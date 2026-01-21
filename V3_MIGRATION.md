@@ -1,5 +1,5 @@
 # GodWorld V3 Migration Plan
-## Draft v0.4 - Maker's Workflow + Migration Priorities
+## Draft v0.5 - Canonical V3 Context Contract
 
 **Created:** Jan 2026
 **Authors:** Claude Code, Maker
@@ -9,134 +9,211 @@
 
 ---
 
-## V3 Architecture (Maker's Design)
+## GOD WORLD ENGINE v3 – Target Context Contract (Clean-Slate Spec)
 
-### Core Principles
+This document defines the v3 context (ctx) contract: the canonical in-memory shape, ownership rules, lifecycle, and invariants. The goal is deterministic, debuggable, scalable simulation execution in Google Apps Script, while keeping phase runners composable and safe to evolve.
 
-1. **Deterministic Cycles**
-   - Seeded RNG (`seededRng_()` using Park-Miller LCG)
-   - Domain-specific salts via `ctx.rngFor(salt)`
-   - Same cycle ID = same outputs (enables replay/debugging)
+### 1. Design Goals
 
-2. **Write-Intents Model**
-   - Engines NEVER write directly to sheets
-   - All writes go through `enqueueCellWrite_()` / `enqueueRangeWrite_()`
-   - Single `phasePersistence_()` executes all writes
-   - Enables dry-run mode, audit trails, batching
+- **Determinism:** identical inputs + cycleId ⇒ identical outputs (seeded RNG)
+- **Explicit data ownership:** each engine writes to one domain; all other domains are read-only
+- **Single-scan rule:** each sheet/tab read at most once per cycle; subsequent access via caches
+- **Replay + Dry-run:** ability to recompute a cycle without persistence (for debugging and audits)
+- **Observability:** structured audit trail, invariants, and phase timing
+- **Compatibility:** supports incremental migration from v2.x by providing compatibility adapters
 
-3. **Single-Scan Sheet Cache**
-   - `readSheet_()` loads entire sheet once, caches in `ctx.cache.sheets`
-   - Eliminates redundant API calls
-   - Enforces read discipline
+### 2. Principles & Rules
 
-4. **Domain Isolation**
-   - Engines read from `ctx.<domain>` and write ONLY to their owned domain
-   - Clear data ownership prevents cross-contamination
-   - Example: population engine owns `ctx.population`, writes only population intents
+- **Domain Ownership Rule:** engine modules must declare the domain they own (e.g., 'population')
+- **No Implicit Globals:** no mutation of arbitrary ctx keys; only via `ctx.<domain>` or `ctx.cache.*`
+- **Write Boundaries:** persistence happens only in a dedicated persistence phase
+- **Deterministic RNG:** no `Math.random()`; use `ctx.rng` only
+- **Validation Gates:** phase entry validates required domains exist and meet invariants
 
-5. **Mode Flags**
-   - `dryRun` - Queue writes but don't execute (testing)
-   - `replay` - Re-run historical cycle (debugging)
-   - `strict` - Throw on errors vs log-and-continue
-   - `profile` - Track phase timings
+### 3. Canonical ctx Shape (v3 Contract)
 
-6. **Invariant Validation**
-   - `validateInvariants_()` checks domain constraints post-cycle
-   - Catches bad data before it persists
-
----
-
-## V3 ctx Contract
+Below is the canonical ctx shape. Types are described informally to stay Apps Script-friendly.
 
 ```javascript
 ctx = {
-  ss,                    // Spreadsheet reference
-  config,                // World_Config key-value pairs
+  // Core handles
+  ss: Spreadsheet,                 // SpreadsheetApp.openById(...)
+  config: Object,                  // loaded from World_Config
 
-  time: { now, cycleId, simDate, tick },
-
-  mode: { dryRun, replay, strict, profile },
-
-  rng,                   // Seeded RNG for this cycle
-  rngFor(salt),          // Domain-specific RNG
-
-  world: {               // World state (owned by calendar/weather engines)
-    season, weather, holiday, holidayPriority,
-    isFirstFriday, isCreationDay, sportsSeason,
-    cityDynamics, chaosEvents
+  // Time & determinism
+  time: {
+    now: Date,                     // real execution timestamp
+    cycleId: number,               // integer cycle counter
+    simDate: Date,                 // in-world calendar date
+    tick: number                   // optional sub-cycle tick
   },
 
-  population: {},        // Owned by population engine
-
-  events: {              // Owned by event engines
-    worldEvents, citizenEvents, arcs, hooks, textures
+  // Feature flags & modes
+  mode: {
+    dryRun: boolean,               // compute but do not write to sheets
+    replay: boolean,               // running a past cycleId
+    strict: boolean,               // enable invariant enforcement and throws
+    profile: boolean               // capture phase timings
   },
 
-  citizens: {            // Owned by citizen engines
-    named, generic, chicagoPool
+  // Randomness (deterministic)
+  rng: function(): number,         // seeded RNG tied to cycleId (and optional salt)
+
+  // World state (inputs for downstream engines)
+  world: {
+    season: "Winter"|"Spring"|"Summer"|"Fall",
+    weather: { type: string, impact: number },
+    holiday: string,
+    holidayPriority: "none"|"minor"|"cultural"|"major"|"oakland",
+    isFirstFriday: boolean,
+    isCreationDay: boolean,
+    sportsSeason: string,
+    cityDynamics: {
+      sentiment: number,
+      publicSpaces: number,
+      traffic: number,
+      culturalActivity: number,
+      communityEngagement: number
+    },
+    chaosEvents: Array<Object>      // world-level events for volatility
   },
 
-  relationships: {       // Owned by bond/neighborhood engines
-    bonds, neighborhoods
+  // Outputs by domain
+  population: {
+    totalPopulation: number,
+    illnessRate: number,
+    employmentRate: number,
+    migration: number,
+    economy: string,
+    births: number,
+    deaths: number
   },
 
-  media: {               // Owned by media engines
-    output, packet, feedback
+  events: {
+    worldEvents: Array<Object>,
+    citizenEvents: Array<Object>,
+    arcs: Array<Object>,
+    hooks: Array<Object>,
+    textures: Array<Object>
   },
 
-  cache: {               // Read cache (managed by readSheet_)
-    sheets, indexes
+  citizens: {
+    named: Array<Object>,
+    generic: Array<Object>,
+    chicagoPool: Array<Object>
   },
 
-  persist: {             // Write intents (consumed by phasePersistence_)
-    updates, logs
+  relationships: {
+    bonds: Array<Object>,
+    neighborhoods: Object
   },
 
-  audit: {               // Diagnostics
-    counters, issues, phaseTimingsMs
+  media: {
+    output: Object|null,
+    packet: Object|null,
+    feedback: Object|null
+  },
+
+  // I/O caches (sheet reads, indexes)
+  cache: {
+    sheets: {
+      // e.g. "World_Population": { header: [...], rows: [...] }
+    },
+    indexes: {
+      ledgerByName: Object,         // key => row
+      maxPopId: number
+    }
+  },
+
+  // Persistence staging (write sets)
+  persist: {
+    updates: Array<Object>,         // normalized write intents
+    logs: Array<Object>
+  },
+
+  // Audit & telemetry
+  audit: {
+    counters: {
+      intakeProcessed: number,
+      citizensUpdated: number,
+      eventsGenerated: number
+    },
+    issues: Array<{ code: string, message: string, meta?: Object }>,
+    phaseTimingsMs: Object          // phaseName => duration
   }
 }
 ```
 
----
+### 4. Lifecycle (Phase Runner Contract)
 
-## V3 Phase Structure
+| Phase | Name | Responsibility |
+|-------|------|----------------|
+| 0 | Bootstrap | Open spreadsheet, initialize ctx, seed rng, set mode flags |
+| 1 | Config & Time | Load config, advance cycleId, compute simDate/calendar flags |
+| 2 | World State | Season, weather, sports, holidays, city dynamics |
+| 3 | Population & Crisis | Update population + crisis models |
+| 4 | Events | World + citizen events, arcs, prioritization |
+| 5 | Citizens & Relationships | Generation, bonds, neighborhoods, roles, careers |
+| 6 | Analysis | Patterns, shock monitor, digest, weights |
+| 7 | Media | Build packet, feedback loop, media intake integration |
+| 8 | Persistence | Apply ctx.persist write intents to sheets (or skip in dryRun) |
+| 9 | Post | Finalize audit, emit logs, optionally snapshot ctx for replay |
+
+### 5. Engine Module Interface
+
+Each engine should follow a simple interface, enabling consistent auditing and validation.
 
 ```javascript
-runPhases_(ctx, [
-  phaseConfigAndTime_,        // Load config, advance cycle
-  phaseCalendarWorldState_,   // Season, weather, holidays
-  phaseIndexesAndCaches_,     // Build ledger indexes
-  phasePopulation_,           // Population dynamics
-  // ... citizen engines ...
-  // ... event engines ...
-  // ... media engines ...
-  phasePersistence_,          // Execute all write intents
-  phasePost_,                 // Invariant validation, audit
-]);
+/**
+ * Engine module contract (Apps Script-friendly)
+ *
+ * name: stable identifier
+ * owns: ctx domain written by this engine (e.g., 'population')
+ * requires: ctx domains that must exist before running
+ * run(ctx): performs deterministic mutations ONLY within owns domain
+ *           (and optionally ctx.audit / ctx.persist)
+ */
+const Engine = {
+  name: 'updateWorldPopulation',
+  owns: 'population',
+  requires: ['time','world','config'],
+  run: function(ctx) { ... }
+};
 ```
 
----
+### 6. Determinism & RNG Spec
 
-## V3 Component Details
+- RNG must be seeded solely from `ctx.time.cycleId` plus optional stable salts (e.g., phaseName)
+- Never use `Math.random()`
+- Seed = `hash(cycleId + optional salt)`
+- All randomness must use `ctx.rng()` or `ctx.rngFor('salt')` to avoid cross-engine coupling
+- Optionally record the seed and salts used in `ctx.audit` for reproducibility
 
-### Batched Persistence (`v3_persistence_batch.gs`)
+### 7. Caching & Single-Scan Rule
 
-Optimized write execution that minimizes API calls.
+- All sheet reads go through `readSheet_(ctx, tabName)` which caches `{header, rows}`
+- All sheet indexes (e.g., `ledgerByName`, `maxPopId`) are computed once and stored in `ctx.cache.indexes`
+- Engines must not call `getDataRange().getValues()` directly unless inside `readSheet_`
 
-**Intent Types:**
+### 8. Persistence (Write Intent Model)
+
+Engines do not write to sheets directly. They create normalized write intents in `ctx.persist.updates`.
+
+**Example write intent:**
 ```javascript
-// Single cell
-{ kind: 'cell', tab: 'World_Config', address: { row: 5, col: 2 }, value: 'newValue' }
-
-// Range (pre-batched by caller)
-{ kind: 'range', tab: 'Citizens', address: { startRow: 2, startCol: 1, numRows: 10, numCols: 5 }, values: [[...]] }
-
-// Append row
-{ kind: 'append', tab: 'Event_Log', values: [['timestamp', 'event', 'details']] }
+{
+  tab: 'World_Population',
+  kind: 'cell' | 'range' | 'append',
+  address: { row: 2, col: 5 } | { a1: 'B2' } | { startRow, startCol, numRows, numCols },
+  values: [[...]],
+  reason: 'update population totals',
+  domain: 'population'
+}
 ```
 
-**Algorithm:**
+The Persistence Phase is the only place that applies write intents. In `dryRun` mode, intents are retained but not executed.
+
+**Batched Persistence Algorithm (`v3_persistence_batch.gs`):**
 1. Group intents by sheet tab
 2. Apply explicit range writes first (already optimized)
 3. Merge individual cell writes into rectangular blocks via `buildCellBlocks_()`
@@ -148,14 +225,25 @@ Optimized write execution that minimizes API calls.
 5. Respects `ctx.mode.dryRun` (skips execution)
 6. Respects `ctx.mode.strict` (throws on missing sheet vs log-and-continue)
 
-**Key Functions:**
-- `phasePersistence_(ctx)` - Main entry point
-- `groupUpdatesByTab_(updates)` - Organize by sheet
-- `buildCellBlocks_(cellUpdates)` - Merge cells into rectangles
-- `applyCellBlocks_(sheet, blocks)` - Execute with `setValues()`
-- `enqueueRangeWrite_(ctx, tab, startRow, startCol, values2d, reason, domain)` - Helper
-
 **Performance:** Reduces N individual `setValue()` calls to ~5-10 batched `setValues()` calls per sheet.
+
+### 9. Validation & Invariants
+
+| Invariant | Rule |
+|-----------|------|
+| Population non-negative | `population.totalPopulation >= 0` |
+| Illness rate bounded | `0 <= population.illnessRate <= 0.15` |
+| Employment rate bounded | `0 <= population.employmentRate <= 1` |
+| Weather impact minimum | `world.weather.impact >= 0.5` (recommended) |
+| Domain ownership | No domain writes outside of `engine.owns` |
+| Write boundary | No sheet writes outside Persistence Phase |
+
+### 10. Migration Path from v2.x
+
+1. Add ctx domains alongside `ctx.summary` (compat period)
+2. Create adapters: `hydrateWorldFromSummary_(ctx)` and `mirrorBackToSummary_(ctx)` while migrating engines
+3. Migrate one engine at a time to read from `ctx.world` / `ctx.time` and write to its `owns` domain
+4. Remove `ctx.summary` after all engines are migrated
 
 ---
 
@@ -167,7 +255,7 @@ Optimized write execution that minimizes API calls.
 - Switch over when complete
 - **Risk:** Long development, integration issues
 
-### Option B: Incremental (Recommended?)
+### Option B: Incremental
 - Keep v2.x running
 - Port engines one-by-one to V3 patterns
 - V3 scaffold calls V2 engines wrapped in adapters
@@ -276,6 +364,56 @@ Functions that write directly to sheets need migration to `enqueueCellWrite_()`:
 
 ---
 
+## Appendix A – Minimal Bootstrap Skeleton (Reference)
+
+```javascript
+function runWorldCycleV3() {
+  const ctx = bootstrapCtx_();
+  runPhases_(ctx, [
+    phaseConfigAndTime_,
+    phaseWorldState_,
+    phasePopulation_,
+    phaseEvents_,
+    phaseCitizensAndRelationships_,
+    phaseAnalysis_,
+    phaseMedia_,
+    phasePersistence_,
+    phasePost_
+  ]);
+}
+
+function bootstrapCtx_() {
+  const ss = SpreadsheetApp.openById('...');
+  const now = new Date();
+  const config = loadConfigFromSheet_(ss);
+
+  const cycleId = Number(config.cycleCount || 0) + 1;
+
+  return {
+    ss,
+    config,
+    time: { now, cycleId, simDate: null, tick: 0 },
+    mode: { dryRun: false, replay: false, strict: true, profile: true },
+    rng: seededRng_(cycleId),
+    world: {},
+    population: {},
+    events: {},
+    citizens: {},
+    relationships: {},
+    media: {},
+    cache: { sheets: {}, indexes: {} },
+    persist: { updates: [], logs: [] },
+    audit: {
+      counters: { intakeProcessed: 0, citizensUpdated: 0, eventsGenerated: 0 },
+      issues: [],
+      phaseTimingsMs: {}
+    }
+  };
+}
+```
+
+---
+
 ## Open Questions
 
 1. **File organization** - One big `v3_main.gs` or split into multiple files per the scaffold?
@@ -298,6 +436,7 @@ Functions that write directly to sheets need migration to `enqueueCellWrite_()`:
 | Jan 2026 | v0.2 | Incorporated Maker's V3 scaffold architecture | Discuss migration strategy |
 | Jan 2026 | v0.3 | Selected Option C (Hybrid), added batched persistence component | Add more components |
 | Jan 2026 | v0.4 | Added Maker's workflow, migration tiers, function tracking | Begin Tier 2 migrations |
+| Jan 2026 | v0.5 | Replaced architecture with canonical V3 Context Contract spec | Continue Tier 2 migrations |
 
 ---
 

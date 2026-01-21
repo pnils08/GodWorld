@@ -14,10 +14,10 @@
 | Priority | Total Issues | Fixed | Remaining |
 |----------|-------------|-------|-----------|
 | CRITICAL | 4 | 3 | 1 |
-| HIGH | 8 | 3 | 5 |
-| MEDIUM | 6 | 0 | 6 |
+| HIGH | 8 | 4 | 4 |
+| MEDIUM | 6 | 1 | 5 |
 
-**Last Updated:** After caching layer implementation (v2.10)
+**Last Updated:** After neighborhood dynamic loading (bondEngine v2.3)
 
 ---
 
@@ -141,12 +141,16 @@
 - **Schema Impact:** Would need Holiday_Config sheet
 - **Status:** V3 FEATURE
 
-### 15. Hardcoded Neighborhood Lists - PENDING
+### 15. ~~Hardcoded Neighborhood Lists~~ - FIXED
 - **File:** `bondEngine.js:72-78`
 - **Count:** 72 lines of hardcoded neighborhoods
-- **Fix Required:** Read from Neighborhood_Map ledger
+- **Fix:** Added `loadNeighborhoodsFromSheet_()` to read from Neighborhood_Map (v2.3)
+  - Uses ctx.cache for efficient access
+  - Falls back to direct sheet access if cache unavailable
+  - Falls back to defaults if sheet is empty/missing
 - **Schema Impact:** None (already exists)
-- **Status:** READY TO IMPLEMENT
+- **Status:** COMPLETED
+- **Date Fixed:** Jan 2026
 
 ### 16. Float Precision Drift - PENDING
 - **File:** `godWorldEngine2.js:315-356`
@@ -209,6 +213,7 @@
 | Jan 2026 | Consolidated duplicate utility functions | 3 files | Claude Code |
 | Jan 2026 | Created SHEET_NAMES constant | utilities/sheetNames.js | Claude Code |
 | Jan 2026 | Implemented Sheets caching layer, bumped to v2.10 | utilities/sheetCache.js, godWorldEngine2.js | Claude Code |
+| Jan 2026 | Dynamic neighborhood loading, bumped to v2.3 | phase05-citizens/bondEngine.js | Claude Code |
 
 ---
 

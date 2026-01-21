@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * BOND ENGINE V2.2
+ * BOND ENGINE V2.3
  * ============================================================================
  *
  * Manages citizen relationships with calendar awareness.
+ *
+ * v2.3 Enhancements:
+ * - Dynamic neighborhood loading from Neighborhood_Map sheet
+ * - Removed hardcoded OAKLAND_NEIGHBORHOODS_BOND array
+ * - Uses ctx.cache for efficient sheet access
  *
  * v2.2 Enhancements:
  * - Festival/celebration days spark more alliance/community bonds
@@ -19,11 +24,12 @@
  * - Fallback population of cycleActiveCitizens
  * - Citizen_Directory lookup
  * - Diagnostic logging
- * 
+ *
  * DEPENDENCIES:
  * - Citizen_Directory sheet (for citizenLookup)
+ * - Neighborhood_Map sheet (for neighborhood list)
  * - ctx.summary.citizenEvents OR ctx.summary.storySeeds OR eventArcs
- * 
+ *
  * ============================================================================
  */
 
@@ -69,13 +75,9 @@ var BOND_STATUS = {
   SEVERED: 'severed'
 };
 
-var OAKLAND_NEIGHBORHOODS_BOND = [
-  'Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt',
-  'West Oakland', 'Laurel', 'Rockridge', 'Jack London',
-  'Adams Point', 'Grand Lake', 'Piedmont Ave', 'Chinatown',
-  'Brooklyn', 'Eastlake', 'Glenview', 'Dimond', 'Ivy Hill', 'San Antonio',
-  'Uptown', 'KONO'  // v2.2: Added arts districts
-];
+// v2.3: Neighborhoods now loaded dynamically from Neighborhood_Map sheet
+// See loadNeighborhoodsFromSheet_() below
+var OAKLAND_NEIGHBORHOODS_BOND = null;  // Populated at runtime by runBondEngine_
 
 // v2.2: Arts district neighborhoods
 var ARTS_DISTRICT_NEIGHBORHOODS = ['Temescal', 'Uptown', 'KONO', 'Jack London'];
@@ -92,15 +94,82 @@ var FESTIVAL_NEIGHBORHOODS = {
 
 
 // ============================================================
+// NEIGHBORHOOD LOADER (v2.3)
+// ============================================================
+
+/**
+ * Loads neighborhood names from Neighborhood_Map sheet.
+ * Uses ctx.cache if available, falls back to direct sheet access.
+ * Returns array of neighborhood names.
+ */
+function loadNeighborhoodsFromSheet_(ctx) {
+  var neighborhoods = [];
+
+  // Try cache first (v2.10+)
+  if (ctx.cache) {
+    var cached = ctx.cache.getData('Neighborhood_Map');
+    if (cached.exists && cached.values.length > 1) {
+      var header = cached.header;
+      var nhIdx = header.indexOf('Neighborhood');
+      if (nhIdx >= 0) {
+        for (var r = 1; r < cached.values.length; r++) {
+          var nh = (cached.values[r][nhIdx] || '').toString().trim();
+          if (nh && neighborhoods.indexOf(nh) < 0) {
+            neighborhoods.push(nh);
+          }
+        }
+      }
+    }
+  }
+
+  // Fallback to direct sheet access
+  if (neighborhoods.length === 0 && ctx.ss) {
+    var sheet = ctx.ss.getSheetByName('Neighborhood_Map');
+    if (sheet) {
+      var values = sheet.getDataRange().getValues();
+      if (values.length > 1) {
+        var header = values[0];
+        var nhIdx = header.indexOf('Neighborhood');
+        if (nhIdx >= 0) {
+          for (var r = 1; r < values.length; r++) {
+            var nh = (values[r][nhIdx] || '').toString().trim();
+            if (nh && neighborhoods.indexOf(nh) < 0) {
+              neighborhoods.push(nh);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Fallback defaults if sheet is empty/missing
+  if (neighborhoods.length === 0) {
+    Logger.log('loadNeighborhoodsFromSheet_: No neighborhoods found, using defaults');
+    neighborhoods = [
+      'Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt',
+      'West Oakland', 'Laurel', 'Rockridge', 'Jack London',
+      'Adams Point', 'Grand Lake', 'Piedmont Ave', 'Chinatown'
+    ];
+  }
+
+  return neighborhoods;
+}
+
+
+// ============================================================
 // MAIN ENGINE
 // ============================================================
 
 function runBondEngine_(ctx) {
   var S = ctx.summary || {};
-  
+
+  // v2.3: Load neighborhoods dynamically from Neighborhood_Map
+  OAKLAND_NEIGHBORHOODS_BOND = loadNeighborhoodsFromSheet_(ctx);
+  Logger.log('runBondEngine_ v2.3: Loaded ' + OAKLAND_NEIGHBORHOODS_BOND.length + ' neighborhoods from Neighborhood_Map');
+
   // Initialize bonds array if needed
   ctx.summary.relationshipBonds = ctx.summary.relationshipBonds || [];
-  
+
   // v2.2: Get calendar context
   var calendarContext = {
     holiday: S.holiday || 'none',
@@ -114,7 +183,7 @@ function runBondEngine_(ctx) {
   // v2.1: Ensure we have the data we need
   var dataReady = ensureBondEngineData_(ctx);
   if (!dataReady) {
-    Logger.log('runBondEngine_ v2.2: Insufficient data, skipping bond processing');
+    Logger.log('runBondEngine_ v2.3: Insufficient data, skipping bond processing');
     return;
   }
   
@@ -129,7 +198,7 @@ function runBondEngine_(ctx) {
     var bond = newBonds[i];
     if (!bondExists_(ctx, bond.citizenA, bond.citizenB)) {
       ctx.summary.relationshipBonds.push(bond);
-      Logger.log('runBondEngine_ v2.2: Created bond ' + bond.citizenA + ' <-> ' + bond.citizenB + ' (' + bond.bondType + ')');
+      Logger.log('runBondEngine_ v2.3: Created bond ' + bond.citizenA + ' <-> ' + bond.citizenB + ' (' + bond.bondType + ')');
     }
   }
   
@@ -143,7 +212,7 @@ function runBondEngine_(ctx) {
   // Step 6: Generate bond summary for packet (with calendar context)
   generateBondSummary_(ctx);
   
-  Logger.log('runBondEngine_ v2.2: Complete. Total bonds: ' + ctx.summary.relationshipBonds.length + ' | Calendar: ' + calendarContext.holiday);
+  Logger.log('runBondEngine_ v2.3: Complete. Total bonds: ' + ctx.summary.relationshipBonds.length + ' | Calendar: ' + calendarContext.holiday);
 }
 
 

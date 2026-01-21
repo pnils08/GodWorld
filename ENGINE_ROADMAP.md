@@ -5,7 +5,7 @@
 
 **Last Updated:** 2026-01-21
 **Current Cycle:** 75
-**Engine Version:** v2.10
+**Engine Version:** v2.11
 
 ---
 
@@ -32,35 +32,40 @@ These can be done now without architectural changes.
 - `safePhaseCall_()` wrapper pattern
 - 11 phases operational
 
-### [ ] 1.3 Normalize Identity Fields
+### [x] 1.3 Normalize Identity Fields
+**Status:** Complete (v2.11)
 **Target:** `existsInLedger_()` and intake validation
 **Actions:**
-- Lowercase names before comparison
-- Trim whitespace
-- Prevents duplicate entries from formatting differences
+- Added `normalizeIdentity_()` to utilities/utilityFunctions.js
+- Updated `existsInLedger_()` to use normalized comparison
+- Handles case differences, extra whitespace
 **Priority:** High
 
-### [ ] 1.4 Transactional Intake Writes
+### [x] 1.4 Transactional Intake Writes
+**Status:** Complete (v2.11)
 **Actions:**
-- Stage intake rows in memory array
-- Validate all rows before any writes
-- Commit batch only after full validation passes
+- Stages all valid rows in memory before writing
+- Checks for intra-batch duplicates (same name twice in intake)
+- Batch writes all rows at once
+- Clears intake only after successful write
 **Priority:** High
 
-### [ ] 1.5 Couple Illness to Mortality
+### [x] 1.5 Couple Illness to Mortality
+**Status:** Complete (v2.11)
 **Target:** `updateWorldPopulation_()`
-```javascript
-const illnessDeathModifier = illnessRate * ILLNESS_MORTALITY_FACTOR;
-adjustedDeathRate = baseDeathRate + illnessDeathModifier;
-```
+**Implementation:**
+- Illness above 5% baseline increases death rate
+- ILLNESS_MORTALITY_FACTOR = 0.02 (2% of excess illness adds to death rate)
+- At 15% illness (max): +0.002 death rate increase
 **Priority:** Medium
 
-### [ ] 1.6 Clamp Migration Magnitude
-**Rule:** `|migration| <= X% of total population`
-```javascript
-const maxMigration = totalPopulation * MAX_MIGRATION_RATE;
-migration = Math.max(-maxMigration, Math.min(maxMigration, migration));
-```
+### [x] 1.6 Clamp Migration Magnitude
+**Status:** Complete (v2.11)
+**Rule:** `|migration| <= 0.5% of total population`
+**Implementation:**
+- MAX_MIGRATION_RATE = 0.005 (0.5%)
+- Migration clamped before applying to total
+- Prevents unrealistic population swings
 **Priority:** Medium
 
 ---

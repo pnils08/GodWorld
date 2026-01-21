@@ -61,3 +61,30 @@ function safeGet_(sheet, row, col) {
 const v = sheet.getRange(row, col).getValue();
 return v === "" || v === null || typeof v === "undefined" ? null : v;
 }
+
+/**
+ * ============================================================================
+ * IDENTITY NORMALIZATION (v2.11)
+ * ============================================================================
+ * Normalizes name strings for consistent duplicate detection.
+ * - Trims whitespace
+ * - Converts to lowercase
+ * - Collapses multiple spaces to single space
+ *
+ * Usage:
+ *   normalizeIdentity_("  John   DOE  ") => "john doe"
+ */
+function normalizeIdentity_(name) {
+  if (!name) return '';
+  return String(name)
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, ' ');
+}
+
+/**
+ * Compares two names for identity match (normalized)
+ */
+function identityMatch_(name1, name2) {
+  return normalizeIdentity_(name1) === normalizeIdentity_(name2);
+}

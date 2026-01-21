@@ -1,7 +1,12 @@
 /**
  * ============================================================================
- * GOD WORLD ENGINE v2.10
+ * GOD WORLD ENGINE v2.11
  * ============================================================================
+ *
+ * v2.11 Changes:
+ * - Identity normalization in existsInLedger_() prevents duplicates
+ * - Uses normalizeIdentity_() from utilities/utilityFunctions.js
+ * - Handles case differences, extra whitespace consistently
  *
  * v2.10 Changes:
  * - Added Sheets API caching layer (ctx.cache)
@@ -514,7 +519,7 @@ function updateWorldPopulation_(ctx) {
   if (emp > 1) emp = 1;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // 3. BIRTHS & DEATHS (SEASON-ADJUSTED)
+  // 3. BIRTHS & DEATHS (SEASON-ADJUSTED + ILLNESS-COUPLED v2.11)
   // ═══════════════════════════════════════════════════════════════════════════
 
   let baseBirthRate = 0.010;
@@ -529,6 +534,15 @@ function updateWorldPopulation_(ctx) {
 
   // Severe weather increases death rate slightly
   if (weather.impact >= 1.5) baseDeathRate += 0.001;
+
+  // v2.11: Illness coupled to mortality
+  // Higher illness rates increase death rate proportionally
+  // At 5% illness (baseline): no modifier
+  // At 10% illness: +0.001 death rate
+  // At 15% illness (max): +0.002 death rate
+  const ILLNESS_MORTALITY_FACTOR = 0.02; // 2% of illness rate adds to death rate
+  const illnessDeathModifier = Math.max(0, (ill - 0.05)) * ILLNESS_MORTALITY_FACTOR;
+  baseDeathRate += illnessDeathModifier;
 
   const births = Math.round(total * baseBirthRate);
   const deaths = Math.round(total * baseDeathRate);
@@ -624,8 +638,14 @@ function updateWorldPopulation_(ctx) {
   if (weather.impact >= 1.5) mig += Math.round((Math.random() - 0.5) * 25);
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // 5. NEW TOTAL POPULATION
+  // 5. NEW TOTAL POPULATION (v2.11: migration clamped)
   // ═══════════════════════════════════════════════════════════════════════════
+
+  // v2.11: Clamp migration to prevent unrealistic swings
+  // Max migration per cycle = 0.5% of total population
+  const MAX_MIGRATION_RATE = 0.005;
+  const maxMigration = Math.round(total * MAX_MIGRATION_RATE);
+  mig = Math.max(-maxMigration, Math.min(maxMigration, mig));
 
   total = total + births - deaths + mig;
   if (total < 0) total = 0;
@@ -686,8 +706,10 @@ function updateWorldPopulation_(ctx) {
 
 /**
  * ============================================================================
- * PROCESS INTAKE — with TRUE duplicate blocking
+ * PROCESS INTAKE v2.11 — Transactional (stage-then-commit)
  * ============================================================================
+ * Stages all valid rows in memory first, then batch writes.
+ * Prevents partial intake corruption if cycle crashes mid-execution.
  */
 function processIntake_(ctx) {
   const intake = ctx.ss.getSheetByName('Intake');
@@ -704,7 +726,15 @@ function processIntake_(ctx) {
   const idxI = name => intakeHeader.indexOf(name);
   const idxL = name => ledgerHeader.indexOf(name);
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // STAGE 1: Validate and stage all rows in memory
+  // ═══════════════════════════════════════════════════════════════════════════
+  const stagedRows = [];
   const rowsToClear = [];
+  let nextPopNum = getMaxPopId_(ledgerVals) + 1;
+
+  // Track names we're adding in this batch to prevent intra-batch duplicates
+  const batchNames = new Set();
 
   for (let r = 1; r < intakeVals.length; r++) {
     const row = intakeVals[r];
@@ -713,8 +743,21 @@ function processIntake_(ctx) {
     const last = (row[idxI('Last')] || '').toString().trim();
     if (!first && !last) continue;
 
-    if (existsInLedger_(ledgerVals, first, last)) continue;
+    // Check against existing ledger (normalized)
+    if (existsInLedger_(ledgerVals, first, last)) {
+      rowsToClear.push(r + 1); // Still clear duplicate intake rows
+      continue;
+    }
 
+    // Check against names already staged in this batch
+    const normKey = normalizeIdentity_(first) + '|' + normalizeIdentity_(last);
+    if (batchNames.has(normKey)) {
+      rowsToClear.push(r + 1); // Duplicate within batch
+      continue;
+    }
+    batchNames.add(normKey);
+
+    // Build the new ledger row
     const middle = (row[idxI('Middle')] || '').toString().trim();
     const originGame = (row[idxI('OriginGame')] || '').toString().trim();
     const uni = (row[idxI('UNI (y/n)')] || '').toString().trim();
@@ -728,8 +771,9 @@ function processIntake_(ctx) {
     const originCity = row[idxI('OriginCity')] || '';
     const lifeHist = row[idxI('LifeHistory')] || '';
     const vault = row[idxI('OriginVault')] || '';
+    const neighborhood = row[idxI('Neighborhood')] || '';
 
-    const popId = nextPopIdSafe_(ledgerVals);
+    const popId = 'POP-' + String(nextPopNum++).padStart(5, '0');
 
     const newRow = new Array(ledgerHeader.length).fill('');
 
@@ -749,27 +793,63 @@ function processIntake_(ctx) {
     if (idxL('OriginCity') >= 0) newRow[idxL('OriginCity')] = originCity;
     if (idxL('LifeHistory') >= 0) newRow[idxL('LifeHistory')] = lifeHist;
     if (idxL('OriginVault') >= 0) newRow[idxL('OriginVault')] = vault;
+    if (idxL('Neighborhood') >= 0) newRow[idxL('Neighborhood')] = neighborhood;
     if (idxL('CreatedAt') >= 0) newRow[idxL('CreatedAt')] = ctx.now;
     if (idxL('LastUpdated') >= 0) newRow[idxL('LastUpdated')] = ctx.now;
+    if (idxL('UsageCount') >= 0) newRow[idxL('UsageCount')] = 0;
 
-    const writeRow = ledger.getLastRow() + 1;
-    ledger.getRange(writeRow, 1, 1, newRow.length).setValues([newRow]);
-
+    stagedRows.push(newRow);
     rowsToClear.push(r + 1);
-    ctx.summary.intakeProcessed++;
   }
 
-  rowsToClear.sort((a,b) => b - a);
+  // ═══════════════════════════════════════════════════════════════════════════
+  // STAGE 2: Batch write all staged rows at once
+  // ═══════════════════════════════════════════════════════════════════════════
+  if (stagedRows.length > 0) {
+    const startRow = ledger.getLastRow() + 1;
+    ledger.getRange(startRow, 1, stagedRows.length, ledgerHeader.length)
+          .setValues(stagedRows);
+    ctx.summary.intakeProcessed += stagedRows.length;
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // STAGE 3: Clear processed intake rows (after successful write)
+  // ═══════════════════════════════════════════════════════════════════════════
+  rowsToClear.sort((a, b) => b - a);
   rowsToClear.forEach(i => {
     intake.getRange(i, 1, 1, intake.getLastColumn()).clearContent();
   });
 }
 
+/**
+ * Helper: Get max POP-ID number from ledger
+ */
+function getMaxPopId_(ledgerValues) {
+  if (ledgerValues.length < 2) return 0;
+
+  const header = ledgerValues[0];
+  const idx = header.indexOf('POPID');
+  if (idx < 0) return 0;
+
+  let maxN = 0;
+  for (let r = 1; r < ledgerValues.length; r++) {
+    const v = (ledgerValues[r][idx] || '').toString().trim();
+    const m = v.match(/^POP-(\d+)$/);
+    if (m) {
+      const n = Number(m[1]);
+      if (n > maxN) maxN = n;
+    }
+  }
+  return maxN;
+}
+
 
 /**
  * ============================================================================
- * DUPLICATE CHECKER
+ * DUPLICATE CHECKER (v2.11 - with identity normalization)
  * ============================================================================
+ * Uses normalizeIdentity_() for consistent duplicate detection.
+ * Prevents duplicates from case differences or extra whitespace.
  */
 function existsInLedger_(ledgerValues, first, last) {
   if (ledgerValues.length < 2) return false;
@@ -778,10 +858,14 @@ function existsInLedger_(ledgerValues, first, last) {
   const idxFirst = header.indexOf('First');
   const idxLast = header.indexOf('Last');
 
+  // Normalize input names
+  const normFirst = normalizeIdentity_(first);
+  const normLast = normalizeIdentity_(last);
+
   for (let r = 1; r < ledgerValues.length; r++) {
-    const f = (ledgerValues[r][idxFirst] || '').toString().trim();
-    const l = (ledgerValues[r][idxLast] || '').toString().trim();
-    if (f === first && l === last) return true;
+    const f = normalizeIdentity_(ledgerValues[r][idxFirst]);
+    const l = normalizeIdentity_(ledgerValues[r][idxLast]);
+    if (f === normFirst && l === normLast) return true;
   }
   return false;
 }

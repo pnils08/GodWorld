@@ -224,10 +224,30 @@
 | bondEngine.js | 5 | READ/WRITE |
 | cycleExportAutomation.js | 10 | READ/EXPORT |
 
+### Key Finding: citizenContextBuilder.js Performance Issue
+**Location:** `phase05-citizens/citizenContextBuilder.js:387-404`
+**Problem:** Reads ENTIRE LifeHistory_Log with `getDataRange().getValues()` every cycle
+**Also reads:** All of Relationship_Bonds
+**Impact:** Gets slower as ledgers grow. With 2500+ rows, this is wasteful.
+
+### Proposed Prune Strategies (Maker Approval Required)
+
+| Ledger | Strategy | Retention | Notes |
+|--------|----------|-----------|-------|
+| LifeHistory_Log | Archive old entries | Keep last 10 cycles | Move older to LifeHistory_Archive sheet |
+| WorldEvents_Ledger | Prune low-severity | Keep severity 3+ forever, prune 1-2 after 5 cycles | Low severity = noise |
+| Relationship_Bonds | Filter on read | Only load Status=ACTIVE | Don't load DORMANT/SEVERED |
+
+### Alternative: Optimize citizenContextBuilder.js
+Instead of pruning, fix the read pattern:
+- Only read rows matching the citizen being built (filter by POPID)
+- Use cached reads if available via sheetCache.js
+- Limit history to last N entries per citizen
+
 ### Next Steps (Tier 2.2)
-- [ ] Verify READ vs WRITE operations in each file
-- [ ] Count actual row counts in production sheets
-- [ ] Propose archive/prune strategy with Maker approval
+- [ ] Get actual row counts from production sheets
+- [ ] Maker decision: Prune strategy OR optimize reads
+- [ ] Implement chosen approach
 
 ---
 

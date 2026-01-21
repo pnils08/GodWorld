@@ -72,11 +72,13 @@
 - **Status:** COMPLETED
 - **Date Fixed:** Jan 2026
 
-### 7. Hardcoded Sheet Names - PENDING
+### 7. ~~Hardcoded Sheet Names~~ - PARTIALLY FIXED
 - **Count:** 100+ occurrences of string literals like `'World_Config'`
-- **Fix Required:** Create `SHEET_NAMES` constant object
+- **Fix:** Created `utilities/sheetNames.js` with SHEET_NAMES constant (v2.9)
 - **Schema Impact:** None (just code organization)
-- **Status:** READY TO IMPLEMENT
+- **Status:** CONSTANT CREATED - Gradual migration during refactors
+- **Date Fixed:** Jan 2026
+- **Note:** Existing code still uses strings; new code should use SHEET_NAMES
 
 ### 8. Missing Null/Undefined Checks - PENDING
 - **Count:** 272 instances of loose conditionals
@@ -169,7 +171,7 @@
 ### Before V3 Work Begins:
 1. [ ] Implement Sheets caching layer
 2. [x] Add error handling to main cycle (v2.9)
-3. [ ] Centralize sheet names
+3. [x] Centralize sheet names (v2.9 - SHEET_NAMES constant created)
 4. [x] Add column index bounds checking (v2.8)
 
 ### V3 Architecture Changes Needed:
@@ -200,6 +202,7 @@
 | Jan 2026 | Column bounds fix, bumped to v2.8 | godWorldEngine2.js | Claude Code |
 | Jan 2026 | Error handling wrapper, bumped to v2.9 | godWorldEngine2.js | Claude Code |
 | Jan 2026 | Consolidated duplicate utility functions | 3 files | Claude Code |
+| Jan 2026 | Created SHEET_NAMES constant | utilities/sheetNames.js | Claude Code |
 
 ---
 
@@ -235,7 +238,7 @@
 1. ~~Add error handling wrapper to `runWorldCycle()`~~ DONE (v2.9)
 2. ~~Add column index bounds checking in `godWorldEngine2.js`~~ DONE (v2.8)
 3. ~~Consolidate duplicate utility functions~~ DONE (v2.9)
-4. Create SHEET_NAMES constant
+4. ~~Create SHEET_NAMES constant~~ DONE (v2.9)
 
 ---
 

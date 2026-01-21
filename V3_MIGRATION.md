@@ -1,9 +1,11 @@
 # GodWorld V3 Migration Plan
-## Draft v0.3 - Adding Component Details
+## Draft v0.4 - Maker's Workflow + Migration Priorities
 
 **Created:** Jan 2026
 **Authors:** Claude Code, Maker
 **Status:** DRAFT - Migration strategy: Option C (Hybrid)
+**Engine Version:** v2.10 (as of Jan 2026)
+**Last Stable Cycle:** 73
 
 ---
 
@@ -180,6 +182,52 @@ Optimized write execution that minimizes API calls.
 
 ---
 
+## Maker's Workflow Process
+
+1. **Maker provides current script code** for review
+2. **Migrate functions** to queued write pattern one at a time
+3. **Test scaffold** with a few migrated functions
+4. **Gradual rollout** - run new parallel to old until stable
+
+---
+
+## Migration Priority Tiers
+
+### Tier 1: Foundation (v2.8-v2.10) ✓ COMPLETE
+Crash prevention and infrastructure:
+
+| Item | Status | Version |
+|------|--------|---------|
+| Sheets API caching layer | ✓ Done | v2.10 |
+| Error handling wrapper | ✓ Done | v2.9 |
+| Column bounds checking | ✓ Done | v2.8 |
+| SHEET_NAMES constant | ✓ Done | v2.9 |
+| Neighborhood dynamic loading | ✓ Done | bondEngine v2.3 |
+
+### Tier 2: Atomic Persistence (V3 Core)
+Functions that write directly to sheets need migration to `enqueueCellWrite_()`:
+
+| Function | File | Status |
+|----------|------|--------|
+| `updateWorldPopulation_` | godWorldEngine2.js | ✓ Uses ctx.cache.queueWrite |
+| `advanceWorldTime_` | godWorldEngine2.js | ✓ Uses ctx.cache.queueWrite |
+| `loadConfig_` | godWorldEngine2.js | ✓ Uses ctx.cache (read-only) |
+| `processIntake_` | processAdvancementIntake.js | ⬜ Pending |
+| `saveV3Seeds_` | saveV3Seeds.js | ⬜ Pending |
+| `v3LedgerWriter_` | v3LedgerWriter.js | ⬜ Pending |
+| `v3DomainWriter_` | v3DomainWriter.js | ⬜ Pending |
+| `bondPersistence_` | bondPersistence.js | ⬜ Pending |
+| `finalizeWorldPopulation_` | finalizeWorldPopulation.js | ⬜ Pending |
+| All `record*.js` files | Various | ⬜ Pending |
+
+### Tier 3: V3 Full Features (Future)
+- Seeded RNG (deterministic cycles)
+- Domain-scoped context objects
+- Replay/dry-run modes
+- Invariant validation
+
+---
+
 ## Migration Phases
 
 ### Phase 1: V3 Scaffold (No Engine Changes)
@@ -249,6 +297,7 @@ Optimized write execution that minimizes API calls.
 | Jan 2026 | v0.1 | Created initial V3_MIGRATION.md | Await Maker input |
 | Jan 2026 | v0.2 | Incorporated Maker's V3 scaffold architecture | Discuss migration strategy |
 | Jan 2026 | v0.3 | Selected Option C (Hybrid), added batched persistence component | Add more components |
+| Jan 2026 | v0.4 | Added Maker's workflow, migration tiers, function tracking | Begin Tier 2 migrations |
 
 ---
 
@@ -265,9 +314,10 @@ Maker's V3 scaffold concept defines:
 
 ## Current Status
 
-**Phase:** Pre-migration (architecture review)
-**Next Task:** Decide migration strategy (A/B/C)
-**Blockers:** None - awaiting direction
+**Phase:** Tier 1 Complete, Tier 2 In Progress
+**Engine:** v2.10 with sheetCache caching layer
+**Next Task:** Migrate remaining Tier 2 functions to queued writes
+**Blockers:** None
 
 ---
 

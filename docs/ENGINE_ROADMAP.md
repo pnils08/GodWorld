@@ -113,25 +113,33 @@ Reduce redundancy, establish single sources of truth.
 - Added cache support instead of pruning data
 - See AUDIT_TRACKER.md for full findings
 
-### [ ] 2.3 BayTribune Roster
+### [~] 2.3 BayTribune Roster
 **Purpose:** Single source of truth for journalists.
-**Schema:** New sheet `BayTribune_Roster`
+**Status:** PARTIAL (Jan 2026)
+
+**Completed:**
+- Created `schemas/bay_tribune_roster.json` with 28 journalists
+- Created `utilities/rosterLookup.js` with lookup functions
+- Audited Phase 7 files (100+ hardcoded references identified)
+
+**Schema (JSON implemented, Sheet pending approval):**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| JournalistID | string | e.g., "MED-001" |
-| Name | string | Full name |
-| Beat | string | civic, sports, health, culture, food, etc. |
-| Tier | int | 1-4 |
-| Voice | string | Tone keywords |
-| Background | string | Brief bio |
-| LastAppearance | int | Cycle last used |
-| ArticleCount | int | Total articles |
-| Status | string | active, on-leave, retired |
+| name | string | Full name |
+| desk | string | sports, metro, culture, business, opinion, wire, etc. |
+| role | string | Beat title |
+| tone | string | Voice keywords |
+| background | string | Brief bio (optional) |
+
+**Pending (V3 refactor):**
+- Migrate hardcoded strings in mediaRoomBriefingGenerator.js to use rosterLookup.js
+- Add LastAppearance/ArticleCount tracking (schema approval needed)
+- Create BayTribune_Roster sheet for runtime updates
 
 **Integration:**
-- Phase 7 reads for story assignment
-- Media Room reads for voice lookup
+- Phase 7 reads for story assignment (utility ready)
+- Media Room reads for voice lookup (utility ready)
 
 ---
 
@@ -239,8 +247,8 @@ Full architecture migration.
 | Change | Sheet | Status |
 |--------|-------|--------|
 | New: `Neighborhood_Demographics` | - | PENDING |
-| New: `Cycle_Weather` | - | PENDING |
-| New: `BayTribune_Roster` | - | PENDING |
+| New: `Cycle_Weather` | - | COMPLETE |
+| New: `BayTribune_Roster` | - | JSON READY (sheet pending) |
 | Remove weather columns | `WorldEvents_Ledger` | PENDING |
 | Remove weather columns | `Neighborhood_Map` | PENDING |
 

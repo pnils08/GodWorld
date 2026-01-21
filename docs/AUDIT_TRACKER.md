@@ -256,6 +256,95 @@ has been fixed via caching. No data pruning needed at this time.
 
 ---
 
+## JOURNALIST ROSTER AUDIT (Tier 2.3)
+
+**Status:** IN PROGRESS
+**Started:** Jan 2026
+
+### Purpose
+Establish single source of truth for Bay Tribune journalists.
+Currently 100+ hardcoded journalist references scattered across Phase 7 files.
+
+### Roster Schema Created
+**File:** `schemas/bay_tribune_roster.json`
+
+| Field | Type | Description |
+|-------|------|-------------|
+| name | string | Full journalist name |
+| desk | string | sports, metro, culture, business, opinion, wire, etc. |
+| role | string | Beat title (e.g., "Lead Beat Reporter") |
+| tone | string | Voice/style keywords for content generation |
+| background | string | Brief bio (optional) |
+
+### Phase 7 Journalist Audit Findings
+
+#### Files with Hardcoded Journalist References
+
+| File | References | Primary Usage |
+|------|------------|---------------|
+| mediaRoomBriefingGenerator.js | 100+ | All assignment functions, holiday coverage, front page |
+| buildEveningFamous.js | 3 | JOURNALISTS array for celebrity pool |
+| pressDraftWriter.js | 2 | Example documentation |
+| mediaRoomStandAloneWriter.js | 4 | Example documentation |
+| parseMediaIntake.js | 2 | Field parsing |
+| culturalLedger.js | 2 | Entity registration |
+| updateMediaSpread.js | 1 | Function signature |
+| mediaRoomIntake.js | 1 | Cultural mention logging |
+
+#### Key Assignment Functions
+
+| Function | Location | Purpose |
+|----------|----------|---------|
+| `getArcReporter_()` | mediaRoomBriefingGenerator.js:1266-1273 | Arc type → journalist |
+| `generateSectionAssignments_()` | mediaRoomBriefingGenerator.js:1373-1453 | Context → desk assignments |
+| `determineFrontPage_()` | mediaRoomBriefingGenerator.js:1117-1263 | Priority → front page lead |
+| `getHolidayStoryIdeas_()` | mediaRoomBriefingGenerator.js:861-1111 | Holiday → journalist lists |
+
+#### Assignment Patterns Identified
+
+1. **String Concatenation:** `briefing.push('- [CATEGORY] Story — Journalist Name');`
+2. **Object Properties:** `{ reporter: 'Journalist Name (Desk)', ... }`
+3. **Function Returns:** `return 'Dr. Lila Mezran';`
+4. **Array Elements:** `{ name: "Tara Ellison", role: "journalist" }`
+
+#### Primary Journalists by Usage Frequency
+
+| Tier | Journalists | Usage |
+|------|-------------|-------|
+| Heavy (20+) | Carmen Delaine, Anthony, Hal Richmond, P Slayer, Mags Corliss | Desk leads |
+| Moderate (5-20) | Kai Marston, Sharon Okafor, Luis Navarro, Trevor Shimizu, Jordan Velez | Specialists |
+| Light (1-5) | Dr. Lila Mezran, Sgt. Rachel Torres, Selena Grant, Talia Finch, Farrah Del Rio | Domain experts |
+
+### Roster Lookup Utility Created
+**File:** `utilities/rosterLookup.js`
+
+| Function | Purpose |
+|----------|---------|
+| `getJournalist_(name)` | Get journalist { desk, role, tone } |
+| `getJournalistTone_(name)` | Get voice/tone string |
+| `getJournalistBySignal_(signalType)` | Signal → primary journalist |
+| `getJournalistsByDesk_(deskName)` | Get all journalists on desk |
+| `formatJournalist_(name, suffix)` | Format for briefing output |
+| `getArcReporterFromRoster_(arcType, domain)` | Roster-based arc assignment |
+| `getSportsAssignment_(sportsSeason)` | Season-aware sports desk |
+| `getVoiceGuidance_(name, storyType)` | Tone + story type guidance |
+
+### Missing from Current System (Future Work)
+
+- No journalist availability/workload tracking
+- No story-to-journalist suitability scoring
+- No LastAppearance or ArticleCount tracking
+- No explicit voice calibration per story type
+
+### Tier 2.3 Status: PARTIAL
+- [x] Roster JSON schema created
+- [x] Phase 7 journalist audit complete
+- [x] Lookup utility created
+- [ ] Migrate hardcoded strings to use rosterLookup.js (V3 refactor)
+- [ ] Add LastAppearance/ArticleCount tracking (schema approval needed)
+
+---
+
 ## V3 UPGRADE PREPARATION
 
 ### Before V3 Work Begins:
@@ -295,6 +384,9 @@ has been fixed via caching. No data pruning needed at this time.
 | Jan 2026 | Created SHEET_NAMES constant | utilities/sheetNames.js | Claude Code |
 | Jan 2026 | Implemented Sheets caching layer, bumped to v2.10 | utilities/sheetCache.js, godWorldEngine2.js | Claude Code |
 | Jan 2026 | Dynamic neighborhood loading, bumped to v2.3 | phase05-citizens/bondEngine.js | Claude Code |
+| Jan 2026 | Bay Tribune roster JSON schema | schemas/bay_tribune_roster.json | Claude Code |
+| Jan 2026 | Roster lookup utility for Phase 7 | utilities/rosterLookup.js | Claude Code |
+| Jan 2026 | Tier 2.3 journalist audit complete | AUDIT_TRACKER.md | Claude Code |
 
 ---
 

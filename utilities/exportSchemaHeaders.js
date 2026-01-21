@@ -4,12 +4,106 @@
  * ============================================================================
  *
  * Mara's idea: Export all sheet headers to markdown for Claude Code visibility.
- * Run this manually, then copy output to SCHEMA_HEADERS.md in GitHub.
  *
- * Usage: Run exportAllHeaders() from Apps Script editor
+ * SETUP (one-time):
+ * 1. Go to Project Settings > Script Properties
+ * 2. Add property: GITHUB_TOKEN = your_personal_access_token
+ * 3. Token needs 'repo' scope (create at github.com/settings/tokens)
+ *
+ * USAGE:
+ * - exportAndPushToGitHub() - Auto-push schema to GitHub (recommended)
+ * - exportAllHeaders() - Just generate markdown (manual copy)
  *
  * ============================================================================
  */
+
+var GITHUB_OWNER = 'pnils08';
+var GITHUB_REPO = 'GodWorld';
+var GITHUB_BRANCH = 'claude/migrate-scripts-github-RzAkz';
+var SCHEMA_FILE_PATH = 'SCHEMA_HEADERS.md';
+
+/**
+ * Export headers and push directly to GitHub
+ */
+function exportAndPushToGitHub() {
+  var token = PropertiesService.getScriptProperties().getProperty('GITHUB_TOKEN');
+
+  if (!token) {
+    throw new Error('GITHUB_TOKEN not set. Go to Project Settings > Script Properties and add it.');
+  }
+
+  // Generate the markdown
+  var markdown = exportAllHeaders();
+
+  // GitHub API URL
+  var url = 'https://api.github.com/repos/' + GITHUB_OWNER + '/' + GITHUB_REPO + '/contents/' + SCHEMA_FILE_PATH;
+
+  // Check if file exists (need SHA for updates)
+  var sha = null;
+  try {
+    var getResponse = UrlFetchApp.fetch(url + '?ref=' + GITHUB_BRANCH, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'token ' + token,
+        'Accept': 'application/vnd.github.v3+json'
+      },
+      muteHttpExceptions: true
+    });
+
+    if (getResponse.getResponseCode() === 200) {
+      var existing = JSON.parse(getResponse.getContentText());
+      sha = existing.sha;
+      Logger.log('File exists, will update (SHA: ' + sha + ')');
+    } else {
+      Logger.log('File does not exist, will create new');
+    }
+  } catch (e) {
+    Logger.log('Could not check existing file: ' + e.message);
+  }
+
+  // Prepare the payload
+  var payload = {
+    message: 'Update schema headers (' + new Date().toISOString().split('T')[0] + ')',
+    content: Utilities.base64Encode(markdown),
+    branch: GITHUB_BRANCH
+  };
+
+  if (sha) {
+    payload.sha = sha;
+  }
+
+  // Push to GitHub
+  var response = UrlFetchApp.fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Authorization': 'token ' + token,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    payload: JSON.stringify(payload),
+    muteHttpExceptions: true
+  });
+
+  var code = response.getResponseCode();
+  var body = response.getContentText();
+
+  if (code === 200 || code === 201) {
+    var result = JSON.parse(body);
+    Logger.log('SUCCESS! Schema pushed to GitHub');
+    Logger.log('URL: ' + result.content.html_url);
+
+    SpreadsheetApp.getUi().alert(
+      'Schema Headers Pushed!',
+      'File updated at:\n' + result.content.html_url,
+      SpreadsheetApp.getUi().ButtonSet.OK
+    );
+
+    return result.content.html_url;
+  } else {
+    Logger.log('ERROR: ' + code + ' - ' + body);
+    throw new Error('GitHub API error: ' + code + ' - ' + body);
+  }
+}
 
 function exportAllHeaders() {
   var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';

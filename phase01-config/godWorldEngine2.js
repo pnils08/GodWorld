@@ -1,7 +1,12 @@
 /**
  * ============================================================================
- * GOD WORLD ENGINE v2.9
+ * GOD WORLD ENGINE v2.10
  * ============================================================================
+ *
+ * v2.10 Changes:
+ * - Added Sheets API caching layer (ctx.cache)
+ * - Reduces API calls from ~1,347 to ~100 per cycle
+ * - See utilities/sheetCache.js for cache API
  *
  * v2.9 Changes:
  * - Added error handling wrapper to runWorldCycle()
@@ -97,8 +102,12 @@ function runWorldCycle() {
 
   const now = new Date();
 
+  // Initialize sheet cache for reduced API calls (v2.10)
+  var cache = createSheetCache_(ss);
+
   ctx = {
     ss: ss,
+    cache: cache,  // v2.10: Sheets API caching layer
     now: now,
     config: {},
     summary: {
@@ -259,6 +268,19 @@ function runWorldCycle() {
     logEngineError_(ctx, 'FATAL-CycleError', fatalError);
     throw fatalError; // Re-throw so Apps Script logs it
   } finally {
+    // v2.10: Flush cached writes to sheets
+    if (ctx && ctx.cache) {
+      try {
+        var flushStats = ctx.cache.flush();
+        Logger.log('Cache flush: ' + flushStats.writes + ' writes, ' + flushStats.appends + ' appends');
+        if (flushStats.errors && flushStats.errors.length > 0) {
+          Logger.log('Cache flush errors: ' + flushStats.errors.join(', '));
+        }
+      } catch (flushErr) {
+        Logger.log('Cache flush failed: ' + flushErr.message);
+      }
+    }
+
     // Log cycle completion summary
     var errorCount = (ctx && ctx.summary && ctx.summary.auditIssues) ? ctx.summary.auditIssues.length : 0;
     Logger.log('Cycle completed. Errors logged: ' + errorCount);
@@ -268,21 +290,22 @@ function runWorldCycle() {
 
 /**
  * ============================================================================
- * LOAD CONFIG
+ * LOAD CONFIG (v2.10 - uses cache)
  * ============================================================================
  */
 function loadConfig_(ctx) {
-  const sheet = ctx.ss.getSheetByName('World_Config');
-  if (!sheet) return;
+  // v2.10: Use cache instead of direct sheet access
+  var cached = ctx.cache.getData('World_Config');
+  if (!cached.exists) return;
 
-  const values = sheet.getDataRange().getValues();
-  for (let r = 1; r < values.length; r++) {
-    const key = (values[r][0] || '').toString().trim();
+  var values = cached.values;
+  for (var r = 1; r < values.length; r++) {
+    var key = (values[r][0] || '').toString().trim();
     if (!key) continue;
 
-    let val = values[r][1];
+    var val = values[r][1];
     if (typeof val === 'string') {
-      const num = parseFloat(val);
+      var num = parseFloat(val);
       if (!isNaN(num)) val = num;
     }
     ctx.config[key] = val;
@@ -292,31 +315,33 @@ function loadConfig_(ctx) {
 
 /**
  * ============================================================================
- * ADVANCE WORLD TIME
+ * ADVANCE WORLD TIME (v2.10 - uses cache)
  * ============================================================================
  */
 function advanceWorldTime_(ctx) {
-  const sheet = ctx.ss.getSheetByName('World_Config');
-  if (!sheet) return;
+  // v2.10: Use cache for reads, queue writes
+  var cached = ctx.cache.getData('World_Config');
+  if (!cached.exists) return;
 
-  const values = sheet.getDataRange().getValues();
+  var values = cached.values;
 
-  let cycleRow = null;
-  let lastRunRow = null;
+  var cycleRow = null;
+  var lastRunRow = null;
 
-  for (let r = 1; r < values.length; r++) {
-    const k = (values[r][0] || '').toString().trim();
+  for (var r = 1; r < values.length; r++) {
+    var k = (values[r][0] || '').toString().trim();
     if (k === 'cycleCount') cycleRow = r + 1;
     if (k === 'lastRun') lastRunRow = r + 1;
   }
 
-  let cycle = Number(ctx.config.cycleCount || 0);
+  var cycle = Number(ctx.config.cycleCount || 0);
   cycle++;
 
   ctx.summary.cycleId = cycle;
 
-  if (cycleRow) sheet.getRange(cycleRow, 2).setValue(cycle);
-  if (lastRunRow) sheet.getRange(lastRunRow, 2).setValue(ctx.now);
+  // v2.10: Queue writes instead of immediate writes
+  if (cycleRow) ctx.cache.queueWrite('World_Config', cycleRow, 2, cycle);
+  if (lastRunRow) ctx.cache.queueWrite('World_Config', lastRunRow, 2, ctx.now);
 
   ctx.config.cycleCount = cycle;
 }
@@ -324,10 +349,13 @@ function advanceWorldTime_(ctx) {
 
 /**
  * ============================================================================
- * UPDATE WORLD POPULATION v2.1
+ * UPDATE WORLD POPULATION v2.2 (v2.10 - uses cache)
  * ============================================================================
  *
  * Safe, realistic city-level population update with GodWorld Calendar integration.
+ *
+ * v2.2 Enhancements (v2.10):
+ * - Uses sheet cache for reads, queued writes for batching
  *
  * v2.1 Enhancements:
  * - Full 30+ holiday awareness for migration patterns
@@ -346,16 +374,18 @@ function advanceWorldTime_(ctx) {
  */
 function updateWorldPopulation_(ctx) {
 
-  const sheet = ctx.ss.getSheetByName('World_Population');
-  if (!sheet) return;
+  // v2.10: Use cache for reads
+  var cached = ctx.cache.getData('World_Population');
+  if (!cached.exists) return;
 
-  const values = sheet.getDataRange().getValues();
+  var values = cached.values;
   if (values.length < 2) return;
 
-  const header = values[0];
-  const row = values[1];
+  var header = values[0];
+  var row = values[1];
 
-  const idx = name => header.indexOf(name);
+  // v2.10: Use createColIndex_ for efficient lookups
+  var idx = createColIndex_(header);
 
   const iTotal = idx('totalPopulation');
   const iIll = idx('illnessRate');
@@ -623,14 +653,14 @@ function updateWorldPopulation_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // WRITE BACK TO SHEET (with column bounds checking)
+  // WRITE BACK TO SHEET (v2.10: queued writes with column bounds checking)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (iTotal >= 0) sheet.getRange(2, iTotal + 1).setValue(total);
-  if (iIll >= 0) sheet.getRange(2, iIll + 1).setValue(ill);
-  if (iEmp >= 0) sheet.getRange(2, iEmp + 1).setValue(emp);
-  if (iMig >= 0) sheet.getRange(2, iMig + 1).setValue(mig);
-  if (iEcon >= 0) sheet.getRange(2, iEcon + 1).setValue(econ);
+  if (iTotal >= 0) ctx.cache.queueWrite('World_Population', 2, iTotal + 1, total);
+  if (iIll >= 0) ctx.cache.queueWrite('World_Population', 2, iIll + 1, ill);
+  if (iEmp >= 0) ctx.cache.queueWrite('World_Population', 2, iEmp + 1, emp);
+  if (iMig >= 0) ctx.cache.queueWrite('World_Population', 2, iMig + 1, mig);
+  if (iEcon >= 0) ctx.cache.queueWrite('World_Population', 2, iEcon + 1, econ);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // STORE IN CTX FOR DOWNSTREAM USE

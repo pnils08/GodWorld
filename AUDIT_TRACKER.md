@@ -14,10 +14,10 @@
 | Priority | Total Issues | Fixed | Remaining |
 |----------|-------------|-------|-----------|
 | CRITICAL | 4 | 2 | 2 |
-| HIGH | 8 | 2 | 6 |
+| HIGH | 8 | 3 | 5 |
 | MEDIUM | 6 | 0 | 6 |
 
-**Last Updated:** After error handling fix (godWorldEngine v2.9)
+**Last Updated:** After utility consolidation (v2.9)
 
 ---
 
@@ -64,12 +64,13 @@
 - **Status:** COMPLETED
 - **Date Fixed:** Jan 2026
 
-### 6. Duplicate Utility Functions - PENDING
-- **Functions:** `pickRandom_()`, `safeGet_()`, `shortId_()`, `ensureSheet_()`
-- **Copies:** 2-3 instances each across files
-- **Fix Required:** Consolidate to `utilities/utilityFunctions.js`
+### 6. ~~Duplicate Utility Functions~~ - FIXED
+- **Functions:** `pickRandom_()`, `safeGet_()`, `shortId_()`, `ensureSheet_()`, etc.
+- **Copies:** Was 2-3 instances each across files
+- **Fix:** Consolidated to `utilities/utilityFunctions.js`, removed duplicates (v2.9)
 - **Schema Impact:** None
-- **Status:** READY TO IMPLEMENT
+- **Status:** COMPLETED
+- **Date Fixed:** Jan 2026
 
 ### 7. Hardcoded Sheet Names - PENDING
 - **Count:** 100+ occurrences of string literals like `'World_Config'`
@@ -198,6 +199,7 @@
 | Jan 2026 | Created AUDIT_TRACKER.md | New file | Claude Code |
 | Jan 2026 | Column bounds fix, bumped to v2.8 | godWorldEngine2.js | Claude Code |
 | Jan 2026 | Error handling wrapper, bumped to v2.9 | godWorldEngine2.js | Claude Code |
+| Jan 2026 | Consolidated duplicate utility functions | 3 files | Claude Code |
 
 ---
 
@@ -232,7 +234,7 @@
 **Next Recommended Fixes (no schema impact):**
 1. ~~Add error handling wrapper to `runWorldCycle()`~~ DONE (v2.9)
 2. ~~Add column index bounds checking in `godWorldEngine2.js`~~ DONE (v2.8)
-3. Consolidate duplicate utility functions
+3. ~~Consolidate duplicate utility functions~~ DONE (v2.9)
 4. Create SHEET_NAMES constant
 
 ---

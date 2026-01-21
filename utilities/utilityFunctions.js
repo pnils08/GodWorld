@@ -1,3 +1,24 @@
+/**
+ * ============================================================================
+ * UTILITY FUNCTIONS - Canonical Location
+ * ============================================================================
+ *
+ * v2.9 Consolidation:
+ * All shared utility functions should be defined here ONLY.
+ * Do not duplicate these functions in other files.
+ *
+ * Available functions:
+ * - pickRandom_(arr) - Pick random element from array
+ * - pickRandomSet_(arr, count) - Pick multiple unique random elements
+ * - maybePick_(arr) - 50% chance to pick random element
+ * - shortId_() - Generate 8-char uppercase UUID
+ * - ensureSheet_(ss, name, headers) - Get or create sheet
+ * - colIndex_(letter) - Convert column letter to index (A=1)
+ * - safeGet_(sheet, row, col) - Safe getValue with null handling
+ *
+ * ============================================================================
+ */
+
 function pickRandom_(arr) {
 if (!arr || arr.length === 0) return null;
 const idx = Math.floor(Math.random() * arr.length);

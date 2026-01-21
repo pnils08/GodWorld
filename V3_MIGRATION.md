@@ -1,103 +1,205 @@
 # GodWorld V3 Migration Plan
-## Draft v0.1 - For Discussion
+## Draft v0.2 - Incorporating Maker's V3 Architecture
 
 **Created:** Jan 2026
-**Authors:** Claude Code (initial draft), Maker (revisions pending)
-**Status:** DRAFT - Awaiting Maker input
+**Authors:** Claude Code, Maker
+**Status:** DRAFT - Architecture defined, migration strategy TBD
 
 ---
 
-## Overview
+## V3 Architecture (Maker's Design)
 
-V3 represents the next major evolution of GodWorld Engine. This document tracks:
-- What's changing and why
-- Migration phases and tasks
-- Decision points requiring Maker input
-- Session-by-session progress
+### Core Principles
 
----
+1. **Deterministic Cycles**
+   - Seeded RNG (`seededRng_()` using Park-Miller LCG)
+   - Domain-specific salts via `ctx.rngFor(salt)`
+   - Same cycle ID = same outputs (enables replay/debugging)
 
-## V3 Goals (Claude's Understanding)
+2. **Write-Intents Model**
+   - Engines NEVER write directly to sheets
+   - All writes go through `enqueueCellWrite_()` / `enqueueRangeWrite_()`
+   - Single `phasePersistence_()` executes all writes
+   - Enables dry-run mode, audit trails, batching
 
-1. **Scalability** - Support larger citizen populations, Chicago expansion
-2. **Configurability** - Move hardcoded values to sheets for easier tuning
-3. **Maintainability** - Break up massive functions, improve code organization
-4. **Reliability** - Schema validation, better error recovery
-5. **Portability** - Support multiple spreadsheet environments
+3. **Single-Scan Sheet Cache**
+   - `readSheet_()` loads entire sheet once, caches in `ctx.cache.sheets`
+   - Eliminates redundant API calls
+   - Enforces read discipline
 
-**Maker: What am I missing? What's the primary driver for V3?**
+4. **Domain Isolation**
+   - Engines read from `ctx.<domain>` and write ONLY to their owned domain
+   - Clear data ownership prevents cross-contamination
+   - Example: population engine owns `ctx.population`, writes only population intents
 
----
+5. **Mode Flags**
+   - `dryRun` - Queue writes but don't execute (testing)
+   - `replay` - Re-run historical cycle (debugging)
+   - `strict` - Throw on errors vs log-and-continue
+   - `profile` - Track phase timings
 
-## Proposed Migration Phases
-
-### Phase A: Foundation (No Schema Changes)
-*Can proceed without Maker approval*
-
-| Task | Status | Notes |
-|------|--------|-------|
-| Sheets caching layer | DONE (v2.10) | `sheetCache.js` |
-| Error handling wrapper | DONE (v2.9) | `safePhaseCall_()` |
-| Centralized sheet names | DONE (v2.9) | `SHEET_NAMES` constant |
-| Dynamic neighborhood loading | DONE (v2.3) | bondEngine reads from sheet |
-| Break up 1000+ line functions | PENDING | See task list below |
-| ctx.summary schema validation | PENDING | Validate required fields in Phase 1 |
-
-### Phase B: Configuration Migration (Schema Changes Required)
-*Requires Maker approval*
-
-| Task | Status | Schema Impact |
-|------|--------|---------------|
-| Spreadsheet ID to World_Config | BLOCKED | Add `SpreadsheetID` row |
-| Holiday lists to Holiday_Config | PROPOSED | New sheet needed |
-| Move hardcoded weights to config | PROPOSED | TBD |
-
-### Phase C: Chicago/Multi-City (Major Feature)
-*Architecture decisions needed*
-
-| Task | Status | Notes |
-|------|--------|-------|
-| Separate Chicago spreadsheet? | DECISION NEEDED | Or tabs in same sheet? |
-| City-specific config loading | PROPOSED | One engine, multiple configs |
-| Cross-city citizen migration | PROPOSED | Story hooks |
+6. **Invariant Validation**
+   - `validateInvariants_()` checks domain constraints post-cycle
+   - Catches bad data before it persists
 
 ---
 
-## Tasks Moved from AUDIT_TRACKER
+## V3 ctx Contract
 
-These audit issues are now V3 scope:
+```javascript
+ctx = {
+  ss,                    // Spreadsheet reference
+  config,                // World_Config key-value pairs
 
-### From CRITICAL
-- **#2 Hardcoded Spreadsheet ID** - Needs schema approval
+  time: { now, cycleId, simDate, tick },
 
-### From HIGH
-- **#11 Functions >1000 Lines** - Refactor targets:
-  - `mediaRoomBriefingGenerator.js` (1,452 lines)
-  - `mediaFeedbackEngine.js` (1,340 lines)
-  - `bondEngine.js` (1,271 lines)
-  - `civicInitiativeEngine.js` (1,229 lines)
+  mode: { dryRun, replay, strict, profile },
 
-- **#12 Tight Coupling via ctx.summary** - 40+ fields assumed to exist
+  rng,                   // Seeded RNG for this cycle
+  rngFor(salt),          // Domain-specific RNG
 
-### From MEDIUM
-- **#14 Hardcoded Holiday Lists** - Move to Holiday_Config sheet
-- **#18 Memory Inefficiency** - citizenContextBuilder profiles
+  world: {               // World state (owned by calendar/weather engines)
+    season, weather, holiday, holidayPriority,
+    isFirstFriday, isCreationDay, sportsSeason,
+    cityDynamics, chaosEvents
+  },
+
+  population: {},        // Owned by population engine
+
+  events: {              // Owned by event engines
+    worldEvents, citizenEvents, arcs, hooks, textures
+  },
+
+  citizens: {            // Owned by citizen engines
+    named, generic, chicagoPool
+  },
+
+  relationships: {       // Owned by bond/neighborhood engines
+    bonds, neighborhoods
+  },
+
+  media: {               // Owned by media engines
+    output, packet, feedback
+  },
+
+  cache: {               // Read cache (managed by readSheet_)
+    sheets, indexes
+  },
+
+  persist: {             // Write intents (consumed by phasePersistence_)
+    updates, logs
+  },
+
+  audit: {               // Diagnostics
+    counters, issues, phaseTimingsMs
+  }
+}
+```
 
 ---
 
-## Open Questions for Maker
+## V3 Phase Structure
 
-1. **What's driving V3?** Performance? Features? Chicago expansion? All of the above?
+```javascript
+runPhases_(ctx, [
+  phaseConfigAndTime_,        // Load config, advance cycle
+  phaseCalendarWorldState_,   // Season, weather, holidays
+  phaseIndexesAndCaches_,     // Build ledger indexes
+  phasePopulation_,           // Population dynamics
+  // ... citizen engines ...
+  // ... event engines ...
+  // ... media engines ...
+  phasePersistence_,          // Execute all write intents
+  phasePost_,                 // Invariant validation, audit
+]);
+```
 
-2. **Schema changes** - Are you ready to approve adding rows/sheets, or should V3 stay schema-neutral?
+---
 
-3. **Chicago architecture** - Same spreadsheet with new tabs, or separate spreadsheet?
+## Migration Strategy
 
-4. **Function breakup priority** - Which 1000+ line file is most painful? Start there?
+### Option A: Big Bang
+- Build V3 engine in parallel (`v3_main.gs`, etc.)
+- Port all engines at once
+- Switch over when complete
+- **Risk:** Long development, integration issues
 
-5. **Timeline** - Any external deadlines, or purely quality-driven?
+### Option B: Incremental (Recommended?)
+- Keep v2.x running
+- Port engines one-by-one to V3 patterns
+- V3 scaffold calls V2 engines wrapped in adapters
+- **Risk:** Adapter complexity, two systems in flight
 
-6. **Testing approach** - Can we create a test spreadsheet clone for V3 work?
+### Option C: Hybrid
+- Build V3 scaffold now
+- Run V3 in `dryRun` mode alongside V2
+- Compare outputs, validate parity
+- Cut over when confident
+- **Risk:** Requires dual-run infrastructure
+
+**Maker: Which approach fits your constraints?**
+
+---
+
+## Migration Phases
+
+### Phase 1: V3 Scaffold (No Engine Changes)
+- [ ] Create `v3_main.gs` with `runWorldCycleV3()`
+- [ ] Create `v3_phases.gs` with phase orchestration
+- [ ] Create `v3_sheet_cache.gs` with `readSheet_()`
+- [ ] Create `v3_write_intents.gs` with `enqueueCellWrite_()`
+- [ ] Create `v3_utils.gs` with RNG, validation, helpers
+- [ ] Test scaffold runs (empty phases)
+
+### Phase 2: Port Phase 1-2 Engines
+- [ ] Port `phaseConfigAndTime_` (already in scaffold)
+- [ ] Port `phaseCalendarWorldState_` (season, weather, holidays)
+- [ ] Port `phaseIndexesAndCaches_` (ledger indexing)
+
+### Phase 3: Port Population Engine
+- [ ] Port `phasePopulation_` (already in scaffold)
+- [ ] Validate against v2.x outputs
+
+### Phase 4: Port Citizen Engines
+- [ ] `phaseGenericCitizens_`
+- [ ] `phaseNamedCitizens_`
+- [ ] `phaseChicagoCitizens_`
+
+### Phase 5: Port Event Engines
+- [ ] `phaseWorldEvents_`
+- [ ] `phaseCitizenEvents_`
+- [ ] `phaseArcs_`
+
+### Phase 6: Port Relationship Engines
+- [ ] `phaseBonds_`
+- [ ] `phaseNeighborhoods_`
+
+### Phase 7: Port Media Engines
+- [ ] `phaseMediaBriefing_`
+- [ ] `phaseMediaFeedback_`
+
+### Phase 8: Persistence & Validation
+- [ ] `phasePersistence_` (already in scaffold)
+- [ ] `phasePost_` with full invariant checks
+
+### Phase 9: Cutover
+- [ ] Parallel run comparison
+- [ ] Deprecate v2.x
+- [ ] V3 goes live
+
+---
+
+## Open Questions
+
+1. **File organization** - One big `v3_main.gs` or split into multiple files per the scaffold?
+
+2. **Backward compatibility** - Do we need to support v2.x cycles during migration?
+
+3. **Testing spreadsheet** - Can we clone the sim sheet for V3 development?
+
+4. **Chicago** - Is Chicago expansion part of V3, or a V3.1 follow-on?
+
+5. **Deterministic validation** - How do we verify RNG determinism across cycles?
 
 ---
 
@@ -105,36 +207,28 @@ These audit issues are now V3 scope:
 
 | Date | Session | Work Done | Next Steps |
 |------|---------|-----------|------------|
-| Jan 2026 | Initial | Created V3_MIGRATION.md draft | Await Maker feedback |
+| Jan 2026 | v0.1 | Created initial V3_MIGRATION.md | Await Maker input |
+| Jan 2026 | v0.2 | Incorporated Maker's V3 scaffold architecture | Discuss migration strategy |
 
 ---
 
-## How To Use This Document
+## Files Reference
 
-**At session start:**
-1. Claude reads this doc
-2. Checks "Current Phase" and "Next Task"
-3. Maker confirms or redirects
-
-**At session end:**
-1. Update task status
-2. Log session in table
-3. Note blockers/decisions needed
-4. Commit and push
-
-**When Maker has input:**
-- Add comments inline or new sections
-- Bump version (v0.1 → v0.2)
-- Claude incorporates in next session
+Maker's V3 scaffold concept defines:
+- `v3_main.gs` - Entry point, bootstrap, phase list
+- `v3_phases.gs` - Phase orchestration, individual phase functions
+- `v3_sheet_cache.gs` - `readSheet_()`, `loadConfigFromSheet_()`
+- `v3_write_intents.gs` - `enqueueCellWrite_()`
+- `v3_utils.gs` - RNG, validation, helpers
 
 ---
 
 ## Current Status
 
-**Phase:** Pre-V3 (Foundation work in progress)
-**Next Task:** Await Maker feedback on this document
+**Phase:** Pre-migration (architecture review)
+**Next Task:** Decide migration strategy (A/B/C)
 **Blockers:** None - awaiting direction
 
 ---
 
-*This is a living document. Version it, argue with it, make it yours.*
+*V3 = deterministic, write-intent, domain-isolated architecture*

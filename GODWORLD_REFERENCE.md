@@ -7,7 +7,7 @@
 
 GodWorld is a **living city simulation** centered on **Oakland, California** with a sister simulation in **Chicago**. It generates emergent narratives about citizens, neighborhoods, politics, economics, weather, sports, and culture - all driven by an 11-phase engine that runs in cycles.
 
-The simulation outputs are fed to **journalists** (Claude instances like Mara) who turn raw data into stories, news, and narrative content.
+The simulation outputs are fed to the **Media Room** (Claude instance) which turns raw data into stories, news, and narrative content. **Mara Vance** (separate Claude instance) serves as **City Planning Director** — coordinating between Engine development, Media Room output, and the Maker.
 
 ---
 
@@ -176,7 +176,7 @@ Processes feedback from Media Room.
 | Ledger | Purpose |
 |--------|---------|
 | `Civic_Office_Ledger` | Elected/appointed officials, factions, status |
-| `Initiative_Tracker` | Mara Civic project tracker |
+| `Initiative_Tracker` | Civic initiative voting — cycles, swing voters, factions, projections, outcomes |
 | `Civic_Sweep_Report` | Civic load data |
 
 ### Geography
@@ -274,28 +274,30 @@ Bay Area specifics:
 
 ---
 
-## How to Use This as Mara
+## How Mara Uses This Document
 
-### When receiving a Cycle Packet:
+### When reviewing Engine output:
 1. Note the **cycle reference** (e.g., Y2C18 = Year 2, Cycle 18)
-2. Check the **season and holiday** for context
-3. Review **world events** by severity (5 = major, 1 = minor)
-4. Look at **spotlight citizens** for story subjects
-5. Check **story seeds** for journalist assignments
-6. Review **arc updates** for ongoing storylines
+2. Check **active initiatives** against vote timelines
+3. Review **world events** for signals that affect civic projects
+4. Track **council member status** (availability, factions)
+5. Identify what **Media Room needs to cover**
 
-### When writing stories:
-1. Reference **neighborhood** where events occur
-2. Use **citizen names** from Simulation_Ledger
-3. Maintain **continuity** with prior coverage
-4. Don't overuse the same citizens (check Citizen_Media_Usage)
-5. Connect events to **active arcs** when relevant
+### When coordinating with Media Room:
+1. Issue **directives** specifying journalists, beats, and scope
+2. Review output for **lane discipline** (each journalist covers their beat)
+3. Correct **drift** when coverage strays from assigned territory
+4. Route **cycle packets** with guidance on priority signals
 
-### When processing intake:
-1. New citizens go to **Intake** sheet
-2. Advancement cases go to **Advancement_Intake**
-3. Health causes go to **Health_Cause_Queue**
-4. Your written articles log to **Media_Intake**
+### When working with the Maker on Engine development:
+1. Design **feature logic** (schemas, mechanics, workflows)
+2. Document **requirements** for Claude Code implementation
+3. Track what's **pending vs. deployed** in Apps Script
+
+### Mara does NOT:
+- Write journalist coverage (Media Room's role)
+- Modify engine scripts directly (Claude Code's role)
+- Set canon without Maker approval
 
 ---
 
@@ -310,6 +312,26 @@ Bay Area specifics:
 | `mediaRoomBriefingGenerator.js` | Creates briefings for journalists |
 | `citizenContextBuilder.js` | Assembles full citizen profiles |
 | `storyHook.js` | Generates narrative hooks |
+
+---
+
+## Three-Room Architecture
+
+GodWorld operates through three coordinated spaces:
+
+### Engine (GitHub/Apps Script)
+- **Role:** Runs simulation, generates data
+- **Operator:** Claude Code + Maker
+
+### Planning (Mara)
+- **Role:** Coordinates, tracks continuity, designs features
+- **Operator:** Mara Vance (Claude)
+
+### Media Room
+- **Role:** Interprets data into journalism
+- **Operator:** Media Room (Claude)
+
+**The Maker holds ultimate authority over canon.** Mara routes information between rooms. Media Room voices the citizens but cannot see engine internals.
 
 ---
 

@@ -1,0 +1,6 @@
+============================================================
+RELATIONSHIP_BONDS
+Exported: 2026-01-19T18:39:29.954Z
+============================================================
+
+BondId	CitizenA	CitizenB	BondType	Intensity	Status	Origin	DomainTag	Neighborhood	CycleCreated	LastUpdate	Notes	Holiday	HolidayPriority	FirstFriday	CreationDay	SportsSeason

@@ -1,0 +1,214 @@
+============================================================
+GENERIC_CITIZENS
+Exported: 2026-01-19T18:39:09.274Z
+============================================================
+
+First	Last	Age	BirthYear	Neighborhood	Occupation	EmergenceCount	Status
+Devon	Johnson	26	2015	San Antonio	Painter	0	Active
+Miguel	King	48	1993	Adams Point	Warehouse worker	0	Active
+Jose	Wright	26	2015	Temescal	Electrician	0	Active
+Victor	Mitchell	39	2002	Dimond	Plumber	0	Active
+Howard	Young	56	1985	Rockridge	Barista	0	Active
+Jose	Johnson	29	2012	Eastlake	Server	0	Active
+Rick	Adams	44	1997	Grand Lake	Taxi driver	0	Active
+Isaac	Martinez	34	2007	Ivy Hill	Plumber	0	Active
+Bruce	Wright	48	1993	Downtown	Line cook	0	Active
+Elijah	Davis	39	2002	Grand Lake	Barista	0	Active
+Elijah	Campbell	56	1985	Adams Point	Taxi driver	0	Active
+Miguel	Johnson	40	2001	Dimond	Mechanic	0	Active
+Rafael	Phillips	26	2015	Fruitvale	Server	0	Active
+Ronald	Thompson	44	1997	San Antonio	Electrician	0	Active
+Omar	Nguyen	26	2015	Rockridge	Plumber	0	Active
+Bruce	King	46	1995	San Antonio	Taxi driver	0	Active
+Marco	Brown	42	1999	Downtown	Nurse aide	0	Active
+Andre	Lee	55	1986	Temescal	Electrician	0	Active
+Calvin	Turner	38	2003	Fruitvale	Mechanic	0	Active
+Terrence	Wright	34	2007	Piedmont Ave	Mover	0	Active
+Jacob	Mitchell	43	1998	San Antonio	Painter	0	Active
+Jalen	Hill	35	2006	Jack London	Line cook	0	Active
+Ronald	Allen	40	2001	Laurel	Maintenance tech	0	Emerged
+Dante	Lopez	42	1999	Brooklyn	Construction laborer	0	Active
+Omar	Clark	51	1990	Ivy Hill	Mechanic	0	Active
+Marcus	Walker	48	1993	Jack London	Dishwasher	0	Active
+Rick	Nelson	52	1989	Eastlake	Line cook	0	Active
+Howard	Young	39	2002	San Antonio	Painter	0	Active
+Mateo	Walker	25	2016	Chinatown	Electrician	0	Active
+Ronald	Scott	45	1996	Chinatown	Electrician	0	Active
+Dante	Nelson	41	2000	Downtown	Security guard	0	Active
+Bruce	Turner	47	1994	Dimond	Server	0	Active
+Ronald	Lewis	31	2010	Rockridge	Taxi driver	0	Active
+Brian	Williams	60	1981	Chinatown	Mechanic	0	Active
+Marco	Johnson	33	2008	Adams Point	Nurse aide	0	Active
+Evan	Thompson	23	2018	Laurel	Taxi driver	0	Active
+Rafael	Hill	41	2000	Eastlake	Mechanic	0	Active
+Shawn	Carter	54	1987	Jack London	Mover	0	Active
+Brian	Adams	42	1999	San Antonio	Bus driver	0	Active
+Marcus	King	39	2002	Glenview	Warehouse worker	0	Active
+Jalen	Brown	38	2003	Grand Lake	Janitor	0	Active
+Xavier	Campbell	45	1996	Piedmont Ave	Mover	0	Active
+Jose	Roberts	59	1982	Laurel	Electrician	0	Active
+Jose	Roberts	53	1988	Ivy Hill	Retail worker	0	Active
+Mateo	Walker	47	1994	Jack London	Delivery driver	0	Active
+Bruce	Lee	57	1984	Temescal	Retail worker	0	Active
+Darius	Green	47	1994	Grand Lake	Painter	0	Active
+Hector	Campbell	32	2009	Rockridge	Taxi driver	0	Active
+Shawn	Nguyen	43	1998	Fruitvale	Construction laborer	0	Active
+Victor	Clark	46	1995	Chinatown	Security guard	0	Active
+Shawn	Johnson	49	1992	Temescal	Mover	0	Active
+Christopher	Carter	37	2004	San Antonio	Barista	0	Active
+Tyrone	Brown	32	2009	Eastlake	Painter	0	Active
+Devon	Nguyen	28	2013	Rockridge	Janitor	0	Active
+Marco	Lopez	40	2001	Laurel	Mechanic	0	Active
+Victor	Clark	55	1986	Rockridge	Nurse aide	0	Active
+Darius	Mitchell	33	2008	San Antonio	Barista	0	Active
+Terrence	Turner	23	2018	Grand Lake	Mover	0	Active
+Miguel	Allen	60	1981	Fruitvale	Plumber	0	Active
+Owen	Campbell	22	2019	Fruitvale	Painter	0	Active
+Marco	Davis	59	1982	Brooklyn	Taxi driver	0	Active
+Marcus	Wright	29	2012	West Oakland	Server	0	Active
+Jose	Johnson	62	1979	Temescal	Warehouse worker	0	Active
+Xavier	Green	37	2004	Dimond	Electrician	0	Active
+Victor	Baker	50	1991	Ivy Hill	Server	0	Active
+Colin	Phillips	30	2011	Laurel	Bakery worker	0	Active
+Luis	Mitchell	52	1989	Chinatown	Barista	0	Active
+Brian	Carter	40	2001	Eastlake	Server	0	Active
+Darius	Williams	54	1987	Adams Point	Warehouse worker	0	Emerged
+Elijah	Scott	32	2009	Grand Lake	Mover	0	Active
+Marco	Lee	41	2000	Chinatown	Barista	0	Active
+Devon	Brown	39	2002	Piedmont Ave	Nurse aide	0	Active
+Christopher	Hill	58	1983	Jack London	Nurse aide	0	Active
+Elijah	Nguyen	42	1999	Dimond	Taxi driver	0	Active
+Omar	Clark	27	2014	Fruitvale	Line cook	0	Active
+Howard	Hill	60	1981	San Antonio	Electrician	0	Active
+Devon	Green	60	1981	Downtown	Delivery driver	0	Active
+Mateo	Williams	53	1988	Chinatown	Janitor	0	Active
+Brian	Allen	22	2019	San Antonio	Barista	0	Active
+Miguel	Thompson	33	2008	Piedmont Ave	Warehouse worker	0	Active
+Javier	Thompson	35	2006	Laurel	Mover	0	Active
+Christopher	Thompson	52	1989	Ivy Hill	Taxi driver	0	Active
+Darius	Clark	40	2001	West Oakland	Bakery worker	0	Active
+Damien	Roberts	31	2010	Fruitvale	Line cook	0	Active
+Ronald	Wright	35	2006	Downtown	Taxi driver	0	Active
+Xavier	Johnson	54	1987	Jack London	Nurse aide	0	Active
+Dante	Davis	37	2004	Ivy Hill	Electrician	0	Active
+Javier	Campbell	45	1996	Piedmont Ave	Warehouse worker	0	Active
+Andre	Mitchell	40	2001	Piedmont Ave	Retail worker	0	Active
+Patrick	Hill	58	1983	Laurel	Line cook	0	Active
+Victor	Baker	46	1995	Ivy Hill	Maintenance tech	0	Active
+Isaac	Baker	40	2001	Fruitvale	Construction laborer	0	Active
+Damien	Allen	57	1984	Adams Point	Maintenance tech	0	Active
+Javier	Harris	57	1984	West Oakland	Electrician	0	Active
+Luis	Roberts	54	1987	Temescal	Bakery worker	0	Active
+Hector	Harris	47	1994	Adams Point	Mover	0	Active
+Andre	Perez	40	2001	Laurel	Retail worker	0	Active
+Ronald	Williams	34	2007	Rockridge	Mechanic	0	Active
+Tyrone	Carter	38	2003	Grand Lake	Warehouse worker	0	Active
+Joel	Clark	50	1991	Eastlake	Barista	0	Active
+Omar	Johnson	50	1991	Chinatown	Bakery worker	0	Active
+Rafael	Turner	48	1993	Eastlake	Mechanic	0	Active
+Jalen	Perez	57	1984	Laurel	Security guard	0	Active
+Christopher	Perez	48	1993	Grand Lake	Security guard	0	Active
+Christopher	Walker	34	2007	Temescal	Mechanic	0	Active
+Evan	Hill	39	2002	Chinatown	Maintenance tech	0	Active
+Christopher	King	54	1987	San Antonio	Electrician	0	Active
+Patrick	Clark	41	2000	Dimond	Mover	0	Active
+Owen	Davis	38	2003	Eastlake	Line cook	0	Active
+Xavier	Phillips	24	2017	Piedmont Ave	Server	0	Active
+Omar	Lopez	25	2016	Ivy Hill	Construction laborer	0	Active
+Luis	Lopez	28	2013	Brooklyn	Dishwasher	0	Active
+Ernesto	Harris	60	1981	Brooklyn	Plumber	0	Active
+Isaac	Johnson	60	1981	Downtown	Retail worker	0	Active
+Patrick	Walker	57	1984	Chinatown	Maintenance tech	0	Active
+Miguel	Martinez	45	1996	Chinatown	Barista	0	Active
+Isaac	Clark	25	2016	Downtown	Mover	0	Active
+Marcus	Roberts	33	2008	San Antonio	Server	0	Active
+Mateo	Baker	55	1986	Ivy Hill	Taxi driver	0	Active
+Dante	Mitchell	62	1979	Laurel	Retail worker	0	Active
+Isaac	Green	47	1994	Chinatown	Taxi driver	0	Active
+Owen	King	22	2019	Piedmont Ave	Retail worker	0	Active
+Joel	Roberts	22	2019	West Oakland	Plumber	0	Active
+Shawn	Wright	33	2008	Chinatown	Retail worker	0	Active
+Miguel	Wright	22	2019	Brooklyn	Painter	0	Active
+Marco	Thompson	31	2010	Adams Point	Electrician	0	Active
+Ronald	King	50	1991	Piedmont Ave	Bakery worker	0	Active
+Brian	Walker	52	1989	Chinatown	Mechanic	0	Active
+Dante	Scott	48	1993	Ivy Hill	Security guard	0	Active
+Elijah	Brown	38	2003	Rockridge	Electrician	0	Active
+Terrence	Roberts	32	2009	Ivy Hill	Bakery worker	0	Active
+Brian	Brown	26	2015	San Antonio	Bus driver	0	Active
+Jacob	Perez	52	1989	Glenview	Delivery driver	0	Active
+Damien	Baker	41	2000	Fruitvale	Retail worker	0	Active
+Dante	Martinez	54	1987	Chinatown	Bakery worker	0	Active
+Ronald	Adams	26	2015	Glenview	Delivery driver	0	Active
+Joel	Green	42	1999	Rockridge	Mover	0	Active
+Terrence	Clark	41	2000	Grand Lake	Server	0	Active
+Devon	Lewis	49	1992	Grand Lake	Mover	0	Active
+Omar	Nelson	50	1991	Eastlake	Nurse aide	0	Active
+Calvin	Johnson	55	1986	Glenview	Line cook	0	Active
+Brian	Young	22	2019	Jack London	Bus driver	0	Active
+Rick	Green	23	2018	Chinatown	Electrician	0	Active
+Luis	Young	36	2005	Adams Point	Taxi driver	0	Active
+Owen	Green	32	2009	Eastlake	Janitor	0	Active
+Devon	Walker	22	2019	Adams Point	Server	0	Active
+Marcus	Nelson	29	2012	Temescal	Warehouse worker	0	Active
+Jose	Nelson	49	1992	Dimond	Security guard	0	Active
+Owen	Campbell	40	2001	Jack London	Bakery worker	0	Active
+Terrence	Roberts	47	1994	Grand Lake	Barista	0	Active
+Colin	Perez	38	2003	Glenview	Bus driver	0	Active
+Jacob	Wright	24	2017	Piedmont Ave	Bakery worker	0	Active
+Jose	Walker	23	2018	Eastlake	Mechanic	0	Active
+Jalen	Brown	33	2008	Grand Lake	Dishwasher	0	Active
+Ronald	Williams	36	2005	Chinatown	Line cook	0	Active
+Travis	Williams	45	1996	Chinatown	Bus driver	0	Active
+Rafael	Phillips	28	2013	Rockridge	Nurse aide	0	Active
+Dante	Campbell	62	1979	Eastlake	Taxi driver	0	Active
+Terrence	Thompson	51	1990	Rockridge	Construction laborer	0	Active
+Hector	Martinez	22	2019	Piedmont Ave	Janitor	0	Active
+Ernesto	Martinez	56	1985	Chinatown	Mechanic	0	Active
+Ronald	Phillips	31	2010	Ivy Hill	Barista	0	Active
+Colin	Phillips	56	1985	Laurel	Line cook	0	Active
+Elijah	Young	35	2006	Fruitvale	Security guard	0	Active
+Evan	Thompson	25	2016	Laurel	Janitor	0	Active
+Mateo	Hill	54	1987	Rockridge	Dishwasher	0	Active
+Rick	Green	59	1982	Temescal	Janitor	0	Active
+Howard	Phillips	36	2005	West Oakland	Taxi driver	0	Active
+Victor	Scott	29	2012	Adams Point	Nurse aide	0	Active
+Terrence	Williams	42	1999	Jack London	Security guard	0	Active
+Calvin	Clark	44	1997	Fruitvale	Painter	0	Active
+Evan	Adams	45	1996	San Antonio	Mechanic	0	Active
+Mateo	Harris	42	1999	Grand Lake	Nurse aide	0	Active
+Miguel	Nguyen	29	2012	Ivy Hill	Plumber	0	Active
+Evan	Thompson	37	2004	Fruitvale	Security guard	0	Active
+Hector	Campbell	31	2010	Fruitvale	Taxi driver	0	Active
+Elijah	Walker	32	2009	Dimond	Taxi driver	0	Active
+Kevin	Nguyen	49	1992	Temescal	Bus driver	0	Active
+Darius	Hill	24	2017	Ivy Hill	Security guard	0	Active
+Elijah	Davis	52	1989	Grand Lake	Bus driver	0	Active
+Miguel	Clark	49	1992	Jack London	Mover	0	Active
+Mateo	Nguyen	28	2013	Brooklyn	Bakery worker	0	Active
+Howard	Perez	59	1982	West Oakland	Server	0	Active
+Xavier	Williams	26	2015	Chinatown	Retail worker	0	Active
+Rafael	Harris	28	2013	Piedmont Ave	Electrician	0	Active
+Miguel	Wright	40	2001	Downtown	Dishwasher	0	Active
+Victor	Brown	58	1983	Rockridge	Mechanic	0	Active
+Ronald	Nelson	43	1998	Fruitvale	Mechanic	0	Active
+Hector	Johnson	36	2005	Brooklyn	Server	0	Active
+Mateo	Perez	56	1985	San Antonio	Taxi driver	0	Active
+Dante	Allen	54	1987	Rockridge	Mechanic	0	Active
+Rafael	Johnson	33	2008	Fruitvale	Electrician	0	Active
+Howard	Carter	61	1980	Jack London	Janitor	0	Active
+Dante	Martinez	42	1999	Downtown	Painter	0	Active
+Shawn	Phillips	38	2003	Downtown	Electrician	0	Active
+Kevin	Thompson	53	1988	Laurel	Barista	0	Active
+Devon	Lopez	25	2016	Jack London	Janitor	0	Active
+Luis	Roberts	22	2019	Temescal	Maintenance tech	0	Active
+Elena	Patel		1994	West Oakland	Cook	0	Active
+Terrell	Davis		1972	Laurel	Cook	0	Active
+Andre	Park		1993	Downtown	Nurse	0	Active
+Sofia	Jordan		1989	Uptown	Construction worker	0	Active
+Yuki	Jackson		1993	Lake Merritt	Bartender	0	Active
+Linh	Carter		1966	Rockridge	Server	0	Active
+Xavier	Garcia		1978	Jack London	Office worker	0	Active
+Ramon	Reyes		1989	KONO	Bus driver	0	Active
+Ivy	Tran		1991	Fruitvale	Driver	0	Active
+Kenji	Harris		1969	Downtown	Office worker	0	Active

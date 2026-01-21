@@ -1,0 +1,47 @@
+============================================================
+CHICAGO_FEED
+Exported: 2026-01-19T18:39:31.268Z
+============================================================
+
+Timestamp	Cycle	GodWorldYear	CycleOfYear	SimMonth	CycleInMOnth	Season	Holiday	WeatherType	Temperature	WeatherImpact	WeatherMood	ComfortIndex	Sentiment	EconomicMood	BullsSeason	Events	Sports	TravelNotes	Correlation	CitizenCount	CitizenSample
+2025-12-08T08:00:45.017Z	1	1	1	22	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-08T09:48:54.701Z	1	1	1	23	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-12T21:38:08.572Z	1	1	1	25	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-15T09:48:54.691Z	1	1	1	26	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-15T19:46:02.661Z	1	1	1	27	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-15T20:27:23.983Z	40	1	1	28	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-16T06:03:06.490Z	40	1	1	29	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-16T06:34:20.370Z	41	1	1	30	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-16T22:08:56.206Z	40	1	1	31	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-16T22:10:42.183Z	41	1	2	1	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-16T22:15:33.658Z	42	1	2	2	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-16T22:20:49.782Z	43	1	2	3	rain	1.2	-0.30000000000000004		Bulls practice development coverage.	Transit caution due to environmental conditions.											
+																					
+2025-12-20T07:05:08.050Z	44	1	2	4	cold	1.1	-0.2		Opening Night												
+2025-12-20T07:09:36.140Z	45	1	2	6	fog	1.3	-0.30000000000000004	Morning haze reported across the city.	day off	Transit caution due to environmental conditions.											
+2025-12-21T08:06:43.976Z	46	1	2	7	fog	1.3	-0.30000000000000004	Morning haze reported across the city.	Bulls pre-game momentum rising.	Transit caution due to environmental conditions.											
+2025-12-22T09:48:54.077Z	47																				
+2025-12-23T05:12:30.441Z	48																				
+2025-12-23T05:16:45.363Z	49	1	2	10	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-23T05:20:51.776Z	50	1	2	11	cold	1.1	-0.2		Bulls pre-game momentum rising.												
+2025-12-27T20:20:39.622Z	51	1	2	12	snow	1.4	-0.2		Bulls practice development coverage.	Transit caution due to environmental conditions.											
+2025-12-27T20:59:14.575Z	52	1	2	13	cold	1.1	-0.2		Bulls pre-game momentum rising.												
+2025-12-27T22:58:56.889Z	53	1	2	14	fog	1.3	-0.30000000000000004	Morning haze reported across the city.	Bulls practice development coverage.	Transit caution due to environmental conditions.											
+2025-12-27T23:07:01.948Z	54	1	2	15	cold	1.1	-0.2		Bulls pre-game momentum rising.												
+2025-12-27T23:08:05.542Z	55	1	2	16	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-27T23:33:17.352Z	57	1	2	18	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-28T02:02:28.879Z	60	1	2	21	snow	1.4	-0.2		Bulls pre-game momentum rising.	Transit caution due to environmental conditions.											
+2025-12-28T02:19:01.510Z	62	1	2	23	fog	1.3	-0.30000000000000004	Morning haze reported across the city.	Bulls pre-game momentum rising.	Transit caution due to environmental conditions.											
+2025-12-28T03:34:51.359Z	63	1	2	24	cold	1.1	-0.2		Bulls practice development coverage.												
+2025-12-28T06:38:47.016Z	64	1	2	25	rain	1.2	-0.29500000000000004		Bulls pre-game momentum rising.	Transit caution due to environmental conditions.											
+2025-12-28T07:06:07.813Z	65	1	2	26	rain	1.2	-0.29500000000000004		Bulls practice development coverage.	Transit caution due to environmental conditions.											
+2025-12-28T07:14:05.231Z	66	1	2	27	fog	1.3	-0.31500000000000006	Morning haze reported across the city.	Bulls pre-game momentum rising.	Transit caution due to environmental conditions.											
+2025-12-28T07:25:38.127Z	67	1	2	28	snow	1.4	-0.21500000000000002		Bulls practice development coverage.	Transit caution due to environmental conditions.											
+2025-12-28T09:53:25.617Z	68	1	3	1	overcast	1.1	-0.09														
+2025-12-29T07:10:37.360Z	69	1	3	3	snow	1.4	introspective	0.35	-0.11	50.5	Snow crews working the main arteries. St. Patrick's Day prep underway. El train delays on the Red Line.		CTA advising extra travel time. O'Hare reporting delays.								
+2025-12-29T09:48:54.672Z	70	1	3	4	snow	1.4	content	0.75	-0.14	50.5	Snow crews working the main arteries.		CTA advising extra travel time. O'Hare reporting delays.								
+2025-12-31T07:55:21.471Z	71	2	19	5	2	Spring	MothersDay	rain	55	1.2	energized	0.95	0.03	50.5	off-season	El train delays on the Red Line.					
+2025-12-31T23:00:44.344Z	72	2	20	5	3	Spring	none	fog	57	1.2	energized	0.95	0.01	50.5	off-season	Morning haze across the lakefront.				75	Howard Gomez (Chinatown); Diane Richardson (Lincoln Park); David Chen (Lincoln Park)
+2026-01-05T09:48:58.985Z	73	2	21	5	4	Spring	MemorialDay	clear	63	1	restless	0.5	0.31	50.5	off-season	Memorial Day ceremonies at Soldier Field. Energy in the downtown corridor.				73	Sandra Turner (Pilsen); Kenneth Wood (Hyde Park); Patricia Lopez (Wicker Park)
+2026-01-12T17:37:42.132Z	74	2	23	6	1	Summer	PrideMonth	heat-wave	66	1.3	energized	0.9	-0.03	53.2	off-season	Cooling centers open in downtown. First Friday gallery openings in River North. Pride Month visibility in Boystown.		CTA advising extra travel time.		74	Tyrone Mitchell (South Shore); Patricia Lopez (Wicker Park); James Morgan (Wicker Park)
+2026-01-19T09:48:57.262Z	75	2	23	6	1	Summer	PrideMonth	heat-wave	65	1.3	restless	0.5	-0.04	53.2	off-season	Cooling centers open in downtown. First Friday gallery openings in River North. Pride Month visibility in Boystown.		CTA advising extra travel time.		75	Diane Richardson (Lincoln Park); Kevin Kelly (South Shore); Felix Cook (Oak Park)

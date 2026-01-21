@@ -74,7 +74,7 @@ These can be done now without architectural changes.
 
 Reduce redundancy, establish single sources of truth.
 
-### [ ] 2.1 Centralized Weather
+### [x] 2.1 Centralized Weather
 **Problem:** Weather data duplicated across multiple ledgers.
 **Solution:** New sheet `Cycle_Weather`
 
@@ -86,11 +86,12 @@ Reduce redundancy, establish single sources of truth.
 | Impact | float | Mood modifier (1.0 = neutral) |
 | Advisory | string | Optional alert text |
 
-**Migration:**
-- Weather generated in Phase 2, stored in `ctx.world.weather`
-- Single row written to `Cycle_Weather`
-- Remove weather columns from: `WorldEvents_Ledger`, `Neighborhood_Map`, others
-- Other ledgers reference by CycleID
+**Status:** COMPLETE (Jan 2026)
+- Created `recordCycleWeather.js` with central weather persistence
+- Added to Phase 10 in `godWorldEngine2.js`
+- Includes helper functions: `getWeatherForCycle_()`, `getWeatherHistory_()`
+- Other ledgers still embed weather for self-contained readability
+- Cycle_Weather is now the canonical lookup source for historical weather
 
 ### [x] 2.2 Ledger Audit & Trim
 **Audit targets:**

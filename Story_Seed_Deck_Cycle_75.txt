@@ -1,0 +1,71 @@
+============================================================
+STORY_SEED_DECK
+Exported: 2026-01-19T18:39:00.850Z
+============================================================
+
+Timestamp	Cycle	SeedID	SeedType	Domain	Neighborhood	Priority	SeedText	Season	Holiday	HolidayPriority	IsFirstFriday	IsCreationDay	SportsSeason
+2025-12-29T07:10:37.360Z	69	92c02ea3	shock	CIVIC	Downtown	3	Sudden systemic jolt disrupts normal cycle flow. Breaking developments.						
+2025-12-29T07:10:37.360Z	69	6dc174a2	health	HEALTH	Temescal	3	Elevated illness indicators raising health concerns. Clinics watching closely.						
+2025-12-29T07:10:37.360Z	69	d2edc5f9	pattern	GENERAL	Laurel	2	Wave of micro-events spreading through neighborhoods. Connected or coincidence?						
+2025-12-29T07:10:37.360Z	69	97f9bde0	demographic	COMMUNITY	West Oakland	2	Population outflow alters community composition. Who's leaving and why?						
+2025-12-29T09:48:54.672Z	70	77de1b6c	shock	CIVIC	Downtown	3	Sudden systemic jolt disrupts normal cycle flow. Breaking developments.						
+2025-12-29T09:48:54.672Z	70	df61db0b	health	HEALTH	Temescal	3	Elevated illness indicators raising health concerns. Clinics watching closely.						
+2025-12-29T09:48:54.672Z	70	941d8991	pattern	GENERAL		2	Elevated activity across the city. Something brewing beneath the surface.						
+2025-12-29T09:48:54.672Z	70	cf2c0d2d	demographic	COMMUNITY	West Oakland	2	Population outflow alters community composition. Who's leaving and why?						
+2025-12-29T09:48:54.672Z	70	ebcb0cd1	sentiment	COMMUNITY		1	Upbeat energy in pockets of the city. Good news travels.						
+2025-12-31T07:55:21.471Z	71	5905cbfd	shock	CIVIC	Downtown	3	Sudden systemic jolt disrupts normal cycle flow. Breaking developments.	Spring	MothersDay	minor	false	false	early-season
+2025-12-31T07:55:21.471Z	71	8becba88	health	HEALTH	Temescal	3	Elevated illness indicators raising health concerns. Clinics watching closely.	Spring	MothersDay	minor	false	false	early-season
+2025-12-31T07:55:21.471Z	71	310bd6cf	pattern	GENERAL		2	Elevated activity across the city. Something brewing beneath the surface.	Spring	MothersDay	minor	false	false	early-season
+2025-12-31T07:55:21.471Z	71	a0d39398	demographic	COMMUNITY	West Oakland	2	Population outflow alters community composition. Who's leaving and why?	Spring	MothersDay	minor	false	false	early-season
+2025-12-31T07:55:21.471Z	71	d07fd58e	sentiment	COMMUNITY	Lake Merritt	2	Positive sentiment lifting community engagement. What's driving the mood?	Spring	MothersDay	minor	false	false	early-season
+2025-12-31T07:55:21.471Z	71	087434a0	retail	BUSINESS	Rockridge	1	Retail surge across commercial corridors. Shoppers on the move.	Spring	MothersDay	minor	false	false	early-season
+2025-12-31T23:00:44.344Z	72	eda1509d	shock	CIVIC	Downtown	3	Sudden systemic jolt disrupts normal cycle flow. Breaking developments.	Spring	none	none	false	false	early-season
+2025-12-31T23:00:44.344Z	72	19965674	health	HEALTH	Temescal	3	Elevated illness indicators raising health concerns. Clinics watching closely.	Spring	none	none	false	false	early-season
+2025-12-31T23:00:44.344Z	72	cc3e76c8	pattern	GENERAL		2	Elevated activity across the city. Something brewing beneath the surface.	Spring	none	none	false	false	early-season
+2025-12-31T23:00:44.344Z	72	e5c34130	demographic	COMMUNITY	West Oakland	2	Population outflow alters community composition. Who's leaving and why?	Spring	none	none	false	false	early-season
+2025-12-31T23:00:44.344Z	72	1e696752	sentiment	COMMUNITY	Lake Merritt	2	Positive sentiment lifting community engagement. What's driving the mood?	Spring	none	none	false	false	early-season
+2025-12-31T23:00:44.344Z	72	ce56cc97	civic	CIVIC	Downtown	1	Minor fluctuations across civic operations. Worth monitoring.	Spring	none	none	false	false	early-season
+2026-01-05T09:48:58.985Z	73	b6984a58	shock	 	Downtown	3	Sudden systemic jolt disrupts normal cycle flow. Breaking developments.	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	e42437a0	shock	GENERAL		3	Holiday disrupted by unexpected developments. Plans change citywide.	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	91709fab	health	HEALTH	Temescal	3	Elevated illness indicators raising health concerns. Clinics watching closely.	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	76dde063	holiday	CIVIC		2	Memorial Day honors fallen service members. Oakland remembers.	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	aa7e7513	engagement	COMMUNITY	Temescal	2	Strong community bonds shaping neighborhood life. Connection stories.	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	d2daa57b	pattern	GENERAL		2	Elevated activity across the city. Something brewing beneath the surface.	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	e3ccbff3	demographic	COMMUNITY	West Oakland	2	Population outflow alters community composition. Who's leaving and why?	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	020d427e	sentiment	COMMUNITY	Lake Merritt	2	Positive sentiment lifting community engagement. What's driving the mood?	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	bd103221	publicspace	COMMUNITY	Lake Merritt	2	Public space activity influencing city energy. People are out.	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	a75fdf28	holiday	COMMUNITY		1	Summer unofficially begins. Weekend getaway stories.	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	dfbda1bf	civic	CIVIC	Downtown	1	Minor fluctuations across civic operations. Worth monitoring.	Spring	MemorialDay	major	false	false	early-season
+2026-01-05T09:48:58.985Z	73	dde52a72	traffic	INFRASTRUCTURE		1	Traffic load altering plans and routines. Commuters adjusting.	Spring	MemorialDay	major	false	false	early-season
+2026-01-12T17:37:42.132Z	74	b11a118d	firstfriday	CULTURE	Uptown	3	First Friday transforms Oakland's arts districts. Galleries, street art, community.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	d7c39c5d	firstfriday	CULTURE	Uptown	3	First Friday cultural surge energizes the city. Arts scene thriving.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	a5772062	cultural	CULTURE	Uptown	3	Cultural vibrancy peaks across Oakland. Arts scene flourishing.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	74b19ec3	engagement	COMMUNITY		3	Community engagement surging. Neighbors connecting like never before.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	9b867c55	shock	CIVIC	Downtown	3	Sudden systemic jolt disrupts normal cycle flow. Breaking developments.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	2ab9b214	health	HEALTH	Temescal	3	Elevated illness indicators raising health concerns. Clinics watching closely.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	f040b40a	firstfriday	CULTURE	KONO	2	Art walk draws crowds to Temescal and KONO. Creative energy stories.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	ef08a686	firstfriday	COMMUNITY	Uptown	2	Local artists showcase work to First Friday audiences. Spotlight opportunities.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	d391174b	pattern	COMMUNITY		2	City enters reflective calm following disruption. Recovery stories emerging.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	b164bb94	shock	CULTURE	Uptown	2	First Friday atmosphere altered by breaking events. Arts community reacts.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	c66e9a8b	demographic	COMMUNITY	Fruitvale	2	Notable population inflow reshaping neighborhoods. New faces, new dynamics.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	450de250	sentiment	COMMUNITY	Lake Merritt	2	Positive sentiment lifting community engagement. What's driving the mood?	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	1564c92b	nightlife	NIGHTLIFE	Jack London	2	High nightlife presence shaping evening flow. Jack London buzzing.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	0d2a493a	publicspace	COMMUNITY	Lake Merritt	2	Public space activity influencing city energy. People are out.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	5912d693	traffic	INFRASTRUCTURE		1	Traffic load altering plans and routines. Commuters adjusting.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-12T17:37:42.132Z	74	4a642aaa	retail	BUSINESS	Rockridge	1	Retail surge across commercial corridors. Shoppers on the move.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	715d9bd0	firstfriday	CULTURE	Uptown	3	First Friday transforms Oakland's arts districts. Galleries, street art, community.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	22544425	firstfriday	CULTURE	Uptown	3	First Friday cultural surge energizes the city. Arts scene thriving.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	5ab8756f	cultural	CULTURE	Uptown	3	Cultural vibrancy peaks across Oakland. Arts scene flourishing.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	4bde54e8	engagement	COMMUNITY		3	Community engagement surging. Neighbors connecting like never before.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	23fdaf78	shock	CIVIC	Downtown	3	Sudden systemic jolt disrupts normal cycle flow. Breaking developments.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	5ee94d3e	health	HEALTH	Temescal	3	Elevated illness indicators raising health concerns. Clinics watching closely.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	a80c174c	firstfriday	CULTURE	KONO	2	Art walk draws crowds to Temescal and KONO. Creative energy stories.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	195c9324	firstfriday	COMMUNITY	Uptown	2	Local artists showcase work to First Friday audiences. Spotlight opportunities.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	4ea6952d	pattern	GENERAL		2	Elevated activity across the city. Something brewing beneath the surface.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	85d64adc	shock	CULTURE	Uptown	2	First Friday atmosphere altered by breaking events. Arts community reacts.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	27aecebf	demographic	COMMUNITY	Fruitvale	2	Notable population inflow reshaping neighborhoods. New faces, new dynamics.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	ee78641a	sentiment	COMMUNITY	Lake Merritt	2	Positive sentiment lifting community engagement. What's driving the mood?	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	c8d04f69	nightlife	NIGHTLIFE	Jack London	2	High nightlife presence shaping evening flow. Jack London buzzing.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	4660d961	publicspace	COMMUNITY	Lake Merritt	2	Public space activity influencing city energy. People are out.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	936bd431	traffic	INFRASTRUCTURE		1	Traffic load altering plans and routines. Commuters adjusting.	Summer	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	d8c7242c	retail	BUSINESS	Rockridge	1	Retail surge across commercial corridors. Shoppers on the move.	Summer	PrideMonth	cultural	true	false	mid-season

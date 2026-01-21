@@ -1,0 +1,8 @@
+============================================================
+SPORTS_FEED
+Exported: 2026-01-19T18:39:32.561Z
+============================================================
+
+Team	League	Record	Wins	Losses	SeasonState	PlayoffRound	PlayoffStatus	Streak	LastGame	NextGame	LastUpdated	Notes
+As	MLB	0-0	0	0	off-season					San Diego	2025-12-31T23:33:44.996Z	ready for 2041 season
+Bulls	NBA	28-13	28	13	mid-season	-	-	3 Game Losing Streak	103-106 Jazz	Brooklyn	2025-12-31T23:33:44.996Z	ahead of schedule

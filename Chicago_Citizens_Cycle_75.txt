@@ -1,0 +1,86 @@
+============================================================
+CHICAGO_CITIZENS
+Exported: 2026-01-19T18:39:12.207Z
+============================================================
+
+CitizenId	Name	Age	Gender	Neighborhood	Occupation	Tier	CreatedCycle	LastActive	Status
+CHI-BBBB2F2A	Howard Gomez	24	M	Chinatown	Grocery Store Owner	4	72	72	active
+CHI-D4E38906	Ricardo Lopez	25	M	Hyde Park	Librarian	4	72	72	active
+CHI-E06C26AF	Darnell Johnson	52	M	Wicker Park	Tattoo Artist	4	72	72	active
+CHI-5D8A4F76	Jennifer Chen	50	F	Loop	Accountant	4	72	72	active
+CHI-2CAF1565	Patricia Diaz	49	F	Loop	Accountant	3	72	72	active
+CHI-A16EC6D3	Diane Richardson	49	F	Lincoln Park	Veterinarian	4	72	72	active
+CHI-5772BCCD	Tanya Murphy	30	F	Lincoln Park	Financial Planner	3	72	72	active
+CHI-0A1CFAF0	Tamara Green	37	F	South Shore	Electrician	4	72	72	active
+CHI-7C16FAC3	Rashid Scott	39	M	Bronzeville	Real Estate Developer	2	72	72	inactive
+CHI-C4D906E1	Daryl King	32	M	River North	Chef	4	72	72	active
+CHI-B1C53A92	Priscilla King	50	F	Pilsen	Muralist	4	72	72	active
+CHI-3459113B	David Chen	65	M	Lincoln Park	Architect	4	72	72	active
+CHI-06A906F2	Priscilla Young	49	F	Hyde Park	Book Store Owner	4	72	72	active
+CHI-4F615F66	Rashid Turner	34	M	Chinatown	Grocery Store Owner	4	72	72	active
+CHI-FCCBD85D	William Gonzalez	38	M	Wicker Park	Yoga Instructor	4	72	72	active
+CHI-BB760092	Alejandra Bailey	40	F	Lincoln Park	Dentist	4	72	72	inactive
+CHI-A3A572EA	Kevin Kelly	25	M	South Shore	CTA Bus Driver	3	72	72	active
+CHI-00F21008	Yolanda Lee	32	F	River North	Hotel Concierge	2	72	72	active
+CHI-47D7A7D7	Felix Cook	31	M	Oak Park	Realtor	4	72	72	active
+CHI-9C21BDAB	Lakisha Wright	26	F	Lincoln Park	Financial Planner	4	72	72	active
+CHI-209ECC12	Linda Wilson	30	F	Wicker Park	Bike Messenger	4	72	72	active
+CHI-74C14AFD	Patrick Anderson	55	M	Loop	Corporate Attorney	3	72	72	active
+CHI-DEE40936	Tyrone Mitchell	20	M	South Shore	Daycare Provider	2	72	72	active
+CHI-79BD6EE2	Eric Wood	26	M	Oak Park	Nonprofit Manager	2	72	72	active
+CHI-2FFB07E1	Dominique Carter	34	F	Hyde Park	Teaching Assistant	4	72	72	active
+CHI-E2A5F40B	Terrence Cooper	61	M	Wicker Park	Musician	4	72	72	active
+CHI-C003896C	Linda Gonzalez	74	F	Bronzeville	Real Estate Developer	4	72	72	active
+CHI-FEEFCD81	Linda Garcia	32	F	Bronzeville	Community Pastor	4	72	72	active
+CHI-5DB3FAC2	Wei Cox	49	M	Loop	Insurance Broker	4	72	72	active
+CHI-79B5F3DA	Mei Roberts	73	F	Hyde Park	Graduate Student	4	72	72	active
+CHI-F4EEEDBF	Maria Gomez	60	F	Oak Park	Retired Professional	3	72	72	active
+CHI-017DA658	Derek Turner	45	M	Chinatown	Grocery Store Owner	2	72	72	active
+CHI-B4F4104B	Jamal Ward	44	M	Wicker Park	Record Store Clerk	2	72	72	active
+CHI-9830367A	James Scott	52	M	Wicker Park	Coffee Shop Barista	3	72	72	active
+CHI-474E3D7B	Linda Lee	40	F	Pilsen	Auto Mechanic	4	72	72	active
+CHI-D382DAD2	Patrick Ward	38	M	South Shore	Daycare Provider	4	72	72	active
+CHI-B6DC824B	James Morgan	60	M	Wicker Park	Coffee Shop Barista	2	72	72	active
+CHI-FB1475A2	Priscilla Jones	29	F	Wicker Park	Record Store Clerk	4	72	72	active
+CHI-E2F82316	Latoya Kelly	35	F	Pilsen	Construction Worker	4	72	72	active
+CHI-6EFC3D81	Sandra Turner	63	F	Pilsen	Restaurant Owner	3	72	72	active
+CHI-FC1C5496	Anthony Bell	38	M	River North	Photographer	4	72	72	active
+CHI-0684A8C9	Vanessa Johnson	70	F	South Shore	Hair Stylist	2	72	72	active
+CHI-72712BCA	Michael Parker	55	M	Loop	Office Manager	4	72	72	active
+CHI-91A24A25	James Phillips	69	M	Lincoln Park	Architect	4	72	72	active
+CHI-BDC00001	Mei Brown	25	F	Oak Park	Therapist	4	72	72	active
+CHI-7346894F	Crystal Bailey	53	F	River North	Restaurant Manager	4	72	72	active
+CHI-C453187C	Lisa Gonzalez	40	F	River North	Server	4	72	72	active
+CHI-F063DC30	Christopher Lewis	49	M	River North	Tech Startup Founder	3	72	72	active
+CHI-13E05E43	Marcus Rogers	65	M	Pilsen	Gallery Curator	3	72	72	active
+CHI-699D0F49	Kimberly Thomas	55	F	Bronzeville	Soul Food Chef	3	72	72	active
+CHI-7FE67D2A	Carlos Morgan	26	M	Hyde Park	Archivist	4	72	72	active
+CHI-AF7CDC86	Patrick Turner	50	M	Hyde Park	Archivist	4	72	72	inactive
+CHI-648DB8BC	Andre Roberts	75	M	Wicker Park	Brewery Worker	3	72	72	active
+CHI-9A5A2A3C	Patricia Bailey	34	F	South Shore	Church Deacon	4	72	72	active
+CHI-778D3BEF	Renee Gonzalez	61	F	Wicker Park	Musician	3	72	72	active
+CHI-A173B5D8	Vincent Anderson	44	M	River North	Hotel Concierge	4	72	72	active
+CHI-A55A09C4	Robert Wright	69	M	Oak Park	Therapist	2	72	72	active
+CHI-6B2A0FA4	Ricardo Young	67	M	South Shore	Church Deacon	4	72	72	active
+CHI-CA9A7FFC	Patricia Lopez	28	F	Wicker Park	Artist	4	72	72	active
+CHI-73D0C108	Brenda Johnson	38	F	Loop	HR Director	4	72	72	active
+CHI-7B6DE6C0	Robert Diaz	42	M	Oak Park	Graphic Designer	4	72	72	active
+CHI-CB5D3B7D	Malik Richardson	41	M	River North	Graphic Designer	4	72	72	active
+CHI-90D066D1	Angela Nelson	33	F	Loop	Insurance Broker	4	72	72	active
+CHI-1EC4FB92	Renee Ward	44	F	Pilsen	Teacher	4	72	72	inactive
+CHI-6DDB624C	Jamal Bell	39	M	Chinatown	Bank Teller	3	72	72	active
+CHI-E40BB496	Brian Reed	73	M	Lincoln Park	Nurse	4	72	72	inactive
+CHI-1DDC1509	Kenneth Diaz	41	M	Lincoln Park	Nurse	4	72	72	active
+CHI-EA66C6A3	Terrence Cooper	62	M	River North	Hotel Concierge	2	72	72	active
+CHI-29C8510D	Alejandra Washington	77	F	Loop	Investment Banker	4	72	72	active
+CHI-917B0703	Carlos Gomez	29	M	South Shore	Hair Stylist	4	72	72	active
+CHI-B488EC55	Linda Garcia	58	F	Loop	Management Consultant	3	72	72	active
+CHI-58236457	Marcus Baker	48	M	Loop	Corporate Attorney	3	72	72	active
+CHI-B2B7497C	Kenneth Wood	27	M	Hyde Park	Archivist	3	72	72	active
+CHI-98D217A0	Kimberly Davis	36	F	Bronzeville	Soul Food Chef	4	72	72	active
+CHI-7C2F032D	William Thomas	37	M	Lincoln Park	Financial Planner	4	72	72	active
+CHI-40472B46	Carmen Williams	28	F	Pilsen	Auto Mechanic	4	75	74	active
+CHI-3313CB2D	Wei Thomas	59	M	Chinatown	Acupuncturist	4	75	74	active
+CHI-26F7155C	Sheryl Bell	63	F	Wicker Park	Artist	4	75	75	active
+CHI-E81A2C54	Nicole Hernandez	62	F	Wicker Park	Freelance Writer	4	75	75	active
+CHI-842E2B53	Felix Cox	67	M	Wicker Park	Freelance Writer	3	75	75	active

@@ -1,0 +1,41 @@
+============================================================
+CIVIC_OFFICE_LEDGER
+Exported: 2026-01-19T18:39:28.458Z
+============================================================
+
+OfficeId	Title	Type	District	Holder	PopId	TermStart	TermEnd	TermYears	ElectionGroup	Status	LastElection	NextElection	Notes		VotingPower	Faction
+MAYOR-01	Mayor	elected	citywide	Avery Santana	POP-00034	1	208	4	B	active		Cycles 205-208	Pro-A's advocate; Baylight plan		yes	OPP
+DA-01	District Attorney	elected	citywide	Clarissa Dane	POP-00143	1	208	4	B	active		Cycles 205-208	Former federal prosecutor		no	IND
+PD-01	Public Defender	elected	citywide	Caleb Reyes	POP-00146	1	208	4	B	active		Cycles 205-208	Sharp political instincts		no	OPP
+COUNCIL-D1	City Council District 1	elected	D1	Denise Carter	POP-00501	1	104	4	A	active		Cycles 101-104	West Oakland		yes	OPP
+COUNCIL-D2	City Council District 2	elected	D2	Leonard Tran	POP-00502	1	208	4	B	active		Cycles 205-208	Downtown/Chinatown		yes	IND
+COUNCIL-D3	City Council District 3	elected	D3	Rose Delgado	POP-00503	1	104	4	A	active		Cycles 101-104	Fruitvale		yes	OPP
+COUNCIL-D4	City Council District 4	elected	D4	Ramon Vega	POP-00042	1	208	4	B	active		Cycles 205-208	Council President		yes	IND
+COUNCIL-D5	City Council District 5	elected	D5	Janae Rivers	POP-00043	1	104	4	A	active		Cycles 205-208	Progressive Caucus Leader		yes	OPP
+COUNCIL-D6	City Council District 6	elected	D6	Elliott Crane	POP-00044	1	208	4	B	injured		Cycles 205-208	Business Caucus Leader		yes	CRC
+COUNCIL-D7	City Council District 7	elected	D7	Warren Ashford	POP-00504	1	104	4	A	active		Cycles 101-104	Temescal/Rockridge		yes	CRC
+COUNCIL-D8	City Council District 8	elected	D8	Nina Chen	POP-00505	1	208	4	B	active		Cycles 205-208	Lake Merritt		yes	CRC
+COUNCIL-D9	City Council District 9	elected	D9	Terrence Mobley	POP-00506	1	104	4	A	active		Cycles 101-104	Laurel/Uptown		yes	OPP
+STAFF-COS	Chief of Staff	appointed	citywide	Laila Cortez	POP-00035	1				active			Pragmatic ex-organizer		no	STAFF
+STAFF-DM-ECON	Deputy Mayor (Econ Dev)	appointed	citywide	Marcus Osei	POP-00036	1				serious-condition			Stadium deal negotiator		no	STAFF
+STAFF-DM-COMM	Deputy Mayor (Community)	appointed	citywide	Brenda Okoro	POP-00037	1				active			Housing-first specialist		no	STAFF
+STAFF-COMMS	Communications Director	appointed	citywide	Theo Park	POP-00038	1				active			Terse; press-fluent		no	STAFF
+STAFF-LEGAL	Chief Legal Counsel	appointed	citywide	Simone Ellis	POP-00039	1				active			Constitutional litigator		no	STAFF
+STAFF-MANAGER	City Manager	appointed	citywide	Aaron Whitfield	POP-00040	1				active			Long-service administrator		no	STAFF
+STAFF-BAYLIGHT	Baylight Authority Director	appointed	citywide	Keisha Ramos	POP-00041	1				active			Stadium plan execution		no	STAFF
+CHIEF-POLICE	Police Chief	appointed	citywide	Rafael Montez	POP-00136	1				active			27-year OPD veteran		no	STAFF
+CHIEF-FIRE	Fire Chief	appointed	citywide	Marcus Hollowell	POP-00140	1				active			30 years OFD		no	STAFF
+DCOP-OPS	Deputy Chief Operations	appointed	citywide	Kimberly Cho	POP-00137	1				active			Logistics-focused		no	STAFF
+DCOP-COMM	Deputy Chief Community	appointed	citywide	Leonard Briggs	POP-00138	1				active			Youth outreach background		no	STAFF
+IAD-LEAD	Internal Affairs Lead	appointed	citywide	Samantha Viteri	POP-00139	1				active			Methodical investigator		no	STAFF
+EMS-DIR	EMS Director	appointed	citywide	Priya Narang	POP-00141	1				active			Trauma physician		no	STAFF
+MED-EXAM	Medical Examiner	appointed	citywide	Jonas Patel	POP-00142	1				active			Forensic pathologist		no	STAFF
+EMERG-DIR	Emergency Management Director	appointed	citywide	Shawna Delgado	POP-00152	1				active			Wildfire response background		no	STAFF
+ADA-MAJOR	ADA Major Crimes	appointed	citywide	Ethan D'Souza	POP-00144	1				active			Case strategy specialist		no	STAFF
+ADA-SAFETY	ADA Community Safety	appointed	citywide	Janelle Rourke	POP-00145	1				active			Restorative justice focus		no	STAFF
+DPD-DEPUTY	Deputy Public Defender	appointed	citywide	Marisol Guzman	POP-00147	1				active			Family law; crisis response		no	STAFF
+COURT-LIAISON	Superior Court Liaison	appointed	citywide	Gordon Tate	POP-00148	1				active			Bureaucratic but reliable		no	STAFF
+CPRB-CHAIR	Civilian Police Review Chair	commission	citywide	Lamine Sissoko	POP-00149	1				active			Public ethics scholar		no	STAFF
+OMBUDSMAN	City Ombudsman	appointed	citywide	Helena Morr	POP-00150	1				active			Conflict resolution expert		no	STAFF
+REENTRY-DIR	Probation & Reentry Director	appointed	citywide	Victor Han	POP-00151	1				active			Rehabilitation focused		no	STAFF
+	City Planning Director	appointed	citywide	Mara Vance	POP-00507	1				active			First Assitant to canonization		no	STAFF

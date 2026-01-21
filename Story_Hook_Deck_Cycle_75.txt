@@ -1,0 +1,51 @@
+============================================================
+STORY_HOOK_DECK
+Exported: 2026-01-19T18:38:59.094Z
+============================================================
+
+Timestamp	Cycle	HookID	HookType	Domain	Neighborhood	Priority	HookText	LinkedArcID	SuggestedDesks	Holiday	HoldayPriority	IsFirstFriday	IsCreationDay	SportsSeason	CalendarTrigger
+2025-12-28T09:53:25.617Z	68	992d22fa	signal	GENERAL		2	Multiple general signals detected. Could be coincidence or early pattern.		City Desk						
+2025-12-29T07:10:37.360Z	69	a21c1e2c	shock	CIVIC		3	SHOCK EVENT: Unexpected disruption detected. Breaking news potential. All desks alert.		Civic Desk						
+2025-12-29T07:10:37.360Z	69	c8e3baf6	demographic	COMMUNITY		2	Significant population outflow detected. Who's leaving and why? Long-form opportunity.		Community Desk						
+2025-12-29T09:48:54.672Z	70	ff5f9acc	shock	CIVIC		3	SHOCK EVENT: Unexpected disruption detected. Breaking news potential. All desks alert.		Civic Desk						
+2025-12-31T07:55:21.471Z	71	5259a32f	shock	CIVIC		3	SHOCK EVENT: Unexpected disruption detected. Breaking news potential. All desks alert.		Civic Desk	MothersDay	minor	false	false	early-season	
+2025-12-31T07:55:21.471Z	71	536d0fbd	sentiment	COMMUNITY	Lake Merritt	2	Positive energy in the city. What's driving the mood? Feature opportunity.		Community Desk	MothersDay	minor	false	false	early-season	
+2025-12-31T07:55:21.471Z	71	0f13c5c4	demographic	COMMUNITY		2	Significant population outflow detected. Who's leaving and why? Long-form opportunity.		Community Desk	MothersDay	minor	false	false	early-season	
+2025-12-31T07:55:21.471Z	71	f1c16e7e	weather	COMMUNITY	Lake Merritt	1	First warm day of spring. Parks filling up, outdoor energy returns. Seasonal feature.		Community Desk	MothersDay	minor	false	false	early-season	
+2025-12-31T23:00:44.344Z	72	cafaad03	shock	CIVIC		3	SHOCK EVENT: Unexpected disruption detected. Breaking news potential. All desks alert.		Civic Desk	none	none	false	false	early-season	
+2025-12-31T23:00:44.344Z	72	ee4762fc	event	SAFETY		3	Fire incident reported. Scene coverage, displacement, cause investigation.		Civic Desk	none	none	false	false	early-season	
+2025-12-31T23:00:44.344Z	72	155f8bb6	sentiment	COMMUNITY	Lake Merritt	2	Positive energy in the city. What's driving the mood? Feature opportunity.		Community Desk	none	none	false	false	early-season	
+2025-12-31T23:00:44.344Z	72	97a35ecf	weather	COMMUNITY	Lake Merritt	1	First warm day of spring. Parks filling up, outdoor energy returns. Seasonal feature.		Community Desk	none	none	false	false	early-season	
+2026-01-05T09:48:58.985Z	73	fe675651	shock	CIVIC		3	SHOCK EVENT: Unexpected disruption detected. Breaking news potential. All desks alert.		Civic Desk	MemorialDay	major	false	false	early-season	
+2026-01-05T09:48:58.985Z	73	d0c985bd	signal	CIVIC		2	Multiple civic signals detected. Could be coincidence or early pattern.		Civic Desk	MemorialDay	major	false	false	early-season	
+2026-01-05T09:48:58.985Z	73	ff0f5eb6	holiday	HOLIDAY		2	MemorialDay observance citywide. Feature opportunity: How Oakland celebrates. Human interest angles available.		Features Desk	MemorialDay	major	false	false	early-season	
+2026-01-05T09:48:58.985Z	73	45e2fe69	sentiment	COMMUNITY	Lake Merritt	2	Positive energy in the city. What's driving the mood? Feature opportunity.		Community Desk	MemorialDay	major	false	false	early-season	
+2026-01-05T09:48:58.985Z	73	3bc845cb	demographic	COMMUNITY		2	Significant population outflow detected. Who's leaving and why? Long-form opportunity.		Community Desk	MemorialDay	major	false	false	early-season	
+2026-01-12T17:37:42.132Z	74	037eda4d	shock	CIVIC		3	SHOCK EVENT: Unexpected disruption detected. Breaking news potential. All desks alert.		Civic Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	cd23257c	signal	INFRASTRUCTURE		2	Multiple infrastructure signals detected. Could be coincidence or early pattern.		Civic Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	db16f892	signal	NIGHTLIFE		2	Multiple nightlife signals detected. Could be coincidence or early pattern.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	dc9d38d7	signal	CULTURE		2	Multiple culture signals detected. Could be coincidence or early pattern.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	0731e0fd	signal	ARTS		2	Multiple arts signals detected. Could be coincidence or early pattern.		City Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	84696804	holiday	CULTURAL	Downtown	2	Pride Month begins: Rainbow flags appear. Preview Oakland Pride, community voices, LGBTQ+ features.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	6f8ce2e1	firstfriday	CULTURE	Uptown	2	First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	88a9a566	sentiment	COMMUNITY	Lake Merritt	2	Positive energy in the city. What's driving the mood? Feature opportunity.		Community Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	a884bc62	cultural	CULTURE		2	Cultural activity surge detected. Arts scene energized. Gallery/venue roundup opportunity.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	0da8700e	community	COMMUNITY		2	Community engagement elevated. Residents gathering, organizing, connecting. Profile opportunity.		Community Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	9c219437	pattern	GENERAL		2	Recovery phase following recent shock. How is the city bouncing back? Follow-up angle.		City Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	0ec779ef	demographic	COMMUNITY		2	Population inflow surge. New residents arriving. Neighborhood change angle.		Community Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	8d525ef3	nightlife	NIGHTLIFE	Jack London	2	Nightlife surge in the district. Scene report or venue profile opportunity.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	25f4425f	firstfriday	NIGHTLIFE	KONO	1	First Friday nightlife surge expected. Restaurant and bar scene coverage available.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-12T17:37:42.132Z	74	01c1a7b5	weather	COMMUNITY	Lake Merritt	1	Perfect weather drawing crowds outdoors. Street scene, park life, café patios. Photo walk.		Community Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	37f76cae	shock	CIVIC		3	SHOCK EVENT: Unexpected disruption detected. Breaking news potential. All desks alert.		Civic Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	e5b0f635	signal	CULTURE		2	Multiple culture signals detected. Could be coincidence or early pattern.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	6bc702d2	signal	INFRASTRUCTURE		2	Multiple infrastructure signals detected. Could be coincidence or early pattern.		Civic Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	28b67b49	signal	NIGHTLIFE		2	Multiple nightlife signals detected. Could be coincidence or early pattern.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	3bc2c0d5	signal	ARTS		2	Multiple arts signals detected. Could be coincidence or early pattern.		City Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	2ba5b485	holiday	CULTURAL	Downtown	2	Pride Month begins: Rainbow flags appear. Preview Oakland Pride, community voices, LGBTQ+ features.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	85ff98c7	firstfriday	CULTURE	Uptown	2	First Friday: Monthly art walk tonight. Gallery openings, street vendors, neighborhood energy. Photo walk opportunity.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	dbd53fed	sentiment	COMMUNITY	Lake Merritt	2	Positive energy in the city. What's driving the mood? Feature opportunity.		Community Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	74fc54b5	cultural	CULTURE		2	Cultural activity surge detected. Arts scene energized. Gallery/venue roundup opportunity.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	5a223d4f	community	COMMUNITY		2	Community engagement elevated. Residents gathering, organizing, connecting. Profile opportunity.		Community Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	35988986	demographic	COMMUNITY		2	Population inflow surge. New residents arriving. Neighborhood change angle.		Community Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	e4af18f1	nightlife	NIGHTLIFE	Jack London	2	Nightlife surge in the district. Scene report or venue profile opportunity.		Culture Desk	PrideMonth	cultural	true	false	mid-season	
+2026-01-19T09:48:57.262Z	75	15dbf204	firstfriday	NIGHTLIFE	KONO	1	First Friday nightlife surge expected. Restaurant and bar scene coverage available.		Culture Desk	PrideMonth	cultural	true	false	mid-season	

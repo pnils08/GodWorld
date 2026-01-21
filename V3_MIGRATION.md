@@ -1,9 +1,9 @@
 # GodWorld V3 Migration Plan
-## Draft v0.2 - Incorporating Maker's V3 Architecture
+## Draft v0.3 - Adding Component Details
 
 **Created:** Jan 2026
 **Authors:** Claude Code, Maker
-**Status:** DRAFT - Architecture defined, migration strategy TBD
+**Status:** DRAFT - Migration strategy: Option C (Hybrid)
 
 ---
 
@@ -116,6 +116,47 @@ runPhases_(ctx, [
 
 ---
 
+## V3 Component Details
+
+### Batched Persistence (`v3_persistence_batch.gs`)
+
+Optimized write execution that minimizes API calls.
+
+**Intent Types:**
+```javascript
+// Single cell
+{ kind: 'cell', tab: 'World_Config', address: { row: 5, col: 2 }, value: 'newValue' }
+
+// Range (pre-batched by caller)
+{ kind: 'range', tab: 'Citizens', address: { startRow: 2, startCol: 1, numRows: 10, numCols: 5 }, values: [[...]] }
+
+// Append row
+{ kind: 'append', tab: 'Event_Log', values: [['timestamp', 'event', 'details']] }
+```
+
+**Algorithm:**
+1. Group intents by sheet tab
+2. Apply explicit range writes first (already optimized)
+3. Merge individual cell writes into rectangular blocks via `buildCellBlocks_()`
+   - Last-write-wins for duplicate (row, col)
+   - Sort by row, col
+   - Build contiguous row runs
+   - Merge runs into rectangles when column spans match
+4. Batch appends into single `setValues()` call
+5. Respects `ctx.mode.dryRun` (skips execution)
+6. Respects `ctx.mode.strict` (throws on missing sheet vs log-and-continue)
+
+**Key Functions:**
+- `phasePersistence_(ctx)` - Main entry point
+- `groupUpdatesByTab_(updates)` - Organize by sheet
+- `buildCellBlocks_(cellUpdates)` - Merge cells into rectangles
+- `applyCellBlocks_(sheet, blocks)` - Execute with `setValues()`
+- `enqueueRangeWrite_(ctx, tab, startRow, startCol, values2d, reason, domain)` - Helper
+
+**Performance:** Reduces N individual `setValue()` calls to ~5-10 batched `setValues()` calls per sheet.
+
+---
+
 ## Migration Strategy
 
 ### Option A: Big Bang
@@ -130,14 +171,12 @@ runPhases_(ctx, [
 - V3 scaffold calls V2 engines wrapped in adapters
 - **Risk:** Adapter complexity, two systems in flight
 
-### Option C: Hybrid
+### Option C: Hybrid ✓ SELECTED
 - Build V3 scaffold now
 - Run V3 in `dryRun` mode alongside V2
 - Compare outputs, validate parity
 - Cut over when confident
 - **Risk:** Requires dual-run infrastructure
-
-**Maker: Which approach fits your constraints?**
 
 ---
 
@@ -209,6 +248,7 @@ runPhases_(ctx, [
 |------|---------|-----------|------------|
 | Jan 2026 | v0.1 | Created initial V3_MIGRATION.md | Await Maker input |
 | Jan 2026 | v0.2 | Incorporated Maker's V3 scaffold architecture | Discuss migration strategy |
+| Jan 2026 | v0.3 | Selected Option C (Hybrid), added batched persistence component | Add more components |
 
 ---
 

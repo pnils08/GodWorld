@@ -1,0 +1,51 @@
+============================================================
+LEDGER_INDEX
+Exported: 2026-01-19T18:39:39.162Z
+============================================================
+
+Active	Ledger	Purpose	Cycle_Packet	Project_Document	Feeder 
+yes	MediaRoom_Paste				
+yes	Storyline_Intake				
+yes	Citizen_Media_Usage				
+yes	Citizen_Usage_Intake				
+yes	Continuity_Intake				
+yes	Continuity_Loop				
+yes	Media_Intake				
+yes	Health_Cause_Queue				
+yes	Press_Drafts				
+yes	Dashboard				
+yes	Sports_Feed	Values fees "Dashboard"	no	no	no
+yes	Cycle_Packet				
+yes	Riley_Digest				
+yes	WorldEvents_V3_Ledger				
+yes	WorldEvents_Ledger				
+yes	NBA_Game_Intake	manual intake ledger for NBA news feed	yes	no	no
+yes	MLB_Game_Intake	manual intake ledger for NBA news feed	yes	no	no
+yes	Media_Briefing				
+yes	Storyline_Tracker				
+yes	Story_Hook_Deck				
+yes	Stort_Seed_Deck				
+yes	Chicago_Feed				
+yes	Civic_Office_Ledger				
+yes	Initiative_Tracker	Mara Civic project tracker	no	no	no
+yes	Intake	intake "NEW" citizens	no	no	no
+yes	Advancement_Intake	intake to "EXISTING" citizens (emergence counts, life changes)	no	no	no
+yes	Simulation_Ledger	Oakland citizens	no	YES	no
+yes	LifeHistory_Log	Oakland citizens microevents log	no	no	YES
+yes	Generic_Citizens	Oakland citizens - generic	no	YES	no
+yes	Relationship_Bonds				
+yes	Cultural_Ledger	Oakland famous citizens	no	YES	no
+yes	Chicago_Citizens	Chicago Citizens	no	YES	no
+yes	Neighborhood_Map				
+yes	Domain_Tracker				
+yes	Event_Arc_Ledger				
+yes	Arc_Ledger				
+yes	Texture_Trigger_Log				
+yes	Sports_Calendar				
+yes	Simulation_Calendar				
+yes	Civic_Sweep_Report				
+yes	World_Drift_Report				
+yes	World_Population				
+yes	World_Config		no	no	no
+yes	Engine_Index2	list all App Scripts .gs files writing to ledgers	no	YES	no
+yes	Ledger_Index	detail and describe ledgers in Simulation_Narrative google sheet enviroment	no	YES	no

@@ -175,6 +175,62 @@
 
 ---
 
+## LEDGER AUDIT (Tier 2.2)
+
+**Status:** IN PROGRESS
+**Started:** Jan 2026
+
+### LifeHistory_Log (18 files reference)
+**Concern:** 2500+ rows, append-only
+
+| File | Phase | Operation |
+|------|-------|-----------|
+| citizenContextBuilder.js | 5 | READ |
+| generateGenericCitizens.js | 5 | WRITE |
+| runRelationshipEngine.js | 5 | WRITE |
+| generateNamedCitizensEvents.js | 5 | WRITE |
+| runAsUniversePipeline.js | 5 | WRITE |
+| runCareerEngine.js | 5 | WRITE |
+| runEducationEngine.js | 5 | WRITE |
+| checkForPromotions.js | 5 | WRITE |
+| processAdvancementIntake.js | 5 | WRITE |
+| runCivicRoleEngine.js | 5 | WRITE |
+| runHouseholdEngine.js | 5 | WRITE |
+| runNeighborhoodEngine.js | 5 | WRITE |
+| godWorldEngine2.js | 1 | CONFIG |
+| generateGenericCitizenMicroEvent.js | 4 | WRITE |
+| generateGameModeMicroEvents.js | 4 | WRITE |
+| generationalEventsEngine.js | 4 | WRITE |
+| generateCitizenEvents.js | 4 | WRITE |
+| cycleExportAutomation.js | 10 | READ/EXPORT |
+
+### WorldEvents_Ledger (4 files reference)
+**Concern:** Every event ever stored
+
+| File | Phase | Operation |
+|------|-------|-----------|
+| worldEventsLedger.js | 4 | WRITE |
+| recordWorldEventsv25.js | 10 | WRITE |
+| cycleExportAutomation.js | 10 | READ/EXPORT |
+
+### Relationship_Bonds (6 files reference)
+**Concern:** Read every cycle
+
+| File | Phase | Operation |
+|------|-------|-----------|
+| seedRelationBondsv1.js | 5 | WRITE (seed) |
+| citizenContextBuilder.js | 5 | READ |
+| bondPersistence.js | 5 | WRITE |
+| bondEngine.js | 5 | READ/WRITE |
+| cycleExportAutomation.js | 10 | READ/EXPORT |
+
+### Next Steps (Tier 2.2)
+- [ ] Verify READ vs WRITE operations in each file
+- [ ] Count actual row counts in production sheets
+- [ ] Propose archive/prune strategy with Maker approval
+
+---
+
 ## V3 UPGRADE PREPARATION
 
 ### Before V3 Work Begins:

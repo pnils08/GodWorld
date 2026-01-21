@@ -13,11 +13,11 @@
 
 | Priority | Total Issues | Fixed | Remaining |
 |----------|-------------|-------|-----------|
-| CRITICAL | 4 | 1 | 3 |
-| HIGH | 8 | 1 | 7 |
+| CRITICAL | 4 | 2 | 2 |
+| HIGH | 8 | 2 | 6 |
 | MEDIUM | 6 | 0 | 6 |
 
-**Last Updated:** After eval() removal and filename fix
+**Last Updated:** After error handling fix (godWorldEngine v2.9)
 
 ---
 
@@ -46,13 +46,14 @@
 - **Schema Impact:** None (internal optimization)
 - **Status:** READY TO IMPLEMENT
 
-### 4. Missing Error Handling - PENDING
-- **Files:** 86 files lack try/catch on Sheets operations
+### 4. ~~Missing Error Handling~~ - FIXED
+- **Files:** godWorldEngine2.js (main cycle)
 - **Issue:** Silent failures, no error recovery
 - **Risk:** Data loss, cycle corruption
-- **Fix Required:** Add error handler wrapper in main cycle
-- **Schema Impact:** None (internal code)
-- **Status:** READY TO IMPLEMENT
+- **Fix:** Added `safePhaseCall_()` wrapper and `logEngineError_()` helper (v2.9)
+- **Schema Impact:** None (creates Engine_Errors sheet only if errors occur)
+- **Status:** COMPLETED
+- **Date Fixed:** Jan 2026
 
 ---
 
@@ -84,12 +85,13 @@
 - **Schema Impact:** None
 - **Status:** LOW PRIORITY - address during V3 refactor
 
-### 9. Column Index -1 Bug - PENDING
+### 9. ~~Column Index -1 Bug~~ - FIXED
 - **File:** `phase01-config/godWorldEngine2.js:547-551`
 - **Issue:** If column not found, `idx = -1`, then `getRange(2, 0)` fails
-- **Fix Required:** Add bounds check before write
+- **Fix:** Added `if (idx >= 0)` guards before each write
 - **Schema Impact:** None
-- **Status:** READY TO IMPLEMENT
+- **Status:** COMPLETED
+- **Date Fixed:** Jan 2026
 
 ### 10. Array Mutation in Loops - PENDING
 - **File:** `utilities/utilityFunctions.js:16`
@@ -165,9 +167,9 @@
 
 ### Before V3 Work Begins:
 1. [ ] Implement Sheets caching layer
-2. [ ] Add error handling to main cycle
+2. [x] Add error handling to main cycle (v2.9)
 3. [ ] Centralize sheet names
-4. [ ] Add column index bounds checking
+4. [x] Add column index bounds checking (v2.8)
 
 ### V3 Architecture Changes Needed:
 1. [ ] Sheet ID configuration system
@@ -194,6 +196,8 @@
 | Jan 2026 | Organized into phase folders | All 129 | Claude Code |
 | Jan 2026 | Created GODWORLD_REFERENCE.md | New file | Claude Code |
 | Jan 2026 | Created AUDIT_TRACKER.md | New file | Claude Code |
+| Jan 2026 | Column bounds fix, bumped to v2.8 | godWorldEngine2.js | Claude Code |
+| Jan 2026 | Error handling wrapper, bumped to v2.9 | godWorldEngine2.js | Claude Code |
 
 ---
 
@@ -226,8 +230,8 @@
 - Internal code changes (logic, error handling, caching) are OK
 
 **Next Recommended Fixes (no schema impact):**
-1. Add error handling wrapper to `runWorldCycle()`
-2. Add column index bounds checking in `godWorldEngine2.js`
+1. ~~Add error handling wrapper to `runWorldCycle()`~~ DONE (v2.9)
+2. ~~Add column index bounds checking in `godWorldEngine2.js`~~ DONE (v2.8)
 3. Consolidate duplicate utility functions
 4. Create SHEET_NAMES constant
 

@@ -92,7 +92,7 @@ Reduce redundancy, establish single sources of truth.
 - Remove weather columns from: `WorldEvents_Ledger`, `Neighborhood_Map`, others
 - Other ledgers reference by CycleID
 
-### [ ] 2.2 Ledger Audit & Trim
+### [x] 2.2 Ledger Audit & Trim
 **Audit targets:**
 
 | Ledger | Concern | Proposal |
@@ -105,6 +105,12 @@ Reduce redundancy, establish single sources of truth.
 - Document read/write frequency per ledger
 - Update AUDIT_TRACKER.md with findings
 - Trim decisions made with Maker approval
+
+**Status:** COMPLETE (Jan 2026)
+- Audited all 3 target ledgers (LifeHistory_Log, WorldEvents_Ledger, Relationship_Bonds)
+- Identified citizenContextBuilder.js as main performance bottleneck
+- Added cache support instead of pruning data
+- See AUDIT_TRACKER.md for full findings
 
 ### [ ] 2.3 BayTribune Roster
 **Purpose:** Single source of truth for journalists.

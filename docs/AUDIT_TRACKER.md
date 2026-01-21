@@ -238,16 +238,21 @@
 | WorldEvents_Ledger | Prune low-severity | Keep severity 3+ forever, prune 1-2 after 5 cycles | Low severity = noise |
 | Relationship_Bonds | Filter on read | Only load Status=ACTIVE | Don't load DORMANT/SEVERED |
 
-### Alternative: Optimize citizenContextBuilder.js
-Instead of pruning, fix the read pattern:
-- Only read rows matching the citizen being built (filter by POPID)
-- Use cached reads if available via sheetCache.js
-- Limit history to last N entries per citizen
+### IMPLEMENTED: Optimize citizenContextBuilder.js
+**Status:** COMPLETE
+**Date:** Jan 2026
 
-### Next Steps (Tier 2.2)
-- [ ] Get actual row counts from production sheets
-- [ ] Maker decision: Prune strategy OR optimize reads
-- [ ] Implement chosen approach
+Fix applied - citizenContextBuilder.js now uses sheetCache when available:
+- [x] `buildCitizenContext()` accepts optional cache parameter
+- [x] `getLifeHistory_()` uses `cache.getValues()` when cache provided
+- [x] `getRelationships_()` uses `cache.getValues()` when cache provided
+
+**Result:** When called during engine cycle with ctx.cache, LifeHistory_Log
+and Relationship_Bonds are read once per cycle instead of once per citizen.
+
+### Tier 2.2 Status: COMPLETE
+The ledger audit is done. Performance bottleneck in citizenContextBuilder.js
+has been fixed via caching. No data pruning needed at this time.
 
 ---
 

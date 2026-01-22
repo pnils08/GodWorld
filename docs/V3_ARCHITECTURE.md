@@ -102,7 +102,16 @@ ctx = {
   // Civic domain
   civic: {
     council: Array<Object>,
-    initiatives: Array<Object>
+    initiatives: Array<Object>,
+    activeRipples: Array<{
+      initiativeId: string,
+      type: string,           // health, transit, economic, sports, housing, environment
+      neighborhoods: Array<string>,
+      impact: number,
+      cyclesRemaining: number,
+      decayRate: number,
+      passed: boolean         // true = positive ripple, false = negative (failure frustration)
+    }>
   },
 
   // Media domain
@@ -154,7 +163,7 @@ ctx = {
 | 5 | Citizens | Generation, bonds, neighborhoods, roles, careers |
 | 6 | Analysis | Patterns, shock monitor, digest, weights |
 | 7 | Media | Build packet, feedback loop, journalist assignment |
-| 8 | Civic | Council state, initiative resolution |
+| 8 | Civic | Council state, initiative resolution, ripple activation |
 | 9 | Persistence | Apply ctx.persist write intents (or skip in dryRun) |
 | 10 | Post | Finalize audit, emit logs |
 

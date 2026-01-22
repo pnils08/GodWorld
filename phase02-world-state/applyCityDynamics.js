@@ -1,38 +1,39 @@
 /**
  * ============================================================================
- * applyCityDynamics_ v2.2
+ * applyCityDynamics_ v2.3
  * ============================================================================
- * 
+ *
  * Calculates city-wide dynamics based on season, holiday, weather, and sports.
  * Aligned with GodWorld Calendar v1.0 and getSimHoliday_ v2.3.
- * 
- * Enhancements:
- * - All 30+ holidays from cycle-based calendar
- * - First Friday modifiers
- * - Creation Day handling
- * - Oakland-specific and cultural holiday effects
- * - Championship sports state
- * - Holiday priority baseline modifiers
- * 
+ *
+ * v2.3 Enhancements:
+ * - Momentum / inertia smoothing (prevents teleporting dynamics)
+ * - Shock-aware momentum reduction (lets real disruptions break inertia)
+ * - Stores previousCityDynamics in ctx.summary (NO sheet/schema changes)
+ * - Optional reset hook via S.resetDynamicsMomentum flag
+ *
  * Outputs:
  * - traffic, retail, tourism, nightlife, publicSpaces, sentiment
- * - culturalActivity, communityEngagement (new)
- * 
+ * - culturalActivity, communityEngagement
+ *
  * ============================================================================
  */
 
 function applyCityDynamics_(ctx) {
 
-  const S = ctx.summary;
+  const S = ctx.summary || (ctx.summary = {});
   const season = S.season;
   const holiday = S.holiday || "none";
   const holidayPriority = S.holidayPriority || "none";
   const weather = S.weather || { type: "clear", impact: 1 };
-  const ss = S.sportsSeason;
+  const ss = S.sportsSeason || "off-season";
   const isFirstFriday = S.isFirstFriday || false;
   const isCreationDay = S.isCreationDay || false;
   const cycleOfYear = S.cycleOfYear || 1;
 
+  // ───────────────────────────────────────────────────────────────────────────
+  // BASELINE
+  // ───────────────────────────────────────────────────────────────────────────
   let traffic = 1;
   let retail = 1;
   let tourism = 1;
@@ -42,10 +43,9 @@ function applyCityDynamics_(ctx) {
   let culturalActivity = 1;
   let communityEngagement = 1;
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // SEASON BASE MODIFIERS
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (season === "Winter") {
     traffic *= 0.8;
     tourism *= 0.6;
@@ -87,10 +87,9 @@ function applyCityDynamics_(ctx) {
     communityEngagement *= 1.0;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // WEATHER MODIFIERS
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (weather.type === "rain" || weather.type === "fog") {
     traffic *= 0.9;
     publicSpaces *= 0.7;
@@ -115,10 +114,9 @@ function applyCityDynamics_(ctx) {
     sentiment += 0.1;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // FIRST FRIDAY (Oakland monthly art walk)
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (isFirstFriday) {
     nightlife *= 1.4;
     culturalActivity *= 1.5;
@@ -129,20 +127,18 @@ function applyCityDynamics_(ctx) {
     sentiment += 0.2;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // CREATION DAY (GodWorld Special - Cycle 48)
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (isCreationDay || holiday === "CreationDay") {
     communityEngagement *= 1.3;
     culturalActivity *= 1.2;
     sentiment += 0.2;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // HOLIDAY PRIORITY BASELINE
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (holidayPriority === "major") {
     publicSpaces *= 1.1;
     sentiment += 0.1;
@@ -154,10 +150,9 @@ function applyCityDynamics_(ctx) {
     culturalActivity *= 1.1;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // MAJOR HOLIDAY MODIFIERS
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (holiday === "NewYear") {
     nightlife *= 1.4;
     publicSpaces *= 1.3;
@@ -226,14 +221,14 @@ function applyCityDynamics_(ctx) {
   }
 
   if (holiday === "Thanksgiving") {
-    traffic *= 1.3;  // Travel
+    traffic *= 1.3;
     retail *= 1.3;
     communityEngagement *= 1.3;
-    nightlife *= 0.7;  // Family time
+    nightlife *= 0.7;
     sentiment += 0.3;
   }
 
-  if (holiday === "Holiday") {  // Christmas
+  if (holiday === "Holiday") {
     retail *= 1.5;
     nightlife *= 1.3;
     publicSpaces *= 1.3;
@@ -242,10 +237,9 @@ function applyCityDynamics_(ctx) {
     sentiment += 0.4;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // CULTURAL HOLIDAY MODIFIERS
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (holiday === "BlackHistoryMonth") {
     culturalActivity *= 1.4;
     communityEngagement *= 1.3;
@@ -288,10 +282,9 @@ function applyCityDynamics_(ctx) {
     sentiment += 0.1;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // OAKLAND-SPECIFIC HOLIDAY MODIFIERS
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (holiday === "OpeningDay") {
     traffic *= 1.4;
     nightlife *= 1.4;
@@ -333,10 +326,9 @@ function applyCityDynamics_(ctx) {
     sentiment += 0.3;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // MINOR HOLIDAY MODIFIERS
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (holiday === "Valentine") {
     nightlife *= 1.3;
     retail *= 1.3;
@@ -350,8 +342,8 @@ function applyCityDynamics_(ctx) {
   }
 
   if (holiday === "PresidentsDay") {
-    retail *= 1.2;  // Sales
-    traffic *= 0.9;  // Some off work
+    retail *= 1.2;
+    traffic *= 0.9;
   }
 
   if (holiday === "MothersDay" || holiday === "FathersDay") {
@@ -365,9 +357,9 @@ function applyCityDynamics_(ctx) {
     sentiment += 0.1;
   }
 
-  if (holiday === "PatriotDay") {  // 9/11
+  if (holiday === "PatriotDay") {
     communityEngagement *= 1.1;
-    nightlife *= 0.8;  // Somber
+    nightlife *= 0.8;
     sentiment -= 0.1;
   }
 
@@ -386,10 +378,9 @@ function applyCityDynamics_(ctx) {
     sentiment -= 0.05;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
+  // ───────────────────────────────────────────────────────────────────────────
   // SPORTS MODIFIERS
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
   if (ss === "spring-training") {
     sentiment += 0.1;
   }
@@ -426,54 +417,120 @@ function applyCityDynamics_(ctx) {
     sentiment += 0.5;
   }
 
-  if (ss === "off-season") {
-    // Baseline, no modifier
-  }
+  // ss === "off-season" => baseline
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // NORMALIZATION & ROUNDING
-  // ═══════════════════════════════════════════════════════════════════════════
-
+  // ───────────────────────────────────────────────────────────────────────────
+  // NORMALIZATION HELPERS
+  // ───────────────────────────────────────────────────────────────────────────
   const round2 = n => Math.round(n * 100) / 100;
   const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-
-  // Clamp sentiment to reasonable range
-  sentiment = clamp(sentiment, -1, 1);
-
-  // Clamp multipliers to prevent extreme values
   const clampMult = n => clamp(n, 0.3, 3.0);
 
-  ctx.summary.cityDynamics = {
-    traffic: round2(clampMult(traffic)),
-    retail: round2(clampMult(retail)),
-    tourism: round2(clampMult(tourism)),
-    nightlife: round2(clampMult(nightlife)),
-    publicSpaces: round2(clampMult(publicSpaces)),
-    sentiment: round2(sentiment),
-    culturalActivity: round2(clampMult(culturalActivity)),
-    communityEngagement: round2(clampMult(communityEngagement))
+  // ───────────────────────────────────────────────────────────────────────────
+  // MOMENTUM (v2.3): INERTIA + SHOCK-AWARE BLENDING
+  // ───────────────────────────────────────────────────────────────────────────
+
+  // Optional reset hook (no sheets; just a flag you can set in summary/config)
+  if (S.resetDynamicsMomentum) {
+    S.previousCityDynamics = null;
+    S.resetDynamicsMomentum = false;
+  }
+
+  function blend(prev, cur, m) {
+    if (prev === null || prev === undefined || isNaN(prev)) return cur;
+    return (prev * m) + (cur * (1 - m));
+  }
+
+  function getMomentumFactor(metric, S) {
+    // Default inertia
+    let m = 0.65;
+
+    const shockFlag = (S.shockFlag || "none").toString();
+    const inShock = (shockFlag === "shock-flag" || shockFlag === "shock-fading" || shockFlag === "shock-chronic");
+
+    // Metric-specific inertia
+    if (metric === "sentiment") m = 0.50; // moves faster
+    else if (metric === "nightlife") m = 0.60;
+    else if (metric === "publicSpaces") m = 0.65;
+    else if (metric === "traffic") m = 0.70;
+    else if (metric === "retail") m = 0.72;
+    else if (metric === "tourism") m = 0.75; // slower to swing
+    else if (metric === "culturalActivity") m = 0.70;
+    else if (metric === "communityEngagement") m = 0.73;
+
+    // Shocks reduce inertia so disruptions can break through
+    if (inShock) m = Math.max(0.40, m - 0.15);
+
+    return m;
+  }
+
+  // Clamp RAW first
+  let raw = {
+    traffic: clampMult(traffic),
+    retail: clampMult(retail),
+    tourism: clampMult(tourism),
+    nightlife: clampMult(nightlife),
+    publicSpaces: clampMult(publicSpaces),
+    sentiment: clamp(sentiment, -1, 1),
+    culturalActivity: clampMult(culturalActivity),
+    communityEngagement: clampMult(communityEngagement)
   };
 
-  // Also store in legacy location if needed
-  S.cityDynamics = ctx.summary.cityDynamics;
+  // Pull previous (stored only in summary)
+  const prev = S.previousCityDynamics || null;
+
+  // Blend
+  let final = {};
+  for (const k in raw) {
+    const m = getMomentumFactor(k, S);
+    final[k] = blend(prev ? prev[k] : null, raw[k], m);
+  }
+
+  // Re-clamp after blending
+  final.traffic = clampMult(final.traffic);
+  final.retail = clampMult(final.retail);
+  final.tourism = clampMult(final.tourism);
+  final.nightlife = clampMult(final.nightlife);
+  final.publicSpaces = clampMult(final.publicSpaces);
+  final.sentiment = clamp(final.sentiment, -1, 1);
+  final.culturalActivity = clampMult(final.culturalActivity);
+  final.communityEngagement = clampMult(final.communityEngagement);
+
+  // Output (rounded)
+  S.cityDynamics = {
+    traffic: round2(final.traffic),
+    retail: round2(final.retail),
+    tourism: round2(final.tourism),
+    nightlife: round2(final.nightlife),
+    publicSpaces: round2(final.publicSpaces),
+    sentiment: round2(final.sentiment),
+    culturalActivity: round2(final.culturalActivity),
+    communityEngagement: round2(final.communityEngagement)
+  };
+
+  // Persist momentum state for next cycle (NO schema changes)
+  S.previousCityDynamics = { ...S.cityDynamics };
+
+  // Legacy alias if other scripts read ctx.summary.cityDynamics directly
+  ctx.summary.cityDynamics = S.cityDynamics;
+  ctx.summary = S;
 }
 
 
 /**
  * ============================================================================
- * CITY DYNAMICS REFERENCE
+ * CITY DYNAMICS REFERENCE v2.3
  * ============================================================================
- * 
- * Metric              | Base | Peak Modifiers
- * ─────────────────────────────────────────────────────────────────────────
- * traffic             | 1    | Summer, playoffs, holidays, First Friday
- * retail              | 1    | Summer, Christmas, BackToSchool, Valentine
- * tourism             | 1    | Summer, Independence, OaklandPride
- * nightlife           | 1    | Summer, NewYearsEve, First Friday, playoffs
- * publicSpaces        | 1    | Summer, Independence, ArtSoulFestival
- * sentiment           | 0    | Summer, NewYearsEve, championship (+0.5 peak)
- * culturalActivity    | 1    | DiaDeMuertos, ArtSoulFestival, First Friday
- * communityEngagement | 1    | Juneteenth, OaklandPride, DiaDeMuertos
- * 
+ *
+ * Adds Momentum:
+ * - Blends current "raw" dynamics with previous cycle
+ * - Prevents teleporting (sudden 1-cycle spikes/drops)
+ * - Shock-aware: reduces inertia so shocks can break through
+ * - Stored in ctx.summary.previousCityDynamics only (no sheet columns)
+ *
+ * Metrics:
+ * traffic, retail, tourism, nightlife, publicSpaces, sentiment,
+ * culturalActivity, communityEngagement
+ *
  * ============================================================================
  */

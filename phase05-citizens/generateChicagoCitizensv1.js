@@ -256,11 +256,8 @@ function getChicagoOccupation_(neighborhood) {
 
 
 /**
- * Pick random from array
+ * pickRandom_() moved to utilities/utilityFunctions.js (v2.9 consolidation)
  */
-function pickRandom_(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
 
 
 /**

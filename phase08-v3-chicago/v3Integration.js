@@ -1,10 +1,14 @@
 /**
  * ============================================================================
- * v3Integration_ v3.4
+ * v3Integration_ v3.5
  * ============================================================================
  *
  * Executes all V3 modules in correct order.
  * Safe function checks that handle undefined functions.
+ *
+ * v3.5 Enhancements:
+ * - SECURITY: Removed eval() - now uses function registry pattern
+ * - Function lookup via V3_FUNCTIONS object instead of dynamic eval
  *
  * v3.4 Enhancements:
  * - Built-in engine wrappers for economicRipple, mediaFeedback, bond engines
@@ -75,10 +79,22 @@ function v3Integration_(ctx) {
     ' | CreationDay: ' + calendarContext.isCreationDay + 
     ' | Sports: ' + calendarContext.sportsSeason);
 
-  // Helper for safe function calls (handles undefined)
+  // Function registry - maps names to actual functions (replaces eval for security)
+  var V3_FUNCTIONS = {
+    'eventArcEngine_': typeof eventArcEngine_ === 'function' ? eventArcEngine_ : null,
+    'domainTracker_': typeof domainTracker_ === 'function' ? domainTracker_ : null,
+    'storyHookEngine_': typeof storyHookEngine_ === 'function' ? storyHookEngine_ : null,
+    'textureTriggerEngine_': typeof textureTriggerEngine_ === 'function' ? textureTriggerEngine_ : null,
+    'chicagoSatelliteEngine_': typeof chicagoSatelliteEngine_ === 'function' ? chicagoSatelliteEngine_ : null,
+    'economicRippleEngine_': typeof economicRippleEngine_ === 'function' ? economicRippleEngine_ : null,
+    'mediaFeedbackEngine_': typeof mediaFeedbackEngine_ === 'function' ? mediaFeedbackEngine_ : null,
+    'bondEngine_': typeof bondEngine_ === 'function' ? bondEngine_ : null
+  };
+
+  // Helper for safe function calls (no eval - uses registry lookup)
   var safeCall = function(fnName) {
     try {
-      var fn = eval(fnName);
+      var fn = V3_FUNCTIONS[fnName];
       if (typeof fn === 'function') {
         fn(ctx);
         return true;

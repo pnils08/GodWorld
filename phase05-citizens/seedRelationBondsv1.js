@@ -73,9 +73,9 @@ function seedRelationshipBonds_(ctx) {
   var citizens = [];
   for (var i = 1; i < ledgerData.length; i++) {
     var row = ledgerData[i];
-    var status = cols.status >= 0 ? row[cols.status] : 'active';
-    
-    if (status === 'active' || status === '' || !status) {
+    var status = cols.status >= 0 ? String(row[cols.status] || '').toLowerCase() : 'active';
+
+    if (status === 'active' || status === '') {
       citizens.push({
         citizenId: row[cols.citizenId] || '',
         name: row[cols.name] || '',

@@ -1,0 +1,8 @@
+============================================================
+WORLD_POPULATION
+Exported: 2026-01-19T18:39:25.170Z
+============================================================
+
+timestamp	totalPopulation	illnessRate	employmentRate	migration	economy	cycle	cycleWeight	cycleWeightReason	civicLoad	migrationDrift	patternFlag	shockFlag	worldEventsCount	weatherType	weatherImpact	trafficLoad	retailLoad	tourismLoad	nightlifeLoad	publicSpacesLoad	sentiment
+2026-01-19T09:48:57.262Z	318898.01346898626	0.0934	0.894	234	stable	75	high-signal	High event volume (5); Very positive sentiment; Shock event detected; Elevated activity; Wide domain spread (9 active).	stable	50	elevated-activity	shock-flag	5	hot	1.2	2.02	1.56	1.76	2.85	2.02	0.89
+	 																				

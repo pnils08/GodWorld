@@ -245,6 +245,7 @@ function runWorldCycle() {
   // PHASE 10: PERSISTENCE (write to sheets)
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase10-WriteDigest', function() { writeDigest_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-CycleWeather', function() { recordCycleWeather_(ctx); });
   safePhaseCall_(ctx, 'Phase10-RecordEvents25', function() { recordWorldEvents25_(ctx); });
   safePhaseCall_(ctx, 'Phase10-RecordEventsV3', function() { recordWorldEventsv3_(ctx); });
 

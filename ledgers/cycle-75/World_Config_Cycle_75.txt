@@ -1,0 +1,17 @@
+============================================================
+WORLD_CONFIG
+Exported: 2026-01-19T18:39:23.840Z
+============================================================
+
+Key	Value	Description
+		
+		
+migrationRate	0.001	drift people in and out of the world 
+deathRate	0.009	deaths
+growthRate	0.012	background population growth
+lastRun	2026-01-19T09:48:57.262Z	engine fills
+cycleCount	75	Automatically increments each world cycle.
+logDriveID	1lm-zXxAPeakCW6-xT-JjTK3VATkBsbkdSBlNYMp1-QI	Riley_System_Log drive ID for reference.
+simulationLedgerID	1TQVhY3B-KpoA6FarnIVXMfoXcwyv0_kk	Simulation Ledger Sheet ID.
+digestSheetID	1lm-zXxAPeakCW6-xT-JjTK3VATkBsbkdSBlNYMp1-QI	Riley_Digest Sheet ID (same as log for now).
+worldName	God World	Internal label used by narrative scripts.

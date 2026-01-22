@@ -1,0 +1,25 @@
+============================================================
+CULTURAL_LEDGER
+Exported: 2026-01-19T18:39:10.598Z
+============================================================
+
+Timestamp	CUL-ID	Name	RoleType	FameCategory	CulturalDomain	Status	UniverseLinks	FirstSeenCycle	LastSeenCycle	MediaCount	FameScore	TrendTrajectory	FirstRefSource	MediaSpread	CityTier	Neighborhood	Holiday	HolidayPriority	SportsSeason
+2025-11-27T05:04:33.593Z	CUL-3913E3E5	Dax Monroe	Celebrity	athlete	Sports	Active		16	68	14	65	stable	SystemEngine	Regional	Local				
+2025-11-27T05:04:33.918Z	CUL-0FBABAC4	Marin Tao	Celebrity	musician	Arts	Active		16	75	17	88	stable	SystemEngine	4	National	Jack London			
+2025-11-27T07:32:30.419Z	CUL-D508319E	Rico Valez	Celebrity	musician	Arts	Active		18	73	13	71	stable	SystemEngine	1	Regional	Chinatown			
+2025-11-29T08:24:07.311Z	CUL-6D596907	Lena Cross	Celebrity	actor	Arts	Active		21	69	12	65	stable	SystemEngine	1	Regional				
+2025-11-30T18:49:24.806Z	CUL-1D834E5A	Kato Rivers	athlete	athlete	Sports	Active		26	75	14	75	stable	SystemEngine	1	Regional	Laurel			
+2025-11-30T18:49:25.335Z	CUL-A2D9EBFF	Sage Vienta	actor	actor	Arts	Active		26	73	12	66	stable	SystemEngine	2	Regional	Laurel			
+2025-11-30T19:44:37.628Z	CUL-8B50B913	Jade Orion	musician	musician	Arts	Active		28	72	11	60	stable	SystemEngine	1	Regional	Temescal			
+2025-11-30T19:44:38.171Z	CUL-9E72118C	Evan Morello	actor	actor	Arts	Active		28	70	14	75	stable	SystemEngine	1	Regional				
+2025-12-01T05:10:23.667Z	CUL-3A2CD59D	Rowan Pierce	journalist	journalist	Media	Active		29	75	11	60	stable	SystemEngine	2	Regional	Rockridge			
+2025-12-01T05:10:23.964Z	CUL-A99D7E2E	Nila James	athlete	athlete	Sports	Active		29	70	13	70	stable	SystemEngine	1	Regional				
+2025-12-01T09:49:13.655Z	CUL-0F9D85B2	Tara Ellison	journalist	journalist	Media	Active		34	71	6	35	stable	SystemEngine	1	Local	Uptown			
+2025-12-29T07:01:08.925Z	CUL-6A0BC6CC	Theo Banks	rapper	musician	Arts	Active		69	71	2	15	stable	SystemEngine	2	Local	Fruitvale			
+2025-12-29T09:49:19.066Z	CUL-B60D00F6	Nina Reyes	actress	actor	Arts	Active		70	70	1	10	rising	SystemEngine	1	Local	Fruitvale			
+2025-12-29T09:49:19.308Z	CUL-4C7646A5	Derek Obi	reporter	journalist	Media	Active		70	70	1	10	rising	SystemEngine	1	Local	Rockridge			
+2025-12-31T23:01:12.874Z	CUL-DC4EA635	Jordan Steele	basketball player	athlete	Sports	Active		72	72	1	10	rising	SystemEngine	1	Local	Jack London			early-season
+2026-01-05T09:49:43.879Z	CUL-905CBDE8	Brody Kale	influencer	influencer	Media	Active		73	73	1	11	rising	SystemEngine	1	Local	Uptown	MemorialDay	MemorialDay	MemorialDay, early-season
+2026-01-12T17:38:29.414Z	CUL-21B70831	Community Director Hayes	community leader	community-leader	Civic	Active		74	74	1	12	rising	SystemEngine	1	Local	Downtown	PrideMonth	PrideMonth	PrideMonth, FirstFriday, mid-season
+2026-01-19T09:49:35.855Z	CUL-72BD508A	Marcus Webb	novelist	author	Literature	Active		75	75	1	10	rising	SystemEngine	1	Local	Fruitvale	PrideMonth	PrideMonth	PrideMonth, FirstFriday, mid-season
+2026-01-19T09:49:38.000Z	CUL-732EA822	Celeste Moon	singer	musician	Arts	Active		75	75	1	16	rising	SystemEngine	1	Local	Downtown	PrideMonth	PrideMonth	PrideMonth, FirstFriday, mid-season

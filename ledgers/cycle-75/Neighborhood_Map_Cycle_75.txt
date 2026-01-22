@@ -1,0 +1,23 @@
+============================================================
+NEIGHBORHOOD_MAP
+Exported: 2026-01-19T18:39:34.577Z
+============================================================
+
+Timestamp	Cycle	Neighborhood	NightlifeProfile	NoiseIndex	CrimeIndex	RetailVitality	EventAttractiveness	Sentiment	DemographicMarker	Holiday	HolidayPriority	FirstFriday	CreationDay	SportsSeason
+2026-01-19T09:48:57.262Z	75	Downtown	3.56	14.95	2	19.75	18	0.89	Civic pressure zone	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Temescal	4.6	9.63	1	18.16	20	0.94	First Friday arts walk zone	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Laurel	2.38	7.63	2	12.56	8	0.92	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	West Oakland	2.6	11.68	1	10.25	7	0.85	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Fruitvale	2.64	10.74	1	12.89	10	0.9	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Jack London	3.11	12.97	1	15.95	17	0.92	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Rockridge	2.72	6.25	1	16.6	9	0.96	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Adams Point	2.3	7.57	2	10.2	7	0.92	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Grand Lake	2.93	8.66	2	14.36	10	0.95	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Piedmont Ave	1.92	5.36	1	13.9	6	0.94	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Chinatown	2.97	13.85	2	14.53	11	0.87	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Brooklyn	2.07	8.61	1	9.55	5	0.87	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Eastlake	2.42	7.6	2	11.3	7	0.91	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Glenview	1.84	5.19	0	10.34	5	0.94	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Dimond	1.88	6.28	1	11.03	6	0.93	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	Ivy Hill	1.52	4.32	1	7	4	0.94	Stable	PrideMonth	cultural	true	false	mid-season
+2026-01-19T09:48:57.262Z	75	San Antonio	2.51	10.86	1	11.58	8	0.86	Stable	PrideMonth	cultural	true	false	mid-season

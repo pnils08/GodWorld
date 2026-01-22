@@ -1,0 +1,84 @@
+============================================================
+STORYLINE_TRACKER
+Exported: 2026-01-19T18:38:57.502Z
+============================================================
+
+Timestamp	CycleAdded	StorylineType	Description	Neighborhood	RelatedCitizens	Priority	Status	Season	Holiday	HolidayPriority	IsFirstDay	IsCreationDay	SportsSeason
+2025-12-31T07:47:00.541Z	70	resolved	Walkout: Publicly acknowledged. "Insensitive" and "overstepped" on record.			normal	abandoned		none	none	false	false	off-season
+2025-12-31T07:47:00.541Z	70	resolved	Health crisis comments: Apology issued. Encouraged residents to log cases.			normal	abandoned		none	none	false	false	off-season
+2025-12-31T07:47:00.541Z	70	question	Paulson physical presence: Where will he be — Cup Finals or Mesa?			high	abandoned		none	none	false	false	off-season
+2025-12-31T07:47:00.541Z	70	thread	Deacon Seymour: Praised from distance, not yet addressed in person			normal	abandoned		none	none	false	false	off-season
+2025-12-31T07:47:00.541Z	70	thread	Lineup leak: Acknowledged awareness, no details provided			normal	abandoned		none	none	false	false	off-season
+2025-12-31T07:47:00.541Z	70	arc	Health crisis (Temescal): Still ongoing, Wave 4 unresolved			normal	abandoned		none	none	false	false	off-season
+2025-12-31T07:47:00.541Z	70	thread	Bulls Cup run: One win from Finals			high	abandoned		none	none	false	false	off-season
+2025-12-31T07:47:00.541Z	70	developing	"The system travels": Paulson invoked Oakland model for Chicago build			high	abandoned		none	none	false	false	off-season
+2025-12-31T07:47:00.541Z	70	developing	Two-city tension now public: Both fanbases watching where he lands next			high	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	resolved	(none this batch)			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	resolved	Bulls Cup Run: Quarterfinal WIN → Semifinal WIN → FINALS (C73 vs Minnesota)			high	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	resolved	Paulson Location: CONFIRMED in Chicago for semifinal			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	thread	Wave 4 Health (Temescal): 9% illness, arc 3.62, EARLY phase			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	thread	Downtown Shock Event: Arc 3.46, ongoing, unexplained			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	thread	Migration Drift: -35 (holding)			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	thread	Keane Final Season: Underway, Gala hosted			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	thread	Davis ACL Rehab: On schedule, preseason at-bats coming			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	thread	Seymour First Season: Finding footing, lineup leak faded			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	thread	A's Stadium (Baylight): Santana applying pressure			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	thread	Theo Banks: Rising trajectory, Gala performance			normal	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	developing	Osei/Crane Hospitalized: Civic load at minor-variance			high	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	developing	Huerter/Jones Injuries: Bulls thin at guard for Finals			high	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	developing	Kessler Trade Speculation: Morant name floated			high	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	developing	Lake Merritt Allergy Spike: Seasonal, separate from Wave 4			high	abandoned		none	none	false	false	off-season
+2026-01-03T06:22:56.556Z	72	developing	Jordan Steele: New cultural entry, basketball player			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	resolved	Paulson Oakland apology: Delivered in person, directly to P Slayer			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	resolved	Osei status: Traffic collision confirmed, hospitalized, recovering			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Paulson presence: ABSENT → THREE DAYS/WEEK (Mesa schedule revealed)			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Dynasty celebration: NEW → 2041 season will honor Keane, Dillon, championship era			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Health crisis response: SILENCE → ACTIVE (A's announce hospital visits, media campaign)			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Elliott Crane: Listed as injured, no details, "expect him back soon"			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Temescal health arc: Wave 4 persists, community organizing continues	Temescal		normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Baylight District: Planning Committee vote pending			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Keane final season: Officially framed as farewell			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Seymour first season: Opens vs. San Diego			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Davis ACL return: Ready for preseason			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Paulson travel: 3 days Mesa, 3 days Chicago, office 7 days			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Mark Aitken: Praised as "lesser-known hero" on stadium deal, "future politician"			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Horn endorsement: Paulson agrees he's "best player in the league"			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Dynasty celebration: Former players returning, youth shown "the expectation"			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Baylight tax structure: Variable exemptions tied to city success, not fixed rate			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Baylight rendering: First official visuals released			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Project scale: 65 acres, $2.8B, 3,200 units, 485K sq ft retail			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Housing breakdown: 56% affordable (1,800 units)			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Stadium specs: 35,000 seats, expandable to 42,000, waterfront orientation			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Youth Apprenticeship Pipeline: Full workforce program announced			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Pipeline funding: $12.5M public-private partnership			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Pipeline targets: 400+ Baylight placements by Year 3			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	thread	Approval timeline: Planning Committee (C74) → Council Vote (C83)			normal	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Baylight District: AGREEMENT → PUBLIC RELEASE (rendering + full documentation)			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Workforce Development: CONCEPT → PROGRAM DESIGN (Pipeline announced)			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Santana: Champion			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	OPP (Rivers): Cautious support, wants enforcement			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	CRC (Crane): Concerns about tax exemptions — but Crane hospitalized			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Vega: Uncommitted			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Osei: Hospitalized, Cortez handling interim			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Kevin Park (support — "something to believe in")			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Jasmine Santos (skeptical — "show me the jobs")			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Darius Patel (housing-focused — "the real story")			high	abandoned		none	none	false	false	off-season
+2026-01-11T04:04:31.952Z	73	arc	Marcus Torres (urgent — "what about people leaving now")			high	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Baylight Planning Committee: PASSED 4-1 with conditions			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Migration reversal: -45 → +50 (95-point swing)			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	First Friday: Maximum nightlife volume, art-walk movement			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Pride Month: Cultural programming begins			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Warriors interest: Golden State pursuing Paulson			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Fruitvale Action Day: Emergency briefing → community celebration	Fruitvale		normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	arc	Baylight District: PLANNING REVIEW → ENVIRONMENTAL REVIEW (Cycles 75-82)			high	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	arc	Temescal health: ELEVATED-ACTIVITY → CALM-AFTER-SHOCK	Temescal		high	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	arc	City pattern: SHOCK-FLAG → CALM-AFTER-SHOCK			high	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	arc	Migration: BLEEDING → GAINING			high	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Osei hospitalized: "Making progress" per Cortez			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Crane hospitalized: No update			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Temescal health arc: Stable but monitored	Temescal		normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Downtown shock flag: Diminished but present	Downtown		normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Seymour first season: Opens vs San Diego			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	thread	Keane farewell tour: 2041 begins			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	resolved	Planning Committee vote: 4-1 approval with conditions			normal	abandoned		none	none	false	false	off-season
+2026-01-18T17:51:45.857Z	74	resolved	Fruitvale Emergency Briefing: Completed, became celebration	Fruitvale		normal	abandoned		none	none	false	false	off-season

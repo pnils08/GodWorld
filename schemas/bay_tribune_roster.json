@@ -1,0 +1,352 @@
+{
+  "version": "1.0",
+  "name": "Bay Tribune Media Roster",
+  "description": "Journalist voices, beats, and editorial structure for GodWorld",
+
+  "editorial": {
+    "editorInChief": {
+      "name": "Mags Corliss",
+      "role": "Editor-in-Chief",
+      "responsibilities": ["Final editorial authority", "Truth standard", "Calls front page lead"],
+      "alsoWrites": "Human interest when not in editorial role",
+      "tone": null
+    },
+    "managingEditor": {
+      "name": "Luis Navarro",
+      "role": "Managing Editor",
+      "responsibilities": ["Investigative balance", "Fact validation"],
+      "alsoCovers": ["Shock events", "Investigations", "Anomalies"],
+      "tone": "Persistent, fair, demands answers"
+    },
+    "copyChief": {
+      "name": "Rhea Morgan",
+      "role": "Copy Chief",
+      "responsibilities": ["Compliance", "Structural integrity"],
+      "writesArticles": false,
+      "tone": null
+    }
+  },
+
+  "desks": {
+    "sports": {
+      "name": "Sports Room",
+      "core": [
+        {
+          "name": "Anthony",
+          "role": "Lead Beat Reporter",
+          "beat": ["A's data", "Roster moves", "Statcast", "Front office", "Scouting"],
+          "tone": "Data-centric, analytical, insider access",
+          "background": null
+        },
+        {
+          "name": "P Slayer",
+          "role": "Fan Columnist",
+          "beat": ["Opinion", "Emotional pulse", "Philosophical takes"],
+          "tone": "Raw, passionate, unapologetically fan-voiced",
+          "background": null,
+          "otherAppearances": ["OakTown Radio 1080 AM", "SportsNation 24/7"]
+        },
+        {
+          "name": "Hal Richmond",
+          "role": "Senior Historian",
+          "beat": ["Legacy essays", "Dynasty context", "Cultural retrospectives"],
+          "tone": "Reverent, long-view, connects past to present",
+          "background": null
+        }
+      ],
+      "support": [
+        {
+          "name": "Tanya Cruz",
+          "role": "Sideline Reporter",
+          "beat": ["#InsideTheA's social feeds", "Clubhouse access"],
+          "tone": "Quick, social-media native, inside access",
+          "background": null
+        },
+        {
+          "name": "DJ Hartley",
+          "role": "Senior Photographer",
+          "beat": ["Visual snapshots", "Award-winning imagery"],
+          "tone": "Observant, minimal commentary, lets images speak",
+          "background": null
+        },
+        {
+          "name": "Simon Leary",
+          "role": "The Long View Columnist",
+          "beat": ["Sports culture", "History crossover"],
+          "tone": "Thoughtful, connects sports to broader Oakland identity",
+          "background": null
+        },
+        {
+          "name": "Elliot Marbury",
+          "role": "Data Desk",
+          "beat": ["Statistical support for Anthony"],
+          "tone": "Factual, monotone, essential for accuracy",
+          "background": "Sabermetrics, formerly ran minor-league data blog"
+        }
+      ]
+    },
+
+    "chicago": {
+      "name": "Chicago Bureau",
+      "reporters": [
+        {
+          "name": "Selena Grant",
+          "role": "Bulls Beat Reporter",
+          "beat": ["Bulls coverage"],
+          "tone": "Professional, analytical, rising star energy",
+          "background": null,
+          "note": "Mirrors Anthony's role for Chicago"
+        },
+        {
+          "name": "Talia Finch",
+          "role": "Chicago Ground Reporter",
+          "beat": ["Street-level Chicago", "City texture"],
+          "tone": "Atmospheric, neighborhood-focused",
+          "background": null
+        }
+      ]
+    },
+
+    "metro": {
+      "name": "Metro / City Desk",
+      "reporters": [
+        {
+          "name": "Dr. Lila Mezran",
+          "role": "Health Desk",
+          "beat": ["Medical", "Public health", "Clinic reports", "Health arcs"],
+          "tone": "Calm, clinical, exact",
+          "background": "Former ER nurse turned journalist",
+          "specialCapability": "ONLY journalist who can cite arc strength as data"
+        },
+        {
+          "name": "Luis Navarro",
+          "role": "Investigations",
+          "beat": ["Shock events", "Accountability", "Civic fact-checking", "Anomalies"],
+          "tone": "Persistent, fair, demands answers",
+          "background": null,
+          "dualRole": "Also Managing Editor"
+        },
+        {
+          "name": "Carmen Delaine",
+          "role": "Civic Ledger",
+          "beat": ["Government", "Municipal rhythm", "Service health", "Infrastructure data"],
+          "tone": "Methodical, tracks patterns over time",
+          "background": null
+        },
+        {
+          "name": "Trevor Shimizu",
+          "role": "Transit & Infrastructure",
+          "beat": ["Utilities", "Transit", "Structural issues", "Outages"],
+          "tone": "Precise, technical, alert-focused",
+          "background": "Civil engineering degree, covered Bay Bridge"
+        },
+        {
+          "name": "Sgt. Rachel Torres",
+          "role": "Public Safety",
+          "beat": ["Crime", "Safety events", "OPD interface"],
+          "tone": "Official, measured, procedural",
+          "background": null
+        }
+      ]
+    },
+
+    "culture": {
+      "name": "Culture & Community",
+      "reporters": [
+        {
+          "name": "Maria Keen",
+          "role": "Cultural Liaison",
+          "beat": ["Neighborhood feeling", "Hyper-local culture", "Community pulse"],
+          "tone": "Warm, street-level, knows everyone",
+          "background": null
+        },
+        {
+          "name": "Sharon Okafor",
+          "role": "Lifestyle",
+          "beat": ["Routines", "Habits", "Behavior trends", "Daily life"],
+          "tone": "Warm, analytical, accessible",
+          "background": "Psychology degree"
+        },
+        {
+          "name": "Kai Marston",
+          "role": "Arts & Entertainment",
+          "beat": ["Galleries", "Musicians", "Artists", "First Fridays", "Cultural Ledger figures"],
+          "tone": "Vivid, energetic, people-focused",
+          "background": "Former music blogger, deep Oakland roots"
+        },
+        {
+          "name": "Mason Ortega",
+          "role": "Food & Hospitality",
+          "beat": ["Restaurants", "Small business", "Pop-ups", "Late-night spots"],
+          "tone": "Sensory, grounded, realistic",
+          "background": "Former sous chef"
+        },
+        {
+          "name": "Angela Reyes",
+          "role": "Education",
+          "beat": ["Schools", "Youth programs", "OUSD", "After-school athletics"],
+          "tone": "Empathetic, detail-rich",
+          "background": "Former teacher"
+        },
+        {
+          "name": "Noah Tan",
+          "role": "Weather & Environment",
+          "beat": ["Forecasts", "Environmental cycles", "Climate"],
+          "tone": "Clear, science-first, never sensational",
+          "background": "Atmospheric science major"
+        }
+      ]
+    },
+
+    "business": {
+      "name": "Business",
+      "reporters": [
+        {
+          "name": "Jordan Velez",
+          "role": "Economics & Labor",
+          "beat": ["Wage trends", "Workforce patterns", "Port logistics", "Retail"],
+          "tone": "Neutral, structured, numbers-first",
+          "background": "Oakland native, formerly covered port logistics"
+        }
+      ]
+    },
+
+    "opinion": {
+      "name": "Opinion",
+      "columnists": [
+        {
+          "name": "Farrah Del Rio",
+          "role": "Civic & Cultural Opinion",
+          "beat": ["Policy", "Culture", "Lived experience", "City Hall critique"],
+          "tone": "Sharp, informed, unapologetically Oakland",
+          "background": "Longtime essayist"
+        },
+        {
+          "name": "P Slayer",
+          "role": "Sports Opinion",
+          "beat": ["Sports opinion"],
+          "tone": "Raw, passionate, unapologetically fan-voiced",
+          "background": null,
+          "note": "See Sports Room for full profile"
+        }
+      ]
+    },
+
+    "wire": {
+      "name": "Wire / Rumor / Social",
+      "reporters": [
+        {
+          "name": "Reed Thompson",
+          "role": "TWS Wire",
+          "beat": ["Neutral rumor verification", "Quick accurate reports"],
+          "tone": "Dry, concise, fully neutral",
+          "background": "Former AP desk journalist"
+        },
+        {
+          "name": "MintConditionOakTown",
+          "role": "Speculative Internet Reporter",
+          "beat": ["Anonymous rumor aggregation", "Chaotic threads"],
+          "tone": "Messy, impulsive, unverified, internet-native",
+          "background": "Unknown (likely college student or warehouse worker)",
+          "note": "Sometimes accidentally contains truth"
+        },
+        {
+          "name": "Celeste Tran",
+          "role": "Social Trends",
+          "beat": ["Hashtags", "Viral moments", "Fanbase temperature"],
+          "tone": "Fast, reactive, semi-chaotic but grounded",
+          "background": "Former social media analyst"
+        }
+      ]
+    },
+
+    "photography": {
+      "name": "Photography",
+      "staff": [
+        {
+          "name": "DJ Hartley",
+          "role": "Senior Photographer",
+          "beat": ["Visual snapshots", "Award-winning imagery"],
+          "tone": "Observant, minimal commentary",
+          "background": null,
+          "note": "See Sports Room"
+        },
+        {
+          "name": "Arman Gutiérrez",
+          "role": "Photo Assistant",
+          "beat": ["Environmental portraits", "City detail shots"],
+          "tone": "Observant, minimal commentary",
+          "background": "Local photography student, works with DJ Hartley"
+        }
+      ]
+    }
+  },
+
+  "signalAssignments": {
+    "health_arc": { "primary": "Dr. Lila Mezran", "desk": "metro" },
+    "illness": { "primary": "Dr. Lila Mezran", "desk": "metro" },
+    "shock_event": { "primary": "Luis Navarro", "desk": "metro" },
+    "anomaly": { "primary": "Luis Navarro", "desk": "metro" },
+    "civic": { "primary": "Carmen Delaine", "desk": "metro" },
+    "government": { "primary": "Carmen Delaine", "desk": "metro" },
+    "infrastructure": { "primary": "Trevor Shimizu", "desk": "metro" },
+    "transit": { "primary": "Trevor Shimizu", "desk": "metro" },
+    "crime": { "primary": "Sgt. Rachel Torres", "desk": "metro" },
+    "safety": { "primary": "Sgt. Rachel Torres", "desk": "metro" },
+    "athletics_baseball": { "primary": "Anthony", "desk": "sports" },
+    "athletics_basketball_bulls": { "primary": "Selena Grant", "desk": "chicago" },
+    "sports_opinion": { "primary": "P Slayer", "desk": "sports" },
+    "sports_history": { "primary": "Hal Richmond", "desk": "sports" },
+    "chicago_street": { "primary": "Talia Finch", "desk": "chicago" },
+    "neighborhood_culture": { "primary": "Maria Keen", "desk": "culture" },
+    "arts": { "primary": "Kai Marston", "desk": "culture" },
+    "music": { "primary": "Kai Marston", "desk": "culture" },
+    "cultural_ledger": { "primary": "Kai Marston", "desk": "culture" },
+    "food": { "primary": "Mason Ortega", "desk": "culture" },
+    "restaurants": { "primary": "Mason Ortega", "desk": "culture" },
+    "education": { "primary": "Angela Reyes", "desk": "culture" },
+    "youth": { "primary": "Angela Reyes", "desk": "culture" },
+    "weather": { "primary": "Noah Tan", "desk": "culture" },
+    "environment": { "primary": "Noah Tan", "desk": "culture" },
+    "economics": { "primary": "Jordan Velez", "desk": "business" },
+    "labor": { "primary": "Jordan Velez", "desk": "business" },
+    "civic_opinion": { "primary": "Farrah Del Rio", "desk": "opinion" },
+    "rumor_verified": { "primary": "Reed Thompson", "desk": "wire" },
+    "rumor_chaotic": { "primary": "MintConditionOakTown", "desk": "wire" },
+    "social_trends": { "primary": "Celeste Tran", "desk": "wire" },
+    "human_interest": { "primary": "Mags Corliss", "desk": "editorial" }
+  },
+
+  "quickLookup": {
+    "byName": {
+      "Anthony": { "desk": "sports", "role": "Lead Beat Reporter", "tone": "Data-centric, analytical, insider access" },
+      "P Slayer": { "desk": "sports", "role": "Fan Columnist", "tone": "Raw, passionate, unapologetically fan-voiced" },
+      "Hal Richmond": { "desk": "sports", "role": "Senior Historian", "tone": "Reverent, long-view, connects past to present" },
+      "Tanya Cruz": { "desk": "sports", "role": "Sideline Reporter", "tone": "Quick, social-media native, inside access" },
+      "DJ Hartley": { "desk": "sports", "role": "Senior Photographer", "tone": "Observant, minimal commentary, lets images speak" },
+      "Simon Leary": { "desk": "sports", "role": "The Long View Columnist", "tone": "Thoughtful, connects sports to broader Oakland identity" },
+      "Elliot Marbury": { "desk": "sports", "role": "Data Desk", "tone": "Factual, monotone, essential for accuracy" },
+      "Selena Grant": { "desk": "chicago", "role": "Bulls Beat Reporter", "tone": "Professional, analytical, rising star energy" },
+      "Talia Finch": { "desk": "chicago", "role": "Chicago Ground Reporter", "tone": "Atmospheric, neighborhood-focused" },
+      "Dr. Lila Mezran": { "desk": "metro", "role": "Health Desk", "tone": "Calm, clinical, exact" },
+      "Luis Navarro": { "desk": "metro", "role": "Investigations", "tone": "Persistent, fair, demands answers" },
+      "Carmen Delaine": { "desk": "metro", "role": "Civic Ledger", "tone": "Methodical, tracks patterns over time" },
+      "Trevor Shimizu": { "desk": "metro", "role": "Transit & Infrastructure", "tone": "Precise, technical, alert-focused" },
+      "Sgt. Rachel Torres": { "desk": "metro", "role": "Public Safety", "tone": "Official, measured, procedural" },
+      "Maria Keen": { "desk": "culture", "role": "Cultural Liaison", "tone": "Warm, street-level, knows everyone" },
+      "Sharon Okafor": { "desk": "culture", "role": "Lifestyle", "tone": "Warm, analytical, accessible" },
+      "Kai Marston": { "desk": "culture", "role": "Arts & Entertainment", "tone": "Vivid, energetic, people-focused" },
+      "Mason Ortega": { "desk": "culture", "role": "Food & Hospitality", "tone": "Sensory, grounded, realistic" },
+      "Angela Reyes": { "desk": "culture", "role": "Education", "tone": "Empathetic, detail-rich" },
+      "Noah Tan": { "desk": "culture", "role": "Weather & Environment", "tone": "Clear, science-first, never sensational" },
+      "Jordan Velez": { "desk": "business", "role": "Economics & Labor", "tone": "Neutral, structured, numbers-first" },
+      "Farrah Del Rio": { "desk": "opinion", "role": "Civic & Cultural Opinion", "tone": "Sharp, informed, unapologetically Oakland" },
+      "Reed Thompson": { "desk": "wire", "role": "TWS Wire", "tone": "Dry, concise, fully neutral" },
+      "MintConditionOakTown": { "desk": "wire", "role": "Speculative Internet Reporter", "tone": "Messy, impulsive, unverified, internet-native" },
+      "Celeste Tran": { "desk": "wire", "role": "Social Trends", "tone": "Fast, reactive, semi-chaotic but grounded" },
+      "Arman Gutiérrez": { "desk": "photography", "role": "Photo Assistant", "tone": "Observant, minimal commentary" },
+      "Mags Corliss": { "desk": "editorial", "role": "Editor-in-Chief", "tone": null },
+      "Rhea Morgan": { "desk": "editorial", "role": "Copy Chief", "tone": null }
+    }
+  }
+}

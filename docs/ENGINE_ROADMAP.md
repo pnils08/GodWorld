@@ -74,7 +74,7 @@ These can be done now without architectural changes.
 
 Reduce redundancy, establish single sources of truth.
 
-### [ ] 2.1 Centralized Weather
+### [x] 2.1 Centralized Weather
 **Problem:** Weather data duplicated across multiple ledgers.
 **Solution:** New sheet `Cycle_Weather`
 
@@ -86,13 +86,14 @@ Reduce redundancy, establish single sources of truth.
 | Impact | float | Mood modifier (1.0 = neutral) |
 | Advisory | string | Optional alert text |
 
-**Migration:**
-- Weather generated in Phase 2, stored in `ctx.world.weather`
-- Single row written to `Cycle_Weather`
-- Remove weather columns from: `WorldEvents_Ledger`, `Neighborhood_Map`, others
-- Other ledgers reference by CycleID
+**Status:** COMPLETE (Jan 2026)
+- Created `recordCycleWeather.js` with central weather persistence
+- Added to Phase 10 in `godWorldEngine2.js`
+- Includes helper functions: `getWeatherForCycle_()`, `getWeatherHistory_()`
+- Other ledgers still embed weather for self-contained readability
+- Cycle_Weather is now the canonical lookup source for historical weather
 
-### [ ] 2.2 Ledger Audit & Trim
+### [x] 2.2 Ledger Audit & Trim
 **Audit targets:**
 
 | Ledger | Concern | Proposal |
@@ -106,25 +107,39 @@ Reduce redundancy, establish single sources of truth.
 - Update AUDIT_TRACKER.md with findings
 - Trim decisions made with Maker approval
 
-### [ ] 2.3 BayTribune Roster
+**Status:** COMPLETE (Jan 2026)
+- Audited all 3 target ledgers (LifeHistory_Log, WorldEvents_Ledger, Relationship_Bonds)
+- Identified citizenContextBuilder.js as main performance bottleneck
+- Added cache support instead of pruning data
+- See AUDIT_TRACKER.md for full findings
+
+### [~] 2.3 BayTribune Roster
 **Purpose:** Single source of truth for journalists.
-**Schema:** New sheet `BayTribune_Roster`
+**Status:** PARTIAL (Jan 2026)
+
+**Completed:**
+- Created `schemas/bay_tribune_roster.json` with 28 journalists
+- Created `utilities/rosterLookup.js` with lookup functions
+- Audited Phase 7 files (100+ hardcoded references identified)
+
+**Schema (JSON implemented, Sheet pending approval):**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| JournalistID | string | e.g., "MED-001" |
-| Name | string | Full name |
-| Beat | string | civic, sports, health, culture, food, etc. |
-| Tier | int | 1-4 |
-| Voice | string | Tone keywords |
-| Background | string | Brief bio |
-| LastAppearance | int | Cycle last used |
-| ArticleCount | int | Total articles |
-| Status | string | active, on-leave, retired |
+| name | string | Full name |
+| desk | string | sports, metro, culture, business, opinion, wire, etc. |
+| role | string | Beat title |
+| tone | string | Voice keywords |
+| background | string | Brief bio (optional) |
+
+**Pending (V3 refactor):**
+- Migrate hardcoded strings in mediaRoomBriefingGenerator.js to use rosterLookup.js
+- Add LastAppearance/ArticleCount tracking (schema approval needed)
+- Create BayTribune_Roster sheet for runtime updates
 
 **Integration:**
-- Phase 7 reads for story assignment
-- Media Room reads for voice lookup
+- Phase 7 reads for story assignment (utility ready)
+- Media Room reads for voice lookup (utility ready)
 
 ---
 
@@ -195,6 +210,40 @@ Connect subsystems properly.
 - Economic stress affects voting patterns
 - Gentrification signals from demographic drift
 
+### [ ] 4.4 Initiative Outcome → Neighborhood Ripple
+**Purpose:** Vote outcomes affect the neighborhoods they serve over time.
+
+**When initiative PASSES:**
+- Positive ripple to affected neighborhoods over N cycles
+- Metrics affected depend on initiative type:
+  - Health (health center) → CrimeIndex ↓, Sentiment ↑
+  - Transit (hub expansion) → RetailVitality ↑, Traffic impact
+  - Economic (business incentive) → RetailVitality ↑, Employment ↑
+  - Sports (stadium) → RetailVitality ↑, EventAttractiveness ↑, NoiseIndex ↑
+  - Housing (affordable units) → Sentiment ↑, community stability
+  - Environment (park) → Sentiment ↑, health indicators ↑
+
+**When initiative FAILS:**
+- Negative ripple to affected neighborhoods
+- Civic frustration → Sentiment ↓
+- Prolonged failure on same issue → compounding frustration
+
+**Ripple Properties:**
+- Impact: Initial magnitude of effect
+- Duration: How many cycles the effect lasts
+- Decay: How quickly the effect fades (or stabilizes for permanent infrastructure)
+- Scope: Primary neighborhood + adjacent spillover
+
+**Integration Points:**
+- `civicInitiativeEngine.js` → `applyInitiativeConsequences_()` triggers ripple
+- Ripple effects applied during Phase 2 (World State) or Phase 3 (Population)
+- Affects `Neighborhood_Map` metrics each cycle until duration expires
+
+**Schema Addition (Initiative_Tracker):**
+- `AffectedNeighborhoods`: comma-separated list of neighborhoods
+- `RippleDuration`: cycles (default based on initiative type)
+- `RippleStatus`: active | exhausted
+
 ---
 
 ## TIER 5: V3 COMPLETION
@@ -232,8 +281,8 @@ Full architecture migration.
 | Change | Sheet | Status |
 |--------|-------|--------|
 | New: `Neighborhood_Demographics` | - | PENDING |
-| New: `Cycle_Weather` | - | PENDING |
-| New: `BayTribune_Roster` | - | PENDING |
+| New: `Cycle_Weather` | - | COMPLETE |
+| New: `BayTribune_Roster` | - | JSON READY (sheet pending) |
 | Remove weather columns | `WorldEvents_Ledger` | PENDING |
 | Remove weather columns | `Neighborhood_Map` | PENDING |
 
@@ -262,6 +311,32 @@ This roadmap replaces:
 
 Reference document:
 - `V3_ARCHITECTURE.md` (technical contract)
+
+---
+
+## TIER 6: NARRATIVE DEPTH (Future)
+
+Deferred until engine efficiency work (Tiers 1-5) is complete. These add richness but depend on a stable, performant foundation.
+
+### [ ] 6.1 Crime / Public Safety
+**Gap:** No crime index, incident types, clearance rates, or response times.
+**Addition:** Crime metrics per neighborhood (property crime index, violent crime index, response times, clearance rates).
+**Depends on:** Neighborhood Demographics (Tier 3)
+
+### [ ] 6.2 Faith / Religious Community
+**Gap:** Elliot Graye (Faith & Ethics) has no data source. No congregations, religious events, or faith-based organizing.
+**Addition:** Faith_Ledger or religious events in world events engine (services, community programs, interfaith moments).
+**Depends on:** World Events integration
+
+### [ ] 6.3 Youth / Next Generation
+**Gap:** Children exist as household members but have no agency. No youth-specific events, school activities, or coming-of-age moments.
+**Addition:** Youth events in citizen engine, school sports/activities, youth civic participation (age-gated).
+**Depends on:** Neighborhood Demographics (Tier 3), Citizen Engine maturity
+
+### [ ] 6.4 Transportation / Transit
+**Gap:** No BART ridership, AC Transit data, or traffic patterns beyond general "traffic" city dynamic.
+**Addition:** Transit metrics (ridership by station, route performance, traffic index by corridor).
+**Depends on:** Neighborhood Demographics (Tier 3)
 
 ---
 

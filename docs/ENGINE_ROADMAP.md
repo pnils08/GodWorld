@@ -210,6 +210,40 @@ Connect subsystems properly.
 - Economic stress affects voting patterns
 - Gentrification signals from demographic drift
 
+### [ ] 4.4 Initiative Outcome → Neighborhood Ripple
+**Purpose:** Vote outcomes affect the neighborhoods they serve over time.
+
+**When initiative PASSES:**
+- Positive ripple to affected neighborhoods over N cycles
+- Metrics affected depend on initiative type:
+  - Health (health center) → CrimeIndex ↓, Sentiment ↑
+  - Transit (hub expansion) → RetailVitality ↑, Traffic impact
+  - Economic (business incentive) → RetailVitality ↑, Employment ↑
+  - Sports (stadium) → RetailVitality ↑, EventAttractiveness ↑, NoiseIndex ↑
+  - Housing (affordable units) → Sentiment ↑, community stability
+  - Environment (park) → Sentiment ↑, health indicators ↑
+
+**When initiative FAILS:**
+- Negative ripple to affected neighborhoods
+- Civic frustration → Sentiment ↓
+- Prolonged failure on same issue → compounding frustration
+
+**Ripple Properties:**
+- Impact: Initial magnitude of effect
+- Duration: How many cycles the effect lasts
+- Decay: How quickly the effect fades (or stabilizes for permanent infrastructure)
+- Scope: Primary neighborhood + adjacent spillover
+
+**Integration Points:**
+- `civicInitiativeEngine.js` → `applyInitiativeConsequences_()` triggers ripple
+- Ripple effects applied during Phase 2 (World State) or Phase 3 (Population)
+- Affects `Neighborhood_Map` metrics each cycle until duration expires
+
+**Schema Addition (Initiative_Tracker):**
+- `AffectedNeighborhoods`: comma-separated list of neighborhoods
+- `RippleDuration`: cycles (default based on initiative type)
+- `RippleStatus`: active | exhausted
+
 ---
 
 ## TIER 5: V3 COMPLETION

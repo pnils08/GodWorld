@@ -1,8 +1,15 @@
 /**
  * ============================================================================
- * STORYLINE STATUS UPDATER v1.1
+ * STORYLINE STATUS UPDATER v1.2
  * ============================================================================
- * 
+ *
+ * v1.2 CHANGES:
+ * - Fixed column name mapping to match actual Storyline_Tracker schema
+ * - Added fallback column names: CycleAdded/StartCycle, StorylineType/Type
+ * - Removed reference to non-existent StorylineId column
+ * - Updated logging to use Description field for storyline identification
+ * - LastMentionedCycle falls back to CycleAdded when not present
+ *
  * v1.1 CHANGES:
  * - Renamed findCol_ to findColByArray_ to avoid collision with
  *   processAdvancementIntake which uses string-based findCol_
@@ -60,15 +67,15 @@ function updateStorylineStatus_(ctx) {
   }
   
   var headers = data[0];
+  // v1.2: Support both legacy and current schema column names
   var cols = {
-    storylineId: findColByArray_(headers, ['StorylineId']),
-    startCycle: findColByArray_(headers, ['StartCycle']),
-    type: findColByArray_(headers, ['Type']),
+    startCycle: findColByArray_(headers, ['CycleAdded', 'StartCycle']),
+    type: findColByArray_(headers, ['StorylineType', 'Type']),
     description: findColByArray_(headers, ['Description']),
     neighborhood: findColByArray_(headers, ['Neighborhood']),
     linkedArc: findColByArray_(headers, ['LinkedArc']),
     status: findColByArray_(headers, ['Status']),
-    lastMentioned: findColByArray_(headers, ['LastMentionedCycle']),
+    lastMentioned: findColByArray_(headers, ['LastMentionedCycle', 'CycleAdded']),
     mentionCount: findColByArray_(headers, ['MentionCount']),
     priority: findColByArray_(headers, ['Priority'])
   };
@@ -110,7 +117,7 @@ function updateStorylineStatus_(ctx) {
         newStatus = 'concluded';
         newPriority = 'wrap-up';
         updates.concluded++;
-        Logger.log('updateStorylineStatus_: Storyline ' + row[cols.storylineId] + ' concluded (linked arc resolved)');
+        Logger.log('updateStorylineStatus_: Storyline "' + (row[cols.description] || 'Row ' + rowNum) + '" concluded (linked arc resolved)');
       } else if (arcStatus.phase === 'peak' || arcStatus.tension >= 7) {
         // Arc escalating — boost priority
         newPriority = 'high';
@@ -128,7 +135,7 @@ function updateStorylineStatus_(ctx) {
         if (status === 'active') {
           newStatus = 'dormant';
           updates.dormant++;
-          Logger.log('updateStorylineStatus_: Storyline ' + row[cols.storylineId] + ' now dormant');
+          Logger.log('updateStorylineStatus_: Storyline "' + (row[cols.description] || 'Row ' + rowNum) + '" now dormant');
         }
       }
       
@@ -136,14 +143,14 @@ function updateStorylineStatus_(ctx) {
       else if (cyclesSinceLastMention >= 15) {
         newStatus = 'abandoned';
         updates.abandoned++;
-        Logger.log('updateStorylineStatus_: Storyline ' + row[cols.storylineId] + ' abandoned');
+        Logger.log('updateStorylineStatus_: Storyline "' + (row[cols.description] || 'Row ' + rowNum) + '" abandoned');
       }
       
       // Reactivate if dormant but recently mentioned
       else if (status === 'dormant' && cyclesSinceLastMention < 5) {
         newStatus = 'active';
         updates.reactivated++;
-        Logger.log('updateStorylineStatus_: Storyline ' + row[cols.storylineId] + ' reactivated');
+        Logger.log('updateStorylineStatus_: Storyline "' + (row[cols.description] || 'Row ' + rowNum) + '" reactivated');
       }
     }
     
@@ -163,8 +170,8 @@ function updateStorylineStatus_(ctx) {
   // Store results in context
   ctx.summary.storylineUpdates = updates;
   
-  Logger.log('updateStorylineStatus_ v1.1: Complete. Dormant: ' + updates.dormant + 
-    ', Concluded: ' + updates.concluded + 
+  Logger.log('updateStorylineStatus_ v1.2: Complete. Dormant: ' + updates.dormant +
+    ', Concluded: ' + updates.concluded +
     ', Abandoned: ' + updates.abandoned +
     ', Reactivated: ' + updates.reactivated);
 }
@@ -295,7 +302,7 @@ function generateStorylineBriefingSection_(ss, cycle) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
-// REFERENCE v1.1
+// REFERENCE v1.2
 // ════════════════════════════════════════════════════════════════════════════
 /**
  * STATUS TRANSITIONS:
@@ -303,15 +310,21 @@ function generateStorylineBriefingSection_(ss, cycle) {
  * - active → concluded: Linked arc resolved
  * - dormant → active: Recently mentioned (< 5 cycles)
  * - dormant → abandoned: No coverage for 15+ cycles
- * 
+ *
  * PRIORITY CHANGES:
  * - normal → high: Linked arc at peak or tension >= 7
  * - any → wrap-up: Linked arc resolved
- * 
+ *
  * ENGINE INTEGRATION:
  * Add to Phase 6 in godWorldEngine2.gs after processArcLifecycle_(ctx):
  *   updateStorylineStatus_(ctx);
- * 
+ *
+ * v1.2 FIX:
+ * Fixed column name mapping to match actual Storyline_Tracker schema:
+ * - CycleAdded (not StartCycle)
+ * - StorylineType (not Type)
+ * - Uses Description for log identification (no StorylineId column)
+ *
  * v1.1 FIX:
  * Renamed findCol_ to findColByArray_ to avoid collision with
  * processAdvancementIntake which uses string-based findCol_

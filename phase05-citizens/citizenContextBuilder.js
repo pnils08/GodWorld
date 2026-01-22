@@ -40,9 +40,10 @@ var SIM_YEAR = 2041;
 /**
  * Build complete citizen context from all ledgers
  * @param {string} identifier - Citizen name or ID (e.g., "Rosa Ochoa" or "POP-00042")
+ * @param {Object} [cache] - Optional sheet cache from createSheetCache_() for performance
  * @returns {Object} Complete citizen profile
  */
-function buildCitizenContext(identifier) {
+function buildCitizenContext(identifier, cache) {
   var ss = SpreadsheetApp.openById(SIM_SSID);
   
   // Initialize profile
@@ -101,10 +102,10 @@ function buildCitizenContext(identifier) {
   }
   
   // Gather life history
-  profile.history = getLifeHistory_(ss, profile.name, profile.id);
-  
+  profile.history = getLifeHistory_(ss, profile.name, profile.id, cache);
+
   // Gather relationships
-  profile.relationships = getRelationships_(ss, profile.name, profile.id);
+  profile.relationships = getRelationships_(ss, profile.name, profile.id, cache);
   
   // Gather media appearances
   profile.mediaAppearances = getMediaAppearances_(ss, profile.name);
@@ -379,16 +380,22 @@ function findInGenericCitizens_(ss, identifier) {
 
 /**
  * Get life history events for citizen
+ * @param {Object} [cache] - Optional sheet cache for performance
  */
-function getLifeHistory_(ss, name, id) {
+function getLifeHistory_(ss, name, id, cache) {
   var history = [];
-  
+
   try {
-    var sheet = ss.getSheetByName('LifeHistory_Log');
-    if (!sheet) return history;
-    
-    var data = sheet.getDataRange().getValues();
-    if (data.length < 2) return history;
+    // Use cache if available, otherwise read directly
+    var data;
+    if (cache) {
+      data = cache.getValues('LifeHistory_Log');
+    } else {
+      var sheet = ss.getSheetByName('LifeHistory_Log');
+      if (!sheet) return history;
+      data = sheet.getDataRange().getValues();
+    }
+    if (!data || data.length < 2) return history;
     
     var headers = data[0];
     
@@ -434,16 +441,22 @@ function getLifeHistory_(ss, name, id) {
 
 /**
  * Get relationships for citizen
+ * @param {Object} [cache] - Optional sheet cache for performance
  */
-function getRelationships_(ss, name, id) {
+function getRelationships_(ss, name, id, cache) {
   var relationships = [];
-  
+
   try {
-    var sheet = ss.getSheetByName('Relationship_Bonds');
-    if (!sheet) return relationships;
-    
-    var data = sheet.getDataRange().getValues();
-    if (data.length < 2) return relationships;
+    // Use cache if available, otherwise read directly
+    var data;
+    if (cache) {
+      data = cache.getValues('Relationship_Bonds');
+    } else {
+      var sheet = ss.getSheetByName('Relationship_Bonds');
+      if (!sheet) return relationships;
+      data = sheet.getDataRange().getValues();
+    }
+    if (!data || data.length < 2) return relationships;
     
     var headers = data[0];
     

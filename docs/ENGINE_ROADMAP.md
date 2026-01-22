@@ -314,4 +314,30 @@ Reference document:
 
 ---
 
+## TIER 6: NARRATIVE DEPTH (Future)
+
+Deferred until engine efficiency work (Tiers 1-5) is complete. These add richness but depend on a stable, performant foundation.
+
+### [ ] 6.1 Crime / Public Safety
+**Gap:** No crime index, incident types, clearance rates, or response times.
+**Addition:** Crime metrics per neighborhood (property crime index, violent crime index, response times, clearance rates).
+**Depends on:** Neighborhood Demographics (Tier 3)
+
+### [ ] 6.2 Faith / Religious Community
+**Gap:** Elliot Graye (Faith & Ethics) has no data source. No congregations, religious events, or faith-based organizing.
+**Addition:** Faith_Ledger or religious events in world events engine (services, community programs, interfaith moments).
+**Depends on:** World Events integration
+
+### [ ] 6.3 Youth / Next Generation
+**Gap:** Children exist as household members but have no agency. No youth-specific events, school activities, or coming-of-age moments.
+**Addition:** Youth events in citizen engine, school sports/activities, youth civic participation (age-gated).
+**Depends on:** Neighborhood Demographics (Tier 3), Citizen Engine maturity
+
+### [ ] 6.4 Transportation / Transit
+**Gap:** No BART ridership, AC Transit data, or traffic patterns beyond general "traffic" city dynamic.
+**Addition:** Transit metrics (ridership by station, route performance, traffic index by corridor).
+**Depends on:** Neighborhood Demographics (Tier 3)
+
+---
+
 *This document defines WHAT to build. See V3_ARCHITECTURE.md for HOW to build it.*

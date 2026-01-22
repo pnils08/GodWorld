@@ -336,12 +336,14 @@ Currently 100+ hardcoded journalist references scattered across Phase 7 files.
 - No LastAppearance or ArticleCount tracking
 - No explicit voice calibration per story type
 
-### Tier 2.3 Status: PARTIAL
+### Tier 2.3 Status: COMPLETE (Migration Deferred to Tier 3)
 - [x] Roster JSON schema created
 - [x] Phase 7 journalist audit complete
 - [x] Lookup utility created
-- [ ] Migrate hardcoded strings to use rosterLookup.js (V3 refactor)
-- [ ] Add LastAppearance/ArticleCount tracking (schema approval needed)
+- [ ] Migrate hardcoded strings to use rosterLookup.js (DEFERRED → Tier 3)
+- [ ] Add LastAppearance/ArticleCount tracking (DEFERRED → Tier 3, schema approval needed)
+
+**Note:** Tier 2.3 deliverables complete. Remaining migration work deferred to Tier 3 as part of V3 refactor.
 
 ---
 

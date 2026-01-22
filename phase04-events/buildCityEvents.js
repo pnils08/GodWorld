@@ -1,11 +1,16 @@
 /**
  * ============================================================================
- * buildCityEvents_ v2.3
+ * buildCityEvents_ v2.4 (weighted + tagged + deterministic RNG)
  * ============================================================================
  *
- * World-aware city-event generator with GodWorld Calendar integration.
+ * v2.4 Improvements:
+ * - Preserves intended weighting via weight accumulation (no "push duplicates then dedupe")
+ * - Unbiased weighted sampling without replacement
+ * - Optional determinism (ctx.rng or ctx.config.rngSeed)
+ * - Adds tags to cityEventDetails entries (non-breaking; extra fields)
+ * - Removed pickRandomSet_ fallback to ensure weighted sampling is always used
  *
- * v2.3 Enhancements:
+ * Previous features (v2.3):
  * - Expanded to 12 Oakland neighborhoods
  * - GodWorld Calendar integration (30+ holidays)
  * - Holiday-specific event pools
@@ -14,21 +19,41 @@
  * - Sports season events
  * - Cultural activity and community engagement effects
  * - Calendar context in output
- * - Aligned with GodWorld Calendar v1.0
  *
- * Previous features (v2.2):
- * - Season, weather, chaos, sentiment
- * - Economic mood integration
- * - Nightlife volume
- * - Sports season (basic)
- * - Public spaces
- * 
+ * Output:
+ * - S.cityEvents: string[]
+ * - S.cityEventDetails: Array<{name, neighborhood, tags?: string[], weight?: number}>
+ * - S.cityEventsCalendarContext: {...}
  * ============================================================================
  */
 
-function buildCityEvents_(ctx) {
+/**
+ * Mulberry32 PRNG - fast, seedable 32-bit PRNG
+ * @param {number} seed - Initial seed value
+ * @returns {function(): number} - Returns random float in [0, 1)
+ */
+function mulberry32_(seed) {
+  return function() {
+    seed = (seed + 0x6D2B79F5) >>> 0;
+    var t = seed;
+    t = Math.imul(t ^ (t >>> 15), t | 1);
+    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
 
-  const S = ctx.summary;
+function buildCityEvents_(ctx) {
+  const S = ctx.summary || (ctx.summary = {});
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // RNG SETUP (v2.4)
+  // Prefer injected RNG, else seed-based, else Math.random
+  // ═══════════════════════════════════════════════════════════════════════════
+  const rng = (typeof ctx.rng === "function")
+    ? ctx.rng
+    : (ctx.config && typeof ctx.config.rngSeed === "number")
+      ? mulberry32_((ctx.config.rngSeed >>> 0) ^ ((S.cycleId || ctx.config.cycleCount || 0) >>> 0))
+      : Math.random;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
@@ -46,13 +71,73 @@ function buildCityEvents_(ctx) {
   const econMood = S.economicMood || 50;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CALENDAR CONTEXT (v2.3)
+  // CALENDAR CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
   const holiday = S.holiday || "none";
   const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
+  const isFirstFriday = !!S.isFirstFriday;
+  const isCreationDay = !!S.isCreationDay;
   const sportsSeason = S.sportsSeason || "off-season";
+
+  // Build calendar tags for traceability
+  const calendarTags = (() => {
+    const tags = [];
+    if (holiday !== "none") tags.push("holiday:" + holiday);
+    if (holidayPriority !== "none") tags.push("holidayPriority:" + holidayPriority);
+    if (isFirstFriday) tags.push("firstFriday");
+    if (isCreationDay) tags.push("creationDay");
+    if (sportsSeason && sportsSeason !== "off-season") tags.push("sportsSeason:" + sportsSeason);
+    return tags;
+  })();
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // TAG HELPERS (v2.4)
+  // ═══════════════════════════════════════════════════════════════════════════
+  const addTag = (tags, t) => {
+    if (!t) return tags;
+    if (tags.indexOf(t) === -1) tags.push(t);
+    return tags;
+  };
+
+  const mergeTags = (a, b) => {
+    const out = (a || []).slice();
+    for (const t of (b || [])) addTag(out, t);
+    return out;
+  };
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // WEIGHT POOL (v2.4)
+  // Accumulates weights by event name instead of duplicating array entries
+  // ═══════════════════════════════════════════════════════════════════════════
+  const poolByName = Object.create(null);
+
+  function addEvents_(events, weight, sourceTags) {
+    if (!Array.isArray(events) || events.length === 0) return;
+    const w = (typeof weight === "number" && isFinite(weight) && weight > 0) ? weight : 1;
+    const baseTags = mergeTags(calendarTags, sourceTags);
+
+    for (const e of events) {
+      if (!e || !e.name) continue;
+      const key = e.name;
+
+      if (!poolByName[key]) {
+        poolByName[key] = {
+          name: e.name,
+          neighborhood: e.neighborhood || "",
+          weight: 0,
+          tags: baseTags.slice()
+        };
+      } else {
+        // Merge tags + preserve neighborhood if missing
+        poolByName[key].tags = mergeTags(poolByName[key].tags, baseTags);
+        if (!poolByName[key].neighborhood && e.neighborhood) {
+          poolByName[key].neighborhood = e.neighborhood;
+        }
+      }
+
+      poolByName[key].weight += w;
+    }
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BASE EVENT POOLS (Oakland - 12 neighborhoods)
@@ -167,7 +252,7 @@ function buildCityEvents_(ctx) {
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // HOLIDAY EVENT POOLS (v2.3)
+  // HOLIDAY EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
   const THANKSGIVING_EVENTS = [
@@ -329,7 +414,7 @@ function buildCityEvents_(ctx) {
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // FIRST FRIDAY EVENT POOLS (v2.3)
+  // FIRST FRIDAY EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
   const FIRST_FRIDAY_EVENTS = [
@@ -342,7 +427,7 @@ function buildCityEvents_(ctx) {
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CREATION DAY EVENT POOLS (v2.3)
+  // CREATION DAY EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
   const CREATION_DAY_EVENTS = [
@@ -354,7 +439,7 @@ function buildCityEvents_(ctx) {
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // SPORTS SEASON EVENT POOLS (v2.3)
+  // SPORTS SEASON EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
   const SPORTS_BASE = [
@@ -377,7 +462,7 @@ function buildCityEvents_(ctx) {
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CULTURAL ACTIVITY EVENT POOLS (v2.3)
+  // CULTURAL ACTIVITY EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
   const HIGH_CULTURAL_EVENTS = [
@@ -387,7 +472,7 @@ function buildCityEvents_(ctx) {
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // COMMUNITY ENGAGEMENT EVENT POOLS (v2.3)
+  // COMMUNITY ENGAGEMENT EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
   const HIGH_ENGAGEMENT_EVENTS = [
@@ -397,231 +482,187 @@ function buildCityEvents_(ctx) {
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // BUILD SELECTION POOL
+  // BUILD SELECTION POOL (weights preserved via addEvents_)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let pool = [];
+  // ───────────────────────────────────────────────────────────────────────────
+  // HOLIDAY EVENTS - Highest priority
+  // ───────────────────────────────────────────────────────────────────────────
+  if (holiday === "Thanksgiving") addEvents_(THANKSGIVING_EVENTS, 2, ["source:holiday", "pool:Thanksgiving"]);
+  if (holiday === "Holiday") addEvents_(HOLIDAY_EVENTS, 2, ["source:holiday", "pool:Holiday"]);
+  if (holiday === "NewYearsEve") addEvents_(NEW_YEARS_EVE_EVENTS, 2, ["source:holiday", "pool:NewYearsEve"]);
+  if (holiday === "NewYear") addEvents_(NEW_YEAR_EVENTS, 2, ["source:holiday", "pool:NewYear"]);
+  if (holiday === "MLKDay") addEvents_(MLK_DAY_EVENTS, 2, ["source:holiday", "pool:MLKDay"]);
+  if (holiday === "LunarNewYear") addEvents_(LUNAR_NEW_YEAR_EVENTS, 3, ["source:holiday", "pool:LunarNewYear"]);
+  if (holiday === "Valentine") addEvents_(VALENTINE_EVENTS, 1, ["source:holiday", "pool:Valentine"]);
+  if (holiday === "PresidentsDay") addEvents_(PRESIDENTS_DAY_EVENTS, 1, ["source:holiday", "pool:PresidentsDay"]);
+  if (holiday === "StPatricksDay") addEvents_(ST_PATRICKS_EVENTS, 1, ["source:holiday", "pool:StPatricksDay"]);
+  if (holiday === "Easter") addEvents_(EASTER_EVENTS, 1, ["source:holiday", "pool:Easter"]);
+  if (holiday === "EarthDay") addEvents_(EARTH_DAY_EVENTS, 1, ["source:holiday", "pool:EarthDay"]);
+  if (holiday === "CincoDeMayo") addEvents_(CINCO_DE_MAYO_EVENTS, 2, ["source:holiday", "pool:CincoDeMayo"]);
+  if (holiday === "MothersDay") addEvents_(MOTHERS_DAY_EVENTS, 1, ["source:holiday", "pool:MothersDay"]);
+  if (holiday === "MemorialDay") addEvents_(MEMORIAL_DAY_EVENTS, 1, ["source:holiday", "pool:MemorialDay"]);
+  if (holiday === "Juneteenth") addEvents_(JUNETEENTH_EVENTS, 2, ["source:holiday", "pool:Juneteenth"]);
+  if (holiday === "FathersDay") addEvents_(FATHERS_DAY_EVENTS, 1, ["source:holiday", "pool:FathersDay"]);
+  if (holiday === "Independence") addEvents_(INDEPENDENCE_EVENTS, 2, ["source:holiday", "pool:Independence"]);
+  if (holiday === "LaborDay") addEvents_(LABOR_DAY_EVENTS, 1, ["source:holiday", "pool:LaborDay"]);
+  if (holiday === "Halloween") addEvents_(HALLOWEEN_EVENTS, 2, ["source:holiday", "pool:Halloween"]);
+  if (holiday === "DiaDeMuertos") addEvents_(DIA_DE_MUERTOS_EVENTS, 2, ["source:holiday", "pool:DiaDeMuertos"]);
+  if (holiday === "VeteransDay") addEvents_(VETERANS_DAY_EVENTS, 1, ["source:holiday", "pool:VeteransDay"]);
+  if (holiday === "OaklandPride") addEvents_(OAKLAND_PRIDE_EVENTS, 3, ["source:holiday", "pool:OaklandPride"]);
+  if (holiday === "ArtSoulFestival") addEvents_(ART_SOUL_EVENTS, 3, ["source:holiday", "pool:ArtSoulFestival"]);
+  if (holiday === "OpeningDay") addEvents_(OPENING_DAY_EVENTS, 3, ["source:holiday", "pool:OpeningDay"]);
 
   // ───────────────────────────────────────────────────────────────────────────
-  // HOLIDAY EVENTS (v2.3) - Highest priority
+  // FIRST FRIDAY
   // ───────────────────────────────────────────────────────────────────────────
-
-  if (holiday === "Thanksgiving") {
-    pool.push(...THANKSGIVING_EVENTS, ...THANKSGIVING_EVENTS);
-  }
-  if (holiday === "Holiday") {
-    pool.push(...HOLIDAY_EVENTS, ...HOLIDAY_EVENTS);
-  }
-  if (holiday === "NewYearsEve") {
-    pool.push(...NEW_YEARS_EVE_EVENTS, ...NEW_YEARS_EVE_EVENTS);
-  }
-  if (holiday === "NewYear") {
-    pool.push(...NEW_YEAR_EVENTS, ...NEW_YEAR_EVENTS);
-  }
-  if (holiday === "MLKDay") {
-    pool.push(...MLK_DAY_EVENTS, ...MLK_DAY_EVENTS);
-  }
-  if (holiday === "LunarNewYear") {
-    pool.push(...LUNAR_NEW_YEAR_EVENTS, ...LUNAR_NEW_YEAR_EVENTS, ...LUNAR_NEW_YEAR_EVENTS);
-  }
-  if (holiday === "Valentine") {
-    pool.push(...VALENTINE_EVENTS);
-  }
-  if (holiday === "PresidentsDay") {
-    pool.push(...PRESIDENTS_DAY_EVENTS);
-  }
-  if (holiday === "StPatricksDay") {
-    pool.push(...ST_PATRICKS_EVENTS);
-  }
-  if (holiday === "Easter") {
-    pool.push(...EASTER_EVENTS);
-  }
-  if (holiday === "EarthDay") {
-    pool.push(...EARTH_DAY_EVENTS);
-  }
-  if (holiday === "CincoDeMayo") {
-    pool.push(...CINCO_DE_MAYO_EVENTS, ...CINCO_DE_MAYO_EVENTS);
-  }
-  if (holiday === "MothersDay") {
-    pool.push(...MOTHERS_DAY_EVENTS);
-  }
-  if (holiday === "MemorialDay") {
-    pool.push(...MEMORIAL_DAY_EVENTS);
-  }
-  if (holiday === "Juneteenth") {
-    pool.push(...JUNETEENTH_EVENTS, ...JUNETEENTH_EVENTS);
-  }
-  if (holiday === "FathersDay") {
-    pool.push(...FATHERS_DAY_EVENTS);
-  }
-  if (holiday === "Independence") {
-    pool.push(...INDEPENDENCE_EVENTS, ...INDEPENDENCE_EVENTS);
-  }
-  if (holiday === "LaborDay") {
-    pool.push(...LABOR_DAY_EVENTS);
-  }
-  if (holiday === "Halloween") {
-    pool.push(...HALLOWEEN_EVENTS, ...HALLOWEEN_EVENTS);
-  }
-  if (holiday === "DiaDeMuertos") {
-    pool.push(...DIA_DE_MUERTOS_EVENTS, ...DIA_DE_MUERTOS_EVENTS);
-  }
-  if (holiday === "VeteransDay") {
-    pool.push(...VETERANS_DAY_EVENTS);
-  }
-  if (holiday === "OaklandPride") {
-    pool.push(...OAKLAND_PRIDE_EVENTS, ...OAKLAND_PRIDE_EVENTS, ...OAKLAND_PRIDE_EVENTS);
-  }
-  if (holiday === "ArtSoulFestival") {
-    pool.push(...ART_SOUL_EVENTS, ...ART_SOUL_EVENTS, ...ART_SOUL_EVENTS);
-  }
-  if (holiday === "OpeningDay") {
-    pool.push(...OPENING_DAY_EVENTS, ...OPENING_DAY_EVENTS, ...OPENING_DAY_EVENTS);
-  }
+  if (isFirstFriday) addEvents_(FIRST_FRIDAY_EVENTS, 3, ["source:firstFriday", "pool:FirstFriday"]);
 
   // ───────────────────────────────────────────────────────────────────────────
-  // FIRST FRIDAY (v2.3)
+  // CREATION DAY
   // ───────────────────────────────────────────────────────────────────────────
-  if (isFirstFriday) {
-    pool.push(...FIRST_FRIDAY_EVENTS, ...FIRST_FRIDAY_EVENTS, ...FIRST_FRIDAY_EVENTS);
-  }
+  if (isCreationDay) addEvents_(CREATION_DAY_EVENTS, 2, ["source:creationDay", "pool:CreationDay"]);
 
   // ───────────────────────────────────────────────────────────────────────────
-  // CREATION DAY (v2.3)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (isCreationDay) {
-    pool.push(...CREATION_DAY_EVENTS, ...CREATION_DAY_EVENTS);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // SPORTS SEASON (v2.3)
+  // SPORTS SEASON
   // ───────────────────────────────────────────────────────────────────────────
   if (sportsSeason === "championship") {
-    pool.push(...CHAMPIONSHIP_EVENTS, ...CHAMPIONSHIP_EVENTS, ...SPORTS_BASE);
+    addEvents_(CHAMPIONSHIP_EVENTS, 2, ["source:sports", "pool:Championship"]);
+    addEvents_(SPORTS_BASE, 1, ["source:sports", "pool:SportsBase"]);
   } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
-    pool.push(...PLAYOFF_EVENTS, ...SPORTS_BASE);
+    addEvents_(PLAYOFF_EVENTS, 1, ["source:sports", "pool:Playoffs"]);
+    addEvents_(SPORTS_BASE, 1, ["source:sports", "pool:SportsBase"]);
   } else if (sportsSeason === "late-season") {
-    pool.push(...SPORTS_BASE);
+    addEvents_(SPORTS_BASE, 1, ["source:sports", "pool:SportsBase"]);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
-  // CULTURAL ACTIVITY (v2.3)
+  // CULTURAL ACTIVITY / ENGAGEMENT
   // ───────────────────────────────────────────────────────────────────────────
-  if (culturalActivity >= 1.4) {
-    pool.push(...HIGH_CULTURAL_EVENTS);
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // COMMUNITY ENGAGEMENT (v2.3)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (communityEngagement >= 1.4) {
-    pool.push(...HIGH_ENGAGEMENT_EVENTS);
-  }
+  if (culturalActivity >= 1.4) addEvents_(HIGH_CULTURAL_EVENTS, 1, ["source:culture"]);
+  if (communityEngagement >= 1.4) addEvents_(HIGH_ENGAGEMENT_EVENTS, 1, ["source:community"]);
 
   // ───────────────────────────────────────────────────────────────────────────
   // SEASON (if no holiday override)
   // ───────────────────────────────────────────────────────────────────────────
   if (holiday === "none") {
-    if (season === "Spring") pool.push(...SPRING);
-    if (season === "Summer") pool.push(...SUMMER);
-    if (season === "Fall") pool.push(...FALL);
-    if (season === "Winter") pool.push(...WINTER);
+    if (season === "Spring") addEvents_(SPRING, 1, ["source:season", "season:Spring"]);
+    if (season === "Summer") addEvents_(SUMMER, 1, ["source:season", "season:Summer"]);
+    if (season === "Fall") addEvents_(FALL, 1, ["source:season", "season:Fall"]);
+    if (season === "Winter") addEvents_(WINTER, 1, ["source:season", "season:Winter"]);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // WEATHER
   // ───────────────────────────────────────────────────────────────────────────
   if (weather.type === "fog") {
-    pool.push(...FOG_EVENTS);
+    addEvents_(FOG_EVENTS, 1, ["source:weather", "weather:fog"]);
   } else if (weather.impact >= 1.3 || weather.type === "rain") {
-    pool.push(...RAIN_EVENTS);
+    addEvents_(RAIN_EVENTS, 1, ["source:weather", "weather:rain"]);
   } else if (holiday === "none") {
-    pool.push(...CLEAR_EVENTS);
+    addEvents_(CLEAR_EVENTS, 1, ["source:weather", "weather:clear"]);
   }
 
-  // Weather mood
-  if (weatherMood.primaryMood === 'cozy') pool.push(...COZY_EVENTS);
-  if (weatherMood.perfectWeather && holiday === "none") pool.push(...PERFECT_WEATHER);
+  if (weatherMood.primaryMood === "cozy") addEvents_(COZY_EVENTS, 1, ["source:weatherMood", "mood:cozy"]);
+  if (weatherMood.perfectWeather && holiday === "none") addEvents_(PERFECT_WEATHER, 1, ["source:weatherMood", "mood:perfect"]);
 
   // ───────────────────────────────────────────────────────────────────────────
-  // CHAOS
+  // CHAOS / SENTIMENT / ECONOMY / NIGHTLIFE / PUBLIC SPACE
   // ───────────────────────────────────────────────────────────────────────────
-  if (chaos.length >= 3) pool.push(...CHAOS_EVENTS);
+  if (chaos.length >= 3) addEvents_(CHAOS_EVENTS, 1, ["source:chaos"]);
+  if (sentiment >= 0.3) addEvents_(HIGH_SENTIMENT, 1, ["source:sentiment", "sentiment:high"]);
+  if (sentiment <= -0.3) addEvents_(LOW_SENTIMENT, 1, ["source:sentiment", "sentiment:low"]);
+  if (econMood >= 65) addEvents_(ECON_BOOM, 1, ["source:economy", "econ:boom"]);
+  if (econMood <= 35) addEvents_(ECON_BUST, 1, ["source:economy", "econ:bust"]);
+  if (nightlife >= 1.2) addEvents_(NIGHTLIFE_EVENTS, 1, ["source:nightlife"]);
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // SENTIMENT
-  // ───────────────────────────────────────────────────────────────────────────
-  if (sentiment >= 0.3) pool.push(...HIGH_SENTIMENT);
-  if (sentiment <= -0.3) pool.push(...LOW_SENTIMENT);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // ECONOMIC MOOD
-  // ───────────────────────────────────────────────────────────────────────────
-  if (econMood >= 65) pool.push(...ECON_BOOM);
-  if (econMood <= 35) pool.push(...ECON_BUST);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // NIGHTLIFE
-  // ───────────────────────────────────────────────────────────────────────────
-  if (nightlife >= 1.2) pool.push(...NIGHTLIFE_EVENTS);
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // PUBLIC SPACE DENSITY
-  // ───────────────────────────────────────────────────────────────────────────
   if (publicSpace >= 1.3) {
-    pool.push({ name: "Lake Merritt Open Plaza Community Flow Event", neighborhood: "Lake Merritt" });
+    addEvents_([{ name: "Lake Merritt Open Plaza Community Flow Event", neighborhood: "Lake Merritt" }], 1, ["source:publicSpace"]);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CLEANUP AND SELECTION
+  // FINAL POOL ARRAY
   // ═══════════════════════════════════════════════════════════════════════════
-
-  // Cleanup duplicates by name
-  pool = [...new Map(pool.map(e => [e.name, e])).values()];
+  const pool = Object.keys(poolByName).map(k => poolByName[k]);
 
   // Fallback
   if (pool.length === 0) {
     S.cityEvents = [];
     S.cityEventDetails = [];
     S.cityEventsCalendarContext = {
-      holiday: holiday,
-      holidayPriority: holidayPriority,
-      isFirstFriday: isFirstFriday,
-      isCreationDay: isCreationDay,
-      sportsSeason: sportsSeason
+      holiday,
+      holidayPriority,
+      isFirstFriday,
+      isCreationDay,
+      sportsSeason
     };
     ctx.summary = S;
     return;
   }
 
-  // Number of events chosen (v2.3: more events for special occasions)
-  let count = Math.random() < 0.3 ? 2 : 1;
-  
+  // ═══════════════════════════════════════════════════════════════════════════
+  // EVENT COUNT (deterministic)
+  // ═══════════════════════════════════════════════════════════════════════════
+  let count = rng() < 0.3 ? 2 : 1;
+
   // Calendar increases event count
   if (holidayPriority === "major" || holidayPriority === "oakland") count = Math.max(count, 2);
   if (isFirstFriday) count = Math.max(count, 2);
   if (sportsSeason === "championship") count = 3;
   if (holiday === "OaklandPride" || holiday === "ArtSoulFestival") count = 3;
-  
-  const selected = typeof pickRandomSet_ === 'function'
-    ? pickRandomSet_(pool, count)
-    : pool.sort(() => Math.random() - 0.5).slice(0, count);
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // OUTPUT
+  // WEIGHTED SAMPLE WITHOUT REPLACEMENT (v2.4)
+  // Mathematically correct weighted random selection
   // ═══════════════════════════════════════════════════════════════════════════
+  function weightedSampleWithoutReplacement_(items, k) {
+    const chosen = [];
+    const work = items.map(e => ({
+      name: e.name,
+      neighborhood: e.neighborhood,
+      tags: Array.isArray(e.tags) ? e.tags.slice() : [],
+      weight: (typeof e.weight === "number" && e.weight > 0) ? e.weight : 1
+    }));
 
-  // Store both formats for compatibility
+    k = Math.max(0, Math.min(k, work.length));
+
+    for (let i = 0; i < k; i++) {
+      let total = 0;
+      for (const it of work) total += it.weight;
+
+      let r = rng() * total;
+      let idx = 0;
+      for (; idx < work.length; idx++) {
+        const w = work[idx].weight;
+        if (r < w) break;
+        r -= w;
+      }
+      // Guard against floating-point edge case where r doesn't drop below 0
+      const picked = work.splice(Math.min(idx, work.length - 1), 1)[0];
+      chosen.push(picked);
+    }
+    return chosen;
+  }
+
+  const selected = weightedSampleWithoutReplacement_(pool, count);
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // OUTPUT (compatible + richer details)
+  // ═══════════════════════════════════════════════════════════════════════════
   S.cityEvents = selected.map(e => e.name);
-  S.cityEventDetails = selected;
-  
-  // v2.3: Calendar context
+  S.cityEventDetails = selected.map(e => ({
+    name: e.name,
+    neighborhood: e.neighborhood,
+    tags: e.tags || calendarTags,
+    weight: e.weight
+  }));
+
   S.cityEventsCalendarContext = {
-    holiday: holiday,
-    holidayPriority: holidayPriority,
-    isFirstFriday: isFirstFriday,
-    isCreationDay: isCreationDay,
-    sportsSeason: sportsSeason,
+    holiday,
+    holidayPriority,
+    isFirstFriday,
+    isCreationDay,
+    sportsSeason,
     eventCount: selected.length
   };
 
@@ -633,52 +674,69 @@ function buildCityEvents_(ctx) {
  * ============================================================================
  * CITY EVENTS REFERENCE
  * ============================================================================
- * 
+ *
+ * v2.4 CHANGES:
+ * - Weight accumulation: Same event from multiple sources gets combined weight
+ *   (no array duplication)
+ * - Deterministic RNG: Pass ctx.rng function or ctx.config.rngSeed for
+ *   reproducible results
+ * - Event tags: Each event in cityEventDetails now has tags[] showing
+ *   which pools contributed to its selection
+ * - Removed pickRandomSet_ fallback to ensure weighted sampling is always used
+ *
  * NEIGHBORHOODS (12):
  * - Temescal, Downtown, Fruitvale, Lake Merritt
  * - West Oakland, Laurel, Rockridge, Jack London
  * - Uptown, KONO, Chinatown, Piedmont Ave
- * 
- * HOLIDAY EVENT POOLS (v2.3):
- * 
- * | Holiday | Events | Key Neighborhoods |
- * |---------|--------|-------------------|
- * | Thanksgiving | 4 | Downtown, Lake Merritt, Fruitvale |
- * | Holiday | 5 | Downtown, Lake Merritt, Rockridge |
- * | NewYearsEve | 4 | Downtown, Jack London, Lake Merritt |
- * | MLKDay | 4 | Downtown, West Oakland, Fruitvale |
- * | LunarNewYear | 4 | Chinatown (3), Downtown |
- * | CincoDeMayo | 4 | Fruitvale (2), Downtown |
- * | Juneteenth | 4 | West Oakland, Downtown, Lake Merritt |
- * | Independence | 4 | Jack London, Lake Merritt, Downtown |
- * | Halloween | 5 | Lake Merritt, Temescal, Jack London |
- * | DiaDeMuertos | 4 | Fruitvale (2), Downtown |
- * | OaklandPride | 4 | Downtown, Lake Merritt, Uptown |
- * | ArtSoulFestival | 4 | Downtown (3), Lake Merritt |
- * | OpeningDay | 4 | Jack London (2), Downtown |
- * 
- * FIRST FRIDAY (6 events):
+ *
+ * HOLIDAY EVENT POOLS:
+ *
+ * | Holiday | Events | Weight | Key Neighborhoods |
+ * |---------|--------|--------|-------------------|
+ * | Thanksgiving | 4 | 2 | Downtown, Lake Merritt, Fruitvale |
+ * | Holiday | 5 | 2 | Downtown, Lake Merritt, Rockridge |
+ * | NewYearsEve | 4 | 2 | Downtown, Jack London, Lake Merritt |
+ * | MLKDay | 4 | 2 | Downtown, West Oakland, Fruitvale |
+ * | LunarNewYear | 4 | 3 | Chinatown (3), Downtown |
+ * | CincoDeMayo | 4 | 2 | Fruitvale (2), Downtown |
+ * | Juneteenth | 4 | 2 | West Oakland, Downtown, Lake Merritt |
+ * | Independence | 4 | 2 | Jack London, Lake Merritt, Downtown |
+ * | Halloween | 5 | 2 | Lake Merritt, Temescal, Jack London |
+ * | DiaDeMuertos | 4 | 2 | Fruitvale (2), Downtown |
+ * | OaklandPride | 4 | 3 | Downtown, Lake Merritt, Uptown |
+ * | ArtSoulFestival | 4 | 3 | Downtown (3), Lake Merritt |
+ * | OpeningDay | 4 | 3 | Jack London (2), Downtown |
+ *
+ * FIRST FRIDAY (6 events, weight 3):
  * - Uptown, KONO, Temescal, Jack London, Downtown, Lake Merritt
- * 
- * CREATION DAY (5 events):
+ *
+ * CREATION DAY (5 events, weight 2):
  * - Downtown, Lake Merritt, West Oakland, Fruitvale, Jack London
- * 
+ *
  * SPORTS SEASON:
- * - Championship: 4 events + 3 base
- * - Playoffs: 3 events + 3 base
- * - Late-season: 3 base events
- * 
+ * - Championship: 4 events (weight 2) + 3 base (weight 1)
+ * - Playoffs: 3 events (weight 1) + 3 base (weight 1)
+ * - Late-season: 3 base events (weight 1)
+ *
  * EVENT COUNT:
- * - Base: 1-2
- * - Major/Oakland holiday: 2
- * - First Friday: 2
+ * - Base: 1-2 (30% chance of 2)
+ * - Major/Oakland holiday: 2+
+ * - First Friday: 2+
  * - Championship: 3
  * - OaklandPride/ArtSoulFestival: 3
- * 
+ *
  * OUTPUT:
- * - cityEvents: Array<string> (names)
- * - cityEventDetails: Array<{name, neighborhood}>
- * - cityEventsCalendarContext: {holiday, holidayPriority, isFirstFriday, isCreationDay, sportsSeason, eventCount}
- * 
+ * - cityEvents: Array<string> (names only, for backwards compatibility)
+ * - cityEventDetails: Array<{name, neighborhood, tags, weight}>
+ * - cityEventsCalendarContext: {holiday, holidayPriority, isFirstFriday,
+ *     isCreationDay, sportsSeason, eventCount}
+ *
+ * DETERMINISTIC USAGE:
+ *   // Option 1: Inject RNG function
+ *   ctx.rng = mySeededRng;
+ *
+ *   // Option 2: Provide seed (XORed with cycleId for variation)
+ *   ctx.config = { rngSeed: 12345 };
+ *
  * ============================================================================
  */

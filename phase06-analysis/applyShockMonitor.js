@@ -1,34 +1,39 @@
 /**
  * ============================================================================
- * applyShockMonitor_ v2.3
+ * applyShockMonitor_ v2.4
  * ============================================================================
  *
- * Identifies REAL cycle shocks with persistence tracking and decay.
+ * Fixes:
+ * - Uses consistent cycle source (absoluteCycle/cycleId/config)
+ * - Properly rolls previousCycleState each cycle (no external rollover needed)
+ * - Sports modifiers only fully apply when sports state is Maker override
+ *   (keeps your canon: engine shouldn't "invent" playoffs/championship intensity)
  *
- * v2.3 Enhancements:
- * - Shock duration tracking (shockStartCycle, shockDuration)
- * - Decay logic: shocks fade after 3+ cycles without severe triggers
- * - Chronic state: 5+ cycle shocks become "new normal"
- * - Resolution state: tracks when shocks clear
- * - Prevents perpetual shock flags
- *
- * v2.2 Features (retained):
- * - GodWorld Calendar integration
- * - Holiday-aware threshold adjustments
- * - Sports season shock potential
- * - Calendar-contextual shock detection
+ * Keeps outputs:
+ * - S.shockFlag, S.shockReasons, S.shockScore
+ * - S.shockStartCycle, S.shockDuration
+ * - S.shockCalendarContext
+ * - S.currentCycleState + S.previousCycleState
  *
  * ============================================================================
  */
 
 function applyShockMonitor_(ctx) {
 
-  var S = ctx.summary;
-  if (!S) {
-    S = {};
-    S.shockFlag = "none";
-    ctx.summary = S;
-    return;
+  var S = ctx.summary || {};
+  ctx.summary = S;
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Resolve cycle consistently across your engine
+  // ───────────────────────────────────────────────────────────────────────────
+  var currentCycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || S.cycle || 0;
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Roll forward previous state (self-contained persistence)
+  // If you already have a rollover script, this still works fine.
+  // ───────────────────────────────────────────────────────────────────────────
+  if (!S.previousCycleState && S.currentCycleState) {
+    S.previousCycleState = S.currentCycleState;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -37,29 +42,47 @@ function applyShockMonitor_(ctx) {
   var curEvents = S.eventsGenerated || 0;
   var worldEvents = S.worldEvents || [];
   var curChaos = worldEvents.length;
-  var dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
-  };
+
+  var dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
   var curSent = dynamics.sentiment || 0;
+
   var civicLoad = S.civicLoad || "stable";
   var civicLoadScore = S.civicLoadScore || 0;
   var patternFlag = S.patternFlag || "none";
+
   var weather = S.weather || { type: "clear", impact: 1 };
   var weatherMood = S.weatherMood || {};
   var econMood = S.economicMood || 50;
+
   var mediaEffects = S.mediaEffects || {};
   var arcs = S.eventArcs || [];
   var demographicDrift = S.demographicDrift || {};
-  var currentCycle = S.cycle || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CALENDAR CONTEXT (v2.2)
+  // CALENDAR CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
   var holiday = S.holiday || "none";
   var holidayPriority = S.holidayPriority || "none";
   var isFirstFriday = S.isFirstFriday || false;
   var isCreationDay = S.isCreationDay || false;
-  var sportsSeason = S.sportsSeason || "off-season";
+
+  // Sports canon handling:
+  // - If Maker override, we trust detailed states (playoffs/championship etc.)
+  // - If simmonth-calculated, treat as "in-season/off-season" for shock weighting
+  var sportsSeason = (S.sportsSeason || "off-season").toString();
+  var sportsSource = (S.sportsSource || "").toString(); // 'config-override' or 'simmonth-calculated' etc.
+  var sportsIsOverride = (sportsSource === "config-override");
+
+  function getSportsPhaseSimple() {
+    // simplest canon: summer = in-season baseball vibe; winter = off-season vibe
+    // You can tune this later, but this keeps the monitor from inventing "playoffs" intensity.
+    var m = S.simMonth || 1;
+    if (m === 3) return "spring-training";
+    if (m >= 4 && m <= 10) return "in-season";
+    return "off-season";
+  }
+
+  var sportsPhase = sportsIsOverride ? sportsSeason : getSportsPhaseSimple();
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PREVIOUS CYCLE STATE
@@ -70,27 +93,26 @@ function applyShockMonitor_(ctx) {
   var prevSent = prevCycle.sentiment || 0;
   var prevEconMood = prevCycle.econMood || 50;
   var prevPattern = prevCycle.pattern || "none";
-  
-  // v2.3: Shock persistence state
+
+  // Shock persistence state
   var prevShockFlag = prevCycle.shockFlag || "none";
   var prevShockStart = prevCycle.shockStartCycle || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CALENDAR-AWARE THRESHOLDS (v2.2)
+  // CALENDAR-AWARE THRESHOLDS
   // ═══════════════════════════════════════════════════════════════════════════
-  
   var highActivityHolidays = [
-    "Independence", "NewYearsEve", "Halloween", "OpeningDay", 
+    "Independence", "NewYearsEve", "Halloween", "OpeningDay",
     "OaklandPride", "ArtSoulFestival", "CincoDeMayo"
   ];
-  
+
   var travelHolidays = [
     "Thanksgiving", "Holiday", "NewYear", "NewYearsEve",
     "MemorialDay", "LaborDay", "Independence"
   ];
 
   var crowdHolidays = [
-    "Independence", "NewYearsEve", "Halloween", "OpeningDay", 
+    "Independence", "NewYearsEve", "Halloween", "OpeningDay",
     "OaklandPride", "CincoDeMayo", "DiaDeMuertos"
   ];
 
@@ -116,14 +138,23 @@ function applyShockMonitor_(ctx) {
     chaosThresholdMod += 1;
   }
 
-  if (sportsSeason === "championship") {
-    eventThresholdMod += 4;
-    chaosThresholdMod += 3;
-    migrationThresholdMod += 60;
-  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
-    eventThresholdMod += 2;
-    chaosThresholdMod += 2;
-    migrationThresholdMod += 40;
+  // Sports: only apply big shock boosts when Maker override is active
+  if (sportsIsOverride) {
+    if (sportsSeason === "championship") {
+      eventThresholdMod += 4;
+      chaosThresholdMod += 3;
+      migrationThresholdMod += 60;
+    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+      eventThresholdMod += 2;
+      chaosThresholdMod += 2;
+      migrationThresholdMod += 40;
+    }
+  } else {
+    // canon-friendly: in-season adds a *small* crowd/traffic baseline
+    if (sportsPhase === "in-season") {
+      eventThresholdMod += 1;
+      chaosThresholdMod += 1;
+    }
   }
 
   if (isCreationDay) {
@@ -137,304 +168,179 @@ function applyShockMonitor_(ctx) {
   var shock = false;
   var shockReasons = [];
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 1. EVENT SPIKE (calendar-adjusted)
-  // ───────────────────────────────────────────────────────────────────────────
+  // 1) EVENT SPIKE
   var eventSpikeThreshold = 10 + eventThresholdMod;
   if (curEvents - prevEvents >= eventSpikeThreshold) {
     shock = true;
-    shockReasons.push('event spike');
+    shockReasons.push("event spike");
   }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 2. SEVERITY SPIKE
-  // ───────────────────────────────────────────────────────────────────────────
+  // 2) SEVERITY SPIKE
   var curHigh = 0;
   var curMed = 0;
   for (var i = 0; i < worldEvents.length; i++) {
-    var sev = (worldEvents[i].severity || '').toString().toLowerCase();
-    if (sev === 'high' || sev === 'major' || sev === 'critical') {
-      curHigh++;
-    }
-    if (sev === 'medium' || sev === 'moderate') {
-      curMed++;
-    }
+    var sev = (worldEvents[i].severity || "").toString().toLowerCase();
+    if (sev === "high" || sev === "major" || sev === "critical") curHigh++;
+    if (sev === "medium" || sev === "moderate") curMed++;
   }
+  if (curHigh >= 2) { shock = true; shockReasons.push("high severity cluster"); }
+  if (curMed >= 4)  { shock = true; shockReasons.push("medium severity wave"); }
 
-  if (curHigh >= 2) {
-    shock = true;
-    shockReasons.push('high severity cluster');
-  }
-  if (curMed >= 4) {
-    shock = true;
-    shockReasons.push('medium severity wave');
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // 3. CHAOS SPIKE (calendar-adjusted)
-  // ───────────────────────────────────────────────────────────────────────────
+  // 3) CHAOS SPIKE
   var chaosSpikeThreshold = 4 + chaosThresholdMod;
   var chaosSaturationThreshold = 8 + chaosThresholdMod;
 
-  if (curChaos - prevChaos >= chaosSpikeThreshold) {
-    shock = true;
-    shockReasons.push('chaos spike');
-  }
-  if (curChaos >= chaosSaturationThreshold) {
-    shock = true;
-    shockReasons.push('chaos saturation');
-  }
+  if (curChaos - prevChaos >= chaosSpikeThreshold) { shock = true; shockReasons.push("chaos spike"); }
+  if (curChaos >= chaosSaturationThreshold)        { shock = true; shockReasons.push("chaos saturation"); }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 4. WEATHER VOLATILITY SHOCK
-  // ───────────────────────────────────────────────────────────────────────────
+  // 4) WEATHER VOLATILITY
   var wxImpact = weather.impact || 1;
-  if (wxImpact >= 1.5) {
-    shock = true;
-    shockReasons.push('severe weather');
-  }
+  if (wxImpact >= 1.5) { shock = true; shockReasons.push("severe weather"); }
+  if (weatherMood.conflictPotential && weatherMood.conflictPotential >= 0.5) { shock = true; shockReasons.push("weather conflict"); }
+  if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.2)            { shock = true; shockReasons.push("weather distress"); }
 
-  if (weatherMood.conflictPotential && weatherMood.conflictPotential >= 0.5) {
-    shock = true;
-    shockReasons.push('weather conflict');
-  }
-  if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.2) {
-    shock = true;
-    shockReasons.push('weather distress');
-  }
+  // 5) SENTIMENT COLLAPSE
+  if (prevSent - curSent >= 0.3) { shock = true; shockReasons.push("sentiment collapse"); }
+  if (curSent <= -0.5)           { shock = true; shockReasons.push("severe negative sentiment"); }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 5. SENTIMENT COLLAPSE
-  // ───────────────────────────────────────────────────────────────────────────
-  if (prevSent - curSent >= 0.3) {
-    shock = true;
-    shockReasons.push('sentiment collapse');
-  }
-  if (curSent <= -0.5) {
-    shock = true;
-    shockReasons.push('severe negative sentiment');
-  }
+  // 6) ECONOMIC MOOD CRASH
+  if (prevEconMood - econMood >= 15) { shock = true; shockReasons.push("economic crash"); }
+  if (econMood <= 25)                { shock = true; shockReasons.push("economic crisis"); }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 6. ECONOMIC MOOD CRASH
-  // ───────────────────────────────────────────────────────────────────────────
-  if (prevEconMood - econMood >= 15) {
-    shock = true;
-    shockReasons.push('economic crash');
-  }
-  if (econMood <= 25) {
-    shock = true;
-    shockReasons.push('economic crisis');
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // 7. MIGRATION DRIFT SHOCK (calendar-adjusted)
-  // ───────────────────────────────────────────────────────────────────────────
+  // 7) MIGRATION DRIFT SHOCK
   var migration = demographicDrift.migration || 0;
   var migrationThreshold = 150 + migrationThresholdMod;
-  
-  if (Math.abs(migration) >= migrationThreshold) {
-    shock = true;
-    shockReasons.push('migration surge');
-  }
+  if (Math.abs(migration) >= migrationThreshold) { shock = true; shockReasons.push("migration surge"); }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 8. EMPLOYMENT SHOCK
-  // ───────────────────────────────────────────────────────────────────────────
+  // 8) EMPLOYMENT SHOCK
   var employment = demographicDrift.employmentRate || 0.91;
-  if (employment < 0.85) {
-    shock = true;
-    shockReasons.push('employment crisis');
-  }
+  if (employment < 0.85) { shock = true; shockReasons.push("employment crisis"); }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 9. CIVIC LOAD STRAIN
-  // ───────────────────────────────────────────────────────────────────────────
-  if (civicLoad === "load-strain") {
-    shock = true;
-    shockReasons.push('civic overload');
-  }
-  if (civicLoadScore >= 15) {
-    shock = true;
-    shockReasons.push('civic strain extreme');
-  }
+  // 9) CIVIC LOAD STRAIN
+  if (civicLoad === "load-strain") { shock = true; shockReasons.push("civic overload"); }
+  if (civicLoadScore >= 15)        { shock = true; shockReasons.push("civic strain extreme"); }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 10. PATTERN BREAK SHOCK
-  // ───────────────────────────────────────────────────────────────────────────
-  if (prevPattern === "stability-streak" && curEvents >= 10) {
-    shock = true;
-    shockReasons.push('stability break');
-  }
-  if (patternFlag === "strain-trend") {
-    shock = true;
-    shockReasons.push('strain trend');
-  }
+  // 10) PATTERN BREAK
+  if (prevPattern === "stability-streak" && curEvents >= 10) { shock = true; shockReasons.push("stability break"); }
+  if (patternFlag === "strain-trend")                        { shock = true; shockReasons.push("strain trend"); }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 11. ARC PEAK CLUSTER
-  // ───────────────────────────────────────────────────────────────────────────
+  // 11) ARC PEAK CLUSTER
   var peakArcs = 0;
   var highTensionArcs = 0;
   for (var a = 0; a < arcs.length; a++) {
-    if (arcs[a] && arcs[a].phase === 'peak') peakArcs++;
+    if (arcs[a] && arcs[a].phase === "peak") peakArcs++;
     if (arcs[a] && (arcs[a].tension || 0) >= 8) highTensionArcs++;
   }
+  if (peakArcs >= 2)       { shock = true; shockReasons.push("arc peak cluster"); }
+  if (highTensionArcs >= 2){ shock = true; shockReasons.push("high tension arcs"); }
 
-  if (peakArcs >= 2) {
-    shock = true;
-    shockReasons.push('arc peak cluster');
-  }
-  if (highTensionArcs >= 2) {
-    shock = true;
-    shockReasons.push('high tension arcs');
-  }
+  // 12) MEDIA CRISIS SATURATION
+  if (mediaEffects.crisisSaturation && mediaEffects.crisisSaturation >= 0.8) { shock = true; shockReasons.push("media crisis saturation"); }
+  if (mediaEffects.coverageIntensity === "saturated")                        { shock = true; shockReasons.push("media saturation"); }
 
-  // ───────────────────────────────────────────────────────────────────────────
-  // 12. MEDIA CRISIS SATURATION
-  // ───────────────────────────────────────────────────────────────────────────
-  if (mediaEffects.crisisSaturation && mediaEffects.crisisSaturation >= 0.8) {
-    shock = true;
-    shockReasons.push('media crisis saturation');
-  }
-  if (mediaEffects.coverageIntensity === 'saturated') {
-    shock = true;
-    shockReasons.push('media saturation');
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // 13. CALENDAR-SPECIFIC SHOCKS (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-
+  // 13) CALENDAR-SPECIFIC SHOCKS
   if (holidayPriority === "major" && curEvents < 5 && curChaos === 0) {
     shock = true;
-    shockReasons.push('holiday dead-zone');
+    shockReasons.push("holiday dead-zone");
   }
 
-  if (sportsSeason === "championship" && curSent <= -0.4) {
+  // Only apply "championship tension" when override is active
+  if (sportsIsOverride && sportsSeason === "championship" && curSent <= -0.4) {
     shock = true;
-    shockReasons.push('championship tension');
+    shockReasons.push("championship tension");
   }
 
   var fireworksHolidays = ["Independence", "NewYearsEve"];
   if (fireworksHolidays.indexOf(holiday) >= 0) {
     var safetyEvents = 0;
     for (var s = 0; s < worldEvents.length; s++) {
-      if (worldEvents[s].domain === 'SAFETY') safetyEvents++;
+      if (worldEvents[s].domain === "SAFETY") safetyEvents++;
     }
     if (safetyEvents >= 3) {
       shock = true;
-      shockReasons.push('fireworks crisis');
+      shockReasons.push("fireworks crisis");
     }
   }
 
-  var culturalHolidays = [
-    "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "OaklandPride", 
-    "LunarNewYear", "MLKDay"
-  ];
-  if (culturalHolidays.indexOf(holiday) >= 0 && dynamics.culturalActivity < 0.7) {
+  var culturalHolidays = ["Juneteenth","CincoDeMayo","DiaDeMuertos","OaklandPride","LunarNewYear","MLKDay"];
+  if (culturalHolidays.indexOf(holiday) >= 0 && (dynamics.culturalActivity || 1) < 0.7) {
     shock = true;
-    shockReasons.push('cultural disconnect');
+    shockReasons.push("cultural disconnect");
   }
 
   if (isCreationDay && curChaos >= 5) {
     shock = true;
-    shockReasons.push('creation day disruption');
+    shockReasons.push("creation day disruption");
   }
 
   if (isFirstFriday && curSent <= -0.35) {
     shock = true;
-    shockReasons.push('first friday tension');
+    shockReasons.push("first friday tension");
   }
 
   if (travelHolidays.indexOf(holiday) >= 0) {
     var infraEvents = 0;
     for (var inf = 0; inf < worldEvents.length; inf++) {
-      if (worldEvents[inf].domain === 'INFRASTRUCTURE') infraEvents++;
+      if (worldEvents[inf].domain === "INFRASTRUCTURE") infraEvents++;
     }
     if (infraEvents >= 2) {
       shock = true;
-      shockReasons.push('holiday transit crisis');
+      shockReasons.push("holiday transit crisis");
     }
   }
 
-  if (dynamics.communityEngagement < 0.6 && curSent <= -0.3) {
+  if ((dynamics.communityEngagement || 1) < 0.6 && curSent <= -0.3) {
     shock = true;
-    shockReasons.push('community withdrawal');
+    shockReasons.push("community withdrawal");
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // SHOCK PERSISTENCE & DECAY (v2.3)
+  // SHOCK PERSISTENCE & DECAY
   // ═══════════════════════════════════════════════════════════════════════════
-  
   var shockStartCycle = 0;
   var shockDuration = 0;
   var finalShockFlag = "none";
 
   if (shock) {
-    // Shock conditions are active this cycle
-    
-    // Check if continuing from previous
-    var wasShocked = (prevShockFlag === "shock-flag" || 
-                      prevShockFlag === "shock-fading" || 
-                      prevShockFlag === "shock-chronic");
-    
+    var wasShocked = (prevShockFlag === "shock-flag" || prevShockFlag === "shock-fading" || prevShockFlag === "shock-chronic");
+
     if (wasShocked && prevShockStart > 0) {
-      // Continuing shock
       shockStartCycle = prevShockStart;
       shockDuration = currentCycle - prevShockStart;
     } else {
-      // New shock
       shockStartCycle = currentCycle;
       shockDuration = 0;
     }
-    
-    // Apply decay based on duration
+
     if (shockDuration >= 5) {
-      // CHRONIC: 5+ cycles - becomes "new normal"
-      // Only maintain active shock if 3+ severe reasons
       if (shockReasons.length >= 3) {
         finalShockFlag = "shock-flag";
       } else {
         finalShockFlag = "shock-chronic";
         shockReasons.push("chronic (normalized after " + shockDuration + " cycles)");
       }
-      
     } else if (shockDuration >= 3) {
-      // FADING: 3-4 cycles - requires 2+ reasons to stay active
       if (shockReasons.length >= 2) {
         finalShockFlag = "shock-flag";
       } else {
         finalShockFlag = "shock-fading";
         shockReasons.push("fading (cycle " + shockDuration + ")");
       }
-      
     } else {
-      // FRESH: 0-2 cycles - full shock
       finalShockFlag = "shock-flag";
     }
-    
+
   } else {
-    // No shock conditions met this cycle
-    
-    var wasActive = (prevShockFlag === "shock-flag" || 
-                     prevShockFlag === "shock-fading");
-    
-    if (wasActive) {
-      // Was shocked, now resolving
+    var wasActive = (prevShockFlag === "shock-flag" || prevShockFlag === "shock-fading");
+    if (wasActive || prevShockFlag === "shock-chronic") {
       finalShockFlag = "shock-resolved";
       shockReasons.push("resolved this cycle");
-    } else if (prevShockFlag === "shock-chronic") {
-      // Chronic finally cleared
-      finalShockFlag = "shock-resolved";
-      shockReasons.push("chronic condition resolved");
     } else if (prevShockFlag === "shock-resolved") {
-      // Already resolved, now fully clear
       finalShockFlag = "none";
     } else {
       finalShockFlag = "none";
     }
-    
+
     shockStartCycle = 0;
     shockDuration = 0;
   }
@@ -448,13 +354,14 @@ function applyShockMonitor_(ctx) {
   S.shockStartCycle = shockStartCycle;
   S.shockDuration = shockDuration;
 
-  // v2.2: Calendar context
   S.shockCalendarContext = {
     holiday: holiday,
     holidayPriority: holidayPriority,
     isFirstFriday: isFirstFriday,
     isCreationDay: isCreationDay,
     sportsSeason: sportsSeason,
+    sportsPhase: sportsPhase,
+    sportsIsOverride: sportsIsOverride,
     thresholdAdjustments: {
       eventThreshold: eventSpikeThreshold,
       chaosThreshold: chaosSpikeThreshold,
@@ -462,8 +369,10 @@ function applyShockMonitor_(ctx) {
     }
   };
 
-  // Store current state for next cycle comparison (v2.3 expanded)
+  // Save both current and previous explicitly (no external rollover required)
+  S.previousCycleState = S.currentCycleState || S.previousCycleState || {};
   S.currentCycleState = {
+    cycle: currentCycle,
     events: curEvents,
     chaosCount: curChaos,
     sentiment: curSent,
@@ -479,50 +388,42 @@ function applyShockMonitor_(ctx) {
 
 /**
  * ============================================================================
- * SHOCK MONITOR REFERENCE v2.3
+ * SHOCK MONITOR v2.4 REFERENCE
  * ============================================================================
- * 
- * SHOCK STATES (v2.3):
- * 
- * | State | Duration | Condition |
- * |-------|----------|-----------|
- * | none | - | No shock conditions |
- * | shock-flag | 0-2 cycles | Active shock, any triggers |
- * | shock-flag | 3-4 cycles | Active shock, 2+ triggers required |
- * | shock-fading | 3-4 cycles | Only 1 trigger, decaying |
- * | shock-flag | 5+ cycles | Active shock, 3+ triggers required |
- * | shock-chronic | 5+ cycles | <3 triggers, "new normal" |
- * | shock-resolved | 1 cycle | Just cleared, transitions to none |
- * 
- * DECAY LOGIC:
- * 
- * - Cycles 0-2: Any trigger = shock-flag
- * - Cycles 3-4: 2+ triggers = shock-flag, else shock-fading
- * - Cycles 5+: 3+ triggers = shock-flag, else shock-chronic
- * - No triggers: shock-resolved (1 cycle), then none
- * 
- * NEW OUTPUT FIELDS (v2.3):
- * 
- * - shockStartCycle: Cycle when shock began
- * - shockDuration: How many cycles shock has been active
- * - currentCycleState.shockFlag: For next cycle comparison
- * - currentCycleState.shockStartCycle: For next cycle comparison
- * 
- * DETECTION CATEGORIES (unchanged from v2.2):
- * 
- * 1. Event spike (calendar-adjusted)
- * 2. Severity spike (high/medium cluster)
- * 3. Chaos spike (calendar-adjusted)
+ *
+ * SHOCK FLAGS:
+ * - none: No shock detected
+ * - shock-flag: Active shock
+ * - shock-fading: Shock declining (3+ cycles, fewer reasons)
+ * - shock-chronic: Shock normalized (5+ cycles, "new normal")
+ * - shock-resolved: Just ended this cycle
+ *
+ * SHOCK DETECTION (13 categories):
+ * 1. Event spike (10+ above previous)
+ * 2. Severity spike (2+ high or 4+ medium)
+ * 3. Chaos spike/saturation
  * 4. Weather volatility
  * 5. Sentiment collapse
- * 6. Economic crash
- * 7. Migration surge (calendar-adjusted)
+ * 6. Economic mood crash
+ * 7. Migration surge
  * 8. Employment crisis
  * 9. Civic load strain
  * 10. Pattern break
  * 11. Arc peak cluster
- * 12. Media saturation
+ * 12. Media crisis saturation
  * 13. Calendar-specific shocks
- * 
+ *
+ * CANON-SAFE SPORTS:
+ * - Only applies big threshold mods when sportsIsOverride
+ * - In-season adds small baseline mods only
+ *
+ * CALL ORDER:
+ * 1. generateCrisisBuckets_ (creates events/arcs)
+ * 2. applyShockMonitor_ (detects shock from this cycle's events)
+ *
+ * PERSISTENCE:
+ * - Self-contained: rolls previousCycleState automatically
+ * - No external rollover script required
+ *
  * ============================================================================
  */

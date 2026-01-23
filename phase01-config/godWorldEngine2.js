@@ -203,6 +203,7 @@ function runWorldCycle() {
 
   safePhaseCall_(ctx, 'Phase6-ArcLifecycle', function() { processArcLifecycle_(ctx); });
   safePhaseCall_(ctx, 'Phase6-StorylineStatus', function() { updateStorylineStatus_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-Textures', function() { textureTriggerEngine_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 7: EVENING + MEDIA SYSTEMS

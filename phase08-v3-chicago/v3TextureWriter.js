@@ -1,28 +1,29 @@
 /**
  * ============================================================================
- * V3.2 TEXTURE WRITER
+ * V3.3 TEXTURE WRITER
  * ============================================================================
  *
  * Writes texture triggers to Texture_Trigger_Log sheet with calendar context.
  *
- * v3.2 Enhancements:
- * - Calendar columns (Holiday, HolidayPriority, FirstFriday, CreationDay, SportsSeason)
- * - Aligned with GodWorld Calendar v1.0 and textureTriggerEngine v3.2
+ * v3.3 Enhancements:
+ * - Hardened null guards for all fields
+ * - Intensity normalization
+ * - Cache layer support (uses ctx.cache.append if available)
+ * - Aligned with textureTriggerEngine v3.3
  *
- * Previous features (v3.1):
+ * Previous features (v3.2):
+ * - Calendar columns (Holiday, HolidayPriority, FirstFriday, CreationDay, SportsSeason)
  * - Domain, neighborhood, texture key
  * - Reason and intensity tracking
- * 
+ *
  * ============================================================================
  */
 
 function saveV3Textures_(ctx) {
   const ss = ctx.ss;
-  const textures = ctx.summary.textureTriggers || [];
-
+  const textures = (ctx.summary && ctx.summary.textureTriggers) ? ctx.summary.textureTriggers : [];
   if (!textures.length) return;
 
-  // v3.2: Expanded headers with calendar columns
   const headers = [
     'Timestamp',        // A
     'Cycle',            // B
@@ -31,41 +32,56 @@ function saveV3Textures_(ctx) {
     'TextureKey',       // E
     'Reason',           // F
     'Intensity',        // G
-    'Holiday',          // H (v3.2)
-    'HolidayPriority',  // I (v3.2)
-    'FirstFriday',      // J (v3.2)
-    'CreationDay',      // K (v3.2)
-    'SportsSeason'      // L (v3.2)
+    'Holiday',          // H
+    'HolidayPriority',  // I
+    'FirstFriday',      // J
+    'CreationDay',      // K
+    'SportsSeason'      // L
   ];
 
   const sheet = ensureSheet_(ss, 'Texture_Trigger_Log', headers);
 
-  const cycle = ctx.config.cycleCount || ctx.summary.cycleId;
+  const cycle = (ctx.config && ctx.config.cycleCount) || (ctx.summary && ctx.summary.cycleId) || 0;
   const now = ctx.now || new Date();
 
-  // v3.2: Get current calendar context
-  const holiday = ctx.summary.holiday || 'none';
-  const holidayPriority = ctx.summary.holidayPriority || 'none';
-  const isFirstFriday = ctx.summary.isFirstFriday || false;
-  const isCreationDay = ctx.summary.isCreationDay || false;
-  const sportsSeason = ctx.summary.sportsSeason || 'off-season';
+  // Calendar context with null guards
+  const holiday = (ctx.summary && ctx.summary.holiday) || 'none';
+  const holidayPriority = (ctx.summary && ctx.summary.holidayPriority) || 'none';
+  const isFirstFriday = !!(ctx.summary && ctx.summary.isFirstFriday);
+  const isCreationDay = !!(ctx.summary && ctx.summary.isCreationDay);
+  const sportsSeason = (ctx.summary && ctx.summary.sportsSeason) || 'off-season';
 
-  const rows = textures.map(t => [
-    now,
-    cycle,
-    t.domain,
-    t.neighborhood,
-    t.textureKey,
-    t.reason,
-    t.intensity || 'moderate',
-    holiday,          // v3.2
-    holidayPriority,  // v3.2
-    isFirstFriday,    // v3.2
-    isCreationDay,    // v3.2
-    sportsSeason      // v3.2
-  ]);
+  // Intensity normalization helper
+  const normalizeIntensity = function(x) {
+    const v = (x || 'moderate').toString().toLowerCase();
+    if (v === 'low' || v === 'moderate' || v === 'high') return v;
+    return 'moderate';
+  };
 
-  // Safe append — handles empty sheet
+  const rows = textures.map(function(t) {
+    return [
+      now,
+      cycle,
+      (t && t.domain) || 'GENERAL',
+      (t && t.neighborhood) || '',
+      (t && t.textureKey) || 'unknown_texture',
+      (t && t.reason) || '',
+      normalizeIntensity(t && t.intensity),
+      holiday,
+      holidayPriority,
+      isFirstFriday,
+      isCreationDay,
+      sportsSeason
+    ];
+  });
+
+  // Use cache append if available (batched writes)
+  if (ctx.cache && typeof ctx.cache.append === 'function') {
+    ctx.cache.append(sheet, rows);
+    return;
+  }
+
+  // Fallback: direct sheet write
   const startRow = Math.max(sheet.getLastRow() + 1, 2);
   sheet.getRange(startRow, 1, rows.length, rows[0].length).setValues(rows);
 }
@@ -73,9 +89,9 @@ function saveV3Textures_(ctx) {
 
 /**
  * ============================================================================
- * TEXTURE TRIGGER LOG SCHEMA v3.2
+ * TEXTURE TRIGGER LOG SCHEMA v3.3
  * ============================================================================
- * 
+ *
  * COLUMNS (12):
  * A - Timestamp
  * B - Cycle
@@ -84,18 +100,18 @@ function saveV3Textures_(ctx) {
  * E - TextureKey (e.g., lion_dance_drums, gallery_crawl, championship_fever)
  * F - Reason (human-readable explanation)
  * G - Intensity (low, moderate, high)
- * H - Holiday (v3.2)
- * I - HolidayPriority (v3.2)
- * J - FirstFriday (v3.2)
- * K - CreationDay (v3.2)
- * L - SportsSeason (v3.2)
- * 
+ * H - Holiday
+ * I - HolidayPriority
+ * J - FirstFriday
+ * K - CreationDay
+ * L - SportsSeason
+ *
  * QUERY EXAMPLES:
  * - All Pride textures: =FILTER(E:E, H:H="OaklandPride")
  * - First Friday textures: =FILTER(E:E, J:J=TRUE)
  * - High intensity holiday textures: =FILTER(E:E, (G:G="high")*(H:H<>"none"))
  * - Championship atmosphere: =FILTER(E:E, L:L="championship")
  * - Chinatown Lunar New Year: =FILTER(E:E, (D:D="Chinatown")*(H:H="LunarNewYear"))
- * 
+ *
  * ============================================================================
  */

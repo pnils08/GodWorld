@@ -160,9 +160,6 @@ function applyWeatherModel_(ctx) {
   if (holiday === "FallEquinox") {
     list.push("cool", "wind", "fog");  // Transition
   }
-  if (holiday === "WinterSolstice") {
-    list.push("cold", "fog", "rain");  // Darkest day
-  }
 
   // Minor holidays
   if (holiday === "Valentine") {
@@ -176,6 +173,23 @@ function applyWeatherModel_(ctx) {
   }
   if (holiday === "BackToSchool") {
     list.push("hot", "clear");  // August
+  }
+
+  // v3.3: Calendar holidays previously missing (light touch)
+  if (holiday === "BlackHistoryMonth") {
+    list.push("mild", "clear");  // observance month, neutral/pleasant
+  }
+  if (holiday === "PresidentsDay") {
+    list.push("cold", "rain");  // Feb vibe
+  }
+  if (holiday === "PatriotDay") {
+    list.push("cool", "fog", "wind");  // solemn/reflective tone
+  }
+  if (holiday === "IndigenousPeoplesDay") {
+    list.push("cool", "clear", "wind");  // fall, outdoors/community feel
+  }
+  if (holiday === "VeteransDay") {
+    list.push("cool", "rain", "fog");  // November remembrance tone
   }
 
   // Creation Day - weather feels significant

@@ -1,18 +1,19 @@
 /**
  * ============================================================================
- * worldEventsEngine_ v2.5
+ * worldEventsEngine_ v2.6
  * ============================================================================
  *
- * v2.5 Fixes:
- * - Flow-safe: no accidental overwrite of other generators (appends)
- * - Uses previousCycleState for chaos comparisons (avoids stale last-cycle bias)
- * - Recovery-aware: respects eventSuppression + recoveryLevel
- * - Canon-safe sports: playoffs/championship pools ONLY when Maker override is active
- * - Adds athlete lifestyle "influence" events (in-season/off-season)
+ * v2.6 Fixes:
+ * - Categories now have explicit domain tags (_domain property)
+ * - Events output real domains (SAFETY, HEALTH, FESTIVAL, etc.) not just "WORLD"
+ * - domainAllowed_() gate: suppressed domains re-roll to different category
+ * - Cooldowns now actually suppress world event generation
  *
- * Requires (recommended):
- * - applyCycleRecovery_ sets: eventSuppression, recoveryLevel
- * - applyShockMonitor_ uses: worldEvents, previousCycleState/currentCycleState pattern
+ * v2.5 Features (retained):
+ * - Append-safe (preserves earlier events from crisis buckets, etc.)
+ * - Uses previousCycleState for chaos comparisons
+ * - Recovery-aware: respects eventSuppression + recoveryLevel
+ * - Canon-safe sports: playoffs/championship only with Maker override
  *
  * ============================================================================
  */
@@ -35,7 +36,7 @@ function pickWeightedSafe_(cats, rng) {
     var w = cats[i].weight;
     if (typeof w === 'number' && isFinite(w) && w > 0) pool.push(cats[i]);
   }
-  if (pool.length === 0) return cats.length ? cats[0].list : [];
+  if (pool.length === 0) return cats.length ? cats[0] : null;
 
   var total = 0;
   for (var j = 0; j < pool.length; j++) total += pool[j].weight;
@@ -43,10 +44,10 @@ function pickWeightedSafe_(cats, rng) {
   var roll = rng() * total;
   for (var k = 0; k < pool.length; k++) {
     var c = pool[k];
-    if (roll < c.weight) return c.list;
+    if (roll < c.weight) return c;
     roll -= c.weight;
   }
-  return pool[0].list;
+  return pool[0];
 }
 
 function worldEventsEngine_(ctx) {
@@ -58,7 +59,6 @@ function worldEventsEngine_(ctx) {
   var cycle = S.absoluteCycle || S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
 
   // Prefer injected RNG, else seed, else Math.random
-  // IMPORTANT: mix seed with cycle so you don't repeat identical outputs each cycle.
   var rng = (typeof ctx.rng === 'function') ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === 'number')
       ? mulberry32_(((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0)) >>> 0)
@@ -78,61 +78,54 @@ function worldEventsEngine_(ctx) {
   var pattern = S.patternFlag || 'none';
   var drift = (typeof S.migrationDrift === 'number') ? S.migrationDrift : 0;
 
-  // Use previous cycle state for chaos comparison (prevents stale bias)
+  // Use previous cycle state for chaos comparison
   var prev = S.previousCycleState || {};
   var prevChaos = (typeof prev.chaosCount === 'number') ? prev.chaosCount : 0;
   var prevEvents = (typeof prev.events === 'number') ? prev.events : 0;
 
-  // Recovery suppression (from applyCycleRecovery_ v2.3)
+  // Recovery suppression
   var eventSupp = (typeof S.eventSuppression === 'number') ? S.eventSuppression : 1.0;
   if (!isFinite(eventSupp) || eventSupp <= 0) eventSupp = 1.0;
   var recoveryLevel = (S.recoveryLevel || 'none').toString();
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CALENDAR CONTEXT
-  // ═══════════════════════════════════════════════════════════════════════════
+  // Calendar context
   var holiday = S.holiday || "none";
   var holidayPriority = S.holidayPriority || "none";
   var isFirstFriday = !!S.isFirstFriday;
   var isCreationDay = !!S.isCreationDay;
 
   var sportsSeason = (S.sportsSeason || "off-season").toString().trim().toLowerCase();
-  var sportsSource = (S.sportsSource || "").toString(); // 'config-override' or 'simmonth-calculated'
+  var sportsSource = (S.sportsSource || "").toString();
 
-  // Canon-safe sports buckets:
   var IN_SEASON = (sportsSeason !== 'off-season');
   var makerOverrideSports = (sportsSource === 'config-override');
-
-  // Only allow playoffs/championship flavor if YOU explicitly override into those states
   var allowPlayoffFlavor = makerOverrideSports && (sportsSeason === 'playoffs' || sportsSeason === 'post-season');
   var allowChampFlavor = makerOverrideSports && (sportsSeason === 'championship');
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // BASE CATEGORY POOLS
+  // BASE CATEGORY POOLS (now with _domain tags)
   // ═══════════════════════════════════════════════════════════════════════════
 
   var categories = [
-    { weight: W.eventWeight, list: ["kitchen fire (minor)", "food poisoning complaint", "staff walkout", "customer dispute"] },
-    { weight: W.civicWeight, list: ["noise complaint", "street disturbance", "suspicious activity check", "minor pursuit"] },
-    { weight: (W.eventWeight * 0.6), list: ["unusual ER case", "cluster of fainting spells", "unexplained symptom pattern"], _health: true },
-    { weight: (W.weatherWeight * weatherImp), list: ["sudden downpour", "high-wind pocket", "fog surge", "rapid temperature drop"] },
-    { weight: W.eventWeight, list: ["actor spotted downtown", "musician near Coliseum", "influencer filming", "athlete sighting"] },
-    { weight: W.schoolWeight, list: ["test score spike", "school-board dispute", "field trip mishap", "teacher highlight"] },
-    { weight: W.civicWeight, list: ["zoning adjustment", "road closure decision", "budget amendment", "committee vote"] },
-    { weight: W.civicWeight, list: ["small protest", "petition rally", "neighborhood grievance", "online call-to-gather"] },
-    { weight: W.eventWeight, list: ["3-block flicker", "transformer hiccup", "5-minute blackout"] },
-    { weight: W.eventWeight, list: ["signal malfunction", "jackknifed truck", "stalled bus"] },
-    { weight: W.civicWeight, list: ["emergency committee meeting", "association briefing", "public-comment session"] },
-    { weight: W.eventWeight, list: ["email leak", "misfiled document", "missing funds", "staff rumor"] },
-    { weight: W.eventWeight, list: ["forklift near-tip", "minor fender-bender", "lost dog returned", "locked-out worker"] },
-    { weight: W.eventWeight, list: ["porch piracy attempt", "petty theft", "graffiti tagging", "car break-in attempt"] },
-    { weight: W.eventWeight, list: ["water-pressure drop", "pothole eruption", "internet disruption"] },
-    { weight: W.eventWeight, list: ["flash choir", "balloon release", "earthquake rumble", "influencer prank", "drone mistake"] }
+    { weight: W.eventWeight, _domain: 'BUSINESS', list: ["kitchen fire (minor)", "food poisoning complaint", "staff walkout", "customer dispute"] },
+    { weight: W.civicWeight, _domain: 'SAFETY', list: ["noise complaint", "street disturbance", "suspicious activity check", "minor pursuit"] },
+    { weight: (W.eventWeight * 0.6), _domain: 'HEALTH', _health: true, list: ["unusual ER case", "cluster of fainting spells", "unexplained symptom pattern"] },
+    { weight: (W.weatherWeight * weatherImp), _domain: 'WEATHER', list: ["sudden downpour", "high-wind pocket", "fog surge", "rapid temperature drop"] },
+    { weight: W.eventWeight, _domain: 'CELEBRITY', list: ["actor spotted downtown", "musician near Coliseum", "influencer filming", "athlete sighting"] },
+    { weight: W.schoolWeight, _domain: 'EDUCATION', list: ["test score spike", "school-board dispute", "field trip mishap", "teacher highlight"] },
+    { weight: W.civicWeight, _domain: 'CIVIC', list: ["zoning adjustment", "road closure decision", "budget amendment", "committee vote"] },
+    { weight: W.civicWeight, _domain: 'CIVIC', list: ["small protest", "petition rally", "neighborhood grievance", "online call-to-gather"] },
+    { weight: W.eventWeight, _domain: 'INFRASTRUCTURE', list: ["3-block flicker", "transformer hiccup", "5-minute blackout"] },
+    { weight: W.eventWeight, _domain: 'TRAFFIC', list: ["signal malfunction", "jackknifed truck", "stalled bus"] },
+    { weight: W.civicWeight, _domain: 'CIVIC', list: ["emergency committee meeting", "association briefing", "public-comment session"] },
+    { weight: W.eventWeight, _domain: 'CIVIC', list: ["email leak", "misfiled document", "missing funds", "staff rumor"] },
+    { weight: W.eventWeight, _domain: 'GENERAL', list: ["forklift near-tip", "minor fender-bender", "lost dog returned", "locked-out worker"] },
+    { weight: W.eventWeight, _domain: 'SAFETY', list: ["porch piracy attempt", "petty theft", "graffiti tagging", "car break-in attempt"] },
+    { weight: W.eventWeight, _domain: 'INFRASTRUCTURE', list: ["water-pressure drop", "pothole eruption", "internet disruption"] },
+    { weight: W.eventWeight, _domain: 'GENERAL', list: ["flash choir", "balloon release", "earthquake rumble", "influencer prank", "drone mistake"] }
   ];
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // ATHLETE LIFESTYLE / INFLUENCE POOLS (NEW - not just sports games)
-  // ═══════════════════════════════════════════════════════════════════════════
+  // Athlete lifestyle pools
   var ATHLETE_IN_SEASON_EVENTS = [
     "youth clinic announced at a local park",
     "foundation fundraiser dinner draws a crowd",
@@ -151,14 +144,14 @@ function worldEventsEngine_(ctx) {
     "community appearance boosts turnout at a local market"
   ];
 
-  // Add lifestyle pool with modest weight, scaled by in-season/off-season
   categories.push({
     weight: W.eventWeight * (IN_SEASON ? 0.9 : 0.7),
+    _domain: 'SPORTS',
     list: IN_SEASON ? ATHLETE_IN_SEASON_EVENTS : ATHLETE_OFF_SEASON_EVENTS
   });
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // HOLIDAY EVENT POOLS
+  // HOLIDAY EVENT POOLS (with domain tags)
   // ═══════════════════════════════════════════════════════════════════════════
   var FESTIVAL_EVENTS = ["parade float breakdown", "crowd surge at barricade", "vendor cart tip-over", "lost child report", "costume malfunction", "balloon escape"];
   var FIREWORKS_EVENTS = ["fireworks debris complaint", "illegal firework confiscation", "sparkler burn incident", "noise complaint surge"];
@@ -185,87 +178,82 @@ function worldEventsEngine_(ctx) {
   var FIRST_FRIDAY_EVENTS = ["gallery overcrowding", "street performer permit issue", "art installation mishap", "wine spill on artwork", "parking garage backup", "food truck line dispute"];
   var CREATION_DAY_EVENTS = ["founders ceremony delay", "heritage walk overcrowding", "history exhibit mishap", "community speech feedback issue"];
 
-  // Canon-safe sports "city texture" (not simulating outcomes)
   var SPORTS_BASE_EVENTS = ["game day traffic surge", "tailgate grill fire", "parking lot fender-bender", "fan celebration spillover"];
-
-  // These only allowed with Maker override (your canon)
   var PLAYOFF_EVENTS = ["playoff watch party overflow", "fan altercation", "scalping bust", "sports bar capacity issue", "honking celebration complaint"];
   var CHAMPIONSHIP_EVENTS = ["championship crowd surge", "victory celebration damage", "championship parade prep", "trophy viewing line chaos", "citywide honking complaint"];
-
   var OPENING_DAY_EVENTS = ["Opening Day parade delay", "first pitch ceremony traffic", "sold-out parking chaos", "tailgate zone overflow"];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // ADD CALENDAR CATEGORIES
+  // ADD CALENDAR CATEGORIES (with _domain tags)
   // ═══════════════════════════════════════════════════════════════════════════
   var holidayWeight = W.eventWeight * 1.5;
 
   if (holiday === "NewYearsEve") {
-    categories.push({ weight: holidayWeight * 2, list: NEW_YEARS_EVE_EVENTS });
-    categories.push({ weight: holidayWeight, list: FIREWORKS_EVENTS });
-    categories.push({ weight: holidayWeight, list: PARTY_EVENTS });
+    categories.push({ weight: holidayWeight * 2, _domain: 'FESTIVAL', list: NEW_YEARS_EVE_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FIREWORKS_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'NIGHTLIFE', list: PARTY_EVENTS });
   }
   if (holiday === "Independence") {
-    categories.push({ weight: holidayWeight * 2, list: INDEPENDENCE_EVENTS });
-    categories.push({ weight: holidayWeight, list: FIREWORKS_EVENTS });
+    categories.push({ weight: holidayWeight * 2, _domain: 'FESTIVAL', list: INDEPENDENCE_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FIREWORKS_EVENTS });
   }
   if (holiday === "Halloween") {
-    categories.push({ weight: holidayWeight * 2, list: HALLOWEEN_EVENTS });
-    categories.push({ weight: holidayWeight, list: PARTY_EVENTS });
+    categories.push({ weight: holidayWeight * 2, _domain: 'FESTIVAL', list: HALLOWEEN_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'NIGHTLIFE', list: PARTY_EVENTS });
   }
-  if (holiday === "Thanksgiving") categories.push({ weight: holidayWeight, list: THANKSGIVING_EVENTS });
-  if (holiday === "Holiday") categories.push({ weight: holidayWeight, list: HOLIDAY_EVENTS });
+  if (holiday === "Thanksgiving") categories.push({ weight: holidayWeight, _domain: 'HOLIDAY', list: THANKSGIVING_EVENTS });
+  if (holiday === "Holiday") categories.push({ weight: holidayWeight, _domain: 'HOLIDAY', list: HOLIDAY_EVENTS });
 
   if (holiday === "LunarNewYear") {
-    categories.push({ weight: holidayWeight * 1.5, list: LUNAR_NEW_YEAR_EVENTS });
-    categories.push({ weight: holidayWeight, list: FESTIVAL_EVENTS });
+    categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: LUNAR_NEW_YEAR_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
   }
   if (holiday === "CincoDeMayo") {
-    categories.push({ weight: holidayWeight * 1.5, list: CINCO_EVENTS });
-    categories.push({ weight: holidayWeight, list: FESTIVAL_EVENTS });
+    categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: CINCO_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
   }
-  if (holiday === "DiaDeMuertos") categories.push({ weight: holidayWeight * 1.5, list: DIA_DE_MUERTOS_EVENTS });
+  if (holiday === "DiaDeMuertos") categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: DIA_DE_MUERTOS_EVENTS });
   if (holiday === "Juneteenth") {
-    categories.push({ weight: holidayWeight * 1.5, list: JUNETEENTH_EVENTS });
-    categories.push({ weight: holidayWeight, list: FESTIVAL_EVENTS });
+    categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: JUNETEENTH_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
   }
   if (holiday === "StPatricksDay") {
-    categories.push({ weight: holidayWeight * 1.5, list: ST_PATRICKS_EVENTS });
-    categories.push({ weight: holidayWeight, list: PARTY_EVENTS });
+    categories.push({ weight: holidayWeight * 1.5, _domain: 'FESTIVAL', list: ST_PATRICKS_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'NIGHTLIFE', list: PARTY_EVENTS });
   }
-  if (holiday === "Easter") categories.push({ weight: holidayWeight, list: EASTER_EVENTS });
-  if (holiday === "EarthDay") categories.push({ weight: holidayWeight, list: EARTH_DAY_EVENTS });
-  if (holiday === "MLKDay") categories.push({ weight: holidayWeight, list: MLK_EVENTS });
-  if (holiday === "MemorialDay" || holiday === "VeteransDay") categories.push({ weight: holidayWeight, list: MEMORIAL_VETERANS_EVENTS });
+  if (holiday === "Easter") categories.push({ weight: holidayWeight, _domain: 'HOLIDAY', list: EASTER_EVENTS });
+  if (holiday === "EarthDay") categories.push({ weight: holidayWeight, _domain: 'CIVIC', list: EARTH_DAY_EVENTS });
+  if (holiday === "MLKDay") categories.push({ weight: holidayWeight, _domain: 'CIVIC', list: MLK_EVENTS });
+  if (holiday === "MemorialDay" || holiday === "VeteransDay") categories.push({ weight: holidayWeight, _domain: 'CIVIC', list: MEMORIAL_VETERANS_EVENTS });
 
   if (holiday === "OaklandPride") {
-    categories.push({ weight: holidayWeight * 2, list: PRIDE_EVENTS });
-    categories.push({ weight: holidayWeight, list: FESTIVAL_EVENTS });
+    categories.push({ weight: holidayWeight * 2, _domain: 'FESTIVAL', list: PRIDE_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
   }
   if (holiday === "ArtSoulFestival") {
-    categories.push({ weight: holidayWeight * 2, list: ART_SOUL_EVENTS });
-    categories.push({ weight: holidayWeight, list: FESTIVAL_EVENTS });
+    categories.push({ weight: holidayWeight * 2, _domain: 'CULTURE', list: ART_SOUL_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
   }
   if (holiday === "OpeningDay") {
-    categories.push({ weight: holidayWeight * 2, list: OPENING_DAY_EVENTS });
-    categories.push({ weight: holidayWeight, list: SPORTS_BASE_EVENTS });
+    categories.push({ weight: holidayWeight * 2, _domain: 'SPORTS', list: OPENING_DAY_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'SPORTS', list: SPORTS_BASE_EVENTS });
   }
 
-  if (isFirstFriday) categories.push({ weight: holidayWeight * 1.5, list: FIRST_FRIDAY_EVENTS });
+  if (isFirstFriday) categories.push({ weight: holidayWeight * 1.5, _domain: 'CULTURE', list: FIRST_FRIDAY_EVENTS });
   if (isCreationDay) {
-    categories.push({ weight: holidayWeight, list: CREATION_DAY_EVENTS });
-    categories.push({ weight: holidayWeight * 0.5, list: FESTIVAL_EVENTS });
+    categories.push({ weight: holidayWeight, _domain: 'CIVIC', list: CREATION_DAY_EVENTS });
+    categories.push({ weight: holidayWeight * 0.5, _domain: 'FESTIVAL', list: FESTIVAL_EVENTS });
   }
 
-  // Sports season: ONLY add "base" texture unless Maker override says playoffs/championship
   if (IN_SEASON) {
-    categories.push({ weight: holidayWeight * 0.9, list: SPORTS_BASE_EVENTS });
+    categories.push({ weight: holidayWeight * 0.9, _domain: 'SPORTS', list: SPORTS_BASE_EVENTS });
   }
   if (allowPlayoffFlavor) {
-    categories.push({ weight: holidayWeight * 1.2, list: PLAYOFF_EVENTS });
+    categories.push({ weight: holidayWeight * 1.2, _domain: 'SPORTS', list: PLAYOFF_EVENTS });
   }
   if (allowChampFlavor) {
-    categories.push({ weight: holidayWeight * 1.6, list: CHAMPIONSHIP_EVENTS });
-    categories.push({ weight: holidayWeight * 1.1, list: PLAYOFF_EVENTS });
+    categories.push({ weight: holidayWeight * 1.6, _domain: 'SPORTS', list: CHAMPIONSHIP_EVENTS });
+    categories.push({ weight: holidayWeight * 1.1, _domain: 'SPORTS', list: PLAYOFF_EVENTS });
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -273,14 +261,12 @@ function worldEventsEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   var baseCount = Math.floor(rng() * 3) + 1;
 
-  // Existing modifiers (using prevChaos/prevEvents rather than stale S.worldEvents)
   if (nightlifeVol >= 7) baseCount++;
   if (prevChaos >= 3) baseCount++;
   if (pattern === "micro-event-wave") baseCount++;
   if (sentiment <= -0.4) baseCount++;
   if (civicLoad === "load-strain") baseCount++;
 
-  // Calendar count modifiers (kept)
   if (holiday === "NewYearsEve") baseCount += 2;
   if (holiday === "OaklandPride" || holiday === "ArtSoulFestival") baseCount += 2;
   if (holiday === "Independence" || holiday === "Halloween") baseCount++;
@@ -289,48 +275,69 @@ function worldEventsEngine_(ctx) {
   if (isFirstFriday) baseCount++;
   if (holiday === "OpeningDay") baseCount++;
 
-  // Quiet holidays reduce count
   if (holiday === "Thanksgiving" || holiday === "Easter") baseCount--;
   if (holiday === "MothersDay" || holiday === "FathersDay") baseCount--;
 
-  // Clamp pre-suppression
   if (baseCount > 6) baseCount = 6;
   if (baseCount < 1) baseCount = 1;
 
-  // Apply recovery suppression to count (this is the big realism fix)
-  // Heavy recovery makes count noticeably smaller.
   var count = Math.max(1, Math.round(baseCount * eventSupp));
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // GENERATE EVENTS
+  // GENERATE EVENTS (with domain gating via domainAllowed_)
   // ═══════════════════════════════════════════════════════════════════════════
   var results = [];
   var used = Object.create(null);
   var healthUsed = false;
 
+  // Build filtered category list (remove suppressed domains upfront)
+  var allowedCategories = [];
+  for (var ac = 0; ac < categories.length; ac++) {
+    var cat = categories[ac];
+    var catDomain = cat._domain || 'GENERAL';
+    // Check if domain is allowed (use domainAllowed_ if available)
+    if (typeof domainAllowed_ === 'function' && !domainAllowed_(ctx, catDomain)) {
+      continue; // Skip suppressed domain categories
+    }
+    allowedCategories.push(cat);
+  }
+
+  // Fallback if all categories suppressed
+  if (allowedCategories.length === 0) {
+    allowedCategories = categories.filter(function(c) { return c._domain === 'GENERAL'; });
+    if (allowedCategories.length === 0) allowedCategories = categories.slice(0, 3);
+  }
+
   for (var i = 0; i < count; i++) {
     var view = [];
-    for (var v = 0; v < categories.length; v++) {
-      var c = categories[v];
+    for (var v = 0; v < allowedCategories.length; v++) {
+      var c = allowedCategories[v];
       var w = c.weight;
 
-      // dampen repeated health flavor
       if (c._health && healthUsed) w = w * 0.35;
-
-      // during recovery, dampen health/crisis vibes slightly
       if (recoveryLevel === 'heavy' && c._health) w = w * 0.6;
 
-      view.push({ weight: w, list: c.list, _health: !!c._health });
+      view.push({ weight: w, list: c.list, _health: !!c._health, _domain: c._domain || 'GENERAL' });
     }
 
-    var list = pickWeightedSafe_(view, rng);
+    var picked = pickWeightedSafe_(view, rng);
+    if (!picked) continue;
+
+    var list = picked.list;
+    var domain = picked._domain || 'GENERAL';
 
     // Avoid repeats
     var allUsed = true;
     for (var a = 0; a < list.length; a++) {
       if (!used[list[a]]) { allUsed = false; break; }
     }
-    if (allUsed) list = pickWeightedSafe_(categories, rng);
+    if (allUsed) {
+      picked = pickWeightedSafe_(allowedCategories, rng);
+      if (picked) {
+        list = picked.list;
+        domain = picked._domain || 'GENERAL';
+      }
+    }
 
     var choice = list[Math.floor(rng() * list.length)];
     var spins = 0;
@@ -339,16 +346,13 @@ function worldEventsEngine_(ctx) {
     }
     used[choice] = true;
 
-    // flag health used
     if (!healthUsed) {
       for (var h = 0; h < view.length; h++) {
         if (view[h].list === list && view[h]._health) { healthUsed = true; break; }
       }
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // SEVERITY (recovery-aware + calendar-aware)
-    // ─────────────────────────────────────────────────────────────────────────
+    // Severity calculation
     var sevScore = 0;
     if (prevChaos >= 3) sevScore += 2;
     if (shock === "shock-flag") sevScore += 3;
@@ -362,26 +366,24 @@ function worldEventsEngine_(ctx) {
     if (holiday === "Thanksgiving" || holiday === "Easter") sevScore -= 1;
     if (holiday === "MothersDay" || holiday === "FathersDay") sevScore -= 1;
 
-    // Recovery softens severity potential
-    if (eventSupp <= 0.75) sevScore -= 1; // moderate recovery
-    if (eventSupp <= 0.55) sevScore -= 2; // heavy recovery
+    if (eventSupp <= 0.75) sevScore -= 1;
+    if (eventSupp <= 0.55) sevScore -= 2;
 
     var severity = (sevScore >= 3) ? "medium" : "low";
     if (sevScore >= 5) severity = "high";
-    if (severity === "high" && eventSupp <= 0.55) severity = "medium"; // clamp highs during heavy recovery
+    if (severity === "high" && eventSupp <= 0.55) severity = "medium";
 
-    results.push({ description: choice, severity: severity });
+    results.push({ description: choice, severity: severity, domain: domain });
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // WRITE OUTPUT (APPEND-SAFE)
+  // WRITE OUTPUT (APPEND-SAFE with real domains)
   // ═══════════════════════════════════════════════════════════════════════════
-  // If other generators already wrote events this cycle, we append rather than overwrite.
   S.worldEvents = Array.isArray(S.worldEvents) ? S.worldEvents : [];
   for (var r = 0; r < results.length; r++) {
     S.worldEvents.push({
       cycle: cycle,
-      domain: "WORLD",
+      domain: results[r].domain,
       subdomain: "texture",
       description: results[r].description,
       severity: results[r].severity,

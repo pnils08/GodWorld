@@ -150,8 +150,10 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase3-CrisisBuckets', function() { generateCrisisBuckets_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
-  // PHASE 4: WORLD EVENTS
+  // PHASE 4: RECOVERY + WORLD EVENTS
   // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase4-CycleRecovery', function() { applyCycleRecovery_(ctx); });
+  safePhaseCall_(ctx, 'Phase4-DomainCooldowns', function() { applyDomainCooldowns_(ctx); });
   safePhaseCall_(ctx, 'Phase4-WorldEvents', function() { worldEventsEngine_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
@@ -228,9 +230,6 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
-
-  safePhaseCall_(ctx, 'Phase8-CycleRecovery', function() { applyCycleRecovery_(ctx); });
-  safePhaseCall_(ctx, 'Phase8-DomainCooldowns', function() { applyDomainCooldowns_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
 
   safePhaseCall_(ctx, 'Phase8-ChicagoCitizens', function() { generateChicagoCitizens_(ctx); });

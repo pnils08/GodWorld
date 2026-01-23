@@ -107,3 +107,45 @@ function domainAllowed_(ctx, domain) {
   const d = domain.toString();
   return !(sup[d] || sup[d.toUpperCase()] || sup[d.toLowerCase()]);
 }
+
+/**
+ * ============================================================================
+ * DOMAIN NORMALIZATION (v2.13)
+ * ============================================================================
+ * Normalizes domain strings to consistent Title Case for clean output.
+ *
+ * Usage:
+ *   normalizeDomain_('HEALTH') => 'Health'
+ *   normalizeDomain_('safety') => 'Safety'
+ *   normalizeDomain_('ARTS') => 'Culture' (mapped alias)
+ */
+function normalizeDomain_(d) {
+  if (!d) return 'General';
+  const s = d.toString().trim();
+  const up = s.toUpperCase();
+
+  // Known domain mappings (uppercase key → Title Case value)
+  const map = {
+    'HEALTH': 'Health',
+    'SAFETY': 'Safety',
+    'INFRASTRUCTURE': 'Infrastructure',
+    'WEATHER': 'Weather',
+    'SPORTS': 'Sports',
+    'CIVIC': 'Civic',
+    'CULTURE': 'Culture',
+    'COMMUNITY': 'Community',
+    'BUSINESS': 'Business',
+    'FESTIVAL': 'Festival',
+    'HOLIDAY': 'Holiday',
+    'TECHNOLOGY': 'Technology',
+    'ENVIRONMENT': 'Environment',
+    'NIGHTLIFE': 'Nightlife',
+    'ARTS': 'Culture',
+    'CELEBRITY': 'Celebrity',
+    'EDUCATION': 'Education',
+    'TRAFFIC': 'Traffic',
+    'GENERAL': 'General'
+  };
+
+  return map[up] || (up[0] + up.slice(1).toLowerCase());
+}

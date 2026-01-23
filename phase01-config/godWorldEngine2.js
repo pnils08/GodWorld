@@ -203,6 +203,7 @@ function runWorldCycle() {
 
   safePhaseCall_(ctx, 'Phase6-ArcLifecycle', function() { processArcLifecycle_(ctx); });
   safePhaseCall_(ctx, 'Phase6-StorylineStatus', function() { updateStorylineStatus_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-Textures', function() { textureTriggerEngine_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 7: EVENING + MEDIA SYSTEMS
@@ -240,6 +241,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase9-DigestSummary', function() { applyCompressedDigestSummary_(ctx); });
   safePhaseCall_(ctx, 'Phase9-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });
+  safePhaseCall_(ctx, 'Phase9-FinalizeCycleState', function() { finalizeCycleState_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 10: PERSISTENCE (write to sheets)

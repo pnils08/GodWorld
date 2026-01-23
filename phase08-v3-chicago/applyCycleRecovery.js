@@ -1,229 +1,324 @@
 /**
  * ============================================================================
- * applyCycleRecovery_ v2.2
+ * applyCycleRecovery_ v2.3
  * ============================================================================
  *
- * If last cycle was heavy, enforce a recovery window.
- * Now calendar-aware: celebration days tolerate more chaos, quiet holidays
- * enforce stricter recovery.
+ * v2.3 Enhancements:
+ * - TRUE recovery window (persistence): heavy cycles enforce multi-cycle recovery
+ * - Momentum / decay: heavy → moderate → light → none unless re-triggered
+ * - Minimum duration: prevents snap-back after overload
+ * - Uses prior recovery state (no oscillation)
+ * - Sports handling: supports override states, but primarily buckets into in-season/off-season
  *
- * v2.2 Enhancements:
- * - Major celebration days raise recovery thresholds
- * - Quiet family holidays lower thresholds for calm
- * - Championship/playoffs tolerate more fan energy
- * - First Friday/Creation Day get slight tolerance boost
- * - Calendar context in output
- * - Aligned with GodWorld Calendar v1.0
+ * Outputs (adds):
+ * - recoveryStartCycle, recoveryWindow, recoveryDuration
+ * - recoveryState: { startCycle, window, duration, lastLevel }
  *
- * Previous features (v2.1):
- * - Overload score calculation
- * - Gradual recovery levels (light, moderate, heavy)
- * - Suppression multipliers
- * 
  * ============================================================================
  */
 
 function applyCycleRecovery_(ctx) {
-  const S = ctx.summary;
+  const S = ctx.summary || (ctx.summary = {});
+
+  // --- Cycle id (consistent across your other scripts)
+  const cycle = S.absoluteCycle || S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // v2.2: CALENDAR CONTEXT
+  // CALENDAR CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
   const holiday = S.holiday || 'none';
   const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  const isFirstFriday = !!S.isFirstFriday;
+  const isCreationDay = !!S.isCreationDay;
+
+  const sportsSeason = (S.sportsSeason || 'off-season').toString().trim().toLowerCase();
+
+  // Bucket sports into in-season/off-season for recovery realism
+  const IN_SEASON_STATES = ['spring-training', 'early-season', 'mid-season', 'late-season', 'regular-season'];
+  const HIGH_INTENSITY_STATES = ['playoffs', 'post-season', 'championship'];
+  const isInSeason = IN_SEASON_STATES.includes(sportsSeason) || HIGH_INTENSITY_STATES.includes(sportsSeason);
+  const isHighIntensitySports = HIGH_INTENSITY_STATES.includes(sportsSeason);
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // v2.2: CALENDAR-BASED THRESHOLD MODIFIERS
+  // v2.3: LOAD PREVIOUS RECOVERY STATE (persistence)
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  // Start with base thresholds
+  // Prefer a dedicated state object if present; fallback to older fields.
+  const prev = S.recoveryState || {};
+  const prevStart = Number(prev.startCycle || S.recoveryStartCycle || 0) || 0;
+  const prevWindow = Number(prev.window || S.recoveryWindow || 0) || 0;
+  const prevDuration = Number(prev.duration || S.recoveryDuration || 0) || 0;
+  const prevLevel = (prev.lastLevel || S.recoveryLevel || 'none').toString();
+
+  const prevActive = prevStart > 0 && prevWindow > 0 && (cycle - prevStart) < prevWindow;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CALENDAR-BASED THRESHOLD MODIFIERS (as in v2.2, but tuned)
+  // ═══════════════════════════════════════════════════════════════════════════
   let lightThreshold = 3;
   let moderateThreshold = 6;
   let heavyThreshold = 10;
 
-  // Major celebration days → can handle more chaos
-  const bigCelebrations = ['OaklandPride', 'ArtSoulFestival', 'NewYearsEve', 'Independence'];
-  if (bigCelebrations.includes(holiday)) {
+  const bigCelebrations = ['oaklandpride', 'artsoulfestival', 'newyearseve', 'independence'];
+  if (bigCelebrations.includes(holiday.toLowerCase())) {
     lightThreshold += 3;
     moderateThreshold += 4;
     heavyThreshold += 5;
   }
 
-  // Oakland-priority holidays → tolerate more activity
-  if (holidayPriority === 'oakland' && !bigCelebrations.includes(holiday)) {
+  if (holidayPriority === 'oakland' && !bigCelebrations.includes(holiday.toLowerCase())) {
     lightThreshold += 2;
     moderateThreshold += 2;
     heavyThreshold += 3;
   }
 
-  // Cultural festivals → moderate tolerance boost
-  const culturalFestivals = ['LunarNewYear', 'CincoDeMayo', 'DiaDeMuertos', 'Juneteenth'];
-  if (culturalFestivals.includes(holiday)) {
+  const culturalFestivals = ['lunarnewyear', 'cincodemayo', 'diademuertos', 'juneteenth'];
+  if (culturalFestivals.includes(holiday.toLowerCase())) {
     lightThreshold += 2;
     moderateThreshold += 2;
     heavyThreshold += 3;
   }
 
-  // Party holidays → tolerate nightlife chaos
-  if (holiday === 'StPatricksDay' || holiday === 'Halloween') {
+  if (holiday.toLowerCase() === 'stpatricksday' || holiday.toLowerCase() === 'halloween') {
     lightThreshold += 2;
     moderateThreshold += 2;
     heavyThreshold += 2;
   }
 
-  // Quiet family holidays → want peace, stricter recovery
-  const quietHolidays = ['Thanksgiving', 'Easter', 'MothersDay', 'FathersDay'];
-  if (quietHolidays.includes(holiday)) {
+  const quietHolidays = ['thanksgiving', 'easter', 'mothersday', 'fathersday'];
+  if (quietHolidays.includes(holiday.toLowerCase())) {
     lightThreshold -= 1;
     moderateThreshold -= 1;
     heavyThreshold -= 2;
   }
 
-  // Winter holiday season → moderate tolerance
-  if (holiday === 'Holiday') {
+  if (holiday.toLowerCase() === 'holiday') {
     lightThreshold += 1;
     moderateThreshold += 1;
     heavyThreshold += 1;
   }
 
-  // Championship → fans can handle excitement
-  if (sportsSeason === 'championship') {
-    lightThreshold += 3;
-    moderateThreshold += 4;
-    heavyThreshold += 4;
-  } else if (sportsSeason === 'playoffs') {
+  // Sports tolerance (primarily in-season vs off-season, plus your override support)
+  if (isHighIntensitySports) {
     lightThreshold += 2;
-    moderateThreshold += 2;
+    moderateThreshold += 3;
     heavyThreshold += 3;
-  } else if (sportsSeason === 'late-season') {
+  } else if (isInSeason) {
     lightThreshold += 1;
     moderateThreshold += 1;
     heavyThreshold += 1;
+  } else {
+    // Off-season: city can "feel calmer," so it recovers with slightly lower tolerance
+    lightThreshold -= 0;
+    moderateThreshold -= 0;
+    heavyThreshold -= 0;
   }
 
-  // Opening Day → special tolerance
-  if (holiday === 'OpeningDay') {
+  if (holiday.toLowerCase() === 'openingday') {
     lightThreshold += 2;
     moderateThreshold += 3;
     heavyThreshold += 3;
   }
 
-  // First Friday → arts crowd tolerates creative chaos
   if (isFirstFriday) {
     lightThreshold += 1;
     moderateThreshold += 2;
     heavyThreshold += 2;
   }
 
-  // Creation Day → community pride tolerates activity
   if (isCreationDay) {
     lightThreshold += 1;
     moderateThreshold += 1;
     heavyThreshold += 2;
   }
 
-  // Ensure thresholds don't go below minimums
   lightThreshold = Math.max(2, lightThreshold);
   moderateThreshold = Math.max(4, moderateThreshold);
   heavyThreshold = Math.max(7, heavyThreshold);
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CALCULATE OVERLOAD SCORE (preserved from v2.1)
+  // CALCULATE OVERLOAD SCORE (same spirit as v2.2, slightly hardened)
   // ═══════════════════════════════════════════════════════════════════════════
   let overloadScore = 0;
 
-  // Texture triggers
   const textureCount = S.textureTriggers ? S.textureTriggers.length : 0;
   if (textureCount > 6) overloadScore += 3;
   else if (textureCount > 4) overloadScore += 2;
   else if (textureCount > 2) overloadScore += 1;
 
-  // Story hooks
   const hookCount = S.storyHooks ? S.storyHooks.length : 0;
   if (hookCount > 7) overloadScore += 3;
   else if (hookCount > 5) overloadScore += 2;
   else if (hookCount > 3) overloadScore += 1;
 
-  // Shock flag (string check)
   if (S.shockFlag === 'shock-flag') overloadScore += 3;
+  if (S.shockFlag === 'shock-fading') overloadScore += 1;
 
-  // World events
   const eventCount = S.worldEvents ? S.worldEvents.length : 0;
   if (eventCount > 10) overloadScore += 3;
   else if (eventCount > 6) overloadScore += 2;
   else if (eventCount > 4) overloadScore += 1;
 
-  // Civic load (string check)
   if (S.civicLoad === 'load-strain') overloadScore += 3;
   else if (S.civicLoad === 'minor-variance') overloadScore += 1;
 
-  // Civic load score (numeric)
-  const civicScore = S.civicLoadScore || 0;
+  const civicScore = Number(S.civicLoadScore || 0);
   if (civicScore >= 15) overloadScore += 2;
   else if (civicScore >= 10) overloadScore += 1;
 
-  // Economic stress
-  const econMood = S.economicMood || 50;
+  const econMood = Number(S.economicMood || 50);
   if (econMood <= 25) overloadScore += 2;
   else if (econMood <= 35) overloadScore += 1;
 
-  // Weather discomfort
   const weatherMood = S.weatherMood || {};
-  if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.25) {
-    overloadScore += 1;
-  }
+  if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.25) overloadScore += 1;
 
-  // Active arcs at peak
   const arcs = S.eventArcs || [];
   const peakArcs = arcs.filter(a => a && a.phase === 'peak').length;
   if (peakArcs >= 3) overloadScore += 2;
   else if (peakArcs >= 2) overloadScore += 1;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // DETERMINE RECOVERY LEVEL (using calendar-adjusted thresholds)
+  // DETERMINE "TRIGGERED" RECOVERY LEVEL (based on today's overload)
   // ═══════════════════════════════════════════════════════════════════════════
-  let recoveryLevel = 'none';
-  if (overloadScore >= heavyThreshold) recoveryLevel = 'heavy';
-  else if (overloadScore >= moderateThreshold) recoveryLevel = 'moderate';
-  else if (overloadScore >= lightThreshold) recoveryLevel = 'light';
+  let triggeredLevel = 'none';
+  if (overloadScore >= heavyThreshold) triggeredLevel = 'heavy';
+  else if (overloadScore >= moderateThreshold) triggeredLevel = 'moderate';
+  else if (overloadScore >= lightThreshold) triggeredLevel = 'light';
 
-  // Set recovery mode
-  S.recoveryMode = recoveryLevel !== 'none';
-  S.recoveryLevel = recoveryLevel;
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.3: APPLY PERSISTENCE + DECAY (the missing realism)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Rules:
+  // - If heavy triggers: start/reset a window (default 3 cycles total including current)
+  // - If moderate triggers: window 2 cycles
+  // - If light triggers: window 1 cycle
+  // - If already in a window: decay one step per cycle unless re-triggered higher
+  // - If re-triggered higher during window: bump up and extend if needed
+
+  function stepDown(level) {
+    if (level === 'heavy') return 'moderate';
+    if (level === 'moderate') return 'light';
+    if (level === 'light') return 'none';
+    return 'none';
+  }
+
+  function maxLevel(a, b) {
+    const rank = { none: 0, light: 1, moderate: 2, heavy: 3 };
+    return (rank[a] >= rank[b]) ? a : b;
+  }
+
+  let finalLevel = triggeredLevel;
+  let startCycle = prevStart;
+  let window = prevWindow;
+  let duration = prevDuration;
+
+  if (triggeredLevel === 'heavy') {
+    startCycle = cycle;
+    window = 3; // heavy: enforce 3-cycle recovery window
+    duration = 0;
+    finalLevel = 'heavy';
+  } else if (triggeredLevel === 'moderate') {
+    // If already heavy window exists, don't reduce instantly; otherwise start 2-cycle window
+    if (!prevActive) {
+      startCycle = cycle;
+      window = 2;
+      duration = 0;
+      finalLevel = 'moderate';
+    } else {
+      // If currently in a window, keep at least the decayed level, and allow bump
+      const decayed = stepDown(prevLevel);
+      finalLevel = maxLevel(triggeredLevel, decayed);
+      startCycle = prevStart;
+      window = prevWindow;
+      duration = (cycle - prevStart);
+    }
+  } else if (triggeredLevel === 'light') {
+    if (!prevActive) {
+      startCycle = cycle;
+      window = 1;
+      duration = 0;
+      finalLevel = 'light';
+    } else {
+      const decayed = stepDown(prevLevel);
+      finalLevel = maxLevel(triggeredLevel, decayed);
+      startCycle = prevStart;
+      window = prevWindow;
+      duration = (cycle - prevStart);
+    }
+  } else {
+    // triggered none
+    if (prevActive) {
+      // Continue decaying until window ends
+      const decayed = stepDown(prevLevel);
+      finalLevel = decayed;
+      startCycle = prevStart;
+      window = prevWindow;
+      duration = (cycle - prevStart);
+      // If decay reaches none early, allow exit early
+      if (finalLevel === 'none') {
+        startCycle = 0;
+        window = 0;
+        duration = 0;
+      }
+    } else {
+      finalLevel = 'none';
+      startCycle = 0;
+      window = 0;
+      duration = 0;
+    }
+  }
+
+  // Extend window if a higher trigger happens mid-window (rare but useful)
+  if (prevActive) {
+    if (triggeredLevel === 'heavy') window = 3;
+    else if (triggeredLevel === 'moderate') window = Math.max(window, 2);
+    else if (triggeredLevel === 'light') window = Math.max(window, 1);
+  }
+
+  // Recompute duration if active
+  if (startCycle > 0 && window > 0) duration = Math.max(0, cycle - startCycle);
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // APPLY SUPPRESSION BASED ON FINAL (PERSISTENT) RECOVERY LEVEL
+  // ═══════════════════════════════════════════════════════════════════════════
+  S.recoveryMode = finalLevel !== 'none';
+  S.recoveryLevel = finalLevel;
   S.overloadScore = overloadScore;
 
-  // v2.2: Store thresholds for debugging
-  S.recoveryThresholds = {
-    light: lightThreshold,
-    moderate: moderateThreshold,
-    heavy: heavyThreshold
+  // Persisted state (v2.3)
+  S.recoveryStartCycle = startCycle;
+  S.recoveryWindow = window;
+  S.recoveryDuration = duration;
+  S.recoveryState = {
+    startCycle: startCycle,
+    window: window,
+    duration: duration,
+    lastLevel: finalLevel
   };
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // APPLY SUPPRESSION BASED ON RECOVERY LEVEL
-  // ═══════════════════════════════════════════════════════════════════════════
-  if (recoveryLevel === 'heavy') {
+  // Thresholds for debugging
+  S.recoveryThresholds = { light: lightThreshold, moderate: moderateThreshold, heavy: heavyThreshold };
+
+  // Suppression table (unchanged behavior, but now applied via persistent finalLevel)
+  if (finalLevel === 'heavy') {
     S.suppressEvents = true;
     S.suppressHooks = true;
     S.suppressTextures = true;
-    S.eventSuppression = 0.5;  // 50% event reduction
+    S.eventSuppression = 0.5;
     S.hookSuppression = 0.5;
     S.textureSuppression = 0.6;
-  } else if (recoveryLevel === 'moderate') {
+  } else if (finalLevel === 'moderate') {
     S.suppressEvents = false;
     S.suppressHooks = true;
     S.suppressTextures = true;
-    S.eventSuppression = 0.75; // 25% event reduction
+    S.eventSuppression = 0.75;
     S.hookSuppression = 0.6;
     S.textureSuppression = 0.7;
-  } else if (recoveryLevel === 'light') {
+  } else if (finalLevel === 'light') {
     S.suppressEvents = false;
     S.suppressHooks = false;
     S.suppressTextures = true;
-    S.eventSuppression = 0.9;  // 10% event reduction
+    S.eventSuppression = 0.9;
     S.hookSuppression = 0.85;
     S.textureSuppression = 0.8;
   } else {
@@ -235,59 +330,16 @@ function applyCycleRecovery_(ctx) {
     S.textureSuppression = 1.0;
   }
 
-  // v2.2: Calendar context for debugging
+  // Calendar context for debugging (v2.3)
   S.recoveryCalendarContext = {
     holiday: holiday,
     holidayPriority: holidayPriority,
     isFirstFriday: isFirstFriday,
     isCreationDay: isCreationDay,
     sportsSeason: sportsSeason,
-    thresholdAdjustment: heavyThreshold - 10 // How much we raised/lowered from default
+    sportsBucket: isHighIntensitySports ? 'high-intensity' : (isInSeason ? 'in-season' : 'off-season'),
+    thresholdAdjustment: (heavyThreshold - 10)
   };
 
   ctx.summary = S;
 }
-
-
-/**
- * ============================================================================
- * CYCLE RECOVERY REFERENCE v2.2
- * ============================================================================
- * 
- * BASE THRESHOLDS:
- * - Light: 3
- * - Moderate: 6
- * - Heavy: 10
- * 
- * CALENDAR THRESHOLD ADJUSTMENTS (v2.2):
- * 
- * | Context | Light | Moderate | Heavy | Effect |
- * |---------|-------|----------|-------|--------|
- * | Pride/ArtSoul/NYE/July4 | +3 | +4 | +5 | Celebration tolerance |
- * | Oakland priority holidays | +2 | +2 | +3 | Local pride tolerance |
- * | Cultural festivals | +2 | +2 | +3 | Cultural tolerance |
- * | StPatricksDay/Halloween | +2 | +2 | +2 | Party tolerance |
- * | Thanksgiving/Easter/Parents | -1 | -1 | -2 | Quiet enforcement |
- * | Holiday (winter) | +1 | +1 | +1 | Slight tolerance |
- * | Championship | +3 | +4 | +4 | Fan energy tolerance |
- * | Playoffs | +2 | +2 | +3 | Sports tolerance |
- * | Late-season | +1 | +1 | +1 | Slight tolerance |
- * | Opening Day | +2 | +3 | +3 | Baseball tolerance |
- * | First Friday | +1 | +2 | +2 | Arts tolerance |
- * | Creation Day | +1 | +1 | +2 | Community tolerance |
- * 
- * EXAMPLE EFFECTIVE THRESHOLDS:
- * - Oakland Pride: Light=6, Moderate=10, Heavy=15
- * - Thanksgiving: Light=2, Moderate=5, Heavy=8
- * - Championship during Pride: Light=9, Moderate=14, Heavy=19
- * - Regular day: Light=3, Moderate=6, Heavy=10
- * 
- * OUTPUT:
- * - recoveryMode: boolean
- * - recoveryLevel: none/light/moderate/heavy
- * - overloadScore: number
- * - recoveryThresholds: {light, moderate, heavy}
- * - recoveryCalendarContext: {holiday, holidayPriority, isFirstFriday, isCreationDay, sportsSeason, thresholdAdjustment}
- * 
- * ============================================================================
- */

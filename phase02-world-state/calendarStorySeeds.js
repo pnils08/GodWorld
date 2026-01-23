@@ -1,19 +1,25 @@
 /**
  * ============================================================================
- * applySeasonalStorySeeds_ v2.2
+ * applySeasonalStorySeeds_ v2.3
  * ============================================================================
- * 
+ *
  * Generates seasonal story seeds with domain tagging.
  * Aligned with GodWorld Calendar v1.0 and getSimHoliday_ v2.3.
- * 
- * Enhancements:
+ *
+ * v2.3 Fixes:
+ * - Removed WinterSolstice (calendar never emits it)
+ * - Fixed weatherMood check: 'energetic' → 'energized'
+ * - Removed sportsSeason-based seeds (user controls sports sim)
+ * - Fixed seed object: 'seed' → 'text' (downstream compatibility)
+ *
+ * v2.2 Enhancements:
  * - All 30+ holidays from cycle-based calendar
  * - First Friday story seeds
  * - Creation Day special seeds
  * - Oakland-specific and cultural holiday seeds
  * - Holiday priority awareness
  * - Neighborhood-specific seeds where applicable
- * 
+ *
  * ============================================================================
  */
 
@@ -28,7 +34,6 @@ function applySeasonalStorySeeds_(ctx) {
   const events = S.worldEvents || [];
   const W = S.weather || { type: "clear", impact: 1 };
   const weatherMood = S.weatherMood || {};
-  const sports = S.sportsSeason;
   const D = S.cityDynamics || {};
   const econMood = S.economicMood || 50;
   const isFirstFriday = S.isFirstFriday || false;
@@ -36,10 +41,10 @@ function applySeasonalStorySeeds_(ctx) {
   const creationDayAnniversary = S.creationDayAnniversary;
   const cycleOfYear = S.cycleOfYear || 1;
 
-  // Helper to create seed object
-  const seed = (text, domain, neighborhood) => ({ 
-    seed: text, 
-    domain: domain || 'GENERAL', 
+  // Helper to create seed object (v2.3: use 'text' for downstream compatibility)
+  const seed = (text, domain, neighborhood) => ({
+    text: text,
+    domain: domain || 'GENERAL',
     source: 'seasonal',
     neighborhood: neighborhood || null
   });
@@ -381,9 +386,7 @@ function applySeasonalStorySeeds_(ctx) {
   if (holiday === "FallEquinox") {
     seeds.push(seed("Fall equinox signals seasonal shift", "ENVIRONMENT"));
   }
-  if (holiday === "WinterSolstice") {
-    seeds.push(seed("Winter solstice marks darkest day", "ENVIRONMENT"));
-  }
+  // v2.3: Removed WinterSolstice (calendar never emits it)
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WEATHER
@@ -406,8 +409,8 @@ function applySeasonalStorySeeds_(ctx) {
   if (weatherMood.primaryMood === 'cozy') {
     seeds.push(seed("Cozy weather encourages indoor gatherings", "COMMUNITY"));
   }
-  if (weatherMood.primaryMood === 'energetic') {
-    seeds.push(seed("Energetic weather mood lifts public activity", "COMMUNITY"));
+  if (weatherMood.primaryMood === 'energized') {  // v2.3: Fixed - was 'energetic'
+    seeds.push(seed("Energized weather mood lifts public activity", "COMMUNITY"));
   }
   if (weatherMood.conflictPotential && weatherMood.conflictPotential > 0.3) {
     seeds.push(seed("Weather conditions raise community tension", "SAFETY"));
@@ -443,37 +446,8 @@ function applySeasonalStorySeeds_(ctx) {
     seeds.push(seed(`Season-context: ${desc}`, domain));
   });
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // SPORTS SEASON
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  if (sports === "spring-training") {
-    seeds.push(seed("Spring training sparks baseball anticipation", "SPORTS"));
-  }
-  if (sports === "early-season" || sports === "regular-season") {
-    seeds.push(seed("Regular season games shape evening routines", "SPORTS"));
-  }
-  if (sports === "mid-season") {
-    seeds.push(seed("Mid-season standings fuel fan debates", "SPORTS"));
-  }
-  if (sports === "late-season") {
-    seeds.push(seed("Late-season intensity grips the fanbase", "SPORTS"));
-  }
-  if (sports === "playoffs" || sports === "post-season") {
-    seeds.push(
-      seed("Playoff fever spreads through the city", "SPORTS"),
-      seed("Watch parties fill bars and living rooms", "COMMUNITY")
-    );
-  }
-  if (sports === "championship") {
-    seeds.push(
-      seed("Championship stakes consume city attention", "SPORTS"),
-      seed("Historic moment potential hangs in the air", "CULTURE")
-    );
-  }
-  if (sports === "off-season") {
-    seeds.push(seed("Off-season trade rumors fuel speculation", "SPORTS"));
-  }
+  // v2.3: Removed SPORTS SEASON section (user controls sports sim)
+  // OpeningDay is kept as a calendar holiday above
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CITY DYNAMICS
@@ -490,7 +464,7 @@ function applySeasonalStorySeeds_(ctx) {
   // DEDUPLICATE AND ASSIGN
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const uniqueSeeds = [...new Map(seeds.map(s => [s.seed, s])).values()];
+  const uniqueSeeds = [...new Map(seeds.map(s => [s.text, s])).values()];  // v2.3: use .text
 
   S.seasonalStorySeeds = uniqueSeeds;
   ctx.summary = S;

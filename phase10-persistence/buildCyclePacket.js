@@ -1,17 +1,23 @@
 /**
  * ============================================================================
- * buildCyclePacket_ v3.6 — CLEAN 3-COLUMN OUTPUT
+ * buildCyclePacket_ v3.7 — RAW SNAPSHOT OUTPUT
  * ============================================================================
- * 
+ *
  * Complete cycle snapshot for narrative review.
- * 
+ *
+ * v3.7 Changes:
+ * - REMOVED: Story Hooks section (packet is raw snapshot, not story seeding)
+ * - REMOVED: Story Seeds section (same reason)
+ * - MOVED: Chicago Satellite to end of packet (before footer)
+ * - Kept 3-column output unchanged
+ *
  * v3.6 Changes:
  * - FIXED: Output only 3 columns (Timestamp, Cycle, PacketText)
  * - REMOVED: All sportsSeason references (user controls sports simulations)
  * - REMOVED: Redundant sheet columns (data is in PacketText)
  * - KEPT: Civic status section in packet text
  * - ES5 compatible
- * 
+ *
  * ============================================================================
  */
 
@@ -23,8 +29,6 @@ function buildCyclePacket_(ctx) {
   var pop = S.worldPopulation || {};
   var arcs = S.eventArcs || [];
   var events = S.worldEvents || [];
-  var hooks = S.storyHooks || [];
-  var seeds = S.storySeeds || [];
   var textures = S.textureTriggers || [];
   var domains = S.domainPresence || {};
   var chicago = S.chicagoFeed || [];
@@ -240,45 +244,6 @@ function buildCyclePacket_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════
-  // STORY HOOKS (priority 2+)
-  // ═══════════════════════════════════════════════════════════
-  var importantHooks = [];
-  for (var hi = 0; hi < hooks.length; hi++) {
-    if (hooks[hi].priority >= 2) importantHooks.push(hooks[hi]);
-  }
-  
-  if (importantHooks.length > 0) {
-    lines.push('--- STORY HOOKS (priority 2+) ---');
-    for (var hj = 0; hj < Math.min(importantHooks.length, 6); hj++) {
-      var h = importantHooks[hj];
-      var hnh = h.neighborhood || 'city-wide';
-      var desk = h.suggestedDesks ? ' → ' + h.suggestedDesks : '';
-      var hookType = h.hookType ? ' [' + h.hookType + ']' : '';
-      lines.push('- [P' + h.priority + '] (' + h.domain + ' @ ' + hnh + ')' + hookType + desk);
-      lines.push('  ' + h.text);
-    }
-    lines.push('');
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // STORY SEEDS (priority 2+)
-  // ═══════════════════════════════════════════════════════════
-  var importantSeeds = [];
-  for (var si = 0; si < seeds.length; si++) {
-    if (seeds[si].priority >= 2) importantSeeds.push(seeds[si]);
-  }
-  
-  if (importantSeeds.length > 0) {
-    lines.push('--- STORY SEEDS (priority 2+) ---');
-    for (var sj = 0; sj < Math.min(importantSeeds.length, 6); sj++) {
-      var s = importantSeeds[sj];
-      var snh = s.neighborhood || '';
-      lines.push('- [P' + s.priority + '] ' + (snh ? snh + ': ' : '') + s.text);
-    }
-    lines.push('');
-  }
-
-  // ═══════════════════════════════════════════════════════════
   // TEXTURE TRIGGERS (high intensity)
   // ═══════════════════════════════════════════════════════════
   var importantTextures = [];
@@ -295,30 +260,6 @@ function buildCyclePacket_(ctx) {
       var tnh = t.neighborhood || 'city-wide';
       lines.push('- [' + t.intensity + '] ' + t.textureKey + ' @ ' + tnh + ': ' + t.reason);
     }
-    lines.push('');
-  }
-
-  // ═══════════════════════════════════════════════════════════
-  // CHICAGO SATELLITE
-  // ═══════════════════════════════════════════════════════════
-  if (chicago.length > 0) {
-    var C = chicago[0];
-    lines.push('--- CHICAGO SATELLITE ---');
-    lines.push('CycleRef: Y' + (C.godWorldYear || cal.godWorldYear) + 'C' + (C.cycleOfYear || cal.cycleOfYear));
-    lines.push('Season: ' + (C.season || cal.season));
-    lines.push('Month: ' + (C.month || C.simMonth || cal.month));
-    
-    if (C.holiday && C.holiday !== 'none') {
-      lines.push('Holiday: ' + C.holiday + ' [' + (C.holidayPriority || 'unknown') + ']');
-    } else if (cal.holiday !== 'none') {
-      lines.push('Holiday: ' + cal.holiday + ' (national)');
-    }
-    
-    lines.push('Weather: ' + (C.weatherType || 'clear') + ' (impact=' + (C.weatherImpact || 1) + ', temp=' + (C.temp || 'n/a') + '°F)');
-    lines.push('Sentiment: ' + round2(C.sentiment || 0));
-    
-    if (C.events) lines.push('Events: ' + C.events);
-    if (C.travelNotes) lines.push('Travel: ' + C.travelNotes);
     lines.push('');
   }
 
@@ -446,6 +387,30 @@ function buildCyclePacket_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════
+  // CHICAGO SATELLITE (v3.7: moved to end of packet)
+  // ═══════════════════════════════════════════════════════════
+  if (chicago.length > 0) {
+    var C = chicago[0];
+    lines.push('--- CHICAGO SATELLITE ---');
+    lines.push('CycleRef: Y' + (C.godWorldYear || cal.godWorldYear) + 'C' + (C.cycleOfYear || cal.cycleOfYear));
+    lines.push('Season: ' + (C.season || cal.season));
+    lines.push('Month: ' + (C.month || C.simMonth || cal.month));
+
+    if (C.holiday && C.holiday !== 'none') {
+      lines.push('Holiday: ' + C.holiday + ' [' + (C.holidayPriority || 'unknown') + ']');
+    } else if (cal.holiday !== 'none') {
+      lines.push('Holiday: ' + cal.holiday + ' (national)');
+    }
+
+    lines.push('Weather: ' + (C.weatherType || 'clear') + ' (impact=' + (C.weatherImpact || 1) + ', temp=' + (C.temp || 'n/a') + '°F)');
+    lines.push('Sentiment: ' + round2(C.sentiment || 0));
+
+    if (C.events) lines.push('Events: ' + C.events);
+    if (C.travelNotes) lines.push('Travel: ' + C.travelNotes);
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
   // FOOTER
   // ═══════════════════════════════════════════════════════════
   lines.push('=== END PACKET ===');
@@ -468,7 +433,7 @@ function buildCyclePacket_(ctx) {
     ]
   ]);
 
-  Logger.log('buildCyclePacket_ v3.6: Cycle ' + (S.absoluteCycle || S.cycleId) + 
+  Logger.log('buildCyclePacket_ v3.7: Cycle ' + (S.absoluteCycle || S.cycleId) +
     ' | Election: ' + civic.electionWindow);
 
   ctx.summary.cyclePacket = packet;

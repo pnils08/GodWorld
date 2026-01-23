@@ -1,9 +1,13 @@
 /**
  * ============================================================================
- * applyDomainCooldowns_ v2.2
+ * applyDomainCooldowns_ v2.3
  * ============================================================================
  *
  * Manages domain cooldowns with severity-based duration and calendar awareness.
+ *
+ * v2.3 Enhancements:
+ * - Filters to current cycle events only (prevents cooldown refresh from old events)
+ * - Uses ev.cycle to match current cycleId
  *
  * v2.2 Enhancements:
  * - FESTIVAL/HOLIDAY domains shorter cooldowns during holidays
@@ -17,13 +21,16 @@
  * - Severity-based cooldown duration
  * - Priority domains (HEALTH, SAFETY, INFRASTRUCTURE)
  * - Long cooldown domains (CULTURE, COMMUNITY, MICRO)
- * 
+ *
  * ============================================================================
  */
 
 function applyDomainCooldowns_(ctx) {
   const S = ctx.summary;
   const cooldowns = S.domainCooldowns || {};
+
+  // v2.3: Current cycle ID for filtering events
+  const currentCycle = S.absoluteCycle || S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.2: CALENDAR CONTEXT
@@ -123,10 +130,17 @@ function applyDomainCooldowns_(ctx) {
   });
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // PROCESS THIS CYCLE'S EVENTS
+  // PROCESS THIS CYCLE'S EVENTS ONLY (v2.3: filter to current cycle)
   // ═══════════════════════════════════════════════════════════════════════════
-  if (S.worldEvents && S.worldEvents.length > 0) {
-    S.worldEvents.forEach(ev => {
+  const allEvents = S.worldEvents || [];
+  const todaysEvents = allEvents.filter(function(ev) {
+    // If event has cycle property, match it; otherwise assume it's from this cycle
+    const evCycle = (typeof ev.cycle === 'number') ? ev.cycle : currentCycle;
+    return evCycle === currentCycle;
+  });
+
+  if (todaysEvents.length > 0) {
+    todaysEvents.forEach(ev => {
       const d = (ev.domain || "").toUpperCase();
       if (!d) return;
 

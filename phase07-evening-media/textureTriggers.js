@@ -1,7 +1,11 @@
 /**
  * ============================================================================
- * V3.3 TEXTURE TRIGGER ENGINE — GODWORLD CALENDAR INTEGRATION
+ * V3.4 TEXTURE TRIGGER ENGINE — GODWORLD CALENDAR INTEGRATION
  * ============================================================================
+ *
+ * v3.4 Enhancements (from v3.3):
+ * - Domain cooldown gate: respects S.suppressDomains from applyDomainCooldowns_
+ * - Uses domainAllowed_() helper to skip suppressed domain textures
  *
  * v3.3 Enhancements (from v3.2):
  * - Deterministic RNG support (ctx.rng / ctx.config.rngSeed)
@@ -83,9 +87,13 @@ function textureTriggerEngine_(ctx) {
     triggers.push(tr);
   }
 
-  // Soft cap to keep output usable
+  // Soft cap to keep output usable + domain cooldown gate
   function cappedPush(tr) {
     if (triggers.length >= 45) return;
+    // Check domain cooldown - skip suppressed domains
+    if (tr && tr.domain && typeof domainAllowed_ === 'function') {
+      if (!domainAllowed_(ctx, tr.domain)) return;
+    }
     pushUnique(tr);
   }
 

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * recordCycleWeather_ v1.0
+ * recordCycleWeather_ v1.1
  * ============================================================================
  *
  * Writes weather data to centralized Cycle_Weather sheet.
@@ -46,7 +46,7 @@ function recordCycleWeather_(ctx) {
   var weather = S.weather;
   var weatherSum = S.weatherSummary || {};
   var tracking = S.weatherTracking || {};
-  var cycleId = S.absoluteCycle || S.cycleId || ctx.config?.cycleCount || 0;
+  var cycleId = S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
 
   // Ensure sheet exists with headers
   var sheet = ensureCycleWeatherSheet_(ss);
@@ -56,14 +56,11 @@ function recordCycleWeather_(ctx) {
   }
 
   // Check if this cycle already has a weather record (avoid duplicates)
-  var existingData = sheet.getDataRange().getValues();
-  var cycleCol = 0; // CycleID is first column
-
-  for (var i = 1; i < existingData.length; i++) {
-    if (existingData[i][cycleCol] === cycleId) {
-      Logger.log('recordCycleWeather_: Cycle ' + cycleId + ' already recorded, skipping');
-      return;
-    }
+  // Uses TextFinder for performance - avoids reading entire sheet
+  var found = sheet.createTextFinder(String(cycleId)).matchEntireCell(true).findNext();
+  if (found && found.getColumn() === 1) {
+    Logger.log('recordCycleWeather_: Cycle ' + cycleId + ' already recorded, skipping');
+    return;
   }
 
   // Build advisory text from alerts
@@ -87,7 +84,7 @@ function recordCycleWeather_(ctx) {
     alerts.join(', '),                          // Alerts
     tracking.currentStreak || 1,                // Streak
     tracking.streakType || weather.type,        // StreakType
-    new Date().toISOString()                    // Timestamp
+    ctx.now || new Date()                        // Timestamp (native Date for Sheets)
   ];
 
   // Append row
@@ -139,8 +136,9 @@ function getWeatherForCycle_(ss, cycleId) {
 
   var headers = data[0];
 
+  var targetCycle = Number(cycleId);
   for (var i = 1; i < data.length; i++) {
-    if (data[i][0] === cycleId) {
+    if (Number(data[i][0]) === targetCycle) {
       var weather = {};
       for (var j = 0; j < headers.length; j++) {
         weather[headers[j]] = data[i][j];
@@ -169,10 +167,12 @@ function getWeatherHistory_(ss, startCycle, endCycle) {
 
   var headers = data[0];
   var history = [];
+  var start = Number(startCycle);
+  var end = Number(endCycle);
 
   for (var i = 1; i < data.length; i++) {
-    var cycleId = data[i][0];
-    if (cycleId >= startCycle && cycleId <= endCycle) {
+    var cycleId = Number(data[i][0]);
+    if (cycleId >= start && cycleId <= end) {
       var weather = {};
       for (var j = 0; j < headers.length; j++) {
         weather[headers[j]] = data[i][j];

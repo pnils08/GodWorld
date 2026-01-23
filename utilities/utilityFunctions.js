@@ -88,3 +88,22 @@ function normalizeIdentity_(name) {
 function identityMatch_(name1, name2) {
   return normalizeIdentity_(name1) === normalizeIdentity_(name2);
 }
+
+/**
+ * ============================================================================
+ * DOMAIN COOLDOWN GATE (v2.12)
+ * ============================================================================
+ * Checks if a domain is allowed based on S.suppressDomains from applyDomainCooldowns_.
+ *
+ * Usage in generators:
+ *   if (!domainAllowed_(ctx, 'HEALTH')) return; // skip suppressed domain
+ *
+ * Handles case variations (HEALTH, Health, health all match).
+ */
+function domainAllowed_(ctx, domain) {
+  const S = ctx.summary || {};
+  const sup = S.suppressDomains || {};
+  if (!domain) return true;
+  const d = domain.toString();
+  return !(sup[d] || sup[d.toUpperCase()] || sup[d.toLowerCase()]);
+}

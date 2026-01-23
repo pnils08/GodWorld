@@ -1,18 +1,24 @@
 /**
  * ============================================================================
- * getSimSeason_ v2.1
+ * getSimSeason_ v2.2
  * ============================================================================
- * 
+ *
  * Returns season based on simulation month (1-12).
  * Per GodWorld Calendar v1.0.
- * 
+ *
+ * v2.2: ES5-safe (removed .includes() for Apps Script compatibility)
+ *
+ * Note: Prefer getSeasonFromCycle_(cycleOfYear) when cycleOfYear is available.
+ * Use this function as fallback when only month is known.
+ *
  * ============================================================================
  */
 
 function getSimSeason_(month) {
-  if ([12, 1, 2].includes(month)) return "Winter";
-  if ([3, 4, 5].includes(month)) return "Spring";
-  if ([6, 7, 8].includes(month)) return "Summer";
+  month = Number(month || 1);
+  if (month === 12 || month === 1 || month === 2) return "Winter";
+  if (month === 3 || month === 4 || month === 5) return "Spring";
+  if (month === 6 || month === 7 || month === 8) return "Summer";
   return "Fall";
 }
 

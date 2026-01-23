@@ -1,10 +1,15 @@
 /**
  * ============================================================================
- * CYCLE WEIGHT ENGINE v2.2
+ * CYCLE WEIGHT ENGINE v2.3
  * ============================================================================
- * 
+ *
  * World-aware cycle signal classifier with GodWorld Calendar integration.
  * Works with ctx.summary for all inputs.
+ *
+ * v2.3 Enhancements:
+ * - Filter worldEvents to current cycle only (multi-cycle safe)
+ * - Null-safe hook priority check
+ * - Recovery suppression signals affect weight
  *
  * v2.2 Enhancements:
  * - Holiday priority scoring (major, cultural, oakland, minor)
@@ -44,8 +49,12 @@
  */
 function applyCycleWeight_(ctx) {
   const S = ctx.summary || {};
-  
-  const worldEvents = S.worldEvents || [];
+
+  // v2.3: Filter worldEvents to current cycle only
+  const cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
+  const worldEventsRaw = S.worldEvents || [];
+  const worldEvents = worldEventsRaw.filter(e => !e.cycle || e.cycle === cycle);
+
   const weather = S.weather || {};
   const dynamics = S.cityDynamics || { culturalActivity: 1, communityEngagement: 1 };
   const domains = S.domainPresence || {};
@@ -150,9 +159,23 @@ function applyCycleWeight_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // RECOVERY SUPPRESSION (v2.3)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  const recoveryLevel = S.recoveryLevel || 'none';
+
+  if (recoveryLevel === 'heavy') {
+    score += 2;
+    reasons.push('Recovery heavy');
+  } else if (recoveryLevel === 'moderate') {
+    score += 1;
+    reasons.push('Recovery moderate');
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // PATTERN FLAGS
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   const patternFlag = S.patternFlag || 'none';
   
   if (patternFlag === 'micro-event-wave') {
@@ -176,7 +199,7 @@ function applyCycleWeight_(ctx) {
   
   const seedCount = seeds.length;
   const hookCount = hooks.length;
-  const highPriorityHooks = hooks.filter(h => h.priority >= 3).length;
+  const highPriorityHooks = hooks.filter(h => h && Number(h.priority) >= 3).length;
   
   if (seedCount >= 10) score += 2;
   if (seedCount >= 15) score += 2;
@@ -450,7 +473,11 @@ function writeCycleWeightToDigest_(ctx) {
  * - low-signal: score < 12
  * - medium-signal: score 12-24
  * - high-signal: score >= 25
- * 
+ *
+ * Recovery Score Contributions (v2.3):
+ * - Heavy recovery: +2
+ * - Moderate recovery: +1
+ *
  * Calendar Score Contributions (v2.2):
  * - Major holiday: +4
  * - Oakland/Cultural holiday: +3

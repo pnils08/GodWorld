@@ -1,18 +1,23 @@
 /**
  * ============================================================================
- * applyWeatherModel_ v3.2
+ * applyWeatherModel_ v3.3
  * ============================================================================
- * 
+ *
  * Combines weather generation with mood pipeline.
  * Aligned with GodWorld Calendar v1.0 and getSimHoliday_ v2.3.
- * 
- * Enhancements:
+ *
+ * v3.3 Enhancements:
+ * - Seeded RNG for deterministic/reproducible weather (same pattern as worldEventsEngine_)
+ * - Fixed streak counter bug (starts at 0, not 1)
+ * - Fixed typeComfort: 'cloudy' → 'overcast' (matches actual output)
+ *
+ * v3.2 Enhancements:
  * - All 30+ holidays from cycle-based calendar
  * - First Friday weather awareness
  * - Creation Day special handling
  * - Oakland-specific and cultural holiday weather effects
  * - Cycle-based tracking (cycleOfYear awareness)
- * 
+ *
  * Features:
  * - Generates base weather (temp, type, impact)
  * - Oakland neighborhood micro-climates
@@ -20,7 +25,7 @@
  * - Detects special events (first snow, heat wave, etc.)
  * - Calculates comfort index and mood effects
  * - Generates weather event pools for citizen generators
- * 
+ *
  * ============================================================================
  */
 
@@ -44,6 +49,13 @@ const OAKLAND_WEATHER_PROFILES = {
 function applyWeatherModel_(ctx) {
 
   const S = ctx.summary;
+
+  // v3.3: Seeded RNG for deterministic weather (same pattern as worldEventsEngine_)
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng
+    : (ctx.config && typeof ctx.config.rngSeed === 'number')
+      ? mulberry32_(ctx.config.rngSeed >>> 0)
+      : Math.random;
+
   const month = S.simMonth;
   const season = S.season;
   const holiday = S.holiday || "none";
@@ -62,7 +74,7 @@ function applyWeatherModel_(ctx) {
     7: 73, 8: 74, 9: 72, 10: 66, 11: 58, 12: 52
   }[month] || 65;
 
-  let temp = base + (Math.random() * 6 - 3);
+  let temp = base + (rng() * 6 - 3);
 
   const list = [];
 
@@ -176,7 +188,7 @@ function applyWeatherModel_(ctx) {
     list.push("clear", "mild");  // Favorable for outdoor crowds
   }
 
-  const type = list[Math.floor(Math.random() * list.length)] || "clear";
+  const type = list[Math.floor(rng() * list.length)] || "clear";
 
   let impact = 1;
   if (type === "rain") impact = 1.2;
@@ -211,7 +223,7 @@ function applyWeatherModel_(ctx) {
     let nhType = type;
     
     // Fog override for fog-prone neighborhoods
-    if (type === 'clear' && Math.random() < profile.fogChance) {
+    if (type === 'clear' && rng() < profile.fogChance) {
       nhType = 'fog';
     }
     
@@ -239,7 +251,7 @@ function applyWeatherModel_(ctx) {
   if (!S.weatherTracking) {
     S.weatherTracking = {
       currentType: type,
-      currentStreak: 1,
+      currentStreak: 0,  // v3.3: Fixed - was 1, caused first run to become 2
       streakType: normalizeWeatherType_(type),
       temperature: temp,
       humidity: S.weather.humidity,
@@ -341,7 +353,7 @@ function applyWeatherModel_(ctx) {
 
   const typeComfort = {
     'clear': 0.15, 'mild': 0.15, 'breeze': 0.1,
-    'cloudy': 0, 'cool': 0,
+    'overcast': 0, 'cool': 0,  // v3.3: Fixed - was 'cloudy', but generator outputs 'overcast'
     'rain': -0.15, 'fog': -0.1, 'wind': -0.1,
     'hot': -0.1, 'humid': -0.15,
     'cold': -0.1, 'snow': -0.15
@@ -685,20 +697,23 @@ function getWeatherEvent_(ctx, preferSpecial) {
   const pools = ctx.summary.weatherEventPools;
   if (!pools) return null;
 
-  if (preferSpecial && pools.special.length > 0 && Math.random() < 0.3) {
-    return { text: pools.special[Math.floor(Math.random() * pools.special.length)], tag: 'Weather-Special' };
+  // v3.3: Resolve RNG from ctx
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+
+  if (preferSpecial && pools.special.length > 0 && rng() < 0.3) {
+    return { text: pools.special[Math.floor(rng() * pools.special.length)], tag: 'Weather-Special' };
   }
 
-  if (pools.holiday && pools.holiday.length > 0 && Math.random() < 0.35) {
-    return { text: pools.holiday[Math.floor(Math.random() * pools.holiday.length)], tag: 'Weather-Holiday' };
+  if (pools.holiday && pools.holiday.length > 0 && rng() < 0.35) {
+    return { text: pools.holiday[Math.floor(rng() * pools.holiday.length)], tag: 'Weather-Holiday' };
   }
 
-  if (pools.enhanced.length > 0 && Math.random() < 0.4) {
-    return { text: pools.enhanced[Math.floor(Math.random() * pools.enhanced.length)], tag: 'Weather-Mood' };
+  if (pools.enhanced.length > 0 && rng() < 0.4) {
+    return { text: pools.enhanced[Math.floor(rng() * pools.enhanced.length)], tag: 'Weather-Mood' };
   }
 
   if (pools.base.length > 0) {
-    return { text: pools.base[Math.floor(Math.random() * pools.base.length)], tag: 'Weather' };
+    return { text: pools.base[Math.floor(rng() * pools.base.length)], tag: 'Weather' };
   }
 
   return null;
@@ -707,10 +722,13 @@ function getWeatherEvent_(ctx, preferSpecial) {
 function getNeighborhoodWeatherEvent_(ctx, neighborhood) {
   const pools = ctx.summary.weatherEventPools?.neighborhood?.[neighborhood];
   if (!pools || pools.length === 0) return null;
-  
-  if (Math.random() < 0.25) {
-    return { 
-      text: pools[Math.floor(Math.random() * pools.length)], 
+
+  // v3.3: Resolve RNG from ctx
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+
+  if (rng() < 0.25) {
+    return {
+      text: pools[Math.floor(rng() * pools.length)],
       tag: 'Weather-Local',
       neighborhood: neighborhood
     };

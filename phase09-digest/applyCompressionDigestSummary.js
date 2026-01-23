@@ -1,11 +1,16 @@
 /**
  * ============================================================================
- * applyCompressedDigestSummary_ v2.2
+ * applyCompressedDigestSummary_ v2.3
  * ============================================================================
  *
  * Builds a compressed single-line summary of cycle state.
  * Uses ctx.summary for all inputs (no sheet reads).
  * Includes all major system outputs.
+ *
+ * v2.3 Enhancements:
+ * - Recovery/cooldown signals (recoveryLevel, overloadScore, activeCooldowns)
+ * - Safer cycle field alignment
+ * - Filters worldEvents to current cycle only
  *
  * v2.2 Enhancements:
  * - GodWorld Calendar integration (holidays, First Friday, Creation Day)
@@ -17,7 +22,7 @@
  * - All major system outputs
  * - Compressed single-line format
  * - Structured cycleSummary object
- * 
+ *
  * ============================================================================
  */
 
@@ -30,10 +35,18 @@ function applyCompressedDigestSummary_(ctx) {
   const r2 = v => Math.round((v || 0) * 100) / 100;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CORE CYCLE INFO
+  // CORE CYCLE INFO (v2.3: safer alignment)
   // ═══════════════════════════════════════════════════════════════════════════
-  const cycle = S.cycleId || ctx.config.cycleCount || 0;
+  const cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
   const events = S.eventsGenerated || 0;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // RECOVERY + COOLDOWN SIGNALS (v2.3)
+  // ═══════════════════════════════════════════════════════════════════════════
+  const recoveryLevel = S.recoveryLevel || 'none';
+  const overloadScore = S.overloadScore || 0;
+  const cooldowns = S.domainCooldowns || {};
+  const activeCooldownCount = Object.values(cooldowns).filter(v => v > 0).length;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CLASSIFICATION SIGNALS
@@ -60,9 +73,13 @@ function applyCompressedDigestSummary_(ctx) {
   const season = S.season || "Spring";
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // WORLD EVENTS
+  // WORLD EVENTS (v2.3: filter to current cycle only)
   // ═══════════════════════════════════════════════════════════════════════════
-  const worldEvents = S.worldEvents || [];
+  const allWorldEvents = S.worldEvents || [];
+  const worldEvents = allWorldEvents.filter(e => {
+    const evCycle = (typeof e.cycle === 'number') ? e.cycle : cycle;
+    return evCycle === cycle;
+  });
   const chaosCount = worldEvents.length;
   const highSev = worldEvents.filter(e => {
     const sev = (e.severity || '').toString().toLowerCase();
@@ -184,7 +201,11 @@ function applyCompressedDigestSummary_(ctx) {
     `load:${load}(${loadScore})`,
     `patt:${pattern}`,
     shock !== 'none' ? `SHOCK` : null,
-    
+
+    // v2.3: Recovery/cooldown indicators
+    recoveryLevel !== 'none' ? `rec:${recoveryLevel}(${overloadScore})` : null,
+    activeCooldownCount > 0 ? `cd:${activeCooldownCount}` : null,
+
     // v2.2: Calendar indicators
     `ssn:${season.substring(0, 2)}`,
     calendarTag ? `hol:${calendarTag}` : null,
@@ -236,7 +257,12 @@ function applyCompressedDigestSummary_(ctx) {
     loadScore: loadScore,
     pattern: pattern,
     shock: shock,
-    
+
+    // Recovery/Cooldown (v2.3)
+    recoveryLevel: recoveryLevel,
+    overloadScore: overloadScore,
+    activeCooldownCount: activeCooldownCount,
+
     // Calendar (v2.2)
     season: season,
     holiday: holiday,
@@ -296,17 +322,29 @@ function applyCompressedDigestSummary_(ctx) {
  * ============================================================================
  * 
  * COMPRESSED LINE FORMAT:
- * 
+ *
  * C{cycle} | ev:{events} | wt:{weight}({score}) | load:{load}({score}) |
- * patt:{pattern} | [SHOCK] | ssn:{season} | [hol:{holiday}] | [FF] | [CD] |
+ * patt:{pattern} | [SHOCK] | [rec:{level}({overload})] | [cd:{count}] |
+ * ssn:{season} | [hol:{holiday}] | [FF] | [CD] |
  * [spt:{sports}] | chaos:{count}[!{high}] | wx:{type}({impact}) |
  * comfort:{value} | sent:{sentiment} | [cult:{activity}] | [comm:{engagement}] |
  * econ:{mood}({ripples}r) | media:{intensity} | [crisis:{saturation}] |
  * [arcs:{active}[p{peak}]] | seeds:{count} | [hooks:{count}] | [spot:{count}] |
  * [bonds:{count}] | [mig:{value}] | [new:{count}] | [promo:{count}]
  * 
+ * RECOVERY/COOLDOWN INDICATORS (v2.3):
+ *
+ * rec: Recovery level with overload score (shown if not 'none')
+ *   - Format: rec:{level}({overloadScore})
+ *   - Levels: mild, moderate, heavy
+ *   - Example: rec:moderate(3.5)
+ *
+ * cd: Active cooldown count (shown if > 0)
+ *   - Number of domains currently suppressed
+ *   - Example: cd:4
+ *
  * CALENDAR INDICATORS (v2.2):
- * 
+ *
  * ssn: Season abbreviation (Sp, Su, Fa, Wi)
  * 
  * hol: Holiday abbreviation
@@ -333,6 +371,7 @@ function applyCompressedDigestSummary_(ctx) {
  * - Full holiday name and priority
  * - Boolean flags for First Friday and Creation Day
  * - Numeric values without abbreviation
+ * - v2.3: recoveryLevel, overloadScore, activeCooldownCount
  * 
  * ============================================================================
  */

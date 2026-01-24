@@ -1,9 +1,17 @@
 /**
  * ============================================================================
- * V3.3 EVENT ARC ENGINE — GODWORLD CALENDAR INTEGRATION
+ * V3.4 EVENT ARC ENGINE — GODWORLD CALENDAR INTEGRATION
  * ============================================================================
  *
  * Manages multi-cycle story arcs with GodWorld Calendar awareness.
+ *
+ * v3.4 Changes:
+ * - Unified currentCycle lookup via getCurrentCycle_
+ * - Fixed neighborhood interference (ignores citywide/blank arcs)
+ * - Championship intensifies existing sports-fever instead of blocking
+ * - Added behavior for strain/education-wave/nightlife-surge arc types
+ * - Festival/celebration/sports-fever exempt from passive decay
+ * - ES5 compatible
  *
  * v3.3 Enhancements:
  * - Expanded to 12 Oakland neighborhoods
@@ -13,28 +21,20 @@
  * - Creation Day community arcs
  * - Holiday tension modifiers
  * - Calendar-driven arc generation
- * - Aligned with GodWorld Calendar v1.0
  *
- * Previous features (v3.2):
- * - Phase progression (early → rising → peak → decline → resolved)
- * - Arc-type specific behavior
- * - Cross-arc neighborhood interference
- * - Citizen involvement tracking
- * - Age-based arc fatigue
- * 
  * NOTE: Arcs are SIGNALS, not automated storylines.
  * They provide context for Media Room coverage decisions.
  * The Maker retains full creative control.
- * 
+ *
  * NO sheet writes — pure functional logic
- * 
+ *
  * ============================================================================
  */
 
 // ═══════════════════════════════════════════════════════════════════════════
 // OAKLAND NEIGHBORHOODS — Domain Affinities (v3.3: expanded to 12)
 // ═══════════════════════════════════════════════════════════════════════════
-const OAKLAND_NEIGHBORHOODS = {
+var OAKLAND_NEIGHBORHOODS = {
   'Temescal': ['HEALTH', 'EDUCATION', 'COMMUNITY'],
   'Downtown': ['CIVIC', 'INFRASTRUCTURE', 'BUSINESS', 'FESTIVAL'],
   'Fruitvale': ['COMMUNITY', 'CULTURE', 'SAFETY', 'FESTIVAL'],
@@ -43,28 +43,40 @@ const OAKLAND_NEIGHBORHOODS = {
   'Laurel': ['COMMUNITY', 'CULTURE', 'GENERAL'],
   'Rockridge': ['BUSINESS', 'EDUCATION', 'COMMUNITY'],
   'Jack London': ['BUSINESS', 'NIGHTLIFE', 'CULTURE', 'SPORTS'],
-  'Uptown': ['CULTURE', 'NIGHTLIFE', 'ARTS', 'FESTIVAL'],           // v3.3
-  'KONO': ['ARTS', 'CULTURE', 'NIGHTLIFE', 'COMMUNITY'],            // v3.3
-  'Chinatown': ['CULTURE', 'COMMUNITY', 'BUSINESS', 'FESTIVAL'],    // v3.3
-  'Piedmont Ave': ['BUSINESS', 'COMMUNITY', 'EDUCATION']            // v3.3
+  'Uptown': ['CULTURE', 'NIGHTLIFE', 'ARTS', 'FESTIVAL'],
+  'KONO': ['ARTS', 'CULTURE', 'NIGHTLIFE', 'COMMUNITY'],
+  'Chinatown': ['CULTURE', 'COMMUNITY', 'BUSINESS', 'FESTIVAL'],
+  'Piedmont Ave': ['BUSINESS', 'COMMUNITY', 'EDUCATION']
 };
+
+
+/**
+ * Unified cycle lookup (v3.4)
+ */
+function getCurrentCycle_(ctx) {
+  var S = ctx.summary || {};
+  var configCycle = (ctx.config && ctx.config.cycleCount) || 0;
+  return Number(S.absoluteCycle || S.cycleId || S.cycleCount || configCycle || 0);
+}
 
 
 /**
  * Pick neighborhood based on domain affinity
  */
 function pickNeighborhoodForDomain_(domain) {
-  const matches = [];
-  for (const [nh, affinities] of Object.entries(OAKLAND_NEIGHBORHOODS)) {
-    if (affinities.includes(domain)) {
+  var matches = [];
+  var nhKeys = Object.keys(OAKLAND_NEIGHBORHOODS);
+  for (var i = 0; i < nhKeys.length; i++) {
+    var nh = nhKeys[i];
+    var affinities = OAKLAND_NEIGHBORHOODS[nh];
+    if (affinities.indexOf(domain) >= 0) {
       matches.push(nh);
     }
   }
   if (matches.length > 0) {
     return matches[Math.floor(Math.random() * matches.length)];
   }
-  const all = Object.keys(OAKLAND_NEIGHBORHOODS);
-  return all[Math.floor(Math.random() * all.length)];
+  return nhKeys[Math.floor(Math.random() * nhKeys.length)];
 }
 
 
@@ -72,39 +84,43 @@ function pickNeighborhoodForDomain_(domain) {
  * Updates tension and phase for existing arcs in ctx.summary.eventArcs.
  */
 function eventArcEngine_(ctx) {
-  const arcs = ctx.summary.eventArcs || [];
+  var arcs = ctx.summary.eventArcs || [];
   if (arcs.length === 0) return;
 
-  const S = ctx.summary || {};
-  const currentCycle = S.cycleId || ctx.config.cycleCount || 0;
+  var S = ctx.summary || {};
+  var currentCycle = getCurrentCycle_(ctx);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v3.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
 
   // Pre-calculate neighborhood arc counts for interference
-  const neighborhoodCounts = {};
-  for (let arc of arcs) {
-    if (!arc || arc.phase === 'resolved') continue;
-    const nh = arc.neighborhood || 'Downtown';
+  // v3.4: Ignore citywide/blank neighborhoods
+  var neighborhoodCounts = {};
+  for (var pi = 0; pi < arcs.length; pi++) {
+    var preArc = arcs[pi];
+    if (!preArc || preArc.phase === 'resolved') continue;
+    var nh = (preArc.neighborhood || '').toString().trim();
+    if (!nh) continue; // ignore citywide arcs for neighborhood interference
     neighborhoodCounts[nh] = (neighborhoodCounts[nh] || 0) + 1;
   }
 
-  for (let arc of arcs) {
+  for (var ai = 0; ai < arcs.length; ai++) {
+    var arc = arcs[ai];
     if (!arc || arc.phase === 'resolved') continue;
 
-    let t = Number(arc.tension) || 0;
-    const arcAge = currentCycle - (arc.cycleCreated || currentCycle);
+    var t = Number(arc.tension) || 0;
+    var arcAge = currentCycle - (arc.cycleCreated || currentCycle);
 
     // ═══════════════════════════════════════════════════════════
     // BASE SIGNAL MODIFIERS
     // ═══════════════════════════════════════════════════════════
-    
+
     if (S.cycleWeight === 'high-signal') t += 1;
     if (S.shockFlag && S.shockFlag !== 'none') t += 2;
     if (S.cycleWeight === 'medium-signal') t += 0.5;
@@ -112,7 +128,7 @@ function eventArcEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════
     // ARC-TYPE SPECIFIC BEHAVIOR
     // ═══════════════════════════════════════════════════════════
-    
+
     // Crisis arcs: escalate faster with shocks, decay faster without
     if (arc.type === 'crisis') {
       if (S.shockFlag && S.shockFlag !== 'none') {
@@ -129,7 +145,7 @@ function eventArcEngine_(ctx) {
 
     // Instability arcs: volatile, respond to migration
     if (arc.type === 'instability') {
-      const drift = S.migrationDrift || 0;
+      var drift = S.migrationDrift || 0;
       if (drift < -30) t += 1;
       else if (drift < -15) t += 0.5;
       else if (drift > 20) t += 0.5;
@@ -137,7 +153,7 @@ function eventArcEngine_(ctx) {
 
     // Health arcs: respond to illness rate
     if (arc.type === 'health-crisis') {
-      const pop = S.worldPopulation || {};
+      var pop = S.worldPopulation || {};
       if (pop.illnessRate > 0.08) t += 1;
       else if (pop.illnessRate > 0.06) t += 0.5;
       else t -= 0.3;
@@ -145,45 +161,66 @@ function eventArcEngine_(ctx) {
 
     // Infrastructure arcs: respond to weather severity
     if (arc.type === 'infrastructure') {
-      const weather = S.weather || {};
+      var weather = S.weather || {};
       if (weather.impact >= 1.4) t += 1;
       else if (weather.impact >= 1.2) t += 0.5;
     }
 
     // Community arcs: respond to sentiment
     if (arc.type === 'community') {
-      const dyn = S.cityDynamics || {};
+      var dyn = S.cityDynamics || {};
       if (dyn.sentiment >= 0.3) t += 0.5;
       else if (dyn.sentiment <= -0.3) t -= 0.3;
     }
 
     // Cultural arcs: tied to cultural activity
     if (arc.type === 'cultural-moment') {
-      const domains = S.domainPresence || {};
-      if (domains['CULTURE'] >= 2) t += 0.5;
-      // v3.3: First Friday boosts cultural arcs
+      var domains = S.domainPresence || {};
+      if ((domains['CULTURE'] || 0) >= 2) t += 0.5;
       if (isFirstFriday) t += 1;
     }
 
     // Safety arcs: respond to safety domain
     if (arc.type === 'safety-concern') {
-      const domains = S.domainPresence || {};
-      if (domains['SAFETY'] >= 2) t += 0.5;
+      var safeDomains = S.domainPresence || {};
+      if ((safeDomains['SAFETY'] || 0) >= 2) t += 0.5;
       else t -= 0.2;
     }
 
     // Business arcs: respond to retail/economy
     if (arc.type === 'business-disruption') {
-      const dyn = S.cityDynamics || {};
-      if (dyn.retail >= 1.2) t += 0.3;
-      const pop = S.worldPopulation || {};
-      if (pop.economy === 'weak') t += 0.5;
+      var bizDyn = S.cityDynamics || {};
+      if (bizDyn.retail >= 1.2) t += 0.3;
+      var bizPop = S.worldPopulation || {};
+      if (bizPop.economy === 'weak') t += 0.5;
     }
 
     // Rivalry arcs: escalate with civic tension
     if (arc.type === 'rivalry') {
       if (S.civicLoad === 'load-strain') t += 1;
       else if (S.civicLoad === 'minor-variance') t += 0.3;
+    }
+
+    // v3.4: Strain arcs: creep up under civic load, decay otherwise
+    if (arc.type === 'strain') {
+      if (S.civicLoad === 'load-strain') t += 0.8;
+      else if (S.civicLoad === 'minor-variance') t += 0.2;
+      else t -= 0.4;
+    }
+
+    // v3.4: Education-wave arcs: respond to education domain
+    if (arc.type === 'education-wave') {
+      var eduDomains = S.domainPresence || {};
+      if ((eduDomains['EDUCATION'] || 0) >= 2) t += 0.5;
+      else t -= 0.2;
+    }
+
+    // v3.4: Nightlife-surge arcs: respond to cityDynamics.nightlife
+    if (arc.type === 'nightlife-surge') {
+      var nlDyn = S.cityDynamics || {};
+      if (nlDyn.nightlife >= 1.4) t += 0.6;
+      else if (nlDyn.nightlife >= 1.2) t += 0.2;
+      else t -= 0.3;
     }
 
     // ═══════════════════════════════════════════════════════════
@@ -194,7 +231,7 @@ function eventArcEngine_(ctx) {
     if (arc.type === 'festival') {
       if (holiday !== 'none' && holidayPriority === 'oakland') t += 1;
       else if (holiday !== 'none') t += 0.5;
-      else t -= 0.5; // Decay faster without holiday
+      else t -= 0.5;
     }
 
     // Celebration arcs: respond to major holidays
@@ -209,13 +246,13 @@ function eventArcEngine_(ctx) {
       if (sportsSeason === 'championship') t += 1.5;
       else if (sportsSeason === 'playoffs') t += 1;
       else if (sportsSeason === 'late-season') t += 0.5;
-      else t -= 0.5; // Decay in off-season
+      else t -= 0.5;
     }
 
     // Parade arcs: short-lived, intense
     if (arc.type === 'parade') {
       if (holiday !== 'none') t += 0.5;
-      else t -= 1; // Decay fast after parade day
+      else t -= 1;
     }
 
     // Arts-walk arcs: respond to First Friday
@@ -248,25 +285,33 @@ function eventArcEngine_(ctx) {
 
     // ═══════════════════════════════════════════════════════════
     // CROSS-ARC NEIGHBORHOOD INTERFERENCE
+    // v3.4: Only apply to real neighborhoods
     // ═══════════════════════════════════════════════════════════
-    
-    const nhCount = neighborhoodCounts[arc.neighborhood] || 0;
-    if (nhCount > 1) {
-      t += 0.5 * (nhCount - 1);
+
+    var nhKey = (arc.neighborhood || '').toString().trim();
+    if (nhKey) {
+      var nhCount = neighborhoodCounts[nhKey] || 0;
+      if (nhCount > 1) {
+        t += 0.5 * (nhCount - 1);
+      }
     }
 
     // ═══════════════════════════════════════════════════════════
     // PASSIVE DECAY
+    // v3.4: Exempt festival/celebration/sports-fever from double-decay
     // ═══════════════════════════════════════════════════════════
-    
-    if (S.cycleWeight !== 'high-signal' && !(S.shockFlag && S.shockFlag !== 'none')) {
-      t -= 0.3;
+
+    var noPassiveDecay = (arc.type === 'festival' || arc.type === 'celebration' || arc.type === 'sports-fever');
+    if (!noPassiveDecay) {
+      if (S.cycleWeight !== 'high-signal' && !(S.shockFlag && S.shockFlag !== 'none')) {
+        t -= 0.3;
+      }
     }
 
     // ═══════════════════════════════════════════════════════════
     // AGE-BASED FATIGUE
     // ═══════════════════════════════════════════════════════════
-    
+
     if (arcAge > 10) {
       t -= 0.2 * Math.floor((arcAge - 10) / 5);
     }
@@ -282,7 +327,7 @@ function eventArcEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════
     // PHASE PROGRESSION
     // ═══════════════════════════════════════════════════════════
-    
+
     if (arc.phase === 'early' && t >= 3) {
       arc.phase = 'rising';
     } else if (arc.phase === 'rising' && t >= 5) {
@@ -302,43 +347,66 @@ function eventArcEngine_(ctx) {
  * Returns an array of arc objects.
  */
 function generateNewArcs_(ctx) {
-  const S = ctx.summary || {};
-  const existingArcs = ctx.summary.eventArcs || [];
-  const newArcs = [];
+  var S = ctx.summary || {};
+  var existingArcs = ctx.summary.eventArcs || [];
+  var newArcs = [];
 
-  const isHigh = S.cycleWeight === 'high-signal';
-  const isMedium = S.cycleWeight === 'medium-signal';
-  const shock = S.shockFlag && S.shockFlag !== 'none';
-  const pattern = S.patternFlag;
-  const currentCycle = S.cycleId || ctx.config.cycleCount || 0;
-  const weather = S.weather || {};
-  const dynamics = S.cityDynamics || {};
-  const population = S.worldPopulation || {};
-  const domains = S.domainPresence || {};
+  var isHigh = S.cycleWeight === 'high-signal';
+  var isMedium = S.cycleWeight === 'medium-signal';
+  var shock = S.shockFlag && S.shockFlag !== 'none';
+  var pattern = S.patternFlag;
+  var currentCycle = getCurrentCycle_(ctx);
+  var weather = S.weather || {};
+  var dynamics = S.cityDynamics || {};
+  var population = S.worldPopulation || {};
+  var domains = S.domainPresence || {};
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v3.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
 
+  // ES5-safe helper functions
   function hasActiveArc(type, neighborhood) {
-    return existingArcs.some(a => 
-      a && a.type === type && 
-      (neighborhood === '' || a.neighborhood === neighborhood) && 
-      a.phase !== 'resolved'
-    );
+    for (var i = 0; i < existingArcs.length; i++) {
+      var a = existingArcs[i];
+      if (a && a.type === type && (neighborhood === '' || a.neighborhood === neighborhood) && a.phase !== 'resolved') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  // v3.4: Find existing active arc by type
+  function findActiveArc(type) {
+    for (var i = 0; i < existingArcs.length; i++) {
+      var a = existingArcs[i];
+      if (a && a.type === type && a.phase !== 'resolved') {
+        return a;
+      }
+    }
+    return null;
   }
 
   function activeArcCount() {
-    return existingArcs.filter(a => a && a.phase !== 'resolved').length;
+    var count = 0;
+    for (var i = 0; i < existingArcs.length; i++) {
+      if (existingArcs[i] && existingArcs[i].phase !== 'resolved') count++;
+    }
+    return count;
   }
 
   function makeArc(type, neighborhood, domain, summary) {
-    const initialTension = Math.round((2 + Math.random() * 2) * 100) / 100;
+    var initialTension = Math.round((2 + Math.random() * 2) * 100) / 100;
+    var calTrigger = null;
+    if (holiday !== 'none') calTrigger = holiday;
+    else if (isFirstFriday) calTrigger = 'FirstFriday';
+    else if (isCreationDay) calTrigger = 'CreationDay';
+
     return {
       arcId: Utilities.getUuid().slice(0, 8),
       type: type,
@@ -350,12 +418,18 @@ function generateNewArcs_(ctx) {
       involvedCitizens: [],
       cycleCreated: currentCycle,
       cycleResolved: null,
-      calendarTrigger: holiday !== 'none' ? holiday : (isFirstFriday ? 'FirstFriday' : (isCreationDay ? 'CreationDay' : null))
+      calendarTrigger: calTrigger
     };
   }
 
+  // Parade holidays list
+  var paradeHolidays = ['Independence', 'Thanksgiving', 'MLKDay', 'VeteransDay', 'MemorialDay', 'StPatricksDay'];
+  function isParadeHoliday(h) {
+    return paradeHolidays.indexOf(h) >= 0;
+  }
+
   // ═══════════════════════════════════════════════════════════
-  // LIMIT TOTAL ACTIVE ARCS (max 10, up from 8)
+  // LIMIT TOTAL ACTIVE ARCS (max 10)
   // ═══════════════════════════════════════════════════════════
   if (activeArcCount() >= 10) return newArcs;
 
@@ -365,10 +439,10 @@ function generateNewArcs_(ctx) {
 
   // OAKLAND PRIDE → Festival arc @ Downtown/Lake Merritt
   if (holiday === 'OaklandPride' && !hasActiveArc('festival', '')) {
-    const nh = Math.random() < 0.5 ? 'Downtown' : 'Lake Merritt';
+    var prideNh = Math.random() < 0.5 ? 'Downtown' : 'Lake Merritt';
     newArcs.push(makeArc(
       'festival',
-      nh,
+      prideNh,
       'FESTIVAL',
       'Pride celebration energy radiating through the district.'
     ));
@@ -400,7 +474,7 @@ function generateNewArcs_(ctx) {
       'festival',
       'Fruitvale',
       'FESTIVAL',
-      holiday === 'CincoDeMayo' 
+      holiday === 'CincoDeMayo'
         ? 'Cinco de Mayo celebrations energizing Fruitvale.'
         : 'Día de los Muertos observances bringing community together.'
     ));
@@ -437,8 +511,7 @@ function generateNewArcs_(ctx) {
   }
 
   // PARADE HOLIDAYS → Parade arc
-  const paradeHolidays = ['Independence', 'Thanksgiving', 'MLKDay', 'VeteransDay', 'MemorialDay', 'StPatricksDay'];
-  if (paradeHolidays.includes(holiday) && !hasActiveArc('parade', '')) {
+  if (isParadeHoliday(holiday) && !hasActiveArc('parade', '')) {
     newArcs.push(makeArc(
       'parade',
       'Downtown',
@@ -468,21 +541,29 @@ function generateNewArcs_(ctx) {
   }
 
   // CHAMPIONSHIP → Sports-fever arc @ Jack London (high intensity)
-  if (sportsSeason === 'championship' && !hasActiveArc('sports-fever', '')) {
-    newArcs.push(makeArc(
-      'sports-fever',
-      'Jack London',
-      'SPORTS',
-      'Championship fever gripping the city.'
-    ));
+  // v3.4: Intensify existing arc instead of blocking
+  if (sportsSeason === 'championship') {
+    var existingSportsFever = findActiveArc('sports-fever');
+    if (existingSportsFever) {
+      // Intensify existing arc
+      existingSportsFever.tension = Math.min(10, (Number(existingSportsFever.tension) || 0) + 1.5);
+      if (existingSportsFever.phase === 'early') existingSportsFever.phase = 'rising';
+    } else {
+      newArcs.push(makeArc(
+        'sports-fever',
+        'Jack London',
+        'SPORTS',
+        'Championship fever gripping the city.'
+      ));
+    }
   }
 
   // FIRST FRIDAY → Arts-walk arc @ Uptown/KONO
   if (isFirstFriday && !hasActiveArc('arts-walk', '')) {
-    const nh = Math.random() < 0.5 ? 'Uptown' : 'KONO';
+    var artNh = Math.random() < 0.5 ? 'Uptown' : 'KONO';
     newArcs.push(makeArc(
       'arts-walk',
-      nh,
+      artNh,
       'ARTS',
       'First Friday gallery crawl drawing art enthusiasts.'
     ));
@@ -514,10 +595,10 @@ function generateNewArcs_(ctx) {
 
   // HIGH-SIGNAL INSTABILITY ARC → Fruitvale or West Oakland
   if (isHigh && !hasActiveArc('instability', '')) {
-    const nh = Math.random() < 0.5 ? 'Fruitvale' : 'West Oakland';
+    var instNh = Math.random() < 0.5 ? 'Fruitvale' : 'West Oakland';
     newArcs.push(makeArc(
       'instability',
-      nh,
+      instNh,
       'COMMUNITY',
       'Residents describe unstable day-to-day conditions.'
     ));
@@ -584,10 +665,10 @@ function generateNewArcs_(ctx) {
 
   // CULTURAL ARC → Jack London (or Uptown if First Friday)
   if ((domains['CULTURE'] || 0) >= 2 && !hasActiveArc('cultural-moment', '')) {
-    const nh = isFirstFriday ? 'Uptown' : 'Jack London';
+    var cultNh = isFirstFriday ? 'Uptown' : 'Jack London';
     newArcs.push(makeArc(
       'cultural-moment',
-      nh,
+      cultNh,
       'CULTURE',
       'Cultural activity drawing city attention.'
     ));
@@ -615,10 +696,10 @@ function generateNewArcs_(ctx) {
 
   // NIGHTLIFE ARC → Jack London (or Uptown)
   if (dynamics.nightlife >= 1.3 && !hasActiveArc('nightlife-surge', '')) {
-    const nh = Math.random() < 0.6 ? 'Jack London' : 'Uptown';
+    var nlNh = Math.random() < 0.6 ? 'Jack London' : 'Uptown';
     newArcs.push(makeArc(
       'nightlife-surge',
-      nh,
+      nlNh,
       'NIGHTLIFE',
       'Evening activity surging in the district.'
     ));
@@ -643,17 +724,19 @@ function generateNewArcs_(ctx) {
  */
 function attachCitizenToArc_(ctx, arc, citizenId, role) {
   if (!arc || !citizenId) return;
-  
+
   arc.involvedCitizens = arc.involvedCitizens || [];
-  
-  const existing = arc.involvedCitizens.find(c => c.id === citizenId);
-  if (existing) {
-    existing.role = role || existing.role;
-    return;
+
+  // Check if already exists
+  for (var i = 0; i < arc.involvedCitizens.length; i++) {
+    if (arc.involvedCitizens[i].id === citizenId) {
+      arc.involvedCitizens[i].role = role || arc.involvedCitizens[i].role;
+      return;
+    }
   }
-  
-  const currentCycle = ctx.summary?.cycleId || ctx.config?.cycleCount || 0;
-  
+
+  var currentCycle = getCurrentCycle_(ctx);
+
   arc.involvedCitizens.push({
     id: citizenId,
     role: role || 'participant',
@@ -666,15 +749,19 @@ function attachCitizenToArc_(ctx, arc, citizenId, role) {
  * Helper: Check if citizen is in any active arc.
  */
 function citizenInActiveArc_(ctx, citizenId) {
-  const arcs = ctx.summary?.eventArcs || [];
-  
-  for (let arc of arcs) {
+  var arcs = (ctx.summary && ctx.summary.eventArcs) || [];
+
+  for (var ai = 0; ai < arcs.length; ai++) {
+    var arc = arcs[ai];
     if (!arc || arc.phase === 'resolved') continue;
-    if (arc.involvedCitizens?.some(c => c.id === citizenId)) {
-      return arc;
+    var citizens = arc.involvedCitizens || [];
+    for (var ci = 0; ci < citizens.length; ci++) {
+      if (citizens[ci].id === citizenId) {
+        return arc;
+      }
     }
   }
-  
+
   return null;
 }
 
@@ -683,10 +770,10 @@ function citizenInActiveArc_(ctx, citizenId) {
  * Helper: Get event probability boost for citizen based on arc involvement.
  */
 function getArcEventBoost_(ctx, citizenId) {
-  const arc = citizenInActiveArc_(ctx, citizenId);
+  var arc = citizenInActiveArc_(ctx, citizenId);
   if (!arc) return 1.0;
 
-  const phaseBoosts = {
+  var phaseBoosts = {
     'early': 1.2,
     'rising': 1.5,
     'peak': 2.0,
@@ -700,9 +787,9 @@ function getArcEventBoost_(ctx, citizenId) {
 
 /**
  * ============================================================================
- * EVENT ARC ENGINE REFERENCE v3.3
+ * EVENT ARC ENGINE REFERENCE v3.4
  * ============================================================================
- * 
+ *
  * NEIGHBORHOODS (12):
  * - Temescal: HEALTH, EDUCATION, COMMUNITY
  * - Downtown: CIVIC, INFRASTRUCTURE, BUSINESS, FESTIVAL
@@ -716,44 +803,24 @@ function getArcEventBoost_(ctx, citizenId) {
  * - KONO: ARTS, CULTURE, NIGHTLIFE, COMMUNITY
  * - Chinatown: CULTURE, COMMUNITY, BUSINESS, FESTIVAL
  * - Piedmont Ave: BUSINESS, COMMUNITY, EDUCATION
- * 
- * NEW ARC TYPES (v3.3):
- * - festival: Oakland celebrations (Pride, Art & Soul, Lunar New Year, etc.)
- * - celebration: Major holiday energy
- * - sports-fever: Playoff/championship fan energy (SIGNAL, not storyline)
- * - parade: Parade day crowds and energy
- * - arts-walk: First Friday gallery crawl
- * - heritage: Creation Day Oakland heritage
- * 
- * CALENDAR-DRIVEN GENERATION:
- * 
- * | Trigger | Arc Type | Neighborhood |
- * |---------|----------|--------------|
- * | OaklandPride | festival | Downtown/Lake Merritt |
- * | ArtSoulFestival | festival | Downtown |
- * | LunarNewYear | festival | Chinatown |
- * | CincoDeMayo/DiaDeMuertos | festival | Fruitvale |
- * | Juneteenth | festival | West Oakland |
- * | NewYearsEve | celebration | Downtown |
- * | Major holidays | celebration | Downtown |
- * | Parade holidays | parade | Downtown |
- * | OpeningDay | sports-fever | Jack London |
- * | Playoffs | sports-fever | Jack London |
- * | Championship | sports-fever | Jack London |
- * | First Friday | arts-walk | Uptown/KONO |
- * | Creation Day | heritage | Downtown |
- * 
- * TENSION MODIFIERS (v3.3):
- * - festival: +1 oakland holiday, +0.5 any holiday, -0.5 no holiday
- * - celebration: +1 major holiday, +0.3 any holiday, -0.4 no holiday
- * - sports-fever: +1.5 championship, +1 playoffs, +0.5 late-season, -0.5 off-season
- * - arts-walk: +2 First Friday, -0.5 otherwise
- * - heritage: +2 Creation Day, -0.3 otherwise
- * 
- * MAX ACTIVE ARCS: 10 (up from 8)
- * 
+ *
+ * ARC TYPES:
+ * - crisis, pattern-wave, instability, health-crisis, infrastructure
+ * - community, cultural-moment, safety-concern, business-disruption
+ * - rivalry, strain, education-wave, nightlife-surge
+ * - festival, celebration, sports-fever, parade, arts-walk, heritage
+ *
+ * v3.4 FIXES:
+ * - Unified getCurrentCycle_ (absoluteCycle → cycleId → cycleCount)
+ * - Neighborhood interference ignores citywide/blank arcs
+ * - Championship intensifies existing sports-fever arc
+ * - Added behavior for strain/education-wave/nightlife-surge
+ * - Festival/celebration/sports-fever exempt from passive decay
+ *
+ * MAX ACTIVE ARCS: 10
+ *
  * NOTE: Arcs are SIGNALS for Media Room context.
  * They do NOT automate storylines or override Maker control.
- * 
+ *
  * ============================================================================
  */

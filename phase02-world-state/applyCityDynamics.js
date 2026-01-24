@@ -509,7 +509,8 @@ function applyCityDynamics_(ctx) {
   };
 
   // Persist momentum state for next cycle (NO schema changes)
-  S.previousCityDynamics = { ...S.cityDynamics };
+  // ES5-safe copy (no spread operator)
+  S.previousCityDynamics = JSON.parse(JSON.stringify(S.cityDynamics));
 
   // Legacy alias if other scripts read ctx.summary.cityDynamics directly
   ctx.summary.cityDynamics = S.cityDynamics;

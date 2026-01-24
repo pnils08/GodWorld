@@ -1,9 +1,15 @@
 /**
  * ============================================================================
- * civicInitiativeEngine_ v1.1
+ * civicInitiativeEngine_ v1.2
  * ============================================================================
  *
  * Tracks civic initiatives and resolves votes/outcomes when cycles match.
+ *
+ * v1.2 Changes:
+ * - Fixed addSwingVoter2Columns() column insertion bug (0-based vs 1-based)
+ * - 9-seat council model: mayor has veto power but doesn't vote
+ * - Added required header validation to prevent silent write failures
+ * - Clamp unnamed IND probability to 0.15-0.85 (consistency with named voters)
  *
  * v1.1 Changes:
  * - Added SwingVoter2 and SwingVoter2Lean columns
@@ -88,7 +94,19 @@ function runCivicInitiativeEngine_(ctx) {
   var iConsequences = idx('Consequences');
   var iNotes = idx('Notes');
   var iLastUpdated = idx('LastUpdated');
-  
+
+  // v1.2: Required header validation to prevent silent write failures
+  var required = ['InitiativeID', 'Name', 'Type', 'Status', 'VoteCycle',
+                  'VoteRequirement', 'Projection', 'LeadFaction',
+                  'OppositionFaction', 'SwingVoter', 'Outcome',
+                  'Consequences', 'LastUpdated'];
+  for (var h = 0; h < required.length; h++) {
+    if (idx(required[h]) < 0) {
+      Logger.log('civicInitiativeEngine: Initiative_Tracker missing required header: ' + required[h]);
+      return;  // Abort to prevent silent failures
+    }
+  }
+
   var updated = false;
   
   for (var r = 0; r < rows.length; r++) {
@@ -209,8 +227,8 @@ function runCivicInitiativeEngine_(ctx) {
   // Update summary
   ctx.summary = S;
   
-  Logger.log('civicInitiativeEngine v1.1: Processed ' + S.initiativeEvents.length + 
-             ' initiatives | Votes: ' + S.votesThisCycle.length + 
+  Logger.log('civicInitiativeEngine v1.2: Processed ' + S.initiativeEvents.length +
+             ' initiatives | Votes: ' + S.votesThisCycle.length +
              ' | Grants: ' + S.grantsThisCycle.length);
 }
 
@@ -230,8 +248,9 @@ function getCouncilState_(ctx) {
   var ss = ctx.ss;
   var sheet = ss.getSheetByName('Civic_Office_Ledger');
   
+  // v1.2: 9-seat council model - mayor has veto power but doesn't vote
   var state = {
-    totalSeats: 10,        // Mayor + 9 Council
+    totalSeats: 9,         // Council only (mayor has veto, not vote)
     filledSeats: 0,
     availableVotes: 0,
     vacantSeats: 0,
@@ -243,7 +262,7 @@ function getCouncilState_(ctx) {
     },
     indMembers: [],        // v1.1: Track IND members individually
     unavailable: [],
-    mayor: null,
+    mayor: null,           // Tracked for veto power, not voting
     president: null
   };
   
@@ -285,10 +304,24 @@ function getCouncilState_(ctx) {
     var faction = (row[iFaction] || '').toString().toUpperCase();
     var votingPower = iVotingPower >= 0 ? (row[iVotingPower] || 'no').toString().toLowerCase() : 'no';
     
-    // Only process voting positions (Mayor + Council)
+    // Only process council and mayor positions
     var officePrefix = officeId.split('-')[0];
     if (officePrefix !== 'MAYOR' && officePrefix !== 'COUNCIL') continue;
-    
+
+    // v1.2: Mayor tracked for veto power but doesn't vote on council matters
+    if (officePrefix === 'MAYOR') {
+      state.mayor = {
+        name: holder,
+        popId: popId,
+        office: officeId,
+        title: title,
+        status: status,
+        faction: faction,
+        available: status !== 'hospitalized' && status !== 'deceased'
+      };
+      continue;  // Skip vote counting for mayor
+    }
+
     // Track vacant seats
     if (votingPower === 'vacant' || holder === 'TBD' || !holder || holder === '') {
       state.vacantSeats++;
@@ -342,10 +375,7 @@ function getCouncilState_(ctx) {
       });
     }
     
-    // Track special roles
-    if (officeId === 'MAYOR-01') {
-      state.mayor = member;
-    }
+    // Track council president
     if (title.indexOf('Council President') >= 0 || title.indexOf('President') >= 0) {
       state.president = member;
     }
@@ -363,8 +393,9 @@ function getCouncilStateFromSimLedger_(ctx) {
   var ss = ctx.ss;
   var ledger = ss.getSheetByName('Simulation_Ledger');
   
+  // v1.2: 9-seat council model
   var state = {
-    totalSeats: 10,
+    totalSeats: 9,
     filledSeats: 0,
     availableVotes: 0,
     vacantSeats: 6,
@@ -376,10 +407,10 @@ function getCouncilStateFromSimLedger_(ctx) {
     },
     indMembers: [],        // v1.1
     unavailable: [],
-    mayor: null,
+    mayor: null,           // Tracked for veto, not voting
     president: null
   };
-  
+
   if (!ledger) return state;
   
   var data = ledger.getDataRange().getValues();
@@ -430,10 +461,23 @@ function getCouncilStateFromSimLedger_(ctx) {
     }
     
     if (!isVoter) continue;
-    
+
+    // v1.2: Mayor tracked for veto power but doesn't vote
+    if (role.indexOf('Mayor') >= 0 && role.indexOf('Council') < 0) {
+      state.mayor = {
+        name: name,
+        popId: popId,
+        role: role,
+        status: status,
+        faction: factionMap[popId] || 'IND',
+        available: status !== 'hospitalized' && status !== 'deceased'
+      };
+      continue;  // Skip vote counting for mayor
+    }
+
     // Get faction
     var faction = factionMap[popId] || 'IND';
-    
+
     state.filledSeats++;
     
     var member = {
@@ -468,15 +512,13 @@ function getCouncilStateFromSimLedger_(ctx) {
     state.members.push(member);
     state.factions[faction].count++;
     state.factions[faction].members.push(name);
-    
-    if (role.indexOf('Mayor') >= 0) {
-      state.mayor = member;
-    }
+
+    // Track council president
     if (role.indexOf('President') >= 0) {
       state.president = member;
     }
   }
-  
+
   return state;
 }
 
@@ -622,6 +664,9 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
     
     // Unnamed IND members use pure sentiment-based probability
     var unnamedProb = 0.5 + (sentiment * 0.15);
+    // v1.2: Clamp to match named swing voter bounds
+    if (unnamedProb < 0.15) unnamedProb = 0.15;
+    if (unnamedProb > 0.85) unnamedProb = 0.85;
     var unnamedVotedYes = Math.random() < unnamedProb;
     
     if (unnamedVotedYes) {
@@ -1001,23 +1046,23 @@ function addSwingVoter2Columns() {
   }
   
   // Find SwingVoter column position
-  var swingVoterIdx = header.indexOf('SwingVoter');
-  if (swingVoterIdx < 0) {
+  var swingVoterIdx0 = header.indexOf('SwingVoter');  // 0-based
+  if (swingVoterIdx0 < 0) {
     Logger.log('SwingVoter column not found');
     return;
   }
-  
-  // Insert 2 columns after SwingVoter
-  var insertAfter = swingVoterIdx + 2; // +1 for 1-index, +1 for after
-  sheet.insertColumnsAfter(insertAfter, 2);
-  
+
+  // v1.2: Fixed column insertion - convert to 1-based for insertColumnsAfter
+  var swingVoterCol1 = swingVoterIdx0 + 1;  // 1-based column number
+  sheet.insertColumnsAfter(swingVoterCol1, 2);
+
   // Set headers
-  sheet.getRange(1, insertAfter + 1).setValue('SwingVoter2');
-  sheet.getRange(1, insertAfter + 2).setValue('SwingVoter2Lean');
-  
+  sheet.getRange(1, swingVoterCol1 + 1).setValue('SwingVoter2');
+  sheet.getRange(1, swingVoterCol1 + 2).setValue('SwingVoter2Lean');
+
   // Set column widths
-  sheet.setColumnWidth(insertAfter + 1, 120);
-  sheet.setColumnWidth(insertAfter + 2, 100);
+  sheet.setColumnWidth(swingVoterCol1 + 1, 120);
+  sheet.setColumnWidth(swingVoterCol1 + 2, 100);
   
   Logger.log('Added SwingVoter2 and SwingVoter2Lean columns after SwingVoter');
 }
@@ -1160,7 +1205,7 @@ function getInitiativeSummaryForMedia_(ctx) {
 
 /**
  * ============================================================================
- * REFERENCE v1.1
+ * REFERENCE v1.2
  * ============================================================================
  *
  * INITIATIVE TYPES:
@@ -1171,6 +1216,11 @@ function getInitiativeSummaryForMedia_(ctx) {
  *
  * STATUS LIFECYCLE:
  * proposed → active → pending-vote → passed/failed
+ *
+ * GOVERNANCE MODEL (v1.2):
+ * - 9-seat council votes on initiatives
+ * - Mayor has VETO POWER but does NOT vote on council matters
+ * - This matches Oakland's real governance structure
  *
  * VOTE REQUIREMENTS:
  * - 5-4: Simple majority (5 of 9 needed)

@@ -1,11 +1,18 @@
 /**
  * ============================================================================
- * generateMonthlyCivicSweep v2.5 (FIXED DATA SOURCE)
+ * generateMonthlyCivicSweep v2.6
  * ============================================================================
  *
- * FIXED: Reads world state from World_Population (where it actually exists)
- * Civic data still from Simulation_Ledger
- * 
+ * v2.6 Changes:
+ * - Add guard for missing CIV (y/n) column
+ * - Add guard for empty World_Population (no data row)
+ * - Build name from First + Last if FullName column missing
+ * - Fallback to POPID if no name available
+ *
+ * v2.5:
+ * - FIXED: Reads world state from World_Population (where it actually exists)
+ * - Civic data still from Simulation_Ledger
+ *
  * ORIGINAL SCHEMA (15 columns) - UNCHANGED
  *
  * ============================================================================
@@ -18,7 +25,7 @@ function generateMonthlyCivicSweep(ssOverride) {
   var ledger = ss.getSheetByName('Simulation_Ledger');
   var pop = ss.getSheetByName('World_Population');
   var sweep = ss.getSheetByName('Civic_Sweep_Report');
-  
+
   // ═══════════════════════════════════════════════════════════════════════════
   // ORIGINAL SCHEMA (15 columns) - DO NOT CHANGE ORDER
   // ═══════════════════════════════════════════════════════════════════════════
@@ -39,7 +46,7 @@ function generateMonthlyCivicSweep(ssOverride) {
     'WeatherImpact',    // N
     'Sentiment'         // O
   ];
-  
+
   // Create sheet with headers if missing
   if (!sweep) {
     sweep = ss.insertSheet('Civic_Sweep_Report');
@@ -53,13 +60,24 @@ function generateMonthlyCivicSweep(ssOverride) {
   // SCAN LEDGER FOR CIV DATA
   // ═══════════════════════════════════════════════════════════════════════════
   var data = ledger.getDataRange().getValues();
+  if (data.length < 2) return;
+
   var header = data[0];
-  
+
   var colIndex = function(h) { return header.indexOf(h); };
 
   var iCIV = colIndex('CIV (y/n)');
   var iStatus = colIndex('Status');
   var iName = colIndex('FullName');
+  var iFirst = colIndex('First');
+  var iLast = colIndex('Last');
+  var iPopId = colIndex('POPID');
+
+  // v2.6: Guard for missing CIV column
+  if (iCIV < 0) {
+    Logger.log('generateMonthlyCivicSweep: Missing column "CIV (y/n)" in Simulation_Ledger');
+    return;
+  }
 
   var civicCount = 0;
   var scandals = 0;
@@ -74,10 +92,25 @@ function generateMonthlyCivicSweep(ssOverride) {
 
     civicCount++;
 
-    var name = iName >= 0 ? data[r][iName] : '';
+    // v2.6: Build name from First + Last if FullName missing
+    var name = '';
+    if (iName >= 0 && data[r][iName]) {
+      name = data[r][iName];
+    } else {
+      var first = iFirst >= 0 ? (data[r][iFirst] || '') : '';
+      var last = iLast >= 0 ? (data[r][iLast] || '') : '';
+      name = (String(first).trim() + ' ' + String(last).trim()).trim();
+      // Fallback to POPID if no name
+      if (!name && iPopId >= 0) {
+        name = data[r][iPopId] || '';
+      }
+    }
     if (name) civicRoster.push(name);
 
-    var status = (data[r][iStatus] || "Active").toString().trim().toLowerCase();
+    // v2.6: Default to "Active" if Status column missing
+    var status = iStatus >= 0 ? (data[r][iStatus] || "Active") : "Active";
+    status = status.toString().trim().toLowerCase();
+
     if (status === "scandal") scandals++;
     if (status === "resigned") resignations++;
     if (status === "retired") retirements++;
@@ -87,11 +120,18 @@ function generateMonthlyCivicSweep(ssOverride) {
   // READ WORLD STATE FROM WORLD_POPULATION
   // ═══════════════════════════════════════════════════════════════════════════
   var popValues = pop.getDataRange().getValues();
+
+  // v2.6: Guard for empty World_Population
+  if (popValues.length < 2) {
+    Logger.log('generateMonthlyCivicSweep: World_Population has no data row');
+    return;
+  }
+
   var popHeader = popValues[0];
   var popRow = popValues[1];
 
-  var get = function(name) {
-    var idx = popHeader.indexOf(name);
+  var get = function(colName) {
+    var idx = popHeader.indexOf(colName);
     return idx >= 0 ? popRow[idx] : '';
   };
 
@@ -125,4 +165,40 @@ function generateMonthlyCivicSweep(ssOverride) {
     weatherImpact,                           // N  WeatherImpact
     sentiment                                // O  Sentiment
   ]);
+
+  Logger.log('generateMonthlyCivicSweep v2.6: CivicCount=' + civicCount +
+             ', Scandals=' + scandals + ', Resignations=' + resignations +
+             ', Retirements=' + retirements);
 }
+
+
+/**
+ * ============================================================================
+ * REFERENCE v2.6
+ * ============================================================================
+ *
+ * OUTPUT SCHEMA (15 columns - DO NOT CHANGE ORDER):
+ * A - Timestamp
+ * B - CivicRoster (up to 10 names)
+ * C - CivicCount
+ * D - Scandals
+ * E - Resignations
+ * F - Retirements
+ * G - CivicLoad
+ * H - CycleWeight
+ * I - CycleWeightReason
+ * J - WorldEventsCount
+ * K - PatternFlag
+ * L - ShockFlag
+ * M - WeatherType
+ * N - WeatherImpact
+ * O - Sentiment
+ *
+ * DATA SOURCES:
+ * - Simulation_Ledger: CIV (y/n), Status, First, Last, POPID
+ * - World_Population: civicLoad, cycleWeight, cycleWeightReason,
+ *   worldEventsCount, patternFlag, shockFlag, weatherType,
+ *   weatherImpact, sentiment
+ *
+ * ============================================================================
+ */

@@ -1,11 +1,15 @@
 /**
  * ============================================================================
- * filterNoiseEvents_ v2.2
+ * filterNoiseEvents_ v2.3
  * ============================================================================
  *
  * Advanced noise compression for engineEvents with GodWorld Calendar awareness.
  * Removes repetitive, low-impact, redundant entries while
  * preserving important world signals for the Media Room.
+ *
+ * v2.3 Changes:
+ * - Calendar-protected events no longer count toward domain caps
+ * - ES5 compatible (no const/let, for..of, rest params, includes, Set)
  *
  * v2.2 Enhancements:
  * - Expanded to 12 neighborhoods
@@ -15,57 +19,59 @@
  * - Sports season awareness (playoff events protected)
  * - Cultural activity and community engagement considerations
  * - Aligned with GodWorld Calendar v1.0
- * 
+ *
  * Oakland neighborhood aware.
  * Supports both uppercase and lowercase domain names.
- * 
+ *
  * ============================================================================
  */
 
 function filterNoiseEvents_(ctx) {
 
-  const S = ctx.summary;
+  var S = ctx.summary;
   if (!S || !S.engineEvents) return;
 
-  const events = S.engineEvents;
+  var events = S.engineEvents;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const sentiment = dynamics.sentiment || 0;
-  const chaos = S.worldEvents || [];
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const pattern = S.patternFlag || "";
-  const econMood = S.economicMood || 50;
+  var sentiment = dynamics.sentiment || 0;
+  var chaos = S.worldEvents || [];
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var pattern = S.patternFlag || "";
+  var econMood = S.economicMood || 50;
 
   // Calendar context (v2.2)
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const holidayNeighborhood = S.holidayNeighborhood || "";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var holidayNeighborhood = S.holidayNeighborhood || "";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
 
-  const seenMicro = new Set();
-  const seenNeighborhood = new Set();
-  const seenHousehold = new Set();
-  const seenByDomain = {};
-  const filtered = [];
+  // ES5: Use plain objects instead of Set
+  var seenMicro = {};
+  var seenNeighborhood = {};
+  var seenHousehold = {};
+  var seenByDomain = {};
+  var filtered = [];
 
   // Track filtering stats
-  let removedCount = 0;
-  let preservedByCalendar = 0;
+  var removedCount = 0;
+  var preservedByCalendar = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HELPER FUNCTIONS
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  function key(...parts) {
-    return parts.join("|");
+
+  // ES5: Use arguments instead of rest params
+  function key() {
+    return [].slice.call(arguments).join("|");
   }
 
   function normalizeType(ev) {
@@ -85,19 +91,19 @@ function filterNoiseEvents_(ctx) {
   // Events with calendar tags should be preserved
   // ═══════════════════════════════════════════════════════════════════════════
   function isCalendarProtected(ev) {
-    const evTag = getEventTag(ev);
-    const evType = normalizeType(ev);
-    const evNeighborhood = ev.neighborhood || ev.location || '';
+    var evTag = getEventTag(ev);
+    var evType = normalizeType(ev);
+    var evNeighborhood = ev.neighborhood || ev.location || '';
 
     // Holiday-tagged events always preserved
-    if (evTag.includes("holiday")) return true;
+    if (evTag.indexOf("holiday") !== -1) return true;
 
     // First Friday events preserved on First Friday
     if (isFirstFriday) {
-      if (evTag.includes("firstfriday")) return true;
+      if (evTag.indexOf("firstfriday") !== -1) return true;
       // Cultural events in First Friday neighborhoods
       if (evType === "culture" || evType === "community") {
-        if (evNeighborhood === "Uptown" || evNeighborhood === "KONO" || 
+        if (evNeighborhood === "Uptown" || evNeighborhood === "KONO" ||
             evNeighborhood === "Temescal" || evNeighborhood === "Jack London") {
           return true;
         }
@@ -106,13 +112,13 @@ function filterNoiseEvents_(ctx) {
 
     // Creation Day events preserved
     if (isCreationDay) {
-      if (evTag.includes("creationday")) return true;
-      if (evType === "community" && evTag.includes("foundational")) return true;
+      if (evTag.indexOf("creationday") !== -1) return true;
+      if (evType === "community" && evTag.indexOf("foundational") !== -1) return true;
     }
 
     // Sports events preserved during high-intensity seasons
     if (evType === "sports") {
-      if (sportsSeason === "championship" || sportsSeason === "playoffs" || 
+      if (sportsSeason === "championship" || sportsSeason === "playoffs" ||
           sportsSeason === "post-season") {
         return true;
       }
@@ -122,7 +128,7 @@ function filterNoiseEvents_(ctx) {
 
     // Events in holiday neighborhood preserved during holidays
     if (holidayNeighborhood && evNeighborhood === holidayNeighborhood) {
-      if (holidayPriority === "major" || holidayPriority === "oakland" || 
+      if (holidayPriority === "major" || holidayPriority === "oakland" ||
           holidayPriority === "cultural") {
         return true;
       }
@@ -136,7 +142,7 @@ function filterNoiseEvents_(ctx) {
   // During special calendar events, allow more events from relevant domains
   // ═══════════════════════════════════════════════════════════════════════════
   function getDomainCap(evType) {
-    let baseCap = 5;
+    var baseCap = 5;
 
     // Cultural holidays boost culture/community caps
     if (holidayPriority === "cultural") {
@@ -182,24 +188,24 @@ function filterNoiseEvents_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // MAIN FILTERING LOOP
+  // MAIN FILTERING LOOP (ES5: classic for loop)
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let ev of events) {
+  for (var i = 0; i < events.length; i++) {
+    var ev = events[i];
 
-    const evType = normalizeType(ev);
-    const evSeverity = normalizeSeverity(ev);
-    const evTag = getEventTag(ev);
-    const neighborhood = ev.neighborhood || ev.location || '';
+    var evType = normalizeType(ev);
+    var evSeverity = normalizeSeverity(ev);
+    var evTag = getEventTag(ev);
+    var neighborhood = ev.neighborhood || ev.location || '';
 
     // ═══════════════════════════════════════════════════════════════════════
-    // CALENDAR PROTECTION CHECK (v2.2)
+    // CALENDAR PROTECTION CHECK (v2.3)
     // Always preserve calendar-protected events
+    // Protected events do NOT count toward domain caps (v2.3 fix)
     // ═══════════════════════════════════════════════════════════════════════
     if (isCalendarProtected(ev)) {
       filtered.push(ev);
       preservedByCalendar++;
-      // Still count toward domain totals but don't cap
-      seenByDomain[evType] = (seenByDomain[evType] || 0) + 1;
       continue;
     }
 
@@ -207,12 +213,12 @@ function filterNoiseEvents_(ctx) {
     // 1. MICRO-EVENT DEDUPLICATION
     // ═══════════════════════════════════════════════════════════════════════
     if (evType === "micro") {
-      const k = key(ev.popId, ev.description);
-      if (seenMicro.has(k)) {
+      var k = key(ev.popId, ev.description);
+      if (seenMicro[k]) {
         removedCount++;
         continue;
       }
-      seenMicro.add(k);
+      seenMicro[k] = true;
     }
 
     // ═══════════════════════════════════════════════════════════════════════
@@ -221,12 +227,12 @@ function filterNoiseEvents_(ctx) {
     // Keep one per neighborhood per description.
     // ═══════════════════════════════════════════════════════════════════════
     if (evType === "neighborhood") {
-      const k = key(neighborhood, ev.description);
-      if (seenNeighborhood.has(k)) {
+      var k = key(neighborhood, ev.description);
+      if (seenNeighborhood[k]) {
         removedCount++;
         continue;
       }
-      seenNeighborhood.add(k);
+      seenNeighborhood[k] = true;
     }
 
     // ═══════════════════════════════════════════════════════════════════════
@@ -234,12 +240,12 @@ function filterNoiseEvents_(ctx) {
     // De-duplicate by description + neighborhood.
     // ═══════════════════════════════════════════════════════════════════════
     if (evType === "household") {
-      const k = key(neighborhood, ev.description);
-      if (seenHousehold.has(k)) {
+      var k = key(neighborhood, ev.description);
+      if (seenHousehold[k]) {
         removedCount++;
         continue;
       }
-      seenHousehold.add(k);
+      seenHousehold[k] = true;
     }
 
     // ═══════════════════════════════════════════════════════════════════════
@@ -249,12 +255,12 @@ function filterNoiseEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (evType === "weather" && evSeverity === "low") {
       if (weather.impact < 1.2 && chaos.length === 0) {
-        const k = key("WEATHER", ev.description);
-        if (seenMicro.has(k)) {
+        var k = key("WEATHER", ev.description);
+        if (seenMicro[k]) {
           removedCount++;
           continue;
         }
-        seenMicro.add(k);
+        seenMicro[k] = true;
       }
     }
 
@@ -267,12 +273,12 @@ function filterNoiseEvents_(ctx) {
     if (sentiment >= 0.3 && evType === "community" && evSeverity === "low") {
       // v2.2: Don't over-filter during high community engagement
       if (dynamics.communityEngagement < 1.2) {
-        const k = key("COMM", neighborhood, ev.description);
-        if (seenNeighborhood.has(k)) {
+        var k = key("COMM", neighborhood, ev.description);
+        if (seenNeighborhood[k]) {
           removedCount++;
           continue;
         }
-        seenNeighborhood.add(k);
+        seenNeighborhood[k] = true;
       }
     }
 
@@ -281,12 +287,12 @@ function filterNoiseEvents_(ctx) {
     // During stable economy, reduce economic noise.
     // ═══════════════════════════════════════════════════════════════════════
     if (econMood >= 45 && econMood <= 55 && evType === "economic" && evSeverity === "low") {
-      const k = key("ECON", ev.description);
-      if (seenMicro.has(k)) {
+      var k = key("ECON", ev.description);
+      if (seenMicro[k]) {
         removedCount++;
         continue;
       }
-      seenMicro.add(k);
+      seenMicro[k] = true;
     }
 
     // ═══════════════════════════════════════════════════════════════════════
@@ -295,12 +301,12 @@ function filterNoiseEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (weatherMood.comfortIndex && weatherMood.comfortIndex > 0.6) {
       if (evType === "weather" && evSeverity === "low") {
-        const k = key("COMFORT-WEATHER", ev.description);
-        if (seenMicro.has(k)) {
+        var k = key("COMFORT-WEATHER", ev.description);
+        if (seenMicro[k]) {
           removedCount++;
           continue;
         }
-        seenMicro.add(k);
+        seenMicro[k] = true;
       }
     }
 
@@ -312,17 +318,17 @@ function filterNoiseEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (chaos.length > 0 && pattern !== "micro-event-wave") {
       // v2.2: Skip chaos collapse during special calendar events
-      const isSpecialDay = (holidayPriority !== "none") || isFirstFriday || isCreationDay;
-      
+      var isSpecialDay = (holidayPriority !== "none") || isFirstFriday || isCreationDay;
+
       if (!isSpecialDay) {
         if (evType === "micro" || evType === "community" || evType === "household") {
           if (evSeverity === "low" || evSeverity === "") {
-            const k = key("CHAOS-COLLAPSE", evType, neighborhood);
-            if (seenMicro.has(k)) {
+            var k = key("CHAOS-COLLAPSE", evType, neighborhood);
+            if (seenMicro[k]) {
               removedCount++;
               continue;
             }
-            seenMicro.add(k);
+            seenMicro[k] = true;
           }
         }
       }
@@ -334,7 +340,7 @@ function filterNoiseEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (evSeverity !== "high" && evSeverity !== "major" && evSeverity !== "critical") {
       seenByDomain[evType] = (seenByDomain[evType] || 0) + 1;
-      const cap = getDomainCap(evType);
+      var cap = getDomainCap(evType);
       if (seenByDomain[evType] > cap) {
         removedCount++;
         continue;
@@ -373,7 +379,7 @@ function filterNoiseEvents_(ctx) {
  * ============================================================================
  * NOISE FILTER REFERENCE
  * ============================================================================
- * 
+ *
  * Filtering Rules:
  * 1. Micro-event deduplication (by popId + description)
  * 2. Neighborhood event compression (one per description)
@@ -384,14 +390,18 @@ function filterNoiseEvents_(ctx) {
  * 7. Weather mood comfort filtering
  * 8. Chaos-cluster merging (background clutter)
  * 9. Domain frequency caps (calendar-adjusted)
- * 
+ *
  * Calendar Preservation (v2.2):
  * - Holiday-tagged events always preserved
  * - First Friday cultural events preserved
  * - Creation Day community events preserved
  * - Sports events during playoffs/championship preserved
  * - Holiday neighborhood events preserved
- * 
+ *
+ * v2.3 Fix:
+ * - Calendar-protected events no longer count toward domain caps
+ *   (prevents holidays from crowding out normal domain signals)
+ *
  * Domain Caps (v2.2 - Calendar-adjusted):
  * - Base cap: 5 events per domain
  * - Cultural holidays: culture +8, community +7
@@ -401,7 +411,7 @@ function filterNoiseEvents_(ctx) {
  * - Creation Day: community +8
  * - High cultural activity: culture +8
  * - High community engagement: community +7
- * 
+ *
  * Stats Output:
  * - original: Event count before filtering
  * - filtered: Event count after filtering
@@ -409,6 +419,6 @@ function filterNoiseEvents_(ctx) {
  * - preservedByCalendar: Events protected by calendar rules
  * - compressionRatio: Percentage removed
  * - calendarContext: Calendar state affecting filters
- * 
+ *
  * ============================================================================
  */

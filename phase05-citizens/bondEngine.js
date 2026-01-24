@@ -722,7 +722,8 @@ function detectNewBonds_(ctx) {
             nhA || nhB || 'Downtown',
             4,
             currentCycle,
-            'Met during ' + holiday + ' celebrations.'
+            'Met during ' + holiday + ' celebrations.',
+            ctx
           ));
           bondsCreated++;
           continue;
@@ -743,7 +744,8 @@ function detectNewBonds_(ctx) {
             nhA || nhB || 'Jack London',
             5,
             currentCycle,
-            sportsSeason === 'championship' ? 'Championship rivalry sparked.' : 'Playoff debate turned heated.'
+            sportsSeason === 'championship' ? 'Championship rivalry sparked.' : 'Playoff debate turned heated.',
+            ctx
           ));
           bondsCreated++;
           continue;
@@ -764,7 +766,8 @@ function detectNewBonds_(ctx) {
             nhA || nhB || 'Uptown',
             4,
             currentCycle,
-            'Connected at First Friday gallery crawl.'
+            'Connected at First Friday gallery crawl.',
+            ctx
           ));
           bondsCreated++;
           continue;
@@ -782,7 +785,8 @@ function detectNewBonds_(ctx) {
             nhA,
             4,
             currentCycle,
-            'Bonded over Oakland heritage at Creation Day.'
+            'Bonded over Oakland heritage at Creation Day.',
+            ctx
           ));
           bondsCreated++;
           continue;
@@ -801,7 +805,8 @@ function detectNewBonds_(ctx) {
             nhA,
             4,
             currentCycle,
-            'Connected during ' + holiday + ' neighborhood gathering.'
+            'Connected during ' + holiday + ' neighborhood gathering.',
+            ctx
           ));
           bondsCreated++;
           continue;
@@ -822,7 +827,8 @@ function detectNewBonds_(ctx) {
           sameNeighborhood ? nhA : '',
           4,
           currentCycle,
-          'Competing in overlapping domains.'
+          'Competing in overlapping domains.',
+          ctx
         ));
         bondsCreated++;
         continue;
@@ -838,7 +844,8 @@ function detectNewBonds_(ctx) {
           nhA,
           3,
           currentCycle,
-          'Neighbors in ' + nhA + '.'
+          'Neighbors in ' + nhA + '.',
+          ctx
         ));
         bondsCreated++;
         continue;
@@ -854,7 +861,8 @@ function detectNewBonds_(ctx) {
           sameNeighborhood ? nhA : '',
           3,
           currentCycle,
-          'Colleagues in ' + sharedDomains[0] + ' sphere.'
+          'Colleagues in ' + sharedDomains[0] + ' sphere.',
+          ctx
         ));
         bondsCreated++;
         continue;
@@ -874,7 +882,8 @@ function detectNewBonds_(ctx) {
           arcA.neighborhood || '',
           5,
           currentCycle,
-          'Brought together by ' + arcA.type + ' arc in ' + (arcA.neighborhood || 'the city') + '.'
+          'Brought together by ' + arcA.type + ' arc in ' + (arcA.neighborhood || 'the city') + '.',
+          ctx
         ));
         bondsCreated++;
         continue;
@@ -895,7 +904,8 @@ function detectNewBonds_(ctx) {
           sameNeighborhood ? nhA : '',
           4,
           currentCycle,
-          'Mentorship forming in ' + sharedDomains[0] + '.'
+          'Mentorship forming in ' + sharedDomains[0] + '.',
+          ctx
         ));
         bondsCreated++;
       }
@@ -1099,8 +1109,8 @@ function generateBondSummary_(ctx) {
 // HELPER FUNCTIONS
 // ============================================================
 
-function makeBond_(citizenA, citizenB, bondType, origin, domainTag, neighborhood, intensity, cycle, notes) {
-  return {
+function makeBond_(citizenA, citizenB, bondType, origin, domainTag, neighborhood, intensity, cycle, notes, ctx) {
+  var bond = {
     bondId: generateBondId_(),
     cycleCreated: cycle,
     citizenA: citizenA,
@@ -1112,8 +1122,26 @@ function makeBond_(citizenA, citizenB, bondType, origin, domainTag, neighborhood
     neighborhood: neighborhood || '',
     status: BOND_STATUS.ACTIVE,
     lastUpdate: cycle,
-    notes: notes || ''
+    notes: notes || '',
+    // v2.4: Calendar context stamped at creation
+    holiday: 'none',
+    holidayPriority: 'none',
+    isFirstFriday: false,
+    isCreationDay: false,
+    sportsSeason: 'off-season'
   };
+
+  // Stamp calendar context if available
+  if (ctx && ctx.bondCalendarContext) {
+    var cal = ctx.bondCalendarContext;
+    bond.holiday = cal.holiday || 'none';
+    bond.holidayPriority = cal.holidayPriority || 'none';
+    bond.isFirstFriday = !!cal.isFirstFriday;
+    bond.isCreationDay = !!cal.isCreationDay;
+    bond.sportsSeason = cal.sportsSeason || 'off-season';
+  }
+
+  return bond;
 }
 
 function generateBondId_() {
@@ -1265,7 +1293,8 @@ function createBond_(ctx, citizenA, citizenB, bondType, origin, domainTag, neigh
     neighborhood,
     3,
     currentCycle,
-    notes
+    notes,
+    ctx
   );
 
   ctx.summary.relationshipBonds = ctx.summary.relationshipBonds || [];
@@ -1302,13 +1331,14 @@ function saveV3BondsToLedger_(ctx) {
     'Holiday', 'HolidayPriority', 'FirstFriday', 'CreationDay', 'SportsSeason'
   ];
 
+  // v2.4: Write to Relationship_Bond_Ledger (not Relationship_Bonds - that's master state)
   var sheet;
   if (typeof ensureSheet_ === 'function') {
-    sheet = ensureSheet_(ss, 'Relationship_Bonds', headers);
+    sheet = ensureSheet_(ss, 'Relationship_Bond_Ledger', headers);
   } else {
-    sheet = ss.getSheetByName('Relationship_Bonds');
+    sheet = ss.getSheetByName('Relationship_Bond_Ledger');
     if (!sheet) {
-      sheet = ss.insertSheet('Relationship_Bonds');
+      sheet = ss.insertSheet('Relationship_Bond_Ledger');
       sheet.appendRow(headers);
       sheet.setFrozenRows(1);
     }

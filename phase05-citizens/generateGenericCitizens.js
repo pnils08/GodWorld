@@ -1,9 +1,17 @@
 /**
  * ============================================================================
- * generateGenericCitizens_ v2.3
+ * generateGenericCitizens_ v2.4
  * ============================================================================
  *
  * World-aware background citizen generation with GodWorld Calendar integration.
+ *
+ * v2.4 Changes from v2.3:
+ * - Full ES5 conversion for Google Apps Script compatibility
+ * - Added First/Last header guard for nameExists() safety
+ * - Removed unused holidayPriority and logSheet variables
+ * - Normalize duplicate name check (case-insensitive)
+ * - BirthYear range updated: 1966-2023 (ages 18-75 in 2041)
+ * - Changed "Born into population" to "Arrived in Oakland"
  *
  * v2.3 Changes from v2.2:
  * - Writes to Generic_Citizens instead of Simulation_Ledger
@@ -28,56 +36,63 @@
  * Always generates Tier-4 ENGINE citizens.
  * Never creates UNI / MED / CIV.
  * No lore characters.
- * 
+ *
  * ============================================================================
  */
 
 function generateGenericCitizens_(ctx) {
 
-  const ss = ctx.ss;
-  const genericSheet = ss.getSheetByName('Generic_Citizens');
-  const logSheet = ss.getSheetByName('LifeHistory_Log');
+  var ss = ctx.ss;
+  var genericSheet = ss.getSheetByName('Generic_Citizens');
   if (!genericSheet) return;
 
-  const genericValues = genericSheet.getDataRange().getValues();
-  const header = genericValues[0];
-  const idx = n => header.indexOf(n);
+  var genericValues = genericSheet.getDataRange().getValues();
+  var header = genericValues[0];
 
-  const iFirst = idx('First');
-  const iLast = idx('Last');
-  const iBirthYear = idx('BirthYear');
-  const iNeighborhood = idx('Neighborhood');
-  const iOccupation = idx('Occupation');
-  const iEmergenceCount = idx('EmergenceCount');
-  const iStatus = idx('Status');
-  const iCreatedCycle = idx('CreatedCycle');
-  const iLifeHistory = idx('LifeHistory');
+  function idx(n) {
+    return header.indexOf(n);
+  }
+
+  var iFirst = idx('First');
+  var iLast = idx('Last');
+  var iBirthYear = idx('BirthYear');
+  var iNeighborhood = idx('Neighborhood');
+  var iOccupation = idx('Occupation');
+  var iEmergenceCount = idx('EmergenceCount');
+  var iStatus = idx('Status');
+  var iCreatedCycle = idx('CreatedCycle');
+  var iLifeHistory = idx('LifeHistory');
+
+  // v2.4: Required header guard for duplicate checking
+  if (iFirst < 0 || iLast < 0) {
+    Logger.log('generateGenericCitizens_: Missing First/Last headers; cannot ensure uniqueness.');
+    return;
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD STATE
   // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary;
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
+  var S = ctx.summary;
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const sports = S.sportsSeason || "off-season";
-  const econMood = S.economicMood || 50;
-  const cycle = S.cycleId || ctx.config.cycleCount || 0;
+  var sportsSeason = S.sportsSeason || "off-season";
+  var econMood = S.economicMood || 50;
+  var cycle = S.cycleId || ctx.config.cycleCount || 0;
 
   // Calendar context (v2.2)
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
+  var holiday = S.holiday || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DETERMINE SPAWN COUNT (World + Calendar Aware)
   // ═══════════════════════════════════════════════════════════════════════════
-  let baseCount = Math.floor(Math.random() * 2) + 1; // 1–2 normally
+  var baseCount = Math.floor(Math.random() * 2) + 1; // 1–2 normally
 
   // Summer → higher population churn + tourism movement
   if (season === "Summer") baseCount += 1;
@@ -99,27 +114,27 @@ function generateGenericCitizens_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Travel holidays bring temporary residents / new arrivals
-  const travelHolidays = [
-    "Thanksgiving", "Holiday", "NewYear", "MemorialDay", 
+  var travelHolidays = [
+    "Thanksgiving", "Holiday", "NewYear", "MemorialDay",
     "LaborDay", "Independence"
   ];
-  if (travelHolidays.includes(holiday)) {
+  if (travelHolidays.indexOf(holiday) >= 0) {
     baseCount += 1;
   }
 
   // Oakland celebration holidays draw new residents
-  const oaklandCelebrations = [
+  var oaklandCelebrations = [
     "OpeningDay", "OaklandPride", "ArtSoulFestival", "Juneteenth"
   ];
-  if (oaklandCelebrations.includes(holiday) && Math.random() < 0.5) {
+  if (oaklandCelebrations.indexOf(holiday) >= 0 && Math.random() < 0.5) {
     baseCount += 1;
   }
 
   // Cultural holidays may draw diaspora arrivals
-  const culturalHolidays = [
+  var culturalHolidays = [
     "CincoDeMayo", "DiaDeMuertos", "LunarNewYear", "Juneteenth"
   ];
-  if (culturalHolidays.includes(holiday) && Math.random() < 0.4) {
+  if (culturalHolidays.indexOf(holiday) >= 0 && Math.random() < 0.4) {
     baseCount += 1;
   }
 
@@ -134,9 +149,9 @@ function generateGenericCitizens_(ctx) {
   }
 
   // Championship brings temporary population surge
-  if (sports === "championship") {
+  if (sportsSeason === "championship") {
     baseCount += 1;
-  } else if ((sports === "playoffs" || sports === "post-season") && Math.random() < 0.4) {
+  } else if ((sportsSeason === "playoffs" || sportsSeason === "post-season") && Math.random() < 0.4) {
     baseCount += 1;
   }
 
@@ -151,8 +166,8 @@ function generateGenericCitizens_(ctx) {
   }
 
   // Quiet holidays reduce arrivals (people staying home)
-  const quietHolidays = ["Easter", "MothersDay", "FathersDay"];
-  if (quietHolidays.includes(holiday) && Math.random() < 0.5) {
+  var quietHolidays = ["Easter", "MothersDay", "FathersDay"];
+  if (quietHolidays.indexOf(holiday) >= 0 && Math.random() < 0.5) {
     baseCount -= 1;
   }
 
@@ -163,14 +178,14 @@ function generateGenericCitizens_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // NAME POOLS
   // ═══════════════════════════════════════════════════════════════════════════
-  const firstNames = [
+  var firstNames = [
     "Carlos", "Mina", "Andre", "Jordan", "Brianna", "Sofia", "Tariq", "Elena", "Marcus",
     "Kaila", "Tobias", "Lorenzo", "Ariana", "Xavier", "Lila", "Darius", "Ramon", "Ivy",
     "Maya", "Jamal", "Priya", "Diego", "Aaliyah", "Oscar", "Jasmine", "Terrell", "Camila",
     "Wei", "Mei", "Jun", "Yuki", "Kenji", "Anh", "Linh", "Tran", "Esperanza", "Guadalupe"
   ];
 
-  const lastNames = [
+  var lastNames = [
     "Lopez", "Carter", "Nguyen", "Patel", "Jackson", "Harris", "Wong", "Thompson",
     "Brown", "Lee", "Lewis", "Jordan", "Reyes", "Scott", "Ward", "Foster", "Cook",
     "Martinez", "Robinson", "Kim", "Davis", "Garcia", "Chen", "Williams", "Santos",
@@ -180,7 +195,7 @@ function generateGenericCitizens_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OCCUPATIONS
   // ═══════════════════════════════════════════════════════════════════════════
-  const occupations = [
+  var occupations = [
     "Barista", "Server", "Cook", "Bartender", "Retail clerk", "Cashier",
     "Driver", "Warehouse worker", "Mechanic", "Electrician", "Plumber",
     "Painter", "Teacher", "Nurse", "Office worker", "Security guard",
@@ -192,14 +207,14 @@ function generateGenericCitizens_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12 - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoods = [
+  var neighborhoods = [
     "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
     "West Oakland", "Laurel", "Rockridge", "Jack London",
     "Uptown", "KONO", "Chinatown", "Piedmont Ave"
   ];
 
   // Base neighborhood weights
-  const neighborhoodWeights = {
+  var neighborhoodWeights = {
     'Temescal': 1.2,
     'Downtown': 1.3,
     'Fruitvale': 1.0,
@@ -215,16 +230,26 @@ function generateGenericCitizens_(ctx) {
   };
 
   // Arts neighborhoods for First Friday
-  const artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+  var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HELPERS
   // ═══════════════════════════════════════════════════════════════════════════
 
+  // v2.4: Normalize strings for comparison
+  function norm(s) {
+    return String(s || '').trim().toLowerCase();
+  }
+
+  // v2.4: Case-insensitive duplicate check
   function nameExists(first, last) {
-    for (let r = 1; r < genericValues.length; r++) {
-      if (genericValues[r][iFirst] === first &&
-          genericValues[r][iLast] === last) return true;
+    var normFirst = norm(first);
+    var normLast = norm(last);
+    for (var r = 1; r < genericValues.length; r++) {
+      if (norm(genericValues[r][iFirst]) === normFirst &&
+          norm(genericValues[r][iLast]) === normLast) {
+        return true;
+      }
     }
     return false;
   }
@@ -233,14 +258,20 @@ function generateGenericCitizens_(ctx) {
   // CALENDAR-AWARE NEIGHBORHOOD PICKER (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
   function pickWeightedNeighborhood() {
-    // Start with base weights
-    const weights = { ...neighborhoodWeights };
+    // v2.4: Manual copy instead of spread operator
+    var weights = {};
+    for (var key in neighborhoodWeights) {
+      if (neighborhoodWeights.hasOwnProperty(key)) {
+        weights[key] = neighborhoodWeights[key];
+      }
+    }
 
     // First Friday boosts arts neighborhoods
     if (isFirstFriday) {
-      artsNeighborhoods.forEach(n => {
-        weights[n] = (weights[n] || 1.0) + 0.4;
-      });
+      for (var a = 0; a < artsNeighborhoods.length; a++) {
+        var artN = artsNeighborhoods[a];
+        weights[artN] = (weights[artN] || 1.0) + 0.4;
+      }
     }
 
     // Lunar New Year boosts Chinatown
@@ -254,7 +285,7 @@ function generateGenericCitizens_(ctx) {
     }
 
     // Opening Day / Sports boosts Jack London / Downtown
-    if (holiday === "OpeningDay" || sports === "championship") {
+    if (holiday === "OpeningDay" || sportsSeason === "championship") {
       weights['Jack London'] = (weights['Jack London'] || 1.0) + 0.4;
       weights['Downtown'] = (weights['Downtown'] || 1.0) + 0.3;
     }
@@ -273,33 +304,36 @@ function generateGenericCitizens_(ctx) {
 
     // High cultural activity boosts arts neighborhoods
     if (dynamics.culturalActivity >= 1.4) {
-      artsNeighborhoods.forEach(n => {
-        weights[n] = (weights[n] || 1.0) + 0.2;
-      });
+      for (var b = 0; b < artsNeighborhoods.length; b++) {
+        var artN2 = artsNeighborhoods[b];
+        weights[artN2] = (weights[artN2] || 1.0) + 0.2;
+      }
     }
 
     // Build weighted array
-    const weighted = [];
-    for (const n of neighborhoods) {
-      const weight = weights[n] || 1.0;
-      const count = Math.round(weight * 10);
-      for (let i = 0; i < count; i++) {
-        weighted.push(n);
+    var weighted = [];
+    for (var n = 0; n < neighborhoods.length; n++) {
+      var neighborhood = neighborhoods[n];
+      var weight = weights[neighborhood] || 1.0;
+      var count = Math.round(weight * 10);
+      for (var c = 0; c < count; c++) {
+        weighted.push(neighborhood);
       }
     }
     return weighted[Math.floor(Math.random() * weighted.length)];
   }
 
   // Track new citizens for summary
-  const newCitizens = [];
+  var newCitizens = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATE CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let i = 0; i < baseCount; i++) {
+  for (var i = 0; i < baseCount; i++) {
 
-    let first = "", last = "";
-    let attempts = 0;
+    var first = "";
+    var last = "";
+    var attempts = 0;
 
     do {
       first = firstNames[Math.floor(Math.random() * firstNames.length)];
@@ -309,14 +343,18 @@ function generateGenericCitizens_(ctx) {
 
     if (attempts >= 50) continue;
 
-    // v2.3: BirthYear instead of Age
-    // Range 1965-2004 → ages 37-76 in 2041 (same range as v2.2)
-    const birthYear = 1965 + Math.floor(Math.random() * 40);
+    // v2.4: BirthYear range 1966-2023 → ages 18-75 in 2041
+    var minBirthYear = 1966;  // Age 75 in 2041
+    var maxBirthYear = 2023;  // Age 18 in 2041
+    var birthYear = minBirthYear + Math.floor(Math.random() * (maxBirthYear - minBirthYear + 1));
 
-    const neighborhood = pickWeightedNeighborhood();
-    const occupation = occupations[Math.floor(Math.random() * occupations.length)];
+    var neighborhood = pickWeightedNeighborhood();
+    var occupation = occupations[Math.floor(Math.random() * occupations.length)];
 
-    const newRow = new Array(header.length).fill("");
+    var newRow = [];
+    for (var h = 0; h < header.length; h++) {
+      newRow.push("");
+    }
 
     if (iFirst >= 0) newRow[iFirst] = first;
     if (iLast >= 0) newRow[iLast] = last;
@@ -330,13 +368,13 @@ function generateGenericCitizens_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // WORLD + CALENDAR AWARE LIFEHISTORY (v2.2)
     // ═══════════════════════════════════════════════════════════════════════
-    let worldContext = "";
+    var worldContext = "";
 
     // Seasonal context
     if (season === "Winter") worldContext = "Arrived during winter's quiet cycle.";
-    if (season === "Spring") worldContext = "Entered population during spring's renewal.";
-    if (season === "Summer") worldContext = "Added to population in a lively summer period.";
-    if (season === "Fall") worldContext = "Joined during the fall transition.";
+    if (season === "Spring") worldContext = "Entered Oakland during spring's renewal.";
+    if (season === "Summer") worldContext = "Moved to Oakland in a lively summer period.";
+    if (season === "Fall") worldContext = "Joined the city during the fall transition.";
 
     // Weather context
     if (weatherMood.perfectWeather) worldContext += " Perfect weather welcomed the newcomer.";
@@ -351,7 +389,7 @@ function generateGenericCitizens_(ctx) {
 
     // Calendar context (v2.2)
     if (holiday !== "none") {
-      const holidayContextMap = {
+      var holidayContextMap = {
         "Thanksgiving": " Arrived during Thanksgiving travel.",
         "Holiday": " Holiday movement influenced this arrival.",
         "NewYear": " New year brought a fresh start.",
@@ -372,7 +410,7 @@ function generateGenericCitizens_(ctx) {
     }
 
     if (isFirstFriday) {
-      if (artsNeighborhoods.includes(neighborhood)) {
+      if (artsNeighborhoods.indexOf(neighborhood) >= 0) {
         worldContext += " First Friday's creative energy drew them to the arts district.";
       } else {
         worldContext += " First Friday evening welcomed new faces.";
@@ -383,9 +421,9 @@ function generateGenericCitizens_(ctx) {
       worldContext += " Creation Day marked their entry into Oakland's story.";
     }
 
-    if (sports === "championship") {
+    if (sportsSeason === "championship") {
       worldContext += " Championship fever filled the city.";
-    } else if (sports === "playoffs" || sports === "post-season") {
+    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
       worldContext += " Playoff excitement energized the city.";
     }
 
@@ -397,12 +435,13 @@ function generateGenericCitizens_(ctx) {
       worldContext += " Strong community welcomed the newcomer.";
     }
 
+    // v2.4: Changed from "Born into population" to "Arrived in Oakland"
     if (iLifeHistory >= 0) {
-      newRow[iLifeHistory] = `Born into population during Cycle ${cycle}. Settled in ${neighborhood}. ${worldContext}`;
+      newRow[iLifeHistory] = "Arrived in Oakland during Cycle " + cycle + ". Settled in " + neighborhood + ". " + worldContext;
     }
 
     // Write to Generic_Citizens
-    const writeRow = genericSheet.getLastRow() + 1;
+    var writeRow = genericSheet.getLastRow() + 1;
     genericSheet.getRange(writeRow, 1, 1, newRow.length).setValues([newRow]);
 
     // Update local array for duplicate checking
@@ -418,7 +457,7 @@ function generateGenericCitizens_(ctx) {
         holiday: holiday,
         isFirstFriday: isFirstFriday,
         isCreationDay: isCreationDay,
-        sportsSeason: sports
+        sportsSeason: sportsSeason
       }
     });
 
@@ -429,34 +468,44 @@ function generateGenericCitizens_(ctx) {
   S.newGenericCitizens = newCitizens;
   S.genericCitizensGenerated = newCitizens.length;
   ctx.summary = S;
+
+  Logger.log('generateGenericCitizens_ v2.4: Generated ' + newCitizens.length + ' citizens');
 }
 
 
 /**
  * ============================================================================
- * GENERIC CITIZENS GENERATOR REFERENCE v2.3
+ * GENERIC CITIZENS GENERATOR REFERENCE v2.4
  * ============================================================================
- * 
+ *
+ * CHANGES FROM v2.3:
+ * - Full ES5 conversion (var, indexOf, classic for loops)
+ * - Added First/Last header guard for nameExists() safety
+ * - Removed unused holidayPriority and logSheet variables
+ * - Normalize duplicate name check (case-insensitive)
+ * - BirthYear range: 1966-2023 (ages 18-75 in SimYear 2041)
+ * - Changed "Born into population" to "Arrived in Oakland"
+ *
  * CHANGES FROM v2.2:
  * - Writes to Generic_Citizens (not Simulation_Ledger)
  * - Uses BirthYear column (not Age)
  * - No POPID (assigned on promotion)
- * 
+ *
  * BASE SPAWN: 1-2 citizens per cycle
- * 
+ *
  * SPAWN MODIFIERS:
- * 
+ *
  * SEASONAL/WEATHER:
  * - Summer: +1
  * - Weather impact ≥1.3: +1 (30% chance)
  * - Perfect weather: +1 (20% chance)
- * 
+ *
  * WORLD STATE:
  * - Chaos events: +1 (40% chance)
  * - Economic boom (≥65): +1 (30% chance)
- * 
+ *
  * CALENDAR MODIFIERS (v2.2):
- * 
+ *
  * | Factor | Effect |
  * |--------|--------|
  * | Travel holidays | +1 |
@@ -469,15 +518,15 @@ function generateGenericCitizens_(ctx) {
  * | High cultural activity | +1 (30% chance) |
  * | High community engagement | +1 (25% chance) |
  * | Quiet holidays | -1 (50% chance) |
- * 
+ *
  * SPAWN CAP: 0-5 citizens per cycle
- * 
- * BIRTHYEAR RANGE: 1965-2004 (ages 37-76 in SimYear 2041)
- * 
+ *
+ * BIRTHYEAR RANGE: 1966-2023 (ages 18-75 in SimYear 2041)
+ *
  * NEIGHBORHOODS (12):
  * - Temescal, Downtown, Fruitvale, Lake Merritt
  * - West Oakland, Laurel, Rockridge, Jack London
  * - Uptown, KONO, Chinatown, Piedmont Ave
- * 
+ *
  * ============================================================================
  */

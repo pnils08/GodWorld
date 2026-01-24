@@ -1,12 +1,19 @@
 /**
  * ============================================================================
- * CITIZEN CONTEXT BUILDER v1.1
+ * CITIZEN CONTEXT BUILDER v1.2
  * ============================================================================
- * 
+ *
+ * v1.2 FIXES:
+ * - Load Neighborhood from Simulation_Ledger (was returning empty)
+ * - Match relationships by ID OR exact name (not substring)
+ * - Skip resolved/severed bonds in relationship lookup
+ * - Filter arc exposure to exclude resolved arcs
+ * - Fix empty if block in getReturningCitizens (neighborhood filter)
+ *
  * v1.1 FIX:
  * - Age calculation now uses SimYear 2041 instead of 2026
  * - BirthYear upper bound changed from 2020 to 2030
- * 
+ *
  * Assembles a complete citizen identity from all simulation ledgers.
  * Returns a structured profile that can be passed to an LLM so the citizen
  * can "wake up knowing who they are."
@@ -255,7 +262,8 @@ function findInSimulationLedger_(ss, identifier) {
     var statusCol = headers.indexOf('Status');
     var birthYearCol = headers.indexOf('BirthYear');
     var originCityCol = headers.indexOf('OrginCity') >= 0 ? headers.indexOf('OrginCity') : headers.indexOf('OriginCity');
-    
+    var neighborhoodCol = headers.indexOf('Neighborhood');
+
     var identifierLower = identifier.toLowerCase().trim();
     
     for (var i = 1; i < data.length; i++) {
@@ -288,7 +296,7 @@ function findInSimulationLedger_(ss, identifier) {
           id: idCol >= 0 ? row[idCol] : '',
           name: fullName,
           age: age,
-          neighborhood: '',  // Not in this ledger
+          neighborhood: neighborhoodCol >= 0 ? row[neighborhoodCol] : '',
           occupation: roleCol >= 0 ? row[roleCol] : '',
           origin: originCityCol >= 0 ? row[originCityCol] : '',
           tier: tierCol >= 0 ? (Number(row[tierCol]) || 4) : 4,
@@ -467,17 +475,28 @@ function getRelationships_(ss, name, id, cache) {
     var statusCol = headers.indexOf('Status');
     var sinceCol = headers.indexOf('CycleCreated');
     var neighborhoodCol = headers.indexOf('Neighborhood');
-    
-    var nameLower = name.toLowerCase();
-    
+
+    // v1.2: Build keys map for exact matching (ID and name)
+    var keys = {};
+    var idKey = (id || '').toString().trim().toLowerCase();
+    var nameKey = (name || '').toString().trim().toLowerCase();
+    if (idKey) keys[idKey] = true;
+    if (nameKey) keys[nameKey] = true;
+
     for (var i = 1; i < data.length; i++) {
       var row = data[i];
+
+      // v1.2: Skip resolved/severed bonds
+      var bondStatus = statusCol >= 0 ? String(row[statusCol] || '').toLowerCase() : '';
+      if (bondStatus === 'resolved' || bondStatus === 'severed') continue;
+
       var citizenA = citizenACol >= 0 ? String(row[citizenACol] || '') : '';
       var citizenB = citizenBCol >= 0 ? String(row[citizenBCol] || '') : '';
-      var citizenALower = citizenA.toLowerCase();
-      var citizenBLower = citizenB.toLowerCase();
-      
-      if (citizenALower === nameLower || citizenALower.indexOf(nameLower) >= 0) {
+      var aKey = citizenA.toLowerCase().trim();
+      var bKey = citizenB.toLowerCase().trim();
+
+      // v1.2: Exact match only (by ID or name)
+      if (keys[aKey]) {
         relationships.push({
           name: citizenB,
           type: typeCol >= 0 ? row[typeCol] : 'connection',
@@ -485,7 +504,7 @@ function getRelationships_(ss, name, id, cache) {
           since: sinceCol >= 0 ? row[sinceCol] : '',
           neighborhood: neighborhoodCol >= 0 ? row[neighborhoodCol] : ''
         });
-      } else if (citizenBLower === nameLower || citizenBLower.indexOf(nameLower) >= 0) {
+      } else if (keys[bKey]) {
         relationships.push({
           name: citizenA,
           type: typeCol >= 0 ? row[typeCol] : 'connection',
@@ -578,7 +597,11 @@ function getArcExposure_(ss, neighborhood, currentCycle) {
     for (var i = 1; i < data.length; i++) {
       var row = data[i];
       var arcNeighborhood = neighborhoodCol >= 0 ? String(row[neighborhoodCol]).toLowerCase() : '';
-      
+
+      // v1.2: Skip resolved arcs (only show active exposure)
+      var phase = phaseCol >= 0 ? String(row[phaseCol] || '').toLowerCase() : '';
+      if (phase === 'resolved') continue;
+
       // Include if same neighborhood or city-wide arc
       if (arcNeighborhood === neighborhoodLower || arcNeighborhood === 'citywide' || arcNeighborhood === 'oakland') {
         exposure.push({
@@ -1129,7 +1152,9 @@ function getReturningCitizens(neighborhood, count) {
       
       if (!name || name.length < 3) continue;
       
+      // v1.2: Filter by neighborhood if specified
       if (neighborhood && context.indexOf(neighborhoodLower) < 0) {
+        continue;
       }
       
       nameCounts[name] = (nameCounts[name] || 0) + 1;
@@ -1161,9 +1186,16 @@ function getReturningCitizens(neighborhood, count) {
 
 /**
  * ============================================================================
- * REFERENCE v1.1
+ * REFERENCE v1.2
  * ============================================================================
- * 
+ *
+ * v1.2 CHANGES:
+ * - Load Neighborhood from Simulation_Ledger (was returning empty)
+ * - Match relationships by ID OR exact name (not substring)
+ * - Skip resolved/severed bonds in relationship lookup
+ * - Filter arc exposure to exclude resolved arcs
+ * - Fix neighborhood filter in getReturningCitizens
+ *
  * v1.1 CHANGES:
  * - Age calculation uses SIM_YEAR (2041) instead of hardcoded 2026
  * - BirthYear upper bound changed from 2020 to 2030

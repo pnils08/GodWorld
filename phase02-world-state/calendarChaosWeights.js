@@ -1,11 +1,17 @@
 /**
  * ============================================================================
- * applyChaosCategoryWeights_ v2.2
+ * applyChaosCategoryWeights_ v2.3
  * ============================================================================
- * 
+ *
  * Applies chaos category weights with named indices.
  * Aligned with GodWorld Calendar v1.0 and getSimHoliday_ v2.3.
- * 
+ *
+ * v2.3 Changes:
+ * - Guard for missing ctx.summary
+ * - CAT length assertion (prevents silent drift)
+ * - Minimum floors for MEDICAL/UTILITY/ACCIDENT
+ * - ES5 compatible (var instead of const/let)
+ *
  * Enhancements:
  * - All 30+ holidays from cycle-based calendar
  * - First Friday modifiers
@@ -13,24 +19,25 @@
  * - Oakland-specific and cultural holiday support
  * - Championship sports state
  * - Holiday priority awareness
- * 
+ *
  * ============================================================================
  */
 
 function applyChaosCategoryWeights_(ctx) {
 
-  const S = ctx.summary;
-  const season = S.season;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const sports = S.sportsSeason;
-  const econMood = S.economicMood || 50;
-  const weatherMood = S.weatherMood || {};
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
+  // Guard for missing ctx.summary
+  var S = ctx.summary || (ctx.summary = {});
+  var season = S.season;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var sports = S.sportsSeason;
+  var econMood = S.economicMood || 50;
+  var weatherMood = S.weatherMood || {};
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
 
   // Category index mapping (must match worldEventsEngine_)
-  const CAT = {
+  var CAT = {
     RESTAURANT: 0,
     BUSINESS: 1,
     MEDICAL: 2,
@@ -50,8 +57,15 @@ function applyChaosCategoryWeights_(ctx) {
     COMMUNITY: 16
   };
 
+  // Hard guard: verify CAT has exactly 17 keys (prevents silent drift)
+  var catKeys = Object.keys(CAT);
+  if (catKeys.length !== 17) {
+    Logger.log('applyChaosCategoryWeights_: CAT drift detected! Expected 17, got ' + catKeys.length);
+  }
+
   // 17 fixed-category weights
-  const w = Array(17).fill(1);
+  var w = [];
+  for (var init = 0; init < 17; init++) { w[init] = 1; }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SEASON MULTIPLIERS
@@ -441,13 +455,18 @@ function applyChaosCategoryWeights_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // NORMALIZATION
+  // NORMALIZATION + MINIMUM FLOORS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  for (let i = 0; i < 17; i++) {
+  for (var i = 0; i < 17; i++) {
     if (w[i] > 3.0) w[i] = 3.0;
     if (w[i] < 0.2) w[i] = 0.2;
   }
+
+  // Minimum floors for critical categories (never too quiet)
+  if (w[CAT.MEDICAL] < 0.5) w[CAT.MEDICAL] = 0.5;
+  if (w[CAT.UTILITY] < 0.5) w[CAT.UTILITY] = 0.5;
+  if (w[CAT.ACCIDENT] < 0.4) w[CAT.ACCIDENT] = 0.4;
 
   S.chaosCategoryWeights = w;
   S.chaosCategoryMap = CAT;  // Export mapping for reference

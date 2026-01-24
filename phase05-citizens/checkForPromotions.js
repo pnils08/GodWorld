@@ -1,10 +1,19 @@
 /**
  * ============================================================================
- * checkForPromotions_ v2.2
+ * checkForPromotions_ v2.3
  * ============================================================================
  *
  * Promotion engine for Generic_Citizens → Simulation_Ledger.
  * World-aware with Oakland neighborhood integration and GodWorld Calendar.
+ *
+ * v2.3 Fixes:
+ * - POPID collision fix: compute maxN once, increment in-memory
+ * - Deterministic neighborhood mapping (no more random fallback)
+ * - Required ledger column guard (prevents silent bad writes)
+ * - Header-based Generic writes (no offset assumptions)
+ * - BirthYear preservation (prefer Generic_Citizens value if exists)
+ * - UNI/MED/CIV values match ledger convention ("no" not "n")
+ * - ES5 compatible
  *
  * v2.2 Enhancements:
  * - Expanded to 12 Oakland neighborhoods
@@ -22,126 +31,200 @@
  * - City Dynamics integration
  *
  * Produces higher-quality Tier-3 background citizens.
- * 
+ *
  * ============================================================================
  */
 
 function checkForPromotions_(ctx) {
 
-  const ss = ctx.ss;
+  var ss = ctx.ss;
 
-  const generic = ss.getSheetByName("Generic_Citizens");
-  const ledger = ss.getSheetByName("Simulation_Ledger");
-  const logSheet = ss.getSheetByName("LifeHistory_Log");
+  var generic = ss.getSheetByName("Generic_Citizens");
+  var ledger = ss.getSheetByName("Simulation_Ledger");
+  var logSheet = ss.getSheetByName("LifeHistory_Log");
 
   if (!generic || !ledger) return;
 
-  const gVals = generic.getDataRange().getValues();
-  const gHeader = gVals[0];
-  const idxG = n => gHeader.indexOf(n);
+  var gVals = generic.getDataRange().getValues();
+  var gHeader = gVals[0];
 
-  const gFirst = idxG("First");
-  const gLast = idxG("Last");
-  const gAge = idxG("Age");
-  const gNeigh = idxG("Neighborhood");
-  const gOcc = idxG("Occupation");
-  const gEmer = idxG("EmergenceCount");
-  const gStat = idxG("Status");
+  // v2.3: ES5-safe header lookup
+  function idxG(n) {
+    for (var i = 0; i < gHeader.length; i++) {
+      if (gHeader[i] === n) return i;
+    }
+    return -1;
+  }
+
+  var gFirst = idxG("First");
+  var gLast = idxG("Last");
+  var gAge = idxG("Age");
+  var gBirthYear = idxG("BirthYear");  // v2.3: Track BirthYear column
+  var gNeigh = idxG("Neighborhood");
+  var gOcc = idxG("Occupation");
+  var gEmer = idxG("EmergenceCount");
+  var gStat = idxG("Status");
+  // v2.3: Optional columns for emergence tracking
+  var gEmergedCycle = idxG("EmergedCycle");
+  var gEmergenceContext = idxG("EmergenceContext");
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary;
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
+  var S = ctx.summary || {};
+  var season = S.season || "";
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const econMood = S.economicMood || 50;
-  const cycle = S.cycleId || ctx.config.cycleCount || 0;
+  var econMood = S.economicMood || 50;
+  var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
 
   // Calendar context (v2.2)
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // Use simYear or calculate from cycle
-  const simYear = S.simYear || (2040 + Math.floor(cycle / 12));
+  var simYear = S.simYear || (2040 + Math.floor(cycle / 12));
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12 - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const validNeighborhoods = [
+  var validNeighborhoods = [
     "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
     "West Oakland", "Laurel", "Rockridge", "Jack London",
     "Uptown", "KONO", "Chinatown", "Piedmont Ave"
   ];
 
   // Arts-focused neighborhoods for First Friday bonus
-  const artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+  var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
 
   // Ledger structure
-  const lVals = ledger.getDataRange().getValues();
-  const lHeader = lVals[0];
-  const idxL = n => lHeader.indexOf(n);
+  var lVals = ledger.getDataRange().getValues();
+  var lHeader = lVals[0];
 
-  const iPopID = idxL("POPID");
-  const iFirst = idxL("First");
-  const iMiddle = idxL("Middle");
-  const iLast = idxL("Last");
-  const iOriginGame = idxL("OriginGame");
-  const iUNI = idxL("UNI (y/n)");
-  const iMED = idxL("MED (y/n)");
-  const iCIV = idxL("CIV (y/n)");
-  const iClock = idxL("ClockMode");
-  const iTier = idxL("Tier");
-  const iRoleType = idxL("RoleType");
-  const iStatus = idxL("Status");
-  const iBirthYear = idxL("BirthYear");
-  const iNeighborhood = idxL("Neighborhood");
-  const iLife = idxL("LifeHistory");
-  const iCreatedAt = idxL("CreatedAt");
-  const iLastUpdated = idxL("LastUpdated");
-  const iOriginVault = idxL("OriginVault");
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // HELPER: NEXT POP-ID
-  // ═══════════════════════════════════════════════════════════════════════════
-  function nextPopId() {
-    let maxN = 0;
-    for (let r = 1; r < lVals.length; r++) {
-      const v = (lVals[r][iPopID] || "").toString().trim();
-      const m = v.match(/^POP-(\d+)$/);
-      if (m) maxN = Math.max(maxN, Number(m[1]));
+  // v2.3: ES5-safe header lookup
+  function idxL(n) {
+    for (var i = 0; i < lHeader.length; i++) {
+      if (lHeader[i] === n) return i;
     }
-    return "POP-" + String(maxN + 1).padStart(5, "0");
+    return -1;
+  }
+
+  var iPopID = idxL("POPID");
+  var iFirst = idxL("First");
+  var iMiddle = idxL("Middle");
+  var iLast = idxL("Last");
+  var iOriginGame = idxL("OriginGame");
+  var iUNI = idxL("UNI (y/n)");
+  var iMED = idxL("MED (y/n)");
+  var iCIV = idxL("CIV (y/n)");
+  var iClock = idxL("ClockMode");
+  var iTier = idxL("Tier");
+  var iRoleType = idxL("RoleType");
+  var iStatus = idxL("Status");
+  var iBirthYear = idxL("BirthYear");
+  var iNeighborhood = idxL("Neighborhood");
+  var iLife = idxL("LifeHistory");
+  var iCreatedAt = idxL("CreatedAt");
+  var iLastUpdated = idxL("LastUpdated");
+  var iOriginVault = idxL("OriginVault");
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.3: REQUIRED COLUMN GUARD
+  // ═══════════════════════════════════════════════════════════════════════════
+  var requiredCols = [
+    { name: "POPID", idx: iPopID },
+    { name: "First", idx: iFirst },
+    { name: "Last", idx: iLast },
+    { name: "Tier", idx: iTier },
+    { name: "Status", idx: iStatus }
+  ];
+  var missingCols = [];
+  for (var rc = 0; rc < requiredCols.length; rc++) {
+    if (requiredCols[rc].idx < 0) {
+      missingCols.push(requiredCols[rc].name);
+    }
+  }
+  if (missingCols.length > 0) {
+    Logger.log("checkForPromotions_ v2.3: Missing required ledger columns: " + missingCols.join(", ") + " - aborting");
+    return;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // HELPER: VALIDATE NEIGHBORHOOD (v2.2)
+  // v2.3: SAFE POPID GENERATOR (fixes collision when multiple promotions)
+  // ═══════════════════════════════════════════════════════════════════════════
+  var popCounter = 0;
+  for (var pr = 1; pr < lVals.length; pr++) {
+    var v = (lVals[pr][iPopID] || "").toString().trim();
+    var m = v.match(/^POP-(\d+)$/);
+    if (m) {
+      var num = parseInt(m[1], 10);
+      if (num > popCounter) popCounter = num;
+    }
+  }
+
+  function nextPopId() {
+    popCounter++;
+    var padded = String(popCounter);
+    while (padded.length < 5) padded = "0" + padded;
+    return "POP-" + padded;
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.3: DETERMINISTIC NEIGHBORHOOD VALIDATION
   // ═══════════════════════════════════════════════════════════════════════════
   function validateNeighborhood(neigh) {
-    if (validNeighborhoods.includes(neigh)) return neigh;
-    // Map old/alternate names
-    if (neigh === "Eastlake") return "Lake Merritt";
-    if (neigh === "Old Oakland") return "Downtown";
-    if (neigh === "Adams Point") return "Lake Merritt";
-    if (neigh === "Koreatown-Northgate") return "KONO";
-    // Default to random Oakland neighborhood
-    return validNeighborhoods[Math.floor(Math.random() * validNeighborhoods.length)];
+    neigh = (neigh || "").toString().trim();
+
+    // Direct match
+    if (validNeighborhoods.indexOf(neigh) >= 0) return neigh;
+
+    // Deterministic mappings (from real Oakland neighborhoods to canon 12)
+    var map = {
+      "Eastlake": "Lake Merritt",
+      "Adams Point": "Lake Merritt",
+      "Grand Lake": "Lake Merritt",
+      "Lakeshore": "Lake Merritt",
+      "Ivy Hill": "Fruitvale",
+      "San Antonio": "Fruitvale",
+      "Dimond": "Laurel",
+      "Glenview": "Laurel",
+      "Maxwell Park": "Laurel",
+      "Old Oakland": "Downtown",
+      "City Center": "Downtown",
+      "Jack London Square": "Jack London",
+      "Koreatown-Northgate": "KONO",
+      "Koreatown": "KONO",
+      "Northgate": "KONO",
+      "Montclair": "Rockridge",
+      "Claremont": "Rockridge",
+      "Longfellow": "Temescal",
+      "Shafter": "Temescal",
+      "Golden Gate": "West Oakland",
+      "McClymonds": "West Oakland",
+      "Prescott": "West Oakland",
+      "Hoover-Foster": "West Oakland"
+    };
+
+    if (map[neigh]) return map[neigh];
+
+    // v2.3: Deterministic fallback (no randomness)
+    return "Downtown";
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PROMOTION CHANCE MODIFIER (v2.2 - Calendar Aware)
   // ═══════════════════════════════════════════════════════════════════════════
   function promotionChance(base, row) {
-    let c = base;
-    const neigh = row[gNeigh] || "";
-    const occ = (row[gOcc] || "").toString().toLowerCase();
+    var c = base;
+    var neigh = row[gNeigh] || "";
+    var occ = (row[gOcc] || "").toString().toLowerCase();
 
     // ═══════════════════════════════════════════════════════════════════════
     // SEASONAL MODIFIERS
@@ -177,25 +260,25 @@ function checkForPromotions_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
 
     // Community gathering holidays increase visibility
-    const gatheringHolidays = [
+    var gatheringHolidays = [
       "Thanksgiving", "Independence", "MemorialDay", "LaborDay"
     ];
-    if (gatheringHolidays.includes(holiday)) {
+    if (gatheringHolidays.indexOf(holiday) >= 0) {
       c += 0.03;
     }
 
     // Cultural celebration holidays boost emergence
-    const culturalHolidays = [
+    var culturalHolidays = [
       "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "OaklandPride",
       "LunarNewYear", "MLKDay", "BlackHistoryMonth"
     ];
-    if (culturalHolidays.includes(holiday)) {
+    if (culturalHolidays.indexOf(holiday) >= 0) {
       c += 0.04;
     }
 
     // Oakland-specific holidays provide strong boost
-    const oaklandHolidays = ["OpeningDay", "OaklandPride", "ArtSoulFestival"];
-    if (oaklandHolidays.includes(holiday)) {
+    var oaklandHolidays = ["OpeningDay", "OaklandPride", "ArtSoulFestival"];
+    if (oaklandHolidays.indexOf(holiday) >= 0) {
       c += 0.05;
     }
 
@@ -208,13 +291,16 @@ function checkForPromotions_(ctx) {
     if (isFirstFriday) {
       c += 0.04;
       // Extra boost for arts neighborhoods
-      if (artsNeighborhoods.includes(neigh)) {
+      if (artsNeighborhoods.indexOf(neigh) >= 0) {
         c += 0.03;
       }
       // Extra boost for creative occupations
-      const creativeOccs = ["artist", "musician", "designer", "writer", "performer"];
-      if (creativeOccs.some(co => occ.includes(co))) {
-        c += 0.03;
+      var creativeOccs = ["artist", "musician", "designer", "writer", "performer"];
+      for (var co = 0; co < creativeOccs.length; co++) {
+        if (occ.indexOf(creativeOccs[co]) >= 0) {
+          c += 0.03;
+          break;
+        }
       }
     }
 
@@ -243,8 +329,8 @@ function checkForPromotions_(ctx) {
     }
 
     // Quiet holidays reduce emergence (offices closed, less activity)
-    const quietHolidays = ["Holiday", "NewYear", "Easter"];
-    if (quietHolidays.includes(holiday)) {
+    var quietHolidays = ["Holiday", "NewYear", "Easter"];
+    if (quietHolidays.indexOf(holiday) >= 0) {
       c -= 0.03;
     }
 
@@ -256,16 +342,16 @@ function checkForPromotions_(ctx) {
   }
 
   // Track promotions for summary
-  const promotions = [];
+  var promotions = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MAIN LOOP
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let r = 1; r < gVals.length; r++) {
+  for (var r = 1; r < gVals.length; r++) {
 
-    const row = gVals[r];
-    const emergence = Number(row[gEmer] || 0);
-    const status = (row[gStat] || "").toString();
+    var row = gVals[r];
+    var emergence = Number(row[gEmer] || 0);
+    var status = (row[gStat] || "").toString();
 
     // Only active candidates
     if (status !== "Active") continue;
@@ -274,35 +360,46 @@ function checkForPromotions_(ctx) {
     if (emergence < 3) continue;
 
     // World-aware promotion chance
-    const chance = promotionChance(0.20, row);
+    var chance = promotionChance(0.20, row);
     if (Math.random() > chance) continue;
 
     // === Promote to Tier-3 ===
-    const first = row[gFirst];
-    const last = row[gLast];
-    const age = Number(row[gAge] || 30);
-    const neigh = validateNeighborhood(row[gNeigh] || "Downtown");
-    const occ = row[gOcc] || "Citizen";
+    var first = row[gFirst] || "";
+    var last = row[gLast] || "";
+    var age = Number(row[gAge] || 30);
+    var neigh = validateNeighborhood(row[gNeigh] || "Downtown");
+    var occ = row[gOcc] || "Citizen";
 
-    const popId = nextPopId();
-    const newRow = new Array(lHeader.length).fill("");
+    var popId = nextPopId();
+    var newRow = [];
+    for (var nr = 0; nr < lHeader.length; nr++) {
+      newRow.push("");
+    }
 
-    const birthYear = simYear - age;
+    // v2.3: Prefer Generic_Citizens BirthYear if exists and valid
+    var birthYear = simYear - age;
+    if (gBirthYear >= 0) {
+      var sheetBirthYear = Number(row[gBirthYear] || 0);
+      if (sheetBirthYear > 1900) {
+        birthYear = sheetBirthYear;
+      }
+    }
 
     newRow[iPopID] = popId;
     newRow[iFirst] = first;
-    newRow[iMiddle] = "";
+    if (iMiddle >= 0) newRow[iMiddle] = "";
     newRow[iLast] = last;
-    newRow[iOriginGame] = "";
-    newRow[iUNI] = "n";
-    newRow[iMED] = "n";
-    newRow[iCIV] = "n";
-    newRow[iClock] = "ENGINE";
-    newRow[iTier] = 3;
-    newRow[iRoleType] = occ;
-    newRow[iStatus] = "Active";
-    newRow[iBirthYear] = birthYear;
-    
+    if (iOriginGame >= 0) newRow[iOriginGame] = "";
+    // v2.3: Use "no" to match ledger convention
+    if (iUNI >= 0) newRow[iUNI] = "no";
+    if (iMED >= 0) newRow[iMED] = "no";
+    if (iCIV >= 0) newRow[iCIV] = "no";
+    if (iClock >= 0) newRow[iClock] = "ENGINE";
+    if (iTier >= 0) newRow[iTier] = 3;
+    if (iRoleType >= 0) newRow[iRoleType] = occ;
+    if (iStatus >= 0) newRow[iStatus] = "Active";
+    if (iBirthYear >= 0) newRow[iBirthYear] = birthYear;
+
     if (iNeighborhood >= 0) {
       newRow[iNeighborhood] = neigh;
     }
@@ -310,7 +407,7 @@ function checkForPromotions_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // WORLD-AWARE LIFEHISTORY CONTEXT (v2.2)
     // ═══════════════════════════════════════════════════════════════════════
-    let context = "";
+    var context = "";
 
     // Seasonal context
     if (season === "Spring") context += "Promoted during spring renewal. ";
@@ -332,7 +429,7 @@ function checkForPromotions_(ctx) {
 
     // Calendar context (v2.2)
     if (holiday !== "none") {
-      const holidayContextMap = {
+      var holidayContextMap = {
         "Thanksgiving": "Emerged during Thanksgiving community gathering. ",
         "Independence": "Celebrated independence alongside neighbors. ",
         "Juneteenth": "Rose to visibility during Juneteenth celebration. ",
@@ -350,7 +447,7 @@ function checkForPromotions_(ctx) {
     }
 
     if (isFirstFriday) {
-      if (artsNeighborhoods.includes(neigh)) {
+      if (artsNeighborhoods.indexOf(neigh) >= 0) {
         context += "First Friday art walk brought them into the spotlight. ";
       } else {
         context += "First Friday energy rippled across the city. ";
@@ -375,15 +472,17 @@ function checkForPromotions_(ctx) {
       context += "Strong community engagement welcomed their presence. ";
     }
 
-    newRow[iLife] = `Promoted from Tier-4 to Tier-3 in Cycle ${cycle}. Settled in ${neigh}. ${context}`;
-    newRow[iCreatedAt] = ctx.now;
-    newRow[iLastUpdated] = ctx.now;
-    newRow[iOriginVault] = "Engine";
+    if (iLife >= 0) {
+      newRow[iLife] = "Promoted from Tier-4 to Tier-3 in Cycle " + cycle + ". Settled in " + neigh + ". " + context;
+    }
+    if (iCreatedAt >= 0) newRow[iCreatedAt] = ctx.now;
+    if (iLastUpdated >= 0) newRow[iLastUpdated] = ctx.now;
+    if (iOriginVault >= 0) newRow[iOriginVault] = "Engine";
 
     // ═══════════════════════════════════════════════════════════════════════
     // WRITE TO LEDGER
     // ═══════════════════════════════════════════════════════════════════════
-    const writeRow = ledger.getLastRow() + 1;
+    var writeRow = ledger.getLastRow() + 1;
     ledger.getRange(writeRow, 1, 1, newRow.length).setValues([newRow]);
 
     // ═══════════════════════════════════════════════════════════════════════
@@ -395,18 +494,24 @@ function checkForPromotions_(ctx) {
         popId,
         (first + " " + last).trim(),
         "Promotion",
-        `Emerged into Tier-3 in ${neigh}`,
+        "Emerged into Tier-3 in " + neigh,
         neigh,
         cycle
       ]);
     }
 
     // ═══════════════════════════════════════════════════════════════════════
-    // MARK GENERIC SHEET
+    // v2.3: MARK GENERIC SHEET (header-based, no offset assumptions)
     // ═══════════════════════════════════════════════════════════════════════
     generic.getRange(r + 1, gStat + 1).setValue("Emerged");
-    generic.getRange(r + 1, gEmer + 2).setValue(`Cycle ${cycle}`);
-    generic.getRange(r + 1, gEmer + 3).setValue(context.trim());
+
+    // Only write emergence tracking columns if they exist by header
+    if (gEmergedCycle >= 0) {
+      generic.getRange(r + 1, gEmergedCycle + 1).setValue("Cycle " + cycle);
+    }
+    if (gEmergenceContext >= 0) {
+      generic.getRange(r + 1, gEmergenceContext + 1).setValue(context.trim());
+    }
 
     // Track for summary
     promotions.push({
@@ -429,36 +534,48 @@ function checkForPromotions_(ctx) {
   S.promotions = promotions;
   S.promotionsCount = promotions.length;
   ctx.summary = S;
+
+  if (promotions.length > 0) {
+    Logger.log("checkForPromotions_ v2.3: " + promotions.length + " citizens promoted");
+  }
 }
 
 
 /**
  * ============================================================================
- * PROMOTION ENGINE REFERENCE
+ * PROMOTION ENGINE REFERENCE v2.3
  * ============================================================================
- * 
+ *
+ * v2.3 FIXES:
+ * - POPID collision: compute maxN once, increment in-memory counter
+ * - Deterministic neighborhood: expanded mappings, no random fallback
+ * - Required column guard: aborts if POPID/First/Last/Tier/Status missing
+ * - Header-based Generic writes: uses EmergedCycle/EmergenceContext by name
+ * - BirthYear preservation: prefers Generic_Citizens value if > 1900
+ * - UNI/MED/CIV: uses "no" to match ledger convention
+ *
  * BASE CHANCE: 0.20 (20%)
  * EMERGENCE THRESHOLD: 3+
- * 
+ *
  * CHANCE MODIFIERS:
- * 
+ *
  * SEASONAL:
  * - Spring: +0.05
  * - Fall: +0.03
- * 
+ *
  * WEATHER:
  * - Impact ≥1.3: +0.02
  * - Perfect weather: +0.02
- * 
+ *
  * WORLD STATE:
  * - Chaos events: +0.04
  * - Positive sentiment: +0.03
  * - Negative sentiment: -0.02
  * - Good economy: +0.02
  * - Bad economy: -0.02
- * 
+ *
  * CALENDAR MODIFIERS (v2.2):
- * 
+ *
  * | Factor | Effect |
  * |--------|--------|
  * | Gathering holidays | +0.03 |
@@ -475,23 +592,35 @@ function checkForPromotions_(ctx) {
  * | High community engagement | +0.03 |
  * | Low community engagement | -0.02 |
  * | Quiet holidays | -0.03 |
- * 
+ *
  * CHANCE CAP: 0.05 - 0.45
- * 
+ *
  * NEIGHBORHOODS (12):
  * - Temescal, Downtown, Fruitvale, Lake Merritt
  * - West Oakland, Laurel, Rockridge, Jack London
- * - Uptown, KONO, Chinatown, Piedmont Ave (v2.2)
- * 
+ * - Uptown, KONO, Chinatown, Piedmont Ave
+ *
+ * NEIGHBORHOOD MAPPINGS (v2.3 - deterministic):
+ * - Eastlake/Adams Point/Grand Lake/Lakeshore → Lake Merritt
+ * - Ivy Hill/San Antonio → Fruitvale
+ * - Dimond/Glenview/Maxwell Park → Laurel
+ * - Old Oakland/City Center → Downtown
+ * - Jack London Square → Jack London
+ * - Koreatown-Northgate/Koreatown/Northgate → KONO
+ * - Montclair/Claremont → Rockridge
+ * - Longfellow/Shafter → Temescal
+ * - Golden Gate/McClymonds/Prescott/Hoover-Foster → West Oakland
+ * - Unknown → Downtown (deterministic fallback)
+ *
  * ARTS NEIGHBORHOODS (First Friday bonus):
  * - Uptown, KONO, Temescal, Jack London
- * 
+ *
  * CREATIVE OCCUPATIONS (First Friday bonus):
  * - artist, musician, designer, writer, performer
- * 
- * LIFEHISTORY CONTEXT:
- * - Includes holiday, First Friday, Creation Day, sports season notes
- * - Contextualizes emergence within city calendar
- * 
+ *
+ * GENERIC_CITIZENS OPTIONAL COLUMNS:
+ * - EmergedCycle: written if header exists
+ * - EmergenceContext: written if header exists
+ *
  * ============================================================================
  */

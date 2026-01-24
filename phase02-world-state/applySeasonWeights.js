@@ -1,37 +1,42 @@
 /**
  * ============================================================================
- * applySeasonalWeights_ v2.2
+ * applySeasonalWeights_ v2.3
  * ============================================================================
- * 
+ *
  * Applies seasonal, holiday, sports, economic, and weather weights.
  * Aligned with GodWorld Calendar v1.0 and getSimHoliday_ v2.3.
- * 
+ *
+ * v2.3 Changes:
+ * - Guard for missing ctx.summary
+ * - ES5 compatible (var instead of const)
+ *
  * Enhancements:
  * - Uses holiday priority system (major/cultural/oakland/minor)
  * - Adds Creation Day special handling
  * - Adds First Friday modifiers
  * - Adds Oakland-specific and cultural holiday support
  * - Cycle-aware (reads cycleOfYear for context)
- * 
+ *
  * ============================================================================
  */
 
 function applySeasonalWeights_(ctx) {
 
-  const S = ctx.summary;
-  const season = S.season;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const sports = S.sportsSeason;
-  const econMood = S.economicMood || 50;
-  const weatherMood = S.weatherMood || {};
-  const isWeekend = S.isWeekend || false;
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const cycleOfYear = S.cycleOfYear || 1;
+  // Guard for missing ctx.summary
+  var S = ctx.summary || (ctx.summary = {});
+  var season = S.season;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var sports = S.sportsSeason;
+  var econMood = S.economicMood || 50;
+  var weatherMood = S.weatherMood || {};
+  var isWeekend = S.isWeekend || false;
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var cycleOfYear = S.cycleOfYear || 1;
 
   // Local weight map
-  const w = {
+  var w = {
     weatherWeight: 1,
     civicWeight: 1,
     eventWeight: 1,
@@ -397,7 +402,7 @@ function applySeasonalWeights_(ctx) {
   // MEDIA WEIGHT (based on context)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const mediaEffects = S.mediaEffects || {};
+  var mediaEffects = S.mediaEffects || {};
   if (mediaEffects.coverageIntensity === 'saturated') {
     w.mediaWeight *= 1.5;
   } else if (mediaEffects.coverageIntensity === 'heavy') {

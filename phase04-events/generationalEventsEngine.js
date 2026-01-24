@@ -178,7 +178,8 @@ function runGenerationalEngine_(ctx) {
 
   ctx._rng = initRng_(ctx, cycle);
 
-  var simYear = (ctx.summary && ctx.summary.simYear) || (2040 + Math.floor(cycle / 12));
+  // 52 cycles = 1 year
+  var simYear = (ctx.summary && ctx.summary.simYear) || (2040 + Math.floor(cycle / 52));
 
   // Calendar context (normalize season for comparisons)
   var calendarContext = {

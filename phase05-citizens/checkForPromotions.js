@@ -89,8 +89,8 @@ function checkForPromotions_(ctx) {
   var isCreationDay = S.isCreationDay || false;
   var sportsSeason = S.sportsSeason || "off-season";
 
-  // Use simYear or calculate from cycle
-  var simYear = S.simYear || (2040 + Math.floor(cycle / 12));
+  // Use simYear or calculate from cycle (52 cycles = 1 year)
+  var simYear = S.simYear || (2040 + Math.floor(cycle / 52));
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12 - v2.2)

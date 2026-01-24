@@ -77,8 +77,8 @@ function runEducationEngine_(ctx) {
   const econMood = S.economicMood || 50;
   const cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
-  // Use simYear or calculate from cycle
-  const simYear = S.simYear || (2040 + Math.floor(cycle / 12));
+  // Use simYear or calculate from cycle (52 cycles = 1 year)
+  const simYear = S.simYear || (2040 + Math.floor(cycle / 52));
 
   let count = 0;
   const LIMIT = 10;

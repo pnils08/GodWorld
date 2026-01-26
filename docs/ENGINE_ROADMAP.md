@@ -3,9 +3,9 @@
 **Purpose:** Actionable implementation plan with clear priorities.
 **Companion:** See `V3_ARCHITECTURE.md` for technical specifications.
 
-**Last Updated:** 2026-01-21
+**Last Updated:** 2026-01-26
 **Current Cycle:** 75
-**Engine Version:** v2.11
+**Engine Version:** v2.12
 
 ---
 
@@ -113,14 +113,20 @@ Reduce redundancy, establish single sources of truth.
 - Added cache support instead of pruning data
 - See AUDIT_TRACKER.md for full findings
 
-### [~] 2.3 BayTribune Roster
+### [x] 2.3 BayTribune Roster
 **Purpose:** Single source of truth for journalists.
-**Status:** PARTIAL (Jan 2026)
+**Status:** COMPLETE (Jan 2026)
 
 **Completed:**
 - Created `schemas/bay_tribune_roster.json` with 28 journalists
 - Created `utilities/rosterLookup.js` with lookup functions
-- Audited Phase 7 files (100+ hardcoded references identified)
+- Migrated `mediaRoomBriefingGenerator.js` to v2.3 with roster integration
+  - `getArcReporter_()` now delegates to `getArcReporterFromRoster_()`
+  - `determineFrontPage_()` uses roster lookups
+  - `generateSectionAssignments_()` uses roster lookups
+  - Added helper functions: `getFormattedJournalist_()`, `getReporterBySignal_()`
+  - Section guidance and briefing strings use dynamic lookups
+  - Maintains backwards compatibility with fallback values
 
 **Schema (JSON implemented, Sheet pending approval):**
 
@@ -132,14 +138,14 @@ Reduce redundancy, establish single sources of truth.
 | tone | string | Voice keywords |
 | background | string | Brief bio (optional) |
 
-**Pending (V3 refactor):**
-- Migrate hardcoded strings in mediaRoomBriefingGenerator.js to use rosterLookup.js
+**Future Enhancements (V3):**
 - Add LastAppearance/ArticleCount tracking (schema approval needed)
 - Create BayTribune_Roster sheet for runtime updates
 
 **Integration:**
 - Phase 7 reads for story assignment (utility ready)
 - Media Room reads for voice lookup (utility ready)
+- mediaRoomBriefingGenerator.js v2.3 uses roster for all reporter assignments
 
 ---
 

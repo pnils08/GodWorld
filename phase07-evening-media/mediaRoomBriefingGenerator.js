@@ -1,25 +1,80 @@
 /**
  * ============================================================================
- * MEDIA ROOM BRIEFING v2.2 — CIVIC & HOLIDAY ENHANCED
+ * MEDIA ROOM BRIEFING v2.3 — ROSTER INTEGRATION
  * ============================================================================
- * 
- * v2.2 Enhancements:
- * - NEW: Section 12 — CIVIC STATUS (elections, officials, vacancies)
+ *
+ * v2.3 Enhancements:
+ * - BayTribune Roster integration via rosterLookup.js
+ * - getArcReporter_() now delegates to getArcReporterFromRoster_()
+ * - Helper functions for formatted journalist lookups
+ * - Signal-based reporter assignments from roster
+ * - Maintains backwards compatibility with fallback values
+ *
+ * v2.2 Features (preserved):
+ * - Section 12 — CIVIC STATUS (elections, officials, vacancies)
  * - Enhanced holiday story ideas with Oakland-specific angles
  * - Election window alerts and coverage guidance
  * - Civic official status tracking (injuries, scandals, conditions)
  * - Term expiration warnings for upcoming elections
  * - Integration with Civic_Office_Ledger and Election_Log
- * 
+ *
  * v2.1.1 Fix preserved: ' prefix to prevent #ERROR in Sheets
- * 
+ *
  * INTEGRATION:
  * Add to Phase 10 in runWorldCycle():
  *   generateMediaBriefing_(ctx);
- * 
+ *
+ * DEPENDENCIES:
+ * - rosterLookup.js (for journalist roster functions)
+ *
  * ============================================================================
  */
 
+
+// ════════════════════════════════════════════════════════════════════════════
+// ROSTER LOOKUP HELPERS (v2.3)
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Get formatted journalist name with role from roster.
+ * Falls back to plain name if roster unavailable.
+ * @param {string} name - Journalist name
+ * @param {string} [suffix] - Optional suffix (e.g., "lead", "support")
+ * @returns {string} Formatted string like "Carmen Delaine (Civic Ledger) lead"
+ */
+function getFormattedJournalist_(name, suffix) {
+  if (typeof formatJournalist_ === 'function') {
+    return formatJournalist_(name, suffix);
+  }
+  return suffix ? name + ' ' + suffix : name;
+}
+
+/**
+ * Get journalist for a signal type from roster.
+ * @param {string} signalType - Signal type (e.g., "civic", "health-crisis")
+ * @returns {string} Journalist name
+ */
+function getReporterBySignal_(signalType) {
+  if (typeof getJournalistBySignal_ === 'function') {
+    return getJournalistBySignal_(signalType) || signalType;
+  }
+  // Fallback mapping
+  var fallback = {
+    'civic': 'Carmen Delaine',
+    'health-crisis': 'Dr. Lila Mezran',
+    'health_arc': 'Dr. Lila Mezran',
+    'shock_event': 'Luis Navarro',
+    'transit': 'Trevor Shimizu',
+    'crime': 'Sgt. Rachel Torres',
+    'arts': 'Kai Marston',
+    'culture': 'Maria Keen',
+    'sports': 'Anthony',
+    'business': 'Jordan Velez',
+    'opinion': 'Farrah Del Rio',
+    'human_interest': 'Mags Corliss'
+  };
+  return fallback[signalType] || signalType;
+}
 
 /**
  * Main function — call from Phase 10
@@ -110,16 +165,16 @@ function generateMediaBriefing_(ctx) {
     briefing.push('🎨 FIRST FRIDAY GUIDANCE:');
     briefing.push('   - Arts district activity (Temescal, Jack London, KONO)');
     briefing.push('   - Gallery openings, street performances');
-    briefing.push('   - Assign: Kai Marston or Sharon Okafor');
+    briefing.push('   - Assign: ' + getReporterBySignal_('arts') + ' or ' + getReporterBySignal_('lifestyle'));
     briefing.push('');
   }
-  
+
   if (cal.isCreationDay) {
     briefing.push('🌳 CREATION DAY GUIDANCE:');
     briefing.push('   - Oakland civic pride stories');
     briefing.push('   - Historical Oakland features');
     briefing.push('   - Local business spotlights');
-    briefing.push('   - Assign: Carmen Delaine (civic) or feature rotation');
+    briefing.push('   - Assign: ' + getReporterBySignal_('civic') + ' (civic) or feature rotation');
     briefing.push('');
   }
   
@@ -201,10 +256,10 @@ function generateMediaBriefing_(ctx) {
     }
     briefing.push('');
     briefing.push('   COVERAGE GUIDANCE:');
-    briefing.push('   - Assign: Carmen Delaine (Civic Desk) lead');
-    briefing.push('   - Anthony (Metro) on policy angles');
-    briefing.push('   - P Slayer (Opinion) on endorsements, voter mood');
-    briefing.push('   - Trevor Shimizu on precinct coverage');
+    briefing.push('   - Assign: ' + getReporterBySignal_('civic') + ' (Civic Desk) lead');
+    briefing.push('   - ' + getReporterBySignal_('sports') + ' (Metro) on policy angles');
+    briefing.push('   - ' + getReporterBySignal_('sports_opinion') + ' (Opinion) on endorsements, voter mood');
+    briefing.push('   - ' + getReporterBySignal_('transit') + ' on precinct coverage');
     briefing.push('');
   } else if (civic.cyclesUntilElection <= 10) {
     briefing.push('📅 ELECTION APPROACHING: ' + civic.cyclesUntilElection + ' cycles until November ' + civic.nextElectionYear);
@@ -242,11 +297,11 @@ function generateMediaBriefing_(ctx) {
       var official = civic.notableStatuses[ns];
       briefing.push('   - ' + official.holder + ' (' + official.title + '): ' + official.status.toUpperCase());
       if (official.status === 'scandal') {
-        briefing.push('     → Investigation angle: Carmen Delaine or Luis Navarro');
+        briefing.push('     → Investigation angle: ' + getReporterBySignal_('civic') + ' or ' + getReporterBySignal_('shock_event'));
       } else if (official.status === 'serious-condition' || official.status === 'injured') {
         briefing.push('     → Health update: respectful coverage, succession questions');
       } else if (official.status === 'resigned' || official.status === 'retired') {
-        briefing.push('     → Legacy piece: Hal Richmond angle, successor speculation');
+        briefing.push('     → Legacy piece: ' + getReporterBySignal_('history') + ' angle, successor speculation');
       }
     }
     briefing.push('');
@@ -319,7 +374,7 @@ function generateMediaBriefing_(ctx) {
       briefing.push('  ' + (p.fromTier || 'Tier 4') + ' → ' + (p.toTier || 'Tier 3'));
       if (p.neighborhood) briefing.push('  Neighborhood: ' + p.neighborhood);
       if (p.occupation) briefing.push('  Occupation: ' + p.occupation);
-      briefing.push('  → Assign: Mags Corliss or Maria Keen');
+      briefing.push('  → Assign: ' + getReporterBySignal_('human_interest') + ' or ' + getReporterBySignal_('neighborhood_culture'));
     }
   }
   briefing.push('');
@@ -476,7 +531,7 @@ function generateMediaBriefing_(ctx) {
     for (var ne = 0; ne < newEntities.length; ne++) {
       var newEnt = newEntities[ne];
       briefing.push('- ' + newEnt.name + ' (' + (newEnt.fameCategory || '') + '/' + (newEnt.domain || '') + ')');
-      briefing.push('  → Assign: Kai Marston or Sharon Okafor');
+      briefing.push('  → Assign: ' + getReporterBySignal_('arts') + ' or ' + getReporterBySignal_('lifestyle'));
     }
     briefing.push('');
   }
@@ -546,26 +601,26 @@ function generateMediaBriefing_(ctx) {
     briefing.push('🏆 CHAMPIONSHIP MODE:');
     briefing.push('   - FRONT PAGE PRIORITY');
     briefing.push('   - Full desk mobilization');
-    briefing.push('   - Anthony (stats/data), P Slayer (fan pulse), Hal Richmond (history)');
+    briefing.push('   - ' + getReporterBySignal_('sports') + ' (stats/data), ' + getReporterBySignal_('sports_opinion') + ' (fan pulse), ' + getReporterBySignal_('history') + ' (history)');
     briefing.push('   - Economic angle: Jack London businesses, merchandise sales');
     briefing.push('   - Consider: Victory parade prep, civic pride angle');
     briefing.push('');
   } else if (cal.sportsSeason === 'playoffs') {
     briefing.push('⚾ PLAYOFF MODE:');
     briefing.push('   - Elevated coverage, Front Page consideration');
-    briefing.push('   - Anthony (Lead) + Hal Richmond (History)');
-    briefing.push('   - P Slayer on fan community');
+    briefing.push('   - ' + getReporterBySignal_('sports') + ' (Lead) + ' + getReporterBySignal_('history') + ' (History)');
+    briefing.push('   - ' + getReporterBySignal_('sports_opinion') + ' on fan community');
     briefing.push('   - Economic angle: playoff spending in Jack London');
     briefing.push('');
   } else if (cal.sportsSeason === 'late-season') {
     briefing.push('📊 LATE SEASON:');
     briefing.push('   - Playoff race coverage if contending');
-    briefing.push('   - Anthony on standings/scenarios');
+    briefing.push('   - ' + getReporterBySignal_('sports') + ' on standings/scenarios');
     briefing.push('');
   } else if (cal.sportsSeason === 'spring-training') {
     briefing.push('🌸 SPRING TRAINING:');
-    briefing.push('   - A\'s spring training active — Anthony on roster coverage');
-    briefing.push('   - Hal Richmond on prospects, P Slayer on fan expectations');
+    briefing.push('   - A\'s spring training active — ' + getReporterBySignal_('sports') + ' on roster coverage');
+    briefing.push('   - ' + getReporterBySignal_('history') + ' on prospects, ' + getReporterBySignal_('sports_opinion') + ' on fan expectations');
     briefing.push('');
   } else if (cal.sportsSeason === 'off-season') {
     briefing.push('❄️ OFF-SEASON:');
@@ -576,8 +631,8 @@ function generateMediaBriefing_(ctx) {
     briefing.push('Regular season — game coverage rotation');
     briefing.push('');
   }
-  
-  briefing.push('Chicago: Bulls coverage via Selena Grant');
+
+  briefing.push('Chicago: Bulls coverage via ' + getReporterBySignal_('athletics_basketball_bulls'));
   briefing.push('');
   
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1096,7 +1151,7 @@ function getHolidayStoryIdeas_(cal, civic, S) {
     for (var ns = 0; ns < civic.notableStatuses.length; ns++) {
       var off = civic.notableStatuses[ns];
       if (off.status === 'scandal') {
-        ideas.push('- [INVESTIGATION] ' + off.title + ' scandal update — Luis Navarro');
+        ideas.push('- [INVESTIGATION] ' + off.title + ' scandal update — ' + getReporterBySignal_('shock_event'));
       } else if (off.status === 'serious-condition') {
         ideas.push('- [UPDATE] ' + off.holder + ' health status — respectful coverage');
       }
@@ -1112,21 +1167,21 @@ function getHolidayStoryIdeas_(cal, civic, S) {
 
 
 /**
- * v2.2: Calendar and civic-aware front page determination
+ * v2.3: Calendar and civic-aware front page determination with roster lookup
  */
 function determineFrontPage_(S, ctx, cal, civic) {
-  
+
   // Priority: Shock > Election Results > Health Crisis > Championship > Oakland Festival > New Arc > Election Window > Promotion > Sports Playoff > Weather Event
-  
+
   if (S.shockFlag && S.shockFlag !== 'none') {
     return {
       lead: 'SHOCK EVENT — ' + (S.cycleWeightReason || 'Disruption detected'),
-      reporter: 'Luis Navarro (Investigations) or Carmen Delaine (Civic)',
+      reporter: getFormattedJournalist_(getReporterBySignal_('shock_event'), 'Investigations') + ' or ' + getFormattedJournalist_(getReporterBySignal_('civic'), 'Civic'),
       signal: 'shock-flag',
       notes: 'Breaking news priority'
     };
   }
-  
+
   // v2.2: Election results take front page
   if (civic.recentResults && civic.recentResults.length > 0) {
     var hasUpset = false;
@@ -1140,26 +1195,26 @@ function determineFrontPage_(S, ctx, cal, civic) {
         mayorResult = res;
       }
     }
-    
+
     if (mayorResult) {
       return {
         lead: '🗳️ MAYORAL ELECTION — ' + mayorResult.winner + (hasUpset ? ' DEFEATS INCUMBENT' : ' wins'),
-        reporter: 'Carmen Delaine (Civic) lead, full civic desk',
+        reporter: getFormattedJournalist_(getReporterBySignal_('civic'), 'lead') + ', full civic desk',
         signal: 'election-mayor',
         notes: 'Margin: ' + mayorResult.margin + ' (' + mayorResult.marginType + ')'
       };
     }
-    
+
     return {
       lead: '🗳️ ELECTION RESULTS — ' + civic.recentResults.length + ' races decided' + (hasUpset ? ' (UPSETS)' : ''),
-      reporter: 'Carmen Delaine (Civic) lead',
+      reporter: getFormattedJournalist_(getReporterBySignal_('civic'), 'lead'),
       signal: 'election-results',
       notes: civic.recentResults.map(function(r) { return r.title + ': ' + r.winner; }).join(', ')
     };
   }
-  
+
   var arcs = S.eventArcs || ctx.v3Arcs || [];
-  
+
   // Health crisis check
   var healthCrisis = null;
   for (var h = 0; h < arcs.length; h++) {
@@ -1171,32 +1226,32 @@ function determineFrontPage_(S, ctx, cal, civic) {
   if (healthCrisis) {
     return {
       lead: 'HEALTH CRISIS — ' + (healthCrisis.neighborhood || 'citywide'),
-      reporter: 'Dr. Lila Mezran (Health Desk)',
+      reporter: getFormattedJournalist_(getReporterBySignal_('health-crisis')),
       signal: 'health-crisis',
       notes: 'Tension: ' + healthCrisis.tension
     };
   }
-  
+
   // Championship takes front page
   if (cal.sportsSeason === 'championship') {
     return {
       lead: '🏆 CHAMPIONSHIP — Oakland sports moment',
-      reporter: 'Anthony (Lead) + Full Sports Desk',
+      reporter: getFormattedJournalist_(getReporterBySignal_('sports'), 'Lead') + ' + Full Sports Desk',
       signal: 'sports-championship',
       notes: 'Historic coverage moment — all hands'
     };
   }
-  
+
   // Oakland-priority holidays can lead
   if (cal.holidayPriority === 'oakland') {
     return {
       lead: '🎉 ' + cal.holiday.toUpperCase() + ' — Oakland celebrates',
-      reporter: 'Kai Marston (Culture) + rotation',
+      reporter: getFormattedJournalist_(getReporterBySignal_('arts'), 'Culture') + ' + rotation',
       signal: 'holiday-oakland',
       notes: 'Festival coverage zones: ' + getHolidayZones_(cal.holiday)
     };
   }
-  
+
   // New arc
   var newArc = null;
   for (var n = 0; n < arcs.length; n++) {
@@ -1213,32 +1268,32 @@ function determineFrontPage_(S, ctx, cal, civic) {
       notes: newArc.summary || ''
     };
   }
-  
+
   // v2.2: Election window (no results yet)
   if (civic.electionWindow && (!civic.recentResults || civic.recentResults.length === 0)) {
     return {
       lead: '🗳️ ELECTION DAY — ' + civic.seatsUp.length + ' seats contested',
-      reporter: 'Carmen Delaine (Civic) lead',
+      reporter: getFormattedJournalist_(getReporterBySignal_('civic'), 'lead'),
       signal: 'election-day',
       notes: 'Group ' + civic.electionGroup + ' elections'
     };
   }
-  
+
   // Playoffs elevated
   if (cal.sportsSeason === 'playoffs') {
     return {
       lead: '⚾ PLAYOFFS — A\'s postseason coverage',
-      reporter: 'Anthony (Lead) + Hal Richmond (History)',
+      reporter: getFormattedJournalist_(getReporterBySignal_('sports'), 'Lead') + ' + ' + getFormattedJournalist_(getReporterBySignal_('history'), 'History'),
       signal: 'sports-playoffs',
       notes: 'Sports elevated to Front Page'
     };
   }
-  
+
   // First Friday can lead on slow days
   if (cal.isFirstFriday) {
     return {
       lead: '🎨 FIRST FRIDAY — Oakland arts night',
-      reporter: 'Kai Marston or Sharon Okafor',
+      reporter: getReporterBySignal_('arts') + ' or ' + getReporterBySignal_('lifestyle'),
       signal: 'first-friday',
       notes: 'Arts district focus — Temescal, Jack London, KONO'
     };
@@ -1248,22 +1303,34 @@ function determineFrontPage_(S, ctx, cal, civic) {
   if (cal.isCreationDay) {
     return {
       lead: '🌳 CREATION DAY — Oakland civic pride',
-      reporter: 'Carmen Delaine (Civic) or Mags Corliss',
+      reporter: getFormattedJournalist_(getReporterBySignal_('civic'), 'Civic') + ' or ' + getReporterBySignal_('human_interest'),
       signal: 'creation-day',
       notes: 'Local business, community features'
     };
   }
-  
+
   return {
     lead: 'EDITOR\'S CHOICE — Feature or follow-up',
-    reporter: 'Mags Corliss calls the lead',
+    reporter: getReporterBySignal_('human_interest') + ' calls the lead',
     signal: 'editorial',
     notes: 'Quiet cycle — depth over urgency'
   };
 }
 
 
+/**
+ * Get arc reporter assignment using roster lookup.
+ * Delegates to getArcReporterFromRoster_() from rosterLookup.js
+ * @param {string} arcType - Arc type (e.g., "health-crisis", "crisis")
+ * @param {string} domain - Domain (e.g., "CIVIC", "TRANSIT", "SAFETY")
+ * @returns {string} Reporter name
+ */
 function getArcReporter_(arcType, domain) {
+  // Use roster lookup if available
+  if (typeof getArcReporterFromRoster_ === 'function') {
+    return getArcReporterFromRoster_(arcType, domain);
+  }
+  // Fallback to hardcoded values if roster not loaded
   if (arcType === 'health-crisis') return 'Dr. Lila Mezran';
   if (arcType === 'crisis' && domain === 'CIVIC') return 'Carmen Delaine';
   if (arcType === 'crisis') return 'Luis Navarro';
@@ -1368,86 +1435,86 @@ function getEngineContinuity_(S, arcs) {
 
 
 /**
- * v2.2: Calendar and civic-aware section assignments
+ * v2.3: Calendar and civic-aware section assignments with roster lookup
  */
 function generateSectionAssignments_(S, arcReport, seeds, promotions, cal, civic) {
   var assignments = {
-    frontPage: 'Mags Corliss calls — see Front Page Recommendation',
+    frontPage: getReporterBySignal_('human_interest') + ' calls — see Front Page Recommendation',
     metro: 'Rotation based on arc activity',
-    civic: 'Carmen Delaine — civic desk',
-    business: 'Jordan Velez — ticker format unless major event',
-    sports: 'Core three (Anthony/P Slayer/Hal) + support',
-    chicago: 'Selena Grant (Bulls) + Talia Finch (ground)',
-    culture: 'Kai Marston / Sharon Okafor rotation',
-    opinion: 'Farrah Del Rio or P Slayer if sports-related',
+    civic: getReporterBySignal_('civic') + ' — civic desk',
+    business: getReporterBySignal_('business') + ' — ticker format unless major event',
+    sports: 'Core three (' + getReporterBySignal_('sports') + '/' + getReporterBySignal_('sports_opinion') + '/' + getReporterBySignal_('history') + ') + support',
+    chicago: getReporterBySignal_('athletics_basketball_bulls') + ' (Bulls) + ' + getReporterBySignal_('chicago_street') + ' (ground)',
+    culture: getReporterBySignal_('arts') + ' / ' + getReporterBySignal_('lifestyle') + ' rotation',
+    opinion: getReporterBySignal_('opinion') + ' or ' + getReporterBySignal_('sports_opinion') + ' if sports-related',
     festival: null,
     election: null
   };
-  
+
   // Metro assignment based on arcs
   var hasHealthCrisis = false;
   var hasCivicArc = false;
   var hasTransitArc = false;
-  
+
   for (var i = 0; i < arcReport.active.length; i++) {
     var a = arcReport.active[i];
     if (a.type === 'health-crisis') hasHealthCrisis = true;
     if (a.domain === 'CIVIC') hasCivicArc = true;
     if (a.domain === 'TRANSIT' || a.domain === 'INFRASTRUCTURE') hasTransitArc = true;
   }
-  
+
   if (hasHealthCrisis) {
-    assignments.metro = 'Dr. Lila Mezran leads — health crisis active';
+    assignments.metro = getReporterBySignal_('health-crisis') + ' leads — health crisis active';
   } else if (hasCivicArc) {
-    assignments.metro = 'Carmen Delaine leads — civic focus';
+    assignments.metro = getReporterBySignal_('civic') + ' leads — civic focus';
   } else if (hasTransitArc) {
-    assignments.metro = 'Trevor Shimizu leads — infrastructure focus';
+    assignments.metro = getReporterBySignal_('transit') + ' leads — infrastructure focus';
   }
-  
+
   // Culture if new entities
   if (S.culturalEntityCreates && S.culturalEntityCreates.length > 0) {
-    assignments.culture = 'Profile opportunity — Kai Marston on new Cultural Ledger entry';
+    assignments.culture = 'Profile opportunity — ' + getReporterBySignal_('arts') + ' on new Cultural Ledger entry';
   }
-  
+
   // v2.2: Civic desk based on election/status
   if (civic.electionWindow) {
-    assignments.civic = '🗳️ ELECTION: Carmen Delaine lead, Anthony policy, Trevor precincts';
+    assignments.civic = '🗳️ ELECTION: ' + getReporterBySignal_('civic') + ' lead, ' + getReporterBySignal_('sports') + ' policy, ' + getReporterBySignal_('transit') + ' precincts';
     assignments.election = 'ACTIVATED: Full civic desk on election coverage';
   } else if (civic.notableStatuses && civic.notableStatuses.length > 0) {
-    assignments.civic = 'Carmen Delaine — official status updates (' + civic.notableStatuses.length + ' alerts)';
+    assignments.civic = getReporterBySignal_('civic') + ' — official status updates (' + civic.notableStatuses.length + ' alerts)';
   } else if (civic.cyclesUntilElection <= 10) {
-    assignments.civic = 'Carmen Delaine — pre-election coverage, candidate profiles';
+    assignments.civic = getReporterBySignal_('civic') + ' — pre-election coverage, candidate profiles';
   }
-  
+
   // Sports based on season
   if (cal.sportsSeason === 'championship') {
-    assignments.sports = '🏆 CHAMPIONSHIP: Full desk — Anthony lead, P Slayer fan pulse, Hal history';
+    assignments.sports = '🏆 CHAMPIONSHIP: Full desk — ' + getReporterBySignal_('sports') + ' lead, ' + getReporterBySignal_('sports_opinion') + ' fan pulse, ' + getReporterBySignal_('history') + ' history';
   } else if (cal.sportsSeason === 'playoffs') {
-    assignments.sports = '⚾ PLAYOFFS: Elevated — Anthony + Hal Richmond lead';
+    assignments.sports = '⚾ PLAYOFFS: Elevated — ' + getReporterBySignal_('sports') + ' + ' + getReporterBySignal_('history') + ' lead';
   } else if (cal.sportsSeason === 'spring-training') {
-    assignments.sports = '🌸 SPRING TRAINING: Anthony on roster, P Slayer on fan expectations';
+    assignments.sports = '🌸 SPRING TRAINING: ' + getReporterBySignal_('sports') + ' on roster, ' + getReporterBySignal_('sports_opinion') + ' on fan expectations';
   }
-  
+
   // Festival section for Oakland holidays
   if (cal.holidayPriority === 'oakland') {
-    assignments.festival = 'ACTIVATED: Kai Marston lead, Sharon Okafor support — ' + cal.holiday;
+    assignments.festival = 'ACTIVATED: ' + getReporterBySignal_('arts') + ' lead, ' + getReporterBySignal_('lifestyle') + ' support — ' + cal.holiday;
     assignments.culture = 'Merged with Festival coverage';
   }
-  
+
   // First Friday culture boost
   if (cal.isFirstFriday) {
-    assignments.culture = '🎨 FIRST FRIDAY: Kai Marston lead, Sharon Okafor on galleries';
+    assignments.culture = '🎨 FIRST FRIDAY: ' + getReporterBySignal_('arts') + ' lead, ' + getReporterBySignal_('lifestyle') + ' on galleries';
   }
-  
+
   // Creation Day civic angle
   if (cal.isCreationDay) {
-    assignments.civic = '🌳 CREATION DAY: Carmen Delaine on civic pride, local business angle';
+    assignments.civic = '🌳 CREATION DAY: ' + getReporterBySignal_('civic') + ' on civic pride, local business angle';
   }
-  
+
   // Holiday shopping business angle
   if (cal.holiday === 'Thanksgiving' || cal.holiday === 'Holiday' || cal.holiday === 'BlackFriday') {
-    assignments.business = '🛒 HOLIDAY SHOPPING: Jordan Velez on retail surge, local business';
+    assignments.business = '🛒 HOLIDAY SHOPPING: ' + getReporterBySignal_('business') + ' on retail surge, local business';
   }
-  
+
   return assignments;
 }

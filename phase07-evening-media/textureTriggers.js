@@ -29,16 +29,20 @@ function mulberry32_(seed) {
 }
 
 function textureTriggerEngine_(ctx) {
-  const triggers = [];
-  const S = ctx.summary || (ctx.summary = {});
-  const arcs = S.eventArcs || [];
-  const dyn = S.cityDynamics || {};
-  const weatherRaw = S.weather || {};
-  const worldEvents = Array.isArray(S.worldEvents) ? S.worldEvents : [];
-  const domains = S.domainPresence || {}; // optional
+  // Defensive guard
+  if (!ctx) return;
+  if (!ctx.summary) ctx.summary = {};
+
+  var triggers = [];
+  var S = ctx.summary;
+  var arcs = S.eventArcs || [];
+  var dyn = S.cityDynamics || {};
+  var weatherRaw = S.weather || {};
+  var worldEvents = Array.isArray(S.worldEvents) ? S.worldEvents : [];
+  var domains = S.domainPresence || {}; // optional
 
   // Prefer injected RNG, else seed, else Math.random
-  const rng = (typeof ctx.rng === 'function') ? ctx.rng
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === 'number')
       ? mulberry32_(ctx.config.rngSeed >>> 0)
       : Math.random;
@@ -46,15 +50,15 @@ function textureTriggerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
 
   // Optional: recovery-aware texture rate (prevents "texture spam" on heavy days)
-  const recoveryLevel = S.recoveryLevel || 'none';
-  const neighborhoodTextureRate =
+  var recoveryLevel = S.recoveryLevel || 'none';
+  var neighborhoodTextureRate =
     (recoveryLevel === 'heavy') ? 0.12 :
     (recoveryLevel === 'moderate') ? 0.18 :
     0.25;
@@ -62,7 +66,7 @@ function textureTriggerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoods = [
+  var neighborhoods = [
     'Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt',
     'West Oakland', 'Laurel', 'Rockridge', 'Jack London',
     'Uptown', 'KONO', 'Chinatown', 'Piedmont Ave'
@@ -79,9 +83,9 @@ function textureTriggerEngine_(ctx) {
   }
 
   // Dedupe helper: (domain|neighborhood|key)
-  const seen = Object.create(null);
+  var seen = Object.create(null);
   function pushUnique(tr) {
-    const k = (tr.domain || '') + '|' + (tr.neighborhood || '') + '|' + (tr.textureKey || '');
+    var k = (tr.domain || '') + '|' + (tr.neighborhood || '') + '|' + (tr.textureKey || '');
     if (seen[k]) return;
     seen[k] = true;
     triggers.push(tr);
@@ -101,7 +105,7 @@ function textureTriggerEngine_(ctx) {
   // WEATHER NORMALIZATION (compat with your other engines)
   // ═══════════════════════════════════════════════════════════════════════════
   function normalizeWeatherType(t) {
-    const x = (t || '').toString().trim().toLowerCase();
+    var x = (t || '').toString().trim().toLowerCase();
     if (!x) return 'clear';
 
     // Common engine types
@@ -113,7 +117,7 @@ function textureTriggerEngine_(ctx) {
     return x;
   }
 
-  const weather = {
+  var weather = {
     type: normalizeWeatherType(weatherRaw.type),
     impact: (typeof weatherRaw.impact === 'number') ? weatherRaw.impact : 1
   };
@@ -330,7 +334,8 @@ function textureTriggerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ARC-BASED TEXTURES
   // ═══════════════════════════════════════════════════════════════════════════
-  for (const a of arcs) {
+  for (var ai = 0; ai < arcs.length; ai++) {
+    var a = arcs[ai];
     if (!a) continue;
 
     if (a.phase === 'early') {
@@ -353,9 +358,9 @@ function textureTriggerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN ACCUMULATION TEXTURES
   // ═══════════════════════════════════════════════════════════════════════════
-  for (const key in domains) {
+  for (var key in domains) {
     if (!Object.prototype.hasOwnProperty.call(domains, key)) continue;
-    const val = domains[key];
+    var val = domains[key];
     if (val >= 5) {
       cappedPush(makeTrigger(key, '', 'domain_saturation', 'Domain heavily saturated with activity', 'high'));
     } else if (val >= 3) {
@@ -366,19 +371,31 @@ function textureTriggerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // EVENT-DRIVEN TEXTURES (robust: domain OR description keywords)
   // ═══════════════════════════════════════════════════════════════════════════
-  const eventCount = worldEvents.length;
+  var eventCount = worldEvents.length;
   if (eventCount >= 5) cappedPush(makeTrigger('GENERAL', '', 'busy_cycle', 'High event activity this cycle', 'moderate'));
   else if (eventCount <= 1) cappedPush(makeTrigger('GENERAL', '', 'quiet_cycle', 'Unusually quiet cycle', 'low'));
 
   function eventHasHint(hints, ev) {
-    const d = ((ev.domain || ev.Domain || '') + '').toLowerCase();
-    const desc = ((ev.description || ev.subdomain || ev.subtype || ev.text || '') + '').toLowerCase();
-    return hints.some(h => d.includes(h) || desc.includes(h));
+    var d = ((ev.domain || ev.Domain || '') + '').toLowerCase();
+    var desc = ((ev.description || ev.subdomain || ev.subtype || ev.text || '') + '').toLowerCase();
+    for (var hi = 0; hi < hints.length; hi++) {
+      if (d.indexOf(hints[hi]) !== -1 || desc.indexOf(hints[hi]) !== -1) return true;
+    }
+    return false;
   }
 
-  const hasHealthEvent = worldEvents.some(ev => eventHasHint(['health','illness','clinic','er','hospital','flu','allergy','injury','heat exhaustion'], ev));
-  const hasSafetyEvent = worldEvents.some(ev => eventHasHint(['safety','theft','break-in','graffiti','altercation','pursuit','scalping'], ev));
-  const hasFestivalEvent = worldEvents.some(ev => eventHasHint(['festival','parade','crowd surge','overcrowding','pride','float'], ev));
+  var hasHealthEvent = false;
+  var hasSafetyEvent = false;
+  var hasFestivalEvent = false;
+  var healthHints = ['health','illness','clinic','er','hospital','flu','allergy','injury','heat exhaustion'];
+  var safetyHints = ['safety','theft','break-in','graffiti','altercation','pursuit','scalping'];
+  var festivalHints = ['festival','parade','crowd surge','overcrowding','pride','float'];
+  for (var wei = 0; wei < worldEvents.length; wei++) {
+    var wev = worldEvents[wei];
+    if (eventHasHint(healthHints, wev)) hasHealthEvent = true;
+    if (eventHasHint(safetyHints, wev)) hasSafetyEvent = true;
+    if (eventHasHint(festivalHints, wev)) hasFestivalEvent = true;
+  }
 
   if (hasHealthEvent) cappedPush(makeTrigger('HEALTH', '', 'health_concern', 'Health-related activity noted', 'moderate'));
   if (hasSafetyEvent) cappedPush(makeTrigger('SAFETY', '', 'safety_alert', 'Safety-related activity noted', 'moderate'));
@@ -387,7 +404,7 @@ function textureTriggerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // NEIGHBORHOOD-SPECIFIC TEXTURES
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoodTextures = [
+  var neighborhoodTextures = [
     { key: 'local_gathering', reason: 'Small gathering in the neighborhood' },
     { key: 'street_noise', reason: 'Elevated street noise' },
     { key: 'foot_traffic', reason: 'Increased foot traffic' },
@@ -396,12 +413,13 @@ function textureTriggerEngine_(ctx) {
     { key: 'dog_walkers', reason: 'Dog walkers out in numbers' }
   ];
 
-  neighborhoods.forEach(n => {
+  for (var ni = 0; ni < neighborhoods.length; ni++) {
+    var n = neighborhoods[ni];
     if (rng() < neighborhoodTextureRate) {
-      const texture = neighborhoodTextures[Math.floor(rng() * neighborhoodTextures.length)];
+      var texture = neighborhoodTextures[Math.floor(rng() * neighborhoodTextures.length)];
       cappedPush(makeTrigger('COMMUNITY', n, texture.key, texture.reason, 'low'));
     }
-  });
+  }
 
   ctx.summary.textureTriggers = triggers;
 

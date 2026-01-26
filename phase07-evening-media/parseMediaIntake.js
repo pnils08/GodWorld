@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * parseMediaIntake_ v2.2
+ * parseMediaIntake_ v2.3
  * ============================================================================
  *
- * v2.2 Enhancements:
+ * v2.3 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for ctx
+ * - for loops instead of for...of
+ *
+ * v2.2 Features:
  * - Calendar context passed to registerCulturalEntity_()
  * - Return object includes calendar context
  * - Tracks which holiday/season cultural mentions occurred during
@@ -27,11 +32,15 @@
 
 function parseMediaIntake_(ctx, mediaText) {
 
-  const lines = mediaText.split("\n");
-  const S = ctx.summary || {};
+  // Defensive guard
+  if (!ctx) return { journalist: "", names: [], entries: [], calendarContext: {} };
+  if (!ctx.summary) ctx.summary = {};
+
+  var lines = mediaText.split("\n");
+  var S = ctx.summary;
 
   // v2.2: Get calendar context
-  const cal = {
+  var cal = {
     season: S.season || '',
     holiday: S.holiday || 'none',
     holidayPriority: S.holidayPriority || 'none',
@@ -41,14 +50,15 @@ function parseMediaIntake_(ctx, mediaText) {
     month: S.month || S.simMonth || 0
   };
 
-  let journalist = "";
-  const namesUsed = [];
-  const culturalEntries = [];
+  var journalist = "";
+  var namesUsed = [];
+  var culturalEntries = [];
 
-  let inCulturalIndex = false;
+  var inCulturalIndex = false;
 
-  for (let rawLine of lines) {
-    const line = rawLine.trim();
+  for (var li = 0; li < lines.length; li++) {
+    var rawLine = lines[li];
+    var line = rawLine.trim();
 
     // --------------------------
     // Identify the journalist
@@ -81,25 +91,25 @@ function parseMediaIntake_(ctx, mediaText) {
     // Extract cultural names and details
     // Format: "- Name (role) @ Neighborhood" or just "- Name"
     // --------------------------
-    if (inCulturalIndex && line.startsWith("-")) {
-      const content = line.slice(1).trim();
-      
+    if (inCulturalIndex && line.indexOf("-") === 0) {
+      var content = line.slice(1).trim();
+
       if (!content || content === '(none)') continue;
 
       // Parse format: "Name (role) @ Neighborhood"
-      let name = content;
-      let role = "";
-      let neighborhood = "";
+      var name = content;
+      var role = "";
+      var neighborhood = "";
 
       // Extract neighborhood if present
-      const atMatch = content.match(/^(.+?)\s*@\s*(.+)$/);
+      var atMatch = content.match(/^(.+?)\s*@\s*(.+)$/);
       if (atMatch) {
         name = atMatch[1].trim();
         neighborhood = atMatch[2].trim();
       }
 
       // Extract role if present
-      const roleMatch = name.match(/^(.+?)\s*\(([^)]+)\)$/);
+      var roleMatch = name.match(/^(.+?)\s*\(([^)]+)\)$/);
       if (roleMatch) {
         name = roleMatch[1].trim();
         role = roleMatch[2].trim();
@@ -119,12 +129,13 @@ function parseMediaIntake_(ctx, mediaText) {
   // --------------------------
   // Register each cultural entity properly (v2.2: with calendar)
   // --------------------------
-  culturalEntries.forEach(entry => {
+  for (var ci = 0; ci < culturalEntries.length; ci++) {
+    var entry = culturalEntries[ci];
     if (typeof registerCulturalEntity_ === 'function') {
       // v2.2: Pass calendar context to registration
       registerCulturalEntity_(ctx, entry.name, entry.role, journalist, entry.neighborhood, cal);
     }
-  });
+  }
 
   // v2.2: Log with calendar context
   if (culturalEntries.length > 0) {

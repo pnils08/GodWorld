@@ -1,8 +1,14 @@
 /**
  * ============================================================================
- * storyHookEngine_ v3.2 — ENHANCED
+ * storyHookEngine_ v3.3 — ENHANCED
  * ============================================================================
- * 
+ *
+ * v3.3 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for ctx/summary
+ * - for loops instead of for...of
+ * - Template literals converted to string concatenation
+ *
  * Builds story hooks from:
  * - Active arcs (phase-aware)
  * - Domain accumulation
@@ -15,37 +21,41 @@
  * - Creation Day
  * - Cultural and Oakland-specific events
  * - Sports seasons
- * 
+ *
  * Provides actionable prompts for journalists.
  * No sheet writes — pure functional logic.
- * 
+ *
  * ============================================================================
  */
 
 function storyHookEngine_(ctx) {
-  const hooks = [];
-  const S = ctx.summary || {};
-  const arcs = S.eventArcs || [];
-  const domains = S.domainPresence || {};
-  const weather = S.weather || {};
-  const weatherMood = S.weatherMood || {};
-  const dynamics = S.cityDynamics || {};
-  const worldEvents = S.worldEvents || [];
-  const cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
-  const cycleOfYear = S.cycleOfYear || 1;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const holidayNeighborhood = S.holidayNeighborhood || null;
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const creationDayAnniversary = S.creationDayAnniversary;
-  const sportsSeason = S.sportsSeason || "off-season";
-  const season = S.season || "Spring";
+  // Defensive guard
+  if (!ctx) return;
+  if (!ctx.summary) ctx.summary = {};
+
+  var hooks = [];
+  var S = ctx.summary;
+  var arcs = S.eventArcs || [];
+  var domains = S.domainPresence || {};
+  var weather = S.weather || {};
+  var weatherMood = S.weatherMood || {};
+  var dynamics = S.cityDynamics || {};
+  var worldEvents = S.worldEvents || [];
+  var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
+  var cycleOfYear = S.cycleOfYear || 1;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var holidayNeighborhood = S.holidayNeighborhood || null;
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var creationDayAnniversary = S.creationDayAnniversary;
+  var sportsSeason = S.sportsSeason || "off-season";
+  var season = S.season || "Spring";
 
   // ═══════════════════════════════════════════════════════════
   // DESK MAPPING BY DOMAIN
   // ═══════════════════════════════════════════════════════════
-  const deskMap = {
+  var deskMap = {
     'HEALTH': 'Health Desk',
     'CIVIC': 'Civic Desk',
     'INFRASTRUCTURE': 'Civic Desk',
@@ -89,24 +99,25 @@ function storyHookEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // ARC-BASED HOOKS (phase-aware)
   // ═══════════════════════════════════════════════════════════
-  for (const a of arcs) {
+  for (var ai = 0; ai < arcs.length; ai++) {
+    var a = arcs[ai];
     if (!a || !a.type || a.phase === 'resolved') continue;
 
-    let priority = 1;
-    let hookText = '';
+    var priority = 1;
+    var hookText = '';
 
     if (a.phase === 'early') {
       priority = 1;
-      hookText = `Early signals in ${a.neighborhood || 'the city'}: ${a.summary || 'Something is building.'}`;
+      hookText = 'Early signals in ' + (a.neighborhood || 'the city') + ': ' + (a.summary || 'Something is building.');
     } else if (a.phase === 'rising') {
       priority = 2;
-      hookText = `Rising tension in ${a.neighborhood || 'the city'}: ${a.summary || 'Situation developing.'} Worth watching.`;
+      hookText = 'Rising tension in ' + (a.neighborhood || 'the city') + ': ' + (a.summary || 'Situation developing.') + ' Worth watching.';
     } else if (a.phase === 'peak') {
       priority = 3;
-      hookText = `PEAK: ${a.neighborhood || 'City'} facing acute pressure. ${a.summary || 'This is the moment.'} Immediate attention recommended.`;
+      hookText = 'PEAK: ' + (a.neighborhood || 'City') + ' facing acute pressure. ' + (a.summary || 'This is the moment.') + ' Immediate attention recommended.';
     } else if (a.phase === 'decline') {
       priority = 2;
-      hookText = `Cooling down in ${a.neighborhood || 'the city'}: ${a.summary || 'Tension easing.'} Follow-up angle available.`;
+      hookText = 'Cooling down in ' + (a.neighborhood || 'the city') + ': ' + (a.summary || 'Tension easing.') + ' Follow-up angle available.';
     }
 
     if (hookText) {
@@ -117,7 +128,7 @@ function storyHookEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // DOMAIN ACCUMULATION HOOKS
   // ═══════════════════════════════════════════════════════════
-  for (const key in domains) {
+  for (var key in domains) {
     if (!domains.hasOwnProperty(key)) continue;
 
     if (domains[key] >= 4) {
@@ -125,7 +136,7 @@ function storyHookEngine_(ctx) {
         key,
         '',
         3,
-        `Heavy ${key.toLowerCase()} activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.`,
+        'Heavy ' + key.toLowerCase() + ' activity this cycle. Multiple incidents creating a pattern. Deep-dive opportunity.',
         null,
         'cluster'
       ));
@@ -134,7 +145,7 @@ function storyHookEngine_(ctx) {
         key,
         '',
         2,
-        `Multiple ${key.toLowerCase()} signals detected. Could be coincidence or early pattern.`,
+        'Multiple ' + key.toLowerCase() + ' signals detected. Could be coincidence or early pattern.',
         null,
         'signal'
       ));
@@ -151,7 +162,7 @@ function storyHookEngine_(ctx) {
       'HOLIDAY',
       holidayNeighborhood || '',
       2,
-      `${holiday} observance citywide. Feature opportunity: How Oakland celebrates. Human interest angles available.`,
+      holiday + ' observance citywide. Feature opportunity: How Oakland celebrates. Human interest angles available.',
       null,
       'holiday'
     ));
@@ -388,7 +399,7 @@ function storyHookEngine_(ctx) {
         'CIVIC',
         '',
         2,
-        `Creation Day marks ${creationDayAnniversary} year${creationDayAnniversary > 1 ? 's' : ''}. Anniversary retrospective opportunity.`,
+        'Creation Day marks ' + creationDayAnniversary + ' year' + (creationDayAnniversary > 1 ? 's' : '') + '. Anniversary retrospective opportunity.',
         null,
         'creationday'
       ));
@@ -439,7 +450,7 @@ function storyHookEngine_(ctx) {
       'WEATHER',
       '',
       3,
-      `Severe weather (${weather.type}) impacting city operations. Human interest and infrastructure angles available.`,
+      'Severe weather (' + weather.type + ') impacting city operations. Human interest and infrastructure angles available.',
       null,
       'weather'
     ));
@@ -448,15 +459,23 @@ function storyHookEngine_(ctx) {
       'WEATHER',
       '',
       2,
-      `Challenging weather (${weather.type}) affecting daily routines. Street-level color available.`,
+      'Challenging weather (' + weather.type + ') affecting daily routines. Street-level color available.',
       null,
       'weather'
     ));
   }
 
   // Weather special events
-  const weatherEvents = S.weatherEvents || [];
-  if (weatherEvents.some(e => e.type === 'first_snow')) {
+  var weatherEvents = S.weatherEvents || [];
+  var hasFirstSnow = false;
+  var hasFirstWarmDay = false;
+  var hasHeatWave = false;
+  for (var wi = 0; wi < weatherEvents.length; wi++) {
+    if (weatherEvents[wi].type === 'first_snow') hasFirstSnow = true;
+    if (weatherEvents[wi].type === 'first_warm_day') hasFirstWarmDay = true;
+    if (weatherEvents[wi].type === 'heat_wave_declared') hasHeatWave = true;
+  }
+  if (hasFirstSnow) {
     hooks.push(makeHook(
       'WEATHER',
       '',
@@ -467,7 +486,7 @@ function storyHookEngine_(ctx) {
     ));
   }
 
-  if (weatherEvents.some(e => e.type === 'first_warm_day')) {
+  if (hasFirstWarmDay) {
     hooks.push(makeHook(
       'COMMUNITY',
       'Lake Merritt',
@@ -478,7 +497,7 @@ function storyHookEngine_(ctx) {
     ));
   }
 
-  if (weatherEvents.some(e => e.type === 'heat_wave_declared')) {
+  if (hasHeatWave) {
     hooks.push(makeHook(
       'WEATHER',
       '',
@@ -600,9 +619,10 @@ function storyHookEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // WORLD EVENT HOOKS (notable individual events)
   // ═══════════════════════════════════════════════════════════
-  for (const ev of worldEvents) {
-    const desc = (ev.description || '').toLowerCase();
-    const severity = ev.severity || 'low';
+  for (var evi = 0; evi < worldEvents.length; evi++) {
+    var ev = worldEvents[evi];
+    var desc = (ev.description || '').toLowerCase();
+    var severity = ev.severity || 'low';
 
     // Only hook on medium severity or specific keywords
     if (severity === 'medium') {
@@ -610,14 +630,14 @@ function storyHookEngine_(ctx) {
         ev.domain || 'GENERAL',
         ev.neighborhood || '',
         2,
-        `Notable event: "${ev.description}". Follow-up recommended.`,
+        'Notable event: "' + ev.description + '". Follow-up recommended.',
         null,
         'event'
       ));
     }
 
     // Specific high-interest events
-    if (desc.includes('earthquake')) {
+    if (desc.indexOf('earthquake') !== -1) {
       hooks.push(makeHook(
         'ENVIRONMENT',
         '',
@@ -628,7 +648,7 @@ function storyHookEngine_(ctx) {
       ));
     }
 
-    if (desc.includes('blackout') || desc.includes('outage')) {
+    if (desc.indexOf('blackout') !== -1 || desc.indexOf('outage') !== -1) {
       hooks.push(makeHook(
         'INFRASTRUCTURE',
         'West Oakland',
@@ -639,7 +659,7 @@ function storyHookEngine_(ctx) {
       ));
     }
 
-    if (desc.includes('protest') || desc.includes('rally')) {
+    if (desc.indexOf('protest') !== -1 || desc.indexOf('rally') !== -1) {
       hooks.push(makeHook(
         'CIVIC',
         'Downtown',
@@ -650,7 +670,7 @@ function storyHookEngine_(ctx) {
       ));
     }
 
-    if (desc.includes('fire') && !desc.includes('fireworks')) {
+    if (desc.indexOf('fire') !== -1 && desc.indexOf('fireworks') === -1) {
       hooks.push(makeHook(
         'SAFETY',
         ev.neighborhood || '',
@@ -665,7 +685,7 @@ function storyHookEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // MIGRATION DRIFT HOOKS
   // ═══════════════════════════════════════════════════════════
-  const drift = S.migrationDrift || 0;
+  var drift = S.migrationDrift || 0;
   if (drift < -35) {
     hooks.push(makeHook(
       'COMMUNITY',
@@ -750,22 +770,25 @@ function storyHookEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // DEDUPLICATE BY PRIORITY (keep highest priority per domain)
   // ═══════════════════════════════════════════════════════════
-  const seen = {};
-  const deduped = [];
+  var seen = {};
+  var deduped = [];
 
-  for (const h of hooks) {
-    const key = `${h.domain}-${h.hookType}`;
-    if (!seen[key] || seen[key].priority < h.priority) {
-      seen[key] = h;
+  for (var hi = 0; hi < hooks.length; hi++) {
+    var h = hooks[hi];
+    var hkey = h.domain + '-' + h.hookType;
+    if (!seen[hkey] || seen[hkey].priority < h.priority) {
+      seen[hkey] = h;
     }
   }
 
-  for (const key in seen) {
-    deduped.push(seen[key]);
+  for (var seenKey in seen) {
+    if (seen.hasOwnProperty(seenKey)) {
+      deduped.push(seen[seenKey]);
+    }
   }
 
   // Sort by priority descending
-  deduped.sort((a, b) => b.priority - a.priority);
+  deduped.sort(function(a, b) { return b.priority - a.priority; });
 
   ctx.summary.storyHooks = deduped;
 }

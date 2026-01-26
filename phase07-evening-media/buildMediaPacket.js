@@ -381,12 +381,85 @@ function buildMediaPacket_(ctx) {
   pkt.push('═══════════════════════════════════════════════════════');
 
   ctx.summary.mediaPacket = pkt.join("\n");
+
+  // v2.3: Populate mediaIntake for recordMediaLedger_
+  populateMediaIntake_(ctx);
+}
+
+
+/**
+ * Populates ctx.summary.mediaIntake from famous sightings and spotlights.
+ * This enables recordMediaLedger_ to track cultural entity media mentions.
+ * v2.3 addition for Media_Ledger integration.
+ */
+function populateMediaIntake_(ctx) {
+  var s = ctx.summary;
+
+  // Gather all names from various sources
+  var names = [];
+  var entries = [];
+
+  // Source 1: Famous sightings (structured data)
+  var sightings = s.famousSightings || [];
+  for (var i = 0; i < sightings.length; i++) {
+    var sight = sightings[i];
+    if (sight && sight.name) {
+      names.push(sight.name);
+      entries.push({
+        name: sight.name,
+        role: sight.role || 'celebrity',
+        neighborhood: sight.neighborhood || ''
+      });
+    }
+  }
+
+  // Source 2: Famous people (simple names list)
+  var famous = s.famousPeople || [];
+  for (var j = 0; j < famous.length; j++) {
+    var fname = famous[j];
+    if (fname && names.indexOf(fname) === -1) {
+      names.push(fname);
+      entries.push({
+        name: fname,
+        role: 'celebrity',
+        neighborhood: ''
+      });
+    }
+  }
+
+  // Source 3: Named spotlights
+  var spotlights = s.namedSpotlights || [];
+  for (var k = 0; k < spotlights.length; k++) {
+    var sp = spotlights[k];
+    if (sp) {
+      var spName = sp.name || sp;
+      if (typeof spName === 'string' && names.indexOf(spName) === -1) {
+        names.push(spName);
+        entries.push({
+          name: spName,
+          role: sp.role || 'spotlight',
+          neighborhood: sp.neighborhood || ''
+        });
+      }
+    }
+  }
+
+  // Only populate if we have names
+  if (names.length > 0) {
+    s.mediaIntake = {
+      names: names,
+      entries: entries,
+      journalist: 'Oakland Daily Media',  // Default journalist
+      cycle: s.cycleId || 0
+    };
+    Logger.log('populateMediaIntake_ v2.3: Populated ' + names.length + ' media mentions');
+  }
 }
 
 
 /**
  * ============================================================================
- * MEDIA PACKET REFERENCE v2.2
+ * MEDIA PACKET REFERENCE v2.3
  * ============================================================================
  * 
  * CALENDAR CONTEXT (Section 1):

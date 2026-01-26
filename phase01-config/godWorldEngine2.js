@@ -262,12 +262,17 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase10-CyclePacket', function() { buildCyclePacket_(ctx); });
   safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
 
+  // Media Ledger - records cultural entity media mentions (uses ctx.summary.mediaIntake from buildMediaPacket_)
+  safePhaseCall_(ctx, 'Phase10-MediaLedger', function() { recordMediaLedger_(ctx); });
+
+  // Execute all queued write intents (V3 persistence model)
+  safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
+
   // ═══════════════════════════════════════════════════════════
-  // PHASE 11: MEDIA INTAKE RETURN (if media output exists)
+  // PHASE 11: MEDIA INTAKE RETURN (optional - for external media input)
   // ═══════════════════════════════════════════════════════════
   if (ctx.mediaOutput) {
     safePhaseCall_(ctx, 'Phase11-MediaIntake', function() { processMediaIntake_(ctx, ctx.mediaOutput); });
-    safePhaseCall_(ctx, 'Phase11-MediaLedger', function() { recordMediaLedger_(ctx); });
   }
 
   } catch (fatalError) {

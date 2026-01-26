@@ -1,5 +1,5 @@
 /**
- * updateTrendTrajectory_ v2.1
+ * updateTrendTrajectory_ v2.2
  *
  * Produces a meaningful trend signal:
  * - rising
@@ -14,41 +14,51 @@
  * - Journalist spread
  *
  * Uses header-based column lookup.
+ *
+ * v2.2 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for sheet/row
  */
 
 function updateTrendTrajectory_(sheet, row, fameScore) {
+  // Defensive guards
   if (!sheet) return;
+  if (!row || row < 2) return;
 
   // Get headers
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const col = n => headers.indexOf(n) + 1; // 1-indexed for getRange
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
 
-  const fameCol = col('FameScore');
-  const mediaCol = col('MediaCount');
-  const trendCol = col('TrendTrajectory');
-  const spreadCol = col('MediaSpread');
+  // Helper function for column lookup (1-indexed for getRange)
+  function col(name) {
+    return headers.indexOf(name) + 1;
+  }
+
+  var fameCol = col('FameScore');
+  var mediaCol = col('MediaCount');
+  var trendCol = col('TrendTrajectory');
+  var spreadCol = col('MediaSpread');
 
   // Get previous fame score
-  let prev = 0;
+  var prev = 0;
   if (fameCol > 0) {
     prev = Number(sheet.getRange(row, fameCol).getValue()) || 0;
   }
 
   // Get media count
-  let mediaCount = 0;
+  var mediaCount = 0;
   if (mediaCol > 0) {
     mediaCount = Number(sheet.getRange(row, mediaCol).getValue()) || 0;
   }
 
   // Get spread
-  let spread = 1;
+  var spread = 1;
   if (spreadCol > 0) {
     spread = Number(sheet.getRange(row, spreadCol).getValue()) || 1;
   }
 
-  const delta = fameScore - prev;
+  var delta = fameScore - prev;
 
-  let trend = "stable";
+  var trend = "stable";
 
   // === Fame momentum ===
   if (delta >= 15) trend = "viral";

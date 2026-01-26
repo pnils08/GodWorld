@@ -1,25 +1,35 @@
 /**
- * updateMediaSpread_ v2.1
+ * updateMediaSpread_ v2.2
  *
  * Updates media spread metrics for cultural entities.
  * Uses header-based column lookup.
+ *
+ * v2.2 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for sheet/row
  */
 
 function updateMediaSpread_(sheet, row, journalistName) {
-  if (!journalistName) return;
+  // Defensive guards
   if (!sheet) return;
+  if (!row || row < 2) return;
+  if (!journalistName) return;
 
   // Get headers
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const col = n => headers.indexOf(n) + 1; // 1-indexed for getRange
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
 
-  const firstRefCol = col('FirstRefSource');
-  const spreadCol = col('MediaSpread');
+  // Helper function for column lookup (1-indexed for getRange)
+  function col(name) {
+    return headers.indexOf(name) + 1;
+  }
+
+  var firstRefCol = col('FirstRefSource');
+  var spreadCol = col('MediaSpread');
 
   // Set first journalist if empty
   if (firstRefCol > 0) {
-    const firstRefCell = sheet.getRange(row, firstRefCol);
-    const currentFirst = firstRefCell.getValue();
+    var firstRefCell = sheet.getRange(row, firstRefCol);
+    var currentFirst = firstRefCell.getValue();
     if (!currentFirst) {
       firstRefCell.setValue(journalistName);
     }
@@ -27,8 +37,8 @@ function updateMediaSpread_(sheet, row, journalistName) {
 
   // Increment media spread
   if (spreadCol > 0) {
-    const spreadCell = sheet.getRange(row, spreadCol);
-    const currentSpread = Number(spreadCell.getValue()) || 0;
+    var spreadCell = sheet.getRange(row, spreadCol);
+    var currentSpread = Number(spreadCell.getValue()) || 0;
     spreadCell.setValue(currentSpread + 1);
   }
 }

@@ -62,10 +62,9 @@ var OAKLAND_SCHOOLS = {
     { name: 'Castlemont High', neighborhood: 'East Oakland', enrollment: 650, character: 'community resilience' }
   ],
   college: [
-    { name: 'Mills College', neighborhood: 'Glenview', enrollment: 1200, character: 'historic womens college' },
-    { name: 'Holy Names University', neighborhood: 'Montclair', enrollment: 800, character: 'catholic tradition' },
-    { name: 'Laney College', neighborhood: 'Lake Merritt', enrollment: 8000, character: 'community college' },
-    { name: 'Merritt College', neighborhood: 'Montclair', enrollment: 4500, character: 'hilltop views' }
+    { name: 'Mills College at Northeastern University', neighborhood: 'Glenview', enrollment: 1500, character: 'historic womens college, merged 2022' },
+    { name: 'Laney College', neighborhood: 'Lake Merritt', enrollment: 14400, character: 'community college' },
+    { name: 'Merritt College', neighborhood: 'Montclair', enrollment: 11000, character: 'hilltop views' }
   ]
 };
 

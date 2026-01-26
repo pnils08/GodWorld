@@ -67,7 +67,7 @@ var OAKLAND_FAITH_ORGANIZATIONS = [
     tradition: 'Baptist',
     neighborhood: 'East Oakland',
     founded: 1919,
-    congregation: 3500,
+    congregation: 5000,
     leader: 'Dr. Jacqueline Thompson',
     character: 'anchor institution, community programs'
   },

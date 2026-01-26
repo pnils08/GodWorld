@@ -97,12 +97,11 @@ var OAKLAND_BART_STATIONS = [
  */
 var AC_TRANSIT_LINES = [
   { line: '1', route: 'Berkeley-Oakland-Fremont', character: 'spine route', frequency: 10 },
-  { line: '1R', route: 'Rapid: Berkeley-Oakland-Fremont', character: 'BRT-lite', frequency: 12 },
+  { line: '72L', route: 'Rapid: San Leandro-Berkeley', character: 'BRT-lite', frequency: 12 },
   { line: '6', route: 'Downtown Oakland-Lake Merritt', character: 'circulator', frequency: 15 },
   { line: '12', route: 'Berkeley-Downtown Oakland', character: 'cross-town', frequency: 15 },
   { line: '14', route: 'Fruitvale-Downtown', character: 'eastside connector', frequency: 20 },
   { line: '18', route: 'Montclair-Downtown', character: 'hills service', frequency: 30 },
-  { line: '33', route: 'Piedmont Ave-Grand Lake', character: 'neighborhood', frequency: 20 },
   { line: '40', route: 'Foothill Blvd', character: 'east oakland spine', frequency: 15 },
   { line: '51A', route: 'Rockridge-Berkeley', character: 'college town', frequency: 12 },
   { line: '57', route: 'Fruitvale-Temescal', character: 'cross-town', frequency: 20 },

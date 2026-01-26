@@ -1,10 +1,14 @@
 /**
  * ============================================================================
- * applyCityDynamics_ v2.3
+ * applyCityDynamics_ v2.4
  * ============================================================================
  *
  * Calculates city-wide dynamics based on season, holiday, weather, and sports.
  * Aligned with GodWorld Calendar v1.0 and getSimHoliday_ v2.3.
+ *
+ * v2.4 Changes:
+ * - ES5 safe: Convert const/let to var, arrow functions to function expressions
+ * - Add defensive guard for missing ctx or ctx.summary
  *
  * v2.3 Enhancements:
  * - Momentum / inertia smoothing (prevents teleporting dynamics)
@@ -21,27 +25,33 @@
 
 function applyCityDynamics_(ctx) {
 
-  const S = ctx.summary || (ctx.summary = {});
-  const season = S.season;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const ss = S.sportsSeason || "off-season";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const cycleOfYear = S.cycleOfYear || 1;
+  // v2.4: Defensive guard for missing ctx
+  if (!ctx) {
+    Logger.log('applyCityDynamics_: Missing ctx object');
+    return;
+  }
+
+  var S = ctx.summary || (ctx.summary = {});
+  var season = S.season;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var ss = S.sportsSeason || "off-season";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var cycleOfYear = S.cycleOfYear || 1;
 
   // ───────────────────────────────────────────────────────────────────────────
   // BASELINE
   // ───────────────────────────────────────────────────────────────────────────
-  let traffic = 1;
-  let retail = 1;
-  let tourism = 1;
-  let nightlife = 1;
-  let publicSpaces = 1;
-  let sentiment = 0;
-  let culturalActivity = 1;
-  let communityEngagement = 1;
+  var traffic = 1;
+  var retail = 1;
+  var tourism = 1;
+  var nightlife = 1;
+  var publicSpaces = 1;
+  var sentiment = 0;
+  var culturalActivity = 1;
+  var communityEngagement = 1;
 
   // ───────────────────────────────────────────────────────────────────────────
   // SEASON BASE MODIFIERS
@@ -420,11 +430,11 @@ function applyCityDynamics_(ctx) {
   // ss === "off-season" => baseline
 
   // ───────────────────────────────────────────────────────────────────────────
-  // NORMALIZATION HELPERS
+  // NORMALIZATION HELPERS (v2.4: ES5 function expressions)
   // ───────────────────────────────────────────────────────────────────────────
-  const round2 = n => Math.round(n * 100) / 100;
-  const clamp = (n, min, max) => Math.max(min, Math.min(max, n));
-  const clampMult = n => clamp(n, 0.3, 3.0);
+  var round2 = function(n) { return Math.round(n * 100) / 100; };
+  var clamp = function(n, min, max) { return Math.max(min, Math.min(max, n)); };
+  var clampMult = function(n) { return clamp(n, 0.3, 3.0); };
 
   // ───────────────────────────────────────────────────────────────────────────
   // MOMENTUM (v2.3): INERTIA + SHOCK-AWARE BLENDING
@@ -443,10 +453,10 @@ function applyCityDynamics_(ctx) {
 
   function getMomentumFactor(metric, S) {
     // Default inertia
-    let m = 0.65;
+    var m = 0.65;
 
-    const shockFlag = (S.shockFlag || "none").toString();
-    const inShock = (shockFlag === "shock-flag" || shockFlag === "shock-fading" || shockFlag === "shock-chronic");
+    var shockFlag = (S.shockFlag || "none").toString();
+    var inShock = (shockFlag === "shock-flag" || shockFlag === "shock-fading" || shockFlag === "shock-chronic");
 
     // Metric-specific inertia
     if (metric === "sentiment") m = 0.50; // moves faster
@@ -465,7 +475,7 @@ function applyCityDynamics_(ctx) {
   }
 
   // Clamp RAW first
-  let raw = {
+  var raw = {
     traffic: clampMult(traffic),
     retail: clampMult(retail),
     tourism: clampMult(tourism),
@@ -477,12 +487,12 @@ function applyCityDynamics_(ctx) {
   };
 
   // Pull previous (stored only in summary)
-  const prev = S.previousCityDynamics || null;
+  var prev = S.previousCityDynamics || null;
 
-  // Blend
-  let final = {};
-  for (const k in raw) {
-    const m = getMomentumFactor(k, S);
+  // Blend (v2.4: ES5 for-in loop)
+  var final = {};
+  for (var k in raw) {
+    var m = getMomentumFactor(k, S);
     final[k] = blend(prev ? prev[k] : null, raw[k], m);
   }
 
@@ -520,10 +530,14 @@ function applyCityDynamics_(ctx) {
 
 /**
  * ============================================================================
- * CITY DYNAMICS REFERENCE v2.3
+ * CITY DYNAMICS REFERENCE v2.4
  * ============================================================================
  *
- * Adds Momentum:
+ * v2.4 Changes:
+ * - ES5 safe: const/let -> var, arrow functions -> function expressions
+ * - Defensive guard for missing ctx object
+ *
+ * Momentum (v2.3):
  * - Blends current "raw" dynamics with previous cycle
  * - Prevents teleporting (sudden 1-cycle spikes/drops)
  * - Shock-aware: reduces inertia so shocks can break through

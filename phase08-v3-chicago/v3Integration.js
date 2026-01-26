@@ -57,14 +57,17 @@ function bondEngine_(ctx) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function v3Integration_(ctx) {
-  
-  const S = ctx.summary;
-  S.cycleId = ctx.config.cycleCount || S.cycleId || 0;
+  // Defensive guard
+  if (!ctx) return;
+  if (!ctx.summary) ctx.summary = {};
+
+  var S = ctx.summary;
+  S.cycleId = (ctx.config ? ctx.config.cycleCount : 0) || S.cycleId || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.3: CALENDAR CONTEXT VALIDATION
   // ═══════════════════════════════════════════════════════════════════════════
-  const calendarContext = {
+  var calendarContext = {
     holiday: S.holiday || 'none',
     holidayPriority: S.holidayPriority || 'none',
     isFirstFriday: S.isFirstFriday || false,

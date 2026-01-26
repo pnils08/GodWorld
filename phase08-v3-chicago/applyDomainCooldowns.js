@@ -1,15 +1,20 @@
 /**
  * ============================================================================
- * applyDomainCooldowns_ v2.3
+ * applyDomainCooldowns_ v2.4
  * ============================================================================
  *
  * Manages domain cooldowns with severity-based duration and calendar awareness.
  *
- * v2.3 Enhancements:
+ * v2.4 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for ctx/summary
+ * - for loops instead of for...of
+ *
+ * v2.3 Features:
  * - Filters to current cycle events only (prevents cooldown refresh from old events)
  * - Uses ev.cycle to match current cycleId
  *
- * v2.2 Enhancements:
+ * v2.2 Features:
  * - FESTIVAL/HOLIDAY domains shorter cooldowns during holidays
  * - SPORTS domain shorter cooldowns during playoffs/championship
  * - ARTS domain shorter cooldowns during First Friday
@@ -26,35 +31,39 @@
  */
 
 function applyDomainCooldowns_(ctx) {
-  const S = ctx.summary;
-  const cooldowns = S.domainCooldowns || {};
+  // Defensive guard
+  if (!ctx) return;
+  if (!ctx.summary) ctx.summary = {};
+
+  var S = ctx.summary;
+  var cooldowns = S.domainCooldowns || {};
 
   // v2.3: Current cycle ID for filtering events
-  const currentCycle = S.absoluteCycle || S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
+  var currentCycle = S.absoluteCycle || S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.2: CALENDAR CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN CLASSIFICATIONS
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Priority domains that can fire more frequently (always)
-  const priorityDomains = ['HEALTH', 'SAFETY', 'INFRASTRUCTURE'];
-  
+  var priorityDomains = ['HEALTH', 'SAFETY', 'INFRASTRUCTURE'];
+
   // Long cooldown domains (prevent spam on normal days)
-  const longCooldownDomains = ['CULTURE', 'COMMUNITY', 'MICRO'];
+  var longCooldownDomains = ['CULTURE', 'COMMUNITY', 'MICRO'];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.2: CALENDAR-BOOSTED DOMAINS (shorter cooldowns today)
   // ═══════════════════════════════════════════════════════════════════════════
-  const calendarBoostedDomains = [];
+  var calendarBoostedDomains = [];
 
   // Any holiday → FESTIVAL and HOLIDAY domains flow freely
   if (holiday !== 'none') {
@@ -67,14 +76,14 @@ function applyDomainCooldowns_(ctx) {
   }
 
   // Big celebration days → everything celebration-related flows
-  const bigCelebrations = ['OaklandPride', 'ArtSoulFestival', 'NewYearsEve', 'Independence'];
-  if (bigCelebrations.includes(holiday)) {
+  var bigCelebrations = ['OaklandPride', 'ArtSoulFestival', 'NewYearsEve', 'Independence'];
+  if (bigCelebrations.indexOf(holiday) !== -1) {
     calendarBoostedDomains.push('NIGHTLIFE', 'COMMUNITY', 'CULTURE');
   }
 
   // Cultural festivals → CULTURE and COMMUNITY
-  const culturalFestivals = ['LunarNewYear', 'CincoDeMayo', 'DiaDeMuertos', 'Juneteenth'];
-  if (culturalFestivals.includes(holiday)) {
+  var culturalFestivals = ['LunarNewYear', 'CincoDeMayo', 'DiaDeMuertos', 'Juneteenth'];
+  if (culturalFestivals.indexOf(holiday) !== -1) {
     calendarBoostedDomains.push('CULTURE', 'COMMUNITY');
   }
 
@@ -101,54 +110,69 @@ function applyDomainCooldowns_(ctx) {
     calendarBoostedDomains.push('NIGHTLIFE');
   }
 
-  // Dedupe boosted domains
-  const uniqueBoostedDomains = [...new Set(calendarBoostedDomains)];
+  // Dedupe boosted domains (ES5 compatible)
+  var seenBoosted = {};
+  var uniqueBoostedDomains = [];
+  for (var bi = 0; bi < calendarBoostedDomains.length; bi++) {
+    var bd = calendarBoostedDomains[bi];
+    if (!seenBoosted[bd]) {
+      seenBoosted[bd] = true;
+      uniqueBoostedDomains.push(bd);
+    }
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.2: CALENDAR-SUPPRESSED DOMAINS (longer cooldowns today)
   // ═══════════════════════════════════════════════════════════════════════════
-  const calendarSuppressedDomains = [];
+  var calendarSuppressedDomains = [];
 
   // Quiet family holidays → suppress nightlife/party domains
-  const quietHolidays = ['Thanksgiving', 'Easter', 'MothersDay', 'FathersDay'];
-  if (quietHolidays.includes(holiday)) {
+  var quietHolidays = ['Thanksgiving', 'Easter', 'MothersDay', 'FathersDay'];
+  if (quietHolidays.indexOf(holiday) !== -1) {
     calendarSuppressedDomains.push('NIGHTLIFE', 'CRIME');
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // APPLY COOLDOWN DECAY EACH CYCLE
   // ═══════════════════════════════════════════════════════════════════════════
-  Object.keys(cooldowns).forEach(domain => {
-    let decay = 1;
+  for (var cdKey in cooldowns) {
+    if (cooldowns.hasOwnProperty(cdKey)) {
+      var decay = 1;
 
-    // v2.2: Calendar-boosted domains decay faster
-    if (uniqueBoostedDomains.includes(domain)) {
-      decay = 2; // Double decay rate
+      // v2.2: Calendar-boosted domains decay faster
+      if (uniqueBoostedDomains.indexOf(cdKey) !== -1) {
+        decay = 2; // Double decay rate
+      }
+
+      cooldowns[cdKey] = Math.max(0, cooldowns[cdKey] - decay);
     }
-
-    cooldowns[domain] = Math.max(0, cooldowns[domain] - decay);
-  });
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PROCESS THIS CYCLE'S EVENTS ONLY (v2.3: filter to current cycle)
   // ═══════════════════════════════════════════════════════════════════════════
-  const allEvents = S.worldEvents || [];
-  const todaysEvents = allEvents.filter(function(ev) {
+  var allEvents = S.worldEvents || [];
+  var todaysEvents = [];
+  for (var ei = 0; ei < allEvents.length; ei++) {
+    var ev = allEvents[ei];
     // If event has cycle property, match it; otherwise assume it's from this cycle
-    const evCycle = (typeof ev.cycle === 'number') ? ev.cycle : currentCycle;
-    return evCycle === currentCycle;
-  });
+    var evCycle = (typeof ev.cycle === 'number') ? ev.cycle : currentCycle;
+    if (evCycle === currentCycle) {
+      todaysEvents.push(ev);
+    }
+  }
 
   if (todaysEvents.length > 0) {
-    todaysEvents.forEach(ev => {
-      const d = (ev.domain || "").toUpperCase();
-      if (!d) return;
+    for (var ti = 0; ti < todaysEvents.length; ti++) {
+      var tevt = todaysEvents[ti];
+      var d = (tevt.domain || "").toUpperCase();
+      if (!d) continue;
 
       // Determine cooldown duration based on severity and domain type
-      let cooldownDuration = 2; // default
+      var cooldownDuration = 2; // default
 
       // Severity affects cooldown
-      const severity = (ev.severity || '').toLowerCase();
+      var severity = (tevt.severity || '').toLowerCase();
       if (severity === 'high' || severity === 'major' || severity === 'critical') {
         cooldownDuration = 3;
       } else if (severity === 'low') {
@@ -156,28 +180,28 @@ function applyDomainCooldowns_(ctx) {
       }
 
       // Priority domains recover faster (always)
-      if (priorityDomains.includes(d)) {
+      if (priorityDomains.indexOf(d) !== -1) {
         cooldownDuration = Math.max(1, cooldownDuration - 1);
       }
 
       // Long cooldown domains take longer (on normal days)
-      if (longCooldownDomains.includes(d) && !uniqueBoostedDomains.includes(d)) {
+      if (longCooldownDomains.indexOf(d) !== -1 && uniqueBoostedDomains.indexOf(d) === -1) {
         cooldownDuration += 1;
       }
 
       // v2.2: Calendar-boosted domains have shorter cooldowns
-      if (uniqueBoostedDomains.includes(d)) {
+      if (uniqueBoostedDomains.indexOf(d) !== -1) {
         cooldownDuration = Math.max(0, cooldownDuration - 1);
       }
 
       // v2.2: Calendar-suppressed domains have longer cooldowns
-      if (calendarSuppressedDomains.includes(d)) {
+      if (calendarSuppressedDomains.indexOf(d) !== -1) {
         cooldownDuration += 1;
       }
 
       // Set cooldown (use max if already cooling)
       cooldowns[d] = Math.max(cooldowns[d] || 0, cooldownDuration);
-    });
+    }
   }
 
   S.domainCooldowns = cooldowns;
@@ -186,18 +210,23 @@ function applyDomainCooldowns_(ctx) {
   // BUILD SUPPRESSION MAP
   // ═══════════════════════════════════════════════════════════════════════════
   S.suppressDomains = {};
-  Object.keys(cooldowns).forEach(domain => {
-    if (cooldowns[domain] > 0) {
-      S.suppressDomains[domain] = true;
-      S.suppressDomains[domain.toLowerCase()] = true;
+  for (var sdKey in cooldowns) {
+    if (cooldowns.hasOwnProperty(sdKey)) {
+      if (cooldowns[sdKey] > 0) {
+        S.suppressDomains[sdKey] = true;
+        S.suppressDomains[sdKey.toLowerCase()] = true;
+      }
     }
-  });
+  }
 
   // Track active cooldowns for debugging
-  S.activeCooldowns = Object.entries(cooldowns)
-    .filter(([_, v]) => v > 0)
-    .map(([k, v]) => `${k}:${v}`)
-    .join(', ') || 'none';
+  var activeArr = [];
+  for (var acKey in cooldowns) {
+    if (cooldowns.hasOwnProperty(acKey) && cooldowns[acKey] > 0) {
+      activeArr.push(acKey + ':' + cooldowns[acKey]);
+    }
+  }
+  S.activeCooldowns = activeArr.length > 0 ? activeArr.join(', ') : 'none';
 
   // v2.2: Calendar context for debugging
   S.cooldownCalendarContext = {

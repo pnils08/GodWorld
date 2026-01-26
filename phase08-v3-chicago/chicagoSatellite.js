@@ -1,16 +1,21 @@
 /**
  * ============================================================================
- * chicagoSatelliteEngine_ v3.5
+ * chicagoSatelliteEngine_ v3.6
  * ============================================================================
- * 
+ *
  * Generates Chicago snapshot aligned with GodWorld Calendar v1.0.
- * 
- * v3.5 Enhancements:
+ *
+ * v3.6 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for ctx
+ * - Replaced optional chaining (?.) with explicit checks
+ *
+ * v3.5 Features:
  * - Report output includes full calendar context for consistency
  * - holidayPriority, isFirstFriday, isCreationDay in output
  * - sportsSeason field matching other engines
  * - Aligned with calendar integration across all 80+ scripts
- * 
+ *
  * Features:
  * - Chicago-specific weather (colder, lake effect, more snow)
  * - Independent sentiment drift (reacts to Bulls results from Game_Intake)
@@ -18,66 +23,70 @@
  * - Holiday awareness (national holidays affect Chicago too)
  * - Bulls season awareness from Sports Clock
  * - Rich event pool (no auto-sports)
- * 
+ *
  * SPORTS ARE NOT SIMULATED.
  * All sports content comes from Game_Intake (user gameplay).
- * 
+ *
  * Provides CONTEXT for journalists, not stories.
- * 
+ *
  * ============================================================================
  */
 
 function chicagoSatelliteEngine_(ctx) {
-  const S = ctx.summary || {};
-  const cycle = Number(S.absoluteCycle || S.cycleId) || 0;
-  
+  // Defensive guard
+  if (!ctx) return;
+  if (!ctx.summary) ctx.summary = {};
+
+  var S = ctx.summary;
+  var cycle = Number(S.absoluteCycle || S.cycleId) || 0;
+
   // ═══════════════════════════════════════════════════════════
   // CHICAGO CALENDAR (from GodWorld Calendar)
   // ═══════════════════════════════════════════════════════════
-  const godWorldYear = S.godWorldYear || Math.ceil(cycle / 52) || 1;
-  const cycleOfYear = S.cycleOfYear || ((cycle - 1) % 52) + 1;
-  const simMonth = S.simMonth || S.month || getMonthFromCycleInternal_(cycleOfYear);
-  const cycleInMonth = S.cycleInMonth || 1;
-  const season = S.season || "Spring";
+  var godWorldYear = S.godWorldYear || Math.ceil(cycle / 52) || 1;
+  var cycleOfYear = S.cycleOfYear || ((cycle - 1) % 52) + 1;
+  var simMonth = S.simMonth || S.month || getMonthFromCycleInternal_(cycleOfYear);
+  var cycleInMonth = S.cycleInMonth || 1;
+  var season = S.season || "Spring";
 
   // Holiday awareness (national holidays)
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;  // v3.5: Oakland-specific, minimal Chicago impact
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;  // v3.5: Oakland-specific, minimal Chicago impact
 
-  // Sports Clock awareness (Bulls)
-  const bullsSeason = ctx.config?.sportsState_Chicago || S.sportsState_Chicago || "off-season";
-  
+  // Sports Clock awareness (Bulls) - ES5 compatible optional chaining replacement
+  var bullsSeason = (ctx.config && ctx.config.sportsState_Chicago) || S.sportsState_Chicago || "off-season";
+
   // v3.5: Unified sportsSeason field (Oakland A's context, for reference)
-  const sportsSeason = S.sportsSeason || "off-season";
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // ═══════════════════════════════════════════════════════════
   // CHICAGO-SPECIFIC WEATHER
   // Chicago baseline: colder than Oakland, lake effect, harsh winters
   // ═══════════════════════════════════════════════════════════
-  const chicagoWeather = generateChicagoWeather_(simMonth, season, holiday);
+  var chicagoWeather = generateChicagoWeather_(simMonth, season, holiday);
 
   // ═══════════════════════════════════════════════════════════
   // CHICAGO SENTIMENT (Independent from Oakland)
   // Based on weather, Bulls performance, and holidays
   // ═══════════════════════════════════════════════════════════
-  const chicagoSentiment = calculateChicagoSentiment_(ctx, chicagoWeather, holiday, holidayPriority, bullsSeason);
+  var chicagoSentiment = calculateChicagoSentiment_(ctx, chicagoWeather, holiday, holidayPriority, bullsSeason);
 
   // ═══════════════════════════════════════════════════════════
   // CHICAGO EVENTS (Non-sports, holiday-aware)
   // ═══════════════════════════════════════════════════════════
-  const chicagoEvents = generateChicagoEvents_(chicagoWeather, chicagoSentiment, simMonth, holiday, isFirstFriday, cycleOfYear);
+  var chicagoEvents = generateChicagoEvents_(chicagoWeather, chicagoSentiment, simMonth, holiday, isFirstFriday, cycleOfYear);
 
   // ═══════════════════════════════════════════════════════════
   // TRAVEL NOTES
   // ═══════════════════════════════════════════════════════════
-  const travelNotes = generateChicagoTravel_(chicagoWeather, holiday);
+  var travelNotes = generateChicagoTravel_(chicagoWeather, holiday);
 
   // ═══════════════════════════════════════════════════════════
   // BUILD REPORT (v3.5: Full calendar context in output)
   // ═══════════════════════════════════════════════════════════
-  const report = {
+  var report = {
     // Cycle-based time
     absoluteCycle: cycle,
     godWorldYear: godWorldYear,
@@ -85,25 +94,25 @@ function chicagoSatelliteEngine_(ctx) {
     cycleInMonth: cycleInMonth,
     simMonth: simMonth,
     season: season,
-    
+
     // Weather
     weatherType: chicagoWeather.type,
     weatherImpact: chicagoWeather.impact,
     temp: chicagoWeather.temp,
-    
+
     // Mood
     sentiment: chicagoSentiment,
-    
+
     // Events
     events: chicagoEvents,
-    
+
     // Sports (Game_Intake driven only)
     sports: '',
     bullsSeason: bullsSeason,
-    
+
     // Travel
     travelNotes: travelNotes,
-    
+
     // v3.5: Full calendar context (aligned with other engines)
     holiday: holiday,
     holidayPriority: holidayPriority,
@@ -114,9 +123,9 @@ function chicagoSatelliteEngine_(ctx) {
   };
 
   ctx.summary.chicagoFeed = [report];
-  
-  Logger.log('chicagoSatelliteEngine_ v3.5: Cycle ' + cycle + 
-    ' | Weather: ' + chicagoWeather.type + 
+
+  Logger.log('chicagoSatelliteEngine_ v3.6: Cycle ' + cycle +
+    ' | Weather: ' + chicagoWeather.type +
     ' | Sentiment: ' + chicagoSentiment +
     ' | Holiday: ' + holiday +
     ' | Bulls: ' + bullsSeason);
@@ -131,17 +140,17 @@ function chicagoSatelliteEngine_(ctx) {
  */
 function generateChicagoWeather_(month, season, holiday) {
   // Base temps by month (Fahrenheit)
-  const baseTemps = {
+  var baseTemps = {
     1: 25, 2: 28, 3: 38, 4: 48, 5: 58, 6: 68,
     7: 75, 8: 74, 9: 65, 10: 53, 11: 40, 12: 28
   };
 
-  let temp = baseTemps[month] || 50;
+  var temp = baseTemps[month] || 50;
   temp += Math.round((Math.random() - 0.5) * 15);
 
-  let type = 'clear';
-  let impact = 1.0;
-  const roll = Math.random();
+  var type = 'clear';
+  var impact = 1.0;
+  var roll = Math.random();
 
   if (month >= 11 || month <= 3) {
     // Winter
@@ -191,7 +200,7 @@ function generateChicagoWeather_(month, season, holiday) {
     if (Math.random() < 0.4) { type = 'cold'; impact = 1.2; }
   }
 
-  return { type, impact, temp };
+  return { type: type, impact: impact, temp: temp };
 }
 
 
@@ -202,7 +211,7 @@ function generateChicagoWeather_(month, season, holiday) {
  * ============================================================================
  */
 function calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bullsSeason) {
-  let sentiment = 0;
+  var sentiment = 0;
 
   // ═══════════════════════════════════════════════════════════
   // WEATHER IMPACT
@@ -266,7 +275,7 @@ function calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bull
   // ═══════════════════════════════════════════════════════════
   // BULLS PERFORMANCE (from Game_Intake)
   // ═══════════════════════════════════════════════════════════
-  const bullsImpact = getBullsSentimentImpact_(ctx);
+  var bullsImpact = getBullsSentimentImpact_(ctx);
   sentiment += bullsImpact;
 
   // Random daily fluctuation
@@ -288,55 +297,58 @@ function calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bull
  * ============================================================================
  */
 function getBullsSentimentImpact_(ctx) {
-  const ss = ctx.ss;
-  const sheet = ss.getSheetByName('Game_Intake');
+  // Defensive guard
+  if (!ctx || !ctx.ss) return 0;
+
+  var ss = ctx.ss;
+  var sheet = ss.getSheetByName('Game_Intake');
   if (!sheet) return 0;
 
-  const data = sheet.getDataRange().getValues();
+  var data = sheet.getDataRange().getValues();
   if (data.length < 2) return 0;
 
-  const header = data[0];
-  const idxGame = header.indexOf('Game');
-  const idxEventType = header.indexOf('EventType');
-  const idxDetails = header.indexOf('Details');
-  const idxCycle = header.indexOf('Cycle');
+  var header = data[0];
+  var idxGame = header.indexOf('Game');
+  var idxEventType = header.indexOf('EventType');
+  var idxDetails = header.indexOf('Details');
+  var idxCycle = header.indexOf('Cycle');
 
   if (idxGame < 0) return 0;
 
-  const currentCycle = ctx.summary.absoluteCycle || ctx.summary.cycleId || ctx.config.cycleCount || 0;
-  const recentWindow = 10; // Look back 10 cycles
+  var currentCycle = (ctx.summary && ctx.summary.absoluteCycle) || (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
+  var recentWindow = 10; // Look back 10 cycles
 
-  let wins = 0;
-  let losses = 0;
-  let bigMoments = 0; // playoffs, championships, trades
+  var wins = 0;
+  var losses = 0;
+  var bigMoments = 0; // playoffs, championships, trades
 
-  for (let r = 1; r < data.length; r++) {
-    const row = data[r];
-    const game = (row[idxGame] || '').toString().toLowerCase();
-    const eventType = (row[idxEventType] || '').toString().toLowerCase();
-    const details = (row[idxDetails] || '').toString().toLowerCase();
-    const cycle = Number(row[idxCycle] || 0);
+  for (var r = 1; r < data.length; r++) {
+    var row = data[r];
+    var game = (row[idxGame] || '').toString().toLowerCase();
+    var eventType = (row[idxEventType] || '').toString().toLowerCase();
+    var details = (row[idxDetails] || '').toString().toLowerCase();
+    var cycle = Number(row[idxCycle] || 0);
 
     // Only count Bulls-related entries
-    if (!game.includes('bulls') && !game.includes('nba 2k')) continue;
+    if (game.indexOf('bulls') === -1 && game.indexOf('nba 2k') === -1) continue;
 
     // Only count recent cycles
     if (currentCycle - cycle > recentWindow) continue;
 
     // Count outcomes
-    if (eventType.includes('win') || details.includes('win') || details.includes('victory')) {
+    if (eventType.indexOf('win') !== -1 || details.indexOf('win') !== -1 || details.indexOf('victory') !== -1) {
       wins++;
     }
-    if (eventType.includes('loss') || details.includes('loss') || details.includes('defeat')) {
+    if (eventType.indexOf('loss') !== -1 || details.indexOf('loss') !== -1 || details.indexOf('defeat') !== -1) {
       losses++;
     }
-    if (details.includes('playoff') || details.includes('championship') || details.includes('finals')) {
+    if (details.indexOf('playoff') !== -1 || details.indexOf('championship') !== -1 || details.indexOf('finals') !== -1) {
       bigMoments++;
     }
   }
 
   // Calculate sentiment shift
-  let impact = 0;
+  var impact = 0;
 
   // Win/loss differential
   impact += (wins - losses) * 0.05;
@@ -359,7 +371,7 @@ function getBullsSentimentImpact_(ctx) {
  * ============================================================================
  */
 function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFriday, cycleOfYear) {
-  const events = [];
+  var events = [];
 
   // ═══════════════════════════════════════════════════════════
   // WEATHER-DRIVEN EVENTS
@@ -434,7 +446,7 @@ function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFrida
   // SENTIMENT-DRIVEN EVENTS
   // ═══════════════════════════════════════════════════════════
   if (sentiment <= -0.3) {
-    const negativeEvents = [
+    var negativeEvents = [
       'Subdued mood in the Loop.',
       'Light foot traffic on State Street.',
       'Commuters hurrying without pause.'
@@ -442,7 +454,7 @@ function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFrida
     events.push(negativeEvents[Math.floor(Math.random() * negativeEvents.length)]);
   }
   if (sentiment >= 0.2) {
-    const positiveEvents = [
+    var positiveEvents = [
       'Energy in the downtown corridor.',
       'Crowds gathering along the riverwalk.',
       'Street musicians out on Michigan Ave.'
@@ -477,7 +489,7 @@ function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFrida
   // RANDOM CITY TEXTURE (20% chance)
   // ═══════════════════════════════════════════════════════════
   if (Math.random() < 0.2) {
-    const textures = [
+    var textures = [
       'El train delays on the Red Line.',
       'Construction on Wacker Drive.',
       'Food truck gathering in Daley Plaza.',
@@ -500,7 +512,7 @@ function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFrida
  * ============================================================================
  */
 function generateChicagoTravel_(weather, holiday) {
-  const notes = [];
+  var notes = [];
 
   if (weather.impact >= 1.3) {
     notes.push('CTA advising extra travel time.');

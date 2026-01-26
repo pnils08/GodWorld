@@ -1,11 +1,16 @@
 /**
  * ============================================================================
- * V3.3 TEXTURE WRITER
+ * V3.4 TEXTURE WRITER
  * ============================================================================
  *
  * Writes texture triggers to Texture_Trigger_Log sheet with calendar context.
  *
- * v3.3 Enhancements:
+ * v3.4 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for ctx
+ * - for loops instead of .map()
+ *
+ * v3.3 Features:
  * - Hardened null guards for all fields
  * - Intensity normalization
  * - Cache layer support (uses ctx.cache.append if available)
@@ -20,11 +25,15 @@
  */
 
 function saveV3Textures_(ctx) {
-  const ss = ctx.ss;
-  const textures = (ctx.summary && ctx.summary.textureTriggers) ? ctx.summary.textureTriggers : [];
+  // Defensive guard
+  if (!ctx) return;
+  if (!ctx.ss) return;
+
+  var ss = ctx.ss;
+  var textures = (ctx.summary && ctx.summary.textureTriggers) ? ctx.summary.textureTriggers : [];
   if (!textures.length) return;
 
-  const headers = [
+  var headers = [
     'Timestamp',        // A
     'Cycle',            // B
     'Domain',           // C
@@ -39,27 +48,30 @@ function saveV3Textures_(ctx) {
     'SportsSeason'      // L
   ];
 
-  const sheet = ensureSheet_(ss, 'Texture_Trigger_Log', headers);
+  var sheet = ensureSheet_(ss, 'Texture_Trigger_Log', headers);
 
-  const cycle = (ctx.config && ctx.config.cycleCount) || (ctx.summary && ctx.summary.cycleId) || 0;
-  const now = ctx.now || new Date();
+  var cycle = (ctx.config && ctx.config.cycleCount) || (ctx.summary && ctx.summary.cycleId) || 0;
+  var now = ctx.now || new Date();
 
   // Calendar context with null guards
-  const holiday = (ctx.summary && ctx.summary.holiday) || 'none';
-  const holidayPriority = (ctx.summary && ctx.summary.holidayPriority) || 'none';
-  const isFirstFriday = !!(ctx.summary && ctx.summary.isFirstFriday);
-  const isCreationDay = !!(ctx.summary && ctx.summary.isCreationDay);
-  const sportsSeason = (ctx.summary && ctx.summary.sportsSeason) || 'off-season';
+  var holiday = (ctx.summary && ctx.summary.holiday) || 'none';
+  var holidayPriority = (ctx.summary && ctx.summary.holidayPriority) || 'none';
+  var isFirstFriday = !!(ctx.summary && ctx.summary.isFirstFriday);
+  var isCreationDay = !!(ctx.summary && ctx.summary.isCreationDay);
+  var sportsSeason = (ctx.summary && ctx.summary.sportsSeason) || 'off-season';
 
   // Intensity normalization helper
-  const normalizeIntensity = function(x) {
-    const v = (x || 'moderate').toString().toLowerCase();
+  function normalizeIntensity(x) {
+    var v = (x || 'moderate').toString().toLowerCase();
     if (v === 'low' || v === 'moderate' || v === 'high') return v;
     return 'moderate';
-  };
+  }
 
-  const rows = textures.map(function(t) {
-    return [
+  // Build rows (ES5 compatible)
+  var rows = [];
+  for (var ti = 0; ti < textures.length; ti++) {
+    var t = textures[ti];
+    rows.push([
       now,
       cycle,
       (t && t.domain) || 'GENERAL',
@@ -72,8 +84,8 @@ function saveV3Textures_(ctx) {
       isFirstFriday,
       isCreationDay,
       sportsSeason
-    ];
-  });
+    ]);
+  }
 
   // Use cache append if available (batched writes)
   if (ctx.cache && typeof ctx.cache.append === 'function') {
@@ -82,7 +94,7 @@ function saveV3Textures_(ctx) {
   }
 
   // Fallback: direct sheet write
-  const startRow = Math.max(sheet.getLastRow() + 1, 2);
+  var startRow = Math.max(sheet.getLastRow() + 1, 2);
   sheet.getRange(startRow, 1, rows.length, rows[0].length).setValues(rows);
 }
 

@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * applyCycleRecovery_ v2.3
+ * applyCycleRecovery_ v2.4
  * ============================================================================
  *
- * v2.3 Enhancements:
+ * v2.4 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for ctx/summary
+ * - for loops instead of for...of
+ *
+ * v2.3 Features:
  * - TRUE recovery window (persistence): heavy cycles enforce multi-cycle recovery
  * - Momentum / decay: heavy → moderate → light → none unless re-triggered
  * - Minimum duration: prevents snap-back after overload
@@ -18,61 +23,65 @@
  */
 
 function applyCycleRecovery_(ctx) {
-  const S = ctx.summary || (ctx.summary = {});
+  // Defensive guard
+  if (!ctx) return;
+  if (!ctx.summary) ctx.summary = {};
+
+  var S = ctx.summary;
 
   // --- Cycle id (consistent across your other scripts)
-  const cycle = S.absoluteCycle || S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
+  var cycle = S.absoluteCycle || S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = !!S.isFirstFriday;
-  const isCreationDay = !!S.isCreationDay;
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = !!S.isFirstFriday;
+  var isCreationDay = !!S.isCreationDay;
 
-  const sportsSeason = (S.sportsSeason || 'off-season').toString().trim().toLowerCase();
+  var sportsSeason = (S.sportsSeason || 'off-season').toString().trim().toLowerCase();
 
   // Bucket sports into in-season/off-season for recovery realism
-  const IN_SEASON_STATES = ['spring-training', 'early-season', 'mid-season', 'late-season', 'regular-season'];
-  const HIGH_INTENSITY_STATES = ['playoffs', 'post-season', 'championship'];
-  const isInSeason = IN_SEASON_STATES.includes(sportsSeason) || HIGH_INTENSITY_STATES.includes(sportsSeason);
-  const isHighIntensitySports = HIGH_INTENSITY_STATES.includes(sportsSeason);
+  var IN_SEASON_STATES = ['spring-training', 'early-season', 'mid-season', 'late-season', 'regular-season'];
+  var HIGH_INTENSITY_STATES = ['playoffs', 'post-season', 'championship'];
+  var isInSeason = IN_SEASON_STATES.indexOf(sportsSeason) !== -1 || HIGH_INTENSITY_STATES.indexOf(sportsSeason) !== -1;
+  var isHighIntensitySports = HIGH_INTENSITY_STATES.indexOf(sportsSeason) !== -1;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.3: LOAD PREVIOUS RECOVERY STATE (persistence)
   // ═══════════════════════════════════════════════════════════════════════════
   // Prefer a dedicated state object if present; fallback to older fields.
-  const prev = S.recoveryState || {};
-  const prevStart = Number(prev.startCycle || S.recoveryStartCycle || 0) || 0;
-  const prevWindow = Number(prev.window || S.recoveryWindow || 0) || 0;
-  const prevDuration = Number(prev.duration || S.recoveryDuration || 0) || 0;
-  const prevLevel = (prev.lastLevel || S.recoveryLevel || 'none').toString();
+  var prev = S.recoveryState || {};
+  var prevStart = Number(prev.startCycle || S.recoveryStartCycle || 0) || 0;
+  var prevWindow = Number(prev.window || S.recoveryWindow || 0) || 0;
+  var prevDuration = Number(prev.duration || S.recoveryDuration || 0) || 0;
+  var prevLevel = (prev.lastLevel || S.recoveryLevel || 'none').toString();
 
-  const prevActive = prevStart > 0 && prevWindow > 0 && (cycle - prevStart) < prevWindow;
+  var prevActive = prevStart > 0 && prevWindow > 0 && (cycle - prevStart) < prevWindow;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR-BASED THRESHOLD MODIFIERS (as in v2.2, but tuned)
   // ═══════════════════════════════════════════════════════════════════════════
-  let lightThreshold = 3;
-  let moderateThreshold = 6;
-  let heavyThreshold = 10;
+  var lightThreshold = 3;
+  var moderateThreshold = 6;
+  var heavyThreshold = 10;
 
-  const bigCelebrations = ['oaklandpride', 'artsoulfestival', 'newyearseve', 'independence'];
-  if (bigCelebrations.includes(holiday.toLowerCase())) {
+  var bigCelebrations = ['oaklandpride', 'artsoulfestival', 'newyearseve', 'independence'];
+  if (bigCelebrations.indexOf(holiday.toLowerCase()) !== -1) {
     lightThreshold += 3;
     moderateThreshold += 4;
     heavyThreshold += 5;
   }
 
-  if (holidayPriority === 'oakland' && !bigCelebrations.includes(holiday.toLowerCase())) {
+  if (holidayPriority === 'oakland' && bigCelebrations.indexOf(holiday.toLowerCase()) === -1) {
     lightThreshold += 2;
     moderateThreshold += 2;
     heavyThreshold += 3;
   }
 
-  const culturalFestivals = ['lunarnewyear', 'cincodemayo', 'diademuertos', 'juneteenth'];
-  if (culturalFestivals.includes(holiday.toLowerCase())) {
+  var culturalFestivals = ['lunarnewyear', 'cincodemayo', 'diademuertos', 'juneteenth'];
+  if (culturalFestivals.indexOf(holiday.toLowerCase()) !== -1) {
     lightThreshold += 2;
     moderateThreshold += 2;
     heavyThreshold += 3;
@@ -84,8 +93,8 @@ function applyCycleRecovery_(ctx) {
     heavyThreshold += 2;
   }
 
-  const quietHolidays = ['thanksgiving', 'easter', 'mothersday', 'fathersday'];
-  if (quietHolidays.includes(holiday.toLowerCase())) {
+  var quietHolidays = ['thanksgiving', 'easter', 'mothersday', 'fathersday'];
+  if (quietHolidays.indexOf(holiday.toLowerCase()) !== -1) {
     lightThreshold -= 1;
     moderateThreshold -= 1;
     heavyThreshold -= 2;
@@ -138,14 +147,14 @@ function applyCycleRecovery_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CALCULATE OVERLOAD SCORE (same spirit as v2.2, slightly hardened)
   // ═══════════════════════════════════════════════════════════════════════════
-  let overloadScore = 0;
+  var overloadScore = 0;
 
-  const textureCount = S.textureTriggers ? S.textureTriggers.length : 0;
+  var textureCount = S.textureTriggers ? S.textureTriggers.length : 0;
   if (textureCount > 6) overloadScore += 3;
   else if (textureCount > 4) overloadScore += 2;
   else if (textureCount > 2) overloadScore += 1;
 
-  const hookCount = S.storyHooks ? S.storyHooks.length : 0;
+  var hookCount = S.storyHooks ? S.storyHooks.length : 0;
   if (hookCount > 7) overloadScore += 3;
   else if (hookCount > 5) overloadScore += 2;
   else if (hookCount > 3) overloadScore += 1;
@@ -153,7 +162,7 @@ function applyCycleRecovery_(ctx) {
   if (S.shockFlag === 'shock-flag') overloadScore += 3;
   if (S.shockFlag === 'shock-fading') overloadScore += 1;
 
-  const eventCount = S.worldEvents ? S.worldEvents.length : 0;
+  var eventCount = S.worldEvents ? S.worldEvents.length : 0;
   if (eventCount > 10) overloadScore += 3;
   else if (eventCount > 6) overloadScore += 2;
   else if (eventCount > 4) overloadScore += 1;
@@ -161,26 +170,29 @@ function applyCycleRecovery_(ctx) {
   if (S.civicLoad === 'load-strain') overloadScore += 3;
   else if (S.civicLoad === 'minor-variance') overloadScore += 1;
 
-  const civicScore = Number(S.civicLoadScore || 0);
+  var civicScore = Number(S.civicLoadScore || 0);
   if (civicScore >= 15) overloadScore += 2;
   else if (civicScore >= 10) overloadScore += 1;
 
-  const econMood = Number(S.economicMood || 50);
+  var econMood = Number(S.economicMood || 50);
   if (econMood <= 25) overloadScore += 2;
   else if (econMood <= 35) overloadScore += 1;
 
-  const weatherMood = S.weatherMood || {};
+  var weatherMood = S.weatherMood || {};
   if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.25) overloadScore += 1;
 
-  const arcs = S.eventArcs || [];
-  const peakArcs = arcs.filter(a => a && a.phase === 'peak').length;
+  var arcs = S.eventArcs || [];
+  var peakArcs = 0;
+  for (var ai = 0; ai < arcs.length; ai++) {
+    if (arcs[ai] && arcs[ai].phase === 'peak') peakArcs++;
+  }
   if (peakArcs >= 3) overloadScore += 2;
   else if (peakArcs >= 2) overloadScore += 1;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DETERMINE "TRIGGERED" RECOVERY LEVEL (based on today's overload)
   // ═══════════════════════════════════════════════════════════════════════════
-  let triggeredLevel = 'none';
+  var triggeredLevel = 'none';
   if (overloadScore >= heavyThreshold) triggeredLevel = 'heavy';
   else if (overloadScore >= moderateThreshold) triggeredLevel = 'moderate';
   else if (overloadScore >= lightThreshold) triggeredLevel = 'light';
@@ -203,14 +215,14 @@ function applyCycleRecovery_(ctx) {
   }
 
   function maxLevel(a, b) {
-    const rank = { none: 0, light: 1, moderate: 2, heavy: 3 };
+    var rank = { none: 0, light: 1, moderate: 2, heavy: 3 };
     return (rank[a] >= rank[b]) ? a : b;
   }
 
-  let finalLevel = triggeredLevel;
-  let startCycle = prevStart;
-  let window = prevWindow;
-  let duration = prevDuration;
+  var finalLevel = triggeredLevel;
+  var startCycle = prevStart;
+  var window = prevWindow;
+  var duration = prevDuration;
 
   if (triggeredLevel === 'heavy') {
     startCycle = cycle;
@@ -226,8 +238,8 @@ function applyCycleRecovery_(ctx) {
       finalLevel = 'moderate';
     } else {
       // If currently in a window, keep at least the decayed level, and allow bump
-      const decayed = stepDown(prevLevel);
-      finalLevel = maxLevel(triggeredLevel, decayed);
+      var decayedMod = stepDown(prevLevel);
+      finalLevel = maxLevel(triggeredLevel, decayedMod);
       startCycle = prevStart;
       window = prevWindow;
       duration = (cycle - prevStart);
@@ -239,8 +251,8 @@ function applyCycleRecovery_(ctx) {
       duration = 0;
       finalLevel = 'light';
     } else {
-      const decayed = stepDown(prevLevel);
-      finalLevel = maxLevel(triggeredLevel, decayed);
+      var decayedLight = stepDown(prevLevel);
+      finalLevel = maxLevel(triggeredLevel, decayedLight);
       startCycle = prevStart;
       window = prevWindow;
       duration = (cycle - prevStart);
@@ -249,8 +261,8 @@ function applyCycleRecovery_(ctx) {
     // triggered none
     if (prevActive) {
       // Continue decaying until window ends
-      const decayed = stepDown(prevLevel);
-      finalLevel = decayed;
+      var decayedNone = stepDown(prevLevel);
+      finalLevel = decayedNone;
       startCycle = prevStart;
       window = prevWindow;
       duration = (cycle - prevStart);

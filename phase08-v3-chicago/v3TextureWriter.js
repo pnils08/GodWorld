@@ -87,15 +87,22 @@ function saveV3Textures_(ctx) {
     ]);
   }
 
-  // Use cache append if available (batched writes)
-  if (ctx.cache && typeof ctx.cache.append === 'function') {
-    ctx.cache.append(sheet, rows);
-    return;
+  // Initialize persist context if needed
+  if (!ctx.persist) {
+    initializePersistContext_(ctx);
   }
 
-  // Fallback: direct sheet write
-  var startRow = Math.max(sheet.getLastRow() + 1, 2);
-  sheet.getRange(startRow, 1, rows.length, rows[0].length).setValues(rows);
+  // Queue batch append intent
+  queueBatchAppendIntent_(
+    ctx,
+    'Texture_Trigger_Log',
+    rows,
+    'Save ' + rows.length + ' texture triggers for cycle ' + cycle,
+    'media',
+    100
+  );
+
+  Logger.log('saveV3Textures_ v3.4: Queued ' + rows.length + ' textures | Holiday: ' + holiday + ' | Sports: ' + sportsSeason);
 }
 
 

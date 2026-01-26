@@ -1,129 +1,126 @@
 /**
  * ============================================================================
- * saveV3Domains_ v3.3
+ * saveV3Domains_ v3.4 - Write-Intent Based
  * ============================================================================
  *
  * Saves domain presence counts to Domain_Tracker sheet with calendar context.
+ * Uses V3 write-intents model for persistence.
  *
- * v3.3 Enhancements:
+ * v3.4 Changes:
+ * - Uses queueAppendIntent_ instead of direct writes
+ * - Full dryRun/replay mode support
+ * - ES5 compatible (removed const/let, spread, for...of, arrow functions)
+ *
+ * v3.3 Features (preserved):
  * - New domains: FESTIVAL, HOLIDAY, ARTS, ENVIRONMENT, TECHNOLOGY
  * - Calendar context columns
  * - Updated domain mappings (matches domainTracker v3.2)
  * - Calendar-aware inference
  * - Aligned with GodWorld Calendar v1.0
  *
- * Previous features (v3.2):
- * - Domain derivation from events/arcs
- * - Dominant domain calculation
- * - Cleanup function
- * 
- * SCHEMA (27 columns):
+ * SCHEMA (32 columns):
  * Timestamp | Cycle | CIVIC | CRIME | TRANSIT | ECONOMIC | EDUCATION | HEALTH |
  * WEATHER | COMMUNITY | NIGHTLIFE | HOUSING | CULTURE | SPORTS | BUSINESS |
  * SAFETY | INFRASTRUCTURE | GENERAL | FESTIVAL | HOLIDAY | ARTS | ENVIRONMENT |
- * TECHNOLOGY | DominantDomain | TotalEvents | Holiday | SportsSeason | Notes
- * 
+ * TECHNOLOGY | DominantDomain | TotalEvents | Holiday | HolidayPriority |
+ * FirstFriday | CreationDay | SportsSeason | Notes
+ *
  * ============================================================================
  */
 
+var DOMAIN_TRACKER_DOMAINS = [
+  'CIVIC',
+  'CRIME',
+  'TRANSIT',
+  'ECONOMIC',
+  'EDUCATION',
+  'HEALTH',
+  'WEATHER',
+  'COMMUNITY',
+  'NIGHTLIFE',
+  'HOUSING',
+  'CULTURE',
+  'SPORTS',
+  'BUSINESS',
+  'SAFETY',
+  'INFRASTRUCTURE',
+  'GENERAL',
+  'FESTIVAL',      // v3.3
+  'HOLIDAY',       // v3.3
+  'ARTS',          // v3.3
+  'ENVIRONMENT',   // v3.3
+  'TECHNOLOGY'     // v3.3
+];
+
+var DOMAIN_TRACKER_HEADERS = [
+  'Timestamp',
+  'Cycle',
+  'CIVIC', 'CRIME', 'TRANSIT', 'ECONOMIC', 'EDUCATION', 'HEALTH',
+  'WEATHER', 'COMMUNITY', 'NIGHTLIFE', 'HOUSING', 'CULTURE',
+  'SPORTS', 'BUSINESS', 'SAFETY', 'INFRASTRUCTURE', 'GENERAL',
+  'FESTIVAL', 'HOLIDAY', 'ARTS', 'ENVIRONMENT', 'TECHNOLOGY',
+  'DominantDomain',
+  'TotalEvents',
+  'Holiday',
+  'HolidayPriority',
+  'FirstFriday',
+  'CreationDay',
+  'SportsSeason',
+  'Notes'
+];
+
+
 function saveV3Domains_(ctx) {
+  var ss = ctx.ss;
 
-  const ss = ctx.ss;
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // DEFINE ALL POSSIBLE DOMAINS (v3.3: expanded)
-  // ═══════════════════════════════════════════════════════════════════════════
-  const ALL_DOMAINS = [
-    'CIVIC',
-    'CRIME',
-    'TRANSIT',
-    'ECONOMIC',
-    'EDUCATION',
-    'HEALTH',
-    'WEATHER',
-    'COMMUNITY',
-    'NIGHTLIFE',
-    'HOUSING',
-    'CULTURE',
-    'SPORTS',
-    'BUSINESS',
-    'SAFETY',
-    'INFRASTRUCTURE',
-    'GENERAL',
-    'FESTIVAL',      // v3.3
-    'HOLIDAY',       // v3.3
-    'ARTS',          // v3.3
-    'ENVIRONMENT',   // v3.3
-    'TECHNOLOGY'     // v3.3
-  ];
-
-  const HEADERS = [
-    'Timestamp',
-    'Cycle',
-    ...ALL_DOMAINS,
-    'DominantDomain',
-    'TotalEvents',
-    'Holiday',        // v3.3
-    'HolidayPriority',// v3.3
-    'FirstFriday',    // v3.3
-    'CreationDay',    // v3.3
-    'SportsSeason',   // v3.3
-    'Notes'
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // ENSURE SHEET WITH HEADERS
-  // ═══════════════════════════════════════════════════════════════════════════
-  let sheet;
-  if (typeof ensureSheet_ === 'function') {
-    sheet = ensureSheet_(ss, 'Domain_Tracker', HEADERS);
-  } else {
-    sheet = ss.getSheetByName('Domain_Tracker');
-    if (!sheet) {
-      sheet = ss.insertSheet('Domain_Tracker');
-      sheet.appendRow(HEADERS);
-      sheet.setFrozenRows(1);
-    }
+  // Initialize persist context if needed
+  if (!ctx.persist) {
+    initializePersistContext_(ctx);
   }
 
+  // Ensure sheet with headers
+  var sheet = ensureSheet_(ss, 'Domain_Tracker', DOMAIN_TRACKER_HEADERS);
+
   if (!sheet) {
-    Logger.log('saveV3Domains_ v3.3: Could not access Domain_Tracker sheet');
+    Logger.log('saveV3Domains_ v3.4: Could not access Domain_Tracker sheet');
     return;
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // PULL CONTEXT DATA
-  // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary || {};
-  const cycle = ctx.config.cycleCount || S.cycleId || 0;
-  const now = ctx.now || new Date();
+  // Pull context data
+  var S = ctx.summary || {};
+  var cycle = ctx.config.cycleCount || S.cycleId || 0;
+  var now = ctx.now || new Date();
 
   // v3.3: Calendar context
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // GET OR DERIVE DOMAIN PRESENCE
-  // ═══════════════════════════════════════════════════════════════════════════
-  let domainPresence = S.domainPresence || {};
+  // Get or derive domain presence
+  var domainPresence = S.domainPresence || {};
 
   // If domainPresence is empty, derive from available data
-  if (Object.keys(domainPresence).length === 0) {
-    domainPresence = deriveDomainPresenceV33_(ctx);
+  var hasData = false;
+  for (var key in domainPresence) {
+    if (domainPresence.hasOwnProperty(key)) {
+      hasData = true;
+      break;
+    }
+  }
+  if (!hasData) {
+    domainPresence = deriveDomainPresenceV34_(ctx);
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CALCULATE TOTALS AND DOMINANT
-  // ═══════════════════════════════════════════════════════════════════════════
-  let totalEvents = 0;
-  let maxCount = 0;
-  let dominantDomain = '';
+  // Calculate totals and dominant
+  var totalEvents = 0;
+  var maxCount = 0;
+  var dominantDomain = '';
 
-  for (const domain of ALL_DOMAINS) {
-    const count = domainPresence[domain] || 0;
+  for (var i = 0; i < DOMAIN_TRACKER_DOMAINS.length; i++) {
+    var domain = DOMAIN_TRACKER_DOMAINS[i];
+    var count = domainPresence[domain] || 0;
     totalEvents += count;
     if (count > maxCount) {
       maxCount = count;
@@ -134,107 +131,105 @@ function saveV3Domains_(ctx) {
   // Use provided dominant if available
   dominantDomain = S.dominantDomain || dominantDomain || '';
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // BUILD ROW (v3.3: with calendar columns)
-  // ═══════════════════════════════════════════════════════════════════════════
-  const row = [
+  // Build row (manually since no spread operator)
+  var row = [
     now,
-    cycle,
-    ...ALL_DOMAINS.map(d => domainPresence[d] || 0),
-    dominantDomain,
-    totalEvents,
-    holiday,          // v3.3
-    holidayPriority,  // v3.3
-    isFirstFriday,    // v3.3
-    isCreationDay,    // v3.3
-    sportsSeason,     // v3.3
-    ''  // Notes
+    cycle
   ];
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // APPEND ROW
-  // ═══════════════════════════════════════════════════════════════════════════
-  try {
-    sheet.appendRow(row);
-    Logger.log('saveV3Domains_ v3.3: Appended row for Cycle ' + cycle + 
-               ' | Dominant: ' + dominantDomain + 
-               ' | Total: ' + totalEvents +
-               ' | Holiday: ' + holiday);
-  } catch (e) {
-    Logger.log('saveV3Domains_ v3.3 error: ' + e.message);
+  // Add domain counts
+  for (var j = 0; j < DOMAIN_TRACKER_DOMAINS.length; j++) {
+    row.push(domainPresence[DOMAIN_TRACKER_DOMAINS[j]] || 0);
   }
+
+  // Add remaining columns
+  row.push(dominantDomain);
+  row.push(totalEvents);
+  row.push(holiday);
+  row.push(holidayPriority);
+  row.push(isFirstFriday);
+  row.push(isCreationDay);
+  row.push(sportsSeason);
+  row.push('');  // Notes
+
+  // Queue append intent
+  queueAppendIntent_(
+    ctx,
+    'Domain_Tracker',
+    row,
+    'Save domain presence for cycle ' + cycle,
+    'events',
+    100
+  );
+
+  Logger.log('saveV3Domains_ v3.4: Queued row for Cycle ' + cycle +
+             ' | Dominant: ' + dominantDomain +
+             ' | Total: ' + totalEvents +
+             ' | Holiday: ' + holiday);
 }
 
 
 /**
  * ============================================================================
- * DERIVE DOMAIN PRESENCE FROM AVAILABLE DATA (v3.3)
+ * DERIVE DOMAIN PRESENCE FROM AVAILABLE DATA (v3.4)
  * ============================================================================
- * 
+ *
  * Scans worldEvents, storySeeds, storyHooks, and eventArcs to count
  * domain activity when domainPresence isn't populated upstream.
- * Now includes FESTIVAL, HOLIDAY, ARTS, ENVIRONMENT, TECHNOLOGY domains.
- * 
+ * ES5 compatible version.
+ *
  * ============================================================================
  */
 
-function deriveDomainPresenceV33_(ctx) {
-  const S = ctx.summary || {};
-  const presence = {};
+function deriveDomainPresenceV34_(ctx) {
+  var S = ctx.summary || {};
+  var presence = {};
 
-  // v3.3: Initialize all domains to 0 (expanded list)
-  const allDomains = [
-    'CIVIC', 'CRIME', 'TRANSIT', 'ECONOMIC', 'EDUCATION', 'HEALTH',
-    'WEATHER', 'COMMUNITY', 'NIGHTLIFE', 'HOUSING', 'CULTURE', 
-    'SPORTS', 'BUSINESS', 'SAFETY', 'INFRASTRUCTURE', 'GENERAL',
-    'FESTIVAL', 'HOLIDAY', 'ARTS', 'ENVIRONMENT', 'TECHNOLOGY'
-  ];
-  allDomains.forEach(d => presence[d] = 0);
+  // Initialize all domains to 0
+  for (var d = 0; d < DOMAIN_TRACKER_DOMAINS.length; d++) {
+    presence[DOMAIN_TRACKER_DOMAINS[d]] = 0;
+  }
 
-  // ─────────────────────────────────────────────────────────────
-  // SCAN WORLD EVENTS
-  // ─────────────────────────────────────────────────────────────
-  const worldEvents = S.worldEvents || [];
-  worldEvents.forEach(ev => {
-    const domain = normalizeDomainV33_(ev.domain || ev.Domain || '');
+  // Scan world events
+  var worldEvents = S.worldEvents || [];
+  for (var we = 0; we < worldEvents.length; we++) {
+    var ev = worldEvents[we];
+    var domain = normalizeDomainV34_(ev.domain || ev.Domain || '');
     if (domain) presence[domain] = (presence[domain] || 0) + 1;
 
     // Also scan description for domain hints
-    const desc = (ev.description || ev.Description || '').toLowerCase();
-    const inferredDomain = inferDomainFromTextV33_(desc);
+    var desc = (ev.description || ev.Description || '').toLowerCase();
+    var inferredDomain = inferDomainFromTextV34_(desc);
     if (inferredDomain && inferredDomain !== domain) {
       presence[inferredDomain] = (presence[inferredDomain] || 0) + 1;
     }
-  });
+  }
 
-  // ─────────────────────────────────────────────────────────────
-  // SCAN STORY SEEDS
-  // ─────────────────────────────────────────────────────────────
-  const storySeeds = S.storySeeds || [];
-  storySeeds.forEach(seed => {
-    const domain = normalizeDomainV33_(seed.domain || seed.Domain || '');
-    if (domain) presence[domain] = (presence[domain] || 0) + 1;
-  });
+  // Scan story seeds
+  var storySeeds = S.storySeeds || [];
+  for (var ss = 0; ss < storySeeds.length; ss++) {
+    var seed = storySeeds[ss];
+    var seedDomain = normalizeDomainV34_(seed.domain || seed.Domain || '');
+    if (seedDomain) presence[seedDomain] = (presence[seedDomain] || 0) + 1;
+  }
 
-  // ─────────────────────────────────────────────────────────────
-  // SCAN STORY HOOKS
-  // ─────────────────────────────────────────────────────────────
-  const storyHooks = S.storyHooks || [];
-  storyHooks.forEach(hook => {
-    const domain = normalizeDomainV33_(hook.domain || hook.Domain || '');
-    if (domain) presence[domain] = (presence[domain] || 0) + 1;
-  });
+  // Scan story hooks
+  var storyHooks = S.storyHooks || [];
+  for (var sh = 0; sh < storyHooks.length; sh++) {
+    var hook = storyHooks[sh];
+    var hookDomain = normalizeDomainV34_(hook.domain || hook.Domain || '');
+    if (hookDomain) presence[hookDomain] = (presence[hookDomain] || 0) + 1;
+  }
 
-  // ─────────────────────────────────────────────────────────────
-  // SCAN EVENT ARCS
-  // ─────────────────────────────────────────────────────────────
-  const eventArcs = S.eventArcs || ctx.v3Arcs || [];
-  eventArcs.forEach(arc => {
-    const domain = normalizeDomainV33_(arc.domainTag || arc.domain || arc.Domain || '');
-    if (domain) presence[domain] = (presence[domain] || 0) + 1;
+  // Scan event arcs
+  var eventArcs = S.eventArcs || ctx.v3Arcs || [];
+  for (var ea = 0; ea < eventArcs.length; ea++) {
+    var arc = eventArcs[ea];
+    var arcDomain = normalizeDomainV34_(arc.domainTag || arc.domain || arc.Domain || '');
+    if (arcDomain) presence[arcDomain] = (presence[arcDomain] || 0) + 1;
 
-    // v3.3: Arc type can indicate domain (expanded)
-    const arcType = (arc.type || arc.Type || '').toLowerCase();
+    // Arc type can indicate domain
+    var arcType = (arc.type || arc.Type || '').toLowerCase();
     if (arcType === 'health-crisis') presence['HEALTH'] = (presence['HEALTH'] || 0) + 1;
     if (arcType === 'crisis') presence['CIVIC'] = (presence['CIVIC'] || 0) + 1;
     if (arcType === 'pattern-wave') presence['GENERAL'] = (presence['GENERAL'] || 0) + 1;
@@ -244,24 +239,20 @@ function deriveDomainPresenceV33_(ctx) {
     if (arcType === 'arts-walk') presence['ARTS'] = (presence['ARTS'] || 0) + 1;
     if (arcType === 'heritage') presence['CIVIC'] = (presence['CIVIC'] || 0) + 1;
     if (arcType === 'parade') presence['FESTIVAL'] = (presence['FESTIVAL'] || 0) + 1;
-  });
+  }
 
-  // ─────────────────────────────────────────────────────────────
-  // CHECK WEATHER (always present if weather exists)
-  // ─────────────────────────────────────────────────────────────
-  const weather = S.weather || {};
+  // Check weather
+  var weather = S.weather || {};
   if (weather.type || weather.impact) {
     presence['WEATHER'] = (presence['WEATHER'] || 0) + 1;
   }
 
-  // ─────────────────────────────────────────────────────────────
-  // v3.3: CHECK CALENDAR CONTEXT
-  // ─────────────────────────────────────────────────────────────
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  // Calendar context
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
 
   // Holidays boost HOLIDAY and possibly FESTIVAL
   if (holiday !== 'none') {
@@ -293,10 +284,8 @@ function deriveDomainPresenceV33_(ctx) {
     }
   }
 
-  // ─────────────────────────────────────────────────────────────
-  // CHECK CITY DYNAMICS FOR DOMAIN HINTS
-  // ─────────────────────────────────────────────────────────────
-  const dynamics = S.cityDynamics || {};
+  // Check city dynamics for domain hints
+  var dynamics = S.cityDynamics || {};
   if (dynamics.nightlife && dynamics.nightlife > 0.8) {
     presence['NIGHTLIFE'] = (presence['NIGHTLIFE'] || 0) + 1;
   }
@@ -312,15 +301,14 @@ function deriveDomainPresenceV33_(ctx) {
 
 
 /**
- * Normalize domain string to uppercase standard (v3.3: expanded)
+ * Normalize domain string to uppercase standard (v3.4: ES5)
  */
-function normalizeDomainV33_(domain) {
+function normalizeDomainV34_(domain) {
   if (!domain) return '';
-  
-  const normalized = domain.toString().toUpperCase().trim();
-  
-  // v3.3: Map variations to standard names (expanded)
-  const mappings = {
+
+  var normalized = domain.toString().toUpperCase().trim();
+
+  var mappings = {
     'SAFETY': 'SAFETY',
     'CRIME': 'CRIME',
     'CRIMINAL': 'CRIME',
@@ -351,7 +339,6 @@ function normalizeDomainV33_(domain) {
     'SPORTS': 'SPORTS',
     'ATHLETICS': 'SPORTS',
     'GENERAL': 'GENERAL',
-    // v3.3: New domains
     'FESTIVAL': 'FESTIVAL',
     'PARADE': 'FESTIVAL',
     'CELEBRATION': 'FESTIVAL',
@@ -369,93 +356,71 @@ function normalizeDomainV33_(domain) {
 
 
 /**
- * Infer domain from text description (v3.3: expanded)
+ * Infer domain from text description (v3.4: ES5)
  */
-function inferDomainFromTextV33_(text) {
+function inferDomainFromTextV34_(text) {
   if (!text) return '';
-  
-  const lower = text.toLowerCase();
-  
-  // v3.3: Check new domains first
-  if (lower.includes('festival') || lower.includes('parade') || lower.includes('celebration') || lower.includes('pride')) return 'FESTIVAL';
-  if (lower.includes('holiday') || lower.includes('firework') || lower.includes('halloween') || lower.includes('thanksgiving')) return 'HOLIDAY';
-  if (lower.includes('gallery') || lower.includes('exhibit') || lower.includes('first friday') || lower.includes('artist')) return 'ARTS';
-  if (lower.includes('environment') || lower.includes('cleanup') || lower.includes('tree planting') || lower.includes('earth day')) return 'ENVIRONMENT';
-  if (lower.includes('drone') || lower.includes('tech') || lower.includes('digital')) return 'TECHNOLOGY';
-  
+
+  var lower = text.toLowerCase();
+
+  // Check new domains first
+  if (lower.indexOf('festival') >= 0 || lower.indexOf('parade') >= 0 || lower.indexOf('celebration') >= 0 || lower.indexOf('pride') >= 0) return 'FESTIVAL';
+  if (lower.indexOf('holiday') >= 0 || lower.indexOf('firework') >= 0 || lower.indexOf('halloween') >= 0 || lower.indexOf('thanksgiving') >= 0) return 'HOLIDAY';
+  if (lower.indexOf('gallery') >= 0 || lower.indexOf('exhibit') >= 0 || lower.indexOf('first friday') >= 0 || lower.indexOf('artist') >= 0) return 'ARTS';
+  if (lower.indexOf('environment') >= 0 || lower.indexOf('cleanup') >= 0 || lower.indexOf('tree planting') >= 0 || lower.indexOf('earth day') >= 0) return 'ENVIRONMENT';
+  if (lower.indexOf('drone') >= 0 || lower.indexOf('tech') >= 0 || lower.indexOf('digital') >= 0) return 'TECHNOLOGY';
+
   // Existing domain checks
-  if (lower.includes('health') || lower.includes('illness') || lower.includes('clinic') || lower.includes('hospital')) return 'HEALTH';
-  if (lower.includes('crime') || lower.includes('theft') || lower.includes('break-in') || lower.includes('pursuit')) return 'CRIME';
-  if (lower.includes('transit') || lower.includes('train') || lower.includes('bus') || lower.includes('traffic')) return 'TRANSIT';
-  if (lower.includes('civic') || lower.includes('city hall') || lower.includes('mayor') || lower.includes('council')) return 'CIVIC';
-  if (lower.includes('school') || lower.includes('education') || lower.includes('student')) return 'EDUCATION';
-  if (lower.includes('business') || lower.includes('retail') || lower.includes('store') || lower.includes('shop')) return 'BUSINESS';
-  if (lower.includes('sport') || lower.includes('game') || lower.includes('team') || lower.includes('player')) return 'SPORTS';
-  if (lower.includes('weather') || lower.includes('rain') || lower.includes('snow') || lower.includes('fog')) return 'WEATHER';
-  if (lower.includes('community') || lower.includes('neighbor') || lower.includes('resident')) return 'COMMUNITY';
-  if (lower.includes('night') || lower.includes('bar') || lower.includes('club') || lower.includes('venue')) return 'NIGHTLIFE';
-  if (lower.includes('art') || lower.includes('music') || lower.includes('concert')) return 'CULTURE';
-  if (lower.includes('infrastructure') || lower.includes('power') || lower.includes('water') || lower.includes('utility')) return 'INFRASTRUCTURE';
-  
+  if (lower.indexOf('health') >= 0 || lower.indexOf('illness') >= 0 || lower.indexOf('clinic') >= 0 || lower.indexOf('hospital') >= 0) return 'HEALTH';
+  if (lower.indexOf('crime') >= 0 || lower.indexOf('theft') >= 0 || lower.indexOf('break-in') >= 0 || lower.indexOf('pursuit') >= 0) return 'CRIME';
+  if (lower.indexOf('transit') >= 0 || lower.indexOf('train') >= 0 || lower.indexOf('bus') >= 0 || lower.indexOf('traffic') >= 0) return 'TRANSIT';
+  if (lower.indexOf('civic') >= 0 || lower.indexOf('city hall') >= 0 || lower.indexOf('mayor') >= 0 || lower.indexOf('council') >= 0) return 'CIVIC';
+  if (lower.indexOf('school') >= 0 || lower.indexOf('education') >= 0 || lower.indexOf('student') >= 0) return 'EDUCATION';
+  if (lower.indexOf('business') >= 0 || lower.indexOf('retail') >= 0 || lower.indexOf('store') >= 0 || lower.indexOf('shop') >= 0) return 'BUSINESS';
+  if (lower.indexOf('sport') >= 0 || lower.indexOf('game') >= 0 || lower.indexOf('team') >= 0 || lower.indexOf('player') >= 0) return 'SPORTS';
+  if (lower.indexOf('weather') >= 0 || lower.indexOf('rain') >= 0 || lower.indexOf('snow') >= 0 || lower.indexOf('fog') >= 0) return 'WEATHER';
+  if (lower.indexOf('community') >= 0 || lower.indexOf('neighbor') >= 0 || lower.indexOf('resident') >= 0) return 'COMMUNITY';
+  if (lower.indexOf('night') >= 0 || lower.indexOf('bar') >= 0 || lower.indexOf('club') >= 0 || lower.indexOf('venue') >= 0) return 'NIGHTLIFE';
+  if (lower.indexOf('art') >= 0 || lower.indexOf('music') >= 0 || lower.indexOf('concert') >= 0) return 'CULTURE';
+  if (lower.indexOf('infrastructure') >= 0 || lower.indexOf('power') >= 0 || lower.indexOf('water') >= 0 || lower.indexOf('utility') >= 0) return 'INFRASTRUCTURE';
+
   return '';
 }
 
 
 /**
  * ============================================================================
- * CLEANUP FUNCTION — Run manually to fix Domain_Tracker (v3.3)
+ * CLEANUP FUNCTION — Run manually to fix Domain_Tracker (v3.4)
  * ============================================================================
  */
 
-function cleanupDomainTrackerV33() {
-  const SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk'; // Your sheet ID
-  const ss = SpreadsheetApp.openById(SIM_SSID);
-
-  const ALL_DOMAINS = [
-    'CIVIC', 'CRIME', 'TRANSIT', 'ECONOMIC', 'EDUCATION', 'HEALTH',
-    'WEATHER', 'COMMUNITY', 'NIGHTLIFE', 'HOUSING', 'CULTURE', 
-    'SPORTS', 'BUSINESS', 'SAFETY', 'INFRASTRUCTURE', 'GENERAL',
-    'FESTIVAL', 'HOLIDAY', 'ARTS', 'ENVIRONMENT', 'TECHNOLOGY'
-  ];
-
-  const HEADERS = [
-    'Timestamp',
-    'Cycle',
-    ...ALL_DOMAINS,
-    'DominantDomain',
-    'TotalEvents',
-    'Holiday',
-    'HolidayPriority',
-    'FirstFriday',
-    'CreationDay',
-    'SportsSeason',
-    'Notes'
-  ];
+function cleanupDomainTrackerV34() {
+  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
+  var ss = SpreadsheetApp.openById(SIM_SSID);
 
   // Get existing sheet
-  const oldSheet = ss.getSheetByName('Domain_Tracker');
-  
+  var oldSheet = ss.getSheetByName('Domain_Tracker');
+
   if (oldSheet) {
-    // Rename old sheet as backup
-    const backupName = 'Domain_Tracker_backup_' + new Date().getTime();
+    var backupName = 'Domain_Tracker_backup_' + new Date().getTime();
     oldSheet.setName(backupName);
-    Logger.log('cleanupDomainTrackerV33: Backed up existing sheet to ' + backupName);
+    Logger.log('cleanupDomainTrackerV34: Backed up existing sheet to ' + backupName);
   }
 
   // Create new sheet with correct headers
-  const newSheet = ss.insertSheet('Domain_Tracker');
-  newSheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
+  var newSheet = ss.insertSheet('Domain_Tracker');
+  newSheet.getRange(1, 1, 1, DOMAIN_TRACKER_HEADERS.length).setValues([DOMAIN_TRACKER_HEADERS]);
   newSheet.setFrozenRows(1);
 
-  Logger.log('cleanupDomainTrackerV33: Complete. Domain_Tracker ready for use with ' + HEADERS.length + ' columns.');
+  Logger.log('cleanupDomainTrackerV34: Complete. Domain_Tracker ready with ' + DOMAIN_TRACKER_HEADERS.length + ' columns.');
 }
 
 
 /**
  * ============================================================================
- * DOMAIN TRACKER SCHEMA v3.3
+ * DOMAIN TRACKER SCHEMA v3.4
  * ============================================================================
- * 
+ *
  * COLUMNS (32):
  * A - Timestamp
  * B - Cycle
@@ -472,12 +437,6 @@ function cleanupDomainTrackerV33() {
  * AC - CreationDay
  * AD - SportsSeason
  * AE - Notes
- * 
- * QUERY EXAMPLES:
- * - Festival activity by cycle: =FILTER(B:B, R:R>0)
- * - First Friday cycles: =FILTER(B:B, AB:AB=TRUE)
- * - Championship SPORTS: =FILTER(L:L, AD:AD="championship")
- * - ARTS during First Friday: =FILTER(U:U, AB:AB=TRUE)
- * 
+ *
  * ============================================================================
  */

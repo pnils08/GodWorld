@@ -1,9 +1,16 @@
 /**
  * ============================================================================
- * buildEveningFamous_ v2.2
+ * buildEveningFamous_ v2.3
  * ============================================================================
  *
  * World-aware celebrity selection for evening coverage with calendar integration.
+ *
+ * v2.3 Changes:
+ * - ES5 compatible (var instead of const/let, no arrow functions)
+ * - Replaced spread operator with concat()
+ * - Replaced includes() with indexOf() !== -1
+ * - Replaced Map deduplication with manual loop
+ * - Defensive guards for ctx and ctx.summary
  *
  * v2.2 Enhancements:
  * - Expanded to 12 Oakland neighborhoods
@@ -21,55 +28,61 @@
  * - Economic mood integration
  * - Sports broadcasts
  * - Neighborhood sighting locations
- * 
+ *
  * ============================================================================
  */
 
 function buildEveningFamous_(ctx) {
 
-  const S = ctx.summary;
+  // Defensive guard
+  if (!ctx || !ctx.summary) {
+    if (ctx) ctx.summary = {};
+    else return;
+  }
+
+  var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
-  const sentiment = dynamics.sentiment || 0;
-  const culturalActivity = dynamics.culturalActivity || 1;
-  const communityEngagement = dynamics.communityEngagement || 1;
-  const sports = S.eveningSports || "";
-  const econMood = S.economicMood || 50;
-  const cycle = S.cycleId || ctx.config.cycleCount || 0;
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
+  var sentiment = dynamics.sentiment || 0;
+  var culturalActivity = dynamics.culturalActivity || 1;
+  var communityEngagement = dynamics.communityEngagement || 1;
+  var sports = S.eveningSports || "";
+  var econMood = S.economicMood || 50;
+  var cycle = S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12 - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoods = [
+  var neighborhoods = [
     "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
     "West Oakland", "Laurel", "Rockridge", "Jack London",
     "Uptown", "KONO", "Chinatown", "Piedmont Ave"
   ];
 
   // Arts neighborhoods for First Friday
-  const artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+  var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CULTURAL POOLS (with categories)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const ACTORS = [
+  var ACTORS = [
     { name: "Lena Cross", role: "actor" },
     { name: "Evan Morello", role: "actor" },
     { name: "Sage Vienta", role: "actor" },
@@ -77,7 +90,7 @@ function buildEveningFamous_(ctx) {
     { name: "Nina Reyes", role: "actress" }
   ];
 
-  const MUSICIANS = [
+  var MUSICIANS = [
     { name: "Rico Valez", role: "musician" },
     { name: "Marin Tao", role: "musician" },
     { name: "Jade Orion", role: "musician" },
@@ -85,7 +98,7 @@ function buildEveningFamous_(ctx) {
     { name: "Celeste Moon", role: "singer" }
   ];
 
-  const ATHLETES = [
+  var ATHLETES = [
     { name: "Dax Monroe", role: "athlete" },
     { name: "Kato Rivers", role: "athlete" },
     { name: "Nila James", role: "athlete" },
@@ -93,43 +106,43 @@ function buildEveningFamous_(ctx) {
     { name: "Malik Torres", role: "football player" }
   ];
 
-  const INFLUENCERS = [
+  var INFLUENCERS = [
     { name: "Sienna Vale", role: "influencer" },
     { name: "Brody Kale", role: "influencer" },
     { name: "Lumi Crest", role: "influencer" },
     { name: "Zara Kim", role: "tiktoker" }
   ];
 
-  const JOURNALISTS = [
+  var JOURNALISTS = [
     { name: "Tara Ellison", role: "journalist" },
     { name: "Rowan Pierce", role: "journalist" },
     { name: "Derek Obi", role: "reporter" }
   ];
 
-  const CHEFS = [
+  var CHEFS = [
     { name: "Carmen Dreel", role: "chef" },
     { name: "Mason Tril", role: "chef" },
     { name: "Sofia Nguyen", role: "restaurateur" }
   ];
 
-  const STREAMERS = [
+  var STREAMERS = [
     { name: "Pixel Pete", role: "streamer" },
     { name: "GameGirl Gia", role: "streamer" },
     { name: "NightOwl Nate", role: "gamer" }
   ];
 
-  const AUTHORS = [
+  var AUTHORS = [
     { name: "Claire Ashford", role: "author" },
     { name: "Marcus Webb", role: "novelist" }
   ];
 
-  const CIVIC = [
+  var CIVIC = [
     { name: "Councilwoman Rivera", role: "civic leader" },
     { name: "Advocate Simmons", role: "activist" },
     { name: "Community Director Hayes", role: "community leader" }
   ];
 
-  const BUSINESS = [
+  var BUSINESS = [
     { name: "Tech CEO Warren", role: "entrepreneur" },
     { name: "Venture Kate Lin", role: "investor" }
   ];
@@ -138,20 +151,20 @@ function buildEveningFamous_(ctx) {
   // NEW POOLS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const ARTISTS = [
+  var ARTISTS = [
     { name: "Gallery Owner Mei Chen", role: "gallery curator" },
     { name: "Muralist Dante Reyes", role: "artist" },
     { name: "Sculptor Alma Vasquez", role: "sculptor" },
     { name: "Photographer Kai Tanaka", role: "artist" }
   ];
 
-  const CULTURAL_LEADERS = [
+  var CULTURAL_LEADERS = [
     { name: "Heritage Director Rosa Martinez", role: "cultural leader" },
     { name: "Festival Organizer James Williams", role: "community organizer" },
     { name: "Cultural Ambassador Li Wei", role: "cultural figure" }
   ];
 
-  const SPORTS_LEGENDS = [
+  var SPORTS_LEGENDS = [
     { name: "Former A's Star Rodriguez", role: "sports legend" },
     { name: "Warriors Alumni Thompson", role: "basketball legend" },
     { name: "Oakland Native MVP Davis", role: "sports figure" }
@@ -161,212 +174,225 @@ function buildEveningFamous_(ctx) {
   // WORLD-AWARE SELECTION LOGIC
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let pool = [];
+  var pool = [];
 
-  // Base pool
-  pool.push(...ACTORS, ...MUSICIANS, ...ATHLETES);
+  // Base pool (v2.3: use concat instead of spread)
+  pool = pool.concat(ACTORS, MUSICIANS, ATHLETES);
 
   // ───────────────────────────────────────────────────────────────────────────
   // HOLIDAY CELEBRITY WEIGHTING (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
 
   // Cultural holidays boost cultural figures
-  const culturalHolidays = [
+  var culturalHolidays = [
     "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear",
     "MLKDay", "OaklandPride", "ArtSoulFestival", "BlackHistoryMonth"
   ];
-  if (culturalHolidays.includes(holiday)) {
-    pool.push(...CULTURAL_LEADERS, ...CULTURAL_LEADERS, ...CIVIC);
+  if (culturalHolidays.indexOf(holiday) !== -1) {
+    pool = pool.concat(CULTURAL_LEADERS, CULTURAL_LEADERS, CIVIC);
   }
 
   // Art & Soul Festival: artists and musicians
   if (holiday === "ArtSoulFestival") {
-    pool.push(...ARTISTS, ...ARTISTS, ...MUSICIANS, ...MUSICIANS);
+    pool = pool.concat(ARTISTS, ARTISTS, MUSICIANS, MUSICIANS);
   }
 
   // Oakland Pride: diverse voices
   if (holiday === "OaklandPride") {
-    pool.push(...INFLUENCERS, ...CIVIC, ...CULTURAL_LEADERS);
+    pool = pool.concat(INFLUENCERS, CIVIC, CULTURAL_LEADERS);
   }
 
   // Opening Day: athletes and sports figures
   if (holiday === "OpeningDay") {
-    pool.push(...ATHLETES, ...ATHLETES, ...SPORTS_LEGENDS, ...SPORTS_LEGENDS);
+    pool = pool.concat(ATHLETES, ATHLETES, SPORTS_LEGENDS, SPORTS_LEGENDS);
   }
 
   // Culinary holidays: chefs
-  const culinaryHolidays = ["Thanksgiving", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear"];
-  if (culinaryHolidays.includes(holiday)) {
-    pool.push(...CHEFS, ...CHEFS);
+  var culinaryHolidays = ["Thanksgiving", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear"];
+  if (culinaryHolidays.indexOf(holiday) !== -1) {
+    pool = pool.concat(CHEFS, CHEFS);
   }
 
   // Entertainment holidays: actors and musicians
-  const entertainmentHolidays = ["NewYearsEve", "Independence", "Halloween"];
-  if (entertainmentHolidays.includes(holiday)) {
-    pool.push(...ACTORS, ...MUSICIANS, ...INFLUENCERS);
+  var entertainmentHolidays = ["NewYearsEve", "Independence", "Halloween"];
+  if (entertainmentHolidays.indexOf(holiday) !== -1) {
+    pool = pool.concat(ACTORS, MUSICIANS, INFLUENCERS);
   }
 
   // Major holidays: broad celebrity appeal
   if (holidayPriority === "major") {
-    pool.push(...ACTORS, ...MUSICIANS);
+    pool = pool.concat(ACTORS, MUSICIANS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // FIRST FRIDAY (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (isFirstFriday) {
-    pool.push(...ARTISTS, ...ARTISTS, ...ARTISTS);
-    pool.push(...MUSICIANS, ...INFLUENCERS);
+    pool = pool.concat(ARTISTS, ARTISTS, ARTISTS);
+    pool = pool.concat(MUSICIANS, INFLUENCERS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // CREATION DAY (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (isCreationDay) {
-    pool.push(...CIVIC, ...CIVIC, ...CULTURAL_LEADERS, ...AUTHORS);
+    pool = pool.concat(CIVIC, CIVIC, CULTURAL_LEADERS, AUTHORS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // SPORTS SEASON (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (sportsSeason === "championship") {
-    pool.push(...ATHLETES, ...ATHLETES, ...ATHLETES, ...SPORTS_LEGENDS);
+    pool = pool.concat(ATHLETES, ATHLETES, ATHLETES, SPORTS_LEGENDS);
   } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
-    pool.push(...ATHLETES, ...ATHLETES, ...SPORTS_LEGENDS);
+    pool = pool.concat(ATHLETES, ATHLETES, SPORTS_LEGENDS);
   } else if (sportsSeason === "late-season") {
-    pool.push(...ATHLETES, ...ATHLETES);
+    pool = pool.concat(ATHLETES, ATHLETES);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // CULTURAL ACTIVITY (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (culturalActivity >= 1.4) {
-    pool.push(...ARTISTS, ...MUSICIANS, ...AUTHORS);
+    pool = pool.concat(ARTISTS, MUSICIANS, AUTHORS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // COMMUNITY ENGAGEMENT (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (communityEngagement >= 1.4) {
-    pool.push(...CIVIC, ...CULTURAL_LEADERS);
+    pool = pool.concat(CIVIC, CULTURAL_LEADERS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // CHAOS / NEWS
   // ───────────────────────────────────────────────────────────────────────────
   if (chaos.length > 0) {
-    pool.push(...JOURNALISTS, ...JOURNALISTS);
+    pool = pool.concat(JOURNALISTS, JOURNALISTS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // SENTIMENT
   // ───────────────────────────────────────────────────────────────────────────
   if (sentiment >= 0.3) {
-    pool.push(...INFLUENCERS, ...MUSICIANS, ...STREAMERS);
+    pool = pool.concat(INFLUENCERS, MUSICIANS, STREAMERS);
   }
   if (sentiment <= -0.3) {
-    pool.push(...ACTORS, ...JOURNALISTS, ...CIVIC);
+    pool = pool.concat(ACTORS, JOURNALISTS, CIVIC);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // ORIGINAL SPORTS BROADCAST
   // ───────────────────────────────────────────────────────────────────────────
   if (sports && sports !== "(none)" && sports !== "off-season") {
-    pool.push(...ATHLETES, ...ATHLETES);
+    pool = pool.concat(ATHLETES, ATHLETES);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // WEATHER
   // ───────────────────────────────────────────────────────────────────────────
   if (weather.impact >= 1.3 || weather.type === "rain" || weather.type === "fog") {
-    pool.push(...ACTORS, ...MUSICIANS, ...STREAMERS);
+    pool = pool.concat(ACTORS, MUSICIANS, STREAMERS);
   }
 
   if (weatherMood.perfectWeather) {
-    pool.push(...ATHLETES, ...INFLUENCERS);
+    pool = pool.concat(ATHLETES, INFLUENCERS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // ECONOMIC MOOD
   // ───────────────────────────────────────────────────────────────────────────
   if (econMood >= 65) {
-    pool.push(...BUSINESS, ...CHEFS);
+    pool = pool.concat(BUSINESS, CHEFS);
   }
   if (econMood <= 35) {
-    pool.push(...CIVIC, ...JOURNALISTS);
+    pool = pool.concat(CIVIC, JOURNALISTS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // SEASONAL
   // ───────────────────────────────────────────────────────────────────────────
   if (season === "Summer") {
-    pool.push(...ATHLETES, ...INFLUENCERS);
+    pool = pool.concat(ATHLETES, INFLUENCERS);
   }
   if (season === "Winter") {
-    pool.push(...ACTORS, ...AUTHORS);
+    pool = pool.concat(ACTORS, AUTHORS);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SELECTION
   // ═══════════════════════════════════════════════════════════════════════════
 
-  // Ensure uniqueness
-  const uniq = [...new Map(pool.map(x => [x.name, x])).values()];
+  // v2.3: ES5 deduplication (instead of Map)
+  var seen = {};
+  var uniq = [];
+  for (var i = 0; i < pool.length; i++) {
+    var item = pool[i];
+    if (!seen[item.name]) {
+      seen[item.name] = true;
+      uniq.push(item);
+    }
+  }
 
   // Pick 2–4 famous for the evening (v2.2: can be up to 4 on special occasions)
-  let count = 2;
+  var count = 2;
   if (chaos.length > 0 || Math.random() < 0.3) count = 3;
   if (weather.impact >= 1.4) count = 3;
-  
+
   // v2.2: Calendar increases sightings
   if (holidayPriority === "major" || holidayPriority === "oakland") count = Math.max(count, 3);
   if (isFirstFriday) count = Math.max(count, 3);
   if (sportsSeason === "championship") count = 4;
 
-  const selected = typeof pickRandomSet_ === 'function' 
+  var selected = typeof pickRandomSet_ === 'function'
     ? pickRandomSet_(uniq, count)
-    : uniq.sort(() => Math.random() - 0.5).slice(0, count);
+    : uniq.sort(function() { return Math.random() - 0.5; }).slice(0, count);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ASSIGN NEIGHBORHOODS (v2.2 - calendar-aware)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const famousWithLocations = selected.map(ent => {
-    let neighborhood;
-    
+  var famousWithLocations = [];
+  for (var j = 0; j < selected.length; j++) {
+    var ent = selected[j];
+    var neighborhood;
+
     // v2.2: Calendar-aware neighborhood assignment
-    if (isFirstFriday && (ent.role.includes("artist") || ent.role.includes("gallery") || ent.role.includes("musician"))) {
+    if (isFirstFriday && (ent.role.indexOf("artist") !== -1 || ent.role.indexOf("gallery") !== -1 || ent.role.indexOf("musician") !== -1)) {
       // Artists on First Friday are in arts districts
       neighborhood = artsNeighborhoods[Math.floor(Math.random() * artsNeighborhoods.length)];
     } else if (holiday === "LunarNewYear" && Math.random() < 0.4) {
       neighborhood = "Chinatown";
     } else if ((holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") && Math.random() < 0.4) {
       neighborhood = "Fruitvale";
-    } else if ((holiday === "OpeningDay" || sportsSeason === "championship") && ent.role.includes("athlete")) {
+    } else if ((holiday === "OpeningDay" || sportsSeason === "championship") && ent.role.indexOf("athlete") !== -1) {
       // Athletes near stadium
       neighborhood = Math.random() < 0.6 ? "Jack London" : "Downtown";
     } else if (holiday === "OaklandPride" && Math.random() < 0.4) {
-      const prideNeighborhoods = ["Downtown", "Lake Merritt", "Uptown"];
+      var prideNeighborhoods = ["Downtown", "Lake Merritt", "Uptown"];
       neighborhood = prideNeighborhoods[Math.floor(Math.random() * prideNeighborhoods.length)];
     } else {
       // Default random neighborhood
       neighborhood = neighborhoods[Math.floor(Math.random() * neighborhoods.length)];
     }
 
-    return {
+    famousWithLocations.push({
       name: ent.name,
       role: ent.role,
       neighborhood: neighborhood
-    };
-  });
+    });
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // REGISTER + OUTPUT
   // ═══════════════════════════════════════════════════════════════════════════
 
-  S.famousPeople = famousWithLocations.map(x => x.name);
+  S.famousPeople = [];
+  for (var k = 0; k < famousWithLocations.length; k++) {
+    S.famousPeople.push(famousWithLocations[k].name);
+  }
   S.famousSightings = famousWithLocations;
-  
+
   // v2.2: Calendar context
   S.famousSightingsContext = {
     holiday: holiday,
@@ -377,11 +403,12 @@ function buildEveningFamous_(ctx) {
     count: famousWithLocations.length
   };
 
-  famousWithLocations.forEach(ent => {
+  for (var m = 0; m < famousWithLocations.length; m++) {
+    var famous = famousWithLocations[m];
     if (typeof registerCulturalEntity_ === 'function') {
-      registerCulturalEntity_(ctx, ent.name, ent.role, "SystemEngine", ent.neighborhood);
+      registerCulturalEntity_(ctx, famous.name, famous.role, "SystemEngine", famous.neighborhood);
     }
-  });
+  }
 
   ctx.summary = S;
 }
@@ -391,7 +418,7 @@ function buildEveningFamous_(ctx) {
  * ============================================================================
  * EVENING FAMOUS REFERENCE
  * ============================================================================
- * 
+ *
  * CELEBRITY POOLS:
  * - ACTORS (5), MUSICIANS (5), ATHLETES (5)
  * - INFLUENCERS (4), JOURNALISTS (3), CHEFS (3)
@@ -399,9 +426,9 @@ function buildEveningFamous_(ctx) {
  * - ARTISTS (4) - v2.2
  * - CULTURAL_LEADERS (3) - v2.2
  * - SPORTS_LEGENDS (3) - v2.2
- * 
+ *
  * CALENDAR POOL WEIGHTING (v2.2):
- * 
+ *
  * | Holiday/Event | Boosted Pools |
  * |---------------|---------------|
  * | Cultural holidays | CULTURAL_LEADERS, CIVIC |
@@ -416,30 +443,30 @@ function buildEveningFamous_(ctx) {
  * | Playoffs | ATHLETES, SPORTS_LEGENDS |
  * | High cultural activity | ARTISTS, MUSICIANS, AUTHORS |
  * | High community engagement | CIVIC, CULTURAL_LEADERS |
- * 
+ *
  * SIGHTING COUNT:
  * - Base: 2
  * - Chaos/weather: 3
  * - Major/Oakland holiday: 3
  * - First Friday: 3
  * - Championship: 4
- * 
+ *
  * CALENDAR-AWARE NEIGHBORHOODS (v2.2):
  * - First Friday + artists → arts districts (Uptown, KONO, Temescal, Jack London)
  * - LunarNewYear → Chinatown (40% chance)
  * - CincoDeMayo/DiaDeMuertos → Fruitvale (40% chance)
  * - OpeningDay/Championship + athletes → Jack London/Downtown
  * - OaklandPride → Downtown/Lake Merritt/Uptown (40% chance)
- * 
+ *
  * NEIGHBORHOODS (12):
  * - Temescal, Downtown, Fruitvale, Lake Merritt
  * - West Oakland, Laurel, Rockridge, Jack London
  * - Uptown, KONO, Chinatown, Piedmont Ave
- * 
+ *
  * OUTPUT:
  * - famousPeople: Array<string> (names)
  * - famousSightings: Array<{name, role, neighborhood}>
  * - famousSightingsContext: {holiday, holidayPriority, isFirstFriday, isCreationDay, sportsSeason, count}
- * 
+ *
  * ============================================================================
  */

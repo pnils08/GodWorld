@@ -1,11 +1,17 @@
 /**
  * ============================================================================
- * V3.2 STORY SEEDS ENGINE — CALENDAR ENHANCED
+ * V3.3 STORY SEEDS ENGINE — CALENDAR ENHANCED
  * ============================================================================
- * 
+ *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
  *
- * v3.2 Enhancements:
+ * v3.3 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for ctx/summary
+ * - Manual deduplication (no Set)
+ * - for loops instead of forEach
+ *
+ * v3.2 Features:
  * - Full GodWorld Calendar integration (30+ holidays)
  * - Holiday-specific story seed pools
  * - First Friday cultural seeds
@@ -27,49 +33,53 @@
  *
  * Seeds are structured objects with domain, neighborhood, priority.
  * No sheet writes — pure functional logic.
- * 
+ *
  * ============================================================================
  */
 
 function applyStorySeeds_(ctx) {
 
-  const S = ctx.summary || {};
-  const seeds = [];
-  const cycle = S.cycleId || ctx.config.cycleCount || 0;
+  // Defensive guard
+  if (!ctx) return;
+  if (!ctx.summary) ctx.summary = {};
+
+  var S = ctx.summary;
+  var seeds = [];
+  var cycle = S.cycleId || ctx.config.cycleCount || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL SIGNALS
   // ═══════════════════════════════════════════════════════════════════════════
-  const worldEvents = S.worldEvents || [];
-  const eventCount = worldEvents.length;
-  const weather = S.weather || {};
-  const dynamics = S.cityDynamics || {};
-  const population = S.worldPopulation || {};
-  const domains = S.domainPresence || {};
-  const arcs = S.eventArcs || [];
+  var worldEvents = S.worldEvents || [];
+  var eventCount = worldEvents.length;
+  var weather = S.weather || {};
+  var dynamics = S.cityDynamics || {};
+  var population = S.worldPopulation || {};
+  var domains = S.domainPresence || {};
+  var arcs = S.eventArcs || [];
 
-  const sentiment = dynamics.sentiment || 0;
-  const culturalActivity = dynamics.culturalActivity || 1;
-  const communityEngagement = dynamics.communityEngagement || 1;
-  const econLabel = population.economy || '';
-  const civicLoad = S.civicLoad || '';
-  const pattern = S.patternFlag || '';
-  const shock = S.shockFlag || '';
-  const drift = S.migrationDrift || 0;
-  const weight = S.cycleWeight || '';
-  const weightReason = S.cycleWeightReason || '';
-  const spotlights = S.namedSpotlights || [];
-  const seasonal = S.seasonalStorySeeds || [];
+  var sentiment = dynamics.sentiment || 0;
+  var culturalActivity = dynamics.culturalActivity || 1;
+  var communityEngagement = dynamics.communityEngagement || 1;
+  var econLabel = population.economy || '';
+  var civicLoad = S.civicLoad || '';
+  var pattern = S.patternFlag || '';
+  var shock = S.shockFlag || '';
+  var drift = S.migrationDrift || 0;
+  var weight = S.cycleWeight || '';
+  var weightReason = S.cycleWeightReason || '';
+  var spotlights = S.namedSpotlights || [];
+  var seasonal = S.seasonalStorySeeds || [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v3.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
-  const season = S.season || "Spring";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
+  var season = S.season || "Spring";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SEED BUILDER
@@ -96,7 +106,7 @@ function applyStorySeeds_(ctx) {
   // HOLIDAY STORY SEEDS (v3.2)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const holidaySeeds = {
+  var holidaySeeds = {
     // Major holidays
     "Thanksgiving": {
       seeds: [
@@ -223,9 +233,11 @@ function applyStorySeeds_(ctx) {
 
   // Add holiday-specific seeds
   if (holiday !== "none" && holidaySeeds[holiday]) {
-    holidaySeeds[holiday].seeds.forEach(hs => {
+    var hsList = holidaySeeds[holiday].seeds;
+    for (var hsi = 0; hsi < hsList.length; hsi++) {
+      var hs = hsList[hsi];
       seeds.push(makeSeed(hs.text, hs.domain, hs.nh, hs.priority, 'holiday'));
-    });
+    }
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -481,24 +493,25 @@ function applyStorySeeds_(ctx) {
   // WORLD EVENTS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  worldEvents.forEach(ev => {
-    const sev = ev.severity || 'low';
-    const desc = ev.description || ev.subdomain || 'Unnamed event';
-    const domain = (ev.domain || 'GENERAL').toUpperCase();
-    const nh = ev.neighborhood || '';
+  for (var evi = 0; evi < worldEvents.length; evi++) {
+    var ev = worldEvents[evi];
+    var sev = ev.severity || 'low';
+    var desc = ev.description || ev.subdomain || 'Unnamed event';
+    var evDomain = (ev.domain || 'GENERAL').toUpperCase();
+    var nh = ev.neighborhood || '';
 
     if (sev === 'medium') {
       seeds.push(makeSeed(
-        `Notable: ${desc}`,
-        domain, nh, 2, 'event'
+        'Notable: ' + desc,
+        evDomain, nh, 2, 'event'
       ));
     } else if (sev === 'high') {
       seeds.push(makeSeed(
-        `Significant: ${desc}`,
-        domain, nh, 3, 'event'
+        'Significant: ' + desc,
+        evDomain, nh, 3, 'event'
       ));
     }
-  });
+  }
 
   if (eventCount >= 6) {
     seeds.push(makeSeed(
@@ -628,12 +641,12 @@ function applyStorySeeds_(ctx) {
   // DOMAIN CLUSTERS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  for (const key in domains) {
+  for (var key in domains) {
     if (!domains.hasOwnProperty(key)) continue;
 
     if (domains[key] >= 4) {
       seeds.push(makeSeed(
-        `Heavy ${key.toLowerCase()} activity this cycle. Pattern worth investigating.`,
+        'Heavy ' + key.toLowerCase() + ' activity this cycle. Pattern worth investigating.',
         key, '', 3, 'domain'
       ));
     }
@@ -643,15 +656,20 @@ function applyStorySeeds_(ctx) {
   // ACTIVE ARCS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const peakArcs = arcs.filter(a => a && a.phase === 'peak');
+  var peakArcs = [];
+  var risingArcs = [];
+  for (var ai = 0; ai < arcs.length; ai++) {
+    var a = arcs[ai];
+    if (a && a.phase === 'peak') peakArcs.push(a);
+    if (a && a.phase === 'rising') risingArcs.push(a);
+  }
   if (peakArcs.length > 0) {
     seeds.push(makeSeed(
-      `${peakArcs.length} story arc(s) at peak tension. Climax moments developing.`,
+      peakArcs.length + ' story arc(s) at peak tension. Climax moments developing.',
       'GENERAL', '', 3, 'arc'
     ));
   }
 
-  const risingArcs = arcs.filter(a => a && a.phase === 'rising');
   if (risingArcs.length >= 2) {
     seeds.push(makeSeed(
       "Multiple arcs building simultaneously. Overlapping pressures.",
@@ -665,46 +683,51 @@ function applyStorySeeds_(ctx) {
 
   if (spotlights.length >= 3) {
     seeds.push(makeSeed(
-      `${spotlights.length} notable figures drawing attention this cycle. Profile opportunities.`,
+      spotlights.length + ' notable figures drawing attention this cycle. Profile opportunities.',
       'COMMUNITY', '', 2, 'spotlight'
     ));
   }
 
-  spotlights.forEach(sp => {
+  for (var spi = 0; spi < spotlights.length; spi++) {
+    var sp = spotlights[spi];
     if (sp.score >= 8) {
       seeds.push(makeSeed(
-        `High-profile spotlight: POPID ${sp.popId}. Deep interest warranted.`,
+        'High-profile spotlight: POPID ' + sp.popId + '. Deep interest warranted.',
         'COMMUNITY', '', 3, 'spotlight'
       ));
     }
-  });
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SEASONAL SEEDS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  seasonal.forEach(seed => {
+  for (var sei = 0; sei < seasonal.length; sei++) {
+    var seed = seasonal[sei];
     if (typeof seed === 'string') {
       seeds.push(makeSeed(seed, 'GENERAL', '', 1, 'seasonal'));
     } else if (seed && seed.text) {
       seeds.push(makeSeed(seed.text, seed.domain || 'GENERAL', '', 1, 'seasonal'));
     }
-  });
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FINAL CLEAN-UP
   // ═══════════════════════════════════════════════════════════════════════════
 
-  // Deduplicate by text
-  const seen = new Set();
-  const deduped = seeds.filter(s => {
-    if (seen.has(s.text)) return false;
-    seen.add(s.text);
-    return true;
-  });
+  // Deduplicate by text (ES5 compatible)
+  var seen = {};
+  var deduped = [];
+  for (var di = 0; di < seeds.length; di++) {
+    var s = seeds[di];
+    if (!seen[s.text]) {
+      seen[s.text] = true;
+      deduped.push(s);
+    }
+  }
 
   // Sort by priority descending
-  deduped.sort((a, b) => b.priority - a.priority);
+  deduped.sort(function(a, b) { return b.priority - a.priority; });
 
   S.storySeeds = deduped;
   ctx.summary = S;

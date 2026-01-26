@@ -1,11 +1,16 @@
 /**
  * ============================================================================
- * registerCulturalEntity_ v2.2
+ * registerCulturalEntity_ v2.3
  * ============================================================================
  *
  * Automatically classifies and registers cultural entities with calendar awareness.
  *
- * v2.2 Enhancements:
+ * v2.3 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for ctx/summary
+ * - for loops instead of arrow functions
+ *
+ * v2.2 Features:
  * - Expanded to 12 Oakland neighborhoods
  * - GodWorld Calendar integration (30+ holidays)
  * - Holiday-based fame score modifiers
@@ -23,34 +28,38 @@
  * - Economic mood affects fame scoring
  *
  * Ensures Media Room always knows WHY an entity is famous.
- * 
+ *
  * ============================================================================
  */
 
 function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborhood) {
 
-  const sheet = ensureCulturalLedger_(ctx);
-  const data = sheet.getDataRange().getValues();
-  const header = data[0];
+  // Defensive guard
+  if (!ctx) return null;
+  if (!ctx.summary) ctx.summary = {};
 
-  const S = ctx.summary;
-  const cycle = S.cycleId || ctx.config.cycleCount || 0;
-  const econMood = S.economicMood || 50;
+  var sheet = ensureCulturalLedger_(ctx);
+  var data = sheet.getDataRange().getValues();
+  var header = data[0];
+
+  var S = ctx.summary;
+  var cycle = S.cycleId || ctx.config.cycleCount || 0;
+  var econMood = S.economicMood || 50;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
-  const dynamics = S.cityDynamics || { culturalActivity: 1, communityEngagement: 1 };
-  const culturalActivity = dynamics.culturalActivity || 1;
-  const communityEngagement = dynamics.communityEngagement || 1;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
+  var dynamics = S.cityDynamics || { culturalActivity: 1, communityEngagement: 1 };
+  var culturalActivity = dynamics.culturalActivity || 1;
+  var communityEngagement = dynamics.communityEngagement || 1;
 
   // Column lookup helper
-  const col = n => header.indexOf(n);
+  var col = function(n) { return header.indexOf(n); };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ROLE CLASSIFICATION
@@ -119,19 +128,25 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // ═══════════════════════════════════════════════════════════════════════════
   // NEIGHBORHOODS (12 - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const validNeighborhoods = [
+  var validNeighborhoods = [
     "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
     "West Oakland", "Laurel", "Rockridge", "Jack London",
     "Uptown", "KONO", "Chinatown", "Piedmont Ave"
   ];
-  const validNeighborhood = validNeighborhoods.includes(neighborhood) ? neighborhood : "";
+  var validNeighborhood = "";
+  for (var ni = 0; ni < validNeighborhoods.length; ni++) {
+    if (validNeighborhoods[ni] === neighborhood) {
+      validNeighborhood = neighborhood;
+      break;
+    }
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // FAME SCORE MODIFIERS (v2.2 - calendar-aware)
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Economic mood modifier (v2.1)
-  let fameBonus = 0;
+  var fameBonus = 0;
   if (econMood >= 65) fameBonus += 2;
   else if (econMood <= 35) fameBonus -= 1;
 
@@ -140,11 +155,15 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // ─────────────────────────────────────────────────────────────────────────
 
   // Cultural holidays boost cultural figures
-  const culturalHolidays = [
+  var culturalHolidays = [
     "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear",
     "MLKDay", "OaklandPride", "ArtSoulFestival", "BlackHistoryMonth"
   ];
-  if (culturalHolidays.includes(holiday)) {
+  var isCulturalHoliday = false;
+  for (var chi = 0; chi < culturalHolidays.length; chi++) {
+    if (culturalHolidays[chi] === holiday) { isCulturalHoliday = true; break; }
+  }
+  if (isCulturalHoliday) {
     if (fam.dom === "Arts" || fam.dom === "Civic" || fam.cat === "activist") {
       fameBonus += 3;
     }
@@ -172,8 +191,12 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   }
 
   // Culinary holidays boost chefs
-  const culinaryHolidays = ["Thanksgiving", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear"];
-  if (culinaryHolidays.includes(holiday)) {
+  var culinaryHolidays = ["Thanksgiving", "CincoDeMayo", "DiaDeMuertos", "LunarNewYear"];
+  var isCulinaryHoliday = false;
+  for (var clhi = 0; clhi < culinaryHolidays.length; clhi++) {
+    if (culinaryHolidays[clhi] === holiday) { isCulinaryHoliday = true; break; }
+  }
+  if (isCulinaryHoliday) {
     if (fam.dom === "Culinary") {
       fameBonus += 3;
     }
@@ -193,9 +216,12 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
       fameBonus += 4;
     }
     // Arts neighborhood entities get extra boost
-    const artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
-    if (artsNeighborhoods.includes(validNeighborhood)) {
-      fameBonus += 2;
+    var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+    for (var ani = 0; ani < artsNeighborhoods.length; ani++) {
+      if (artsNeighborhoods[ani] === validNeighborhood) {
+        fameBonus += 2;
+        break;
+      }
     }
   }
 
@@ -240,32 +266,32 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // ═══════════════════════════════════════════════════════════════════════════
   // COLUMN INDICES
   // ═══════════════════════════════════════════════════════════════════════════
-  const iCulId = col('CUL-ID');
-  const iName = col('Name');
-  const iRoleType = col('RoleType');
-  const iFameCat = col('FameCategory');
-  const iCulDom = col('CulturalDomain');
-  const iNeighborhood = col('Neighborhood');
-  const iFirstSeen = col('FirstSeenCycle');
-  const iLastSeen = col('LastSeenCycle');
-  const iMediaCount = col('MediaCount');
-  const iFameScore = col('FameScore');
-  const iTrend = col('TrendTrajectory');
-  const iFirstRef = col('FirstRefSource');
-  const iMediaSpread = col('MediaSpread');
-  const iCityTier = col('CityTier');
-  const iStatus = col('Status');
-  
+  var iCulId = col('CUL-ID');
+  var iName = col('Name');
+  var iRoleType = col('RoleType');
+  var iFameCat = col('FameCategory');
+  var iCulDom = col('CulturalDomain');
+  var iNeighborhood = col('Neighborhood');
+  var iFirstSeen = col('FirstSeenCycle');
+  var iLastSeen = col('LastSeenCycle');
+  var iMediaCount = col('MediaCount');
+  var iFameScore = col('FameScore');
+  var iTrend = col('TrendTrajectory');
+  var iFirstRef = col('FirstRefSource');
+  var iMediaSpread = col('MediaSpread');
+  var iCityTier = col('CityTier');
+  var iStatus = col('Status');
+
   // Calendar columns (v2.2)
-  const iFirstHoliday = col('FirstSeenHoliday');
-  const iLastHoliday = col('LastSeenHoliday');
-  const iCalendarContext = col('CalendarContext');
+  var iFirstHoliday = col('FirstSeenHoliday');
+  var iLastHoliday = col('LastSeenHoliday');
+  var iCalendarContext = col('CalendarContext');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // UPDATE IF EXISTS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let i = 1; i < data.length; i++) {
-    const rowName = iName >= 0 ? data[i][iName] : data[i][2];
+  for (var i = 1; i < data.length; i++) {
+    var rowName = iName >= 0 ? data[i][iName] : data[i][2];
     
     if (rowName === name) {
 
@@ -275,14 +301,14 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
       }
 
       // MediaCount
-      const mcCol = iMediaCount >= 0 ? iMediaCount : 10;
-      const mc = Number(data[i][mcCol] || 0) + 1;
+      var mcCol = iMediaCount >= 0 ? iMediaCount : 10;
+      var mc = Number(data[i][mcCol] || 0) + 1;
       sheet.getRange(i + 1, mcCol + 1).setValue(mc);
 
       // FameScore with calendar bonus
-      const fsCol = iFameScore >= 0 ? iFameScore : 11;
-      const baseFame = Number(data[i][fsCol] || 0);
-      const newFame = baseFame + 5 + fameBonus;
+      var fsCol = iFameScore >= 0 ? iFameScore : 11;
+      var baseFame = Number(data[i][fsCol] || 0);
+      var newFame = baseFame + 5 + fameBonus;
       sheet.getRange(i + 1, fsCol + 1).setValue(newFame);
 
       // FameCategory + Domain refresh
@@ -299,7 +325,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
         sheet.getRange(i + 1, iLastHoliday + 1).setValue(holiday);
       }
       if (iCalendarContext >= 0) {
-        const calCtx = buildCalendarContext_();
+        var calCtx = buildCalendarContext_();
         sheet.getRange(i + 1, iCalendarContext + 1).setValue(calCtx);
       }
 
@@ -336,11 +362,11 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATE NEW CUL-ID
   // ═══════════════════════════════════════════════════════════════════════════
-  const culId = "CUL-" + (typeof shortId_ === 'function' ? shortId_().toUpperCase() : Math.random().toString(36).substr(2, 6).toUpperCase());
+  var culId = "CUL-" + (typeof shortId_ === 'function' ? shortId_().toUpperCase() : Math.random().toString(36).substr(2, 6).toUpperCase());
 
   // Build calendar context string (v2.2)
   function buildCalendarContext_() {
-    const parts = [];
+    var parts = [];
     if (holiday !== "none") parts.push(holiday);
     if (isFirstFriday) parts.push("FirstFriday");
     if (isCreationDay) parts.push("CreationDay");
@@ -348,7 +374,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
     return parts.join(", ") || "";
   }
 
-  const newRow = [
+  var newRow = [
     new Date(),               // Timestamp
     culId,                    // CUL-ID
     name,                     // Name

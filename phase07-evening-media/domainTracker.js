@@ -1,11 +1,16 @@
 /**
  * ============================================================================
- * V3.2 DOMAIN TRACKER — GODWORLD CALENDAR INTEGRATION
+ * V3.3 DOMAIN TRACKER — GODWORLD CALENDAR INTEGRATION
  * ============================================================================
  *
  * Counts domain presence from worldEvents with calendar awareness.
  *
- * v3.2 Enhancements:
+ * v3.3 Enhancements:
+ * - ES5 syntax for Google Apps Script compatibility
+ * - Defensive guards for ctx/summary
+ * - for loops instead of for...of
+ *
+ * v3.2 Features:
  * - Expanded domainMap (matches recordWorldEventsv3 v3.2)
  * - New domains: FESTIVAL, HOLIDAY, ARTS
  * - Calendar context boosters
@@ -18,33 +23,37 @@
  * - Arc domain tracking
  * - City dynamics domain effects
  * - Dominant domain detection
- * 
+ *
  * No sheet writes — pure functional logic.
- * 
+ *
  * ============================================================================
  */
 
 function domainTracker_(ctx) {
-  const domain = {};
-  const S = ctx.summary || {};
-  const arcs = S.eventArcs || [];
-  const events = S.worldEvents || [];
-  const dyn = S.cityDynamics || {};
-  const weather = S.weather || {};
+  // Defensive guard
+  if (!ctx) return;
+  if (!ctx.summary) ctx.summary = {};
+
+  var domain = {};
+  var S = ctx.summary;
+  var arcs = S.eventArcs || [];
+  var events = S.worldEvents || [];
+  var dyn = S.cityDynamics || {};
+  var weather = S.weather || {};
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v3.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN MAP (v3.2 - matches recordWorldEventsv3 v3.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const domainMap = {
+  var domainMap = {
     // Health
     'symptom': 'HEALTH', 'illness': 'HEALTH', 'fainting': 'HEALTH', 'hospital': 'HEALTH',
     'heat exhaustion': 'HEALTH', 'burn': 'HEALTH', 'injury': 'HEALTH', 'allergy': 'HEALTH',
@@ -111,9 +120,11 @@ function domainTracker_(ctx) {
   };
 
   function deriveDomain(desc) {
-    const lower = desc.toLowerCase();
-    for (const [keyword, dom] of Object.entries(domainMap)) {
-      if (lower.includes(keyword)) return dom;
+    var lower = desc.toLowerCase();
+    for (var keyword in domainMap) {
+      if (domainMap.hasOwnProperty(keyword) && lower.indexOf(keyword) !== -1) {
+        return domainMap[keyword];
+      }
     }
     return 'GENERAL';
   }
@@ -121,18 +132,20 @@ function domainTracker_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAINS FROM ARCS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (const a of arcs) {
+  for (var ai = 0; ai < arcs.length; ai++) {
+    var a = arcs[ai];
     if (!a || !a.domainTag) continue;
-    const tag = a.domainTag.toUpperCase();
+    var tag = a.domainTag.toUpperCase();
     domain[tag] = (domain[tag] || 0) + 1;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAINS FROM WORLD EVENTS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (const e of events) {
+  for (var ei = 0; ei < events.length; ei++) {
+    var e = events[ei];
     // Use pre-derived domain if available, otherwise derive
-    let dom = e.domain ? e.domain.toUpperCase() : deriveDomain(e.description || '');
+    var dom = e.domain ? e.domain.toUpperCase() : deriveDomain(e.description || '');
     domain[dom] = (domain[dom] || 0) + 1;
   }
 
@@ -239,11 +252,11 @@ function domainTracker_(ctx) {
   ctx.summary.domainPresence = domain;
 
   // Also store dominant domain for narrative use
-  let maxDomain = 'GENERAL';
-  let maxCount = 0;
-  for (const [d, count] of Object.entries(domain)) {
-    if (count > maxCount) {
-      maxCount = count;
+  var maxDomain = 'GENERAL';
+  var maxCount = 0;
+  for (var d in domain) {
+    if (domain.hasOwnProperty(d) && domain[d] > maxCount) {
+      maxCount = domain[d];
       maxDomain = d;
     }
   }

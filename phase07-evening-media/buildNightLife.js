@@ -1,9 +1,15 @@
 /**
  * ============================================================================
- * buildNightlife_ v2.2
+ * buildNightlife_ v2.3
  * ============================================================================
  *
  * World-aware nightlife generator with GodWorld Calendar integration.
+ *
+ * v2.3 Changes:
+ * - ES5 compatible (var instead of const/let, no arrow functions)
+ * - Replaced spread operator with concat()
+ * - Replaced Map deduplication with manual loop
+ * - Defensive guards for ctx and ctx.summary
  *
  * v2.2 Enhancements:
  * - Expanded to 12 Oakland neighborhoods
@@ -23,43 +29,49 @@
  * - Economic mood
  * - Season
  * - PublicSpaces, Traffic
- * 
+ *
  * ============================================================================
  */
 
 function buildNightlife_(ctx) {
 
-  const S = ctx.summary;
+  // Defensive guard
+  if (!ctx || !ctx.summary) {
+    if (ctx) ctx.summary = {};
+    else return;
+  }
+
+  var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || {};
-  const sentiment = dynamics.sentiment || 0;
-  const traffic = dynamics.traffic || 1;
-  const publicSpace = dynamics.publicSpaces || 1;
-  const culturalActivity = dynamics.culturalActivity || 1;
-  const communityEngagement = dynamics.communityEngagement || 1;
-  const econMood = S.economicMood || 50;
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {};
+  var sentiment = dynamics.sentiment || 0;
+  var traffic = dynamics.traffic || 1;
+  var publicSpace = dynamics.publicSpaces || 1;
+  var culturalActivity = dynamics.culturalActivity || 1;
+  var communityEngagement = dynamics.communityEngagement || 1;
+  var econMood = S.economicMood || 50;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // NIGHTLIFE SPOT POOLS (Oakland - 12 neighborhoods)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const BARS = [
+  var BARS = [
     { name: "Blue Lantern Bar", neighborhood: "Jack London" },
     { name: "Temple Lounge", neighborhood: "Downtown" },
     { name: "Skybar", neighborhood: "Downtown" },
@@ -74,7 +86,7 @@ function buildNightlife_(ctx) {
     { name: "Piedmont Pub", neighborhood: "Piedmont Ave" }
   ];
 
-  const DANCE = [
+  var DANCE = [
     { name: "Pulse District", neighborhood: "Downtown" },
     { name: "Neon Harbor Club", neighborhood: "Jack London" },
     { name: "Vibe Terrace", neighborhood: "Lake Merritt" },
@@ -82,7 +94,7 @@ function buildNightlife_(ctx) {
     { name: "Uptown Dance Hall", neighborhood: "Uptown" }
   ];
 
-  const CHILL = [
+  var CHILL = [
     { name: "Quiet Harbor Wine Room", neighborhood: "Jack London" },
     { name: "Twilight Teahouse", neighborhood: "Temescal" },
     { name: "Cozy Wick Lounge", neighborhood: "Rockridge" },
@@ -90,37 +102,37 @@ function buildNightlife_(ctx) {
     { name: "Piedmont Parlor", neighborhood: "Piedmont Ave" }
   ];
 
-  const RAIN_SHELTER = [
+  var RAIN_SHELTER = [
     { name: "Lantern Basement Bar", neighborhood: "Downtown" },
     { name: "Underglow Lounge", neighborhood: "Jack London" },
     { name: "Storm Shelter Pub", neighborhood: "West Oakland" }
   ];
 
-  const FOG_SPOTS = [
+  var FOG_SPOTS = [
     { name: "Misty Dockside Lounge", neighborhood: "Jack London" },
     { name: "Haze Bar", neighborhood: "West Oakland" }
   ];
 
-  const CHAOS_SPOTS = [
+  var CHAOS_SPOTS = [
     { name: "Civic Watch Patio", neighborhood: "Downtown" },
     { name: "Neighborhood Response Hub", neighborhood: "Fruitvale" },
     { name: "Community Pulse Tavern", neighborhood: "West Oakland" }
   ];
 
-  const UPSCALE = [
+  var UPSCALE = [
     { name: "Merritt Club", neighborhood: "Lake Merritt" },
     { name: "The Grand Oak", neighborhood: "Rockridge" },
     { name: "Harbor House VIP", neighborhood: "Jack London" },
     { name: "Uptown Elite", neighborhood: "Uptown" }
   ];
 
-  const BUDGET = [
+  var BUDGET = [
     { name: "Dive & Dash", neighborhood: "West Oakland" },
     { name: "Dollar Drafts", neighborhood: "Fruitvale" },
     { name: "The Cheap Seat", neighborhood: "Downtown" }
   ];
 
-  const LATE_NIGHT = [
+  var LATE_NIGHT = [
     { name: "After Hours Oakland", neighborhood: "Downtown" },
     { name: "3AM Club", neighborhood: "Jack London" },
     { name: "Night Owl Den", neighborhood: "Temescal" },
@@ -131,58 +143,58 @@ function buildNightlife_(ctx) {
   // HOLIDAY NIGHTLIFE POOLS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const NEW_YEARS_EVE_SPOTS = [
+  var NEW_YEARS_EVE_SPOTS = [
     { name: "Countdown Club", neighborhood: "Downtown" },
     { name: "Midnight Toast Bar", neighborhood: "Jack London" },
     { name: "New Year's Terrace", neighborhood: "Lake Merritt" },
     { name: "Ball Drop Lounge", neighborhood: "Uptown" }
   ];
 
-  const HOLIDAY_SPOTS = [
+  var HOLIDAY_SPOTS = [
     { name: "Holiday Spirits Bar", neighborhood: "Downtown" },
     { name: "Festive Fireside", neighborhood: "Rockridge" },
     { name: "Winter Wonderland Lounge", neighborhood: "Temescal" }
   ];
 
-  const ST_PATRICKS_SPOTS = [
+  var ST_PATRICKS_SPOTS = [
     { name: "Shamrock Pub", neighborhood: "Jack London" },
     { name: "Green Light Tavern", neighborhood: "Downtown" },
     { name: "Lucky Clover Bar", neighborhood: "Temescal" }
   ];
 
-  const CINCO_SPOTS = [
+  var CINCO_SPOTS = [
     { name: "Cinco Cantina", neighborhood: "Fruitvale" },
     { name: "Margarita Mile", neighborhood: "Fruitvale" },
     { name: "Fiesta Lounge", neighborhood: "Downtown" }
   ];
 
-  const INDEPENDENCE_SPOTS = [
+  var INDEPENDENCE_SPOTS = [
     { name: "Red White Blue Bar", neighborhood: "Jack London" },
     { name: "Fireworks View Terrace", neighborhood: "Lake Merritt" },
     { name: "Fourth of July Tavern", neighborhood: "Downtown" }
   ];
 
-  const HALLOWEEN_SPOTS = [
+  var HALLOWEEN_SPOTS = [
     { name: "Haunted House Bar", neighborhood: "Jack London" },
     { name: "Costume Club", neighborhood: "Downtown" },
     { name: "Spooky Spirits Lounge", neighborhood: "Temescal" },
     { name: "Monster Mash Nightclub", neighborhood: "Uptown" }
   ];
 
-  const DIA_DE_MUERTOS_SPOTS = [
+  var DIA_DE_MUERTOS_SPOTS = [
     { name: "Altar Bar", neighborhood: "Fruitvale" },
     { name: "Marigold Lounge", neighborhood: "Fruitvale" },
     { name: "Ancestor's Toast", neighborhood: "Downtown" }
   ];
 
-  const PRIDE_SPOTS = [
+  var PRIDE_SPOTS = [
     { name: "Rainbow Room", neighborhood: "Downtown" },
     { name: "Pride Pavilion", neighborhood: "Lake Merritt" },
     { name: "Equality Lounge", neighborhood: "Uptown" },
     { name: "Love Wins Bar", neighborhood: "Jack London" }
   ];
 
-  const LUNAR_NEW_YEAR_SPOTS = [
+  var LUNAR_NEW_YEAR_SPOTS = [
     { name: "Golden Dragon Lounge", neighborhood: "Chinatown" },
     { name: "Red Envelope Bar", neighborhood: "Chinatown" },
     { name: "Lucky Year Club", neighborhood: "Downtown" }
@@ -192,7 +204,7 @@ function buildNightlife_(ctx) {
   // FIRST FRIDAY NIGHTLIFE POOLS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const FIRST_FRIDAY_SPOTS = [
+  var FIRST_FRIDAY_SPOTS = [
     { name: "Gallery Night Lounge", neighborhood: "Uptown" },
     { name: "Art Walk Bar", neighborhood: "KONO" },
     { name: "Canvas Club", neighborhood: "Temescal" },
@@ -204,7 +216,7 @@ function buildNightlife_(ctx) {
   // CREATION DAY NIGHTLIFE POOLS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const CREATION_DAY_SPOTS = [
+  var CREATION_DAY_SPOTS = [
     { name: "Founders Pub", neighborhood: "Downtown" },
     { name: "Oakland Roots Bar", neighborhood: "West Oakland" },
     { name: "Heritage Tavern", neighborhood: "Lake Merritt" }
@@ -214,14 +226,14 @@ function buildNightlife_(ctx) {
   // SPORTS SEASON NIGHTLIFE POOLS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const SPORTS_BARS = [
+  var SPORTS_BARS = [
     { name: "Green & Gold Tavern", neighborhood: "Jack London" },
     { name: "Stadium Sports Bar", neighborhood: "Jack London" },
     { name: "Ninth Inning Pub", neighborhood: "Downtown" },
     { name: "Playoff Central", neighborhood: "Jack London" }
   ];
 
-  const CHAMPIONSHIP_SPOTS = [
+  var CHAMPIONSHIP_SPOTS = [
     { name: "Championship Watch Party", neighborhood: "Jack London" },
     { name: "Title Town Tavern", neighborhood: "Downtown" },
     { name: "Victory Lounge", neighborhood: "Lake Merritt" }
@@ -231,111 +243,111 @@ function buildNightlife_(ctx) {
   // BUILD DYNAMIC NIGHTLIFE POOL
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let pool = [...BARS];
+  var pool = [].concat(BARS);
 
   // ───────────────────────────────────────────────────────────────────────────
   // HOLIDAY SPOTS (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
 
   if (holiday === "NewYearsEve") {
-    pool.push(...NEW_YEARS_EVE_SPOTS, ...NEW_YEARS_EVE_SPOTS, ...DANCE, ...LATE_NIGHT);
+    pool = pool.concat(NEW_YEARS_EVE_SPOTS, NEW_YEARS_EVE_SPOTS, DANCE, LATE_NIGHT);
   }
   if (holiday === "Holiday" || holiday === "NewYear") {
-    pool.push(...HOLIDAY_SPOTS);
+    pool = pool.concat(HOLIDAY_SPOTS);
   }
   if (holiday === "StPatricksDay") {
-    pool.push(...ST_PATRICKS_SPOTS, ...ST_PATRICKS_SPOTS);
+    pool = pool.concat(ST_PATRICKS_SPOTS, ST_PATRICKS_SPOTS);
   }
   if (holiday === "CincoDeMayo") {
-    pool.push(...CINCO_SPOTS, ...CINCO_SPOTS);
+    pool = pool.concat(CINCO_SPOTS, CINCO_SPOTS);
   }
   if (holiday === "Independence") {
-    pool.push(...INDEPENDENCE_SPOTS, ...INDEPENDENCE_SPOTS);
+    pool = pool.concat(INDEPENDENCE_SPOTS, INDEPENDENCE_SPOTS);
   }
   if (holiday === "Halloween") {
-    pool.push(...HALLOWEEN_SPOTS, ...HALLOWEEN_SPOTS, ...LATE_NIGHT);
+    pool = pool.concat(HALLOWEEN_SPOTS, HALLOWEEN_SPOTS, LATE_NIGHT);
   }
   if (holiday === "DiaDeMuertos") {
-    pool.push(...DIA_DE_MUERTOS_SPOTS, ...DIA_DE_MUERTOS_SPOTS);
+    pool = pool.concat(DIA_DE_MUERTOS_SPOTS, DIA_DE_MUERTOS_SPOTS);
   }
   if (holiday === "OaklandPride") {
-    pool.push(...PRIDE_SPOTS, ...PRIDE_SPOTS, ...DANCE);
+    pool = pool.concat(PRIDE_SPOTS, PRIDE_SPOTS, DANCE);
   }
   if (holiday === "LunarNewYear") {
-    pool.push(...LUNAR_NEW_YEAR_SPOTS, ...LUNAR_NEW_YEAR_SPOTS);
+    pool = pool.concat(LUNAR_NEW_YEAR_SPOTS, LUNAR_NEW_YEAR_SPOTS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // FIRST FRIDAY (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (isFirstFriday) {
-    pool.push(...FIRST_FRIDAY_SPOTS, ...FIRST_FRIDAY_SPOTS, ...DANCE);
+    pool = pool.concat(FIRST_FRIDAY_SPOTS, FIRST_FRIDAY_SPOTS, DANCE);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // CREATION DAY (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (isCreationDay) {
-    pool.push(...CREATION_DAY_SPOTS, ...CREATION_DAY_SPOTS);
+    pool = pool.concat(CREATION_DAY_SPOTS, CREATION_DAY_SPOTS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // SPORTS SEASON (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (sportsSeason === "championship") {
-    pool.push(...CHAMPIONSHIP_SPOTS, ...CHAMPIONSHIP_SPOTS, ...SPORTS_BARS);
+    pool = pool.concat(CHAMPIONSHIP_SPOTS, CHAMPIONSHIP_SPOTS, SPORTS_BARS);
   } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
-    pool.push(...SPORTS_BARS, ...SPORTS_BARS);
+    pool = pool.concat(SPORTS_BARS, SPORTS_BARS);
   } else if (sportsSeason === "late-season" || holiday === "OpeningDay") {
-    pool.push(...SPORTS_BARS);
+    pool = pool.concat(SPORTS_BARS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // CULTURAL ACTIVITY (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (culturalActivity >= 1.4) {
-    pool.push(...FIRST_FRIDAY_SPOTS, ...DANCE);
+    pool = pool.concat(FIRST_FRIDAY_SPOTS, DANCE);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // COMMUNITY ENGAGEMENT (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (communityEngagement >= 1.4) {
-    pool.push(...CREATION_DAY_SPOTS);
+    pool = pool.concat(CREATION_DAY_SPOTS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // SEASON (if no holiday override)
   // ───────────────────────────────────────────────────────────────────────────
   if (holiday === "none") {
-    if (season === "Summer") pool.push(...DANCE);
-    if (season === "Winter") pool.push(...CHILL);
-    if (season === "Fall") pool.push(...CHILL);
+    if (season === "Summer") pool = pool.concat(DANCE);
+    if (season === "Winter") pool = pool.concat(CHILL);
+    if (season === "Fall") pool = pool.concat(CHILL);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
   // WEATHER
   // ───────────────────────────────────────────────────────────────────────────
   if (weather.type === "fog") {
-    pool.push(...FOG_SPOTS);
+    pool = pool.concat(FOG_SPOTS);
   } else if (weather.impact >= 1.3 || weather.type === "rain") {
-    pool.push(...RAIN_SHELTER);
+    pool = pool.concat(RAIN_SHELTER);
   }
 
   // Weather mood
-  if (weatherMood.primaryMood === 'cozy') pool.push(...CHILL);
-  if (weatherMood.perfectWeather && holiday === "none") pool.push(...DANCE);
+  if (weatherMood.primaryMood === 'cozy') pool = pool.concat(CHILL);
+  if (weatherMood.perfectWeather && holiday === "none") pool = pool.concat(DANCE);
 
   // ───────────────────────────────────────────────────────────────────────────
   // CHAOS
   // ───────────────────────────────────────────────────────────────────────────
-  if (chaos.length >= 3) pool.push(...CHAOS_SPOTS);
+  if (chaos.length >= 3) pool = pool.concat(CHAOS_SPOTS);
 
   // ───────────────────────────────────────────────────────────────────────────
   // ECONOMIC MOOD
   // ───────────────────────────────────────────────────────────────────────────
-  if (econMood >= 65) pool.push(...UPSCALE);
-  if (econMood <= 35) pool.push(...BUDGET);
+  if (econMood >= 65) pool = pool.concat(UPSCALE);
+  if (econMood <= 35) pool = pool.concat(BUDGET);
 
   // ───────────────────────────────────────────────────────────────────────────
   // PUBLIC SPACE
@@ -344,14 +356,23 @@ function buildNightlife_(ctx) {
     pool.push({ name: "Open-Air Night Plaza", neighborhood: "Lake Merritt" });
   }
 
-  // Unique by name
-  pool = [...new Map(pool.map(s => [s.name, s])).values()];
+  // v2.3: ES5 deduplication (instead of Map)
+  var seen = {};
+  var uniquePool = [];
+  for (var i = 0; i < pool.length; i++) {
+    var spot = pool[i];
+    if (!seen[spot.name]) {
+      seen[spot.name] = true;
+      uniquePool.push(spot);
+    }
+  }
+  pool = uniquePool;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DETERMINE NIGHTLIFE VOLUME (v2.2 - calendar-aware)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let volume = 4; // baseline moderate
+  var volume = 4; // baseline moderate
 
   // Sentiment
   if (sentiment >= 0.3) volume += 2;
@@ -416,7 +437,7 @@ function buildNightlife_(ctx) {
   // PICK FINAL SPOTS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let count = 1;
+  var count = 1;
   if (volume >= 7) count = 3;
   else if (volume >= 5) count = 2;
 
@@ -426,17 +447,17 @@ function buildNightlife_(ctx) {
   if (sportsSeason === "championship") count = Math.max(count, 3);
 
   // Add late night spots for high volume
-  if (volume >= 8) pool.push(...LATE_NIGHT);
+  if (volume >= 8) pool = pool.concat(LATE_NIGHT);
 
-  const spots = typeof pickRandomSet_ === 'function'
+  var spots = typeof pickRandomSet_ === 'function'
     ? pickRandomSet_(pool, count)
-    : pool.sort(() => Math.random() - 0.5).slice(0, count);
+    : pool.sort(function() { return Math.random() - 0.5; }).slice(0, count);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BUILD VIBE DESCRIPTION (v2.2 - calendar-aware)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let vibe = "steady";
+  var vibe = "steady";
 
   // Calendar vibes take priority
   if (holiday === "NewYearsEve") {
@@ -477,7 +498,7 @@ function buildNightlife_(ctx) {
   // BUILD MOVEMENT CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let movement = "normal";
+  var movement = "normal";
 
   if (traffic >= 1.3) movement = "traffic-slowed";
   if (weather.impact >= 1.4) movement = "weather-limited";
@@ -494,8 +515,13 @@ function buildNightlife_(ctx) {
   // OUTPUT
   // ═══════════════════════════════════════════════════════════════════════════
 
+  var spotNames = [];
+  for (var j = 0; j < spots.length; j++) {
+    spotNames.push(spots[j].name);
+  }
+
   S.nightlife = {
-    spots: spots.map(s => s.name),
+    spots: spotNames,
     spotDetails: spots,
     volume: volume,
     vibe: vibe,
@@ -524,19 +550,19 @@ function buildNightlife_(ctx) {
  * ============================================================================
  * NIGHTLIFE REFERENCE
  * ============================================================================
- * 
+ *
  * NEIGHBORHOODS (12):
  * - Temescal, Downtown, Fruitvale, Lake Merritt
  * - West Oakland, Laurel, Rockridge, Jack London
  * - Uptown, KONO, Chinatown, Piedmont Ave
- * 
+ *
  * BASE POOLS:
  * - BARS (12), DANCE (5), CHILL (5)
  * - RAIN_SHELTER (3), FOG_SPOTS (2), CHAOS_SPOTS (3)
  * - UPSCALE (4), BUDGET (3), LATE_NIGHT (4)
- * 
+ *
  * HOLIDAY POOLS (v2.2):
- * 
+ *
  * | Holiday | Spots | Key Neighborhoods |
  * |---------|-------|-------------------|
  * | NewYearsEve | 4 | Downtown, Jack London, Lake Merritt, Uptown |
@@ -548,18 +574,18 @@ function buildNightlife_(ctx) {
  * | DiaDeMuertos | 3 | Fruitvale ×2, Downtown |
  * | OaklandPride | 4 | Downtown, Lake Merritt, Uptown, Jack London |
  * | LunarNewYear | 3 | Chinatown ×2, Downtown |
- * 
+ *
  * FIRST FRIDAY (5 spots):
  * - Gallery Night Lounge (Uptown), Art Walk Bar (KONO), etc.
- * 
+ *
  * CREATION DAY (3 spots):
  * - Founders Pub (Downtown), Oakland Roots Bar (West Oakland), etc.
- * 
+ *
  * SPORTS SEASON:
  * - Championship: 3 championship + 4 sports bars
  * - Playoffs: 4 sports bars ×2
  * - Late-season/Opening Day: 4 sports bars
- * 
+ *
  * VOLUME MODIFIERS (v2.2):
  * - NewYearsEve: +4
  * - Halloween: +3
@@ -573,13 +599,13 @@ function buildNightlife_(ctx) {
  * - Opening Day: +2
  * - Thanksgiving/Holiday: -1
  * - Easter: -2
- * 
+ *
  * SPOT COUNT:
  * - Base: 1-3 based on volume
  * - NewYearsEve/Halloween: 4
  * - OaklandPride/First Friday: 3
  * - Championship: 3
- * 
+ *
  * VIBES (v2.2):
  * - celebratory (NYE)
  * - festive-spooky (Halloween)
@@ -591,6 +617,6 @@ function buildNightlife_(ctx) {
  * - community-pride (Creation Day)
  * - sports-fever (Championship)
  * - game-night (Playoffs)
- * 
+ *
  * ============================================================================
  */

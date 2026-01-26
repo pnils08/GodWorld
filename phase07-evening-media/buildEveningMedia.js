@@ -1,9 +1,15 @@
 /**
  * ============================================================================
- * buildEveningMedia_ v2.2
+ * buildEveningMedia_ v2.3
  * ============================================================================
  *
  * World-aware evening media selection with GodWorld Calendar integration.
+ *
+ * v2.3 Changes:
+ * - ES5 compatible (var instead of const/let, no arrow functions)
+ * - Replaced spread operator with concat()
+ * - Replaced Set deduplication with manual loop
+ * - Defensive guards for ctx and ctx.summary
  *
  * v2.2 Enhancements:
  * - Full GodWorld Calendar integration (30+ holidays)
@@ -19,39 +25,45 @@
  * - Season, weather, chaos, sentiment
  * - Economic mood integration
  * - Sports broadcasts
- * 
+ *
  * ============================================================================
  */
 
 function buildEveningMedia_(ctx) {
 
-  const S = ctx.summary;
+  // Defensive guard
+  if (!ctx || !ctx.summary) {
+    if (ctx) ctx.summary = {};
+    else return;
+  }
+
+  var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || {};
-  const sentiment = dynamics.sentiment || 0;
-  const culturalActivity = dynamics.culturalActivity || 1;
-  const communityEngagement = dynamics.communityEngagement || 1;
-  const sports = S.eveningSports || "";
-  const econMood = S.economicMood || 50;
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {};
+  var sentiment = dynamics.sentiment || 0;
+  var culturalActivity = dynamics.culturalActivity || 1;
+  var communityEngagement = dynamics.communityEngagement || 1;
+  var sports = S.eveningSports || "";
+  var econMood = S.economicMood || 50;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // Helper for random pick
-  const pickRandom = (arr) => {
+  var pickRandom = function(arr) {
     if (typeof pickRandom_ === 'function') return pickRandom_(arr);
     return arr[Math.floor(Math.random() * arr.length)];
   };
@@ -61,33 +73,33 @@ function buildEveningMedia_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // TV Pools
-  const tvBase = ["The Beacon", "Deep City", "Family Circuit", "Metro Nights", "Quiet Line"];
-  const tvDrama = ["Iron District", "Seaboard Unit", "Eastward Echo", "Oakland Stories"];
-  const tvComedy = ["Warm House", "The Neighbors", "Weekend Kids", "Lake Merritt Laughs"];
-  const tvChaos = ["Breaking Bulletin", "Crisis Desk", "Late Shift Live", "Bay Area Alert"];
-  const tvCozy = ["Fireside Hour", "Comfort Kitchen", "Slow Evenings"];
-  const tvEcon = ["Market Watch", "Business Brief", "Economic Outlook"];
+  var tvBase = ["The Beacon", "Deep City", "Family Circuit", "Metro Nights", "Quiet Line"];
+  var tvDrama = ["Iron District", "Seaboard Unit", "Eastward Echo", "Oakland Stories"];
+  var tvComedy = ["Warm House", "The Neighbors", "Weekend Kids", "Lake Merritt Laughs"];
+  var tvChaos = ["Breaking Bulletin", "Crisis Desk", "Late Shift Live", "Bay Area Alert"];
+  var tvCozy = ["Fireside Hour", "Comfort Kitchen", "Slow Evenings"];
+  var tvEcon = ["Market Watch", "Business Brief", "Economic Outlook"];
 
   // Movie Pools
-  const moviesBase = ["Iron Streets", "Last Horizon", "Prime Heat", "Silver Orbit", "Fading Harbor"];
-  const moviesAction = ["Glassfire", "Night Voltage", "Strikepoint"];
-  const moviesDrama = ["North Dock", "Blue Lantern", "Paper City"];
-  const moviesRain = ["Umbrella Line", "Fog Harbor", "Storm Window"];
-  const moviesComedy = ["Weekend Warriors", "Office Chaos", "Family Reunion"];
-  const moviesUplifting = ["Rising Star", "Second Chance", "New Beginnings"];
+  var moviesBase = ["Iron Streets", "Last Horizon", "Prime Heat", "Silver Orbit", "Fading Harbor"];
+  var moviesAction = ["Glassfire", "Night Voltage", "Strikepoint"];
+  var moviesDrama = ["North Dock", "Blue Lantern", "Paper City"];
+  var moviesRain = ["Umbrella Line", "Fog Harbor", "Storm Window"];
+  var moviesComedy = ["Weekend Warriors", "Office Chaos", "Family Reunion"];
+  var moviesUplifting = ["Rising Star", "Second Chance", "New Beginnings"];
 
   // Streaming Pools
-  const streamingBase = ["documentary spike", "crime-drama rotation", "sitcom rebound"];
-  const streamingCalm = ["slow-burn drama", "nature series", "comfort comedy"];
-  const streamingChaos = ["breaking-news loop", "political commentary surge"];
-  const streamingCozy = ["comfort rewatch", "classic films", "feel-good series"];
-  const streamingBudget = ["free-tier binge", "ad-supported marathon"];
+  var streamingBase = ["documentary spike", "crime-drama rotation", "sitcom rebound"];
+  var streamingCalm = ["slow-burn drama", "nature series", "comfort comedy"];
+  var streamingChaos = ["breaking-news loop", "political commentary surge"];
+  var streamingCozy = ["comfort rewatch", "classic films", "feel-good series"];
+  var streamingBudget = ["free-tier binge", "ad-supported marathon"];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY MEDIA POOLS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const holidayMedia = {
+  var holidayMedia = {
     "Thanksgiving": {
       tv: ["Thanksgiving Parade", "Family Feast Special", "Turkey Day Football", "Gratitude Hour"],
       movies: ["Home for the Holidays", "Thankful Hearts", "Harvest Moon", "Family Table"],
@@ -203,28 +215,28 @@ function buildEveningMedia_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY MEDIA POOLS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const firstFridayTV = ["Art Walk Live", "Gallery Hour", "Oakland Arts Tonight", "First Friday Special"];
-  const firstFridayMovies = ["Art of the City", "Canvas Dreams", "Gallery Night", "Creative Pulse"];
-  const firstFridayStreaming = "arts documentaries";
+  var firstFridayTV = ["Art Walk Live", "Gallery Hour", "Oakland Arts Tonight", "First Friday Special"];
+  var firstFridayMovies = ["Art of the City", "Canvas Dreams", "Gallery Night", "Creative Pulse"];
+  var firstFridayStreaming = "arts documentaries";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY MEDIA POOLS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const creationDayTV = ["Oakland Origins", "City Founders Special", "Community Roots", "Our Oakland"];
-  const creationDayMovies = ["City Born", "Foundation Stone", "Oakland Story"];
-  const creationDayStreaming = "local history documentaries";
+  var creationDayTV = ["Oakland Origins", "City Founders Special", "Community Roots", "Our Oakland"];
+  var creationDayMovies = ["City Born", "Foundation Stone", "Oakland Story"];
+  var creationDayStreaming = "local history documentaries";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SPORTS SEASON MEDIA POOLS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const sportsSeasonTV = {
+  var sportsSeasonTV = {
     "championship": ["Championship Coverage", "Finals Live", "Title Talk", "Glory Bound"],
     "playoffs": ["Playoff Central", "Postseason Live", "Do or Die"],
     "post-season": ["Postseason Wrap", "Playoff Preview", "October Baseball"],
     "late-season": ["Pennant Race", "Stretch Run", "Playoff Push"]
   };
 
-  const sportsSeasonMovies = {
+  var sportsSeasonMovies = {
     "championship": ["Championship Dreams", "Glory Day", "The Big Win"],
     "playoffs": ["Underdog Story", "Game Seven", "Clutch"],
     "post-season": ["October Magic", "Playoff Run"],
@@ -235,16 +247,16 @@ function buildEveningMedia_(ctx) {
   // BUILD MEDIA SELECTIONS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let tv = [];
-  let movies = [];
-  let streaming = "";
-  let specialProgramming = "";
+  var tv = [];
+  var movies = [];
+  var streaming = "";
+  var specialProgramming = "";
 
   // ───────────────────────────────────────────────────────────────────────────
   // HOLIDAY PROGRAMMING (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (holiday !== "none" && holidayMedia[holiday]) {
-    const hm = holidayMedia[holiday];
+    var hm = holidayMedia[holiday];
     tv.push(pickRandom(hm.tv));
     movies.push(pickRandom(hm.movies));
     streaming = streaming || hm.streaming;
@@ -283,7 +295,7 @@ function buildEveningMedia_(ctx) {
   if (sportsSeason !== "off-season" && sportsSeasonTV[sportsSeason]) {
     tv.push(pickRandom(sportsSeasonTV[sportsSeason]));
     movies.push(pickRandom(sportsSeasonMovies[sportsSeason]));
-    
+
     if (sportsSeason === "championship") {
       tv.push(pickRandom(sportsSeasonTV[sportsSeason])); // Extra coverage
       streaming = streaming || "sports documentaries marathon";
@@ -389,13 +401,13 @@ function buildEveningMedia_(ctx) {
   // ───────────────────────────────────────────────────────────────────────────
   // SPORTS BROADCASTS
   // ───────────────────────────────────────────────────────────────────────────
-  let sportsShow = "";
+  var sportsShow = "";
   if (sports && sports !== "(none)") {
-    if (sports.toLowerCase().includes("game") || sports.toLowerCase().includes("home")) {
+    if (sports.toLowerCase().indexOf("game") !== -1 || sports.toLowerCase().indexOf("home") !== -1) {
       sportsShow = "Sports Central: Game Night";
-    } else if (sports.toLowerCase().includes("warriors")) {
+    } else if (sports.toLowerCase().indexOf("warriors") !== -1) {
       sportsShow = "Warriors Live";
-    } else if (sports.toLowerCase().includes("a's")) {
+    } else if (sports.toLowerCase().indexOf("a's") !== -1) {
       sportsShow = "A's Tonight";
     } else {
       sportsShow = "League Overview Live";
@@ -417,9 +429,26 @@ function buildEveningMedia_(ctx) {
   if (movies.length === 0) movies.push(pickRandom(moviesBase));
   if (!streaming) streaming = pickRandom(streamingBase);
 
-  // Deduplicate
-  tv = [...new Set(tv)];
-  movies = [...new Set(movies)];
+  // v2.3: ES5 deduplication (instead of Set)
+  var seenTV = {};
+  var uniqueTV = [];
+  for (var i = 0; i < tv.length; i++) {
+    if (!seenTV[tv[i]]) {
+      seenTV[tv[i]] = true;
+      uniqueTV.push(tv[i]);
+    }
+  }
+  tv = uniqueTV;
+
+  var seenMovies = {};
+  var uniqueMovies = [];
+  for (var j = 0; j < movies.length; j++) {
+    if (!seenMovies[movies[j]]) {
+      seenMovies[movies[j]] = true;
+      uniqueMovies.push(movies[j]);
+    }
+  }
+  movies = uniqueMovies;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OUTPUT
@@ -450,41 +479,41 @@ function buildEveningMedia_(ctx) {
  * ============================================================================
  * EVENING MEDIA REFERENCE
  * ============================================================================
- * 
+ *
  * HOLIDAY PROGRAMMING (v2.2):
- * 
+ *
  * 21 holidays with custom TV, movie, and streaming pools:
  * - Major: Thanksgiving, Holiday, NewYear, NewYearsEve, Independence
  * - Cultural: MLKDay, Juneteenth, CincoDeMayo, DiaDeMuertos, LunarNewYear
  * - Oakland: OpeningDay, OaklandPride, ArtSoulFestival
  * - Minor: Halloween, Valentine, Easter, MemorialDay, LaborDay, VeteransDay
  * - Family: StPatricksDay, MothersDay, FathersDay
- * 
+ *
  * FIRST FRIDAY:
  * - TV: Art Walk Live, Gallery Hour, Oakland Arts Tonight
  * - Movies: Art of the City, Canvas Dreams, Gallery Night
  * - Streaming: arts documentaries
- * 
+ *
  * CREATION DAY:
  * - TV: Oakland Origins, City Founders Special, Community Roots
  * - Movies: City Born, Foundation Stone, Oakland Story
  * - Streaming: local history documentaries
- * 
+ *
  * SPORTS SEASON:
  * - Championship: Championship Coverage, Finals Live, Title Talk
  * - Playoffs: Playoff Central, Postseason Live, Do or Die
  * - Post-season: Postseason Wrap, Playoff Preview
  * - Late-season: Pennant Race, Stretch Run
- * 
+ *
  * CULTURAL ACTIVITY (≥1.4):
  * - TV: Cultural Spotlight
  * - Movies: Art House Pick
  * - Streaming: indie film showcase
- * 
+ *
  * COMMUNITY ENGAGEMENT (≥1.4):
  * - TV: Community Stories
  * - Movies: Neighborhood Tales
- * 
+ *
  * OUTPUT STRUCTURE:
  * {
  *   tv: Array<string>,
@@ -497,6 +526,6 @@ function buildEveningMedia_(ctx) {
  *     holiday, holidayPriority, isFirstFriday, isCreationDay, sportsSeason
  *   }
  * }
- * 
+ *
  * ============================================================================
  */

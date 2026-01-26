@@ -26,32 +26,27 @@ Additionally, the V3 persistence model uses write-intents (queueBatchAppendInten
 |------|---------|--------|-------|
 | buildMediaPacket.js | v2.3 | ✅ Fixed | Added populateMediaIntake_() for Media_Ledger |
 
+### Batch 2 Fixes - Completed
+| File | Version | Status | Notes |
+|------|---------|--------|-------|
+| v3ChicagoWriter.js | v2.5 | ✅ Fixed | ES5, queueBatchAppendIntent_ |
+| utilityFunctions.js | v2.13 | ✅ Fixed | const/let → var |
+| ensureWorldEventsV3Ledger.js | v3.3 | ✅ Fixed | const/let → var |
+| v3preLoader.js | v3.3 | ✅ Fixed | const → var |
+| v3Integration.js | v3.5 | ✅ Fixed | .filter() arrow → for loop |
+
+### Batch 3 Fixes - Completed
+| File | Version | Status | Notes |
+|------|---------|--------|-------|
+| saveV3Seeds.js | v3.3 | ✅ Fixed | upgradeStorySeedDeck_ ES5 |
+| recordWorldEventsv25.js | v2.3 | ✅ Fixed | ensure + upgrade functions ES5 |
+
 ### Remaining Work
 
-#### Priority 1: Phase 10 Writers (ES5 + Write-Intents)
-| File | Current Issue | Recommended Fix |
-|------|---------------|-----------------|
-| v3ChicagoWriter.js | ES6 syntax, direct writes | Convert to ES5, use queueBatchAppendIntent_ |
-| recordWorldEventsv25.js | ES6 in upgrade function, uses appendRow | Convert to ES5, use queueAppendIntent_ |
-
-#### Priority 2: Utilities (ES5 Syntax)
-| File | Current Issue | Recommended Fix |
-|------|---------------|-----------------|
-| utilities/utilityFunctions.js | const, let throughout | Convert to var |
-| utilities/ensureWorldEventsV3Ledger.js | const, let | Convert to var |
-| utilities/rosterLookup.js | .includes() | Use indexOf() >= 0 |
-
-#### Priority 3: Phase 10 Persistence (ES5 in upgrade functions)
-| File | Current Issue | Recommended Fix |
-|------|---------------|-----------------|
-| saveV3Seeds.js | ES6 in upgradeStorySeedDeck_() | Convert to ES5 |
-| recordWorldEventsv25.js | ES6 in upgradeWorldEventsLedger_() | Convert to ES5 |
-
-#### Priority 4: Other V3 Files (ES5 Syntax)
-| File | Current Issue | Recommended Fix |
-|------|---------------|-----------------|
-| v3preLoader.js | const | Convert to var |
-| v3Integration.js | .filter() with arrow | Convert to for loop |
+#### Verified Clean (No Changes Needed)
+| File | Status | Notes |
+|------|--------|-------|
+| utilities/rosterLookup.js | ✅ Clean | Already ES5 compliant |
 
 ### Write-Intent Coverage Summary
 
@@ -67,10 +62,12 @@ Additionally, the V3 persistence model uses write-intents (queueBatchAppendInten
 - saveV3Textures_() → queueBatchAppendIntent_
 
 #### Direct Writes (Need Review)
-- saveV3NeighborhoodMap_() - Replace pattern, may need special handling
-- saveV3Chicago_() - Needs conversion
+- saveV3NeighborhoodMap_() - Replace pattern, keeps direct write (intentional)
 - buildCyclePacket_() - May be intentional (non-ledger)
-- recordWorldEvents25_() - Legacy, needs conversion
+
+#### Migrated to Write-Intents
+- saveV3Chicago_() → queueBatchAppendIntent_ ✅
+- recordWorldEvents25_() → queueBatchAppendIntent_ ✅
 
 ### ES5 Conversion Patterns
 
@@ -149,5 +146,5 @@ After completing all migrations:
 
 ---
 
-*Last updated: Cycle 77 fix session*
-*Commits: 129fbc0 (ledger fixes), ca9fad4 (ES5 batch 1)*
+*Last updated: Cycle 77 fix session - Batch 3 complete*
+*Commits: 129fbc0 (ledger fixes), ca9fad4 (ES5 batch 1), e7c542a (ES5 batch 2)*

@@ -110,39 +110,41 @@ function saveV3Seeds_(ctx) {
 
 
 /**
- * upgradeStorySeedDeck_ v3.2
+ * upgradeStorySeedDeck_ v3.3
  * Adds calendar columns to existing Story_Seed_Deck sheet.
  * Run once to upgrade v3.1 sheets to v3.2 format.
+ *
+ * v3.3: ES5 compatible (const/let → var, .includes() → indexOf)
  */
 function upgradeStorySeedDeck_(ctx) {
-  const ss = ctx.ss;
-  const sheet = ss.getSheetByName('Story_Seed_Deck');
+  var ss = ctx.ss;
+  var sheet = ss.getSheetByName('Story_Seed_Deck');
   if (!sheet) return;
 
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
 
-  // Check if calendar columns exist
-  const hasSeason = headers.includes('Season');
+  // Check if calendar columns exist (ES5: indexOf instead of includes)
+  var hasSeason = headers.indexOf('Season') >= 0;
 
   if (!hasSeason) {
     // Add calendar columns
-    const lastCol = sheet.getLastColumn();
-    const newHeaders = ['Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason'];
+    var lastCol = sheet.getLastColumn();
+    var newHeaders = ['Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason'];
 
     sheet.getRange(1, lastCol + 1, 1, newHeaders.length).setValues([newHeaders]);
     sheet.getRange(1, lastCol + 1, 1, newHeaders.length).setFontWeight('bold');
 
     // Set defaults for existing rows
-    const lastRow = sheet.getLastRow();
+    var lastRow = sheet.getLastRow();
     if (lastRow > 1) {
-      const defaults = [];
-      for (let i = 2; i <= lastRow; i++) {
+      var defaults = [];
+      for (var i = 2; i <= lastRow; i++) {
         defaults.push(['', 'none', 'none', false, false, 'off-season']);
       }
       sheet.getRange(2, lastCol + 1, lastRow - 1, 6).setValues(defaults);
     }
 
-    Logger.log('upgradeStorySeedDeck_ v3.2: Added 6 calendar columns to Story_Seed_Deck');
+    Logger.log('upgradeStorySeedDeck_ v3.3: Added 6 calendar columns to Story_Seed_Deck');
   }
 }
 

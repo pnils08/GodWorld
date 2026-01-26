@@ -1,15 +1,19 @@
 /**
  * ============================================================================
- * recordWorldEvents_ v2.2 - Write-Intent Based
+ * recordWorldEvents_ v2.3 - Write-Intent Based
  * ============================================================================
  *
  * Logs all world events into WorldEvents_Ledger with full calendar context.
  * Uses V3 write-intents model for persistence.
  *
+ * v2.3 Changes:
+ * - ES5 conversion in ensureWorldEventsLedger_ and upgradeWorldEventsLedger_
+ * - const/let → var, .includes() → indexOf()
+ *
  * v2.2 Changes:
  * - Uses queueBatchAppendIntent_ instead of direct writes
  * - Full dryRun/replay mode support
- * - ES5 compatible
+ * - ES5 compatible in main function
  *
  * v2.1 Features (preserved):
  * - HolidayPriority column
@@ -119,13 +123,13 @@ function recordWorldEvents25_(ctx) {
  */
 
 function ensureWorldEventsLedger_(ctx) {
-  const ss = ctx.ss;
-  let sheet = ss.getSheetByName('WorldEvents_Ledger');
-  
+  var ss = ctx.ss;
+  var sheet = ss.getSheetByName('WorldEvents_Ledger');
+
   if (!sheet) {
     sheet = ss.insertSheet('WorldEvents_Ledger');
-    
-    const headers = [
+
+    var headers = [
       'Timestamp',        // A
       'Cycle',            // B
       'Description',      // C
@@ -150,14 +154,14 @@ function ensureWorldEventsLedger_(ctx) {
       'SportsSeason',     // U
       'Month'             // V
     ];
-    
+
     sheet.appendRow(headers);
     sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
     sheet.setFrozenRows(1);
-    
-    Logger.log('ensureWorldEventsLedger_ v2.1: Created WorldEvents_Ledger with ' + headers.length + ' columns');
+
+    Logger.log('ensureWorldEventsLedger_ v2.2: Created WorldEvents_Ledger with ' + headers.length + ' columns');
   }
-  
+
   return sheet;
 }
 
@@ -174,34 +178,34 @@ function ensureWorldEventsLedger_(ctx) {
  */
 
 function upgradeWorldEventsLedger_(ctx) {
-  const ss = ctx.ss;
-  const sheet = ss.getSheetByName('WorldEvents_Ledger');
+  var ss = ctx.ss;
+  var sheet = ss.getSheetByName('WorldEvents_Ledger');
   if (!sheet) return;
-  
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  
-  // Check if calendar columns exist
-  const hasHolidayPriority = headers.includes('HolidayPriority');
-  
+
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  // Check if calendar columns exist (ES5: indexOf instead of includes)
+  var hasHolidayPriority = headers.indexOf('HolidayPriority') >= 0;
+
   if (!hasHolidayPriority) {
     // Add calendar columns
-    const lastCol = sheet.getLastColumn();
-    const newHeaders = ['HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason', 'Month'];
-    
+    var lastCol = sheet.getLastColumn();
+    var newHeaders = ['HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason', 'Month'];
+
     sheet.getRange(1, lastCol + 1, 1, newHeaders.length).setValues([newHeaders]);
     sheet.getRange(1, lastCol + 1, 1, newHeaders.length).setFontWeight('bold');
-    
+
     // Set defaults for existing rows
-    const lastRow = sheet.getLastRow();
+    var lastRow = sheet.getLastRow();
     if (lastRow > 1) {
-      const defaults = [];
-      for (let i = 2; i <= lastRow; i++) {
+      var defaults = [];
+      for (var i = 2; i <= lastRow; i++) {
         defaults.push(['none', false, false, 'off-season', 0]);
       }
       sheet.getRange(2, lastCol + 1, lastRow - 1, 5).setValues(defaults);
     }
-    
-    Logger.log('upgradeWorldEventsLedger_ v2.1: Added 5 calendar columns to WorldEvents_Ledger');
+
+    Logger.log('upgradeWorldEventsLedger_ v2.2: Added 5 calendar columns to WorldEvents_Ledger');
   }
 }
 

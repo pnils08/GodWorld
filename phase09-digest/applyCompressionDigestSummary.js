@@ -28,136 +28,149 @@
 
 function applyCompressedDigestSummary_(ctx) {
 
-  const S = ctx.summary;
+  var S = ctx.summary;
   if (!S) return;
 
   // Helper for rounding
-  const r2 = v => Math.round((v || 0) * 100) / 100;
+  function r2(v) { return Math.round((v || 0) * 100) / 100; }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CORE CYCLE INFO (v2.3: safer alignment)
   // ═══════════════════════════════════════════════════════════════════════════
-  const cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
-  const events = S.eventsGenerated || 0;
+  var cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
+  var events = S.eventsGenerated || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // RECOVERY + COOLDOWN SIGNALS (v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const recoveryLevel = S.recoveryLevel || 'none';
-  const overloadScore = S.overloadScore || 0;
-  const cooldowns = S.domainCooldowns || {};
-  const activeCooldownCount = Object.values(cooldowns).filter(v => v > 0).length;
+  var recoveryLevel = S.recoveryLevel || 'none';
+  var overloadScore = S.overloadScore || 0;
+  var cooldowns = S.domainCooldowns || {};
+  var cooldownKeys = Object.keys(cooldowns);
+  var activeCooldownCount = 0;
+  for (var cdIdx = 0; cdIdx < cooldownKeys.length; cdIdx++) {
+    if (cooldowns[cooldownKeys[cdIdx]] > 0) activeCooldownCount++;
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CLASSIFICATION SIGNALS
   // ═══════════════════════════════════════════════════════════════════════════
-  const weight = S.cycleWeight || "low-signal";
-  const weightScore = S.cycleWeightScore || 0;
-  const load = S.civicLoad || "stable";
-  const loadScore = S.civicLoadScore || 0;
+  var weight = S.cycleWeight || "low-signal";
+  var weightScore = S.cycleWeightScore || 0;
+  var load = S.civicLoad || "stable";
+  var loadScore = S.civicLoadScore || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PATTERN/SHOCK
   // ═══════════════════════════════════════════════════════════════════════════
-  const pattern = S.patternFlag || "none";
-  const shock = S.shockFlag || "none";
+  var pattern = S.patternFlag || "none";
+  var shock = S.shockFlag || "none";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
-  const season = S.season || "Spring";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
+  var season = S.season || "Spring";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD EVENTS (v2.3: filter to current cycle only)
   // ═══════════════════════════════════════════════════════════════════════════
-  const allWorldEvents = S.worldEvents || [];
-  const worldEvents = allWorldEvents.filter(e => {
-    const evCycle = (typeof e.cycle === 'number') ? e.cycle : cycle;
-    return evCycle === cycle;
-  });
-  const chaosCount = worldEvents.length;
-  const highSev = worldEvents.filter(e => {
-    const sev = (e.severity || '').toString().toLowerCase();
-    return sev === 'high' || sev === 'major' || sev === 'critical';
-  }).length;
+  var allWorldEvents = S.worldEvents || [];
+  var worldEvents = [];
+  for (var weIdx = 0; weIdx < allWorldEvents.length; weIdx++) {
+    var e = allWorldEvents[weIdx];
+    var evCycle = (typeof e.cycle === 'number') ? e.cycle : cycle;
+    if (evCycle === cycle) worldEvents.push(e);
+  }
+  var chaosCount = worldEvents.length;
+  var highSev = 0;
+  for (var hsIdx = 0; hsIdx < worldEvents.length; hsIdx++) {
+    var sevE = worldEvents[hsIdx];
+    var sev = (sevE.severity || '').toString().toLowerCase();
+    if (sev === 'high' || sev === 'major' || sev === 'critical') highSev++;
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WEATHER
   // ═══════════════════════════════════════════════════════════════════════════
-  const weather = S.weather || {};
-  const weatherImpact = r2(weather.impact || 1);
-  const weatherType = weather.type || 'clear';
-  const weatherMood = S.weatherMood || {};
-  const comfort = r2(weatherMood.comfortIndex || 0.5);
+  var weather = S.weather || {};
+  var weatherImpact = r2(weather.impact || 1);
+  var weatherType = weather.type || 'clear';
+  var weatherMood = S.weatherMood || {};
+  var comfort = r2(weatherMood.comfortIndex || 0.5);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CITY DYNAMICS
   // ═══════════════════════════════════════════════════════════════════════════
-  const dynamics = S.cityDynamics || {};
-  const sentiment = r2(dynamics.sentiment || 0);
-  const culturalActivity = r2(dynamics.culturalActivity || 1);
-  const communityEngagement = r2(dynamics.communityEngagement || 1);
+  var dynamics = S.cityDynamics || {};
+  var sentiment = r2(dynamics.sentiment || 0);
+  var culturalActivity = r2(dynamics.culturalActivity || 1);
+  var communityEngagement = r2(dynamics.communityEngagement || 1);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ECONOMIC
   // ═══════════════════════════════════════════════════════════════════════════
-  const econMood = S.economicMood || 50;
-  const econRipples = (S.economicRipples || []).length;
+  var econMood = S.economicMood || 50;
+  var econRipples = (S.economicRipples || []).length;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MEDIA
   // ═══════════════════════════════════════════════════════════════════════════
-  const mediaEffects = S.mediaEffects || {};
-  const mediaIntensity = mediaEffects.coverageIntensity || 'minimal';
-  const crisisSat = r2(mediaEffects.crisisSaturation || 0);
+  var mediaEffects = S.mediaEffects || {};
+  var mediaIntensity = mediaEffects.coverageIntensity || 'minimal';
+  var crisisSat = r2(mediaEffects.crisisSaturation || 0);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ARCS
   // ═══════════════════════════════════════════════════════════════════════════
-  const arcs = S.eventArcs || [];
-  const activeArcs = arcs.filter(a => a && a.phase !== 'resolved').length;
-  const peakArcs = arcs.filter(a => a && a.phase === 'peak').length;
+  var arcs = S.eventArcs || [];
+  var activeArcs = 0;
+  var peakArcs = 0;
+  for (var arcIdx = 0; arcIdx < arcs.length; arcIdx++) {
+    var a = arcs[arcIdx];
+    if (a && a.phase !== 'resolved') activeArcs++;
+    if (a && a.phase === 'peak') peakArcs++;
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // STORY CONTENT
   // ═══════════════════════════════════════════════════════════════════════════
-  const seeds = S.storySeeds ? S.storySeeds.length : 0;
-  const hooks = S.storyHooks ? S.storyHooks.length : 0;
-  const spotlights = S.namedSpotlights ? S.namedSpotlights.length : 0;
+  var seeds = S.storySeeds ? S.storySeeds.length : 0;
+  var hooks = S.storyHooks ? S.storyHooks.length : 0;
+  var spotlights = S.namedSpotlights ? S.namedSpotlights.length : 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BONDS
   // ═══════════════════════════════════════════════════════════════════════════
-  const bonds = S.newBonds || [];
-  const bondCount = bonds.length;
+  var bonds = S.newBonds || [];
+  var bondCount = bonds.length;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DEMOGRAPHICS
   // ═══════════════════════════════════════════════════════════════════════════
-  const demo = S.demographicDrift || {};
-  const migration = demo.migration || 0;
-  const economy = demo.economy || 'stable';
+  var demo = S.demographicDrift || {};
+  var migration = demo.migration || 0;
+  var economy = demo.economy || 'stable';
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  const newCitizens = S.citizensGenerated || 0;
-  const promotions = S.promotionsCount || 0;
+  var newCitizens = S.citizensGenerated || 0;
+  var promotions = S.promotionsCount || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BUILD COMPRESSED SUMMARY
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   // v2.2: Build calendar indicator
-  let calendarTag = "";
+  var calendarTag = "";
   if (holiday !== "none") {
     // Abbreviate holiday name
-    const holidayAbbrev = {
+    var holidayAbbrev = {
       "Thanksgiving": "TG",
       "Holiday": "HOL",
       "NewYear": "NY",
@@ -188,54 +201,60 @@ function applyCompressedDigestSummary_(ctx) {
   }
 
   // v2.2: Build sports tag
-  let sportsTag = "";
+  var sportsTag = "";
   if (sportsSeason === "championship") sportsTag = "CHAMP";
   else if (sportsSeason === "playoffs") sportsTag = "PLYF";
   else if (sportsSeason === "post-season") sportsTag = "POST";
   else if (sportsSeason === "late-season") sportsTag = "LATE";
 
-  const parts = [
-    `C${cycle}`,
-    `ev:${events}`,
-    `wt:${weight}(${weightScore})`,
-    `load:${load}(${loadScore})`,
-    `patt:${pattern}`,
-    shock !== 'none' ? `SHOCK` : null,
+  var parts = [
+    "C" + cycle,
+    "ev:" + events,
+    "wt:" + weight + "(" + weightScore + ")",
+    "load:" + load + "(" + loadScore + ")",
+    "patt:" + pattern,
+    shock !== 'none' ? "SHOCK" : null,
 
     // v2.3: Recovery/cooldown indicators
-    recoveryLevel !== 'none' ? `rec:${recoveryLevel}(${overloadScore})` : null,
-    activeCooldownCount > 0 ? `cd:${activeCooldownCount}` : null,
+    recoveryLevel !== 'none' ? "rec:" + recoveryLevel + "(" + overloadScore + ")" : null,
+    activeCooldownCount > 0 ? "cd:" + activeCooldownCount : null,
 
     // v2.2: Calendar indicators
-    `ssn:${season.substring(0, 2)}`,
-    calendarTag ? `hol:${calendarTag}` : null,
-    isFirstFriday ? `FF` : null,
-    isCreationDay ? `CD` : null,
-    sportsTag ? `spt:${sportsTag}` : null,
-    
-    `chaos:${chaosCount}${highSev > 0 ? '!' + highSev : ''}`,
-    `wx:${weatherType}(${weatherImpact})`,
-    `comfort:${comfort}`,
-    `sent:${sentiment}`,
-    
-    // v2.2: Cultural/community indicators (only if notable)
-    culturalActivity >= 1.3 ? `cult:${culturalActivity}` : null,
-    communityEngagement >= 1.3 ? `comm:${communityEngagement}` : null,
-    
-    `econ:${econMood}(${econRipples}r)`,
-    `media:${mediaIntensity}`,
-    crisisSat >= 0.5 ? `crisis:${crisisSat}` : null,
-    activeArcs > 0 ? `arcs:${activeArcs}${peakArcs > 0 ? 'p' + peakArcs : ''}` : null,
-    `seeds:${seeds}`,
-    hooks > 0 ? `hooks:${hooks}` : null,
-    spotlights > 0 ? `spot:${spotlights}` : null,
-    bondCount > 0 ? `bonds:${bondCount}` : null,
-    Math.abs(migration) >= 20 ? `mig:${migration}` : null,
-    newCitizens > 0 ? `new:${newCitizens}` : null,
-    promotions > 0 ? `promo:${promotions}` : null
-  ].filter(Boolean);
+    "ssn:" + season.substring(0, 2),
+    calendarTag ? "hol:" + calendarTag : null,
+    isFirstFriday ? "FF" : null,
+    isCreationDay ? "CD" : null,
+    sportsTag ? "spt:" + sportsTag : null,
 
-  const summary = parts.join(' | ');
+    "chaos:" + chaosCount + (highSev > 0 ? '!' + highSev : ''),
+    "wx:" + weatherType + "(" + weatherImpact + ")",
+    "comfort:" + comfort,
+    "sent:" + sentiment,
+
+    // v2.2: Cultural/community indicators (only if notable)
+    culturalActivity >= 1.3 ? "cult:" + culturalActivity : null,
+    communityEngagement >= 1.3 ? "comm:" + communityEngagement : null,
+
+    "econ:" + econMood + "(" + econRipples + "r)",
+    "media:" + mediaIntensity,
+    crisisSat >= 0.5 ? "crisis:" + crisisSat : null,
+    activeArcs > 0 ? "arcs:" + activeArcs + (peakArcs > 0 ? 'p' + peakArcs : '') : null,
+    "seeds:" + seeds,
+    hooks > 0 ? "hooks:" + hooks : null,
+    spotlights > 0 ? "spot:" + spotlights : null,
+    bondCount > 0 ? "bonds:" + bondCount : null,
+    Math.abs(migration) >= 20 ? "mig:" + migration : null,
+    newCitizens > 0 ? "new:" + newCitizens : null,
+    promotions > 0 ? "promo:" + promotions : null
+  ];
+
+  // Filter out null values (ES5 compatible)
+  var filteredParts = [];
+  for (var pIdx = 0; pIdx < parts.length; pIdx++) {
+    if (parts[pIdx]) filteredParts.push(parts[pIdx]);
+  }
+
+  var summary = filteredParts.join(' | ');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // STORE OUTPUT

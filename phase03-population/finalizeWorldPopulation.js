@@ -65,31 +65,31 @@
  */
 
 function finalizeWorldPopulation_(ctx) {
-  const sheet = ctx.ss.getSheetByName('World_Population');
+  var sheet = ctx.ss.getSheetByName('World_Population');
   if (!sheet) {
     Logger.log('finalizeWorldPopulation_: World_Population sheet not found');
     return;
   }
 
   // Get header row to find column indices
-  const lastCol = sheet.getLastColumn();
+  var lastCol = sheet.getLastColumn();
   if (lastCol < 1) {
     Logger.log('finalizeWorldPopulation_: No columns found');
     return;
   }
-  
-  const header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
-  const dataRow = 2; // World_Population is single-row state sheet
+
+  var header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+  var dataRow = 2; // World_Population is single-row state sheet
 
   // Helper to find column index (returns -1 if not found)
-  const idx = function(name) {
+  var idx = function(name) {
     return header.indexOf(name);
   };
 
   // Pull summary data from context
-  const S = ctx.summary || {};
-  const D = S.cityDynamics || {};
-  const W = S.weather || {};
+  var S = ctx.summary || {};
+  var D = S.cityDynamics || {};
+  var W = S.weather || {};
 
   // -------------------------------------------------------------------------
   // CYCLE METADATA
@@ -130,9 +130,9 @@ function finalizeWorldPopulation_(ctx) {
   // -------------------------------------------------------------------------
   // WORLD EVENTS
   // -------------------------------------------------------------------------
-  
+
   if (idx('worldEventsCount') >= 0) {
-    const eventsArray = S.worldEvents || [];
+    var eventsArray = S.worldEvents || [];
     sheet.getRange(dataRow, idx('worldEventsCount') + 1).setValue(eventsArray.length);
   }
 
@@ -232,23 +232,23 @@ function finalizeWorldPopulation_(ctx) {
  */
 
 function finalizeWorldPopulation_Batch_(ctx) {
-  const sheet = ctx.ss.getSheetByName('World_Population');
+  var sheet = ctx.ss.getSheetByName('World_Population');
   if (!sheet) return;
 
-  const lastCol = sheet.getLastColumn();
+  var lastCol = sheet.getLastColumn();
   if (lastCol < 1) return;
-  
-  const header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
-  const dataRange = sheet.getRange(2, 1, 1, lastCol);
-  const dataRow = dataRange.getValues()[0];
 
-  const idx = function(name) {
+  var header = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
+  var dataRange = sheet.getRange(2, 1, 1, lastCol);
+  var dataRow = dataRange.getValues()[0];
+
+  var idx = function(name) {
     return header.indexOf(name);
   };
 
-  const S = ctx.summary || {};
-  const D = S.cityDynamics || {};
-  const W = S.weather || {};
+  var S = ctx.summary || {};
+  var D = S.cityDynamics || {};
+  var W = S.weather || {};
 
   // Update values in array
   if (idx('timestamp') >= 0) dataRow[idx('timestamp')] = ctx.now || new Date();
@@ -297,19 +297,19 @@ function finalizeWorldPopulation_Batch_(ctx) {
  */
 
 function upgradeWorldPopulationSheet_(ctx) {
-  const ss = ctx.ss;
-  const sheet = ss.getSheetByName('World_Population');
+  var ss = ctx.ss;
+  var sheet = ss.getSheetByName('World_Population');
   if (!sheet) return;
 
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
 
   // Check if calendar columns exist
-  const hasSeason = headers.includes('season');
+  var hasSeason = headers.indexOf('season') >= 0;
 
   if (!hasSeason) {
     // Add calendar columns
-    const lastCol = sheet.getLastColumn();
-    const newHeaders = ['season', 'holiday', 'holidayPriority', 'isFirstFriday', 'isCreationDay', 'sportsSeason', 'month'];
+    var lastCol = sheet.getLastColumn();
+    var newHeaders = ['season', 'holiday', 'holidayPriority', 'isFirstFriday', 'isCreationDay', 'sportsSeason', 'month'];
 
     sheet.getRange(1, lastCol + 1, 1, newHeaders.length).setValues([newHeaders]);
     sheet.getRange(1, lastCol + 1, 1, newHeaders.length).setFontWeight('bold');

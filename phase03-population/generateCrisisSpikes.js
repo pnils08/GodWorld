@@ -22,32 +22,32 @@
 
 function generateCrisisSpikes_(ctx) {
 
-  const S = ctx.summary;
+  var S = ctx.summary;
   if (!S.worldEvents) S.worldEvents = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const econMood = S.economicMood || 50;
-  const season = S.season;
-  const cycle = S.cycleId || ctx.config.cycleCount || 0;
+  var econMood = S.economicMood || 50;
+  var season = S.season;
+  var cycle = S.cycleId || ctx.config.cycleCount || 0;
 
   // Calendar context (v2.5)
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BASE CRISIS CHANCE
   // ═══════════════════════════════════════════════════════════════════════════
-  let baseChance = 0.65;
+  var baseChance = 0.65;
   
   // Weather increases crisis likelihood
   if (weather.impact >= 1.3) baseChance += 0.1;
@@ -62,28 +62,28 @@ function generateCrisisSpikes_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CHANCE MODIFIERS (v2.5)
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   // Major holidays REDUCE crisis likelihood (community together, vigilance up)
-  const peacefulHolidays = [
+  var peacefulHolidays = [
     "Thanksgiving", "Holiday", "Easter", "MothersDay", "FathersDay"
   ];
-  if (peacefulHolidays.includes(holiday)) {
+  if (peacefulHolidays.indexOf(holiday) >= 0) {
     baseChance -= 0.15;
   }
 
   // High-activity holidays may INCREASE certain crisis types (crowds, accidents)
-  const crowdHolidays = [
+  var crowdHolidays = [
     "Independence", "NewYearsEve", "Halloween", "OpeningDay", "OaklandPride"
   ];
-  if (crowdHolidays.includes(holiday)) {
+  if (crowdHolidays.indexOf(holiday) >= 0) {
     baseChance += 0.05;
   }
 
   // Civic observance holidays reduce crisis (offices closed, less activity)
-  const civicRestHolidays = [
+  var civicRestHolidays = [
     "MLKDay", "PresidentsDay", "MemorialDay", "LaborDay", "VeteransDay"
   ];
-  if (civicRestHolidays.includes(holiday)) {
+  if (civicRestHolidays.indexOf(holiday) >= 0) {
     baseChance -= 0.08;
   }
 
@@ -120,12 +120,12 @@ function generateCrisisSpikes_(ctx) {
   if (baseChance > 0.9) baseChance = 0.9;
   if (baseChance < 0.2) baseChance = 0.2;
 
-  const MAX_SPIKES = Math.random() < baseChance ? 1 : 2;
+  var MAX_SPIKES = Math.random() < baseChance ? 1 : 2;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAINS WITH WORLD-AWARE WEIGHTS
   // ═══════════════════════════════════════════════════════════════════════════
-  const DOMAINS = [
+  var DOMAINS = [
     { name: 'HEALTH', weight: 1.0 },
     { name: 'INFRASTRUCTURE', weight: 0.9 },
     { name: 'CIVIC', weight: 0.8 },
@@ -138,103 +138,106 @@ function generateCrisisSpikes_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD STATE DOMAIN ADJUSTMENTS
   // ═══════════════════════════════════════════════════════════════════════════
-  DOMAINS.forEach(d => {
+  for (var di = 0; di < DOMAINS.length; di++) {
+    var d = DOMAINS[di];
     // Winter increases health crises
     if (d.name === 'HEALTH' && season === 'Winter') d.weight += 0.2;
-    
+
     // Bad weather increases infrastructure crises
     if (d.name === 'INFRASTRUCTURE' && weather.impact >= 1.3) d.weight += 0.3;
-    
+
     // Economic stress increases economic crises
     if (d.name === 'ECONOMIC' && econMood <= 35) d.weight += 0.3;
-    
+
     // Negative sentiment increases safety crises
     if (d.name === 'SAFETY' && dynamics.sentiment <= -0.3) d.weight += 0.2;
-    
+
     // Heat increases environment crises
     if (d.name === 'ENVIRONMENT' && weather.type === 'hot') d.weight += 0.2;
-  });
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR DOMAIN ADJUSTMENTS (v2.5)
   // ═══════════════════════════════════════════════════════════════════════════
-  DOMAINS.forEach(d => {
-    
-    // Holiday-specific domain shifts
-    
+
+  // Holiday-specific domain shifts
+  var gatheringHolidays = [
+    "Thanksgiving", "Holiday", "NewYearsEve", "Independence", "OpeningDay"
+  ];
+  var fireworksHolidays = ["Independence", "NewYearsEve"];
+  var travelHolidays = ["Thanksgiving", "Holiday", "MemorialDay", "LaborDay"];
+  var retailHolidays = ["Holiday", "BlackFriday"];
+  var culturalCelebrations = [
+    "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "OaklandPride",
+    "LunarNewYear", "MLKDay"
+  ];
+
+  for (var dj = 0; dj < DOMAINS.length; dj++) {
+    var dom = DOMAINS[dj];
+
     // Gathering holidays increase health crisis risk
-    const gatheringHolidays = [
-      "Thanksgiving", "Holiday", "NewYearsEve", "Independence", "OpeningDay"
-    ];
-    if (d.name === 'HEALTH' && gatheringHolidays.includes(holiday)) {
-      d.weight += 0.15;
+    if (dom.name === 'HEALTH' && gatheringHolidays.indexOf(holiday) >= 0) {
+      dom.weight += 0.15;
     }
 
     // Crowd holidays increase safety crisis risk
-    if (d.name === 'SAFETY' && crowdHolidays.includes(holiday)) {
-      d.weight += 0.25;
+    if (dom.name === 'SAFETY' && crowdHolidays.indexOf(holiday) >= 0) {
+      dom.weight += 0.25;
     }
 
     // Championship increases safety crisis risk (crowds, celebrations)
-    if (d.name === 'SAFETY' && sportsSeason === "championship") {
-      d.weight += 0.3;
-    } else if (d.name === 'SAFETY' && (sportsSeason === "playoffs" || sportsSeason === "post-season")) {
-      d.weight += 0.15;
+    if (dom.name === 'SAFETY' && sportsSeason === "championship") {
+      dom.weight += 0.3;
+    } else if (dom.name === 'SAFETY' && (sportsSeason === "playoffs" || sportsSeason === "post-season")) {
+      dom.weight += 0.15;
     }
 
     // Fireworks holidays increase safety and environment
-    const fireworksHolidays = ["Independence", "NewYearsEve"];
-    if ((d.name === 'SAFETY' || d.name === 'ENVIRONMENT') && fireworksHolidays.includes(holiday)) {
-      d.weight += 0.2;
+    if ((dom.name === 'SAFETY' || dom.name === 'ENVIRONMENT') && fireworksHolidays.indexOf(holiday) >= 0) {
+      dom.weight += 0.2;
     }
 
     // Travel holidays increase infrastructure stress
-    const travelHolidays = ["Thanksgiving", "Holiday", "MemorialDay", "LaborDay"];
-    if (d.name === 'INFRASTRUCTURE' && travelHolidays.includes(holiday)) {
-      d.weight += 0.15;
+    if (dom.name === 'INFRASTRUCTURE' && travelHolidays.indexOf(holiday) >= 0) {
+      dom.weight += 0.15;
     }
 
     // Retail holidays increase economic pressure
-    const retailHolidays = ["Holiday", "BlackFriday"];
-    if (d.name === 'ECONOMIC' && retailHolidays.includes(holiday)) {
-      d.weight += 0.2;
+    if (dom.name === 'ECONOMIC' && retailHolidays.indexOf(holiday) >= 0) {
+      dom.weight += 0.2;
     }
 
     // Cultural holidays reduce cultural crisis (celebration, not crisis)
-    const culturalCelebrations = [
-      "Juneteenth", "CincoDeMayo", "DiaDeMuertos", "OaklandPride", 
-      "LunarNewYear", "MLKDay"
-    ];
-    if (d.name === 'CULTURE' && culturalCelebrations.includes(holiday)) {
-      d.weight -= 0.2;
-      if (d.weight < 0.1) d.weight = 0.1;
+    if (dom.name === 'CULTURE' && culturalCelebrations.indexOf(holiday) >= 0) {
+      dom.weight -= 0.2;
+      if (dom.weight < 0.1) dom.weight = 0.1;
     }
 
     // First Friday reduces cultural crisis, increases safety slightly
     if (isFirstFriday) {
-      if (d.name === 'CULTURE') d.weight -= 0.15;
-      if (d.name === 'SAFETY') d.weight += 0.1; // Crowds
+      if (dom.name === 'CULTURE') dom.weight -= 0.15;
+      if (dom.name === 'SAFETY') dom.weight += 0.1; // Crowds
     }
 
     // Creation Day reduces civic and cultural crisis
     if (isCreationDay) {
-      if (d.name === 'CIVIC') d.weight -= 0.2;
-      if (d.name === 'CULTURE') d.weight -= 0.15;
+      if (dom.name === 'CIVIC') dom.weight -= 0.2;
+      if (dom.name === 'CULTURE') dom.weight -= 0.15;
     }
 
     // High community engagement reduces safety crises
-    if (d.name === 'SAFETY' && dynamics.communityEngagement >= 1.4) {
-      d.weight -= 0.15;
+    if (dom.name === 'SAFETY' && dynamics.communityEngagement >= 1.4) {
+      dom.weight -= 0.15;
     }
 
     // Ensure minimum weight
-    if (d.weight < 0.1) d.weight = 0.1;
-  });
+    if (dom.weight < 0.1) dom.weight = 0.1;
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12 - v2.5)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoods = [
+  var neighborhoods = [
     { name: 'Temescal', weight: 0.9 },
     { name: 'Downtown', weight: 1.2 },
     { name: 'Fruitvale', weight: 1.0 },
@@ -253,7 +256,11 @@ function generateCrisisSpikes_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR NEIGHBORHOOD ADJUSTMENTS (v2.5)
   // ═══════════════════════════════════════════════════════════════════════════
-  neighborhoods.forEach(n => {
+  var fruitvaleCultural = ['CincoDeMayo', 'DiaDeMuertos'];
+
+  for (var ni = 0; ni < neighborhoods.length; ni++) {
+    var n = neighborhoods[ni];
+
     // First Friday increases Uptown/KONO activity
     if (isFirstFriday && (n.name === 'Uptown' || n.name === 'KONO' || n.name === 'Temescal')) {
       n.weight += 0.3;
@@ -265,7 +272,7 @@ function generateCrisisSpikes_(ctx) {
     }
 
     // Opening Day / Sports → Jack London, Downtown
-    if ((holiday === 'OpeningDay' || sportsSeason === 'championship') && 
+    if ((holiday === 'OpeningDay' || sportsSeason === 'championship') &&
         (n.name === 'Jack London' || n.name === 'Downtown')) {
       n.weight += 0.3;
     }
@@ -276,8 +283,7 @@ function generateCrisisSpikes_(ctx) {
     }
 
     // Fruitvale during cultural holidays
-    const fruitvaleCultural = ['CincoDeMayo', 'DiaDeMuertos'];
-    if (fruitvaleCultural.includes(holiday) && n.name === 'Fruitvale') {
+    if (fruitvaleCultural.indexOf(holiday) >= 0 && n.name === 'Fruitvale') {
       n.weight += 0.3;
     }
 
@@ -285,40 +291,41 @@ function generateCrisisSpikes_(ctx) {
     if (holidayPriority === 'major' && n.name === 'Downtown') {
       n.weight += 0.2;
     }
-  });
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SEVERITY LEVELS
   // ═══════════════════════════════════════════════════════════════════════════
-  const severityLevels = ['low', 'low', 'medium', 'medium', 'medium', 'high'];
+  var severityLevels = ['low', 'low', 'medium', 'medium', 'medium', 'high'];
 
   // v2.5: Calendar can shift severity
-  let severityPool = [...severityLevels];
-  
+  var severityPool = severityLevels.slice(); // ES5 array copy
+
   // Peaceful holidays reduce severity
-  if (peacefulHolidays.includes(holiday) || isCreationDay) {
+  if (peacefulHolidays.indexOf(holiday) >= 0 || isCreationDay) {
     severityPool = ['low', 'low', 'low', 'medium', 'medium'];
   }
-  
+
   // Crowd holidays can increase severity
-  if (crowdHolidays.includes(holiday) || sportsSeason === 'championship') {
+  if (crowdHolidays.indexOf(holiday) >= 0 || sportsSeason === 'championship') {
     severityPool = ['low', 'medium', 'medium', 'medium', 'high', 'high'];
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN PICKER
   // ═══════════════════════════════════════════════════════════════════════════
-  const domainHits = {};
+  var domainHits = {};
 
   function pickDomain() {
-    let pool = [];
-    DOMAINS.forEach(d => {
-      const penalty = domainHits[d.name] ? 0.15 : 1;
-      const effectiveWeight = d.weight * penalty;
-      for (let i = 0; i < Math.round(effectiveWeight * 10); i++) {
-        pool.push(d.name);
+    var pool = [];
+    for (var dk = 0; dk < DOMAINS.length; dk++) {
+      var dd = DOMAINS[dk];
+      var penalty = domainHits[dd.name] ? 0.15 : 1;
+      var effectiveWeight = dd.weight * penalty;
+      for (var wi = 0; wi < Math.round(effectiveWeight * 10); wi++) {
+        pool.push(dd.name);
       }
-    });
+    }
     return pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
   }
 
@@ -326,34 +333,35 @@ function generateCrisisSpikes_(ctx) {
   // NEIGHBORHOOD PICKER
   // ═══════════════════════════════════════════════════════════════════════════
   function pickNeighborhood() {
-    let pool = [];
-    neighborhoods.forEach(n => {
-      for (let i = 0; i < Math.round(n.weight * 10); i++) {
-        pool.push(n.name);
+    var pool = [];
+    for (var nk = 0; nk < neighborhoods.length; nk++) {
+      var nb = neighborhoods[nk];
+      for (var wj = 0; wj < Math.round(nb.weight * 10); wj++) {
+        pool.push(nb.name);
       }
-    });
+    }
     return pool[Math.floor(Math.random() * pool.length)];
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // GENERATE SPIKES
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let i = 0; i < MAX_SPIKES; i++) {
+  for (var si = 0; si < MAX_SPIKES; si++) {
 
-    const domain = pickDomain();
+    var domain = pickDomain();
     if (!domain) continue;
 
     domainHits[domain] = (domainHits[domain] || 0) + 1;
 
-    const neighborhood = pickNeighborhood();
-    const severity = severityPool[Math.floor(Math.random() * severityPool.length)];
-    
+    var neighborhood = pickNeighborhood();
+    var severity = severityPool[Math.floor(Math.random() * severityPool.length)];
+
     // Impact score based on severity
-    let impactBase = severity === 'high' ? 50 : severity === 'medium' ? 30 : 15;
-    const impact = Math.round(impactBase + (Math.random() * 20 - 10));
+    var impactBase = severity === 'high' ? 50 : severity === 'medium' ? 30 : 15;
+    var impact = Math.round(impactBase + (Math.random() * 20 - 10));
 
     // v2.5: Add calendar context to event
-    const event = {
+    var event = {
       cycle: cycle,
       domain: domain,
       subdomain: 'crisis-spike',

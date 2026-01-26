@@ -114,25 +114,28 @@ function getSimHoliday_(cycleOfYear) {
 
 /**
  * ============================================================================
- * getSimHolidayDetails_ v2.3
+ * getSimHolidayDetails_ v2.4 (ES5)
  * ============================================================================
- * 
+ *
  * Returns rich holiday object based on CYCLE (1-52).
  * Includes priority, neighborhood, and type.
- * 
+ *
+ * v2.4 Changes:
+ * - ES5 safe: const -> var, .includes() -> .indexOf() !== -1
+ *
  * ============================================================================
  */
 
 function getSimHolidayDetails_(cycleOfYear) {
-  
-  const name = getSimHoliday_(cycleOfYear);
-  
+
+  var name = getSimHoliday_(cycleOfYear);
+
   if (name === "none") {
     return { name: "none", priority: "none", neighborhood: null, type: null };
   }
-  
+
   // Holiday metadata lookup
-  const metadata = {
+  var metadata = {
     // MAJOR
     "NewYear":        { priority: "major", neighborhood: "Downtown", type: "celebration" },
     "MLKDay":         { priority: "major", neighborhood: "West Oakland", type: "remembrance" },
@@ -176,8 +179,8 @@ function getSimHolidayDetails_(cycleOfYear) {
     "FallEquinox":    { priority: "minor", neighborhood: null, type: "seasonal" },
     "WinterSolstice": { priority: "minor", neighborhood: null, type: "seasonal" }
   };
-  
-  const meta = metadata[name] || { priority: "minor", neighborhood: null, type: null };
+
+  var meta = metadata[name] || { priority: "minor", neighborhood: null, type: null };
   
   return {
     name: name,
@@ -203,8 +206,8 @@ function getSimHolidayDetails_(cycleOfYear) {
  */
 
 function isFirstFridayCycle_(cycleOfYear) {
-  const firstFridayCycles = [1, 6, 10, 14, 18, 23, 27, 31, 36, 40, 45, 49];
-  return firstFridayCycles.includes(cycleOfYear);
+  var firstFridayCycles = [1, 6, 10, 14, 18, 23, 27, 31, 36, 40, 45, 49];
+  return firstFridayCycles.indexOf(cycleOfYear) !== -1;
 }
 
 
@@ -346,28 +349,28 @@ function getSimMonthFromCycle_(cycleOfYear) {
  */
 
 function getHolidayPriority_(holidayName) {
-  
-  const major = [
+
+  var major = [
     "NewYear", "MLKDay", "Easter", "MemorialDay", "Juneteenth",
     "Independence", "LaborDay", "Halloween", "Thanksgiving",
     "CreationDay", "Holiday", "NewYearsEve"
   ];
-  
-  const cultural = [
+
+  var cultural = [
     "BlackHistoryMonth", "CincoDeMayo", "PrideMonth",
     "IndigenousPeoplesDay", "DiaDeMuertos", "Hanukkah"
   ];
-  
-  const oakland = [
+
+  var oakland = [
     "OpeningDay", "OaklandPride", "ArtSoulFestival",
     "SummerFestival", "EarthDay"
   ];
-  
-  if (major.includes(holidayName)) return "major";
-  if (cultural.includes(holidayName)) return "cultural";
-  if (oakland.includes(holidayName)) return "oakland";
+
+  if (major.indexOf(holidayName) !== -1) return "major";
+  if (cultural.indexOf(holidayName) !== -1) return "cultural";
+  if (oakland.indexOf(holidayName) !== -1) return "oakland";
   if (holidayName === "none") return "none";
-  
+
   return "minor";
 }
 

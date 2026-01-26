@@ -1,10 +1,16 @@
 /**
  * ============================================================================
- * applyWeatherModel_ v3.3
+ * applyWeatherModel_ v3.4 (ES5)
  * ============================================================================
  *
  * Combines weather generation with mood pipeline.
  * Aligned with GodWorld Calendar v1.0 and getSimHoliday_ v2.3.
+ *
+ * v3.4 Changes:
+ * - ES5 safe: const/let -> var, arrow functions -> function expressions
+ * - for...of -> traditional for loop, .includes() -> .indexOf() !== -1
+ * - Template literals -> string concatenation
+ * - Optional chaining -> defensive checks
  *
  * v3.3 Enhancements:
  * - Seeded RNG for deterministic/reproducible weather (same pattern as worldEventsEngine_)
@@ -30,7 +36,7 @@
  */
 
 // Oakland micro-climate profiles
-const OAKLAND_WEATHER_PROFILES = {
+var OAKLAND_WEATHER_PROFILES = {
   'Downtown': { tempMod: 2, fogChance: 0.1, description: 'urban heat island' },
   'Jack London': { tempMod: -1, fogChance: 0.3, description: 'waterfront cool' },
   'Fruitvale': { tempMod: 1, fogChance: 0.15, description: 'inland warmth' },
@@ -48,7 +54,7 @@ const OAKLAND_WEATHER_PROFILES = {
 
 function applyWeatherModel_(ctx) {
 
-  const S = ctx.summary;
+  var S = ctx.summary;
 
   // v3.3: Seeded RNG for deterministic weather (same pattern as worldEventsEngine_)
   var rng = (typeof ctx.rng === 'function') ? ctx.rng
@@ -56,27 +62,28 @@ function applyWeatherModel_(ctx) {
       ? mulberry32_(ctx.config.rngSeed >>> 0)
       : Math.random;
 
-  const month = S.simMonth;
-  const season = S.season;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const cycleOfYear = S.cycleOfYear || 1;
-  const currentCycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
+  var month = S.simMonth;
+  var season = S.season;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var cycleOfYear = S.cycleOfYear || 1;
+  var currentCycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PART 1: BASE WEATHER GENERATION
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const base = {
+  var baseTemps = {
     1: 48, 2: 51, 3: 56, 4: 61, 5: 66, 6: 71,
     7: 73, 8: 74, 9: 72, 10: 66, 11: 58, 12: 52
-  }[month] || 65;
+  };
+  var base = baseTemps[month] || 65;
 
-  let temp = base + (rng() * 6 - 3);
+  var temp = base + (rng() * 6 - 3);
 
-  const list = [];
+  var list = [];
 
   if (season === "Winter") list.push("cold", "rain", "fog", "snow");
   if (season === "Spring") list.push("mild", "rain", "wind", "clear");
@@ -202,9 +209,9 @@ function applyWeatherModel_(ctx) {
     list.push("clear", "mild");  // Favorable for outdoor crowds
   }
 
-  const type = list[Math.floor(rng() * list.length)] || "clear";
+  var type = list[Math.floor(rng() * list.length)] || "clear";
 
-  let impact = 1;
+  var impact = 1;
   if (type === "rain") impact = 1.2;
   if (type === "fog") impact = 1.3;
   if (type === "wind") impact = 1.1;
@@ -231,26 +238,29 @@ function applyWeatherModel_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   S.neighborhoodWeather = {};
-  
-  for (const [nh, profile] of Object.entries(OAKLAND_WEATHER_PROFILES)) {
-    let nhTemp = temp + profile.tempMod;
-    let nhType = type;
-    
+
+  var neighborhoodKeys = Object.keys(OAKLAND_WEATHER_PROFILES);
+  for (var nhIdx = 0; nhIdx < neighborhoodKeys.length; nhIdx++) {
+    var nh = neighborhoodKeys[nhIdx];
+    var profile = OAKLAND_WEATHER_PROFILES[nh];
+    var nhTemp = temp + profile.tempMod;
+    var nhType = type;
+
     // Fog override for fog-prone neighborhoods
     if (type === 'clear' && rng() < profile.fogChance) {
       nhType = 'fog';
     }
-    
+
     // Heat amplification in urban areas
     if (type === 'hot' && profile.tempMod > 0) {
       nhTemp += 2;
     }
-    
+
     // Waterfront neighborhoods cooler in heat
     if (type === 'hot' && profile.tempMod < 0) {
       nhTemp -= 2;
     }
-    
+
     S.neighborhoodWeather[nh] = {
       temp: Math.round(nhTemp),
       type: nhType,
@@ -278,8 +288,8 @@ function applyWeatherModel_(ctx) {
     };
   }
 
-  const tracking = S.weatherTracking;
-  const normalizedType = normalizeWeatherType_(type);
+  var tracking = S.weatherTracking;
+  var normalizedType = normalizeWeatherType_(type);
 
   if (normalizedType === tracking.streakType) {
     tracking.currentStreak++;
@@ -358,14 +368,14 @@ function applyWeatherModel_(ctx) {
   // PART 5: COMFORT INDEX
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let comfort = 0.5;
+  var comfort = 0.5;
 
   if (temp >= 65 && temp <= 75) comfort += 0.3;
   else if (temp >= 55 && temp <= 85) comfort += 0.1;
   else if (temp < 32 || temp > 95) comfort -= 0.3;
   else if (temp < 45 || temp > 88) comfort -= 0.15;
 
-  const typeComfort = {
+  var typeComfort = {
     'clear': 0.15, 'mild': 0.15, 'breeze': 0.1,
     'overcast': 0, 'cool': 0,  // v3.3: Fixed - was 'cloudy', but generator outputs 'overcast'
     'rain': -0.15, 'fog': -0.1, 'wind': -0.1,
@@ -391,7 +401,7 @@ function applyWeatherModel_(ctx) {
   // PART 6: MOOD EFFECTS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const mood = {
+  var mood = {
     primaryMood: 'neutral',
     moodIntensity: 0.3,
     energyLevel: 0.5,
@@ -404,7 +414,7 @@ function applyWeatherModel_(ctx) {
     perfectWeather: false
   };
 
-  const baseMoods = {
+  var baseMoods = {
     'clear': { mood: 'content', energy: 0.7, social: 0.7 },
     'mild': { mood: 'content', energy: 0.7, social: 0.7 },
     'breeze': { mood: 'energized', energy: 0.75, social: 0.7 },
@@ -418,7 +428,7 @@ function applyWeatherModel_(ctx) {
     'snow': { mood: 'nostalgic', energy: 0.5, social: 0.5 }
   };
 
-  const baseMood = baseMoods[type] || baseMoods['clear'];
+  var baseMood = baseMoods[type] || baseMoods['clear'];
   mood.primaryMood = baseMood.mood;
   mood.energyLevel = baseMood.energy;
   mood.socialInclination = baseMood.social;
@@ -428,30 +438,40 @@ function applyWeatherModel_(ctx) {
     mood.conflictPotential += 0.05 * tracking.consecutiveUncomfortableDays;
   }
 
-  if (tracking.activeAlerts.includes('heat_wave')) {
+  if (tracking.activeAlerts.indexOf('heat_wave') !== -1) {
     mood.irritabilityFactor += 0.3;
     mood.conflictPotential += 0.25;
     mood.energyLevel -= 0.2;
     mood.primaryMood = 'irritable';
   }
 
-  if (tracking.activeAlerts.includes('prolonged_rain')) {
+  if (tracking.activeAlerts.indexOf('prolonged_rain') !== -1) {
     mood.creativityBoost += 0.2;
     mood.socialInclination -= 0.2;
     mood.primaryMood = 'introspective';
   }
 
-  if (tracking.activeAlerts.includes('fog_advisory')) {
+  if (tracking.activeAlerts.indexOf('fog_advisory') !== -1) {
     mood.socialInclination -= 0.1;
     mood.creativityBoost += 0.1;
   }
 
-  if (S.weatherEvents.some(e => e.type === 'first_snow')) {
+  // ES5: Check weatherEvents for first_snow
+  var hasFirstSnow = false;
+  for (var fsIdx = 0; fsIdx < S.weatherEvents.length; fsIdx++) {
+    if (S.weatherEvents[fsIdx].type === 'first_snow') { hasFirstSnow = true; break; }
+  }
+  if (hasFirstSnow) {
     mood.nostalgiaFactor = 0.8;
     mood.primaryMood = 'nostalgic';
   }
 
-  if (S.weatherEvents.some(e => e.type === 'first_warm_day')) {
+  // ES5: Check weatherEvents for first_warm_day
+  var hasFirstWarmDay = false;
+  for (var fwIdx = 0; fwIdx < S.weatherEvents.length; fwIdx++) {
+    if (S.weatherEvents[fwIdx].type === 'first_warm_day') { hasFirstWarmDay = true; break; }
+  }
+  if (hasFirstWarmDay) {
     mood.energyLevel = 0.9;
     mood.socialInclination = 0.85;
     mood.primaryMood = 'energized';
@@ -548,8 +568,8 @@ function applyWeatherModel_(ctx) {
     );
   }
 
-  // Special weather events
-  if (S.weatherEvents.some(e => e.type === 'first_snow')) {
+  // Special weather events (ES5: reuse hasFirstSnow from above)
+  if (hasFirstSnow) {
     S.weatherEventPools.special.push(
       "watched the first snowfall with wonder",
       "felt the magic of the year's first snow",
@@ -557,7 +577,7 @@ function applyWeatherModel_(ctx) {
     );
   }
 
-  if (tracking.activeAlerts.includes('heat_wave')) {
+  if (tracking.activeAlerts.indexOf('heat_wave') !== -1) {
     S.weatherEventPools.special.push(
       "struggled with the extended heat wave",
       "witnessed tempers flare in the heat",
@@ -565,7 +585,7 @@ function applyWeatherModel_(ctx) {
     );
   }
 
-  if (tracking.activeAlerts.includes('fog_advisory')) {
+  if (tracking.activeAlerts.indexOf('fog_advisory') !== -1) {
     S.weatherEventPools.special.push(
       "navigated carefully through the persistent fog",
       "felt the city muffled under fog",
@@ -609,28 +629,31 @@ function applyWeatherModel_(ctx) {
     );
   }
 
-  // Neighborhood-specific weather events
-  for (const [nh, nhWeather] of Object.entries(S.neighborhoodWeather)) {
-    S.weatherEventPools.neighborhood[nh] = [];
-    
+  // Neighborhood-specific weather events (ES5)
+  var nhWeatherKeys = Object.keys(S.neighborhoodWeather);
+  for (var nhwIdx = 0; nhwIdx < nhWeatherKeys.length; nhwIdx++) {
+    var nhKey = nhWeatherKeys[nhwIdx];
+    var nhWeather = S.neighborhoodWeather[nhKey];
+    S.weatherEventPools.neighborhood[nhKey] = [];
+
     if (nhWeather.type === 'fog' && type !== 'fog') {
-      S.weatherEventPools.neighborhood[nh].push(
-        `noticed ${nh} shrouded in fog while other areas stayed clear`,
-        `experienced the microclimates around ${nh}`
+      S.weatherEventPools.neighborhood[nhKey].push(
+        "noticed " + nhKey + " shrouded in fog while other areas stayed clear",
+        "experienced the microclimates around " + nhKey
       );
     }
-    
+
     if (nhWeather.temp >= temp + 3) {
-      S.weatherEventPools.neighborhood[nh].push(
-        `felt the extra heat in ${nh}'s urban corridor`,
-        `noticed ${nh} running warmer than expected`
+      S.weatherEventPools.neighborhood[nhKey].push(
+        "felt the extra heat in " + nhKey + "'s urban corridor",
+        "noticed " + nhKey + " running warmer than expected"
       );
     }
-    
+
     if (nhWeather.temp <= temp - 3) {
-      S.weatherEventPools.neighborhood[nh].push(
-        `appreciated the cooler air in ${nh}`,
-        `noticed the bay breeze keeping ${nh} comfortable`
+      S.weatherEventPools.neighborhood[nhKey].push(
+        "appreciated the cooler air in " + nhKey,
+        "noticed the bay breeze keeping " + nhKey + " comfortable"
       );
     }
   }
@@ -638,6 +661,31 @@ function applyWeatherModel_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // PART 8: WEATHER SUMMARY FOR PACKET
   // ═══════════════════════════════════════════════════════════════════════════
+
+  // ES5: Build specialEvents array
+  var specialEventTypes = [];
+  for (var seIdx = 0; seIdx < S.weatherEvents.length; seIdx++) {
+    specialEventTypes.push(S.weatherEvents[seIdx].type);
+  }
+
+  // ES5: Build foggyNeighborhoods, hotspots, coolspots arrays
+  var foggyNeighborhoods = [];
+  var hotspots = [];
+  var coolspots = [];
+  var summaryNhKeys = Object.keys(S.neighborhoodWeather);
+  for (var snIdx = 0; snIdx < summaryNhKeys.length; snIdx++) {
+    var snKey = summaryNhKeys[snIdx];
+    var snWeather = S.neighborhoodWeather[snKey];
+    if (snWeather.type === 'fog') {
+      foggyNeighborhoods.push(snKey);
+    }
+    if (snWeather.temp >= temp + 3) {
+      hotspots.push(snKey);
+    }
+    if (snWeather.temp <= temp - 3) {
+      coolspots.push(snKey);
+    }
+  }
 
   S.weatherSummary = {
     type: type,
@@ -650,7 +698,7 @@ function applyWeatherModel_(ctx) {
     streak: tracking.currentStreak,
     streakType: tracking.streakType,
     alerts: tracking.activeAlerts,
-    specialEvents: S.weatherEvents.map(e => e.type),
+    specialEvents: specialEventTypes,
     perfectWeather: mood.perfectWeather,
     irritability: mood.irritabilityFactor,
     conflictPotential: mood.conflictPotential,
@@ -660,15 +708,9 @@ function applyWeatherModel_(ctx) {
     holiday: holiday,
     isFirstFriday: isFirstFriday,
     isCreationDay: isCreationDay,
-    foggyNeighborhoods: Object.entries(S.neighborhoodWeather)
-      .filter(([nh, w]) => w.type === 'fog')
-      .map(([nh]) => nh),
-    hotspots: Object.entries(S.neighborhoodWeather)
-      .filter(([nh, w]) => w.temp >= temp + 3)
-      .map(([nh]) => nh),
-    coolspots: Object.entries(S.neighborhoodWeather)
-      .filter(([nh, w]) => w.temp <= temp - 3)
-      .map(([nh]) => nh)
+    foggyNeighborhoods: foggyNeighborhoods,
+    hotspots: hotspots,
+    coolspots: coolspots
   };
 }
 
@@ -678,7 +720,7 @@ function applyWeatherModel_(ctx) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function normalizeWeatherType_(type) {
-  const groups = {
+  var groups = {
     'clear': 'clear', 'mild': 'clear', 'breeze': 'clear',
     'rain': 'rain',
     'fog': 'fog',
@@ -691,7 +733,7 @@ function normalizeWeatherType_(type) {
 }
 
 function getBaseWeatherEvents_(weatherType) {
-  const pools = {
+  var pools = {
     'clear': ["enjoyed the clear skies", "took advantage of the nice weather"],
     'mild': ["appreciated the mild conditions", "felt comfortable in the pleasant weather"],
     'breeze': ["felt refreshed by the breeze", "enjoyed the gentle wind"],
@@ -708,7 +750,7 @@ function getBaseWeatherEvents_(weatherType) {
 }
 
 function getWeatherEvent_(ctx, preferSpecial) {
-  const pools = ctx.summary.weatherEventPools;
+  var pools = ctx.summary.weatherEventPools;
   if (!pools) return null;
 
   // v3.3: Resolve RNG from ctx
@@ -734,7 +776,10 @@ function getWeatherEvent_(ctx, preferSpecial) {
 }
 
 function getNeighborhoodWeatherEvent_(ctx, neighborhood) {
-  const pools = ctx.summary.weatherEventPools?.neighborhood?.[neighborhood];
+  // ES5: Defensive checks instead of optional chaining
+  var eventPools = ctx.summary && ctx.summary.weatherEventPools;
+  var nhPools = eventPools && eventPools.neighborhood;
+  var pools = nhPools && nhPools[neighborhood];
   if (!pools || pools.length === 0) return null;
 
   // v3.3: Resolve RNG from ctx
@@ -751,10 +796,11 @@ function getNeighborhoodWeatherEvent_(ctx, neighborhood) {
 }
 
 function getWeatherEventModifier_(ctx, eventCategory) {
-  const mood = ctx.summary?.weatherMood;
+  // ES5: Defensive checks instead of optional chaining
+  var mood = ctx.summary && ctx.summary.weatherMood;
   if (!mood) return 1.0;
 
-  const modifiers = {
+  var modifiers = {
     'conflict': 1.0 + mood.conflictPotential,
     'social': mood.socialInclination + 0.5,
     'creative': 1.0 + mood.creativityBoost,
@@ -767,15 +813,26 @@ function getWeatherEventModifier_(ctx, eventCategory) {
 }
 
 function hasWeatherCondition_(ctx, condition) {
-  const tracking = ctx.summary?.weatherTracking;
+  // ES5: Defensive checks instead of optional chaining
+  var tracking = ctx.summary && ctx.summary.weatherTracking;
   if (!tracking) return false;
 
-  if (condition === 'heat_wave') return tracking.activeAlerts.includes('heat_wave');
-  if (condition === 'prolonged_rain') return tracking.activeAlerts.includes('prolonged_rain');
-  if (condition === 'cold_snap') return tracking.activeAlerts.includes('cold_snap');
-  if (condition === 'fog_advisory') return tracking.activeAlerts.includes('fog_advisory');
-  if (condition === 'first_snow') return ctx.summary.weatherEvents?.some(e => e.type === 'first_snow');
-  if (condition === 'perfect_weather') return ctx.summary.weatherMood?.perfectWeather;
+  if (condition === 'heat_wave') return tracking.activeAlerts.indexOf('heat_wave') !== -1;
+  if (condition === 'prolonged_rain') return tracking.activeAlerts.indexOf('prolonged_rain') !== -1;
+  if (condition === 'cold_snap') return tracking.activeAlerts.indexOf('cold_snap') !== -1;
+  if (condition === 'fog_advisory') return tracking.activeAlerts.indexOf('fog_advisory') !== -1;
+  if (condition === 'first_snow') {
+    var events = ctx.summary && ctx.summary.weatherEvents;
+    if (!events) return false;
+    for (var i = 0; i < events.length; i++) {
+      if (events[i].type === 'first_snow') return true;
+    }
+    return false;
+  }
+  if (condition === 'perfect_weather') {
+    var wMood = ctx.summary && ctx.summary.weatherMood;
+    return wMood && wMood.perfectWeather;
+  }
   if (condition === 'first_friday') return ctx.summary.isFirstFriday;
   if (condition === 'creation_day') return ctx.summary.isCreationDay;
 
@@ -783,7 +840,12 @@ function hasWeatherCondition_(ctx, condition) {
 }
 
 function getNeighborhoodTemp_(ctx, neighborhood) {
-  return ctx.summary?.neighborhoodWeather?.[neighborhood]?.temp || ctx.summary?.weather?.temp || 65;
+  // ES5: Defensive checks instead of optional chaining
+  var nhWeather = ctx.summary && ctx.summary.neighborhoodWeather && ctx.summary.neighborhoodWeather[neighborhood];
+  if (nhWeather && nhWeather.temp !== undefined) return nhWeather.temp;
+  var weather = ctx.summary && ctx.summary.weather;
+  if (weather && weather.temp !== undefined) return weather.temp;
+  return 65;
 }
 
 

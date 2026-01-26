@@ -48,41 +48,46 @@
  * Main entry point - computes cycle weight from ctx.summary
  */
 function applyCycleWeight_(ctx) {
-  const S = ctx.summary || {};
+  var S = ctx.summary || {};
 
   // v2.3: Filter worldEvents to current cycle only
-  const cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
-  const worldEventsRaw = S.worldEvents || [];
-  const worldEvents = worldEventsRaw.filter(e => !e.cycle || e.cycle === cycle);
+  var cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
+  var worldEventsRaw = S.worldEvents || [];
+  var worldEvents = [];
+  for (var weIdx = 0; weIdx < worldEventsRaw.length; weIdx++) {
+    var evItem = worldEventsRaw[weIdx];
+    if (!evItem.cycle || evItem.cycle === cycle) worldEvents.push(evItem);
+  }
 
-  const weather = S.weather || {};
-  const dynamics = S.cityDynamics || { culturalActivity: 1, communityEngagement: 1 };
-  const domains = S.domainPresence || {};
-  const arcs = S.eventArcs || [];
-  const seeds = S.storySeeds || [];
-  const hooks = S.storyHooks || [];
-  
+  var weather = S.weather || {};
+  var dynamics = S.cityDynamics || { culturalActivity: 1, communityEngagement: 1 };
+  var domains = S.domainPresence || {};
+  var arcs = S.eventArcs || [];
+  var seeds = S.storySeeds || [];
+  var hooks = S.storyHooks || [];
+
   // Calendar fields (v2.2)
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
-  
-  let score = 0;
-  const reasons = [];
-  const calendarFactors = [];
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
+
+  var score = 0;
+  var reasons = [];
+  var calendarFactors = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD EVENTS
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   if (worldEvents.length > 0) {
-    let eventScore = 0;
-    let highSeverity = 0;
-    
-    worldEvents.forEach(ev => {
-      const sev = (ev.severity || 'low').toLowerCase();
+    var eventScore = 0;
+    var highSeverity = 0;
+
+    for (var evIdx = 0; evIdx < worldEvents.length; evIdx++) {
+      var ev = worldEvents[evIdx];
+      var sev = (ev.severity || 'low').toLowerCase();
       if (sev === 'high' || sev === 'major' || sev === 'critical') {
         eventScore += 4;
         highSeverity++;
@@ -91,10 +96,10 @@ function applyCycleWeight_(ctx) {
       } else {
         eventScore += 1;
       }
-    });
-    
+    }
+
     score += eventScore;
-    
+
     if (highSeverity > 0) {
       reasons.push(highSeverity + ' high-severity event(s)');
     }
@@ -106,9 +111,9 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WEATHER IMPACT
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const weatherImpact = weather.impact || 1;
-  
+
+  var weatherImpact = weather.impact || 1;
+
   if (weatherImpact >= 1.4) {
     score += 5;
     reasons.push('Severe weather (impact ' + weatherImpact + ')');
@@ -120,9 +125,9 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SENTIMENT
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const sentiment = dynamics.sentiment || 0;
-  
+
+  var sentiment = dynamics.sentiment || 0;
+
   if (sentiment <= -0.4) {
     score += 4;
     reasons.push('Very negative sentiment (' + sentiment + ')');
@@ -137,9 +142,9 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CIVIC LOAD
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const civicLoad = S.civicLoad || 'stable';
-  
+
+  var civicLoad = S.civicLoad || 'stable';
+
   if (civicLoad === 'load-strain') {
     score += 4;
     reasons.push('Civic load strain');
@@ -150,9 +155,9 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SHOCK FLAG
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const shockFlag = S.shockFlag || 'none';
-  
+
+  var shockFlag = S.shockFlag || 'none';
+
   if (shockFlag && shockFlag !== 'none') {
     score += 6;
     reasons.push('Shock event detected');
@@ -162,7 +167,7 @@ function applyCycleWeight_(ctx) {
   // RECOVERY SUPPRESSION (v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const recoveryLevel = S.recoveryLevel || 'none';
+  var recoveryLevel = S.recoveryLevel || 'none';
 
   if (recoveryLevel === 'heavy') {
     score += 2;
@@ -176,7 +181,7 @@ function applyCycleWeight_(ctx) {
   // PATTERN FLAGS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const patternFlag = S.patternFlag || 'none';
+  var patternFlag = S.patternFlag || 'none';
   
   if (patternFlag === 'micro-event-wave') {
     score += 3;
@@ -196,14 +201,18 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // STORY SEEDS & HOOKS
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const seedCount = seeds.length;
-  const hookCount = hooks.length;
-  const highPriorityHooks = hooks.filter(h => h && Number(h.priority) >= 3).length;
-  
+
+  var seedCount = seeds.length;
+  var hookCount = hooks.length;
+  var highPriorityHooks = 0;
+  for (var hkIdx = 0; hkIdx < hooks.length; hkIdx++) {
+    var h = hooks[hkIdx];
+    if (h && Number(h.priority) >= 3) highPriorityHooks++;
+  }
+
   if (seedCount >= 10) score += 2;
   if (seedCount >= 15) score += 2;
-  
+
   if (highPriorityHooks >= 3) {
     score += 3;
     reasons.push(highPriorityHooks + ' high-priority story hooks');
@@ -212,15 +221,21 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN CLUSTERING
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const activeDomains = Object.values(domains).filter(v => v > 0).length;
-  const dominantCount = Math.max(...Object.values(domains), 0);
-  
+
+  var domainKeys = Object.keys(domains);
+  var activeDomains = 0;
+  var dominantCount = 0;
+  for (var dkIdx = 0; dkIdx < domainKeys.length; dkIdx++) {
+    var domVal = domains[domainKeys[dkIdx]];
+    if (domVal > 0) activeDomains++;
+    if (domVal > dominantCount) dominantCount = domVal;
+  }
+
   if (activeDomains >= 6) {
     score += 2;
     reasons.push('Wide domain spread (' + activeDomains + ' active)');
   }
-  
+
   if (dominantCount >= 4) {
     score += 3;
     reasons.push('Domain saturation (' + dominantCount + ' in one domain)');
@@ -229,21 +244,29 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // EVENT ARCS
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const activeArcs = arcs.filter(a => a && a.phase !== 'resolved');
-  const peakArcs = activeArcs.filter(a => a.phase === 'peak');
-  const highTensionArcs = activeArcs.filter(a => (a.tension || 0) >= 7);
-  
+
+  var activeArcs = [];
+  var peakArcs = [];
+  var highTensionArcs = [];
+  for (var arcIdx = 0; arcIdx < arcs.length; arcIdx++) {
+    var arc = arcs[arcIdx];
+    if (arc && arc.phase !== 'resolved') {
+      activeArcs.push(arc);
+      if (arc.phase === 'peak') peakArcs.push(arc);
+      if ((arc.tension || 0) >= 7) highTensionArcs.push(arc);
+    }
+  }
+
   if (peakArcs.length > 0) {
     score += 4;
     reasons.push(peakArcs.length + ' arc(s) at peak');
   }
-  
+
   if (highTensionArcs.length > 0) {
     score += 2;
     reasons.push('High-tension arc activity');
   }
-  
+
   if (activeArcs.length >= 5) {
     score += 2;
     reasons.push(activeArcs.length + ' active arcs');
@@ -252,10 +275,10 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ECONOMIC MOOD
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const econMood = S.economicMood || 50;
-  const econRipples = (S.economicRipples || []).length;
-  
+
+  var econMood = S.economicMood || 50;
+  var econRipples = (S.economicRipples || []).length;
+
   if (econMood <= 30) {
     score += 3;
     reasons.push('Economic distress (mood ' + econMood + ')');
@@ -263,7 +286,7 @@ function applyCycleWeight_(ctx) {
     score += 1;
     reasons.push('Economic boom');
   }
-  
+
   if (econRipples >= 4) {
     score += 2;
     reasons.push(econRipples + ' economic ripples active');
@@ -272,8 +295,8 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // MEDIA SATURATION
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const mediaEffects = S.mediaEffects || {};
+
+  var mediaEffects = S.mediaEffects || {};
   
   if (mediaEffects.coverageIntensity === 'saturated') {
     score += 2;
@@ -307,12 +330,12 @@ function applyCycleWeight_(ctx) {
   }
 
   // High-signal holidays that typically generate significant activity
-  const highSignalHolidays = [
+  var highSignalHolidays = [
     "Independence", "Thanksgiving", "Holiday", "NewYear", "NewYearsEve",
     "OpeningDay", "OaklandPride", "Halloween"
   ];
-  
-  if (highSignalHolidays.includes(holiday)) {
+
+  if (highSignalHolidays.indexOf(holiday) !== -1) {
     score += 2;
     calendarFactors.push('high-signal-holiday');
   }
@@ -357,9 +380,9 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CULTURAL ACTIVITY (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const culturalActivity = dynamics.culturalActivity || 1;
-  
+
+  var culturalActivity = dynamics.culturalActivity || 1;
+
   if (culturalActivity >= 1.5) {
     score += 2;
     reasons.push('High cultural activity');
@@ -372,8 +395,8 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // COMMUNITY ENGAGEMENT (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const communityEngagement = dynamics.communityEngagement || 1;
+
+  var communityEngagement = dynamics.communityEngagement || 1;
   
   if (communityEngagement >= 1.4) {
     score += 2;
@@ -398,10 +421,10 @@ function applyCycleWeight_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CLASSIFICATION
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  let weight = 'low-signal';
-  let baseReason = 'Low activity and stable patterns.';
-  
+
+  var weight = 'low-signal';
+  var baseReason = 'Low activity and stable patterns.';
+
   if (score >= 25) {
     weight = 'high-signal';
     baseReason = 'High chaos density, strong volatility, or severe world signals.';
@@ -411,7 +434,7 @@ function applyCycleWeight_(ctx) {
   }
 
   // Build detailed reason
-  let detailedReason = baseReason;
+  var detailedReason = baseReason;
   if (reasons.length > 0) {
     detailedReason = reasons.slice(0, 5).join('; ') + '.';
   }
@@ -434,29 +457,29 @@ function applyCycleWeight_(ctx) {
  * Call separately if needed for backward compatibility
  */
 function writeCycleWeightToDigest_(ctx) {
-  const ss = ctx.ss;
-  const S = ctx.summary || {};
-  
-  const sheet = ss.getSheetByName('Riley_Digest');
+  var ss = ctx.ss;
+  var S = ctx.summary || {};
+
+  var sheet = ss.getSheetByName('Riley_Digest');
   if (!sheet) return;
-  
-  const lastRow = sheet.getLastRow();
+
+  var lastRow = sheet.getLastRow();
   if (lastRow < 2) return;
-  
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  
-  const weightCol = headers.indexOf('CycleWeight') + 1;
-  const reasonCol = headers.indexOf('CycleWeightReason') + 1;
-  const calendarCol = headers.indexOf('CycleWeightCalendarFactors') + 1;
-  
+
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  var weightCol = headers.indexOf('CycleWeight') + 1;
+  var reasonCol = headers.indexOf('CycleWeightReason') + 1;
+  var calendarCol = headers.indexOf('CycleWeightCalendarFactors') + 1;
+
   if (weightCol > 0) {
     sheet.getRange(lastRow, weightCol).setValue(S.cycleWeight || 'low-signal');
   }
-  
+
   if (reasonCol > 0) {
     sheet.getRange(lastRow, reasonCol).setValue(S.cycleWeightReason || '');
   }
-  
+
   // v2.2: Write calendar factors if column exists
   if (calendarCol > 0 && S.cycleWeightCalendarFactors) {
     sheet.getRange(lastRow, calendarCol).setValue(S.cycleWeightCalendarFactors.join(', '));

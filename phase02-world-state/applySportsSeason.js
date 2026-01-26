@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * applySportsSeason_ v2.3 (canon-safe fallback)
+ * applySportsSeason_ v2.4 (canon-safe fallback, ES5)
  * ============================================================================
  *
  * Maker override still rules:
@@ -9,19 +9,22 @@
  *
  * Canon rule:
  * - Engine NEVER invents playoffs/championship/hot-stove. Those require override.
+ *
+ * v2.4 Changes:
+ * - ES5 safe: const/let -> var, shorthand properties -> explicit
  * ============================================================================
  */
 
 function applySportsSeason_(ctx) {
-  const S = ctx.summary;
-  const m = Number(S.simMonth || 1);
+  var S = ctx.summary;
+  var m = Number(S.simMonth || 1);
 
   // ─────────────────────────────────────────────────────────────
   // PRIORITY 1: World_Config override (Maker control)
   // ─────────────────────────────────────────────────────────────
-  const oaklandOverride =
+  var oaklandOverride =
     ctx.config.sportsState_Oakland || ctx.config.sportsStateOakland || null;
-  const chicagoOverride =
+  var chicagoOverride =
     ctx.config.sportsState_Chicago || ctx.config.sportsStateChicago || null;
 
   if (oaklandOverride || chicagoOverride) {
@@ -44,7 +47,7 @@ function applySportsSeason_(ctx) {
   // PRIORITY 2: SimMonth fallback (canon-safe)
   // - No playoffs/finals/post-season/pennant without override
   // ─────────────────────────────────────────────────────────────
-  const out = deriveCanonSafeSeasonFromMonth_(m);
+  var out = deriveCanonSafeSeasonFromMonth_(m);
 
   S.sportsSeason = out.oaklandState; // primary
   S.sportsSeasonOakland = out.oaklandState;
@@ -73,9 +76,9 @@ function applySportsSeason_(ctx) {
  * - Never emits "*-playoffs" or "*-finals" without override.
  */
 function deriveCanonSafeSeasonFromMonth_(m) {
-  let oaklandState = "off-season";
-  let chicagoState = "off-season";
-  const activeSports = [];
+  var oaklandState = "off-season";
+  var chicagoState = "off-season";
+  var activeSports = [];
 
   // Oakland baseball
   if (m === 3) {
@@ -108,7 +111,7 @@ function deriveCanonSafeSeasonFromMonth_(m) {
   // Default if somehow empty
   if (activeSports.length === 0) activeSports.push("off-season");
 
-  return { oaklandState, chicagoState, activeSports };
+  return { oaklandState: oaklandState, chicagoState: chicagoState, activeSports: activeSports };
 }
 
 /**
@@ -117,10 +120,10 @@ function deriveCanonSafeSeasonFromMonth_(m) {
  * because override is your injected canon.
  */
 function buildActiveSportsFromOverride_(oaklandState, chicagoState) {
-  const active = [];
+  var active = [];
 
   if (oaklandState) {
-    const os = oaklandState.toLowerCase();
+    var os = oaklandState.toLowerCase();
 
     if (os === "spring-training") active.push("baseball-spring");
     else if (os === "early-season" || os === "regular-season") active.push("baseball");
@@ -132,7 +135,7 @@ function buildActiveSportsFromOverride_(oaklandState, chicagoState) {
   }
 
   if (chicagoState) {
-    const cs = chicagoState.toLowerCase();
+    var cs = chicagoState.toLowerCase();
 
     if (cs === "preseason") active.push("basketball-preseason");
     else if (cs === "regular-season") active.push("basketball");

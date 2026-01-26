@@ -28,60 +28,60 @@
 
 function applyDemographicDrift_(ctx) {
 
-  const sheet = ctx.ss.getSheetByName('World_Population');
+  var sheet = ctx.ss.getSheetByName('World_Population');
   if (!sheet) return;
 
-  const values = sheet.getDataRange().getValues();
+  var values = sheet.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const row = values[1];
-  const idx = name => header.indexOf(name);
+  var header = values[0];
+  var row = values[1];
+  var idx = function(name) { return header.indexOf(name); };
 
-  const iTotal = idx('totalPopulation');
-  const iIll = idx('illnessRate');
-  const iEmp = idx('employmentRate');
-  const iMig = idx('migration');
-  const iEcon = idx('economy');
+  var iTotal = idx('totalPopulation');
+  var iIll = idx('illnessRate');
+  var iEmp = idx('employmentRate');
+  var iMig = idx('migration');
+  var iEcon = idx('economy');
 
-  let total = Number(row[iTotal] || 0);
-  let ill = Number(row[iIll] || 0.05);
-  let emp = Number(row[iEmp] || 0.91);
-  let mig = Number(row[iMig] || 0);
-  let econ = (row[iEcon] || "stable").toString();
+  var total = Number(row[iTotal] || 0);
+  var ill = Number(row[iIll] || 0.05);
+  var emp = Number(row[iEmp] || 0.91);
+  var mig = Number(row[iMig] || 0);
+  var econ = (row[iEcon] || "stable").toString();
 
   // Helper for clean decimals
-  const round4 = v => Math.round(v * 10000) / 10000;
-  const round2 = v => Math.round(v * 100) / 100;
+  var round4 = function(v) { return Math.round(v * 10000) / 10000; };
+  var round2 = function(v) { return Math.round(v * 100) / 100; };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary;
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
+  var S = ctx.summary;
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const econMood = S.economicMood || 50;
+  var econMood = S.economicMood || 50;
 
   // Calendar context (v2.2)
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // Track changes for summary
-  const changes = [];
+  var changes = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // 1. ILLNESS DRIFT
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const prevIll = ill;
+  var prevIll = ill;
 
   // Base downward drift
   ill += (Math.random() - 0.6) * 0.0004;
@@ -109,11 +109,11 @@ function applyDemographicDrift_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Gathering holidays increase illness spread
-  const gatheringHolidays = [
-    "Thanksgiving", "Holiday", "NewYearsEve", "NewYear", 
+  var gatheringHolidays = [
+    "Thanksgiving", "Holiday", "NewYearsEve", "NewYear",
     "Independence", "OpeningDay", "OaklandPride"
   ];
-  if (gatheringHolidays.includes(holiday)) {
+  if (gatheringHolidays.indexOf(holiday) >= 0) {
     ill += 0.0006;
   }
 
@@ -144,7 +144,7 @@ function applyDemographicDrift_(ctx) {
   // 2. EMPLOYMENT DRIFT
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const prevEmp = emp;
+  var prevEmp = emp;
 
   // Tend toward 0.90–0.93 band
   if (emp < 0.90) emp += 0.0003;
@@ -166,14 +166,14 @@ function applyDemographicDrift_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Retail holidays boost temporary employment
-  const retailHolidays = ["Holiday", "BlackFriday", "Valentine", "MothersDay", "FathersDay"];
-  if (retailHolidays.includes(holiday)) {
+  var retailHolidays = ["Holiday", "BlackFriday", "Valentine", "MothersDay", "FathersDay"];
+  if (retailHolidays.indexOf(holiday) >= 0) {
     emp += 0.0008;
   }
 
   // Service industry holidays boost employment
-  const serviceHolidays = ["Independence", "MemorialDay", "LaborDay", "CincoDeMayo"];
-  if (serviceHolidays.includes(holiday)) {
+  var serviceHolidays = ["Independence", "MemorialDay", "LaborDay", "CincoDeMayo"];
+  if (serviceHolidays.indexOf(holiday) >= 0) {
     emp += 0.0005;
   }
 
@@ -211,7 +211,7 @@ function applyDemographicDrift_(ctx) {
   // 3. MIGRATION DRIFT
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const prevMig = mig;
+  var prevMig = mig;
 
   // Natural damping back to neutral
   if (Math.abs(mig) > 50 && Math.random() < 0.6) {
@@ -236,44 +236,44 @@ function applyDemographicDrift_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Travel holidays create volatility (people visiting AND leaving)
-  const travelHolidays = [
+  var travelHolidays = [
     "Thanksgiving", "Holiday", "NewYear", "NewYearsEve",
     "MemorialDay", "LaborDay", "Independence"
   ];
-  if (travelHolidays.includes(holiday)) {
+  if (travelHolidays.indexOf(holiday) >= 0) {
     mig += Math.round((Math.random() - 0.5) * 50); // High volatility
   }
 
   // Gathering holidays tend to draw people IN
-  const gatheringDraw = [
-    "OpeningDay", "OaklandPride", "ArtSoulFestival", 
+  var gatheringDraw = [
+    "OpeningDay", "OaklandPride", "ArtSoulFestival",
     "Juneteenth", "CincoDeMayo", "DiaDeMuertos"
   ];
-  if (gatheringDraw.includes(holiday)) {
+  if (gatheringDraw.indexOf(holiday) >= 0) {
     mig += Math.round(Math.random() * 40); // Positive inflow
   }
 
   // Cultural visitor holidays
-  const culturalVisitors = [
-    "DiaDeMuertos", "CincoDeMayo", "Juneteenth", 
+  var culturalVisitors = [
+    "DiaDeMuertos", "CincoDeMayo", "Juneteenth",
     "BlackHistoryMonth", "PrideMonth", "LunarNewYear"
   ];
-  if (culturalVisitors.includes(holiday)) {
+  if (culturalVisitors.indexOf(holiday) >= 0) {
     mig += Math.round(Math.random() * 25); // Cultural tourism
   }
 
   // Minor holidays have smaller effects
-  const minorHolidays = [
+  var minorHolidays = [
     "Valentine", "StPatricksDay", "Easter", "Halloween",
     "MothersDay", "FathersDay", "EarthDay"
   ];
-  if (minorHolidays.includes(holiday)) {
+  if (minorHolidays.indexOf(holiday) >= 0) {
     mig += Math.round((Math.random() - 0.5) * 20);
   }
 
   // Civic rest holidays - minimal movement
-  const civicRest = ["MLKDay", "PresidentsDay", "VeteransDay"];
-  if (civicRest.includes(holiday)) {
+  var civicRest = ["MLKDay", "PresidentsDay", "VeteransDay"];
+  if (civicRest.indexOf(holiday) >= 0) {
     mig += Math.round((Math.random() - 0.5) * 10);
   }
 
@@ -334,7 +334,7 @@ function applyDemographicDrift_(ctx) {
   // 4. ECONOMY LABEL UPDATE
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const prevEcon = econ;
+  var prevEcon = econ;
 
   // Economy follows economic mood from ripple engine
   if (econMood >= 70) econ = "booming";

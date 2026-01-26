@@ -43,13 +43,13 @@ function mulberry32_(seed) {
 }
 
 function buildCityEvents_(ctx) {
-  const S = ctx.summary || (ctx.summary = {});
+  var S = ctx.summary || (ctx.summary = {});
 
   // ═══════════════════════════════════════════════════════════════════════════
   // RNG SETUP (v2.4)
   // Prefer injected RNG, else seed-based, else Math.random
   // ═══════════════════════════════════════════════════════════════════════════
-  const rng = (typeof ctx.rng === "function")
+  var rng = (typeof ctx.rng === "function")
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
       ? mulberry32_((ctx.config.rngSeed >>> 0) ^ ((S.cycleId || ctx.config.cycleCount || 0) >>> 0))
@@ -58,30 +58,30 @@ function buildCityEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || {};
-  const sentiment = dynamics.sentiment || 0;
-  const publicSpace = dynamics.publicSpaces || 1;
-  const nightlife = dynamics.nightlife || 1;
-  const culturalActivity = dynamics.culturalActivity || 1;
-  const communityEngagement = dynamics.communityEngagement || 1;
-  const econMood = S.economicMood || 50;
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {};
+  var sentiment = dynamics.sentiment || 0;
+  var publicSpace = dynamics.publicSpaces || 1;
+  var nightlife = dynamics.nightlife || 1;
+  var culturalActivity = dynamics.culturalActivity || 1;
+  var communityEngagement = dynamics.communityEngagement || 1;
+  var econMood = S.economicMood || 50;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = !!S.isFirstFriday;
-  const isCreationDay = !!S.isCreationDay;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = !!S.isFirstFriday;
+  var isCreationDay = !!S.isCreationDay;
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // Build calendar tags for traceability
-  const calendarTags = (() => {
-    const tags = [];
+  var calendarTags = (function() {
+    var tags = [];
     if (holiday !== "none") tags.push("holiday:" + holiday);
     if (holidayPriority !== "none") tags.push("holidayPriority:" + holidayPriority);
     if (isFirstFriday) tags.push("firstFriday");
@@ -93,32 +93,36 @@ function buildCityEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // TAG HELPERS (v2.4)
   // ═══════════════════════════════════════════════════════════════════════════
-  const addTag = (tags, t) => {
+  function addTag(tags, t) {
     if (!t) return tags;
     if (tags.indexOf(t) === -1) tags.push(t);
     return tags;
-  };
+  }
 
-  const mergeTags = (a, b) => {
-    const out = (a || []).slice();
-    for (const t of (b || [])) addTag(out, t);
+  function mergeTags(a, b) {
+    var out = (a || []).slice();
+    var bArr = b || [];
+    for (var i = 0; i < bArr.length; i++) {
+      addTag(out, bArr[i]);
+    }
     return out;
-  };
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WEIGHT POOL (v2.4)
   // Accumulates weights by event name instead of duplicating array entries
   // ═══════════════════════════════════════════════════════════════════════════
-  const poolByName = Object.create(null);
+  var poolByName = Object.create(null);
 
   function addEvents_(events, weight, sourceTags) {
     if (!Array.isArray(events) || events.length === 0) return;
-    const w = (typeof weight === "number" && isFinite(weight) && weight > 0) ? weight : 1;
-    const baseTags = mergeTags(calendarTags, sourceTags);
+    var w = (typeof weight === "number" && isFinite(weight) && weight > 0) ? weight : 1;
+    var baseTags = mergeTags(calendarTags, sourceTags);
 
-    for (const e of events) {
+    for (var i = 0; i < events.length; i++) {
+      var e = events[i];
       if (!e || !e.name) continue;
-      const key = e.name;
+      var key = e.name;
 
       if (!poolByName[key]) {
         poolByName[key] = {
@@ -143,7 +147,7 @@ function buildCityEvents_(ctx) {
   // BASE EVENT POOLS (Oakland - 12 neighborhoods)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const SPRING = [
+  var SPRING = [
     { name: "Lake Merritt Blossom Walk", neighborhood: "Lake Merritt" },
     { name: "Temescal Spring Arts Pop-Up", neighborhood: "Temescal" },
     { name: "Rockridge Garden Market", neighborhood: "Rockridge" },
@@ -152,7 +156,7 @@ function buildCityEvents_(ctx) {
     { name: "KONO Flower Market", neighborhood: "KONO" }
   ];
 
-  const SUMMER = [
+  var SUMMER = [
     { name: "Jack London Estuary Jazz Fest", neighborhood: "Jack London" },
     { name: "Lake Merritt Concert Series", neighborhood: "Lake Merritt" },
     { name: "Fruitvale Street Food Carnival", neighborhood: "Fruitvale" },
@@ -161,7 +165,7 @@ function buildCityEvents_(ctx) {
     { name: "Piedmont Ave Sidewalk Sale", neighborhood: "Piedmont Ave" }
   ];
 
-  const FALL = [
+  var FALL = [
     { name: "Temescal Harvest Fair", neighborhood: "Temescal" },
     { name: "Rockridge Autumn Walk", neighborhood: "Rockridge" },
     { name: "Laurel District Craft Expo", neighborhood: "Laurel" },
@@ -170,7 +174,7 @@ function buildCityEvents_(ctx) {
     { name: "Chinatown Autumn Moon Festival", neighborhood: "Chinatown" }
   ];
 
-  const WINTER = [
+  var WINTER = [
     { name: "Lake Merritt Lantern Parade", neighborhood: "Lake Merritt" },
     { name: "Downtown Winter Festival", neighborhood: "Downtown" },
     { name: "Jack London Cozy Nights Film Series", neighborhood: "Jack London" },
@@ -179,7 +183,7 @@ function buildCityEvents_(ctx) {
     { name: "Chinatown Winter Lights", neighborhood: "Chinatown" }
   ];
 
-  const CLEAR_EVENTS = [
+  var CLEAR_EVENTS = [
     { name: "Downtown Plaza Noon Music Session", neighborhood: "Downtown" },
     { name: "Lake Merritt Open-Air Book Market", neighborhood: "Lake Merritt" },
     { name: "Temescal Street Vendors Block", neighborhood: "Temescal" },
@@ -187,7 +191,7 @@ function buildCityEvents_(ctx) {
     { name: "Uptown Outdoor Gallery", neighborhood: "Uptown" }
   ];
 
-  const RAIN_EVENTS = [
+  var RAIN_EVENTS = [
     { name: "Rockridge Heated Tent Pop-Up Cafe", neighborhood: "Rockridge" },
     { name: "Downtown Indoor Arts Night", neighborhood: "Downtown" },
     { name: "Temescal Shelter-Hub Spoken Word", neighborhood: "Temescal" },
@@ -195,31 +199,31 @@ function buildCityEvents_(ctx) {
     { name: "KONO Rainy Day Art Walk", neighborhood: "KONO" }
   ];
 
-  const FOG_EVENTS = [
+  var FOG_EVENTS = [
     { name: "Lake Merritt Fog Walk Photography Tour", neighborhood: "Lake Merritt" },
     { name: "Jack London Misty Morning Coffee Club", neighborhood: "Jack London" },
     { name: "West Oakland Industrial Fog Art Exhibit", neighborhood: "West Oakland" }
   ];
 
-  const CHAOS_EVENTS = [
+  var CHAOS_EVENTS = [
     { name: "Downtown Civic Response Meeting", neighborhood: "Downtown" },
     { name: "Fruitvale Emergency Town Briefing", neighborhood: "Fruitvale" },
     { name: "West Oakland Neighborhood Stabilization Panel", neighborhood: "West Oakland" }
   ];
 
-  const HIGH_SENTIMENT = [
+  var HIGH_SENTIMENT = [
     { name: "Lake Merritt Community Joy Parade", neighborhood: "Lake Merritt" },
     { name: "Fruitvale Good News Gathering", neighborhood: "Fruitvale" },
     { name: "Temescal Volunteer Boost Rally", neighborhood: "Temescal" }
   ];
 
-  const LOW_SENTIMENT = [
+  var LOW_SENTIMENT = [
     { name: "Downtown Civic Concern Forum", neighborhood: "Downtown" },
     { name: "West Oakland Neighborhood Watch Meet", neighborhood: "West Oakland" },
     { name: "Fruitvale Public Dialogue Circle", neighborhood: "Fruitvale" }
   ];
 
-  const NIGHTLIFE_EVENTS = [
+  var NIGHTLIFE_EVENTS = [
     { name: "Jack London Neon Terrace DJ Night", neighborhood: "Jack London" },
     { name: "Downtown Rooftop Mixer", neighborhood: "Downtown" },
     { name: "Lake Merritt After-Dark Cultural Showcase", neighborhood: "Lake Merritt" },
@@ -227,25 +231,25 @@ function buildCityEvents_(ctx) {
     { name: "Uptown Club Crawl", neighborhood: "Uptown" }
   ];
 
-  const ECON_BOOM = [
+  var ECON_BOOM = [
     { name: "Downtown Business Gala", neighborhood: "Downtown" },
     { name: "Jack London Startup Showcase", neighborhood: "Jack London" },
     { name: "Rockridge Investment Summit", neighborhood: "Rockridge" }
   ];
 
-  const ECON_BUST = [
+  var ECON_BUST = [
     { name: "Fruitvale Job Fair", neighborhood: "Fruitvale" },
     { name: "West Oakland Community Resource Day", neighborhood: "West Oakland" },
     { name: "Downtown Workers Rights Forum", neighborhood: "Downtown" }
   ];
 
-  const COZY_EVENTS = [
+  var COZY_EVENTS = [
     { name: "Laurel Fireside Reading Night", neighborhood: "Laurel" },
     { name: "Rockridge Candlelit Wine Tasting", neighborhood: "Rockridge" },
     { name: "Temescal Cozy Crafts Workshop", neighborhood: "Temescal" }
   ];
 
-  const PERFECT_WEATHER = [
+  var PERFECT_WEATHER = [
     { name: "Lake Merritt Picnic Festival", neighborhood: "Lake Merritt" },
     { name: "Jack London Outdoor Yoga Session", neighborhood: "Jack London" },
     { name: "Temescal Street Fair", neighborhood: "Temescal" }
@@ -255,14 +259,14 @@ function buildCityEvents_(ctx) {
   // HOLIDAY EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const THANKSGIVING_EVENTS = [
+  var THANKSGIVING_EVENTS = [
     { name: "Downtown Thanksgiving Parade", neighborhood: "Downtown" },
     { name: "Lake Merritt Gratitude Gathering", neighborhood: "Lake Merritt" },
     { name: "Fruitvale Community Feast", neighborhood: "Fruitvale" },
     { name: "West Oakland Turkey Trot", neighborhood: "West Oakland" }
   ];
 
-  const HOLIDAY_EVENTS = [
+  var HOLIDAY_EVENTS = [
     { name: "Downtown Holiday Tree Lighting", neighborhood: "Downtown" },
     { name: "Lake Merritt Festival of Lights", neighborhood: "Lake Merritt" },
     { name: "Rockridge Holiday Stroll", neighborhood: "Rockridge" },
@@ -270,108 +274,108 @@ function buildCityEvents_(ctx) {
     { name: "Jack London Holiday Market", neighborhood: "Jack London" }
   ];
 
-  const NEW_YEARS_EVE_EVENTS = [
+  var NEW_YEARS_EVE_EVENTS = [
     { name: "Downtown Oakland Countdown", neighborhood: "Downtown" },
     { name: "Jack London Waterfront Fireworks", neighborhood: "Jack London" },
     { name: "Lake Merritt Midnight Celebration", neighborhood: "Lake Merritt" },
     { name: "Uptown New Year's Eve Party", neighborhood: "Uptown" }
   ];
 
-  const NEW_YEAR_EVENTS = [
+  var NEW_YEAR_EVENTS = [
     { name: "Lake Merritt Polar Plunge", neighborhood: "Lake Merritt" },
     { name: "Downtown New Year's Day Parade", neighborhood: "Downtown" },
     { name: "Temescal Resolution Run", neighborhood: "Temescal" }
   ];
 
-  const MLK_DAY_EVENTS = [
+  var MLK_DAY_EVENTS = [
     { name: "Downtown MLK March", neighborhood: "Downtown" },
     { name: "West Oakland Dream Rally", neighborhood: "West Oakland" },
     { name: "Fruitvale Unity Gathering", neighborhood: "Fruitvale" },
     { name: "Lake Merritt Peace Walk", neighborhood: "Lake Merritt" }
   ];
 
-  const LUNAR_NEW_YEAR_EVENTS = [
+  var LUNAR_NEW_YEAR_EVENTS = [
     { name: "Chinatown Lunar New Year Parade", neighborhood: "Chinatown" },
     { name: "Chinatown Lion Dance Festival", neighborhood: "Chinatown" },
     { name: "Chinatown Firecracker Ceremony", neighborhood: "Chinatown" },
     { name: "Downtown Asian Heritage Celebration", neighborhood: "Downtown" }
   ];
 
-  const VALENTINE_EVENTS = [
+  var VALENTINE_EVENTS = [
     { name: "Lake Merritt Sweetheart Stroll", neighborhood: "Lake Merritt" },
     { name: "Rockridge Romance Walk", neighborhood: "Rockridge" },
     { name: "Jack London Couples Cruise", neighborhood: "Jack London" }
   ];
 
-  const PRESIDENTS_DAY_EVENTS = [
+  var PRESIDENTS_DAY_EVENTS = [
     { name: "Downtown Presidents Day Observance", neighborhood: "Downtown" },
     { name: "Lake Merritt History Walk", neighborhood: "Lake Merritt" }
   ];
 
-  const ST_PATRICKS_EVENTS = [
+  var ST_PATRICKS_EVENTS = [
     { name: "Jack London St. Patrick's Pub Crawl", neighborhood: "Jack London" },
     { name: "Downtown Green Parade", neighborhood: "Downtown" },
     { name: "Temescal Irish Music Night", neighborhood: "Temescal" }
   ];
 
-  const EASTER_EVENTS = [
+  var EASTER_EVENTS = [
     { name: "Lake Merritt Easter Egg Hunt", neighborhood: "Lake Merritt" },
     { name: "Rockridge Spring Celebration", neighborhood: "Rockridge" },
     { name: "Fruitvale Easter Festival", neighborhood: "Fruitvale" }
   ];
 
-  const EARTH_DAY_EVENTS = [
+  var EARTH_DAY_EVENTS = [
     { name: "Lake Merritt Environmental Fair", neighborhood: "Lake Merritt" },
     { name: "West Oakland Sustainability Summit", neighborhood: "West Oakland" },
     { name: "Temescal Green Market", neighborhood: "Temescal" }
   ];
 
-  const CINCO_DE_MAYO_EVENTS = [
+  var CINCO_DE_MAYO_EVENTS = [
     { name: "Fruitvale Cinco de Mayo Festival", neighborhood: "Fruitvale" },
     { name: "Fruitvale Mariachi Parade", neighborhood: "Fruitvale" },
     { name: "Downtown Cinco Celebration", neighborhood: "Downtown" },
     { name: "Lake Merritt Mexican Heritage Day", neighborhood: "Lake Merritt" }
   ];
 
-  const MOTHERS_DAY_EVENTS = [
+  var MOTHERS_DAY_EVENTS = [
     { name: "Rockridge Mother's Day Brunch Walk", neighborhood: "Rockridge" },
     { name: "Lake Merritt Family Picnic", neighborhood: "Lake Merritt" },
     { name: "Piedmont Ave Mother's Day Market", neighborhood: "Piedmont Ave" }
   ];
 
-  const MEMORIAL_DAY_EVENTS = [
+  var MEMORIAL_DAY_EVENTS = [
     { name: "Downtown Memorial Ceremony", neighborhood: "Downtown" },
     { name: "Mountain View Cemetery Observance", neighborhood: "Piedmont Ave" },
     { name: "Jack London Veterans Tribute", neighborhood: "Jack London" }
   ];
 
-  const JUNETEENTH_EVENTS = [
+  var JUNETEENTH_EVENTS = [
     { name: "West Oakland Juneteenth Festival", neighborhood: "West Oakland" },
     { name: "Downtown Freedom Parade", neighborhood: "Downtown" },
     { name: "Lake Merritt Liberation Celebration", neighborhood: "Lake Merritt" },
     { name: "Fruitvale Juneteenth Block Party", neighborhood: "Fruitvale" }
   ];
 
-  const FATHERS_DAY_EVENTS = [
+  var FATHERS_DAY_EVENTS = [
     { name: "Lake Merritt Father's Day BBQ", neighborhood: "Lake Merritt" },
     { name: "Jack London Dad's Day Out", neighborhood: "Jack London" },
     { name: "Temescal Father-Child Festival", neighborhood: "Temescal" }
   ];
 
-  const INDEPENDENCE_EVENTS = [
+  var INDEPENDENCE_EVENTS = [
     { name: "Jack London Fourth of July Fireworks", neighborhood: "Jack London" },
     { name: "Lake Merritt Independence Celebration", neighborhood: "Lake Merritt" },
     { name: "Downtown Patriotic Parade", neighborhood: "Downtown" },
     { name: "Temescal Red White Blue Block Party", neighborhood: "Temescal" }
   ];
 
-  const LABOR_DAY_EVENTS = [
+  var LABOR_DAY_EVENTS = [
     { name: "Downtown Labor Day Parade", neighborhood: "Downtown" },
     { name: "West Oakland Workers Festival", neighborhood: "West Oakland" },
     { name: "Jack London End of Summer Bash", neighborhood: "Jack London" }
   ];
 
-  const HALLOWEEN_EVENTS = [
+  var HALLOWEEN_EVENTS = [
     { name: "Lake Merritt Ghost Walk", neighborhood: "Lake Merritt" },
     { name: "Temescal Trick-or-Treat Street", neighborhood: "Temescal" },
     { name: "Jack London Halloween Haunted Pier", neighborhood: "Jack London" },
@@ -379,34 +383,34 @@ function buildCityEvents_(ctx) {
     { name: "Laurel District Spooky Stroll", neighborhood: "Laurel" }
   ];
 
-  const DIA_DE_MUERTOS_EVENTS = [
+  var DIA_DE_MUERTOS_EVENTS = [
     { name: "Fruitvale Día de los Muertos Festival", neighborhood: "Fruitvale" },
     { name: "Fruitvale Altar Walk", neighborhood: "Fruitvale" },
     { name: "Downtown Ofrenda Exhibition", neighborhood: "Downtown" },
     { name: "Lake Merritt Marigold Ceremony", neighborhood: "Lake Merritt" }
   ];
 
-  const VETERANS_DAY_EVENTS = [
+  var VETERANS_DAY_EVENTS = [
     { name: "Downtown Veterans Parade", neighborhood: "Downtown" },
     { name: "Jack London Veterans Memorial", neighborhood: "Jack London" },
     { name: "West Oakland Service Recognition", neighborhood: "West Oakland" }
   ];
 
-  const OAKLAND_PRIDE_EVENTS = [
+  var OAKLAND_PRIDE_EVENTS = [
     { name: "Downtown Oakland Pride Parade", neighborhood: "Downtown" },
     { name: "Lake Merritt Pride Festival", neighborhood: "Lake Merritt" },
     { name: "Uptown Pride Block Party", neighborhood: "Uptown" },
     { name: "Jack London Rainbow Celebration", neighborhood: "Jack London" }
   ];
 
-  const ART_SOUL_EVENTS = [
+  var ART_SOUL_EVENTS = [
     { name: "Downtown Art & Soul Festival Main Stage", neighborhood: "Downtown" },
     { name: "Downtown Art & Soul Vendor Village", neighborhood: "Downtown" },
     { name: "Downtown Art & Soul Youth Zone", neighborhood: "Downtown" },
     { name: "Lake Merritt Art & Soul Overflow", neighborhood: "Lake Merritt" }
   ];
 
-  const OPENING_DAY_EVENTS = [
+  var OPENING_DAY_EVENTS = [
     { name: "Jack London Opening Day Block Party", neighborhood: "Jack London" },
     { name: "Jack London Pre-Game Tailgate", neighborhood: "Jack London" },
     { name: "Downtown Baseball Fever Rally", neighborhood: "Downtown" },
@@ -417,7 +421,7 @@ function buildCityEvents_(ctx) {
   // FIRST FRIDAY EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const FIRST_FRIDAY_EVENTS = [
+  var FIRST_FRIDAY_EVENTS = [
     { name: "Uptown First Friday Art Walk", neighborhood: "Uptown" },
     { name: "KONO First Friday Gallery Hop", neighborhood: "KONO" },
     { name: "Temescal First Friday Art Stroll", neighborhood: "Temescal" },
@@ -430,7 +434,7 @@ function buildCityEvents_(ctx) {
   // CREATION DAY EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const CREATION_DAY_EVENTS = [
+  var CREATION_DAY_EVENTS = [
     { name: "Downtown Oakland Founders Day Ceremony", neighborhood: "Downtown" },
     { name: "Lake Merritt Creation Day Gathering", neighborhood: "Lake Merritt" },
     { name: "West Oakland Heritage Walk", neighborhood: "West Oakland" },
@@ -442,20 +446,20 @@ function buildCityEvents_(ctx) {
   // SPORTS SEASON EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const SPORTS_BASE = [
+  var SPORTS_BASE = [
     { name: "Jack London Pre-Game Block Party", neighborhood: "Jack London" },
     { name: "Downtown Sports Bar Crawl", neighborhood: "Downtown" },
     { name: "Lake Merritt Tailgate Gathering", neighborhood: "Lake Merritt" }
   ];
 
-  const CHAMPIONSHIP_EVENTS = [
+  var CHAMPIONSHIP_EVENTS = [
     { name: "Downtown Championship Watch Party", neighborhood: "Downtown" },
     { name: "Jack London Championship Rally", neighborhood: "Jack London" },
     { name: "Lake Merritt Title Celebration", neighborhood: "Lake Merritt" },
     { name: "Uptown Championship Fever", neighborhood: "Uptown" }
   ];
 
-  const PLAYOFF_EVENTS = [
+  var PLAYOFF_EVENTS = [
     { name: "Jack London Playoff Tailgate", neighborhood: "Jack London" },
     { name: "Downtown Playoff Watch Zone", neighborhood: "Downtown" },
     { name: "Lake Merritt Fan Gathering", neighborhood: "Lake Merritt" }
@@ -465,7 +469,7 @@ function buildCityEvents_(ctx) {
   // CULTURAL ACTIVITY EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const HIGH_CULTURAL_EVENTS = [
+  var HIGH_CULTURAL_EVENTS = [
     { name: "Uptown Cultural Showcase", neighborhood: "Uptown" },
     { name: "KONO Arts District Celebration", neighborhood: "KONO" },
     { name: "Downtown Cultural Festival", neighborhood: "Downtown" }
@@ -475,7 +479,7 @@ function buildCityEvents_(ctx) {
   // COMMUNITY ENGAGEMENT EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const HIGH_ENGAGEMENT_EVENTS = [
+  var HIGH_ENGAGEMENT_EVENTS = [
     { name: "Lake Merritt Community Circle", neighborhood: "Lake Merritt" },
     { name: "West Oakland Neighborhood Assembly", neighborhood: "West Oakland" },
     { name: "Fruitvale Community Action Day", neighborhood: "Fruitvale" }
@@ -583,18 +587,22 @@ function buildCityEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FINAL POOL ARRAY
   // ═══════════════════════════════════════════════════════════════════════════
-  const pool = Object.keys(poolByName).map(k => poolByName[k]);
+  var poolKeys = Object.keys(poolByName);
+  var pool = [];
+  for (var pi = 0; pi < poolKeys.length; pi++) {
+    pool.push(poolByName[poolKeys[pi]]);
+  }
 
   // Fallback
   if (pool.length === 0) {
     S.cityEvents = [];
     S.cityEventDetails = [];
     S.cityEventsCalendarContext = {
-      holiday,
-      holidayPriority,
-      isFirstFriday,
-      isCreationDay,
-      sportsSeason
+      holiday: holiday,
+      holidayPriority: holidayPriority,
+      isFirstFriday: isFirstFriday,
+      isCreationDay: isCreationDay,
+      sportsSeason: sportsSeason
     };
     ctx.summary = S;
     return;
@@ -603,7 +611,7 @@ function buildCityEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // EVENT COUNT (deterministic)
   // ═══════════════════════════════════════════════════════════════════════════
-  let count = rng() < 0.3 ? 2 : 1;
+  var count = rng() < 0.3 ? 2 : 1;
 
   // Calendar increases event count
   if (holidayPriority === "major" || holidayPriority === "oakland") count = Math.max(count, 2);
@@ -616,53 +624,67 @@ function buildCityEvents_(ctx) {
   // Mathematically correct weighted random selection
   // ═══════════════════════════════════════════════════════════════════════════
   function weightedSampleWithoutReplacement_(items, k) {
-    const chosen = [];
-    const work = items.map(e => ({
-      name: e.name,
-      neighborhood: e.neighborhood,
-      tags: Array.isArray(e.tags) ? e.tags.slice() : [],
-      weight: (typeof e.weight === "number" && e.weight > 0) ? e.weight : 1
-    }));
+    var chosen = [];
+    var work = [];
+    for (var wi = 0; wi < items.length; wi++) {
+      var e = items[wi];
+      work.push({
+        name: e.name,
+        neighborhood: e.neighborhood,
+        tags: Array.isArray(e.tags) ? e.tags.slice() : [],
+        weight: (typeof e.weight === "number" && e.weight > 0) ? e.weight : 1
+      });
+    }
 
     k = Math.max(0, Math.min(k, work.length));
 
-    for (let i = 0; i < k; i++) {
-      let total = 0;
-      for (const it of work) total += it.weight;
+    for (var i = 0; i < k; i++) {
+      var total = 0;
+      for (var ti = 0; ti < work.length; ti++) {
+        total += work[ti].weight;
+      }
 
-      let r = rng() * total;
-      let idx = 0;
+      var r = rng() * total;
+      var idx = 0;
       for (; idx < work.length; idx++) {
-        const w = work[idx].weight;
+        var w = work[idx].weight;
         if (r < w) break;
         r -= w;
       }
       // Guard against floating-point edge case where r doesn't drop below 0
-      const picked = work.splice(Math.min(idx, work.length - 1), 1)[0];
+      var picked = work.splice(Math.min(idx, work.length - 1), 1)[0];
       chosen.push(picked);
     }
     return chosen;
   }
 
-  const selected = weightedSampleWithoutReplacement_(pool, count);
+  var selected = weightedSampleWithoutReplacement_(pool, count);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OUTPUT (compatible + richer details)
   // ═══════════════════════════════════════════════════════════════════════════
-  S.cityEvents = selected.map(e => e.name);
-  S.cityEventDetails = selected.map(e => ({
-    name: e.name,
-    neighborhood: e.neighborhood,
-    tags: e.tags || calendarTags,
-    weight: e.weight
-  }));
+  S.cityEvents = [];
+  for (var si = 0; si < selected.length; si++) {
+    S.cityEvents.push(selected[si].name);
+  }
+
+  S.cityEventDetails = [];
+  for (var di = 0; di < selected.length; di++) {
+    var ev = selected[di];
+    S.cityEventDetails.push({
+      name: ev.name,
+      neighborhood: ev.neighborhood,
+      tags: ev.tags || calendarTags,
+      weight: ev.weight
+    });
+  }
 
   S.cityEventsCalendarContext = {
-    holiday,
-    holidayPriority,
-    isFirstFriday,
-    isCreationDay,
-    sportsSeason,
+    holiday: holiday,
+    holidayPriority: holidayPriority,
+    isFirstFriday: isFirstFriday,
+    isCreationDay: isCreationDay,
+    sportsSeason: sportsSeason,
     eventCount: selected.length
   };
 

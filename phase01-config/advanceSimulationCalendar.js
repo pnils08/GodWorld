@@ -24,29 +24,29 @@
 
 function advanceSimulationCalendar_(ctx) {
 
-  const sheet = ctx.ss.getSheetByName('Simulation_Calendar');
+  var sheet = ctx.ss.getSheetByName('Simulation_Calendar');
   if (!sheet) return;
 
-  const S = ctx.summary;
+  var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // GET ABSOLUTE CYCLE (source of truth)
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   // Absolute cycle comes from World_Config (set by advanceWorldTime_)
-  const absoluteCycle = ctx.config.cycleCount || S.cycleId || 1;
+  var absoluteCycle = ctx.config.cycleCount || S.cycleId || 1;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALCULATE GODWORLD YEAR AND CYCLE OF YEAR
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const godWorldYear = Math.ceil(absoluteCycle / 52);
-  const cycleOfYear = ((absoluteCycle - 1) % 52) + 1;
+
+  var godWorldYear = Math.ceil(absoluteCycle / 52);
+  var cycleOfYear = ((absoluteCycle - 1) % 52) + 1;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DERIVE SIMMONTH FROM CYCLE (per GodWorld Calendar v1.0)
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   // Month-to-cycle mapping:
   // January:   1-5   (5 cycles)
   // February:  6-9   (4 cycles)
@@ -61,8 +61,8 @@ function advanceSimulationCalendar_(ctx) {
   // November:  45-48 (4 cycles)
   // December:  49-52 (4 cycles)
 
-  let simMonth = 1;
-  let cycleInMonth = 1;
+  var simMonth = 1;
+  var cycleInMonth = 1;
   
   if (cycleOfYear >= 1 && cycleOfYear <= 5) {
     simMonth = 1;
@@ -105,30 +105,30 @@ function advanceSimulationCalendar_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SEASON CALCULATION (from SimMonth)
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  let season = "Spring";
+
+  var season = "Spring";
   if (typeof getSimSeason_ === 'function') {
     season = getSimSeason_(simMonth);
   } else {
     // Fallback calculation
-    if ([12, 1, 2].includes(simMonth)) season = "Winter";
-    else if ([3, 4, 5].includes(simMonth)) season = "Spring";
-    else if ([6, 7, 8].includes(simMonth)) season = "Summer";
+    if ([12, 1, 2].indexOf(simMonth) >= 0) season = "Winter";
+    else if ([3, 4, 5].indexOf(simMonth) >= 0) season = "Spring";
+    else if ([6, 7, 8].indexOf(simMonth) >= 0) season = "Summer";
     else season = "Fall";
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY CALCULATION (from Cycle, not date)
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  let holiday = "none";
-  let holidayDetails = null;
-  
+
+  var holiday = "none";
+  var holidayDetails = null;
+
   if (typeof getSimHoliday_ === 'function') {
     // v2.3+ takes cycleOfYear
     holiday = getSimHoliday_(cycleOfYear);
   }
-  
+
   if (typeof getSimHolidayDetails_ === 'function') {
     holidayDetails = getSimHolidayDetails_(cycleOfYear);
   }
@@ -136,22 +136,22 @@ function advanceSimulationCalendar_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY CHECK
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  let isFirstFriday = false;
+
+  var isFirstFriday = false;
   if (typeof isFirstFridayCycle_ === 'function') {
     isFirstFriday = isFirstFridayCycle_(cycleOfYear);
   } else {
     // Fallback: first cycle of each month
-    const firstFridayCycles = [1, 6, 10, 14, 18, 23, 27, 31, 36, 40, 45, 49];
-    isFirstFriday = firstFridayCycles.includes(cycleOfYear);
+    var firstFridayCycles = [1, 6, 10, 14, 18, 23, 27, 31, 36, 40, 45, 49];
+    isFirstFriday = firstFridayCycles.indexOf(cycleOfYear) >= 0;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY CHECK
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const isCreationDay = (cycleOfYear === 48);
-  const creationDayAnniversary = isCreationDay ? godWorldYear - 1 : null;
+
+  var isCreationDay = (cycleOfYear === 48);
+  var creationDayAnniversary = isCreationDay ? godWorldYear - 1 : null;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WRITE TO SIMULATION_CALENDAR SHEET
@@ -172,18 +172,18 @@ function advanceSimulationCalendar_(ctx) {
   sheet.getRange(2, 5).setValue(holiday);
   
   // Optional: Write cycle info to Notes column
-  const cycleNote = "Cycle " + cycleOfYear + " (Abs: " + absoluteCycle + ")";
+  var cycleNote = "Cycle " + cycleOfYear + " (Abs: " + absoluteCycle + ")";
   sheet.getRange(2, 6).setValue(cycleNote);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // MONTH NAME LOOKUP
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  const monthNames = [
+
+  var monthNames = [
     "", "January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
-  const monthName = monthNames[simMonth] || "Unknown";
+  var monthName = monthNames[simMonth] || "Unknown";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SUMMARY FIELDS
@@ -212,10 +212,10 @@ function advanceSimulationCalendar_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // BASELINE WEATHER (if none already generated)
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   if (!S.weather) {
-    let baseType = "clear";
-    let baseImpact = 1.0;
+    var baseType = "clear";
+    var baseImpact = 1.0;
 
     if (season === "Winter") {
       baseImpact = 1.2;
@@ -238,10 +238,10 @@ function advanceSimulationCalendar_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // BASELINE WEATHER MOOD (if none already generated)
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   if (!S.weatherMood) {
-    let primaryMood = "neutral";
-    let comfortIndex = 0.5;
+    var primaryMood = "neutral";
+    var comfortIndex = 0.5;
 
     if (season === "Winter") {
       primaryMood = "cozy";
@@ -269,9 +269,9 @@ function advanceSimulationCalendar_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY MOOD MODIFIER
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   if (holiday !== "none" && S.weatherMood) {
-    const priority = S.holidayPriority;
+    var priority = S.holidayPriority;
     
     if (priority === "major") {
       S.weatherMood.holidayEnergy = 0.8;

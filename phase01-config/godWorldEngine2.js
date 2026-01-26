@@ -94,7 +94,7 @@ function safePhaseCall_(ctx, phaseName, fn) {
 }
 
 function runWorldCycle() {
-  const SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
+  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
 
   var ss, ctx;
 
@@ -105,7 +105,7 @@ function runWorldCycle() {
     throw e; // Cannot continue without spreadsheet
   }
 
-  const now = new Date();
+  var now = new Date();
 
   // Initialize sheet cache for reduced API calls (v2.10)
   var cache = createSheetCache_(ss);
@@ -399,37 +399,37 @@ function updateWorldPopulation_(ctx) {
   // v2.10: Use createColIndex_ for efficient lookups
   var idx = createColIndex_(header);
 
-  const iTotal = idx('totalPopulation');
-  const iIll = idx('illnessRate');
-  const iEmp = idx('employmentRate');
-  const iMig = idx('migration');
-  const iEcon = idx('economy');
+  var iTotal = idx('totalPopulation');
+  var iIll = idx('illnessRate');
+  var iEmp = idx('employmentRate');
+  var iMig = idx('migration');
+  var iEcon = idx('economy');
 
-  let total = Number(row[iTotal] || 0);
-  let ill = Number(row[iIll] || 0.05);
-  let emp = Number(row[iEmp] || 0.91);
-  let mig = Number(row[iMig] || 0);
-  let econ = (row[iEcon] || "stable").toString();
+  var total = Number(row[iTotal] || 0);
+  var ill = Number(row[iIll] || 0.05);
+  var emp = Number(row[iEmp] || 0.91);
+  var mig = Number(row[iMig] || 0);
+  var econ = (row[iEcon] || "stable").toString();
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary;
-  
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { 
+  var S = ctx.summary;
+
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {
     sentiment: 0, publicSpaces: 1, traffic: 1,
-    culturalActivity: 1, communityEngagement: 1 
+    culturalActivity: 1, communityEngagement: 1
   };
-  const sports = S.sportsSeason || "off-season";
+  var sports = S.sportsSeason || "off-season";
 
   // Calendar context
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // 1. ILLNESS UPDATE
@@ -452,17 +452,17 @@ function updateWorldPopulation_(ctx) {
   if (dynamics.sentiment <= -0.5) ill += 0.0004;
 
   // Holiday illness patterns - large gatherings increase transmission
-  const gatheringHolidays = [
+  var gatheringHolidays = [
     "Thanksgiving", "Holiday", "NewYearsEve", "NewYear",
     "Independence", "OpeningDay", "OaklandPride"
   ];
-  if (gatheringHolidays.includes(holiday)) {
+  if (gatheringHolidays.indexOf(holiday) >= 0) {
     ill += 0.0006;
   }
 
   // Post-holiday illness bump (winter holidays especially)
-  const winterHolidays = ["Holiday", "NewYear", "Hanukkah"];
-  if (winterHolidays.includes(holiday) && season === "Winter") {
+  var winterHolidays = ["Holiday", "NewYear", "Hanukkah"];
+  if (winterHolidays.indexOf(holiday) >= 0 && season === "Winter") {
     ill += 0.0004;
   }
 
@@ -494,14 +494,14 @@ function updateWorldPopulation_(ctx) {
   if (weather.impact >= 1.3) emp -= 0.0005;
 
   // Holiday employment effects - retail holidays boost employment
-  const retailHolidays = ["Holiday", "BlackFriday", "Valentine", "MothersDay", "FathersDay"];
-  if (retailHolidays.includes(holiday)) {
+  var retailHolidays = ["Holiday", "BlackFriday", "Valentine", "MothersDay", "FathersDay"];
+  if (retailHolidays.indexOf(holiday) >= 0) {
     emp += 0.0008;
   }
 
   // Summer/outdoor event holidays boost service employment
-  const serviceHolidays = ["Independence", "MemorialDay", "LaborDay", "CincoDeMayo"];
-  if (serviceHolidays.includes(holiday)) {
+  var serviceHolidays = ["Independence", "MemorialDay", "LaborDay", "CincoDeMayo"];
+  if (serviceHolidays.indexOf(holiday) >= 0) {
     emp += 0.0005;
   }
 
@@ -529,8 +529,8 @@ function updateWorldPopulation_(ctx) {
   // 3. BIRTHS & DEATHS (SEASON-ADJUSTED + ILLNESS-COUPLED v2.11)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  let baseBirthRate = 0.010;
-  let baseDeathRate = 0.008;
+  var baseBirthRate = 0.010;
+  var baseDeathRate = 0.008;
 
   // Seasonal patterns
   if (season === "Summer") baseBirthRate += 0.002;
@@ -547,12 +547,12 @@ function updateWorldPopulation_(ctx) {
   // At 5% illness (baseline): no modifier
   // At 10% illness: +0.001 death rate
   // At 15% illness (max): +0.002 death rate
-  const ILLNESS_MORTALITY_FACTOR = 0.02; // 2% of illness rate adds to death rate
-  const illnessDeathModifier = Math.max(0, (ill - 0.05)) * ILLNESS_MORTALITY_FACTOR;
+  var ILLNESS_MORTALITY_FACTOR = 0.02; // 2% of illness rate adds to death rate
+  var illnessDeathModifier = Math.max(0, (ill - 0.05)) * ILLNESS_MORTALITY_FACTOR;
   baseDeathRate += illnessDeathModifier;
 
-  const births = Math.round(total * baseBirthRate);
-  const deaths = Math.round(total * baseDeathRate);
+  var births = Math.round(total * baseBirthRate);
+  var deaths = Math.round(total * baseDeathRate);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // 4. MIGRATION UPDATE (Full Calendar Awareness)
@@ -562,44 +562,44 @@ function updateWorldPopulation_(ctx) {
   mig += Math.round((Math.random() - 0.5) * 20);
 
   // TRAVEL HOLIDAYS - High movement volatility
-  const travelHolidays = [
+  var travelHolidays = [
     "Thanksgiving", "Holiday", "NewYear", "NewYearsEve",
     "MemorialDay", "LaborDay", "Independence"
   ];
-  if (travelHolidays.includes(holiday)) {
+  if (travelHolidays.indexOf(holiday) >= 0) {
     mig += Math.round((Math.random() - 0.5) * 50);
   }
 
   // GATHERING HOLIDAYS - Net inflow for celebrations
-  const gatheringInflow = [
+  var gatheringInflow = [
     "OpeningDay", "OaklandPride", "ArtSoulFestival",
     "Juneteenth", "CincoDeMayo", "DiaDeMuertos"
   ];
-  if (gatheringInflow.includes(holiday)) {
+  if (gatheringInflow.indexOf(holiday) >= 0) {
     mig += Math.round(Math.random() * 40);
   }
 
   // CULTURAL HOLIDAYS - Diaspora visitors
-  const culturalVisitorHolidays = [
+  var culturalVisitorHolidays = [
     "DiaDeMuertos", "CincoDeMayo", "Juneteenth",
     "BlackHistoryMonth", "PrideMonth", "LunarNewYear"
   ];
-  if (culturalVisitorHolidays.includes(holiday)) {
+  if (culturalVisitorHolidays.indexOf(holiday) >= 0) {
     mig += Math.round(Math.random() * 25);
   }
 
   // MINOR HOLIDAYS - Slight local movement
-  const minorHolidays = [
+  var minorHolidays = [
     "Valentine", "StPatricksDay", "Easter", "Halloween",
     "MothersDay", "FathersDay", "EarthDay"
   ];
-  if (minorHolidays.includes(holiday)) {
+  if (minorHolidays.indexOf(holiday) >= 0) {
     mig += Math.round((Math.random() - 0.5) * 20);
   }
 
   // CIVIC OBSERVATION HOLIDAYS - Reduced movement
-  const civicRestHolidays = ["MLKDay", "PresidentsDay", "VeteransDay"];
-  if (civicRestHolidays.includes(holiday)) {
+  var civicRestHolidays = ["MLKDay", "PresidentsDay", "VeteransDay"];
+  if (civicRestHolidays.indexOf(holiday) >= 0) {
     mig += Math.round((Math.random() - 0.5) * 10);
   }
 
@@ -650,8 +650,8 @@ function updateWorldPopulation_(ctx) {
 
   // v2.11: Clamp migration to prevent unrealistic swings
   // Max migration per cycle = 0.5% of total population
-  const MAX_MIGRATION_RATE = 0.005;
-  const maxMigration = Math.round(total * MAX_MIGRATION_RATE);
+  var MAX_MIGRATION_RATE = 0.005;
+  var maxMigration = Math.round(total * MAX_MIGRATION_RATE);
   mig = Math.max(-maxMigration, Math.min(maxMigration, mig));
 
   total = total + births - deaths + mig;
@@ -718,36 +718,48 @@ function updateWorldPopulation_(ctx) {
  * Stages all valid rows in memory first, then batch writes.
  * Prevents partial intake corruption if cycle crashes mid-execution.
  */
+/**
+ * Helper: Pad string to specified length (ES5-compatible padStart replacement)
+ */
+function padStart_(str, targetLength, padChar) {
+  str = String(str);
+  padChar = padChar || '0';
+  while (str.length < targetLength) {
+    str = padChar + str;
+  }
+  return str;
+}
+
 function processIntake_(ctx) {
-  const intake = ctx.ss.getSheetByName('Intake');
-  const ledger = ctx.ss.getSheetByName('Simulation_Ledger');
+  var intake = ctx.ss.getSheetByName('Intake');
+  var ledger = ctx.ss.getSheetByName('Simulation_Ledger');
   if (!intake || !ledger) return;
 
-  const intakeVals = intake.getDataRange().getValues();
+  var intakeVals = intake.getDataRange().getValues();
   if (intakeVals.length < 2) return;
 
-  const intakeHeader = intakeVals[0];
-  const ledgerVals = ledger.getDataRange().getValues();
-  const ledgerHeader = ledgerVals[0];
+  var intakeHeader = intakeVals[0];
+  var ledgerVals = ledger.getDataRange().getValues();
+  var ledgerHeader = ledgerVals[0];
 
-  const idxI = name => intakeHeader.indexOf(name);
-  const idxL = name => ledgerHeader.indexOf(name);
+  var idxI = function(name) { return intakeHeader.indexOf(name); };
+  var idxL = function(name) { return ledgerHeader.indexOf(name); };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // STAGE 1: Validate and stage all rows in memory
   // ═══════════════════════════════════════════════════════════════════════════
-  const stagedRows = [];
-  const rowsToClear = [];
-  let nextPopNum = getMaxPopId_(ledgerVals) + 1;
+  var stagedRows = [];
+  var rowsToClear = [];
+  var nextPopNum = getMaxPopId_(ledgerVals) + 1;
 
   // Track names we're adding in this batch to prevent intra-batch duplicates
-  const batchNames = new Set();
+  var batchNames = new Set();
 
-  for (let r = 1; r < intakeVals.length; r++) {
-    const row = intakeVals[r];
+  for (var r = 1; r < intakeVals.length; r++) {
+    var row = intakeVals[r];
 
-    const first = (row[idxI('First')] || '').toString().trim();
-    const last = (row[idxI('Last')] || '').toString().trim();
+    var first = (row[idxI('First')] || '').toString().trim();
+    var last = (row[idxI('Last')] || '').toString().trim();
     if (!first && !last) continue;
 
     // Check against existing ledger (normalized)
@@ -757,7 +769,7 @@ function processIntake_(ctx) {
     }
 
     // Check against names already staged in this batch
-    const normKey = normalizeIdentity_(first) + '|' + normalizeIdentity_(last);
+    var normKey = normalizeIdentity_(first) + '|' + normalizeIdentity_(last);
     if (batchNames.has(normKey)) {
       rowsToClear.push(r + 1); // Duplicate within batch
       continue;
@@ -765,24 +777,24 @@ function processIntake_(ctx) {
     batchNames.add(normKey);
 
     // Build the new ledger row
-    const middle = (row[idxI('Middle')] || '').toString().trim();
-    const originGame = (row[idxI('OriginGame')] || '').toString().trim();
-    const uni = (row[idxI('UNI (y/n)')] || '').toString().trim();
-    const med = (row[idxI('MED (y/n)')] || '').toString().trim();
-    const civ = (row[idxI('CIV (y/n)')] || '').toString().trim();
-    const clock = (row[idxI('ClockMode')] || 'ENGINE').toString().trim();
-    const tier = row[idxI('Tier')] || '';
-    const roleType = row[idxI('RoleType')] || '';
-    const status = row[idxI('Status')] || 'Active';
-    const birthYear = row[idxI('BirthYear')] || '';
-    const originCity = row[idxI('OriginCity')] || '';
-    const lifeHist = row[idxI('LifeHistory')] || '';
-    const vault = row[idxI('OriginVault')] || '';
-    const neighborhood = row[idxI('Neighborhood')] || '';
+    var middle = (row[idxI('Middle')] || '').toString().trim();
+    var originGame = (row[idxI('OriginGame')] || '').toString().trim();
+    var uni = (row[idxI('UNI (y/n)')] || '').toString().trim();
+    var med = (row[idxI('MED (y/n)')] || '').toString().trim();
+    var civ = (row[idxI('CIV (y/n)')] || '').toString().trim();
+    var clock = (row[idxI('ClockMode')] || 'ENGINE').toString().trim();
+    var tier = row[idxI('Tier')] || '';
+    var roleType = row[idxI('RoleType')] || '';
+    var status = row[idxI('Status')] || 'Active';
+    var birthYear = row[idxI('BirthYear')] || '';
+    var originCity = row[idxI('OriginCity')] || '';
+    var lifeHist = row[idxI('LifeHistory')] || '';
+    var vault = row[idxI('OriginVault')] || '';
+    var neighborhood = row[idxI('Neighborhood')] || '';
 
-    const popId = 'POP-' + String(nextPopNum++).padStart(5, '0');
+    var popId = 'POP-' + padStart_(nextPopNum++, 5, '0');
 
-    const newRow = new Array(ledgerHeader.length).fill('');
+    var newRow = new Array(ledgerHeader.length).fill('');
 
     if (idxL('POPID') >= 0) newRow[idxL('POPID')] = popId;
     if (idxL('First') >= 0) newRow[idxL('First')] = first;
@@ -813,7 +825,7 @@ function processIntake_(ctx) {
   // STAGE 2: Batch write all staged rows at once
   // ═══════════════════════════════════════════════════════════════════════════
   if (stagedRows.length > 0) {
-    const startRow = ledger.getLastRow() + 1;
+    var startRow = ledger.getLastRow() + 1;
     ledger.getRange(startRow, 1, stagedRows.length, ledgerHeader.length)
           .setValues(stagedRows);
     ctx.summary.intakeProcessed += stagedRows.length;
@@ -822,10 +834,10 @@ function processIntake_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // STAGE 3: Clear processed intake rows (after successful write)
   // ═══════════════════════════════════════════════════════════════════════════
-  rowsToClear.sort((a, b) => b - a);
-  rowsToClear.forEach(i => {
-    intake.getRange(i, 1, 1, intake.getLastColumn()).clearContent();
-  });
+  rowsToClear.sort(function(a, b) { return b - a; });
+  for (var i = 0; i < rowsToClear.length; i++) {
+    intake.getRange(rowsToClear[i], 1, 1, intake.getLastColumn()).clearContent();
+  }
 }
 
 /**
@@ -834,16 +846,16 @@ function processIntake_(ctx) {
 function getMaxPopId_(ledgerValues) {
   if (ledgerValues.length < 2) return 0;
 
-  const header = ledgerValues[0];
-  const idx = header.indexOf('POPID');
+  var header = ledgerValues[0];
+  var idx = header.indexOf('POPID');
   if (idx < 0) return 0;
 
-  let maxN = 0;
-  for (let r = 1; r < ledgerValues.length; r++) {
-    const v = (ledgerValues[r][idx] || '').toString().trim();
-    const m = v.match(/^POP-(\d+)$/);
+  var maxN = 0;
+  for (var r = 1; r < ledgerValues.length; r++) {
+    var v = (ledgerValues[r][idx] || '').toString().trim();
+    var m = v.match(/^POP-(\d+)$/);
     if (m) {
-      const n = Number(m[1]);
+      var n = Number(m[1]);
       if (n > maxN) maxN = n;
     }
   }
@@ -861,17 +873,17 @@ function getMaxPopId_(ledgerValues) {
 function existsInLedger_(ledgerValues, first, last) {
   if (ledgerValues.length < 2) return false;
 
-  const header = ledgerValues[0];
-  const idxFirst = header.indexOf('First');
-  const idxLast = header.indexOf('Last');
+  var header = ledgerValues[0];
+  var idxFirst = header.indexOf('First');
+  var idxLast = header.indexOf('Last');
 
   // Normalize input names
-  const normFirst = normalizeIdentity_(first);
-  const normLast = normalizeIdentity_(last);
+  var normFirst = normalizeIdentity_(first);
+  var normLast = normalizeIdentity_(last);
 
-  for (let r = 1; r < ledgerValues.length; r++) {
-    const f = normalizeIdentity_(ledgerValues[r][idxFirst]);
-    const l = normalizeIdentity_(ledgerValues[r][idxLast]);
+  for (var r = 1; r < ledgerValues.length; r++) {
+    var f = normalizeIdentity_(ledgerValues[r][idxFirst]);
+    var l = normalizeIdentity_(ledgerValues[r][idxLast]);
     if (f === normFirst && l === normLast) return true;
   }
   return false;
@@ -886,19 +898,19 @@ function existsInLedger_(ledgerValues, first, last) {
 function nextPopIdSafe_(ledgerValues) {
   if (ledgerValues.length < 2) return 'POP-00001';
 
-  const header = ledgerValues[0];
-  const idx = header.indexOf('POPID');
+  var header = ledgerValues[0];
+  var idx = header.indexOf('POPID');
 
-  let maxN = 0;
-  for (let r = 1; r < ledgerValues.length; r++) {
-    const v = (ledgerValues[r][idx] || '').toString().trim();
-    const m = v.match(/^POP-(\d+)$/);
+  var maxN = 0;
+  for (var r = 1; r < ledgerValues.length; r++) {
+    var v = (ledgerValues[r][idx] || '').toString().trim();
+    var m = v.match(/^POP-(\d+)$/);
     if (m) {
-      const n = Number(m[1]);
+      var n = Number(m[1]);
       if (n > maxN) maxN = n;
     }
   }
-  return 'POP-' + String(maxN + 1).padStart(5, '0');
+  return 'POP-' + padStart_(maxN + 1, 5, '0');
 }
 
 
@@ -908,27 +920,27 @@ function nextPopIdSafe_(ledgerValues) {
  * ============================================================================
  */
 function updateNamedCitizens_(ctx) {
-  const sheet = ctx.ss.getSheetByName('Simulation_Ledger');
+  var sheet = ctx.ss.getSheetByName('Simulation_Ledger');
   if (!sheet) return;
 
-  const range = sheet.getDataRange();
-  const values = range.getValues();
+  var range = sheet.getDataRange();
+  var values = range.getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
+  var header = values[0];
+  var rows = values.slice(1);
 
-  const idx = name => header.indexOf(name);
+  var idx = function(name) { return header.indexOf(name); };
 
-  const iClock = idx('ClockMode');
-  const iStatus = idx('Status');
-  const iLast = idx('LastUpdated');
+  var iClock = idx('ClockMode');
+  var iStatus = idx('Status');
+  var iLast = idx('LastUpdated');
 
-  for (let i = 0; i < rows.length; i++) {
-    const row = rows[i];
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
 
-    const mode = row[iClock] || 'ENGINE';
-    const status = row[iStatus] || 'Active';
+    var mode = row[iClock] || 'ENGINE';
+    var status = row[iStatus] || 'Active';
 
     if (status === 'Deceased') continue;
     if (mode !== 'ENGINE') continue;
@@ -959,12 +971,12 @@ function updateNamedCitizens_(ctx) {
  * ============================================================================
  */
 function writeDigest_(ctx) {
-  const sheet = ctx.ss.getSheetByName('Riley_Digest');
+  var sheet = ctx.ss.getSheetByName('Riley_Digest');
   if (!sheet) return;
 
-  const S = ctx.summary;
+  var S = ctx.summary;
 
-  const row = [
+  var row = [
     // A – Timestamp
     ctx.now,
 
@@ -1060,15 +1072,15 @@ function writeDigest_(ctx) {
  * ============================================================================
  */
 function applyCycleWeightForLatestCycle_(ctx) {
-  const sheet = ctx.ss.getSheetByName('Riley_Digest');
+  var sheet = ctx.ss.getSheetByName('Riley_Digest');
   if (!sheet) return;
 
-  const lastRow = sheet.getLastRow();
+  var lastRow = sheet.getLastRow();
 
   // EventsGenerated is column 5 (E)
-  const events = Number(sheet.getRange(lastRow, 5).getValue()) || 0;
+  var events = Number(sheet.getRange(lastRow, 5).getValue()) || 0;
 
-  let weight = 'low-signal';
+  var weight = 'low-signal';
   if (events >= 20) {
     weight = 'high-signal';
   } else if (events >= 5) {

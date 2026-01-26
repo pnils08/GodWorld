@@ -44,44 +44,44 @@
 
 function prioritizeEvents_(ctx) {
 
-  const S = ctx.summary;
+  var S = ctx.summary;
   if (!S || !S.engineEvents) return;
 
-  const events = S.engineEvents;
+  var events = S.engineEvents;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const civicLoad = S.civicLoad || "";
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var civicLoad = S.civicLoad || "";
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const sentiment = dynamics.sentiment || 0;
-  const chaos = S.worldEvents || [];
-  const pattern = S.patternFlag || "";
-  const shock = S.shockFlag || "";
-  const econMood = S.economicMood || 50;
-  const mediaEffects = S.mediaEffects || {};
+  var sentiment = dynamics.sentiment || 0;
+  var chaos = S.worldEvents || [];
+  var pattern = S.patternFlag || "";
+  var shock = S.shockFlag || "";
+  var econMood = S.economicMood || 50;
+  var mediaEffects = S.mediaEffects || {};
 
   // Calendar context (v2.2)
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const holidayNeighborhood = S.holidayNeighborhood || "";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var holidayNeighborhood = S.holidayNeighborhood || "";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // Demographic context (v2.3 - Tier 3)
-  const demographicShifts = S.demographicShifts || [];
-  const neighborhoodDemographics = S.neighborhoodDemographics || {};
+  var demographicShifts = S.demographicShifts || [];
+  var neighborhoodDemographics = S.neighborhoodDemographics || {};
 
   // Build demographic shift lookup for fast neighborhood matching
-  const shiftsByNeighborhood = {};
-  for (let i = 0; i < demographicShifts.length; i++) {
-    const shift = demographicShifts[i];
+  var shiftsByNeighborhood = {};
+  for (var i = 0; i < demographicShifts.length; i++) {
+    var shift = demographicShifts[i];
     if (shift.neighborhood) {
       if (!shiftsByNeighborhood[shift.neighborhood]) {
         shiftsByNeighborhood[shift.neighborhood] = [];
@@ -93,7 +93,7 @@ function prioritizeEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN PRIORITY (lowercase and uppercase)
   // ═══════════════════════════════════════════════════════════════════════════
-  const domainPriority = {
+  var domainPriority = {
     // Uppercase (standard)
     "CIVIC": 1,
     "SAFETY": 2,
@@ -127,7 +127,7 @@ function prioritizeEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // NEIGHBORHOOD IMPORTANCE (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoodWeight = {
+  var neighborhoodWeight = {
     'Downtown': 1.3,
     'West Oakland': 1.2,
     'Jack London': 1.15,
@@ -145,7 +145,7 @@ function prioritizeEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY-DOMAIN AFFINITY (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holidayDomainBoost = {
+  var holidayDomainBoost = {
     // Major holidays
     "Independence": { civic: 3, community: 3, safety: 2 },
     "Thanksgiving": { community: 4, household: 3 },
@@ -181,11 +181,11 @@ function prioritizeEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   function worldModifier(ev) {
 
-    let score = 0;
-    const evType = (ev.type || ev.domain || '').toLowerCase();
-    const evSeverity = (ev.severity || '').toString().toLowerCase();
-    const evNeighborhood = ev.neighborhood || ev.location || '';
-    const evTag = (ev.tag || '').toLowerCase();
+    var score = 0;
+    var evType = (ev.type || ev.domain || '').toLowerCase();
+    var evSeverity = (ev.severity || '').toString().toLowerCase();
+    var evNeighborhood = ev.neighborhood || ev.location || '';
+    var evTag = (ev.tag || '').toLowerCase();
 
     // ═══════════════════════════════════════════════════════════════════════
     // SEVERITY (highest weight)
@@ -260,7 +260,7 @@ function prioritizeEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (isFirstFriday) {
       if (evType === "culture" || evType === "community") score += 4;
-      if (evTag.includes("firstfriday")) score += 3;
+      if (evTag.indexOf("firstfriday") !== -1) score += 3;
       // First Friday neighborhoods
       if (evNeighborhood === "Uptown" || evNeighborhood === "KONO" || evNeighborhood === "Temescal") {
         score += 2;
@@ -272,7 +272,7 @@ function prioritizeEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (isCreationDay) {
       if (evType === "community" || evType === "civic") score += 3;
-      if (evTag.includes("creationday")) score += 3;
+      if (evTag.indexOf("creationday") !== -1) score += 3;
     }
 
     // ═══════════════════════════════════════════════════════════════════════
@@ -290,68 +290,68 @@ function prioritizeEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // CULTURAL ACTIVITY BOOST (v2.2)
     // ═══════════════════════════════════════════════════════════════════════
-    const culturalActivity = dynamics.culturalActivity || 1;
+    var culturalActivity = dynamics.culturalActivity || 1;
     if (culturalActivity >= 1.4 && evType === "culture") score += 3;
     else if (culturalActivity >= 1.2 && evType === "culture") score += 1;
 
     // ═══════════════════════════════════════════════════════════════════════
     // COMMUNITY ENGAGEMENT BOOST (v2.2)
     // ═══════════════════════════════════════════════════════════════════════
-    const communityEngagement = dynamics.communityEngagement || 1;
+    var communityEngagement = dynamics.communityEngagement || 1;
     if (communityEngagement >= 1.3 && evType === "community") score += 3;
     else if (communityEngagement >= 1.15 && evType === "community") score += 1;
 
     // ═══════════════════════════════════════════════════════════════════════
     // DEMOGRAPHIC SHIFT BOOST (v2.3 - Tier 3)
     // ═══════════════════════════════════════════════════════════════════════
-    const neighborhoodShifts = shiftsByNeighborhood[evNeighborhood] || [];
+    var neighborhoodShifts = shiftsByNeighborhood[evNeighborhood] || [];
     if (neighborhoodShifts.length > 0) {
       // Events in neighborhoods with demographic shifts get priority
-      for (let s = 0; s < neighborhoodShifts.length; s++) {
-        const shift = neighborhoodShifts[s];
+      for (var s = 0; s < neighborhoodShifts.length; s++) {
+        var shiftItem = neighborhoodShifts[s];
 
         // Population shifts affect migration/community events
-        if (shift.type === 'population_shift') {
+        if (shiftItem.type === 'population_shift') {
           if (evType === 'migration') score += 4;
           if (evType === 'community') score += 3;
           if (evType === 'economic') score += 2;
         }
 
         // Unemployment shifts affect economic events
-        if (shift.type === 'unemployed_shift') {
+        if (shiftItem.type === 'unemployed_shift') {
           if (evType === 'economic') score += 4;
           if (evType === 'civic') score += 2;
         }
 
         // Illness shifts affect health events
-        if (shift.type === 'sick_shift') {
+        if (shiftItem.type === 'sick_shift') {
           if (evType === 'health') score += 4;
           if (evType === 'community') score += 2;
         }
 
         // Age demographic shifts
-        if (shift.type === 'students_shift') {
+        if (shiftItem.type === 'students_shift') {
           if (evType === 'community') score += 2;
         }
-        if (shift.type === 'seniors_shift') {
+        if (shiftItem.type === 'seniors_shift') {
           if (evType === 'health') score += 2;
           if (evType === 'community') score += 2;
         }
 
         // Large shifts (>10%) get extra boost
-        if (shift.percentage && shift.percentage >= 10) {
+        if (shiftItem.percentage && shiftItem.percentage >= 10) {
           score += 2;
         }
       }
     }
 
     // Demographic event tag boost
-    if (evTag.includes('demographic') || evTag.includes('population')) score += 3;
+    if (evTag.indexOf('demographic') !== -1 || evTag.indexOf('population') !== -1) score += 3;
 
     // ═══════════════════════════════════════════════════════════════════════
     // NEIGHBORHOOD IMPORTANCE (applied last as multiplier)
     // ═══════════════════════════════════════════════════════════════════════
-    const nWeight = neighborhoodWeight[evNeighborhood] || 1.0;
+    var nWeight = neighborhoodWeight[evNeighborhood] || 1.0;
     score = Math.round(score * nWeight);
 
     return score;
@@ -365,35 +365,35 @@ function prioritizeEvents_(ctx) {
   // 2. world-state modifier score
   // 3. severity fallback
   // 4. timestamp fallback
-  
-  S.engineEvents.sort((a, b) => {
 
-    const typeA = a.type || a.domain || '';
-    const typeB = b.type || b.domain || '';
+  S.engineEvents.sort(function(a, b) {
 
-    const pa = domainPriority[typeA] || domainPriority[typeA.toLowerCase()] || 50;
-    const pb = domainPriority[typeB] || domainPriority[typeB.toLowerCase()] || 50;
+    var typeA = a.type || a.domain || '';
+    var typeB = b.type || b.domain || '';
+
+    var pa = domainPriority[typeA] || domainPriority[typeA.toLowerCase()] || 50;
+    var pb = domainPriority[typeB] || domainPriority[typeB.toLowerCase()] || 50;
 
     if (pa !== pb) return pa - pb;
 
-    const wa = worldModifier(a);
-    const wb = worldModifier(b);
+    var wa = worldModifier(a);
+    var wb = worldModifier(b);
 
     if (wa !== wb) return wb - wa; // higher world-impact first
 
     // Severity fallback
-    const sevRank = { 
-      low: 1, 
-      medium: 2, 
-      moderate: 2, 
-      high: 3, 
-      major: 3, 
-      critical: 4 
+    var sevRank = {
+      low: 1,
+      medium: 2,
+      moderate: 2,
+      high: 3,
+      major: 3,
+      critical: 4
     };
-    const sevA = (a.severity || '').toString().toLowerCase();
-    const sevB = (b.severity || '').toString().toLowerCase();
-    const sa = sevRank[sevA] || 0;
-    const sb = sevRank[sevB] || 0;
+    var sevA = (a.severity || '').toString().toLowerCase();
+    var sevB = (b.severity || '').toString().toLowerCase();
+    var sa = sevRank[sevA] || 0;
+    var sb = sevRank[sevB] || 0;
 
     if (sa !== sb) return sb - sa;
 
@@ -407,8 +407,8 @@ function prioritizeEvents_(ctx) {
   S.eventPrioritization = {
     totalEvents: events.length,
     topDomain: events.length > 0 ? (events[0].type || events[0].domain || 'unknown') : 'none',
-    highPriorityCount: events.filter(e => {
-      const sev = (e.severity || '').toString().toLowerCase();
+    highPriorityCount: events.filter(function(e) {
+      var sev = (e.severity || '').toString().toLowerCase();
       return sev === 'high' || sev === 'major' || sev === 'critical';
     }).length,
     // v2.2: Calendar context in prioritization

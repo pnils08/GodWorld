@@ -29,28 +29,28 @@
 
 function applyPatternDetection_(ctx) {
 
-  const sheet = ctx.ss.getSheetByName('Riley_Digest');
+  var sheet = ctx.ss.getSheetByName('Riley_Digest');
   if (!sheet) return;
 
-  const lastRow = sheet.getLastRow();
+  var lastRow = sheet.getLastRow();
   if (lastRow < 3) {
     ctx.summary.patternFlag = "none";
     ctx.summary.patternCalendarContext = {};
     return;
   }
 
-  const S = ctx.summary;
+  var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
-  const culturalActivity = (S.cityDynamics || {}).culturalActivity || 1;
-  const communityEngagement = (S.cityDynamics || {}).communityEngagement || 1;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
+  var culturalActivity = (S.cityDynamics || {}).culturalActivity || 1;
+  var communityEngagement = (S.cityDynamics || {}).communityEngagement || 1;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DATA EXTRACTION
@@ -59,28 +59,28 @@ function applyPatternDetection_(ctx) {
     return sheet.getRange(r, 1, 1, sheet.getLastColumn()).getValues()[0];
   }
 
-  const rows = [];
-  const windowSize = Math.min(7, lastRow - 1);
+  var rows = [];
+  var windowSize = Math.min(7, lastRow - 1);
 
-  for (let r = lastRow; r > lastRow - windowSize; r--) {
+  for (var r = lastRow; r > lastRow - windowSize; r--) {
     rows.push(getRow(r));
   }
 
   // Extract arrays for last N cycles
-  const eventsArr = rows.map(r => Number(r[4] || 0)); // E - EventsGenerated
-  const issuesArr = rows.map(r => (r[5] || "").toString());
-  const civicArr = rows.map(r => (r[8] || "").toString()); // I - CivicLoad
-  const driftArr = rows.map(r => Number(r[9] || 0)); // J - MigrationDrift
-  const patternArr = rows.map(r => (r[10] || "").toString());
-  const shockArr = rows.map(r => (r[11] || "").toString()); // L - ShockFlag
-  const seedsArr = rows.map(r => Number(r[12] || 0));
-  const sentimentArr = rows.map(r => Number(r[27] || 0)); // AB - Sentiment
+  var eventsArr = rows.map(function(r) { return Number(r[4] || 0); }); // E - EventsGenerated
+  var issuesArr = rows.map(function(r) { return (r[5] || "").toString(); });
+  var civicArr = rows.map(function(r) { return (r[8] || "").toString(); }); // I - CivicLoad
+  var driftArr = rows.map(function(r) { return Number(r[9] || 0); }); // J - MigrationDrift
+  var patternArr = rows.map(function(r) { return (r[10] || "").toString(); });
+  var shockArr = rows.map(function(r) { return (r[11] || "").toString(); }); // L - ShockFlag
+  var seedsArr = rows.map(function(r) { return Number(r[12] || 0); });
+  var sentimentArr = rows.map(function(r) { return Number(r[27] || 0); }); // AB - Sentiment
 
   // Also check worldEvents count from ctx for current cycle
-  const currentWorldEvents = (S.worldEvents || []).length;
+  var currentWorldEvents = (S.worldEvents || []).length;
 
-  let pattern = "none";
-  const calendarContext = {
+  var pattern = "none";
+  var calendarContext = {
     holiday: holiday,
     holidayPriority: holidayPriority,
     isFirstFriday: isFirstFriday,
@@ -92,35 +92,35 @@ function applyPatternDetection_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR-ADJUSTED THRESHOLDS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   // High-activity holidays expect more events
-  const highActivityHolidays = [
+  var highActivityHolidays = [
     "Independence", "Thanksgiving", "Holiday", "NewYearsEve", "NewYear",
     "OpeningDay", "OaklandPride", "ArtSoulFestival", "Halloween",
     "CincoDeMayo", "Juneteenth", "DiaDeMuertos"
   ];
-  
-  const isHighActivityHoliday = highActivityHolidays.includes(holiday);
-  const isHighActivityPeriod = isHighActivityHoliday || isFirstFriday || 
+
+  var isHighActivityHoliday = highActivityHolidays.indexOf(holiday) !== -1;
+  var isHighActivityPeriod = isHighActivityHoliday || isFirstFriday ||
     sportsSeason === "championship" || sportsSeason === "playoffs";
 
   // Adjusted thresholds for high-activity periods
-  const stabilityThreshold = isHighActivityPeriod ? 55 : 45;
-  const microWaveThreshold = isHighActivityPeriod ? 65 : 55;
-  const calmThreshold = isHighActivityPeriod ? 60 : 50;
-  const elevatedLow = isHighActivityPeriod ? 60 : 50;
-  const elevatedHigh = isHighActivityPeriod ? 75 : 60;
+  var stabilityThreshold = isHighActivityPeriod ? 55 : 45;
+  var microWaveThreshold = isHighActivityPeriod ? 65 : 55;
+  var calmThreshold = isHighActivityPeriod ? 60 : 50;
+  var elevatedLow = isHighActivityPeriod ? 60 : 50;
+  var elevatedHigh = isHighActivityPeriod ? 75 : 60;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PATTERN 1: stability-streak
   // Last 5 cycles: low chaos, no issues, stable civic load
   // ═══════════════════════════════════════════════════════════════════════════
   if (rows.length >= 5) {
-    let stable = true;
-    for (let i = 0; i < 5; i++) {
-      const events = eventsArr[i];
-      const issues = issuesArr[i];
-      const civic = civicArr[i];
+    var stable = true;
+    for (var i = 0; i < 5; i++) {
+      var events = eventsArr[i];
+      var issues = issuesArr[i];
+      var civic = civicArr[i];
 
       if (events >= stabilityThreshold) { stable = false; break; }
       if (issues && issues.trim() !== "") { stable = false; break; }
@@ -129,7 +129,7 @@ function applyPatternDetection_(ctx) {
     if (stable && currentWorldEvents <= 2) {
       pattern = "stability-streak";
     }
-    
+
     // v2.2: Creation Day enhances stability pattern
     if (stable && isCreationDay) {
       pattern = "stability-streak";
@@ -142,10 +142,10 @@ function applyPatternDetection_(ctx) {
   // High activity during holidays/special events is expected, not concerning
   // ═══════════════════════════════════════════════════════════════════════════
   if (pattern === "none" && isHighActivityPeriod) {
-    const latestEvents = eventsArr[0];
-    const latestShock = shockArr[0];
-    const latestIssues = issuesArr[0];
-    
+    var latestEvents = eventsArr[0];
+    var latestShock = shockArr[0];
+    var latestIssues = issuesArr[0];
+
     // High events but no shock/issues during holiday = holiday-elevated
     if (latestEvents >= 55 && latestEvents < 80 &&
         latestShock !== "shock-flag" &&
@@ -161,14 +161,14 @@ function applyPatternDetection_(ctx) {
   // v2.2: First Friday micro-waves are expected
   // ═══════════════════════════════════════════════════════════════════════════
   if (pattern === "none" && rows.length >= 3) {
-    let wave = true;
-    for (let i = 0; i < 3; i++) {
-      if (eventsArr[i] < microWaveThreshold) { wave = false; break; }
-      if (shockArr[i] === "shock-flag") { wave = false; break; }
+    var wave = true;
+    for (var j = 0; j < 3; j++) {
+      if (eventsArr[j] < microWaveThreshold) { wave = false; break; }
+      if (shockArr[j] === "shock-flag") { wave = false; break; }
     }
     if (wave) {
       pattern = "micro-event-wave";
-      
+
       // v2.2: Note if First Friday contributed
       if (isFirstFriday) {
         calendarContext.calendarAdjusted = true;
@@ -182,25 +182,25 @@ function applyPatternDetection_(ctx) {
   // v2.2: Adjust sensitivity based on calendar context
   // ═══════════════════════════════════════════════════════════════════════════
   if (pattern === "none") {
-    const strainCycles = civicArr.filter(c => c === "load-strain").length;
-    const minorVariance = civicArr.filter(c => c === "minor-variance").length;
-    const strongNegDrift = driftArr.filter(d => d <= -25).length;
-    const negSentCycles = sentimentArr.filter(s => s <= -0.35).length;
+    var strainCycles = civicArr.filter(function(c) { return c === "load-strain"; }).length;
+    var minorVariance = civicArr.filter(function(c) { return c === "minor-variance"; }).length;
+    var strongNegDrift = driftArr.filter(function(d) { return d <= -25; }).length;
+    var negSentCycles = sentimentArr.filter(function(s) { return s <= -0.35; }).length;
 
     // v2.2: During high-activity periods, require more evidence of strain
-    let strainThreshold = 2;
-    let minorThreshold = 3;
-    let negSentThreshold = 2;
-    
+    var strainThreshold2 = 2;
+    var minorThreshold = 3;
+    var negSentThreshold = 2;
+
     if (isHighActivityPeriod) {
-      strainThreshold = 3;
+      strainThreshold2 = 3;
       minorThreshold = 4;
       negSentThreshold = 3;
       calendarContext.calendarAdjusted = true;
     }
 
     // More sensitive: minor-variance accumulation also counts
-    if (strainCycles >= strainThreshold || 
+    if (strainCycles >= strainThreshold2 ||
         (minorVariance >= minorThreshold && negSentCycles >= negSentThreshold)) {
       pattern = "strain-trend";
     }
@@ -214,15 +214,19 @@ function applyPatternDetection_(ctx) {
   // Recovery from recent shock
   // ═══════════════════════════════════════════════════════════════════════════
   if (pattern === "none" && rows.length >= 3) {
-    const latestIssues = issuesArr[0];
-    const latestShock = shockArr[0];
-    const earlierShock = shockArr.slice(1).some(s => s === "shock-flag");
-    const latestEvents = eventsArr[0];
+    var latestIssues2 = issuesArr[0];
+    var latestShock2 = shockArr[0];
+    var earlierShockArr = shockArr.slice(1);
+    var earlierShock = false;
+    for (var k = 0; k < earlierShockArr.length; k++) {
+      if (earlierShockArr[k] === "shock-flag") { earlierShock = true; break; }
+    }
+    var latestEvents2 = eventsArr[0];
 
     if (
-      latestShock !== "shock-flag" &&
-      (!latestIssues || latestIssues.trim() === "") &&
-      latestEvents < calmThreshold &&
+      latestShock2 !== "shock-flag" &&
+      (!latestIssues2 || latestIssues2.trim() === "") &&
+      latestEvents2 < calmThreshold &&
       earlierShock
     ) {
       pattern = "calm-after-shock";
@@ -235,10 +239,13 @@ function applyPatternDetection_(ctx) {
   // v2.2: Adjust thresholds for calendar context
   // ═══════════════════════════════════════════════════════════════════════════
   if (pattern === "none" && rows.length >= 3) {
-    const avgEvents = eventsArr.slice(0, 3).reduce((a, b) => a + b, 0) / 3;
+    var eventsSlice = eventsArr.slice(0, 3);
+    var eventsSum = 0;
+    for (var m = 0; m < eventsSlice.length; m++) { eventsSum += eventsSlice[m]; }
+    var avgEvents = eventsSum / 3;
     if (avgEvents >= elevatedLow && avgEvents < elevatedHigh) {
       pattern = "elevated-activity";
-      
+
       // v2.2: Cultural activity may explain elevation
       if (culturalActivity >= 1.4) {
         calendarContext.calendarAdjusted = true;
@@ -253,8 +260,8 @@ function applyPatternDetection_(ctx) {
   if (pattern === "strain-trend" && communityEngagement >= 1.4) {
     // Strong community engagement may buffer strain
     // Downgrade to elevated-activity if strain is marginal
-    const strainCycles = civicArr.filter(c => c === "load-strain").length;
-    if (strainCycles <= 2) {
+    var strainCyclesCount = civicArr.filter(function(c) { return c === "load-strain"; }).length;
+    if (strainCyclesCount <= 2) {
       pattern = "elevated-activity";
       calendarContext.calendarAdjusted = true;
     }

@@ -15,26 +15,26 @@ function updateCityTier_(sheet, row, fameScore, mediaCount) {
   if (!sheet) return;
 
   // Get headers
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-  const col = n => headers.indexOf(n) + 1; // 1-indexed for getRange
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var col = function(n) { return headers.indexOf(n) + 1; }; // 1-indexed for getRange
 
-  const spreadCol = col('MediaSpread');
-  const trendCol = col('TrendTrajectory');
-  const tierCol = col('CityTier');
+  var spreadCol = col('MediaSpread');
+  var trendCol = col('TrendTrajectory');
+  var tierCol = col('CityTier');
 
   // Get spread
-  let spread = 1;
+  var spread = 1;
   if (spreadCol > 0) {
     spread = Number(sheet.getRange(row, spreadCol).getValue()) || 1;
   }
 
   // Get trend
-  let trend = "stable";
+  var trend = "stable";
   if (trendCol > 0) {
     trend = (sheet.getRange(row, trendCol).getValue() || "stable").toString().toLowerCase();
   }
 
-  let tierScore = 0;
+  var tierScore = 0;
 
   // FameScore contribution
   if (fameScore >= 20) tierScore += 2;
@@ -63,8 +63,8 @@ function updateCityTier_(sheet, row, fameScore, mediaCount) {
   if (trend === "falling") tierScore -= 4;
   if (trend === "fading") tierScore -= 6;
 
-  // Convert score → tier
-  let tier = "Local";
+  // Convert score to tier
+  var tier = "Local";
 
   if (tierScore >= 30) tier = "Iconic";
   else if (tierScore >= 22) tier = "Global";

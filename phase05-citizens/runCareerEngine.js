@@ -22,57 +22,57 @@
 
 function runCareerEngine_(ctx) {
 
-  const ss = ctx.ss;
-  const ledger = ss.getSheetByName('Simulation_Ledger');
-  const logSheet = ss.getSheetByName('LifeHistory_Log');
+  var ss = ctx.ss;
+  var ledger = ss.getSheetByName('Simulation_Ledger');
+  var logSheet = ss.getSheetByName('LifeHistory_Log');
   if (!ledger) return;
 
-  const values = ledger.getDataRange().getValues();
+  var values = ledger.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
+  var header = values[0];
+  var rows = values.slice(1);
 
-  const idx = n => header.indexOf(n);
+  var idx = function(n) { return header.indexOf(n); };
 
-  const iPopID = idx('POPID');
-  const iFirst = idx('First');
-  const iLast = idx('Last');
-  const iTier = idx('Tier');
-  const iUNI = idx('UNI (y/n)');
-  const iMED = idx('MED (y/n)');
-  const iCIV = idx('CIV (y/n)');
-  const iClock = idx('ClockMode');
-  const iLife = idx('LifeHistory');
-  const iLastUpd = idx('LastUpdated');
-  const iNeighborhood = idx('Neighborhood');
-  const iTierRole = idx('TierRole');
+  var iPopID = idx('POPID');
+  var iFirst = idx('First');
+  var iLast = idx('Last');
+  var iTier = idx('Tier');
+  var iUNI = idx('UNI (y/n)');
+  var iMED = idx('MED (y/n)');
+  var iCIV = idx('CIV (y/n)');
+  var iClock = idx('ClockMode');
+  var iLife = idx('LifeHistory');
+  var iLastUpd = idx('LastUpdated');
+  var iNeighborhood = idx('Neighborhood');
+  var iTierRole = idx('TierRole');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary;
-  const season = S.season;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
+  var S = ctx.summary;
+  var season = S.season;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const econMood = S.economicMood || 50;
-  const cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
+  var econMood = S.economicMood || 50;
+  var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
-  let count = 0;
-  const LIMIT = 10;
+  var count = 0;
+  var LIMIT = 10;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BASE MICRO-CAREER POOL
   // ═══════════════════════════════════════════════════════════════════════════
-  const baseCareer = [
+  var baseCareer = [
     "had a routine period at work with no major changes",
     "felt slightly more confident in their role",
     "experienced a quieter workload than usual",
@@ -84,7 +84,7 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SEASONAL WORK-CYCLE PATTERNS
   // ═══════════════════════════════════════════════════════════════════════════
-  const seasonalCareer = [];
+  var seasonalCareer = [];
   if (season === "Winter") {
     seasonalCareer.push("noticed slower workplace activity during winter months");
     seasonalCareer.push("navigated year-end deadlines and planning");
@@ -105,7 +105,7 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WEATHER EFFECTS ON WORK RHYTHM
   // ═══════════════════════════════════════════════════════════════════════════
-  const weatherCareer = [];
+  var weatherCareer = [];
   if (weather.type === "rain" || weather.type === "fog") {
     weatherCareer.push("was affected by weather-related workplace slowdowns");
     weatherCareer.push("had a longer commute due to weather");
@@ -118,7 +118,7 @@ function runCareerEngine_(ctx) {
   }
 
   // Weather mood effects
-  const weatherMoodCareer = [];
+  var weatherMoodCareer = [];
   if (weatherMood.irritabilityFactor && weatherMood.irritabilityFactor > 0.3) {
     weatherMoodCareer.push("noticed workplace tension from weather stress");
   }
@@ -130,7 +130,7 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CHAOS → WORKPLACE CHATTER/STRESS
   // ═══════════════════════════════════════════════════════════════════════════
-  const chaosCareer = chaos.length > 0 ? [
+  var chaosCareer = chaos.length > 0 ? [
     "noticed workplace discussion reacting to recent city events",
     "felt subtle workplace tension due to city happenings"
   ] : [];
@@ -138,14 +138,14 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SENTIMENT → WORKPLACE MORALE
   // ═══════════════════════════════════════════════════════════════════════════
-  const sentimentCareer = [];
+  var sentimentCareer = [];
   if (dynamics.sentiment >= 0.3) sentimentCareer.push("felt improved workplace morale");
   if (dynamics.sentiment <= -0.3) sentimentCareer.push("felt uneasy workplace atmosphere");
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ECONOMIC MOOD → JOB SECURITY FEELINGS
   // ═══════════════════════════════════════════════════════════════════════════
-  const econCareer = [];
+  var econCareer = [];
   if (econMood <= 35) {
     econCareer.push("felt economic uncertainty affecting workplace mood");
     econCareer.push("noticed colleagues discussing job market concerns");
@@ -158,7 +158,7 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY-SPECIFIC CAREER NOTES (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holidayCareer = [];
+  var holidayCareer = [];
 
   // Long weekend holidays
   if (holiday === "MemorialDay" || holiday === "LaborDay" || holiday === "Independence") {
@@ -209,7 +209,7 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY CAREER NOTES (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const firstFridayCareer = isFirstFriday ? [
+  var firstFridayCareer = isFirstFriday ? [
     "made plans to attend First Friday after work",
     "felt the end-of-week creative energy",
     "left work early for First Friday art walk",
@@ -219,7 +219,7 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY CAREER NOTES (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const creationDayCareer = isCreationDay ? [
+  var creationDayCareer = isCreationDay ? [
     "reflected on their career journey",
     "felt connected to the reasons they started this work",
     "appreciated their place in the community",
@@ -229,7 +229,7 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CULTURAL ACTIVITY EFFECTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const culturalCareer = [];
+  var culturalCareer = [];
   if (dynamics.culturalActivity >= 1.4) {
     culturalCareer.push("felt inspired by the city's creative energy");
     culturalCareer.push("noticed colleagues discussing cultural events");
@@ -238,7 +238,7 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // COMMUNITY ENGAGEMENT EFFECTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const communityCareer = [];
+  var communityCareer = [];
   if (dynamics.communityEngagement >= 1.3) {
     communityCareer.push("participated in workplace community initiative");
     communityCareer.push("felt connected to colleagues and neighborhood");
@@ -247,7 +247,7 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOOD WORKPLACE POOLS (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoodCareer = {
+  var neighborhoodCareer = {
     'Downtown': [
       "navigated the busy Downtown commute",
       "felt the energy of the business district",
@@ -313,36 +313,36 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FINAL BASE EVENT POOL
   // ═══════════════════════════════════════════════════════════════════════════
-  const basePool = [
-    ...baseCareer,
-    ...seasonalCareer,
-    ...weatherCareer,
-    ...weatherMoodCareer,
-    ...chaosCareer,
-    ...sentimentCareer,
-    ...econCareer,
-    ...holidayCareer,
-    ...firstFridayCareer,
-    ...creationDayCareer,
-    ...culturalCareer,
-    ...communityCareer
-  ];
+  var basePool = [].concat(
+    baseCareer,
+    seasonalCareer,
+    weatherCareer,
+    weatherMoodCareer,
+    chaosCareer,
+    sentimentCareer,
+    econCareer,
+    holidayCareer,
+    firstFridayCareer,
+    creationDayCareer,
+    culturalCareer,
+    communityCareer
+  );
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE THROUGH CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let r = 0; r < rows.length; r++) {
+  for (var r = 0; r < rows.length; r++) {
 
     if (count >= LIMIT) break;
 
-    const row = rows[r];
+    var row = rows[r];
 
-    const tier = Number(row[iTier] || 0);
-    const mode = row[iClock] || "ENGINE";
-    const isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
-    const isMED = (row[iMED] || "").toString().toLowerCase() === "y";
-    const isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
-    const neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
+    var tier = Number(row[iTier] || 0);
+    var mode = row[iClock] || "ENGINE";
+    var isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
+    var isMED = (row[iMED] || "").toString().toLowerCase() === "y";
+    var isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
+    var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
 
     // Only allow ENGINE Tier-3/4 non-UNI/MED/CIV
     if (mode !== "ENGINE") continue;
@@ -352,7 +352,7 @@ function runCareerEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // DRIFT PROBABILITY
     // ═══════════════════════════════════════════════════════════════════════
-    let chance = 0.02;
+    var chance = 0.02;
 
     // Weather-based noise
     if (weather.impact >= 1.3) chance += 0.01;
@@ -410,29 +410,29 @@ function runCareerEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // BUILD CITIZEN-SPECIFIC POOL
     // ═══════════════════════════════════════════════════════════════════════
-    let pool = [...basePool];
-    
+    var pool = basePool.slice();
+
     // Add neighborhood events
     if (neighborhood && neighborhoodCareer[neighborhood]) {
-      pool = [...pool, ...neighborhoodCareer[neighborhood]];
+      pool = pool.concat(neighborhoodCareer[neighborhood]);
     }
 
     // Choose drift output
-    const pick = pool[Math.floor(Math.random() * pool.length)];
-    const stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var pick = pool[Math.floor(Math.random() * pool.length)];
+    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
 
     // Determine event tag (v2.2)
-    let eventTag = "Career";
-    if (firstFridayCareer.includes(pick)) {
+    var eventTag = "Career";
+    if (firstFridayCareer.indexOf(pick) >= 0) {
       eventTag = "Career-FirstFriday";
-    } else if (creationDayCareer.includes(pick)) {
+    } else if (creationDayCareer.indexOf(pick) >= 0) {
       eventTag = "Career-CreationDay";
-    } else if (holidayCareer.includes(pick)) {
+    } else if (holidayCareer.indexOf(pick) >= 0) {
       eventTag = "Career-Holiday";
     }
 
-    const existing = row[iLife] ? row[iLife].toString() : "";
-    const line = `${stamp} — [${eventTag}] ${pick}`;
+    var existing = row[iLife] ? row[iLife].toString() : "";
+    var line = stamp + " — [" + eventTag + "] " + pick;
 
     row[iLife] = existing ? existing + "\n" + line : line;
     row[iLastUpd] = ctx.now;

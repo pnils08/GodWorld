@@ -30,60 +30,60 @@
 
 function runHouseholdEngine_(ctx) {
 
-  const ss = ctx.ss;
-  const ledger = ss.getSheetByName('Simulation_Ledger');
-  const logSheet = ss.getSheetByName('LifeHistory_Log');
+  var ss = ctx.ss;
+  var ledger = ss.getSheetByName('Simulation_Ledger');
+  var logSheet = ss.getSheetByName('LifeHistory_Log');
   if (!ledger) return;
 
-  const values = ledger.getDataRange().getValues();
+  var values = ledger.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
+  var header = values[0];
+  var rows = values.slice(1);
 
-  const idx = n => header.indexOf(n);
+  var idx = function(n) { return header.indexOf(n); };
 
-  const iPopID = idx('POPID');
-  const iFirst = idx('First');
-  const iLast = idx('Last');
-  const iTier = idx('Tier');
-  const iClock = idx('ClockMode');
-  const iUNI = idx('UNI (y/n)');
-  const iMED = idx('MED (y/n)');
-  const iCIV = idx('CIV (y/n)');
-  const iLife = idx('LifeHistory');
-  const iLastUpd = idx('LastUpdated');
-  const iNeighborhood = idx('Neighborhood');
+  var iPopID = idx('POPID');
+  var iFirst = idx('First');
+  var iLast = idx('Last');
+  var iTier = idx('Tier');
+  var iClock = idx('ClockMode');
+  var iUNI = idx('UNI (y/n)');
+  var iMED = idx('MED (y/n)');
+  var iCIV = idx('CIV (y/n)');
+  var iLife = idx('LifeHistory');
+  var iLastUpd = idx('LastUpdated');
+  var iNeighborhood = idx('Neighborhood');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary;
-  const season = S.season;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, publicSpaces: 1, culturalActivity: 1, communityEngagement: 1 
+  var S = ctx.summary;
+  var season = S.season;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, publicSpaces: 1, culturalActivity: 1, communityEngagement: 1
   };
-  const sports = S.sportsSeason;
-  const econMood = S.economicMood || 50;
-  const cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
+  var sports = S.sportsSeason;
+  var econMood = S.economicMood || 50;
+  var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
-  let count = 0;
-  const LIMIT = 6;
+  var count = 0;
+  var LIMIT = 6;
 
   // Track for summary
-  const householdEvents = [];
+  var householdEvents = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BASE HOUSEHOLD POOL
   // ═══════════════════════════════════════════════════════════════════════════
-  const baseHousehold = [
+  var baseHousehold = [
     "shared quiet time at home with household members",
     "handled routine household matters",
     "spent a calm evening in their living space",
@@ -94,7 +94,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SEASONAL HOUSEHOLD BEHAVIOR
   // ═══════════════════════════════════════════════════════════════════════════
-  const seasonal = [];
+  var seasonal = [];
   if (season === "Winter") seasonal.push("spent extra time indoors due to cold weather");
   if (season === "Spring") seasonal.push("organized part of the home during seasonal transition");
   if (season === "Summer") seasonal.push("kept doors/windows open to enjoy evening warmth");
@@ -103,7 +103,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WEATHER EFFECTS
   // ═══════════════════════════════════════════════════════════════════════════
-  const weatherPool = [];
+  var weatherPool = [];
   if (weather.type === "rain") weatherPool.push("stayed inside and listened to the rain");
   if (weather.type === "fog") weatherPool.push("kept indoor lights on during heavy fog");
   if (weather.type === "hot") weatherPool.push("used fans or open windows to cool the home");
@@ -114,7 +114,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WEATHER MOOD EFFECTS
   // ═══════════════════════════════════════════════════════════════════════════
-  const moodPool = [];
+  var moodPool = [];
   if (weatherMood.primaryMood === 'cozy') moodPool.push("enjoyed a cozy evening at home");
   if (weatherMood.primaryMood === 'introspective') moodPool.push("had a quiet, reflective evening indoors");
   if (weatherMood.primaryMood === 'irritable') moodPool.push("felt some household tension from the weather");
@@ -124,7 +124,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CHAOS RIPPLE EFFECTS
   // ═══════════════════════════════════════════════════════════════════════════
-  const chaosPool = chaos.length > 0 ? [
+  var chaosPool = chaos.length > 0 ? [
     "discussed light city news with household members",
     "felt slight shift in home mood due to recent events"
   ] : [];
@@ -132,7 +132,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY EFFECTS (v2.2 - 30+ holidays)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holidayPool = [];
+  var holidayPool = [];
 
   // Major holidays
   if (holiday === "NewYear") {
@@ -223,7 +223,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY HOUSEHOLD EFFECTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const firstFridayPool = isFirstFriday ? [
+  var firstFridayPool = isFirstFriday ? [
     "got ready at home before heading to First Friday",
     "invited friends over before the art walk",
     "relaxed at home after First Friday festivities"
@@ -232,7 +232,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY HOUSEHOLD EFFECTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const creationDayPool = isCreationDay ? [
+  var creationDayPool = isCreationDay ? [
     "felt a sense of home and belonging today",
     "reflected on household history and roots",
     "appreciated the home's foundational meaning",
@@ -242,7 +242,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CULTURAL ACTIVITY EFFECTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const culturalPool = [];
+  var culturalPool = [];
   if (dynamics.culturalActivity >= 1.4) {
     culturalPool.push("discussed local cultural events at home");
     culturalPool.push("played music that matched the city's creative mood");
@@ -251,7 +251,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // COMMUNITY ENGAGEMENT EFFECTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const communityPool = [];
+  var communityPool = [];
   if (dynamics.communityEngagement >= 1.3) {
     communityPool.push("chatted with neighbors from the porch");
     communityPool.push("felt connected to the block from inside the home");
@@ -260,14 +260,14 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CITY DYNAMICS
   // ═══════════════════════════════════════════════════════════════════════════
-  const dynamicsPool = [];
+  var dynamicsPool = [];
   if (dynamics.sentiment >= 0.3) dynamicsPool.push("felt positive atmosphere inside the home");
   if (dynamics.sentiment <= -0.3) dynamicsPool.push("felt slight tension among household members");
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ECONOMIC MOOD
   // ═══════════════════════════════════════════════════════════════════════════
-  const econPool = [];
+  var econPool = [];
   if (econMood <= 35) {
     econPool.push("discussed household budget concerns");
     econPool.push("looked for ways to cut household costs");
@@ -279,7 +279,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SPORTS SEASON
   // ═══════════════════════════════════════════════════════════════════════════
-  const sportsPool = [];
+  var sportsPool = [];
   if (sports === "mid-season") sportsPool.push("watched part of a game together at home");
   if (sports === "post-season" || sports === "playoffs") sportsPool.push("tuned into postseason coverage as a household");
   if (sports === "late-season") sportsPool.push("debated playoff chances with household members");
@@ -291,7 +291,7 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOOD FLAVOR (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoodPool = {
+  var neighborhoodPool = {
     'Temescal': [
       "heard neighborhood kids playing outside",
       "smelled cooking from a nearby home",
@@ -357,37 +357,37 @@ function runHouseholdEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // MERGE INTO FINAL POOL
   // ═══════════════════════════════════════════════════════════════════════════
-  const pool = [
-    ...baseHousehold,
-    ...seasonal,
-    ...weatherPool,
-    ...moodPool,
-    ...chaosPool,
-    ...holidayPool,
-    ...firstFridayPool,
-    ...creationDayPool,
-    ...culturalPool,
-    ...communityPool,
-    ...dynamicsPool,
-    ...econPool,
-    ...sportsPool
-  ];
+  var pool = [].concat(
+    baseHousehold,
+    seasonal,
+    weatherPool,
+    moodPool,
+    chaosPool,
+    holidayPool,
+    firstFridayPool,
+    creationDayPool,
+    culturalPool,
+    communityPool,
+    dynamicsPool,
+    econPool,
+    sportsPool
+  );
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let r = 0; r < rows.length; r++) {
+  for (var r = 0; r < rows.length; r++) {
 
     if (count >= LIMIT) break;
 
-    const row = rows[r];
+    var row = rows[r];
 
-    const tier = Number(row[iTier] || 0);
-    const mode = (row[iClock] || "").toString().trim();
-    const isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
-    const isMED = (row[iMED] || "").toString().toLowerCase() === "y";
-    const isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
-    const neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
+    var tier = Number(row[iTier] || 0);
+    var mode = (row[iClock] || "").toString().trim();
+    var isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
+    var isMED = (row[iMED] || "").toString().toLowerCase() === "y";
+    var isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
+    var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
 
     // Eligibility: Tier-3/4 background ENGINE citizens only
     if (mode !== "ENGINE") continue;
@@ -397,7 +397,7 @@ function runHouseholdEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // PROBABILITY
     // ═══════════════════════════════════════════════════════════════════════
-    let chance = 0.02;
+    var chance = 0.02;
 
     // Seasonal effects
     if (season === "Winter") chance += 0.01;
@@ -445,31 +445,32 @@ function runHouseholdEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // BUILD CITIZEN-SPECIFIC POOL
     // ═══════════════════════════════════════════════════════════════════════
-    let citizenPool = [...pool];
-    
+    var citizenPool = pool.slice();
+
     // Add neighborhood-specific events
     if (neighborhood && neighborhoodPool[neighborhood]) {
-      citizenPool.push(...neighborhoodPool[neighborhood]);
+      var np = neighborhoodPool[neighborhood];
+      for (var i = 0; i < np.length; i++) { citizenPool.push(np[i]); }
     }
 
     // ═══════════════════════════════════════════════════════════════════════
     // PICK AND LOG
     // ═══════════════════════════════════════════════════════════════════════
-    const pick = citizenPool[Math.floor(Math.random() * citizenPool.length)];
-    const stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var pick = citizenPool[Math.floor(Math.random() * citizenPool.length)];
+    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
 
     // Determine event tag (v2.2)
-    let eventTag = "Household";
-    if (firstFridayPool.includes(pick)) {
+    var eventTag = "Household";
+    if (firstFridayPool.indexOf(pick) >= 0) {
       eventTag = "Household-FirstFriday";
-    } else if (creationDayPool.includes(pick)) {
+    } else if (creationDayPool.indexOf(pick) >= 0) {
       eventTag = "Household-CreationDay";
-    } else if (holidayPool.includes(pick)) {
+    } else if (holidayPool.indexOf(pick) >= 0) {
       eventTag = "Household-Holiday";
     }
 
-    const line = `${stamp} — [${eventTag}] ${pick}`;
-    const existing = row[iLife] ? row[iLife].toString() : "";
+    var line = stamp + " — [" + eventTag + "] " + pick;
+    var existing = row[iLife] ? row[iLife].toString() : "";
 
     row[iLife] = existing ? existing + "\n" + line : line;
     row[iLastUpd] = ctx.now;

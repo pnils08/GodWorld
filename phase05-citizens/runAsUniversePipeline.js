@@ -44,51 +44,51 @@ function mulberry32_uni_(seed) {
 
 function runAsUniversePipeline_(ctx) {
 
-  const ss = ctx.ss;
-  const ledger = ss.getSheetByName('Simulation_Ledger');
-  const logSheet = ss.getSheetByName('LifeHistory_Log');
+  var ss = ctx.ss;
+  var ledger = ss.getSheetByName('Simulation_Ledger');
+  var logSheet = ss.getSheetByName('LifeHistory_Log');
   if (!ledger) return;
 
-  const values = ledger.getDataRange().getValues();
+  var values = ledger.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
+  var header = values[0];
+  var rows = values.slice(1);
 
-  const idx = n => header.indexOf(n);
+  var idx = function(n) { return header.indexOf(n); };
 
-  const iPopID = idx('POPID');
-  const iFirst = idx('First');
-  const iLast = idx('Last');
-  const iUNI = idx('UNI (y/n)');
-  const iClock = idx('ClockMode');
-  const iStatus = idx('Status');
-  const iLife = idx('LifeHistory');
-  const iLastUpd = idx('LastUpdated');
-  const iNeighborhood = idx('Neighborhood');
+  var iPopID = idx('POPID');
+  var iFirst = idx('First');
+  var iLast = idx('Last');
+  var iUNI = idx('UNI (y/n)');
+  var iClock = idx('ClockMode');
+  var iStatus = idx('Status');
+  var iLife = idx('LifeHistory');
+  var iLastUpd = idx('LastUpdated');
+  var iNeighborhood = idx('Neighborhood');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary;
-  const season = (S.season || "").toString();
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || {
+  var S = ctx.summary;
+  var season = (S.season || "").toString();
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {
     sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const econMood = S.economicMood || 50;
-  const cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
+  var econMood = S.economicMood || 50;
+  var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DETERMINISTIC RNG SETUP (v3.0)
   // ═══════════════════════════════════════════════════════════════════════════
-  const rng = (typeof ctx.rng === "function")
+  var rng = (typeof ctx.rng === "function")
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
       ? mulberry32_uni_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
@@ -102,16 +102,16 @@ function runAsUniversePipeline_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   function normalizeSportsState_(raw) {
-    const s0 = (raw == null ? "" : String(raw)).trim().toLowerCase();
+    var s0 = (raw == null ? "" : String(raw)).trim().toLowerCase();
     if (!s0) return "off-season";
-    const compact = s0
+    var compact = s0
       .replace(/[_/]+/g, "-")
       .replace(/\s+/g, "-")
       .replace(/[^a-z0-9-]/g, "")
       .replace(/-+/g, "-")
       .replace(/^-|-$/g, "");
 
-    const map = {
+    var map = {
       "offseason": "off-season",
       "off-season": "off-season",
       "springtraining": "spring-training",
@@ -139,8 +139,8 @@ function runAsUniversePipeline_(ctx) {
    * - Else: derives from GodWorld season ONLY (no league ops, no playoffs).
    */
   function deriveCanonSportsPhase_(summary) {
-    const source = (summary.sportsSource || "").toString();
-    const oak = normalizeSportsState_(summary.sportsSeasonOakland || summary.sportsSeason);
+    var source = (summary.sportsSource || "").toString();
+    var oak = normalizeSportsState_(summary.sportsSeasonOakland || summary.sportsSeason);
 
     if (source === "config-override") {
       // Maker-controlled canon is allowed
@@ -149,7 +149,7 @@ function runAsUniversePipeline_(ctx) {
 
     // Engine-only canon from world season:
     // Winter: off-season, Spring: spring-training, Summer/Fall: in-season
-    const worldSeason = (summary.season || "").toString().toLowerCase();
+    var worldSeason = (summary.season || "").toString().toLowerCase();
     if (worldSeason === "winter") return "off-season";
     if (worldSeason === "spring") return "spring-training";
     if (worldSeason === "summer") return "in-season";
@@ -157,13 +157,13 @@ function runAsUniversePipeline_(ctx) {
     return "off-season";
   }
 
-  const canonSportsPhase = deriveCanonSportsPhase_(S);
+  var canonSportsPhase = deriveCanonSportsPhase_(S);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CANON-SAFE SPORTS ATMOSPHERE NOTES (v3.0)
   // No standings/trades/playoffs unless Maker override provides that canon
   // ═══════════════════════════════════════════════════════════════════════════
-  const sportsAtmosphereNotes = {
+  var sportsAtmosphereNotes = {
     "spring-training": [
       "enjoying the familiar rhythm of spring prep",
       "noticing the city ease back into baseball season",
@@ -213,33 +213,33 @@ function runAsUniversePipeline_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ATHLETE LIFESTYLE POOLS (v3.0) - Sports-agnostic citizen activities
   // ═══════════════════════════════════════════════════════════════════════════
-  const influencePool = [
+  var influencePool = [
     "did a low-key sponsor appearance",
     "recorded a short message for a community campaign",
     "handled a small wave of public recognition with ease",
     "took a call about a future partnership opportunity"
   ];
-  const communityPool = [
+  var communityPool = [
     "dropped in at a youth clinic as a surprise guest",
     "visited a school to speak about discipline and routine",
     "spent time encouraging young athletes at a local program"
   ];
-  const fundraiserPool = [
+  var fundraiserPool = [
     "attended a charity event in support of a local cause",
     "helped raise funds for a community initiative",
     "joined an alumni charity event for a good cause"
   ];
-  const vacationPool = [
+  var vacationPool = [
     "took a short getaway to recharge",
     "enjoyed a low-profile weekend away from the spotlight",
     "made time for a relaxing change of scenery"
   ];
-  const wellnessPool = [
+  var wellnessPool = [
     "kept up a light training routine for health and structure",
     "spent time on mobility work and recovery habits",
     "kept their schedule calm and consistent"
   ];
-  const businessPool = [
+  var businessPool = [
     "met quietly with contacts about post-career opportunities",
     "considered a media or coaching opportunity without committing",
     "handled a few personal business tasks with an advisor"
@@ -252,29 +252,32 @@ function runAsUniversePipeline_(ctx) {
    * @param {function} rng - Random number generator
    */
   function addAthleteLifestyle_(poolArr, phase, rng) {
-    poolArr.push(...wellnessPool);
+    var i;
+    for (i = 0; i < wellnessPool.length; i++) { poolArr.push(wellnessPool[i]); }
 
     if (phase === "off-season") {
       // Heavier lifestyle in off-season
-      poolArr.push(...vacationPool, ...vacationPool);
-      poolArr.push(...influencePool, ...influencePool);
-      poolArr.push(...communityPool);
-      poolArr.push(...fundraiserPool);
-      poolArr.push(...businessPool);
+      for (i = 0; i < vacationPool.length; i++) { poolArr.push(vacationPool[i]); }
+      for (i = 0; i < vacationPool.length; i++) { poolArr.push(vacationPool[i]); }
+      for (i = 0; i < influencePool.length; i++) { poolArr.push(influencePool[i]); }
+      for (i = 0; i < influencePool.length; i++) { poolArr.push(influencePool[i]); }
+      for (i = 0; i < communityPool.length; i++) { poolArr.push(communityPool[i]); }
+      for (i = 0; i < fundraiserPool.length; i++) { poolArr.push(fundraiserPool[i]); }
+      for (i = 0; i < businessPool.length; i++) { poolArr.push(businessPool[i]); }
     } else {
       // Lighter lifestyle during in-season / spring-prep
-      poolArr.push(...influencePool);
-      poolArr.push(...communityPool);
-      if (rng() < 0.30) poolArr.push(...fundraiserPool);
-      if (rng() < 0.15) poolArr.push(...vacationPool);
-      if (rng() < 0.25) poolArr.push(...businessPool);
+      for (i = 0; i < influencePool.length; i++) { poolArr.push(influencePool[i]); }
+      for (i = 0; i < communityPool.length; i++) { poolArr.push(communityPool[i]); }
+      if (rng() < 0.30) { for (i = 0; i < fundraiserPool.length; i++) { poolArr.push(fundraiserPool[i]); } }
+      if (rng() < 0.15) { for (i = 0; i < vacationPool.length; i++) { poolArr.push(vacationPool[i]); } }
+      if (rng() < 0.25) { for (i = 0; i < businessPool.length; i++) { poolArr.push(businessPool[i]); } }
     }
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOOD POST-CAREER POOLS (12 neighborhoods)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoodPools = {
+  var neighborhoodPools = {
     'Temescal': [
       "enjoying Temescal's cafe culture in retirement",
       "appreciating the creative energy around Temescal",
@@ -340,7 +343,7 @@ function runAsUniversePipeline_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY POST-CAREER POOLS
   // ═══════════════════════════════════════════════════════════════════════════
-  const holidayPools = {
+  var holidayPools = {
     'NewYear': [
       "reflecting on the new year in retirement",
       "enjoying a quieter New Year's celebration"
@@ -387,7 +390,7 @@ function runAsUniversePipeline_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY POST-CAREER NOTES
   // ═══════════════════════════════════════════════════════════════════════════
-  const firstFridayNotes = [
+  var firstFridayNotes = [
     "wandering First Friday galleries in retirement",
     "enjoying the art walk's creative energy",
     "connecting with artists at First Friday",
@@ -397,30 +400,30 @@ function runAsUniversePipeline_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY POST-CAREER NOTES
   // ═══════════════════════════════════════════════════════════════════════════
-  const creationDayNotes = [
+  var creationDayNotes = [
     "feeling connected to deep roots today",
     "reflecting on the journey that brought them here",
     "sensing something foundational in the air",
     "appreciating the community's origins"
   ];
 
-  let postCareerEvents = 0;
-  const logRows = []; // Batch logging
+  var postCareerEvents = 0;
+  var logRows = []; // Batch logging
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE THROUGH CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let r = 0; r < rows.length; r++) {
+  for (var r = 0; r < rows.length; r++) {
 
-    const row = rows[r];
+    var row = rows[r];
 
-    const isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
+    var isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
     if (!isUNI) continue;
 
-    const status = (row[iStatus] || "").toString().trim().toLowerCase();
-    const clock = (row[iClock] || "").toString().trim();
-    const name = (row[iFirst] + " " + row[iLast]).trim();
-    const neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
+    var status = (row[iStatus] || "").toString().trim().toLowerCase();
+    var clock = (row[iClock] || "").toString().trim();
+    var name = (row[iFirst] + " " + row[iLast]).trim();
+    var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
 
     // ═══════════════════════════════════════════════════════════════════════
     // 1. ACTIVE UNI — GAME CLOCK (no random events)
@@ -439,8 +442,8 @@ function runAsUniversePipeline_(ctx) {
       row[iClock] = "ENGINE";
       row[iLastUpd] = ctx.now;
 
-      const baseNote = "Transitioned from active simulation to post-career life.";
-      const existing = row[iLife] ? row[iLife].toString() : "";
+      var baseNote = "Transitioned from active simulation to post-career life.";
+      var existing = row[iLife] ? row[iLife].toString() : "";
       row[iLife] = existing ? existing + "\n" + baseNote : baseNote;
 
       logRows.push([
@@ -462,7 +465,7 @@ function runAsUniversePipeline_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (status === "retired" && clock === "ENGINE") {
 
-      let chance = 0.02;
+      var chance = 0.02;
 
       // Season flavor
       if (season === "Winter") chance += 0.005;
@@ -500,53 +503,64 @@ function runAsUniversePipeline_(ctx) {
 
       if (rng() < chance) {
 
-        const pool = [];
+        var pool = [];
+        var i, sn, np, hp;
 
         // Athlete lifestyle (sports-agnostic, uses rng)
         addAthleteLifestyle_(pool, canonSportsPhase, rng);
 
         // Sports atmosphere (canon-safe)
-        const sn = sportsAtmosphereNotes[canonSportsPhase] || [];
-        pool.push(...sn);
+        sn = sportsAtmosphereNotes[canonSportsPhase] || [];
+        for (i = 0; i < sn.length; i++) { pool.push(sn[i]); }
 
         // Holiday / cultural notes
-        if (holiday !== "none" && holidayPools[holiday]) pool.push(...holidayPools[holiday]);
-        if (isFirstFriday) pool.push(...firstFridayNotes);
-        if (isCreationDay) pool.push(...creationDayNotes);
+        if (holiday !== "none" && holidayPools[holiday]) {
+          hp = holidayPools[holiday];
+          for (i = 0; i < hp.length; i++) { pool.push(hp[i]); }
+        }
+        if (isFirstFriday) {
+          for (i = 0; i < firstFridayNotes.length; i++) { pool.push(firstFridayNotes[i]); }
+        }
+        if (isCreationDay) {
+          for (i = 0; i < creationDayNotes.length; i++) { pool.push(creationDayNotes[i]); }
+        }
 
         // Neighborhood
-        if (neighborhood && neighborhoodPools[neighborhood]) pool.push(...neighborhoodPools[neighborhood]);
+        if (neighborhood && neighborhoodPools[neighborhood]) {
+          np = neighborhoodPools[neighborhood];
+          for (i = 0; i < np.length; i++) { pool.push(np[i]); }
+        }
 
         if (pool.length === 0) pool.push("continuing to adjust to post-career life");
 
-        const pick = pool[Math.floor(rng() * pool.length)];
+        var pick = pool[Math.floor(rng() * pool.length)];
 
         // Determine event tag (v3.0 - expanded tags)
-        let eventTag = "PostCareer";
-        if (firstFridayNotes.includes(pick)) {
+        var eventTag = "PostCareer";
+        if (firstFridayNotes.indexOf(pick) >= 0) {
           eventTag = "PostCareer-FirstFriday";
-        } else if (creationDayNotes.includes(pick)) {
+        } else if (creationDayNotes.indexOf(pick) >= 0) {
           eventTag = "PostCareer-CreationDay";
-        } else if (holiday !== "none" && holidayPools[holiday] && holidayPools[holiday].includes(pick)) {
+        } else if (holiday !== "none" && holidayPools[holiday] && holidayPools[holiday].indexOf(pick) >= 0) {
           eventTag = "PostCareer-Holiday";
-        } else if ((sportsAtmosphereNotes[canonSportsPhase] || []).includes(pick)) {
+        } else if ((sportsAtmosphereNotes[canonSportsPhase] || []).indexOf(pick) >= 0) {
           eventTag = "PostCareer-Sports";
-        } else if (vacationPool.includes(pick)) {
+        } else if (vacationPool.indexOf(pick) >= 0) {
           eventTag = "PostCareer-Travel";
-        } else if (fundraiserPool.includes(pick)) {
+        } else if (fundraiserPool.indexOf(pick) >= 0) {
           eventTag = "PostCareer-Fundraiser";
-        } else if (communityPool.includes(pick)) {
+        } else if (communityPool.indexOf(pick) >= 0) {
           eventTag = "PostCareer-Community";
-        } else if (influencePool.includes(pick) || businessPool.includes(pick)) {
+        } else if (influencePool.indexOf(pick) >= 0 || businessPool.indexOf(pick) >= 0) {
           eventTag = "PostCareer-Influence";
-        } else if (wellnessPool.includes(pick)) {
+        } else if (wellnessPool.indexOf(pick) >= 0) {
           eventTag = "PostCareer-Wellness";
         }
 
-        const stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
-        const line = `${stamp} — [${eventTag}] ${pick}`;
+        var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+        var line = stamp + " — [" + eventTag + "] " + pick;
 
-        const existing = row[iLife] ? row[iLife].toString() : "";
+        var existing = row[iLife] ? row[iLife].toString() : "";
         row[iLife] = existing ? existing + "\n" + line : line;
         row[iLastUpd] = ctx.now;
 
@@ -575,7 +589,7 @@ function runAsUniversePipeline_(ctx) {
 
   // Batch log write (v3.0 - single API call)
   if (logSheet && logRows.length > 0) {
-    const lastRow = logSheet.getLastRow();
+    var lastRow = logSheet.getLastRow();
     logSheet.getRange(lastRow + 1, 1, logRows.length, 7).setValues(logRows);
   }
 

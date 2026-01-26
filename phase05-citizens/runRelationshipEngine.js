@@ -32,46 +32,46 @@
 
 function runRelationshipEngine_(ctx) {
 
-  const ss = ctx.ss;
-  const ledger = ss.getSheetByName('Simulation_Ledger');
-  const logSheet = ss.getSheetByName('LifeHistory_Log');
+  var ss = ctx.ss;
+  var ledger = ss.getSheetByName('Simulation_Ledger');
+  var logSheet = ss.getSheetByName('LifeHistory_Log');
   if (!ledger) return;
 
-  const values = ledger.getDataRange().getValues();
+  var values = ledger.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
+  var header = values[0];
+  var rows = values.slice(1);
 
-  const idx = name => header.indexOf(name);
+  var idx = function(name) { return header.indexOf(name); };
 
-  const iPopID = idx('POPID');
-  const iTier = idx('Tier');
-  const iClockMode = idx('ClockMode');
-  const iUNI = idx('UNI (y/n)');
-  const iMED = idx('MED (y/n)');
-  const iCIV = idx('CIV (y/n)');
-  const iLife = idx('LifeHistory');
-  const iLastUpdated = idx('LastUpdated');
-  const iFirst = idx('First');
-  const iLast = idx('Last');
-  const iNeighborhood = idx('Neighborhood');
+  var iPopID = idx('POPID');
+  var iTier = idx('Tier');
+  var iClockMode = idx('ClockMode');
+  var iUNI = idx('UNI (y/n)');
+  var iMED = idx('MED (y/n)');
+  var iCIV = idx('CIV (y/n)');
+  var iLife = idx('LifeHistory');
+  var iLastUpdated = idx('LastUpdated');
+  var iFirst = idx('First');
+  var iLast = idx('Last');
+  var iNeighborhood = idx('Neighborhood');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL GODWORLD STATE
   // ═══════════════════════════════════════════════════════════════════════════
-  const season = ctx.summary.season;
-  const holiday = ctx.summary.holiday || "none";
-  const holidayPriority = ctx.summary.holidayPriority || "none";
-  const holidayNeighborhood = ctx.summary.holidayNeighborhood || null;
-  const isFirstFriday = ctx.summary.isFirstFriday || false;
-  const isCreationDay = ctx.summary.isCreationDay || false;
-  const weather = ctx.summary.weather || { type: "clear", impact: 1 };
-  const dynamics = ctx.summary.cityDynamics || { 
+  var season = ctx.summary.season;
+  var holiday = ctx.summary.holiday || "none";
+  var holidayPriority = ctx.summary.holidayPriority || "none";
+  var holidayNeighborhood = ctx.summary.holidayNeighborhood || null;
+  var isFirstFriday = ctx.summary.isFirstFriday || false;
+  var isCreationDay = ctx.summary.isCreationDay || false;
+  var weather = ctx.summary.weather || { type: "clear", impact: 1 };
+  var dynamics = ctx.summary.cityDynamics || {
     traffic: 1, publicSpaces: 1, sentiment: 0,
     culturalActivity: 1, communityEngagement: 1
   };
-  const chaos = ctx.summary.worldEvents || [];
+  var chaos = ctx.summary.worldEvents || [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // INITIALIZE TRACKING FOR BOND ENGINE
@@ -81,13 +81,13 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OUTPUT CAP
   // ═══════════════════════════════════════════════════════════════════════════
-  let globalEvents = 0;
-  const LIMIT = 8;
+  var globalEvents = 0;
+  var LIMIT = 8;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BASE POOL
   // ═══════════════════════════════════════════════════════════════════════════
-  const baseRels = [
+  var baseRels = [
     "reconnected with an old friend",
     "felt distant from people around them",
     "spent time with a close friend",
@@ -99,7 +99,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SEASONAL SOCIAL BEHAVIOR
   // ═══════════════════════════════════════════════════════════════════════════
-  const seasonalRels = [];
+  var seasonalRels = [];
 
   if (season === "Winter") {
     seasonalRels.push("limited social activity due to winter mood");
@@ -124,7 +124,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WEATHER SOCIAL EFFECTS
   // ═══════════════════════════════════════════════════════════════════════════
-  const weatherRels = [];
+  var weatherRels = [];
 
   if (weather.type === "rain") {
     weatherRels.push("stayed indoors and messaged friends remotely");
@@ -142,7 +142,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CHAOS SOCIAL EFFECTS
   // ═══════════════════════════════════════════════════════════════════════════
-  const chaosRels = chaos.length > 0 ? [
+  var chaosRels = chaos.length > 0 ? [
     "discussed recent city events with someone they knew",
     "felt social atmosphere shift due to today's happenings"
   ] : [];
@@ -150,7 +150,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // PUBLIC SENTIMENT EFFECTS
   // ═══════════════════════════════════════════════════════════════════════════
-  const sentimentRels = [];
+  var sentimentRels = [];
 
   if (dynamics.sentiment >= 0.4) {
     sentimentRels.push("felt more comfortable reaching out to others");
@@ -162,7 +162,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CULTURAL ACTIVITY EFFECTS (NEW v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const culturalRels = [];
+  var culturalRels = [];
 
   if (dynamics.culturalActivity >= 1.4) {
     culturalRels.push("attended a cultural event with friends");
@@ -173,7 +173,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // COMMUNITY ENGAGEMENT EFFECTS (NEW v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const communityRels = [];
+  var communityRels = [];
 
   if (dynamics.communityEngagement >= 1.3) {
     communityRels.push("participated in a neighborhood activity");
@@ -184,7 +184,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY SOCIAL EFFECTS (NEW v2.3 - 30+ holidays)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holidayRels = [];
+  var holidayRels = [];
 
   // Major holidays
   if (holiday === "NewYear" || holiday === "NewYearsEve") {
@@ -265,7 +265,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY EVENTS (NEW v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const firstFridayRels = isFirstFriday ? [
+  var firstFridayRels = isFirstFriday ? [
     "wandered the First Friday art walk with friends",
     "met an artist at a gallery opening",
     "ran into acquaintances at First Friday",
@@ -276,7 +276,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY EVENTS (NEW v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const creationDayRels = isCreationDay ? [
+  var creationDayRels = isCreationDay ? [
     "felt a deep sense of community belonging",
     "shared stories about the early days with neighbors",
     "sensed something foundational in the air",
@@ -286,7 +286,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // BOND-AWARE EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
-  const rivalryRels = [
+  var rivalryRels = [
     "felt a flicker of tension thinking about a competitor",
     "noticed subtle friction with someone in their circle",
     "sensed unspoken rivalry in a social interaction",
@@ -294,7 +294,7 @@ function runRelationshipEngine_(ctx) {
     "avoided someone they've had friction with"
   ];
 
-  const allianceRels = [
+  var allianceRels = [
     "received support from a trusted connection",
     "coordinated briefly with an ally",
     "felt reassured by a solid friendship",
@@ -302,7 +302,7 @@ function runRelationshipEngine_(ctx) {
     "appreciated the loyalty of a close contact"
   ];
 
-  const mentorshipRels = [
+  var mentorshipRels = [
     "reflected on guidance from someone experienced",
     "offered advice to someone newer in their circle",
     "appreciated a learning moment from a mentor figure",
@@ -312,7 +312,7 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ARC INVOLVEMENT POOL
   // ═══════════════════════════════════════════════════════════════════════════
-  const arcRels = [
+  var arcRels = [
     "felt the social weight of unfolding events",
     "sensed relationships shifting due to larger circumstances",
     "noticed how current events affected their social circle",
@@ -322,38 +322,38 @@ function runRelationshipEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // UNIFIED INTERACTION POOL
   // ═══════════════════════════════════════════════════════════════════════════
-  const basePool = [
-    ...baseRels,
-    ...seasonalRels,
-    ...weatherRels,
-    ...chaosRels,
-    ...sentimentRels,
-    ...culturalRels,
-    ...communityRels,
-    ...holidayRels,
-    ...firstFridayRels,
-    ...creationDayRels
-  ];
+  var basePool = [].concat(
+    baseRels,
+    seasonalRels,
+    weatherRels,
+    chaosRels,
+    sentimentRels,
+    culturalRels,
+    communityRels,
+    holidayRels,
+    firstFridayRels,
+    creationDayRels
+  );
 
   // Ensure non-empty pool
-  const interactionPool = basePool.length > 0 ? basePool : baseRels;
+  var interactionPool = basePool.length > 0 ? basePool : baseRels;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE THROUGH CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let r = 0; r < rows.length; r++) {
+  for (var r = 0; r < rows.length; r++) {
 
     if (globalEvents >= LIMIT) break;
 
-    const row = rows[r];
-    const popId = row[iPopID];
-    const neighborhood = iNeighborhood >= 0 ? row[iNeighborhood] : '';
+    var row = rows[r];
+    var popId = row[iPopID];
+    var neighborhood = iNeighborhood >= 0 ? row[iNeighborhood] : '';
 
-    const tier = Number(row[iTier] || 0);
-    const mode = row[iClockMode] || "ENGINE";
-    const isUNI = (row[iUNI] || "").toString().toLowerCase() === "yes";
-    const isMED = (row[iMED] || "").toString().toLowerCase() === "yes";
-    const isCIV = (row[iCIV] || "").toString().toLowerCase() === "yes";
+    var tier = Number(row[iTier] || 0);
+    var mode = row[iClockMode] || "ENGINE";
+    var isUNI = (row[iUNI] || "").toString().toLowerCase() === "yes";
+    var isMED = (row[iMED] || "").toString().toLowerCase() === "yes";
+    var isCIV = (row[iCIV] || "").toString().toLowerCase() === "yes";
 
     // Only Tier-3/4 background citizens
     if (tier !== 3 && tier !== 4) continue;
@@ -363,7 +363,7 @@ function runRelationshipEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // DRIFT PROBABILITY
     // ═══════════════════════════════════════════════════════════════════════
-    let driftChance = 0.02; // base chance
+    var driftChance = 0.02; // base chance
 
     // Seasonal adjustments
     if (season === "Winter") driftChance += 0.005;
@@ -409,22 +409,22 @@ function runRelationshipEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // BOND & ARC BOOST
     // ═══════════════════════════════════════════════════════════════════════
-    const eventBoost = getCombinedEventBoost_(ctx, popId);
+    var eventBoost = getCombinedEventBoost_(ctx, popId);
     driftChance *= eventBoost;
 
     // Check for active bonds
-    const citizenBonds = getCitizenBonds_(ctx, popId);
-    const hasRivalry = citizenBonds.some(b => b.bondType === 'rivalry');
-    const hasAlliance = citizenBonds.some(b => b.bondType === 'alliance');
-    const hasMentorship = citizenBonds.some(b => b.bondType === 'mentorship');
+    var citizenBonds = getCitizenBonds_(ctx, popId);
+    var hasRivalry = citizenBonds.some(function(b) { return b.bondType === 'rivalry'; });
+    var hasAlliance = citizenBonds.some(function(b) { return b.bondType === 'alliance'; });
+    var hasMentorship = citizenBonds.some(function(b) { return b.bondType === 'mentorship'; });
 
     // Rivalry increases social event chance (drama)
     if (hasRivalry) driftChance += 0.015;
 
     // Arc Involvement Check
-    const activeArc = citizenInActiveArc_(ctx, popId);
+    var activeArc = citizenInActiveArc_(ctx, popId);
     if (activeArc) {
-      const arcPhaseBoost = {
+      var arcPhaseBoost = {
         'early': 0.005,
         'mid': 0.01,
         'peak': 0.02,
@@ -435,19 +435,19 @@ function runRelationshipEngine_(ctx) {
 
     // Weather Mood Modifier
     if (typeof getWeatherEventModifier_ === 'function') {
-      const weatherMod = getWeatherEventModifier_(ctx, 'social');
+      var weatherMod = getWeatherEventModifier_(ctx, 'social');
       driftChance *= weatherMod;
     }
 
     // Economic Modifier
     if (typeof getEconomicEventModifier_ === 'function') {
-      const econMod = getEconomicEventModifier_(ctx, 'social');
+      var econMod = getEconomicEventModifier_(ctx, 'social');
       driftChance *= econMod;
     }
 
     // Media Modifier
     if (typeof getMediaEventModifier_ === 'function') {
-      const mediaMod = getMediaEventModifier_(ctx, 'social');
+      var mediaMod = getMediaEventModifier_(ctx, 'social');
       driftChance *= mediaMod;
     }
 
@@ -465,28 +465,28 @@ function runRelationshipEngine_(ctx) {
     if (Math.random() < driftChance) {
 
       // Build contextual pool
-      let pool = [...interactionPool];
-      let eventTag = "Relationship";
+      var pool = interactionPool.slice();
+      var eventTag = "Relationship";
 
       // Add bond-aware events based on citizen's bonds
       if (hasRivalry && Math.random() < 0.35) {
-        pool = [...pool, ...rivalryRels];
+        pool = pool.concat(rivalryRels);
       }
       if (hasAlliance && Math.random() < 0.35) {
-        pool = [...pool, ...allianceRels];
+        pool = pool.concat(allianceRels);
       }
       if (hasMentorship && Math.random() < 0.30) {
-        pool = [...pool, ...mentorshipRels];
+        pool = pool.concat(mentorshipRels);
       }
 
       // Add Arc Events
       if (activeArc && Math.random() < 0.4) {
-        pool = [...pool, ...arcRels];
+        pool = pool.concat(arcRels);
       }
 
       // Add Weather Events
       if (typeof getWeatherEvent_ === 'function' && Math.random() < 0.2) {
-        const weatherEvent = getWeatherEvent_(ctx, false);
+        var weatherEvent = getWeatherEvent_(ctx, false);
         if (weatherEvent) {
           pool.push(weatherEvent.text);
         }
@@ -494,14 +494,14 @@ function runRelationshipEngine_(ctx) {
 
       // Add Weather Special Events During Heat Wave
       if (typeof hasWeatherCondition_ === 'function' && hasWeatherCondition_(ctx, 'heat_wave')) {
-        if (ctx.summary.weatherEventPools?.special) {
-          pool = [...pool, ...ctx.summary.weatherEventPools.special];
+        if (ctx.summary.weatherEventPools && ctx.summary.weatherEventPools.special) {
+          pool = pool.concat(ctx.summary.weatherEventPools.special);
         }
       }
 
       // Add Media-Influenced Events
       if (typeof getMediaInfluencedEvent_ === 'function' && Math.random() < 0.15) {
-        const mediaEvent = getMediaInfluencedEvent_(ctx);
+        var mediaEvent = getMediaInfluencedEvent_(ctx);
         if (mediaEvent) {
           pool.push(mediaEvent.text);
         }
@@ -510,61 +510,62 @@ function runRelationshipEngine_(ctx) {
       // ═══════════════════════════════════════════════════════════════════════
       // PICK EVENT
       // ═══════════════════════════════════════════════════════════════════════
-      const pick = pool[Math.floor(Math.random() * pool.length)];
+      var pick = pool[Math.floor(Math.random() * pool.length)];
 
       // Determine event tag based on which pool it came from
-      if (rivalryRels.includes(pick)) {
+      if (rivalryRels.indexOf(pick) >= 0) {
         eventTag = "Rivalry";
-      } else if (allianceRels.includes(pick)) {
+      } else if (allianceRels.indexOf(pick) >= 0) {
         eventTag = "Alliance";
-      } else if (mentorshipRels.includes(pick)) {
+      } else if (mentorshipRels.indexOf(pick) >= 0) {
         eventTag = "Mentorship";
-      } else if (arcRels.includes(pick)) {
+      } else if (arcRels.indexOf(pick) >= 0) {
         eventTag = "Arc";
-      } else if (holidayRels.includes(pick)) {
+      } else if (holidayRels.indexOf(pick) >= 0) {
         eventTag = "Holiday";
-      } else if (firstFridayRels.includes(pick)) {
+      } else if (firstFridayRels.indexOf(pick) >= 0) {
         eventTag = "FirstFriday";
-      } else if (creationDayRels.includes(pick)) {
+      } else if (creationDayRels.indexOf(pick) >= 0) {
         eventTag = "CreationDay";
-      } else if (culturalRels.includes(pick)) {
+      } else if (culturalRels.indexOf(pick) >= 0) {
         eventTag = "Cultural";
-      } else if (communityRels.includes(pick)) {
+      } else if (communityRels.indexOf(pick) >= 0) {
         eventTag = "Community";
       }
 
       // Check for Media Event Tag
-      if (ctx.summary.mediaEffects?.eventPools) {
-        const allMediaEvents = [
-          ...(ctx.summary.mediaEffects.eventPools.anxious || []),
-          ...(ctx.summary.mediaEffects.eventPools.hopeful || []),
-          ...(ctx.summary.mediaEffects.eventPools.crisis || []),
-          ...(ctx.summary.mediaEffects.eventPools.celebrity || []),
-          ...(ctx.summary.mediaEffects.eventPools.sports || [])
-        ];
-        if (allMediaEvents.includes(pick)) {
+      var mediaEffects = ctx.summary.mediaEffects;
+      if (mediaEffects && mediaEffects.eventPools) {
+        var allMediaEvents = [].concat(
+          mediaEffects.eventPools.anxious || [],
+          mediaEffects.eventPools.hopeful || [],
+          mediaEffects.eventPools.crisis || [],
+          mediaEffects.eventPools.celebrity || [],
+          mediaEffects.eventPools.sports || []
+        );
+        if (allMediaEvents.indexOf(pick) >= 0) {
           eventTag = "Media";
         }
       }
 
       // Check for Weather Event Tag
       if (ctx.summary.weatherEventPools) {
-        const allWeatherEvents = [
-          ...(ctx.summary.weatherEventPools.base || []),
-          ...(ctx.summary.weatherEventPools.enhanced || []),
-          ...(ctx.summary.weatherEventPools.special || [])
-        ];
-        if (allWeatherEvents.includes(pick)) {
+        var allWeatherEvents = [].concat(
+          ctx.summary.weatherEventPools.base || [],
+          ctx.summary.weatherEventPools.enhanced || [],
+          ctx.summary.weatherEventPools.special || []
+        );
+        if (allWeatherEvents.indexOf(pick) >= 0) {
           eventTag = "Weather";
         }
       }
 
-      const stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+      var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
 
-      const existing = row[iLife] ? row[iLife].toString() : "";
-      const line = `${stamp} — [${eventTag}] ${pick}`;
+      var existing = row[iLife] ? row[iLife].toString() : "";
+      var line = stamp + " — [" + eventTag + "] " + pick;
 
-      row[iLife] = existing ? existing + "\\n" + line : line;
+      row[iLife] = existing ? existing + "\n" + line : line;
       row[iLastUpdated] = ctx.now;
 
       // Track active citizen for Bond Engine
@@ -602,12 +603,12 @@ function runRelationshipEngine_(ctx) {
  * Gets all active bonds for a citizen.
  */
 function getCitizenBonds_(ctx, citizenId) {
-  const bonds = ctx.summary.relationshipBonds || [];
-  return bonds.filter(b => 
-    b && 
-    b.status === 'active' &&
-    (b.citizenA === citizenId || b.citizenB === citizenId)
-  );
+  var bonds = ctx.summary.relationshipBonds || [];
+  return bonds.filter(function(b) {
+    return b &&
+      b.status === 'active' &&
+      (b.citizenA === citizenId || b.citizenB === citizenId);
+  });
 }
 
 /**
@@ -615,10 +616,10 @@ function getCitizenBonds_(ctx, citizenId) {
  */
 function getCombinedEventBoost_(ctx, citizenId) {
   // Arc boost
-  let arcBoost = 1.0;
-  const arc = citizenInActiveArc_(ctx, citizenId);
+  var arcBoost = 1.0;
+  var arc = citizenInActiveArc_(ctx, citizenId);
   if (arc) {
-    const phaseBoosts = {
+    var phaseBoosts = {
       'early': 1.2,
       'mid': 1.5,
       'peak': 2.0,
@@ -627,11 +628,12 @@ function getCombinedEventBoost_(ctx, citizenId) {
     };
     arcBoost = phaseBoosts[arc.phase] || 1.0;
   }
-  
+
   // Alliance boost
-  const allianceData = ctx.summary.allianceBenefits?.[citizenId];
-  const allianceBoost = allianceData?.boost || 1.0;
-  
+  var allianceBenefits = ctx.summary.allianceBenefits || {};
+  var allianceData = allianceBenefits[citizenId];
+  var allianceBoost = (allianceData && allianceData.boost) ? allianceData.boost : 1.0;
+
   // Multiply boosts, cap at 3.0
   return Math.min(arcBoost * allianceBoost, 3.0);
 }
@@ -640,15 +642,18 @@ function getCombinedEventBoost_(ctx, citizenId) {
  * Check if citizen is in any active arc.
  */
 function citizenInActiveArc_(ctx, citizenId) {
-  const arcs = ctx.summary?.eventArcs || [];
-  
-  for (let arc of arcs) {
+  var arcs = (ctx.summary && ctx.summary.eventArcs) ? ctx.summary.eventArcs : [];
+
+  for (var i = 0; i < arcs.length; i++) {
+    var arc = arcs[i];
     if (!arc || arc.phase === 'resolved') continue;
-    if (arc.involvedCitizens?.some(c => c.id === citizenId)) {
+    var involvedCitizens = arc.involvedCitizens || [];
+    var found = involvedCitizens.some(function(c) { return c.id === citizenId; });
+    if (found) {
       return arc;
     }
   }
-  
+
   return null;
 }
 

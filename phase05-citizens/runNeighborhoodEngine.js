@@ -34,36 +34,36 @@
 
 function runNeighborhoodEngine_(ctx) {
 
-  const ss = ctx.ss;
-  const ledger = ss.getSheetByName('Simulation_Ledger');
-  const logSheet = ss.getSheetByName('LifeHistory_Log');
+  var ss = ctx.ss;
+  var ledger = ss.getSheetByName('Simulation_Ledger');
+  var logSheet = ss.getSheetByName('LifeHistory_Log');
   if (!ledger) return;
 
-  const values = ledger.getDataRange().getValues();
+  var values = ledger.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
+  var header = values[0];
+  var rows = values.slice(1);
 
-  const idx = name => header.indexOf(name);
+  var idx = function(name) { return header.indexOf(name); };
 
-  const iTier = idx('Tier');
-  const iClockMode = idx('ClockMode');
-  const iUNI = idx('UNI (y/n)');
-  const iMED = idx('MED (y/n)');
-  const iCIV = idx('CIV (y/n)');
-  const iNeighborhood = idx('Neighborhood');
-  const iLife = idx('LifeHistory');
-  const iLastUpdated = idx('LastUpdated');
-  const iPopID = idx('POPID');
-  const iFirst = idx('First');
-  const iLast = idx('Last');
-  const iBirthYear = idx('BirthYear');
+  var iTier = idx('Tier');
+  var iClockMode = idx('ClockMode');
+  var iUNI = idx('UNI (y/n)');
+  var iMED = idx('MED (y/n)');
+  var iCIV = idx('CIV (y/n)');
+  var iNeighborhood = idx('Neighborhood');
+  var iLife = idx('LifeHistory');
+  var iLastUpdated = idx('LastUpdated');
+  var iPopID = idx('POPID');
+  var iFirst = idx('First');
+  var iLast = idx('Last');
+  var iBirthYear = idx('BirthYear');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12 total - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoods = [
+  var neighborhoods = [
     "Temescal", "Downtown", "Fruitvale", "Lake Merritt",
     "West Oakland", "Laurel", "Rockridge", "Jack London",
     "Uptown", "KONO", "Chinatown", "Piedmont Ave"
@@ -72,7 +72,7 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // NEIGHBORHOOD-SPECIFIC EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoodEvents = {
+  var neighborhoodEvents = {
     'Temescal': [
       "noticed the creative energy shifting in Temescal",
       "felt Temescal's community vibe change slightly",
@@ -148,7 +148,7 @@ function runNeighborhoodEngine_(ctx) {
   };
 
   // Generic events (fallback)
-  const genericEvents = [
+  var genericEvents = [
     "noticed small tension in the neighborhood",
     "heard more activity around the block",
     "felt area slightly quieter than usual",
@@ -160,40 +160,40 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // EXTERNAL CONTEXT FROM ctx.summary
   // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary;
-  const season = S.season;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const holidayNeighborhood = S.holidayNeighborhood || null;
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const dynamics = S.cityDynamics || { 
+  var S = ctx.summary;
+  var season = S.season;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var holidayNeighborhood = S.holidayNeighborhood || null;
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var dynamics = S.cityDynamics || {
     traffic: 1, publicSpaces: 1, sentiment: 0,
     culturalActivity: 1, communityEngagement: 1
   };
-  const chaos = S.worldEvents || [];
-  const econMood = S.economicMood || 50;
-  const cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
+  var chaos = S.worldEvents || [];
+  var econMood = S.economicMood || 50;
+  var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
-  let globalEvents = 0;
-  const EVENT_LIMIT = 6;
-  
+  var globalEvents = 0;
+  var EVENT_LIMIT = 6;
+
   // Track for summary
-  const neighborhoodDriftEvents = [];
-  let assignmentsCount = 0;
+  var neighborhoodDriftEvents = [];
+  var assignmentsCount = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DEMOGRAPHIC-AWARE NEIGHBORHOOD PICKER (v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
   function pickDemographicNeighborhood_(ss, row, neighborhoods, iBirthYear, idxFn) {
     // Determine citizen type based on age
-    const simYear = 2041;
-    let citizenType = 'young_professional';
+    var simYear = 2041;
+    var citizenType = 'young_professional';
 
     if (iBirthYear >= 0 && row[iBirthYear]) {
-      const age = simYear - Number(row[iBirthYear]);
+      var age = simYear - Number(row[iBirthYear]);
       if (age >= 5 && age <= 22) {
         citizenType = 'student';
       } else if (age >= 65) {
@@ -208,16 +208,16 @@ function runNeighborhoodEngine_(ctx) {
     // Check if demographic weighting is available
     if (typeof getDemographicWeightedNeighborhoods_ === 'function' &&
         typeof getNeighborhoodDemographics_ === 'function') {
-      const demographics = getNeighborhoodDemographics_(ss);
+      var demographics = getNeighborhoodDemographics_(ss);
       if (demographics && Object.keys(demographics).length > 0) {
-        const weights = getDemographicWeightedNeighborhoods_(demographics, citizenType);
+        var weights = getDemographicWeightedNeighborhoods_(demographics, citizenType);
         // Build weighted selection array
-        const weighted = [];
-        for (let i = 0; i < neighborhoods.length; i++) {
-          const hood = neighborhoods[i];
-          const weight = weights[hood] || 0.05;
-          const count = Math.max(1, Math.round(weight * 100));
-          for (let c = 0; c < count; c++) {
+        var weighted = [];
+        for (var i = 0; i < neighborhoods.length; i++) {
+          var hood = neighborhoods[i];
+          var weight = weights[hood] || 0.05;
+          var count = Math.max(1, Math.round(weight * 100));
+          for (var c = 0; c < count; c++) {
             weighted.push(hood);
           }
         }
@@ -234,7 +234,7 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY-SPECIFIC NEIGHBORHOOD EVENTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holidayNeighborhoodEvents = {};
+  var holidayNeighborhoodEvents = {};
 
   // Fruitvale holidays
   if (holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") {
@@ -294,7 +294,7 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY EVENTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const firstFridayEvents = {
+  var firstFridayEvents = {
     'Uptown': [
       "noticed First Friday crowds filling the galleries",
       "felt the monthly art walk energy in Uptown",
@@ -317,7 +317,7 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY EVENTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const creationDayEvents = [
+  var creationDayEvents = [
     "felt something foundational in the neighborhood air",
     "sensed deep community roots today",
     "noticed neighbors reflecting on how things began",
@@ -327,17 +327,17 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE THROUGH CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let r = 0; r < rows.length; r++) {
+  for (var r = 0; r < rows.length; r++) {
 
     if (globalEvents >= EVENT_LIMIT) break;
 
-    const row = rows[r];
+    var row = rows[r];
 
-    const tier = Number(row[iTier] || 0);
-    const mode = row[iClockMode] || 'ENGINE';
-    const isUNI = (row[iUNI] || '').toString().toLowerCase() === 'y';
-    const isMED = (row[iMED] || '').toString().toLowerCase() === 'y';
-    const isCIV = (row[iCIV] || '').toString().toLowerCase() === 'y';
+    var tier = Number(row[iTier] || 0);
+    var mode = row[iClockMode] || 'ENGINE';
+    var isUNI = (row[iUNI] || '').toString().toLowerCase() === 'y';
+    var isMED = (row[iMED] || '').toString().toLowerCase() === 'y';
+    var isCIV = (row[iCIV] || '').toString().toLowerCase() === 'y';
 
     // Only Tier-3/4 ENGINE citizens qualify
     if (tier !== 3 && tier !== 4) continue;
@@ -347,7 +347,7 @@ function runNeighborhoodEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // NEIGHBORHOOD ASSIGNMENT IF MISSING (v2.3 - demographic aware)
     // ═══════════════════════════════════════════════════════════════════════
-    let neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '').toString().trim() : '';
+    var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '').toString().trim() : '';
 
     if (!neighborhood || neighborhood === '' || neighborhood === 'Oakland, CA') {
       // v2.3: Use demographic-weighted neighborhood selection
@@ -362,7 +362,7 @@ function runNeighborhoodEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // DRIFT CHANCE INFLUENCED BY CONDITIONS
     // ═══════════════════════════════════════════════════════════════════════
-    let driftChance = 0.02;
+    var driftChance = 0.02;
 
     // Weather-driven drift
     if (weather.impact >= 1.3) driftChance += 0.015;
@@ -424,22 +424,22 @@ function runNeighborhoodEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (Math.random() < driftChance) {
 
-      let eventPool = [...(neighborhoodEvents[neighborhood] || genericEvents)];
-      let eventTag = "Neighborhood";
+      var eventPool = (neighborhoodEvents[neighborhood] || genericEvents).slice();
+      var eventTag = "Neighborhood";
 
       // Add holiday-specific events (v2.2)
       if (holidayNeighborhoodEvents[neighborhood]) {
-        eventPool = [...eventPool, ...holidayNeighborhoodEvents[neighborhood]];
+        eventPool = eventPool.concat(holidayNeighborhoodEvents[neighborhood]);
       }
 
       // Add First Friday events (v2.2)
       if (isFirstFriday && firstFridayEvents[neighborhood]) {
-        eventPool = [...eventPool, ...firstFridayEvents[neighborhood]];
+        eventPool = eventPool.concat(firstFridayEvents[neighborhood]);
       }
 
       // Add Creation Day events (v2.2)
       if (isCreationDay) {
-        eventPool = [...eventPool, ...creationDayEvents];
+        eventPool = eventPool.concat(creationDayEvents);
       }
 
       // Add weather-context events
@@ -476,21 +476,21 @@ function runNeighborhoodEngine_(ctx) {
         eventPool.push("felt neighbors more engaged with each other");
       }
 
-      const entry = eventPool[Math.floor(Math.random() * eventPool.length)];
+      var entry = eventPool[Math.floor(Math.random() * eventPool.length)];
 
       // Determine event tag (v2.2)
-      if (isFirstFriday && firstFridayEvents[neighborhood]?.includes(entry)) {
+      if (isFirstFriday && firstFridayEvents[neighborhood] && firstFridayEvents[neighborhood].indexOf(entry) >= 0) {
         eventTag = "FirstFriday";
-      } else if (isCreationDay && creationDayEvents.includes(entry)) {
+      } else if (isCreationDay && creationDayEvents.indexOf(entry) >= 0) {
         eventTag = "CreationDay";
-      } else if (holidayNeighborhoodEvents[neighborhood]?.includes(entry)) {
+      } else if (holidayNeighborhoodEvents[neighborhood] && holidayNeighborhoodEvents[neighborhood].indexOf(entry) >= 0) {
         eventTag = "Holiday";
       }
 
       // Stamp entry
-      const stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
-      const existing = row[iLife] ? row[iLife].toString() : "";
-      const line = `${stamp} — [${eventTag}] ${entry}`;
+      var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+      var existing = row[iLife] ? row[iLife].toString() : "";
+      var line = stamp + " — [" + eventTag + "] " + entry;
 
       row[iLife] = existing ? existing + "\n" + line : line;
       row[iLastUpdated] = ctx.now;

@@ -22,51 +22,51 @@
 
 function runCivicRoleEngine_(ctx) {
 
-  const ss = ctx.ss;
-  const ledger = ss.getSheetByName('Simulation_Ledger');
-  const logSheet = ss.getSheetByName('LifeHistory_Log');
+  var ss = ctx.ss;
+  var ledger = ss.getSheetByName('Simulation_Ledger');
+  var logSheet = ss.getSheetByName('LifeHistory_Log');
   if (!ledger) return;
 
-  const values = ledger.getDataRange().getValues();
+  var values = ledger.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
+  var header = values[0];
+  var rows = values.slice(1);
 
-  const idx = n => header.indexOf(n);
+  var idx = function(n) { return header.indexOf(n); };
 
-  const iPopID = idx('POPID');
-  const iFirst = idx('First');
-  const iLast = idx('Last');
-  const iCIV = idx('CIV (y/n)');
-  const iStatus = idx('Status');
-  const iLife = idx('LifeHistory');
-  const iLastUpd = idx('LastUpdated');
-  const iNeighborhood = idx('Neighborhood');
-  const iTierRole = idx('TierRole');
+  var iPopID = idx('POPID');
+  var iFirst = idx('First');
+  var iLast = idx('Last');
+  var iCIV = idx('CIV (y/n)');
+  var iStatus = idx('Status');
+  var iLife = idx('LifeHistory');
+  var iLastUpd = idx('LastUpdated');
+  var iNeighborhood = idx('Neighborhood');
+  var iTierRole = idx('TierRole');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL WORLD CONDITIONS
   // ═══════════════════════════════════════════════════════════════════════════
-  const S = ctx.summary;
-  const season = S.season;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
+  var S = ctx.summary;
+  var season = S.season;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const econMood = S.economicMood || 50;
-  const cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
+  var econMood = S.economicMood || 50;
+  var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // NEIGHBORHOOD CIVIC NOTES (12 neighborhoods - v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoodCivicNotes = {
+  var neighborhoodCivicNotes = {
     'Downtown': [
       "City Hall activity continues in Downtown.",
       "Civic presence noted in the government district.",
@@ -132,7 +132,7 @@ function runCivicRoleEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ROLE-SPECIFIC CIVIC NOTES
   // ═══════════════════════════════════════════════════════════════════════════
-  const roleCivicNotes = {
+  var roleCivicNotes = {
     'council': [
       "Council responsibilities continue.",
       "Legislative matters under consideration.",
@@ -173,7 +173,7 @@ function runCivicRoleEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY-SPECIFIC CIVIC NOTES (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holidayCivicNotes = {
+  var holidayCivicNotes = {
     'MLKDay': [
       "MLK Day observance duties fulfilled.",
       "Civil rights commemoration activities attended.",
@@ -229,7 +229,7 @@ function runCivicRoleEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY CIVIC NOTES (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const firstFridayCivicNotes = [
+  var firstFridayCivicNotes = [
     "First Friday cultural affairs oversight maintained.",
     "Arts community civic engagement noted.",
     "Cultural district coordination continues.",
@@ -239,34 +239,34 @@ function runCivicRoleEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY CIVIC NOTES (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const creationDayCivicNotes = [
+  var creationDayCivicNotes = [
     "Reflected on the city's foundational values.",
     "Civic responsibilities feel particularly meaningful today.",
     "Sense of duty to community origins renewed.",
     "Foundational civic commitments reaffirmed."
   ];
 
-  let events = 0;
-  const LIMIT = 6;
+  var events = 0;
+  var LIMIT = 6;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE THROUGH CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let r = 0; r < rows.length; r++) {
+  for (var r = 0; r < rows.length; r++) {
 
     if (events >= LIMIT) break;
 
-    const row = rows[r];
-    const civFlag = (row[iCIV] || "").toString().toLowerCase();
+    var row = rows[r];
+    var civFlag = (row[iCIV] || "").toString().toLowerCase();
     if (civFlag !== "y") continue;
 
-    const status = (row[iStatus] || "").toString().trim().toLowerCase();
-    const name = (row[iFirst] + " " + row[iLast]).trim();
-    const neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
-    const tierRole = iTierRole >= 0 ? (row[iTierRole] || '').toString().toLowerCase() : '';
+    var status = (row[iStatus] || "").toString().trim().toLowerCase();
+    var name = (row[iFirst] + " " + row[iLast]).trim();
+    var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
+    var tierRole = iTierRole >= 0 ? (row[iTierRole] || '').toString().toLowerCase() : '';
 
-    let baseNote = "";
-    let shouldLog = false;
+    var baseNote = "";
+    var shouldLog = false;
 
     // ═══════════════════════════════════════════════════════════════════════
     // MAKER-DEFINED CIVIC STATUSES
@@ -285,72 +285,74 @@ function runCivicRoleEngine_(ctx) {
     }
     else if (status === "active") {
       // Active CIV citizens get occasional soft civic notes
-      let chance = 0.015;
-      
+      var chance = 0.015;
+
       // Base modifiers
       if (chaos.length > 0) chance += 0.01;
       if (dynamics.sentiment <= -0.3) chance += 0.01;
       if (econMood <= 35) chance += 0.005;
       if (season === "Fall") chance += 0.005; // Election season
-      
+
       // Holiday priority boost (v2.2)
       if (holidayPriority === "major") chance += 0.01;
       else if (holidayPriority === "cultural") chance += 0.008;
       else if (holidayPriority === "oakland") chance += 0.008;
-      
+
       // Civic holidays boost (v2.2)
       if (holiday === "MLKDay" || holiday === "Juneteenth" || holiday === "VeteransDay" ||
           holiday === "MemorialDay" || holiday === "IndigenousPeoplesDay") {
         chance += 0.015;
       }
-      
+
       // First Friday boost (v2.2)
       if (isFirstFriday) chance += 0.008;
-      
+
       // Creation Day boost (v2.2)
       if (isCreationDay) chance += 0.01;
-      
+
       // Community engagement boost (v2.2)
       if (dynamics.communityEngagement >= 1.3) chance += 0.005;
-      
+
       if (chance > 0.08) chance = 0.08;
-      
+
       if (Math.random() < chance) {
         // Build pool of civic notes
-        let pool = [
+        var pool = [
           "Continuing civic responsibilities.",
           "Public engagement ongoing.",
           "Civic duties proceeding normally."
         ];
-        
+
         // Add role-specific notes
-        for (const [roleKey, notes] of Object.entries(roleCivicNotes)) {
-          if (tierRole.includes(roleKey)) {
-            pool = [...pool, ...notes];
+        var roleKeys = Object.keys(roleCivicNotes);
+        for (var k = 0; k < roleKeys.length; k++) {
+          var roleKey = roleKeys[k];
+          if (tierRole.indexOf(roleKey) >= 0) {
+            pool = pool.concat(roleCivicNotes[roleKey]);
             break;
           }
         }
-        
+
         // Add neighborhood-specific notes
         if (neighborhood && neighborhoodCivicNotes[neighborhood]) {
-          pool = [...pool, ...neighborhoodCivicNotes[neighborhood]];
+          pool = pool.concat(neighborhoodCivicNotes[neighborhood]);
         }
-        
+
         // Add holiday-specific notes (v2.2)
         if (holiday !== "none" && holidayCivicNotes[holiday]) {
-          pool = [...pool, ...holidayCivicNotes[holiday]];
+          pool = pool.concat(holidayCivicNotes[holiday]);
         }
-        
+
         // Add First Friday notes (v2.2)
         if (isFirstFriday) {
-          pool = [...pool, ...firstFridayCivicNotes];
+          pool = pool.concat(firstFridayCivicNotes);
         }
-        
+
         // Add Creation Day notes (v2.2)
         if (isCreationDay) {
-          pool = [...pool, ...creationDayCivicNotes];
+          pool = pool.concat(creationDayCivicNotes);
         }
-        
+
         baseNote = pool[Math.floor(Math.random() * pool.length)];
         shouldLog = true;
       }
@@ -361,7 +363,7 @@ function runCivicRoleEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // CONTEXTUAL MODIFIERS
     // ═══════════════════════════════════════════════════════════════════════
-    let context = "";
+    var context = "";
 
     // Season influence
     if (season === "Spring") context += " Spring civic activity increases attention.";
@@ -382,7 +384,7 @@ function runCivicRoleEngine_(ctx) {
     // Weather influence
     if (weather.type === "rain") context += " Rainy conditions tempered public engagement.";
     if (weather.type === "fog") context += " Foggy conditions muted civic presence.";
-    
+
     // Weather mood
     if (weatherMood.irritabilityFactor && weatherMood.irritabilityFactor > 0.3) {
       context += " Public mood shows strain.";
@@ -405,10 +407,10 @@ function runCivicRoleEngine_(ctx) {
     if (econMood <= 35) context += " Economic concerns affect civic priorities.";
     if (econMood >= 65) context += " Economic optimism supports civic agenda.";
 
-    const stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
 
-    const existing = row[iLife] ? row[iLife].toString() : "";
-    const finalLine = `${stamp} — [Civic Role] ${baseNote}${context}`;
+    var existing = row[iLife] ? row[iLife].toString() : "";
+    var finalLine = stamp + " — [Civic Role] " + baseNote + context;
 
     row[iLife] = existing ? existing + "\n" + finalLine : finalLine;
     row[iLastUpd] = ctx.now;

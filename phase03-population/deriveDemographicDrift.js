@@ -25,41 +25,53 @@
 
 function deriveDemographicDrift_(ctx) {
 
-  const S = ctx.summary;
+  var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // EXISTING SIGNALS (preserved from v3.1)
   // ═══════════════════════════════════════════════════════════════════════════
-  const nightlife = S.nightlifeVolume || 0;
-  const events = S.worldEvents || [];
-  const crime = events.filter(e => e.domain && e.domain.toLowerCase() === 'crime').length;
-  const safety = events.filter(e => e.domain && e.domain.toLowerCase() === 'safety').length;
-  const dynamics = S.cityDynamics || {};
-  const sentiment = dynamics.sentiment || 0;
-  const civicLoad = S.civicLoad || 'stable';
-  const civicLoadScore = S.civicLoadScore || 0;
-  const econMood = S.economicMood || 50;
-  const weatherMood = S.weatherMood || {};
+  var nightlife = S.nightlifeVolume || 0;
+  var events = S.worldEvents || [];
+  var crime = 0;
+  var safety = 0;
+  for (var ei = 0; ei < events.length; ei++) {
+    var ev = events[ei];
+    if (ev.domain && ev.domain.toLowerCase() === 'crime') crime++;
+    if (ev.domain && ev.domain.toLowerCase() === 'safety') safety++;
+  }
+  var dynamics = S.cityDynamics || {};
+  var sentiment = dynamics.sentiment || 0;
+  var civicLoad = S.civicLoad || 'stable';
+  var civicLoadScore = S.civicLoadScore || 0;
+  var econMood = S.economicMood || 50;
+  var weatherMood = S.weatherMood || {};
 
-  const hooks = S.storyHooks ? S.storyHooks.length : 0;
-  const textures = S.textureTriggers ? S.textureTriggers.length : 0;
-  const arcs = S.eventArcs ? S.eventArcs.filter(a => a && a.phase !== 'resolved').length : 0;
+  var hooks = S.storyHooks ? S.storyHooks.length : 0;
+  var textures = S.textureTriggers ? S.textureTriggers.length : 0;
+  var arcsCount = 0;
+  if (S.eventArcs) {
+    for (var ai = 0; ai < S.eventArcs.length; ai++) {
+      var a = S.eventArcs[ai];
+      if (a && a.phase !== 'resolved') arcsCount++;
+    }
+  }
+  var arcs = arcsCount;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.2: CALENDAR CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
 
   // Derived signals
-  const culturePulse = hooks + arcs;
-  const instability = S.shockFlag === 'shock-flag' ? 1 : 0;
+  var culturePulse = hooks + arcs;
+  var instability = S.shockFlag === 'shock-flag' ? 1 : 0;
 
   // Build drift factors (accumulate instead of overwrite)
-  const driftFactors = [];
+  var driftFactors = [];
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.2: HOLIDAY-SPECIFIC DRIFT FACTORS
@@ -178,17 +190,25 @@ function deriveDemographicDrift_(ctx) {
   // EXISTING DRIFT FACTORS (preserved from v3.1)
   // ═══════════════════════════════════════════════════════════════════════════
 
+  // Helper to check if any factor includes a term
+  function factorsInclude(term) {
+    for (var fi = 0; fi < driftFactors.length; fi++) {
+      if (driftFactors[fi].indexOf(term) >= 0) return true;
+    }
+    return false;
+  }
+
   // Nightlife attracts youth (only if not already covered by holiday)
-  if (nightlife >= 7 && !driftFactors.some(f => f.includes('Youth'))) {
+  if (nightlife >= 7 && !factorsInclude('Youth')) {
     driftFactors.push("Youth inflow (strong nightlife)");
-  } else if (nightlife >= 5 && !driftFactors.some(f => f.includes('Youth'))) {
+  } else if (nightlife >= 5 && !factorsInclude('Youth')) {
     driftFactors.push("Youth interest (active nightlife)");
   }
 
   // Cultural activity attracts artists (only if not already covered)
-  if (culturePulse >= 5 && !driftFactors.some(f => f.includes('Artist') || f.includes('Arts') || f.includes('Creative'))) {
+  if (culturePulse >= 5 && !factorsInclude('Artist') && !factorsInclude('Arts') && !factorsInclude('Creative')) {
     driftFactors.push("Artist inflow (high cultural activity)");
-  } else if (culturePulse >= 3 && !driftFactors.some(f => f.includes('Artist') || f.includes('Creative'))) {
+  } else if (culturePulse >= 3 && !factorsInclude('Artist') && !factorsInclude('Creative')) {
     driftFactors.push("Creative interest (cultural pulse)");
   }
 
@@ -249,17 +269,22 @@ function deriveDemographicDrift_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // DETERMINE PRIMARY DRIFT
   // ═══════════════════════════════════════════════════════════════════════════
-  let drift = "Stable";
-  
+  var drift = "Stable";
+
   if (driftFactors.length > 0) {
     // Count inflows vs outflows
-    const inflows = driftFactors.filter(f => 
-      f.includes('inflow') || f.includes('interest') || f.includes('surge') || 
-      f.includes('gathering') || f.includes('crowd') || f.includes('visitors')
-    ).length;
-    const outflows = driftFactors.filter(f => 
-      f.includes('outflow') || f.includes('caution')
-    ).length;
+    var inflows = 0;
+    var outflows = 0;
+    for (var di = 0; di < driftFactors.length; di++) {
+      var f = driftFactors[di];
+      if (f.indexOf('inflow') >= 0 || f.indexOf('interest') >= 0 || f.indexOf('surge') >= 0 ||
+          f.indexOf('gathering') >= 0 || f.indexOf('crowd') >= 0 || f.indexOf('visitors') >= 0) {
+        inflows++;
+      }
+      if (f.indexOf('outflow') >= 0 || f.indexOf('caution') >= 0) {
+        outflows++;
+      }
+    }
 
     // v3.2: Holiday/event days default to inflow unless strong outflow signals
     if (holiday !== 'none' || isFirstFriday || sportsSeason === 'playoffs' || sportsSeason === 'championship') {
@@ -282,14 +307,25 @@ function deriveDemographicDrift_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // EXPOSE INTO CTX.SUMMARY
   // ═══════════════════════════════════════════════════════════════════════════
+  // Calculate net direction
+  var netInflow = 0;
+  var netOutflow = 0;
+  for (var ni = 0; ni < driftFactors.length; ni++) {
+    var nf = driftFactors[ni];
+    if (nf.indexOf('inflow') >= 0 || nf.indexOf('surge') >= 0 || nf.indexOf('visitors') >= 0) {
+      netInflow++;
+    }
+    if (nf.indexOf('outflow') >= 0) {
+      netOutflow++;
+    }
+  }
+
   S.demographicDrift = drift;
   S.demographicDriftFactors = driftFactors;
   S.demographicDriftSummary = {
     primary: drift,
     factors: driftFactors,
-    netDirection: driftFactors.filter(f => 
-      f.includes('inflow') || f.includes('surge') || f.includes('visitors')
-    ).length - driftFactors.filter(f => f.includes('outflow')).length,
+    netDirection: netInflow - netOutflow,
     // v3.2: Calendar context
     holiday: holiday,
     holidayPriority: holidayPriority,

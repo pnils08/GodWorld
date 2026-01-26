@@ -8,7 +8,7 @@
 
 function ensureCulturalLedger_(ctx) {
 
-  let sheet = ctx.ss.getSheetByName('Cultural_Ledger');
+  var sheet = ctx.ss.getSheetByName('Cultural_Ledger');
 
   if (!sheet) {
 

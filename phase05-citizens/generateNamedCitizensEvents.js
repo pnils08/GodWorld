@@ -25,71 +25,71 @@
 
 function generateNamedCitizenEvents_(ctx) {
 
-  const ledger = ctx.ss.getSheetByName('Simulation_Ledger');
-  const logSheet = ctx.ss.getSheetByName('LifeHistory_Log');
+  var ledger = ctx.ss.getSheetByName('Simulation_Ledger');
+  var logSheet = ctx.ss.getSheetByName('LifeHistory_Log');
   if (!ledger) return;
 
-  const values = ledger.getDataRange().getValues();
+  var values = ledger.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
+  var header = values[0];
+  var rows = values.slice(1);
 
-  const idx = n => header.indexOf(n);
+  var idx = function(n) { return header.indexOf(n); };
 
-  const iPopID = idx('POPID');
-  const iFirst = idx('First');
-  const iLast = idx('Last');
-  const iClock = idx('ClockMode');
-  const iUNI = idx('UNI (y/n)');
-  const iMED = idx('MED (y/n)');
-  const iCIV = idx('CIV (y/n)');
-  const iStatus = idx('Status');
-  const iLife = idx('LifeHistory');
-  const iLastUpd = idx('LastUpdated');
-  const iNeighborhood = idx('Neighborhood');
+  var iPopID = idx('POPID');
+  var iFirst = idx('First');
+  var iLast = idx('Last');
+  var iClock = idx('ClockMode');
+  var iUNI = idx('UNI (y/n)');
+  var iMED = idx('MED (y/n)');
+  var iCIV = idx('CIV (y/n)');
+  var iStatus = idx('Status');
+  var iLife = idx('LifeHistory');
+  var iLastUpd = idx('LastUpdated');
+  var iNeighborhood = idx('Neighborhood');
 
-  const S = ctx.summary;
-  const cycle = S.cycleId || ctx.config.cycleCount || 0;
+  var S = ctx.summary;
+  var cycle = S.cycleId || ctx.config.cycleCount || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { 
-    sentiment: 0, culturalActivity: 1, communityEngagement: 1 
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || {
+    sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
-  const econMood = S.economicMood || 50;
+  var econMood = S.economicMood || 50;
 
   // Calendar context (v2.3)
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // INITIALIZE TRACKING
   // ═══════════════════════════════════════════════════════════════════════════
   S.cycleActiveCitizens = S.cycleActiveCitizens || [];
 
-  let globalEvents = 0;
-  const GLOBAL_EVENT_CAP = 5;
+  var globalEvents = 0;
+  var GLOBAL_EVENT_CAP = 5;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // UNI + MED EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
-  const uniMedLifestyle = [
+  var uniMedLifestyle = [
     "kept a steady routine focused on personal balance",
     "maintained consistent daily habits",
     "reflected quietly on recent days",
     "kept low profile while focusing on responsibilities"
   ];
 
-  const uniMedReputation = [
+  var uniMedReputation = [
     "experienced subtle reputation drift based on steady presence",
     "maintained stable public perception",
     "gained minor positive regard from nearby peers"
@@ -98,7 +98,7 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CIV EVENT POOL
   // ═══════════════════════════════════════════════════════════════════════════
-  const civEvents = [
+  var civEvents = [
     "public perception shifted slightly after minor civic discussions",
     "became a point of small attention during local civic conversations",
     "engaged in a low-visibility civic task this cycle"
@@ -107,20 +107,20 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // GENERAL NAMED-CITIZEN POOLS
   // ═══════════════════════════════════════════════════════════════════════════
-  const generalLifestyle = [
+  var generalLifestyle = [
     "made a small personal adjustment to their daily routine",
     "spent time reconnecting with familiar surroundings",
     "found a calm moment amid the day's flow",
     "adjusted habits in response to daily events"
   ];
 
-  const generalCommunity = [
+  var generalCommunity = [
     "interacted lightly with community members",
     "felt mild influence from neighborhood mood",
     "noticed subtle shifts in local activity"
   ];
 
-  const generalReputation = [
+  var generalReputation = [
     "experienced a minor reputation shift based on daily presence",
     "received brief positive acknowledgement",
     "brushed past a minor misunderstanding",
@@ -130,19 +130,19 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // BOND-AWARE EVENT POOLS
   // ═══════════════════════════════════════════════════════════════════════════
-  const allianceEvents = [
+  var allianceEvents = [
     "received quiet support from an established connection",
     "felt reassured by a trusted professional relationship",
     "exchanged brief acknowledgement with a known ally"
   ];
 
-  const rivalryEvents = [
+  var rivalryEvents = [
     "sensed subtle professional tension in passing",
     "noticed a brief moment of competitive awareness",
     "felt the weight of an ongoing professional dynamic"
   ];
 
-  const mentorshipEvents = [
+  var mentorshipEvents = [
     "reflected on guidance from someone in their network",
     "considered their role as someone others look to",
     "appreciated wisdom shared by an experienced contact"
@@ -151,7 +151,7 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ARC INVOLVEMENT POOL
   // ═══════════════════════════════════════════════════════════════════════════
-  const arcEvents = [
+  var arcEvents = [
     "felt connected to larger unfolding events",
     "sensed their involvement in an evolving situation",
     "noticed how current circumstances affected their sphere"
@@ -160,7 +160,7 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOOD POOLS (12 neighborhoods - v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const neighborhoodEvents = {
+  var neighborhoodEvents = {
     'Temescal': [
       "noticed the neighborhood's creative energy",
       "felt Temescal's community vibe",
@@ -227,7 +227,7 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WEATHER NOTES
   // ═══════════════════════════════════════════════════════════════════════════
-  const weatherNotes = [];
+  var weatherNotes = [];
   if (weather.type === "rain") weatherNotes.push("adjusted plans due to rain");
   if (weather.type === "fog") weatherNotes.push("moved carefully during foggy hours");
   if (weather.type === "hot") weatherNotes.push("adapted routine to summer heat");
@@ -237,7 +237,7 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SEASONAL NOTES
   // ═══════════════════════════════════════════════════════════════════════════
-  const seasonal = [];
+  var seasonal = [];
   if (season === "Winter") seasonal.push("adjusted rhythm to winter pace");
   if (season === "Spring") seasonal.push("felt seasonal renewal in daily mood");
   if (season === "Summer") seasonal.push("enjoyed warmer evening hours");
@@ -246,7 +246,7 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CHAOS NOTES
   // ═══════════════════════════════════════════════════════════════════════════
-  const chaosNotes = chaos.length > 0 ? [
+  var chaosNotes = chaos.length > 0 ? [
     "felt slight atmospheric shift due to city events",
     "reacted subtly to recent happenings"
   ] : [];
@@ -254,21 +254,21 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SENTIMENT NOTES
   // ═══════════════════════════════════════════════════════════════════════════
-  const sentimentNotes = [];
+  var sentimentNotes = [];
   if (dynamics.sentiment >= 0.3) sentimentNotes.push("felt encouraged by improving city mood");
   if (dynamics.sentiment <= -0.3) sentimentNotes.push("felt tension from city atmosphere");
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ECONOMIC NOTES
   // ═══════════════════════════════════════════════════════════════════════════
-  const econNotes = [];
+  var econNotes = [];
   if (econMood <= 35) econNotes.push("felt economic uncertainty in the air");
   if (econMood >= 65) econNotes.push("sensed optimism about the local economy");
 
   // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY EVENT POOLS (v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holidayPools = {
+  var holidayPools = {
     // Major holidays
     "Thanksgiving": [
       "prepared for Thanksgiving observances",
@@ -349,7 +349,7 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // FIRST FRIDAY POOL (v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const firstFridayEvents = [
+  var firstFridayEvents = [
     "noticed First Friday energy in the arts district",
     "felt the creative atmosphere of the evening",
     "observed gallery openings and art walks"
@@ -358,7 +358,7 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATION DAY POOL (v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const creationDayEvents = [
+  var creationDayEvents = [
     "felt a sense of Oakland's foundational spirit",
     "reflected on roots in the community",
     "appreciated the city's enduring character"
@@ -367,7 +367,7 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SPORTS SEASON POOLS (v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  const sportsSeasonEvents = {
+  var sportsSeasonEvents = {
     "championship": [
       "felt championship energy in the city",
       "noticed the team's success lifting spirits"
@@ -389,31 +389,31 @@ function generateNamedCitizenEvents_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // MAIN CITIZEN LOOP
   // ═══════════════════════════════════════════════════════════════════════════
-  for (let r = 0; r < rows.length; r++) {
+  for (var r = 0; r < rows.length; r++) {
 
     if (globalEvents >= GLOBAL_EVENT_CAP) break;
 
-    const row = rows[r];
+    var row = rows[r];
 
-    const popId = (row[iPopID] || "").toString();
-    const first = (row[iFirst] || "").toString();
-    const last = (row[iLast] || "").toString();
-    const mode = (row[iClock] || "").toString().trim();
-    const status = (row[iStatus] || "").toString().trim().toLowerCase();
-    const neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
+    var popId = (row[iPopID] || "").toString();
+    var first = (row[iFirst] || "").toString();
+    var last = (row[iLast] || "").toString();
+    var mode = (row[iClock] || "").toString().trim();
+    var status = (row[iStatus] || "").toString().trim().toLowerCase();
+    var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
 
     if (!popId) continue;
     if (mode !== "ENGINE") continue;
     if (status !== "active") continue;
 
-    const isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
-    const isMED = (row[iMED] || "").toString().toLowerCase() === "y";
-    const isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
+    var isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
+    var isMED = (row[iMED] || "").toString().toLowerCase() === "y";
+    var isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
 
     // ═══════════════════════════════════════════════════════════════════════
     // BASE PROBABILITY
     // ═══════════════════════════════════════════════════════════════════════
-    let chance = 0.02;
+    var chance = 0.02;
 
     // Weather modifiers
     if (weather.impact >= 1.3) chance += 0.01;
@@ -469,21 +469,21 @@ function generateNamedCitizenEvents_(ctx) {
     // BOND & ARC BOOST
     // ═══════════════════════════════════════════════════════════════════════
     if (typeof getCombinedEventBoost_ === 'function') {
-      const eventBoost = getCombinedEventBoost_(ctx, popId);
+      var eventBoost = getCombinedEventBoost_(ctx, popId);
       chance *= eventBoost;
     }
 
     // Check for active bonds
-    let citizenBonds = [];
-    let hasRivalry = false;
-    let hasAlliance = false;
-    let hasMentorship = false;
-    
+    var citizenBonds = [];
+    var hasRivalry = false;
+    var hasAlliance = false;
+    var hasMentorship = false;
+
     if (typeof getCitizenBonds_ === 'function') {
       citizenBonds = getCitizenBonds_(ctx, popId);
-      hasRivalry = citizenBonds.some(b => b.bondType === 'rivalry');
-      hasAlliance = citizenBonds.some(b => b.bondType === 'alliance');
-      hasMentorship = citizenBonds.some(b => b.bondType === 'mentorship');
+      hasRivalry = citizenBonds.some(function(b) { return b.bondType === 'rivalry'; });
+      hasAlliance = citizenBonds.some(function(b) { return b.bondType === 'alliance'; });
+      hasMentorship = citizenBonds.some(function(b) { return b.bondType === 'mentorship'; });
     }
 
     if (hasRivalry) chance += 0.01;
@@ -491,11 +491,11 @@ function generateNamedCitizenEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // ARC INVOLVEMENT CHECK
     // ═══════════════════════════════════════════════════════════════════════
-    let activeArc = null;
+    var activeArc = null;
     if (typeof citizenInActiveArc_ === 'function') {
       activeArc = citizenInActiveArc_(ctx, popId);
       if (activeArc) {
-        const arcPhaseBoost = {
+        var arcPhaseBoost = {
           'early': 0.005,
           'rising': 0.008,
           'mid': 0.01,
@@ -511,7 +511,7 @@ function generateNamedCitizenEvents_(ctx) {
     // WEATHER MOOD MODIFIER
     // ═══════════════════════════════════════════════════════════════════════
     if (typeof getWeatherEventModifier_ === 'function') {
-      const weatherMod = getWeatherEventModifier_(ctx, 'social');
+      var weatherMod = getWeatherEventModifier_(ctx, 'social');
       chance *= weatherMod;
     }
 
@@ -519,7 +519,7 @@ function generateNamedCitizenEvents_(ctx) {
     // MEDIA MODIFIER
     // ═══════════════════════════════════════════════════════════════════════
     if (typeof getMediaEventModifier_ === 'function') {
-      const mediaMod = getMediaEventModifier_(ctx, 'social');
+      var mediaMod = getMediaEventModifier_(ctx, 'social');
       chance *= mediaMod;
     }
 
@@ -531,8 +531,8 @@ function generateNamedCitizenEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // DETERMINE EVENT TYPE
     // ═══════════════════════════════════════════════════════════════════════
-    let pool = [];
-    let tag = "";
+    var pool = [];
+    var tag = "";
 
     if (isCIV) {
       tag = "Civic Perception";
@@ -543,7 +543,7 @@ function generateNamedCitizenEvents_(ctx) {
       pool = tag === "Lifestyle" ? uniMedLifestyle : uniMedReputation;
     }
     else {
-      const roll = Math.random();
+      var roll = Math.random();
       if (roll < 0.33) { tag = "Lifestyle"; pool = generalLifestyle; }
       else if (roll < 0.66) { tag = "Community"; pool = generalCommunity; }
       else { tag = "Reputation"; pool = generalReputation; }
@@ -590,13 +590,13 @@ function generateNamedCitizenEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     if (!isUNI) {
       if (hasAlliance && Math.random() < 0.3) {
-        pool = [...pool, ...allianceEvents];
+        pool = pool.concat(allianceEvents);
       }
       if (hasRivalry && Math.random() < 0.25) {
-        pool = [...pool, ...rivalryEvents];
+        pool = pool.concat(rivalryEvents);
       }
       if (hasMentorship && Math.random() < 0.25) {
-        pool = [...pool, ...mentorshipEvents];
+        pool = pool.concat(mentorshipEvents);
       }
     }
 
@@ -604,14 +604,14 @@ function generateNamedCitizenEvents_(ctx) {
     // ADD ARC EVENTS
     // ═══════════════════════════════════════════════════════════════════════
     if (activeArc && !isUNI && Math.random() < 0.3) {
-      pool = [...pool, ...arcEvents];
+      pool = pool.concat(arcEvents);
     }
 
     // ═══════════════════════════════════════════════════════════════════════
     // ADD WEATHER EVENTS
     // ═══════════════════════════════════════════════════════════════════════
     if (typeof getWeatherEvent_ === 'function' && Math.random() < 0.2) {
-      const weatherEvent = getWeatherEvent_(ctx, false);
+      var weatherEvent = getWeatherEvent_(ctx, false);
       if (weatherEvent) {
         pool.push(weatherEvent.text);
       }
@@ -621,58 +621,58 @@ function generateNamedCitizenEvents_(ctx) {
     // ADD MEDIA-INFLUENCED EVENTS
     // ═══════════════════════════════════════════════════════════════════════
     if (typeof getMediaInfluencedEvent_ === 'function' && Math.random() < 0.15) {
-      const mediaEvent = getMediaInfluencedEvent_(ctx);
+      var mediaEvent = getMediaInfluencedEvent_(ctx);
       if (mediaEvent) {
         pool.push(mediaEvent.text);
       }
     }
 
     // Pick final event description
-    const description = pool[Math.floor(Math.random() * pool.length)];
+    var description = pool[Math.floor(Math.random() * pool.length)];
 
     // ═══════════════════════════════════════════════════════════════════════
     // DETERMINE FINAL TAG BASED ON CONTENT
     // ═══════════════════════════════════════════════════════════════════════
-    if (allianceEvents.includes(description)) tag = "Alliance";
-    else if (rivalryEvents.includes(description)) tag = "Rivalry";
-    else if (mentorshipEvents.includes(description)) tag = "Mentorship";
-    else if (arcEvents.includes(description)) tag = "Arc";
-    else if (neighborhood && neighborhoodEvents[neighborhood]?.includes(description)) tag = "Neighborhood";
-    else if (firstFridayEvents.includes(description)) tag = "FirstFriday";
-    else if (creationDayEvents.includes(description)) tag = "CreationDay";
-    else if (holiday !== "none" && holidayPools[holiday]?.includes(description)) tag = "Holiday";
-    else if (sportsSeason !== "off-season" && sportsSeasonEvents[sportsSeason]?.includes(description)) tag = "Sports";
+    if (allianceEvents.indexOf(description) >= 0) tag = "Alliance";
+    else if (rivalryEvents.indexOf(description) >= 0) tag = "Rivalry";
+    else if (mentorshipEvents.indexOf(description) >= 0) tag = "Mentorship";
+    else if (arcEvents.indexOf(description) >= 0) tag = "Arc";
+    else if (neighborhood && neighborhoodEvents[neighborhood] && neighborhoodEvents[neighborhood].indexOf(description) >= 0) tag = "Neighborhood";
+    else if (firstFridayEvents.indexOf(description) >= 0) tag = "FirstFriday";
+    else if (creationDayEvents.indexOf(description) >= 0) tag = "CreationDay";
+    else if (holiday !== "none" && holidayPools[holiday] && holidayPools[holiday].indexOf(description) >= 0) tag = "Holiday";
+    else if (sportsSeason !== "off-season" && sportsSeasonEvents[sportsSeason] && sportsSeasonEvents[sportsSeason].indexOf(description) >= 0) tag = "Sports";
 
     // Check for Media Event Tag
-    const mediaEffects = S.mediaEffects || {};
+    var mediaEffects = S.mediaEffects || {};
     if (mediaEffects.eventPools) {
-      const allMediaEvents = [
-        ...(mediaEffects.eventPools.anxious || []),
-        ...(mediaEffects.eventPools.hopeful || []),
-        ...(mediaEffects.eventPools.crisis || []),
-        ...(mediaEffects.eventPools.celebrity || []),
-        ...(mediaEffects.eventPools.sports || [])
-      ];
-      if (allMediaEvents.includes(description)) tag = "Media";
+      var allMediaEvents = [].concat(
+        mediaEffects.eventPools.anxious || [],
+        mediaEffects.eventPools.hopeful || [],
+        mediaEffects.eventPools.crisis || [],
+        mediaEffects.eventPools.celebrity || [],
+        mediaEffects.eventPools.sports || []
+      );
+      if (allMediaEvents.indexOf(description) >= 0) tag = "Media";
     }
 
     // Check for Weather Event Tag
     if (S.weatherEventPools) {
-      const allWeatherEvents = [
-        ...(S.weatherEventPools.base || []),
-        ...(S.weatherEventPools.enhanced || []),
-        ...(S.weatherEventPools.special || [])
-      ];
-      if (allWeatherEvents.includes(description)) tag = "Weather";
+      var allWeatherEvents = [].concat(
+        S.weatherEventPools.base || [],
+        S.weatherEventPools.enhanced || [],
+        S.weatherEventPools.special || []
+      );
+      if (allWeatherEvents.indexOf(description) >= 0) tag = "Weather";
     }
 
     // ═══════════════════════════════════════════════════════════════════════
     // WRITE TO LIFEHISTORY
     // ═══════════════════════════════════════════════════════════════════════
-    const stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm');
-    const line = `${stamp} — [${tag}] ${description}`;
+    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), 'yyyy-MM-dd HH:mm');
+    var line = stamp + " — [" + tag + "] " + description;
 
-    const existing = row[iLife] ? row[iLife].toString() : "";
+    var existing = row[iLife] ? row[iLife].toString() : "";
     row[iLife] = existing ? existing + "\n" + line : line;
     row[iLastUpd] = ctx.now;
 

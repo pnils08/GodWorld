@@ -19,66 +19,66 @@ function mulberry32_(seed) {
 }
 
 function generateGenericCitizenMicroEvents_(ctx) {
-  const ss = ctx.ss;
-  const ledger = ss.getSheetByName("Simulation_Ledger");
-  const logSheet = ss.getSheetByName("LifeHistory_Log");
+  var ss = ctx.ss;
+  var ledger = ss.getSheetByName("Simulation_Ledger");
+  var logSheet = ss.getSheetByName("LifeHistory_Log");
   if (!ledger) return;
 
-  const values = ledger.getDataRange().getValues();
+  var values = ledger.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
-  const idx = (n) => header.indexOf(n);
+  var header = values[0];
+  var rows = values.slice(1);
+  function idx(n) { return header.indexOf(n); }
 
-  const iPopID = idx("POPID");
-  const iFirst = idx("First");
-  const iLast = idx("Last");
-  const iTier = idx("Tier");
-  const iClock = idx("ClockMode");
-  const iUNI = idx("UNI (y/n)");
-  const iMED = idx("MED (y/n)");
-  const iCIV = idx("CIV (y/n)");
-  const iLife = idx("LifeHistory");
-  const iLastUpd = idx("LastUpdated");
-  const iNeighborhood = idx("Neighborhood");
+  var iPopID = idx("POPID");
+  var iFirst = idx("First");
+  var iLast = idx("Last");
+  var iTier = idx("Tier");
+  var iClock = idx("ClockMode");
+  var iUNI = idx("UNI (y/n)");
+  var iMED = idx("MED (y/n)");
+  var iCIV = idx("CIV (y/n)");
+  var iLife = idx("LifeHistory");
+  var iLastUpd = idx("LastUpdated");
+  var iNeighborhood = idx("Neighborhood");
 
   if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0) return;
 
-  const S = ctx.summary || (ctx.summary = {});
-  const cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+  var S = ctx.summary || (ctx.summary = {});
+  var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
 
   // Optional determinism
-  const rng = (typeof ctx.rng === "function")
+  var rng = (typeof ctx.rng === "function")
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
       ? mulberry32_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
       : Math.random;
 
-  const roll = () => rng();
-  const hit = (p) => roll() < p;
-  const pickOne = (arr) => arr[Math.floor(roll() * arr.length)];
+  function roll() { return rng(); }
+  function hit(p) { return roll() < p; }
+  function pickOne(arr) { return arr[Math.floor(roll() * arr.length)]; }
 
   // WORLD STATE
-  const season = S.season;
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
-  const econMood = S.economicMood || 50;
+  var season = S.season;
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
+  var econMood = S.economicMood || 50;
 
   // Calendar context
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = !!S.isFirstFriday;
-  const isCreationDay = !!S.isCreationDay;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = !!S.isFirstFriday;
+  var isCreationDay = !!S.isCreationDay;
+  var sportsSeason = S.sportsSeason || "off-season";
 
-  let eventCount = 0;
-  const EVENT_LIMIT = 12;
+  var eventCount = 0;
+  var EVENT_LIMIT = 12;
 
   // BASE POOL
-  const base = [
+  var base = [
     "enjoyed a calm, uneventful day",
     "spent time at a corner store; routine stop",
     "stepped outside briefly; peaceful moment",
@@ -88,14 +88,14 @@ function generateGenericCitizenMicroEvents_(ctx) {
   ];
 
   // SEASONAL
-  const seasonal = [];
+  var seasonal = [];
   if (season === "Winter") seasonal.push("moved quietly through a cold evening");
   if (season === "Spring") seasonal.push("noticed seasonal change in the air");
   if (season === "Summer") seasonal.push("took in warm evening weather");
   if (season === "Fall") seasonal.push("adjusted to early autumn atmosphere");
 
   // WEATHER
-  const weatherPool = [];
+  var weatherPool = [];
   if (weather.type === "rain") weatherPool.push("adjusted plans due to light rain");
   if (weather.type === "fog") weatherPool.push("moved more carefully due to fog");
   if (weather.type === "hot") weatherPool.push("took shelter from warm conditions");
@@ -103,29 +103,29 @@ function generateGenericCitizenMicroEvents_(ctx) {
   if (weather.type === "wind") weatherPool.push("noted windy conditions during outing");
 
   // WEATHER MOOD
-  const moodPool = [];
+  var moodPool = [];
   if (weatherMood.primaryMood === "cozy") moodPool.push("enjoyed a cozy indoor moment");
   if (weatherMood.primaryMood === "irritable") moodPool.push("felt a bit restless from the weather");
   if (weatherMood.perfectWeather) moodPool.push("enjoyed the perfect weather outside");
   if ((weatherMood.nostalgiaFactor || 0) > 0.3) moodPool.push("felt a moment of nostalgia");
 
   // CHAOS
-  const chaosPool = (chaos.length > 0)
+  var chaosPool = (chaos.length > 0)
     ? ["overheard brief talk about recent city events", "felt a slight shift in background mood"]
     : [];
 
   // SENTIMENT
-  const sentimentPool = [];
+  var sentimentPool = [];
   if ((dynamics.sentiment || 0) >= 0.3) sentimentPool.push("picked up on a slightly positive city mood");
   if ((dynamics.sentiment || 0) <= -0.3) sentimentPool.push("noticed a subtle tension in the environment");
 
   // ECON
-  const econPool = [];
+  var econPool = [];
   if (econMood <= 35) econPool.push("overheard concerns about the economy");
   if (econMood >= 65) econPool.push("sensed optimism in local conversations");
 
   // Neighborhood pools
-  const neighborhoodPool = {
+  var neighborhoodPool = {
     Temescal: [
       "stopped by a Temescal cafe",
       "noticed the creative energy around Temescal",
@@ -189,7 +189,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
   };
 
   // Holiday pools
-  const holidayPools = {
+  var holidayPools = {
     Thanksgiving: [
       "noticed Thanksgiving preparations around town",
       "smelled holiday cooking in the air",
@@ -292,7 +292,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
     ]
   };
 
-  const firstFridayPool = [
+  var firstFridayPool = [
     "checked out a First Friday gallery",
     "enjoyed the art walk atmosphere",
     "wandered through open studios",
@@ -301,14 +301,14 @@ function generateGenericCitizenMicroEvents_(ctx) {
     "grabbed food from a First Friday vendor"
   ];
 
-  const creationDayPool = [
+  var creationDayPool = [
     "felt a quiet sense of belonging",
     "reflected on roots in the community",
     "appreciated Oakland's spirit",
     "felt connected to the city's story"
   ];
 
-  const sportsSeasonPools = {
+  var sportsSeasonPools = {
     championship: [
       "felt championship fever everywhere",
       "saw fans celebrating in the streets",
@@ -331,16 +331,16 @@ function generateGenericCitizenMicroEvents_(ctx) {
     ]
   };
 
-  const culturalActivityPool = (dynamics.culturalActivity || 1) >= 1.4
+  var culturalActivityPool = (dynamics.culturalActivity || 1) >= 1.4
     ? ["noticed vibrant cultural activity around town", "felt the city's creative pulse", "appreciated the artistic atmosphere"]
     : [];
 
-  const communityPool = (dynamics.communityEngagement || 1) >= 1.3
+  var communityPool = (dynamics.communityEngagement || 1) >= 1.3
     ? ["felt welcomed by neighborhood energy", "noticed community members connecting", "appreciated the local camaraderie"]
     : [];
 
   // Build basePool
-  let basePool = base
+  var basePool = base
     .concat(seasonal, weatherPool, moodPool, chaosPool, sentimentPool, econPool, culturalActivityPool, communityPool);
 
   if (holiday !== "none" && holidayPools[holiday]) basePool = basePool.concat(holidayPools[holiday]);
@@ -348,45 +348,34 @@ function generateGenericCitizenMicroEvents_(ctx) {
   if (isCreationDay) basePool = basePool.concat(creationDayPool);
   if (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) basePool = basePool.concat(sportsSeasonPools[sportsSeason]);
 
-  const artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
+  var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
 
-  // Fast tag lookup Sets
-  const setFrom = (arr) => new Set(arr || []);
-  const firstFridaySet = setFrom(firstFridayPool);
-  const creationDaySet = setFrom(creationDayPool);
-  const culturalSet = setFrom(culturalActivityPool);
-  const communitySet = setFrom(communityPool);
-  const holidaySet = (holiday !== "none" && holidayPools[holiday]) ? setFrom(holidayPools[holiday]) : new Set();
-  const sportsSet = (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) ? setFrom(sportsSeasonPools[sportsSeason]) : new Set();
+  // Fast tag lookup using indexOf (ES5 compatible)
+  var holidayPoolArr = (holiday !== "none" && holidayPools[holiday]) ? holidayPools[holiday] : [];
+  var sportsPoolArr = (sportsSeason !== "off-season" && sportsSeasonPools[sportsSeason]) ? sportsSeasonPools[sportsSeason] : [];
 
-  // NEW: cached neighborhood sets (no per-row allocation)
-  const neighborhoodSets = Object.create(null);
-  for (const n in neighborhoodPool) {
-    neighborhoodSets[n] = setFrom(neighborhoodPool[n]);
-  }
-
-  // NEW: global per-cycle uniqueness (citywide)
-  const usedGlobal = new Set(); // key: cycle|text
+  // NEW: global per-cycle uniqueness (citywide) - using object for ES5 compatibility
+  var usedGlobalObj = Object.create(null);
 
   function uniquePickGlobal_(pool) {
     if (!pool.length) return null;
 
-    const maxSpins = Math.min(16, pool.length * 2);
-    for (let s = 0; s < maxSpins; s++) {
-      const cand = pickOne(pool);
-      const key = `${cycle}|${cand}`;
-      if (!usedGlobal.has(key)) {
-        usedGlobal.add(key);
+    var maxSpins = Math.min(16, pool.length * 2);
+    for (var s = 0; s < maxSpins; s++) {
+      var cand = pickOne(pool);
+      var key = cycle + "|" + cand;
+      if (!usedGlobalObj[key]) {
+        usedGlobalObj[key] = true;
         return cand;
       }
     }
 
     // deterministic scan fallback
-    for (let i = 0; i < pool.length; i++) {
-      const cand = pool[i];
-      const key = `${cycle}|${cand}`;
-      if (!usedGlobal.has(key)) {
-        usedGlobal.add(key);
+    for (var i = 0; i < pool.length; i++) {
+      var cand = pool[i];
+      var key = cycle + "|" + cand;
+      if (!usedGlobalObj[key]) {
+        usedGlobalObj[key] = true;
         return cand;
       }
     }
@@ -395,29 +384,29 @@ function generateGenericCitizenMicroEvents_(ctx) {
   }
 
   // Batch logs (schema-safe 7 cols)
-  const logRows = [];
+  var logRows = [];
 
-  for (let r = 0; r < rows.length; r++) {
+  for (var r = 0; r < rows.length; r++) {
     if (eventCount >= EVENT_LIMIT) break;
 
-    const row = rows[r];
+    var row = rows[r];
 
-    const tier = Number(row[iTier] || 0);
-    const mode = (row[iClock] || "ENGINE").toString().trim().toUpperCase();
+    var tier = Number(row[iTier] || 0);
+    var mode = (row[iClock] || "ENGINE").toString().trim().toUpperCase();
 
-    const isUNIFlag = (iUNI >= 0) ? (row[iUNI] || "").toString().trim().toLowerCase() === "y" : false;
-    const isMEDFlag = (iMED >= 0) ? (row[iMED] || "").toString().trim().toLowerCase() === "y" : false;
-    const isCIVFlag = (iCIV >= 0) ? (row[iCIV] || "").toString().trim().toLowerCase() === "y" : false;
+    var isUNIFlag = (iUNI >= 0) ? (row[iUNI] || "").toString().trim().toLowerCase() === "y" : false;
+    var isMEDFlag = (iMED >= 0) ? (row[iMED] || "").toString().trim().toLowerCase() === "y" : false;
+    var isCIVFlag = (iCIV >= 0) ? (row[iCIV] || "").toString().trim().toLowerCase() === "y" : false;
 
-    const popId = (row[iPopID] || "").toString();
-    const neighborhood = (iNeighborhood >= 0) ? (row[iNeighborhood] || "").toString() : "";
+    var popId = (row[iPopID] || "").toString();
+    var neighborhood = (iNeighborhood >= 0) ? (row[iNeighborhood] || "").toString() : "";
 
     if (mode !== "ENGINE") continue;
     if (isUNIFlag || isMEDFlag || isCIVFlag) continue;
     if (tier !== 3 && tier !== 4) continue;
     if (!popId) continue;
 
-    let chance = 0.03;
+    var chance = 0.03;
 
     if (weather.impact >= 1.3) chance += 0.01;
     if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.35) chance += 0.01;
@@ -449,28 +438,28 @@ function generateGenericCitizenMicroEvents_(ctx) {
     if (chance > 0.12) chance = 0.12;
     if (!hit(chance)) continue;
 
-    let pool = basePool.slice();
+    var pool = basePool.slice();
     if (neighborhood && neighborhoodPool[neighborhood]) pool = pool.concat(neighborhoodPool[neighborhood]);
 
-    const pick = uniquePickGlobal_(pool);
+    var pick = uniquePickGlobal_(pool);
     if (!pick) continue;
 
-    // Tag (fast)
-    let tag = "Background";
+    // Tag (fast) - using indexOf for ES5 compatibility
+    var tag = "Background";
 
-    const nSet = neighborhood ? neighborhoodSets[neighborhood] : null;
-    if (nSet && nSet.has(pick)) tag = "Neighborhood";
-    else if (firstFridaySet.has(pick)) tag = "FirstFriday";
-    else if (creationDaySet.has(pick)) tag = "CreationDay";
-    else if (holidaySet.has(pick)) tag = "Holiday";
-    else if (sportsSet.has(pick)) tag = "Sports";
-    else if (culturalSet.has(pick)) tag = "Cultural";
-    else if (communitySet.has(pick)) tag = "Community";
+    var nPoolArr = neighborhood ? neighborhoodPool[neighborhood] : null;
+    if (nPoolArr && nPoolArr.indexOf(pick) >= 0) tag = "Neighborhood";
+    else if (firstFridayPool.indexOf(pick) >= 0) tag = "FirstFriday";
+    else if (creationDayPool.indexOf(pick) >= 0) tag = "CreationDay";
+    else if (holidayPoolArr.indexOf(pick) >= 0) tag = "Holiday";
+    else if (sportsPoolArr.indexOf(pick) >= 0) tag = "Sports";
+    else if (culturalActivityPool.indexOf(pick) >= 0) tag = "Cultural";
+    else if (communityPool.indexOf(pick) >= 0) tag = "Community";
 
-    const stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
-    const line = `${stamp} — [${tag}] ${pick}`;
+    var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
+    var line = stamp + " — [" + tag + "] " + pick;
 
-    const existing = row[iLife] ? row[iLife].toString() : "";
+    var existing = row[iLife] ? row[iLife].toString() : "";
     row[iLife] = existing ? existing + "\n" + line : line;
 
     if (iLastUpd >= 0) row[iLastUpd] = ctx.now;
@@ -495,7 +484,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
   ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
 
   if (logSheet && logRows.length) {
-    const startRow = logSheet.getLastRow() + 1;
+    var startRow = logSheet.getLastRow() + 1;
     logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
   }
 

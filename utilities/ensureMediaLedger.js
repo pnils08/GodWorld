@@ -8,7 +8,7 @@
 
 function ensureMediaLedger_(ctx) {
 
-  let sheet = ctx.ss.getSheetByName('Media_Ledger');
+  var sheet = ctx.ss.getSheetByName('Media_Ledger');
 
   if (!sheet) {
     sheet = ctx.ss.insertSheet('Media_Ledger');

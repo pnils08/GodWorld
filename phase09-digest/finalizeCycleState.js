@@ -31,13 +31,13 @@
  */
 
 function finalizeCycleState_(ctx) {
-  const S = ctx.summary || (ctx.summary = {});
-  const dynamics = S.cityDynamics || { sentiment: 0 };
-  const weather = S.weather || {};
-  const worldEvents = Array.isArray(S.worldEvents) ? S.worldEvents : [];
+  var S = ctx.summary || (ctx.summary = {});
+  var dynamics = S.cityDynamics || { sentiment: 0 };
+  var weather = S.weather || {};
+  var worldEvents = Array.isArray(S.worldEvents) ? S.worldEvents : [];
 
   // Standardized cycle ID resolution (prefer cycleId, fallback to config)
-  const cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
+  var cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
 
   // v1.1: Idempotence guard - prevent double-finalize on reruns
   if (S.previousCycleState && S.previousCycleState.cycle === cycle) {
@@ -45,7 +45,7 @@ function finalizeCycleState_(ctx) {
   }
 
   // Build comprehensive final snapshot of this cycle
-  const snapshot = {
+  var snapshot = {
     // Core identifiers
     cycle: cycle,
 

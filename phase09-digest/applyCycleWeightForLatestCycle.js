@@ -31,32 +31,32 @@ function applyCycleWeightForLatestCycle_(ctx) {
     applyCycleWeight_(ctx);
   }
 
-  const S = ctx.summary || {};
+  var S = ctx.summary || {};
 
   // v2.3: Defensive guard - ensure applyCycleWeight_ produced output
   if (!S.cycleWeight && !S.cycleWeightScore && !S.cycleWeightReason) {
     Logger.log('applyCycleWeightForLatestCycle_: applyCycleWeight_ produced no output');
   }
 
-  const weight = S.cycleWeight || "low-signal";
-  const reason = S.cycleWeightReason || "Low activity and stable patterns.";
-  const score = S.cycleWeightScore || 0;
+  var weight = S.cycleWeight || "low-signal";
+  var reason = S.cycleWeightReason || "Low activity and stable patterns.";
+  var score = S.cycleWeightScore || 0;
 
   // v2.3: Get current cycle for row targeting
-  const cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
+  var cycle = S.cycleId || S.cycle || (ctx.config && ctx.config.cycleCount) || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
-  const season = S.season || "Spring";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || "off-season";
+  var season = S.season || "Spring";
 
   // Build calendar summary string (v2.3: abbreviated to match compressed digest)
-  const holidayAbbrev = {
+  var holidayAbbrev = {
     "Thanksgiving": "TG", "Holiday": "HOL", "NewYear": "NY", "NewYearsEve": "NYE",
     "Independence": "IND", "MLKDay": "MLK", "PresidentsDay": "PRES",
     "Valentine": "VAL", "Easter": "ESTR", "MemorialDay": "MEM",
@@ -67,10 +67,10 @@ function applyCycleWeightForLatestCycle_(ctx) {
     "FathersDay": "DAD", "EarthDay": "ERTH", "ArtSoulFestival": "A&S"
   };
 
-  const calendarParts = [];
+  var calendarParts = [];
   calendarParts.push(season.substring(0, 2)); // Sp, Su, Fa, Wi
   if (holiday !== "none") {
-    const hAbbr = holidayAbbrev[holiday] || holiday.substring(0, 4).toUpperCase();
+    var hAbbr = holidayAbbrev[holiday] || holiday.substring(0, 4).toUpperCase();
     calendarParts.push(hAbbr);
   }
   if (isFirstFriday) calendarParts.push("FF");
@@ -78,35 +78,40 @@ function applyCycleWeightForLatestCycle_(ctx) {
   if (sportsSeason === "championship") calendarParts.push("CHAMP");
   else if (sportsSeason === "playoffs" || sportsSeason === "post-season") calendarParts.push("PLYF");
 
-  let calendarSummary = calendarParts.join(" | ");
+  var calendarSummary = calendarParts.join(" | ");
   if (calendarSummary.length > 80) calendarSummary = calendarSummary.substring(0, 77) + "...";
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WRITE TO RILEY_DIGEST
   // ═══════════════════════════════════════════════════════════════════════════
-  const sheet = ctx.ss.getSheetByName('Riley_Digest');
+  var sheet = ctx.ss.getSheetByName('Riley_Digest');
   if (!sheet) return;
 
-  const lastRow = sheet.getLastRow();
+  var lastRow = sheet.getLastRow();
   if (lastRow < 2) return;
 
   // Find columns by header
-  const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
 
   // v2.3: Cycle-safe row targeting - find row for THIS cycle
-  const cycleCol = headers.indexOf('Cycle') + 1 || headers.indexOf('CycleId') + 1;
-  let targetRow = lastRow; // fallback
+  var cycleCol = headers.indexOf('Cycle') + 1 || headers.indexOf('CycleId') + 1;
+  var targetRow = lastRow; // fallback
 
   if (cycleCol > 0 && lastRow > 1) {
-    const cycleVals = sheet.getRange(2, cycleCol, lastRow - 1, 1).getValues().flat();
-    const idx = cycleVals.lastIndexOf(cycle);
+    var cycleValsRaw = sheet.getRange(2, cycleCol, lastRow - 1, 1).getValues();
+    // Flatten 2D array to 1D (ES5 compatible)
+    var cycleVals = [];
+    for (var cvIdx = 0; cvIdx < cycleValsRaw.length; cvIdx++) {
+      cycleVals.push(cycleValsRaw[cvIdx][0]);
+    }
+    var idx = cycleVals.lastIndexOf(cycle);
     if (idx >= 0) targetRow = idx + 2; // offset for header row
   }
-  
+
   // Original columns (v2.1)
-  const weightCol = headers.indexOf('CycleWeight') + 1;
-  const reasonCol = headers.indexOf('CycleWeightReason') + 1;
-  const scoreCol = headers.indexOf('CycleWeightScore') + 1;
+  var weightCol = headers.indexOf('CycleWeight') + 1;
+  var reasonCol = headers.indexOf('CycleWeightReason') + 1;
+  var scoreCol = headers.indexOf('CycleWeightScore') + 1;
 
   // v2.3: Defensive logging for missing core columns
   if (weightCol <= 0 && reasonCol <= 0 && scoreCol <= 0) {
@@ -114,13 +119,13 @@ function applyCycleWeightForLatestCycle_(ctx) {
   }
 
   // Calendar columns (v2.2)
-  const holidayCol = headers.indexOf('Holiday') + 1;
-  const holidayPriorityCol = headers.indexOf('HolidayPriority') + 1;
-  const firstFridayCol = headers.indexOf('FirstFriday') + 1;
-  const creationDayCol = headers.indexOf('CreationDay') + 1;
-  const sportsSeasonCol = headers.indexOf('SportsSeason') + 1;
-  const seasonCol = headers.indexOf('Season') + 1;
-  const calendarSummaryCol = headers.indexOf('CalendarSummary') + 1;
+  var holidayCol = headers.indexOf('Holiday') + 1;
+  var holidayPriorityCol = headers.indexOf('HolidayPriority') + 1;
+  var firstFridayCol = headers.indexOf('FirstFriday') + 1;
+  var creationDayCol = headers.indexOf('CreationDay') + 1;
+  var sportsSeasonCol = headers.indexOf('SportsSeason') + 1;
+  var seasonCol = headers.indexOf('Season') + 1;
+  var calendarSummaryCol = headers.indexOf('CalendarSummary') + 1;
 
   // Write original values (v2.3: use targetRow instead of lastRow)
   if (weightCol > 0) {

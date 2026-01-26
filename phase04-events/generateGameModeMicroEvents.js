@@ -21,61 +21,61 @@ function mulberry32_(seed) {
 }
 
 function generateGameModeMicroEvents_(ctx) {
-  const ss = ctx.ss;
-  const ledger = ss.getSheetByName("Simulation_Ledger");
-  const logSheet = ss.getSheetByName("LifeHistory_Log");
+  var ss = ctx.ss;
+  var ledger = ss.getSheetByName("Simulation_Ledger");
+  var logSheet = ss.getSheetByName("LifeHistory_Log");
   if (!ledger) return;
 
-  const values = ledger.getDataRange().getValues();
+  var values = ledger.getDataRange().getValues();
   if (values.length < 2) return;
 
-  const header = values[0];
-  const rows = values.slice(1);
-  const idx = (n) => header.indexOf(n);
+  var header = values[0];
+  var rows = values.slice(1);
+  function idx(n) { return header.indexOf(n); }
 
-  const iPopID = idx("POPID");
-  const iFirst = idx("First");
-  const iLast = idx("Last");
-  const iTier = idx("Tier");
-  const iClock = idx("ClockMode");
-  const iUNI = idx("UNI (y/n)");
-  const iMED = idx("MED (y/n)");
-  const iCIV = idx("CIV (y/n)");
-  const iRole = idx("RoleType");
-  const iStatus = idx("Status");
-  const iLife = idx("LifeHistory");
-  const iLastUpd = (idx("LastUpdated") >= 0) ? idx("LastUpdated") : idx("Last Updated");
-  const iOriginGame = idx("OriginGame");
+  var iPopID = idx("POPID");
+  var iFirst = idx("First");
+  var iLast = idx("Last");
+  var iTier = idx("Tier");
+  var iClock = idx("ClockMode");
+  var iUNI = idx("UNI (y/n)");
+  var iMED = idx("MED (y/n)");
+  var iCIV = idx("CIV (y/n)");
+  var iRole = idx("RoleType");
+  var iStatus = idx("Status");
+  var iLife = idx("LifeHistory");
+  var iLastUpd = (idx("LastUpdated") >= 0) ? idx("LastUpdated") : idx("Last Updated");
+  var iOriginGame = idx("OriginGame");
 
   if (iPopID < 0 || iClock < 0 || iStatus < 0 || iLife < 0) return;
 
-  const S = ctx.summary || (ctx.summary = {});
-  const cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+  var S = ctx.summary || (ctx.summary = {});
+  var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
 
-  const rng = (typeof ctx.rng === "function")
+  var rng = (typeof ctx.rng === "function")
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
       ? mulberry32_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
       : Math.random;
 
-  const roll = () => rng();
-  const hit = (p) => roll() < p;
-  const pickOne = (arr) => arr[Math.floor(roll() * arr.length)];
+  function roll() { return rng(); }
+  function hit(p) { return roll() < p; }
+  function pickOne(arr) { return arr[Math.floor(roll() * arr.length)]; }
 
   // WORLD STATE
-  const weather = S.weather || { type: "clear", impact: 1 };
-  const chaos = S.worldEvents || [];
-  const dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
+  var weather = S.weather || { type: "clear", impact: 1 };
+  var chaos = S.worldEvents || [];
+  var dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
 
   // Calendar context
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = !!S.isFirstFriday;
-  const isCreationDay = !!S.isCreationDay;
-  const sportsSeason = S.sportsSeason || "off-season";
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var isFirstFriday = !!S.isFirstFriday;
+  var isCreationDay = !!S.isCreationDay;
+  var sportsSeason = S.sportsSeason || "off-season";
 
-  const calendarTags = (() => {
-    const t = [];
+  var calendarTags = (function() {
+    var t = [];
     if (holiday !== "none") t.push("holiday:" + holiday);
     if (holidayPriority !== "none") t.push("holidayPriority:" + holidayPriority);
     if (isFirstFriday) t.push("firstFriday");
@@ -84,23 +84,27 @@ function generateGameModeMicroEvents_(ctx) {
     return t;
   })();
 
-  const mergeTags = (a, b) => {
-    const seen = Object.create(null);
-    const out = [];
-    const add = (x) => { if (x && !seen[x]) { seen[x] = true; out.push(x); } };
-    (a || []).forEach(add);
-    (b || []).forEach(add);
+  function mergeTags(a, b) {
+    var seen = Object.create(null);
+    var out = [];
+    function add(x) { if (x && !seen[x]) { seen[x] = true; out.push(x); } }
+    var aArr = a || [];
+    var bArr = b || [];
+    for (var ai = 0; ai < aArr.length; ai++) { add(aArr[ai]); }
+    for (var bi = 0; bi < bArr.length; bi++) { add(bArr[bi]); }
     return out;
-  };
+  }
 
-  const entry = (text, tags, primary) => ({
-    text: text,
-    tags: mergeTags(tags, calendarTags),
-    primary: primary || "Life"
-  });
+  function entry(text, tags, primary) {
+    return {
+      text: text,
+      tags: mergeTags(tags, calendarTags),
+      primary: primary || "Life"
+    };
+  }
 
   // Pools (tagged)
-  const mlbPublic = [
+  var mlbPublic = [
     "signed autographs for fans",
     "did a brief media availability",
     "posed for photos with young fans",
@@ -111,7 +115,7 @@ function generateGameModeMicroEvents_(ctx) {
     "did a radio interview"
   ].map(function(t) { return entry(t, ["role:mlb"], "Public"); });
 
-  const mlbPersonal = [
+  var mlbPersonal = [
     "spent downtime away from the ballpark",
     "caught up with family via video call",
     "enjoyed a quiet meal in the city",
@@ -121,14 +125,14 @@ function generateGameModeMicroEvents_(ctx) {
     "enjoyed an off-day in Oakland"
   ].map(function(t) { return entry(t, ["role:mlb"], "Personal"); });
 
-  const mlbTeamLife = [
+  var mlbTeamLife = [
     "joined teammates for a team meal",
     "participated in clubhouse conversations",
     "connected with younger players",
     "shared a laugh with teammates"
   ].map(function(t) { return entry(t, ["role:mlb"], "Team"); });
 
-  const mediaWork = [
+  var mediaWork = [
     "worked on developing a story lead",
     "conducted background interviews",
     "reviewed notes from recent events",
@@ -137,49 +141,49 @@ function generateGameModeMicroEvents_(ctx) {
     "fact-checked a developing story"
   ].map(function(t) { return entry(t, ["role:media"], "Work"); });
 
-  const mediaPublic = [
+  var mediaPublic = [
     "attended a press conference",
     "participated in a media availability",
     "represented the paper at an event",
     "networked with industry contacts"
   ].map(function(t) { return entry(t, ["role:media"], "Public"); });
 
-  const mediaPersonal = [
+  var mediaPersonal = [
     "decompressed after a long news cycle",
     "caught up on industry reading",
     "reflected on recent coverage decisions",
     "maintained source relationships quietly"
   ].map(function(t) { return entry(t, ["role:media"], "Personal"); });
 
-  const editorPool = [
+  var editorPool = [
     "reviewed the day's editorial priorities",
     "made tough decisions on story placement",
     "mentored a younger staff member",
     "navigated internal editorial discussions"
   ].map(function(t) { return entry(t, ["role:media", "media:editor"], "Work"); });
 
-  const reporterPool = [
+  var reporterPool = [
     "followed up on a tip",
     "built rapport with a new source",
     "spent time in the field gathering details",
     "attended a community meeting for coverage"
   ].map(function(t) { return entry(t, ["role:media", "media:reporter"], "Work"); });
 
-  const columnistPool = [
+  var columnistPool = [
     "drafted thoughts for an upcoming column",
     "engaged with reader feedback",
     "considered a provocative angle",
     "reflected on the week's events"
   ].map(function(t) { return entry(t, ["role:media", "media:columnist"], "Work"); });
 
-  const photographerPool = [
+  var photographerPool = [
     "scouted locations for upcoming shoots",
     "edited images from recent assignments",
     "captured candid moments around town",
     "maintained equipment between assignments"
   ].map(function(t) { return entry(t, ["role:media", "media:photographer"], "Work"); });
 
-  const civicWork = [
+  var civicWork = [
     "reviewed briefing materials",
     "attended internal policy meetings",
     "consulted with department heads",
@@ -187,7 +191,7 @@ function generateGameModeMicroEvents_(ctx) {
     "addressed constituent concerns"
   ].map(function(t) { return entry(t, ["role:civic"], "Civic"); });
 
-  const civicPublic = [
+  var civicPublic = [
     "made a brief public appearance",
     "spoke with community members",
     "attended a neighborhood event",
@@ -195,32 +199,32 @@ function generateGameModeMicroEvents_(ctx) {
     "fielded questions from local media"
   ].map(function(t) { return entry(t, ["role:civic"], "Public"); });
 
-  const civicPersonal = [
+  var civicPersonal = [
     "found a quiet moment between obligations",
     "balanced public duties with personal time",
     "reflected on the weight of public service",
     "maintained composure under public scrutiny"
   ].map(function(t) { return entry(t, ["role:civic"], "Personal"); });
 
-  const mayorPool = [
+  var mayorPool = [
     "navigated competing political pressures",
     "considered long-term city priorities",
     "met with key stakeholders privately"
   ].map(function(t) { return entry(t, ["role:civic", "civic:mayor"], "Civic"); });
 
-  const councilPool = [
+  var councilPool = [
     "prepared for council deliberations",
     "met with district constituents",
     "reviewed proposed legislation"
   ].map(function(t) { return entry(t, ["role:civic", "civic:council"], "Civic"); });
 
-  const staffPool = [
+  var staffPool = [
     "coordinated across departments",
     "managed logistics for upcoming events",
     "handled sensitive communications"
   ].map(function(t) { return entry(t, ["role:civic", "civic:staff"], "Civic"); });
 
-  const publicFigureGeneral = [
+  var publicFigureGeneral = [
     "navigated being recognized in public",
     "maintained public composure",
     "handled attention with practiced ease",
@@ -228,7 +232,7 @@ function generateGameModeMicroEvents_(ctx) {
     "managed the demands of public life"
   ].map(function(t) { return entry(t, ["role:publicFigure"], "Life"); });
 
-  const publicFigurePersonal = [
+  var publicFigurePersonal = [
     "enjoyed a rare quiet evening",
     "connected with close friends",
     "took time for personal wellness",
@@ -236,25 +240,25 @@ function generateGameModeMicroEvents_(ctx) {
     "appreciated a normal moment"
   ].map(function(t) { return entry(t, ["role:publicFigure"], "Personal"); });
 
-  const championshipPool = [
+  var championshipPool = [
     "felt the city's championship energy",
     "navigated heightened media attention",
     "noticed more fans recognizing them"
   ].map(function(t) { return entry(t, ["context:sportsAtmosphere"], "Season"); });
 
-  const playoffPool = [
+  var playoffPool = [
     "felt the city's postseason energy",
     "noticed increased media presence",
     "sensed the heightened expectations"
   ].map(function(t) { return entry(t, ["context:sportsAtmosphere"], "Season"); });
 
-  const offseasonPool = [
+  var offseasonPool = [
     "enjoyed the slower offseason pace",
     "appreciated time away from the spotlight",
     "recharged during the break"
   ].map(function(t) { return entry(t, ["context:sportsAtmosphere"], "Season"); });
 
-  const holidayPublicPool = {
+  var holidayPublicPool = {
     Thanksgiving: ["participated in a holiday community event"],
     Holiday: ["attended a holiday charity function"],
     NewYear: ["reflected publicly on the year ahead"],
@@ -358,8 +362,8 @@ function generateGameModeMicroEvents_(ctx) {
   var details = [];
 
   // NEW: per-cycle uniqueness per citizen
-  // Key: cycle|popId|text (cycle included so Set can optionally persist in ctx)
-  var used = new Set();
+  // Key: cycle|popId|text (cycle included so object can optionally persist in ctx)
+  var usedObj = Object.create(null);
 
   function uniquePick_(pool, popId) {
     if (!pool.length) return null;
@@ -368,8 +372,8 @@ function generateGameModeMicroEvents_(ctx) {
     for (var s = 0; s < maxSpins; s++) {
       var cand = pickOne(pool);
       var key = cycle + "|" + popId + "|" + cand.text;
-      if (!used.has(key)) {
-        used.add(key);
+      if (!usedObj[key]) {
+        usedObj[key] = true;
         return cand;
       }
     }
@@ -378,8 +382,8 @@ function generateGameModeMicroEvents_(ctx) {
     for (var i = 0; i < pool.length; i++) {
       var cand = pool[i];
       var key = cycle + "|" + popId + "|" + cand.text;
-      if (!used.has(key)) {
-        used.add(key);
+      if (!usedObj[key]) {
+        usedObj[key] = true;
         return cand;
       }
     }

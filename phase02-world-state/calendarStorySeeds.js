@@ -1,10 +1,14 @@
 /**
  * ============================================================================
- * applySeasonalStorySeeds_ v2.3
+ * applySeasonalStorySeeds_ v2.4 (ES5)
  * ============================================================================
  *
  * Generates seasonal story seeds with domain tagging.
  * Aligned with GodWorld Calendar v1.0 and getSimHoliday_ v2.3.
+ *
+ * v2.4 Changes:
+ * - ES5 safe: const/let -> var, arrow functions -> function expressions
+ * - forEach -> for loop, spread operator -> manual array building
  *
  * v2.3 Fixes:
  * - Removed WinterSolstice (calendar never emits it)
@@ -25,29 +29,32 @@
 
 function applySeasonalStorySeeds_(ctx) {
 
-  const seeds = [];
-  const S = ctx.summary;
-  const season = S.season;
-  const holiday = S.holiday || "none";
-  const holidayPriority = S.holidayPriority || "none";
-  const holidayNeighborhood = S.holidayNeighborhood || null;
-  const events = S.worldEvents || [];
-  const W = S.weather || { type: "clear", impact: 1 };
-  const weatherMood = S.weatherMood || {};
-  const D = S.cityDynamics || {};
-  const econMood = S.economicMood || 50;
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const creationDayAnniversary = S.creationDayAnniversary;
-  const cycleOfYear = S.cycleOfYear || 1;
+  var seeds = [];
+  var S = ctx.summary;
+  var season = S.season;
+  var holiday = S.holiday || "none";
+  var holidayPriority = S.holidayPriority || "none";
+  var holidayNeighborhood = S.holidayNeighborhood || null;
+  var events = S.worldEvents || [];
+  var W = S.weather || { type: "clear", impact: 1 };
+  var weatherMood = S.weatherMood || {};
+  var D = S.cityDynamics || {};
+  var econMood = S.economicMood || 50;
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var creationDayAnniversary = S.creationDayAnniversary;
+  var cycleOfYear = S.cycleOfYear || 1;
 
   // Helper to create seed object (v2.3: use 'text' for downstream compatibility)
-  const seed = (text, domain, neighborhood) => ({
-    text: text,
-    domain: domain || 'GENERAL',
-    source: 'seasonal',
-    neighborhood: neighborhood || null
-  });
+  // ES5: function expression instead of arrow function
+  function seed(text, domain, neighborhood) {
+    return {
+      text: text,
+      domain: domain || 'GENERAL',
+      source: 'seasonal',
+      neighborhood: neighborhood || null
+    };
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SEASONS
@@ -440,11 +447,14 @@ function applySeasonalStorySeeds_(ctx) {
   // WORLD EVENTS (seasonal framing)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  events.slice(0, 5).forEach(ev => {
-    const desc = ev.description || ev.subdomain || 'event';
-    const domain = ev.domain || 'GENERAL';
-    seeds.push(seed(`Season-context: ${desc}`, domain));
-  });
+  // ES5: for loop instead of forEach, string concatenation instead of template literal
+  var eventsSlice = events.slice(0, 5);
+  for (var evIdx = 0; evIdx < eventsSlice.length; evIdx++) {
+    var ev = eventsSlice[evIdx];
+    var desc = ev.description || ev.subdomain || 'event';
+    var domain = ev.domain || 'GENERAL';
+    seeds.push(seed("Season-context: " + desc, domain));
+  }
 
   // v2.3: Removed SPORTS SEASON section (user controls sports sim)
   // OpeningDay is kept as a calendar holiday above
@@ -464,7 +474,16 @@ function applySeasonalStorySeeds_(ctx) {
   // DEDUPLICATE AND ASSIGN
   // ═══════════════════════════════════════════════════════════════════════════
 
-  const uniqueSeeds = [...new Map(seeds.map(s => [s.text, s])).values()];  // v2.3: use .text
+  // ES5: Manual deduplication instead of spread operator with Map
+  var seenTexts = {};
+  var uniqueSeeds = [];
+  for (var usIdx = 0; usIdx < seeds.length; usIdx++) {
+    var seedItem = seeds[usIdx];
+    if (!seenTexts[seedItem.text]) {
+      seenTexts[seedItem.text] = true;
+      uniqueSeeds.push(seedItem);
+    }
+  }
 
   S.seasonalStorySeeds = uniqueSeeds;
   ctx.summary = S;

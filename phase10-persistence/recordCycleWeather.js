@@ -1,10 +1,16 @@
 /**
  * ============================================================================
- * recordCycleWeather_ v1.1
+ * recordCycleWeather_ v1.2 - Write-Intent Based
  * ============================================================================
  *
  * Writes weather data to centralized Cycle_Weather sheet.
  * This is the single source of truth for weather by cycle.
+ * Uses V3 write-intents model for persistence.
+ *
+ * v1.2 Changes:
+ * - Uses queueAppendIntent_ instead of direct appendRow
+ * - Full dryRun/replay mode support
+ * - ES5 compatible
  *
  * Schema:
  *   CycleID | Type | Temp | Impact | Advisory | Comfort | Mood | Alerts
@@ -32,6 +38,7 @@ var CYCLE_WEATHER_HEADERS = [
 
 /**
  * Records weather for the current cycle to Cycle_Weather sheet
+ * v1.2: Uses write-intents model
  * @param {Object} ctx - Engine context with ss and summary
  */
 function recordCycleWeather_(ctx) {
@@ -41,6 +48,11 @@ function recordCycleWeather_(ctx) {
   if (!S || !S.weather) {
     Logger.log('recordCycleWeather_: No weather data to record');
     return;
+  }
+
+  // Initialize persist context if needed
+  if (!ctx.persist) {
+    initializePersistContext_(ctx);
   }
 
   var weather = S.weather;
@@ -67,9 +79,11 @@ function recordCycleWeather_(ctx) {
   var alerts = tracking.activeAlerts || weatherSum.alerts || [];
   var advisory = '';
   if (alerts.length > 0) {
-    advisory = alerts.map(function(a) {
-      return a.replace(/_/g, ' ').toUpperCase();
-    }).join('; ');
+    var alertTexts = [];
+    for (var i = 0; i < alerts.length; i++) {
+      alertTexts.push(alerts[i].replace(/_/g, ' ').toUpperCase());
+    }
+    advisory = alertTexts.join('; ');
   }
 
   // Build row
@@ -84,14 +98,21 @@ function recordCycleWeather_(ctx) {
     alerts.join(', '),                          // Alerts
     tracking.currentStreak || 1,                // Streak
     tracking.streakType || weather.type,        // StreakType
-    ctx.now || new Date()                        // Timestamp (native Date for Sheets)
+    ctx.now || new Date()                       // Timestamp (native Date for Sheets)
   ];
 
-  // Append row
-  sheet.appendRow(row);
+  // Queue append intent
+  queueAppendIntent_(
+    ctx,
+    'Cycle_Weather',
+    row,
+    'Record weather for cycle ' + cycleId + ' - ' + weather.type,
+    'world',
+    100
+  );
 
-  Logger.log('recordCycleWeather_: Recorded weather for cycle ' + cycleId +
-             ' - ' + weather.type + ' ' + weather.temp + '°F');
+  Logger.log('recordCycleWeather_ v1.2: Queued weather for cycle ' + cycleId +
+             ' - ' + weather.type + ' ' + (weather.temp || 65) + '°F');
 }
 
 

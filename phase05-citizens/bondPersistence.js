@@ -1,12 +1,17 @@
 /**
  * ============================================================================
- * BOND PERSISTENCE v2.2
+ * BOND PERSISTENCE v2.3 - Write-Intent Based
  * ============================================================================
  *
  * Handles loading and saving relationship bonds to/from sheet storage.
  * Works with Bond Engine v2.4 to maintain bonds across cycles.
  *
- * v2.2 Fixes:
+ * v2.3 Changes:
+ * - saveRelationshipBonds_ uses queueReplaceIntent_ for V3 write-intents
+ * - Full dryRun/replay mode support
+ * - Loading unchanged (reads don't need intents)
+ *
+ * v2.2 Fixes (preserved):
  * - ES5 compatible (var instead of const/let, no arrow functions)
  * - sheet.clear() replaced with clearContent() (preserves formatting)
  * - asBool_() helper for robust boolean parsing from sheets
@@ -14,7 +19,7 @@
  * - upgradeBondSheetSchema_ bails if sheet looks like ledger
  * - purgeInactiveBonds_ bondAge calculation fixed
  *
- * v2.1 Enhancements:
+ * v2.1 Enhancements (preserved):
  * - Calendar columns (Holiday, HolidayPriority, FirstFriday, CreationDay, SportsSeason)
  * - Load calendar context from storage
  * - Save calendar context to storage
@@ -186,47 +191,40 @@ function loadRelationshipBonds_(ctx) {
  *
  * This REPLACES the entire sheet with current state (master record).
  * Historical changes are tracked by saveV3BondsToLedger_().
+ *
+ * v2.3: Uses queueReplaceIntent_ for V3 write-intents model.
  */
 function saveRelationshipBonds_(ctx) {
   var S = ctx.summary || {};
   var ss = ctx.ss;
   var bonds = S.relationshipBonds || [];
 
-  // Get or create the bonds sheet
+  // Initialize persist context if needed
+  if (!ctx.persist) {
+    initializePersistContext_(ctx);
+  }
+
+  // Check for ledger schema collision (safety check)
   var sheet = ss.getSheetByName('Relationship_Bonds');
-  if (!sheet) {
-    sheet = ss.insertSheet('Relationship_Bonds');
-  } else {
-    // v2.2: Check if sheet is ledger schema before overwriting
-    var existingHeaders = sheet.getRange(1, 1, 1, Math.min(sheet.getLastColumn(), 5)).getValues()[0];
-    if (isLedgerSchema_(existingHeaders)) {
-      Logger.log('saveRelationshipBonds_ v2.2: Relationship_Bonds appears to be ledger schema; aborting save to prevent corruption');
-      return;
+  if (sheet) {
+    var lastCol = sheet.getLastColumn();
+    if (lastCol > 0) {
+      var existingHeaders = sheet.getRange(1, 1, 1, Math.min(lastCol, 5)).getValues()[0];
+      if (isLedgerSchema_(existingHeaders)) {
+        Logger.log('saveRelationshipBonds_ v2.3: Relationship_Bonds appears to be ledger schema; aborting save to prevent corruption');
+        return;
+      }
     }
-  }
-
-  // v2.2: Clear contents only, preserve formatting/filters/protection
-  if (sheet.getLastRow() > 0) {
-    sheet.getDataRange().clearContent();
-  }
-
-  // Write headers
-  sheet.getRange(1, 1, 1, BOND_SHEET_HEADERS.length).setValues([BOND_SHEET_HEADERS]);
-  sheet.getRange(1, 1, 1, BOND_SHEET_HEADERS.length).setFontWeight('bold');
-  sheet.setFrozenRows(1);
-
-  if (bonds.length === 0) {
-    Logger.log('saveRelationshipBonds_ v2.2: No bonds to save');
-    return; // Nothing more to save
   }
 
   var currentCycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
 
-  // Build all rows
-  var rows = [];
+  // Build all rows (starting with header)
+  var allRows = [BOND_SHEET_HEADERS];
+
   for (var i = 0; i < bonds.length; i++) {
     var bond = bonds[i];
-    rows.push([
+    allRows.push([
       bond.bondId || '',
       bond.citizenA || '',
       bond.citizenB || '',
@@ -248,12 +246,17 @@ function saveRelationshipBonds_(ctx) {
     ]);
   }
 
-  // Batch write all bonds
-  if (rows.length > 0) {
-    sheet.getRange(2, 1, rows.length, BOND_SHEET_HEADERS.length).setValues(rows);
-  }
+  // Queue replace intent (clears and writes all data)
+  queueReplaceIntent_(
+    ctx,
+    'Relationship_Bonds',
+    allRows,
+    'Save ' + bonds.length + ' relationship bonds (master state)',
+    'citizens',
+    50  // Replace ops run first
+  );
 
-  Logger.log('saveRelationshipBonds_ v2.2: Saved ' + rows.length + ' bonds');
+  Logger.log('saveRelationshipBonds_ v2.3: Queued ' + bonds.length + ' bonds for save');
 }
 
 
@@ -710,10 +713,15 @@ function upgradeBondSheetSchema_(ctx) {
 
 /**
  * ============================================================================
- * BOND PERSISTENCE REFERENCE v2.2
+ * BOND PERSISTENCE REFERENCE v2.3
  * ============================================================================
  *
- * v2.2 FIXES:
+ * v2.3 CHANGES:
+ * - saveRelationshipBonds_ uses queueReplaceIntent_ for V3 write-intents
+ * - Full dryRun/replay mode support via ctx.mode flags
+ * - Actual writes deferred to Phase 10 persistence executor
+ *
+ * v2.2 FIXES (preserved):
  * - ES5 compatible (var, no arrow functions)
  * - sheet.clear() replaced with clearContent() (preserves formatting)
  * - asBool_() for robust boolean parsing

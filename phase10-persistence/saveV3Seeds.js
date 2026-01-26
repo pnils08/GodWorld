@@ -1,11 +1,17 @@
 /**
  * ============================================================================
- * V3.2 STORY SEEDS WRITER
+ * V3.3 STORY SEEDS WRITER - Write-Intent Based
  * ============================================================================
  *
  * Writes seeds to Story_Seed_Deck sheet with full calendar context.
+ * Uses V3 write-intents model for persistence.
  *
- * v3.2 Enhancements:
+ * v3.3 Changes:
+ * - Uses queueBatchAppendIntent_ instead of direct writes
+ * - Full dryRun/replay mode support
+ * - ES5 compatible
+ *
+ * v3.2 Features (preserved):
  * - Season column
  * - Holiday column
  * - HolidayPriority column
@@ -17,70 +23,89 @@
  * Previous features (v3.1):
  * - 8 columns for seed tracking
  * - Domain, neighborhood, priority
- * 
+ *
  * ============================================================================
  */
 
+var SEED_DECK_HEADERS = [
+  'Timestamp',       // A
+  'Cycle',           // B
+  'SeedID',          // C
+  'SeedType',        // D
+  'Domain',          // E
+  'Neighborhood',    // F
+  'Priority',        // G
+  'SeedText',        // H
+  // v3.2: Calendar columns
+  'Season',          // I
+  'Holiday',         // J
+  'HolidayPriority', // K
+  'IsFirstFriday',   // L
+  'IsCreationDay',   // M
+  'SportsSeason'     // N
+];
+
+
 function saveV3Seeds_(ctx) {
-  const ss = ctx.ss;
-  const seeds = ctx.summary.storySeeds || [];
+  var ss = ctx.ss;
+  var seeds = ctx.summary.storySeeds || [];
 
   if (!seeds.length) return;
 
-  const headers = [
-    'Timestamp',       // A
-    'Cycle',           // B
-    'SeedID',          // C
-    'SeedType',        // D
-    'Domain',          // E
-    'Neighborhood',    // F
-    'Priority',        // G
-    'SeedText',        // H
-    // v3.2: Calendar columns
-    'Season',          // I
-    'Holiday',         // J
-    'HolidayPriority', // K
-    'IsFirstFriday',   // L
-    'IsCreationDay',   // M
-    'SportsSeason'     // N
-  ];
+  // Initialize persist context if needed
+  if (!ctx.persist) {
+    initializePersistContext_(ctx);
+  }
 
-  const sheet = ensureSheet_(ss, 'Story_Seed_Deck', headers);
+  // Ensure sheet exists (still need this for header setup)
+  var sheet = ensureSheet_(ss, 'Story_Seed_Deck', SEED_DECK_HEADERS);
 
-  const S = ctx.summary;
-  const cycle = ctx.config.cycleCount || S.cycleId;
-  const now = ctx.now || new Date();
+  var S = ctx.summary;
+  var cycle = ctx.config.cycleCount || S.cycleId;
+  var now = ctx.now || new Date();
 
   // v3.2: Calendar context
-  const season = S.season || '';
-  const holiday = S.holiday || 'none';
-  const holidayPriority = S.holidayPriority || 'none';
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || 'off-season';
+  var season = S.season || '';
+  var holiday = S.holiday || 'none';
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
 
-  const rows = seeds.map(s => [
-    now,                              // A  Timestamp
-    cycle,                            // B  Cycle
-    s.seedId || '',                   // C  SeedID
-    s.seedType || 'signal',           // D  SeedType
-    s.domain || '',                   // E  Domain
-    s.neighborhood || '',             // F  Neighborhood
-    s.priority || 1,                  // G  Priority
-    s.text || '',                     // H  SeedText
-    // v3.2: Calendar columns
-    season,                           // I  Season
-    holiday,                          // J  Holiday
-    holidayPriority,                  // K  HolidayPriority
-    isFirstFriday,                    // L  IsFirstFriday
-    isCreationDay,                    // M  IsCreationDay
-    sportsSeason                      // N  SportsSeason
-  ]);
+  // Build rows
+  var rows = [];
+  for (var i = 0; i < seeds.length; i++) {
+    var s = seeds[i];
+    rows.push([
+      now,                              // A  Timestamp
+      cycle,                            // B  Cycle
+      s.seedId || '',                   // C  SeedID
+      s.seedType || 'signal',           // D  SeedType
+      s.domain || '',                   // E  Domain
+      s.neighborhood || '',             // F  Neighborhood
+      s.priority || 1,                  // G  Priority
+      s.text || '',                     // H  SeedText
+      // v3.2: Calendar columns
+      season,                           // I  Season
+      holiday,                          // J  Holiday
+      holidayPriority,                  // K  HolidayPriority
+      isFirstFriday,                    // L  IsFirstFriday
+      isCreationDay,                    // M  IsCreationDay
+      sportsSeason                      // N  SportsSeason
+    ]);
+  }
 
-  const startRow = Math.max(sheet.getLastRow() + 1, 2);
-  sheet.getRange(startRow, 1, rows.length, rows[0].length).setValues(rows);
-  
-  Logger.log('saveV3Seeds_ v3.2: Saved ' + rows.length + ' seeds | Holiday: ' + holiday + ' | Sports: ' + sportsSeason);
+  // Queue batch append intent
+  queueBatchAppendIntent_(
+    ctx,
+    'Story_Seed_Deck',
+    rows,
+    'Save ' + rows.length + ' story seeds for cycle ' + cycle,
+    'media',
+    100
+  );
+
+  Logger.log('saveV3Seeds_ v3.3: Queued ' + rows.length + ' seeds | Holiday: ' + holiday + ' | Sports: ' + sportsSeason);
 }
 
 

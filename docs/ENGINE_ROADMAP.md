@@ -5,7 +5,7 @@
 
 **Last Updated:** 2026-01-26
 **Current Cycle:** 75
-**Engine Version:** v2.12
+**Engine Version:** v3.0
 
 ---
 
@@ -290,29 +290,70 @@ Connect subsystems properly.
 
 Full architecture migration.
 
-### [ ] 5.1 Migrate Remaining Engines to Write-Intents
-**Pending migrations:**
-- `processIntake_`
-- `saveV3Seeds_`
-- `v3LedgerWriter_`
-- `bondPersistence_`
-- All `record*.gs` files
+### [x] 5.1 Migrate Remaining Engines to Write-Intents
+**Status:** COMPLETE (Jan 2026)
 
-### [ ] 5.2 Implement Replay Mode
-- Accept `cycleId` parameter to replay specific cycle
-- Load seed from that cycle
-- Disable persistence writes
-- Compare outputs to original
+**Implementation:**
+- Created `utilities/writeIntents.js` with intent creation helpers
+- Created `phase10-persistence/persistenceExecutor.js` for intent execution
+- Migrated engines to write-intents:
+  - `processIntake_` → `processIntakeV3_` (phase05-citizens/processIntakeV3.js)
+  - `saveV3Seeds_` v3.3 (uses queueBatchAppendIntent_)
+  - `saveRelationshipBonds_` v2.3 (uses queueReplaceIntent_)
+  - `recordCycleWeather_` v1.2 (uses queueAppendIntent_)
+  - `recordWorldEvents25_` v2.2 (uses queueBatchAppendIntent_)
+  - `recordWorldEventsv3_` v3.3 (uses queueBatchAppendIntent_)
+  - `recordMediaLedger_` v3.2 (uses queueBatchAppendIntent_)
 
-### [ ] 5.3 Implement Dry-Run Mode
-- `ctx.mode.dryRun = true`
-- Full execution, all writes staged but not committed
-- Log intended operations for validation
+**Intent Types:**
+- `cell`: Single value write
+- `range`: 2D array write
+- `append`: Add rows to end
+- `replace`: Clear and rewrite (for master state sheets)
 
-### [ ] 5.4 Deprecate v2 Patterns
-- Remove direct `Math.random()` calls
-- Remove direct sheet writes outside persistence phase
-- Remove `ctx.summary` compatibility shim
+### [x] 5.2 Implement Replay Mode
+**Status:** COMPLETE (Jan 2026)
+
+**Implementation:**
+- Created `utilities/cycleModes.js` with replay support
+- `initializeReplayMode_(ctx, cycleId)` to set up replay
+- `seededRng_(seed)` for deterministic random generation
+- `saveCycleSeed_(ctx)` persists cycle seed and checksum
+- `loadCycleSeed_(ss, cycleId)` retrieves stored seed
+- `compareReplayOutput_(ctx)` validates replay accuracy
+- New sheet: `Cycle_Seeds` tracks CycleID, Seed, key outputs, checksum
+
+### [x] 5.3 Implement Dry-Run Mode
+**Status:** COMPLETE (Jan 2026)
+
+**Implementation:**
+- `ctx.mode.dryRun = true` flag
+- `initializeDryRunMode_(ctx)` for setup
+- Persistence executor logs intents but skips writes
+- `getIntentSummary_(ctx)` shows planned operations
+- Full cycle execution without side effects
+
+### [x] 5.4 Deprecate v2 Patterns
+**Status:** COMPLETE (Jan 2026)
+
+**Implementation:**
+- Created `utilities/v2DeprecationGuide.js` with:
+  - Pattern detection (scanForDeprecatedPatterns_)
+  - Report generation (generateDeprecationReport_)
+  - Migration helpers (v3Random_, v3PickRandom_, v3Chance_)
+  - ctx.summary shim (createSummaryShim_)
+
+**Deprecated Patterns (HIGH):**
+- `Math.random()` → `ctx.rng()`
+- `.appendRow()` → `queueAppendIntent_()`
+- `.setValue()` → `queueCellIntent_()`
+- `.setValues()` → `queueRangeIntent_()`
+
+**ES5 Compatibility (LOW):**
+- `const/let` → `var`
+- Arrow functions → `function()`
+- Template literals → string concatenation
+- `Object.entries/forEach` → for loops
 
 ---
 
@@ -323,6 +364,7 @@ Full architecture migration.
 | New: `Neighborhood_Demographics` | - | COMPLETE |
 | New: `Cycle_Weather` | - | COMPLETE |
 | New: `BayTribune_Roster` | - | JSON READY (sheet pending) |
+| New: `Cycle_Seeds` | - | COMPLETE (Tier 5) |
 | Remove weather columns | `WorldEvents_Ledger` | PENDING |
 | Remove weather columns | `Neighborhood_Map` | PENDING |
 

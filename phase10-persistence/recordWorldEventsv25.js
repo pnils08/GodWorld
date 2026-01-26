@@ -1,11 +1,17 @@
 /**
  * ============================================================================
- * recordWorldEvents_ v2.1
+ * recordWorldEvents_ v2.2 - Write-Intent Based
  * ============================================================================
  *
  * Logs all world events into WorldEvents_Ledger with full calendar context.
+ * Uses V3 write-intents model for persistence.
  *
- * v2.1 Enhancements:
+ * v2.2 Changes:
+ * - Uses queueBatchAppendIntent_ instead of direct writes
+ * - Full dryRun/replay mode support
+ * - ES5 compatible
+ *
+ * v2.1 Features (preserved):
  * - HolidayPriority column
  * - IsFirstFriday column
  * - IsCreationDay column
@@ -14,74 +20,90 @@
  * - Aligned with GodWorld Calendar v1.0
  *
  * Must match ensureWorldEventsLedger_ v2.1 column structure (22 columns).
- * 
+ *
  * ============================================================================
  */
 
 function recordWorldEvents25_(ctx) {
-  const sheet = ctx.ss.getSheetByName('WorldEvents_Ledger');
+  var sheet = ctx.ss.getSheetByName('WorldEvents_Ledger');
   if (!sheet) return;
 
-  const events = ctx.summary.worldEvents || [];
+  var events = ctx.summary.worldEvents || [];
   if (events.length === 0) return;
 
-  const S = ctx.summary;
+  // Initialize persist context if needed
+  if (!ctx.persist) {
+    initializePersistContext_(ctx);
+  }
 
-  const ts = ctx.now;
-  const cycle = S.cycleId;
-  const season = S.season || "";
-  const holiday = S.holiday || "none";
-  const weatherT = S.weather ? S.weather.type : "";
-  const weatherI = S.weather ? S.weather.impact : "";
-  const traffic = S.cityDynamics ? S.cityDynamics.traffic : "";
-  const sentiment = S.cityDynamics ? S.cityDynamics.sentiment : "";
+  var S = ctx.summary;
 
-  const civicLoad = S.civicLoad || "";
-  const shock = S.shockFlag || "";
-  const pattern = S.patternFlag || "";
-  const drift = S.migrationDrift || 0;
-  const chaosCount = S.worldEvents ? S.worldEvents.length : 0;
-  const seedCount = S.storySeeds ? S.storySeeds.length : 0;
-  const nightlife = S.nightlifeVolume || 0;
+  var ts = ctx.now;
+  var cycle = S.cycleId;
+  var season = S.season || '';
+  var holiday = S.holiday || 'none';
+  var weatherT = S.weather ? S.weather.type : '';
+  var weatherI = S.weather ? S.weather.impact : '';
+  var traffic = S.cityDynamics ? S.cityDynamics.traffic : '';
+  var sentiment = S.cityDynamics ? S.cityDynamics.sentiment : '';
+
+  var civicLoad = S.civicLoad || '';
+  var shock = S.shockFlag || '';
+  var pattern = S.patternFlag || '';
+  var drift = S.migrationDrift || 0;
+  var chaosCount = S.worldEvents ? S.worldEvents.length : 0;
+  var seedCount = S.storySeeds ? S.storySeeds.length : 0;
+  var nightlife = S.nightlifeVolume || 0;
 
   // v2.1: Calendar context
-  const holidayPriority = S.holidayPriority || "none";
-  const isFirstFriday = S.isFirstFriday || false;
-  const isCreationDay = S.isCreationDay || false;
-  const sportsSeason = S.sportsSeason || "off-season";
-  const month = S.month || 0;
+  var holidayPriority = S.holidayPriority || 'none';
+  var isFirstFriday = S.isFirstFriday || false;
+  var isCreationDay = S.isCreationDay || false;
+  var sportsSeason = S.sportsSeason || 'off-season';
+  var month = S.month || 0;
 
-  const rows = events.map(ev => [
-    ts,              // A  Timestamp
-    cycle,           // B  Cycle
-    ev.description,  // C  Description
-    ev.severity,     // D  Severity
-    season,          // E  Season
-    holiday,         // F  Holiday
-    weatherT,        // G  WeatherType
-    weatherI,        // H  WeatherImpact
-    traffic,         // I  TrafficLoad
-    sentiment,       // J  PublicSentiment
-    civicLoad,       // K  CivicLoad
-    shock,           // L  ShockFlag
-    pattern,         // M  PatternFlag
-    drift,           // N  MigrationDrift
-    chaosCount,      // O  ChaosCount
-    seedCount,       // P  StorySeedCount
-    nightlife,       // Q  NightlifeVolume
-    // v2.1: Calendar columns
-    holidayPriority, // R  HolidayPriority
-    isFirstFriday,   // S  IsFirstFriday
-    isCreationDay,   // T  IsCreationDay
-    sportsSeason,    // U  SportsSeason
-    month            // V  Month
-  ]);
+  // Build rows
+  var rows = [];
+  for (var i = 0; i < events.length; i++) {
+    var ev = events[i];
+    rows.push([
+      ts,              // A  Timestamp
+      cycle,           // B  Cycle
+      ev.description,  // C  Description
+      ev.severity,     // D  Severity
+      season,          // E  Season
+      holiday,         // F  Holiday
+      weatherT,        // G  WeatherType
+      weatherI,        // H  WeatherImpact
+      traffic,         // I  TrafficLoad
+      sentiment,       // J  PublicSentiment
+      civicLoad,       // K  CivicLoad
+      shock,           // L  ShockFlag
+      pattern,         // M  PatternFlag
+      drift,           // N  MigrationDrift
+      chaosCount,      // O  ChaosCount
+      seedCount,       // P  StorySeedCount
+      nightlife,       // Q  NightlifeVolume
+      // v2.1: Calendar columns
+      holidayPriority, // R  HolidayPriority
+      isFirstFriday,   // S  IsFirstFriday
+      isCreationDay,   // T  IsCreationDay
+      sportsSeason,    // U  SportsSeason
+      month            // V  Month
+    ]);
+  }
 
-  sheet
-    .getRange(sheet.getLastRow() + 1, 1, rows.length, rows[0].length)
-    .setValues(rows);
-  
-  Logger.log('recordWorldEvents25_ v2.1: Logged ' + rows.length + ' events | Holiday: ' + holiday + ' | Sports: ' + sportsSeason);
+  // Queue batch append intent
+  queueBatchAppendIntent_(
+    ctx,
+    'WorldEvents_Ledger',
+    rows,
+    'Record ' + rows.length + ' world events for cycle ' + cycle,
+    'events',
+    100
+  );
+
+  Logger.log('recordWorldEvents25_ v2.2: Queued ' + rows.length + ' events | Holiday: ' + holiday + ' | Sports: ' + sportsSeason);
 }
 
 

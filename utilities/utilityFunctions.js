@@ -20,46 +20,52 @@
  */
 
 function pickRandom_(arr) {
-if (!arr || arr.length === 0) return null;
-const idx = Math.floor(Math.random() * arr.length);
-return arr[idx];
+  if (!arr || arr.length === 0) return null;
+  var idx = Math.floor(Math.random() * arr.length);
+  return arr[idx];
 }
+
 function pickRandomSet_(arr, count) {
-if (!arr || arr.length === 0) return [];
-if (count >= arr.length) return arr.slice();
+  if (!arr || arr.length === 0) return [];
+  if (count >= arr.length) return arr.slice();
 
-const copy = arr.slice();
-const result = [];
+  var copy = arr.slice();
+  var result = [];
 
-for (let i = 0; i < count; i++) {
-const idx = Math.floor(Math.random() * copy.length);
-result.push(copy[idx]);
-copy.splice(idx, 1);
+  for (var i = 0; i < count; i++) {
+    var idx = Math.floor(Math.random() * copy.length);
+    result.push(copy[idx]);
+    copy.splice(idx, 1);
+  }
+
+  return result;
 }
 
-return result;
-}
 function maybePick_(arr) {
-if (Math.random() < 0.5) return null;
-return pickRandom_(arr);
+  if (Math.random() < 0.5) return null;
+  return pickRandom_(arr);
 }
+
 function shortId_() {
-return Utilities.getUuid().slice(0, 8).toUpperCase();
+  return Utilities.getUuid().slice(0, 8).toUpperCase();
 }
+
 function ensureSheet_(ss, name, headers) {
-let sheet = ss.getSheetByName(name);
-if (!sheet) {
-sheet = ss.insertSheet(name);
-if (headers && headers.length > 0) sheet.appendRow(headers);
+  var sheet = ss.getSheetByName(name);
+  if (!sheet) {
+    sheet = ss.insertSheet(name);
+    if (headers && headers.length > 0) sheet.appendRow(headers);
+  }
+  return sheet;
 }
-return sheet;
-}
+
 function colIndex_(letter) {
-return letter.toUpperCase().charCodeAt(0) - 64;
+  return letter.toUpperCase().charCodeAt(0) - 64;
 }
+
 function safeGet_(sheet, row, col) {
-const v = sheet.getRange(row, col).getValue();
-return v === "" || v === null || typeof v === "undefined" ? null : v;
+  var v = sheet.getRange(row, col).getValue();
+  return v === "" || v === null || typeof v === "undefined" ? null : v;
 }
 
 /**
@@ -101,10 +107,10 @@ function identityMatch_(name1, name2) {
  * Handles case variations (HEALTH, Health, health all match).
  */
 function domainAllowed_(ctx, domain) {
-  const S = ctx.summary || {};
-  const sup = S.suppressDomains || {};
+  var S = ctx.summary || {};
+  var sup = S.suppressDomains || {};
   if (!domain) return true;
-  const d = domain.toString();
+  var d = domain.toString();
   return !(sup[d] || sup[d.toUpperCase()] || sup[d.toLowerCase()]);
 }
 
@@ -121,11 +127,11 @@ function domainAllowed_(ctx, domain) {
  */
 function normalizeDomain_(d) {
   if (!d) return 'General';
-  const s = d.toString().trim();
-  const up = s.toUpperCase();
+  var s = d.toString().trim();
+  var up = s.toUpperCase();
 
   // Known domain mappings (uppercase key → Title Case value)
-  const map = {
+  var map = {
     'HEALTH': 'Health',
     'SAFETY': 'Safety',
     'INFRASTRUCTURE': 'Infrastructure',

@@ -16,13 +16,13 @@
  */
 
 function ensureWorldEventsV3Ledger_(ctx) {
-  const ss = ctx.ss;
-  let sheet = ss.getSheetByName('WorldEvents_V3_Ledger');
+  var ss = ctx.ss;
+  var sheet = ss.getSheetByName('WorldEvents_V3_Ledger');
 
   if (!sheet) {
     sheet = ss.insertSheet('WorldEvents_V3_Ledger');
 
-    const headers = [
+    var headers = [
       "Timestamp",           // A
       "Cycle",               // B
       "EventDescription",    // C

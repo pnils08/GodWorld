@@ -26,7 +26,7 @@ function v3PreloadContext_(ctx) {
   // Preserve all existing V2.5 summary data
   if (!ctx.summary) ctx.summary = {};
 
-  const S = ctx.summary;
+  var S = ctx.summary;
 
   // Explicitly preserve issues if present
   if (!Array.isArray(S.auditIssues)) {

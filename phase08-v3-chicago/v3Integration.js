@@ -161,8 +161,14 @@ function v3Integration_(ctx) {
   S.v3CalendarContext = calendarContext;
   S.v3ModulesRan = modulesRan;
 
-  // Log summary
-  var arcCount = S.eventArcs ? S.eventArcs.filter(function(a) { return a && a.phase !== 'resolved'; }).length : 0;
+  // Log summary - ES5 compatible arc count
+  var arcCount = 0;
+  if (S.eventArcs) {
+    for (var ai = 0; ai < S.eventArcs.length; ai++) {
+      var arc = S.eventArcs[ai];
+      if (arc && arc.phase !== 'resolved') arcCount++;
+    }
+  }
   var textureCount = S.textureTriggers ? S.textureTriggers.length : 0;
   var domainCount = S.domainPresence ? Object.keys(S.domainPresence).length : 0;
   var rippleCount = S.economicRipples ? S.economicRipples.length : 0;

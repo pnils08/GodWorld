@@ -1,13 +1,17 @@
 /**
  * ============================================================================
- * saveV3Chicago_ v2.4
+ * saveV3Chicago_ v2.5 - Write-Intent Based
  * ============================================================================
- * 
- * CHANGES FROM v2.3:
- * 1. Adds CitizenCount and CitizenSample columns for Chicago population
- * 2. Converts to ES5 syntax for Apps Script compatibility
+ *
+ * CHANGES FROM v2.4:
+ * 1. Uses queueBatchAppendIntent_ instead of direct writes
+ * 2. Full dryRun/replay mode support
+ *
+ * v2.4 Features (preserved):
+ * 1. CitizenCount and CitizenSample columns for Chicago population
+ * 2. ES5 syntax for Apps Script compatibility
  * 3. References ctx.summary.chicagoCitizens from generateChicagoCitizens_()
- * 4. Maintains all v2.3 calendar/holiday/season awareness
+ * 4. All calendar/holiday/season awareness
  * 
  * SCHEMA (22 columns):
  * Timestamp | Cycle | GodWorldYear | CycleOfYear | SimMonth | CycleInMonth |
@@ -139,15 +143,24 @@ function saveV3Chicago_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════
-  // APPEND ROWS
+  // QUEUE WRITE INTENT
   // ═══════════════════════════════════════════════════════════
-  try {
-    if (rows.length) {
-      sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, rows[0].length).setValues(rows);
-      Logger.log('saveV3Chicago_ v2.4: Appended ' + rows.length + ' row(s) for Cycle ' + absoluteCycle + ' | Citizens: ' + citizenCount);
+  if (rows.length) {
+    // Initialize persist context if needed
+    if (!ctx.persist) {
+      initializePersistContext_(ctx);
     }
-  } catch (e) {
-    Logger.log('saveV3Chicago_ v2.4 error: ' + e.message);
+
+    queueBatchAppendIntent_(
+      ctx,
+      'Chicago_Feed',
+      rows,
+      'Save ' + rows.length + ' Chicago feed row(s) for cycle ' + absoluteCycle,
+      'chicago',
+      100
+    );
+
+    Logger.log('saveV3Chicago_ v2.5: Queued ' + rows.length + ' row(s) for Cycle ' + absoluteCycle + ' | Citizens: ' + citizenCount);
   }
 }
 

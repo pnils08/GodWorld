@@ -1,10 +1,18 @@
 /**
  * ============================================================================
- * applyCityDynamics_ v2.4
+ * applyCityDynamics_ v2.5
  * ============================================================================
  *
  * Calculates city-wide dynamics based on season, holiday, weather, and sports.
  * Aligned with GodWorld Calendar v1.0 and getSimHoliday_ v2.3.
+ *
+ * v2.5 Changes:
+ * - Integrated Tier 4 Neighborhood Demographics
+ * - Aggregate unemployment affects retail and sentiment
+ * - High illness rates dampen public spaces and community engagement
+ * - Youth population (students) boosts nightlife and cultural activity
+ * - Senior concentration affects community engagement positively
+ * - Economic stress from demographics creates gentrification signals
  *
  * v2.4 Changes:
  * - ES5 safe: Convert const/let to var, arrow functions to function expressions
@@ -430,6 +438,126 @@ function applyCityDynamics_(ctx) {
   // ss === "off-season" => baseline
 
   // ───────────────────────────────────────────────────────────────────────────
+  // DEMOGRAPHIC MODIFIERS (v2.5 - Tier 4 integration)
+  // ───────────────────────────────────────────────────────────────────────────
+  var neighborhoodDemographics = S.neighborhoodDemographics || {};
+  var demographicShifts = S.demographicShifts || [];
+
+  // If demographics available, load from utility
+  if (typeof getNeighborhoodDemographics_ === 'function' && Object.keys(neighborhoodDemographics).length === 0) {
+    neighborhoodDemographics = getNeighborhoodDemographics_(ctx.ss);
+    S.neighborhoodDemographics = neighborhoodDemographics;
+  }
+
+  // Calculate aggregate demographic indicators
+  if (Object.keys(neighborhoodDemographics).length > 0) {
+    var totalPop = 0;
+    var totalUnemployed = 0;
+    var totalSick = 0;
+    var totalStudents = 0;
+    var totalSeniors = 0;
+
+    for (var hood in neighborhoodDemographics) {
+      if (!neighborhoodDemographics.hasOwnProperty(hood)) continue;
+      var demo = neighborhoodDemographics[hood];
+      var hoodPop = (demo.students || 0) + (demo.adults || 0) + (demo.seniors || 0);
+      totalPop += hoodPop;
+      totalUnemployed += demo.unemployed || 0;
+      totalSick += demo.sick || 0;
+      totalStudents += demo.students || 0;
+      totalSeniors += demo.seniors || 0;
+    }
+
+    if (totalPop > 0) {
+      var unemploymentRate = totalUnemployed / totalPop;
+      var sicknessRate = totalSick / totalPop;
+      var studentRatio = totalStudents / totalPop;
+      var seniorRatio = totalSeniors / totalPop;
+
+      // v2.5: Unemployment affects retail and sentiment
+      if (unemploymentRate > 0.12) {
+        retail *= 0.92;
+        sentiment -= 0.15;
+      } else if (unemploymentRate > 0.08) {
+        retail *= 0.96;
+        sentiment -= 0.08;
+      } else if (unemploymentRate < 0.05) {
+        retail *= 1.05;
+        sentiment += 0.05;
+      }
+
+      // v2.5: High illness rates dampen activity
+      if (sicknessRate > 0.10) {
+        publicSpaces *= 0.88;
+        communityEngagement *= 0.90;
+        nightlife *= 0.92;
+        sentiment -= 0.10;
+      } else if (sicknessRate > 0.06) {
+        publicSpaces *= 0.95;
+        communityEngagement *= 0.96;
+      }
+
+      // v2.5: Young population boosts nightlife and culture
+      if (studentRatio > 0.25) {
+        nightlife *= 1.10;
+        culturalActivity *= 1.08;
+      } else if (studentRatio > 0.18) {
+        nightlife *= 1.05;
+        culturalActivity *= 1.04;
+      }
+
+      // v2.5: Senior population affects community engagement
+      if (seniorRatio > 0.25) {
+        communityEngagement *= 1.08;
+        publicSpaces *= 1.05;
+        nightlife *= 0.95;
+      } else if (seniorRatio > 0.18) {
+        communityEngagement *= 1.04;
+      }
+
+      // Store aggregate economic indicators in summary
+      S.economicIndicators = {
+        unemploymentRate: Math.round(unemploymentRate * 1000) / 10,
+        sicknessRate: Math.round(sicknessRate * 1000) / 10,
+        studentRatio: Math.round(studentRatio * 1000) / 10,
+        seniorRatio: Math.round(seniorRatio * 1000) / 10,
+        totalPopulation: totalPop
+      };
+    }
+  }
+
+  // v2.5: Process demographic shifts for gentrification signals
+  var gentrificationSignal = 0;
+  for (var shiftIdx = 0; shiftIdx < demographicShifts.length; shiftIdx++) {
+    var shift = demographicShifts[shiftIdx];
+    if (!shift) continue;
+
+    // Population growth + senior decline = potential gentrification
+    if (shift.type === 'population_shift' && shift.direction === 'growth' && shift.percentage >= 8) {
+      gentrificationSignal += 1;
+    }
+    if (shift.type === 'seniors_shift' && shift.direction === 'down' && shift.percentage >= 6) {
+      gentrificationSignal += 1;
+    }
+    // Unemployment drop in changing areas
+    if (shift.type === 'unemployed_shift' && shift.direction === 'down' && shift.percentage >= 10) {
+      gentrificationSignal += 0.5;
+    }
+  }
+
+  if (gentrificationSignal >= 2) {
+    // Gentrification pattern detected
+    retail *= 1.08;
+    tourism *= 1.05;
+    sentiment -= 0.05; // Mixed feelings
+    S.gentrificationSignal = true;
+    S.gentrificationStrength = gentrificationSignal;
+  } else {
+    S.gentrificationSignal = false;
+    S.gentrificationStrength = gentrificationSignal;
+  }
+
+  // ───────────────────────────────────────────────────────────────────────────
   // NORMALIZATION HELPERS (v2.4: ES5 function expressions)
   // ───────────────────────────────────────────────────────────────────────────
   var round2 = function(n) { return Math.round(n * 100) / 100; };
@@ -530,8 +658,16 @@ function applyCityDynamics_(ctx) {
 
 /**
  * ============================================================================
- * CITY DYNAMICS REFERENCE v2.4
+ * CITY DYNAMICS REFERENCE v2.5
  * ============================================================================
+ *
+ * v2.5 Changes:
+ * - Integrated Tier 4 Neighborhood Demographics
+ * - Aggregate unemployment affects retail (-4% to -8%) and sentiment
+ * - High illness rates dampen public spaces, community, nightlife
+ * - Youth population boosts nightlife (+5-10%) and culture
+ * - Senior population boosts community engagement (+4-8%)
+ * - Gentrification signals from demographic shift patterns
  *
  * v2.4 Changes:
  * - ES5 safe: const/let -> var, arrow functions -> function expressions
@@ -546,6 +682,13 @@ function applyCityDynamics_(ctx) {
  * Metrics:
  * traffic, retail, tourism, nightlife, publicSpaces, sentiment,
  * culturalActivity, communityEngagement
+ *
+ * Economic Indicators (v2.5 - from demographics):
+ * - unemploymentRate: city-wide unemployment %
+ * - sicknessRate: city-wide illness %
+ * - studentRatio: youth population %
+ * - seniorRatio: senior population %
+ * - gentrificationSignal: boolean if pattern detected
  *
  * ============================================================================
  */

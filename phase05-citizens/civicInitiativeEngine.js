@@ -1,9 +1,16 @@
 /**
  * ============================================================================
- * civicInitiativeEngine_ v1.2
+ * civicInitiativeEngine_ v1.3
  * ============================================================================
  *
  * Tracks civic initiatives and resolves votes/outcomes when cycles match.
+ *
+ * v1.3 Changes:
+ * - Integrated Tier 3 Neighborhood Demographics into vote resolution
+ * - Swing voter probability modified by initiative's affected neighborhoods
+ * - Demographics influence: senior-heavy areas boost senior-benefit initiatives
+ * - Added AffectedNeighborhoods column support
+ * - Initiative type→demographic alignment mapping
  *
  * v1.2 Changes:
  * - Fixed addSwingVoter2Columns() column insertion bug (0-based vs 1-based)
@@ -59,7 +66,13 @@ function runCivicInitiativeEngine_(ctx) {
   // Get city sentiment for swing vote calculations
   var dynamics = S.cityDynamics || { sentiment: 0 };
   var sentiment = dynamics.sentiment || 0;
-  
+
+  // v1.3: Load neighborhood demographics for vote influence
+  var neighborhoodDemographics = {};
+  if (typeof getNeighborhoodDemographics_ === 'function') {
+    neighborhoodDemographics = getNeighborhoodDemographics_(ss);
+  }
+
   // Initialize tracking
   S.initiativeEvents = S.initiativeEvents || [];
   S.votesThisCycle = [];
@@ -94,6 +107,7 @@ function runCivicInitiativeEngine_(ctx) {
   var iConsequences = idx('Consequences');
   var iNotes = idx('Notes');
   var iLastUpdated = idx('LastUpdated');
+  var iAffectedNeighborhoods = idx('AffectedNeighborhoods');  // v1.3
 
   // v1.2: Required header validation to prevent silent write failures
   var required = ['InitiativeID', 'Name', 'Type', 'Status', 'VoteCycle',
@@ -135,14 +149,28 @@ function runCivicInitiativeEngine_(ctx) {
       
       var result;
       
+      // v1.3: Get affected neighborhoods for demographic influence
+      var affectedNeighborhoods = [];
+      if (iAffectedNeighborhoods >= 0 && row[iAffectedNeighborhoods]) {
+        affectedNeighborhoods = String(row[iAffectedNeighborhoods]).split(',').map(function(n) {
+          return n.trim();
+        }).filter(function(n) { return n !== ''; });
+      }
+
       if (type === 'vote' || type === 'council-vote') {
-        // v1.1: Pass swing voter info as object
+        // v1.3: Pass swing voter info and demographics
         var swingInfo = {
           primary: swingVoter,
           secondary: swingVoter2,
           secondaryLean: swingVoter2Lean
         };
-        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo);
+        var demoContext = {
+          demographics: neighborhoodDemographics,
+          affectedNeighborhoods: affectedNeighborhoods,
+          initiativeType: type,
+          initiativeName: name
+        };
+        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext);
       } else if (type === 'grant' || type === 'federal-grant' || type === 'external') {
         result = resolveExternalDecision_(ctx, row, header, sentiment);
       } else if (type === 'visioning' || type === 'input') {
@@ -154,7 +182,13 @@ function runCivicInitiativeEngine_(ctx) {
           secondary: swingVoter2,
           secondaryLean: swingVoter2Lean
         };
-        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo);
+        var demoContext = {
+          demographics: neighborhoodDemographics,
+          affectedNeighborhoods: affectedNeighborhoods,
+          initiativeType: type,
+          initiativeName: name
+        };
+        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext);
       }
       
       // Update row with result
@@ -227,9 +261,16 @@ function runCivicInitiativeEngine_(ctx) {
   // Update summary
   ctx.summary = S;
   
-  Logger.log('civicInitiativeEngine v1.2: Processed ' + S.initiativeEvents.length +
+  // v1.3: Track demographic influence in summary
+  S.civicDemographicContext = {
+    neighborhoodsLoaded: Object.keys(neighborhoodDemographics).length,
+    demographicsAvailable: Object.keys(neighborhoodDemographics).length > 0
+  };
+
+  Logger.log('civicInitiativeEngine v1.3: Processed ' + S.initiativeEvents.length +
              ' initiatives | Votes: ' + S.votesThisCycle.length +
-             ' | Grants: ' + S.grantsThisCycle.length);
+             ' | Grants: ' + S.grantsThisCycle.length +
+             ' | Demographics: ' + (Object.keys(neighborhoodDemographics).length > 0 ? 'active' : 'unavailable'));
 }
 
 
@@ -532,8 +573,12 @@ function getCouncilStateFromSimLedger_(ctx) {
 /**
  * Resolve a council vote
  * v1.1: Now accepts swingInfo object with primary, secondary, and secondaryLean
+ * v1.3: Now accepts demoContext with neighborhood demographics for vote influence
  */
-function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo) {
+function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext) {
+
+  // v1.3: Demographics context (optional for backwards compatibility)
+  demoContext = demoContext || { demographics: {}, affectedNeighborhoods: [] };
   
   var idx = function(n) { return header.indexOf(n); };
   
@@ -597,12 +642,19 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   // ═══════════════════════════════════════════════════════════════════════════
   // v1.1: PROCESS PRIMARY SWING VOTER
   // ═══════════════════════════════════════════════════════════════════════════
+  // v1.3: Calculate demographic influence for this initiative
+  var demographicInfluence = calculateDemographicInfluence_(demoContext);
+
   if (swingVoter) {
     var primaryAvailable = isSwingVoterAvailable_(swingVoter, councilState, availableIndMembers);
-    
+
     if (primaryAvailable) {
       // Use projection-based probability for primary swing voter
       var primaryProb = calculateSwingProbability_(projection, sentiment, isSupermajority);
+      // v1.3: Apply demographic influence
+      primaryProb += demographicInfluence;
+      if (primaryProb < 0.15) primaryProb = 0.15;
+      if (primaryProb > 0.85) primaryProb = 0.85;
       var primaryVotedYes = Math.random() < primaryProb;
       
       if (primaryVotedYes) {
@@ -628,10 +680,14 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   // ═══════════════════════════════════════════════════════════════════════════
   if (swingVoter2 && !processedIndMembers[swingVoter2]) {
     var secondaryAvailable = isSwingVoterAvailable_(swingVoter2, councilState, availableIndMembers);
-    
+
     if (secondaryAvailable) {
       // Use lean-based probability for secondary swing voter
       var secondaryProb = calculateLeanProbability_(swingVoter2Lean, sentiment);
+      // v1.3: Apply demographic influence
+      secondaryProb += demographicInfluence;
+      if (secondaryProb < 0.15) secondaryProb = 0.15;
+      if (secondaryProb > 0.85) secondaryProb = 0.85;
       var secondaryVotedYes = Math.random() < secondaryProb;
       
       if (secondaryVotedYes) {
@@ -664,6 +720,8 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
     
     // Unnamed IND members use pure sentiment-based probability
     var unnamedProb = 0.5 + (sentiment * 0.15);
+    // v1.3: Apply demographic influence to unnamed members too
+    unnamedProb += demographicInfluence;
     // v1.2: Clamp to match named swing voter bounds
     if (unnamedProb < 0.15) unnamedProb = 0.15;
     if (unnamedProb > 0.85) unnamedProb = 0.85;
@@ -695,7 +753,8 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
     swingVoters: swingVoterResults,
     swingVoted: swingVoterResults.length > 0 ? swingVoterResults[0].vote : null,  // Legacy field
     consequences: '',
-    notes: ''
+    notes: '',
+    affectedNeighborhoods: demoContext.affectedNeighborhoods || []  // v1.3: For ripple effects
   };
   
   // Generate consequences and notes
@@ -835,6 +894,122 @@ function calculateLeanProbability_(lean, sentiment) {
 
 /**
  * ============================================================================
+ * DEMOGRAPHIC INFLUENCE (v1.3)
+ * ============================================================================
+ */
+
+/**
+ * v1.3: Calculate demographic influence on swing vote probability
+ * Initiatives that benefit underserved demographics get boosted support
+ *
+ * @param {Object} demoContext - Demographics context from vote resolution
+ * @param {string} initiativeName - Name of the initiative
+ * @return {number} Probability modifier (-0.15 to +0.15)
+ */
+function calculateDemographicInfluence_(demoContext) {
+  var modifier = 0;
+
+  if (!demoContext || !demoContext.demographics) return modifier;
+
+  var demographics = demoContext.demographics;
+  var affected = demoContext.affectedNeighborhoods || [];
+  var name = (demoContext.initiativeName || '').toLowerCase();
+
+  // No affected neighborhoods specified = neutral
+  if (affected.length === 0) return modifier;
+
+  // Calculate aggregate demographics of affected neighborhoods
+  var totalStudents = 0;
+  var totalAdults = 0;
+  var totalSeniors = 0;
+  var totalUnemployed = 0;
+  var totalSick = 0;
+  var totalPop = 0;
+
+  for (var i = 0; i < affected.length; i++) {
+    var hood = affected[i];
+    var demo = demographics[hood];
+    if (demo) {
+      totalStudents += demo.students || 0;
+      totalAdults += demo.adults || 0;
+      totalSeniors += demo.seniors || 0;
+      totalUnemployed += demo.unemployed || 0;
+      totalSick += demo.sick || 0;
+      totalPop += (demo.students || 0) + (demo.adults || 0) + (demo.seniors || 0);
+    }
+  }
+
+  if (totalPop === 0) return modifier;
+
+  // Calculate demographic ratios
+  var seniorRatio = totalSeniors / totalPop;
+  var studentRatio = totalStudents / totalPop;
+  var unemploymentRate = totalUnemployed / totalPop;
+  var sicknessRate = totalSick / totalPop;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INITIATIVE TYPE → DEMOGRAPHIC ALIGNMENT
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Health initiatives get boost from areas with high senior/sick populations
+  if (name.indexOf('health') >= 0 || name.indexOf('clinic') >= 0 ||
+      name.indexOf('hospital') >= 0 || name.indexOf('medical') >= 0) {
+    if (seniorRatio > 0.25) modifier += 0.08;
+    if (sicknessRate > 0.08) modifier += 0.06;
+  }
+
+  // Housing/stabilization initiatives get boost from areas with high unemployment
+  if (name.indexOf('housing') >= 0 || name.indexOf('stabiliz') >= 0 ||
+      name.indexOf('afford') >= 0 || name.indexOf('rent') >= 0) {
+    if (unemploymentRate > 0.12) modifier += 0.10;
+    if (seniorRatio > 0.20) modifier += 0.05;
+  }
+
+  // Transit initiatives benefit working adults
+  if (name.indexOf('transit') >= 0 || name.indexOf('bart') >= 0 ||
+      name.indexOf('bus') >= 0 || name.indexOf('transportation') >= 0) {
+    var adultRatio = totalAdults / totalPop;
+    if (adultRatio > 0.55) modifier += 0.06;
+    if (studentRatio > 0.20) modifier += 0.05;
+  }
+
+  // Education/youth initiatives benefit areas with high student population
+  if (name.indexOf('school') >= 0 || name.indexOf('education') >= 0 ||
+      name.indexOf('youth') >= 0 || name.indexOf('student') >= 0) {
+    if (studentRatio > 0.25) modifier += 0.10;
+  }
+
+  // Jobs/economic initiatives benefit areas with high unemployment
+  if (name.indexOf('job') >= 0 || name.indexOf('employment') >= 0 ||
+      name.indexOf('business') >= 0 || name.indexOf('economic') >= 0) {
+    if (unemploymentRate > 0.10) modifier += 0.08;
+  }
+
+  // Senior-specific initiatives
+  if (name.indexOf('senior') >= 0 || name.indexOf('elder') >= 0 ||
+      name.indexOf('aging') >= 0 || name.indexOf('retire') >= 0) {
+    if (seniorRatio > 0.20) modifier += 0.12;
+  }
+
+  // Alternative/progressive policing gets mixed response based on demographics
+  if (name.indexOf('alternative') >= 0 || name.indexOf('response') >= 0 ||
+      name.indexOf('police') >= 0 || name.indexOf('safety') >= 0) {
+    // Young areas more supportive
+    if (studentRatio > 0.20) modifier += 0.05;
+    // Senior areas more cautious
+    if (seniorRatio > 0.25) modifier -= 0.03;
+  }
+
+  // Clamp modifier
+  if (modifier > 0.15) modifier = 0.15;
+  if (modifier < -0.15) modifier = -0.15;
+
+  return modifier;
+}
+
+
+/**
+ * ============================================================================
  * EXTERNAL DECISIONS (Grants, Federal)
  * ============================================================================
  */
@@ -926,36 +1101,223 @@ function resolveVisioningPhase_(ctx, row, header) {
 
 /**
  * Apply consequences of initiative outcome to world state
+ * v1.3: Added neighborhood ripple effects based on initiative type
  */
 function applyInitiativeConsequences_(ctx, result, name, type) {
-  
+
   var S = ctx.summary;
   var dynamics = S.cityDynamics || { sentiment: 0 };
-  
+  var nameLower = (name || '').toLowerCase();
+
+  // Initialize ripple tracking
+  S.initiativeRipples = S.initiativeRipples || [];
+
+  // Get affected neighborhoods from result (set during vote resolution)
+  var affectedNeighborhoods = result.affectedNeighborhoods || [];
+
   // Sentiment shifts based on outcome
   if (result.outcome === 'PASSED' || result.outcome === 'APPROVED') {
     // Positive outcome boosts sentiment slightly
     dynamics.sentiment = (dynamics.sentiment || 0) + 0.05;
-    
+
     // Track for narrative
     S.positiveInitiatives = S.positiveInitiatives || [];
     S.positiveInitiatives.push(name);
-    
+
+    // v1.3: Apply neighborhood ripple effects
+    applyNeighborhoodRipple_(ctx, name, 'positive', affectedNeighborhoods);
+
   } else if (result.outcome === 'FAILED' || result.outcome === 'DENIED') {
     // Negative outcome dampens sentiment
     dynamics.sentiment = (dynamics.sentiment || 0) - 0.05;
-    
+
     // Track for narrative
     S.failedInitiatives = S.failedInitiatives || [];
     S.failedInitiatives.push(name);
+
+    // v1.3: Apply negative neighborhood ripple
+    applyNeighborhoodRipple_(ctx, name, 'negative', affectedNeighborhoods);
   }
-  
+
   // Clamp sentiment
   if (dynamics.sentiment > 1) dynamics.sentiment = 1;
   if (dynamics.sentiment < -1) dynamics.sentiment = -1;
-  
+
   S.cityDynamics = dynamics;
   ctx.summary = S;
+}
+
+
+/**
+ * ============================================================================
+ * NEIGHBORHOOD RIPPLE EFFECTS (v1.3 - Tier 4.4)
+ * ============================================================================
+ */
+
+/**
+ * v1.3: Apply ripple effects to affected neighborhoods based on initiative outcome
+ *
+ * Initiative types and their ripple effects:
+ * - Health → sick_rate ↓, sentiment ↑
+ * - Transit → retail ↑, traffic impact
+ * - Economic/Business → unemployment ↓, retail ↑
+ * - Housing → sentiment ↑, community stability
+ * - Safety/Policing → sentiment varies
+ * - Environment/Park → sentiment ↑, sick_rate ↓
+ */
+function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighborhoods) {
+
+  var S = ctx.summary;
+  var nameLower = (initiativeName || '').toLowerCase();
+  var isPositive = direction === 'positive';
+
+  // Default duration in cycles
+  var rippleDuration = 8;
+  var rippleStrength = isPositive ? 1.0 : -0.6;
+
+  // Determine ripple type based on initiative name keywords
+  var rippleType = 'general';
+  var effects = {};
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // INITIATIVE TYPE → RIPPLE EFFECTS MAPPING
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  if (nameLower.indexOf('health') >= 0 || nameLower.indexOf('clinic') >= 0 ||
+      nameLower.indexOf('hospital') >= 0 || nameLower.indexOf('medical') >= 0) {
+    rippleType = 'health';
+    rippleDuration = 12;
+    effects = {
+      sick_modifier: isPositive ? -0.02 : 0.01,
+      sentiment_modifier: isPositive ? 0.08 : -0.05,
+      community_modifier: isPositive ? 0.05 : -0.02
+    };
+  }
+
+  else if (nameLower.indexOf('transit') >= 0 || nameLower.indexOf('bart') >= 0 ||
+           nameLower.indexOf('bus') >= 0 || nameLower.indexOf('hub') >= 0) {
+    rippleType = 'transit';
+    rippleDuration = 10;
+    effects = {
+      retail_modifier: isPositive ? 0.08 : -0.04,
+      traffic_modifier: isPositive ? 0.15 : -0.08,
+      sentiment_modifier: isPositive ? 0.05 : -0.03
+    };
+  }
+
+  else if (nameLower.indexOf('business') >= 0 || nameLower.indexOf('economic') >= 0 ||
+           nameLower.indexOf('job') >= 0 || nameLower.indexOf('employment') >= 0) {
+    rippleType = 'economic';
+    rippleDuration = 15;
+    effects = {
+      unemployment_modifier: isPositive ? -0.03 : 0.02,
+      retail_modifier: isPositive ? 0.10 : -0.06,
+      sentiment_modifier: isPositive ? 0.06 : -0.04
+    };
+  }
+
+  else if (nameLower.indexOf('housing') >= 0 || nameLower.indexOf('stabiliz') >= 0 ||
+           nameLower.indexOf('afford') >= 0 || nameLower.indexOf('rent') >= 0) {
+    rippleType = 'housing';
+    rippleDuration = 20;
+    effects = {
+      sentiment_modifier: isPositive ? 0.10 : -0.08,
+      community_modifier: isPositive ? 0.08 : -0.05,
+      population_stability: isPositive ? 0.05 : -0.03
+    };
+  }
+
+  else if (nameLower.indexOf('safety') >= 0 || nameLower.indexOf('police') >= 0 ||
+           nameLower.indexOf('alternative') >= 0 || nameLower.indexOf('response') >= 0) {
+    rippleType = 'safety';
+    rippleDuration = 8;
+    // Safety initiatives have mixed reception
+    effects = {
+      sentiment_modifier: isPositive ? 0.03 : -0.06,
+      community_modifier: isPositive ? 0.05 : -0.04
+    };
+  }
+
+  else if (nameLower.indexOf('park') >= 0 || nameLower.indexOf('green') >= 0 ||
+           nameLower.indexOf('environment') >= 0 || nameLower.indexOf('earth') >= 0) {
+    rippleType = 'environment';
+    rippleDuration = 12;
+    effects = {
+      sentiment_modifier: isPositive ? 0.08 : -0.04,
+      sick_modifier: isPositive ? -0.01 : 0.005,
+      publicSpaces_modifier: isPositive ? 0.10 : -0.05
+    };
+  }
+
+  else if (nameLower.indexOf('stadium') >= 0 || nameLower.indexOf('arena') >= 0 ||
+           nameLower.indexOf('sports') >= 0) {
+    rippleType = 'sports';
+    rippleDuration = 20;
+    effects = {
+      retail_modifier: isPositive ? 0.12 : -0.06,
+      traffic_modifier: isPositive ? 0.20 : -0.10,
+      nightlife_modifier: isPositive ? 0.15 : -0.08,
+      sentiment_modifier: isPositive ? 0.05 : -0.08 // Failed sports = big disappointment
+    };
+  }
+
+  else if (nameLower.indexOf('school') >= 0 || nameLower.indexOf('education') >= 0 ||
+           nameLower.indexOf('youth') >= 0) {
+    rippleType = 'education';
+    rippleDuration = 15;
+    effects = {
+      sentiment_modifier: isPositive ? 0.06 : -0.05,
+      community_modifier: isPositive ? 0.08 : -0.04,
+      student_attraction: isPositive ? 0.05 : -0.03
+    };
+  }
+
+  else {
+    // Generic initiative
+    rippleType = 'general';
+    rippleDuration = 6;
+    effects = {
+      sentiment_modifier: isPositive ? 0.04 : -0.03
+    };
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CREATE RIPPLE RECORD
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  var cycle = S.cycleId || S.absoluteCycle || 0;
+  var ripple = {
+    initiativeName: initiativeName,
+    rippleType: rippleType,
+    direction: direction,
+    strength: rippleStrength,
+    effects: effects,
+    affectedNeighborhoods: affectedNeighborhoods || [],
+    startCycle: cycle,
+    duration: rippleDuration,
+    endCycle: cycle + rippleDuration,
+    status: 'active'
+  };
+
+  S.initiativeRipples.push(ripple);
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // IMMEDIATE EFFECTS (first cycle impact)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Apply immediate sentiment effect to city dynamics
+  var dynamics = S.cityDynamics || {};
+  if (effects.sentiment_modifier) {
+    dynamics.sentiment = (dynamics.sentiment || 0) + (effects.sentiment_modifier * 0.5);
+    if (dynamics.sentiment > 1) dynamics.sentiment = 1;
+    if (dynamics.sentiment < -1) dynamics.sentiment = -1;
+  }
+  S.cityDynamics = dynamics;
+
+  // Log ripple creation
+  Logger.log('initiativeRipple: ' + initiativeName + ' → ' + rippleType + ' ripple (' +
+             direction + ') affecting ' + (affectedNeighborhoods || []).length +
+             ' neighborhoods for ' + rippleDuration + ' cycles');
 }
 
 
@@ -1205,8 +1567,21 @@ function getInitiativeSummaryForMedia_(ctx) {
 
 /**
  * ============================================================================
- * REFERENCE v1.2
+ * REFERENCE v1.3
  * ============================================================================
+ *
+ * v1.3 DEMOGRAPHIC INTEGRATION:
+ * - Reads Neighborhood_Demographics for affected areas
+ * - Swing vote probability modified by demographic alignment:
+ *   - Health initiatives: +8% if >25% seniors, +6% if >8% sick
+ *   - Housing/stabilization: +10% if >12% unemployed, +5% if >20% seniors
+ *   - Transit: +6% if >55% working adults, +5% if >20% students
+ *   - Education/youth: +10% if >25% students
+ *   - Jobs/economic: +8% if >10% unemployed
+ *   - Senior-specific: +12% if >20% seniors
+ *   - Alternative policing: +5% if young area, -3% if senior area
+ * - Maximum demographic modifier: ±15%
+ * - AffectedNeighborhoods column (comma-separated) specifies target areas
  *
  * INITIATIVE TYPES:
  * - vote / council-vote: Requires council vote, uses faction math

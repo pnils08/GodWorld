@@ -1,7 +1,16 @@
 /**
  * ============================================================================
- * storyHookEngine_ v3.3 — ENHANCED
+ * storyHookEngine_ v3.4 — ENHANCED
  * ============================================================================
+ *
+ * v3.4 Enhancements:
+ * - Integrated Tier 4 Neighborhood Demographics for story signals
+ * - Population shifts generate community/housing angles
+ * - Senior demographic changes → health/aging stories
+ * - Student population shifts → education angles
+ * - Unemployment changes → economic impact stories
+ * - Illness rate spikes → public health investigation hooks
+ * - Aggregate demographic shifts trigger city-wide story angles
  *
  * v3.3 Enhancements:
  * - ES5 syntax for Google Apps Script compatibility
@@ -707,6 +716,143 @@ function storyHookEngine_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════
+  // DEMOGRAPHIC SHIFT HOOKS (v3.4 - Tier 4 integration)
+  // ═══════════════════════════════════════════════════════════
+  var demographicShifts = S.demographicShifts || [];
+  var neighborhoodDemographics = S.neighborhoodDemographics || {};
+
+  for (var dsi = 0; dsi < demographicShifts.length; dsi++) {
+    var shift = demographicShifts[dsi];
+    if (!shift || !shift.neighborhood) continue;
+
+    var shiftHood = shift.neighborhood;
+    var shiftType = shift.type || '';
+    var shiftDir = shift.direction || '';
+    var shiftPct = shift.percentage || 0;
+
+    // Only generate hooks for significant shifts (8%+ change)
+    if (shiftPct < 8) continue;
+
+    // Population shifts
+    if (shiftType === 'population_shift') {
+      if (shiftDir === 'growth') {
+        hooks.push(makeHook(
+          'COMMUNITY',
+          shiftHood,
+          shiftPct >= 12 ? 3 : 2,
+          shiftHood + ' seeing ' + shiftPct + '% population growth. New residents arriving—who are they and why? Neighborhood change angle.',
+          null,
+          'demographic'
+        ));
+      } else if (shiftDir === 'decline') {
+        hooks.push(makeHook(
+          'COMMUNITY',
+          shiftHood,
+          shiftPct >= 12 ? 3 : 2,
+          shiftHood + ' experiencing ' + shiftPct + '% population decline. Who\'s leaving and why? Long-form opportunity.',
+          null,
+          'demographic'
+        ));
+      }
+    }
+
+    // Senior population shifts
+    if (shiftType === 'seniors_shift') {
+      if (shiftDir === 'up') {
+        hooks.push(makeHook(
+          'HEALTH',
+          shiftHood,
+          2,
+          shiftHood + '\'s senior population up ' + shiftPct + '%. Aging-in-place story? Senior services demand increasing.',
+          null,
+          'demographic'
+        ));
+      } else if (shiftDir === 'down') {
+        hooks.push(makeHook(
+          'COMMUNITY',
+          shiftHood,
+          2,
+          shiftHood + ' losing senior residents (' + shiftPct + '% decline). Displacement? Family migration? Feature angle.',
+          null,
+          'demographic'
+        ));
+      }
+    }
+
+    // Student population shifts
+    if (shiftType === 'students_shift') {
+      if (shiftDir === 'up') {
+        hooks.push(makeHook(
+          'EDUCATION',
+          shiftHood,
+          2,
+          shiftHood + '\'s student population up ' + shiftPct + '%. Young families moving in? School capacity angle.',
+          null,
+          'demographic'
+        ));
+      } else if (shiftDir === 'down') {
+        hooks.push(makeHook(
+          'EDUCATION',
+          shiftHood,
+          2,
+          shiftHood + ' seeing ' + shiftPct + '% decline in student population. Schools affected? Family migration angle.',
+          null,
+          'demographic'
+        ));
+      }
+    }
+
+    // Unemployment shifts
+    if (shiftType === 'unemployed_shift') {
+      if (shiftDir === 'up') {
+        hooks.push(makeHook(
+          'BUSINESS',
+          shiftHood,
+          shiftPct >= 10 ? 3 : 2,
+          'Unemployment in ' + shiftHood + ' up ' + shiftPct + '%. Economic stress story. Who\'s affected and why?',
+          null,
+          'demographic'
+        ));
+      } else if (shiftDir === 'down') {
+        hooks.push(makeHook(
+          'BUSINESS',
+          shiftHood,
+          2,
+          shiftHood + ' unemployment down ' + shiftPct + '%. Recovery story. What\'s driving job growth?',
+          null,
+          'demographic'
+        ));
+      }
+    }
+
+    // Illness rate shifts
+    if (shiftType === 'sick_shift') {
+      if (shiftDir === 'up') {
+        hooks.push(makeHook(
+          'HEALTH',
+          shiftHood,
+          shiftPct >= 10 ? 3 : 2,
+          'Illness rates in ' + shiftHood + ' up ' + shiftPct + '%. Public health concern? Investigation warranted.',
+          null,
+          'demographic'
+        ));
+      }
+    }
+  }
+
+  // Aggregate demographic context hooks
+  if (Object.keys(neighborhoodDemographics).length > 0 && demographicShifts.length >= 3) {
+    hooks.push(makeHook(
+      'CIVIC',
+      '',
+      2,
+      'Multiple neighborhood demographic shifts detected this cycle. City-wide population dynamics story.',
+      null,
+      'demographic'
+    ));
+  }
+
+  // ═══════════════════════════════════════════════════════════
   // NIGHTLIFE HOOKS
   // ═══════════════════════════════════════════════════════════
   if (dynamics.nightlife >= 1.4) {
@@ -798,7 +944,7 @@ function storyHookEngine_(ctx) {
  * ============================================================================
  * HOOK TYPES REFERENCE
  * ============================================================================
- * 
+ *
  * Type         | Source                    | Priority Range
  * ─────────────────────────────────────────────────────────────────────────
  * arc          | Event arcs                | 1-3 (phase-based)
@@ -815,9 +961,18 @@ function storyHookEngine_(ctx) {
  * pattern      | Multi-cycle patterns      | 2-3
  * shock        | Disruption events         | 3
  * event        | World events              | 2-3
- * demographic  | Migration drift           | 2
+ * demographic  | Migration + demo shifts   | 2-3 (v3.4 expanded)
  * nightlife    | Nightlife surge           | 2
  * seasonal     | Equinox/solstice          | 1
- * 
+ *
+ * v3.4 DEMOGRAPHIC SHIFTS (Tier 4):
+ * - population_shift: Growth/decline → Community desk
+ * - seniors_shift: Aging population → Health desk
+ * - students_shift: Youth population → Education desk
+ * - unemployed_shift: Job market → Business desk
+ * - sick_shift: Health issues → Health desk
+ * - Significant shifts (8%+) generate hooks
+ * - Major shifts (12%+) get priority 3
+ *
  * ============================================================================
  */

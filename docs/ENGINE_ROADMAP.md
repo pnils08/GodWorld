@@ -221,54 +221,63 @@ The core feature for v3 narrative depth.
 
 Connect subsystems properly.
 
-### [ ] 4.1 Civic Voting + Demographics
-**Current:** Civic Initiative Engine runs semi-independently.
-**V3:**
-- Council state loaded as `ctx.civic.council`
-- Initiatives readable as `ctx.civic.initiatives`
-- Vote resolution references:
-  - `ctx.world.cityDynamics.sentiment`
-  - `ctx.neighborhoods[district]` demographics
-  - District composition affects council member behavior
+### [x] 4.1 Civic Voting + Demographics
+**Status:** COMPLETE (Jan 2026)
 
-### [ ] 4.2 Media Hooks + Demographics
-- Story hooks can reference neighborhood composition
-- "Temescal's student population reacts to transit changes"
-- Journalist assignment considers beat + neighborhood relevance
+**Implementation:**
+- Updated `civicInitiativeEngine.js` to v1.3:
+  - Swing vote probability modified by initiative's affected neighborhoods
+  - Demographics influence: senior-heavy areas boost senior-benefit initiatives
+  - Health initiatives: +8% if >25% seniors, +6% if >8% sick
+  - Housing/stabilization: +10% if >12% unemployed
+  - Transit: +6% if >55% working adults
+  - Education: +10% if >25% students
+  - Maximum demographic modifier: ±15%
+- Added `AffectedNeighborhoods` column support
+- `calculateDemographicInfluence_()` function for vote probability
 
-### [ ] 4.3 Economic Indicators + Demographics
-- Unemployment concentrated in specific neighborhoods
-- Economic stress affects voting patterns
-- Gentrification signals from demographic drift
+### [x] 4.2 Media Hooks + Demographics
+**Status:** COMPLETE (Jan 2026)
 
-### [ ] 4.4 Initiative Outcome → Neighborhood Ripple
-**Purpose:** Vote outcomes affect the neighborhoods they serve over time.
+**Implementation:**
+- Updated `storyHook.js` to v3.4:
+  - Population shifts → community/housing story angles
+  - Senior demographic changes → health/aging stories
+  - Student population shifts → education angles
+  - Unemployment changes → economic impact stories
+  - Illness rate spikes → public health investigation hooks
+- Significant shifts (8%+) generate hooks, major shifts (12%+) get priority 3
+- Aggregate shifts trigger city-wide story angles
 
-**When initiative PASSES:**
-- Positive ripple to affected neighborhoods over N cycles
-- Metrics affected depend on initiative type:
-  - Health (health center) → CrimeIndex ↓, Sentiment ↑
-  - Transit (hub expansion) → RetailVitality ↑, Traffic impact
-  - Economic (business incentive) → RetailVitality ↑, Employment ↑
-  - Sports (stadium) → RetailVitality ↑, EventAttractiveness ↑, NoiseIndex ↑
-  - Housing (affordable units) → Sentiment ↑, community stability
-  - Environment (park) → Sentiment ↑, health indicators ↑
+### [x] 4.3 Economic Indicators + Demographics
+**Status:** COMPLETE (Jan 2026)
 
-**When initiative FAILS:**
-- Negative ripple to affected neighborhoods
-- Civic frustration → Sentiment ↓
-- Prolonged failure on same issue → compounding frustration
+**Implementation:**
+- Updated `applyCityDynamics.js` to v2.5:
+  - Aggregate unemployment affects retail (-4% to -8%) and sentiment
+  - High illness rates dampen public spaces, community, nightlife
+  - Youth population boosts nightlife (+5-10%) and culture
+  - Senior population boosts community engagement (+4-8%)
+- Gentrification signals from demographic shift patterns
+- `ctx.summary.economicIndicators` tracks city-wide rates
+- `ctx.summary.gentrificationSignal` boolean flag
 
-**Ripple Properties:**
-- Impact: Initial magnitude of effect
-- Duration: How many cycles the effect lasts
-- Decay: How quickly the effect fades (or stabilizes for permanent infrastructure)
-- Scope: Primary neighborhood + adjacent spillover
+### [x] 4.4 Initiative Outcome → Neighborhood Ripple
+**Status:** COMPLETE (Jan 2026)
 
-**Integration Points:**
-- `civicInitiativeEngine.js` → `applyInitiativeConsequences_()` triggers ripple
-- Ripple effects applied during Phase 2 (World State) or Phase 3 (Population)
-- Affects `Neighborhood_Map` metrics each cycle until duration expires
+**Implementation:**
+- Added `applyNeighborhoodRipple_()` function to civicInitiativeEngine.js
+- Initiative type → ripple effects mapping:
+  - Health → sick_modifier, sentiment, community (12 cycles)
+  - Transit → retail, traffic, sentiment (10 cycles)
+  - Economic → unemployment, retail, sentiment (15 cycles)
+  - Housing → sentiment, community, stability (20 cycles)
+  - Safety → sentiment, community (8 cycles)
+  - Environment → sentiment, sick, publicSpaces (12 cycles)
+  - Sports → retail, traffic, nightlife, sentiment (20 cycles)
+  - Education → sentiment, community, student_attraction (15 cycles)
+- Ripple records stored in `ctx.summary.initiativeRipples`
+- Immediate first-cycle impact + ongoing effects
 
 **Schema Addition (Initiative_Tracker):**
 - `AffectedNeighborhoods`: comma-separated list of neighborhoods

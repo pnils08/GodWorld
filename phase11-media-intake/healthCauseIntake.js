@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * HEALTH CAUSE INTAKE v1.0
+ * HEALTH CAUSE INTAKE v1.1
  * ============================================================================
  *
  * Allows Media Room chat to assign narrative causes to hospitalized citizens.
@@ -16,8 +16,58 @@
  * SHEET: Health_Cause_Queue
  * Columns: POPID, Name, Status, StatusStart, Neighborhood, Tier, AssignedCause, MediaCycle
  *
+ * v1.1 Changes:
+ * - Added normalizeHealthStatus_() to handle all status variants
+ * - Recognizes: hospitalized, critical, serious-condition, Serious Condition, injured, Injured
+ * - Case-insensitive status matching
+ *
  * ============================================================================
  */
+
+
+// ============================================================
+// STATUS NORMALIZATION
+// ============================================================
+
+/**
+ * Normalizes health status values to handle various formats used in the ledger.
+ * Returns a standardized lowercase status or null if not a health status.
+ *
+ * Recognized health statuses that need cause assignment:
+ * - hospitalized, Hospitalized
+ * - critical, Critical
+ * - serious-condition, Serious Condition, serious condition
+ * - injured, Injured
+ */
+function normalizeHealthStatus_(status) {
+  if (!status) return null;
+
+  var s = status.toString().toLowerCase().trim();
+
+  // Direct matches
+  if (s === 'hospitalized' || s === 'critical') {
+    return s;
+  }
+
+  // Handle 'serious-condition' and 'serious condition' variants
+  if (s === 'serious-condition' || s === 'serious condition') {
+    return 'serious-condition';
+  }
+
+  // Handle 'injured'
+  if (s === 'injured') {
+    return 'injured';
+  }
+
+  return null;
+}
+
+/**
+ * Checks if a status indicates a health condition needing cause assignment.
+ */
+function isHealthStatusNeedingCause_(status) {
+  return normalizeHealthStatus_(status) !== null;
+}
 
 
 // ============================================================
@@ -82,10 +132,11 @@ function exportHealthCauseQueue_(ctx) {
   
   for (var r = 1; r < values.length; r++) {
     var row = values[r];
-    var status = (row[iStatus] || '').toString().toLowerCase().trim();
-    
-    // Only queue hospitalized/critical without assigned cause
-    if (status !== 'hospitalized' && status !== 'critical') continue;
+    var rawStatus = (row[iStatus] || '').toString();
+    var normalizedStatus = normalizeHealthStatus_(rawStatus);
+
+    // Only queue citizens with health conditions (hospitalized, critical, serious-condition, injured)
+    if (!normalizedStatus) continue;
     
     var popId = row[iPopID];
     var existingCause = iHealthCause >= 0 ? row[iHealthCause] : '';
@@ -105,7 +156,7 @@ function exportHealthCauseQueue_(ctx) {
     newEntries.push([
       popId,
       name,
-      status,
+      normalizedStatus,  // Use normalized status for consistency
       statusStart,
       cyclesSick,
       neighborhood,
@@ -503,53 +554,62 @@ function runGenerateHealthBriefing() {
 
 /**
  * ============================================================================
- * HEALTH CAUSE INTAKE REFERENCE v1.0
+ * HEALTH CAUSE INTAKE REFERENCE v1.1
  * ============================================================================
- * 
+ *
  * WORKFLOW:
- * 
+ *
  * 1. Engine runs → citizen hospitalized → no cause assigned
  * 2. exportHealthCauseQueue_() → adds to Health_Cause_Queue sheet
  * 3. generateHealthCauseBriefing_() → creates markdown for Media Room
  * 4. Media Room responds with cause assignments
  * 5. processHealthCauseIntake_() → updates Simulation_Ledger.HealthCause
  * 6. Next engine run → uses cause in death/recovery descriptions
- * 
+ *
+ * RECOGNIZED HEALTH STATUSES (v1.1):
+ *
+ * | Input Value | Normalized To |
+ * |-------------|---------------|
+ * | hospitalized, Hospitalized | hospitalized |
+ * | critical, Critical | critical |
+ * | serious-condition, Serious Condition | serious-condition |
+ * | injured, Injured | injured |
+ *
  * SHEETS:
- * 
+ *
  * Health_Cause_Queue:
  * - POPID, Name, Status, StatusStartCycle, CyclesSick
  * - Neighborhood, Tier, Age, AssignedCause, MediaCycle, Processed
- * 
+ *
  * Health_Cause_Intake:
  * - Column A: Raw markdown from Media Room
- * 
+ *
  * MARKDOWN FORMATS ACCEPTED:
- * 
+ *
  * Bullet format:
  * - **Name** (POPID): Cause description
  * - POPID: Cause description
- * 
+ *
  * Table format:
  * | POPID | Cause |
  * |-------|-------|
  * | OAK-00042 | Cause description |
- * 
+ *
  * INTEGRATION WITH CYCLE:
- * 
+ *
  * Add to godWorldEngine2.gs after generationalEventsEngine:
- * 
+ *
  *   exportHealthCauseQueue_(ctx);
- *   
+ *
  *   // Include in cycle packet
  *   var healthBriefing = generateHealthCauseBriefing_(ctx);
  *   if (healthBriefing.hasPendingCases) {
  *     ctx.summary.healthCauseBriefing = healthBriefing.markdown;
  *   }
- * 
+ *
  * Add to mediaRoomIntake processing:
- * 
+ *
  *   processHealthCauseIntake_(ctx, intakeMarkdown);
- * 
+ *
  * ============================================================================
  */

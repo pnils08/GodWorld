@@ -1,12 +1,20 @@
 /**
  * ============================================================================
- * Neighborhood Engine v2.2
+ * Neighborhood Engine v2.3
  * ============================================================================
- * 
+ *
  * Assigns Tier-3 and Tier-4 citizens to Oakland neighborhoods.
  * Logs neighborhood drift events with location-specific flavor.
  * Named citizens (UNI/MED/CIV) are excluded unless assigned manually.
- * 
+ *
+ * v2.3 Enhancements:
+ * - Integrated Tier 3 Neighborhood Demographics for placement
+ * - Citizens assigned to neighborhoods matching their demographic profile
+ * - Students → neighborhoods with existing student populations
+ * - Seniors → established/senior-heavy neighborhoods
+ * - Young professionals → urban/professional areas
+ * - Falls back to random selection if demographics unavailable
+ *
  * v2.2 Enhancements:
  * - Expanded to 12 neighborhoods (added Uptown, KONO, Chinatown, Piedmont Ave)
  * - Holiday-specific neighborhood events
@@ -50,6 +58,7 @@ function runNeighborhoodEngine_(ctx) {
   const iPopID = idx('POPID');
   const iFirst = idx('First');
   const iLast = idx('Last');
+  const iBirthYear = idx('BirthYear');
 
   // ═══════════════════════════════════════════════════════════════════════════
   // OAKLAND NEIGHBORHOODS (12 total - v2.2)
@@ -176,6 +185,53 @@ function runNeighborhoodEngine_(ctx) {
   let assignmentsCount = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // DEMOGRAPHIC-AWARE NEIGHBORHOOD PICKER (v2.3)
+  // ═══════════════════════════════════════════════════════════════════════════
+  function pickDemographicNeighborhood_(ss, row, neighborhoods, iBirthYear, idxFn) {
+    // Determine citizen type based on age
+    const simYear = 2041;
+    let citizenType = 'young_professional';
+
+    if (iBirthYear >= 0 && row[iBirthYear]) {
+      const age = simYear - Number(row[iBirthYear]);
+      if (age >= 5 && age <= 22) {
+        citizenType = 'student';
+      } else if (age >= 65) {
+        citizenType = 'senior';
+      } else if (age >= 25 && age <= 40) {
+        citizenType = 'young_professional';
+      } else {
+        citizenType = 'family';
+      }
+    }
+
+    // Check if demographic weighting is available
+    if (typeof getDemographicWeightedNeighborhoods_ === 'function' &&
+        typeof getNeighborhoodDemographics_ === 'function') {
+      const demographics = getNeighborhoodDemographics_(ss);
+      if (demographics && Object.keys(demographics).length > 0) {
+        const weights = getDemographicWeightedNeighborhoods_(demographics, citizenType);
+        // Build weighted selection array
+        const weighted = [];
+        for (let i = 0; i < neighborhoods.length; i++) {
+          const hood = neighborhoods[i];
+          const weight = weights[hood] || 0.05;
+          const count = Math.max(1, Math.round(weight * 100));
+          for (let c = 0; c < count; c++) {
+            weighted.push(hood);
+          }
+        }
+        if (weighted.length > 0) {
+          return weighted[Math.floor(Math.random() * weighted.length)];
+        }
+      }
+    }
+
+    // Fallback: random selection
+    return neighborhoods[Math.floor(Math.random() * neighborhoods.length)];
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // HOLIDAY-SPECIFIC NEIGHBORHOOD EVENTS (v2.2)
   // ═══════════════════════════════════════════════════════════════════════════
   const holidayNeighborhoodEvents = {};
@@ -289,12 +345,13 @@ function runNeighborhoodEngine_(ctx) {
     if (isUNI || isMED || isCIV) continue;
 
     // ═══════════════════════════════════════════════════════════════════════
-    // NEIGHBORHOOD ASSIGNMENT IF MISSING
+    // NEIGHBORHOOD ASSIGNMENT IF MISSING (v2.3 - demographic aware)
     // ═══════════════════════════════════════════════════════════════════════
     let neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '').toString().trim() : '';
-    
+
     if (!neighborhood || neighborhood === '' || neighborhood === 'Oakland, CA') {
-      neighborhood = neighborhoods[Math.floor(Math.random() * neighborhoods.length)];
+      // v2.3: Use demographic-weighted neighborhood selection
+      neighborhood = pickDemographicNeighborhood_(ss, row, neighborhoods, iBirthYear, idx);
       if (iNeighborhood >= 0) {
         row[iNeighborhood] = neighborhood;
       }

@@ -1,9 +1,17 @@
 /**
  * ============================================================================
- * generateGenericCitizens_ v2.4
+ * generateGenericCitizens_ v2.5
  * ============================================================================
  *
  * World-aware background citizen generation with GodWorld Calendar integration.
+ *
+ * v2.5 Changes from v2.4:
+ * - Integrated Tier 3 Neighborhood Demographics weighting
+ * - pickWeightedNeighborhood now considers citizen age and demographic fit
+ * - Young professionals placed in urban/professional neighborhoods
+ * - Students placed near existing student populations
+ * - Seniors placed in established/senior-heavy neighborhoods
+ * - Demographics influence blended with calendar/cultural weights
  *
  * v2.4 Changes from v2.3:
  * - Full ES5 conversion for Google Apps Script compatibility
@@ -255,14 +263,53 @@ function generateGenericCitizens_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // CALENDAR-AWARE NEIGHBORHOOD PICKER (v2.2)
+  // DEMOGRAPHIC WEIGHTING (v2.5 - Tier 3 integration)
   // ═══════════════════════════════════════════════════════════════════════════
-  function pickWeightedNeighborhood() {
+  var demographicWeights = {};
+  if (typeof getDemographicWeightedNeighborhoods_ === 'function') {
+    // Determine citizen type based on birth year distribution
+    var citizenType = 'young_professional'; // Default for new arrivals
+    var demographics = getNeighborhoodDemographics_(ss);
+    if (demographics && Object.keys(demographics).length > 0) {
+      demographicWeights = getDemographicWeightedNeighborhoods_(demographics, citizenType);
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CALENDAR-AWARE NEIGHBORHOOD PICKER (v2.5)
+  // ═══════════════════════════════════════════════════════════════════════════
+  function pickWeightedNeighborhood(birthYear) {
     // v2.4: Manual copy instead of spread operator
     var weights = {};
     for (var key in neighborhoodWeights) {
       if (neighborhoodWeights.hasOwnProperty(key)) {
         weights[key] = neighborhoodWeights[key];
+      }
+    }
+
+    // v2.5: Apply demographic weighting based on citizen age
+    var simYear = 2041;
+    var age = simYear - (birthYear || 2010);
+    var citizenType = 'young_professional';
+    if (age >= 5 && age <= 22) {
+      citizenType = 'student';
+    } else if (age >= 65) {
+      citizenType = 'senior';
+    } else if (age >= 25 && age <= 40) {
+      citizenType = 'young_professional';
+    }
+
+    // Apply demographic weights if available
+    if (typeof getDemographicWeightedNeighborhoods_ === 'function') {
+      var demographics = getNeighborhoodDemographics_(ss);
+      if (demographics && Object.keys(demographics).length > 0) {
+        var demoWeights = getDemographicWeightedNeighborhoods_(demographics, citizenType);
+        for (var hood in demoWeights) {
+          if (demoWeights.hasOwnProperty(hood) && weights[hood] !== undefined) {
+            // Blend base weights with demographic weights
+            weights[hood] = (weights[hood] + demoWeights[hood] * 2) / 3;
+          }
+        }
       }
     }
 
@@ -348,7 +395,7 @@ function generateGenericCitizens_(ctx) {
     var maxBirthYear = 2023;  // Age 18 in 2041
     var birthYear = minBirthYear + Math.floor(Math.random() * (maxBirthYear - minBirthYear + 1));
 
-    var neighborhood = pickWeightedNeighborhood();
+    var neighborhood = pickWeightedNeighborhood(birthYear);
     var occupation = occupations[Math.floor(Math.random() * occupations.length)];
 
     var newRow = [];
@@ -469,14 +516,19 @@ function generateGenericCitizens_(ctx) {
   S.genericCitizensGenerated = newCitizens.length;
   ctx.summary = S;
 
-  Logger.log('generateGenericCitizens_ v2.4: Generated ' + newCitizens.length + ' citizens');
+  Logger.log('generateGenericCitizens_ v2.5: Generated ' + newCitizens.length + ' citizens');
 }
 
 
 /**
  * ============================================================================
- * GENERIC CITIZENS GENERATOR REFERENCE v2.4
+ * GENERIC CITIZENS GENERATOR REFERENCE v2.5
  * ============================================================================
+ *
+ * CHANGES FROM v2.4:
+ * - Integrated Tier 3 Neighborhood Demographics weighting
+ * - pickWeightedNeighborhood considers citizen age for demographic fit
+ * - Demographic weights blended with calendar/cultural modifiers
  *
  * CHANGES FROM v2.3:
  * - Full ES5 conversion (var, indexOf, classic for loops)

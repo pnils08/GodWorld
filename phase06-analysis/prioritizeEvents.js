@@ -1,9 +1,18 @@
 /**
  * ============================================================================
- * prioritizeEvents_ v2.2
+ * prioritizeEvents_ v2.3
  * ============================================================================
  *
  * World-aware event prioritization with GodWorld Calendar integration.
+ *
+ * v2.3 Enhancements:
+ * - Integrated Tier 3 Neighborhood Demographics for story signals
+ * - Demographic shifts boost related event types
+ * - Population shifts → migration/community/economic events
+ * - Unemployment shifts → economic/civic events
+ * - Illness shifts → health/community events
+ * - Age demographic shifts → community/health events
+ * - Large shifts (>10%) get extra priority
  *
  * v2.2 Enhancements:
  * - Expanded to 12 neighborhoods
@@ -26,6 +35,7 @@
  * - neighborhood importance
  * - holiday context (v2.2)
  * - calendar signals (v2.2)
+ * - demographic shifts (v2.3)
  *
  * Produces a clean, sorted, high-signal event list for Media Room use.
  * 
@@ -63,6 +73,22 @@ function prioritizeEvents_(ctx) {
   const isFirstFriday = S.isFirstFriday || false;
   const isCreationDay = S.isCreationDay || false;
   const sportsSeason = S.sportsSeason || "off-season";
+
+  // Demographic context (v2.3 - Tier 3)
+  const demographicShifts = S.demographicShifts || [];
+  const neighborhoodDemographics = S.neighborhoodDemographics || {};
+
+  // Build demographic shift lookup for fast neighborhood matching
+  const shiftsByNeighborhood = {};
+  for (let i = 0; i < demographicShifts.length; i++) {
+    const shift = demographicShifts[i];
+    if (shift.neighborhood) {
+      if (!shiftsByNeighborhood[shift.neighborhood]) {
+        shiftsByNeighborhood[shift.neighborhood] = [];
+      }
+      shiftsByNeighborhood[shift.neighborhood].push(shift);
+    }
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN PRIORITY (lowercase and uppercase)
@@ -276,6 +302,53 @@ function prioritizeEvents_(ctx) {
     else if (communityEngagement >= 1.15 && evType === "community") score += 1;
 
     // ═══════════════════════════════════════════════════════════════════════
+    // DEMOGRAPHIC SHIFT BOOST (v2.3 - Tier 3)
+    // ═══════════════════════════════════════════════════════════════════════
+    const neighborhoodShifts = shiftsByNeighborhood[evNeighborhood] || [];
+    if (neighborhoodShifts.length > 0) {
+      // Events in neighborhoods with demographic shifts get priority
+      for (let s = 0; s < neighborhoodShifts.length; s++) {
+        const shift = neighborhoodShifts[s];
+
+        // Population shifts affect migration/community events
+        if (shift.type === 'population_shift') {
+          if (evType === 'migration') score += 4;
+          if (evType === 'community') score += 3;
+          if (evType === 'economic') score += 2;
+        }
+
+        // Unemployment shifts affect economic events
+        if (shift.type === 'unemployed_shift') {
+          if (evType === 'economic') score += 4;
+          if (evType === 'civic') score += 2;
+        }
+
+        // Illness shifts affect health events
+        if (shift.type === 'sick_shift') {
+          if (evType === 'health') score += 4;
+          if (evType === 'community') score += 2;
+        }
+
+        // Age demographic shifts
+        if (shift.type === 'students_shift') {
+          if (evType === 'community') score += 2;
+        }
+        if (shift.type === 'seniors_shift') {
+          if (evType === 'health') score += 2;
+          if (evType === 'community') score += 2;
+        }
+
+        // Large shifts (>10%) get extra boost
+        if (shift.percentage && shift.percentage >= 10) {
+          score += 2;
+        }
+      }
+    }
+
+    // Demographic event tag boost
+    if (evTag.includes('demographic') || evTag.includes('population')) score += 3;
+
+    // ═══════════════════════════════════════════════════════════════════════
     // NEIGHBORHOOD IMPORTANCE (applied last as multiplier)
     // ═══════════════════════════════════════════════════════════════════════
     const nWeight = neighborhoodWeight[evNeighborhood] || 1.0;
@@ -345,6 +418,14 @@ function prioritizeEvents_(ctx) {
       isFirstFriday: isFirstFriday,
       isCreationDay: isCreationDay,
       sportsSeason: sportsSeason
+    },
+    // v2.3: Demographic context in prioritization
+    demographicContext: {
+      shiftsCount: demographicShifts.length,
+      neighborhoodsWithShifts: Object.keys(shiftsByNeighborhood).length,
+      significantShifts: demographicShifts.filter(function(s) {
+        return s.percentage && s.percentage >= 8;
+      }).length
     }
   };
 

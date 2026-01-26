@@ -60,6 +60,7 @@ var SHEET_NAMES = {
 
   // === Geography ===
   NEIGHBORHOOD_MAP: 'Neighborhood_Map',
+  NEIGHBORHOOD_DEMOGRAPHICS: 'Neighborhood_Demographics',
   DOMAIN_TRACKER: 'Domain_Tracker',
 
   // === Dashboard/Feeds ===

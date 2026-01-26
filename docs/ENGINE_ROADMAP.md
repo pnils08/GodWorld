@@ -153,12 +153,14 @@ Reduce redundancy, establish single sources of truth.
 
 The core feature for v3 narrative depth.
 
-### [ ] 3.1 Neighborhood_Demographics Sheet
+### [x] 3.1 Neighborhood_Demographics Sheet
+**Status:** COMPLETE (Jan 2026)
+
 **Schema:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| Neighborhood | string | e.g., "TEMESCAL", "WEST_OAKLAND" |
+| Neighborhood | string | e.g., "Temescal", "Downtown" |
 | Students | int | School-age (5-22) |
 | Adults | int | Working-age (23-64) |
 | Seniors | int | 65+ |
@@ -166,29 +168,52 @@ The core feature for v3 narrative depth.
 | Sick | int | Currently ill |
 | LastUpdated | int | Cycle last recalculated |
 
-**Seed Method:**
-- Initial values derived from `Simulation_Ledger` citizen distribution
+**Implementation:**
+- Created `utilities/ensureNeighborhoodDemographics.js` with:
+  - `ensureNeighborhoodDemographicsSchema_()` - append-only safe schema creation
+  - `getNeighborhoodDemographics_()` - reads all neighborhood data
+  - `updateNeighborhoodDemographics_()` - single neighborhood update
+  - `batchUpdateNeighborhoodDemographics_()` - efficient bulk update
+  - `seedNeighborhoodDemographicsFromLedger_()` - initial data seeding
+  - `calculateDemographicShifts_()` - detects significant changes
+  - `getDemographicWeightedNeighborhoods_()` - citizen placement weights
+- 17 Oakland neighborhoods with character profiles (studentMod, adultMod, seniorMod)
+- Seed method derives from `Simulation_Ledger` citizen distribution
 - Cross-referenced with neighborhood character (e.g., Rockridge skews older/wealthier)
 
-### [ ] 3.2 Demographics Engine Integration
+### [x] 3.2 Demographics Engine Integration
+**Status:** COMPLETE (Jan 2026)
+
 **Phase 3 (Population):**
-- Read `Neighborhood_Demographics`
-- Update counts based on:
-  - Births/deaths
+- Created `phase03-population/updateNeighborhoodDemographics.js`
+- Updates counts based on:
   - Migration (incoming/outgoing citizen profiles)
   - Status changes (employment, illness)
+  - Calendar-aware modifiers (holidays affect specific neighborhoods)
+  - Natural population changes (aging, mortality, births)
 
 **Phase 5 (Citizens):**
-- New citizen placement weighted by neighborhood demographics
-- Young professionals more likely in Temescal
-- Families more likely in Fruitvale
+- Updated `generateGenericCitizens.js` to v2.5:
+  - `pickWeightedNeighborhood()` considers citizen age for demographic fit
+  - Young professionals → urban/professional neighborhoods
+  - Students → neighborhoods with existing student populations
+  - Seniors → established/senior-heavy neighborhoods
+- Updated `runNeighborhoodEngine.js` to v2.3:
+  - `pickDemographicNeighborhood_()` for age-based assignment
+  - Falls back to random selection if demographics unavailable
 
-### [ ] 3.3 Demographics as Story Signals
+### [x] 3.3 Demographics as Story Signals
+**Status:** COMPLETE (Jan 2026)
+
 **Phase 6 (Analysis):**
-- Flag significant demographic shifts
-- "Rockridge senior population up 8% this quarter"
-- "West Oakland seeing influx of young adults"
-- Feed to Story_Hook_Deck
+- Updated `prioritizeEvents.js` to v2.3:
+  - Population shifts → boost migration/community/economic events
+  - Unemployment shifts → boost economic/civic events
+  - Illness shifts → boost health/community events
+  - Age demographic shifts → boost community/health events
+  - Large shifts (>10%) get extra story priority
+- `ctx.summary.demographicShifts` array available for story generation
+- `ctx.summary.eventPrioritization.demographicContext` tracks shift statistics
 
 ---
 
@@ -286,7 +311,7 @@ Full architecture migration.
 
 | Change | Sheet | Status |
 |--------|-------|--------|
-| New: `Neighborhood_Demographics` | - | PENDING |
+| New: `Neighborhood_Demographics` | - | COMPLETE |
 | New: `Cycle_Weather` | - | COMPLETE |
 | New: `BayTribune_Roster` | - | JSON READY (sheet pending) |
 | Remove weather columns | `WorldEvents_Ledger` | PENDING |

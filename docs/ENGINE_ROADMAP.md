@@ -5,7 +5,7 @@
 
 **Last Updated:** 2026-01-26
 **Current Cycle:** 75
-**Engine Version:** v3.0
+**Engine Version:** v3.1
 
 ---
 
@@ -365,6 +365,11 @@ Full architecture migration.
 | New: `Cycle_Weather` | - | COMPLETE |
 | New: `BayTribune_Roster` | - | JSON READY (sheet pending) |
 | New: `Cycle_Seeds` | - | COMPLETE (Tier 5) |
+| New: `Crime_Metrics` | - | COMPLETE (Tier 6) |
+| New: `Faith_Ledger` | - | COMPLETE (Tier 6) |
+| New: `Faith_Organizations` | - | COMPLETE (Tier 6) |
+| New: `Youth_Events` | - | COMPLETE (Tier 6) |
+| New: `Transit_Metrics` | - | COMPLETE (Tier 6) |
 | Remove weather columns | `WorldEvents_Ledger` | PENDING |
 | Remove weather columns | `Neighborhood_Map` | PENDING |
 
@@ -382,6 +387,10 @@ Full architecture migration.
 | 6 | Civic integration (4.1) | Demographics complete |
 | 7 | Media integration (4.2) | Demographics complete |
 | 8 | V3 completion (5.1-5.4) | All above complete |
+| 9 | Crime metrics (6.1) | Demographics complete |
+| 10 | Faith community (6.2) | World events integration |
+| 11 | Youth engine (6.3) | Demographics + citizen engine |
+| 12 | Transit metrics (6.4) | Demographics complete |
 
 ---
 
@@ -396,29 +405,75 @@ Reference document:
 
 ---
 
-## TIER 6: NARRATIVE DEPTH (Future)
+## TIER 6: NARRATIVE DEPTH
 
-Deferred until engine efficiency work (Tiers 1-5) is complete. These add richness but depend on a stable, performant foundation.
+Adds narrative richness to the simulation with new data domains.
 
-### [ ] 6.1 Crime / Public Safety
-**Gap:** No crime index, incident types, clearance rates, or response times.
-**Addition:** Crime metrics per neighborhood (property crime index, violent crime index, response times, clearance rates).
-**Depends on:** Neighborhood Demographics (Tier 3)
+### [x] 6.1 Crime / Public Safety
+**Status:** COMPLETE (Jan 2026)
 
-### [ ] 6.2 Faith / Religious Community
-**Gap:** Elliot Graye (Faith & Ethics) has no data source. No congregations, religious events, or faith-based organizing.
-**Addition:** Faith_Ledger or religious events in world events engine (services, community programs, interfaith moments).
-**Depends on:** World Events integration
+**Implementation:**
+- Created `utilities/ensureCrimeMetrics.js` with:
+  - `Crime_Metrics` sheet schema (neighborhood, property/violent crime indices, response times, clearance rates)
+  - 17 neighborhood crime profiles with character-based modifiers
+  - Crime metrics CRUD functions with write-intents support
+  - `calculateCrimeShifts_()` for story signals
+  - `getHighCrimeNeighborhoods_()` for event targeting
+- Created `phase03-population/updateCrimeMetrics.js` with:
+  - `updateCrimeMetrics_Phase3_()` engine integration
+  - Crime influenced by: unemployment, youth population, sentiment, weather, season
+  - `generateCrimeEvents_()` for world events integration
+  - `getCrimeStorySignals_()` for Phase 6 analysis
 
-### [ ] 6.3 Youth / Next Generation
-**Gap:** Children exist as household members but have no agency. No youth-specific events, school activities, or coming-of-age moments.
-**Addition:** Youth events in citizen engine, school sports/activities, youth civic participation (age-gated).
-**Depends on:** Neighborhood Demographics (Tier 3), Citizen Engine maturity
+### [x] 6.2 Faith / Religious Community
+**Status:** COMPLETE (Jan 2026)
 
-### [ ] 6.4 Transportation / Transit
-**Gap:** No BART ridership, AC Transit data, or traffic patterns beyond general "traffic" city dynamic.
-**Addition:** Transit metrics (ridership by station, route performance, traffic index by corridor).
-**Depends on:** Neighborhood Demographics (Tier 3)
+**Implementation:**
+- Created `utilities/ensureFaithLedger.js` with:
+  - `Faith_Ledger` sheet schema for events
+  - `Faith_Organizations` sheet with 16 Oakland congregations
+  - Multi-tradition support (Protestant, Catholic, Jewish, Muslim, Buddhist, Hindu, Sikh, Unitarian)
+  - Holy days calendar by tradition
+  - Event pools: services, holy days, community programs, interfaith dialogue, outreach, crisis response
+- Created `phase04-events/faithEventsEngine.js` with:
+  - `runFaithEventsEngine_()` integration
+  - Organization-specific event generation
+  - Interfaith event generation
+  - `getFaithStorySignals_()` for Elliot Graye (Faith & Ethics) desk
+
+### [x] 6.3 Youth / Next Generation
+**Status:** COMPLETE (Jan 2026)
+
+**Implementation:**
+- Created `utilities/youthActivities.js` with:
+  - `Youth_Events` sheet schema
+  - Oakland schools (elementary, middle, high, college)
+  - Academic calendar with seasonal periods
+  - Event pools: academic, sports, arts, civic participation, coming-of-age, achievement, challenge
+  - School assignment by age and neighborhood
+- Created `phase05-citizens/runYouthEngine.js` with:
+  - `runYouthEngine_()` engine integration
+  - Youth citizen retrieval from Generic_Citizens and Simulation_Ledger
+  - School-wide event generation (graduations, homecoming, sports seasons)
+  - Life history integration for named youth
+  - `getYouthStorySignals_()` for education/sports desks
+
+### [x] 6.4 Transportation / Transit
+**Status:** COMPLETE (Jan 2026)
+
+**Implementation:**
+- Created `utilities/ensureTransitMetrics.js` with:
+  - `Transit_Metrics` sheet schema
+  - 8 Oakland BART stations with baseline ridership
+  - 12 AC Transit lines
+  - 10 major traffic corridors
+  - Ridership/traffic modifiers by context (weather, events, day type)
+- Created `phase02-world-state/updateTransitMetrics.js` with:
+  - `updateTransitMetrics_Phase2_()` engine integration
+  - Station metrics: ridership volume, on-time performance
+  - Corridor metrics: traffic index
+  - Game day handling for Coliseum area
+  - `getTransitStorySignals_()` for metro desk
 
 ---
 

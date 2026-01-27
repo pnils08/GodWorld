@@ -415,7 +415,7 @@ function parseStorylines_(ss, section) {
       currentCategory = 'active';
       continue;
     }
-    if (line.match(/^NEW THREAD/i) || line.match(/^NEW:/i)) {
+    if (line.match(/^NEW THREAD/i) || line.match(/^NEW THIS CYCLE/i) || line.match(/^NEW:/i)) {
       currentCategory = 'new';
       continue;
     }
@@ -439,28 +439,22 @@ function parseStorylines_(ss, section) {
       }
       
       // Determine type
-      var storyType = 'thread';
-      if (currentCategory === 'resolved') {
+      var storyType = currentCategory;
+      if (currentCategory === 'question') {
+        storyType = 'question';
+      } else if (currentCategory === 'resolved') {
         storyType = 'resolved';
       } else if (currentCategory === 'phase-change') {
-        storyType = 'arc';
+        storyType = 'phase-change';
       } else if (currentCategory === 'new') {
-        storyType = 'developing';
-      } else if (currentCategory === 'question') {
-        storyType = 'question';
-      } else if (storylineName.toLowerCase().indexOf('crisis') >= 0) {
-        storyType = 'arc';
-      } else if (description.indexOf('?') >= 0) {
-        storyType = 'question';
+        storyType = 'new';
+      } else {
+        storyType = 'active';
       }
-      
+
       // Determine priority
       var priority = 'normal';
       if (currentCategory === 'new' || currentCategory === 'phase-change') {
-        priority = 'high';
-      }
-      if (description.toLowerCase().indexOf('finals') >= 0 || 
-          description.toLowerCase().indexOf('championship') >= 0) {
         priority = 'high';
       }
       
@@ -519,72 +513,76 @@ function parseCitizenUsage_(ss, section) {
   var lines = section.split('\n');
   var usages = [];
   var currentCategory = 'citizen';
-  
+  var currentContext = 'CITIZEN';
+
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i].trim();
     if (!line) continue;
-    
+
     // Category headers
     var headerLower = line.toLowerCase();
     if (headerLower.indexOf('journalist') >= 0 || headerLower.indexOf('reporter') >= 0) {
       currentCategory = 'journalist';
+      currentContext = 'JOURNALIST';
       continue;
     }
-    if (headerLower.indexOf('player') >= 0 || headerLower.indexOf('a\'s') >= 0 || 
+    if (headerLower.indexOf('sports') >= 0 || headerLower.indexOf('player') >= 0 || headerLower.indexOf('a\'s') >= 0 ||
         headerLower.indexOf('bulls') >= 0 || headerLower.indexOf('nba') >= 0) {
-      currentCategory = 'player';
+      currentCategory = 'uni';
+      currentContext = 'UNI';
       continue;
     }
     if (headerLower.indexOf('civic') >= 0 || headerLower.indexOf('official') >= 0) {
       currentCategory = 'official';
+      currentContext = 'CIVIC';
       continue;
     }
     if (headerLower.indexOf('cultural') >= 0) {
       currentCategory = 'cultural';
+      currentContext = 'CULTURAL';
       continue;
     }
     if (headerLower.indexOf('owner') >= 0 || headerLower.indexOf('executive') >= 0) {
       currentCategory = 'executive';
+      currentContext = 'EXECUTIVE';
+      continue;
+    }
+    if (headerLower.indexOf('quoted') >= 0) {
+      currentCategory = 'quoted';
+      currentContext = 'QUOTED';
+      continue;
+    }
+    if (headerLower.indexOf('letters') >= 0) {
+      currentCategory = 'letters';
+      currentContext = 'LETTERS';
       continue;
     }
     if (headerLower.indexOf('citizen') >= 0 || headerLower.indexOf('other') >= 0) {
       currentCategory = 'citizen';
+      currentContext = 'CITIZEN';
       continue;
     }
-    
+
     // Parse entries
     if (line.match(/^[—\-]\s+/)) {
       var content = line.replace(/^[—\-]\s+/, '').trim();
-      
-      // Skip journalists - they're reporters not citizens
-      if (currentCategory === 'journalist') continue;
-      
+
       // Parse "Name (context)" format
       var name = content;
       var context = '';
-      
+
       var parenMatch = content.match(/^(.+?)\s*\(([^)]+)\)$/);
       if (parenMatch) {
         name = parenMatch[1].trim();
         context = parenMatch[2].trim();
       }
-      
+
       // Determine usage type based on category
       var usageType = 'mentioned';
-      if (currentCategory === 'player') {
-        usageType = 'mentioned';
-        if (!context) context = 'player';
-      } else if (currentCategory === 'official') {
-        usageType = 'mentioned';
-        if (!context) context = 'official';
-      } else if (currentCategory === 'cultural') {
-        usageType = 'mentioned';
-        if (!context) context = 'cultural figure';
-      } else if (currentCategory === 'executive') {
-        usageType = 'mentioned';
-        if (!context) context = 'executive';
+      if (!context) {
+        context = currentContext;
       }
-      
+
       if (name) {
         usages.push({
           citizenName: name,
@@ -917,6 +915,6 @@ function ensureContinuityIntakeSheet_(ss) {
  *   1. Paste Media Room output → MediaRoom_Paste
  *   2. Run parseMediaRoomMarkdown()
  *   3. Run processMediaIntakeV2() to move to ledgers
- * 
+ *
  * ============================================================================
  */

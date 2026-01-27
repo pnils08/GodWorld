@@ -1,9 +1,17 @@
 /**
  * ============================================================================
- * MEDIA ROOM INTAKE v2.1
+ * MEDIA ROOM INTAKE v2.2
  * ============================================================================
  *
  * Aligned with MEDIA_ROOM_INSTRUCTIONS v2.0 and GodWorld Calendar v1.0
+ *
+ * v2.2 Enhancements:
+ * - Raw citizen usage log parsing (paste full log, auto-route)
+ * - Citizen existence check against Simulation_Ledger
+ * - Automatic routing: New → Intake, Existing → Advancement_Intake
+ * - Category detection: UNI (Universe/athletes), MED (Media), CIV (Civic)
+ * - Quote extraction to LifeHistory_Log
+ * - Full demographic parsing (age, neighborhood, occupation)
  *
  * v2.1 Enhancements:
  * - Calendar columns in all output sheets
@@ -58,7 +66,7 @@ function processMediaIntakeV2() {
   results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
   results.continuity = processContinuityIntake_(ss, cycle, cal);
 
-  var summary = 'Media Intake v2.1 Complete:\n' +
+  var summary = 'Media Intake v2.2 Complete:\n' +
     '- Articles: ' + results.articles + '\n' +
     '- Storylines: ' + results.storylines + '\n' +
     '- Citizen Usage: ' + results.citizenUsage + '\n' +
@@ -459,7 +467,7 @@ function setupMediaIntakeV2() {
     : 'All intake sheets already exist';
 
   Logger.log('setupMediaIntakeV2: ' + msg);
-  SpreadsheetApp.getUi().alert('Media Intake v2.1 Setup Complete\n\n' + msg);
+  SpreadsheetApp.getUi().alert('Media Intake v2.2 Setup Complete\n\n' + msg);
 }
 
 
@@ -834,6 +842,501 @@ function clearAllProcessedIntake() {
 
   Logger.log('Cleared ' + total + ' processed rows across intake sheets');
 }
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// v2.2: RAW CITIZEN USAGE LOG PARSING & ROUTING
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Parse raw citizen usage log text and route citizens appropriately.
+ *
+ * Input format sections:
+ * - CIVIC OFFICIALS: → CIV category
+ * - SPORTS — [TEAM]: → UNI category
+ * - JOURNALISTS: → MED category
+ * - CITIZENS QUOTED IN ARTICLES (NEW): → Quote extraction + intake/advancement
+ * - CITIZENS IN LETTERS (NEW): → Standard intake/advancement
+ *
+ * Flow:
+ * 1. Parse text into structured citizen data
+ * 2. Check if citizen exists in Simulation_Ledger
+ * 3. Route: New → Intake sheet, Existing → Advancement_Intake
+ * 4. Log quotes to LifeHistory_Log
+ */
+function processRawCitizenUsageLog_(ss, rawText, cycle, cal) {
+  var results = {
+    parsed: 0,
+    newCitizens: 0,
+    existingCitizens: 0,
+    quotesLogged: 0,
+    errors: []
+  };
+
+  if (!rawText || rawText.trim() === '') return results;
+
+  // Parse raw text into structured sections
+  var parsed = parseRawCitizenUsageLog_(rawText);
+  results.parsed = parsed.totalCount;
+
+  // Get ledger data for existence checks
+  var ledger = ss.getSheetByName('Simulation_Ledger');
+  var ledgerData = ledger ? ledger.getDataRange().getValues() : [];
+
+  // Process each category
+  results = processCategoryEntries_(ss, parsed.civic, 'CIV', ledgerData, cycle, cal, results);
+  results = processCategoryEntries_(ss, parsed.sports, 'UNI', ledgerData, cycle, cal, results);
+  results = processCategoryEntries_(ss, parsed.journalists, 'MED', ledgerData, cycle, cal, results);
+  results = processQuotedCitizens_(ss, parsed.quotedNew, ledgerData, cycle, cal, results);
+  results = processQuotedCitizens_(ss, parsed.lettersNew, ledgerData, cycle, cal, results);
+
+  Logger.log('processRawCitizenUsageLog_: ' + JSON.stringify(results));
+  return results;
+}
+
+
+/**
+ * Parse raw citizen usage log text into structured data.
+ */
+function parseRawCitizenUsageLog_(rawText) {
+  var result = {
+    civic: [],
+    sports: [],
+    journalists: [],
+    quotedNew: [],
+    lettersNew: [],
+    totalCount: 0
+  };
+
+  var lines = rawText.split('\n');
+  var currentSection = null;
+  var currentTeam = null;
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    if (!line || line.indexOf('###') === 0) continue;
+
+    // Detect section headers
+    if (line.indexOf('CIVIC OFFICIALS') === 0) {
+      currentSection = 'civic';
+      currentTeam = null;
+      continue;
+    }
+    if (line.indexOf('SPORTS') === 0) {
+      currentSection = 'sports';
+      // Extract team name: "SPORTS — A'S:" or "SPORTS — BULLS:"
+      var teamMatch = line.match(/SPORTS\s*[—–-]\s*([^:]+)/i);
+      currentTeam = teamMatch ? teamMatch[1].trim() : 'Unknown';
+      continue;
+    }
+    if (line.indexOf('JOURNALISTS') === 0) {
+      currentSection = 'journalists';
+      currentTeam = null;
+      continue;
+    }
+    if (line.indexOf('CITIZENS QUOTED IN ARTICLES') >= 0) {
+      currentSection = 'quotedNew';
+      currentTeam = null;
+      continue;
+    }
+    if (line.indexOf('CITIZENS IN LETTERS') >= 0) {
+      currentSection = 'lettersNew';
+      currentTeam = null;
+      continue;
+    }
+
+    // Skip section separator lines
+    if (line.indexOf('-----') === 0) continue;
+
+    // Parse citizen entry (starts with — or -)
+    if (line.indexOf('—') === 0 || line.indexOf('-') === 0) {
+      var entry = line.replace(/^[—–-]\s*/, '').trim();
+      if (!entry) continue;
+
+      var citizen = parseCitizenEntry_(entry, currentSection, currentTeam);
+      if (citizen) {
+        result[currentSection].push(citizen);
+        result.totalCount++;
+      }
+    }
+  }
+
+  return result;
+}
+
+
+/**
+ * Parse a single citizen entry based on section type.
+ */
+function parseCitizenEntry_(entry, section, team) {
+  var citizen = {
+    name: '',
+    role: '',
+    team: team || '',
+    age: '',
+    neighborhood: '',
+    occupation: '',
+    context: '',
+    articleCount: 0
+  };
+
+  if (section === 'civic') {
+    // Format: "Name (Role)" e.g., "Avery Santana (Mayor)"
+    var civicMatch = entry.match(/^([^(]+)\s*\(([^)]+)\)/);
+    if (civicMatch) {
+      citizen.name = civicMatch[1].trim();
+      citizen.role = civicMatch[2].trim();
+    } else {
+      citizen.name = entry;
+    }
+  } else if (section === 'sports') {
+    // Format: "Name (Position)" e.g., "Vinnie Keane (3B)"
+    var sportsMatch = entry.match(/^([^(]+)\s*\(([^)]+)\)/);
+    if (sportsMatch) {
+      citizen.name = sportsMatch[1].trim();
+      citizen.role = sportsMatch[2].trim();
+    } else {
+      citizen.name = entry;
+    }
+  } else if (section === 'journalists') {
+    // Format: "Name (N article[s])" e.g., "Maria Keen (1 article)"
+    var journoMatch = entry.match(/^([^(]+)\s*\((\d+)\s*article/i);
+    if (journoMatch) {
+      citizen.name = journoMatch[1].trim();
+      citizen.articleCount = parseInt(journoMatch[2], 10);
+      citizen.role = 'Journalist';
+    } else {
+      citizen.name = entry;
+      citizen.role = 'Journalist';
+    }
+  } else if (section === 'quotedNew' || section === 'lettersNew') {
+    // Format: "Name, Age, Neighborhood, Occupation (Article context)"
+    // e.g., "Terrell Davis, Laurel, Cook (Juneteenth front page)"
+    // or: "Javier Harris, 57, West Oakland, Electrician (Stabilization Fund)"
+    var quotedMatch = entry.match(/^([^,]+),\s*(\d+)?,?\s*([^,]+),\s*([^(]+)\s*\(([^)]+)\)/);
+    if (quotedMatch) {
+      citizen.name = quotedMatch[1].trim();
+      citizen.age = quotedMatch[2] ? quotedMatch[2].trim() : '';
+      citizen.neighborhood = quotedMatch[3].trim();
+      citizen.occupation = quotedMatch[4].trim();
+      citizen.context = quotedMatch[5].trim();
+    } else {
+      // Try simpler format: "Name, Neighborhood, Occupation (context)"
+      var simpleMatch = entry.match(/^([^,]+),\s*([^,]+),\s*([^(]+)\s*\(([^)]+)\)/);
+      if (simpleMatch) {
+        citizen.name = simpleMatch[1].trim();
+        citizen.neighborhood = simpleMatch[2].trim();
+        citizen.occupation = simpleMatch[3].trim();
+        citizen.context = simpleMatch[4].trim();
+      } else {
+        // Fallback: just use the whole entry as name
+        citizen.name = entry.replace(/\s*\([^)]*\)\s*$/, '').trim();
+        var ctxMatch = entry.match(/\(([^)]+)\)/);
+        if (ctxMatch) citizen.context = ctxMatch[1].trim();
+      }
+    }
+  }
+
+  return citizen.name ? citizen : null;
+}
+
+
+/**
+ * Check if citizen exists in ledger (normalized comparison).
+ */
+function citizenExistsInLedger_(ledgerData, firstName, lastName) {
+  if (ledgerData.length < 2) return null;
+
+  var headers = ledgerData[0];
+  var firstCol = headers.indexOf('First');
+  var lastCol = headers.indexOf('Last');
+  var popIdCol = headers.indexOf('POPID');
+
+  if (firstCol < 0 || lastCol < 0) return null;
+
+  var normFirst = normalizeIdentity_(firstName);
+  var normLast = normalizeIdentity_(lastName);
+
+  for (var r = 1; r < ledgerData.length; r++) {
+    var f = normalizeIdentity_(ledgerData[r][firstCol]);
+    var l = normalizeIdentity_(ledgerData[r][lastCol]);
+    if (f === normFirst && l === normLast) {
+      return {
+        row: r,
+        popId: popIdCol >= 0 ? ledgerData[r][popIdCol] : '',
+        data: ledgerData[r]
+      };
+    }
+  }
+  return null;
+}
+
+
+/**
+ * Split full name into first and last.
+ */
+function splitName_(fullName) {
+  var parts = String(fullName).trim().split(/\s+/);
+  if (parts.length === 1) {
+    return { first: parts[0], last: '' };
+  }
+  return {
+    first: parts[0],
+    last: parts.slice(1).join(' ')
+  };
+}
+
+
+/**
+ * Process category entries (CIV, UNI, MED) and route appropriately.
+ */
+function processCategoryEntries_(ss, entries, category, ledgerData, cycle, cal, results) {
+  if (!entries || entries.length === 0) return results;
+
+  var intakeSheet = ss.getSheetByName('Intake');
+  var advSheet = ss.getSheetByName('Advancement_Intake1');
+  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
+
+  for (var i = 0; i < entries.length; i++) {
+    var citizen = entries[i];
+    var nameParts = splitName_(citizen.name);
+    var exists = citizenExistsInLedger_(ledgerData, nameParts.first, nameParts.last);
+
+    if (exists) {
+      // Send to Advancement_Intake
+      if (advSheet) {
+        advSheet.appendRow([
+          nameParts.first,          // A: First
+          '',                       // B: Middle
+          nameParts.last,           // C: Last
+          citizen.role || '',       // D: RoleType
+          '',                       // E: Tier (keep existing)
+          '',                       // F: ClockMode (keep existing)
+          category === 'CIV' ? 'yes' : '', // G: CIV
+          category === 'MED' ? 'yes' : '', // H: MED
+          category === 'UNI' ? 'yes' : '', // I: UNI
+          'Media usage C' + cycle + ': ' + (citizen.role || citizen.team || '') // J: Notes
+        ]);
+        results.existingCitizens++;
+      }
+    } else {
+      // Send to Intake for new citizen creation
+      if (intakeSheet) {
+        intakeSheet.appendRow([
+          nameParts.first,          // A: First
+          '',                       // B: Middle
+          nameParts.last,           // C: Last
+          citizen.team || '',       // D: OriginGame
+          category === 'UNI' ? 'yes' : 'no', // E: UNI (y/n)
+          category === 'MED' ? 'yes' : 'no', // F: MED (y/n)
+          category === 'CIV' ? 'yes' : 'no', // G: CIV (y/n)
+          'ENGINE',                 // H: ClockMode
+          3,                        // I: Tier
+          citizen.role || 'Citizen', // J: RoleType
+          'Active',                 // K: Status
+          '',                       // L: BirthYear
+          'Oakland',                // M: OriginCity
+          'Introduced via Media Room C' + cycle + '. ' + (citizen.role || ''), // N: LifeHistory
+          '',                       // O: OriginVault
+          ''                        // P: Neighborhood
+        ]);
+        results.newCitizens++;
+      }
+    }
+  }
+
+  return results;
+}
+
+
+/**
+ * Process quoted citizens with full demographic data.
+ */
+function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
+  if (!entries || entries.length === 0) return results;
+
+  var intakeSheet = ss.getSheetByName('Intake');
+  var advSheet = ss.getSheetByName('Advancement_Intake1');
+  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
+  var logSheet = ss.getSheetByName('LifeHistory_Log');
+
+  for (var i = 0; i < entries.length; i++) {
+    var citizen = entries[i];
+    var nameParts = splitName_(citizen.name);
+    var exists = citizenExistsInLedger_(ledgerData, nameParts.first, nameParts.last);
+
+    // Calculate birth year from age if provided
+    var birthYear = '';
+    if (citizen.age) {
+      var currentYear = cal && cal.month ? new Date().getFullYear() : 2026;
+      birthYear = currentYear - parseInt(citizen.age, 10);
+    }
+
+    if (exists) {
+      // Send to Advancement_Intake with quote context
+      if (advSheet) {
+        advSheet.appendRow([
+          nameParts.first,
+          '',
+          nameParts.last,
+          citizen.occupation || '',
+          '',  // Tier
+          '',  // ClockMode
+          '',  // CIV
+          '',  // MED
+          '',  // UNI
+          'Quoted in article C' + cycle + ': "' + citizen.context + '"'
+        ]);
+        results.existingCitizens++;
+      }
+
+      // Log quote to LifeHistory_Log
+      if (logSheet && citizen.context) {
+        logSheet.appendRow([
+          new Date(),               // A: Timestamp
+          exists.popId,             // B: POPID
+          citizen.name,             // C: Name
+          'Quoted',                 // D: EventTag
+          'Quoted in article: ' + citizen.context, // E: EventText
+          citizen.neighborhood || '',// F: Neighborhood
+          cycle,                    // G: Cycle
+          '',                       // H: (empty)
+          ''                        // I: (empty)
+        ]);
+        results.quotesLogged++;
+      }
+    } else {
+      // Send to Intake for new citizen creation
+      if (intakeSheet) {
+        intakeSheet.appendRow([
+          nameParts.first,
+          '',
+          nameParts.last,
+          '',                       // OriginGame
+          'no',                     // UNI
+          'no',                     // MED
+          'no',                     // CIV
+          'ENGINE',
+          4,                        // Tier 4 for quoted citizens
+          citizen.occupation || 'Citizen',
+          'Active',
+          birthYear,
+          'Oakland',
+          'First quoted in Media Room C' + cycle + ': ' + citizen.context,
+          '',
+          citizen.neighborhood || ''
+        ]);
+        results.newCitizens++;
+      }
+
+      // Log quote to LifeHistory_Log (new citizen, no POPID yet)
+      if (logSheet && citizen.context) {
+        logSheet.appendRow([
+          new Date(),
+          '',                       // No POPID yet
+          citizen.name,
+          'Quoted',
+          'First quoted in article: ' + citizen.context,
+          citizen.neighborhood || '',
+          cycle,
+          '',
+          ''
+        ]);
+        results.quotesLogged++;
+      }
+    }
+  }
+
+  return results;
+}
+
+
+/**
+ * Manual runner for raw citizen usage log processing.
+ * Paste log into MediaRoom_Paste sheet, then run this.
+ */
+function processRawCitizenUsageLogManual() {
+  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var cycle = getCurrentCycle_(ss);
+  var cal = getCurrentCalendarContext_(ss);
+
+  // Get raw text from MediaRoom_Paste sheet
+  var pasteSheet = ss.getSheetByName('MediaRoom_Paste');
+  if (!pasteSheet) {
+    SpreadsheetApp.getUi().alert('MediaRoom_Paste sheet not found');
+    return;
+  }
+
+  var rawText = pasteSheet.getRange('A2').getValue();
+  if (!rawText) {
+    SpreadsheetApp.getUi().alert('No text found in MediaRoom_Paste A2');
+    return;
+  }
+
+  var results = processRawCitizenUsageLog_(ss, rawText, cycle, cal);
+
+  var summary = 'Citizen Usage Log v2.2 Complete:\n' +
+    '- Parsed: ' + results.parsed + ' entries\n' +
+    '- New Citizens → Intake: ' + results.newCitizens + '\n' +
+    '- Existing → Advancement: ' + results.existingCitizens + '\n' +
+    '- Quotes Logged: ' + results.quotesLogged;
+
+  if (results.errors.length > 0) {
+    summary += '\n- Errors: ' + results.errors.length;
+  }
+
+  Logger.log(summary);
+  SpreadsheetApp.getUi().alert(summary);
+
+  // Mark as parsed
+  pasteSheet.getRange('A1').setValue('Last parsed: ' + new Date().toLocaleString());
+}
+
+
+/**
+ * ============================================================================
+ * MEDIA ROOM INTAKE REFERENCE v2.2
+ * ============================================================================
+ *
+ * v2.2 ADDITIONS:
+ * - parseRawCitizenUsageLog_(): Parse raw text format into structured data
+ * - citizenExistsInLedger_(): Check for existing citizens (normalized)
+ * - processCategoryEntries_(): Route CIV/UNI/MED citizens to intake or advancement
+ * - processQuotedCitizens_(): Handle quoted citizens with demographics + life history
+ * - processRawCitizenUsageLogManual(): Manual runner from MediaRoom_Paste
+ *
+ * CATEGORIES:
+ * - UNI = Universe (game players/athletes)
+ * - MED = Media (journalists)
+ * - CIV = Civic (officials, council members)
+ *
+ * INPUT FORMAT (paste into MediaRoom_Paste A2):
+ * ############################################################
+ * CITIZEN USAGE LOG
+ * ############################################################
+ *
+ * CIVIC OFFICIALS:
+ * — Name (Role)
+ *
+ * SPORTS — [TEAM]:
+ * — Name (Position)
+ *
+ * JOURNALISTS:
+ * — Name (N article[s])
+ *
+ * CITIZENS QUOTED IN ARTICLES (NEW):
+ * — Name, Age, Neighborhood, Occupation (Article context)
+ *
+ * CITIZENS IN LETTERS (NEW):
+ * — Name, Age, Neighborhood, Occupation
+ *
+ * ROUTING:
+ * - New citizens → Intake sheet (for processIntakeV3_ to create in ledger)
+ * - Existing citizens → Advancement_Intake1 (for processAdvancementIntake_ to update)
+ * - Quotes → LifeHistory_Log
+ *
+ * ============================================================================
+ */
 
 
 /**

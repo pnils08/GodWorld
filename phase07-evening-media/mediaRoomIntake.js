@@ -1,10 +1,18 @@
 /**
  * ============================================================================
- * MEDIA ROOM INTAKE v2.1
+ * MEDIA ROOM INTAKE v2.2
  * ============================================================================
- * 
+ *
  * Aligned with MEDIA_ROOM_INSTRUCTIONS v2.0 and GodWorld Calendar v1.0
- * 
+ *
+ * v2.2 Enhancements:
+ * - Citizen existence checking against Simulation_Ledger and Generic_Citizens
+ * - New citizens routed to Intake sheet for processing
+ * - Civic figure detection (CIV flagging)
+ * - LifeHistory append for existing Simulation_Ledger citizens
+ * - EmergenceCount/Cycle/Context update for Generic_Citizens
+ * - New input columns: Age, Neighborhood, Occupation
+ *
  * v2.1 Enhancements:
  * - Calendar columns in all output sheets
  * - getCurrentCalendarContext_() helper
@@ -12,18 +20,18 @@
  * - Calendar story types (holiday, festival)
  * - Calendar context in Media_Ledger
  * - Upgrade functions for existing sheets
- * 
+ *
  * Handles four intake streams from Media Room:
  * 1. Article Table → Press_Drafts (14 columns)
  * 2. Storylines Carried Forward → Storyline_Tracker (14 columns)
  * 3. Citizen Usage Log → Citizen_Media_Usage (12 columns)
  * 4. Continuity Notes → Continuity_Loop (13 columns)
- * 
+ *
  * SETUP:
  * 1. Add to Simulation_Narrative Apps Script
  * 2. Run setupMediaIntakeV2() once to create all sheets
  * 3. After each cycle: paste Media Room outputs, run processMediaIntakeV2()
- * 
+ *
  * ============================================================================
  */
 
@@ -58,13 +66,14 @@ function processMediaIntakeV2() {
   results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
   results.continuity = processContinuityIntake_(ss, cycle, cal);
   
-  var summary = 'Media Intake v2.1 Complete:\n' +
+  var summary = 'Media Intake v2.2 Complete:\n' +
     '- Articles: ' + results.articles + '\n' +
     '- Storylines: ' + results.storylines + '\n' +
     '- Citizen Usage: ' + results.citizenUsage + '\n' +
     '- Continuity Notes: ' + results.continuity + '\n' +
     '- Holiday: ' + cal.holiday + '\n' +
-    '- Sports: ' + cal.sportsSeason;
+    '- Sports: ' + cal.sportsSeason + '\n' +
+    '(v2.2: Check logs for citizen routing details)';
   
   Logger.log(summary);
   SpreadsheetApp.getUi().alert(summary);
@@ -270,40 +279,107 @@ function processStorylineIntake_(ss, cycle, cal) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
-// 3. CITIZEN USAGE LOG
+// 3. CITIZEN USAGE LOG (v2.2: with existence checks and routing)
 // ════════════════════════════════════════════════════════════════════════════
 
 function processCitizenUsageIntake_(ss, cycle, cal) {
-  
+
   var intakeSheet = ss.getSheetByName('Citizen_Usage_Intake');
   if (!intakeSheet) return 0;
-  
+
   var data = intakeSheet.getDataRange().getValues();
+  var header = data[0];
+
+  // v2.2: Column index helper
+  var idx = function(name) { return header.indexOf(name); };
+
+  // v2.2: Pre-fetch ledger and generic data for existence checks
+  var ledgerSheet = ss.getSheetByName('Simulation_Ledger');
+  var genericSheet = ss.getSheetByName('Generic_Citizens');
+  var simLedgerVals = ledgerSheet ? ledgerSheet.getDataRange().getValues() : [];
+  var genericVals = genericSheet ? genericSheet.getDataRange().getValues() : [];
+
   var usages = [];
-  
+  var routed = { newCitizens: 0, ledgerUpdates: 0, genericUpdates: 0 };
+
+  // v2.2: Find status column index (last column in new format)
+  var statusColIdx = idx('Status');
+  if (statusColIdx < 0) statusColIdx = header.length - 1;
+
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
-    
+
     // Skip empty or processed
     if (!row[0]) continue;
-    if (row[4] === 'processed') continue;
-    
+    if (row[statusColIdx] === 'processed') continue;
+
+    var citizenName = (row[idx('CitizenName')] || row[0] || '').toString().trim();
+    var usageType = (row[idx('UsageType')] || row[1] || 'mentioned').toString().trim();
+    var context = (row[idx('Context')] || row[2] || '').toString().trim();
+    var reporter = (row[idx('Reporter')] || row[3] || '').toString().trim();
+    // v2.2: New columns
+    var age = row[idx('Age')] || row[4] || '';
+    var neighborhood = (row[idx('Neighborhood')] || row[5] || '').toString().trim();
+    var occupation = (row[idx('Occupation')] || row[6] || '').toString().trim();
+
     usages.push({
-      citizenName: row[0] || '',
-      usageType: row[1] || 'mentioned',  // mentioned / quoted / profiled / featured
-      context: row[2] || '',
-      reporter: row[3] || ''
+      citizenName: citizenName,
+      usageType: usageType,
+      context: context,
+      reporter: reporter,
+      age: age,
+      neighborhood: neighborhood,
+      occupation: occupation
     });
-    
-    intakeSheet.getRange(i + 1, 5).setValue('processed');
+
+    // ═══════════════════════════════════════════════════════════════════════════
+    // v2.2: CITIZEN ROUTING LOGIC
+    // ═══════════════════════════════════════════════════════════════════════════
+
+    // STEP 1: Parse CitizenName into First + Last
+    var nameParts = citizenName.trim().split(' ');
+    var first = nameParts[0] || '';
+    var last = nameParts.slice(1).join(' ') || '';
+
+    // STEP 2: Check existence
+    var existsInSimLedger = existsInLedgerMedia_(simLedgerVals, first, last);
+    var existsInGeneric = existsInGenericCitizens_(genericVals, first, last, neighborhood);
+
+    // STEP 3: Route based on existence
+    if (!existsInSimLedger && !existsInGeneric) {
+      // NEW CITIZEN — route to Intake sheet
+      addToIntake_(ss, {
+        first: first,
+        last: last,
+        birthYear: calculateBirthYear_(ss, age),
+        neighborhood: neighborhood,
+        roleType: occupation,
+        originGame: 'Media Room',
+        civ: isCivicFigure_(context, occupation) ? 'yes' : 'no',
+        status: 'Active'
+      });
+      routed.newCitizens++;
+    } else if (existsInSimLedger) {
+      // EXISTING in Simulation_Ledger — append LifeHistory
+      appendLifeHistory_(ss, 'Simulation_Ledger', first, last, cycle, context);
+      routed.ledgerUpdates++;
+    } else if (existsInGeneric) {
+      // EXISTING in Generic_Citizens — update EmergenceCount
+      // This feeds into promotion pipeline (>=3 triggers eligibility)
+      updateGenericCitizenEmergence_(ss, first, last, neighborhood, cycle, context);
+      routed.genericUpdates++;
+    }
+
+    // Mark processed
+    intakeSheet.getRange(i + 1, statusColIdx + 1).setValue('processed');
   }
-  
+
   if (usages.length === 0) return 0;
-  
+
   // Write to Citizen_Media_Usage (v2.1: 12 columns with calendar)
   var usageSheet = ensureCitizenMediaUsage_(ss);
   var now = new Date();
-  
+
   var rows = [];
   for (var j = 0; j < usages.length; j++) {
     var u = usages[j];
@@ -322,16 +398,23 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
       cal.isCreationDay,      // K  IsCreationDay
       cal.sportsSeason        // L  SportsSeason
     ]);
-    
+
     // If profiled or featured, flag for tier review
     if (u.usageType === 'profiled' || u.usageType === 'featured') {
       flagCitizenForTierReview_(ss, u.citizenName, cycle, u.usageType);
     }
   }
-  
+
   var startRow = usageSheet.getLastRow() + 1;
   usageSheet.getRange(startRow, 1, rows.length, 12).setValues(rows);
-  
+
+  // Log routing summary
+  Logger.log('processCitizenUsageIntake_ v2.2: ' +
+    usages.length + ' processed, ' +
+    routed.newCitizens + ' new citizens routed to Intake, ' +
+    routed.ledgerUpdates + ' LifeHistory updates, ' +
+    routed.genericUpdates + ' EmergenceCount updates');
+
   return usages.length;
 }
 
@@ -428,11 +511,11 @@ function setupMediaIntakeV2() {
     created.push('Storyline_Intake');
   }
   
-  // 3. Citizen_Usage_Intake
+  // 3. Citizen_Usage_Intake (v2.2: added Age, Neighborhood, Occupation)
   var usageSheet = ss.getSheetByName('Citizen_Usage_Intake');
   if (!usageSheet) {
     usageSheet = ss.insertSheet('Citizen_Usage_Intake');
-    usageSheet.appendRow(['CitizenName', 'UsageType', 'Context', 'Reporter', 'Status']);
+    usageSheet.appendRow(['CitizenName', 'UsageType', 'Context', 'Reporter', 'Age', 'Neighborhood', 'Occupation', 'Status']);
     usageSheet.setFrozenRows(1);
     setupUsageValidation_(usageSheet);
     created.push('Citizen_Usage_Intake');
@@ -459,7 +542,7 @@ function setupMediaIntakeV2() {
     : 'All intake sheets already exist';
   
   Logger.log('setupMediaIntakeV2: ' + msg);
-  SpreadsheetApp.getUi().alert('Media Intake v2.1 Setup Complete\n\n' + msg);
+  SpreadsheetApp.getUi().alert('Media Intake v2.2 Setup Complete\n\n' + msg);
 }
 
 
@@ -502,13 +585,27 @@ function setupStorylineValidation_(sheet) {
 }
 
 function setupUsageValidation_(sheet) {
+  // v2.2: UsageType validation
   var types = SpreadsheetApp.newDataValidation()
     .requireValueInList(['mentioned', 'quoted', 'profiled', 'featured', 'background'])
     .build();
   sheet.getRange('B2:B100').setDataValidation(types);
-  
-  sheet.setColumnWidth(1, 150);
-  sheet.setColumnWidth(3, 250);
+
+  // v2.2: Neighborhood validation (12 Oakland neighborhoods)
+  var neighborhoods = SpreadsheetApp.newDataValidation()
+    .requireValueInList([
+      'Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt',
+      'West Oakland', 'Laurel', 'Rockridge', 'Jack London',
+      'Eastlake', 'Piedmont Ave', 'Grand Lake', 'Adams Point'
+    ])
+    .build();
+  sheet.getRange('F2:F100').setDataValidation(neighborhoods);
+
+  sheet.setColumnWidth(1, 150);  // CitizenName
+  sheet.setColumnWidth(3, 250);  // Context
+  sheet.setColumnWidth(5, 60);   // Age
+  sheet.setColumnWidth(6, 120);  // Neighborhood
+  sheet.setColumnWidth(7, 150);  // Occupation
 }
 
 function setupContinuityValidation_(sheet) {
@@ -592,6 +689,253 @@ function ensureContinuityLoop_(ss) {
     sheet.setColumnWidth(4, 300);
   }
   return sheet;
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// v2.2: CITIZEN ROUTING HELPER FUNCTIONS
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Check if citizen exists in Simulation_Ledger.
+ * Uses normalized name matching for consistency.
+ */
+function existsInLedgerMedia_(ledgerVals, first, last) {
+  if (ledgerVals.length < 2) return false;
+
+  var header = ledgerVals[0];
+  var idxFirst = header.indexOf('First');
+  var idxLast = header.indexOf('Last');
+
+  var normFirst = normalizeIdentityMedia_(first);
+  var normLast = normalizeIdentityMedia_(last);
+
+  for (var r = 1; r < ledgerVals.length; r++) {
+    var f = normalizeIdentityMedia_(ledgerVals[r][idxFirst]);
+    var l = normalizeIdentityMedia_(ledgerVals[r][idxLast]);
+    if (f === normFirst && l === normLast) return true;
+  }
+  return false;
+}
+
+
+/**
+ * Check if citizen exists in Generic_Citizens.
+ * Optionally matches neighborhood if provided.
+ */
+function existsInGenericCitizens_(genericVals, first, last, neighborhood) {
+  if (genericVals.length < 2) return false;
+
+  var header = genericVals[0];
+  var idxFirst = header.indexOf('First');
+  var idxLast = header.indexOf('Last');
+  var idxNeighborhood = header.indexOf('Neighborhood');
+
+  var normFirst = normalizeIdentityMedia_(first);
+  var normLast = normalizeIdentityMedia_(last);
+
+  for (var r = 1; r < genericVals.length; r++) {
+    var f = normalizeIdentityMedia_(genericVals[r][idxFirst]);
+    var l = normalizeIdentityMedia_(genericVals[r][idxLast]);
+
+    if (f === normFirst && l === normLast) {
+      // If neighborhood provided, match it too
+      if (neighborhood && idxNeighborhood >= 0) {
+        var n = (genericVals[r][idxNeighborhood] || '').toString().trim();
+        if (n !== neighborhood) continue;
+      }
+      return true;
+    }
+  }
+  return false;
+}
+
+
+/**
+ * Normalize identity string for consistent matching.
+ * Local version to avoid cross-file dependency.
+ */
+function normalizeIdentityMedia_(str) {
+  if (!str) return '';
+  return str.toString().toLowerCase().trim().replace(/\s+/g, ' ');
+}
+
+
+/**
+ * Calculate birth year from current age.
+ * Uses World_Config currentYear or defaults to 2041.
+ */
+function calculateBirthYear_(ss, age) {
+  if (!age) return '';
+  var currentYear = getCurrentYear_(ss);
+  return currentYear - Number(age);
+}
+
+
+/**
+ * Get current simulation year from World_Config.
+ */
+function getCurrentYear_(ss) {
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) return 2041;
+
+  var data = configSheet.getDataRange().getValues();
+  for (var i = 0; i < data.length; i++) {
+    if (data[i][0] === 'currentYear' || data[i][0] === 'simYear') {
+      return Number(data[i][1]) || 2041;
+    }
+  }
+  return 2041;
+}
+
+
+/**
+ * Detect if citizen is a civic figure based on context and occupation.
+ * Returns true if civic keywords found.
+ */
+function isCivicFigure_(context, occupation) {
+  var civicKeywords = [
+    'OPOA', 'Director', 'Chief', 'President', 'Commissioner',
+    'Coalition', 'Union Rep', 'Battalion', 'Councilmember',
+    'Mayor', 'Captain', 'Sergeant', 'Lieutenant', 'Superintendent',
+    'Board Member', 'Chairperson', 'Executive Director'
+  ];
+
+  var combined = ((context || '') + ' ' + (occupation || '')).toLowerCase();
+
+  for (var i = 0; i < civicKeywords.length; i++) {
+    if (combined.indexOf(civicKeywords[i].toLowerCase()) >= 0) {
+      return true;
+    }
+  }
+  return false;
+}
+
+
+/**
+ * Append to LifeHistory for existing Simulation_Ledger citizen.
+ */
+function appendLifeHistory_(ss, sheetName, first, last, cycle, context) {
+  var sheet = ss.getSheetByName(sheetName);
+  if (!sheet) return;
+
+  var data = sheet.getDataRange().getValues();
+  var header = data[0];
+  var idxFirst = header.indexOf('First');
+  var idxLast = header.indexOf('Last');
+  var idxHistory = header.indexOf('LifeHistory');
+
+  if (idxHistory < 0) return;
+
+  var normFirst = normalizeIdentityMedia_(first);
+  var normLast = normalizeIdentityMedia_(last);
+
+  for (var r = 1; r < data.length; r++) {
+    var f = normalizeIdentityMedia_(data[r][idxFirst]);
+    var l = normalizeIdentityMedia_(data[r][idxLast]);
+
+    if (f === normFirst && l === normLast) {
+      var existing = data[r][idxHistory] || '';
+      var dateStr = new Date().toISOString().split('T')[0];
+      var newEntry = '\n' + dateStr + ' — [Civic] quoted in media coverage re: ' + context;
+      sheet.getRange(r + 1, idxHistory + 1).setValue(existing + newEntry);
+      Logger.log('appendLifeHistory_: Updated ' + first + ' ' + last);
+      return;
+    }
+  }
+}
+
+
+/**
+ * Update EmergenceCount, EmergedCycle, and EmergenceContext for Generic_Citizens.
+ * Feeds into the promotion pipeline (EmergenceCount >= 3 triggers promotion eligibility).
+ */
+function updateGenericCitizenEmergence_(ss, first, last, neighborhood, cycle, context) {
+  var sheet = ss.getSheetByName('Generic_Citizens');
+  if (!sheet) return;
+
+  var data = sheet.getDataRange().getValues();
+  var header = data[0];
+  var idxFirst = header.indexOf('First');
+  var idxLast = header.indexOf('Last');
+  var idxNeigh = header.indexOf('Neighborhood');
+  var idxCount = header.indexOf('EmergenceCount');
+  var idxCycle = header.indexOf('EmergedCycle');
+  var idxContext = header.indexOf('EmergenceContext');
+
+  var normFirst = normalizeIdentityMedia_(first);
+  var normLast = normalizeIdentityMedia_(last);
+
+  for (var r = 1; r < data.length; r++) {
+    var f = normalizeIdentityMedia_(data[r][idxFirst]);
+    var l = normalizeIdentityMedia_(data[r][idxLast]);
+
+    if (f === normFirst && l === normLast) {
+      // Optional neighborhood match
+      if (neighborhood && idxNeigh >= 0) {
+        var n = (data[r][idxNeigh] || '').toString().trim();
+        if (n !== neighborhood) continue;
+      }
+
+      // Update EmergenceCount
+      if (idxCount >= 0) {
+        var count = Number(data[r][idxCount]) || 0;
+        sheet.getRange(r + 1, idxCount + 1).setValue(count + 1);
+      }
+
+      // Update EmergedCycle (optional column)
+      if (idxCycle >= 0) {
+        sheet.getRange(r + 1, idxCycle + 1).setValue(cycle);
+      }
+
+      // Update EmergenceContext (optional column)
+      if (idxContext >= 0) {
+        sheet.getRange(r + 1, idxContext + 1).setValue(context);
+      }
+
+      Logger.log('updateGenericCitizenEmergence_: Updated ' + first + ' ' + last + ' (count=' + (count + 1) + ')');
+      return;
+    }
+  }
+}
+
+
+/**
+ * Add new citizen to Intake sheet for processing into Simulation_Ledger.
+ * Sets OriginGame to 'Media Room' and CIV based on civic detection.
+ */
+function addToIntake_(ss, citizenData) {
+  var intake = ss.getSheetByName('Intake');
+  if (!intake) {
+    Logger.log('addToIntake_: Intake sheet not found');
+    return;
+  }
+
+  var header = intake.getRange(1, 1, 1, intake.getLastColumn()).getValues()[0];
+  var newRow = [];
+  for (var i = 0; i < header.length; i++) {
+    newRow.push('');
+  }
+
+  // Helper to set column value by name
+  var setCol = function(name, value) {
+    var idx = header.indexOf(name);
+    if (idx >= 0) newRow[idx] = value;
+  };
+
+  setCol('First', citizenData.first);
+  setCol('Last', citizenData.last);
+  setCol('BirthYear', citizenData.birthYear);
+  setCol('Neighborhood', citizenData.neighborhood);
+  setCol('RoleType', citizenData.roleType);
+  setCol('OriginGame', citizenData.originGame || 'Media Room');
+  setCol('CIV (y/n)', citizenData.civ || 'no');
+  setCol('Status', citizenData.status || 'Active');
+  setCol('OriginVault', 'Media Room');
+  setCol('Tier', '3'); // Default Tier-3 for media-discovered citizens
+
+  intake.appendRow(newRow);
+  Logger.log('addToIntake_: Added ' + citizenData.first + ' ' + citizenData.last + ' (CIV=' + citizenData.civ + ')');
 }
 
 
@@ -713,38 +1057,87 @@ function flagCitizenForTierReview_(ss, citizenName, cycle, usageType) {
 function upgradeMediaIntakeSheets() {
   var ss = SpreadsheetApp.openById(SIM_SSID);
   var upgraded = [];
-  
+
   // Upgrade Press_Drafts
   if (upgradeSheetWithCalendarColumns_(ss, 'Press_Drafts', 8)) {
     upgraded.push('Press_Drafts');
   }
-  
+
   // Upgrade Storyline_Tracker
   if (upgradeSheetWithCalendarColumns_(ss, 'Storyline_Tracker', 8)) {
     upgraded.push('Storyline_Tracker');
   }
-  
+
   // Upgrade Citizen_Media_Usage
   if (upgradeSheetWithCalendarColumns_(ss, 'Citizen_Media_Usage', 6)) {
     upgraded.push('Citizen_Media_Usage');
   }
-  
+
   // Upgrade Continuity_Loop
   if (upgradeSheetWithCalendarColumns_(ss, 'Continuity_Loop', 7)) {
     upgraded.push('Continuity_Loop');
   }
-  
+
   // Upgrade Media_Ledger (7 columns including Month)
   if (upgradeMediaLedgerWithCalendar_(ss)) {
     upgraded.push('Media_Ledger');
   }
-  
-  var msg = upgraded.length > 0 
+
+  // v2.2: Upgrade Citizen_Usage_Intake with new columns
+  if (upgradeCitizenUsageIntakeColumns_(ss)) {
+    upgraded.push('Citizen_Usage_Intake');
+  }
+
+  var msg = upgraded.length > 0
     ? 'Upgraded sheets: ' + upgraded.join(', ')
     : 'All sheets already have calendar columns';
-  
+
   Logger.log('upgradeMediaIntakeSheets: ' + msg);
   SpreadsheetApp.getUi().alert('Upgrade Complete\n\n' + msg);
+}
+
+
+/**
+ * v2.2: Upgrade Citizen_Usage_Intake with Age, Neighborhood, Occupation columns.
+ * Inserts new columns before Status column.
+ */
+function upgradeCitizenUsageIntakeColumns_(ss) {
+  var sheet = ss.getSheetByName('Citizen_Usage_Intake');
+  if (!sheet) return false;
+
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+
+  // Check if already upgraded
+  if (headers.indexOf('Age') >= 0) return false;
+
+  // Find Status column (should be column 5 in old format)
+  var statusIdx = headers.indexOf('Status');
+  if (statusIdx < 0) statusIdx = headers.length;
+
+  // Insert 3 columns before Status
+  sheet.insertColumnsBefore(statusIdx + 1, 3);
+
+  // Set new headers
+  sheet.getRange(1, statusIdx + 1, 1, 3).setValues([['Age', 'Neighborhood', 'Occupation']]);
+  sheet.getRange(1, statusIdx + 1, 1, 3).setFontWeight('bold');
+
+  // Set column widths
+  sheet.setColumnWidth(statusIdx + 1, 60);   // Age
+  sheet.setColumnWidth(statusIdx + 2, 120);  // Neighborhood
+  sheet.setColumnWidth(statusIdx + 3, 150);  // Occupation
+
+  // Add neighborhood validation
+  var neighborhoods = SpreadsheetApp.newDataValidation()
+    .requireValueInList([
+      'Temescal', 'Downtown', 'Fruitvale', 'Lake Merritt',
+      'West Oakland', 'Laurel', 'Rockridge', 'Jack London',
+      'Eastlake', 'Piedmont Ave', 'Grand Lake', 'Adams Point'
+    ])
+    .build();
+  sheet.getRange(2, statusIdx + 2, 99, 1).setDataValidation(neighborhoods);
+
+  Logger.log('upgradeCitizenUsageIntakeColumns_: Upgraded Citizen_Usage_Intake with Age, Neighborhood, Occupation');
+  return true;
 }
 
 
@@ -838,38 +1231,61 @@ function clearAllProcessedIntake() {
 
 /**
  * ============================================================================
- * MEDIA ROOM INTAKE REFERENCE v2.1
+ * MEDIA ROOM INTAKE REFERENCE v2.2
  * ============================================================================
- * 
+ *
+ * INPUT SHEET COLUMNS:
+ *
+ * Citizen_Usage_Intake (8 columns - v2.2):
+ * A: CitizenName
+ * B: UsageType (mentioned/quoted/profiled/featured/background)
+ * C: Context
+ * D: Reporter
+ * E: Age (NEW v2.2)
+ * F: Neighborhood (NEW v2.2)
+ * G: Occupation (NEW v2.2)
+ * H: Status
+ *
  * OUTPUT SHEET COLUMNS:
- * 
+ *
  * Press_Drafts (14):
  * A-H: Original columns
  * I-N: Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason
- * 
+ *
  * Storyline_Tracker (14):
  * A-H: Original columns
  * I-N: Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason
- * 
+ *
  * Citizen_Media_Usage (12):
  * A-F: Original columns
  * G-L: Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason
- * 
+ *
  * Continuity_Loop (13):
  * A-G: Original columns
  * H-M: Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason
- * 
+ *
  * Media_Ledger (32):
  * A-Y: Original columns (25)
  * Z-AF: Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason, Month
- * 
- * NEW VALIDATION OPTIONS:
- * - StoryTypes: holiday, festival
- * - SignalSources: holiday, first-friday, creation-day, championship, playoffs
- * - StorylineTypes: seasonal, festival, sports
- * - ContinuityTypes: seasonal
- * 
- * UPGRADE: Run upgradeMediaIntakeSheets() once to add calendar columns to existing sheets
- * 
+ *
+ * v2.2 ROUTING LOGIC:
+ *
+ * When processCitizenUsageIntake_() runs:
+ * 1. Parses CitizenName into First + Last
+ * 2. Checks existence in Simulation_Ledger and Generic_Citizens
+ * 3. Routes based on existence:
+ *    - NEW citizen → Intake sheet (with CIV flag if civic figure)
+ *    - Existing in Simulation_Ledger → LifeHistory append
+ *    - Existing in Generic_Citizens → EmergenceCount increment
+ * 4. All citizens → Citizen_Media_Usage (existing behavior)
+ * 5. profiled/featured → flagCitizenForTierReview_() (existing behavior)
+ *
+ * EMERGENCE → TIER ADVANCEMENT PIPELINE:
+ * - EmergenceCount >= 3 in Generic_Citizens triggers promotion eligibility
+ * - checkForPromotions_() promotes eligible citizens to Simulation_Ledger (Tier-3)
+ * - Base 20% promotion chance with calendar modifiers
+ *
+ * UPGRADE: Run upgradeMediaIntakeSheets() once to add new columns to existing sheets
+ *
  * ============================================================================
  */

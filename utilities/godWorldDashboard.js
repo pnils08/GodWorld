@@ -230,7 +230,11 @@ function createGodWorldDashboard() {
   ss.moveActiveSheet(1);
 
   Logger.log('createGodWorldDashboard v1.5: Dashboard created with uniform styling');
-  SpreadsheetApp.getUi().alert('✅ Dashboard v1.5 created!');
+  try {
+    SpreadsheetApp.getUi().alert('✅ Dashboard v1.5 created!');
+  } catch (e) {
+    // UI not available when run from trigger/programmatically
+  }
 }
 
 
@@ -242,7 +246,10 @@ function refreshDashboard() {
   var dash = ss.getSheetByName('Dashboard');
 
   if (!dash) {
-    SpreadsheetApp.getUi().alert('Dashboard not found. Run createGodWorldDashboard() first.');
+    Logger.log('Dashboard not found. Run createGodWorldDashboard() first.');
+    try {
+      SpreadsheetApp.getUi().alert('Dashboard not found. Run createGodWorldDashboard() first.');
+    } catch (e) {}
     return;
   }
 

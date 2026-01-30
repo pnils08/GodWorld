@@ -1659,6 +1659,17 @@ function manualRunVote(initiativeId) {
   return { error: 'No result returned from vote resolution' };
 }
 
+/**
+ * Wrapper to run manualRunVote from Apps Script editor.
+ * Change the initiative ID below and run this function.
+ */
+function runVoteForInitiative() {
+  var initiativeId = 'INIT-001';  // <-- Change this ID as needed
+  var result = manualRunVote(initiativeId);
+  Logger.log(JSON.stringify(result, null, 2));
+  return result;
+}
+
 function seedInitiativeTracker_() {
   
   var ss = SpreadsheetApp.getActiveSpreadsheet();

@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * civicInitiativeEngine_ v1.3
+ * civicInitiativeEngine_ v1.4
  * ============================================================================
  *
  * Tracks civic initiatives and resolves votes/outcomes when cycles match.
+ *
+ * v1.4 Changes:
+ * - Added manualRunVote(initiativeId) for on-demand vote execution
+ * - Manual votes bypass cycle checks but respect resolution guards
+ * - Notes prefixed with "MANUAL" to distinguish from automatic processing
  *
  * v1.3 Changes:
  * - Integrated Tier 3 Neighborhood Demographics into vote resolution
@@ -267,7 +272,7 @@ function runCivicInitiativeEngine_(ctx) {
     demographicsAvailable: Object.keys(neighborhoodDemographics).length > 0
   };
 
-  Logger.log('civicInitiativeEngine v1.3: Processed ' + S.initiativeEvents.length +
+  Logger.log('civicInitiativeEngine v1.4: Processed ' + S.initiativeEvents.length +
              ' initiatives | Votes: ' + S.votesThisCycle.length +
              ' | Grants: ' + S.grantsThisCycle.length +
              ' | Demographics: ' + (Object.keys(neighborhoodDemographics).length > 0 ? 'active' : 'unavailable'));
@@ -1444,6 +1449,216 @@ function seedInitiativeTracker() {
   seedInitiativeTracker_();
 }
 
+
+/**
+ * ============================================================================
+ * MANUAL VOTE EXECUTION
+ * ============================================================================
+ * Run this from the script editor to manually trigger a vote for a specific
+ * initiative, bypassing the cycle check.
+ *
+ * Usage: manualRunVote('INIT-001')
+ *
+ * SAFETY:
+ * - Will NOT process already-resolved initiatives (passed/failed/resolved)
+ * - Logs results to console
+ * - Updates the sheet like normal cycle processing would
+ */
+function manualRunVote(initiativeId) {
+  if (!initiativeId) {
+    Logger.log('manualRunVote: Please provide an initiative ID (e.g., "INIT-001")');
+    return { error: 'No initiative ID provided' };
+  }
+
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('Initiative_Tracker');
+
+  if (!sheet) {
+    Logger.log('manualRunVote: Initiative_Tracker sheet not found');
+    return { error: 'Initiative_Tracker not found' };
+  }
+
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) {
+    Logger.log('manualRunVote: No initiatives in tracker');
+    return { error: 'No initiatives found' };
+  }
+
+  var header = data[0];
+  var rows = data.slice(1);
+
+  var idx = function(name) { return header.indexOf(name); };
+
+  var iID = idx('InitiativeID');
+  var iName = idx('Name');
+  var iType = idx('Type');
+  var iStatus = idx('Status');
+  var iVoteCycle = idx('VoteCycle');
+  var iProjection = idx('Projection');
+  var iSwingVoter = idx('SwingVoter');
+  var iSwingVoter2 = idx('SwingVoter2');
+  var iSwingVoter2Lean = idx('SwingVoter2Lean');
+  var iOutcome = idx('Outcome');
+  var iConsequences = idx('Consequences');
+  var iNotes = idx('Notes');
+  var iLastUpdated = idx('LastUpdated');
+  var iAffectedNeighborhoods = idx('AffectedNeighborhoods');
+
+  // Find the initiative
+  var targetRow = -1;
+  for (var r = 0; r < rows.length; r++) {
+    if (rows[r][iID] === initiativeId) {
+      targetRow = r;
+      break;
+    }
+  }
+
+  if (targetRow < 0) {
+    Logger.log('manualRunVote: Initiative "' + initiativeId + '" not found');
+    return { error: 'Initiative not found: ' + initiativeId };
+  }
+
+  var row = rows[targetRow];
+  var name = row[iName] || 'Unknown';
+  var status = (row[iStatus] || '').toString().toLowerCase();
+  var type = (row[iType] || 'vote').toString().toLowerCase();
+
+  // Check if already resolved
+  if (status === 'resolved' || status === 'passed' || status === 'failed' || status === 'inactive') {
+    Logger.log('manualRunVote: Initiative "' + initiativeId + '" already resolved (status: ' + status + ')');
+    return { error: 'Already resolved', status: status, outcome: row[iOutcome] };
+  }
+
+  // Build minimal context
+  var now = new Date();
+  var configSheet = ss.getSheetByName('Simulation_Config');
+  var cycleCount = 0;
+  if (configSheet) {
+    var configData = configSheet.getDataRange().getValues();
+    for (var c = 0; c < configData.length; c++) {
+      if (configData[c][0] === 'cycleCount') {
+        cycleCount = Number(configData[c][1]) || 0;
+        break;
+      }
+    }
+  }
+
+  var ctx = {
+    ss: ss,
+    now: now,
+    config: { cycleCount: cycleCount },
+    summary: {
+      cycleId: cycleCount,
+      cityDynamics: { sentiment: 0 },
+      initiativeEvents: [],
+      votesThisCycle: [],
+      grantsThisCycle: []
+    }
+  };
+
+  // Try to get actual sentiment from City_Dynamics
+  var dynamicsSheet = ss.getSheetByName('City_Dynamics');
+  if (dynamicsSheet) {
+    var dynData = dynamicsSheet.getDataRange().getValues();
+    for (var d = 0; d < dynData.length; d++) {
+      if (dynData[d][0] === 'Sentiment' || dynData[d][0] === 'sentiment') {
+        ctx.summary.cityDynamics.sentiment = Number(dynData[d][1]) || 0;
+        break;
+      }
+    }
+  }
+
+  // Get council state
+  var councilState = getCouncilState_(ctx);
+  var sentiment = ctx.summary.cityDynamics.sentiment;
+
+  // Load neighborhood demographics
+  var neighborhoodDemographics = {};
+  if (typeof getNeighborhoodDemographics_ === 'function') {
+    neighborhoodDemographics = getNeighborhoodDemographics_(ss);
+  }
+
+  // Prepare swing voter info
+  var swingVoter = row[iSwingVoter] || '';
+  var swingVoter2 = iSwingVoter2 >= 0 ? (row[iSwingVoter2] || '') : '';
+  var swingVoter2Lean = iSwingVoter2Lean >= 0 ? (row[iSwingVoter2Lean] || '') : '';
+
+  var swingInfo = {
+    primary: swingVoter,
+    secondary: swingVoter2,
+    secondaryLean: swingVoter2Lean
+  };
+
+  // Prepare affected neighborhoods
+  var affectedNeighborhoods = [];
+  if (iAffectedNeighborhoods >= 0 && row[iAffectedNeighborhoods]) {
+    affectedNeighborhoods = String(row[iAffectedNeighborhoods]).split(',').map(function(n) {
+      return n.trim();
+    }).filter(function(n) { return n !== ''; });
+  }
+
+  var demoContext = {
+    demographics: neighborhoodDemographics,
+    affectedNeighborhoods: affectedNeighborhoods,
+    initiativeType: type,
+    initiativeName: name
+  };
+
+  // Resolve the vote based on type
+  var result;
+  if (type === 'vote' || type === 'council-vote') {
+    result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext);
+  } else if (type === 'grant' || type === 'federal-grant' || type === 'external') {
+    result = resolveExternalDecision_(ctx, row, header, sentiment);
+  } else if (type === 'visioning' || type === 'input') {
+    result = resolveVisioningPhase_(ctx, row, header);
+  } else {
+    result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext);
+  }
+
+  // Update the row
+  if (result) {
+    row[iStatus] = result.status;
+    row[iOutcome] = result.outcome;
+    row[iConsequences] = result.consequences;
+    row[iLastUpdated] = now;
+
+    if (iNotes >= 0 && result.notes) {
+      var existingNotes = row[iNotes] || '';
+      row[iNotes] = existingNotes + (existingNotes ? '\n' : '') +
+                    'MANUAL Cycle ' + cycleCount + ': ' + result.notes;
+    }
+
+    // Write back to sheet (row index is 0-based in rows array, +2 for header and 1-based)
+    sheet.getRange(targetRow + 2, 1, 1, row.length).setValues([row]);
+
+    // Apply consequences
+    applyInitiativeConsequences_(ctx, result, name, type);
+
+    Logger.log('═══════════════════════════════════════════════════════════════');
+    Logger.log('manualRunVote: ' + initiativeId + ' — ' + name);
+    Logger.log('Type: ' + type);
+    Logger.log('Outcome: ' + result.outcome + ' (' + (result.voteCount || 'N/A') + ')');
+    Logger.log('Swing Voters: ' + JSON.stringify(result.swingVoters || []));
+    Logger.log('Consequences: ' + result.consequences);
+    Logger.log('Notes: ' + result.notes);
+    Logger.log('═══════════════════════════════════════════════════════════════');
+
+    return {
+      success: true,
+      initiativeId: initiativeId,
+      name: name,
+      type: type,
+      outcome: result.outcome,
+      voteCount: result.voteCount,
+      swingVoters: result.swingVoters,
+      notes: result.notes
+    };
+  }
+
+  return { error: 'No result returned from vote resolution' };
+}
+
 function seedInitiativeTracker_() {
   
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -1567,8 +1782,16 @@ function getInitiativeSummaryForMedia_(ctx) {
 
 /**
  * ============================================================================
- * REFERENCE v1.3
+ * REFERENCE v1.4
  * ============================================================================
+ *
+ * MANUAL VOTE EXECUTION (v1.4):
+ * - manualRunVote('INIT-001') — Force a vote on any initiative
+ * - Bypasses cycle check but respects already-resolved guards
+ * - Builds context automatically (council state, sentiment, demographics)
+ * - Notes prefixed with "MANUAL Cycle X:" for audit trail
+ * - Returns result object with outcome, voteCount, swingVoters
+ * - Will NOT double-process passed/failed/resolved initiatives
  *
  * v1.3 DEMOGRAPHIC INTEGRATION:
  * - Reads Neighborhood_Demographics for affected areas

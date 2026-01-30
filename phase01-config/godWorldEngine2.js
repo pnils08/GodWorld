@@ -170,6 +170,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-EnsureEventsLedger', function() { ensureWorldEventsLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase5-EnsureMediaLedger', function() { ensureMediaLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase5-EnsureEventsV3', function() { ensureWorldEventsV3Ledger_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-EnsureBonds', function() { ensureRelationshipBondSchemas_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-LoadBonds', function() { loadRelationshipBonds_(ctx); });
   safePhaseCall_(ctx, 'Phase5-SeedBonds', function() { seedRelationshipBonds_(ctx); });
@@ -185,6 +186,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Household', function() { runHouseholdEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Generational', function() { runGenerationalEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Youth', function() { runYouthEngine_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-EventArc', function() { eventArcEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Bonds', function() { runBondEngine_(ctx); });

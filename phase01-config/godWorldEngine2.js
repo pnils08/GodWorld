@@ -140,6 +140,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 3: POPULATION + CRISIS
@@ -148,6 +149,8 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase3-Demographics', function() { applyDemographicDrift_(ctx); });
   safePhaseCall_(ctx, 'Phase3-CrisisSpikes', function() { generateCrisisSpikes_(ctx); });
   safePhaseCall_(ctx, 'Phase3-CrisisBuckets', function() { generateCrisisBuckets_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-Crime', function() { updateCrimeMetrics_Phase3_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-NeighborhoodDemo', function() { updateNeighborhoodDemographics_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 4: RECOVERY + WORLD EVENTS
@@ -155,6 +158,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase4-CycleRecovery', function() { applyCycleRecovery_(ctx); });
   safePhaseCall_(ctx, 'Phase4-DomainCooldowns', function() { applyDomainCooldowns_(ctx); });
   safePhaseCall_(ctx, 'Phase4-WorldEvents', function() { worldEventsEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase4-FaithEvents', function() { runFaithEventsEngine_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 5: CITIZENS + RELATIONSHIPS

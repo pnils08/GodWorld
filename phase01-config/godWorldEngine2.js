@@ -1,7 +1,14 @@
 /**
  * ============================================================================
- * GOD WORLD ENGINE v2.11
+ * GOD WORLD ENGINE v2.12
  * ============================================================================
+ *
+ * v2.12 Changes:
+ * - Wired up cycle modes (dry-run, replay) from utilities/cycleModes.js
+ * - Calls initializeModeFlags_() and initializeSeededRng_() at cycle start
+ * - Calls saveCycleSeed_() in Phase 10 for replay capability
+ * - Added runDryRunCycle() wrapper for testing without writes
+ * - Added replayCycle(cycleId) wrapper for deterministic replay
  *
  * v2.11 Changes:
  * - Identity normalization in existsInLedger_() prevents duplicates
@@ -123,6 +130,10 @@ function runWorldCycle() {
       auditIssues: []
     }
   };
+
+  // v2.12: Initialize mode flags and seeded RNG for replay/dry-run support
+  initializeModeFlags_(ctx);
+  initializeSeededRng_(ctx);
 
   try {
   // ═══════════════════════════════════════════════════════════
@@ -271,6 +282,9 @@ function runWorldCycle() {
 
   // Media Ledger - records cultural entity media mentions (uses ctx.summary.mediaIntake from buildMediaPacket_)
   safePhaseCall_(ctx, 'Phase10-MediaLedger', function() { recordMediaLedger_(ctx); });
+
+  // v2.12: Save cycle seed for replay capability
+  safePhaseCall_(ctx, 'Phase10-CycleSeed', function() { saveCycleSeed_(ctx); });
 
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
@@ -1096,4 +1110,284 @@ function applyCycleWeightForLatestCycle_(ctx) {
 
   // CycleWeight column = 7 (G)
   sheet.getRange(lastRow, 7).setValue(weight);
+}
+
+
+/**
+ * ============================================================================
+ * DRY-RUN CYCLE (v2.12)
+ * ============================================================================
+ * Runs a full cycle without writing to sheets.
+ * All intents are logged but not executed.
+ * Use this to test cycle logic without side effects.
+ *
+ * Usage (from Apps Script editor):
+ *   runDryRunCycle()
+ *
+ * Returns: Intent summary showing what would have been written
+ */
+function runDryRunCycle() {
+  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
+
+  var ss, ctx;
+
+  try {
+    ss = SpreadsheetApp.openById(SIM_SSID);
+  } catch (e) {
+    Logger.log('FATAL: Cannot open spreadsheet: ' + e.message);
+    throw e;
+  }
+
+  var now = new Date();
+  var cache = createSheetCache_(ss);
+
+  ctx = {
+    ss: ss,
+    cache: cache,
+    now: now,
+    config: {},
+    summary: {
+      cycleId: null,
+      intakeProcessed: 0,
+      citizensUpdated: 0,
+      eventsGenerated: 0,
+      auditIssues: []
+    }
+  };
+
+  // Enable dry-run mode
+  initializeDryRunMode_(ctx);
+  initializeSeededRng_(ctx);
+
+  Logger.log('═══════════════════════════════════════════════════════════');
+  Logger.log('DRY-RUN CYCLE STARTED');
+  Logger.log('═══════════════════════════════════════════════════════════');
+
+  // Run the cycle (writes will be logged but not executed)
+  runCyclePhases_(ctx);
+
+  // Get intent summary
+  var summary = getIntentSummary_(ctx);
+
+  Logger.log('═══════════════════════════════════════════════════════════');
+  Logger.log('DRY-RUN COMPLETE - Intent Summary:');
+  Logger.log('  Updates: ' + summary.updateCount);
+  Logger.log('  Logs: ' + summary.logCount);
+  Logger.log('  Replaces: ' + summary.replaceCount);
+  Logger.log('  Sheets affected: ' + summary.sheetsAffected.join(', '));
+  Logger.log('═══════════════════════════════════════════════════════════');
+
+  return summary;
+}
+
+
+/**
+ * ============================================================================
+ * REPLAY CYCLE (v2.12)
+ * ============================================================================
+ * Re-runs a past cycle using the same seed for deterministic output.
+ * Compares output to original cycle checksum.
+ * Use this to verify cycle logic is deterministic.
+ *
+ * Usage (from Apps Script editor):
+ *   replayCycle(75)  // Replay cycle 75
+ *
+ * @param {number} cycleId - The cycle ID to replay
+ * @returns {Object} Comparison result with match status
+ */
+function replayCycle(cycleId) {
+  if (!cycleId || typeof cycleId !== 'number') {
+    Logger.log('ERROR: replayCycle requires a numeric cycleId');
+    return { error: 'Invalid cycleId' };
+  }
+
+  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
+
+  var ss, ctx;
+
+  try {
+    ss = SpreadsheetApp.openById(SIM_SSID);
+  } catch (e) {
+    Logger.log('FATAL: Cannot open spreadsheet: ' + e.message);
+    throw e;
+  }
+
+  var now = new Date();
+  var cache = createSheetCache_(ss);
+
+  ctx = {
+    ss: ss,
+    cache: cache,
+    now: now,
+    config: {},
+    summary: {
+      cycleId: null,
+      intakeProcessed: 0,
+      citizensUpdated: 0,
+      eventsGenerated: 0,
+      auditIssues: []
+    }
+  };
+
+  // Enable replay mode for the specified cycle
+  initializeReplayMode_(ctx, cycleId);
+
+  Logger.log('═══════════════════════════════════════════════════════════');
+  Logger.log('REPLAY CYCLE ' + cycleId + ' STARTED');
+  Logger.log('Using seed: ' + (ctx.replaySeed ? ctx.replaySeed.seed : cycleId));
+  Logger.log('═══════════════════════════════════════════════════════════');
+
+  // Run the cycle (writes will be logged but not executed)
+  runCyclePhases_(ctx);
+
+  // Compare output to original
+  var comparison = compareReplayOutput_(ctx);
+
+  Logger.log('═══════════════════════════════════════════════════════════');
+  Logger.log('REPLAY COMPLETE - Comparison Result:');
+  Logger.log('  Match: ' + (comparison.match ? 'YES ✓' : 'NO ✗'));
+  if (!comparison.match && comparison.differences) {
+    Logger.log('  Differences:');
+    for (var i = 0; i < comparison.differences.length; i++) {
+      Logger.log('    - ' + comparison.differences[i]);
+    }
+  }
+  Logger.log('═══════════════════════════════════════════════════════════');
+
+  return comparison;
+}
+
+
+/**
+ * ============================================================================
+ * RUN CYCLE PHASES (v2.12 - internal helper)
+ * ============================================================================
+ * Extracted cycle phase execution for reuse by wrapper functions.
+ * @param {Object} ctx - Engine context
+ */
+function runCyclePhases_(ctx) {
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 1: CORE TIME + CONFIG
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase1-LoadConfig', function() { loadConfig_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 2: WORLD STATE
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 3: POPULATION + CRISIS
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase3-Population', function() { updateWorldPopulation_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-Demographics', function() { applyDemographicDrift_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-CrisisSpikes', function() { generateCrisisSpikes_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-CrimeMetrics', function() { generateCrimeMetrics_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-Faith', function() { runFaithEventsEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-Youth', function() { runYouthEngine_(ctx); });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 4: INITIATIVES + VOTING
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase4-CivicInitiatives', function() { runCivicInitiativeEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase4-BondEngine', function() { runBondEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase4-ArcGen', function() { generateNewStoryArcs_(ctx); });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 5: CITIZENS
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase5-Intake', function() { processIntakeV3_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-GenerationalEvents', function() { runGenerationalEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-AsUniverse', function() { runAsUniversePipeline_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-CivicRole', function() { runCivicRoleEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Relationships', function() { runRelationshipEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Neighborhood', function() { runNeighborhoodEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Household', function() { runHouseholdEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-CivicElections', function() { runCivicElections_(ctx); });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 6: EVENT PROCESSING + ANALYSIS
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase6-FilterNoise', function() { filterNoiseEvents_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-Prioritize', function() { prioritizeEvents_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-Spotlights', function() { applyNamedCitizenSpotlights_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-CivicLoad', function() { applyCivicLoadIndicator_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-EconomicRipple', function() { runEconomicRippleEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-Migration', function() { applyMigrationDrift_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-PatternDetect', function() { applyPatternDetection_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-ShockMonitor', function() { applyShockMonitor_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-ArcLifecycle', function() { processArcLifecycle_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-StorylineStatus', function() { updateStorylineStatus_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-Textures', function() { textureTriggerEngine_(ctx); });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 7: EVENING + MEDIA SYSTEMS
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-Famous', function() { buildEveningFamous_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-Food', function() { buildEveningFood_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-CityEvents', function() { buildCityEvents_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-Nightlife', function() { buildNightlife_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-Sports', function() { buildEveningSportsAndStreaming_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-MediaFeedback', function() { runMediaFeedbackEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-SeasonalSeeds', function() { applySeasonalStorySeeds_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-ChaosWeights', function() { applyChaosCategoryWeights_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-StorySeeds', function() { applyStorySeeds_(ctx); });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 8: V3 INTEGRATION + CHICAGO
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-ChicagoCitizens', function() { generateChicagoCitizens_(ctx); });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 9: FINAL ANALYSIS + DIGEST
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase9-DigestSummary', function() { applyCompressedDigestSummary_(ctx); });
+  safePhaseCall_(ctx, 'Phase9-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
+  safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });
+  safePhaseCall_(ctx, 'Phase9-FinalizeCycleState', function() { finalizeCycleState_(ctx); });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 10: PERSISTENCE
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase10-WriteDigest', function() { writeDigest_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-CycleWeather', function() { recordCycleWeather_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-RecordEvents25', function() { recordWorldEvents25_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-RecordEventsV3', function() { recordWorldEventsv3_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-NeighborhoodMap', function() { saveV3NeighborhoodMap_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-Arcs', function() { saveV3ArcsToLedger_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-Bonds', function() { saveRelationshipBonds_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-Domains', function() { saveV3Domains_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-Seeds', function() { saveV3Seeds_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-Hooks', function() { saveV3Hooks_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-Textures', function() { saveV3Textures_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-Chicago', function() { saveV3Chicago_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-CyclePacket', function() { buildCyclePacket_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-MediaLedger', function() { recordMediaLedger_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-CycleSeed', function() { saveCycleSeed_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
+
+  // Flush cache
+  if (ctx.cache) {
+    try {
+      ctx.cache.flush();
+    } catch (e) {
+      Logger.log('Cache flush error: ' + e.message);
+    }
+  }
 }

@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * BOND ENGINE V2.4
+ * BOND ENGINE V2.5
  * ============================================================================
  *
  * Manages citizen relationships with calendar awareness.
+ *
+ * v2.5 Fixes:
+ * - Added Simulation_Ledger fallback when Citizen_Directory doesn't exist
+ * - New ctx.citizenIdToName map for ID-to-name resolution
+ * - Ensures citizenLookup is populated even without Citizen_Directory sheet
  *
  * v2.4 Fixes:
  * - Citizen name/id resolver: handles id-based sources correctly
@@ -390,6 +395,7 @@ function ensureBondEngineData_(ctx) {
   // ─────────────────────────────────────────────────────────────
   if (!ctx.citizenLookup || Object.keys(ctx.citizenLookup).length === 0) {
     ctx.citizenLookup = {};
+    ctx.citizenIdToName = {};  // v2.5: ID-to-name lookup
 
     // Try to load from Citizen_Directory sheet
     try {
@@ -429,6 +435,60 @@ function ensureBondEngineData_(ctx) {
       }
     } catch (e) {
       Logger.log('ensureBondEngineData_: Error loading Citizen_Directory - ' + e.message);
+    }
+
+    // v2.5: Fallback to Simulation_Ledger if no citizens loaded
+    if (Object.keys(ctx.citizenLookup).length === 0) {
+      try {
+        var ledgerSheet = ctx.ss.getSheetByName('Simulation_Ledger');
+        if (ledgerSheet) {
+          var ledgerData = ledgerSheet.getDataRange().getValues();
+          if (ledgerData.length > 1) {
+            var lh = ledgerData[0];
+            var lFirst = findColIndex_(lh, ['First']);
+            var lLast = findColIndex_(lh, ['Last']);
+            var lNH = findColIndex_(lh, ['Neighborhood']);
+            var lTier = findColIndex_(lh, ['Tier', 'TierRole']);
+            var lUNI = findColIndex_(lh, ['UNI (y/n)', 'UNI']);
+            var lMED = findColIndex_(lh, ['MED (y/n)', 'MED']);
+            var lCIV = findColIndex_(lh, ['CIV (y/n)', 'CIV']);
+            var lOcc = findColIndex_(lh, ['Occupation', 'RoleType']);
+            var lStatus = findColIndex_(lh, ['Status']);
+            var lPopId = findColIndex_(lh, ['POPID']);
+
+            for (var lr = 1; lr < ledgerData.length; lr++) {
+              var lrow = ledgerData[lr];
+              var status = lStatus >= 0 ? String(lrow[lStatus] || '').toLowerCase() : 'active';
+              if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
+
+              var first = lFirst >= 0 ? (lrow[lFirst] || '').toString().trim() : '';
+              var last = lLast >= 0 ? (lrow[lLast] || '').toString().trim() : '';
+              var fullName = (first + ' ' + last).trim();
+              if (!fullName) continue;
+
+              var popId = lPopId >= 0 ? (lrow[lPopId] || '').toString().trim() : '';
+
+              ctx.citizenLookup[fullName] = {
+                Name: fullName,
+                Neighborhood: lNH >= 0 ? (lrow[lNH] || '').toString().trim() : '',
+                TierRole: lTier >= 0 ? (lrow[lTier] || '').toString().trim() : '',
+                UNI: lUNI >= 0 ? (lrow[lUNI] || '').toString().trim() : '',
+                MED: lMED >= 0 ? (lrow[lMED] || '').toString().trim() : '',
+                CIV: lCIV >= 0 ? (lrow[lCIV] || '').toString().trim() : '',
+                Occupation: lOcc >= 0 ? (lrow[lOcc] || '').toString().trim() : ''
+              };
+
+              // v2.5: Build ID-to-name map
+              if (popId) {
+                ctx.citizenIdToName[popId] = fullName;
+              }
+            }
+            diagnostics.sources.push('Simulation_Ledger');
+          }
+        }
+      } catch (e2) {
+        Logger.log('ensureBondEngineData_: Error loading Simulation_Ledger fallback - ' + e2.message);
+      }
     }
   }
 
@@ -1451,8 +1511,12 @@ function diagnoseBondEngine() {
 
 /**
  * ============================================================================
- * BOND ENGINE REFERENCE v2.4
+ * BOND ENGINE REFERENCE v2.5
  * ============================================================================
+ *
+ * v2.5 FIXES:
+ * - Simulation_Ledger fallback for citizenLookup when Citizen_Directory missing
+ * - ctx.citizenIdToName map for POPID→Name resolution
  *
  * v2.4 FIXES:
  * - Citizen name/id resolver handles mixed sources

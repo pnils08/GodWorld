@@ -175,6 +175,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-Universe', function() { runAsUniversePipeline_(ctx); });
   safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Elections', function() { runCivicElections_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });

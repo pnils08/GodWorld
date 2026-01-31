@@ -148,6 +148,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase3-Demographics', function() { applyDemographicDrift_(ctx); });
   safePhaseCall_(ctx, 'Phase3-CrisisSpikes', function() { generateCrisisSpikes_(ctx); });
   safePhaseCall_(ctx, 'Phase3-CrisisBuckets', function() { generateCrisisBuckets_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-CrimeMetrics', function() { updateCrimeMetrics_Phase3_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 4: RECOVERY + WORLD EVENTS

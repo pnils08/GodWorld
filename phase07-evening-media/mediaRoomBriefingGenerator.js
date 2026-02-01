@@ -1,7 +1,14 @@
 /**
  * ============================================================================
- * MEDIA ROOM BRIEFING v2.3 — ROSTER INTEGRATION
+ * MEDIA ROOM BRIEFING v2.4 — CITIZEN SPOTLIGHT INTEGRATION
  * ============================================================================
+ *
+ * v2.4 Enhancements:
+ * - Section 14: CITIZEN SPOTLIGHT for interview candidates
+ * - TraitProfile consumption: archetypes inform interview suggestions
+ * - Domain-to-archetype mapping for story-citizen matching
+ * - Neighborhood-filtered candidate recommendations
+ * - Tone-aware suggestions matching story mood
  *
  * v2.3 Enhancements:
  * - BayTribune Roster integration via rosterLookup.js
@@ -661,14 +668,29 @@ function generateMediaBriefing_(ctx) {
   briefing.push('');
   
   // ═══════════════════════════════════════════════════════════════════════════
-  // SECTION 14: CULTURAL INDEX TEMPLATE
+  // v2.4: SECTION 14: CITIZEN SPOTLIGHT
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  briefing.push('## 14. CULTURAL INDEX TEMPLATE');
+
+  briefing.push('## 14. CITIZEN SPOTLIGHT');
+  briefing.push('');
+  briefing.push('Interview candidates matching current story angles:');
+  briefing.push('');
+
+  var citizenSpotlight = generateCitizenSpotlight_(ctx, S, cal);
+  for (var csi = 0; csi < citizenSpotlight.length; csi++) {
+    briefing.push(citizenSpotlight[csi]);
+  }
+  briefing.push('');
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SECTION 15: CULTURAL INDEX TEMPLATE
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  briefing.push('## 15. CULTURAL INDEX TEMPLATE');
   briefing.push('');
   briefing.push('When filing articles, include Cultural Index in this format:');
   briefing.push('');
-  briefing.push('14. CULTURAL INDEX');
+  briefing.push('15. CULTURAL INDEX');
   briefing.push('- Name (role) @ Neighborhood');
   briefing.push('- Name (role) @ Neighborhood');
   briefing.push('');
@@ -716,7 +738,7 @@ function generateMediaBriefing_(ctx) {
     
     // v2.1.1 FIX: Prefix with ' to prevent #ERROR from = signs
     sheet.appendRow([new Date(), cycle, cal.holiday, cal.holidayPriority, cal.sportsSeason, civic.electionWindow, "'" + output]);
-    Logger.log('generateMediaBriefing_ v2.2: Briefing generated for Cycle ' + cycle + ' | Holiday: ' + cal.holiday + ' | Election: ' + civic.electionWindow);
+    Logger.log('generateMediaBriefing_ v2.4: Briefing generated for Cycle ' + cycle + ' | Holiday: ' + cal.holiday + ' | Election: ' + civic.electionWindow);
     
   } catch (e) {
     Logger.log('generateMediaBriefing_ error: ' + e.message);
@@ -724,6 +746,123 @@ function generateMediaBriefing_(ctx) {
   
   ctx.summary.mediaBriefing = output;
   return output;
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// v2.4: CITIZEN SPOTLIGHT HELPER
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Generates citizen interview suggestions organized by neighborhood and archetype
+ */
+function generateCitizenSpotlight_(ctx, S, cal) {
+  var lines = [];
+  var citizenLookup = ctx.citizenLookup || {};
+  var popIds = Object.keys(citizenLookup);
+
+  if (popIds.length === 0) {
+    lines.push('(No citizen data available for spotlight)');
+    return lines;
+  }
+
+  // Archetype-to-story type mapping
+  var ARCHETYPE_ANGLES = {
+    'Connector': 'community voice, network insights',
+    'Watcher': 'observational perspective, thoughtful analysis',
+    'Striver': 'career/business angle, ambition profile',
+    'Anchor': 'stability perspective, neighborhood history',
+    'Catalyst': 'change agent, disruptor profile',
+    'Caretaker': 'service angle, community support',
+    'Drifter': 'outsider perspective'
+  };
+
+  // Group citizens by neighborhood
+  var byNeighborhood = {};
+
+  for (var i = 0; i < popIds.length; i++) {
+    var popId = popIds[i];
+    var citizen = citizenLookup[popId];
+    if (!citizen) continue;
+
+    // Only include Tier 3-4 citizens with TraitProfiles
+    if (citizen.Tier < 3 || !citizen.TraitProfile) continue;
+
+    var nh = citizen.Neighborhood || 'Unknown';
+    if (!byNeighborhood[nh]) byNeighborhood[nh] = [];
+
+    // Parse archetype from TraitProfile
+    var archetype = 'Drifter';
+    var tone = 'plain';
+    var parts = String(citizen.TraitProfile).split('|');
+    for (var pi = 0; pi < parts.length; pi++) {
+      var part = parts[pi];
+      if (part.indexOf('Archetype:') === 0) archetype = part.substring(10);
+      if (part.indexOf('reflective:') === 0 && parseFloat(part.substring(11)) >= 0.6) tone = 'noir';
+      if (part.indexOf('social:') === 0 && parseFloat(part.substring(7)) >= 0.6) tone = 'bright';
+      if (part.indexOf('volatile:') === 0 && parseFloat(part.substring(9)) >= 0.6) tone = 'tense';
+    }
+
+    var name = ((citizen.First || '') + ' ' + (citizen.Last || '')).trim() || popId;
+
+    byNeighborhood[nh].push({
+      name: name,
+      archetype: archetype,
+      tone: tone,
+      occupation: citizen.Occupation || '',
+      angle: ARCHETYPE_ANGLES[archetype] || 'general'
+    });
+  }
+
+  // Generate spotlight lines per neighborhood (top 3 neighborhoods)
+  var neighborhoods = Object.keys(byNeighborhood).sort(function(a, b) {
+    return byNeighborhood[b].length - byNeighborhood[a].length;
+  });
+
+  for (var ni = 0; ni < Math.min(neighborhoods.length, 4); ni++) {
+    var nhName = neighborhoods[ni];
+    var citizens = byNeighborhood[nhName];
+
+    lines.push(nhName.toUpperCase() + ':');
+
+    // Sort by archetype diversity (prefer non-Drifter)
+    citizens.sort(function(a, b) {
+      if (a.archetype === 'Drifter' && b.archetype !== 'Drifter') return 1;
+      if (b.archetype === 'Drifter' && a.archetype !== 'Drifter') return -1;
+      return 0;
+    });
+
+    for (var ci = 0; ci < Math.min(citizens.length, 2); ci++) {
+      var c = citizens[ci];
+      var occStr = c.occupation ? ' (' + c.occupation + ')' : '';
+      lines.push('  - ' + c.name + occStr + ' [' + c.archetype + '] — ' + c.angle);
+      if (c.tone !== 'plain') {
+        lines.push('    Tone: ' + c.tone + ' — matches ' + (c.tone === 'noir' ? 'investigative' : c.tone === 'bright' ? 'uplifting' : 'conflict') + ' angles');
+      }
+    }
+  }
+
+  // Holiday-specific suggestions
+  if (cal.holiday !== 'none') {
+    lines.push('');
+    lines.push('HOLIDAY ANGLE (' + cal.holiday + '):');
+    lines.push('  Prioritize Connector and Caretaker archetypes for community celebration coverage');
+  }
+
+  // If rivalries/alliances active, suggest related citizens
+  var bondSummary = S.bondSummary || {};
+  if (bondSummary.rivalries > 0 || bondSummary.alliances > 0) {
+    lines.push('');
+    lines.push('RELATIONSHIP ANGLES:');
+    if (bondSummary.rivalries > 0) {
+      lines.push('  Active rivalries: ' + bondSummary.rivalries + ' — seek Catalyst/Striver perspectives');
+    }
+    if (bondSummary.alliances > 0) {
+      lines.push('  Active alliances: ' + bondSummary.alliances + ' — seek Connector/Anchor perspectives');
+    }
+  }
+
+  return lines;
 }
 
 

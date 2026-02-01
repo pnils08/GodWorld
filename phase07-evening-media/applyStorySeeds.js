@@ -1,9 +1,16 @@
 /**
  * ============================================================================
- * V3.6 STORY SEEDS ENGINE — QOL CIVIC TEXTURE + CRIME METRICS INTEGRATION
+ * V3.7 STORY SEEDS ENGINE — CITIZEN MATCHING + TRAITPROFILE INTEGRATION
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
+ *
+ * v3.7 Enhancements:
+ * - Citizen matching: suggests interview candidates per seed
+ * - TraitProfile consumption: archetypes inform interview suggestions
+ * - Domain-to-archetype mapping: CIVIC→Anchor, BUSINESS→Striver, etc.
+ * - Neighborhood filtering: candidates from seed's target neighborhood
+ * - Tone-aware suggestions: matches citizen tone to story mood
  *
  * v3.6 Enhancements:
  * - QoL civic texture seeds from crimeMetrics v1.2 qualityOfLifeIndex
@@ -120,7 +127,7 @@ function applyStorySeeds_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SEED BUILDER
   // ═══════════════════════════════════════════════════════════════════════════
-  function makeSeed(text, domain, neighborhood, priority, seedType) {
+  function makeSeed(text, domain, neighborhood, priority, seedType, suggestedCitizens) {
     return {
       seedId: Utilities.getUuid().slice(0, 8),
       text: text,
@@ -134,8 +141,115 @@ function applyStorySeeds_(ctx) {
         isFirstFriday: isFirstFriday,
         isCreationDay: isCreationDay,
         sportsSeason: sportsSeason
-      }
+      },
+      // v3.7: Suggested interview candidates
+      suggestedCitizens: suggestedCitizens || []
     };
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v3.7: CITIZEN MATCHING HELPERS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /**
+   * Domain to preferred archetype mapping
+   */
+  var DOMAIN_ARCHETYPES = {
+    'CIVIC': ['Anchor', 'Connector'],
+    'COMMUNITY': ['Connector', 'Caretaker', 'Anchor'],
+    'BUSINESS': ['Striver', 'Connector'],
+    'CULTURE': ['Catalyst', 'Watcher', 'Connector'],
+    'HEALTH': ['Caretaker', 'Watcher'],
+    'SAFETY': ['Anchor', 'Watcher'],
+    'EDUCATION': ['Caretaker', 'Striver'],
+    'SPORTS': ['Connector', 'Striver'],
+    'NIGHTLIFE': ['Catalyst', 'Connector'],
+    'GENERAL': ['Watcher', 'Anchor']
+  };
+
+  /**
+   * Get citizens matching domain and neighborhood for interview suggestions
+   */
+  function getCitizenCandidates_(domain, neighborhood, limit) {
+    limit = limit || 3;
+    var candidates = [];
+    var preferredArchetypes = DOMAIN_ARCHETYPES[domain] || ['Connector', 'Anchor'];
+
+    // Access citizenLookup from context if available
+    var lookup = ctx.citizenLookup || {};
+    var popIds = Object.keys(lookup);
+
+    for (var i = 0; i < popIds.length && candidates.length < limit * 2; i++) {
+      var popId = popIds[i];
+      var citizen = lookup[popId];
+      if (!citizen) continue;
+
+      // Skip if wrong neighborhood (when specified)
+      if (neighborhood && citizen.Neighborhood && citizen.Neighborhood !== neighborhood) continue;
+
+      // Parse TraitProfile for archetype
+      var archetype = 'Drifter';
+      var tone = 'plain';
+      if (citizen.TraitProfile) {
+        var parts = String(citizen.TraitProfile).split('|');
+        for (var pi = 0; pi < parts.length; pi++) {
+          var part = parts[pi];
+          if (part.indexOf('Archetype:') === 0) archetype = part.substring(10);
+        }
+        // Derive tone from traits
+        for (var ti = 0; ti < parts.length; ti++) {
+          var tp = parts[ti];
+          if (tp.indexOf('reflective:') === 0 && parseFloat(tp.substring(11)) >= 0.6) tone = 'noir';
+          if (tp.indexOf('social:') === 0 && parseFloat(tp.substring(7)) >= 0.6) tone = 'bright';
+          if (tp.indexOf('volatile:') === 0 && parseFloat(tp.substring(9)) >= 0.6) tone = 'tense';
+        }
+      }
+
+      // Score by archetype match
+      var score = 0;
+      for (var ai = 0; ai < preferredArchetypes.length; ai++) {
+        if (archetype === preferredArchetypes[ai]) {
+          score = preferredArchetypes.length - ai; // Higher for earlier matches
+          break;
+        }
+      }
+
+      // Boost Tier 4 citizens (more developed)
+      if (citizen.Tier >= 4) score += 1;
+
+      // Only include if some match
+      if (score > 0 || archetype !== 'Drifter') {
+        var name = ((citizen.First || '') + ' ' + (citizen.Last || '')).trim() || popId;
+        candidates.push({
+          popId: popId,
+          name: name,
+          archetype: archetype,
+          neighborhood: citizen.Neighborhood || '',
+          occupation: citizen.Occupation || '',
+          tone: tone,
+          score: score
+        });
+      }
+    }
+
+    // Sort by score descending
+    candidates.sort(function(a, b) { return b.score - a.score; });
+
+    // Return top candidates formatted
+    var result = [];
+    for (var ri = 0; ri < Math.min(limit, candidates.length); ri++) {
+      var c = candidates[ri];
+      result.push(c.name + ' (' + c.archetype + ')');
+    }
+    return result;
+  }
+
+  /**
+   * Make seed with auto-suggested citizens
+   */
+  function makeSeedWithCitizens_(text, domain, neighborhood, priority, seedType) {
+    var citizens = getCitizenCandidates_(domain, neighborhood, 2);
+    return makeSeed(text, domain, neighborhood, priority, seedType, citizens);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -433,17 +547,17 @@ function applyStorySeeds_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   if (communityEngagement >= 1.5) {
-    seeds.push(makeSeed(
+    seeds.push(makeSeedWithCitizens_(
       "Community engagement surging. Neighbors connecting like never before.",
       'COMMUNITY', '', 3, 'engagement'
     ));
   } else if (communityEngagement >= 1.3) {
-    seeds.push(makeSeed(
+    seeds.push(makeSeedWithCitizens_(
       "Strong community bonds shaping neighborhood life. Connection stories.",
       'COMMUNITY', 'Temescal', 2, 'engagement'
     ));
   } else if (communityEngagement <= 0.6) {
-    seeds.push(makeSeed(
+    seeds.push(makeSeedWithCitizens_(
       "Community withdrawal noted. Neighbors pulling back. Why?",
       'COMMUNITY', '', 2, 'engagement'
     ));
@@ -453,23 +567,23 @@ function applyStorySeeds_(ctx) {
   // QOL CIVIC TEXTURE SEEDS (v3.6)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  // Low quality of life → civic texture beats
+  // Low quality of life → civic texture beats (v3.7: with citizen suggestions)
   if (qualityOfLifeIndex <= 0.35) {
-    seeds.push(makeSeed(
+    seeds.push(makeSeedWithCitizens_(
       "Quality of life concerns mounting across neighborhoods. Noise, nuisance, and disorder shaping daily experience.",
       'CIVIC', '', 3, 'qol'
     ));
-    seeds.push(makeSeed(
+    seeds.push(makeSeedWithCitizens_(
       "Residents voice frustration over persistent quality-of-life issues. What's the tipping point?",
       'COMMUNITY', '', 2, 'qol'
     ));
   } else if (qualityOfLifeIndex <= 0.45) {
-    seeds.push(makeSeed(
+    seeds.push(makeSeedWithCitizens_(
       "Quality of life strain noted in pockets of the city. Minor but persistent irritants.",
       'CIVIC', '', 2, 'qol'
     ));
   } else if (qualityOfLifeIndex >= 0.75) {
-    seeds.push(makeSeed(
+    seeds.push(makeSeedWithCitizens_(
       "Neighborhood quality of life trending upward. Clean streets, quiet nights.",
       'COMMUNITY', '', 2, 'qol'
     ));
@@ -519,18 +633,18 @@ function applyStorySeeds_(ctx) {
     ));
   }
 
-  // Neighborhood-specific QoL hotspots
+  // Neighborhood-specific QoL hotspots (v3.7: with citizen suggestions from target neighborhood)
   for (var nhKey in neighborhoodCrime) {
     if (!neighborhoodCrime.hasOwnProperty(nhKey)) continue;
     var nhData = neighborhoodCrime[nhKey];
     var nhQol = nhData.qualityOfLifeIndex || 0.5;
     if (nhQol <= 0.3) {
-      seeds.push(makeSeed(
+      seeds.push(makeSeedWithCitizens_(
         "Quality of life crisis in " + nhKey + ". Noise, disorder, and frustration peak.",
         'CIVIC', nhKey, 3, 'qol'
       ));
     } else if (nhQol >= 0.8) {
-      seeds.push(makeSeed(
+      seeds.push(makeSeedWithCitizens_(
         nhKey + " emerges as quality-of-life bright spot. What's working there?",
         'COMMUNITY', nhKey, 2, 'qol'
       ));

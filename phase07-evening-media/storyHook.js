@@ -1,7 +1,13 @@
 /**
  * ============================================================================
- * storyHookEngine_ v3.4 — ENHANCED
+ * storyHookEngine_ v3.5 — CITIZEN RELATIONSHIP HOOKS
  * ============================================================================
+ *
+ * v3.5 Enhancements:
+ * - Citizen bond awareness: rivalries and alliances generate story hooks
+ * - TraitProfile tone matching: noir/tense citizens get investigative angles
+ * - Archetype-driven suggestions: Watchers for observation, Catalysts for conflict
+ * - Relationship-based story angles: tensions, alliances, networks
  *
  * v3.4 Enhancements:
  * - Integrated Tier 4 Neighborhood Demographics for story signals
@@ -910,6 +916,161 @@ function storyHookEngine_(ctx) {
       'Winter solstice: Darkest day. Holiday season mood, year-end reflection.',
       null,
       'seasonal'
+    ));
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // v3.5: CITIZEN RELATIONSHIP HOOKS
+  // ═══════════════════════════════════════════════════════════
+
+  // Get citizen bonds from summary
+  var citizenBonds = S.citizenBonds || S.relationshipBonds || [];
+  var citizenLookup = ctx.citizenLookup || {};
+
+  // Helper to get citizen name
+  function getCitizenName_(popId) {
+    var c = citizenLookup[popId];
+    if (!c) return popId;
+    return ((c.First || '') + ' ' + (c.Last || '')).trim() || popId;
+  }
+
+  // Helper to get archetype from TraitProfile
+  function getCitizenArchetype_(popId) {
+    var c = citizenLookup[popId];
+    if (!c || !c.TraitProfile) return 'Drifter';
+    var parts = String(c.TraitProfile).split('|');
+    for (var pi = 0; pi < parts.length; pi++) {
+      if (parts[pi].indexOf('Archetype:') === 0) {
+        return parts[pi].substring(10);
+      }
+    }
+    return 'Drifter';
+  }
+
+  // Count active rivalries and alliances
+  var activeRivalries = [];
+  var activeAlliances = [];
+
+  for (var bi = 0; bi < citizenBonds.length; bi++) {
+    var bond = citizenBonds[bi];
+    if (!bond || !bond.bondType) continue;
+
+    // Only look at bonds modified recently (last 5 cycles)
+    var bondCycle = bond.lastUpdated || bond.cycle || 0;
+    if (cycle - bondCycle > 5) continue;
+
+    if (bond.bondType === 'rivalry' && bond.strength >= 3) {
+      activeRivalries.push(bond);
+    } else if (bond.bondType === 'alliance' && bond.strength >= 3) {
+      activeAlliances.push(bond);
+    }
+  }
+
+  // Generate rivalry hooks
+  if (activeRivalries.length >= 2) {
+    hooks.push(makeHook(
+      'COMMUNITY',
+      '',
+      2,
+      'Multiple active rivalries detected across neighborhoods. Tensions simmering. Who\'s in conflict and why?',
+      null,
+      'relationship'
+    ));
+  }
+
+  // Feature strongest rivalry
+  if (activeRivalries.length > 0) {
+    var strongestRivalry = activeRivalries[0];
+    for (var ri = 1; ri < activeRivalries.length; ri++) {
+      if (activeRivalries[ri].strength > strongestRivalry.strength) {
+        strongestRivalry = activeRivalries[ri];
+      }
+    }
+    if (strongestRivalry.strength >= 5) {
+      var rival1 = getCitizenName_(strongestRivalry.popId1 || strongestRivalry.citizenA);
+      var rival2 = getCitizenName_(strongestRivalry.popId2 || strongestRivalry.citizenB);
+      var rivalNh = strongestRivalry.neighborhood || '';
+      hooks.push(makeHook(
+        'COMMUNITY',
+        rivalNh,
+        3,
+        'High-intensity rivalry between ' + rival1 + ' and ' + rival2 + '. Investigation angle: what\'s driving the conflict?',
+        null,
+        'relationship'
+      ));
+    }
+  }
+
+  // Generate alliance hooks
+  if (activeAlliances.length >= 3) {
+    hooks.push(makeHook(
+      'COMMUNITY',
+      '',
+      2,
+      'Strong alliance networks forming across neighborhoods. Collective action brewing. Feature on community connections.',
+      null,
+      'relationship'
+    ));
+  }
+
+  // Feature notable alliance
+  if (activeAlliances.length > 0) {
+    var strongestAlliance = activeAlliances[0];
+    for (var ali = 1; ali < activeAlliances.length; ali++) {
+      if (activeAlliances[ali].strength > strongestAlliance.strength) {
+        strongestAlliance = activeAlliances[ali];
+      }
+    }
+    if (strongestAlliance.strength >= 5) {
+      var ally1 = getCitizenName_(strongestAlliance.popId1 || strongestAlliance.citizenA);
+      var ally2 = getCitizenName_(strongestAlliance.popId2 || strongestAlliance.citizenB);
+      var arch1 = getCitizenArchetype_(strongestAlliance.popId1 || strongestAlliance.citizenA);
+      var arch2 = getCitizenArchetype_(strongestAlliance.popId2 || strongestAlliance.citizenB);
+      hooks.push(makeHook(
+        'COMMUNITY',
+        strongestAlliance.neighborhood || '',
+        2,
+        'Strong alliance: ' + ally1 + ' (' + arch1 + ') and ' + ally2 + ' (' + arch2 + '). What are they building together?',
+        null,
+        'relationship'
+      ));
+    }
+  }
+
+  // Archetype-based investigation angles
+  var watcherCount = 0;
+  var catalystCount = 0;
+  var striverCount = 0;
+
+  var popIds = Object.keys(citizenLookup);
+  for (var ci = 0; ci < popIds.length; ci++) {
+    var arch = getCitizenArchetype_(popIds[ci]);
+    if (arch === 'Watcher') watcherCount++;
+    if (arch === 'Catalyst') catalystCount++;
+    if (arch === 'Striver') striverCount++;
+  }
+
+  // Catalyst-heavy neighborhoods might have more conflict
+  if (catalystCount >= 5) {
+    hooks.push(makeHook(
+      'COMMUNITY',
+      '',
+      1,
+      'Multiple Catalyst personalities active in the population. Watch for disruption, change, or volatility.',
+      null,
+      'archetype'
+    ));
+  }
+
+  // Striver concentration suggests economic/career angles
+  if (striverCount >= 8) {
+    hooks.push(makeHook(
+      'BUSINESS',
+      '',
+      1,
+      'High concentration of ambitious, driven personalities. Career competition and economic hustle stories.',
+      null,
+      'archetype'
     ));
   }
 

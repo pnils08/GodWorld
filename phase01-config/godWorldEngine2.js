@@ -1,7 +1,12 @@
 /**
  * ============================================================================
- * GOD WORLD ENGINE v2.12
+ * GOD WORLD ENGINE v2.13
  * ============================================================================
+ *
+ * v2.13 Changes:
+ * - Added compressLifeHistory_ call in Phase 9 for TraitProfile generation
+ * - Enables archetype-aware event generation in generateCitizensEvents v2.7
+ * - Compresses LifeHistory column to TraitProfile (column R) periodically
  *
  * v2.12 Changes:
  * - Wired up cycle modes (dry-run, replay) from utilities/cycleModes.js
@@ -257,6 +262,8 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase9-DigestSummary', function() { applyCompressedDigestSummary_(ctx); });
   safePhaseCall_(ctx, 'Phase9-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
+  // v2.13: Compress LifeHistory into TraitProfiles for archetype-aware event generation
+  safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizeCycleState', function() { finalizeCycleState_(ctx); });
 
@@ -1358,6 +1365,8 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase9-DigestSummary', function() { applyCompressedDigestSummary_(ctx); });
   safePhaseCall_(ctx, 'Phase9-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
+  // v2.13: Compress LifeHistory into TraitProfiles for archetype-aware event generation
+  safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizeCycleState', function() { finalizeCycleState_(ctx); });
 

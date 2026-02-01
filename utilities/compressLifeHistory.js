@@ -1,10 +1,14 @@
 /**
  * ============================================================================
- * compressLifeHistory.js v1.1
+ * compressLifeHistory.js v1.2
  * ============================================================================
  *
  * Scans LifeHistory and compresses accumulated events into a personality profile
  * stored in TraitProfile (or OriginVault fallback).
+ *
+ * v1.2 Upgrades (additive, ES5 safe):
+ * - Career Engine integration: TAG_TRAIT_MAP includes Career tags
+ * - CareerState lines protected from trim (persist across compression)
  *
  * v1.1 Upgrades (additive, ES5 safe):
  * - Robust parsing (timestamps optional; supports [Tag] without timestamp)
@@ -32,7 +36,7 @@
 // CONSTANTS
 // ============================================================================
 
-var COMPRESS_VERSION = '1.1';
+var COMPRESS_VERSION = '1.2';
 
 // Decay per unit (entry or cycle depending on basis)
 var TAG_DECAY_RATE = 0.95;
@@ -101,7 +105,15 @@ var TAG_TRAIT_MAP = {
 
   // Continuity
   'Continuity': { driven: 0.4, reflective: 0.3 },
-  'source:motif': { grounded: 0.4, reflective: 0.2 }
+  'source:motif': { grounded: 0.4, reflective: 0.2 },
+
+  // Career (v1.2: Career Engine integration)
+  'Career': { driven: 0.6, grounded: 0.3 },
+  'Career-Transition': { volatile: 0.5, driven: 0.4 },
+  'Career-Training': { driven: 0.5, reflective: 0.3 },
+  'Career-FirstFriday': { social: 0.4, reflective: 0.3 },
+  'Career-CreationDay': { grounded: 0.5, reflective: 0.4 },
+  'Career-Holiday': { social: 0.4, grounded: 0.3 }
 };
 
 // Archetypes
@@ -575,19 +587,33 @@ function shortHash_(s) {
 // ============================================================================
 
 function trimLifeHistory_(entries, keepCount, profile, cycle) {
-  if (entries.length <= keepCount) {
+  // Extract CareerState lines - these must persist (Career Engine reads them back)
+  var careerStateEntry = null;
+  var filteredEntries = [];
+  for (var k = 0; k < entries.length; k++) {
+    if (entries[k].tag === 'CareerState') {
+      careerStateEntry = entries[k]; // Keep most recent CareerState
+    } else {
+      filteredEntries.push(entries[k]);
+    }
+  }
+
+  if (filteredEntries.length <= keepCount) {
     var lines = [];
-    for (var i = 0; i < entries.length; i++) lines.push(entries[i].raw);
+    if (careerStateEntry) lines.push(careerStateEntry.raw);
+    for (var i = 0; i < filteredEntries.length; i++) lines.push(filteredEntries[i].raw);
     return lines.join('\n');
   }
 
-  var oldCount = entries.length - keepCount;
-  var oldEntries = entries.slice(0, oldCount);
-  var recentEntries = entries.slice(oldCount);
+  var oldCount = filteredEntries.length - keepCount;
+  var oldEntries = filteredEntries.slice(0, oldCount);
+  var recentEntries = filteredEntries.slice(oldCount);
 
   var compressedLine = createCompressedBlock_(oldEntries, profile, cycle);
 
-  var newLines = [compressedLine];
+  var newLines = [];
+  if (careerStateEntry) newLines.push(careerStateEntry.raw);
+  newLines.push(compressedLine);
   for (var j = 0; j < recentEntries.length; j++) newLines.push(recentEntries[j].raw);
 
   return newLines.join('\n');
@@ -666,8 +692,12 @@ function parseProfileString_(profileStr) {
 
 /**
  * ============================================================================
- * COMPRESS LIFE HISTORY REFERENCE v1.1
+ * COMPRESS LIFE HISTORY REFERENCE v1.2
  * ============================================================================
+ *
+ * v1.2 CHANGES:
+ * - Career tag mappings: Career, Career-Transition, Career-Training, etc.
+ * - CareerState lines protected from trim (always preserved in output)
  *
  * v1.1 CHANGES:
  * - Cycle-aware decay option (Basis:cycle when "Cycle N" markers present)

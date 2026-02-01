@@ -10,7 +10,12 @@
  * - Coming-of-age milestones
  * - Civic participation (age-appropriate)
  *
- * @version 1.0
+ * v1.1 Enhancements:
+ * - crimeMetrics v1.2 integration: QoL-aware probability modifiers
+ * - Low-QoL neighborhoods generate more stress/resilience events
+ * - Hotspot awareness for youth safety events
+ *
+ * @version 1.1
  * @tier 6.3
  */
 
@@ -18,7 +23,7 @@
 // CONSTANTS
 // ============================================================================
 
-var YOUTH_ENGINE_VERSION = '1.0';
+var YOUTH_ENGINE_VERSION = '1.1';
 
 // Event generation limits
 var YOUTH_EVENT_LIMITS = {
@@ -63,6 +68,18 @@ function runYouthEngine_(ctx) {
   var month = now.getMonth() + 1;
   var season = S.season || 'spring';
 
+  // v1.1: Get crimeMetrics context for QoL awareness
+  var crimeMetrics = S.crimeMetrics || {};
+  var neighborhoodCrime = crimeMetrics.neighborhoodBreakdown || {};
+  var crimeHotspots = crimeMetrics.hotspots || [];
+
+  function getNeighborhoodQoL_(nh) {
+    if (neighborhoodCrime[nh] && typeof neighborhoodCrime[nh].qualityOfLifeIndex === 'number') {
+      return neighborhoodCrime[nh].qualityOfLifeIndex;
+    }
+    return crimeMetrics.qualityOfLifeIndex || 0.5;
+  }
+
   // Get demographics for youth populations
   var demographics = {};
   if (typeof getNeighborhoodDemographics_ === 'function') {
@@ -103,10 +120,26 @@ function runYouthEngine_(ctx) {
     // Adjust by season
     prob = adjustProbByCalendar_(prob, month, season);
 
+    // v1.1: Adjust by neighborhood QoL
+    var nhQoL = getNeighborhoodQoL_(neighborhood);
+    var isHotspot = crimeHotspots.indexOf(neighborhood) >= 0;
+    if (nhQoL <= 0.35) {
+      prob *= 1.15; // More events in stressed neighborhoods (resilience stories)
+    } else if (nhQoL >= 0.75) {
+      prob *= 1.05; // Slightly more in thriving neighborhoods
+    }
+    if (isHotspot) {
+      prob *= 1.1; // Youth in hotspots have more notable events
+    }
+
     // Roll for event
     if (rng() < prob) {
-      var event = generateYouthEventForCitizen_(youth, month, rng);
+      // v1.1: Pass QoL context to event generator
+      var qolContext = { qol: nhQoL, isHotspot: isHotspot };
+      var event = generateYouthEventForCitizen_(youth, month, rng, qolContext);
       if (event) {
+        // v1.1: Tag event with QoL context
+        event.qolContext = qolContext;
         events.push(event);
         eventsPerNeighborhood[neighborhood]++;
         totalEvents++;
@@ -247,9 +280,12 @@ function getNamedYouth_(ss) {
  * @param {Object} youth - { id, name, age, neighborhood }
  * @param {number} month
  * @param {Function} rng
+ * @param {Object} qolContext - v1.1: { qol, isHotspot }
  * @return {Object|null}
  */
-function generateYouthEventForCitizen_(youth, month, rng) {
+function generateYouthEventForCitizen_(youth, month, rng, qolContext) {
+  qolContext = qolContext || { qol: 0.5, isHotspot: false };
+
   // Get school assignment
   var school = null;
   if (typeof assignSchoolForYouth_ === 'function') {
@@ -262,12 +298,30 @@ function generateYouthEventForCitizen_(youth, month, rng) {
     eventType = selectYouthEventType_(youth.age, month, rng);
   }
 
+  // v1.1: QoL-influenced event type selection
+  if (qolContext.qol <= 0.35 && rng() < 0.25) {
+    // Low-QoL neighborhoods: resilience/challenge events
+    var stressTypes = ['resilience', 'community_support', 'safety_awareness'];
+    eventType = stressTypes[Math.floor(rng() * stressTypes.length)];
+  } else if (qolContext.isHotspot && rng() < 0.15) {
+    eventType = 'safety_awareness';
+  }
+
   // Get event description
   var description = '';
   if (typeof pickYouthEvent_ === 'function') {
     description = pickYouthEvent_(eventType, rng);
   } else {
-    description = 'youth activity';
+    // v1.1: Fallback descriptions for new types
+    if (eventType === 'resilience') {
+      description = 'showed resilience amid neighborhood challenges';
+    } else if (eventType === 'community_support') {
+      description = 'received support from community mentors';
+    } else if (eventType === 'safety_awareness') {
+      description = 'participated in youth safety program';
+    } else {
+      description = 'youth activity';
+    }
   }
 
   // Generate outcome

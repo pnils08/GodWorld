@@ -1,9 +1,17 @@
 /**
  * ============================================================================
- * V3.7 STORY SEEDS ENGINE — CITIZEN MATCHING + TRAITPROFILE INTEGRATION
+ * V3.8 STORY SEEDS ENGINE — STORYLINE TRACKER INTEGRATION
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
+ *
+ * v3.8 Enhancements:
+ * - Storyline Tracker integration: reads active/dormant storylines
+ * - Follow-up seeds: generates continuity seeds for storylines not mentioned recently
+ * - Wrap-up seeds: flags storylines with resolved linked arcs for conclusion
+ * - Priority boosting: seeds matching active storyline domains get +1 priority
+ * - Storyline citizens: pulls RelatedCitizens from storylines for interview suggestions
+ * - LinkedStorylineId: seeds can reference originating storyline
  *
  * v3.7 Enhancements:
  * - Citizen matching: suggests interview candidates per seed
@@ -127,7 +135,7 @@ function applyStorySeeds_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // SEED BUILDER
   // ═══════════════════════════════════════════════════════════════════════════
-  function makeSeed(text, domain, neighborhood, priority, seedType, suggestedCitizens) {
+  function makeSeed(text, domain, neighborhood, priority, seedType, suggestedCitizens, linkedStorylineId) {
     return {
       seedId: Utilities.getUuid().slice(0, 8),
       text: text,
@@ -143,7 +151,9 @@ function applyStorySeeds_(ctx) {
         sportsSeason: sportsSeason
       },
       // v3.7: Suggested interview candidates
-      suggestedCitizens: suggestedCitizens || []
+      suggestedCitizens: suggestedCitizens || [],
+      // v3.8: Linked storyline reference
+      linkedStorylineId: linkedStorylineId || null
     };
   }
 
@@ -247,10 +257,161 @@ function applyStorySeeds_(ctx) {
   /**
    * Make seed with auto-suggested citizens
    */
-  function makeSeedWithCitizens_(text, domain, neighborhood, priority, seedType) {
+  function makeSeedWithCitizens_(text, domain, neighborhood, priority, seedType, linkedStorylineId) {
     var citizens = getCitizenCandidates_(domain, neighborhood, 2);
-    return makeSeed(text, domain, neighborhood, priority, seedType, citizens);
+    return makeSeed(text, domain, neighborhood, priority, seedType, citizens, linkedStorylineId);
   }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v3.8: STORYLINE TRACKER INTEGRATION
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /**
+   * Load active storylines from Storyline_Tracker sheet
+   */
+  function loadActiveStorylines_() {
+    var storylines = [];
+    var ss = ctx.ss;
+    if (!ss) return storylines;
+
+    var sheet = ss.getSheetByName('Storyline_Tracker');
+    if (!sheet) return storylines;
+
+    var data = sheet.getDataRange().getValues();
+    if (data.length < 2) return storylines;
+
+    var headers = data[0];
+    var col = function(name) {
+      return headers.indexOf(name);
+    };
+
+    // Column indices
+    var cycleAddedIdx = col('CycleAdded');
+    var typeIdx = col('StorylineType');
+    var descIdx = col('Description');
+    var nhIdx = col('Neighborhood');
+    var citizensIdx = col('RelatedCitizens');
+    var priorityIdx = col('Priority');
+    var statusIdx = col('Status');
+
+    for (var i = 1; i < data.length; i++) {
+      var row = data[i];
+      var status = statusIdx >= 0 ? row[statusIdx] : '';
+
+      // Only include active and dormant storylines
+      if (status !== 'active' && status !== 'dormant') continue;
+
+      storylines.push({
+        rowNumber: i + 1,
+        cycleAdded: cycleAddedIdx >= 0 ? row[cycleAddedIdx] : 0,
+        type: typeIdx >= 0 ? row[typeIdx] : '',
+        description: descIdx >= 0 ? row[descIdx] : '',
+        neighborhood: nhIdx >= 0 ? row[nhIdx] : '',
+        relatedCitizens: citizensIdx >= 0 ? row[citizensIdx] : '',
+        priority: priorityIdx >= 0 ? row[priorityIdx] : 'normal',
+        status: status,
+        cyclesSinceAdded: cycle - (cycleAddedIdx >= 0 ? (row[cycleAddedIdx] || 0) : 0)
+      });
+    }
+
+    return storylines;
+  }
+
+  /**
+   * Map storyline type to domain
+   */
+  var STORYLINE_TYPE_DOMAINS = {
+    'arc': 'GENERAL',
+    'question': 'CIVIC',
+    'thread': 'COMMUNITY',
+    'mystery': 'CIVIC',
+    'developing': 'GENERAL',
+    'seasonal': 'CULTURE',
+    'festival': 'CULTURE',
+    'sports': 'SPORTS'
+  };
+
+  /**
+   * Generate seeds from active storylines
+   */
+  function generateStorylineSeeds_(storylines) {
+    var storylineSeeds = [];
+
+    for (var si = 0; si < storylines.length; si++) {
+      var sl = storylines[si];
+
+      // Determine domain from storyline type
+      var domain = STORYLINE_TYPE_DOMAINS[sl.type] || 'GENERAL';
+
+      // Parse related citizens for interview suggestions
+      var citizenSuggestions = [];
+      if (sl.relatedCitizens) {
+        var parts = String(sl.relatedCitizens).split(',');
+        for (var pi = 0; pi < Math.min(parts.length, 2); pi++) {
+          citizenSuggestions.push(parts[pi].trim());
+        }
+      }
+
+      // Calculate priority based on storyline priority
+      var basePriority = 1;
+      if (sl.priority === 'urgent') basePriority = 3;
+      else if (sl.priority === 'high') basePriority = 2;
+      else if (sl.priority === 'low' || sl.priority === 'background') basePriority = 0;
+
+      // Generate follow-up seed for dormant storylines (not mentioned in 3+ cycles)
+      if (sl.status === 'dormant' || sl.cyclesSinceAdded >= 3) {
+        storylineSeeds.push(makeSeed(
+          'FOLLOW-UP: ' + sl.description + ' — Last coverage was ' + sl.cyclesSinceAdded + ' cycles ago.',
+          domain,
+          sl.neighborhood,
+          Math.max(basePriority, 2),
+          'storyline-followup',
+          citizenSuggestions,
+          sl.rowNumber
+        ));
+      }
+
+      // Generate active storyline seeds for high/urgent priority
+      if (sl.status === 'active' && (sl.priority === 'high' || sl.priority === 'urgent')) {
+        storylineSeeds.push(makeSeed(
+          'CONTINUING: ' + sl.description,
+          domain,
+          sl.neighborhood,
+          basePriority,
+          'storyline-active',
+          citizenSuggestions,
+          sl.rowNumber
+        ));
+      }
+
+      // Generate mystery/question seeds
+      if (sl.type === 'mystery' || sl.type === 'question') {
+        storylineSeeds.push(makeSeed(
+          'OPEN QUESTION: ' + sl.description + ' — Still unresolved.',
+          'CIVIC',
+          sl.neighborhood,
+          Math.max(basePriority, 2),
+          'storyline-question',
+          citizenSuggestions,
+          sl.rowNumber
+        ));
+      }
+    }
+
+    return storylineSeeds;
+  }
+
+  // Load storylines and generate seeds
+  var activeStorylines = loadActiveStorylines_();
+  var storylineSeedsList = generateStorylineSeeds_(activeStorylines);
+
+  // Add storyline seeds to main seeds array
+  for (var ssi = 0; ssi < storylineSeedsList.length; ssi++) {
+    seeds.push(storylineSeedsList[ssi]);
+  }
+
+  // Store storyline count in summary for briefing
+  S.activeStorylineCount = activeStorylines.length;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v3.4: SPORTS PHASE NORMALIZATION
@@ -1172,8 +1333,34 @@ function generateAngle_(seed) {
 
 /**
  * ============================================================================
- * STORY SEEDS ENGINE REFERENCE v3.6
+ * STORY SEEDS ENGINE REFERENCE v3.8
  * ============================================================================
+ *
+ * v3.8 CHANGES:
+ * - Storyline Tracker integration via loadActiveStorylines_()
+ * - Follow-up seeds for dormant storylines (3+ cycles since last mention)
+ * - Active storyline seeds for high/urgent priority storylines
+ * - Mystery/question seeds for unresolved storylines
+ * - linkedStorylineId field added to seed structure
+ * - New seedTypes: 'storyline-followup', 'storyline-active', 'storyline-question'
+ * - S.activeStorylineCount set for briefing generation
+ * - RelatedCitizens from storylines used as interview suggestions
+ *
+ * STORYLINE TYPES → DOMAINS:
+ * - arc → GENERAL
+ * - question → CIVIC
+ * - thread → COMMUNITY
+ * - mystery → CIVIC
+ * - developing → GENERAL
+ * - seasonal → CULTURE
+ * - festival → CULTURE
+ * - sports → SPORTS
+ *
+ * v3.7 CHANGES:
+ * - Citizen matching for interview suggestions
+ * - TraitProfile consumption for archetype-based matching
+ * - Domain-to-archetype mapping
+ * - makeSeedWithCitizens_() helper
  *
  * v3.6 CHANGES:
  * - QoL civic texture seeds from crimeMetrics v1.2 qualityOfLifeIndex
@@ -1242,6 +1429,9 @@ function generateAngle_(seed) {
  * - cultural, engagement
  * - manual (v3.4)
  * - qol (v3.6) — quality-of-life civic texture seeds
+ * - storyline-followup (v3.8) — dormant storyline follow-up
+ * - storyline-active (v3.8) — high-priority active storyline
+ * - storyline-question (v3.8) — unresolved mystery/question
  *
  * SPORTS PHASES (v3.4):
  * - finals/championship -> priority 3
@@ -1267,7 +1457,9 @@ function generateAngle_(seed) {
  *   cycle: number,
  *   calendarContext: {
  *     holiday, isFirstFriday, isCreationDay, sportsSeason
- *   }
+ *   },
+ *   suggestedCitizens: string[] (v3.7),
+ *   linkedStorylineId: number|null (v3.8) — row number in Storyline_Tracker
  * }
  *
  * ============================================================================

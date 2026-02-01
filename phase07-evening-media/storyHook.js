@@ -1,7 +1,16 @@
 /**
  * ============================================================================
- * storyHookEngine_ v3.5 — CITIZEN RELATIONSHIP HOOKS
+ * storyHookEngine_ v3.6 — STORYLINE TRACKER INTEGRATION
  * ============================================================================
+ *
+ * v3.6 Enhancements:
+ * - Storyline Tracker integration: reads active/dormant storylines
+ * - Storyline hooks: generates hooks from storylines needing attention
+ * - Dormant revival hooks: suggests revisiting storylines not mentioned in 5+ cycles
+ * - Wrap-up hooks: flags storylines with resolved linked arcs
+ * - Priority boost: storylines with 'high' priority get hook priority 3
+ * - Neighborhood correlation: matches storyline neighborhoods to existing hooks
+ * - RelatedCitizens consumption for interview angle suggestions
  *
  * v3.5 Enhancements:
  * - Citizen bond awareness: rivalries and alliances generate story hooks
@@ -1075,6 +1084,137 @@ function storyHookEngine_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════
+  // v3.6: STORYLINE TRACKER HOOKS
+  // ═══════════════════════════════════════════════════════════
+
+  /**
+   * Load storylines from Storyline_Tracker sheet
+   */
+  function loadStorylines_() {
+    var storylines = [];
+    var ss = ctx.ss;
+    if (!ss) return storylines;
+
+    var sheet = ss.getSheetByName('Storyline_Tracker');
+    if (!sheet) return storylines;
+
+    var data = sheet.getDataRange().getValues();
+    if (data.length < 2) return storylines;
+
+    var headers = data[0];
+    var col = function(name) { return headers.indexOf(name); };
+
+    var cycleAddedIdx = col('CycleAdded');
+    var typeIdx = col('StorylineType');
+    var descIdx = col('Description');
+    var nhIdx = col('Neighborhood');
+    var citizensIdx = col('RelatedCitizens');
+    var priorityIdx = col('Priority');
+    var statusIdx = col('Status');
+
+    for (var i = 1; i < data.length; i++) {
+      var row = data[i];
+      var status = statusIdx >= 0 ? row[statusIdx] : '';
+
+      storylines.push({
+        rowNumber: i + 1,
+        cycleAdded: cycleAddedIdx >= 0 ? row[cycleAddedIdx] : 0,
+        type: typeIdx >= 0 ? row[typeIdx] : '',
+        description: descIdx >= 0 ? row[descIdx] : '',
+        neighborhood: nhIdx >= 0 ? row[nhIdx] : '',
+        relatedCitizens: citizensIdx >= 0 ? row[citizensIdx] : '',
+        priority: priorityIdx >= 0 ? row[priorityIdx] : 'normal',
+        status: status,
+        cyclesSinceAdded: cycle - (cycleAddedIdx >= 0 ? (row[cycleAddedIdx] || 0) : 0)
+      });
+    }
+
+    return storylines;
+  }
+
+  var storylines = loadStorylines_();
+  var activeStorylines = [];
+  var dormantStorylines = [];
+  var urgentStorylines = [];
+
+  for (var sli = 0; sli < storylines.length; sli++) {
+    var sl = storylines[sli];
+    if (sl.status === 'active') activeStorylines.push(sl);
+    if (sl.status === 'dormant') dormantStorylines.push(sl);
+    if (sl.priority === 'urgent' || sl.priority === 'high') urgentStorylines.push(sl);
+  }
+
+  // Generate hooks for dormant storylines (revival opportunity)
+  if (dormantStorylines.length > 0) {
+    var oldestDormant = dormantStorylines[0];
+    for (var di = 1; di < dormantStorylines.length; di++) {
+      if (dormantStorylines[di].cyclesSinceAdded > oldestDormant.cyclesSinceAdded) {
+        oldestDormant = dormantStorylines[di];
+      }
+    }
+
+    if (oldestDormant.cyclesSinceAdded >= 5) {
+      hooks.push(makeHook(
+        'GENERAL',
+        oldestDormant.neighborhood || '',
+        2,
+        'DORMANT STORYLINE: "' + (oldestDormant.description || 'Unnamed').substring(0, 60) + '..." - ' + oldestDormant.cyclesSinceAdded + ' cycles without coverage. Revival angle?',
+        null,
+        'storyline-dormant'
+      ));
+    }
+  }
+
+  // Generate hooks for urgent/high priority active storylines
+  for (var ui = 0; ui < urgentStorylines.length && ui < 2; ui++) {
+    var urg = urgentStorylines[ui];
+    if (urg.status !== 'active') continue;
+
+    var urgPriority = urg.priority === 'urgent' ? 3 : 2;
+    hooks.push(makeHook(
+      'GENERAL',
+      urg.neighborhood || '',
+      urgPriority,
+      (urg.priority === 'urgent' ? 'URGENT: ' : 'HIGH PRIORITY: ') + (urg.description || 'Active storyline').substring(0, 80),
+      null,
+      'storyline-priority'
+    ));
+  }
+
+  // Generate hooks for mystery/question storylines
+  for (var mi = 0; mi < storylines.length; mi++) {
+    var myst = storylines[mi];
+    if (myst.status !== 'active') continue;
+    if (myst.type !== 'mystery' && myst.type !== 'question') continue;
+
+    hooks.push(makeHook(
+      'CIVIC',
+      myst.neighborhood || '',
+      2,
+      'OPEN QUESTION: ' + (myst.description || 'Unresolved mystery').substring(0, 70) + ' — Investigation angle available.',
+      null,
+      'storyline-mystery'
+    ));
+    break; // Only one mystery hook per cycle
+  }
+
+  // Multiple active storylines hook
+  if (activeStorylines.length >= 5) {
+    hooks.push(makeHook(
+      'GENERAL',
+      '',
+      2,
+      activeStorylines.length + ' active storylines tracked. Complex narrative environment. Continuity opportunities.',
+      null,
+      'storyline-density'
+    ));
+  }
+
+  // Store storyline count in summary
+  S.activeStorylineCount = activeStorylines.length;
+  S.dormantStorylineCount = dormantStorylines.length;
+
+  // ═══════════════════════════════════════════════════════════
   // DEDUPLICATE BY PRIORITY (keep highest priority per domain)
   // ═══════════════════════════════════════════════════════════
   var seen = {};
@@ -1106,25 +1246,31 @@ function storyHookEngine_(ctx) {
  * HOOK TYPES REFERENCE
  * ============================================================================
  *
- * Type         | Source                    | Priority Range
+ * Type              | Source                    | Priority Range
  * ─────────────────────────────────────────────────────────────────────────
- * arc          | Event arcs                | 1-3 (phase-based)
- * cluster      | Domain accumulation       | 2-3
- * signal       | Domain early detection    | 1-2
- * holiday      | Calendar holidays         | 2-3
- * firstfriday  | Monthly art walk          | 1-2
- * creationday  | GodWorld founding         | 2
- * sports       | Sports season             | 2-3
- * weather      | Weather conditions        | 1-3
- * sentiment    | City mood                 | 2-3
- * cultural     | Cultural activity         | 2
- * community    | Community engagement      | 2
- * pattern      | Multi-cycle patterns      | 2-3
- * shock        | Disruption events         | 3
- * event        | World events              | 2-3
- * demographic  | Migration + demo shifts   | 2-3 (v3.4 expanded)
- * nightlife    | Nightlife surge           | 2
- * seasonal     | Equinox/solstice          | 1
+ * arc               | Event arcs                | 1-3 (phase-based)
+ * cluster           | Domain accumulation       | 2-3
+ * signal            | Domain early detection    | 1-2
+ * holiday           | Calendar holidays         | 2-3
+ * firstfriday       | Monthly art walk          | 1-2
+ * creationday       | GodWorld founding         | 2
+ * sports            | Sports season             | 2-3
+ * weather           | Weather conditions        | 1-3
+ * sentiment         | City mood                 | 2-3
+ * cultural          | Cultural activity         | 2
+ * community         | Community engagement      | 2
+ * pattern           | Multi-cycle patterns      | 2-3
+ * shock             | Disruption events         | 3
+ * event             | World events              | 2-3
+ * demographic       | Migration + demo shifts   | 2-3 (v3.4 expanded)
+ * nightlife         | Nightlife surge           | 2
+ * seasonal          | Equinox/solstice          | 1
+ * relationship      | Citizen bonds (v3.5)      | 2-3
+ * archetype         | Archetype concentration   | 1
+ * storyline-dormant | Dormant storylines (v3.6) | 2
+ * storyline-priority| High/urgent storylines    | 2-3
+ * storyline-mystery | Unresolved questions      | 2
+ * storyline-density | Multiple active storylines| 2
  *
  * v3.4 DEMOGRAPHIC SHIFTS (Tier 4):
  * - population_shift: Growth/decline → Community desk

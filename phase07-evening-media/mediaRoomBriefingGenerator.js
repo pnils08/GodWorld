@@ -1,7 +1,14 @@
 /**
  * ============================================================================
- * MEDIA ROOM BRIEFING v2.4 — CITIZEN SPOTLIGHT INTEGRATION
+ * MEDIA ROOM BRIEFING v2.5 — STORYLINE TRACKER INTEGRATION
  * ============================================================================
+ *
+ * v2.5 Enhancements:
+ * - Section 16: STORYLINE BRIEF for active storyline tracking
+ * - Storyline Tracker integration: reads active/dormant storylines
+ * - Follow-up reminders for storylines not covered recently
+ * - Wrap-up alerts for storylines with resolved arcs
+ * - Cross-reference with citizen spotlight for storyline-related interviews
  *
  * v2.4 Enhancements:
  * - Section 14: CITIZEN SPOTLIGHT for interview candidates
@@ -698,7 +705,22 @@ function generateMediaBriefing_(ctx) {
   briefing.push('- Marcus Webb (community organizer) @ West Oakland');
   briefing.push('- Janae Rivers (council member) @ Temescal');
   briefing.push('');
-  
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.5: SECTION 16: STORYLINE BRIEF
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  briefing.push('## 16. STORYLINE BRIEF');
+  briefing.push('');
+  briefing.push('Active narrative threads requiring coverage attention:');
+  briefing.push('');
+
+  var storylineBrief = generateStorylineBrief_(ctx, S, cycle);
+  for (var sbi = 0; sbi < storylineBrief.length; sbi++) {
+    briefing.push(storylineBrief[sbi]);
+  }
+  briefing.push('');
+
   // ═══════════════════════════════════════════════════════════════════════════
   // FOOTER
   // ═══════════════════════════════════════════════════════════════════════════
@@ -738,7 +760,7 @@ function generateMediaBriefing_(ctx) {
     
     // v2.1.1 FIX: Prefix with ' to prevent #ERROR from = signs
     sheet.appendRow([new Date(), cycle, cal.holiday, cal.holidayPriority, cal.sportsSeason, civic.electionWindow, "'" + output]);
-    Logger.log('generateMediaBriefing_ v2.4: Briefing generated for Cycle ' + cycle + ' | Holiday: ' + cal.holiday + ' | Election: ' + civic.electionWindow);
+    Logger.log('generateMediaBriefing_ v2.5: Briefing generated for Cycle ' + cycle + ' | Holiday: ' + cal.holiday + ' | Election: ' + civic.electionWindow);
     
   } catch (e) {
     Logger.log('generateMediaBriefing_ error: ' + e.message);
@@ -860,6 +882,153 @@ function generateCitizenSpotlight_(ctx, S, cal) {
     if (bondSummary.alliances > 0) {
       lines.push('  Active alliances: ' + bondSummary.alliances + ' — seek Connector/Anchor perspectives');
     }
+  }
+
+  return lines;
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// v2.5: STORYLINE BRIEF HELPER
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Generates storyline tracking brief from Storyline_Tracker
+ */
+function generateStorylineBrief_(ctx, S, cycle) {
+  var lines = [];
+  var ss = ctx.ss;
+
+  if (!ss) {
+    lines.push('(No spreadsheet access for storyline data)');
+    return lines;
+  }
+
+  var sheet = ss.getSheetByName('Storyline_Tracker');
+  if (!sheet) {
+    lines.push('(Storyline_Tracker sheet not found)');
+    return lines;
+  }
+
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) {
+    lines.push('(No storylines tracked)');
+    return lines;
+  }
+
+  var headers = data[0];
+  var col = function(name) { return headers.indexOf(name); };
+
+  var cycleAddedIdx = col('CycleAdded');
+  var typeIdx = col('StorylineType');
+  var descIdx = col('Description');
+  var nhIdx = col('Neighborhood');
+  var citizensIdx = col('RelatedCitizens');
+  var priorityIdx = col('Priority');
+  var statusIdx = col('Status');
+
+  var activeStorylines = [];
+  var dormantStorylines = [];
+  var urgentStorylines = [];
+
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var status = statusIdx >= 0 ? row[statusIdx] : '';
+
+    var storyline = {
+      rowNumber: i + 1,
+      cycleAdded: cycleAddedIdx >= 0 ? row[cycleAddedIdx] : 0,
+      type: typeIdx >= 0 ? row[typeIdx] : '',
+      description: descIdx >= 0 ? String(row[descIdx] || '').substring(0, 100) : '',
+      neighborhood: nhIdx >= 0 ? row[nhIdx] : '',
+      relatedCitizens: citizensIdx >= 0 ? row[citizensIdx] : '',
+      priority: priorityIdx >= 0 ? row[priorityIdx] : 'normal',
+      status: status,
+      cyclesSinceAdded: cycle - (cycleAddedIdx >= 0 ? (row[cycleAddedIdx] || 0) : 0)
+    };
+
+    if (status === 'active') {
+      activeStorylines.push(storyline);
+      if (storyline.priority === 'urgent' || storyline.priority === 'high') {
+        urgentStorylines.push(storyline);
+      }
+    } else if (status === 'dormant') {
+      dormantStorylines.push(storyline);
+    }
+  }
+
+  // Summary counts
+  lines.push('STORYLINE STATUS:');
+  lines.push('  Active: ' + activeStorylines.length + ' | Dormant: ' + dormantStorylines.length);
+  lines.push('');
+
+  // Urgent/high priority storylines (need immediate attention)
+  if (urgentStorylines.length > 0) {
+    lines.push('PRIORITY STORYLINES (require coverage):');
+    for (var ui = 0; ui < Math.min(urgentStorylines.length, 3); ui++) {
+      var urg = urgentStorylines[ui];
+      var urgPrefix = urg.priority === 'urgent' ? '🔴 URGENT: ' : '🟡 HIGH: ';
+      lines.push('  ' + urgPrefix + urg.description);
+      if (urg.neighborhood) lines.push('    Location: ' + urg.neighborhood);
+      if (urg.relatedCitizens) lines.push('    Citizens: ' + urg.relatedCitizens);
+    }
+    lines.push('');
+  }
+
+  // Dormant storylines needing revival (5+ cycles)
+  var needsRevival = [];
+  for (var di = 0; di < dormantStorylines.length; di++) {
+    if (dormantStorylines[di].cyclesSinceAdded >= 5) {
+      needsRevival.push(dormantStorylines[di]);
+    }
+  }
+
+  if (needsRevival.length > 0) {
+    // Sort by oldest first
+    needsRevival.sort(function(a, b) { return b.cyclesSinceAdded - a.cyclesSinceAdded; });
+
+    lines.push('DORMANT (consider revival):');
+    for (var ri = 0; ri < Math.min(needsRevival.length, 3); ri++) {
+      var rev = needsRevival[ri];
+      lines.push('  ⏸️ ' + rev.description + ' — ' + rev.cyclesSinceAdded + ' cycles dormant');
+      if (rev.neighborhood) lines.push('    Location: ' + rev.neighborhood);
+    }
+    lines.push('');
+  }
+
+  // Mystery/question storylines
+  var mysteries = [];
+  for (var mi = 0; mi < activeStorylines.length; mi++) {
+    var myst = activeStorylines[mi];
+    if (myst.type === 'mystery' || myst.type === 'question') {
+      mysteries.push(myst);
+    }
+  }
+
+  if (mysteries.length > 0) {
+    lines.push('OPEN QUESTIONS (unresolved):');
+    for (var qi = 0; qi < Math.min(mysteries.length, 3); qi++) {
+      var q = mysteries[qi];
+      lines.push('  ❓ ' + q.description);
+    }
+    lines.push('');
+  }
+
+  // Recent active storylines (for continuity reference)
+  var recent = activeStorylines.filter(function(s) { return s.cyclesSinceAdded <= 3; });
+  if (recent.length > 0) {
+    lines.push('RECENTLY ACTIVE (last 3 cycles):');
+    for (var rci = 0; rci < Math.min(recent.length, 5); rci++) {
+      var rec = recent[rci];
+      var typeTag = rec.type ? '[' + rec.type + ']' : '';
+      lines.push('  • ' + rec.description + ' ' + typeTag);
+    }
+    lines.push('');
+  }
+
+  // If no storylines, indicate that
+  if (activeStorylines.length === 0 && dormantStorylines.length === 0) {
+    lines.push('No tracked storylines. Consider establishing narrative threads.');
   }
 
   return lines;

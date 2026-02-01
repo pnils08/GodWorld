@@ -1,11 +1,15 @@
 /**
  * ============================================================================
- * V3.4 STORY SEEDS ENGINE — SPORTS GENERALIZED + MANUAL INPUT
+ * V3.5 STORY SEEDS ENGINE — SPORTS GENERALIZED + MANUAL INPUT + UI RENDER
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
  *
- * v3.4 Enhancements:
+ * v3.5 Enhancements:
+ * - Added renderStorySeedsForUI_() for headline/lede/angle format
+ * - Outputs ready for mediaRoomBriefingGenerator or Press_Drafts
+ *
+ * v3.4 Features (retained):
  * - Sports generalization (no hardcoded team references)
  * - Generic sports phases: finals, postseason, late-season, in-season, preseason, off-season
  * - Manual input system via ctx.config.manualStoryInputs
@@ -812,14 +816,167 @@ function applyStorySeeds_(ctx) {
 
 /**
  * ============================================================================
- * STORY SEEDS ENGINE REFERENCE v3.4
+ * renderStorySeedsForUI_ v1.0 — HEADLINE + LEDE + ANGLE FORMAT
  * ============================================================================
+ *
+ * Converts story seeds into newsroom-ready format:
+ * - Headline: Short punchy title
+ * - Lede: Opening sentence/hook
+ * - Angle: Editorial direction hint
+ *
+ * Call AFTER applyStorySeeds_() so ctx.summary.storySeeds is populated.
+ *
+ * Outputs:
+ * - ctx.summary.storySeedsUI (array of formatted objects)
+ * - Returns top N seeds (default 5) in UI format
+ *
+ * ============================================================================
+ */
+function renderStorySeedsForUI_(ctx, maxSeeds) {
+  if (!ctx || !ctx.summary || !ctx.summary.storySeeds) return [];
+
+  var seeds = ctx.summary.storySeeds;
+  var limit = maxSeeds || 5;
+  var output = [];
+
+  for (var i = 0; i < seeds.length && i < limit; i++) {
+    var seed = seeds[i];
+
+    // Generate headline from seed text (first clause or truncated)
+    var headline = generateHeadline_(seed.text, seed.domain);
+
+    // Lede is the full seed text
+    var lede = seed.text;
+
+    // Angle based on seedType and priority
+    var angle = generateAngle_(seed);
+
+    output.push({
+      seedId: seed.seedId,
+      headline: headline,
+      lede: lede,
+      angle: angle,
+      domain: seed.domain,
+      neighborhood: seed.neighborhood,
+      priority: seed.priority,
+      seedType: seed.seedType
+    });
+  }
+
+  ctx.summary.storySeedsUI = output;
+  return output;
+}
+
+/**
+ * Generate a punchy headline from seed text
+ */
+function generateHeadline_(text, domain) {
+  if (!text) return 'Story Developing';
+
+  // If text has a period, take first sentence
+  var firstSentence = text.split('.')[0];
+
+  // Truncate if too long (max 60 chars for headline)
+  if (firstSentence.length > 60) {
+    // Find a natural break point
+    var truncated = firstSentence.substring(0, 57);
+    var lastSpace = truncated.lastIndexOf(' ');
+    if (lastSpace > 40) {
+      return truncated.substring(0, lastSpace) + '...';
+    }
+    return truncated + '...';
+  }
+
+  return firstSentence;
+}
+
+/**
+ * Generate editorial angle hint based on seed metadata
+ */
+function generateAngle_(seed) {
+  var type = seed.seedType || 'signal';
+  var priority = seed.priority || 1;
+  var domain = seed.domain || 'GENERAL';
+  var nh = seed.neighborhood || '';
+
+  var angles = [];
+
+  // Priority-based angles
+  if (priority >= 3) {
+    angles.push('LEAD STORY');
+  } else if (priority === 2) {
+    angles.push('FEATURE');
+  } else {
+    angles.push('BRIEF');
+  }
+
+  // Type-based angles
+  if (type === 'shock') {
+    angles.push('BREAKING');
+  } else if (type === 'pattern') {
+    angles.push('TREND PIECE');
+  } else if (type === 'arc') {
+    angles.push('ONGOING');
+  } else if (type === 'spotlight') {
+    angles.push('PROFILE');
+  } else if (type === 'holiday' || type === 'firstfriday' || type === 'creationday') {
+    angles.push('CALENDAR');
+  } else if (type === 'sports') {
+    angles.push('SPORTS DESK');
+  } else if (type === 'health') {
+    angles.push('HEALTH BEAT');
+  }
+
+  // Domain desk assignment
+  if (domain === 'CIVIC' || domain === 'SAFETY') {
+    angles.push('CITY DESK');
+  } else if (domain === 'BUSINESS') {
+    angles.push('BUSINESS DESK');
+  } else if (domain === 'CULTURE' || domain === 'COMMUNITY') {
+    angles.push('LIFESTYLE');
+  } else if (domain === 'SPORTS') {
+    angles.push('SPORTS DESK');
+  }
+
+  // Neighborhood localization
+  if (nh) {
+    angles.push(nh.toUpperCase() + ' FOCUS');
+  }
+
+  return angles.join(' | ');
+}
+
+
+/**
+ * ============================================================================
+ * STORY SEEDS ENGINE REFERENCE v3.5
+ * ============================================================================
+ *
+ * v3.5 CHANGES:
+ * - Added renderStorySeedsForUI_() for headline/lede/angle format
+ * - Output feeds mediaRoomBriefingGenerator or Press_Drafts
  *
  * v3.4 CHANGES:
  * - Sports generalization: No hardcoded team references
  * - Generic phases: finals, postseason, late-season, in-season, preseason, off-season
  * - Manual input: ctx.config.manualStoryInputs
  * - Extra seeds: manual.extraSeeds[] injection
+ *
+ * RENDER FORMAT (v3.5):
+ * renderStorySeedsForUI_(ctx, 5) returns:
+ * [
+ *   {
+ *     seedId: "abc12345",
+ *     headline: "Championship fever grips the city",
+ *     lede: "Championship fever grips the city near Jack London. Championship on the line. Community united behind the team.",
+ *     angle: "LEAD STORY | SPORTS DESK | JACK LONDON FOCUS",
+ *     domain: "SPORTS",
+ *     neighborhood: "Jack London",
+ *     priority: 3,
+ *     seedType: "sports"
+ *   },
+ *   ...
+ * ]
  *
  * MANUAL INPUT FORMAT:
  * ctx.config.manualStoryInputs = {

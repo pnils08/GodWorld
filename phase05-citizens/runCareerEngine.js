@@ -1,12 +1,12 @@
 /**
  * ============================================================================
- * Career Engine v2.2
+ * Career Engine v2.3
  * ============================================================================
- * 
+ *
  * Lightweight, calendar-aware, weather-aware career drift generator.
  * Only affects ENGINE-mode Tier-3 and Tier-4 non-UNI/MED/CIV citizens.
  * Never changes RoleType or Status. Logs soft career observations only.
- * 
+ *
  * v2.2 Enhancements:
  * - Expanded to 12 neighborhoods
  * - Holiday-specific career notes (long weekends, retail rush, etc.)
@@ -16,8 +16,18 @@
  * - Aligned with GodWorld Calendar v1.0
  *
  * Oakland workplace context integrated.
- * 
+ *
  * ============================================================================
+ *
+ * v2.3 ADDITIONS (schema-safe, additive)
+ * - CareerState persistence via LifeHistory line: "[CareerState] k=v|k=v..."
+ * - Job transitions: promotion, lateral shift, layoff, sector shift
+ * - Employer/industry modeling: tech/retail/public/health/creative/logistics/hospitality
+ * - Tenure + skill accumulation to drive career arcs
+ * - Industry cycle pressure: season + holiday + econMood + chaos + weather friction
+ * - Deterministic RNG via ctx.rng / ctx.config.rngSeed (matches other engines)
+ * - Batch append to LifeHistory_Log (avoid appendRow per citizen)
+ * - Summary outputs: ctx.summary.careerSignals (aggregates for downstream)
  */
 
 function runCareerEngine_(ctx) {
@@ -46,12 +56,14 @@ function runCareerEngine_(ctx) {
   var iLife = idx('LifeHistory');
   var iLastUpd = idx('LastUpdated');
   var iNeighborhood = idx('Neighborhood');
-  var iTierRole = idx('TierRole');
+  var iTierRole = idx('TierRole'); // read-only; do not write
+
+  if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0 || iLastUpd < 0) return;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════
-  var S = ctx.summary;
+  var S = ctx.summary || (ctx.summary = {});
   var season = S.season;
   var holiday = S.holiday || "none";
   var holidayPriority = S.holidayPriority || "none";
@@ -64,10 +76,225 @@ function runCareerEngine_(ctx) {
     sentiment: 0, culturalActivity: 1, communityEngagement: 1
   };
   var econMood = S.economicMood || 50;
-  var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
+  var cycle = S.absoluteCycle || S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+
+  // v2.3: Deterministic RNG (prefer ctx.rng, else seed via mulberry32_, else Math.random)
+  var rng = (typeof ctx.rng === "function")
+    ? ctx.rng
+    : (ctx.config && typeof ctx.config.rngSeed === "number" && typeof mulberry32_ === "function")
+      ? mulberry32_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
+      : Math.random;
+  function roll() { return rng(); }
+  function chanceHit(p) { return roll() < p; }
+  function pickOne(arr) { return arr[Math.floor(roll() * arr.length)]; }
+  function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }
+  function safeStr(v) { return (v === null || v === undefined) ? "" : String(v); }
 
   var count = 0;
   var LIMIT = 10;
+
+  // v2.3: Batch logs to avoid appendRow in loop
+  var logRows = [];
+
+  // v2.3: Downstream-friendly aggregate signals
+  if (!S.careerSignals) {
+    S.careerSignals = {
+      cycle: cycle,
+      transitions: 0,
+      promotions: 0,
+      layoffs: 0,
+      sectorShifts: 0,
+      training: 0,
+      avgTenure: 0,
+      avgLevel: 0,
+      industries: {},
+      pressure: {}
+    };
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.3: CAREER MODEL (schema-safe, persists in LifeHistory via [CareerState])
+  // ═══════════════════════════════════════════════════════════════════════════
+  var INDUSTRIES = ["tech", "retail", "public", "health", "creative", "logistics", "hospitality"];
+  var EMPLOYERS = ["startup", "mid", "enterprise", "public", "nonprofit", "gig"];
+
+  function getIndustrySeasonBias_(industry, season, holiday) {
+    var bias = 0;
+    if (season === "Winter") {
+      if (industry === "retail" || industry === "hospitality") bias += 0.10;
+    }
+    if (season === "Summer") {
+      if (industry === "hospitality" || industry === "logistics") bias += 0.08;
+      if (industry === "public") bias -= 0.04;
+    }
+    if (holiday === "Holiday" && (industry === "retail" || industry === "logistics")) bias += 0.12;
+    if (holiday === "BlackFriday" && industry === "retail") bias += 0.20;
+    if (holidayPriority === "major" && industry === "hospitality") bias += 0.06;
+    return bias;
+  }
+
+  function getMacroPressure_(mood) {
+    if (mood >= 70) return 0.7;
+    if (mood >= 60) return 0.35;
+    if (mood >= 45) return 0.05;
+    if (mood >= 35) return -0.25;
+    return -0.65;
+  }
+
+  function getChaosPressure_(chaosList) {
+    var c = chaosList ? chaosList.length : 0;
+    if (c >= 6) return 0.35;
+    if (c >= 3) return 0.18;
+    if (c >= 1) return 0.10;
+    return 0;
+  }
+
+  function getWeatherPressure_(w) {
+    var t = (w && w.type) ? w.type : "clear";
+    if (t === "snow") return 0.25;
+    if (t === "fog") return 0.12;
+    if (t === "rain") return 0.10;
+    if (t === "hot") return 0.08;
+    return 0;
+  }
+
+  function parseCareerStateFromLife_(lifeStr) {
+    var st = {
+      industry: null,
+      employer: null,
+      level: 1,
+      tenure: 0,
+      skill: { general: 0.2 },
+      incomeBand: "low",
+      lastTransition: 0
+    };
+    if (!lifeStr) return st;
+    var lines = String(lifeStr).split("\n");
+    for (var i = lines.length - 1; i >= 0; i--) {
+      var line = lines[i];
+      if (line.indexOf("[CareerState]") >= 0) {
+        var parts = line.split("[CareerState]");
+        if (parts.length < 2) break;
+        var payload = parts[1].trim();
+        var segs = payload.split("|");
+        for (var s = 0; s < segs.length; s++) {
+          var seg = segs[s];
+          var eq = seg.indexOf("=");
+          if (eq < 0) continue;
+          var k = seg.substring(0, eq).trim();
+          var v = seg.substring(eq + 1).trim();
+          if (k === "industry") st.industry = v || st.industry;
+          else if (k === "employer") st.employer = v || st.employer;
+          else if (k === "income") st.incomeBand = v || st.incomeBand;
+          else if (k === "level") st.level = parseInt(v, 10) || st.level;
+          else if (k === "tenure") st.tenure = parseInt(v, 10) || st.tenure;
+          else if (k === "lastT") st.lastTransition = parseInt(v, 10) || st.lastTransition;
+          else if (k === "skill") {
+            var skills = v.split(",");
+            st.skill = st.skill || {};
+            for (var si = 0; si < skills.length; si++) {
+              var kv = skills[si].split(":");
+              if (kv.length === 2) {
+                var sk = kv[0];
+                var sv = parseFloat(kv[1]);
+                if (sk) st.skill[sk] = isNaN(sv) ? (st.skill[sk] || 0) : sv;
+              }
+            }
+          }
+        }
+        break;
+      }
+    }
+    return st;
+  }
+
+  function encodeSkill_(skillObj) {
+    var out = [];
+    for (var k in skillObj) {
+      if (!skillObj.hasOwnProperty(k)) continue;
+      var v = skillObj[k];
+      if (typeof v !== "number") continue;
+      out.push(k + ":" + (Math.round(v * 100) / 100));
+    }
+    return out.join(",");
+  }
+
+  function inferIncomeBand_(industry, level) {
+    if (industry === "tech" && level >= 3) return "high";
+    if (industry === "public" && level >= 4) return "mid";
+    if (industry === "health" && level >= 3) return "mid";
+    if (industry === "retail" && level >= 4) return "mid";
+    if (level >= 4) return "mid";
+    return "low";
+  }
+
+  function pickInitialIndustry_(tierRole) {
+    var tr = safeStr(tierRole).toLowerCase();
+    if (tr.indexOf("artist") >= 0 || tr.indexOf("creative") >= 0) return "creative";
+    if (tr.indexOf("nurse") >= 0 || tr.indexOf("clinic") >= 0) return "health";
+    if (tr.indexOf("gov") >= 0 || tr.indexOf("public") >= 0) return "public";
+    if (tr.indexOf("driver") >= 0 || tr.indexOf("warehouse") >= 0) return "logistics";
+    if (tr.indexOf("service") >= 0 || tr.indexOf("bar") >= 0 || tr.indexOf("food") >= 0) return "hospitality";
+    if (tr.indexOf("retail") >= 0 || tr.indexOf("shop") >= 0) return "retail";
+    return pickOne(INDUSTRIES);
+  }
+
+  function pickEmployerType_(industry) {
+    if (industry === "public") return "public";
+    if (industry === "creative") return chanceHit(0.35) ? "gig" : "nonprofit";
+    if (industry === "retail") return chanceHit(0.60) ? "mid" : "enterprise";
+    if (industry === "tech") return chanceHit(0.45) ? "startup" : "enterprise";
+    return pickOne(EMPLOYERS);
+  }
+
+  function chooseSkillFocus_(industry) {
+    if (industry === "tech") return "systems";
+    if (industry === "retail") return "sales";
+    if (industry === "public") return "process";
+    if (industry === "health") return "care";
+    if (industry === "creative") return "craft";
+    if (industry === "logistics") return "ops";
+    if (industry === "hospitality") return "service";
+    return "general";
+  }
+
+  function addSkillXP_(st, focus, amt) {
+    if (!st.skill) st.skill = {};
+    st.skill.general = clamp((st.skill.general || 0) + (amt * 0.35), 0, 1);
+    if (focus) st.skill[focus] = clamp((st.skill[focus] || 0) + amt, 0, 1);
+  }
+
+  function maybeTransition_(st, context) {
+    if (st.lastTransition && (cycle - st.lastTransition) < 6) return null;
+
+    var macro = getMacroPressure_(context.econMood);
+    var chaosP = getChaosPressure_(context.chaos);
+    var wP = getWeatherPressure_(context.weather);
+    var seasonBias = getIndustrySeasonBias_(st.industry, context.season, context.holiday);
+
+    var pressure = macro + seasonBias - (chaosP * 0.35) - (wP * 0.20);
+    pressure = clamp(pressure, -1, 1);
+    S.careerSignals.pressure[st.industry] = Math.round(pressure * 100) / 100;
+
+    var skillCore = (st.skill && st.skill.general) ? st.skill.general : 0.25;
+    var promoChance = 0.01 + (st.tenure * 0.004) + (Math.max(0, pressure) * 0.02) + (skillCore * 0.015);
+    promoChance = clamp(promoChance, 0, 0.08);
+
+    var layoffChance = 0.004 + (Math.max(0, -pressure) * 0.03) + (chaosP * 0.01);
+    layoffChance = clamp(layoffChance, 0, 0.07);
+
+    var shiftChance = 0.004 + (Math.max(0, -pressure) * 0.018) + (roll() * 0.004);
+    shiftChance = clamp(shiftChance, 0, 0.05);
+
+    var lateralChance = 0.006 + (Math.max(0, pressure) * 0.012);
+    lateralChance = clamp(lateralChance, 0, 0.05);
+
+    if (chanceHit(layoffChance)) return { type: "layoff", text: "faced an unexpected work disruption and started looking for new options" };
+    if (chanceHit(promoChance) && st.level < 5) return { type: "promotion", text: "earned a quiet step up at work—more responsibility, fewer excuses" };
+    if (chanceHit(shiftChance)) return { type: "sector_shift", text: "considered a sector change after noticing the ground shifting under their role" };
+    if (chanceHit(lateralChance)) return { type: "lateral", text: "made a lateral move that looked small on paper but felt strategic" };
+    return null;
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BASE MICRO-CAREER POOL
@@ -79,6 +306,15 @@ function runCareerEngine_(ctx) {
     "saw minor shifts in workplace expectations",
     "received small positive feedback on daily tasks",
     "handled ordinary work responsibilities without incident"
+  ];
+
+  // v2.3: Skill/training flavor (light injection)
+  var trainingPool = [
+    "picked up a small skill that made the day easier",
+    "learned a trick from someone who didn't explain it twice",
+    "improved a routine process and kept it quiet",
+    "spent time sharpening a skill that might matter later",
+    "noticed how competence attracts new expectations"
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -331,6 +567,10 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // ITERATE THROUGH CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
+  var sumTenure = 0;
+  var sumLevel = 0;
+  var careerCounted = 0;
+
   for (var r = 0; r < rows.length; r++) {
 
     if (count >= LIMIT) break;
@@ -343,11 +583,31 @@ function runCareerEngine_(ctx) {
     var isMED = (row[iMED] || "").toString().toLowerCase() === "y";
     var isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
     var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
+    var tierRole = iTierRole >= 0 ? row[iTierRole] : "";
+    var popId = row[iPopID];
+    if (!popId) continue;
 
     // Only allow ENGINE Tier-3/4 non-UNI/MED/CIV
     if (mode !== "ENGINE") continue;
     if (tier !== 3 && tier !== 4) continue;
     if (isUNI || isMED || isCIV) continue;
+
+    // v2.3: Load/init career state from LifeHistory
+    var existing = row[iLife] ? row[iLife].toString() : "";
+    var st = parseCareerStateFromLife_(existing);
+    if (!st.industry) st.industry = pickInitialIndustry_(tierRole);
+    if (!st.employer) st.employer = pickEmployerType_(st.industry);
+    if (!st.level) st.level = 1;
+    if (st.tenure === null || st.tenure === undefined) st.tenure = 0;
+
+    // v2.3: Advance tenure + small skill gain
+    st.tenure += 1;
+    var focus = chooseSkillFocus_(st.industry);
+    var xp = 0.01 + (roll() * 0.02);
+    if (econMood >= 65) xp += 0.005;
+    if (econMood <= 35) xp -= 0.004;
+    xp = clamp(xp, 0.004, 0.04);
+    addSkillXP_(st, focus, xp);
 
     // ═══════════════════════════════════════════════════════════════════════
     // DRIFT PROBABILITY
@@ -379,7 +639,7 @@ function runCareerEngine_(ctx) {
     else if (holidayPriority === "minor") chance += 0.005;
 
     // Long weekend holidays boost (v2.2)
-    if (holiday === "MemorialDay" || holiday === "LaborDay" || 
+    if (holiday === "MemorialDay" || holiday === "LaborDay" ||
         holiday === "Thanksgiving" || holiday === "Independence") {
       chance += 0.008;
     }
@@ -402,10 +662,13 @@ function runCareerEngine_(ctx) {
     // Community engagement boost (v2.2)
     if (dynamics.communityEngagement >= 1.3) chance += 0.005;
 
-    // Cap chance
-    if (chance > 0.12) chance = 0.12;
+    // v2.3: Extreme macro conditions slightly increase "career notable" likelihood
+    var macroP = getMacroPressure_(econMood);
+    if (macroP <= -0.65 || macroP >= 0.7) chance += 0.006;
 
-    if (Math.random() >= chance) continue;
+    // Cap chance
+    if (chance > 0.14) chance = 0.14;
+    if (!chanceHit(chance)) continue;
 
     // ═══════════════════════════════════════════════════════════════════════
     // BUILD CITIZEN-SPECIFIC POOL
@@ -417,68 +680,164 @@ function runCareerEngine_(ctx) {
       pool = pool.concat(neighborhoodCareer[neighborhood]);
     }
 
+    // v2.3: occasional training flavor
+    if (chanceHit(0.25)) pool = pool.concat(trainingPool);
+
+    // v2.3: maybe transition
+    var tEv = maybeTransition_(st, {
+      econMood: econMood,
+      season: season,
+      holiday: holiday,
+      chaos: chaos,
+      weather: weather
+    });
+
     // Choose drift output
-    var pick = pool[Math.floor(Math.random() * pool.length)];
+    var pick = null;
     var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
 
     // Determine event tag (v2.2)
     var eventTag = "Career";
-    if (firstFridayCareer.indexOf(pick) >= 0) {
-      eventTag = "Career-FirstFriday";
-    } else if (creationDayCareer.indexOf(pick) >= 0) {
-      eventTag = "Career-CreationDay";
-    } else if (holidayCareer.indexOf(pick) >= 0) {
-      eventTag = "Career-Holiday";
+
+    if (tEv) {
+      pick = tEv.text;
+      eventTag = "Career-Transition";
+      st.lastTransition = cycle;
+      if (tEv.type === "promotion") {
+        st.level = Math.min(5, st.level + 1);
+        st.tenure = Math.max(1, Math.round(st.tenure * 0.55));
+        S.careerSignals.promotions += 1;
+        S.careerSignals.transitions += 1;
+      } else if (tEv.type === "layoff") {
+        st.tenure = 0;
+        st.employer = "gig";
+        S.careerSignals.layoffs += 1;
+        S.careerSignals.transitions += 1;
+      } else if (tEv.type === "sector_shift") {
+        var old = st.industry;
+        var tries = 0;
+        while (tries < 6) {
+          var cand = pickOne(INDUSTRIES);
+          if (cand !== old) { st.industry = cand; break; }
+          tries++;
+        }
+        st.employer = pickEmployerType_(st.industry);
+        st.tenure = 0;
+        S.careerSignals.sectorShifts += 1;
+        S.careerSignals.transitions += 1;
+      } else if (tEv.type === "lateral") {
+        st.employer = pickEmployerType_(st.industry);
+        st.tenure = Math.max(1, Math.round(st.tenure * 0.70));
+        S.careerSignals.transitions += 1;
+      }
+    } else {
+      pick = pool[Math.floor(roll() * pool.length)];
+      if (firstFridayCareer.indexOf(pick) >= 0) eventTag = "Career-FirstFriday";
+      else if (creationDayCareer.indexOf(pick) >= 0) eventTag = "Career-CreationDay";
+      else if (holidayCareer.indexOf(pick) >= 0) eventTag = "Career-Holiday";
+      else if (trainingPool.indexOf(pick) >= 0) {
+        eventTag = "Career-Training";
+        S.careerSignals.training += 1;
+      }
     }
 
-    var existing = row[iLife] ? row[iLife].toString() : "";
-    var line = stamp + " — [" + eventTag + "] " + pick;
+    // v2.3: derived income + aggregates
+    st.incomeBand = inferIncomeBand_(st.industry, st.level);
+    S.careerSignals.industries[st.industry] = (S.careerSignals.industries[st.industry] || 0) + 1;
 
-    row[iLife] = existing ? existing + "\n" + line : line;
+    var line = stamp + " — [" + eventTag + "] " + pick;
+    var lifeOut = existing ? (existing + "\n" + line) : line;
+
+    // v2.3: persist CareerState occasionally or always on transition
+    var shouldPersistState = !!tEv || chanceHit(0.20);
+    if (shouldPersistState) {
+      var stateLine = stamp + " — [CareerState] " +
+        "industry=" + st.industry +
+        "|employer=" + st.employer +
+        "|level=" + st.level +
+        "|tenure=" + st.tenure +
+        "|income=" + st.incomeBand +
+        "|lastT=" + (st.lastTransition || 0) +
+        "|skill=" + encodeSkill_(st.skill) +
+        "|Updated:c" + cycle;
+      lifeOut = lifeOut + "\n" + stateLine;
+    }
+
+    row[iLife] = lifeOut;
     row[iLastUpd] = ctx.now;
 
+    // v2.3: batch logs (no appendRow inside loop)
     if (logSheet) {
-      logSheet.appendRow([
+      logRows.push([
         ctx.now,
         row[iPopID],
-        (row[iFirst] + " " + row[iLast]).trim(),
+        (safeStr(row[iFirst]) + " " + safeStr(row[iLast])).trim(),
         eventTag,
         pick,
         neighborhood || "Engine",
         cycle
       ]);
+      if (shouldPersistState) {
+        logRows.push([
+          ctx.now,
+          row[iPopID],
+          (safeStr(row[iFirst]) + " " + safeStr(row[iLast])).trim(),
+          "CareerState",
+          ("industry=" + st.industry + "|employer=" + st.employer + "|level=" + st.level + "|income=" + st.incomeBand),
+          neighborhood || "Engine",
+          cycle
+        ]);
+      }
     }
 
     rows[r] = row;
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
     count++;
+
+    sumTenure += st.tenure;
+    sumLevel += st.level;
+    careerCounted += 1;
   }
 
   ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
-  
+
+  // v2.3: flush batched logs
+  if (logSheet && logRows.length) {
+    var startRow = logSheet.getLastRow() + 1;
+    logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
+  }
+
   // Summary
   S.careerEvents = count;
+  if (careerCounted > 0) {
+    S.careerSignals.avgTenure = Math.round((sumTenure / careerCounted) * 100) / 100;
+    S.careerSignals.avgLevel = Math.round((sumLevel / careerCounted) * 100) / 100;
+  }
+  S.careerSignals.cycle = cycle;
   ctx.summary = S;
 }
 
 
 /**
  * ============================================================================
- * CAREER EVENT REFERENCE
+ * CAREER EVENT REFERENCE v2.3
  * ============================================================================
- * 
+ *
  * Event Tags:
  * - Career: Base career drift events
  * - Career-FirstFriday: Art walk related
  * - Career-CreationDay: Foundational reflection
  * - Career-Holiday: Holiday-specific work events
- * 
+ * - Career-Transition: v2.3 job transitions (promotion/layoff/lateral/shift)
+ * - Career-Training: v2.3 skill development events
+ * - CareerState: v2.3 persistent state snapshot (logged separately)
+ *
  * Holiday Impacts:
  * - Long weekends: Lighter attendance, pre-holiday wrap-up
  * - Thanksgiving/Holiday: Year-end tasks, potlucks
  * - Valentine/Mother's/Father's: Retail rush
  * - BackToSchool: Schedule adjustments
- * 
+ *
  * Neighborhood Character (12 total):
  * - Downtown: Business district energy
  * - Jack London: Waterfront atmosphere
@@ -486,6 +845,20 @@ function runCareerEngine_(ctx) {
  * - KONO: Creative DIY spirit
  * - Chinatown: Bustling markets
  * - etc.
- * 
+ *
+ * v2.3 Career State (persisted in LifeHistory):
+ * - industry: tech/retail/public/health/creative/logistics/hospitality
+ * - employer: startup/mid/enterprise/public/nonprofit/gig
+ * - level: 1-5 (career progression)
+ * - tenure: cycles in current role
+ * - skill: general + industry-specific (0-1)
+ * - incomeBand: low/mid/high (derived)
+ *
+ * v2.3 Downstream Signals (ctx.summary.careerSignals):
+ * - transitions/promotions/layoffs/sectorShifts/training counts
+ * - avgTenure/avgLevel across processed citizens
+ * - industries: count per industry
+ * - pressure: industry pressure snapshot (-1 to +1)
+ *
  * ============================================================================
  */

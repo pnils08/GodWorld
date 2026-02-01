@@ -1,12 +1,18 @@
 /**
  * ============================================================================
- * V3.5 STORY SEEDS ENGINE — SPORTS GENERALIZED + MANUAL INPUT + UI RENDER
+ * V3.6 STORY SEEDS ENGINE — QOL CIVIC TEXTURE + CRIME METRICS INTEGRATION
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
  *
- * v3.5 Enhancements:
- * - Added renderStorySeedsForUI_() for headline/lede/angle format
+ * v3.6 Enhancements:
+ * - QoL civic texture seeds from crimeMetrics v1.2 qualityOfLifeIndex
+ * - Reporting gap seeds (underreporting angles)
+ * - Neighborhood-level QoL targeting via clusterDefinitions
+ * - Patrol strategy awareness for enforcement story angles
+ *
+ * v3.5 Features (retained):
+ * - renderStorySeedsForUI_() for headline/lede/angle format
  * - Outputs ready for mediaRoomBriefingGenerator or Press_Drafts
  *
  * v3.4 Features (retained):
@@ -78,6 +84,19 @@ function applyStorySeeds_(ctx) {
   var weightReason = S.cycleWeightReason || '';
   var spotlights = S.namedSpotlights || [];
   var seasonal = S.seasonalStorySeeds || [];
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CRIME METRICS CONTEXT (v3.6)
+  // ═══════════════════════════════════════════════════════════════════════════
+  var crimeMetrics = S.crimeMetrics || {};
+  var qualityOfLifeIndex = crimeMetrics.qualityOfLifeIndex || 0.5;
+  var reportedIncidentCount = crimeMetrics.reportedIncidentCount || 0;
+  var trueIncidentCount = crimeMetrics.trueIncidentCount || 0;
+  var reportingRatio = (trueIncidentCount > 0) ? (reportedIncidentCount / trueIncidentCount) : 1;
+  var patrolStrategy = crimeMetrics.patrolStrategy || 'balanced';
+  var enforcementCapacity = crimeMetrics.enforcementCapacity || 1.0;
+  var crimeHotspots = crimeMetrics.hotspots || [];
+  var neighborhoodCrime = crimeMetrics.neighborhoodBreakdown || {};
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT (v3.2)
@@ -428,6 +447,94 @@ function applyStorySeeds_(ctx) {
       "Community withdrawal noted. Neighbors pulling back. Why?",
       'COMMUNITY', '', 2, 'engagement'
     ));
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // QOL CIVIC TEXTURE SEEDS (v3.6)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  // Low quality of life → civic texture beats
+  if (qualityOfLifeIndex <= 0.35) {
+    seeds.push(makeSeed(
+      "Quality of life concerns mounting across neighborhoods. Noise, nuisance, and disorder shaping daily experience.",
+      'CIVIC', '', 3, 'qol'
+    ));
+    seeds.push(makeSeed(
+      "Residents voice frustration over persistent quality-of-life issues. What's the tipping point?",
+      'COMMUNITY', '', 2, 'qol'
+    ));
+  } else if (qualityOfLifeIndex <= 0.45) {
+    seeds.push(makeSeed(
+      "Quality of life strain noted in pockets of the city. Minor but persistent irritants.",
+      'CIVIC', '', 2, 'qol'
+    ));
+  } else if (qualityOfLifeIndex >= 0.75) {
+    seeds.push(makeSeed(
+      "Neighborhood quality of life trending upward. Clean streets, quiet nights.",
+      'COMMUNITY', '', 2, 'qol'
+    ));
+  } else if (qualityOfLifeIndex >= 0.65) {
+    seeds.push(makeSeed(
+      "Positive signs in neighborhood livability. Small wins adding up.",
+      'COMMUNITY', '', 1, 'qol'
+    ));
+  }
+
+  // Reporting gap seeds — underreporting angle
+  if (reportingRatio < 0.5 && trueIncidentCount > 10) {
+    seeds.push(makeSeed(
+      "Significant gap between reported and actual incidents. Why aren't residents calling it in?",
+      'CIVIC', '', 3, 'qol'
+    ));
+  } else if (reportingRatio < 0.65 && trueIncidentCount > 5) {
+    seeds.push(makeSeed(
+      "Underreporting pattern detected. Trust or fatigue? Community voices needed.",
+      'CIVIC', '', 2, 'qol'
+    ));
+  }
+
+  // Enforcement capacity seeds
+  if (enforcementCapacity < 0.6) {
+    seeds.push(makeSeed(
+      "Enforcement resources stretched thin. Response times and coverage suffering.",
+      'SAFETY', '', 2, 'qol'
+    ));
+  } else if (enforcementCapacity > 1.3) {
+    seeds.push(makeSeed(
+      "Heightened enforcement presence noted. Proactive patrols visible.",
+      'SAFETY', '', 1, 'qol'
+    ));
+  }
+
+  // Patrol strategy flavor
+  if (patrolStrategy === 'suppress_hotspots' && crimeHotspots.length > 0) {
+    seeds.push(makeSeed(
+      "Hotspot suppression strategy concentrates resources in " + String(crimeHotspots.length) + " zones. Displacement concerns?",
+      'SAFETY', '', 2, 'qol'
+    ));
+  } else if (patrolStrategy === 'community_presence') {
+    seeds.push(makeSeed(
+      "Community-presence policing emphasizes visibility over response. Building trust or spreading thin?",
+      'SAFETY', '', 2, 'qol'
+    ));
+  }
+
+  // Neighborhood-specific QoL hotspots
+  for (var nhKey in neighborhoodCrime) {
+    if (!neighborhoodCrime.hasOwnProperty(nhKey)) continue;
+    var nhData = neighborhoodCrime[nhKey];
+    var nhQol = nhData.qualityOfLifeIndex || 0.5;
+    if (nhQol <= 0.3) {
+      seeds.push(makeSeed(
+        "Quality of life crisis in " + nhKey + ". Noise, disorder, and frustration peak.",
+        'CIVIC', nhKey, 3, 'qol'
+      ));
+    } else if (nhQol >= 0.8) {
+      seeds.push(makeSeed(
+        nhKey + " emerges as quality-of-life bright spot. What's working there?",
+        'COMMUNITY', nhKey, 2, 'qol'
+      ));
+    }
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -925,6 +1032,8 @@ function generateAngle_(seed) {
     angles.push('SPORTS DESK');
   } else if (type === 'health') {
     angles.push('HEALTH BEAT');
+  } else if (type === 'qol') {
+    angles.push('CIVIC TEXTURE');
   }
 
   // Domain desk assignment
@@ -949,8 +1058,30 @@ function generateAngle_(seed) {
 
 /**
  * ============================================================================
- * STORY SEEDS ENGINE REFERENCE v3.5
+ * STORY SEEDS ENGINE REFERENCE v3.6
  * ============================================================================
+ *
+ * v3.6 CHANGES:
+ * - QoL civic texture seeds from crimeMetrics v1.2 qualityOfLifeIndex
+ * - Reporting gap seeds when reportedIncidentCount / trueIncidentCount < threshold
+ * - Enforcement capacity seeds (stretched thin / heightened presence)
+ * - Patrol strategy flavor seeds (suppress_hotspots / community_presence)
+ * - Neighborhood-level QoL targeting via crimeMetrics.neighborhoodBreakdown
+ * - New seedType: 'qol' with CIVIC TEXTURE angle
+ *
+ * CRIME METRICS INPUT (v3.6):
+ * ctx.summary.crimeMetrics = {
+ *   qualityOfLifeIndex: 0.0-1.0,         // Low = noise/nuisance issues, High = quality
+ *   reportedIncidentCount: number,       // What gets called in
+ *   trueIncidentCount: number,           // Estimated true count
+ *   patrolStrategy: string,              // 'suppress_hotspots' | 'community_presence' | 'balanced'
+ *   enforcementCapacity: number,         // 1.0 = normal, <0.6 = stretched, >1.3 = surplus
+ *   hotspots: string[],                  // Neighborhood names with elevated activity
+ *   neighborhoodBreakdown: {             // Per-neighborhood crime data
+ *     "Fruitvale": { qualityOfLifeIndex: 0.4, ... },
+ *     ...
+ *   }
+ * }
  *
  * v3.5 CHANGES:
  * - Added renderStorySeedsForUI_() for headline/lede/angle format
@@ -996,6 +1127,7 @@ function generateAngle_(seed) {
  * - holiday, firstfriday, creationday, sports
  * - cultural, engagement
  * - manual (v3.4)
+ * - qol (v3.6) — quality-of-life civic texture seeds
  *
  * SPORTS PHASES (v3.4):
  * - finals/championship -> priority 3

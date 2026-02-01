@@ -1,33 +1,30 @@
 /**
  * ============================================================================
- * Career Engine v2.3
+ * Career Engine v2.3.1
  * ============================================================================
  *
  * Lightweight, calendar-aware, weather-aware career drift generator.
  * Only affects ENGINE-mode Tier-3 and Tier-4 non-UNI/MED/CIV citizens.
  * Never changes RoleType or Status. Logs soft career observations only.
  *
- * v2.2 Enhancements:
- * - Expanded to 12 neighborhoods
- * - Holiday-specific career notes (long weekends, retail rush, etc.)
- * - First Friday effects on creative/arts workers
- * - Creation Day career reflection
- * - Cultural activity and community engagement modifiers
- * - Aligned with GodWorld Calendar v1.0
+ * v2.3.1 Changes:
+ * - Simplified industry model: tech/service/public/creative (was 7)
+ * - Simplified employer model: small/large/public (was 6)
+ * - careerSignals wired to Economic Ripple Engine
  *
- * Oakland workplace context integrated.
- *
- * ============================================================================
- *
- * v2.3 ADDITIONS (schema-safe, additive)
+ * v2.3 Features (retained):
  * - CareerState persistence via LifeHistory line: "[CareerState] k=v|k=v..."
  * - Job transitions: promotion, lateral shift, layoff, sector shift
- * - Employer/industry modeling: tech/retail/public/health/creative/logistics/hospitality
  * - Tenure + skill accumulation to drive career arcs
- * - Industry cycle pressure: season + holiday + econMood + chaos + weather friction
- * - Deterministic RNG via ctx.rng / ctx.config.rngSeed (matches other engines)
- * - Batch append to LifeHistory_Log (avoid appendRow per citizen)
+ * - Deterministic RNG via ctx.rng / ctx.config.rngSeed
+ * - Batch append to LifeHistory_Log
  * - Summary outputs: ctx.summary.careerSignals (aggregates for downstream)
+ *
+ * v2.2 Features (retained):
+ * - 12 neighborhoods, holiday notes, First Friday, Creation Day
+ * - Cultural activity and community engagement modifiers
+ *
+ * ============================================================================
  */
 
 function runCareerEngine_(ctx) {
@@ -114,22 +111,20 @@ function runCareerEngine_(ctx) {
 
   // ═══════════════════════════════════════════════════════════════════════════
   // v2.3: CAREER MODEL (schema-safe, persists in LifeHistory via [CareerState])
+  // v2.3.1: Simplified to 4 industries, 3 employer types (cut noise)
   // ═══════════════════════════════════════════════════════════════════════════
-  var INDUSTRIES = ["tech", "retail", "public", "health", "creative", "logistics", "hospitality"];
-  var EMPLOYERS = ["startup", "mid", "enterprise", "public", "nonprofit", "gig"];
+  var INDUSTRIES = ["tech", "service", "public", "creative"];
+  var EMPLOYERS = ["small", "large", "public"];
 
   function getIndustrySeasonBias_(industry, season, holiday) {
     var bias = 0;
-    if (season === "Winter") {
-      if (industry === "retail" || industry === "hospitality") bias += 0.10;
-    }
+    if (season === "Winter" && industry === "service") bias += 0.10;
     if (season === "Summer") {
-      if (industry === "hospitality" || industry === "logistics") bias += 0.08;
+      if (industry === "service") bias += 0.08;
       if (industry === "public") bias -= 0.04;
     }
-    if (holiday === "Holiday" && (industry === "retail" || industry === "logistics")) bias += 0.12;
-    if (holiday === "BlackFriday" && industry === "retail") bias += 0.20;
-    if (holidayPriority === "major" && industry === "hospitality") bias += 0.06;
+    if ((holiday === "Holiday" || holiday === "BlackFriday") && industry === "service") bias += 0.15;
+    if (holidayPriority === "major" && industry === "service") bias += 0.06;
     return bias;
   }
 
@@ -222,39 +217,33 @@ function runCareerEngine_(ctx) {
   function inferIncomeBand_(industry, level) {
     if (industry === "tech" && level >= 3) return "high";
     if (industry === "public" && level >= 4) return "mid";
-    if (industry === "health" && level >= 3) return "mid";
-    if (industry === "retail" && level >= 4) return "mid";
+    if (industry === "creative" && level >= 4) return "mid";
     if (level >= 4) return "mid";
     return "low";
   }
 
   function pickInitialIndustry_(tierRole) {
     var tr = safeStr(tierRole).toLowerCase();
-    if (tr.indexOf("artist") >= 0 || tr.indexOf("creative") >= 0) return "creative";
-    if (tr.indexOf("nurse") >= 0 || tr.indexOf("clinic") >= 0) return "health";
-    if (tr.indexOf("gov") >= 0 || tr.indexOf("public") >= 0) return "public";
-    if (tr.indexOf("driver") >= 0 || tr.indexOf("warehouse") >= 0) return "logistics";
-    if (tr.indexOf("service") >= 0 || tr.indexOf("bar") >= 0 || tr.indexOf("food") >= 0) return "hospitality";
-    if (tr.indexOf("retail") >= 0 || tr.indexOf("shop") >= 0) return "retail";
-    return pickOne(INDUSTRIES);
+    if (tr.indexOf("artist") >= 0 || tr.indexOf("creative") >= 0 || tr.indexOf("music") >= 0) return "creative";
+    if (tr.indexOf("gov") >= 0 || tr.indexOf("public") >= 0 || tr.indexOf("city") >= 0) return "public";
+    if (tr.indexOf("tech") >= 0 || tr.indexOf("engineer") >= 0 || tr.indexOf("developer") >= 0) return "tech";
+    // Everything else is service (retail, health, logistics, hospitality, etc.)
+    return chanceHit(0.6) ? "service" : pickOne(INDUSTRIES);
   }
 
   function pickEmployerType_(industry) {
     if (industry === "public") return "public";
-    if (industry === "creative") return chanceHit(0.35) ? "gig" : "nonprofit";
-    if (industry === "retail") return chanceHit(0.60) ? "mid" : "enterprise";
-    if (industry === "tech") return chanceHit(0.45) ? "startup" : "enterprise";
-    return pickOne(EMPLOYERS);
+    if (industry === "creative") return chanceHit(0.65) ? "small" : "large";
+    if (industry === "tech") return chanceHit(0.55) ? "small" : "large";
+    // service: mostly large employers (retail chains, hospitals, hotels)
+    return chanceHit(0.35) ? "small" : "large";
   }
 
   function chooseSkillFocus_(industry) {
     if (industry === "tech") return "systems";
-    if (industry === "retail") return "sales";
     if (industry === "public") return "process";
-    if (industry === "health") return "care";
     if (industry === "creative") return "craft";
-    if (industry === "logistics") return "ops";
-    if (industry === "hospitality") return "service";
+    if (industry === "service") return "operations";
     return "general";
   }
 
@@ -710,7 +699,7 @@ function runCareerEngine_(ctx) {
         S.careerSignals.transitions += 1;
       } else if (tEv.type === "layoff") {
         st.tenure = 0;
-        st.employer = "gig";
+        st.employer = "small";
         S.careerSignals.layoffs += 1;
         S.careerSignals.transitions += 1;
       } else if (tEv.type === "sector_shift") {
@@ -820,7 +809,7 @@ function runCareerEngine_(ctx) {
 
 /**
  * ============================================================================
- * CAREER EVENT REFERENCE v2.3
+ * CAREER EVENT REFERENCE v2.3.1
  * ============================================================================
  *
  * Event Tags:
@@ -828,37 +817,27 @@ function runCareerEngine_(ctx) {
  * - Career-FirstFriday: Art walk related
  * - Career-CreationDay: Foundational reflection
  * - Career-Holiday: Holiday-specific work events
- * - Career-Transition: v2.3 job transitions (promotion/layoff/lateral/shift)
- * - Career-Training: v2.3 skill development events
- * - CareerState: v2.3 persistent state snapshot (logged separately)
+ * - Career-Transition: job transitions (promotion/layoff/lateral/shift)
+ * - Career-Training: skill development events
+ * - CareerState: persistent state snapshot (logged separately)
  *
- * Holiday Impacts:
- * - Long weekends: Lighter attendance, pre-holiday wrap-up
- * - Thanksgiving/Holiday: Year-end tasks, potlucks
- * - Valentine/Mother's/Father's: Retail rush
- * - BackToSchool: Schedule adjustments
- *
- * Neighborhood Character (12 total):
- * - Downtown: Business district energy
- * - Jack London: Waterfront atmosphere
- * - Uptown: Urban arts district
- * - KONO: Creative DIY spirit
- * - Chinatown: Bustling markets
- * - etc.
- *
- * v2.3 Career State (persisted in LifeHistory):
- * - industry: tech/retail/public/health/creative/logistics/hospitality
- * - employer: startup/mid/enterprise/public/nonprofit/gig
+ * Career State (persisted in LifeHistory):
+ * - industry: tech/service/public/creative (v2.3.1 simplified)
+ * - employer: small/large/public (v2.3.1 simplified)
  * - level: 1-5 (career progression)
  * - tenure: cycles in current role
  * - skill: general + industry-specific (0-1)
  * - incomeBand: low/mid/high (derived)
  *
- * v2.3 Downstream Signals (ctx.summary.careerSignals):
+ * Downstream Signals (ctx.summary.careerSignals):
  * - transitions/promotions/layoffs/sectorShifts/training counts
  * - avgTenure/avgLevel across processed citizens
  * - industries: count per industry
  * - pressure: industry pressure snapshot (-1 to +1)
+ *
+ * Integration:
+ * - Economic Ripple Engine reads careerSignals.layoffs to trigger MAJOR_LAYOFFS
+ * - compressLifeHistory protects [CareerState] lines from trim
  *
  * ============================================================================
  */

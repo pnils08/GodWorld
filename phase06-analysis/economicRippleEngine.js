@@ -1,27 +1,28 @@
 /**
  * ============================================================================
- * ECONOMIC RIPPLE ENGINE v2.2
+ * ECONOMIC RIPPLE ENGINE v2.3
  * ============================================================================
  *
- * CONNECTED: Now factors in migration drift from previous cycle.
+ * CONNECTED: Factors in migration drift AND career signals from Career Engine.
  *
- * v2.2 Enhancements:
- * - Reads previousCycle.migrationDrift for economic impact
- * - Migration surge creates economic ripples
- * - Migration exodus triggers negative ripples
+ * v2.3 Enhancements:
+ * - Wired to Career Engine v2.3.1: reads ctx.summary.careerSignals
+ * - Layoffs >= 3 triggers MAJOR_LAYOFFS ripple
+ * - Promotions >= 4 triggers WORKFORCE_GROWTH ripple
+ * - Sector shifts flagged as career churn
+ *
+ * v2.2 Features (retained):
+ * - Migration drift impact on economic mood
  * - Employment rate derived from mood and migration
  * - Bidirectional connection with applyMigrationDrift_
- * - Writes derived employment back to World_Population
  *
  * v2.1 Features (retained):
- * - Holiday shopping boost
- * - Festival economic effects
- * - Sports season spending
+ * - Holiday shopping boost, festival effects, sports spending
  * - Calendar-triggered ripples
  *
  * EXECUTION ORDER:
- * Run BEFORE applyMigrationDrift_ so ctx.summary.economicMood is available.
- * Uses previousCycleState.migrationDrift from prior cycle.
+ * Run AFTER Career Engine (Phase 5) and BEFORE applyMigrationDrift_.
+ * Reads careerSignals from Career Engine and previousCycleState.migrationDrift.
  *
  * ============================================================================
  */
@@ -131,7 +132,10 @@ function runEconomicRippleEngine_(ctx) {
   
   // 1. Detect migration-triggered ripples
   detectMigrationRipples_(ctx, currentCycle);
-  
+
+  // 1b. v2.3: Detect career-triggered ripples (reads careerSignals from Career Engine)
+  detectCareerRipples_(ctx, currentCycle);
+
   // 2. Detect calendar-triggered ripples
   detectCalendarRipples_(ctx, currentCycle);
   
@@ -155,9 +159,11 @@ function runEconomicRippleEngine_(ctx) {
   
   ctx.summary = S;
   
-  Logger.log('runEconomicRippleEngine_ v2.2: mood=' + S.economicMood + 
+  var careerSignals = S.careerSignals || {};
+  Logger.log('runEconomicRippleEngine_ v2.3: mood=' + S.economicMood +
     ' | ripples=' + S.economicRipples.length +
-    ' | prevMigration=' + prevMigration);
+    ' | prevMigration=' + prevMigration +
+    ' | layoffs=' + (careerSignals.layoffs || 0));
 }
 
 
@@ -188,6 +194,40 @@ function detectMigrationRipples_(ctx, currentCycle) {
   } else if (prevMig <= -20) {
     createRipple_(S, 'WORKFORCE_DECLINE', currentCycle, 
       { description: 'Shrinking workforce affecting business climate' }, 'Downtown', cal);
+  }
+}
+
+
+// ═══════════════════════════════════════════════════════════════
+// v2.3: CAREER RIPPLE DETECTION (wired to Career Engine v2.3.1)
+// ═══════════════════════════════════════════════════════════════
+
+function detectCareerRipples_(ctx, currentCycle) {
+  var S = ctx.summary;
+  var cal = ctx.economicCalendarContext || {};
+  var careerSignals = S.careerSignals || {};
+
+  // MAJOR_LAYOFFS: triggered when career engine reports significant layoffs
+  // Threshold: 3+ layoffs in a single cycle indicates systemic issue
+  var layoffs = careerSignals.layoffs || 0;
+  if (layoffs >= 3) {
+    createRipple_(S, 'MAJOR_LAYOFFS', currentCycle,
+      { description: 'Multiple layoffs reported across industries' }, 'Downtown', cal);
+  }
+
+  // WORKFORCE_GROWTH: triggered by high promotion rate
+  // Threshold: 4+ promotions indicates healthy job market
+  var promotions = careerSignals.promotions || 0;
+  if (promotions >= 4) {
+    createRipple_(S, 'WORKFORCE_GROWTH', currentCycle,
+      { description: 'Career advancement activity signals strong job market' }, 'Downtown', cal);
+  }
+
+  // Sector shifts can indicate economic churn
+  var sectorShifts = careerSignals.sectorShifts || 0;
+  if (sectorShifts >= 3) {
+    // Not a specific trigger, but affects mood calculation
+    S.careerChurn = true;
   }
 }
 
@@ -780,40 +820,36 @@ function generateEconomicSummary_(ctx) {
 
 /**
  * ============================================================================
- * ECONOMIC RIPPLE ENGINE REFERENCE v2.2
+ * ECONOMIC RIPPLE ENGINE REFERENCE v2.3
  * ============================================================================
- * 
+ *
+ * CAREER TRIGGERS (v2.3 - wired to Career Engine):
+ *
+ * | Signal | Threshold | Trigger | Impact |
+ * |--------|-----------|---------|--------|
+ * | layoffs | >= 3 | MAJOR_LAYOFFS | -15 |
+ * | promotions | >= 4 | WORKFORCE_GROWTH | +6 |
+ * | sectorShifts | >= 3 | (careerChurn flag) | - |
+ *
  * MIGRATION TRIGGERS:
- * 
+ *
  * | Prev Migration | Trigger | Impact |
  * |----------------|---------|--------|
  * | +30 or more | POPULATION_SURGE | +8 |
  * | +20 to +29 | WORKFORCE_GROWTH | +6 |
  * | -20 to -29 | WORKFORCE_DECLINE | -8 |
  * | -30 or less | POPULATION_EXODUS | -10 |
- * 
- * MIGRATION IMPACT ON MOOD:
- * | Prev Migration | Mood Adjustment |
- * |----------------|-----------------|
- * | +30 or more | +4 |
- * | +15 to +29 | +2 |
- * | -15 to -29 | -2 |
- * | -30 or less | -5 |
- * 
+ *
  * DERIVED EMPLOYMENT:
  * - Base: 0.82 + (mood/100) * 0.14
  * - Migration surge: -1% (temporary)
  * - Migration exodus: +1% (smaller workforce)
  * - Written back to World_Population sheet
- * 
+ *
  * EXECUTION ORDER:
- * Run BEFORE applyMigrationDrift_ so mood is available.
+ * Run AFTER Career Engine (Phase 5), BEFORE applyMigrationDrift_.
+ * Reads careerSignals from Career Engine.
  * Uses previousCycleState.migrationDrift from prior cycle.
- * 
- * BIDIRECTIONAL CONNECTION:
- * Cycle N: economicRippleEngine reads N-1 migration → affects mood
- * Cycle N: applyMigrationDrift reads N mood → affects migration
- * Cycle N+1: economicRippleEngine reads N migration → feedback loop
- * 
+ *
  * ============================================================================
  */

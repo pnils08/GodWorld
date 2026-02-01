@@ -1,25 +1,29 @@
 /**
  * ============================================================================
- * compressLifeHistory.js v1.0
+ * compressLifeHistory.js v1.1
  * ============================================================================
  *
- * Scans LifeHistory (column O) and compresses accumulated events into a
- * personality profile stored in TraitProfile (column R, formerly OriginVault).
+ * Scans LifeHistory and compresses accumulated events into a personality profile
+ * stored in TraitProfile (or OriginVault fallback).
  *
- * Features:
- * - Tag counting with 0.95 decay (older events fade but don't vanish)
- * - Archetype assignment based on trait clustering
- * - Signature motif extraction (recurring venues/phrases)
- * - Optional LifeHistory trimming (keep last K entries)
+ * v1.1 Upgrades (additive, ES5 safe):
+ * - Robust parsing (timestamps optional; supports [Tag] without timestamp)
+ * - Detects and respects existing [Compressed: ...] blocks
+ * - Optional time-aware decay via cycle timestamps (Basis:cycle) when present
+ * - Adds metadata tokens: V, Basis, Hash (no schema changes)
+ * - Motif extraction safer + slightly smarter
+ * - Profile formatting more consistent, still pipe-delimited
  *
- * Output format (pipe-delimited, easy to parse):
- * Archetype:Watcher|reflective:0.73|social:0.45|driven:0.22|TopTags:Relationship,Neighborhood|Motifs:corner store|Updated:c47
+ * v1.0 Features (retained):
+ * - Tag counting with 0.95 decay
+ * - 7 archetypes: Connector, Watcher, Striver, Anchor, Catalyst, Caretaker, Drifter
+ * - 5 trait axes: social, reflective, driven, grounded, volatile
+ * - History trimming (keeps last 20 entries)
  *
- * Integration:
- * - Feeds into generateCitizensEvents v2.6 for archetype-aware pool selection
- * - Readable by Claude for narrative decisions
+ * Output example:
+ * Archetype:Watcher|Mods:curious,steady|reflective:0.73|social:0.45|TopTags:Neighborhood,Weather,Arc|Motifs:coffee,gallery|Entries:47|Basis:entries|V:1.1|Hash:8f2c1a|Updated:c47
  *
- * @version 1.0
+ * @version 1.1
  * @phase utilities
  * ============================================================================
  */
@@ -28,16 +32,25 @@
 // CONSTANTS
 // ============================================================================
 
-var COMPRESS_VERSION = '1.0';
+var COMPRESS_VERSION = '1.1';
 
-// Decay rate per cycle (0.95 = tag from 20 cycles ago retains ~36% weight)
+// Decay per unit (entry or cycle depending on basis)
 var TAG_DECAY_RATE = 0.95;
 
-// Keep last N raw entries in LifeHistory (older get trimmed after compression)
+// Keep last N raw entries in LifeHistory
 var KEEP_RAW_ENTRIES = 20;
 
 // Minimum cycles between compression runs per citizen
 var MIN_CYCLES_BETWEEN_COMPRESS = 10;
+
+// Default decay basis
+var DEFAULT_DECAY_BASIS = 'entries';
+
+// Stopwords for motif extraction
+var MOTIF_STOPWORDS = {
+  'the': true, 'and': true, 'with': true, 'from': true, 'into': true,
+  'again': true, 'today': true, 'tonight': true, 'around': true, 'near': true
+};
 
 // Tag → Trait axis mappings
 var TAG_TRAIT_MAP = {
@@ -81,16 +94,17 @@ var TAG_TRAIT_MAP = {
   'CreationDay': { grounded: 0.7, reflective: 0.3 },
   'Sports': { social: 0.5, volatile: 0.3 },
 
-  // QoL-driven (from v2.6)
+  // QoL
   'QoL': { grounded: 0.4, volatile: 0.3 },
   'qol:low': { volatile: 0.5, grounded: 0.2 },
   'qol:high': { grounded: 0.6, social: 0.3 },
 
   // Continuity
-  'Continuity': { driven: 0.4, reflective: 0.3 }
+  'Continuity': { driven: 0.4, reflective: 0.3 },
+  'source:motif': { grounded: 0.4, reflective: 0.2 }
 };
 
-// Archetype definitions based on trait dominance
+// Archetypes
 var ARCHETYPES = {
   'Connector': { social: 0.7, grounded: 0.4 },
   'Watcher': { reflective: 0.7, grounded: 0.3 },
@@ -101,7 +115,7 @@ var ARCHETYPES = {
   'Drifter': { reflective: 0.4, volatile: 0.4 }
 };
 
-// Modifier words based on secondary traits
+// Modifiers
 var TRAIT_MODIFIERS = {
   social: ['warm', 'outgoing', 'connected'],
   reflective: ['thoughtful', 'observant', 'curious'],
@@ -114,16 +128,11 @@ var TRAIT_MODIFIERS = {
 // MAIN FUNCTION
 // ============================================================================
 
-/**
- * Compress LifeHistory for all citizens and write TraitProfile.
- *
- * @param {Object} ctx - Engine context
- * @param {Object} options - { trimHistory: boolean, forceAll: boolean }
- */
 function compressLifeHistory_(ctx, options) {
   options = options || {};
-  var trimHistory = options.trimHistory !== false; // default true
+  var trimHistory = options.trimHistory !== false;
   var forceAll = options.forceAll || false;
+  var basisOverride = options.basis || null;
 
   var ss = ctx.ss;
   var sheet = ss.getSheetByName('Simulation_Ledger');
@@ -143,18 +152,12 @@ function compressLifeHistory_(ctx, options) {
   var iPopID = idx('POPID');
   var iLifeHistory = idx('LifeHistory');
   var iTraitProfile = idx('TraitProfile');
-
-  // Fallback: check for OriginVault if TraitProfile doesn't exist
-  if (iTraitProfile < 0) {
-    iTraitProfile = idx('OriginVault');
-  }
+  if (iTraitProfile < 0) iTraitProfile = idx('OriginVault');
 
   if (iPopID < 0 || iLifeHistory < 0) {
     Logger.log('compressLifeHistory_: Missing required columns');
     return;
   }
-
-  // If TraitProfile column doesn't exist, we can't write
   if (iTraitProfile < 0) {
     Logger.log('compressLifeHistory_: No TraitProfile or OriginVault column found');
     return;
@@ -171,7 +174,6 @@ function compressLifeHistory_(ctx, options) {
 
     if (!popId || !lifeHistory) continue;
 
-    // Check if recently compressed (unless forceAll)
     if (!forceAll && existingProfile) {
       var lastUpdate = parseLastUpdateCycle_(existingProfile);
       if (lastUpdate > 0 && (cycle - lastUpdate) < MIN_CYCLES_BETWEEN_COMPRESS) {
@@ -180,35 +182,33 @@ function compressLifeHistory_(ctx, options) {
       }
     }
 
-    // Parse and compress
-    var entries = parseLifeHistoryEntries_(lifeHistory);
-    if (entries.length < 3) {
+    var parsed = parseLifeHistoryEntries_(lifeHistory);
+    var entries = parsed.entries;
+
+    if (!entries || entries.length < 3) {
       skipped++;
-      continue; // Not enough history to profile
+      continue;
     }
 
-    var profile = computeProfile_(entries, cycle);
-    var profileString = formatProfileString_(profile, cycle);
+    var basis = basisOverride || (parsed.hasCycleMarkers ? 'cycle' : DEFAULT_DECAY_BASIS);
 
-    // Write profile to column R
+    var profile = computeProfile_(entries, cycle, basis);
+    var profileString = formatProfileString_(profile, cycle, basis);
+
     row[iTraitProfile] = profileString;
 
-    // Optionally trim old entries
     if (trimHistory && entries.length > KEEP_RAW_ENTRIES) {
-      var trimmedHistory = trimLifeHistory_(entries, KEEP_RAW_ENTRIES, profile);
-      row[iLifeHistory] = trimmedHistory;
+      row[iLifeHistory] = trimLifeHistory_(entries, KEEP_RAW_ENTRIES, profile, cycle);
     }
 
     rows[r] = row;
     updated++;
   }
 
-  // Write back
   if (updated > 0) {
     sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
   }
 
-  // Log results
   S.lifeHistoryCompression = {
     cycle: cycle,
     updated: updated,
@@ -217,101 +217,112 @@ function compressLifeHistory_(ctx, options) {
   };
 
   ctx.summary = S;
-
-  Logger.log('compressLifeHistory_: Updated ' + updated + ' profiles, skipped ' + skipped);
+  Logger.log('compressLifeHistory_ v' + COMPRESS_VERSION + ': Updated ' + updated + ', skipped ' + skipped);
 }
 
 // ============================================================================
-// PARSING FUNCTIONS
+// PARSING
 // ============================================================================
 
-/**
- * Parse LifeHistory string into structured entries.
- *
- * @param {string} historyStr
- * @return {Array} Array of { timestamp, tag, text, ageInCycles }
- */
 function parseLifeHistoryEntries_(historyStr) {
   var entries = [];
-  var lines = historyStr.split('\n');
+  var lines = String(historyStr || '').split('\n');
+  var hasCycleMarkers = false;
 
   for (var i = 0; i < lines.length; i++) {
-    var line = lines[i].trim();
+    var line = String(lines[i] || '').trim();
     if (!line) continue;
 
     var entry = parseHistoryLine_(line);
     if (entry) {
+      if (entry.cycle !== null && entry.cycle !== undefined) hasCycleMarkers = true;
       entries.push(entry);
     }
   }
 
-  return entries;
+  return { entries: entries, hasCycleMarkers: hasCycleMarkers };
 }
 
-/**
- * Parse a single LifeHistory line.
- * Formats:
- * - "2025-12-22 03:48 — [Tag] description"
- * - "Born into population during Cycle 3."
- * - "Engine Event: description"
- *
- * @param {string} line
- * @return {Object|null}
- */
 function parseHistoryLine_(line) {
-  // Standard format: "YYYY-MM-DD HH:MM — [Tag] text"
+  // Existing compressed block
+  if (line.indexOf('[Compressed:') === 0) {
+    return {
+      timestamp: null,
+      cycle: null,
+      tag: 'Compressed',
+      text: line,
+      raw: line
+    };
+  }
+
+  // Standard: "YYYY-MM-DD HH:MM — [Tag] text"
   var standardMatch = line.match(/^(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})\s*[—-]\s*\[([^\]]+)\]\s*(.*)$/);
   if (standardMatch) {
+    var cycleNum = extractCycleNumber_(standardMatch[3]);
     return {
       timestamp: standardMatch[1],
+      cycle: cycleNum,
       tag: standardMatch[2],
       text: standardMatch[3],
       raw: line
     };
   }
 
-  // Engine event format: "Engine Event: description"
+  // Alternate: "[Tag] text" (no timestamp)
+  var tagOnly = line.match(/^\[([^\]]+)\]\s*(.*)$/);
+  if (tagOnly) {
+    var cycleNum2 = extractCycleNumber_(tagOnly[2]);
+    return {
+      timestamp: null,
+      cycle: cycleNum2,
+      tag: tagOnly[1],
+      text: tagOnly[2],
+      raw: line
+    };
+  }
+
+  // Engine event format
   var engineMatch = line.match(/^Engine\s+Event:\s*(.*)$/i);
   if (engineMatch) {
     return {
       timestamp: null,
+      cycle: extractCycleNumber_(engineMatch[1]),
       tag: 'EngineEvent',
       text: engineMatch[1],
       raw: line
     };
   }
 
-  // Birth format: "Born into population during Cycle N."
-  var birthMatch = line.match(/^Born\s+into\s+population/i);
-  if (birthMatch) {
-    return {
-      timestamp: null,
-      tag: 'Birth',
-      text: line,
-      raw: line
-    };
+  // Birth line
+  if (/^Born\s+into\s+population/i.test(line)) {
+    return { timestamp: null, cycle: extractCycleNumber_(line), tag: 'Birth', text: line, raw: line };
   }
 
-  // Fallback: treat as untagged
+  // Arrival format
+  if (/^Arrived\s+in\s+Oakland/i.test(line)) {
+    return { timestamp: null, cycle: extractCycleNumber_(line), tag: 'Arrival', text: line, raw: line };
+  }
+
+  // Fallback: untagged
   return {
     timestamp: null,
+    cycle: extractCycleNumber_(line),
     tag: 'Untagged',
     text: line,
     raw: line
   };
 }
 
-/**
- * Extract last update cycle from existing profile string.
- *
- * @param {string} profileStr
- * @return {number}
- */
+function extractCycleNumber_(text) {
+  if (!text) return null;
+  var m = String(text).match(/Cycle\s+(\d+)/i);
+  if (m && m[1]) return parseInt(m[1], 10);
+  return null;
+}
+
 function parseLastUpdateCycle_(profileStr) {
-  var match = profileStr.match(/Updated:c(\d+)/);
-  if (match) {
-    return parseInt(match[1], 10);
-  }
+  var match = String(profileStr || '').match(/Updated:c(\d+)/);
+  if (match) return parseInt(match[1], 10);
   return 0;
 }
 
@@ -319,57 +330,47 @@ function parseLastUpdateCycle_(profileStr) {
 // PROFILE COMPUTATION
 // ============================================================================
 
-/**
- * Compute personality profile from entries.
- *
- * @param {Array} entries
- * @param {number} currentCycle
- * @return {Object}
- */
-function computeProfile_(entries, currentCycle) {
-  // Count tags with decay
+function computeProfile_(entries, currentCycle, basis) {
   var tagCounts = {};
   var traitScores = { social: 0, reflective: 0, driven: 0, grounded: 0, volatile: 0 };
   var motifCounts = {};
-  var totalWeight = 0;
 
   for (var i = 0; i < entries.length; i++) {
     var entry = entries[i];
-    var age = entries.length - i; // Older entries have higher age
-    var weight = Math.pow(TAG_DECAY_RATE, age);
 
-    var tag = entry.tag;
+    var weight = 1;
+    if (basis === 'cycle') {
+      var entryCycle = (entry.cycle !== null && entry.cycle !== undefined) ? entry.cycle : null;
+      var ageCycles = (entryCycle !== null) ? Math.max(0, currentCycle - entryCycle) : (entries.length - i);
+      weight = Math.pow(TAG_DECAY_RATE, ageCycles);
+    } else {
+      var ageEntries = (entries.length - i);
+      weight = Math.pow(TAG_DECAY_RATE, ageEntries);
+    }
+
+    var tag = String(entry.tag || 'Untagged');
     tagCounts[tag] = (tagCounts[tag] || 0) + weight;
-    totalWeight += weight;
 
-    // Map tag to traits
     applyTagToTraits_(tag, weight, traitScores);
-
-    // Extract motifs from text
     extractMotifs_(entry.text, weight, motifCounts);
   }
 
-  // Normalize trait scores to 0-1 range
+  // Normalize trait scores
   var maxTrait = 0;
   for (var t in traitScores) {
-    if (traitScores[t] > maxTrait) maxTrait = traitScores[t];
+    if (traitScores.hasOwnProperty(t) && traitScores[t] > maxTrait) maxTrait = traitScores[t];
   }
   if (maxTrait > 0) {
     for (var t2 in traitScores) {
-      traitScores[t2] = Math.round((traitScores[t2] / maxTrait) * 100) / 100;
+      if (!traitScores.hasOwnProperty(t2)) continue;
+      traitScores[t2] = round2_(traitScores[t2] / maxTrait);
     }
   }
 
-  // Determine archetype
   var archetype = assignArchetype_(traitScores);
-
-  // Get modifiers (secondary traits)
   var modifiers = getModifiers_(traitScores, archetype);
 
-  // Get top tags
   var topTags = getTopN_(tagCounts, 5);
-
-  // Get top motifs
   var topMotifs = getTopN_(motifCounts, 3);
 
   return {
@@ -382,314 +383,267 @@ function computeProfile_(entries, currentCycle) {
   };
 }
 
-/**
- * Apply tag weight to trait scores.
- *
- * @param {string} tag
- * @param {number} weight
- * @param {Object} traitScores
- */
 function applyTagToTraits_(tag, weight, traitScores) {
   var mapping = TAG_TRAIT_MAP[tag];
-  if (mapping) {
-    for (var trait in mapping) {
-      traitScores[trait] = (traitScores[trait] || 0) + (mapping[trait] * weight);
-    }
+  if (!mapping) return;
+  for (var trait in mapping) {
+    if (!mapping.hasOwnProperty(trait)) continue;
+    traitScores[trait] = (traitScores[trait] || 0) + (mapping[trait] * weight);
   }
 }
 
-/**
- * Extract motifs (recurring phrases/venues) from text.
- *
- * @param {string} text
- * @param {number} weight
- * @param {Object} motifCounts
- */
 function extractMotifs_(text, weight, motifCounts) {
   if (!text) return;
+  var lower = String(text).toLowerCase();
 
-  var lowerText = text.toLowerCase();
-
-  // Common venue patterns
   var venuePatterns = [
-    'corner store', 'local park', 'home', 'at work', 'neighborhood',
-    'quiet time', 'coffee', 'cafe', 'lakeside', 'downtown', 'waterfront',
-    'gallery', 'community', 'church', 'school', 'library'
+    'corner store', 'local park', 'coffee', 'cafe', 'gallery',
+    'library', 'church', 'school', 'downtown', 'waterfront',
+    'lake', 'lakeside', 'bart', 'theater', 'fox theater',
+    'community', 'neighborhood'
   ];
 
   for (var i = 0; i < venuePatterns.length; i++) {
-    if (lowerText.indexOf(venuePatterns[i]) >= 0) {
-      motifCounts[venuePatterns[i]] = (motifCounts[venuePatterns[i]] || 0) + weight;
+    var p = venuePatterns[i];
+    if (lower.indexOf(p) >= 0) {
+      motifCounts[p] = (motifCounts[p] || 0) + weight;
     }
   }
 
-  // Action patterns
   var actionPatterns = [
-    'reached out', 'felt distant', 'quiet moment', 'adjusted', 'reflected',
-    'noticed', 'engaged', 'comfortable', 'uncomfortable', 'tension'
+    'reached out', 'quiet moment', 'reflected', 'noticed', 'adjusted',
+    'tension', 'pressure', 'unwinding', 'supportive', 'collaborated'
   ];
-
   for (var j = 0; j < actionPatterns.length; j++) {
-    if (lowerText.indexOf(actionPatterns[j]) >= 0) {
-      motifCounts[actionPatterns[j]] = (motifCounts[actionPatterns[j]] || 0) + weight;
+    var a = actionPatterns[j];
+    if (lower.indexOf(a) >= 0) {
+      motifCounts[a] = (motifCounts[a] || 0) + weight;
+    }
+  }
+
+  var nearMatch = lower.match(/\b(near|at)\s+([a-z0-9'\s]{3,24})/i);
+  if (nearMatch && nearMatch[2]) {
+    var phrase = sanitizeMotif_(nearMatch[2]);
+    if (phrase && !MOTIF_STOPWORDS[phrase]) {
+      motifCounts[phrase] = (motifCounts[phrase] || 0) + (weight * 0.6);
     }
   }
 }
 
-/**
- * Assign archetype based on trait scores.
- *
- * @param {Object} traitScores
- * @return {string}
- */
+function sanitizeMotif_(s) {
+  if (!s) return null;
+  var out = String(s).replace(/[^\w'\s]/g, '').trim();
+  if (out.length < 3) return null;
+  if (out.length > 24) out = out.substring(0, 24).trim();
+  out = out.replace(/\s+/g, ' ');
+  return out;
+}
+
 function assignArchetype_(traitScores) {
-  var bestArchetype = 'Drifter';
+  var best = 'Drifter';
   var bestScore = -1;
 
-  for (var archetype in ARCHETYPES) {
-    var requirements = ARCHETYPES[archetype];
+  for (var a in ARCHETYPES) {
+    if (!ARCHETYPES.hasOwnProperty(a)) continue;
+
+    var req = ARCHETYPES[a];
     var score = 0;
     var matches = 0;
 
-    for (var trait in requirements) {
-      var required = requirements[trait];
+    for (var trait in req) {
+      if (!req.hasOwnProperty(trait)) continue;
+      var required = req[trait];
       var actual = traitScores[trait] || 0;
-      if (actual >= required * 0.7) { // 70% threshold
+      if (actual >= required * 0.7) {
         score += actual;
         matches++;
       }
     }
 
-    // Require at least 1 trait match
     if (matches > 0 && score > bestScore) {
       bestScore = score;
-      bestArchetype = archetype;
+      best = a;
     }
   }
 
-  return bestArchetype;
+  return best;
 }
 
-/**
- * Get modifier words based on secondary traits.
- *
- * @param {Object} traitScores
- * @param {string} archetype
- * @return {Array}
- */
 function getModifiers_(traitScores, archetype) {
-  // Sort traits by score
   var sorted = [];
   for (var trait in traitScores) {
+    if (!traitScores.hasOwnProperty(trait)) continue;
     sorted.push({ trait: trait, score: traitScores[trait] });
   }
   sorted.sort(function(a, b) { return b.score - a.score; });
 
+  // Traits defining each archetype (don't repeat as modifiers)
+  var archetypeCore = {
+    Connector: { social: true },
+    Watcher: { reflective: true },
+    Striver: { driven: true },
+    Anchor: { grounded: true },
+    Catalyst: { volatile: true },
+    Caretaker: { social: true, grounded: true },
+    Drifter: {}
+  };
+
+  var skip = archetypeCore[archetype] || {};
   var modifiers = [];
 
-  // Take top 2 traits as modifiers (skip if they define the archetype)
   for (var i = 0; i < sorted.length && modifiers.length < 2; i++) {
-    var trait = sorted[i].trait;
-    var score = sorted[i].score;
+    var tr = sorted[i].trait;
+    var sc = sorted[i].score;
+    if (sc < 0.3) continue;
+    if (skip[tr]) continue;
 
-    if (score < 0.3) continue; // Too weak
+    var words = TRAIT_MODIFIERS[tr];
+    if (!words || !words.length) continue;
 
-    var words = TRAIT_MODIFIERS[trait];
-    if (words && words.length > 0) {
-      // Pick word based on score intensity
-      var wordIdx = score >= 0.7 ? 0 : (score >= 0.5 ? 1 : 2);
-      wordIdx = Math.min(wordIdx, words.length - 1);
-      modifiers.push(words[wordIdx]);
-    }
+    var idx = (sc >= 0.7) ? 0 : (sc >= 0.5 ? 1 : 2);
+    idx = Math.min(idx, words.length - 1);
+    modifiers.push(words[idx]);
   }
 
   return modifiers;
 }
 
-/**
- * Get top N items from a counts object.
- *
- * @param {Object} counts
- * @param {number} n
- * @return {Array}
- */
 function getTopN_(counts, n) {
   var items = [];
   for (var key in counts) {
+    if (!counts.hasOwnProperty(key)) continue;
     items.push({ key: key, count: counts[key] });
   }
   items.sort(function(a, b) { return b.count - a.count; });
 
-  var result = [];
-  for (var i = 0; i < Math.min(n, items.length); i++) {
-    result.push(items[i].key);
-  }
-  return result;
+  var out = [];
+  for (var i = 0; i < Math.min(n, items.length); i++) out.push(items[i].key);
+  return out;
+}
+
+function round2_(n) {
+  return Math.round(n * 100) / 100;
 }
 
 // ============================================================================
 // OUTPUT FORMATTING
 // ============================================================================
 
-/**
- * Format profile as pipe-delimited string.
- *
- * @param {Object} profile
- * @param {number} cycle
- * @return {string}
- */
-function formatProfileString_(profile, cycle) {
+function formatProfileString_(profile, cycle, basis) {
   var parts = [];
 
-  // Archetype
   parts.push('Archetype:' + profile.archetype);
 
-  // Modifiers
-  if (profile.modifiers.length > 0) {
+  if (profile.modifiers && profile.modifiers.length) {
     parts.push('Mods:' + profile.modifiers.join(','));
   }
 
-  // Trait scores (only significant ones)
   for (var trait in profile.traitScores) {
+    if (!profile.traitScores.hasOwnProperty(trait)) continue;
     var score = profile.traitScores[trait];
     if (score >= 0.3) {
       parts.push(trait + ':' + score.toFixed(2));
     }
   }
 
-  // Top tags
-  if (profile.topTags.length > 0) {
-    parts.push('TopTags:' + profile.topTags.join(','));
-  }
+  if (profile.topTags && profile.topTags.length) parts.push('TopTags:' + profile.topTags.join(','));
+  if (profile.topMotifs && profile.topMotifs.length) parts.push('Motifs:' + profile.topMotifs.join(','));
 
-  // Motifs
-  if (profile.topMotifs.length > 0) {
-    parts.push('Motifs:' + profile.topMotifs.join(','));
-  }
-
-  // Metadata
   parts.push('Entries:' + profile.entryCount);
+  parts.push('Basis:' + (basis || 'entries'));
+  parts.push('V:' + COMPRESS_VERSION);
+  parts.push('Hash:' + shortHash_(parts.join('|')));
   parts.push('Updated:c' + cycle);
 
   return parts.join('|');
 }
 
-/**
- * Trim LifeHistory to keep only recent entries, with compressed summary.
- *
- * @param {Array} entries
- * @param {number} keepCount
- * @param {Object} profile
- * @return {string}
- */
-function trimLifeHistory_(entries, keepCount, profile) {
+function shortHash_(s) {
+  s = String(s || '');
+  var h = 5381;
+  for (var i = 0; i < s.length; i++) {
+    h = ((h << 5) + h) + s.charCodeAt(i);
+    h = h & 0xFFFFFFFF;
+  }
+  var hex = (h >>> 0).toString(16);
+  while (hex.length < 6) hex = '0' + hex;
+  return hex.substring(0, 6);
+}
+
+// ============================================================================
+// TRIMMING
+// ============================================================================
+
+function trimLifeHistory_(entries, keepCount, profile, cycle) {
   if (entries.length <= keepCount) {
-    // Nothing to trim, return original
     var lines = [];
-    for (var i = 0; i < entries.length; i++) {
-      lines.push(entries[i].raw);
-    }
+    for (var i = 0; i < entries.length; i++) lines.push(entries[i].raw);
     return lines.join('\n');
   }
 
-  // Split into old (to compress) and recent (to keep)
   var oldCount = entries.length - keepCount;
   var oldEntries = entries.slice(0, oldCount);
   var recentEntries = entries.slice(oldCount);
 
-  // Create compressed summary of old entries
-  var compressedLine = createCompressedBlock_(oldEntries, profile);
+  var compressedLine = createCompressedBlock_(oldEntries, profile, cycle);
 
-  // Build new history
   var newLines = [compressedLine];
-  for (var j = 0; j < recentEntries.length; j++) {
-    newLines.push(recentEntries[j].raw);
-  }
+  for (var j = 0; j < recentEntries.length; j++) newLines.push(recentEntries[j].raw);
 
   return newLines.join('\n');
 }
 
-/**
- * Create a compressed summary block for old entries.
- *
- * @param {Array} oldEntries
- * @param {Object} profile
- * @return {string}
- */
-function createCompressedBlock_(oldEntries, profile) {
-  // Count tags in old entries
+function createCompressedBlock_(oldEntries, profile, cycle) {
   var tagCounts = {};
   for (var i = 0; i < oldEntries.length; i++) {
     var tag = oldEntries[i].tag;
     tagCounts[tag] = (tagCounts[tag] || 0) + 1;
   }
 
-  // Get top 3 tags
   var topTags = getTopN_(tagCounts, 3);
 
-  // Get date range
-  var firstDate = oldEntries[0].timestamp || '?';
-  var lastDate = oldEntries[oldEntries.length - 1].timestamp || '?';
+  var firstDate = '?';
+  var lastDate = '?';
+  for (var a = 0; a < oldEntries.length; a++) {
+    if (oldEntries[a].timestamp) { firstDate = oldEntries[a].timestamp; break; }
+  }
+  for (var b = oldEntries.length - 1; b >= 0; b--) {
+    if (oldEntries[b].timestamp) { lastDate = oldEntries[b].timestamp; break; }
+  }
 
-  // Build compressed line
-  var summary = '[Compressed: ' + oldEntries.length + ' entries, ' +
-                firstDate + ' to ' + lastDate + '] ' +
-                'Dominant: ' + topTags.join(', ') +
-                ' | Profile: ' + profile.archetype;
+  var mods = (profile.modifiers && profile.modifiers.length) ? (' | Mods:' + profile.modifiers.join(',')) : '';
+  var motifs = (profile.topMotifs && profile.topMotifs.length) ? (' | Motifs:' + profile.topMotifs.join(',')) : '';
 
-  return summary;
+  return '[Compressed: ' + oldEntries.length +
+    ' entries | ' + firstDate + ' → ' + lastDate +
+    ' | Dominant:' + topTags.join(',') +
+    ' | Archetype:' + profile.archetype +
+    mods + motifs +
+    ' | AsOf:c' + cycle + ']';
 }
 
 // ============================================================================
-// ACCESSOR FOR EVENT GENERATION
+// ACCESSOR (for event generation)
 // ============================================================================
 
-/**
- * Get citizen's archetype from TraitProfile.
- * Used by generateCitizensEvents v2.6 for archetype-aware pool selection.
- *
- * @param {Object} ctx
- * @param {string} popId
- * @return {Object|null} { archetype, modifiers, traits }
- */
 function getCitizenArchetype_(ctx, popId) {
-  // Check cache first
-  if (ctx._archetypeCache && ctx._archetypeCache[popId]) {
-    return ctx._archetypeCache[popId];
-  }
+  if (ctx._archetypeCache && ctx._archetypeCache[popId]) return ctx._archetypeCache[popId];
+  if (!ctx._archetypeCache) ctx._archetypeCache = {};
 
-  // Initialize cache
-  if (!ctx._archetypeCache) {
-    ctx._archetypeCache = {};
-  }
-
-  // Look up from citizenLookup if TraitProfile was loaded
   var citizen = ctx.citizenLookup && ctx.citizenLookup[popId];
-  if (!citizen || !citizen.TraitProfile) {
-    return null;
-  }
+  if (!citizen || !citizen.TraitProfile) return null;
 
   var profile = parseProfileString_(citizen.TraitProfile);
   ctx._archetypeCache[popId] = profile;
   return profile;
 }
 
-/**
- * Parse a TraitProfile string back into an object.
- *
- * @param {string} profileStr
- * @return {Object}
- */
 function parseProfileString_(profileStr) {
   if (!profileStr) return null;
 
-  var result = {
-    archetype: 'Drifter',
-    modifiers: [],
-    traits: {}
-  };
+  var result = { archetype: 'Drifter', modifiers: [], traits: {}, meta: {} };
+  var parts = String(profileStr).split('|');
 
-  var parts = profileStr.split('|');
   for (var i = 0; i < parts.length; i++) {
     var part = parts[i];
     var colonIdx = part.indexOf(':');
@@ -698,37 +652,32 @@ function parseProfileString_(profileStr) {
     var key = part.substring(0, colonIdx);
     var value = part.substring(colonIdx + 1);
 
-    if (key === 'Archetype') {
-      result.archetype = value;
-    } else if (key === 'Mods') {
-      result.modifiers = value.split(',');
-    } else if (key === 'TopTags' || key === 'Motifs' || key === 'Entries' || key === 'Updated') {
-      // Skip metadata
+    if (key === 'Archetype') result.archetype = value;
+    else if (key === 'Mods') result.modifiers = value ? value.split(',') : [];
+    else if (key === 'TopTags' || key === 'Motifs' || key === 'Entries' || key === 'Updated' || key === 'Basis' || key === 'V' || key === 'Hash') {
+      result.meta[key] = value;
     } else {
-      // Trait score
       result.traits[key] = parseFloat(value) || 0;
     }
   }
-
   return result;
 }
 
 
 /**
  * ============================================================================
- * COMPRESS LIFE HISTORY REFERENCE v1.0
+ * COMPRESS LIFE HISTORY REFERENCE v1.1
  * ============================================================================
  *
- * PURPOSE:
- * Compresses LifeHistory (column O) into a personality profile stored in
- * TraitProfile (column R). Prevents cell bloat while preserving identity.
+ * v1.1 CHANGES:
+ * - Cycle-aware decay option (Basis:cycle when "Cycle N" markers present)
+ * - Robust parsing (handles [Tag] without timestamp, [Compressed:] blocks)
+ * - Metadata tokens: V:1.1, Basis, Hash for debugging
+ * - Smarter modifier selection (avoids duplicating archetype-defining traits)
+ * - Better motif extraction with stopword filtering
  *
- * INPUT:
- * Column O (LifeHistory): Timestamped event entries with [Tag] markers
- *
- * OUTPUT:
- * Column R (TraitProfile): Pipe-delimited profile string
- * Format: Archetype:Watcher|Mods:curious,steady|social:0.65|...
+ * OUTPUT FORMAT:
+ * Archetype:Watcher|Mods:curious,steady|reflective:0.73|social:0.45|TopTags:...|Motifs:...|Entries:47|Basis:entries|V:1.1|Hash:8f2c1a|Updated:c47
  *
  * ARCHETYPES:
  * - Connector: High social, moderate grounded
@@ -740,25 +689,14 @@ function parseProfileString_(profileStr) {
  * - Drifter: Default/balanced
  *
  * TRAITS:
- * - social: Relationship-oriented, outgoing
- * - reflective: Thoughtful, observant
- * - driven: Achievement-oriented, ambitious
- * - grounded: Stable, community-rooted
- * - volatile: Reactive, intense, changeable
+ * - social, reflective, driven, grounded, volatile (0-1 normalized)
  *
- * DECAY RATE: 0.95 per entry age
- * - Tag from 20 entries ago: ~36% weight
- * - Tag from 50 entries ago: ~8% weight
- *
- * HISTORY TRIMMING:
- * - Keeps last 20 raw entries
- * - Older entries compressed into summary block
- *
- * USAGE:
- * compressLifeHistory_(ctx, { trimHistory: true, forceAll: false })
+ * DECAY: 0.95 per unit (entry or cycle)
+ * TRIM: Keeps last 20 raw entries, compresses older into summary block
  *
  * ACCESSOR:
- * getCitizenArchetype_(ctx, popId) → { archetype, modifiers, traits }
+ * getCitizenArchetype_(ctx, popId) → { archetype, modifiers, traits, meta }
+ * parseProfileString_(str) → { archetype, modifiers, traits, meta }
  *
  * ============================================================================
  */

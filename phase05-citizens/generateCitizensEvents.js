@@ -1,13 +1,21 @@
 /**
  * ============================================================================
- * Citizens Events Engine v2.6 (QoL-aware + neighborhoodDynamics v2.6 integration)
+ * Citizens Events Engine v2.7 (TraitProfile consumption + template slotter)
  * ============================================================================
  *
  * Backward compatible:
  * - LifeHistory line remains: "[PrimaryTag] text"
  * - LifeHistory_Log "EventTag" column receives: "PrimaryTag|tagA|tagB|..."
  *
- * v2.6 Additive upgrades (NO schema breaks):
+ * v2.7 Additive upgrades (NO schema breaks):
+ * - TraitProfile consumption: reads R-TraitProfile from compressLifeHistory v1.1
+ * - Archetype-weighted pool selection (Connector gets +social, Watcher +reflective, etc.)
+ * - Motif injection: recurring venues/phrases from profile appear organically
+ * - Tone-aware template slotter: plain/noir/bright/tense/tender (no narrator voice)
+ * - Template spam cooldown (prevents repeated template events)
+ * - Continuity penalty for tag repetition from profile
+ *
+ * v2.6 Features (retained):
  * - crimeMetrics v1.2 integration: QoL-aware event pools
  * - neighborhoodDynamics v2.6 integration via getNeighborhoodDynamics_()
  * - Weather v3.5 full integration (precipitationIntensity, visibility, front types)
@@ -217,6 +225,9 @@ function generateCitizensEvents_(ctx) {
     var iUNI = idx("UNI (y/n)");
     var iMED = idx("MED (y/n)");
     var iCIV = idx("CIV (y/n)");
+    // v2.7: TraitProfile column (or OriginVault fallback)
+    var iTraitProfile = idx("TraitProfile");
+    if (iTraitProfile < 0) iTraitProfile = idx("OriginVault");
 
     for (var ri = 0; ri < rows.length; ri++) {
       var rowL = rows[ri];
@@ -234,7 +245,9 @@ function generateCitizensEvents_(ctx) {
         First: iFirst >= 0 ? (rowL[iFirst] || "") : "",
         Last: iLast >= 0 ? (rowL[iLast] || "") : "",
         Occupation: iOccupation >= 0 ? (rowL[iOccupation] || "") : "",
-        BirthYear: iBirthYear >= 0 ? Number(rowL[iBirthYear] || 0) : 0
+        BirthYear: iBirthYear >= 0 ? Number(rowL[iBirthYear] || 0) : 0,
+        // v2.7: TraitProfile for archetype/motif access
+        TraitProfile: iTraitProfile >= 0 ? (rowL[iTraitProfile] || "") : ""
       };
     }
   }
@@ -253,6 +266,215 @@ function generateCitizensEvents_(ctx) {
     if (age <= 35) return "youngAdult";
     if (age <= 64) return "adult";
     return "senior";
+  }
+
+  // =========================================================================
+  // v2.7: TRAITPROFILE HELPERS
+  // =========================================================================
+
+  /**
+   * Parse TraitProfile string into structured object
+   * Format: Archetype:X|Mods:a,b|trait:0.xx|TopTags:...|Motifs:...|Entries:N|...
+   */
+  function getCitizenTraitProfile_(popId) {
+    var citizen = ctx.citizenLookup && ctx.citizenLookup[popId];
+    if (!citizen || !citizen.TraitProfile) return null;
+
+    var profileStr = citizen.TraitProfile;
+    var result = { archetype: 'Drifter', modifiers: [], traits: {}, topTags: [], motifs: [], entryCount: 0 };
+    var parts = String(profileStr).split('|');
+
+    for (var i = 0; i < parts.length; i++) {
+      var part = parts[i];
+      var colonIdx = part.indexOf(':');
+      if (colonIdx < 0) continue;
+
+      var key = part.substring(0, colonIdx);
+      var value = part.substring(colonIdx + 1);
+
+      if (key === 'Archetype') result.archetype = value;
+      else if (key === 'Mods') result.modifiers = value ? value.split(',') : [];
+      else if (key === 'TopTags') result.topTags = value ? value.split(',') : [];
+      else if (key === 'Motifs') result.motifs = value ? value.split(',') : [];
+      else if (key === 'Entries') result.entryCount = parseInt(value, 10) || 0;
+      else if (key !== 'V' && key !== 'Hash' && key !== 'Updated' && key !== 'Basis') {
+        var numVal = parseFloat(value);
+        if (!isNaN(numVal)) result.traits[key] = numVal;
+      }
+    }
+    return result;
+  }
+
+  /**
+   * Get motifs from citizen's TraitProfile
+   */
+  function getProfileMotifs_(popId) {
+    var profile = getCitizenTraitProfile_(popId);
+    return (profile && profile.motifs) ? profile.motifs : [];
+  }
+
+  /**
+   * Weight multipliers for pool categories based on archetype
+   * Returns object with category keys and weight multipliers
+   */
+  function getArchetypeWeights_(archetype) {
+    var weights = {
+      social: 1.0, reflective: 1.0, driven: 1.0, grounded: 1.0, volatile: 1.0,
+      alliance: 1.0, rivalry: 1.0, neighborhood: 1.0, work: 1.0, continuity: 1.0
+    };
+
+    switch (archetype) {
+      case 'Connector':
+        weights.social = 1.4; weights.alliance = 1.3; weights.neighborhood = 1.2;
+        break;
+      case 'Watcher':
+        weights.reflective = 1.4; weights.continuity = 1.3; weights.neighborhood = 1.1;
+        break;
+      case 'Striver':
+        weights.driven = 1.4; weights.work = 1.3; weights.rivalry = 1.2;
+        break;
+      case 'Anchor':
+        weights.grounded = 1.4; weights.neighborhood = 1.3; weights.continuity = 1.2;
+        break;
+      case 'Catalyst':
+        weights.volatile = 1.3; weights.rivalry = 1.2; weights.social = 1.1;
+        break;
+      case 'Caretaker':
+        weights.social = 1.2; weights.grounded = 1.2; weights.alliance = 1.2;
+        break;
+      case 'Drifter':
+        weights.reflective = 1.1; weights.volatile = 1.1;
+        break;
+    }
+    return weights;
+  }
+
+  /**
+   * Derive tone from TraitProfile for template slotter
+   * Tones: plain, noir, bright, tense, tender
+   */
+  function toneFromProfile_(profile, nhQoL) {
+    if (!profile) return 'plain';
+
+    var t = profile.traits || {};
+    var volatile = t.volatile || 0;
+    var social = t.social || 0;
+    var reflective = t.reflective || 0;
+    var grounded = t.grounded || 0;
+
+    // Low QoL leans tense
+    if (nhQoL <= 0.35 && volatile >= 0.4) return 'tense';
+    if (nhQoL <= 0.35 && reflective >= 0.5) return 'noir';
+
+    // High volatile with low grounded = tense
+    if (volatile >= 0.6 && grounded < 0.4) return 'tense';
+
+    // High social + grounded = bright
+    if (social >= 0.6 && grounded >= 0.5) return 'bright';
+
+    // High social + reflective = tender
+    if (social >= 0.5 && reflective >= 0.5) return 'tender';
+
+    // High reflective alone = noir
+    if (reflective >= 0.6) return 'noir';
+
+    return 'plain';
+  }
+
+  // v2.7: Template cooldown tracker (prevents spam)
+  if (!S.templateCooldowns) S.templateCooldowns = {};
+  var TEMPLATE_COOLDOWN_CYCLES = 3;
+
+  function canUseTemplate_(popId) {
+    var lastUse = S.templateCooldowns[popId] || 0;
+    return (cycle - lastUse) >= TEMPLATE_COOLDOWN_CYCLES;
+  }
+
+  function markTemplateUsed_(popId) {
+    S.templateCooldowns[popId] = cycle;
+  }
+
+  // =========================================================================
+  // v2.7: TONE-AWARE TEMPLATE SLOTTER
+  // =========================================================================
+
+  /**
+   * Beat pools by tone (lived experience voice - NO narrator framing)
+   */
+  var TONE_BEATS = {
+    plain: [
+      "crossed paths with $CONTACT at $VENUE",
+      "stopped by $VENUE and noticed something small",
+      "ran into $CONTACT near $INSTITUTION",
+      "made a quick stop at $VENUE",
+      "saw $CONTACT at $VENUE, exchanged a few words"
+    ],
+    noir: [
+      "caught $CONTACT's eye at $VENUE—neither spoke first",
+      "waited at $VENUE longer than made sense",
+      "heard something at $INSTITUTION that didn't sit right",
+      "noticed $CONTACT leaving $VENUE in a hurry",
+      "sat alone at $VENUE, thinking through options"
+    ],
+    bright: [
+      "laughed with $CONTACT outside $VENUE",
+      "found unexpected good news at $INSTITUTION",
+      "left $VENUE feeling lighter than expected",
+      "bumped into $CONTACT at $VENUE and made plans",
+      "shared a moment with $CONTACT near $VENUE"
+    ],
+    tense: [
+      "avoided $CONTACT at $VENUE without making it obvious",
+      "felt watched near $VENUE",
+      "left $INSTITUTION faster than planned",
+      "saw $CONTACT at $VENUE and kept walking",
+      "noticed something off at $VENUE but said nothing"
+    ],
+    tender: [
+      "shared a quiet moment with $CONTACT at $VENUE",
+      "helped someone at $INSTITUTION without being asked",
+      "listened to $CONTACT at $VENUE without interrupting",
+      "left $VENUE feeling something unnamed",
+      "remembered something at $VENUE that mattered"
+    ]
+  };
+
+  /**
+   * Build a template-slotted event using profile-derived tone
+   * No role whisper, no garnish - pure lived experience voice
+   */
+  function buildTemplateEvent_(popId, neighborhood, contact, profile, nhQoL) {
+    var tone = toneFromProfile_(profile, nhQoL);
+    var beats = TONE_BEATS[tone] || TONE_BEATS.plain;
+    var beat = beats[Math.floor(roll() * beats.length)];
+
+    var venue = pickVenue_(neighborhood) || "a familiar spot";
+    var institution = pickInstitution_(neighborhood) || "a local office";
+    var contactName = (contact && contact.name) ? contact.name : "someone familiar";
+
+    var rendered = beat
+      .split("$VENUE").join(venue)
+      .split("$INSTITUTION").join(institution)
+      .split("$CONTACT").join(contactName);
+
+    // v2.7: Motif injection (20% chance if profile has motifs)
+    var motifs = (profile && profile.motifs) ? profile.motifs : [];
+    if (motifs.length > 0 && chanceHit(0.20)) {
+      var motif = motifs[Math.floor(roll() * motifs.length)];
+      // Inject motif naturally at end
+      var motifSuffixes = [
+        ", near the " + motif,
+        "—" + motif + " came up",
+        ", thinking about " + motif
+      ];
+      rendered += motifSuffixes[Math.floor(roll() * motifSuffixes.length)];
+    }
+
+    return {
+      text: rendered,
+      tone: tone,
+      tags: ["source:template", "tone:" + tone, "source:slotter"]
+    };
   }
 
   // =========================================================================
@@ -709,6 +931,11 @@ function generateCitizensEvents_(ctx) {
 
     var mem = getMem(popId);
 
+    // v2.7: Get TraitProfile for archetype-aware event generation
+    var traitProfile = getCitizenTraitProfile_(popId);
+    var archetype = (traitProfile && traitProfile.archetype) ? traitProfile.archetype : 'Drifter';
+    var archetypeWeights = getArchetypeWeights_(archetype);
+
     // v2.6: Get neighborhood-level context
     var nhContext = getNeighborhoodContext_(neighborhood);
     var nhQoL = nhContext.qualityOfLifeIndex || 0.5;
@@ -946,6 +1173,50 @@ function generateCitizensEvents_(ctx) {
 
     if (pool.length === 0) continue;
 
+    // v2.7: Apply archetype weights to pool entries
+    if (traitProfile) {
+      for (var awi = 0; awi < pool.length; awi++) {
+        var awEntry = pool[awi];
+        var awTags = awEntry.tags || [];
+        var weightMod = 1.0;
+
+        // Check tags for category matches and apply archetype weights
+        for (var awti = 0; awti < awTags.length; awti++) {
+          var awTag = awTags[awti];
+          if (awTag.indexOf('relationship:alliance') >= 0 || awTag === 'Alliance') weightMod *= archetypeWeights.alliance;
+          else if (awTag.indexOf('relationship:rivalry') >= 0 || awTag === 'Rivalry') weightMod *= archetypeWeights.rivalry;
+          else if (awTag.indexOf('source:neighborhood') >= 0 || awTag === 'Neighborhood') weightMod *= archetypeWeights.neighborhood;
+          else if (awTag.indexOf('source:occupation') >= 0 || awTag === 'Work') weightMod *= archetypeWeights.work;
+          else if (awTag.indexOf('source:continuity') >= 0) weightMod *= archetypeWeights.continuity;
+        }
+
+        // Trait-based weight adjustments from profile
+        var traits = traitProfile.traits || {};
+        if (traits.social >= 0.6 && awEntry.text.indexOf('coordinated') >= 0) weightMod *= 1.15;
+        if (traits.reflective >= 0.6 && awEntry.text.indexOf('noticed') >= 0) weightMod *= 1.15;
+        if (traits.driven >= 0.6 && awEntry.text.indexOf('work') >= 0) weightMod *= 1.15;
+
+        awEntry.weight = (awEntry.weight || 1) * weightMod;
+      }
+    }
+
+    // v2.7: Continuity penalty - reduce weight if TopTags overlap with recent primary tags
+    if (traitProfile && traitProfile.topTags && mem && mem.recentPrimary) {
+      var topTags = traitProfile.topTags;
+      var recentPri = mem.recentPrimary;
+      for (var cpi = 0; cpi < pool.length; cpi++) {
+        var cpEntry = pool[cpi];
+        var cpTags = cpEntry.tags || [];
+        for (var cpti = 0; cpti < cpTags.length; cpti++) {
+          var cpTag = cpTags[cpti];
+          // If this tag is both in TopTags AND in recent primary, penalize slightly
+          if (topTags.indexOf(cpTag) >= 0 && recentPri.indexOf(cpTag) >= 0) {
+            cpEntry.weight = (cpEntry.weight || 1) * 0.85;
+          }
+        }
+      }
+    }
+
     // Filter out recently repeated content
     var filtered = [];
     var recent = mem ? mem.recentTexts : [];
@@ -973,16 +1244,26 @@ function generateCitizensEvents_(ctx) {
     }
 
     if (entry.template) {
-      chosenVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "a familiar corner";
-      chosenInstitution = pickInstitution_(neighborhood) || "a local office";
+      // v2.7: Use tone-aware template slotter if cooldown allows
+      if (canUseTemplate_(popId) && traitProfile) {
+        var slotted = buildTemplateEvent_(popId, neighborhood, contact, traitProfile, nhQoL);
+        pick = slotted.text;
+        tags = mergeTags(tags, slotted.tags);
+        markTemplateUsed_(popId);
+        chosenVenue = "local"; // for memory tracking
+      } else {
+        // Fallback to simple template rendering
+        chosenVenue = pickVenue_(neighborhood) || (mem && mem.lastVenue) || "a familiar corner";
+        chosenInstitution = pickInstitution_(neighborhood) || "a local office";
 
-      pick = renderTemplate_(pick, {
-        VENUE: chosenVenue,
-        INSTITUTION: chosenInstitution,
-        CONTACT: contact.name || "someone familiar"
-      });
+        pick = renderTemplate_(pick, {
+          VENUE: chosenVenue,
+          INSTITUTION: chosenInstitution,
+          CONTACT: contact.name || "someone familiar"
+        });
 
-      tags = mergeTags(tags, ["source:template"]);
+        tags = mergeTags(tags, ["source:template"]);
+      }
       if (contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
       if (chosenVenue) tags = mergeTags(tags, ["venue:local"]);
     } else if (neighborhood && chanceHit(0.12)) {
@@ -1015,6 +1296,9 @@ function generateCitizensEvents_(ctx) {
     if (nhQoL <= 0.35) tags = mergeTags(tags, ["qol:low"]);
     else if (nhQoL >= 0.65) tags = mergeTags(tags, ["qol:high"]);
     if (isHotspot) tags = mergeTags(tags, ["hotspot:true"]);
+
+    // v2.7: Add archetype tag
+    if (archetype && archetype !== 'Drifter') tags = mergeTags(tags, ["archetype:" + archetype]);
 
     var primaryTag = primaryFromTags(tags);
     var tagString = [primaryTag].concat(tags).join("|");
@@ -1062,18 +1346,47 @@ function generateCitizensEvents_(ctx) {
 
 /**
  * ============================================================================
- * CITIZENS EVENTS ENGINE REFERENCE v2.6
+ * CITIZENS EVENTS ENGINE REFERENCE v2.7
  * ============================================================================
  *
- * v2.6 CHANGES:
+ * v2.7 CHANGES (TraitProfile + Template Slotter):
+ * - TraitProfile consumption: reads R-TraitProfile from compressLifeHistory v1.1
+ * - Archetype-weighted pool selection: Connector +social, Watcher +reflective, etc.
+ * - Motif injection: recurring venues/phrases from profile appear organically (20%)
+ * - Tone-aware template slotter: plain/noir/bright/tense/tender
+ * - Template spam cooldown: 3-cycle minimum between template events per citizen
+ * - Continuity penalty: reduces weight for TopTags that appear in recent primary
+ * - New tag: archetype:{name} for non-Drifter archetypes
+ * - New tags: tone:{plain|noir|bright|tense|tender}, source:slotter
+ *
+ * TRAITPROFILE INPUT (v2.7):
+ * Reads from citizenLookup[popId].TraitProfile (column R or OriginVault fallback)
+ * Format: Archetype:X|Mods:a,b|social:0.xx|...|TopTags:...|Motifs:...
+ *
+ * ARCHETYPES & WEIGHTS:
+ * - Connector: +40% social, +30% alliance, +20% neighborhood
+ * - Watcher: +40% reflective, +30% continuity, +10% neighborhood
+ * - Striver: +40% driven, +30% work, +20% rivalry
+ * - Anchor: +40% grounded, +30% neighborhood, +20% continuity
+ * - Catalyst: +30% volatile, +20% rivalry, +10% social
+ * - Caretaker: +20% social/grounded/alliance
+ * - Drifter: +10% reflective/volatile (default)
+ *
+ * TONE SELECTION:
+ * - plain: default, neutral events
+ * - noir: high reflective or low QoL + reflective
+ * - bright: high social + grounded
+ * - tense: high volatile or low QoL + volatile
+ * - tender: high social + reflective
+ *
+ * v2.6 FEATURES (retained):
  * - crimeMetrics v1.2 integration: qualityOfLifeIndex drives event pools
  * - neighborhoodDynamics v2.6 integration via getNeighborhoodDynamics_()
  * - Weather v3.5 full integration (precipitationIntensity, visibility, frontType)
  * - QoL-aware event pools (low QoL = tension/patrol events, high QoL = calm events)
  * - Patrol strategy flavor (suppress_hotspots vs community_presence)
  * - Hotspot awareness (crimeMetrics.hotspots[] boost + events)
- * - New primary tag: "QoL" for quality-of-life driven events
- * - New tags: qol:low, qol:high, hotspot:true, patrol:suppress, patrol:community
+ * - Tags: qol:low, qol:high, hotspot:true, patrol:suppress, patrol:community
  *
  * CRIME METRICS INPUT (v2.6):
  * ctx.summary.crimeMetrics = {

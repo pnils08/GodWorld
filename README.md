@@ -46,17 +46,6 @@ See [docs/DEPLOY.md](docs/DEPLOY.md) for detailed deployment instructions.
 
 Each Claude Code chat session creates a branch with the format `claude/<task>-<sessionID>`. The session can only push to its own branch.
 
-**Claude Session Start:**
-```bash
-git fetch origin main
-git merge origin/main   # Get any changes from other sessions
-```
-
-**Claude Push:**
-```bash
-git push -u origin claude/<branch-name>
-```
-
 **User Deploy (on Cloud Shell):**
 ```bash
 cd ~/GodWorld
@@ -67,7 +56,7 @@ git push origin main
 clasp push
 ```
 
-**If merge conflicts occur:** Claude resolves them on the claude branch, then user retries.
+**If merge conflicts occur:** User tells Claude, Claude fixes on the branch, user retries.
 
 ### Deployment
 

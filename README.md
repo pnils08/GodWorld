@@ -46,32 +46,28 @@ See [docs/DEPLOY.md](docs/DEPLOY.md) for detailed deployment instructions.
 
 Each Claude Code chat session creates a branch with the format `claude/<task>-<sessionID>`. The session can only push to its own branch.
 
-**CRITICAL: Claude must ALWAYS sync with main before pushing:**
-
+**Claude Session Start:**
 ```bash
-# Claude does this BEFORE every push:
 git fetch origin main
-git merge origin/main   # Resolve any conflicts HERE on the claude branch
+git merge origin/main   # Get any changes from other sessions
+```
+
+**Claude Push:**
+```bash
 git push -u origin claude/<branch-name>
 ```
 
-This ensures the user's merge to main is always a clean fast-forward with no conflicts.
-
-**User Workflow (on Cloud Shell):**
-
+**User Deploy (on Cloud Shell):**
 ```bash
 cd ~/GodWorld
 git fetch origin
 git checkout main
-git merge origin/claude/<branch-name>   # Should be clean - no conflicts
+git merge origin/claude/<branch-name>
 git push origin main
 clasp push
 ```
 
-**Why this matters:**
-- Claude cannot push to main directly
-- If Claude doesn't merge main first, conflicts happen on the user's side
-- User should never have to resolve conflicts - Claude handles that on the branch
+**If merge conflicts occur:** Claude resolves them on the claude branch, then user retries.
 
 ### Deployment
 

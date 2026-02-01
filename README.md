@@ -46,15 +46,23 @@ See [docs/DEPLOY.md](docs/DEPLOY.md) for detailed deployment instructions.
 
 Each Claude Code chat session creates a branch with the format `claude/<task>-<sessionID>`. The session can only push to its own branch.
 
-**User Deploy (on Cloud Shell):**
-```bash
-cd ~/GodWorld
-git fetch origin
-git checkout main
-git merge origin/claude/<branch-name>
-git push origin main
-clasp push
-```
+**Workflow:**
+
+1. **Start from `main`** - New sessions should checkout `main` to get the latest code
+2. **Work on chat branch** - Claude makes changes and pushes to its session branch
+3. **Deploy via clasp** - User deploys to Apps Script from Google Cloud Shell:
+   ```bash
+   cd ~/GodWorld
+   git pull origin <chat-branch>
+   clasp push
+   ```
+4. **Merge to main** - At end of session, merge the chat branch into `main`:
+   ```bash
+   git checkout main
+   git merge <chat-branch>
+   git push origin main
+   ```
+5. **Clean up** - Delete old chat branches as needed
 
 **If merge conflicts occur:** User tells Claude, Claude fixes on the branch, user retries.
 

@@ -1,9 +1,17 @@
 /**
  * ============================================================================
- * generateGenericCitizens_ v2.5
+ * generateGenericCitizens_ v2.6
  * ============================================================================
  *
  * World-aware background citizen generation with GodWorld Calendar integration.
+ *
+ * v2.6 Changes from v2.5:
+ * - Deterministic RNG support via ctx.rng or seededRng_ pattern
+ * - Batch writes (all rows written at once instead of one-by-one)
+ * - Distribution logging in ctx.summary.genericCitizensDistribution
+ * - Expanded name pools (+25 first names, +20 last names) for more variety
+ * - Hash set for O(1) duplicate name checking
+ * - Follows existing engine RNG patterns (mulberry32/seededRng_)
  *
  * v2.5 Changes from v2.4:
  * - Integrated Tier 3 Neighborhood Demographics weighting
@@ -16,30 +24,9 @@
  * v2.4 Changes from v2.3:
  * - Full ES5 conversion for Google Apps Script compatibility
  * - Added First/Last header guard for nameExists() safety
- * - Removed unused holidayPriority and logSheet variables
  * - Normalize duplicate name check (case-insensitive)
  * - BirthYear range updated: 1966-2023 (ages 18-75 in 2041)
  * - Changed "Born into population" to "Arrived in Oakland"
- *
- * v2.3 Changes from v2.2:
- * - Writes to Generic_Citizens instead of Simulation_Ledger
- * - Uses BirthYear instead of Age (calculated from SimYear 2041)
- * - No POPID assigned (assigned on promotion to Simulation_Ledger)
- *
- * v2.2 Features retained:
- * - Expanded to 12 Oakland neighborhoods
- * - Full GodWorld Calendar integration (30+ holidays)
- * - First Friday draws creative arrivals to arts districts
- * - Creation Day provides settling bonus
- * - Holiday-specific spawn modifiers
- * - Sports season crowd effects
- * - Cultural activity and community engagement modifiers
- * - Aligned with GodWorld Calendar v1.0
- *
- * Previous features (v2.1):
- * - Season, Weather, Weather Mood
- * - Chaos, City Dynamics, Economic Mood
- * - Sports Season awareness
  *
  * Always generates Tier-4 ENGINE citizens.
  * Never creates UNI / MED / CIV.
@@ -78,9 +65,48 @@ function generateGenericCitizens_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // v2.6: DETERMINISTIC RNG (follows existing engine patterns)
+  // ═══════════════════════════════════════════════════════════════════════════
+  var S = ctx.summary || {};
+  var config = ctx.config || {};
+  var cycle = S.cycleId || config.cycleCount || 0;
+
+  // Use ctx.rng if available, else create seeded RNG if seed provided, else Math.random
+  var rng = null;
+  if (ctx.rng && typeof ctx.rng === 'function') {
+    rng = ctx.rng;
+  } else if (config.rngSeed !== undefined && config.rngSeed !== null) {
+    // Use seededRng_ if available, else fallback to inline mulberry32
+    if (typeof seededRng_ === 'function') {
+      rng = seededRng_((config.rngSeed >>> 0) ^ (cycle >>> 0));
+    } else {
+      // Inline mulberry32 fallback
+      var seed = ((config.rngSeed >>> 0) ^ (cycle >>> 0)) >>> 0;
+      rng = function() {
+        seed = (seed + 0x6D2B79F5) >>> 0;
+        var t = seed;
+        t = Math.imul(t ^ (t >>> 15), t | 1) >>> 0;
+        t = (t ^ (t + Math.imul(t ^ (t >>> 7), t | 61))) >>> 0;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+      };
+    }
+  }
+
+  function rand() {
+    return rng ? rng() : Math.random();
+  }
+
+  function randInt(n) {
+    return Math.floor(rand() * n);
+  }
+
+  function randItem(arr) {
+    return arr[randInt(arr.length)];
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // WORLD STATE
   // ═══════════════════════════════════════════════════════════════════════════
-  var S = ctx.summary;
   var season = S.season;
   var weather = S.weather || { type: "clear", impact: 1 };
   var weatherMood = S.weatherMood || {};
@@ -90,7 +116,6 @@ function generateGenericCitizens_(ctx) {
   };
   var sportsSeason = S.sportsSeason || "off-season";
   var econMood = S.economicMood || 50;
-  var cycle = S.cycleId || ctx.config.cycleCount || 0;
 
   // Calendar context (v2.2)
   var holiday = S.holiday || "none";
@@ -100,22 +125,22 @@ function generateGenericCitizens_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // DETERMINE SPAWN COUNT (World + Calendar Aware)
   // ═══════════════════════════════════════════════════════════════════════════
-  var baseCount = Math.floor(Math.random() * 2) + 1; // 1–2 normally
+  var baseCount = Math.floor(rand() * 2) + 1; // 1-2 normally
 
-  // Summer → higher population churn + tourism movement
+  // Summer -> higher population churn + tourism movement
   if (season === "Summer") baseCount += 1;
 
-  // Chaos → population turbulence
-  if (chaos.length > 0 && Math.random() < 0.4) baseCount += 1;
+  // Chaos -> population turbulence
+  if (chaos.length > 0 && rand() < 0.4) baseCount += 1;
 
-  // Weather volatility → slight adjustments
-  if (weather.impact >= 1.3 && Math.random() < 0.3) baseCount += 1;
+  // Weather volatility -> slight adjustments
+  if (weather.impact >= 1.3 && rand() < 0.3) baseCount += 1;
 
   // Economic boom attracts people
-  if (econMood >= 65 && Math.random() < 0.3) baseCount += 1;
+  if (econMood >= 65 && rand() < 0.3) baseCount += 1;
 
   // Perfect weather attracts people
-  if (weatherMood.perfectWeather && Math.random() < 0.2) baseCount += 1;
+  if (weatherMood.perfectWeather && rand() < 0.2) baseCount += 1;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR SPAWN MODIFIERS (v2.2)
@@ -134,7 +159,7 @@ function generateGenericCitizens_(ctx) {
   var oaklandCelebrations = [
     "OpeningDay", "OaklandPride", "ArtSoulFestival", "Juneteenth"
   ];
-  if (oaklandCelebrations.indexOf(holiday) >= 0 && Math.random() < 0.5) {
+  if (oaklandCelebrations.indexOf(holiday) >= 0 && rand() < 0.5) {
     baseCount += 1;
   }
 
@@ -142,40 +167,40 @@ function generateGenericCitizens_(ctx) {
   var culturalHolidays = [
     "CincoDeMayo", "DiaDeMuertos", "LunarNewYear", "Juneteenth"
   ];
-  if (culturalHolidays.indexOf(holiday) >= 0 && Math.random() < 0.4) {
+  if (culturalHolidays.indexOf(holiday) >= 0 && rand() < 0.4) {
     baseCount += 1;
   }
 
   // First Friday draws creative types to Oakland
-  if (isFirstFriday && Math.random() < 0.4) {
+  if (isFirstFriday && rand() < 0.4) {
     baseCount += 1;
   }
 
-  // Creation Day — settling energy, people put down roots
-  if (isCreationDay && Math.random() < 0.3) {
+  // Creation Day - settling energy, people put down roots
+  if (isCreationDay && rand() < 0.3) {
     baseCount += 1;
   }
 
   // Championship brings temporary population surge
   if (sportsSeason === "championship") {
     baseCount += 1;
-  } else if ((sportsSeason === "playoffs" || sportsSeason === "post-season") && Math.random() < 0.4) {
+  } else if ((sportsSeason === "playoffs" || sportsSeason === "post-season") && rand() < 0.4) {
     baseCount += 1;
   }
 
   // High cultural activity attracts creative arrivals
-  if (dynamics.culturalActivity >= 1.4 && Math.random() < 0.3) {
+  if (dynamics.culturalActivity >= 1.4 && rand() < 0.3) {
     baseCount += 1;
   }
 
   // High community engagement suggests welcoming environment
-  if (dynamics.communityEngagement >= 1.4 && Math.random() < 0.25) {
+  if (dynamics.communityEngagement >= 1.4 && rand() < 0.25) {
     baseCount += 1;
   }
 
   // Quiet holidays reduce arrivals (people staying home)
   var quietHolidays = ["Easter", "MothersDay", "FathersDay"];
-  if (quietHolidays.indexOf(holiday) >= 0 && Math.random() < 0.5) {
+  if (quietHolidays.indexOf(holiday) >= 0 && rand() < 0.5) {
     baseCount -= 1;
   }
 
@@ -184,20 +209,30 @@ function generateGenericCitizens_(ctx) {
   if (baseCount < 0) baseCount = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // NAME POOLS
+  // NAME POOLS (v2.6: Expanded for variety - 62 first, 53 last = 3,286 combos)
   // ═══════════════════════════════════════════════════════════════════════════
   var firstNames = [
+    // Original 37
     "Carlos", "Mina", "Andre", "Jordan", "Brianna", "Sofia", "Tariq", "Elena", "Marcus",
     "Kaila", "Tobias", "Lorenzo", "Ariana", "Xavier", "Lila", "Darius", "Ramon", "Ivy",
     "Maya", "Jamal", "Priya", "Diego", "Aaliyah", "Oscar", "Jasmine", "Terrell", "Camila",
-    "Wei", "Mei", "Jun", "Yuki", "Kenji", "Anh", "Linh", "Tran", "Esperanza", "Guadalupe"
+    "Wei", "Mei", "Jun", "Yuki", "Kenji", "Anh", "Linh", "Tran", "Esperanza", "Guadalupe",
+    // v2.6 additions (25 more - diverse Oakland-appropriate names)
+    "Destiny", "Isaiah", "Natasha", "DeShawn", "Monique", "Tyrell", "Alicia", "Malik",
+    "Vanessa", "Cedric", "Leticia", "Dwayne", "Gabriela", "Kwame", "Nina", "Rashid",
+    "Bianca", "Trevon", "Imani", "Hector", "Sakura", "Javier", "Miriam", "Kofi", "Lucia"
   ];
 
   var lastNames = [
+    // Original 33
     "Lopez", "Carter", "Nguyen", "Patel", "Jackson", "Harris", "Wong", "Thompson",
     "Brown", "Lee", "Lewis", "Jordan", "Reyes", "Scott", "Ward", "Foster", "Cook",
     "Martinez", "Robinson", "Kim", "Davis", "Garcia", "Chen", "Williams", "Santos",
-    "Tran", "Chung", "Park", "Liu", "Hernandez", "Ramirez", "Cruz", "Mendoza"
+    "Tran", "Chung", "Park", "Liu", "Hernandez", "Ramirez", "Cruz", "Mendoza",
+    // v2.6 additions (20 more - diverse Oakland-appropriate names)
+    "Washington", "Morales", "Okonkwo", "Yamamoto", "Rivera", "Freeman", "Gutierrez",
+    "Singh", "Jefferson", "Flores", "Muhammad", "Torres", "Coleman", "Vasquez", "Adams",
+    "Espinoza", "Nakamura", "Reed", "Delgado", "Franklin"
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -249,17 +284,35 @@ function generateGenericCitizens_(ctx) {
     return String(s || '').trim().toLowerCase();
   }
 
-  // v2.4: Case-insensitive duplicate check
-  function nameExists(first, last) {
-    var normFirst = norm(first);
-    var normLast = norm(last);
-    for (var r = 1; r < genericValues.length; r++) {
-      if (norm(genericValues[r][iFirst]) === normFirst &&
-          norm(genericValues[r][iLast]) === normLast) {
-        return true;
-      }
+  // v2.6: Build hash set for O(1) duplicate checking
+  var existingNames = {};
+  for (var r = 1; r < genericValues.length; r++) {
+    var ef = norm(genericValues[r][iFirst]);
+    var el = norm(genericValues[r][iLast]);
+    if (ef && el) {
+      existingNames[ef + '|' + el] = true;
     }
-    return false;
+  }
+
+  // v2.6: O(1) duplicate check using hash set
+  function nameExists(first, last) {
+    return existingNames[norm(first) + '|' + norm(last)] === true;
+  }
+
+  // v2.6: Get unique name with hash set tracking
+  function getUniqueName(maxAttempts) {
+    var attempts = 0;
+    while (attempts < maxAttempts) {
+      var f = randItem(firstNames);
+      var l = randItem(lastNames);
+      var key = norm(f) + '|' + norm(l);
+      if (!existingNames[key]) {
+        existingNames[key] = true; // Mark as used
+        return { first: f, last: l };
+      }
+      attempts++;
+    }
+    return null;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -267,8 +320,7 @@ function generateGenericCitizens_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   var demographicWeights = {};
   if (typeof getDemographicWeightedNeighborhoods_ === 'function') {
-    // Determine citizen type based on birth year distribution
-    var citizenType = 'young_professional'; // Default for new arrivals
+    var citizenType = 'young_professional';
     var demographics = getNeighborhoodDemographics_(ss);
     if (demographics && Object.keys(demographics).length > 0) {
       demographicWeights = getDemographicWeightedNeighborhoods_(demographics, citizenType);
@@ -279,7 +331,6 @@ function generateGenericCitizens_(ctx) {
   // CALENDAR-AWARE NEIGHBORHOOD PICKER (v2.5)
   // ═══════════════════════════════════════════════════════════════════════════
   function pickWeightedNeighborhood(birthYear) {
-    // v2.4: Manual copy instead of spread operator
     var weights = {};
     for (var key in neighborhoodWeights) {
       if (neighborhoodWeights.hasOwnProperty(key)) {
@@ -306,7 +357,6 @@ function generateGenericCitizens_(ctx) {
         var demoWeights = getDemographicWeightedNeighborhoods_(demographics, citizenType);
         for (var hood in demoWeights) {
           if (demoWeights.hasOwnProperty(hood) && weights[hood] !== undefined) {
-            // Blend base weights with demographic weights
             weights[hood] = (weights[hood] + demoWeights[hood] * 2) / 3;
           }
         }
@@ -357,7 +407,7 @@ function generateGenericCitizens_(ctx) {
       }
     }
 
-    // Build weighted array
+    // Build weighted array (v2.6: use seeded rand)
     var weighted = [];
     for (var n = 0; n < neighborhoods.length; n++) {
       var neighborhood = neighborhoods[n];
@@ -367,36 +417,51 @@ function generateGenericCitizens_(ctx) {
         weighted.push(neighborhood);
       }
     }
-    return weighted[Math.floor(Math.random() * weighted.length)];
+    return weighted[randInt(weighted.length)];
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.6: DISTRIBUTION TRACKING
+  // ═══════════════════════════════════════════════════════════════════════════
+  var neighborhoodCounts = {};
+  var citizenTypeCounts = {};
+
+  function getCitizenType(birthYear) {
+    var simYear = 2041;
+    var age = simYear - (birthYear || 2010);
+    if (age >= 5 && age <= 22) return 'student';
+    if (age >= 65) return 'senior';
+    if (age >= 25 && age <= 40) return 'young_professional';
+    return 'adult';
   }
 
   // Track new citizens for summary
   var newCitizens = [];
+  var rowsToWrite = []; // v2.6: Batch write collection
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATE CITIZENS
   // ═══════════════════════════════════════════════════════════════════════════
   for (var i = 0; i < baseCount; i++) {
 
-    var first = "";
-    var last = "";
-    var attempts = 0;
+    var nameResult = getUniqueName(50);
+    if (!nameResult) continue;
 
-    do {
-      first = firstNames[Math.floor(Math.random() * firstNames.length)];
-      last = lastNames[Math.floor(Math.random() * lastNames.length)];
-      attempts++;
-    } while (nameExists(first, last) && attempts < 50);
+    var first = nameResult.first;
+    var last = nameResult.last;
 
-    if (attempts >= 50) continue;
-
-    // v2.4: BirthYear range 1966-2023 → ages 18-75 in 2041
-    var minBirthYear = 1966;  // Age 75 in 2041
-    var maxBirthYear = 2023;  // Age 18 in 2041
-    var birthYear = minBirthYear + Math.floor(Math.random() * (maxBirthYear - minBirthYear + 1));
+    // v2.4: BirthYear range 1966-2023 -> ages 18-75 in 2041
+    var minBirthYear = 1966;
+    var maxBirthYear = 2023;
+    var birthYear = minBirthYear + randInt(maxBirthYear - minBirthYear + 1);
 
     var neighborhood = pickWeightedNeighborhood(birthYear);
-    var occupation = occupations[Math.floor(Math.random() * occupations.length)];
+    var occupation = randItem(occupations);
+
+    // v2.6: Track distribution
+    neighborhoodCounts[neighborhood] = (neighborhoodCounts[neighborhood] || 0) + 1;
+    var citizenType = getCitizenType(birthYear);
+    citizenTypeCounts[citizenType] = (citizenTypeCounts[citizenType] || 0) + 1;
 
     var newRow = [];
     for (var h = 0; h < header.length; h++) {
@@ -417,24 +482,19 @@ function generateGenericCitizens_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     var worldContext = "";
 
-    // Seasonal context
     if (season === "Winter") worldContext = "Arrived during winter's quiet cycle.";
     if (season === "Spring") worldContext = "Entered Oakland during spring's renewal.";
     if (season === "Summer") worldContext = "Moved to Oakland in a lively summer period.";
     if (season === "Fall") worldContext = "Joined the city during the fall transition.";
 
-    // Weather context
     if (weatherMood.perfectWeather) worldContext += " Perfect weather welcomed the newcomer.";
     if (weather.impact >= 1.3) worldContext += " Weather volatility marked their arrival.";
 
-    // Chaos context
     if (chaos.length > 0) worldContext += " Period of city-level disturbance.";
 
-    // Economic context
     if (econMood >= 65) worldContext += " Economic optimism in the area.";
     if (econMood <= 35) worldContext += " Arrived despite economic uncertainty.";
 
-    // Calendar context (v2.2)
     if (holiday !== "none") {
       var holidayContextMap = {
         "Thanksgiving": " Arrived during Thanksgiving travel.",
@@ -447,7 +507,7 @@ function generateGenericCitizens_(ctx) {
         "OaklandPride": " Pride celebration energy drew them to Oakland.",
         "Juneteenth": " Juneteenth celebration welcomed their arrival.",
         "CincoDeMayo": " Cinco de Mayo festivities marked their arrival.",
-        "DiaDeMuertos": " Día de los Muertos spirit welcomed them.",
+        "DiaDeMuertos": " Dia de los Muertos spirit welcomed them.",
         "LunarNewYear": " Lunar New Year brought new beginnings.",
         "ArtSoulFestival": " Art & Soul Festival energy drew them in."
       };
@@ -482,16 +542,14 @@ function generateGenericCitizens_(ctx) {
       worldContext += " Strong community welcomed the newcomer.";
     }
 
-    // v2.4: Changed from "Born into population" to "Arrived in Oakland"
     if (iLifeHistory >= 0) {
       newRow[iLifeHistory] = "Arrived in Oakland during Cycle " + cycle + ". Settled in " + neighborhood + ". " + worldContext;
     }
 
-    // Write to Generic_Citizens
-    var writeRow = genericSheet.getLastRow() + 1;
-    genericSheet.getRange(writeRow, 1, 1, newRow.length).setValues([newRow]);
+    // v2.6: Collect row for batch write
+    rowsToWrite.push(newRow);
 
-    // Update local array for duplicate checking
+    // Update local array for duplicate checking (already done via hash set)
     genericValues.push(newRow);
 
     // Track for summary
@@ -500,6 +558,7 @@ function generateGenericCitizens_(ctx) {
       neighborhood: neighborhood,
       birthYear: birthYear,
       occupation: occupation,
+      citizenType: citizenType,
       calendarContext: {
         holiday: holiday,
         isFirstFriday: isFirstFriday,
@@ -511,74 +570,82 @@ function generateGenericCitizens_(ctx) {
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
   }
 
-  // Summary
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.6: BATCH WRITE (single API call instead of N calls)
+  // ═══════════════════════════════════════════════════════════════════════════
+  if (rowsToWrite.length > 0) {
+    var startRow = genericSheet.getLastRow() + 1;
+    genericSheet.getRange(startRow, 1, rowsToWrite.length, rowsToWrite[0].length).setValues(rowsToWrite);
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SUMMARY + DISTRIBUTION LOGGING (v2.6)
+  // ═══════════════════════════════════════════════════════════════════════════
   S.newGenericCitizens = newCitizens;
   S.genericCitizensGenerated = newCitizens.length;
+  S.genericCitizensDistribution = {
+    neighborhoods: neighborhoodCounts,
+    citizenTypes: citizenTypeCounts,
+    baseCount: baseCount,
+    rngMode: rng ? 'seeded' : 'random'
+  };
   ctx.summary = S;
 
-  Logger.log('generateGenericCitizens_ v2.5: Generated ' + newCitizens.length + ' citizens');
+  // Build distribution string for logging
+  var hoodParts = [];
+  for (var hk in neighborhoodCounts) {
+    if (neighborhoodCounts.hasOwnProperty(hk)) {
+      hoodParts.push(hk + '=' + neighborhoodCounts[hk]);
+    }
+  }
+  var typeParts = [];
+  for (var tk in citizenTypeCounts) {
+    if (citizenTypeCounts.hasOwnProperty(tk)) {
+      typeParts.push(tk + '=' + citizenTypeCounts[tk]);
+    }
+  }
+
+  Logger.log('generateGenericCitizens_ v2.6: Generated ' + newCitizens.length +
+    ' (baseCount=' + baseCount + ', rng=' + (rng ? 'seeded' : 'random') + ')' +
+    ' | neighborhoods: ' + hoodParts.join(', ') +
+    ' | types: ' + typeParts.join(', '));
 }
 
 
 /**
  * ============================================================================
- * GENERIC CITIZENS GENERATOR REFERENCE v2.5
+ * GENERIC CITIZENS GENERATOR REFERENCE v2.6
  * ============================================================================
  *
- * CHANGES FROM v2.4:
- * - Integrated Tier 3 Neighborhood Demographics weighting
- * - pickWeightedNeighborhood considers citizen age for demographic fit
- * - Demographic weights blended with calendar/cultural modifiers
+ * CHANGES FROM v2.5:
+ * - Deterministic RNG support (ctx.rng or ctx.config.rngSeed)
+ * - Batch writes (all rows at once vs one-by-one)
+ * - Distribution logging in ctx.summary.genericCitizensDistribution
+ * - Expanded name pools: 62 first names, 53 last names = 3,286 combinations
+ * - Hash set for O(1) duplicate checking
  *
- * CHANGES FROM v2.3:
- * - Full ES5 conversion (var, indexOf, classic for loops)
- * - Added First/Last header guard for nameExists() safety
- * - Removed unused holidayPriority and logSheet variables
- * - Normalize duplicate name check (case-insensitive)
- * - BirthYear range: 1966-2023 (ages 18-75 in SimYear 2041)
- * - Changed "Born into population" to "Arrived in Oakland"
+ * NAME POOL EXPANSION (v2.6):
+ * - Added 25 first names (diverse Oakland-appropriate)
+ * - Added 20 last names (diverse Oakland-appropriate)
+ * - Previous: 37 x 33 = 1,221 combinations
+ * - New: 62 x 53 = 3,286 combinations (2.7x increase)
  *
- * CHANGES FROM v2.2:
- * - Writes to Generic_Citizens (not Simulation_Ledger)
- * - Uses BirthYear column (not Age)
- * - No POPID (assigned on promotion)
+ * RNG MODES:
+ * - ctx.rng function takes precedence
+ * - ctx.config.rngSeed creates deterministic seeded RNG
+ * - Falls back to Math.random() if neither provided
+ *
+ * DISTRIBUTION OUTPUT (ctx.summary.genericCitizensDistribution):
+ * {
+ *   neighborhoods: { 'Downtown': 2, 'Temescal': 1, ... },
+ *   citizenTypes: { 'young_professional': 2, 'senior': 1, ... },
+ *   baseCount: 3,
+ *   rngMode: 'seeded' | 'random'
+ * }
  *
  * BASE SPAWN: 1-2 citizens per cycle
- *
- * SPAWN MODIFIERS:
- *
- * SEASONAL/WEATHER:
- * - Summer: +1
- * - Weather impact ≥1.3: +1 (30% chance)
- * - Perfect weather: +1 (20% chance)
- *
- * WORLD STATE:
- * - Chaos events: +1 (40% chance)
- * - Economic boom (≥65): +1 (30% chance)
- *
- * CALENDAR MODIFIERS (v2.2):
- *
- * | Factor | Effect |
- * |--------|--------|
- * | Travel holidays | +1 |
- * | Oakland celebrations | +1 (50% chance) |
- * | Cultural holidays | +1 (40% chance) |
- * | First Friday | +1 (40% chance) |
- * | Creation Day | +1 (30% chance) |
- * | Championship | +1 |
- * | Playoffs | +1 (40% chance) |
- * | High cultural activity | +1 (30% chance) |
- * | High community engagement | +1 (25% chance) |
- * | Quiet holidays | -1 (50% chance) |
- *
  * SPAWN CAP: 0-5 citizens per cycle
- *
  * BIRTHYEAR RANGE: 1966-2023 (ages 18-75 in SimYear 2041)
- *
- * NEIGHBORHOODS (12):
- * - Temescal, Downtown, Fruitvale, Lake Merritt
- * - West Oakland, Laurel, Rockridge, Jack London
- * - Uptown, KONO, Chinatown, Piedmont Ave
  *
  * ============================================================================
  */

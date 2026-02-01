@@ -1,9 +1,13 @@
 /**
  * ============================================================================
- * V3.4 EVENT ARC ENGINE — GODWORLD CALENDAR INTEGRATION
+ * V3.5 EVENT ARC ENGINE — GODWORLD CALENDAR INTEGRATION
  * ============================================================================
  *
  * Manages multi-cycle story arcs with GodWorld Calendar awareness.
+ *
+ * v3.5 Changes:
+ * - Safe UUID generation via generateSafeUuid_() (fixes trigger context errors)
+ * - Removes dependency on Utilities.getUuid() which fails in some contexts
  *
  * v3.4 Changes:
  * - Unified currentCycle lookup via getCurrentCycle_
@@ -343,6 +347,32 @@ function eventArcEngine_(ctx) {
 
 
 /**
+ * v3.5: Safe UUID generation that works in all contexts
+ * Falls back to manual generation if Utilities.getUuid() fails
+ */
+function generateSafeUuid_() {
+  try {
+    if (typeof Utilities !== 'undefined' && typeof Utilities.getUuid === 'function') {
+      return Utilities.getUuid();
+    }
+  } catch (e) {
+    // Utilities.getUuid() failed, use fallback
+  }
+
+  // Fallback: manual UUID generation (RFC 4122 v4 format)
+  var chars = '0123456789abcdef';
+  var uuid = '';
+  for (var i = 0; i < 32; i++) {
+    uuid += chars[Math.floor(Math.random() * 16)];
+    if (i === 7 || i === 11 || i === 15 || i === 19) {
+      uuid += '-';
+    }
+  }
+  return uuid;
+}
+
+
+/**
  * Generates new arcs based on cycle-level signals.
  * Returns an array of arc objects.
  */
@@ -407,8 +437,11 @@ function generateNewArcs_(ctx) {
     else if (isFirstFriday) calTrigger = 'FirstFriday';
     else if (isCreationDay) calTrigger = 'CreationDay';
 
+    // v3.5: Safe UUID generation (handles trigger context where Utilities may fail)
+    var arcUuid = generateSafeUuid_();
+
     return {
-      arcId: Utilities.getUuid().slice(0, 8),
+      arcId: arcUuid.slice(0, 8),
       type: type,
       phase: 'early',
       tension: initialTension,
@@ -787,8 +820,10 @@ function getArcEventBoost_(ctx, citizenId) {
 
 /**
  * ============================================================================
- * EVENT ARC ENGINE REFERENCE v3.4
+ * EVENT ARC ENGINE REFERENCE v3.5
  * ============================================================================
+ *
+ * v3.5: Safe UUID generation (generateSafeUuid_) - handles trigger contexts
  *
  * NEIGHBORHOODS (12):
  * - Temescal: HEALTH, EDUCATION, COMMUNITY

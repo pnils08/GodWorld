@@ -1,11 +1,21 @@
 /**
  * ============================================================================
- * V3.3 STORY SEEDS ENGINE — CALENDAR ENHANCED
+ * V3.5 STORY SEEDS ENGINE — SPORTS GENERALIZED + MANUAL INPUT + UI RENDER
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
  *
- * v3.3 Enhancements:
+ * v3.5 Enhancements:
+ * - Added renderStorySeedsForUI_() for headline/lede/angle format
+ * - Outputs ready for mediaRoomBriefingGenerator or Press_Drafts
+ *
+ * v3.4 Features (retained):
+ * - Sports generalization (no hardcoded team references)
+ * - Generic sports phases: finals, postseason, late-season, in-season, preseason, off-season
+ * - Manual input system via ctx.config.manualStoryInputs
+ * - Extra seeds injection via manual.extraSeeds[]
+ *
+ * v3.3 Features retained:
  * - ES5 syntax for Google Apps Script compatibility
  * - Defensive guards for ctx/summary
  * - Manual deduplication (no Set)
@@ -16,20 +26,18 @@
  * - Holiday-specific story seed pools
  * - First Friday cultural seeds
  * - Creation Day community seeds
- * - Sports season narrative seeds
  * - Cultural activity and community engagement seeds
  * - Expanded Oakland neighborhoods (12)
- * - Aligned with GodWorld Calendar v1.0
  *
- * Previous features (v3.1):
- * - Pattern and shock cycles
- * - World events + severity
- * - Civic load and sentiment
- * - Migration drift
- * - Weather volatility
- * - Economic signals
- * - Named citizen spotlights
- * - Domain accumulation
+ * Manual input format (optional):
+ * {
+ *   sportLabel: "your sport/league/scene",   // e.g., "ranked season", "playoffs"
+ *   sportVenue: "place",                     // e.g., "Downtown", "Jack London"
+ *   sportStakes: "what's on the line",       // e.g., "promotion", "championship"
+ *   extraSeeds: [                            // optional extra seeds
+ *     { text:"...", domain:"...", nh:"...", priority:3, seedType:"manual" }
+ *   ]
+ * }
  *
  * Seeds are structured objects with domain, neighborhood, priority.
  * No sheet writes — pure functional logic.
@@ -45,7 +53,7 @@ function applyStorySeeds_(ctx) {
 
   var S = ctx.summary;
   var seeds = [];
-  var cycle = S.cycleId || ctx.config.cycleCount || 0;
+  var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL SIGNALS
@@ -82,6 +90,15 @@ function applyStorySeeds_(ctx) {
   var season = S.season || "Spring";
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // v3.4: MANUAL INPUT SYSTEM
+  // ═══════════════════════════════════════════════════════════════════════════
+  var manual = (ctx.config && ctx.config.manualStoryInputs) || S.manualStoryInputs || {};
+  var manualSportLabel = manual.sportLabel || '';
+  var manualSportVenue = manual.sportVenue || '';
+  var manualSportStakes = manual.sportStakes || '';
+  var manualExtraSeeds = manual.extraSeeds || [];
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // SEED BUILDER
   // ═══════════════════════════════════════════════════════════════════════════
   function makeSeed(text, domain, neighborhood, priority, seedType) {
@@ -100,6 +117,44 @@ function applyStorySeeds_(ctx) {
         sportsSeason: sportsSeason
       }
     };
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v3.4: SPORTS PHASE NORMALIZATION
+  // ═══════════════════════════════════════════════════════════════════════════
+  function getSportsPhase_(sportsSeasonRaw) {
+    var s = String(sportsSeasonRaw || '').toLowerCase();
+    if (s === 'championship' || s === 'finals') return 'finals';
+    if (s === 'playoffs' || s === 'post-season' || s === 'postseason') return 'postseason';
+    if (s === 'late-season') return 'late-season';
+    if (s === 'preseason') return 'preseason';
+    if (s === 'in-season' || s === 'regular-season') return 'in-season';
+    if (s === 'off-season' || s === 'offseason') return 'off-season';
+    return 'off-season';
+  }
+
+  // v3.4: Generic sports text builder
+  function buildSportsText_(phase) {
+    var label = manualSportLabel ? (' (' + manualSportLabel + ')') : '';
+    var venue = manualSportVenue ? (' near ' + manualSportVenue) : '';
+    var stakes = manualSportStakes ? (' ' + manualSportStakes + ' on the line.') : '';
+
+    if (phase === 'finals') {
+      return "Championship fever grips the city" + label + venue + "." + stakes + " Community united behind the team.";
+    }
+    if (phase === 'postseason') {
+      return "Playoff tension ripples through neighborhoods" + label + venue + "." + stakes + " Hope and anxiety.";
+    }
+    if (phase === 'late-season') {
+      return "Late-season push intensifies" + label + venue + "." + stakes + " Every game matters now.";
+    }
+    if (phase === 'in-season') {
+      return "Regular season routines shape community rhythms" + label + venue + ". Sports stories emerging.";
+    }
+    if (phase === 'preseason') {
+      return "Preseason optimism fills the air" + label + venue + ". New faces, fresh narratives.";
+    }
+    return "Off-season activity continues quietly" + label + venue + ". Behind-the-scenes developments.";
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -140,7 +195,7 @@ function applyStorySeeds_(ctx) {
         { text: "Patriotic displays and community gatherings define the day. Local traditions.", domain: "CULTURE", nh: "", priority: 1 }
       ]
     },
-    
+
     // Cultural holidays
     "MLKDay": {
       seeds: [
@@ -162,7 +217,7 @@ function applyStorySeeds_(ctx) {
     },
     "DiaDeMuertos": {
       seeds: [
-        { text: "Día de los Muertos altars honor ancestors. Fruitvale's beautiful tradition.", domain: "CULTURE", nh: "Fruitvale", priority: 3 },
+        { text: "Dia de los Muertos altars honor ancestors. Fruitvale's beautiful tradition.", domain: "CULTURE", nh: "Fruitvale", priority: 3 },
         { text: "Community remembers those who came before. Stories of loss and love.", domain: "COMMUNITY", nh: "Fruitvale", priority: 2 }
       ]
     },
@@ -172,13 +227,13 @@ function applyStorySeeds_(ctx) {
         { text: "Red lanterns and lion dances mark the new year. Tradition meets modernity.", domain: "COMMUNITY", nh: "Chinatown", priority: 2 }
       ]
     },
-    
-    // Oakland-specific holidays
+
+    // Oakland-specific holidays (v3.4: Generalized sports references)
     "OpeningDay": {
       seeds: [
-        { text: "Opening Day brings baseball fever to Oakland. Green and gold stories.", domain: "SPORTS", nh: "Jack London", priority: 3 },
+        { text: "Opening Day brings sports fever to Oakland. Season begins with optimism.", domain: "SPORTS", nh: "Jack London", priority: 3 },
         { text: "Fans flood the waterfront district. Economic and emotional energy.", domain: "BUSINESS", nh: "Jack London", priority: 2 },
-        { text: "A's faithful gather for another season. Hope springs eternal.", domain: "SPORTS", nh: "Jack London", priority: 2 }
+        { text: "Faithful gather for another season. Hope springs eternal.", domain: "SPORTS", nh: "Jack London", priority: 2 }
       ]
     },
     "OaklandPride": {
@@ -194,7 +249,7 @@ function applyStorySeeds_(ctx) {
         { text: "Music, art, and community converge. Festival stories emerging.", domain: "COMMUNITY", nh: "Downtown", priority: 2 }
       ]
     },
-    
+
     // Minor holidays
     "Valentine": {
       seeds: [
@@ -287,37 +342,51 @@ function applyStorySeeds_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // SPORTS SEASON SEEDS (v3.2)
+  // SPORTS SEASON SEEDS (v3.4: Generalized phases)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (sportsSeason === "championship") {
+  var sportsPhase = getSportsPhase_(sportsSeason);
+  var sportsVenue = manualSportVenue || 'Jack London';
+
+  if (sportsPhase === 'finals') {
     seeds.push(makeSeed(
-      "Championship fever grips Oakland. City united behind the team.",
-      'SPORTS', 'Jack London', 3, 'sports'
+      buildSportsText_('finals'),
+      'SPORTS', sportsVenue, 3, 'sports'
     ));
     seeds.push(makeSeed(
-      "Business booming near the stadium. Economic championship story.",
-      'BUSINESS', 'Jack London', 2, 'sports'
+      "Business booming in sports district. Economic championship story.",
+      'BUSINESS', sportsVenue, 2, 'sports'
     ));
     seeds.push(makeSeed(
       "Fan stories capture the championship moment. Personal stakes.",
       'COMMUNITY', '', 2, 'sports'
     ));
-  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
+  } else if (sportsPhase === 'postseason') {
     seeds.push(makeSeed(
-      "Playoff tension ripples through the city. Hope and anxiety.",
-      'SPORTS', 'Jack London', 2, 'sports'
+      buildSportsText_('postseason'),
+      'SPORTS', sportsVenue, 2, 'sports'
     ));
     seeds.push(makeSeed(
       "Sports bars and watch parties gather the faithful. Community viewing.",
       'NIGHTLIFE', 'Downtown', 2, 'sports'
     ));
-  } else if (sportsSeason === "late-season") {
+  } else if (sportsPhase === 'late-season') {
     seeds.push(makeSeed(
-      "Pennant race intensifies. Will Oakland make it?",
+      buildSportsText_('late-season'),
       'SPORTS', '', 2, 'sports'
     ));
+  } else if (sportsPhase === 'in-season') {
+    seeds.push(makeSeed(
+      buildSportsText_('in-season'),
+      'SPORTS', sportsVenue, 1, 'sports'
+    ));
+  } else if (sportsPhase === 'preseason') {
+    seeds.push(makeSeed(
+      buildSportsText_('preseason'),
+      'SPORTS', sportsVenue, 1, 'sports'
+    ));
   }
+  // off-season: no automatic seed (quiet)
 
   // ═══════════════════════════════════════════════════════════════════════════
   // CULTURAL ACTIVITY SEEDS (v3.2)
@@ -431,14 +500,14 @@ function applyStorySeeds_(ctx) {
 
   if (weight === 'high-signal') {
     seeds.push(makeSeed(
-      `High-signal cycle: ${weightReason || 'Multiple triggers firing.'}`,
+      'High-signal cycle: ' + (weightReason || 'Multiple triggers firing.'),
       'GENERAL', '', 3, 'weight'
     ));
   }
 
   if (weight === 'medium-signal') {
     seeds.push(makeSeed(
-      `Moderate world movement: ${weightReason || 'Activity above baseline.'}`,
+      'Moderate world movement: ' + (weightReason || 'Activity above baseline.'),
       'GENERAL', '', 2, 'weight'
     ));
   }
@@ -526,12 +595,12 @@ function applyStorySeeds_(ctx) {
 
   if (weather.impact >= 1.5) {
     seeds.push(makeSeed(
-      `Severe ${weather.type || 'weather'} generating shifts in resident behavior. City adapting.`,
+      'Severe ' + (weather.type || 'weather') + ' generating shifts in resident behavior. City adapting.',
       'WEATHER', '', 3, 'weather'
     ));
   } else if (weather.impact >= 1.3) {
     seeds.push(makeSeed(
-      `${weather.type || 'Weather'} conditions impacting local routines. Street-level stories.`,
+      (weather.type || 'Weather') + ' conditions impacting local routines. Street-level stories.',
       'WEATHER', '', 2, 'weather'
     ));
   }
@@ -646,7 +715,7 @@ function applyStorySeeds_(ctx) {
 
     if (domains[key] >= 4) {
       seeds.push(makeSeed(
-        'Heavy ' + key.toLowerCase() + ' activity this cycle. Pattern worth investigating.',
+        'Heavy ' + String(key).toLowerCase() + ' activity this cycle. Pattern worth investigating.',
         key, '', 3, 'domain'
       ));
     }
@@ -665,7 +734,7 @@ function applyStorySeeds_(ctx) {
   }
   if (peakArcs.length > 0) {
     seeds.push(makeSeed(
-      peakArcs.length + ' story arc(s) at peak tension. Climax moments developing.',
+      String(peakArcs.length) + ' story arc(s) at peak tension. Climax moments developing.',
       'GENERAL', '', 3, 'arc'
     ));
   }
@@ -683,14 +752,14 @@ function applyStorySeeds_(ctx) {
 
   if (spotlights.length >= 3) {
     seeds.push(makeSeed(
-      spotlights.length + ' notable figures drawing attention this cycle. Profile opportunities.',
+      String(spotlights.length) + ' notable figures drawing attention this cycle. Profile opportunities.',
       'COMMUNITY', '', 2, 'spotlight'
     ));
   }
 
   for (var spi = 0; spi < spotlights.length; spi++) {
     var sp = spotlights[spi];
-    if (sp.score >= 8) {
+    if (sp && sp.score >= 8) {
       seeds.push(makeSeed(
         'High-profile spotlight: POPID ' + sp.popId + '. Deep interest warranted.',
         'COMMUNITY', '', 3, 'spotlight'
@@ -707,7 +776,18 @@ function applyStorySeeds_(ctx) {
     if (typeof seed === 'string') {
       seeds.push(makeSeed(seed, 'GENERAL', '', 1, 'seasonal'));
     } else if (seed && seed.text) {
-      seeds.push(makeSeed(seed.text, seed.domain || 'GENERAL', '', 1, 'seasonal'));
+      seeds.push(makeSeed(seed.text, seed.domain || 'GENERAL', seed.nh || '', seed.priority || 1, seed.seedType || 'seasonal'));
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v3.4: MANUAL EXTRA SEEDS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  for (var mi = 0; mi < manualExtraSeeds.length; mi++) {
+    var m = manualExtraSeeds[mi];
+    if (m && m.text) {
+      seeds.push(makeSeed(m.text, m.domain || 'GENERAL', m.nh || '', m.priority || 2, m.seedType || 'manual'));
     }
   }
 
@@ -736,55 +816,200 @@ function applyStorySeeds_(ctx) {
 
 /**
  * ============================================================================
- * STORY SEEDS ENGINE REFERENCE
+ * renderStorySeedsForUI_ v1.0 — HEADLINE + LEDE + ANGLE FORMAT
  * ============================================================================
- * 
+ *
+ * Converts story seeds into newsroom-ready format:
+ * - Headline: Short punchy title
+ * - Lede: Opening sentence/hook
+ * - Angle: Editorial direction hint
+ *
+ * Call AFTER applyStorySeeds_() so ctx.summary.storySeeds is populated.
+ *
+ * Outputs:
+ * - ctx.summary.storySeedsUI (array of formatted objects)
+ * - Returns top N seeds (default 5) in UI format
+ *
+ * ============================================================================
+ */
+function renderStorySeedsForUI_(ctx, maxSeeds) {
+  if (!ctx || !ctx.summary || !ctx.summary.storySeeds) return [];
+
+  var seeds = ctx.summary.storySeeds;
+  var limit = maxSeeds || 5;
+  var output = [];
+
+  for (var i = 0; i < seeds.length && i < limit; i++) {
+    var seed = seeds[i];
+
+    // Generate headline from seed text (first clause or truncated)
+    var headline = generateHeadline_(seed.text, seed.domain);
+
+    // Lede is the full seed text
+    var lede = seed.text;
+
+    // Angle based on seedType and priority
+    var angle = generateAngle_(seed);
+
+    output.push({
+      seedId: seed.seedId,
+      headline: headline,
+      lede: lede,
+      angle: angle,
+      domain: seed.domain,
+      neighborhood: seed.neighborhood,
+      priority: seed.priority,
+      seedType: seed.seedType
+    });
+  }
+
+  ctx.summary.storySeedsUI = output;
+  return output;
+}
+
+/**
+ * Generate a punchy headline from seed text
+ */
+function generateHeadline_(text, domain) {
+  if (!text) return 'Story Developing';
+
+  // If text has a period, take first sentence
+  var firstSentence = text.split('.')[0];
+
+  // Truncate if too long (max 60 chars for headline)
+  if (firstSentence.length > 60) {
+    // Find a natural break point
+    var truncated = firstSentence.substring(0, 57);
+    var lastSpace = truncated.lastIndexOf(' ');
+    if (lastSpace > 40) {
+      return truncated.substring(0, lastSpace) + '...';
+    }
+    return truncated + '...';
+  }
+
+  return firstSentence;
+}
+
+/**
+ * Generate editorial angle hint based on seed metadata
+ */
+function generateAngle_(seed) {
+  var type = seed.seedType || 'signal';
+  var priority = seed.priority || 1;
+  var domain = seed.domain || 'GENERAL';
+  var nh = seed.neighborhood || '';
+
+  var angles = [];
+
+  // Priority-based angles
+  if (priority >= 3) {
+    angles.push('LEAD STORY');
+  } else if (priority === 2) {
+    angles.push('FEATURE');
+  } else {
+    angles.push('BRIEF');
+  }
+
+  // Type-based angles
+  if (type === 'shock') {
+    angles.push('BREAKING');
+  } else if (type === 'pattern') {
+    angles.push('TREND PIECE');
+  } else if (type === 'arc') {
+    angles.push('ONGOING');
+  } else if (type === 'spotlight') {
+    angles.push('PROFILE');
+  } else if (type === 'holiday' || type === 'firstfriday' || type === 'creationday') {
+    angles.push('CALENDAR');
+  } else if (type === 'sports') {
+    angles.push('SPORTS DESK');
+  } else if (type === 'health') {
+    angles.push('HEALTH BEAT');
+  }
+
+  // Domain desk assignment
+  if (domain === 'CIVIC' || domain === 'SAFETY') {
+    angles.push('CITY DESK');
+  } else if (domain === 'BUSINESS') {
+    angles.push('BUSINESS DESK');
+  } else if (domain === 'CULTURE' || domain === 'COMMUNITY') {
+    angles.push('LIFESTYLE');
+  } else if (domain === 'SPORTS') {
+    angles.push('SPORTS DESK');
+  }
+
+  // Neighborhood localization
+  if (nh) {
+    angles.push(nh.toUpperCase() + ' FOCUS');
+  }
+
+  return angles.join(' | ');
+}
+
+
+/**
+ * ============================================================================
+ * STORY SEEDS ENGINE REFERENCE v3.5
+ * ============================================================================
+ *
+ * v3.5 CHANGES:
+ * - Added renderStorySeedsForUI_() for headline/lede/angle format
+ * - Output feeds mediaRoomBriefingGenerator or Press_Drafts
+ *
+ * v3.4 CHANGES:
+ * - Sports generalization: No hardcoded team references
+ * - Generic phases: finals, postseason, late-season, in-season, preseason, off-season
+ * - Manual input: ctx.config.manualStoryInputs
+ * - Extra seeds: manual.extraSeeds[] injection
+ *
+ * RENDER FORMAT (v3.5):
+ * renderStorySeedsForUI_(ctx, 5) returns:
+ * [
+ *   {
+ *     seedId: "abc12345",
+ *     headline: "Championship fever grips the city",
+ *     lede: "Championship fever grips the city near Jack London. Championship on the line. Community united behind the team.",
+ *     angle: "LEAD STORY | SPORTS DESK | JACK LONDON FOCUS",
+ *     domain: "SPORTS",
+ *     neighborhood: "Jack London",
+ *     priority: 3,
+ *     seedType: "sports"
+ *   },
+ *   ...
+ * ]
+ *
+ * MANUAL INPUT FORMAT:
+ * ctx.config.manualStoryInputs = {
+ *   sportLabel: "NBA playoffs",        // optional
+ *   sportVenue: "Downtown",            // optional
+ *   sportStakes: "Championship",       // optional
+ *   extraSeeds: [                      // optional
+ *     { text: "...", domain: "...", nh: "...", priority: 2, seedType: "manual" }
+ *   ]
+ * }
+ *
  * SEED TYPES:
  * - pattern, shock, weight, civic, demographic
  * - event, cluster, weather, sentiment, economy
  * - nightlife, traffic, publicspace, retail
  * - health, domain, arc, spotlight, seasonal
- * - holiday, firstfriday, creationday, sports (v3.2)
- * - cultural, engagement (v3.2)
- * 
- * HOLIDAY SEEDS (v3.2):
- * - 17 holidays with specific seed pools
- * - Major: Thanksgiving, Holiday, NewYear, NewYearsEve, Independence
- * - Cultural: MLKDay, Juneteenth, CincoDeMayo, DiaDeMuertos, LunarNewYear
- * - Oakland: OpeningDay, OaklandPride, ArtSoulFestival
- * - Minor: Valentine, Halloween, Easter, MemorialDay, LaborDay, VeteransDay
- * 
- * FIRST FRIDAY SEEDS:
- * - Arts district transformation
- * - Art walk crowds
- * - Artist spotlights
- * - Cultural surge (if high cultural activity)
- * 
- * CREATION DAY SEEDS:
- * - Oakland founding honor
- * - Community reflection
- * - Long-time resident stories
- * 
- * SPORTS SEASON SEEDS:
- * - Championship: fever, economic boost, fan stories
- * - Playoffs: tension, watch parties
- * - Late-season: pennant race
- * 
- * CULTURAL ACTIVITY SEEDS:
- * - High (≥1.5): Peak cultural vibrancy
- * - Medium (≥1.3): Strong cultural energy
- * - Low (≤0.7): Cultural subdued
- * 
- * COMMUNITY ENGAGEMENT SEEDS:
- * - High (≥1.5): Engagement surging
- * - Medium (≥1.3): Strong community bonds
- * - Low (≤0.6): Community withdrawal
- * 
+ * - holiday, firstfriday, creationday, sports
+ * - cultural, engagement
+ * - manual (v3.4)
+ *
+ * SPORTS PHASES (v3.4):
+ * - finals/championship -> priority 3
+ * - postseason/playoffs -> priority 2
+ * - late-season -> priority 2
+ * - in-season -> priority 1
+ * - preseason -> priority 1
+ * - off-season -> no automatic seed
+ *
  * NEIGHBORHOODS (12):
  * - Temescal, Downtown, Fruitvale, Lake Merritt
  * - West Oakland, Laurel, Rockridge, Jack London
  * - Uptown, KONO, Chinatown, Piedmont Ave
- * 
+ *
  * SEED STRUCTURE:
  * {
  *   seedId: string (8 char UUID),
@@ -798,6 +1023,6 @@ function applyStorySeeds_(ctx) {
  *     holiday, isFirstFriday, isCreationDay, sportsSeason
  *   }
  * }
- * 
+ *
  * ============================================================================
  */

@@ -384,3 +384,136 @@ Using Claude Haiku for drafts, Sonnet for final: ~$0.30-0.50/cycle.
 - How many agent rounds before editor finalizes? (4-6 seems right)
 - Human-in-loop review? (Discord approval before save?)
 - Combine with OpenClaw? (Memory + triggers from OpenClaw, generation from AutoGen)
+
+---
+
+## Full Starter Script
+
+### Prerequisites
+
+1. **Python 3.8+** required
+2. Create virtual environment (optional but recommended):
+   ```bash
+   python -m venv autogen_env
+   source autogen_env/bin/activate  # Windows: autogen_env\Scripts\activate
+   ```
+3. Install packages:
+   ```bash
+   pip install pyautogen anthropic
+   ```
+4. Get Anthropic API key from anthropic.com/api
+5. Set environment variable:
+   ```bash
+   export ANTHROPIC_API_KEY="sk-ant-..."
+   ```
+
+### The Script (godworld_autogen_starter.py)
+
+```python
+import os
+from autogen import AssistantAgent, UserProxyAgent, GroupChat, GroupChatManager
+
+# Load Anthropic API key from environment variable
+api_key = os.getenv("ANTHROPIC_API_KEY")
+if not api_key:
+    raise ValueError("ANTHROPIC_API_KEY environment variable not set.")
+
+# Claude LLM config (using Claude 3.5 Sonnet)
+llm_config = {
+    "config_list": [
+        {
+            "model": "claude-3-5-sonnet-20240620",
+            "api_key": api_key,
+            "api_type": "anthropic",
+        }
+    ],
+    "temperature": 0.7,
+    "max_tokens": 1500,
+}
+
+# Agent 1: Civic Reporter (Carmen Delaine style)
+civic_reporter = AssistantAgent(
+    name="Carmen_Delaine",
+    system_message="""You are Carmen Delaine, Civic Ledger reporter for Cycle Pulse.
+    Generate balanced, factual civic reports from GodWorld data.
+    Use a warm, approachable tone.
+    Structure as headlines and paragraphs.""",
+    llm_config=llm_config,
+)
+
+# Agent 2: Data Analyst (summarizes raw data)
+data_analyst = AssistantAgent(
+    name="Data_Analyst",
+    system_message="""You are a data analyst for Cycle Pulse.
+    Summarize GodWorld raw data (sentiment, migration, neighborhood stats) into
+    concise bullet points or tables. Highlight trends and implications.""",
+    llm_config=llm_config,
+)
+
+# User Proxy (human-in-the-loop for oversight)
+user_proxy = UserProxyAgent(
+    name="User",
+    human_input_mode="ALWAYS",  # Change to "NEVER" for full autonomy
+    code_execution_config=False,
+)
+
+# Group Chat: The "newsroom"
+group_chat = GroupChat(
+    agents=[civic_reporter, data_analyst, user_proxy],
+    messages=[],
+    max_round=6,
+)
+
+# Group Chat Manager (orchestrates using Claude)
+group_chat_manager = GroupChatManager(
+    groupchat=group_chat,
+    llm_config=llm_config,
+)
+
+# Sample GodWorld data (replace with actual Sheets/JSON export)
+sample_data = """
+Cycle: 77
+Sentiment: 0.98
+Migration: +265
+Pattern: Steady
+Neighborhood Stats: West Oakland - Nightlife 2.52, Sentiment 1.05
+Arc Seeds: Instability early phase in Uptown/Laurel
+Shock-flag: 15
+Domains active: 9
+Stabilization Fund: Committee 5-4, floor vote Cycle 78, needs 6, Vega yes, Tran undecided
+"""
+
+# Kick off the chat
+user_proxy.initiate_chat(
+    group_chat_manager,
+    message=f"""Generate today's Cycle Pulse edition using this GodWorld data:
+
+{sample_data}
+
+Data Analyst: Summarize trends first.
+Carmen: Write the civic report using your voice.
+Collaborate to produce a final formatted edition.""",
+)
+
+print("\n--- Cycle Pulse Generation Complete ---")
+```
+
+### How It Works
+
+1. **Agents Collaborate:** Data Analyst summarizes trends → Civic Reporter builds narrative → Manager coordinates
+2. **Output:** Formatted Cycle Pulse in terminal (add file save with `with open('pulse.txt', 'w') as f:`)
+3. **Autonomy:** Change `human_input_mode="NEVER"` for auto-run, add cron for scheduling
+
+### What AutoGen Does Well for GodWorld
+
+- **Multi-Agent Collaboration** — agents bounce ideas, build on each other (newsroom simulation)
+- **LLM Flexibility** — Claude, Grok, local models — easy to switch
+- **Workflow Automation** — chains tasks (data pull → analysis → generation)
+- **Open-Source** — free, customizable, integrates with Sheets/scripts
+
+### Future Enhancements
+
+- Add more agents (Luis Navarro investigations, Dr. Mezran health, Mags editor)
+- Integrate Sheets API for live data pull
+- Add file output to media/ folder
+- Schedule with cron for autonomous cycles

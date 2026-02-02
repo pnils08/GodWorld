@@ -325,7 +325,8 @@ function getCouncilState_(ctx) {
     factions: {
       'OPP': { count: 0, available: 0, members: [] },
       'CRC': { count: 0, available: 0, members: [] },
-      'IND': { count: 0, available: 0, members: [] }
+      'IND': { count: 0, available: 0, members: [] },
+      'PROG': { count: 0, available: 0, members: [] }  // v1.5 FIX: Add PROG faction
     },
     indMembers: [],        // v1.1: Track IND members individually
     unavailable: [],
@@ -654,12 +655,37 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   if (councilState.factions[leadFaction]) {
     yesVotes += councilState.factions[leadFaction].available;
   }
-  
+
   // Opposition faction votes no
   if (councilState.factions[opposition]) {
     noVotes += councilState.factions[opposition].available;
   }
-  
+
+  // v1.5 FIX: Handle other factions (PROG, etc.) that aren't lead/opposition/IND
+  // These factions vote based on sentiment (positive sentiment = yes, negative = no)
+  var otherFactionVotes = [];
+  for (var factionName in councilState.factions) {
+    if (!councilState.factions.hasOwnProperty(factionName)) continue;
+    if (factionName === leadFaction || factionName === opposition || factionName === 'IND') continue;
+
+    var factionData = councilState.factions[factionName];
+    if (factionData.available > 0) {
+      // Other factions vote based on sentiment: positive sentiment favors yes
+      var otherFactionVotesYes = sentiment >= 0;
+      if (otherFactionVotesYes) {
+        yesVotes += factionData.available;
+      } else {
+        noVotes += factionData.available;
+      }
+      otherFactionVotes.push({
+        faction: factionName,
+        count: factionData.available,
+        vote: otherFactionVotesYes ? 'yes' : 'no',
+        reason: 'sentiment-based'
+      });
+    }
+  }
+
   // v1.1: Track which IND members have been processed
   var processedIndMembers = {};
   var swingVoterResults = [];

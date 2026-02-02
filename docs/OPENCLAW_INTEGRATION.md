@@ -623,3 +623,216 @@ app.listen(8080);
 Then configure Claude Code with MCP server integration pointing to `localhost:8080`.
 
 This adds complexity — start with OpenClaw driving the workflow first.
+
+---
+
+## Persistence Examples (Memory Across Sessions)
+
+OpenClaw uses a lightweight, local-first approach to memory (no cloud database required). Persistence is built around files, key-value stores, or simple JSON/SQLite. These patterns work well for GodWorld (persistent citizens, cycle state, memory of past Pulse editions).
+
+### Option 1: File-Based Persistence (Simplest)
+
+OpenClaw can read/write files in a dedicated folder. Zero-config and survives restarts.
+
+**Example: Persistent Citizen Memory**
+
+Create `godworld/memory/` folder for citizen state:
+
+```javascript
+// skills/citizen-memory.js
+module.exports = {
+  name: 'citizenMemory',
+  description: 'Remember or recall citizen details across sessions',
+
+  execute: async (context) => {
+    const { message, config } = context;
+    const fs = require('fs').promises;
+    const path = require('path');
+    const memoryDir = path.join(__dirname, '../godworld/memory');
+
+    // Ensure directory exists
+    await fs.mkdir(memoryDir, { recursive: true });
+
+    if (message.includes('remember citizen')) {
+      // Parse: "remember citizen Javier Harris age 57 occupation electrician neighborhood West Oakland"
+      const parts = message.split(' ');
+      const name = parts.slice(2, 4).join(' ');
+      const data = {
+        name,
+        age: parts[5],
+        occupation: parts[7],
+        neighborhood: parts[9],
+        timestamp: new Date().toISOString(),
+      };
+
+      const filePath = path.join(memoryDir, `${name.replace(/ /g, '_')}.json`);
+      await fs.writeFile(filePath, JSON.stringify(data, null, 2));
+
+      return `Remembered ${name}: ${JSON.stringify(data, null, 2)}`;
+    }
+
+    if (message.includes('recall citizen')) {
+      const name = message.split('recall citizen ')[1].trim();
+      const filePath = path.join(memoryDir, `${name.replace(/ /g, '_')}.json`);
+
+      try {
+        const content = await fs.readFile(filePath, 'utf8');
+        return `Recall for ${name}:\n${content}`;
+      } catch (err) {
+        return `No memory found for ${name}`;
+      }
+    }
+
+    return 'Use "remember citizen ..." or "recall citizen ..."';
+  }
+};
+```
+
+**Usage:**
+- `"remember citizen Javier Harris age 57 occupation electrician neighborhood West Oakland"`
+- Later: `"recall citizen Javier Harris"` → gets full JSON back, even after restart
+
+---
+
+### Option 2: Single JSON Key-Value Store (Recommended)
+
+One file for all persistent state (citizens, cycles, last Pulse, shock-flag, etc.):
+
+```javascript
+// skills/godworld-state.js
+const fs = require('fs').promises;
+const path = require('path');
+const stateFile = path.join(__dirname, '../godworld/state.json');
+
+let state = {};
+
+async function loadState() {
+  try {
+    const data = await fs.readFile(stateFile, 'utf8');
+    state = JSON.parse(data);
+  } catch (err) {
+    state = { citizens: {}, cycles: {}, lastPulse: null, shockFlag: 15 };
+    await saveState();
+  }
+}
+
+async function saveState() {
+  await fs.writeFile(stateFile, JSON.stringify(state, null, 2));
+}
+
+module.exports = {
+  name: 'godworldState',
+  description: 'Persistent key-value store for GodWorld sim',
+
+  async execute(context) {
+    await loadState();
+
+    const { message } = context;
+
+    if (message.startsWith('set ')) {
+      const [, key, ...valueParts] = message.split(' ');
+      const value = valueParts.join(' ');
+      state[key] = value;
+      await saveState();
+      return `Set ${key} = ${value}`;
+    }
+
+    if (message.startsWith('get ')) {
+      const key = message.split(' ')[1];
+      return `${key}: ${JSON.stringify(state[key] ?? 'not found')}`;
+    }
+
+    if (message === 'list citizens') {
+      return Object.keys(state.citizens || {}).join('\n');
+    }
+
+    return 'Commands: set <key> <value>, get <key>, list citizens';
+  }
+};
+```
+
+**Usage:**
+- `"set shockFlag 12"`
+- `"set citizen_JavierHarris {age:57, occupation:'electrician', neighborhood:'West Oakland'}"`
+- `"get shockFlag"` → remembers across restarts
+
+---
+
+### Option 3: SQLite for Structured Persistence
+
+For real queries (search citizens by neighborhood, occupation, etc.):
+
+```javascript
+// skills/sqlite-citizens.js
+const sqlite3 = require('sqlite3').verbose();
+const db = new sqlite3.Database('./godworld/citizens.db');
+
+db.serialize(() => {
+  db.run(`CREATE TABLE IF NOT EXISTS citizens (
+    name TEXT PRIMARY KEY,
+    age INTEGER,
+    occupation TEXT,
+    neighborhood TEXT,
+    lastSeen TEXT,
+    notes TEXT
+  )`);
+});
+
+module.exports = {
+  name: 'citizenDb',
+  description: 'Persistent citizen database',
+
+  async execute(context) {
+    const { message } = context;
+
+    if (message.startsWith('add citizen ')) {
+      const parts = message.split(' ');
+      const name = parts[2];
+      const age = parts[4];
+      const occupation = parts[6];
+      const neighborhood = parts[8];
+
+      db.run(
+        `INSERT OR REPLACE INTO citizens (name, age, occupation, neighborhood, lastSeen) VALUES (?, ?, ?, ?, ?)`,
+        [name, age, occupation, neighborhood, new Date().toISOString()],
+        function (err) {
+          if (err) return `Error: ${err.message}`;
+          return `Added/updated ${name}`;
+        }
+      );
+    }
+
+    if (message.startsWith('get citizen ')) {
+      const name = message.split(' ')[2];
+      db.get(`SELECT * FROM citizens WHERE name = ?`, [name], (err, row) => {
+        if (err) return `Error: ${err.message}`;
+        return row ? JSON.stringify(row, null, 2) : 'Not found';
+      });
+    }
+
+    return 'Commands: add citizen <name> age <age> occupation <occ> neighborhood <hood>, get citizen <name>';
+  }
+};
+```
+
+---
+
+### Persistence Comparison
+
+| Method | Complexity | GodWorld Use Case | Restart Survival | Query Power |
+|--------|------------|-------------------|------------------|-------------|
+| Single JSON file | Very low | Quick citizen/cycle state, last Pulse | Yes | Basic |
+| Per-file JSON | Low | One file per citizen or cycle | Yes | None |
+| SQLite | Medium | Full citizen ledger, searchable | Yes | High |
+| Key-value (LevelDB) | Medium | Fast key lookups (shock-flag, sentiment) | Yes | Medium |
+
+### Recommendation for GodWorld
+
+**Start with single JSON file** (`godworld/state.json`) — handles 90% of needs:
+- Cycle number
+- Current sentiment/migration
+- Shock-flag value
+- Last Pulse edition text
+- Small citizen memory cache
+
+**Add SQLite later** if you want to query citizens by neighborhood or occupation.

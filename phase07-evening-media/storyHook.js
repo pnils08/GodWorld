@@ -1,7 +1,14 @@
 /**
  * ============================================================================
- * storyHookEngine_ v3.6 — STORYLINE TRACKER INTEGRATION
+ * storyHookEngine_ v3.7 — INITIATIVE OUTCOME HOOKS
  * ============================================================================
+ *
+ * v3.7 Enhancements:
+ * - Initiative outcome hooks: passed/failed initiatives generate story hooks
+ * - Swing voter drama: close votes with named swing voters get priority hooks
+ * - Ripple effect hooks: new ripples get early observation angles
+ * - Housing/stabilization initiatives get priority 3 hooks
+ * - Vote margin analysis for political drama angles
  *
  * v3.6 Enhancements:
  * - Storyline Tracker integration: reads active/dormant storylines
@@ -641,6 +648,131 @@ function storyHookEngine_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════
+  // INITIATIVE OUTCOME HOOKS (v3.7)
+  // ═══════════════════════════════════════════════════════════
+  var initiativeEvents = S.initiativeEvents || [];
+  var votesThisCycle = S.votesThisCycle || [];
+  var positiveInitiatives = S.positiveInitiatives || [];
+  var failedInitiatives = S.failedInitiatives || [];
+  var initiativeRipples = S.initiativeRipples || [];
+
+  // Generate hooks for passed initiatives
+  for (var pi = 0; pi < positiveInitiatives.length; pi++) {
+    var passedName = positiveInitiatives[pi] || '';
+    var passedLower = passedName.toLowerCase();
+
+    // Determine priority and desk based on initiative type
+    var initPriority = 2;
+    var initDesk = 'CIVIC';
+    var initNh = '';
+
+    // Housing/stabilization initiatives are major civic stories
+    if (passedLower.indexOf('housing') >= 0 || passedLower.indexOf('stabiliz') >= 0 ||
+        passedLower.indexOf('fund') >= 0) {
+      initPriority = 3;
+      initDesk = 'CIVIC';
+      if (passedLower.indexOf('west oakland') >= 0) initNh = 'West Oakland';
+    }
+    // Health initiatives
+    else if (passedLower.indexOf('health') >= 0 || passedLower.indexOf('clinic') >= 0) {
+      initPriority = 2;
+      initDesk = 'HEALTH';
+    }
+    // Transit initiatives
+    else if (passedLower.indexOf('transit') >= 0 || passedLower.indexOf('hub') >= 0) {
+      initPriority = 2;
+      initDesk = 'INFRASTRUCTURE';
+    }
+    // Economic/business
+    else if (passedLower.indexOf('business') >= 0 || passedLower.indexOf('economic') >= 0) {
+      initPriority = 2;
+      initDesk = 'BUSINESS';
+    }
+    // Major developments
+    else if (passedLower.indexOf('baylight') >= 0 || passedLower.indexOf('district') >= 0) {
+      initPriority = 3;
+      initDesk = 'CIVIC';
+    }
+
+    hooks.push(makeHook(
+      initDesk,
+      initNh,
+      initPriority,
+      'INITIATIVE PASSED: "' + passedName + '" approved by council. Community reaction, implementation timeline, impact analysis angles.',
+      null,
+      'initiative-passed'
+    ));
+  }
+
+  // Generate hooks for failed initiatives
+  for (var fi = 0; fi < failedInitiatives.length; fi++) {
+    var failedName = failedInitiatives[fi] || '';
+
+    hooks.push(makeHook(
+      'CIVIC',
+      '',
+      2,
+      'INITIATIVE FAILED: "' + failedName + '" rejected by council. Political fallout, opposition reaction, what\'s next angles.',
+      null,
+      'initiative-failed'
+    ));
+  }
+
+  // Generate hooks for vote details (swing voter drama)
+  for (var vi = 0; vi < votesThisCycle.length; vi++) {
+    var vote = votesThisCycle[vi];
+    var swingVoters = vote.swingVoters || [];
+
+    // If close vote with swing voter drama
+    if (swingVoters.length > 0 && vote.voteCount) {
+      var voteNums = String(vote.voteCount).split('-');
+      var yesVotes = parseInt(voteNums[0]) || 0;
+      var noVotes = parseInt(voteNums[1]) || 0;
+      var margin = Math.abs(yesVotes - noVotes);
+
+      if (margin <= 2) {
+        // Close vote = drama
+        var swingNames = [];
+        for (var si = 0; si < swingVoters.length; si++) {
+          if (swingVoters[si].source === 'projection' || swingVoters[si].source === 'lean') {
+            swingNames.push(swingVoters[si].name + ' (' + swingVoters[si].vote + ')');
+          }
+        }
+        if (swingNames.length > 0) {
+          hooks.push(makeHook(
+            'CIVIC',
+            '',
+            3,
+            'CLOSE VOTE: "' + vote.name + '" decided ' + vote.voteCount + '. Swing voters: ' + swingNames.join(', ') + '. Political drama profile opportunity.',
+            null,
+            'initiative-swing'
+          ));
+        }
+      }
+    }
+  }
+
+  // Initiative ripple effects starting
+  if (initiativeRipples.length > 0) {
+    var newRipples = initiativeRipples.filter(function(r) {
+      return r.startCycle === cycle && r.direction === 'positive';
+    });
+
+    if (newRipples.length > 0) {
+      var ripple = newRipples[0];
+      var affectedHoods = (ripple.affectedNeighborhoods || []).join(', ');
+      hooks.push(makeHook(
+        'CIVIC',
+        affectedHoods ? affectedHoods.split(',')[0].trim() : '',
+        2,
+        'RIPPLE EFFECT: "' + ripple.initiativeName + '" beginning to affect ' + (affectedHoods || 'the city') + '. Early impact observation angle.',
+        null,
+        'initiative-ripple'
+      ));
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════
   // WORLD EVENT HOOKS (notable individual events)
   // ═══════════════════════════════════════════════════════════
   for (var evi = 0; evi < worldEvents.length; evi++) {
@@ -1271,6 +1403,17 @@ function storyHookEngine_(ctx) {
  * storyline-priority| High/urgent storylines    | 2-3
  * storyline-mystery | Unresolved questions      | 2
  * storyline-density | Multiple active storylines| 2
+ * initiative-passed | Passed initiatives (v3.7) | 2-3
+ * initiative-failed | Failed initiatives (v3.7) | 2
+ * initiative-swing  | Close votes w/ swing drama| 3
+ * initiative-ripple | Ripple effects starting   | 2
+ *
+ * v3.7 INITIATIVE OUTCOMES:
+ * - Passed initiatives generate civic story hooks
+ * - Housing/stabilization initiatives get priority 3
+ * - Close votes (margin ≤2) with named swing voters trigger drama hooks
+ * - Ripple effects generate early observation angles
+ * - Failed initiatives trigger political fallout hooks
  *
  * v3.4 DEMOGRAPHIC SHIFTS (Tier 4):
  * - population_shift: Growth/decline → Community desk

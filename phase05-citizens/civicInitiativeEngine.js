@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * civicInitiativeEngine_ v1.4
+ * civicInitiativeEngine_ v1.5
  * ============================================================================
  *
  * Tracks civic initiatives and resolves votes/outcomes when cycles match.
+ *
+ * v1.5 Changes:
+ * - FIX: Delayed initiatives now retry each cycle instead of getting stuck
+ * - FIX: Replaced Math.random() with ctx.rng for deterministic simulation
+ * - Added rng parameter to resolveCouncilVote_ and resolveExternalDecision_
  *
  * v1.4 Changes:
  * - Added manualRunVote(initiativeId) for on-demand vote execution
@@ -53,8 +58,11 @@
  * Main entry point - process initiatives for current cycle
  */
 function runCivicInitiativeEngine_(ctx) {
-  
+
   var ss = ctx.ss;
+  // v1.5 FIX: Use deterministic RNG from context
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+
   var sheet = ss.getSheetByName('Initiative_Tracker');
   
   if (!sheet) {
@@ -148,7 +156,20 @@ function runCivicInitiativeEngine_(ctx) {
     if (status === 'resolved' || status === 'passed' || status === 'failed' || status === 'inactive') {
       continue;
     }
-    
+
+    // v1.5 FIX: Re-check delayed initiatives each cycle
+    // Delayed initiatives should try again - don't stay stuck forever
+    if (status === 'delayed') {
+      // Update VoteCycle to current cycle to retry
+      row[iVoteCycle] = cycle;
+      voteCycle = cycle;
+      row[iStatus] = 'pending-vote';  // Reset to pending-vote to allow re-attempt
+      status = 'pending-vote';
+      rows[r] = row;
+      updated = true;
+      Logger.log('civicInitiativeEngine: Retrying delayed initiative ' + initId);
+    }
+
     // Check if this cycle triggers a vote or decision
     if (voteCycle === cycle && (status === 'active' || status === 'pending-vote')) {
       
@@ -175,9 +196,9 @@ function runCivicInitiativeEngine_(ctx) {
           initiativeType: type,
           initiativeName: name
         };
-        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext);
+        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng);
       } else if (type === 'grant' || type === 'federal-grant' || type === 'external') {
-        result = resolveExternalDecision_(ctx, row, header, sentiment);
+        result = resolveExternalDecision_(ctx, row, header, sentiment, rng);
       } else if (type === 'visioning' || type === 'input') {
         result = resolveVisioningPhase_(ctx, row, header);
       } else {
@@ -193,7 +214,7 @@ function runCivicInitiativeEngine_(ctx) {
           initiativeType: type,
           initiativeName: name
         };
-        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext);
+        result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng);
       }
       
       // Update row with result
@@ -272,7 +293,7 @@ function runCivicInitiativeEngine_(ctx) {
     demographicsAvailable: Object.keys(neighborhoodDemographics).length > 0
   };
 
-  Logger.log('civicInitiativeEngine v1.4: Processed ' + S.initiativeEvents.length +
+  Logger.log('civicInitiativeEngine v1.5: Processed ' + S.initiativeEvents.length +
              ' initiatives | Votes: ' + S.votesThisCycle.length +
              ' | Grants: ' + S.grantsThisCycle.length +
              ' | Demographics: ' + (Object.keys(neighborhoodDemographics).length > 0 ? 'active' : 'unavailable'));
@@ -579,8 +600,11 @@ function getCouncilStateFromSimLedger_(ctx) {
  * Resolve a council vote
  * v1.1: Now accepts swingInfo object with primary, secondary, and secondaryLean
  * v1.3: Now accepts demoContext with neighborhood demographics for vote influence
+ * v1.5: Now accepts rng function for deterministic simulation
  */
-function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext) {
+function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng) {
+  // v1.5: Use passed rng or fallback
+  rng = rng || Math.random;
 
   // v1.3: Demographics context (optional for backwards compatibility)
   demoContext = demoContext || { demographics: {}, affectedNeighborhoods: [] };
@@ -660,7 +684,7 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
       primaryProb += demographicInfluence;
       if (primaryProb < 0.15) primaryProb = 0.15;
       if (primaryProb > 0.85) primaryProb = 0.85;
-      var primaryVotedYes = Math.random() < primaryProb;
+      var primaryVotedYes = rng() < primaryProb;
       
       if (primaryVotedYes) {
         yesVotes++;
@@ -693,7 +717,7 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
       secondaryProb += demographicInfluence;
       if (secondaryProb < 0.15) secondaryProb = 0.15;
       if (secondaryProb > 0.85) secondaryProb = 0.85;
-      var secondaryVotedYes = Math.random() < secondaryProb;
+      var secondaryVotedYes = rng() < secondaryProb;
       
       if (secondaryVotedYes) {
         yesVotes++;
@@ -730,7 +754,7 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
     // v1.2: Clamp to match named swing voter bounds
     if (unnamedProb < 0.15) unnamedProb = 0.15;
     if (unnamedProb > 0.85) unnamedProb = 0.85;
-    var unnamedVotedYes = Math.random() < unnamedProb;
+    var unnamedVotedYes = rng() < unnamedProb;
     
     if (unnamedVotedYes) {
       yesVotes++;
@@ -1021,8 +1045,10 @@ function calculateDemographicInfluence_(demoContext) {
 
 /**
  * Resolve federal grant or external binary decision
+ * v1.5: Now accepts rng function for deterministic simulation
  */
-function resolveExternalDecision_(ctx, row, header, sentiment) {
+function resolveExternalDecision_(ctx, row, header, sentiment, rng) {
+  rng = rng || Math.random;
   
   var idx = function(n) { return header.indexOf(n); };
   
@@ -1049,7 +1075,7 @@ function resolveExternalDecision_(ctx, row, header, sentiment) {
   if (baseProb < 0.25) baseProb = 0.25;
   if (baseProb > 0.75) baseProb = 0.75;
   
-  var approved = Math.random() < baseProb;
+  var approved = rng() < baseProb;
   
   var result = {
     status: approved ? 'passed' : 'failed',
@@ -1323,6 +1349,156 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
   Logger.log('initiativeRipple: ' + initiativeName + ' → ' + rippleType + ' ripple (' +
              direction + ') affecting ' + (affectedNeighborhoods || []).length +
              ' neighborhoods for ' + rippleDuration + ' cycles');
+}
+
+
+/**
+ * ============================================================================
+ * RIPPLE CONSUMER (v1.5 - Tier 4.4)
+ * ============================================================================
+ *
+ * Processes active initiative ripples each cycle, applying their effects with
+ * decay over time. Call from Phase 02 or 06 to apply ongoing ripple effects.
+ */
+
+/**
+ * v1.5: Apply active initiative ripple effects to city/neighborhood state
+ *
+ * @param {Object} ctx - Engine context
+ */
+function applyActiveInitiativeRipples_(ctx) {
+  var S = ctx.summary || {};
+  var ripples = S.initiativeRipples || [];
+  var cycle = S.absoluteCycle || S.cycleId || 0;
+
+  if (ripples.length === 0) return;
+
+  var activeRipples = [];
+  var expiredCount = 0;
+
+  for (var i = 0; i < ripples.length; i++) {
+    var ripple = ripples[i];
+
+    // Skip already expired/completed ripples
+    if (ripple.status === 'expired' || ripple.status === 'completed') {
+      continue;
+    }
+
+    // Check if ripple has expired this cycle
+    if (cycle >= ripple.endCycle) {
+      ripple.status = 'expired';
+      expiredCount++;
+      Logger.log('initiativeRipple: "' + ripple.initiativeName + '" ripple expired after ' + ripple.duration + ' cycles');
+      continue;
+    }
+
+    // Calculate decay factor (linear decay from 1.0 to 0.2 over duration)
+    var cyclesActive = cycle - ripple.startCycle;
+    var decayFactor = 1.0 - (cyclesActive / ripple.duration) * 0.8;
+    if (decayFactor < 0.2) decayFactor = 0.2;
+
+    // Apply effects to city dynamics
+    var dynamics = S.cityDynamics || {};
+    var effects = ripple.effects || {};
+
+    // Sentiment effects (applied city-wide)
+    if (effects.sentiment_modifier) {
+      var sentimentDelta = effects.sentiment_modifier * decayFactor * 0.1; // Gradual application
+      dynamics.sentiment = (dynamics.sentiment || 0) + sentimentDelta;
+      if (dynamics.sentiment > 1) dynamics.sentiment = 1;
+      if (dynamics.sentiment < -1) dynamics.sentiment = -1;
+    }
+
+    // Community effects
+    if (effects.community_modifier) {
+      dynamics.communityEngagement = (dynamics.communityEngagement || 1) +
+        (effects.community_modifier * decayFactor * 0.1);
+    }
+
+    // Retail/economic effects
+    if (effects.retail_modifier) {
+      dynamics.retailActivity = (dynamics.retailActivity || 1) +
+        (effects.retail_modifier * decayFactor * 0.1);
+    }
+
+    // Nightlife effects
+    if (effects.nightlife_modifier) {
+      dynamics.nightlife = (dynamics.nightlife || 1) +
+        (effects.nightlife_modifier * decayFactor * 0.1);
+    }
+
+    S.cityDynamics = dynamics;
+
+    // Track active ripples for neighborhood-specific effects
+    activeRipples.push({
+      name: ripple.initiativeName,
+      type: ripple.rippleType,
+      neighborhoods: ripple.affectedNeighborhoods || [],
+      effects: effects,
+      decayFactor: decayFactor,
+      cyclesRemaining: ripple.endCycle - cycle
+    });
+
+    // Mark as still active
+    ripple.status = 'active';
+  }
+
+  // Store active ripple summary for other engines
+  S.activeRipples = activeRipples;
+  S.activeRippleCount = activeRipples.length;
+
+  // Update ripples array with status changes
+  S.initiativeRipples = ripples.filter(function(r) {
+    return r.status !== 'expired';
+  });
+
+  if (activeRipples.length > 0 || expiredCount > 0) {
+    Logger.log('applyActiveInitiativeRipples_: ' + activeRipples.length + ' active, ' +
+               expiredCount + ' expired this cycle');
+  }
+}
+
+
+/**
+ * v1.5: Get active ripple effects for a specific neighborhood
+ * Helper function for other engines to query ripple state
+ *
+ * @param {Object} ctx - Engine context
+ * @param {string} neighborhood - Neighborhood name
+ * @return {Object} Combined effects for this neighborhood
+ */
+function getRippleEffectsForNeighborhood_(ctx, neighborhood) {
+  var S = ctx.summary || {};
+  var activeRipples = S.activeRipples || [];
+
+  var combinedEffects = {
+    sentiment: 0,
+    sick: 0,
+    unemployment: 0,
+    retail: 0,
+    traffic: 0,
+    community: 0
+  };
+
+  for (var i = 0; i < activeRipples.length; i++) {
+    var ripple = activeRipples[i];
+    var affectsThisHood = ripple.neighborhoods.length === 0 || // City-wide
+                          ripple.neighborhoods.indexOf(neighborhood) >= 0;
+
+    if (!affectsThisHood) continue;
+
+    var effects = ripple.effects || {};
+    var decay = ripple.decayFactor || 1.0;
+
+    if (effects.sentiment_modifier) combinedEffects.sentiment += effects.sentiment_modifier * decay;
+    if (effects.sick_modifier) combinedEffects.sick += effects.sick_modifier * decay;
+    if (effects.unemployment_modifier) combinedEffects.unemployment += effects.unemployment_modifier * decay;
+    if (effects.retail_modifier) combinedEffects.retail += effects.retail_modifier * decay;
+    if (effects.traffic_modifier) combinedEffects.traffic += effects.traffic_modifier * decay;
+    if (effects.community_modifier) combinedEffects.community += effects.community_modifier * decay;
+  }
+
+  return combinedEffects;
 }
 
 
@@ -1604,16 +1780,19 @@ function manualRunVote(initiativeId) {
     initiativeName: name
   };
 
+  // v1.5: Use Math.random for manual votes (no ctx.rng available outside cycle)
+  var rng = Math.random;
+
   // Resolve the vote based on type
   var result;
   if (type === 'vote' || type === 'council-vote') {
-    result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext);
+    result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng);
   } else if (type === 'grant' || type === 'federal-grant' || type === 'external') {
-    result = resolveExternalDecision_(ctx, row, header, sentiment);
+    result = resolveExternalDecision_(ctx, row, header, sentiment, rng);
   } else if (type === 'visioning' || type === 'input') {
     result = resolveVisioningPhase_(ctx, row, header);
   } else {
-    result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext);
+    result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng);
   }
 
   // Update the row
@@ -1793,7 +1972,7 @@ function getInitiativeSummaryForMedia_(ctx) {
 
 /**
  * ============================================================================
- * REFERENCE v1.4
+ * REFERENCE v1.5
  * ============================================================================
  *
  * MANUAL VOTE EXECUTION (v1.4):

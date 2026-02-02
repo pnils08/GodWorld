@@ -10,12 +10,18 @@
  * - Coming-of-age milestones
  * - Civic participation (age-appropriate)
  *
+ * v1.2 Fixes:
+ * - FIX: No longer creates fake IDs (GEN-N, NAM-N) for citizens without PopID
+ * - FIX: getNamedYouth_ now checks POPID column name variant
+ * - FIX: Skips rows without valid citizen IDs instead of generating fake ones
+ * - FIX: Better name handling (First+Last fallback)
+ *
  * v1.1 Enhancements:
  * - crimeMetrics v1.2 integration: QoL-aware probability modifiers
  * - Low-QoL neighborhoods generate more stress/resilience events
  * - Hotspot awareness for youth safety events
  *
- * @version 1.1
+ * @version 1.2
  * @tier 6.3
  */
 
@@ -23,7 +29,7 @@
 // CONSTANTS
 // ============================================================================
 
-var YOUTH_ENGINE_VERSION = '1.1';
+var YOUTH_ENGINE_VERSION = '1.2';
 
 // Event generation limits
 var YOUTH_EVENT_LIMITS = {
@@ -206,15 +212,27 @@ function getGenericYouth_(ss) {
   var iNeighborhood = idx('Neighborhood');
   var iStatus = idx('Status');
 
+  // v1.2 FIX: Require valid ID column - don't create fake IDs
+  if (iId < 0) {
+    Logger.log('getGenericYouth_: No PopID or ID column found in Generic_Citizens');
+    return [];
+  }
+
   var result = [];
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var age = Number(row[iAge]) || 0;
     var status = String(row[iStatus] || '').toLowerCase();
+    var citizenId = String(row[iId] || '').trim();
+
+    // v1.2 FIX: Skip rows without valid citizen ID - don't create fake IDs
+    if (!citizenId) {
+      continue;
+    }
 
     if (age >= YOUTH_EVENT_LIMITS.MIN_AGE && age <= YOUTH_EVENT_LIMITS.MAX_AGE && status !== 'deceased') {
       result.push({
-        id: String(row[iId] || 'GEN-' + r),
+        id: citizenId,
         name: String(row[iName] || ''),
         age: age,
         neighborhood: String(row[iNeighborhood] || ''),
@@ -244,22 +262,47 @@ function getNamedYouth_(ss) {
 
   var idx = function(name) { return header.indexOf(name); };
 
-  var iId = idx('PopID') !== -1 ? idx('PopID') : idx('ID');
+  var iId = idx('PopID') !== -1 ? idx('PopID') : idx('POPID');
+  if (iId < 0) iId = idx('ID');
   var iName = idx('Name');
+  var iFirst = idx('First');
+  var iLast = idx('Last');
   var iAge = idx('Age');
   var iNeighborhood = idx('Neighborhood');
   var iStatus = idx('Status');
+
+  // v1.2 FIX: Require valid ID column
+  if (iId < 0) {
+    Logger.log('getNamedYouth_: No PopID, POPID, or ID column found in Simulation_Ledger');
+    return [];
+  }
 
   var result = [];
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var age = Number(row[iAge]) || 0;
     var status = String(row[iStatus] || '').toLowerCase();
+    var citizenId = String(row[iId] || '').trim();
+
+    // v1.2 FIX: Skip rows without valid citizen ID
+    if (!citizenId) {
+      continue;
+    }
+
+    // Get name - try Name first, then First+Last
+    var citizenName = '';
+    if (iName >= 0 && row[iName]) {
+      citizenName = String(row[iName]);
+    } else if (iFirst >= 0 || iLast >= 0) {
+      var first = iFirst >= 0 ? String(row[iFirst] || '') : '';
+      var last = iLast >= 0 ? String(row[iLast] || '') : '';
+      citizenName = (first + ' ' + last).trim();
+    }
 
     if (age >= YOUTH_EVENT_LIMITS.MIN_AGE && age <= YOUTH_EVENT_LIMITS.MAX_AGE && status !== 'deceased') {
       result.push({
-        id: String(row[iId] || 'NAM-' + r),
-        name: String(row[iName] || ''),
+        id: citizenId,
+        name: citizenName,
         age: age,
         neighborhood: String(row[iNeighborhood] || ''),
         source: 'named'

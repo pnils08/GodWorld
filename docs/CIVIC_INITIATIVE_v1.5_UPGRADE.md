@@ -193,9 +193,15 @@ if (typeof applyActiveInitiativeRipples_ === 'function') {
 }
 ```
 
-**Files to Change:**
-- `phase05-citizens/civicInitiativeEngine.js` (add functions)
-- `phase01-config/godWorldEngine2.js` (add call in phase runner)
+**STATUS: IMPLEMENTED**
+- Added `applyActiveInitiativeRipples_(ctx)` to civicInitiativeEngine.js v1.5
+- Added `getRippleEffectsForNeighborhood_(ctx, neighborhood)` helper
+- Ripples decay linearly from 1.0 to 0.2 over their duration
+- Expired ripples are filtered out automatically
+- Active ripple summary stored in `ctx.summary.activeRipples`
+
+**Files Changed:**
+- `phase05-citizens/civicInitiativeEngine.js` (functions added)
 
 **Testing:**
 - Pass an initiative with AffectedNeighborhoods set

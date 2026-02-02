@@ -1,9 +1,13 @@
 /**
  * ============================================================================
- * civicInitiativeEngine_ v1.5
+ * civicInitiativeEngine_ v1.6
  * ============================================================================
  *
  * Tracks civic initiatives and resolves votes/outcomes when cycles match.
+ *
+ * v1.6 Changes:
+ * - FIX: VoteRequirement date parsing (Google Sheets auto-formats "6-3" as June 3rd)
+ * - FIX: Faction whitespace trim to prevent lookup failures
  *
  * v1.5 Changes:
  * - FIX: Delayed initiatives now retry each cycle instead of getting stuck
@@ -293,7 +297,7 @@ function runCivicInitiativeEngine_(ctx) {
     demographicsAvailable: Object.keys(neighborhoodDemographics).length > 0
   };
 
-  Logger.log('civicInitiativeEngine v1.5: Processed ' + S.initiativeEvents.length +
+  Logger.log('civicInitiativeEngine v1.6: Processed ' + S.initiativeEvents.length +
              ' initiatives | Votes: ' + S.votesThisCycle.length +
              ' | Grants: ' + S.grantsThisCycle.length +
              ' | Demographics: ' + (Object.keys(neighborhoodDemographics).length > 0 ? 'active' : 'unavailable'));
@@ -368,7 +372,7 @@ function getCouncilState_(ctx) {
     var holder = (row[iHolder] || '').toString();
     var popId = (row[iPopId] || '').toString();
     var status = (row[iStatus] || 'active').toString().toLowerCase();
-    var faction = (row[iFaction] || '').toString().toUpperCase();
+    var faction = (row[iFaction] || '').toString().trim().toUpperCase();
     var votingPower = iVotingPower >= 0 ? (row[iVotingPower] || 'no').toString().toLowerCase() : 'no';
     
     // Only process council and mayor positions
@@ -612,7 +616,13 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   var idx = function(n) { return header.indexOf(n); };
   
   var name = row[idx('Name')] || 'Unknown Initiative';
-  var voteReq = (row[idx('VoteRequirement')] || '5-4').toString();
+
+  // v1.6 FIX: Handle Google Sheets date formatting (e.g., "6-3" stored as June 3rd)
+  var voteReqRaw = row[idx('VoteRequirement')] || '5-4';
+  if (voteReqRaw instanceof Date) {
+    voteReqRaw = (voteReqRaw.getMonth() + 1) + '-' + voteReqRaw.getDate();
+  }
+  var voteReq = voteReqRaw.toString();
   var projection = (row[idx('Projection')] || '').toString().toLowerCase();
   var leadFaction = row[idx('LeadFaction')] || 'OPP';
   var opposition = row[idx('OppositionFaction')] || 'CRC';

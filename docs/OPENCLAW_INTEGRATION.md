@@ -1127,3 +1127,152 @@ SELECT neighborhood, COUNT(*) as count FROM citizens GROUP BY neighborhood ORDER
 | **No Cloud DB** | Fully local, private |
 | **Scalable** | Add tables for arcs, neighborhoods, domain stats later |
 | **Source of Truth** | Sheets remains master, SQLite is fast local cache |
+
+---
+
+## Ollama: Local LLM Option (Zero API Cost)
+
+**What is Ollama?** A tool for running open-source LLMs (Llama 3, Mistral, etc.) locally on your machine. No API fees, no cloud dependency.
+
+### Why Consider Ollama for GodWorld?
+
+| Use Case | Claude API | Ollama (Local) |
+|----------|------------|----------------|
+| High-quality Tribune articles | Best choice | Acceptable |
+| Bulk citizen chatter / filler text | Expensive | Free |
+| Testing/iteration | Adds up fast | Unlimited |
+| Offline operation | Not possible | Works |
+| Privacy | Data sent to cloud | Fully local |
+
+### Installation
+
+```bash
+# macOS
+brew install ollama
+
+# Linux
+curl -fsSL https://ollama.com/install.sh | sh
+
+# Start the service
+ollama serve
+
+# Pull a model (Llama 3 8B is a good balance)
+ollama pull llama3:8b
+```
+
+### Hardware Requirements
+
+| Model | RAM Needed | Quality |
+|-------|------------|---------|
+| llama3:8b | 8GB+ | Good for drafts |
+| llama3:70b | 48GB+ | Near-Claude quality |
+| mistral:7b | 8GB+ | Fast, decent |
+| mixtral:8x7b | 32GB+ | Better reasoning |
+
+### OpenClaw + Ollama Integration
+
+Swap Claude API for Ollama in your skills:
+
+```javascript
+// skills/media-generator-ollama.js
+const fetch = require('node-fetch');
+
+async function generateWithOllama(prompt) {
+  const response = await fetch('http://localhost:11434/api/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: 'llama3:8b',
+      prompt: prompt,
+      stream: false,
+    }),
+  });
+
+  const data = await response.json();
+  return data.response;
+}
+
+module.exports = {
+  name: 'mediaGeneratorOllama',
+  description: 'Generate media content using local Ollama model',
+
+  execute: async (context) => {
+    const { summary, citizens } = context;
+
+    const prompt = `Generate Bay Tribune Pulse for Cycle ${summary.cycleId}.
+Sentiment: ${summary.sentiment}, Migration: ${summary.migration}.
+Key citizens: ${citizens.map(c => c.name).join(', ')}.
+Write balanced, professional news coverage.`;
+
+    const content = await generateWithOllama(prompt);
+    return content;
+  }
+};
+```
+
+### Hybrid Approach (Recommended)
+
+Use both for cost optimization:
+
+```javascript
+// config.js
+module.exports = {
+  llm: {
+    // Use Ollama for drafts and bulk work
+    draft: {
+      type: 'ollama',
+      model: 'llama3:8b',
+      endpoint: 'http://localhost:11434',
+    },
+    // Use Claude for final, high-quality output
+    final: {
+      type: 'claude',
+      model: 'claude-3-5-sonnet-20240620',
+      apiKey: process.env.ANTHROPIC_API_KEY,
+    },
+  },
+};
+```
+
+Workflow:
+```
+Cycle Export
+    ↓
+OpenClaw: Parse data
+    ↓
+Ollama: Generate draft Pulse (free)
+    ↓
+Human review: "This draft is good, polish it"
+    ↓
+Claude: Polish final version (paid, but only 1 call)
+    ↓
+Save to media/
+```
+
+### Ollama vs Claude Comparison
+
+| Factor | Claude API | Ollama |
+|--------|------------|--------|
+| **Cost** | ~$0.003-0.015 per 1K tokens | Free |
+| **Quality** | Excellent | Good (varies by model) |
+| **Speed** | Fast (cloud) | Depends on hardware |
+| **Setup** | Just API key | Install + download models |
+| **Offline** | No | Yes |
+| **Best for** | Final output, complex reasoning | Drafts, bulk generation, testing |
+
+### When to Use What
+
+| Task | Recommendation |
+|------|----------------|
+| Tribune Pulse (public) | Claude (quality matters) |
+| Echo Op-Ed drafts | Ollama → Claude polish |
+| Citizen background chatter | Ollama (bulk, low stakes) |
+| Testing prompt iterations | Ollama (unlimited) |
+| Continuity checking | Either |
+| Arc summaries | Claude (needs reasoning) |
+
+### Bottom Line
+
+- **Start with Claude API** for quality baseline
+- **Add Ollama later** when you want to reduce costs or go offline
+- **Hybrid approach** gives best of both: free iteration + quality output

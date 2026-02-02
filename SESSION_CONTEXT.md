@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-02 | Engine: v3.1 | Cycle: 75
+Last Updated: 2026-02-02 | Engine: v3.1 | Cycle: 78
 
 ---
 
@@ -72,7 +72,7 @@ GodWorld/
 | Main Orchestrator | godWorldEngine2.js | - | Runs all phases |
 | Career Engine | runCareerEngine.js | v2.3.1 | 4 industries, 3 employer types |
 | Economic Ripple | economicRippleEngine.js | v2.3 | Reads careerSignals |
-| Civic Initiative | civicInitiativeEngine.js | v1.3 | Demographic voting influence |
+| Civic Initiative | civicInitiativeEngine.js | v1.6 | Date parsing fix, faction trim, ripple consumer |
 | Story Hook | storyHook.js | v3.4 | Demographic story angles |
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
 
@@ -94,6 +94,10 @@ GodWorld/
 | Doc | Purpose |
 |-----|---------|
 | docs/ENGINE_ROADMAP.md | Implementation status (Tiers 1-6 complete) |
+| docs/TIER_7_ROADMAP.md | Tier 7 planning (ripples, micro-economies, life paths) |
+| docs/CIVIC_INITIATIVE_v1.5_UPGRADE.md | Bug fixes and upgrades tracking |
+| docs/OPENCLAW_INTEGRATION.md | OpenClaw setup for citizen memory + automation |
+| docs/AUTOGEN_INTEGRATION.md | AutoGen multi-agent newsroom (future project) |
 | docs/GODWORLD_REFERENCE.md | Full system reference |
 | docs/V3_ARCHITECTURE.md | Technical contract, ctx shape |
 | schemas/SCHEMA_HEADERS.md | All ledger schemas |
@@ -115,7 +119,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Session History
 
-### 2026-02-02
+### 2026-02-02 (Session 2)
+- **civicInitiativeEngine v1.6**: Fixed VoteRequirement date parsing bug (Google Sheets auto-formats "6-3" as June 3rd), faction whitespace trim
+- **CIVIC_INITIATIVE_v1.5_UPGRADE.md**: Updated - Bug #7 fixed (function naming collision), ripple consumer implemented
+- **OPENCLAW_INTEGRATION.md**: Created - Full setup guide, custom skills, citizen memory layer, SQLite integration
+- **AUTOGEN_INTEGRATION.md**: Created - Multi-agent newsroom planning, full starter script, cost analysis
+- **utilities/ensureNeighborhoodDemographics.js**: Renamed `updateNeighborhoodDemographics_` to `updateSingleNeighborhoodDemographics_`
+
+### 2026-02-02 (Session 1)
 - Created SESSION_CONTEXT.md
 - Previous session: Career Engine v2.3.1, Economic Ripple v2.3, compressLifeHistory v1.2
 
@@ -141,5 +152,10 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 (Update this section each session)
 
-- No pending tasks from previous session
-- User decides what to work on next
+**Priority Task List:** See `docs/PRIORITY_TASKS.md` for ordered task list
+
+**Summary:**
+1. v1.5/v1.6 bug fixes mostly complete
+2. Tier 7.1 (Ripple System) ready to start - wire ripple consumer into engine
+3. OpenClaw integration ready for setup when desired
+4. AutoGen deferred to future project

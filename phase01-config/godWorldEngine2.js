@@ -222,6 +222,11 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase6-Spotlights', function() { applyNamedCitizenSpotlights_(ctx); });
   safePhaseCall_(ctx, 'Phase6-CivicLoad', function() { applyCivicLoadIndicator_(ctx); });
   safePhaseCall_(ctx, 'Phase6-EconomicRipple', function() { runEconomicRippleEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-InitiativeRipple', function() {
+    if (typeof applyActiveInitiativeRipples_ === 'function') {
+      applyActiveInitiativeRipples_(ctx);
+    }
+  });
   safePhaseCall_(ctx, 'Phase6-Migration', function() { applyMigrationDrift_(ctx); });
   safePhaseCall_(ctx, 'Phase6-PatternDetect', function() { applyPatternDetection_(ctx); });
   safePhaseCall_(ctx, 'Phase6-ShockMonitor', function() { applyShockMonitor_(ctx); });
@@ -1329,6 +1334,11 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase6-Spotlights', function() { applyNamedCitizenSpotlights_(ctx); });
   safePhaseCall_(ctx, 'Phase6-CivicLoad', function() { applyCivicLoadIndicator_(ctx); });
   safePhaseCall_(ctx, 'Phase6-EconomicRipple', function() { runEconomicRippleEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-InitiativeRipple', function() {
+    if (typeof applyActiveInitiativeRipples_ === 'function') {
+      applyActiveInitiativeRipples_(ctx);
+    }
+  });
   safePhaseCall_(ctx, 'Phase6-Migration', function() { applyMigrationDrift_(ctx); });
   safePhaseCall_(ctx, 'Phase6-PatternDetect', function() { applyPatternDetection_(ctx); });
   safePhaseCall_(ctx, 'Phase6-ShockMonitor', function() { applyShockMonitor_(ctx); });

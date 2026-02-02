@@ -84,7 +84,7 @@ GodWorld/
 - **ctx.rng** - Deterministic random (never use Math.random())
 - **Write-Intents** - Stage writes in memory, apply in Phase 10
 - **Tiered Citizens** - Tier-1 (protected) → Tier-4 (generic)
-- **Neighborhoods** - 17 Oakland districts with demographics
+- **Neighborhoods** - 17 Oakland districts with demographics (see GODWORLD_REFERENCE.md for list)
 - **Arcs** - Multi-cycle storylines (SEED → ACTIVE → RESOLVED)
 
 ---

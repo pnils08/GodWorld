@@ -2,7 +2,7 @@
 
 A **living city simulation engine** for Oakland, California (with Chicago satellite) that generates emergent narratives about citizens, neighborhoods, politics, economics, weather, sports, and culture.
 
-**Engine Version:** v2.11 | **Architecture:** Google Apps Script + Sheets
+**Engine Version:** v3.1 | **Architecture:** Google Apps Script + Sheets
 
 ## Overview
 
@@ -12,7 +12,7 @@ GodWorld runs an **11-phase cycle engine** that simulates city life and outputs 
 
 - **Citizen Simulation** - Tiered citizen system (Tier-1 protected → Tier-4 generic) with relationships, careers, education, and households
 - **World Events** - 5-20 events per cycle across 8 categories (CIVIC, CRIME, HEALTH, ECONOMIC, CULTURE, SPORTS, CHAOS, CELEBRATION)
-- **12 Oakland Neighborhoods** - Each with mood, local events, and economic indicators
+- **17 Oakland Neighborhoods** - Each with mood, local events, demographics, and economic indicators
 - **Media Integration** - Story hooks, press drafts, and briefing packets for journalists
 - **Video Game Integration** - MLB The Show and NBA 2K athletes tracked as citizens
 - **Chicago Satellite** - Parallel simulation focused on Bulls basketball

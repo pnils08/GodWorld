@@ -187,7 +187,7 @@ Processes feedback from Media Room.
 
 ---
 
-## Oakland Neighborhoods (12 Districts)
+## Oakland Neighborhoods (17 Districts)
 
 1. **Temescal** - Arts, dining, boutiques
 2. **Downtown** - Business, civic center
@@ -201,6 +201,11 @@ Processes feedback from Media Room.
 10. **KONO** - Koreatown-Northgate, emerging
 11. **Chinatown** - Asian culture, markets
 12. **Piedmont Ave** - Boutiques, restaurants
+13. **Eastlake** - Diverse, residential
+14. **Grand Lake** - Theater district, mixed-use
+15. **Dimond** - Family-oriented, local shops
+16. **Glenview** - Quiet residential
+17. **Montclair** - Hillside, village center
 
 Each neighborhood has:
 - Mood/sentiment that shifts
@@ -353,4 +358,4 @@ GodWorld operates through three coordinated spaces:
 
 ---
 
-*This document is for Mara and other GodWorld assistants to understand the simulation architecture. Last updated after engine v2.7 analysis.*
+*This document is for Mara and other GodWorld assistants to understand the simulation architecture. Last updated: 2026-02-02 | Engine v3.1*

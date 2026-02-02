@@ -836,3 +836,294 @@ module.exports = {
 - Small citizen memory cache
 
 **Add SQLite later** if you want to query citizens by neighborhood or occupation.
+
+---
+
+## SQLite + Google Sheets Integration (Layer Expansion)
+
+SQLite + Google Sheets is a perfect lightweight combo:
+- **Sheets** = source of truth for cycle data exports
+- **SQLite** = fast local queries and persistence across runs
+
+This lets you:
+- Pull raw data from Sheets (citizens, arcs, neighborhood stats)
+- Store in SQLite for fast local queries
+- Use for autonomous media generation ("recall all West Oakland citizens with Sentiment >1.0")
+
+### Prerequisites
+
+```bash
+npm install googleapis sqlite3
+```
+
+Plus:
+1. Google Cloud Console → Create Project → Enable "Google Sheets API"
+2. Create Service Account → Download JSON key (save as `credentials.json`)
+3. Share your GodWorld Sheets with the service account email
+
+### Full Integration Script (sheets-to-sqlite.js)
+
+```javascript
+const { google } = require('googleapis');
+const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs').promises;
+const path = require('path');
+
+// === CONFIG ===
+const SPREADSHEET_ID = 'your-godworld-sheets-id-here';
+const SHEET_NAME = 'Cycle_76';
+const DB_PATH = path.join(__dirname, 'godworld.db');
+
+async function main() {
+  // Load credentials
+  const credentials = JSON.parse(await fs.readFile('./credentials.json'));
+
+  // === AUTHENTICATE ===
+  const auth = new google.auth.GoogleAuth({
+    credentials: credentials,
+    scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+  });
+
+  const sheets = google.sheets({ version: 'v4', auth });
+
+  // === SQLITE SETUP ===
+  const db = new sqlite3.Database(DB_PATH);
+
+  db.serialize(() => {
+    db.run(`
+      CREATE TABLE IF NOT EXISTS citizens (
+        name TEXT PRIMARY KEY,
+        age INTEGER,
+        occupation TEXT,
+        neighborhood TEXT,
+        faction TEXT,
+        tier INTEGER,
+        lastSeen TEXT,
+        notes TEXT
+      )
+    `);
+
+    db.run(`
+      CREATE TABLE IF NOT EXISTS cycles (
+        cycle INTEGER PRIMARY KEY,
+        sentiment REAL,
+        migration INTEGER,
+        pattern TEXT,
+        shockFlag INTEGER,
+        domainsActive INTEGER,
+        timestamp TEXT
+      )
+    `);
+
+    db.run(`
+      CREATE TABLE IF NOT EXISTS initiatives (
+        initiativeId TEXT PRIMARY KEY,
+        name TEXT,
+        status TEXT,
+        outcome TEXT,
+        voteCount TEXT,
+        cycle INTEGER,
+        lastUpdated TEXT
+      )
+    `);
+  });
+
+  // === PULL FROM SHEETS ===
+  try {
+    const res = await sheets.spreadsheets.values.get({
+      spreadsheetId: SPREADSHEET_ID,
+      range: `${SHEET_NAME}!A:Z`,
+    });
+
+    const rows = res.data.values;
+    if (!rows || rows.length === 0) {
+      console.log('No data found in Sheets.');
+      return;
+    }
+
+    console.log(`Pulled ${rows.length} rows from Sheets.`);
+
+    // Parse and insert citizens
+    const headers = rows[0];
+    const citizenRows = rows.slice(1);
+
+    db.serialize(() => {
+      const stmt = db.prepare(`
+        INSERT OR REPLACE INTO citizens (name, age, occupation, neighborhood, faction, tier, lastSeen, notes)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+      `);
+
+      for (const row of citizenRows) {
+        const name = row[0] || 'Unknown';
+        const age = parseInt(row[1]) || null;
+        const occupation = row[2] || '';
+        const neighborhood = row[3] || '';
+        const faction = row[4] || '';
+        const tier = parseInt(row[5]) || 4;
+        const lastSeen = new Date().toISOString();
+        const notes = row.slice(6).join(' | ') || '';
+
+        stmt.run(name, age, occupation, neighborhood, faction, tier, lastSeen, notes);
+      }
+
+      stmt.finalize();
+      console.log('Citizens saved to SQLite.');
+    });
+
+  } catch (err) {
+    console.error('Error pulling from Sheets:', err);
+  }
+
+  // === QUERY EXAMPLES ===
+  const westOaklandCitizens = await queryCitizensByNeighborhood(db, 'West Oakland');
+  console.log('West Oakland Citizens:', westOaklandCitizens);
+
+  const indMembers = await queryCitizensByFaction(db, 'IND');
+  console.log('IND Faction Members:', indMembers);
+
+  db.close();
+}
+
+// Query helpers
+function queryCitizensByNeighborhood(db, neighborhood) {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT * FROM citizens WHERE neighborhood LIKE ?`,
+      [`%${neighborhood}%`],
+      (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
+      }
+    );
+  });
+}
+
+function queryCitizensByFaction(db, faction) {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT * FROM citizens WHERE faction = ?`,
+      [faction],
+      (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
+      }
+    );
+  });
+}
+
+function queryTier1Citizens(db) {
+  return new Promise((resolve, reject) => {
+    db.all(
+      `SELECT * FROM citizens WHERE tier = 1`,
+      [],
+      (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
+      }
+    );
+  });
+}
+
+main().catch(console.error);
+```
+
+### OpenClaw Skill Version
+
+```javascript
+// skills/sheets-sqlite-sync.js
+const { google } = require('googleapis');
+const sqlite3 = require('sqlite3').verbose();
+const fs = require('fs').promises;
+const path = require('path');
+
+module.exports = {
+  name: 'sheetsSqliteSync',
+  description: 'Sync Google Sheets data to local SQLite database',
+
+  execute: async (context) => {
+    const { config } = context;
+    const dbPath = path.join(__dirname, '../godworld/godworld.db');
+
+    // Load credentials
+    const credentials = JSON.parse(
+      await fs.readFile(config.googleCredentialsPath)
+    );
+
+    const auth = new google.auth.GoogleAuth({
+      credentials,
+      scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly'],
+    });
+
+    const sheets = google.sheets({ version: 'v4', auth });
+    const db = new sqlite3.Database(dbPath);
+
+    // Pull Simulation_Ledger
+    const simRes = await sheets.spreadsheets.values.get({
+      spreadsheetId: config.godworldSheetId,
+      range: 'Simulation_Ledger!A:Z',
+    });
+
+    // Pull Initiative_Tracker
+    const initRes = await sheets.spreadsheets.values.get({
+      spreadsheetId: config.godworldSheetId,
+      range: 'Initiative_Tracker!A:Q',
+    });
+
+    // Insert citizens...
+    // Insert initiatives...
+
+    db.close();
+    return `Synced ${simRes.data.values.length} citizens, ${initRes.data.values.length} initiatives`;
+  }
+};
+```
+
+### GodWorld Workflow Integration
+
+1. **Export Cycle Data from Sheets:**
+   - Use Apps Script to export on cycle advance
+   - Or pull directly via API
+
+2. **Persist in SQLite:**
+   - Run sync after each cycle export
+   - Add cycle-level data (sentiment, migration, shock-flag) to cycles table
+
+3. **Query for Media Generation:**
+   - "Give me 3 West Oakland citizens with occupation 'electrician'" → feed to Claude for Pulse quotes
+   - "List all Tier-1 citizens in elevated activity zones" → tie to arc seeds
+
+4. **Autonomous Loop (with OpenClaw):**
+   - Trigger on cron or Sheets change webhook
+   - Pull → Save to SQLite → Generate Pulse → Save to ledger folder
+
+### Useful Queries for GodWorld
+
+```sql
+-- All West Oakland citizens
+SELECT * FROM citizens WHERE neighborhood LIKE '%West Oakland%';
+
+-- IND swing voters
+SELECT * FROM citizens WHERE faction = 'IND';
+
+-- Tier-1 protected citizens
+SELECT * FROM citizens WHERE tier = 1;
+
+-- Recent initiatives
+SELECT * FROM initiatives WHERE cycle >= 75 ORDER BY cycle DESC;
+
+-- Citizens by occupation for quotes
+SELECT * FROM citizens WHERE occupation LIKE '%electrician%' OR occupation LIKE '%teacher%';
+
+-- Neighborhood citizen count
+SELECT neighborhood, COUNT(*) as count FROM citizens GROUP BY neighborhood ORDER BY count DESC;
+```
+
+### Advantages for GodWorld
+
+| Benefit | Description |
+|---------|-------------|
+| **Persistence** | Citizens, cycles, sentiment history survive restarts |
+| **Query Power** | Fast lookups ("all Fruitvale citizens" for cultural reports) |
+| **No Cloud DB** | Fully local, private |
+| **Scalable** | Add tables for arcs, neighborhoods, domain stats later |
+| **Source of Truth** | Sheets remains master, SQLite is fast local cache |

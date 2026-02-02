@@ -104,6 +104,78 @@ These are bugs/incomplete features blocking Tier 7 work:
 
 ---
 
+## Optional: Sports Integration
+
+**Goal:** Manual Sports_Feed entries seed SPORTS events and affect city mood.
+
+| Task | Location | Description |
+|------|----------|-------------|
+| Add `SentimentModifier` column | Sports_Feed | Win streak = +0.03, losing = -0.02 |
+| Add `EventTrigger` column | Sports_Feed | "hot-streak", "playoff-push", "championship" |
+| Add `HomeNeighborhood` column | Sports_Feed | Game days affect Jack London traffic/retail |
+| Wire into City Dynamics | applyCityDynamics.js | Read Sports_Feed, apply sentiment |
+| Wire into Event Generation | worldEventsEngine.js | EventTrigger spawns SPORTS events |
+
+**Example Row:**
+```
+As | MLB | 85-62 | mid-season | W6 | +0.05 | playoff-push | Jack London | ...
+```
+→ Engine reads `playoff-push` → generates "A's clinch playoff spot" SPORTS event
+→ Engine reads `+0.05` → boosts Oakland sentiment
+→ Engine reads `Jack London` → increases that neighborhood's retail/traffic
+
+---
+
+## Design Pattern: Manual Entry → Story Seeding
+
+**Problem:** You manually enter data (sports scores, initiative details, weather overrides) but it doesn't automatically flow into stories.
+
+**Solution:** Add standard "trigger columns" to any ledger where manual entries should seed events.
+
+### Standard Trigger Columns
+
+| Column | Purpose | Values |
+|--------|---------|--------|
+| `EventTrigger` | What event type to generate | Domain-specific keywords |
+| `SentimentModifier` | How it affects mood | -0.10 to +0.10 |
+| `Severity` | How prominently to feature | 1-5 or LOW/MED/HIGH |
+| `AffectedNeighborhoods` | Which areas impacted | Comma-separated list |
+| `AffectedCitizens` | Which PopIds involved | Comma-separated PopIds |
+| `StoryHook` | One-line narrative seed | Free text |
+
+### Pattern Flow
+
+```
+Manual Ledger Entry
+        ↓
+Engine reads trigger columns
+        ↓
+    ┌───┴───┐
+    ↓       ↓
+Generate   Modify
+Event      State
+    ↓       ↓
+    └───┬───┘
+        ↓
+Media Packet includes event + context
+        ↓
+Media Room writes story
+```
+
+### Applicable Ledgers
+
+| Ledger | Trigger Use |
+|--------|-------------|
+| Sports_Feed | Team status → SPORTS events |
+| Initiative_Tracker | Vote outcomes → CIVIC events |
+| WorldEvents_Ledger | Manual events → any category |
+| Arc_Ledger | Arc state changes → story hooks |
+| Civic_Office_Ledger | Status changes → CIVIC events (resignation, illness) |
+
+**Key Insight:** Any ledger with an `EventTrigger` column becomes a story source. The engine just needs a reader function that checks for non-empty triggers each cycle.
+
+---
+
 ## Deferred to Tier 8+
 
 | Idea | Why Deferred |

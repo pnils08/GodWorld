@@ -323,3 +323,303 @@ module.exports = {
 - How to handle cycle exports? (Google Sheets export? Apps Script webhook?)
 - Review workflow? (Discord? Email? Just check folder?)
 - How much autonomy first pass? (Full auto or human-in-loop?)
+
+---
+
+## Full Setup Guide (From Scratch)
+
+### What is OpenClaw?
+
+OpenClaw (formerly Clawdbot/Moltbot) is an open-source, local-first AI agent that runs on your machine as a proactive personal assistant. With 68k+ GitHub stars, it's viral for integrating AI models with apps/files (e.g., WhatsApp, Discord, email, system commands) to automate tasks. It's Node.js-based, privacy-focused (no cloud required), and extensible with skills/plugins.
+
+### Prerequisites
+
+- **Node.js 18+** — download from nodejs.org
+- **Git** — for cloning repo
+- **API key** from LLM provider (Anthropic for Claude, xAI for Grok)
+- **Optional:** Docker for containerized run (easier for production)
+
+### Installation Steps
+
+```bash
+# 1. Clone the repo (still named moltbot on GitHub)
+git clone https://github.com/moltbot/moltbot.git
+
+# 2. Navigate to folder
+cd moltbot
+
+# 3. Install dependencies
+npm install
+
+# 4. Create .env file with your API key
+echo 'ANTHROPIC_API_KEY=sk-ant-...' > .env
+
+# 5. Run locally (starts gateway on localhost:3000)
+npm start
+```
+
+### Configuration
+
+Edit `config.js` to set:
+- LLM model (e.g., `"claude-3.5-sonnet"`)
+- Integrations (Discord bot token, WhatsApp via Twilio)
+- Sandbox mode (least privilege for security)
+
+### Test It
+
+Message via Discord/Slack: "Summarize today's news" — it should respond autonomously.
+
+### Security & Sandbox
+
+- Enable sandbox mode in config (limits agent to specific folders)
+- Add browser control: Install Puppeteer extension for web tasks
+- Deploy options: Raspberry Pi (always-on), DigitalOcean droplet (1-Click setup)
+
+---
+
+## Custom Skills for Sheets → Pulse Workflow
+
+OpenClaw's strength is extensibility — you add skills/plugins as Node.js modules.
+
+### Basic Skill Structure
+
+Create `skills/sheets-to-pulse.js`:
+
+```javascript
+module.exports = {
+  name: 'sheetsToPulse',
+  description: 'Pull from Google Sheets and generate Cycle Pulse edition',
+  execute: async (context) => {
+    const { message, config } = context;
+    // Logic goes here
+    return 'Pulse edition generated.';
+  }
+};
+```
+
+Add to config's skills array.
+
+### Step 1: Sheets Integration (Pull Raw Data)
+
+Install Google APIs client:
+```bash
+npm install googleapis
+```
+
+Skill code for fetching:
+```javascript
+const { google } = require('googleapis');
+
+// Inside your skill execute function:
+const sheets = google.sheets({ version: 'v4', auth: config.googleApiKey });
+
+// Fetch from Sheets
+const res = await sheets.spreadsheets.values.get({
+  spreadsheetId: 'your-sheets-id',  // Replace with GodWorld Sheets ID
+  range: 'Cycle_76!A1:Z1000',       // Raw data sheet
+});
+
+const rawData = res.data.values;
+// rawData now has neighborhood map, citizens, arcs, etc.
+```
+
+Trigger: Message "Run Sheets to Pulse for Cycle 77"
+
+### Step 2: Process Data & Generate with Claude
+
+Install Anthropic SDK:
+```bash
+npm install @anthropic-ai/sdk
+```
+
+Generation code:
+```javascript
+const Anthropic = require('@anthropic-ai/sdk');
+
+const client = new Anthropic({ apiKey: config.anthropicApiKey });
+
+const response = await client.messages.create({
+  model: 'claude-3-5-sonnet-20240620',
+  max_tokens: 2000,
+  messages: [{
+    role: 'user',
+    content: `Generate Cycle Pulse edition from this GodWorld data:
+      Sentiment 0.98, Migration +265, West Oakland Sentiment 1.05, Shock-flag 15.
+      Use Bay Tribune voice: balanced, procedural.
+      Structure as Front Page, Civic Affairs, etc.`
+  }],
+});
+
+const pulseText = response.content[0].text;
+```
+
+### Step 3: Autonomous Loop with Cron
+
+Install cron:
+```bash
+npm install cron
+```
+
+Schedule daily generation:
+```javascript
+const CronJob = require('cron').CronJob;
+
+new CronJob('0 0 * * *', async () => {
+  // Run sheetsToPulse skill daily at midnight
+  await skills.sheetsToPulse.execute(context);
+  // Send output to Discord/Slack
+}, null, true);
+```
+
+### Full Workflow
+
+```
+Sheets pull → Data process (sentiment/migration) → Claude generation → Save to ledger → Notify
+```
+
+---
+
+## Complete Sheets-to-Pulse Skill
+
+```javascript
+// skills/sheets-to-pulse.js
+const { google } = require('googleapis');
+const Anthropic = require('@anthropic-ai/sdk');
+const fs = require('fs').promises;
+
+module.exports = {
+  name: 'sheetsToPulse',
+  description: 'Pull GodWorld data from Sheets and generate Cycle Pulse',
+
+  execute: async (context) => {
+    const { config } = context;
+
+    // 1. Initialize APIs
+    const sheets = google.sheets({ version: 'v4', auth: config.googleApiKey });
+    const claude = new Anthropic({ apiKey: config.anthropicApiKey });
+
+    // 2. Fetch cycle data from Sheets
+    const cycleData = await sheets.spreadsheets.values.get({
+      spreadsheetId: config.godworldSheetId,
+      range: 'Cycle_Summary!A1:Z100',
+    });
+
+    const citizenData = await sheets.spreadsheets.values.get({
+      spreadsheetId: config.godworldSheetId,
+      range: 'Simulation_Ledger!A1:Z500',
+    });
+
+    const initiativeData = await sheets.spreadsheets.values.get({
+      spreadsheetId: config.godworldSheetId,
+      range: 'Initiative_Tracker!A1:Q20',
+    });
+
+    // 3. Parse into structured format
+    const summary = parseCycleData(cycleData.data.values);
+    const citizens = parseCitizens(citizenData.data.values);
+    const initiatives = parseInitiatives(initiativeData.data.values);
+
+    // 4. Load citizen memory for context
+    const relevantCitizens = await loadRelevantCitizens(summary, citizens);
+
+    // 5. Build prompt with full context
+    const prompt = buildTribunePrompt(summary, relevantCitizens, initiatives);
+
+    // 6. Generate with Claude
+    const response = await claude.messages.create({
+      model: 'claude-3-5-sonnet-20240620',
+      max_tokens: 3000,
+      messages: [{ role: 'user', content: prompt }],
+    });
+
+    const pulseContent = response.content[0].text;
+
+    // 7. Save to file
+    const cycleId = summary.cycleId || 'unknown';
+    const outputPath = `media/cycle-${cycleId}/tribune-pulse.md`;
+    await fs.mkdir(`media/cycle-${cycleId}`, { recursive: true });
+    await fs.writeFile(outputPath, pulseContent);
+
+    // 8. Update citizen memory with new events
+    await updateCitizenMemory(summary, initiatives);
+
+    return `Pulse generated: ${outputPath}`;
+  }
+};
+
+// Helper functions
+function parseCycleData(rows) {
+  // Convert Sheets rows to structured object
+  // ... implementation
+}
+
+function buildTribunePrompt(summary, citizens, initiatives) {
+  return `
+You are generating the Bay Tribune Pulse for Cycle ${summary.cycleId}.
+
+## Cycle Data
+- Sentiment: ${summary.sentiment}
+- Migration: ${summary.migration}
+- Active Arcs: ${summary.arcs.join(', ')}
+
+## Key Citizens This Cycle
+${citizens.map(c => `- ${c.name} (${c.role}): ${c.recentEvents}`).join('\n')}
+
+## Initiative Updates
+${initiatives.map(i => `- ${i.name}: ${i.status} (${i.outcome || 'pending'})`).join('\n')}
+
+Generate a full Pulse edition with:
+1. Front Page (lead story)
+2. Council Watch (political analysis)
+3. Neighborhood Beat (local impacts)
+4. Looking Ahead (what's next)
+
+Use balanced, professional Tribune voice.
+  `;
+}
+```
+
+---
+
+## Future: Claude Calling OpenClaw (Reverse Integration)
+
+Currently: OpenClaw → calls Claude API → gets text back
+
+Possible future: Claude → calls OpenClaw → gets citizen data
+
+### How It Would Work
+
+1. OpenClaw exposes REST API locally:
+   ```
+   GET localhost:8080/citizen/POP-00042
+   → Returns Ramon Vega's full profile
+   ```
+
+2. Claude Code configured with custom tool to call that endpoint
+
+3. Flow:
+   ```
+   You: "Write a spotlight on Ramon Vega"
+   Claude: [calls OpenClaw tool] → "get citizen POP-00042"
+   OpenClaw: [returns profile, history, relationships]
+   Claude: [writes spotlight using that data]
+   ```
+
+### Setup (Future)
+
+```javascript
+// OpenClaw API server mode
+const express = require('express');
+const app = express();
+
+app.get('/citizen/:popId', async (req, res) => {
+  const citizen = await memory.getCitizen(req.params.popId);
+  res.json(citizen);
+});
+
+app.listen(8080);
+```
+
+Then configure Claude Code with MCP server integration pointing to `localhost:8080`.
+
+This adds complexity — start with OpenClaw driving the workflow first.

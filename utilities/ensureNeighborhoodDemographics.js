@@ -163,12 +163,15 @@ function getNeighborhoodDemographic_(ss, neighborhood) {
  * Updates demographics for a single neighborhood.
  * Creates the row if it doesn't exist.
  *
+ * NOTE: Renamed from updateNeighborhoodDemographics_ to avoid collision
+ * with phase03-population/updateNeighborhoodDemographics.js (which expects ctx)
+ *
  * @param {Spreadsheet} ss - The spreadsheet object
  * @param {string} neighborhood - The neighborhood name
  * @param {Object} demographics - The demographics data
  * @param {number} cycle - The current cycle
  */
-function updateNeighborhoodDemographics_(ss, neighborhood, demographics, cycle) {
+function updateSingleNeighborhoodDemographics_(ss, neighborhood, demographics, cycle) {
   var sheet = ensureNeighborhoodDemographicsSchema_(ss);
   var values = sheet.getDataRange().getValues();
   var header = values[0];

@@ -321,6 +321,11 @@ function getCurrentCycle_(ctxOrSs) {
 3. If no, create it as a wrapper
 4. Fix `getCurrentCycle_` to handle both parameter types
 
+**STATUS: FIXED**
+- Renamed utility function from `updateNeighborhoodDemographics_` to `updateSingleNeighborhoodDemographics_`
+- Phase03 function now correctly resolves (it expects ctx and extracts ss internally)
+- File: utilities/ensureNeighborhoodDemographics.js line 174
+
 ---
 
 ## Version History

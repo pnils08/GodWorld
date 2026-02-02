@@ -261,7 +261,65 @@ if (totalAvailable < QUORUM) {
 
 | Cycle | Issue | Severity | Notes |
 |-------|-------|----------|-------|
-| | | | |
+| 78 | `ss.getSheetByName is not a function` in Phase3-NeighborhoodDemo | HIGH | Function naming collision - see Bug #7 below |
+| 78 | `ss.getSheetByName is not a function` in Phase5-EventArc | HIGH | Same root cause - see Bug #7 below |
+| 78 | Demographics unavailable for vote | MEDIUM | Blocked by Bug #7 |
+| 78 | AffectedNeighborhoods = 0 | LOW | Column was empty in Initiative_Tracker |
+
+---
+
+## Bug #7: Function Parameter Mismatch (ss vs ctx)
+
+**Discovered:** Cycle 78
+**Severity:** HIGH - Blocks demographics and arc engines
+
+**Problem:**
+Multiple utility functions expect `ss` (spreadsheet) as first parameter, but engine calls them with `ctx` (context object).
+
+**Affected Functions:**
+
+| Function | File | Line | Expects | Receives |
+|----------|------|------|---------|----------|
+| `updateNeighborhoodDemographics_` | utilities/ensureNeighborhoodDemographics.js | 172 | `ss` | `ctx` |
+| `getCurrentCycle_` | phase10-persistence/cycleExportAutomation.js | 410 | `ss` | `ctx` |
+
+**Root Cause:**
+Naming collision between:
+- `updateNeighborhoodDemographics_(ss, neighborhood, demographics, cycle)` in utilities
+- `updateNeighborhoodDemographics_(ctx)` expected by engine
+
+**Fix Options:**
+
+**Option A: Rename utility function** (Recommended)
+```javascript
+// Rename to avoid collision:
+function updateSingleNeighborhoodDemographics_(ss, neighborhood, demographics, cycle)
+```
+
+**Option B: Create wrapper in phase03**
+```javascript
+// phase03-population/updateNeighborhoodDemographics.js
+function updateNeighborhoodDemographics_(ctx) {
+  var ss = ctx.ss;
+  // Call utility functions with ss
+  ensureNeighborhoodDemographicsSchema_(ss);
+  // ... rest of phase logic
+}
+```
+
+**Option C: Fix getCurrentCycle_ to accept ctx**
+```javascript
+function getCurrentCycle_(ctxOrSs) {
+  var ss = ctxOrSs.ss || ctxOrSs;  // Handle both
+  // ...
+}
+```
+
+**Recommended Fix Order:**
+1. Check if phase03-population/updateNeighborhoodDemographics.js exists
+2. If yes, it should call utility with `ctx.ss`
+3. If no, create it as a wrapper
+4. Fix `getCurrentCycle_` to handle both parameter types
 
 ---
 

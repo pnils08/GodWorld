@@ -216,7 +216,10 @@ Media Room writes story
 
 | Cycle | Issue | Affects | Notes |
 |-------|-------|---------|-------|
-| | | | |
+| 78 | `ss.getSheetByName` parameter mismatch | Tier 7.1, 7.2 | Blocks demographics - see CIVIC_INITIATIVE_v1.5_UPGRADE.md Bug #7 |
+| 78 | Demographics unavailable for vote | Tier 7.1 | INIT-001 passed without demographic modifiers |
+| 78 | AffectedNeighborhoods empty | Tier 7.1 | Ripple created for 0 neighborhoods |
+| 78 | EventArc engine blocked | Tier 7.4 | Same ss/ctx parameter bug |
 
 ---
 

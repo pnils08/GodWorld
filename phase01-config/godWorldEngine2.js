@@ -60,13 +60,9 @@ function logEngineError_(ctx, phase, error) {
   Logger.log(msg);
   Logger.log('Stack: ' + (error.stack || 'N/A'));
 
-  // Track in context for summary
+  // Track in context for summary (push string, not object, to avoid [object Object] in join)
   if (ctx && ctx.summary && ctx.summary.auditIssues) {
-    ctx.summary.auditIssues.push({
-      phase: phase,
-      error: error.message,
-      timestamp: new Date().toISOString()
-    });
+    ctx.summary.auditIssues.push('[' + phase + '] ' + error.message);
   }
 
   // Optionally write to Engine_Errors sheet (creates if missing)

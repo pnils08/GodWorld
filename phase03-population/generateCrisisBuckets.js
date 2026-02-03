@@ -549,6 +549,7 @@ function generateCrisisBuckets_(ctx) {
       subdomain: crisis.subtype,
       neighborhood: crisis.location,
       severity: crisis.severity,
+      description: crisis.category + ' — ' + crisis.subtype + ' (' + crisis.location + ')',
       impactScore: crisis.severity === 'high' ? 50 : crisis.severity === 'medium' ? 30 : 15,
       source: 'BUCKET',
       timestamp: ctx.now

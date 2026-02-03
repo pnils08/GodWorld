@@ -2,8 +2,10 @@
 
 **Previous:** Tiers 1-6 complete (see ENGINE_ROADMAP.md)
 **Current Tier:** 7
-**Theme:** Ripple Effects, Economic Depth, Citizen Trajectories
+**Theme:** Ripple Effects, Economic Depth, Citizen Trajectories, Agent Integration
+**Status:** In Progress
 **Created:** 2026-02-02
+**Updated:** 2026-02-03
 
 ---
 
@@ -12,6 +14,8 @@
 Tier 7 focuses on making simulation effects **persist and compound over time**. The foundation (demographics, careers, civic initiatives) exists. Now we make those systems talk to each other.
 
 **Core Principle:** Every major event should create ripples that affect neighborhoods and citizens across multiple cycles.
+
+**New in 7.0:** OpenClaw integration via Cycle Context Pack exports enables autonomous media generation.
 
 ---
 
@@ -176,6 +180,49 @@ Media Room writes story
 
 ---
 
+## Tier 7.0: OpenClaw Integration Foundation
+
+**Goal:** Enable autonomous media generation via agent consumption of cycle exports.
+
+**Status:** Complete
+
+| Task | Location | Status |
+|------|----------|--------|
+| Add `exportCycleArtifacts_()` | apps-script/utilities/exportCycleArtifacts.js | Done |
+| Wire into engine as Phase 11 | godWorldEngine2.js:1399-1406 | Done |
+| Document context pack schema | OPENCLAW_INTEGRATION.md | Done |
+| Document manifest schema | OPENCLAW_INTEGRATION.md | Done |
+
+### What's Exported
+
+| File | Purpose |
+|------|---------|
+| `cycle-XX-summary.json` | Full `ctx.summary` snapshot |
+| `cycle-XX-context.json` | Prompt-ready distilled pack |
+| `manifest.json` | Latest cycle + SHA-256 checksums |
+
+### Risk Flags (Deterministic)
+
+The context pack derives routing flags without LLM:
+
+| Flag | Condition |
+|------|-----------|
+| `high-tension` | `chaosEvents >= 2` |
+| `negative-sentiment` | `sentiment <= -0.35` |
+| `economic-stress` | `economicMood <= 35` |
+| `high-incident-volume` | `totalIncidents > 80` |
+
+### Next Steps (OpenClaw Side)
+
+- [ ] SQLite schema for citizens/initiatives/cycles
+- [ ] `godworld-sync` skill to consume manifest
+- [ ] `media-generator` skill with Tribune/Echo/Continuity routing
+- [ ] Continuity gate (`confidence >= 0.9 && risk <= 0.4`)
+
+**See:** `docs/OPENCLAW_INTEGRATION.md` for full implementation plan.
+
+---
+
 ## Deferred to Tier 8+
 
 | Idea | Why Deferred |
@@ -220,6 +267,8 @@ Media Room writes story
 | 78 | Demographics unavailable for vote | Tier 7.1 | Should resolve with Bug #7 fix |
 | 78 | AffectedNeighborhoods empty | Tier 7.1 | Ripple created for 0 neighborhoods |
 | 78 | EventArc engine blocked | Tier 7.4 | May need separate fix for getCurrentCycle_ |
+| 78 | `[object Object]` in auditIssues | Media output | **FIXED** - godWorldEngine2.js:65-69 now pushes strings |
+| 78 | Empty world events (`- [low]`) | Media output | **FIXED** - generateCrisisBuckets.js now adds description field |
 
 ---
 
@@ -228,5 +277,9 @@ Media Room writes story
 | Tier | Theme | Status |
 |------|-------|--------|
 | 1-6 | Foundation (demographics, careers, civic, media) | Complete |
-| 7 | Ripple effects, economic depth, citizen trajectories | Planning |
+| 7.0 | OpenClaw integration foundation | Complete |
+| 7.1 | Ripple system completion | Planned |
+| 7.2 | Neighborhood micro-economies | Planned |
+| 7.3 | Citizen life path evolution | Planned |
+| 7.4 | Continuity threading | Planned |
 | 8 | City memory, shock cascades | Future |

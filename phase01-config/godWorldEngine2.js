@@ -1397,6 +1397,18 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase10-CycleSeed', function() { saveCycleSeed_(ctx); });
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 11: EXPORT ARTIFACTS (OpenClaw Integration)
+  // ═══════════════════════════════════════════════════════════
+  // Exports cycle-XX-summary.json, cycle-XX-context.json, and manifest.json
+  // to Drive folder "exports/" for OpenClaw consumption.
+  // See: apps-script/utilities/exportCycleArtifacts.js
+  safePhaseCall_(ctx, 'Phase11-ExportArtifacts', function() {
+    if (typeof exportCycleArtifacts_ === 'function') {
+      exportCycleArtifacts_(ctx, { includePretty: true });
+    }
+  });
+
   // Flush cache
   if (ctx.cache) {
     try {

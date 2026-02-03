@@ -13,8 +13,6 @@
  * ============================================================================
  */
 
-var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-
 var EMERGENCE_USAGE_TYPES = [
   'quoted', 'observed', 'profile', 'scene', 'reaction', 'witness',
   'mentioned', 'interviewed', 'featured', 'community'
@@ -25,7 +23,7 @@ var NON_EMERGENCE_USAGE_TYPES = [
 ];
 
 function processAdvancementIntake_(ctx) {
-  var ss = ctx ? ctx.ss : SpreadsheetApp.openById(SIM_SSID);
+  var ss = ctx ? ctx.ss : openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var now = ctx ? ctx.now : new Date();
   var cycle = ctx ? (ctx.summary.cycleId || ctx.config.cycleCount || 0) : getCurrentCycleFromConfig_(ss);
   

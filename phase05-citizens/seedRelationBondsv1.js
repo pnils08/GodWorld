@@ -420,8 +420,7 @@ function findColumnIndex_(headers, possibleNames) {
  * Test function — run manually
  */
 function testBondSeeding_() {
-  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';  // Replace with your ID
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   
   var ctx = {
     ss: ss,

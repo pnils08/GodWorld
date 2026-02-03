@@ -106,8 +106,7 @@ function exportAndPushToGitHub() {
 }
 
 function exportAllHeaders() {
-  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var sheets = ss.getSheets();
 
   var output = [];
@@ -185,8 +184,7 @@ function exportAllHeaders() {
  * Export headers for a single sheet (useful for quick checks)
  */
 function exportSingleSheetHeaders(sheetName) {
-  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var sheet = ss.getSheetByName(sheetName);
 
   if (!sheet) {

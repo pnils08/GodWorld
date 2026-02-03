@@ -10,14 +10,12 @@
  * ============================================================================
  */
 
-var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-
 /**
  * Master repair function - runs all repairs
  * RUN THIS ONE
  */
 function repairSimulationLedger() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var ledger = ss.getSheetByName('Simulation_Ledger');
   
   // First, ensure Neighborhood column exists
@@ -60,7 +58,7 @@ function repairSimulationLedger() {
  * ============================================================================
  */
 function diagnoseSimulationLedger() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var ledger = ss.getSheetByName('Simulation_Ledger');
   
   if (!ledger) {
@@ -143,7 +141,7 @@ function diagnoseSimulationLedger() {
  * ============================================================================
  */
 function repairMissingBirthYears(ss) {
-  ss = ss || SpreadsheetApp.openById(SIM_SSID);
+  ss = ss || openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var ledger = ss.getSheetByName('Simulation_Ledger');
   var data = ledger.getDataRange().getValues();
   var header = data[0];
@@ -199,7 +197,7 @@ function repairMissingBirthYears(ss) {
  * ============================================================================
  */
 function repairMissingNeighborhoods(ss) {
-  ss = ss || SpreadsheetApp.openById(SIM_SSID);
+  ss = ss || openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var ledger = ss.getSheetByName('Simulation_Ledger');
   
   // Re-read data to get fresh header (in case column was just added)
@@ -268,7 +266,7 @@ function repairMissingNeighborhoods(ss) {
  * ============================================================================
  */
 function generateCitizensToTarget(ss, target) {
-  ss = ss || SpreadsheetApp.openById(SIM_SSID);
+  ss = ss || openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var ledger = ss.getSheetByName('Simulation_Ledger');
   var currentCount = ledger.getLastRow() - 1;
   

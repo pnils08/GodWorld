@@ -36,7 +36,6 @@
  * ============================================================================
  */
 
-var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
 var SIM_YEAR = 2041;
 
 
@@ -51,7 +50,7 @@ var SIM_YEAR = 2041;
  * @returns {Object} Complete citizen profile
  */
 function buildCitizenContext(identifier, cache) {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   
   // Initialize profile
   var profile = {
@@ -978,7 +977,7 @@ function lookupCitizen(name) {
  * List all named citizens in Simulation_Ledger (for reference)
  */
 function listNamedCitizens() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var sheet = ss.getSheetByName('Simulation_Ledger');
   if (!sheet) {
     Logger.log('Simulation_Ledger not found');
@@ -1013,7 +1012,7 @@ function listNamedCitizens() {
  * Diagnostic - show ledger structure so we can fix lookups
  */
 function diagnoseLedgerStructure() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   
   var sheetsToCheck = [
     'Simulation_Ledger',
@@ -1066,7 +1065,7 @@ function diagnoseLedgerStructure() {
  * Get random citizens from a neighborhood for Media Room to quote
  */
 function getCitizensForQuotes(neighborhood, count) {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var citizens = [];
   
   try {
@@ -1130,7 +1129,7 @@ function getCitizensForQuotes(neighborhood, count) {
  * Get citizens who have been mentioned in media before (established voices)
  */
 function getReturningCitizens(neighborhood, count) {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var citizens = [];
   
   try {

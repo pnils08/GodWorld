@@ -778,23 +778,26 @@ Paste new Media Room output here. |
 ## Sports_Feed
 
 - **Rows:** 3
-- **Columns:** 13
+- **Columns:** 16
 
-| Col | Header |
-|-----|--------|
-| A | Team |
-| B | League |
-| C | Record |
-| D | Wins |
-| E | Losses |
-| F | SeasonState |
-| G | PlayoffRound |
-| H | PlayoffStatus |
-| I | Streak |
-| J | LastGame |
-| K | NextGame |
-| L | LastUpdated |
-| M | Notes |
+| Col | Header | Description |
+|-----|--------|-------------|
+| A | Team | Team name (e.g., "A's", "Warriors") |
+| B | League | MLB, NBA, NFL, etc. |
+| C | Record | Current record (e.g., "85-62") |
+| D | Wins | Number of wins |
+| E | Losses | Number of losses |
+| F | SeasonState | off-season, spring-training, early/mid/late-season |
+| G | PlayoffRound | Current playoff round if applicable |
+| H | PlayoffStatus | Playoff status |
+| I | Streak | Win/loss streak (e.g., "W6", "L3") |
+| J | LastGame | Last game result |
+| K | NextGame | Next game info |
+| L | LastUpdated | Timestamp |
+| M | Notes | Free text notes |
+| N | SentimentModifier | **v2.14** City sentiment effect (-0.10 to +0.10) |
+| O | EventTrigger | **v2.14** Event type: hot-streak, playoff-push, championship, rivalry |
+| P | HomeNeighborhood | **v2.14** Neighborhood for game day effects (e.g., Jack London)
 
 ---
 

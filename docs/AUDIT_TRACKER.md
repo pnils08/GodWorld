@@ -13,11 +13,11 @@
 
 | Priority | Total Issues | Fixed | Remaining |
 |----------|-------------|-------|-----------|
-| CRITICAL | 4 | 3 | 1 |
+| CRITICAL | 4 | 4 | 0 |
 | HIGH | 8 | 4 | 4 |
 | MEDIUM | 6 | 1 | 5 |
 
-**Last Updated:** After neighborhood dynamic loading (bondEngine v2.3)
+**Last Updated:** Feb 2026 - Hardcoded Spreadsheet ID fix (v2.14)
 
 ---
 
@@ -29,14 +29,18 @@
 - **Fix:** Replaced with function registry pattern (v3.5)
 - **Date Fixed:** Jan 2026
 
-### 2. Hardcoded Spreadsheet ID - PENDING
+### 2. ~~Hardcoded Spreadsheet ID~~ - FIXED
 - **File:** `phase01-config/godWorldEngine2.js:24`
-- **Also in:** 15 other files
+- **Also in:** 16 other files (17 total)
 - **Issue:** `SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk'`
 - **Risk:** Cannot deploy to different environments, V3 will need different sheets
-- **Fix Required:** Move to World_Config sheet lookup
-- **Schema Impact:** Would need `SpreadsheetID` row in World_Config
-- **Status:** WAITING - Needs Maker approval on schema change
+- **Fix:** Created `getSimSpreadsheetId_()` and `openSimSpreadsheet_()` in utilityFunctions.js (v2.14)
+  - Reads from Script Properties (`SIM_SSID`) if set
+  - Falls back to default production ID
+  - Updated all 17 files to use `openSimSpreadsheet_()`
+- **Schema Impact:** None (uses Script Properties, not World_Config)
+- **Status:** COMPLETED
+- **Date Fixed:** Feb 2026
 
 ### 3. ~~No Sheets API Caching/Batching~~ - FIXED
 - **Files:** 86 files with 1,347 getRange/getValue calls

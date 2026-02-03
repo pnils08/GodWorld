@@ -14,13 +14,11 @@
  * ============================================================================
  */
 
-var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-
 /**
  * STEP 1: Diagnose — see what's in each column
  */
 function repairEventArcLedger_DIAGNOSE() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var sheet = ss.getSheetByName('Event_Arc_Ledger');
   
   if (!sheet) {
@@ -164,7 +162,7 @@ function inferColumnType_(samples) {
  * STEP 2: Fix — apply the correct headers
  */
 function repairEventArcLedger_FIX() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var sheet = ss.getSheetByName('Event_Arc_Ledger');
   
   if (!sheet) {
@@ -263,7 +261,7 @@ function repairEventArcLedger_FIX() {
  * STEP 3: Verify the repair
  */
 function repairEventArcLedger_VERIFY() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var sheet = ss.getSheetByName('Event_Arc_Ledger');
   
   if (!sheet) {

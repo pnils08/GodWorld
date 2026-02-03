@@ -15,18 +15,11 @@
  * 
  * SETUP:
  * 1. Copy this entire file into your Media Room's Apps Script
- * 2. Update SIM_SSID with your Simulation_Narrative spreadsheet ID
+ * 2. Ensure openSimSpreadsheet_() from utilities/utilityFunctions.js is available
  * 3. Call logDraft() after generating each article
  * 
  * ============================================================================
  */
-
-
-// ════════════════════════════════════════════════════════════════════════════
-// CONFIGURATION — UPDATE THIS
-// ════════════════════════════════════════════════════════════════════════════
-
-var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';  // Your Simulation_Narrative spreadsheet
 
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -55,7 +48,7 @@ var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';  // Your Simulati
 function logDraft(reporter, storyType, signalSource, summaryPrompt, draftText) {
   
   try {
-    var ss = SpreadsheetApp.openById(SIM_SSID);
+    var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
     var sheet = ensurePressDraftsSheet_(ss);
     var cycle = getCurrentCycle_(ss);
     
@@ -119,7 +112,7 @@ function logDrafts(drafts) {
   }
   
   try {
-    var ss = SpreadsheetApp.openById(SIM_SSID);
+    var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
     var sheet = ensurePressDraftsSheet_(ss);
     var cycle = getCurrentCycle_(ss);
     var now = new Date();
@@ -174,9 +167,9 @@ function logDrafts(drafts) {
  * logCulturalMention('Elena Reyes', 'Theo Banks');
  */
 function logCulturalMention(journalist, entityName) {
-  
+
   try {
-    var ss = SpreadsheetApp.openById(SIM_SSID);
+    var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
     var cycle = getCurrentCycle_(ss);
     
     // v1.1: Get calendar context
@@ -375,7 +368,7 @@ function ensurePressDraftsSheet_(ss) {
  */
 function upgradePressDraftsSheet() {
   try {
-    var ss = SpreadsheetApp.openById(SIM_SSID);
+    var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
     var sheet = ss.getSheetByName('Press_Drafts');
     if (!sheet) {
       Logger.log('upgradePressDraftsSheet: Press_Drafts not found');
@@ -416,7 +409,7 @@ function upgradePressDraftsSheet() {
  */
 function upgradeMediaLedgerSheet() {
   try {
-    var ss = SpreadsheetApp.openById(SIM_SSID);
+    var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
     var sheet = ss.getSheetByName('Media_Ledger');
     if (!sheet) {
       Logger.log('upgradeMediaLedgerSheet: Media_Ledger not found');
@@ -517,7 +510,7 @@ function testMediaRoomWriter() {
  */
 function testCalendarContext() {
   try {
-    var ss = SpreadsheetApp.openById(SIM_SSID);
+    var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
     var cal = getCurrentCalendarContext_(ss);
     
     Logger.log('Calendar Context:');

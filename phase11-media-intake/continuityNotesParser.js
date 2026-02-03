@@ -23,14 +23,11 @@
  * ============================================================================
  */
 
-var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-
-
 /**
  * Main parser function
  */
 function parseContinuityNotes() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
   
   // Get raw paste sheet
   var rawSheet = ss.getSheetByName('Raw_Continuity_Paste');
@@ -311,7 +308,7 @@ function extractCitizens_(line) {
  * Setup function - creates Raw_Continuity_Paste sheet
  */
 function setupContinuityParser() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
   
   var sheet = ss.getSheetByName('Raw_Continuity_Paste');
   if (!sheet) {

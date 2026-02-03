@@ -15,6 +15,8 @@
  * - ensureSheet_(ss, name, headers) - Get or create sheet
  * - colIndex_(letter) - Convert column letter to index (A=1)
  * - safeGet_(sheet, row, col) - Safe getValue with null handling
+ * - getSimSpreadsheetId_() - Get spreadsheet ID from config (v2.14)
+ * - openSimSpreadsheet_() - Open spreadsheet using config ID (v2.14)
  *
  * ============================================================================
  */
@@ -154,4 +156,39 @@ function normalizeDomain_(d) {
   };
 
   return map[up] || (up[0] + up.slice(1).toLowerCase());
+}
+
+/**
+ * ============================================================================
+ * SPREADSHEET ID CONFIG (v2.14)
+ * ============================================================================
+ * Returns the simulation spreadsheet ID from Script Properties or fallback.
+ *
+ * To deploy to a different spreadsheet:
+ *   1. Open Script Editor → Project Settings → Script Properties
+ *   2. Add property: SIM_SSID = your-new-spreadsheet-id
+ *
+ * If no property is set, uses the default production spreadsheet.
+ */
+var DEFAULT_SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
+
+function getSimSpreadsheetId_() {
+  try {
+    var props = PropertiesService.getScriptProperties();
+    var customId = props.getProperty('SIM_SSID');
+    if (customId && customId.length > 10) {
+      return customId;
+    }
+  } catch (e) {
+    // PropertiesService not available (e.g., testing context)
+  }
+  return DEFAULT_SIM_SSID;
+}
+
+/**
+ * Opens the simulation spreadsheet using configured ID.
+ * Use this instead of hardcoding SpreadsheetApp.openById(...).
+ */
+function openSimSpreadsheet_() {
+  return SpreadsheetApp.openById(getSimSpreadsheetId_());
 }

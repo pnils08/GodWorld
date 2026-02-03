@@ -20,7 +20,7 @@
 
 function generateMonthlyCivicSweep(ssOverride) {
 
-  var ss = ssOverride || SpreadsheetApp.openById('1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk');
+  var ss = ssOverride || openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
 
   var ledger = ss.getSheetByName('Simulation_Ledger');
   var pop = ss.getSheetByName('World_Population');

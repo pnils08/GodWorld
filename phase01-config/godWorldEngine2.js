@@ -102,12 +102,10 @@ function safePhaseCall_(ctx, phaseName, fn) {
 }
 
 function runWorldCycle() {
-  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-
   var ss, ctx;
 
   try {
-    ss = SpreadsheetApp.openById(SIM_SSID);
+    ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
   } catch (e) {
     Logger.log('FATAL: Cannot open spreadsheet: ' + e.message);
     throw e; // Cannot continue without spreadsheet
@@ -150,6 +148,7 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
@@ -1135,12 +1134,10 @@ function applyCycleWeightForLatestCycle_(ctx) {
  * Returns: Intent summary showing what would have been written
  */
 function runDryRunCycle() {
-  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-
   var ss, ctx;
 
   try {
-    ss = SpreadsheetApp.openById(SIM_SSID);
+    ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
   } catch (e) {
     Logger.log('FATAL: Cannot open spreadsheet: ' + e.message);
     throw e;
@@ -1209,12 +1206,10 @@ function replayCycle(cycleId) {
     return { error: 'Invalid cycleId' };
   }
 
-  var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-
   var ss, ctx;
 
   try {
-    ss = SpreadsheetApp.openById(SIM_SSID);
+    ss = openSimSpreadsheet_();  // v2.14: Use configured spreadsheet ID
   } catch (e) {
     Logger.log('FATAL: Cannot open spreadsheet: ' + e.message);
     throw e;
@@ -1287,6 +1282,7 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
+  safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });

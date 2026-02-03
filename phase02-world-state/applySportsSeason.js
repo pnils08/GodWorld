@@ -148,6 +148,143 @@ function buildActiveSportsFromOverride_(oaklandState, chicagoState) {
   return active;
 }
 
+/**
+ * ============================================================================
+ * applySportsFeedTriggers_ v1.0
+ * ============================================================================
+ *
+ * Reads Sports_Feed sheet for manual trigger columns that seed events.
+ *
+ * Expected columns (added manually to Sports_Feed):
+ *   N: SentimentModifier (-0.10 to +0.10) - affects city sentiment
+ *   O: EventTrigger (hot-streak, playoff-push, championship, rivalry, etc.)
+ *   P: HomeNeighborhood (Jack London, Downtown, etc.) - game day effects
+ *
+ * Outputs to ctx.summary:
+ *   - sportsSentimentBoost: cumulative sentiment modifier
+ *   - sportsEventTriggers: array of {team, trigger, neighborhood}
+ *   - sportsNeighborhoodEffects: {neighborhood: {traffic, retail, nightlife}}
+ *
+ * ============================================================================
+ */
+function applySportsFeedTriggers_(ctx) {
+  var S = ctx.summary;
+  if (!S) S = ctx.summary = {};
+
+  // Initialize outputs
+  S.sportsSentimentBoost = 0;
+  S.sportsEventTriggers = [];
+  S.sportsNeighborhoodEffects = {};
+
+  // Try to read Sports_Feed sheet
+  var ss = ctx.ss;
+  if (!ss) return;
+
+  var sheet = ss.getSheetByName('Sports_Feed');
+  if (!sheet) {
+    Logger.log('applySportsFeedTriggers_: Sports_Feed sheet not found');
+    return;
+  }
+
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) return; // Only header row
+
+  var headers = data[0];
+
+  // Find column indices (flexible header matching)
+  var teamCol = findColumnIndex_(headers, ['Team', 'team']);
+  var sentimentCol = findColumnIndex_(headers, ['SentimentModifier', 'Sentiment', 'sentimentmodifier']);
+  var triggerCol = findColumnIndex_(headers, ['EventTrigger', 'Trigger', 'eventtrigger']);
+  var neighborhoodCol = findColumnIndex_(headers, ['HomeNeighborhood', 'Neighborhood', 'homeneighborhood']);
+  var streakCol = findColumnIndex_(headers, ['Streak', 'streak']);
+
+  if (teamCol === -1) {
+    Logger.log('applySportsFeedTriggers_: Team column not found');
+    return;
+  }
+
+  var totalSentiment = 0;
+  var triggers = [];
+  var neighborhoodEffects = {};
+
+  // Process each team row (skip header)
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var team = (row[teamCol] || '').toString().trim();
+    if (!team) continue;
+
+    // Process SentimentModifier
+    if (sentimentCol !== -1) {
+      var sentMod = parseFloat(row[sentimentCol]);
+      if (!isNaN(sentMod) && sentMod !== 0) {
+        totalSentiment += sentMod;
+        Logger.log('Sports sentiment: ' + team + ' contributes ' + sentMod);
+      }
+    }
+
+    // Process EventTrigger
+    if (triggerCol !== -1) {
+      var trigger = (row[triggerCol] || '').toString().trim().toLowerCase();
+      if (trigger && trigger !== 'none' && trigger !== '') {
+        var neighborhood = neighborhoodCol !== -1
+          ? (row[neighborhoodCol] || '').toString().trim()
+          : 'Downtown';
+
+        triggers.push({
+          team: team,
+          trigger: trigger,
+          neighborhood: neighborhood,
+          streak: streakCol !== -1 ? (row[streakCol] || '').toString() : ''
+        });
+
+        Logger.log('Sports trigger: ' + team + ' -> ' + trigger + ' @ ' + neighborhood);
+      }
+    }
+
+    // Process HomeNeighborhood effects (game day impacts)
+    if (neighborhoodCol !== -1) {
+      var hood = (row[neighborhoodCol] || '').toString().trim();
+      if (hood) {
+        if (!neighborhoodEffects[hood]) {
+          neighborhoodEffects[hood] = { traffic: 0, retail: 0, nightlife: 0 };
+        }
+        // Game day effects: increased traffic, retail, nightlife in home neighborhood
+        neighborhoodEffects[hood].traffic += 0.15;
+        neighborhoodEffects[hood].retail += 0.10;
+        neighborhoodEffects[hood].nightlife += 0.12;
+      }
+    }
+  }
+
+  // Apply outputs
+  S.sportsSentimentBoost = totalSentiment;
+  S.sportsEventTriggers = triggers;
+  S.sportsNeighborhoodEffects = neighborhoodEffects;
+
+  // Apply sentiment to city mood if significant
+  if (totalSentiment !== 0) {
+    S.sentiment = (S.sentiment || 0) + totalSentiment;
+    Logger.log('applySportsFeedTriggers_: Total sentiment adjustment: ' + totalSentiment);
+  }
+
+  ctx.summary = S;
+}
+
+/**
+ * Helper: Find column index by possible header names (case-insensitive)
+ */
+function findColumnIndex_(headers, possibleNames) {
+  for (var i = 0; i < headers.length; i++) {
+    var h = (headers[i] || '').toString().toLowerCase().trim();
+    for (var j = 0; j < possibleNames.length; j++) {
+      if (h === possibleNames[j].toLowerCase()) {
+        return i;
+      }
+    }
+  }
+  return -1;
+}
+
 
 /**
  * ============================================================================

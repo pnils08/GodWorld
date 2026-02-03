@@ -33,8 +33,9 @@
 // ════════════════════════════════════════════════════════════════════════════
 
 var CONFIG = {
-  // Spreadsheet ID (update if different)
-  SPREADSHEET_ID: '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk',
+  // Spreadsheet ID - now uses openSimSpreadsheet_() from utilities
+  // v2.14: Use configured spreadsheet ID
+  SPREADSHEET_ID: null, // Legacy - use getSimSpreadsheetId_() instead
   
   // Drive folder name for exports
   EXPORT_FOLDER_NAME: 'GodWorld_Exports',
@@ -129,7 +130,7 @@ function onOpen() {
  * Export all configured sheets for current cycle
  */
 function exportCurrentCycleAll() {
-  var ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var cycle = getCurrentCycle_(ss);
   var folder = getOrCreateExportFolder_();
   
@@ -157,7 +158,7 @@ function exportCurrentCycleAll() {
  * Update all running mirror files (append mode)
  */
 function updateAllMirrors() {
-  var ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var cycle = getCurrentCycle_(ss);
   var folder = getOrCreateExportFolder_();
   
@@ -213,7 +214,7 @@ function exportContinuityLog() {
 }
 
 function exportSingleSheet_(sheetName) {
-  var ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var cycle = getCurrentCycle_(ss);
   var folder = getOrCreateExportFolder_();
   var sheet = ss.getSheetByName(sheetName);
@@ -444,11 +445,11 @@ function openExportFolder() {
  * Show current configuration
  */
 function showConfig() {
-  var ss = SpreadsheetApp.openById(CONFIG.SPREADSHEET_ID);
+  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var cycle = getCurrentCycle_(ss);
   
   var msg = 'Current Configuration:\n\n' +
-    'Spreadsheet ID: ' + CONFIG.SPREADSHEET_ID + '\n' +
+    'Spreadsheet ID: (using openSimSpreadsheet_())\\n' +
     'Export Folder: ' + CONFIG.EXPORT_FOLDER_NAME + '\n' +
     'Current Cycle: ' + cycle + '\n\n' +
     'Export Sheets (' + CONFIG.EXPORT_SHEETS.length + '):\n' + 

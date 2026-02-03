@@ -1,5 +1,5 @@
 function diagnoseDashboardData() {
-  var ss = SpreadsheetApp.openById('1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk');
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   
   // Sports_Feed - show first 3 rows
   var sf = ss.getSheetByName('Sports_Feed');

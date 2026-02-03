@@ -35,9 +35,6 @@
  * ============================================================================
  */
 
-var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-
-
 // ════════════════════════════════════════════════════════════════════════════
 // MAIN PROCESSING FUNCTION
 // ════════════════════════════════════════════════════════════════════════════
@@ -47,7 +44,7 @@ var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
  */
 function processMediaIntakeV2() {
 
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var cycle = getCurrentCycle_(ss);
 
   // v2.1: Get calendar context
@@ -413,7 +410,7 @@ function processContinuityIntake_(ss, cycle, cal) {
 
 function setupMediaIntakeV2() {
 
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var created = [];
 
   // 1. Media_Intake (Articles)
@@ -719,7 +716,7 @@ function flagCitizenForTierReview_(ss, citizenName, cycle, usageType) {
  * Run once to upgrade existing v2.0 sheets.
  */
 function upgradeMediaIntakeSheets() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var upgraded = [];
 
   // Upgrade Press_Drafts
@@ -821,7 +818,7 @@ function upgradeMediaLedgerWithCalendar_(ss) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function clearAllProcessedIntake() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var sheets = ['Media_Intake', 'Storyline_Intake', 'Citizen_Usage_Intake', 'Continuity_Intake'];
   var total = 0;
 
@@ -1256,7 +1253,7 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
  * Paste log into MediaRoom_Paste sheet, then run this.
  */
 function processRawCitizenUsageLogManual() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var cycle = getCurrentCycle_(ss);
   var cal = getCurrentCalendarContext_(ss);
 

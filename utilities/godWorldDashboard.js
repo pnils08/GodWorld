@@ -17,10 +17,8 @@
  * ============================================================================
  */
 
-var SIM_SSID = '1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk';
-
 function createGodWorldDashboard() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var COLORS = {
     base: '#0b0f1a',
     card: '#111827',
@@ -242,7 +240,7 @@ function createGodWorldDashboard() {
  * Refresh the dashboard (updates timestamp)
  */
 function refreshDashboard() {
-  var ss = SpreadsheetApp.openById(SIM_SSID);
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var dash = ss.getSheetByName('Dashboard');
 
   if (!dash) {

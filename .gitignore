@@ -1,2 +1,15 @@
 node_modules/
 package-lock.json
+
+# Environment variables (secrets)
+.env
+
+# SQLite database (local persistence, not tracked)
+godworld/godworld.db
+godworld/*.db
+
+# Exported cycle artifacts (generated, large)
+exports/*.json
+
+# Generated media output
+media/

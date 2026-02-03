@@ -431,27 +431,29 @@
 ## Initiative_Tracker
 
 - **Rows:** 7
-- **Columns:** 17
+- **Columns:** 19
 
-| Col | Header |
-|-----|--------|
-| A | InitiativeID |
-| B | Name |
-| C | Type |
-| D | Status |
-| E | Budget |
-| F | VoteRequirement |
-| G | VoteCycle |
-| H | Projection |
-| I | LeadFaction |
-| J | OppositionFaction |
-| K | SwingVoter |
-| L | Outcome |
-| M | SwingVoter2 |
-| N | SwingVoter2Lean |
-| O | Consequences |
-| P | Notes |
-| Q | LastUpdated |
+| Col | Header | Description |
+|-----|--------|-------------|
+| A | InitiativeID | Unique identifier |
+| B | Name | Initiative name |
+| C | Type | vote, grant, visioning |
+| D | Status | proposed, active, pending-vote, passed, failed |
+| E | Budget | Budget amount |
+| F | VoteRequirement | Required votes (e.g., "5-4", "6-3") |
+| G | VoteCycle | Cycle when vote occurs |
+| H | Projection | likely pass, lean pass, toss-up, lean fail, likely fail |
+| I | LeadFaction | Supporting faction |
+| J | OppositionFaction | Opposing faction |
+| K | SwingVoter | Primary swing voter name |
+| L | Outcome | PASSED, FAILED, APPROVED, DENIED |
+| M | SwingVoter2 | Secondary swing voter name |
+| N | SwingVoter2Lean | Secondary voter lean |
+| O | Consequences | Outcome description |
+| P | Notes | Additional notes |
+| Q | LastUpdated | Timestamp |
+| R | AffectedNeighborhoods | **v1.3** Comma-separated neighborhoods for ripple effects |
+| S | PolicyDomain | **v1.6** Explicit domain override (dropdown) |
 
 ---
 

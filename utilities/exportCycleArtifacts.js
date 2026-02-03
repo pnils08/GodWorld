@@ -206,7 +206,7 @@ function buildCycleContextPack_(S, ctx, cycleId) {
     },
 
     riskFlags: riskFlags,
-    continuityHints: [],
+    continuityHints: buildContinuityHints_(S, ctx),
     conflictsDetected: conflictsDetected
   };
 }
@@ -272,6 +272,91 @@ function inferKeyCitizens_(votes, initiativeEvents, activeCitizens) {
   }
 
   return out;
+}
+
+/**
+ * Build continuity hints for OpenClaw media generation.
+ * Flags citizens with ongoing storylines that should be maintained across cycles.
+ *
+ * Sources:
+ * - Active arcs (citizens involved in multi-cycle story arcs)
+ * - Recurring citizens (appeared in multiple recent cycles)
+ * - Civic participants (swing voters, initiative sponsors)
+ */
+function buildContinuityHints_(S, ctx) {
+  var hints = [];
+  var seen = Object.create(null);
+
+  // 1) Citizens involved in active arcs
+  var arcs = S.eventArcs || [];
+  for (var i = 0; i < arcs.length; i++) {
+    var arc = arcs[i];
+    if (!arc || arc.phase === 'resolved') continue;
+
+    var involved = arc.involvedCitizens || arc.keyCitizens || [];
+    for (var j = 0; j < involved.length; j++) {
+      var citizen = involved[j];
+      var popId = citizen.popId || citizen.POPID || citizen;
+      var name = citizen.name || citizen.Name || popId;
+
+      if (!popId || seen[popId]) continue;
+      seen[popId] = true;
+
+      hints.push({
+        popId: popId,
+        name: name,
+        reason: 'active-arc',
+        arc: arc.name || arc.title || 'Unnamed Arc',
+        arcPhase: arc.phase || 'active',
+        priority: arc.phase === 'peak' ? 'high' : 'medium'
+      });
+
+      if (hints.length >= 15) break;
+    }
+    if (hints.length >= 15) break;
+  }
+
+  // 2) Recurring active citizens (if tracking exists)
+  var recurringCitizens = S.recurringCitizens || S.frequentCitizens || [];
+  for (var k = 0; k < recurringCitizens.length && hints.length < 20; k++) {
+    var rec = recurringCitizens[k];
+    var recId = rec.popId || rec.POPID || rec;
+    if (seen[recId]) continue;
+    seen[recId] = true;
+
+    hints.push({
+      popId: recId,
+      name: rec.name || rec.Name || recId,
+      reason: 'recurring',
+      appearances: rec.appearances || rec.count || 2,
+      priority: 'medium'
+    });
+  }
+
+  // 3) Civic participants (swing voters from this cycle's votes)
+  var votes = S.votesThisCycle || [];
+  for (var v = 0; v < votes.length && hints.length < 25; v++) {
+    var vote = votes[v];
+    var swings = vote.swingVoters || [];
+    for (var s = 0; s < swings.length && hints.length < 25; s++) {
+      var swing = swings[s];
+      var swingId = swing.popId || swing.POPID || swing.id;
+      var swingName = swing.name || swing.Name || swingId;
+
+      if (!swingId || seen[swingId]) continue;
+      seen[swingId] = true;
+
+      hints.push({
+        popId: swingId,
+        name: swingName,
+        reason: 'civic-participant',
+        context: 'swing voter on ' + (vote.name || 'initiative'),
+        priority: 'low'
+      });
+    }
+  }
+
+  return hints;
 }
 
 function countDomains_(events, domains) {

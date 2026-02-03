@@ -125,6 +125,7 @@ function runCivicInitiativeEngine_(ctx) {
   var iNotes = idx('Notes');
   var iLastUpdated = idx('LastUpdated');
   var iAffectedNeighborhoods = idx('AffectedNeighborhoods');  // v1.3
+  var iPolicyDomain = idx('PolicyDomain');  // v1.6: Explicit domain override
 
   // v1.2: Required header validation to prevent silent write failures
   var required = ['InitiativeID', 'Name', 'Type', 'Status', 'VoteCycle',
@@ -194,11 +195,14 @@ function runCivicInitiativeEngine_(ctx) {
           secondary: swingVoter2,
           secondaryLean: swingVoter2Lean
         };
+        // v1.6: Include PolicyDomain if set
+        var policyDomain = iPolicyDomain >= 0 ? (row[iPolicyDomain] || '').toString().trim() : '';
         var demoContext = {
           demographics: neighborhoodDemographics,
           affectedNeighborhoods: affectedNeighborhoods,
           initiativeType: type,
-          initiativeName: name
+          initiativeName: name,
+          policyDomain: policyDomain  // v1.6
         };
         result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng);
       } else if (type === 'grant' || type === 'federal-grant' || type === 'external') {
@@ -212,11 +216,14 @@ function runCivicInitiativeEngine_(ctx) {
           secondary: swingVoter2,
           secondaryLean: swingVoter2Lean
         };
+        // v1.6: Include PolicyDomain if set
+        var policyDomain = iPolicyDomain >= 0 ? (row[iPolicyDomain] || '').toString().trim() : '';
         var demoContext = {
           demographics: neighborhoodDemographics,
           affectedNeighborhoods: affectedNeighborhoods,
           initiativeType: type,
-          initiativeName: name
+          initiativeName: name,
+          policyDomain: policyDomain  // v1.6
         };
         result = resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng);
       }
@@ -793,7 +800,8 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
     swingVoted: swingVoterResults.length > 0 ? swingVoterResults[0].vote : null,  // Legacy field
     consequences: '',
     notes: '',
-    affectedNeighborhoods: demoContext.affectedNeighborhoods || []  // v1.3: For ripple effects
+    affectedNeighborhoods: demoContext.affectedNeighborhoods || [],  // v1.3: For ripple effects
+    policyDomain: demoContext.policyDomain || ''  // v1.6: Explicit domain override
   };
   
   // Generate consequences and notes
@@ -1143,6 +1151,7 @@ function resolveVisioningPhase_(ctx, row, header) {
 /**
  * Apply consequences of initiative outcome to world state
  * v1.3: Added neighborhood ripple effects based on initiative type
+ * v1.6: Added PolicyDomain support for explicit domain override
  */
 function applyInitiativeConsequences_(ctx, result, name, type) {
 
@@ -1156,6 +1165,9 @@ function applyInitiativeConsequences_(ctx, result, name, type) {
   // Get affected neighborhoods from result (set during vote resolution)
   var affectedNeighborhoods = result.affectedNeighborhoods || [];
 
+  // v1.6: Get explicit policy domain if set
+  var policyDomain = result.policyDomain || '';
+
   // Sentiment shifts based on outcome
   if (result.outcome === 'PASSED' || result.outcome === 'APPROVED') {
     // Positive outcome boosts sentiment slightly
@@ -1165,8 +1177,8 @@ function applyInitiativeConsequences_(ctx, result, name, type) {
     S.positiveInitiatives = S.positiveInitiatives || [];
     S.positiveInitiatives.push(name);
 
-    // v1.3: Apply neighborhood ripple effects
-    applyNeighborhoodRipple_(ctx, name, 'positive', affectedNeighborhoods);
+    // v1.3/v1.6: Apply neighborhood ripple effects (with domain override)
+    applyNeighborhoodRipple_(ctx, name, 'positive', affectedNeighborhoods, policyDomain);
 
   } else if (result.outcome === 'FAILED' || result.outcome === 'DENIED') {
     // Negative outcome dampens sentiment
@@ -1176,8 +1188,8 @@ function applyInitiativeConsequences_(ctx, result, name, type) {
     S.failedInitiatives = S.failedInitiatives || [];
     S.failedInitiatives.push(name);
 
-    // v1.3: Apply negative neighborhood ripple
-    applyNeighborhoodRipple_(ctx, name, 'negative', affectedNeighborhoods);
+    // v1.3/v1.6: Apply negative neighborhood ripple (with domain override)
+    applyNeighborhoodRipple_(ctx, name, 'negative', affectedNeighborhoods, policyDomain);
   }
 
   // Clamp sentiment
@@ -1206,7 +1218,7 @@ function applyInitiativeConsequences_(ctx, result, name, type) {
  * - Safety/Policing → sentiment varies
  * - Environment/Park → sentiment ↑, sick_rate ↓
  */
-function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighborhoods) {
+function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighborhoods, policyDomain) {
 
   var S = ctx.summary;
   var nameLower = (initiativeName || '').toLowerCase();
@@ -1216,16 +1228,21 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
   var rippleDuration = 8;
   var rippleStrength = isPositive ? 1.0 : -0.6;
 
-  // Determine ripple type based on initiative name keywords
+  // v1.6: Normalize policyDomain for matching
+  var domainLower = (policyDomain || '').toLowerCase();
+
+  // Determine ripple type - use explicit domain if provided, else detect from name
   var rippleType = 'general';
   var effects = {};
 
   // ═══════════════════════════════════════════════════════════════════════════
   // INITIATIVE TYPE → RIPPLE EFFECTS MAPPING
+  // v1.6: Check explicit policyDomain first, then fall back to keyword detection
   // ═══════════════════════════════════════════════════════════════════════════
 
-  if (nameLower.indexOf('health') >= 0 || nameLower.indexOf('clinic') >= 0 ||
-      nameLower.indexOf('hospital') >= 0 || nameLower.indexOf('medical') >= 0) {
+  if (domainLower === 'health' ||
+      (domainLower === '' && (nameLower.indexOf('health') >= 0 || nameLower.indexOf('clinic') >= 0 ||
+      nameLower.indexOf('hospital') >= 0 || nameLower.indexOf('medical') >= 0))) {
     rippleType = 'health';
     rippleDuration = 12;
     effects = {
@@ -1235,8 +1252,9 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
     };
   }
 
-  else if (nameLower.indexOf('transit') >= 0 || nameLower.indexOf('bart') >= 0 ||
-           nameLower.indexOf('bus') >= 0 || nameLower.indexOf('hub') >= 0) {
+  else if (domainLower === 'transit' ||
+           (domainLower === '' && (nameLower.indexOf('transit') >= 0 || nameLower.indexOf('bart') >= 0 ||
+           nameLower.indexOf('bus') >= 0 || nameLower.indexOf('hub') >= 0))) {
     rippleType = 'transit';
     rippleDuration = 10;
     effects = {
@@ -1246,8 +1264,9 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
     };
   }
 
-  else if (nameLower.indexOf('business') >= 0 || nameLower.indexOf('economic') >= 0 ||
-           nameLower.indexOf('job') >= 0 || nameLower.indexOf('employment') >= 0) {
+  else if (domainLower === 'economic' || domainLower === 'business' ||
+           (domainLower === '' && (nameLower.indexOf('business') >= 0 || nameLower.indexOf('economic') >= 0 ||
+           nameLower.indexOf('job') >= 0 || nameLower.indexOf('employment') >= 0))) {
     rippleType = 'economic';
     rippleDuration = 15;
     effects = {
@@ -1257,8 +1276,9 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
     };
   }
 
-  else if (nameLower.indexOf('housing') >= 0 || nameLower.indexOf('stabiliz') >= 0 ||
-           nameLower.indexOf('afford') >= 0 || nameLower.indexOf('rent') >= 0) {
+  else if (domainLower === 'housing' ||
+           (domainLower === '' && (nameLower.indexOf('housing') >= 0 || nameLower.indexOf('stabiliz') >= 0 ||
+           nameLower.indexOf('afford') >= 0 || nameLower.indexOf('rent') >= 0))) {
     rippleType = 'housing';
     rippleDuration = 20;
     effects = {
@@ -1268,8 +1288,9 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
     };
   }
 
-  else if (nameLower.indexOf('safety') >= 0 || nameLower.indexOf('police') >= 0 ||
-           nameLower.indexOf('alternative') >= 0 || nameLower.indexOf('response') >= 0) {
+  else if (domainLower === 'safety' ||
+           (domainLower === '' && (nameLower.indexOf('safety') >= 0 || nameLower.indexOf('police') >= 0 ||
+           nameLower.indexOf('alternative') >= 0 || nameLower.indexOf('response') >= 0))) {
     rippleType = 'safety';
     rippleDuration = 8;
     // Safety initiatives have mixed reception
@@ -1279,8 +1300,9 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
     };
   }
 
-  else if (nameLower.indexOf('park') >= 0 || nameLower.indexOf('green') >= 0 ||
-           nameLower.indexOf('environment') >= 0 || nameLower.indexOf('earth') >= 0) {
+  else if (domainLower === 'environment' || domainLower === 'parks' ||
+           (domainLower === '' && (nameLower.indexOf('park') >= 0 || nameLower.indexOf('green') >= 0 ||
+           nameLower.indexOf('environment') >= 0 || nameLower.indexOf('earth') >= 0))) {
     rippleType = 'environment';
     rippleDuration = 12;
     effects = {
@@ -1290,8 +1312,9 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
     };
   }
 
-  else if (nameLower.indexOf('stadium') >= 0 || nameLower.indexOf('arena') >= 0 ||
-           nameLower.indexOf('sports') >= 0) {
+  else if (domainLower === 'sports' ||
+           (domainLower === '' && (nameLower.indexOf('stadium') >= 0 || nameLower.indexOf('arena') >= 0 ||
+           nameLower.indexOf('sports') >= 0))) {
     rippleType = 'sports';
     rippleDuration = 20;
     effects = {
@@ -1302,8 +1325,9 @@ function applyNeighborhoodRipple_(ctx, initiativeName, direction, affectedNeighb
     };
   }
 
-  else if (nameLower.indexOf('school') >= 0 || nameLower.indexOf('education') >= 0 ||
-           nameLower.indexOf('youth') >= 0) {
+  else if (domainLower === 'education' ||
+           (domainLower === '' && (nameLower.indexOf('school') >= 0 || nameLower.indexOf('education') >= 0 ||
+           nameLower.indexOf('youth') >= 0))) {
     rippleType = 'education';
     rippleDuration = 15;
     effects = {

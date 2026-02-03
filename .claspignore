@@ -13,6 +13,8 @@ openclaw-skills/**
 
 # CLI scripts (Node.js, not Apps Script)
 scripts/**
+scripts/*
+scripts/*.js
 
 # Git
 .git/**

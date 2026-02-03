@@ -321,9 +321,9 @@ var HOLY_DAYS = {
     12: 'Hanukkah'
   },
   'Muslim': {
-    0: 'Ramadan',  // Variable, placeholder
-    0: 'Eid al-Fitr',
-    0: 'Eid al-Adha'
+    3: 'Ramadan',  // Variable lunar calendar - approximate months
+    4: 'Eid al-Fitr',
+    6: 'Eid al-Adha'
   },
   'Buddhist': {
     2: 'Losar (Tibetan New Year)',

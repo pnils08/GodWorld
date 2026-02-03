@@ -1,0 +1,50 @@
+{
+  "env": {
+    "es2020": true,
+    "node": true
+  },
+  "globals": {
+    "SpreadsheetApp": "readonly",
+    "DriveApp": "readonly",
+    "PropertiesService": "readonly",
+    "UrlFetchApp": "readonly",
+    "Utilities": "readonly",
+    "LockService": "readonly",
+    "Logger": "readonly",
+    "ContentService": "readonly",
+    "HtmlService": "readonly",
+    "Session": "readonly",
+    "ScriptApp": "readonly",
+    "CacheService": "readonly",
+    "DocumentApp": "readonly",
+    "SlidesApp": "readonly",
+    "GmailApp": "readonly",
+    "CalendarApp": "readonly"
+  },
+  "parserOptions": {
+    "ecmaVersion": 2020,
+    "sourceType": "script"
+  },
+  "rules": {
+    "no-unused-vars": "off",
+    "no-undef": "off",
+    "no-constant-condition": "warn",
+    "no-empty": "warn",
+    "no-unreachable": "error",
+    "no-duplicate-case": "error",
+    "no-dupe-keys": "error",
+    "no-dupe-args": "error",
+    "no-extra-semi": "warn",
+    "no-func-assign": "error",
+    "no-invalid-regexp": "error",
+    "no-irregular-whitespace": "warn",
+    "no-sparse-arrays": "warn",
+    "use-isnan": "error",
+    "valid-typeof": "error"
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    "*.min.js",
+    "dist/"
+  ]
+}

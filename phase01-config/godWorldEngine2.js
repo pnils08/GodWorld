@@ -1402,7 +1402,7 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // Exports cycle-XX-summary.json, cycle-XX-context.json, and manifest.json
   // to Drive folder "exports/" for OpenClaw consumption.
-  // See: apps-script/utilities/exportCycleArtifacts.js
+  // See: utilities/exportCycleArtifacts.js
   safePhaseCall_(ctx, 'Phase11-ExportArtifacts', function() {
     if (typeof exportCycleArtifacts_ === 'function') {
       exportCycleArtifacts_(ctx, { includePretty: true });

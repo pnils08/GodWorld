@@ -1458,7 +1458,7 @@ Machine-friendly export system that generates prompt-ready artifacts for OpenCla
 
 ### Implementation
 
-The export system is implemented in `apps-script/utilities/exportCycleArtifacts.js` and produces:
+The export system is implemented in `utilities/exportCycleArtifacts.js` and produces:
 
 | File | Purpose | Size |
 |------|---------|------|

@@ -175,16 +175,18 @@ Archetype:Watcher|Mods:curious,steady|reflective:0.73|social:0.45|TopTags:Neighb
 
 **Goal:** Repeated citizen mentions across cycles create story depth.
 
-**Status:** Partial (parsing done, mention tracking needed)
+**Status:** Complete (OpenClaw-side tracking)
 
 | Task | Location | Status |
 |------|----------|--------|
 | Continuity notes parser | phase11-media-intake/continuityNotesParser.js | Done (v1.0) |
 | Arc-to-citizen relationships | continuityNotesParser.js | Done |
 | Citizen context assembly | citizenContextBuilder.js | Done |
-| Mention count tracking | Simulation_Ledger / new field | **TODO** |
-| Media packet continuity hints | buildMediaPacket.js | **TODO** |
-| Streak detection | OpenClaw SQLite | Planned |
+| Export keyCitizens to context pack | utilities/exportCycleArtifacts.js | Done |
+| SQLite mention tracking schema | openclaw-skills/schemas/godworld.sql | Done |
+| Streak detection in sync | openclaw-skills/godworld-sync/index.js:135-155 | Done |
+| Continuity candidates view | openclaw-skills/schemas/godworld.sql:v_continuity_candidates | Done |
+| Media packet continuity hints | buildMediaPacket.js | Optional (OpenClaw handles) |
 
 ### What's Implemented
 
@@ -201,12 +203,25 @@ function buildCitizenContext(identifier, cache)
   - Returns: history[], relationships[], mediaAppearances[], arcExposure[]
 ```
 
-### Remaining Work
+### Implementation Complete
 
-1. **Mention count field** — Add `media_appearances` or `mention_count` to Simulation_Ledger
-2. **Streak tracking** — Count consecutive cycles with mentions
-3. **Media packet flag** — Add `continuingStory` flag to media packet for citizens with 3+ mention streak
-4. **OpenClaw integration** — SQLite tracks `last_mention_cycle`, `mention_streak`
+The mention tracking loop is fully wired:
+
+```
+Engine: populates cycleActiveCitizens array
+    ↓
+Export: includes keyCitizens in context pack
+    ↓
+OpenClaw sync: updates SQLite mention_streak, media_appearances
+    ↓
+Media-generator: queries v_continuity_candidates view
+    ↓
+Output: flags citizens with continuing stories
+```
+
+### Optional Enhancement (Future)
+
+- Add `continuityHints` population to engine-side export (currently empty array placeholder)
 
 ### OpenClaw SQLite Schema (Ready)
 
@@ -301,7 +316,7 @@ Media Room writes story
 
 | Task | Location | Status |
 |------|----------|--------|
-| Add `exportCycleArtifacts_()` | apps-script/utilities/exportCycleArtifacts.js | Done |
+| Add `exportCycleArtifacts_()` | utilities/exportCycleArtifacts.js | Done |
 | Wire into engine as Phase 11 | godWorldEngine2.js:1399-1406 | Done |
 | Document context pack schema | OPENCLAW_INTEGRATION.md | Done |
 | Document manifest schema | OPENCLAW_INTEGRATION.md | Done |
@@ -327,10 +342,10 @@ The context pack derives routing flags without LLM:
 
 ### Next Steps (OpenClaw Side)
 
-- [ ] SQLite schema for citizens/initiatives/cycles
-- [ ] `godworld-sync` skill to consume manifest
-- [ ] `media-generator` skill with Tribune/Echo/Continuity routing
-- [ ] Continuity gate (`confidence >= 0.9 && risk <= 0.4`)
+- [x] SQLite schema for citizens/initiatives/cycles (`openclaw-skills/schemas/godworld.sql`)
+- [x] `godworld-sync` skill to consume manifest (`openclaw-skills/godworld-sync/`)
+- [x] `media-generator` skill with Tribune/Echo/Continuity routing (`openclaw-skills/media-generator/`)
+- [x] Continuity gate (`confidence >= 0.9 && risk <= 0.4`) (in media-generator/index.js:270)
 
 **See:** `docs/OPENCLAW_INTEGRATION.md` for full implementation plan.
 
@@ -394,7 +409,7 @@ The context pack derives routing flags without LLM:
 | 7.1 | Ripple system (initiative → neighborhood effects) | Complete (v1.5) |
 | 7.2 | Neighborhood micro-economies | Complete (v2.3) |
 | 7.3 | Citizen life path evolution (archetypes + traits) | Complete (v1.2) |
-| 7.4 | Continuity threading (mention tracking) | Partial (parser done, tracking TODO) |
+| 7.4 | Continuity threading (mention tracking) | Complete (OpenClaw-side) |
 | 8 | City memory, shock cascades | Future |
 
 ---
@@ -408,9 +423,8 @@ The context pack derives routing flags without LLM:
 - Continuity notes parsing with arc relationships
 
 **Remaining for Tier 7 completion:**
-1. Add `mention_count` / `mention_streak` fields to Simulation_Ledger
-2. Wire mention tracking into media packet generation
-3. Integration testing across 5+ cycles
+1. Integration testing across 5+ cycles
+2. (Optional) Add engine-side continuityHints population
 
 **Ready for Claude integration:**
 - Engine exports context packs (Phase 11)

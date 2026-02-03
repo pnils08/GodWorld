@@ -334,7 +334,7 @@ OpenClaw (formerly Clawdbot/Moltbot) is an open-source, local-first AI agent tha
 
 ### Prerequisites
 
-- **Node.js 18+** — download from nodejs.org
+- **Node.js 22+** — download from nodejs.org (OpenClaw requires Node >=22)
 - **Git** — for cloning repo
 - **API key** from LLM provider (Anthropic for Claude, xAI for Grok)
 - **Optional:** Docker for containerized run (easier for production)
@@ -342,11 +342,11 @@ OpenClaw (formerly Clawdbot/Moltbot) is an open-source, local-first AI agent tha
 ### Installation Steps
 
 ```bash
-# 1. Clone the repo (still named moltbot on GitHub)
-git clone https://github.com/moltbot/moltbot.git
+# 1. Clone the repo
+git clone https://github.com/openclaw/openclaw.git
 
 # 2. Navigate to folder
-cd moltbot
+cd openclaw
 
 # 3. Install dependencies
 npm install
@@ -379,16 +379,61 @@ Message via Discord/Slack: "Summarize today's news" — it should respond autono
 
 ## Custom Skills for Sheets → Pulse Workflow
 
-OpenClaw's strength is extensibility — you add skills/plugins as Node.js modules.
+OpenClaw's strength is extensibility — you add skills as markdown files (`SKILL.md`) with workspace configuration.
 
-### Basic Skill Structure
+### Skill Structure (SKILL.md Format)
 
-Create `skills/sheets-to-pulse.js`:
+Skills in OpenClaw are defined as markdown files with frontmatter. Create `skills/sheets-to-pulse/SKILL.md`:
+
+```markdown
+---
+name: sheetsToPulse
+description: Pull from Google Sheets and generate Cycle Pulse edition
+triggers:
+  - manual
+  - watch:exports/cycle-*-summary.json
+---
+
+## Instructions
+
+When triggered, this skill:
+1. Pulls cycle data from Google Sheets
+2. Loads relevant citizen profiles from memory
+3. Generates Bay Tribune Pulse using Claude
+4. Saves output to media/cycle-XX/
+
+## Context Required
+
+- Google Sheets credentials (via config)
+- Anthropic API key (via config)
+- Citizen memory store (local)
+```
+
+### Workspace Configuration
+
+Register skills in your workspace config (`workspace.json` or `openclaw.config.js`):
+
+```json
+{
+  "name": "godworld",
+  "skills": [
+    "./skills/sheets-to-pulse",
+    "./skills/citizen-sync",
+    "./skills/media-generator"
+  ],
+  "memory": {
+    "path": "./godworld/memory"
+  }
+}
+```
+
+### Skill Implementation (Supporting Module)
+
+Each skill folder can include a supporting JS module for logic:
 
 ```javascript
+// skills/sheets-to-pulse/index.js
 module.exports = {
-  name: 'sheetsToPulse',
-  description: 'Pull from Google Sheets and generate Cycle Pulse edition',
   execute: async (context) => {
     const { message, config } = context;
     // Logic goes here
@@ -396,8 +441,6 @@ module.exports = {
   }
 };
 ```
-
-Add to config's skills array.
 
 ### Step 1: Sheets Integration (Pull Raw Data)
 
@@ -1466,7 +1509,7 @@ const apiKey = process.env.ANTHROPIC_API_KEY;
 
 ```bash
 # Verify Node version
-node --version  # Should be 18+
+node --version  # Should be 22+ (OpenClaw requires >=22)
 
 # Verify API key is set
 echo $ANTHROPIC_API_KEY | head -c 10  # Should show "sk-ant-..."

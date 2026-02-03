@@ -150,15 +150,24 @@ function buildActiveSportsFromOverride_(oaklandState, chicagoState) {
 
 /**
  * ============================================================================
- * applySportsFeedTriggers_ v1.0
+ * applySportsFeedTriggers_ v1.1
  * ============================================================================
  *
- * Reads Sports_Feed sheet for manual trigger columns that seed events.
+ * Reads Sports_Feed sheet and auto-calculates sentiment from team performance.
  *
- * Expected columns (added manually to Sports_Feed):
- *   N: SentimentModifier (-0.10 to +0.10) - affects city sentiment
- *   O: EventTrigger (hot-streak, playoff-push, championship, rivalry, etc.)
- *   P: HomeNeighborhood (Jack London, Downtown, etc.) - game day effects
+ * Auto-sentiment factors (weighted):
+ *   C: Record (win %) - base sentiment
+ *   F: SeasonState - multiplier (playoffs > regular > off-season)
+ *   G: PlayoffRound - bonus for deeper playoff runs
+ *   H: PlayoffStatus - bonus/penalty for clinched/eliminated
+ *   I: Streak - amplifier for hot/cold streaks
+ *
+ * Manual override:
+ *   N: SentimentModifier - if set, overrides auto-calculation
+ *
+ * Trigger columns:
+ *   O: EventTrigger (hot-streak, playoff-push, championship, rivalry)
+ *   P: HomeNeighborhood (game day effects location)
  *
  * Outputs to ctx.summary:
  *   - sportsSentimentBoost: cumulative sentiment modifier
@@ -193,10 +202,14 @@ function applySportsFeedTriggers_(ctx) {
 
   // Find column indices (flexible header matching)
   var teamCol = findColumnIndex_(headers, ['Team', 'team']);
+  var recordCol = findColumnIndex_(headers, ['Record', 'record']);
+  var seasonStateCol = findColumnIndex_(headers, ['SeasonState', 'seasonstate']);
+  var playoffRoundCol = findColumnIndex_(headers, ['PlayoffRound', 'playoffround']);
+  var playoffStatusCol = findColumnIndex_(headers, ['PlayoffStatus', 'playoffstatus']);
+  var streakCol = findColumnIndex_(headers, ['Streak', 'streak']);
   var sentimentCol = findColumnIndex_(headers, ['SentimentModifier', 'Sentiment', 'sentimentmodifier']);
   var triggerCol = findColumnIndex_(headers, ['EventTrigger', 'Trigger', 'eventtrigger']);
   var neighborhoodCol = findColumnIndex_(headers, ['HomeNeighborhood', 'Neighborhood', 'homeneighborhood']);
-  var streakCol = findColumnIndex_(headers, ['Streak', 'streak']);
 
   if (teamCol === -1) {
     Logger.log('applySportsFeedTriggers_: Team column not found');
@@ -213,32 +226,42 @@ function applySportsFeedTriggers_(ctx) {
     var team = (row[teamCol] || '').toString().trim();
     if (!team) continue;
 
-    // Process SentimentModifier
-    if (sentimentCol !== -1) {
-      var sentMod = parseFloat(row[sentimentCol]);
-      if (!isNaN(sentMod) && sentMod !== 0) {
-        totalSentiment += sentMod;
-        Logger.log('Sports sentiment: ' + team + ' contributes ' + sentMod);
-      }
+    // Check for manual override first
+    var manualSentiment = sentimentCol !== -1 ? parseFloat(row[sentimentCol]) : NaN;
+    var teamSentiment = 0;
+
+    if (!isNaN(manualSentiment) && manualSentiment !== 0) {
+      // Use manual override
+      teamSentiment = manualSentiment;
+      Logger.log('Sports sentiment (manual): ' + team + ' = ' + teamSentiment);
+    } else {
+      // Auto-calculate from performance data
+      teamSentiment = calculateTeamSentiment_(row, recordCol, seasonStateCol, playoffRoundCol, playoffStatusCol, streakCol);
+      Logger.log('Sports sentiment (auto): ' + team + ' = ' + teamSentiment.toFixed(3));
     }
 
-    // Process EventTrigger
-    if (triggerCol !== -1) {
-      var trigger = (row[triggerCol] || '').toString().trim().toLowerCase();
-      if (trigger && trigger !== 'none' && trigger !== '') {
-        var neighborhood = neighborhoodCol !== -1
-          ? (row[neighborhoodCol] || '').toString().trim()
-          : 'Downtown';
+    totalSentiment += teamSentiment;
 
-        triggers.push({
-          team: team,
-          trigger: trigger,
-          neighborhood: neighborhood,
-          streak: streakCol !== -1 ? (row[streakCol] || '').toString() : ''
-        });
+    // Auto-generate EventTrigger if not set
+    var trigger = triggerCol !== -1 ? (row[triggerCol] || '').toString().trim().toLowerCase() : '';
+    if (!trigger || trigger === 'none') {
+      trigger = inferEventTrigger_(row, streakCol, playoffStatusCol, seasonStateCol);
+    }
 
-        Logger.log('Sports trigger: ' + team + ' -> ' + trigger + ' @ ' + neighborhood);
-      }
+    if (trigger && trigger !== 'none' && trigger !== '') {
+      var neighborhood = neighborhoodCol !== -1
+        ? (row[neighborhoodCol] || '').toString().trim()
+        : 'Downtown';
+
+      triggers.push({
+        team: team,
+        trigger: trigger,
+        neighborhood: neighborhood,
+        streak: streakCol !== -1 ? (row[streakCol] || '').toString() : '',
+        sentiment: teamSentiment
+      });
+
+      Logger.log('Sports trigger: ' + team + ' -> ' + trigger + ' @ ' + neighborhood);
     }
 
     // Process HomeNeighborhood effects (game day impacts)
@@ -248,10 +271,11 @@ function applySportsFeedTriggers_(ctx) {
         if (!neighborhoodEffects[hood]) {
           neighborhoodEffects[hood] = { traffic: 0, retail: 0, nightlife: 0 };
         }
-        // Game day effects: increased traffic, retail, nightlife in home neighborhood
-        neighborhoodEffects[hood].traffic += 0.15;
-        neighborhoodEffects[hood].retail += 0.10;
-        neighborhoodEffects[hood].nightlife += 0.12;
+        // Scale effects by sentiment (winning teams draw more fans)
+        var fanBoost = 1 + Math.max(0, teamSentiment * 2);
+        neighborhoodEffects[hood].traffic += 0.15 * fanBoost;
+        neighborhoodEffects[hood].retail += 0.10 * fanBoost;
+        neighborhoodEffects[hood].nightlife += 0.12 * fanBoost;
       }
     }
   }
@@ -264,10 +288,143 @@ function applySportsFeedTriggers_(ctx) {
   // Apply sentiment to city mood if significant
   if (totalSentiment !== 0) {
     S.sentiment = (S.sentiment || 0) + totalSentiment;
-    Logger.log('applySportsFeedTriggers_: Total sentiment adjustment: ' + totalSentiment);
+    Logger.log('applySportsFeedTriggers_: Total sentiment adjustment: ' + totalSentiment.toFixed(3));
   }
 
   ctx.summary = S;
+}
+
+/**
+ * Calculate team sentiment from performance data
+ * Returns value between -0.08 and +0.08 per team
+ */
+function calculateTeamSentiment_(row, recordCol, seasonStateCol, playoffRoundCol, playoffStatusCol, streakCol) {
+  var sentiment = 0;
+
+  // 1. Record (win percentage) - base sentiment (-0.03 to +0.03)
+  if (recordCol !== -1) {
+    var record = (row[recordCol] || '').toString();
+    var winPct = parseWinPercentage_(record);
+    if (winPct !== null) {
+      // .500 = neutral, above = positive, below = negative
+      sentiment += (winPct - 0.5) * 0.06;  // Range: -0.03 to +0.03
+    }
+  }
+
+  // 2. SeasonState multiplier
+  var seasonMultiplier = 1.0;
+  if (seasonStateCol !== -1) {
+    var state = (row[seasonStateCol] || '').toString().toLowerCase();
+    if (state.indexOf('playoff') >= 0 || state.indexOf('post') >= 0) {
+      seasonMultiplier = 2.0;  // Playoffs matter more
+    } else if (state.indexOf('championship') >= 0 || state.indexOf('finals') >= 0 || state.indexOf('world') >= 0) {
+      seasonMultiplier = 3.0;  // Championship = maximum impact
+    } else if (state.indexOf('off') >= 0) {
+      seasonMultiplier = 0.3;  // Off-season = minimal impact
+    } else if (state.indexOf('spring') >= 0 || state.indexOf('pre') >= 0) {
+      seasonMultiplier = 0.5;  // Preseason = low impact
+    }
+  }
+
+  // 3. PlayoffRound bonus (+0.01 per round)
+  if (playoffRoundCol !== -1) {
+    var round = (row[playoffRoundCol] || '').toString().toLowerCase();
+    if (round.indexOf('wild') >= 0) sentiment += 0.01;
+    else if (round.indexOf('division') >= 0 || round.indexOf('alds') >= 0 || round.indexOf('nlds') >= 0) sentiment += 0.02;
+    else if (round.indexOf('league') >= 0 || round.indexOf('alcs') >= 0 || round.indexOf('nlcs') >= 0 || round.indexOf('conference') >= 0) sentiment += 0.03;
+    else if (round.indexOf('world') >= 0 || round.indexOf('finals') >= 0 || round.indexOf('championship') >= 0) sentiment += 0.04;
+  }
+
+  // 4. PlayoffStatus bonus/penalty
+  if (playoffStatusCol !== -1) {
+    var status = (row[playoffStatusCol] || '').toString().toLowerCase();
+    if (status.indexOf('clinch') >= 0 || status.indexOf('won') >= 0) sentiment += 0.02;
+    else if (status.indexOf('elimin') >= 0 || status.indexOf('lost') >= 0) sentiment -= 0.02;
+    else if (status.indexOf('contend') >= 0 || status.indexOf('race') >= 0) sentiment += 0.01;
+  }
+
+  // 5. Streak amplifier (-0.02 to +0.02)
+  if (streakCol !== -1) {
+    var streak = (row[streakCol] || '').toString().toUpperCase();
+    var streakBonus = parseStreakBonus_(streak);
+    sentiment += streakBonus;
+  }
+
+  // Apply season multiplier
+  sentiment = sentiment * seasonMultiplier;
+
+  // Clamp to reasonable range
+  return Math.max(-0.08, Math.min(0.08, sentiment));
+}
+
+/**
+ * Parse win percentage from record string (e.g., "85-62" -> 0.578)
+ */
+function parseWinPercentage_(record) {
+  if (!record) return null;
+  var match = record.match(/(\d+)\s*[-–]\s*(\d+)/);
+  if (!match) return null;
+  var wins = parseInt(match[1], 10);
+  var losses = parseInt(match[2], 10);
+  var total = wins + losses;
+  if (total === 0) return null;
+  return wins / total;
+}
+
+/**
+ * Parse streak bonus from streak string (e.g., "W6" -> +0.02, "L3" -> -0.01)
+ */
+function parseStreakBonus_(streak) {
+  if (!streak) return 0;
+  var match = streak.match(/([WL])(\d+)/i);
+  if (!match) return 0;
+  var type = match[1].toUpperCase();
+  var count = parseInt(match[2], 10);
+
+  if (type === 'W') {
+    if (count >= 6) return 0.02;
+    if (count >= 3) return 0.01;
+    return 0.005;
+  } else {
+    if (count >= 6) return -0.02;
+    if (count >= 3) return -0.01;
+    return -0.005;
+  }
+}
+
+/**
+ * Infer event trigger from performance data
+ */
+function inferEventTrigger_(row, streakCol, playoffStatusCol, seasonStateCol) {
+  // Check streak for hot-streak trigger
+  if (streakCol !== -1) {
+    var streak = (row[streakCol] || '').toString().toUpperCase();
+    var match = streak.match(/([WL])(\d+)/i);
+    if (match) {
+      var type = match[1].toUpperCase();
+      var count = parseInt(match[2], 10);
+      if (type === 'W' && count >= 6) return 'hot-streak';
+      if (type === 'L' && count >= 6) return 'cold-streak';
+    }
+  }
+
+  // Check playoff status
+  if (playoffStatusCol !== -1) {
+    var status = (row[playoffStatusCol] || '').toString().toLowerCase();
+    if (status.indexOf('clinch') >= 0) return 'playoff-clinch';
+    if (status.indexOf('elimin') >= 0) return 'eliminated';
+    if (status.indexOf('contend') >= 0) return 'playoff-push';
+  }
+
+  // Check season state
+  if (seasonStateCol !== -1) {
+    var state = (row[seasonStateCol] || '').toString().toLowerCase();
+    if (state.indexOf('championship') >= 0 || state.indexOf('finals') >= 0 || state.indexOf('world') >= 0) {
+      return 'championship';
+    }
+  }
+
+  return '';
 }
 
 /**

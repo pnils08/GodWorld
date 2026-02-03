@@ -1,0 +1,37 @@
+# ============================================================================
+# .claspignore - Files/folders to exclude from clasp push
+# ============================================================================
+# These patterns prevent non-Apps Script files from being uploaded to Google
+
+# Node.js / NPM
+node_modules/**
+package.json
+package-lock.json
+
+# OpenClaw skills (Node.js, not Apps Script)
+openclaw-skills/**
+
+# Git
+.git/**
+.github/**
+.gitignore
+
+# Documentation (not executable)
+docs/**
+*.md
+README.md
+SESSION_CONTEXT.md
+
+# Data files
+ledgers/**
+exports/**
+
+# Config files
+.clasp.json
+.claspignore
+.eslintrc.json
+
+# Misc
+*.log
+*.tmp
+.DS_Store

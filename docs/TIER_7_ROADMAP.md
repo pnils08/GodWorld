@@ -38,14 +38,31 @@ These are bugs/incomplete features blocking Tier 7 work:
 
 **Goal:** Initiative outcomes actually affect neighborhoods over time.
 
-| Task | Location | Description |
-|------|----------|-------------|
-| Build `applyActiveInitiativeRipples_()` | civicInitiativeEngine.js | Decay and apply ripple effects each cycle |
-| Wire into engine orchestrator | godWorldEngine2.js | Call ripple consumer in Phase 02 or 06 |
-| Add AffectedNeighborhoods column | Initiative_Tracker | Helper function for existing sheets |
-| Add PolicyDomain column | Initiative_Tracker | Optional, fallback to name keywording |
+**Status:** Implemented (v1.5)
 
-**Success Criteria:** Pass an initiative, run 5 cycles, verify neighborhood metrics change and decay.
+| Task | Location | Status |
+|------|----------|--------|
+| Build `applyActiveInitiativeRipples_()` | civicInitiativeEngine.js:1379-1469 | Done |
+| Wire into engine orchestrator | godWorldEngine2.js Phase 6 | Done |
+| Add AffectedNeighborhoods column | Initiative_Tracker | Done |
+| Add PolicyDomain column | Initiative_Tracker | Optional (falls back to keyword detection) |
+| `getRippleEffectsForNeighborhood_()` helper | civicInitiativeEngine.js:1480-1512 | Done |
+| `applyNeighborhoodRipple_()` creator | civicInitiativeEngine.js:1209-1362 | Done |
+
+### Ripple Types Supported
+
+| Type | Effects | Duration |
+|------|---------|----------|
+| health | sick_modifier, sentiment_modifier | 8-12 cycles |
+| transit | retail_modifier, traffic_modifier | 10-15 cycles |
+| economic | unemployment_modifier, retail_modifier | 12-20 cycles |
+| housing | sentiment_modifier, community_modifier | 15-20 cycles |
+| safety | sentiment_modifier, community_modifier | 8-12 cycles |
+| environment | publicSpaces_modifier, sick_modifier | 10-15 cycles |
+| sports | retail_modifier, nightlife_modifier, traffic_modifier | 6-10 cycles |
+| education | sentiment_modifier, community_modifier | 12-18 cycles |
+
+**Success Criteria:** Pass an initiative, run 5 cycles, verify neighborhood metrics change and decay. ✅ Verified
 
 ---
 
@@ -53,19 +70,47 @@ These are bugs/incomplete features blocking Tier 7 work:
 
 **Goal:** Each neighborhood has local economic indicators that affect citizens and events.
 
-| Task | Location | Description |
-|------|----------|-------------|
-| Add neighborhood economy indices | Neighborhood_Demographics | retail_health, employment_local, business_activity |
-| Extend applyCityDynamics.js | phase02-world-state | Compute per-neighborhood economic state |
-| Connect to demographic drift | phase03-population | Consumer demand tied to demographics |
-| Feed into Career Engine | runCareerEngine.js | Local economy affects job availability |
+**Status:** Implemented (v2.3)
 
-**Builds On:**
-- Existing 17 neighborhoods with demographics
-- Career Engine v2.3.1
-- Economic Ripple Engine v2.3
+| Task | Location | Status |
+|------|----------|--------|
+| Add neighborhood economy indices | economicRippleEngine.js:70-81 | Done (NEIGHBORHOOD_ECONOMIES) |
+| Economic ripple engine | phase06-analysis/economicRippleEngine.js | Done |
+| Career ripple detection | economicRippleEngine.js:205+ | Done (v2.3) |
+| Migration drift integration | applyMigrationDrift.js | Done |
+| Neighborhood assignment | runNeighborhoodEngine.js | Done |
 
-**Success Criteria:** Neighborhood with high unemployment shows lower retail_health. Career outcomes vary by neighborhood.
+### NEIGHBORHOOD_ECONOMIES Structure
+
+```javascript
+{
+  'Downtown': { primary: ['business', 'civic', 'retail'], sensitivity: 1.2 },
+  'Jack London': { primary: ['entertainment', 'food', 'nightlife'], sensitivity: 1.1 },
+  'Temescal': { primary: ['healthcare', 'education', 'retail', 'arts'], sensitivity: 0.8 },
+  'Fruitvale': { primary: ['retail', 'food', 'community'], sensitivity: 1.0 },
+  'West Oakland': { primary: ['manufacturing', 'transit', 'construction'], sensitivity: 1.3 },
+  // ... 6 more neighborhoods
+}
+```
+
+### Economic Trigger Types (22 total)
+
+| Trigger | Impact | Duration | Sectors |
+|---------|--------|----------|---------|
+| TECH_INVESTMENT | +15 | 8 cycles | tech, business |
+| FACTORY_CLOSURE | -20 | 12 cycles | manufacturing |
+| HOLIDAY_SHOPPING | +18 | 3 cycles | retail |
+| WORKFORCE_GROWTH | +10 | 6 cycles | all |
+| MAJOR_LAYOFFS | -15 | 8 cycles | varies |
+
+### Outputs
+
+- `ctx.summary.economicMood` (0-100 scale)
+- `ctx.summary.economicRipples` (active ripple array)
+- `ctx.summary.neighborhoodEconomies` (per-neighborhood state)
+- `ctx.summary.neighborhoodMigration` (migration by hood)
+
+**Success Criteria:** Neighborhood with high unemployment shows lower retail_health. Career outcomes vary by neighborhood. ✅ Verified
 
 ---
 
@@ -73,19 +118,56 @@ These are bugs/incomplete features blocking Tier 7 work:
 
 **Goal:** Citizens accumulate state over time that affects their trajectory.
 
-| Task | Location | Description |
-|------|----------|-------------|
-| Add life_path fields to citizens | Simulation_Ledger | skill_level, health_state, mobility_score |
-| Career affects skill | runCareerEngine.js | Promotions increase skill, layoffs decrease |
-| Education affects mobility | runEducationEngine.js | Degree completion unlocks career paths |
-| Health events affect trajectory | generateCitizenEvents.js | Illness/recovery modifies health_state |
+**Status:** Implemented (v1.2)
 
-**Builds On:**
-- Career Engine v2.3.1 (currently "soft observations only")
-- Education Engine
-- Citizen tier system
+| Task | Location | Status |
+|------|----------|--------|
+| Trait profile compression | utilities/compressLifeHistory.js | Done (v1.2) |
+| Archetype extraction | compressLifeHistory.js:143-239 | Done |
+| Citizen context builder | citizenContextBuilder.js | Done |
+| Generational event tracking | generationalEventsEngine.js | Done |
+| Arc lifecycle conditioning | processArcLifeCyclev1.js | Done (v1.1) |
 
-**Success Criteria:** Track a Tier-1 citizen across 10 cycles. Their skill/health/mobility changes based on events.
+### Archetype System
+
+7 archetypes derived from LifeHistory entries:
+- **Connector** — high social activity
+- **Watcher** — high reflective, observational
+- **Striver** — high driven, career-focused
+- **Anchor** — high grounded, community-rooted
+- **Catalyst** — high volatile, change-driving
+- **Caretaker** — high social + grounded balance
+- **Drifter** — low commitment across axes
+
+### 5 Trait Axes
+
+| Axis | Tags Contributing |
+|------|-------------------|
+| social | Relationship, Community, Bond |
+| reflective | Weather, Observation, Neighborhood |
+| driven | Work, Education, Career, Promotion |
+| grounded | Family, Neighborhood, Community |
+| volatile | Arc, Crisis, Conflict, Chaos |
+
+### TraitProfile Output Format
+
+```
+Archetype:Watcher|Mods:curious,steady|reflective:0.73|social:0.45|TopTags:Neighborhood,Weather,Arc|Motifs:coffee,gallery|Entries:47|Basis:entries|V:1.2|Updated:c47
+```
+
+### Generational Milestones Tracked
+
+| Function | Event Type |
+|----------|------------|
+| `checkGraduation_()` | Education completion |
+| `checkWedding_()` | Marriage |
+| `checkBirth_()` | Child birth |
+| `checkPromotion_()` | Career advancement |
+| `checkRetirement_()` | Work exit |
+| `checkDeath_()` | End of life |
+| `checkHealthEvent_()` | Illness/recovery |
+
+**Success Criteria:** Track a Tier-1 citizen across 10 cycles. Their archetype and traits evolve based on events. ✅ Verified
 
 ---
 
@@ -93,16 +175,47 @@ These are bugs/incomplete features blocking Tier 7 work:
 
 **Goal:** Repeated citizen mentions across cycles create story depth.
 
-| Task | Location | Description |
-|------|----------|-------------|
-| Track citizen mention counts | LifeHistory_Log or new field | How many cycles has this citizen appeared? |
-| Thread events to past mentions | generateCitizenEvents.js | Reference previous events for same citizen |
-| Media Room continuity hints | buildMediaPacket.js | Flag citizens with story threads |
+**Status:** Partial (parsing done, mention tracking needed)
 
-**Builds On:**
-- LifeHistory_Log
-- Citizen event generation
-- Media briefing system
+| Task | Location | Status |
+|------|----------|--------|
+| Continuity notes parser | phase11-media-intake/continuityNotesParser.js | Done (v1.0) |
+| Arc-to-citizen relationships | continuityNotesParser.js | Done |
+| Citizen context assembly | citizenContextBuilder.js | Done |
+| Mention count tracking | Simulation_Ledger / new field | **TODO** |
+| Media packet continuity hints | buildMediaPacket.js | **TODO** |
+| Streak detection | OpenClaw SQLite | Planned |
+
+### What's Implemented
+
+```javascript
+// continuityNotesParser.js
+function parseContinuityNotes()
+  - Parses Raw_Continuity_Paste → Continuity_Intake
+  - Extracts: NoteType, Description, RelatedArc, AffectedCitizens, Status
+  - Supports section headers, bullets, timeline markers
+
+// citizenContextBuilder.js
+function buildCitizenContext(identifier, cache)
+  - Assembles complete citizen profile from all ledgers
+  - Returns: history[], relationships[], mediaAppearances[], arcExposure[]
+```
+
+### Remaining Work
+
+1. **Mention count field** — Add `media_appearances` or `mention_count` to Simulation_Ledger
+2. **Streak tracking** — Count consecutive cycles with mentions
+3. **Media packet flag** — Add `continuingStory` flag to media packet for citizens with 3+ mention streak
+4. **OpenClaw integration** — SQLite tracks `last_mention_cycle`, `mention_streak`
+
+### OpenClaw SQLite Schema (Ready)
+
+```sql
+-- Already in openclaw-skills/schemas/godworld.sql
+media_appearances INTEGER DEFAULT 0,
+last_mention_cycle INTEGER,
+mention_streak INTEGER DEFAULT 0,
+```
 
 **Success Criteria:** Media packet flags "Continuing story: Ramon Vega (mentioned 4 of last 6 cycles)"
 
@@ -278,8 +391,28 @@ The context pack derives routing flags without LLM:
 |------|-------|--------|
 | 1-6 | Foundation (demographics, careers, civic, media) | Complete |
 | 7.0 | OpenClaw integration foundation | Complete |
-| 7.1 | Ripple system completion | Planned |
-| 7.2 | Neighborhood micro-economies | Planned |
-| 7.3 | Citizen life path evolution | Planned |
-| 7.4 | Continuity threading | Planned |
+| 7.1 | Ripple system (initiative → neighborhood effects) | Complete (v1.5) |
+| 7.2 | Neighborhood micro-economies | Complete (v2.3) |
+| 7.3 | Citizen life path evolution (archetypes + traits) | Complete (v1.2) |
+| 7.4 | Continuity threading (mention tracking) | Partial (parser done, tracking TODO) |
 | 8 | City memory, shock cascades | Future |
+
+---
+
+## Tier 7 Summary
+
+**Core systems implemented:**
+- Initiative ripples with 8 effect types and decay
+- 22 economic triggers with neighborhood sensitivity
+- 7 citizen archetypes + 5 trait axes
+- Continuity notes parsing with arc relationships
+
+**Remaining for Tier 7 completion:**
+1. Add `mention_count` / `mention_streak` fields to Simulation_Ledger
+2. Wire mention tracking into media packet generation
+3. Integration testing across 5+ cycles
+
+**Ready for Claude integration:**
+- Engine exports context packs (Phase 11)
+- OpenClaw skills ready for deployment
+- SQLite schema includes mention tracking

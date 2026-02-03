@@ -517,3 +517,246 @@ print("\n--- Cycle Pulse Generation Complete ---")
 - Integrate Sheets API for live data pull
 - Add file output to media/ folder
 - Schedule with cron for autonomous cycles
+
+---
+
+## Integration with OpenClaw (Full Architecture)
+
+**OpenClaw + AutoGen** work as a powerful combo:
+- **OpenClaw** = persistent memory + always-on trigger layer
+- **AutoGen** = multi-agent creative/newsroom engine
+
+### How They Work Together
+
+```
+[Your Google Sheets / Engine]
+   ↓ (export JSON on cycle advance)
+[OpenClaw - Local Always-On Agent]
+   ├── Citizen Memory (SQLite/JSON) — persistent profiles, events, relationships
+   ├── Cycle State Store — sentiment, migration, shock-flag, last Pulse
+   ├── Watch Trigger — detects new cycle export
+   └── Webhook/Endpoint — receives cycle JSON
+         ↓
+   [Trigger AutoGen Group Chat]
+         ↓
+[AutoGen Multi-Agent Newsroom]
+   ├── Civic Agent (Carmen Delaine style)
+   ├── Investigations Agent (Luis Navarro style)
+   ├── Opinion Agent (Farrah Del Rio / P Slayer style)
+   ├── Historian Agent (Hal Richmond style)
+   ├── Mayor Agent (Santana principled tone)
+   ├── Swing Voter Agents (Vega/Tran debate simulation)
+   └── Editor Agent (Mags Corliss — final format & continuity check)
+         ↓
+[Generated Output]
+   ├── Tribune Pulse .md
+   ├── Echo Op-Ed .md
+   ├── Supplemental (vote coverage, council watch)
+   └── Saved back to OpenClaw memory folder + optional Discord/Slack notification
+```
+
+### What Each Tool Provides
+
+| Capability | OpenClaw | AutoGen |
+|------------|----------|---------|
+| **Persistence** | SQLite/JSON citizen store | None (needs external store) |
+| **Autonomy** | Watch triggers, cron | GroupChat auto-runs |
+| **Distinct Voices** | Single agent | Multi-agent collaboration |
+| **Memory** | Remembers forever | Per-conversation only |
+| **Triggers** | File watch, webhooks | Manual or scheduler |
+| **Best For** | Memory + automation | Creative multi-voice generation |
+
+### OpenClaw: Cycle Watch Skill
+
+Detects new cycle exports and triggers AutoGen:
+
+```javascript
+// skills/cycle-watch.js
+const fs = require('fs').promises;
+const path = require('path');
+const { exec } = require('child_process');
+
+module.exports = {
+  name: 'cycleWatch',
+  description: 'Watch for new cycle exports and trigger AutoGen',
+
+  execute: async (context) => {
+    const exportDir = path.join(__dirname, '../exports');
+    const files = await fs.readdir(exportDir);
+
+    const latest = files
+      .filter(f => f.startsWith('cycle-') && f.endsWith('.json'))
+      .sort()
+      .pop();
+
+    if (!latest) {
+      return 'No cycle export found';
+    }
+
+    const data = JSON.parse(await fs.readFile(path.join(exportDir, latest)));
+
+    // Save to state
+    await context.state.set('currentCycle', data.cycle);
+    await context.state.set('sentiment', data.sentiment);
+    await context.state.set('migration', data.migration);
+
+    // Trigger AutoGen newsroom
+    await context.runSkill('runAutoGenPulse', data);
+
+    return `Processed cycle ${data.cycle} — AutoGen triggered`;
+  }
+};
+```
+
+### OpenClaw: Shell Skill to Call AutoGen
+
+Bridge from Node.js (OpenClaw) to Python (AutoGen):
+
+```javascript
+// skills/run-autogen-pulse.js
+const { exec } = require('child_process');
+const path = require('path');
+
+module.exports = {
+  name: 'runAutoGenPulse',
+  description: 'Run AutoGen media generator script',
+
+  execute: async (context, cycleData) => {
+    const scriptPath = path.join(__dirname, '../autogen/godworld_pulse.py');
+    const dataJson = JSON.stringify(cycleData).replace(/"/g, '\\"');
+
+    return new Promise((resolve, reject) => {
+      exec(
+        `python "${scriptPath}" "${dataJson}"`,
+        { maxBuffer: 1024 * 1024 },
+        (error, stdout, stderr) => {
+          if (error) {
+            console.error('AutoGen error:', stderr);
+            return reject(error);
+          }
+
+          // Save output to memory
+          context.state.set('lastPulse', stdout);
+          context.state.set('lastPulseDate', new Date().toISOString());
+
+          resolve(stdout);
+        }
+      );
+    });
+  }
+};
+```
+
+### AutoGen: Python Script Called by OpenClaw
+
+```python
+# autogen/godworld_pulse.py
+import sys
+import json
+import os
+from autogen import AssistantAgent, GroupChat, GroupChatManager, UserProxyAgent
+
+# Parse cycle data from command line
+cycle_data = json.loads(sys.argv[1]) if len(sys.argv) > 1 else {}
+
+config_list = [
+    {
+        "model": "claude-3-5-sonnet-20240620",
+        "api_key": os.getenv("ANTHROPIC_API_KEY"),
+        "api_type": "anthropic",
+    }
+]
+
+# Tribune Civic Reporter
+civic_reporter = AssistantAgent(
+    name="Carmen_Delaine",
+    system_message="""You are Carmen Delaine, Civic Ledger reporter.
+    Write balanced, factual civic reports. Use professional tone.
+    Include names index at bottom.""",
+    llm_config={"config_list": config_list},
+)
+
+# Echo Opinion Writer
+echo_opinion = AssistantAgent(
+    name="Farrah_Del_Rio",
+    system_message="""You are Farrah Del Rio, Echo opinion writer.
+    Write sharp, skeptical, community-focused opinion pieces.
+    Call out hesitation and power plays.""",
+    llm_config={"config_list": config_list},
+)
+
+# Editor (final formatter)
+editor = AssistantAgent(
+    name="Mags_Corliss",
+    system_message="""You are Mags Corliss, Editor-in-Chief.
+    Review drafts, enforce continuity, format as Cycle Pulse edition.
+    Sections: Lead, Council Watch, Neighborhood Beat, Looking Ahead.""",
+    llm_config={"config_list": config_list},
+)
+
+groupchat = GroupChat(
+    agents=[civic_reporter, echo_opinion, editor],
+    messages=[],
+    max_round=6,
+)
+
+manager = GroupChatManager(
+    groupchat=groupchat,
+    llm_config={"config_list": config_list}
+)
+
+user_proxy = UserProxyAgent(name="CycleData", human_input_mode="NEVER")
+
+# Build prompt from cycle data
+prompt = f"""Generate Cycle {cycle_data.get('cycle', 'N/A')} Pulse edition.
+
+Data:
+- Sentiment: {cycle_data.get('sentiment', 'N/A')}
+- Migration: {cycle_data.get('migration', 'N/A')}
+- Pattern: {cycle_data.get('pattern', 'N/A')}
+- Active Arcs: {cycle_data.get('activeArcs', [])}
+- Key Citizens: {cycle_data.get('keyCitizens', [])}
+
+Carmen: Write civic report.
+Farrah: Write opinion piece (if tension warrants).
+Mags: Format final edition."""
+
+user_proxy.initiate_chat(manager, message=prompt)
+
+# Output goes to stdout, captured by OpenClaw
+```
+
+### Final Recommended Flow
+
+```
+Engine Cycle Ends
+    ↓
+cycleExportAutomation.js exports JSON to exports/
+    ↓
+OpenClaw cycle-watch.js detects new file
+    ↓
+OpenClaw pulls citizen memory from SQLite
+    ↓
+OpenClaw calls run-autogen-pulse.js with context
+    ↓
+AutoGen agents collaborate (Carmen → Farrah → Mags)
+    ↓
+AutoGen returns formatted Pulse to stdout
+    ↓
+OpenClaw saves to media/cycle-XX/tribune-pulse.md
+    ↓
+OpenClaw sends Discord/Slack notification: "Cycle XX Pulse ready for review"
+    ↓
+Human reviews and approves
+```
+
+### Benefits of This Architecture
+
+| Benefit | How |
+|---------|-----|
+| **Persistence** | OpenClaw SQLite stores citizen history forever |
+| **Autonomy** | Watch trigger + cron = no manual prompting |
+| **Voice Differentiation** | AutoGen agents have distinct system messages |
+| **Low Manual Work** | Human only reviews, doesn't generate |
+| **Cost Control** | Haiku for drafts, Sonnet for final only |
+| **Continuity** | Editor agent checks names/timeline before publish |

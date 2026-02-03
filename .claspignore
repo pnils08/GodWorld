@@ -11,6 +11,9 @@ package-lock.json
 # OpenClaw skills (Node.js, not Apps Script)
 openclaw-skills/**
 
+# CLI scripts (Node.js, not Apps Script)
+scripts/**
+
 # Git
 .git/**
 .github/**
@@ -25,11 +28,15 @@ SESSION_CONTEXT.md
 # Data files
 ledgers/**
 exports/**
+godworld/**
+media/**
 
 # Config files
 .clasp.json
 .claspignore
 .eslintrc.json
+.env
+.env.example
 
 # Misc
 *.log

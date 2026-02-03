@@ -1579,6 +1579,38 @@ const prompt = buildPrompt(contextPack);
 - **Idempotent** — skips write if content unchanged (unless `forceWrite`)
 - **Capped history** — manifest keeps max 250 cycles
 
+### Dependency Chain
+
+```
+[Engine Phase 11] ──► [exports/] ──► [godworld-sync] ──► [SQLite]
+       │                  │                                  │
+       └─ exportCycleArtifacts_()                            ▼
+                          │                          [media-generator]
+                          ├── manifest.json                  │
+                          ├── cycle-XX-context.json          ▼
+                          └── cycle-XX-summary.json    [media/cycle-XX/]
+                                                             │
+                                                             ├── tribune-pulse.md
+                                                             ├── echo-oped.md
+                                                             └── council-watch.md
+```
+
+### Execution Flow
+
+1. **Cycle Completes** — Engine runs Phase 1-10, finalizes `ctx.summary`
+2. **Phase 11 Export** — `exportCycleArtifacts_()` writes to `exports/` folder
+3. **Sync Trigger** — `godworld-sync` detects new `manifest.json`, updates SQLite
+4. **Media Generation** — `media-generator` queries SQLite, calls Claude API
+5. **Output** — Markdown files written to `media/cycle-XX/` for review
+
+### Skill Locations
+
+| Skill | Path | Purpose |
+|-------|------|---------|
+| godworld-sync | `openclaw-skills/godworld-sync/` | Manifest → SQLite sync |
+| media-generator | `openclaw-skills/media-generator/` | SQLite → Claude → Markdown |
+| SQLite schema | `openclaw-skills/schemas/godworld.sql` | Database structure |
+
 ---
 
 ## Config & Ops Checklist

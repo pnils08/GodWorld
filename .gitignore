@@ -13,3 +13,6 @@ exports/*.json
 
 # Generated media output
 media/
+
+# MCP server config (contains API keys)
+.mcp.json

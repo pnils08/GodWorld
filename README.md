@@ -23,6 +23,12 @@ GodWorld runs an **11-phase cycle engine** that simulates city life and outputs 
 - **Google Sheets API** - Data persistence across 20+ ledger sheets
 - **CLASP** - Deployment tooling
 
+## Prerequisites
+
+- **Node.js** (v18+) and npm
+- **Google Account** with access to Google Apps Script
+- **Git** for version control
+
 ## Quick Start
 
 ```bash
@@ -48,7 +54,7 @@ Each Claude Code chat session creates a branch with the format `claude/<task>-<s
 
 **Workflow:**
 
-1. **Start from `main`** - New sessions should checkout `main` to get the latest code
+1. **Start from `main`** - New sessions should checkout `main` (the default branch) to get the latest code
 2. **Work on chat branch** - Claude makes changes and pushes to its session branch
 3. **Deploy via clasp** - User deploys to Apps Script from Google Cloud Shell:
    ```bash
@@ -138,14 +144,16 @@ GodWorld/
 
 | Document | Description |
 |----------|-------------|
-| [GODWORLD_REFERENCE.md](docs/GODWORLD_REFERENCE.md) | Complete system reference (356 lines) |
+| [PROJECT_GOALS.md](docs/PROJECT_GOALS.md) | Core automation concept and architecture |
+| [GODWORLD_REFERENCE.md](docs/GODWORLD_REFERENCE.md) | Complete system reference |
 | [V3_ARCHITECTURE.md](docs/V3_ARCHITECTURE.md) | Technical design contract |
 | [ENGINE_ROADMAP.md](docs/ENGINE_ROADMAP.md) | Implementation priorities |
+| [OPENCLAW_INTEGRATION.md](docs/OPENCLAW_INTEGRATION.md) | Persistent memory integration |
 | [SCHEMA_HEADERS.md](schemas/SCHEMA_HEADERS.md) | All ledger schemas |
 
 ## Main Entry Point
 
-The engine orchestrator is at `phase01-config/godWorldEngine2.js` (~1073 lines). Key function:
+The engine orchestrator is at `phase01-config/godWorldEngine2.js`. Key function:
 
 ```javascript
 function runWorldCycle() {

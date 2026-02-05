@@ -137,6 +137,11 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Updated `quickLookup` section with themes and opening styles for all journalists
   - **Full voice profiles**: Anthony, P Slayer, Hal Richmond, Mags Corliss, Luis Navarro, Carmen Delaine, Maria Keen, Kai Marston, Farrah Del Rio, Tanya Cruz, DJ Hartley, Simon Leary, Selena Grant, Talia Finch, Dr. Lila Mezran, Trevor Shimizu, Sgt. Rachel Torres, Sharon Okafor, Mason Ortega, Angela Reyes, Noah Tan, Reed Thompson, MintConditionOakTown, Celeste Tran, Arman Gutiérrez
   - **Committed & pushed**: `29d7a95`
+- **rosterLookup.js Enhancement**: Updated to v2.0 to use enriched persona data
+  - `loadRoster_()` now includes `openingStyle`, `themes`, `samplePhrases`, `background` for all journalists
+  - New functions: `getJournalistOpeningStyle_()`, `getJournalistThemes_()`, `getJournalistSamplePhrases_()`, `getJournalistBackground_()`
+  - Enhanced `getVoiceGuidance_()` returns multi-line guidance with themes and sample phrases
+  - New `getFullVoiceProfile_()` returns complete briefing block for Media Room use
 
 ### 2026-02-02 (Session 2)
 - **civicInitiativeEngine v1.6**: Fixed VoteRequirement date parsing bug (Google Sheets auto-formats "6-3" as June 3rd), faction whitespace trim

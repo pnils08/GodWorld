@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-02 | Engine: v3.1 | Cycle: 78
+Last Updated: 2026-02-05 | Engine: v3.1 | Cycle: 78
 
 ---
 
@@ -100,6 +100,8 @@ GodWorld/
 | docs/AUTOGEN_INTEGRATION.md | AutoGen multi-agent newsroom (future project) |
 | docs/GODWORLD_REFERENCE.md | Full system reference |
 | docs/V3_ARCHITECTURE.md | Technical contract, ctx shape |
+| docs/ARTICLE_INDEX_BY_POPID.md | **NEW** - Search articles by POP-ID (326 citizens, 367 articles) |
+| docs/CITIZENS_BY_ARTICLE.md | **NEW** - Search citizens by article name |
 | schemas/SCHEMA_HEADERS.md | All ledger schemas |
 
 ---
@@ -118,6 +120,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-05
+- **Git cleanup**: Merged `super-memory-chat-3bC53` (.mcp.json gitignore) and `main-branch-work-9q5nB` (README improvements) into main
+- **Google Drive API**: Enabled for service account project `godworld-486407`
+- **POP-ID Article Index**: Created searchable index linking citizens to media articles
+  - Scanned 8 Drive folders: Oakland_Sports_Desk, Bay_Tribune_Oakland, As_Universe, The_Cycle_Pulse, Oakland_Supplementals, Mike_Paulson_Pressers, Chicago_Supplementals, Mara_Vance
+  - Added citizens from sheets: Cultural_Ledger (+25), Chicago_Citizens (+90), Generic_Citizens (+175)
+  - **Result**: 326 citizens, 367 articles, 4,922 references
+  - **Files**: `docs/ARTICLE_INDEX_BY_POPID.md`, `docs/CITIZENS_BY_ARTICLE.md`
+  - **Raw URLs**: `https://raw.githubusercontent.com/pnils08/GodWorld/main/docs/ARTICLE_INDEX_BY_POPID.md`
 
 ### 2026-02-02 (Session 2)
 - **civicInitiativeEngine v1.6**: Fixed VoteRequirement date parsing bug (Google Sheets auto-formats "6-3" as June 3rd), faction whitespace trim
@@ -159,3 +171,4 @@ Before editing, check what reads from and writes to the affected ctx fields.
 2. Tier 7.1 (Ripple System) ready to start - wire ripple consumer into engine
 3. OpenClaw integration ready for setup when desired
 4. AutoGen deferred to future project
+5. **NEW**: POP-ID article index available for media continuity checks - can load into Claude for citizen lookup

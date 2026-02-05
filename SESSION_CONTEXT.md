@@ -130,6 +130,12 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **Result**: 326 citizens, 367 articles, 4,922 references
   - **Files**: `docs/ARTICLE_INDEX_BY_POPID.md`, `docs/CITIZENS_BY_ARTICLE.md`
   - **Raw URLs**: `https://raw.githubusercontent.com/pnils08/GodWorld/main/docs/ARTICLE_INDEX_BY_POPID.md`
+- **Journalist Persona Enrichment**: Updated `schemas/bay_tribune_roster.json` (v1.0 → v2.0)
+  - Analyzed actual articles from Drive for 25 journalists
+  - Added new fields: `writingPatterns`, `signatureThemes`, `samplePhrases`, `frequentSubjects`
+  - Filled null `background` fields with character-appropriate backstories
+  - Updated `quickLookup` section with themes and opening styles for all journalists
+  - **Full voice profiles**: Anthony, P Slayer, Hal Richmond, Mags Corliss, Luis Navarro, Carmen Delaine, Maria Keen, Kai Marston, Farrah Del Rio, Tanya Cruz, DJ Hartley, Simon Leary, Selena Grant, Talia Finch, Dr. Lila Mezran, Trevor Shimizu, Sgt. Rachel Torres, Sharon Okafor, Mason Ortega, Angela Reyes, Noah Tan, Reed Thompson, MintConditionOakTown, Celeste Tran, Arman Gutiérrez
 
 ### 2026-02-02 (Session 2)
 - **civicInitiativeEngine v1.6**: Fixed VoteRequirement date parsing bug (Google Sheets auto-formats "6-3" as June 3rd), faction whitespace trim

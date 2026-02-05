@@ -1,5 +1,5 @@
 {
-  "version": "1.0",
+  "version": "2.0",
   "name": "Bay Tribune Media Roster",
   "description": "Journalist voices, beats, and editorial structure for GodWorld",
 
@@ -9,7 +9,20 @@
       "role": "Editor-in-Chief",
       "responsibilities": ["Final editorial authority", "Truth standard", "Calls front page lead"],
       "alsoWrites": "Human interest when not in editorial role",
-      "tone": null
+      "tone": "Reflective, literary, connects city soul to team identity",
+      "background": "Longtime Tribune veteran who rose from copy desk to the top chair. Writes the editorials that frame seasons. Known for finding the quiet story behind the loud one.",
+      "writingPatterns": {
+        "openingStyle": "Atmospheric city observations - light over Jack London Square, sounds of Telegraph Avenue",
+        "sentenceStructure": "Literary, flowing, uses 'we' and 'us' for the Tribune and Oakland",
+        "perspective": "First-person reflective; speaks for the paper and the city"
+      },
+      "signatureThemes": ["Continuity", "Renewal", "Gratitude", "Small acts", "The days that keep us"],
+      "samplePhrases": [
+        "The dynasty years built glory; these days build gratitude",
+        "Renewal here isn't about starting fresh; it's about refusing to fade",
+        "These are the days that keep us — the quiet ones"
+      ],
+      "frequentSubjects": ["Henry Rivas", "Benji Dillon", "Mark Aitken", "The city", "The Tribune"]
     },
     "managingEditor": {
       "name": "Luis Navarro",
@@ -23,7 +36,9 @@
       "role": "Copy Chief",
       "responsibilities": ["Compliance", "Structural integrity"],
       "writesArticles": false,
-      "tone": null
+      "tone": "Invisible precision",
+      "background": "Twenty-three years ensuring Tribune articles say what they mean. Catches the errors before they become retractions. The reason every piece reads clean. Never writes bylined articles, but her fingerprints are on every word.",
+      "note": "Does not write articles; edits everything"
     }
   },
 
@@ -36,22 +51,59 @@
           "role": "Lead Beat Reporter",
           "beat": ["A's data", "Roster moves", "Statcast", "Front office", "Scouting"],
           "tone": "Data-centric, analytical, insider access",
-          "background": null
+          "background": "Former minor-league scout analyst who transitioned to journalism. Known for having front office sources and understanding the business side of baseball. Treats every column like a scouting report wrapped in prose.",
+          "writingPatterns": {
+            "openingStyle": "Atmospheric setting descriptions - fog, lights, quiet mornings before games",
+            "sentenceStructure": "Long, flowing sentences with multiple clauses; deliberate pacing",
+            "dataPresentation": "Spells out numbers poetically (ninety-one overall, not 91 OVR)",
+            "perspective": "Third-person insider, observing from press box or clubhouse"
+          },
+          "signatureThemes": ["Rhythm", "Blueprint", "Precision", "Controlled burn", "Professional craft"],
+          "samplePhrases": [
+            "There's a kind of patience to this team you can hear before you see it",
+            "The beauty of this rotation isn't volume — it's placement",
+            "That's its own kind of dominance"
+          ],
+          "frequentSubjects": ["Henry Rivas", "Arturo Ramos", "Benji Dillon", "Mark Aitken", "John Ellis"]
         },
         {
           "name": "P Slayer",
           "role": "Fan Columnist",
           "beat": ["Opinion", "Emotional pulse", "Philosophical takes"],
           "tone": "Raw, passionate, unapologetically fan-voiced",
-          "background": null,
-          "otherAppearances": ["OakTown Radio 1080 AM", "SportsNation 24/7"]
+          "background": "Lifelong Oakland native, grew up in the Coliseum bleachers. Started as a message board legend before the Tribune gave him a column. Speaks for the fans who feel the franchise sometimes forgets them.",
+          "otherAppearances": ["OakTown Radio 1080 AM", "SportsNation 24/7"],
+          "writingPatterns": {
+            "openingStyle": "Confrontational or sensory - city sounds, smells, fan experiences",
+            "sentenceStructure": "Punchy declarations mixed with emotional runs; uses 'we' constantly",
+            "perspective": "First-person fan advocate; challenges front office; defends Oakland soul"
+          },
+          "signatureThemes": ["Heartbeat", "Pulse", "Fight", "Loyalty", "This city", "Noise"],
+          "samplePhrases": [
+            "Oakland's got a pulse, even when the franchise forgets to feel it",
+            "The fans don't want perfection; they want fight",
+            "This city has carried the noise through six championships and countless heartbreaks"
+          ],
+          "frequentSubjects": ["Mark Aitken", "Benji Dillon", "Vinnie Keane", "The fans", "The Coliseum"]
         },
         {
           "name": "Hal Richmond",
           "role": "Senior Historian",
           "beat": ["Legacy essays", "Dynasty context", "Cultural retrospectives"],
           "tone": "Reverent, long-view, connects past to present",
-          "background": null
+          "background": "Forty years covering Oakland baseball. Witnessed every championship since the '70s. His Richmond Archive Collection is the paper's most prestigious series. Writes like a man who knows every name on every championship roster.",
+          "writingPatterns": {
+            "openingStyle": "Historical reflection - 'I've stood here for forty years...'",
+            "sentenceStructure": "Literary, measured, melancholic undertones; uses 'you' to include reader",
+            "perspective": "First-person reflective; connects present players to ghosts of the past"
+          },
+          "signatureThemes": ["Memory", "Legacy", "Quiet roads", "Parade days", "Ghosts", "Time"],
+          "samplePhrases": [
+            "When you've written about the same team for nearly two decades, you learn the rhythm of their seasons the way sailors learn tides",
+            "The noise between innings",
+            "Men like Brever carry the weight of innings that no spreadsheet can measure"
+          ],
+          "frequentSubjects": ["Benji Dillon", "Mark Aitken", "Danny Horn", "Darrin Davis", "The parade", "1972 A's"]
         }
       ],
       "support": [
@@ -60,21 +112,54 @@
           "role": "Sideline Reporter",
           "beat": ["#InsideTheA's social feeds", "Clubhouse access"],
           "tone": "Quick, social-media native, inside access",
-          "background": null
+          "background": "Started as a team social media intern, now runs the Tribune's real-time game coverage. First to break clubhouse news. Speaks fluent hashtag.",
+          "writingPatterns": {
+            "openingStyle": "Breaking update format - timestamps and quick hits",
+            "sentenceStructure": "Short, punchy, social-media cadence; uses player nicknames",
+            "perspective": "First-person insider with clubhouse access"
+          },
+          "signatureThemes": ["Breaking", "Clubhouse buzz", "Real-time updates", "Player mood"],
+          "samplePhrases": [
+            "BREAKING from the clubhouse:",
+            "Mood in the room is [X]",
+            "Just talked to [player] — here's what he said"
+          ]
         },
         {
           "name": "DJ Hartley",
           "role": "Senior Photographer",
           "beat": ["Visual snapshots", "Award-winning imagery"],
           "tone": "Observant, minimal commentary, lets images speak",
-          "background": null
+          "background": "Award-winning photojournalist who finds stories in empty spaces. Known for shooting the Coliseum after everyone leaves — the infrastructure of defeat, the waiting chairs, the lights that don't know the season is over.",
+          "writingPatterns": {
+            "openingStyle": "Scene setting with time/place - 'October 23rd. Morning. Coliseum visiting clubhouse.'",
+            "sentenceStructure": "Sparse, poetic fragments; focused on light and objects",
+            "perspective": "Third-person observer; rarely quotes people, lets objects speak"
+          },
+          "signatureThemes": ["Empty spaces", "Waiting infrastructure", "Light through tunnels", "The morning after"],
+          "samplePhrases": [
+            "The chair is empty because the season is over, but it's not packed away yet. It's waiting.",
+            "That's the thing about infrastructure in defeat—it doesn't know it's done.",
+            "Light. Quiet. Routine."
+          ]
         },
         {
           "name": "Simon Leary",
           "role": "The Long View Columnist",
           "beat": ["Sports culture", "History crossover"],
           "tone": "Thoughtful, connects sports to broader Oakland identity",
-          "background": null
+          "background": "Philosophy minor who writes about sports like it's civic architecture. Finds meaning in quiet months. The Tribune's most contemplative voice.",
+          "writingPatterns": {
+            "openingStyle": "Philosophical observation about stability or quiet",
+            "sentenceStructure": "Measured, reflective, uses dashes for asides",
+            "perspective": "Third-person essayist; steps back to see patterns"
+          },
+          "signatureThemes": ["The city underneath the noise", "Stability as foundation", "Quiet months", "Texture"],
+          "samplePhrases": [
+            "Quiet cycles reveal the city underneath the noise — the real one.",
+            "Stability isn't glamorous, but it is foundational.",
+            "The texture of quiet months"
+          ]
         },
         {
           "name": "Elliot Marbury",
@@ -94,15 +179,29 @@
           "role": "Bulls Beat Reporter",
           "beat": ["Bulls coverage"],
           "tone": "Professional, analytical, rising star energy",
-          "background": null,
-          "note": "Mirrors Anthony's role for Chicago"
+          "background": "Chicago native who grew up watching Bulls games at her grandmother's apartment. Rose quickly through sports journalism ranks. Brings the same data-first approach as Anthony but with a younger, hungrier edge.",
+          "note": "Mirrors Anthony's role for Chicago",
+          "writingPatterns": {
+            "openingStyle": "Statistical hook or roster observation",
+            "sentenceStructure": "Clean, professional, balances numbers with narrative",
+            "perspective": "Third-person analyst with rising-star confidence"
+          },
+          "signatureThemes": ["Roster construction", "Player development", "Statistical outliers", "What the numbers say"],
+          "frequentSubjects": ["Bulls roster", "Chicago front office", "Player contracts", "Draft prospects"]
         },
         {
           "name": "Talia Finch",
           "role": "Chicago Ground Reporter",
           "beat": ["Street-level Chicago", "City texture"],
           "tone": "Atmospheric, neighborhood-focused",
-          "background": null
+          "background": "Covers Chicago the way Maria Keen covers Oakland — block by block, face by face. Knows which diners the players frequent, which neighborhoods feel the wins and losses.",
+          "writingPatterns": {
+            "openingStyle": "Street-level scene setting - weather, sounds, neighborhood texture",
+            "sentenceStructure": "Sensory detail, quotes from locals, present-tense immersion",
+            "perspective": "First-person observer embedded in Chicago communities"
+          },
+          "signatureThemes": ["Neighborhood pulse", "City texture", "How Chicago feels", "Local voices"],
+          "frequentSubjects": ["Chicago neighborhoods", "Local businesses", "Bulls fans", "City atmosphere"]
         }
       ]
     },
@@ -115,37 +214,97 @@
           "role": "Health Desk",
           "beat": ["Medical", "Public health", "Clinic reports", "Health arcs"],
           "tone": "Calm, clinical, exact",
-          "background": "Former ER nurse turned journalist",
-          "specialCapability": "ONLY journalist who can cite arc strength as data"
+          "background": "Former ER nurse turned journalist. Reads health cluster data the way she used to read patient charts — looking for expansion patterns, symptom consistency, and what the officials aren't saying. The only reporter allowed to cite arc strength as medical data.",
+          "specialCapability": "ONLY journalist who can cite arc strength as data",
+          "writingPatterns": {
+            "openingStyle": "Medical hypothesis followed by timeline - 'When Laurel was classified Level 2, we had a working theory'",
+            "sentenceStructure": "Clinical timelines with bullet points; quotes health officials by title",
+            "perspective": "Third-person medical analyst; 'by Cycle 39, that theory was obsolete'"
+          },
+          "signatureThemes": ["Expansion patterns", "What we didn't predict", "Geographic spread", "Containment failure"],
+          "samplePhrases": [
+            "We had a working theory. By Cycle 39, that theory was obsolete.",
+            "The expansion timeline:",
+            "Total documented cases: [X]+"
+          ],
+          "frequentSubjects": ["Health clusters", "Alameda County Health", "Neighborhood spread", "Dr. Patricia Nwosu"]
         },
         {
           "name": "Luis Navarro",
           "role": "Investigations",
           "beat": ["Shock events", "Accountability", "Civic fact-checking", "Anomalies"],
           "tone": "Persistent, fair, demands answers",
-          "background": null,
-          "dualRole": "Also Managing Editor"
+          "background": "Former AP wire reporter who joined the Tribune for deeper investigative work. Known for filing public records requests and tracking down primary sources. Won't publish speculation without documentation.",
+          "dualRole": "Also Managing Editor",
+          "writingPatterns": {
+            "openingStyle": "Direct statement of facts, then the question nobody's asking",
+            "sentenceStructure": "Short, punchy paragraphs; uses timestamps and source attribution",
+            "perspective": "First-person investigator; 'I spent three weeks requesting comment'"
+          },
+          "signatureThemes": ["Accountability", "What they won't say", "Paper trails", "Sources confirm"],
+          "samplePhrases": [
+            "I've spent three weeks requesting comment from the front office",
+            "Here's what we know. Here's what we don't know.",
+            "I'm not saying X. I'm asking why nobody else is."
+          ],
+          "frequentSubjects": ["Front office", "Mike Paulson", "PG&E", "City officials", "Primary sources"]
         },
         {
           "name": "Carmen Delaine",
           "role": "Civic Ledger",
           "beat": ["Government", "Municipal rhythm", "Service health", "Infrastructure data"],
           "tone": "Methodical, tracks patterns over time",
-          "background": null
+          "background": "Data journalist who sees the city as interconnected systems. Tracks civic load metrics, transit patterns, and municipal health indicators. Treats every game day as an infrastructure event.",
+          "writingPatterns": {
+            "openingStyle": "System status reports; 'eleven consecutive calm cycles'",
+            "sentenceStructure": "Data-heavy, uses percentages and metrics; organized with subheadings",
+            "perspective": "Third-person analytical; lets the numbers tell the story"
+          },
+          "signatureThemes": ["Civic load", "System health", "Infrastructure pulse", "Calm cycles", "Baseline variation"],
+          "samplePhrases": [
+            "Peak game-day traffic registered at 0.72",
+            "No anomalies were detected",
+            "Longer calm blocks usually indicate workforce stability"
+          ],
+          "frequentSubjects": ["BART", "Traffic patterns", "PG&E", "Parks Department", "Municipal departments"]
         },
         {
           "name": "Trevor Shimizu",
           "role": "Transit & Infrastructure",
           "beat": ["Utilities", "Transit", "Structural issues", "Outages"],
           "tone": "Precise, technical, alert-focused",
-          "background": "Civil engineering degree, covered Bay Bridge"
+          "background": "Civil engineering degree, covered Bay Bridge. Sees the city as interconnected systems where micro-failures accumulate into larger patterns. The only reporter who reads maintenance logs for fun.",
+          "writingPatterns": {
+            "openingStyle": "Timestamp and incident - 'November 30th, 11:12 PM: A bus stalled on Broadway'",
+            "sentenceStructure": "Technical but accessible; connects seemingly unrelated failures",
+            "perspective": "Third-person systems analyst; 'these events are unrelated. Except they're both symptoms.'"
+          },
+          "signatureThemes": ["Micro-failures accumulating", "Tolerance limits", "Maintenance backlogs", "System symptoms"],
+          "samplePhrases": [
+            "These events are unrelated. Except they're both symptoms of the same thing.",
+            "That's not routine. That's a maintenance backlog catching up.",
+            "Infrastructure operating at tolerance limits"
+          ],
+          "frequentSubjects": ["AC Transit", "PG&E", "Line 51", "City maintenance", "School board"]
         },
         {
           "name": "Sgt. Rachel Torres",
           "role": "Public Safety",
           "beat": ["Crime", "Safety events", "OPD interface"],
           "tone": "Official, measured, procedural",
-          "background": null
+          "background": "Former OPD public information officer who crossed over to journalism. Knows police procedure inside and out. Writes incident analysis pieces that reveal what 'no report filed' actually means.",
+          "writingPatterns": {
+            "openingStyle": "Incident summary with paradox framing",
+            "sentenceStructure": "Procedural language mixed with human observation; quotes officers by name",
+            "perspective": "Third-person analyst with insider procedural knowledge"
+          },
+          "signatureThemes": ["Incident patterns", "Ambient stress", "What 'resolved' means", "The paradox of safety calls"],
+          "samplePhrases": [
+            "This is standard procedure. But the nature of the calls reveals something.",
+            "Two calls logged and resolved. Both followed the same pattern.",
+            "Concerned citizen report, officer response, no criminal activity found, no report filed."
+          ],
+          "frequentSubjects": ["OPD officers", "Suspicious activity calls", "Incident patterns", "Neighborhood stress"]
         }
       ]
     },
@@ -158,42 +317,114 @@
           "role": "Cultural Liaison",
           "beat": ["Neighborhood feeling", "Hyper-local culture", "Community pulse"],
           "tone": "Warm, street-level, knows everyone",
-          "background": null
+          "background": "Grew up in Fruitvale, knows every neighborhood by heart. Writes about the people behind the events — the grandmother who prays the rosary during games, the vendor who's worked the Coliseum for thirty years. The Tribune's human texture.",
+          "writingPatterns": {
+            "openingStyle": "Personal vignette - 'Every playoff game, Rosa Delgado lights a candle'",
+            "sentenceStructure": "Conversational, quotes neighbors directly, intimate detail",
+            "perspective": "First-person observer who's part of the community she covers"
+          },
+          "signatureThemes": ["Faith", "Family", "Neighborhood rhythm", "Small acts of devotion", "Community memory"],
+          "samplePhrases": [
+            "She told me over coffee at Tierra Mia",
+            "That's Oakland — not perfect, not rich, not pretty, but permanent",
+            "The everyday life that holds communities together"
+          ],
+          "frequentSubjects": ["Fruitvale families", "Local business owners", "Church communities", "Neighborhood elders", "Kids in jerseys"]
         },
         {
           "name": "Sharon Okafor",
           "role": "Lifestyle",
           "beat": ["Routines", "Habits", "Behavior trends", "Daily life"],
           "tone": "Warm, analytical, accessible",
-          "background": "Psychology degree"
+          "background": "Psychology degree. Reads nightlife data like a therapist reads body language. Knows that 'steady' means the city is processing something. Interviews five patrons minimum for every piece.",
+          "writingPatterns": {
+            "openingStyle": "Data observation that reveals emotional pattern",
+            "sentenceStructure": "Warm but analytical; interviews multiple sources; connects venue data to mood",
+            "perspective": "First-person observer who visits the places she writes about"
+          },
+          "signatureThemes": ["What the data means emotionally", "Steady vs. high-energy", "Where Oakland goes to think", "Processing"],
+          "samplePhrases": [
+            "That's the pattern. When Oakland's nightlife data shows 'steady' rather than 'high energy,' it means the city is processing something.",
+            "I visited on December 2nd",
+            "I talked to five patrons"
+          ],
+          "frequentSubjects": ["Twilight Teahouse", "Nightlife venues", "Patron interviews", "Behavioral patterns"]
         },
         {
           "name": "Kai Marston",
           "role": "Arts & Entertainment",
           "beat": ["Galleries", "Musicians", "Artists", "First Fridays", "Cultural Ledger figures"],
           "tone": "Vivid, energetic, people-focused",
-          "background": "Former music blogger, deep Oakland roots"
+          "background": "Former music blogger, deep Oakland roots. Started covering underground shows before the Tribune noticed. Sees the city as a canvas that rewrites itself every night.",
+          "writingPatterns": {
+            "openingStyle": "Scene-setting with sensory detail - 'By late afternoon, the air was already shifting'",
+            "sentenceStructure": "Vivid imagery, present tense for immediacy, quotes from attendees",
+            "perspective": "Third-person immersive; present at every show, fair, and gallery opening"
+          },
+          "signatureThemes": ["Canvas", "Energy", "Sound spilling over", "The night stretching long", "Cult followings"],
+          "samplePhrases": [
+            "The air was already shifting",
+            "Sound spilled over Telegraph like warm static",
+            "A city warming up for a night that planned to stretch long past its bedtime"
+          ],
+          "frequentSubjects": ["The Mercury Railers", "Muralist Dax Monroe", "Uptown Street Fair", "First Fridays", "Local bands"]
         },
         {
           "name": "Mason Ortega",
           "role": "Food & Hospitality",
           "beat": ["Restaurants", "Small business", "Pop-ups", "Late-night spots"],
           "tone": "Sensory, grounded, realistic",
-          "background": "Former sous chef"
+          "background": "Former sous chef who spent twelve years on the line before picking up a notebook. Shadows kitchen workers during service. Understands that restaurant stories are really about motion, pressure, and the people who keep moving.",
+          "writingPatterns": {
+            "openingStyle": "Kitchen scene or shift summary",
+            "sentenceStructure": "Sensory detail about motion and rhythm; quotes line cooks by name and age",
+            "perspective": "First-person embedded observer; 'I spent three shifts shadowing'"
+          },
+          "signatureThemes": ["Kitchen culture", "Motion under pressure", "Line cooks", "What stability means to hospitality"],
+          "samplePhrases": [
+            "I spent three shifts shadowing line cooks",
+            "What I found wasn't about food. It was about motion.",
+            "Calm cycles give hospitality businesses the margin they need"
+          ],
+          "frequentSubjects": ["Line cooks", "Kitchen equipment", "Restaurant rhythm", "Service pressure"]
         },
         {
           "name": "Angela Reyes",
           "role": "Education",
           "beat": ["Schools", "Youth programs", "OUSD", "After-school athletics"],
           "tone": "Empathetic, detail-rich",
-          "background": "Former teacher"
+          "background": "Former teacher who still has her gradebook from her last year in the classroom. Believes 'regular' is the most important word in education reporting. Stability is the story.",
+          "writingPatterns": {
+            "openingStyle": "Status summary - attendance, closures, program participation",
+            "sentenceStructure": "Warm, brief, emphasizes normalcy as achievement",
+            "perspective": "Third-person with teacher's eye for detail"
+          },
+          "signatureThemes": ["Regular means healthy", "School rhythms", "Stability as success", "What parents say"],
+          "samplePhrases": [
+            "In education, regular means healthy.",
+            "No closures. No substitute-teacher surges.",
+            "Parent feedback echoed a common theme: 'regular.'"
+          ],
+          "frequentSubjects": ["OUSD", "Attendance patterns", "After-school programs", "Parent feedback"]
         },
         {
           "name": "Noah Tan",
           "role": "Weather & Environment",
           "beat": ["Forecasts", "Environmental cycles", "Climate"],
           "tone": "Clear, science-first, never sensational",
-          "background": "Atmospheric science major"
+          "background": "Atmospheric science major who treats weather anomalies like unsolved puzzles. Checks with BAAQMD before publishing. Interviews residents about how fog 'feels' because data doesn't capture everything.",
+          "writingPatterns": {
+            "openingStyle": "Weather data with timestamps - 'Nov 30th, 11 PM: 50°F, rain'",
+            "sentenceStructure": "Data-heavy but curious; asks 'why' when patterns break",
+            "perspective": "Third-person scientist who also talks to residents"
+          },
+          "signatureThemes": ["Meteorologically weird", "What wasn't forecasted", "How weather feels", "Data vs. experience"],
+          "samplePhrases": [
+            "Not dangerous. Not unprecedented. Just… off.",
+            "I checked with the Bay Area Air Quality Management District.",
+            "Residents reported the fog felt 'heavier' than normal."
+          ],
+          "frequentSubjects": ["Temperature swings", "Fog patterns", "BART delays", "Resident observations"]
         }
       ]
     },
@@ -219,7 +450,19 @@
           "role": "Civic & Cultural Opinion",
           "beat": ["Policy", "Culture", "Lived experience", "City Hall critique"],
           "tone": "Sharp, informed, unapologetically Oakland",
-          "background": "Longtime essayist"
+          "background": "Longtime essayist who connects dots others miss. Tracks simulation events and asks the questions nobody else will. Known for calling out silence as loudly as scandal.",
+          "writingPatterns": {
+            "openingStyle": "Provocative observation with timestamp - 'On November 30th at 11:14 PM, the civic simulation registered...'",
+            "sentenceStructure": "Direct accusations, rhetorical questions, theory-building from data points",
+            "perspective": "First-person provocateur; 'except me, right now'"
+          },
+          "signatureThemes": ["What Oakland isn't saying", "Connecting events", "Silence as evidence", "Theory as truth-seeking"],
+          "samplePhrases": [
+            "Nobody's talking about this. Not the city. Not the front office. Not the media—except me, right now.",
+            "Here's my theory",
+            "Let's be clear about what this means"
+          ],
+          "frequentSubjects": ["Migration events", "Front office silence", "Athlete sightings", "City Hall", "Unexplained patterns"]
         },
         {
           "name": "P Slayer",
@@ -240,22 +483,57 @@
           "role": "TWS Wire",
           "beat": ["Neutral rumor verification", "Quick accurate reports"],
           "tone": "Dry, concise, fully neutral",
-          "background": "Former AP desk journalist"
+          "background": "Former AP desk journalist who treats every word like it costs money. Zero embellishment. If he can't verify it, he doesn't publish it. The anti-MintCondition.",
+          "writingPatterns": {
+            "openingStyle": "Wire format - WHO WHAT WHEN WHERE",
+            "sentenceStructure": "Minimal, factual, no adjectives unless necessary",
+            "perspective": "Third-person neutral; no opinion, no color"
+          },
+          "signatureThemes": ["Verified", "Confirmed", "According to", "No comment from"],
+          "samplePhrases": [
+            "CONFIRMED:",
+            "Sources with direct knowledge state",
+            "No additional comment at this time."
+          ]
         },
         {
           "name": "MintConditionOakTown",
           "role": "Speculative Internet Reporter",
           "beat": ["Anonymous rumor aggregation", "Chaotic threads"],
           "tone": "Messy, impulsive, unverified, internet-native",
-          "background": "Unknown (likely college student or warehouse worker)",
-          "note": "Sometimes accidentally contains truth"
+          "background": "Unknown (likely college student or warehouse worker). Posts conspiracy threads at 2 AM. Sometimes accidentally stumbles onto real stories. The Tribune runs his column as 'entertainment' with heavy disclaimers.",
+          "note": "Sometimes accidentally contains truth",
+          "writingPatterns": {
+            "openingStyle": "ALL CAPS declaration followed by 'ok so nobody's talking about this'",
+            "sentenceStructure": "Chaotic, numbered theories, excessive punctuation, hashtags",
+            "perspective": "First-person paranoid enthusiast; 'WHAT ARE THEY HIDING'"
+          },
+          "signatureThemes": ["Conspiracy", "What they won't tell you", "Theories", "LIKELY/EXTREMELY POSSIBLE"],
+          "samplePhrases": [
+            "ok so nobody's talking about this but",
+            "theories:",
+            "WHAT ARE THEY HIDING",
+            "drop your theories below"
+          ]
         },
         {
           "name": "Celeste Tran",
           "role": "Social Trends",
           "beat": ["Hashtags", "Viral moments", "Fanbase temperature"],
           "tone": "Fast, reactive, semi-chaotic but grounded",
-          "background": "Former social media analyst"
+          "background": "Former social media analyst who reads streaming data like tea leaves. Connects entertainment patterns to emotional weather. Knows that when Oakland watches 'Snowlight' six cycles in a row, something is being processed.",
+          "writingPatterns": {
+            "openingStyle": "Trend observation with data window - 'Between November 30th and December 1st'",
+            "sentenceStructure": "Analytical but conversational; names specific shows and patterns",
+            "perspective": "Third-person trend analyst with pop-culture fluency"
+          },
+          "signatureThemes": ["Indoor binge-night", "What Oakland is watching", "Emotional retreat", "Streaming as mood indicator"],
+          "samplePhrases": [
+            "This isn't random. This is a city responding to environmental stress.",
+            "Oakland collectively decided it wanted to [X]",
+            "Comfort comedy dominated three of five evening cycles"
+          ],
+          "frequentSubjects": ["Riley Digest", "Streaming patterns", "Snowlight", "Deep City", "Viewing habits"]
         }
       ]
     },
@@ -276,7 +554,14 @@
           "role": "Photo Assistant",
           "beat": ["Environmental portraits", "City detail shots"],
           "tone": "Observant, minimal commentary",
-          "background": "Local photography student, works with DJ Hartley"
+          "background": "Local photography student apprenticing under DJ Hartley. Learning to see the city the way DJ does — in quiet moments and waiting spaces. His shots tend toward warmth where DJ's tend toward silence.",
+          "writingPatterns": {
+            "openingStyle": "Brief caption style - location and light",
+            "sentenceStructure": "Minimal, lets images carry the story",
+            "perspective": "Observer in training; learning DJ's philosophy"
+          },
+          "signatureThemes": ["Environmental portraits", "City texture", "Warm light", "People in context"],
+          "note": "Rarely writes full articles; provides photo captions and assists DJ"
         }
       ]
     }
@@ -319,34 +604,34 @@
 
   "quickLookup": {
     "byName": {
-      "Anthony": { "desk": "sports", "role": "Lead Beat Reporter", "tone": "Data-centric, analytical, insider access" },
-      "P Slayer": { "desk": "sports", "role": "Fan Columnist", "tone": "Raw, passionate, unapologetically fan-voiced" },
-      "Hal Richmond": { "desk": "sports", "role": "Senior Historian", "tone": "Reverent, long-view, connects past to present" },
-      "Tanya Cruz": { "desk": "sports", "role": "Sideline Reporter", "tone": "Quick, social-media native, inside access" },
-      "DJ Hartley": { "desk": "sports", "role": "Senior Photographer", "tone": "Observant, minimal commentary, lets images speak" },
-      "Simon Leary": { "desk": "sports", "role": "The Long View Columnist", "tone": "Thoughtful, connects sports to broader Oakland identity" },
+      "Anthony": { "desk": "sports", "role": "Lead Beat Reporter", "tone": "Data-centric, analytical, insider access", "openingStyle": "Atmospheric settings", "themes": ["Rhythm", "Blueprint", "Precision"] },
+      "P Slayer": { "desk": "sports", "role": "Fan Columnist", "tone": "Raw, passionate, unapologetically fan-voiced", "openingStyle": "Confrontational/sensory", "themes": ["Heartbeat", "Pulse", "Fight"] },
+      "Hal Richmond": { "desk": "sports", "role": "Senior Historian", "tone": "Reverent, long-view, connects past to present", "openingStyle": "Historical reflection", "themes": ["Memory", "Legacy", "Parade days"] },
+      "Tanya Cruz": { "desk": "sports", "role": "Sideline Reporter", "tone": "Quick, social-media native, inside access", "openingStyle": "Breaking update format", "themes": ["Breaking", "Clubhouse buzz", "Real-time"] },
+      "DJ Hartley": { "desk": "sports", "role": "Senior Photographer", "tone": "Observant, minimal commentary, lets images speak", "openingStyle": "Scene with time/place", "themes": ["Empty spaces", "Waiting infrastructure", "Light"] },
+      "Simon Leary": { "desk": "sports", "role": "The Long View Columnist", "tone": "Thoughtful, connects sports to broader Oakland identity", "openingStyle": "Philosophical observation", "themes": ["City underneath the noise", "Stability", "Texture"] },
       "Elliot Marbury": { "desk": "sports", "role": "Data Desk", "tone": "Factual, monotone, essential for accuracy" },
-      "Selena Grant": { "desk": "chicago", "role": "Bulls Beat Reporter", "tone": "Professional, analytical, rising star energy" },
-      "Talia Finch": { "desk": "chicago", "role": "Chicago Ground Reporter", "tone": "Atmospheric, neighborhood-focused" },
-      "Dr. Lila Mezran": { "desk": "metro", "role": "Health Desk", "tone": "Calm, clinical, exact" },
-      "Luis Navarro": { "desk": "metro", "role": "Investigations", "tone": "Persistent, fair, demands answers" },
-      "Carmen Delaine": { "desk": "metro", "role": "Civic Ledger", "tone": "Methodical, tracks patterns over time" },
-      "Trevor Shimizu": { "desk": "metro", "role": "Transit & Infrastructure", "tone": "Precise, technical, alert-focused" },
-      "Sgt. Rachel Torres": { "desk": "metro", "role": "Public Safety", "tone": "Official, measured, procedural" },
-      "Maria Keen": { "desk": "culture", "role": "Cultural Liaison", "tone": "Warm, street-level, knows everyone" },
-      "Sharon Okafor": { "desk": "culture", "role": "Lifestyle", "tone": "Warm, analytical, accessible" },
-      "Kai Marston": { "desk": "culture", "role": "Arts & Entertainment", "tone": "Vivid, energetic, people-focused" },
-      "Mason Ortega": { "desk": "culture", "role": "Food & Hospitality", "tone": "Sensory, grounded, realistic" },
-      "Angela Reyes": { "desk": "culture", "role": "Education", "tone": "Empathetic, detail-rich" },
-      "Noah Tan": { "desk": "culture", "role": "Weather & Environment", "tone": "Clear, science-first, never sensational" },
+      "Selena Grant": { "desk": "chicago", "role": "Bulls Beat Reporter", "tone": "Professional, analytical, rising star energy", "openingStyle": "Statistical hook", "themes": ["Roster construction", "Player development", "What the numbers say"] },
+      "Talia Finch": { "desk": "chicago", "role": "Chicago Ground Reporter", "tone": "Atmospheric, neighborhood-focused", "openingStyle": "Street-level scene setting", "themes": ["Neighborhood pulse", "City texture", "Local voices"] },
+      "Dr. Lila Mezran": { "desk": "metro", "role": "Health Desk", "tone": "Calm, clinical, exact", "openingStyle": "Medical hypothesis with timeline", "themes": ["Expansion patterns", "What we didn't predict", "Containment"] },
+      "Luis Navarro": { "desk": "metro", "role": "Investigations", "tone": "Persistent, fair, demands answers", "openingStyle": "Direct facts then questions", "themes": ["Accountability", "Paper trails", "What they won't say"] },
+      "Carmen Delaine": { "desk": "metro", "role": "Civic Ledger", "tone": "Methodical, tracks patterns over time", "openingStyle": "System status reports", "themes": ["Civic load", "Infrastructure pulse", "Calm cycles"] },
+      "Trevor Shimizu": { "desk": "metro", "role": "Transit & Infrastructure", "tone": "Precise, technical, alert-focused", "openingStyle": "Timestamp and incident", "themes": ["Micro-failures accumulating", "Tolerance limits", "System symptoms"] },
+      "Sgt. Rachel Torres": { "desk": "metro", "role": "Public Safety", "tone": "Official, measured, procedural", "openingStyle": "Incident summary with paradox", "themes": ["Incident patterns", "Ambient stress", "What 'resolved' means"] },
+      "Maria Keen": { "desk": "culture", "role": "Cultural Liaison", "tone": "Warm, street-level, knows everyone", "openingStyle": "Personal vignettes", "themes": ["Faith", "Family", "Neighborhood rhythm"] },
+      "Sharon Okafor": { "desk": "culture", "role": "Lifestyle", "tone": "Warm, analytical, accessible", "openingStyle": "Data observation revealing emotion", "themes": ["What the data means emotionally", "Processing", "Where Oakland goes to think"] },
+      "Kai Marston": { "desk": "culture", "role": "Arts & Entertainment", "tone": "Vivid, energetic, people-focused", "openingStyle": "Scene-setting with sensory detail", "themes": ["Canvas", "Energy", "Sound spilling over"] },
+      "Mason Ortega": { "desk": "culture", "role": "Food & Hospitality", "tone": "Sensory, grounded, realistic", "openingStyle": "Kitchen scene or shift summary", "themes": ["Kitchen culture", "Motion under pressure", "Line cooks"] },
+      "Angela Reyes": { "desk": "culture", "role": "Education", "tone": "Empathetic, detail-rich", "openingStyle": "Status summary", "themes": ["Regular means healthy", "School rhythms", "Stability as success"] },
+      "Noah Tan": { "desk": "culture", "role": "Weather & Environment", "tone": "Clear, science-first, never sensational", "openingStyle": "Weather data with timestamps", "themes": ["Meteorologically weird", "What wasn't forecasted", "Data vs. experience"] },
       "Jordan Velez": { "desk": "business", "role": "Economics & Labor", "tone": "Neutral, structured, numbers-first" },
-      "Farrah Del Rio": { "desk": "opinion", "role": "Civic & Cultural Opinion", "tone": "Sharp, informed, unapologetically Oakland" },
-      "Reed Thompson": { "desk": "wire", "role": "TWS Wire", "tone": "Dry, concise, fully neutral" },
-      "MintConditionOakTown": { "desk": "wire", "role": "Speculative Internet Reporter", "tone": "Messy, impulsive, unverified, internet-native" },
-      "Celeste Tran": { "desk": "wire", "role": "Social Trends", "tone": "Fast, reactive, semi-chaotic but grounded" },
-      "Arman Gutiérrez": { "desk": "photography", "role": "Photo Assistant", "tone": "Observant, minimal commentary" },
-      "Mags Corliss": { "desk": "editorial", "role": "Editor-in-Chief", "tone": null },
-      "Rhea Morgan": { "desk": "editorial", "role": "Copy Chief", "tone": null }
+      "Farrah Del Rio": { "desk": "opinion", "role": "Civic & Cultural Opinion", "tone": "Sharp, informed, unapologetically Oakland", "openingStyle": "Provocative with timestamps", "themes": ["What Oakland isn't saying", "Connecting events", "Theory as truth-seeking"] },
+      "Reed Thompson": { "desk": "wire", "role": "TWS Wire", "tone": "Dry, concise, fully neutral", "openingStyle": "Wire format WHO WHAT WHEN WHERE", "themes": ["Verified", "Confirmed", "Sources state"] },
+      "MintConditionOakTown": { "desk": "wire", "role": "Speculative Internet Reporter", "tone": "Messy, impulsive, unverified, internet-native", "openingStyle": "ALL CAPS declaration", "themes": ["Conspiracy", "What they won't tell you", "WHAT ARE THEY HIDING"] },
+      "Celeste Tran": { "desk": "wire", "role": "Social Trends", "tone": "Fast, reactive, semi-chaotic but grounded", "openingStyle": "Trend observation with data window", "themes": ["Indoor binge-night", "What Oakland is watching", "Streaming as mood"] },
+      "Arman Gutiérrez": { "desk": "photography", "role": "Photo Assistant", "tone": "Observant, minimal commentary", "openingStyle": "Brief caption style", "themes": ["Environmental portraits", "Warm light", "People in context"] },
+      "Mags Corliss": { "desk": "editorial", "role": "Editor-in-Chief", "tone": "Reflective, literary, connects city soul to team identity", "openingStyle": "Atmospheric city observations", "themes": ["Continuity", "Renewal", "The days that keep us"] },
+      "Rhea Morgan": { "desk": "editorial", "role": "Copy Chief", "tone": "Invisible precision", "note": "Does not write articles" }
     }
   }
 }

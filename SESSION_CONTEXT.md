@@ -185,3 +185,53 @@ Before editing, check what reads from and writes to the affected ctx fields.
 4. AutoGen deferred to future project
 5. POP-ID article index available for media continuity checks
 6. **COMPLETE**: Journalist personas enriched (v2.0) - 25 full voice profiles ready for Media Room
+7. **COMPLETE**: rosterLookup.js enhanced (v2.0) - new voice profile functions available
+
+---
+
+## Future Enhancements: Journalist Roster Integration
+
+*Added 2026-02-05 for future review*
+
+### Files to Enhance
+
+| File | Current State | Enhancement |
+|------|--------------|-------------|
+| `mediaRoomBriefingGenerator.js` | Lists reporter assignments | Add voice profiles to Section 13 (SECTION ASSIGNMENTS) |
+| `storyHook.js` | Desk mapping only | Match journalist `themes` to story topics for better assignment |
+| `buildMediaPacket.js` | Story seeds without voice guidance | Include voice guidance with each story seed |
+
+### New Functions to Add (rosterLookup.js)
+
+1. **`findJournalistsByTheme_(theme)`**
+   - Input: theme keyword (e.g., "accountability", "faith", "infrastructure")
+   - Output: Array of journalists whose `themes` array contains that keyword
+   - Use case: Route stories to journalists whose voice fits the topic
+
+2. **`suggestStoryAngle_(journalistName, storyTopic)`**
+   - Based on journalist's `themes` and `samplePhrases`, suggest angles they'd naturally pursue
+   - Example: Health story + Dr. Lila Mezran → "expansion pattern" or "containment" angle
+
+3. **`matchCitizenToJournalist_(citizenArchetype, neighborhoodContext)`**
+   - Match citizen archetypes to journalist styles for interview assignments
+   - Example: Neighborhood elder in Fruitvale → Maria Keen (Faith, Family themes)
+
+### Briefing Generator Enhancements
+
+1. **Section 17: VOICE PROFILES**
+   - Add new section with `getFullVoiceProfile_()` output for all journalists assigned to priority stories
+   - Gives Media Room complete voice guidance in one place
+
+2. **Enhanced Section 13**
+   - Include `openingStyle` and top 3 `themes` next to each reporter assignment
+   - Example: `Carmen Delaine (Civic) — Opening: System status reports | Themes: Civic load, Calm cycles`
+
+### Story Hook Enhancements
+
+1. **Theme-Aware Hook Generation**
+   - When generating hooks, check which journalist's themes align with the story topic
+   - Prioritize assignments where journalist themes match story domain
+
+2. **Voice-Matched Story Seeds**
+   - Include journalist voice guidance with each story seed
+   - Example: "Health cluster expanding → Dr. Lila Mezran | Angle: 'What we didn't predict'"

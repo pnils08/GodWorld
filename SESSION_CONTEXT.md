@@ -136,6 +136,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Filled null `background` fields with character-appropriate backstories
   - Updated `quickLookup` section with themes and opening styles for all journalists
   - **Full voice profiles**: Anthony, P Slayer, Hal Richmond, Mags Corliss, Luis Navarro, Carmen Delaine, Maria Keen, Kai Marston, Farrah Del Rio, Tanya Cruz, DJ Hartley, Simon Leary, Selena Grant, Talia Finch, Dr. Lila Mezran, Trevor Shimizu, Sgt. Rachel Torres, Sharon Okafor, Mason Ortega, Angela Reyes, Noah Tan, Reed Thompson, MintConditionOakTown, Celeste Tran, Arman Gutiérrez
+  - **Committed & pushed**: `29d7a95`
 
 ### 2026-02-02 (Session 2)
 - **civicInitiativeEngine v1.6**: Fixed VoteRequirement date parsing bug (Google Sheets auto-formats "6-3" as June 3rd), faction whitespace trim
@@ -177,4 +178,5 @@ Before editing, check what reads from and writes to the affected ctx fields.
 2. Tier 7.1 (Ripple System) ready to start - wire ripple consumer into engine
 3. OpenClaw integration ready for setup when desired
 4. AutoGen deferred to future project
-5. **NEW**: POP-ID article index available for media continuity checks - can load into Claude for citizen lookup
+5. POP-ID article index available for media continuity checks
+6. **COMPLETE**: Journalist personas enriched (v2.0) - 25 full voice profiles ready for Media Room

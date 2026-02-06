@@ -2,7 +2,7 @@
 
 A **living city simulation engine** for Oakland, California (with Chicago satellite) that generates emergent narratives about citizens, neighborhoods, politics, economics, weather, sports, and culture.
 
-**Engine Version:** v3.1 | **Architecture:** Google Apps Script + Sheets
+**Engine Version:** v3.1 | **Current Cycle:** 78 | **Architecture:** Google Apps Script + Sheets
 
 ## Overview
 
@@ -13,15 +13,19 @@ GodWorld runs an **11-phase cycle engine** that simulates city life and outputs 
 - **Citizen Simulation** - Tiered citizen system (Tier-1 protected → Tier-4 generic) with relationships, careers, education, and households
 - **World Events** - 5-20 events per cycle across 8 categories (CIVIC, CRIME, HEALTH, ECONOMIC, CULTURE, SPORTS, CHAOS, CELEBRATION)
 - **17 Oakland Neighborhoods** - Each with mood, local events, demographics, and economic indicators
-- **Media Integration** - Story hooks, press drafts, and briefing packets for journalists
+- **Media Integration** - Theme-aware story hooks, voice-matched seeds, press drafts, and briefing packets for 25 journalists with full voice profiles
 - **Video Game Integration** - MLB The Show and NBA 2K athletes tracked as citizens
 - **Chicago Satellite** - Parallel simulation focused on Bulls basketball
+- **OpenClaw Pipeline** - SQLite-backed persistent memory layer for citizen continuity and automated media generation
 
 ## Technology Stack
 
 - **Google Apps Script** (V8 Runtime) - Execution environment
 - **Google Sheets API** - Data persistence across 20+ ledger sheets
 - **CLASP** - Deployment tooling
+- **Node.js** - CLI tools and OpenClaw runtime
+- **SQLite** (better-sqlite3) - OpenClaw persistent memory
+- **Anthropic Claude API** - Media generation (Tribune, Echo, Council Watch)
 
 ## Prerequisites
 
@@ -87,22 +91,25 @@ The simulation runs in Apps Script. The GitHub repo is the source of truth for c
 
 ```
 GodWorld/
-├── phase01-config/       # Cycle initialization, calendar
-├── phase02-world-state/  # Weather, city dynamics, seasons
-├── phase03-population/   # Demographics, migration, crisis
-├── phase04-events/       # World event generation
-├── phase05-citizens/     # 14 sub-engines for citizen simulation
-├── phase06-analysis/     # Event filtering, pattern detection
-├── phase07-evening-media/# Entertainment, media briefings
-├── phase08-v3-chicago/   # Game integration, Chicago satellite
-├── phase09-digest/       # Cycle compression
-├── phase10-persistence/  # Write to ledger sheets
-├── phase11-media-intake/ # Feedback processing
-├── utilities/            # Shared helpers, caching
-├── schemas/              # Data structure documentation
-├── docs/                 # Architecture & reference docs
-├── maintenance/          # Repair utilities
-└── ledgers/              # Archived cycle data
+├── phase01-config/        # Cycle initialization, calendar (2 files)
+├── phase02-world-state/   # Weather, city dynamics, seasons (9 files)
+├── phase03-population/    # Demographics, migration, crisis (9 files)
+├── phase04-events/        # World events, faith events (9 files)
+├── phase05-citizens/      # 14 sub-engines for citizen simulation (24 files)
+├── phase06-analysis/      # Event filtering, economic ripple, patterns (9 files)
+├── phase07-evening-media/ # Story hooks, media briefings, nightlife (22 files)
+├── phase08-v3-chicago/    # Game integration, Chicago satellite (11 files)
+├── phase09-digest/        # Cycle compression (4 files)
+├── phase10-persistence/   # Write to 20+ ledger sheets (8 files)
+├── phase11-media-intake/  # Feedback processing (2 files)
+├── utilities/             # Shared helpers, caching, write-intents (26 files)
+├── schemas/               # JSON roster + SQL schema
+├── docs/                  # Architecture & reference docs (17 files)
+├── openclaw-skills/       # OpenClaw sync + media-generator skills
+├── maintenance/           # Repair utilities for ledgers
+├── ledgers/               # Archived cycle data
+├── exports/               # Cycle context JSON exports
+└── scripts/               # CLI tools
 ```
 
 ## The 11-Phase Engine

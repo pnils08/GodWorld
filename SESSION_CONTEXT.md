@@ -167,6 +167,11 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - `calculateDemographicInfluence_()`: Now checks `demoContext.policyDomain` first, falls back to name keyword detection
   - Domains supported: health, housing, transit, education, economic, safety, environment, sports, senior
   - **PRIORITY_TASKS.md**: PolicyDomain column marked Done (v1.6)
+- **Tech Debt: Null/Undefined Checks** — 22 fixes across top 3 highest-risk files
+  - **civicInitiativeEngine.js** (6 fixes): `ripple.neighborhoods` guard in `getRippleEffectsForNeighborhood_`, swing voter array element checks, unavailable member guards in `isSwingVoterAvailable_` and vote result notes, manual vote `demoContext` missing `policyDomain`
+  - **bondEngine.js** (8 fixes): Element null checks in `ensureBondEngineData_` (citizenEvents, storySeeds, eventArcs, worldEvents), `generateBondSummary_` active bond loops and hottest bonds
+  - **economicRippleEngine.js** (8 fixes): Element null checks in all ripple iteration loops (`processActiveRipples_`, `calculateEconomicMood_`, `createRipple_`, `calculateNeighborhoodEconomies_`, `generateEconomicSummary_`)
+  - **AUDIT_TRACKER.md**: Issue #8 updated to PARTIALLY FIXED
 
 ### 2026-02-06 (Session 2, continued)
 - **Echo removal**: Removed all Echo (Oakland Echo) code and references — Echo was never a real publication (originated from Grok experimentation)
@@ -276,6 +281,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 12. **COMPLETE**: buildMediaPacket.js v2.4 — voice guidance on seeds/hooks
 13. **COMPLETE**: Engine-side continuityHints — computeRecurringCitizens v1.0, wired Phase 6
 14. **COMPLETE**: PolicyDomain column — sheet schema, seed data, demographic influence all wired
+15. **PARTIAL**: Tech debt null checks — 22 fixes in civicInitiativeEngine, bondEngine, economicRippleEngine
 
 ---
 

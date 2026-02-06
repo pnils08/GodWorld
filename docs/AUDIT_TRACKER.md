@@ -89,13 +89,16 @@
 - **Date Fixed:** Jan 2026
 - **Note:** Existing code still uses strings; new code should use SHEET_NAMES
 
-### 8. Missing Null/Undefined Checks - PENDING
-- **Count:** 272 instances of loose conditionals
+### 8. Missing Null/Undefined Checks - PARTIALLY FIXED
+- **Count:** 272 instances of loose conditionals (original audit)
 - **Example:** `if (!arr)` without checking if arr is actually an array
 - **Risk:** Runtime errors on unexpected data
-- **Fix Required:** Add guards throughout
+- **Fix Applied (Feb 2026):** Null guards added to top 3 highest-risk files:
+  - `civicInitiativeEngine.js`: 6 fixes — ripple.neighborhoods guard, swing voter array element checks, unavailable member guards, manual vote policyDomain
+  - `bondEngine.js`: 8 fixes — element null checks in ensureBondEngineData_ (4 source arrays), generateBondSummary_ (3 loops + hottest bonds)
+  - `economicRippleEngine.js`: 8 fixes — element null checks in all ripple iteration loops (processActiveRipples_, calculateEconomicMood_, createRipple_, calculateNeighborhoodEconomies_, generateEconomicSummary_)
 - **Schema Impact:** None
-- **Status:** LOW PRIORITY - address during V3 refactor
+- **Status:** PARTIALLY FIXED — Phase 7 media files (64 remaining) deferred
 
 ### 9. ~~Column Index -1 Bug~~ - FIXED
 - **File:** `phase01-config/godWorldEngine2.js:547-551`

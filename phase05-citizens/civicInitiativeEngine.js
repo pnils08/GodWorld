@@ -797,7 +797,7 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
     outcome: passed ? 'PASSED' : 'FAILED',
     voteCount: voteCount,
     swingVoters: swingVoterResults,
-    swingVoted: swingVoterResults.length > 0 ? swingVoterResults[0].vote : null,  // Legacy field
+    swingVoted: (swingVoterResults.length > 0 && swingVoterResults[0]) ? swingVoterResults[0].vote : null,  // Legacy field
     consequences: '',
     notes: '',
     affectedNeighborhoods: demoContext.affectedNeighborhoods || [],  // v1.3: For ripple effects
@@ -825,10 +825,11 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   }
   
   // Add unavailable member impact
-  if (councilState.unavailable.length > 0) {
+  var unavailList = councilState.unavailable || [];
+  if (unavailList.length > 0) {
     var unavailNames = [];
-    for (var k = 0; k < councilState.unavailable.length; k++) {
-      unavailNames.push(councilState.unavailable[k].name);
+    for (var k = 0; k < unavailList.length; k++) {
+      if (unavailList[k]) unavailNames.push(unavailList[k].name);
     }
     result.notes += ' (' + unavailNames.join(', ') + ' absent)';
   }
@@ -849,15 +850,16 @@ function isSwingVoterAvailable_(voterName, councilState, availableIndMembers) {
   if (!voterName) return false;
   
   // Check if in unavailable list
-  for (var i = 0; i < councilState.unavailable.length; i++) {
-    if (councilState.unavailable[i].name === voterName) {
+  var unavail = councilState.unavailable || [];
+  for (var i = 0; i < unavail.length; i++) {
+    if (unavail[i] && unavail[i].name === voterName) {
       return false;
     }
   }
-  
+
   // Check if in available IND members
   for (var j = 0; j < availableIndMembers.length; j++) {
-    if (availableIndMembers[j].name === voterName) {
+    if (availableIndMembers[j] && availableIndMembers[j].name === voterName) {
       return true;
     }
   }
@@ -1540,8 +1542,9 @@ function getRippleEffectsForNeighborhood_(ctx, neighborhood) {
 
   for (var i = 0; i < activeRipples.length; i++) {
     var ripple = activeRipples[i];
-    var affectsThisHood = ripple.neighborhoods.length === 0 || // City-wide
-                          ripple.neighborhoods.indexOf(neighborhood) >= 0;
+    var hoods = ripple.neighborhoods || [];
+    var affectsThisHood = hoods.length === 0 || // City-wide
+                          hoods.indexOf(neighborhood) >= 0;
 
     if (!affectsThisHood) continue;
 
@@ -1835,11 +1838,14 @@ function manualRunVote(initiativeId) {
     }).filter(function(n) { return n !== ''; });
   }
 
+  var iPolicyDomainManual = idx('PolicyDomain');
+  var policyDomainManual = iPolicyDomainManual >= 0 ? (row[iPolicyDomainManual] || '').toString().trim() : '';
   var demoContext = {
     demographics: neighborhoodDemographics,
     affectedNeighborhoods: affectedNeighborhoods,
     initiativeType: type,
-    initiativeName: name
+    initiativeName: name,
+    policyDomain: policyDomainManual  // v1.6
   };
 
   // v1.5: Use Math.random for manual votes (no ctx.rng available outside cycle)

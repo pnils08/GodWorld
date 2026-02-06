@@ -330,6 +330,7 @@ function ensureBondEngineData_(ctx) {
     var citizenEvents = S.citizenEvents || [];
     for (var i = 0; i < citizenEvents.length; i++) {
       var ev = citizenEvents[i];
+      if (!ev) continue;
       var name = ev.citizenName || ev.citizen || ev.name || '';
       var resolved = resolveCitizenName_(ctx, name);
       if (resolved && ctx.summary.cycleActiveCitizens.indexOf(resolved) === -1) {
@@ -342,6 +343,7 @@ function ensureBondEngineData_(ctx) {
     var storySeeds = S.storySeeds || [];
     for (var j = 0; j < storySeeds.length; j++) {
       var seed = storySeeds[j];
+      if (!seed) continue;
       var seedCitizens = seed.citizens || seed.involvedCitizens || [];
       for (var k = 0; k < seedCitizens.length; k++) {
         var c = seedCitizens[k];
@@ -358,7 +360,7 @@ function ensureBondEngineData_(ctx) {
     var eventArcs = S.eventArcs || ctx.v3Arcs || [];
     for (var a = 0; a < eventArcs.length; a++) {
       var arc = eventArcs[a];
-      if (arc.phase === 'resolved') continue;
+      if (!arc || arc.phase === 'resolved') continue;
       var arcCitizens = arc.involvedCitizens || [];
       for (var b = 0; b < arcCitizens.length; b++) {
         var ac = arcCitizens[b];
@@ -375,6 +377,7 @@ function ensureBondEngineData_(ctx) {
     var worldEvents = S.worldEvents || [];
     for (var w = 0; w < worldEvents.length; w++) {
       var we = worldEvents[w];
+      if (!we) continue;
       var weCitizens = we.citizens || we.involvedCitizens || [];
       for (var x = 0; x < weCitizens.length; x++) {
         var wc = weCitizens[x];
@@ -1129,6 +1132,7 @@ function generateBondSummary_(ctx) {
 
   for (var j = 0; j < activeBonds.length; j++) {
     var b = activeBonds[j];
+    if (!b) continue;
     if (b.bondType === BOND_TYPES.RIVALRY) summary.rivalries++;
     if (b.bondType === BOND_TYPES.ALLIANCE) summary.alliances++;
     if (b.bondType === BOND_TYPES.TENSION) summary.tensions++;
@@ -1142,7 +1146,7 @@ function generateBondSummary_(ctx) {
 
   var hottestBonds = [];
   for (var hb = 0; hb < activeBonds.length; hb++) {
-    if (activeBonds[hb].intensity >= 5) {
+    if (activeBonds[hb] && activeBonds[hb].intensity >= 5) {
       hottestBonds.push(activeBonds[hb]);
     }
   }
@@ -1152,6 +1156,7 @@ function generateBondSummary_(ctx) {
   summary.hottestBonds = [];
   for (var hbi = 0; hbi < hottestBonds.length; hbi++) {
     var hbond = hottestBonds[hbi];
+    if (!hbond) continue;
     summary.hottestBonds.push({
       citizens: hbond.citizenA + ' <-> ' + hbond.citizenB,
       type: hbond.bondType,

@@ -249,7 +249,8 @@ function detectCalendarRipples_(ctx, currentCycle) {
   if (cal.month === 12 && cal.holiday === 'none') {
     var holidayRippleExists = false;
     for (var i = 0; i < S.economicRipples.length; i++) {
-      if (S.economicRipples[i].type === 'HOLIDAY_SHOPPING' && 
+      if (S.economicRipples[i] &&
+          S.economicRipples[i].type === 'HOLIDAY_SHOPPING' &&
           S.economicRipples[i].endCycle > currentCycle) {
         holidayRippleExists = true;
         break;
@@ -416,7 +417,7 @@ function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, ca
   
   var rippleId = triggerType + '_' + cycle;
   for (var i = 0; i < S.economicRipples.length; i++) {
-    if (S.economicRipples[i].id === rippleId) return null;
+    if (S.economicRipples[i] && S.economicRipples[i].id === rippleId) return null;
   }
   
   var neighborhood = eventNeighborhood || '';
@@ -468,7 +469,8 @@ function processActiveRipples_(ctx, currentCycle) {
   
   for (var i = 0; i < S.economicRipples.length; i++) {
     var ripple = S.economicRipples[i];
-    
+    if (!ripple) continue;
+
     if (currentCycle >= ripple.endCycle) {
       continue;
     }
@@ -498,7 +500,7 @@ function calculateEconomicMood_(ctx) {
   var rippleEffect = 0;
   
   for (var i = 0; i < S.economicRipples.length; i++) {
-    rippleEffect += S.economicRipples[i].currentStrength;
+    if (S.economicRipples[i]) rippleEffect += S.economicRipples[i].currentStrength;
   }
   
   var newMood = baseMood + (rippleEffect * 0.1);
@@ -662,12 +664,13 @@ function calculateNeighborhoodEconomies_(ctx) {
     
     for (var i = 0; i < ripples.length; i++) {
       var ripple = ripples[i];
+      if (!ripple) continue;
       var affectsAll = ripple.neighborhoods && ripple.neighborhoods.indexOf('all') >= 0;
       var affectsThis = ripple.neighborhoods && ripple.neighborhoods.indexOf(nh) >= 0;
       var isPrimary = ripple.primaryNeighborhood === nh;
-      
+
       if (affectsAll || affectsThis) {
-        var effect = ripple.currentStrength * profile.sensitivity;
+        var effect = (ripple.currentStrength || 0) * (profile.sensitivity || 1);
         if (isPrimary) effect *= 1.5;
         localMood += effect * 0.1;
         localRipples++;
@@ -726,7 +729,7 @@ function generateEconomicSummary_(ctx) {
   var maxStrength = 0;
   
   for (var i = 0; i < ripples.length; i++) {
-    if (Math.abs(ripples[i].currentStrength) > Math.abs(maxStrength)) {
+    if (ripples[i] && Math.abs(ripples[i].currentStrength) > Math.abs(maxStrength)) {
       maxStrength = ripples[i].currentStrength;
       strongestRipple = ripples[i];
     }
@@ -781,9 +784,10 @@ function generateEconomicSummary_(ctx) {
   var migrationCount = 0;
   
   for (var j = 0; j < ripples.length; j++) {
+    if (!ripples[j]) continue;
     if (ripples[j].impact > 0) positiveCount++;
     if (ripples[j].impact < 0) negativeCount++;
-    if (ripples[j].type.indexOf('POPULATION') >= 0 || ripples[j].type.indexOf('WORKFORCE') >= 0) {
+    if (ripples[j].type && (ripples[j].type.indexOf('POPULATION') >= 0 || ripples[j].type.indexOf('WORKFORCE') >= 0)) {
       migrationCount++;
     }
   }

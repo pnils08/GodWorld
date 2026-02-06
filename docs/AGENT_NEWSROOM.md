@@ -57,18 +57,25 @@ DESK CONVERSATIONS (parallel subagents)
     |
 Each desk outputs a draft section with bylines
     |
-EDITORIAL MEETING (sequential)
+STEP A — COMPILE (sequential)
   Mags Corliss (Editor):
     - Receives all desk drafts
     - Picks lead story
     - Cuts what doesn't serve readers
     - Assigns follow-up angles for next cycle
     - Writes editorial if warranted
-  Rhea Morgan (Copy Chief):
-    - Citizen name spelling vs. SQLite roster
-    - Timeline consistency
-    - Arc continuity
-    - Flags issues back to Mags
+    |
+STEP B — VERIFY (Rhea Morgan, Verification Agent)
+  Input: compiled edition + canonical source data
+  Checks:
+    1. Every name vs. ARTICLE_INDEX_BY_POPID.md + citizen ledgers
+    2. Every vote vs. Initiative_Tracker
+    3. Every backstory vs. citizen records
+    4. No engine metrics in article text
+    5. Reporter names vs. bay_tribune_roster.json
+  Output: numbered error list or CLEAN
+    |
+  Fix mismatches → Final Edition
     |
 FINAL OUTPUT: Bay Tribune Pulse (markdown)
   Saved to: media/cycle-XX/tribune-pulse.md
@@ -83,7 +90,7 @@ FINAL OUTPUT: Bay Tribune Pulse (markdown)
 | Agent | Role | Runs Every Cycle |
 |-------|------|------------------|
 | Mags Corliss | Editor-in-Chief | Yes - synthesizes all desk output |
-| Rhea Morgan | Copy Chief | Yes - continuity/fact check (does not write articles) |
+| Rhea Morgan | Copy Chief / Verification Agent | Yes - canon cross-reference, vote audit, engine-metric sweep (does not write articles) |
 
 ### Sports Desk
 
@@ -189,8 +196,13 @@ ${journalist.samplePhrases?.map(p => `- "${p}"`).join('\n')}
 
 Frequent Subjects: ${journalist.frequentSubjects?.join(', ')}
 
+CANON REFERENCE:
+${canonReference}
+
 RULES:
 - Write ONLY from the data provided. Do not invent events or citizens.
+- Every proper noun must match the CANON REFERENCE or citizen ledger files exactly. If a person is not in the reference data, do not include them. Never invent names, backstories, or vote positions.
+- Never cite engine metrics in article text (tension scores, severity levels, event counts, sentiment values). Describe what people experience, not what the engine measures.
 - Stay in your voice. Your tone and style are non-negotiable.
 - Reference citizens by name when relevant.
 - Flag anything unusual for Luis (investigations) to follow up.

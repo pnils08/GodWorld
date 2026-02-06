@@ -55,12 +55,23 @@ GodWorld Engine → Export Script → Google Drive
                               Extracts current cycle only
                               Deduplicates continuity
                               Filters low-priority seeds
+                              Extracts CANON REFERENCE (Section 14)
                                         ↓
                               Single HANDOFF document (~30KB target)
                               + Citizen Ledgers (Project upload)
                               + Previous Edition (for tone/continuity)
                                         ↓
-                              Media Room writes The Cycle Pulse
+                              Desk Agents write articles (parallel)
+                                        ↓
+                              STEP A: Compile — stitch agent outputs into edition
+                                        ↓
+                              STEP B: Verify — cross-reference every proper noun,
+                              vote, and factual claim against canon sources
+                              (ARTICLE_INDEX_BY_POPID.md, Civic_Office_Ledger,
+                              Initiative_Tracker, bay_tribune_roster.json,
+                              citizen ledger files)
+                                        ↓
+                              Fix mismatches → Final Edition
 ```
 
 ### What the Media Room receives
@@ -130,6 +141,16 @@ Contains these sections in order:
     - Storylines Carried Forward format
     - Citizen Usage Log format
     - Continuity Notes format
+
+14. CANON REFERENCE (auto-extracted from existing docs)
+    - A's roster names (from ARTICLE_INDEX_BY_POPID.md)
+    - Bulls roster names (from ARTICLE_INDEX_BY_POPID.md)
+    - Council composition with districts, factions, status (from Civic_Office_Ledger)
+    - Vote positions as hard constraints (from Initiative_Tracker)
+    - Reporter names (from bay_tribune_roster.json quickLookup)
+    - Key recurring citizens featured this cycle (from citizen ledger files)
+    - Format: flat scannable list, exact names only
+    - Rule: "Every name in the edition must match this reference or the citizen ledgers. Do not invent names, backstories, or vote positions."
 ```
 
 **Document 2: CITIZEN LEDGERS** (upload to Project — unchanged)
@@ -194,6 +215,57 @@ Chicago scenes use Chicago details — the lakefront, Boystown, dim sum in China
 ### 8. Clean returns for engine intake
 Article Table, Storylines Updated, Citizen Usage Log, Continuity Notes — all structured for engine processing.
 
+### 9. No engine metrics in article text
+Articles are written for readers, not engine operators. Never include:
+- Tension scores (e.g., "tension to 6.32")
+- Severity levels (e.g., "high-severity civic event", "impact level of 6")
+- System event counts (e.g., "22 faith-institution events")
+- Sentiment values (e.g., "sentiment dropped to 0.54")
+- Engine terminology (e.g., "single-arc reading", "civic load reading")
+
+Engine data belongs in the handoff and in engine returns. A journalist would never cite a "tension score" — they describe what people experience.
+
+---
+
+## Editorial Verification (Compile → Verify)
+
+Edition 78 shipped with 15+ canon errors because the editorial step compiled agent outputs without checking them against source data. The fix: split editorial into two explicit steps.
+
+### Step A: Compile
+
+Stitch desk agent outputs into edition format. Add engine returns sections (Article Table, Storylines, Citizen Usage Log, Continuity Notes). No verification at this stage.
+
+### Step B: Verify (Verification Agent)
+
+Launch a dedicated verification pass. This is a separate agent or prompt whose only job is auditing — it does not write or rewrite articles.
+
+**Input:**
+- Compiled edition text
+- `docs/ARTICLE_INDEX_BY_POPID.md` (citizen name index — 176+ citizens with POP-IDs)
+- `docs/CITIZENS_BY_ARTICLE.md` (article-to-citizen cross-reference)
+- `schemas/bay_tribune_roster.json` (reporter names and roles)
+- Civic_Office_Ledger data (council members, factions, districts)
+- Initiative_Tracker data (vote positions — YES/NO per member)
+- Citizen ledger files (ages, neighborhoods, occupations, backstories)
+
+**Prompt:**
+> "You are a fact-checker. Cross-reference every proper noun in this edition against the canonical source data. Check:
+> 1. Every citizen/player name is spelled exactly as in the source data
+> 2. Every vote position matches the Initiative Tracker
+> 3. Every backstory detail (hire date, contract, origin) matches citizen records
+> 4. No engine metrics appear in article text (tension scores, severity levels, event counts, sentiment values)
+> 5. Reporter names match bay_tribune_roster.json exactly
+>
+> Return ONLY a numbered list of errors found, with the wrong text and the correct text from source data. If no errors found, say 'CLEAN'."
+
+**Output:** Numbered error list or CLEAN. If errors found, apply fixes before finalizing.
+
+### Why This Exists
+
+The desk agents will hallucinate plausible-sounding details when facts aren't in their input. That's expected — they're writers, not databases. The canon reference (Section 14) reduces this by giving them exact names upfront. But some errors will always slip through. The verification step catches them before the edition ships.
+
+The canonical reference docs (`ARTICLE_INDEX_BY_POPID.md`, `CITIZENS_BY_ARTICLE.md`, `bay_tribune_roster.json`) were built specifically for this purpose. Use them.
+
 ---
 
 ## Handoff Compiler (Future Script)
@@ -207,8 +279,14 @@ A Google Apps Script function `compileHandoff(cycleNumber)` that:
 5. Reads Story_Seed_Deck → filters to current cycle, Priority >= 2
 6. Reads World_Population → gets current cycle metrics
 7. Deduplicates continuity data (keeps latest version of each block)
-8. Assembles into the structured format above
-9. Writes to a single "Handoff_C{XX}" sheet or exports to Drive
+8. **Extracts CANON REFERENCE (Section 14):**
+   - Reads Civic_Office_Ledger → council names, districts, factions, status
+   - Reads Initiative_Tracker → vote positions (YES/NO per member) for active initiatives
+   - Reads Simulation_Ledger → A's roster names, Bulls roster names (filter by role type)
+   - Reads bay_tribune_roster.json quickLookup → reporter names
+   - Formats as flat scannable list with rule: "Do not invent names"
+9. Assembles into the structured format above
+10. Writes to a single "Handoff_C{XX}" sheet or exports to Drive
 
 **Estimated token reduction**: ~310KB raw → ~30KB compiled (90% reduction)
 

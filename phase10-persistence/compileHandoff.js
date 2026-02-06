@@ -33,14 +33,21 @@
 // ════════════════════════════════════════════════════════════════════════════
 
 /**
- * Menu wrapper — auto-detects current cycle and compiles handoff.
+ * Menu wrapper — prompts user for cycle number and compiles handoff.
  */
 function compileHandoffFromMenu() {
-  var ss = openSimSpreadsheet_();
-  var cycle = getCurrentCycle_(ss);
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.prompt(
+    'Compile Handoff',
+    'Enter cycle number:',
+    ui.ButtonSet.OK_CANCEL
+  );
 
-  if (!cycle || cycle === 0) {
-    showAlert_('Handoff Error', 'Could not determine current cycle.');
+  if (response.getSelectedButton() !== ui.Button.OK) return;
+
+  var cycle = Number(response.getResponseText());
+  if (!cycle || cycle <= 0) {
+    showAlert_('Handoff Error', 'Invalid cycle number: ' + response.getResponseText());
     return;
   }
 
@@ -55,19 +62,14 @@ function compileHandoffFromMenu() {
  */
 function compileHandoff(cycleNumber) {
   var startTime = new Date();
-  var ss = openSimSpreadsheet_();
 
-  // Auto-detect cycle when called without argument (e.g., from Apps Script Run button)
-  if (cycleNumber === undefined || cycleNumber === null || cycleNumber === 0) {
-    cycleNumber = getCurrentCycle_(ss);
-    if (!cycleNumber || cycleNumber === 0) {
-      showAlert_('Handoff Error', 'Could not determine current cycle.');
-      return;
-    }
-    Logger.log('compileHandoff: Auto-detected cycle ' + cycleNumber);
+  if (cycleNumber === undefined || cycleNumber === null || cycleNumber <= 0) {
+    showAlert_('Handoff Error', 'No cycle number provided. Use the menu: Compile Handoff.');
+    return;
   }
 
   Logger.log('compileHandoff v1.0: Starting for cycle ' + cycleNumber);
+  var ss = openSimSpreadsheet_();
 
   try {
     var cache = createSheetCache_(ss);
@@ -558,7 +560,7 @@ function loadPlayerRosters_(cache) {
       if (origin.indexOf('mlb') >= 0 || origin.indexOf("a's") >= 0 ||
           origin.indexOf('oakland') >= 0 || roleType.indexOf('mlb') >= 0 ||
           roleType.indexOf('baseball') >= 0) {
-        if (tier <= 2 && !seenAs[name]) {
+        if (tier <= 1 && !seenAs[name]) {
           seenAs[name] = true;
           asRoster.push({ name: name, tier: String(tier), popId: popId });
         }

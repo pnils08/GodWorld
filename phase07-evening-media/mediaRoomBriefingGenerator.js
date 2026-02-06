@@ -537,9 +537,24 @@ function generateMediaBriefing_(ctx) {
   }
   
   // ═══════════════════════════════════════════════════════════════════════════
+  // SECTION 9B: PREVIOUS COVERAGE (from Press_Drafts)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  var prevCoverage = getPreviousCoverage_(ss, cycle);
+  if (prevCoverage.length > 0) {
+    briefing.push('## 9B. PREVIOUS COVERAGE (Cycle ' + (cycle - 1) + ')');
+    briefing.push('');
+    for (var pc = 0; pc < prevCoverage.length; pc++) {
+      var cov = prevCoverage[pc];
+      briefing.push('- [' + cov.storyType + '] ' + cov.headline + ' — ' + cov.reporter);
+    }
+    briefing.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // SECTION 10: CULTURAL ENTITIES
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   briefing.push('## 10. CULTURAL ENTITIES');
   briefing.push('');
   
@@ -1775,6 +1790,44 @@ function getContinuityFromLoop_(ss, cycle) {
     }
   }
   
+  return result;
+}
+
+
+/**
+ * Read Press_Drafts for previous cycle's coverage.
+ * Returns array of {reporter, storyType, headline}.
+ */
+function getPreviousCoverage_(ss, cycle) {
+  var result = [];
+  var prevCycle = cycle - 1;
+  if (prevCycle < 1) return result;
+
+  var sheet = ss.getSheetByName('Press_Drafts');
+  if (!sheet) return result;
+
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) return result;
+
+  var headers = data[0];
+  var cycleCol = headers.indexOf('Cycle');
+  var reporterCol = headers.indexOf('Reporter');
+  var typeCol = headers.indexOf('StoryType');
+  var headlineCol = headers.indexOf('SummaryPrompt');
+  if (headlineCol < 0) headlineCol = headers.indexOf('Headline');
+
+  if (cycleCol < 0 || reporterCol < 0) return result;
+
+  for (var i = 1; i < data.length; i++) {
+    if (Number(data[i][cycleCol]) === prevCycle) {
+      result.push({
+        reporter: data[i][reporterCol] || '',
+        storyType: typeCol >= 0 ? (data[i][typeCol] || '') : '',
+        headline: headlineCol >= 0 ? (data[i][headlineCol] || '') : ''
+      });
+    }
+  }
+
   return result;
 }
 

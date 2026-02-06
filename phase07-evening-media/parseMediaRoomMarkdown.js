@@ -639,23 +639,75 @@ function parseContinuityNotes_(ss, section) {
   }
   
   // Second pass: parse content
+  var tableRows = [];  // Accumulate pipe table rows
+  var tableHeader = '';  // Track which subsection owns the table
+
   for (var j = 0; j < lines.length; j++) {
     var line = lines[j].trim();
-    
+
     // Skip empty, decorators, ARC: line
     if (!line || line.match(/^[#=]{3,}$/) || line.match(/^ARC:/i)) continue;
-    
+
     // Detect subsection headers
     if (isSubsectionHeader_(line)) {
+      // Flush any accumulated table rows as a compound note
+      if (tableRows.length > 0) {
+        notes.push({
+          noteType: 'introduced',
+          description: '[' + (tableHeader || currentSubsection) + '] ' + tableRows.join(' | '),
+          relatedArc: relatedArc || '',
+          affectedCitizens: extractCitizenNames_(tableRows.join(' '))
+        });
+        tableRows = [];
+      }
       currentSubsection = cleanSubsectionName_(line);
+      tableHeader = currentSubsection;
       continue;
     }
-    
+
+    // Handle pipe table rows
+    if (line.charAt(0) === '|') {
+      // Skip separator rows (|---|---|)
+      if (line.match(/^\|[\s\-|]+\|$/)) continue;
+      // Capture data rows: extract cell values
+      var cells = line.split('|');
+      var cellValues = [];
+      for (var c = 1; c < cells.length - 1; c++) {
+        var val = cells[c].trim();
+        if (val) cellValues.push(val);
+      }
+      if (cellValues.length > 0) {
+        tableRows.push(cellValues.join(', '));
+      }
+      continue;
+    }
+
+    // Flush any accumulated table rows before processing a non-table line
+    if (tableRows.length > 0) {
+      notes.push({
+        noteType: 'introduced',
+        description: '[' + (tableHeader || currentSubsection) + '] ' + tableRows.join(' | '),
+        relatedArc: relatedArc || '',
+        affectedCitizens: extractCitizenNames_(tableRows.join(' '))
+      });
+      tableRows = [];
+    }
+
     // Parse content line
     var note = parseNoteLine_(line, currentSubsection, relatedArc);
     if (note) {
       notes.push(note);
     }
+  }
+
+  // Flush any remaining table rows
+  if (tableRows.length > 0) {
+    notes.push({
+      noteType: 'introduced',
+      description: '[' + (tableHeader || currentSubsection) + '] ' + tableRows.join(' | '),
+      relatedArc: relatedArc || '',
+      affectedCitizens: extractCitizenNames_(tableRows.join(' '))
+    });
   }
   
   if (notes.length === 0) return 0;
@@ -683,14 +735,17 @@ function parseContinuityNotes_(ss, section) {
 
 
 function isSubsectionHeader_(line) {
-  // ALL CAPS headers
-  if (line === line.toUpperCase() && line.length > 3 && line.length < 60) {
-    if (!line.match(/^[A-Z\s]+:\s+\S/)) {  // Not "KEY: value" format
+  // Strip bold markdown (**HEADER** → HEADER)
+  var clean = line.replace(/\*\*/g, '').trim();
+
+  // ALL CAPS headers (with optional trailing colon/parens)
+  if (clean === clean.toUpperCase() && clean.length > 3 && clean.length < 60) {
+    if (!clean.match(/^[A-Z\s]+:\s+\S/)) {  // Not "KEY: value" format
       return true;
     }
   }
   // "Header:" format (ends with colon, no value)
-  if (line.match(/^[A-Za-z\s]+:$/) && line.length < 40) {
+  if (clean.match(/^[A-Za-z\s']+:$/) && clean.length < 40) {
     return true;
   }
   return false;
@@ -698,7 +753,8 @@ function isSubsectionHeader_(line) {
 
 
 function cleanSubsectionName_(line) {
-  return line.replace(/[:#]+$/, '').trim();
+  // Strip bold markdown and trailing punctuation
+  return line.replace(/\*\*/g, '').replace(/[:#]+$/, '').trim();
 }
 
 

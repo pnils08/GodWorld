@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * MEDIA ROOM INTAKE v2.2
+ * MEDIA ROOM INTAKE v2.3
  * ============================================================================
  *
  * Aligned with MEDIA_ROOM_INSTRUCTIONS v2.0 and GodWorld Calendar v1.0
+ *
+ * v2.3 Enhancements:
+ * - processMediaIntake_(ctx): Engine-callable entry point for Phase 11
+ * - processAllIntakeSheets_(): Shared processing logic
+ * - Consolidated: processMediaIntake.js (v2.1) deleted — this is the single processor
  *
  * v2.2 Enhancements:
  * - Raw citizen usage log parsing (paste full log, auto-route)
@@ -36,32 +41,46 @@
  */
 
 // ════════════════════════════════════════════════════════════════════════════
-// MAIN PROCESSING FUNCTION
+// MAIN PROCESSING FUNCTIONS
 // ════════════════════════════════════════════════════════════════════════════
 
 /**
- * Process all Media Room intake sheets at once
+ * Engine-callable function — called from Phase 11 in godWorldEngine2.js.
+ * Processes all unprocessed rows in the four intake sheets.
+ * @param {Object} ctx - Engine context (ctx.ss, ctx.config.cycleCount)
+ */
+function processMediaIntake_(ctx) {
+  var ss = ctx.ss;
+  var cycle = ctx.config.cycleCount || 0;
+  var cal = getCurrentCalendarContext_(ss);
+
+  Logger.log('processMediaIntake_ v2.2: Starting intake processing for cycle ' + cycle);
+
+  var results = processAllIntakeSheets_(ss, cycle, cal);
+
+  ctx.summary.intakeProcessed = results;
+
+  Logger.log('processMediaIntake_ v2.2: Complete. ' +
+    'Articles: ' + results.articles +
+    ', Storylines: ' + results.storylines +
+    ', Citizens: ' + results.citizenUsage +
+    ', Continuity: ' + results.continuity);
+
+  return results;
+}
+
+
+/**
+ * Menu-callable function — run manually from Apps Script UI.
+ * No underscore = visible in script menu.
  */
 function processMediaIntakeV2() {
 
-  var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
+  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var cycle = getCurrentCycle_(ss);
-
-  // v2.1: Get calendar context
   var cal = getCurrentCalendarContext_(ss);
 
-  var results = {
-    articles: 0,
-    storylines: 0,
-    citizenUsage: 0,
-    continuity: 0
-  };
-
-  // Process each intake type (pass calendar context)
-  results.articles = processArticleIntake_(ss, cycle, cal);
-  results.storylines = processStorylineIntake_(ss, cycle, cal);
-  results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
-  results.continuity = processContinuityIntake_(ss, cycle, cal);
+  var results = processAllIntakeSheets_(ss, cycle, cal);
 
   var summary = 'Media Intake v2.2 Complete:\n' +
     '- Articles: ' + results.articles + '\n' +
@@ -73,6 +92,26 @@ function processMediaIntakeV2() {
 
   Logger.log(summary);
   SpreadsheetApp.getUi().alert(summary);
+
+  return results;
+}
+
+
+/**
+ * Shared processing logic — called by both processMediaIntake_(ctx) and processMediaIntakeV2().
+ */
+function processAllIntakeSheets_(ss, cycle, cal) {
+  var results = {
+    articles: 0,
+    storylines: 0,
+    citizenUsage: 0,
+    continuity: 0
+  };
+
+  results.articles = processArticleIntake_(ss, cycle, cal);
+  results.storylines = processStorylineIntake_(ss, cycle, cal);
+  results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
+  results.continuity = processContinuityIntake_(ss, cycle, cal);
 
   return results;
 }

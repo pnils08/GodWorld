@@ -299,11 +299,9 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
-  // PHASE 11: MEDIA INTAKE RETURN (optional - for external media input)
+  // PHASE 11: MEDIA INTAKE — process any unprocessed intake rows
   // ═══════════════════════════════════════════════════════════
-  if (ctx.mediaOutput) {
-    safePhaseCall_(ctx, 'Phase11-MediaIntake', function() { processMediaIntake_(ctx, ctx.mediaOutput); });
-  }
+  safePhaseCall_(ctx, 'Phase11-MediaIntake', function() { processMediaIntake_(ctx); });
 
   } catch (fatalError) {
     // Log fatal error that crashed the entire cycle

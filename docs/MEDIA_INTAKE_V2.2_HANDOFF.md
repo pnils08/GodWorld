@@ -184,7 +184,7 @@ This section is **reference-heavy** and is best treated as a narrative block.
 The parser will ingest lines and label them with NoteType values.
 
 ### Format
-Use readable subsections with headings in **ALL CAPS** or **Header:** format, then free-form bullets or lines.
+Use readable subsections with headings in **ALL CAPS**, **Header:** format, or **\*\*BOLD HEADER\*\*** format, then free-form bullets or lines. All three heading styles are recognized by the parser.
 
 **Example (valid):**
 ```
@@ -278,5 +278,5 @@ Use this checklist before handoff:
 
 ## 8) Source files
 
-- `phase07-evening-media/parseMediaRoomMarkdown.js` — Parser (v1.3)
-- `phase07-evening-media/mediaRoomIntake.js` — Processor (v2.2)
+- `phase07-evening-media/parseMediaRoomMarkdown.js` — Parser (v1.4: bold header support, pipe table handling)
+- `phase07-evening-media/mediaRoomIntake.js` — Processor (v2.3: engine-callable via processMediaIntake_(ctx), replaces deleted processMediaIntake.js)

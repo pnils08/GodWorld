@@ -214,6 +214,8 @@ Agents query GodWorld data through an MCP server connected to the OpenClaw SQLit
 | `query_initiatives` | Civic proposals, vote outcomes | Carmen, Farrah |
 | `query_relationships` | Citizen bonds and tensions | Maria, Culture desk |
 | `query_events` | World events by category | All agents |
+| `search_citizen_articles` | Find all articles mentioning a citizen by POP-ID (from ARTICLE_INDEX_BY_POPID.md) | All agents - continuity checks, backstory |
+| `search_article_citizens` | Find all citizens appearing in a given article (from CITIZENS_BY_ARTICLE.md) | Mags, Rhea - cross-reference coverage |
 
 ### MCP Server Setup
 
@@ -286,6 +288,8 @@ DESK OUTPUT -> Combined sports section with three bylines
 | `media-generator/index.js` | Routing logic (determineRouting) reusable |
 | `godworld.sql` schema | SQLite tables ready for MCP queries |
 | `godworld-sync` skill | Exports cycle data to SQLite |
+| `docs/ARTICLE_INDEX_BY_POPID.md` | Agents look up which articles mention a citizen (326 citizens, 367 articles, 4,922 references) |
+| `docs/CITIZENS_BY_ARTICLE.md` | Agents look up which citizens appear in a given article |
 
 ---
 

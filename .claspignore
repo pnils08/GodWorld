@@ -11,6 +11,9 @@ package-lock.json
 # OpenClaw skills (Node.js, not Apps Script)
 openclaw-skills/**
 
+# Node.js library (not Apps Script)
+lib/**
+
 # CLI scripts (Node.js, not Apps Script)
 scripts/**
 scripts/*

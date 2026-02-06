@@ -80,7 +80,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 
 | Task | Description | Status |
 |------|-------------|--------|
-| Sports Integration | Add trigger columns to Sports_Feed | Not started |
+| Sports Integration | Trigger hooks, crowd effects, briefing display | Done (v3.9/v2.6) |
 | Engine-side continuityHints | Populate hints array in export | Optional |
 | PolicyDomain column | Add to Initiative_Tracker | Optional (falls back to keyword detection) |
 

@@ -439,6 +439,18 @@ function buildCityEveningSystems_(ctx) {
     crowd["Fruitvale"] += 1;
   }
 
+  // v2.4: Sports neighborhood effects (game-day crowd boost)
+  var sportsEffects = S.sportsNeighborhoodEffects || {};
+  var sportsHoods = Object.keys(sportsEffects);
+  for (var shi = 0; shi < sportsHoods.length; shi++) {
+    var sHood = sportsHoods[shi];
+    var effects = sportsEffects[sHood];
+    if (effects && effects.traffic > 0) {
+      if (!crowd[sHood]) crowd[sHood] = 0;
+      crowd[sHood] += Math.round(effects.traffic * 10);
+    }
+  }
+
   // Prevent negatives
   var crowdKeys = Object.keys(crowd);
   for (var ck = 0; ck < crowdKeys.length; ck++) {

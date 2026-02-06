@@ -654,7 +654,19 @@ function generateMediaBriefing_(ctx) {
 
   briefing.push('Chicago: Bulls coverage via ' + getReporterBySignal_('athletics_basketball_bulls'));
   briefing.push('');
-  
+
+  // v2.6: Active sports triggers from Sports_Feed
+  var sportsTriggers = S.sportsEventTriggers || [];
+  if (sportsTriggers.length > 0) {
+    briefing.push('ACTIVE TRIGGERS:');
+    for (var sti = 0; sti < sportsTriggers.length; sti++) {
+      var trig = sportsTriggers[sti];
+      var sentStr = trig.sentiment >= 0 ? '+' + trig.sentiment.toFixed(2) : trig.sentiment.toFixed(2);
+      briefing.push('  ' + trig.team + ': ' + trig.trigger + (trig.streak ? ' (' + trig.streak + ')' : '') + ' — sentiment ' + sentStr);
+    }
+    briefing.push('');
+  }
+
   // ═══════════════════════════════════════════════════════════════════════════
   // SECTION 13: SECTION ASSIGNMENTS
   // ═══════════════════════════════════════════════════════════════════════════

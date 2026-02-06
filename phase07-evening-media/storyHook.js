@@ -1,7 +1,11 @@
 /**
  * ============================================================================
- * storyHookEngine_ v3.8 — THEME-AWARE JOURNALIST MATCHING
+ * storyHookEngine_ v3.9 — SPORTS FEED TRIGGER HOOKS
  * ============================================================================
+ *
+ * v3.9 Enhancements:
+ * - Sports Feed trigger hooks: 9 trigger types generate team-specific story hooks
+ * - Reads sportsEventTriggers from Phase 2 applySportsFeedTriggers_()
  *
  * v3.8 Enhancements:
  * - Theme-aware journalist matching via suggestStoryAngle_()
@@ -554,6 +558,39 @@ function storyHookEngine_(ctx) {
       null,
       'sports'
     ));
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // v3.9: SPORTS FEED TRIGGER HOOKS
+  // ═══════════════════════════════════════════════════════════
+  var sportsTriggers = S.sportsEventTriggers || [];
+  if (sportsTriggers.length > 0) {
+    var TRIGGER_HOOKS = {
+      'hot-streak':     { priority: 2, text: function(t) { return t.team + ' on a ' + (t.streak || 'hot streak') + '. Fan energy rising' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '. Momentum story.'; } },
+      'cold-streak':    { priority: 2, text: function(t) { return t.team + ' struggling — ' + (t.streak || 'cold streak') + '. Fan frustration angle. What\'s going wrong?'; } },
+      'playoff-push':   { priority: 3, text: function(t) { return t.team + ' pushing for playoffs. City holding its breath. Stakes coverage.'; } },
+      'playoff-clinch': { priority: 3, text: function(t) { return t.team + ' clinches playoff spot! Celebration' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '. Historic angle.'; } },
+      'eliminated':     { priority: 2, text: function(t) { return t.team + ' eliminated. Season over. Fan reaction, what-if story, next year angle.'; } },
+      'championship':   { priority: 3, text: function(t) { return t.team + ' CHAMPIONSHIP! City-wide celebration. Legacy story. All desks mobilize.'; } },
+      'rivalry':        { priority: 2, text: function(t) { return t.team + ' rivalry game. Heated atmosphere' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '. Fan culture feature.'; } },
+      'home-opener':    { priority: 2, text: function(t) { return t.team + ' home opener' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '. Season preview, fan energy, local business boost.'; } },
+      'season-finale':  { priority: 2, text: function(t) { return t.team + ' season finale. End-of-year reflection. Player profiles, record wrap-up.'; } }
+    };
+
+    for (var sti = 0; sti < sportsTriggers.length; sti++) {
+      var trig = sportsTriggers[sti];
+      var trigDef = TRIGGER_HOOKS[trig.trigger];
+      if (trigDef) {
+        hooks.push(makeHook(
+          'SPORTS',
+          trig.neighborhood || '',
+          trigDef.priority,
+          trigDef.text(trig),
+          null,
+          'sports'
+        ));
+      }
+    }
   }
 
   // ═══════════════════════════════════════════════════════════

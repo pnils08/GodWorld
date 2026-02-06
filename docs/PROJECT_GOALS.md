@@ -86,15 +86,14 @@ These are interesting future directions but **not the core goal**. The core goal
 
 ---
 
-## Setup Requirements
+## Infrastructure
 
-| Component | Purpose | Cost |
-|-----------|---------|------|
-| Cloud server | Runs OpenClaw 24/7 | ~$5/mo |
-| Google service account | Read access to Sheets | Free |
-| Anthropic API key | LLM for media generation | ~$5-15/mo |
-
-**Total: ~$10-20/month** to automate the manual workflow.
+| Component | Purpose | Status |
+|-----------|---------|--------|
+| DigitalOcean droplet | Headless server — Claude Code, OpenClaw, git repo | Active ($5/mo) |
+| Google Cloud Shell | clasp push deployment to Apps Script | Active (free) |
+| Google service account | Sheets API read access for OpenClaw | Configured (free) |
+| Anthropic API key | LLM for OpenClaw media generation | Key exists, not yet active |
 
 ---
 
@@ -137,8 +136,8 @@ These are interesting future directions but **not the core goal**. The core goal
 |---------|---------|------|
 | Claude (direct at claude.ai) | Claude Code + Media Room + web chat | $100/mo (Max) or $20/mo (Pro) |
 | Supermemory Pro | Persistent memory via MCP across all Claude clients | $19/mo |
-| DigitalOcean | Cloud server for OpenClaw (24/7 sync + media gen) | $5/mo |
-| Anthropic API | LLM calls from OpenClaw media-generator | ~$5-15/mo (usage-based) |
+| DigitalOcean | Headless server — runs Claude Code, OpenClaw, GodWorld repo | $5/mo |
+| Anthropic API | LLM calls from OpenClaw media-generator (future) | ~$5-15/mo (usage-based) |
 | **Total (Phase 1)** | | **~$129-139/mo** |
 | **Total (Phase 2)** | | **~$49-59/mo** |
 

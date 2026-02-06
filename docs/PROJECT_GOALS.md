@@ -128,8 +128,19 @@ These are interesting future directions but **not the core goal**. The core goal
 | Add Supermemory Pro (developer tier) | +$19/mo | Persistent memory via MCP for Claude Code + claude.ai |
 | **Optional:** Downgrade Claude Max → Pro | -$80/mo | Test after Supermemory proves value |
 
-**Phase 1 target: $119/mo** (Claude Max $100 direct + Supermemory Pro $19)
-**Phase 2 target: $39/mo** (Claude Pro $20 + Supermemory Pro $19) — only if Supermemory offsets reduced usage limits
+**Phase 1 target: $124/mo** (Claude Max $100 + Supermemory $19 + DigitalOcean $5)
+**Phase 2 target: $44/mo** (Claude Pro $20 + Supermemory $19 + DigitalOcean $5) — only if Supermemory offsets reduced usage limits
+
+### Full Monthly Stack
+
+| Service | Purpose | Cost |
+|---------|---------|------|
+| Claude (direct at claude.ai) | Claude Code + Media Room + web chat | $100/mo (Max) or $20/mo (Pro) |
+| Supermemory Pro | Persistent memory via MCP across all Claude clients | $19/mo |
+| DigitalOcean | Cloud server for OpenClaw (24/7 sync + media gen) | $5/mo |
+| Anthropic API | LLM calls from OpenClaw media-generator | ~$5-15/mo (usage-based) |
+| **Total (Phase 1)** | | **~$129-139/mo** |
+| **Total (Phase 2)** | | **~$49-59/mo** |
 
 ### Supermemory Integration
 
@@ -169,7 +180,7 @@ All three clients can connect to the same Supermemory MCP server, sharing a unif
 | claude.ai MCP connector | Not started — configure after Pro subscription |
 | Cancel Apple Claude subscription | Canceled — expires 2/16 |
 | Re-subscribe direct at claude.ai | Pending — after 2/16 expiry |
-| Cancel browser extension | Not started |
+| Cancel browser extension | Done (2026-02-07) |
 
 **Plugin commands (once Pro is active):**
 - `/claude-supermemory:index` — Index codebase into memory

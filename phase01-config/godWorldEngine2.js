@@ -279,6 +279,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase10-NeighborhoodMap', function() { saveV3NeighborhoodMap_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Arcs', function() { saveV3ArcsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Bonds', function() { saveRelationshipBonds_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-BondLedger', function() { saveV3BondsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Domains', function() { saveV3Domains_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Seeds', function() { saveV3Seeds_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Hooks', function() { saveV3Hooks_(ctx); });
@@ -1302,6 +1303,7 @@ function runCyclePhases_(ctx) {
   // PHASE 4: INITIATIVES + VOTING
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase4-CivicInitiatives', function() { runCivicInitiativeEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase4-LoadBonds', function() { loadRelationshipBonds_(ctx); });
   safePhaseCall_(ctx, 'Phase4-BondEngine', function() { runBondEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase4-ArcGen', function() { generateNewStoryArcs_(ctx); });
 
@@ -1384,6 +1386,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase10-NeighborhoodMap', function() { saveV3NeighborhoodMap_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Arcs', function() { saveV3ArcsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Bonds', function() { saveRelationshipBonds_(ctx); });
+  safePhaseCall_(ctx, 'Phase10-BondLedger', function() { saveV3BondsToLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Domains', function() { saveV3Domains_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Seeds', function() { saveV3Seeds_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Hooks', function() { saveV3Hooks_(ctx); });

@@ -75,7 +75,8 @@ GodWorld/
 | Civic Initiative | civicInitiativeEngine.js | v1.6 | Date parsing fix, faction trim, ripple consumer |
 | Story Hook | storyHook.js | v3.8 | Theme-aware hook generation |
 | Story Seeds | applyStorySeeds.js | v3.9 | Voice-matched story seeds |
-| Roster Lookup | rosterLookup.js | v2.1 | Journalist theme matching, voice profiles |
+| Roster Lookup | rosterLookup.js | v2.2 | Theme matching, voice profiles, citizen-to-journalist matching |
+| Media Briefing | mediaRoomBriefingGenerator.js | v2.6 | Consumer wiring: Section 13/14/17 enhancements |
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
 
 ---
@@ -123,6 +124,22 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-06 (Session 3)
+- **Consumer Wiring**: mediaRoomBriefingGenerator.js v2.5 → v2.6
+  - **Section 13 Enhanced**: Desk assignments now show journalist `openingStyle` + top 3 `themes` as indented detail lines
+    - New helper: `getAssignmentDetail_(assignmentStr)` — extracts lead journalist, looks up roster data
+  - **Section 14 Wired**: `matchCitizenToJournalist_()` now called for each citizen spotlight entry
+    - Shows best-fit journalist, interview angle, and confidence level
+    - Uses first active arc domain as story context
+  - **Section 17 Added**: VOICE PROFILES — new section between Section 16 and Footer
+    - Outputs `getFullVoiceProfile_()` for up to 5 priority-assigned journalists
+    - New helper: `generateVoiceProfiles_(frontPageCall, assignments, arcReport)`
+  - **Shared helper**: `extractJournalistName_(str)` — parses journalist names from assignment strings
+  - All changes backward compatible with `typeof` guards
+- **Git workflow**: Synced local main with GitHub (was 9 commits behind), configured GitHub token for pushes
+- **Stale local changes**: Committed leftover uncommitted work from previous sessions (rosterLookup.js v2.2 matchCitizenToJournalist_, .gitignore credentials/, googleapis dependency, lib/sheets.js, scripts/)
+- **PRIORITY_TASKS.md**: Consumer Wiring tasks marked Done (3/3), next action → integration testing
 
 ### 2026-02-06 (Session 2, continued)
 - **Echo removal**: Removed all Echo (Oakland Echo) code and references — Echo was never a real publication (originated from Grok experimentation)
@@ -227,6 +244,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 7. **COMPLETE**: rosterLookup.js enhanced (v2.1) - theme matching, voice profiles
 8. **COMPLETE**: Theme-aware hook generation (storyHook.js v3.8)
 9. **COMPLETE**: Voice-matched story seeds (applyStorySeeds.js v3.9)
+10. **COMPLETE**: Consumer wiring — briefing v2.6 (Section 13 enhanced, Section 14 wired, Section 17 voice profiles)
 
 ---
 
@@ -243,11 +261,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 | Theme-aware hook generation | **Done** | storyHook.js v3.8 |
 | Voice-matched story seeds | **Done** | applyStorySeeds.js v3.9 |
 
+### Implemented (Session 3, 2026-02-06)
+
+| Item | Status | Location |
+|------|--------|----------|
+| `matchCitizenToJournalist_()` | **Done** | rosterLookup.js v2.2, wired in briefing Section 14 |
+| Briefing Section 17: VOICE PROFILES | **Done** | mediaRoomBriefingGenerator.js v2.6 |
+| Enhanced Section 13 | **Done** | mediaRoomBriefingGenerator.js v2.6 |
+
 ### Still Open
 
 | Item | Description |
 |------|-------------|
-| `matchCitizenToJournalist_()` | Match citizen archetypes to journalist styles — not yet needed |
-| Briefing generator voice profiles (Section 17) | Add `getFullVoiceProfile_()` to briefing output |
-| Enhanced Section 13 | Add `openingStyle` + themes to reporter assignments in briefing |
 | `buildMediaPacket.js` voice guidance | Include voice guidance with each story seed in packet |

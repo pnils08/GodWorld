@@ -4,8 +4,13 @@
  * Single source of truth for journalist data.
  * Provides lookup functions for Phase 7 media integration.
  *
- * @version 2.0
+ * @version 2.1
  * @tier 2.3
+ *
+ * v2.1 Enhancements:
+ * - findJournalistsByTheme_(theme) - find journalists by theme keyword
+ * - getThemeKeywordsForDomain_(domain, hookType) - map domains to theme keywords
+ * - suggestStoryAngle_(eventThemes, signalType) - theme-based journalist matching
  *
  * v2.0 Enhancements:
  * - Full voice profiles with openingStyle, themes, samplePhrases, background
@@ -668,4 +673,208 @@ function getVoiceProfileObject_(name) {
     samplePhrases: journalist.samplePhrases || [],
     background: journalist.background || null
   };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// v2.1: THEME-AWARE JOURNALIST MATCHING
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Find journalists whose themes match a given keyword.
+ * Uses partial case-insensitive matching.
+ *
+ * @param {string} theme - Theme keyword to search (e.g., "Legacy", "Pulse")
+ * @returns {Array<Object>} Array of { name, desk, matchedThemes, tone }
+ *
+ * @example
+ * findJournalistsByTheme_("Legacy")
+ * // → [{ name: "Hal Richmond", desk: "sports", matchedThemes: ["Legacy"], tone: "Reverent..." }]
+ */
+function findJournalistsByTheme_(theme) {
+  if (!theme) return [];
+
+  var roster = getRoster_();
+  var results = [];
+  var themeLower = String(theme).toLowerCase();
+
+  var names = Object.keys(roster.journalists);
+  for (var i = 0; i < names.length; i++) {
+    var name = names[i];
+    var journalist = roster.journalists[name];
+    var themes = journalist.themes || [];
+
+    // Check for partial match in any theme
+    var matchedThemes = [];
+    for (var ti = 0; ti < themes.length; ti++) {
+      if (String(themes[ti]).toLowerCase().indexOf(themeLower) >= 0) {
+        matchedThemes.push(themes[ti]);
+      }
+    }
+
+    if (matchedThemes.length > 0) {
+      results.push({
+        name: name,
+        desk: journalist.desk,
+        matchedThemes: matchedThemes,
+        tone: journalist.tone || ''
+      });
+    }
+  }
+
+  return results;
+}
+
+/**
+ * Get theme keywords associated with a domain or hook type.
+ * Used for mapping story domains to journalist themes.
+ *
+ * @param {string} domain - Domain (e.g., "CIVIC", "SPORTS", "HEALTH")
+ * @param {string} [hookType] - Optional hook type for more specific matching
+ * @returns {Array<string>} Theme keywords to use for journalist matching
+ */
+function getThemeKeywordsForDomain_(domain, hookType) {
+  var domainThemes = {
+    'CIVIC': ['civic', 'accountability', 'system', 'baseline'],
+    'SPORTS': ['rhythm', 'legacy', 'pulse', 'fight'],
+    'HEALTH': ['health', 'expansion', 'containment', 'patterns'],
+    'SAFETY': ['incident', 'stress', 'resolved', 'paradox'],
+    'CULTURE': ['canvas', 'energy', 'sound', 'texture'],
+    'COMMUNITY': ['faith', 'family', 'neighborhood', 'rhythm'],
+    'BUSINESS': ['economic', 'labor', 'stability'],
+    'INFRASTRUCTURE': ['micro-failures', 'tolerance', 'maintenance', 'system'],
+    'WEATHER': ['meteorologically', 'forecast', 'data', 'experience'],
+    'GENERAL': ['stability', 'quiet', 'texture']
+  };
+
+  var hookTypeThemes = {
+    'arc': ['legacy', 'continuity', 'ongoing'],
+    'shock': ['breaking', 'accountability'],
+    'pattern': ['patterns', 'accumulating', 'system'],
+    'holiday': ['community', 'celebration', 'tradition'],
+    'demographic': ['neighborhood', 'shift', 'change'],
+    'relationship': ['conflict', 'alliance', 'tension'],
+    'sentiment': ['mood', 'pulse', 'emotional'],
+    'initiative-passed': ['civic', 'victory', 'implementation'],
+    'initiative-failed': ['accountability', 'fallout']
+  };
+
+  var themes = domainThemes[domain] || ['general'];
+
+  if (hookType && hookTypeThemes[hookType]) {
+    themes = themes.concat(hookTypeThemes[hookType]);
+  }
+
+  return themes;
+}
+
+/**
+ * Suggest a story angle based on event themes and signal type.
+ * Returns journalist match, suggested angle, and voice guidance.
+ *
+ * @param {Array<string>} eventThemes - Themes from the event/hook (e.g., ["tension", "civic"])
+ * @param {string} [signalType] - Optional signal type for fallback matching
+ * @returns {Object} { journalist, angle, voiceGuidance, confidence }
+ *
+ * @example
+ * suggestStoryAngle_(["Legacy", "Memory"], "sports_history")
+ * // → { journalist: "Hal Richmond", angle: "historical reflection", voiceGuidance: "...", confidence: "high" }
+ */
+function suggestStoryAngle_(eventThemes, signalType) {
+  var result = {
+    journalist: null,
+    angle: 'general coverage',
+    voiceGuidance: '',
+    confidence: 'low'
+  };
+
+  if (!eventThemes || eventThemes.length === 0) {
+    // Fall back to signal-based assignment
+    if (signalType) {
+      var bySignal = getJournalistBySignal_(signalType);
+      if (bySignal) {
+        result.journalist = bySignal;
+        result.angle = 'signal-matched coverage';
+        result.voiceGuidance = getVoiceGuidance_(bySignal, 'feature') || '';
+        result.confidence = 'medium';
+      }
+    }
+    return result;
+  }
+
+  // Theme-to-angle mapping
+  var THEME_ANGLES = {
+    'legacy': 'historical reflection',
+    'memory': 'retrospective piece',
+    'pulse': 'street-level mood piece',
+    'fight': 'conflict/tension coverage',
+    'rhythm': 'observational analysis',
+    'stability': 'baseline context piece',
+    'accountability': 'investigative angle',
+    'civic': 'civic affairs coverage',
+    'faith': 'human interest/community',
+    'canvas': 'arts/culture feature',
+    'breaking': 'breaking news',
+    'conspiracy': 'skeptical/alternative',
+    'health': 'public health coverage',
+    'infrastructure': 'systems analysis'
+  };
+
+  // Score each journalist by theme overlap
+  var roster = getRoster_();
+  var bestMatch = null;
+  var bestScore = 0;
+  var matchedAngle = 'general coverage';
+
+  var names = Object.keys(roster.journalists);
+  for (var i = 0; i < names.length; i++) {
+    var name = names[i];
+    var journalist = roster.journalists[name];
+    var journoThemes = journalist.themes || [];
+
+    var score = 0;
+    for (var ei = 0; ei < eventThemes.length; ei++) {
+      var eventTheme = String(eventThemes[ei]).toLowerCase();
+
+      for (var ji = 0; ji < journoThemes.length; ji++) {
+        var journoTheme = String(journoThemes[ji]).toLowerCase();
+
+        // Exact match
+        if (journoTheme === eventTheme) {
+          score += 3;
+        }
+        // Partial match
+        else if (journoTheme.indexOf(eventTheme) >= 0 || eventTheme.indexOf(journoTheme) >= 0) {
+          score += 1;
+        }
+      }
+
+      // Track matched angle
+      if (THEME_ANGLES[eventTheme]) {
+        matchedAngle = THEME_ANGLES[eventTheme];
+      }
+    }
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = name;
+    }
+  }
+
+  if (bestMatch && bestScore >= 2) {
+    result.journalist = bestMatch;
+    result.angle = matchedAngle;
+    result.voiceGuidance = getVoiceGuidance_(bestMatch, 'feature') || '';
+    result.confidence = bestScore >= 4 ? 'high' : 'medium';
+  } else if (signalType) {
+    // Fall back to signal-based
+    var bySignalFallback = getJournalistBySignal_(signalType);
+    if (bySignalFallback) {
+      result.journalist = bySignalFallback;
+      result.angle = matchedAngle;
+      result.voiceGuidance = getVoiceGuidance_(bySignalFallback, 'feature') || '';
+      result.confidence = 'medium';
+    }
+  }
+
+  return result;
 }

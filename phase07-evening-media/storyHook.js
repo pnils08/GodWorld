@@ -1,7 +1,13 @@
 /**
  * ============================================================================
- * storyHookEngine_ v3.7 — INITIATIVE OUTCOME HOOKS
+ * storyHookEngine_ v3.8 — THEME-AWARE JOURNALIST MATCHING
  * ============================================================================
+ *
+ * v3.8 Enhancements:
+ * - Theme-aware journalist matching via suggestStoryAngle_()
+ * - New hook fields: themes, suggestedJournalist, suggestedAngle, voiceGuidance, matchConfidence
+ * - mapHookTypeToSignal_() helper for signal-based fallback
+ * - Integration with rosterLookup.js v2.1 theme functions
  *
  * v3.7 Enhancements:
  * - Initiative outcome hooks: passed/failed initiatives generate story hooks
@@ -110,20 +116,97 @@ function storyHookEngine_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════
-  // HOOK BUILDER
+  // v3.8: THEME-AWARE JOURNALIST MATCHING HELPERS
+  // ═══════════════════════════════════════════════════════════
+
+  /**
+   * Map hookType to signal type for journalist lookup fallback.
+   */
+  function mapHookTypeToSignal_(hookType, domain) {
+    var hookToSignal = {
+      'arc': 'crisis',
+      'cluster': 'shock_event',
+      'signal': null,
+      'holiday': 'human_interest',
+      'firstfriday': 'arts',
+      'creationday': 'civic',
+      'sports': 'sports',
+      'weather': 'weather',
+      'sentiment': 'civic_opinion',
+      'cultural': 'arts',
+      'community': 'community',
+      'pattern': 'civic',
+      'shock': 'shock_event',
+      'event': null,
+      'demographic': 'community',
+      'nightlife': 'lifestyle',
+      'seasonal': 'human_interest',
+      'relationship': 'community',
+      'archetype': 'human_interest',
+      'storyline-dormant': 'human_interest',
+      'storyline-priority': 'civic',
+      'storyline-mystery': 'shock_event',
+      'initiative-passed': 'civic',
+      'initiative-failed': 'civic',
+      'initiative-swing': 'civic_opinion',
+      'initiative-ripple': 'civic'
+    };
+
+    var signal = hookToSignal[hookType];
+    if (signal) return signal;
+
+    // Fall back to domain-based signal
+    var domainSignals = {
+      'HEALTH': 'health_arc',
+      'CIVIC': 'civic',
+      'SPORTS': 'sports',
+      'SAFETY': 'crime',
+      'CULTURE': 'arts',
+      'BUSINESS': 'business',
+      'INFRASTRUCTURE': 'transit',
+      'COMMUNITY': 'community'
+    };
+
+    return domainSignals[domain] || 'human_interest';
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // HOOK BUILDER (v3.8: Theme-aware journalist matching)
   // ═══════════════════════════════════════════════════════════
   function makeHook(domain, neighborhood, priority, text, linkedArcId, hookType) {
+    var normalDomain = domain || 'GENERAL';
+    var normalHookType = hookType || 'signal';
+
+    // v3.8: Determine themes for this hook
+    var themes = [];
+    if (typeof getThemeKeywordsForDomain_ === 'function') {
+      themes = getThemeKeywordsForDomain_(normalDomain, normalHookType);
+    }
+
+    // v3.8: Suggest journalist based on themes
+    var suggestion = null;
+    if (typeof suggestStoryAngle_ === 'function') {
+      var signalType = mapHookTypeToSignal_(normalHookType, normalDomain);
+      suggestion = suggestStoryAngle_(themes, signalType);
+    }
+
     return {
       hookId: Utilities.getUuid().slice(0, 8),
-      domain: domain || 'GENERAL',
+      domain: normalDomain,
       neighborhood: neighborhood || '',
       priority: priority || 1,
       text: text || '',
       linkedArcId: linkedArcId || null,
-      hookType: hookType || 'signal',
-      suggestedDesks: getDesks(domain),
+      hookType: normalHookType,
+      suggestedDesks: getDesks(normalDomain),
       cycle: cycle,
-      cycleOfYear: cycleOfYear
+      cycleOfYear: cycleOfYear,
+      // v3.8 additions:
+      themes: themes,
+      suggestedJournalist: suggestion ? suggestion.journalist : null,
+      suggestedAngle: suggestion ? suggestion.angle : null,
+      voiceGuidance: suggestion ? suggestion.voiceGuidance : null,
+      matchConfidence: suggestion ? suggestion.confidence : 'none'
     };
   }
 

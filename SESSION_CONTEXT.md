@@ -121,6 +121,20 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Session History
 
+### 2026-02-06
+- **Theme-Aware Hook Generation & Voice-Matched Story Seeds**: Core implementation complete
+  - **rosterLookup.js v2.1**: Added 3 new functions
+    - `findJournalistsByTheme_(theme)` - find journalists by theme keyword (partial match)
+    - `getThemeKeywordsForDomain_(domain, hookType)` - map domains to theme arrays
+    - `suggestStoryAngle_(eventThemes, signalType)` - scoring-based journalist matching
+  - **storyHook.js v3.8**: Theme-aware hook generation
+    - `mapHookTypeToSignal_()` helper for signal-based fallback
+    - `makeHook()` now includes: themes, suggestedJournalist, suggestedAngle, voiceGuidance, matchConfidence
+  - **applyStorySeeds.js v3.9**: Voice-matched story seeds
+    - `mapSeedTypeToSignal_()` helper for signal-based fallback
+    - `makeSeed()` now includes same 5 new fields as hooks
+  - **Backward Compatible**: All existing fields unchanged, new fields additive (null if no match)
+
 ### 2026-02-05
 - **Git cleanup**: Merged `super-memory-chat-3bC53` (.mcp.json gitignore) and `main-branch-work-9q5nB` (README improvements) into main
 - **Google Drive API**: Enabled for service account project `godworld-486407`
@@ -186,6 +200,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
 5. POP-ID article index available for media continuity checks
 6. **COMPLETE**: Journalist personas enriched (v2.0) - 25 full voice profiles ready for Media Room
 7. **COMPLETE**: rosterLookup.js enhanced (v2.0) - new voice profile functions available
+8. **COMPLETE**: Theme-aware hook generation (storyHook.js v3.8)
+9. **COMPLETE**: Voice-matched story seeds (applyStorySeeds.js v3.9)
 
 ---
 

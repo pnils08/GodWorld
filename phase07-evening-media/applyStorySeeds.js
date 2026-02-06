@@ -1,9 +1,15 @@
 /**
  * ============================================================================
- * V3.8 STORY SEEDS ENGINE — STORYLINE TRACKER INTEGRATION
+ * V3.9 STORY SEEDS ENGINE — THEME-AWARE JOURNALIST MATCHING
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
+ *
+ * v3.9 Enhancements:
+ * - Theme-aware journalist matching via suggestStoryAngle_()
+ * - New seed fields: themes, suggestedJournalist, suggestedAngle, voiceGuidance, matchConfidence
+ * - mapSeedTypeToSignal_() helper for signal-based fallback
+ * - Integration with rosterLookup.js v2.1 theme functions
  *
  * v3.8 Enhancements:
  * - Storyline Tracker integration: reads active/dormant storylines
@@ -133,16 +139,94 @@ function applyStorySeeds_(ctx) {
   var manualExtraSeeds = manual.extraSeeds || [];
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // SEED BUILDER
+  // v3.9: THEME-AWARE JOURNALIST MATCHING HELPERS
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  /**
+   * Map seedType to signal type for journalist lookup fallback.
+   */
+  function mapSeedTypeToSignal_(seedType, domain) {
+    var seedToSignal = {
+      'pattern': 'civic',
+      'shock': 'shock_event',
+      'weight': 'civic',
+      'civic': 'civic',
+      'demographic': 'community',
+      'event': null,
+      'cluster': 'shock_event',
+      'weather': 'weather',
+      'sentiment': 'civic_opinion',
+      'economy': 'business',
+      'nightlife': 'lifestyle',
+      'traffic': 'transit',
+      'publicspace': 'community',
+      'retail': 'business',
+      'health': 'health_arc',
+      'domain': null,
+      'arc': 'crisis',
+      'spotlight': 'human_interest',
+      'seasonal': 'human_interest',
+      'holiday': 'human_interest',
+      'firstfriday': 'arts',
+      'creationday': 'civic',
+      'sports': 'sports',
+      'cultural': 'arts',
+      'engagement': 'community',
+      'manual': null,
+      'qol': 'civic',
+      'storyline-followup': 'human_interest',
+      'storyline-active': 'civic',
+      'storyline-question': 'shock_event'
+    };
+
+    var signal = seedToSignal[seedType];
+    if (signal) return signal;
+
+    // Fall back to domain-based signal
+    var domainSignals = {
+      'HEALTH': 'health_arc',
+      'CIVIC': 'civic',
+      'SPORTS': 'sports',
+      'SAFETY': 'crime',
+      'CULTURE': 'arts',
+      'BUSINESS': 'business',
+      'INFRASTRUCTURE': 'transit',
+      'COMMUNITY': 'community',
+      'NIGHTLIFE': 'lifestyle',
+      'WEATHER': 'weather',
+      'GENERAL': 'human_interest'
+    };
+
+    return domainSignals[domain] || 'human_interest';
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // SEED BUILDER (v3.9: Theme-aware journalist matching)
   // ═══════════════════════════════════════════════════════════════════════════
   function makeSeed(text, domain, neighborhood, priority, seedType, suggestedCitizens, linkedStorylineId) {
+    var normalDomain = domain || 'GENERAL';
+    var normalSeedType = seedType || 'signal';
+
+    // v3.9: Determine themes for this seed
+    var themes = [];
+    if (typeof getThemeKeywordsForDomain_ === 'function') {
+      themes = getThemeKeywordsForDomain_(normalDomain, normalSeedType);
+    }
+
+    // v3.9: Suggest journalist based on themes
+    var suggestion = null;
+    if (typeof suggestStoryAngle_ === 'function') {
+      var signalType = mapSeedTypeToSignal_(normalSeedType, normalDomain);
+      suggestion = suggestStoryAngle_(themes, signalType);
+    }
+
     return {
       seedId: Utilities.getUuid().slice(0, 8),
       text: text,
-      domain: domain || 'GENERAL',
+      domain: normalDomain,
       neighborhood: neighborhood || '',
       priority: priority || 1,
-      seedType: seedType || 'signal',
+      seedType: normalSeedType,
       cycle: cycle,
       calendarContext: {
         holiday: holiday,
@@ -153,7 +237,13 @@ function applyStorySeeds_(ctx) {
       // v3.7: Suggested interview candidates
       suggestedCitizens: suggestedCitizens || [],
       // v3.8: Linked storyline reference
-      linkedStorylineId: linkedStorylineId || null
+      linkedStorylineId: linkedStorylineId || null,
+      // v3.9 additions:
+      themes: themes,
+      suggestedJournalist: suggestion ? suggestion.journalist : null,
+      suggestedAngle: suggestion ? suggestion.angle : null,
+      voiceGuidance: suggestion ? suggestion.voiceGuidance : null,
+      matchConfidence: suggestion ? suggestion.confidence : 'none'
     };
   }
 

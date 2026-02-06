@@ -73,7 +73,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 
 | Task | File | Status |
 |------|------|--------|
-| Hardcoded Spreadsheet ID | godWorldEngine2.js + 15 files | Waiting on schema approval |
+| Hardcoded Spreadsheet ID | utilityFunctions.js (centralized) | Done (v2.14) |
 | Missing Null/Undefined Checks | 272 instances | Low priority - address during V3 |
 
 ### Priority 3: Optional Enhancements

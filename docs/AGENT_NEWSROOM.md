@@ -289,6 +289,84 @@ DESK OUTPUT -> Combined sports section with three bylines
 
 ---
 
+## Pipeline Prerequisites
+
+The Agent Newsroom depends on a data pipeline that is partially built but not yet connected end-to-end. These layers must work before agents can run.
+
+### Current Pipeline State
+
+```
+Engine runs in Google Apps Script (WORKING - Cycle 78)
+    |
+Export cycle data to local filesystem (CODE EXISTS - exports/ is empty)
+    |
+Sync exports to SQLite (CODE EXISTS - no data to feed it)
+    |
+MCP server for agent data access (NOT BUILT)
+    |
+Agent Newsroom (NOT BUILT)
+```
+
+### Layer 1: Data Bridge (Google Apps Script -> Local)
+
+The engine runs in Apps Script and `exportCycleArtifacts.js` exists to write context packs, but `exports/` is currently empty. The bridge between Apps Script and the local filesystem needs to be established.
+
+**Options:**
+- Google Sheets API pull via service account (credentials exist but `GODWORLD_SHEET_ID` not configured)
+- Apps Script webhook to a local endpoint
+- Manual export after each cycle run
+
+**What exists:**
+- `exportCycleArtifacts.js` - writes `cycle-XX-context.json`, `cycle-XX-summary.json`, `manifest.json`
+- `.env.example` has `GODWORLD_SHEET_ID` placeholder
+- Service account project `godworld-486407` created with Drive API enabled
+
+### Layer 2: Local Data Store
+
+SQLite schema exists at `openclaw-skills/schemas/godworld.sql` (11 tables + 4 views) but no database file has been initialized with real data.
+
+**What exists:**
+- `scripts/init-db.js` - initializes schema
+- `scripts/load-citizens.js` - loads citizen snapshot
+- `scripts/sync.js` - syncs exports to SQLite
+- `godworld-sync` skill - reads manifest, updates SQLite
+- Previous test had 9 citizens loaded
+
+**What's needed:**
+- Run `node scripts/init-db.js` to create the database
+- Load a full citizen snapshot (326+ citizens from Simulation_Ledger)
+- Run at least one sync with real cycle data
+
+### Layer 3: Pipeline Validation
+
+Before building agents, confirm the existing single-agent pipeline works end-to-end.
+
+**What exists:**
+- `scripts/generate.js` - CLI runner for media generation
+- `media-generator` skill - routes to tribune/continuity agents, has confidence gate
+- Previous test produced usable Tribune Pulse output for Cycle 78
+
+**What's needed:**
+- Run `node scripts/generate.js` with real cycle data
+- Verify Tribune Pulse output quality
+- Confirm continuity gate works (blocks publish if score < 0.9)
+
+### Layer 4: Agent Newsroom (New Work)
+
+Only start after Layers 1-3 are validated.
+
+| Component | Description | Depends On |
+|-----------|-------------|------------|
+| MCP server | GodWorld SQLite exposed as MCP tools | Layer 2 (SQLite populated) |
+| System prompt builder | Reads roster JSON, generates per-journalist prompts | bay_tribune_roster.json (ready) |
+| Orchestrator | Reads cycle export, activates desks, spawns agents | Layer 1 (exports flowing) |
+| Desk runner | Manages conversation within a desk | MCP server + prompt builder |
+| Editorial pipeline | Mags receives desk output, Rhea validates | Desk runner |
+| Output formatter | Final Pulse markdown with sections and bylines | Editorial pipeline |
+| Scheduler | Triggers on new cycle export (cron or file watch) | All above |
+
+---
+
 ## What Needs Building
 
 | Component | Description | Priority |

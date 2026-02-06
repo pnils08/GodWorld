@@ -95,7 +95,7 @@ GodWorld/
 
 | Doc | Purpose |
 |-----|---------|
-| docs/ENGINE_ROADMAP.md | Implementation status (Tiers 1-6 complete) |
+| docs/ENGINE_ROADMAP.md | Implementation status (Tiers 1-6 complete, Tier 7 in TIER_7_ROADMAP) |
 | docs/TIER_7_ROADMAP.md | Tier 7 planning (ripples, micro-economies, life paths) |
 | docs/CIVIC_INITIATIVE_v1.5_UPGRADE.md | Bug fixes and upgrades tracking |
 | docs/OPENCLAW_INTEGRATION.md | OpenClaw setup for citizen memory + automation |
@@ -208,7 +208,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 **Summary:**
 1. v1.5/v1.6 bug fixes mostly complete
-2. Tier 7.1 (Ripple System) ready to start - wire ripple consumer into engine
+2. **COMPLETE**: Tier 7.1 (Ripple System) - wired into engine Phase 6, next civic vote Cycle 80
 3. OpenClaw integration ready for setup when desired
 4. **Agent Newsroom planned** - Claude Agent SDK, 25 journalists, replaces AutoGen approach (see docs/AGENT_NEWSROOM.md)
 5. POP-ID article index available for media continuity checks

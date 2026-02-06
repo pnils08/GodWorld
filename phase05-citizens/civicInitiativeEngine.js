@@ -993,58 +993,82 @@ function calculateDemographicInfluence_(demoContext) {
   var studentRatio = totalStudents / totalPop;
   var unemploymentRate = totalUnemployed / totalPop;
   var sicknessRate = totalSick / totalPop;
+  var adultRatio = totalAdults / totalPop;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // INITIATIVE TYPE → DEMOGRAPHIC ALIGNMENT
+  // v1.6: Check explicit PolicyDomain first, fall back to name keywords
   // ═══════════════════════════════════════════════════════════════════════════
+  var domain = (demoContext.policyDomain || '').toLowerCase();
 
-  // Health initiatives get boost from areas with high senior/sick populations
-  if (name.indexOf('health') >= 0 || name.indexOf('clinic') >= 0 ||
-      name.indexOf('hospital') >= 0 || name.indexOf('medical') >= 0) {
+  // Resolve domain: explicit PolicyDomain column → keyword detection on name
+  var resolvedDomain = '';
+  if (domain === 'health') {
+    resolvedDomain = 'health';
+  } else if (domain === 'housing') {
+    resolvedDomain = 'housing';
+  } else if (domain === 'transit') {
+    resolvedDomain = 'transit';
+  } else if (domain === 'education') {
+    resolvedDomain = 'education';
+  } else if (domain === 'economic') {
+    resolvedDomain = 'economic';
+  } else if (domain === 'safety') {
+    resolvedDomain = 'safety';
+  } else if (domain === 'environment') {
+    resolvedDomain = 'environment';
+  } else if (domain === 'sports') {
+    resolvedDomain = 'sports';
+  }
+
+  // Fallback: keyword detection on initiative name
+  if (!resolvedDomain) {
+    if (name.indexOf('health') >= 0 || name.indexOf('clinic') >= 0 ||
+        name.indexOf('hospital') >= 0 || name.indexOf('medical') >= 0) {
+      resolvedDomain = 'health';
+    } else if (name.indexOf('housing') >= 0 || name.indexOf('stabiliz') >= 0 ||
+               name.indexOf('afford') >= 0 || name.indexOf('rent') >= 0) {
+      resolvedDomain = 'housing';
+    } else if (name.indexOf('transit') >= 0 || name.indexOf('bart') >= 0 ||
+               name.indexOf('bus') >= 0 || name.indexOf('transportation') >= 0) {
+      resolvedDomain = 'transit';
+    } else if (name.indexOf('school') >= 0 || name.indexOf('education') >= 0 ||
+               name.indexOf('youth') >= 0 || name.indexOf('student') >= 0) {
+      resolvedDomain = 'education';
+    } else if (name.indexOf('job') >= 0 || name.indexOf('employment') >= 0 ||
+               name.indexOf('business') >= 0 || name.indexOf('economic') >= 0) {
+      resolvedDomain = 'economic';
+    } else if (name.indexOf('senior') >= 0 || name.indexOf('elder') >= 0 ||
+               name.indexOf('aging') >= 0 || name.indexOf('retire') >= 0) {
+      resolvedDomain = 'senior';
+    } else if (name.indexOf('alternative') >= 0 || name.indexOf('response') >= 0 ||
+               name.indexOf('police') >= 0 || name.indexOf('safety') >= 0) {
+      resolvedDomain = 'safety';
+    }
+  }
+
+  // Apply demographic modifiers based on resolved domain
+  if (resolvedDomain === 'health') {
     if (seniorRatio > 0.25) modifier += 0.08;
     if (sicknessRate > 0.08) modifier += 0.06;
-  }
-
-  // Housing/stabilization initiatives get boost from areas with high unemployment
-  if (name.indexOf('housing') >= 0 || name.indexOf('stabiliz') >= 0 ||
-      name.indexOf('afford') >= 0 || name.indexOf('rent') >= 0) {
+  } else if (resolvedDomain === 'housing') {
     if (unemploymentRate > 0.12) modifier += 0.10;
     if (seniorRatio > 0.20) modifier += 0.05;
-  }
-
-  // Transit initiatives benefit working adults
-  if (name.indexOf('transit') >= 0 || name.indexOf('bart') >= 0 ||
-      name.indexOf('bus') >= 0 || name.indexOf('transportation') >= 0) {
-    var adultRatio = totalAdults / totalPop;
+  } else if (resolvedDomain === 'transit') {
     if (adultRatio > 0.55) modifier += 0.06;
     if (studentRatio > 0.20) modifier += 0.05;
-  }
-
-  // Education/youth initiatives benefit areas with high student population
-  if (name.indexOf('school') >= 0 || name.indexOf('education') >= 0 ||
-      name.indexOf('youth') >= 0 || name.indexOf('student') >= 0) {
+  } else if (resolvedDomain === 'education') {
     if (studentRatio > 0.25) modifier += 0.10;
-  }
-
-  // Jobs/economic initiatives benefit areas with high unemployment
-  if (name.indexOf('job') >= 0 || name.indexOf('employment') >= 0 ||
-      name.indexOf('business') >= 0 || name.indexOf('economic') >= 0) {
+  } else if (resolvedDomain === 'economic' || resolvedDomain === 'sports') {
     if (unemploymentRate > 0.10) modifier += 0.08;
-  }
-
-  // Senior-specific initiatives
-  if (name.indexOf('senior') >= 0 || name.indexOf('elder') >= 0 ||
-      name.indexOf('aging') >= 0 || name.indexOf('retire') >= 0) {
+  } else if (resolvedDomain === 'senior') {
     if (seniorRatio > 0.20) modifier += 0.12;
-  }
-
-  // Alternative/progressive policing gets mixed response based on demographics
-  if (name.indexOf('alternative') >= 0 || name.indexOf('response') >= 0 ||
-      name.indexOf('police') >= 0 || name.indexOf('safety') >= 0) {
-    // Young areas more supportive
+  } else if (resolvedDomain === 'safety') {
     if (studentRatio > 0.20) modifier += 0.05;
-    // Senior areas more cautious
     if (seniorRatio > 0.25) modifier -= 0.03;
+  } else if (resolvedDomain === 'environment') {
+    if (studentRatio > 0.20) modifier += 0.04;
+    if (sicknessRate > 0.08) modifier += 0.04;
   }
 
   // Clamp modifier
@@ -1563,17 +1587,19 @@ function createInitiativeTrackerSheet_(ss) {
     'OppositionFaction', // J - CRC, OPP
     'SwingVoter',        // K - Primary swing voter name
     'SwingVoter2',       // L - Secondary swing voter name (v1.1)
-    'SwingVoter2Lean',   // M - Secondary swing voter lean: lean-yes, lean-no, toss-up (v1.1)
-    'Outcome',           // N - PASSED, FAILED, APPROVED, DENIED
-    'Consequences',      // O - What happens as result
-    'Notes',             // P - Running notes
-    'LastUpdated'        // Q - Timestamp
+    'SwingVoter2Lean',       // M - Secondary swing voter lean: lean-yes, lean-no, toss-up (v1.1)
+    'Outcome',               // N - PASSED, FAILED, APPROVED, DENIED
+    'Consequences',          // O - What happens as result
+    'Notes',                 // P - Running notes
+    'LastUpdated',           // Q - Timestamp
+    'AffectedNeighborhoods', // R - Comma-separated neighborhoods for ripple effects (v1.3)
+    'PolicyDomain'           // S - Explicit domain: health, transit, economic, housing, safety, environment, sports, education (v1.6)
   ];
-  
+
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
   sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
   sheet.setFrozenRows(1);
-  
+
   // Set column widths
   sheet.setColumnWidth(1, 100);  // InitiativeID
   sheet.setColumnWidth(2, 250);  // Name
@@ -1592,8 +1618,10 @@ function createInitiativeTrackerSheet_(ss) {
   sheet.setColumnWidth(15, 250); // Consequences
   sheet.setColumnWidth(16, 300); // Notes
   sheet.setColumnWidth(17, 120); // LastUpdated
-  
-  Logger.log('Created Initiative_Tracker sheet with v1.1 schema');
+  sheet.setColumnWidth(18, 200); // AffectedNeighborhoods (v1.3)
+  sheet.setColumnWidth(19, 120); // PolicyDomain (v1.6)
+
+  Logger.log('Created Initiative_Tracker sheet with v1.6 schema');
   
   return sheet;
 }
@@ -1892,31 +1920,37 @@ function seedInitiativeTracker_() {
     sheet = createInitiativeTrackerSheet_(ss);
   }
   
-  // v1.1: Updated seed data with SwingVoter2 and SwingVoter2Lean
+  // v1.6: Updated seed data with AffectedNeighborhoods and PolicyDomain
   var initiatives = [
     // West Oakland Stabilization Fund
     ['INIT-001', 'West Oakland Stabilization Fund', 'vote', 'active', '$28M', '6-3', 78,
-     '5-4 OPP — needs 1 swing', 'OPP', 'CRC', 'Ramon Vega', 'Leonard Tran', 'lean-yes', '', '', '', ''],
-    
+     '5-4 OPP — needs 1 swing', 'OPP', 'CRC', 'Ramon Vega', 'Leonard Tran', 'lean-yes', '', '', '', '',
+     'West Oakland', 'housing'],
+
     // Oakland Alternative Response Initiative
     ['INIT-002', 'Oakland Alternative Response Initiative', 'vote', 'proposed', '$12.5M', '5-4', 82,
-     'Uncertain — true toss-up', 'OPP', 'CRC', 'Ramon Vega', 'Leonard Tran', 'toss-up', '', '', '', ''],
-    
+     'Uncertain — true toss-up', 'OPP', 'CRC', 'Ramon Vega', 'Leonard Tran', 'toss-up', '', '', '', '',
+     'Downtown,East Oakland,West Oakland', 'safety'],
+
     // Fruitvale Transit Hub Phase II - Visioning
     ['INIT-003', 'Fruitvale Transit Hub Phase II — Visioning', 'visioning', 'proposed', '$230M', '', 86,
-     'Input phase — no vote', 'OPP', '', '', '', '', '', '', '', ''],
-    
+     'Input phase — no vote', 'OPP', '', '', '', '', '', '', '', '',
+     'Fruitvale', 'transit'],
+
     // Port Green Modernization - Federal Grant
     ['INIT-004', 'Port of Oakland Green Modernization — Federal Grant', 'grant', 'proposed', '$320M', '', 89,
-     'Competitive — external decision', '', '', '', '', '', '', '', '', ''],
-    
+     'Competitive — external decision', '', '', '', '', '', '', '', '', '',
+     'Jack London,West Oakland', 'environment'],
+
     // Temescal Health Center
     ['INIT-005', 'Temescal Community Health Center', 'vote', 'proposed', '$45M', '5-4', 80,
-     'Likely passes', 'OPP', 'CRC', '', 'Marcus Tran', 'lean-yes', '', '', '', ''],
-    
+     'Likely passes', 'OPP', 'CRC', '', 'Marcus Tran', 'lean-yes', '', '', '', '',
+     'Temescal', 'health'],
+
     // Baylight Final Vote
     ['INIT-006', 'Baylight District — Final Council Vote', 'vote', 'active', '$2.1B', '5-4', 83,
-     'Likely passes with conditions', 'OPP', 'CRC', 'Ramon Vega', 'Leonard Tran', 'lean-yes', '', '', '', '']
+     'Likely passes with conditions', 'OPP', 'CRC', 'Ramon Vega', 'Leonard Tran', 'lean-yes', '', '', '', '',
+     'Jack London,Downtown', 'economic']
   ];
   
   // Write seed data

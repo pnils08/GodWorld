@@ -161,6 +161,12 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Populates `S.recurringCitizens` — consumed by `buildContinuityHints_()` in exportCycleArtifacts.js (Source 2, previously empty)
   - Wired into both V2 and V3 engines as `Phase6-RecurringCitizens` (after Spotlights, before CivicLoad)
   - **PRIORITY_TASKS.md**: Engine-side continuityHints marked Done (v1.0)
+- **PolicyDomain column**: civicInitiativeEngine.js v1.6 integration complete
+  - `createInitiativeTrackerSheet_()`: Added AffectedNeighborhoods (R) and PolicyDomain (S) columns to base schema
+  - `seedInitiativeTracker_()`: All 6 seed initiatives now include PolicyDomain and AffectedNeighborhoods values
+  - `calculateDemographicInfluence_()`: Now checks `demoContext.policyDomain` first, falls back to name keyword detection
+  - Domains supported: health, housing, transit, education, economic, safety, environment, sports, senior
+  - **PRIORITY_TASKS.md**: PolicyDomain column marked Done (v1.6)
 
 ### 2026-02-06 (Session 2, continued)
 - **Echo removal**: Removed all Echo (Oakland Echo) code and references — Echo was never a real publication (originated from Grok experimentation)
@@ -269,6 +275,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 11. **COMPLETE**: Sports Integration — trigger hooks, crowd effects, briefing display
 12. **COMPLETE**: buildMediaPacket.js v2.4 — voice guidance on seeds/hooks
 13. **COMPLETE**: Engine-side continuityHints — computeRecurringCitizens v1.0, wired Phase 6
+14. **COMPLETE**: PolicyDomain column — sheet schema, seed data, demographic influence all wired
 
 ---
 

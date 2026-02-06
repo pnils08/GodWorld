@@ -109,6 +109,7 @@ GodWorld/
 | docs/ARTICLE_INDEX_BY_POPID.md | **NEW** - Search articles by POP-ID (326 citizens, 367 articles) |
 | docs/CITIZENS_BY_ARTICLE.md | **NEW** - Search citizens by article name |
 | docs/MEDIA_ROOM_HANDOFF.md | **NEW** - Structured handoff workflow for Media Room (replaces ad-hoc process) |
+| docs/cycle_pulse_edition_78.txt | **NEW** - Edition 78 written by 5 parallel Claude Code desk agents |
 | docs/PROJECT_GOALS.md | Project goals, MCP stack, subscription optimization |
 | schemas/SCHEMA_HEADERS.md | All ledger schemas |
 
@@ -128,6 +129,22 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-08 (continued)
+- **Edition 78 — First Parallel-Agent Production**: Wrote The Cycle Pulse Edition 78 using 5 parallel Claude Code desk agents
+  - Downloaded 9 citizen ledger files from Google Drive (792KB total: Generic Citizens, Chicago Citizens, Cultural Ledger, Civic Office Ledger, Civic Sweep Report, Neighborhood Map, Citizen Media Usage, Simulation Ledger, Full Text Mirror)
+  - Compiled HANDOFF_C78.txt (15KB editorial brief) fed to all agents as structured input
+  - **5 parallel agents launched simultaneously**: Civic Desk (Carmen Delaine), Sports Desk (Anthony + Selena Grant), Chicago Bureau (Talia Finch), Faith/Culture Desk (Elliot Graye), Letters Desk (citizen voices)
+  - **Total agent wall time: ~70 seconds** (longest was Sports at 71s)
+  - **Output**: 6 articles + 3 letters, 14 citizens quoted in articles, 3 in letters
+  - **Editorial decisions**: Stabilization Fund passes 6-3 (Vega + Tran YES, CRC bloc NO), Bulls beat Hornets 108-91 (record to 34-14)
+  - **Canon corrections applied**: 5 wrong council first names fixed from agent output (Ramon Vega, Leonard Tran, Warren Ashford, Nina Chen, Rose Delgado), Davis position CF not SS, spurious "Council Member Reyes" removed
+  - **4 new canon figures**: Rabbi Miriam Adler (Beth Jacob), Imam Yusuf Kareem (Masjid Al-Islam), Tiffany Gonzalez (76, Bronzeville, Jazz Musician), Thomas Jackson (66, Loop, Insurance Broker)
+  - **Full engine returns included**: Article Table (6 entries), Storylines Updated, Citizen Usage Log, Continuity Notes
+  - Key storyline: Faith community feature ("The Quiet Week") surfaced hidden story of 22 faith events across 10 neighborhoods
+  - **File**: `docs/cycle_pulse_edition_78.txt`
+  - **Commit**: `7e42242`
+  - **Workflow validated**: compileHandoff → parallel desk agents → editorial compilation → canon correction → engine returns. This is the production model for future editions.
 
 ### 2026-02-08
 - **Media Room Handoff Guide**: Created `docs/MEDIA_ROOM_HANDOFF.md` — structured workflow replacing ad-hoc "drop everything into chat"
@@ -341,11 +358,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 21. **PENDING**: Supermemory Pro subscription ($19/mo) — blocks codebase indexing
 22. **PENDING**: Apple Claude subscription migration — cancel expires 2/16, re-subscribe direct ($49/mo savings)
 
+23. **COMPLETE**: Edition 78 written by parallel agents — 6 articles + 3 letters, 14 citizens quoted, 4 new canon figures
+24. **VALIDATED**: Parallel-agent newsroom workflow — compileHandoff → 5 desk agents → editorial compilation → engine returns
+
 **Next Actions:**
-1. Build `compileHandoff()` script in Google Apps Script (automates the handoff compilation)
+1. Build `compileHandoff()` script in Google Apps Script (automates the handoff compilation from ledger data)
 2. Integration testing — run 5+ cycles with all Tier 7 systems active
 3. Activate Supermemory Pro after subscription sort (2/16)
-4. Use HANDOFF_C78.txt for Edition 78 Media Room session
+4. Feed Edition 78 returns back to engine (Article Table → Media_Intake, Storylines → Storyline_Intake, Usage → Citizen_Usage_Intake)
 
 ---
 

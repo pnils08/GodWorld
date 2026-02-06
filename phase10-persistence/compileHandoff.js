@@ -55,10 +55,21 @@ function compileHandoffFromMenu() {
  */
 function compileHandoff(cycleNumber) {
   var startTime = new Date();
+  var ss = openSimSpreadsheet_();
+
+  // Auto-detect cycle when called without argument (e.g., from Apps Script Run button)
+  if (cycleNumber === undefined || cycleNumber === null || cycleNumber === 0) {
+    cycleNumber = getCurrentCycle_(ss);
+    if (!cycleNumber || cycleNumber === 0) {
+      showAlert_('Handoff Error', 'Could not determine current cycle.');
+      return;
+    }
+    Logger.log('compileHandoff: Auto-detected cycle ' + cycleNumber);
+  }
+
   Logger.log('compileHandoff v1.0: Starting for cycle ' + cycleNumber);
 
   try {
-    var ss = openSimSpreadsheet_();
     var cache = createSheetCache_(ss);
 
     // Load all data
@@ -505,55 +516,102 @@ function loadInitiatives_(cache) {
 
 
 /**
- * Loads A's and Bulls rosters from Simulation_Ledger.
+ * Loads A's and Bulls rosters from Simulation_Ledger + Chicago_Citizens.
+ * Caps to Tier 1-2 for A's (key named players only) and deduplicates.
  */
 function loadPlayerRosters_(cache) {
-  var values = cache.getValues(SHEET_NAMES.SIMULATION_LEDGER);
-  if (values.length < 2) return { as: [], bulls: [] };
-
-  var header = values[0];
-  var idx = createColIndex_(header);
-  var iFirst = idx('First');
-  var iMiddle = idx('Middle');
-  var iLast = idx('Last');
-  var iOriginGame = idx('OriginGame');
-  var iTier = idx('Tier');
-  var iRoleType = idx('RoleType');
-  var iStatus = idx('Status');
-  var iPopId = idx('POPID');
-
   var asRoster = [];
   var bullsRoster = [];
+  var seenAs = {};
+  var seenBulls = {};
 
-  for (var r = 1; r < values.length; r++) {
-    var row = values[r];
-    var origin = String(safeColRead_(row, iOriginGame, '')).toLowerCase();
-    var roleType = String(safeColRead_(row, iRoleType, '')).toLowerCase();
-    var status = String(safeColRead_(row, iStatus, '')).toLowerCase();
-    var first = String(safeColRead_(row, iFirst, ''));
-    var last = String(safeColRead_(row, iLast, ''));
+  // Scan Simulation_Ledger for A's and Bulls players
+  var values = cache.getValues(SHEET_NAMES.SIMULATION_LEDGER);
+  if (values.length >= 2) {
+    var header = values[0];
+    var idx = createColIndex_(header);
+    var iFirst = idx('First');
+    var iLast = idx('Last');
+    var iOriginGame = idx('OriginGame');
+    var iTier = idx('Tier');
+    var iRoleType = idx('RoleType');
+    var iStatus = idx('Status');
+    var iPopId = idx('POPID');
 
-    if (!first && !last) continue;
-    if (status === 'inactive' || status === 'removed') continue;
+    for (var r = 1; r < values.length; r++) {
+      var row = values[r];
+      var origin = String(safeColRead_(row, iOriginGame, '')).toLowerCase();
+      var roleType = String(safeColRead_(row, iRoleType, '')).toLowerCase();
+      var status = String(safeColRead_(row, iStatus, '')).toLowerCase();
+      var first = String(safeColRead_(row, iFirst, ''));
+      var last = String(safeColRead_(row, iLast, ''));
+      var tier = Number(safeColRead_(row, iTier, 9));
+      var popId = String(safeColRead_(row, iPopId, ''));
 
-    var name = first;
-    if (last) name = first + ' ' + last;
+      if (!first && !last) continue;
+      if (status === 'inactive' || status === 'removed') continue;
 
-    var tier = String(safeColRead_(row, iTier, ''));
-    var popId = String(safeColRead_(row, iPopId, ''));
+      var name = first;
+      if (last) name = first + ' ' + last;
 
-    // A's / MLB players
-    if (origin.indexOf('mlb') >= 0 || origin.indexOf("a's") >= 0 ||
-        origin.indexOf('oakland') >= 0 || roleType.indexOf('mlb') >= 0 ||
-        roleType.indexOf('baseball') >= 0) {
-      asRoster.push({ name: name, tier: tier, popId: popId, roleType: roleType });
+      // A's / MLB players — Tier 1-2 only for canon reference
+      if (origin.indexOf('mlb') >= 0 || origin.indexOf("a's") >= 0 ||
+          origin.indexOf('oakland') >= 0 || roleType.indexOf('mlb') >= 0 ||
+          roleType.indexOf('baseball') >= 0) {
+        if (tier <= 2 && !seenAs[name]) {
+          seenAs[name] = true;
+          asRoster.push({ name: name, tier: String(tier), popId: popId });
+        }
+      }
+
+      // Bulls / NBA players from Simulation_Ledger
+      if (origin.indexOf('nba') >= 0 || origin.indexOf('bulls') >= 0 ||
+          roleType.indexOf('nba') >= 0 || roleType.indexOf('basketball') >= 0) {
+        if (!seenBulls[name]) {
+          seenBulls[name] = true;
+          bullsRoster.push({ name: name, tier: String(tier), popId: popId });
+        }
+      }
     }
+  }
 
-    // Bulls / NBA players
-    if (origin.indexOf('nba') >= 0 || origin.indexOf('bulls') >= 0 ||
-        origin.indexOf('chicago') >= 0 || roleType.indexOf('nba') >= 0 ||
-        roleType.indexOf('basketball') >= 0) {
-      bullsRoster.push({ name: name, tier: tier, popId: popId, roleType: roleType });
+  // Also scan Chicago_Citizens for Bulls players
+  var chiValues = cache.getValues(SHEET_NAMES.CHICAGO_CITIZENS);
+  if (chiValues.length >= 2) {
+    var chiHeader = chiValues[0];
+    var chiIdx = createColIndex_(chiHeader);
+    var ciFirst = chiIdx('First');
+    var ciLast = chiIdx('Last');
+    var ciTier = chiIdx('Tier');
+    var ciRoleType = chiIdx('RoleType');
+    var ciStatus = chiIdx('Status');
+    var ciPopId = chiIdx('POPID');
+    var ciOrigin = chiIdx('OriginGame');
+
+    for (var cr = 1; cr < chiValues.length; cr++) {
+      var crow = chiValues[cr];
+      var cStatus = String(safeColRead_(crow, ciStatus, '')).toLowerCase();
+      var cFirst = String(safeColRead_(crow, ciFirst, ''));
+      var cLast = String(safeColRead_(crow, ciLast, ''));
+      var cOrigin = String(safeColRead_(crow, ciOrigin, '')).toLowerCase();
+      var cRole = String(safeColRead_(crow, ciRoleType, '')).toLowerCase();
+
+      if (!cFirst && !cLast) continue;
+      if (cStatus === 'inactive' || cStatus === 'removed') continue;
+
+      var cName = cFirst;
+      if (cLast) cName = cFirst + ' ' + cLast;
+
+      // Include NBA/basketball/Bulls players
+      if (cOrigin.indexOf('nba') >= 0 || cOrigin.indexOf('bulls') >= 0 ||
+          cRole.indexOf('nba') >= 0 || cRole.indexOf('basketball') >= 0) {
+        if (!seenBulls[cName]) {
+          seenBulls[cName] = true;
+          var cTier = String(safeColRead_(crow, ciTier, ''));
+          var cPopId = String(safeColRead_(crow, ciPopId, ''));
+          bullsRoster.push({ name: cName, tier: cTier, popId: cPopId });
+        }
+      }
     }
   }
 

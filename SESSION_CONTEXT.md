@@ -73,7 +73,7 @@ GodWorld/
 | Career Engine | runCareerEngine.js | v2.3.1 | 4 industries, 3 employer types |
 | Economic Ripple | economicRippleEngine.js | v2.3 | Reads careerSignals |
 | Civic Initiative | civicInitiativeEngine.js | v1.6 | Date parsing fix, faction trim, ripple consumer |
-| Story Hook | storyHook.js | v3.8 | Theme-aware hook generation |
+| Story Hook | storyHook.js | v3.9 | Theme-aware hooks + sports feed triggers |
 | Story Seeds | applyStorySeeds.js | v3.9 | Voice-matched story seeds |
 | Roster Lookup | rosterLookup.js | v2.2 | Theme matching, voice profiles, citizen-to-journalist matching |
 | Media Briefing | mediaRoomBriefingGenerator.js | v2.6 | Consumer wiring: Section 13/14/17 enhancements |
@@ -145,6 +145,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Seeds and hooks now show suggestedJournalist, suggestedAngle, matchConfidence
   - First line of voiceGuidance displayed inline
   - Last open roster integration item — all consumer wiring now complete
+- **Multi-journalist coverage gap fix**: `extractAllJournalistNames_()` splits multi-journalist strings (e.g., "Anthony/P Slayer/Hal Richmond"), sports + chicago desks added to Section 17 voice profile collection, cap raised to 8
+- **Hardcoded Spreadsheet ID**: Already done (v2.14) — marked as Done in PRIORITY_TASKS.md
+- **Sports Integration**: Wired orphaned `sportsEventTriggers` and `sportsNeighborhoodEffects` into consumers
+  - **storyHook.js v3.9**: 9 trigger types (hot-streak, cold-streak, playoff-push, playoff-clinch, eliminated, championship, rivalry, home-opener, season-finale) generate team-specific story hooks
+  - **cityEveningSystems.js**: Game-day crowd boost — sports neighborhood effects added to crowd map
+  - **mediaRoomBriefingGenerator.js**: Section 12 (SPORTS DESK) now shows active triggers with team, streak, and sentiment
+  - **buildMediaPacket.js v2.4**: Voice guidance on story seeds and hooks (Section 7)
+- **PRIORITY_TASKS.md**: Sports Integration marked Done, Hardcoded Spreadsheet ID marked Done
 
 ### 2026-02-06 (Session 2, continued)
 - **Echo removal**: Removed all Echo (Oakland Echo) code and references — Echo was never a real publication (originated from Grok experimentation)
@@ -250,6 +258,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
 8. **COMPLETE**: Theme-aware hook generation (storyHook.js v3.8)
 9. **COMPLETE**: Voice-matched story seeds (applyStorySeeds.js v3.9)
 10. **COMPLETE**: Consumer wiring — briefing v2.6 (Section 13 enhanced, Section 14 wired, Section 17 voice profiles)
+11. **COMPLETE**: Sports Integration — trigger hooks, crowd effects, briefing display
+12. **COMPLETE**: buildMediaPacket.js v2.4 — voice guidance on seeds/hooks
 
 ---
 

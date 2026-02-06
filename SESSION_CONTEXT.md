@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-06 | Engine: v3.1 | Cycle: 78
+Last Updated: 2026-02-07 | Engine: v3.1 | Cycle: 78
 
 ---
 
@@ -79,6 +79,7 @@ GodWorld/
 | Media Briefing | mediaRoomBriefingGenerator.js | v2.6 | Consumer wiring: Section 13/14/17 enhancements |
 | Media Packet | buildMediaPacket.js | v2.4 | Voice guidance on story seeds & hooks |
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
+| Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 
 ---
 
@@ -125,6 +126,23 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-07
+- **Bond Persistence Fix**: Two bugs found and fixed in `godWorldEngine2.js`
+  - `saveV3BondsToLedger_(ctx)` was defined in bondEngine.js but NEVER CALLED from either V2 or V3 engine pipeline
+  - V3 engine was missing `loadRelationshipBonds_(ctx)` call before `runBondEngine_()`
+  - Added `Phase10-BondLedger` → `saveV3BondsToLedger_(ctx)` to both V2 (line 282) and V3 (line 1389)
+  - Added `Phase4-LoadBonds` → `loadRelationshipBonds_(ctx)` to V3 (line 1306)
+  - **Commit**: `17b097c`
+- **Dashboard v2.0 → v2.1**: Full rewrite of `utilities/godWorldDashboard.js`
+  - Expanded from 4 cards (~12 data points) to 7 cards (~28 data points)
+  - New cards: CALENDAR (Season, Holiday, Sports, First Friday/Creation Day), WORLD PULSE (Civic Load, Migration, Pattern, Cycle Weight + Nightlife, Traffic, Retail, Employment), CIVIC (Active, Pending Vote, Passed, Failed from Initiative_Tracker), BONDS (Active, Rivalries, Alliances, Peak Intensity from Relationship_Bonds)
+  - v2.1 fixes: `A:Z` → `2:2`/`1:1` (full-row INDEX/MATCH for sheets with 29+ columns), `wpPct()` for percentage formatting, `wpR()` for rounding, uniform font sizes, parallel city card layout (both show Weather/Sentiment/Mood/Team/Streak)
+  - Dark theme with per-card color accents (green=Oakland, blue=Chicago, amber=Calendar, purple=Pulse, green=Civic, rose=Bonds)
+  - **Commits**: `ebd736b` (v2.0), `82ba6e0` (v2.1)
+- **.claspignore Fix**: Added `lib/**` to prevent Node.js files (`lib/sheets.js`) from being uploaded to Apps Script as `.gs` files, which caused `ReferenceError: require is not defined`
+  - Note: `clasp push` does NOT auto-delete previously uploaded files — user had to manually delete `lib/sheets.gs` from the Apps Script editor
+  - **Commit**: `127669c`
 
 ### 2026-02-06 (Session 3)
 - **Consumer Wiring**: mediaRoomBriefingGenerator.js v2.5 → v2.6
@@ -282,6 +300,11 @@ Before editing, check what reads from and writes to the affected ctx fields.
 13. **COMPLETE**: Engine-side continuityHints — computeRecurringCitizens v1.0, wired Phase 6
 14. **COMPLETE**: PolicyDomain column — sheet schema, seed data, demographic influence all wired
 15. **PARTIAL**: Tech debt null checks — 22 fixes in civicInitiativeEngine, bondEngine, economicRippleEngine
+16. **COMPLETE**: Bond persistence fix — saveV3BondsToLedger_ wired into V2/V3, loadRelationshipBonds_ added to V3
+17. **COMPLETE**: Dashboard v2.1 — 7 cards, 28 data points (Calendar, World Pulse, Civic, Bonds)
+18. **COMPLETE**: .claspignore fix — lib/** excluded to prevent require() error
+
+**Next Action:** Integration testing — run 5+ cycles with all Tier 7 systems active
 
 ---
 

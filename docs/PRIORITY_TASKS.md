@@ -1,7 +1,7 @@
 # Priority Task List
 
 **Created:** 2026-02-02
-**Updated:** 2026-02-06
+**Updated:** 2026-02-07
 **Status:** Active tracking document
 
 ---
@@ -41,6 +41,14 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Wire matchCitizenToJournalist_ | Section 14 citizen spotlight journalist recommendations | Done (v2.6) |
 | Briefing Section 17: Voice Profiles | getFullVoiceProfile_() for priority-assigned journalists | Done (v2.6) |
 | Enhanced Section 13 | openingStyle + themes detail lines on desk assignments | Done (v2.6) |
+
+### Completed: Bug Fixes & Dashboard (2026-02-07)
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Bond persistence fix | saveV3BondsToLedger_ wired into V2/V3, loadRelationshipBonds_ added to V3 | Done |
+| Dashboard v2.1 | 7 cards, 28 data points — Calendar, World Pulse, Civic, Bonds | Done (v2.1) |
+| .claspignore fix | lib/** excluded — prevented require() error from lib/sheets.js | Done |
 
 ### Previously Completed (Tier 7 / Bug Fixes)
 
@@ -83,6 +91,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Sports Integration | Trigger hooks, crowd effects, briefing display | Done (v3.9/v2.6) |
 | Engine-side continuityHints | Populate recurringCitizens for buildContinuityHints_ | Done (v1.0) |
 | PolicyDomain column | Sheet schema, seed data, demographic influence | Done (v1.6) |
+| Dashboard v2.1 | Calendar, World Pulse, Civic, Bonds cards + formatting | Done (v2.1) |
 
 ---
 

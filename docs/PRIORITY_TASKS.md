@@ -34,13 +34,13 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Agent Newsroom architecture plan | Done | docs/AGENT_NEWSROOM.md |
 | Echo removal (never a real publication) | Done | — |
 
-### Consumer Wiring (Not Yet Done)
+### Completed: Consumer Wiring (2026-02-06)
 
 | Task | Description | Status |
 |------|-------------|--------|
-| Wire matchCitizenToJournalist_ | Connect to media briefing or story seed consumers | Not started |
-| Briefing Section 17: Voice Profiles | Add getFullVoiceProfile_() output to media briefings | Not started |
-| Enhanced Section 13 | Add openingStyle + themes to reporter assignments | Not started |
+| Wire matchCitizenToJournalist_ | Section 14 citizen spotlight journalist recommendations | Done (v2.6) |
+| Briefing Section 17: Voice Profiles | getFullVoiceProfile_() for priority-assigned journalists | Done (v2.6) |
+| Enhanced Section 13 | openingStyle + themes detail lines on desk assignments | Done (v2.6) |
 
 ### Previously Completed (Tier 7 / Bug Fixes)
 
@@ -103,9 +103,9 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 |----------|-----------|-----------|
 | Tier 7 Features | 5/5 | 0 |
 | Journalist Matching & Media | 11/11 | 0 |
-| Consumer Wiring | 0/3 | 3 |
+| Consumer Wiring | 3/3 | 0 |
 | Testing | 0/3 | 3 |
 | Tech Debt | 0/2 | 2 (low priority) |
 | Optional | 0/3 | 3 |
 
-**Next Action:** Wire consumer integrations (matchCitizenToJournalist_, briefing voice profiles, section 13 enhancements), then integration testing.
+**Next Action:** Integration testing — run 5+ cycles with all systems active.

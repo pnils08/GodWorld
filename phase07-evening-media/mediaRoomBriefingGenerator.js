@@ -1,7 +1,13 @@
 /**
  * ============================================================================
- * MEDIA ROOM BRIEFING v2.5 — STORYLINE TRACKER INTEGRATION
+ * MEDIA ROOM BRIEFING v2.6 — CONSUMER WIRING INTEGRATION
  * ============================================================================
+ *
+ * v2.6 Enhancements:
+ * - Section 13: openingStyle + themes detail lines on desk assignments
+ * - Section 14: matchCitizenToJournalist_ integration for journalist recommendations
+ * - Section 17: VOICE PROFILES for priority-assigned journalists
+ * - New helpers: extractJournalistName_(), getAssignmentDetail_(), generateVoiceProfiles_()
  *
  * v2.5 Enhancements:
  * - Section 16: STORYLINE BRIEF for active storyline tracking
@@ -658,16 +664,23 @@ function generateMediaBriefing_(ctx) {
   
   var assignments = generateSectionAssignments_(S, arcReport, seeds, promotions, cal, civic);
   
-  briefing.push('FRONT PAGE: ' + assignments.frontPage);
-  briefing.push('METRO: ' + assignments.metro);
-  briefing.push('CIVIC: ' + assignments.civic);
-  briefing.push('BUSINESS: ' + assignments.business);
-  briefing.push('SPORTS: ' + assignments.sports);
-  briefing.push('CHICAGO: ' + assignments.chicago);
-  briefing.push('CULTURE: ' + assignments.culture);
-  briefing.push('OPINION: ' + assignments.opinion);
+  // v2.6: Desk assignments with openingStyle + themes detail lines
+  var deskKeys = ['frontPage', 'metro', 'civic', 'business', 'sports', 'chicago', 'culture', 'opinion'];
+  var deskLabels = ['FRONT PAGE', 'METRO', 'CIVIC', 'BUSINESS', 'SPORTS', 'CHICAGO', 'CULTURE', 'OPINION'];
+
+  for (var di = 0; di < deskKeys.length; di++) {
+    briefing.push(deskLabels[di] + ': ' + assignments[deskKeys[di]]);
+    var detail = getAssignmentDetail_(assignments[deskKeys[di]]);
+    for (var dj = 0; dj < detail.length; dj++) {
+      briefing.push(detail[dj]);
+    }
+  }
   if (assignments.festival) {
     briefing.push('FESTIVAL: ' + assignments.festival);
+    var festDetail = getAssignmentDetail_(assignments.festival);
+    for (var fdi = 0; fdi < festDetail.length; fdi++) {
+      briefing.push(festDetail[fdi]);
+    }
   }
   if (assignments.election) {
     briefing.push('ELECTION: ' + assignments.election);
@@ -718,6 +731,21 @@ function generateMediaBriefing_(ctx) {
   var storylineBrief = generateStorylineBrief_(ctx, S, cycle);
   for (var sbi = 0; sbi < storylineBrief.length; sbi++) {
     briefing.push(storylineBrief[sbi]);
+  }
+  briefing.push('');
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v2.6: SECTION 17: VOICE PROFILES
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  briefing.push('## 17. VOICE PROFILES');
+  briefing.push('');
+  briefing.push('Voice guidance for journalists assigned to priority stories this cycle:');
+  briefing.push('');
+
+  var voiceProfileLines = generateVoiceProfiles_(frontPageCall, assignments, arcReport);
+  for (var vpi = 0; vpi < voiceProfileLines.length; vpi++) {
+    briefing.push(voiceProfileLines[vpi]);
   }
   briefing.push('');
 
@@ -782,6 +810,17 @@ function generateCitizenSpotlight_(ctx, S, cal) {
   var lines = [];
   var citizenLookup = ctx.citizenLookup || {};
   var popIds = Object.keys(citizenLookup);
+
+  // v2.6: Collect active story domains for journalist matching
+  var activeArcs = (S && S.eventArcs) || [];
+  var firstActiveDomain = null;
+  for (var adi = 0; adi < activeArcs.length; adi++) {
+    var arc = activeArcs[adi];
+    if (arc && arc.phase !== 'resolved') {
+      firstActiveDomain = arc.domainTag || arc.domain || null;
+      if (firstActiveDomain) break;
+    }
+  }
 
   if (popIds.length === 0) {
     lines.push('(No citizen data available for spotlight)');
@@ -860,6 +899,14 @@ function generateCitizenSpotlight_(ctx, S, cal) {
       lines.push('  - ' + c.name + occStr + ' [' + c.archetype + '] — ' + c.angle);
       if (c.tone !== 'plain') {
         lines.push('    Tone: ' + c.tone + ' — matches ' + (c.tone === 'noir' ? 'investigative' : c.tone === 'bright' ? 'uplifting' : 'conflict') + ' angles');
+      }
+
+      // v2.6: Journalist match via matchCitizenToJournalist_
+      if (typeof matchCitizenToJournalist_ === 'function') {
+        var match = matchCitizenToJournalist_(c.archetype, nhName, firstActiveDomain);
+        if (match.journalist) {
+          lines.push('    → Best-fit journalist: ' + match.journalist + ' | Angle: ' + match.interviewAngle + ' [' + match.confidence + ']');
+        }
       }
     }
   }
@@ -1743,6 +1790,76 @@ function getEngineContinuity_(S, arcs) {
 
 
 /**
+ * v2.6: Generate voice profile blocks for journalists in priority assignments.
+ * Collects unique journalist names from front page, desk leads, and new arcs.
+ * Caps output at 5 profiles to keep briefing manageable.
+ *
+ * @param {Object} frontPageCall - Front page assignment { reporter, lead, signal }
+ * @param {Object} assignments - Section assignments { frontPage, metro, civic, ... }
+ * @param {Object} arcReport - Categorized arcs { new, active, phaseChange, resolved }
+ * @returns {Array<string>} Lines for the voice profiles section
+ */
+function generateVoiceProfiles_(frontPageCall, assignments, arcReport) {
+  var lines = [];
+
+  if (typeof getFullVoiceProfile_ !== 'function') {
+    lines.push('(Voice profiles unavailable — roster not loaded)');
+    return lines;
+  }
+
+  // Collect priority journalist names
+  var priorityNames = [];
+
+  // 1. Front page reporter
+  if (frontPageCall && frontPageCall.reporter) {
+    var fpName = extractJournalistName_(frontPageCall.reporter);
+    if (fpName) priorityNames.push(fpName);
+  }
+
+  // 2. Desk leads (key desks only)
+  var deskKeys = ['metro', 'civic', 'culture'];
+  for (var di = 0; di < deskKeys.length; di++) {
+    if (assignments && assignments[deskKeys[di]]) {
+      var deskName = extractJournalistName_(assignments[deskKeys[di]]);
+      if (deskName) priorityNames.push(deskName);
+    }
+  }
+
+  // 3. New arc reporters
+  if (arcReport && arcReport.new) {
+    for (var ni = 0; ni < arcReport.new.length; ni++) {
+      var arc = arcReport.new[ni];
+      if (typeof getArcReporter_ === 'function') {
+        var arcReporter = extractJournalistName_(getArcReporter_(arc.type, arc.domain));
+        if (arcReporter) priorityNames.push(arcReporter);
+      }
+    }
+  }
+
+  // Output profiles for unique journalists (max 5)
+  var seen = {};
+  var count = 0;
+  for (var pi = 0; pi < priorityNames.length && count < 5; pi++) {
+    var name = priorityNames[pi];
+    if (seen[name]) continue;
+    seen[name] = true;
+
+    var profile = getFullVoiceProfile_(name);
+    if (profile && profile.indexOf('Unknown journalist') < 0) {
+      lines.push(profile);
+      lines.push('');
+      count++;
+    }
+  }
+
+  if (count === 0) {
+    lines.push('(No voice profiles available for this cycle\'s assignments)');
+  }
+
+  return lines;
+}
+
+/**
  * v2.3: Calendar and civic-aware section assignments with roster lookup
  */
 function generateSectionAssignments_(S, arcReport, seeds, promotions, cal, civic) {
@@ -1825,4 +1942,68 @@ function generateSectionAssignments_(S, arcReport, seeds, promotions, cal, civic
   }
 
   return assignments;
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// v2.6: SHARED HELPERS
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * v2.6: Extract a journalist name from an assignment string.
+ * Handles formats like "Carmen Delaine — civic desk", "Dr. Lila Mezran leads",
+ * "🗳️ ELECTION: Carmen Delaine lead", "Mags Corliss calls — see Front Page".
+ *
+ * @param {string} str - Assignment or reporter string
+ * @returns {string|null} Extracted journalist name, or null
+ */
+function extractJournalistName_(str) {
+  if (!str) return null;
+  str = String(str);
+
+  // Remove leading emojis and section labels like "🗳️ ELECTION: "
+  str = str.replace(/^[^A-Za-z]*(?:[A-Z]+:\s*)?/, '').trim();
+
+  // Match name patterns: "Dr. Lila Mezran", "Sgt. Rachel Torres", "Carmen Delaine"
+  var match = str.match(/^((?:Dr\.|Sgt\.|Prof\.)?\s*[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/);
+  if (!match) return null;
+
+  var candidate = match[1].trim();
+
+  // Remove trailing action words
+  candidate = candidate.replace(/\s+(calls|leads|lead|on|or|and)$/i, '').trim();
+
+  if (!candidate) return null;
+
+  // Validate against roster if possible
+  if (typeof isValidJournalist_ === 'function') {
+    return isValidJournalist_(candidate) ? candidate : null;
+  }
+
+  return candidate;
+}
+
+/**
+ * v2.6: Get detail lines (openingStyle + themes) for a section assignment.
+ *
+ * @param {string} assignmentStr - The assignment string (e.g., "Carmen Delaine — civic desk")
+ * @returns {Array<string>} Indented detail lines (may be empty)
+ */
+function getAssignmentDetail_(assignmentStr) {
+  if (!assignmentStr || typeof getJournalistOpeningStyle_ !== 'function') return [];
+
+  var name = extractJournalistName_(assignmentStr);
+  if (!name) return [];
+
+  var details = [];
+  var openingStyle = getJournalistOpeningStyle_(name);
+  var themes = (typeof getJournalistThemes_ === 'function') ? getJournalistThemes_(name) : null;
+
+  if (openingStyle) {
+    details.push('  Opening: ' + openingStyle);
+  }
+  if (themes && themes.length > 0) {
+    details.push('  Themes: ' + themes.slice(0, 3).join(', '));
+  }
+
+  return details;
 }

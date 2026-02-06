@@ -29,32 +29,28 @@ Every Media Room session starts fresh. Claude forgets who citizens are, what hap
 - Juggling 3+ chat sessions to maintain context
 - Re-explaining citizen details every time
 
-**Solution: OpenClaw Integration**
+**Solution: MCP-Based Stack (replaces OpenClaw plan)**
 
 ```
 BEFORE (Manual):
 Simulation → Manual export → Juggle 3 chats → Manually compile Pulse
 
 AFTER (Automated):
-Simulation → Auto-sync to persistent memory → Single Media Room with full context → Auto-generate Pulse
+Simulation → cron sync to SQLite → Supermemory shares context across clients
+         → Agent Newsroom generates media → claude.ai MCP queries data directly
 ```
 
-OpenClaw provides:
-1. **Persistent citizen memory** - SQLite database that remembers all citizens, their history, relationships
-2. **Automatic sync** - Pulls from Google Sheets after each cycle
-3. **Autonomous generation** - Media Room can generate content without manual prompting
-4. **Continuity checking** - Validates names, timelines, arc consistency before publishing
+The automation stack is built from focused tools instead of a monolithic framework:
 
----
+| Need | Tool | Status |
+|------|------|--------|
+| Persistent session memory | **Supermemory MCP** — shared across Claude Code, claude.ai, Desktop | Plugin installed, needs Pro sub |
+| Citizen data access | **claude.ai MCP connector** — query SQLite or Sheets directly | Not started |
+| Media generation | **Agent Newsroom (Claude Agent SDK)** — 25 journalist agents | Planned (docs/AGENT_NEWSROOM.md) |
+| Auto-sync from Sheets | **cron + scripts/sync.js** — on DigitalOcean | Scripts exist, cron not configured |
+| Continuity checking | **Agent Newsroom** — Rhea Morgan (continuity agent) runs every cycle | Planned |
 
-## What This Is NOT (Yet)
-
-Future concepts (not current priority):
-- Chatting directly with citizens as characters
-- Interactive Media Room conversations
-- Real-time citizen Q&A
-
-These are interesting future directions but **not the core goal**. The core goal is **automating the document flow and giving the Media Room persistent memory**.
+> **Note:** The original OpenClaw integration plan is preserved in `docs/OPENCLAW_INTEGRATION.md` if needed down the line. OpenClaw was planned before MCP connectors, Supermemory, and the Agent SDK existed. The individual capabilities it provided are now covered by simpler, focused tools.
 
 ---
 
@@ -72,17 +68,38 @@ These are interesting future directions but **not the core goal**. The core goal
 └─────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                    OPENCLAW (Server)                         │
+│               DIGITALOCEAN DROPLET ($5/mo)                   │
 │                                                              │
-│  godworld-sync/ → reads exports, updates SQLite             │
+│  Claude Code ← Supermemory MCP (persistent dev memory)      │
 │       ↓                                                      │
-│  SQLite database (citizens, cycles, initiatives)            │
+│  cron + sync.js → reads exports, updates SQLite             │
 │       ↓                                                      │
-│  media-generator/ → queries SQLite, calls Claude API        │
+│  SQLite database (citizens, cycles, initiatives, arcs)      │
 │       ↓                                                      │
-│  Output: media/cycle-XX/tribune-pulse.md                    │
+│  Agent Newsroom (Claude Agent SDK) → media generation       │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│                   CLAUDE.AI (Media Room)                      │
+│                                                              │
+│  MCP connector → queries SQLite / Supermemory               │
+│       ↓                                                      │
+│  Journalists write with full context + persistent memory    │
+│       ↓                                                      │
+│  Output: Bay Tribune Pulse, Council Watch, etc.             │
 └─────────────────────────────────────────────────────────────┘
 ```
+
+---
+
+## What This Is NOT (Yet)
+
+Future concepts (not current priority):
+- Chatting directly with citizens as characters
+- Interactive Media Room conversations
+- Real-time citizen Q&A
+
+These are interesting future directions but **not the core goal**. The core goal is **automating the document flow and giving the Media Room persistent memory**.
 
 ---
 
@@ -90,10 +107,10 @@ These are interesting future directions but **not the core goal**. The core goal
 
 | Component | Purpose | Status |
 |-----------|---------|--------|
-| DigitalOcean droplet | Headless server — Claude Code, OpenClaw, git repo | Active ($5/mo) |
+| DigitalOcean droplet | Headless server — Claude Code, git repo, SQLite, future Agent Newsroom | Active ($5/mo) |
 | Google Cloud Shell | clasp push deployment to Apps Script | Active (free) |
-| Google service account | Sheets API read access for OpenClaw | Configured (free) |
-| Anthropic API key | LLM for OpenClaw media generation | Key exists, not yet active |
+| Google service account | Sheets API read access for sync scripts | Configured (free) |
+| Anthropic API key | LLM calls for Agent Newsroom (future) | Key exists, not yet active |
 
 ---
 
@@ -115,15 +132,14 @@ These are interesting future directions but **not the core goal**. The core goal
 | Subscription | Cost | Notes |
 |-------------|------|-------|
 | Claude Max 5x (Apple) | $149/mo | Overpaying — Apple App Store 30% markup |
-| Supermemory browser extension | $9/mo | Wrong product — not useful for development |
-| **Total** | **$158/mo** | |
+| ~~Supermemory browser extension~~ | ~~$9/mo~~ | Canceled 2026-02-07 — wrong product |
+| **Total** | **$149/mo** | |
 
 ### Recommended Changes
 
 | Action | Savings | Notes |
 |--------|---------|-------|
 | Cancel Apple subscription, re-subscribe at claude.ai | -$49/mo | Same Max 5x plan, $100/mo direct vs $149 via Apple |
-| Cancel Supermemory browser extension | -$9/mo | Not useful for GodWorld dev workflow |
 | Add Supermemory Pro (developer tier) | +$19/mo | Persistent memory via MCP for Claude Code + claude.ai |
 | **Optional:** Downgrade Claude Max → Pro | -$80/mo | Test after Supermemory proves value |
 
@@ -136,8 +152,8 @@ These are interesting future directions but **not the core goal**. The core goal
 |---------|---------|------|
 | Claude (direct at claude.ai) | Claude Code + Media Room + web chat | $100/mo (Max) or $20/mo (Pro) |
 | Supermemory Pro | Persistent memory via MCP across all Claude clients | $19/mo |
-| DigitalOcean | Headless server — runs Claude Code, OpenClaw, GodWorld repo | $5/mo |
-| Anthropic API | LLM calls from OpenClaw media-generator (future) | ~$5-15/mo (usage-based) |
+| DigitalOcean | Headless server — Claude Code, git repo, SQLite, Agent Newsroom | $5/mo |
+| Anthropic API | LLM calls from Agent Newsroom (future) | ~$5-15/mo (usage-based) |
 | **Total (Phase 1)** | | **~$129-139/mo** |
 | **Total (Phase 2)** | | **~$49-59/mo** |
 
@@ -202,15 +218,32 @@ All three clients can connect to the same Supermemory MCP server, sharing a unif
 
 ---
 
+## OpenClaw — Deferred
+
+The original automation plan was built around OpenClaw as a monolithic middleware framework. With the arrival of MCP connectors, Supermemory, and the Claude Agent SDK, OpenClaw's individual capabilities are now covered by simpler, focused tools (see "The Automation Goal" above).
+
+**Full OpenClaw plan preserved in:** `docs/OPENCLAW_INTEGRATION.md`
+
+Existing OpenClaw code that remains useful without the framework:
+- `openclaw-skills/schemas/godworld.sql` — SQLite schema (used by sync scripts)
+- `openclaw-skills/godworld-sync/index.js` — sync logic (adaptable to standalone cron)
+- `openclaw-skills/media-generator/index.js` — routing logic (reference for Agent Newsroom)
+- `scripts/sync.js`, `scripts/init-db.js` — standalone Node.js tools
+
+---
+
 ## Current Status
 
 - [x] Simulation engine working (v3.1, Cycle 78)
 - [x] Export code written (exportCycleArtifacts.js)
-- [x] SQLite schema defined
-- [x] Media generator code written
-- [ ] OpenClaw server setup
-- [ ] Google Sheets credentials configured
-- [ ] End-to-end test with cycle comparison
+- [x] SQLite schema defined (openclaw-skills/schemas/godworld.sql)
+- [x] Sync scripts written (scripts/sync.js, godworld-sync/index.js)
+- [x] Media generator reference code (openclaw-skills/media-generator/index.js)
+- [x] Agent Newsroom architecture planned (docs/AGENT_NEWSROOM.md)
+- [x] Supermemory plugin installed + configured for Claude Code
 - [ ] Supermemory Pro subscription (blocks codebase indexing)
-- [ ] Cancel Apple Claude subscription, re-subscribe direct
+- [ ] Cancel Apple Claude subscription, re-subscribe direct (expires 2/16)
 - [ ] claude.ai MCP connector for Media Room sessions
+- [ ] Cron job for auto-sync (scripts/sync.js on DigitalOcean)
+- [ ] Agent Newsroom implementation (Claude Agent SDK)
+- [ ] End-to-end test with cycle comparison

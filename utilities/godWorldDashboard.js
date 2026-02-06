@@ -1,15 +1,23 @@
 /**
  * ============================================================================
- * GodWorld Dashboard v2.0
+ * GodWorld Dashboard v2.1
  * ============================================================================
  *
- * v2.0 Enhancements:
+ * v2.1 Fixes:
+ * - Fixed A:Z range limit — calendar columns past col 26 now found
+ *   (uses 2:2 / 1:1 for full-row INDEX/MATCH)
+ * - Employment formatted as percentage (90.1%)
+ * - Dynamics values rounded to 1 decimal
+ * - Oakland and Chicago cards now show parallel data
+ *   (Weather, Sentiment, Mood, Team, Streak)
+ * - Uniform font sizes: labels=10, values=12, big numbers=20
+ * - Consistent card title size (12pt bold)
+ *
+ * v2.0 Features:
  * - CALENDAR card: season, holiday, First Friday, Creation Day, sports season
- * - WORLD PULSE card: expanded signals + city dynamics (nightlife, traffic,
- *   retail, employment)
+ * - WORLD PULSE card: expanded signals + city dynamics
  * - CIVIC card: active initiatives, pending votes, pass/fail totals
  * - BONDS card: active bonds, rivalries, alliances, hottest intensity
- * - Events count added to Cycle card
  *
  * Data sources (all formula-driven, no engine changes):
  * - World_Population (single-row state sheet)
@@ -23,43 +31,62 @@
 
 function createGodWorldDashboard() {
   var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
-  var COLORS = {
+  var C = {
     base: '#0b0f1a',
     card: '#111827',
     cardOak: '#0d2818',
     cardChi: '#0d1a2e',
     cardCivic: '#0d1f0d',
     cardBonds: '#1f0d1a',
+    border: '#1f2937',
     label: '#9ca3af',
     value: '#ffffff',
-    accentOak: '#22c55e',
-    accentChi: '#3b82f6',
-    accentSignal: '#a78bfa',
-    accentCycle: '#fbbf24',
-    accentCivic: '#4ade80',
-    accentBonds: '#fb7185'
+    oak: '#22c55e',
+    chi: '#3b82f6',
+    pulse: '#a78bfa',
+    amber: '#fbbf24',
+    civic: '#4ade80',
+    bonds: '#fb7185',
+    red: '#ef4444'
   };
 
-  // Helper: INDEX/MATCH into World_Population row 2
+  // --- Formula helpers (v2.1: use 2:2 / 1:1 for full row coverage) ---
+
+  // Raw value from World_Population
   var wp = function(col) {
-    return '=IFERROR(INDEX(World_Population!A:Z,2,MATCH("' + col + '",World_Population!1:1,0)),"--")';
+    return '=IFERROR(INDEX(World_Population!2:2,MATCH("' + col + '",World_Population!1:1,0)),"--")';
   };
 
-  // Helper: Rounded version
-  var wpRound = function(col, digits) {
-    return '=IFERROR(ROUND(INDEX(World_Population!A:Z,2,MATCH("' + col + '",World_Population!1:1,0)),' + (digits || 2) + '),"--")';
+  // Rounded value
+  var wpR = function(col, d) {
+    return '=IFERROR(ROUND(INDEX(World_Population!2:2,MATCH("' + col + '",World_Population!1:1,0)),' + (d || 1) + '),"--")';
   };
+
+  // Percentage formatted
+  var wpPct = function(col) {
+    return '=IFERROR(TEXT(INDEX(World_Population!2:2,MATCH("' + col + '",World_Population!1:1,0)),"0.0%"),"--")';
+  };
+
+  // --- Style helpers ---
+  var LABEL = 10;
+  var VALUE = 12;
+  var BIG = 20;
+  var TITLE = 12;
+
+  var styleLabel = function(r) { r.setFontSize(LABEL).setFontColor(C.label); };
+  var styleValue = function(r, color) { r.setFontSize(VALUE).setFontColor(color || C.value).setFontWeight('bold'); };
+  var styleData = function(r, color) { r.setFontSize(VALUE).setFontColor(color || C.value); };
+  var styleBig = function(r, color) { r.setFontSize(BIG).setFontColor(color || C.value).setFontWeight('bold'); };
+  var styleTitle = function(r, color) { r.setFontSize(TITLE).setFontWeight('bold').setFontColor(color).setVerticalAlignment('middle'); };
+  var addBorder = function(range) { range.setBorder(true, true, true, true, false, false, C.border, SpreadsheetApp.BorderStyle.SOLID); };
 
   // Delete existing dashboard if present
   var existing = ss.getSheetByName('Dashboard');
-  if (existing) {
-    ss.deleteSheet(existing);
-  }
+  if (existing) ss.deleteSheet(existing);
 
-  // Create fresh dashboard
   var dash = ss.insertSheet('Dashboard');
 
-  // Wider layout with breathing room
+  // Column widths
   dash.setColumnWidth(1, 40);   // Left margin
   dash.setColumnWidth(2, 140);  // Labels
   dash.setColumnWidth(3, 160);  // Values
@@ -68,325 +95,226 @@ function createGodWorldDashboard() {
   dash.setColumnWidth(6, 160);  // Values
   dash.setColumnWidth(7, 40);   // Right margin
 
-  // Consistent row heights
-  for (var i = 1; i <= 55; i++) {
-    dash.setRowHeight(i, 24);
-  }
+  // Row heights
+  for (var i = 1; i <= 55; i++) dash.setRowHeight(i, 24);
 
   // Base styling
-  dash.getRange('A1:G55').setBackground(COLORS.base).setFontFamily('Arial').setFontColor(COLORS.value);
+  dash.getRange('A1:G55').setBackground(C.base).setFontFamily('Arial').setFontSize(LABEL).setFontColor(C.value);
 
   // ═══════════════════════════════════════════════════════════
   // HEADER (Rows 2-3)
   // ═══════════════════════════════════════════════════════════
   dash.setRowHeight(2, 40);
   dash.getRange('B2:F2').merge();
-  dash.getRange('B2').setValue('GODWORLD');
-  dash.getRange('B2').setFontSize(28).setFontWeight('bold').setFontColor(COLORS.value).setHorizontalAlignment('center');
+  dash.getRange('B2').setValue('GODWORLD').setFontSize(28).setFontWeight('bold').setFontColor(C.value).setHorizontalAlignment('center');
 
   dash.getRange('B3:F3').merge();
-  dash.getRange('B3').setValue('Mission Control');
-  dash.getRange('B3').setFontSize(11).setFontColor(COLORS.label).setHorizontalAlignment('center');
+  dash.getRange('B3').setValue('Mission Control').setFontSize(11).setFontColor(C.label).setHorizontalAlignment('center');
 
   // ═══════════════════════════════════════════════════════════
-  // CYCLE CARD (Rows 5-9) — enhanced with events count
+  // CYCLE CARD (Rows 5-9)
   // ═══════════════════════════════════════════════════════════
-  dash.getRange('B5:F9').setBackground(COLORS.card);
-  dash.getRange('B5:F9').setBorder(true, true, true, true, false, false, '#1f2937', SpreadsheetApp.BorderStyle.SOLID);
+  dash.getRange('B5:F9').setBackground(C.card);
+  addBorder(dash.getRange('B5:F9'));
 
-  // Cycle number - big and centered
   dash.setRowHeight(6, 60);
   dash.setRowHeight(7, 36);
   dash.getRange('B6:C7').merge();
   dash.getRange('B6').setFormula(wp('cycle'));
-  dash.getRange('B6').setFontSize(56).setFontWeight('bold').setFontColor(COLORS.accentCycle).setHorizontalAlignment('center').setVerticalAlignment('middle');
+  dash.getRange('B6').setFontSize(56).setFontWeight('bold').setFontColor(C.amber).setHorizontalAlignment('center').setVerticalAlignment('middle');
 
-  dash.getRange('B8').setValue('CYCLE');
-  dash.getRange('B8').setFontSize(10).setFontColor(COLORS.label).setHorizontalAlignment('center');
+  dash.getRange('B8').setValue('CYCLE').setFontSize(LABEL).setFontColor(C.label).setHorizontalAlignment('center');
 
-  // Status indicators - right side
-  dash.getRange('E6').setValue('Economy');
-  dash.getRange('F6').setFormula(wp('economy'));
-  dash.getRange('E6').setFontSize(9).setFontColor(COLORS.label);
-  dash.getRange('F6').setFontSize(12).setFontColor(COLORS.accentOak).setFontWeight('bold');
+  // Right side
+  styleLabel(dash.getRange('E6').setValue('Economy'));
+  styleValue(dash.getRange('F6').setFormula(wp('economy')), C.oak);
 
-  dash.getRange('E7').setValue('Population');
-  dash.getRange('F7').setFormula('=IFERROR(TEXT(INDEX(World_Population!A:Z,2,MATCH("totalPopulation",World_Population!1:1,0)),"#,##0"),"--")');
-  dash.getRange('E7').setFontSize(9).setFontColor(COLORS.label);
-  dash.getRange('F7').setFontSize(12).setFontColor(COLORS.value);
+  styleLabel(dash.getRange('E7').setValue('Population'));
+  styleValue(dash.getRange('F7').setFormula('=IFERROR(TEXT(INDEX(World_Population!2:2,MATCH("totalPopulation",World_Population!1:1,0)),"#,##0"),"--")'), C.value);
 
-  dash.getRange('E8').setValue('Events');
-  dash.getRange('F8').setFormula(wp('worldEventsCount'));
-  dash.getRange('E8').setFontSize(9).setFontColor(COLORS.label);
-  dash.getRange('F8').setFontSize(12).setFontColor(COLORS.value);
+  styleLabel(dash.getRange('E8').setValue('Events'));
+  styleData(dash.getRange('F8').setFormula(wp('worldEventsCount')));
 
-  // Shock - clean display
-  dash.getRange('E9').setValue('Shock');
-  dash.getRange('F9').setFormula('=IFERROR(IF(INDEX(World_Population!A:Z,2,MATCH("shockFlag",World_Population!1:1,0))="shock-flag","YES",IF(INDEX(World_Population!A:Z,2,MATCH("shockFlag",World_Population!1:1,0))="none","—","" & INDEX(World_Population!A:Z,2,MATCH("shockFlag",World_Population!1:1,0)))),"—")');
-  dash.getRange('E9').setFontSize(9).setFontColor(COLORS.label);
-  dash.getRange('F9').setFontSize(12).setFontColor(COLORS.accentCycle);
+  styleLabel(dash.getRange('E9').setValue('Shock'));
+  styleData(dash.getRange('F9').setFormula('=IFERROR(IF(INDEX(World_Population!2:2,MATCH("shockFlag",World_Population!1:1,0))="none","—",INDEX(World_Population!2:2,MATCH("shockFlag",World_Population!1:1,0))),"—")'), C.amber);
 
   // ═══════════════════════════════════════════════════════════
   // OAKLAND CARD (Rows 11-18)
   // ═══════════════════════════════════════════════════════════
-  dash.getRange('B11:C18').setBackground(COLORS.cardOak);
-  dash.getRange('B11:C18').setBorder(true, true, true, true, false, false, '#1f2937', SpreadsheetApp.BorderStyle.SOLID);
-
+  dash.getRange('B11:C18').setBackground(C.cardOak);
+  addBorder(dash.getRange('B11:C18'));
   dash.setRowHeight(11, 32);
+
   dash.getRange('B11:C11').merge();
-  dash.getRange('B11').setValue('  OAKLAND');
-  dash.getRange('B11').setFontSize(13).setFontWeight('bold').setFontColor(COLORS.accentOak).setVerticalAlignment('middle');
+  styleTitle(dash.getRange('B11').setValue('  OAKLAND'), C.oak);
 
-  // Weather
-  dash.getRange('B13').setValue('Weather');
-  dash.getRange('C13').setFormula(wp('weatherType'));
-  dash.getRange('B13').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C13').setFontSize(14).setFontColor(COLORS.value).setFontWeight('bold');
+  styleLabel(dash.getRange('B13').setValue('Weather'));
+  styleValue(dash.getRange('C13').setFormula(wp('weatherType')));
 
-  // Sentiment
-  dash.getRange('B14').setValue('Sentiment');
-  dash.getRange('C14').setFormula(wpRound('sentiment'));
-  dash.getRange('B14').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C14').setFontSize(14).setFontColor(COLORS.value).setFontWeight('bold');
+  styleLabel(dash.getRange('B14').setValue('Sentiment'));
+  styleData(dash.getRange('C14').setFormula(wpR('sentiment', 2)));
 
-  // Mood
-  dash.getRange('B15').setValue('Mood');
-  dash.getRange('C15').setFormula('=IFERROR(IF(INDEX(World_Population!A:Z,2,MATCH("sentiment",World_Population!1:1,0))>=0.3,"Thriving",IF(INDEX(World_Population!A:Z,2,MATCH("sentiment",World_Population!1:1,0))>=0.15,"Optimistic",IF(INDEX(World_Population!A:Z,2,MATCH("sentiment",World_Population!1:1,0))>=0,"Content",IF(INDEX(World_Population!A:Z,2,MATCH("sentiment",World_Population!1:1,0))>=-0.15,"Uneasy","Troubled")))),"--")');
-  dash.getRange('B15').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C15').setFontSize(12).setFontColor(COLORS.label);
+  styleLabel(dash.getRange('B15').setValue('Mood'));
+  var moodFormula = '=IFERROR(IF(INDEX(World_Population!2:2,MATCH("sentiment",World_Population!1:1,0))>=0.3,"Thriving",IF(INDEX(World_Population!2:2,MATCH("sentiment",World_Population!1:1,0))>=0.15,"Optimistic",IF(INDEX(World_Population!2:2,MATCH("sentiment",World_Population!1:1,0))>=0,"Content",IF(INDEX(World_Population!2:2,MATCH("sentiment",World_Population!1:1,0))>=-0.15,"Uneasy","Troubled")))),"--")';
+  styleData(dash.getRange('C15').setFormula(moodFormula), C.label);
 
-  // Spacer
   dash.setRowHeight(16, 8);
 
-  // A's
-  dash.getRange('B17').setValue("A's");
-  dash.getRange('C17').setFormula('=IFERROR(INDEX(Sports_Feed!C:C,MATCH("As",Sports_Feed!A:A,0)) & " | " & INDEX(Sports_Feed!F:F,MATCH("As",Sports_Feed!A:A,0)),"--")');
-  dash.getRange('B17').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C17').setFontSize(12).setFontColor(COLORS.accentOak).setFontWeight('bold');
+  styleLabel(dash.getRange('B17').setValue("A's"));
+  styleValue(dash.getRange('C17').setFormula('=IFERROR(INDEX(Sports_Feed!C:C,MATCH("As",Sports_Feed!A:A,0)) & " | " & INDEX(Sports_Feed!F:F,MATCH("As",Sports_Feed!A:A,0)),"--")'), C.oak);
 
-  dash.getRange('B18').setValue('Streak');
-  dash.getRange('C18').setFormula('=IFERROR(IF(INDEX(Sports_Feed!I:I,MATCH("As",Sports_Feed!A:A,0))="","—",INDEX(Sports_Feed!I:I,MATCH("As",Sports_Feed!A:A,0))),"—")');
-  dash.getRange('B18').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C18').setFontSize(11).setFontColor(COLORS.accentOak);
+  styleLabel(dash.getRange('B18').setValue('Streak'));
+  styleData(dash.getRange('C18').setFormula('=IFERROR(IF(INDEX(Sports_Feed!I:I,MATCH("As",Sports_Feed!A:A,0))="","—",INDEX(Sports_Feed!I:I,MATCH("As",Sports_Feed!A:A,0))),"—")'), C.oak);
 
   // ═══════════════════════════════════════════════════════════
-  // CHICAGO CARD (Rows 11-18)
+  // CHICAGO CARD (Rows 11-18) — now parallel with Oakland
   // ═══════════════════════════════════════════════════════════
-  dash.getRange('E11:F18').setBackground(COLORS.cardChi);
-  dash.getRange('E11:F18').setBorder(true, true, true, true, false, false, '#1f2937', SpreadsheetApp.BorderStyle.SOLID);
+  dash.getRange('E11:F18').setBackground(C.cardChi);
+  addBorder(dash.getRange('E11:F18'));
 
   dash.getRange('E11:F11').merge();
-  dash.getRange('E11').setValue('  CHICAGO');
-  dash.getRange('E11').setFontSize(13).setFontWeight('bold').setFontColor(COLORS.accentChi).setVerticalAlignment('middle');
+  styleTitle(dash.getRange('E11').setValue('  CHICAGO'), C.chi);
 
-  // Weather
-  dash.getRange('E13').setValue('Weather');
-  dash.getRange('F13').setFormula('=IFERROR(INDEX(Chicago_Feed!F:F,2),"--")');
-  dash.getRange('E13').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F13').setFontSize(14).setFontColor(COLORS.value).setFontWeight('bold');
+  styleLabel(dash.getRange('E13').setValue('Weather'));
+  styleValue(dash.getRange('F13').setFormula('=IFERROR(INDEX(Chicago_Feed!F:F,2),"--")'));
 
-  // Temperature
-  dash.getRange('E14').setValue('Temp');
-  dash.getRange('F14').setFormula('=IFERROR(INDEX(Chicago_Feed!E:E,2) & "F","--")');
-  dash.getRange('E14').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F14').setFontSize(14).setFontColor(COLORS.value).setFontWeight('bold');
+  styleLabel(dash.getRange('E14').setValue('Sentiment'));
+  styleData(dash.getRange('F14').setFormula('=IFERROR(ROUND(INDEX(Chicago_Feed!H:H,2),2),"--")'));
 
-  // Sentiment
-  dash.getRange('E15').setValue('Sentiment');
-  dash.getRange('F15').setFormula('=IFERROR(ROUND(INDEX(Chicago_Feed!H:H,2),2),"--")');
-  dash.getRange('E15').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F15').setFontSize(12).setFontColor(COLORS.label);
+  styleLabel(dash.getRange('E15').setValue('Mood'));
+  var chiMoodFormula = '=IFERROR(IF(INDEX(Chicago_Feed!H:H,2)>=0.3,"Thriving",IF(INDEX(Chicago_Feed!H:H,2)>=0.15,"Optimistic",IF(INDEX(Chicago_Feed!H:H,2)>=0,"Content",IF(INDEX(Chicago_Feed!H:H,2)>=-0.15,"Uneasy","Troubled")))),"--")';
+  styleData(dash.getRange('F15').setFormula(chiMoodFormula), C.label);
 
-  // Bulls
-  dash.getRange('E17').setValue('Bulls');
-  dash.getRange('F17').setFormula('=IFERROR(INDEX(Sports_Feed!D:D,MATCH("Bulls",Sports_Feed!A:A,0)) & "-" & INDEX(Sports_Feed!E:E,MATCH("Bulls",Sports_Feed!A:A,0)) & " | " & INDEX(Sports_Feed!F:F,MATCH("Bulls",Sports_Feed!A:A,0)),"--")');
-  dash.getRange('E17').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F17').setFontSize(12).setFontColor('#ef4444').setFontWeight('bold');
+  styleLabel(dash.getRange('E17').setValue('Bulls'));
+  styleValue(dash.getRange('F17').setFormula('=IFERROR(INDEX(Sports_Feed!D:D,MATCH("Bulls",Sports_Feed!A:A,0)) & "-" & INDEX(Sports_Feed!E:E,MATCH("Bulls",Sports_Feed!A:A,0)) & " | " & INDEX(Sports_Feed!F:F,MATCH("Bulls",Sports_Feed!A:A,0)),"--")'), C.red);
 
-  dash.getRange('E18').setValue('Streak');
-  dash.getRange('F18').setFormula('=IFERROR(IF(INDEX(Sports_Feed!I:I,MATCH("Bulls",Sports_Feed!A:A,0))="","—",INDEX(Sports_Feed!I:I,MATCH("Bulls",Sports_Feed!A:A,0))),"—")');
-  dash.getRange('E18').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F18').setFontSize(11).setFontColor('#ef4444');
+  styleLabel(dash.getRange('E18').setValue('Streak'));
+  styleData(dash.getRange('F18').setFormula('=IFERROR(IF(INDEX(Sports_Feed!I:I,MATCH("Bulls",Sports_Feed!A:A,0))="","—",INDEX(Sports_Feed!I:I,MATCH("Bulls",Sports_Feed!A:A,0))),"—")'), C.red);
 
   // ═══════════════════════════════════════════════════════════
-  // CALENDAR CARD (Rows 20-24) — NEW
+  // CALENDAR CARD (Rows 20-24)
   // ═══════════════════════════════════════════════════════════
-  dash.getRange('B20:F24').setBackground(COLORS.card);
-  dash.getRange('B20:F24').setBorder(true, true, true, true, false, false, '#1f2937', SpreadsheetApp.BorderStyle.SOLID);
-
+  dash.getRange('B20:F24').setBackground(C.card);
+  addBorder(dash.getRange('B20:F24'));
   dash.setRowHeight(20, 28);
+
   dash.getRange('B20:F20').merge();
-  dash.getRange('B20').setValue('  CALENDAR');
-  dash.getRange('B20').setFontSize(11).setFontWeight('bold').setFontColor(COLORS.accentCycle).setVerticalAlignment('middle');
+  styleTitle(dash.getRange('B20').setValue('  CALENDAR'), C.amber);
 
-  dash.getRange('B22').setValue('Season');
-  dash.getRange('C22').setFormula(wp('season'));
-  dash.getRange('B22').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C22').setFontSize(12).setFontColor(COLORS.accentCycle).setFontWeight('bold');
+  styleLabel(dash.getRange('B22').setValue('Season'));
+  styleValue(dash.getRange('C22').setFormula(wp('season')), C.amber);
 
-  dash.getRange('B23').setValue('Holiday');
-  dash.getRange('C23').setFormula('=IFERROR(IF(INDEX(World_Population!A:Z,2,MATCH("holiday",World_Population!1:1,0))="none","—",INDEX(World_Population!A:Z,2,MATCH("holiday",World_Population!1:1,0))),"—")');
-  dash.getRange('B23').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C23').setFontSize(12).setFontColor(COLORS.accentCycle);
+  styleLabel(dash.getRange('B23').setValue('Holiday'));
+  styleData(dash.getRange('C23').setFormula('=IFERROR(IF(INDEX(World_Population!2:2,MATCH("holiday",World_Population!1:1,0))="none","—",INDEX(World_Population!2:2,MATCH("holiday",World_Population!1:1,0))),"—")'), C.amber);
 
-  dash.getRange('E22').setValue('Sports');
-  dash.getRange('F22').setFormula(wp('sportsSeason'));
-  dash.getRange('E22').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F22').setFontSize(12).setFontColor(COLORS.accentCycle).setFontWeight('bold');
+  styleLabel(dash.getRange('E22').setValue('Sports'));
+  styleValue(dash.getRange('F22').setFormula(wp('sportsSeason')), C.amber);
 
-  dash.getRange('E23').setValue('Special');
-  dash.getRange('F23').setFormula('=IFERROR(IF(AND(INDEX(World_Population!A:Z,2,MATCH("isFirstFriday",World_Population!1:1,0))<>TRUE,INDEX(World_Population!A:Z,2,MATCH("isCreationDay",World_Population!1:1,0))<>TRUE),"—",IF(AND(INDEX(World_Population!A:Z,2,MATCH("isFirstFriday",World_Population!1:1,0))=TRUE,INDEX(World_Population!A:Z,2,MATCH("isCreationDay",World_Population!1:1,0))=TRUE),"1st Fri + Creation",IF(INDEX(World_Population!A:Z,2,MATCH("isFirstFriday",World_Population!1:1,0))=TRUE,"First Friday","Creation Day"))),"—")');
-  dash.getRange('E23').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F23').setFontSize(12).setFontColor(COLORS.accentCycle);
+  styleLabel(dash.getRange('E23').setValue('Special'));
+  styleData(dash.getRange('F23').setFormula('=IFERROR(IF(AND(INDEX(World_Population!2:2,MATCH("isFirstFriday",World_Population!1:1,0))<>TRUE,INDEX(World_Population!2:2,MATCH("isCreationDay",World_Population!1:1,0))<>TRUE),"—",IF(AND(INDEX(World_Population!2:2,MATCH("isFirstFriday",World_Population!1:1,0))=TRUE,INDEX(World_Population!2:2,MATCH("isCreationDay",World_Population!1:1,0))=TRUE),"1st Fri + Creation",IF(INDEX(World_Population!2:2,MATCH("isFirstFriday",World_Population!1:1,0))=TRUE,"First Friday","Creation Day"))),"—")'), C.amber);
 
   // ═══════════════════════════════════════════════════════════
-  // WORLD PULSE CARD (Rows 26-33) — expanded signals
+  // WORLD PULSE CARD (Rows 26-33)
   // ═══════════════════════════════════════════════════════════
-  dash.getRange('B26:F33').setBackground(COLORS.card);
-  dash.getRange('B26:F33').setBorder(true, true, true, true, false, false, '#1f2937', SpreadsheetApp.BorderStyle.SOLID);
-
+  dash.getRange('B26:F33').setBackground(C.card);
+  addBorder(dash.getRange('B26:F33'));
   dash.setRowHeight(26, 28);
+
   dash.getRange('B26:F26').merge();
-  dash.getRange('B26').setValue('  WORLD PULSE');
-  dash.getRange('B26').setFontSize(11).setFontWeight('bold').setFontColor(COLORS.accentSignal).setVerticalAlignment('middle');
+  styleTitle(dash.getRange('B26').setValue('  WORLD PULSE'), C.pulse);
 
-  // Left column: original signals
-  dash.getRange('B28').setValue('Civic Load');
-  dash.getRange('C28').setFormula(wp('civicLoad'));
-  dash.getRange('B28').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C28').setFontSize(11).setFontColor(COLORS.value);
+  // Left: signals
+  styleLabel(dash.getRange('B28').setValue('Civic Load'));
+  styleData(dash.getRange('C28').setFormula(wp('civicLoad')), C.pulse);
 
-  dash.getRange('B29').setValue('Migration');
-  dash.getRange('C29').setFormula('=IFERROR(ROUND(INDEX(World_Population!A:Z,2,MATCH("migrationDrift",World_Population!1:1,0)),0),"--")');
-  dash.getRange('B29').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C29').setFontSize(11).setFontColor(COLORS.value);
+  styleLabel(dash.getRange('B29').setValue('Migration'));
+  styleData(dash.getRange('C29').setFormula('=IFERROR(ROUND(INDEX(World_Population!2:2,MATCH("migrationDrift",World_Population!1:1,0)),0),"--")'), C.pulse);
 
-  dash.getRange('B30').setValue('Pattern');
-  dash.getRange('C30').setFormula(wp('patternFlag'));
-  dash.getRange('B30').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C30').setFontSize(11).setFontColor(COLORS.value);
+  styleLabel(dash.getRange('B30').setValue('Pattern'));
+  styleData(dash.getRange('C30').setFormula(wp('patternFlag')), C.pulse);
 
-  dash.getRange('B31').setValue('Cycle Weight');
-  dash.getRange('C31').setFormula(wp('cycleWeight'));
-  dash.getRange('B31').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C31').setFontSize(11).setFontColor(COLORS.value);
+  styleLabel(dash.getRange('B31').setValue('Cycle Weight'));
+  styleData(dash.getRange('C31').setFormula(wp('cycleWeight')), C.pulse);
 
-  // Right column: city dynamics
-  dash.getRange('E28').setValue('Nightlife');
-  dash.getRange('F28').setFormula(wp('nightlifeLoad'));
-  dash.getRange('E28').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F28').setFontSize(11).setFontColor(COLORS.accentSignal);
+  // Right: city dynamics (rounded to 1 decimal)
+  styleLabel(dash.getRange('E28').setValue('Nightlife'));
+  styleData(dash.getRange('F28').setFormula(wpR('nightlifeLoad')), C.pulse);
 
-  dash.getRange('E29').setValue('Traffic');
-  dash.getRange('F29').setFormula(wp('trafficLoad'));
-  dash.getRange('E29').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F29').setFontSize(11).setFontColor(COLORS.accentSignal);
+  styleLabel(dash.getRange('E29').setValue('Traffic'));
+  styleData(dash.getRange('F29').setFormula(wpR('trafficLoad')), C.pulse);
 
-  dash.getRange('E30').setValue('Retail');
-  dash.getRange('F30').setFormula(wp('retailLoad'));
-  dash.getRange('E30').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F30').setFontSize(11).setFontColor(COLORS.accentSignal);
+  styleLabel(dash.getRange('E30').setValue('Retail'));
+  styleData(dash.getRange('F30').setFormula(wpR('retailLoad')), C.pulse);
 
-  dash.getRange('E31').setValue('Employment');
-  dash.getRange('F31').setFormula(wp('employmentRate'));
-  dash.getRange('E31').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F31').setFontSize(11).setFontColor(COLORS.accentSignal);
+  styleLabel(dash.getRange('E31').setValue('Employment'));
+  styleData(dash.getRange('F31').setFormula(wpPct('employmentRate')), C.pulse);
 
   // ═══════════════════════════════════════════════════════════
-  // CIVIC CARD (Rows 35-41) — NEW
+  // CIVIC CARD (Rows 35-41)
   // ═══════════════════════════════════════════════════════════
-  dash.getRange('B35:F41').setBackground(COLORS.cardCivic);
-  dash.getRange('B35:F41').setBorder(true, true, true, true, false, false, '#1f2937', SpreadsheetApp.BorderStyle.SOLID);
-
+  dash.getRange('B35:F41').setBackground(C.cardCivic);
+  addBorder(dash.getRange('B35:F41'));
   dash.setRowHeight(35, 28);
+
   dash.getRange('B35:F35').merge();
-  dash.getRange('B35').setValue('  CIVIC');
-  dash.getRange('B35').setFontSize(11).setFontWeight('bold').setFontColor(COLORS.accentCivic).setVerticalAlignment('middle');
+  styleTitle(dash.getRange('B35').setValue('  CIVIC'), C.civic);
 
-  // Left: active + pending
-  dash.getRange('B37').setValue('Active');
-  dash.getRange('C37').setFormula('=IFERROR(COUNTIF(Initiative_Tracker!D:D,"active"),"--")');
-  dash.getRange('B37').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C37').setFontSize(18).setFontColor(COLORS.accentCivic).setFontWeight('bold');
+  styleLabel(dash.getRange('B37').setValue('Active'));
+  styleBig(dash.getRange('C37').setFormula('=IFERROR(COUNTIF(Initiative_Tracker!D:D,"active"),"--")'), C.civic);
 
-  dash.getRange('B38').setValue('initiatives');
-  dash.getRange('B38').setFontSize(9).setFontColor(COLORS.label);
+  dash.getRange('B38').setValue('initiatives').setFontSize(9).setFontColor(C.label);
 
-  dash.getRange('B40').setValue('Pending Vote');
-  dash.getRange('C40').setFormula('=IFERROR(COUNTIF(Initiative_Tracker!D:D,"pending-vote"),"--")');
-  dash.getRange('B40').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C40').setFontSize(14).setFontColor(COLORS.accentCivic);
+  styleLabel(dash.getRange('B40').setValue('Pending Vote'));
+  styleData(dash.getRange('C40').setFormula('=IFERROR(COUNTIF(Initiative_Tracker!D:D,"pending-vote"),"--")'), C.civic);
 
-  // Right: pass/fail
-  dash.getRange('E37').setValue('Passed');
-  dash.getRange('F37').setFormula('=IFERROR(COUNTIF(Initiative_Tracker!N:N,"PASSED")+COUNTIF(Initiative_Tracker!N:N,"APPROVED"),"--")');
-  dash.getRange('E37').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F37').setFontSize(18).setFontColor(COLORS.accentCivic).setFontWeight('bold');
+  styleLabel(dash.getRange('E37').setValue('Passed'));
+  styleBig(dash.getRange('F37').setFormula('=IFERROR(COUNTIF(Initiative_Tracker!N:N,"PASSED")+COUNTIF(Initiative_Tracker!N:N,"APPROVED"),"--")'), C.civic);
 
-  dash.getRange('E38').setValue('total');
-  dash.getRange('E38').setFontSize(9).setFontColor(COLORS.label);
+  dash.getRange('E38').setValue('total').setFontSize(9).setFontColor(C.label);
 
-  dash.getRange('E40').setValue('Failed');
-  dash.getRange('F40').setFormula('=IFERROR(COUNTIF(Initiative_Tracker!N:N,"FAILED")+COUNTIF(Initiative_Tracker!N:N,"DENIED"),"--")');
-  dash.getRange('E40').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F40').setFontSize(14).setFontColor('#ef4444');
+  styleLabel(dash.getRange('E40').setValue('Failed'));
+  styleData(dash.getRange('F40').setFormula('=IFERROR(COUNTIF(Initiative_Tracker!N:N,"FAILED")+COUNTIF(Initiative_Tracker!N:N,"DENIED"),"--")'), C.red);
 
   // ═══════════════════════════════════════════════════════════
-  // BONDS CARD (Rows 43-49) — NEW
+  // BONDS CARD (Rows 43-49)
   // ═══════════════════════════════════════════════════════════
-  dash.getRange('B43:F49').setBackground(COLORS.cardBonds);
-  dash.getRange('B43:F49').setBorder(true, true, true, true, false, false, '#1f2937', SpreadsheetApp.BorderStyle.SOLID);
-
+  dash.getRange('B43:F49').setBackground(C.cardBonds);
+  addBorder(dash.getRange('B43:F49'));
   dash.setRowHeight(43, 28);
+
   dash.getRange('B43:F43').merge();
-  dash.getRange('B43').setValue('  BONDS');
-  dash.getRange('B43').setFontSize(11).setFontWeight('bold').setFontColor(COLORS.accentBonds).setVerticalAlignment('middle');
+  styleTitle(dash.getRange('B43').setValue('  BONDS'), C.bonds);
 
-  // Left: active bonds + rivalries
-  dash.getRange('B45').setValue('Active');
-  dash.getRange('C45').setFormula('=IFERROR(COUNTIF(Relationship_Bonds!F:F,"active"),"--")');
-  dash.getRange('B45').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C45').setFontSize(18).setFontColor(COLORS.accentBonds).setFontWeight('bold');
+  styleLabel(dash.getRange('B45').setValue('Active'));
+  styleBig(dash.getRange('C45').setFormula('=IFERROR(COUNTIF(Relationship_Bonds!F:F,"active"),"--")'), C.bonds);
 
-  dash.getRange('B46').setValue('bonds');
-  dash.getRange('B46').setFontSize(9).setFontColor(COLORS.label);
+  dash.getRange('B46').setValue('bonds').setFontSize(9).setFontColor(C.label);
 
-  dash.getRange('B48').setValue('Rivalries');
-  dash.getRange('C48').setFormula('=IFERROR(COUNTIFS(Relationship_Bonds!D:D,"rivalry",Relationship_Bonds!F:F,"active")+COUNTIFS(Relationship_Bonds!D:D,"sports_rival",Relationship_Bonds!F:F,"active"),"--")');
-  dash.getRange('B48').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('C48').setFontSize(14).setFontColor(COLORS.accentBonds);
+  styleLabel(dash.getRange('B48').setValue('Rivalries'));
+  styleData(dash.getRange('C48').setFormula('=IFERROR(COUNTIFS(Relationship_Bonds!D:D,"rivalry",Relationship_Bonds!F:F,"active")+COUNTIFS(Relationship_Bonds!D:D,"sports_rival",Relationship_Bonds!F:F,"active"),"--")'), C.bonds);
 
-  // Right: alliances + hottest intensity
-  dash.getRange('E45').setValue('Alliances');
-  dash.getRange('F45').setFormula('=IFERROR(COUNTIFS(Relationship_Bonds!D:D,"alliance",Relationship_Bonds!F:F,"active")+COUNTIFS(Relationship_Bonds!D:D,"mentorship",Relationship_Bonds!F:F,"active"),"--")');
-  dash.getRange('E45').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F45').setFontSize(18).setFontColor(COLORS.accentBonds).setFontWeight('bold');
+  styleLabel(dash.getRange('E45').setValue('Alliances'));
+  styleBig(dash.getRange('F45').setFormula('=IFERROR(COUNTIFS(Relationship_Bonds!D:D,"alliance",Relationship_Bonds!F:F,"active")+COUNTIFS(Relationship_Bonds!D:D,"mentorship",Relationship_Bonds!F:F,"active"),"--")'), C.bonds);
 
-  dash.getRange('E46').setValue('+ mentorships');
-  dash.getRange('E46').setFontSize(9).setFontColor(COLORS.label);
+  dash.getRange('E46').setValue('+ mentorships').setFontSize(9).setFontColor(C.label);
 
-  dash.getRange('E48').setValue('Peak Intensity');
-  dash.getRange('F48').setFormula('=IFERROR(MAX(IF(Relationship_Bonds!F:F="active",Relationship_Bonds!E:E)),"--")');
-  dash.getRange('E48').setFontSize(10).setFontColor(COLORS.label);
-  dash.getRange('F48').setFontSize(14).setFontColor(COLORS.accentBonds);
+  styleLabel(dash.getRange('E48').setValue('Peak Intensity'));
+  styleData(dash.getRange('F48').setFormula('=IFERROR(MAX(IF(Relationship_Bonds!F:F="active",Relationship_Bonds!E:E)),"--")'), C.bonds);
 
   // ═══════════════════════════════════════════════════════════
   // FOOTER (Row 51)
   // ═══════════════════════════════════════════════════════════
   dash.getRange('B51:F51').merge();
-  dash.getRange('B51').setValue('Updated: ' + new Date().toLocaleString());
-  dash.getRange('B51').setFontSize(9).setFontColor(COLORS.label).setHorizontalAlignment('center');
+  dash.getRange('B51').setValue('Updated: ' + new Date().toLocaleString()).setFontSize(9).setFontColor(C.label).setHorizontalAlignment('center');
 
   // Move dashboard to first position
   ss.setActiveSheet(dash);
   ss.moveActiveSheet(1);
 
-  Logger.log('createGodWorldDashboard v2.0: Dashboard created with 7 cards');
+  Logger.log('createGodWorldDashboard v2.1: Dashboard created');
   try {
-    SpreadsheetApp.getUi().alert('Dashboard v2.0 created!');
-  } catch (e) {
-    // UI not available when run from trigger/programmatically
-  }
+    SpreadsheetApp.getUi().alert('Dashboard v2.1 created!');
+  } catch (e) {}
 }
 
 
@@ -394,20 +322,15 @@ function createGodWorldDashboard() {
  * Refresh the dashboard (updates timestamp)
  */
 function refreshDashboard() {
-  var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
+  var ss = openSimSpreadsheet_();
   var dash = ss.getSheetByName('Dashboard');
-
   if (!dash) {
     Logger.log('Dashboard not found. Run createGodWorldDashboard() first.');
-    try {
-      SpreadsheetApp.getUi().alert('Dashboard not found. Run createGodWorldDashboard() first.');
-    } catch (e) {}
+    try { SpreadsheetApp.getUi().alert('Dashboard not found.'); } catch (e) {}
     return;
   }
-
   dash.getRange('B51').setValue('Updated: ' + new Date().toLocaleString());
   SpreadsheetApp.flush();
-  Logger.log('refreshDashboard: Updated');
 }
 
 

@@ -1,7 +1,7 @@
 # Priority Task List
 
 **Created:** 2026-02-02
-**Updated:** 2026-02-03
+**Updated:** 2026-02-06
 **Status:** Active tracking document
 
 ---
@@ -18,7 +18,31 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | 7.3 | Citizen life path evolution | Complete | v1.2 |
 | 7.4 | Continuity threading | Complete | OpenClaw-side |
 
-### Previously Completed (This Session)
+### Completed: Journalist Matching & Media Integration (2026-02-06)
+
+| Task | Status | Version |
+|------|--------|---------|
+| Journalist persona enrichment (25 profiles) | Done | bay_tribune_roster.json v2.0 |
+| rosterLookup.js voice profile functions | Done | v2.0 |
+| findJournalistsByTheme_() | Done | v2.1 |
+| getThemeKeywordsForDomain_() | Done | v2.1 |
+| suggestStoryAngle_() — scoring-based matching | Done | v2.1 |
+| matchCitizenToJournalist_() — archetype matching | Done | v2.2 |
+| Theme-aware hook generation (storyHook.js) | Done | v3.8 |
+| Voice-matched story seeds (applyStorySeeds.js) | Done | v3.9 |
+| POP-ID article index (326 citizens, 367 articles) | Done | — |
+| Agent Newsroom architecture plan | Done | docs/AGENT_NEWSROOM.md |
+| Echo removal (never a real publication) | Done | — |
+
+### Consumer Wiring (Not Yet Done)
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Wire matchCitizenToJournalist_ | Connect to media briefing or story seed consumers | Not started |
+| Briefing Section 17: Voice Profiles | Add getFullVoiceProfile_() output to media briefings | Not started |
+| Enhanced Section 13 | Add openingStyle + themes to reporter assignments | Not started |
+
+### Previously Completed (Tier 7 / Bug Fixes)
 
 | Task | Status |
 |------|--------|
@@ -29,7 +53,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Ripple consumer function created | Done (v1.5) |
 | Delayed status handling | Done (v1.5) |
 | OpenClaw integration doc | Done |
-| AutoGen integration doc | Done |
+| AutoGen integration doc | Done (superseded by Agent Newsroom) |
 | _legacy/ folder cleanup | Done |
 | GitHub Actions linting | Done |
 
@@ -78,8 +102,10 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Category | Completed | Remaining |
 |----------|-----------|-----------|
 | Tier 7 Features | 5/5 | 0 |
+| Journalist Matching & Media | 11/11 | 0 |
+| Consumer Wiring | 0/3 | 3 |
 | Testing | 0/3 | 3 |
 | Tech Debt | 0/2 | 2 (low priority) |
 | Optional | 0/3 | 3 |
 
-**Next Action:** Integration testing - run 5+ cycles with all systems active.
+**Next Action:** Wire consumer integrations (matchCitizenToJournalist_, briefing voice profiles, section 13 enhancements), then integration testing.

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-05 | Engine: v3.1 | Cycle: 78
+Last Updated: 2026-02-06 | Engine: v3.1 | Cycle: 78
 
 ---
 
@@ -73,7 +73,9 @@ GodWorld/
 | Career Engine | runCareerEngine.js | v2.3.1 | 4 industries, 3 employer types |
 | Economic Ripple | economicRippleEngine.js | v2.3 | Reads careerSignals |
 | Civic Initiative | civicInitiativeEngine.js | v1.6 | Date parsing fix, faction trim, ripple consumer |
-| Story Hook | storyHook.js | v3.4 | Demographic story angles |
+| Story Hook | storyHook.js | v3.8 | Theme-aware hook generation |
+| Story Seeds | applyStorySeeds.js | v3.9 | Voice-matched story seeds |
+| Roster Lookup | rosterLookup.js | v2.1 | Journalist theme matching, voice profiles |
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
 
 ---
@@ -97,7 +99,8 @@ GodWorld/
 | docs/TIER_7_ROADMAP.md | Tier 7 planning (ripples, micro-economies, life paths) |
 | docs/CIVIC_INITIATIVE_v1.5_UPGRADE.md | Bug fixes and upgrades tracking |
 | docs/OPENCLAW_INTEGRATION.md | OpenClaw setup for citizen memory + automation |
-| docs/AUTOGEN_INTEGRATION.md | AutoGen multi-agent newsroom (future project) |
+| docs/AUTOGEN_INTEGRATION.md | AutoGen multi-agent newsroom (superseded by AGENT_NEWSROOM.md) |
+| docs/AGENT_NEWSROOM.md | **NEW** - 25-agent Bay Tribune newsroom using Claude Agent SDK |
 | docs/GODWORLD_REFERENCE.md | Full system reference |
 | docs/V3_ARCHITECTURE.md | Technical contract, ctx shape |
 | docs/ARTICLE_INDEX_BY_POPID.md | **NEW** - Search articles by POP-ID (326 citizens, 367 articles) |
@@ -121,7 +124,18 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Session History
 
-### 2026-02-06
+### 2026-02-06 (Session 2)
+- **Agent Newsroom Architecture**: Designed Claude Agent SDK-based newsroom to replace AutoGen plan
+  - 25 journalist agents from bay_tribune_roster.json, organized into 7 desks
+  - Desk activation based on signal types (not all agents run every cycle)
+  - MCP server for SQLite data access (citizens, arcs, cycles)
+  - Mags Corliss (editor) + Rhea Morgan (continuity) run every cycle
+  - Model tiers: Haiku for reporters, Sonnet for leads/editor
+  - Estimated $0.50-2.50 per cycle depending on activity
+  - **File**: `docs/AGENT_NEWSROOM.md`
+  - Supersedes AutoGen approach (docs/AUTOGEN_INTEGRATION.md)
+
+### 2026-02-06 (Session 1)
 - **Theme-Aware Hook Generation & Voice-Matched Story Seeds**: Core implementation complete
   - **rosterLookup.js v2.1**: Added 3 new functions
     - `findJournalistsByTheme_(theme)` - find journalists by theme keyword (partial match)
@@ -196,10 +210,10 @@ Before editing, check what reads from and writes to the affected ctx fields.
 1. v1.5/v1.6 bug fixes mostly complete
 2. Tier 7.1 (Ripple System) ready to start - wire ripple consumer into engine
 3. OpenClaw integration ready for setup when desired
-4. AutoGen deferred to future project
+4. **Agent Newsroom planned** - Claude Agent SDK, 25 journalists, replaces AutoGen approach (see docs/AGENT_NEWSROOM.md)
 5. POP-ID article index available for media continuity checks
-6. **COMPLETE**: Journalist personas enriched (v2.0) - 25 full voice profiles ready for Media Room
-7. **COMPLETE**: rosterLookup.js enhanced (v2.0) - new voice profile functions available
+6. **COMPLETE**: Journalist personas enriched (v2.0) - 25 full voice profiles ready
+7. **COMPLETE**: rosterLookup.js enhanced (v2.1) - theme matching, voice profiles
 8. **COMPLETE**: Theme-aware hook generation (storyHook.js v3.8)
 9. **COMPLETE**: Voice-matched story seeds (applyStorySeeds.js v3.9)
 

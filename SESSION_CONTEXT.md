@@ -137,8 +137,9 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **5 parallel agents launched simultaneously**: Civic Desk (Carmen Delaine), Sports Desk (Anthony + Selena Grant), Chicago Bureau (Talia Finch), Faith/Culture Desk (Elliot Graye), Letters Desk (citizen voices)
   - **Total agent wall time: ~70 seconds** (longest was Sports at 71s)
   - **Output**: 6 articles + 3 letters, 14 citizens quoted in articles, 3 in letters
-  - **Editorial decisions**: Stabilization Fund passes 6-3 (Vega + Tran YES, CRC bloc NO), Bulls beat Hornets 108-91 (record to 34-14)
+  - **Editorial decisions**: Stabilization Fund passes 6-3 (Vega + Crane crossover YES, CRC bloc fractures), Bulls beat Hornets 108-91 (record to 34-14)
   - **Canon corrections applied**: 5 wrong council first names fixed from agent output (Ramon Vega, Leonard Tran, Warren Ashford, Nina Chen, Rose Delgado), Davis position CF not SS, spurious "Council Member Reyes" removed
+  - **Post-production canon fixes**: 5 A's names corrected (Vinnie Keane, Darrin Davis, Benji Dillon, Arturo Ramos, John Ellis), Seymour backstory fixed (hired externally, not promoted from bench coach), vote narrative reframed (Crane crossover YES / Tran NO, not Tran YES), 4th-wall engine language removed (tension scores, system counts, "high-severity civic event")
   - **4 new canon figures**: Rabbi Miriam Adler (Beth Jacob), Imam Yusuf Kareem (Masjid Al-Islam), Tiffany Gonzalez (76, Bronzeville, Jazz Musician), Thomas Jackson (66, Loop, Insurance Broker)
   - **Full engine returns included**: Article Table (6 entries), Storylines Updated, Citizen Usage Log, Continuity Notes
   - Key storyline: Faith community feature ("The Quiet Week") surfaced hidden story of 22 faith events across 10 neighborhoods

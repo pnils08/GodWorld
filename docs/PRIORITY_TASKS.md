@@ -1,7 +1,7 @@
 # Priority Task List
 
 **Created:** 2026-02-02
-**Updated:** 2026-02-09
+**Updated:** 2026-02-06
 **Status:** Active tracking document
 
 ---
@@ -82,6 +82,16 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Upgrade Rhea Morgan to verification agent | Canon cross-reference, vote audit, engine-metric sweep | Done (AGENT_NEWSROOM.md) |
 | Add "do not invent" rule to desk agent prompts | Canon reference input + explicit rules against fabrication | Done (AGENT_NEWSROOM.md) |
 
+### Completed: Media Intake Pipeline Repair (2026-02-06)
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Consolidate intake processors | Deleted processMediaIntake.js (v2.1), mediaRoomIntake.js v2.3 is sole processor | Done |
+| Fix Phase 11 wiring | Removed dead ctx.mediaOutput condition — Phase 11 always runs processMediaIntake_(ctx) | Done |
+| Fix continuity parser | Bold markdown headers, pipe table compound notes, cleanSubsectionName_ fix | Done (v1.4) |
+| Wire Press_Drafts as consumer | Section 9B PREVIOUS COVERAGE in briefing generator reads cycle N-1 drafts | Done |
+| Update handoff doc | Bold headers accepted, source versions updated | Done |
+
 ### Previously Completed (Tier 7 / Bug Fixes)
 
 | Task | Status |
@@ -105,8 +115,9 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 
 | Task | Description | Status |
 |------|-------------|--------|
-| Build compileHandoff() script | GAS function to automate handoff compilation from sheets | Not started |
-| Feed Edition 78 returns to engine | Article Table → Media_Intake, Storylines → Storyline_Intake, Usage → Citizen_Usage_Intake | Not started |
+| Build compileHandoff() script | GAS function to automate handoff compilation from sheets | Done (v1.0) |
+| Repair media intake pipeline | Consolidate processors, fix Phase 11, fix parser, wire Press_Drafts | Done (v2.3/v1.4) |
+| Feed Edition 78 returns to engine | Paste into MediaRoom_Paste → parseMediaRoomMarkdown() → processMediaIntakeV2() | Ready — pipeline repaired, needs `clasp push` + test |
 | Fix Media Briefing continuity dedup | Engine-side fix to collapse duplicate continuity notes | Not started |
 | Filter Priority 1 seeds in engine | Stop generating filler seeds ("Barbecue smoke rises") | Not started |
 
@@ -164,14 +175,16 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Consumer Wiring | 3/3 | 0 |
 | Media Room & Tooling | 6/6 | 0 |
 | Edition 78 Production | 6/6 | 0 |
-| Media Room Automation | 0/4 | 4 |
+| Media Intake Pipeline | 5/5 | 0 |
+| Media Room Automation | 2/5 | 3 (feed returns, dedup, seed filter) |
 | Subscription & Tooling | 0/3 | 3 |
 | Testing | 0/3 | 3 |
 | Tech Debt | 0/2 | 2 (low priority) |
 | Optional | 0/3 | 3 |
 
 **Next Actions:**
-1. Feed Edition 78 returns back to engine (close the loop)
-2. Build `compileHandoff()` script (automate handoff compilation)
-3. Integration testing — run 5+ cycles with all systems active
-4. Activate Supermemory Pro after subscription sort (2/16)
+1. `clasp push` + test media intake pipeline with Edition 78 data
+2. Feed Edition 78 returns back to engine (pipeline repaired, ready to run)
+3. Run Cycle 79 — verify Phase 11, briefing Sections 9 + 9B
+4. Integration testing — run 5+ cycles with all systems active
+5. Activate Supermemory Pro after subscription sort (2/16)

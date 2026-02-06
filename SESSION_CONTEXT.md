@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-06 | Engine: v3.1 | Cycle: 78
+Last Updated: 2026-02-06 | Engine: v3.1 | Cycle: 78 | Session: 6
 
 ---
 
@@ -76,8 +76,10 @@ GodWorld/
 | Story Hook | storyHook.js | v3.9 | Theme-aware hooks + sports feed triggers |
 | Story Seeds | applyStorySeeds.js | v3.9 | Voice-matched story seeds |
 | Roster Lookup | rosterLookup.js | v2.2 | Theme matching, voice profiles, citizen-to-journalist matching |
-| Media Briefing | mediaRoomBriefingGenerator.js | v2.6 | Consumer wiring: Section 13/14/17 enhancements |
+| Media Briefing | mediaRoomBriefingGenerator.js | v2.6 | Consumer wiring: Section 13/14/17 enhancements, Section 9B previous coverage |
 | Media Packet | buildMediaPacket.js | v2.4 | Voice guidance on story seeds & hooks |
+| Media Intake | mediaRoomIntake.js | v2.3 | Consolidated processor — engine-callable via processMediaIntake_(ctx) |
+| Media Parser | parseMediaRoomMarkdown.js | v1.4 | Bold header support, pipe table handling in continuity notes |
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Handoff Compiler | compileHandoff.js | v1.0 | Automates 14-section media handoff (~310KB→30KB) |
@@ -130,6 +132,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-06 (Session 6)
+- **Media Intake Pipeline Repair**: Consolidated and fixed the feedback loop (Edition returns → engine)
+  - **DELETED**: `phase07-evening-media/processMediaIntake.js` (older v2.1 processor with duplicate function names)
+  - **mediaRoomIntake.js v2.2 → v2.3**: Added `processMediaIntake_(ctx)` engine-callable entry point, `processAllIntakeSheets_()` shared logic. `processMediaIntakeV2()` kept for manual menu use.
+  - **godWorldEngine2.js Phase 11 fix**: Removed dead `ctx.mediaOutput` condition — Phase 11 now always runs `processMediaIntake_(ctx)`, which skips gracefully if intake sheets are empty
+  - **parseMediaRoomMarkdown.js v1.3 → v1.4**: `isSubsectionHeader_()` strips `**bold**` markdown before ALL CAPS check. `cleanSubsectionName_()` strips bold. `parseContinuityNotes_()` accumulates pipe table rows as compound notes instead of individual entries.
+  - **mediaRoomBriefingGenerator.js**: Added Section 9B PREVIOUS COVERAGE — reads Press_Drafts for cycle N-1, lists reporter/type/headline. New helper `getPreviousCoverage_(ss, cycle)`.
+  - **docs/MEDIA_INTAKE_V2.2_HANDOFF.md**: Updated to note bold markdown headers accepted, source file versions updated
+  - **Key finding**: Continuity_Loop was already wired (briefing Section 9 `getContinuityFromLoop_()`) — no fix needed
+  - **Commit**: `ab80938`
 
 ### 2026-02-06 (Session 5)
 - **compileHandoff.js v1.0**: Built automated Media Room handoff compiler
@@ -394,12 +407,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 25. **COMPLETE**: Edition 78 canon fixes — 5 A's names, Seymour backstory, vote narrative (Crane/Tran), 4th-wall engine language
 26. **COMPLETE**: Editorial verification workflow — canon reference in handoff (Section 14), compile→verify split, Rhea as verification agent, no-engine-metrics rule
 27. **COMPLETE**: compileHandoff.js v1.0 — automated 14-section handoff compiler, menu integration, Drive export, ~310KB→30KB
+28. **COMPLETE**: Media intake pipeline repair — consolidated processors, fixed Phase 11 wiring, parser bold header + pipe table fixes, Press_Drafts wired to briefing Section 9B
+29. **COMPLETE**: processMediaIntake.js DELETED — function name collisions resolved, mediaRoomIntake.js v2.3 is sole processor
 
 **Next Actions:**
-1. **Deploy & test compileHandoff**: `clasp push`, run `compileHandoff(78)` from Apps Script, verify output
-2. Feed Edition 78 returns back to engine (Article Table → Media_Intake, Storylines → Storyline_Intake, Usage → Citizen_Usage_Intake)
-3. Integration testing — run 5+ cycles with all Tier 7 systems active
-4. Activate Supermemory Pro after subscription sort (2/16)
+1. **Deploy & test**: `clasp push` from Cloud Shell, then test media intake pipeline with Edition 78 data
+2. **Feed Edition 78 returns**: Paste engine returns from cycle_pulse_edition_78.txt into MediaRoom_Paste, run `parseMediaRoomMarkdown()`, then `processMediaIntakeV2()`
+3. **Run Cycle 79**: Verify Phase 11 executes, briefing Section 9 has continuity, Section 9B has previous coverage
+4. Integration testing — run 5+ cycles with all Tier 7 systems active
+5. Activate Supermemory Pro after subscription sort (2/16)
 
 ---
 

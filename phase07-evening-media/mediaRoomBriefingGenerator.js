@@ -1816,12 +1816,14 @@ function generateVoiceProfiles_(frontPageCall, assignments, arcReport) {
     if (fpName) priorityNames.push(fpName);
   }
 
-  // 2. Desk leads (key desks only)
-  var deskKeys = ['metro', 'civic', 'culture'];
+  // 2. Desk leads (all key desks including multi-journalist)
+  var deskKeys = ['metro', 'civic', 'culture', 'sports', 'chicago'];
   for (var di = 0; di < deskKeys.length; di++) {
     if (assignments && assignments[deskKeys[di]]) {
-      var deskName = extractJournalistName_(assignments[deskKeys[di]]);
-      if (deskName) priorityNames.push(deskName);
+      var names = extractAllJournalistNames_(assignments[deskKeys[di]]);
+      for (var dni = 0; dni < names.length; dni++) {
+        priorityNames.push(names[dni]);
+      }
     }
   }
 
@@ -1836,10 +1838,10 @@ function generateVoiceProfiles_(frontPageCall, assignments, arcReport) {
     }
   }
 
-  // Output profiles for unique journalists (max 5)
+  // Output profiles for unique journalists (max 8)
   var seen = {};
   var count = 0;
-  for (var pi = 0; pi < priorityNames.length && count < 5; pi++) {
+  for (var pi = 0; pi < priorityNames.length && count < 8; pi++) {
     var name = priorityNames[pi];
     if (seen[name]) continue;
     seen[name] = true;
@@ -1980,6 +1982,29 @@ function extractJournalistName_(str) {
   }
 
   return candidate;
+}
+
+/**
+ * v2.6: Extract ALL journalist names from an assignment string.
+ * Handles multi-journalist formats like "Core three (Anthony/P Slayer/Hal Richmond) + support"
+ * by splitting on /, +, and parentheses, then validating each candidate.
+ *
+ * @param {string} str - Assignment string
+ * @returns {Array<string>} Array of valid journalist names (may be empty)
+ */
+function extractAllJournalistNames_(str) {
+  if (!str) return [];
+
+  // Split on separators: / + , and parentheses content
+  var parts = String(str).replace(/[()]/g, '/').split(/[\/+,]/);
+  var names = [];
+
+  for (var i = 0; i < parts.length; i++) {
+    var name = extractJournalistName_(parts[i].trim());
+    if (name) names.push(name);
+  }
+
+  return names;
 }
 
 /**

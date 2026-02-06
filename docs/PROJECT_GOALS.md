@@ -167,8 +167,8 @@ All three clients can connect to the same Supermemory MCP server, sharing a unif
 | Project config (.claude/.supermemory-claude/config.json) | Done (repoContainerTag: godworld) |
 | Codebase indexed | Blocked — requires Pro plan ($19/mo) |
 | claude.ai MCP connector | Not started — configure after Pro subscription |
-| Cancel Apple Claude subscription | Not started |
-| Re-subscribe direct at claude.ai | Not started |
+| Cancel Apple Claude subscription | Canceled — expires 2/16 |
+| Re-subscribe direct at claude.ai | Pending — after 2/16 expiry |
 | Cancel browser extension | Not started |
 
 **Plugin commands (once Pro is active):**

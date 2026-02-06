@@ -4,8 +4,12 @@
  * Single source of truth for journalist data.
  * Provides lookup functions for Phase 7 media integration.
  *
- * @version 2.1
+ * @version 2.2
  * @tier 2.3
+ *
+ * v2.2 Enhancements:
+ * - matchCitizenToJournalist_(citizenArchetype, neighborhoodContext, storyDomain)
+ *   Maps citizen personality archetypes to best-fit journalist for interviews
  *
  * v2.1 Enhancements:
  * - findJournalistsByTheme_(theme) - find journalists by theme keyword
@@ -874,6 +878,143 @@ function suggestStoryAngle_(eventThemes, signalType) {
       result.voiceGuidance = getVoiceGuidance_(bySignalFallback, 'feature') || '';
       result.confidence = 'medium';
     }
+  }
+
+  return result;
+}
+
+/**
+ * Match a citizen archetype to the best-fit journalist for interview coverage.
+ * Uses archetype personality traits to derive theme keywords, then scores
+ * journalists the same way suggestStoryAngle_ does.
+ *
+ * Citizens come from: Simulation_Ledger, Generic_Citizens, Culture_Ledger,
+ * Faith_Organizations, Chicago_Citizens.
+ *
+ * @param {string} citizenArchetype - Citizen archetype (Connector|Watcher|Striver|Anchor|Catalyst|Caretaker|Drifter)
+ * @param {string} [neighborhoodContext] - Oakland neighborhood (e.g., "Fruitvale", "Temescal")
+ * @param {string} [storyDomain] - Event domain (e.g., "CIVIC", "CULTURE", "HEALTH")
+ * @returns {Object} { journalist, interviewAngle, voiceGuidance, confidence }
+ *
+ * @example
+ * matchCitizenToJournalist_("Caretaker", "Fruitvale", "HEALTH")
+ * // → { journalist: "Dr. Lila Mezran", interviewAngle: "human interest / who they look after", ... }
+ *
+ * @example
+ * matchCitizenToJournalist_("Catalyst", null, "CIVIC")
+ * // → { journalist: "Luis Navarro", interviewAngle: "tension driver / change agent angle", ... }
+ */
+function matchCitizenToJournalist_(citizenArchetype, neighborhoodContext, storyDomain) {
+  var result = {
+    journalist: null,
+    interviewAngle: 'general profile',
+    voiceGuidance: '',
+    confidence: 'low'
+  };
+
+  // ── Archetype → theme keywords ──────────────────────────────────────────
+  var ARCHETYPE_THEMES = {
+    'Connector':  ['community', 'neighborhood', 'family', 'alliance'],
+    'Watcher':    ['memory', 'legacy', 'quiet', 'patterns'],
+    'Striver':    ['precision', 'economic', 'labor', 'blueprint'],
+    'Anchor':     ['baseline', 'system', 'civic', 'stability'],
+    'Catalyst':   ['pulse', 'fight', 'breaking', 'accountability'],
+    'Caretaker':  ['faith', 'family', 'health', 'devotion'],
+    'Drifter':    ['texture', 'quiet', 'general']
+  };
+
+  // ── Archetype → interview angle ─────────────────────────────────────────
+  var ARCHETYPE_ANGLES = {
+    'Connector':  'community perspective / relationship angle',
+    'Watcher':    'observational reflection / what they\'ve noticed',
+    'Striver':    'ambition narrative / where they\'re headed',
+    'Anchor':     'neighborhood roots / stability story',
+    'Catalyst':   'tension driver / change agent angle',
+    'Caretaker':  'human interest / who they look after',
+    'Drifter':    'general profile / slice of life'
+  };
+
+  // ── Neighborhoods with cultural/civic weight ────────────────────────────
+  var CULTURE_NEIGHBORHOODS = ['Temescal', 'Fruitvale', 'Chinatown', 'Uptown', 'Jack London'];
+  var CIVIC_NEIGHBORHOODS = ['Downtown', 'West Oakland', 'Old Oakland', 'Lake Merritt'];
+
+  // Build theme list from archetype
+  var archetype = citizenArchetype || 'Drifter';
+  var themes = ARCHETYPE_THEMES[archetype] || ARCHETYPE_THEMES['Drifter'];
+
+  // Add domain themes if provided
+  if (storyDomain && typeof getThemeKeywordsForDomain_ === 'function') {
+    var domainThemes = getThemeKeywordsForDomain_(storyDomain);
+    themes = themes.concat(domainThemes);
+  }
+
+  // Set interview angle from archetype
+  result.interviewAngle = ARCHETYPE_ANGLES[archetype] || ARCHETYPE_ANGLES['Drifter'];
+
+  // ── Score journalists by theme overlap ──────────────────────────────────
+  var roster = getRoster_();
+  var bestMatch = null;
+  var bestScore = 0;
+
+  var names = Object.keys(roster.journalists);
+  for (var i = 0; i < names.length; i++) {
+    var name = names[i];
+    var journalist = roster.journalists[name];
+    var journoThemes = journalist.themes || [];
+
+    var score = 0;
+    for (var ti = 0; ti < themes.length; ti++) {
+      var theme = String(themes[ti]).toLowerCase();
+
+      for (var ji = 0; ji < journoThemes.length; ji++) {
+        var journoTheme = String(journoThemes[ji]).toLowerCase();
+
+        if (journoTheme === theme) {
+          score += 3; // Exact match
+        } else if (journoTheme.indexOf(theme) >= 0 || theme.indexOf(journoTheme) >= 0) {
+          score += 1; // Partial match
+        }
+      }
+    }
+
+    // ── Neighborhood affinity bonus ─────────────────────────────────────
+    if (neighborhoodContext) {
+      var hood = String(neighborhoodContext);
+      var desk = journalist.desk || '';
+
+      // Culture desk journalists fit culture-heavy neighborhoods
+      if (desk === 'culture') {
+        for (var ci = 0; ci < CULTURE_NEIGHBORHOODS.length; ci++) {
+          if (CULTURE_NEIGHBORHOODS[ci] === hood) { score += 2; break; }
+        }
+      }
+
+      // Metro desk journalists fit civic-heavy neighborhoods
+      if (desk === 'metro') {
+        for (var mi = 0; mi < CIVIC_NEIGHBORHOODS.length; mi++) {
+          if (CIVIC_NEIGHBORHOODS[mi] === hood) { score += 2; break; }
+        }
+      }
+
+      // Chicago desk journalists for Chicago context
+      if (desk === 'chicago' && hood.toLowerCase().indexOf('chicago') >= 0) {
+        score += 2;
+      }
+    }
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestMatch = name;
+    }
+  }
+
+  // ── Build result ────────────────────────────────────────────────────────
+  if (bestMatch && bestScore >= 2) {
+    result.journalist = bestMatch;
+    result.voiceGuidance = (typeof getVoiceGuidance_ === 'function')
+      ? (getVoiceGuidance_(bestMatch, 'feature') || '')
+      : '';
+    result.confidence = bestScore >= 4 ? 'high' : 'medium';
   }
 
   return result;

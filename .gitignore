@@ -4,6 +4,9 @@ package-lock.json
 # Environment variables (secrets)
 .env
 
+# Service account credentials (never commit)
+credentials/
+
 # SQLite database (local persistence, not tracked)
 godworld/godworld.db
 godworld/*.db

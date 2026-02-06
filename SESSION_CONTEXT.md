@@ -124,6 +124,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Session History
 
+### 2026-02-06 (Session 2, continued)
+- **Echo removal**: Removed all Echo (Oakland Echo) code and references — Echo was never a real publication (originated from Grok experimentation)
+  - `openclaw-skills/media-generator/index.js`: Removed voice profile, routing logic, `buildEchoPrompt()`, prompt selection branch, filename mapping (47 lines deleted)
+  - `docs/OPENCLAW_INTEGRATION.md`: Removed ~15 Echo references, updated routing matrix to tribune/continuity only
+  - `docs/PROJECT_GOALS.md`: Removed "Echo Op-Ed" from Media Room description
+  - `docs/AUTOGEN_INTEGRATION.md`: Marked as SUPERSEDED with header pointing to AGENT_NEWSROOM.md
+- **Doc cleanup**: Aligned all documentation with current project state
+  - `docs/CIVIC_INITIATIVE_v1.5_UPGRADE.md`: Status updated to v1.6 complete
+  - `docs/PRIORITY_TASKS.md`: AutoGen reference → Agent Newsroom (Claude Agent SDK)
+  - `SESSION_CONTEXT.md`: Future Enhancements section cleaned up, implemented items marked done
+
 ### 2026-02-06 (Session 2)
 - **Agent Newsroom Architecture**: Designed Claude Agent SDK-based newsroom to replace AutoGen plan
   - 25 journalist agents from bay_tribune_roster.json, organized into 7 desks

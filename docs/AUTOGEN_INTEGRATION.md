@@ -1,8 +1,10 @@
 # AutoGen Integration Plan for GodWorld
 
-**Status:** Planning
-**Goal:** Multi-agent newsroom for autonomous media generation
+**Status:** SUPERSEDED — See `docs/AGENT_NEWSROOM.md` for the active plan (Claude Agent SDK / Node.js)
+**Original Goal:** Multi-agent newsroom for autonomous media generation
 **Last Updated:** 2026-02-02
+
+> **Note:** This document is kept for historical reference. The AutoGen (Python) approach has been replaced by a Claude Agent SDK (Node.js) approach that aligns with the existing GodWorld stack. See `docs/AGENT_NEWSROOM.md` for the current 25-agent newsroom architecture.
 
 ---
 

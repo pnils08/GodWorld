@@ -69,7 +69,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | City Memory / Epigenetics | Needs stable Tier 7 first |
 | Shock Cascades | Ripple system handles basics |
 | Branching Story Arcs | Enhancement, not urgent |
-| AutoGen Multi-Agent Newsroom | Python project, separate repo |
+| Agent Newsroom (Claude Agent SDK) | See docs/AGENT_NEWSROOM.md — replaces AutoGen plan |
 
 ---
 

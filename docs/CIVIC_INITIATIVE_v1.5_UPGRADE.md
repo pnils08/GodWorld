@@ -1,9 +1,8 @@
-# Civic Initiative Engine v1.5 Upgrade Plan
+# Civic Initiative Engine v1.5/v1.6 Upgrade Tracker
 
-**Current Version:** v1.4
-**Target Version:** v1.5
+**Current Version:** v1.6
 **Created:** 2026-02-02
-**Status:** Planning
+**Status:** Complete — all must-fix items resolved
 
 ---
 
@@ -338,6 +337,8 @@ function getCurrentCycle_(ctxOrSs) {
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v1.6 | 2026-02 | VoteRequirement date parsing fix, faction whitespace trim |
+| v1.5 | 2026-02 | Math.random() → ctx.rng(), ripple consumer, delayed status handling |
 | v1.4 | 2026-01 | Manual vote execution, demographic influence |
 | v1.3 | 2026-01 | Neighborhood demographics integration |
 | v1.2 | 2025-12 | 9-seat council model, header validation |

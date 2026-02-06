@@ -16,7 +16,7 @@ GodWorld is a **living city simulation** that generates emergent narratives. The
 
 ### 2. Media Room (Working, but manual)
 - Claude-powered journalism layer
-- Reads simulation output, writes news content (Tribune Pulse, Echo Op-Ed, etc.)
+- Reads simulation output, writes news content (Bay Tribune Pulse, Council Watch, etc.)
 - **Current pain point:** No persistent memory. Requires manually moving documents and managing multiple chat sessions per cycle.
 
 ---

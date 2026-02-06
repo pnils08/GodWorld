@@ -17,7 +17,7 @@
 | **Cycle Context Export** | Working | `exports/cycle-78-context.json` with full city state |
 | **Manifest Tracking** | Working | `exports/manifest.json` tracks latest cycle |
 | **Media Generator** | Working | Generates Tribune Pulse + Continuity Check |
-| **Multi-Agent Routing** | Working | Routes to tribune/echo/continuity based on events |
+| **Multi-Agent Routing** | Working | Routes to tribune/continuity based on events |
 | **Confidence Gate** | Working | Blocks publish if continuity < 0.9 |
 | **CLI Runner** | Working | `node scripts/generate.js` |
 
@@ -58,7 +58,7 @@ media/cycle-78/
 | Google Sheets Sync | Not started | Need service account credentials |
 | Watch Triggers | Not started | No automation yet (manual CLI) |
 | Scheduled Runs | Not started | Cron not configured |
-| Echo Op-Ed Agent | Implemented but not triggered | Needs high-tension events |
+| ~~Echo Op-Ed Agent~~ | Removed | Echo was never a real publication |
 | Discord Notifications | Not started | No webhook configured |
 
 ---
@@ -75,7 +75,7 @@ OpenClaw solves:
 - **Local execution** — no data sent to cloud
 - **Persistent memory** — remembers citizens, their history, relationships
 - **Autonomous triggers** — watch for cycle exports, auto-generate content
-- **Multi-agent routing** — different "voices" for Tribune vs Echo
+- **Multi-agent routing** — different journalist voices within the Tribune
 
 ---
 
@@ -152,7 +152,7 @@ When cycle advances:
     ↓
 [OpenClaw: Generate Prompts for Claude API]
     ↓
-[Claude: Write Tribune Pulse / Echo Op-Ed]
+[Claude: Write Tribune Pulse]
     ↓
 [OpenClaw: Format & Save to media/cycle-XX/]
     ↓
@@ -164,7 +164,6 @@ When cycle advances:
 | Type | Voice | Trigger |
 |------|-------|---------|
 | Bay Tribune Pulse | Balanced, factual | Every cycle |
-| Oakland Echo Op-Ed | Edgy, provocative | High-tension events |
 | Citizen Spotlight | Human interest | Tier-1 life events |
 | Council Watch | Political analysis | Initiative votes |
 | Neighborhood Report | Local focus | Demographic shifts |
@@ -212,11 +211,6 @@ watches:
 - Tone: Professional, balanced
 - Sources: All ledgers, official statements
 - Format: Inverted pyramid, quotes, context
-
-### Oakland Echo Agent
-- Tone: Skeptical, community-focused
-- Sources: Street-level data, citizen reactions
-- Format: Opinion-forward, provocative headlines
 
 ### Continuity Agent
 - Role: Fact-checker, consistency enforcer
@@ -317,7 +311,7 @@ module.exports = {
 │                              │                                  │
 │                              ▼                                  │
 │  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐             │
-│  │ Tribune     │  │ Echo        │  │ Continuity  │             │
+│  │ Tribune     │  │ Continuity  │                               │
 │  │ Agent       │  │ Agent       │  │ Agent       │             │
 │  └─────────────┘  └─────────────┘  └─────────────┘             │
 └─────────────────────────────────────────────────────────────────┘
@@ -328,7 +322,6 @@ module.exports = {
 │  media/                                                         │
 │  ├── cycle-78/                                                  │
 │  │   ├── tribune-pulse.md                                       │
-│  │   ├── echo-oped.md                                           │
 │  │   └── council-watch.md                                       │
 │  └── citizens/                                                  │
 │      └── spotlight-ramon-vega.md                                │
@@ -346,7 +339,7 @@ module.exports = {
 
 ### Full Autonomy
 - [ ] Scheduled cycle detection
-- [ ] Multi-voice generation (Tribune + Echo)
+- [ ] Multi-voice generation (see docs/AGENT_NEWSROOM.md for 25-agent plan)
 - [ ] Continuity checking before publish
 - [ ] Discord notification for review
 
@@ -370,7 +363,7 @@ module.exports = {
 3. **Write citizen-sync skill** — manual trigger first
 4. **Write media-generator skill** — test with cycle 78 data
 5. **Add watch triggers** — automate cycle detection
-6. **Add multi-agent voices** — Tribune vs Echo differentiation
+6. **Add multi-agent voices** — see docs/AGENT_NEWSROOM.md for 25-agent newsroom plan
 
 ---
 
@@ -1365,7 +1358,7 @@ Save to media/
 | Task | Recommendation |
 |------|----------------|
 | Tribune Pulse (public) | Claude (quality matters) |
-| Echo Op-Ed drafts | Ollama → Claude polish |
+| Draft iterations | Ollama → Claude polish |
 | Citizen background chatter | Ollama (bulk, low stakes) |
 | Testing prompt iterations | Ollama (unlimited) |
 | Continuity checking | Either |
@@ -1406,7 +1399,7 @@ Save to media/
 - [ ] Build **media-generator** skill:
   - Load summary + context pack
   - Pull relevant citizen profiles
-  - Build prompts by media type (Tribune, Echo, Council Watch)
+  - Build prompts by media type (Tribune, Council Watch, Spotlight)
   - Save outputs to `media/cycle-XX/`
 - [ ] Add **manual review step** before publishing
 
@@ -1426,19 +1419,19 @@ Save to media/
 
 ### Routing Matrix
 
-| Signal | Tribune (Balanced) | Echo (Edgy) | Continuity (Check) |
-|--------|-------------------|-------------|-------------------|
-| Civic votes (Initiative outcomes) | Yes | Maybe | Yes |
-| High-tension events (CHAOS/CRIME) | Yes | Yes | Yes |
-| Routine cycle (no major events) | Yes | No | Maybe |
-| Tier-1 citizen spotlight | Yes | Yes | Yes |
-| Conflicting ledger data | No | No | Yes |
+| Signal | Tribune (Balanced) | Continuity (Check) |
+|--------|-------------------|--------------------|
+| Civic votes (Initiative outcomes) | Yes | Yes |
+| High-tension events (CHAOS/CRIME) | Yes | Yes |
+| Routine cycle (no major events) | Yes | Maybe |
+| Tier-1 citizen spotlight | Yes | Yes |
+| Conflicting ledger data | No | Yes |
 
 ### Simple Rules (Pseudo-Logic)
 
 ```
 if conflicts_detected => Continuity only
-if chaosEvents >= 2 => Tribune + Echo + Continuity
+if chaosEvents >= 2 => Tribune + Continuity
 if civicVotes >= 1 => Tribune + Continuity
 if routineCycle => Tribune only
 ```
@@ -1648,7 +1641,6 @@ const prompt = buildPrompt(contextPack);
                           └── cycle-XX-summary.json    [media/cycle-XX/]
                                                              │
                                                              ├── tribune-pulse.md
-                                                             ├── echo-oped.md
                                                              └── council-watch.md
 ```
 

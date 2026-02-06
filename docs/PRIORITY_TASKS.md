@@ -1,7 +1,7 @@
 # Priority Task List
 
 **Created:** 2026-02-02
-**Updated:** 2026-02-08
+**Updated:** 2026-02-09
 **Status:** Active tracking document
 
 ---
@@ -61,6 +61,17 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Supermemory plugin setup | Claude Code plugin installed, project config set | Done (needs Pro sub) |
 | Subscription optimization plan | Apple markup identified ($49/mo savings), browser ext canceled | Done |
 
+### Completed: Edition 78 Parallel-Agent Production (2026-02-08)
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Download citizen ledgers from Drive | 9 files (792KB) via googleapis service account | Done |
+| Compile HANDOFF_C78 editorial brief | 15KB structured brief from 402KB raw exports | Done |
+| Write Edition 78 with parallel agents | 5 desk agents (Civic, Sports, Chicago, Faith, Letters) | Done |
+| Editorial compilation + canon correction | Fixed 5 wrong names, 1 position, 1 spurious character | Done |
+| Full engine returns | Article Table, Storylines, Usage Log, Continuity Notes | Done (docs/cycle_pulse_edition_78.txt) |
+| Validate parallel-agent workflow | compileHandoff → desk agents → compile → correct → returns | Done — production model confirmed |
+
 ### Previously Completed (Tier 7 / Bug Fixes)
 
 | Task | Status |
@@ -85,7 +96,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Task | Description | Status |
 |------|-------------|--------|
 | Build compileHandoff() script | GAS function to automate handoff compilation from sheets | Not started |
-| Use HANDOFF_C78 for Edition 78 | Test compiled handoff in actual Media Room session | Not started |
+| Feed Edition 78 returns to engine | Article Table → Media_Intake, Storylines → Storyline_Intake, Usage → Citizen_Usage_Intake | Not started |
 | Fix Media Briefing continuity dedup | Engine-side fix to collapse duplicate continuity notes | Not started |
 | Filter Priority 1 seeds in engine | Stop generating filler seeds ("Barbecue smoke rises") | Not started |
 
@@ -142,6 +153,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Journalist Matching & Media | 11/11 | 0 |
 | Consumer Wiring | 3/3 | 0 |
 | Media Room & Tooling | 6/6 | 0 |
+| Edition 78 Production | 6/6 | 0 |
 | Media Room Automation | 0/4 | 4 |
 | Subscription & Tooling | 0/3 | 3 |
 | Testing | 0/3 | 3 |
@@ -149,6 +161,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Optional | 0/3 | 3 |
 
 **Next Actions:**
-1. Build `compileHandoff()` script (automate handoff compilation)
-2. Test HANDOFF_C78 in actual Media Room session for Edition 78
+1. Feed Edition 78 returns back to engine (close the loop)
+2. Build `compileHandoff()` script (automate handoff compilation)
 3. Integration testing — run 5+ cycles with all systems active
+4. Activate Supermemory Pro after subscription sort (2/16)

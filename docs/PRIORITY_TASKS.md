@@ -81,7 +81,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Task | Description | Status |
 |------|-------------|--------|
 | Sports Integration | Trigger hooks, crowd effects, briefing display | Done (v3.9/v2.6) |
-| Engine-side continuityHints | Populate hints array in export | Optional |
+| Engine-side continuityHints | Populate recurringCitizens for buildContinuityHints_ | Done (v1.0) |
 | PolicyDomain column | Add to Initiative_Tracker | Optional (falls back to keyword detection) |
 
 ---

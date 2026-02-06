@@ -215,6 +215,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase6-Prioritize', function() { prioritizeEvents_(ctx); });
 
   safePhaseCall_(ctx, 'Phase6-Spotlights', function() { applyNamedCitizenSpotlights_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-RecurringCitizens', function() { computeRecurringCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase6-CivicLoad', function() { applyCivicLoadIndicator_(ctx); });
   safePhaseCall_(ctx, 'Phase6-EconomicRipple', function() { runEconomicRippleEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase6-InitiativeRipple', function() {
@@ -1324,6 +1325,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase6-FilterNoise', function() { filterNoiseEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Prioritize', function() { prioritizeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Spotlights', function() { applyNamedCitizenSpotlights_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-RecurringCitizens', function() { computeRecurringCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase6-CivicLoad', function() { applyCivicLoadIndicator_(ctx); });
   safePhaseCall_(ctx, 'Phase6-EconomicRipple', function() { runEconomicRippleEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase6-InitiativeRipple', function() {

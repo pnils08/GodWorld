@@ -153,6 +153,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **mediaRoomBriefingGenerator.js**: Section 12 (SPORTS DESK) now shows active triggers with team, streak, and sentiment
   - **buildMediaPacket.js v2.4**: Voice guidance on story seeds and hooks (Section 7)
 - **PRIORITY_TASKS.md**: Sports Integration marked Done, Hardcoded Spreadsheet ID marked Done
+- **Engine-side continuityHints**: `computeRecurringCitizens_(ctx)` — v1.0
+  - **New file**: `phase06-analysis/computeRecurringCitizens.js`
+  - Aggregates citizen appearances across 4 data sources: namedSpotlights, cycleActiveCitizens, eventArcs, relationshipBonds
+  - Citizens appearing in 2+ distinct sources marked as "recurring" (capped at 15)
+  - Builds reverse name→popId lookup from `ctx.namedCitizenMap` to resolve bond citizen names
+  - Populates `S.recurringCitizens` — consumed by `buildContinuityHints_()` in exportCycleArtifacts.js (Source 2, previously empty)
+  - Wired into both V2 and V3 engines as `Phase6-RecurringCitizens` (after Spotlights, before CivicLoad)
+  - **PRIORITY_TASKS.md**: Engine-side continuityHints marked Done (v1.0)
 
 ### 2026-02-06 (Session 2, continued)
 - **Echo removal**: Removed all Echo (Oakland Echo) code and references — Echo was never a real publication (originated from Grok experimentation)
@@ -260,6 +268,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 10. **COMPLETE**: Consumer wiring — briefing v2.6 (Section 13 enhanced, Section 14 wired, Section 17 voice profiles)
 11. **COMPLETE**: Sports Integration — trigger hooks, crowd effects, briefing display
 12. **COMPLETE**: buildMediaPacket.js v2.4 — voice guidance on seeds/hooks
+13. **COMPLETE**: Engine-side continuityHints — computeRecurringCitizens v1.0, wired Phase 6
 
 ---
 

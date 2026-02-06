@@ -385,6 +385,75 @@ Only start after Layers 1-3 are validated.
 
 ---
 
+## Open Questions & Design Decisions
+
+*Raised during architecture review. Must be resolved before or during build.*
+
+### 1. Voice Drift at Scale
+
+**Problem:** One journalist profile generating one article is testable. Twenty-five agents writing in parallel across multiple cycles is different. Does Carmen Delaine still sound like Carmen Delaine after fifty articles, or does she drift toward generic Claude?
+
+**Mitigations to test:**
+- Keep agent outputs short (200-400 words per section) to reduce drift surface
+- Include 2-3 sample phrases from the roster as anchors in every prompt
+- Rhea's continuity check could include a voice consistency score (does this sound like Carmen or generic Claude?)
+- Test with a single journalist over 10+ outputs before scaling to full newsroom
+
+### 2. Desk Overlap (Cross-Desk Citizen Collisions)
+
+**Problem:** Sports Desk and Metro Desk both write about Mark Aitken attending a council vote. Who catches the overlap? Who decides which version survives?
+
+**Design needed:**
+- Desk runner should tag every citizen POP-ID mentioned in each desk's output
+- Mags receives a collision report: "POP-00077 (Aitken) mentioned by Sports Desk AND Metro Desk"
+- Mags decides: merge, pick one, or assign one desk the lead angle
+- This collision detection is not yet designed in the current architecture
+
+### 3. Multi-Signal Story Routing
+
+**Problem:** A story spans health + civic + community. Does it get assigned to three desks? Does something fall through?
+
+**Rules to define:**
+- Same-desk multi-signal: works naturally (Metro has Carmen for civic, Lila for health, Maria for community — they coordinate within the desk conversation)
+- Cross-desk multi-signal (e.g., health + sports): needs an orchestrator rule
+  - Option A: strongest signal wins, one desk gets it
+  - Option B: both desks get it, Mags merges (risks duplication)
+  - Option C: orchestrator creates a temporary cross-desk assignment with a lead reporter
+- Must be defined before building the orchestrator
+
+### 4. Rhea Validating Against Incomplete Data
+
+**Problem:** Rhea checks continuity against SQLite and the Article Index. If those sources are incomplete or have errors, she validates against bad data with high confidence. Garbage in, garbage out.
+
+**Mitigations:**
+- Rhea should FLAG issues, not BLOCK publication. Mags makes the final call.
+- Confidence score should reflect data completeness (e.g., if SQLite has only 9 of 326 citizens, confidence drops)
+- Add a data freshness check: if SQLite hasn't been synced in 5+ cycles, Rhea warns "stale data" instead of running full validation
+- The POP-ID index was built from Drive scans, not manually verified — known limitation
+
+### 5. Archive Contradictions
+
+**Problem:** The Article Index records what exists. If two articles say different things about the same citizen, which one wins? Does the agent notice or just pick one?
+
+**Rules to define:**
+- Recency bias: later cycle = more authoritative (simulation state evolves)
+- Tier weighting: Tier-1 citizen contradictions get escalated to Mags, Tier-4 gets ignored
+- If an agent detects conflicting facts, flag it as a continuity note rather than silently picking one
+- Long-term: contradictions feed back into the engine's continuity notes parser for future cycles
+
+### 6. Error Handling & Cost on Failed Runs
+
+**Problem:** No circuit breaker. If the MCP server goes down mid-run, all active agents burn tokens trying to query a dead endpoint. Debugging across twenty agents is expensive.
+
+**Design needed:**
+- Per-agent timeout (agent that can't get data in 10s = skip, don't retry forever)
+- Desk-level error handling: if 3+ agents on a desk fail, skip that desk entirely
+- Dry-run mode: orchestrator pre-checks all layers (SQLite reachable? Exports exist? Roster loads?) before spending on generation
+- Failed run output: save partial results and error log so you can see what broke without re-running
+- Budget cap per cycle (e.g., $5 hard limit — if hit, stop all agents and save what exists)
+
+---
+
 ## File Structure (Proposed)
 
 ```

@@ -72,6 +72,16 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Full engine returns | Article Table, Storylines, Usage Log, Continuity Notes | Done (docs/cycle_pulse_edition_78.txt) |
 | Validate parallel-agent workflow | compileHandoff → desk agents → compile → correct → returns | Done — production model confirmed |
 
+### Completed: Edition 78 Canon Fixes & Verification Workflow (2026-02-06)
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Fix Edition 78 canon errors | 5 A's names, Seymour backstory, vote narrative (Crane/Tran swap), 4th-wall engine language | Done |
+| Add canon reference to handoff spec | Section 14 in MEDIA_ROOM_HANDOFF.md — auto-extracted from ARTICLE_INDEX, ledgers, roster | Done |
+| Add editorial verification workflow | Compile → Verify split, verification agent spec, no-engine-metrics rule | Done (MEDIA_ROOM_HANDOFF.md) |
+| Upgrade Rhea Morgan to verification agent | Canon cross-reference, vote audit, engine-metric sweep | Done (AGENT_NEWSROOM.md) |
+| Add "do not invent" rule to desk agent prompts | Canon reference input + explicit rules against fabrication | Done (AGENT_NEWSROOM.md) |
+
 ### Previously Completed (Tier 7 / Bug Fixes)
 
 | Task | Status |

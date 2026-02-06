@@ -130,6 +130,21 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Session History
 
+### 2026-02-06 (Session 4)
+- **Edition 78 Canon Fixes**: Fixed 15+ errors in `docs/cycle_pulse_edition_78.txt`
+  - **5 A's names corrected**: Marcus Keane → Vinnie Keane, Darren Davis → Darrin Davis, Matt Dillon → Benji Dillon, Carlos Ramos → Arturo Ramos, Jaylen Ellis → John Ellis
+  - **Seymour backstory fixed**: "promoted from bench coach" → hired externally on 3yr/$7.6M contract, no prior MLB managing experience
+  - **Vote narrative reframed**: Tran votes NO (not YES), Crane votes YES as crossover (not NO). CRC fractures — Crane is the surprise, not Tran. Entire front page rewritten.
+  - **4th-wall engine language removed**: tension score 6.32, "high-severity civic event", "22 faith-institution events" count, replaced with journalist-voice descriptions
+  - All metadata sections updated (Article Table, Storylines, Continuity Notes, Citizen Usage Log)
+  - **Commit**: `b438a69`
+- **Editorial Verification Workflow**: Designed and documented fix to prevent future canon errors
+  - **Root cause**: Desk agents hallucinated details; editorial compilation step never cross-referenced against existing canonical data (ARTICLE_INDEX_BY_POPID.md, citizen ledgers, bay_tribune_roster.json)
+  - **MEDIA_ROOM_HANDOFF.md**: Added Section 14 (CANON REFERENCE — auto-extracted from existing docs), quality standard #9 (no engine metrics in article text), new Editorial Verification section (compile → verify split with verification agent spec)
+  - **AGENT_NEWSROOM.md**: Rhea Morgan upgraded to verification agent (5-point canon cross-reference), desk agent prompts get CANON REFERENCE input + "do not invent names" rule + "no engine metrics" rule
+  - **Key principle**: The reference docs exist (ARTICLE_INDEX_BY_POPID.md has "POP-00001: Vinnie Keane") — the failure was not using them
+  - **Commit**: `375fc70`
+
 ### 2026-02-08 (continued)
 - **Edition 78 — First Parallel-Agent Production**: Wrote The Cycle Pulse Edition 78 using 5 parallel Claude Code desk agents
   - Downloaded 9 citizen ledger files from Google Drive (792KB total: Generic Citizens, Chicago Citizens, Cultural Ledger, Civic Office Ledger, Civic Sweep Report, Neighborhood Map, Citizen Media Usage, Simulation Ledger, Full Text Mirror)
@@ -361,12 +376,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 23. **COMPLETE**: Edition 78 written by parallel agents — 6 articles + 3 letters, 14 citizens quoted, 4 new canon figures
 24. **VALIDATED**: Parallel-agent newsroom workflow — compileHandoff → 5 desk agents → editorial compilation → engine returns
+25. **COMPLETE**: Edition 78 canon fixes — 5 A's names, Seymour backstory, vote narrative (Crane/Tran), 4th-wall engine language
+26. **COMPLETE**: Editorial verification workflow — canon reference in handoff (Section 14), compile→verify split, Rhea as verification agent, no-engine-metrics rule
 
 **Next Actions:**
-1. Build `compileHandoff()` script in Google Apps Script (automates the handoff compilation from ledger data)
-2. Integration testing — run 5+ cycles with all Tier 7 systems active
-3. Activate Supermemory Pro after subscription sort (2/16)
-4. Feed Edition 78 returns back to engine (Article Table → Media_Intake, Storylines → Storyline_Intake, Usage → Citizen_Usage_Intake)
+1. Build `compileHandoff()` script in Google Apps Script (automates handoff compilation including Section 14 canon reference)
+2. Feed Edition 78 returns back to engine (Article Table → Media_Intake, Storylines → Storyline_Intake, Usage → Citizen_Usage_Intake)
+3. Integration testing — run 5+ cycles with all Tier 7 systems active
+4. Activate Supermemory Pro after subscription sort (2/16)
 
 ---
 

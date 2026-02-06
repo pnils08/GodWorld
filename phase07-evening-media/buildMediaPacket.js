@@ -1,10 +1,14 @@
 /**
  * ============================================================================
- * buildMediaPacket_ v2.3
+ * buildMediaPacket_ v2.4
  * ============================================================================
  *
  * Fully world-aware, aligned with GodWorld Calendar v1.0.
  * Produces the final newsroom packet text.
+ *
+ * v2.4 Enhancements:
+ * - Section 7: Voice guidance on story seeds and hooks
+ * - Displays suggestedJournalist, suggestedAngle, matchConfidence, first line of voiceGuidance
  *
  * v2.3 Enhancements:
  * - ES5 syntax for Google Apps Script compatibility
@@ -197,7 +201,14 @@ function buildMediaPacket_(ctx) {
     for (var si = 0; si < seedSlice.length; si++) {
       var x = seedSlice[si];
       if (typeof x === 'object') {
-        pkt.push('  - [' + (x.domain || 'GENERAL') + '] ' + (x.seed || x.description || 'seed'));
+        pkt.push('  - [' + (x.domain || 'GENERAL') + '] ' + (x.seed || x.text || x.description || 'seed'));
+        // v2.4: Voice guidance for story seeds
+        if (x.suggestedJournalist) {
+          pkt.push('    → ' + x.suggestedJournalist + ' | ' + (x.suggestedAngle || 'general angle') + ' [' + (x.matchConfidence || 'low') + ']');
+        }
+        if (x.voiceGuidance) {
+          pkt.push('    Voice: ' + x.voiceGuidance.split('\n')[0]);
+        }
       } else {
         pkt.push('  - ' + x);
       }
@@ -213,7 +224,14 @@ function buildMediaPacket_(ctx) {
     var hookSlice = hooks.slice(0, 4);
     for (var hi = 0; hi < hookSlice.length; hi++) {
       var h = hookSlice[hi];
-      pkt.push('  - ' + (h.hook || h.description || 'hook') + ' (' + (h.priority || 'normal') + ')');
+      pkt.push('  - ' + (h.hook || h.text || h.description || 'hook') + ' (' + (h.priority || 'normal') + ')');
+      // v2.4: Voice guidance for story hooks
+      if (h.suggestedJournalist) {
+        pkt.push('    → ' + h.suggestedJournalist + ' | ' + (h.suggestedAngle || 'general angle') + ' [' + (h.matchConfidence || 'low') + ']');
+      }
+      if (h.voiceGuidance) {
+        pkt.push('    Voice: ' + h.voiceGuidance.split('\n')[0]);
+      }
     }
   }
   pkt.push('');
@@ -459,7 +477,7 @@ function populateMediaIntake_(ctx) {
 
 /**
  * ============================================================================
- * MEDIA PACKET REFERENCE v2.3
+ * MEDIA PACKET REFERENCE v2.4
  * ============================================================================
  * 
  * CALENDAR CONTEXT (Section 1):

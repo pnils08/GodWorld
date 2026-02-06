@@ -77,6 +77,7 @@ GodWorld/
 | Story Seeds | applyStorySeeds.js | v3.9 | Voice-matched story seeds |
 | Roster Lookup | rosterLookup.js | v2.2 | Theme matching, voice profiles, citizen-to-journalist matching |
 | Media Briefing | mediaRoomBriefingGenerator.js | v2.6 | Consumer wiring: Section 13/14/17 enhancements |
+| Media Packet | buildMediaPacket.js | v2.4 | Voice guidance on story seeds & hooks |
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
 
 ---
@@ -140,6 +141,10 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Git workflow**: Synced local main with GitHub (was 9 commits behind), configured GitHub token for pushes
 - **Stale local changes**: Committed leftover uncommitted work from previous sessions (rosterLookup.js v2.2 matchCitizenToJournalist_, .gitignore credentials/, googleapis dependency, lib/sheets.js, scripts/)
 - **PRIORITY_TASKS.md**: Consumer Wiring tasks marked Done (3/3), next action → integration testing
+- **buildMediaPacket.js v2.4**: Voice guidance added to Section 7 (Story Seeds & Hooks)
+  - Seeds and hooks now show suggestedJournalist, suggestedAngle, matchConfidence
+  - First line of voiceGuidance displayed inline
+  - Last open roster integration item — all consumer wiring now complete
 
 ### 2026-02-06 (Session 2, continued)
 - **Echo removal**: Removed all Echo (Oakland Echo) code and references — Echo was never a real publication (originated from Grok experimentation)
@@ -269,8 +274,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
 | Briefing Section 17: VOICE PROFILES | **Done** | mediaRoomBriefingGenerator.js v2.6 |
 | Enhanced Section 13 | **Done** | mediaRoomBriefingGenerator.js v2.6 |
 
-### Still Open
+### Implemented (Session 3, continued, 2026-02-06)
 
-| Item | Description |
-|------|-------------|
-| `buildMediaPacket.js` voice guidance | Include voice guidance with each story seed in packet |
+| Item | Status | Location |
+|------|--------|----------|
+| `buildMediaPacket.js` voice guidance | **Done** | buildMediaPacket.js v2.4, Section 7 |

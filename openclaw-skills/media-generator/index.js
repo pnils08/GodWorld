@@ -26,18 +26,6 @@ Avoid: Editorializing, speculation, sensationalism.
 Format your output as markdown with clear sections.`
   },
 
-  echo: {
-    name: 'Oakland Echo',
-    systemPrompt: `You are writing for the Oakland Echo, a community-focused alternative paper.
-
-Voice: Skeptical, advocacy-oriented, community-first. Question official narratives.
-Structure: Opinion-forward, provocative headlines, street-level perspective.
-Include: Community impact, what officials aren't saying, calls to action.
-Avoid: Both-sidesing clear injustices, corporate PR language.
-
-Format your output as markdown with clear sections.`
-  },
-
   continuity: {
     name: 'Continuity Checker',
     systemPrompt: `You are a fact-checker and continuity editor for GodWorld media.
@@ -75,10 +63,6 @@ function determineRouting(contextPack, riskFlags) {
   if (hasConflicts) {
     // Conflicts detected - only continuity check
     return ['continuity'];
-  }
-
-  if (hasHighTension || hasChaos) {
-    agents.push('echo');
   }
 
   // Always run continuity check for civic events
@@ -138,34 +122,6 @@ function buildTribunePrompt(contextPack, citizens) {
 4. **Looking Ahead** - What to watch next cycle
 
 Write 400-600 words total. Use specific names and details from above.`;
-
-  return prompt;
-}
-
-/**
- * Build prompt for Echo Op-Ed
- */
-function buildEchoPrompt(contextPack, citizens) {
-  const riskFlags = contextPack.riskFlags || [];
-
-  let prompt = `Write an Oakland Echo op-ed for Cycle ${contextPack.cycleId}.
-
-## Context
-The city is experiencing: ${riskFlags.join(', ') || 'routine conditions'}
-Sentiment: ${contextPack.city?.sentiment || 0}
-Chaos events this cycle: ${contextPack.city?.chaosEvents || 0}
-
-## Your Angle
-Pick ONE of these approaches:
-1. What officials aren't telling us about [recent event]
-2. Community voices: what [neighborhood] residents are saying
-3. Follow the money: who benefits from [policy/initiative]
-4. The pattern we're seeing: [connect recent events]
-
-## Tone
-Skeptical but not cynical. Advocate for community. Name names.
-
-Write 300-400 words. End with a question or call to action.`;
 
   return prompt;
 }
@@ -274,8 +230,6 @@ async function execute(context) {
     let userPrompt;
     if (agent === 'tribune') {
       userPrompt = buildTribunePrompt(contextPack, citizens);
-    } else if (agent === 'echo') {
-      userPrompt = buildEchoPrompt(contextPack, citizens);
     } else if (agent === 'continuity') {
       // Continuity checks the tribune output
       if (!outputs.tribune) continue;
@@ -295,7 +249,6 @@ async function execute(context) {
 
       // Save to file
       const filename = agent === 'tribune' ? 'tribune-pulse.md' :
-                       agent === 'echo' ? 'echo-oped.md' :
                        'continuity-check.md';
       await fs.writeFile(path.join(cycleDir, filename), content);
 

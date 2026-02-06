@@ -14,10 +14,11 @@ GodWorld is a **living city simulation** that generates emergent narratives. The
 - Outputs to **Google Sheets** (20+ ledgers)
 - Runs ~weekly cycles
 
-### 2. Media Room (Working, but manual)
+### 2. Media Room (Working, handoff documented)
 - Claude-powered journalism layer
 - Reads simulation output, writes news content (Bay Tribune Pulse, Council Watch, etc.)
-- **Current pain point:** No persistent memory. Requires manually moving documents and managing multiple chat sessions per cycle.
+- **Handoff Guide:** `docs/MEDIA_ROOM_HANDOFF.md` — structured workflow reducing 402KB raw exports to ~15KB compiled handoff (96% reduction)
+- **Current pain point:** No persistent memory. Handoff is documented but still manual. Requires copy-paste into chat sessions per cycle.
 
 ---
 
@@ -240,10 +241,13 @@ Existing OpenClaw code that remains useful without the framework:
 - [x] Sync scripts written (scripts/sync.js, godworld-sync/index.js)
 - [x] Media generator reference code (openclaw-skills/media-generator/index.js)
 - [x] Agent Newsroom architecture planned (docs/AGENT_NEWSROOM.md)
+- [x] Media Room Handoff Guide (docs/MEDIA_ROOM_HANDOFF.md — 96% data reduction)
+- [x] Cycle 78 compiled handoff demonstrated (15KB vs 402KB raw)
 - [x] Supermemory plugin installed + configured for Claude Code
 - [ ] Supermemory Pro subscription (blocks codebase indexing)
 - [ ] Cancel Apple Claude subscription, re-subscribe direct (expires 2/16)
 - [ ] claude.ai MCP connector for Media Room sessions
 - [ ] Cron job for auto-sync (scripts/sync.js on DigitalOcean)
 - [ ] Agent Newsroom implementation (Claude Agent SDK)
+- [ ] Build compileHandoff() script in Google Apps Script
 - [ ] End-to-end test with cycle comparison

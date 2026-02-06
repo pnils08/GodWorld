@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-07 | Engine: v3.1 | Cycle: 78
+Last Updated: 2026-02-08 | Engine: v3.1 | Cycle: 78
 
 ---
 
@@ -108,6 +108,8 @@ GodWorld/
 | docs/V3_ARCHITECTURE.md | Technical contract, ctx shape |
 | docs/ARTICLE_INDEX_BY_POPID.md | **NEW** - Search articles by POP-ID (326 citizens, 367 articles) |
 | docs/CITIZENS_BY_ARTICLE.md | **NEW** - Search citizens by article name |
+| docs/MEDIA_ROOM_HANDOFF.md | **NEW** - Structured handoff workflow for Media Room (replaces ad-hoc process) |
+| docs/PROJECT_GOALS.md | Project goals, MCP stack, subscription optimization |
 | schemas/SCHEMA_HEADERS.md | All ledger schemas |
 
 ---
@@ -126,6 +128,37 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-08
+- **Media Room Handoff Guide**: Created `docs/MEDIA_ROOM_HANDOFF.md` — structured workflow replacing ad-hoc "drop everything into chat"
+  - Analyzed all 10 Cycle 78 export files (402KB raw data across media_briefing, cycle_packet, storyline_tracker, press_drafts, story_seeds, world_events, world_pop, riley_digest, story_hooks, citizen_ledgers)
+  - Deep structural analysis of Media Briefing (122KB, 2357 lines, 8 cycles stacked): 17 sections mapped, redundancy scored
+  - **Key finding**: Continuity notes are 584 lines (68% of Cycle 78 briefing), with 70-80% verbatim duplicates (Baylight Timeline 4x, Council Composition 3x, Paulson quotes 3x)
+  - **Key finding**: Priority 1 story seeds are pure filler ("Barbecue smoke rises from backyards"), Riley Digest and Story Hooks are engine analytics the Media Room never needs
+  - Compiled HANDOFF_C78.txt demonstrating new format: **15KB vs 402KB raw — 96.2% reduction**
+  - Identified hidden story in Cycle 78 data: 22 faith-institution events (grief gathering, emergency fund, interfaith council)
+  - Defined quality standards based on Edition 77 (best content): named citizens with details, direct quotes, specific addresses/numbers, continuity callbacks, vote math tracking, letters with personal voice
+  - Full reporter roster (18 journalists), edition structure template, returns format
+  - **Commit**: `31d428f`
+- **Supermemory Evaluation**: Analyzed Supermemory v2 email, clarified two product lines (Consumer App $9/mo vs Developer API $19/mo)
+  - Browser extension canceled (wrong product, $9/mo)
+  - Claude Code plugin installed, project config set (repoContainerTag: godworld, personalContainerTag: pnils08)
+  - Codebase indexing blocked — needs Pro developer tier ($19/mo), free tier returns 403
+  - API key in ~/.bashrc as SUPERMEMORY_CC_API_KEY
+- **Subscription Optimization**: Found Apple App Store markup on Claude Max ($149 vs $100 direct)
+  - billingType: "apple_subscription" in .claude.json
+  - Cancel expires 2/16, then re-subscribe direct for $49/mo savings
+  - Browser extension canceled, monthly target: $124/mo (Phase 1) or $44/mo (Phase 2)
+- **PROJECT_GOALS.md Major Rewrite**: Replaced OpenClaw-centric plan with MCP-based stack
+  - New architecture: Supermemory MCP + Agent Newsroom + cron sync + claude.ai MCP connectors
+  - Added subscription optimization section with full monthly stack costs
+  - OpenClaw deferred (doc preserved at docs/OPENCLAW_INTEGRATION.md)
+  - **Commits**: `52651e8`, `9b30dde`, `4e9cd22`, `61f7906`, `a0ef6de`
+- **Google Drive Integration**: Downloaded 10 export files via service account + googleapis
+  - Three Drive folders explored: The Cycle Pulse, GodWorld Exports, Writable folder
+  - Service account can read/list but can't create new files (no storage quota)
+  - Files saved to /tmp/ for analysis
+- **.gitignore Update**: Added `.claude/.supermemory-claude/` to prevent API key exposure
 
 ### 2026-02-07
 - **Bond Persistence Fix**: Two bugs found and fixed in `godWorldEngine2.js`
@@ -287,7 +320,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 **Summary:**
 1. v1.5/v1.6 bug fixes mostly complete
 2. **COMPLETE**: Tier 7.1 (Ripple System) - wired into engine Phase 6, next civic vote Cycle 80
-3. OpenClaw integration ready for setup when desired
+3. OpenClaw deferred — replaced by MCP-based stack (Supermemory + Agent Newsroom + cron)
 4. **Agent Newsroom planned** - Claude Agent SDK, 25 journalists, replaces AutoGen approach (see docs/AGENT_NEWSROOM.md)
 5. POP-ID article index available for media continuity checks
 6. **COMPLETE**: Journalist personas enriched (v2.0) - 25 full voice profiles ready
@@ -303,8 +336,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 16. **COMPLETE**: Bond persistence fix — saveV3BondsToLedger_ wired into V2/V3, loadRelationshipBonds_ added to V3
 17. **COMPLETE**: Dashboard v2.1 — 7 cards, 28 data points (Calendar, World Pulse, Civic, Bonds)
 18. **COMPLETE**: .claspignore fix — lib/** excluded to prevent require() error
+19. **COMPLETE**: Media Room Handoff Guide — structured workflow, 96% data reduction, quality standards from Edition 77
+20. **COMPLETE**: PROJECT_GOALS.md rewrite — MCP-based stack replaces OpenClaw, subscription optimization documented
+21. **PENDING**: Supermemory Pro subscription ($19/mo) — blocks codebase indexing
+22. **PENDING**: Apple Claude subscription migration — cancel expires 2/16, re-subscribe direct ($49/mo savings)
 
-**Next Action:** Integration testing — run 5+ cycles with all Tier 7 systems active
+**Next Actions:**
+1. Build `compileHandoff()` script in Google Apps Script (automates the handoff compilation)
+2. Integration testing — run 5+ cycles with all Tier 7 systems active
+3. Activate Supermemory Pro after subscription sort (2/16)
+4. Use HANDOFF_C78.txt for Edition 78 Media Room session
 
 ---
 

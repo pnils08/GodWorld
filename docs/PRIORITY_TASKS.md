@@ -1,7 +1,7 @@
 # Priority Task List
 
 **Created:** 2026-02-02
-**Updated:** 2026-02-07
+**Updated:** 2026-02-08
 **Status:** Active tracking document
 
 ---
@@ -50,6 +50,17 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Dashboard v2.1 | 7 cards, 28 data points — Calendar, World Pulse, Civic, Bonds | Done (v2.1) |
 | .claspignore fix | lib/** excluded — prevented require() error from lib/sheets.js | Done |
 
+### Completed: Media Room & Tooling (2026-02-08)
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Media Room Handoff Guide | Structured workflow replacing ad-hoc process, 96% data reduction | Done (docs/MEDIA_ROOM_HANDOFF.md) |
+| Cycle 78 Handoff compiled | 15KB compiled from 402KB raw — demonstrates new format | Done (/tmp/HANDOFF_C78.txt) |
+| Media Briefing deep analysis | 17 sections mapped, redundancy/noise scored, dedup recommendations | Done |
+| PROJECT_GOALS.md rewrite | MCP-based stack replaces OpenClaw, subscription optimization | Done |
+| Supermemory plugin setup | Claude Code plugin installed, project config set | Done (needs Pro sub) |
+| Subscription optimization plan | Apple markup identified ($49/mo savings), browser ext canceled | Done |
+
 ### Previously Completed (Tier 7 / Bug Fixes)
 
 | Task | Status |
@@ -69,7 +80,16 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 
 ## Remaining Tasks
 
-### Priority 1: Testing & Validation
+### Priority 1: Media Room & Handoff Automation
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Build compileHandoff() script | GAS function to automate handoff compilation from sheets | Not started |
+| Use HANDOFF_C78 for Edition 78 | Test compiled handoff in actual Media Room session | Not started |
+| Fix Media Briefing continuity dedup | Engine-side fix to collapse duplicate continuity notes | Not started |
+| Filter Priority 1 seeds in engine | Stop generating filler seeds ("Barbecue smoke rises") | Not started |
+
+### Priority 2: Testing & Validation
 
 | Task | Description | Status |
 |------|-------------|--------|
@@ -77,14 +97,22 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Verify ripple decay | Confirm neighborhood effects decay as expected | Not started |
 | Verify economic triggers | Test 22 economic trigger types | Not started |
 
-### Priority 2: Tech Debt (from AUDIT_TRACKER.md)
+### Priority 3: Subscription & Tooling
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Supermemory Pro subscription | $19/mo — unblocks codebase indexing + MCP memory | Pending (test free credits first) |
+| Cancel Apple Claude subscription | Expires 2/16 — re-subscribe direct at claude.ai for $100/mo | Pending (2/16) |
+| claude.ai MCP connector | Connect Supermemory to Media Room web sessions | Not started |
+
+### Priority 4: Tech Debt (from AUDIT_TRACKER.md)
 
 | Task | File | Status |
 |------|------|--------|
 | Hardcoded Spreadsheet ID | utilityFunctions.js (centralized) | Done (v2.14) |
 | Missing Null/Undefined Checks | 272 instances (22 fixed in top 3 files) | Partially done — Phase 7 files deferred |
 
-### Priority 3: Optional Enhancements
+### Priority 5: Optional Enhancements
 
 | Task | Description | Status |
 |------|-------------|--------|
@@ -113,8 +141,14 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Tier 7 Features | 5/5 | 0 |
 | Journalist Matching & Media | 11/11 | 0 |
 | Consumer Wiring | 3/3 | 0 |
+| Media Room & Tooling | 6/6 | 0 |
+| Media Room Automation | 0/4 | 4 |
+| Subscription & Tooling | 0/3 | 3 |
 | Testing | 0/3 | 3 |
 | Tech Debt | 0/2 | 2 (low priority) |
 | Optional | 0/3 | 3 |
 
-**Next Action:** Integration testing — run 5+ cycles with all systems active.
+**Next Actions:**
+1. Build `compileHandoff()` script (automate handoff compilation)
+2. Test HANDOFF_C78 in actual Media Room session for Edition 78
+3. Integration testing — run 5+ cycles with all systems active

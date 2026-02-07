@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-07 | Engine: v3.1 | Cycle: 78 | Session: 7
+Last Updated: 2026-02-07 | Engine: v3.1 | Cycle: 79 | Session: 8
 
 ---
 
@@ -82,13 +82,13 @@ GodWorld/
 | Story Hook | storyHook.js | v3.9 | Theme-aware hooks + sports feed triggers |
 | Story Seeds | applyStorySeeds.js | v3.9 | Voice-matched story seeds |
 | Roster Lookup | rosterLookup.js | v2.2 | Theme matching, voice profiles, citizen-to-journalist matching |
-| Media Briefing | mediaRoomBriefingGenerator.js | v2.6 | Consumer wiring: Section 13/14/17 enhancements, Section 9B previous coverage |
+| Media Briefing | mediaRoomBriefingGenerator.js | v2.7 | Consumer wiring, Continuity_Loop reference removed |
 | Media Packet | buildMediaPacket.js | v2.4 | Voice guidance on story seeds & hooks |
-| Media Intake | mediaRoomIntake.js | v2.3 | Consolidated processor — engine-callable via processMediaIntake_(ctx) |
-| Media Parser | parseMediaRoomMarkdown.js | v1.4 | Bold header support, pipe table handling in continuity notes |
+| Media Intake | mediaRoomIntake.js | v2.5 | Continuity pipeline removed, storyline lifecycle (resolved), citizen routing to Intake/Advancement |
+| Media Parser | parseMediaRoomMarkdown.js | v1.5 | Continuity → LifeHistory_Log (quotes only), continuity pipeline eliminated |
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
-| Handoff Compiler | compileHandoff.js | v1.0 | Automates 14-section media handoff (~310KB→30KB) |
+| Handoff Compiler | compileHandoff.js | v1.1 | Handoff compiler — NEEDS REBUILD around Cycle Packet (current 15-section format is data dump, not useful) |
 
 ---
 
@@ -120,7 +120,7 @@ GodWorld/
 | docs/media/MEDIA_ROOM_HANDOFF.md | Structured handoff workflow for Media Room (replaces ad-hoc process) |
 | docs/media/MEDIA_ROOM_STYLE_GUIDE.md | How to write: voice, data treatment, Paulson canon, dual-clock rules (replaces MEDIA_ROOM_INSTRUCTIONS v2.0) |
 | docs/media/TIME_CANON_ADDENDUM.md | Dual-clock system (City Clock vs Sports Clock), desk-specific rules, A's-in-Arizona context |
-| editions/CYCLE_PULSE_TEMPLATE.md | Standardized edition structure, journalist assignments, canon rules, article length guidelines |
+| editions/CYCLE_PULSE_TEMPLATE.md | v1.2 — Standardized edition structure, journalist assignments, canon rules. Continuity notes = audit-only, quotes → LifeHistory_Log |
 | docs/mara-vance/ | Mara Vance: in-world character, newsroom interface, operating manual v2.0 (canon adjudication, anomaly detection, presser prep, fourth wall) |
 | docs/media/PAULSON_CARPENTERS_LINE.md | Paulson family backstory — Lars, Maureen, brothers (Christopher, Anthony, Mike), Shannon-Romano descendants, family symbolism |
 | editions/cycle_pulse_edition_78.txt | Edition 78 written by 5 parallel Claude Code desk agents |
@@ -145,6 +145,46 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-07 (Session 8) — Media Pipeline Overhaul
+- **Continuity pipeline eliminated**: Ripped out Continuity_Loop (782 rows, all "active", 57% useless "introduced" type), Continuity_Intake, Raw_Continuity_Paste. Direct quotes now route from edition → LifeHistory_Log via parseContinuityNotes_. All other continuity notes stay in edition text for cycle-to-cycle auditing — no sheet storage.
+  - **7 files modified**: mediaRoomIntake.js, parseMediaRoomMarkdown.js, compileHandoff.js, mediaRoomBriefingGenerator.js, sheetNames.js, cycleExportAutomation.js, CYCLE_PULSE_TEMPLATE.md
+  - **Commit**: `bd9f020`
+- **Handoff size: 80KB → 29KB**: Multiple fixes to reduce handoff bloat
+  - Storyline dedup (113 → 65 via description key matching)
+  - Press_Drafts dedup (by headline)
+  - Sports feeds: current cycle only (was 10-cycle lookback, 213 lines → 5)
+  - Continuity notes: current cycle only + engine-tracked data filter
+  - **Commit**: `0ef3d24`
+- **Handoff noise cuts**: Further tightening
+  - World events: medium+ severity only (drops 18 routine "weekly service draws faithful" events)
+  - Story seeds: dedup by domain+neighborhood, skip vague generics, cap at 10
+  - Cultural entities: fame 25+ only, sorted by fame, cap at 15
+  - Texture triggers: high only, deduped, cap at 8
+  - Section 14: removed council/votes (duplicated from Section 3)
+  - Storylines: arc-root grouping for semantic dedup ("Stabilization Fund" variants collapse)
+  - **Commit**: `1f37b1c`
+- **Storyline lifecycle fixed**: mediaRoomIntake.js — "resolved" type in Storyline_Intake now searches Storyline_Tracker and updates Status to "resolved" instead of appending new rows. Added pipe-separated parsing for column A.
+  - **Commit**: `d5d81e8`
+- **Template v1.2**: CYCLE_PULSE_TEMPLATE.md — Storylines (NEW/RESOLVED only, pipe-separated), Citizen Usage Log (explicit formats, no-parens rule), Continuity Notes (audit-only), Warriors category added.
+  - **Commit**: `d5d81e8`
+- **Handoff declared useless — rebuild planned**: User reviewed 29KB handoff and identified fundamental problem: the handoff is organized around data sources (15 sections from different sheets) instead of what the writer needs. Pre-assigns stories, recommends front page, tells reporters what to cover — killing the creativity and emergence that makes the media room valuable.
+  - **Decision**: Rebuild compileHandoff around the Cycle Packet (4KB of actual signal) + Sports Feeds + brief arc context + civic reference + return format. 5 sections, ~10-12KB.
+  - **Key quote**: "its stupid to cue stories to a media room trying to be creative and who am I to tell them what to write about"
+
+**Sheets eliminated from pipeline (can be archived/deleted from spreadsheet):**
+- `Continuity_Loop` (782 rows) — dead
+- `Continuity_Intake` (333 rows) — dead
+- `Raw_Continuity_Paste` (8 rows) — dead
+- `Citizen_Media_Usage` (297 rows) — useless dump, never routed to Intake/Advancement
+
+**Sheets still broken:**
+- `Intake` (empty) — citizen routing from processRawCitizenUsageLog_ exists but never ran
+- `Advancement_Intake1` (empty) — same
+- `Storyline_Tracker` (986 rows) — bloated but has lifecycle now
+- `Citizen_Media_Usage` (297 rows) — 297 citizens stuck here that should have been routed to Intake/Advancement_Intake
+
+**Bulls roster wrong**: Section 14 shows wrong names (Freddie Silecki, Johhny Necklar, Billy Storip) from Simulation_Ledger. Real Bulls players (Trepagnier, Tre Jones, Jrue Holiday, Ben Simmons) never made it to ledger because citizen intake was stuck.
 
 ### 2026-02-07 (Session 7)
 - **extractCitizenNames_ name collision fix**: `compileHandoff.js` and `parseMediaRoomMarkdown.js` both defined `extractCitizenNames_()` with different signatures. Google Apps Script flat namespace caused `parseMediaRoomMarkdown()` to resolve to the wrong function, crashing with `TypeError: Cannot read properties of undefined (reading 'length')`. Renamed to `extractHandoffCitizenNames_()` in compileHandoff.js.
@@ -499,10 +539,30 @@ Before editing, check what reads from and writes to the affected ctx fields.
 42. **COMPLETE**: Paulson pressers saved to repo — Cycle 70 Chicago presser, Cycle 73 Oakland presser (both have full engine returns)
 43. **COMPLETE**: Paulson Carpenter's Line backstory saved to `docs/media/PAULSON_CARPENTERS_LINE.md` — family canon (Lars, Maureen, brothers, Shannon-Romano descendants)
 
-**Next Actions:**
-1. **Run Cycle 79**: Verify Phase 11 executes, briefing Section 9 has continuity, Section 9B has previous coverage
-2. Integration testing — run 5+ cycles with all Tier 7 systems active
-3. Activate Supermemory Pro after subscription sort (2/16)
+**Next Actions (Session 9):**
+
+1. **FIX: Citizen intake log jam** — 297 citizens stuck in Citizen_Media_Usage that should have routed to Intake (new citizens) or Advancement_Intake (existing). processRawCitizenUsageLog_ exists but was never wired as the primary processor. Fix: ensure processCitizenUsageIntake_ routes through processRawCitizenUsageLog_ (or replace it), verify Intake and Advancement_Intake1 sheets are aligned to receive data with correct column schemas.
+
+2. **REBUILD: compileHandoff.js** — Current 15-section format is a data dump. Rebuild around:
+   - Section 1: Cycle Packet (paste the raw engine output — what happened)
+   - Section 2: Sports Feeds (current cycle video game results/trades)
+   - Section 3: Active Arcs (5-8 ongoing storylines, not 65)
+   - Section 4: Civic Reference (council + pending votes, one place only)
+   - Section 5: Return Format (article table, storylines, citizen usage log formats)
+   - Target: ~10-12KB, 5 sections. No story assignments, no front page recommendations, no story seeds, no cultural entity dumps. The media room decides what to cover.
+
+3. **ENHANCE: Cycle Packet** — May need additions for the media room (TBD by user). Currently 4KB with calendar, civic, events, dynamics, weather, Chicago. May want to add: active arcs summary, recent edition coverage, canon names.
+
+4. **REDO: Edition 79** — Write with the new handoff format after rebuild.
+
+5. **CLEANUP: Archive dead sheets** — Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste, Citizen_Media_Usage can be archived/deleted from spreadsheet.
+
+6. **FIX: Bulls roster in Simulation_Ledger** — Real players (Trepagnier, Tre Jones, Jrue Holiday, Ben Simmons) need to be in the ledger. Currently blocked by stuck citizen intake.
+
+7. **FIX: Storyline_Tracker bloat** — 986 rows. Has lifecycle now (resolved status works) but needs archival of old resolved entries.
+
+8. Integration testing — run cycles with fixed intake pipeline
+9. Activate Supermemory Pro after subscription sort (2/16)
 
 ---
 

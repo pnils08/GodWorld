@@ -459,7 +459,8 @@ function extractCouncilMembers_(officers) {
 
 
 /**
- * Loads Initiative_Tracker rows (active/pending-vote).
+ * Loads Initiative_Tracker rows (active/pending-vote/passed/failed).
+ * "Proposed" initiatives are excluded — they stay hidden until Mara releases them.
  */
 function loadInitiatives_(cache) {
   var sheetName = 'Initiative_Tracker';
@@ -490,8 +491,9 @@ function loadInitiatives_(cache) {
     var row = values[r];
     var status = String(safeColRead_(row, iStatus, '')).toLowerCase();
 
-    // Include active, pending-vote, proposed, and recently passed/failed
-    if (status === 'active' || status === 'pending-vote' || status === 'proposed' ||
+    // Include active, pending-vote, and recently passed/failed
+    // "proposed" status is excluded — Mara phases these into the media room when ready
+    if (status === 'active' || status === 'pending-vote' ||
         status === 'passed' || status === 'failed') {
       results.push({
         id: String(safeColRead_(row, iId, '')),

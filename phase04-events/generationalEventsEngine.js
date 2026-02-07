@@ -70,6 +70,16 @@ var HEALTH_TRANSITIONS = {
   recovering: {
     short: { active: 0.70, hospitalized: 0.10, stay: 0.20 },
     long: { active: 0.90, hospitalized: 0.05, stay: 0.05 }
+  },
+  injured: {
+    short: { active: 0.50, hospitalized: 0.05, stay: 0.45 },
+    medium: { active: 0.65, hospitalized: 0.05, stay: 0.30 },
+    long: { active: 0.85, hospitalized: 0.05, stay: 0.10 }
+  },
+  "serious-condition": {
+    short: { hospitalized: 0.30, critical: 0.15, stay: 0.55 },
+    medium: { hospitalized: 0.40, critical: 0.15, stay: 0.45 },
+    long: { hospitalized: 0.50, critical: 0.20, stay: 0.30 }
   }
 };
 
@@ -234,7 +244,8 @@ function runGenerationalEngine_(ctx) {
     var name = ((row[iFirst] || "") + " " + (row[iLast] || "")).trim();
 
     // HEALTH STATUS LIFECYCLE
-    if (status === "hospitalized" || status === "critical" || status === "recovering") {
+    if (status === "hospitalized" || status === "critical" || status === "recovering" ||
+        status === "injured" || status === "serious-condition") {
       var healthResult = processHealthLifecycle_(
         ctx, popId, name, status, statusDuration, age, tier,
         healthCause, neighborhood, cycle, calendarContext
@@ -498,6 +509,54 @@ function processHealthLifecycle_(ctx, popId, name, currentStatus, duration, age,
       newStatus = "active";
       description = name + " has made a full recovery and returned to their duties";
       tag = "Recovery";
+    }
+  }
+
+  if (currentStatus === "injured") {
+    addOutcome_("hospitalized", probs.hospitalized * ageMod);
+    addOutcome_("active", probs.active);
+    addOutcome_("stay", probs.stay);
+
+    var out4 = pickOutcome_();
+    if (!out4) return null;
+
+    if (out4 === "stay") {
+      if (duration < 5) return null;
+      out4 = "active";
+    }
+
+    if (out4 === "hospitalized") {
+      newStatus = "hospitalized";
+      description = name + "'s condition has worsened and requires hospitalization";
+      tag = "Hospitalized";
+    } else {
+      newStatus = "active";
+      description = name + " has recovered from their injury and returned to their duties";
+      tag = "Recovery";
+    }
+  }
+
+  if (currentStatus === "serious-condition") {
+    addOutcome_("critical", probs.critical * ageMod * seasonMod);
+    addOutcome_("hospitalized", probs.hospitalized / (ageMod * tierMod));
+    addOutcome_("stay", probs.stay);
+
+    var out5 = pickOutcome_();
+    if (!out5) return null;
+
+    if (out5 === "stay") {
+      if (duration < 5) return null;
+      out5 = chance_(ctx, 0.55) ? "hospitalized" : "critical";
+    }
+
+    if (out5 === "critical") {
+      newStatus = "critical";
+      description = name + "'s condition has deteriorated to critical";
+      tag = "Critical";
+    } else {
+      newStatus = "hospitalized";
+      description = name + " has been stabilized and moved to hospital care";
+      tag = "Stabilized";
     }
   }
 

@@ -292,33 +292,70 @@ function loadActiveStorylines_(cache, cycle) {
     }
   }
 
-  // Second pass: deduplicate — latest cycle wins per description key
-  var seen = {};
+  // Second pass: deduplicate by arc root.
+  // "Stabilization Fund passes 6-3" and "Stabilization Fund implementation"
+  // share the arc root "stabilization fund" — keep the latest/highest-status one.
+  var ARC_ROOTS = [
+    'stabilization fund', 'baylight', 'oari', 'health center', 'temescal health',
+    'lake merritt', 'bulls', 'paulson', 'keane', 'seymour', 'davis acl',
+    'horn', 'aitken', 'warriors', 'elliott crane', 'crane', 'marcus osei', 'osei',
+    'walkout', 'dynasty', 'civic load', 'spring training', 'playoff'
+  ];
+
+  function getArcRoot_(desc) {
+    var d = desc.toLowerCase();
+    for (var ar = 0; ar < ARC_ROOTS.length; ar++) {
+      if (d.indexOf(ARC_ROOTS[ar]) >= 0) return ARC_ROOTS[ar];
+    }
+    return null;
+  }
+
+  var rank = { resolved: 3, active: 2, 'new': 1, dormant: 0 };
+
+  // Group by arc root — keep best entry per root
+  var arcGroups = {};
+  var noArc = [];
   for (var i = 0; i < raw.length; i++) {
     var entry = raw[i];
-    // Normalize: lowercase, trim, collapse whitespace, take first 80 chars
-    var key = entry.description.toLowerCase().replace(/\s+/g, ' ').trim().substring(0, 80);
-    if (!key) continue;
+    var desc = entry.description.toLowerCase().replace(/\s+/g, ' ').trim();
+    if (!desc) continue;
 
-    if (!seen[key] || seen[key].cycleAdded < entry.cycleAdded) {
-      seen[key] = entry;
-    } else if (seen[key].cycleAdded === entry.cycleAdded) {
-      // Same cycle: prefer resolved > active > new > dormant
-      var rank = { resolved: 3, active: 2, 'new': 1, dormant: 0 };
-      var existingRank = rank[seen[key].status] || 0;
-      var newRank = rank[entry.status] || 0;
-      if (newRank > existingRank) {
-        seen[key] = entry;
+    var root = getArcRoot_(desc);
+    if (root) {
+      // Per-status: keep one entry per arc root per status category
+      var arcKey = root + '|' + entry.status;
+      if (!arcGroups[arcKey] || arcGroups[arcKey].cycleAdded < entry.cycleAdded) {
+        arcGroups[arcKey] = entry;
+      } else if (arcGroups[arcKey].cycleAdded === entry.cycleAdded) {
+        // Same cycle+root+status: prefer longer description (more detail)
+        if (entry.description.length > arcGroups[arcKey].description.length) {
+          arcGroups[arcKey] = entry;
+        }
       }
+    } else {
+      // No arc root match — dedup by first 50 chars
+      var textKey = desc.substring(0, 50);
+      var found = false;
+      for (var n = 0; n < noArc.length; n++) {
+        var existKey = noArc[n].description.toLowerCase().replace(/\s+/g, ' ').trim().substring(0, 50);
+        if (existKey === textKey) {
+          found = true;
+          if (entry.cycleAdded > noArc[n].cycleAdded ||
+              (entry.cycleAdded === noArc[n].cycleAdded && (rank[entry.status] || 0) > (rank[noArc[n].status] || 0))) {
+            noArc[n] = entry;
+          }
+          break;
+        }
+      }
+      if (!found) noArc.push(entry);
     }
   }
 
   var results = [];
-  for (var k in seen) {
-    if (seen.hasOwnProperty(k)) {
-      results.push(seen[k]);
-    }
+  for (var ak in arcGroups) {
+    if (arcGroups.hasOwnProperty(ak)) results.push(arcGroups[ak]);
   }
+  for (var na = 0; na < noArc.length; na++) results.push(noArc[na]);
 
   Logger.log('loadActiveStorylines_: ' + raw.length + ' raw → ' + results.length + ' deduplicated');
   return results;
@@ -390,13 +427,16 @@ function loadWorldEvents_(cache, cycle) {
     if (Number(safeColRead_(row, iCycle, 0)) !== cycle) continue;
 
     var desc = String(safeColRead_(row, iDesc, ''));
-    var severity = String(safeColRead_(row, iSeverity, ''));
+    var severity = String(safeColRead_(row, iSeverity, '')).toLowerCase();
 
     // Skip generic/empty entries
     if (!desc || desc === '' || desc === 'undefined') continue;
     if (desc.toLowerCase().indexOf('no significant') >= 0) continue;
     if (desc.toLowerCase().indexOf('routine activity') >= 0) continue;
     if (!severity || severity === 'none' || severity === '') continue;
+
+    // Only include medium+ severity — low events are routine noise
+    if (severity === 'low') continue;
 
     results.push({
       description: desc,
@@ -425,7 +465,7 @@ function loadStorySeeds_(cache, cycle) {
   var iPriority = idx('Priority');
   var iText = idx('SeedText');
 
-  var results = [];
+  var raw = [];
   for (var r = 1; r < values.length; r++) {
     var row = values[r];
     if (Number(safeColRead_(row, iCycle, 0)) !== cycle) continue;
@@ -433,14 +473,38 @@ function loadStorySeeds_(cache, cycle) {
     var priority = Number(safeColRead_(row, iPriority, 0));
     if (priority < 2) continue;
 
-    results.push({
+    var text = String(safeColRead_(row, iText, '')).trim();
+    if (!text) continue;
+
+    // Skip vague/generic seeds that add no value
+    var textLower = text.toLowerCase();
+    if (textLower.indexOf('significant:') >= 0 && textLower.length < 40) continue;
+    if (textLower.indexOf('notable:') >= 0 && textLower.length < 40) continue;
+
+    raw.push({
       seedType: String(safeColRead_(row, iType, '')),
       domain: String(safeColRead_(row, iDomain, '')),
       neighborhood: String(safeColRead_(row, iNeighborhood, '')),
       priority: priority,
-      seedText: String(safeColRead_(row, iText, ''))
+      seedText: text
     });
   }
+
+  // Dedup by domain+neighborhood (keep highest priority)
+  var seen = {};
+  var results = [];
+  for (var d = 0; d < raw.length; d++) {
+    var seed = raw[d];
+    var key = (seed.domain + '|' + seed.neighborhood).toLowerCase();
+    if (seen[key]) continue;
+    seen[key] = true;
+    results.push(seed);
+  }
+
+  // Sort by priority descending, cap at 10
+  results.sort(function(a, b) { return b.priority - a.priority; });
+  if (results.length > 10) results = results.slice(0, 10);
+
   return results;
 }
 
@@ -739,18 +803,26 @@ function loadCulturalEntities_(cache) {
     var row = values[r];
     var name = String(safeColRead_(row, iName, ''));
     var status = String(safeColRead_(row, iStatus, 'active')).toLowerCase();
+    var fame = Number(safeColRead_(row, iFameScore, 0));
 
     if (!name || status === 'inactive' || status === 'archived') continue;
+    // Only include entities with meaningful fame — fame <25 is background noise
+    if (fame < 25) continue;
 
     results.push({
       name: name,
       roleType: String(safeColRead_(row, iRoleType, '')),
       fameCategory: String(safeColRead_(row, iFameCategory, '')),
       domain: String(safeColRead_(row, iDomain, '')),
-      fameScore: String(safeColRead_(row, iFameScore, '')),
+      fameScore: fame,
       neighborhood: String(safeColRead_(row, iNeighborhood, ''))
     });
   }
+
+  // Sort by fame descending, cap at 15
+  results.sort(function(a, b) { return b.fameScore - a.fameScore; });
+  if (results.length > 15) results = results.slice(0, 15);
+
   return results;
 }
 
@@ -1196,15 +1268,27 @@ function buildSection09_Calendar_(data) {
     }
   }
 
-  // Texture triggers from packet
+  // Texture triggers from packet — deduped, capped at 8, high priority only
   var textureSection = extractPacketSection_(packet, 'TEXTURE TRIGGERS');
   if (textureSection) {
     lines.push('TEXTURE TRIGGERS:');
     var tLines = textureSection.split('\n');
+    var tSeen = {};
+    var tCount = 0;
     for (var t = 0; t < tLines.length; t++) {
-      if (tLines[t].trim()) lines.push(tLines[t]);
+      var tLine = tLines[t].trim();
+      if (!tLine) continue;
+      // Skip low/moderate triggers — only include high
+      if (tLine.indexOf('[low]') >= 0 || tLine.indexOf('[moderate]') >= 0) continue;
+      // Dedup by trigger type (text before the @ or colon)
+      var tKey = tLine.replace(/\s*@.*$/, '').toLowerCase().substring(0, 40);
+      if (tSeen[tKey]) continue;
+      tSeen[tKey] = true;
+      lines.push(tLine);
+      tCount++;
+      if (tCount >= 8) break;
     }
-    lines.push('');
+    if (tCount > 0) lines.push('');
   }
 
   // Weather mood from packet
@@ -1415,58 +1499,9 @@ function buildSection14_CanonReference_(data) {
   }
   lines.push('');
 
-  // Council Composition
-  lines.push('COUNCIL:');
-  var council = data.councilMembers;
-  var sortedCouncil = council.slice().sort(function(a, b) {
-    return a.district.localeCompare(b.district);
-  });
-  for (var c = 0; c < sortedCouncil.length; c++) {
-    var cm = sortedCouncil[c];
-    lines.push('- ' + cm.district + ': ' + cm.holder + ' (' + cm.faction + ') — ' + cm.status);
-  }
+  // Council and vote positions are in Section 3 — not duplicated here.
+  lines.push('COUNCIL & VOTES: See Section 3 (Civic Status)');
   lines.push('');
-
-  // Vote Positions for active initiatives
-  var activeInits = [];
-  for (var iv = 0; iv < data.initiatives.length; iv++) {
-    var init = data.initiatives[iv];
-    if (init.status === 'active' || init.status === 'pending-vote' || init.status === 'proposed') {
-      activeInits.push(init);
-    }
-  }
-
-  if (activeInits.length > 0) {
-    lines.push('VOTE POSITIONS:');
-    for (var vi = 0; vi < activeInits.length; vi++) {
-      var vote = activeInits[vi];
-      lines.push(vote.name + ':');
-      lines.push('  Requirement: ' + vote.voteRequirement + ' | Projection: ' + vote.projection);
-
-      // Map faction to YES/NO
-      var yes = [];
-      var no = [];
-      var swing = [];
-      for (var fc = 0; fc < sortedCouncil.length; fc++) {
-        var member = sortedCouncil[fc];
-        if (member.status !== 'active') continue;
-
-        if (member.faction === vote.leadFaction) {
-          yes.push(member.holder + ' (' + member.district + ')');
-        } else if (member.faction === vote.oppositionFaction) {
-          no.push(member.holder + ' (' + member.district + ')');
-        } else {
-          swing.push(member.holder + ' (' + member.district + ')');
-        }
-      }
-      if (yes.length > 0) lines.push('  YES (' + yes.length + '): ' + yes.join(', '));
-      if (no.length > 0) lines.push('  NO (' + no.length + '): ' + no.join(', '));
-      if (swing.length > 0) lines.push('  SWING (' + swing.length + '): ' + swing.join(', '));
-      if (vote.swingVoter) lines.push('  Named Swing: ' + vote.swingVoter);
-      if (vote.swingVoter2) lines.push('  Named Swing 2: ' + vote.swingVoter2 + ' (lean: ' + vote.swingVoter2Lean + ')');
-    }
-    lines.push('');
-  }
 
   // Reporter Names
   lines.push('REPORTERS:');

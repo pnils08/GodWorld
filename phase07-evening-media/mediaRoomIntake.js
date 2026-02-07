@@ -1,9 +1,17 @@
 /**
  * ============================================================================
- * MEDIA ROOM INTAKE v2.4
+ * MEDIA ROOM INTAKE v2.5
  * ============================================================================
  *
  * Aligned with MEDIA_ROOM_INSTRUCTIONS v2.0 and GodWorld Calendar v1.0
+ *
+ * v2.5 Enhancements:
+ * - routeCitizenUsageToIntake_: Routes Citizen_Media_Usage rows to Intake (new)
+ *   or Advancement_Intake1 (existing) based on Simulation_Ledger lookup.
+ *   Uses separate "Routed" column so processMediaUsage_ (Phase 5) still sees
+ *   unprocessed rows for usage counting and tier promotions.
+ * - Wired into processAllIntakeSheets_ after processCitizenUsageIntake_
+ * - Handles backlog: all unrouted rows processed on first run
  *
  * v2.4 Enhancements:
  * - Storyline lifecycle: "resolved" type in Storyline_Intake now finds and
@@ -62,17 +70,19 @@ function processMediaIntake_(ctx) {
   var cycle = ctx.config.cycleCount || 0;
   var cal = getCurrentCalendarContext_(ss);
 
-  Logger.log('processMediaIntake_ v2.2: Starting intake processing for cycle ' + cycle);
+  Logger.log('processMediaIntake_ v2.5: Starting intake processing for cycle ' + cycle);
 
   var results = processAllIntakeSheets_(ss, cycle, cal);
 
   ctx.summary.intakeProcessed = results;
 
-  Logger.log('processMediaIntake_ v2.2: Complete. ' +
+  var routing = results.citizenRouting || {};
+  Logger.log('processMediaIntake_ v2.5: Complete. ' +
     'Articles: ' + results.articles +
     ', Storylines: ' + results.storylines +
     ', Citizens: ' + results.citizenUsage +
-    ', Continuity: ' + results.continuity);
+    ', Routed: ' + (routing.routed || 0) +
+    ' (new: ' + (routing.newCitizens || 0) + ', existing: ' + (routing.existingCitizens || 0) + ')');
 
   return results;
 }
@@ -118,6 +128,7 @@ function processAllIntakeSheets_(ss, cycle, cal) {
   results.articles = processArticleIntake_(ss, cycle, cal);
   results.storylines = processStorylineIntake_(ss, cycle, cal);
   results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
+  results.citizenRouting = routeCitizenUsageToIntake_(ss, cycle, cal);
   // Continuity pipeline removed — quotes route to LifeHistory_Log via
   // parseContinuityNotes_ in parseMediaRoomMarkdown.js during parse step.
 
@@ -449,6 +460,131 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
+// 3B. CITIZEN USAGE ROUTING (v2.5)
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Route unrouted Citizen_Media_Usage rows to Intake (new) or Advancement_Intake1 (existing).
+ * Uses a separate "Routed" column so processMediaUsage_ (Phase 5) still sees rows
+ * for usage counting and tier promotions via the "Processed" column.
+ *
+ * @param {Spreadsheet} ss
+ * @param {number} cycle
+ * @param {Object} cal - Calendar context
+ * @return {{ routed: number, newCitizens: number, existingCitizens: number }}
+ */
+function routeCitizenUsageToIntake_(ss, cycle, cal) {
+  var results = { routed: 0, newCitizens: 0, existingCitizens: 0 };
+
+  var usageSheet = ss.getSheetByName('Citizen_Media_Usage');
+  if (!usageSheet) return results;
+
+  var data = usageSheet.getDataRange().getValues();
+  if (data.length < 2) return results;
+
+  var headers = data[0];
+
+  // Find or create Routed column
+  var routedCol = -1;
+  for (var h = 0; h < headers.length; h++) {
+    if (String(headers[h]).trim() === 'Routed') { routedCol = h; break; }
+  }
+  if (routedCol < 0) {
+    routedCol = headers.length;
+    usageSheet.getRange(1, routedCol + 1).setValue('Routed');
+  }
+
+  // Find CitizenName and UsageType columns
+  var nameCol = -1;
+  var usageTypeCol = -1;
+  var contextCol = -1;
+  for (var c = 0; c < headers.length; c++) {
+    var hdr = String(headers[c]).trim();
+    if (hdr === 'CitizenName' || hdr === 'Name') nameCol = c;
+    if (hdr === 'UsageType') usageTypeCol = c;
+    if (hdr === 'Context') contextCol = c;
+  }
+  if (nameCol < 0) return results;
+
+  // Load Simulation_Ledger for existence checks
+  var ledger = ss.getSheetByName('Simulation_Ledger');
+  var ledgerData = ledger ? ledger.getDataRange().getValues() : [];
+
+  // Get target sheets
+  var intakeSheet = ss.getSheetByName('Intake');
+  var advSheet = ss.getSheetByName('Advancement_Intake1');
+  if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
+
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+
+    // Skip already routed
+    if (routedCol < row.length && row[routedCol] === 'Y') continue;
+
+    var citizenName = nameCol >= 0 ? String(row[nameCol] || '').trim() : '';
+    if (!citizenName) continue;
+
+    var usageType = usageTypeCol >= 0 ? String(row[usageTypeCol] || '').trim() : '';
+    var context = contextCol >= 0 ? String(row[contextCol] || '').trim() : '';
+
+    var nameParts = splitName_(citizenName);
+    var exists = citizenExistsInLedger_(ledgerData, nameParts.first, nameParts.last);
+
+    if (exists) {
+      // Existing citizen → Advancement_Intake1
+      if (advSheet) {
+        advSheet.appendRow([
+          nameParts.first,          // A: First
+          '',                       // B: Middle
+          nameParts.last,           // C: Last
+          '',                       // D: RoleType (keep existing)
+          '',                       // E: Tier (keep existing)
+          '',                       // F: ClockMode (keep existing)
+          '',                       // G: CIV
+          '',                       // H: MED
+          '',                       // I: UNI
+          'Media usage C' + cycle + ' (' + usageType + '): ' + context // J: Notes
+        ]);
+        results.existingCitizens++;
+      }
+    } else {
+      // New citizen → Intake
+      if (intakeSheet) {
+        intakeSheet.appendRow([
+          nameParts.first,          // A: First
+          '',                       // B: Middle
+          nameParts.last,           // C: Last
+          '',                       // D: OriginGame
+          'no',                     // E: UNI
+          'no',                     // F: MED
+          'no',                     // G: CIV
+          'ENGINE',                 // H: ClockMode
+          4,                        // I: Tier (default for media-introduced)
+          'Citizen',                // J: RoleType
+          'Active',                 // K: Status
+          '',                       // L: BirthYear
+          'Oakland',                // M: OriginCity
+          'Introduced via Media Room C' + cycle + '. ' + context, // N: LifeHistory
+          '',                       // O: OriginVault
+          ''                        // P: Neighborhood
+        ]);
+        results.newCitizens++;
+      }
+    }
+
+    // Mark as routed
+    usageSheet.getRange(i + 1, routedCol + 1).setValue('Y');
+    results.routed++;
+  }
+
+  Logger.log('routeCitizenUsageToIntake_: Routed ' + results.routed +
+    ' citizens (new: ' + results.newCitizens + ', existing: ' + results.existingCitizens + ')');
+
+  return results;
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
 // 4. CONTINUITY NOTES
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -622,13 +758,14 @@ function ensureCitizenMediaUsage_(ss) {
   var sheet = ss.getSheetByName('Citizen_Media_Usage');
   if (!sheet) {
     sheet = ss.insertSheet('Citizen_Media_Usage');
-    // v2.1: 12 columns with calendar
+    // v2.5: 13 columns with calendar + Routed
     sheet.appendRow([
       'Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter',
-      'Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason'
+      'Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason',
+      'Routed'
     ]);
     sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, 12).setFontWeight('bold');
+    sheet.getRange(1, 1, 1, 13).setFontWeight('bold');
     sheet.setColumnWidth(3, 150);
     sheet.setColumnWidth(5, 250);
   }

@@ -63,7 +63,7 @@ function compileHandoffFromMenu() {
 function compileHandoff(cycleNumber) {
   var startTime = new Date();
 
-  if (cycleNumber === undefined || cycleNumber === null || cycleNumber <= 0) {
+  if (cycleNumber === undefined || cycleNumber === null || isNaN(cycleNumber) || cycleNumber <= 0) {
     showAlert_('Handoff Error', 'No cycle number provided. Use the menu: Compile Handoff.');
     return;
   }

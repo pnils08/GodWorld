@@ -84,7 +84,7 @@ GodWorld/
 | Roster Lookup | rosterLookup.js | v2.2 | Theme matching, voice profiles, citizen-to-journalist matching |
 | Media Briefing | mediaRoomBriefingGenerator.js | v2.7 | Consumer wiring, Continuity_Loop reference removed |
 | Media Packet | buildMediaPacket.js | v2.4 | Voice guidance on story seeds & hooks |
-| Media Intake | mediaRoomIntake.js | v2.5 | Continuity pipeline removed, storyline lifecycle (resolved), citizen routing to Intake/Advancement |
+| Media Intake | mediaRoomIntake.js | v2.5 | Continuity pipeline removed, storyline lifecycle (resolved), citizen routing to Intake/Advancement via Simulation_Ledger lookup |
 | Media Parser | parseMediaRoomMarkdown.js | v1.5 | Continuity → LifeHistory_Log (quotes only), continuity pipeline eliminated |
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
@@ -158,6 +158,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Tech debt noted**: mulberry32_ defined in 10 files — consolidation into utilities/rng.js recommended
   - **Commits**: `12bbe69`, `b116306`, `76e2aa5`, `1f71585`, `dbd9b5e`
   - **Branch**: `claude/read-documentation-JRbqb` (merged via fast-forward)
+- **mediaRoomIntake.js v2.5**: Wired citizen usage routing — 297 citizens stuck in Citizen_Media_Usage now route to Intake (new) or Advancement_Intake1 (existing) via Simulation_Ledger lookup. New function `routeCitizenUsageToIntake_()` uses separate `Routed` column so Phase 5 `processMediaUsage_` still works for usage counting/tier promotions. Wired into `processAllIntakeSheets_()` after `processCitizenUsageIntake_`.
+  - **Commit**: `ed2c235`
 
 ### 2026-02-07 (Session 8) — Media Pipeline Overhaul
 - **Continuity pipeline eliminated**: Ripped out Continuity_Loop (782 rows, all "active", 57% useless "introduced" type), Continuity_Intake, Raw_Continuity_Paste. Direct quotes now route from edition → LifeHistory_Log via parseContinuityNotes_. All other continuity notes stay in edition text for cycle-to-cycle auditing — no sheet storage.
@@ -596,10 +598,11 @@ any code is written.
 46. **COMPLETE**: generateGameModeMicroEvents.js v1.3 — write-intents conversion, namespace collision prevention
 47. **COMPLETE**: Transit + faith story signals wired into Phase 6 orchestrator (V2 + V3)
 48. **NOTED**: mulberry32_ defined in 10 files — consolidation needed (utilities/rng.js)
+49. **COMPLETE**: Citizen intake routing — mediaRoomIntake.js v2.5, routeCitizenUsageToIntake_() wired into Phase 11, 297 backlogged citizens cleared on first run
 
 **Next Actions (Session 10):**
 
-1. **FIX: Citizen intake log jam** — 297 citizens stuck in Citizen_Media_Usage that should have routed to Intake (new citizens) or Advancement_Intake (existing). processRawCitizenUsageLog_ exists but was never wired as the primary processor. Fix: ensure processCitizenUsageIntake_ routes through processRawCitizenUsageLog_ (or replace it), verify Intake and Advancement_Intake1 sheets are aligned to receive data with correct column schemas.
+1. **DEPLOY + TEST: Citizen intake routing** — `clasp push`, run manually via processMediaIntakeV2(), verify Intake and Advancement_Intake1 receive rows, verify 297 backlog clears
 
 2. **REBUILD: compileHandoff.js** — Current 15-section format is a data dump. Rebuild around:
    - Section 1: Cycle Packet (paste the raw engine output — what happened)

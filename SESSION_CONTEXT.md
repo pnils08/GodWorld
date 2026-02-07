@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-06 | Engine: v3.1 | Cycle: 78 | Session: 6
+Last Updated: 2026-02-07 | Engine: v3.1 | Cycle: 78 | Session: 7
 
 ---
 
@@ -41,6 +41,7 @@ GodWorld/
 ├── phase11-media-intake/  # Feedback processing
 ├── utilities/             # Shared helpers (caching, write-intents, etc.)
 ├── schemas/               # Data structure docs
+├── editions/              # Cycle Pulse editions + template
 ├── docs/                  # Architecture references
 └── _legacy/               # Disabled old code
 ```
@@ -111,8 +112,11 @@ GodWorld/
 | docs/V3_ARCHITECTURE.md | Technical contract, ctx shape |
 | docs/ARTICLE_INDEX_BY_POPID.md | **NEW** - Search articles by POP-ID (326 citizens, 367 articles) |
 | docs/CITIZENS_BY_ARTICLE.md | **NEW** - Search citizens by article name |
-| docs/MEDIA_ROOM_HANDOFF.md | **NEW** - Structured handoff workflow for Media Room (replaces ad-hoc process) |
-| editions/cycle_pulse_edition_78.txt | **NEW** - Edition 78 written by 5 parallel Claude Code desk agents |
+| docs/MEDIA_ROOM_HANDOFF.md | Structured handoff workflow for Media Room (replaces ad-hoc process) |
+| docs/MEDIA_ROOM_STYLE_GUIDE.md | **NEW** - How to write: voice, data treatment, Paulson canon, dual-clock rules (replaces MEDIA_ROOM_INSTRUCTIONS v2.0) |
+| docs/TIME_CANON_ADDENDUM.md | **NEW** - Dual-clock system (City Clock vs Sports Clock), desk-specific rules, A's-in-Arizona context |
+| editions/CYCLE_PULSE_TEMPLATE.md | **NEW** - Standardized edition structure, journalist assignments, canon rules, article length guidelines |
+| editions/cycle_pulse_edition_78.txt | Edition 78 written by 5 parallel Claude Code desk agents |
 | docs/PROJECT_GOALS.md | Project goals, MCP stack, subscription optimization |
 | schemas/SCHEMA_HEADERS.md | All ledger schemas |
 
@@ -132,6 +136,40 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-07 (Session 7)
+- **extractCitizenNames_ name collision fix**: `compileHandoff.js` and `parseMediaRoomMarkdown.js` both defined `extractCitizenNames_()` with different signatures. Google Apps Script flat namespace caused `parseMediaRoomMarkdown()` to resolve to the wrong function, crashing with `TypeError: Cannot read properties of undefined (reading 'length')`. Renamed to `extractHandoffCitizenNames_()` in compileHandoff.js.
+  - **Commit**: `d966052`
+- **Media intake successfully processed**: Edition 78 returns parsed — 12 articles, 68 storylines, 119 citizen usages, 109 continuity notes
+- **editions/ folder created**: Moved `cycle_pulse_edition_78.txt` from `docs/` to `editions/`. Updated 5 references across SESSION_CONTEXT.md, PROJECT_GOALS.md, PRIORITY_TASKS.md.
+  - **Commit**: `509e9b6`
+- **Cycle Pulse Template v1.1**: `editions/CYCLE_PULSE_TEMPLATE.md` — standardized edition structure for agent newsroom
+  - Canon rules (no invented names, no engine metrics, verify against handoff Section 14)
+  - Article length guidelines (800-1200 front page lead → 100-200 letters)
+  - Names Index as universal article footer
+  - Letters format guidance (first-person citizen voice)
+  - Article Table field definitions (ArticleText = summary, not full text)
+  - Pipe table formatting note for Continuity Notes
+  - Full journalist assignment tables (Oakland, Chicago, Wire/Social, Support, Editorial)
+  - **Commit**: `b78d0b4`
+- **Time & Canon Addendum v2.0**: `docs/TIME_CANON_ADDENDUM.md` — dual-clock system rewrite for multi-agent newsroom
+  - Removed all "Maker" references — agents know only the world
+  - Updated A's situation: played last season in Arizona, Bay District Initiative to bring them back
+  - A's players as citizens: live in Oakland, full life histories, encouraged for non-sports coverage
+  - Desk-specific clock rules (Sports Desk, Chicago Bureau, Civic, Business, Letters)
+  - Off-season guidance, crossover coverage rules
+  - **Commit**: `6e46e5a`
+- **Media Room Style Guide v1.0**: `docs/MEDIA_ROOM_STYLE_GUIDE.md` — replaces MEDIA_ROOM_INSTRUCTIONS v2.0
+  - "The World Is Real" — agents know nothing about engine, sheets, ledgers, or the user
+  - Mike Paulson canon: background (Swedish-Irish Chicago family), brothers (Christopher sculptor, Anthony beat reporter), current situation (two-city GM)
+  - Anthony Paulson dynamic: A's lead beat writer is Mike's brother — background tension, never broken
+  - Paulson Pressers: live interview system where agents ask questions, user answers on the spot as Paulson, agents write articles from raw transcript
+  - Data humanization rules: quote-as-numbers vs humanize-never-quote
+  - StoryType and SignalSource enum values for Article Table
+  - Journalist voice differentiation (Anthony precise, P Slayer emotional, Hal Richmond historical, etc.)
+  - Cultural Ledger reference table
+  - **Commit**: `078496a`
+- **Paulson Pressers downloaded**: 4 files from Google Drive Mike_Paulson_Pressers folder (~90KB) — Cycle 70 Chicago presser, Cycle 73 Oakland presser, Part I "The Carpenter's Line" (family backstory), full text mirror
 
 ### 2026-02-06 (Session 6)
 - **Media Intake Pipeline Repair**: Consolidated and fixed the feedback loop (Edition returns → engine)
@@ -410,12 +448,20 @@ Before editing, check what reads from and writes to the affected ctx fields.
 28. **COMPLETE**: Media intake pipeline repair — consolidated processors, fixed Phase 11 wiring, parser bold header + pipe table fixes, Press_Drafts wired to briefing Section 9B
 29. **COMPLETE**: processMediaIntake.js DELETED — function name collisions resolved, mediaRoomIntake.js v2.3 is sole processor
 
+30. **COMPLETE**: extractCitizenNames_ name collision fix — renamed to extractHandoffCitizenNames_ in compileHandoff.js
+31. **COMPLETE**: editions/ folder — Cycle Pulse editions moved out of docs/
+32. **COMPLETE**: Cycle Pulse Template v1.1 — standardized structure, canon rules, article lengths, journalist assignments
+33. **COMPLETE**: Time & Canon Addendum v2.0 — dual-clock rewrite, A's-in-Arizona, desk-specific rules, players-as-citizens
+34. **COMPLETE**: Media Room Style Guide v1.0 — replaces MEDIA_ROOM_INSTRUCTIONS v2.0, Paulson canon, live presser system, data humanization
+35. **COMPLETE**: Edition 78 media intake processed — 12 articles, 68 storylines, 119 citizen usages, 109 continuity notes
+36. **COMPLETE**: Deploy & test — name collision fixed, clasp pushed, parseMediaRoomMarkdown() runs clean
+
 **Next Actions:**
-1. **Deploy & test**: `clasp push` from Cloud Shell, then test media intake pipeline with Edition 78 data
-2. **Feed Edition 78 returns**: Paste engine returns from cycle_pulse_edition_78.txt into MediaRoom_Paste, run `parseMediaRoomMarkdown()`, then `processMediaIntakeV2()`
-3. **Run Cycle 79**: Verify Phase 11 executes, briefing Section 9 has continuity, Section 9B has previous coverage
-4. Integration testing — run 5+ cycles with all Tier 7 systems active
-5. Activate Supermemory Pro after subscription sort (2/16)
+1. **Run Cycle 79**: Verify Phase 11 executes, briefing Section 9 has continuity, Section 9B has previous coverage
+2. Integration testing — run 5+ cycles with all Tier 7 systems active
+3. Activate Supermemory Pro after subscription sort (2/16)
+4. **Feed Paulson pressers to intake**: Cycle 70 and 73 supplemental editions have engine returns that could be ingested
+5. **Store Paulson canon in repo**: Consider saving Carpenter's Line backstory and presser transcripts to editions/ or docs/
 
 ---
 

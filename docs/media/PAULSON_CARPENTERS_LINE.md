@@ -56,8 +56,8 @@ Son of Clara, the first to attend college out of state (Notre Dame). Returned to
 
 Cultural Echo and Realism Layer
     • These descendants populate Bridgeport, Hyde Park, South Loop, and Little Italy, maintaining realism in Chicago’s demographic and economic structure.
-    • All are now live entities in the Living Ledger — meaning they can organically reappear in politics, development projects, local scandals, or media coverage by Anthony or Hal.
-    • Riley’s outreach division will occasionally receive whispers about their operations — redevelopment deals, tax breaks, neighborhood disputes — for review in GM or Maker roles.
+    • All are active citizens who can organically reappear in politics, development projects, local scandals, or media coverage by Anthony or Hal.
+    • These descendants populate the civic and business landscape — redevelopment deals, tax breaks, neighborhood disputes — and may surface organically in coverage.
 
 ⸻
 

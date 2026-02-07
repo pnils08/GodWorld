@@ -69,7 +69,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Compile HANDOFF_C78 editorial brief | 15KB structured brief from 402KB raw exports | Done |
 | Write Edition 78 with parallel agents | 5 desk agents (Civic, Sports, Chicago, Faith, Letters) | Done |
 | Editorial compilation + canon correction | Fixed 5 wrong names, 1 position, 1 spurious character | Done |
-| Full engine returns | Article Table, Storylines, Usage Log, Continuity Notes | Done (docs/cycle_pulse_edition_78.txt) |
+| Full engine returns | Article Table, Storylines, Usage Log, Continuity Notes | Done (editions/cycle_pulse_edition_78.txt) |
 | Validate parallel-agent workflow | compileHandoff → desk agents → compile → correct → returns | Done — production model confirmed |
 
 ### Completed: Edition 78 Canon Fixes & Verification Workflow (2026-02-06)

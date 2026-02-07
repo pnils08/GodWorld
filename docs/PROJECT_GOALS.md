@@ -18,7 +18,7 @@ GodWorld is a **living city simulation** that generates emergent narratives. The
 - Claude-powered journalism layer
 - Reads simulation output, writes news content (Bay Tribune Pulse, Council Watch, etc.)
 - **Handoff Guide:** `docs/MEDIA_ROOM_HANDOFF.md` — structured workflow reducing 402KB raw exports to ~15KB compiled handoff (96% reduction)
-- **Edition 78 produced by Claude Code** using 5 parallel desk agents (Civic, Sports, Chicago, Faith/Culture, Letters) — 6 articles + 3 letters in ~70 seconds wall time. See `docs/cycle_pulse_edition_78.txt`
+- **Edition 78 produced by Claude Code** using 5 parallel desk agents (Civic, Sports, Chicago, Faith/Culture, Letters) — 6 articles + 3 letters in ~70 seconds wall time. See `editions/cycle_pulse_edition_78.txt`
 - **Production workflow validated:** compileHandoff → parallel desk agents → editorial compilation → canon correction → engine returns
 - **Remaining pain point:** No persistent memory. Handoff is documented but still manual. Returns need to be fed back to engine.
 

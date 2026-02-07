@@ -112,7 +112,7 @@ GodWorld/
 | docs/ARTICLE_INDEX_BY_POPID.md | **NEW** - Search articles by POP-ID (326 citizens, 367 articles) |
 | docs/CITIZENS_BY_ARTICLE.md | **NEW** - Search citizens by article name |
 | docs/MEDIA_ROOM_HANDOFF.md | **NEW** - Structured handoff workflow for Media Room (replaces ad-hoc process) |
-| docs/cycle_pulse_edition_78.txt | **NEW** - Edition 78 written by 5 parallel Claude Code desk agents |
+| editions/cycle_pulse_edition_78.txt | **NEW** - Edition 78 written by 5 parallel Claude Code desk agents |
 | docs/PROJECT_GOALS.md | Project goals, MCP stack, subscription optimization |
 | schemas/SCHEMA_HEADERS.md | All ledger schemas |
 
@@ -159,7 +159,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **Target**: ~310KB raw → ~30KB compiled (90% reduction)
 
 ### 2026-02-06 (Session 4)
-- **Edition 78 Canon Fixes**: Fixed 15+ errors in `docs/cycle_pulse_edition_78.txt`
+- **Edition 78 Canon Fixes**: Fixed 15+ errors in `editions/cycle_pulse_edition_78.txt`
   - **5 A's names corrected**: Marcus Keane → Vinnie Keane, Darren Davis → Darrin Davis, Matt Dillon → Benji Dillon, Carlos Ramos → Arturo Ramos, Jaylen Ellis → John Ellis
   - **Seymour backstory fixed**: "promoted from bench coach" → hired externally on 3yr/$7.6M contract, no prior MLB managing experience
   - **Vote narrative reframed**: Tran votes NO (not YES), Crane votes YES as crossover (not NO). CRC fractures — Crane is the surprise, not Tran. Entire front page rewritten.
@@ -186,7 +186,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **4 new canon figures**: Rabbi Miriam Adler (Beth Jacob), Imam Yusuf Kareem (Masjid Al-Islam), Tiffany Gonzalez (76, Bronzeville, Jazz Musician), Thomas Jackson (66, Loop, Insurance Broker)
   - **Full engine returns included**: Article Table (6 entries), Storylines Updated, Citizen Usage Log, Continuity Notes
   - Key storyline: Faith community feature ("The Quiet Week") surfaced hidden story of 22 faith events across 10 neighborhoods
-  - **File**: `docs/cycle_pulse_edition_78.txt`
+  - **File**: `editions/cycle_pulse_edition_78.txt`
   - **Commit**: `7e42242`
   - **Workflow validated**: compileHandoff → parallel desk agents → editorial compilation → canon correction → engine returns. This is the production model for future editions.
 

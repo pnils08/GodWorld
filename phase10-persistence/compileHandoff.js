@@ -246,6 +246,7 @@ function loadCyclePacketText_(cache, cycle) {
 
 /**
  * Loads active/recent storylines from Storyline_Tracker.
+ * Deduplicates by description — latest cycle wins for matching entries.
  */
 function loadActiveStorylines_(cache, cycle) {
   var values = cache.getValues(SHEET_NAMES.STORYLINE_TRACKER);
@@ -261,11 +262,15 @@ function loadActiveStorylines_(cache, cycle) {
   var iPriority = idx('Priority');
   var iStatus = idx('Status');
 
-  var results = [];
+  // First pass: collect all qualifying entries
+  var raw = [];
   for (var r = 1; r < values.length; r++) {
     var row = values[r];
     var cycleAdded = Number(safeColRead_(row, iCycleAdded, 0));
     var status = String(safeColRead_(row, iStatus, '')).toLowerCase();
+
+    // Skip abandoned entries entirely
+    if (status === 'abandoned') continue;
 
     // Include: active, new this cycle, recently resolved (last 2 cycles), recent dormant
     var include = false;
@@ -275,7 +280,7 @@ function loadActiveStorylines_(cache, cycle) {
     if (status === 'dormant' && cycleAdded >= cycle - 5) include = true;
 
     if (include) {
-      results.push({
+      raw.push({
         cycleAdded: cycleAdded,
         type: String(safeColRead_(row, iType, '')),
         description: String(safeColRead_(row, iDesc, '')),
@@ -286,12 +291,42 @@ function loadActiveStorylines_(cache, cycle) {
       });
     }
   }
+
+  // Second pass: deduplicate — latest cycle wins per description key
+  var seen = {};
+  for (var i = 0; i < raw.length; i++) {
+    var entry = raw[i];
+    // Normalize: lowercase, trim, collapse whitespace, take first 80 chars
+    var key = entry.description.toLowerCase().replace(/\s+/g, ' ').trim().substring(0, 80);
+    if (!key) continue;
+
+    if (!seen[key] || seen[key].cycleAdded < entry.cycleAdded) {
+      seen[key] = entry;
+    } else if (seen[key].cycleAdded === entry.cycleAdded) {
+      // Same cycle: prefer resolved > active > new > dormant
+      var rank = { resolved: 3, active: 2, 'new': 1, dormant: 0 };
+      var existingRank = rank[seen[key].status] || 0;
+      var newRank = rank[entry.status] || 0;
+      if (newRank > existingRank) {
+        seen[key] = entry;
+      }
+    }
+  }
+
+  var results = [];
+  for (var k in seen) {
+    if (seen.hasOwnProperty(k)) {
+      results.push(seen[k]);
+    }
+  }
+
+  Logger.log('loadActiveStorylines_: ' + raw.length + ' raw → ' + results.length + ' deduplicated');
   return results;
 }
 
 
 /**
- * Loads Press_Drafts for the target cycle.
+ * Loads Press_Drafts for the target cycle. Deduplicates by headline.
  */
 function loadPressDrafts_(cache, cycle) {
   var values = cache.getValues(SHEET_NAMES.PRESS_DRAFTS);
@@ -306,18 +341,24 @@ function loadPressDrafts_(cache, cycle) {
   var iPrompt = idx('SummaryPrompt');
   var iDraft = idx('DraftText');
 
+  var seen = {};
   var results = [];
   for (var r = 1; r < values.length; r++) {
     var row = values[r];
-    if (Number(safeColRead_(row, iCycle, 0)) === cycle) {
-      results.push({
-        reporter: String(safeColRead_(row, iReporter, '')),
-        storyType: String(safeColRead_(row, iType, '')),
-        signalSource: String(safeColRead_(row, iSignal, '')),
-        summaryPrompt: String(safeColRead_(row, iPrompt, '')),
-        draftText: String(safeColRead_(row, iDraft, '')).substring(0, 200)
-      });
-    }
+    if (Number(safeColRead_(row, iCycle, 0)) !== cycle) continue;
+
+    var headline = String(safeColRead_(row, iPrompt, '')).trim();
+    var key = headline.toLowerCase().substring(0, 60);
+    if (seen[key]) continue;  // skip duplicate headline
+    seen[key] = true;
+
+    results.push({
+      reporter: String(safeColRead_(row, iReporter, '')),
+      storyType: String(safeColRead_(row, iType, '')),
+      signalSource: String(safeColRead_(row, iSignal, '')),
+      summaryPrompt: headline,
+      draftText: String(safeColRead_(row, iDraft, '')).substring(0, 200)
+    });
   }
   return results;
 }
@@ -642,22 +683,45 @@ function loadContinuityNotes_(cache, cycle) {
   var iCitizens = idx('AffectedCitizens');
   var iStatus = idx('Status');
 
+  // Content that's already in the handoff from engine sheets — skip these
+  var SKIP_CONTENT = [
+    'council composition', 'faction count', 'major votes pending',
+    'vote count', 'civic staff status', 'weather/mood', 'weather mood',
+    'sentiment:', 'migration:', 'pattern:', 'oari vote count',
+    'stabilization fund vote count', 'baylight vote count'
+  ];
+
   var results = [];
   for (var r = 1; r < values.length; r++) {
     var row = values[r];
     var noteCycle = Number(safeColRead_(row, iCycle, 0));
+    var status = String(safeColRead_(row, iStatus, '')).toLowerCase();
 
-    // Include notes from recent cycles (last 10)
-    if (noteCycle >= cycle - 10) {
-      results.push({
-        cycle: noteCycle,
-        noteType: String(safeColRead_(row, iNoteType, '')).toLowerCase(),
-        description: String(safeColRead_(row, iDesc, '')),
-        relatedArc: String(safeColRead_(row, iRelatedArc, '')),
-        citizens: String(safeColRead_(row, iCitizens, '')),
-        status: String(safeColRead_(row, iStatus, ''))
-      });
+    // Current cycle only, active notes only
+    if (noteCycle !== cycle) continue;
+    if (status === 'resolved') continue;
+
+    var desc = String(safeColRead_(row, iDesc, ''));
+    var descLower = desc.toLowerCase();
+
+    // Skip notes that duplicate engine-tracked data
+    var skip = false;
+    for (var s = 0; s < SKIP_CONTENT.length; s++) {
+      if (descLower.indexOf(SKIP_CONTENT[s]) >= 0) {
+        skip = true;
+        break;
+      }
     }
+    if (skip) continue;
+
+    results.push({
+      cycle: noteCycle,
+      noteType: String(safeColRead_(row, iNoteType, '')).toLowerCase(),
+      description: desc,
+      relatedArc: String(safeColRead_(row, iRelatedArc, '')),
+      citizens: String(safeColRead_(row, iCitizens, '')),
+      status: status
+    });
   }
   return results;
 }
@@ -1694,10 +1758,9 @@ function extractHandoffCitizenNames_(data) {
  */
 function loadSportsFeeds_(cache, cycle) {
   var result = { oakland: [], chicago: [] };
-  var lookback = 10;
 
-  result.oakland = loadSingleSportsFeed_(cache, SHEET_NAMES.OAKLAND_SPORTS_FEED, cycle, lookback);
-  result.chicago = loadSingleSportsFeed_(cache, SHEET_NAMES.CHICAGO_SPORTS_FEED, cycle, lookback);
+  result.oakland = loadSingleSportsFeed_(cache, SHEET_NAMES.OAKLAND_SPORTS_FEED, cycle);
+  result.chicago = loadSingleSportsFeed_(cache, SHEET_NAMES.CHICAGO_SPORTS_FEED, cycle);
 
   Logger.log('loadSportsFeeds_: Oakland=' + result.oakland.length +
     ', Chicago=' + result.chicago.length);
@@ -1711,10 +1774,9 @@ function loadSportsFeeds_(cache, cycle) {
  * @param {Object} cache - SheetCache instance
  * @param {string} sheetName - Sheet name constant
  * @param {number} cycle - Target cycle number
- * @param {number} lookback - How many cycles back to include
- * @returns {Array} Array of entry objects
+ * @returns {Array} Array of entry objects (current cycle only, column A)
  */
-function loadSingleSportsFeed_(cache, sheetName, cycle, lookback) {
+function loadSingleSportsFeed_(cache, sheetName, cycle) {
   var values;
   try {
     values = cache.getValues(sheetName);
@@ -1737,7 +1799,6 @@ function loadSingleSportsFeed_(cache, sheetName, cycle, lookback) {
   var iGameDate = idx('VideoGameDate');
   var iGame = idx('VideoGame');
 
-  var minCycle = cycle - lookback;
   var results = [];
 
   for (var r = 1; r < values.length; r++) {
@@ -1745,10 +1806,8 @@ function loadSingleSportsFeed_(cache, sheetName, cycle, lookback) {
     var rawCycle = safeColRead_(row, iCycle, '');
     var entryCycle = Number(rawCycle);
 
-    // Include if: cycle is in range, OR cycle is empty (ongoing item)
-    if (rawCycle !== '' && !isNaN(entryCycle)) {
-      if (entryCycle < minCycle || entryCycle > cycle) continue;
-    }
+    // Only include entries matching the current cycle (column A)
+    if (rawCycle === '' || isNaN(entryCycle) || entryCycle !== cycle) continue;
 
     var eventType = String(safeColRead_(row, iEventType, '')).trim();
     var notes = String(safeColRead_(row, iNotes, '')).trim();

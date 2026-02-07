@@ -1,9 +1,16 @@
 /**
  * ============================================================================
- * MEDIA ROOM INTAKE v2.3
+ * MEDIA ROOM INTAKE v2.4
  * ============================================================================
  *
  * Aligned with MEDIA_ROOM_INSTRUCTIONS v2.0 and GodWorld Calendar v1.0
+ *
+ * v2.4 Enhancements:
+ * - Storyline lifecycle: "resolved" type in Storyline_Intake now finds and
+ *   closes matching active storylines in Storyline_Tracker instead of appending
+ * - Continuity lifecycle: "resolved" noteType in Continuity_Intake now finds
+ *   and closes matching active entries in Continuity_Loop instead of appending
+ * - Template alignment: CYCLE_PULSE_TEMPLATE v1.2 pipe-separated format
  *
  * v2.3 Enhancements:
  * - processMediaIntake_(ctx): Engine-callable entry point for Phase 11
@@ -258,7 +265,8 @@ function processStorylineIntake_(ss, cycle, cal) {
   if (!intakeSheet) return 0;
 
   var data = intakeSheet.getDataRange().getValues();
-  var storylines = [];
+  var newStorylines = [];
+  var resolveDescriptions = [];
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
@@ -267,49 +275,108 @@ function processStorylineIntake_(ss, cycle, cal) {
     if (!row[0] && !row[1]) continue;
     if (row[5] === 'processed') continue;
 
-    storylines.push({
-      storylineType: row[0] || 'arc',        // arc / question / thread
-      description: row[1] || '',
-      neighborhood: row[2] || '',
-      relatedCitizens: row[3] || '',
-      priority: row[4] || 'normal'
-    });
+    var type, description, neighborhood, citizens, priority;
+
+    // Check if pipe-separated data was pasted entirely in column A
+    var colA = String(row[0] || '').trim();
+    if (colA.indexOf('|') >= 0 && !row[1]) {
+      var parts = colA.replace(/^[—–-]\s*/, '').split('|');
+      type = (parts[0] || '').trim().toLowerCase();
+      description = (parts[1] || '').trim();
+      neighborhood = (parts[2] || '').trim();
+      citizens = (parts[3] || '').trim();
+      priority = (parts[4] || '').trim();
+    } else {
+      type = colA.toLowerCase();
+      description = String(row[1] || '').trim();
+      neighborhood = String(row[2] || '').trim();
+      citizens = String(row[3] || '').trim();
+      priority = String(row[4] || '').trim();
+    }
+
+    if (type === 'resolved') {
+      // This entry closes a matching storyline in the tracker
+      resolveDescriptions.push(description);
+    } else {
+      // New storyline to add
+      newStorylines.push({
+        storylineType: type || 'arc',
+        description: description,
+        neighborhood: neighborhood,
+        relatedCitizens: citizens,
+        priority: priority || 'normal'
+      });
+    }
 
     intakeSheet.getRange(i + 1, 6).setValue('processed');
   }
 
-  if (storylines.length === 0) return 0;
-
-  // Write to Storyline_Tracker (v2.1: 14 columns with calendar)
   var trackerSheet = ensureStorylineTracker_(ss);
-  var now = new Date();
+  var totalProcessed = 0;
 
-  var rows = [];
-  for (var j = 0; j < storylines.length; j++) {
-    var s = storylines[j];
-    rows.push([
-      now,                    // A  Timestamp
-      cycle,                  // B  CycleAdded
-      s.storylineType,        // C  StorylineType
-      s.description,          // D  Description
-      s.neighborhood,         // E  Neighborhood
-      s.relatedCitizens,      // F  RelatedCitizens
-      s.priority,             // G  Priority
-      'active',               // H  Status
-      // v2.1: Calendar columns
-      cal.season,             // I  Season
-      cal.holiday,            // J  Holiday
-      cal.holidayPriority,    // K  HolidayPriority
-      cal.isFirstFriday,      // L  IsFirstFriday
-      cal.isCreationDay,      // M  IsCreationDay
-      cal.sportsSeason        // N  SportsSeason
-    ]);
+  // --- Resolve matching storylines in tracker ---
+  if (resolveDescriptions.length > 0) {
+    var trackerData = trackerSheet.getDataRange().getValues();
+    var headers = trackerData[0];
+    var descCol = headers.indexOf('Description');
+    var statusCol = headers.indexOf('Status');
+
+    if (descCol >= 0 && statusCol >= 0) {
+      for (var r = 1; r < trackerData.length; r++) {
+        var trackerDesc = String(trackerData[r][descCol] || '').trim().toLowerCase();
+        var trackerStatus = String(trackerData[r][statusCol] || '').trim().toLowerCase();
+
+        // Only resolve active storylines
+        if (trackerStatus !== 'active') continue;
+
+        for (var d = 0; d < resolveDescriptions.length; d++) {
+          var resolveKey = resolveDescriptions[d].toLowerCase();
+          // Match if tracker description contains the resolve key or vice versa
+          if (trackerDesc.indexOf(resolveKey) >= 0 || resolveKey.indexOf(trackerDesc) >= 0) {
+            trackerSheet.getRange(r + 1, statusCol + 1).setValue('resolved');
+            Logger.log('processStorylineIntake_: Resolved storyline row ' + (r + 1) + ': ' + trackerData[r][descCol]);
+            totalProcessed++;
+            break;
+          }
+        }
+      }
+    }
   }
 
-  var startRow = trackerSheet.getLastRow() + 1;
-  trackerSheet.getRange(startRow, 1, rows.length, 14).setValues(rows);
+  // --- Add new storylines ---
+  if (newStorylines.length > 0) {
+    var now = new Date();
+    var rows = [];
+    for (var j = 0; j < newStorylines.length; j++) {
+      var s = newStorylines[j];
+      rows.push([
+        now,                    // A  Timestamp
+        cycle,                  // B  CycleAdded
+        s.storylineType,        // C  StorylineType
+        s.description,          // D  Description
+        s.neighborhood,         // E  Neighborhood
+        s.relatedCitizens,      // F  RelatedCitizens
+        s.priority,             // G  Priority
+        'active',               // H  Status
+        // v2.1: Calendar columns
+        cal.season,             // I  Season
+        cal.holiday,            // J  Holiday
+        cal.holidayPriority,    // K  HolidayPriority
+        cal.isFirstFriday,      // L  IsFirstFriday
+        cal.isCreationDay,      // M  IsCreationDay
+        cal.sportsSeason        // N  SportsSeason
+      ]);
+    }
 
-  return storylines.length;
+    var startRow = trackerSheet.getLastRow() + 1;
+    trackerSheet.getRange(startRow, 1, rows.length, 14).setValues(rows);
+    totalProcessed += newStorylines.length;
+  }
+
+  Logger.log('processStorylineIntake_: ' + newStorylines.length + ' new, ' +
+    resolveDescriptions.length + ' resolved');
+
+  return totalProcessed;
 }
 
 
@@ -390,7 +457,8 @@ function processContinuityIntake_(ss, cycle, cal) {
   if (!intakeSheet) return 0;
 
   var data = intakeSheet.getDataRange().getValues();
-  var notes = [];
+  var newNotes = [];
+  var resolvedNotes = [];
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
@@ -399,47 +467,95 @@ function processContinuityIntake_(ss, cycle, cal) {
     if (!row[0] && !row[1]) continue;
     if (row[4] === 'processed') continue;
 
-    notes.push({
-      noteType: row[0] || 'builton',  // builton / introduced / question / resolved
-      description: row[1] || '',
-      relatedArc: row[2] || '',
-      affectedCitizens: row[3] || ''
-    });
+    var noteType = String(row[0] || '').trim().toLowerCase();
+    var description = String(row[1] || '').trim();
+
+    if (noteType === 'resolved') {
+      // This closes matching active entries in Continuity_Loop
+      resolvedNotes.push({
+        description: description,
+        relatedArc: row[2] || '',
+        affectedCitizens: row[3] || ''
+      });
+    } else {
+      newNotes.push({
+        noteType: row[0] || 'builton',
+        description: description,
+        relatedArc: row[2] || '',
+        affectedCitizens: row[3] || ''
+      });
+    }
 
     intakeSheet.getRange(i + 1, 5).setValue('processed');
   }
 
-  if (notes.length === 0) return 0;
-
-  // Write to Continuity_Loop (v2.1: 13 columns with calendar)
   var loopSheet = ensureContinuityLoop_(ss);
-  var now = new Date();
+  var totalProcessed = 0;
 
-  var rows = [];
-  for (var j = 0; j < notes.length; j++) {
-    var n = notes[j];
-    rows.push([
-      now,                    // A  Timestamp
-      cycle,                  // B  Cycle
-      n.noteType,             // C  NoteType
-      n.description,          // D  Description
-      n.relatedArc,           // E  RelatedArc
-      n.affectedCitizens,     // F  AffectedCitizens
-      'active',               // G  Status
-      // v2.1: Calendar columns
-      cal.season,             // H  Season
-      cal.holiday,            // I  Holiday
-      cal.holidayPriority,    // J  HolidayPriority
-      cal.isFirstFriday,      // K  IsFirstFriday
-      cal.isCreationDay,      // L  IsCreationDay
-      cal.sportsSeason        // M  SportsSeason
-    ]);
+  // --- Resolve matching entries in Continuity_Loop ---
+  if (resolvedNotes.length > 0) {
+    var loopData = loopSheet.getDataRange().getValues();
+    var headers = loopData[0];
+    var descCol = headers.indexOf('Description');
+    var statusCol = headers.indexOf('Status');
+    var arcCol = headers.indexOf('RelatedArc');
+
+    if (descCol >= 0 && statusCol >= 0) {
+      for (var r = 1; r < loopData.length; r++) {
+        var loopStatus = String(loopData[r][statusCol] || '').trim().toLowerCase();
+        if (loopStatus !== 'active') continue;
+
+        var loopDesc = String(loopData[r][descCol] || '').trim().toLowerCase();
+        var loopArc = arcCol >= 0 ? String(loopData[r][arcCol] || '').trim().toLowerCase() : '';
+
+        for (var d = 0; d < resolvedNotes.length; d++) {
+          var resolveKey = resolvedNotes[d].description.toLowerCase();
+          var resolveArc = resolvedNotes[d].relatedArc.toLowerCase();
+          // Match on description substring or arc name
+          if (loopDesc.indexOf(resolveKey) >= 0 || resolveKey.indexOf(loopDesc) >= 0 ||
+              (resolveArc && loopArc && loopArc.indexOf(resolveArc) >= 0)) {
+            loopSheet.getRange(r + 1, statusCol + 1).setValue('resolved');
+            totalProcessed++;
+            break;
+          }
+        }
+      }
+    }
   }
 
-  var startRow = loopSheet.getLastRow() + 1;
-  loopSheet.getRange(startRow, 1, rows.length, 13).setValues(rows);
+  // --- Add new notes ---
+  if (newNotes.length > 0) {
+    var now = new Date();
+    var rows = [];
+    for (var j = 0; j < newNotes.length; j++) {
+      var n = newNotes[j];
+      rows.push([
+        now,                    // A  Timestamp
+        cycle,                  // B  Cycle
+        n.noteType,             // C  NoteType
+        n.description,          // D  Description
+        n.relatedArc,           // E  RelatedArc
+        n.affectedCitizens,     // F  AffectedCitizens
+        'active',               // G  Status
+        // v2.1: Calendar columns
+        cal.season,             // H  Season
+        cal.holiday,            // I  Holiday
+        cal.holidayPriority,    // J  HolidayPriority
+        cal.isFirstFriday,      // K  IsFirstFriday
+        cal.isCreationDay,      // L  IsCreationDay
+        cal.sportsSeason        // M  SportsSeason
+      ]);
+    }
 
-  return notes.length;
+    var startRow = loopSheet.getLastRow() + 1;
+    loopSheet.getRange(startRow, 1, rows.length, 13).setValues(rows);
+    totalProcessed += newNotes.length;
+  }
+
+  Logger.log('processContinuityIntake_: ' + newNotes.length + ' new, ' +
+    resolvedNotes.length + ' resolved');
+
+  return totalProcessed;
 }
 
 

@@ -1,4 +1,4 @@
-# CYCLE PULSE TEMPLATE v1.1
+# CYCLE PULSE TEMPLATE v1.2
 
 **Purpose:** Standardize section order, journalist distribution, and structural consistency across cycles.
 
@@ -142,85 +142,95 @@ ARTICLE TABLE — ENGINE INTAKE FORMAT
 -----
 
 ############################################################
-STORYLINES UPDATED
+STORYLINES UPDATED — ENGINE INTAKE FORMAT
 ############################################################
+FORMAT: This feeds Storyline_Intake. Use pipe-separated fields.
+Only list NEW and RESOLVED. Do NOT re-list active storylines.
 
 NEW THIS CYCLE:
-— [item]
+— [type] | [description] | [neighborhood] | [citizens] | [priority]
+  Types: arc, thread, question, mystery, developing, seasonal, sports
+  Priority: urgent, high, normal, low, background
+  Example: — arc | Stabilization Fund implementation begins | West Oakland | Denise Carter, Ramon Vega | high
+  Example: — thread | Warriors identity shift post-Giannis trade | Oakland | Giannis Antetokounmpo | normal
 
-PHASE CHANGES:
-— [item]
+RESOLVED THIS CYCLE:
+— resolved | [description of storyline being closed]
+  Example: — resolved | Stabilization Fund committee vote
+  This CLOSES the matching storyline in the tracker.
 
-STILL ACTIVE:
-— [item]
-
-RESOLVED:
-— [item]
+Do NOT list "STILL ACTIVE" storylines — they are already tracked.
+Do NOT list "PHASE CHANGES" — use RESOLVED when a storyline ends.
 
 -----
 
 ############################################################
 CITIZEN USAGE LOG
 ############################################################
+FORMAT RULES — This section feeds directly into the intake
+parser. Every entry MUST follow the exact format shown.
+NO parentheses inside any field — parentheses are ONLY used
+for the final field (role, position, context, or count).
+Street addresses go after neighborhood with no parens.
 
 CIVIC OFFICIALS:
-— [name] ([role])
+— [Name] ([Title, Faction])
+  Example: — Denise Carter (D1 Councilmember, OPP)
 
 SPORTS — A'S:
-— [name] ([position])
+— [Name] ([Position — note])
+  Example: — Vinnie Keane (OF/DH — final season confirmed)
 
 SPORTS — BULLS:
-— [name] ([position])
+— [Name] ([Position — note])
+  Example: — Hank Trepagnier (C, Rookie — ROY leader)
+
+SPORTS — WARRIORS:
+— [Name] ([Position — note])
 
 JOURNALISTS:
-— [name] ([X] articles)
+— [Name] ([N] articles)
+  Example: — Carmen Delaine (3 articles)
 
 CITIZENS QUOTED IN ARTICLES (NEW):
-— [Name], [Age], [Neighborhood], [Occupation] ([context])
+— [Name], [Age], [Neighborhood], [Occupation] ([article context])
+  Example: — Gloria Meeks, 64, West Oakland, retired postal worker (Stabilization Fund reaction)
+  WRONG: — Gloria Meeks, 64, West Oakland (Linden Street), retired postal worker (context)
+  All four fields required. No parens except final context.
 
 CITIZENS IN LETTERS (NEW):
 — [Name], [Age], [Neighborhood], [Occupation]
+  Example: — Carla Edmonds, 58, West Oakland, retired teacher
+  All four fields required. No parentheses.
 
 CULTURAL:
-— [name] ([role])
+— [Name] ([Role, Location])
+  Example: — Dante Reyes (Muralist, KONO)
 
 OTHER CITIZENS:
-— [name] ([note])
+— [Name] ([note])
+  Example: — Marcus Wright (returning from Edition 78)
 
 -----
 
 ############################################################
 CONTINUITY NOTES — CYCLE [XX]
 ############################################################
+NOTE: Only include information NOT already tracked by the engine.
+Council composition, vote positions, weather, and sentiment are
+pulled from engine sheets automatically — do NOT repeat them here.
 
-**COUNCIL COMPOSITION** (pipe table required — no blank lines between rows):
-|District|Member|Faction|Status|
-|--------|------|-------|------|
-|D1|[Name]|[OPP/CRC/IND]|[Active/Term-limited/etc.]|
+**SPORTS RECORDS** (game results from this cycle):
+— Bulls: [X-X], key result: [brief]
+— A's: [status], key result: [brief]
 
-**FACTION COUNT:** OPP [X], CRC [X], IND [X]
+**DIRECT QUOTES PRESERVED** (for LifeHistory_Log):
+— [Name]: "[quote]"
+  Only include quotes that reveal character or advance storylines.
 
-**MAJOR VOTES PENDING:**
-— Cycle [XX]: [Initiative] ([requirement])
-
-**CIVIC STAFF STATUS:**
-— [name]: [status]
-
-**SPORTS RECORDS:**
-— Bulls: [X-X]
-— A's: [status]
-
-**WEATHER/MOOD:**
-— [X]°F, [Conditions]
-— Sentiment: [X.XX]
-— Migration: [+/-XX]
-— Pattern: [X]
-
-**CULTURAL:**
-— [Holiday/event]
-
-**NEW CANON FIGURES:**
-— [name] ([role])
+**NEW CANON FIGURES** (introduced this edition):
+— [Name] ([age, neighborhood, occupation or role])
+  These must also appear in Citizen Usage Log above.
 
 ================================================================================
 END EDITION [XX]
@@ -343,9 +353,9 @@ Dear Editor,
 6. **Chicago Bureau** — Separate header with Chicago weather from handoff. Bulls coverage (Selena Grant), Chicago Ground texture (Talia Finch).
 7. **Letters** — 2-4 citizen letters in first-person voice. Mix of topics from the cycle.
 8. **Article Table** — Engine intake format. All articles listed. ArticleText is summary only (1-2 sentences).
-9. **Storylines Updated** — NEW, PHASE CHANGES, STILL ACTIVE, RESOLVED. Use exact sub-headers.
-10. **Citizen Usage Log** — All citizens used, grouped by category. New citizens include Age, Neighborhood, Occupation.
-11. **Continuity Notes** — Council composition (pipe table), pending votes, staff status, sports records, weather/mood, new canon figures.
+9. **Storylines Updated** — NEW and RESOLVED only. Pipe-separated fields matching Storyline_Intake columns. Do NOT re-list active storylines.
+10. **Citizen Usage Log** — All citizens used, grouped by category. Exact formats required — feeds intake parser. No parentheses inside fields.
+11. **Continuity Notes** — Sports records, direct quotes, new canon figures ONLY. Do not repeat engine-tracked data (council, votes, weather).
 
 -----
 
@@ -355,3 +365,4 @@ Dear Editor,
 |---------|-------|---------|
 | v1.0    | 77    | Initial creation. Standardized section order, added Business Ticker, created Skyline Tribune header for Chicago Bureau, established journalist assignment guidelines with full roster coverage including support teams (photo, data, social). |
 | v1.1    | 78    | Added Canon Rules (no invented names, no engine metrics, verify against handoff). Added article length guidelines. Added Names Index as universal article footer. Added Letters format guidance. Clarified Article Table field definitions (ArticleText = summary). Added pipe table formatting note for Continuity Notes. Added header notes (omit holiday if none, copy engine numbers exactly). Bumped from lessons learned in Edition 78. |
+| v1.2    | 79    | Fixed Citizen Usage Log format with explicit examples and no-parens rule to match intake parser. Restructured Storylines Updated to pipe-separated NEW/RESOLVED only (no STILL ACTIVE re-listing). Simplified Continuity Notes to sports records, quotes, and new canon figures only (removed redundant engine-tracked data). Added Warriors sports category. |

@@ -160,6 +160,10 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **Branch**: `claude/read-documentation-JRbqb` (merged via fast-forward)
 - **mediaRoomIntake.js v2.5**: Wired citizen usage routing — 297 citizens stuck in Citizen_Media_Usage now route to Intake (new) or Advancement_Intake1 (existing) via Simulation_Ledger lookup. New function `routeCitizenUsageToIntake_()` uses separate `Routed` column so Phase 5 `processMediaUsage_` still works for usage counting/tier promotions. Wired into `processAllIntakeSheets_()` after `processCitizenUsageIntake_`.
   - **Commit**: `ed2c235`
+- **Dedup attempted and reverted**: Added batch dedup (seenNew/seenExisting dictionaries) but reverted — all rows already marked `Routed = 'Y'` from first run so it routed 0. User manually cleaning backlog duplicates.
+  - **Commits**: `b706a85` (added), `36b9984` (reverted)
+- **CYCLE_PULSE_TEMPLATE v1.3**: Journalists section clarified as byline tracking only — not citizen usage or advancement. Reporters writing articles are not characters appearing in stories. Only counts as citizen usage if a journalist appears AS A CHARACTER in someone else's article.
+  - **Commit**: `77fe6c3`
 
 ### 2026-02-07 (Session 8) — Media Pipeline Overhaul
 - **Continuity pipeline eliminated**: Ripped out Continuity_Loop (782 rows, all "active", 57% useless "introduced" type), Continuity_Intake, Raw_Continuity_Paste. Direct quotes now route from edition → LifeHistory_Log via parseContinuityNotes_. All other continuity notes stay in edition text for cycle-to-cycle auditing — no sheet storage.
@@ -599,6 +603,7 @@ any code is written.
 47. **COMPLETE**: Transit + faith story signals wired into Phase 6 orchestrator (V2 + V3)
 48. **NOTED**: mulberry32_ defined in 10 files — consolidation needed (utilities/rng.js)
 49. **COMPLETE**: Citizen intake routing — mediaRoomIntake.js v2.5, routeCitizenUsageToIntake_() wired into Phase 11, 297 backlogged citizens cleared on first run
+50. **COMPLETE**: CYCLE_PULSE_TEMPLATE v1.3 — journalists byline tracking only, not citizen usage/advancement
 
 **Next Actions (Session 10):**
 

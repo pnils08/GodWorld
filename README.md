@@ -100,6 +100,7 @@ GodWorld/
 ├── phase11-media-intake/ # Feedback processing
 ├── utilities/            # Shared helpers, caching
 ├── schemas/              # Data structure documentation
+├── editions/             # Cycle Pulse editions + template
 ├── docs/                 # Architecture & reference docs (reference/, engine/, media/, mara-vance/, archive/)
 ├── maintenance/          # Repair utilities
 └── ledgers/              # Archived cycle data
@@ -148,7 +149,8 @@ GodWorld/
 | [GODWORLD_REFERENCE.md](docs/reference/GODWORLD_REFERENCE.md) | Complete system reference |
 | [V3_ARCHITECTURE.md](docs/reference/V3_ARCHITECTURE.md) | Technical design contract |
 | [ENGINE_ROADMAP.md](docs/engine/ENGINE_ROADMAP.md) | Implementation priorities |
-| [OPENCLAW_INTEGRATION.md](docs/archive/OPENCLAW_INTEGRATION.md) | Persistent memory integration (deferred) |
+| [MEDIA_ROOM_STYLE_GUIDE.md](docs/media/MEDIA_ROOM_STYLE_GUIDE.md) | Newsroom voice, Paulson canon, data rules, editorial chain |
+| [MEDIA_ROOM_HANDOFF.md](docs/media/MEDIA_ROOM_HANDOFF.md) | Structured handoff workflow (96% data reduction) |
 | [SCHEMA_HEADERS.md](schemas/SCHEMA_HEADERS.md) | All ledger schemas |
 
 ## Main Entry Point

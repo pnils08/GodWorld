@@ -194,6 +194,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Removed all "Maker" terminology, Engine Room replaced by Claude Code, three-space → two-interface model
   - Engine Room Introduction skipped (debunked)
   - **Commit**: `ea36554`
+- **Docs reorganized into subfolders**: 21 files moved via `git mv`, 40+ cross-references updated across 11 files
+  - `docs/reference/` — GODWORLD_REFERENCE, V3_ARCHITECTURE, PROJECT_GOALS, DEPLOY
+  - `docs/engine/` — ENGINE_ROADMAP, TIER_7_ROADMAP, PRIORITY_TASKS, AUDIT_TRACKER, REALISM_AUDIT_REPORT, CIVIC_ELECTION_ENGINE, CIVIC_INITIATIVE_v1.5_UPGRADE, INITIATIVE_TRACKER_VOTER_LOGIC
+  - `docs/media/` — MEDIA_ROOM_STYLE_GUIDE, MEDIA_ROOM_HANDOFF, MEDIA_INTAKE_V2.2_HANDOFF, TIME_CANON_ADDENDUM, AGENT_NEWSROOM, ARTICLE_INDEX_BY_POPID, CITIZENS_BY_ARTICLE
+  - `docs/archive/` — AUTOGEN_INTEGRATION, OPENCLAW_INTEGRATION (moved from root docs/)
+  - `docs/mara-vance/` — already organized (unchanged)
+  - `.gitignore` fixed: `media/` → `/media/` to avoid blocking `docs/media/`
+  - Cross-references updated in: README, SESSION_CONTEXT, PROJECT_GOALS, PRIORITY_TASKS, TIER_7_ROADMAP, AGENT_NEWSROOM, MEDIA_ROOM_HANDOFF, MEDIA_ROOM_STYLE_GUIDE, AUTOGEN_INTEGRATION, OPENCLAW_INTEGRATION, compileHandoff.js
+  - **Commit**: `7bbcddd`
 
 ### 2026-02-06 (Session 6)
 - **Media Intake Pipeline Repair**: Consolidated and fixed the feedback loop (Edition returns → engine)
@@ -482,14 +491,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 37. **COMPLETE**: Media Room Style Guide v1.1 — Mara Vance section (in-world role, directives), editorial chain (Mara→Mags→Rhea→Desks), Rhea upgraded to Data Analyst, 7-agent architecture confirmed
 38. **COMPLETE**: Cycle Pulse Template updated — Rhea Morgan role updated to Data Analyst
 39. **COMPLETE**: Mara Vance docs saved to `docs/mara-vance/` — 3 files updated to current architecture, Engine Room Introduction dropped
+40. **COMPLETE**: Docs reorganized into subfolders — reference/, engine/, media/, mara-vance/, archive/. 21 files moved, 40+ cross-references updated, .gitignore fixed.
 
 **Next Actions:**
 1. **Run Cycle 79**: Verify Phase 11 executes, briefing Section 9 has continuity, Section 9B has previous coverage
 2. Integration testing — run 5+ cycles with all Tier 7 systems active
 3. Activate Supermemory Pro after subscription sort (2/16)
 4. **Feed Paulson pressers to intake**: Cycle 70 and 73 supplemental editions have engine returns that could be ingested
-5. **Store Paulson canon in repo**: Consider saving Carpenter's Line backstory and presser transcripts to editions/ or docs/
-6. **Mara Vance docs in repo**: Consider saving Operating Manual, character sheet, and introduction docs for reference
+5. **Store Paulson canon in repo**: Consider saving Carpenter's Line backstory and presser transcripts to editions/ or docs/media/
 
 ---
 

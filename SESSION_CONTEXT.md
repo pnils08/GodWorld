@@ -499,6 +499,45 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ---
 
+## Planned Upgrade: Tier-Aware Life Events for GAME Citizens
+
+### Problem
+GAME-mode citizens (A's, Bulls, media, civic, public figures) only receive events from
+`generateGameModeMicroEvents.js`. SIM citizens get events from ~14 engines. This means
+GAME citizens like Vinnie Keane have barely any life history — their lore is 100% dependent
+on user-written content from the media room.
+
+### Design Intent
+Every engine should impact citizens. Life events should correlate with the world state.
+
+### Rules
+1. **No video game content auto-populates.** Contract negotiations, game results, trades,
+   anything tied to A's/Bulls gameplay — the user provides that. This engine covers their
+   life OUTSIDE the video game.
+2. **Neighborhood matters.** All citizen events should factor in the neighborhood they live in
+   (already listed per citizen). Tier 1 citizens get events tied to their local area.
+3. **World state correlation.** Events must align with current conditions — no "took a walk"
+   during a rainy week. Weather, transit, faith events, and other engine outputs should
+   influence what life events are generated.
+4. **Tier-based event types:**
+   - **Tier 1** (highly visible public figures): Local figure events — attended concerts,
+     seen at hot restaurants, neighborhood happenings. The kind of events a public figure
+     has in their personal life.
+   - **Tier 3-4** (generic citizens): Mainly daily routine events.
+
+### Dependencies
+- Restaurant engine output (hot restaurants)
+- Weather engine output (rainy week = indoor events)
+- Neighborhood data per citizen
+- Event/concert calendar or world events output
+- Tier classification per citizen
+
+### Status
+Design concept only. NOT approved for implementation. Requires explicit user approval before
+any code is written.
+
+---
+
 ## Current Work / Next Steps
 
 (Update this section each session)

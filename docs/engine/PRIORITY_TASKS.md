@@ -31,7 +31,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Theme-aware hook generation (storyHook.js) | Done | v3.8 |
 | Voice-matched story seeds (applyStorySeeds.js) | Done | v3.9 |
 | POP-ID article index (326 citizens, 367 articles) | Done | — |
-| Agent Newsroom architecture plan | Done | docs/AGENT_NEWSROOM.md |
+| Agent Newsroom architecture plan | Done | docs/media/AGENT_NEWSROOM.md |
 | Echo removal (never a real publication) | Done | — |
 
 ### Completed: Consumer Wiring (2026-02-06)
@@ -54,7 +54,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 
 | Task | Description | Status |
 |------|-------------|--------|
-| Media Room Handoff Guide | Structured workflow replacing ad-hoc process, 96% data reduction | Done (docs/MEDIA_ROOM_HANDOFF.md) |
+| Media Room Handoff Guide | Structured workflow replacing ad-hoc process, 96% data reduction | Done (docs/media/MEDIA_ROOM_HANDOFF.md) |
 | Cycle 78 Handoff compiled | 15KB compiled from 402KB raw — demonstrates new format | Done (/tmp/HANDOFF_C78.txt) |
 | Media Briefing deep analysis | 17 sections mapped, redundancy/noise scored, dedup recommendations | Done |
 | PROJECT_GOALS.md rewrite | MCP-based stack replaces OpenClaw, subscription optimization | Done |
@@ -162,7 +162,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | City Memory / Epigenetics | Needs stable Tier 7 first |
 | Shock Cascades | Ripple system handles basics |
 | Branching Story Arcs | Enhancement, not urgent |
-| Agent Newsroom (Claude Agent SDK) | See docs/AGENT_NEWSROOM.md — replaces AutoGen plan |
+| Agent Newsroom (Claude Agent SDK) | See docs/media/AGENT_NEWSROOM.md — replaces AutoGen plan |
 
 ---
 

@@ -4,7 +4,7 @@
 
 **Companion documents:**
 - `editions/CYCLE_PULSE_TEMPLATE.md` — Section order, journalist assignments, structural format
-- `docs/TIME_CANON_ADDENDUM.md` — Dual-clock system deep dive
+- `docs/media/TIME_CANON_ADDENDUM.md` — Dual-clock system deep dive
 
 -----
 
@@ -367,7 +367,7 @@ See `schemas/bay_tribune_roster.json` for full voice profiles.
 | Business news | City | Current week/month OK |
 | Letters | City | Narrative for sports references |
 
-**Full rules:** See `docs/TIME_CANON_ADDENDUM.md`
+**Full rules:** See `docs/media/TIME_CANON_ADDENDUM.md`
 
 -----
 

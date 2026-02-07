@@ -43,6 +43,11 @@ GodWorld/
 ├── schemas/               # Data structure docs
 ├── editions/              # Cycle Pulse editions + template
 ├── docs/                  # Architecture references
+│   ├── reference/         # Core system docs (GODWORLD_REFERENCE, V3_ARCHITECTURE, PROJECT_GOALS, DEPLOY)
+│   ├── engine/            # Roadmaps, audits, engine design (ENGINE_ROADMAP, TIER_7, PRIORITY_TASKS, etc.)
+│   ├── media/             # Newsroom operations (STYLE_GUIDE, HANDOFF, TIME_CANON, AGENT_NEWSROOM, etc.)
+│   ├── mara-vance/        # Mara Vance docs (character, newsroom intro, operating manual)
+│   └── archive/           # Superseded/deferred (AUTOGEN, OPENCLAW, ES5_MIGRATION)
 └── _legacy/               # Disabled old code
 ```
 
@@ -93,7 +98,7 @@ GodWorld/
 - **ctx.rng** - Deterministic random (never use Math.random())
 - **Write-Intents** - Stage writes in memory, apply in Phase 10
 - **Tiered Citizens** - Tier-1 (protected) → Tier-4 (generic)
-- **Neighborhoods** - 17 Oakland districts with demographics (see GODWORLD_REFERENCE.md for list)
+- **Neighborhoods** - 17 Oakland districts with demographics (see docs/reference/GODWORLD_REFERENCE.md for list)
 - **Arcs** - Multi-cycle storylines (SEED → ACTIVE → RESOLVED)
 
 ---
@@ -102,23 +107,23 @@ GodWorld/
 
 | Doc | Purpose |
 |-----|---------|
-| docs/ENGINE_ROADMAP.md | Implementation status (Tiers 1-6 complete, Tier 7 in TIER_7_ROADMAP) |
-| docs/TIER_7_ROADMAP.md | Tier 7 planning (ripples, micro-economies, life paths) |
-| docs/CIVIC_INITIATIVE_v1.5_UPGRADE.md | Bug fixes and upgrades tracking |
-| docs/OPENCLAW_INTEGRATION.md | OpenClaw setup for citizen memory + automation |
-| docs/AUTOGEN_INTEGRATION.md | AutoGen multi-agent newsroom (superseded by AGENT_NEWSROOM.md) |
-| docs/AGENT_NEWSROOM.md | **NEW** - 25-agent Bay Tribune newsroom using Claude Agent SDK |
-| docs/GODWORLD_REFERENCE.md | Full system reference |
-| docs/V3_ARCHITECTURE.md | Technical contract, ctx shape |
-| docs/ARTICLE_INDEX_BY_POPID.md | **NEW** - Search articles by POP-ID (326 citizens, 367 articles) |
-| docs/CITIZENS_BY_ARTICLE.md | **NEW** - Search citizens by article name |
-| docs/MEDIA_ROOM_HANDOFF.md | Structured handoff workflow for Media Room (replaces ad-hoc process) |
-| docs/MEDIA_ROOM_STYLE_GUIDE.md | **NEW** - How to write: voice, data treatment, Paulson canon, dual-clock rules (replaces MEDIA_ROOM_INSTRUCTIONS v2.0) |
-| docs/TIME_CANON_ADDENDUM.md | **NEW** - Dual-clock system (City Clock vs Sports Clock), desk-specific rules, A's-in-Arizona context |
-| editions/CYCLE_PULSE_TEMPLATE.md | **NEW** - Standardized edition structure, journalist assignments, canon rules, article length guidelines |
-| docs/mara-vance/ | **NEW** - Mara Vance: in-world character, newsroom interface, operating manual v2.0 (canon adjudication, anomaly detection, presser prep, fourth wall) |
+| docs/engine/ENGINE_ROADMAP.md | Implementation status (Tiers 1-6 complete, Tier 7 in TIER_7_ROADMAP) |
+| docs/engine/TIER_7_ROADMAP.md | Tier 7 planning (ripples, micro-economies, life paths) |
+| docs/engine/CIVIC_INITIATIVE_v1.5_UPGRADE.md | Bug fixes and upgrades tracking |
+| docs/archive/OPENCLAW_INTEGRATION.md | OpenClaw setup for citizen memory + automation (deferred) |
+| docs/archive/AUTOGEN_INTEGRATION.md | AutoGen multi-agent newsroom (superseded by AGENT_NEWSROOM.md) |
+| docs/media/AGENT_NEWSROOM.md | 25-agent Bay Tribune newsroom using Claude Agent SDK |
+| docs/reference/GODWORLD_REFERENCE.md | Full system reference |
+| docs/reference/V3_ARCHITECTURE.md | Technical contract, ctx shape |
+| docs/media/ARTICLE_INDEX_BY_POPID.md | Search articles by POP-ID (326 citizens, 367 articles) |
+| docs/media/CITIZENS_BY_ARTICLE.md | Search citizens by article name |
+| docs/media/MEDIA_ROOM_HANDOFF.md | Structured handoff workflow for Media Room (replaces ad-hoc process) |
+| docs/media/MEDIA_ROOM_STYLE_GUIDE.md | How to write: voice, data treatment, Paulson canon, dual-clock rules (replaces MEDIA_ROOM_INSTRUCTIONS v2.0) |
+| docs/media/TIME_CANON_ADDENDUM.md | Dual-clock system (City Clock vs Sports Clock), desk-specific rules, A's-in-Arizona context |
+| editions/CYCLE_PULSE_TEMPLATE.md | Standardized edition structure, journalist assignments, canon rules, article length guidelines |
+| docs/mara-vance/ | Mara Vance: in-world character, newsroom interface, operating manual v2.0 (canon adjudication, anomaly detection, presser prep, fourth wall) |
 | editions/cycle_pulse_edition_78.txt | Edition 78 written by 5 parallel Claude Code desk agents |
-| docs/PROJECT_GOALS.md | Project goals, MCP stack, subscription optimization |
+| docs/reference/PROJECT_GOALS.md | Project goals, MCP stack, subscription optimization |
 | schemas/SCHEMA_HEADERS.md | All ledger schemas |
 
 ---
@@ -153,14 +158,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Pipe table formatting note for Continuity Notes
   - Full journalist assignment tables (Oakland, Chicago, Wire/Social, Support, Editorial)
   - **Commit**: `b78d0b4`
-- **Time & Canon Addendum v2.0**: `docs/TIME_CANON_ADDENDUM.md` — dual-clock system rewrite for multi-agent newsroom
+- **Time & Canon Addendum v2.0**: `docs/media/TIME_CANON_ADDENDUM.md` — dual-clock system rewrite for multi-agent newsroom
   - Removed all "Maker" references — agents know only the world
   - Updated A's situation: played last season in Arizona, Bay District Initiative to bring them back
   - A's players as citizens: live in Oakland, full life histories, encouraged for non-sports coverage
   - Desk-specific clock rules (Sports Desk, Chicago Bureau, Civic, Business, Letters)
   - Off-season guidance, crossover coverage rules
   - **Commit**: `6e46e5a`
-- **Media Room Style Guide v1.0**: `docs/MEDIA_ROOM_STYLE_GUIDE.md` — replaces MEDIA_ROOM_INSTRUCTIONS v2.0
+- **Media Room Style Guide v1.0**: `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` — replaces MEDIA_ROOM_INSTRUCTIONS v2.0
   - "The World Is Real" — agents know nothing about engine, sheets, ledgers, or the user
   - Mike Paulson canon: background (Swedish-Irish Chicago family), brothers (Christopher sculptor, Anthony beat reporter), current situation (two-city GM)
   - Anthony Paulson dynamic: A's lead beat writer is Mike's brother — background tension, never broken
@@ -197,7 +202,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **godWorldEngine2.js Phase 11 fix**: Removed dead `ctx.mediaOutput` condition — Phase 11 now always runs `processMediaIntake_(ctx)`, which skips gracefully if intake sheets are empty
   - **parseMediaRoomMarkdown.js v1.3 → v1.4**: `isSubsectionHeader_()` strips `**bold**` markdown before ALL CAPS check. `cleanSubsectionName_()` strips bold. `parseContinuityNotes_()` accumulates pipe table rows as compound notes instead of individual entries.
   - **mediaRoomBriefingGenerator.js**: Added Section 9B PREVIOUS COVERAGE — reads Press_Drafts for cycle N-1, lists reporter/type/headline. New helper `getPreviousCoverage_(ss, cycle)`.
-  - **docs/MEDIA_INTAKE_V2.2_HANDOFF.md**: Updated to note bold markdown headers accepted, source file versions updated
+  - **docs/media/MEDIA_INTAKE_V2.2_HANDOFF.md**: Updated to note bold markdown headers accepted, source file versions updated
   - **Key finding**: Continuity_Loop was already wired (briefing Section 9 `getContinuityFromLoop_()`) — no fix needed
   - **Commit**: `ab80938`
 
@@ -248,7 +253,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **Workflow validated**: compileHandoff → parallel desk agents → editorial compilation → canon correction → engine returns. This is the production model for future editions.
 
 ### 2026-02-08
-- **Media Room Handoff Guide**: Created `docs/MEDIA_ROOM_HANDOFF.md` — structured workflow replacing ad-hoc "drop everything into chat"
+- **Media Room Handoff Guide**: Created `docs/media/MEDIA_ROOM_HANDOFF.md` — structured workflow replacing ad-hoc "drop everything into chat"
   - Analyzed all 10 Cycle 78 export files (402KB raw data across media_briefing, cycle_packet, storyline_tracker, press_drafts, story_seeds, world_events, world_pop, riley_digest, story_hooks, citizen_ledgers)
   - Deep structural analysis of Media Briefing (122KB, 2357 lines, 8 cycles stacked): 17 sections mapped, redundancy scored
   - **Key finding**: Continuity notes are 584 lines (68% of Cycle 78 briefing), with 70-80% verbatim duplicates (Baylight Timeline 4x, Council Composition 3x, Paulson quotes 3x)
@@ -270,7 +275,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **PROJECT_GOALS.md Major Rewrite**: Replaced OpenClaw-centric plan with MCP-based stack
   - New architecture: Supermemory MCP + Agent Newsroom + cron sync + claude.ai MCP connectors
   - Added subscription optimization section with full monthly stack costs
-  - OpenClaw deferred (doc preserved at docs/OPENCLAW_INTEGRATION.md)
+  - OpenClaw deferred (doc preserved at docs/archive/OPENCLAW_INTEGRATION.md)
   - **Commits**: `52651e8`, `9b30dde`, `4e9cd22`, `61f7906`, `a0ef6de`
 - **Google Drive Integration**: Downloaded 10 export files via service account + googleapis
   - Three Drive folders explored: The Cycle Pulse, GodWorld Exports, Writable folder
@@ -345,12 +350,12 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ### 2026-02-06 (Session 2, continued)
 - **Echo removal**: Removed all Echo (Oakland Echo) code and references — Echo was never a real publication (originated from Grok experimentation)
   - `openclaw-skills/media-generator/index.js`: Removed voice profile, routing logic, `buildEchoPrompt()`, prompt selection branch, filename mapping (47 lines deleted)
-  - `docs/OPENCLAW_INTEGRATION.md`: Removed ~15 Echo references, updated routing matrix to tribune/continuity only
+  - `docs/archive/OPENCLAW_INTEGRATION.md`: Removed ~15 Echo references, updated routing matrix to tribune/continuity only
   - `docs/PROJECT_GOALS.md`: Removed "Echo Op-Ed" from Media Room description
-  - `docs/AUTOGEN_INTEGRATION.md`: Marked as SUPERSEDED with header pointing to AGENT_NEWSROOM.md
+  - `docs/archive/AUTOGEN_INTEGRATION.md`: Marked as SUPERSEDED with header pointing to AGENT_NEWSROOM.md
 - **Doc cleanup**: Aligned all documentation with current project state
-  - `docs/CIVIC_INITIATIVE_v1.5_UPGRADE.md`: Status updated to v1.6 complete
-  - `docs/PRIORITY_TASKS.md`: AutoGen reference → Agent Newsroom (Claude Agent SDK)
+  - `docs/engine/CIVIC_INITIATIVE_v1.5_UPGRADE.md`: Status updated to v1.6 complete
+  - `docs/engine/PRIORITY_TASKS.md`: AutoGen reference → Agent Newsroom (Claude Agent SDK)
   - `SESSION_CONTEXT.md`: Future Enhancements section cleaned up, implemented items marked done
 
 ### 2026-02-06 (Session 2)
@@ -361,8 +366,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Mags Corliss (editor) + Rhea Morgan (continuity) run every cycle
   - Model tiers: Haiku for reporters, Sonnet for leads/editor
   - Estimated $0.50-2.50 per cycle depending on activity
-  - **File**: `docs/AGENT_NEWSROOM.md`
-  - Supersedes AutoGen approach (docs/AUTOGEN_INTEGRATION.md)
+  - **File**: `docs/media/AGENT_NEWSROOM.md`
+  - Supersedes AutoGen approach (docs/archive/AUTOGEN_INTEGRATION.md)
 
 ### 2026-02-06 (Session 1)
 - **Theme-Aware Hook Generation & Voice-Matched Story Seeds**: Core implementation complete
@@ -385,7 +390,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Scanned 8 Drive folders: Oakland_Sports_Desk, Bay_Tribune_Oakland, As_Universe, The_Cycle_Pulse, Oakland_Supplementals, Mike_Paulson_Pressers, Chicago_Supplementals, Mara_Vance
   - Added citizens from sheets: Cultural_Ledger (+25), Chicago_Citizens (+90), Generic_Citizens (+175)
   - **Result**: 326 citizens, 367 articles, 4,922 references
-  - **Files**: `docs/ARTICLE_INDEX_BY_POPID.md`, `docs/CITIZENS_BY_ARTICLE.md`
+  - **Files**: `docs/media/ARTICLE_INDEX_BY_POPID.md`, `docs/media/CITIZENS_BY_ARTICLE.md`
   - **Raw URLs**: `https://raw.githubusercontent.com/pnils08/GodWorld/main/docs/ARTICLE_INDEX_BY_POPID.md`
 - **Journalist Persona Enrichment**: Updated `schemas/bay_tribune_roster.json` (v1.0 → v2.0)
   - Analyzed actual articles from Drive for 25 journalists
@@ -433,13 +438,13 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 (Update this section each session)
 
-**Priority Task List:** See `docs/PRIORITY_TASKS.md` for ordered task list
+**Priority Task List:** See `docs/engine/PRIORITY_TASKS.md` for ordered task list
 
 **Summary:**
 1. v1.5/v1.6 bug fixes mostly complete
 2. **COMPLETE**: Tier 7.1 (Ripple System) - wired into engine Phase 6, next civic vote Cycle 80
 3. OpenClaw deferred — replaced by MCP-based stack (Supermemory + Agent Newsroom + cron)
-4. **Agent Newsroom planned** - Claude Agent SDK, 25 journalists, replaces AutoGen approach (see docs/AGENT_NEWSROOM.md)
+4. **Agent Newsroom planned** - Claude Agent SDK, 25 journalists, replaces AutoGen approach (see docs/media/AGENT_NEWSROOM.md)
 5. POP-ID article index available for media continuity checks
 6. **COMPLETE**: Journalist personas enriched (v2.0) - 25 full voice profiles ready
 7. **COMPLETE**: rosterLookup.js enhanced (v2.1) - theme matching, voice profiles

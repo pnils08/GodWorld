@@ -14,8 +14,8 @@ godworld/*.db
 # Exported cycle artifacts (generated, large)
 exports/*.json
 
-# Generated media output
-media/
+# Generated media output (root-level only, not docs/media/)
+/media/
 
 # MCP server config (contains API keys)
 .mcp.json

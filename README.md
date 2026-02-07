@@ -44,7 +44,7 @@ npx clasp push
 runWorldCycle()
 ```
 
-See [docs/DEPLOY.md](docs/DEPLOY.md) for detailed deployment instructions.
+See [docs/reference/DEPLOY.md](docs/reference/DEPLOY.md) for detailed deployment instructions.
 
 ## Development Workflow
 
@@ -100,7 +100,7 @@ GodWorld/
 ├── phase11-media-intake/ # Feedback processing
 ├── utilities/            # Shared helpers, caching
 ├── schemas/              # Data structure documentation
-├── docs/                 # Architecture & reference docs
+├── docs/                 # Architecture & reference docs (reference/, engine/, media/, mara-vance/, archive/)
 ├── maintenance/          # Repair utilities
 └── ledgers/              # Archived cycle data
 ```
@@ -144,11 +144,11 @@ GodWorld/
 
 | Document | Description |
 |----------|-------------|
-| [PROJECT_GOALS.md](docs/PROJECT_GOALS.md) | Core automation concept and architecture |
-| [GODWORLD_REFERENCE.md](docs/GODWORLD_REFERENCE.md) | Complete system reference |
-| [V3_ARCHITECTURE.md](docs/V3_ARCHITECTURE.md) | Technical design contract |
-| [ENGINE_ROADMAP.md](docs/ENGINE_ROADMAP.md) | Implementation priorities |
-| [OPENCLAW_INTEGRATION.md](docs/OPENCLAW_INTEGRATION.md) | Persistent memory integration |
+| [PROJECT_GOALS.md](docs/reference/PROJECT_GOALS.md) | Core automation concept and architecture |
+| [GODWORLD_REFERENCE.md](docs/reference/GODWORLD_REFERENCE.md) | Complete system reference |
+| [V3_ARCHITECTURE.md](docs/reference/V3_ARCHITECTURE.md) | Technical design contract |
+| [ENGINE_ROADMAP.md](docs/engine/ENGINE_ROADMAP.md) | Implementation priorities |
+| [OPENCLAW_INTEGRATION.md](docs/archive/OPENCLAW_INTEGRATION.md) | Persistent memory integration (deferred) |
 | [SCHEMA_HEADERS.md](schemas/SCHEMA_HEADERS.md) | All ledger schemas |
 
 ## Main Entry Point

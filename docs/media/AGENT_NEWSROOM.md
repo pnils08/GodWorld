@@ -300,8 +300,8 @@ DESK OUTPUT -> Combined sports section with three bylines
 | `media-generator/index.js` | Routing logic (determineRouting) reusable |
 | `godworld.sql` schema | SQLite tables ready for MCP queries |
 | `godworld-sync` skill | Exports cycle data to SQLite |
-| `docs/ARTICLE_INDEX_BY_POPID.md` | Agents look up which articles mention a citizen (326 citizens, 367 articles, 4,922 references) |
-| `docs/CITIZENS_BY_ARTICLE.md` | Agents look up which citizens appear in a given article |
+| `docs/media/ARTICLE_INDEX_BY_POPID.md` | Agents look up which articles mention a citizen (326 citizens, 367 articles, 4,922 references) |
+| `docs/media/CITIZENS_BY_ARTICLE.md` | Agents look up which citizens appear in a given article |
 
 ---
 
@@ -489,8 +489,8 @@ godworld-newsroom/
 
 ## Replaces
 
-This plan replaces `docs/AUTOGEN_INTEGRATION.md` (Microsoft AutoGen / Python approach). The AutoGen doc is kept for historical reference but is no longer the active plan.
+This plan replaces `docs/archive/AUTOGEN_INTEGRATION.md` (Microsoft AutoGen / Python approach). The AutoGen doc is kept for historical reference but is no longer the active plan.
 
 This plan does NOT replace:
 - `openclaw-skills/media-generator/index.js` - Still useful for single-agent quick generation
-- `docs/OPENCLAW_INTEGRATION.md` - OpenClaw is the data layer that feeds the newsroom
+- `docs/archive/OPENCLAW_INTEGRATION.md` - OpenClaw is the data layer that feeds the newsroom

@@ -6,7 +6,7 @@
  * Compiles cycle data from 10+ sheets into a structured ~30KB handoff document
  * for the Media Room (Claude agents that write The Cycle Pulse).
  *
- * Replaces the manual copy-paste workflow. Spec: docs/MEDIA_ROOM_HANDOFF.md
+ * Replaces the manual copy-paste workflow. Spec: docs/media/MEDIA_ROOM_HANDOFF.md
  *
  * ENTRY POINTS:
  *   compileHandoff(cycleNumber)   - Menu-callable, compiles handoff for given cycle

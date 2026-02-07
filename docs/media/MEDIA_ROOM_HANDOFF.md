@@ -241,8 +241,8 @@ Launch a dedicated verification pass. This is a separate agent or prompt whose o
 
 **Input:**
 - Compiled edition text
-- `docs/ARTICLE_INDEX_BY_POPID.md` (citizen name index — 176+ citizens with POP-IDs)
-- `docs/CITIZENS_BY_ARTICLE.md` (article-to-citizen cross-reference)
+- `docs/media/ARTICLE_INDEX_BY_POPID.md` (citizen name index — 176+ citizens with POP-IDs)
+- `docs/media/CITIZENS_BY_ARTICLE.md` (article-to-citizen cross-reference)
 - `schemas/bay_tribune_roster.json` (reporter names and roles)
 - Civic_Office_Ledger data (council members, factions, districts)
 - Initiative_Tracker data (vote positions — YES/NO per member)

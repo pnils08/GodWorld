@@ -347,7 +347,7 @@ The context pack derives routing flags without LLM:
 - [x] `media-generator` skill with Tribune/Echo/Continuity routing (`openclaw-skills/media-generator/`)
 - [x] Continuity gate (`confidence >= 0.9 && risk <= 0.4`) (in media-generator/index.js:270)
 
-**See:** `docs/OPENCLAW_INTEGRATION.md` for full implementation plan.
+**See:** `docs/archive/OPENCLAW_INTEGRATION.md` for full implementation plan.
 
 ---
 

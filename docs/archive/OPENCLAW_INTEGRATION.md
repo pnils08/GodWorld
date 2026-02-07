@@ -339,7 +339,7 @@ module.exports = {
 
 ### Full Autonomy
 - [ ] Scheduled cycle detection
-- [ ] Multi-voice generation (see docs/AGENT_NEWSROOM.md for 25-agent plan)
+- [ ] Multi-voice generation (see docs/media/AGENT_NEWSROOM.md for 25-agent plan)
 - [ ] Continuity checking before publish
 - [ ] Discord notification for review
 
@@ -363,7 +363,7 @@ module.exports = {
 3. **Write citizen-sync skill** — manual trigger first
 4. **Write media-generator skill** — test with cycle 78 data
 5. **Add watch triggers** — automate cycle detection
-6. **Add multi-agent voices** — see docs/AGENT_NEWSROOM.md for 25-agent newsroom plan
+6. **Add multi-agent voices** — see docs/media/AGENT_NEWSROOM.md for 25-agent newsroom plan
 
 ---
 

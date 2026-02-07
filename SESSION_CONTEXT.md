@@ -164,6 +164,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **Commits**: `b706a85` (added), `36b9984` (reverted)
 - **CYCLE_PULSE_TEMPLATE v1.3**: Journalists section clarified as byline tracking only — not citizen usage or advancement. Reporters writing articles are not characters appearing in stories. Only counts as citizen usage if a journalist appears AS A CHARACTER in someone else's article.
   - **Commit**: `77fe6c3`
+- **Branch cleanup**: Deleted 10 stale remote branches — repo now has only `main`
+- **Backlog status**: First run routed 174 new + 122 existing. Advancement_Intake1 was incorrectly cleared during manual cleanup — needs re-run. To fix: clear `Routed` column in Citizen_Media_Usage, re-run `processMediaIntakeV2()`, then manually dedup Intake (remove repeated names, keep first occurrence).
 
 ### 2026-02-07 (Session 8) — Media Pipeline Overhaul
 - **Continuity pipeline eliminated**: Ripped out Continuity_Loop (782 rows, all "active", 57% useless "introduced" type), Continuity_Intake, Raw_Continuity_Paste. Direct quotes now route from edition → LifeHistory_Log via parseContinuityNotes_. All other continuity notes stay in edition text for cycle-to-cycle auditing — no sheet storage.
@@ -607,7 +609,7 @@ any code is written.
 
 **Next Actions (Session 10):**
 
-1. **DEPLOY + TEST: Citizen intake routing** — `clasp push`, run manually via processMediaIntakeV2(), verify Intake and Advancement_Intake1 receive rows, verify 297 backlog clears
+1. **FIX: Re-run citizen intake routing** — Clear `Routed` column in Citizen_Media_Usage, re-run `processMediaIntakeV2()`, manually dedup Intake (repeated names from multiple appearances). Advancement_Intake1 was incorrectly cleared — the 122 existing citizen entries need to be re-routed. Future: consider adding dedup logic and Chicago athlete routing (Bulls/Chicago citizens → Chicago_Citizens instead of Oakland Intake).
 
 2. **REBUILD: compileHandoff.js** — Current 15-section format is a data dump. Rebuild around:
    - Section 1: Cycle Packet (paste the raw engine output — what happened)

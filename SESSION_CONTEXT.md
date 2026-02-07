@@ -170,6 +170,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Cultural Ledger reference table
   - **Commit**: `078496a`
 - **Paulson Pressers downloaded**: 4 files from Google Drive Mike_Paulson_Pressers folder (~90KB) — Cycle 70 Chicago presser, Cycle 73 Oakland presser, Part I "The Carpenter's Line" (family backstory), full text mirror
+- **Mara Vance reviewed**: Downloaded and analyzed 4 structural files from Drive — IN-WORLD CHARACTER, OPERATING MANUAL v1.0, MEDIA ROOM INTRODUCTION, ENGINE ROOM INTRODUCTION. Mara is City Planning Director (in-world), canon authority + directive system (operational), fourth wall architect (meta). Created Cycle 74 after Paulson walkout incident.
+- **Temescal Community Health Center reviewed**: Downloaded proposal + architectural render from Drive. $48M facility, 42,000 sq ft, 72 FTE staff, council vote at Cycle 80. Spawned from health crisis walkout — Paulson broke character predicting crisis resolution, agents caught it, walkout became canon, health center became the institutional response.
+- **Media Room Style Guide v1.1**: Updated with Mara Vance section and editorial chain
+  - Mara Vance: in-world role (City Planning Director), quote style, key relationships, editorial directive system
+  - Editorial chain clarified: Mara speaks for the operation to the city, Mags Corliss speaks to the newsroom
+  - Mags confirmed as Editor-in-Chief — desk agents receive assignments from Mags (main session operates as Mags)
+  - Rhea Morgan upgraded from Copy Chief to dedicated Data Analyst (canon verification, sports stats, world data, does not write)
+  - Luis Navarro as investigative balance/fact validation within Mags's editorial pass
+  - **7-agent architecture per cycle**: main session (as Mags) + 5 desk agents + Rhea verification pass. Room to grow.
+  - Cycle Pulse Template updated to match (Rhea → Data Analyst)
+  - **Commit**: `84a51c0`
 
 ### 2026-02-06 (Session 6)
 - **Media Intake Pipeline Repair**: Consolidated and fixed the feedback loop (Edition returns → engine)
@@ -455,6 +466,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
 34. **COMPLETE**: Media Room Style Guide v1.0 — replaces MEDIA_ROOM_INSTRUCTIONS v2.0, Paulson canon, live presser system, data humanization
 35. **COMPLETE**: Edition 78 media intake processed — 12 articles, 68 storylines, 119 citizen usages, 109 continuity notes
 36. **COMPLETE**: Deploy & test — name collision fixed, clasp pushed, parseMediaRoomMarkdown() runs clean
+37. **COMPLETE**: Media Room Style Guide v1.1 — Mara Vance section (in-world role, directives), editorial chain (Mara→Mags→Rhea→Desks), Rhea upgraded to Data Analyst, 7-agent architecture confirmed
+38. **COMPLETE**: Cycle Pulse Template updated — Rhea Morgan role updated to Data Analyst
 
 **Next Actions:**
 1. **Run Cycle 79**: Verify Phase 11 executes, briefing Section 9 has continuity, Section 9B has previous coverage
@@ -462,6 +475,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 3. Activate Supermemory Pro after subscription sort (2/16)
 4. **Feed Paulson pressers to intake**: Cycle 70 and 73 supplemental editions have engine returns that could be ingested
 5. **Store Paulson canon in repo**: Consider saving Carpenter's Line backstory and presser transcripts to editions/ or docs/
+6. **Mara Vance docs in repo**: Consider saving Operating Manual, character sheet, and introduction docs for reference
 
 ---
 

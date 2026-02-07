@@ -3,7 +3,7 @@
  * COMPILE HANDOFF v1.0 — Automated Media Room Handoff Compiler
  * ============================================================================
  *
- * Compiles cycle data from 10+ sheets into a structured ~30KB handoff document
+ * Compiles cycle data from 12+ sheets into a structured ~30KB handoff document
  * for the Media Room (Claude agents that write The Cycle Pulse).
  *
  * Replaces the manual copy-paste workflow. Spec: docs/media/MEDIA_ROOM_HANDOFF.md
@@ -94,6 +94,7 @@ function compileHandoff(cycleNumber) {
     sections.push(buildSectionWrapper_(12, 'SECTION ASSIGNMENTS', buildSection12_SectionAssignments_, data));
     sections.push(buildSectionWrapper_(13, 'RETURNS EXPECTED', buildSection13_ReturnsExpected_));
     sections.push(buildSectionWrapper_(14, 'CANON REFERENCE', buildSection14_CanonReference_, data));
+    sections.push(buildSectionWrapper_(15, 'SPORTS FEEDS', buildSection15_SportsFeeds_, data));
     sections.push('############################################################');
     sections.push('END HANDOFF');
     sections.push('############################################################');
@@ -151,6 +152,7 @@ function loadHandoffData_(cache, cycle) {
     continuityNotes: [],
     culturalEntities: [],
     councilMembers: [],
+    sportsFeeds: { oakland: [], chicago: [] },
     roster: null
   };
 
@@ -170,6 +172,7 @@ function loadHandoffData_(cache, cycle) {
   data.playerRosters = loadPlayerRosters_(cache);
   data.continuityNotes = loadContinuityNotes_(cache, cycle);
   data.culturalEntities = loadCulturalEntities_(cache);
+  data.sportsFeeds = loadSportsFeeds_(cache, cycle);
 
   try {
     data.roster = getRoster_();
@@ -1637,6 +1640,176 @@ function extractHandoffCitizenNames_(data) {
   }
 
   return Object.keys(names).sort();
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// SPORTS FEEDS
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Loads Oakland_Sports_Feed and Chicago_Sports_Feed for recent cycles.
+ * Includes entries from (cycle - 10) through cycle, plus entries with no cycle
+ * (ongoing narrative items).
+ *
+ * @param {Object} cache - SheetCache instance
+ * @param {number} cycle - Target cycle number
+ * @returns {Object} { oakland: [], chicago: [] }
+ */
+function loadSportsFeeds_(cache, cycle) {
+  var result = { oakland: [], chicago: [] };
+  var lookback = 10;
+
+  result.oakland = loadSingleSportsFeed_(cache, SHEET_NAMES.OAKLAND_SPORTS_FEED, cycle, lookback);
+  result.chicago = loadSingleSportsFeed_(cache, SHEET_NAMES.CHICAGO_SPORTS_FEED, cycle, lookback);
+
+  Logger.log('loadSportsFeeds_: Oakland=' + result.oakland.length +
+    ', Chicago=' + result.chicago.length);
+  return result;
+}
+
+
+/**
+ * Reads a single sports feed sheet and filters to recent entries.
+ *
+ * @param {Object} cache - SheetCache instance
+ * @param {string} sheetName - Sheet name constant
+ * @param {number} cycle - Target cycle number
+ * @param {number} lookback - How many cycles back to include
+ * @returns {Array} Array of entry objects
+ */
+function loadSingleSportsFeed_(cache, sheetName, cycle, lookback) {
+  var values;
+  try {
+    values = cache.getValues(sheetName);
+  } catch (e) {
+    Logger.log('loadSingleSportsFeed_: Sheet not found: ' + sheetName);
+    return [];
+  }
+  if (!values || values.length < 2) return [];
+
+  var header = values[0];
+  var idx = createColIndex_(header);
+  var iCycle = idx('Cycle');
+  var iSeasonType = idx('SeasonType');
+  var iEventType = idx('EventType');
+  var iTeams = idx('TeamsUsed');
+  var iNames = idx('NamesUsed');
+  var iNotes = idx('Notes');
+  var iStats = idx('Stats');
+  var iRecord = idx('Team Record');
+  var iGameDate = idx('VideoGameDate');
+  var iGame = idx('VideoGame');
+
+  var minCycle = cycle - lookback;
+  var results = [];
+
+  for (var r = 1; r < values.length; r++) {
+    var row = values[r];
+    var rawCycle = safeColRead_(row, iCycle, '');
+    var entryCycle = Number(rawCycle);
+
+    // Include if: cycle is in range, OR cycle is empty (ongoing item)
+    if (rawCycle !== '' && !isNaN(entryCycle)) {
+      if (entryCycle < minCycle || entryCycle > cycle) continue;
+    }
+
+    var eventType = String(safeColRead_(row, iEventType, '')).trim();
+    var notes = String(safeColRead_(row, iNotes, '')).trim();
+    if (!eventType && !notes) continue; // skip empty rows
+
+    results.push({
+      cycle: rawCycle !== '' && !isNaN(entryCycle) ? entryCycle : null,
+      seasonType: String(safeColRead_(row, iSeasonType, '')).trim(),
+      eventType: eventType,
+      teams: String(safeColRead_(row, iTeams, '')).trim(),
+      names: String(safeColRead_(row, iNames, '')).trim(),
+      notes: notes,
+      stats: String(safeColRead_(row, iStats, '')).trim(),
+      record: String(safeColRead_(row, iRecord, '')).trim(),
+      gameDate: String(safeColRead_(row, iGameDate, '')).trim(),
+      videoGame: String(safeColRead_(row, iGame, '')).trim()
+    });
+  }
+
+  return results;
+}
+
+
+/**
+ * Section 15: SPORTS FEEDS
+ * Sources: Oakland_Sports_Feed, Chicago_Sports_Feed
+ * Shows recent game results, trades, rumors, and records for the media room.
+ */
+function buildSection15_SportsFeeds_(data) {
+  var lines = [];
+  var feeds = data.sportsFeeds;
+
+  lines.push('Recent sports activity from video game play. Use this data to');
+  lines.push('inform sports coverage. Names and events here are canon.');
+  lines.push('');
+
+  // Oakland feed
+  lines.push('--- OAKLAND (A\'s / Warriors) ---');
+  if (feeds.oakland.length > 0) {
+    for (var o = 0; o < feeds.oakland.length; o++) {
+      var oe = feeds.oakland[o];
+      var oLine = formatSportsFeedEntry_(oe);
+      lines.push(oLine);
+    }
+  } else {
+    lines.push('(No recent Oakland sports feed entries)');
+  }
+  lines.push('');
+
+  // Chicago feed
+  lines.push('--- CHICAGO (Bulls) ---');
+  if (feeds.chicago.length > 0) {
+    for (var c = 0; c < feeds.chicago.length; c++) {
+      var ce = feeds.chicago[c];
+      var cLine = formatSportsFeedEntry_(ce);
+      lines.push(cLine);
+    }
+  } else {
+    lines.push('(No recent Chicago sports feed entries)');
+  }
+
+  return lines;
+}
+
+
+/**
+ * Formats a single sports feed entry for the handoff.
+ */
+function formatSportsFeedEntry_(entry) {
+  var parts = [];
+
+  if (entry.cycle !== null) {
+    parts.push('[C' + entry.cycle + ']');
+  }
+  if (entry.eventType) {
+    parts.push(entry.eventType.toUpperCase());
+  }
+  if (entry.teams) {
+    parts.push(entry.teams);
+  }
+  if (entry.names) {
+    parts.push('— ' + entry.names);
+  }
+
+  var line = parts.join(' | ');
+
+  if (entry.notes) {
+    line += '\n  ' + entry.notes;
+  }
+  if (entry.stats) {
+    line += '\n  Stats: ' + entry.stats;
+  }
+  if (entry.record) {
+    line += '\n  Record: ' + entry.record;
+  }
+
+  return line;
 }
 
 

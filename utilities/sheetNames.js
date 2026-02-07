@@ -67,6 +67,8 @@ var SHEET_NAMES = {
   DASHBOARD: 'Dashboard',
   SPORTS_FEED: 'Sports_Feed',
   CHICAGO_FEED: 'Chicago_Feed',
+  OAKLAND_SPORTS_FEED: 'Oakland_Sports_Feed',
+  CHICAGO_SPORTS_FEED: 'Chicago_Sports_Feed',
 
   // === Engine Errors (created by error handler) ===
   ENGINE_ERRORS: 'Engine_Errors'

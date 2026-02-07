@@ -83,6 +83,8 @@ var CONFIG = {
     'Relationship_Bonds',
     'Chicago_Feed',
     'Sports_Feed',
+    'Oakland_Sports_Feed',
+    'Chicago_Sports_Feed',
     'Neighborhood_Map',
     'Domain_Tracker',
     'Engine_Index2',

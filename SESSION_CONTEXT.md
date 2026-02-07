@@ -116,6 +116,7 @@ GodWorld/
 | docs/MEDIA_ROOM_STYLE_GUIDE.md | **NEW** - How to write: voice, data treatment, Paulson canon, dual-clock rules (replaces MEDIA_ROOM_INSTRUCTIONS v2.0) |
 | docs/TIME_CANON_ADDENDUM.md | **NEW** - Dual-clock system (City Clock vs Sports Clock), desk-specific rules, A's-in-Arizona context |
 | editions/CYCLE_PULSE_TEMPLATE.md | **NEW** - Standardized edition structure, journalist assignments, canon rules, article length guidelines |
+| docs/mara-vance/ | **NEW** - Mara Vance: in-world character, newsroom interface, operating manual v2.0 (canon adjudication, anomaly detection, presser prep, fourth wall) |
 | editions/cycle_pulse_edition_78.txt | Edition 78 written by 5 parallel Claude Code desk agents |
 | docs/PROJECT_GOALS.md | Project goals, MCP stack, subscription optimization |
 | schemas/SCHEMA_HEADERS.md | All ledger schemas |
@@ -181,6 +182,13 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **7-agent architecture per cycle**: main session (as Mags) + 5 desk agents + Rhea verification pass. Room to grow.
   - Cycle Pulse Template updated to match (Rhea → Data Analyst)
   - **Commit**: `84a51c0`
+- **Mara Vance docs saved to repo**: `docs/mara-vance/` — 3 files, updated to current architecture
+  - `IN_WORLD_CHARACTER.md` — civic identity, relationships, citizen ledger entry
+  - `MEDIA_ROOM_INTRODUCTION.md` — newsroom interface, briefing protocol, editorial guidance routes through Mags
+  - `OPERATING_MANUAL.md` v2.0 — canon adjudication, anomaly detection thresholds, presser prep protocol, initiative tracker (Stabilization Fund updated to Passed), gap analysis, fourth wall architecture
+  - Removed all "Maker" terminology, Engine Room replaced by Claude Code, three-space → two-interface model
+  - Engine Room Introduction skipped (debunked)
+  - **Commit**: `ea36554`
 
 ### 2026-02-06 (Session 6)
 - **Media Intake Pipeline Repair**: Consolidated and fixed the feedback loop (Edition returns → engine)
@@ -468,6 +476,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 36. **COMPLETE**: Deploy & test — name collision fixed, clasp pushed, parseMediaRoomMarkdown() runs clean
 37. **COMPLETE**: Media Room Style Guide v1.1 — Mara Vance section (in-world role, directives), editorial chain (Mara→Mags→Rhea→Desks), Rhea upgraded to Data Analyst, 7-agent architecture confirmed
 38. **COMPLETE**: Cycle Pulse Template updated — Rhea Morgan role updated to Data Analyst
+39. **COMPLETE**: Mara Vance docs saved to `docs/mara-vance/` — 3 files updated to current architecture, Engine Room Introduction dropped
 
 **Next Actions:**
 1. **Run Cycle 79**: Verify Phase 11 executes, briefing Section 9 has continuity, Section 9B has previous coverage

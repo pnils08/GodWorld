@@ -122,7 +122,10 @@ GodWorld/
 | docs/media/TIME_CANON_ADDENDUM.md | Dual-clock system (City Clock vs Sports Clock), desk-specific rules, A's-in-Arizona context |
 | editions/CYCLE_PULSE_TEMPLATE.md | Standardized edition structure, journalist assignments, canon rules, article length guidelines |
 | docs/mara-vance/ | Mara Vance: in-world character, newsroom interface, operating manual v2.0 (canon adjudication, anomaly detection, presser prep, fourth wall) |
+| docs/media/PAULSON_CARPENTERS_LINE.md | Paulson family backstory — Lars, Maureen, brothers (Christopher, Anthony, Mike), Shannon-Romano descendants, family symbolism |
 | editions/cycle_pulse_edition_78.txt | Edition 78 written by 5 parallel Claude Code desk agents |
+| editions/cycle_pulse_supplemental_70_paulson_chicago_presser.txt | Supplemental: Paulson Chicago presser (walkout acknowledgment, Bulls Cup run) — has engine returns |
+| editions/cycle_pulse_supplemental_73_paulson_oakland_presser.txt | Supplemental: Paulson Oakland presser (apology, Osei reveal, Baylight, dynasty celebration) — has engine returns |
 | docs/reference/PROJECT_GOALS.md | Project goals, MCP stack, subscription optimization |
 | schemas/SCHEMA_HEADERS.md | All ledger schemas |
 
@@ -492,13 +495,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 38. **COMPLETE**: Cycle Pulse Template updated — Rhea Morgan role updated to Data Analyst
 39. **COMPLETE**: Mara Vance docs saved to `docs/mara-vance/` — 3 files updated to current architecture, Engine Room Introduction dropped
 40. **COMPLETE**: Docs reorganized into subfolders — reference/, engine/, media/, mara-vance/, archive/. 21 files moved, 40+ cross-references updated, .gitignore fixed.
+41. **COMPLETE**: Exclude "proposed" initiatives from handoff — Mara controls when initiatives are revealed to the newsroom
+42. **COMPLETE**: Paulson pressers saved to repo — Cycle 70 Chicago presser, Cycle 73 Oakland presser (both have full engine returns)
+43. **COMPLETE**: Paulson Carpenter's Line backstory saved to `docs/media/PAULSON_CARPENTERS_LINE.md` — family canon (Lars, Maureen, brothers, Shannon-Romano descendants)
 
 **Next Actions:**
 1. **Run Cycle 79**: Verify Phase 11 executes, briefing Section 9 has continuity, Section 9B has previous coverage
 2. Integration testing — run 5+ cycles with all Tier 7 systems active
 3. Activate Supermemory Pro after subscription sort (2/16)
-4. **Feed Paulson pressers to intake**: Cycle 70 and 73 supplemental editions have engine returns that could be ingested
-5. **Store Paulson canon in repo**: Consider saving Carpenter's Line backstory and presser transcripts to editions/ or docs/media/
 
 ---
 

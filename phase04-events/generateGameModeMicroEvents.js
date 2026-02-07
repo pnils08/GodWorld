@@ -1,18 +1,17 @@
 /**
  * ============================================================================
- * generateGameModeMicroEvents_ v1.4 (tier-aware + richer pools)
+ * generateGameModeMicroEvents_ v1.3 (write-intents + namespace safety)
  * ============================================================================
  * - Log schema unchanged
  * - Optional determinism (ctx.rng or ctx.config.rngSeed)
  * - Tagged entries (no includes scanning)
- * - Batch log writes via write-intents
+ * - Batch log writes
  * - Per-cycle uniqueness per citizen (no duplicate picked.text for same popId)
  *
- * v1.4 Changes:
- * - Tier-aware event system: Tier 1 guaranteed events, Tier 2 elevated, Tier 3-4 background
- * - Tier 1 spotlight pools: story-hook events for media pipeline
- * - Multi-event per citizen: Tier 1 gets 1-3 events/cycle, Tier 2 gets 1-2
- * - EVENT_LIMIT raised to 25 (Tier 1 citizens need more slots)
+ * v1.3 Changes:
+ * - FIX: Simulation_Ledger update via queueRangeIntent_ (was direct setValues mid-cycle)
+ * - FIX: LifeHistory_Log append via queueBatchAppendIntent_ (was direct setValues)
+ * - FIX: Rename mulberry32_ to mulberry32GameMode_ to prevent flat namespace collision
  * ============================================================================
  */
 
@@ -109,52 +108,7 @@ function generateGameModeMicroEvents_(ctx) {
     };
   }
 
-  // ========== TIER 1 SPOTLIGHT POOLS ==========
-  // These create story hooks — events the media room can pick up
-
-  var mlbSpotlight = [
-    "drew attention for comments about the team's direction",
-    "was seen meeting with front office staff",
-    "generated buzz after a candid postgame moment",
-    "showed leadership during a tense clubhouse moment",
-    "was the subject of trade speculation on local radio",
-    "made headlines for community involvement off the field",
-    "sparked discussion after a fiery exchange with umpires",
-    "earned praise from coaching staff for mentoring rookies",
-    "was spotted at a high-profile Oakland event",
-    "addressed media about the team's playoff push",
-    "became a trending topic after fan interaction went viral",
-    "quietly visited a children's hospital — word got out"
-  ].map(function(t) { return entry(t, ["role:mlb", "tier:spotlight"], "Spotlight"); });
-
-  var mediaSpotlight = [
-    "broke a story that shook City Hall",
-    "received pushback on a controversial column",
-    "was praised by peers for investigative work",
-    "clashed with an editor over story direction",
-    "became the story after a heated press conference exchange",
-    "cultivated a source that could change a major story",
-    "faced ethical questions about a sensitive report",
-    "was nominated for a local journalism award",
-    "drew reader backlash — and reader praise — for a bold take",
-    "landed an exclusive interview with a key figure"
-  ].map(function(t) { return entry(t, ["role:media", "tier:spotlight"], "Spotlight"); });
-
-  var civicSpotlight = [
-    "faced tough questions at a public town hall",
-    "navigated a political crisis behind closed doors",
-    "drew criticism from opposition voices",
-    "earned praise for a decisive policy move",
-    "was rumored to be considering a major announcement",
-    "clashed publicly with a council colleague",
-    "brokered a compromise on a divisive issue",
-    "held a press conference that dominated the news cycle",
-    "was profiled in a national outlet",
-    "made an unannounced visit to a struggling neighborhood"
-  ].map(function(t) { return entry(t, ["role:civic", "tier:spotlight"], "Spotlight"); });
-
-  // ========== STANDARD POOLS ==========
-
+  // Pools (tagged)
   var mlbPublic = [
     "signed autographs for fans",
     "did a brief media availability",
@@ -357,42 +311,34 @@ function generateGameModeMicroEvents_(ctx) {
     return "public-figure";
   }
 
-  function buildEventPool_(citizenType, tier) {
+  function buildEventPool_(citizenType) {
     var pool = publicFigureGeneral.concat(publicFigurePersonal);
 
     switch (citizenType) {
       case "mlb-pitcher":
       case "mlb-position":
         pool = pool.concat(mlbPublic, mlbPersonal, mlbTeamLife);
-        if (tier <= 2) pool = pool.concat(mlbSpotlight);
         break;
       case "media-editor":
         pool = pool.concat(mediaWork, mediaPublic, mediaPersonal, editorPool);
-        if (tier <= 2) pool = pool.concat(mediaSpotlight);
         break;
       case "media-reporter":
         pool = pool.concat(mediaWork, mediaPublic, mediaPersonal, reporterPool);
-        if (tier <= 2) pool = pool.concat(mediaSpotlight);
         break;
       case "media-columnist":
         pool = pool.concat(mediaWork, mediaPublic, mediaPersonal, columnistPool);
-        if (tier <= 2) pool = pool.concat(mediaSpotlight);
         break;
       case "media-photographer":
         pool = pool.concat(mediaWork, mediaPublic, mediaPersonal, photographerPool);
-        if (tier <= 2) pool = pool.concat(mediaSpotlight);
         break;
       case "civic-mayor":
         pool = pool.concat(civicWork, civicPublic, civicPersonal, mayorPool);
-        if (tier <= 2) pool = pool.concat(civicSpotlight);
         break;
       case "civic-council":
         pool = pool.concat(civicWork, civicPublic, civicPersonal, councilPool);
-        if (tier <= 2) pool = pool.concat(civicSpotlight);
         break;
       case "civic-staff":
         pool = pool.concat(civicWork, civicPublic, civicPersonal, staffPool);
-        if (tier <= 2) pool = pool.concat(civicSpotlight);
         break;
       default:
         break;
@@ -411,23 +357,6 @@ function generateGameModeMicroEvents_(ctx) {
     }
 
     return pool;
-  }
-
-  // Tier-based event count: how many events a citizen gets this cycle
-  function getEventCount_(tier) {
-    if (tier === 1) {
-      // Tier 1: guaranteed 1, chance of 2-3
-      var count = 1;
-      if (hit(0.5)) count++;
-      if (hit(0.15)) count++;
-      return count;
-    }
-    if (tier === 2) {
-      // Tier 2: guaranteed 1, small chance of 2
-      return hit(0.25) ? 2 : 1;
-    }
-    // Tier 3-4: always 1 (if they pass the probability check at all)
-    return 1;
   }
 
   // MAIN LOOP

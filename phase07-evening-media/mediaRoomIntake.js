@@ -8,8 +8,9 @@
  * v2.4 Enhancements:
  * - Storyline lifecycle: "resolved" type in Storyline_Intake now finds and
  *   closes matching active storylines in Storyline_Tracker instead of appending
- * - Continuity lifecycle: "resolved" noteType in Continuity_Intake now finds
- *   and closes matching active entries in Continuity_Loop instead of appending
+ * - Continuity pipeline removed: Continuity_Loop and Continuity_Intake eliminated.
+ *   Direct quotes from edition route to LifeHistory_Log. All other continuity
+ *   notes stay in the edition text for auditing only — no sheet storage.
  * - Template alignment: CYCLE_PULSE_TEMPLATE v1.2 pipe-separated format
  *
  * v2.3 Enhancements:
@@ -37,7 +38,7 @@
  * 1. Article Table → Press_Drafts (14 columns)
  * 2. Storylines Carried Forward → Storyline_Tracker (14 columns)
  * 3. Citizen Usage Log → Citizen_Media_Usage (12 columns)
- * 4. Continuity Notes → Continuity_Loop (13 columns)
+ * 4. Continuity Notes → LifeHistory_Log (direct quotes only; everything else is audit-only in edition)
  *
  * SETUP:
  * 1. Add to Simulation_Narrative Apps Script
@@ -111,14 +112,14 @@ function processAllIntakeSheets_(ss, cycle, cal) {
   var results = {
     articles: 0,
     storylines: 0,
-    citizenUsage: 0,
-    continuity: 0
+    citizenUsage: 0
   };
 
   results.articles = processArticleIntake_(ss, cycle, cal);
   results.storylines = processStorylineIntake_(ss, cycle, cal);
   results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
-  results.continuity = processContinuityIntake_(ss, cycle, cal);
+  // Continuity pipeline removed — quotes route to LifeHistory_Log via
+  // parseContinuityNotes_ in parseMediaRoomMarkdown.js during parse step.
 
   return results;
 }
@@ -451,111 +452,15 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
 // 4. CONTINUITY NOTES
 // ════════════════════════════════════════════════════════════════════════════
 
+/**
+ * DEPRECATED — Continuity pipeline removed.
+ * Continuity notes stay in the edition for auditing.
+ * Direct quotes route to LifeHistory_Log via parseContinuityNotes_ in parseMediaRoomMarkdown.js.
+ * This stub exists only for backwards compatibility if called from old code.
+ */
 function processContinuityIntake_(ss, cycle, cal) {
-
-  var intakeSheet = ss.getSheetByName('Continuity_Intake');
-  if (!intakeSheet) return 0;
-
-  var data = intakeSheet.getDataRange().getValues();
-  var newNotes = [];
-  var resolvedNotes = [];
-
-  for (var i = 1; i < data.length; i++) {
-    var row = data[i];
-
-    // Skip empty or processed
-    if (!row[0] && !row[1]) continue;
-    if (row[4] === 'processed') continue;
-
-    var noteType = String(row[0] || '').trim().toLowerCase();
-    var description = String(row[1] || '').trim();
-
-    if (noteType === 'resolved') {
-      // This closes matching active entries in Continuity_Loop
-      resolvedNotes.push({
-        description: description,
-        relatedArc: row[2] || '',
-        affectedCitizens: row[3] || ''
-      });
-    } else {
-      newNotes.push({
-        noteType: row[0] || 'builton',
-        description: description,
-        relatedArc: row[2] || '',
-        affectedCitizens: row[3] || ''
-      });
-    }
-
-    intakeSheet.getRange(i + 1, 5).setValue('processed');
-  }
-
-  var loopSheet = ensureContinuityLoop_(ss);
-  var totalProcessed = 0;
-
-  // --- Resolve matching entries in Continuity_Loop ---
-  if (resolvedNotes.length > 0) {
-    var loopData = loopSheet.getDataRange().getValues();
-    var headers = loopData[0];
-    var descCol = headers.indexOf('Description');
-    var statusCol = headers.indexOf('Status');
-    var arcCol = headers.indexOf('RelatedArc');
-
-    if (descCol >= 0 && statusCol >= 0) {
-      for (var r = 1; r < loopData.length; r++) {
-        var loopStatus = String(loopData[r][statusCol] || '').trim().toLowerCase();
-        if (loopStatus !== 'active') continue;
-
-        var loopDesc = String(loopData[r][descCol] || '').trim().toLowerCase();
-        var loopArc = arcCol >= 0 ? String(loopData[r][arcCol] || '').trim().toLowerCase() : '';
-
-        for (var d = 0; d < resolvedNotes.length; d++) {
-          var resolveKey = resolvedNotes[d].description.toLowerCase();
-          var resolveArc = resolvedNotes[d].relatedArc.toLowerCase();
-          // Match on description substring or arc name
-          if (loopDesc.indexOf(resolveKey) >= 0 || resolveKey.indexOf(loopDesc) >= 0 ||
-              (resolveArc && loopArc && loopArc.indexOf(resolveArc) >= 0)) {
-            loopSheet.getRange(r + 1, statusCol + 1).setValue('resolved');
-            totalProcessed++;
-            break;
-          }
-        }
-      }
-    }
-  }
-
-  // --- Add new notes ---
-  if (newNotes.length > 0) {
-    var now = new Date();
-    var rows = [];
-    for (var j = 0; j < newNotes.length; j++) {
-      var n = newNotes[j];
-      rows.push([
-        now,                    // A  Timestamp
-        cycle,                  // B  Cycle
-        n.noteType,             // C  NoteType
-        n.description,          // D  Description
-        n.relatedArc,           // E  RelatedArc
-        n.affectedCitizens,     // F  AffectedCitizens
-        'active',               // G  Status
-        // v2.1: Calendar columns
-        cal.season,             // H  Season
-        cal.holiday,            // I  Holiday
-        cal.holidayPriority,    // J  HolidayPriority
-        cal.isFirstFriday,      // K  IsFirstFriday
-        cal.isCreationDay,      // L  IsCreationDay
-        cal.sportsSeason        // M  SportsSeason
-      ]);
-    }
-
-    var startRow = loopSheet.getLastRow() + 1;
-    loopSheet.getRange(startRow, 1, rows.length, 13).setValues(rows);
-    totalProcessed += newNotes.length;
-  }
-
-  Logger.log('processContinuityIntake_: ' + newNotes.length + ' new, ' +
-    resolvedNotes.length + ' resolved');
-
-  return totalProcessed;
+  Logger.log('processContinuityIntake_: DEPRECATED — continuity pipeline removed. Quotes route via parseMediaRoomMarkdown.');
+  return 0;
 }
 
 
@@ -598,21 +503,13 @@ function setupMediaIntakeV2() {
     created.push('Citizen_Usage_Intake');
   }
 
-  // 4. Continuity_Intake
-  var contSheet = ss.getSheetByName('Continuity_Intake');
-  if (!contSheet) {
-    contSheet = ss.insertSheet('Continuity_Intake');
-    contSheet.appendRow(['NoteType', 'Description', 'RelatedArc', 'AffectedCitizens', 'Status']);
-    contSheet.setFrozenRows(1);
-    setupContinuityValidation_(contSheet);
-    created.push('Continuity_Intake');
-  }
+  // 4. Continuity_Intake — REMOVED (continuity pipeline eliminated)
+  // Quotes route to LifeHistory_Log via parseMediaRoomMarkdown.js
 
   // Ensure output sheets exist too (v2.1 versions with calendar columns)
   ensurePressDraftsSheet_(ss);
   ensureStorylineTracker_(ss);
   ensureCitizenMediaUsage_(ss);
-  ensureContinuityLoop_(ss);
 
   var msg = created.length > 0
     ? 'Created sheets: ' + created.join(', ')
@@ -738,21 +635,7 @@ function ensureCitizenMediaUsage_(ss) {
   return sheet;
 }
 
-function ensureContinuityLoop_(ss) {
-  var sheet = ss.getSheetByName('Continuity_Loop');
-  if (!sheet) {
-    sheet = ss.insertSheet('Continuity_Loop');
-    // v2.1: 13 columns with calendar
-    sheet.appendRow([
-      'Timestamp', 'Cycle', 'NoteType', 'Description', 'RelatedArc', 'AffectedCitizens', 'Status',
-      'Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason'
-    ]);
-    sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, 13).setFontWeight('bold');
-    sheet.setColumnWidth(4, 300);
-  }
-  return sheet;
-}
+// ensureContinuityLoop_ — REMOVED (continuity pipeline eliminated)
 
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -889,10 +772,7 @@ function upgradeMediaIntakeSheets() {
     upgraded.push('Citizen_Media_Usage');
   }
 
-  // Upgrade Continuity_Loop
-  if (upgradeSheetWithCalendarColumns_(ss, 'Continuity_Loop', 7)) {
-    upgraded.push('Continuity_Loop');
-  }
+  // Continuity_Loop — REMOVED (continuity pipeline eliminated)
 
   // Upgrade Media_Ledger (7 columns including Month)
   if (upgradeMediaLedgerWithCalendar_(ss)) {
@@ -974,7 +854,7 @@ function upgradeMediaLedgerWithCalendar_(ss) {
 
 function clearAllProcessedIntake() {
   var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
-  var sheets = ['Media_Intake', 'Storyline_Intake', 'Citizen_Usage_Intake', 'Continuity_Intake'];
+  var sheets = ['Media_Intake', 'Storyline_Intake', 'Citizen_Usage_Intake'];
   var total = 0;
 
   for (var s = 0; s < sheets.length; s++) {
@@ -1510,9 +1390,8 @@ function processRawCitizenUsageLogManual() {
  * A-F: Original columns
  * G-L: Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason
  *
- * Continuity_Loop (13):
- * A-G: Original columns
- * H-M: Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason
+ * Continuity_Loop: REMOVED — continuity pipeline eliminated.
+ * Direct quotes route to LifeHistory_Log via parseMediaRoomMarkdown.js.
  *
  * Media_Ledger (32):
  * A-Y: Original columns (25)

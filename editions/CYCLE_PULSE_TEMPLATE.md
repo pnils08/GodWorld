@@ -216,17 +216,19 @@ OTHER CITIZENS:
 ############################################################
 CONTINUITY NOTES — CYCLE [XX]
 ############################################################
-NOTE: Only include information NOT already tracked by the engine.
-Council composition, vote positions, weather, and sentiment are
-pulled from engine sheets automatically — do NOT repeat them here.
+AUDIT SECTION — stays in edition text for cycle-to-cycle reference.
+NOT tracked in sheets (Continuity_Loop eliminated).
+Exception: DIRECT QUOTES route to LifeHistory_Log automatically.
+Do NOT repeat engine-tracked data (council, votes, weather, sentiment).
 
-**SPORTS RECORDS** (game results from this cycle):
+**SPORTS RECORDS** (game results — audit reference only):
 — Bulls: [X-X], key result: [brief]
 — A's: [status], key result: [brief]
 
-**DIRECT QUOTES PRESERVED** (for LifeHistory_Log):
+**DIRECT QUOTES PRESERVED** (→ routes to LifeHistory_Log):
 — [Name]: "[quote]"
   Only include quotes that reveal character or advance storylines.
+  Format matters: dash, name, colon, quoted text.
 
 **NEW CANON FIGURES** (introduced this edition):
 — [Name] ([age, neighborhood, occupation or role])

@@ -12,7 +12,7 @@
  * - ARTICLE TABLE → Media_Intake (7 columns)
  * - STORYLINES CARRIED FORWARD → Storyline_Intake (6 columns)
  * - CITIZEN USAGE LOG → Citizen_Usage_Intake (5 columns)
- * - CONTINUITY NOTES → Continuity_Intake (5 columns)
+ * - CONTINUITY NOTES → LifeHistory_Log (direct quotes only; rest is audit-only)
  * 
  * USAGE:
  * 1. Paste Media Room output into "MediaRoom_Paste" sheet
@@ -620,117 +620,90 @@ function parseCitizenUsage_(ss, section) {
 // Continuity_Intake: NoteType, Description, RelatedArc, AffectedCitizens, Status
 // ════════════════════════════════════════════════════════════════════════════
 
+/**
+ * Parses CONTINUITY NOTES section from edition.
+ * Only extracts DIRECT QUOTES and routes them to LifeHistory_Log.
+ * All other continuity content (sports records, new canon, etc.) stays
+ * in the edition text for auditing — no sheet storage needed.
+ *
+ * Quote format in edition: — Name: "quote text"
+ */
 function parseContinuityNotes_(ss, section) {
   if (!section || section.trim().length < 10) return 0;
-  
+
   var lines = section.split(/[\r\n]+/);
-  var notes = [];
-  var currentSubsection = '';
-  var relatedArc = '';
-  
-  // First pass: find ARC: line if present
+  var quotes = [];
+  var inQuoteSection = false;
+
   for (var i = 0; i < lines.length; i++) {
     var line = lines[i].trim();
-    var arcMatch = line.match(/^ARC:\s*(.+)$/i);
-    if (arcMatch) {
-      relatedArc = arcMatch[1].trim();
-      break;
+    if (!line) continue;
+
+    // Detect DIRECT QUOTES subsection
+    if (line.match(/direct\s+quotes?\s+preserved/i) || line.match(/\*\*DIRECT QUOTES/i)) {
+      inQuoteSection = true;
+      continue;
     }
-  }
-  
-  // Second pass: parse content
-  var tableRows = [];  // Accumulate pipe table rows
-  var tableHeader = '';  // Track which subsection owns the table
 
-  for (var j = 0; j < lines.length; j++) {
-    var line = lines[j].trim();
+    // Detect other subsection headers — exit quote section
+    if (line.match(/\*\*SPORTS RECORDS/i) || line.match(/\*\*NEW CANON/i) ||
+        line.match(/^[#=]{3,}$/) || line.match(/^={3,}$/)) {
+      inQuoteSection = false;
+      continue;
+    }
 
-    // Skip empty, decorators, ARC: line
-    if (!line || line.match(/^[#=]{3,}$/) || line.match(/^ARC:/i)) continue;
-
-    // Detect subsection headers
-    if (isSubsectionHeader_(line)) {
-      // Flush any accumulated table rows as a compound note
-      if (tableRows.length > 0) {
-        notes.push({
-          noteType: 'introduced',
-          description: '[' + (tableHeader || currentSubsection) + '] ' + tableRows.join(' | '),
-          relatedArc: relatedArc || '',
-          affectedCitizens: extractCitizenNames_(tableRows.join(' '))
+    // Parse quote lines: — Name: "quote" or - Name: "quote"
+    if (inQuoteSection) {
+      var quoteMatch = line.match(/^[—–\-]\s*(.+?):\s*[""](.+?)[""]$/);
+      if (quoteMatch) {
+        quotes.push({
+          name: quoteMatch[1].trim(),
+          quote: quoteMatch[2].trim()
         });
-        tableRows = [];
       }
-      currentSubsection = cleanSubsectionName_(line);
-      tableHeader = currentSubsection;
-      continue;
-    }
-
-    // Handle pipe table rows
-    if (line.charAt(0) === '|') {
-      // Skip separator rows (|---|---|)
-      if (line.match(/^\|[\s\-|]+\|$/)) continue;
-      // Capture data rows: extract cell values
-      var cells = line.split('|');
-      var cellValues = [];
-      for (var c = 1; c < cells.length - 1; c++) {
-        var val = cells[c].trim();
-        if (val) cellValues.push(val);
-      }
-      if (cellValues.length > 0) {
-        tableRows.push(cellValues.join(', '));
-      }
-      continue;
-    }
-
-    // Flush any accumulated table rows before processing a non-table line
-    if (tableRows.length > 0) {
-      notes.push({
-        noteType: 'introduced',
-        description: '[' + (tableHeader || currentSubsection) + '] ' + tableRows.join(' | '),
-        relatedArc: relatedArc || '',
-        affectedCitizens: extractCitizenNames_(tableRows.join(' '))
-      });
-      tableRows = [];
-    }
-
-    // Parse content line
-    var note = parseNoteLine_(line, currentSubsection, relatedArc);
-    if (note) {
-      notes.push(note);
     }
   }
 
-  // Flush any remaining table rows
-  if (tableRows.length > 0) {
-    notes.push({
-      noteType: 'introduced',
-      description: '[' + (tableHeader || currentSubsection) + '] ' + tableRows.join(' | '),
-      relatedArc: relatedArc || '',
-      affectedCitizens: extractCitizenNames_(tableRows.join(' '))
-    });
+  if (quotes.length === 0) {
+    Logger.log('parseContinuityNotes_: No direct quotes found (other notes are audit-only)');
+    return 0;
   }
-  
-  if (notes.length === 0) return 0;
-  
-  var sheet = ensureContinuityIntakeSheet_(ss);
-  
-  var rows = [];
-  for (var k = 0; k < notes.length; k++) {
-    var n = notes[k];
-    rows.push([
-      n.noteType,
-      n.description,
-      n.relatedArc,
-      n.affectedCitizens,
-      ''  // Status
+
+  // Route quotes to LifeHistory_Log
+  var logSheet = ss.getSheetByName('LifeHistory_Log');
+  if (!logSheet) {
+    Logger.log('parseContinuityNotes_: LifeHistory_Log sheet not found — cannot route quotes');
+    return 0;
+  }
+
+  // Get current cycle from World_Config
+  var cycle = 0;
+  var configSheet = ss.getSheetByName('World_Config');
+  if (configSheet) {
+    var configData = configSheet.getDataRange().getValues();
+    for (var c = 0; c < configData.length; c++) {
+      if (configData[c][0] === 'cycleCount') {
+        cycle = Number(configData[c][1]) || 0;
+        break;
+      }
+    }
+  }
+
+  var now = new Date();
+  for (var q = 0; q < quotes.length; q++) {
+    logSheet.appendRow([
+      now,                                          // A: Timestamp
+      '',                                           // B: POPID (resolved later)
+      quotes[q].name,                               // C: Name
+      'Quoted',                                     // D: EventTag
+      'Direct quote preserved: ' + quotes[q].quote, // E: EventText
+      '',                                           // F: Neighborhood
+      cycle                                         // G: Cycle
     ]);
   }
-  
-  var startRow = sheet.getLastRow() + 1;
-  sheet.getRange(startRow, 1, rows.length, 5).setValues(rows);
-  
-  Logger.log('parseContinuityNotes_: Added ' + notes.length + ' continuity notes');
-  return notes.length;
+
+  Logger.log('parseContinuityNotes_: Routed ' + quotes.length + ' quotes to LifeHistory_Log');
+  return quotes.length;
 }
 
 
@@ -918,23 +891,7 @@ function ensureCitizenUsageIntakeSheet_(ss) {
 }
 
 
-function ensureContinuityIntakeSheet_(ss) {
-  var HEADERS = ['NoteType', 'Description', 'RelatedArc', 'AffectedCitizens', 'Status'];
-  
-  var sheet = ss.getSheetByName('Continuity_Intake');
-  if (!sheet) {
-    sheet = ss.insertSheet('Continuity_Intake');
-    sheet.appendRow(HEADERS);
-    sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
-    
-    var noteTypes = SpreadsheetApp.newDataValidation()
-      .requireValueInList(['builton', 'introduced', 'question', 'resolved', 'callback', 'seasonal'])
-      .build();
-    sheet.getRange('A2:A500').setDataValidation(noteTypes);
-  }
-  return sheet;
-}
+// ensureContinuityIntakeSheet_ — REMOVED (continuity pipeline eliminated)
 
 
 /**
@@ -953,21 +910,14 @@ function ensureContinuityIntakeSheet_(ss) {
  * Citizen_Usage_Intake (5 columns):
  *   CitizenName, UsageType, Context, Reporter, Status
  * 
- * Continuity_Intake (5 columns):
- *   NoteType, Description, RelatedArc, AffectedCitizens, Status
- * 
- * CONTINUITY NOTE TYPES:
- *   builton     - Building on previous coverage
- *   introduced  - New data/facts/timeline items
- *   question    - Open questions
- *   resolved    - Completed threads
- *   callback    - References to past events
- *   seasonal    - Calendar-related
- * 
+ * Continuity_Intake: REMOVED — pipeline eliminated.
+ *   Direct quotes from CONTINUITY NOTES → LifeHistory_Log
+ *   All other continuity content stays in edition text for auditing.
+ *
  * WORKFLOW:
  *   1. Paste Media Room output → MediaRoom_Paste
- *   2. Run parseMediaRoomMarkdown()
- *   3. Run processMediaIntakeV2() to move to ledgers
+ *   2. Run parseMediaRoomMarkdown() (routes quotes to LifeHistory_Log)
+ *   3. Run processMediaIntakeV2() to move articles/storylines/citizens to ledgers
  *
  * ============================================================================
  */

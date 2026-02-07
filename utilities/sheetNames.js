@@ -37,14 +37,14 @@ var SHEET_NAMES = {
   MEDIA_LEDGER: 'Media_Ledger',
   PRESS_DRAFTS: 'Press_Drafts',
   CITIZEN_MEDIA_USAGE: 'Citizen_Media_Usage',
-  CONTINUITY_LOOP: 'Continuity_Loop',
+  // CONTINUITY_LOOP: removed — pipeline eliminated
   CULTURAL_LEDGER: 'Cultural_Ledger',
 
   // === Media Intake ===
   MEDIA_INTAKE: 'Media_Intake',
   STORYLINE_INTAKE: 'Storyline_Intake',
   CITIZEN_USAGE_INTAKE: 'Citizen_Usage_Intake',
-  CONTINUITY_INTAKE: 'Continuity_Intake',
+  // CONTINUITY_INTAKE: removed — pipeline eliminated
   MEDIAROOM_PASTE: 'MediaRoom_Paste',
   ADVANCEMENT_INTAKE: 'Advancement_Intake',
   INTAKE: 'Intake',

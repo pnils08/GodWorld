@@ -46,8 +46,7 @@ var CONFIG = {
     'Storyline_Intake',
     'Citizen_Media_Usage',
     'Citizen_Usage_Intake',
-    'Continuity_Intake',
-    'Continuity_Loop',
+    // Continuity_Intake/Loop removed — pipeline eliminated
     'Media_Intake',
     'Health_Cause_Queue',
     'Press_Drafts',

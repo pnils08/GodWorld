@@ -170,7 +170,7 @@ function loadHandoffData_(cache, cycle) {
   data.councilMembers = extractCouncilMembers_(data.civicOfficers);
   data.initiatives = loadInitiatives_(cache);
   data.playerRosters = loadPlayerRosters_(cache);
-  data.continuityNotes = loadContinuityNotes_(cache, cycle);
+  data.recentQuotes = loadRecentQuotes_(cache, cycle);
   data.culturalEntities = loadCulturalEntities_(cache);
   data.sportsFeeds = loadSportsFeeds_(cache, cycle);
 
@@ -668,61 +668,47 @@ function loadPlayerRosters_(cache) {
 
 
 /**
- * Loads Continuity_Loop notes (recent cycles).
+ * Loads recent "Quoted" entries from LifeHistory_Log for the current cycle.
+ * Replaces the old loadContinuityNotes_ (Continuity_Loop eliminated).
  */
-function loadContinuityNotes_(cache, cycle) {
-  var values = cache.getValues(SHEET_NAMES.CONTINUITY_LOOP);
+function loadRecentQuotes_(cache, cycle) {
+  var values;
+  try {
+    values = cache.getValues('LifeHistory_Log');
+  } catch (e) {
+    Logger.log('loadRecentQuotes_: LifeHistory_Log not found');
+    return [];
+  }
   if (values.length < 2) return [];
 
   var header = values[0];
   var idx = createColIndex_(header);
   var iCycle = idx('Cycle');
-  var iNoteType = idx('NoteType');
-  var iDesc = idx('Description');
-  var iRelatedArc = idx('RelatedArc');
-  var iCitizens = idx('AffectedCitizens');
-  var iStatus = idx('Status');
-
-  // Content that's already in the handoff from engine sheets — skip these
-  var SKIP_CONTENT = [
-    'council composition', 'faction count', 'major votes pending',
-    'vote count', 'civic staff status', 'weather/mood', 'weather mood',
-    'sentiment:', 'migration:', 'pattern:', 'oari vote count',
-    'stabilization fund vote count', 'baylight vote count'
-  ];
+  var iName = idx('Name');
+  var iTag = idx('EventTag');
+  var iText = idx('EventText');
 
   var results = [];
   for (var r = 1; r < values.length; r++) {
     var row = values[r];
-    var noteCycle = Number(safeColRead_(row, iCycle, 0));
-    var status = String(safeColRead_(row, iStatus, '')).toLowerCase();
+    var rowCycle = Number(safeColRead_(row, iCycle, 0));
+    if (rowCycle !== cycle) continue;
 
-    // Current cycle only, active notes only
-    if (noteCycle !== cycle) continue;
-    if (status === 'resolved') continue;
+    var tag = String(safeColRead_(row, iTag, '')).toLowerCase();
+    if (tag !== 'quoted') continue;
 
-    var desc = String(safeColRead_(row, iDesc, ''));
-    var descLower = desc.toLowerCase();
-
-    // Skip notes that duplicate engine-tracked data
-    var skip = false;
-    for (var s = 0; s < SKIP_CONTENT.length; s++) {
-      if (descLower.indexOf(SKIP_CONTENT[s]) >= 0) {
-        skip = true;
-        break;
-      }
-    }
-    if (skip) continue;
+    var text = String(safeColRead_(row, iText, ''));
+    // Strip prefix added by intake ("Direct quote preserved: " or "Quoted in article: ")
+    text = text.replace(/^(Direct quote preserved|Quoted in article|First quoted in article):\s*/i, '');
 
     results.push({
-      cycle: noteCycle,
-      noteType: String(safeColRead_(row, iNoteType, '')).toLowerCase(),
-      description: desc,
-      relatedArc: String(safeColRead_(row, iRelatedArc, '')),
-      citizens: String(safeColRead_(row, iCitizens, '')),
-      status: status
+      cycle: rowCycle,
+      name: String(safeColRead_(row, iName, '')),
+      text: text
     });
   }
+
+  Logger.log('loadRecentQuotes_: ' + results.length + ' quotes from cycle ' + cycle);
   return results;
 }
 
@@ -1270,49 +1256,28 @@ function buildSection10_Cultural_(data) {
 
 
 /**
- * Section 11: CONTINUITY REFERENCE (DEDUPLICATED)
- * Sources: Continuity_Loop (deduped), Civic_Office_Ledger, Initiative_Tracker
+ * Section 11: RECENT QUOTES (from LifeHistory_Log)
+ * Continuity_Loop eliminated — continuity notes stay in edition for auditing.
+ * This section now shows recent direct quotes for narrative reference.
  */
 function buildSection11_Continuity_(data) {
   var lines = [];
 
-  // Council and vote data come from LIVE sheets (Section 3 already has them)
-  // Here we include a compact reference plus deduped continuity notes
-
-  lines.push('NOTE: Council composition and vote math are in Section 3 (live data).');
-  lines.push('Below: deduped continuity notes from recent cycles.');
+  lines.push('Recent direct quotes preserved from editions.');
+  lines.push('Full continuity context is in the edition text (not tracked in sheets).');
+  lines.push('Council/vote data is in Section 3. Sports records are in Section 15.');
   lines.push('');
 
-  // Deduplicate continuity notes
-  var notes = data.continuityNotes;
-  var deduped = deduplicateContinuity_(notes);
-
-  if (deduped.length === 0) {
-    lines.push('(No continuity notes in recent cycles)');
+  // Pull recent quotes from LifeHistory_Log (loaded with main data)
+  var quotes = data.recentQuotes || [];
+  if (quotes.length === 0) {
+    lines.push('(No recent quotes from editions)');
     return lines;
   }
 
-  // Group by noteType
-  var groups = {};
-  for (var i = 0; i < deduped.length; i++) {
-    var note = deduped[i];
-    var key = note.noteType || 'general';
-    if (!groups[key]) groups[key] = [];
-    groups[key].push(note);
-  }
-
-  var typeOrder = ['introduced', 'callback', 'builton', 'seasonal', 'question', 'resolved', 'general'];
-  for (var t = 0; t < typeOrder.length; t++) {
-    var type = typeOrder[t];
-    if (!groups[type] || groups[type].length === 0) continue;
-
-    lines.push(type.toUpperCase() + ':');
-    for (var n = 0; n < groups[type].length; n++) {
-      var entry = groups[type][n];
-      var suffix = entry.citizens ? ' [Citizens: ' + entry.citizens + ']' : '';
-      lines.push('- (C' + entry.cycle + ') ' + entry.description + suffix);
-    }
-    lines.push('');
+  for (var i = 0; i < quotes.length; i++) {
+    var q = quotes[i];
+    lines.push('- (C' + q.cycle + ') ' + q.name + ': ' + q.text);
   }
 
   return lines;
@@ -1401,11 +1366,12 @@ function buildSection13_ReturnsExpected_() {
   lines.push('— Name (note)');
   lines.push('');
   lines.push('CONTINUITY NOTES — CYCLE N:');
-  lines.push('Only include data NOT tracked by the engine.');
+  lines.push('Audit-only section — stays in edition text, not tracked in sheets.');
+  lines.push('Exception: DIRECT QUOTES route to LifeHistory_Log automatically.');
   lines.push('Do NOT repeat: council composition, vote positions, weather, sentiment.');
   lines.push('');
-  lines.push('SPORTS RECORDS: (game results from this cycle)');
-  lines.push('DIRECT QUOTES PRESERVED: (Name: "quote" — for LifeHistory_Log)');
+  lines.push('SPORTS RECORDS: (game results — audit reference only)');
+  lines.push('DIRECT QUOTES PRESERVED: — Name: "quote" (routes to LifeHistory_Log)');
   lines.push('NEW CANON FIGURES: (Name, age, neighborhood, role — must also be in Citizen Usage Log)');
 
   return lines;
@@ -1650,56 +1616,7 @@ function parsePacketField_(text, fieldName) {
 }
 
 
-/**
- * Deduplicates continuity notes.
- * Strategy: category-keyed latest-wins. Group by noteType + truncated description.
- * Discard council/vote note types (replaced by live sheet data).
- *
- * @param {Array} notes - Raw continuity note objects
- * @returns {Array} Deduplicated notes
- */
-function deduplicateContinuity_(notes) {
-  if (!notes || notes.length === 0) return [];
-
-  // Skip note types that are replaced by live data
-  var skipTypes = ['council', 'vote', 'composition', 'vote-math'];
-
-  var seen = {};
-  var results = [];
-
-  for (var i = 0; i < notes.length; i++) {
-    var note = notes[i];
-    var type = note.noteType || 'general';
-
-    // Skip types replaced by live sheet data
-    var skip = false;
-    for (var s = 0; s < skipTypes.length; s++) {
-      if (type.indexOf(skipTypes[s]) >= 0) {
-        skip = true;
-        break;
-      }
-    }
-    if (skip) continue;
-
-    // Build dedup key: noteType + first 50 chars of description
-    var descKey = (note.description || '').substring(0, 50).toLowerCase().replace(/\s+/g, ' ');
-    var key = type + '|' + descKey;
-
-    if (!seen[key] || seen[key].cycle < note.cycle) {
-      seen[key] = note;
-    }
-  }
-
-  var keys = Object.keys(seen);
-  for (var k = 0; k < keys.length; k++) {
-    results.push(seen[keys[k]]);
-  }
-
-  // Sort by cycle descending
-  results.sort(function(a, b) { return b.cycle - a.cycle; });
-
-  return results;
-}
+// deduplicateContinuity_ — REMOVED (Continuity_Loop eliminated)
 
 
 /**

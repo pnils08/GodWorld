@@ -794,7 +794,7 @@ function generateMediaBriefing_(ctx) {
   briefing.push('1. Article Table (Media_Intake)');
   briefing.push('2. Storylines Carried Forward (Storyline_Intake)');
   briefing.push('3. Citizen Usage Log (Citizen_Usage_Intake)');
-  briefing.push('4. Continuity Notes (Continuity_Intake)');
+  briefing.push('4. Continuity Notes (audit-only in edition; direct quotes → LifeHistory_Log)');
   briefing.push('================================================================================');
   
   // ═══════════════════════════════════════════════════════════════════════════
@@ -1775,20 +1775,8 @@ function getContinuityFromLoop_(ss, cycle) {
     }
   }
   
-  var loopSheet = ss.getSheetByName('Continuity_Loop');
-  if (loopSheet) {
-    var loopData = loopSheet.getDataRange().getValues();
-    for (var j = 1; j < loopData.length; j++) {
-      var noteCycle = loopData[j][1];
-      if (noteCycle >= cycle - 3 && loopData[j][6] === 'active') {
-        result.recentNotes.push({
-          cycle: noteCycle,
-          type: loopData[j][2],
-          description: loopData[j][3]
-        });
-      }
-    }
-  }
+  // Continuity_Loop removed — no recent notes to pull.
+  // Direct quotes route to LifeHistory_Log; continuity is audit-only in edition text.
   
   return result;
 }

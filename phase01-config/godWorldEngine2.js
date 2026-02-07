@@ -239,6 +239,15 @@ function runWorldCycle() {
       }
     }
   });
+  safePhaseCall_(ctx, 'Phase6-FaithSignals', function() {
+    if (typeof getFaithStorySignals_ === 'function') {
+      var signals = getFaithStorySignals_(ctx);
+      if (signals.length > 0) {
+        var S = ctx.summary || {};
+        S.faithStorySignals = signals;
+      }
+    }
+  });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 7: EVENING + MEDIA SYSTEMS
@@ -1303,6 +1312,8 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase3-Demographics', function() { applyDemographicDrift_(ctx); });
   safePhaseCall_(ctx, 'Phase3-CrisisSpikes', function() { generateCrisisSpikes_(ctx); });
   safePhaseCall_(ctx, 'Phase3-CrimeMetrics', function() { generateCrimeMetrics_(ctx); });
+  // Note: V3 runs faith in Phase 3 (before world events). Crisis detection uses
+  // sentiment only — worldEvents-based crisis keywords don't fire in V3 pipeline.
   safePhaseCall_(ctx, 'Phase3-Faith', function() { runFaithEventsEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase3-Youth', function() { runYouthEngine_(ctx); });
 
@@ -1354,6 +1365,15 @@ function runCyclePhases_(ctx) {
       if (signals.length > 0) {
         var S = ctx.summary || {};
         S.transitStorySignals = signals;
+      }
+    }
+  });
+  safePhaseCall_(ctx, 'Phase6-FaithSignals', function() {
+    if (typeof getFaithStorySignals_ === 'function') {
+      var signals = getFaithStorySignals_(ctx);
+      if (signals.length > 0) {
+        var S = ctx.summary || {};
+        S.faithStorySignals = signals;
       }
     }
   });

@@ -12,15 +12,20 @@
  * - Outreach and charitable work
  * - Crisis response and community healing
  *
- * @version 1.0
+ * @version 1.1
  * @tier 6.2
+ *
+ * v1.1 Changes:
+ * - FIX: Use S.simMonth from Phase 1 calendar for holy day lookup (was using real wall clock)
+ * - FIX: Rename shuffleFaithOrgs_ to shuffleFaithOrgs_ to prevent flat namespace collision
+ * - WIRED: getFaithStorySignals_ consumed in Phase 6 orchestrator
  */
 
 // ============================================================================
 // CONSTANTS
 // ============================================================================
 
-var FAITH_ENGINE_VERSION = '1.0';
+var FAITH_ENGINE_VERSION = '1.1';
 
 // Event generation probabilities
 var FAITH_EVENT_PROBS = {
@@ -95,9 +100,8 @@ function runFaithEventsEngine_(ctx) {
   // Detect crisis conditions
   var hasCrisis = detectCrisisConditions_(worldEvents, sentiment);
 
-  // Get current month for holy days
-  var now = ctx.now || new Date();
-  var month = now.getMonth() + 1;
+  // Get simulation month for holy day lookup (set by Phase 1 calendar)
+  var month = S.simMonth || 1;
 
   // Generate events
   var events = [];
@@ -293,7 +297,7 @@ function generateInterfaithEvents_(organizations, context, rng) {
   var count = 0;
   while (count < 2 && rng() < interfaithProb) {
     // Pick 2-4 participating organizations
-    var shuffled = shuffleArray_(organizations.slice(), rng);
+    var shuffled = shuffleFaithOrgs_(organizations.slice(), rng);
     var participants = shuffled.slice(0, 2 + Math.floor(rng() * 3));
 
     if (participants.length >= 2) {
@@ -406,7 +410,7 @@ function countEventsByType_(events) {
  * @param {Function} rng
  * @return {Array}
  */
-function shuffleArray_(arr, rng) {
+function shuffleFaithOrgs_(arr, rng) {
   var result = arr.slice();
   for (var i = result.length - 1; i > 0; i--) {
     var j = Math.floor(rng() * (i + 1));

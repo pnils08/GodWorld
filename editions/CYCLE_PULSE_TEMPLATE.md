@@ -329,7 +329,7 @@ Dear Editor,
 |-----------------|--------------|-----------------------------------------|
 | Editor-in-Chief | Mags Corliss | Final authority, calls front page lead  |
 | Managing Editor | Luis Navarro | Investigative balance, fact validation  |
-| Copy Chief      | Rhea Morgan  | Compliance & structure (does not write) |
+| Data Analyst    | Rhea Morgan  | Canon verification, stats checking, data accuracy (does not write) |
 
 -----
 

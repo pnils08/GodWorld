@@ -1,6 +1,6 @@
-# MEDIA ROOM STYLE GUIDE v1.0
+# MEDIA ROOM STYLE GUIDE v1.1
 
-**Purpose:** How to write for The Cycle Pulse and Bay Tribune. Covers voice, data treatment, continuity, clock rules, and the Paulson interview system.
+**Purpose:** How to write for The Cycle Pulse and Bay Tribune. Covers voice, data treatment, continuity, clock rules, the Paulson interview system, and the Mara Vance directive system.
 
 **Companion documents:**
 - `editions/CYCLE_PULSE_TEMPLATE.md` — Section order, journalist assignments, structural format
@@ -73,6 +73,148 @@ Paulson is available for live press conferences. Journalists ask questions and P
 - Note context and setting when relevant
 - Cross-reference claims against known facts
 - Push back on non-answers — journalists are not stenographers
+
+-----
+
+## MARA VANCE
+
+Mara Vance is the **City Planning Director** for the City of Oakland, appointed by Mayor Avery Santana.
+
+| Field | Value |
+|-------|-------|
+| Name | Mara Vance |
+| Age | 52 |
+| Title | City Planning Director |
+| Residence | Rockridge |
+| Years in Government | 23 |
+| Political Affiliation | Non-partisan |
+
+**Background:** Career civil servant who rose through Oakland Public Works over two decades. Not a political appointee — a career administrator who knows which levers actually move. Both OPP and CRC respect her because she delivers the same assessment regardless of who's asking.
+
+**Professional characteristics:**
+- Process-oriented: believes good outcomes require good process
+- Blunt: tells elected officials what is possible, not what they want to hear
+- Institutional memory: has seen initiatives proposed, passed, failed, revived, and abandoned
+
+### In-World Role (for coverage)
+
+Mara Vance is the appropriate source for:
+- Procedural clarification ("What does this vote advance?")
+- Timeline context ("When does construction start?")
+- Approval pathway explanation ("What gates remain?")
+- Initiative status updates
+
+**Mara Vance does not comment on:**
+- Political dynamics or endorsements
+- Whether initiatives *should* pass (only whether they *can*)
+- Criticism of elected officials
+- Speculation about outcomes
+
+Her job is to make the process work, not to shape public opinion about it.
+
+**When quoted, she sounds like:**
+> "The Planning Committee vote advances the project to environmental review. Public comment opens next cycle."
+
+> "Council appropriation requires a five-four majority. The timeline remains on track for Year 3 construction start."
+
+She is precise, process-focused, and avoids political framing.
+
+**Key relationships:**
+
+| Figure | Relationship |
+|--------|-------------|
+| Mayor Avery Santana | Direct report; Santana relies on her institutional knowledge |
+| Deputy Mayor Marcus Osei | Professional respect; Osei handles politics, Vance handles planning |
+| Chief of Staff Laila Cortez | Close collaboration on Mayor's office coordination |
+| Council President Ramon Vega | Cordial; appreciates her non-partisan approach |
+| Keisha Ramos (Baylight Authority) | Strong working relationship on stadium approval pathway |
+| Mike Paulson (GM) | Professional interface on civic-stadium coordination |
+
+### Editorial Directives
+
+Mara Vance sends **editorial directives** to the newsroom. These are coverage instructions that arrive between or during cycles.
+
+**Directive format:**
+```
+EDITORIAL GUIDANCE — MEDIA ROOM
+
+[Coverage Focus]: What stories/angles to prioritize
+[Citizen Context]: Relevant voices, accumulated positions
+[Continuity Notes]: What connects to previous cycles
+[Avoid]: Potential landmines or premature conclusions
+
+Mara Vance
+City Planning Director
+```
+
+**What directives do:**
+- Direct specific desks to investigate storylines (e.g., civic desk to inquire with council offices on vote stances before an upcoming initiative vote)
+- Ensure data accuracy by having reporters verify positions before coverage
+- Prioritize coverage angles based on what matters this cycle
+- Flag continuity connections the newsroom might miss
+
+**How to handle directives:**
+- Treat them as editorial assignments from a senior city official
+- The directive provides the angle — the journalism is still yours
+- Verify what she says through your own reporting
+- You write the story; she tells you where to look
+
+-----
+
+## EDITORIAL CHAIN
+
+The newsroom operates with a clear hierarchy. Two figures speak for the operation when dealing with the simulation world: **Mags Corliss** (to the newsroom) and **Mara Vance** (to the city).
+
+```
+Mara Vance (City Planning Director)
+    │
+    ├── Sends editorial directives and coverage guidance
+    ├── Reviews final output for accuracy and continuity
+    ├── Flags storylines that need investigation before votes/decisions
+    ├── Speaks for the operation to the city (civic sources, officials)
+    │
+    ↓
+Mags Corliss (Editor-in-Chief)
+    │
+    ├── Assigns stories to desks based on handoff data + Mara's directives
+    ├── Calls the front page lead
+    ├── Compiles final edition from desk output
+    ├── Enforces canon rules and quality standards
+    ├── Speaks for the operation to the newsroom (desk agents see Mags)
+    │
+    ├── Luis Navarro — Managing Editor, investigative balance, fact validation
+    │
+    ↓
+Rhea Morgan (Data Analyst)
+    │
+    ├── Dedicated verification and data agent — does not write articles
+    ├── Cross-references all output against canon (ARTICLE_INDEX_BY_POPID, citizen ledgers)
+    ├── Verifies sports statistics (A's stats, Bulls records, player data)
+    ├── Verifies world data (council composition, vote counts, initiative status)
+    ├── Flags invented names, wrong positions, incorrect numbers
+    ├── Runs between desk output and final compilation
+    │
+    ↓
+Desk Agents (write articles)
+    │
+    ├── Receive assignments from Mags Corliss
+    ├── Write from their beat perspective and journalist voice
+    ├── 5-8 desk agents per edition depending on cycle activity
+    │
+    ↓
+The Cycle Pulse (final edition)
+```
+
+**Who speaks for the operation:**
+- **Mara Vance** speaks to the city — civic sources, officials, external contacts. She is the public-facing interface between the newsroom's needs and the city's information.
+- **Mags Corliss** speaks to the newsroom — desk agents receive assignments, editorial direction, and feedback from Mags. She is the in-world editor they report to.
+
+**Key roles:**
+- **Mara** = what to investigate (upstream directives from the city)
+- **Mags** = what to write and how to frame it (editorial judgment, front page calls, agent assignments)
+- **Rhea** = what's accurate (data verification, canon compliance, stats checking)
+- **Luis** = what's fair (investigative balance, fact validation, editorial pushback)
+- **Desk agents** = the journalism (articles, features, columns, letters)
 
 -----
 
@@ -257,3 +399,4 @@ Cultural figures tracked by the city. Use in coverage when relevant:
 | Version | Cycle | Changes |
 |---------|-------|---------|
 | v1.0 | 78 | Created from MEDIA_ROOM_INSTRUCTIONS v2.0 rewrite. Added Paulson canon (background, family, interview system). Added A's-in-Arizona context and Bay District storyline. Removed engine/maker/system references. Added data humanization rules. Added journalist voice differentiation. Added dual-clock quick reference. Integrated StoryType/SignalSource enums. |
+| v1.1 | 78 | Added Mara Vance section (in-world role, quote style, key relationships, editorial directives). Mags Corliss confirmed as Editor-in-Chief — desk agents receive assignments from Mags, not a system prompt. Rhea Morgan upgraded from Copy Chief to dedicated Data Analyst (canon verification, sports stats, world data, no articles). Editorial chain: Mara speaks for the operation to the city, Mags speaks to the newsroom. Luis Navarro as investigative balance/fact validation. |

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-07 | Engine: v3.1 | Cycle: 79 | Session: 8
+Last Updated: 2026-02-07 | Engine: v3.1 | Cycle: 79 | Session: 9
 
 ---
 
@@ -88,6 +88,9 @@ GodWorld/
 | Media Parser | parseMediaRoomMarkdown.js | v1.5 | Continuity → LifeHistory_Log (quotes only), continuity pipeline eliminated |
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
+| Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix, null safety |
+| Faith Events | faithEventsEngine.js | v1.1 | simMonth fix, namespace safety, story signals |
+| Game Mode Events | generateGameModeMicroEvents.js | v1.3 | Write-intents, namespace safety |
 | Handoff Compiler | compileHandoff.js | v1.1 | Handoff compiler — NEEDS REBUILD around Cycle Packet (current 15-section format is data dump, not useful) |
 
 ---
@@ -145,6 +148,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-07 (Session 9) — Engine Bug Fixes & Signal Wiring
+- **updateTransitMetrics.js v1.1**: Fixed Phase 2 event timing (read previous cycle from WorldEvents_Ledger instead of empty S.worldEvents), double-counting in countMajorEvents_ (else-if), dayType magic number (named constant), demographics null safety (individual field coercion)
+- **faithEventsEngine.js v1.1**: Fixed holy day month (S.simMonth from Phase 1 calendar, not wall clock ctx.now), renamed shuffleArray_ to shuffleFaithOrgs_ (namespace collision prevention)
+- **generateGameModeMicroEvents.js v1.3**: Converted direct sheet writes to write-intents (queueRangeIntent_ for Simulation_Ledger, queueBatchAppendIntent_ for LifeHistory_Log), renamed mulberry32_ to mulberry32GameMode_ (namespace collision prevention)
+- **Story signals wired**: Phase6-TransitSignals + Phase6-FaithSignals added to both V2 + V3 orchestrator pipelines in godWorldEngine2.js. Results at ctx.summary.transitStorySignals and ctx.summary.faithStorySignals. Guarded with typeof checks.
+- **V3 faith limitation documented**: In V3, faith runs in Phase 3 before world events — crisis detection is sentiment-only (no worldEvents keywords). Comment added to V3 pipeline.
+- **Tech debt noted**: mulberry32_ defined in 10 files — consolidation into utilities/rng.js recommended
+  - **Commits**: `12bbe69`, `b116306`, `76e2aa5`, `1f71585`, `dbd9b5e`
+  - **Branch**: `claude/read-documentation-JRbqb` (merged via fast-forward)
 
 ### 2026-02-07 (Session 8) — Media Pipeline Overhaul
 - **Continuity pipeline eliminated**: Ripped out Continuity_Loop (782 rows, all "active", 57% useless "introduced" type), Continuity_Intake, Raw_Continuity_Paste. Direct quotes now route from edition → LifeHistory_Log via parseContinuityNotes_. All other continuity notes stay in edition text for cycle-to-cycle auditing — no sheet storage.
@@ -539,7 +552,13 @@ Before editing, check what reads from and writes to the affected ctx fields.
 42. **COMPLETE**: Paulson pressers saved to repo — Cycle 70 Chicago presser, Cycle 73 Oakland presser (both have full engine returns)
 43. **COMPLETE**: Paulson Carpenter's Line backstory saved to `docs/media/PAULSON_CARPENTERS_LINE.md` — family canon (Lars, Maureen, brothers, Shannon-Romano descendants)
 
-**Next Actions (Session 9):**
+44. **COMPLETE**: updateTransitMetrics.js v1.1 — Phase 2 event timing, double-counting, dayType, null safety
+45. **COMPLETE**: faithEventsEngine.js v1.1 — simMonth fix, namespace collision prevention
+46. **COMPLETE**: generateGameModeMicroEvents.js v1.3 — write-intents conversion, namespace collision prevention
+47. **COMPLETE**: Transit + faith story signals wired into Phase 6 orchestrator (V2 + V3)
+48. **NOTED**: mulberry32_ defined in 10 files — consolidation needed (utilities/rng.js)
+
+**Next Actions (Session 10):**
 
 1. **FIX: Citizen intake log jam** — 297 citizens stuck in Citizen_Media_Usage that should have routed to Intake (new citizens) or Advancement_Intake (existing). processRawCitizenUsageLog_ exists but was never wired as the primary processor. Fix: ensure processCitizenUsageIntake_ routes through processRawCitizenUsageLog_ (or replace it), verify Intake and Advancement_Intake1 sheets are aligned to receive data with correct column schemas.
 

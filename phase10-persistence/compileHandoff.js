@@ -1412,7 +1412,7 @@ function buildSection14_CanonReference_(data) {
   lines.push('');
 
   // Recurring citizens from continuity notes
-  var citizenNames = extractCitizenNames_(data);
+  var citizenNames = extractHandoffCitizenNames_(data);
   if (citizenNames.length > 0) {
     lines.push('RECURRING CITIZENS THIS CYCLE:');
     for (var cn = 0; cn < citizenNames.length; cn++) {
@@ -1603,7 +1603,7 @@ function deduplicateContinuity_(notes) {
  * @param {Object} data - Full data bag
  * @returns {Array} List of citizen name strings
  */
-function extractCitizenNames_(data) {
+function extractHandoffCitizenNames_(data) {
   var names = {};
 
   // From continuity notes

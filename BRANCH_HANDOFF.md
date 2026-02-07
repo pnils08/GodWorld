@@ -98,6 +98,26 @@ clasp push
 
 ---
 
+## Game Mode Fixes (generateGameModeMicroEvents.js v1.3)
+
+### 10. Direct Sheet Writes Bypass Write-Intents (architecture violation)
+**Problem:** `Simulation_Ledger` was updated via `setValues()` and `LifeHistory_Log` via `setValues()` directly during Phase 5. This bypasses the write-intents model — if the cycle crashes after these writes, data is partially committed with no rollback.
+
+**Fix:** Converted to `queueRangeIntent_()` for Simulation_Ledger and `queueBatchAppendIntent_()` for LifeHistory_Log. Both deferred to Phase 10 persistence. Fallback to direct write if write-intents not loaded.
+
+### 11. `mulberry32_` Namespace Collision (10 copies)
+**Problem:** `mulberry32_` is defined identically in 10 files. In GAS flat namespace, only one definition wins. Currently not breaking (all copies identical), but any change to one copy silently affects all engines.
+
+**Fix:** Renamed to `mulberry32GameMode_()` in this file. The other 9 copies are a separate cleanup task — document in SESSION_CONTEXT.md for future session.
+
+---
+
+## Known Tech Debt (for future sessions)
+
+- **`mulberry32_` defined in 10 files**: applyWeatherModel.js, buildCityEvents.js, generateCitizenEvents.js, generateGameModeMicroEvents.js (fixed), generateGenericCitizenMicroEvent.js, generationalEventsEngine.js, worldEventsEngine.js, generateCitizensEvents.js, textureTriggers.js, runAsUniversePipeline.js (already renamed to `mulberry32_uni_`). Recommend consolidating into `utilities/rng.js`.
+
+---
+
 ## SESSION_CONTEXT.md Update Needed
 
 Add to Session History and Current Work sections after merge:
@@ -108,6 +128,10 @@ Add to Session History and Current Work sections after merge:
   double-counting in countMajorEvents_, dayType magic number, demographics null safety
 - **faithEventsEngine.js v1.1**: Fixed holy day month (S.simMonth not wall clock), renamed shuffleArray_
   to shuffleFaithOrgs_ (namespace collision prevention)
+- **generateGameModeMicroEvents.js v1.3**: Converted direct sheet writes to write-intents
+  (queueRangeIntent_ for Simulation_Ledger, queueBatchAppendIntent_ for LifeHistory_Log),
+  renamed mulberry32_ to mulberry32GameMode_
 - **Story signals wired**: Phase6-TransitSignals + Phase6-FaithSignals added to V2 + V3 orchestrator pipelines
 - **V3 faith limitation documented**: crisis detection is sentiment-only in V3 (no worldEvents at Phase 3)
+- **Tech debt noted**: mulberry32_ defined in 10 files — consolidation needed
 ```

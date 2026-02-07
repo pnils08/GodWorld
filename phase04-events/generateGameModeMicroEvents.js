@@ -1,16 +1,21 @@
 /**
  * ============================================================================
- * generateGameModeMicroEvents_ v1.2 (schema-safe + per-cycle uniqueness)
+ * generateGameModeMicroEvents_ v1.3 (write-intents + namespace safety)
  * ============================================================================
  * - Log schema unchanged
  * - Optional determinism (ctx.rng or ctx.config.rngSeed)
  * - Tagged entries (no includes scanning)
  * - Batch log writes
- * - NEW: per-cycle uniqueness per citizen (no duplicate picked.text for same popId)
+ * - Per-cycle uniqueness per citizen (no duplicate picked.text for same popId)
+ *
+ * v1.3 Changes:
+ * - FIX: Simulation_Ledger update via queueRangeIntent_ (was direct setValues mid-cycle)
+ * - FIX: LifeHistory_Log append via queueBatchAppendIntent_ (was direct setValues)
+ * - FIX: Rename mulberry32_ to mulberry32GameMode_ to prevent flat namespace collision
  * ============================================================================
  */
 
-function mulberry32_(seed) {
+function mulberry32GameMode_(seed) {
   return function rng() {
     seed = (seed + 0x6D2B79F5) >>> 0;
     var t = seed;
@@ -55,7 +60,7 @@ function generateGameModeMicroEvents_(ctx) {
   var rng = (typeof ctx.rng === "function")
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
-      ? mulberry32_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
+      ? mulberry32GameMode_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
       : Math.random;
 
   function roll() { return rng(); }
@@ -473,11 +478,26 @@ function generateGameModeMicroEvents_(ctx) {
     eventCount++;
   }
 
-  ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+  // Write-intents: defer writes to Phase 10 persistence
+  if (eventCount > 0) {
+    if (typeof queueRangeIntent_ === 'function') {
+      queueRangeIntent_(ctx, 'Simulation_Ledger', 2, 1, rows,
+        'game mode micro events — update LifeHistory for ' + eventCount + ' citizens',
+        'events', 100);
+    } else {
+      // Fallback: direct write if write-intents not loaded
+      ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+    }
 
-  if (logSheet && logRows.length) {
-    var startRow = logSheet.getLastRow() + 1;
-    logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
+    if (logRows.length > 0) {
+      if (typeof queueBatchAppendIntent_ === 'function') {
+        queueBatchAppendIntent_(ctx, 'LifeHistory_Log', logRows,
+          'game mode micro event log entries', 'events', 200);
+      } else if (logSheet) {
+        var startRow = logSheet.getLastRow() + 1;
+        logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
+      }
+    }
   }
 
   S.gameModeMicroEvents = eventCount;
@@ -488,15 +508,15 @@ function generateGameModeMicroEvents_(ctx) {
 
 /**
  * ============================================================================
- * GAME MODE MICRO-EVENTS REFERENCE v1.2
+ * GAME MODE MICRO-EVENTS REFERENCE v1.3
  * ============================================================================
  *
  * Target: ClockMode === "GAME" citizens (public figures)
  * Limit: 15 events per cycle
  *
- * UPGRADE NOTES (v1.2):
- * - Deterministic RNG via mulberry32_ seeded by cycle
- * - Batch log writes (setValues instead of appendRow)
+ * UPGRADE NOTES (v1.3):
+ * - Deterministic RNG via mulberry32GameMode_ seeded by cycle
+ * - Writes via write-intents (queueRangeIntent_, queueBatchAppendIntent_)
  * - Per-cycle uniqueness per citizen (no duplicate events)
  * - Tagged entries (no includes scanning for tag detection)
  * - Rich detail output in summary.gameModeMicroEventDetails

@@ -188,9 +188,15 @@ SPORTS — BULLS:
 SPORTS — WARRIORS:
 — [Name] ([Position — note])
 
-JOURNALISTS:
+JOURNALISTS (BYLINE TRACKING ONLY — NOT CITIZEN USAGE):
 — [Name] ([N] articles)
   Example: — Carmen Delaine (3 articles)
+  NOTE: This section tracks reporter output for editorial
+  reference. Journalists writing articles are NOT citizens
+  appearing in stories — do NOT count as citizen usage or
+  advancement. A journalist is only citizen usage if they
+  appear AS A CHARACTER in someone else's article (e.g.,
+  Anthony quoted in a civic story about his brother).
 
 CITIZENS QUOTED IN ARTICLES (NEW):
 — [Name], [Age], [Neighborhood], [Occupation] ([article context])
@@ -356,7 +362,7 @@ Dear Editor,
 7. **Letters** — 2-4 citizen letters in first-person voice. Mix of topics from the cycle.
 8. **Article Table** — Engine intake format. All articles listed. ArticleText is summary only (1-2 sentences).
 9. **Storylines Updated** — NEW and RESOLVED only. Pipe-separated fields matching Storyline_Intake columns. Do NOT re-list active storylines.
-10. **Citizen Usage Log** — All citizens used, grouped by category. Exact formats required — feeds intake parser. No parentheses inside fields.
+10. **Citizen Usage Log** — All citizens used, grouped by category. Exact formats required — feeds intake parser. No parentheses inside fields. JOURNALISTS section is byline tracking only — does not feed citizen intake or advancement.
 11. **Continuity Notes** — Sports records, direct quotes, new canon figures ONLY. Do not repeat engine-tracked data (council, votes, weather).
 
 -----
@@ -368,3 +374,4 @@ Dear Editor,
 | v1.0    | 77    | Initial creation. Standardized section order, added Business Ticker, created Skyline Tribune header for Chicago Bureau, established journalist assignment guidelines with full roster coverage including support teams (photo, data, social). |
 | v1.1    | 78    | Added Canon Rules (no invented names, no engine metrics, verify against handoff). Added article length guidelines. Added Names Index as universal article footer. Added Letters format guidance. Clarified Article Table field definitions (ArticleText = summary). Added pipe table formatting note for Continuity Notes. Added header notes (omit holiday if none, copy engine numbers exactly). Bumped from lessons learned in Edition 78. |
 | v1.2    | 79    | Fixed Citizen Usage Log format with explicit examples and no-parens rule to match intake parser. Restructured Storylines Updated to pipe-separated NEW/RESOLVED only (no STILL ACTIVE re-listing). Simplified Continuity Notes to sports records, quotes, and new canon figures only (removed redundant engine-tracked data). Added Warriors sports category. |
+| v1.3    | 79    | Clarified JOURNALISTS section is byline tracking only — not citizen usage or advancement. Journalists writing articles are reporters, not characters. Only counts as citizen usage if they appear AS A CHARACTER in someone else's story. |

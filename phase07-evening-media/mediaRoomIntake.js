@@ -82,8 +82,7 @@ function processMediaIntake_(ctx) {
     ', Storylines: ' + results.storylines +
     ', Citizens: ' + results.citizenUsage +
     ', Routed: ' + (routing.routed || 0) +
-    ' (new: ' + (routing.newCitizens || 0) + ', existing: ' + (routing.existingCitizens || 0) +
-    ', dupes: ' + (routing.skippedDupes || 0) + ')');
+    ' (new: ' + (routing.newCitizens || 0) + ', existing: ' + (routing.existingCitizens || 0) + ')');
 
   return results;
 }
@@ -475,7 +474,7 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
  * @return {{ routed: number, newCitizens: number, existingCitizens: number }}
  */
 function routeCitizenUsageToIntake_(ss, cycle, cal) {
-  var results = { routed: 0, newCitizens: 0, existingCitizens: 0, skippedDupes: 0 };
+  var results = { routed: 0, newCitizens: 0, existingCitizens: 0 };
 
   var usageSheet = ss.getSheetByName('Citizen_Media_Usage');
   if (!usageSheet) return results;
@@ -516,10 +515,6 @@ function routeCitizenUsageToIntake_(ss, cycle, cal) {
   var advSheet = ss.getSheetByName('Advancement_Intake1');
   if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
 
-  // Dedup: track names already routed in this batch (normalized lowercase key)
-  var seenNew = {};      // names routed to Intake this batch
-  var seenExisting = {}; // names routed to Advancement this batch
-
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
 
@@ -533,69 +528,57 @@ function routeCitizenUsageToIntake_(ss, cycle, cal) {
     var context = contextCol >= 0 ? String(row[contextCol] || '').trim() : '';
 
     var nameParts = splitName_(citizenName);
-    var nameKey = (nameParts.first + ' ' + nameParts.last).toLowerCase().trim();
     var exists = citizenExistsInLedger_(ledgerData, nameParts.first, nameParts.last);
 
     if (exists) {
-      // Existing citizen → Advancement_Intake1 (first appearance only)
-      if (!seenExisting[nameKey]) {
-        if (advSheet) {
-          advSheet.appendRow([
-            nameParts.first,          // A: First
-            '',                       // B: Middle
-            nameParts.last,           // C: Last
-            '',                       // D: RoleType (keep existing)
-            '',                       // E: Tier (keep existing)
-            '',                       // F: ClockMode (keep existing)
-            '',                       // G: CIV
-            '',                       // H: MED
-            '',                       // I: UNI
-            'Media usage C' + cycle + ' (' + usageType + '): ' + context // J: Notes
-          ]);
-          results.existingCitizens++;
-        }
-        seenExisting[nameKey] = true;
-      } else {
-        results.skippedDupes++;
+      // Existing citizen → Advancement_Intake1
+      if (advSheet) {
+        advSheet.appendRow([
+          nameParts.first,          // A: First
+          '',                       // B: Middle
+          nameParts.last,           // C: Last
+          '',                       // D: RoleType (keep existing)
+          '',                       // E: Tier (keep existing)
+          '',                       // F: ClockMode (keep existing)
+          '',                       // G: CIV
+          '',                       // H: MED
+          '',                       // I: UNI
+          'Media usage C' + cycle + ' (' + usageType + '): ' + context // J: Notes
+        ]);
+        results.existingCitizens++;
       }
     } else {
-      // New citizen → Intake (first appearance only)
-      if (!seenNew[nameKey]) {
-        if (intakeSheet) {
-          intakeSheet.appendRow([
-            nameParts.first,          // A: First
-            '',                       // B: Middle
-            nameParts.last,           // C: Last
-            '',                       // D: OriginGame
-            'no',                     // E: UNI
-            'no',                     // F: MED
-            'no',                     // G: CIV
-            'ENGINE',                 // H: ClockMode
-            4,                        // I: Tier (default for media-introduced)
-            'Citizen',                // J: RoleType
-            'Active',                 // K: Status
-            '',                       // L: BirthYear
-            'Oakland',                // M: OriginCity
-            'Introduced via Media Room C' + cycle + '. ' + context, // N: LifeHistory
-            '',                       // O: OriginVault
-            ''                        // P: Neighborhood
-          ]);
-          results.newCitizens++;
-        }
-        seenNew[nameKey] = true;
-      } else {
-        results.skippedDupes++;
+      // New citizen → Intake
+      if (intakeSheet) {
+        intakeSheet.appendRow([
+          nameParts.first,          // A: First
+          '',                       // B: Middle
+          nameParts.last,           // C: Last
+          '',                       // D: OriginGame
+          'no',                     // E: UNI
+          'no',                     // F: MED
+          'no',                     // G: CIV
+          'ENGINE',                 // H: ClockMode
+          4,                        // I: Tier (default for media-introduced)
+          'Citizen',                // J: RoleType
+          'Active',                 // K: Status
+          '',                       // L: BirthYear
+          'Oakland',                // M: OriginCity
+          'Introduced via Media Room C' + cycle + '. ' + context, // N: LifeHistory
+          '',                       // O: OriginVault
+          ''                        // P: Neighborhood
+        ]);
+        results.newCitizens++;
       }
     }
 
-    // Mark as routed (all appearances, including dupes)
+    // Mark as routed
     usageSheet.getRange(i + 1, routedCol + 1).setValue('Y');
     results.routed++;
   }
 
   Logger.log('routeCitizenUsageToIntake_: Routed ' + results.routed +
-    ' citizens (new: ' + results.newCitizens + ', existing: ' + results.existingCitizens +
-    ', dupes skipped: ' + results.skippedDupes + ')');
+    ' citizens (new: ' + results.newCitizens + ', existing: ' + results.existingCitizens + ')');
 
   return results;
 }

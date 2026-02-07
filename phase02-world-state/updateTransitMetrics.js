@@ -10,15 +10,22 @@
  * - Season
  * - City sentiment and economic conditions
  *
- * @version 1.0
+ * @version 1.1
  * @tier 6.4
+ *
+ * v1.1 Changes:
+ * - FIX: Read previous cycle events from WorldEvents_Ledger (events don't exist at Phase 2)
+ * - FIX: dayType uses S.holiday from Phase 1, weekend probability as named constant
+ * - FIX: countMajorEvents_ no longer double-counts SPORTS events
+ * - FIX: Demographics null safety on adultsRatio calculation
+ * - WIRED: getTransitStorySignals_ consumed in Phase 6 orchestrator
  */
 
 // ============================================================================
 // CONSTANTS
 // ============================================================================
 
-var TRANSIT_UPDATE_VERSION = '1.0';
+var TRANSIT_UPDATE_VERSION = '1.1';
 
 // Transit variability factors
 var TRANSIT_FACTORS = {
@@ -42,7 +49,10 @@ var TRANSIT_FACTORS = {
 
   // Game day special handling
   GAMEDAY_RIDERSHIP_BOOST: 0.3,
-  GAMEDAY_TRAFFIC_INCREASE: 0.25
+  GAMEDAY_TRAFFIC_INCREASE: 0.25,
+
+  // Day type probability (cycles = weeks, so each cycle contains weekdays + weekends)
+  WEEKEND_PROBABILITY: 2 / 7
 };
 
 // ============================================================================
@@ -66,19 +76,19 @@ function updateTransitMetrics_Phase2_(ctx) {
     ensureTransitMetricsSchema_(ss);
   }
 
-  // Get context factors
+  // Get context factors (set by Phase 1 calendar)
   var weather = S.weather || {};
   var weatherType = weather.type || 'clear';
   var season = S.season || 'spring';
   var holiday = S.holiday || '';
-  var dayType = holiday ? 'holiday' : (rng() < 0.286 ? 'weekend' : 'weekday'); // ~2/7 days are weekend
+  var dayType = (holiday && holiday !== 'none') ? 'holiday' : (rng() < TRANSIT_FACTORS.WEEKEND_PROBABILITY ? 'weekend' : 'weekday');
 
-  // Get world events for event impact
-  var worldEvents = S.worldEvents || [];
-  var majorEvents = countMajorEvents_(worldEvents);
+  // Read PREVIOUS cycle events — current cycle events don't exist yet (generated in Phase 4)
+  var prevCycleEvents = loadPreviousCycleEvents_(ctx, cycle);
+  var majorEvents = countMajorEvents_(prevCycleEvents);
 
-  // Check for game day
-  var gameDay = isGameDay_(ctx, rng);
+  // Check for game day (uses previous cycle events + season-based probability)
+  var gameDay = isGameDay_(ctx, rng, prevCycleEvents);
 
   // Get demographics for ridership correlation
   var demographics = {};
@@ -170,7 +180,11 @@ function calculateStationMetrics_(station, context, demographics, rng) {
   // Demographic adjustment (working population)
   var hood = station.neighborhood;
   var demo = demographics[hood] || {};
-  var adultsRatio = demo.adults ? (demo.adults / (demo.students + demo.adults + demo.seniors || 1000)) : 0.6;
+  var adults = Number(demo.adults) || 0;
+  var students = Number(demo.students) || 0;
+  var seniors = Number(demo.seniors) || 0;
+  var totalPop = adults + students + seniors;
+  var adultsRatio = totalPop > 0 ? (adults / totalPop) : 0.6;
   ridershipMod *= (0.7 + adultsRatio * 0.5); // More working adults = more riders
 
   // Game day boost for Coliseum
@@ -301,6 +315,56 @@ function calculateTrafficModLocal_(context) {
 // ============================================================================
 
 /**
+ * Load world events from the previous cycle.
+ * Transit metrics react to recent event patterns since current cycle
+ * events are not generated until Phase 4.
+ *
+ * @param {Object} ctx - Engine context
+ * @param {number} currentCycle
+ * @return {Array}
+ */
+function loadPreviousCycleEvents_(ctx, currentCycle) {
+  if (currentCycle <= 1) return [];
+
+  var prevCycle = currentCycle - 1;
+  var ss = ctx.ss;
+  var sheetName = (typeof SHEET_NAMES !== 'undefined' && SHEET_NAMES.WORLD_EVENTS_LEDGER)
+    ? SHEET_NAMES.WORLD_EVENTS_LEDGER
+    : 'WorldEvents_Ledger';
+
+  var sheet = null;
+  if (typeof getCachedSheet_ === 'function') {
+    sheet = getCachedSheet_(ss, sheetName);
+  } else {
+    sheet = ss.getSheetByName(sheetName);
+  }
+
+  if (!sheet || sheet.getLastRow() < 2) return [];
+
+  var data = sheet.getDataRange().getValues();
+  var header = data[0];
+  var rows = data.slice(1);
+
+  var cycleIdx = header.indexOf('Cycle');
+  var domainIdx = header.indexOf('Domain');
+  var severityIdx = header.indexOf('Severity');
+  if (cycleIdx === -1) return [];
+
+  var events = [];
+  for (var i = 0; i < rows.length; i++) {
+    var rowCycle = Number(rows[i][cycleIdx]) || 0;
+    if (rowCycle !== prevCycle) continue;
+
+    events.push({
+      domain: domainIdx >= 0 ? String(rows[i][domainIdx] || '') : '',
+      severity: severityIdx >= 0 ? String(rows[i][severityIdx] || '') : ''
+    });
+  }
+
+  return events;
+}
+
+/**
  * Count major events from world events.
  *
  * @param {Array} worldEvents
@@ -313,8 +377,12 @@ function countMajorEvents_(worldEvents) {
     var severity = (evt.severity || '').toLowerCase();
     var domain = (evt.domain || evt._domain || '').toUpperCase();
 
-    if (severity === 'high' || severity === 'medium') count++;
-    if (domain === 'SPORTS' || domain === 'CELEBRATION' || domain === 'FESTIVAL') count++;
+    // Count each event once: domain match takes priority over severity
+    if (domain === 'SPORTS' || domain === 'CELEBRATION' || domain === 'FESTIVAL') {
+      count++;
+    } else if (severity === 'high' || severity === 'medium') {
+      count++;
+    }
   }
   return count;
 }
@@ -326,20 +394,20 @@ function countMajorEvents_(worldEvents) {
  * @param {Function} rng
  * @return {boolean}
  */
-function isGameDay_(ctx, rng) {
+function isGameDay_(ctx, rng, prevCycleEvents) {
   var S = ctx.summary || {};
 
-  // Check for sports events
-  var worldEvents = S.worldEvents || [];
-  for (var i = 0; i < worldEvents.length; i++) {
-    var domain = (worldEvents[i].domain || worldEvents[i]._domain || '').toUpperCase();
+  // Check previous cycle for sports events (current cycle events don't exist yet)
+  var events = prevCycleEvents || [];
+  for (var i = 0; i < events.length; i++) {
+    var domain = (events[i].domain || events[i]._domain || '').toUpperCase();
     if (domain === 'SPORTS') return true;
   }
 
-  // Random game day probability (baseball season ~50% of days have games)
-  var season = S.season || 'spring';
+  // Season-based probability (baseball season ~50% of days have games)
+  var season = (S.season || 'spring').toLowerCase();
   if (season === 'spring' || season === 'summer' || season === 'fall') {
-    return rng() < 0.15; // 15% chance of game day
+    return rng() < 0.15;
   }
 
   return false;

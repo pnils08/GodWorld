@@ -230,6 +230,15 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase6-ArcLifecycle', function() { processArcLifecycle_(ctx); });
   safePhaseCall_(ctx, 'Phase6-StorylineStatus', function() { updateStorylineStatus_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Textures', function() { textureTriggerEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-TransitSignals', function() {
+    if (typeof getTransitStorySignals_ === 'function') {
+      var signals = getTransitStorySignals_(ctx);
+      if (signals.length > 0) {
+        var S = ctx.summary || {};
+        S.transitStorySignals = signals;
+      }
+    }
+  });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 7: EVENING + MEDIA SYSTEMS
@@ -1339,6 +1348,15 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase6-ArcLifecycle', function() { processArcLifecycle_(ctx); });
   safePhaseCall_(ctx, 'Phase6-StorylineStatus', function() { updateStorylineStatus_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Textures', function() { textureTriggerEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-TransitSignals', function() {
+    if (typeof getTransitStorySignals_ === 'function') {
+      var signals = getTransitStorySignals_(ctx);
+      if (signals.length > 0) {
+        var S = ctx.summary || {};
+        S.transitStorySignals = signals;
+      }
+    }
+  });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 7: EVENING + MEDIA SYSTEMS

@@ -1,4 +1,4 @@
-# Desk Packet Pipeline v1.0
+# Desk Packet Pipeline v1.1
 
 **Purpose:** The definitive process for generating The Cycle Pulse using per-desk JSON packets and parallel desk agents. Replaces the monolithic handoff approach.
 
@@ -205,7 +205,31 @@ Rhea receives the compiled edition + canon sources:
 
 1. Apply Rhea's corrections
 2. Save to `editions/cycle_pulse_edition_{XX}_v2.txt`
-3. Parse edition returns into sheets via intake scripts
+3. Parse edition returns into intake sheets, then process into final ledgers
+
+### Scripts
+
+```bash
+# Step 1: Parse edition text → 4 intake sheets
+node scripts/editionIntake.js [cycle]          # --dry-run to preview
+# Writes: Media_Intake, Storyline_Intake, Citizen_Usage_Intake, LifeHistory_Log (quotes)
+
+# Step 2: Process intake sheets → final ledgers + citizen routing
+node scripts/processIntake.js [cycle]          # --cleanup to fix broken rows
+# Writes: Press_Drafts (14 cols), Storyline_Tracker (14 cols),
+#         Citizen_Media_Usage (12 cols) → routes to Intake / Advancement_Intake1
+```
+
+### Calendar Context (v1.1)
+
+Calendar data is parsed from the `--- CALENDAR ---` section in the `Cycle_Packet` sheet's PacketText field — NOT from `World_Population` (which has no calendar columns). Extracted fields: Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason, Month.
+
+### Citizen Routing (v1.1)
+
+Citizens in `Citizen_Media_Usage` are checked against `Simulation_Ledger`:
+- **New citizens** → `Intake` sheet (16 cols) with demographics extracted from name field format `"Name, Age, Neighborhood, Occupation"` → populates BirthYear, Neighborhood, RoleType
+- **Existing citizens** → `Advancement_Intake1` sheet (10 cols) with RoleType from demographics and media usage notes
+- Writes use explicit column ranges (`Intake!A:P`, `Advancement_Intake1!A:J`) to prevent Sheets API table-detection column shift
 
 ---
 
@@ -224,4 +248,5 @@ Rhea receives the compiled edition + canon sources:
 
 | Version | Cycle | Changes |
 |---------|-------|---------|
+| v1.1 | 79 | Stage 7 documented with editionIntake.js + processIntake.js v1.1. Calendar from Cycle_Packet, demographic extraction, citizen routing with explicit ranges. |
 | v1.0 | 79 | Initial creation. Per-desk JSON packets, parallel agent architecture, 7-stage pipeline. |

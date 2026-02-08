@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * PROCESS MEDIA INTAKE v1.0
+ * PROCESS MEDIA INTAKE v1.1
  * ============================================================================
  *
  * Node.js equivalent of processMediaIntakeV2() from mediaRoomIntake.js.
@@ -8,12 +8,21 @@
  *
  * Usage:
  *   node scripts/processIntake.js [cycle-number]
+ *   node scripts/processIntake.js [cycle-number] --cleanup
  *
  * Processes:
  *   1. Media_Intake → Press_Drafts (14 cols with calendar)
  *   2. Storyline_Intake → Storyline_Tracker (14 cols, with resolution)
  *   3. Citizen_Usage_Intake → Citizen_Media_Usage (12 cols)
  *   4. Citizen_Media_Usage → Intake / Advancement_Intake1 (routing)
+ *
+ * v1.1 Changes:
+ * - Calendar context now parsed from Cycle_Packet text (--- CALENDAR --- section)
+ *   instead of World_Population which has no calendar columns
+ * - Full demographic extraction from citizen name format "Name, Age, Neighborhood, Occupation"
+ * - Intake sheet now populated with BirthYear, Neighborhood, and actual RoleType/Occupation
+ * - Advancement_Intake1 writes use explicit A:J range to prevent column shift
+ * - --cleanup flag fixes broken shifted rows in Advancement_Intake1
  *
  * ============================================================================
  */
@@ -22,39 +31,176 @@ const sheets = require('../lib/sheets');
 
 
 // ════════════════════════════════════════════════════════════════════════════
-// CALENDAR CONTEXT
+// CALENDAR CONTEXT — Parsed from Cycle_Packet text
 // ════════════════════════════════════════════════════════════════════════════
 
-async function getCalendarContext() {
+async function getCalendarContext(cycle) {
   const defaults = {
     season: '',
     holiday: 'none',
     holidayPriority: 'none',
     isFirstFriday: false,
     isCreationDay: false,
-    sportsSeason: 'off-season'
+    sportsSeason: 'off-season',
+    month: 0
   };
 
   try {
-    const data = await sheets.getSheetData('World_Population');
+    const data = await sheets.getSheetData('Cycle_Packet');
     if (data.length < 2) return defaults;
 
     const headers = data[0];
-    const row = data[1];
-    const idx = (name) => headers.indexOf(name);
+    const cycleCol = headers.indexOf('Cycle');
+    const textCol = headers.indexOf('PacketText');
+    if (textCol < 0) return defaults;
 
-    if (idx('season') >= 0) defaults.season = row[idx('season')] || '';
-    if (idx('holiday') >= 0) defaults.holiday = row[idx('holiday')] || 'none';
-    if (idx('holidayPriority') >= 0) defaults.holidayPriority = row[idx('holidayPriority')] || 'none';
-    if (idx('isFirstFriday') >= 0) defaults.isFirstFriday = row[idx('isFirstFriday')] === true || row[idx('isFirstFriday')] === 'TRUE';
-    if (idx('isCreationDay') >= 0) defaults.isCreationDay = row[idx('isCreationDay')] === true || row[idx('isCreationDay')] === 'TRUE';
-    if (idx('sportsSeason') >= 0) defaults.sportsSeason = row[idx('sportsSeason')] || 'off-season';
+    // Find the packet for the target cycle (search backwards for most recent)
+    let packetText = '';
+    for (let i = data.length - 1; i >= 1; i--) {
+      const rowCycle = parseInt(data[i][cycleCol >= 0 ? cycleCol : 1]) || 0;
+      if (rowCycle === cycle) {
+        packetText = (data[i][textCol >= 0 ? textCol : 2] || '').toString();
+        break;
+      }
+    }
+
+    if (!packetText) {
+      console.log('  Warning: No Cycle_Packet row found for cycle ' + cycle);
+      return defaults;
+    }
+
+    // Parse --- CALENDAR --- section
+    // The section ends at the next --- header or a double newline
+    const calMatch = packetText.match(/---\s*CALENDAR\s*---\s*\n([\s\S]*?)(?:\n---|\n\n\n)/i);
+    if (!calMatch) {
+      console.log('  Warning: No --- CALENDAR --- section found in Cycle_Packet');
+      return defaults;
+    }
+
+    const calSection = calMatch[1];
+
+    // Season: "Season: Summer"
+    const seasonMatch = calSection.match(/Season:\s*(\w+)/i);
+    if (seasonMatch) defaults.season = seasonMatch[1];
+
+    // Holiday: "Holiday: Independence [major] @ Lake Merritt"
+    const holidayMatch = calSection.match(/Holiday:\s*(\w+)\s*\[(\w+)\]/i);
+    if (holidayMatch) {
+      defaults.holiday = holidayMatch[1];
+      defaults.holidayPriority = holidayMatch[2];
+    } else {
+      // Check for "Holiday: none"
+      const noneMatch = calSection.match(/Holiday:\s*none/i);
+      if (noneMatch) {
+        defaults.holiday = 'none';
+        defaults.holidayPriority = 'none';
+      }
+    }
+
+    // First Friday: line contains "FIRST FRIDAY"
+    if (/FIRST\s+FRIDAY/i.test(calSection)) {
+      defaults.isFirstFriday = true;
+    }
+
+    // Creation Day
+    if (/CREATION\s*DAY/i.test(calSection)) {
+      defaults.isCreationDay = true;
+    }
+
+    // Month: "Month: 7 (July)"
+    const monthMatch = calSection.match(/Month:\s*(\d+)/i);
+    if (monthMatch) {
+      defaults.month = parseInt(monthMatch[1]);
+
+      // Derive sportsSeason from month (tracks baseball — Oakland A's primary)
+      const m = defaults.month;
+      if (m >= 2 && m <= 3) defaults.sportsSeason = 'spring-training';
+      else if (m >= 4 && m <= 9) defaults.sportsSeason = 'mid-season';
+      else if (m === 10) defaults.sportsSeason = 'playoffs';
+      else defaults.sportsSeason = 'off-season';
+    }
 
     return defaults;
   } catch (e) {
-    console.log(`  Warning: Could not read World_Population: ${e.message}`);
+    console.log(`  Warning: Could not read Cycle_Packet: ${e.message}`);
     return defaults;
   }
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
+// CITIZEN DEMOGRAPHIC PARSING
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Parse citizen name field which may contain demographics.
+ * Handles formats:
+ *   "Bruce Wright, 48, Downtown, Line cook"  → full demographics
+ *   "Gloria Santos, Fruitvale, Teacher"       → no age
+ *   "Denise Carter"                           → name only
+ *   "Gallery Owner Mei Chen"                  → name with title prefix
+ *
+ * @param {string} fullField - The CitizenName field value
+ * @returns {{ first: string, last: string, age: string, neighborhood: string, occupation: string }}
+ */
+function parseCitizenDemographics(fullField) {
+  const result = { first: '', last: '', age: '', neighborhood: '', occupation: '' };
+  if (!fullField) return result;
+
+  const parts = fullField.split(',').map(p => p.trim());
+
+  if (parts.length >= 4) {
+    // Full format: "Bruce Wright, 48, Downtown, Line cook"
+    const nameParts = parts[0].split(/\s+/);
+    result.first = nameParts[0] || '';
+    result.last = nameParts.slice(1).join(' ') || '';
+    result.age = parts[1] || '';
+    result.neighborhood = parts[2] || '';
+    result.occupation = parts.slice(3).join(', ').trim();
+  } else if (parts.length === 3) {
+    // "Name, Neighborhood, Occupation" or "Name, Age, Neighborhood"
+    const nameParts = parts[0].split(/\s+/);
+    result.first = nameParts[0] || '';
+    result.last = nameParts.slice(1).join(' ') || '';
+
+    if (/^\d+$/.test(parts[1])) {
+      // Second part is a number → age
+      result.age = parts[1];
+      result.neighborhood = parts[2];
+    } else {
+      result.neighborhood = parts[1];
+      result.occupation = parts[2];
+    }
+  } else if (parts.length === 2) {
+    // "Name, Neighborhood" or "Name, Age"
+    const nameParts = parts[0].split(/\s+/);
+    result.first = nameParts[0] || '';
+    result.last = nameParts.slice(1).join(' ') || '';
+
+    if (/^\d+$/.test(parts[1])) {
+      result.age = parts[1];
+    } else {
+      result.neighborhood = parts[1];
+    }
+  } else {
+    // Just a name, possibly with parenthetical: "Name (details)"
+    const cleaned = parts[0].replace(/\s*\([^)]*\)\s*$/, '').trim();
+    const nameParts = cleaned.split(/\s+/);
+    result.first = nameParts[0] || '';
+    result.last = nameParts.slice(1).join(' ') || '';
+  }
+
+  return result;
+}
+
+/**
+ * Calculate birth year from age string.
+ * GodWorld simulation year is fixed at 2026.
+ */
+function birthYearFromAge(ageStr) {
+  const age = parseInt(ageStr);
+  if (isNaN(age) || age <= 0 || age > 120) return '';
+  return 2026 - age;
 }
 
 
@@ -193,7 +339,6 @@ async function processStorylineIntake(cycle, cal) {
           for (const resolveKey of resolveDescriptions) {
             const key = resolveKey.toLowerCase();
             if (trackerDesc.includes(key) || key.includes(trackerDesc)) {
-              // Use 1-indexed row, and column letter from index
               const colLetter = String.fromCharCode(65 + statusCol);
               resolveUpdates.push({
                 range: `Storyline_Tracker!${colLetter}${r + 1}`,
@@ -312,14 +457,6 @@ async function processCitizenUsageIntake(cycle, cal) {
 // 4. CITIZEN ROUTING → INTAKE / ADVANCEMENT_INTAKE1
 // ════════════════════════════════════════════════════════════════════════════
 
-function splitName(fullField) {
-  // Handle "Name, Age, Neighborhood, Occupation" format
-  const namePart = fullField.split(',')[0].trim();
-  const parts = namePart.split(/\s+/);
-  if (parts.length === 1) return { first: parts[0], last: '' };
-  return { first: parts[0], last: parts.slice(1).join(' ') };
-}
-
 function citizenExistsInLedger(ledgerData, firstName, lastName) {
   if (ledgerData.length < 2) return false;
 
@@ -361,7 +498,6 @@ async function routeCitizenUsageToIntake(cycle, cal) {
   // If no Routed column exists, it's the column after the last header
   if (routedCol < 0) {
     routedCol = headers.length;
-    // Add the header
     const colLetter = String.fromCharCode(65 + routedCol);
     await sheets.updateRange(`Citizen_Media_Usage!${colLetter}1`, [['Routed']]);
   }
@@ -399,41 +535,45 @@ async function routeCitizenUsageToIntake(cycle, cal) {
     const usageType = usageTypeCol >= 0 ? (row[usageTypeCol] || '').toString().trim() : '';
     const context = contextCol >= 0 ? (row[contextCol] || '').toString().trim() : '';
 
-    const nameParts = splitName(citizenName);
-    const exists = citizenExistsInLedger(ledgerData, nameParts.first, nameParts.last);
+    // Parse full demographics from citizen name field
+    const demo = parseCitizenDemographics(citizenName);
+    const exists = citizenExistsInLedger(ledgerData, demo.first, demo.last);
 
     if (exists) {
+      // Existing citizen → Advancement_Intake1
       advancementRows.push([
-        nameParts.first,          // A: First
-        '',                       // B: Middle
-        nameParts.last,           // C: Last
-        '',                       // D: RoleType
-        '',                       // E: Tier
-        '',                       // F: ClockMode
-        '',                       // G: CIV
-        '',                       // H: MED
-        '',                       // I: UNI
+        demo.first,                   // A: First
+        '',                           // B: Middle
+        demo.last,                    // C: Last
+        demo.occupation || '',        // D: RoleType (from demographics)
+        '',                           // E: Tier
+        '',                           // F: ClockMode
+        '',                           // G: CIV
+        '',                           // H: MED
+        '',                           // I: UNI
         `Media usage C${cycle} (${usageType}): ${context}` // J: Notes
       ]);
       results.existingCitizens++;
     } else {
+      // New citizen → Intake (16 columns)
+      const birthYear = birthYearFromAge(demo.age);
       intakeRows.push([
-        nameParts.first,          // A: First
-        '',                       // B: Middle
-        nameParts.last,           // C: Last
-        '',                       // D: OriginGame
-        'no',                     // E: UNI
-        'no',                     // F: MED
-        'no',                     // G: CIV
-        'ENGINE',                 // H: ClockMode
-        4,                        // I: Tier
-        'Citizen',                // J: RoleType
-        'Active',                 // K: Status
-        '',                       // L: BirthYear
-        'Oakland',                // M: OriginCity
+        demo.first,                   // A: First
+        '',                           // B: Middle
+        demo.last,                    // C: Last
+        '',                           // D: OriginGame
+        'no',                         // E: UNI
+        'no',                         // F: MED
+        'no',                         // G: CIV
+        'ENGINE',                     // H: ClockMode
+        4,                            // I: Tier
+        demo.occupation || 'Citizen', // J: RoleType (from demographics)
+        'Active',                     // K: Status
+        birthYear,                    // L: BirthYear (from age)
+        'Oakland',                    // M: OriginCity
         `Introduced via Media Room C${cycle}. ${context}`, // N: LifeHistory
-        '',                       // O: OriginVault
-        ''                        // P: Neighborhood
+        '',                           // O: OriginVault
+        demo.neighborhood || ''       // P: Neighborhood (from demographics)
       ]);
       results.newCitizens++;
     }
@@ -447,15 +587,18 @@ async function routeCitizenUsageToIntake(cycle, cal) {
     results.routed++;
   }
 
-  // Write batches
+  // Write Intake rows — use explicit column range A:P
   if (intakeRows.length > 0 && hasIntake) {
-    await sheets.appendRows('Intake', intakeRows);
+    await sheets.appendRows('Intake!A:P', intakeRows);
   }
+
+  // Write Advancement rows — use explicit column range A:J to prevent column shift
   if (advancementRows.length > 0 && hasAdvancement) {
-    await sheets.appendRows(advSheetName, advancementRows);
+    await sheets.appendRows(`${advSheetName}!A:J`, advancementRows);
   }
+
+  // Mark as routed in batches of 50
   if (routeUpdates.length > 0) {
-    // Batch in chunks of 50 to avoid API limits
     for (let i = 0; i < routeUpdates.length; i += 50) {
       await sheets.batchUpdate(routeUpdates.slice(i, i + 50));
     }
@@ -466,14 +609,110 @@ async function routeCitizenUsageToIntake(cycle, cal) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
+// CLEANUP: Fix broken Advancement_Intake1 rows
+// ════════════════════════════════════════════════════════════════════════════
+
+/**
+ * Fixes rows in Advancement_Intake1 where data was shifted right by N columns
+ * due to the Sheets API append table-detection bug. Detects rows where column A
+ * is empty but later columns contain data, then shifts the data back to column A.
+ */
+async function cleanupAdvancementIntake() {
+  console.log('  Reading Advancement_Intake1...');
+  const data = await sheets.getSheetData('Advancement_Intake1');
+  if (data.length < 2) {
+    console.log('  No data to clean up');
+    return 0;
+  }
+
+  const headers = data[0];
+  const expectedCols = headers.length; // 10 columns (A:J)
+  const fixes = [];
+
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+    const aVal = (row[0] || '').toString().trim();
+
+    // Skip rows that already have data in column A (these are fine)
+    if (aVal) continue;
+
+    // Find first non-empty cell in this row
+    let firstDataCol = -1;
+    for (let c = 1; c < row.length; c++) {
+      if (row[c] && row[c].toString().trim()) {
+        firstDataCol = c;
+        break;
+      }
+    }
+
+    if (firstDataCol < 0) continue; // Completely empty row
+
+    // This row is shifted — extract the data starting at firstDataCol
+    const shiftedData = row.slice(firstDataCol, firstDataCol + expectedCols);
+
+    // Pad to expected column count
+    while (shiftedData.length < expectedCols) {
+      shiftedData.push('');
+    }
+
+    const sheetRow = i + 1; // 1-indexed
+    fixes.push({
+      row: sheetRow,
+      corrected: shiftedData,
+      totalColsToWrite: Math.max(expectedCols, row.length) // need to clear the old shifted data too
+    });
+  }
+
+  if (fixes.length === 0) {
+    console.log('  No broken rows found');
+    return 0;
+  }
+
+  console.log(`  Found ${fixes.length} broken rows to fix`);
+
+  // Build batch updates: write corrected data to A:J and clear excess columns
+  const updates = [];
+  for (const fix of fixes) {
+    // Write corrected data to columns A through J
+    updates.push({
+      range: `Advancement_Intake1!A${fix.row}:J${fix.row}`,
+      values: [fix.corrected.slice(0, expectedCols)]
+    });
+
+    // Clear excess columns (K onwards) that still have old shifted data
+    if (fix.totalColsToWrite > expectedCols) {
+      const clearCount = fix.totalColsToWrite - expectedCols;
+      const startCol = String.fromCharCode(65 + expectedCols); // 'K'
+      const endCol = String.fromCharCode(65 + expectedCols + clearCount - 1);
+      const clearRow = new Array(clearCount).fill('');
+      updates.push({
+        range: `Advancement_Intake1!${startCol}${fix.row}:${endCol}${fix.row}`,
+        values: [clearRow]
+      });
+    }
+  }
+
+  // Execute in batches of 50
+  for (let i = 0; i < updates.length; i += 50) {
+    await sheets.batchUpdate(updates.slice(i, i + 50));
+  }
+
+  console.log(`  Fixed ${fixes.length} rows`);
+  return fixes.length;
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
 // MAIN
 // ════════════════════════════════════════════════════════════════════════════
 
 async function main() {
-  const cycle = parseInt(process.argv[2]) || 79;
+  const args = process.argv.slice(2);
+  const cycle = parseInt(args.find(a => /^\d+$/.test(a))) || 79;
+  const doCleanup = args.includes('--cleanup');
 
   console.log('');
-  console.log('=== PROCESS MEDIA INTAKE v1.0 ===');
+  console.log('=== PROCESS MEDIA INTAKE v1.1 ===');
   console.log(`Cycle: ${cycle}`);
   console.log('');
 
@@ -483,11 +722,23 @@ async function main() {
   console.log(`Connected: ${conn.title}`);
   console.log('');
 
-  // Get calendar context
-  console.log('Reading calendar context...');
-  const cal = await getCalendarContext();
+  // Cleanup mode — fix broken rows then exit
+  if (doCleanup) {
+    console.log('=== CLEANUP MODE ===');
+    console.log('');
+    console.log('Fixing Advancement_Intake1 shifted rows...');
+    const fixed = await cleanupAdvancementIntake();
+    console.log('');
+    console.log(`=== CLEANUP COMPLETE: ${fixed} rows fixed ===`);
+    console.log('');
+    return;
+  }
+
+  // Get calendar context from Cycle_Packet
+  console.log('Reading calendar context from Cycle_Packet...');
+  const cal = await getCalendarContext(cycle);
   console.log(`  Season: ${cal.season}, Holiday: ${cal.holiday} (${cal.holidayPriority})`);
-  console.log(`  FirstFriday: ${cal.isFirstFriday}, Sports: ${cal.sportsSeason}`);
+  console.log(`  FirstFriday: ${cal.isFirstFriday}, Sports: ${cal.sportsSeason}, Month: ${cal.month}`);
   console.log('');
 
   // Step 1: Articles
@@ -520,6 +771,7 @@ async function main() {
   console.log(`  Storylines: ${storylineCount} -> Storyline_Tracker`);
   console.log(`  Citizens:   ${citizenCount} -> Citizen_Media_Usage`);
   console.log(`  Routing:    ${routing.routed} (${routing.newCitizens} new, ${routing.existingCitizens} existing)`);
+  console.log(`  Calendar:   ${cal.season} / ${cal.holiday} (${cal.holidayPriority}) / FF:${cal.isFirstFriday}`);
   console.log('');
 }
 

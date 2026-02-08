@@ -312,30 +312,37 @@ The Agent Newsroom depends on a data pipeline that is partially built but not ye
 ### Current Pipeline State
 
 ```
-Engine runs in Google Apps Script (WORKING - Cycle 78)
+Engine runs in Google Apps Script (WORKING - Cycle 79)
     |
-Export cycle data to local filesystem (CODE EXISTS - exports/ is empty)
+Google Sheets API pull via service account (WORKING - lib/sheets.js)
+    |
+Per-desk JSON packets (WORKING - scripts/buildDeskPackets.js)
+    |
+Parallel desk agents via Claude Code (WORKING - 6 desks, Edition 79 produced)
+    |
+Compile + Verify (WORKING - Mags + Rhea agents)
+    |
+Engine Intake (WORKING - editionIntake.js + processIntake.js v1.1)
     |
 Sync exports to SQLite (CODE EXISTS - no data to feed it)
     |
 MCP server for agent data access (NOT BUILT)
     |
-Agent Newsroom (NOT BUILT)
+Agent Newsroom (NOT BUILT - superseded by Desk Packet Pipeline for now)
 ```
 
-### Layer 1: Data Bridge (Google Apps Script -> Local)
+### Layer 1: Data Bridge (Google Apps Script -> Local) — COMPLETE
 
-The engine runs in Apps Script and `exportCycleArtifacts.js` exists to write context packs, but `exports/` is currently empty. The bridge between Apps Script and the local filesystem needs to be established.
+Google Sheets API pull via service account is fully operational. The `lib/sheets.js` client handles auth, read, and write operations against all 78+ sheets in the spreadsheet.
 
-**Options:**
-- Google Sheets API pull via service account (credentials exist but `GODWORLD_SHEET_ID` not configured)
-- Apps Script webhook to a local endpoint
-- Manual export after each cycle run
-
-**What exists:**
-- `exportCycleArtifacts.js` - writes `cycle-XX-context.json`, `cycle-XX-summary.json`, `manifest.json`
-- `.env.example` has `GODWORLD_SHEET_ID` placeholder
-- Service account project `godworld-486407` created with Drive API enabled
+**What's working:**
+- `lib/sheets.js` — Sheets API client (read/write scope, service account auth)
+- `scripts/buildDeskPackets.js` — Pulls from 16 sheets, generates per-desk JSON packets
+- `scripts/editionIntake.js` — Parses edition text, writes to 4 intake sheets
+- `scripts/processIntake.js` — Processes intake to final ledgers, routes citizens
+- `.env` has `GODWORLD_SHEET_ID` configured
+- `credentials/service-account.json` — Service account with Sheets API access
+- See `docs/media/DESK_PACKET_PIPELINE.md` for the full 7-stage pipeline
 
 ### Layer 2: Local Data Store
 

@@ -241,25 +241,48 @@ Use this checklist before handoff:
 
 ## 6) Engine workflow (quick reference)
 
+### Option A: Apps Script (manual, in-sheet)
+
 1. Paste Media Room output into `MediaRoom_Paste`
 2. Run `parseMediaRoomMarkdown()` (writes intake sheets)
 3. Run `processMediaIntakeV2()` (moves to ledgers + calendar context)
 
-### Intake sheets (populated by parseMediaRoomMarkdown)
+### Option B: Node.js CLI (automated, from local)
+
+```bash
+# Step 1: Parse edition text → intake sheets
+node scripts/editionIntake.js [cycle]            # --dry-run to preview
+# Step 2: Process intake → final ledgers + citizen routing
+node scripts/processIntake.js [cycle]            # --cleanup to fix broken rows
+```
+
+The Node.js scripts (`editionIntake.js` + `processIntake.js`) replicate the Apps Script logic via Google Sheets API (service account auth in `lib/sheets.js`). Both paths produce identical output.
+
+### Intake sheets (populated by parseMediaRoomMarkdown / editionIntake.js)
 | Sheet | Columns |
 |-------|---------|
 | Media_Intake | Reporter, StoryType, SignalSource, Headline, ArticleText, CulturalMentions, Status |
 | Storyline_Intake | StorylineType, Description, Neighborhood, RelatedCitizens, Priority, Status |
 | Citizen_Usage_Intake | CitizenName, UsageType, Context, Reporter, Status |
-| Continuity_Intake | NoteType, Description, RelatedArc, AffectedCitizens, Status |
+| LifeHistory_Log | Timestamp, POPID, Name, EventTag, EventText, Neighborhood, Cycle (direct quotes only) |
 
-### Output ledgers (populated by processMediaIntakeV2 with calendar context)
+### Output ledgers (populated by processMediaIntakeV2 / processIntake.js with calendar context)
 | Sheet | Columns |
 |-------|---------|
 | Press_Drafts | 14 columns (8 core + 6 calendar) |
 | Storyline_Tracker | 14 columns (8 core + 6 calendar) |
-| Citizen_Media_Usage | 12 columns (6 core + 6 calendar) |
-| Continuity_Loop | 13 columns (7 core + 6 calendar) |
+| Citizen_Media_Usage | 12 columns (6 core + 6 calendar) + Routed column |
+
+### Citizen routing (processIntake.js v1.1)
+| Source | Destination | Fields Populated |
+|--------|------------|-----------------|
+| New citizens | `Intake` (16 cols) | First, Last, RoleType (from occupation), BirthYear (from age), Neighborhood, LifeHistory |
+| Existing citizens | `Advancement_Intake1` (10 cols) | First, Last, RoleType (from occupation), Notes |
+
+Demographics are extracted from the CitizenName field format: `"Name, Age, Neighborhood, Occupation"`.
+
+### Calendar context source
+Calendar data is parsed from the `--- CALENDAR ---` section in `Cycle_Packet.PacketText` (NOT from `World_Population`, which has no calendar columns). Extracted: Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason, Month.
 
 ### Calendar columns (added to all output ledgers)
 `Season, Holiday, HolidayPriority, IsFirstFriday, IsCreationDay, SportsSeason`
@@ -270,6 +293,8 @@ Use this checklist before handoff:
 
 | Version | Changes |
 |---------|---------|
+| v2.5+node | Node.js CLI scripts (`editionIntake.js` v1.0, `processIntake.js` v1.1). Calendar from Cycle_Packet text. Demographic extraction (age→BirthYear, neighborhood, occupation→RoleType). Explicit range writes to prevent Sheets API column shift. Cleanup mode for broken rows. |
+| v2.5 | `routeCitizenUsageToIntake_`: Routes Citizen_Media_Usage to Intake (new) or Advancement_Intake1 (existing). Separate "Routed" column. |
 | v2.2 | Raw citizen usage log parsing, citizen existence check, routing (new → Intake, existing → Advancement_Intake), quote extraction to LifeHistory_Log |
 | v2.1 | Calendar columns in all output sheets, calendar signal sources and story types |
 | v2.0 | Initial structured intake with four streams |
@@ -278,5 +303,11 @@ Use this checklist before handoff:
 
 ## 8) Source files
 
+### Apps Script (in-sheet)
 - `phase07-evening-media/parseMediaRoomMarkdown.js` — Parser (v1.4: bold header support, pipe table handling)
-- `phase07-evening-media/mediaRoomIntake.js` — Processor (v2.3: engine-callable via processMediaIntake_(ctx), replaces deleted processMediaIntake.js)
+- `phase07-evening-media/mediaRoomIntake.js` — Processor (v2.5: engine-callable via processMediaIntake_(ctx), citizen routing via routeCitizenUsageToIntake_)
+
+### Node.js CLI (local)
+- `scripts/editionIntake.js` — Parser (reads edition text file, writes to 4 intake sheets via Sheets API)
+- `scripts/processIntake.js` — Processor (v1.1: calendar from Cycle_Packet, demographic extraction, explicit range writes, --cleanup flag)
+- `lib/sheets.js` — Google Sheets API client (getSheetData, getSheetAsObjects, appendRows, updateRange, batchUpdate)

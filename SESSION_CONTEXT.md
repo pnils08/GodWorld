@@ -164,6 +164,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - Storyline_Tracker bloated at 1,000 rows (127 active, 872 blank/other)
   - Dead continuity sheets still have data (781 + 332 + 7 rows)
 - **Next Actions updated** with verified sheet state and accurate priorities
+- **Deep engine code audit**: Read actual source code (not docs) to identify root causes of simulation output problems. 6 bugs documented in AUDIT_TRACKER.md as issues #19-#24:
+  - **#19 CRITICAL**: Relationship_Bonds 0 rows — 3 compounding bugs in seedRelationBondsv1.js (POPID missing from column search, header name mismatch with bondPersistence.js, 12 vs 17 column count)
+  - **#20 HIGH**: Empty LifeHistory_Log descriptions — 18 writer files, some don't populate description column
+  - **#21 HIGH**: Migration double-modification — calculated in updateWorldPopulation_ then modified again by applyDemographicDrift_, both Phase 3
+  - **#22 HIGH**: World events 37% duplicate rate — ~60 templates, no cross-cycle dedup
+  - **#23 HIGH**: Storyline_Tracker 83% duplicate rate — same storylines re-appended instead of updated
+  - **#24 HIGH**: World_Population single data point — overwrites instead of appending, no time series
+- **Weather confirmed NOT broken**: applyWeatherModel.js v3.5 has correct Oakland monthly climate data (July: 58-74°F), Markov chain fronts, 12 neighborhood microclimates
 
 ### 2026-02-08 (Session 10) — Desk Packet Pipeline, Edition 79 Full Production, Business Strategy
 

@@ -13,11 +13,11 @@
 
 | Priority | Total Issues | Fixed | Remaining |
 |----------|-------------|-------|-----------|
-| CRITICAL | 4 | 4 | 0 |
-| HIGH | 8 | 4 | 4 |
-| MEDIUM | 6 | 1 | 5 |
+| CRITICAL | 5 | 4 | 1 |
+| HIGH | 11 | 4 | 7 |
+| MEDIUM | 7 | 1 | 6 |
 
-**Last Updated:** Feb 2026 - Hardcoded Spreadsheet ID fix (v2.14)
+**Last Updated:** 2026-02-08 — Session 11 deep audit (6 new issues: #19-#24)
 
 ---
 
@@ -179,6 +179,160 @@
 - **Issue:** Building massive profiles without cleanup
 - **Risk:** Timeout on large citizen populations
 - **Status:** V3 REFACTOR
+
+---
+
+## SESSION 11 DEEP AUDIT (2026-02-08)
+
+Findings from code-level audit of engine output. Verified against live sheet data via Node.js/Sheets API.
+
+### 19. Relationship_Bonds — Zero Rows After 79 Cycles - CRITICAL
+
+**Files:** `phase05-citizens/seedRelationBondsv1.js`, `phase05-citizens/bondPersistence.js`
+**Status:** NOT FIXED
+**Discovered:** Session 11
+
+Three compounding bugs prevent any bonds from forming:
+
+**Bug A — Citizen ID column name mismatch (root cause):**
+- `seedRelationBondsv1.js` searches for citizen IDs using `['CitizenId', 'citizenId', 'ID']`
+- Simulation_Ledger actual column name is `POPID`
+- `findColumnIndex_` returns -1, every citizen gets `undefined` as their ID
+- All bonds collapse to key `undefined|undefined` — effectively 0 or 1 bond total
+- **Fix:** Add `'POPID'` to the search array in `findColumnIndex_` call
+
+**Bug B — Header name mismatch between seeder and persistence:**
+- Seeder writes headers: `Type`, `StartCycle`, `LastInteraction`
+- `bondPersistence.js` (`loadRelationshipBonds_`) expects: `BondType`, `CycleCreated`, `LastUpdate`
+- Loaded bonds have wrong field mappings — all bond data is misaligned
+- **Fix:** Change seeder header row to match persistence expectations
+
+**Bug C — Column count mismatch:**
+- Seeder creates 12 columns
+- Persistence layer expects 17 columns (missing: `DomainTag`, `Notes`, `Holiday`, `HolidayPriority`, `FirstFriday`, `CreationDay`, `SportsSeason`)
+- **Fix:** Add missing columns to seeder header row
+
+**Action Plan:**
+1. Fix header row in `seedRelationBondsv1.js` — align all 17 column names with `bondPersistence.js`
+2. Add `'POPID'` to citizen ID column search
+3. Delete existing Relationship_Bonds sheet data (it's empty anyway)
+4. Re-run seeder to create sheet with correct schema
+5. Run Cycle 80 to verify bonds are created and persisted
+
+**Schema Impact:** YES — Relationship_Bonds sheet headers change. No other sheets affected.
+
+---
+
+### 20. Empty LifeHistory_Log Descriptions - HIGH
+
+**Files:** Multiple Phase 5 writers (see Ledger Audit below for full list)
+**Status:** NOT FIXED
+**Discovered:** Session 11
+
+**Problem:** 2,852 entries in LifeHistory_Log. Many have EventTag populated but Description column is empty.
+
+**Root cause analysis:**
+- The two primary writers (`generateCitizensEvents.js:1313`, `runRelationshipEngine.js:576`) DO populate the description field via `pick` variable
+- Empty descriptions come from OTHER sub-engines writing to LifeHistory_Log without filling column 5:
+  - `runCareerEngine.js`
+  - `runEducationEngine.js`
+  - `runCivicRoleEngine.js`
+  - `runHouseholdEngine.js`
+  - `runNeighborhoodEngine.js`
+  - `generateGameModeMicroEvents.js`
+  - `generationalEventsEngine.js`
+- Also possible: `pickWeightedEvent_` returns `undefined` when event pool is empty after archetype/trait filtering
+
+**Action Plan:**
+1. Audit each LifeHistory_Log writer (18 files listed in Ledger Audit section) for column 5 population
+2. Add fallback `pick || "(no event description)"` to any writer missing it
+3. Verify with test cycle
+
+**Schema Impact:** None — same columns, just populating empty cells.
+
+---
+
+### 21. Migration Double-Modification - HIGH
+
+**Files:** `godWorldEngine2.js` (`updateWorldPopulation_`), `phase03-population/applyDemographicDrift.js`
+**Status:** NOT FIXED
+**Discovered:** Session 11
+
+**Problem:** Migration value is calculated twice in Phase 3:
+1. `updateWorldPopulation_` calculates migration, writes to World_Population sheet
+2. `applyDemographicDrift_` reads that value and modifies it AGAIN with additional randomness
+3. Both write to the same Migration column, creating compounding volatility
+
+**Action Plan:**
+1. Determine which function should own migration calculation
+2. Remove migration logic from the other function
+3. Verify migration values are stable and realistic across multiple cycles
+
+**Schema Impact:** None — same column, just single-write instead of double-write.
+
+---
+
+### 22. World Events 37% Duplicate Rate - HIGH
+
+**File:** `phase04-events/worldEventsEngine.js` (v2.6)
+**Status:** NOT FIXED
+**Discovered:** Session 11
+
+**Problem:** Only ~60 unique event description strings in template pool. Over 79 cycles generating 1-6 events each, 37% of events are verbatim duplicates. Dedup only works within a single cycle (via `used` object), not across cycles.
+
+**Examples of repeated events:**
+- "transformer hiccup" — 6 times
+- "athlete sighting" — 6 times
+- "unexplained symptom pattern" — 4 times
+- "kitchen fire (minor)" — 4 times
+
+**Action Plan (3 options, pick one):**
+- **Option A:** Expand template pool to 200+ events per category
+- **Option B:** Add cross-cycle dedup — track recently used events, suppress repeats for N cycles
+- **Option C:** Parameterized templates — `"{neighborhood} reports {event_type}"` with citizen/location variation
+- Option C is recommended — produces unique descriptions without maintaining a huge static pool
+
+**Schema Impact:** None — same WorldEvents_Ledger columns.
+
+---
+
+### 23. Storyline_Tracker 83% Duplicate Rate - HIGH
+
+**File:** `phase11-media-intake/mediaRoomIntake.js`
+**Status:** NOT FIXED
+**Discovered:** Session 11
+
+**Problem:** 1,000 rows but only 169 unique descriptions. Same storylines re-appended every cycle instead of updating existing rows. The `resolved` lifecycle fix (Session 8) works for resolution but doesn't prevent duplicate active storylines from accumulating.
+
+**Verified data:** 127 active, 1 resolved, 872 other/blank status.
+
+**Action Plan:**
+1. Add dedup on insert — before appending a storyline, check if Description already exists with Status=active
+2. If match found, update `LastUpdate` timestamp instead of creating new row
+3. Archive rows with blank/other status (872 rows of noise)
+4. Consider periodic archival of resolved storylines to Storyline_Archive sheet
+
+**Schema Impact:** None — same columns. Optional: new Storyline_Archive sheet.
+
+---
+
+### 24. World_Population Single Data Point - HIGH
+
+**File:** `godWorldEngine2.js` (`updateWorldPopulation_`)
+**Status:** NOT FIXED
+**Discovered:** Session 11
+
+**Problem:** World_Population sheet has only 2 rows (1 with data, 1 blank) across 79 cycles. No time series exists. Cannot track economic trends, population changes, or sentiment over time.
+
+**Root cause:** `updateWorldPopulation_` likely overwrites the same row each cycle instead of appending. Needs verification.
+
+**Action Plan:**
+1. Verify whether `updateWorldPopulation_` overwrites or appends
+2. If overwrite: change to append (one row per cycle = time series)
+3. If append was intended but failing: find the bug
+4. Add cycle number to each row for time series tracking
+
+**Schema Impact:** Rows increase from 1 to 1-per-cycle (79+ rows over time). No column changes.
 
 ---
 

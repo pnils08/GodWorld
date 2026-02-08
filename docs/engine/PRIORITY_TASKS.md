@@ -220,8 +220,8 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 
 **Next Actions:**
 1. Run Cycle 80 — validates all Session 11 bug fixes (bonds, migration, events, storylines, population history). Bulls roster promotes from Intake to Simulation_Ledger.
-2. Delete + recreate Relationship_Bonds sheet — seeder will create with correct 17-col headers
-3. Archive dead sheets (Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste)
-4. Storyline_Tracker cleanup — archive 872 blank/other rows, keep 127 active + 1 resolved
+2. ~~Delete + recreate Relationship_Bonds sheet~~ — Done (both Relationship_Bonds and Relationship_Bond_Ledger deleted, seeder recreates on C80)
+3. ~~Archive dead sheets~~ — Done (Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste deleted, 76→73 tabs)
+4. ~~Storyline_Tracker cleanup~~ — Done (1,000→129 rows, 763 processed + 109 abandoned removed)
 5. Activate Supermemory Pro after subscription sort (2/16)
 6. mulberry32_ consolidation — 10 copies into utilities/rng.js

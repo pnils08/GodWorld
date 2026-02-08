@@ -171,6 +171,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **#22 HIGH**: World events 37% duplicate rate — ~60 templates, no cross-cycle dedup
   - **#23 HIGH**: Storyline_Tracker 83% duplicate rate — same storylines re-appended instead of updated
   - **#24 HIGH**: World_Population single data point — overwrites instead of appending, no time series
+- **Sheet cleanup**: Deleted 3 dead continuity sheets (76→73 tabs). Storyline_Tracker cleaned from 1,000→129 rows.
 - **Docs updated**: ENGINE_ROADMAP.md (Session 11 audit table), PRIORITY_TASKS.md (Priority 4 bug fixes, progress summary, next actions)
 - **Weather confirmed NOT broken**: applyWeatherModel.js v3.5 has correct Oakland monthly climate data (July: 58-74°F), Markov chain fronts, 12 neighborhood microclimates
 - **#20 DROPPED**: All 13 LifeHistory_Log writers populate description field. Initial audit was wrong.
@@ -736,10 +737,10 @@ any code is written.
 - Press_Drafts: 107 rows, latest is C79 (Talia Finch)
 - LifeHistory_Log: 2,852 rows, C79 quotes present
 - Citizen_Media_Usage: 978 rows, all routed (978/978)
-- Storyline_Tracker: 1,000 rows (127 active, 1 resolved, 872 other/blank)
-- Continuity_Loop: 781 rows (dead sheet, still has data)
-- Continuity_Intake: 332 rows (dead sheet, still has data)
-- Raw_Continuity_Paste: 7 rows (dead sheet)
+- Storyline_Tracker: 129 rows (127 active, 1 resolved) — cleaned from 1,000
+- Continuity_Loop: DELETED (was 781 rows)
+- Continuity_Intake: DELETED (was 332 rows)
+- Raw_Continuity_Paste: DELETED (was 7 rows)
 - World_Population: 2 rows (mostly empty — may need attention)
 - Simulation_Ledger: 526 total (163 GAME, 84 A's players, 0 Bulls — Bulls in Intake staging)
 
@@ -747,19 +748,15 @@ any code is written.
 
 1. **RUN: Cycle 80** — Next engine cycle promotes Intake citizens to Simulation_Ledger (including Bulls roster), processes storylines, advances world state.
 
-2. **CLEANUP: Storyline_Tracker** — 1,000 rows, only 127 active + 1 resolved. 872 rows are blank/other status. Needs archival.
+2. **DONE: Storyline_Tracker cleaned** — 1,000 → 129 rows (127 active, 1 resolved). 763 processed + 109 abandoned deleted.
 
-3. **CLEANUP: Archive dead sheets** — Continuity_Loop (781), Continuity_Intake (332), Raw_Continuity_Paste (7). Pipeline eliminated in Session 8 but data still sitting there.
+3. **DONE: Dead sheets archived** — Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste deleted (76 → 73 tabs).
 
 4. **CONSIDER: compileHandoff.js cleanup** — Superseded by buildDeskPackets.js. Still in GodWorld Exports menu.
 
 5. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
 
-6. **FIXED: World_Population** — appendPopulationHistory_ (Bug #24) now appends row 2 as time series after Phase 10. Row 2 = current, rows 3+ = history.
-
-7. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
-
-8. Activate Supermemory Pro after subscription sort (2/16)
+6. Activate Supermemory Pro after subscription sort (2/16)
 
 ---
 

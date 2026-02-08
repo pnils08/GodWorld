@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-08 | Engine: v3.1 | Cycle: 79 | Session: 10
+Last Updated: 2026-02-08 | Engine: v3.1 | Cycle: 79 | Session: 11
 
 ---
 
@@ -151,6 +151,19 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-08 (Session 11) — Sheet State Audit, Documentation Recovery
+
+- **Session 10 documentation recovery**: Previous session (14 hrs) committed code but never committed SESSION_CONTEXT.md updates. Reconstructed full Session 10 history from git commits, /tmp artifacts, BRANCH_HANDOFF.md. 7-part history written and committed (`6637452`).
+- **Reference docs updated**: PROJECT_GOALS.md, PRIORITY_TASKS.md, ENGINE_ROADMAP.md, TIER_7_ROADMAP.md all brought current (`b16767f`).
+- **Unmerged branch recovered**: `claude/read-documentation-JRbqb` merged to main (`6e115f2`) — contained BRANCH_HANDOFF.md (826 lines: business strategy, Wix blueprint, subscription serial, Wreck-It Ralph concept).
+- **Full sheet state audit**: Checked 15+ sheets via Node.js/Sheets API. Key findings:
+  - Edition 79 intake pipeline ran successfully — all staging sheets populated and marked "processed"
+  - Bulls roster (10 players) confirmed in Intake sheet, waiting for Cycle 80 engine run to promote to Simulation_Ledger
+  - Citizen_Media_Usage fully routed (978/978)
+  - Storyline_Tracker bloated at 1,000 rows (127 active, 872 blank/other)
+  - Dead continuity sheets still have data (781 + 332 + 7 rows)
+- **Next Actions updated** with verified sheet state and accurate priorities
 
 ### 2026-02-08 (Session 10) — Desk Packet Pipeline, Edition 79 Full Production, Business Strategy
 
@@ -699,20 +712,36 @@ any code is written.
 
 **Next Actions (Session 11):**
 
-1. **UNKNOWN: Citizen intake routing status** — Was this done via processIntake.js? Check sheet state. Advancement_Intake1 may still need re-population.
+**Sheet state verified 2026-02-08:**
+- Intake: 217 rows — Bulls players (Trepagnier, Giddey, Buzelis, Holiday, Simmons, Kessler, Huerter, Dosunmu, Okoro, Stanley) all queued. Will promote to Simulation_Ledger on next engine cycle (C80).
+- Citizen_Usage_Intake: 386 rows, all marked "processed"
+- Storyline_Intake: 219 rows, all marked "processed"
+- Media_Intake: 107 rows
+- Press_Drafts: 107 rows, latest is C79 (Talia Finch)
+- LifeHistory_Log: 2,852 rows, C79 quotes present
+- Citizen_Media_Usage: 978 rows, all routed (978/978)
+- Storyline_Tracker: 1,000 rows (127 active, 1 resolved, 872 other/blank)
+- Continuity_Loop: 781 rows (dead sheet, still has data)
+- Continuity_Intake: 332 rows (dead sheet, still has data)
+- Raw_Continuity_Paste: 7 rows (dead sheet)
+- World_Population: 2 rows (mostly empty — may need attention)
+- Simulation_Ledger: 526 total (163 GAME, 84 A's players, 0 Bulls — Bulls in Intake staging)
 
-2. **CLEANUP: Archive dead sheets** — Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste can be archived/deleted from spreadsheet.
+**Edition 79 intake status: COMPLETE.** editionIntake.js + processIntake.js ran successfully. All staging sheets populated and marked processed. Bulls players and new C79 citizens queued in Intake for Cycle 80 engine run.
 
-3. **FIX: Bulls roster in Simulation_Ledger** — Real players (Trepagnier, Tre Jones, Jrue Holiday, Ben Simmons) need to be in the ledger. May be unblocked now if citizen intake routing ran.
+1. **RUN: Cycle 80** — Next engine cycle promotes Intake citizens to Simulation_Ledger (including Bulls roster), processes storylines, advances world state.
 
-4. **FIX: Storyline_Tracker bloat** — 986 rows. Has lifecycle now (resolved status works) but needs archival of old resolved entries.
+2. **CLEANUP: Storyline_Tracker** — 1,000 rows, only 127 active + 1 resolved. 872 rows are blank/other status. Needs archival.
 
-5. **CONSIDER: compileHandoff.js cleanup** — Now superseded by buildDeskPackets.js. Could be deleted or archived. Still referenced from GodWorld Exports menu in cycleExportAutomation.js.
+3. **CLEANUP: Archive dead sheets** — Continuity_Loop (781), Continuity_Intake (332), Raw_Continuity_Paste (7). Pipeline eliminated in Session 8 but data still sitting there.
 
-6. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase, consolidate into utilities/rng.js
+4. **CONSIDER: compileHandoff.js cleanup** — Superseded by buildDeskPackets.js. Still in GodWorld Exports menu.
 
-7. Integration testing — run a full cycle with the new Node.js intake pipeline
-8. Activate Supermemory Pro after subscription sort (2/16)
+5. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
+
+6. **CHECK: World_Population** — Only 2 rows, mostly empty. May be normal (summary sheet) or may need fix.
+
+7. Activate Supermemory Pro after subscription sort (2/16)
 
 ---
 

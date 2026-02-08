@@ -98,7 +98,7 @@ The West Oakland Stabilization Fund is law. The 6-3 supermajority vote in Cycle 
 
 That was last week. This week, in a neighborhood where promises have a history of arriving late or not at all, the question is simpler: When does the money show up?
 
-According to city records, the fund's implementation now falls to the city administrator's office, which has 45 days from the date of passage to begin first disbursements. Carter's office confirmed the timeline in a written statement but declined to identify which programs would receive priority funding. A spokesperson said the administrator is "building the intake framework" and expects to announce application guidelines within three weeks.
+According to city records, the fund's implementation now falls to the city administrator's office, which has 45 days from the date of passage to begin first disbursements. The rollout is further complicated by the absence of Deputy Mayor Marcus Osei, whose economic development portfolio would ordinarily place him at the center of disbursement design. Osei has been in serious condition since a car accident and has not been seen at City Hall in weeks. His office has not responded to requests for comment. Carter's office confirmed the timeline in a written statement but declined to identify which programs would receive priority funding. A spokesperson said the administrator is "building the intake framework" and expects to announce application guidelines within three weeks.
 
 For residents along Mandela Parkway and the surrounding blocks, the timeline is both encouraging and familiar.
 
@@ -106,7 +106,7 @@ For residents along Mandela Parkway and the surrounding blocks, the timeline is 
 
 Wright said he watched the floor vote on a livestream from his phone during a break at work. He called the result "good news with an asterisk."
 
-That asterisk hangs over much of the neighborhood's response. Community Director Hayes, who organized several of the public comment sessions that preceded the committee hearing, described the mood as "cautious optimism mixed with institutional fatigue."
+That asterisk hangs over much of the neighborhood's response. Robert Hayes, 58, a community director in West Oakland who organized several of the public comment sessions that preceded the committee hearing, described the mood as "cautious optimism mixed with institutional fatigue."
 
 "People here have seen bond measures, redevelopment funds, promise zones," Hayes said. "They know what passage looks like. They're waiting to see what implementation looks like."
 
@@ -114,11 +114,11 @@ The political mechanics of what made passage possible remain only partly visible
 
 More notable: the silence from CRC colleagues Warren Ashford and Nina Chen, who both voted no. Neither has issued a public statement. Neither responded to Tribune requests for comment. In a council where factional discipline typically produces coordinated messaging within hours of a major vote, the absence of any CRC response has drawn attention from observers at City Hall.
 
-Councilwoman Rivera, who represents West Oakland and voted yes, has been more direct.
+Councilmember Janae Rivers, who voted yes and has been vocal about West Oakland investment, has been more direct.
 
-"The fund is a down payment," Rivera said in a brief exchange after a community event this week. "Not a conclusion. We have to build the infrastructure to spend it well."
+"The fund is a down payment," Rivers said in a brief exchange after a community event this week. "Not a conclusion. We have to build the infrastructure to spend it well."
 
-Rivera's framing — that passage is the beginning, not the end — may be the most honest assessment of where the Stabilization Fund stands. The $28 million is allocated but not yet programmed. The administrator's office must design application processes, identify eligible recipients, and establish oversight mechanisms, all within a compressed timeline that coincides with Independence holiday scheduling and reduced city staffing.
+Rivers's framing — that passage is the beginning, not the end — may be the most honest assessment of where the Stabilization Fund stands. The $28 million is allocated but not yet programmed. The administrator's office must design application processes, identify eligible recipients, and establish oversight mechanisms, all within a compressed timeline that coincides with Independence holiday scheduling and reduced city staffing.
 
 Dante Nelson, 41, a security guard who works and lives Downtown, said he has followed the Stabilization Fund debate closely but isn't sure it will reach the people who need it most.
 
@@ -126,7 +126,7 @@ Dante Nelson, 41, a security guard who works and lives Downtown, said he has fol
 
 The city administrator's office is expected to hold informational sessions in West Oakland before the end of the month. No dates have been announced.
 
-Names Index: Denise Carter (Councilwoman, D1, OPP), Elliott Crane (Councilmember, D6, CRC), Councilwoman Rivera (City Council, West Oakland), Warren Ashford (Councilmember, D7, CRC), Nina Chen (Councilmember, D8, CRC), Community Director Hayes (Community Leader, Downtown), Bruce Wright (Line cook, Downtown), Dante Nelson (Security guard, Downtown), Carmen Delaine (Civic Ledger)
+Names Index: Denise Carter (Councilwoman, D1, OPP), Elliott Crane (Councilmember, D6, CRC), Janae Rivers (Councilmember, D5, OPP), Warren Ashford (Councilmember, D7, CRC), Nina Chen (Councilmember, D8, CRC), Marcus Osei (Deputy Mayor, Economic Development — serious condition), Robert Hayes (58, West Oakland, Community Director), Bruce Wright (Line cook, Downtown), Dante Nelson (Security guard, Downtown), Carmen Delaine (Civic Ledger)
 
 -----
 
@@ -178,7 +178,7 @@ The timeline is straightforward. Next cycle, the Oakland City Council will vote 
 
 The projection: 5-4, likely to pass. The variable: Councilmember Warren Ashford, who represents District 7 — the district where the health center would be built — and who has spent months expressing what his office calls "fiscal concerns" about the appropriation.
 
-What those fiscal concerns mean in practice is a matter of interpretation. The health center proposal carries a $12 million first-phase construction cost and an estimated $3.4 million annual operating budget, partially offset by Medi-Cal reimbursements and a county matching grant that expires if not drawn down by the end of the fiscal year. Supporters argue the math is tight but workable. Skeptics point to the Stabilization Fund's $28 million draw and ask whether the city can absorb another major commitment within the same budget window.
+What those fiscal concerns mean in practice is a matter of interpretation. The health center proposal carries a total project cost of $45 million, with a $12 million first-phase construction appropriation before the council now and an estimated $3.4 million annual operating budget, partially offset by Medi-Cal reimbursements and a county matching grant that expires if not drawn down by the end of the fiscal year. Supporters argue the math is tight but workable. Skeptics point to the Stabilization Fund's $28 million draw and ask whether the city can absorb another major commitment within the same budget window.
 
 But the clinical case is harder to argue against.
 
@@ -464,7 +464,7 @@ Keane's final season will unfold under Deacon Seymour's management — a new ski
 
 That is the Oakland way. You honor the past by refusing to surrender the present.
 
-Arturo Ramos in left field, Edmundo Peña closing games from his Jack London apartment, Buford Park and Martin Richards rounding out a rotation that Anthony Casto supports from the bullpen, John Ellis providing depth — this roster has the bones of something real. Mike Kinder, the manager from Temescal who has guided these men through daily preparation, understands that Keane's farewell is not a funeral. It is a foundation.
+Arturo Ramos on the mound, Edmundo Peña closing games from his Jack London apartment, Buford Park and Martin Richards rounding out a rotation that Anthony Casto supports from the bullpen, John Ellis providing depth — this roster has the bones of something real. Deacon Seymour, building on the groundwork that former manager Mike Kindler laid in Temescal, understands that Keane's farewell is not a funeral. It is a foundation.
 
 The question this columnist has been asked most frequently this summer, by readers and colleagues alike, is simple: Where does Vinnie Keane rank?
 
@@ -472,7 +472,7 @@ The answer requires context that numbers alone cannot provide. Keane ranks where
 
 The Coliseum will be full for his last game. The ceremony will last longer than eleven minutes. And this time, Oakland will get the goodbye right.
 
-Names Index: Vinnie Keane (A's Legend — Montclair), Benji Dillon (SP — Rockridge), Danny Horn (SP — Temescal), Darrin Davis (CF — Laurel), Mark Aitken (3B — Piedmont Ave), Isley Kelley (SS — Montclair), Deacon Seymour (Manager — A's), Arturo Ramos (LF — Laurel), Edmundo Peña (CL — Jack London), Buford Park (SP — Uptown), Martin Richards (SP — Fruitvale), Anthony Casto (RP — Adams Point), John Ellis (SP — Laurel), Mike Kinder (Manager — Temescal), DJ Hartley (Senior Photographer), Hal Richmond (Senior Historian)
+Names Index: Vinnie Keane (A's Legend — Montclair), Benji Dillon (SP — Rockridge), Danny Horn (SP — Temescal), Darrin Davis (CF — Laurel), Mark Aitken (3B — Piedmont Ave), Isley Kelley (SS — Montclair), Deacon Seymour (Manager — A's), Arturo Ramos (SP — Laurel), Edmundo Peña (CL — Jack London), Buford Park (SP — Uptown), Martin Richards (SP — Fruitvale), Anthony Casto (RP — Adams Point), John Ellis (SP — Laurel), Mike Kindler (Former Manager — Temescal), DJ Hartley (Senior Photographer), Hal Richmond (Senior Historian)
 
 -----
 
@@ -494,7 +494,7 @@ The headline acquisition is Holiday, the veteran guard secured from a deal that 
 
 "It's not about what we're losing," a team source said of the Jones departure. "It's about what the starting five looks like in May."
 
-That starting five now projects as a nightmare for opposing coaches: Giddey at the point, running his 17.9-point, 9-assist, 7-rebound triple-double machine. Holiday slotting in at the two, providing the perimeter defense this team lacked in close games. Matas Buzelis at the four, whose Most Improved Player candidacy has been built on a midrange game that did not exist fourteen months ago. Patrick Williams at the four. And Hank Trepagnier — the 7-foot rookie who is averaging 16.7 points, 8.0 rebounds, and 5.4 assists and has not merely entered the Rookie of the Year conversation but is chairing it — anchoring the middle.
+That starting five now projects as a nightmare for opposing coaches: Giddey at the point, running his 17.9-point, 9-assist, 7-rebound triple-double machine. Holiday slotting in at the two, providing the perimeter defense this team lacked in close games. Matas Buzelis at the four — back from the pinched nerve that cost him three weeks — whose Most Improved Player candidacy has been built on a midrange game that did not exist fourteen months ago. Patrick Williams at the four. And Hank Trepagnier — the 7-foot rookie who is averaging 16.7 points, 8.0 rebounds, and 5.4 assists and has not merely entered the Rookie of the Year conversation but is chairing it — anchoring the middle.
 
 The Simmons signing is the riskier bet. Signed for the remainder of the season on a veteran minimum deal, Simmons has not played meaningful minutes in years, and his reputation precedes him. But Paulson's calculus appears to be about depth, not stardom. With Walker Kessler providing backup center minutes and Kevin Huerter returning from his nagging hamstring issue, Simmons slots in as a versatile forward who can defend multiple positions and push the ball in transition. If he can stay engaged, the Bulls get a Swiss Army knife off the bench. If he cannot, they have barely invested anything to find out.
 
@@ -592,7 +592,7 @@ ARTICLE TABLE — ENGINE INTAKE FORMAT
 |Reporter|StoryType|SignalSource|Headline|ArticleText|CulturalMentions|
 |P Slayer|Opinion/Breaking|Oakland_Sports_Feed — Warriors Trade|EARTHQUAKE ON THE BAY: WARRIORS LAND GIANNIS ANTETOKOUNMPO IN BLOCKBUSTER TRADE|Warriors acquire Giannis Antetokounmpo and Jericho Sims from Milwaukee in three-team blockbuster; Draymond Green sent to Boston, Moses Moody and four first-round picks to Bucks. Oakland's biggest sports moment in years.|Warriors, Oakland identity, dynasty culture|
 |Anthony|Beat Report/Analysis|Oakland_Sports_Feed — Paulson, storylines|THE PAULSON QUESTION: ONE GM, TWO CITIES, AND NOW A THIRD TEAM CALLING|Warriors confirm interest in Mike Paulson as executive; GM currently splitting time between A's (Mesa) and Bulls (Chicago), faces unprecedented three-franchise courtship as both teams enter critical windows.|Mesa facility, A's clubhouse, Chicago Bulls, Warriors front office|
-|Carmen Delaine|Post-vote Reaction|Stabilization Fund passage, civic seed|STABILIZATION FUND CLEARS COUNCIL, BUT WEST OAKLAND ASKS: WHERE'S THE CHECK?|West Oakland reacts to Stabilization Fund passage with cautious optimism; implementation timeline of 45 days begins under city administrator, but residents question whether disbursement pipelines will reach those most in need.|Community Director Hayes, Councilwoman Rivera|
+|Carmen Delaine|Post-vote Reaction|Stabilization Fund passage, civic seed|STABILIZATION FUND CLEARS COUNCIL, BUT WEST OAKLAND ASKS: WHERE'S THE CHECK?|West Oakland reacts to Stabilization Fund passage with cautious optimism; implementation timeline of 45 days begins under city administrator, but residents question whether disbursement pipelines will reach those most in need. Deputy Mayor Osei's absence from implementation complicates rollout.|Robert Hayes, Janae Rivers, Marcus Osei|
 |Luis Navarro|Investigative Analysis|CRC fracture, civic seed|THE CRC'S SILENCE: WHAT CRANE'S CROSSOVER BROKE — AND WHAT ASHFORD AND CHEN WON'T SAY|CRC coalition silence following Crane's crossover vote analyzed; Ashford and Chen both declined comment, raising questions about bloc cohesion ahead of Health Center and OARI votes.|None|
 |Dr. Lila Mezran|Health/Civic Preview|Health Center pending vote, health arc|TEMESCAL HEALTH CENTER VOTE APPROACHES: A NEIGHBORHOOD CAUGHT BETWEEN NEED AND POLITICS|Temescal Community Health Center vote projected 5-4 for next cycle; Ashford's position as D7 representative remains noncommittal while health indicators worsen in the neighborhood.|None|
 |Trevor Shimizu|Infrastructure|Lake Merritt inflow strain arc, infrastructure seed|LAKE MERRITT FOURTH OF JULY DRAWS CROWDS — AND EXPOSES STRAIN ON AGING INFRASTRUCTURE|Lake Merritt drainage infrastructure operating at capacity as Independence Day crowds compound deferred maintenance issues; population growth and increased impervious surface outpacing system design.|None|
@@ -617,7 +617,7 @@ NEW THIS CYCLE:
 — sports | Warriors confirmed interest in Mike Paulson as executive — three-franchise tension escalates | Oakland | Mike Paulson | high
 — sports | Danny Horn sponsors wiffleball tournament in West Oakland celebrating Stabilization Fund passage | West Oakland | Danny Horn, Mark Aitken, Deacon Seymour | high
 — sports | Vinnie Keane farewell season officially underway — 2041 dynasty celebration announced | Montclair | Vinnie Keane, Benji Dillon | high
-— civic | Stabilization Fund implementation begins; 45-day disbursement clock running, city administrator building intake framework | West Oakland | Bruce Wright, Dante Nelson, Community Director Hayes, Councilwoman Rivera | high
+— civic | Stabilization Fund implementation begins; 45-day disbursement clock running, city administrator building intake framework. Deputy Mayor Osei's absence complicates oversight | West Oakland | Bruce Wright, Dante Nelson, Robert Hayes, Janae Rivers, Marcus Osei | high
 — civic | CRC coalition fracture — Ashford and Chen silent post-vote; bloc cohesion in question ahead of C80 and C82 votes | Downtown | Warren Ashford, Nina Chen, Elliott Crane | high
 — health | Temescal Health Center vote approaching C80; neighborhood health indicators worsening, Ashford position unresolved | Temescal | Jose Wright, Andre Lee, Bruce Lee, Warren Ashford | high
 — infrastructure | Lake Merritt inflow strain; drainage system at capacity, deferred maintenance compounding, population growth outpacing design | Lake Merritt | Hector Campbell, Xavier Campbell | normal
@@ -628,6 +628,24 @@ NEW THIS CYCLE:
 — developing | West Oakland Stabilization Fund economic impact — 45-day disbursement clock, corridor investment pipeline | West Oakland | Owen Campbell, Guadalupe Lee | high
 — trade_deadline | Bulls acquire Jrue Holiday for Tre Jones + 2nd rd pick; sign Ben Simmons for remainder of season | Chicago | Jrue Holiday, Tre Jones, Ben Simmons, Mike Paulson | high
 — community | Bridgeport and Bronzeville react to Bulls deadline moves; summer belief building around championship contender | Chicago | Hank Trepagnier, Josh Giddey | normal
+
+PHASE CHANGES:
+— Stabilization Fund: PASSED → IMPLEMENTATION (45-day disbursement clock running, city administrator building intake framework)
+— CRC coalition: HOLDING → FRACTURED (Crane crossover vote; Ashford and Chen silent post-vote)
+— Warriors roster: REBUILDING → CONTENDER (Giannis Antetokounmpo acquisition reshapes conference)
+— Bulls roster: BUILDING → CHAMPIONSHIP WINDOW (Holiday + Simmons acquisitions complete depth chart)
+— Buzelis injury: OUT (pinched nerve C77) → RETURNED (MIP candidate, starting at PF)
+
+STILL ACTIVE:
+— Temescal Health Center: $45M project, $12M first-phase appropriation vote expected C80. Ashford (D7) position unresolved. Projected 5-4. (ARC: health-center)
+— OARI Funding: Committee vote expected C82. Details embargoed pending release. (ARC: oari-funding)
+— Baylight Development: Vote expected C83. Details pending. (ARC: baylight)
+— Marcus Osei status: Deputy Mayor (Economic Development) in serious condition since car accident. Absent from Stabilization Fund implementation. No public timeline for return. (ARC: osei-status)
+— Elliott Crane injury: D6 councilmember participating remotely due to broken leg. Details of incident undisclosed. (ARC: crane-injury)
+— Paulson three-franchise tension: GM currently serving A's + Bulls, Warriors expressing interest. Logistics of dual role already strained. (ARC: paulson-question)
+— Keane farewell season: Final season underway, 2041 dynasty celebration announced. (ARC: keane-farewell)
+— OPOA pressure: Police officers association activity noted in civic signals but no direct media coverage this cycle. Thread paused — monitor for C80. (ARC: opoa)
+— Lake Merritt infrastructure strain: Drainage at capacity, deferred maintenance compounding. No resolution timeline. (ARC: lake-merritt-infrastructure)
 
 RESOLVED THIS CYCLE:
 — resolved | Stabilization Fund floor vote (PASSED 6-3, now in implementation phase)
@@ -644,13 +662,13 @@ CIVIC OFFICIALS:
 — Elliott Crane (Councilmember D6, CRC — injured, participating remotely)
 — Warren Ashford (Councilmember D7, CRC)
 — Nina Chen (Councilmember D8, CRC)
-— Councilwoman Rivera (City Council, West Oakland)
 — Ramon Vega (Councilmember D4, IND)
 — Leonard Tran (Councilmember D2, IND)
 — Rose Delgado (Councilmember D3, OPP)
 — Janae Rivers (Councilmember D5, OPP)
 — Terrence Mobley (Councilmember D9, OPP)
-— Community Director Hayes (Community Leader, Downtown)
+— Marcus Osei (Deputy Mayor — Economic Development — serious condition, absent from implementation)
+— Robert Hayes, 58, West Oakland, Community Director
 
 SPORTS — A'S:
 — Vinnie Keane (A's Legend — Montclair — farewell season coverage)
@@ -659,13 +677,13 @@ SPORTS — A'S:
 — Benji Dillon (SP — Rockridge — dynasty celebration reference)
 — Darrin Davis (CF — Laurel — ACL return, preseason ready)
 — Isley Kelley (SS — Montclair — roster mention)
-— Arturo Ramos (LF — Laurel — roster mention)
+— Arturo Ramos (SP — Laurel — roster mention)
 — Edmundo Peña (CL — Jack London — roster mention)
 — Buford Park (SP — Uptown — roster mention)
 — Martin Richards (SP — Fruitvale — roster mention)
 — Anthony Casto (RP — Adams Point — roster mention)
 — John Ellis (SP — Laurel — roster mention)
-— Mike Kinder (Manager — Temescal — roster context)
+— Mike Kindler (Former Manager — Temescal — roster context)
 — Deacon Seymour (Manager — first spring training, community event appearance)
 — Mike Paulson (GM — A's/Bulls — Paulson question, Warriors interest, community event)
 
@@ -680,7 +698,7 @@ SPORTS — BULLS:
 — Josh Giddey (PG — 17.9/7/9 triple-double pace)
 — Hank Trepagnier (C — Rookie, ROY leader, 16.7/8.0/5.4)
 — Adash Stanley (PG — Rookie, backup minutes)
-— Matas Buzelis (PF — MIP candidate)
+— Matas Buzelis (PF — MIP candidate, returned from pinched nerve C77)
 — Patrick Williams (PF — starter)
 — Walker Kessler (C — backup)
 — Kevin Huerter (SG — returning from hamstring)
@@ -751,15 +769,47 @@ CITIZENS IN LETTERS (NEW):
 CONTINUITY NOTES — CYCLE 79
 ############################################################
 
+COUNCIL COMPOSITION:
+|District|Member|Faction|Status|
+|--------|------|-------|------|
+|D1|Denise Carter|OPP|Active — Stabilization Fund author|
+|D2|Leonard Tran|IND|Active|
+|D3|Rose Delgado|OPP|Active|
+|D4|Ramon Vega|IND|Active — swing vote on Health Center|
+|D5|Janae Rivers|OPP|Active|
+|D6|Elliott Crane|CRC|Injured — participating remotely (broken leg)|
+|D7|Warren Ashford|CRC|Active — Health Center district, position unresolved|
+|D8|Nina Chen|CRC|Active — silent post-Stabilization vote|
+|D9|Terrence Mobley|OPP|Active|
+
+FACTION COUNT: OPP 4 (D1, D3, D5, D9) — CRC 3 (D6, D7, D8) — IND 2 (D2, D4)
+
+MAJOR VOTES PENDING:
+— C80: Temescal Health Center ($45M total, $12M first-phase appropriation). Projected 5-4 pass. Ashford position is fulcrum.
+— C82: OARI Funding. Details embargoed. Committee stage.
+— C83: Baylight Development. Details pending.
+
+CIVIC STAFF STATUS:
+— Marcus Osei (Deputy Mayor, Economic Development): Serious condition since car accident. Absent. No return timeline. Portfolio gap impacts Stabilization Fund implementation.
+— Elliott Crane (D6, CRC): Broken leg, participating remotely. Crossover vote on Stabilization Fund fractured CRC bloc.
+— Avery Santana (Mayor): Active. No direct coverage this cycle.
+
+WEATHER / MOOD:
+— Season: Summer (July)
+— Conditions: Overcast, 62°F, fog sitting on city
+— Holiday: Independence Day (major) + First Friday convergence
+— Sentiment: Cautious optimism (Stabilization Fund passed, but implementation uncertainty)
+— Migration drift: +14
+
 SPORTS RECORDS:
-— A's: Mid-season, spring training / preseason phase. Season opens vs. San Diego under Seymour. Keane farewell season. Davis ACL return.
+— A's: Mid-season, spring training / preseason phase. Season opens vs. San Diego under Seymour (new manager, replacing Mike Kindler). Keane farewell season. Davis ACL return.
 — Warriors: 28-24 pre-trade. Acquired Giannis Antetokounmpo and Jericho Sims. Lost Draymond Green (to Boston) and Moses Moody (to Milwaukee) plus 4 first-round picks.
-— Bulls: 37-15, 1st in Eastern Conference. Trade deadline: Tre Jones + 2nd rd pick OUT, Jrue Holiday IN. Free agent signing: Ben Simmons for remainder of season. Previous result: Bulls 108, Hornets 91. All-Star selections due Cycle 80.
+— Bulls: 37-15, 1st in Eastern Conference. Trade deadline: Tre Jones + 2nd rd pick OUT, Jrue Holiday IN. Free agent signing: Ben Simmons for remainder of season. Buzelis returned from pinched nerve (C77). All-Star selections due Cycle 80.
 
 DIRECT QUOTES PRESERVED:
 — Bruce Wright: "Forty-five days is fine. I can wait forty-five days. What I can't do is wait forty-five days and then hear it's been pushed to ninety. We've been down that road."
-— Community Director Hayes: "People here have seen bond measures, redevelopment funds, promise zones. They know what passage looks like. They're waiting to see what implementation looks like."
-— Councilwoman Rivera: "The fund is a down payment. Not a conclusion. We have to build the infrastructure to spend it well."
+— Robert Hayes: "People here have seen bond measures, redevelopment funds, promise zones. They know what passage looks like. They're waiting to see what implementation looks like."
+— Councilmember Janae Rivers: "The fund is a down payment. Not a conclusion. We have to build the infrastructure to spend it well."
 — Dante Nelson: "I work nights. I see who's sleeping in doorways on San Pablo. Those folks aren't going to fill out a grant application. The question isn't whether the money exists. It's whether the pipeline reaches the ground."
 — Jose Wright: "My kid had an ear infection last month. Couldn't get into the clinic on 51st — two-hour wait, they were turning people away by noon. Drove to the urgent care in Emeryville. That's forty-five minutes round trip in the middle of a workday. You tell me we don't need a health center."
 — Andre Lee: "I've seen proposals come and go in this neighborhood. The old Pill Hill expansion, the mobile clinic pilot that lasted eight months. I'm not against a health center. I just want to know who's going to run it, who's going to staff it, and whether it's still going to be there in five years."
@@ -788,6 +838,7 @@ DIRECT QUOTES PRESERVED:
 — Anonymous team source (Bulls): "It's not about what we're losing. It's about what the starting five looks like in May."
 
 NEW CANON FIGURES:
+— Robert Hayes (58, West Oakland, Community Director)
 — Bruce Wright (48, Downtown, Line cook)
 — Dante Nelson (41, Downtown, Security guard)
 — Jose Wright (26, Temescal, Electrician)

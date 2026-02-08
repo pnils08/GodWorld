@@ -151,6 +151,198 @@ any code is written.
 
 ---
 
+## Planned Initiative: GodWorld Wix Front-End
+
+### Overview
+Build a public-facing website on Wix that displays GodWorld simulation data. The simulation
+continues to run on Google Apps Script / Google Sheets — Wix is a read-only display layer.
+No simulation logic moves to Wix.
+
+### Architecture
+
+```
+Google Sheets (data) → Apps Script doGet() API → Wix Velo fetch() → Wix Pages
+```
+
+- **Google Apps Script**: New `wixAPI.gs` file with `doGet(e)` function deployed as a web app.
+  Returns JSON for each data category.
+- **Wix Velo**: Backend `.jsw` files call the API. Frontend page code populates Wix elements
+  (repeaters, text, dynamic pages).
+- **Data is read-only on Wix.** No writes back to Google Sheets from the website.
+
+---
+
+### Phase 1: Core Pages (MVP)
+
+| Page | Data Source Sheets | What It Shows |
+|---|---|---|
+| **World Dashboard** | `World_Population`, `Cycle_Weather`, `Transit_Metrics`, `Domain_Tracker` | Current cycle, population stats, weather, transit on-time %, crime index, sentiment, dominant domain. A snapshot of Oakland right now. |
+| **Citizen Directory** | `Simulation_Ledger`, `Generic_Citizens`, `Chicago_Citizens` | Searchable/filterable list of all citizens. Name, tier, neighborhood, occupation, status. Click to open profile. |
+| **Citizen Profile** (dynamic) | `Simulation_Ledger`, `LifeHistory_Log`, `Relationship_Bonds`, `Citizen_Media_Usage`, `Cultural_Ledger` | Full bio page per citizen: identity, neighborhood, tier, life event timeline, relationship bonds, media appearances, cultural fame score. |
+| **Neighborhood Explorer** | `Neighborhood_Map`, `Neighborhood_Demographics` | Each of the ~15 Oakland neighborhoods: nightlife profile, crime index, retail vitality, sentiment, demographic markers. Who lives there. |
+
+**API endpoints for Phase 1:**
+```
+?action=world-state       → latest World_Population row + weather + transit
+?action=citizens          → merged citizen list (Sim_Ledger + Generic + Chicago)
+?action=citizen&id=POPID  → single citizen + life history + bonds + media usage
+?action=neighborhoods     → Neighborhood_Map + Demographics latest rows
+```
+
+---
+
+### Phase 2: Content Pages
+
+| Page | Data Source Sheets | What It Shows |
+|---|---|---|
+| **Riley Digest** | `Riley_Digest` | The published newspaper output each cycle — the primary narrative artifact of GodWorld. Displayed as a styled newspaper page. |
+| **World Events Timeline** | `WorldEvents_V3_Ledger`, `WorldEvents_Ledger` | Scrollable timeline of all world events. Filter by domain (CIVIC, CRIME, HEALTH, etc.), severity, neighborhood. |
+| **Event Arcs** | `Event_Arc_Ledger` | Active and resolved story arcs. Tension level, phase, neighborhood, citizen count, resolution type. |
+
+**API endpoints for Phase 2:**
+```
+?action=digest&cycle=N    → Riley_Digest for cycle N (or latest)
+?action=events&limit=50   → WorldEvents_V3_Ledger rows, newest first
+?action=arcs              → Event_Arc_Ledger active + recently resolved
+```
+
+---
+
+### Phase 3: Governance & Culture
+
+| Page | Data Source Sheets | What It Shows |
+|---|---|---|
+| **City Hall** | `Civic_Office_Ledger`, `Election_Log`, `Initiative_Tracker` | Current office holders, upcoming elections, active initiatives with vote status and budget. |
+| **Cultural Scene** | `Cultural_Ledger`, `Media_Ledger` | Famous figures, cultural domains, fame scores, trend trajectories. Media appearances and spread. |
+| **Sports Hub** | `Sports_Feed`, `Oakland_Sports_Feed`, `Chicago_Feed`, `Sports_Calendar` | A's and Bulls game results, sports calendar, game day impact on the city. |
+
+**API endpoints for Phase 3:**
+```
+?action=civic             → office holders + initiatives
+?action=culture           → Cultural_Ledger top figures
+?action=sports            → Sports_Feed + Calendar
+```
+
+---
+
+### Phase 4: Advanced Features
+
+| Feature | Description |
+|---|---|
+| **Live Cycle Updates** | Auto-refresh dashboard when a new cycle runs (poll API every few minutes) |
+| **Relationship Web** | Visual graph of citizen bonds using a JS graph library (D3.js or vis.js) in a Wix HTML embed |
+| **Historical Trends** | Charts showing population, sentiment, crime over time using `World_Population` historical rows |
+| **Media Room** (read-only) | Display `Media_Briefing` content — what the press desk received each cycle |
+| **Story Arc Tracker** | Visual lifecycle of arcs from creation through escalation to resolution |
+
+---
+
+### Google Apps Script: `wixAPI.gs` Blueprint
+
+```javascript
+// wixAPI.gs — Deploy as Web App (Execute as: Me, Access: Anyone)
+
+function doGet(e) {
+  var action = e.parameter.action;
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  var handlers = {
+    'world-state':   function() { return serveWorldState_(ss); },
+    'citizens':      function() { return serveCitizens_(ss); },
+    'citizen':       function() { return serveCitizen_(ss, e.parameter.id); },
+    'neighborhoods': function() { return serveNeighborhoods_(ss); },
+    'digest':        function() { return serveDigest_(ss, e.parameter.cycle); },
+    'events':        function() { return serveEvents_(ss, e.parameter.limit); },
+    'arcs':          function() { return serveArcs_(ss); },
+    'civic':         function() { return serveCivic_(ss); },
+    'culture':       function() { return serveCulture_(ss); },
+    'sports':        function() { return serveSports_(ss); }
+  };
+
+  var handler = handlers[action];
+  if (!handler) {
+    return jsonResponse_({ error: 'Unknown action: ' + action });
+  }
+  return handler();
+}
+
+function jsonResponse_(data) {
+  return ContentService.createTextOutput(JSON.stringify(data))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+```
+
+Each `serve*_()` function reads the relevant sheet(s), converts rows to objects using
+column headers, and returns via `jsonResponse_()`.
+
+---
+
+### Wix Site Structure
+
+```
+godworldoakland.com/
+├── /                    → World Dashboard (landing page)
+├── /citizens            → Citizen Directory (searchable list)
+├── /citizens/{id}       → Citizen Profile (dynamic page)
+├── /neighborhoods       → Neighborhood Explorer
+├── /digest              → Riley Digest (latest edition)
+├── /digest/{cycle}      → Riley Digest (specific cycle)
+├── /events              → World Events Timeline
+├── /arcs                → Event Arc Tracker
+├── /city-hall           → Civic Government
+├── /culture             → Cultural Scene
+└── /sports              → Sports Hub
+```
+
+---
+
+### Citizen Merge Logic (3 sheets → 1 unified list)
+
+| Field | Simulation_Ledger | Generic_Citizens | Chicago_Citizens |
+|---|---|---|---|
+| ID | POPID | (generate from name) | CitizenId |
+| Name | First + Last | First + Last | Name |
+| Tier | Tier (1-4) | 4 (always) | Tier |
+| Neighborhood | Neighborhood | Neighborhood | Neighborhood |
+| Occupation | (from RoleType) | Occupation | Occupation |
+| Status | Status | Status | Status |
+| Age | (calc from BirthYear) | Age | Age |
+| City | OrginCity | Oakland (default) | Chicago |
+
+---
+
+### Hosting & Cost
+
+| Item | Annual Cost |
+|---|---|
+| Domain name (`.com` via Namecheap) | ~$12 |
+| Wix Light plan (custom domain, no ads) | ~$204 ($17/mo) |
+| Google Apps Script API | Free (20k calls/day quota) |
+| **Total** | **~$216/year (~$18/month)** |
+
+**Recommended approach:** Build entire site on Wix free plan first. Upgrade to Light plan
++ custom domain only when ready to go public.
+
+**Domain options:** `godworldoakland.com`, `thegodworld.com`, `godworldsim.com`
+
+---
+
+### Dependencies & Risks
+
+| Risk | Mitigation |
+|---|---|
+| Apps Script 6-min execution limit | API reads are fast (single sheet reads). Not an issue for `doGet()`. |
+| Apps Script daily quota (20k calls) | Wix can cache responses. Most pages need only 1-2 API calls. |
+| CORS issues | Wix Velo backend calls avoid CORS entirely. |
+| Stale data | Data updates when simulation runs. Add "Last updated: Cycle N" to dashboard. |
+| Sheet schema changes | API references column headers by name, not index. Schema changes need API updates. |
+
+### Status
+**Project initiative only.** NOT approved for implementation. Requires explicit user approval
+before any code is written.
+
+---
+
 ## Known Tech Debt (for future sessions)
 
 - **`mulberry32_` defined in 10 files**: applyWeatherModel.js, buildCityEvents.js, generateCitizenEvents.js, generateGameModeMicroEvents.js (fixed), generateGenericCitizenMicroEvent.js, generationalEventsEngine.js, worldEventsEngine.js, generateCitizensEvents.js, textureTriggers.js, runAsUniversePipeline.js (already renamed to `mulberry32_uni_`). Recommend consolidating into `utilities/rng.js`.

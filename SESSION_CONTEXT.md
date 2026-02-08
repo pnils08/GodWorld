@@ -152,41 +152,84 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Session History
 
-### 2026-02-08 (Session 10) — Desk Packet Pipeline, Edition 79, Business Strategy
-- **Desk Packet Pipeline v1.0-1.1**: Replaced monolithic compileHandoff.js with per-desk JSON packet system
-  - **New file**: `scripts/buildDeskPackets.js` (~885 lines) — pulls 16 Google Sheets + local files, splits into per-desk filtered JSON packets
-  - **New file**: `docs/media/DESK_PACKET_PIPELINE.md` — 7-stage pipeline documented (Engine → Packets → Desk Agents → Compile → Verify → Fix → Intake)
-  - 6 desk packets: civic, sports, culture, business, chicago, letters + base_context.json + manifest.json
-  - Domain-to-desk routing (CIVIC→civic, SPORTS→sports+chicago, CULTURE→culture, ECONOMIC→business, etc.)
-  - NO front page recommendations, NO story assignments — desks decide autonomously
-  - Replaces the old 15-section handoff format entirely
-- **Edition 79 v2**: Written and finalized with Mara Vance audit corrections (863 lines)
-  - Front page: Warriors land Giannis Antetokounmpo in blockbuster 3-team trade (Milwaukee sends Giannis + Sims, GSW ships Draymond to Boston + Moody + 4 firsts to Bucks)
-  - 6 desk agents (Civic, Sports, Culture, Business, Chicago, Letters) ran in parallel
-  - Mara directive for C79: post-Stabilization fallout, Crane silence, health center approaching C80, "let the world breathe"
+### 2026-02-08 (Session 10) — Desk Packet Pipeline, Edition 79 Full Production, Business Strategy
+
+#### Part 1: Handoff Format Iteration (compileHandoff → desk packets)
+- **HANDOFF_C79 v1** (82KB): Generated via compileHandoff.js v1.0, monolithic 15-section format — same data dump problem as C78
+- **HANDOFF_C79 v2** (83KB): Attempted tightening — still too large, too prescriptive
+- **HANDOFF_C79 v3** (30KB): Cut significantly but still organized around data sources, not what writers need
+- **Decision**: Abandon monolithic handoff entirely. Build per-desk filtered packets instead.
+
+#### Part 2: Desk Packet Pipeline v1.0-1.1
+- **New file**: `scripts/buildDeskPackets.js` (~885 lines) — Node.js script pulling 16 Google Sheets + local files, splitting into per-desk filtered JSON packets
+- **New file**: `docs/media/DESK_PACKET_PIPELINE.md` — 7-stage pipeline documented (Engine → Packets → Desk Agents → Compile → Verify → Fix → Intake)
+- 6 desk packets generated: civic (37KB), sports (21KB), culture (48KB), business (10KB), chicago (13KB), letters (65KB) + base_context.json (14KB) + manifest.json (2KB)
+- Domain-to-desk routing: CIVIC/HEALTH/CRIME→civic, SPORTS→sports+chicago (keyword filtered), CULTURE/FAITH/ARTS→culture, ECONOMIC/NIGHTLIFE→business, CHICAGO→chicago, GENERAL→civic+culture
+- Storyline routing via keyword matching on Description + RelatedCitizens fields
+- Each desk gets ONLY its relevant canon (council for civic, A's roster for sports, etc.)
+- NO front page recommendations, NO story assignments — desks decide autonomously
+- Replaces compileHandoff.js entirely
+
+#### Part 3: Mara Vance Directive (C79)
+- **File**: `/tmp/mara_directive_c79.txt` (30 lines)
+- Position: Y2C27
+- Primary coverage: Post-Stabilization Fund fallout — "Where's the check?" voices in West Oakland
+- Crane's CRC silence is a story (Ashford and Chen also declined comment)
+- Health Center approaching C80 — seed the debate via Ashford's office (D7)
+- OARI pressure continues — Ramirez campaign building, Vega under fire
+- Key directive: **"No new initiatives this cycle. Let the world breathe."**
+- Upcoming votes mapped: C80 Health Center (5-4), C82 OARI (toss-up), C83 Baylight Final (likely passes)
+
+#### Part 4: Edition 79 — Full 6-Desk Parallel Production
+- **6 desk agents launched in parallel**, each receiving system prompt + desk packet JSON:
+  - **Civic Desk** (Carmen Delaine lead, 229 lines): Stabilization Fund implementation — "Where's the Check?" front-page-quality piece on West Oakland reaction. Bruce Wright, Hayes, Rivera, Nelson quoted. CRC silence noted. Crane injury report. + Temescal Health Center preview (C80 vote), Ashford's ambiguity in D7, citizens Jose Wright & Andre Lee & Bruce Lee quoted.
+  - **Sports Desk** (P Slayer lead, 208 lines): Warriors-Giannis blockbuster trade — front page pick. 3-team deal (MIL sends Giannis+Sims, GSW ships Draymond to BOS + Moody + 4 firsts to MIL). Emotional P Slayer voice. + A's spring training preview under Seymour, Keane farewell season, Davis ACL return.
+  - **Culture Desk** (Maria Keen lead, 182 lines): "Smoke, Sparklers, and the Question of Whose Independence" — Independence Day across neighborhoods. Calvin Turner's grill at Lake Merritt, Rafael Phillips's tamales in Fruitvale, Chinatown BBQ flare-up, Rockridge sparkler burn. Faith community woven in (Allen Temple choir, Cathedral emergency fund). + First Friday convergence coverage.
+  - **Business Desk** (Jordan Velez, 69 lines): Business Ticker format — First Friday + Independence Day triple overlap, retail load elevated, Copper Dock Kitchen/Almanac Table/Masa Verde/Bardo Lounge highlighted. + Stabilization Fund business angle — West Oakland storefronts vs. Jack London prosperity gap.
+  - **Chicago Bureau** (Selena Grant lead, 112 lines): Bulls trade deadline blockbuster — Jrue Holiday acquired (Tre Jones + 2nd out), Ben Simmons signed on vet minimum. 37-15 record, best in East. Full roster breakdown (Giddey, Buzelis MIP, Trepagnier ROY, Kessler, Huerter, Okoro, Dosunmu, Stanley). Paulson dual-GM tension (Warriors interest). + Chicago neighborhood piece.
+  - **Letters Desk** (citizen voices, 78 lines): 3 letters — Marcus Walker skeptical of Stabilization Fund ("Show me the check"), Jalen Hill euphoric about Giannis trade, Elijah Campbell's Fourth of July cab tour of Oakland's faith and community.
+
+- **Compilation (Mags Corliss role)**: All 6 desk outputs merged into `compiled_edition_79.txt` (812 lines). Front page called: P Slayer's Giannis piece. Section order: Front Page > Civic > Business > Culture > Sports > Chicago > Letters.
+
+- **Verification (Rhea Morgan role)**: Canon cross-check against ledger data, roster names, vote positions.
+
+- **Mara Vance audit**: Corrections applied to produce `edition_79_v2.txt` (863 lines). Specific corrections included name/detail fixes, canon alignment, quote verification.
+
+- **Final Edition 79 v2 contents**:
+  - 10+ articles across 6 desks
+  - 18 new canon figures (Robert Hayes, Bruce Wright, Dante Nelson, Jose Wright, Andre Lee, Bruce Lee, Hector Campbell, Xavier Campbell, Owen Campbell, Guadalupe Lee, Calvin Turner, Rafael Phillips, Elijah Campbell, Terrence Wright, Ronald Scott, Marco Johnson, Howard Young, Brian Williams)
+  - 30+ direct quotes preserved in engine returns
+  - Full engine returns: Article Table, Storylines Updated, Citizen Usage Log, Continuity Notes, Sports Records, New Canon Figures
   - **File**: `editions/cycle_pulse_edition_79_v2.txt`
   - **Commits**: `7d57977` (pipeline + edition), `90ef762` (Mara corrections)
+
+#### Part 5: Node.js Intake Pipeline
 - **Edition Intake Parser v1.0**: `scripts/editionIntake.js` (~479 lines)
-  - Node.js CLI tool replicating parseMediaRoomMarkdown.js logic
+  - Node.js CLI replicating parseMediaRoomMarkdown.js logic
   - Parses edition text → 4 intake sheets (Media_Intake, Storyline_Intake, Citizen_Usage_Intake, LifeHistory_Log)
+  - Supports --dry-run mode for preview
 - **Process Intake v1.1**: `scripts/processIntake.js` (~785 lines)
-  - Node.js equivalent of processMediaIntakeV2() from mediaRoomIntake.js
-  - Moves intake sheets → final ledgers (Press_Drafts, Storyline_Tracker, Citizen_Media_Usage)
-  - v1.1: Calendar context from Cycle_Packet (not World_Population), demographic extraction from name format, explicit column ranges for Advancement_Intake1
-  - Citizen routing: new → Intake (16 cols), existing → Advancement_Intake1 (10 cols)
+  - Node.js equivalent of processMediaIntakeV2()
+  - Moves intake sheets → final ledgers (Press_Drafts 14 cols, Storyline_Tracker 14 cols, Citizen_Media_Usage 12 cols)
+  - v1.1 fixes: Calendar context from Cycle_Packet `--- CALENDAR ---` section (World_Population has no calendar columns), demographic extraction from name format `"Name, Age, Neighborhood, Occupation"` → BirthYear/Neighborhood/RoleType, explicit column ranges (`Intake!A:P`, `Advancement_Intake1!A:J`) to prevent Sheets API table-detection column shift
+  - Citizen routing: new citizens → Intake (16 cols), existing → Advancement_Intake1 (10 cols)
+  - Supports --cleanup flag for fixing broken shifted rows
   - **Commit**: `c1a02a7`
-- **Handoff iteration**: 3 versions of HANDOFF_C79 (82KB → 83KB → 30KB) before desk packet pipeline replaced the format entirely
-- **AGENT_NEWSROOM.md updated**: Aligned with desk packet pipeline
-- **MEDIA_INTAKE_V2.2_HANDOFF.md updated**: Node.js scripts documented
-- **lib/sheets.js enhanced**: Additional helper functions for Node.js sheet access
-- **Business strategy & product concepts** (documented in BRANCH_HANDOFF.md):
-  - **Wix front-end initiative**: 4-phase blueprint for public-facing website (godworldoakland.com). Architecture: Google Sheets → Apps Script doGet() API → Wix Velo. Pages: World Dashboard, Citizen Directory, Citizen Profile, Neighborhood Explorer, Riley Digest, Events, Arcs, City Hall, Culture, Sports. Estimated $18/mo (Wix Light + domain).
-  - **Business strategy**: 5 revenue paths ranked — SaaS platform (highest ceiling, 1-2yr), subscription serial (fastest, 1-3mo), YouTube/podcast (medium), interactive game (huge effort), IP licensing (wildcard)
-  - **Subscription serial deep dive**: "GodWorld Weekly" on Substack. Free tier (Riley Digest) + paid $7/mo (Behind the Curtain, Citizen Spotlight, Arc Watch, Neighborhood Report, God's Hand). Revenue projections: 100 subs = $756/yr → 10K subs = $151K/yr. 1.5 hrs/week workflow.
-  - **"Wreck-It Ralph" sandbox concept**: User-generated characters dropped into living city. 3 product levels: personal sandbox ($5/mo), shared worlds ($10-15/mo), spectator content ($7/mo). Core insight: the 25 engines are character-agnostic — they normalize any input into daily city life.
-  - **Tier-aware life events design**: GAME citizens getting events from all engines, not just generateGameModeMicroEvents.js. Design concept only, not approved for implementation.
+
+#### Part 6: Business Strategy & Product Concepts
+All documented in `BRANCH_HANDOFF.md` (826 lines, now merged to main):
+- **Wix front-end initiative**: 4-phase blueprint for public-facing website (godworldoakland.com). Architecture: Google Sheets → Apps Script doGet() API → Wix Velo fetch(). Phase 1 MVP: World Dashboard, Citizen Directory, Citizen Profile (dynamic), Neighborhood Explorer. Phase 2: Riley Digest, Events Timeline, Event Arcs. Phase 3: City Hall, Cultural Scene, Sports Hub. Phase 4: Live updates, relationship web graph, historical trends. 10 API endpoints defined. Citizen merge logic (3 sheets → 1 list). Estimated $18/mo (Wix Light $17 + domain $1). Full `doGet()` blueprint provided.
+- **Business strategy — 5 revenue paths ranked**: (1) SaaS "Build Your Own City Sim" — highest ceiling, 1-2yr, $10-30/user/mo. (2) Subscription serial — fastest path, 1-3mo, $5-10/mo. (3) YouTube/Podcast "GodWorld Report" — medium effort, ad revenue. (4) Interactive web game — huge effort, 1yr+. (5) IP licensing — wildcard.
+- **Subscription serial deep dive — "GodWorld Weekly"**: Substack platform recommended. Free tier: Riley Digest. Paid $7/mo: Behind the Curtain (God's commentary), Citizen Spotlight, Arc Watch, Neighborhood Report, God's Hand (media room decisions). Premium $12-15/mo: early access, vote on storylines, name a citizen. Revenue: 100 subs = $756/yr → 10K = $151K/yr. Weekly workflow: 1.5 hrs (run cycle Mon, write commentary Tue, format Wed, publish Thu). Full content calendar template. Audience playbook (Reddit r/worldbuilding, TikTok clips, Substack discovery). Quick-start checklist.
+- **"Wreck-It Ralph" sandbox concept**: Any character (sim, sports player, monster, cartoon villain) dropped into living city. Engines normalize to daily life — Bowser gets a job, takes the bus, votes in elections. 3 product levels: personal sandbox ($5/mo), shared worlds ($10-15/mo — multiple users contribute characters), spectator content ($7/mo — curated chaos). Maps to all 5 revenue paths. Phased build: prove it works (manual add 3-5 absurd characters now), accept user submissions (Google Form, Month 1-2), self-service worlds (Month 6-12). Core insight: the 25 engines are character-agnostic — hardest part (the engines) is already done.
+- **Tier-aware life events design**: GAME citizens getting events from all 14 engines, not just generateGameModeMicroEvents.js. Rules: no video game content auto-populates, neighborhood matters, world state correlation (no walks in rain), tier-based types (Tier 1 = public figure events, Tier 3-4 = daily routine). Dependencies: restaurant engine, weather, neighborhood data, event calendar, tier classification. **Design concept only — NOT approved for implementation.**
+
+#### Part 7: Supporting Updates
+- **AGENT_NEWSROOM.md updated**: Aligned with desk packet pipeline architecture
+- **MEDIA_INTAKE_V2.2_HANDOFF.md updated**: Node.js intake scripts documented
+- **lib/sheets.js enhanced**: Additional helpers for Node.js sheet access (getSheetAsObjects, batchUpdate, listSheets, testConnection)
 - **Tech debt documented**: mulberry32_ defined in 10 files — consolidation into utilities/rng.js recommended
-- **Docs updated this session**: PROJECT_GOALS.md, PRIORITY_TASKS.md, ENGINE_ROADMAP.md, TIER_7_ROADMAP.md all brought current
+- **Reference docs updated (Session 11 recovery)**: PROJECT_GOALS.md, PRIORITY_TASKS.md, ENGINE_ROADMAP.md, TIER_7_ROADMAP.md all brought current to Cycle 79
 
 ### 2026-02-07 (Session 9) — Engine Bug Fixes & Signal Wiring
 - **updateTransitMetrics.js v1.1**: Fixed Phase 2 event timing (read previous cycle from WorldEvents_Ledger instead of empty S.worldEvents), double-counting in countMajorEvents_ (else-if), dayType magic number (named constant), demographics null safety (individual field coercion)

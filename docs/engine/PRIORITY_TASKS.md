@@ -160,7 +160,18 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Cancel Apple Claude subscription | Expires 2/16 — re-subscribe direct at claude.ai for $100/mo | Pending (2/16) |
 | claude.ai MCP connector | Connect Supermemory to Media Room web sessions | Not started |
 
-### Priority 4: Tech Debt (from AUDIT_TRACKER.md)
+### Priority 4: Engine Bug Fixes (Session 11 Audit)
+
+| Task | File | Status |
+|------|------|--------|
+| #19 Bond system — POPID + header alignment | seedRelationBondsv1.js | Done (Session 11) |
+| #21 Migration double-modification | applyDemographicDrift.js v2.3 | Done (Session 11) |
+| #22 World events cross-cycle dedup | worldEventsEngine.js v2.7 | Done (Session 11) |
+| #23 Storyline_Tracker dedup on insert | mediaRoomIntake.js v2.6 | Done (Session 11) |
+| #24 World_Population time series | godWorldEngine2.js (appendPopulationHistory_) | Done (Session 11) |
+| #20 Empty LifeHistory descriptions | (13 files audited) | Dropped — false alarm |
+
+### Priority 5: Tech Debt (from AUDIT_TRACKER.md)
 
 | Task | File | Status |
 |------|------|--------|
@@ -201,15 +212,16 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Media Intake Pipeline | 5/5 | 0 |
 | Media Room Automation | 4/5 | 1 (dedup, seed filter) |
 | Desk Packet Pipeline | 5/5 | 0 |
-| Engine Bug Fixes | 7/7 | 0 |
+| Engine Bug Fixes (Sessions 9-10) | 7/7 | 0 |
+| Engine Bug Fixes (Session 11 audit) | 5/5 | 0 (1 dropped) |
 | Subscription & Tooling | 0/3 | 3 |
 | Testing | 0/3 | 3 |
 | Tech Debt | 0/2 | 2 (low priority) |
 
 **Next Actions:**
-1. Archive dead sheets (Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste)
-2. Fix Bulls roster in Simulation_Ledger (real players need to be added)
-3. Storyline_Tracker archival — 986 rows, old resolved entries need cleanup
-4. Integration testing — run full cycle with new Node.js intake pipeline
+1. Run Cycle 80 — validates all Session 11 bug fixes (bonds, migration, events, storylines, population history). Bulls roster promotes from Intake to Simulation_Ledger.
+2. Delete + recreate Relationship_Bonds sheet — seeder will create with correct 17-col headers
+3. Archive dead sheets (Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste)
+4. Storyline_Tracker cleanup — archive 872 blank/other rows, keep 127 active + 1 resolved
 5. Activate Supermemory Pro after subscription sort (2/16)
 6. mulberry32_ consolidation — 10 copies into utilities/rng.js

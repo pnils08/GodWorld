@@ -171,6 +171,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **#22 HIGH**: World events 37% duplicate rate — ~60 templates, no cross-cycle dedup
   - **#23 HIGH**: Storyline_Tracker 83% duplicate rate — same storylines re-appended instead of updated
   - **#24 HIGH**: World_Population single data point — overwrites instead of appending, no time series
+- **Docs updated**: ENGINE_ROADMAP.md (Session 11 audit table), PRIORITY_TASKS.md (Priority 4 bug fixes, progress summary, next actions)
 - **Weather confirmed NOT broken**: applyWeatherModel.js v3.5 has correct Oakland monthly climate data (July: 58-74°F), Markov chain fronts, 12 neighborhood microclimates
 - **#20 DROPPED**: All 13 LifeHistory_Log writers populate description field. Initial audit was wrong.
 - **5 bugs fixed**:
@@ -754,9 +755,11 @@ any code is written.
 
 5. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
 
-6. **CHECK: World_Population** — Only 2 rows, mostly empty. May be normal (summary sheet) or may need fix.
+6. **FIXED: World_Population** — appendPopulationHistory_ (Bug #24) now appends row 2 as time series after Phase 10. Row 2 = current, rows 3+ = history.
 
-7. Activate Supermemory Pro after subscription sort (2/16)
+7. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
+
+8. Activate Supermemory Pro after subscription sort (2/16)
 
 ---
 

@@ -501,6 +501,19 @@ Significant work done after Tiers 1-6 completion:
 - saveV3BondsToLedger_ wired into V2/V3 engine pipelines
 - loadRelationshipBonds_ added to V3 pipeline before runBondEngine_
 
+### Session 11 Deep Audit & Bug Fixes (2026-02-08)
+
+Code-level audit found 6 bugs (5 fixed, 1 false alarm). See AUDIT_TRACKER.md #19-#24.
+
+| Bug | File | Fix |
+|-----|------|-----|
+| #19 CRITICAL: Bonds never formed (0 rows after 79 cycles) | seedRelationBondsv1.js | Added POPID to column search, aligned 17-col headers with bondPersistence.js |
+| #21 HIGH: Migration double-modification | applyDemographicDrift.js v2.3 | Removed migration modification — updateWorldPopulation_ is sole owner |
+| #22 HIGH: World events 37% duplicate rate | worldEventsEngine.js v2.7 | Cross-cycle dedup — loads last 5 cycles into `used` object |
+| #23 HIGH: Storyline_Tracker 83% duplicates | mediaRoomIntake.js v2.6 | Dedup check before append — skips if Description+active already exists |
+| #24 HIGH: World_Population no time series | godWorldEngine2.js | appendPopulationHistory_ v1.0 — copies row 2 to end after Phase 10 writes |
+| #20 DROPPED: Empty LifeHistory descriptions | (13 files) | All writers populate descriptions — initial audit was wrong |
+
 See `docs/engine/PRIORITY_TASKS.md` for detailed task tracking.
 
 ---

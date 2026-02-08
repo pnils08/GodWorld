@@ -5,7 +5,7 @@
 **Theme:** Ripple Effects, Economic Depth, Citizen Trajectories, Agent Integration
 **Status:** In Progress
 **Created:** 2026-02-02
-**Updated:** 2026-02-03
+**Updated:** 2026-02-08
 
 ---
 
@@ -25,12 +25,12 @@ These are bugs/incomplete features blocking Tier 7 work:
 
 | Item | Doc | Status |
 |------|-----|--------|
-| Delayed initiatives stuck forever | CIVIC_INITIATIVE_v1.5_UPGRADE.md | Planned |
-| Math.random() → ctx.rng() | CIVIC_INITIATIVE_v1.5_UPGRADE.md | Planned |
-| Ripple consumer function | CIVIC_INITIATIVE_v1.5_UPGRADE.md | Planned |
-| Quorum vs votes-needed | CIVIC_INITIATIVE_v1.5_UPGRADE.md | Planned |
+| Delayed initiatives stuck forever | CIVIC_INITIATIVE_v1.5_UPGRADE.md | **Done** (v1.5) |
+| Math.random() → ctx.rng() | CIVIC_INITIATIVE_v1.5_UPGRADE.md | **Done** (v1.5) |
+| Ripple consumer function | CIVIC_INITIATIVE_v1.5_UPGRADE.md | **Done** (v1.5) |
+| Quorum vs votes-needed | CIVIC_INITIATIVE_v1.5_UPGRADE.md | **Done** (v1.6) |
 
-**Do not start Tier 7 features until prerequisites are complete.**
+**All prerequisites complete.** Tier 7 features implemented.
 
 ---
 
@@ -45,7 +45,7 @@ These are bugs/incomplete features blocking Tier 7 work:
 | Build `applyActiveInitiativeRipples_()` | civicInitiativeEngine.js:1379-1469 | Done |
 | Wire into engine orchestrator | godWorldEngine2.js Phase 6 | Done |
 | Add AffectedNeighborhoods column | Initiative_Tracker | Done |
-| Add PolicyDomain column | Initiative_Tracker | Optional (falls back to keyword detection) |
+| Add PolicyDomain column | Initiative_Tracker | **Done** (v1.6 — sheet schema, seed data, demographic influence all wired) |
 | `getRippleEffectsForNeighborhood_()` helper | civicInitiativeEngine.js:1480-1512 | Done |
 | `applyNeighborhoodRipple_()` creator | civicInitiativeEngine.js:1209-1362 | Done |
 
@@ -424,9 +424,16 @@ The context pack derives routing flags without LLM:
 
 **Remaining for Tier 7 completion:**
 1. Integration testing across 5+ cycles
-2. (Optional) Add engine-side continuityHints population
 
-**Ready for Claude integration:**
-- Engine exports context packs (Phase 11)
-- OpenClaw skills ready for deployment
-- SQLite schema includes mention tracking
+**Tier 7 complete items since last update:**
+- PolicyDomain column added to Initiative_Tracker (v1.6)
+- Engine-side continuityHints populated (computeRecurringCitizens v1.0, wired Phase 6)
+- Bond persistence fixed — saveV3BondsToLedger_ wired into both pipelines
+- Transit/faith story signals wired into Phase 6 orchestrator
+- updateTransitMetrics v1.1, faithEventsEngine v1.1, generateGameModeMicroEvents v1.3 bug fixes
+
+**Media pipeline (post-Tier 7):**
+- Desk Packet Pipeline replaces monolithic handoff (scripts/buildDeskPackets.js)
+- Edition 79 produced via 6-desk parallel agents + Mara Vance audit
+- Node.js intake pipeline (editionIntake.js + processIntake.js) replaces GAS-only flow
+- See docs/media/DESK_PACKET_PIPELINE.md for full pipeline documentation

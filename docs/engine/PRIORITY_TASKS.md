@@ -1,7 +1,7 @@
 # Priority Task List
 
 **Created:** 2026-02-02
-**Updated:** 2026-02-06
+**Updated:** 2026-02-08
 **Status:** Active tracking document
 
 ---
@@ -92,6 +92,28 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Wire Press_Drafts as consumer | Section 9B PREVIOUS COVERAGE in briefing generator reads cycle N-1 drafts | Done |
 | Update handoff doc | Bold headers accepted, source versions updated | Done |
 
+### Completed: Engine Bug Fixes & Signal Wiring (2026-02-07)
+
+| Task | Description | Status |
+|------|-------------|--------|
+| updateTransitMetrics.js v1.1 | Phase 2 event timing (read cycle N-1), double-counting fix, dayType constant, null safety | Done |
+| faithEventsEngine.js v1.1 | simMonth fix (S.simMonth not wall clock), namespace collision prevention (shuffleFaithOrgs_) | Done |
+| generateGameModeMicroEvents.js v1.3 | Write-intents conversion (queueRangeIntent_, queueBatchAppendIntent_), namespace safety | Done |
+| Wire transit story signals | Phase6-TransitSignals in V2 + V3 orchestrator pipelines | Done |
+| Wire faith story signals | Phase6-FaithSignals in V2 + V3 orchestrator pipelines | Done |
+| Citizen intake routing | mediaRoomIntake.js v2.5 — routeCitizenUsageToIntake_() for Intake/Advancement routing | Done |
+| Continuity pipeline elimination | Removed Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste from pipeline | Done |
+
+### Completed: Desk Packet Pipeline & Edition 79 (2026-02-08)
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Build desk packet pipeline | scripts/buildDeskPackets.js — per-desk JSON from 16 sheets, replaces compileHandoff.js | Done (v1.0) |
+| Document pipeline | docs/media/DESK_PACKET_PIPELINE.md — 7-stage pipeline, desk definitions, canon rules | Done (v1.1) |
+| Write Edition 79 | 6 desk agents → Mags compile → Rhea verify → Mara audit | Done (editions/cycle_pulse_edition_79_v2.txt) |
+| Build edition intake parser | scripts/editionIntake.js — Node.js CLI, parses edition → 4 intake sheets | Done (v1.0) |
+| Build process intake script | scripts/processIntake.js — Node.js CLI, intake → final ledgers + citizen routing | Done (v1.1) |
+
 ### Previously Completed (Tier 7 / Bug Fixes)
 
 | Task | Status |
@@ -115,9 +137,10 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 
 | Task | Description | Status |
 |------|-------------|--------|
-| Build compileHandoff() script | GAS function to automate handoff compilation from sheets | Done (v1.0) |
+| ~~Build compileHandoff() script~~ | ~~GAS function~~ → **Superseded** by scripts/buildDeskPackets.js (desk packet pipeline) | Done (superseded) |
 | Repair media intake pipeline | Consolidate processors, fix Phase 11, fix parser, wire Press_Drafts | Done (v2.3/v1.4) |
-| Feed Edition 78 returns to engine | Paste into MediaRoom_Paste → parseMediaRoomMarkdown() → processMediaIntakeV2() | Ready — pipeline repaired, needs `clasp push` + test |
+| Feed Edition 78 returns to engine | Pipeline repaired, edition parsed and processed | Done |
+| Feed Edition 79 returns to engine | Via editionIntake.js + processIntake.js Node.js pipeline | Done |
 | Fix Media Briefing continuity dedup | Engine-side fix to collapse duplicate continuity notes | Not started |
 | Filter Priority 1 seeds in engine | Stop generating filler seeds ("Barbecue smoke rises") | Not started |
 
@@ -176,15 +199,17 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Media Room & Tooling | 6/6 | 0 |
 | Edition 78 Production | 6/6 | 0 |
 | Media Intake Pipeline | 5/5 | 0 |
-| Media Room Automation | 2/5 | 3 (feed returns, dedup, seed filter) |
+| Media Room Automation | 4/5 | 1 (dedup, seed filter) |
+| Desk Packet Pipeline | 5/5 | 0 |
+| Engine Bug Fixes | 7/7 | 0 |
 | Subscription & Tooling | 0/3 | 3 |
 | Testing | 0/3 | 3 |
 | Tech Debt | 0/2 | 2 (low priority) |
-| Optional | 0/3 | 3 |
 
 **Next Actions:**
-1. `clasp push` + test media intake pipeline with Edition 78 data
-2. Feed Edition 78 returns back to engine (pipeline repaired, ready to run)
-3. Run Cycle 79 — verify Phase 11, briefing Sections 9 + 9B
-4. Integration testing — run 5+ cycles with all systems active
+1. Archive dead sheets (Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste)
+2. Fix Bulls roster in Simulation_Ledger (real players need to be added)
+3. Storyline_Tracker archival — 986 rows, old resolved entries need cleanup
+4. Integration testing — run full cycle with new Node.js intake pipeline
 5. Activate Supermemory Pro after subscription sort (2/16)
+6. mulberry32_ consolidation — 10 copies into utilities/rng.js

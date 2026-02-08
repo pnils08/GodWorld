@@ -14,13 +14,14 @@ GodWorld is a **living city simulation** that generates emergent narratives. The
 - Outputs to **Google Sheets** (20+ ledgers)
 - Runs ~weekly cycles
 
-### 2. Media Room (Working — parallel-agent production validated)
+### 2. Media Room (Working — desk packet pipeline production-validated)
 - Claude-powered journalism layer
 - Reads simulation output, writes news content (Bay Tribune Pulse, Council Watch, etc.)
-- **Handoff Guide:** `docs/media/MEDIA_ROOM_HANDOFF.md` — structured workflow reducing 402KB raw exports to ~15KB compiled handoff (96% reduction)
-- **Edition 78 produced by Claude Code** using 5 parallel desk agents (Civic, Sports, Chicago, Faith/Culture, Letters) — 6 articles + 3 letters in ~70 seconds wall time. See `editions/cycle_pulse_edition_78.txt`
-- **Production workflow validated:** compileHandoff → parallel desk agents → editorial compilation → canon correction → engine returns
-- **Remaining pain point:** No persistent memory. Handoff is documented but still manual. Returns need to be fed back to engine.
+- **Desk Packet Pipeline:** `docs/media/DESK_PACKET_PIPELINE.md` — per-desk JSON packets from 16 sheets, replaces monolithic handoff
+- **Edition 79 produced via desk packet pipeline** — 6 desk agents (Civic, Sports, Culture, Business, Chicago, Letters) with Mara Vance audit corrections. See `editions/cycle_pulse_edition_79_v2.txt`
+- **Node.js intake pipeline:** `scripts/editionIntake.js` (parse edition → intake sheets) + `scripts/processIntake.js` (intake → final ledgers + citizen routing)
+- **Production workflow validated:** buildDeskPackets → parallel desk agents → Mags compile → Rhea verify → Mara audit → engine intake
+- **Remaining pain point:** No persistent memory. Returns pipeline works but is manual.
 
 ---
 
@@ -49,7 +50,7 @@ The automation stack is built from focused tools instead of a monolithic framewo
 |------|------|--------|
 | Persistent session memory | **Supermemory MCP** — shared across Claude Code, claude.ai, Desktop | Plugin installed, needs Pro sub |
 | Citizen data access | **claude.ai MCP connector** — query SQLite or Sheets directly | Not started |
-| Media generation | **Claude Code parallel agents** — 5 desk agents write simultaneously | **Validated** (Edition 78) |
+| Media generation | **Claude Code parallel agents** — 6 desk agents write simultaneously | **Validated** (Edition 78 + 79) |
 | Media generation (alt) | **Agent Newsroom (Claude Agent SDK)** — 25 journalist agents | Planned (docs/media/AGENT_NEWSROOM.md) |
 | Auto-sync from Sheets | **cron + scripts/sync.js** — on DigitalOcean | Scripts exist, cron not configured |
 | Continuity checking | **Agent Newsroom** — Rhea Morgan (continuity agent) runs every cycle | Planned |
@@ -238,22 +239,24 @@ Existing OpenClaw code that remains useful without the framework:
 
 ## Current Status
 
-- [x] Simulation engine working (v3.1, Cycle 78)
+- [x] Simulation engine working (v3.1, Cycle 79)
 - [x] Export code written (exportCycleArtifacts.js)
 - [x] SQLite schema defined (openclaw-skills/schemas/godworld.sql)
 - [x] Sync scripts written (scripts/sync.js, godworld-sync/index.js)
 - [x] Media generator reference code (openclaw-skills/media-generator/index.js)
 - [x] Agent Newsroom architecture planned (docs/media/AGENT_NEWSROOM.md)
 - [x] Media Room Handoff Guide (docs/media/MEDIA_ROOM_HANDOFF.md — 96% data reduction)
-- [x] Cycle 78 compiled handoff demonstrated (15KB vs 402KB raw)
+- [x] **Desk Packet Pipeline** — per-desk JSON packets replace monolithic handoff (docs/media/DESK_PACKET_PIPELINE.md)
 - [x] **Edition 78 written by parallel agents** — 5 desks, 6 articles + 3 letters, 14 citizens quoted, 4 new canon figures
-- [x] **Parallel-agent workflow validated** — production model for future editions confirmed
+- [x] **Edition 79 written via desk packet pipeline** — 6 desks, Mara Vance audit, Giannis trade front page
+- [x] **Node.js intake pipeline** — editionIntake.js + processIntake.js (parse → intake → ledgers → citizen routing)
+- [x] **Edition 78 returns fed to engine** — pipeline repaired and validated
 - [x] Supermemory plugin installed + configured for Claude Code
-- [ ] Feed Edition 78 returns back to engine (Article Table, Storylines, Usage Log, Continuity Notes)
+- [x] **Engine bug fixes** — updateTransitMetrics v1.1, faithEventsEngine v1.1, generateGameModeMicroEvents v1.3
+- [x] **Story signals wired** — transit + faith signals into Phase 6 orchestrator (V2 + V3)
 - [ ] Supermemory Pro subscription (blocks codebase indexing)
 - [ ] Cancel Apple Claude subscription, re-subscribe direct (expires 2/16)
 - [ ] claude.ai MCP connector for Media Room sessions
 - [ ] Cron job for auto-sync (scripts/sync.js on DigitalOcean)
 - [ ] Agent Newsroom implementation (Claude Agent SDK)
-- [ ] Build compileHandoff() script in Google Apps Script
-- [ ] End-to-end test with cycle comparison
+- [ ] End-to-end integration test with full cycle

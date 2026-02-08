@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-07 | Engine: v3.1 | Cycle: 79 | Session: 9
+Last Updated: 2026-02-08 | Engine: v3.1 | Cycle: 79 | Session: 10
 
 ---
 
@@ -91,7 +91,10 @@ GodWorld/
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix, null safety |
 | Faith Events | faithEventsEngine.js | v1.1 | simMonth fix, namespace safety, story signals |
 | Game Mode Events | generateGameModeMicroEvents.js | v1.3 | Write-intents, namespace safety |
-| Handoff Compiler | compileHandoff.js | v1.1 | Handoff compiler — NEEDS REBUILD around Cycle Packet (current 15-section format is data dump, not useful) |
+| Handoff Compiler | compileHandoff.js | v1.1 | **SUPERSEDED** by scripts/buildDeskPackets.js (desk packet pipeline) |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v1.0 | Per-desk JSON packets from 16 sheets, replaces monolithic handoff |
+| Edition Intake | scripts/editionIntake.js | v1.0 | Node.js CLI — parses edition → 4 intake sheets |
+| Process Intake (Node) | scripts/processIntake.js | v1.1 | Node.js CLI — intake sheets → final ledgers + citizen routing |
 
 ---
 
@@ -148,6 +151,42 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-08 (Session 10) — Desk Packet Pipeline, Edition 79, Business Strategy
+- **Desk Packet Pipeline v1.0-1.1**: Replaced monolithic compileHandoff.js with per-desk JSON packet system
+  - **New file**: `scripts/buildDeskPackets.js` (~885 lines) — pulls 16 Google Sheets + local files, splits into per-desk filtered JSON packets
+  - **New file**: `docs/media/DESK_PACKET_PIPELINE.md` — 7-stage pipeline documented (Engine → Packets → Desk Agents → Compile → Verify → Fix → Intake)
+  - 6 desk packets: civic, sports, culture, business, chicago, letters + base_context.json + manifest.json
+  - Domain-to-desk routing (CIVIC→civic, SPORTS→sports+chicago, CULTURE→culture, ECONOMIC→business, etc.)
+  - NO front page recommendations, NO story assignments — desks decide autonomously
+  - Replaces the old 15-section handoff format entirely
+- **Edition 79 v2**: Written and finalized with Mara Vance audit corrections (863 lines)
+  - Front page: Warriors land Giannis Antetokounmpo in blockbuster 3-team trade (Milwaukee sends Giannis + Sims, GSW ships Draymond to Boston + Moody + 4 firsts to Bucks)
+  - 6 desk agents (Civic, Sports, Culture, Business, Chicago, Letters) ran in parallel
+  - Mara directive for C79: post-Stabilization fallout, Crane silence, health center approaching C80, "let the world breathe"
+  - **File**: `editions/cycle_pulse_edition_79_v2.txt`
+  - **Commits**: `7d57977` (pipeline + edition), `90ef762` (Mara corrections)
+- **Edition Intake Parser v1.0**: `scripts/editionIntake.js` (~479 lines)
+  - Node.js CLI tool replicating parseMediaRoomMarkdown.js logic
+  - Parses edition text → 4 intake sheets (Media_Intake, Storyline_Intake, Citizen_Usage_Intake, LifeHistory_Log)
+- **Process Intake v1.1**: `scripts/processIntake.js` (~785 lines)
+  - Node.js equivalent of processMediaIntakeV2() from mediaRoomIntake.js
+  - Moves intake sheets → final ledgers (Press_Drafts, Storyline_Tracker, Citizen_Media_Usage)
+  - v1.1: Calendar context from Cycle_Packet (not World_Population), demographic extraction from name format, explicit column ranges for Advancement_Intake1
+  - Citizen routing: new → Intake (16 cols), existing → Advancement_Intake1 (10 cols)
+  - **Commit**: `c1a02a7`
+- **Handoff iteration**: 3 versions of HANDOFF_C79 (82KB → 83KB → 30KB) before desk packet pipeline replaced the format entirely
+- **AGENT_NEWSROOM.md updated**: Aligned with desk packet pipeline
+- **MEDIA_INTAKE_V2.2_HANDOFF.md updated**: Node.js scripts documented
+- **lib/sheets.js enhanced**: Additional helper functions for Node.js sheet access
+- **Business strategy & product concepts** (documented in BRANCH_HANDOFF.md):
+  - **Wix front-end initiative**: 4-phase blueprint for public-facing website (godworldoakland.com). Architecture: Google Sheets → Apps Script doGet() API → Wix Velo. Pages: World Dashboard, Citizen Directory, Citizen Profile, Neighborhood Explorer, Riley Digest, Events, Arcs, City Hall, Culture, Sports. Estimated $18/mo (Wix Light + domain).
+  - **Business strategy**: 5 revenue paths ranked — SaaS platform (highest ceiling, 1-2yr), subscription serial (fastest, 1-3mo), YouTube/podcast (medium), interactive game (huge effort), IP licensing (wildcard)
+  - **Subscription serial deep dive**: "GodWorld Weekly" on Substack. Free tier (Riley Digest) + paid $7/mo (Behind the Curtain, Citizen Spotlight, Arc Watch, Neighborhood Report, God's Hand). Revenue projections: 100 subs = $756/yr → 10K subs = $151K/yr. 1.5 hrs/week workflow.
+  - **"Wreck-It Ralph" sandbox concept**: User-generated characters dropped into living city. 3 product levels: personal sandbox ($5/mo), shared worlds ($10-15/mo), spectator content ($7/mo). Core insight: the 25 engines are character-agnostic — they normalize any input into daily city life.
+  - **Tier-aware life events design**: GAME citizens getting events from all engines, not just generateGameModeMicroEvents.js. Design concept only, not approved for implementation.
+- **Tech debt documented**: mulberry32_ defined in 10 files — consolidation into utilities/rng.js recommended
+- **Docs updated this session**: PROJECT_GOALS.md, PRIORITY_TASKS.md, ENGINE_ROADMAP.md, TIER_7_ROADMAP.md all brought current
 
 ### 2026-02-07 (Session 9) — Engine Bug Fixes & Signal Wiring
 - **updateTransitMetrics.js v1.1**: Fixed Phase 2 event timing (read previous cycle from WorldEvents_Ledger instead of empty S.worldEvents), double-counting in countMajorEvents_ (else-if), dayType magic number (named constant), demographics null safety (individual field coercion)
@@ -607,30 +646,30 @@ any code is written.
 49. **COMPLETE**: Citizen intake routing — mediaRoomIntake.js v2.5, routeCitizenUsageToIntake_() wired into Phase 11, 297 backlogged citizens cleared on first run
 50. **COMPLETE**: CYCLE_PULSE_TEMPLATE v1.3 — journalists byline tracking only, not citizen usage/advancement
 
-**Next Actions (Session 10):**
+51. **COMPLETE**: Desk Packet Pipeline v1.0-1.1 — buildDeskPackets.js replaces compileHandoff.js, per-desk JSON packets from 16 sheets, 7-stage pipeline documented
+52. **COMPLETE**: Edition 79 v2 — written with desk packet pipeline, Mara Vance audit corrections applied (863 lines, Warriors/Giannis trade front page)
+53. **COMPLETE**: editionIntake.js v1.0 — Node.js CLI for parsing editions into intake sheets
+54. **COMPLETE**: processIntake.js v1.1 — Node.js CLI for intake → final ledgers, calendar from Cycle_Packet, demographic extraction, explicit column ranges
+55. **COMPLETE**: Business strategy documented in BRANCH_HANDOFF.md — 5 revenue paths, Wix blueprint, subscription serial playbook, Wreck-It Ralph sandbox concept
+56. **COMPLETE**: Tier-aware life events design concept documented (GAME citizens getting full engine events)
+57. **COMPLETE**: All reference docs updated — PROJECT_GOALS, PRIORITY_TASKS, ENGINE_ROADMAP, TIER_7_ROADMAP brought current to Cycle 79
 
-1. **FIX: Re-run citizen intake routing** — Clear `Routed` column in Citizen_Media_Usage, re-run `processMediaIntakeV2()`, manually dedup Intake (repeated names from multiple appearances). Advancement_Intake1 was incorrectly cleared — the 122 existing citizen entries need to be re-routed. Future: consider adding dedup logic and Chicago athlete routing (Bulls/Chicago citizens → Chicago_Citizens instead of Oakland Intake).
+**Next Actions (Session 11):**
 
-2. **REBUILD: compileHandoff.js** — Current 15-section format is a data dump. Rebuild around:
-   - Section 1: Cycle Packet (paste the raw engine output — what happened)
-   - Section 2: Sports Feeds (current cycle video game results/trades)
-   - Section 3: Active Arcs (5-8 ongoing storylines, not 65)
-   - Section 4: Civic Reference (council + pending votes, one place only)
-   - Section 5: Return Format (article table, storylines, citizen usage log formats)
-   - Target: ~10-12KB, 5 sections. No story assignments, no front page recommendations, no story seeds, no cultural entity dumps. The media room decides what to cover.
+1. **UNKNOWN: Citizen intake routing status** — Was this done via processIntake.js? Check sheet state. Advancement_Intake1 may still need re-population.
 
-3. **ENHANCE: Cycle Packet** — May need additions for the media room (TBD by user). Currently 4KB with calendar, civic, events, dynamics, weather, Chicago. May want to add: active arcs summary, recent edition coverage, canon names.
+2. **CLEANUP: Archive dead sheets** — Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste can be archived/deleted from spreadsheet.
 
-4. **REDO: Edition 79** — Write with the new handoff format after rebuild.
+3. **FIX: Bulls roster in Simulation_Ledger** — Real players (Trepagnier, Tre Jones, Jrue Holiday, Ben Simmons) need to be in the ledger. May be unblocked now if citizen intake routing ran.
 
-5. **CLEANUP: Archive dead sheets** — Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste, Citizen_Media_Usage can be archived/deleted from spreadsheet.
+4. **FIX: Storyline_Tracker bloat** — 986 rows. Has lifecycle now (resolved status works) but needs archival of old resolved entries.
 
-6. **FIX: Bulls roster in Simulation_Ledger** — Real players (Trepagnier, Tre Jones, Jrue Holiday, Ben Simmons) need to be in the ledger. Currently blocked by stuck citizen intake.
+5. **CONSIDER: compileHandoff.js cleanup** — Now superseded by buildDeskPackets.js. Could be deleted or archived. Still referenced from GodWorld Exports menu in cycleExportAutomation.js.
 
-7. **FIX: Storyline_Tracker bloat** — 986 rows. Has lifecycle now (resolved status works) but needs archival of old resolved entries.
+6. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase, consolidate into utilities/rng.js
 
-8. Integration testing — run cycles with fixed intake pipeline
-9. Activate Supermemory Pro after subscription sort (2/16)
+7. Integration testing — run a full cycle with the new Node.js intake pipeline
+8. Activate Supermemory Pro after subscription sort (2/16)
 
 ---
 

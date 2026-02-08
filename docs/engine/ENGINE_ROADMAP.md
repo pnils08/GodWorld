@@ -3,8 +3,8 @@
 **Purpose:** Actionable implementation plan with clear priorities.
 **Companion:** See `V3_ARCHITECTURE.md` for technical specifications.
 
-**Last Updated:** 2026-01-26
-**Current Cycle:** 75
+**Last Updated:** 2026-02-08
+**Current Cycle:** 79
 **Engine Version:** v3.1
 
 ---
@@ -474,6 +474,34 @@ Adds narrative richness to the simulation with new data domains.
   - Corridor metrics: traffic index
   - Game day handling for Coliseum area
   - `getTransitStorySignals_()` for metro desk
+
+---
+
+---
+
+## Post-Tier 6: Engine Fixes & Media Pipeline (Sessions 8-10)
+
+Significant work done after Tiers 1-6 completion:
+
+### Engine Bug Fixes (Session 9, 2026-02-07)
+- **updateTransitMetrics.js v1.1** — Phase 2 event timing (reads cycle N-1 from WorldEvents_Ledger), double-counting fix, dayType constant, null safety
+- **faithEventsEngine.js v1.1** — simMonth fix (uses S.simMonth not wall clock), namespace collision prevention
+- **generateGameModeMicroEvents.js v1.3** — write-intents conversion, namespace collision prevention
+- **Story signals wired** — Phase6-TransitSignals + Phase6-FaithSignals added to V2 + V3 orchestrator pipelines
+
+### Media Pipeline Evolution (Sessions 7-10, 2026-02-07 to 2026-02-08)
+- **Continuity pipeline eliminated** (Session 8) — Continuity_Loop/Intake/Raw removed, quotes route to LifeHistory_Log
+- **compileHandoff.js v1.0** (Session 5) — monolithic 15-section handoff, then declared useless
+- **Desk Packet Pipeline v1.0** (Session 10) — per-desk JSON packets from 16 sheets, replaces monolithic handoff
+- **Node.js intake pipeline** (Session 10) — editionIntake.js + processIntake.js for edition → ledger flow
+- **Edition 78** — first parallel-agent production (5 desks)
+- **Edition 79** — desk packet pipeline production (6 desks + Mara Vance audit)
+
+### Bond Persistence Fix (Session 9, 2026-02-07)
+- saveV3BondsToLedger_ wired into V2/V3 engine pipelines
+- loadRelationshipBonds_ added to V3 pipeline before runBondEngine_
+
+See `docs/engine/PRIORITY_TASKS.md` for detailed task tracking.
 
 ---
 

@@ -460,6 +460,180 @@ path to pursue.
 
 ---
 
+## Subscription Serial Deep Dive: "GodWorld Weekly"
+
+### What You Already Have (Free Content)
+
+Every simulation cycle already generates publishable content:
+
+| Content | Source Sheet | Effort to Publish |
+|---|---|---|
+| Riley Digest (newspaper) | `Riley_Digest` | Zero — already written by engine |
+| World events (5-15 per cycle) | `WorldEvents_V3_Ledger` | Copy/paste + light editing |
+| Citizen life events | `LifeHistory_Log` | Needs narrative framing |
+| Neighborhood shifts | `Neighborhood_Map` | Dashboard visual |
+| Active crisis arcs | `Event_Arc_Ledger` | Needs storytelling wrapper |
+| Civic moves (elections, initiatives) | `Civic_Office_Ledger`, `Initiative_Tracker` | Recap format |
+| Sports impact on city | `Sports_Feed` | Already game-connected |
+
+The engines generate ~80% of the content. The gap is **packaging and voice.**
+
+---
+
+### The Product Tiers
+
+**Free tier** (hooks them in):
+- Riley Digest — the headline newspaper edition each week
+- World Dashboard snapshot (Wix site link)
+
+**Paid tier — $7/month or $60/year:**
+- **"Behind the Curtain"** — God's editorial commentary on why events happened, what's
+  coming, engine decisions you made. The creator's perspective.
+- **Citizen Spotlight** — deep profile on 1-2 citizens per week. Life timeline, bonds,
+  neighborhood, what's next for them.
+- **Arc Watch** — active crisis arcs broken down: tension level, who's involved, possible
+  outcomes, how it escalated.
+- **Neighborhood Report** — one neighborhood per week deep dive: crime, nightlife, retail,
+  who moved in/out, sentiment shift.
+- **"The God's Hand"** — what YOU did in the media room this week. What you typed in, what
+  you overrode, what you let the engines decide. Behind-the-scenes content nobody else
+  can generate.
+
+**Premium tier — $12-15/month:**
+- Everything above
+- **Early access** to next cycle before free readers see it
+- **Vote on storylines** — "Should the Mayor face a recall? Should Vinnie Keane get traded?"
+  Poll results go into the media room.
+- **Name a citizen** — subscriber names get added to the Generic_Citizens pool
+
+---
+
+### Platform Comparison
+
+| Platform | Cut They Take | Best For |
+|---|---|---|
+| **Substack** | 10% of paid subs | Newsletter-first, built-in discovery, readers find you through Substack's recommendation network |
+| **Patreon** | 5-12% | Community-first, tiers, polls, exclusive posts |
+| **Ghost** | $0 (self-hosted) or $9/month | Full control, own your audience, custom branding |
+| **Beehiiv** | Free up to 2,500 subs | Newsletter-focused, good analytics, monetization built in |
+| **Wix (built-in blog + paywall)** | Part of existing Wix plan | Everything in one place, but weaker newsletter/discovery tools |
+
+**Recommendation:** Start with **Substack**. Zero upfront cost. Built-in audience discovery
+(Substack recommends you to similar readers). Easy to migrate later. The Riley Digest format
+is a natural fit for Substack's newsletter model.
+
+---
+
+### Weekly Workflow: Time Investment
+
+| Task | Time | Day |
+|---|---|---|
+| Run simulation cycle | 5 min (already doing this) | Monday |
+| Review engine output, pick highlights | 15 min | Monday |
+| Write "Behind the Curtain" commentary (2-3 paragraphs) | 20 min | Tuesday |
+| Write Citizen Spotlight (pick 1 citizen, narrate their story) | 20 min | Tuesday |
+| Write Arc Watch recap (active crises, what changed) | 15 min | Wednesday |
+| Format and schedule the Substack post | 10 min | Wednesday |
+| Post free Riley Digest teaser to socials | 5 min | Thursday (publish day) |
+| **Total weekly time** | **~1.5 hours** | |
+
+1.5 hours per week. The engines do the heavy lifting.
+
+---
+
+### Revenue Projections
+
+| Total Subscribers | Free : Paid Ratio | Paying Subs | Monthly Revenue ($7/mo) | Annual (after 10% Substack cut) |
+|---|---|---|---|---|
+| 100 | 90:10 | 10 | $70 | $756 |
+| 500 | 85:15 | 75 | $525 | $5,670 |
+| 1,000 | 80:20 | 200 | $1,400 | $15,120 |
+| 5,000 | 80:20 | 1,000 | $7,000 | $75,600 |
+| 10,000 | 80:20 | 2,000 | $14,000 | $151,200 |
+
+**Reality check:**
+- 100-500 total subs: achievable in first 3-6 months with consistent publishing
+- 1,000+: requires real audience building, cross-platform promotion
+- 5,000+: full-time income territory, requires dedicated following
+- 10,000+: top-tier Substack creator territory
+
+---
+
+### Audience Building Playbook
+
+**Month 1-2: Seed audience**
+- Publish Riley Digest free on Substack weekly — build a backlog of editions
+- Cross-post clips to Reddit: r/worldbuilding, r/SimCity, r/proceduralgeneration, r/writingprompts
+- Twitter/X threads: "I built an AI-powered city simulation. Here's what happened this
+  week in Oakland." with screenshots of the dashboard
+- TikTok/Reels: 60-second narration of the wildest event each cycle
+- Share on r/indiegaming, r/gamedev, r/artificialintelligence
+
+**Month 2-4: Convert to paid**
+- First 4-6 editions are fully free — hook people on the world
+- Gate the deep content (Citizen Spotlight, Arc Watch, God's Hand) behind the paywall
+- Free readers still get Riley Digest — enough to stay interested, not enough to feel complete
+- Add a "Subscribe" CTA at the bottom of every free post with a teaser of what paid got
+
+**Month 4+: Compound growth**
+- Substack recommendation engine kicks in — shows your newsletter to similar readers
+- Loyal subscribers share specific citizen stories ("You gotta read what happened to
+  Vinnie Keane this week")
+- YouTube/podcast layer drives new subscribers back to Substack
+- Cross-promote: Wix site links to Substack, Substack links to Wix
+- Guest appearances on worldbuilding/game design podcasts
+
+---
+
+### Content Calendar Template (1 Month)
+
+| Week | Free Post (Riley Digest) | Paid Post 1 | Paid Post 2 |
+|---|---|---|---|
+| **Week 1** | Edition 80: Headline events | Behind the Curtain: Why God let the transit crisis escalate | Citizen Spotlight: Vinnie Keane |
+| **Week 2** | Edition 81: Headline events | Arc Watch: Fruitvale housing initiative | Neighborhood Report: Jack London |
+| **Week 3** | Edition 82: Headline events | The God's Hand: Media room decisions this week | Citizen Spotlight: Mayor recall drama |
+| **Week 4** | Edition 83: Headline events | Behind the Curtain: How elections actually work in GodWorld | Arc Watch: Monthly roundup of all active arcs |
+
+That's 12 posts/month. 3 free, 8 paid, 1 bonus.
+
+---
+
+### What Makes This Defensible
+
+Most Substack creators compete on writing quality alone. GodWorld has structural advantages:
+
+1. **The engine generates content.** Writer's block doesn't exist when 25 engines write for you.
+2. **Continuity is automatic.** Characters have 30+ cycles of real history. Arcs build over
+   weeks. Readers get invested in outcomes they can't predict — because even you can't
+   predict what the engines will do.
+3. **The "God" narrative frame.** You're not just an author — you're God commenting on a world
+   that runs itself. No other Substack has that.
+4. **Interactivity.** Subscribers vote, suggest, name citizens. They become part of the world.
+   That creates lock-in — they won't unsubscribe if their named citizen is in an active arc.
+5. **The Wix site is a moat.** Free Substack readers can browse the world. That visual layer
+   (citizen profiles, dashboards, neighborhood maps) makes GodWorld tangible in a way text
+   alone can't.
+
+---
+
+### Quick-Start Checklist
+
+1. [ ] Sign up at substack.com (free, takes 5 minutes)
+2. [ ] Name it: "GodWorld" or "The GodWorld Report" or "God's Desk"
+3. [ ] Write a welcome post explaining the concept (what is GodWorld, how the simulation works)
+4. [ ] Publish 4 free editions of the Riley Digest (one per week, build backlog)
+5. [ ] On edition 5, introduce paid tier with first Citizen Spotlight + Behind the Curtain
+6. [ ] Set price: $7/month or $60/year (annual discount drives commitment)
+7. [ ] Share each edition to 2-3 Reddit communities + Twitter/X
+8. [ ] Track: open rate, free-to-paid conversion, which content type gets most engagement
+9. [ ] Month 2: evaluate what's working, double down on highest-engagement content
+
+### Status
+**Playbook ready.** No accounts created. Requires user to sign up on chosen platform
+and begin publishing when ready.
+
+---
+
 ## Known Tech Debt (for future sessions)
 
 - **`mulberry32_` defined in 10 files**: applyWeatherModel.js, buildCityEvents.js, generateCitizenEvents.js, generateGameModeMicroEvents.js (fixed), generateGenericCitizenMicroEvent.js, generationalEventsEngine.js, worldEventsEngine.js, generateCitizensEvents.js, textureTriggers.js, runAsUniversePipeline.js (already renamed to `mulberry32_uni_`). Recommend consolidating into `utilities/rng.js`.

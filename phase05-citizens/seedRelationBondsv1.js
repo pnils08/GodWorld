@@ -60,7 +60,7 @@ function seedRelationshipBonds_(ctx) {
   
   // Find column indices
   var cols = {
-    citizenId: findColumnIndex_(headers, ['CitizenId', 'citizenId', 'ID']),
+    citizenId: findColumnIndex_(headers, ['POPID', 'CitizenId', 'citizenId', 'ID']),
     name: findColumnIndex_(headers, ['Name', 'name', 'CitizenName']),
     neighborhood: findColumnIndex_(headers, ['Neighborhood', 'neighborhood']),
     occupation: findColumnIndex_(headers, ['Occupation', 'occupation']),
@@ -341,16 +341,21 @@ function createRelationshipBondsSheet_(ss) {
   sheet.appendRow([
     'BondId',
     'CitizenA',
-    'NameA',
     'CitizenB',
-    'NameB',
-    'Type',
+    'BondType',
     'Intensity',
-    'Origin',
-    'StartCycle',
-    'LastInteraction',
     'Status',
-    'Neighborhood'
+    'Origin',
+    'DomainTag',
+    'Neighborhood',
+    'CycleCreated',
+    'LastUpdate',
+    'Notes',
+    'Holiday',
+    'HolidayPriority',
+    'FirstFriday',
+    'CreationDay',
+    'SportsSeason'
   ]);
   sheet.setFrozenRows(1);
   return sheet;

@@ -290,6 +290,30 @@ function worldEventsEngine_(ctx) {
   var used = Object.create(null);
   var healthUsed = false;
 
+  // v2.7: Cross-cycle dedup — load recent event descriptions from WorldEvents_Ledger
+  // Suppresses events used in last 5 cycles to reduce the 37% duplicate rate
+  try {
+    var evLedger = ctx.ss.getSheetByName('WorldEvents_Ledger');
+    if (evLedger) {
+      var evData = evLedger.getDataRange().getValues();
+      var evHeader = evData[0];
+      var descIdx = evHeader.indexOf('Description') >= 0 ? evHeader.indexOf('Description') : evHeader.indexOf('description');
+      var cycIdx = evHeader.indexOf('Cycle') >= 0 ? evHeader.indexOf('Cycle') : evHeader.indexOf('cycle');
+      if (descIdx >= 0) {
+        var currentCycle = Number(ctx.summary.cycleId || ctx.summary.absoluteCycle || 0);
+        for (var re = 1; re < evData.length; re++) {
+          var evCycle = Number(evData[re][cycIdx] || 0);
+          if (currentCycle - evCycle <= 5) {
+            var evDesc = String(evData[re][descIdx] || '').trim();
+            if (evDesc) used[evDesc] = true;
+          }
+        }
+      }
+    }
+  } catch (e) {
+    Logger.log('worldEventsEngine_: Cross-cycle dedup skipped: ' + e.message);
+  }
+
   // Build filtered category list (remove suppressed domains upfront)
   var allowedCategories = [];
   for (var ac = 0; ac < categories.length; ac++) {

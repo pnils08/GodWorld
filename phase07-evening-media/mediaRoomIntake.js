@@ -355,6 +355,33 @@ function processStorylineIntake_(ss, cycle, cal) {
     }
   }
 
+  // --- Dedup: filter out storylines already active in tracker (v2.6) ---
+  if (newStorylines.length > 0) {
+    var trackerData = trackerSheet.getDataRange().getValues();
+    var tHeaders = trackerData[0];
+    var tDescCol = tHeaders.indexOf('Description');
+    var tStatusCol = tHeaders.indexOf('Status');
+    if (tDescCol >= 0 && tStatusCol >= 0) {
+      var activeDescs = {};
+      for (var ad = 1; ad < trackerData.length; ad++) {
+        if (String(trackerData[ad][tStatusCol] || '').trim().toLowerCase() === 'active') {
+          activeDescs[String(trackerData[ad][tDescCol] || '').trim().toLowerCase()] = true;
+        }
+      }
+      var filtered = [];
+      for (var fd = 0; fd < newStorylines.length; fd++) {
+        var desc = String(newStorylines[fd].description || '').trim().toLowerCase();
+        if (!activeDescs[desc]) {
+          filtered.push(newStorylines[fd]);
+        } else {
+          Logger.log('processStorylineIntake_: Skipping duplicate: ' + newStorylines[fd].description);
+        }
+      }
+      Logger.log('processStorylineIntake_: Dedup filtered ' + (newStorylines.length - filtered.length) + ' duplicates');
+      newStorylines = filtered;
+    }
+  }
+
   // --- Add new storylines ---
   if (newStorylines.length > 0) {
     var now = new Date();

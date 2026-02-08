@@ -316,6 +316,9 @@ function runWorldCycle() {
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 
+  // v3.2: Append World_Population row 2 as history row for time series tracking
+  safePhaseCall_(ctx, 'Phase10-PopulationHistory', function() { appendPopulationHistory_(ctx); });
+
   // ═══════════════════════════════════════════════════════════
   // PHASE 11: MEDIA INTAKE — process any unprocessed intake rows
   // ═══════════════════════════════════════════════════════════
@@ -754,6 +757,32 @@ function updateWorldPopulation_(ctx) {
   };
   
   ctx.summary = S;
+}
+
+
+/**
+ * ============================================================================
+ * APPEND POPULATION HISTORY v1.0
+ * ============================================================================
+ * Copies World_Population row 2 (current state) to the end of the sheet.
+ * Row 2 stays as "current state" for all existing readers.
+ * Rows 3+ build a time series for trend analysis.
+ * Runs after ExecuteIntents so all Phase writes have landed on row 2.
+ */
+function appendPopulationHistory_(ctx) {
+  var sheet = ctx.ss.getSheetByName('World_Population');
+  if (!sheet) return;
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) return;
+  var currentRow = data[1]; // row 2 (0-indexed)
+  // Set timestamp and cycle on the history copy
+  var header = data[0];
+  var row = currentRow.slice(); // copy
+  var tsIdx = header.indexOf('timestamp');
+  var cyIdx = header.indexOf('cycle');
+  if (tsIdx >= 0) row[tsIdx] = new Date();
+  if (cyIdx >= 0) row[cyIdx] = ctx.summary.cycleId || ctx.summary.absoluteCycle || '';
+  sheet.appendRow(row);
 }
 
 

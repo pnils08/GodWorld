@@ -208,127 +208,10 @@ function applyDemographicDrift_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // 3. MIGRATION DRIFT
+  // 3. MIGRATION — READ ONLY (v2.3)
+  // Migration is calculated by updateWorldPopulation_ in Phase 1.
+  // This function only reads it for summary/logging. No double-modification.
   // ═══════════════════════════════════════════════════════════════════════════
-
-  var prevMig = mig;
-
-  // Natural damping back to neutral
-  if (Math.abs(mig) > 50 && Math.random() < 0.6) {
-    mig *= 0.95;
-  }
-
-  // Chaos → migration instability
-  if (chaos.length > 0) mig += Math.round((Math.random() - 0.5) * 20);
-
-  // Weather impact can push slight movements
-  if (weather.impact >= 1.3) mig += Math.round((Math.random() - 0.5) * 10);
-
-  // Economic mood affects migration
-  if (econMood >= 65) mig += Math.round(Math.random() * 5);
-  if (econMood <= 35) mig -= Math.round(Math.random() * 5);
-
-  // Negative sentiment drives outflow
-  if (dynamics.sentiment <= -0.3) mig -= Math.round(Math.random() * 3);
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CALENDAR MIGRATION MODIFIERS (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  // Travel holidays create volatility (people visiting AND leaving)
-  var travelHolidays = [
-    "Thanksgiving", "Holiday", "NewYear", "NewYearsEve",
-    "MemorialDay", "LaborDay", "Independence"
-  ];
-  if (travelHolidays.indexOf(holiday) >= 0) {
-    mig += Math.round((Math.random() - 0.5) * 50); // High volatility
-  }
-
-  // Gathering holidays tend to draw people IN
-  var gatheringDraw = [
-    "OpeningDay", "OaklandPride", "ArtSoulFestival",
-    "Juneteenth", "CincoDeMayo", "DiaDeMuertos"
-  ];
-  if (gatheringDraw.indexOf(holiday) >= 0) {
-    mig += Math.round(Math.random() * 40); // Positive inflow
-  }
-
-  // Cultural visitor holidays
-  var culturalVisitors = [
-    "DiaDeMuertos", "CincoDeMayo", "Juneteenth",
-    "BlackHistoryMonth", "PrideMonth", "LunarNewYear"
-  ];
-  if (culturalVisitors.indexOf(holiday) >= 0) {
-    mig += Math.round(Math.random() * 25); // Cultural tourism
-  }
-
-  // Minor holidays have smaller effects
-  var minorHolidays = [
-    "Valentine", "StPatricksDay", "Easter", "Halloween",
-    "MothersDay", "FathersDay", "EarthDay"
-  ];
-  if (minorHolidays.indexOf(holiday) >= 0) {
-    mig += Math.round((Math.random() - 0.5) * 20);
-  }
-
-  // Civic rest holidays - minimal movement
-  var civicRest = ["MLKDay", "PresidentsDay", "VeteransDay"];
-  if (civicRest.indexOf(holiday) >= 0) {
-    mig += Math.round((Math.random() - 0.5) * 10);
-  }
-
-  // Holiday priority effects
-  if (holidayPriority === "major") {
-    mig += Math.round((Math.random() - 0.5) * 30);
-  } else if (holidayPriority === "oakland") {
-    mig += Math.round(Math.random() * 35); // Oakland holidays draw people IN
-  } else if (holidayPriority === "cultural") {
-    mig += Math.round(Math.random() * 20);
-  }
-
-  // First Friday draws art walk visitors
-  if (isFirstFriday) {
-    mig += Math.round(Math.random() * 30);
-  }
-
-  // Creation Day - settling energy, people stay
-  if (isCreationDay) {
-    mig += Math.round(Math.random() * 15); // Slight positive (people putting down roots)
-  }
-
-  // Sports season effects
-  if (sportsSeason === "championship") {
-    mig += Math.round(Math.random() * 60); // Major crowd inflow
-  } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
-    mig += Math.round(Math.random() * 40);
-  } else if (sportsSeason === "late-season") {
-    mig += Math.round(Math.random() * 20);
-  }
-
-  // City dynamics effects
-  if (dynamics.publicSpaces >= 1.4) {
-    mig += Math.round((Math.random() - 0.5) * 20);
-  }
-  if (dynamics.culturalActivity >= 1.4) {
-    mig += Math.round(Math.random() * 15);
-  }
-  if (dynamics.communityEngagement >= 1.3) {
-    mig += Math.round(Math.random() * 10); // Welcoming community retains people
-  }
-
-  // Weather can affect migration during severe conditions
-  if (weather.impact >= 1.3) {
-    mig += Math.round((Math.random() - 0.5) * 15);
-  }
-  if (weather.impact >= 1.5) {
-    mig += Math.round((Math.random() - 0.5) * 25);
-  }
-
-  mig = Math.round(mig);
-
-  if (Math.abs(mig - prevMig) > 5) {
-    changes.push('migration ' + (mig > prevMig ? 'inflow' : 'outflow'));
-  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // 4. ECONOMY LABEL UPDATE
@@ -377,7 +260,7 @@ function applyDemographicDrift_(ctx) {
 
   sheet.getRange(2, iIll + 1).setValue(ill);
   sheet.getRange(2, iEmp + 1).setValue(emp);
-  sheet.getRange(2, iMig + 1).setValue(mig);
+  // Migration write removed (v2.3) — owned by updateWorldPopulation_
   sheet.getRange(2, iEcon + 1).setValue(econ);
 
   // ═══════════════════════════════════════════════════════════════════════════

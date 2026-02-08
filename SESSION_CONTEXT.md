@@ -172,6 +172,13 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - **#23 HIGH**: Storyline_Tracker 83% duplicate rate — same storylines re-appended instead of updated
   - **#24 HIGH**: World_Population single data point — overwrites instead of appending, no time series
 - **Weather confirmed NOT broken**: applyWeatherModel.js v3.5 has correct Oakland monthly climate data (July: 58-74°F), Markov chain fronts, 12 neighborhood microclimates
+- **#20 DROPPED**: All 13 LifeHistory_Log writers populate description field. Initial audit was wrong.
+- **5 bugs fixed**:
+  - **#19 FIXED**: seedRelationBondsv1.js — added POPID to column search, aligned header row to 17 columns matching bondPersistence.js BOND_SHEET_HEADERS
+  - **#21 FIXED**: applyDemographicDrift.js v2.3 — removed all migration modification code (100+ lines), migration write removed. updateWorldPopulation_ is sole owner.
+  - **#22 FIXED**: worldEventsEngine.js v2.7 — added cross-cycle dedup, loads last 5 cycles from WorldEvents_Ledger into `used` object before event generation
+  - **#23 FIXED**: mediaRoomIntake.js v2.6 — added storyline dedup before appending, checks existing active descriptions in Storyline_Tracker
+  - **#24 FIXED**: godWorldEngine2.js — added `appendPopulationHistory_` v1.0, copies row 2 to end of sheet after Phase 10 writes. Row 2 stays current, rows 3+ are time series. Wired as Phase10-PopulationHistory.
 
 ### 2026-02-08 (Session 10) — Desk Packet Pipeline, Edition 79 Full Production, Business Strategy
 

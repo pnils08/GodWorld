@@ -13,11 +13,11 @@
 
 | Priority | Total Issues | Fixed | Remaining |
 |----------|-------------|-------|-----------|
-| CRITICAL | 5 | 4 | 1 |
-| HIGH | 11 | 4 | 7 |
+| CRITICAL | 5 | 5 | 0 |
+| HIGH | 11 | 8 | 3 |
 | MEDIUM | 7 | 1 | 6 |
 
-**Last Updated:** 2026-02-08 — Session 11 deep audit (6 new issues: #19-#24)
+**Last Updated:** 2026-02-08 — Session 11: 5 bugs fixed (#19, #21, #22, #23, #24), #20 dropped (false alarm)
 
 ---
 
@@ -189,7 +189,7 @@ Findings from code-level audit of engine output. Verified against live sheet dat
 ### 19. Relationship_Bonds — Zero Rows After 79 Cycles - CRITICAL
 
 **Files:** `phase05-citizens/seedRelationBondsv1.js`, `phase05-citizens/bondPersistence.js`
-**Status:** NOT FIXED
+**Status:** FIXED (Session 11)
 **Discovered:** Session 11
 
 Three compounding bugs prevent any bonds from forming:
@@ -223,10 +223,10 @@ Three compounding bugs prevent any bonds from forming:
 
 ---
 
-### 20. Empty LifeHistory_Log Descriptions - HIGH
+### 20. Empty LifeHistory_Log Descriptions - DROPPED (FALSE ALARM)
 
 **Files:** Multiple Phase 5 writers (see Ledger Audit below for full list)
-**Status:** NOT FIXED
+**Status:** DROPPED — All 13 writers populate description field. Initial audit was incorrect.
 **Discovered:** Session 11
 
 **Problem:** 2,852 entries in LifeHistory_Log. Many have EventTag populated but Description column is empty.
@@ -255,7 +255,7 @@ Three compounding bugs prevent any bonds from forming:
 ### 21. Migration Double-Modification - HIGH
 
 **Files:** `godWorldEngine2.js` (`updateWorldPopulation_`), `phase03-population/applyDemographicDrift.js`
-**Status:** NOT FIXED
+**Status:** FIXED (Session 11) — Removed all migration modification from applyDemographicDrift.js (v2.3). updateWorldPopulation_ is sole owner.
 **Discovered:** Session 11
 
 **Problem:** Migration value is calculated twice in Phase 3:
@@ -274,8 +274,8 @@ Three compounding bugs prevent any bonds from forming:
 
 ### 22. World Events 37% Duplicate Rate - HIGH
 
-**File:** `phase04-events/worldEventsEngine.js` (v2.6)
-**Status:** NOT FIXED
+**File:** `phase04-events/worldEventsEngine.js` (v2.7)
+**Status:** FIXED (Session 11) — Added cross-cycle dedup: loads last 5 cycles from WorldEvents_Ledger into `used` object before event generation. Events used recently are suppressed.
 **Discovered:** Session 11
 
 **Problem:** Only ~60 unique event description strings in template pool. Over 79 cycles generating 1-6 events each, 37% of events are verbatim duplicates. Dedup only works within a single cycle (via `used` object), not across cycles.
@@ -298,8 +298,8 @@ Three compounding bugs prevent any bonds from forming:
 
 ### 23. Storyline_Tracker 83% Duplicate Rate - HIGH
 
-**File:** `phase11-media-intake/mediaRoomIntake.js`
-**Status:** NOT FIXED
+**File:** `phase07-evening-media/mediaRoomIntake.js` (v2.6)
+**Status:** FIXED (Session 11) — Added dedup check before appending: reads existing active storylines from Storyline_Tracker, skips if Description already exists with Status=active.
 **Discovered:** Session 11
 
 **Problem:** 1,000 rows but only 169 unique descriptions. Same storylines re-appended every cycle instead of updating existing rows. The `resolved` lifecycle fix (Session 8) works for resolution but doesn't prevent duplicate active storylines from accumulating.
@@ -318,8 +318,8 @@ Three compounding bugs prevent any bonds from forming:
 
 ### 24. World_Population Single Data Point - HIGH
 
-**File:** `godWorldEngine2.js` (`updateWorldPopulation_`)
-**Status:** NOT FIXED
+**File:** `godWorldEngine2.js` (`updateWorldPopulation_`, `appendPopulationHistory_`)
+**Status:** FIXED (Session 11) — Added `appendPopulationHistory_` v1.0: copies row 2 to end of sheet after all Phase 10 writes complete. Row 2 stays as "current state" for readers, rows 3+ build time series. Wired as Phase10-PopulationHistory.
 **Discovered:** Session 11
 
 **Problem:** World_Population sheet has only 2 rows (1 with data, 1 blank) across 79 cycles. No time series exists. Cannot track economic trends, population changes, or sentiment over time.

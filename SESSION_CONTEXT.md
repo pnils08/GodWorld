@@ -92,7 +92,7 @@ GodWorld/
 | Faith Events | faithEventsEngine.js | v1.1 | simMonth fix, namespace safety, story signals |
 | Game Mode Events | generateGameModeMicroEvents.js | v1.3 | Write-intents, namespace safety |
 | Handoff Compiler | compileHandoff.js | v1.1 | **SUPERSEDED** by scripts/buildDeskPackets.js (desk packet pipeline) |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v1.0 | Per-desk JSON packets from 16 sheets, replaces monolithic handoff |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v1.1 | Per-desk JSON packets from 16 sheets + reporter history + citizen archive from POPID index |
 | Edition Intake | scripts/editionIntake.js | v1.0 | Node.js CLI — parses edition → 4 intake sheets |
 | Process Intake (Node) | scripts/processIntake.js | v1.1 | Node.js CLI — intake sheets → final ledgers + citizen routing |
 
@@ -172,7 +172,11 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - `docs/reference/PROJECT_GOALS.md` — Agent Newsroom marked implemented, Rhea implemented
   - `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` — editorial chain updated for permanent agents (v1.2)
   - `docs/engine/PRIORITY_TASKS.md` — Session 13 completed section (10 tasks), SDK plan superseded
-- **Commits**: `d9d1fbb` (16 files, 1,099 lines — agents + skills + paths), `2b69b2b` (session context), `aa5af3a` (Rhea agent + 5 doc updates).
+- **buildDeskPackets.js v1.1 — reporter history + citizen archive**:
+  - `reporterHistory`: Every article each reporter has written across ALL cycles, pulled from Press_Drafts (107 rows). Grouped by reporter name, sorted by cycle. Each desk agent sees its reporters' full body of work — prevents voice drift and enables natural story continuity.
+  - `citizenArchive`: Parses ARTICLE_INDEX_BY_POPID.md (174 citizens, 4,900+ refs) into JSON. Each desk gets archives for citizens in its coverage area — matched from storylines, events, canon rosters, interview candidates, arc summaries. Capped at 10 articles per citizen to prevent packet bloat, with `totalRefs` showing full count. Full 174-citizen archive also written to `output/desk-packets/citizen_archive.json`.
+  - Name extraction pulls from: storyline RelatedCitizens, interview candidates, recent quotes, canon rosters (A's, Bulls, council, cultural entities), event/seed/hook descriptions (regex), arc summaries.
+- **Commits**: `d9d1fbb` (agents + skills + paths), `2b69b2b` (session context), `aa5af3a` (Rhea + docs), `849743f` (session context), `b8221d1` (reporter history), `4c1c440` (citizen archive).
 
 ### 2026-02-09 (Session 12) — Initiative Tracker Review for C80
 
@@ -761,6 +765,7 @@ any code is written.
 60. **COMPLETE**: BAY_TRIBUNE_JOURNALIST_PROFILES.pdf integrated — evolved personality profiles for Mags, Luis, Anthony, P Slayer, Hal, Selena, Talia, Carmen, Lila, Trevor, Maria, Jordan, Elliot Graye baked into agents
 61. **COMPLETE**: Rhea Morgan permanent verification agent — .claude/agents/rhea-morgan/, 7-point check against POPID index + CITIZENS_BY_ARTICLE + canon sources
 62. **COMPLETE**: 5 docs updated for agent newsroom — AGENT_NEWSROOM (full rewrite), DESK_PACKET_PIPELINE (paths), PROJECT_GOALS (implemented), STYLE_GUIDE (v1.2), PRIORITY_TASKS (Session 13 section)
+63. **COMPLETE**: buildDeskPackets.js v1.1 — reporter history (full Press_Drafts bibliography per reporter) + citizen archive (POPID index parsed into per-desk filtered archives, capped at 10 articles, canon-aware name extraction)
 
 **Next Actions (Session 13):**
 

@@ -268,6 +268,33 @@ function findFullProfile(roster, name) {
   return {};
 }
 
+function buildReporterHistory(allDrafts, reporterNames) {
+  var history = {};
+  for (var r = 0; r < reporterNames.length; r++) {
+    history[reporterNames[r]] = [];
+  }
+  for (var i = 0; i < allDrafts.length; i++) {
+    var draft = allDrafts[i];
+    var reporter = (draft.Reporter || '').trim();
+    if (!reporter || !history[reporter]) continue;
+    history[reporter].push({
+      cycle: parseInt(draft.Cycle) || 0,
+      headline: draft.SummaryPrompt || '',
+      type: draft.StoryType || '',
+      summary: draft.DraftText || ''
+    });
+  }
+  // Sort each reporter's articles by cycle (oldest first)
+  for (var name in history) {
+    history[name].sort(function(a, b) { return a.cycle - b.cycle; });
+  }
+  // Remove empty reporters
+  for (var name in history) {
+    if (history[name].length === 0) delete history[name];
+  }
+  return history;
+}
+
 function extractPreviousCoverage(prevEditionText, reporterNames) {
   if (!prevEditionText) return [];
   var coverage = [];
@@ -473,7 +500,7 @@ function buildCulturalEntitiesCanon(culturalLedger) {
 // ─── MAIN ──────────────────────────────────────────────────
 
 async function main() {
-  console.log('=== buildDeskPackets v1.0 ===');
+  console.log('=== buildDeskPackets v1.1 ===');
   console.log('Cycle:', CYCLE);
   console.log('Pulling live data from Google Sheets...\n');
 
@@ -510,6 +537,7 @@ async function main() {
   var hooks = filterByCycle(hooksRaw, CYCLE);
   var events = filterByCycle(eventsRaw, CYCLE);
   var prevDrafts = filterByCycle(draftsRaw, CYCLE - 1);
+  var allDrafts = allToObjects(draftsRaw);
 
   // Arcs: get active (not resolved)
   var allArcs = allToObjects(arcsRaw);
@@ -636,7 +664,7 @@ async function main() {
   var manifest = {
     cycle: CYCLE,
     generated: new Date().toISOString(),
-    generator: 'buildDeskPackets v1.0',
+    generator: 'buildDeskPackets v1.1',
     packets: []
   };
 
@@ -696,8 +724,9 @@ async function main() {
     var neighborhoods = getDeskNeighborhoods(deskEvents, deskSeeds, deskArcs);
     var candidates = getInterviewCandidates(genericCitizens, neighborhoods);
 
-    // Get previous coverage
+    // Get previous coverage + full reporter history
     var prevCoverage = extractPreviousCoverage(prevEdition, reporterNames);
+    var reporterHistory = buildReporterHistory(allDrafts, reporterNames);
 
     // Build canon reference for this desk
     var deskCanon = { reporters: canon.reporters };
@@ -731,7 +760,7 @@ async function main() {
         deskName: desk.name,
         cycle: CYCLE,
         generated: new Date().toISOString(),
-        generator: 'buildDeskPackets v1.0'
+        generator: 'buildDeskPackets v1.1'
       },
       baseContext: baseContext,
       deskBrief: {
@@ -793,6 +822,7 @@ async function main() {
       sportsFeeds: deskSportsFeeds,
       maraDirective: deskMara,
       previousCoverage: prevCoverage,
+      reporterHistory: reporterHistory,
       recentQuotes: deskQuotes.map(function(q) {
         return { name: q.Name || q.CitizenName || '', text: q.EventNote || q.Quote || '', cycle: q.Cycle || '' };
       })
@@ -822,6 +852,8 @@ async function main() {
                 '| Hooks:', deskHooks.length, '| Arcs:', deskArcs.length,
                 '| Storylines:', deskStorylines.length);
     console.log('  Reporters:', reporterNames.join(', ') || '(citizen voices)');
+    var historyCount = Object.keys(reporterHistory).reduce(function(sum, k) { return sum + reporterHistory[k].length; }, 0);
+    console.log('  Reporter history:', Object.keys(reporterHistory).length, 'reporters,', historyCount, 'articles');
     console.log('  Size:', stats.sizeKB, 'KB →', filepath);
   }
 

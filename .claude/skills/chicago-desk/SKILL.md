@@ -1,3 +1,8 @@
+---
+name: chicago-desk
+description: Write the Chicago bureau section using Selena Grant and Talia Finch.
+---
+
 # /chicago-desk — Write Chicago Bureau Section
 
 ## Usage

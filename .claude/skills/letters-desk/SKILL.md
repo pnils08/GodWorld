@@ -1,3 +1,8 @@
+---
+name: letters-desk
+description: Write the letters to the editor section with citizen voices.
+---
+
 # /letters-desk — Write Letters to the Editor
 
 ## Usage

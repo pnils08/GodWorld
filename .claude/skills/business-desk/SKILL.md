@@ -1,3 +1,8 @@
+---
+name: business-desk
+description: Write the business ticker section using Jordan Velez.
+---
+
 # /business-desk — Write Business Ticker Section
 
 ## Usage

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-09 | Engine: v3.1 | Cycle: 79 | Session: 13
+Last Updated: 2026-02-09 | Engine: v3.1 | Cycle: 80 | Session: 15
 
 ---
 
@@ -129,6 +129,7 @@ GodWorld/
 | editions/CYCLE_PULSE_TEMPLATE.md | v1.2 — Standardized edition structure, journalist assignments, canon rules. Continuity notes = audit-only, quotes → LifeHistory_Log |
 | docs/mara-vance/ | Mara Vance: in-world character, newsroom interface, operating manual v2.0 (canon adjudication, anomaly detection, presser prep, fourth wall) |
 | docs/media/PAULSON_CARPENTERS_LINE.md | Paulson family backstory — Lars, Maureen, brothers (Christopher, Anthony, Mike), Shannon-Romano descendants, family symbolism |
+| editions/cycle_pulse_edition_80.txt | Edition 80 — 14 articles + 4 letters, Health Center vote front page, full agent pipeline |
 | editions/cycle_pulse_edition_78.txt | Edition 78 written by 5 parallel Claude Code desk agents |
 | editions/cycle_pulse_supplemental_70_paulson_chicago_presser.txt | Supplemental: Paulson Chicago presser (walkout acknowledgment, Bulls Cup run) — has engine returns |
 | editions/cycle_pulse_supplemental_73_paulson_oakland_presser.txt | Supplemental: Paulson Oakland presser (apology, Osei reveal, Baylight, dynasty celebration) — has engine returns |
@@ -151,6 +152,50 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-09 (Session 15) — Edition 80 Full Production
+
+- **Cycle 80 engine run**: Pre-flight checks passed, engine triggered via Apps Script, post-cycle review confirmed all 11 phases complete. Summer cycle, SummerFestival holiday (Oakland priority), overcast weather, elevated pattern, mid-season sports.
+- **Desk packets built**: buildDeskPackets.js generated 6 packets — civic (63.3KB, 3 events, 68 seeds), sports (36.9KB, 2 events), culture (82.9KB, 19 events, 73 seeds), business (19.1KB), chicago (24.9KB, 2 events), letters (83.4KB, 24 events, 89 seeds).
+- **Mara Vance Directive C80 downloaded**: Three priorities — (1) Stabilization Fund implementation tracking (45-day disbursement window active), (2) OARI committee activity (vote in C82, OPOA organizing in D4), (3) Baylight environmental review (final vote C83, $2.1B).
+- **6 desk agents launched in parallel** — all completed successfully:
+  - **Civic Desk** (Carmen Delaine lead): Health Center passes 6-2 (front page lead), Stabilization Fund implementation, Downtown infrastructure strain, OPOA pressure campaign. 4 articles.
+  - **Sports Desk** (Anthony + P Slayer): Wiffleball in Temescal, Warriors 5-game streak, Baylight noise opinion column. 3 articles.
+  - **Culture Desk** (Maria Keen lead): SummerFestival in the Fog, nightlife surge, faith infrastructure mobilization. 3 articles.
+  - **Business Desk** (Jordan Velez): Business Ticker + Stabilization Fund economics feature. 2 articles.
+  - **Chicago Bureau** (Selena Grant + Talia Finch): Trepagnier/Donovan tension, Bulls 39-16, Chicago summer texture. 2 articles.
+  - **Letters Desk**: Sofia Martinez (Health Center), Carlos Ruiz (Paulson), Terrell Washington (Stabilization Fund), Amina Hassan (faith community). 4 letters.
+- **Compilation (Mags Corliss role)**: 14 articles + 4 letters compiled into edition. Health Center vote (6-2, Crane absent injured) chosen as front page lead. All three Mara Vance directive priorities covered.
+- **Verification (Rhea Morgan role)**: 7-point canon check passed. Two issues flagged:
+  - Calvin Turner age in Names Index — determined non-issue per template spec (Names Index doesn't require age; age correctly present in Citizen Usage Log as 38).
+  - Ernesto Quintero age listed as 0 — **FIXED** to 45 in Citizen Usage Log.
+- **File**: `editions/cycle_pulse_edition_80.txt`
+- **Edition 80 intake pipeline run**:
+  - `editionIntake.js` parsed edition → 4 intake sheets: 14 articles (Media_Intake), 14 storylines (Storyline_Intake), 69 citizens (Citizen_Usage_Intake), 19 direct quotes (LifeHistory_Log). 116 total rows written.
+  - `processIntake.js` moved intake → final ledgers: 14 articles → Press_Drafts, 13 new + 1 resolved → Storyline_Tracker, 69 → Citizen_Media_Usage. Citizen routing: 8 new → Intake, 61 existing → Advancement_Intake1. Simulation_Ledger now at 652 entries (up from 526 pre-C80, Bulls and C79 citizens promoted by engine).
+  - Note: Cycle_Packet sheet still shows C79 calendar context (Independence/July/FirstFriday). Cosmetic only — article/storyline data correctly tagged C80 from intake step.
+- **No code changes this session** — pure edition production and intake.
+
+### 2026-02-09 (Session 14) — Supermemory Full World Save
+
+- **Supermemory engaged and configured**: Free tier active, 3m tokens/month.
+- **13 memory entries saved** covering the full GodWorld world state:
+  1. Project overview (repo structure, tech stack, agents/skills, entry points, critical rules)
+  2. Session habits (always save at end, always search at start)
+  3. World state C79 (active storylines, council, C80 vote calendar, edition highlights)
+  4. Mike Paulson canon (family tree — Lars, Maureen, Gabriel/Christopher, Anthony, Danny — Chicago Shannon-Romano clan)
+  5. Mara Vance canon (identity, authority, anomaly thresholds, relationships, fourth wall)
+  6. Journalist roster (all 25 reporters, beats, desk assignments, voice characteristics)
+  7. A's & Bulls canon (rosters, name corrections, dynasty context, Sports Clock rules)
+  8. Civic canon (council seats, all 6 initiatives with vote timelines, neighborhoods)
+  9. Editorial decisions (world-is-real rule, eliminated pipelines, data humanization, fourth wall)
+  10. Cultural ledger & citizens (cultural figures, new canon from C78/C79, tier system, POPID index)
+  11. Business strategy (5 revenue paths, Substack playbook, Wix blueprint, Wreck-It Ralph concept)
+  12. Engine architecture (11 phases, ctx/rng rules, write-intents, cascade dependencies, tech debt)
+  13. Edition history (C78 and C79 production details, supplemental pressers, corrections)
+- **Session workflow established**: Start → search Supermemory + read SESSION_CONTEXT.md. End → save session summary to Supermemory + update SESSION_CONTEXT.md.
+- **Chrome + Xvfb virtual display**: Installed Google Chrome v144, set up Xvfb on :99 at 1920x1080. Available for future visual verification tasks (screenshots via scrot + xdotool for interaction).
+- **No code changes this session** — pure onboarding and memory persistence.
 
 ### 2026-02-09 (Session 13) — Agent Newsroom Implementation
 
@@ -767,38 +812,24 @@ any code is written.
 62. **COMPLETE**: 5 docs updated for agent newsroom — AGENT_NEWSROOM (full rewrite), DESK_PACKET_PIPELINE (paths), PROJECT_GOALS (implemented), STYLE_GUIDE (v1.2), PRIORITY_TASKS (Session 13 section)
 63. **COMPLETE**: buildDeskPackets.js v1.1 — reporter history (full Press_Drafts bibliography per reporter) + citizen archive (POPID index parsed into per-desk filtered archives, capped at 10 articles, canon-aware name extraction)
 
-**Next Actions (Session 13):**
+**Next Actions (Session 15):**
 
-**Sheet state verified 2026-02-08:**
-- Intake: 217 rows — Bulls players (Trepagnier, Giddey, Buzelis, Holiday, Simmons, Kessler, Huerter, Dosunmu, Okoro, Stanley) all queued. Will promote to Simulation_Ledger on next engine cycle (C80).
-- Citizen_Usage_Intake: 386 rows, all marked "processed"
-- Storyline_Intake: 219 rows, all marked "processed"
-- Media_Intake: 107 rows
-- Press_Drafts: 107 rows, latest is C79 (Talia Finch)
-- LifeHistory_Log: 2,852 rows, C79 quotes present
-- Citizen_Media_Usage: 978 rows, all routed (978/978)
-- Storyline_Tracker: 129 rows (127 active, 1 resolved) — cleaned from 1,000
-- Continuity_Loop: DELETED (was 781 rows)
-- Continuity_Intake: DELETED (was 332 rows)
-- Raw_Continuity_Paste: DELETED (was 7 rows)
-- World_Population: 2 rows (mostly empty — may need attention)
-- Simulation_Ledger: 526 total (163 GAME, 84 A's players, 0 Bulls — Bulls in Intake staging)
+1. **CONSIDER: compileHandoff.js cleanup** — Superseded by buildDeskPackets.js. Still in GodWorld Exports menu.
 
-**Edition 79 intake status: COMPLETE.** editionIntake.js + processIntake.js ran successfully. All staging sheets populated and marked processed. Bulls players and new C79 citizens queued in Intake for Cycle 80 engine run.
+2. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
 
-1. **RUN: Cycle 80** — Next engine cycle promotes Intake citizens to Simulation_Ledger (including Bulls roster), processes storylines, advances world state. Use `/run-cycle` skill.
+3. Activate Supermemory Pro after subscription sort (2/16)
 
-2. **WRITE: Edition 80** — After C80 engine run, use `/write-edition` to launch all 6 desk agents in parallel. First edition using the new agent pipeline.
+4. **NOTE: Cycle_Packet calendar stale** — Still shows C79 data (Independence/July). processIntake.js reads calendar from this sheet. Will auto-update on next engine run (C81).
 
-3. **DONE: Storyline_Tracker cleaned** — 1,000 → 129 rows (127 active, 1 resolved). 763 processed + 109 abandoned deleted.
+5. **NOTE: editionIntake.js default cycle** — Hardcoded default is 79 (line 349). Must pass cycle number explicitly (`node scripts/editionIntake.js <file> 80`). Consider updating default or auto-detecting from edition header.
 
-4. **DONE: Dead sheets archived** — Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste deleted (76 → 73 tabs).
-
-5. **CONSIDER: compileHandoff.js cleanup** — Superseded by buildDeskPackets.js. Still in GodWorld Exports menu.
-
-6. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
-
-7. Activate Supermemory Pro after subscription sort (2/16)
+64. **COMPLETE**: Supermemory engaged — 13 memory entries saved (world state, canon, editorial, business strategy, engine architecture, edition history). Free tier active, 3m tokens/month.
+65. **ESTABLISHED**: Session workflow — search Supermemory at start, save summary at end. Mirrors SESSION_CONTEXT.md updates.
+66. **AVAILABLE**: Chrome v144 + Xvfb virtual display on :99 (1920x1080) for visual verification tasks.
+67. **COMPLETE**: Cycle 80 engine run — Summer, SummerFestival, overcast, elevated pattern, mid-season sports. All 11 phases complete.
+68. **COMPLETE**: Edition 80 written — 14 articles + 4 letters across 6 desks. Health Center vote (6-2) front page. Mara Vance directive fully covered (Stabilization Fund, OARI/OPOA, Baylight). Ernesto Quintero age fix applied. File: `editions/cycle_pulse_edition_80.txt`.
+69. **COMPLETE**: Edition 80 intake — 14 articles, 14 storylines (13 new + 1 resolved), 69 citizens (8 new, 61 existing), 19 quotes. All routed to final ledgers. Simulation_Ledger at 652 entries.
 
 ---
 

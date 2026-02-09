@@ -1,3 +1,8 @@
+---
+name: culture-desk
+description: Write the culture and seasonal section using Maria Keen and the culture desk reporters.
+---
+
 # /culture-desk — Write Culture/Seasonal Section
 
 ## Usage

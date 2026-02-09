@@ -35,6 +35,7 @@ const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/desk-packets');
 const MARA_PATH = path.join(PROJECT_ROOT, `output/mara_directive_c${CYCLE}.txt`);
 const ROSTER_PATH = path.join(PROJECT_ROOT, 'schemas/bay_tribune_roster.json');
 const PREV_EDITION_PATH = path.join(PROJECT_ROOT, `editions/cycle_pulse_edition_${CYCLE - 1}.txt`);
+const POPID_INDEX_PATH = path.join(PROJECT_ROOT, 'docs/media/ARTICLE_INDEX_BY_POPID.md');
 
 // ─── DESK DEFINITIONS ──────────────────────────────────────
 const DESKS = {
@@ -266,6 +267,90 @@ function findFullProfile(roster, name) {
     if (desk.name === name) return desk;
   }
   return {};
+}
+
+function parsePopIdIndex(filePath) {
+  if (!fs.existsSync(filePath)) return {};
+  var text = fs.readFileSync(filePath, 'utf-8');
+  var lines = text.split('\n');
+  var archive = {};
+  var current = null;
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i].trim();
+    // Match: ## POP-00001 — Vinnie Keane (35)  or  ## CUL-6D596907 — Lena Cross (26)
+    var match = line.match(/^## (.+?) — (.+?) \((\d+)\)/);
+    if (match) {
+      current = { popId: match[1], name: match[2], totalRefs: parseInt(match[3]), articles: [] };
+      archive[match[2]] = current; // key by name for easy lookup
+      continue;
+    }
+    // Match article lines: - [Source] Title
+    if (current && line.startsWith('- [')) {
+      var artMatch = line.match(/^- \[(.+?)\] (.+)/);
+      if (artMatch) {
+        current.articles.push({ source: artMatch[1], title: artMatch[2] });
+      }
+    }
+  }
+  return archive;
+}
+
+function getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon) {
+  var names = {};
+  // Extract from storylines (RelatedCitizens field)
+  (deskStorylines || []).forEach(function(s) {
+    (s.relatedCitizens || '').split(/[,;|]/).forEach(function(n) {
+      var trimmed = n.trim();
+      if (trimmed.length > 2 && /[A-Z]/.test(trimmed[0])) names[trimmed] = true;
+    });
+  });
+  // Extract from interview candidates
+  (candidates || []).forEach(function(c) { if (c.name) names[c.name] = true; });
+  // Extract from recent quotes
+  (deskQuotes || []).forEach(function(q) { if (q.name) names[q.name] = true; });
+  // Extract from canon roster data (A's, Bulls, council, cultural entities)
+  if (deskCanon) {
+    (deskCanon.asRoster || []).forEach(function(p) { if (p.name) names[p.name] = true; });
+    (deskCanon.bullsRoster || []).forEach(function(p) { if (p.name) names[p.name] = true; });
+    (deskCanon.council || []).forEach(function(c) { if (c.member) names[c.member] = true; });
+    (deskCanon.culturalEntities || []).forEach(function(e) { if (e.name) names[e.name] = true; });
+  }
+  // Extract from event/seed/hook descriptions (capitalized multi-word names)
+  [deskEvents, deskSeeds, deskHooks].forEach(function(list) {
+    (list || []).forEach(function(item) {
+      var text = item.description || item.text || '';
+      var nameMatches = text.match(/[A-Z][a-z]+ [A-Z][a-z]+/g);
+      if (nameMatches) nameMatches.forEach(function(n) { names[n] = true; });
+    });
+  });
+  // Extract from arc summaries
+  (deskArcs || []).forEach(function(a) {
+    var text = a.summary || a.Summary || '';
+    var nameMatches = text.match(/[A-Z][a-z]+ [A-Z][a-z]+/g);
+    if (nameMatches) nameMatches.forEach(function(n) { names[n] = true; });
+  });
+  return Object.keys(names);
+}
+
+function buildCitizenArchive(popIdIndex, citizenNames) {
+  var MAX_ARTICLES_PER_CITIZEN = 10;
+  var archive = {};
+  for (var i = 0; i < citizenNames.length; i++) {
+    var name = citizenNames[i];
+    if (popIdIndex[name]) {
+      var allArticles = popIdIndex[name].articles;
+      archive[name] = {
+        popId: popIdIndex[name].popId,
+        totalRefs: popIdIndex[name].totalRefs,
+        articles: allArticles.slice(-MAX_ARTICLES_PER_CITIZEN)
+      };
+      if (allArticles.length > MAX_ARTICLES_PER_CITIZEN) {
+        archive[name].note = allArticles.length + ' total articles, showing last ' + MAX_ARTICLES_PER_CITIZEN;
+      }
+    }
+  }
+  return archive;
 }
 
 function buildReporterHistory(allDrafts, reporterNames) {
@@ -619,6 +704,9 @@ async function main() {
     console.log('  Previous edition: loaded (' + prevEdition.length + ' chars)');
   }
 
+  var popIdIndex = parsePopIdIndex(POPID_INDEX_PATH);
+  console.log('  POPID index: ' + Object.keys(popIdIndex).length + ' citizens loaded');
+
   // ── Build base context ──
   var baseContext = {
     cycle: CYCLE,
@@ -728,6 +816,10 @@ async function main() {
     var prevCoverage = extractPreviousCoverage(prevEdition, reporterNames);
     var reporterHistory = buildReporterHistory(allDrafts, reporterNames);
 
+    // Build citizen archive for this desk's relevant citizens
+    var deskCitizenNames = getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon);
+    var citizenArchive = buildCitizenArchive(popIdIndex, deskCitizenNames);
+
     // Build canon reference for this desk
     var deskCanon = { reporters: canon.reporters };
     for (var ci = 0; ci < desk.canonSections.length; ci++) {
@@ -823,6 +915,7 @@ async function main() {
       maraDirective: deskMara,
       previousCoverage: prevCoverage,
       reporterHistory: reporterHistory,
+      citizenArchive: citizenArchive,
       recentQuotes: deskQuotes.map(function(q) {
         return { name: q.Name || q.CitizenName || '', text: q.EventNote || q.Quote || '', cycle: q.Cycle || '' };
       })
@@ -854,12 +947,18 @@ async function main() {
     console.log('  Reporters:', reporterNames.join(', ') || '(citizen voices)');
     var historyCount = Object.keys(reporterHistory).reduce(function(sum, k) { return sum + reporterHistory[k].length; }, 0);
     console.log('  Reporter history:', Object.keys(reporterHistory).length, 'reporters,', historyCount, 'articles');
+    console.log('  Citizen archive:', Object.keys(citizenArchive).length, 'citizens matched (of', deskCitizenNames.length, 'extracted)');
     console.log('  Size:', stats.sizeKB, 'KB →', filepath);
   }
 
   // Write base context
   var baseFile = path.join(OUTPUT_DIR, 'base_context.json');
   fs.writeFileSync(baseFile, JSON.stringify({ baseContext: baseContext, canon: canon }, null, 2));
+
+  // Write full citizen archive (standalone reference for agents)
+  var archiveFile = path.join(OUTPUT_DIR, 'citizen_archive.json');
+  fs.writeFileSync(archiveFile, JSON.stringify(popIdIndex, null, 2));
+  console.log('\nCitizen archive: ' + Object.keys(popIdIndex).length + ' citizens → ' + archiveFile);
 
   // Write manifest
   var manifestFile = path.join(OUTPUT_DIR, 'manifest.json');

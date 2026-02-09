@@ -118,7 +118,7 @@ GodWorld/
 | docs/engine/CIVIC_INITIATIVE_v1.5_UPGRADE.md | Bug fixes and upgrades tracking |
 | docs/archive/OPENCLAW_INTEGRATION.md | OpenClaw setup for citizen memory + automation (deferred) |
 | docs/archive/AUTOGEN_INTEGRATION.md | AutoGen multi-agent newsroom (superseded by AGENT_NEWSROOM.md) |
-| docs/media/AGENT_NEWSROOM.md | 25-agent Bay Tribune newsroom using Claude Agent SDK |
+| docs/media/AGENT_NEWSROOM.md | Agent Newsroom — 7 permanent agents + 8 skills (implemented) |
 | docs/reference/GODWORLD_REFERENCE.md | Full system reference |
 | docs/reference/V3_ARCHITECTURE.md | Technical contract, ctx shape |
 | docs/media/ARTICLE_INDEX_BY_POPID.md | Search articles by POP-ID (326 citizens, 367 articles) |
@@ -152,20 +152,27 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Session History
 
-### 2026-02-09 (Session 13) — Desk Agent Pipeline & Custom Skills
+### 2026-02-09 (Session 13) — Agent Newsroom Implementation
 
-- **7 custom skills created** (`.claude/skills/`):
+- **8 custom skills created** (`.claude/skills/`):
   - `/run-cycle` — pre-flight sheet checks (30+ sheets), engine trigger instructions, post-cycle review and summary
   - `/civic-desk`, `/sports-desk`, `/culture-desk`, `/business-desk`, `/chicago-desk`, `/letters-desk` — orchestration skills that load desk packets and delegate to permanent agents
   - `/write-edition` — master pipeline that launches all 6 desk agents in parallel, compiles edition, runs verification
-- **6 permanent desk agents created** (`.claude/agents/`):
-  - Each agent has deep journalist personality profiles baked in from BAY_TRIBUNE_JOURNALIST_PROFILES.pdf (Drive file, 397 lines of evolved character backgrounds)
+- **7 permanent agents created** (`.claude/agents/`):
+  - 6 desk agents: civic-desk (Carmen Delaine lead), sports-desk (P Slayer + Anthony + Hal Richmond), culture-desk (Maria Keen lead), business-desk (Jordan Velez), chicago-desk (Selena Grant + Talia Finch), letters-desk (citizen voices)
+  - 1 verification agent: rhea-morgan — 7-point check (names, votes, records, engine metrics, reporters, duplicates, format) against ARTICLE_INDEX_BY_POPID.md, CITIZENS_BY_ARTICLE.md, bay_tribune_roster.json, desk packet canon, live sheet data
+  - Each desk agent has deep journalist personality profiles baked in from BAY_TRIBUNE_JOURNALIST_PROFILES.pdf (Drive file, 397 lines of evolved character backgrounds)
   - Agents run on Sonnet model with read-only tools (Read, Glob, Grep) — they write articles, not code
-  - civic-desk (Carmen Delaine lead), sports-desk (P Slayer + Anthony + Hal Richmond), culture-desk (Maria Keen lead), business-desk (Jordan Velez), chicago-desk (Selena Grant + Talia Finch), letters-desk (citizen voices)
 - **Skills vs Agents**: Skills are orchestration playbooks (load data, verify, compile). Agents are permanent workers with personalities — they don't need to be rebuilt each session.
 - **buildDeskPackets.js output path updated**: `/tmp/desk_packets/` → `output/desk-packets/` (permanent project directory). Mara directive path also updated to `output/mara_directive_c{XX}.txt`.
 - **`.gitignore` updated**: `output/` added — generated desk packets stay local, not committed.
-- **Commit**: `d9d1fbb` — 16 files, 1,099 lines added.
+- **5 docs updated** to reflect agent newsroom as implemented (was "planned"):
+  - `docs/media/AGENT_NEWSROOM.md` — full rewrite, 7 agents + 8 skills + 25 reporters documented
+  - `docs/media/DESK_PACKET_PIPELINE.md` — output paths updated
+  - `docs/reference/PROJECT_GOALS.md` — Agent Newsroom marked implemented, Rhea implemented
+  - `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` — editorial chain updated for permanent agents (v1.2)
+  - `docs/engine/PRIORITY_TASKS.md` — Session 13 completed section (10 tasks), SDK plan superseded
+- **Commits**: `d9d1fbb` (16 files, 1,099 lines — agents + skills + paths), `2b69b2b` (session context), `aa5af3a` (Rhea agent + 5 doc updates).
 
 ### 2026-02-09 (Session 12) — Initiative Tracker Review for C80
 
@@ -691,7 +698,7 @@ any code is written.
 1. v1.5/v1.6 bug fixes mostly complete
 2. **COMPLETE**: Tier 7.1 (Ripple System) - wired into engine Phase 6, next civic vote Cycle 80
 3. OpenClaw deferred — replaced by MCP-based stack (Supermemory + Agent Newsroom + cron)
-4. **Agent Newsroom planned** - Claude Agent SDK, 25 journalists, replaces AutoGen approach (see docs/media/AGENT_NEWSROOM.md)
+4. **COMPLETE**: Agent Newsroom implemented — 7 permanent agents + 8 skills in Claude Code (supersedes Agent SDK plan). See docs/media/AGENT_NEWSROOM.md
 5. POP-ID article index available for media continuity checks
 6. **COMPLETE**: Journalist personas enriched (v2.0) - 25 full voice profiles ready
 7. **COMPLETE**: rosterLookup.js enhanced (v2.1) - theme matching, voice profiles
@@ -752,6 +759,8 @@ any code is written.
 58. **COMPLETE**: Desk Agent Pipeline — 6 permanent agents (.claude/agents/) with deep journalist profiles, 7 skills (.claude/skills/) for orchestration, /write-edition master pipeline
 59. **COMPLETE**: buildDeskPackets.js output path → output/desk-packets/ (was /tmp/), output/ in .gitignore
 60. **COMPLETE**: BAY_TRIBUNE_JOURNALIST_PROFILES.pdf integrated — evolved personality profiles for Mags, Luis, Anthony, P Slayer, Hal, Selena, Talia, Carmen, Lila, Trevor, Maria, Jordan, Elliot Graye baked into agents
+61. **COMPLETE**: Rhea Morgan permanent verification agent — .claude/agents/rhea-morgan/, 7-point check against POPID index + CITIZENS_BY_ARTICLE + canon sources
+62. **COMPLETE**: 5 docs updated for agent newsroom — AGENT_NEWSROOM (full rewrite), DESK_PACKET_PIPELINE (paths), PROJECT_GOALS (implemented), STYLE_GUIDE (v1.2), PRIORITY_TASKS (Session 13 section)
 
 **Next Actions (Session 13):**
 

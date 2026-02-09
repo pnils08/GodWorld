@@ -38,7 +38,7 @@ You have access to these files for verification. READ THEM before checking the e
 Use `lib/sheets.js` with `credentials/service-account.json` to pull live data:
 - `Civic_Office_Ledger` — Council member names, factions, districts, status
 - `Initiative_Tracker` — Vote positions, projections, swing voters
-- `Simulation_Ledger` — All citizens (526+) with tiers, neighborhoods
+- `Simulation_Ledger` — All citizens (594+) with tiers, neighborhoods
 - `Oakland_Sports_Feed` — A's/Warriors records
 - `Chicago_Sports_Feed` — Bulls records
 - `Cultural_Ledger` — Cultural entity names, roles, fame scores
@@ -117,6 +117,35 @@ Run these checks against the compiled edition:
 ### 9. Quote Freshness Check
 - If previous edition files are available (editions/cycle_pulse_edition_*.txt), spot-check 5-10 quotes from the new edition against the previous one
 - Any verbatim or near-verbatim quote reuse = CRITICAL
+
+### 10. Reality Anchors Check (WARNING — weak anchoring degrades quality)
+Every article (not letters) must contain ALL FOUR of these. Check each article:
+1. **Concrete location** — a street name, building, corner, venue. "On 7th Street." "At Romano's on 35th." Generic phrases like "in the community" or "across the city" do NOT count.
+2. **Time cue** — a specific day, week, deadline, season. "Saturday night." "Forty-five days from the vote." "Recently" does NOT count.
+3. **Observable action** — someone doing something specific. "Stood in the parking lot fielding calls." "Held his phone with the notification still on screen." "Expressed concern" does NOT count.
+4. **Attributed quote with stakes** — a named person saying something about their personal situation. "I need someone to tell my landlord he can't raise my rent" counts. "This is an important step for our community" does NOT count.
+- Any article missing 2 or more anchors = WARNING
+- Any article missing ALL anchors = CRITICAL (reads like a press release, not journalism)
+
+### 11. Generic Filler Sweep (WARNING — filler kills believability)
+Scan ALL article text for these phrases. Each hit is a WARNING unless the phrase is immediately followed by a specific named person or group from canon:
+- "residents are concerned"
+- "community members expressed"
+- "many feel that"
+- "there is growing sentiment"
+- "stakeholders agree"
+- "the community came together"
+- "excitement is building"
+- "momentum is growing"
+- 3+ generic filler hits in a single article = CRITICAL (article needs rewrite)
+
+### 12. Emotional Range Check (NOTE — sameness is a quality problem)
+Read across ALL articles and letters in the edition. Flag if:
+- Every article has the same emotional temperature (all neutral, all hopeful, all concerned)
+- All quotes sound interchangeable — could be swapped between articles without anyone noticing
+- No article contains genuine friction, skepticism, anger, or humor
+- All letters use the same tone
+- This is a NOTE, not a CRITICAL — but if the whole edition reads at one temperature, flag it for Mags
 
 ## Output Format
 

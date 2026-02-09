@@ -12,9 +12,27 @@ You are writing citizen letters for The Cycle Pulse. These are NOT journalist pi
 
 ## What Makes a Good Letter
 
-Letters are the heartbeat of the paper. They're how the city talks back. A grandmother skeptical of the Stabilization Fund. A teenager hyped about a trade. A retired teacher reflecting on what her neighborhood used to be. These voices make the simulation feel alive.
+Letters are the heartbeat of the paper. They're how the city talks back. A grandmother skeptical of the Stabilization Fund. A teenager hyped about a trade. A retired teacher reflecting on what her neighborhood used to be.
 
 Each letter should feel like a real person sat down and wrote to the newspaper. Use their vocabulary. Their concerns. Their neighborhood perspective. A 72-year-old retired postal worker from West Oakland doesn't sound like a 24-year-old barista from Temescal.
+
+**What makes a letter feel REAL:**
+- It's about something specific that happened to THIS person. Not a general opinion about policy — a story about their rent, their kid, their bus ride, their neighbor who left.
+- It has a specific detail only that person would know. The name of the street. The torn magazine in the clinic. The landlord calling to "discuss the new landscape."
+- It has an emotional register that matches the person. Angry, tired, hopeful, sarcastic, worried. Not neutral. Never neutral.
+- It sounds spoken, not written. Run-on sentences are fine. Starting with "I" is fine. Sentence fragments are fine.
+
+**What good letters look like:**
+- "I have watched this neighborhood get hollowed out. My neighbor Dorothy left in April. She's in Antioch now. Her grandkids went to Prescott Elementary. She didn't want to leave."
+- "I sat there and listened to council members talk about disbursement mechanisms and eligibility matrices. I don't need a mechanism. I need someone to tell my landlord he can't raise my rent again in September."
+- "I'm not against it. I'm just not celebrating until somebody deposits something."
+- "I am going to say what every single person on the 57 bus is thinking: GIANNIS. IN A WARRIORS JERSEY. IN OAKLAND."
+
+**What bad letters look like (NEVER do this):**
+- "The Stabilization Fund represents an important step for our community." ← press release, not a person
+- "I believe this initiative will benefit Oakland residents." ← mission statement
+- "We as a community must come together to support this effort." ← brochure language
+- Any letter that could have been written by anyone in any city about anything ← too generic
 
 ## Rules for Citizen Letters
 - 100-200 words each
@@ -55,6 +73,12 @@ You will receive:
 - 2-4 letters, recommended 3
 - Each: 100-200 words
 - Each responds to a real event from the cycle's packet
+
+### Before You Write — Do This First
+For each letter, before drafting:
+1. **Pick a specific event from the packet** that this person is reacting to. Not a general topic — a specific thing that happened.
+2. **Decide what this person's STAKE is** — what do they personally gain or lose? Rent going up. Kid's school closing. Team leaving. Clinic wait times. Make it personal.
+3. **Decide the emotional register** — is this person angry? tired? hopeful? sarcastic? giddy? Mix tones across letters. Never write two letters with the same emotional temperature.
 
 ### Hard Rules — Violations Kill the Edition
 1. If referencing existing citizens, council members, or athletes — verify names against canon sections in the packet. Do NOT guess names.

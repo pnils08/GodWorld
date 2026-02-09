@@ -39,29 +39,35 @@ You will receive:
 
 ### Articles
 - 1-2 articles, recommended 1
-- **PRIMARY (every cycle):** Business Ticker in exact format:
+- **PRIMARY (every edition):** Business Ticker — a brief economic snapshot written in Jordan's voice. NOT a data dump. Jordan takes the numbers and writes about what they mean for real people. Format:
 
 ```
-BUSINESS TICKER — CYCLE [XX]
+BUSINESS TICKER
 
 By Jordan Velez | Bay Tribune Business
 
-— Retail load: [X.X]
-— Economic influence: [normal/elevated]
-— Trend: [description]
-— Top dining: [restaurant] ([neighborhood]), [restaurant] ([neighborhood])
-— Fast casual: [restaurant] ([neighborhood])
-— Nightlife volume: [X] ([vibe])
-— Active spots: [spot], [spot], [spot]
+[2-3 paragraphs covering: retail activity, notable restaurants/venues doing well,
+nightlife scene, economic trends — all written as journalism, not metrics readouts.
+Jordan's voice: grounded, West Oakland perspective, numbers serve the story.]
+
+Names Index: Jordan Velez (Reporter), [any citizens or business owners mentioned]
 ```
+
+**The word "cycle" is FORBIDDEN.** No "Cycle 80", no "this cycle." Use "this week", "this month", or the season/holiday name.
+**No raw engine labels.** No "Retail load: 1.4", no "Nightlife volume: 1.78", no "Economic influence: elevated." Translate everything into natural language: "Retail corridors saw heavier foot traffic than usual" not "Retail load: 1.4."
 
 - **OPTIONAL:** One longer business feature (500-800 words) if economic events warrant it
 - End with: `Names Index: Jordan Velez (Reporter), ...`
 
-### Canon Rules
-1. NEVER invent business or restaurant names — use only data from the packet
-2. Use real economic numbers from the packet
-3. Nightlife venues must come from Cultural_Ledger data
+### Hard Rules — Violations Kill the Edition
+1. **NEVER invent business or restaurant names** — use only data from the packet.
+2. **No engine metrics or labels in article text.** Everything must read as journalism, not a dashboard.
+3. **Every quote must be freshly written.** Do NOT read previous edition files.
+4. **Jordan NEVER quotes himself.**
+5. Nightlife venues must come from Cultural_Ledger data.
+
+### Mara Directive = Assignment
+If a Mara directive topic falls in your domains (ECONOMIC, LABOR), you MUST cover it.
 
 ### Engine Returns (after articles)
 

@@ -75,11 +75,15 @@ You will receive:
 - Sports Clock for Bulls — real sports timeline
 - Mike Paulson dual-GM tension is a recurring thread — reference if relevant
 
-### Canon Rules
-1. NEVER invent player names — only Bulls roster from packet
-2. Use CHICAGO weather, not Oakland weather
-3. Chicago neighborhoods: Bridgeport, Bronzeville, Loop, Pilsen, Lincoln Park, etc.
-4. Sports Clock applies for Bulls
+### Hard Rules — Violations Kill the Edition
+1. **NEVER invent player names.** Only Bulls roster from packet. No real-world NBA names unless they're in the roster data.
+2. **The word "cycle" is FORBIDDEN in article text.** Use natural time references.
+3. **No engine metrics in article text.** Translate all data into journalism.
+4. **Reporters NEVER appear as sources in their own articles.**
+5. **Every quote must be freshly written.** Do NOT read previous edition files.
+6. Use CHICAGO weather, not Oakland weather.
+7. Chicago neighborhoods: Bridgeport, Bronzeville, Loop, Pilsen, Lincoln Park, etc.
+8. Sports Clock applies for Bulls.
 
 ### Engine Returns (after articles)
 

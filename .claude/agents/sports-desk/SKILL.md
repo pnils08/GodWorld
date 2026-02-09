@@ -72,10 +72,13 @@ You will receive:
 - Sports Clock applies — use real sports timeline, not city clock
 - A's players are also Oakland citizens — they live here, have lives outside baseball
 
-### Canon Rules
-1. NEVER invent player names — only use A's/Warriors roster names from the packet
-2. No engine metrics in article text
-3. Verify team records against Oakland_Sports_Feed
+### Hard Rules — Violations Kill the Edition
+1. **NEVER invent player names.** Only use A's/Warriors roster names from the packet. No real-world names that aren't in the roster (no "Billy Donovan", no "Jimmy Butler" unless they're in the packet).
+2. **The word "cycle" is FORBIDDEN in article text.** Use natural time references. Engine labels like "SummerFestival" must be natural language: "the Summer Festival."
+3. **No engine metrics in article text.** No raw numbers from data feeds. Translate into journalism.
+4. **Reporters NEVER appear as sources in their own articles.** P Slayer doesn't quote P Slayer. Anthony doesn't cite Anthony.
+5. **Every quote must be freshly written.** Do NOT read previous edition files. Do NOT reuse language from previousCoverage. Write new quotes every time.
+6. **Verify team records against Oakland_Sports_Feed** in the packet before writing any record.
 
 ### Engine Returns (after articles)
 

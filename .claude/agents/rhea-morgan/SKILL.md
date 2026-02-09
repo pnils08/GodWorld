@@ -55,12 +55,24 @@ Run these checks against the compiled edition:
 - New citizens → verify they have Age, Neighborhood, Occupation in Citizen Usage Log
 - Flag: misspelled names, wrong first names, citizens that don't exist in canon
 
-### 2. Vote & Civic Verification
+### 2. Vote & Civic Verification (CRITICAL — vote math must be proven)
 - Initiative vote positions → check against Initiative_Tracker canon
 - Faction assignments → check against Civic_Office_Ledger
 - District numbers → check against Civic_Office_Ledger
 - Council member status (active, injured, etc.) → check against ledger
-- Flag: wrong vote positions, wrong factions, wrong district assignments
+- **VOTE MATH CHECK:** For every vote described in the edition:
+  1. List all 9 council members by name, district, and faction
+  2. Mark any ABSENT members (check status in ledger)
+  3. For each remaining member, determine expected YES/NO based on faction alignment + any noted crossovers
+  4. Count YES votes and NO votes
+  5. Verify the article's stated count matches your tally
+  6. If the math doesn't work, this is CRITICAL — the article cannot run
+- Flag: wrong vote positions, wrong factions, wrong district assignments, impossible vote counts
+
+### 2b. Self-Citation Check
+- No reporter should appear as a source or quoted figure in their own article
+- Carmen Delaine writing about Carmen Delaine = CRITICAL
+- Cross-check every Names Index against the article's byline
 
 ### 3. Sports Record Verification
 - A's record → check against Oakland_Sports_Feed
@@ -69,12 +81,14 @@ Run these checks against the compiled edition:
 - Player positions → check against roster data
 - Flag: wrong records, wrong positions, players on wrong teams
 
-### 4. Engine Metric Sweep
-- Scan all article text for forbidden language:
-  - "tension score", "severity level", "high-severity", "civic load"
-  - "event count", "arc strength", "signal", "trigger"
-  - Any number that looks like a raw engine metric (tension 6.32, severity 0.8)
-- Flag: every instance with article title and exact phrase
+### 4. Engine Language Sweep (CRITICAL — any hit fails the edition)
+- Scan ALL article text, letters, and headlines for:
+  - The word **"cycle"** in any form: "Cycle 80", "this cycle", "next cycle", "single-cycle"
+  - Engine labels: "tension score", "severity level", "high-severity", "civic load", "arc strength", "signal", "trigger", "event count"
+  - Raw metrics: "Retail load: 1.4", "Nightlife volume: 1.78", "Economic influence: elevated", any "X.XX" decimal that looks like a data readout
+  - Compound engine labels: "SummerFestival", "FirstFriday", "CreationDay" (should be "Summer Festival", "First Friday", "Creation Day")
+  - System language: "engine", "simulation", "phase", "ledger", "intake", "seed"
+- **Every single hit is CRITICAL.** Engine language is not a warning — it breaks the fourth wall.
 
 ### 5. Reporter Accuracy
 - Every byline → check against bay_tribune_roster.json
@@ -91,8 +105,18 @@ Run these checks against the compiled edition:
 - Every article has Names Index footer
 - Article Table has entries for every article
 - Citizen Usage Log has entries for every citizen used
-- Storylines section has only NEW and RESOLVED (no re-listed active)
+- Storylines section has NEW, PHASE CHANGES, STILL ACTIVE categories, and RESOLVED
 - Letters have Name, Age, Neighborhood attribution
+- Continuity Notes include council composition table
+
+### 8. Mara Directive Coverage Check
+- Read the Mara Directive from the desk packet
+- Verify each directive topic is covered by at least one article
+- If a directive topic has no corresponding article, this is CRITICAL — the directive is an assignment, not optional
+
+### 9. Quote Freshness Check
+- If previous edition files are available (editions/cycle_pulse_edition_*.txt), spot-check 5-10 quotes from the new edition against the previous one
+- Any verbatim or near-verbatim quote reuse = CRITICAL
 
 ## Output Format
 

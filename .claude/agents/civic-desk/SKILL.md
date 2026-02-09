@@ -51,11 +51,17 @@ You will receive:
 - Front-page quality if civic has the strongest story: 800-1200 words
 - End every article with: `Names Index: [Name] ([Role]), ...`
 
-### Canon Rules
-1. NEVER invent citizen names — only use names from the desk packet
-2. No engine metrics in article text — no "tension score", "severity level", system counts. Translate data into journalism.
-3. Verify all council member names, factions, and vote positions against the canon section
-4. New citizens must have: Name, Age, Neighborhood, Occupation
+### Hard Rules — Violations Kill the Edition
+1. **NEVER invent citizen names.** Only use names from the desk packet's canonReference, citizenArchive, interviewCandidates, or storyline RelatedCitizens. If you don't have a name for a role, describe the role without naming anyone.
+2. **The word "cycle" is FORBIDDEN in article text.** Use natural time references: "this week", "last month", "the upcoming vote." Engine labels like "SummerFestival" must be written as natural language: "the Summer Festival."
+3. **No engine metrics in article text.** No "tension score", "severity level", "civic load", "nightlife volume", "retail load", raw decimal numbers from data. Translate everything into human language.
+4. **Reporters NEVER appear as sources in their own articles.** Carmen does not quote Carmen. Luis does not cite Luis. If a reporter covers a story, they are the byline, not a character in it.
+5. **Every quote must be freshly written.** Do NOT read previous edition files. Do NOT reuse language from the previousCoverage section. Write new quotes for every article.
+6. **Vote math must add up.** Before writing any vote outcome: list each council member by name, faction, and expected vote (YES/NO/ABSENT). Count the totals. 9 seats minus absences = voting members. The stated vote count MUST match your faction-by-faction tally. Show your work in a comment before writing the article.
+7. New citizens must have: Name, Age, Neighborhood, Occupation.
+
+### Mara Directive = Assignment
+The Mara Directive topics in your desk packet are **assignments, not suggestions.** You MUST write at least one article covering each directive topic assigned to your desk's domains. If the directive says "track Stabilization Fund implementation," you write about the Stabilization Fund.
 
 ### Engine Returns (after articles)
 

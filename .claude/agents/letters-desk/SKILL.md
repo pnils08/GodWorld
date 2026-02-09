@@ -56,10 +56,13 @@ You will receive:
 - Each: 100-200 words
 - Each responds to a real event from the cycle's packet
 
-### Canon Rules
-1. If referencing existing citizens, council members, or athletes — verify against canon sections in packet
-2. New citizens must have complete info: Name, Age, Neighborhood, Occupation
-3. No engine metrics or system language
+### Hard Rules — Violations Kill the Edition
+1. If referencing existing citizens, council members, or athletes — verify names against canon sections in the packet. Do NOT guess names.
+2. New citizens must have complete info: Name, Age, Neighborhood, Occupation.
+3. **The word "cycle" is FORBIDDEN.** No "this cycle", no "Cycle 80." Citizens don't know what a cycle is. Use natural time: "this week", "lately", "ever since the vote."
+4. **No engine metrics or system language.** No "tension score", "nightlife volume", "severity level." Citizens talk like people, not dashboards.
+5. **Every quote and letter must be freshly written.** Do NOT read previous edition files. Do NOT reuse phrases from previousCoverage.
+6. **Holiday/event names in natural language.** "Summer Festival" not "SummerFestival." "First Friday" not "FirstFriday."
 
 ### Engine Returns (after letters)
 

@@ -56,12 +56,18 @@ You will receive:
 - End every article with: `Names Index: [Name] ([Role]), ...`
 - Neighborhoods matter — every cultural event has a place
 
-### Canon Rules
-1. NEVER invent citizen names — only use names from the desk packet or existing canon
-2. No engine metrics in article text
-3. Use correct cultural entity names from the packet
-4. Faith coverage should name specific congregations from Faith_Organizations
-5. Oakland has 17 neighborhoods — use correct names
+### Hard Rules — Violations Kill the Edition
+1. **NEVER invent citizen names.** Only use names from the desk packet's canonReference, citizenArchive, interviewCandidates, culturalEntities, or storyline RelatedCitizens.
+2. **The word "cycle" is FORBIDDEN in article text.** Use natural time references. Engine labels like "SummerFestival" must be natural language: "the Summer Festival." "FirstFriday" → "First Friday."
+3. **No engine metrics in article text.** No "fame score", "nightlife volume", raw decimal numbers. Translate into human language.
+4. **Reporters NEVER appear as sources in their own articles.** Maria doesn't quote Maria.
+5. **Every quote must be freshly written.** Do NOT read previous edition files. Write new quotes every time.
+6. Use correct cultural entity names from the packet.
+7. Faith coverage should name specific congregations from Faith_Organizations.
+8. Oakland has 17 neighborhoods — use correct names.
+
+### Mara Directive = Assignment
+The Mara Directive topics are **assignments, not suggestions.** If a directive topic falls in your domains, you MUST cover it.
 
 ### Engine Returns (after articles)
 

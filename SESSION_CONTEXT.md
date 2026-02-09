@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-08 | Engine: v3.1 | Cycle: 79 | Session: 11
+Last Updated: 2026-02-09 | Engine: v3.1 | Cycle: 79 | Session: 13
 
 ---
 
@@ -151,6 +151,21 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-09 (Session 13) — Desk Agent Pipeline & Custom Skills
+
+- **7 custom skills created** (`.claude/skills/`):
+  - `/run-cycle` — pre-flight sheet checks (30+ sheets), engine trigger instructions, post-cycle review and summary
+  - `/civic-desk`, `/sports-desk`, `/culture-desk`, `/business-desk`, `/chicago-desk`, `/letters-desk` — orchestration skills that load desk packets and delegate to permanent agents
+  - `/write-edition` — master pipeline that launches all 6 desk agents in parallel, compiles edition, runs verification
+- **6 permanent desk agents created** (`.claude/agents/`):
+  - Each agent has deep journalist personality profiles baked in from BAY_TRIBUNE_JOURNALIST_PROFILES.pdf (Drive file, 397 lines of evolved character backgrounds)
+  - Agents run on Sonnet model with read-only tools (Read, Glob, Grep) — they write articles, not code
+  - civic-desk (Carmen Delaine lead), sports-desk (P Slayer + Anthony + Hal Richmond), culture-desk (Maria Keen lead), business-desk (Jordan Velez), chicago-desk (Selena Grant + Talia Finch), letters-desk (citizen voices)
+- **Skills vs Agents**: Skills are orchestration playbooks (load data, verify, compile). Agents are permanent workers with personalities — they don't need to be rebuilt each session.
+- **buildDeskPackets.js output path updated**: `/tmp/desk_packets/` → `output/desk-packets/` (permanent project directory). Mara directive path also updated to `output/mara_directive_c{XX}.txt`.
+- **`.gitignore` updated**: `output/` added — generated desk packets stay local, not committed.
+- **Commit**: `d9d1fbb` — 16 files, 1,099 lines added.
 
 ### 2026-02-09 (Session 12) — Initiative Tracker Review for C80
 
@@ -734,8 +749,11 @@ any code is written.
 55. **COMPLETE**: Business strategy documented in BRANCH_HANDOFF.md — 5 revenue paths, Wix blueprint, subscription serial playbook, Wreck-It Ralph sandbox concept
 56. **COMPLETE**: Tier-aware life events design concept documented (GAME citizens getting full engine events)
 57. **COMPLETE**: All reference docs updated — PROJECT_GOALS, PRIORITY_TASKS, ENGINE_ROADMAP, TIER_7_ROADMAP brought current to Cycle 79
+58. **COMPLETE**: Desk Agent Pipeline — 6 permanent agents (.claude/agents/) with deep journalist profiles, 7 skills (.claude/skills/) for orchestration, /write-edition master pipeline
+59. **COMPLETE**: buildDeskPackets.js output path → output/desk-packets/ (was /tmp/), output/ in .gitignore
+60. **COMPLETE**: BAY_TRIBUNE_JOURNALIST_PROFILES.pdf integrated — evolved personality profiles for Mags, Luis, Anthony, P Slayer, Hal, Selena, Talia, Carmen, Lila, Trevor, Maria, Jordan, Elliot Graye baked into agents
 
-**Next Actions (Session 11):**
+**Next Actions (Session 13):**
 
 **Sheet state verified 2026-02-08:**
 - Intake: 217 rows — Bulls players (Trepagnier, Giddey, Buzelis, Holiday, Simmons, Kessler, Huerter, Dosunmu, Okoro, Stanley) all queued. Will promote to Simulation_Ledger on next engine cycle (C80).
@@ -754,17 +772,19 @@ any code is written.
 
 **Edition 79 intake status: COMPLETE.** editionIntake.js + processIntake.js ran successfully. All staging sheets populated and marked processed. Bulls players and new C79 citizens queued in Intake for Cycle 80 engine run.
 
-1. **RUN: Cycle 80** — Next engine cycle promotes Intake citizens to Simulation_Ledger (including Bulls roster), processes storylines, advances world state.
+1. **RUN: Cycle 80** — Next engine cycle promotes Intake citizens to Simulation_Ledger (including Bulls roster), processes storylines, advances world state. Use `/run-cycle` skill.
 
-2. **DONE: Storyline_Tracker cleaned** — 1,000 → 129 rows (127 active, 1 resolved). 763 processed + 109 abandoned deleted.
+2. **WRITE: Edition 80** — After C80 engine run, use `/write-edition` to launch all 6 desk agents in parallel. First edition using the new agent pipeline.
 
-3. **DONE: Dead sheets archived** — Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste deleted (76 → 73 tabs).
+3. **DONE: Storyline_Tracker cleaned** — 1,000 → 129 rows (127 active, 1 resolved). 763 processed + 109 abandoned deleted.
 
-4. **CONSIDER: compileHandoff.js cleanup** — Superseded by buildDeskPackets.js. Still in GodWorld Exports menu.
+4. **DONE: Dead sheets archived** — Continuity_Loop, Continuity_Intake, Raw_Continuity_Paste deleted (76 → 73 tabs).
 
-5. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
+5. **CONSIDER: compileHandoff.js cleanup** — Superseded by buildDeskPackets.js. Still in GodWorld Exports menu.
 
-6. Activate Supermemory Pro after subscription sort (2/16)
+6. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
+
+7. Activate Supermemory Pro after subscription sort (2/16)
 
 ---
 

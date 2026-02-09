@@ -152,6 +152,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Session History
 
+### 2026-02-09 (Session 12) — Initiative Tracker Review for C80
+
+- **Initiative Tracker verified via service account**: Pulled Initiative_Tracker and Civic_Office_Ledger from Google Sheets. All 6 initiatives have correct data. INIT-005 (Temescal Community Health Center) confirmed ready for C80 vote — status `pending-vote`, SwingVoter=Ramon Vega, SwingVoter2=Leonard Tran, Projection=likely pass, PolicyDomain=health, AffectedNeighborhoods=Temescal.
+- **Council composition verified**: 9 seats, all Faction values populated (OPP×4, CRC×3, IND×2). Elliott Crane (D6, CRC) status=injured but participating remotely per Edition 79 reporting.
+- **Seed function corrected**: `seedInitiativeTracker_()` in civicInitiativeEngine.js had wrong data — empty SwingVoter on INIT-005, "Marcus Tran" instead of "Leonard Tran". Fixed to match actual sheet state so the seed function serves as accurate backup.
+- **`createInitiativeTrackerSheet_` column order fixed**: Matched to actual sheet order (L=Outcome, M=SwingVoter2, N=SwingVoter2Lean). Reference comment updated from 17 to 19 columns.
+- **Schema doc updated**: SCHEMA_HEADERS.md — added `delayed`, `resolved` to Status values and `uncertain` to Projection values to match what the engine and sheet already use.
+
 ### 2026-02-08 (Session 11) — Sheet State Audit, Documentation Recovery
 
 - **Session 10 documentation recovery**: Previous session (14 hrs) committed code but never committed SESSION_CONTEXT.md updates. Reconstructed full Session 10 history from git commits, /tmp artifacts, BRANCH_HANDOFF.md. 7-part history written and committed (`6637452`).

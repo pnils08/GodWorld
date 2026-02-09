@@ -1581,20 +1581,20 @@ function createInitiativeTrackerSheet_(ss) {
     'InitiativeID',      // A - Unique ID (INIT-001, etc.)
     'Name',              // B - Initiative name
     'Type',              // C - vote, grant, visioning, external
-    'Status',            // D - proposed, active, pending-vote, passed, failed, resolved
+    'Status',            // D - proposed, active, pending-vote, passed, failed, resolved, delayed
     'Budget',            // E - Dollar amount
     'VoteRequirement',   // F - 5-4, 6-3, etc.
     'VoteCycle',         // G - Cycle when vote/decision occurs
-    'Projection',        // H - likely passes, toss-up, needs 1 swing, etc.
+    'Projection',        // H - likely pass, lean pass, toss-up, lean fail, likely fail
     'LeadFaction',       // I - OPP, CRC
     'OppositionFaction', // J - CRC, OPP
     'SwingVoter',        // K - Primary swing voter name
-    'SwingVoter2',       // L - Secondary swing voter name (v1.1)
-    'SwingVoter2Lean',       // M - Secondary swing voter lean: lean-yes, lean-no, toss-up (v1.1)
-    'Outcome',               // N - PASSED, FAILED, APPROVED, DENIED
-    'Consequences',          // O - What happens as result
-    'Notes',                 // P - Running notes
-    'LastUpdated',           // Q - Timestamp
+    'Outcome',           // L - PASSED, FAILED, APPROVED, DENIED
+    'SwingVoter2',       // M - Secondary swing voter name (v1.1)
+    'SwingVoter2Lean',   // N - Secondary swing voter lean: lean-yes, lean-no, toss-up (v1.1)
+    'Consequences',      // O - What happens as result
+    'Notes',             // P - Running notes
+    'LastUpdated',       // Q - Timestamp
     'AffectedNeighborhoods', // R - Comma-separated neighborhoods for ripple effects (v1.3)
     'PolicyDomain'           // S - Explicit domain: health, transit, economic, housing, safety, environment, sports, education (v1.6)
   ];
@@ -1615,9 +1615,9 @@ function createInitiativeTrackerSheet_(ss) {
   sheet.setColumnWidth(9, 80);   // LeadFaction
   sheet.setColumnWidth(10, 100); // OppositionFaction
   sheet.setColumnWidth(11, 120); // SwingVoter
-  sheet.setColumnWidth(12, 120); // SwingVoter2 (v1.1)
-  sheet.setColumnWidth(13, 100); // SwingVoter2Lean (v1.1)
-  sheet.setColumnWidth(14, 80);  // Outcome
+  sheet.setColumnWidth(12, 80);  // Outcome
+  sheet.setColumnWidth(13, 120); // SwingVoter2 (v1.1)
+  sheet.setColumnWidth(14, 100); // SwingVoter2Lean (v1.1)
   sheet.setColumnWidth(15, 250); // Consequences
   sheet.setColumnWidth(16, 300); // Notes
   sheet.setColumnWidth(17, 120); // LastUpdated
@@ -1926,37 +1926,48 @@ function seedInitiativeTracker_() {
     sheet = createInitiativeTrackerSheet_(ss);
   }
   
-  // v1.6: Updated seed data with AffectedNeighborhoods and PolicyDomain
+  // v1.7: Seed data matches ACTUAL sheet column order (L=Outcome, M=SwingVoter2, N=SwingVoter2Lean)
+  // and reflects current sheet state as of Cycle 79.
+  // Column order: InitiativeID, Name, Type, Status, Budget, VoteRequirement, VoteCycle,
+  //               Projection, LeadFaction, OppositionFaction, SwingVoter, Outcome,
+  //               SwingVoter2, SwingVoter2Lean, Consequences, Notes, LastUpdated,
+  //               AffectedNeighborhoods, PolicyDomain
   var initiatives = [
-    // West Oakland Stabilization Fund
-    ['INIT-001', 'West Oakland Stabilization Fund', 'vote', 'active', '$28M', '6-3', 78,
-     '5-4 OPP — needs 1 swing', 'OPP', 'CRC', 'Ramon Vega', 'Leonard Tran', 'lean-yes', '', '', '', '',
+    // West Oakland Stabilization Fund — resolved C78
+    ['INIT-001', 'West Oakland Stabilization Fund', 'vote', 'passed', '$28M', '6-3', 78,
+     'lean pass', 'OPP', 'CRC', 'Ramon Vega', 'PASSED',
+     'Leonard Tran', 'toss-up', 'Initiative approved. Implementation begins.', '', '',
      'West Oakland', 'housing'],
 
-    // Oakland Alternative Response Initiative
+    // Oakland Alternative Response Initiative — vote C82
     ['INIT-002', 'Oakland Alternative Response Initiative', 'vote', 'proposed', '$12.5M', '5-4', 82,
-     'Uncertain — true toss-up', 'OPP', 'CRC', 'Ramon Vega', 'Leonard Tran', 'toss-up', '', '', '', '',
+     'toss-up', 'OPP', 'CRC', 'Ramon Vega', '',
+     'Leonard Tran', 'toss-up', '', '', '',
      'Downtown,East Oakland,West Oakland', 'safety'],
 
-    // Fruitvale Transit Hub Phase II - Visioning
+    // Fruitvale Transit Hub Phase II — Visioning C86
     ['INIT-003', 'Fruitvale Transit Hub Phase II — Visioning', 'visioning', 'proposed', '$230M', '', 86,
-     'Input phase — no vote', 'OPP', '', '', '', '', '', '', '', '',
+     'uncertain', 'OPP', '', '', '',
+     '', '', '', '', '',
      'Fruitvale', 'transit'],
 
-    // Port Green Modernization - Federal Grant
+    // Port Green Modernization — Federal Grant C89
     ['INIT-004', 'Port of Oakland Green Modernization — Federal Grant', 'grant', 'proposed', '$320M', '', 89,
-     'Competitive — external decision', '', '', '', '', '', '', '', '', '',
-     'Jack London,West Oakland', 'environment'],
+     'uncertain', '', '', '', '',
+     '', '', '', '', '',
+     'Jack London,West Oakland', 'economic'],
 
-    // Temescal Health Center
+    // Temescal Health Center — vote C80
     ['INIT-005', 'Temescal Community Health Center', 'vote', 'proposed', '$45M', '5-4', 80,
-     'Likely passes', 'OPP', 'CRC', '', 'Marcus Tran', 'lean-yes', '', '', '', '',
+     'likely pass', 'OPP', 'CRC', 'Ramon Vega', '',
+     'Leonard Tran', 'toss-up', '', '', '',
      'Temescal', 'health'],
 
-    // Baylight Final Vote
+    // Baylight District — Final Council Vote C83
     ['INIT-006', 'Baylight District — Final Council Vote', 'vote', 'active', '$2.1B', '5-4', 83,
-     'Likely passes with conditions', 'OPP', 'CRC', 'Ramon Vega', 'Leonard Tran', 'lean-yes', '', '', '', '',
-     'Jack London,Downtown', 'economic']
+     'likely pass', 'OPP', 'CRC', 'Ramon Vega', '',
+     'Leonard Tran', 'lean-yes', '', '', '',
+     '', 'sports']
   ];
   
   // Write seed data
@@ -2119,7 +2130,7 @@ function getInitiativeSummaryForMedia_(ctx) {
  * - hospitalized, serious condition, critical, injured
  * - deceased, resigned, retired
  *
- * SCHEMA (17 columns):
+ * SCHEMA (19 columns — matches actual sheet column order):
  * A - InitiativeID
  * B - Name
  * C - Type
@@ -2131,12 +2142,14 @@ function getInitiativeSummaryForMedia_(ctx) {
  * I - LeadFaction
  * J - OppositionFaction
  * K - SwingVoter (primary)
- * L - SwingVoter2 (secondary) [v1.1]
- * M - SwingVoter2Lean [v1.1]
- * N - Outcome
+ * L - Outcome
+ * M - SwingVoter2 (secondary) [v1.1]
+ * N - SwingVoter2Lean [v1.1]
  * O - Consequences
  * P - Notes
  * Q - LastUpdated
+ * R - AffectedNeighborhoods [v1.3]
+ * S - PolicyDomain [v1.6]
  *
  * ============================================================================
  */

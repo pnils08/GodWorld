@@ -438,11 +438,11 @@
 | A | InitiativeID | Unique identifier |
 | B | Name | Initiative name |
 | C | Type | vote, grant, visioning |
-| D | Status | proposed, active, pending-vote, passed, failed |
+| D | Status | proposed, active, pending-vote, passed, failed, delayed, resolved |
 | E | Budget | Budget amount |
 | F | VoteRequirement | Required votes (e.g., "5-4", "6-3") |
 | G | VoteCycle | Cycle when vote occurs |
-| H | Projection | likely pass, lean pass, toss-up, lean fail, likely fail |
+| H | Projection | likely pass, lean pass, toss-up, lean fail, likely fail, uncertain |
 | I | LeadFaction | Supporting faction |
 | J | OppositionFaction | Opposing faction |
 | K | SwingVoter | Primary swing voter name |

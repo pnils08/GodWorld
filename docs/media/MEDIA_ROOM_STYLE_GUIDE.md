@@ -1,4 +1,4 @@
-# MEDIA ROOM STYLE GUIDE v1.1
+# MEDIA ROOM STYLE GUIDE v1.2
 
 **Purpose:** How to write for The Cycle Pulse and Bay Tribune. Covers voice, data treatment, continuity, clock rules, the Paulson interview system, and the Mara Vance directive system.
 
@@ -185,21 +185,24 @@ Mags Corliss (Editor-in-Chief)
     ├── Luis Navarro — Managing Editor, investigative balance, fact validation
     │
     ↓
-Rhea Morgan (Data Analyst)
+Rhea Morgan (Data Analyst — permanent agent: .claude/agents/rhea-morgan/)
     │
-    ├── Dedicated verification and data agent — does not write articles
-    ├── Cross-references all output against canon (ARTICLE_INDEX_BY_POPID, citizen ledgers)
+    ├── Dedicated verification agent — does not write articles
+    ├── Cross-references all output against canon (ARTICLE_INDEX_BY_POPID, CITIZENS_BY_ARTICLE, citizen ledgers)
     ├── Verifies sports statistics (A's stats, Bulls records, player data)
     ├── Verifies world data (council composition, vote counts, initiative status)
     ├── Flags invented names, wrong positions, incorrect numbers
-    ├── Runs between desk output and final compilation
+    ├── 7-point check: names, votes, records, engine metrics, reporters, duplicates, format
+    ├── Runs after compilation, before publication
     │
     ↓
-Desk Agents (write articles)
+Desk Agents (permanent agents: .claude/agents/{desk}-desk/)
     │
-    ├── Receive assignments from Mags Corliss
-    ├── Write from their beat perspective and journalist voice
-    ├── 5-8 desk agents per edition depending on cycle activity
+    ├── 6 permanent agents: civic, sports, culture, business, chicago, letters
+    ├── Each receives filtered desk packet JSON (output/desk-packets/)
+    ├── Deep journalist personalities baked in from BAY_TRIBUNE_JOURNALIST_PROFILES.pdf
+    ├── Write from their beat perspective — desks choose what to cover
+    ├── Orchestrated by skills (.claude/skills/) that load data and delegate
     │
     ↓
 The Cycle Pulse (final edition)
@@ -349,7 +352,7 @@ Each journalist has a distinct voice. Key examples:
 - **Talia Finch** — texture and atmosphere, the room and the mood
 - **Dr. Lila Mezran** — clinical precision when covering health, pushes for specifics
 
-See `schemas/bay_tribune_roster.json` for full voice profiles.
+See `schemas/bay_tribune_roster.json` for voice profiles. Deep evolved personalities are baked into permanent agents at `.claude/agents/`.
 
 -----
 
@@ -400,3 +403,4 @@ Cultural figures tracked by the city. Use in coverage when relevant:
 |---------|-------|---------|
 | v1.0 | 78 | Created from MEDIA_ROOM_INSTRUCTIONS v2.0 rewrite. Added Paulson canon (background, family, interview system). Added A's-in-Arizona context and Bay District storyline. Removed engine/maker/system references. Added data humanization rules. Added journalist voice differentiation. Added dual-clock quick reference. Integrated StoryType/SignalSource enums. |
 | v1.1 | 78 | Added Mara Vance section (in-world role, quote style, key relationships, editorial directives). Mags Corliss confirmed as Editor-in-Chief — desk agents receive assignments from Mags, not a system prompt. Rhea Morgan upgraded from Copy Chief to dedicated Data Analyst (canon verification, sports stats, world data, no articles). Editorial chain: Mara speaks for the operation to the city, Mags speaks to the newsroom. Luis Navarro as investigative balance/fact validation. |
+| v1.2 | 79 | Updated editorial chain to reflect permanent agent architecture (`.claude/agents/`). Rhea Morgan is now a dedicated verification agent. 6 desk agents receive filtered desk packets and choose their own coverage. Journalist personalities baked into agents from BAY_TRIBUNE_JOURNALIST_PROFILES.pdf. |

@@ -50,10 +50,10 @@ The automation stack is built from focused tools instead of a monolithic framewo
 |------|------|--------|
 | Persistent session memory | **Supermemory MCP** — shared across Claude Code, claude.ai, Desktop | Plugin installed, needs Pro sub |
 | Citizen data access | **claude.ai MCP connector** — query SQLite or Sheets directly | Not started |
-| Media generation | **Claude Code parallel agents** — 6 desk agents write simultaneously | **Validated** (Edition 78 + 79) |
-| Media generation (alt) | **Agent Newsroom (Claude Agent SDK)** — 25 journalist agents | Planned (docs/media/AGENT_NEWSROOM.md) |
+| Media generation | **Claude Code permanent agents** (`.claude/agents/`) — 6 desk agents + Rhea verification | **Implemented** (Session 13) |
+| Media orchestration | **Claude Code skills** (`.claude/skills/`) — `/write-edition`, `/run-cycle`, 6 desk skills | **Implemented** (Session 13) |
 | Auto-sync from Sheets | **cron + scripts/sync.js** — on DigitalOcean | Scripts exist, cron not configured |
-| Continuity checking | **Agent Newsroom** — Rhea Morgan (continuity agent) runs every cycle | Planned |
+| Continuity checking | **Rhea Morgan agent** (`.claude/agents/rhea-morgan/`) — 7-point verification every edition | **Implemented** (Session 13) |
 
 > **Note:** The original OpenClaw integration plan is preserved in `docs/archive/OPENCLAW_INTEGRATION.md` if needed down the line. OpenClaw was planned before MCP connectors, Supermemory, and the Agent SDK existed. The individual capabilities it provided are now covered by simpler, focused tools.
 
@@ -81,7 +81,7 @@ The automation stack is built from focused tools instead of a monolithic framewo
 │       ↓                                                      │
 │  SQLite database (citizens, cycles, initiatives, arcs)      │
 │       ↓                                                      │
-│  Agent Newsroom (Claude Agent SDK) → media generation       │
+│  Claude Code agents (.claude/agents/) → media generation    │
 └─────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -244,7 +244,7 @@ Existing OpenClaw code that remains useful without the framework:
 - [x] SQLite schema defined (openclaw-skills/schemas/godworld.sql)
 - [x] Sync scripts written (scripts/sync.js, godworld-sync/index.js)
 - [x] Media generator reference code (openclaw-skills/media-generator/index.js)
-- [x] Agent Newsroom architecture planned (docs/media/AGENT_NEWSROOM.md)
+- [x] **Agent Newsroom implemented** — 7 permanent agents + 8 skills (docs/media/AGENT_NEWSROOM.md)
 - [x] Media Room Handoff Guide (docs/media/MEDIA_ROOM_HANDOFF.md — 96% data reduction)
 - [x] **Desk Packet Pipeline** — per-desk JSON packets replace monolithic handoff (docs/media/DESK_PACKET_PIPELINE.md)
 - [x] **Edition 78 written by parallel agents** — 5 desks, 6 articles + 3 letters, 14 citizens quoted, 4 new canon figures
@@ -258,5 +258,5 @@ Existing OpenClaw code that remains useful without the framework:
 - [ ] Cancel Apple Claude subscription, re-subscribe direct (expires 2/16)
 - [ ] claude.ai MCP connector for Media Room sessions
 - [ ] Cron job for auto-sync (scripts/sync.js on DigitalOcean)
-- [ ] Agent Newsroom implementation (Claude Agent SDK)
+- [x] **Agent Newsroom implemented** — Claude Code permanent agents (supersedes Claude Agent SDK plan)
 - [ ] End-to-end integration test with full cycle

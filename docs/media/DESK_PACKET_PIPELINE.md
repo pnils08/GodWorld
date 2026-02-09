@@ -67,7 +67,7 @@ cd /root/GodWorld && node scripts/buildDeskPackets.js 79
 | `LifeHistory_Log` | Recent quotes (EventTag='quoted') | Current cycle |
 
 Local files read:
-- `/tmp/mara_directive_c{XX}.txt` — Mara Vance editorial guidance
+- `output/mara_directive_c{XX}.txt` — Mara Vance editorial guidance
 - `schemas/bay_tribune_roster.json` — Journalist voice profiles
 - `editions/cycle_pulse_edition_{XX-1}.txt` — Previous edition (for continuity)
 
@@ -87,7 +87,7 @@ Storylines route via keyword matching on Description + RelatedCitizens fields.
 ### Output
 
 ```
-/tmp/desk_packets/
+output/desk-packets/
   civic_c79.json      (~36KB)
   sports_c79.json     (~21KB)
   culture_c79.json    (~47KB)
@@ -97,6 +97,8 @@ Storylines route via keyword matching on Description + RelatedCitizens fields.
   base_context.json   (shared canon + context)
   manifest.json       (index of all packets)
 ```
+
+Note: `output/` is in `.gitignore` — packets are generated locally, not committed.
 
 ### What Each Packet Contains
 

@@ -1,7 +1,7 @@
 # Priority Task List
 
 **Created:** 2026-02-02
-**Updated:** 2026-02-08
+**Updated:** 2026-02-09
 **Status:** Active tracking document
 
 ---
@@ -114,6 +114,21 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Build edition intake parser | scripts/editionIntake.js — Node.js CLI, parses edition → 4 intake sheets | Done (v1.0) |
 | Build process intake script | scripts/processIntake.js — Node.js CLI, intake → final ledgers + citizen routing | Done (v1.1) |
 
+### Completed: Agent Newsroom Implementation (2026-02-09)
+
+| Task | Description | Status |
+|------|-------------|--------|
+| Create /run-cycle skill | Pre-flight checks (30+ sheets), engine trigger, post-cycle review | Done (.claude/skills/run-cycle/) |
+| Create 6 desk skills | /civic-desk, /sports-desk, /culture-desk, /business-desk, /chicago-desk, /letters-desk | Done (.claude/skills/) |
+| Create /write-edition skill | Master pipeline — verify packets, launch 6 agents, compile, verify, save | Done (.claude/skills/write-edition/) |
+| Create 6 permanent desk agents | Deep journalist personalities baked in from BAY_TRIBUNE_JOURNALIST_PROFILES.pdf | Done (.claude/agents/) |
+| Create Rhea Morgan agent | Verification agent — 7-point check against POPID index + canon sources | Done (.claude/agents/rhea-morgan/) |
+| Move desk packets to project dir | output/desk-packets/ (was /tmp/), added to .gitignore | Done |
+| Update AGENT_NEWSROOM.md | Full rewrite — "Planned" → "Implemented", 7 agents + 8 skills documented | Done |
+| Update DESK_PACKET_PIPELINE.md | Output paths updated to output/desk-packets/ | Done |
+| Update PROJECT_GOALS.md | Agent Newsroom marked implemented, architecture diagram updated | Done |
+| Update MEDIA_ROOM_STYLE_GUIDE.md | Editorial chain updated for permanent agents, version bumped to v1.2 | Done |
+
 ### Previously Completed (Tier 7 / Bug Fixes)
 
 | Task | Status |
@@ -196,7 +211,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | City Memory / Epigenetics | Needs stable Tier 7 first |
 | Shock Cascades | Ripple system handles basics |
 | Branching Story Arcs | Enhancement, not urgent |
-| Agent Newsroom (Claude Agent SDK) | See docs/media/AGENT_NEWSROOM.md — replaces AutoGen plan |
+| ~~Agent Newsroom (Claude Agent SDK)~~ | **Superseded** — implemented as Claude Code permanent agents (Session 13). SDK plan deferred. |
 
 ---
 
@@ -212,6 +227,7 @@ All Tier 7 core features have been implemented. See TIER_7_ROADMAP.md for detail
 | Media Intake Pipeline | 5/5 | 0 |
 | Media Room Automation | 4/5 | 1 (dedup, seed filter) |
 | Desk Packet Pipeline | 5/5 | 0 |
+| Agent Newsroom | 10/10 | 0 |
 | Engine Bug Fixes (Sessions 9-10) | 7/7 | 0 |
 | Engine Bug Fixes (Session 11 audit) | 5/5 | 0 (1 dropped) |
 | Subscription & Tooling | 0/3 | 3 |

@@ -31,8 +31,8 @@ const path = require('path');
 // ─── CONFIGURATION ─────────────────────────────────────────
 const CYCLE = parseInt(process.argv[2]) || 79;
 const PROJECT_ROOT = path.resolve(__dirname, '..');
-const OUTPUT_DIR = '/tmp/desk_packets';
-const MARA_PATH = `/tmp/mara_directive_c${CYCLE}.txt`;
+const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/desk-packets');
+const MARA_PATH = path.join(PROJECT_ROOT, `output/mara_directive_c${CYCLE}.txt`);
 const ROSTER_PATH = path.join(PROJECT_ROOT, 'schemas/bay_tribune_roster.json');
 const PREV_EDITION_PATH = path.join(PROJECT_ROOT, `editions/cycle_pulse_edition_${CYCLE - 1}.txt`);
 

@@ -1,0 +1,60 @@
+# /civic-desk — Write Civic Affairs Section
+
+## Usage
+`/civic-desk [reporter-name]`
+- Default: Carmen Delaine
+- Other options: Luis Navarro, Tanya Cruz, Trevor Shimizu, Sgt. Rachel Torres, Dr. Lila Mezran
+
+## Rules
+- Read SESSION_CONTEXT.md FIRST
+- NEVER invent citizen names — only use names from the desk packet data or existing canon
+- No engine metrics in article text (no "tension score", "severity level", system counts)
+- Verify council members, vote positions against the canon reference in the packet
+- New citizens must be logged in the Citizen Usage Log with full details
+
+## Step 1: Load Data
+1. Read `output/desk-packets/base_context.json` — cycle info, calendar, weather, sentiment
+2. Read `output/desk-packets/civic_c{XX}.json` — the civic desk packet
+3. Read `schemas/bay_tribune_roster.json` — look up the reporter's voice profile
+4. If reporter name is given as argument, use that reporter. Otherwise default to Carmen Delaine.
+
+## Step 2: Understand the Desk Packet
+The civic packet contains:
+- **worldEvents** — civic/health/crime/transit events this cycle (medium+ severity)
+- **storylines** — active storylines relevant to civic beat
+- **storySeeds** — story seed suggestions from the engine
+- **storyHooks** — story hook triggers
+- **canon** — council composition, pending votes, status alerts, recent outcomes
+- **maraDirective** — Mara Vance's editorial directive for this cycle (civic gets this)
+- **prevEditionExcerpts** — relevant sections from last edition for continuity
+
+## Step 3: Write Articles
+Delegate to the **civic-desk agent** (`.claude/agents/civic-desk/`). The agent has Carmen Delaine's full personality and all secondary reporter profiles baked in permanently.
+
+Pass the agent:
+1. The civic desk packet JSON
+2. The base_context JSON
+3. The Mara directive (if present)
+4. The reporter name (if user specified one other than Carmen)
+
+The agent handles voice, article writing, canon rules, and engine returns on its own.
+
+## Step 4: Review Output
+Before showing the user:
+- Check all citizen names against the desk packet canon section
+- Verify no engine jargon leaked into article text
+- Confirm engine returns are properly formatted
+- Check article lengths are in range
+
+## Civic Desk Domains
+CIVIC, INFRASTRUCTURE, HEALTH, CRIME, SAFETY, GOVERNMENT, TRANSIT
+
+## Reporter Roster (Civic/Metro Desk)
+| Reporter | Role | Best For |
+|----------|------|----------|
+| Carmen Delaine | Civic Ledger (lead) | Government, municipal rhythm, infrastructure data |
+| Luis Navarro | Investigations | Shock events, accountability, anomalies |
+| Trevor Shimizu | Transit & Infrastructure | Utilities, transit, outages, structural issues |
+| Sgt. Rachel Torres | Public Safety | Crime, safety events, OPD interface |
+| Dr. Lila Mezran | Health Desk | Medical, public health, clinic reports |
+| Tanya Cruz | Sideline/Support | Quick updates, social media angle |

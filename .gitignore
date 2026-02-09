@@ -20,5 +20,8 @@ exports/*.json
 # MCP server config (contains API keys)
 .mcp.json
 
+# Generated desk packets and cycle output
+output/
+
 # Supermemory plugin config (may contain API keys)
 .claude/.supermemory-claude/

@@ -1,0 +1,58 @@
+# /sports-desk — Write Oakland Sports Section
+
+## Usage
+`/sports-desk [reporter-name]`
+- Default: P Slayer (fan voice) + Anthony (data/analysis)
+- Other options: Hal Richmond (legacy/history), Simon Leary (culture crossover), Tanya Cruz (social/breaking)
+
+## Rules
+- Read SESSION_CONTEXT.md FIRST
+- NEVER invent player names — only use names from the A's/Warriors rosters in the packet
+- No engine metrics in article text
+- Verify all player names, positions, and records against Oakland_Sports_Feed in the packet
+- Sports Clock rules: A's and Warriors operate on real sports time (see TIME_CANON_ADDENDUM.md)
+
+## Step 1: Load Data
+1. Read `output/desk-packets/base_context.json` — cycle info, calendar, weather
+2. Read `output/desk-packets/sports_c{XX}.json` — the sports desk packet
+3. Read `schemas/bay_tribune_roster.json` — look up reporter voice profiles
+4. If reporter name given, use that reporter. Otherwise use P Slayer as primary, Anthony as secondary.
+
+## Step 2: Understand the Desk Packet
+The sports packet contains:
+- **worldEvents** — sports-domain events this cycle
+- **storylines** — active sports storylines
+- **storySeeds/storyHooks** — sports-related seeds and trigger hooks
+- **canon.asRoster** — full A's roster with positions and stats
+- **oaklandSportsFeed** — current A's and Warriors records, recent results
+- **prevEditionExcerpts** — sports sections from last edition
+
+## Step 3: Write Articles
+Delegate to the **sports-desk agent** (`.claude/agents/sports-desk/`). The agent has P Slayer, Anthony, and Hal Richmond's full personalities baked in permanently.
+
+Pass the agent:
+1. The sports desk packet JSON
+2. The base_context JSON
+3. The reporter name (if user specified one other than P Slayer/Anthony)
+
+The agent handles voice, article writing, canon rules, and engine returns on its own.
+
+## Step 4: Review Output
+- Verify all player names against A's/Warriors rosters in packet
+- Check team records match Oakland_Sports_Feed data
+- Confirm no invented roster moves or game results
+- Check article lengths
+
+## Sports Desk Domains
+SPORTS (Oakland-filtered — excludes Chicago/Bulls content)
+
+## Reporter Roster (Sports Desk)
+| Reporter | Role | Best For |
+|----------|------|----------|
+| P Slayer | Fan Columnist (lead) | Opinion, emotional pulse, fan voice |
+| Anthony | Lead Beat Reporter | A's data, roster moves, scouting, front office |
+| Hal Richmond | Senior Historian | Legacy essays, dynasty context, retrospectives |
+| Simon Leary | Long View Columnist | Sports culture, history crossover |
+| Tanya Cruz | Sideline Reporter | Breaking news, social feeds, clubhouse access |
+| DJ Hartley | Senior Photographer | Visual/atmospheric pieces |
+| Elliot Marbury | Data Desk | Statistical support (usually supports Anthony) |

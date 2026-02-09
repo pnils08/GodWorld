@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * BOND SEEDING v1.0
+ * BOND SEEDING v1.1
  * ============================================================================
  * 
  * Seeds initial relationship bonds between Oakland citizens.
@@ -290,34 +290,41 @@ function seedRelationshipBonds_(ctx) {
   Logger.log('seedRelationshipBonds_: Created ' + randomBondCount + ' random bonds');
   
   // ═══════════════════════════════════════════════════════════════════════════
-  // WRITE BONDS TO SHEET
+  // STORE BONDS IN CTX (v1.1: let saveRelationshipBonds_ handle sheet write)
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   if (bonds.length > 0) {
-    var rows = [];
+    // Map seed bond format to persistence format expected by saveRelationshipBonds_
+    var persistBonds = [];
     for (var b = 0; b < bonds.length; b++) {
       var bond = bonds[b];
-      rows.push([
-        bond.bondId,
-        bond.citizenA,
-        bond.nameA,
-        bond.citizenB,
-        bond.nameB,
-        bond.type,
-        bond.intensity,
-        bond.origin,
-        bond.startCycle,
-        bond.lastInteraction,
-        bond.status,
-        bond.neighborhood
-      ]);
+      persistBonds.push({
+        bondId: bond.bondId,
+        citizenA: bond.citizenA,
+        citizenB: bond.citizenB,
+        bondType: bond.type,
+        intensity: bond.intensity,
+        status: bond.status || 'active',
+        origin: bond.origin,
+        domainTag: '',
+        neighborhood: bond.neighborhood,
+        cycleCreated: bond.startCycle,
+        lastUpdate: bond.lastInteraction,
+        notes: 'seeded',
+        holiday: 'none',
+        holidayPriority: 'none',
+        isFirstFriday: false,
+        isCreationDay: false,
+        sportsSeason: 'off-season'
+      });
     }
-    
-    sheet.getRange(sheet.getLastRow() + 1, 1, rows.length, rows[0].length).setValues(rows);
-    Logger.log('seedRelationshipBonds_: Wrote ' + rows.length + ' bonds to sheet');
+
+    // Populate ctx.summary.relationshipBonds so saveRelationshipBonds_ writes them
+    ctx.summary.relationshipBonds = persistBonds;
+    Logger.log('seedRelationshipBonds_: Stored ' + persistBonds.length + ' bonds in ctx.summary.relationshipBonds');
   }
-  
-  // Store in context
+
+  // Store summary in context
   ctx.summary.bondSummary = {
     activeBonds: bonds.length,
     familyBonds: bonds.filter(function(b) { return b.type === 'family'; }).length,
@@ -326,9 +333,9 @@ function seedRelationshipBonds_(ctx) {
     rivalries: bonds.filter(function(b) { return b.type === 'rivalry'; }).length,
     alliances: bonds.filter(function(b) { return b.type === 'alliance'; }).length
   };
-  
+
   Logger.log('seedRelationshipBonds_: Complete. Total bonds: ' + bonds.length);
-  
+
   return bonds.length;
 }
 

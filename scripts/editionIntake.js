@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * EDITION INTAKE PARSER v1.0
+ * EDITION INTAKE PARSER v1.1
  * ============================================================================
  *
  * Parses a Cycle Pulse edition file and writes structured data to Google Sheets
@@ -8,7 +8,7 @@
  * as a Node.js CLI tool.
  *
  * Usage:
- *   node scripts/editionIntake.js <edition-file> [cycle-number]
+ *   node scripts/editionIntake.js <edition-file> [cycle-number]  (auto-detects from header if omitted)
  *   node scripts/editionIntake.js --dry-run <edition-file> [cycle-number]
  *
  * Writes to:
@@ -346,14 +346,6 @@ async function main() {
   }
 
   const editionFile = path.resolve(filteredArgs[0]);
-  const cycle = parseInt(filteredArgs[1]) || 79;
-
-  console.log('');
-  console.log('=== EDITION INTAKE PARSER v1.0 ===');
-  console.log(`Edition: ${editionFile}`);
-  console.log(`Cycle: ${cycle}`);
-  if (dryRun) console.log('Mode: DRY RUN (no writes)');
-  console.log('');
 
   // Read edition file
   if (!fs.existsSync(editionFile)) {
@@ -362,6 +354,25 @@ async function main() {
   }
 
   const markdown = fs.readFileSync(editionFile, 'utf-8');
+
+  // Auto-detect cycle from header: "THE CYCLE PULSE — EDITION 80"
+  let cycle = parseInt(filteredArgs[1]);
+  if (!cycle) {
+    const headerMatch = markdown.match(/EDITION\s+(\d+)/i);
+    cycle = headerMatch ? parseInt(headerMatch[1]) : 0;
+  }
+  if (!cycle) {
+    console.error('ERROR: Could not detect cycle number. Pass it explicitly:');
+    console.error('  node scripts/editionIntake.js <file> <cycle-number>');
+    process.exit(1);
+  }
+
+  console.log('');
+  console.log('=== EDITION INTAKE PARSER v1.1 ===');
+  console.log(`Edition: ${editionFile}`);
+  console.log(`Cycle: ${cycle}${!filteredArgs[1] ? ' (auto-detected from header)' : ''}`);
+  if (dryRun) console.log('Mode: DRY RUN (no writes)');
+  console.log('');
   console.log(`Read ${markdown.length} characters from edition file`);
 
   // Extract sections

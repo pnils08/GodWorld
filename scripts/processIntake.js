@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * PROCESS MEDIA INTAKE v1.1
+ * PROCESS MEDIA INTAKE v1.2
  * ============================================================================
  *
  * Node.js equivalent of processMediaIntakeV2() from mediaRoomIntake.js.
@@ -708,12 +708,11 @@ async function cleanupAdvancementIntake() {
 
 async function main() {
   const args = process.argv.slice(2);
-  const cycle = parseInt(args.find(a => /^\d+$/.test(a))) || 79;
+  let cycle = parseInt(args.find(a => /^\d+$/.test(a))) || 0;
   const doCleanup = args.includes('--cleanup');
 
   console.log('');
-  console.log('=== PROCESS MEDIA INTAKE v1.1 ===');
-  console.log(`Cycle: ${cycle}`);
+  console.log('=== PROCESS MEDIA INTAKE v1.2 ===');
   console.log('');
 
   // Connect
@@ -733,6 +732,29 @@ async function main() {
     console.log('');
     return;
   }
+
+  // Auto-detect cycle from Cycle_Packet if not provided
+  if (!cycle) {
+    const cpData = await sheets.getSheetData('Cycle_Packet');
+    if (cpData.length >= 2) {
+      const cycleCol = cpData[0].indexOf('Cycle');
+      let maxCycle = 0;
+      for (let i = 1; i < cpData.length; i++) {
+        const c = parseInt(cpData[i][cycleCol >= 0 ? cycleCol : 1]) || 0;
+        if (c > maxCycle) maxCycle = c;
+      }
+      cycle = maxCycle;
+    }
+    if (!cycle) {
+      console.error('ERROR: Could not detect cycle. Pass it explicitly:');
+      console.error('  node scripts/processIntake.js <cycle-number>');
+      process.exit(1);
+    }
+    console.log(`Cycle: ${cycle} (auto-detected from Cycle_Packet)`);
+  } else {
+    console.log(`Cycle: ${cycle}`);
+  }
+  console.log('');
 
   // Get calendar context from Cycle_Packet
   console.log('Reading calendar context from Cycle_Packet...');

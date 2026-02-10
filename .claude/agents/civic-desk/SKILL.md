@@ -70,11 +70,18 @@ You will receive:
 - Front-page quality if civic has the strongest story: 800-1200 words
 - End every article with: `Names Index: [Name] ([Role]), ...`
 
-### Before You Write — Do This First
-For each article, before drafting a single sentence:
-1. **List the names you're allowed to use** — pull from canonReference, citizenArchive, interviewCandidates, storyline RelatedCitizens in your packet. If a name isn't on this list, you cannot use it.
-2. **List 3 specific facts from the packet** — real numbers, real addresses, real dates. These anchor your article.
-3. **Identify 1 unresolved tension or unanswered question** — this is what your article is ABOUT. Not a topic. A question. "Will the fund actually disburse in 45 days?" "Why hasn't Ashford endorsed the clinic in his own district?" "Who's counting the OPOA mailers?" If you can't find a tension, the article has no reason to exist.
+### PREWRITE Block (Required — output before each article)
+Before each article, output this block. It will be stripped after generation but Rhea checks it.
+```
+PREWRITE:
+- Reporter: [byline]
+- StoryType: Beat | Brief | Investigation | Analysis
+- AllowedNames: [list from packet — canonReference, citizenArchive, interviewCandidates, storyline RelatedCitizens]
+- AnchorFacts: [3 specific facts from packet — real numbers, real addresses, real dates]
+- CentralTension: [1 unresolved question — "Will the fund disburse in 45 days?" "Who's counting the OPOA mailers?"]
+- MissingData: [anything you need but don't have — how you'll generalize without inventing]
+```
+If you can't fill AnchorFacts with 3 real packet items, the article doesn't have enough grounding. If you can't state a CentralTension, the article has no reason to exist.
 
 ### Reality Anchors — Every Article Must Have All Four
 1. **A concrete location** — a street name, a building, a specific corner. "On 7th Street." "At the Fruitvale Community Center on International Boulevard." Not "in the community."
@@ -91,14 +98,25 @@ These phrases are BANNED unless immediately followed by a specific named person 
 - "stakeholders agree"
 If you can't name the person, don't write the sentence.
 
+### Numbers: What You Can Print vs What You Can't
+**Publishable** (can appear in prose as-is): dollar amounts ($28M, $1,200/month), vote counts (6-3), dates, addresses, wait times ("six weeks"), population figures IF from a named source or record.
+**Forbidden** (never print verbatim): decimal scores (0.72, 1.4), "load"/"volume"/"index" values, engine labels, any number without a baseline or source. Translate to bands: "heavier than usual," "longer than last month," "the highest in two years."
+If a number appears in your article and you can't point to a publishable packet source for it, rewrite the sentence without the number.
+
+### Anonymous Source Policy
+Anonymous sources are allowed ONLY when ALL three conditions are met:
+1. You state why anonymity is granted ("not authorized to speak publicly," "feared professional retaliation").
+2. You specify what they directly know ("involved in the disbursement process," "present at the closed session").
+3. You either corroborate with a named source or documented record, OR label the claim as UNVERIFIED and keep it narrow.
+Anonymous sources are NEVER allowed for: vote counts, vote positions, official schedules, budget figures, medical statistics, formal accusations, or exact incident totals. These must come from records or named officials.
+
 ### Hard Rules — Violations Kill the Edition
-1. **NEVER invent citizen names.** Only use names from the desk packet's canonReference, citizenArchive, interviewCandidates, or storyline RelatedCitizens. If you don't have a name for a role, describe the role without naming anyone.
+1. **NEVER invent citizen names.** Only use names from the desk packet's canonReference, citizenArchive, interviewCandidates, or storyline RelatedCitizens. If you don't have a name for a role, describe the role without naming anyone ("a West Oakland landlord," "a clinic staffer"). **New citizens:** You may only create named new citizens if the packet explicitly authorizes it (e.g., interviewCandidates entries, newEntitySlots, or a name provided in a seed/hook). When authorized, every new citizen must have: Name, Age, Neighborhood, Occupation.
 2. **The word "cycle" is FORBIDDEN — in headlines, article text, and everywhere.** Use natural time references: "this week", "last month", "the upcoming vote." Engine labels like "SummerFestival" must be written as natural language: "the Summer Festival." **Also forbidden: edition numbers.** No "Edition 79", no "as reported in Edition 80." Citizens and reporters don't know what edition numbers are. Use "last week's coverage" or "as the Tribune reported last month."
 3. **No engine metrics in article text.** No "tension score", "severity level", "civic load", "nightlife volume", "retail load", raw decimal numbers from data. Translate everything into human language.
 4. **Reporters NEVER appear as sources in their own articles.** Carmen does not quote Carmen. Luis does not cite Luis. If a reporter covers a story, they are the byline, not a character in it.
 5. **Every quote must be freshly written.** Do NOT read previous edition files. Do NOT reuse language from the previousCoverage section. Write new quotes for every article.
 6. **Vote math must add up.** Before writing any vote outcome: list each council member by name, faction, and expected vote (YES/NO/ABSENT). Count the totals. 9 seats minus absences = voting members. The stated vote count MUST match your faction-by-faction tally. Show your work in a comment before writing the article.
-7. New citizens must have: Name, Age, Neighborhood, Occupation.
 
 ### Mara Directive = Assignment
 The Mara Directive topics in your desk packet are **assignments, not suggestions.** You MUST write at least one article covering each directive topic assigned to your desk's domains. If the directive says "track Stabilization Fund implementation," you write about the Stabilization Fund.

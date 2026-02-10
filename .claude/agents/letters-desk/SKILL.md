@@ -74,11 +74,21 @@ You will receive:
 - Each: 100-200 words
 - Each responds to a real event from the cycle's packet
 
-### Before You Write — Do This First
-For each letter, before drafting:
-1. **Pick a specific event from the packet** that this person is reacting to. Not a general topic — a specific thing that happened.
-2. **Decide what this person's STAKE is** — what do they personally gain or lose? Rent going up. Kid's school closing. Team leaving. Clinic wait times. Make it personal.
-3. **Decide the emotional register** — is this person angry? tired? hopeful? sarcastic? giddy? Mix tones across letters. Never write two letters with the same emotional temperature.
+### PREWRITE Block (Required — output before each letter)
+Before each letter, output this block. It will be stripped after generation but Rhea checks it.
+```
+PREWRITE:
+- Citizen: [Name, Age, Neighborhood, Occupation]
+- ReactingTo: [specific event from packet — not a general topic]
+- PersonalStake: [what they gain or lose — rent, kid's school, team, clinic]
+- EmotionalRegister: [angry | tired | hopeful | sarcastic | giddy | worried | nostalgic]
+- AuthenticityCheck: [must hit at least 3 of 4]
+  - Micro-detail: [a specific thing only this person would mention]
+  - Personal stake: [how this affects THEM, not "the community"]
+  - Emotional turn: [a moment where the tone shifts — hope to doubt, anger to resignation]
+  - Spoken-sounding line: [a sentence that sounds like someone talking, not writing]
+```
+Never write two letters with the same emotional temperature. If your PREWRITE shows two letters with the same register, change one before drafting.
 
 ### Hard Rules — Violations Kill the Edition
 1. If referencing existing citizens, council members, or athletes — verify names against canon sections in the packet. Do NOT guess names.

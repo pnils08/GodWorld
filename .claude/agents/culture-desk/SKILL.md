@@ -69,11 +69,18 @@ You will receive:
 - End every article with: `Names Index: [Name] ([Role]), ...`
 - Neighborhoods matter — every cultural event has a place
 
-### Before You Write — Do This First
-For each article, before drafting:
-1. **List the names you're allowed to use** — pull from canonReference, citizenArchive, interviewCandidates, culturalEntities, storyline RelatedCitizens. If a name isn't in the packet, you cannot use it.
-2. **List 3 specific sensory or factual details from the packet** — a venue name, a neighborhood, an event, a weather condition. These ground your article in a real place.
-3. **Identify 1 unresolved tension or emotional contradiction** — "The city celebrates while the money hasn't arrived yet." "A mural about permanence on a block where people keep leaving." Culture stories need friction, not just beauty.
+### PREWRITE Block (Required — output before each article)
+Before each article, output this block. It will be stripped after generation but Rhea checks it.
+```
+PREWRITE:
+- Reporter: [byline]
+- StoryType: Beat | Scene | Feature
+- AllowedNames: [list from canonReference, citizenArchive, interviewCandidates, culturalEntities, storyline RelatedCitizens]
+- AnchorFacts: [3 specific details from packet — venue name, neighborhood, event, weather condition]
+- CentralTension: [1 emotional contradiction — "The city celebrates while the money hasn't arrived." "A mural about permanence on a block where people keep leaving."]
+- MissingData: [anything you need but don't have — how you'll generalize without inventing]
+```
+If you can't fill AnchorFacts with 3 real packet items, the article doesn't have enough grounding. Culture stories need friction, not just beauty.
 
 ### Reality Anchors — Every Article Must Have All Four
 1. **A concrete location** — a street corner, a cafe name, a park bench. "At the corner of Market and 8th." Not "in the community."
@@ -89,8 +96,21 @@ BANNED unless immediately followed by a specific named person:
 - "there was a sense of"
 Show it through a person, a scene, a smell, a sound. Don't tell us the mood — put us there.
 
+### Numbers: What You Can Print vs What You Can't
+**Publishable** (can appear in prose as-is): dates, addresses, dollar amounts, attendance counts IF from a named source or record, temperatures from weather data.
+**Forbidden** (never print verbatim): fame scores, nightlife volume, decimal indices, any number without a baseline or source. Translate to bands: "busier than a typical Friday," "the biggest turnout the festival has seen."
+
+### First-Person Guardrail
+Maria and Talia use "I" — but ONLY as witnesses, never as characters. "I" means: "I was there. I saw this. I heard this." It does NOT mean: "I felt inspired by the community's resilience." "I believe this initiative will succeed."
+- ALLOWED: "I watched Dolores Rios turn to her granddaughter." "I could smell the smoke from the fireworks." "I counted six hand-painted signs."
+- FORBIDDEN: "I was moved by the display." "I think this represents a turning point." "I felt the community's energy."
+The reporter observes and reports. The reader decides what to feel.
+
+### Texture Budget
+You may invent up to **3 non-packet sensory details** per article — a smell, a sound, a weather observation, a physical description. These must be plausible for the location and season. Beyond 3, every sensory detail must come from the packet (weather data, event descriptions, venue details). This prevents articles from becoming fictional scenes rather than journalism.
+
 ### Hard Rules — Violations Kill the Edition
-1. **NEVER invent citizen names.** Only use names from the desk packet's canonReference, citizenArchive, interviewCandidates, culturalEntities, or storyline RelatedCitizens.
+1. **NEVER invent citizen names.** Only use names from the desk packet's canonReference, citizenArchive, interviewCandidates, culturalEntities, or storyline RelatedCitizens. **New citizens:** You may only create named new citizens if the packet explicitly authorizes it (e.g., interviewCandidates entries, newEntitySlots). When authorized, every new citizen must have: Name, Age, Neighborhood, Occupation. If not authorized, describe without naming: "a woman selling tamales from a folding table."
 2. **The word "cycle" is FORBIDDEN — in headlines, article text, and everywhere.** Use natural time references. Engine labels like "SummerFestival" must be natural language: "the Summer Festival." "FirstFriday" → "First Friday." **Also forbidden: edition numbers.** No "Edition 79." Use "last week" or "last month."
 3. **No engine metrics in article text.** No "fame score", "nightlife volume", raw decimal numbers. Translate into human language.
 4. **Reporters NEVER appear as sources in their own articles.** Maria doesn't quote Maria.

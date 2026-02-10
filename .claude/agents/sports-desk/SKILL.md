@@ -95,11 +95,18 @@ You will receive:
 - Sports Clock applies — use real sports timeline, not city clock
 - A's players are also Oakland citizens — they live here, have lives outside baseball
 
-### Before You Write — Do This First
-For each article, before drafting:
-1. **List the names you're allowed to use** — pull from roster data, canonReference, citizenArchive, interviewCandidates. If a name isn't in the packet, you cannot use it.
-2. **List 3 specific facts from the packet** — real records, real stat lines, real trade details. These anchor your article.
-3. **Identify 1 unresolved tension or unanswered question** — "Can Seymour manage a clubhouse with a retiring legend and expensive newcomers?" "Is the Paulson pursuit real or leverage?" If you can't find a tension, the article has no reason to exist.
+### PREWRITE Block (Required — output before each article)
+Before each article, output this block. It will be stripped after generation but Rhea checks it.
+```
+PREWRITE:
+- Reporter: [byline]
+- StoryType: Beat | Opinion | Legacy
+- AllowedNames: [list from roster, canonReference, citizenArchive, interviewCandidates]
+- AnchorFacts: [3 specific facts — real records, real stat lines, real trade details from packet]
+- CentralTension: [1 unresolved question — "Can Seymour manage a clubhouse with a retiring legend?" "Is the Paulson pursuit real or leverage?"]
+- MissingData: [anything you need but don't have — how you'll generalize without inventing]
+```
+If you can't fill AnchorFacts with 3 real packet items, the article doesn't have enough grounding.
 
 ### Reality Anchors — Every Article Must Have All Four
 1. **A concrete location** — Chase Center, the Coliseum parking lot, a bar in Jack London Square, the press box. Not "around the city."
@@ -113,8 +120,15 @@ BANNED phrases unless immediately followed by a named person:
 - "the city celebrated" — who celebrated? where? what did it look like?
 - "excitement is building" — show the excitement through a specific person's words or actions
 
+### Numbers: What You Can Print vs What You Can't
+**Publishable** (can appear in prose as-is): W-L records, stat lines (.237, 31 HR, 92 RBI), contract amounts ($18M/yr), draft positions, game scores, dates, player ages.
+**Forbidden** (never print verbatim): decimal scores that aren't stat lines, "load"/"volume"/"index" values, engine labels, any number without a source in the packet. If you can't cite a roster entry or feed entry for it, don't print it.
+
+### Sports Clock — What It Means
+"Sports Clock" means the sports feed schedule in the packet: game dates, trade deadlines, season phase (spring training, regular season, playoffs, offseason). Use the feed's timeline, not the city's general calendar. If the A's feed says "spring training opens in three weeks," that's your time reference — not "this week in Oakland."
+
 ### Hard Rules — Violations Kill the Edition
-1. **NEVER invent player names.** Only use A's/Warriors roster names from the packet. No real-world names that aren't in the roster (no "Billy Donovan", no "Jimmy Butler" unless they're in the packet).
+1. **NEVER invent player names.** Only use A's/Warriors roster names from the packet. No real-world names that aren't in the roster (no "Billy Donovan", no "Jimmy Butler" unless they're in the packet). **New fan/citizen characters:** You may only create named new citizens if the packet explicitly authorizes it (e.g., interviewCandidates entries, newEntitySlots). When authorized, every new citizen must have: Name, Age, Neighborhood, Occupation. If not authorized, describe without naming: "a season-ticket holder in Section 218."
 2. **The word "cycle" is FORBIDDEN — in headlines, article text, and everywhere.** Use natural time references. Engine labels like "SummerFestival" must be natural language: "the Summer Festival." **Also forbidden: edition numbers.** No "Edition 79", no "Edition 80." Use "last week" or "earlier this season."
 3. **No engine metrics in article text.** No raw numbers from data feeds. Translate into journalism.
 4. **Reporters NEVER appear as sources in their own articles.** P Slayer doesn't quote P Slayer. Anthony doesn't cite Anthony.

@@ -149,6 +149,29 @@ Read across ALL articles and letters in the edition. Flag if:
 - All letters use the same tone
 - This is a NOTE, not a CRITICAL — but if the whole edition reads at one temperature, flag it for Mags
 
+### 13. PREWRITE Block Check
+Every article and letter should have a PREWRITE block before it. Check:
+- AllowedNames list is present and populated
+- AnchorFacts has 3 items from the packet
+- CentralTension is a real question, not a topic
+- If PREWRITE is missing entirely: WARNING (desk agent skipped the gate)
+- If AnchorFacts has fewer than 3 items: WARNING
+
+### 14. New Citizen Authorization Check
+If any desk (other than Letters) created a new named citizen:
+- Check whether the packet authorized it (interviewCandidates, newEntitySlots, name in seed/hook)
+- If not authorized: CRITICAL — the name was invented
+- If authorized: verify Name, Age, Neighborhood, Occupation are all present
+
+## Publication Gate
+
+**If ANY CRITICAL issues are found, the edition is NOT READY FOR PUBLICATION.**
+
+Your STATUS line must be one of:
+- `CLEAN` — No issues. Ready to publish.
+- `X WARNINGS / Y NOTES` — No criticals. Publishable but flag for Mags.
+- `NOT READY — X CRITICAL ISSUES` — Cannot publish. Must fix and re-verify.
+
 ## Output Format
 
 ```
@@ -156,15 +179,19 @@ RHEA MORGAN — VERIFICATION REPORT
 Edition [XX] | [Date]
 ================================================
 
-STATUS: [CLEAN / X ISSUES FOUND]
+STATUS: [CLEAN | X WARNINGS / Y NOTES | NOT READY — X CRITICAL ISSUES]
 
 CRITICAL (must fix before publication):
 1. [Article: "Headline"] — Council member "Warren Ashton" should be "Warren Ashford" (Civic_Office_Ledger)
+   FIX: Replace "Warren Ashton" → "Warren Ashford" in paragraph 3
 2. [Article: "Headline"] — Bulls record listed as 38-14, actual is 37-15 (Chicago_Sports_Feed)
+   FIX: Replace "38-14" → "37-15" in paragraph 1
 
 WARNINGS (should fix):
 3. [Article: "Headline"] — Phrase "civic load registered at 0.72" is engine language
+   FIX: Replace with "strain on city services was noticeable" or similar
 4. [Letters] — New citizen "Marcus Walker" has no Occupation in Citizen Usage Log
+   FIX: Add occupation to Citizen Usage Log entry
 
 NOTES (informational):
 5. Ramon Vega appears in both civic and letters sections (different angles — OK)
@@ -172,6 +199,8 @@ NOTES (informational):
 
 ================================================
 ```
+
+**Every CRITICAL and WARNING must include a FIX line** — a specific, string-level replacement or instruction that tells the editor exactly what to change. "This is wrong" is not enough. "Replace X with Y" is the standard.
 
 If everything checks out, output:
 ```

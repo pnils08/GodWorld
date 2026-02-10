@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-09 | Engine: v3.1 | Cycle: 80 | Session: 15
+Last Updated: 2026-02-09 | Engine: v3.1 | Cycle: 80 | Session: 17
 
 ---
 
@@ -92,9 +92,9 @@ GodWorld/
 | Faith Events | faithEventsEngine.js | v1.1 | simMonth fix, namespace safety, story signals |
 | Game Mode Events | generateGameModeMicroEvents.js | v1.3 | Write-intents, namespace safety |
 | Handoff Compiler | compileHandoff.js | v1.1 | **SUPERSEDED** by scripts/buildDeskPackets.js (desk packet pipeline) |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v1.1 | Per-desk JSON packets from 16 sheets + reporter history + citizen archive from POPID index |
-| Edition Intake | scripts/editionIntake.js | v1.0 | Node.js CLI — parses edition → 4 intake sheets |
-| Process Intake (Node) | scripts/processIntake.js | v1.1 | Node.js CLI — intake sheets → final ledgers + citizen routing |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v1.2 | Per-desk JSON packets from 16 sheets + reporter history + citizen archive from POPID index. buildRecentOutcomes returns full objects with voteBreakdown. buildPendingVotes includes budget/notes/initiativeId. |
+| Edition Intake | scripts/editionIntake.js | v1.2 | Node.js CLI — parses edition → 4 intake sheets, auto-detects cycle from header. Double-dash (--) prefix parsing fixed for all three parsers (storylines, citizens, quotes). |
+| Process Intake (Node) | scripts/processIntake.js | v1.2 | Node.js CLI — intake sheets → final ledgers + citizen routing, auto-detects cycle from Cycle_Packet |
 
 ---
 
@@ -153,6 +153,39 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Session History
 
+### 2026-02-09 (Session 17) — Edition 80 Canon Fixes + Intake Pipeline Repair
+
+- **Edition 80 canon errors fixed** (from Mags audit, grade C+):
+  - Vote count corrected: 6-2 throughout (was 5-4). Root cause: `buildDeskPackets.js` only passed vote REQUIREMENT ("5-4 required") not actual ENGINE RESULT (6-2). Carmen's lead fabricated a 5-4 narrative.
+  - Phantom characters grounded: "Community Director Hayes" → Beverly Hayes (POP-00576, female, West Oakland). "Councilwoman Rivera" → Elena Rivera (POP-00617, West Oakland). Both had titles stored as first names in Simulation_Ledger.
+  - Beverly chosen over Robert (originally picked in Session 16) because Maria Keen's culture article uses she/her pronouns throughout.
+  - Wiffleball continuity fixed: removed "moved from West Oakland to Temescal" (C79v2 already covered it in West Oakland).
+  - Crane: changed from "voted NO remotely" / "injured, remote" to "absent" throughout.
+  - CRC narrative: "0 for 2 on blocking appropriations" replaces "bloc held."
+  - Carmen's front page lead fully rewritten with correct political framing.
+  - All downstream references updated (Article Table, Storylines, Citizen Usage Log, Continuity Notes).
+- **Pipeline fix** (`buildDeskPackets.js` v1.2):
+  - `buildRecentOutcomes`: now returns objects with full initiative data including `voteBreakdown` from Notes column (was returning flat strings without vote tallies).
+  - `buildPendingVotes`: now includes `budget`, `notes`, `initiativeId` fields.
+  - Future editions will receive actual engine vote tallies automatically.
+- **Edition 80 v3 saved** (`editions/cycle_pulse_edition_80_v3.txt`). Mags graded B+.
+- **Mags editorial note**: Mike Paulson at Temescal wiffleball should connect to the health crisis he spoke out on — that's WHY he was there. Agents treated him as scenery. Flag for C81.
+- **Intake pipeline bugs fixed** (`editionIntake.js` v1.2):
+  - Double-dash bug: parser regex `/^[—\-]\s+/` only matched single dash. Edition template uses `-- ` (double dash). Changed to `/^(?:--|[—\-])\s+/` in `parseStorylines`, `parseCitizenUsage`, and `parseDirectQuotes`. This bug was silently dropping ALL citizen and storyline intake on every edition.
+  - Quote name bug: same regex issue caused names stored as `- Jose Johnson` instead of `Jose Johnson`. Fixed regex + cleaned 24 dirty rows in LifeHistory_Log.
+- **Intake results for C80 v3**: 12 articles, 13 storylines, 72 citizens (16 new, 56 existing), 24 quotes. 121 total rows.
+- **Duplicate cleanup**: 225 duplicate rows deleted from Press_Drafts (17) and LifeHistory_Log (208, including pre-existing Tier 3 dupes from earlier cycles).
+- **Commits**: `7be2de2` (canon fixes + pipeline), `6d08300` (v3 final), `59d8a2e` (intake double-dash fix), `9b15ff4` (quote parser fix). All pushed.
+
+### 2026-02-09 (Session 16) — Code Pilot Fixes + Jax Caldera Agent
+
+- **Code Pilot's 10 fixes applied** (commit `50e62d9`): new-citizen contradiction resolved, PREWRITE blocks added to all 6 desks, number classification (publishable vs forbidden), anonymous source policy (civic), first-person guardrail (culture/chicago), texture budget (culture), publication gate (Rhea), FIX lines required for CRITICAL/WARNING, ticker as subtle canon framing (business), Sports Clock clarified (sports/chicago). Plus PREWRITE block check (Rhea check 13) and new citizen authorization check (Rhea check 14).
+- **Jax Caldera agent created** (commit `3182f5d`): freelance accountability columnist, `.claude/agents/freelance-firebrand/SKILL.md`. Deploys only on stink signals. Max 1 article/edition, 400-700 words. Manual deployment only — not wired into write-edition pipeline yet.
+- **Grok audit fixes** (commit `9e4887e`): domain lock, headline ban, edition numbers, topic spread.
+- **Deep agent rewrite** (commit `fc03c0b`): editorial stances, voice samples, reality anchors.
+- **Mechanical fixes** (commit `cfc0ed2`): across all desk agents.
+- **Total commits across sessions 15-16 for agent rewrite**: 5 (cfc0ed2, fc03c0b, 9e4887e, 50e62d9, 3182f5d).
+
 ### 2026-02-09 (Session 15) — Edition 80 Full Production
 
 - **Cycle 80 engine run**: Pre-flight checks passed, engine triggered via Apps Script, post-cycle review confirmed all 11 phases complete. Summer cycle, SummerFestival holiday (Oakland priority), overcast weather, elevated pattern, mid-season sports.
@@ -174,7 +207,32 @@ Before editing, check what reads from and writes to the affected ctx fields.
   - `editionIntake.js` parsed edition → 4 intake sheets: 14 articles (Media_Intake), 14 storylines (Storyline_Intake), 69 citizens (Citizen_Usage_Intake), 19 direct quotes (LifeHistory_Log). 116 total rows written.
   - `processIntake.js` moved intake → final ledgers: 14 articles → Press_Drafts, 13 new + 1 resolved → Storyline_Tracker, 69 → Citizen_Media_Usage. Citizen routing: 8 new → Intake, 61 existing → Advancement_Intake1. Simulation_Ledger now at 652 entries (up from 526 pre-C80, Bulls and C79 citizens promoted by engine).
   - Note: Cycle_Packet sheet still shows C79 calendar context (Independence/July/FirstFriday). Cosmetic only — article/storyline data correctly tagged C80 from intake step.
-- **No code changes this session** — pure edition production and intake.
+- **Bug fixes (3 code changes)**:
+  - **editionIntake.js v1.1**: Auto-detects cycle from edition header (`EDITION 80`) instead of hardcoded default 79. Errors if detection fails and no CLI arg provided.
+  - **processIntake.js v1.2**: Auto-detects cycle from highest cycle in Cycle_Packet sheet instead of hardcoded default 79. This also fixes the stale calendar issue — C80's Cycle_Packet has correct SummerFestival calendar, but the old code was finding C79 (Independence) because it defaulted to cycle 79.
+  - **seedRelationBondsv1.js v1.1**: Fixed root cause of Relationship_Bonds being empty across 80 cycles. Seed was writing bonds directly to sheet, but `saveRelationshipBonds_` in Phase 10 replaced the entire sheet from `ctx.summary.relationshipBonds` (which the seed never populated) — wiping all seeded bonds. Fix: seed now stores bonds in `ctx.summary.relationshipBonds` in the 17-column persistence format, letting the save function handle the write. Also fixed column format mismatch (seed had `nameA`/`nameB`/`type` fields vs persistence's `bondType`/`domainTag`/`cycleCreated` schema).
+  - **World_Population ghost row deleted**: Blank row 3 (single space in totalPopulation) removed via Sheets API. Sheet now clean: header (row 1), current state (row 2, C80), history (row 3, C80 snapshot from `appendPopulationHistory_`).
+- **Commits**: `6451cf8` (intake auto-detection + World_Population cleanup), `01b622d` (bond seeding fix). Pushed to main.
+- **Edition 80 declared UNUSABLE** after Mara Vance full audit:
+  - Vote math impossible: 6-2 requires Mobley (OPP) voting NO with zero narrative basis. With Crane absent, correct math is 7-1 (OPP×4 + Vega + Tran + Ashford YES, Chen NO).
+  - Carmen Delaine cites herself in her own article.
+  - Verbatim quote recycling: 8+ citizens have word-for-word quotes from Edition 79 (Calvin Turner, Jose Wright, Elijah Campbell, Marco Johnson, Jalen Hill, Marcus Walker, Howard Young, Brian Williams).
+  - 6+ invented characters: Laila Cortez, Brenda Okoro, Community Director Hayes, Gallery Owner Mei Chen, Amara Keane, Ernesto Quintero.
+  - Missing template sections: PHASE CHANGES, STILL ACTIVE, council composition table.
+  - Engine language throughout: "Cycle 82", "this cycle", "Nightlife volume: 1.78".
+  - "SummerFestival" as compound word (engine label, not natural language).
+  - Billy Donovan is a real NBA coach name.
+  - Redundant coverage: Carmen and Jordan both wrote Stabilization Fund stories.
+  - Mara directive partially missed: Baylight not actually covered (opinion instead of reporting), OARI committee work not shown.
+  - **Verdict: D-. Entire /write-edition skill pipeline failed. Not one desk produced clean output.**
+- **Intake rollback completed** — 285 bad rows removed across 5 sheets:
+  - Press_Drafts: 121 → 92 (29 rows, ISO-timestamp 2026-02-08/09 batches)
+  - Storyline_Tracker: 141 → 113 (28 rows)
+  - Citizen_Media_Usage: 1047 → 888 (159 rows)
+  - Intake: 8 → 0 (cleared — had Billy Donovan, Jimmy Butler, other bad names)
+  - Advancement_Intake1: 61 → 0 (cleared — all from bad edition)
+  - LifeHistory_Log: 373 C80 rows LEFT IN PLACE (valid engine data, not edition contamination)
+- **Edition 80 file retained** (`editions/cycle_pulse_edition_80.txt`) as reference for what went wrong. Must be rewritten before intake can run again.
 
 ### 2026-02-09 (Session 14) — Supermemory Full World Save
 
@@ -812,24 +870,38 @@ any code is written.
 62. **COMPLETE**: 5 docs updated for agent newsroom — AGENT_NEWSROOM (full rewrite), DESK_PACKET_PIPELINE (paths), PROJECT_GOALS (implemented), STYLE_GUIDE (v1.2), PRIORITY_TASKS (Session 13 section)
 63. **COMPLETE**: buildDeskPackets.js v1.1 — reporter history (full Press_Drafts bibliography per reporter) + citizen archive (POPID index parsed into per-desk filtered archives, capped at 10 articles, canon-aware name extraction)
 
-**Next Actions (Session 15):**
+**Next Actions (Session 18):**
 
-1. **CONSIDER: compileHandoff.js cleanup** — Superseded by buildDeskPackets.js. Still in GodWorld Exports menu.
+1. **DEPLOY bond seeding fix**: `clasp push` seedRelationBondsv1.js v1.1. Relationship_Bonds should populate (~500 bonds) on next engine run.
 
-2. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
+2. **Canon resolution: Deacon Seymour vs Mike Kinder** — base_context lists Mike Kinder as A's Manager, all articles reference Deacon Seymour. Needs definitive canon call before C81.
 
-3. Activate Supermemory Pro after subscription sort (2/16)
+3. **Clean Carmen's roster entry** in `bay_tribune_roster.json` — still has engine language in samplePhrases/themes ("Civic load", "Peak game-day traffic registered at 0.72").
 
-4. **NOTE: Cycle_Packet calendar stale** — Still shows C79 data (Independence/July). processIntake.js reads calendar from this sheet. Will auto-update on next engine run (C81).
+4. **Beverly Hayes intro descriptor** — Maria Keen's culture article drops her cold without identifying who she is. Needs "community director at the West Oakland Neighbors Association" on first reference.
 
-5. **NOTE: editionIntake.js default cycle** — Hardcoded default is 79 (line 349). Must pass cycle number explicitly (`node scripts/editionIntake.js <file> 80`). Consider updating default or auto-detecting from edition header.
+5. **Wire Jax Caldera into /write-edition** — currently manual deployment only. Consider deployment router (when to use Jax vs Carmen/Luis).
+
+6. **CONSIDER: compileHandoff.js cleanup** — Superseded by buildDeskPackets.js. Still in GodWorld Exports menu.
+
+7. **TECH DEBT: mulberry32_ consolidation** — 10 copies across codebase → utilities/rng.js
+
+8. Activate Supermemory Pro after subscription sort (2/16)
 
 64. **COMPLETE**: Supermemory engaged — 13 memory entries saved (world state, canon, editorial, business strategy, engine architecture, edition history). Free tier active, 3m tokens/month.
 65. **ESTABLISHED**: Session workflow — search Supermemory at start, save summary at end. Mirrors SESSION_CONTEXT.md updates.
 66. **AVAILABLE**: Chrome v144 + Xvfb virtual display on :99 (1920x1080) for visual verification tasks.
 67. **COMPLETE**: Cycle 80 engine run — Summer, SummerFestival, overcast, elevated pattern, mid-season sports. All 11 phases complete.
-68. **COMPLETE**: Edition 80 written — 14 articles + 4 letters across 6 desks. Health Center vote (6-2) front page. Mara Vance directive fully covered (Stabilization Fund, OARI/OPOA, Baylight). Ernesto Quintero age fix applied. File: `editions/cycle_pulse_edition_80.txt`.
-69. **COMPLETE**: Edition 80 intake — 14 articles, 14 storylines (13 new + 1 resolved), 69 citizens (8 new, 61 existing), 19 quotes. All routed to final ledgers. Simulation_Ledger at 652 entries.
+68. **COMPLETE**: Edition 80 v3 — canon-corrected final (B+ grade). Vote math 6-2 correct, phantoms grounded (Beverly Hayes, Elena Rivera), wiffleball continuity fixed, Crane absent. File: `editions/cycle_pulse_edition_80_v3.txt`.
+69. **ROLLED BACK then REPLACED**: Edition 80 intake — original 285 bad rows removed (Session 15). New intake from v3: 121 rows (12 articles, 13 storylines, 72 citizens, 24 quotes). Dupes from double-run cleaned (225 rows).
+70. **FIXED**: editionIntake.js v1.1 → v1.2 — auto-detects cycle + double-dash prefix parsing fixed for storylines, citizens, and quotes. Was silently dropping all citizen/storyline intake.
+71. **FIXED**: processIntake.js v1.2 — auto-detects cycle from Cycle_Packet, fixes stale calendar issue.
+72. **FIXED**: seedRelationBondsv1.js v1.1 — bonds stored in ctx.summary.relationshipBonds instead of direct sheet write. Root cause of 0 bonds across 80 cycles. Needs `clasp push`.
+73. **FIXED**: World_Population ghost row deleted — blank row 3 removed, sheet clean (header + current + history).
+74. **COMPLETE**: Agent pipeline overhaul — 5 commits across Sessions 15-16 (cfc0ed2 mechanical, fc03c0b deep rewrite, 9e4887e Grok, 50e62d9 Code Pilot, 3182f5d Jax). PREWRITE blocks, number classification, publication gate, citizen authorization checks all added.
+75. **FIXED**: buildDeskPackets.js v1.1 → v1.2 — buildRecentOutcomes returns full objects with voteBreakdown from Notes column. buildPendingVotes includes budget/notes/initiativeId. Root cause of vote count errors in editions.
+76. **CREATED**: Jax Caldera freelance accountability agent — `.claude/agents/freelance-firebrand/SKILL.md`. Manual deployment only.
+77. **FIXED**: Simulation_Ledger — POP-00576 (Beverly Hayes, West Oakland), POP-00617 (Elena Rivera, West Oakland). Titles removed from first name fields.
 
 ---
 

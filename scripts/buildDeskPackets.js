@@ -463,8 +463,10 @@ function buildPendingVotes(initiatives) {
   }).map(function(i) {
     return {
       name: i.Name || '',
+      initiativeId: i.InitiativeID || '',
       type: i.Type || '',
       status: i.Status || '',
+      budget: i.Budget || '',
       voteRequirement: i.VoteRequirement || '',
       voteCycle: i.VoteCycle || '',
       projection: i.Projection || '',
@@ -474,7 +476,8 @@ function buildPendingVotes(initiatives) {
       swingVoter2: i.SwingVoter2 || '',
       swingVoter2Lean: i.SwingVoter2Lean || '',
       policyDomain: i.PolicyDomain || '',
-      affectedNeighborhoods: i.AffectedNeighborhoods || ''
+      affectedNeighborhoods: i.AffectedNeighborhoods || '',
+      notes: i.Notes || ''
     };
   });
 }
@@ -493,7 +496,18 @@ function buildRecentOutcomes(initiatives) {
     var s = (i.Status || '').toLowerCase();
     return s === 'passed' || s === 'failed';
   }).map(function(i) {
-    return i.Name + ': ' + (i.Status || '').toUpperCase() + (i.Outcome ? ' — ' + i.Outcome : '');
+    return {
+      name: i.Name || '',
+      initiativeId: i.InitiativeID || '',
+      status: (i.Status || '').toUpperCase(),
+      outcome: i.Outcome || '',
+      budget: i.Budget || '',
+      voteRequirement: i.VoteRequirement || '',
+      voteCycle: i.VoteCycle || '',
+      voteBreakdown: i.Notes || '',
+      affectedNeighborhoods: i.AffectedNeighborhoods || '',
+      policyDomain: i.PolicyDomain || ''
+    };
   });
 }
 

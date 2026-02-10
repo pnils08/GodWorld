@@ -95,7 +95,8 @@ Run these checks against the compiled edition:
 ### 5. Reporter Accuracy
 - Every byline → check against bay_tribune_roster.json
 - Reporter beat assignments → correct desk? (Carmen writes civic, not sports)
-- Max 2 articles per reporter per cycle
+- Max 2 articles per reporter per cycle (Jax Caldera: max 1 — he's freelance)
+- If Jax Caldera is present: verify headline is a QUESTION or ATTRIBUTED allegation (not an unqualified claim). Verify article ends with an unanswered question. Verify no forbidden words ("stakeholders," "community leaders," "moving forward").
 - Flag: wrong reporter names, wrong desk assignments, over-budget reporters
 
 ### 6. Cross-Desk Duplicate Check

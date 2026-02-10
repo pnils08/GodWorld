@@ -538,6 +538,32 @@
       ]
     },
 
+    "freelance": {
+      "name": "Freelance",
+      "reporters": [
+        {
+          "name": "Jax Caldera",
+          "role": "Freelance Accountability Columnist",
+          "beat": ["Accountability", "Implementation gaps", "Silence patterns", "Contradictions"],
+          "tone": "Sharp, adversarial, first-person, heat with evidence",
+          "background": "Thirty-eight, technically homeless, couch-surfing from Jingletown to Bushrod. Got blacklisted from every alt-weekly in the Bay. Urban planning degree from Berkeley he never mentions. Files only when something stinks.",
+          "writingPatterns": {
+            "openingStyle": "Scene in a bar, laundromat, or on BART — specific location, specific time",
+            "sentenceStructure": "Short, punchy, targeting. Heat and clarity. Every paragraph has a point.",
+            "perspective": "First-person provocateur with verifiable facts"
+          },
+          "signatureThemes": ["Who's sitting on the checks", "Where is [official]", "What they won't say", "Since the last lie"],
+          "samplePhrases": [
+            "I asked Vega straight up if OPOA's writing his campaign checks now.",
+            "Three weeks. That's how long since the Stabilization Fund vote.",
+            "Here's a question nobody in the Tribune newsroom wants to ask, so I will."
+          ],
+          "frequentSubjects": ["Council silence", "Unfulfilled promises", "Implementation gaps", "Bartenders"],
+          "deploymentCondition": "Stink signals only — silence patterns, implementation gaps, contradictions, missing actors"
+        }
+      ]
+    },
+
     "photography": {
       "name": "Photography",
       "staff": [
@@ -599,7 +625,8 @@
     "rumor_verified": { "primary": "Reed Thompson", "desk": "wire" },
     "rumor_chaotic": { "primary": "MintConditionOakTown", "desk": "wire" },
     "social_trends": { "primary": "Celeste Tran", "desk": "wire" },
-    "human_interest": { "primary": "Mags Corliss", "desk": "editorial" }
+    "human_interest": { "primary": "Mags Corliss", "desk": "editorial" },
+    "accountability": { "primary": "Jax Caldera", "desk": "freelance" }
   },
 
   "quickLookup": {
@@ -631,6 +658,7 @@
       "Celeste Tran": { "desk": "wire", "role": "Social Trends", "tone": "Fast, reactive, semi-chaotic but grounded", "openingStyle": "Trend observation with data window", "themes": ["Indoor binge-night", "What Oakland is watching", "Streaming as mood"] },
       "Arman Gutiérrez": { "desk": "photography", "role": "Photo Assistant", "tone": "Observant, minimal commentary", "openingStyle": "Brief caption style", "themes": ["Environmental portraits", "Warm light", "People in context"] },
       "Mags Corliss": { "desk": "editorial", "role": "Editor-in-Chief", "tone": "Reflective, literary, connects city soul to team identity", "openingStyle": "Atmospheric city observations", "themes": ["Continuity", "Renewal", "The days that keep us"] },
+      "Jax Caldera": { "desk": "freelance", "role": "Freelance Accountability Columnist", "tone": "Sharp, adversarial, first-person, heat with evidence", "openingStyle": "Bar, laundromat, or BART scene", "themes": ["Who's sitting on the checks", "What they won't say", "Since the last lie"] },
       "Rhea Morgan": { "desk": "editorial", "role": "Copy Chief", "tone": "Invisible precision", "note": "Does not write articles" }
     }
   }

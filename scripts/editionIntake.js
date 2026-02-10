@@ -305,7 +305,7 @@ function parseDirectQuotes(section, cycle) {
     if (inQuoteSection) {
       // Match: — Name: "quote text"
       // Handles ASCII quotes, smart quotes, and parenthetical qualifiers in name
-      const quoteMatch = trimmed.match(/^[—–\-]\s*(.+?):\s*["\u201C\u201D](.+)["\u201C\u201D]$/);
+      const quoteMatch = trimmed.match(/^(?:--|[—–\-])\s*(.+?):\s*["\u201C\u201D](.+)["\u201C\u201D]$/);
       if (quoteMatch) {
         const now = new Date().toISOString();
         quotes.push([

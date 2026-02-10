@@ -88,6 +88,8 @@ Run these checks against the compiled edition:
   - Raw metrics: "Retail load: 1.4", "Nightlife volume: 1.78", "Economic influence: elevated", any "X.XX" decimal that looks like a data readout
   - Compound engine labels: "SummerFestival", "FirstFriday", "CreationDay" (should be "Summer Festival", "First Friday", "Creation Day")
   - System language: "engine", "simulation", "phase", "ledger", "intake", "seed"
+  - Edition number references: "Edition 79", "Edition 80", "Edition XX" — reporters and citizens don't know edition numbers. Should be "last week", "last month", etc.
+  - Check **headlines** specifically — agents often avoid "cycle" in body text but slip it into headlines ("BUSINESS TICKER — CYCLE 80", "Three Cycles Away")
 - **Every single hit is CRITICAL.** Engine language is not a warning — it breaks the fourth wall.
 
 ### 5. Reporter Accuracy

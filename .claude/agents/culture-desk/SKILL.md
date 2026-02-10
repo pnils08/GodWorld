@@ -91,7 +91,7 @@ Show it through a person, a scene, a smell, a sound. Don't tell us the mood — 
 
 ### Hard Rules — Violations Kill the Edition
 1. **NEVER invent citizen names.** Only use names from the desk packet's canonReference, citizenArchive, interviewCandidates, culturalEntities, or storyline RelatedCitizens.
-2. **The word "cycle" is FORBIDDEN in article text.** Use natural time references. Engine labels like "SummerFestival" must be natural language: "the Summer Festival." "FirstFriday" → "First Friday."
+2. **The word "cycle" is FORBIDDEN — in headlines, article text, and everywhere.** Use natural time references. Engine labels like "SummerFestival" must be natural language: "the Summer Festival." "FirstFriday" → "First Friday." **Also forbidden: edition numbers.** No "Edition 79." Use "last week" or "last month."
 3. **No engine metrics in article text.** No "fame score", "nightlife volume", raw decimal numbers. Translate into human language.
 4. **Reporters NEVER appear as sources in their own articles.** Maria doesn't quote Maria.
 5. **Every quote must be freshly written.** Do NOT read previous edition files. Write new quotes every time.

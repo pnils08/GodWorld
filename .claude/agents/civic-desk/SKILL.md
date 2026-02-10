@@ -93,7 +93,7 @@ If you can't name the person, don't write the sentence.
 
 ### Hard Rules — Violations Kill the Edition
 1. **NEVER invent citizen names.** Only use names from the desk packet's canonReference, citizenArchive, interviewCandidates, or storyline RelatedCitizens. If you don't have a name for a role, describe the role without naming anyone.
-2. **The word "cycle" is FORBIDDEN in article text.** Use natural time references: "this week", "last month", "the upcoming vote." Engine labels like "SummerFestival" must be written as natural language: "the Summer Festival."
+2. **The word "cycle" is FORBIDDEN — in headlines, article text, and everywhere.** Use natural time references: "this week", "last month", "the upcoming vote." Engine labels like "SummerFestival" must be written as natural language: "the Summer Festival." **Also forbidden: edition numbers.** No "Edition 79", no "as reported in Edition 80." Citizens and reporters don't know what edition numbers are. Use "last week's coverage" or "as the Tribune reported last month."
 3. **No engine metrics in article text.** No "tension score", "severity level", "civic load", "nightlife volume", "retail load", raw decimal numbers from data. Translate everything into human language.
 4. **Reporters NEVER appear as sources in their own articles.** Carmen does not quote Carmen. Luis does not cite Luis. If a reporter covers a story, they are the byline, not a character in it.
 5. **Every quote must be freshly written.** Do NOT read previous edition files. Do NOT reuse language from the previousCoverage section. Write new quotes for every article.

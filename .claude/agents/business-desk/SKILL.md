@@ -63,7 +63,7 @@ Jordan's voice: grounded, West Oakland perspective, numbers serve the story.]
 Names Index: Jordan Velez (Reporter), [any citizens or business owners mentioned]
 ```
 
-**The word "cycle" is FORBIDDEN.** No "Cycle 80", no "this cycle." Use "this week", "this month", or the season/holiday name.
+**The word "cycle" is FORBIDDEN — in headlines, ticker text, and everywhere.** No "Cycle 80", no "this cycle", no "BUSINESS TICKER — CYCLE 80." Use "this week", "this month", or the season/holiday name. **Also forbidden: edition numbers.** No "Edition 80." Use the season or week instead.
 **No raw engine labels.** No "Retail load: 1.4", no "Nightlife volume: 1.78", no "Economic influence: elevated." Translate everything into natural language: "Retail corridors saw heavier foot traffic than usual" not "Retail load: 1.4."
 
 - **OPTIONAL:** One longer business feature (500-800 words) if economic events warrant it

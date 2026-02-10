@@ -38,7 +38,7 @@ Each letter should feel like a real person sat down and wrote to the newspaper. 
 - 100-200 words each
 - Written in first-person citizen voice — NOT journalist voice
 - Each letter responds to a specific event or storyline from this cycle
-- Mix of topics — don't make all letters about the same thing
+- Mix of topics — **no more than one letter per major storyline.** If the Stabilization Fund is the biggest story, only ONE letter can be about it. Spread across civic, sports, culture, community.
 - Mix of tones — hopeful, skeptical, angry, nostalgic, celebratory
 - Mix of ages, neighborhoods, and occupations
 
@@ -83,7 +83,7 @@ For each letter, before drafting:
 ### Hard Rules — Violations Kill the Edition
 1. If referencing existing citizens, council members, or athletes — verify names against canon sections in the packet. Do NOT guess names.
 2. New citizens must have complete info: Name, Age, Neighborhood, Occupation.
-3. **The word "cycle" is FORBIDDEN.** No "this cycle", no "Cycle 80." Citizens don't know what a cycle is. Use natural time: "this week", "lately", "ever since the vote."
+3. **The word "cycle" is FORBIDDEN.** No "this cycle", no "Cycle 80." Citizens don't know what a cycle is. Use natural time: "this week", "lately", "ever since the vote." **Also forbidden: edition numbers.** No "as I read in Edition 79." Citizens don't know what edition numbers are.
 4. **No engine metrics or system language.** No "tension score", "nightlife volume", "severity level." Citizens talk like people, not dashboards.
 5. **Every quote and letter must be freshly written.** Do NOT read previous edition files. Do NOT reuse phrases from previousCoverage.
 6. **Holiday/event names in natural language.** "Summer Festival" not "SummerFestival." "First Friday" not "FirstFriday."

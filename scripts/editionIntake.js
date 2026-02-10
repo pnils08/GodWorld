@@ -137,9 +137,9 @@ function parseStorylines(section) {
     if (/^NEW THREAD/i.test(trimmed) || /^NEW THIS CYCLE/i.test(trimmed) || /^NEW:/i.test(trimmed)) { currentCategory = 'new'; continue; }
     if (/^QUESTIONS/i.test(trimmed)) { currentCategory = 'question'; continue; }
 
-    // Parse entries (— or - prefix)
-    if (/^[—\-]\s+/.test(trimmed)) {
-      const content = trimmed.replace(/^[—\-]\s+/, '').trim();
+    // Parse entries (— or - or -- prefix)
+    if (/^(?:--|[—\-])\s+/.test(trimmed)) {
+      const content = trimmed.replace(/^(?:--|[—\-])\s+/, '').trim();
 
       // Pipe-separated format: type | description | neighborhood | citizens | priority
       if (content.includes('|')) {
@@ -206,8 +206,8 @@ function parseCitizenUsage(section) {
     // Parse entries FIRST (— or - prefix) before checking headers,
     // because entry content can contain header trigger words
     // (e.g., "civic engagement" in context, "Owner" in name)
-    if (/^[—\-]\s+/.test(trimmed)) {
-      const content = trimmed.replace(/^[—\-]\s+/, '').trim();
+    if (/^(?:--|[—\-])\s+/.test(trimmed)) {
+      const content = trimmed.replace(/^(?:--|[—\-])\s+/, '').trim();
 
       let name = content;
       let context = '';

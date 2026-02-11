@@ -6,6 +6,31 @@
 
 ---
 
+## Citizen Ledger Architecture
+
+GodWorld uses **4 citizen ledgers** with different purposes:
+
+| Ledger | Purpose | Current Columns | Citizens |
+|--------|---------|-----------------|----------|
+| **Simulation_Ledger** | Oakland named citizens (Tier 1-3) | 20 | ~500 |
+| **Generic_Citizens** | Oakland Tier 4 generic pool | 10 | ~300 |
+| **Cultural_Ledger** | Cultural figures, celebrities | 20 | ~50 |
+| **Chicago_Citizens** | Chicago satellite citizens | 10 | ~100 |
+
+**Key Differences:**
+- **Simulation_Ledger:** Has POPID, TraitProfile, UsageCount, LifeHistory
+- **Generic_Citizens:** Name-only, no POPID until promoted
+- **Cultural_Ledger:** **Already has FameScore, MediaCount, TrendTrajectory!**
+- **Chicago_Citizens:** Has CitizenId, simpler structure
+
+**Promotion Flow:**
+```
+Generic_Citizens (famous) → Simulation_Ledger (named)
+```
+When a Generic citizen gains fame/story importance, they get promoted to Simulation_Ledger with a POPID.
+
+---
+
 ## Current State Analysis
 
 ### ✅ What Already Works Well
@@ -113,12 +138,32 @@
 
 ### Week 1: Citizen Fame & Media Exposure 🌟
 
-**New Columns (Simulation_Ledger):**
+**New Columns (Simulation_Ledger) — Oakland Named Citizens:**
 - FameScore (0-100) - Overall fame/recognition
 - Notoriety (0-100) - Known for negative reasons
 - MediaMentions (count) - Total article features
 - LastMentionedCycle (number) - Most recent coverage
 - FameTrend (enum: rising/stable/fading)
+- ActiveStorylines (JSON array) - Storylines this citizen is in
+- StorylineRole (text) - Most prominent current role
+
+**New Columns (Generic_Citizens) — Tier 4 Generic Pool:**
+- PromotionCandidate (bool) - Flag for promotion to Simulation_Ledger
+- PromotionScore (0-100) - Emergence frequency + media potential
+- PromotionReason (text) - Why this citizen deserves promotion
+
+**Cultural_Ledger Updates — Already Has FameScore!**
+- No new columns needed (already has FameScore, MediaCount, TrendTrajectory)
+- Sync existing columns with new mediaFeedbackEngine logic
+- Ensure Cultural_Ledger citizens appear in "Trending Citizens" section
+
+**New Columns (Chicago_Citizens) — Chicago Satellite:**
+- FameScore (0-100) - Chicago media fame
+- MediaMentions (count) - Chicago article features
+- LastMentionedCycle (number) - Most recent Chicago coverage
+- FameTrend (enum: rising/stable/fading)
+
+**Note:** Cultural_Ledger already tracks fame (FameScore, MediaCount, TrendTrajectory). Week 1 syncs all ledgers to unified fame system.
 
 **New Columns (Storyline_Tracker):**
 - LastCoverageycle - When storyline last appeared in edition
@@ -127,19 +172,35 @@
 
 **Engine Updates:**
 - mediaFeedbackEngine.js v2.2 → v2.3
-  - applyMediaFameImpact_() - Articles update citizen FameScore
-  - detectTrendingCitizens_() - Rising fame in last 5 cycles
-  - flagMediaSaturation_() - Overused citizens
+  - applyMediaFameImpact_() - Articles update citizen FameScore **across all ledgers**
+  - detectTrendingCitizens_() - Rising fame in last 5 cycles **across all ledgers**
+  - flagMediaSaturation_() - Overused citizens **across all ledgers**
+  - syncCulturalLedgerFame_() - Align Cultural_Ledger with unified fame system
+  - checkGenericPromotions_() - Flag Generic_Citizens ready for named promotion
 - mediaRoomBriefingGenerator.js v2.7 → v2.8
-  - Add "Trending Citizens" section to briefing
-  - Fresh face recommendations (low MediaMentions, relevant to hooks)
+  - Add "Trending Citizens" section to briefing (**includes all ledgers**)
+  - Fresh face recommendations (low MediaMentions, relevant to hooks, **any ledger**)
+  - Promotion candidates (Generic → Simulation_Ledger when fame threshold met)
+
+**Citizen Ledger Processing Order:**
+1. Simulation_Ledger (Oakland named citizens)
+2. Cultural_Ledger (sync existing FameScore with articles)
+3. Chicago_Citizens (Chicago satellite coverage)
+4. Generic_Citizens (check for promotion candidates)
 
 **Story Hooks Generated:**
-- TRENDING_CITIZEN (severity 5-7): Fame spike detected
-- OVEREXPOSED (severity 3): Media saturation warning
-- FRESH_FACE (severity 4): Underused citizen with story potential
+- TRENDING_CITIZEN (severity 5-7): Fame spike detected (any ledger)
+- OVEREXPOSED (severity 3): Media saturation warning (any ledger)
+- FRESH_FACE (severity 4): Underused citizen with story potential (any ledger)
+- PROMOTION_CANDIDATE (severity 4): Generic citizen ready for named promotion
 
-**Total:** 8 new columns, 2 engine updates, 3 hook types
+**Fame System Unified Across All Ledgers:**
+- Simulation_Ledger: Oakland named citizens (Tier 1-3)
+- Generic_Citizens: Oakland generic pool (Tier 4) — promotion tracking
+- Cultural_Ledger: Cultural figures (sync with existing FameScore)
+- Chicago_Citizens: Chicago satellite citizens
+
+**Total:** 18 new columns (7 Simulation, 3 Generic, 0 Cultural, 4 Chicago, 4 Storyline), 2 engine updates, 4 hook types
 
 ---
 
@@ -191,14 +252,15 @@ closed
 ### Week 3: Multi-Citizen Storyline Weaving 🕸️
 
 **New Columns (Storyline_Tracker):**
-- CitizenRoles (JSON) - `{"POP-123": "protagonist", "POP-456": "antagonist"}`
+- CitizenRoles (JSON) - `{"POP-123": "protagonist", "POP-456": "antagonist", "CUL-045": "witness"}`
 - ConflictType (enum: personal/political/economic/romantic/ideological)
 - RelationshipImpact (JSON) - Predicted relationship changes
 - CrossStorylineLinks (JSON) - Other storylines with shared citizens
 
-**New Columns (Simulation_Ledger):**
-- ActiveStorylines (JSON array) - Storylines this citizen is in
-- StorylineRole (text) - Most prominent current role
+**Citizen Ledger Integration:**
+- Uses ActiveStorylines + StorylineRole columns added in Week 1 (Simulation_Ledger, Cultural_Ledger, Chicago_Citizens)
+- Generic_Citizens can appear in CitizenRoles by name (triggers promotion if role is protagonist/antagonist)
+- Cross-ledger storyline support (e.g., Cultural_Ledger celebrity + Simulation_Ledger citizen in same storyline)
 
 **Engine Updates:**
 - New file: phase07-evening-media/storylineWeavingEngine.js v1.0
@@ -220,7 +282,9 @@ THEN generate CROSS_STORYLINE hook (severity 7)
 - RELATIONSHIP_CLASH (severity 6): Rivals both in news this cycle
 - ALLIANCE_OPPORTUNITY (severity 5): Allies can team up across storylines
 
-**Total:** 7 new columns, 1 new engine file, 3 hook types
+**Note:** Week 3 weaving works across ALL citizen ledgers (Simulation, Cultural, Chicago, Generic). CitizenRoles JSON uses appropriate ID format (POPID, CUL-ID, CitizenId, or name string).
+
+**Total:** 4 new columns (Storyline_Tracker only, citizen columns added in Week 1), 1 new engine file, 3 hook types
 
 ---
 
@@ -270,13 +334,17 @@ THEN generate CROSS_STORYLINE hook (severity 7)
 
 | Sheet | New Columns | Existing | New Total |
 |-------|-------------|----------|-----------|
-| Simulation_Ledger | 7 | ~50 | ~57 |
+| Simulation_Ledger | 7 | 20 | 27 |
+| Generic_Citizens | 3 | 10 | 13 |
+| Cultural_Ledger | 0 | 20 | 20 (sync existing) |
+| Chicago_Citizens | 4 | 10 | 14 |
 | Storyline_Tracker | 11 | 14 | 25 |
 | Arc_Ledger | 5 | 16 | 21 |
 | Event_Arc_Ledger | 3 | 26 | 29 |
 | Story_Hook_Deck | 4 | 22 | 26 |
 
-**Total: 30 new columns across 5 sheets, 0 new sheets**
+**Total: 37 new columns across 8 sheets, 0 new sheets**
+**Note:** Cultural_Ledger already has FameScore/MediaCount/TrendTrajectory — sync with new system, no new columns needed
 
 ### New Engine Files
 

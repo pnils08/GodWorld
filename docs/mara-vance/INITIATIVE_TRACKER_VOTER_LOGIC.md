@@ -1,13 +1,22 @@
 # Initiative Tracker Voter Logic Reference
 
-**Source:** `phase05-citizens/civicInitiativeEngine.js` v1.3
-**Last Updated:** Cycle 75
+**Source:** `phase05-citizens/civicInitiativeEngine.js` v1.7
+**Last Updated:** 2026-02-11 (Cycle 80+)
+
+**NEW in v1.7:** Mayoral veto, override votes, approval ratings
+**See also:** docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md (comprehensive guide)
 
 ---
 
 ## Overview
 
 The Initiative Tracker implements a 9-seat city council voting system where the **mayor has veto power but does NOT vote** on council matters. Votes are resolved using faction math combined with probabilistic swing voter calculations.
+
+**v1.7 Enhancements:**
+- Mayoral veto implemented (probability-based, triggered after passed votes)
+- Council override votes (6+ supermajority required, scheduled 2 cycles after veto)
+- Approval ratings tracked for mayor and council members
+- Story hooks: MAYORAL_VETO, VETO_OVERRIDE, VETO_UPHELD
 
 ---
 

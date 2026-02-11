@@ -1,8 +1,17 @@
-# Civic Initiative Engine v1.5/v1.6 Upgrade Tracker
+# Civic Initiative Engine Upgrade Tracker
 
-**Current Version:** v1.6
+**Current Version:** v1.7 (2026-02-11)
 **Created:** 2026-02-02
-**Status:** Complete — all must-fix items resolved
+**Status:** Complete — all v1.5/v1.6 items resolved, v1.7 mayoral veto implemented
+
+**NEW in v1.7:**
+- Mayoral veto power (probability-based)
+- Council override votes (6+ supermajority)
+- Approval ratings for mayor and council
+- 7 new columns added (5 to Initiative_Tracker, 2 to Civic_Office_Ledger)
+- Story hooks: MAYORAL_VETO, VETO_OVERRIDE, VETO_UPHELD
+
+**For Mara Vance:** See docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md for complete civic governance guide
 
 ---
 

@@ -1,19 +1,23 @@
 /**
  * ============================================================================
- * ROLLBACK: EDUCATION PIPELINE & CAREER PATHWAYS (Week 3)
+ * ROLLBACK: EDUCATION PIPELINE & CAREER PATHWAYS (Week 3 - Consolidated)
  * ============================================================================
  *
- * Removes columns and sheets added by addEducationCareerColumns.js migration.
+ * Removes columns added by addEducationCareerColumns.js migration.
  *
  * WARNING: This will delete all education and career progression data.
  * Use only if you need to completely roll back the Week 3 enhancement.
  *
  * Columns removed:
+ * - Neighborhood_Demographics: SchoolQualityIndex, GraduationRate,
+ *   CollegeReadinessRate, TeacherQuality, Funding (5 columns)
  * - Simulation_Ledger: EducationLevel, SchoolQuality, CareerStage,
  *   YearsInCareer, CareerMobility, LastPromotionCycle (6 columns)
  *
- * Sheets deleted:
- * - School_Quality
+ * Total: 11 columns removed
+ *
+ * Note: Week 3 consolidated version does NOT create a separate School_Quality
+ * sheet, so no sheet deletion is needed.
  *
  * Usage:
  *   node scripts/rollbackEducationCareerColumns.js
@@ -29,6 +33,13 @@ const sheets = require('../lib/sheets');
 // ════════════════════════════════════════════════════════════════════════════
 
 const ROLLBACK_DEFINITIONS = {
+  'Neighborhood_Demographics': [
+    'SchoolQualityIndex',
+    'GraduationRate',
+    'CollegeReadinessRate',
+    'TeacherQuality',
+    'Funding'
+  ],
   'Simulation_Ledger': [
     'EducationLevel',
     'SchoolQuality',
@@ -38,10 +49,6 @@ const ROLLBACK_DEFINITIONS = {
     'LastPromotionCycle'
   ]
 };
-
-const SHEETS_TO_DELETE = [
-  'School_Quality'
-];
 
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -77,7 +84,7 @@ async function removeColumnsFromSheet(sheetName, columnsToRemove, dryRun = false
   console.log(`Not found: ${columnsNotFound.length}`);
 
   if (columnsNotFound.length > 0) {
-    console.log(`\n⏭️  Columns not found (already removed?):`);
+    console.log(`\n⏭️  Columns not found (already removed?):`)
     columnsNotFound.forEach(name => console.log(`   - ${name}`));
   }
 
@@ -117,34 +124,6 @@ async function removeColumnsFromSheet(sheetName, columnsToRemove, dryRun = false
   return { removed: columnsFound.length, notFound: columnsNotFound.length };
 }
 
-async function deleteSheet(sheetName, dryRun = false) {
-  console.log(`\n${'='.repeat(70)}`);
-  console.log(`Sheet to delete: ${sheetName}`);
-  console.log('='.repeat(70));
-
-  try {
-    const data = await sheets.getSheetAsObjects(sheetName);
-    console.log(`Sheet exists with ${data.length} rows`);
-
-    if (dryRun) {
-      console.log(`\n🔍 DRY RUN: Would delete sheet "${sheetName}"`);
-      return { deleted: false, wouldDelete: true };
-    }
-
-    console.log(`\n⚠️  WARNING: This will permanently delete sheet "${sheetName}"!`);
-    console.log(`   Waiting 3 seconds...`);
-    await new Promise(resolve => setTimeout(resolve, 3000));
-
-    await sheets.deleteSheet(sheetName);
-    console.log(`\n✅ Successfully deleted sheet "${sheetName}"`);
-    return { deleted: true };
-
-  } catch (err) {
-    console.log(`\n⏭️  Sheet "${sheetName}" does not exist`);
-    return { deleted: false, notFound: true };
-  }
-}
-
 
 // ════════════════════════════════════════════════════════════════════════════
 // MAIN
@@ -157,6 +136,7 @@ async function main() {
   console.log('');
   console.log('╔════════════════════════════════════════════════════════════════════╗');
   console.log('║   ROLLBACK: EDUCATION PIPELINE & CAREER PATHWAYS (Week 3)         ║');
+  console.log('║   Consolidated Architecture Version                               ║');
   console.log('╚════════════════════════════════════════════════════════════════════╝');
   console.log('');
 
@@ -173,19 +153,13 @@ async function main() {
   console.log(`✅ Connected: ${conn.title}`);
 
   const results = {
-    columns: {},
-    sheets: {}
+    columns: {}
   };
 
   // Remove columns
   for (const sheetName of Object.keys(ROLLBACK_DEFINITIONS)) {
     const columnsToRemove = ROLLBACK_DEFINITIONS[sheetName];
     results.columns[sheetName] = await removeColumnsFromSheet(sheetName, columnsToRemove, dryRun);
-  }
-
-  // Delete sheets
-  for (const sheetName of SHEETS_TO_DELETE) {
-    results.sheets[sheetName] = await deleteSheet(sheetName, dryRun);
   }
 
   // Summary
@@ -196,14 +170,12 @@ async function main() {
   const totalRemoved = Object.values(results.columns)
     .reduce((sum, r) => sum + r.removed, 0);
 
-  const sheetsDeleted = Object.values(results.sheets)
-    .filter(r => r.deleted).length;
-
-  console.log(`\nColumns removed: ${totalRemoved}`);
-  console.log(`Sheets deleted: ${sheetsDeleted}`);
+  console.log(`\nColumns removed from Neighborhood_Demographics: ${results.columns['Neighborhood_Demographics'].removed}`);
+  console.log(`Columns removed from Simulation_Ledger: ${results.columns['Simulation_Ledger'].removed}`);
+  console.log(`Total columns removed: ${totalRemoved}`);
 
   if (dryRun) {
-    console.log(`\n🔍 DRY RUN: Would remove ${totalRemoved} columns and delete ${sheetsDeleted} sheets`);
+    console.log(`\n🔍 DRY RUN: Would remove ${totalRemoved} columns total`);
     console.log('\nRun without --dry-run to apply rollback');
   } else {
     console.log(`\n✅ Rollback complete!`);
@@ -211,6 +183,7 @@ async function main() {
     console.log('1. Remove educationCareerEngine.js from Apps Script');
     console.log('2. Remove processEducationCareer_() call from Phase 05');
     console.log('3. Verify simulation runs without errors');
+    console.log('\nNote: No sheets deleted (consolidated architecture)');
   }
 
   console.log('');

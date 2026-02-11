@@ -1,8 +1,9 @@
-# Population Week 3: Education Pipeline & Career Pathways - Deploy Guide
+# Population Week 3: Education Pipeline & Career Pathways - Deploy Guide (Consolidated)
 
 **Status:** Ready to deploy
 **Time to deploy:** ~5 minutes
 **Difficulty:** Easy
+**Architecture:** Consolidated (no separate School_Quality sheet)
 
 ---
 
@@ -11,13 +12,19 @@
 Adds education tracking, school quality metrics, and career progression mechanics to GodWorld.
 
 **Impact:**
-- 1 new sheet created (School_Quality with 15 neighborhoods)
-- 6 new columns added to Simulation_Ledger
+- 0 new sheets created (consolidated into Neighborhood_Demographics)
+- 11 new columns added total:
+  - 5 columns to Neighborhood_Demographics (school metrics)
+  - 6 columns to Simulation_Ledger (citizen education/career)
 - Education levels derived from UNI/MED/CIV flags
 - Career progression tracking (student → entry → mid → senior → retired)
 - Education → income correlation
 - School quality affects career outcomes
 - Zero breaking changes (backwards compatible)
+
+**Note:** This is the consolidated version - school quality data is added to
+Neighborhood_Demographics instead of creating a separate School_Quality sheet.
+Cleaner architecture for media handoff.
 
 ---
 
@@ -37,8 +44,10 @@ node scripts/addEducationCareerColumns.js
 
 **Expected output:**
 ```
-Sheets created: 1 (School_Quality with 15 neighborhoods)
-Columns added: 6 (to Simulation_Ledger)
+Columns added to Neighborhood_Demographics: 5
+Columns added to Simulation_Ledger: 6
+Total columns added: 11
+Neighborhoods with school data: 15
 
 ✅ Migration complete!
 ```
@@ -99,12 +108,12 @@ After next cycle runs, check Simulation_Ledger for:
 - **CareerMobility** showing advancing/stagnant/declining
 - **LastPromotionCycle** updated on promotions
 
-Check School_Quality sheet for:
-- 15 neighborhoods with quality ratings
-- Rockridge (9/10), Piedmont Ave (8/10) → best schools
-- West Oakland (3/10), Fruitvale (3/10) → crisis level
-- Graduation rates by neighborhood
-- College readiness rates
+Check Neighborhood_Demographics for:
+- **SchoolQualityIndex** (0-10): Rockridge 9/10, West Oakland 3/10 CRISIS
+- **GraduationRate** (%): Rockridge 95%, West Oakland 62%
+- **CollegeReadinessRate** (%): Rockridge 78%, West Oakland 22%
+- **TeacherQuality** (0-10): Quality of teachers
+- **Funding** ($ per student): Rockridge $15k, West Oakland $6.5k
 
 Check logs for:
 ```
@@ -132,7 +141,7 @@ Then remove from Apps Script:
 ## Files Added/Modified
 
 **Created:**
-1. `scripts/addEducationCareerColumns.js` - Migration (includes school quality data)
+1. `scripts/addEducationCareerColumns.js` - Migration (consolidated architecture)
 2. `phase05-citizens/educationCareerEngine.js` - Education/career engine
 3. `scripts/rollbackEducationCareerColumns.js` - Rollback
 
@@ -180,14 +189,14 @@ Mid-career → Senior:  20 cycles (~1 year) + education-dependent:
 Stagnation threshold: 40 cycles (~2 years) without advancement
 ```
 
-### School Quality by Neighborhood
+### School Quality by Neighborhood (Consolidated in Neighborhood_Demographics)
 ```
 EXCELLENT (9-10):
-  - Rockridge (9): 95% grad rate, 78% college-ready
-  - Piedmont Ave (8): 93% grad rate, 72% college-ready
+  - Rockridge (9): 95% grad rate, 78% college-ready, $15k funding
+  - Piedmont Ave (8): 93% grad rate, 72% college-ready, $14k funding
 
 GOOD (6-8):
-  - Grand Lake, Temescal, Lake Merritt, Adams Point
+  - Grand Lake (7), Temescal (7), Lake Merritt (6), Adams Point (6)
 
 ADEQUATE (5):
   - Downtown, Uptown, Laurel
@@ -196,8 +205,8 @@ STRUGGLING (4):
   - Jack London, Chinatown, Brooklyn, Eastlake
 
 CRISIS (3):
-  - Fruitvale: 65% grad rate, 25% college-ready
-  - West Oakland: 62% grad rate, 22% college-ready
+  - Fruitvale: 65% grad rate, 25% college-ready, $7k funding
+  - West Oakland: 62% grad rate, 22% college-ready, $6.5k funding
 ```
 
 ---
@@ -244,6 +253,22 @@ When promoted 2+ levels:
 
 ---
 
+## Architectural Improvements
+
+**Consolidated Design:**
+- School quality data lives in Neighborhood_Demographics
+- All neighborhood metrics in one place (demographics, crime, schools)
+- Fewer sheets = cleaner architecture for media handoff
+- Easier to analyze neighborhoods holistically
+
+**Why consolidated?**
+- Neighborhood_Demographics went from 7 → 12 columns (still manageable)
+- Only 15-17 rows (neighborhoods, not citizens)
+- Avoids sheet proliferation
+- Simpler for external analysis and storytelling
+
+---
+
 ## Next: Week 4
 
 **Gentrification Mechanics & Migration Reasons** 🏘️
@@ -252,6 +277,9 @@ When promoted 2+ levels:
 - Migration reasons (job, family, cost, crime, displaced)
 - Migration events tracking
 - Neighborhood wealth change
+
+**Note:** Week 4 will extend existing Neighborhood_Map and
+Neighborhood_Demographics rather than creating new ledgers.
 
 ---
 

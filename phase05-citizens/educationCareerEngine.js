@@ -19,7 +19,7 @@
  * - Reads UNI/MED/CIV flags from Simulation_Ledger
  * - Updates Income based on education level
  * - Hooks into career engine for promotions
- * - Uses school quality from School_Quality sheet
+ * - Uses school quality from Neighborhood_Demographics (consolidated)
  *
  * Story Hooks:
  * - SCHOOL_QUALITY_CRISIS (severity 8): School quality <3
@@ -432,7 +432,7 @@ function detectCareerMobility_(ss, ctx, cycle) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function checkSchoolQuality_(ss, ctx, cycle) {
-  var sheet = ss.getSheetByName('School_Quality');
+  var sheet = ss.getSheetByName('Neighborhood_Demographics');
   if (!sheet) return { alerts: 0 };
 
   var values = sheet.getDataRange().getValues();

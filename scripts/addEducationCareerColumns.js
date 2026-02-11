@@ -1,15 +1,18 @@
 /**
  * ============================================================================
- * EDUCATION PIPELINE & CAREER PATHWAYS MIGRATION (Week 3)
+ * EDUCATION PIPELINE & CAREER PATHWAYS MIGRATION (Week 3 - Consolidated)
  * ============================================================================
  *
  * Adds education tracking, school quality, and career progression mechanics.
  *
  * SCHEMA CHANGES:
  *
- * NEW SHEET: School_Quality (7 columns)
- *   - Neighborhood, SchoolQualityIndex, GraduationRate, CollegeReadinessRate,
- *     TeacherQuality, Funding, LastUpdatedCycle
+ * Neighborhood_Demographics (+5):
+ *   - SchoolQualityIndex (0-10 rating)
+ *   - GraduationRate (% graduating HS)
+ *   - CollegeReadinessRate (% college-ready)
+ *   - TeacherQuality (0-10 rating)
+ *   - Funding ($ per student)
  *
  * Simulation_Ledger (+6):
  *   - EducationLevel (none, hs-dropout, hs-diploma, some-college, bachelor, graduate)
@@ -19,7 +22,10 @@
  *   - CareerMobility (stagnant, advancing, declining)
  *   - LastPromotionCycle (cycle of last promotion)
  *
- * Total: 1 new sheet, 6 new columns
+ * Total: 11 new columns (5 neighborhood, 6 citizen)
+ *
+ * ARCHITECTURE: Consolidates school metrics into Neighborhood_Demographics
+ * instead of creating separate School_Quality sheet. Cleaner for media handoff.
  *
  * Usage:
  *   node scripts/addEducationCareerColumns.js
@@ -43,35 +49,32 @@ const SIMULATION_LEDGER_ADDITIONS = [
   { name: 'LastPromotionCycle', defaultValue: 0 }            // No recent promotion
 ];
 
-// School_Quality sheet headers
-const SCHOOL_QUALITY_HEADERS = [
-  'Neighborhood',
-  'SchoolQualityIndex',
-  'GraduationRate',
-  'CollegeReadinessRate',
-  'TeacherQuality',
-  'Funding',
-  'LastUpdatedCycle'
+const NEIGHBORHOOD_DEMOGRAPHICS_ADDITIONS = [
+  { name: 'SchoolQualityIndex', defaultValue: 5 },       // Adequate default
+  { name: 'GraduationRate', defaultValue: 75 },          // 75% grad rate
+  { name: 'CollegeReadinessRate', defaultValue: 40 },    // 40% college-ready
+  { name: 'TeacherQuality', defaultValue: 5 },           // Adequate teachers
+  { name: 'Funding', defaultValue: 9000 }                // $9k per student
 ];
 
-// Initial school quality data by neighborhood (based on Oakland reality)
-const INITIAL_SCHOOL_QUALITY = [
-  { Neighborhood: 'Rockridge', SchoolQualityIndex: 9, GraduationRate: 95, CollegeReadinessRate: 78, TeacherQuality: 9, Funding: 15000, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Piedmont Ave', SchoolQualityIndex: 8, GraduationRate: 93, CollegeReadinessRate: 72, TeacherQuality: 8, Funding: 14000, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Grand Lake', SchoolQualityIndex: 7, GraduationRate: 88, CollegeReadinessRate: 60, TeacherQuality: 7, Funding: 12000, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Temescal', SchoolQualityIndex: 7, GraduationRate: 86, CollegeReadinessRate: 58, TeacherQuality: 7, Funding: 11500, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Lake Merritt', SchoolQualityIndex: 6, GraduationRate: 82, CollegeReadinessRate: 50, TeacherQuality: 6, Funding: 10500, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Adams Point', SchoolQualityIndex: 6, GraduationRate: 80, CollegeReadinessRate: 48, TeacherQuality: 6, Funding: 10000, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Downtown', SchoolQualityIndex: 5, GraduationRate: 75, CollegeReadinessRate: 40, TeacherQuality: 5, Funding: 9000, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Uptown', SchoolQualityIndex: 5, GraduationRate: 73, CollegeReadinessRate: 38, TeacherQuality: 5, Funding: 8500, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Jack London', SchoolQualityIndex: 4, GraduationRate: 70, CollegeReadinessRate: 32, TeacherQuality: 4, Funding: 8000, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Laurel', SchoolQualityIndex: 5, GraduationRate: 76, CollegeReadinessRate: 42, TeacherQuality: 5, Funding: 9200, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Chinatown', SchoolQualityIndex: 4, GraduationRate: 68, CollegeReadinessRate: 30, TeacherQuality: 4, Funding: 7500, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Fruitvale', SchoolQualityIndex: 3, GraduationRate: 65, CollegeReadinessRate: 25, TeacherQuality: 3, Funding: 7000, LastUpdatedCycle: 0 },
-  { Neighborhood: 'West Oakland', SchoolQualityIndex: 3, GraduationRate: 62, CollegeReadinessRate: 22, TeacherQuality: 3, Funding: 6500, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Brooklyn', SchoolQualityIndex: 4, GraduationRate: 69, CollegeReadinessRate: 28, TeacherQuality: 4, Funding: 7200, LastUpdatedCycle: 0 },
-  { Neighborhood: 'Eastlake', SchoolQualityIndex: 4, GraduationRate: 71, CollegeReadinessRate: 33, TeacherQuality: 4, Funding: 7800, LastUpdatedCycle: 0 }
-];
+// Initial school quality data by neighborhood (Oakland-based reality)
+const NEIGHBORHOOD_SCHOOL_DATA = {
+  'Rockridge': { SchoolQualityIndex: 9, GraduationRate: 95, CollegeReadinessRate: 78, TeacherQuality: 9, Funding: 15000 },
+  'Piedmont Ave': { SchoolQualityIndex: 8, GraduationRate: 93, CollegeReadinessRate: 72, TeacherQuality: 8, Funding: 14000 },
+  'Grand Lake': { SchoolQualityIndex: 7, GraduationRate: 88, CollegeReadinessRate: 60, TeacherQuality: 7, Funding: 12000 },
+  'Temescal': { SchoolQualityIndex: 7, GraduationRate: 86, CollegeReadinessRate: 58, TeacherQuality: 7, Funding: 11500 },
+  'Lake Merritt': { SchoolQualityIndex: 6, GraduationRate: 82, CollegeReadinessRate: 50, TeacherQuality: 6, Funding: 10500 },
+  'Adams Point': { SchoolQualityIndex: 6, GraduationRate: 80, CollegeReadinessRate: 48, TeacherQuality: 6, Funding: 10000 },
+  'Downtown': { SchoolQualityIndex: 5, GraduationRate: 75, CollegeReadinessRate: 40, TeacherQuality: 5, Funding: 9000 },
+  'Uptown': { SchoolQualityIndex: 5, GraduationRate: 73, CollegeReadinessRate: 38, TeacherQuality: 5, Funding: 8500 },
+  'Jack London': { SchoolQualityIndex: 4, GraduationRate: 70, CollegeReadinessRate: 32, TeacherQuality: 4, Funding: 8000 },
+  'Laurel': { SchoolQualityIndex: 5, GraduationRate: 76, CollegeReadinessRate: 42, TeacherQuality: 5, Funding: 9200 },
+  'Chinatown': { SchoolQualityIndex: 4, GraduationRate: 68, CollegeReadinessRate: 30, TeacherQuality: 4, Funding: 7500 },
+  'Fruitvale': { SchoolQualityIndex: 3, GraduationRate: 65, CollegeReadinessRate: 25, TeacherQuality: 3, Funding: 7000 },
+  'West Oakland': { SchoolQualityIndex: 3, GraduationRate: 62, CollegeReadinessRate: 22, TeacherQuality: 3, Funding: 6500 },
+  'Brooklyn': { SchoolQualityIndex: 4, GraduationRate: 69, CollegeReadinessRate: 28, TeacherQuality: 4, Funding: 7200 },
+  'Eastlake': { SchoolQualityIndex: 4, GraduationRate: 71, CollegeReadinessRate: 33, TeacherQuality: 4, Funding: 7800 }
+};
 
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -154,47 +157,70 @@ async function addColumnsToSheet(sheetName, additions, dryRun = false) {
   return { added: columnsToAdd.length, skipped: columnsSkipped.length };
 }
 
-async function createSchoolQualitySheet(dryRun = false) {
+async function populateNeighborhoodSchoolData(dryRun = false) {
   console.log(`\n${'='.repeat(70)}`);
-  console.log(`New Sheet: School_Quality`);
+  console.log(`Populating School Quality Data for Neighborhoods`);
   console.log('='.repeat(70));
 
-  console.log(`Columns to create: ${SCHOOL_QUALITY_HEADERS.length}`);
-  console.log(`Headers: ${SCHOOL_QUALITY_HEADERS.join(', ')}`);
-  console.log(`\nInitial data rows: ${INITIAL_SCHOOL_QUALITY.length} neighborhoods`);
+  const data = await sheets.getSheetAsObjects('Neighborhood_Demographics');
+  const neighborhoods = data.map(row => row.Neighborhood);
+
+  console.log(`\nFound ${neighborhoods.length} neighborhoods to update`);
+  console.log(`School data defined for ${Object.keys(NEIGHBORHOOD_SCHOOL_DATA).length} neighborhoods`);
 
   if (dryRun) {
-    console.log(`\n🔍 DRY RUN: Would create School_Quality sheet with ${SCHOOL_QUALITY_HEADERS.length} columns and ${INITIAL_SCHOOL_QUALITY.length} rows`);
-    return { created: false, wouldCreate: true };
+    console.log(`\n🔍 DRY RUN: Would populate school quality data for matched neighborhoods`);
+    neighborhoods.forEach(name => {
+      if (NEIGHBORHOOD_SCHOOL_DATA[name]) {
+        const data = NEIGHBORHOOD_SCHOOL_DATA[name];
+        console.log(`   ${name}: Quality ${data.SchoolQualityIndex}/10, Grad ${data.GraduationRate}%, College ${data.CollegeReadinessRate}%`);
+      } else {
+        console.log(`   ${name}: (using defaults - no specific data)`);
+      }
+    });
+    return { populated: 0, wouldPopulate: neighborhoods.length };
   }
 
-  try {
-    // Check if sheet already exists
-    const data = await sheets.getSheetAsObjects('School_Quality');
-    console.log(`\n⏭️  Sheet "School_Quality" already exists with ${data.length} rows`);
-    return { created: false, existed: true };
-  } catch (err) {
-    // Sheet doesn't exist, create it
-    console.log(`\nCreating new sheet "School_Quality"...`);
-    await sheets.createSheet('School_Quality', SCHOOL_QUALITY_HEADERS);
+  // Re-fetch with new columns
+  const updatedData = await sheets.getSheetAsObjects('Neighborhood_Demographics');
+  const headers = Object.keys(updatedData[0]);
 
-    // Add initial data
-    console.log(`Populating with ${INITIAL_SCHOOL_QUALITY.length} neighborhood school quality records...`);
-    const rows = INITIAL_SCHOOL_QUALITY.map(school => [
-      school.Neighborhood,
-      school.SchoolQualityIndex,
-      school.GraduationRate,
-      school.CollegeReadinessRate,
-      school.TeacherQuality,
-      school.Funding,
-      school.LastUpdatedCycle
-    ]);
+  const schoolQualityIdx = headers.indexOf('SchoolQualityIndex');
+  const gradRateIdx = headers.indexOf('GraduationRate');
+  const collegeReadyIdx = headers.indexOf('CollegeReadinessRate');
+  const teacherQualityIdx = headers.indexOf('TeacherQuality');
+  const fundingIdx = headers.indexOf('Funding');
 
-    await sheets.appendRows('School_Quality', rows);
-
-    console.log(`\n✅ Successfully created sheet "School_Quality" with ${INITIAL_SCHOOL_QUALITY.length} schools`);
-    return { created: true };
+  if (schoolQualityIdx === -1) {
+    console.log('\n⚠️  School quality columns not found - run column addition first');
+    return { populated: 0 };
   }
+
+  console.log(`\nUpdating school quality data...`);
+
+  let populated = 0;
+  for (let i = 0; i < updatedData.length; i++) {
+    const row = updatedData[i];
+    const schoolData = NEIGHBORHOOD_SCHOOL_DATA[row.Neighborhood];
+
+    if (schoolData) {
+      // Update this row with specific data
+      const updateValues = [[
+        schoolData.SchoolQualityIndex,
+        schoolData.GraduationRate,
+        schoolData.CollegeReadinessRate,
+        schoolData.TeacherQuality,
+        schoolData.Funding
+      ]];
+
+      await sheets.updateRangeByPosition('Neighborhood_Demographics', i + 2, schoolQualityIdx, updateValues);
+      console.log(`   ✓ ${row.Neighborhood}: Quality ${schoolData.SchoolQualityIndex}/10, Grad ${schoolData.GraduationRate}%`);
+      populated++;
+    }
+  }
+
+  console.log(`\n✅ Populated school quality data for ${populated}/${updatedData.length} neighborhoods`);
+  return { populated };
 }
 
 
@@ -209,6 +235,7 @@ async function main() {
   console.log('');
   console.log('╔════════════════════════════════════════════════════════════════════╗');
   console.log('║   EDUCATION PIPELINE & CAREER PATHWAYS MIGRATION (Week 3)         ║');
+  console.log('║   Consolidated Architecture - No Separate School_Quality Sheet    ║');
   console.log('╚════════════════════════════════════════════════════════════════════╝');
   console.log('');
 
@@ -221,29 +248,47 @@ async function main() {
   console.log(`✅ Connected: ${conn.title}`);
 
   const results = {
-    School_Quality: { created: false },
-    Simulation_Ledger: { added: 0, skipped: 0 }
+    Neighborhood_Demographics: { added: 0, skipped: 0 },
+    Simulation_Ledger: { added: 0, skipped: 0 },
+    SchoolDataPopulated: { populated: 0 }
   };
 
-  // Create new sheet with initial data
-  results.School_Quality = await createSchoolQualitySheet(dryRun);
+  // Add columns to Neighborhood_Demographics
+  results.Neighborhood_Demographics = await addColumnsToSheet(
+    'Neighborhood_Demographics',
+    NEIGHBORHOOD_DEMOGRAPHICS_ADDITIONS,
+    dryRun
+  );
 
-  // Add columns to existing sheet
-  results.Simulation_Ledger = await addColumnsToSheet('Simulation_Ledger', SIMULATION_LEDGER_ADDITIONS, dryRun);
+  // Add columns to Simulation_Ledger
+  results.Simulation_Ledger = await addColumnsToSheet(
+    'Simulation_Ledger',
+    SIMULATION_LEDGER_ADDITIONS,
+    dryRun
+  );
+
+  // Populate neighborhood school quality data
+  if (!dryRun && results.Neighborhood_Demographics.added > 0) {
+    results.SchoolDataPopulated = await populateNeighborhoodSchoolData(dryRun);
+  } else if (dryRun) {
+    results.SchoolDataPopulated = await populateNeighborhoodSchoolData(dryRun);
+  }
 
   // Summary
   console.log(`\n${'='.repeat(70)}`);
   console.log('MIGRATION SUMMARY');
   console.log('='.repeat(70));
 
-  const sheetsCreated = results.School_Quality.created ? 1 : 0;
-  const columnsAdded = results.Simulation_Ledger.added;
+  const totalColumnsAdded = results.Neighborhood_Demographics.added + results.Simulation_Ledger.added;
+  const neighborhoodsPopulated = results.SchoolDataPopulated.populated || 0;
 
-  console.log(`\nSheets created: ${sheetsCreated}`);
-  console.log(`Columns added: ${columnsAdded}`);
+  console.log(`\nColumns added to Neighborhood_Demographics: ${results.Neighborhood_Demographics.added}`);
+  console.log(`Columns added to Simulation_Ledger: ${results.Simulation_Ledger.added}`);
+  console.log(`Total columns added: ${totalColumnsAdded}`);
+  console.log(`Neighborhoods with school data: ${neighborhoodsPopulated}`);
 
   if (dryRun) {
-    console.log(`\n🔍 DRY RUN: Would create ${sheetsCreated} sheet and add ${columnsAdded} columns`);
+    console.log(`\n🔍 DRY RUN: Would add ${totalColumnsAdded} columns and populate ${neighborhoodsPopulated} neighborhoods`);
     console.log('\nRun without --dry-run to apply changes');
   } else {
     console.log(`\n✅ Migration complete!`);
@@ -251,6 +296,8 @@ async function main() {
     console.log('1. Deploy educationCareerEngine.js to Apps Script');
     console.log('2. Wire into Phase 05 processing');
     console.log('3. Run a test cycle to verify education tracking');
+    console.log('\nNote: School quality data now consolidated in Neighborhood_Demographics');
+    console.log('      (cleaner architecture for media handoff)');
   }
 
   console.log('');

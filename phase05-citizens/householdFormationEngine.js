@@ -442,24 +442,68 @@ function updateHouseholdIncomes_(ss, households, citizens) {
 
   if (incomeCol === 0) return;
 
+  // Build income lookup from citizens (if Income column exists)
+  var citizenIncomes = buildCitizenIncomeLookup_(ss);
+
   for (var i = 0; i < households.length; i++) {
     var household = households[i];
     var totalIncome = 0;
 
-    // Sum income of all members (would need Income column on citizens)
-    // For now, estimate based on household type
-    if (household.householdType === HOUSEHOLD_TYPES.SINGLE) {
-      totalIncome = 50000;  // Estimate
-    } else if (household.householdType === HOUSEHOLD_TYPES.COUPLE) {
-      totalIncome = 85000;  // Estimate
-    } else if (household.householdType === HOUSEHOLD_TYPES.FAMILY) {
-      totalIncome = 95000;  // Estimate
+    // Sum income of all members from real data
+    if (citizenIncomes && household.members) {
+      try {
+        var members = JSON.parse(household.members);
+        for (var m = 0; m < members.length; m++) {
+          totalIncome += citizenIncomes[members[m]] || 0;
+        }
+      } catch (e) {
+        // If Income column doesn't exist yet, fall back to estimates
+        if (household.householdType === HOUSEHOLD_TYPES.SINGLE) {
+          totalIncome = 50000;
+        } else if (household.householdType === HOUSEHOLD_TYPES.COUPLE) {
+          totalIncome = 85000;
+        } else if (household.householdType === HOUSEHOLD_TYPES.FAMILY) {
+          totalIncome = 95000;
+        }
+      }
+    } else {
+      // Fallback estimates if no income data available
+      if (household.householdType === HOUSEHOLD_TYPES.SINGLE) {
+        totalIncome = 50000;
+      } else if (household.householdType === HOUSEHOLD_TYPES.COUPLE) {
+        totalIncome = 85000;
+      } else if (household.householdType === HOUSEHOLD_TYPES.FAMILY) {
+        totalIncome = 95000;
+      }
     }
 
     // Update sheet
     sheet.getRange(household.rowIndex, incomeCol).setValue(totalIncome);
     household.householdIncome = totalIncome;
   }
+}
+
+function buildCitizenIncomeLookup_(ss) {
+  var sheet = ss.getSheetByName('Simulation_Ledger');
+  if (!sheet) return null;
+
+  var values = sheet.getDataRange().getValues();
+  if (values.length < 2) return null;
+
+  var header = values[0];
+  var popIdCol = header.indexOf('POPID');
+  var incomeCol = header.indexOf('Income');
+
+  if (popIdCol < 0 || incomeCol < 0) return null;
+
+  var lookup = {};
+  for (var r = 1; r < values.length; r++) {
+    var popId = values[r][popIdCol];
+    var income = Number(values[r][incomeCol]) || 0;
+    lookup[popId] = income;
+  }
+
+  return lookup;
 }
 
 function detectHouseholdStress_(ss, households) {

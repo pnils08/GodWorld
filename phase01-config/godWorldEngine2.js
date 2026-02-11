@@ -207,6 +207,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-CitizenEvents', function() { generateCitizensEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Promotions', function() { checkForPromotions_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Advancement', function() { processAdvancementIntake_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-HouseholdFormation', function() { processHouseholdFormation_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 6: EVENT PROCESSING + ANALYSIS

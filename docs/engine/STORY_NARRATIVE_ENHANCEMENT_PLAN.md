@@ -11,7 +11,7 @@
 | Week | Feature | Status | Deployed | Files |
 |------|---------|--------|----------|-------|
 | **Week 1** | Citizen Fame & Media Exposure | ✅ **COMPLETE** | 2026-02-11 | Migration: `addCitizenFameColumns.js`<br>Engine: `citizenFameTracker.js` v1.0<br>Integration: `mediaRoomIntake.js` v2.6 |
-| Week 2 | Arc Lifecycle Automation | 🔜 Planned | — | — |
+| **Week 2** | Arc Lifecycle Automation | ✅ **COMPLETE** | 2026-02-11 | Migration: `addArcLifecycleColumns.js`<br>Engine: `arcLifecycleEngine.js` v1.0<br>Integration: `godWorldEngine2.js` Phase 06 |
 | Week 3 | Multi-Citizen Storyline Weaving | 🔜 Planned | — | — |
 | Week 4 | Storyline Resolution & Hook Lifecycle | 🔜 Planned | — | — |
 
@@ -25,6 +25,18 @@
 
 **Deployment Guide:** [WEEK1_DEPLOY.md](../../WEEK1_DEPLOY.md)
 **Full Docs:** [WEEK1_CITIZEN_FAME_TRACKING.md](WEEK1_CITIZEN_FAME_TRACKING.md)
+
+**Week 2 Achievements:**
+- ✅ 8 columns added (Arc_Ledger +5, Event_Arc_Ledger +3)
+- ✅ Automatic phase progression (seed → opening → building → climax → resolution)
+- ✅ Phase-specific tension decay rates (2% to 15% per cycle)
+- ✅ Smart advancement triggers (tension thresholds + duration limits)
+- ✅ Resolution detection (tension_resolved, time_expired, manual)
+- ✅ Story hook generation (ARC_PHASE_TRANSITION, ARC_RESOLVED)
+- ✅ Full documentation and rollback script
+
+**Deployment Guide:** [WEEK2_DEPLOY.md](../../WEEK2_DEPLOY.md)
+**Full Docs:** [WEEK2_ARC_LIFECYCLE_AUTOMATION.md](WEEK2_ARC_LIFECYCLE_AUTOMATION.md)
 
 ---
 

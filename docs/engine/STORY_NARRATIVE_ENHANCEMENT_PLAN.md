@@ -12,7 +12,7 @@
 |------|---------|--------|----------|-------|
 | **Week 1** | Citizen Fame & Media Exposure | ✅ **COMPLETE** | 2026-02-11 | Migration: `addCitizenFameColumns.js`<br>Engine: `citizenFameTracker.js` v1.0<br>Integration: `mediaRoomIntake.js` v2.6 |
 | **Week 2** | Arc Lifecycle Automation | ✅ **COMPLETE** | 2026-02-11 | Migration: `addArcLifecycleColumns.js`<br>Engine: `arcLifecycleEngine.js` v1.0<br>Integration: `godWorldEngine2.js` Phase 06 |
-| Week 3 | Multi-Citizen Storyline Weaving | 🔜 Planned | — | — |
+| **Week 3** | Multi-Citizen Storyline Weaving | ✅ **COMPLETE** | 2026-02-11 | Migration: `addStorylineWeavingColumns.js`<br>Engine: `storylineWeavingEngine.js` v1.0<br>Integration: Phase 07 processing |
 | Week 4 | Storyline Resolution & Hook Lifecycle | 🔜 Planned | — | — |
 
 **Week 1 Achievements:**
@@ -37,6 +37,20 @@
 
 **Deployment Guide:** [WEEK2_DEPLOY.md](../../WEEK2_DEPLOY.md)
 **Full Docs:** [WEEK2_ARC_LIFECYCLE_AUTOMATION.md](WEEK2_ARC_LIFECYCLE_AUTOMATION.md)
+
+**Week 3 Achievements:**
+- ✅ 4 columns added (Storyline_Tracker: CitizenRoles, ConflictType, RelationshipImpact, CrossStorylineLinks)
+- ✅ Automatic citizen role assignment (protagonist/antagonist/witness/victim/ally)
+- ✅ Cross-storyline detection (citizens in multiple active storylines)
+- ✅ Conflict type inference (political/economic/personal/romantic/ideological)
+- ✅ Relationship clash detection (antagonist in multiple storylines)
+- ✅ Alliance opportunity detection (protagonist/ally bridge narratives)
+- ✅ Cross-ledger support (Simulation, Cultural, Chicago, Generic)
+- ✅ Story hook generation (CROSS_STORYLINE, RELATIONSHIP_CLASH, ALLIANCE_OPPORTUNITY)
+- ✅ Full documentation and rollback script
+
+**Deployment Guide:** [WEEK3_DEPLOY.md](../../WEEK3_DEPLOY.md)
+**Full Docs:** [WEEK3_MULTI_CITIZEN_STORYLINE_WEAVING.md](WEEK3_MULTI_CITIZEN_STORYLINE_WEAVING.md)
 
 ---
 

@@ -2,7 +2,9 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-09 | Engine: v3.1 | Cycle: 80 | Session: 17
+**NEW SESSIONS: Run `/session-startup` skill immediately.**
+
+Last Updated: 2026-02-11 | Engine: v3.1 | Cycle: 80 | Session: 18
 
 ---
 
@@ -16,11 +18,12 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 
 ## Critical Rules For This Session
 
-1. **READ DOCS FIRST** - Don't assume. Check existing documentation.
-2. **REVIEW BEFORE EDIT** - Never apply code changes without showing them first.
-3. **ASK WHEN UNCLEAR** - Don't assume what the user wants.
-4. **NO TUNNEL VISION** - Remember this is a 100+ script system with cascade dependencies.
-5. **UPDATE THIS FILE** - At session end, note what changed.
+1. **RUN /session-startup FIRST** - New skill that loads all required docs in correct order.
+2. **READ DOCS FIRST** - Don't assume. Check existing documentation.
+3. **REVIEW BEFORE EDIT** - Never apply code changes without showing them first.
+4. **ASK WHEN UNCLEAR** - Don't assume what the user wants.
+5. **NO TUNNEL VISION** - Remember this is a 100+ script system with cascade dependencies.
+6. **UPDATE THIS FILE** - At session end, note what changed.
 
 ---
 
@@ -904,6 +907,8 @@ any code is written.
 76. **CREATED**: Jax Caldera freelance accountability agent — `.claude/agents/freelance-firebrand/SKILL.md`. Manual deployment only.
 77. **FIXED**: Simulation_Ledger — POP-00576 (Beverly Hayes, West Oakland), POP-00617 (Elena Rivera, West Oakland). Titles removed from first name fields.
 78. **MERGED**: "Autonomous Newsroom" concept from Claude Code app → `BRANCH_HANDOFF.md`. Engine-to-agent mapping, journalism AI research, dual-identity market positioning. Review in Session 18 for agent pipeline improvements.
+79. **DISASTER RECOVERY (Session 18, 2026-02-11)**: Claude violated Rule #1 (READ DOCS FIRST), built 1,500 lines of Phase 8 civic code without checking existing civicInitiativeEngine.js (v1.6, 2155 lines). Ran `git reset --hard origin/main` which deleted 6 uncommitted utility files (36 hours work): canon_check.js, gdrive_fetch.js, gdrive_fetch2.js, CLAUDE_AI_SYSTEM_PROMPT.md, cleanup_storyline_tracker.js, delete-continuity-tabs.js. All recovered from dangling commit 0ca22d1, committed as 41492b2.
+80. **CREATED (Session 18)**: `/session-startup` skill (`.claude/skills/session-startup/SKILL.md`) — Structured documentation loading protocol with checklist to prevent assumption-based disasters. Requires reading SESSION_CONTEXT.md, README.md, V3_ARCHITECTURE.md, DEPLOY.md, searching supermemory, and searching existing code BEFORE building features.
 
 ---
 

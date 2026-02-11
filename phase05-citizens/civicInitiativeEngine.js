@@ -1,9 +1,18 @@
 /**
  * ============================================================================
- * civicInitiativeEngine_ v1.6
+ * civicInitiativeEngine_ v1.7
  * ============================================================================
  *
  * Tracks civic initiatives and resolves votes/outcomes when cycles match.
+ *
+ * v1.7 Changes (2026-02-11):
+ * - FEATURE: Mayoral veto power implementation
+ * - FEATURE: Council override votes (6+ supermajority required)
+ * - FEATURE: Executive action tracking (mayor's last 10 actions)
+ * - FEATURE: Approval ratings for mayor and council members
+ * - Added 5 columns to Initiative_Tracker: MayoralAction, MayoralActionCycle, VetoReason, OverrideVoteCycle, OverrideOutcome
+ * - Added 2 columns to Civic_Office_Ledger: ExecutiveActions (JSON), Approval (0-100)
+ * - Story hooks: MAYORAL_VETO, VETO_OVERRIDE, VETO_UPHELD
  *
  * v1.6 Changes:
  * - FIX: VoteRequirement date parsing (Google Sheets auto-formats "6-3" as June 3rd)
@@ -44,15 +53,16 @@
  * - Named swing voter handling (up to 2)
  * - Swing vote probability based on projection/lean
  * - Council member availability (hospitalized/vacant seats affect count)
+ * - Mayoral veto and override votes (v1.7)
  * - Federal grant / external decision resolution
  * - Consequence cascades (affects sentiment, political standing)
  *
- * LEDGER: Initiative_Tracker
- * 
+ * LEDGER: Initiative_Tracker, Civic_Office_Ledger
+ *
  * INTEGRATES WITH:
- * - Civic_Office_Ledger (council member status, factions)
+ * - Civic_Office_Ledger (council member status, factions, approval ratings)
  * - City Dynamics (sentiment for unnamed swing votes)
- * - Media Room (coverage triggers)
+ * - Media Room (coverage triggers, veto story hooks)
  * - Event Arc Engine (initiative arcs)
  *
  * ============================================================================
@@ -126,6 +136,11 @@ function runCivicInitiativeEngine_(ctx) {
   var iLastUpdated = idx('LastUpdated');
   var iAffectedNeighborhoods = idx('AffectedNeighborhoods');  // v1.3
   var iPolicyDomain = idx('PolicyDomain');  // v1.6: Explicit domain override
+  var iMayoralAction = idx('MayoralAction');       // v1.7
+  var iMayoralActionCycle = idx('MayoralActionCycle');  // v1.7
+  var iVetoReason = idx('VetoReason');             // v1.7
+  var iOverrideVoteCycle = idx('OverrideVoteCycle');  // v1.7
+  var iOverrideOutcome = idx('OverrideOutcome');   // v1.7
 
   // v1.2: Required header validation to prevent silent write failures
   var required = ['InitiativeID', 'Name', 'Type', 'Status', 'VoteCycle',
@@ -157,8 +172,14 @@ function runCivicInitiativeEngine_(ctx) {
     var swingVoter2 = iSwingVoter2 >= 0 ? (row[iSwingVoter2] || '') : '';           // v1.1
     var swingVoter2Lean = iSwingVoter2Lean >= 0 ? (row[iSwingVoter2Lean] || '') : ''; // v1.1
     
-    // Skip resolved or inactive
-    if (status === 'resolved' || status === 'passed' || status === 'failed' || status === 'inactive') {
+    // Skip resolved or inactive (v1.7: added veto-related statuses)
+    if (status === 'resolved' || status === 'failed' || status === 'inactive' ||
+        status === 'override-passed' || status === 'override-failed') {
+      continue;
+    }
+
+    // v1.7: Skip passed initiatives that have been signed (mayoral action complete)
+    if (status === 'passed' && row[iMayoralAction] === 'signed') {
       continue;
     }
 
@@ -234,16 +255,16 @@ function runCivicInitiativeEngine_(ctx) {
         row[iOutcome] = result.outcome;
         row[iConsequences] = result.consequences;
         row[iLastUpdated] = ctx.now;
-        
+
         if (iNotes >= 0 && result.notes) {
           var existingNotes = row[iNotes] || '';
-          row[iNotes] = existingNotes + (existingNotes ? '\n' : '') + 
+          row[iNotes] = existingNotes + (existingNotes ? '\n' : '') +
                         'Cycle ' + cycle + ': ' + result.notes;
         }
-        
+
         rows[r] = row;
         updated = true;
-        
+
         // Track for summary
         S.initiativeEvents.push({
           id: initId,
@@ -253,7 +274,7 @@ function runCivicInitiativeEngine_(ctx) {
           voteCount: result.voteCount || null,
           cycle: cycle
         });
-        
+
         if (type === 'vote' || type === 'council-vote') {
           S.votesThisCycle.push({
             name: name,
@@ -268,8 +289,44 @@ function runCivicInitiativeEngine_(ctx) {
             outcome: result.outcome
           });
         }
-        
-        // Apply consequences to world state
+
+        // v1.7: Check for mayoral veto if vote passed
+        if ((type === 'vote' || type === 'council-vote') && result.outcome === 'PASSED') {
+          var vetoData = checkMayoralVeto_(ctx, row, header, result, rng);
+
+          if (vetoData && vetoData.vetoed) {
+            // Mayor vetoes
+            row[iStatus] = 'vetoed';
+            row[iMayoralAction] = 'vetoed';
+            row[iMayoralActionCycle] = cycle;
+            row[iVetoReason] = vetoData.vetoReason;
+            row[iOverrideVoteCycle] = vetoData.overrideScheduled;
+
+            if (iNotes >= 0) {
+              var notes = row[iNotes] || '';
+              row[iNotes] = notes + (notes ? '\n' : '') +
+                            'Cycle ' + cycle + ': VETOED by Mayor ' + vetoData.mayorName +
+                            ' - ' + vetoData.vetoReason;
+            }
+
+            rows[r] = row;
+            generateVetoStoryHook_(ctx, row, header, vetoData);
+
+            Logger.log('civicInitiativeEngine: ' + name + ' VETOED by mayor. Override scheduled Cycle ' + vetoData.overrideScheduled);
+
+            // Skip consequences - initiative is vetoed
+            continue;  // Don't apply consequences yet
+          } else {
+            // Mayor signs
+            row[iMayoralAction] = 'signed';
+            row[iMayoralActionCycle] = cycle;
+            rows[r] = row;
+
+            Logger.log('civicInitiativeEngine: ' + name + ' SIGNED by mayor');
+          }
+        }
+
+        // Apply consequences to world state (only if not vetoed)
         applyInitiativeConsequences_(ctx, result, name, type);
       }
     }
@@ -289,7 +346,73 @@ function runCivicInitiativeEngine_(ctx) {
       updated = true;
     }
   }
-  
+
+  // ========================================================================
+  // v1.7: PROCESS OVERRIDE VOTES
+  // ========================================================================
+  // Separate loop for override votes (vetoed initiatives scheduled this cycle)
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
+    var status = (row[iStatus] || '').toString().toLowerCase();
+
+    // Only process vetoed initiatives with override scheduled this cycle
+    if (status !== 'vetoed') continue;
+
+    var overrideVoteCycle = Number(row[iOverrideVoteCycle]) || 0;
+    if (overrideVoteCycle !== cycle) continue;
+
+    var name = row[iName] || 'Unknown Initiative';
+    Logger.log('civicInitiativeEngine: Processing override vote for ' + name);
+
+    // Run override vote
+    var overrideResult = processOverrideVote_(ctx, row, header, councilState, rng);
+
+    if (overrideResult.overridePassed) {
+      // Override passed - initiative proceeds
+      row[iStatus] = 'override-passed';
+      row[iOutcome] = 'OVERRIDE PASSED';
+      row[iOverrideOutcome] = 'OVERRIDE PASSED (' + overrideResult.voteCount + ')';
+
+      if (iNotes >= 0) {
+        var notes = row[iNotes] || '';
+        row[iNotes] = notes + (notes ? '\n' : '') +
+                      'Cycle ' + cycle + ': Council OVERRIDES veto ' + overrideResult.voteCount +
+                      ' - Initiative proceeds';
+      }
+
+      // Now apply consequences (delayed from original vote)
+      var dummyResult = {
+        outcome: 'OVERRIDE PASSED',
+        status: 'override-passed',
+        affectedNeighborhoods: row[iAffectedNeighborhoods] ?
+          String(row[iAffectedNeighborhoods]).split(',').map(function(n) { return n.trim(); }) : [],
+        policyDomain: row[iPolicyDomain] || ''
+      };
+      applyInitiativeConsequences_(ctx, dummyResult, name, 'vote');
+
+      generateOverrideStoryHook_(ctx, name, overrideResult, councilState.mayor ? councilState.mayor.name : 'Mayor');
+
+    } else {
+      // Override failed - veto upheld, initiative dies
+      row[iStatus] = 'override-failed';
+      row[iOutcome] = 'OVERRIDE FAILED';
+      row[iOverrideOutcome] = 'OVERRIDE FAILED (' + overrideResult.voteCount + ') - Veto upheld';
+
+      if (iNotes >= 0) {
+        var notes = row[iNotes] || '';
+        row[iNotes] = notes + (notes ? '\n' : '') +
+                      'Cycle ' + cycle + ': Override vote FAILS ' + overrideResult.voteCount +
+                      ' - Veto upheld, initiative dies';
+      }
+
+      generateOverrideStoryHook_(ctx, name, overrideResult, councilState.mayor ? councilState.mayor.name : 'Mayor');
+    }
+
+    row[iLastUpdated] = ctx.now;
+    rows[r] = row;
+    updated = true;
+  }
+
   // Write back
   if (updated) {
     sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
@@ -364,6 +487,7 @@ function getCouncilState_(ctx) {
   var iStatus = idx('Status');
   var iFaction = idx('Faction');
   var iVotingPower = idx('VotingPower');
+  var iApproval = idx('Approval');  // v1.7
   
   // Check if Faction column exists
   if (iFaction < 0) {
@@ -388,6 +512,7 @@ function getCouncilState_(ctx) {
 
     // v1.2: Mayor tracked for veto power but doesn't vote on council matters
     if (officePrefix === 'MAYOR') {
+      var mayorApproval = iApproval >= 0 ? (Number(row[iApproval]) || 65) : 65;  // v1.7
       state.mayor = {
         name: holder,
         popId: popId,
@@ -395,7 +520,8 @@ function getCouncilState_(ctx) {
         title: title,
         status: status,
         faction: faction,
-        available: status !== 'hospitalized' && status !== 'deceased'
+        available: status !== 'hospitalized' && status !== 'deceased',
+        approval: mayorApproval  // v1.7
       };
       continue;  // Skip vote counting for mayor
     }
@@ -2068,6 +2194,280 @@ function getInitiativeSummaryForMedia_(ctx) {
  * - Returns result object with outcome, voteCount, swingVoters
  * - Will NOT double-process passed/failed/resolved initiatives
  *
+ * ============================================================================
+ * MAYORAL VETO & OVERRIDE MECHANICS (v1.7)
+ * ============================================================================
+ */
+
+/**
+ * Check if mayor vetoes a passed initiative
+ *
+ * @param {Object} ctx - Engine context
+ * @param {Array} row - Initiative row data
+ * @param {Array} header - Header row
+ * @param {Object} voteResult - Result from resolveCouncilVote_
+ * @param {Object} rng - Random number generator
+ * @returns {Object|null} Veto result or null if signed
+ */
+function checkMayoralVeto_(ctx, row, header, voteResult, rng) {
+  var S = ctx.summary;
+  var idx = function(n) { return header.indexOf(n); };
+
+  var name = row[idx('Name')] || 'Unknown Initiative';
+  var leadFaction = (row[idx('LeadFaction')] || '').toString().trim().toUpperCase();
+  var budget = Number(row[idx('Budget')]) || 0;
+  var projection = (row[idx('Projection')] || '').toLowerCase();
+
+  // Get mayor from council state
+  var councilState = getCouncilState_(ctx);
+  if (!councilState.mayor || !councilState.mayor.available) {
+    Logger.log('checkMayoralVeto_: Mayor unavailable, auto-signing: ' + name);
+    return null;  // No veto if mayor unavailable
+  }
+
+  var mayorFaction = (councilState.mayor.faction || '').trim().toUpperCase();
+  var mayorApproval = councilState.mayor.approval || 65;  // Default if not set
+  var voteMargin = voteResult.yesVotes - voteResult.noVotes;
+
+  // Extract public support if available (will be used in Week 2 town halls)
+  var publicSupport = 50;  // Default neutral
+
+  // Extract controversy from projection keywords
+  var controversy = 0;
+  if (projection.indexOf('controversial') >= 0) controversy = 7;
+  else if (projection.indexOf('divisive') >= 0) controversy = 8;
+  else if (projection.indexOf('contentious') >= 0) controversy = 6;
+
+  // ========================================================================
+  // VETO PROBABILITY CALCULATION
+  // ========================================================================
+  var baseVetoProb = 0.10;  // 10% base chance
+
+  // Faction opposition (biggest factor)
+  if (mayorFaction && leadFaction && mayorFaction !== leadFaction) {
+    baseVetoProb += 0.40;
+  }
+
+  // Low approval = more cautious, higher veto chance
+  if (mayorApproval < 40) {
+    baseVetoProb += 0.20;
+  }
+
+  // Controversy
+  if (controversy >= 7) {
+    baseVetoProb += 0.15;
+  }
+
+  // Big budget items get more scrutiny
+  if (budget > 50000000) {
+    baseVetoProb += 0.10;
+  }
+
+  // Strong public support deters veto (placeholder until Week 2)
+  if (publicSupport > 70) {
+    baseVetoProb -= 0.30;
+  }
+
+  // Same faction support
+  if (mayorFaction && leadFaction && mayorFaction === leadFaction) {
+    baseVetoProb -= 0.20;
+  }
+
+  // Overwhelming council support deters veto
+  if (voteMargin >= 7) {  // 8-1 or 9-0 votes
+    baseVetoProb -= 0.15;
+  }
+
+  // Clamp to reasonable range
+  if (baseVetoProb < 0.05) baseVetoProb = 0.05;
+  if (baseVetoProb > 0.75) baseVetoProb = 0.75;
+
+  var roll = rng();
+  var willVeto = roll < baseVetoProb;
+
+  Logger.log('checkMayoralVeto_: ' + name + ' | prob=' + baseVetoProb.toFixed(2) +
+             ' | roll=' + roll.toFixed(2) + ' | veto=' + willVeto);
+
+  if (!willVeto) {
+    return null;  // Mayor signs
+  }
+
+  // ========================================================================
+  // MAYOR VETOES
+  // ========================================================================
+
+  // Select veto reason based on context
+  var vetoReasons = [];
+
+  if (budget > 50000000) {
+    vetoReasons.push('Budget concerns - exceeds fiscal projections');
+  }
+  if (controversy >= 7) {
+    vetoReasons.push('Insufficient community consensus');
+  }
+  if (mayorFaction !== leadFaction) {
+    vetoReasons.push('Conflicts with administration priorities');
+  }
+  if (projection.indexOf('timeline') >= 0 || projection.indexOf('delay') >= 0) {
+    vetoReasons.push('Implementation timeline concerns');
+  }
+
+  // Default reasons if no specific triggers
+  if (vetoReasons.length === 0) {
+    vetoReasons = [
+      'Requires additional review',
+      'Implementation feasibility concerns',
+      'Needs refined scope'
+    ];
+  }
+
+  // Pick random reason
+  var vetoReason = vetoReasons[Math.floor(rng() * vetoReasons.length)];
+
+  var cycle = S.cycleId || S.absoluteCycle || 0;
+
+  return {
+    vetoed: true,
+    vetoReason: vetoReason,
+    vetoCycle: cycle,
+    overrideScheduled: cycle + 2,
+    mayorName: councilState.mayor.name,
+    mayorFaction: mayorFaction,
+    vetoProb: baseVetoProb
+  };
+}
+
+
+/**
+ * Process override vote for vetoed initiative
+ *
+ * @param {Object} ctx - Engine context
+ * @param {Array} row - Initiative row data
+ * @param {Array} header - Header row
+ * @param {Object} councilState - Council composition
+ * @param {Object} rng - Random number generator
+ * @returns {Object} Override vote result
+ */
+function processOverrideVote_(ctx, row, header, councilState, rng) {
+  var S = ctx.summary;
+  var idx = function(n) { return header.indexOf(n); };
+
+  var name = row[idx('Name')] || 'Unknown Initiative';
+  var leadFaction = (row[idx('LeadFaction')] || '').toString().trim().toUpperCase();
+  var opposition = (row[idx('OppositionFaction')] || '').toString().trim().toUpperCase();
+
+  // Override needs 6+ votes (supermajority)
+  var factions = councilState.factions;
+  var leadAvailable = factions[leadFaction] ? factions[leadFaction].available : 0;
+  var oppAvailable = factions[opposition] ? factions[opposition].available : 0;
+  var indAvailable = factions['IND'] ? factions['IND'].available : 0;
+
+  // Base calculation: lead faction holds firm, needs IND support
+  var yesVotes = leadAvailable;
+  var noVotes = oppAvailable;
+
+  // IND members vote probabilistically (slightly higher chance to override than original vote)
+  // Rationale: council tends to defend its decision against veto
+  var indMembers = councilState.indMembers || [];
+  for (var i = 0; i < indMembers.length; i++) {
+    var prob = 0.55;  // Slight override bias
+    if (rng() < prob) {
+      yesVotes++;
+    } else {
+      noVotes++;
+    }
+  }
+
+  var overridePassed = yesVotes >= 6;
+  var voteCount = yesVotes + '-' + noVotes;
+
+  Logger.log('processOverrideVote_: ' + name + ' | ' + voteCount + ' | override=' + overridePassed);
+
+  return {
+    overridePassed: overridePassed,
+    voteCount: voteCount,
+    yesVotes: yesVotes,
+    noVotes: noVotes
+  };
+}
+
+
+/**
+ * Generate story hook for mayoral veto
+ *
+ * @param {Object} ctx - Engine context
+ * @param {Array} row - Initiative row data
+ * @param {Array} header - Header row
+ * @param {Object} vetoData - Veto details
+ */
+function generateVetoStoryHook_(ctx, row, header, vetoData) {
+  var idx = function(n) { return header.indexOf(n); };
+  var name = row[idx('Name')] || 'Unknown Initiative';
+  var leadFaction = row[idx('LeadFaction')] || '';
+
+  var hook = {
+    hookType: 'MAYORAL_VETO',
+    theme: 'CIVIC',
+    severity: 7,
+    initiative: name,
+    mayor: vetoData.mayorName,
+    mayorFaction: vetoData.mayorFaction,
+    leadFaction: leadFaction,
+    reason: vetoData.vetoReason,
+    vetoCycle: vetoData.vetoCycle,
+    overrideCycle: vetoData.overrideScheduled,
+    suggestedAngle: 'Mayor breaks with council majority - political fallout?'
+  };
+
+  var S = ctx.summary;
+  S.storyHooks = S.storyHooks || [];
+  S.storyHooks.push(hook);
+
+  Logger.log('generateVetoStoryHook_: ' + name + ' vetoed by ' + vetoData.mayorName);
+}
+
+
+/**
+ * Generate story hook for veto override
+ *
+ * @param {Object} ctx - Engine context
+ * @param {String} name - Initiative name
+ * @param {Object} overrideResult - Override vote result
+ * @param {String} mayorName - Mayor's name
+ */
+function generateOverrideStoryHook_(ctx, name, overrideResult, mayorName) {
+  var hookType = overrideResult.overridePassed ? 'VETO_OVERRIDE' : 'VETO_UPHELD';
+  var severity = overrideResult.overridePassed ? 8 : 6;
+  var angle = overrideResult.overridePassed ?
+    'Power struggle - council flexes supermajority muscle' :
+    'Initiative dies - supporters vow to revive next session';
+
+  var hook = {
+    hookType: hookType,
+    theme: 'CIVIC',
+    severity: severity,
+    initiative: name,
+    overrideVote: overrideResult.voteCount,
+    mayorStatus: overrideResult.overridePassed ?
+      'Political defeat - council defies veto' :
+      'Political victory - veto stands',
+    mayorName: mayorName,
+    suggestedAngle: angle
+  };
+
+  var S = ctx.summary;
+  S.storyHooks = S.storyHooks || [];
+  S.storyHooks.push(hook);
+
+  Logger.log('generateOverrideStoryHook_: ' + name + ' | ' + hookType + ' | ' + overrideResult.voteCount);
+}
+
+
+/**
+ * ============================================================================
+ * END MAYORAL VETO & OVERRIDE MECHANICS
+ * ============================================================================
+ *
  * v1.3 DEMOGRAPHIC INTEGRATION:
  * - Reads Neighborhood_Demographics for affected areas
  * - Swing vote probability modified by demographic alignment:
@@ -2130,7 +2530,7 @@ function getInitiativeSummaryForMedia_(ctx) {
  * - hospitalized, serious condition, critical, injured
  * - deceased, resigned, retired
  *
- * SCHEMA (19 columns — matches actual sheet column order):
+ * SCHEMA (24 columns — matches actual sheet column order):
  * A - InitiativeID
  * B - Name
  * C - Type
@@ -2150,6 +2550,17 @@ function getInitiativeSummaryForMedia_(ctx) {
  * Q - LastUpdated
  * R - AffectedNeighborhoods [v1.3]
  * S - PolicyDomain [v1.6]
+ * T - MayoralAction [v1.7] - none/signed/vetoed
+ * U - MayoralActionCycle [v1.7] - cycle when action occurred
+ * V - VetoReason [v1.7] - why mayor vetoed
+ * W - OverrideVoteCycle [v1.7] - when override scheduled
+ * X - OverrideOutcome [v1.7] - result of override vote
+ *
+ * VETO MECHANICS (v1.7):
+ * - Mayor can veto passed initiatives (probability based on faction, approval, public support)
+ * - Council can override with 6+ votes (supermajority)
+ * - Override vote scheduled 2 cycles after veto
+ * - Generates story hooks: MAYORAL_VETO, VETO_OVERRIDE, VETO_UPHELD
  *
  * ============================================================================
  */

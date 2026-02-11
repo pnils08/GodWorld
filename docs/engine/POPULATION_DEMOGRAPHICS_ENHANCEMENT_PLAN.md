@@ -10,10 +10,20 @@
 
 | Week | Feature | Status | Deployed | Files |
 |------|---------|--------|----------|-------|
-| Week 1 | Household Formation & Family Trees | 🔜 Planned | — | — |
+| **Week 1** | Household Formation & Family Trees | ✅ **READY** | Pending | Migration: `addHouseholdFamilyColumns.js`<br>Engine: `householdFormationEngine.js` v1.0<br>Integration: Phase 05 |
 | Week 2 | Generational Wealth & Inheritance | 🔜 Planned | — | — |
 | Week 3 | Education Pipeline & Career Pathways | 🔜 Planned | — | — |
 | Week 4 | Gentrification Mechanics & Migration Reasons | 🔜 Planned | — | — |
+
+**Week 1 Status:**
+- ✅ 2 new sheets created (Household_Ledger, Family_Relationships)
+- ✅ 5 columns added to Simulation_Ledger
+- ✅ Household formation engine v1.0
+- ✅ Migration and rollback scripts
+- ✅ Deployment guide
+- 📋 Ready for local migration and Apps Script deployment
+
+**Deployment Guide:** [POPULATION_WEEK1_DEPLOY.md](../../POPULATION_WEEK1_DEPLOY.md)
 
 ---
 

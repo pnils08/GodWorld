@@ -48,32 +48,14 @@ Columns added: 5 (to Simulation_Ledger)
 
 ```bash
 cd ~/GodWorld
-git pull
+git pull origin main
 npm install
 npx clasp push
 ```
 
-### 3. Wire into Phase 05 (2 minutes)
+**That's it!** The household formation engine is already wired into Phase 05 in godWorldEngine2.js - no manual editing needed.
 
-**IMPORTANT:** Must manually add to Phase 05 citizen processing:
-
-Open Apps Script editor, find Phase 05, add after citizen events:
-
-```javascript
-// Phase 05: Citizens
-if (typeof generateCitizensEvents_ === 'function') {
-  generateCitizensEvents_(ctx);
-}
-
-// Population Week 1: Household formation
-if (typeof processHouseholdFormation_ === 'function') {
-  processHouseholdFormation_(ctx);
-}
-```
-
-Save and deploy.
-
-### 4. Test (1 minute)
+### 3. Test (1 minute)
 
 Run this in Apps Script:
 

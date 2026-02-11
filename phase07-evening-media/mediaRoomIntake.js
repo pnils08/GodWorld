@@ -1,9 +1,18 @@
 /**
  * ============================================================================
- * MEDIA ROOM INTAKE v2.5
+ * MEDIA ROOM INTAKE v2.6
  * ============================================================================
  *
  * Aligned with MEDIA_ROOM_INSTRUCTIONS v2.0 and GodWorld Calendar v1.0
+ *
+ * v2.6 Enhancements (Week 1: Citizen Fame & Media Exposure):
+ * - updateCitizenFameFromMedia_: Tracks citizen fame from media mentions
+ *   Updates FameScore, MediaMentions, FameTrend on Simulation_Ledger
+ *   Flags Generic_Citizens for promotion when mentions exceed threshold
+ *   Syncs with Cultural_Ledger and Chicago_Citizens fame systems
+ *   Updates Storyline_Tracker coverage metrics
+ * - Integrated into processAllIntakeSheets_ after citizen routing
+ * - Requires: citizenFameTracker.js and 18 new columns (run migration first)
  *
  * v2.5 Enhancements:
  * - routeCitizenUsageToIntake_: Routes Citizen_Media_Usage rows to Intake (new)
@@ -70,19 +79,21 @@ function processMediaIntake_(ctx) {
   var cycle = ctx.config.cycleCount || 0;
   var cal = getCurrentCalendarContext_(ss);
 
-  Logger.log('processMediaIntake_ v2.5: Starting intake processing for cycle ' + cycle);
+  Logger.log('processMediaIntake_ v2.6: Starting intake processing for cycle ' + cycle);
 
   var results = processAllIntakeSheets_(ss, cycle, cal);
 
   ctx.summary.intakeProcessed = results;
 
   var routing = results.citizenRouting || {};
-  Logger.log('processMediaIntake_ v2.5: Complete. ' +
+  var fame = results.fameTracking || {};
+  Logger.log('processMediaIntake_ v2.6: Complete. ' +
     'Articles: ' + results.articles +
     ', Storylines: ' + results.storylines +
     ', Citizens: ' + results.citizenUsage +
     ', Routed: ' + (routing.routed || 0) +
-    ' (new: ' + (routing.newCitizens || 0) + ', existing: ' + (routing.existingCitizens || 0) + ')');
+    ' (new: ' + (routing.newCitizens || 0) + ', existing: ' + (routing.existingCitizens || 0) + ')' +
+    ', Fame: ' + (fame.processed || 0) + ' mentions → ' + (fame.simulationUpdates || 0) + ' updates');
 
   return results;
 }
@@ -100,11 +111,15 @@ function processMediaIntakeV2() {
 
   var results = processAllIntakeSheets_(ss, cycle, cal);
 
-  var summary = 'Media Intake v2.2 Complete:\n' +
+  var routing = results.citizenRouting || {};
+  var fame = results.fameTracking || {};
+
+  var summary = 'Media Intake v2.6 Complete:\n' +
     '- Articles: ' + results.articles + '\n' +
     '- Storylines: ' + results.storylines + '\n' +
     '- Citizen Usage: ' + results.citizenUsage + '\n' +
-    '- Continuity Notes: ' + results.continuity + '\n' +
+    '- Routed: ' + (routing.routed || 0) + ' (new: ' + (routing.newCitizens || 0) + ', existing: ' + (routing.existingCitizens || 0) + ')\n' +
+    '- Fame Tracking: ' + (fame.processed || 0) + ' mentions → ' + (fame.simulationUpdates || 0) + ' updates, ' + (fame.genericPromotions || 0) + ' promotions\n' +
     '- Holiday: ' + cal.holiday + '\n' +
     '- Sports: ' + cal.sportsSeason;
 
@@ -129,6 +144,12 @@ function processAllIntakeSheets_(ss, cycle, cal) {
   results.storylines = processStorylineIntake_(ss, cycle, cal);
   results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
   results.citizenRouting = routeCitizenUsageToIntake_(ss, cycle, cal);
+
+  // v2.6: Week 1 fame tracking — update citizen fame scores from media mentions
+  if (typeof updateCitizenFameFromMedia_ === 'function') {
+    results.fameTracking = updateCitizenFameFromMedia_(ss, cycle, cal);
+  }
+
   // Continuity pipeline removed — quotes route to LifeHistory_Log via
   // parseContinuityNotes_ in parseMediaRoomMarkdown.js during parse step.
 

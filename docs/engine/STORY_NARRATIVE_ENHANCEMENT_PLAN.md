@@ -6,6 +6,28 @@
 
 ---
 
+## 🚀 Implementation Status
+
+| Week | Feature | Status | Deployed | Files |
+|------|---------|--------|----------|-------|
+| **Week 1** | Citizen Fame & Media Exposure | ✅ **COMPLETE** | 2026-02-11 | Migration: `addCitizenFameColumns.js`<br>Engine: `citizenFameTracker.js` v1.0<br>Integration: `mediaRoomIntake.js` v2.6 |
+| Week 2 | Arc Lifecycle Automation | 🔜 Planned | — | — |
+| Week 3 | Multi-Citizen Storyline Weaving | 🔜 Planned | — | — |
+| Week 4 | Storyline Resolution & Hook Lifecycle | 🔜 Planned | — | — |
+
+**Week 1 Achievements:**
+- ✅ 18 columns added (Simulation_Ledger, Generic_Citizens, Chicago_Citizens, Storyline_Tracker)
+- ✅ Fame tracking integrated into Phase 11 intake processing
+- ✅ Generic_Citizens auto-promotion flagging (3+ mentions)
+- ✅ Cross-ledger synchronization (all 4 citizen ledgers)
+- ✅ Storyline coverage metrics
+- ✅ Full documentation and rollback script
+
+**Deployment Guide:** [WEEK1_DEPLOY.md](../../WEEK1_DEPLOY.md)
+**Full Docs:** [WEEK1_CITIZEN_FAME_TRACKING.md](WEEK1_CITIZEN_FAME_TRACKING.md)
+
+---
+
 ## Citizen Ledger Architecture
 
 GodWorld uses **4 citizen ledgers** with different purposes:

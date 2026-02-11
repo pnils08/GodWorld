@@ -47,4 +47,21 @@ This skill will:
 
 ---
 
+## Deployment Workflow
+
+**When code changes are ready to deploy:**
+
+**Claude (local environment):**
+1. Make code changes
+2. Commit locally: `git commit -m "message"`
+3. **Push to GitHub:** `git push origin main`
+
+**User (Cloud Shell):**
+4. Pull from GitHub: `git pull origin main`
+5. Deploy to Apps Script: `clasp push`
+
+**Key:** Claude pushes to GitHub first, THEN user pulls and deploys from Cloud Shell.
+
+---
+
 **NOW RUN:** `/session-startup`

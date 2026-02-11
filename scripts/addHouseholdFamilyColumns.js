@@ -141,7 +141,7 @@ async function addColumnsToSheet(sheetName, additions, dryRun = false) {
       fillData.push([...defaultValues]);
     }
 
-    await sheets.updateRange(sheetName, 2, startCol, fillData);
+    await sheets.updateRangeByPosition(sheetName, 2, startCol, fillData);
   }
 
   console.log(`\n✅ Successfully added ${columnsToAdd.length} columns to ${sheetName}`);

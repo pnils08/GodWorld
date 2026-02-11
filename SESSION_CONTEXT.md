@@ -4,7 +4,7 @@
 
 **NEW SESSIONS: Run `/session-startup` skill immediately.**
 
-Last Updated: 2026-02-11 | Engine: v3.1 | Cycle: 80 | Session: 18
+Last Updated: 2026-02-11 | Engine: v3.1 | Cycle: 80 | Session: 19 - Population & Demographics (Weeks 1-3)
 
 ---
 
@@ -98,6 +98,9 @@ GodWorld/
 | Desk Packet Builder | scripts/buildDeskPackets.js | v1.2 | Per-desk JSON packets from 16 sheets + reporter history + citizen archive from POPID index. buildRecentOutcomes returns full objects with voteBreakdown. buildPendingVotes includes budget/notes/initiativeId. |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Node.js CLI — parses edition → 4 intake sheets, auto-detects cycle from header. Double-dash (--) prefix parsing fixed for all three parsers (storylines, citizens, quotes). |
 | Process Intake (Node) | scripts/processIntake.js | v1.2 | Node.js CLI — intake sheets → final ledgers + citizen routing, auto-detects cycle from Cycle_Packet |
+| **Household Formation** | householdFormationEngine.js | v1.0 | **NEW Week 1** - Young adults form households, rent burden tracking, household income aggregation, dissolution mechanics |
+| **Generational Wealth** | generationalWealthEngine.js | v1.0 | **NEW Week 2** - Wealth levels (0-10), income calculation, inheritance (80% to heirs), household wealth aggregation |
+| **Education Career** | educationCareerEngine.js | v1.0 | **NEW Week 3** - Education levels (hs-dropout → graduate), career progression, education → income correlation, school quality alerts |
 
 ---
 
@@ -155,6 +158,59 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Session History
+
+### 2026-02-11 (Session 19) — Population & Demographics Enhancement (Weeks 1-3)
+
+- **Population & Demographics 4-week plan completed (3/4 weeks)**:
+  - Week 1: Household Formation & Family Trees ✅ DEPLOYED
+  - Week 2: Generational Wealth & Inheritance ✅ DEPLOYED
+  - Week 3: Education Pipeline & Career Pathways ✅ DEPLOYED
+  - Week 4: Gentrification Mechanics & Migration (READY TO BUILD)
+
+- **Week 1: Household Formation & Family Trees** (commits `b2238df`, `67a14f1`, `7f12e21`, `a8af823`, `d8025c1`):
+  - **Schema changes**: Created Household_Ledger (14 columns), Family_Relationships (6 columns). Added 5 columns to Simulation_Ledger (HouseholdId, MaritalStatus, NumChildren, ParentIds, ChildrenIds).
+  - **Engine**: `householdFormationEngine.js` v1.0 — young adults (22-28) form households (15% chance/cycle), rent burden detection (40% warning, 50% crisis), household income aggregation, dissolution mechanics.
+  - **Integration**: Wired into Phase 05 after citizen advancement. Initially used income ESTIMATES ($50k single, $85k couple) — Week 2 replaced with real income calculation.
+  - **Story hooks**: HOUSEHOLD_FORMED (severity 2), HOUSEHOLD_DISSOLVED (severity 3), RENT_BURDEN_CRISIS (severity 6).
+  - **Files**: `scripts/addHouseholdFamilyColumns.js` (migration), `householdFormationEngine.js` (engine), `scripts/rollbackHouseholdFamilyColumns.js` (rollback), `POPULATION_WEEK1_DEPLOY.md` (guide).
+  - **Rent estimates by neighborhood**: Rockridge $2,400, West Oakland $1,450 (12 neighborhoods).
+
+- **Week 2: Generational Wealth & Inheritance** (commits `cfd13b8`, `64a8083`):
+  - **Schema changes**: Added 6 columns to Simulation_Ledger (WealthLevel 0-10, Income $, InheritanceReceived, NetWorth, SavingsRate, DebtLevel). Added 6 columns to Household_Ledger (HouseholdWealth, HomeOwnership, HomeValue, MortgageBalance, SavingsBalance, DebtBalance). Added 2 columns to Family_Relationships (InheritanceAmount, InheritanceCycle).
+  - **Engine**: `generationalWealthEngine.js` v1.0 — derives income from career incomeBand (low=$35k, mid=$62k, high=$110k), calculates wealth levels (0-10) from income + assets + debt, processes inheritance (80% of net worth to heirs on death), household wealth aggregation.
+  - **Integration**: Wired into Phase 05 after household formation. Updated `householdFormationEngine.js` to use REAL citizen income (added `buildCitizenIncomeLookup_()`) instead of estimates. Hooks into `generationalEventsEngine.js` death events for inheritance.
+  - **Wealth levels**: 0-2 poverty (<$45k), 3-4 working ($45k-$60k), 5 middle ($60k-$85k), 6-7 upper-middle ($85k-$120k), 8-9 wealthy ($120k-$200k), 10 elite ($200k+).
+  - **Story hooks**: GENERATIONAL_WEALTH_TRANSFER (severity 5-7), HOME_OWNERSHIP_ACHIEVED (severity 4), DOWNWARD_MOBILITY (severity 6).
+  - **Files**: `scripts/addGenerationalWealthColumns.js` (migration), `generationalWealthEngine.js` (engine), `scripts/rollbackGenerationalWealthColumns.js` (rollback), `POPULATION_WEEK2_DEPLOY.md` (guide).
+
+- **Week 3: Education Pipeline & Career Pathways** (commits `2529a73`, `f49d46d`):
+  - **Schema changes**: Created School_Quality sheet (15 neighborhoods with quality ratings). Added 6 columns to Simulation_Ledger (EducationLevel, SchoolQuality, CareerStage, YearsInCareer, CareerMobility, LastPromotionCycle).
+  - **Engine**: `educationCareerEngine.js` v1.0 — derives education levels from UNI/MED/CIV flags (none → hs-dropout → hs-diploma → some-college → bachelor → graduate), tracks career progression (student → entry → mid → senior → retired), adjusts income based on education (hs-dropout $30k → graduate $120k) + career stage modifiers, detects career mobility (advancing/stagnant/declining), generates school quality crisis alerts.
+  - **Integration**: Wired into Phase 05 after wealth engine. Education-based income adjustments integrate with `generationalWealthEngine.js`. Career stage tracks alongside existing career data from `runCareerEngine.js`.
+  - **School quality by neighborhood**: Rockridge 9/10 (95% grad rate), Piedmont Ave 8/10 (93%), West Oakland 3/10 (62%, CRISIS), Fruitvale 3/10 (65%, CRISIS).
+  - **Career advancement**: Entry → Mid (10 cycles, 15% chance), Mid → Senior (20 cycles, education-dependent: 5% hs-diploma, 10% bachelor, 15% graduate). Stagnation threshold: 40 cycles.
+  - **Story hooks**: SCHOOL_QUALITY_CRISIS (severity 8), DROPOUT_WAVE (severity 6), CAREER_STAGNATION (severity 3), CAREER_BREAKTHROUGH (severity 4).
+  - **Files**: `scripts/addEducationCareerColumns.js` (migration + school data), `educationCareerEngine.js` (engine), `scripts/rollbackEducationCareerColumns.js` (rollback), `POPULATION_WEEK3_DEPLOY.md` (guide).
+
+- **Infrastructure improvements** (commit `7f12e21`):
+  - **lib/sheets.js**: Added 6 new functions for sheet manipulation: `createSheet()`, `deleteSheet()`, `appendColumns()`, `deleteColumn()`, `getRawSheetData()`, `updateRangeByPosition()`. Required for migration scripts.
+
+- **Existing infrastructure discovered** (pre-Week 4 planning):
+  - **Neighborhood_Map** already tracks: DemographicMarker ("Demographic pressure zone" = gentrification signal!), MigrationFlow (calculated by `applyMigrationDrift.js` v2.6), CrimeIndex, Sentiment, RetailVitality, EventAttractiveness.
+  - **applyMigrationDrift.js** v2.6: Already calculates MigrationFlow per neighborhood, reads local metrics, writes to Neighborhood_Map column P.
+  - **Crime_Metrics**: PropertyCrimeIndex, ViolentCrimeIndex by neighborhood.
+  - **Neighborhood_Demographics**: Students, Adults, Seniors, Unemployed, Sick (17 neighborhoods).
+  - **Recommendation for Week 4**: EXTEND Neighborhood_Map (not create new Neighborhood_Ledger), integrate with existing `applyMigrationDrift.js`, avoid sheet bloat.
+
+- **Potential bloat identified**: School_Quality sheet is a neighborhood metric that could have been added to Neighborhood_Demographics (5 columns) instead of creating separate sheet. Consolidation deferred — focus on doing Week 4 correctly.
+
+- **Key learnings**:
+  - Always check existing sheets/engines BEFORE building (avoided Week 4 duplication).
+  - Measure twice, cut once — thorough investigation prevents bloat.
+  - Service account inspection critical for understanding current state.
+  - Integration > isolation — tie new systems to existing infrastructure.
+
+- **Next**: Week 4 (Gentrification Mechanics & Migration Reasons) — extend Neighborhood_Map, integrate with applyMigrationDrift.js, add Migration_Events sheet, track displacement and individual migration decisions.
 
 ### 2026-02-09 (Session 17) — Edition 80 Canon Fixes + Intake Pipeline Repair
 

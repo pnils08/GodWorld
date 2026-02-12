@@ -1189,6 +1189,56 @@ function applyCycleWeightForLatestCycle_(ctx) {
 
 /**
  * ============================================================================
+ * GET INTENT SUMMARY
+ * ============================================================================
+ * Extracts summary statistics from persist intents.
+ * Used by dry-run and replay modes to report what would be written.
+ */
+function getIntentSummary_(ctx) {
+  if (!ctx.persist) {
+    return {
+      updateCount: 0,
+      logCount: 0,
+      replaceCount: 0,
+      sheetsAffected: []
+    };
+  }
+
+  var replaceOps = ctx.persist.replaceOps || [];
+  var updates = ctx.persist.updates || [];
+  var logs = ctx.persist.logs || [];
+
+  // Collect unique sheet names
+  var sheetSet = {};
+
+  for (var i = 0; i < replaceOps.length; i++) {
+    if (replaceOps[i].tab) sheetSet[replaceOps[i].tab] = true;
+  }
+
+  for (var j = 0; j < updates.length; j++) {
+    if (updates[j].tab) sheetSet[updates[j].tab] = true;
+  }
+
+  for (var k = 0; k < logs.length; k++) {
+    if (logs[k].tab) sheetSet[logs[k].tab] = true;
+  }
+
+  var sheetsAffected = [];
+  for (var sheet in sheetSet) {
+    sheetsAffected.push(sheet);
+  }
+
+  return {
+    updateCount: updates.length,
+    logCount: logs.length,
+    replaceCount: replaceOps.length,
+    sheetsAffected: sheetsAffected
+  };
+}
+
+
+/**
+ * ============================================================================
  * DRY-RUN CYCLE (v2.12)
  * ============================================================================
  * Runs a full cycle without writing to sheets.

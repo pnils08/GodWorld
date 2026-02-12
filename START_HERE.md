@@ -14,13 +14,22 @@ A **SessionStart hook** now runs at the beginning of every session:
 
 ## Why This Matters
 
-**Real disaster from 2026-02-11:**
+**Real disasters prevented by this system:**
+
+**2026-02-11: Duplicate Code Disaster**
 - Claude didn't read docs before starting
 - Built 1,500 lines of duplicate civic code
 - Ran `git reset --hard` and deleted 36 hours of work
 - Had to recover from git reflog
 
-**The automatic SessionStart hook prevents this.**
+**2026-02-12: Dry-Run Cycle Bug**
+- Dry-run mode (`runDryRunCycle`) still advances cycle counter
+- Wrote data to 7 summary sheets (46 rows total)
+- Had to rollback cycle 81 → 80 before testing new engines
+- **Lesson:** Dry-run has bugs - verify cycle doesn't advance
+
+**The automatic SessionStart hook prevents code disasters.
+Manual verification prevents cycle disasters.**
 
 ---
 
@@ -42,6 +51,7 @@ A **SessionStart hook** now runs at the beginning of every session:
 3. **SEARCH EXISTING CODE** - Before building
 4. **ASK WHEN UNCLEAR** - User is beginner coder
 5. **REVIEW BEFORE EDIT** - Show changes first
+6. **VERIFY CYCLES DON'T RUN** - Dry-run has bugs, check cycle counter before/after
 
 ---
 

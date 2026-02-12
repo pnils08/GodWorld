@@ -19,6 +19,11 @@ scripts/**
 scripts/*
 scripts/*.js
 
+# Node.js utilities (use require, not for Apps Script)
+**/canon_check.js
+**/gdrive_fetch.js
+**/gdrive_fetch2.js
+
 # Git
 .git/**
 .github/**

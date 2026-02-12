@@ -1360,33 +1360,59 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase3-Population', function() { updateWorldPopulation_(ctx); });
   safePhaseCall_(ctx, 'Phase3-Demographics', function() { applyDemographicDrift_(ctx); });
   safePhaseCall_(ctx, 'Phase3-CrisisSpikes', function() { generateCrisisSpikes_(ctx); });
-  safePhaseCall_(ctx, 'Phase3-CrimeMetrics', function() { generateCrimeMetrics_(ctx); });
-  // Note: V3 runs faith in Phase 3 (before world events). Crisis detection uses
-  // sentiment only — worldEvents-based crisis keywords don't fire in V3 pipeline.
-  safePhaseCall_(ctx, 'Phase3-Faith', function() { runFaithEventsEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase3-Youth', function() { runYouthEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-CrisisBuckets', function() { generateCrisisBuckets_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-Crime', function() { updateCrimeMetrics_Phase3_(ctx); });
+  safePhaseCall_(ctx, 'Phase3-NeighborhoodDemo', function() { updateNeighborhoodDemographics_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
-  // PHASE 4: INITIATIVES + VOTING
+  // PHASE 4: RECOVERY + WORLD EVENTS
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase4-CivicInitiatives', function() { runCivicInitiativeEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase4-LoadBonds', function() { loadRelationshipBonds_(ctx); });
-  safePhaseCall_(ctx, 'Phase4-BondEngine', function() { runBondEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase4-ArcGen', function() { generateNewStoryArcs_(ctx); });
+  safePhaseCall_(ctx, 'Phase4-CycleRecovery', function() { applyCycleRecovery_(ctx); });
+  safePhaseCall_(ctx, 'Phase4-DomainCooldowns', function() { applyDomainCooldowns_(ctx); });
+  safePhaseCall_(ctx, 'Phase4-WorldEvents', function() { worldEventsEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase4-FaithEvents', function() { runFaithEventsEngine_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
-  // PHASE 5: CITIZENS
+  // PHASE 5: CITIZENS + RELATIONSHIPS
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase5-Intake', function() { processIntakeV3_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-GenerationalEvents', function() { runGenerationalEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-AsUniverse', function() { runAsUniversePipeline_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-CivicRole', function() { runCivicRoleEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-GenericMicroEvents', function() { generateGenericCitizenMicroEvents_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-GameModeMicroEvents', function() { generateGameModeMicroEvents_(ctx); });
+
+  safePhaseCall_(ctx, 'Phase5-EnsureEventsLedger', function() { ensureWorldEventsLedger_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-EnsureMediaLedger', function() { ensureMediaLedger_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-EnsureEventsV3', function() { ensureWorldEventsV3Ledger_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-EnsureBonds', function() { ensureRelationshipBondSchemas_(ctx); });
+
+  safePhaseCall_(ctx, 'Phase5-LoadBonds', function() { loadRelationshipBonds_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-SeedBonds', function() { seedRelationshipBonds_(ctx); });
+
   safePhaseCall_(ctx, 'Phase5-Relationships', function() { runRelationshipEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-Neighborhood', function() { runNeighborhoodEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Neighborhoods', function() { runNeighborhoodEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Universe', function() { runAsUniversePipeline_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Elections', function() { runCivicElections_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
+
+  safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Household', function() { runHouseholdEngine_(ctx); });
-  safePhaseCall_(ctx, 'Phase5-CivicElections', function() { runCivicElections_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Generational', function() { runGenerationalEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Youth', function() { runYouthEngine_(ctx); });
+
+  safePhaseCall_(ctx, 'Phase5-EventArc', function() { eventArcEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Bonds', function() { runBondEngine_(ctx); });
+
+  safePhaseCall_(ctx, 'Phase5-Intake', function() { processIntake_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-NamedCitizens', function() { updateNamedCitizens_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-CitizenEvents', function() { generateCitizensEvents_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Promotions', function() { checkForPromotions_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Advancement', function() { processAdvancementIntake_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-HouseholdFormation', function() { processHouseholdFormation_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-GenerationalWealth', function() { processGenerationalWealth_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-EducationCareer', function() { processEducationCareer_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-Gentrification', function() { processGentrification_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-MigrationTracking', function() { processMigrationTracking_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 6: EVENT PROCESSING + ANALYSIS
@@ -1481,19 +1507,17 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
   safePhaseCall_(ctx, 'Phase10-MediaLedger', function() { recordMediaLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-CycleSeed', function() { saveCycleSeed_(ctx); });
+
+  // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 
+  // v3.2: Append World_Population row 2 as history row for time series tracking
+  safePhaseCall_(ctx, 'Phase10-PopulationHistory', function() { appendPopulationHistory_(ctx); });
+
   // ═══════════════════════════════════════════════════════════
-  // PHASE 11: EXPORT ARTIFACTS (OpenClaw Integration)
+  // PHASE 11: MEDIA INTAKE — process any unprocessed intake rows
   // ═══════════════════════════════════════════════════════════
-  // Exports cycle-XX-summary.json, cycle-XX-context.json, and manifest.json
-  // to Drive folder "exports/" for OpenClaw consumption.
-  // See: utilities/exportCycleArtifacts.js
-  safePhaseCall_(ctx, 'Phase11-ExportArtifacts', function() {
-    if (typeof exportCycleArtifacts_ === 'function') {
-      exportCycleArtifacts_(ctx, { includePretty: true });
-    }
-  });
+  safePhaseCall_(ctx, 'Phase11-MediaIntake', function() { processMediaIntake_(ctx); });
 
   // Flush cache
   if (ctx.cache) {

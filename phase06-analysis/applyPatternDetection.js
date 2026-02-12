@@ -28,6 +28,14 @@
  */
 
 function applyPatternDetection_(ctx) {
+  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (isDryRun) {
+    Logger.log('applyPatternDetection_: Skipping (dry-run mode)');
+    ctx.summary.patternFlag = "none";
+    ctx.summary.patternCalendarContext = {};
+    return;
+  }
 
   var sheet = ctx.ss.getSheetByName('Riley_Digest');
   if (!sheet) return;

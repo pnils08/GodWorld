@@ -141,6 +141,13 @@ var TRAIT_MODIFIERS = {
 // ============================================================================
 
 function compressLifeHistory_(ctx, options) {
+  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (isDryRun) {
+    Logger.log('compressLifeHistory_: Skipping (dry-run mode)');
+    return;
+  }
+
   options = options || {};
   var trimHistory = options.trimHistory !== false;
   var forceAll = options.forceAll || false;

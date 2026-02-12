@@ -100,7 +100,13 @@ function getReporterBySignal_(signalType) {
  * Main function — call from Phase 10
  */
 function generateMediaBriefing_(ctx) {
-  
+  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (isDryRun) {
+    Logger.log('generateMediaBriefing_: Skipping (dry-run mode)');
+    return;
+  }
+
   var ss = ctx.ss;
   var S = ctx.summary || {};
   var cycle = ctx.config.cycleCount || S.cycleId || 0;

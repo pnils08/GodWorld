@@ -401,13 +401,21 @@ function advanceWorldTime_(ctx) {
   }
 
   var cycle = Number(ctx.config.cycleCount || 0);
-  cycle++;
+
+  // DRY-RUN FIX: Don't increment cycle in dry-run mode
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (!isDryRun) {
+    cycle++;
+  }
 
   ctx.summary.cycleId = cycle;
 
   // v2.10: Queue writes instead of immediate writes
-  if (cycleRow) ctx.cache.queueWrite('World_Config', cycleRow, 2, cycle);
-  if (lastRunRow) ctx.cache.queueWrite('World_Config', lastRunRow, 2, ctx.now);
+  // DRY-RUN FIX: Don't queue writes in dry-run mode (executePersistIntents will skip anyway, but be explicit)
+  if (!isDryRun) {
+    if (cycleRow) ctx.cache.queueWrite('World_Config', cycleRow, 2, cycle);
+    if (lastRunRow) ctx.cache.queueWrite('World_Config', lastRunRow, 2, ctx.now);
+  }
 
   ctx.config.cycleCount = cycle;
 }
@@ -775,6 +783,13 @@ function updateWorldPopulation_(ctx) {
  * Runs after ExecuteIntents so all Phase writes have landed on row 2.
  */
 function appendPopulationHistory_(ctx) {
+  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (isDryRun) {
+    Logger.log('appendPopulationHistory_: Skipping (dry-run mode)');
+    return;
+  }
+
   var sheet = ctx.ss.getSheetByName('World_Population');
   if (!sheet) return;
   var data = sheet.getDataRange().getValues();

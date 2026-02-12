@@ -37,6 +37,13 @@ var OAKLAND_NEIGHBORHOODS = [
 
 
 function saveV3NeighborhoodMap_(ctx) {
+  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (isDryRun) {
+    Logger.log('saveV3NeighborhoodMap_: Skipping (dry-run mode)');
+    return;
+  }
+
   var ss = ctx.ss;
 
   var sheet = ensureNeighborhoodMapSchemaAppendOnly_(ss, 'Neighborhood_Map', NEIGHBORHOOD_MAP_HEADERS);

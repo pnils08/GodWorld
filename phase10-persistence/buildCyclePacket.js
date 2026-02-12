@@ -22,6 +22,13 @@
  */
 
 function buildCyclePacket_(ctx) {
+  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (isDryRun) {
+    Logger.log('buildCyclePacket_: Skipping (dry-run mode)');
+    return;
+  }
+
   var S = ctx.summary || {};
 
   var weather = S.weather || {};

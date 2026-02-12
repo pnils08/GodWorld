@@ -159,6 +159,7 @@ function deriveEducationLevels_(ss, ctx) {
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
+    if (!row || !Array.isArray(row)) continue; // Skip undefined or invalid rows
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased') continue;
 
@@ -235,6 +236,7 @@ function updateCareerProgression_(ss, cycle) {
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
+    if (!row || !Array.isArray(row)) continue; // Skip undefined or invalid rows
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased') continue;
 
@@ -320,6 +322,7 @@ function matchEducationToIncome_(ss) {
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
+    if (!row || !Array.isArray(row)) continue; // Skip undefined or invalid rows
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased') continue;
 
@@ -386,6 +389,7 @@ function detectCareerMobility_(ss, ctx, cycle) {
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
+    if (!row || !Array.isArray(row)) continue; // Skip undefined or invalid rows
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased') continue;
 
@@ -450,6 +454,7 @@ function checkSchoolQuality_(ss, ctx, cycle) {
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
+    if (!row || !Array.isArray(row)) continue; // Skip undefined or invalid rows
     var neighborhood = row[iNeighborhood];
     var quality = Number(row[iQuality]) || 5;
     var gradRate = Number(row[iGradRate]) || 75;

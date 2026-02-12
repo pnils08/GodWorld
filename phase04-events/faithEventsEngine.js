@@ -12,8 +12,12 @@
  * - Outreach and charitable work
  * - Crisis response and community healing
  *
- * @version 1.1
+ * @version 1.2
  * @tier 6.2
+ *
+ * v1.2 Changes:
+ * - JOURNALISM AI: Added signalChain tracking to getFaithStorySignals_()
+ *   for "Behind the Curtain" subscriber transparency
  *
  * v1.1 Changes:
  * - FIX: Use S.simMonth from Phase 1 calendar for holy day lookup (was using real wall clock)
@@ -25,7 +29,7 @@
 // CONSTANTS
 // ============================================================================
 
-var FAITH_ENGINE_VERSION = '1.1';
+var FAITH_ENGINE_VERSION = '1.2';
 
 // Event generation probabilities
 var FAITH_EVENT_PROBS = {
@@ -431,6 +435,20 @@ function shuffleFaithOrgs_(arr, rng) {
  * @param {Object} ctx - Engine context
  * @return {Array}
  */
+/**
+ * Helper: Create signal chain entry for Faith & Ethics Correspondent
+ */
+function createFaithSignalChain_(detected, value, context) {
+  return [{
+    agent: 'Faith & Ethics Correspondent',
+    engine: 'faithEventsEngine_',
+    detected: detected,
+    value: value,
+    context: context || '',
+    timestamp: 'Phase4'
+  }];
+}
+
 function getFaithStorySignals_(ctx) {
   var S = ctx.summary || {};
   var faithData = S.faithEvents || {};
@@ -446,7 +464,8 @@ function getFaithStorySignals_(ctx) {
       headline: 'Religious communities observe holy days',
       desk: 'faith',
       reporter: 'Elliot Graye',
-      data: { count: byType.holy_day }
+      data: { count: byType.holy_day },
+      signalChain: createFaithSignalChain_('holy_day_observance', byType.holy_day, 'Religious calendar event')
     });
   }
 
@@ -458,7 +477,8 @@ function getFaithStorySignals_(ctx) {
       headline: 'Interfaith leaders gather for dialogue',
       desk: 'faith',
       reporter: 'Elliot Graye',
-      data: { count: byType.interfaith_dialogue }
+      data: { count: byType.interfaith_dialogue },
+      signalChain: createFaithSignalChain_('interfaith_dialogue', byType.interfaith_dialogue, 'Cross-community engagement')
     });
   }
 
@@ -470,7 +490,8 @@ function getFaithStorySignals_(ctx) {
       headline: 'Faith communities respond to community crisis',
       desk: 'faith',
       reporter: 'Elliot Graye',
-      data: { count: byType.crisis_response }
+      data: { count: byType.crisis_response },
+      signalChain: createFaithSignalChain_('crisis_response', byType.crisis_response, 'Faith community mobilization')
     });
   }
 
@@ -482,7 +503,8 @@ function getFaithStorySignals_(ctx) {
       headline: 'Faith-based programs serve Oakland neighbors',
       desk: 'faith',
       reporter: 'Elliot Graye',
-      data: { count: byType.community_program }
+      data: { count: byType.community_program },
+      signalChain: createFaithSignalChain_('community_programs', byType.community_program, 'Multiple programs active')
     });
   }
 

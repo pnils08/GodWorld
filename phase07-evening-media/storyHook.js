@@ -1,7 +1,11 @@
 /**
  * ============================================================================
- * storyHookEngine_ v3.9 — SPORTS FEED TRIGGER HOOKS
+ * storyHookEngine_ v4.0 — SPORTS FEED TRIGGER HOOKS
  * ============================================================================
+ *
+ * v4.0 Enhancements:
+ * - JOURNALISM AI: Added signalChain tracking to story hooks
+ *   for "Behind the Curtain" subscriber transparency
  *
  * v3.9 Enhancements:
  * - Sports Feed trigger hooks: 9 trigger types generate team-specific story hooks
@@ -210,7 +214,16 @@ function storyHookEngine_(ctx) {
       suggestedJournalist: suggestion ? suggestion.journalist : null,
       suggestedAngle: suggestion ? suggestion.angle : null,
       voiceGuidance: suggestion ? suggestion.voiceGuidance : null,
-      matchConfidence: suggestion ? suggestion.confidence : 'none'
+      matchConfidence: suggestion ? suggestion.confidence : 'none',
+      // v4.0: Signal chain tracking
+      signalChain: [{
+        agent: 'Story Editor',
+        engine: 'storyHookEngine_',
+        detected: normalHookType,
+        value: priority,
+        context: text.slice(0, 50),
+        timestamp: 'Phase7'
+      }]
     };
   }
 

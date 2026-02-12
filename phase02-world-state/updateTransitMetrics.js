@@ -10,8 +10,12 @@
  * - Season
  * - City sentiment and economic conditions
  *
- * @version 1.1
+ * @version 1.2
  * @tier 6.4
+ *
+ * v1.2 Changes:
+ * - JOURNALISM AI: Added signalChain tracking to getTransitStorySignals_()
+ *   for "Behind the Curtain" subscriber transparency
  *
  * v1.1 Changes:
  * - FIX: Read previous cycle events from WorldEvents_Ledger (events don't exist at Phase 2)
@@ -25,7 +29,7 @@
 // CONSTANTS
 // ============================================================================
 
-var TRANSIT_UPDATE_VERSION = '1.1';
+var TRANSIT_UPDATE_VERSION = '1.2';
 
 // Transit variability factors
 var TRANSIT_FACTORS = {
@@ -548,6 +552,20 @@ function generateTransitAlerts_(stationMetrics, corridorMetrics, context) {
  * @param {Object} ctx
  * @return {Array}
  */
+/**
+ * Helper: Create signal chain entry for Transit Correspondent
+ */
+function createTransitSignalChain_(detected, value, context) {
+  return [{
+    agent: 'Transit Correspondent',
+    engine: 'updateTransitMetrics_',
+    detected: detected,
+    value: value,
+    context: context || '',
+    timestamp: 'Phase2'
+  }];
+}
+
 function getTransitStorySignals_(ctx) {
   var S = ctx.summary || {};
   var transitData = S.transitMetrics || {};
@@ -563,7 +581,8 @@ function getTransitStorySignals_(ctx) {
       priority: 2,
       headline: 'BART service delays reported',
       desk: 'metro',
-      data: { alerts: serviceAlerts }
+      data: { alerts: serviceAlerts },
+      signalChain: createTransitSignalChain_('service_disruption', serviceAlerts.length, 'BART delays detected')
     });
   }
 
@@ -575,7 +594,8 @@ function getTransitStorySignals_(ctx) {
       priority: 2,
       headline: 'Heavy traffic across Oakland corridors',
       desk: 'metro',
-      data: { alerts: trafficAlerts }
+      data: { alerts: trafficAlerts },
+      signalChain: createTransitSignalChain_('traffic_congestion', trafficAlerts.length, 'Multiple corridors affected')
     });
   }
 
@@ -586,7 +606,8 @@ function getTransitStorySignals_(ctx) {
       priority: 1,
       headline: 'Strong BART ridership day',
       desk: 'metro',
-      data: { ridership: transitData.totalRidership }
+      data: { ridership: transitData.totalRidership },
+      signalChain: createTransitSignalChain_('ridership_milestone', transitData.totalRidership, 'Above 60k threshold')
     });
   }
 
@@ -597,7 +618,8 @@ function getTransitStorySignals_(ctx) {
       priority: 3,
       headline: 'BART on-time performance drops',
       desk: 'metro',
-      data: { onTime: transitData.avgOnTime }
+      data: { onTime: transitData.avgOnTime },
+      signalChain: createTransitSignalChain_('performance_drop', Math.round(transitData.avgOnTime * 100), 'Below 75% on-time')
     });
   } else if (transitData.avgOnTime > 0.92) {
     signals.push({
@@ -605,7 +627,8 @@ function getTransitStorySignals_(ctx) {
       priority: 1,
       headline: 'BART reports strong on-time performance',
       desk: 'metro',
-      data: { onTime: transitData.avgOnTime }
+      data: { onTime: transitData.avgOnTime },
+      signalChain: createTransitSignalChain_('performance_excellence', Math.round(transitData.avgOnTime * 100), 'Above 92% on-time')
     });
   }
 
@@ -616,7 +639,8 @@ function getTransitStorySignals_(ctx) {
       priority: 2,
       headline: 'Coliseum crowds impact transit',
       desk: 'sports',
-      data: transitData.factors
+      data: transitData.factors,
+      signalChain: createTransitSignalChain_('gameday_impact', 1, 'Game day detected')
     });
   }
 

@@ -1,7 +1,11 @@
 /**
  * ============================================================================
- * V3.4 TEXTURE TRIGGER ENGINE — GODWORLD CALENDAR INTEGRATION
+ * V3.5 TEXTURE TRIGGER ENGINE — GODWORLD CALENDAR INTEGRATION
  * ============================================================================
+ *
+ * v3.5 Enhancements (from v3.4):
+ * - JOURNALISM AI: Added signalChain tracking to texture triggers
+ *   for "Behind the Curtain" subscriber transparency
  *
  * v3.4 Enhancements (from v3.3):
  * - Domain cooldown gate: respects S.suppressDomains from applyDomainCooldowns_
@@ -78,7 +82,15 @@ function textureTriggerEngine_(ctx) {
       neighborhood: neighborhood || '',
       textureKey: key,
       reason: reason,
-      intensity: intensity || 'moderate' // low, moderate, high
+      intensity: intensity || 'moderate', // low, moderate, high
+      signalChain: [{
+        agent: 'Story Editor',
+        engine: 'textureTriggerEngine_',
+        detected: key,
+        value: intensity,
+        context: reason,
+        timestamp: 'Phase7'
+      }]
     };
   }
 

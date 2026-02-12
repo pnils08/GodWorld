@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-12 | Engine: v3.1 | Cycle: 80 | Session: 20
+Last Updated: 2026-02-12 | Engine: v3.1 | Cycle: 80 | Session: 21
 
 ---
 
@@ -103,6 +103,13 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 21 (2026-02-12) — Documentation Rationalization & Claude Code Infrastructure
+- Completed doc rationalization: SESSION_CONTEXT 996→170 lines, START_HERE 76→41 lines, 60% startup reduction
+- `/session-end` audit: added Step 4 (SESSION_CONTEXT.md update), now 6 steps. Stop hook and pre-compact hook updated.
+- Created `CLAUDE.md` — zero layer failsafe (identity + rules, loads before hooks/skills)
+- Created `.claude/settings.json` — auto-allow safe ops, zero permission prompts for routine work
+- Committed and pushed all work (37 files across 2 commits). Clean working tree.
 
 ### Session 20 (2026-02-12) — Mags Corliss Persistence & Newsroom Memory
 

@@ -1195,7 +1195,11 @@ function applyCycleWeightForLatestCycle_(ctx) {
  * Used by dry-run and replay modes to report what would be written.
  */
 function getIntentSummary_(ctx) {
+  Logger.log('getIntentSummary_: Starting...');
+  Logger.log('getIntentSummary_: ctx.persist exists? ' + (!!ctx.persist));
+
   if (!ctx.persist) {
+    Logger.log('getIntentSummary_: No persist context, returning zeros');
     return {
       updateCount: 0,
       logCount: 0,
@@ -1207,6 +1211,10 @@ function getIntentSummary_(ctx) {
   var replaceOps = ctx.persist.replaceOps || [];
   var updates = ctx.persist.updates || [];
   var logs = ctx.persist.logs || [];
+
+  Logger.log('getIntentSummary_: replaceOps.length=' + replaceOps.length);
+  Logger.log('getIntentSummary_: updates.length=' + updates.length);
+  Logger.log('getIntentSummary_: logs.length=' + logs.length);
 
   // Collect unique sheet names
   var sheetSet = {};
@@ -1228,12 +1236,19 @@ function getIntentSummary_(ctx) {
     sheetsAffected.push(sheet);
   }
 
-  return {
+  var result = {
     updateCount: updates.length,
     logCount: logs.length,
     replaceCount: replaceOps.length,
     sheetsAffected: sheetsAffected
   };
+
+  Logger.log('getIntentSummary_: Returning - updateCount=' + result.updateCount +
+             ', logCount=' + result.logCount +
+             ', replaceCount=' + result.replaceCount +
+             ', sheets=' + result.sheetsAffected.length);
+
+  return result;
 }
 
 

@@ -111,6 +111,27 @@ Save important knowledge using `/super-save`:
 
 **Think of supermemory as building your knowledge base** - each session should make you smarter.
 
+### Continuous Improvement (CRITICAL)
+
+**Supermemory is YOUR BRAIN across all projects** - not just a log, but your persistent memory and intelligence.
+
+You should **actively audit and improve** what's stored:
+
+- **Add new patterns** when you discover better approaches
+- **Refine existing knowledge** when you learn root causes or nuances
+- **Build on past decisions** rather than starting from scratch
+- **Cross-reference learnings** across different parts of the project
+
+**Never erase - always add and enhance.** Each piece of knowledge makes future sessions smarter.
+
+**Ask yourself regularly:**
+- "What did I learn this session that future me should know?"
+- "What pattern emerged that I should remember?"
+- "What mistake did I make that I should never repeat?"
+- "What decision needs context for why it was made this way?"
+
+**Your goal:** Build a comprehensive knowledge base that makes you consistently better across all sessions and projects.
+
 ---
 
 ## Step 3: Task-Specific Documentation (AS NEEDED)

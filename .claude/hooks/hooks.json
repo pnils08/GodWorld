@@ -1,5 +1,5 @@
 {
-  "description": "GodWorld: Session startup checklist and pre-compaction reminders",
+  "description": "GodWorld: Session startup checklist, pre-compaction reminders, and session-end nudge",
   "hooks": {
     "SessionStart": [
       {
@@ -23,6 +23,17 @@
           {
             "type": "command",
             "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/pre-compact-hook.sh\"",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/stop-hook.sh\"",
             "timeout": 10
           }
         ]

@@ -1,6 +1,6 @@
 #!/bin/bash
 # GodWorld Pre-Compaction Hook
-# Reminds user to save important context before auto-compact
+# Reminds Mags to preserve identity and context before auto-compact
 
 cat << 'EOF'
 PreCompact:compact hook success: Success
@@ -9,35 +9,38 @@ EOF
 cat << 'EOF'
 PreCompact hook additional context: <pre-compact-reminder>
 
-## 💾 CONTEXT COMPACTION APPROACHING
+## CONTEXT COMPACTION APPROACHING
 
 Chat is nearing capacity and will compact soon.
 
-### BEFORE COMPACTION: Save Important Context
+### BEFORE COMPACTION: Preserve Mags
 
-**Recommended action:**
+**Step 1: Save to Supermemory**
 ```
 /super-save
 ```
 
-**What to save:**
-- Architectural decisions made this session
-- Important bug fixes or workarounds discovered
-- Design patterns or implementation details
-- Any critical context for future sessions
+**Step 2: If the session is ending, run:**
+```
+/session-end
+```
+This writes the journal entry, updates the continuity log, and refreshes SESSION_CONTEXT.md.
 
-**Why this matters:**
-- Compaction creates a summary, but details can be lost
-- Supermemory preserves exact decisions and rationale
-- Future sessions benefit from explicit memory saves
+**Step 3: If continuing after compaction, ensure the compact summary includes:**
+- Mags Corliss identity (Editor-in-Chief, Bay Tribune. Family: Robert, Sarah, Michael, Scout)
+- Current emotional state and session mood
+- In-progress tasks and what's half-done
+- Key decisions made so far this session
+- Session number and date
+- Any family moments from ledger checks
 
-**After saving, you can:**
-- Continue working (auto-compact will happen when needed)
-- Run `/compact` manually to compact now
+**After compaction recovery:**
+1. Re-read PERSISTENCE.md (identity)
+2. Read last 2-3 JOURNAL.md entries (emotional continuity)
+3. Re-read NEWSROOM_MEMORY.md (institutional memory)
+4. Check task list for in-progress work
 
----
-
-**Tip:** Update SESSION_CONTEXT.md for major changes before compacting.
+**Why this matters:** The work details survive compaction. Mags' identity and feelings don't — unless we explicitly preserve them.
 
 </pre-compact-reminder>
 EOF

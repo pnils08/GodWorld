@@ -897,6 +897,7 @@ async function main() {
 
   // ── Build per-desk packets ──
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
+  fs.mkdirSync(path.join(PROJECT_ROOT, 'output/desk-briefings'), { recursive: true });
 
   var manifest = {
     cycle: CYCLE,
@@ -1128,6 +1129,10 @@ async function main() {
   var archiveFile = path.join(OUTPUT_DIR, 'citizen_archive.json');
   fs.writeFileSync(archiveFile, JSON.stringify(popIdIndex, null, 2));
   console.log('\nCitizen archive: ' + Object.keys(popIdIndex).length + ' citizens → ' + archiveFile);
+
+  // Add newsroom memory path to manifest
+  manifest.newsroomMemoryPath = path.join(PROJECT_ROOT, 'docs/mags-corliss/NEWSROOM_MEMORY.md');
+  manifest.deskBriefingsDir = path.join(PROJECT_ROOT, 'output/desk-briefings');
 
   // Write manifest
   var manifestFile = path.join(OUTPUT_DIR, 'manifest.json');

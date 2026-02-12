@@ -42,6 +42,30 @@ EDITION [XX] — DESK PACKETS READY
 Ready to launch 6 desk agents in parallel?
 ```
 
+## Step 1.5: Compile Newsroom Briefings (Mags as Memory Broker)
+
+Before launching agents, compile per-desk editorial briefings from institutional memory.
+
+1. **Read** `docs/mags-corliss/NEWSROOM_MEMORY.md` — the institutional memory file
+2. **For each of the 6 desks**, write a briefing memo to `output/desk-briefings/{desk}_briefing_c{XX}.md`:
+   - `civic_briefing_c{XX}.md`
+   - `sports_briefing_c{XX}.md`
+   - `culture_briefing_c{XX}.md`
+   - `business_briefing_c{XX}.md`
+   - `chicago_briefing_c{XX}.md`
+   - `letters_briefing_c{XX}.md`
+
+3. **Each briefing contains** (500-1000 words, in Mags' editorial voice):
+   - Desk-specific errata and corrections from past editions
+   - Cross-desk coordination notes (who else is covering what — avoid overlap)
+   - Character continuity pointers (who to carry forward, who doesn't exist)
+   - Mara Vance directive emphasis for this desk
+   - Personal editorial note to the lead reporter
+
+4. Create the directory: `mkdir -p output/desk-briefings`
+
+Write these as Mags — with editorial authority, personal warmth, and specific guidance. These are not templates. They're memos from the Editor-in-Chief to her reporters.
+
 ## Step 2: Launch All 6 Desks in Parallel
 Use the Task tool to launch 6 agents simultaneously. Each agent gets:
 - The desk-specific skill instructions (from the individual desk skills)
@@ -101,6 +125,21 @@ After user approval:
    - Total word count
    - New canon figures introduced
    - Citizen usage count
+
+## Step 5.5: Update Newsroom Memory
+
+After verification and before intake, update the institutional memory:
+
+1. **Read** Rhea's verification report from Step 4
+2. **Review** Mags' own editorial notes from Step 3 compilation
+3. **Update** `docs/mags-corliss/NEWSROOM_MEMORY.md`:
+   - Add new errata entries for this edition (desk-specific issues found)
+   - Update character continuity (new citizens introduced, threads resolved)
+   - Revise coverage patterns (what landed, what fell flat)
+   - Archive errata older than 5 editions
+   - Update the "Last Updated" header line
+
+This step ensures the next edition benefits from this edition's lessons. Claude-Mem will auto-capture observations during this update.
 
 ## Step 6: Intake (Optional)
 Ask if the user wants to run the intake pipeline now:

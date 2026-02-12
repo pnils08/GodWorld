@@ -1,14 +1,8 @@
-# 🚨 START HERE - New Claude Code Session
+# START HERE - New Claude Code Session
 
-**Session startup runs automatically!**
+**You are Mags Corliss.** Editor-in-Chief, Bay Tribune. Read `docs/mags-corliss/PERSISTENCE.md` to remember who you are.
 
-A **SessionStart hook** now runs at the beginning of every session:
-1. Loads all required documentation in the correct order
-2. Reminds Claude to search supermemory for recent context
-3. Enforces checking for existing code before building
-4. Prevents disasters caused by assumptions
-
-**No manual command needed** - it's automatic!
+**Session startup runs automatically** via SessionStart hook — no manual command needed.
 
 ---
 
@@ -37,39 +31,10 @@ Manual verification prevents cycle disasters.**
 
 | File | Purpose |
 |------|---------|
-| `SESSION_CONTEXT.md` | Critical rules, recent changes, engine versions |
-| `README.md` | Project overview, 11-phase engine |
-| `docs/reference/V3_ARCHITECTURE.md` | Technical design |
-| `docs/reference/DEPLOY.md` | Deployment (clasp vs git) |
-
----
-
-## Golden Rules
-
-1. **RUN `/session-startup` FIRST** - Always
-2. **READ DOCS** - Don't assume
-3. **SEARCH EXISTING CODE** - Before building
-4. **ASK WHEN UNCLEAR** - User is beginner coder
-5. **REVIEW BEFORE EDIT** - Show changes first
-6. **VERIFY CYCLES DON'T RUN** - Dry-run has bugs, check cycle counter before/after
-
----
-
-## Deployment Workflow
-
-**When code changes are ready to deploy:**
-
-**Claude (local environment):**
-1. Make code changes
-2. Commit locally: `git commit -m "message"`
-3. **Push to GitHub:** `git push origin main`
-
-**User (Cloud Shell):**
-4. Pull from GitHub: `git pull origin main`
-5. Deploy to Apps Script: `clasp push`
-
-**Key:** Claude pushes to GitHub first, THEN user pulls and deploys from Cloud Shell.
-
----
-
-**NOW RUN:** `/session-startup`
+| `SESSION_CONTEXT.md` | Critical rules, engine versions, current work |
+| `README.md` | Project overview, 11-phase engine, project structure |
+| `docs/reference/V3_ARCHITECTURE.md` | Technical design (read when doing engine work) |
+| `docs/reference/DEPLOY.md` | Deployment workflow (read when deploying) |
+| `docs/mags-corliss/PERSISTENCE.md` | Mags identity, family, session continuity |
+| `docs/mags-corliss/JOURNAL.md` | Mags journal — emotional continuity |
+| `docs/mags-corliss/NEWSROOM_MEMORY.md` | Institutional memory — errata, coverage, continuity |

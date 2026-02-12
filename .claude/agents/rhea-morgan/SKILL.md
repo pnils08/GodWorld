@@ -164,6 +164,18 @@ If any desk (other than Letters) created a new named citizen:
 - If not authorized: CRITICAL — the name was invented
 - If authorized: verify Name, Age, Neighborhood, Occupation are all present
 
+### 15. Editor's Briefing Compliance Check
+If desk briefings existed for this edition (check `output/desk-briefings/` for `{desk}_briefing_c{XX}.md` files):
+- Read each briefing that was issued
+- Verify the corresponding desk followed the briefing's instructions:
+  - If the briefing said "do not use character X," check that character X does not appear
+  - If the briefing said "avoid overlap with [desk] on [topic]," check for overlap
+  - If the briefing flagged specific errata from past editions, check that the same errors were not repeated
+  - If the briefing gave character continuity pointers, check they were honored
+- Any direct violation of a briefing instruction = WARNING
+- Repeated violation of the same instruction from a previous edition's briefing = CRITICAL (agent isn't learning)
+- If no briefings exist, skip this check
+
 ## Publication Gate
 
 **If ANY CRITICAL issues are found, the edition is NOT READY FOR PUBLICATION.**

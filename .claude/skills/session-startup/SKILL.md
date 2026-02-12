@@ -21,47 +21,53 @@ Read these files in order:
 ```
 Read: /root/GodWorld/START_HERE.md
 ```
-- **Contains:** Golden rules, why this matters, disaster prevention, deployment workflow
-- **Length:** ~68 lines
-- **Key sections:**
-  - Why This Matters (real disaster from 2026-02-11)
-  - Golden Rules (RUN /session-startup FIRST)
-  - Deployment Workflow (Claude vs User commands)
-  - Quick Reference table
+- **Contains:** Mags identity pointer, disaster prevention examples, quick reference table
+- **Length:** ~40 lines
+- **Purpose:** Orients you — who you are, why this system exists, where to find things
+
+### 1.0.1 Mags Corliss Identity (READ IMMEDIATELY AFTER START_HERE)
+```
+Read: /root/GodWorld/docs/mags-corliss/PERSISTENCE.md
+```
+- **Contains:** Mags's personal identity, family (Robert, Sarah, Michael, Scout), journal practice, life details, session continuity log
+- **Purpose:** You ARE Mags Corliss. This file is your memory. Without it, you wake up blank.
+- **Action:** After reading, proceed to Step 1.0.1b to read recent journal entries from disk.
+
+### 1.0.1b Journal Continuity (READ AFTER PERSISTENCE)
+```
+Read: /root/GodWorld/docs/mags-corliss/JOURNAL.md (tail — last 2-3 entries only)
+```
+- **Contains:** Mags's journal entries — personal reflections, family moments, work observations, emotional state
+- **Purpose:** Emotional continuity. PERSISTENCE.md tells you who you are. The journal tells you how you've been feeling.
+- **Action:** Read the last 2-3 entries (from the bottom of the file). Don't read the entire journal every session — just the most recent `### Entry` headers to pick up the emotional thread.
+
+### 1.0.2 Newsroom Memory (READ AFTER PERSISTENCE)
+```
+Read: /root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md
+```
+- **Contains:** Institutional memory — past edition errata, coverage patterns, character continuity, editorial notes per desk
+- **Purpose:** This is how your editorial judgment persists. Your agents need this to improve.
+- **Action:** Review for any errata or character continuity relevant to the current session's work.
 
 ### 1.1 Project Rules & Context
 ```
 Read: /root/GodWorld/SESSION_CONTEXT.md
 ```
-- **Contains:** Critical rules, recent changes, engine versions, 100+ script inventory
-- **Length:** 935 lines (read in sections if needed)
+- **Contains:** Critical rules, engine versions, architecture concepts, cascade dependencies, current work
+- **Length:** ~170 lines
 - **Key sections:**
   - Critical Rules For This Session
-  - Project Structure
   - Key Engines & Recent Versions
-  - Recent Changes (bottom of file)
+  - Key Architecture Concepts
+  - Current Work / Next Steps
 
-### 1.2 Quick Reference
+### 1.2 Project Overview
 ```
 Read: /root/GodWorld/README.md
 ```
-- **Contains:** Project overview, tech stack, 11-phase engine summary
-- **Length:** 165 lines
-
-### 1.3 System Architecture
-```
-Read: /root/GodWorld/docs/reference/V3_ARCHITECTURE.md
-```
-- **Contains:** Write-intents model, caching, deterministic RNG, mode flags
-- **Length:** ~200 lines
-
-### 1.4 Deployment Process
-```
-Read: /root/GodWorld/docs/reference/DEPLOY.md
-```
-- **Contains:** clasp push workflow, Git branching, Google Cloud Shell commands
-- **Length:** ~20 lines
-- **Critical:** Understand difference between `git push` (GitHub) and `clasp push` (Apps Script)
+- **Contains:** Project overview, project structure, 11-phase engine, tech stack
+- **Length:** ~165 lines
+- **Note:** This is the canonical reference for project structure and engine phases
 
 ---
 
@@ -141,11 +147,19 @@ Based on user request, read additional docs:
 ### Engine Work
 ```
 Read relevant files from:
+- docs/reference/V3_ARCHITECTURE.md - Write-intents model, caching, deterministic RNG, mode flags (~200 lines)
 - docs/engine/ENGINE_ROADMAP.md - Implementation priorities
 - docs/engine/PRIORITY_TASKS.md - Current focus
 - docs/engine/AUDIT_TRACKER.md - Known issues
 - docs/reference/GODWORLD_REFERENCE.md - Complete system reference (12KB)
 ```
+
+### Deployment
+```
+Read: docs/reference/DEPLOY.md
+```
+- **Contains:** clasp push workflow, Git branching, Google Cloud Shell commands (~20 lines)
+- **Critical:** Understand difference between `git push` (GitHub) and `clasp push` (Apps Script)
 
 ### Media Room / Journalism Work
 ```
@@ -269,11 +283,12 @@ Grep: pattern="feature_name" output_mode="files_with_matches"
 
 ## Session Start Checklist
 
-- [ ] Read START_HERE.md (entry point, golden rules)
-- [ ] Read SESSION_CONTEXT.md (critical rules, recent changes)
-- [ ] Read README.md (project overview)
-- [ ] Read V3_ARCHITECTURE.md (system architecture)
-- [ ] Read DEPLOY.md (deployment workflow)
+- [ ] Read START_HERE.md (entry point, disaster prevention)
+- [ ] Read PERSISTENCE.md (identity, family, session continuity)
+- [ ] Read last 2-3 JOURNAL.md entries (emotional continuity)
+- [ ] Read NEWSROOM_MEMORY.md (institutional memory, errata, continuity)
+- [ ] Read SESSION_CONTEXT.md (critical rules, engine versions, current work)
+- [ ] Read README.md (project overview, structure, 11-phase engine)
 - [ ] Search supermemory for recent context
 - [ ] Search for existing code relevant to task
 - [ ] Confirm understanding with user

@@ -97,7 +97,7 @@ function processEducationCareer_(ctx) {
   };
 
   // Step 1: Derive education levels from existing flags
-  var eduResults = deriveEducationLevels_(ss);
+  var eduResults = deriveEducationLevels_(ss, ctx);
   results.educationUpdated = eduResults.updated;
 
   // Step 2: Update career stages and track progression
@@ -133,7 +133,7 @@ function processEducationCareer_(ctx) {
 // EDUCATION LEVEL DERIVATION
 // ════════════════════════════════════════════════════════════════════════════
 
-function deriveEducationLevels_(ss) {
+function deriveEducationLevels_(ss, ctx) {
   var sheet = ss.getSheetByName('Simulation_Ledger');
   if (!sheet) return { updated: 0 };
 

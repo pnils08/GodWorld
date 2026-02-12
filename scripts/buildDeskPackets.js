@@ -596,10 +596,134 @@ function buildCulturalEntitiesCanon(culturalLedger) {
   }).sort(function(a, b) { return b.fameScore - a.fameScore; });
 }
 
+// ─── JOURNALISM AI OPTIMIZATIONS (v1.2) ───────────────────
+
+/**
+ * Calculate statistical variance for anomaly detection
+ * Returns number of standard deviations from baseline mean
+ */
+function calculateVariance(current, baseline) {
+  if (!baseline || baseline.length === 0) return 0;
+
+  var sum = baseline.reduce(function(a, b) { return a + b; }, 0);
+  var mean = sum / baseline.length;
+
+  var squaredDiffs = baseline.map(function(x) { return Math.pow(x - mean, 2); });
+  var variance = squaredDiffs.reduce(function(a, b) { return a + b; }, 0) / baseline.length;
+  var stdDev = Math.sqrt(variance);
+
+  if (stdDev === 0) return 0;
+  return (current - mean) / stdDev;
+}
+
+/**
+ * Calculate priority score for signals
+ * Formula: (severity × 10) + (citizen_count × 2) + (variance × 5) + neighborhood_weight
+ */
+function calculatePriorityScore(signal, variance) {
+  var severity = parseInt(signal.severity || signal.Severity || 3);
+  var citizenCount = 0;
+
+  // Count citizens mentioned in description
+  if (signal.description || signal.EventDescription) {
+    var desc = signal.description || signal.EventDescription || '';
+    var names = desc.match(/[A-Z][a-z]+ [A-Z][a-z]+/g) || [];
+    citizenCount = names.length;
+  }
+
+  var neighborhood = signal.neighborhood || signal.Neighborhood || '';
+  var neighborhoodWeight = (neighborhood && neighborhood !== 'GENERAL' && neighborhood !== 'Multiple') ? 2 : 0;
+
+  var varianceScore = Math.abs(variance) * 5;
+
+  return (severity * 10) + (citizenCount * 2) + varianceScore + neighborhoodWeight;
+}
+
+/**
+ * Detect anomalies in event data by comparing to historical baseline
+ * Returns events with variance and anomalyFlag fields added
+ */
+function detectAnomalies(events, historicalEvents) {
+  if (!events || events.length === 0) return [];
+  if (!historicalEvents || historicalEvents.length === 0) {
+    // No baseline - mark all as normal
+    return events.map(function(e) {
+      e.variance = 0;
+      e.anomalyFlag = 'NORMAL';
+      return e;
+    });
+  }
+
+  // Build baseline: count events by severity over last cycles
+  var severityBaseline = [];
+  var cycleGroups = {};
+
+  historicalEvents.forEach(function(e) {
+    var cycle = e.Cycle || e.CycleId;
+    if (!cycleGroups[cycle]) cycleGroups[cycle] = [];
+    cycleGroups[cycle].push(parseInt(e.Severity || 3));
+  });
+
+  // Get severity counts per cycle
+  for (var cycle in cycleGroups) {
+    var cycleSeverities = cycleGroups[cycle];
+    var highSeverityCount = cycleSeverities.filter(function(s) { return s >= 4; }).length;
+    severityBaseline.push(highSeverityCount);
+  }
+
+  // Calculate variance for current cycle
+  var currentHighSeverity = events.filter(function(e) {
+    return parseInt(e.Severity || 3) >= 4;
+  }).length;
+
+  var variance = calculateVariance(currentHighSeverity, severityBaseline);
+
+  return events.map(function(e) {
+    var eventSeverity = parseInt(e.Severity || 3);
+    var eventVariance = eventSeverity >= 4 ? variance : 0;
+
+    e.variance = Math.round(eventVariance * 100) / 100;
+    e.anomalyFlag = Math.abs(eventVariance) > 2.5 ? 'HIGH' :
+                    Math.abs(eventVariance) > 1.5 ? 'MEDIUM' : 'NORMAL';
+    e.priorityScore = calculatePriorityScore(e, eventVariance);
+
+    return e;
+  });
+}
+
+/**
+ * Add priority scores to seeds and hooks
+ */
+function addPriorityScores(signals, varianceDefault) {
+  return signals.map(function(s) {
+    s.priorityScore = calculatePriorityScore(s, varianceDefault || 0);
+    return s;
+  });
+}
+
+/**
+ * Sort and flag top priority signals
+ */
+function flagTopPriority(signals, topN) {
+  if (!signals || signals.length === 0) return signals;
+
+  // Sort by priority score descending
+  signals.sort(function(a, b) {
+    return (b.priorityScore || 0) - (a.priorityScore || 0);
+  });
+
+  // Flag top N as priority
+  for (var i = 0; i < Math.min(topN, signals.length); i++) {
+    signals[i].priority = true;
+  }
+
+  return signals;
+}
+
 // ─── MAIN ──────────────────────────────────────────────────
 
 async function main() {
-  console.log('=== buildDeskPackets v1.1 ===');
+  console.log('=== buildDeskPackets v1.2 (Journalism AI Optimizations) ===');
   console.log('Cycle:', CYCLE);
   console.log('Pulling live data from Google Sheets...\n');
 
@@ -637,6 +761,17 @@ async function main() {
   var events = filterByCycle(eventsRaw, CYCLE);
   var prevDrafts = filterByCycle(draftsRaw, CYCLE - 1);
   var allDrafts = allToObjects(draftsRaw);
+
+  // ── Pull historical events for anomaly detection baseline (last 10 cycles) ──
+  var historicalEvents = [];
+  var allEvents = allToObjects(eventsRaw);
+  for (var i = Math.max(1, CYCLE - 10); i < CYCLE; i++) {
+    var cycleEvents = allEvents.filter(function(e) {
+      return parseInt(e.Cycle || e.CycleId) === i;
+    });
+    historicalEvents = historicalEvents.concat(cycleEvents);
+  }
+  console.log('  Historical events (baseline):', historicalEvents.length);
 
   // Arcs: get active (not resolved)
   var allArcs = allToObjects(arcsRaw);
@@ -781,6 +916,10 @@ async function main() {
         return targetDesks.indexOf(deskId) !== -1;
       });
 
+    // Apply anomaly detection and priority scoring to events
+    deskEvents = detectAnomalies(deskEvents, historicalEvents);
+    deskEvents = flagTopPriority(deskEvents, 3);
+
     // Filter seeds by domain
     var deskSeeds = desk.domains.indexOf('ALL') !== -1 ? seeds :
       seeds.filter(function(s) {
@@ -788,12 +927,20 @@ async function main() {
         return targetDesks.indexOf(deskId) !== -1;
       });
 
+    // Add priority scores to seeds
+    deskSeeds = addPriorityScores(deskSeeds, 0);
+    deskSeeds = flagTopPriority(deskSeeds, 3);
+
     // Filter hooks by domain
     var deskHooks = desk.domains.indexOf('ALL') !== -1 ? hooks :
       hooks.filter(function(h) {
         var targetDesks = getDesksForDomain(h.Domain, h.HookText);
         return targetDesks.indexOf(deskId) !== -1;
       });
+
+    // Add priority scores to hooks
+    deskHooks = addPriorityScores(deskHooks, 0);
+    deskHooks = flagTopPriority(deskHooks, 3);
 
     // Filter arcs by domain
     var deskArcs = desk.domains.indexOf('ALL') !== -1 ? arcs :
@@ -866,7 +1013,7 @@ async function main() {
         deskName: desk.name,
         cycle: CYCLE,
         generated: new Date().toISOString(),
-        generator: 'buildDeskPackets v1.1'
+        generator: 'buildDeskPackets v1.2'
       },
       baseContext: baseContext,
       deskBrief: {
@@ -881,7 +1028,11 @@ async function main() {
           domain: e.Domain, severity: e.Severity, neighborhood: e.Neighborhood,
           description: e.EventDescription, type: e.EventType,
           healthFlag: e.HealthFlag, civicFlag: e.CivicFlag,
-          shockFlag: e.ShockFlag, sentimentShift: e.SentimentShift
+          shockFlag: e.ShockFlag, sentimentShift: e.SentimentShift,
+          variance: e.variance || 0,
+          anomalyFlag: e.anomalyFlag || 'NORMAL',
+          priorityScore: e.priorityScore || 0,
+          priority: e.priority || false
         };
       }),
       seeds: deskSeeds.map(function(s) {
@@ -889,7 +1040,9 @@ async function main() {
           seedType: s.SeedType, domain: s.Domain, neighborhood: s.Neighborhood,
           priority: parseInt(s.Priority || '1'), text: s.SeedText,
           themes: s.themes || '', suggestedJournalist: s.suggestedJournalist || '',
-          matchConfidence: s.matchConfidence || ''
+          matchConfidence: s.matchConfidence || '',
+          priorityScore: s.priorityScore || 0,
+          autoPriority: s.priority || false
         };
       }),
       hooks: deskHooks.map(function(h) {
@@ -898,7 +1051,9 @@ async function main() {
           priority: parseInt(h.Priority || '1'), text: h.HookText,
           suggestedDesks: h.SuggestedDesks || '',
           themes: h.themes || '', suggestedJournalist: h.suggestedJournalist || '',
-          matchConfidence: h.matchConfidence || ''
+          matchConfidence: h.matchConfidence || '',
+          priorityScore: h.priorityScore || 0,
+          autoPriority: h.priority || false
         };
       }),
       arcs: deskArcs.map(function(a) {

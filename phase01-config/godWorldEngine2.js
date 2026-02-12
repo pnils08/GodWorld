@@ -1304,7 +1304,20 @@ function runDryRunCycle() {
   runCyclePhases_(ctx);
 
   // Get intent summary
-  var summary = getIntentSummary_(ctx);
+  var summary;
+  try {
+    Logger.log('About to call getIntentSummary_...');
+    summary = getIntentSummary_(ctx);
+    Logger.log('getIntentSummary_ returned: ' + (typeof summary));
+  } catch (e) {
+    Logger.log('ERROR calling getIntentSummary_: ' + e.message);
+    summary = {
+      updateCount: 0,
+      logCount: 0,
+      replaceCount: 0,
+      sheetsAffected: []
+    };
+  }
 
   Logger.log('═══════════════════════════════════════════════════════════');
   Logger.log('DRY-RUN COMPLETE - Intent Summary:');

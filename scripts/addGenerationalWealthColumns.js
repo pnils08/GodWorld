@@ -121,8 +121,13 @@ async function addColumnsToSheet(sheetName, additions, dryRun = false) {
   const rawData = await sheets.getRawSheetData(sheetName);
   const headers = rawData[0];
   const startCol = headers.length;
+  const neededColumns = startCol + columnsToAdd.length;
 
   console.log(`\nAdding columns starting at position ${startCol + 1}...`);
+  console.log(`Total columns needed: ${neededColumns}`);
+
+  // Resize sheet if needed (add 10 extra columns for future growth)
+  await sheets.resizeSheet(sheetName, Math.max(neededColumns + 10, headers.length));
 
   const newHeaders = columnsToAdd.map(c => c.name);
   await sheets.appendColumns(sheetName, 1, startCol, newHeaders);

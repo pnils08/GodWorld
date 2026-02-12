@@ -1189,71 +1189,6 @@ function applyCycleWeightForLatestCycle_(ctx) {
 
 /**
  * ============================================================================
- * GET INTENT SUMMARY
- * ============================================================================
- * Extracts summary statistics from persist intents.
- * Used by dry-run and replay modes to report what would be written.
- */
-function getIntentSummary_(ctx) {
-  Logger.log('getIntentSummary_: Starting...');
-  Logger.log('getIntentSummary_: ctx.persist exists? ' + (!!ctx.persist));
-
-  if (!ctx.persist) {
-    Logger.log('getIntentSummary_: No persist context, returning zeros');
-    return {
-      updateCount: 0,
-      logCount: 0,
-      replaceCount: 0,
-      sheetsAffected: []
-    };
-  }
-
-  var replaceOps = ctx.persist.replaceOps || [];
-  var updates = ctx.persist.updates || [];
-  var logs = ctx.persist.logs || [];
-
-  Logger.log('getIntentSummary_: replaceOps.length=' + replaceOps.length);
-  Logger.log('getIntentSummary_: updates.length=' + updates.length);
-  Logger.log('getIntentSummary_: logs.length=' + logs.length);
-
-  // Collect unique sheet names
-  var sheetSet = {};
-
-  for (var i = 0; i < replaceOps.length; i++) {
-    if (replaceOps[i].tab) sheetSet[replaceOps[i].tab] = true;
-  }
-
-  for (var j = 0; j < updates.length; j++) {
-    if (updates[j].tab) sheetSet[updates[j].tab] = true;
-  }
-
-  for (var k = 0; k < logs.length; k++) {
-    if (logs[k].tab) sheetSet[logs[k].tab] = true;
-  }
-
-  var sheetsAffected = [];
-  for (var sheet in sheetSet) {
-    sheetsAffected.push(sheet);
-  }
-
-  var result = {
-    updateCount: updates.length,
-    logCount: logs.length,
-    replaceCount: replaceOps.length,
-    sheetsAffected: sheetsAffected
-  };
-
-  Logger.log('getIntentSummary_: Returning - updateCount=' + result.updateCount +
-             ', logCount=' + result.logCount +
-             ', replaceCount=' + result.replaceCount +
-             ', sheets=' + result.sheetsAffected.length);
-
-  return result;
-}
-
-
-/**
- * ============================================================================
  * DRY-RUN CYCLE (v2.12)
  * ============================================================================
  * Runs a full cycle without writing to sheets.
@@ -1303,28 +1238,16 @@ function runDryRunCycle() {
   // Run the cycle (writes will be logged but not executed)
   runCyclePhases_(ctx);
 
-  // Get intent summary
-  var summary;
-  try {
-    Logger.log('About to call getIntentSummary_...');
-    summary = getIntentSummary_(ctx);
-    Logger.log('getIntentSummary_ returned: ' + (typeof summary));
-  } catch (e) {
-    Logger.log('ERROR calling getIntentSummary_: ' + e.message);
-    summary = {
-      updateCount: 0,
-      logCount: 0,
-      replaceCount: 0,
-      sheetsAffected: []
-    };
-  }
+  // Get intent summary (from utilities/writeIntents.js)
+  var summary = getIntentSummary_(ctx);
 
   Logger.log('═══════════════════════════════════════════════════════════');
   Logger.log('DRY-RUN COMPLETE - Intent Summary:');
-  Logger.log('  Updates: ' + summary.updateCount);
-  Logger.log('  Logs: ' + summary.logCount);
-  Logger.log('  Replaces: ' + summary.replaceCount);
-  Logger.log('  Sheets affected: ' + summary.sheetsAffected.join(', '));
+  Logger.log('  Total intents: ' + summary.totalIntents);
+  Logger.log('  Replace ops: ' + summary.replaceOps);
+  Logger.log('  Updates: ' + summary.updates);
+  Logger.log('  Logs: ' + summary.logs);
+  Logger.log('  Sheets affected: ' + Object.keys(summary.bySheet || {}).length);
   Logger.log('═══════════════════════════════════════════════════════════');
 
   return summary;

@@ -255,6 +255,17 @@ function runWorldCycle() {
   });
 
   // ═══════════════════════════════════════════════════════════
+  // PHASE 6.5: PRE-PUBLICATION VALIDATION
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase6.5-Validation', function() {
+    if (typeof runPrePublicationValidation_ === 'function') {
+      var validationReport = runPrePublicationValidation_(ctx);
+      ctx.summary.validationReport = validationReport;
+      Logger.log('Phase 6.5: Validation complete - ' + validationReport.overallStatus);
+    }
+  });
+
+  // ═══════════════════════════════════════════════════════════
   // PHASE 7: EVENING + MEDIA SYSTEMS
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
@@ -1451,6 +1462,17 @@ function runCyclePhases_(ctx) {
         var S = ctx.summary || {};
         S.faithStorySignals = signals;
       }
+    }
+  });
+
+  // ═══════════════════════════════════════════════════════════
+  // PHASE 6.5: PRE-PUBLICATION VALIDATION
+  // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase6.5-Validation', function() {
+    if (typeof runPrePublicationValidation_ === 'function') {
+      var validationReport = runPrePublicationValidation_(ctx);
+      ctx.summary.validationReport = validationReport;
+      Logger.log('Phase 6.5: Validation complete - ' + validationReport.overallStatus);
     }
   });
 

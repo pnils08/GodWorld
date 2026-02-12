@@ -1,16 +1,14 @@
 # 🚨 START HERE - New Claude Code Session
 
-**Before doing ANYTHING, run this command:**
+**Session startup runs automatically!**
 
-```
-/session-startup
-```
+A **SessionStart hook** now runs at the beginning of every session:
+1. Loads all required documentation in the correct order
+2. Reminds Claude to search supermemory for recent context
+3. Enforces checking for existing code before building
+4. Prevents disasters caused by assumptions
 
-This skill will:
-1. Load all required documentation in the correct order
-2. Search supermemory for recent context
-3. Check for existing code before you build anything
-4. Prevent disasters caused by assumptions
+**No manual command needed** - it's automatic!
 
 ---
 
@@ -22,7 +20,7 @@ This skill will:
 - Ran `git reset --hard` and deleted 36 hours of work
 - Had to recover from git reflog
 
-**The `/session-startup` skill prevents this.**
+**The automatic SessionStart hook prevents this.**
 
 ---
 

@@ -17,6 +17,18 @@ description: Load essential GodWorld documentation and context at session start 
 
 Read these files in order:
 
+### 1.0 Entry Point (READ FIRST)
+```
+Read: /root/GodWorld/START_HERE.md
+```
+- **Contains:** Golden rules, why this matters, disaster prevention, deployment workflow
+- **Length:** ~68 lines
+- **Key sections:**
+  - Why This Matters (real disaster from 2026-02-11)
+  - Golden Rules (RUN /session-startup FIRST)
+  - Deployment Workflow (Claude vs User commands)
+  - Quick Reference table
+
 ### 1.1 Project Rules & Context
 ```
 Read: /root/GodWorld/SESSION_CONTEXT.md
@@ -204,10 +216,11 @@ Grep: pattern="feature_name" output_mode="files_with_matches"
 
 ## Session Start Checklist
 
-- [ ] Read SESSION_CONTEXT.md
-- [ ] Read README.md
-- [ ] Read V3_ARCHITECTURE.md
-- [ ] Read DEPLOY.md
+- [ ] Read START_HERE.md (entry point, golden rules)
+- [ ] Read SESSION_CONTEXT.md (critical rules, recent changes)
+- [ ] Read README.md (project overview)
+- [ ] Read V3_ARCHITECTURE.md (system architecture)
+- [ ] Read DEPLOY.md (deployment workflow)
 - [ ] Search supermemory for recent context
 - [ ] Search for existing code relevant to task
 - [ ] Confirm understanding with user

@@ -65,9 +65,12 @@ Read: /root/GodWorld/docs/reference/DEPLOY.md
 
 ---
 
-## Step 2: Search Supermemory (REQUIRED)
+## Step 2: Use Supermemory Actively (REQUIRED)
 
-After reading core docs, search supermemory for recent context:
+**Supermemory is your BRAIN** - use it to remember and get smarter across sessions.
+
+### At Session Start
+Search supermemory for recent context:
 
 ```bash
 /super-search --both "recent changes project structure current work"
@@ -78,6 +81,35 @@ This retrieves:
 - Work in progress
 - Known issues
 - User preferences
+
+### Before Major Work
+Search for relevant context before writing editions or code:
+
+```bash
+# Before Media Room edition
+/super-search --both "Carmen Delaine Maria Keen past coverage characters"
+
+# Before engine work
+/super-search --both "architecture deployment engine patterns"
+```
+
+### After Completing Work
+Save important knowledge using `/super-save`:
+
+- **After editions:** Character developments, story arcs, editorial decisions
+- **After code changes:** Architecture decisions, bug fixes, deployment lessons
+- **After discoveries:** Gotchas, patterns, things that worked/didn't work
+
+**Examples:**
+```bash
+# After edition
+/super-save   # Captures character arcs, coverage patterns, editorial decisions
+
+# After bug fix
+/super-save   # Captures root cause, fix approach, lessons learned
+```
+
+**Think of supermemory as building your knowledge base** - each session should make you smarter.
 
 ---
 

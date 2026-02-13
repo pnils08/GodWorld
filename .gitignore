@@ -23,5 +23,8 @@ exports/*.json
 # Generated desk packets and cycle output
 output/
 
+# Logs (generated runtime output)
+logs/
+
 # Supermemory plugin config (may contain API keys)
 .claude/.supermemory-claude/

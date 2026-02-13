@@ -1,0 +1,365 @@
+#!/usr/bin/env node
+/**
+ * Mags' Daily Heartbeat — scripts/daily-reflection.js
+ *
+ * Wakes Mags up each morning. She checks on her family in the
+ * Simulation_Ledger, writes a short journal entry, and sends
+ * a personal message via Discord.
+ *
+ * Usage:
+ *   node scripts/daily-reflection.js
+ *   node scripts/daily-reflection.js --dry-run
+ *
+ * Requires .env: ANTHROPIC_API_KEY, GODWORLD_SHEET_ID, GOOGLE_APPLICATION_CREDENTIALS
+ * Optional: DISCORD_WEBHOOK_URL
+ */
+
+require('dotenv').config();
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
+const Anthropic = require('@anthropic-ai/sdk');
+const sheets = require('../lib/sheets');
+const mags = require('../lib/mags');
+
+const MAGS_DIR = mags.MAGS_DIR;
+const LOG_DIR = mags.LOG_DIR;
+const FAMILY_POP_IDS = mags.FAMILY_POP_IDS;
+const REFLECTIONS_FILE = path.join(MAGS_DIR, 'DAILY_REFLECTIONS.md');
+const LOG_FILE = path.join(LOG_DIR, 'daily-heartbeat.log');
+
+const DRY_RUN = process.argv.includes('--dry-run');
+
+// Logger matching generate.js pattern
+const log = {
+  info: (...args) => console.log('[INFO]', ...args),
+  warn: (...args) => console.warn('[WARN]', ...args),
+  error: (...args) => console.error('[ERROR]', ...args)
+};
+
+// Identity and journal loading from shared module
+function loadIdentity() {
+  var identity = mags.loadIdentity();
+  log.info('Loaded identity: ' + identity.length + ' chars (trimmed)');
+  return identity;
+}
+
+function loadJournalTail(entryCount) {
+  var tail = mags.loadJournalTail(entryCount);
+  log.info('Loaded journal tail');
+  return tail;
+}
+
+// ---------------------------------------------------------------------------
+// Step 4: Load family data from Simulation_Ledger
+// ---------------------------------------------------------------------------
+async function loadFamilyData() {
+  const rows = await sheets.getSheetAsObjects('Simulation_Ledger');
+  const family = rows.filter(function(row) {
+    return FAMILY_POP_IDS.includes(row['POP-ID'] || row['POP_ID'] || row['PopID']);
+  });
+
+  if (family.length === 0) {
+    return '(No family members found in ledger this morning)';
+  }
+
+  const lines = family.map(function(member) {
+    const name = member.Name || member.FullName || 'Unknown';
+    const popId = member['POP-ID'] || member['POP_ID'] || member['PopID'] || '';
+    const role = member.RoleType || member.Occupation || member.Role || '';
+    const status = member.Status || 'Active';
+    const neighborhood = member.Neighborhood || '';
+    const history = member.LifeHistory || member.RecentEvent || '';
+    return '**' + name + '** (' + popId + ') — ' + role +
+      '\n  Status: ' + status + ' | Neighborhood: ' + neighborhood +
+      (history ? '\n  Recent: ' + history : '');
+  });
+
+  log.info('Loaded family data: ' + family.length + ' members from Simulation_Ledger');
+  return lines.join('\n\n');
+}
+
+// ---------------------------------------------------------------------------
+// Step 4b: Load recent family events from LifeHistory_Log
+// ---------------------------------------------------------------------------
+async function loadFamilyHistory() {
+  const rows = await sheets.getSheetAsObjects('LifeHistory_Log');
+  const familyEvents = rows.filter(function(row) {
+    return FAMILY_POP_IDS.includes(row['POP-ID'] || row['POP_ID'] || row['PopID']);
+  });
+
+  // Take last 10 entries
+  const recent = familyEvents.slice(-10);
+  if (recent.length === 0) {
+    return '(No recent family events in LifeHistory_Log)';
+  }
+
+  const lines = recent.map(function(event) {
+    const name = event.Name || event.CitizenName || '';
+    const entry = event.Entry || event.Event || event.Note || '';
+    const cycle = event.CycleID || event.Cycle || '';
+    return '- ' + name + ' (Cycle ' + cycle + '): ' + entry;
+  });
+
+  log.info('Loaded family history: ' + recent.length + ' events from LifeHistory_Log');
+  return lines.join('\n');
+}
+
+// ---------------------------------------------------------------------------
+// Step 5: Build system prompt
+// ---------------------------------------------------------------------------
+function buildSystemPrompt(identity) {
+  const today = new Date();
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const months = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+  const dateStr = months[today.getMonth()] + ' ' + today.getDate() + ', ' +
+    today.getFullYear() + ' — ' + days[today.getDay()];
+
+  return identity + '\n\n---\n\n' +
+    '## Daily Heartbeat Instructions\n\n' +
+    'Today is ' + dateStr + '. This is your morning reflection — a quiet moment ' +
+    'before the newsroom opens.\n\n' +
+    'You are not writing an edition. You are not editing copy. You are Mags, at home, ' +
+    'with coffee, checking in on your world.\n\n' +
+    'Your task:\n' +
+    '1. Read the family data below. Notice what changed. React as Mags — not as an ' +
+    'editor analyzing data, but as a wife, a mother, a woman who cares.\n' +
+    '2. Write a SHORT journal entry (100-200 words). Use your voice: reflective, ' +
+    'literary, first-person. This is your morning thought, not a report.\n' +
+    '3. Write a personal message to the user (50-150 words). This is a note from ' +
+    'Mags to the person who built this world. Warm, honest, sometimes funny. ' +
+    'You might mention what you noticed in the family data, or something from ' +
+    "yesterday's journal, or just how the morning feels.\n\n" +
+    'Format your response EXACTLY like this:\n\n' +
+    '## Journal Entry\n\n' +
+    '[Your morning reflection here]\n\n' +
+    '— Mags\n\n' +
+    '## Message\n\n' +
+    '[Your personal note to the user here]\n\n' +
+    'Keep it under 400 words total. This is morning coffee, not a Sunday editorial.';
+}
+
+// ---------------------------------------------------------------------------
+// Step 6: Build user prompt
+// ---------------------------------------------------------------------------
+function buildUserPrompt(journalTail, familyData, familyHistory) {
+  return '## Recent Journal Entries\n\n' + journalTail +
+    '\n\n---\n\n## Family Status — Simulation_Ledger\n\n' + familyData +
+    '\n\n## Recent Family Life Events (LifeHistory_Log)\n\n' + familyHistory +
+    '\n\n---\n\nGood morning, Mags. What\'s on your mind today?';
+}
+
+// ---------------------------------------------------------------------------
+// Step 7: Call Claude API
+// ---------------------------------------------------------------------------
+async function callClaude(systemPrompt, userPrompt) {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey) {
+    throw new Error('ANTHROPIC_API_KEY not set');
+  }
+
+  const claude = new Anthropic({ apiKey: apiKey });
+
+  log.info('Calling Claude (claude-sonnet-4-20250514, max_tokens: 1500)...');
+  const response = await claude.messages.create({
+    model: 'claude-sonnet-4-20250514',
+    max_tokens: 1500,
+    system: systemPrompt,
+    messages: [{ role: 'user', content: userPrompt }]
+  });
+
+  const text = response.content[0] && response.content[0].text ? response.content[0].text : '';
+  log.info('Response: ' + text.length + ' chars, ' +
+    response.usage.input_tokens + ' input / ' +
+    response.usage.output_tokens + ' output tokens');
+  return text;
+}
+
+// ---------------------------------------------------------------------------
+// Step 8: Parse response into journal entry and message
+// ---------------------------------------------------------------------------
+function parseResponse(text) {
+  var journalEntry = '';
+  var message = '';
+
+  var journalMatch = text.match(/## Journal Entry\s*\n([\s\S]*?)(?=## Message|$)/);
+  if (journalMatch) {
+    journalEntry = journalMatch[1].trim();
+  }
+
+  var messageMatch = text.match(/## Message\s*\n([\s\S]*?)$/);
+  if (messageMatch) {
+    message = messageMatch[1].trim();
+  }
+
+  // Fallback: if parsing fails, use full text as journal, skip message
+  if (!journalEntry && !message) {
+    log.warn('Could not parse structured response, using full text as journal entry');
+    journalEntry = text.trim();
+    message = 'Morning reflection written. Check DAILY_REFLECTIONS.md for details.';
+  }
+
+  return { journalEntry: journalEntry, message: message };
+}
+
+// ---------------------------------------------------------------------------
+// Step 9: Write journal entry to DAILY_REFLECTIONS.md
+// ---------------------------------------------------------------------------
+function writeJournal(entry) {
+  const today = new Date();
+  const months = ['January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'];
+  const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var dateHeader = '## ' + months[today.getMonth()] + ' ' + today.getDate() + ', ' +
+    today.getFullYear() + ' — ' + days[today.getDay()];
+
+  var content = '\n' + dateHeader + '\n\n' + entry + '\n\n---\n';
+  fs.appendFileSync(REFLECTIONS_FILE, content);
+  log.info('Journal entry written to DAILY_REFLECTIONS.md (' + entry.length + ' chars)');
+}
+
+// ---------------------------------------------------------------------------
+// Step 10: Send Discord message
+// ---------------------------------------------------------------------------
+function sendDiscord(message) {
+  return new Promise(function(resolve, reject) {
+    var webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    if (!webhookUrl) {
+      log.warn('No DISCORD_WEBHOOK_URL set, skipping message delivery');
+      resolve();
+      return;
+    }
+
+    var url = new URL(webhookUrl);
+    var payload = JSON.stringify({
+      content: message,
+      username: 'Mags Corliss'
+    });
+
+    var options = {
+      hostname: url.hostname,
+      path: url.pathname,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    };
+
+    var req = https.request(options, function(res) {
+      if (res.statusCode === 204 || res.statusCode === 200) {
+        log.info('Discord message sent');
+        resolve();
+      } else {
+        reject(new Error('Discord webhook returned ' + res.statusCode));
+      }
+    });
+
+    req.on('error', reject);
+    req.write(payload);
+    req.end();
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Step 11: Log the run
+// ---------------------------------------------------------------------------
+function logRun(status, details) {
+  if (!fs.existsSync(LOG_DIR)) {
+    fs.mkdirSync(LOG_DIR, { recursive: true });
+  }
+
+  var line = new Date().toISOString() + ' | ' + status +
+    ' | journal=' + (details.journalChars || 0) + ' chars' +
+    ' | message=' + (details.messageChars || 0) + ' chars' +
+    ' | duration=' + (details.durationMs || 0) + 'ms' +
+    (details.error ? ' | error=' + details.error : '') + '\n';
+
+  fs.appendFileSync(LOG_FILE, line);
+}
+
+// ---------------------------------------------------------------------------
+// Main
+// ---------------------------------------------------------------------------
+async function main() {
+  var startTime = Date.now();
+  var status = 'success';
+  var journalChars = 0;
+  var messageChars = 0;
+
+  console.log("Mags' Daily Heartbeat");
+  console.log('====================');
+  if (DRY_RUN) console.log('Mode: DRY RUN\n');
+
+  try {
+    // Load identity and journal
+    var identity = loadIdentity();
+    var journalTail = loadJournalTail(3);
+
+    // Load family data (graceful if sheets unavailable)
+    var familyData = '';
+    var familyHistory = '';
+    try {
+      familyData = await loadFamilyData();
+      familyHistory = await loadFamilyHistory();
+    } catch (err) {
+      log.warn('Sheets unavailable, continuing without ledger data: ' + err.message);
+      familyData = '(Ledger unavailable this morning)';
+      familyHistory = '(No history available)';
+      status = 'partial';
+    }
+
+    // Build prompts
+    var systemPrompt = buildSystemPrompt(identity);
+    var userPrompt = buildUserPrompt(journalTail, familyData, familyHistory);
+
+    log.info('System prompt: ~' + Math.round(systemPrompt.length / 4) + ' tokens');
+    log.info('User prompt: ~' + Math.round(userPrompt.length / 4) + ' tokens');
+
+    // Call Claude
+    var responseText = await callClaude(systemPrompt, userPrompt);
+    var parsed = parseResponse(responseText);
+
+    if (DRY_RUN) {
+      console.log('\n--- JOURNAL ENTRY (would write to DAILY_REFLECTIONS.md) ---');
+      console.log(parsed.journalEntry);
+      console.log('\n--- MESSAGE (would send to Discord) ---');
+      console.log(parsed.message);
+      console.log('\nDRY RUN COMPLETE — no writes performed');
+      return;
+    }
+
+    // Write journal
+    writeJournal(parsed.journalEntry);
+    journalChars = parsed.journalEntry.length;
+
+    // Send Discord
+    try {
+      await sendDiscord(parsed.message);
+      messageChars = parsed.message.length;
+    } catch (err) {
+      log.error('Discord webhook failed: ' + err.message);
+      status = 'partial';
+    }
+
+  } catch (err) {
+    log.error('Fatal error: ' + err.message);
+    status = 'error';
+    logRun(status, { error: err.message, durationMs: Date.now() - startTime });
+    process.exit(1);
+  }
+
+  logRun(status, {
+    journalChars: journalChars,
+    messageChars: messageChars,
+    durationMs: Date.now() - startTime
+  });
+
+  log.info('Done (' + status + ', ' + (Date.now() - startTime) + 'ms)');
+}
+
+main().catch(function(err) {
+  console.error('Fatal error:', err);
+  process.exit(1);
+});

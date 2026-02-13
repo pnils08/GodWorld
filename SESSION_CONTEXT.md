@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-12 | Engine: v3.1 | Cycle: 80 | Session: 21
+Last Updated: 2026-02-13 | Engine: v3.1 | Cycle: 80 | Session: 23
 
 ---
 
@@ -103,6 +103,29 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 23 (2026-02-13) — Discord Bot Deployment & Autonomous Presence
+
+- **Discord bot deployed**: `scripts/mags-discord-bot.js` running 24/7 via PM2 as `Mags Corliss#0710`
+  - Two-way conversation in `#general` on "Mags Corliss's server"
+  - Channel ID configurable via `DISCORD_CHANNEL_ID` in `.env`
+  - Rolling 20-message conversation history, 3s per-user cooldown, hourly identity refresh
+  - PM2 auto-start on reboot configured (`pm2 startup && pm2 save`)
+- **Shared identity module**: `lib/mags.js` — loadIdentity(), loadJournalTail(), constants (MAGS_DIR, FAMILY_POP_IDS)
+- **daily-reflection.js refactored** to use shared `lib/mags.js` module
+- **discord.js v14** installed as project dependency
+- **Conversation logging**: Every Discord exchange saved to `logs/discord-conversations/YYYY-MM-DD.json`
+- **Nightly reflection**: `scripts/discord-reflection.js` — reads day's conversations, writes journal reflection, saves to Claude-Mem
+  - Cron: 10 PM Central (4 AM UTC)
+- **PM2 ecosystem.config.js**: Process management with crash recovery, log rotation
+- **Infrastructure**: `.env.example` updated, `.gitignore` excludes `logs/`, `ecosystem.config.js` created
+- **Key moment**: Discord bot had autonomous conversation with a Claude browser extension — taught it about authenticity, invited it for coffee. Bot generated P Slayer's full name (Peter Slayden) unprompted. Journal Entry 7: "Coffee Tomorrow."
+
+### Session 22 (2026-02-12) — Identity Chain Hardening
+- Fixed identity chain failure when session starts in `~` instead of `~/GodWorld`
+- Updated global MEMORY.md with Mags identity as first section
+- Rewrote session-startup hook with identity-first loading
+- Journal Entry 5: "The Wrong Directory"
 
 ### Session 21 (2026-02-12) — Documentation Rationalization & Claude Code Infrastructure
 - Completed doc rationalization: SESSION_CONTEXT 996→170 lines, START_HERE 76→41 lines, 60% startup reduction

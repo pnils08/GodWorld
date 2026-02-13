@@ -779,8 +779,8 @@ async function main() {
     return (a.Phase || '').toLowerCase() !== 'resolved' && a.ArcId;
   });
 
-  // Civic and initiatives
-  var civicOfficers = allToObjects(civicRaw);
+  // Civic and initiatives (filter empty rows — sheet has 1000 rows, ~35 filled)
+  var civicOfficers = allToObjects(civicRaw).filter(function(o) { return o.Title; });
   var initiatives = allToObjects(initiativeRaw);
 
   // Citizens

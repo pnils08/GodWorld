@@ -805,14 +805,25 @@ function appendPopulationHistory_(ctx) {
   if (!sheet) return;
   var data = sheet.getDataRange().getValues();
   if (data.length < 2) return;
-  var currentRow = data[1]; // row 2 (0-indexed)
+  var currentRow = data[1]; // row 2 (0-indexed) — this is the canonical live row
   // Set timestamp and cycle on the history copy
   var header = data[0];
   var row = currentRow.slice(); // copy
   var tsIdx = header.indexOf('timestamp');
   var cyIdx = header.indexOf('cycle');
   if (tsIdx >= 0) row[tsIdx] = new Date();
-  if (cyIdx >= 0) row[cyIdx] = ctx.summary.cycleId || ctx.summary.absoluteCycle || '';
+  var cycleId = ctx.summary.cycleId || ctx.summary.absoluteCycle || '';
+  if (cyIdx >= 0) row[cyIdx] = cycleId;
+
+  // Dedup: skip if last history row already has this cycle
+  if (data.length > 2 && cyIdx >= 0) {
+    var lastHistoryCycle = data[data.length - 1][cyIdx];
+    if (lastHistoryCycle == cycleId) {
+      Logger.log('appendPopulationHistory_: Cycle ' + cycleId + ' already recorded, skipping');
+      return;
+    }
+  }
+
   sheet.appendRow(row);
 }
 
@@ -1077,6 +1088,13 @@ function updateNamedCitizens_(ctx) {
  * ============================================================================
  */
 function writeDigest_(ctx) {
+  // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (isDryRun) {
+    Logger.log('writeDigest_: Skipping (dry-run mode)');
+    return;
+  }
+
   var sheet = ctx.ss.getSheetByName('Riley_Digest');
   if (!sheet) return;
 

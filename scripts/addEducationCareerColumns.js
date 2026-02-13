@@ -272,12 +272,8 @@ async function main() {
     dryRun
   );
 
-  // Populate neighborhood school quality data
-  if (!dryRun && results.Neighborhood_Demographics.added > 0) {
-    results.SchoolDataPopulated = await populateNeighborhoodSchoolData(dryRun);
-  } else if (dryRun) {
-    results.SchoolDataPopulated = await populateNeighborhoodSchoolData(dryRun);
-  }
+  // Populate neighborhood school quality data (always run — columns may exist but be empty)
+  results.SchoolDataPopulated = await populateNeighborhoodSchoolData(dryRun);
 
   // Summary
   console.log(`\n${'='.repeat(70)}`);

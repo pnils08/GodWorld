@@ -12,8 +12,12 @@
  * - Outreach and charitable work
  * - Crisis response and community healing
  *
- * @version 1.2
+ * @version 1.3
  * @tier 6.2
+ *
+ * v1.3 Changes:
+ * - FIX: Cap faith events at 5 per cycle (was generating ~15-18 from 16 orgs)
+ * - Priority sort: crisis > holy_day > interfaith > community_program > regular
  *
  * v1.2 Changes:
  * - JOURNALISM AI: Added signalChain tracking to getFaithStorySignals_()
@@ -29,7 +33,7 @@
 // CONSTANTS
 // ============================================================================
 
-var FAITH_ENGINE_VERSION = '1.2';
+var FAITH_ENGINE_VERSION = '1.3';
 
 // Event generation probabilities
 var FAITH_EVENT_PROBS = {
@@ -139,6 +143,17 @@ function runFaithEventsEngine_(ctx) {
 
   for (var f = 0; f < interfaithEvents.length; f++) {
     events.push(interfaithEvents[f]);
+  }
+
+  // Cap faith events to prevent bloat (16 orgs × 5 types = too many)
+  // Priority: crisis_response > holy_day > interfaith > community_program > rest
+  var MAX_FAITH_EVENTS = 5;
+  if (events.length > MAX_FAITH_EVENTS) {
+    var priority = { crisis_response: 4, holy_day: 3, interfaith_dialogue: 2, community_program: 1 };
+    events.sort(function(a, b) {
+      return (priority[b.eventType] || 0) - (priority[a.eventType] || 0);
+    });
+    events = events.slice(0, MAX_FAITH_EVENTS);
   }
 
   // Record events to ledger

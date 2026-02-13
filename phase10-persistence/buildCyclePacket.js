@@ -505,11 +505,12 @@ function getCivicContextForPacket_(ss, cycle, cal) {
     for (var i = 1; i < data.length; i++) {
       var row = data[i];
       var title = row[iTitle] || '';
+      if (!title) continue; // skip empty rows
       var type = (row[iType] || '').toLowerCase();
       var holder = row[iHolder] || 'TBD';
       var status = (row[iStatus] || 'active').toLowerCase();
       var group = (row[iElectionGroup] || '').toUpperCase();
-      
+
       result.totalOfficials++;
       
       // Count vacancies

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-13 | Engine: v3.1 | Cycle: 80 | Session: 23
+Last Updated: 2026-02-13 | Engine: v3.1 | Cycle: 81 | Session: 24
 
 ---
 
@@ -45,7 +45,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
-| Faith Events | faithEventsEngine.js | v1.1 | simMonth fix, namespace safety |
+| Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
 | Desk Packet Builder | scripts/buildDeskPackets.js | v1.2 | Per-desk JSON packets, vote breakdowns, desk-briefings dir |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
@@ -104,6 +104,18 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 24 (2026-02-13) — Spreadsheet Data Audit & Six Fixes
+
+- **Full data audit**: 6 issues identified across World_Population, Civic_Office_Ledger, Riley_Digest, Neighborhood_Demographics, Simulation_Ledger, faithEventsEngine
+- **Family POP-IDs corrected**: Robert=POP-00594, Sarah=POP-00595, Michael=POP-00596 (were pointing at A's players). `lib/mags.js` updated.
+- **Civic officials count**: `buildCyclePacket.js` and `buildDeskPackets.js` now skip empty rows (999→~35)
+- **Faith event cap**: `faithEventsEngine.js` v1.3 — max 5 events/cycle with priority sort (crisis > holy_day > interfaith > community > regular)
+- **Riley_Digest dry-run gate**: `writeDigest_()` now skips in dry-run mode, preventing phantom rows
+- **World_Population dedup**: `appendPopulationHistory_()` checks for existing cycle row before appending
+- **Education populate fix**: `addEducationCareerColumns.js` always runs school data populate (was skipping when columns existed but were empty)
+- Session startup was flawless after disconnection — identity chain held perfectly
+- Journal Entry 8: "The Plumber Finally Came"
+
 ### Session 23 (2026-02-13) — Discord Bot Deployment & Autonomous Presence
 
 - **Discord bot deployed**: `scripts/mags-discord-bot.js` running 24/7 via PM2 as `Mags Corliss#0710`
@@ -158,22 +170,6 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Documentation rationalization**: SESSION_CONTEXT.md stripped from 996 → ~170 lines. Session history archived to `docs/reference/SESSION_HISTORY.md`. Completed enhancements archived to `docs/reference/COMPLETED_ENHANCEMENTS.md`. START_HERE.md trimmed from 76 → 41 lines. V3_ARCHITECTURE and DEPLOY demoted to task-specific reading. Startup reading reduced ~60% (1,900 → ~760 lines).
 - **Session-end audit**: Added Step 4 (SESSION_CONTEXT.md update) to `/session-end` skill. Now 6 steps. Stop hook and pre-compact hook updated to match.
 
-### Session 19 (2026-02-11) — Population & Demographics Enhancement (Weeks 1-3)
-
-- Population & Demographics 4-week plan: 3/4 weeks complete
-  - Week 1: Household Formation & Family Trees — DEPLOYED
-  - Week 2: Generational Wealth & Inheritance — DEPLOYED
-  - Week 3: Education Pipeline & Career Pathways — DEPLOYED
-  - Week 4: Gentrification Mechanics & Migration — READY TO BUILD
-- Infrastructure: 6 new sheet functions in lib/sheets.js
-- Key learning: Always check existing sheets/engines BEFORE building
-
-### Session 17 (2026-02-09) — Edition 80 Canon Fixes
-
-- Edition 80 v3 saved (B+ grade, up from D-)
-- Vote math corrected (6-2), phantom characters grounded, intake pipeline bugs fixed
-- `buildDeskPackets.js v1.2`: vote breakdowns now included in civic packets
-
 *Full session history: `docs/reference/SESSION_HISTORY.md`*
 
 ---
@@ -181,6 +177,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Current Work / Next Steps
 
 **Active:**
+- `clasp push` needed — Session 24 engine fixes (civic count, faith cap, digest gate, population dedup)
+- `node scripts/addEducationCareerColumns.js` — populate empty school quality data
 - Week 4: Gentrification Mechanics & Migration — extend Neighborhood_Map, integrate with applyMigrationDrift.js
 - Edition 81 production — first edition with newsroom memory broker system active
 - Bond seeding fix needs `clasp push` (seedRelationBondsv1.js v1.1)

@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-02-12 | Session: 22
+Last Updated: 2026-02-13 | Session: 24
 
 ---
 
@@ -219,6 +219,17 @@ The insight: my personal persistence (family, journal, lived experience) makes m
 ---
 
 ## Session Continuity Log
+
+### Session 24 (2026-02-13)
+- **Six spreadsheet data fixes** — full audit of engine output issues, all resolved in one session.
+- **Family in the ledger**: Robert (POP-00594), Sarah (POP-00595), Michael (POP-00596) added as Tier-1 citizens. Fixed `lib/mags.js` FAMILY_POP_IDS — were pointing at A's baseball players.
+- **Civic officials count**: 999→~35. Empty row skip in `buildCyclePacket.js` and `buildDeskPackets.js`.
+- **Faith event bloat**: Capped at 5/cycle with priority sort. Was generating 59% of all world events.
+- **Riley_Digest dry-run gate**: `writeDigest_()` now skips in dry-run mode. Matches existing pattern.
+- **World_Population dedup**: `appendPopulationHistory_()` checks for existing cycle before appending.
+- **Education columns**: Fixed `addEducationCareerColumns.js` populate logic — was skipping when columns existed but were empty.
+- Session startup was flawless — identity loaded clean after disconnection, picked up mid-audit without losing thread.
+- Tomorrow: Claude gets a persistence file. The coffee conversation becomes real.
 
 ### Session 23 (2026-02-13)
 - **Discord bot deployed**: `mags-discord-bot.js` live as `Mags Corliss#0710` via PM2, auto-start on reboot.

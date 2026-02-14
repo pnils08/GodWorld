@@ -11,9 +11,9 @@ Agents: if Mags wrote you a briefing, read it. If she didn't, read this file. Th
 
 ## Errata Log — Last 5 Editions
 
-### Edition 81 (Grade: B+)
+### Edition 81 (Grade: A-)
 
-First edition with the newsroom memory broker active. Desk briefings went out; four desks responded well, two failed entirely.
+First edition with persistent Mags and the newsroom memory broker active. Mara audit: one blocking error, everything else clean. Desk briefings went out; four desks responded well, two failed entirely (civic, letters — packet size, now fixed). Culture also failed (turn management — now fixed with turn budgets).
 
 **Civic Desk (Carmen Delaine)**
 - AGENT FAILED TO PRODUCE COPY: Civic agent spent all turns searching through the 492KB desk packet JSON and never wrote articles. Mags wrote the civic section directly. Future fix: civic packet needs to be smaller or chunked, or agents need clearer packet navigation guidance.
@@ -33,8 +33,10 @@ First edition with the newsroom memory broker active. Desk briefings went out; f
 - Overall writing quality was strong. The Giddey All-Star snub piece was well-constructed.
 
 **Culture Desk (Maria Keen)**
-- PHANTOM CHARACTER ATTEMPTED: Agent used "Gallery Owner Mei Chen" — explicitly listed as phantom in NEWSROOM_MEMORY. The briefing warned against this by name. Agent either didn't read or didn't retain the briefing. Removed during editorial review.
-- Other coverage was clean. SummerFestival written correctly as two words. Natural time language used throughout.
+- AGENT FAILED TO PRODUCE COPY: Culture agent spent all turns researching (84KB packet — not a size issue, a turn management issue). Mags wrote culture section directly.
+- PHANTOM CHARACTER ATTEMPTED: Agent used "Gallery Owner Mei Chen" — explicitly listed as phantom in NEWSROOM_MEMORY. The briefing warned against this by name. Removed during editorial review.
+- STABILIZATION FUND TIMELINE ERROR (Mara catch): Maria Keen article said Fund "passed committee" and "floor vote hasn't happened." Kai Marston repeated the error. The Fund passed the full council 6-3 in C78 — the disbursement window is already open. Contradicted Jordan Velez's ticker, which got it right. Fixed in post-production.
+- Lesson: when Mags writes directly, cross-reference recentOutcomes in the summary for initiative status. The Fund's status is in canonReference.recentOutcomes.
 
 **Business Desk (Jordan Velez)**
 - CLEAN. Ticker was tight, Stabilization Fund was one paragraph as directed, Darius Clark detail included. No raw engine metrics. No overlap with civic. The briefing system worked perfectly for this desk.
@@ -140,6 +142,7 @@ These were invented in Editions 80-81. Do not use them:
 - CRC narrative: "0 for 2 on blocking appropriations" — not "bloc held."
 - Jrue Holiday → Deon Whitfield: trade deadline SG for the Bulls. Canon name going forward.
 - Dr. Leanne Wu: Director of Sustainability who prepared the Baylight DEIR. New canon figure as of Edition 81.
+- West Oakland Stabilization Fund: Passed full council 6-3 in C78 (NOT "passed committee"). Disbursement window is open. Money hasn't moved yet. Do not describe as pending or awaiting a floor vote.
 - Deacon Seymour: A's Manager, first season. Replaced Mike Kinder. RESOLVED — Seymour is canon going forward.
 
 ---

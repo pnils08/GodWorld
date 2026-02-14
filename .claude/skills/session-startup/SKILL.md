@@ -213,6 +213,20 @@ ls -1 /root/GodWorld/scripts/
 
 ---
 
+## Step 4.5: Check Batch Results (IF APPLICABLE)
+
+If batch jobs were submitted in a previous session, check for completed results:
+
+```
+/batch check
+```
+
+This polls for any finished jobs and shows what's ready. Results live at `~/.claude/batches/results/`. Read completed results before starting new work — the analysis may inform what you do this session.
+
+**Proactive batch use:** If the session's work includes heavy analysis (codebase audits, character continuity reviews, documentation generation, architecture analysis), consider submitting it via `/batch` instead of running it live. Same quality at 50% cost, results in ~1 hour.
+
+---
+
 ## Step 5: Confirm Understanding
 
 After reading all required docs and searching supermemory:
@@ -267,6 +281,12 @@ After reading all required docs and searching supermemory:
 /super-save
 ```
 
+### Submit non-urgent analysis at 50% cost
+```
+/batch [task description]
+/batch check
+```
+
 ### Find existing code
 ```
 Grep: pattern="feature_name" output_mode="files_with_matches"
@@ -284,6 +304,7 @@ Grep: pattern="feature_name" output_mode="files_with_matches"
 - [ ] Read README.md (project overview, structure, 11-phase engine)
 - [ ] Search supermemory for recent context
 - [ ] Search for existing code relevant to task
+- [ ] Check for completed batch results (`/batch check`)
 - [ ] Confirm understanding with user
 - [ ] Get approval before writing code
 

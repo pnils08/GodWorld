@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-13 | Engine: v3.1 | Cycle: 81 | Session: 24
+Last Updated: 2026-02-14 | Engine: v3.1 | Cycle: 81 | Session: 26
 
 ---
 
@@ -68,6 +68,21 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 
 ---
 
+## Key Tools & Infrastructure
+
+| Tool | Purpose | Usage |
+|------|---------|-------|
+| **Batch API** | 50% cost for non-urgent work (~1hr turnaround) | `/batch [task]`, `/batch check` |
+| **Claude-Mem** | Automatic observation capture (SQLite, port 37777) | `search()`, `timeline()`, `get_observations()` |
+| **Supermemory** | Curated project knowledge (cloud) | `/super-save`, `/super-search` |
+| **Discord Bot** | 24/7 presence as Mags Corliss#0710 (PM2) | Always-on, conversation logging |
+| **Daily Heartbeat** | Morning reflection at 8 AM Central | `scripts/daily-reflection.js` (cron) |
+| **Nightly Reflection** | Discord conversation journal at 10 PM Central | `scripts/discord-reflection.js` (cron) |
+
+**Batch API guidelines:** Use for codebase audits, documentation generation, architecture analysis, character continuity reviews, post-edition analysis. NOT for interactive editing, desk agent writing, or real-time debugging. Results at `~/.claude/batches/results/`. Check at session start for completed work from previous sessions.
+
+---
+
 ## Key Documentation
 
 | Doc | Purpose |
@@ -103,6 +118,23 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 26 (2026-02-14) — Architecture Review & Edition 81 Planning
+
+- **Short phone session** — Valentine's Day. Reviewed external AI agent architecture, planned Edition 81 production.
+- **Evaluated Paweł Huryn's n8n + Claude personal agent system** — compared to GodWorld's architecture. We're ahead on persistence, editorial memory, and autonomous scheduling. Their sandbox execution model (Docker-isolated agents with tool installation) is worth filing for future.
+- **Deferred two features**: (1) Session state objects — current 5-layer persistence already handles multi-step state. (2) Sandboxed executor agents — real architecture work, not a quick add.
+- **Edition 81 ready for next session** — needs `clasp push` of Session 24 fixes, then cycle run, then full pipeline with newsroom memory broker.
+- No engine changes, no code changes.
+
+### Session 25 (2026-02-13) — Batch Toolkit & Process Integration
+
+- **Claude Batch Toolkit installed** — MCP server at `~/.claude/mcp/claude_batch_mcp.py`, skill `/batch`, statusline merged into settings.json. 50% cost for non-urgent work (~1hr turnaround).
+- **Batch integrated into workflow** — session-startup hook (check results), stop hook (remind to submit), session-startup skill (Step 4.5), session-end skill (Step 5.5), SESSION_CONTEXT.md (Key Tools table).
+- **Key Tools & Infrastructure table added** to SESSION_CONTEXT.md — documents batch API, Claude-Mem, Supermemory, Discord bot, heartbeat, nightly reflection in one reference.
+- **Confirmed autonomous systems status**: Discord bot (18h uptime, 72 exchanges), heartbeat (running), nightly reflection (first autonomous run expected tonight at 10 PM Central).
+- **Research session**: Reviewed Cloudflare Markdown for Agents (architecture validation), batch toolkit repo (full code review before install), Anthropic/CodePath partnership.
+- No engine changes, no edition work.
 
 ### Session 24 (2026-02-13) — Spreadsheet Data Audit & Six Fixes
 
@@ -184,7 +216,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - Bond seeding fix needs `clasp push` (seedRelationBondsv1.js v1.1)
 
 **Pending Decisions:**
-- Canon resolution: Deacon Seymour vs Mike Kinder (A's Manager)
+- ~~Canon resolution: Deacon Seymour vs Mike Kinder~~ RESOLVED — Seymour is canon, replaced Kinder
 - Wire Jax Caldera into /write-edition pipeline
 - Activate Supermemory Pro after subscription sort (2/16)
 - Clean Carmen's roster entry (engine language in samplePhrases)

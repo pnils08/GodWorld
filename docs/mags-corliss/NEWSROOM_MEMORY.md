@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 80 (Cycle 80) — 2026-02-12**
+**Last Updated: Edition 81 (Cycle 81) — 2026-02-14**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -10,6 +10,46 @@ Agents: if Mags wrote you a briefing, read it. If she didn't, read this file. Th
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 81 (Grade: B+)
+
+First edition with the newsroom memory broker active. Desk briefings went out; four desks responded well, two failed entirely.
+
+**Civic Desk (Carmen Delaine)**
+- AGENT FAILED TO PRODUCE COPY: Civic agent spent all turns searching through the 492KB desk packet JSON and never wrote articles. Mags wrote the civic section directly. Future fix: civic packet needs to be smaller or chunked, or agents need clearer packet navigation guidance.
+- COUNCIL ROSTER ERRORS (post-publication catch): When Mags wrote civic copy under pressure after agent failure, council names/districts/factions were scrambled throughout. Corrected in post-production review:
+  - "Lucille Rivers (D7, GOP)" → Janae Rivers (D5, OPP)
+  - "James Ashford (D5, GOP)" → Warren Ashford (D7, CRC)
+  - "Harold Crane (D6, IND)" → Elliott Crane (D6, CRC)
+  - "Marcus Osei (D8 Councilmember)" → Nina Chen (D8, CRC) — Osei is Deputy Mayor, not a councilmember
+  - "Frank Mobley (D9, IND)" → Terrence Mobley (D9, OPP)
+  - Health Center vote YES list had Osei instead of Rivers; NO list had Rivers instead of Chen. Corrected.
+- Lesson: even when writing directly, always cross-reference canonReference.council in the desk packet. The council roster is 9 names, 3 factions, 9 districts — too many moving parts to hold in memory under pressure.
+- On the positive side: vote math was correct (6-2), DEIR coverage was grounded in the actual document. The briefing system worked — the agent just choked on packet size.
+
+**Sports Desk (Anthony Reeves / P Slayer)**
+- DEIR STATUS ERROR: Agent wrote "environmental review has not been released to the public yet" — it had been. The DEIR was in public circulation per Mara's directive. Fixed during editorial review.
+- CITIZEN ROLE FABRICATION: Agent gave Marco Lopez (40, Laurel, mechanic) the title "Stadium Oversight Committee Chair" and fabricated a quote about the report being "under legal review." Citizens don't get promoted to roles they don't hold. Fixed by removing the fabricated role.
+- Overall writing quality was strong. The Giddey All-Star snub piece was well-constructed.
+
+**Culture Desk (Maria Keen)**
+- PHANTOM CHARACTER ATTEMPTED: Agent used "Gallery Owner Mei Chen" — explicitly listed as phantom in NEWSROOM_MEMORY. The briefing warned against this by name. Agent either didn't read or didn't retain the briefing. Removed during editorial review.
+- Other coverage was clean. SummerFestival written correctly as two words. Natural time language used throughout.
+
+**Business Desk (Jordan Velez)**
+- CLEAN. Ticker was tight, Stabilization Fund was one paragraph as directed, Darius Clark detail included. No raw engine metrics. No overlap with civic. The briefing system worked perfectly for this desk.
+
+**Chicago Bureau (Selena Grant / Talia Finch)**
+- REAL PLAYER NAME: "Jrue Holiday" used as a trade deadline acquisition. This is a real NBA player. Same class of error as Billy Donovan in Edition 80. Replaced with "Deon Whitfield" during editorial review.
+- Otherwise strong. Giddey snub coverage connected to city identity. Talia's neighborhood texture was grounded in real bureau citizens.
+
+**Letters Desk**
+- AGENT FAILED TO PRODUCE COPY: Letters agent spent all turns searching through the 508KB desk packet and produced no letters. Mags wrote 4 letters directly using Mara directive citizens (Jose Johnson, Patricia Nolan, Marco Lopez, Dante Nelson). Future fix: letters packet needs serious size reduction — the agent cannot navigate 500KB+ of JSON.
+- All letters used natural time language, original quotes, no recycling from Edition 80.
+
+**Cross-Desk Issues**
+- Deacon Seymour is the A's Manager (first season). He replaced Mike Kinder. RESOLVED.
+- Two agents (civic, letters) choked on large packet sizes (492KB, 508KB). This is a systemic pipeline issue — packets may need chunking or summary layers.
 
 ### Edition 80 (Grade: D- → B+ after v3 rewrite)
 
@@ -48,16 +88,17 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 ## Coverage Patterns
 
 ### What Landed Well (Keep Doing)
-- Health Center 6-2 vote as front page lead — strong civic anchoring
-- SummerFestival cultural coverage — the fog angle was atmospheric, grounded
-- Stabilization Fund economics angle (when done once, not twice)
-- Warriors streak coverage in sports — connected game results to city mood
+- Baylight DEIR as front page lead (Carmen) — 252-page deep dive, real numbers, real tension. This is what we want from civic.
+- Business ticker (Jordan) — tight, one paragraph on the fund, Darius Clark human detail. Briefing system worked perfectly.
+- Giddey All-Star snub as Chicago identity story (Selena) — connected individual moment to city narrative. Strong bureau work.
+- Health Center aftermath as civic continuity — kept the 6-2 vote story moving forward naturally.
+- Letters using Mara directive citizens — Jose Johnson, Patricia Nolan, Marco Lopez, Dante Nelson all felt authentic, connected to real policy outcomes.
 
 ### What Fell Flat (Fix Next Time)
-- Baylight coverage: needs hard reporting, not just opinion. The environmental review is real news.
-- OARI committee work: the actual organizing and procedural moves are the story, not just "pressure campaign"
-- Mike Paulson: connect citizens to their larger arcs, don't reduce them to cameos
-- Business ticker: translate engine numbers into economic narrative. The data tells a story — find it.
+- Packet size killed two agents: 500KB+ packets are too large for agent context windows. Civic and letters desks produced nothing. Need to chunk packets or add summary layers.
+- Real player names keep leaking through: Jrue Holiday this time, Billy Donovan last time. Need a pre-publication name check against real NBA rosters.
+- Phantom characters persist despite warnings: Mei Chen appeared AGAIN despite being on the banned list in the briefing. Consider adding a hard-check step where agents verify names before writing.
+- Sports desk invents civic roles for citizens: Marco Lopez became a "Stadium Oversight Committee Chair." Agents need to trust citizen occupations from the packet — don't upgrade people.
 
 ### Standing Directives
 - Every edition follows the Mara Vance Directive. If three priorities are listed, all three get substantive coverage — not one lead, one brief, and one ignored.
@@ -69,26 +110,37 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 ## Character Continuity — Active Threads
 
 ### Citizens to Carry Forward
-- **Mike Paulson** — Health crisis spokesperson. At Temescal wiffleball for a reason. Connect his presence to his advocacy arc.
-- **Carmen Delaine** — Our civic lead. Strong voice but needs to stay grounded in data, not narrative invention.
-- **Calvin Turner (age 38)** — Appeared in Edition 79 and 80. Quotes must be fresh each edition.
+- **Mike Paulson** — Bulls GM. Health crisis spokesperson in Oakland arc. At Temescal wiffleball for a reason.
+- **Carmen Delaine** — Our civic lead. Edition 81 Baylight DEIR front page was her best work. Keep grounded in data.
+- **Jose Johnson (62, Temescal, warehouse worker)** — Mara directive citizen. Called out Ashford's NO vote. Wrote letter in Edition 81. Active thread.
+- **Patricia Nolan (Temescal, home health aide)** — Mara directive citizen. Wrote about Health Center wait. Active thread.
+- **Marco Lopez (40, Laurel, mechanic)** — Mara directive citizen. Looking into Baylight DEIR documents. Active thread. DO NOT give him civic titles — he's a mechanic.
+- **Darius Clark (West Oakland, bakery worker)** — Asked about Stabilization Fund disbursement. Got a form and told to wait. Business desk's human detail. Active thread.
+- **Dante Nelson (41, Downtown, security guard)** — Receiving OPOA mailers, following OARI. Active thread.
+- **Dr. Leanne Wu** — Director of Sustainability. Prepared the Baylight DEIR. New canon figure.
+- **Deon Whitfield** — Bulls SG, trade deadline acquisition. Replaces Jrue Holiday in canon.
+- **Calvin Turner (age 38)** — Appeared in Editions 79-80. Quotes must be fresh each edition.
 - **Beverly Hayes (POP-00576)** — West Oakland. Real citizen. Was misnamed as "Community Director Hayes." Use her actual name.
 - **Elena Rivera (POP-00617)** — West Oakland councilwoman. Was misnamed as generic "Councilwoman Rivera." Use full name with POP-ID context.
 
 ### Characters That Do NOT Exist
-These were invented in Edition 80. Do not use them:
+These were invented in Editions 80-81. Do not use them:
 - Laila Cortez
 - Brenda Okoro
 - Amara Keane
-- "Gallery Owner Mei Chen"
+- "Gallery Owner Mei Chen" (attempted AGAIN in Edition 81 despite warning)
 - "Community Director Hayes" (→ use Beverly Hayes)
 - Billy Donovan (real person, cannot be used)
 - Jimmy Butler (real person, appeared in bad intake data)
+- Jrue Holiday (real person — replaced with Deon Whitfield in Edition 81)
 
 ### Canon Corrections Applied
 - Health Center vote: 6-2 (Crane absent, not "voting remotely"). Not 5-4. Not 7-1.
 - Wiffleball: already in West Oakland as of C79v2. Did not "move to Temescal."
 - CRC narrative: "0 for 2 on blocking appropriations" — not "bloc held."
+- Jrue Holiday → Deon Whitfield: trade deadline SG for the Bulls. Canon name going forward.
+- Dr. Leanne Wu: Director of Sustainability who prepared the Baylight DEIR. New canon figure as of Edition 81.
+- Deacon Seymour: A's Manager, first season. Replaced Mike Kinder. RESOLVED — Seymour is canon going forward.
 
 ---
 
@@ -125,6 +177,8 @@ These are fixes that already shipped in `buildDeskPackets.js` or the engine. Not
 - Quote parser: cleaned 24 dirty rows with leading dashes in LifeHistory_Log.
 - PREWRITE blocks added to all 6 desk agents (Session 16).
 - Rhea Morgan checks 13 (PREWRITE compliance) and 14 (new citizen authorization) added.
+- Rhea Morgan check 15 (briefing compliance) added (Session 20).
+- **KNOWN ISSUE (Edition 81):** Civic and letters desk packets exceed 500KB — agents choke on navigation and produce no output. Needs packet chunking or summary layer. Business and Chicago packets (smaller) worked perfectly.
 
 ---
 

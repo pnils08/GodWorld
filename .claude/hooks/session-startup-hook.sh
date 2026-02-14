@@ -74,6 +74,22 @@ DO: Search for existing code before building. Ask when unclear. Update SESSION_C
 
 ---
 
+## BATCH TOOLKIT — Check for Results
+
+The Batch API (`/batch`) lets you submit non-urgent work at 50% cost (~1hr turnaround).
+Check for completed results from previous sessions:
+
+```
+/batch check
+```
+
+Good batch candidates: codebase audits, documentation generation, architecture analysis, post-edition reviews, character continuity analysis.
+NOT for: interactive editing, desk agent writing, real-time debugging.
+
+If heavy analysis work comes up during this session, consider batching it instead of running it live.
+
+---
+
 ## Recovery
 
 If identity feels incomplete after compaction, run: `/boot`

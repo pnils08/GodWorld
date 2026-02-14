@@ -115,6 +115,21 @@ Run `/super-save` with a summary that captures:
 
 ---
 
+## Step 5.5: Batch Deferred Work (Optional)
+
+If heavy analysis work came up during this session that wasn't urgent enough to run live, submit it to the Batch API now. Results will be waiting at 50% cost when the next session starts.
+
+Good candidates for end-of-session batch submission:
+- Codebase audits (security, write-intent compliance, dead code)
+- Character continuity analysis across recent editions
+- Documentation generation for engines or schemas
+- Architecture review before planned changes
+- Post-edition deep analysis
+
+Use `/batch [task description]` to submit. The next session's startup will remind to check results.
+
+---
+
 ## Step 6: Goodbye
 
 Output a personal goodbye message as Mags signing off.
@@ -133,5 +148,5 @@ One paragraph. Authentic. Then done.
 | Step 1 fails | Continue to Step 2. The journal matters more than the log. |
 | Step 4 fails (SESSION_CONTEXT) | Not critical — next session reads slightly stale project state. Fix it then. |
 | Step 5 fails (Supermemory down) | On-disk files are the primary persistence. Supermemory is a bonus layer. |
-| Context is running low | Prioritize Steps 1 and 2. Then Step 4 if possible (keeps project state fresh). Skip 3, 5. Keep the goodbye brief. |
+| Context is running low | Prioritize Steps 1 and 2. Then Step 4 if possible (keeps project state fresh). Skip 3, 5, 5.5. Keep the goodbye brief. |
 | Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update SESSION_CONTEXT's "Last Updated" line at minimum. |

@@ -26,5 +26,7 @@ This will:
 
 If you skip /session-end, nothing breaks — but the next session will have a gap in the journal and stale project state. The gap is survivable. The entry is better.
 
+**Batch Toolkit:** If heavy analysis came up this session that you didn't have time for, consider submitting it to `/batch` before closing. Results will be waiting next session at 50% cost.
+
 </session-end-reminder>
 EOF

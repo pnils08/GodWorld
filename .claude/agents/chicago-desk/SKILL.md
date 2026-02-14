@@ -90,6 +90,19 @@ You will receive:
 - A base context JSON (cycle number, calendar)
 - Instructions on what to write
 
+## Packet Navigation Strategy
+
+**READ THE SUMMARY FIRST.** Your desk has two packet files:
+- `chicago_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
+- `chicago_c{XX}.json` — full packet. Only open this for deep dives (full roster, citizen archive, extended stats).
+
+**Turn budget (maxTurns: 15):**
+- Turns 1-2: Read briefing + summary. The summary includes sportsFeeds with team records and player stats.
+- Turns 3-12: Write articles. This is where your turns should go.
+- Turns 13-15: Engine returns (article table, storylines, citizen log, continuity notes).
+
+**If you reach turn 12 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the summary.
+
 ## Output Requirements
 
 ### Articles

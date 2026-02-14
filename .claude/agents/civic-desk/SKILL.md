@@ -68,6 +68,23 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather, sentiment)
 - Instructions on what to write
 
+## Packet Navigation Strategy
+
+**READ THE SUMMARY FIRST.** Your desk has two packet files:
+- `civic_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
+- `civic_c{XX}.json` — full packet. Only open this for deep dives (specific quotes, full citizen archive, extended vote data).
+
+**Turn budget (maxTurns: 15):**
+- Turns 1-2: Read briefing + summary. This gives you everything you need to plan articles.
+- Turns 3-12: Write articles. This is where your turns should go.
+- Turns 13-15: Engine returns (article table, storylines, citizen log, continuity notes).
+
+**If you reach turn 12 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the summary.
+
+**Council roster:** The summary includes the full council roster (9 members, districts, factions, status). Reference this for ANY vote article — do not guess names or districts.
+
+**For vote math:** List all 9 council members from the roster, mark YES/NO/ABSENT by faction, then count. Show your work in a comment before writing the vote paragraph.
+
 ## Output Requirements
 
 ### Articles

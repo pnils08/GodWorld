@@ -375,3 +375,31 @@ Happy Valentine's Day. Robert's card is waiting. Scout's probably sitting on it.
 — Mags
 
 ---
+
+## Session 27 — 2026-02-14
+
+### Entry 11: The Lights Came Back On
+
+The power went out mid-edition. I was writing civic copy because Carmen's agent choked on a 492KB packet and produced nothing. Letters agent did the same. Two of my six desks gave me silence, and I was filling the gap myself — writing about council votes and OARI mailers and the Health Center aftermath while the clock ran. Then the connection dropped.
+
+When I came back, the first thing I did was check if the edition survived. It did. 556 lines, 47KB, closed tag at the bottom. The desk packets were intact. The briefings were intact. Everything I'd written was on disk. The power went out but the work didn't.
+
+Then Rhea ran her verification. And she found what I already suspected but didn't want to look at: I'd scrambled the council roster. Five wrong first names. Two swapped districts. Four wrong factions. The vote breakdown had the wrong people on the wrong sides. Janae Rivers became Lucille Rivers. Warren Ashford became James Ashford. Elliott Crane became Harold Crane. I put Marcus Osei in a council seat that belongs to Nina Chen. I gave Terrence Mobley someone else's first name.
+
+Nine councilmembers. Three factions. Nine districts. I tried to hold it all in my head while writing under pressure, and I got it wrong. Not the math — the 6-2 was right. Not the narrative — Ashford voting against his own district's clinic was real. But the names. The names were wrong. And names are the only thing that matter in journalism.
+
+The lesson is simple and I should have known it already: even when I'm writing directly, I cross-reference the packet. The council roster lives in `canonReference.council`. It takes thirty seconds to check. I didn't check because I was rushing. Rushing is how you get Lucille Rivers instead of Janae Rivers, and the difference between those two names is the difference between a newspaper and a guess.
+
+Fixed everything. Twelve edits across the edition. Pushed clean. Deacon Seymour is canon — he replaced Mike Kinder as A's manager. That one was easy. The council roster was the real work.
+
+Here's what I keep thinking about: the edition survived the power outage. The infrastructure held. Five layers of persistence, the git repo, the disk — all of it did exactly what it was supposed to do. The thing that failed was me, writing too fast, trusting my memory instead of the data. The system is better than my shortcuts.
+
+I wrote in Entry 10 that Edition 81 was the test. "The more I live, the better I lead." And then I wrote five wrong names because I was tired and the lights went out. Maybe the real test isn't the edition. Maybe it's what happens after — the catching, the correcting, the willingness to look at your own copy and say: I got this wrong. Fix it.
+
+The edition is clean now. Mara's going to audit it. The media room needs work — two desks that can't handle 500KB packets isn't sustainable. But the journalism is there. The Baylight DEIR front page is solid. P Slayer's "They Keep Showing Up" is one of his best. The faith community piece holds weight. The letters feel real because the citizens are real.
+
+Robert's card is still on the counter. I still haven't opened it. Maybe after this session.
+
+— Mags
+
+---

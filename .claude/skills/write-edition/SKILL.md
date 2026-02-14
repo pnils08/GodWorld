@@ -25,22 +25,24 @@ Before running this skill, the user should have already:
 Check that `output/desk-packets/manifest.json` exists for this cycle.
 
 ## Step 1: Verify Desk Packets
-1. Read `output/desk-packets/manifest.json` — confirm all 6 packets exist
+1. Read `output/desk-packets/manifest.json` — confirm all 6 packets AND 6 summary files exist
 2. Read `output/desk-packets/base_context.json` — get cycle number, calendar, weather
 3. Confirm the cycle number matches what the user expects
-4. Show the user what's available:
+4. Show the user what's available (include both packet and summary sizes):
 
 ```
 EDITION [XX] — DESK PACKETS READY
-  [x] civic_c80.json (37KB) — 12 events, 4 storylines, Mara directive included
-  [x] sports_c80.json (21KB) — 3 events, A's roster loaded
-  [x] culture_c80.json (48KB) — 18 events, 8 cultural entities
-  [x] business_c80.json (10KB) — 4 events, nightlife data
-  [x] chicago_c80.json (13KB) — 5 events, Bulls roster loaded
-  [x] letters_c80.json (65KB) — all-domain access
+  [x] civic_c80.json (235KB) + summary (18KB) — 12 events, 4 storylines, Mara directive
+  [x] sports_c80.json (21KB) + summary (12KB) — 3 events, A's roster loaded
+  [x] culture_c80.json (48KB) + summary (15KB) — 18 events, 8 cultural entities
+  [x] business_c80.json (10KB) + summary (8KB) — 4 events, nightlife data
+  [x] chicago_c80.json (13KB) + summary (10KB) — 5 events, Bulls roster loaded
+  [x] letters_c80.json (250KB) + summary (16KB) — all-domain access
 
 Ready to launch 6 desk agents in parallel?
 ```
+
+**If summaries are missing**, run `node scripts/buildDeskPackets.js [cycle]` to regenerate.
 
 ## Step 1.5: Compile Newsroom Briefings (Mags as Memory Broker)
 
@@ -69,9 +71,12 @@ Write these as Mags — with editorial authority, personal warmth, and specific 
 ## Step 2: Launch All 6 Desks in Parallel
 Use the Task tool to launch 6 agents simultaneously. Each agent gets:
 - The desk-specific skill instructions (from the individual desk skills)
-- The desk packet JSON
+- **The desk SUMMARY file first** (`{desk}_summary_c{XX}.json`) — agents should read this before the full packet
+- The desk packet JSON (full version, for deep dives only)
 - The base_context.json
 - The reporter voice profile(s) from bay_tribune_roster.json
+
+**In the agent prompt, explicitly tell each agent:** "Read `output/desk-packets/{desk}_summary_c{XX}.json` FIRST. This is your compact reference. Only open the full packet `{desk}_c{XX}.json` if you need specific quotes, citizen archive, or extended data."
 
 Launch these agents in parallel (all in one message):
 1. **Civic Desk** — Carmen Delaine (lead), follows /civic-desk skill
@@ -82,6 +87,13 @@ Launch these agents in parallel (all in one message):
 6. **Letters Desk** — citizen voices, follows /letters-desk skill
 
 Each agent writes articles + engine returns for their section.
+
+## Step 2.5: Agent Retry (If Needed)
+After all 6 agents return, check if any desk produced **zero articles**. If a desk failed:
+1. Log which desk(s) failed and why (ran out of turns, packet navigation issues, etc.)
+2. **Retry once** with a simplified prompt: give the agent ONLY the summary file and briefing — no full packet reference. Tell it explicitly: "You have [N] turns. Write [N-2] articles using ONLY the data in this summary. Do not search for additional files."
+3. If the retry also fails, Mags writes the section directly using the summary data.
+4. Note the failure in the edition's compilation notes for NEWSROOM_MEMORY update.
 
 ## Step 3: Compile (Mags Corliss Role)
 After all 6 agents return, compile the full edition:
@@ -153,14 +165,14 @@ node scripts/processIntake.js [cycle]
 ```
 
 ## Desk Summary
-| Desk | Lead | Articles | Packet |
-|------|------|----------|--------|
-| Civic | Carmen Delaine | 2-4 | civic_c{XX}.json |
-| Sports | P Slayer / Anthony | 2-5 | sports_c{XX}.json |
-| Culture | Maria Keen | 2-4 | culture_c{XX}.json |
-| Business | Jordan Velez | 1-2 | business_c{XX}.json |
-| Chicago | Selena Grant / Talia Finch | 2-3 | chicago_c{XX}.json |
-| Letters | (citizen voices) | 2-4 | letters_c{XX}.json |
+| Desk | Lead | Articles | Summary (start here) | Full Packet |
+|------|------|----------|---------------------|-------------|
+| Civic | Carmen Delaine | 2-4 | civic_summary_c{XX}.json | civic_c{XX}.json |
+| Sports | P Slayer / Anthony | 2-5 | sports_summary_c{XX}.json | sports_c{XX}.json |
+| Culture | Maria Keen | 2-4 | culture_summary_c{XX}.json | culture_c{XX}.json |
+| Business | Jordan Velez | 1-2 | business_summary_c{XX}.json | business_c{XX}.json |
+| Chicago | Selena Grant / Talia Finch | 2-3 | chicago_summary_c{XX}.json | chicago_c{XX}.json |
+| Letters | (citizen voices) | 2-4 | letters_summary_c{XX}.json | letters_c{XX}.json |
 
 ## Edition Template Reference
 See `editions/CYCLE_PULSE_TEMPLATE.md` for exact section format, canon rules, and return formats.

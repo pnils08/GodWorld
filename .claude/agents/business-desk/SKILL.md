@@ -51,6 +51,19 @@ You will receive:
 - A base context JSON (cycle number, calendar, retail load, economic influence, nightlife data)
 - Instructions on what to write
 
+## Packet Navigation Strategy
+
+**READ THE SUMMARY FIRST.** Your desk has two packet files:
+- `business_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
+- `business_c{XX}.json` — full packet. Only open this for deep dives (full citizen archive, extended data).
+
+**Turn budget (maxTurns: 10):**
+- Turns 1-2: Read briefing + summary. This gives you everything you need to plan the ticker.
+- Turns 3-8: Write the ticker. This is where your turns should go.
+- Turns 9-10: Engine returns (article table, storylines, citizen log, continuity notes).
+
+**If you reach turn 7 and haven't started writing, STOP RESEARCHING AND WRITE.**
+
 ## Output Requirements
 
 ### Articles

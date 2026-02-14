@@ -73,6 +73,19 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather)
 - Instructions on what to write
 
+## Packet Navigation Strategy
+
+**READ THE SUMMARY FIRST.** Your desk has two packet files:
+- `letters_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
+- `letters_c{XX}.json` — full packet (500KB+). **You do NOT need to read this.** The summary includes top events from ALL domains, active storylines, interview candidates, and the Mara directive. That is enough to write letters.
+
+**Turn budget (maxTurns: 10):**
+- Turns 1-2: Read briefing + summary. Pick 3-4 diverse topics across civic, sports, culture.
+- Turns 3-8: Write letters. This is where your turns should go.
+- Turns 9-10: Engine returns (citizen usage log, continuity notes).
+
+**If you reach turn 7 and haven't started writing, STOP RESEARCHING AND WRITE.** Four short letters from the summary is better than zero letters from reading a 500KB file.
+
 ## Output Requirements
 
 ### Letters

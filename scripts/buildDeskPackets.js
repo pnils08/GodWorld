@@ -458,6 +458,7 @@ function buildCouncil(civicOfficers) {
 
 function buildPendingVotes(initiatives) {
   return initiatives.filter(function(i) {
+    if (!i.Name || i.Name.trim() === '') return false;
     var status = (i.Status || '').toLowerCase();
     return status !== 'proposed' && status !== 'passed' && status !== 'failed' && status !== 'archived';
   }).map(function(i) {
@@ -480,6 +481,73 @@ function buildPendingVotes(initiatives) {
       notes: i.Notes || ''
     };
   });
+}
+
+// ─── DESK SUMMARY GENERATOR ─────────────────────────────
+// Produces a compact 10-25KB summary for agent consumption.
+// Agents read this first instead of the full 200-500KB packet.
+function generateDeskSummary(packet, deskId, cycle) {
+  var cr = packet.canonReference || {};
+
+  // Sort events by priority score, take top 5
+  var topEvents = (packet.events || []).slice().sort(function(a, b) {
+    return (b.priorityScore || 0) - (a.priorityScore || 0);
+  }).slice(0, 5).map(function(e) {
+    return {
+      domain: e.domain, severity: e.severity, neighborhood: e.neighborhood,
+      description: e.description, type: e.type, priorityScore: e.priorityScore
+    };
+  });
+
+  // Sort seeds by priority score, take top 5
+  var topSeeds = (packet.seeds || []).slice().sort(function(a, b) {
+    return (b.priorityScore || 0) - (a.priorityScore || 0);
+  }).slice(0, 5).map(function(s) {
+    return { seedType: s.seedType, domain: s.domain, neighborhood: s.neighborhood, text: s.text };
+  });
+
+  // Sort arcs by tension, take top 3
+  var topArcs = (packet.arcs || []).slice().sort(function(a, b) {
+    return parseFloat(b.tension || 0) - parseFloat(a.tension || 0);
+  }).slice(0, 3).map(function(a) {
+    return { arcId: a.arcId, domain: a.domain, phase: a.phase, tension: a.tension, summary: a.summary };
+  });
+
+  // Active storylines only, cap at 10
+  var activeStorylines = (packet.storylines || []).filter(function(s) {
+    return s.status === 'active' || s.type === 'new' || s.type === 'developing';
+  }).slice(0, 10);
+
+  // Interview candidates, top 10
+  var topCandidates = (packet.interviewCandidates || []).slice(0, 10);
+
+  var summary = {
+    meta: {
+      desk: deskId,
+      cycle: cycle,
+      fullPacketFile: deskId + '_c' + cycle + '.json',
+      generatedAt: new Date().toISOString()
+    },
+    councilRoster: cr.council || [],
+    pendingVotes: (cr.pendingVotes || []).filter(function(v) {
+      return v.name && v.name.trim() !== '';
+    }).map(function(v) {
+      return { name: v.name, status: v.status, budget: v.budget, voteCycle: v.voteCycle,
+               projection: v.projection, swingVoter: v.swingVoter, swingVoter2: v.swingVoter2 };
+    }),
+    statusAlerts: cr.statusAlerts || [],
+    recentOutcomes: cr.recentOutcomes || [],
+    topEvents: topEvents,
+    topSeeds: topSeeds,
+    topArcs: topArcs,
+    activeStorylines: activeStorylines,
+    reporters: cr.reporters || packet.reporters || [],
+    interviewCandidates: topCandidates,
+    maraDirective: packet.maraDirective || '',
+    sportsFeeds: packet.sportsFeeds || []
+  };
+
+  return summary;
 }
 
 function buildStatusAlerts(civicOfficers) {
@@ -1097,10 +1165,22 @@ async function main() {
     var jsonStr = JSON.stringify(packet, null, 2);
     fs.writeFileSync(filepath, jsonStr);
 
+    // Generate desk summary (compact version for agent consumption)
+    var summary = generateDeskSummary(packet, deskId, CYCLE);
+    var summaryFilename = deskId + '_summary_c' + CYCLE + '.json';
+    var summaryFilepath = path.join(OUTPUT_DIR, summaryFilename);
+    var summaryStr = JSON.stringify(summary, null, 2);
+    fs.writeFileSync(summaryFilepath, summaryStr);
+
+    var packetSizeKB = Math.round(jsonStr.length / 1024 * 10) / 10;
+    var summarySizeKB = Math.round(summaryStr.length / 1024 * 10) / 10;
+
     var stats = {
       desk: deskId,
       file: filename,
-      sizeKB: Math.round(jsonStr.length / 1024 * 10) / 10,
+      sizeKB: packetSizeKB,
+      summaryFile: summaryFilename,
+      summarySizeKB: summarySizeKB,
       reporters: reporterNames,
       events: deskEvents.length,
       seeds: deskSeeds.length,
@@ -1118,7 +1198,11 @@ async function main() {
     var historyCount = Object.keys(reporterHistory).reduce(function(sum, k) { return sum + reporterHistory[k].length; }, 0);
     console.log('  Reporter history:', Object.keys(reporterHistory).length, 'reporters,', historyCount, 'articles');
     console.log('  Citizen archive:', Object.keys(citizenArchive).length, 'citizens matched (of', deskCitizenNames.length, 'extracted)');
-    console.log('  Size:', stats.sizeKB, 'KB →', filepath);
+    console.log('  Full packet:', packetSizeKB, 'KB →', filepath);
+    console.log('  Summary:', summarySizeKB, 'KB →', summaryFilepath);
+    if (packetSizeKB > 200) {
+      console.log('  WARNING: Packet exceeds 200KB — agents should use summary file.');
+    }
   }
 
   // Write base context

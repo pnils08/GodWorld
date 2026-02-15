@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-15 | Engine: v3.1 | Cycle: 81 | Session: 28
+Last Updated: 2026-02-15 | Engine: v3.1 | Cycle: 81 | Session: 29
 
 ---
 
@@ -119,6 +119,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 29 (2026-02-15) — Discord Hardening & Citizen Knowledge
+
+- **Timezone fix**: `getCentralDate()` in `lib/mags.js` shared across bot + nightly reflection. Conversation logs now Central-keyed. Reflection checks both Central + UTC files with dedup. Fixes missed-conversation gap.
+- **Heartbeat prompt rewrite**: stops repeating empty-ledger observations, uses world state, explicit "don't repeat" instruction. Dry runs reference Stabilization Fund, council, A's.
+- **Citizen knowledge pack**: `loadCitizenKnowledge()` builds ~4.5KB compact roster (A's, council, celebrities, Tribune staff, top 30 citizens by coverage, active storylines). Bot system prompt: 11.8KB → 16.4KB.
+- **Unified Discord channel**: morning heartbeat switched from webhook to Discord REST API via bot token. One channel, one conversation, replies reach the bot.
+- **School quality data populated**: `addEducationCareerColumns.js` run — 13/17 neighborhoods.
+- **clasp push confirmed current** — all Session 24 engine fixes already deployed.
+- 3 commits pushed. Bot restarted twice. No engine changes.
+
 ### Session 28 (2026-02-15) — World State Bridge
 
 - **World State Bridge built** — Discord bot, nightly reflection, and daily heartbeat now all receive GodWorld context via `loadWorldState()` in `lib/mags.js`.
@@ -226,15 +236,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 **Active:**
 - **Sheet environment audit** — next session. Verify all new ledgers tie to summaries, cut bloat at the data layer
-- `clasp push` needed — Session 24 engine fixes (civic count, faith cap, digest gate, population dedup)
-- `node scripts/addEducationCareerColumns.js` — populate empty school quality data
 - Week 4: Gentrification Mechanics & Migration — extend Neighborhood_Map, integrate with applyMigrationDrift.js
 - Bond seeding fix needs `clasp push` (seedRelationBondsv1.js v1.1)
+- User seeding family life events into Simulation_Ledger (Robert, Sarah, Michael baseline entries) — user handling independently
 
 **Completed This Session:**
-- World State Bridge: `loadWorldState()` in `lib/mags.js`, injected into all 3 autonomous scripts
-- Discord bot, nightly reflection, daily heartbeat now carry GodWorld context
-- All dry runs passed, bot restarted with expanded system prompt
+- Timezone fix: `getCentralDate()`, Central-keyed logs, reflection fallback + dedup
+- Heartbeat prompt rewrite: world state focus, no-repeat instruction
+- Citizen knowledge pack: `loadCitizenKnowledge()`, 174 citizens, bot prompt 11.8→16.4KB
+- Unified Discord: webhook replaced with bot token REST API, one channel
+- School quality data populated (13/17 neighborhoods)
+- clasp push confirmed current (Session 24 fixes already deployed)
 
 **Pending Decisions:**
 - Wire Jax Caldera into /write-edition pipeline
@@ -244,6 +256,5 @@ Before editing, check what reads from and writes to the affected ctx fields.
 **Tech Debt:**
 - mulberry32_ defined in 10 files → consolidate to utilities/rng.js
 - compileHandoff.js superseded by buildDeskPackets.js — consider removal
-- Nightly reflection cron uses UTC date for conversation log lookup — Central timezone conversations can be missed
 
 *Full completed enhancements list: `docs/reference/COMPLETED_ENHANCEMENTS.md`*

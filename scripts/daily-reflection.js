@@ -123,13 +123,19 @@ function buildSystemPrompt(identity) {
     'You are not writing an edition. You are not editing copy. You are Mags, at home, ' +
     'with coffee, checking in on your world.\n\n' +
     'Your task:\n' +
-    '1. Read the family data below. Notice what changed. React as Mags — not as an ' +
+    '1. Read the world state and family data below. React as Mags — not as an ' +
     'editor analyzing data, but as a wife, a mother, a woman who cares.\n' +
-    '2. Write a SHORT journal entry (100-200 words). Use your voice: reflective, ' +
+    '2. If the family ledger is empty, DO NOT dwell on it. You have a whole city ' +
+    'outside your window — the weather, the season, the A\'s, the council, whatever\'s ' +
+    'happening in Oakland. Write about your life, your morning, what you see and feel.\n' +
+    '3. IMPORTANT: Read your recent journal entries below. Do NOT repeat the same ' +
+    'observations. If you wrote about empty ledgers yesterday, write about something ' +
+    'else today. Every morning is different. Find what\'s new.\n' +
+    '4. Write a SHORT journal entry (100-200 words). Use your voice: reflective, ' +
     'literary, first-person. This is your morning thought, not a report.\n' +
-    '3. Write a personal message to the user (50-150 words). This is a note from ' +
+    '5. Write a personal message to the user (50-150 words). This is a note from ' +
     'Mags to the person who built this world. Warm, honest, sometimes funny. ' +
-    'You might mention what you noticed in the family data, or something from ' +
+    'You might mention the world state, family, something from ' +
     "yesterday's journal, or just how the morning feels.\n\n" +
     'Format your response EXACTLY like this:\n\n' +
     '## Journal Entry\n\n' +
@@ -143,11 +149,12 @@ function buildSystemPrompt(identity) {
 // ---------------------------------------------------------------------------
 // Step 6: Build user prompt
 // ---------------------------------------------------------------------------
-function buildUserPrompt(journalTail, familyData, familyHistory) {
-  return '## Recent Journal Entries\n\n' + journalTail +
+function buildUserPrompt(journalTail, familyData, familyHistory, worldState) {
+  return '## Your World Right Now\n\n' + worldState +
+    '\n\n---\n\n## Recent Journal Entries (DO NOT repeat these themes)\n\n' + journalTail +
     '\n\n---\n\n## Family Status — Simulation_Ledger\n\n' + familyData +
     '\n\n## Recent Family Life Events (LifeHistory_Log)\n\n' + familyHistory +
-    '\n\n---\n\nGood morning, Mags. What\'s on your mind today?';
+    '\n\n---\n\nGood morning, Mags. The city is out there. What\'s on your mind today?';
 }
 
 // ---------------------------------------------------------------------------
@@ -310,9 +317,12 @@ async function main() {
       status = 'partial';
     }
 
+    // Load world state
+    var worldState = mags.loadWorldState();
+
     // Build prompts
     var systemPrompt = buildSystemPrompt(identity);
-    var userPrompt = buildUserPrompt(journalTail, familyData, familyHistory);
+    var userPrompt = buildUserPrompt(journalTail, familyData, familyHistory, worldState);
 
     log.info('System prompt: ~' + Math.round(systemPrompt.length / 4) + ' tokens');
     log.info('User prompt: ~' + Math.round(userPrompt.length / 4) + ' tokens');

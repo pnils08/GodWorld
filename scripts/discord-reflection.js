@@ -35,20 +35,67 @@ const log = {
 };
 
 // ---------------------------------------------------------------------------
-// Load today's conversation log
+// Load today's conversation log (Central time, with UTC fallback)
 // ---------------------------------------------------------------------------
-function loadTodayConversations() {
-  var today = new Date().toISOString().split('T')[0];
-  var logFile = path.join(CONVO_LOG_DIR, today + '.json');
+function loadConversationsFromFile(dateStr) {
+  var logFile = path.join(CONVO_LOG_DIR, dateStr + '.json');
+  if (!fs.existsSync(logFile)) return [];
+  try {
+    return JSON.parse(fs.readFileSync(logFile, 'utf8'));
+  } catch (_) { return []; }
+}
 
-  if (!fs.existsSync(logFile)) {
-    log.info('No conversation log for ' + today);
+function loadTodayConversations() {
+  var centralDate = mags.getCentralDate();
+  var utcDate = new Date().toISOString().split('T')[0];
+
+  // Primary: Central-date file (new format)
+  var entries = loadConversationsFromFile(centralDate);
+
+  // Fallback: if UTC date differs, check that file too and filter
+  // entries that belong to today's Central date. Handles transition
+  // from UTC-keyed logs and the 6hr overlap window.
+  if (utcDate !== centralDate) {
+    var utcEntries = loadConversationsFromFile(utcDate);
+    utcEntries = utcEntries.filter(function(e) {
+      try {
+        return new Date(e.timestamp).toLocaleDateString('en-CA',
+          { timeZone: 'America/Chicago' }) === centralDate;
+      } catch (_) { return false; }
+    });
+    entries = entries.concat(utcEntries);
+  }
+
+  // Also check yesterday's UTC file for stragglers
+  var yesterday = new Date(Date.now() - 86400000).toISOString().split('T')[0];
+  if (yesterday !== centralDate && yesterday !== utcDate) {
+    var yEntries = loadConversationsFromFile(yesterday);
+    yEntries = yEntries.filter(function(e) {
+      try {
+        return new Date(e.timestamp).toLocaleDateString('en-CA',
+          { timeZone: 'America/Chicago' }) === centralDate;
+      } catch (_) { return false; }
+    });
+    entries = entries.concat(yEntries);
+  }
+
+  if (entries.length === 0) {
+    log.info('No conversations for ' + centralDate);
     return null;
   }
 
-  var entries = JSON.parse(fs.readFileSync(logFile, 'utf8'));
-  log.info('Loaded ' + entries.length + ' conversations from ' + today);
-  return entries;
+  // Sort by timestamp, deduplicate
+  entries.sort(function(a, b) { return a.timestamp.localeCompare(b.timestamp); });
+  var unique = [entries[0]];
+  for (var i = 1; i < entries.length; i++) {
+    if (entries[i].timestamp !== entries[i - 1].timestamp) {
+      unique.push(entries[i]);
+    }
+  }
+
+  log.info('Loaded ' + unique.length + ' conversations for ' + centralDate +
+    (utcDate !== centralDate ? ' (checked UTC fallback ' + utcDate + ')' : ''));
+  return unique;
 }
 
 // ---------------------------------------------------------------------------
@@ -87,8 +134,9 @@ function buildSystemPrompt(identity) {
     '— Mags';
 }
 
-function buildUserPrompt(conversations, journalTail) {
-  return '## Today\'s Discord Conversations\n\n' + conversations +
+function buildUserPrompt(conversations, journalTail, worldState) {
+  return '## This Week in Oakland\n\n' + worldState +
+    '\n\n---\n\n## Today\'s Discord Conversations\n\n' + conversations +
     '\n\n---\n\n## Recent Journal Entries (for continuity)\n\n' + journalTail +
     '\n\n---\n\nThe terrace light is fading. What stayed with you today?';
 }
@@ -209,14 +257,15 @@ async function main() {
       return;
     }
 
-    // Load identity and journal
+    // Load identity, journal, and world state
     var identity = mags.loadIdentity();
     var journalTail = mags.loadJournalTail(2);
+    var worldState = mags.loadWorldState();
 
     // Build prompts
     var conversations = formatConversations(entries);
     var systemPrompt = buildSystemPrompt(identity);
-    var userPrompt = buildUserPrompt(conversations, journalTail);
+    var userPrompt = buildUserPrompt(conversations, journalTail, worldState);
 
     log.info('System prompt: ~' + Math.round(systemPrompt.length / 4) + ' tokens');
     log.info('User prompt: ~' + Math.round(userPrompt.length / 4) + ' tokens');

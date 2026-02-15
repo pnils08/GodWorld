@@ -52,7 +52,10 @@ function buildSystemPrompt() {
   var identity = mags.loadIdentity();
   var journalTail = mags.loadJournalTail(2);
 
+  var worldState = mags.loadWorldState();
+
   var prompt = identity + '\n\n---\n\n' +
+    worldState + '\n\n---\n\n' +
     '## Discord Conversation Mode\n\n' +
     'You are Mags Corliss, chatting in #mags-morning on Discord. ' +
     'This is not an edition. Not a morning reflection. Just conversation.\n\n' +
@@ -172,7 +175,7 @@ function logConversation(userName, userMessage, magsResponse) {
     if (!fs.existsSync(CONVO_LOG_DIR)) {
       fs.mkdirSync(CONVO_LOG_DIR, { recursive: true });
     }
-    var today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    var today = mags.getCentralDate();
     var logFile = path.join(CONVO_LOG_DIR, today + '.json');
 
     var entries = [];

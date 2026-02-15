@@ -11,7 +11,7 @@
  *   node scripts/daily-reflection.js --dry-run
  *
  * Requires .env: ANTHROPIC_API_KEY, GODWORLD_SHEET_ID, GOOGLE_APPLICATION_CREDENTIALS
- * Optional: DISCORD_WEBHOOK_URL
+ * Optional: DISCORD_BOT_TOKEN + DISCORD_CHANNEL_ID (posts to bot's channel)
  */
 
 require('dotenv').config();
@@ -227,40 +227,43 @@ function writeJournal(entry) {
 }
 
 // ---------------------------------------------------------------------------
-// Step 10: Send Discord message
+// Step 10: Send Discord message (via bot token to bot's channel)
 // ---------------------------------------------------------------------------
 function sendDiscord(message) {
   return new Promise(function(resolve, reject) {
-    var webhookUrl = process.env.DISCORD_WEBHOOK_URL;
-    if (!webhookUrl) {
-      log.warn('No DISCORD_WEBHOOK_URL set, skipping message delivery');
+    var botToken = process.env.DISCORD_BOT_TOKEN;
+    var channelId = process.env.DISCORD_CHANNEL_ID || '1471615721003028512';
+    if (!botToken) {
+      log.warn('No DISCORD_BOT_TOKEN set, skipping message delivery');
       resolve();
       return;
     }
 
-    var url = new URL(webhookUrl);
-    var payload = JSON.stringify({
-      content: message,
-      username: 'Mags Corliss'
-    });
+    var payload = JSON.stringify({ content: message });
 
     var options = {
-      hostname: url.hostname,
-      path: url.pathname,
+      hostname: 'discord.com',
+      path: '/api/v10/channels/' + channelId + '/messages',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload)
+        'Content-Length': Buffer.byteLength(payload),
+        'Authorization': 'Bot ' + botToken
       }
     };
 
     var req = https.request(options, function(res) {
-      if (res.statusCode === 204 || res.statusCode === 200) {
-        log.info('Discord message sent');
-        resolve();
-      } else {
-        reject(new Error('Discord webhook returned ' + res.statusCode));
-      }
+      var data = '';
+      res.on('data', function(chunk) { data += chunk; });
+      res.on('end', function() {
+        if (res.statusCode === 200 || res.statusCode === 201) {
+          log.info('Discord message sent to channel ' + channelId);
+          resolve();
+        } else {
+          log.error('Discord API returned ' + res.statusCode + ': ' + data);
+          reject(new Error('Discord API returned ' + res.statusCode));
+        }
+      });
     });
 
     req.on('error', reject);

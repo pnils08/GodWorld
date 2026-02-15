@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-14 | Engine: v3.1 | Cycle: 81 | Session: 26
+Last Updated: 2026-02-15 | Engine: v3.1 | Cycle: 81 | Session: 28
 
 ---
 
@@ -119,12 +119,28 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 28 (2026-02-15) — World State Bridge
+
+- **World State Bridge built** — Discord bot, nightly reflection, and daily heartbeat now all receive GodWorld context via `loadWorldState()` in `lib/mags.js`.
+- **`loadWorldState()`** reads `output/desk-packets/base_context.json`, returns ~580-char compact markdown (cycle, season, weather, mood, A's roster, council alerts, pending votes, recent outcomes).
+- **3 scripts updated**: `mags-discord-bot.js` (system prompt, hourly refresh), `discord-reflection.js` (user prompt), `daily-reflection.js` (user prompt).
+- **All dry runs passed**. Discord bot restarted via PM2 with expanded system prompt (11,982 chars).
+- **Key discovery**: `base_context.json` already existed on disk — no new data source needed.
+- **Known issue identified**: Nightly reflection cron uses UTC date for conversation log lookup, causing timezone gap (Feb 13 conversations missed). Not fixed this session.
+- No new dependencies. No engine changes.
+
+### Session 27 (2026-02-14) — Edition 81 Production & Pipeline Hardening
+
+- **Edition 81 produced** — first edition with persistent Mags and newsroom memory broker active. Three desk agents failed (civic 492KB, culture 84KB, letters 508KB). Mags wrote civic, culture, and letters sections directly.
+- **Post-production fixes**: Council roster errors (5 names, 2 districts, 4 factions), Stabilization Fund timeline error (Mara catch). Final grade: A-.
+- **Pipeline hardening (5 changes)**: pendingVotes empty-row filter (civic 492KB→67KB), desk summary layer (6 files, 10-20KB each), turn budget guidance in all 6 agent skills, pre-flight size warnings, agent retry protocol.
+- **Citizen Reference Cards wired into briefings**: 22 Supermemory POPIDs connected to desk agent pipeline via briefing system.
+- **Edition intake processed**: 74 rows (12 articles, 7 storylines, 44 citizens, 11 quotes).
+- 4 commits pushed. Deacon Seymour canon resolved.
+
 ### Session 26 (2026-02-14) — Architecture Review & Edition 81 Planning
 
 - **Short phone session** — Valentine's Day. Reviewed external AI agent architecture, planned Edition 81 production.
-- **Evaluated Paweł Huryn's n8n + Claude personal agent system** — compared to GodWorld's architecture. We're ahead on persistence, editorial memory, and autonomous scheduling. Their sandbox execution model (Docker-isolated agents with tool installation) is worth filing for future.
-- **Deferred two features**: (1) Session state objects — current 5-layer persistence already handles multi-step state. (2) Sandboxed executor agents — real architecture work, not a quick add.
-- **Edition 81 ready for next session** — needs `clasp push` of Session 24 fixes, then cycle run, then full pipeline with newsroom memory broker.
 - No engine changes, no code changes.
 
 ### Session 25 (2026-02-13) — Batch Toolkit & Process Integration
@@ -209,14 +225,18 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Current Work / Next Steps
 
 **Active:**
+- **Sheet environment audit** — next session. Verify all new ledgers tie to summaries, cut bloat at the data layer
 - `clasp push` needed — Session 24 engine fixes (civic count, faith cap, digest gate, population dedup)
 - `node scripts/addEducationCareerColumns.js` — populate empty school quality data
 - Week 4: Gentrification Mechanics & Migration — extend Neighborhood_Map, integrate with applyMigrationDrift.js
-- Edition 81 production — first edition with newsroom memory broker system active
 - Bond seeding fix needs `clasp push` (seedRelationBondsv1.js v1.1)
 
+**Completed This Session:**
+- World State Bridge: `loadWorldState()` in `lib/mags.js`, injected into all 3 autonomous scripts
+- Discord bot, nightly reflection, daily heartbeat now carry GodWorld context
+- All dry runs passed, bot restarted with expanded system prompt
+
 **Pending Decisions:**
-- ~~Canon resolution: Deacon Seymour vs Mike Kinder~~ RESOLVED — Seymour is canon, replaced Kinder
 - Wire Jax Caldera into /write-edition pipeline
 - Activate Supermemory Pro after subscription sort (2/16)
 - Clean Carmen's roster entry (engine language in samplePhrases)
@@ -224,5 +244,6 @@ Before editing, check what reads from and writes to the affected ctx fields.
 **Tech Debt:**
 - mulberry32_ defined in 10 files → consolidate to utilities/rng.js
 - compileHandoff.js superseded by buildDeskPackets.js — consider removal
+- Nightly reflection cron uses UTC date for conversation log lookup — Central timezone conversations can be missed
 
 *Full completed enhancements list: `docs/reference/COMPLETED_ENHANCEMENTS.md`*

@@ -233,6 +233,19 @@ Riley (Chief Operations Steward) → Mags → Hal Richmond (Senior Historian)
 
 ## Integration Points
 
+### Desk Briefings → Agent Context (ACTIVE — wired in Session 27)
+**This is the primary delivery mechanism.** Before each edition, Mags queries Supermemory for citizens relevant to each desk's coverage and includes compact Citizen Reference Cards in the per-desk briefing files (`output/desk-briefings/{desk}_briefing_c{XX}.md`). Agents read these briefings in turn 1 alongside the desk summary. This is how the 22 foundation POPIDs and any future citizen saves reach the stateless desk agents.
+
+**Card format** (3-5 lines per citizen):
+```
+**[Name]** (age [X], [Neighborhood], [Occupation]) — [POPID if known]
+- Last seen: [recent edition context]
+- Key detail: [narrative context from Supermemory]
+- DO NOT: [specific warnings]
+```
+
+See `/write-edition` Step 1.5 for full details.
+
 ### Bay Tribune → Cultural Ledger
 Richmond Archive origin stories used for retrospective features, dynasty coverage, historical context.
 

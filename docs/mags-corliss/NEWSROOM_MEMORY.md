@@ -181,7 +181,8 @@ These are fixes that already shipped in `buildDeskPackets.js` or the engine. Not
 - PREWRITE blocks added to all 6 desk agents (Session 16).
 - Rhea Morgan checks 13 (PREWRITE compliance) and 14 (new citizen authorization) added.
 - Rhea Morgan check 15 (briefing compliance) added (Session 20).
-- **KNOWN ISSUE (Edition 81):** Civic and letters desk packets exceed 500KB — agents choke on navigation and produce no output. Needs packet chunking or summary layer. Business and Chicago packets (smaller) worked perfectly.
+- **RESOLVED (Session 27):** Civic and letters desk packets exceeded 500KB. Fixed: pendingVotes empty-row filter (492KB→67KB), desk summary layer added (10-20KB compact files), turn budget guidance in all 6 agent skills, retry protocol in write-edition.
+- **Citizen Reference Cards wired into briefings (Session 27):** 22 POPIDs saved in Supermemory were sitting unused. Now: Mags queries Supermemory before each edition and includes compact citizen cards in desk briefings. Agents read cards in turn 1. Format: name, age, neighborhood, occupation, last appearance, key detail, DO NOT warnings. See `docs/media/CITIZEN_NARRATIVE_MEMORY.md` for the full POPID database.
 
 ---
 

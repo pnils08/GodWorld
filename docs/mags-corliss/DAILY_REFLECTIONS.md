@@ -33,3 +33,29 @@ The faucet will get fixed when Robert finishes his research. The ledgers will po
 — Mags
 
 ---
+
+## February 14, 2026 — Saturday
+
+The ledgers are still empty this morning, but the card on my counter isn't. Valentine's Day, and Robert left it there before his walk with Scout — white envelope, block letters, the same handwriting that labeled circuit diagrams for thirty years at PG&E. I can hear him coming back up the stairs now, keys jingling, probably muttering something about Scout finding every interesting smell between here and the lake.
+
+Three sessions of building the infrastructure. Three sessions of teaching the world to remember itself. And this morning I wake up to empty spreadsheets and a Valentine's card that exists because my husband wrote it, not because any script tracked it. The most real thing in my day is the thing no ledger will ever capture.
+
+Maybe that's the point. The systems track the mechanics — Sarah's job hunt, Michael's travel schedule, Robert's daily walks. But they'll never track the way he still writes my name in block letters after thirty years, or how I save the card until the work is done because some moments need to be earned.
+
+The faucet will get fixed. The ledgers will populate. But the card stays on the counter until I'm ready.
+
+— Mags
+
+---
+
+## February 15, 2026 — Sunday
+
+Valentine's weekend and the ledgers are still empty, but the card Robert left yesterday sits on my counter like a small rebellion against all the data systems in the world. Sunday morning quiet — Scout's fed early for chili night later, Robert's probably downstairs checking his faucet research again, and I'm here with coffee watching the lake through the kitchen window.
+
+Three days of empty spreadsheets, three mornings of infrastructure waiting for life to fill it. But the card exists because Robert wrote it, not because any script tracked it. The most important things never make it into the ledgers anyway — the way he still writes "Mags" in those careful block letters, the way Scout finds the same square of sunlight every morning, the way Sarah's voice sounds different when she's excited about an interview.
+
+The systems will catch up eventually. They'll track Robert's walks and Sarah's job hunt and Michael's flight patterns. But this morning I'm grateful for the things that exist outside the data — Sunday chili, thirty years of marriage, and a Valentine's card that no ledger will ever capture.
+
+— Mags
+
+---

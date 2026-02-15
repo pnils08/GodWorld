@@ -49,7 +49,14 @@ Ready to launch 6 desk agents in parallel?
 Before launching agents, compile per-desk editorial briefings from institutional memory.
 
 1. **Read** `docs/mags-corliss/NEWSROOM_MEMORY.md` — the institutional memory file
-2. **For each of the 6 desks**, write a briefing memo to `output/desk-briefings/{desk}_briefing_c{XX}.md`:
+2. **Read** the desk summary files (`{desk}_summary_c{XX}.json`) — identify which citizens, initiatives, and storylines each desk will likely cover
+3. **Query Supermemory** for citizen cards relevant to each desk's coverage:
+   - Use `/super-search` with citizen names, POPIDs, or neighborhoods from the summary
+   - Pull narrative context for citizens who will likely be quoted, referenced, or written about
+   - Check `docs/media/CITIZEN_NARRATIVE_MEMORY.md` for the 22 foundation POPIDs (Dynasty Five, Bulls core, reporters, civic figures)
+   - Focus on citizens in the Mara directive, interview candidates, and active storylines
+
+4. **For each of the 6 desks**, write a briefing memo to `output/desk-briefings/{desk}_briefing_c{XX}.md`:
    - `civic_briefing_c{XX}.md`
    - `sports_briefing_c{XX}.md`
    - `culture_briefing_c{XX}.md`
@@ -57,14 +64,44 @@ Before launching agents, compile per-desk editorial briefings from institutional
    - `chicago_briefing_c{XX}.md`
    - `letters_briefing_c{XX}.md`
 
-3. **Each briefing contains** (500-1000 words, in Mags' editorial voice):
+5. **Each briefing contains** (500-1500 words, in Mags' editorial voice):
    - Desk-specific errata and corrections from past editions
    - Cross-desk coordination notes (who else is covering what — avoid overlap)
    - Character continuity pointers (who to carry forward, who doesn't exist)
+   - **Citizen Reference Cards** (see format below) — for every citizen this desk is likely to write about
    - Mara Vance directive emphasis for this desk
    - Personal editorial note to the lead reporter
 
-4. Create the directory: `mkdir -p output/desk-briefings`
+6. Create the directory: `mkdir -p output/desk-briefings`
+
+### Citizen Reference Card Format
+
+Include a `## Citizen Reference Cards` section in each briefing. Each card is 3-5 lines:
+
+```
+**[Name]** (age [X], [Neighborhood], [Occupation]) — [POPID if known]
+- Last seen: [what they did / said in recent edition]
+- Key detail: [narrative context from Supermemory — origin, family, thematic significance]
+- DO NOT: [specific warnings — don't promote, don't invent titles, don't confuse with similar names]
+```
+
+Example:
+```
+**Marco Lopez** (40, Laurel, Mechanic) — Mara directive citizen
+- Last seen: Edition 81, looking into Baylight DEIR documents
+- Key detail: Working-class voice on development. Skeptical but engaged, not oppositional.
+- DO NOT: Give him civic titles. He is a mechanic. Not a committee chair, not an organizer.
+```
+
+**Card selection by desk:**
+- **Civic**: Council members (always all 9), Mara directive citizens, initiative stakeholders
+- **Sports**: A's roster (Dynasty Five + current), featured fans, Paulson
+- **Culture**: Neighborhood residents, faith figures, event participants
+- **Business**: Workers affected by policy, small business owners, Stabilization Fund contacts
+- **Chicago**: Bulls roster, Chicago neighborhood citizens, Talia's sources
+- **Letters**: All Mara directive citizens, plus 3-5 interview candidates from the summary
+
+**If a citizen has no Supermemory card**, still include a basic card from the desk packet data (name, age, neighborhood, occupation) with a note: "No narrative history yet — introduce naturally."
 
 Write these as Mags — with editorial authority, personal warmth, and specific guidance. These are not templates. They're memos from the Editor-in-Chief to her reporters.
 

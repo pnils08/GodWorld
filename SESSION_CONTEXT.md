@@ -200,6 +200,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - 5 canon contradictions resolved (Newell righty, Davis 33, Ellis 24, Horn both correct, Dillon 5 CYs)
 - PreToolUse safety hooks: pre-flight checks on clasp push, git push, force push denial, destructive op warnings
 - settings.local.json cleaned: dangerous auto-allows removed
+- Daily backup to Drive: `scripts/backup.sh` (Claude-Mem, .env, creds, logs → Drive nightly)
+- Disaster recovery guide: `docs/reference/DISASTER_RECOVERY.md` (10-step rebuild)
 
 **Pending Decisions:**
 - See `docs/engine/PROJECT_STATUS.md` for full list

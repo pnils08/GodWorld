@@ -27,6 +27,12 @@ const MAX_HISTORY = 20;          // rolling message pairs
 const COOLDOWN_MS = 3000;        // per-user cooldown
 const MAX_RESPONSE_TOKENS = 1000;
 const IDENTITY_REFRESH_MS = 60 * 60 * 1000; // hourly
+const COOLDOWN_CLEANUP_MS = 60 * 60 * 1000; // clean stale cooldowns hourly
+
+// ---------------------------------------------------------------------------
+// Anthropic client (created once, reused for all messages)
+// ---------------------------------------------------------------------------
+const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 // ---------------------------------------------------------------------------
 // State
@@ -35,6 +41,8 @@ var conversationHistory = [];
 var lastIdentityLoad = 0;
 var cachedSystemPrompt = '';
 var userCooldowns = new Map();
+var cachedLogDate = '';           // current day string for log caching
+var cachedLogEntries = [];        // in-memory log entries for current day
 
 // ---------------------------------------------------------------------------
 // Logger
@@ -100,10 +108,6 @@ function getSystemPrompt() {
 // Call Claude API
 // ---------------------------------------------------------------------------
 async function callClaude(userMessage, userName) {
-  var apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) throw new Error('ANTHROPIC_API_KEY not set');
-
-  var claude = new Anthropic({ apiKey: apiKey });
   var systemPrompt = getSystemPrompt();
 
   // Build messages array from conversation history + new message
@@ -189,22 +193,33 @@ function logConversation(userName, userMessage, magsResponse) {
       fs.mkdirSync(CONVO_LOG_DIR, { recursive: true });
     }
     var today = mags.getCentralDate();
-    var logFile = path.join(CONVO_LOG_DIR, today + '.json');
 
-    var entries = [];
-    if (fs.existsSync(logFile)) {
-      entries = JSON.parse(fs.readFileSync(logFile, 'utf8'));
+    // Day rolled over — reset cache, load new day's file if it exists
+    if (today !== cachedLogDate) {
+      cachedLogDate = today;
+      var logFile = path.join(CONVO_LOG_DIR, today + '.json');
+      if (fs.existsSync(logFile)) {
+        try {
+          cachedLogEntries = JSON.parse(fs.readFileSync(logFile, 'utf8'));
+        } catch (parseErr) {
+          log.warn('Could not parse existing log, starting fresh: ' + parseErr.message);
+          cachedLogEntries = [];
+        }
+      } else {
+        cachedLogEntries = [];
+      }
     }
 
-    entries.push({
+    cachedLogEntries.push({
       timestamp: new Date().toISOString(),
       user: userName,
       message: userMessage,
       response: magsResponse
     });
 
-    fs.writeFileSync(logFile, JSON.stringify(entries, null, 2));
-    log.info('Conversation logged (' + entries.length + ' exchanges today)');
+    var logFile = path.join(CONVO_LOG_DIR, today + '.json');
+    fs.writeFileSync(logFile, JSON.stringify(cachedLogEntries, null, 2));
+    log.info('Conversation logged (' + cachedLogEntries.length + ' exchanges today)');
   } catch (err) {
     log.error('Failed to log conversation: ' + err.message);
   }
@@ -254,9 +269,26 @@ async function main() {
     console.error('DISCORD_BOT_TOKEN not set in .env');
     process.exit(1);
   }
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.error('ANTHROPIC_API_KEY not set in .env');
+    process.exit(1);
+  }
 
   // Pre-load identity
   buildSystemPrompt();
+
+  // Clean stale cooldown entries hourly
+  setInterval(function() {
+    var now = Date.now();
+    var cleaned = 0;
+    userCooldowns.forEach(function(timestamp, userId) {
+      if ((now - timestamp) > COOLDOWN_CLEANUP_MS) {
+        userCooldowns.delete(userId);
+        cleaned++;
+      }
+    });
+    if (cleaned > 0) log.info('Cleaned ' + cleaned + ' stale cooldown entries');
+  }, COOLDOWN_CLEANUP_MS);
 
   // Create Discord client
   var client = new Client({

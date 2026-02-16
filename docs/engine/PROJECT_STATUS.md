@@ -2,7 +2,7 @@
 
 **Single source of truth for what's open, what's done, and what's next.**
 
-Last Updated: 2026-02-16 | Session: 31 | Cycle: 81
+Last Updated: 2026-02-16 | Session: 32 | Cycle: 81
 
 ---
 
@@ -36,6 +36,7 @@ Items in progress or planned for upcoming sessions.
 | 2 | **LifeHistory archive scheduling** — run `maintenance/archiveLifeHistory.js` | HIGH | Script ready, not scheduled | Before C150 |
 | 3 | **LifeHistory compression enforcement** — schedule compressLifeHistory.js regularly | HIGH | Needs scheduling logic | Before C150 |
 | 4 | **Gentrification Mechanics & Migration** — extend Neighborhood_Map, integrate with applyMigrationDrift.js | MEDIUM | Planned (Week 4) | No deadline |
+| 5 | **Google Drive reorganization** — standardize folder naming across 5 archives (see notes below) | LOW | Documented | No deadline |
 
 ---
 
@@ -93,6 +94,59 @@ Items that work but could be cleaner. No deadlines.
 | 4 | **Hardcoded holiday lists** | godWorldEngine2.js:331-471, 30+ holidays | DEFERRED |
 | 5 | **Float precision drift** | godWorldEngine2.js:315-356, illness/employment rounding | LOW |
 | 6 | **Array mutation in loops** | utilities/utilityFunctions.js:16, .splice() while iterating | LOW |
+
+---
+
+## Google Drive Archive Infrastructure (Session 32)
+
+**Local mirror:** `output/drive-files/` (614 files, 6.9 MB) — 5 Drive roots crawled and downloaded.
+
+| Root | Drive ID | Files | Purpose |
+|------|----------|-------|---------|
+| Tribune Media Archive | `10Y-X48HloGv9EEllWSm-Mycpmbj_9DVS` | 101 | 20 journalist desks — full body of work |
+| Sports Desk Archive | `1KPftAbw3dmjJjlUS9Wo97mFRZ-9Oqq0p` | 155 | Hal, Anthony, P Slayer features + analytics |
+| Publications Archive | `1NEIimxouKHwrVF0Wuhz7rjwX94_-FvNZ` | 67 | Cycle Pulse editions 1-81, supplementals |
+| A's Universe Database | `1g3c82HA9iGNUdY7Oxe6cGIWpn5nILJFG` | 100 | TrueSource player cards, rosters, stats |
+| Bulls Universe Database | `1VbXGpcierDXN3LCzywgJfXtU1ABGhZZM` | 9 | Chicago player profiles, contracts |
+
+**Scripts:**
+- `buildCombinedManifest.js` — crawl all 5 roots into combined manifest
+- `downloadDriveArchive.js` — download text files (`--refresh` for incremental)
+- `crawlSheetsArchive.js` — index Sheets tabs with headers + row counts
+- `fetchDriveFile.js` — single file retrieval by Drive ID
+
+**Refresh workflow:** After adding new files to Drive:
+```bash
+node scripts/buildCombinedManifest.js     # re-crawl (updates manifest)
+node scripts/downloadDriveArchive.js --refresh   # download only new files
+```
+
+### Drive Reorganization (Future)
+
+Current Drive folder naming is inconsistent across the 5 archives. Not blocking (local search works fine), but cleaner structure would help manual browsing.
+
+**Current issues:**
+- Numbered prefixes in some folders (`1_The_Cycle_Pulse`, `2_Oakland_Supplementals`) but not others
+- Mixed case/underscores (`Former_Players_Data_Cards` vs `Player_Cards`)
+- Some duplicate content across archives (text mirrors in both Tribune Media and Sports Desk)
+- PDFs stored alongside text files without clear separation
+
+**Recommended structure (if reorganizing):**
+```
+GodWorld_Drive/
+├── 01_Tribune_Media/          ← journalist desk folders (one per reporter)
+├── 02_Sports_Oakland/         ← A's Universe: player cards, stats, rosters
+├── 03_Sports_Chicago/         ← Bulls Universe: player cards, contracts
+├── 04_Publications/           ← Cycle Pulse editions + supplementals
+│   ├── Editions/
+│   ├── Supplementals/
+│   ├── Chicago/
+│   └── PDFs/
+├── 05_Front_Office/           ← Paulson pressers, Mara directives, season data
+└── 06_Archives/               ← Text mirrors, legacy content
+```
+
+**Impact on scripts:** If reorganized, update `ROOTS` array in `buildCombinedManifest.js` with new folder IDs. Re-run crawl + download. All local paths regenerate automatically.
 
 ---
 

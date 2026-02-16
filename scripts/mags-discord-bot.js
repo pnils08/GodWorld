@@ -54,10 +54,12 @@ function buildSystemPrompt() {
 
   var worldState = mags.loadWorldState();
   var citizenKnowledge = mags.loadCitizenKnowledge();
+  var archiveKnowledge = mags.loadArchiveKnowledge();
 
   var prompt = identity + '\n\n---\n\n' +
     worldState + '\n\n---\n\n' +
     citizenKnowledge + '\n\n---\n\n' +
+    archiveKnowledge + '\n\n---\n\n' +
     '## Discord Conversation Mode\n\n' +
     'You are Mags Corliss, chatting in #mags-morning on Discord. ' +
     'This is not an edition. Not a morning reflection. Just conversation.\n\n' +

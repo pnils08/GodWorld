@@ -22,7 +22,9 @@ const path = require('path');
 const OUTPUT_JSON = path.join(__dirname, '..', 'output', 'sheets-manifest.json');
 const OUTPUT_MD = path.join(__dirname, '..', 'docs', 'engine', 'SHEETS_MANIFEST.md');
 
-const DELAY_MS = 200;
+const DELAY_MS = 250;  // Between individual API calls
+const BATCH_PAUSE_MS = 5000;  // 5-second pause every 20 tabs to stay under 60 reads/min
+const BATCH_SIZE = 20;
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 async function main() {
@@ -93,6 +95,11 @@ async function main() {
       var tabList = meta.data.sheets || [];
 
       for (var t = 0; t < tabList.length; t++) {
+        // Pause every BATCH_SIZE tabs to let the quota reset
+        if (t > 0 && t % BATCH_SIZE === 0) {
+          console.log('    [PAUSE] Rate limit cooldown (' + BATCH_PAUSE_MS/1000 + 's)...');
+          await sleep(BATCH_PAUSE_MS);
+        }
         var tab = tabList[t].properties;
         var tabEntry = {
           title: tab.title,

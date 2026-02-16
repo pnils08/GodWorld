@@ -6,7 +6,8 @@
  * to output/drive-files/ preserving desk/journalist folder structure.
  *
  * Usage:
- *   node scripts/downloadDriveArchive.js
+ *   node scripts/downloadDriveArchive.js           # full download (re-downloads everything)
+ *   node scripts/downloadDriveArchive.js --refresh  # incremental (skip existing files)
  */
 
 require('dotenv').config();
@@ -50,7 +51,9 @@ async function main() {
     return mt.startsWith('image/') || e.name.endsWith('.PNG') || e.name.endsWith('.png');
   });
 
-  console.log('Tribune Archive Downloader');
+  var refreshMode = process.argv.includes('--refresh');
+
+  console.log('Tribune Archive Downloader' + (refreshMode ? ' (REFRESH — skip existing)' : ''));
   console.log('Text files to download: ' + textFiles.length);
   console.log('Image files (skipping): ' + imageFiles.length);
   console.log('Output dir: ' + OUTPUT_DIR);
@@ -65,6 +68,7 @@ async function main() {
   if (!fs.existsSync(OUTPUT_DIR)) fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
   var downloaded = 0;
+  var skipped = 0;
   var errors = 0;
 
   for (var i = 0; i < textFiles.length; i++) {
@@ -80,6 +84,12 @@ async function main() {
       fileName += '.txt';
     }
     var localPath = path.join(localDir, fileName);
+
+    // In refresh mode, skip files that already exist locally
+    if (refreshMode && fs.existsSync(localPath)) {
+      skipped++;
+      continue;
+    }
 
     try {
       var content;
@@ -107,7 +117,7 @@ async function main() {
     }
   }
 
-  console.log('\nDone! Downloaded: ' + downloaded + ', Errors: ' + errors);
+  console.log('\nDone! Downloaded: ' + downloaded + ', Skipped: ' + skipped + ', Errors: ' + errors);
 
   // Write a quick search index
   var indexPath = path.join(OUTPUT_DIR, '_INDEX.md');

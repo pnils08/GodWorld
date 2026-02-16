@@ -18,6 +18,8 @@ Items ready to go — just need `clasp push` on Cloud Shell.
 | recordWorldEventsv3 v3.5 | recordWorldEventsv3.js | 31 | 16 dead cols, Math.random fix, domain neighborhoods |
 | compressLifeHistory v1.3 | compressLifeHistory.js | 31 | 14 new TAG_TRAIT_MAP entries |
 | buildDeskPackets v1.5 | scripts/buildDeskPackets.js | 31 | Sports feed digest — structured intel from raw feeds |
+| applySportsFeedTriggers v2.0 | applySportsSeason.js | 31 | Engine reads Oakland/Chicago feeds instead of dead Sports_Feed |
+| setupSportsFeedValidation v2.1 | setupSportsFeedValidation.js | 31 | Streak column (O) added to feed sheets |
 
 **Deploy command:** `cd ~/GodWorld && git pull && clasp push`
 

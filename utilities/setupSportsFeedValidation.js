@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * setupSportsFeedValidation.js v2.0
+ * setupSportsFeedValidation.js v2.1
  * ============================================================================
  *
  * Sets up Oakland_Sports_Feed and Chicago_Sports_Feed with:
@@ -26,6 +26,7 @@
  *   L: PlayerMood      (NEW — dropdown)
  *   M: EventTrigger    (NEW — dropdown)
  *   N: HomeNeighborhood (NEW — dropdown, team-specific)
+ *   O: Streak          (NEW — text, W6/L3 format — feeds engine sentiment)
  *
  * Run from Apps Script editor:
  *   setupSportsFeedValidation()    — sets up both sheets
@@ -160,7 +161,8 @@ var HEADER_NOTES = {
   'StoryAngle': 'Your 10-word headline instinct.\nWhat would you tell P Slayer at the morning meeting?\nExample: "Kessler gamble paying off in locker room"',
   'PlayerMood': 'Select from dropdown. One-word emotional register.\nApplies to the primary player(s) in NamesUsed.',
   'EventTrigger': 'Select from dropdown. Optional.\nFlags special story-generating moments.\nLeave blank for routine entries.',
-  'HomeNeighborhood': 'Select from dropdown. Optional.\nWhere the impact of this event lands.\nUsed for neighborhood-specific coverage.'
+  'HomeNeighborhood': 'Select from dropdown. Optional.\nWhere the impact of this event lands.\nUsed for neighborhood-specific coverage.',
+  'Streak': 'Current team streak. Format: W6 or L3.\nW = wins, L = losses, number = consecutive games.\nFeeds engine sentiment calculation.\nLeave blank if not applicable.'
 };
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -191,7 +193,7 @@ function setupSportsFeedValidation() {
     results.push('Chicago_Sports_Feed: NOT FOUND (skipped)');
   }
 
-  Logger.log('setupSportsFeedValidation v2.0: Complete');
+  Logger.log('setupSportsFeedValidation v2.1: Complete');
   SpreadsheetApp.getUi().alert(
     'Sports Feed Setup Complete!\n\n' +
     results.join('\n') + '\n\n' +
@@ -204,7 +206,8 @@ function setupSportsFeedValidation() {
     '  N: HomeNeighborhood (NEW)\n\n' +
     'New columns added:\n' +
     '  K: StoryAngle (text)\n' +
-    '  L: PlayerMood (dropdown)\n\n' +
+    '  L: PlayerMood (dropdown)\n' +
+    '  O: Streak (text — W6/L3 format)\n\n' +
     'Dead columns grayed out:\n' +
     '  I: VideoGameDate\n' +
     '  J: VideoGame'
@@ -246,21 +249,22 @@ function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
   var lastRow = Math.max(sheet.getLastRow(), 20);
   var dataRows = lastRow - 1;
 
-  // ── Ensure we have 14 columns ──
+  // ── Ensure we have 15 columns ──
   var currentCols = sheet.getMaxColumns();
-  if (currentCols < 14) {
-    sheet.insertColumnsAfter(currentCols, 14 - currentCols);
+  if (currentCols < 15) {
+    sheet.insertColumnsAfter(currentCols, 15 - currentCols);
   }
 
-  // ── Set headers for new columns (K-N) ──
+  // ── Set headers for new columns (K-O) ──
   var expectedHeaders = {
     11: 'StoryAngle',       // K (1-indexed col 11)
     12: 'PlayerMood',       // L
     13: 'EventTrigger',     // M
-    14: 'HomeNeighborhood'  // N
+    14: 'HomeNeighborhood', // N
+    15: 'Streak'            // O
   };
 
-  var headers = sheet.getRange(1, 1, 1, 14).getValues()[0];
+  var headers = sheet.getRange(1, 1, 1, 15).getValues()[0];
 
   for (var col in expectedHeaders) {
     var c = parseInt(col);
@@ -293,7 +297,7 @@ function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
   // ── Header notes (hover help) ──
   var allHeaders = ['Cycle', 'SeasonType', 'EventType', 'TeamsUsed', 'NamesUsed',
                     'Notes', 'Stats', 'Team Record', 'VideoGameDate', 'VideoGame',
-                    'StoryAngle', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood'];
+                    'StoryAngle', 'PlayerMood', 'EventTrigger', 'HomeNeighborhood', 'Streak'];
 
   for (var i = 0; i < allHeaders.length; i++) {
     var note = HEADER_NOTES[allHeaders[i]];
@@ -303,7 +307,7 @@ function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
   }
 
   // ── Format ALL headers ──
-  var headerRange = sheet.getRange(1, 1, 1, 14);
+  var headerRange = sheet.getRange(1, 1, 1, 15);
   headerRange.setFontWeight('bold');
   headerRange.setBackground('#e8f0fe');
 
@@ -316,7 +320,7 @@ function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
   deadColJ.setFontColor('#999999');
 
   // ── Highlight new columns with light green headers ──
-  var newColHeaders = sheet.getRange(1, 11, 1, 4); // K, L, M, N
+  var newColHeaders = sheet.getRange(1, 11, 1, 5); // K, L, M, N, O
   newColHeaders.setBackground('#d9ead3');
 
   // ── Color-code dropdown columns lightly ──
@@ -342,11 +346,12 @@ function setupFeedSheet_(sheet, city, teamValues, neighborhoodValues) {
   sheet.setColumnWidth(12, 100); // L: PlayerMood
   sheet.setColumnWidth(13, 120); // M: EventTrigger
   sheet.setColumnWidth(14, 140); // N: HomeNeighborhood
+  sheet.setColumnWidth(15, 80);  // O: Streak
 
   // ── Freeze header row ──
   sheet.setFrozenRows(1);
 
-  Logger.log('setupFeedSheet_(' + city + '): Complete — 14 columns, 6 dropdowns, 2 dead cols grayed');
+  Logger.log('setupFeedSheet_(' + city + '): Complete — 15 columns, 6 dropdowns, 2 dead cols grayed');
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

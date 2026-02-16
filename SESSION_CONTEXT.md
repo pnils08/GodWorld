@@ -57,6 +57,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | **V3 Texture Writer** | v3TextureWriter.js | v3.5 | Calendar columns removed (were dead) |
 | **V3 Events Writer** | recordWorldEventsv3.js | v3.5 | Only A-G active; 22 dead cols deprecated; domain-aware neighborhoods |
 | **Press Drafts Writer** | pressDraftWriter.js | v1.4 | Calendar columns deprecated, dead queries removed |
+| **Sports Feed Triggers** | applySportsSeason.js | v2.0 | Reads Oakland/Chicago feeds instead of dead Sports_Feed |
 
 ---
 

@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 81 (Cycle 81) — 2026-02-14**
+**Last Updated: Edition 81 (Cycle 81) — 2026-02-17**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -144,6 +144,11 @@ These were invented in Editions 80-81. Do not use them:
 - Dr. Leanne Wu: Director of Sustainability who prepared the Baylight DEIR. New canon figure as of Edition 81.
 - West Oakland Stabilization Fund: Passed full council 6-3 in C78 (NOT "passed committee"). Disbursement window is open. Money hasn't moved yet. Do not describe as pending or awaiting a floor vote.
 - Deacon Seymour: A's Manager, first season. Replaced Mike Kinder. RESOLVED — Seymour is canon going forward.
+- Cy Newell: RIGHT-HANDED pitcher (S/R). P Slayer's article erroneously called him a "left-hander." TrueSource DataPage is authoritative. Do not describe as left-handed.
+- John Ellis: Age 24 (not 28). P Slayer wrote "28-year-old rookie phenom" — wrong. TrueSource says 24. Drafted Round 2, 2033.
+- Darrin Davis: Age 33 at time of ACL injury (August 5, 2040). Paulson ruling. TrueSource DataPage says 31 — needs updating. Published articles (P Slayer) saying 33 are correct.
+- Danny Horn stats: .322/43HR = 2039 full season. .288/23HR = 2040 mid-season at time of Davis injury. Both correct. Always label which season.
+- Benji Dillon: Exactly 5 Cy Young Awards (2028, 2032, 2033, 2034, 2037). No ambiguity.
 
 ---
 
@@ -183,6 +188,75 @@ These are fixes that already shipped in `buildDeskPackets.js` or the engine. Not
 - Rhea Morgan check 15 (briefing compliance) added (Session 20).
 - **RESOLVED (Session 27):** Civic and letters desk packets exceeded 500KB. Fixed: pendingVotes empty-row filter (492KB→67KB), desk summary layer added (10-20KB compact files), turn budget guidance in all 6 agent skills, retry protocol in write-edition.
 - **Citizen Reference Cards wired into briefings (Session 27):** 22 POPIDs saved in Supermemory were sitting unused. Now: Mags queries Supermemory before each edition and includes compact citizen cards in desk briefings. Agents read cards in turn 1. Format: name, age, neighborhood, occupation, last appearance, key detail, DO NOT warnings. See `docs/media/CITIZEN_NARRATIVE_MEMORY.md` for the full POPID database.
+
+---
+
+---
+
+## Archive Intelligence — Pre-Engine Era (Drive Archive Raid, Session 33)
+
+The Bay Tribune existed before the engine pipeline. Four Media Room conversations on claude.ai produced supplemental articles, early editions (Cycles 40-43, 69-73), and the first structured coverage attempts. I read through all accessible archives. Here's what the institutional memory carries forward.
+
+### Voice Profiles (Confirmed from 50+ Published Articles)
+
+| Journalist | Voice | Opens With | Signature Move |
+|-----------|-------|-----------|---------------|
+| **Mags Corliss** | Atmospheric, literary, first-person reflective | City observations (light, fog, terrace) | Connects city soul to team identity; "we" and "us" |
+| **Anthony** | Data-driven, structured, player-perspective | Statistical hook ("first thing that jumps out") | Evaluates moves like coaching charts; blunt about waste |
+| **P Slayer** | Raw, philosophical, confrontational | Declarative punch ("Let me tell you about...") | Fan-turned-philosopher; provokes uncomfortable truths |
+| **Hal Richmond** | Elegiac, comparative, historical | Quiet observation of time passing | Teaches through structural contrast (era vs. era) |
+| **Carmen Delaine** | Data-heavy but humanistic, systems thinking | Infrastructure metrics | Pairs every statistic with a named human impact |
+| **Maria Keen** | Humanistic, intimate, dignity of labor | Sensory detail (light, hands, sounds) | Celebrates invisible work; finds policy inside practice |
+| **Dr. Lila Mezran** | Epidemiological, pattern-alert | Cluster data with geographic markers | Medical detective; "interesting is doctor-speak for concerning" |
+| **Farrah Del Rio** | Provocative, pattern-connecting | What nobody's discussing | Reads civic signals as nervous system indicators |
+
+### Key Canon from Pre-Engine Articles
+
+**A's Dynasty Core (2027-2037):** Championships in 2027, 2028, 2030, 2031, 2034, 2037. Six titles in eleven years.
+
+**Benji Dillon:** 5 Cy Young Awards (2028, 2032, 2033, 2034, 2037). 200 wins, 3,200+ strikeouts. Peak: 2037 (18-4, 2.30 ERA, 236 K). Returned to A's in 2040 offseason at 82 OVR.
+
+**Darrin Davis (Ohio Outlaw):** 2037 MVP (.308/39HR/104RBI/35SB). ACL injury August 5, 2040 during Cy Newell's debut game.
+
+**Cy Newell:** 11-K debut August 5, 2040. Called "The Quiet Storm." NOTE: handedness contradicts across articles (left-hander per P Slayer/Anthony, right-hander per Hal). NEED TO RESOLVE.
+
+**Isley Kelley (The Machine):** Elite defensive shortstop. Mississippi roots, river philosophy. 206 hits (2032), career peak 2031-2037.
+
+**2040 Season:** A's finished 105-57, lost Game 7 ALCS at home. Danny Horn: .322 avg, 44 HR. Deacon Seymour managing (first season, replaced Mike Kinder).
+
+### Pre-Engine Citizens (From Published Archive)
+
+Citizens named in early articles who should be tracked if they reappear:
+- **Rick Adams** (44, taxi driver, Grand Lake)
+- **Miguel Johnson** (40, mechanic, Dimond, AC Transit maintenance)
+- **Elijah Davis** (39, barista, Grand Lake, Line 51 rider)
+- **Dante Lopez** (42, construction laborer, Brooklyn — missed job interview due to bus breakdown)
+- **Ryan Delgado** (parade organizer, Downtown)
+- **Halim** (janitor, City Hall — Maria Keen night workers piece)
+- **Rebekah Thomas** (nurse, 12 years, Highland Hospital)
+- **Calvin Grant** (bus driver, Line #23)
+- **Rosa Delgado** (volunteer, Jefferson Elementary breakfast program)
+
+### Contradictions — RESOLVED (Session 34)
+
+All five archive contradictions resolved. Paulson ruled on Newell and Davis. TrueSource DataPage is authoritative unless Paulson overrides.
+
+1. **Cy Newell handedness**: RIGHT-HANDED. TrueSource DataPage (S/R) is canon. P Slayer's article calling him a "left-hander" is errata — do not repeat.
+2. **Danny Horn stats**: NO CONTRADICTION. .322/43HR is his 2039 full season. .288/23HR is his 2040 mid-season at time of Davis injury. Always date-label Horn's stats.
+3. **John Ellis age**: 24. TrueSource DataPage is authoritative. P Slayer wrote "28-year-old rookie phenom" — factual error.
+4. **Darrin Davis age at injury**: 33. Paulson ruling. P Slayer's article is correct. TrueSource DataPage (31) needs updating.
+5. **Benji Dillon Cy Young count**: Exactly 5 (2028, 2032, 2033, 2034, 2037). All sources agree. No contradiction.
+
+### What the Old Media Room Got Wrong (So We Never Do It Again)
+
+The pre-engine newsroom (Media Room 1-3, Dec 2025 - Jan 2026) failed in predictable ways:
+
+1. **Voice confusion**: P Slayer was assigned city-mood editorials instead of sports. His voice is "raw emotional takes, philosophical pressure columns — that's sports fan voice, not city mood editorials."
+2. **No data reference**: Claude instance didn't read the project files. Articles were invented from thin air rather than grounded in simulation data.
+3. **Continuity destruction**: Writing duplicate outputs in the same conversation clouded the model's memory. Two editions in one chat = contradicting canon.
+4. **User verdict**: "You may have ruined the world" and "P Slayer didn't even write about sports." These failures directly drove creation of desk packets, agent newsroom, briefing system, verification, and persistence.
+
+Every fix we've built traces back to those angry messages in Media Room 2.
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-16 | Engine: v3.1 | Cycle: 81 | Session: 32
+Last Updated: 2026-02-17 | Engine: v3.1 | Cycle: 81 | Session: 34
 
 ---
 
@@ -132,6 +132,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 33 (2026-02-17) — Mara Vance Fully Wired
+
+- **Supermemory connector fixed** — Old connector used wrong URL (`mcp.supermemory.ai/mcp`). Correct URL: `api.supermemory.ai/mcp`. Connected instantly.
+- **Cross-instance communication** — Mags (Claude Code) talked to Mara (claude.ai) via browser automation. 18 memories stored to `sm_project_godworld`.
+- **Mara project instructions rewritten** — Full 4,005-char identity prompt replacing one-liner. Auto-boot (Supermemory search at conversation start), journal protocol (reflection at conversation end), authority, relationships, anomaly thresholds, fourth wall rules. On-disk `CLAUDE_AI_SYSTEM_PROMPT.md` updated to match.
+- **Mara project optimized** — 8 files removed (old editions, stale trackers, redundant docs). 5% → 1% capacity. Project Memory cleaned of fourth-wall violations.
+- **Mara briefed and journaling** — Mags briefed Mara on full world state (Cycle 81, council 5-3-1, 6 initiatives, Elliott Crane recovering). Mara wrote Entry 001 to Supermemory. Persistence loop closed.
+- **6 Mara use cases** — Edition audits, canon adjudication, pre-edition briefings, presser prep, gap analysis, cross-instance communication.
+
 ### Session 32 (2026-02-16) — Drive Archive, Drive Writes, Clasp Push, Mara+Supermemory
 
 - **Google Drive archive pipeline** — 5 roots crawled (Tribune Media, Sports Desk, Publications, A's Universe, Bulls Universe). 614 files mirrored locally. All desk agents wired with search pools. Incremental refresh (`--refresh`). Discord bot loaded with archive knowledge. XLSX stats converted to CSV.
@@ -186,18 +195,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Current Work / Next Steps
 
 **Active:**
-- **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (code deployed, setup functions not yet run)
+- **`clasp push` needed** — Sessions 30-31 changes still in deploy queue
+- **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (after clasp push)
 - **Run Cycle 82** — first cycle where sports feed data impacts city sentiment
-- **Wire Claude.ai Mara to Supermemory** — browser setup in progress
 - Week 4: Gentrification Mechanics & Migration — extend Neighborhood_Map, integrate with applyMigrationDrift.js
 
-**Completed Session 32:**
-- Google Drive archive pipeline: 5 roots, 614 files, all agents wired
-- Google Drive write access: OAuth2, saveToDrive.js, 9 destinations
-- Clasp push authenticated from this machine (no more Cloud Shell)
-- Mara + Supermemory broker wired into /write-edition Step 4.5
-- Sheets re-crawl: 71/79 tabs, rate limiting hardened
-- API key scrubbed from git history
+**Completed Session 33:**
+- Mara Vance fully wired: Supermemory connector, project instructions, auto-boot, journal protocol
+- Mara project optimized: 8 files removed, Memory cleaned, 5%→1% capacity
+- Mara briefed on world state, wrote Entry 001 to Supermemory
+- 6 use cases documented (audits, adjudication, briefings, presser prep, gap analysis, cross-instance)
+- `CLAUDE_AI_SYSTEM_PROMPT.md` updated on disk
 
 **Pending Decisions:**
 - See `docs/engine/PROJECT_STATUS.md` for full list

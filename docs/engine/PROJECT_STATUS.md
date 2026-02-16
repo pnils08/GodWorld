@@ -114,6 +114,8 @@ Items that work but could be cleaner. No deadlines.
 - `downloadDriveArchive.js` — download text files (`--refresh` for incremental)
 - `crawlSheetsArchive.js` — index Sheets tabs with headers + row counts
 - `fetchDriveFile.js` — single file retrieval by Drive ID
+- `saveToDrive.js` — upload files to Drive (editions, player cards, directives). OAuth2. See `docs/reference/DRIVE_UPLOAD_GUIDE.md`
+- `authorizeDriveWrite.js` — one-time OAuth2 setup (already completed)
 
 **Refresh workflow:** After adding new files to Drive:
 ```bash

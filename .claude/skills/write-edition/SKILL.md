@@ -174,11 +174,17 @@ Run a verification pass:
 
 Show issues found (if any) and recommended fixes.
 
-## Step 5: Save Edition
+## Step 5: Save Edition & Upload to Drive
 After user approval:
 1. Save to `editions/cycle_pulse_edition_{XX}.txt`
 2. If corrections needed, save as `_v2.txt` after fixes
-3. Show the user the file path and total stats:
+3. **Upload to Google Drive:**
+   ```bash
+   node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition
+   ```
+   - Also upload Mara audit if produced: `node scripts/saveToDrive.js output/mara_directive_c{XX}.txt mara`
+   - Also upload supplementals if produced: `...supplement` or `...chicago`
+4. Show the user the file path, Drive link, and total stats:
    - Article count
    - Total word count
    - New canon figures introduced

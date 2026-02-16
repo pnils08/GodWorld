@@ -235,11 +235,22 @@ Rhea receives the compiled edition + canon sources:
 
 ---
 
-## Stage 6-7: Finalize + Engine Intake
+## Stage 6-7: Finalize + Upload + Engine Intake
 
 1. Apply Rhea's corrections
 2. Save to `editions/cycle_pulse_edition_{XX}_v2.txt`
-3. Parse edition returns into intake sheets, then process into final ledgers
+3. **Upload to Google Drive:**
+   ```bash
+   node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition
+   node scripts/saveToDrive.js output/mara_directive_c{XX}.txt mara        # if Mara audit exists
+   node scripts/saveToDrive.js editions/oakland_supplemental_c{XX}.txt supplement  # if supplemental
+   node scripts/saveToDrive.js editions/chicago_supplemental_c{XX}.txt chicago     # if supplemental
+   ```
+4. **Refresh local mirror** (picks up the file we just uploaded):
+   ```bash
+   node scripts/buildCombinedManifest.js && node scripts/downloadDriveArchive.js --refresh
+   ```
+5. Parse edition returns into intake sheets, then process into final ledgers
 
 ### Scripts
 

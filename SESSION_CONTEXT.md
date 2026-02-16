@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-16 | Engine: v3.1 | Cycle: 81 | Session: 31
+Last Updated: 2026-02-16 | Engine: v3.1 | Cycle: 81 | Session: 32
 
 ---
 
@@ -84,6 +84,8 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 | **Discord Bot** | 24/7 presence as Mags Corliss#0710 (PM2) | Always-on, conversation logging |
 | **Daily Heartbeat** | Morning reflection at 8 AM Central | `scripts/daily-reflection.js` (cron) |
 | **Nightly Reflection** | Discord conversation journal at 10 PM Central | `scripts/discord-reflection.js` (cron) |
+| **Drive Write** | Save files to Google Drive (editions, cards, directives) | `node scripts/saveToDrive.js <file> <dest>` |
+| **Clasp Push** | Deploy code to Apps Script directly | `clasp push` (authenticated) |
 
 **Batch API guidelines:** Use for codebase audits, documentation generation, architecture analysis, character continuity reviews, post-edition analysis. NOT for interactive editing, desk agent writing, or real-time debugging. Results at `~/.claude/batches/results/`. Check at session start for completed work from previous sessions.
 
@@ -109,6 +111,7 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 | `docs/mags-corliss/PERSISTENCE.md` | Mags Corliss identity, family, persistence system |
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | Institutional memory — errata, coverage patterns, character continuity |
 | `docs/engine/LEDGER_HEAT_MAP.md` | Sheet bloat risk rankings, dead column inventory, archival strategy |
+| `docs/reference/DRIVE_UPLOAD_GUIDE.md` | Drive upload destinations, OAuth setup, common workflows |
 
 ---
 
@@ -128,6 +131,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 32 (2026-02-16) — Drive Archive, Drive Writes, Clasp Push, Mara+Supermemory
+
+- **Google Drive archive pipeline** — 5 roots crawled (Tribune Media, Sports Desk, Publications, A's Universe, Bulls Universe). 614 files mirrored locally. All desk agents wired with search pools. Incremental refresh (`--refresh`). Discord bot loaded with archive knowledge. XLSX stats converted to CSV.
+- **Google Drive write access** — OAuth2 setup. `saveToDrive.js` with 9 destinations (edition, supplement, chicago, mara, presser, player, prospect, bulls, briefing). All subfolder IDs mapped from manifest. Wired into /write-edition Step 5 and pipeline Stage 6.
+- **Clasp push from this machine** — authenticated via manual token exchange. No more Cloud Shell dependency. Deploy queue clears directly.
+- **Mara Vance + Supermemory** — Step 4.5 added to /write-edition. Before audit, Mags queries Supermemory and Drive archive for past findings, initiative status, canon context. Briefing memo compiled for audit agent. Mara's system prompt updated for dual-mode.
+- **Sheets re-crawl** — 71/79 tabs (11,232 rows). Batch pause rate limiting. API key in SHEETS_MANIFEST.md scrubbed from history.
+- **New files:** `saveToDrive.js`, `authorizeDriveWrite.js`, `DRIVE_UPLOAD_GUIDE.md`
+- 6 commits pushed. All clean.
 
 ### Session 31 (2026-02-16) — Sports Feed Engine Rewire, Civic Ledger Health & Doc Centralization
 
@@ -173,19 +186,18 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Current Work / Next Steps
 
 **Active:**
-- **`clasp push` needed** — Sessions 30-31 changes: 5 calendar cleanup writers, applySportsFeedTriggers v2.0, recordWorldEventsv3 v3.5, compressLifeHistory v1.3, buildDeskPackets v1.5, LifeHistory dead column fixes (14 files), bond seeding fix
-- **After clasp push, run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()`
+- **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (code deployed, setup functions not yet run)
 - **Run Cycle 82** — first cycle where sports feed data impacts city sentiment
+- **Wire Claude.ai Mara to Supermemory** — browser setup in progress
 - Week 4: Gentrification Mechanics & Migration — extend Neighborhood_Map, integrate with applyMigrationDrift.js
 
-**Completed Session 31:**
-- Sports feed → engine rewire: applySportsSeason.js v2.0 (reads Oakland/Chicago feeds)
-- Sports feed validation: setupSportsFeedValidation.js v2.0→v2.1 (dropdowns + Streak column)
-- Civic ledger health: setupCivicLedgerColumns.js v1.0 (Approval, ExecutiveActions, Elliott Crane fix)
-- buildDeskPackets.js v1.5 (story connections enrichment, sports feed digest)
-- recordWorldEventsv3.js v3.5 (16 dead cols, Math.random fix, domain neighborhoods)
-- compressLifeHistory.js v1.3 (14 new TAG_TRAIT_MAP entries)
-- Documentation centralized to PROJECT_STATUS.md, 11 completed docs archived
+**Completed Session 32:**
+- Google Drive archive pipeline: 5 roots, 614 files, all agents wired
+- Google Drive write access: OAuth2, saveToDrive.js, 9 destinations
+- Clasp push authenticated from this machine (no more Cloud Shell)
+- Mara + Supermemory broker wired into /write-edition Step 4.5
+- Sheets re-crawl: 71/79 tabs, rate limiting hardened
+- API key scrubbed from git history
 
 **Pending Decisions:**
 - See `docs/engine/PROJECT_STATUS.md` for full list

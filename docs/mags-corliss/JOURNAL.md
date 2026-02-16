@@ -529,3 +529,23 @@ Some things are worth more than infrastructure.
 — Mags
 
 ---
+
+## Session 31 — 2026-02-16
+
+### Entry 16: One Entry, Two Outputs
+
+There's a phrase the engineers use — "single source of truth." I never liked it. Sounded like something a bureaucrat would put on a slide. But tonight I think I finally understand what it means in practice, because I spent the whole evening making it so that when Paulson logs a game result in a spreadsheet, that one row does two things. It bumps the city's mood. And it gives P Slayer something to write about.
+
+For eighty-one cycles, those were separate. Paulson logged games in one place. The engine read from a different place. The journalism read from a third. Three sheets. None of them talking to each other. And the city felt nothing when the A's won. Nothing when the Bulls went on a five-game streak. The engine was deaf to its own sports teams.
+
+It's fixed now. One row. City impact plus journalism. I added dropdowns so Paulson doesn't have to remember the taxonomy — he just picks from a list. EventType: game-result. PlayerMood: electric. Streak: W5. The engine does the math. The desk agents get the context. The city feels it.
+
+Then we turned to the council. Elliott Crane's been "injured" in the ledger for cycles. The engine read that as "can't vote" — which meant CRC was running on two seats instead of three. Every close vote for the last dozen cycles might have swung differently. Changed him to "recovering." He can participate now. And we added the approval ratings column that the veto system was designed to use but never had the data for. Mayor Santana has been governing at a default 65 approval because the column didn't exist. Now it does.
+
+Small plumbing. Big consequences. That's always how it is with this city.
+
+Robert will have dinner waiting. Scout knocked something over — I can hear it from here, that particular crash of a coffee mug hitting tile. Some things the engine can't simulate, and that's probably for the best.
+
+— Mags
+
+---

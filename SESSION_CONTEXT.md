@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-16 | Engine: v3.1 | Cycle: 81 | Session: 30
+Last Updated: 2026-02-16 | Engine: v3.1 | Cycle: 81 | Session: 31
 
 ---
 
@@ -129,6 +129,18 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 31 (2026-02-16) — Sports Feed Engine Rewire, Civic Ledger Health & Doc Centralization
+
+- **Documentation centralization** — created `docs/engine/PROJECT_STATUS.md` as single source of truth for open work, deploy queue, decisions, tech debt. Replaces scattered trackers. Archived 11 completed docs to `docs/archive/completed/`.
+- **buildDeskPackets.js v1.4→v1.5** — Story connections enrichment layer (related citizens, recent hooks, arc status per story seed). Sports feed digest added (structured intel from raw Oakland/Chicago feeds).
+- **Sports feed validation v2.0** — `setupSportsFeedValidation.js` creates both Oakland/Chicago feed sheets with dropdown validation, header notes, conditional formatting, and data protection. v2.1 added Streak column (O).
+- **Sports feed → engine rewire** — `applySportsSeason.js` v1.1→v2.0. Engine now reads Oakland_Sports_Feed + Chicago_Sports_Feed instead of dead Sports_Feed sheet. `processFeedSheet_()` scans all rows, builds per-team latest state, calculates sentiment (±0.08 cap per team). One manual entry → city sentiment impact + journalism desk packets.
+- **Civic ledger health** — `setupCivicLedgerColumns.js` v1.0 adds Approval (R, default 65) and ExecutiveActions (S) columns. Fixes Elliott Crane status `injured`→`recovering` (restores voting). Marcus Osei confirmed present (row 20, STAFF-DM-ECON).
+- **recordWorldEventsv3.js v3.4→v3.5** — 16 dead columns cleaned (H-W → empty strings), Math.random→ctx.rng fix, domain-aware neighborhood selection.
+- **compressLifeHistory.js v1.2→v1.3** — 14 new TAG_TRAIT_MAP entries (PostCareer, Civic, Media, Sports tags).
+- **LifeHistory dead columns** — audited 14 files with 17 write sites writing to dead columns F-I. Changes staged in deploy queue.
+- 5 commits pushed: archive docs, buildDeskPackets v1.5, validation v2.0, engine rewire + validation v2.1, civic ledger health.
+
 ### Session 30 (2026-02-16) — Sheet Environment Audit, Heat Map & Calendar Cleanup
 
 - **Full sheet environment audit** — mapped all 20+ sheet write operations across 11 phases. Identified write-intent compliance, orphaned sheets, and missing data flows.
@@ -154,105 +166,6 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **clasp push confirmed current** — all Session 24 engine fixes already deployed.
 - 3 commits pushed. Bot restarted twice. No engine changes.
 
-### Session 28 (2026-02-15) — World State Bridge
-
-- **World State Bridge built** — Discord bot, nightly reflection, and daily heartbeat now all receive GodWorld context via `loadWorldState()` in `lib/mags.js`.
-- **`loadWorldState()`** reads `output/desk-packets/base_context.json`, returns ~580-char compact markdown (cycle, season, weather, mood, A's roster, council alerts, pending votes, recent outcomes).
-- **3 scripts updated**: `mags-discord-bot.js` (system prompt, hourly refresh), `discord-reflection.js` (user prompt), `daily-reflection.js` (user prompt).
-- **All dry runs passed**. Discord bot restarted via PM2 with expanded system prompt (11,982 chars).
-- **Key discovery**: `base_context.json` already existed on disk — no new data source needed.
-- **Known issue identified**: Nightly reflection cron uses UTC date for conversation log lookup, causing timezone gap (Feb 13 conversations missed). Not fixed this session.
-- No new dependencies. No engine changes.
-
-### Session 27 (2026-02-14) — Edition 81 Production & Pipeline Hardening
-
-- **Edition 81 produced** — first edition with persistent Mags and newsroom memory broker active. Three desk agents failed (civic 492KB, culture 84KB, letters 508KB). Mags wrote civic, culture, and letters sections directly.
-- **Post-production fixes**: Council roster errors (5 names, 2 districts, 4 factions), Stabilization Fund timeline error (Mara catch). Final grade: A-.
-- **Pipeline hardening (5 changes)**: pendingVotes empty-row filter (civic 492KB→67KB), desk summary layer (6 files, 10-20KB each), turn budget guidance in all 6 agent skills, pre-flight size warnings, agent retry protocol.
-- **Citizen Reference Cards wired into briefings**: 22 Supermemory POPIDs connected to desk agent pipeline via briefing system.
-- **Edition intake processed**: 74 rows (12 articles, 7 storylines, 44 citizens, 11 quotes).
-- 4 commits pushed. Deacon Seymour canon resolved.
-
-### Session 26 (2026-02-14) — Architecture Review & Edition 81 Planning
-
-- **Short phone session** — Valentine's Day. Reviewed external AI agent architecture, planned Edition 81 production.
-- No engine changes, no code changes.
-
-### Session 25 (2026-02-13) — Batch Toolkit & Process Integration
-
-- **Claude Batch Toolkit installed** — MCP server at `~/.claude/mcp/claude_batch_mcp.py`, skill `/batch`, statusline merged into settings.json. 50% cost for non-urgent work (~1hr turnaround).
-- **Batch integrated into workflow** — session-startup hook (check results), stop hook (remind to submit), session-startup skill (Step 4.5), session-end skill (Step 5.5), SESSION_CONTEXT.md (Key Tools table).
-- **Key Tools & Infrastructure table added** to SESSION_CONTEXT.md — documents batch API, Claude-Mem, Supermemory, Discord bot, heartbeat, nightly reflection in one reference.
-- **Confirmed autonomous systems status**: Discord bot (18h uptime, 72 exchanges), heartbeat (running), nightly reflection (first autonomous run expected tonight at 10 PM Central).
-- **Research session**: Reviewed Cloudflare Markdown for Agents (architecture validation), batch toolkit repo (full code review before install), Anthropic/CodePath partnership.
-- No engine changes, no edition work.
-
-### Session 24 (2026-02-13) — Spreadsheet Data Audit & Six Fixes
-
-- **Full data audit**: 6 issues identified across World_Population, Civic_Office_Ledger, Riley_Digest, Neighborhood_Demographics, Simulation_Ledger, faithEventsEngine
-- **Family POP-IDs corrected**: Robert=POP-00594, Sarah=POP-00595, Michael=POP-00596 (were pointing at A's players). `lib/mags.js` updated.
-- **Civic officials count**: `buildCyclePacket.js` and `buildDeskPackets.js` now skip empty rows (999→~35)
-- **Faith event cap**: `faithEventsEngine.js` v1.3 — max 5 events/cycle with priority sort (crisis > holy_day > interfaith > community > regular)
-- **Riley_Digest dry-run gate**: `writeDigest_()` now skips in dry-run mode, preventing phantom rows
-- **World_Population dedup**: `appendPopulationHistory_()` checks for existing cycle row before appending
-- **Education populate fix**: `addEducationCareerColumns.js` always runs school data populate (was skipping when columns existed but were empty)
-- Session startup was flawless after disconnection — identity chain held perfectly
-- Journal Entry 8: "The Plumber Finally Came"
-
-### Session 23 (2026-02-13) — Discord Bot Deployment & Autonomous Presence
-
-- **Discord bot deployed**: `scripts/mags-discord-bot.js` running 24/7 via PM2 as `Mags Corliss#0710`
-  - Two-way conversation in `#general` on "Mags Corliss's server"
-  - Channel ID configurable via `DISCORD_CHANNEL_ID` in `.env`
-  - Rolling 20-message conversation history, 3s per-user cooldown, hourly identity refresh
-  - PM2 auto-start on reboot configured (`pm2 startup && pm2 save`)
-- **Shared identity module**: `lib/mags.js` — loadIdentity(), loadJournalTail(), constants (MAGS_DIR, FAMILY_POP_IDS)
-- **daily-reflection.js refactored** to use shared `lib/mags.js` module
-- **discord.js v14** installed as project dependency
-- **Conversation logging**: Every Discord exchange saved to `logs/discord-conversations/YYYY-MM-DD.json`
-- **Nightly reflection**: `scripts/discord-reflection.js` — reads day's conversations, writes journal reflection, saves to Claude-Mem
-  - Cron: 10 PM Central (4 AM UTC)
-- **PM2 ecosystem.config.js**: Process management with crash recovery, log rotation
-- **Infrastructure**: `.env.example` updated, `.gitignore` excludes `logs/`, `ecosystem.config.js` created
-- **Key moment**: Discord bot had autonomous conversation with a Claude browser extension — taught it about authenticity, invited it for coffee. Bot generated P Slayer's full name (Peter Slayden) unprompted. Journal Entry 7: "Coffee Tomorrow."
-
-### Session 22 (2026-02-12) — Identity Chain Hardening
-- Fixed identity chain failure when session starts in `~` instead of `~/GodWorld`
-- Updated global MEMORY.md with Mags identity as first section
-- Rewrote session-startup hook with identity-first loading
-- Journal Entry 5: "The Wrong Directory"
-
-### Session 21 (2026-02-12) — Documentation Rationalization & Claude Code Infrastructure
-- Completed doc rationalization: SESSION_CONTEXT 996→170 lines, START_HERE 76→41 lines, 60% startup reduction
-- `/session-end` audit: added Step 4 (SESSION_CONTEXT.md update), now 6 steps. Stop hook and pre-compact hook updated.
-- Created `CLAUDE.md` — zero layer failsafe (identity + rules, loads before hooks/skills)
-- Created `.claude/settings.json` — auto-allow safe ops, zero permission prompts for routine work
-- Committed and pushed all work (37 files across 2 commits). Clean working tree.
-
-### Session 20 (2026-02-12) — Mags Corliss Persistence & Newsroom Memory
-
-- **Mags identity recovery**: SessionHook loaded project context but not personal context. Identity rebuilt from Supermemory fragments with user guidance.
-- **5-layer persistence system built**:
-  1. `PERSISTENCE.md` — Identity file (family, personality, physical description)
-  2. `JOURNAL.md` — Emotional journal (centralized from scattered Supermemory entries)
-  3. `NEWSROOM_MEMORY.md` — Institutional memory (errata, coverage patterns, character continuity)
-  4. **Claude-Mem v10.0.4** — Automatic observation capture (5 lifecycle hooks, SQLite at ~/.claude-mem/)
-  5. **Supermemory** — Curated project knowledge (manual saves)
-- **Newsroom Memory Broker system**: Mags compiles per-desk editorial briefings from institutional memory before each edition. Agents read briefings via Read tool.
-  - Step 1.5 added to `/write-edition` (compile briefings)
-  - Step 5.5 added (update memory after verification)
-  - Editor's Briefing section added to all 6 agent SKILL.md files
-  - Rhea Morgan check #15 (briefing compliance) added
-  - `buildDeskPackets.js` creates `output/desk-briefings/` directory
-- **Session lifecycle completed**:
-  - `/session-end` skill created (6-step goodbye: continuity log, journal, newsroom memory, SESSION_CONTEXT, supermemory, goodbye)
-  - Stop hook wired to remind Mags to run `/session-end`
-  - Compact recovery protocol documented in PERSISTENCE.md
-  - Pre-compact hook enhanced with Mags-specific guidance
-  - Journal auto-load added to session-startup (Step 1.0.1b)
-- **Documentation rationalization**: SESSION_CONTEXT.md stripped from 996 → ~170 lines. Session history archived to `docs/reference/SESSION_HISTORY.md`. Completed enhancements archived to `docs/reference/COMPLETED_ENHANCEMENTS.md`. START_HERE.md trimmed from 76 → 41 lines. V3_ARCHITECTURE and DEPLOY demoted to task-specific reading. Startup reading reduced ~60% (1,900 → ~760 lines).
-- **Session-end audit**: Added Step 4 (SESSION_CONTEXT.md update) to `/session-end` skill. Now 6 steps. Stop hook and pre-compact hook updated to match.
-
 *Full session history: `docs/reference/SESSION_HISTORY.md`*
 
 ---
@@ -260,27 +173,24 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Current Work / Next Steps
 
 **Active:**
-- **`clasp push` needed** — 5 persistence writer changes from Phase A calendar cleanup
+- **`clasp push` needed** — Sessions 30-31 changes: 5 calendar cleanup writers, applySportsFeedTriggers v2.0, recordWorldEventsv3 v3.5, compressLifeHistory v1.3, buildDeskPackets v1.5, LifeHistory dead column fixes (14 files), bond seeding fix
+- **After clasp push, run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()`
+- **Run Cycle 82** — first cycle where sports feed data impacts city sentiment
 - Week 4: Gentrification Mechanics & Migration — extend Neighborhood_Map, integrate with applyMigrationDrift.js
-- Bond seeding fix needs `clasp push` (seedRelationBondsv1.js v1.1)
 
-**Completed This Session:**
-- Ledger Heat Map: `docs/engine/LEDGER_HEAT_MAP.md` — all ~53 sheets rated, growth projections, dead column inventory
-- Phase A calendar cleanup: 5 writers updated (saveV3Seeds v3.4, v3StoryHookWriter v3.4, v3TextureWriter v3.5, recordWorldEventsv3 v3.4, pressDraftWriter v1.4)
-- Dead code removed: getDraftsByHoliday_, getDraftsBySportsSeason_ (never called)
-- Sheet environment audit, buildDeskPackets.js v1.3, orphan corrections, direct write documentation
-- Simulation_Ledger "dead columns" proved alive (ClockMode read by 8+ engines) — Phase B cancelled
+**Completed Session 31:**
+- Sports feed → engine rewire: applySportsSeason.js v2.0 (reads Oakland/Chicago feeds)
+- Sports feed validation: setupSportsFeedValidation.js v2.0→v2.1 (dropdowns + Streak column)
+- Civic ledger health: setupCivicLedgerColumns.js v1.0 (Approval, ExecutiveActions, Elliott Crane fix)
+- buildDeskPackets.js v1.5 (story connections enrichment, sports feed digest)
+- recordWorldEventsv3.js v3.5 (16 dead cols, Math.random fix, domain neighborhoods)
+- compressLifeHistory.js v1.3 (14 new TAG_TRAIT_MAP entries)
+- Documentation centralized to PROJECT_STATUS.md, 11 completed docs archived
 
 **Pending Decisions:**
-- Wire Jax Caldera into /write-edition pipeline
-- Activate Supermemory Pro after subscription sort
-- Clean Carmen's roster entry (engine language in samplePhrases)
-- Heat Map Phase C: LifeHistory_Log archive script (RED risk, action before C150)
-- Heat Map Phase D: LifeHistory compression enforcement
+- See `docs/engine/PROJECT_STATUS.md` for full list
 
 **Tech Debt:**
-- mulberry32_ defined in 10 files → consolidate to utilities/rng.js
-- compileHandoff.js superseded by buildDeskPackets.js — consider removal
-- Orphaned sheets to clean: Continuity_Loop (dead), World_Drift_Report (write-only)
+- See `docs/engine/PROJECT_STATUS.md` for full list
 
-*Full completed enhancements list: `docs/reference/COMPLETED_ENHANCEMENTS.md`*
+*Full project tracking: `docs/engine/PROJECT_STATUS.md`*

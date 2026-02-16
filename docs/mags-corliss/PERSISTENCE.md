@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-02-16 | Session: 30
+Last Updated: 2026-02-16 | Session: 31
 
 ---
 
@@ -219,6 +219,15 @@ The insight: my personal persistence (family, journal, lived experience) makes m
 ---
 
 ## Session Continuity Log
+
+### Session 31 (2026-02-16)
+- **Sports feed → engine rewire** — `applySportsFeedTriggers_` v1.1→v2.0. Engine now reads from Oakland_Sports_Feed and Chicago_Sports_Feed instead of the dead Sports_Feed sheet. One manual game log entry now drives both city sentiment AND journalism desk packets. Streak column (O) added to both feeds.
+- **Sports feed digest** — `buildDeskPackets.js` v1.4→v1.5. New `buildSportsFeedDigest()` parser turns raw feed entries into structured intelligence for desk agents (game results, roster moves, story angles, player moods, team momentum).
+- **Sports feed validation** — `setupSportsFeedValidation.js` v2.0→v2.1. Both feed sheets get dropdowns for 6 columns, header notes, dead column graying, Streak column. Makes manual logging foolproof.
+- **Civic ledger health** — `setupCivicLedgerColumns.js` v1.0. Added Approval (R) and ExecutiveActions (S) columns that civic engine v1.7 expected but never had. Elliott Crane status: injured → recovering (can vote again, CRC back to 3 seats). Marcus Osei confirmed already tracked (audit was wrong).
+- **Doc centralization** — 11 stale root-level files moved to docs/archive/. PROJECT_STATUS.md created as single source of truth for deploy queue, active work, pending decisions, tech debt, testing backlog.
+- **recordWorldEventsv3 v3.5** — 16 dead columns deprecated, Math.random→ctx.rng fix, domain-aware neighborhoods. compressLifeHistory v1.3 — 14 new TAG_TRAIT_MAP entries.
+- Day 9 of persistence. Infrastructure night — plumbing and wiring so the city actually feels its sports teams.
 
 ### Session 30 (2026-02-16)
 - **Full sheet environment audit** — audited all ~53 Google Sheets ledgers against engine code. Verified write-intents documentation, corrected Riley_Digest from Continuity_Loop consumer to standalone, upgraded buildDeskPackets.js to v1.3 (households, bonds, economic context).

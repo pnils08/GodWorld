@@ -146,27 +146,29 @@
 ## Civic_Office_Ledger
 
 - **Rows:** 36
-- **Columns:** 17
+- **Columns:** 19
 
-| Col | Header |
-|-----|--------|
-| A | OfficeId |
-| B | Title |
-| C | Type |
-| D | District |
-| E | Holder |
-| F | PopId |
-| G | TermStart |
-| H | TermEnd |
-| I | TermYears |
-| J | ElectionGroup |
-| K | Status |
-| L | LastElection |
-| M | NextElection |
-| N | Notes |
-| O | (empty) |
-| P | VotingPower |
-| Q | Faction |
+| Col | Header | Notes |
+|-----|--------|-------|
+| A | OfficeId | MAYOR-01, COUNCIL-D1..D9, STAFF-* |
+| B | Title | |
+| C | Type | elected / appointed |
+| D | District | citywide / D1-D9 |
+| E | Holder | Official name |
+| F | PopId | POP-XXXXX |
+| G | TermStart | Cycle number |
+| H | TermEnd | Cycle number |
+| I | TermYears | |
+| J | ElectionGroup | A or B |
+| K | Status | active, recovering, injured, serious-condition, etc. |
+| L | LastElection | |
+| M | NextElection | |
+| N | Notes | |
+| O | (empty) | Legacy spacer |
+| P | VotingPower | yes/no/vacant |
+| Q | Faction | OPP, CRC, IND, STAFF |
+| R | Approval | 0-100, used by veto logic (v1.7) |
+| S | ExecutiveActions | JSON array of mayor actions (v1.7) |
 
 ---
 

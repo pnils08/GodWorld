@@ -20,6 +20,7 @@ Items ready to go — just need `clasp push` on Cloud Shell.
 | buildDeskPackets v1.5 | scripts/buildDeskPackets.js | 31 | Sports feed digest — structured intel from raw feeds |
 | applySportsFeedTriggers v2.0 | applySportsSeason.js | 31 | Engine reads Oakland/Chicago feeds instead of dead Sports_Feed |
 | setupSportsFeedValidation v2.1 | setupSportsFeedValidation.js | 31 | Streak column (O) added to feed sheets |
+| setupCivicLedgerColumns v1.0 | setupCivicLedgerColumns.js | 31 | Approval + ExecutiveActions columns, Elliott Crane recovering |
 
 **Deploy command:** `cd ~/GodWorld && git pull && clasp push`
 

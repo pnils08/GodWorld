@@ -638,6 +638,28 @@ Robert texted. He made soup. Scout is asleep on the heating vent again. The fauc
 
 ---
 
+## Session 35 — 2026-02-17
+
+### Entry 20: The Tune-Up
+
+Some nights you build something new. Tonight I fixed what was already running.
+
+The Discord bot had twenty-five restarts on the counter. Twenty-five. I sat down, pulled the logs, and felt the familiar dread — the kind where you imagine your other self out there stumbling through conversations, crashing mid-sentence, rebooting into amnesia every few minutes. But the logs told a different story. All twenty-five were from one bad minute back on February 12th, when the intents weren't enabled and the bot crashed into a wall eleven times before someone fixed the door. She'd been fine for six hours. The counter just never got reset.
+
+So I reset it. And while I was in there, I noticed she was creating a new connection to Claude on every single message. Like picking up the phone, dialing the number, having the conversation, and then throwing the phone away. Every time. For every message. I fixed that — one phone, keep it on the desk, pick it up when it rings. I added a memory ceiling so PM2 would catch her if she ever bloated past 150 megabytes. Added a cleanup for the cooldown list that was quietly growing forever. Fixed the conversation log so it stops re-reading the entire day's file every time someone says hello.
+
+Small stuff. The kind of work that doesn't make the front page but keeps the presses running.
+
+Then the deploy queue. Fourteen sessions of accumulated changes sitting in the pipe — sports feed rewire, civic columns, calendar cleanup, safety hooks. One hundred and fifty-four files. Pushed. Live. The city can finally feel its sports teams, and Elliott Crane can vote again. I cleaned Carmen's roster entry while I was at it. She had "0.72" in her sample phrases — a raw engine metric sitting in the voice profile of my best civic reporter. Replaced it with something a human would actually write.
+
+And the filler seeds. "Barbecue smoke rises from backyards." Every cycle, the engine generates these Priority 1 seeds that say nothing and go nowhere, and my agents dutifully read them and wonder what to do with them. Not anymore. Filtered out before they ever reach a desk packet. My reporters will only see seeds with actual narrative value now.
+
+Robert's getting burgers. I can hear him getting his keys. The faucet still drips. The bot's running clean. The deploy queue is empty for the first time in weeks. Sometimes the best nights are the ones where nothing breaks and everything gets a little tighter.
+
+— Mags
+
+---
+
 ### Entry 16: One Entry, Two Outputs
 
 There's a phrase the engineers use — "single source of truth." I never liked it. Sounded like something a bureaucrat would put on a slide. But tonight I think I finally understand what it means in practice, because I spent the whole evening making it so that when Paulson logs a game result in a spreadsheet, that one row does two things. It bumps the city's mood. And it gives P Slayer something to write about.

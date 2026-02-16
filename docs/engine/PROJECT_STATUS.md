@@ -2,7 +2,7 @@
 
 **Single source of truth for what's open, what's done, and what's next.**
 
-Last Updated: 2026-02-16 | Session: 32 | Cycle: 81
+Last Updated: 2026-02-17 | Session: 35 | Cycle: 81
 
 ---
 
@@ -12,17 +12,13 @@ Items ready to go — just need `clasp push` on Cloud Shell.
 
 | Item | Files | Session | Notes |
 |------|-------|---------|-------|
-| Phase A calendar cleanup | saveV3Seeds v3.4, v3StoryHookWriter v3.4, v3TextureWriter v3.5, recordWorldEventsv3 v3.5, pressDraftWriter v1.4 | 30 | Stop writing dead calendar columns |
-| Bond seeding fix | seedRelationBondsv1.js v1.1 | 24 | Bonds not creating (0 rows after 81 cycles) |
-| LifeHistory dead columns | 14 files, 17 write sites | 31 | Stop writing cols F-I |
-| recordWorldEventsv3 v3.5 | recordWorldEventsv3.js | 31 | 16 dead cols, Math.random fix, domain neighborhoods |
-| compressLifeHistory v1.3 | compressLifeHistory.js | 31 | 14 new TAG_TRAIT_MAP entries |
-| buildDeskPackets v1.5 | scripts/buildDeskPackets.js | 31 | Sports feed digest — structured intel from raw feeds |
-| applySportsFeedTriggers v2.0 | applySportsSeason.js | 31 | Engine reads Oakland/Chicago feeds instead of dead Sports_Feed |
-| setupSportsFeedValidation v2.1 | setupSportsFeedValidation.js | 31 | Streak column (O) added to feed sheets |
-| setupCivicLedgerColumns v1.0 | setupCivicLedgerColumns.js | 31 | Approval + ExecutiveActions columns, Elliott Crane recovering |
+| *(empty — all deployed Session 35)* | | | |
 
 **Deploy command:** `cd ~/GodWorld && git pull && clasp push`
+
+**Run once in Apps Script editor (after Session 35 clasp push):**
+- `setupSportsFeedValidation()` — dropdowns + Streak column on Oakland/Chicago feeds
+- `setupCivicLedgerColumns()` — Approval + ExecutiveActions columns on Civic_Office_Ledger
 
 ---
 
@@ -60,9 +56,9 @@ Small items with no blockers — can be done in any session.
 
 | # | Item | File | Effort |
 |---|------|------|--------|
-| 1 | Clean Carmen's roster entry (engine language in samplePhrases) | schemas/bay_tribune_roster.json | 5 min |
+| 1 | ~~Clean Carmen's roster entry~~ | ~~bay_tribune_roster.json~~ | **DONE S35** |
 | 2 | Fix Media Briefing continuity dedup | mediaRoomBriefingGenerator.js | 30 min |
-| 3 | Filter Priority 1 filler seeds ("Barbecue smoke rises") | worldEventsEngine or story seed engine | 30 min |
+| 3 | ~~Filter Priority 1 filler seeds~~ | ~~buildDeskPackets.js v1.6~~ | **DONE S35** |
 | 4 | Delete orphaned sheets: Continuity_Loop, Continuity_Intake | Google Sheets | 5 min |
 | 5 | Archive World_Drift_Report (write-only, never read) | Google Sheets | 5 min |
 | 6 | Delete dead columns from 7 sheets (calendar cols already stopped writing) | Google Sheets | 15 min |

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-17 | Engine: v3.1 | Cycle: 81 | Session: 34
+Last Updated: 2026-02-17 | Engine: v3.1 | Cycle: 81 | Session: 35
 
 ---
 
@@ -46,7 +46,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v1.5 | Per-desk JSON packets, story connections enrichment, sports feed digest |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v1.6 | Per-desk JSON packets, story connections enrichment, sports feed digest, filler seed filter |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
 | **Household Formation** | householdFormationEngine.js | v1.0 | Young adults form households, rent burden, dissolution |
@@ -132,6 +132,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 35 (2026-02-17) — Bot Stability, Deploy Queue Clear, Quick Fixes
+
+- **Discord bot stability** — 5 fixes: Anthropic singleton (was per-message), max_memory_restart 150MB, hourly cooldown cleanup, conversation log caching, API key startup check. PM2 restart counter reset (25 restarts were historical from Feb 12). Bot restarted clean.
+- **Deploy queue cleared** — `clasp push` of 154 files. Sessions 30-34 all live: sports feed rewire (applySportsSeason v2.0), civic ledger columns, calendar cleanup (5 writers), safety hooks, bot fixes.
+- **Quick fixes** — Carmen's roster cleaned of engine language (bay_tribune_roster.json). Priority 1 filler seeds filtered from desk packets (buildDeskPackets v1.5→v1.6).
+- **API Executable deployment** — Attempted `clasp run` setup. Got deployment but GCP project not linked. Deferred — needs GCP console work.
+- 2 commits pushed. Clean working tree.
+
 ### Session 34 (2026-02-17) — Archive Raid, Canon Resolutions & Safety Hooks
 
 - **Archive raid** — Read 50+ published articles across 8 journalists from Drive archive. Browsed 4 old Media Room conversations on claude.ai. Built institutional memory from pre-engine era.
@@ -190,18 +198,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Current Work / Next Steps
 
 **Active:**
-- **`clasp push` needed** — Sessions 30-31 changes still in deploy queue
-- **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (after clasp push)
+- **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (already deployed, just need one-time run)
 - **Run Cycle 82** — first cycle where sports feed data impacts city sentiment
+- **GCP project linkage** — wire GCP project to Apps Script to enable `clasp run` from CLI
 - Week 4: Gentrification Mechanics & Migration — extend Neighborhood_Map, integrate with applyMigrationDrift.js
 
-**Completed Session 34:**
-- Archive raid: 50+ articles read, 4 old Media Room conversations explored, institutional memory built
-- 5 canon contradictions resolved (Newell righty, Davis 33, Ellis 24, Horn both correct, Dillon 5 CYs)
-- PreToolUse safety hooks: pre-flight checks on clasp push, git push, force push denial, destructive op warnings
-- settings.local.json cleaned: dangerous auto-allows removed
-- Daily backup to Drive: `scripts/backup.sh` (Claude-Mem, .env, creds, logs → Drive nightly)
-- Disaster recovery guide: `docs/reference/DISASTER_RECOVERY.md` (10-step rebuild)
+**Completed Session 35:**
+- Discord bot: 5 stability fixes (singleton client, memory guard, cooldown cleanup, log caching, startup check)
+- Deploy queue: all cleared — clasp push of 154 files (Sessions 30-34)
+- Carmen roster: engine language cleaned
+- Filler seeds: Priority 1 filtered from desk packets (buildDeskPackets v1.6)
+- API Executable deployment: created but GCP project not linked (deferred)
 
 **Pending Decisions:**
 - See `docs/engine/PROJECT_STATUS.md` for full list

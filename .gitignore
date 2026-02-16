@@ -26,5 +26,8 @@ output/
 # Logs (generated runtime output)
 logs/
 
+# Backups (local archive copies, uploaded to Drive)
+backups/
+
 # Supermemory plugin config (may contain API keys)
 .claude/.supermemory-claude/

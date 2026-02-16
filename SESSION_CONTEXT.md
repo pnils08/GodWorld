@@ -97,7 +97,8 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 | `docs/reference/V3_ARCHITECTURE.md` | Technical contract, ctx shape, write-intents spec |
 | `docs/reference/DEPLOY.md` | Deployment (clasp vs git) |
 | `docs/reference/GODWORLD_REFERENCE.md` | Complete system reference |
-| `docs/engine/ENGINE_ROADMAP.md` | Implementation status (Tiers 1-6 complete, Tier 7 in progress) |
+| `docs/engine/PROJECT_STATUS.md` | **Single source of truth** — open work, deploy queue, decisions, tech debt |
+| `docs/engine/ENGINE_ROADMAP.md` | Implementation status (Tiers 1-6 complete, Tier 7 complete) |
 | `docs/media/AGENT_NEWSROOM.md` | Agent Newsroom — 7 permanent agents + 8 skills |
 | `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` | Editorial rules, voice, canon, Paulson, Mara Vance |
 | `docs/media/ARTICLE_INDEX_BY_POPID.md` | 326+ citizens indexed by POP-ID |

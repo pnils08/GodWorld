@@ -22,6 +22,13 @@ description: Write the letters to the editor section with citizen voices.
 1. Read `output/desk-packets/base_context.json` — cycle info, calendar, weather
 2. Read `output/desk-packets/letters_c{XX}.json` — the letters desk packet
 3. Letters packet gets data from ALL domains — it's the citizen reaction section
+4. If desk briefing exists, read `output/desk-briefings/letters_briefing_c{XX}.md` — Mags' editorial guidance + citizen cards + archive findings
+
+## Local Archive Search Pool
+The letters desk has Grep access to the ENTIRE local Drive mirror for citizen voice research:
+- **All archives:** `output/drive-files/` — search anywhere for citizen mentions, past letters, voice continuity
+- **Past editions:** `output/drive-files/_Publications Archive/` — past Letters sections for tone reference
+- **Citizen references:** Search any archive by citizen name to find their history across all coverage
 
 ## Step 2: Understand the Desk Packet
 The letters packet contains:

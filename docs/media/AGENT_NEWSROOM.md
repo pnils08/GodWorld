@@ -221,6 +221,49 @@ All agents can access these for verification and continuity:
 
 ---
 
+## Local Drive Archive (Searchable Institutional Memory)
+
+All agents have Grep/Read access to **`output/drive-files/`** — a local mirror of the entire Google Drive archive (614 files, 6.9 MB). This is every article ever written, every player data card, every edition ever published.
+
+### Archive Contents
+
+| Archive | Files | Content |
+|---------|-------|---------|
+| Tribune Media Archive | 101 | 20 journalist desks — Carmen, Maria, Hal, Anthony, P Slayer, Luis, etc. |
+| Sports Desk Archive | 155 | Features, analytics, interviews, origin series, dugout scenes |
+| Publications Archive | 67 | Cycle Pulse editions 1-81, supplementals, Paulson pressers, Mara directives |
+| As Universe Database | 100 | TrueSource player cards (30+ MLB, 14 prospects, 13 former), rosters, transactions |
+| Bulls Universe Database | 9 | Chicago player profiles (3), contracts, financials |
+| Stats CSV | 4 | Batting stats, master stats (2039-2040 seasons as searchable CSV) |
+
+### Per-Desk Search Pools
+
+| Desk | Primary Search Targets | What to Search For |
+|------|----------------------|-------------------|
+| **Sports** | `_Sports Desk Archive/`, `_As Universe Database/`, `_As_Universe_Stats_CSV/` | Player histories, past features by Hal/Anthony/P Slayer, batting stats, roster data, TrueSource cards |
+| **Civic** | `_Tribune Media Archive/Carmen_Delaine/`, `_Tribune Media Archive/Luis_Navarro/` | Past civic coverage, initiative history, infrastructure reporting, investigation precedents |
+| **Culture** | `_Tribune Media Archive/Maria_Keen/`, `_Tribune Media Archive/Kai_Marston/`, `_Tribune Media Archive/Mason_Ortega/` | Past cultural coverage, neighborhood features, faith reporting, food coverage |
+| **Business** | `_Tribune Media Archive/Jordan_Velez/` | Past business tickers, economic analysis, labor reporting |
+| **Chicago** | `_Bulls Universe Database/`, `_Publications Archive/Chicago_Supplementals/` | Bulls player cards, Chicago satellite editions, Selena/Talia past coverage |
+| **Letters** | All archives | Citizen mentions anywhere, past letters for voice continuity |
+| **Rhea (Verification)** | `_As Universe Database/`, `_Bulls Universe Database/`, `_Publications Archive/` | Player data cards for stat verification, edition history for continuity checks |
+
+### How Agents Use the Archive
+
+1. **During briefing compilation (Step 1.5):** Mags Greps the archive for citizens, storylines, and reporters relevant to this cycle. Key findings go into desk briefing memos.
+2. **During writing (Step 3):** Agents can Grep their search pool for voice reference, historical context, or continuity checks.
+3. **During verification (Step 4):** Rhea can cross-reference player stats against TrueSource data cards and CSV stat files.
+
+### Manifest & Index
+
+- **Full manifest:** `output/drive-manifest.json` (JSON, all 432 files with IDs and paths)
+- **Human-readable index:** `docs/media/DRIVE_MANIFEST.md`
+- **Local file index:** `output/drive-files/_INDEX.md`
+- **Rebuild command:** `node scripts/buildCombinedManifest.js` (re-crawls all 5 Drive roots)
+- **Re-download:** `node scripts/downloadDriveArchive.js` (downloads all text files from manifest)
+
+---
+
 ## What Changed (Session 13)
 
 This document previously described a **planned** Agent Newsroom using the Claude Agent SDK with MCP servers and SQLite. That architecture has been **superseded** by the simpler Claude Code agent pipeline:

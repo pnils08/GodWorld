@@ -22,6 +22,15 @@ description: Write the Oakland sports section using P Slayer, Anthony, and Hal R
 2. Read `output/desk-packets/sports_c{XX}.json` — the sports desk packet
 3. Read `schemas/bay_tribune_roster.json` — look up reporter voice profiles
 4. If reporter name given, use that reporter. Otherwise use P Slayer as primary, Anthony as secondary.
+5. If desk briefing exists, read `output/desk-briefings/sports_briefing_c{XX}.md` — Mags' editorial guidance + citizen cards + archive findings
+
+## Local Archive Search Pool
+The sports desk has Grep access to the local Drive mirror for research and voice reference:
+- **Player data cards:** `output/drive-files/_As Universe Database/Players/` — TrueSource DataPages for all MLB, prospect, and former players
+- **Batting stats (CSV):** `output/drive-files/_As_Universe_Stats_CSV/` — 2039-2040 season stats, searchable
+- **Past sports coverage:** `output/drive-files/_Sports Desk Archive/` — Hal, Anthony, P Slayer features, analytics, interviews, origin series
+- **Past editions:** `output/drive-files/_Publications Archive/` — every Cycle Pulse edition for continuity
+- **Cannon mirrors:** `As_Universe_Cannon_Text_Mirror` — complete A's universe reference text
 
 ## Step 2: Understand the Desk Packet
 The sports packet contains:

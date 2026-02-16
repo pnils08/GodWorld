@@ -22,6 +22,18 @@ description: Write the culture and seasonal section using Maria Keen and the cul
 2. Read `output/desk-packets/culture_c{XX}.json` — the culture desk packet
 3. Read `schemas/bay_tribune_roster.json` — look up reporter voice profiles
 4. If reporter name given, use that reporter. Otherwise default to Maria Keen.
+5. If desk briefing exists, read `output/desk-briefings/culture_briefing_c{XX}.md` — Mags' editorial guidance + citizen cards + archive findings
+
+## Local Archive Search Pool
+The culture desk has Grep access to the local Drive mirror for research and voice reference:
+- **Past culture coverage:** `output/drive-files/_Tribune Media Archive/Maria_Keen/` — Maria's cultural features
+- **Arts/entertainment:** `output/drive-files/_Tribune Media Archive/Kai_Marston/` — arts coverage
+- **Food/hospitality:** `output/drive-files/_Tribune Media Archive/Mason_Ortega/` — food features
+- **Education:** `output/drive-files/_Tribune Media Archive/Angela_Reyes/` — education reporting
+- **Faith:** `output/drive-files/_Tribune Media Archive/Elliot_Graye/` — faith essays
+- **Weather:** `output/drive-files/_Tribune Media Archive/Noah_Tan/` — weather/environment
+- **Lifestyle:** `output/drive-files/_Tribune Media Archive/Sharon_Okafor/` — lifestyle features
+- **Past editions:** `output/drive-files/_Publications Archive/` — every Cycle Pulse for continuity
 
 ## Step 2: Understand the Desk Packet
 The culture packet contains:

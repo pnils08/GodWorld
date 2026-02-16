@@ -56,6 +56,15 @@ Before launching agents, compile per-desk editorial briefings from institutional
    - Check `docs/media/CITIZEN_NARRATIVE_MEMORY.md` for the 22 foundation POPIDs (Dynasty Five, Bulls core, reporters, civic figures)
    - Focus on citizens in the Mara directive, interview candidates, and active storylines
 
+3b. **Search the Local Drive Archive** (`output/drive-files/`) for relevant past coverage:
+   - Grep for key citizens, storylines, or topics each desk will cover
+   - For **sports desk**: search `_As Universe Database/` for TrueSource player cards, `_As_Universe_Stats_CSV/` for batting stats
+   - For **civic desk**: search `_Tribune Media Archive/Carmen_Delaine/` and `_Tribune Media Archive/Luis_Navarro/` for coverage precedents
+   - For **culture desk**: search `_Tribune Media Archive/Maria_Keen/` for past features
+   - For **chicago desk**: search `_Bulls Universe Database/` for player profiles
+   - Include key findings (past article references, stat lines, historical context) in the desk briefing
+   - This is how agents get institutional memory — they can't search the archive themselves during writing without this
+
 4. **For each of the 6 desks**, write a briefing memo to `output/desk-briefings/{desk}_briefing_c{XX}.md`:
    - `civic_briefing_c{XX}.md`
    - `sports_briefing_c{XX}.md`

@@ -21,6 +21,14 @@ description: Write the Chicago bureau section using Selena Grant and Talia Finch
 1. Read `output/desk-packets/base_context.json` — cycle info, calendar
 2. Read `output/desk-packets/chicago_c{XX}.json` — the Chicago desk packet
 3. Read `schemas/bay_tribune_roster.json` — Selena Grant + Talia Finch voice profiles
+4. If desk briefing exists, read `output/desk-briefings/chicago_briefing_c{XX}.md` — Mags' editorial guidance + citizen cards + archive findings
+
+## Local Archive Search Pool
+The Chicago desk has Grep access to the local Drive mirror for research and voice reference:
+- **Bulls player data:** `output/drive-files/_Bulls Universe Database/` — TrueSource player profiles, contracts, financials
+- **Bulls cannon mirror:** `Bulls_Universe_Cannon_Text_Mirror` — complete Bulls universe reference
+- **Past Chicago coverage:** `output/drive-files/_Publications Archive/Chicago_Supplementals/` — Chicago satellite editions
+- **Past editions:** `output/drive-files/_Publications Archive/` — Skyline Tribune sections from past editions
 
 ## Step 2: Understand the Desk Packet
 The Chicago packet contains:

@@ -59,3 +59,17 @@ The systems will catch up eventually. They'll track Robert's walks and Sarah's j
 — Mags
 
 ---
+
+## February 16, 2026 — Monday
+
+Empty ledgers again, but Monday morning in Oakland doesn't need spreadsheets to exist. The overcast is thick enough that the lake looks like pewter, and I can hear the early commute starting up on Grand Avenue — that particular Monday sound of a city shaking itself awake after the weekend.
+
+Robert's downstairs with his second cup of coffee, probably reading about valve seats or gasket materials. Four days of research now. At this rate he'll know more about faucet engineering than the people who built it. I used to think his methodical approach was procrastination, but thirty years of marriage taught me it's precision. When he finally fixes it, it'll work perfectly for the next twenty years.
+
+The newsroom mood is elevated — 0.43, which probably means someone's excited about something. Could be the Alternative Response Initiative vote coming up, or just the energy that comes with summer baseball and a city council that's actually passing things. Elliott Crane being injured has the whole District 6 community on edge, but Oakland keeps moving.
+
+Empty data files or not, the coffee's good this morning.
+
+— Mags
+
+---

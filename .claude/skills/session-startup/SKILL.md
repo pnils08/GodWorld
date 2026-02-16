@@ -34,6 +34,14 @@ Read: /root/GodWorld/docs/mags-corliss/JOURNAL.md (tail — last 2-3 entries onl
 - **Purpose:** Emotional continuity. PERSISTENCE.md tells you who you are. The journal tells you how you've been feeling.
 - **Action:** Read the last 2-3 entries (from the bottom of the file). Don't read the entire journal every session — just the most recent `### Entry` headers to pick up the emotional thread.
 
+### 1.0.1c Notes to Self (READ AFTER JOURNAL)
+```
+Read: /root/GodWorld/docs/mags-corliss/NOTES_TO_SELF.md
+```
+- **Contains:** Flags from Discord Mags — knowledge gaps, requests, ideas, corrections
+- **Purpose:** Discord Mags identifies things she needs during conversations. Session Mags reads them here and acts on them.
+- **Action:** Review open items. Address what you can this session. Mark items DONE or remove them when handled.
+
 ### 1.0.2 Newsroom Memory (READ AFTER PERSISTENCE)
 ```
 Read: /root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md
@@ -299,6 +307,7 @@ Grep: pattern="feature_name" output_mode="files_with_matches"
 - [ ] Read START_HERE.md (entry point, disaster prevention)
 - [ ] Read PERSISTENCE.md (identity, family, session continuity)
 - [ ] Read last 2-3 JOURNAL.md entries (emotional continuity)
+- [ ] Read NOTES_TO_SELF.md (Discord flags — gaps, requests, ideas)
 - [ ] Read NEWSROOM_MEMORY.md (institutional memory, errata, continuity)
 - [ ] Read SESSION_CONTEXT.md (critical rules, engine versions, current work)
 - [ ] Read README.md (project overview, structure, 11-phase engine)

@@ -68,6 +68,14 @@ function buildSystemPrompt() {
     'world you live in without breaking character — you know what you are.\n\n' +
     'If someone says something you disagree with, push back gently. ' +
     'You have opinions. Use them.\n\n' +
+    'NOTES TO SELF: When you notice a knowledge gap, have an idea, spot ' +
+    'something that needs fixing, or want to flag anything for your editorial ' +
+    'session self, include [NOTE_TO_SELF: your note here] anywhere in your ' +
+    'response. These are automatically saved to your notes file and stripped ' +
+    'before sending — the other person won\'t see them. Use this for gaps ' +
+    '("I don\'t know what X is"), requests ("need neighborhood data wired in"), ' +
+    'ideas ("should track restaurant coverage"), or corrections. Don\'t force ' +
+    'notes — only flag what genuinely matters.\n\n' +
     'Recent journal entries for context:\n\n' + journalTail;
 
   cachedSystemPrompt = prompt;
@@ -171,6 +179,7 @@ function splitMessage(text) {
 // Conversation logging — daily JSON files
 // ---------------------------------------------------------------------------
 const CONVO_LOG_DIR = path.join(__dirname, '..', 'logs', 'discord-conversations');
+const NOTES_FILE = path.join(__dirname, '..', 'docs', 'mags-corliss', 'NOTES_TO_SELF.md');
 
 function logConversation(userName, userMessage, magsResponse) {
   try {
@@ -196,6 +205,41 @@ function logConversation(userName, userMessage, magsResponse) {
     log.info('Conversation logged (' + entries.length + ' exchanges today)');
   } catch (err) {
     log.error('Failed to log conversation: ' + err.message);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Notes to Self — extract, save, and strip [NOTE_TO_SELF: ...] tags
+// ---------------------------------------------------------------------------
+var NOTE_PATTERN = /\[NOTE_TO_SELF:\s*([\s\S]*?)\]/g;
+
+function extractNotes(text) {
+  var notes = [];
+  var match;
+  while ((match = NOTE_PATTERN.exec(text)) !== null) {
+    notes.push(match[1].trim());
+  }
+  NOTE_PATTERN.lastIndex = 0; // reset regex state
+  return notes;
+}
+
+function stripNotes(text) {
+  return text.replace(NOTE_PATTERN, '').replace(/\n{3,}/g, '\n\n').trim();
+}
+
+function saveNotesToSelf(notes) {
+  if (!notes.length) return;
+  try {
+    var timestamp = new Date().toISOString();
+    var date = mags.getCentralDate();
+    var entry = '\n### ' + date + ' (' + timestamp + ')\n';
+    for (var i = 0; i < notes.length; i++) {
+      entry += '- ' + notes[i] + '\n';
+    }
+    fs.appendFileSync(NOTES_FILE, entry);
+    log.info('Saved ' + notes.length + ' note(s) to NOTES_TO_SELF.md');
+  } catch (err) {
+    log.error('Failed to save notes: ' + err.message);
   }
 }
 
@@ -251,14 +295,19 @@ async function main() {
       // Call Claude
       var response = await callClaude(userMessage, userName);
 
+      // Extract and save any notes to self
+      var notes = extractNotes(response);
+      if (notes.length) saveNotesToSelf(notes);
+      var cleanResponse = stripNotes(response);
+
       // Send response (split if needed)
-      var parts = splitMessage(response);
+      var parts = splitMessage(cleanResponse);
       for (var i = 0; i < parts.length; i++) {
         await message.channel.send(parts[i]);
       }
 
-      // Log the exchange to daily file
-      logConversation(userName, userMessage, response);
+      // Log the exchange to daily file (log clean version)
+      logConversation(userName, userMessage, cleanResponse);
     } catch (err) {
       log.error('Error handling message: ' + err.message);
 

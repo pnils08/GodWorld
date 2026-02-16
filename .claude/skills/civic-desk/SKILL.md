@@ -22,6 +22,15 @@ description: Write the civic affairs section for an edition using Carmen Delaine
 2. Read `output/desk-packets/civic_c{XX}.json` — the civic desk packet
 3. Read `schemas/bay_tribune_roster.json` — look up the reporter's voice profile
 4. If reporter name is given as argument, use that reporter. Otherwise default to Carmen Delaine.
+5. If desk briefing exists, read `output/desk-briefings/civic_briefing_c{XX}.md` — Mags' editorial guidance + citizen cards + archive findings
+
+## Local Archive Search Pool
+The civic desk has Grep access to the local Drive mirror for research and voice reference:
+- **Past civic coverage:** `output/drive-files/_Tribune Media Archive/Carmen_Delaine/` — Carmen's civic ledger articles
+- **Investigations:** `output/drive-files/_Tribune Media Archive/Luis_Navarro/` — Luis's investigation pieces
+- **Health desk:** `output/drive-files/_Tribune Media Archive/Dr._Lila_Mezran/` — health reporting history
+- **Transit/infrastructure:** `output/drive-files/_Tribune Media Archive/Trevor_Shimizu/` — transit coverage
+- **Past editions:** `output/drive-files/_Publications Archive/` — every Cycle Pulse for initiative continuity
 
 ## Step 2: Understand the Desk Packet
 The civic packet contains:

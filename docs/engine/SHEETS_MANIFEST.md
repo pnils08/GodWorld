@@ -1,0 +1,101 @@
+# Google Sheets Manifest
+
+**Generated:** 2026-02-16T16:21:29.155Z
+**Spreadsheets:** 1
+
+---
+
+## Simulation_Narrative
+
+- **ID:** `1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk`
+- **Modified:** 2026-02-16T05:13:44.429Z
+- **Tabs:** 79
+
+| Tab | Data Rows | Columns | Headers (first 8) |
+|-----|-----------|---------|-------------------|
+| Dashboard | 0 | 0 |  |
+| World_Population | 1 | 22 | timestamp, totalPopulation, illnessRate, employmentRate, migration, economy, cycle, cycleWeight, ...(22 total) |
+| Sports_Feed | 2 | 18 | Team, League, Record, Wins, Losses, SeasonState, PlayoffRound, PlayoffStatus, ...(18 total) |
+| Handoff_Output | 4 | 3 | Timestamp, Cycle, HandoffText |
+| Cycle_Packet | 38 | 3 | Timestamp, Cycle, PacketText |
+| Riley_Digest | 79 | 28 | Timestamp, Cycle, IntakeProcessed, CitizensAged, EventsGenerated, Issues, CycleWeight, CycleWeightReason, ...(28 total) |
+| WorldEvents_V3_Ledger | 128 | 29 | Timestamp, Cycle, EventDescription, EventType, Domain, Severity, Neighborhood, ImpactScore, ...(29 total) |
+| Media_Briefing | 11 | 7 | Timestamp, Cycle, Holiday, HolidayPriority, SportsSeason, ElectionWindow, Briefing |
+| Initiative_Tracker | 5 | 24 |  , Name, Type, Status, Budget, VoteRequirement, VoteCycle, Projection, ...(24 total) |
+| Civic_Office_Ledger | 35 | 19 | OfficeId, Title, Type, District, Holder, PopId, TermStart, TermEnd, ...(19 total) |
+| Oakland_Sports_Feed | 35 | 10 | Cycle, SeasonType, EventType, TeamsUsed, NamesUsed, Notes, Stats, Team Record, ...(10 total) |
+| Chicago_Sports_Feed | 47 | 10 | Cycle, SeasonType, EventType, TeamsUsed, NamesUsed, Notes, Stats, Team Record, ...(10 total) |
+| Chicago_Feed | 46 | 22 | Timestamp, Cycle, GodWorldYear, CycleOfYear, SimMonth, CycleInMOnth, Season, Holiday, ...(22 total) |
+| Health_Cause_Queue | 3 | 11 | POPID, Name, Status, StatusStartCycle, CyclesSick, Neighborhood, Tier, Age, ...(11 total) |
+| Press_Drafts | 111 | 14 | Timestamp, Cycle, Reporter, StoryType, SignalSource, SummaryPrompt, DraftText, Status, ...(14 total) |
+| Storyline_Tracker | 132 | 14 | Timestamp, CycleAdded, StorylineType, Description, Neighborhood, RelatedCitizens, Priority, Status, ...(14 total) |
+| Cycle_Weather | 6 | 11 | CycleID, Type, Temp, Impact, Advisory, Comfort, Mood, Alerts, ...(11 total) |
+| Neighborhood_Demographics | 17 | 12 | Neighborhood, Students, Adults, Seniors, Unemployed, Sick, LastUpdated, SchoolQualityIndex, ...(12 total) |
+| Neighborhood_Map | 17 | 27 | Timestamp, Cycle, Neighborhood, NightlifeProfile, NoiseIndex, CrimeIndex, RetailVitality, EventAttractiveness, ...(27 total) |
+| Faith_Organizations | 16 | 8 | Organization, FaithTradition, Neighborhood, Founded, Congregation, Leader, Character, ActiveStatus |
+| Crime_Metrics | 17 | 7 | Neighborhood, PropertyCrimeIndex, ViolentCrimeIndex, ResponseTimeAvg, ClearanceRate, IncidentCount, LastUpdated |
+| Transit_Metrics | 72 | 8 | Timestamp, Cycle, Station, RidershipVolume, OnTimePerformance, TrafficIndex, Corridor, Notes |
+| Simulation_Ledger | 614 | 43 | POPID, First, Middle , Last, OriginGame, UNI (y/n), MED (y/n), CIV (y/n), ...(43 total) |
+| Generic_Citizens | 256 | 10 | First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, ...(10 total) |
+| Cultural_Ledger | 29 | 20 | Timestamp, CUL-ID, Name, RoleType, FameCategory, CulturalDomain, Status, UniverseLinks, ...(20 total) |
+| Chicago_Citizens | 101 | 10 | CitizenId, Name, Age, Gender, Neighborhood, Occupation, Tier, CreatedCycle, ...(10 total) |
+| Family_Relationships | 0 | 6 | RelationshipId, Citizen1, Citizen2, RelationshipType, SinceCycle, Status |
+| Household_Ledger | 1 | 14 | HouseholdId, HeadOfHousehold, HouseholdType, Members, Neighborhood, HousingType, MonthlyRent, HousingCost, ...(14 total) |
+| Relationship_Bond_Ledger | 1290 | 19 | Timestamp, Cycle, BondId, CitizenA, CitizenB, BondType, Intensity, Status, ...(19 total) |
+| Relationship_Bonds | 0 | 17 | BondId, CitizenA, CitizenB, BondType, Intensity, Status, Origin, DomainTag, ...(17 total) |
+| LifeHistory_Log | 0 | 0 |  |
+| Youth_Events | 0 | 0 |  |
+| Faith_Ledger | 0 | 0 |  |
+| Migration_Events | 0 | 0 |  |
+| MediaRoom_Paste | 0 | 0 |  |
+| Intake | 0 | 0 |  |
+| Advancement_Intake1 | 0 | 0 |  |
+| Media_Ledger | 0 | 0 |  |
+| Media_Intake | 0 | 0 |  |
+| Storyline_Intake | 0 | 0 |  |
+| Citizen_Usage_Intake | 0 | 0 |  |
+| Citizen_Media_Usage | 0 | 0 |  |
+| WorldEvents_Ledger | 0 | 0 |  |
+| Story_Seed_Deck | 0 | 0 |  |
+| Story_Hook_Deck | 138 | 21 | Timestamp, Cycle, HookID, HookType, Domain, Neighborhood, Priority, HookText, ...(21 total) |
+| Cycle_Seeds | 4 | 8 | CycleID, Seed, Timestamp, Weather, Holiday, EventCount, PopulationDelta, Checksum |
+| NBA_Game_Intake | 41 | 9 | Game, City, Cycle, GameDate, EventType, NamesUsed, RoleType, Details, ...(9 total) |
+| MLB_Game_Intake | 76 | 9 | Game, City, Cycle, GameDate, EventType, NamesUsed, RoleType, Details, ...(9 total) |
+| Domain_Tracker | 40 | 31 | Timestamp, Cycle, CIVIC, CRIME, TRANSIT, ECONOMIC, EDUCATION, HEALTH, ...(31 total) |
+| Event_Arc_Ledger | 37 | 23 | Timestamp, Cycle, ArcId, DomainTag, Phase, Tension, Neighborhood, DomainTag, ...(23 total) |
+| Arc_Ledger | 37 | 11 | Timestamp, Cycle, ArcID, ArcType, ArcPhase, ArcTension, Neighborhood, DomainTag, ...(11 total) |
+| //WorldEvents_V3_Ledger1 | 46 | 17 | Cycle, Timestamp, EventId, EventType, Domain, Subdomain, Neighborhood, Severity, ...(17 total) |
+| Domain_Tracker_backup_1767050596364 | 29 | 16 |  , CIVIC, CRIME, TRANSIT, ECONOMIC, EDUCATION, HEALTH, WEATHER, ...(16 total) |
+| Texture_Trigger_Log | 173 | 12 | Timestamp, Cycle, Domain, Neighborhood, TextureKey, Reason, Intensity, Holiday, ...(12 total) |
+| WorldEvents_Ledger1 | 0 | 17 | Timestamp, Cycle, Description, Severity, Season, Holiday, WeatherType, WeatherImpact, ...(17 total) |
+| Civic_Sweep_Report | 7 | 15 | Timestamp, CivicRoster, CivicCount, Scandals, Resignations, Retirements, CivicLoad, CycleWeight, ...(15 total) |
+| World_Drift_Report | 7 | 22 | Timestamp, totalPopulation, illnessRate, employmentRate, migration, economy, cycle, cycleWeight, ...(22 total) |
+| Simulation_Calendar | 1 | 6 | SimYear, SimMonth, SimDay, Season, HolidayFlag, Notes |
+| Engine_Index2 | 130 | 1 | Here are all the .gs files in this project (Simulation_Narrative): |
+| Ledger_Index | 45 | 7 | Active, Ledger, Purpose, Cycle_Packet, Project_Document, Feeder , Engine_Notes |
+| Sports_Calendar | 12 | 3 | Month, SeasonState, Notes |
+| World_Config | 9 | 3 | Key, Value, Description |
+| Engine_Errors | 19 | 5 | Timestamp, Cycle, Phase, Error, Stack |
+| Engine_ideas | 0 | 0 |  |
+| /commands | 27 | 5 | claude/skills/, , , , claude
+  |
+| GitHub_token | 12 | 4 | [REDACTED — API key], Anthroptic API KEY, , [REDACTED — curl example] |
+| GitHub_Templates | 35 | 2 |  , Github Token |
+| Continuity_Doc | 10 | 3 | Section, Content, 12/01/2025 |
+| Engine_Index | 80 | 4 | FileName, ModuleGroup, Purpose, Version |
+| godWorldEngine2.5 | 480 | 1 | /** |
+| godWorldEngine2.5_v3build | 488 | 1 | /** |
+| v3.0_Intergration_Engine | 22 | 1 | /** |
+| Steward_Actions | 1 | 4 | Timestamp, Command, Status, Notes |
+| //Intake// | 16 | 2 | Set, fill in  |
+| Main | 0 | 0 |  |
+| Advancement_Intake | 0 | 4 | POP-ID, Field, NewValue, Notes |
+| ID_Counters | 4 | 2 | Counter, NextValue |
+| Narrative_Stories | 4 | 0 |  |
+| Narrative_Bridge | 0 | 0 |  |
+
+---
+
+**Totals:** 1 spreadsheets, 79 tabs, ~5143 data rows
+
+*Use `lib/sheets.js` to query any tab: `sheets.getSheetData("TabName")`*

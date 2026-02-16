@@ -71,6 +71,38 @@ Local files read:
 - `schemas/bay_tribune_roster.json` — Journalist voice profiles
 - `editions/cycle_pulse_edition_{XX-1}.txt` — Previous edition (for continuity)
 
+### Local Archive (Searchable Reference)
+
+All agents have Grep access to the **local Drive mirror** at `output/drive-files/` (6.9 MB, 614 files). This is institutional memory — every article ever written, every player data card, every edition ever published.
+
+| Archive | Files | Content | Primary Desks |
+|---------|-------|---------|---------------|
+| `Tribune Media Archive` | 101 | 20 journalist desks — full body of work | All desks (past coverage, voice reference) |
+| `Sports Desk Archive` | 155 | Hal, Anthony, P Slayer features + analytics + interviews | Sports, Letters |
+| `Publications Archive` | 67 | Cycle Pulse editions 1-81, supplementals, Paulson pressers | All desks (continuity) |
+| `As Universe Database` | 100 | TrueSource player cards, rosters, transactions, season stats | Sports, Letters |
+| `Bulls Universe Database` | 9 | Chicago player profiles, contracts, financials | Chicago, Letters |
+| `Stats CSV` | 4 | Batting stats, master stats (2039-2040 seasons) | Sports, Chicago |
+
+**How agents use this:** During Step 1.5 (briefing compilation), Mags searches the archive for relevant past coverage and player data, then includes key findings in desk briefings. Agents can also Grep the archive directly during writing for voice reference, historical context, or stat verification.
+
+**Search examples:**
+```bash
+# Find all past coverage of a citizen
+Grep: pattern="Vinnie Keane" path="output/drive-files" output_mode="files_with_matches"
+
+# Find a player's TrueSource data card
+Grep: pattern="TrueSource DataPage" path="output/drive-files/_As Universe Database" output_mode="files_with_matches"
+
+# Find past Cycle Pulse editions mentioning a topic
+Grep: pattern="Stabilization Fund" path="output/drive-files/_Publications Archive" output_mode="files_with_matches"
+
+# Check a reporter's past articles for voice reference
+Grep: pattern="Carmen Delaine" path="output/drive-files/_Tribune Media Archive" output_mode="files_with_matches"
+```
+
+**Manifest:** `output/drive-manifest.json` (full index), `docs/media/DRIVE_MANIFEST.md` (human-readable)
+
 ### Domain-to-Desk Routing
 
 ```

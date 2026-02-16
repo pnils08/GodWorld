@@ -20,6 +20,12 @@ description: Write the business ticker section using Jordan Velez.
 1. Read `output/desk-packets/base_context.json` — cycle info, calendar, economic data
 2. Read `output/desk-packets/business_c{XX}.json` — the business desk packet
 3. Read `schemas/bay_tribune_roster.json` — Jordan Velez voice profile
+4. If desk briefing exists, read `output/desk-briefings/business_briefing_c{XX}.md` — Mags' editorial guidance + citizen cards + archive findings
+
+## Local Archive Search Pool
+The business desk has Grep access to the local Drive mirror for research and voice reference:
+- **Past business coverage:** `output/drive-files/_Tribune Media Archive/Jordan_Velez/` — Jordan's economics features
+- **Past editions:** `output/drive-files/_Publications Archive/` — past Business Ticker sections for format/voice reference
 
 ## Step 2: Understand the Desk Packet
 The business packet contains:

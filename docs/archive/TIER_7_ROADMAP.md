@@ -1,3 +1,5 @@
+> **ARCHIVED** — All Tier 7 features complete. Open items moved to `docs/engine/PROJECT_STATUS.md`. Moved 2026-02-16.
+
 # Tier 7 Roadmap
 
 **Previous:** Tiers 1-6 complete (see ENGINE_ROADMAP.md)

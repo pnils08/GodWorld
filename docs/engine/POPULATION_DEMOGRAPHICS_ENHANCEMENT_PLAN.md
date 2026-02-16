@@ -8,12 +8,12 @@
 
 ## 🚀 Implementation Status
 
-| Week | Feature | Status | Deployed | Files |
-|------|---------|--------|----------|-------|
-| **Week 1** | Household Formation & Family Trees | ✅ **READY** | Pending | Migration: `addHouseholdFamilyColumns.js`<br>Engine: `householdFormationEngine.js` v1.0<br>Integration: Phase 05 |
-| Week 2 | Generational Wealth & Inheritance | 🔜 Planned | — | — |
-| Week 3 | Education Pipeline & Career Pathways | 🔜 Planned | — | — |
-| Week 4 | Gentrification Mechanics & Migration Reasons | 🔜 Planned | — | — |
+| Week | Feature | Status | Files |
+|------|---------|--------|-------|
+| **Week 1** | Household Formation & Family Trees | ✅ **DEPLOYED** | `householdFormationEngine.js` v1.0 |
+| **Week 2** | Generational Wealth & Inheritance | ✅ **DEPLOYED** | `generationalWealthEngine.js` v1.0 |
+| **Week 3** | Education Pipeline & Career Pathways | ✅ **DEPLOYED** | `educationCareerEngine.js` v1.0 |
+| Week 4 | Gentrification Mechanics & Migration Reasons | 🔜 **OPEN** | Not started — tracked in `PROJECT_STATUS.md` |
 
 **Week 1 Status:**
 - ✅ 2 new sheets created (Household_Ledger, Family_Relationships)

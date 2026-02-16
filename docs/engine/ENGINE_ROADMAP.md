@@ -1,3 +1,5 @@
+> **COMPLETE** — Tiers 1-7 fully implemented. Two schema items (weather columns, BayTribune_Roster sheet) tracked in `docs/engine/PROJECT_STATUS.md`. This doc is kept as historical reference.
+
 # GOD WORLD ENGINE - Implementation Roadmap
 
 **Purpose:** Actionable implementation plan with clear priorities.

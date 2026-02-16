@@ -1,3 +1,5 @@
+> **ARCHIVED** — Civic Initiative Engine at v1.7 with mayoral veto. All work complete. Moved 2026-02-16.
+
 # Civic Initiative Engine Upgrade Tracker
 
 **Current Version:** v1.7 (2026-02-11)

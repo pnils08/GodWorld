@@ -1,3 +1,5 @@
+> **ARCHIVED** — Critical issues fixed. Remaining tech debt moved to `docs/engine/PROJECT_STATUS.md`. Moved 2026-02-16.
+
 # GodWorld Engine Audit Tracker
 ## For Mara, Claude Code, and Maker Coordination
 

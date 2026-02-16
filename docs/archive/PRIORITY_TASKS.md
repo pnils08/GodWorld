@@ -1,3 +1,5 @@
+> **ARCHIVED** — Open items moved to `docs/engine/PROJECT_STATUS.md`. Moved 2026-02-16.
+
 # Priority Task List
 
 **Created:** 2026-02-02

@@ -1,3 +1,5 @@
+> **ARCHIVED** — Deployed. Moved 2026-02-16.
+
 # Population Week 3: Education Pipeline & Career Pathways - Deploy Guide (Consolidated)
 
 **Status:** Ready to deploy

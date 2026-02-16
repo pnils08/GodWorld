@@ -1,3 +1,5 @@
+> **ARCHIVED** — Branch merged Session 9. Moved 2026-02-16.
+
 # Branch Handoff: claude/read-documentation-JRbqb
 
 **Created:** 2026-02-07 | **Session:** 9 | **Status:** Ready to merge

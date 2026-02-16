@@ -1,3 +1,5 @@
+> **ARCHIVED** — Deployed (Week 4 gentrification engine still open). Moved 2026-02-16.
+
 # Population Week 4: Gentrification & Migration - Deploy Guide (Consolidated)
 
 **Status:** Ready to deploy

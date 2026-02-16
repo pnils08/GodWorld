@@ -1,3 +1,5 @@
+> **ARCHIVED** — Deployed. Moved 2026-02-16.
+
 # Population Week 2: Generational Wealth & Inheritance - Deploy Guide
 
 **Status:** Ready to deploy

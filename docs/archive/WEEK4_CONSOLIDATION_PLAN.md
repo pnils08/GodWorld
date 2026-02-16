@@ -1,3 +1,5 @@
+> **ARCHIVED** — Architecture plan captured. Implementation tracked in PROJECT_STATUS.md. Moved 2026-02-16.
+
 # Week 4: Gentrification & Migration - Consolidated Architecture Plan
 
 **Date:** 2026-02-11

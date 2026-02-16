@@ -1,3 +1,5 @@
+> **ARCHIVED** — Weeks 1-3 deployed. Week 4 gentrification still open. Moved 2026-02-16.
+
 # Population & Demographics Enhancement - COMPLETE ✅
 
 **Status:** All 4 weeks built and ready to deploy

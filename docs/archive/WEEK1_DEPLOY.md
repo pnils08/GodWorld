@@ -1,3 +1,5 @@
+> **ARCHIVED** — Deployed. Moved 2026-02-16.
+
 # Week 1: Citizen Fame Tracking - Quick Deploy Guide
 
 **Status:** Ready to deploy

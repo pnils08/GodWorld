@@ -1,3 +1,5 @@
+> **ARCHIVED** — Deployed. Moved 2026-02-16.
+
 # Population Week 1: Household Formation & Family Trees - Quick Deploy Guide
 
 **Status:** Ready to deploy

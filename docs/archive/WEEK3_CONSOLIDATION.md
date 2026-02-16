@@ -1,3 +1,5 @@
+> **ARCHIVED** — Architecture decisions implemented. Moved 2026-02-16.
+
 # Week 3 Consolidation: School Quality Integration
 
 **Date:** 2026-02-11

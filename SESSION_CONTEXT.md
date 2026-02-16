@@ -46,7 +46,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v1.4 | Per-desk JSON packets, vote breakdowns, households, bonds, economic context, story connections enrichment |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v1.5 | Per-desk JSON packets, story connections enrichment, sports feed digest |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
 | **Household Formation** | householdFormationEngine.js | v1.0 | Young adults form households, rent burden, dissolution |

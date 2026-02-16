@@ -29,10 +29,21 @@ The sports packet contains:
 - **storylines** — active sports storylines
 - **seeds/hooks** — sports-related seeds and trigger hooks
 - **canonReference.asRoster** — full A's roster with positions and stats
-- **sportsFeeds** — current A's and Warriors records, recent results
+- **sportsFeeds** — raw feed entries (legacy, kept for reference)
+- **sportsFeedDigest** — **(v1.5 — USE THIS instead of raw sportsFeeds):**
+  - `gameResults` — parsed game scores, key performers, stat lines
+  - `rosterMoves` — trades, signings, injuries with story angles
+  - `playerFeatures` — off-field appearances, community events, milestones
+  - `frontOffice` — GM decisions, coaching, organizational moves
+  - `fanCivic` — stadium events, fan reactions, civic appearances
+  - `editorialNotes` — Paulson's editorial instincts and story angle suggestions
+  - `activeStoryAngles` — headline-ready angles from the feed ("Paulson silence finally breaking")
+  - `playerMoods` — per-player emotional register (confident, frustrated, hungry, etc.)
+  - `relatedStorylines` — active storylines cross-referenced with feed player names
+  - `currentRecord`, `seasonState`, `teamMomentum` — team snapshot
 - **previousCoverage** — sports sections from last edition
 - **bonds** — active relationship bonds between citizens (sorted by intensity)
-- **storyConnections** — **(v1.4 enrichment — USE THIS):**
+- **storyConnections** — **(v1.4 enrichment):**
   - `eventCitizenLinks` — each event linked to named citizens who live in that neighborhood
   - `citizenBonds` — per-citizen relationship map (teammates, rivals, fan connections)
   - `citizenLifeContext` — last 3 LifeHistory entries per citizen (recent experiences)

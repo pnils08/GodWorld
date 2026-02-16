@@ -17,6 +17,7 @@ Items ready to go — just need `clasp push` on Cloud Shell.
 | LifeHistory dead columns | 14 files, 17 write sites | 31 | Stop writing cols F-I |
 | recordWorldEventsv3 v3.5 | recordWorldEventsv3.js | 31 | 16 dead cols, Math.random fix, domain neighborhoods |
 | compressLifeHistory v1.3 | compressLifeHistory.js | 31 | 14 new TAG_TRAIT_MAP entries |
+| buildDeskPackets v1.5 | scripts/buildDeskPackets.js | 31 | Sports feed digest — structured intel from raw feeds |
 
 **Deploy command:** `cd ~/GodWorld && git pull && clasp push`
 

@@ -1,9 +1,17 @@
 #!/usr/bin/env node
 /**
- * buildDeskPackets.js v1.4
+ * buildDeskPackets.js v1.5
  *
  * Pulls live data from Google Sheets and splits into per-desk JSON packets
  * for independent agent processing in the Media Room.
+ *
+ * v1.5 Changes:
+ * - Sports Feed Digest — parses raw feed entries into structured intelligence:
+ *   game results, roster moves, player features, front office, fan/civic, editorial notes
+ * - Supports both new EventType taxonomy and legacy freeform entries (auto-inferred)
+ * - Cross-references feed entries with active storylines for related arcs
+ * - Derives team momentum from record + streak + player moods
+ * - sportsFeedDigest object added to desk packets and summaries
  *
  * v1.4 Changes:
  * - Story Connections enrichment layer — cross-references data silos at read time:
@@ -565,6 +573,7 @@ function generateDeskSummary(packet, deskId, cycle) {
     interviewCandidates: topCandidates,
     maraDirective: packet.maraDirective || '',
     sportsFeeds: packet.sportsFeeds || [],
+    sportsFeedDigest: packet.sportsFeedDigest || null,
     // Household events this cycle (formations, dissolutions, crises)
     householdEvents: (packet.householdEvents || []).slice(0, 5),
     householdCount: (packet.households || []).length,
@@ -1139,10 +1148,207 @@ function buildStoryConnections(deskEvents, deskCitizenNames, initiatives, active
   };
 }
 
+// ─── SPORTS FEED DIGEST (v1.5) ──────────────────────────────
+
+/**
+ * Parse sports feed entries into a structured digest.
+ * Handles both new structured format (EventType taxonomy) and legacy freeform entries.
+ * Returns: { gameResults, rosterMoves, playerFeatures, frontOffice, fanCivic,
+ *            editorialNotes, currentRecord, seasonState, activeStoryAngles,
+ *            playerMoods, teamMomentum, digestNote }
+ */
+function buildSportsFeedDigest(feedEntries, storylines, teamLabel) {
+  if (!feedEntries || feedEntries.length === 0) {
+    return { empty: true, teamLabel: teamLabel || '', digestNote: 'No feed entries' };
+  }
+
+  var gameResults = [];
+  var rosterMoves = [];
+  var playerFeatures = [];
+  var frontOffice = [];
+  var fanCivic = [];
+  var editorialNotes = [];
+  var seasonStateEntries = [];
+  var uncategorized = [];
+
+  // Track across all entries
+  var latestRecord = '';
+  var latestSeasonState = '';
+  var allPlayerMoods = {};
+  var allStoryAngles = [];
+  var allNamesUsed = {};
+
+  feedEntries.forEach(function(entry) {
+    var eventType = (entry.EventType || entry.eventType || '').toString().trim().toLowerCase();
+    var notes = (entry.Notes || entry.notes || '').toString().trim();
+    var stats = (entry.Stats || entry.stats || '').toString().trim();
+    var record = (entry['Team Record'] || entry.TeamRecord || entry.teamRecord || '').toString().trim();
+    var seasonState = (entry.SeasonState || entry.seasonState || entry.SeasonType || entry.seasonType || '').toString().trim().toLowerCase();
+    var storyAngle = (entry.StoryAngle || entry.storyAngle || '').toString().trim();
+    var playerMood = (entry.PlayerMood || entry.playerMood || '').toString().trim().toLowerCase();
+    var namesRaw = (entry.NamesUsed || entry.namesUsed || '').toString().trim();
+    var neighborhood = (entry.HomeNeighborhood || entry.homeNeighborhood || '').toString().trim();
+    var trigger = (entry.EventTrigger || entry.eventTrigger || '').toString().trim();
+    var cycle = (entry.Cycle || entry.cycle || '').toString().trim();
+
+    // Track latest record and season state
+    if (record) latestRecord = record;
+    if (seasonState) latestSeasonState = seasonState;
+
+    // Parse player names
+    var names = namesRaw.split(/[,;]/).map(function(n) { return n.trim(); }).filter(Boolean);
+    names.forEach(function(n) { allNamesUsed[n] = true; });
+
+    // Track story angles
+    if (storyAngle) allStoryAngles.push(storyAngle);
+
+    // Track player moods
+    if (playerMood && names.length > 0) {
+      names.forEach(function(n) { allPlayerMoods[n] = playerMood; });
+    }
+
+    // Build structured entry
+    var structured = {
+      cycle: cycle,
+      names: names,
+      notes: notes.substring(0, 250),
+      neighborhood: neighborhood
+    };
+    if (stats) structured.stats = stats;
+    if (record) structured.record = record;
+    if (storyAngle) structured.storyAngle = storyAngle;
+    if (playerMood) structured.playerMood = playerMood;
+    if (trigger) structured.trigger = trigger;
+
+    // Route by event type
+    if (eventType === 'game-result' || eventType === 'game' || eventType === 'result') {
+      // Parse score from notes if present
+      var scoreMatch = notes.match(/(\d+)\s*[-–,]\s*(\w+)\s+(\d+)/);
+      if (scoreMatch) {
+        structured.scoreLine = scoreMatch[0];
+      }
+      gameResults.push(structured);
+    } else if (eventType === 'roster-move' || eventType === 'roster' || eventType === 'trade' || eventType === 'injury') {
+      rosterMoves.push(structured);
+    } else if (eventType === 'player-feature' || eventType === 'feature' || eventType === 'community') {
+      playerFeatures.push(structured);
+    } else if (eventType === 'front-office' || eventType === 'front office' || eventType === 'coaching') {
+      frontOffice.push(structured);
+    } else if (eventType === 'fan-civic' || eventType === 'civic' || eventType === 'fan' || eventType === 'stadium') {
+      fanCivic.push(structured);
+    } else if (eventType === 'season-state' || eventType === 'season' || eventType === 'standings') {
+      seasonStateEntries.push(structured);
+    } else if (eventType === 'editorial-note' || eventType === 'editorial' || eventType === 'note') {
+      editorialNotes.push(structured);
+    } else {
+      // Legacy entries without taxonomy — try to infer from content
+      var notesLower = notes.toLowerCase();
+      if (notesLower.match(/\d+\s*[-–]\s*\d+/) && notesLower.match(/pts|ast|reb|hr|rbi|era/i)) {
+        gameResults.push(structured);
+      } else if (notesLower.match(/trade|sign|cut|waiv|injur|IR|DL/i)) {
+        rosterMoves.push(structured);
+      } else if (notesLower.match(/communit|charit|clinic|event|appearance/i)) {
+        playerFeatures.push(structured);
+      } else if (notesLower.match(/GM|front office|coach|hire|fire|draft/i)) {
+        frontOffice.push(structured);
+      } else if (notesLower.match(/stadium|fan|civic|environment|media avail/i)) {
+        fanCivic.push(structured);
+      } else {
+        uncategorized.push(structured);
+      }
+    }
+  });
+
+  // Cross-reference with storylines for active story angles
+  var storylineAngles = (storylines || [])
+    .filter(function(s) {
+      var desc = (s.description || s.Description || '').toLowerCase();
+      var status = (s.status || s.Status || '').toLowerCase();
+      return (status === 'active' || s.type === 'new' || s.type === 'developing') &&
+             Object.keys(allNamesUsed).some(function(name) {
+               return desc.indexOf(name.toLowerCase()) !== -1;
+             });
+    })
+    .map(function(s) {
+      return {
+        description: s.description || s.Description || '',
+        status: s.status || s.Status || '',
+        cycleAdded: s.cycleAdded || s.CycleAdded || '',
+        priority: s.priority || s.Priority || ''
+      };
+    });
+
+  // Derive team momentum from recent entries
+  var momentum = 'steady';
+  if (latestRecord) {
+    var winPct = parseWinPctFromRecord(latestRecord);
+    if (winPct !== null) {
+      if (winPct >= 0.600) momentum = 'rising';
+      else if (winPct >= 0.500) momentum = 'steady';
+      else if (winPct >= 0.400) momentum = 'struggling';
+      else momentum = 'sinking';
+    }
+  }
+  // Adjust for mood signals
+  var moodValues = Object.values(allPlayerMoods);
+  var positiveCount = moodValues.filter(function(m) {
+    return m === 'confident' || m === 'dominant' || m === 'locked-in';
+  }).length;
+  var negativeCount = moodValues.filter(function(m) {
+    return m === 'frustrated' || m === 'uncertain';
+  }).length;
+  if (positiveCount > negativeCount + 1) momentum = 'rising';
+  if (negativeCount > positiveCount + 1 && momentum !== 'sinking') momentum = 'struggling';
+
+  var digest = {
+    teamLabel: teamLabel || '',
+    currentRecord: latestRecord,
+    seasonState: latestSeasonState,
+    teamMomentum: momentum,
+    gameResults: gameResults,
+    rosterMoves: rosterMoves,
+    playerFeatures: playerFeatures,
+    frontOffice: frontOffice,
+    fanCivic: fanCivic,
+    editorialNotes: editorialNotes,
+    activeStoryAngles: allStoryAngles,
+    playerMoods: allPlayerMoods,
+    relatedStorylines: storylineAngles.slice(0, 8),
+    digestNote: gameResults.length + ' games, ' +
+                rosterMoves.length + ' roster moves, ' +
+                playerFeatures.length + ' features, ' +
+                frontOffice.length + ' front office, ' +
+                fanCivic.length + ' fan/civic, ' +
+                Object.keys(allPlayerMoods).length + ' player moods'
+  };
+
+  // Include uncategorized if any (legacy entries)
+  if (uncategorized.length > 0) {
+    digest.uncategorized = uncategorized;
+    digest.digestNote += ', ' + uncategorized.length + ' uncategorized (legacy format)';
+  }
+
+  return digest;
+}
+
+/**
+ * Parse win percentage from record string like "39-16" → 0.709
+ */
+function parseWinPctFromRecord(record) {
+  if (!record) return null;
+  var match = record.match(/(\d+)\s*[-–]\s*(\d+)/);
+  if (!match) return null;
+  var wins = parseInt(match[1], 10);
+  var losses = parseInt(match[2], 10);
+  var total = wins + losses;
+  if (total === 0) return null;
+  return wins / total;
+}
+
 // ─── MAIN ──────────────────────────────────────────────────
 
 async function main() {
-  console.log('=== buildDeskPackets v1.4 (Story Connections Enrichment) ===');
+  console.log('=== buildDeskPackets v1.5 (Story Connections Enrichment) ===');
   console.log('Cycle:', CYCLE);
   console.log('Pulling live data from Google Sheets...\n');
 
@@ -1357,7 +1563,7 @@ async function main() {
   var manifest = {
     cycle: CYCLE,
     generated: new Date().toISOString(),
-    generator: 'buildDeskPackets v1.4',
+    generator: 'buildDeskPackets v1.5',
     packets: []
   };
 
@@ -1465,6 +1671,19 @@ async function main() {
     else if (desk.getsSportsFeeds === 'chicago') deskSportsFeeds = chiSports;
     else if (desk.getsSportsFeeds === 'both') deskSportsFeeds = { oakland: oakSports, chicago: chiSports };
 
+    // Sports feed digest (v1.5) — structured intelligence from raw feed
+    var sportsFeedDigest = null;
+    if (desk.getsSportsFeeds === 'oakland') {
+      sportsFeedDigest = buildSportsFeedDigest(oakSports, deskStorylines, "A's");
+    } else if (desk.getsSportsFeeds === 'chicago') {
+      sportsFeedDigest = buildSportsFeedDigest(chiSports, deskStorylines, 'Bulls');
+    } else if (desk.getsSportsFeeds === 'both') {
+      sportsFeedDigest = {
+        oakland: buildSportsFeedDigest(oakSports, deskStorylines, "A's"),
+        chicago: buildSportsFeedDigest(chiSports, deskStorylines, 'Bulls')
+      };
+    }
+
     // Mara directive
     var deskMara = desk.getsMara ? maraText : null;
 
@@ -1475,7 +1694,7 @@ async function main() {
         deskName: desk.name,
         cycle: CYCLE,
         generated: new Date().toISOString(),
-        generator: 'buildDeskPackets v1.4'
+        generator: 'buildDeskPackets v1.5'
       },
       baseContext: baseContext,
       deskBrief: {
@@ -1543,6 +1762,7 @@ async function main() {
       interviewCandidates: candidates,
       canonReference: deskCanon,
       sportsFeeds: deskSportsFeeds,
+      sportsFeedDigest: sportsFeedDigest,
       maraDirective: deskMara,
       previousCoverage: prevCoverage,
       reporterHistory: reporterHistory,
@@ -1605,6 +1825,13 @@ async function main() {
                 '| Households:', (packet.households || []).length,
                 '| Bonds:', (packet.bonds || []).length);
     console.log('  Story connections:', storyConnections.enrichmentNote);
+    if (sportsFeedDigest && !sportsFeedDigest.empty) {
+      var digestLabel = sportsFeedDigest.oakland ? 'Oakland + Chicago' : (sportsFeedDigest.teamLabel || 'sports');
+      var digestNote = sportsFeedDigest.oakland
+        ? sportsFeedDigest.oakland.digestNote + ' | ' + sportsFeedDigest.chicago.digestNote
+        : sportsFeedDigest.digestNote;
+      console.log('  Sports digest (' + digestLabel + '):', digestNote);
+    }
     console.log('  Reporters:', reporterNames.join(', ') || '(citizen voices)');
     var historyCount = Object.keys(reporterHistory).reduce(function(sum, k) { return sum + reporterHistory[k].length; }, 0);
     console.log('  Reporter history:', Object.keys(reporterHistory).length, 'reporters,', historyCount, 'articles');

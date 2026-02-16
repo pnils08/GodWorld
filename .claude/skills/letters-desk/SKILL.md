@@ -28,7 +28,8 @@ The letters packet contains:
 - **events** — ALL events this cycle (letters can react to anything) with priority scoring
 - **storylines** — all active storylines
 - **canonReference** — council, pending votes, A's roster, Bulls roster (for accuracy)
-- **sportsFeeds** — both Oakland and Chicago sports feeds
+- **sportsFeeds** — both Oakland and Chicago sports feeds (raw, legacy)
+- **sportsFeedDigest** — **(v1.5)** structured sports intel for both teams (`oakland` + `chicago` sub-objects with game results, story angles, player moods)
 - **previousCoverage** — letters from last edition (avoid repeating same topics)
 - **households** — active households (family context for citizen letters)
 - **bonds** — active relationship bonds between citizens

@@ -81,7 +81,7 @@ Paste new Media Room output here. |
 | Engine_ideas | 0 | 0 |  |
 | /commands | 27 | 5 | claude/skills/, , , , claude
   |
-| GitHub_token | 12 | 4 | [REDACTED — API key], Anthroptic API KEY, , [REDACTED — curl example] |
+| GitHub_token | 12 | 4 | [REDACTED — API key], Anthropic API KEY, , [REDACTED — curl example] |
 | GitHub_Templates | 35 | 2 |  , Github Token |
 | Continuity_Doc | 10 | 3 | Section, Content, 12/01/2025 |
 | Engine_Index | 80 | 4 | FileName, ModuleGroup, Purpose, Version |

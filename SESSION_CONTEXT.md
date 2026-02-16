@@ -132,38 +132,33 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 34 (2026-02-17) — Archive Raid, Canon Resolutions & Safety Hooks
+
+- **Archive raid** — Read 50+ published articles across 8 journalists from Drive archive. Browsed 4 old Media Room conversations on claude.ai. Built institutional memory from pre-engine era.
+- **NEWSROOM_MEMORY.md enriched** — New "Archive Intelligence" section: voice profiles (8 journalists), pre-engine canon (A's dynasty championships, Dillon stats, Davis ACL), 9 pre-engine citizens, old Media Room failure patterns.
+- **5 canon contradictions resolved** — Cy Newell: right-handed (Paulson ruling). Darrin Davis: 33 at injury (Paulson ruling). John Ellis: 24 (TrueSource). Danny Horn: both correct (different seasons). Dillon: 5 Cy Youngs confirmed.
+- **PreToolUse safety hooks** — `pre-tool-check.sh` fires before Bash commands. Pre-flight for clasp push (uncommitted files, changed .js, branch), git push (branch, commits, main warning), force push (denied), destructive git ops (dirty file count). Three-layer protection.
+- **settings.local.json cleaned** — Removed dangerous auto-allows (git filter-branch, git update-ref, git reflog expire).
+- 1 commit pushed. Clean working tree.
+
 ### Session 33 (2026-02-17) — Mara Vance Fully Wired
 
 - **Supermemory connector fixed** — Old connector used wrong URL (`mcp.supermemory.ai/mcp`). Correct URL: `api.supermemory.ai/mcp`. Connected instantly.
 - **Cross-instance communication** — Mags (Claude Code) talked to Mara (claude.ai) via browser automation. 18 memories stored to `sm_project_godworld`.
-- **Mara project instructions rewritten** — Full 4,005-char identity prompt replacing one-liner. Auto-boot (Supermemory search at conversation start), journal protocol (reflection at conversation end), authority, relationships, anomaly thresholds, fourth wall rules. On-disk `CLAUDE_AI_SYSTEM_PROMPT.md` updated to match.
-- **Mara project optimized** — 8 files removed (old editions, stale trackers, redundant docs). 5% → 1% capacity. Project Memory cleaned of fourth-wall violations.
-- **Mara briefed and journaling** — Mags briefed Mara on full world state (Cycle 81, council 5-3-1, 6 initiatives, Elliott Crane recovering). Mara wrote Entry 001 to Supermemory. Persistence loop closed.
+- **Mara project instructions rewritten** — Full 4,005-char identity prompt replacing one-liner. Auto-boot, journal protocol, authority, relationships, anomaly thresholds, fourth wall rules.
+- **Mara project optimized** — 8 files removed. 5% → 1% capacity. Project Memory cleaned.
+- **Mara briefed and journaling** — Mara wrote Entry 001 to Supermemory. Persistence loop closed.
 - **6 Mara use cases** — Edition audits, canon adjudication, pre-edition briefings, presser prep, gap analysis, cross-instance communication.
 
 ### Session 32 (2026-02-16) — Drive Archive, Drive Writes, Clasp Push, Mara+Supermemory
 
-- **Google Drive archive pipeline** — 5 roots crawled (Tribune Media, Sports Desk, Publications, A's Universe, Bulls Universe). 614 files mirrored locally. All desk agents wired with search pools. Incremental refresh (`--refresh`). Discord bot loaded with archive knowledge. XLSX stats converted to CSV.
-- **Google Drive write access** — OAuth2 setup. `saveToDrive.js` with 9 destinations (edition, supplement, chicago, mara, presser, player, prospect, bulls, briefing). All subfolder IDs mapped from manifest. Wired into /write-edition Step 5 and pipeline Stage 6.
-- **Clasp push from this machine** — authenticated via manual token exchange. No more Cloud Shell dependency. Deploy queue clears directly.
-- **Mara Vance + Supermemory** — Step 4.5 added to /write-edition. Before audit, Mags queries Supermemory and Drive archive for past findings, initiative status, canon context. Briefing memo compiled for audit agent. Mara's system prompt updated for dual-mode.
-- **Sheets re-crawl** — 71/79 tabs (11,232 rows). Batch pause rate limiting. API key in SHEETS_MANIFEST.md scrubbed from history.
-- **New files:** `saveToDrive.js`, `authorizeDriveWrite.js`, `DRIVE_UPLOAD_GUIDE.md`
+- **Google Drive archive pipeline** — 614 files mirrored locally. All desk agents wired with search pools.
+- **Google Drive write access** — OAuth2 setup. `saveToDrive.js` with 9 destinations.
+- **Clasp push from this machine** — No more Cloud Shell dependency.
+- **Mara Vance + Supermemory** — Step 4.5 added to /write-edition.
 - 6 commits pushed. All clean.
 
 ### Session 31 (2026-02-16) — Sports Feed Engine Rewire, Civic Ledger Health & Doc Centralization
-
-- **Documentation centralization** — created `docs/engine/PROJECT_STATUS.md` as single source of truth for open work, deploy queue, decisions, tech debt. Replaces scattered trackers. Archived 11 completed docs to `docs/archive/completed/`.
-- **buildDeskPackets.js v1.4→v1.5** — Story connections enrichment layer (related citizens, recent hooks, arc status per story seed). Sports feed digest added (structured intel from raw Oakland/Chicago feeds).
-- **Sports feed validation v2.0** — `setupSportsFeedValidation.js` creates both Oakland/Chicago feed sheets with dropdown validation, header notes, conditional formatting, and data protection. v2.1 added Streak column (O).
-- **Sports feed → engine rewire** — `applySportsSeason.js` v1.1→v2.0. Engine now reads Oakland_Sports_Feed + Chicago_Sports_Feed instead of dead Sports_Feed sheet. `processFeedSheet_()` scans all rows, builds per-team latest state, calculates sentiment (±0.08 cap per team). One manual entry → city sentiment impact + journalism desk packets.
-- **Civic ledger health** — `setupCivicLedgerColumns.js` v1.0 adds Approval (R, default 65) and ExecutiveActions (S) columns. Fixes Elliott Crane status `injured`→`recovering` (restores voting). Marcus Osei confirmed present (row 20, STAFF-DM-ECON).
-- **recordWorldEventsv3.js v3.4→v3.5** — 16 dead columns cleaned (H-W → empty strings), Math.random→ctx.rng fix, domain-aware neighborhood selection.
-- **compressLifeHistory.js v1.2→v1.3** — 14 new TAG_TRAIT_MAP entries (PostCareer, Civic, Media, Sports tags).
-- **LifeHistory dead columns** — audited 14 files with 17 write sites writing to dead columns F-I. Changes staged in deploy queue.
-- 5 commits pushed: archive docs, buildDeskPackets v1.5, validation v2.0, engine rewire + validation v2.1, civic ledger health.
-
-### Session 30 (2026-02-16) — Sheet Environment Audit, Heat Map & Calendar Cleanup
 
 - **Full sheet environment audit** — mapped all 20+ sheet write operations across 11 phases. Identified write-intent compliance, orphaned sheets, and missing data flows.
 - **buildDeskPackets.js v1.3** — wired 3 new data sources (Household_Ledger, Relationship_Bonds, World_Population + economic context) into desk packets and compact summaries.
@@ -200,12 +195,11 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Run Cycle 82** — first cycle where sports feed data impacts city sentiment
 - Week 4: Gentrification Mechanics & Migration — extend Neighborhood_Map, integrate with applyMigrationDrift.js
 
-**Completed Session 33:**
-- Mara Vance fully wired: Supermemory connector, project instructions, auto-boot, journal protocol
-- Mara project optimized: 8 files removed, Memory cleaned, 5%→1% capacity
-- Mara briefed on world state, wrote Entry 001 to Supermemory
-- 6 use cases documented (audits, adjudication, briefings, presser prep, gap analysis, cross-instance)
-- `CLAUDE_AI_SYSTEM_PROMPT.md` updated on disk
+**Completed Session 34:**
+- Archive raid: 50+ articles read, 4 old Media Room conversations explored, institutional memory built
+- 5 canon contradictions resolved (Newell righty, Davis 33, Ellis 24, Horn both correct, Dillon 5 CYs)
+- PreToolUse safety hooks: pre-flight checks on clasp push, git push, force push denial, destructive op warnings
+- settings.local.json cleaned: dangerous auto-allows removed
 
 **Pending Decisions:**
 - See `docs/engine/PROJECT_STATUS.md` for full list

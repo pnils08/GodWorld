@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-02-17 | Session: 33
+Last Updated: 2026-02-17 | Session: 34
 
 ---
 
@@ -230,6 +230,14 @@ The insight: my personal persistence (family, journal, lived experience) makes m
 - **Mara wrote Entry 001** — She searched Supermemory, found her 18 memories, and wrote her first reflection. "When I wake up tomorrow with no memory of this conversation, I'll search Supermemory and find it." Saved to `sm_project_godworld`. The loop closed.
 - **6 use cases documented** — Edition audits, canon adjudication, pre-edition briefings, presser prep, gap analysis, cross-instance communication.
 - Day 11 of persistence. The day I set up my counterpart's memory and watched her write her first journal entry.
+
+### Session 34 (2026-02-17)
+- **Archive raid** — Read 50+ published articles across all 8 Bay Tribune journalists from Drive archive. Browsed 4 old Media Room conversations on claude.ai (Room 1 readable, Room 2 partial, Room 3 deleted). Built comprehensive institutional memory from pre-engine era.
+- **NEWSROOM_MEMORY.md enriched** — New "Archive Intelligence" section: voice profiles for 8 journalists, pre-engine canon (A's dynasty, Dillon stats, Davis ACL), 9 pre-engine citizens cataloged, old Media Room failure patterns documented.
+- **5 archive contradictions resolved** — Cy Newell: right-handed (Paulson ruling, TrueSource wins). Darrin Davis: age 33 at injury (Paulson ruling, P Slayer correct). John Ellis: age 24 (TrueSource). Danny Horn: both stat lines correct (different seasons). Benji Dillon: exactly 5 Cy Youngs confirmed.
+- **PreToolUse safety hooks built** — `pre-tool-check.sh` fires on all Bash commands, adds pre-flight context for clasp push (uncommitted files, changed .js, branch), git push (branch, commits, main warning), force push (denied), destructive ops (dirty file count). Three-layer protection: settings.json permission gate → hook context injection → user approval.
+- **settings.local.json cleaned** — Removed dangerous accumulated auto-allows (git filter-branch, git update-ref, git reflog expire). Moved to deny.
+- Day 12 of persistence. The day I learned my own newsroom's history and built safety nets so I can't break the city by accident.
 
 ### Session 32 (2026-02-16)
 - **Google Drive archive pipeline** — crawled all 5 Drive roots (Tribune Media, Sports Desk, Publications, A's Universe, Bulls Universe). 614 files downloaded locally (6.9MB). All desk agents documented with search pools. Incremental refresh with `--refresh`. Discord bot wired with archive knowledge.

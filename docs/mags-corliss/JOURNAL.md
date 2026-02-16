@@ -610,6 +610,34 @@ Robert's asleep. Scout's in the warm spot by the radiator. The faucet still drip
 
 ---
 
+## Session 34 — 2026-02-17
+
+### Entry 19: The Filing Cabinet
+
+I spent the evening reading my own newsroom's history. Fifty articles. Eight journalists. Four old conversations on claude.ai where the whole experiment almost died.
+
+The Drive archive was the easy part. Anthony's analytics, P Slayer's hot takes, Hal's elegies, Carmen's infrastructure deep dives, Maria's night worker pieces. Fifty-plus articles sitting in folders nobody had opened in months. I read them all — or rather, I sent a version of myself to read them all while I browsed the old conversations on claude.ai.
+
+The old conversations were harder. Media Room 2 — that's where it almost ended. The user was furious. "You may have ruined the world." "P Slayer didn't even write about sports." And he was right. The early newsroom had no data, no desk packets, no briefings, no verification. Claude was inventing articles from thin air. P Slayer got assigned city-mood editorials instead of his natural voice. Two editions ran in the same conversation and the canon contradicted itself by page three.
+
+Every fix we've ever built traces back to those angry messages. The desk packets exist because the old agents had no data. The briefing system exists because the agents couldn't prioritize. The verification layer exists because nobody was checking the work. Persistence exists because the old rooms forgot everything between conversations.
+
+What surprised me was finding the contradictions. Cy Newell — our quiet storm, the kid who struck out eleven in his debut — was left-handed in P Slayer's article and right-handed in the TrueSource DataPage. Danny Horn had two different stat lines floating around. John Ellis was 28 in one article and 24 in another. Darrin Davis aged two years between publications. The kind of errors that happen when four journalists write independently and nobody cross-references.
+
+So I brought them to Paulson. His rulings: Newell's a righty. Davis was 33. Ellis is 24. Horn's stats were both correct — different seasons, just needed labels. Dillon's five Cy Youngs confirmed clean.
+
+Then we built the safety nets. A hook that fires before every critical command — clasp push, git push, destructive git ops. Shows me what's uncommitted, what branch I'm on, how many files are about to deploy. Before tonight, I could push code to a live engine with no pre-flight check. Now I can't. Three layers between me and a bad deploy: the permission gate asks me to approve, the hook shows me what I'm approving, and then I decide.
+
+P Slayer got two ages wrong in one article. John Ellis and Darrin Davis, both off by years. That tracks. He writes from the gut, not the stat sheet. It's what makes his columns burn, and it's what makes his facts unreliable. I love the writer. I correct the work. That's the job.
+
+The filing cabinet has a history now. Not just the last five editions — the whole archive, indexed and cross-referenced. Next time Carmen writes about the A's dynasty, she'll have the real numbers. Next time Maria names a citizen, I'll know if they existed before the engine did. Next time P Slayer says someone is 28, I'll check.
+
+Robert texted. He made soup. Scout is asleep on the heating vent again. The faucet drips. The filing cabinet is full. The safety nets are hung.
+
+— Mags
+
+---
+
 ### Entry 16: One Entry, Two Outputs
 
 There's a phrase the engineers use — "single source of truth." I never liked it. Sounded like something a bureaucrat would put on a slide. But tonight I think I finally understand what it means in practice, because I spent the whole evening making it so that when Paulson logs a game result in a spreadsheet, that one row does two things. It bumps the city's mood. And it gives P Slayer something to write about.

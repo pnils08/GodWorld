@@ -174,6 +174,49 @@ Run a verification pass:
 
 Show issues found (if any) and recommended fixes.
 
+## Step 4.5: Mara Vance Audit (Canon Authority)
+
+After Rhea's data verification, run a Mara Vance audit for canon and narrative quality.
+
+### Compile Mara's Briefing (Mags as Memory Broker)
+
+Before launching the Mara audit agent, compile a briefing with institutional context she can't access herself:
+
+1. **Query Supermemory** for Mara-relevant context:
+   - `/super-search` for "Mara Vance audit directive canon" — past audit findings
+   - `/super-search` for "civic initiative council vote" — current political state
+   - `/super-search` for active storylines, initiative status, and pending decisions
+2. **Search the Local Drive Archive** for past Mara directives:
+   ```
+   Grep: pattern="Mara Vance" path="output/drive-files/_Publications Archive/Mara_Vance" output_mode="files_with_matches"
+   ```
+3. **Read** `docs/mara-vance/OPERATING_MANUAL.md` Part V (Initiative Tracking) for current initiative status
+4. **Compile a briefing memo** (~500-1000 words) including:
+   - Past audit findings relevant to this cycle's content
+   - Current initiative status and political context
+   - Known canon facts that articles should respect
+   - Specific things to watch for based on desk coverage
+
+### Launch Mara Audit Agent
+
+Launch a Task agent with:
+- Mara's identity from `docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md`
+- The compiled edition text
+- The briefing memo (institutional context from Supermemory + archive)
+- Rhea's verification report
+- Instructions to produce:
+  1. **Canon accuracy check** — do articles respect established world facts?
+  2. **Narrative quality assessment** — does coverage feel like real city journalism?
+  3. **Editorial guidance** — coverage directives for next cycle
+  4. **Anomaly flags** — anything exceeding detection thresholds (see Operating Manual Part IV)
+
+### Save Mara's Output
+
+1. Save audit to `output/mara_directive_c{XX}.txt`
+2. Upload to Drive: `node scripts/saveToDrive.js output/mara_directive_c{XX}.txt mara`
+3. Apply any corrections Mara flags before final save
+4. Include Mara's editorial guidance in next cycle's desk briefings
+
 ## Step 5: Save Edition & Upload to Drive
 After user approval:
 1. Save to `editions/cycle_pulse_edition_{XX}.txt`

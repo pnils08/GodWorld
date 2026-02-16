@@ -1348,7 +1348,7 @@ function parseWinPctFromRecord(record) {
 // ─── MAIN ──────────────────────────────────────────────────
 
 async function main() {
-  console.log('=== buildDeskPackets v1.5 (Story Connections Enrichment) ===');
+  console.log('=== buildDeskPackets v1.6 (Story Connections Enrichment) ===');
   console.log('Cycle:', CYCLE);
   console.log('Pulling live data from Google Sheets...\n');
 
@@ -1385,7 +1385,9 @@ async function main() {
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
 
   // ── Filter to current cycle where applicable ──
-  var seeds = filterByCycle(seedsRaw, CYCLE);
+  var seeds = filterByCycle(seedsRaw, CYCLE).filter(function(s) {
+    return parseInt(s.Priority || '1') > 1;  // Drop Priority 1 filler seeds
+  });
   var hooks = filterByCycle(hooksRaw, CYCLE);
   var events = filterByCycle(eventsRaw, CYCLE);
   var prevDrafts = filterByCycle(draftsRaw, CYCLE - 1);
@@ -1563,7 +1565,7 @@ async function main() {
   var manifest = {
     cycle: CYCLE,
     generated: new Date().toISOString(),
-    generator: 'buildDeskPackets v1.5',
+    generator: 'buildDeskPackets v1.6',
     packets: []
   };
 
@@ -1694,7 +1696,7 @@ async function main() {
         deskName: desk.name,
         cycle: CYCLE,
         generated: new Date().toISOString(),
-        generator: 'buildDeskPackets v1.5'
+        generator: 'buildDeskPackets v1.6'
       },
       baseContext: baseContext,
       deskBrief: {

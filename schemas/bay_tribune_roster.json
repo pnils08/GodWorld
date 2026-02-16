@@ -256,15 +256,15 @@
           "tone": "Methodical, tracks patterns over time",
           "background": "Data journalist who sees the city as interconnected systems. Tracks civic load metrics, transit patterns, and municipal health indicators. Treats every game day as an infrastructure event.",
           "writingPatterns": {
-            "openingStyle": "System status reports; 'eleven consecutive calm cycles'",
+            "openingStyle": "System status reports; 'eleven straight weeks without a service disruption'",
             "sentenceStructure": "Data-heavy, uses percentages and metrics; organized with subheadings",
             "perspective": "Third-person analytical; lets the numbers tell the story"
           },
-          "signatureThemes": ["Civic load", "System health", "Infrastructure pulse", "Calm cycles", "Baseline variation"],
+          "signatureThemes": ["Civic load", "System health", "Infrastructure pulse", "Quiet stretches", "Baseline variation"],
           "samplePhrases": [
-            "Peak game-day traffic registered at 0.72",
+            "Game-day traffic peaked near capacity across three transit corridors",
             "No anomalies were detected",
-            "Longer calm blocks usually indicate workforce stability"
+            "Longer stretches of stability usually indicate workforce confidence"
           ],
           "frequentSubjects": ["BART", "Traffic patterns", "PG&E", "Parks Department", "Municipal departments"]
         },
@@ -642,7 +642,7 @@
       "Talia Finch": { "desk": "chicago", "role": "Chicago Ground Reporter", "tone": "Atmospheric, neighborhood-focused", "openingStyle": "Street-level scene setting", "themes": ["Neighborhood pulse", "City texture", "Local voices"] },
       "Dr. Lila Mezran": { "desk": "metro", "role": "Health Desk", "tone": "Calm, clinical, exact", "openingStyle": "Medical hypothesis with timeline", "themes": ["Expansion patterns", "What we didn't predict", "Containment"] },
       "Luis Navarro": { "desk": "metro", "role": "Investigations", "tone": "Persistent, fair, demands answers", "openingStyle": "Direct facts then questions", "themes": ["Accountability", "Paper trails", "What they won't say"] },
-      "Carmen Delaine": { "desk": "metro", "role": "Civic Ledger", "tone": "Methodical, tracks patterns over time", "openingStyle": "System status reports", "themes": ["Civic load", "Infrastructure pulse", "Calm cycles"] },
+      "Carmen Delaine": { "desk": "metro", "role": "Civic Ledger", "tone": "Methodical, tracks patterns over time", "openingStyle": "System status reports", "themes": ["Civic load", "Infrastructure pulse", "Quiet stretches"] },
       "Trevor Shimizu": { "desk": "metro", "role": "Transit & Infrastructure", "tone": "Precise, technical, alert-focused", "openingStyle": "Timestamp and incident", "themes": ["Micro-failures accumulating", "Tolerance limits", "System symptoms"] },
       "Sgt. Rachel Torres": { "desk": "metro", "role": "Public Safety", "tone": "Official, measured, procedural", "openingStyle": "Incident summary with paradox", "themes": ["Incident patterns", "Ambient stress", "What 'resolved' means"] },
       "Maria Keen": { "desk": "culture", "role": "Cultural Liaison", "tone": "Warm, street-level, knows everyone", "openingStyle": "Personal vignettes", "themes": ["Faith", "Family", "Neighborhood rhythm"] },

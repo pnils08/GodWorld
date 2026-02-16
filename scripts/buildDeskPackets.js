@@ -1,9 +1,25 @@
 #!/usr/bin/env node
 /**
- * buildDeskPackets.js v1.0
+ * buildDeskPackets.js v1.4
  *
  * Pulls live data from Google Sheets and splits into per-desk JSON packets
  * for independent agent processing in the Media Room.
+ *
+ * v1.4 Changes:
+ * - Story Connections enrichment layer — cross-references data silos at read time:
+ *   1. Event-Citizen Links: world events → named citizens in that neighborhood
+ *   2. Civic Consequences: initiative outcomes → affected neighborhoods → citizens
+ *   3. Citizen Bond Map: per-citizen relationship bonds for story depth
+ *   4. Coverage Echo: citizens from previous edition flagged as recently covered
+ *   5. Citizen Life Context: last 3 LifeHistory entries per desk citizen
+ * - Neighborhood Citizen Index: one-time build maps neighborhoods → named citizens
+ * - Fixed variable ordering bug: deskCanon + deskQuotes now defined before
+ *   getCitizenNamesFromDeskData (were previously undefined at call site)
+ * - storyConnections object added to each desk packet and summary
+ *
+ * v1.3 Changes:
+ * - Household data (Household_Ledger), relationship bonds (Relationship_Bonds),
+ *   economic context (World_Population) wired into desk packets
  *
  * Usage: node scripts/buildDeskPackets.js [cycleNumber]
  *   e.g. node scripts/buildDeskPackets.js 79
@@ -555,7 +571,14 @@ function generateDeskSummary(packet, deskId, cycle) {
     // Economic snapshot
     economicContext: packet.economicContext || {},
     // Top bonds by intensity
-    topBonds: (packet.bonds || []).slice(0, 5)
+    topBonds: (packet.bonds || []).slice(0, 5),
+    // v1.4: Story connections summary (compact enrichment for agent consumption)
+    storyConnections: {
+      eventCitizenLinks: ((packet.storyConnections || {}).eventCitizenLinks || []).slice(0, 5),
+      civicConsequences: ((packet.storyConnections || {}).civicConsequences || []).slice(0, 3),
+      coverageEcho: ((packet.storyConnections || {}).coverageEcho || []).slice(0, 10),
+      enrichmentNote: ((packet.storyConnections || {}).enrichmentNote || '')
+    }
   };
 
   return summary;
@@ -928,10 +951,198 @@ function formatBondsForPacket(bonds) {
   }).sort(function(a, b) { return b.intensity - a.intensity; });
 }
 
+// ─── STORY CONNECTIONS / ENRICHMENT (v1.4) ──────────────────
+
+/**
+ * Build a neighborhood → named citizens index (one-time, pre-loop)
+ * Returns: { "Downtown": [{name, popId, tier, occupation}], ... }
+ */
+function buildNeighborhoodCitizenIndex(simLedger) {
+  var index = {};
+  simLedger.forEach(function(c) {
+    var hood = c.Neighborhood || c.neighborhood || '';
+    var name = c.Name || c.CitizenName || '';
+    if (!hood || !name) return;
+    if (!index[hood]) index[hood] = [];
+    index[hood].push({
+      name: name,
+      popId: c.POP_ID || c.PopId || '',
+      tier: c.Tier || '',
+      occupation: c.Occupation || c.Career || ''
+    });
+  });
+  return index;
+}
+
+/**
+ * For each desk event, find named citizens who live in that neighborhood.
+ * Returns array of {event, neighborhood, domain, severity, citizens[]}
+ * Does NOT mutate original events.
+ */
+function buildEventCitizenLinks(deskEvents, neighborhoodIndex) {
+  var links = [];
+  deskEvents.forEach(function(e) {
+    var hood = e.Neighborhood || '';
+    var citizens = (neighborhoodIndex[hood] || []).slice(0, 5);
+    if (citizens.length > 0) {
+      links.push({
+        event: (e.EventDescription || e.description || '').substring(0, 120),
+        neighborhood: hood,
+        domain: e.Domain || '',
+        severity: e.Severity || '',
+        citizens: citizens.map(function(c) {
+          return { name: c.name, popId: c.popId, occupation: c.occupation };
+        })
+      });
+    }
+  });
+  return links;
+}
+
+/**
+ * Tag passed/failed/active initiatives with affected neighborhoods and citizens.
+ * Returns array of {initiative, status, domain, neighborhoods[], citizens[], voteResult}
+ */
+function buildCivicConsequences(initiatives, neighborhoodIndex) {
+  return initiatives
+    .filter(function(i) {
+      var status = (i.Status || '').toLowerCase();
+      return status === 'passed' || status === 'failed' || status === 'active';
+    })
+    .map(function(i) {
+      var hoodsRaw = i.AffectedNeighborhoods || i.Neighborhood || '';
+      var hoods = hoodsRaw.split(/[,;|]/).map(function(s) { return s.trim(); }).filter(Boolean);
+      var citizens = [];
+      hoods.forEach(function(h) {
+        (neighborhoodIndex[h] || []).slice(0, 3).forEach(function(c) {
+          citizens.push({ name: c.name, neighborhood: h, occupation: c.occupation });
+        });
+      });
+      return {
+        initiative: i.Name || i.InitiativeName || '',
+        status: i.Status || '',
+        domain: i.PolicyDomain || i.Domain || '',
+        neighborhoods: hoods,
+        citizens: citizens.slice(0, 12),
+        voteResult: i.VoteResult || i.Result || i.Outcome || ''
+      };
+    })
+    .filter(function(c) { return c.citizens.length > 0; });
+}
+
+/**
+ * For a set of citizen names, build a map of name → strongest bonds.
+ * Returns: { "Alice Wong": [{partner, bondType, intensity, domain}], ... }
+ */
+function buildCitizenBondMap(citizenNames, activeBonds) {
+  var map = {};
+  citizenNames.forEach(function(name) {
+    var bonds = activeBonds.filter(function(b) {
+      return b.CitizenA === name || b.CitizenB === name;
+    });
+    if (bonds.length > 0) {
+      map[name] = bonds.map(function(b) {
+        return {
+          partner: b.CitizenA === name ? b.CitizenB : b.CitizenA,
+          bondType: b.BondType || '',
+          intensity: parseFloat(b.Intensity || 0),
+          domain: b.DomainTag || ''
+        };
+      }).sort(function(a, b) { return b.intensity - a.intensity; }).slice(0, 5);
+    }
+  });
+  return map;
+}
+
+/**
+ * Scan previous edition text for citizen names.
+ * Returns set-like object: { "Carmen Delaine": true, ... }
+ */
+function buildCoverageEchoMap(prevEdition, simLedger) {
+  if (!prevEdition) return {};
+  var echo = {};
+  simLedger.forEach(function(c) {
+    var name = c.Name || c.CitizenName || '';
+    if (name && name.length > 4 && prevEdition.indexOf(name) !== -1) {
+      echo[name] = true;
+    }
+  });
+  return echo;
+}
+
+/**
+ * For a set of citizen names, pull their most recent LifeHistory entries.
+ * Returns: { "Marcus Chen": [{cycle, tag, note, mood}], ... }
+ */
+function buildCitizenLifeContext(citizenNames, allHistory, limit) {
+  limit = limit || 3;
+  // Pre-build a name → entries index for performance (avoid N*M scan)
+  var historyByName = {};
+  allHistory.forEach(function(h) {
+    var name = h.Name || h.CitizenName || '';
+    if (!name) return;
+    if (!historyByName[name]) historyByName[name] = [];
+    historyByName[name].push(h);
+  });
+
+  var context = {};
+  citizenNames.forEach(function(name) {
+    var entries = historyByName[name];
+    if (entries && entries.length > 0) {
+      context[name] = entries.slice(-limit).map(function(h) {
+        return {
+          cycle: h.Cycle || '',
+          tag: h.EventTag || '',
+          note: (h.EventNote || '').substring(0, 150),
+          mood: h.MoodShift || ''
+        };
+      });
+    }
+  });
+  return context;
+}
+
+/**
+ * Assemble the storyConnections enrichment object for a desk packet.
+ */
+function buildStoryConnections(deskEvents, deskCitizenNames, initiatives, activeBonds,
+                                allHistory, neighborhoodIndex, coverageEchoMap, deskId) {
+  // Event → citizen links
+  var eventLinks = buildEventCitizenLinks(deskEvents, neighborhoodIndex);
+
+  // Civic consequences (civic + letters desks get full view, others get their domain)
+  var civicConsequences = (deskId === 'civic' || deskId === 'letters')
+    ? buildCivicConsequences(initiatives, neighborhoodIndex)
+    : [];
+
+  // Per-citizen bond map
+  var bondMap = buildCitizenBondMap(deskCitizenNames, activeBonds);
+
+  // Per-citizen recent life context
+  var lifeContext = buildCitizenLifeContext(deskCitizenNames, allHistory, 3);
+
+  // Coverage echo — which desk citizens were in last edition
+  var recentlyCovered = deskCitizenNames.filter(function(name) {
+    return coverageEchoMap[name];
+  });
+
+  return {
+    eventCitizenLinks: eventLinks,
+    civicConsequences: civicConsequences,
+    citizenBonds: bondMap,
+    citizenLifeContext: lifeContext,
+    coverageEcho: recentlyCovered,
+    enrichmentNote: eventLinks.length + ' event-citizen links, ' +
+                    Object.keys(bondMap).length + ' citizens with bonds, ' +
+                    Object.keys(lifeContext).length + ' with life context, ' +
+                    recentlyCovered.length + ' recently covered'
+  };
+}
+
 // ─── MAIN ──────────────────────────────────────────────────
 
 async function main() {
-  console.log('=== buildDeskPackets v1.3 (Household + Bonds + Economic Context) ===');
+  console.log('=== buildDeskPackets v1.4 (Story Connections Enrichment) ===');
   console.log('Cycle:', CYCLE);
   console.log('Pulling live data from Google Sheets...\n');
 
@@ -1093,6 +1304,12 @@ async function main() {
   var popIdIndex = parsePopIdIndex(POPID_INDEX_PATH);
   console.log('  POPID index: ' + Object.keys(popIdIndex).length + ' citizens loaded');
 
+  // ── Build enrichment indexes (one-time, reused per desk) ──
+  var neighborhoodCitizenIndex = buildNeighborhoodCitizenIndex(simLedger);
+  var coverageEchoMap = buildCoverageEchoMap(prevEdition, simLedger);
+  console.log('  Neighborhood citizen index:', Object.keys(neighborhoodCitizenIndex).length, 'neighborhoods mapped');
+  console.log('  Coverage echo:', Object.keys(coverageEchoMap).length, 'citizens from previous edition');
+
   // ── Build base context ──
   var baseContext = {
     cycle: CYCLE,
@@ -1140,7 +1357,7 @@ async function main() {
   var manifest = {
     cycle: CYCLE,
     generated: new Date().toISOString(),
-    generator: 'buildDeskPackets v1.3',
+    generator: 'buildDeskPackets v1.4',
     packets: []
   };
 
@@ -1216,16 +1433,31 @@ async function main() {
     var prevCoverage = extractPreviousCoverage(prevEdition, reporterNames);
     var reporterHistory = buildReporterHistory(allDrafts, reporterNames);
 
-    // Build citizen archive for this desk's relevant citizens
-    var deskCitizenNames = getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon);
-    var citizenArchive = buildCitizenArchive(popIdIndex, deskCitizenNames);
-
-    // Build canon reference for this desk
+    // Build canon reference for this desk (must precede citizen name extraction)
     var deskCanon = { reporters: canon.reporters };
     for (var ci = 0; ci < desk.canonSections.length; ci++) {
       var section = desk.canonSections[ci];
       deskCanon[section] = canon[section];
     }
+
+    // Recent quotes for this desk (must precede citizen name extraction)
+    var deskQuotes = desk.domains.indexOf('ALL') !== -1 ? recentQuotes :
+      recentQuotes.filter(function(q) {
+        return matchesStorylineKeywords(
+          (q.EventNote || '') + ' ' + (q.Name || ''),
+          desk.storylineKeywords
+        );
+      });
+
+    // Build citizen archive for this desk's relevant citizens
+    var deskCitizenNames = getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon);
+    var citizenArchive = buildCitizenArchive(popIdIndex, deskCitizenNames);
+
+    // Build story connections enrichment (v1.4)
+    var storyConnections = buildStoryConnections(
+      deskEvents, deskCitizenNames, initiatives, activeBonds,
+      allHistory, neighborhoodCitizenIndex, coverageEchoMap, deskId
+    );
 
     // Sports feeds
     var deskSportsFeeds = null;
@@ -1236,15 +1468,6 @@ async function main() {
     // Mara directive
     var deskMara = desk.getsMara ? maraText : null;
 
-    // Recent quotes for this desk
-    var deskQuotes = desk.domains.indexOf('ALL') !== -1 ? recentQuotes :
-      recentQuotes.filter(function(q) {
-        return matchesStorylineKeywords(
-          (q.EventNote || '') + ' ' + (q.Name || ''),
-          desk.storylineKeywords
-        );
-      });
-
     // Assemble packet
     var packet = {
       meta: {
@@ -1252,7 +1475,7 @@ async function main() {
         deskName: desk.name,
         cycle: CYCLE,
         generated: new Date().toISOString(),
-        generator: 'buildDeskPackets v1.3'
+        generator: 'buildDeskPackets v1.4'
       },
       baseContext: baseContext,
       deskBrief: {
@@ -1339,7 +1562,9 @@ async function main() {
       // Task 3: Relationship bonds
       bonds: formatBondsForPacket(
         filterBondsForDesk(activeBonds, deskCitizenNames, neighborhoods, desk.domains)
-      )
+      ),
+      // v1.4: Story connections enrichment — cross-referenced data for editorial coherence
+      storyConnections: storyConnections
     };
 
     // Write packet
@@ -1379,6 +1604,7 @@ async function main() {
                 '| Storylines:', deskStorylines.length,
                 '| Households:', (packet.households || []).length,
                 '| Bonds:', (packet.bonds || []).length);
+    console.log('  Story connections:', storyConnections.enrichmentNote);
     console.log('  Reporters:', reporterNames.join(', ') || '(citizen voices)');
     var historyCount = Object.keys(reporterHistory).reduce(function(sum, k) { return sum + reporterHistory[k].length; }, 0);
     console.log('  Reporter history:', Object.keys(reporterHistory).length, 'reporters,', historyCount, 'articles');

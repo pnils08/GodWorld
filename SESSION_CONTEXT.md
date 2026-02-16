@@ -42,11 +42,11 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Media Packet | buildMediaPacket.js | v2.4 | Voice guidance on story seeds & hooks |
 | Media Intake | mediaRoomIntake.js | v2.5 | Storyline lifecycle, citizen routing |
 | Media Parser | parseMediaRoomMarkdown.js | v1.5 | Quotes to LifeHistory_Log |
-| Life History | compressLifeHistory.js | v1.2 | Career tags in TAG_TRAIT_MAP |
+| Life History | compressLifeHistory.js | v1.3 | 47 TAG_TRAIT_MAP entries (PostCareer, Civic, Media, Sports) |
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v1.3 | Per-desk JSON packets, vote breakdowns, households, bonds, economic context |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v1.4 | Per-desk JSON packets, vote breakdowns, households, bonds, economic context, story connections enrichment |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
 | **Household Formation** | householdFormationEngine.js | v1.0 | Young adults form households, rent burden, dissolution |
@@ -55,7 +55,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | **V3 Seeds Writer** | saveV3Seeds.js | v3.4 | Calendar columns removed (were dead) |
 | **V3 Hooks Writer** | v3StoryHookWriter.js | v3.4 | Calendar columns removed (were dead) |
 | **V3 Texture Writer** | v3TextureWriter.js | v3.5 | Calendar columns removed (were dead) |
-| **V3 Events Writer** | recordWorldEventsv3.js | v3.4 | Calendar columns deprecated (empty strings) |
+| **V3 Events Writer** | recordWorldEventsv3.js | v3.5 | Only A-G active; 22 dead cols deprecated; domain-aware neighborhoods |
 | **Press Drafts Writer** | pressDraftWriter.js | v1.4 | Calendar columns deprecated, dead queries removed |
 
 ---

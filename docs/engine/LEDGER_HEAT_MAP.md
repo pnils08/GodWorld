@@ -141,22 +141,26 @@ The Simulation_Ledger itself has only 511 rows and grows slowly (new named citiz
 
 **Priority:** HIGH — text bloat affects load time for every script that reads Simulation_Ledger
 
-### 3. WorldEvents_V3_Ledger (YELLOW)
+### 3. WorldEvents_V3_Ledger (YELLOW → GREEN after v3.5)
 
-Growing at 5-20 events per cycle with 29 columns — 7 of which are dead.
+Growing at 5-20 events per cycle. Was 29 columns with 22 dead. After v3.5 cleanup, only 7 active columns (A-G). All 22 dead columns now write empty strings. Historical data retained.
 
-**Dead columns:**
+**Dead columns (all STOPPED as of v3.5):**
 | Col | Header | Status |
 |-----|--------|--------|
-| W | Holiday | DEAD — calendar context |
-| X | HoldayPriority | DEAD — calendar context (also misspelled) |
-| Y | IsFirstFriday | DEAD — calendar context |
-| Z | IsCreationDay | DEAD — calendar context |
-| AA | SportsSeason | DEAD — calendar context |
-| AB | SportsEngine | DEAD — never read |
-| AC | CanonStatus | DEAD — never read |
+| H-I | ImpactScore, PopulationAffected | STOPPED v3.5 — calculated, never consumed |
+| J-M | HealthFlag, CivicFlag, EconomicFlag, FestivalFlag | STOPPED v3.5 — written, never read |
+| N | SentimentShift | STOPPED v3.5 — calculated, never consumed |
+| O-Q | WeatherType, WeatherImpact, CitySentiment | STOPPED v3.5 — weather in ctx.summary |
+| R-S | TextureSignal, StoryHookSignal | STOPPED v3.5 — signal counts in ctx.summary |
+| T-V | CivicLoad, ShockFlag, PatternFlag | STOPPED v3.5 — analysis flags in ctx.summary |
+| W-AA | Calendar columns (5) | STOPPED v3.4 — calendar in ctx.summary |
+| AB | SourceEngine (always "ENGINE") | STOPPED v3.5 — never read |
+| AC | CanonStatus (always "pending") | STOPPED v3.5 — never read |
 
-**Priority:** MEDIUM — drop dead cols to slow cell growth by 24%
+**Also fixed:** Math.random() → ctx.rng, domain-aware neighborhood assignment.
+
+**Priority:** RESOLVED — effective col count reduced from 29 to 7 (76% reduction)
 
 ---
 
@@ -181,7 +185,7 @@ Growing at 5-20 events per cycle with 29 columns — 7 of which are dead.
 |-------|-------------------|---------------------|------------|------------|---------|
 | Story_Seed_Deck | I-N (6 cols: Season thru SportsSeason) | — | 6 | 14 | 43% |
 | Story_Hook_Deck | K-P (5 calendar + CalendarTrigger) | — | 6 | 16 | 38% |
-| WorldEvents_V3_Ledger | W-AA (5 calendar) | AB-AC (SportsEngine, CanonStatus) | 7 | 29 | 24% |
+| WorldEvents_V3_Ledger | W-AA (5 calendar, v3.4) | H-V, AB-AC (16 cols, v3.5) | 22 | 29 | 76% — STOPPED |
 | Press_Drafts | I-N (6 cols: Season thru SportsSeason) | — | 6 | 14 | 43% |
 | Texture_Trigger_Log | H-L (5 calendar) | — | 5 | 12 | 42% |
 | Simulation_Ledger | — | C, I, N, Q, S (Middle, ClockMode, OrginCity, Last Updated, UsageCount) | 5 | 20 | 25% |
@@ -316,13 +320,13 @@ Audit revealed Middle, ClockMode, OrginCity, Last Updated, UsageCount are ALL ac
 | Risk | Count | Sheets |
 |------|-------|--------|
 | RED | 2 | LifeHistory_Log, Simulation_Ledger (LifeHistory col) |
-| YELLOW | 11 | WorldEvents_V3_Ledger, Press_Drafts, Storyline_Tracker, Story_Seed_Deck, Story_Hook_Deck, Texture_Trigger_Log, Citizen_Media_Usage, WorldEvents_Ledger, Initiative_Tracker, Storyline_Intake, Citizen_Usage_Intake |
-| GREEN | 37+ | All state/config/reference/low-growth sheets |
+| YELLOW | 10 | Press_Drafts, Storyline_Tracker, Story_Seed_Deck, Story_Hook_Deck, Texture_Trigger_Log, Citizen_Media_Usage, WorldEvents_Ledger, Initiative_Tracker, Storyline_Intake, Citizen_Usage_Intake |
+| GREEN | 38+ | All state/config/reference/low-growth sheets (includes WorldEvents_V3_Ledger after v3.5 cleanup) |
 | ORPHANED | 3 | Continuity_Loop, Continuity_Intake, World_Drift_Report |
 
-**Total dead column instances (verified):** 40 columns across 7 sheets
+**Total dead column instances (verified):** 56 columns across 7 sheets (40 original + 16 WorldEvents v3.5)
 **Total dead column instances (unverified):** ~35 columns across 9 additional sheets
-**Estimated cell savings from Phase A+B cleanup:** ~15,000 cells at C81
+**Estimated cell savings from all cleanup:** ~25,000 cells at C81
 
 ---
 
@@ -333,3 +337,4 @@ Audit revealed Middle, ClockMode, OrginCity, Last Updated, UsageCount are ALL ac
 | 2026-02-16 | 30 | Initial creation. Full audit of all 53 sheets. Calendar column waste pattern discovered. |
 | 2026-02-16 | 31 | Phase C complete. archiveLifeHistory.js v1.0 created in maintenance/. |
 | 2026-02-16 | 31 | LifeHistory_Log dead columns stopped: Name (C), Neighborhood (F) → '' across 14 files, 17 write sites. |
+| 2026-02-16 | 31 | WorldEvents_V3_Ledger v3.5: 16 more dead cols deprecated (H-V, AB-AC). Only A-G active. Math.random→ctx.rng fix. Domain-aware neighborhoods. Sheet downgraded YELLOW→GREEN. |

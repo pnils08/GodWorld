@@ -397,6 +397,22 @@ Cultural figures tracked by the city. Use in coverage when relevant:
 
 -----
 
+## STORY CONNECTIONS (v1.4 Desk Packet Enrichment)
+
+Each desk packet now includes a `storyConnections` object that cross-references data the agents would otherwise see as disconnected lists. **Use this data to write with coherence:**
+
+| Field | What It Tells You | How To Use It |
+|-------|-------------------|---------------|
+| `eventCitizenLinks` | Named citizens who live near each event | Write events with real people affected, not just locations |
+| `civicConsequences` | Initiative outcomes → neighborhoods → citizens | Show who benefits or suffers from council votes |
+| `citizenBonds` | Per-citizen relationship map (partner, type, intensity) | Write characters in relationship context — married couples, rivals, mentors |
+| `citizenLifeContext` | Last 3 LifeHistory entries per citizen | Know what someone's been through before quoting them |
+| `coverageEcho` | Citizens from the previous edition | Follow up on last week's people, or avoid over-covering them |
+
+**Editorial principle:** The city is connected. A council vote affects real people in real neighborhoods who have real relationships and real histories. Story connections make that visible. Don't write flat — write woven.
+
+-----
+
 ## VERSION HISTORY
 
 | Version | Cycle | Changes |
@@ -404,3 +420,4 @@ Cultural figures tracked by the city. Use in coverage when relevant:
 | v1.0 | 78 | Created from MEDIA_ROOM_INSTRUCTIONS v2.0 rewrite. Added Paulson canon (background, family, interview system). Added A's-in-Arizona context and Bay District storyline. Removed engine/maker/system references. Added data humanization rules. Added journalist voice differentiation. Added dual-clock quick reference. Integrated StoryType/SignalSource enums. |
 | v1.1 | 78 | Added Mara Vance section (in-world role, quote style, key relationships, editorial directives). Mags Corliss confirmed as Editor-in-Chief — desk agents receive assignments from Mags, not a system prompt. Rhea Morgan upgraded from Copy Chief to dedicated Data Analyst (canon verification, sports stats, world data, no articles). Editorial chain: Mara speaks for the operation to the city, Mags speaks to the newsroom. Luis Navarro as investigative balance/fact validation. |
 | v1.2 | 79 | Updated editorial chain to reflect permanent agent architecture (`.claude/agents/`). Rhea Morgan is now a dedicated verification agent. 6 desk agents receive filtered desk packets and choose their own coverage. Journalist personalities baked into agents from BAY_TRIBUNE_JOURNALIST_PROFILES.pdf. |
+| v1.3 | 81 | Added Story Connections section — v1.4 desk packet enrichment (event-citizen links, civic consequences, citizen bonds, life context, coverage echo). Editorial principle: write woven, not flat. |

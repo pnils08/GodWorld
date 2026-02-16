@@ -361,10 +361,22 @@ Update documentation to use journalism AI industry terminology:
 - [x] Add to Rhea Morgan verification checklist
 - **Commit:** bd66adc (2026-02-12)
 
-### Phase 3: Documentation Updates
-- [ ] Update MEDIA_ROOM_STYLE_GUIDE.md with journalism AI terminology
-- [ ] Update AGENT_NEWSROOM.md with agent role mappings
-- [ ] Save optimizations to supermemory
+### Phase 1.5: Story Connections Enrichment (buildDeskPackets.js v1.4) ✅ COMPLETE
+- [x] buildNeighborhoodCitizenIndex — maps neighborhoods → named citizens (one-time)
+- [x] buildEventCitizenLinks — events → affected citizens by neighborhood
+- [x] buildCivicConsequences — initiative outcomes → neighborhoods → citizens
+- [x] buildCitizenBondMap — per-citizen relationship bond lookup
+- [x] buildCoverageEchoMap — citizens from previous edition flagged
+- [x] buildCitizenLifeContext — last 3 LifeHistory entries per citizen
+- [x] storyConnections object assembled per desk packet + included in summaries
+- [x] Fixed variable ordering bug (deskQuotes/deskCanon undefined at call site)
+- [x] All 6 desk skill files updated with storyConnections documentation
+- **Commit:** 35ab967 (2026-02-16)
+
+### Phase 3: Documentation Updates ✅ COMPLETE
+- [x] Update MEDIA_ROOM_STYLE_GUIDE.md with journalism AI terminology + story connections
+- [x] Update AGENT_NEWSROOM.md with agent role mappings + signal intelligence layer
+- [x] Save optimizations to supermemory
 
 ---
 
@@ -424,5 +436,6 @@ For external documentation, use industry-standard journalism AI terminology:
 
 | Version | Date | Changes |
 |---------|------|---------|
+| v1.2 | 2026-02-16 | Phase 1.5 (Story Connections enrichment) + Phase 3 (doc updates) complete. All phases done. |
 | v1.1 | 2026-02-12 | Implementation complete: Phases 1-2, terminology guide added |
 | v1.0 | 2026-02-12 | Initial design based on journalism AI platform analysis |

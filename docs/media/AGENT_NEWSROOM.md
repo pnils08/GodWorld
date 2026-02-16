@@ -56,6 +56,38 @@ Individual desk skills (/civic-desk, /sports-desk, etc.)
 
 ---
 
+## Signal Intelligence Layer
+
+The pipeline includes automated signal intelligence (implemented in `buildDeskPackets.js` and engine phases):
+
+| Feature | What It Does | Where |
+|---------|-------------|-------|
+| **Anomaly Detection** | Flags events with >2σ variance from 10-cycle baseline | `buildDeskPackets.js` → each event gets `anomalyFlag` |
+| **Priority Scoring** | Auto-ranks signals by newsworthiness (severity × citizen count × variance) | `buildDeskPackets.js` → top 3 per desk flagged `priority: true` |
+| **Signal Chain Tracking** | Records which engines detected what and why | 4 engine files → `signalChain` on outputs |
+| **Pre-Publication Validation** | 4 validators: tone, continuity, distribution, sensitivity | `phase06-analysis/prePublicationValidation.js` (Phase 6.5) |
+| **Story Connections (v1.4)** | Cross-references events↔citizens↔bonds↔initiatives↔coverage | `buildDeskPackets.js` → `storyConnections` in each packet |
+
+### Journalism AI Role Mappings
+
+For external communication, engine components map to journalism industry terminology:
+
+| Engine Component | Journalism AI Term |
+|-----------------|-------------------|
+| `worldEventsEngine_` | City Desk Monitor Agent |
+| `updateTransitMetrics_` | Transit Correspondent Agent |
+| `faithEventsEngine_` | Faith & Ethics Correspondent Agent |
+| `textureTriggerEngine_` | Story Editor (Texture Detection) |
+| `storyHookEngine_` | Story Editor (Hook Generation) |
+| `godWorldEngine2.js` | Managing Editor Orchestrator |
+| Desk agents (Carmen, Maria, etc.) | Beat Reporter Agents |
+| Mags compilation | Editor-in-Chief Review |
+| Phase 6.5 Validation | Pre-Publication Quality Control |
+| Signal chain | Detection Provenance Trail |
+| `buildDeskPackets.js` enrichment | Editorial Intelligence Layer |
+
+---
+
 ## Permanent Agents (7 total)
 
 ### Desk Agents (6)

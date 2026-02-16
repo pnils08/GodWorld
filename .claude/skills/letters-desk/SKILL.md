@@ -25,11 +25,20 @@ description: Write the letters to the editor section with citizen voices.
 
 ## Step 2: Understand the Desk Packet
 The letters packet contains:
-- **worldEvents** — ALL events this cycle (letters can react to anything)
+- **events** — ALL events this cycle (letters can react to anything) with priority scoring
 - **storylines** — all active storylines
-- **canon** — council, pending votes, A's roster, Bulls roster (for accuracy)
-- **oaklandSportsFeed + chicagoSportsFeed** — both sports feeds
-- **prevEditionExcerpts** — letters from last edition (avoid repeating same topics)
+- **canonReference** — council, pending votes, A's roster, Bulls roster (for accuracy)
+- **sportsFeeds** — both Oakland and Chicago sports feeds
+- **previousCoverage** — letters from last edition (avoid repeating same topics)
+- **households** — active households (family context for citizen letters)
+- **bonds** — active relationship bonds between citizens
+- **economicContext** — employment, income, rent burden (economic complaint context)
+- **storyConnections** — **(v1.4 enrichment — USE THIS):**
+  - `eventCitizenLinks` — each event linked to named citizens in that neighborhood
+  - `civicConsequences` — initiative outcomes with affected neighborhoods and real citizens (letters reacts to these)
+  - `citizenBonds` — per-citizen relationship map (write letters from people who know each other)
+  - `citizenLifeContext` — last 3 LifeHistory entries per citizen (gives letter writers personal history)
+  - `coverageEcho` — citizens from previous edition (avoid repeating same voices)
 
 ## Step 3: Write Letters
 Delegate to the **letters-desk agent** (`.claude/agents/letters-desk/`). The agent knows citizen voice rules, letter format, and canon requirements permanently.

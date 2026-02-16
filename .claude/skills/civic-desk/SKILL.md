@@ -25,13 +25,22 @@ description: Write the civic affairs section for an edition using Carmen Delaine
 
 ## Step 2: Understand the Desk Packet
 The civic packet contains:
-- **worldEvents** — civic/health/crime/transit events this cycle (medium+ severity)
+- **events** — civic/health/crime/transit events this cycle with anomaly detection and priority scoring
 - **storylines** — active storylines relevant to civic beat
-- **storySeeds** — story seed suggestions from the engine
-- **storyHooks** — story hook triggers
-- **canon** — council composition, pending votes, status alerts, recent outcomes
+- **seeds** — story seed suggestions from the engine
+- **hooks** — story hook triggers
+- **canonReference** — council composition, pending votes, status alerts, recent outcomes
 - **maraDirective** — Mara Vance's editorial directive for this cycle (civic gets this)
-- **prevEditionExcerpts** — relevant sections from last edition for continuity
+- **previousCoverage** — relevant sections from last edition for continuity
+- **households** — active households, formations/dissolutions this cycle
+- **bonds** — active relationship bonds between citizens (sorted by intensity)
+- **economicContext** — employment, income distribution, rent burden stats
+- **storyConnections** — **(v1.4 enrichment — USE THIS):**
+  - `eventCitizenLinks` — each event linked to named citizens who live in that neighborhood
+  - `civicConsequences` — initiative outcomes with affected neighborhoods and real citizens
+  - `citizenBonds` — per-citizen relationship map (who knows whom, bond type, intensity)
+  - `citizenLifeContext` — last 3 LifeHistory entries per citizen (what they've been through)
+  - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
 
 ## Step 3: Write Articles
 Delegate to the **civic-desk agent** (`.claude/agents/civic-desk/`). The agent has Carmen Delaine's full personality and all secondary reporter profiles baked in permanently.

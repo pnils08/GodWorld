@@ -25,12 +25,18 @@ description: Write the Oakland sports section using P Slayer, Anthony, and Hal R
 
 ## Step 2: Understand the Desk Packet
 The sports packet contains:
-- **worldEvents** — sports-domain events this cycle
+- **events** — sports-domain events this cycle with anomaly detection and priority scoring
 - **storylines** — active sports storylines
-- **storySeeds/storyHooks** — sports-related seeds and trigger hooks
-- **canon.asRoster** — full A's roster with positions and stats
-- **oaklandSportsFeed** — current A's and Warriors records, recent results
-- **prevEditionExcerpts** — sports sections from last edition
+- **seeds/hooks** — sports-related seeds and trigger hooks
+- **canonReference.asRoster** — full A's roster with positions and stats
+- **sportsFeeds** — current A's and Warriors records, recent results
+- **previousCoverage** — sports sections from last edition
+- **bonds** — active relationship bonds between citizens (sorted by intensity)
+- **storyConnections** — **(v1.4 enrichment — USE THIS):**
+  - `eventCitizenLinks` — each event linked to named citizens who live in that neighborhood
+  - `citizenBonds` — per-citizen relationship map (teammates, rivals, fan connections)
+  - `citizenLifeContext` — last 3 LifeHistory entries per citizen (recent experiences)
+  - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
 
 ## Step 3: Write Articles
 Delegate to the **sports-desk agent** (`.claude/agents/sports-desk/`). The agent has P Slayer, Anthony, and Hal Richmond's full personalities baked in permanently.

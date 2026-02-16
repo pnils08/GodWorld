@@ -24,12 +24,18 @@ description: Write the Chicago bureau section using Selena Grant and Talia Finch
 
 ## Step 2: Understand the Desk Packet
 The Chicago packet contains:
-- **worldEvents** — Chicago-filtered events (CHICAGO domain + Bulls-keyword sports)
+- **events** — Chicago-filtered events (CHICAGO domain + Bulls-keyword sports) with priority scoring
 - **storylines** — active Chicago/Bulls storylines
-- **storySeeds/storyHooks** — Chicago-related seeds
-- **canon.bullsRoster** — full Bulls roster with positions and stats
-- **chicagoSportsFeed** — current Bulls record, recent results
-- **prevEditionExcerpts** — Chicago sections from last edition
+- **seeds/hooks** — Chicago-related seeds
+- **canonReference.bullsRoster** — full Bulls roster with positions and stats
+- **sportsFeeds** — current Bulls record, recent results
+- **previousCoverage** — Chicago sections from last edition
+- **bonds** — active relationship bonds between Chicago citizens
+- **storyConnections** — **(v1.4 enrichment — USE THIS):**
+  - `eventCitizenLinks` — each event linked to named citizens in that neighborhood
+  - `citizenBonds` — per-citizen relationship map (teammates, community ties)
+  - `citizenLifeContext` — last 3 LifeHistory entries per citizen (recent experiences)
+  - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
 
 ## Step 3: Write Articles
 Delegate to the **chicago-desk agent** (`.claude/agents/chicago-desk/`). The agent has Selena Grant and Talia Finch's full personalities baked in permanently, plus the Skyline Tribune section format.

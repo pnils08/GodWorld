@@ -25,11 +25,18 @@ description: Write the culture and seasonal section using Maria Keen and the cul
 
 ## Step 2: Understand the Desk Packet
 The culture packet contains:
-- **worldEvents** — culture/faith/community/arts/education/weather events
+- **events** — culture/faith/community/arts/education/weather events with priority scoring
 - **storylines** — active cultural storylines
-- **storySeeds/storyHooks** — culture-related seeds and hooks
-- **canon.culturalEntities** — cultural venues, organizations, landmarks
-- **prevEditionExcerpts** — culture sections from last edition
+- **seeds/hooks** — culture-related seeds and hooks
+- **canonReference.culturalEntities** — cultural venues, organizations, landmarks
+- **previousCoverage** — culture sections from last edition
+- **households** — active households, formations this cycle (marriage, family events)
+- **bonds** — active relationship bonds between citizens
+- **storyConnections** — **(v1.4 enrichment — USE THIS):**
+  - `eventCitizenLinks` — each event linked to named citizens who live in that neighborhood
+  - `citizenBonds` — per-citizen relationship map (families, community ties)
+  - `citizenLifeContext` — last 3 LifeHistory entries per citizen (recent experiences)
+  - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
 
 ## Step 3: Write Articles
 Delegate to the **culture-desk agent** (`.claude/agents/culture-desk/`). The agent has Maria Keen's full personality and all secondary reporter profiles baked in permanently.

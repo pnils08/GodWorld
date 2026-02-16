@@ -23,10 +23,18 @@ description: Write the business ticker section using Jordan Velez.
 
 ## Step 2: Understand the Desk Packet
 The business packet contains:
-- **worldEvents** — economic/nightlife/retail/labor events
+- **events** — economic/nightlife/retail/labor events with priority scoring
 - **storylines** — active business/economic storylines
-- **storySeeds/storyHooks** — business-related seeds
-- **prevEditionExcerpts** — business sections from last edition
+- **seeds/hooks** — business-related seeds
+- **previousCoverage** — business sections from last edition
+- **households** — active households, rent burden context
+- **economicContext** — employment, income distribution, rent burden stats, average household income
+- **bonds** — active relationship bonds between citizens
+- **storyConnections** — **(v1.4 enrichment — USE THIS):**
+  - `eventCitizenLinks` — each event linked to named citizens who live in that neighborhood
+  - `citizenBonds` — per-citizen relationship map (business partners, colleagues)
+  - `citizenLifeContext` — last 3 LifeHistory entries per citizen (career changes, economic events)
+  - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
 
 ## Step 3: Write Articles
 Delegate to the **business-desk agent** (`.claude/agents/business-desk/`). The agent IS Jordan Velez — his full personality and Business Ticker format are baked in permanently.

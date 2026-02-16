@@ -1314,10 +1314,10 @@ function generateCitizensEvents_(ctx) {
       logRows.push([
         ctx.now,
         row[iPopID],
-        ((row[iFirst] + " " + row[iLast]).trim()),
+        '',
         tagString,
         pick,
-        neighborhood || "Engine",
+        '',
         cycle
       ]);
     }

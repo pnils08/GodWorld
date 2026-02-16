@@ -454,10 +454,10 @@ function generateGameModeMicroEvents_(ctx) {
       logRows.push([
         ctx.now,
         popId,
-        (first + " " + last).trim(),
+        '',
         "GAME-Micro",
         picked.text,
-        citizenType,
+        '',
         cycle
       ]);
     }

@@ -492,10 +492,10 @@ function checkForPromotions_(ctx) {
       logSheet.appendRow([
         ctx.now,
         popId,
-        (first + " " + last).trim(),
+        '',
         "Promotion",
         "Emerged into Tier-3 in " + neigh,
-        neigh,
+        '',
         cycle
       ]);
     }

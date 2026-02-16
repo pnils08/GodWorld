@@ -1412,10 +1412,10 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
         logSheet.appendRow([
           new Date(),               // A: Timestamp
           exists.popId,             // B: POPID
-          citizen.name,             // C: Name
+          '',                       // C: Name (deprecated)
           'Quoted',                 // D: EventTag
           'Quoted in article: ' + citizen.context, // E: EventText
-          citizen.neighborhood || '',// F: Neighborhood
+          '',                       // F: Neighborhood (deprecated)
           cycle,                    // G: Cycle
           '',                       // H: (empty)
           ''                        // I: (empty)
@@ -1451,10 +1451,10 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
         logSheet.appendRow([
           new Date(),
           '',                       // No POPID yet
-          citizen.name,
+          '',                       // Name (deprecated)
           'Quoted',
           'First quoted in article: ' + citizen.context,
-          citizen.neighborhood || '',
+          '',                       // Neighborhood (deprecated)
           cycle,
           '',
           ''

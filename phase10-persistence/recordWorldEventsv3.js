@@ -6,17 +6,19 @@
  * Enhanced V3 ledger writer with GodWorld Calendar integration.
  * Writes to WorldEvents_V3_Ledger using write-intents model.
  *
+ * v3.4 Changes:
+ * - Stopped writing dead calendar columns (W-AA now empty strings)
+ *   Calendar data is already in ctx.summary — sheet duplication was never read
+ *
  * v3.3 Changes:
  * - Uses queueBatchAppendIntent_ instead of direct writes
  * - Full dryRun/replay mode support
  * - ES5 compatible (removed const/let, arrow functions, forEach, Object.entries)
  *
  * v3.2 Features (preserved):
- * - Calendar columns (Holiday, HolidayPriority, FirstFriday, CreationDay, SportsSeason)
  * - Expanded domainMap for holiday/festival event keywords
  * - New domains: Festival, Holiday, Parade
  * - Calendar-aware impact scoring
- * - Aligned with GodWorld Calendar v1.0 and worldEventsEngine v2.4
  *
  * Previous features (v3.1):
  * - Domain/Type derivation
@@ -50,15 +52,6 @@ function recordWorldEventsv3_(ctx) {
     'West Oakland', 'Laurel', 'Rockridge', 'Jack London',
     'Uptown', 'KONO', 'Chinatown', 'Piedmont Ave'
   ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // CALENDAR CONTEXT (v3.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var holiday = ctx.summary.holiday || 'none';
-  var holidayPriority = ctx.summary.holidayPriority || 'none';
-  var isFirstFriday = ctx.summary.isFirstFriday || false;
-  var isCreationDay = ctx.summary.isCreationDay || false;
-  var sportsSeason = ctx.summary.sportsSeason || 'off-season';
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAIN MAP (v3.2 - expanded for calendar events)
@@ -177,6 +170,10 @@ function recordWorldEventsv3_(ctx) {
     return Math.round(impact);
   }
 
+  // Calendar context used for impact scoring only (no longer written to sheet)
+  var holiday = ctx.summary.holiday || 'none';
+  var sportsSeason = ctx.summary.sportsSeason || 'off-season';
+
   // ═══════════════════════════════════════════════════════════════════════════
   // BUILD EVENT ROWS
   // ═══════════════════════════════════════════════════════════════════════════
@@ -234,11 +231,11 @@ function recordWorldEventsv3_(ctx) {
       ctx.summary.civicLoad || 'stable',       // T - CivicLoad
       ctx.summary.shockFlag || 'none',         // U - ShockFlag
       ctx.summary.patternFlag || 'none',       // V - PatternFlag
-      holiday,                                 // W - Holiday (v3.2)
-      holidayPriority,                         // X - HolidayPriority (v3.2)
-      isFirstFriday,                           // Y - FirstFriday (v3.2)
-      isCreationDay,                           // Z - CreationDay (v3.2)
-      sportsSeason,                            // AA - SportsSeason (v3.2)
+      '',                                      // W - Holiday (deprecated v3.4)
+      '',                                      // X - HolidayPriority (deprecated v3.4)
+      '',                                      // Y - FirstFriday (deprecated v3.4)
+      '',                                      // Z - CreationDay (deprecated v3.4)
+      '',                                      // AA - SportsSeason (deprecated v3.4)
       'ENGINE',                                // AB - SourceEngine
       'pending'                                // AC - CanonStatus
     ]);
@@ -256,16 +253,16 @@ function recordWorldEventsv3_(ctx) {
     );
   }
 
-  Logger.log('recordWorldEventsv3_ v3.3: Queued ' + rows.length + ' events | Holiday: ' + holiday + ' | Sports: ' + sportsSeason);
+  Logger.log('recordWorldEventsv3_ v3.4: Queued ' + rows.length + ' events for cycle ' + cycle);
 }
 
 
 /**
  * ============================================================================
- * WORLD EVENTS V3 LEDGER SCHEMA v3.3
+ * WORLD EVENTS V3 LEDGER SCHEMA v3.4
  * ============================================================================
  *
- * COLUMNS (29):
+ * COLUMNS (29 — W-AA deprecated):
  * A - Timestamp
  * B - Cycle
  * C - EventDescription
@@ -288,27 +285,17 @@ function recordWorldEventsv3_(ctx) {
  * T - CivicLoad
  * U - ShockFlag
  * V - PatternFlag
- * W - Holiday (v3.2)
- * X - HolidayPriority (v3.2)
- * Y - FirstFriday (v3.2)
- * Z - CreationDay (v3.2)
- * AA - SportsSeason (v3.2)
+ * W - (deprecated v3.4, was Holiday)
+ * X - (deprecated v3.4, was HolidayPriority)
+ * Y - (deprecated v3.4, was FirstFriday)
+ * Z - (deprecated v3.4, was CreationDay)
+ * AA - (deprecated v3.4, was SportsSeason)
  * AB - SourceEngine
  * AC - CanonStatus
  *
- * NEW DOMAINS (v3.2):
- * - Festival: parade, float, crowd surge, overcrowding, Pride, etc.
- * - Holiday: fireworks, sparkler, turkey fryer, trick-or-treat, etc.
- *
- * NEW EVENT TYPES (v3.2):
- * - festival-incident
- * - holiday-incident
- *
- * QUERY EXAMPLES:
- * - All festival events: =FILTER(C:C, E:E="Festival")
- * - Pride events: =FILTER(C:C, W:W="OaklandPride")
- * - Championship season: =FILTER(C:C, AA:AA="championship")
- * - First Friday incidents: =FILTER(C:C, Y:Y=TRUE)
+ * Note: Calendar columns W-AA were never read by any consumer.
+ * Calendar data is available in ctx.summary. Existing rows retain
+ * historical data in W-AA; new rows write empty strings.
  *
  * ============================================================================
  */

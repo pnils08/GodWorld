@@ -20,6 +20,14 @@
  * - Hooks into generationalEventsEngine.js death events
  * - Updates householdFormationEngine.js with real income
  *
+ * DIRECT WRITES (intentional — NOT legacy):
+ * This engine uses direct setValues instead of write-intents because:
+ * 1. It reads Household_Ledger data written by HouseholdFormation (prior engine)
+ * 2. EducationCareer (next engine) reads Income data written here
+ * Deferring writes to Phase 10 would break the Phase 5 data chain.
+ * Execution order: HouseholdFormation → GenerationalWealth → EducationCareer
+ * (see godWorldEngine2.js lines 210-212)
+ *
  * Story Hooks:
  * - GENERATIONAL_WEALTH_TRANSFER (severity 5): Large inheritance received
  * - WEALTH_GAP_WIDENING (severity 7): Neighborhood wealth disparity

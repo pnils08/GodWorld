@@ -733,10 +733,10 @@ function generateCitizensEvents_(ctx) {
       logRows.push([
         ctx.now,
         row[iPopID],
-        ((row[iFirst] + " " + row[iLast]).trim()),
+        '',
         tagString,          // <-- richer tags without changing schema
         pick,
-        neighborhood || "Engine",
+        '',
         cycle
       ]);
     }

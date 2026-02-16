@@ -21,6 +21,15 @@
  * - Hooks into career engine for promotions
  * - Uses school quality from Neighborhood_Demographics (consolidated)
  *
+ * DIRECT WRITES (intentional — NOT legacy):
+ * This engine uses direct setValues instead of write-intents because it runs
+ * last in the Phase 5 Tier-5 chain (after HouseholdFormation and
+ * GenerationalWealth). While no subsequent Phase 5 engine reads its output
+ * within the same cycle, the pattern is consistent with the other two engines.
+ * A future V3 migration would thread all citizen data through ctx.
+ * Execution order: HouseholdFormation → GenerationalWealth → EducationCareer
+ * (see godWorldEngine2.js lines 210-212)
+ *
  * Story Hooks:
  * - SCHOOL_QUALITY_CRISIS (severity 8): School quality <3
  * - CAREER_BREAKTHROUGH (severity 4): Promotion 2+ levels

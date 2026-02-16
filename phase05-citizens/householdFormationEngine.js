@@ -20,6 +20,14 @@
  * - Requires Household_Ledger and Family_Relationships sheets
  * - Updates Simulation_Ledger with household linkage
  *
+ * DIRECT WRITES (intentional — NOT legacy):
+ * This engine uses direct setValue/appendRow instead of write-intents because
+ * GenerationalWealth (next in Phase 5 sequence) reads Household_Ledger
+ * immediately after this engine runs. Deferring writes to Phase 10 would
+ * cause GenWealth to miss newly formed households.
+ * Execution order: HouseholdFormation → GenerationalWealth → EducationCareer
+ * (see godWorldEngine2.js lines 210-212)
+ *
  * Story Hooks Generated:
  * - HOUSEHOLD_FORMED (severity 2): New household established
  * - HOUSEHOLD_DISSOLVED (severity 3): Household breakup

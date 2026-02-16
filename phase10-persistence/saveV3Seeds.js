@@ -6,19 +6,14 @@
  * Writes seeds to Story_Seed_Deck sheet with full calendar context.
  * Uses V3 write-intents model for persistence.
  *
+ * v3.4 Changes:
+ * - Removed dead calendar columns (Season through SportsSeason)
+ *   Calendar data is already in ctx.summary — sheet duplication was never read
+ *
  * v3.3 Changes:
  * - Uses queueBatchAppendIntent_ instead of direct writes
  * - Full dryRun/replay mode support
  * - ES5 compatible
- *
- * v3.2 Features (preserved):
- * - Season column
- * - Holiday column
- * - HolidayPriority column
- * - IsFirstFriday column
- * - IsCreationDay column
- * - SportsSeason column
- * - Aligned with GodWorld Calendar v1.0
  *
  * Previous features (v3.1):
  * - 8 columns for seed tracking
@@ -35,14 +30,7 @@ var SEED_DECK_HEADERS = [
   'Domain',          // E
   'Neighborhood',    // F
   'Priority',        // G
-  'SeedText',        // H
-  // v3.2: Calendar columns
-  'Season',          // I
-  'Holiday',         // J
-  'HolidayPriority', // K
-  'IsFirstFriday',   // L
-  'IsCreationDay',   // M
-  'SportsSeason'     // N
+  'SeedText'         // H
 ];
 
 
@@ -64,14 +52,6 @@ function saveV3Seeds_(ctx) {
   var cycle = ctx.config.cycleCount || S.cycleId;
   var now = ctx.now || new Date();
 
-  // v3.2: Calendar context
-  var season = S.season || '';
-  var holiday = S.holiday || 'none';
-  var holidayPriority = S.holidayPriority || 'none';
-  var isFirstFriday = S.isFirstFriday || false;
-  var isCreationDay = S.isCreationDay || false;
-  var sportsSeason = S.sportsSeason || 'off-season';
-
   // Build rows
   var rows = [];
   for (var i = 0; i < seeds.length; i++) {
@@ -84,14 +64,7 @@ function saveV3Seeds_(ctx) {
       s.domain || '',                   // E  Domain
       s.neighborhood || '',             // F  Neighborhood
       s.priority || 1,                  // G  Priority
-      s.text || '',                     // H  SeedText
-      // v3.2: Calendar columns
-      season,                           // I  Season
-      holiday,                          // J  Holiday
-      holidayPriority,                  // K  HolidayPriority
-      isFirstFriday,                    // L  IsFirstFriday
-      isCreationDay,                    // M  IsCreationDay
-      sportsSeason                      // N  SportsSeason
+      s.text || ''                      // H  SeedText
     ]);
   }
 
@@ -105,56 +78,16 @@ function saveV3Seeds_(ctx) {
     100
   );
 
-  Logger.log('saveV3Seeds_ v3.3: Queued ' + rows.length + ' seeds | Holiday: ' + holiday + ' | Sports: ' + sportsSeason);
+  Logger.log('saveV3Seeds_ v3.4: Queued ' + rows.length + ' seeds for cycle ' + cycle);
 }
 
 
 /**
- * upgradeStorySeedDeck_ v3.3
- * Adds calendar columns to existing Story_Seed_Deck sheet.
- * Run once to upgrade v3.1 sheets to v3.2 format.
+ * ============================================================================
+ * STORY SEED DECK REFERENCE v3.4
+ * ============================================================================
  *
- * v3.3: ES5 compatible (const/let → var, .includes() → indexOf)
- */
-function upgradeStorySeedDeck_(ctx) {
-  var ss = ctx.ss;
-  var sheet = ss.getSheetByName('Story_Seed_Deck');
-  if (!sheet) return;
-
-  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
-
-  // Check if calendar columns exist (ES5: indexOf instead of includes)
-  var hasSeason = headers.indexOf('Season') >= 0;
-
-  if (!hasSeason) {
-    // Add calendar columns
-    var lastCol = sheet.getLastColumn();
-    var newHeaders = ['Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason'];
-
-    sheet.getRange(1, lastCol + 1, 1, newHeaders.length).setValues([newHeaders]);
-    sheet.getRange(1, lastCol + 1, 1, newHeaders.length).setFontWeight('bold');
-
-    // Set defaults for existing rows
-    var lastRow = sheet.getLastRow();
-    if (lastRow > 1) {
-      var defaults = [];
-      for (var i = 2; i <= lastRow; i++) {
-        defaults.push(['', 'none', 'none', false, false, 'off-season']);
-      }
-      sheet.getRange(2, lastCol + 1, lastRow - 1, 6).setValues(defaults);
-    }
-
-    Logger.log('upgradeStorySeedDeck_ v3.3: Added 6 calendar columns to Story_Seed_Deck');
-  }
-}
-
-
-/**
- * ============================================================================
- * STORY SEED DECK REFERENCE v3.2
- * ============================================================================
- * 
- * COLUMNS (14):
+ * COLUMNS (8):
  * A   Timestamp
  * B   Cycle
  * C   SeedID
@@ -163,12 +96,9 @@ function upgradeStorySeedDeck_(ctx) {
  * F   Neighborhood
  * G   Priority
  * H   SeedText
- * I   Season (v3.2)
- * J   Holiday (v3.2)
- * K   HolidayPriority (v3.2)
- * L   IsFirstFriday (v3.2)
- * M   IsCreationDay (v3.2)
- * N   SportsSeason (v3.2)
- * 
+ *
+ * Note: Calendar columns (I-N) existed in v3.2-v3.3 but were never read.
+ * Removed in v3.4. Existing rows retain historical data in cols I-N.
+ *
  * ============================================================================
  */

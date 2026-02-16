@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-15 | Engine: v3.1 | Cycle: 81 | Session: 29
+Last Updated: 2026-02-16 | Engine: v3.1 | Cycle: 81 | Session: 30
 
 ---
 
@@ -46,12 +46,17 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v1.2 | Per-desk JSON packets, vote breakdowns, desk-briefings dir |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v1.3 | Per-desk JSON packets, vote breakdowns, households, bonds, economic context |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
 | **Household Formation** | householdFormationEngine.js | v1.0 | Young adults form households, rent burden, dissolution |
 | **Generational Wealth** | generationalWealthEngine.js | v1.0 | Wealth levels 0-10, income, inheritance |
 | **Education Career** | educationCareerEngine.js | v1.0 | Education levels, career progression, school quality |
+| **V3 Seeds Writer** | saveV3Seeds.js | v3.4 | Calendar columns removed (were dead) |
+| **V3 Hooks Writer** | v3StoryHookWriter.js | v3.4 | Calendar columns removed (were dead) |
+| **V3 Texture Writer** | v3TextureWriter.js | v3.5 | Calendar columns removed (were dead) |
+| **V3 Events Writer** | recordWorldEventsv3.js | v3.4 | Calendar columns deprecated (empty strings) |
+| **Press Drafts Writer** | pressDraftWriter.js | v1.4 | Calendar columns deprecated, dead queries removed |
 
 ---
 
@@ -101,6 +106,7 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 | `docs/mara-vance/` | Mara Vance: character, operating manual, newsroom interface |
 | `docs/mags-corliss/PERSISTENCE.md` | Mags Corliss identity, family, persistence system |
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | Institutional memory — errata, coverage patterns, character continuity |
+| `docs/engine/LEDGER_HEAT_MAP.md` | Sheet bloat risk rankings, dead column inventory, archival strategy |
 
 ---
 
@@ -112,12 +118,29 @@ Editing one engine can affect others. Key connections:
 - **Demographics** → Civic Voting, Story Hooks, City Dynamics
 - **World Events** → Arc Engine, Media Briefings
 - **Initiative Outcomes** → Neighborhood Ripples (12-20 cycles)
+- **HouseholdFormation** → GenerationalWealth → EducationCareer (Phase 5 chain, direct sheet writes — see engine headers)
+- **Riley_Digest** → Pattern Detection (Phase 6 reads historical digest for cross-cycle patterns)
 
 Before editing, check what reads from and writes to the affected ctx fields.
 
 ---
 
 ## Recent Sessions
+
+### Session 30 (2026-02-16) — Sheet Environment Audit, Heat Map & Calendar Cleanup
+
+- **Full sheet environment audit** — mapped all 20+ sheet write operations across 11 phases. Identified write-intent compliance, orphaned sheets, and missing data flows.
+- **buildDeskPackets.js v1.3** — wired 3 new data sources (Household_Ledger, Relationship_Bonds, World_Population + economic context) into desk packets and compact summaries.
+- **Ledger Heat Map created** — `docs/engine/LEDGER_HEAT_MAP.md`. Every sheet rated GREEN/YELLOW/RED by bloat risk, growth projections to C281, dead column inventory (40 verified), archival strategy, 4-phase cleanup roadmap.
+- **Phase A calendar cleanup executed** — 5 persistence writers updated to stop writing dead calendar columns:
+  - `saveV3Seeds.js` v3.3→v3.4: Removed cols I-N (Story_Seed_Deck)
+  - `v3StoryHookWriter.js` v3.3→v3.4: Removed cols K-P (Story_Hook_Deck)
+  - `v3TextureWriter.js` v3.4→v3.5: Removed cols H-L (Texture_Trigger_Log)
+  - `recordWorldEventsv3.js` v3.3→v3.4: Cols W-AA → empty strings (WorldEvents_V3_Ledger)
+  - `pressDraftWriter.js` v1.3→v1.4: Cols I-N → empty strings; removed dead `getDraftsByHoliday_`, `getDraftsBySportsSeason_` (Press_Drafts)
+- **Critical correction**: Simulation_Ledger columns (ClockMode, Middle, etc.) are NOT dead — ClockMode read by 8+ engines. Phase B cancelled.
+- **Orphaned sheet audit**, **intentional direct writes documentation**, **cascade dependencies** — all from earlier in session.
+- Needs `clasp push` to deploy the 5 persistence writer changes.
 
 ### Session 29 (2026-02-15) — Discord Hardening & Citizen Knowledge
 
@@ -235,26 +258,27 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Current Work / Next Steps
 
 **Active:**
-- **Sheet environment audit** — next session. Verify all new ledgers tie to summaries, cut bloat at the data layer
+- **`clasp push` needed** — 5 persistence writer changes from Phase A calendar cleanup
 - Week 4: Gentrification Mechanics & Migration — extend Neighborhood_Map, integrate with applyMigrationDrift.js
 - Bond seeding fix needs `clasp push` (seedRelationBondsv1.js v1.1)
-- User seeding family life events into Simulation_Ledger (Robert, Sarah, Michael baseline entries) — user handling independently
 
 **Completed This Session:**
-- Timezone fix: `getCentralDate()`, Central-keyed logs, reflection fallback + dedup
-- Heartbeat prompt rewrite: world state focus, no-repeat instruction
-- Citizen knowledge pack: `loadCitizenKnowledge()`, 174 citizens, bot prompt 11.8→16.4KB
-- Unified Discord: webhook replaced with bot token REST API, one channel
-- School quality data populated (13/17 neighborhoods)
-- clasp push confirmed current (Session 24 fixes already deployed)
+- Ledger Heat Map: `docs/engine/LEDGER_HEAT_MAP.md` — all ~53 sheets rated, growth projections, dead column inventory
+- Phase A calendar cleanup: 5 writers updated (saveV3Seeds v3.4, v3StoryHookWriter v3.4, v3TextureWriter v3.5, recordWorldEventsv3 v3.4, pressDraftWriter v1.4)
+- Dead code removed: getDraftsByHoliday_, getDraftsBySportsSeason_ (never called)
+- Sheet environment audit, buildDeskPackets.js v1.3, orphan corrections, direct write documentation
+- Simulation_Ledger "dead columns" proved alive (ClockMode read by 8+ engines) — Phase B cancelled
 
 **Pending Decisions:**
 - Wire Jax Caldera into /write-edition pipeline
-- Activate Supermemory Pro after subscription sort (2/16)
+- Activate Supermemory Pro after subscription sort
 - Clean Carmen's roster entry (engine language in samplePhrases)
+- Heat Map Phase C: LifeHistory_Log archive script (RED risk, action before C150)
+- Heat Map Phase D: LifeHistory compression enforcement
 
 **Tech Debt:**
 - mulberry32_ defined in 10 files → consolidate to utilities/rng.js
 - compileHandoff.js superseded by buildDeskPackets.js — consider removal
+- Orphaned sheets to clean: Continuity_Loop (dead), World_Drift_Report (write-only)
 
 *Full completed enhancements list: `docs/reference/COMPLETED_ENHANCEMENTS.md`*

@@ -1,10 +1,16 @@
 /**
  * ============================================================================
- * compressLifeHistory.js v1.2
+ * compressLifeHistory.js v1.3
  * ============================================================================
  *
  * Scans LifeHistory and compresses accumulated events into a personality profile
  * stored in TraitProfile (or OriginVault fallback).
+ *
+ * v1.3 Upgrades (additive, ES5 safe):
+ * - LifeHistory alignment: 14 missing tags added to TAG_TRAIT_MAP
+ * - PostCareer cluster (10 variants) for retirement personality
+ * - CivicRole + Civic Perception for civic service visibility
+ * - GAME-Micro for sports integration, Quoted for journalist observations
  *
  * v1.2 Upgrades (additive, ES5 safe):
  * - Career Engine integration: TAG_TRAIT_MAP includes Career tags
@@ -36,7 +42,7 @@
 // CONSTANTS
 // ============================================================================
 
-var COMPRESS_VERSION = '1.2';
+var COMPRESS_VERSION = '1.3';
 
 // Decay per unit (entry or cycle depending on basis)
 var TAG_DECAY_RATE = 0.95;
@@ -113,7 +119,27 @@ var TAG_TRAIT_MAP = {
   'Career-Training': { driven: 0.5, reflective: 0.3 },
   'Career-FirstFriday': { social: 0.4, reflective: 0.3 },
   'Career-CreationDay': { grounded: 0.5, reflective: 0.4 },
-  'Career-Holiday': { social: 0.4, grounded: 0.3 }
+  'Career-Holiday': { social: 0.4, grounded: 0.3 },
+
+  // PostCareer / Retirement Lifestyle (v1.3: LifeHistory alignment)
+  'PostCareer': { reflective: 0.5, grounded: 0.4 },
+  'PostCareer-FirstFriday': { social: 0.6, reflective: 0.3 },
+  'PostCareer-CreationDay': { grounded: 0.7, reflective: 0.3 },
+  'PostCareer-Holiday': { social: 0.5, grounded: 0.4 },
+  'PostCareer-Sports': { social: 0.5, volatile: 0.3 },
+  'PostCareer-Travel': { reflective: 0.6, driven: 0.2 },
+  'PostCareer-Fundraiser': { social: 0.7, driven: 0.4 },
+  'PostCareer-Community': { social: 0.7, grounded: 0.4 },
+  'PostCareer-Influence': { driven: 0.6, social: 0.3 },
+  'PostCareer-Wellness': { grounded: 0.6, reflective: 0.4 },
+
+  // Civic & Public Role (v1.3)
+  'CivicRole': { driven: 0.6, social: 0.5 },
+  'Civic Perception': { social: 0.6, reflective: 0.3 },
+
+  // Media & Sports Integration (v1.3)
+  'GAME-Micro': { social: 0.4, volatile: 0.3 },
+  'Quoted': { reflective: 0.7, grounded: 0.3 }
 };
 
 // Archetypes

@@ -479,10 +479,10 @@ function runHouseholdEngine_(ctx) {
       logSheet.appendRow([
         ctx.now,
         row[iPopID],
-        (row[iFirst] + " " + row[iLast]).trim(),
+        '',
         eventTag,
         pick,
-        neighborhood || "Engine",
+        '',
         cycle
       ]);
     }

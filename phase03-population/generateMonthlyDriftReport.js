@@ -5,7 +5,12 @@
  *
  * FIXED: Reads ALL data from World_Population (where it actually exists)
  * Riley_Digest lookup removed - was looking for columns that don't exist there
- * 
+ *
+ * NOTE (Session 30 audit): World_Drift_Report is WRITE-ONLY. No engine or
+ * script reads from it. It exists as a historical archive exported by
+ * cycleExportAutomation.js. If storage becomes an issue, this writer can
+ * be safely disabled without affecting the pipeline.
+ *
  * ORIGINAL SCHEMA (22 columns) - UNCHANGED
  *
  * ============================================================================

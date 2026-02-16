@@ -216,6 +216,11 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   // PHASE 6: EVENT PROCESSING + ANALYSIS
   // ═══════════════════════════════════════════════════════════
+  // NOTE (Session 30 audit): Phase 5 Tier-5 engines (Household, GenWealth,
+  // Education) and Phase 6 engines below use direct sheet writes instead of
+  // write-intents. This is intentional — subsequent engines in the sequence
+  // read from sheets updated by prior engines within the same cycle.
+  // See individual engine headers for details.
   safePhaseCall_(ctx, 'Phase6-FilterNoise', function() { filterNoiseEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Prioritize', function() { prioritizeEvents_(ctx); });
 
@@ -1447,6 +1452,11 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // PHASE 6: EVENT PROCESSING + ANALYSIS
   // ═══════════════════════════════════════════════════════════
+  // NOTE (Session 30 audit): Phase 5 Tier-5 engines (Household, GenWealth,
+  // Education) and Phase 6 engines below use direct sheet writes instead of
+  // write-intents. This is intentional — subsequent engines in the sequence
+  // read from sheets updated by prior engines within the same cycle.
+  // See individual engine headers for details.
   safePhaseCall_(ctx, 'Phase6-FilterNoise', function() { filterNoiseEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Prioritize', function() { prioritizeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Spotlights', function() { applyNamedCitizenSpotlights_(ctx); });

@@ -760,20 +760,20 @@ function runCareerEngine_(ctx) {
       logRows.push([
         ctx.now,
         row[iPopID],
-        (safeStr(row[iFirst]) + " " + safeStr(row[iLast])).trim(),
+        '',
         eventTag,
         pick,
-        neighborhood || "Engine",
+        '',
         cycle
       ]);
       if (shouldPersistState) {
         logRows.push([
           ctx.now,
           row[iPopID],
-          (safeStr(row[iFirst]) + " " + safeStr(row[iLast])).trim(),
+          '',
           "CareerState",
           ("industry=" + st.industry + "|employer=" + st.employer + "|level=" + st.level + "|income=" + st.incomeBand),
-          neighborhood || "Engine",
+          '',
           cycle
         ]);
       }

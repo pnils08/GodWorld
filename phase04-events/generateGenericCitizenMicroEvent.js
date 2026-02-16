@@ -468,10 +468,10 @@ function generateGenericCitizenMicroEvents_(ctx) {
       logRows.push([
         ctx.now,
         popId,
-        ((row[iFirst] || "") + " " + (row[iLast] || "")).trim(),
+        '',
         "Micro-Event",
         pick,
-        neighborhood || "Engine",
+        '',
         cycle
       ]);
     }

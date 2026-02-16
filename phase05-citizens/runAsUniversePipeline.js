@@ -449,10 +449,10 @@ function runAsUniversePipeline_(ctx) {
       logRows.push([
         ctx.now,
         row[iPopID],
-        name,
+        '',
         "Retirement",
         "Moved into post-career life.",
-        neighborhood || "Engine",
+        '',
         cycle
       ]);
 
@@ -567,10 +567,10 @@ function runAsUniversePipeline_(ctx) {
         logRows.push([
           ctx.now,
           row[iPopID],
-          name,
+          '',
           eventTag,
           pick,
-          neighborhood || "Engine",
+          '',
           cycle
         ]);
 

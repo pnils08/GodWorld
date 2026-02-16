@@ -694,10 +694,10 @@ function parseContinuityNotes_(ss, section) {
     logSheet.appendRow([
       now,                                          // A: Timestamp
       '',                                           // B: POPID (resolved later)
-      quotes[q].name,                               // C: Name
+      '',                                           // C: Name (deprecated)
       'Quoted',                                     // D: EventTag
       'Direct quote preserved: ' + quotes[q].quote, // E: EventText
-      '',                                           // F: Neighborhood
+      '',                                           // F: Neighborhood (deprecated)
       cycle                                         // G: Cycle
     ]);
   }

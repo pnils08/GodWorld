@@ -12,7 +12,8 @@
  *   Story_Seed_Deck, Story_Hook_Deck, WorldEvents_V3_Ledger, Event_Arc_Ledger,
  *   Civic_Office_Ledger, Initiative_Tracker, Simulation_Ledger, Generic_Citizens,
  *   Chicago_Citizens, Cultural_Ledger, Oakland_Sports_Feed, Chicago_Sports_Feed,
- *   Storyline_Tracker, Cycle_Packet, Press_Drafts, LifeHistory_Log
+ *   Storyline_Tracker, Cycle_Packet, Press_Drafts, LifeHistory_Log,
+ *   Household_Ledger, Relationship_Bonds, World_Population
  *
  * Reads locally:
  *   /tmp/mara_directive_c{XX}.txt
@@ -48,7 +49,8 @@ const DESKS = {
       'stabilization', 'council', 'vote', 'oari', 'baylight', 'crane',
       'health center', 'osei', 'civic load', 'vega', 'carter', 'ashford',
       'chen', 'rivers', 'tran', 'mobley', 'delgado', 'infrastructure',
-      'initiative', 'mayor', 'city hall', 'opoa', 'ramirez', 'district'
+      'initiative', 'mayor', 'city hall', 'opoa', 'ramirez', 'district',
+      'household', 'rent burden', 'housing', 'eviction'
     ],
     canonSections: ['council', 'pendingVotes', 'statusAlerts', 'recentOutcomes'],
     getsSportsFeeds: false,
@@ -77,7 +79,8 @@ const DESKS = {
     storylineKeywords: [
       'faith', 'interfaith', 'gallery', 'mei chen', 'first friday', 'mural',
       'community', 'art walk', 'cultural', 'church', 'mosque', 'synagogue',
-      'temple', 'concert', 'nightlife', 'restaurant', 'school'
+      'temple', 'concert', 'nightlife', 'restaurant', 'school',
+      'household', 'family', 'multigenerational', 'marriage', 'birth'
     ],
     canonSections: ['culturalEntities'],
     getsSportsFeeds: false,
@@ -90,7 +93,8 @@ const DESKS = {
     articleBudget: { min: 1, max: 2, recommended: 1 },
     storylineKeywords: [
       'economic', 'retail', 'nightlife', 'commerce', 'business', 'port',
-      'employment', 'labor', 'restaurant', 'jack london'
+      'employment', 'labor', 'restaurant', 'jack london',
+      'household', 'income', 'rent', 'housing cost', 'wealth'
     ],
     canonSections: [],
     getsSportsFeeds: false,
@@ -544,7 +548,14 @@ function generateDeskSummary(packet, deskId, cycle) {
     reporters: cr.reporters || packet.reporters || [],
     interviewCandidates: topCandidates,
     maraDirective: packet.maraDirective || '',
-    sportsFeeds: packet.sportsFeeds || []
+    sportsFeeds: packet.sportsFeeds || [],
+    // Household events this cycle (formations, dissolutions, crises)
+    householdEvents: (packet.householdEvents || []).slice(0, 5),
+    householdCount: (packet.households || []).length,
+    // Economic snapshot
+    economicContext: packet.economicContext || {},
+    // Top bonds by intensity
+    topBonds: (packet.bonds || []).slice(0, 5)
   };
 
   return summary;
@@ -788,10 +799,139 @@ function flagTopPriority(signals, topN) {
   return signals;
 }
 
+// ─── HOUSEHOLD / BOND / ECONOMIC BUILDERS ─────────────────
+
+/**
+ * Filter households relevant to a desk by neighborhood overlap
+ */
+function filterHouseholdsForDesk(households, deskNeighborhoods, deskDomains) {
+  if (deskDomains.indexOf('ALL') !== -1) return households;
+  if (!deskNeighborhoods || deskNeighborhoods.length === 0) return [];
+  return households.filter(function(h) {
+    return deskNeighborhoods.indexOf(h.Neighborhood || h.neighborhood) !== -1;
+  });
+}
+
+/**
+ * Filter bonds relevant to a desk by citizen overlap with desk data
+ */
+function filterBondsForDesk(bonds, deskCitizenNames, deskNeighborhoods, deskDomains) {
+  if (deskDomains.indexOf('ALL') !== -1) return bonds;
+  return bonds.filter(function(b) {
+    var citizenMatch = deskCitizenNames.indexOf(b.CitizenA) !== -1 ||
+                       deskCitizenNames.indexOf(b.CitizenB) !== -1;
+    var hoodMatch = deskNeighborhoods.indexOf(b.Neighborhood) !== -1;
+    return citizenMatch || hoodMatch;
+  });
+}
+
+/**
+ * Build economic context from World_Population + citizen data
+ */
+function buildEconomicContext(worldPopRaw, simLedger, activeHouseholds) {
+  var ctx = {
+    employment: '',
+    economyDescription: '',
+    incomeDistribution: { low: 0, mid: 0, high: 0, unknown: 0 },
+    educationDistribution: {},
+    householdStats: {
+      total: activeHouseholds.length,
+      rentBurdenCount: 0,
+      averageIncome: 0
+    }
+  };
+
+  // Extract from World_Population row 2
+  if (worldPopRaw && worldPopRaw.length >= 2) {
+    var headers = worldPopRaw[0] || [];
+    var row = worldPopRaw[1] || [];
+    var empIdx = headers.indexOf('Employment');
+    var econIdx = headers.indexOf('EconomyDescription');
+    if (empIdx !== -1) ctx.employment = safe(row[empIdx], '');
+    if (econIdx !== -1) ctx.economyDescription = safe(row[econIdx], '');
+  }
+
+  // Income distribution from Simulation_Ledger
+  var totalIncome = 0;
+  var incomeCount = 0;
+  simLedger.forEach(function(c) {
+    var income = (c.Income || '').toString().toLowerCase();
+    if (income === 'low') ctx.incomeDistribution.low++;
+    else if (income === 'mid' || income === 'medium') ctx.incomeDistribution.mid++;
+    else if (income === 'high') ctx.incomeDistribution.high++;
+    else if (income) ctx.incomeDistribution.unknown++;
+  });
+
+  // Education distribution from Simulation_Ledger
+  simLedger.forEach(function(c) {
+    var edu = c.EducationLevel || '';
+    if (edu) {
+      ctx.educationDistribution[edu] = (ctx.educationDistribution[edu] || 0) + 1;
+    }
+  });
+
+  // Household income stats
+  activeHouseholds.forEach(function(h) {
+    var income = parseFloat(h.HouseholdIncome || 0);
+    if (income > 0) {
+      totalIncome += income;
+      incomeCount++;
+    }
+    var rent = parseFloat(h.MonthlyRent || 0);
+    if (income > 0 && rent > 0 && (rent * 12) / income > 0.40) {
+      ctx.householdStats.rentBurdenCount++;
+    }
+  });
+  ctx.householdStats.averageIncome = incomeCount > 0 ? Math.round(totalIncome / incomeCount) : 0;
+
+  return ctx;
+}
+
+/**
+ * Format households for packet inclusion
+ */
+function formatHouseholdsForPacket(households) {
+  return households.map(function(h) {
+    var members = [];
+    try { members = JSON.parse(h.Members || '[]'); } catch(e) {}
+    return {
+      householdId: h.HouseholdId || h.householdId || '',
+      head: h.HeadOfHousehold || h.headOfHousehold || '',
+      type: h.HouseholdType || h.householdType || '',
+      neighborhood: h.Neighborhood || h.neighborhood || '',
+      housingType: h.HousingType || h.housingType || '',
+      memberCount: Array.isArray(members) ? members.length : 0,
+      income: parseFloat(h.HouseholdIncome || 0),
+      monthlyRent: parseFloat(h.MonthlyRent || h.monthlyRent || 0),
+      formedCycle: h.FormedCycle || h.formedCycle || '',
+      dissolvedCycle: h.DissolvedCycle || h.dissolvedCycle || '',
+      status: h.Status || h.status || ''
+    };
+  });
+}
+
+/**
+ * Format bonds for packet inclusion
+ */
+function formatBondsForPacket(bonds) {
+  return bonds.map(function(b) {
+    return {
+      citizenA: b.CitizenA || '',
+      citizenB: b.CitizenB || '',
+      bondType: b.BondType || '',
+      intensity: parseFloat(b.Intensity || 0),
+      status: b.Status || '',
+      neighborhood: b.Neighborhood || '',
+      domainTag: b.DomainTag || '',
+      notes: b.Notes || ''
+    };
+  }).sort(function(a, b) { return b.intensity - a.intensity; });
+}
+
 // ─── MAIN ──────────────────────────────────────────────────
 
 async function main() {
-  console.log('=== buildDeskPackets v1.2 (Journalism AI Optimizations) ===');
+  console.log('=== buildDeskPackets v1.3 (Household + Bonds + Economic Context) ===');
   console.log('Cycle:', CYCLE);
   console.log('Pulling live data from Google Sheets...\n');
 
@@ -801,7 +941,8 @@ async function main() {
     seedsRaw, hooksRaw, eventsRaw, arcsRaw,
     civicRaw, initiativeRaw, simRaw, genericRaw,
     chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
-    storylineRaw, packetRaw, draftsRaw, historyRaw
+    storylineRaw, packetRaw, draftsRaw, historyRaw,
+    householdRaw, bondsRaw, worldPopRaw
   ] = await Promise.all([
     sheets.getSheetData('Story_Seed_Deck'),
     sheets.getSheetData('Story_Hook_Deck'),
@@ -818,7 +959,10 @@ async function main() {
     sheets.getSheetData('Storyline_Tracker'),
     sheets.getSheetData('Cycle_Packet'),
     sheets.getSheetData('Press_Drafts'),
-    sheets.getSheetData('LifeHistory_Log')
+    sheets.getSheetData('LifeHistory_Log'),
+    sheets.getSheetData('Household_Ledger').catch(function() { return []; }),
+    sheets.getSheetData('Relationship_Bonds').catch(function() { return []; }),
+    sheets.getSheetData('World_Population').catch(function() { return []; })
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
@@ -882,6 +1026,27 @@ async function main() {
            String(h.Cycle) === String(CYCLE);
   });
 
+  // Households: active + recently formed/dissolved this cycle
+  var allHouseholds = allToObjects(householdRaw);
+  var activeHouseholds = allHouseholds.filter(function(h) {
+    return (h.Status || '').toLowerCase() === 'active';
+  });
+  var cycleHouseholdEvents = allHouseholds.filter(function(h) {
+    return String(h.FormedCycle) === String(CYCLE) ||
+           String(h.DissolvedCycle) === String(CYCLE);
+  });
+
+  // Relationship bonds: active, interesting intensity
+  var allBonds = allToObjects(bondsRaw);
+  var activeBonds = allBonds.filter(function(b) {
+    var status = (b.Status || '').toLowerCase();
+    var intensity = parseFloat(b.Intensity || 0);
+    return status !== 'dissolved' && status !== 'broken' && intensity >= 3;
+  });
+
+  // Economic context from World_Population + Simulation_Ledger
+  var economicContext = buildEconomicContext(worldPopRaw, simLedger, activeHouseholds);
+
   // Cycle packet text
   var packetRows = filterByCycle(packetRaw, CYCLE);
   var cyclePacketText = packetRows.length > 0 ? (packetRows[0].PacketText || packetRows[0].Briefing || JSON.stringify(packetRows[0])) : '';
@@ -902,6 +1067,10 @@ async function main() {
   console.log('  Active Storylines:', storylines.length);
   console.log('  Previous Drafts (C' + (CYCLE - 1) + '):', prevDrafts.length);
   console.log('  Recent Quotes:', recentQuotes.length);
+  console.log('  Active Households:', activeHouseholds.length);
+  console.log('  Household Events (C' + CYCLE + '):', cycleHouseholdEvents.length);
+  console.log('  Active Bonds (intensity>=3):', activeBonds.length);
+  console.log('  Economy:', economicContext.economyDescription || '(no description)');
 
   // ── Read local files ──
   var maraText = '';
@@ -939,7 +1108,8 @@ async function main() {
     weather: extractWeatherFromEvents(events),
     sentiment: extractFieldFromEvents(events, 'CitySentiment'),
     migrationDrift: '', // from cycle packet if available
-    cycleWeight: determineCycleWeight(events)
+    cycleWeight: determineCycleWeight(events),
+    economicContext: economicContext
   };
 
   // ── Build canon sections (shared data) ──
@@ -970,7 +1140,7 @@ async function main() {
   var manifest = {
     cycle: CYCLE,
     generated: new Date().toISOString(),
-    generator: 'buildDeskPackets v1.1',
+    generator: 'buildDeskPackets v1.3',
     packets: []
   };
 
@@ -1082,7 +1252,7 @@ async function main() {
         deskName: desk.name,
         cycle: CYCLE,
         generated: new Date().toISOString(),
-        generator: 'buildDeskPackets v1.2'
+        generator: 'buildDeskPackets v1.3'
       },
       baseContext: baseContext,
       deskBrief: {
@@ -1156,7 +1326,20 @@ async function main() {
       citizenArchive: citizenArchive,
       recentQuotes: deskQuotes.map(function(q) {
         return { name: q.Name || q.CitizenName || '', text: q.EventNote || q.Quote || '', cycle: q.Cycle || '' };
-      })
+      }),
+      // Task 1: Household data
+      households: formatHouseholdsForPacket(
+        filterHouseholdsForDesk(activeHouseholds, neighborhoods, desk.domains)
+      ),
+      householdEvents: formatHouseholdsForPacket(
+        filterHouseholdsForDesk(cycleHouseholdEvents, neighborhoods, desk.domains)
+      ),
+      // Task 2: Economic context
+      economicContext: economicContext,
+      // Task 3: Relationship bonds
+      bonds: formatBondsForPacket(
+        filterBondsForDesk(activeBonds, deskCitizenNames, neighborhoods, desk.domains)
+      )
     };
 
     // Write packet
@@ -1193,7 +1376,9 @@ async function main() {
 
     console.log('  Events:', deskEvents.length, '| Seeds:', deskSeeds.length,
                 '| Hooks:', deskHooks.length, '| Arcs:', deskArcs.length,
-                '| Storylines:', deskStorylines.length);
+                '| Storylines:', deskStorylines.length,
+                '| Households:', (packet.households || []).length,
+                '| Bonds:', (packet.bonds || []).length);
     console.log('  Reporters:', reporterNames.join(', ') || '(citizen voices)');
     var historyCount = Object.keys(reporterHistory).reduce(function(sum, k) { return sum + reporterHistory[k].length; }, 0);
     console.log('  Reporter history:', Object.keys(reporterHistory).length, 'reporters,', historyCount, 'articles');
@@ -1207,7 +1392,18 @@ async function main() {
 
   // Write base context
   var baseFile = path.join(OUTPUT_DIR, 'base_context.json');
-  fs.writeFileSync(baseFile, JSON.stringify({ baseContext: baseContext, canon: canon }, null, 2));
+  fs.writeFileSync(baseFile, JSON.stringify({
+    baseContext: baseContext,
+    canon: canon,
+    householdStats: {
+      activeHouseholds: activeHouseholds.length,
+      cycleEvents: cycleHouseholdEvents.length,
+      rentBurdenCount: economicContext.householdStats.rentBurdenCount
+    },
+    bondStats: {
+      activeBonds: activeBonds.length
+    }
+  }, null, 2));
 
   // Write full citizen archive (standalone reference for agents)
   var archiveFile = path.join(OUTPUT_DIR, 'citizen_archive.json');

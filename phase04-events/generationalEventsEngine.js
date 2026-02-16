@@ -1035,7 +1035,7 @@ function applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighb
   // SCHEMA SAFE:
   // baseline 7 cols, then optional appended cols only if sheet already has them
   if (lifeLog && logWidth > 0) {
-    var base7 = [ctx.now, popId, name, milestone.tag, milestone.description, neighborhood || "", cycle];
+    var base7 = [ctx.now, popId, '', milestone.tag, milestone.description, '', cycle];
     var extras = [cal.holiday || "none", cal.season || "unknown"]; // appended-only
     lifeLog.appendRow(buildLogRowSchemaSafe_(logWidth, base7, extras));
   }

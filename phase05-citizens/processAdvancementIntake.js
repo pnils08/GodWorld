@@ -247,9 +247,9 @@ function processMediaUsage_(ss, now, cycle) {
       if (lTierCol >= 0 && update.tier !== update.oldTier) {
         ledgerSheet.getRange(Number(lRow) + 1, lTierCol + 1).setValue(update.tier);
         if (logSheet) {
-          logSheet.appendRow([now, update.popId, update.name, 'Promotion',
+          logSheet.appendRow([now, update.popId, '', 'Promotion',
             'Advanced from Tier ' + update.oldTier + ' to Tier ' + update.tier,
-            'Engine', cycle]);
+            '', cycle]);
         }
       }
     }
@@ -338,8 +338,8 @@ function processAdvancementRows_(ss, now, cycle) {
       if (lLastUpdated >= 0) ledgerSheet.getRange(existingRow + 1, lLastUpdated + 1).setValue(now);
       var popId = lPopId >= 0 ? ledgerData[existingRow][lPopId] : '';
       if (logSheet) {
-        logSheet.appendRow([now, popId, first + ' ' + last, 'Advancement',
-          'Updated to Tier ' + tier + '. ' + notes, 'Engine', cycle]);
+        logSheet.appendRow([now, popId, '', 'Advancement',
+          'Updated to Tier ' + tier + '. ' + notes, '', cycle]);
       }
     } else {
       maxPop++;
@@ -359,8 +359,8 @@ function processAdvancementRows_(ss, now, cycle) {
       if (lUsageCol >= 0) newRow[lUsageCol] = 0;
       ledgerSheet.appendRow(newRow);
       if (logSheet) {
-        logSheet.appendRow([now, newPopId, first + ' ' + last, 'Promotion',
-          'Added to Simulation_Ledger as Tier ' + tier + '. ' + notes, 'Engine', cycle]);
+        logSheet.appendRow([now, newPopId, '', 'Promotion',
+          'Added to Simulation_Ledger as Tier ' + tier + '. ' + notes, '', cycle]);
       }
       markAsEmergedInGeneric_(ss, genericSheet, first, last, cycle);
     }

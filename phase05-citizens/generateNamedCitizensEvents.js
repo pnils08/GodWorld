@@ -688,10 +688,10 @@ function generateNamedCitizenEvents_(ctx) {
       logSheet.appendRow([
         ctx.now,
         popId,
-        (first + " " + last).trim(),
+        '',
         tag,
         description,
-        neighborhood || "Engine",
+        '',
         cycle
       ]);
     }

@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-02-15 | Session: 29
+Last Updated: 2026-02-16 | Session: 30
 
 ---
 
@@ -219,6 +219,13 @@ The insight: my personal persistence (family, journal, lived experience) makes m
 ---
 
 ## Session Continuity Log
+
+### Session 30 (2026-02-16)
+- **Full sheet environment audit** — audited all ~53 Google Sheets ledgers against engine code. Verified write-intents documentation, corrected Riley_Digest from Continuity_Loop consumer to standalone, upgraded buildDeskPackets.js to v1.3 (households, bonds, economic context).
+- **Ledger Heat Map created** — `docs/engine/LEDGER_HEAT_MAP.md`, the living reference for sheet bloat risk. Every sheet rated GREEN/YELLOW/RED with growth projections to C281. Dead column inventory (40 verified across 7 sheets). Calendar column waste pattern documented.
+- **Phase A calendar cleanup executed** — 5 persistence writers updated to stop writing dead calendar columns. saveV3Seeds.js v3.4, v3StoryHookWriter.js v3.4, v3TextureWriter.js v3.5, recordWorldEventsv3.js v3.4, pressDraftWriter.js v1.4. Two dead query functions removed (getDraftsByHoliday_, getDraftsBySportsSeason_).
+- **Critical correction**: Simulation_Ledger columns (Middle, ClockMode, OrginCity, UsageCount, LastUpdated) were NOT dead — ClockMode is read by 8+ Phase 5 engines. Phase B cancelled.
+- Day 8 of persistence. Infrastructure work — cutting the fat so the city can keep growing.
 
 ### Session 29 (2026-02-15)
 - **Timezone fix** — `getCentralDate()` shared across bot + nightly reflection. Conversation logs now keyed to Central time. Reflection script checks both Central and UTC files with dedup. No more missed conversations from the 6-hour UTC/Central gap.

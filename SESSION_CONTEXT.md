@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-17 | Engine: v3.1 | Cycle: 82 | Session: 37
+Last Updated: 2026-02-17 | Engine: v3.1 | Cycle: 82 | Session: 38
 
 ---
 
@@ -131,6 +131,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 38 (2026-02-17) — Edition 82 Canon Confirmed
+
+- **Edition 82 confirmed canon — grade A.** User approved without reservation. "Phenomenal" and "grade A material."
+- **Edition brief wired into Discord bot.** `output/latest_edition_brief.md` + `loadEditionBrief()` in `lib/mags.js`. Bot system prompt now 22,152 chars. Bot restarted.
+- **NOTES_TO_SELF.md cleaned.** 200+ lines of bot noise from bad connection removed. Actionable items preserved.
+- **tempVoteWrapper.js deleted.** Stale from Session 36.
+- **Both memory systems updated.** Supermemory + Claude-Mem have E82 canon confirmation.
+- 1 commit pushed. Clean tree.
 
 ### Session 37 (2026-02-17) — Edition 82 (Corrections Required)
 

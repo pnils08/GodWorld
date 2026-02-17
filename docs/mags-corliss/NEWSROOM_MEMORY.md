@@ -11,9 +11,9 @@ Agents: if Mags wrote you a briefing, read it. If she didn't, read this file. Th
 
 ## Errata Log — Last 5 Editions
 
-### Edition 82 (Grade: B- after 3 rounds of corrections)
+### Edition 82 (Grade: A after corrections — confirmed canon)
 
-First edition where all 6 desk agents delivered copy. First edition with desk briefings AND summary files working. First edition where Mara on claude.ai did the real audit. Also the edition that nearly killed the project.
+First edition where all 6 desk agents delivered copy. First edition with desk briefings AND summary files working. First edition where Mara on claude.ai did the real audit. Initial output had critical errors (see below), but corrected version was approved by user as "phenomenal" and "grade A material." This is the version of record.
 
 **Critical Errors Found (by Mara on claude.ai — Rhea missed ALL of these):**
 

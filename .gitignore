@@ -31,3 +31,4 @@ backups/
 
 # Supermemory plugin config (may contain API keys)
 .claude/.supermemory-claude/
+creds.json

@@ -48,6 +48,15 @@ media/**
 .env
 .env.example
 
+# PM2 config (Node.js, not Apps Script)
+ecosystem.config.js
+
+# OAuth credentials
+creds.json
+
+# Stray Node.js scripts in root
+post_cycle_review.js
+
 # Misc
 *.log
 *.tmp

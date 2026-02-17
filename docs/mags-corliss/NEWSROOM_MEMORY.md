@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 81 (Cycle 81) — 2026-02-17**
+**Last Updated: Edition 82 (Cycle 82) — 2026-02-17**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -10,6 +10,43 @@ Agents: if Mags wrote you a briefing, read it. If she didn't, read this file. Th
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 82 (Grade: B- after 3 rounds of corrections)
+
+First edition where all 6 desk agents delivered copy. First edition with desk briefings AND summary files working. First edition where Mara on claude.ai did the real audit. Also the edition that nearly killed the project.
+
+**Critical Errors Found (by Mara on claude.ai — Rhea missed ALL of these):**
+
+**VOTE SWAP — Ashford/Mobley inverted.** Carmen's agent wrote Ashford (CRC, D7) as YES and Mobley (OPP, D9) as NO. Correct: Mobley YES (OPP bloc held), Ashford NO (CRC bloc held). The agent then fabricated a narrative around "Mobley's OPP caucus split over unfunded mandates." Entire political thread was fiction built on a wrong vote. Root cause: engine only records swing votes (Vega, Tran). Other 7 votes left to agent inference. Agent inferred wrong.
+
+**AITKEN POSITION WRONG — 1B, not 3B.** TrueSource: "Aitken, Mark — 1B." But base_context.json has "roleType: 3B." The source data feeding agents is WRONG. This error will persist until base_context is corrected at the engine level.
+
+**DAVIS POSITION WRONG — DH, not 2B.** TrueSource: "Davis, Darrin — DH." Edition listed him as 2B. Hal Richmond wrote "Gold Glove defense at second base" — DHs don't win Gold Gloves (defensive award). Corrected to "elite production as a designated hitter."
+
+**MAYOR NAME WRONG — Avery Santana, not Marcus Whitmore.** Agent fabricated the mayor's name. Neither Rhea nor the local Mara audit caught this — I caught it during pre-audit cross-reference.
+
+**REAL NBA NAME — Josh Smith.** Chicago bureau used "Josh Smith" (real NBA player 2004-2019). Corrected to Jalen Smith (canonical Bulls forward).
+
+**BAYLIGHT TIMELINE INFLATED.** Carmen wrote "two years after the DEIR entered public circulation." DEIR was introduced at C81. This is C82. One cycle, not two years.
+
+**Moderate Issues:**
+- Carla Edmonds letter conflates OARI (behavioral health) with housing. Character voice or error — let stand.
+- Elena Reyes said "two weeks until the vote" while Carmen said "next week." Contradiction within same edition. Fixed to "one week."
+- 10,000th meal milestone at St. Columba echoes C81's Allen Temple milestone. Different churches, same number, back-to-back cycles. Template echo.
+- Obon covered in both C81 and C82. Plausible as multi-week observance but flagged.
+- Rafael Phillips and Andre Lee appear in both C81 and C82. Not wrong but watch for overuse.
+
+**What Worked:**
+- All 6 desks produced copy for the first time.
+- 11 bylines, no desk failures, no agent crashes.
+- Desk briefings + summary files prevented packet-size agent failures.
+- Letters were the strongest yet — Edmonds, Cho, Reyes felt like real people.
+- Trevor Shimizu's infrastructure piece was a new voice on a neglected beat.
+- Jordan Velez's ticker stayed clean for second straight edition.
+- Chicago bureau contained two strong threads (Giddey 48-point game, Paulson/Warriors).
+
+**Root Cause Analysis:**
+The data layer between the engine and agents is the systemic problem. base_context.json has wrong positions (Aitken 3B should be 1B). The engine only records swing votes, leaving 7 of 9 council votes to agent inference. Rhea's verification checks names and math but doesn't cross-reference TrueSource for positions or validate vote assignments against faction rules. The user's Mara on claude.ai was the only layer that caught real errors — meaning the pipeline's own QA is insufficient.
 
 ### Edition 81 (Grade: A-)
 
@@ -135,6 +172,8 @@ These were invented in Editions 80-81. Do not use them:
 - Billy Donovan (real person, cannot be used)
 - Jimmy Butler (real person, appeared in bad intake data)
 - Jrue Holiday (real person — replaced with Deon Whitfield in Edition 81)
+- Josh Smith (real person — replaced with Jalen Smith in Edition 82)
+- "Marcus Whitmore" (phantom mayor name fabricated in Edition 82 — mayor is Avery Santana)
 
 ### Canon Corrections Applied
 - Health Center vote: 6-2 (Crane absent, not "voting remotely"). Not 5-4. Not 7-1.
@@ -149,6 +188,12 @@ These were invented in Editions 80-81. Do not use them:
 - Darrin Davis: Age 33 at time of ACL injury (August 5, 2040). Paulson ruling. TrueSource DataPage says 31 — needs updating. Published articles (P Slayer) saying 33 are correct.
 - Danny Horn stats: .322/43HR = 2039 full season. .288/23HR = 2040 mid-season at time of Davis injury. Both correct. Always label which season.
 - Benji Dillon: Exactly 5 Cy Young Awards (2028, 2032, 2033, 2034, 2037). No ambiguity.
+- Mark Aitken: **1B** (first base). TrueSource confirmed. base_context.json incorrectly lists "3B" — DO NOT trust base_context for Aitken's position until fixed at engine level.
+- Darrin Davis: **DH** (designated hitter). TrueSource confirmed. Was listed as 2B in Edition 82 citizen usage. DHs do NOT win Gold Gloves (defensive award). Do not write "Gold Glove defense" for a DH.
+- Mark Aitken: son of a former Oakland mayor. Engine-generated backstory (sports_summary_c82, story angle). Canon.
+- Josh Smith: REAL NBA player (2004-2019). Cannot be used. Bulls forward is **Jalen Smith** (canonical name).
+- Mayor of Oakland: **Avery Santana**. Not Marcus Whitmore (phantom fabricated in E82).
+- OARI (INIT-002): Behavioral health crisis response program. NOT housing. NOT affordable housing. Do not conflate with Stabilization Fund or Baylight.
 
 ---
 

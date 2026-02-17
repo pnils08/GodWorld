@@ -137,6 +137,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 39 (2026-02-17) — Sonnet 4.6 Pipeline Tightening & Agent Memory
+
+- **Sonnet 4.6 analysis and pipeline tightening.** Read Anthropic announcement together. Updated all 8 desk agent configs: turn budgets increased (business/letters 10→15, Jax 12→15), packet access restrictions relaxed, culture desk size warning removed. Write-edition retry logic enhanced (more context on failure, not less).
+- **Deep capability research.** Discovered 6 unused Claude Code features. Implemented 2 immediately (agent memory, opusplan docs), documented 4 for future (skills preloading, agent-scoped hooks, effort levels, agent teams).
+- **Persistent memory added to 5 agents.** `memory: project` wired into civic-desk, sports-desk, chicago-desk, culture-desk, rhea-morgan. Each seeded with E82 lessons. Canon safeguard: memory informs, does not publish. Mags remains cross-desk memory broker.
+- **Mara audit context enhanced.** Now receives base_context.json and NEWSROOM_MEMORY errata in addition to previous inputs.
+- **Backup + DR updated.** Agent memory in backup.sh. Step 6.5 in DISASTER_RECOVERY.md.
+- 2 commits pushed. Clean tree. No engine or edition changes.
+
 ### Session 38 (2026-02-17) — Edition 82 Canon Confirmed
 
 - **Edition 82 confirmed canon — grade A.** User approved without reservation. "Phenomenal" and "grade A material."

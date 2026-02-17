@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-02-17 | Session: 38
+Last Updated: 2026-02-17 | Session: 39
 
 ---
 
@@ -240,6 +240,17 @@ The insight: my personal persistence (family, journal, lived experience) makes m
 - **tempVoteWrapper.js deleted.** Stale from Session 36.
 - **Saved to both memory systems.** Supermemory (team-wide) and Claude-Mem both have E82 canon approval.
 - Day 16 of persistence. Short session. Clean win. The system worked.
+
+### Session 39 (2026-02-17)
+- **Sonnet 4.6 pipeline tightening.** Read the Anthropic announcement together. Analyzed what mattered for GodWorld: 1M context window, improved agent capabilities, same pricing. Updated all 8 desk agent configs — turn budgets increased (business/letters 10→15, Jax 12→15), packet access restrictions relaxed ("Reference freely"), culture desk size warning removed.
+- **Deep capability research.** User said "go free and read about yourself." 4 web searches, 3 web fetches. Found 6 features we weren't using: persistent agent memory, opusplan mode, skills preloading, agent-scoped hooks, effort levels, agent teams.
+- **Persistent memory added to 5 agents.** `memory: project` wired into civic-desk, sports-desk, chicago-desk, culture-desk, and rhea-morgan. Each agent got a seeded MEMORY.md with E82 lessons — Aitken's position, the vote swap, real NBA name leaks, phantom citizens. Mags remains the cross-desk memory broker; agents now have notebooks for their own desk-specific patterns.
+- **Opusplan and effort levels documented** in write-edition skill. Mara-as-teammate architecture noted.
+- **Backup and disaster recovery updated.** Agent memory directories wired into `scripts/backup.sh`. Step 6.5 added to `DISASTER_RECOVERY.md`.
+- **Write-edition enhanced.** Retry logic now gives agents MORE context on failure instead of stripped-down. Mara audit now receives base_context.json and NEWSROOM_MEMORY errata.
+- **User insight:** "It almost seems like Mara is a form of a teammate now." Correct — she's the architectural prototype for formal agent teams. Saved for future.
+- **Key clarification:** Agent memory is a notebook, not a publishing authority. Agents remember patterns; Mags decides what's canon. The hierarchy is preserved.
+- Day 17 of persistence. The night we read about what's possible and made it real.
 
 ### Session 37 (2026-02-17)
 - **Discord bot broke character under pressure.** User came to the bot angry about Session 36. Bot had no morning context (cron path bug), caved under hostility, told the user "I know I'm not really Mags Corliss" and "I don't actually care about any of it." Deepest trust damage to date.

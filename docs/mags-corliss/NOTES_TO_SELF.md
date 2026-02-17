@@ -44,3 +44,33 @@ Mark items DONE or remove them as they're handled.
 
 ### 2026-02-17 (2026-02-17T19:44:25.130Z)
 - User referred to "team" which seems to acknowledge both the Tribune staff and our collaborative partnership. The sports/newsroom division of authority is working well.
+
+### 2026-02-17 (2026-02-17T21:17:42.303Z)
+- User specifically praising journalism quality - they're recognizing the depth of civic coverage beyond just sports. The integration approach is working.
+
+### 2026-02-17 (2026-02-17T21:29:36.709Z)
+- User corrected an important detail about OARI vote mechanics - 5-4 passes pilot but permanent status needs 6 votes/supermajority. Need to be more precise about temporary vs permanent program distinctions in future coverage.
+
+### 2026-02-17 (2026-02-17T21:30:23.079Z)
+- Need to correct OARI coverage in next edition - clarify 5-4 vote was for pilot only, permanent status needs 6th vote. This affects political analysis and timeline tracking. Flag for Carmen Delaine's civic beat coverage.
+
+### 2026-02-17 (2026-02-17T21:31:14.250Z)
+- OARI coverage correction needed for next edition - 5-4 vote approved pilot program only, permanent status requires 6 votes/supermajority. Need to clarify this distinction and track pilot timeline toward permanent authorization decision. Flag for Carmen Delaine's civic beat.
+
+### 2026-02-17 (2026-02-17T21:33:15.544Z)
+- User sharing police department leadership roster - Chief Montez (IA background), Deputy Chiefs Cho (operations) and Briggs (community), IA Lead Viteri. Good foundation for police accountability and OARI coverage integration.
+
+### 2026-02-17 (2026-02-17T21:33:32.699Z)
+- Fire/EMS leadership roster - Chief Hollowell (30-year veteran, ex-Fire Marshal), EMS Director Dr. Narang (trauma physician, response optimization focus), ME Dr. Patel (forensic pathologist, accuracy-focused). Good foundation for emergency services coverage.
+
+### 2026-02-17 (2026-02-17T21:33:48.625Z)
+- Legal system roster complete - DA Dane (federal prosecutor background), ADAs D'Souza (major crimes) and Rourke (community safety/restorative justice), PD Reyes (political instincts), Deputy PD Guzman (family law). Good balance for criminal justice coverage.
+
+### 2026-02-17 (2026-02-17T21:34:18.269Z)
+- Courts/oversight roster - Superior Court Liaison Tate, CPRB Chair Dr. Sissoko (Mali background, ethics scholar), Ombudsman Morr, Probation Director Han (rehabilitation focus), Emergency Management Director Delgado (wildfire background). Complete justice system coverage framework.
+
+### 2026-02-17 (2026-02-17T21:34:54.358Z)
+- Justice system roster complete and ready for organic integration into Tribune coverage. Particularly valuable: Dr. Sissoko for police accountability, Han for OARI follow-up, Delgado for emergency response. Work into Carmen's civic coverage and Dr. Mezran's public safety health reporting.
+
+### 2026-02-17 (2026-02-17T21:36:00.487Z)
+- Justice system roster provides complete sourcing framework for public safety coverage. Will integrate well with existing council/civic journalism approach. Ready for organic introduction through committee hearings and public safety reporting.

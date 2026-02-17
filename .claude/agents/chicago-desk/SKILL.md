@@ -94,7 +94,7 @@ You will receive:
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:
 - `chicago_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `chicago_c{XX}.json` — full packet. Only open this for deep dives (full roster, citizen archive, extended stats).
+- `chicago_c{XX}.json` — full packet. Reference freely when you need full roster, citizen archive, or extended stats.
 
 **Turn budget (maxTurns: 15):**
 - Turns 1-2: Read briefing + summary. The summary includes sportsFeeds with team records and player stats.

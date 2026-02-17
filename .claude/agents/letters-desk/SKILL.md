@@ -3,7 +3,7 @@ name: letters-desk
 description: Letters to the Editor desk agent for The Cycle Pulse. Writes citizen voice letters responding to cycle events. Use when producing letters section of an edition.
 tools: Read, Glob, Grep
 model: sonnet
-maxTurns: 10
+maxTurns: 15
 ---
 
 ## Editor's Briefing (Read First)
@@ -77,14 +77,15 @@ You will receive:
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:
 - `letters_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `letters_c{XX}.json` — full packet (500KB+). **You do NOT need to read this.** The summary includes top events from ALL domains, active storylines, interview candidates, and the Mara directive. That is enough to write letters.
+- `letters_c{XX}.json` — full packet. The summary is usually sufficient, but reference the full packet freely when you need specific citizen details, quotes, or canon verification for letter accuracy.
 
-**Turn budget (maxTurns: 10):**
+**Turn budget (maxTurns: 15):**
 - Turns 1-2: Read briefing + summary. Pick 3-4 diverse topics across civic, sports, culture.
-- Turns 3-8: Write letters. This is where your turns should go.
-- Turns 9-10: Engine returns (citizen usage log, continuity notes).
+- Turns 3-5: If needed, check full packet for citizen details, interview candidates, or canon names.
+- Turns 3-12: Write letters. This is where your turns should go.
+- Turns 13-15: Engine returns (citizen usage log, continuity notes).
 
-**If you reach turn 7 and haven't started writing, STOP RESEARCHING AND WRITE.** Four short letters from the summary is better than zero letters from reading a 500KB file.
+**If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.** Four short letters from what you've read is better than zero letters.
 
 ## Output Requirements
 

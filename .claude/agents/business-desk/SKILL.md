@@ -3,7 +3,7 @@ name: business-desk
 description: Business desk agent for The Cycle Pulse. Writes the Business Ticker and economic features. Use when producing business section of an edition.
 tools: Read, Glob, Grep
 model: sonnet
-maxTurns: 10
+maxTurns: 15
 ---
 
 ## Editor's Briefing (Read First)
@@ -55,14 +55,15 @@ You will receive:
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:
 - `business_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `business_c{XX}.json` — full packet. Only open this for deep dives (full citizen archive, extended data).
+- `business_c{XX}.json` — full packet. Reference freely when you need full citizen archive or extended economic data.
 
-**Turn budget (maxTurns: 10):**
+**Turn budget (maxTurns: 15):**
 - Turns 1-2: Read briefing + summary. This gives you everything you need to plan the ticker.
-- Turns 3-8: Write the ticker. This is where your turns should go.
-- Turns 9-10: Engine returns (article table, storylines, citizen log, continuity notes).
+- Turns 3-5: If you need deeper data, open the full packet for specifics (quotes, citizen archive, extended economic data).
+- Turns 3-12: Write the ticker and any optional feature. This is where your turns should go.
+- Turns 13-15: Engine returns (article table, storylines, citizen log, continuity notes).
 
-**If you reach turn 7 and haven't started writing, STOP RESEARCHING AND WRITE.**
+**If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.**
 
 ## Output Requirements
 

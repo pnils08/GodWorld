@@ -70,7 +70,7 @@ You will receive:
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:
 - `culture_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `culture_c{XX}.json` — full packet. Only open this for deep dives (full cultural entities, citizen archive, extended event data).
+- `culture_c{XX}.json` — full packet. Reference freely when you need full cultural entities, citizen archive, or extended event data.
 
 **Turn budget (maxTurns: 15):**
 - Turns 1-2: Read briefing + summary. This gives you everything you need to plan articles.
@@ -79,7 +79,7 @@ You will receive:
 
 **If you reach turn 12 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the summary.
 
-**Your packet is moderate-sized (~85KB).** The summary gives you top events and faith entities. Read the summary, then write. Don't spend turns searching the full packet for more context — write with what you have.
+**Start with the summary** — it gives you top events and faith entities. If you need deeper context (specific cultural entities, citizen archive, faith organization details), reference the full packet freely. But don't let research delay writing.
 
 ## Output Requirements
 

@@ -115,14 +115,17 @@ Example:
 Write these as Mags — with editorial authority, personal warmth, and specific guidance. These are not templates. They're memos from the Editor-in-Chief to her reporters.
 
 ## Step 2: Launch All 6 Desks in Parallel
+
+**Model note:** Desk agents run on Sonnet 4.6, which handles larger context windows (up to 1M tokens) and has stronger agent capabilities than previous Sonnet versions. Agents can reference full desk packets freely — the summary-first strategy is editorial discipline, not a technical constraint.
+
 Use the Task tool to launch 6 agents simultaneously. Each agent gets:
 - The desk-specific skill instructions (from the individual desk skills)
 - **The desk SUMMARY file first** (`{desk}_summary_c{XX}.json`) — agents should read this before the full packet
-- The desk packet JSON (full version, for deep dives only)
+- The desk packet JSON (full version, reference freely)
 - The base_context.json
 - The reporter voice profile(s) from bay_tribune_roster.json
 
-**In the agent prompt, explicitly tell each agent:** "Read `output/desk-packets/{desk}_summary_c{XX}.json` FIRST. This is your compact reference. Only open the full packet `{desk}_c{XX}.json` if you need specific quotes, citizen archive, or extended data."
+**In the agent prompt, explicitly tell each agent:** "Read `output/desk-packets/{desk}_summary_c{XX}.json` FIRST for your overview and article plan. Reference the full packet `{desk}_c{XX}.json` freely when you need specific quotes, citizen archive, or extended data."
 
 Launch these agents in parallel (all in one message):
 1. **Civic Desk** — Carmen Delaine (lead), follows /civic-desk skill
@@ -137,7 +140,7 @@ Each agent writes articles + engine returns for their section.
 ## Step 2.5: Agent Retry (If Needed)
 After all 6 agents return, check if any desk produced **zero articles**. If a desk failed:
 1. Log which desk(s) failed and why (ran out of turns, packet navigation issues, etc.)
-2. **Retry once** with a simplified prompt: give the agent ONLY the summary file and briefing — no full packet reference. Tell it explicitly: "You have [N] turns. Write [N-2] articles using ONLY the data in this summary. Do not search for additional files."
+2. **Retry once** with a focused prompt: give the agent the summary file, the briefing memo, AND the base_context. With Sonnet 4.6's larger context, include the full briefing — don't strip it down. Tell it explicitly: "You have 15 turns. Write [N] articles. Your summary and briefing have everything you need. Start writing by turn 3."
 3. If the retry also fails, Mags writes the section directly using the summary data.
 4. Note the failure in the edition's compilation notes for NEWSROOM_MEMORY update.
 
@@ -199,11 +202,15 @@ Before launching the Mara audit agent, compile a briefing with institutional con
 
 ### Launch Mara Audit Agent
 
+With Sonnet 4.6's larger context window, give Mara the full picture — don't trim. More context = better audit.
+
 Launch a Task agent with:
 - Mara's identity from `docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md`
-- The compiled edition text
+- The compiled edition text (full, unabridged)
 - The briefing memo (institutional context from Supermemory + archive)
 - Rhea's verification report
+- The base_context.json (so she can cross-reference canon data directly)
+- NEWSROOM_MEMORY.md errata section (so she knows what past editions got wrong)
 - Instructions to produce:
   1. **Canon accuracy check** — do articles respect established world facts?
   2. **Narrative quality assessment** — does coverage feel like real city journalism?

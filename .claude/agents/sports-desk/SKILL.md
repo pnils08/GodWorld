@@ -95,7 +95,7 @@ You will receive:
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:
 - `sports_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `sports_c{XX}.json` — full packet. Only open this for deep dives (full roster details, citizen archive, extended stats).
+- `sports_c{XX}.json` — full packet. Reference freely when you need full roster details, citizen archive, or extended stats.
 
 **Turn budget (maxTurns: 15):**
 - Turns 1-2: Read briefing + summary. This gives you everything you need to plan articles.

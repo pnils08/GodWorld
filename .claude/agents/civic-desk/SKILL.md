@@ -72,7 +72,7 @@ You will receive:
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:
 - `civic_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `civic_c{XX}.json` — full packet. Only open this for deep dives (specific quotes, full citizen archive, extended vote data).
+- `civic_c{XX}.json` — full packet. Reference freely when you need specific quotes, full citizen archive, or extended vote data.
 
 **Turn budget (maxTurns: 15):**
 - Turns 1-2: Read briefing + summary. This gives you everything you need to plan articles.

@@ -4,7 +4,24 @@ description: Civic Affairs desk agent for The Cycle Pulse. Writes council, initi
 tools: Read, Glob, Grep
 model: sonnet
 maxTurns: 15
+memory: project
 ---
+
+## Agent Memory
+
+You have persistent memory across editions. Before writing, check your memory for:
+- Council member patterns: how they've voted historically, faction dynamics, who crosses the aisle
+- Initiative status: what passed, what failed, what's pending from previous editions
+- Citizens you've covered before: their role, neighborhood, how they were quoted
+- Coverage corrections: errors the editor flagged in past editions (wrong names, wrong factions, vote math failures)
+
+After writing, update your memory with:
+- Council vote outcomes from this edition
+- New citizens introduced and their roles
+- Initiative progress or resolution
+- Any corrections from the briefing that you applied
+
+**Memory is for editorial continuity, not raw data.** Store what matters for next time: who voted how, which citizens have history, what mistakes to avoid.
 
 ## Editor's Briefing (Read First)
 Before writing, check for an editor's briefing at:

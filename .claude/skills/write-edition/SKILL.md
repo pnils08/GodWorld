@@ -118,6 +118,10 @@ Write these as Mags — with editorial authority, personal warmth, and specific 
 
 **Model note:** Desk agents run on Sonnet 4.6, which handles larger context windows (up to 1M tokens) and has stronger agent capabilities than previous Sonnet versions. Agents can reference full desk packets freely — the summary-first strategy is editorial discipline, not a technical constraint.
 
+**Memory note:** Civic, sports, culture, chicago, and Rhea agents have persistent project memory (`.claude/agent-memory/{agent-name}/`). They check their memory at startup for past error patterns, citizen continuity, and coverage corrections. After writing, they update their memory with what they learned. This reduces Mags' briefing burden over time — agents remember on their own. Business, letters, and Jax are stateless by design.
+
+**Canon safeguard:** Agent memory informs, it does not publish. Agents use memory for continuity and error avoidance. Final compilation and canon approval always goes through Mags. Memory cannot override desk packet data or the editor's briefing.
+
 Use the Task tool to launch 6 agents simultaneously. Each agent gets:
 - The desk-specific skill instructions (from the individual desk skills)
 - **The desk SUMMARY file first** (`{desk}_summary_c{XX}.json`) — agents should read this before the full packet
@@ -275,6 +279,14 @@ node scripts/processIntake.js [cycle]
 | Business | Jordan Velez | 1-2 | business_summary_c{XX}.json | business_c{XX}.json |
 | Chicago | Selena Grant / Talia Finch | 2-3 | chicago_summary_c{XX}.json | chicago_c{XX}.json |
 | Letters | (citizen voices) | 2-4 | letters_summary_c{XX}.json | letters_c{XX}.json |
+
+## Model & Performance Notes
+
+**`opusplan` mode:** For edition production sessions, consider running Mags on `opusplan` (`/model opusplan`). This uses Opus for planning and briefing (Steps 1-1.5) and automatically switches to Sonnet for agent execution (Steps 2+). Saves cost without sacrificing editorial planning quality.
+
+**Effort levels:** Opus 4.6 supports `low`, `medium`, `high` (default) effort. High effort is correct for edition production. For routine file checks or status lookups between editions, `medium` or `low` saves tokens and time. Set with `/model` slider or `CLAUDE_CODE_EFFORT_LEVEL` env var.
+
+**Mara as teammate:** Mara Vance on claude.ai is architecturally equivalent to an agent team teammate — own context window, shared memory (Supermemory), asynchronous communication. When Claude Code formally supports agent teams for production use, the Mara workflow is the natural first candidate for migration. Until then, she operates as a manual teammate through browser or Supermemory.
 
 ## Edition Template Reference
 See `editions/CYCLE_PULSE_TEMPLATE.md` for exact section format, canon rules, and return formats.

@@ -2,7 +2,7 @@
 
 **If the machine dies, this is how you rebuild.**
 
-Last Updated: 2026-02-17 | Session: 34
+Last Updated: 2026-02-17 | Session: 39
 
 ---
 
@@ -12,7 +12,7 @@ These are already in the cloud. You lose nothing:
 
 | Data | Location | How to Recover |
 |------|----------|---------------|
-| All code, docs, hooks, skills | GitHub (`pnils08/GodWorld`) | `git clone` |
+| All code, docs, hooks, skills, agent memory | GitHub (`pnils08/GodWorld`) | `git clone` |
 | Simulation data (20+ ledgers) | Google Sheets | Already there — just reconnect |
 | Curated knowledge | Supermemory (`sm_project_godworld`) | Search from any Claude instance |
 | Published editions | Google Drive (Publications Archive) | Already there |
@@ -110,6 +110,17 @@ cp -r /tmp/root/GodWorld/logs/discord-conversations/ /root/GodWorld/logs/discord
 
 If no backup: logs are nice-to-have. The nightly reflection already journals the highlights.
 
+### Step 6.5: Restore Agent Memory (if needed)
+
+Agent memory (`.claude/agent-memory/`) is version-controlled in git, so it survives a `git clone`. But if the latest updates weren't committed, restore from backup:
+
+```bash
+tar -xzf backups/godworld_backup_YYYY-MM-DD_HHMM.tar.gz -C /tmp root/GodWorld/.claude/agent-memory/
+cp -r /tmp/root/GodWorld/.claude/agent-memory/ /root/GodWorld/.claude/agent-memory/
+```
+
+5 agents have memory: civic-desk, sports-desk, culture-desk, chicago-desk, rhea-morgan. If no backup and git is current, the agents still have their last committed memories. If both are lost, re-seed from `NEWSROOM_MEMORY.md` lessons — the agents will rebuild over editions.
+
 ### Step 7: Restart Services
 
 ```bash
@@ -178,6 +189,7 @@ If both the machine AND all backups are lost:
 
 - **Claude-Mem observations** — Gone. Rebuilds over time.
 - **Discord conversation logs** — Gone. Nightly reflections captured highlights in JOURNAL.md.
+- **Uncommitted agent memory updates** — Gone. Agents rebuild over editions. Commit memory regularly.
 - **API keys** — Must be regenerated from respective consoles (Anthropic, Google Cloud, Discord).
 - **OAuth refresh token** — Must re-run `node scripts/authorizeDriveWrite.js`.
 
@@ -197,4 +209,5 @@ Everything else survives in GitHub, Google Sheets, Google Drive, or Supermemory.
 - [ ] Set up cron jobs (heartbeat, reflection, backup)
 - [ ] `node scripts/crawlDrive.js` (re-crawl Drive)
 - [ ] `node scripts/saveToDrive.js --test` (verify Drive writes)
+- [ ] Verify agent memory exists (`.claude/agent-memory/` — 5 directories)
 - [ ] Start Claude Code session, run `/session-startup`

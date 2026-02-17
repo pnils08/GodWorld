@@ -14,6 +14,7 @@
 #   - credentials/ (service account)
 #   - ~/.clasprc.json (clasp auth tokens)
 #   - settings.local.json (permission overrides)
+#   - .claude/agent-memory/ (persistent desk agent memory — civic, sports, culture, chicago, rhea)
 #
 # What's NOT backed up (already durable):
 #   - Code/docs → GitHub
@@ -100,6 +101,13 @@ fi
 if [ -f "$GODWORLD/.claude/settings.local.json" ]; then
   BACKUP_FILES+=("$GODWORLD/.claude/settings.local.json")
   echo "  + settings.local.json"
+fi
+
+# Agent memory directories (persistent desk agent memory)
+if [ -d "$GODWORLD/.claude/agent-memory" ]; then
+  BACKUP_FILES+=("$GODWORLD/.claude/agent-memory")
+  AGENT_COUNT=$(ls -d "$GODWORLD/.claude/agent-memory"/*/ 2>/dev/null | wc -l)
+  echo "  + agent-memory/ ($AGENT_COUNT agents)"
 fi
 
 if [ ${#BACKUP_FILES[@]} -eq 0 ]; then

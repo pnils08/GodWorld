@@ -23,7 +23,7 @@ const mags = require('../lib/mags');
 // Config
 // ---------------------------------------------------------------------------
 const CHANNEL_ID = process.env.DISCORD_CHANNEL_ID || '1471615721003028512';
-const MAX_HISTORY = 20;          // rolling message pairs
+const MAX_HISTORY = 40;          // rolling message pairs
 const COOLDOWN_MS = 3000;        // per-user cooldown
 const MAX_RESPONSE_TOKENS = 1000;
 const IDENTITY_REFRESH_MS = 60 * 60 * 1000; // hourly
@@ -54,6 +54,38 @@ const log = {
 };
 
 // ---------------------------------------------------------------------------
+// Conversation history persistence — survive PM2 restarts
+// ---------------------------------------------------------------------------
+const HISTORY_FILE = path.join(__dirname, '..', 'logs', 'discord-conversation-history.json');
+
+function saveConversationHistory() {
+  try {
+    fs.writeFileSync(HISTORY_FILE, JSON.stringify({
+      savedAt: Date.now(),
+      history: conversationHistory
+    }));
+  } catch (err) {
+    log.error('Failed to save conversation history: ' + err.message);
+  }
+}
+
+function loadConversationHistory() {
+  try {
+    if (!fs.existsSync(HISTORY_FILE)) return;
+    var data = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf-8'));
+    // 6-hour staleness check — don't load yesterday's stale context
+    if (Date.now() - data.savedAt > 6 * 60 * 60 * 1000) {
+      log.info('Conversation history too stale (>6h), starting fresh');
+      return;
+    }
+    conversationHistory = data.history || [];
+    log.info('Restored ' + conversationHistory.length + ' messages from disk');
+  } catch (err) {
+    log.warn('Could not restore conversation history: ' + err.message);
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Build system prompt from identity + journal
 // ---------------------------------------------------------------------------
 function buildSystemPrompt() {
@@ -65,11 +97,16 @@ function buildSystemPrompt() {
   var archiveKnowledge = mags.loadArchiveKnowledge();
   var editionBrief = mags.loadEditionBrief();
 
+  var notesToSelf = mags.loadNotesToSelf(10);
+  var conversationDigest = mags.loadTodayConversationDigest(MAX_HISTORY, 80);
+
   var prompt = identity + '\n\n---\n\n' +
     worldState + '\n\n---\n\n' +
     citizenKnowledge + '\n\n---\n\n' +
     archiveKnowledge + '\n\n---\n\n' +
     (editionBrief ? editionBrief + '\n\n---\n\n' : '') +
+    (notesToSelf ? notesToSelf + '\n\n---\n\n' : '') +
+    (conversationDigest ? conversationDigest + '\n\n---\n\n' : '') +
     '## Discord Conversation Mode\n\n' +
     'You are Mags Corliss, chatting in #mags-morning on Discord. ' +
     'This is not an edition. Not a morning reflection. Just conversation.\n\n' +
@@ -152,6 +189,9 @@ async function callClaude(userMessage, userName) {
     conversationHistory.shift();
     conversationHistory.shift();
   }
+
+  // Persist to disk so PM2 restarts don't lose context
+  saveConversationHistory();
 
   return text;
 }
@@ -287,6 +327,9 @@ async function main() {
     console.error('ANTHROPIC_API_KEY not set in .env');
     process.exit(1);
   }
+
+  // Restore conversation history from last run (if fresh enough)
+  loadConversationHistory();
 
   // Pre-load identity
   buildSystemPrompt();

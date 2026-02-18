@@ -46,7 +46,7 @@ First edition where all 6 desk agents delivered copy. First edition with desk br
 - Chicago bureau contained two strong threads (Giddey 48-point game, Paulson/Warriors).
 
 **Root Cause Analysis:**
-The data layer between the engine and agents is the systemic problem. base_context.json has wrong positions (Aitken 3B should be 1B). The engine only records swing votes, leaving 7 of 9 council votes to agent inference. Rhea's verification checks names and math but doesn't cross-reference TrueSource for positions or validate vote assignments against faction rules. The user's Mara on claude.ai was the only layer that caught real errors — meaning the pipeline's own QA is insufficient.
+The data layer between the engine and agents was the systemic problem. **FIXED in Session 41:** (1) base_context.json positions corrected (Aitken 1B, Dillon P, Horn CF, Davis DH — 3 players promoted from Tier 3 to Tier 1), (2) civicInitiativeEngine v1.8 now writes ALL 9 council votes to Notes (faction members tracked individually). **Still open:** Rhea's verification checks names and math but doesn't cross-reference TrueSource for positions or validate vote assignments against faction rules. The user's Mara on claude.ai was the only layer that caught real errors — meaning the pipeline's own QA still needs strengthening.
 
 ### Edition 81 (Grade: A-)
 
@@ -188,7 +188,7 @@ These were invented in Editions 80-81. Do not use them:
 - Darrin Davis: Age 33 at time of ACL injury (August 5, 2040). Paulson ruling. TrueSource DataPage says 31 — needs updating. Published articles (P Slayer) saying 33 are correct.
 - Danny Horn stats: .322/43HR = 2039 full season. .288/23HR = 2040 mid-season at time of Davis injury. Both correct. Always label which season.
 - Benji Dillon: Exactly 5 Cy Young Awards (2028, 2032, 2033, 2034, 2037). No ambiguity.
-- Mark Aitken: **1B** (first base). TrueSource confirmed. base_context.json incorrectly lists "3B" — DO NOT trust base_context for Aitken's position until fixed at engine level.
+- Mark Aitken: **1B** (first base). TrueSource confirmed. FIXED in Session 41 — base_context.json now correct (was "3B").
 - Darrin Davis: **DH** (designated hitter). TrueSource confirmed. Was listed as 2B in Edition 82 citizen usage. DHs do NOT win Gold Gloves (defensive award). Do not write "Gold Glove defense" for a DH.
 - Mark Aitken: son of a former Oakland mayor. Engine-generated backstory (sports_summary_c82, story angle). Canon.
 - Josh Smith: REAL NBA player (2004-2019). Cannot be used. Bulls forward is **Jalen Smith** (canonical name).

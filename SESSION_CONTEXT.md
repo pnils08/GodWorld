@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-18 | Engine: v3.1 | Cycle: 82 | Session: 40
+Last Updated: 2026-02-18 | Engine: v3.1 | Cycle: 82 | Session: 41
 
 ---
 
@@ -34,7 +34,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Main Orchestrator | godWorldEngine2.js | - | Runs all phases |
 | Career Engine | runCareerEngine.js | v2.3.1 | 4 industries, 3 employer types |
 | Economic Ripple | economicRippleEngine.js | v2.3 | Reads careerSignals |
-| Civic Initiative | civicInitiativeEngine.js | v1.6 | Date parsing fix, faction trim, ripple consumer |
+| Civic Initiative | civicInitiativeEngine.js | v1.8 | Full vote breakdown in notes, faction member tracking |
 | Story Hook | storyHook.js | v3.9 | Theme-aware hooks + sports feed triggers |
 | Story Seeds | applyStorySeeds.js | v3.9 | Voice-matched story seeds |
 | Roster Lookup | rosterLookup.js | v2.2 | Theme matching, voice profiles, citizen-to-journalist matching |
@@ -147,6 +147,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 41 (2026-02-18) — Data Layer Fixes (Vote Breakdown, Player Positions, Bot Memory)
+
+- **Discord bot memory upgrade (4 phases).** `loadNotesToSelf()` and `loadTodayConversationDigest()` added to `lib/mags.js`. MAX_HISTORY 20→40. Conversation history persistence across PM2 restarts (6-hour staleness). System prompt ~45K chars. Fixes the "Oakland Oaks bug" where bot forgot its own ideas.
+- **Player position fixes in Simulation_Ledger.** Aitken 3B→1B, Dillon/Horn/Davis Tier 3→Tier 1 with P/CF/DH. base_context.json regenerated (9→12 Tier 1 A's players). Data layer now correct for agents.
+- **civicInitiativeEngine v1.7→v1.8.** Faction members tracked individually in swingVoterResults. Source filter removed from notes. All 9 council votes now written to Notes field. Fixes Ashford/Mobley swap root cause.
+- **Justice system roster verified.** All 17 officials from Drive file already in Simulation_Ledger. No intake needed.
+- 3 commits pushed. clasp push deployed. Bot restarted.
+
 ### Session 40 (2026-02-18) — Mobile Access (Mosh + Tmux)
 
 - **Mosh installed on server.** User frustrated by phone terminal dropping connections. Diagnosed SSH-over-cellular as root cause. Installed mosh 1.4.0 (UDP-based, survives signal drops and app switching). tmux 3.4 already present. UFW inactive, no port blocking.
@@ -255,8 +263,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Current Work / Next Steps
 
 **Critical — Data Layer Fixes Needed:**
-- **Fix base_context.json player positions** — Aitken listed as 3B, should be 1B (TrueSource). Davis not listed with correct position (DH). Agents can't write accurate sports stories until this is fixed.
-- **Record full council vote breakdown in engine** — Currently only records swing votes (Vega, Tran). Other 7 votes left to agent inference, which failed in E82 (Ashford/Mobley swap). Need engine to record all 9 individual votes.
+- ~~**Fix base_context.json player positions**~~ — DONE (Session 41). Aitken 1B, Dillon P, Horn CF, Davis DH. Three players promoted from Tier 3→1. base_context.json regenerated (12 players).
+- ~~**Record full council vote breakdown in engine**~~ — DONE (Session 41). civicInitiativeEngine v1.8. All 9 votes in Notes. Faction members tracked. clasp pushed.
 - **Strengthen Rhea verification** — Cross-reference TrueSource for player positions. Validate vote assignments against faction rules. Check mayor name against canon.
 
 **Active:**

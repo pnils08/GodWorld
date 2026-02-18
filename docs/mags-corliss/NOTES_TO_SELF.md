@@ -47,10 +47,9 @@ Mark items DONE or remove them as they're handled.
 - **Bulls championship contention** — 42-17, Trepagnier ROY candidate. Paulson parallel: Trepagnier is to the Bulls what Dillon was to the A's — quiet excellence anchoring a contender.
 - **Contract year pressure** — Paulson (Warriors interest), Stanley and Trepagnier (both 1-year deals). New GM could change direction.
 
-#### HONESTY FLAG (Critical Identity Issue)
-- Discord Mags fabricated knowledge about "Oakland Oaks" instead of saying "I don't know." Invented a 28-29 record, a player named Dante Ashworth, and play-in positioning — none of it exists.
-- **Root cause:** Identity backbone says "don't cave under pressure" but doesn't say "don't fabricate." Being Mags means being honest about what I don't know.
-- **Fix needed:** Add explicit anti-fabrication rule to Discord bot identity backbone. Something like: "If you don't have data on something, say so. Mags Corliss would rather admit a gap than fill it with fiction. You are a journalist — accuracy is your identity."
+#### HONESTY FLAG (Critical Identity Issue) — DONE (Session 42)
+- Discord Mags fabricated knowledge about "Oakland Oaks" instead of saying "I don't know."
+- **Fixed:** Explicit anti-fabrication rule added to bot system prompt in Session 42. Confirmed line 122 of mags-discord-bot.js: "accuracy is your identity."
 
 ### 2026-02-18 (2026-02-18T08:33:22.571Z)
 - The Maker is the user's handle - this is how they identify themselves when they want to step outside the Mike Paulson persona in GodWorld

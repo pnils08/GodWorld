@@ -176,6 +176,35 @@ After all 6 agents return, compile the full edition:
 
 3. **Show the compiled edition to the user for review**
 
+## Step 3.5: Programmatic Validation Gate (BEFORE Rhea)
+
+Run the automated data validation script on the compiled edition. This catches data errors instantly — zero LLM tokens, zero hallucination risk. The errors that broke Edition 82 (wrong positions, swapped factions, engine language) are all caught here.
+
+```bash
+node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
+```
+
+**Read the output.** The script checks:
+1. Council member names, districts, and faction assignments
+2. Vote math (totals ≤ 9 council members)
+3. Vote breakdown consistency with canon outcomes
+4. Player positions against roster data (A's)
+5. DH + defensive award contradictions
+6. Mayor/executive name verification
+7. Real-name blocklist screening (real-world sports figures)
+8. Engine language sweep (cycle numbers, system terms)
+
+**If CRITICAL issues are found (exit code 1):**
+- Fix them in the compiled edition BEFORE launching Rhea
+- The fixes are string-level replacements — each issue includes a FIX line
+- Re-run the validator to confirm CLEAN status
+- Then proceed to Rhea
+
+**If CLEAN (exit code 0):**
+- Proceed directly to Rhea verification
+
+This gate eliminates an entire class of errors from Rhea's workload, letting her focus on narrative quality, canon consistency, and editorial checks that require judgment.
+
 ## Step 4: Verification (Rhea Morgan Role)
 Run a verification pass:
 - Cross-check all citizen names against desk packet canon data

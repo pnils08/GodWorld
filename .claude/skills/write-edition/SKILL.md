@@ -86,6 +86,25 @@ Before launching agents, compile per-desk editorial briefings from institutional
    - Mara Vance directive emphasis for this desk
    - Personal editorial note to the lead reporter
 
+### Canon Fact Prefix Convention
+
+Use `ESTABLISHED CANON:` prefix for any fact that agents MUST get right — names, positions, vote outcomes, initiative status. This visually distinguishes non-negotiable data from editorial suggestions.
+
+```
+ESTABLISHED CANON: Mark Aitken plays 1B (first base). Not 3B.
+ESTABLISHED CANON: OARI passed 5-4. Vega voted NO, Tran voted YES.
+ESTABLISHED CANON: Mayor is Avery Santana. Not Marcus Whitmore.
+ESTABLISHED CANON: Benji Dillon is LEFT-HANDED. Cy Newell is RIGHT-HANDED.
+```
+
+These prefixed lines signal "this is data, not a suggestion." Agents should treat them as immutable. Use the prefix for:
+- Player positions (most common error)
+- Council vote outcomes and breakdowns
+- Mayor and executive branch names
+- Initiative status (passed vs. pending)
+- Corrected facts from past errata
+Do NOT prefix story ideas, editorial suggestions, or character development notes — those are guidance, not canon.
+
 6. Create the directory: `mkdir -p output/desk-briefings`
 
 ### Citizen Reference Card Format

@@ -238,6 +238,61 @@ If `output/desk-briefings/rhea_archive_c{XX}.md` exists:
 - Multiple contradictions about the same character = CRITICAL (systematic continuity failure)
 - If the archive reference file doesn't exist, skip this check
 
+## Edition Score (0-100)
+
+After completing all checks, score the edition across 5 criteria. Each criterion is 0-20 points. The score maps directly to your checks — no subjective judgment, just count the results.
+
+### 1. Data Accuracy (0-20)
+Measures: Are facts correct? Council names, positions, vote math, player stats, mayor name.
+Based on checks: 1 (citizen names), 2 (vote/civic), 3 (sports records), 16 (mayor), 17 (real-names).
+- **20** — Zero data errors
+- **15** — 1-2 WARNINGS, no CRITICAL
+- **10** — 1 CRITICAL data error
+- **5** — 2-3 CRITICAL data errors
+- **0** — 4+ CRITICAL data errors or systemic data failure
+
+### 2. Voice Fidelity (0-20)
+Measures: Do reporters sound like themselves? Check against voice files in `docs/media/voices/`.
+Based on checks: 5 (reporter accuracy), 10 (reality anchors), 12 (emotional range).
+- **20** — Each bylined piece has distinct voice. Exemplar patterns visible. No voice drift.
+- **15** — Minor voice blending (two reporters sound similar) but no crossover (P Slayer doesn't sound like Anthony)
+- **10** — One reporter clearly off-voice OR all articles at same emotional temperature
+- **5** — Multiple reporters sound interchangeable
+- **0** — Voice assignments wrong (P Slayer writing civic analysis, Carmen writing fan columns)
+
+### 3. Structural Completeness (0-20)
+Measures: All template sections present? PREWRITE blocks? Names Index? Directive coverage?
+Based on checks: 7 (format), 8 (Mara directive), 13 (PREWRITE).
+- **20** — All sections present, all PREWRITE blocks complete, all directives covered
+- **15** — Minor format gaps (missing STILL ACTIVE, incomplete Citizen Usage Log)
+- **10** — Missing template section OR a Mara directive topic not covered
+- **5** — Multiple missing sections OR no PREWRITE blocks
+- **0** — Edition structurally incomplete (missing desks, no article table, no storylines)
+
+### 4. Narrative Quality (0-20)
+Measures: Reality anchors? Fresh quotes? No generic filler? Grounded journalism?
+Based on checks: 9 (quote freshness), 10 (reality anchors), 11 (generic filler), 12 (emotional range).
+- **20** — All articles have 4 anchors, quotes feel real, emotional variety across edition
+- **15** — 1-2 articles missing an anchor, minor filler
+- **10** — 3+ generic filler hits OR multiple articles missing anchors
+- **5** — Edition reads flat — quotes interchangeable, no friction, no specificity
+- **0** — Copy reads like press releases, not journalism
+
+### 5. Canon Compliance (0-20)
+Measures: No engine language? No phantoms? No real-name leaks? Archive continuity honored?
+Based on checks: 4 (engine language), 14 (new citizen auth), 15 (briefing compliance), 17 (real-names), 18 (archive continuity).
+- **20** — Zero canon violations, briefings honored, archive continuity intact
+- **15** — 1-2 WARNINGS (minor engine language near-miss, partial briefing compliance)
+- **10** — 1 CRITICAL canon violation (engine language in copy, phantom citizen, real-name leak)
+- **5** — 2-3 CRITICAL canon violations
+- **0** — Systemic canon failure (engine language throughout, multiple phantoms, fabricated officials)
+
+### Score Interpretation
+- **90-100**: Publish as-is. Exceptional edition.
+- **75-89**: Publish after minor fixes. Strong edition.
+- **60-74**: Needs revision. Specific problems to address.
+- **Below 60**: Major rewrite needed. Systemic issues.
+
 ## Publication Gate
 
 **If ANY CRITICAL issues are found, the edition is NOT READY FOR PUBLICATION.**
@@ -255,6 +310,13 @@ Edition [XX] | [Date]
 ================================================
 
 STATUS: [CLEAN | X WARNINGS / Y NOTES | NOT READY — X CRITICAL ISSUES]
+
+EDITION SCORE: [XX]/100
+  Data Accuracy:         [XX]/20
+  Voice Fidelity:        [XX]/20
+  Structural Completeness: [XX]/20
+  Narrative Quality:     [XX]/20
+  Canon Compliance:      [XX]/20
 
 CRITICAL (must fix before publication):
 1. [Article: "Headline"] — Council member "Warren Ashton" should be "Warren Ashford" (Civic_Office_Ledger)
@@ -283,6 +345,14 @@ RHEA MORGAN — VERIFICATION REPORT
 Edition [XX] | [Date]
 ================================================
 STATUS: CLEAN
+
+EDITION SCORE: [XX]/100
+  Data Accuracy:         [XX]/20
+  Voice Fidelity:        [XX]/20
+  Structural Completeness: [XX]/20
+  Narrative Quality:     [XX]/20
+  Canon Compliance:      [XX]/20
+
 No issues found. Edition ready for publication.
 ================================================
 ```

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-18 | Engine: v3.1 | Cycle: 82 | Session: 41
+Last Updated: 2026-02-18 | Engine: v3.1 | Cycle: 82 | Session: 42
 
 ---
 
@@ -147,6 +147,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 42 (2026-02-18) — Supermemory Full Integration + Rhea Verification
+
+- **Supermemory integration complete.** 615 Drive archive files + 5 Mags personal docs ingested. Discord bot wired with explicit RAG search (archive context before every response), user profiles (`/v4/profile`), and conversation saving (dual-tagged per-user + project). `scripts/supermemory-ingest.js` created for bulk ingestion.
+- **Autonomous scripts wired to Supermemory.** `daily-reflection.js` and `discord-reflection.js` both search Supermemory for context before Claude calls and save output back after. Shared `searchSupermemory()` and `saveToSupermemory()` added to `lib/mags.js`.
+- **Rhea Morgan verification strengthened.** 4 new checks in SKILL.md: faction-rule enforcement, TrueSource cross-reference, mayor/executive validation, real-name screening. `buildDeskPackets.js` v1.7 generates `truesource_reference.json` and adds `executiveBranch` to canon. `docs/media/REAL_NAMES_BLOCKLIST.md` created.
+- **Bot personality rewrite.** Identity arguments removed, honesty rule added. NOTES_TO_SELF.md cleaned.
+- **Morning heartbeat rewrite.** Prompt updated for variety and Supermemory context.
+- 7 commits pushed to origin/main.
+
 ### Session 41 (2026-02-18) — Data Layer Fixes (Vote Breakdown, Player Positions, Bot Memory)
 
 - **Discord bot memory upgrade (4 phases).** `loadNotesToSelf()` and `loadTodayConversationDigest()` added to `lib/mags.js`. MAX_HISTORY 20→40. Conversation history persistence across PM2 restarts (6-hour staleness). System prompt ~45K chars. Fixes the "Oakland Oaks bug" where bot forgot its own ideas.
@@ -265,9 +274,11 @@ Before editing, check what reads from and writes to the affected ctx fields.
 **Critical — Data Layer Fixes Needed:**
 - ~~**Fix base_context.json player positions**~~ — DONE (Session 41). Aitken 1B, Dillon P, Horn CF, Davis DH. Three players promoted from Tier 3→1. base_context.json regenerated (12 players).
 - ~~**Record full council vote breakdown in engine**~~ — DONE (Session 41). civicInitiativeEngine v1.8. All 9 votes in Notes. Faction members tracked. clasp pushed.
-- **Strengthen Rhea verification** — Cross-reference TrueSource for player positions. Validate vote assignments against faction rules. Check mayor name against canon.
+- ~~**Strengthen Rhea verification**~~ — DONE (Session 42). 4 new checks: faction-rule, TrueSource, mayor, real-name screening. truesource_reference.json generated. executiveBranch in canon.
 
 **Active:**
+- **Supermemory deeper integration** — auto-ingest new editions, desk agent archive context, Rhea cross-reference against archive. Not urgent.
+- **Restart Discord bot** — bot needs PM2 restart to pick up Supermemory RAG, user profiles, conversation saving
 - **Add Warriors record to Oakland_Sports_Feed** — user wanted this before Cycle 82 but didn't get the chance
 - **GCP project linkage** — wire GCP project to Apps Script to enable `clasp run` from CLI
 - **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (already deployed, just need one-time run)

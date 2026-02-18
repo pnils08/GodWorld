@@ -221,13 +221,119 @@ function searchSupermemory(query) {
 }
 
 // ---------------------------------------------------------------------------
+// Fetch user profile from Supermemory (auto-built from conversations)
+// ---------------------------------------------------------------------------
+function fetchUserProfile(discordUserId) {
+  if (!USE_SUPERMEMORY) return Promise.resolve('');
+
+  return new Promise(function(resolve) {
+    var payload = JSON.stringify({
+      containerTag: 'discord_user_' + discordUserId
+    });
+
+    var options = {
+      hostname: 'api.supermemory.ai',
+      path: '/v4/profile',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    };
+
+    var req = require('https').request(options, function(res) {
+      var data = '';
+      res.on('data', function(chunk) { data += chunk; });
+      res.on('end', function() {
+        try {
+          if (res.statusCode !== 200) { resolve(''); return; }
+          var parsed = JSON.parse(data);
+          var profile = parsed.profile;
+          if (!profile) { resolve(''); return; }
+
+          var lines = [];
+          if (profile.static && profile.static.length) {
+            lines.push('Known: ' + profile.static.join('. '));
+          }
+          if (profile.dynamic && profile.dynamic.length) {
+            lines.push('Recent: ' + profile.dynamic.join('. '));
+          }
+
+          var result = lines.join('\n');
+          if (result) {
+            log.info('User profile loaded (' + result.length + ' chars)');
+          }
+          resolve(result);
+        } catch (err) {
+          resolve('');
+        }
+      });
+    });
+
+    req.on('error', function() { resolve(''); });
+    req.setTimeout(2000, function() { req.destroy(); resolve(''); });
+    req.write(payload);
+    req.end();
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Save conversation to Supermemory for user profile building
+// ---------------------------------------------------------------------------
+function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
+  if (!USE_SUPERMEMORY) return;
+
+  var content = userName + ': ' + userMessage + '\nMags: ' + magsResponse;
+  var payload = JSON.stringify({
+    content: content,
+    containerTags: ['discord_user_' + discordUserId, 'sm_project_godworld']
+  });
+
+  var options = {
+    hostname: 'api.supermemory.ai',
+    path: '/v3/documents',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
+      'Content-Length': Buffer.byteLength(payload)
+    }
+  };
+
+  var req = require('https').request(options, function(res) {
+    var data = '';
+    res.on('data', function(c) { data += c; });
+    res.on('end', function() {
+      if (res.statusCode >= 200 && res.statusCode < 300) {
+        log.info('Conversation saved to Supermemory for profile building');
+      }
+    });
+  });
+  req.on('error', function() {}); // fire and forget
+  req.write(payload);
+  req.end();
+}
+
+// ---------------------------------------------------------------------------
 // Call Claude API
 // ---------------------------------------------------------------------------
 async function callClaude(userMessage, userName, userId) {
   var systemPrompt = getSystemPrompt();
 
-  // Search Supermemory for relevant archive context
-  var archiveContext = await searchSupermemory(userMessage);
+  // Fetch user profile + search archive in parallel
+  var results = await Promise.all([
+    searchSupermemory(userMessage),
+    fetchUserProfile(userId)
+  ]);
+  var archiveContext = results[0];
+  var userProfile = results[1];
+
+  if (userProfile) {
+    systemPrompt += '\n\n---\n\n## About This Person\n\n' +
+      'You remember this about who you\'re talking to:\n' + userProfile;
+  }
+
   if (archiveContext) {
     systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
       'The following was found in your archives. Use it naturally — don\'t quote it ' +
@@ -477,6 +583,9 @@ async function main() {
 
       // Log the exchange to daily file (log clean version)
       logConversation(userName, userMessage, cleanResponse);
+
+      // Save to Supermemory for user profile building (fire and forget)
+      saveToSupermemory(userName, userMessage, cleanResponse, message.author.id);
     } catch (err) {
       log.error('Error handling message: ' + err.message);
 

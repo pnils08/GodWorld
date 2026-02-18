@@ -227,14 +227,14 @@ function generateStorylineBriefingSection_(ss, cycle) {
   
   var headers = data[0];
   var cols = {
-    storylineId: headers.indexOf('StorylineId'),
-    type: headers.indexOf('Type'),
-    description: headers.indexOf('Description'),
-    neighborhood: headers.indexOf('Neighborhood'),
-    linkedArc: headers.indexOf('LinkedArc'),
-    status: headers.indexOf('Status'),
-    lastMentioned: headers.indexOf('LastMentionedCycle'),
-    priority: headers.indexOf('Priority')
+    storylineId: findColByArray_(headers, ['StorylineId', 'StorylineType']),
+    type: findColByArray_(headers, ['StorylineType', 'Type']),
+    description: findColByArray_(headers, ['Description']),
+    neighborhood: findColByArray_(headers, ['Neighborhood']),
+    linkedArc: findColByArray_(headers, ['LinkedArc']),
+    status: findColByArray_(headers, ['Status']),
+    lastMentioned: findColByArray_(headers, ['LastMentionedCycle', 'CycleAdded']),
+    priority: findColByArray_(headers, ['Priority'])
   };
   
   var lines = [];

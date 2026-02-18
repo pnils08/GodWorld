@@ -407,9 +407,9 @@ function getLifeHistory_(ss, name, id, cache) {
     var headers = data[0];
     
     var idCol = headers.indexOf('POPID');
-    var cycleCol = headers.indexOf('EngineCycle');
-    var eventTypeCol = headers.indexOf('EventType');
-    var descCol = headers.indexOf('Description');
+    var cycleCol = headers.indexOf('Cycle') >= 0 ? headers.indexOf('Cycle') : headers.indexOf('EngineCycle');
+    var eventTypeCol = headers.indexOf('EventTag') >= 0 ? headers.indexOf('EventTag') : headers.indexOf('EventType');
+    var descCol = headers.indexOf('EventText') >= 0 ? headers.indexOf('EventText') : headers.indexOf('Description');
     var sourceCol = headers.indexOf('Source');
     var timestampCol = headers.indexOf('Timestamp');
     

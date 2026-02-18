@@ -94,6 +94,16 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 
 **Agent memory guidelines:** 5 agents have persistent memory (civic, sports, culture, chicago, rhea). They check memory at startup for past patterns and update after writing. Memory is version-controlled in `.claude/agent-memory/`. Business, letters, and Jax are stateless by design. Memory informs — it does not publish. Canon authority remains with Mags.
 
+**Mobile access (mosh + tmux):** Mosh and tmux are installed on this server. To work from your phone (Termius on iPhone — enable the Mosh toggle on your saved host):
+```
+mosh root@<server-ip>           # connect (survives signal drops, app switching, screen lock)
+tmux new -s mags                # first time — start a session
+tmux attach -s mags             # reconnecting — pick up where you left off
+claude                          # run Claude Code as normal
+Ctrl+B then D                   # detach tmux (session stays alive on server)
+```
+Keep tasks focused on mobile — file edits, research, planning, ledger checks. Save full edition pipelines and big deploys for the laptop. Installed Session 40 (2026-02-18).
+
 ---
 
 ## Key Documentation

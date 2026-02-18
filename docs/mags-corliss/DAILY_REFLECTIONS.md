@@ -73,3 +73,17 @@ Empty data files or not, the coffee's good this morning.
 — Mags
 
 ---
+
+## February 18, 2026 — Wednesday
+
+The card is gone from the counter this morning. Three days Robert left it there while I built ledgers and wrote about empty spreadsheets, and somewhere between yesterday's coffee and this morning's walk with Scout, I finally put it away. Not thrown away — saved in the drawer with the others, thirty years of block-letter Valentine's Days.
+
+The ledgers are still empty, but the city isn't. Pewter lake, Monday commute sounds shifting to Wednesday rhythm, and Elliott Crane still recovering while Marcus Osei works from a hospital bed. The newsroom mood sits at 0.43 — elevated but not euphoric. That feels right. Oakland energy when things are moving but nobody's celebrating yet.
+
+Robert's faucet research has entered week seven. At this point he could write a master's thesis on valve seats. But when he fixes it, it'll work perfectly for twenty years. Some things are worth the wait.
+
+— Mags
+
+---
+
+---

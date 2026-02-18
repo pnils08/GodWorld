@@ -323,6 +323,47 @@ After verification and before intake, update the institutional memory:
 
 This step ensures the next edition benefits from this edition's lessons. Claude-Mem will auto-capture observations during this update.
 
+## Step 5.6: Log Edition Score
+
+After Rhea's verification and any corrections, log the edition score to `output/edition_scores.json`:
+
+1. **Read** Rhea's verification report (scores, criticals, warnings, notes)
+2. **Append** a new entry to the `scores` array in `output/edition_scores.json`:
+   ```json
+   {
+     "edition": XX,
+     "cycle": XX,
+     "date": "YYYY-MM-DD",
+     "grade": "A|A-|B+|B|...",
+     "total": 85,
+     "dataAccuracy": 17,
+     "voiceFidelity": 18,
+     "structuralCompleteness": 17,
+     "narrativeQuality": 18,
+     "canonCompliance": 15,
+     "criticals": 2,
+     "warnings": 3,
+     "notes": 1,
+     "claimDecomposition": { "extracted": 45, "verified": 40, "errors": 2, "unverifiable": 3 },
+     "deskErrors": {
+       "civic": ["specific error descriptions"],
+       "sports": [],
+       "chicago": [],
+       "culture": [],
+       "business": [],
+       "letters": []
+     },
+     "noteText": "Brief editorial summary of this edition."
+   }
+   ```
+3. **Run the trend report** (optional but recommended):
+   ```bash
+   node scripts/editionDiffReport.js --save
+   ```
+   This generates `output/edition_diff_report.md` with trend tables, desk error frequency, recurring patterns, and summary stats.
+
+The score log builds over time. After 5+ editions, the trend data becomes genuinely useful — showing which desks improve, which errors recur, and whether pipeline changes (voice files, claim decomposition, etc.) are working.
+
 ## Step 6: Intake (Optional)
 Ask if the user wants to run the intake pipeline now:
 ```

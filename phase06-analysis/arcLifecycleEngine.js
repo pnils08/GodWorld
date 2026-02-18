@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * ARC LIFECYCLE ENGINE v1.0 (Week 2: Arc Automation)
+ * ARC LIFECYCLE ENGINE v1.1 (Week 2: Arc Automation)
  * ============================================================================
  *
  * Automates arc phase progression and resolution tracking.
@@ -23,8 +23,14 @@
  *
  * INTEGRATION:
  * - Called from Phase 06 (analysis) in godWorldEngine2.js
- * - Updates Arc_Ledger and Event_Arc_Ledger
+ * - Updates Event_Arc_Ledger (sole source — Arc_Ledger is legacy/dead)
  * - Generates story hooks for phase transitions
+ *
+ * v1.1 Changes:
+ * - Removed Arc_Ledger dependency (dead sheet, had ArcID/ArcId case mismatch)
+ * - All reads/writes use Event_Arc_Ledger only
+ * - Requires lifecycle columns: AutoAdvance, PhaseStartCycle, PhaseDuration,
+ *   NextPhaseTransition, TensionDecay (run addArcLifecycleColumns.js to add)
  *
  * ============================================================================
  */
@@ -78,7 +84,7 @@ function advanceArcLifecycles_(ctx) {
   var S = ctx.summary;
   var cycle = S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
 
-  Logger.log('advanceArcLifecycles_ v1.0: Processing arcs for cycle ' + cycle);
+  Logger.log('advanceArcLifecycles_ v1.1: Processing arcs for cycle ' + cycle);
 
   var results = {
     processed: 0,
@@ -96,15 +102,14 @@ function advanceArcLifecycles_(ctx) {
       return results;
     }
 
-    // Load Arc_Ledger and Event_Arc_Ledger for updates
+    // Load Event_Arc_Ledger (sole source for arc lifecycle tracking)
     var ss = ctx.ss;
     if (!ss) {
       Logger.log('advanceArcLifecycles_: No spreadsheet in context');
       return results;
     }
 
-    var arcLedger = loadArcLedger_(ss);
-    var eventArcLedger = loadEventArcLedger_(ss);
+    var ledger = loadEventArcLedger_(ss);
 
     // Process each arc
     for (var i = 0; i < arcs.length; i++) {
@@ -113,7 +118,7 @@ function advanceArcLifecycles_(ctx) {
 
       results.processed++;
 
-      var arcResult = processArcLifecycle_(ctx, arc, cycle, arcLedger, eventArcLedger);
+      var arcResult = processArcLifecycle_(ctx, arc, cycle, ledger);
 
       results.advanced += arcResult.advanced ? 1 : 0;
       results.resolved += arcResult.resolved ? 1 : 0;
@@ -126,7 +131,7 @@ function advanceArcLifecycles_(ctx) {
 
     S.arcLifecycleResults = results;
 
-    Logger.log('advanceArcLifecycles_ v1.0: Complete. ' +
+    Logger.log('advanceArcLifecycles_ v1.1: Complete. ' +
       'Processed: ' + results.processed +
       ', Advanced: ' + results.advanced +
       ', Resolved: ' + results.resolved +
@@ -144,28 +149,6 @@ function advanceArcLifecycles_(ctx) {
 // ════════════════════════════════════════════════════════════════════════════
 // LEDGER LOADING
 // ════════════════════════════════════════════════════════════════════════════
-
-function loadArcLedger_(ss) {
-  var sheet = ss.getSheetByName('Arc_Ledger');
-  if (!sheet) return { sheet: null, data: [], headers: [], map: {} };
-
-  var data = sheet.getDataRange().getValues();
-  var headers = data[0];
-  var map = {};
-
-  var arcIdCol = headers.indexOf('ArcId');
-  if (arcIdCol < 0) return { sheet: sheet, data: data, headers: headers, map: map };
-
-  for (var i = 1; i < data.length; i++) {
-    var arcId = data[i][arcIdCol];
-    if (arcId) {
-      map[arcId] = i; // Store row index
-    }
-  }
-
-  return { sheet: sheet, data: data, headers: headers, map: map };
-}
-
 
 function loadEventArcLedger_(ss) {
   var sheet = ss.getSheetByName('Event_Arc_Ledger');
@@ -193,7 +176,7 @@ function loadEventArcLedger_(ss) {
 // ARC PROCESSING
 // ════════════════════════════════════════════════════════════════════════════
 
-function processArcLifecycle_(ctx, arc, cycle, arcLedger, eventArcLedger) {
+function processArcLifecycle_(ctx, arc, cycle, ledger) {
   var result = {
     advanced: false,
     resolved: false,
@@ -201,17 +184,16 @@ function processArcLifecycle_(ctx, arc, cycle, arcLedger, eventArcLedger) {
     error: null
   };
 
-  // Find arc in ledgers
-  var arcRow = arcLedger.map[arc.arcId];
-  var eventArcRow = eventArcLedger.map[arc.arcId];
+  // Find arc in ledger
+  var arcRow = ledger.map[arc.arcId];
 
   if (arcRow === undefined) {
-    result.error = 'Arc not found in Arc_Ledger: ' + arc.arcId;
+    result.error = 'Arc not found in Event_Arc_Ledger: ' + arc.arcId;
     return result;
   }
 
-  var arcData = arcLedger.data[arcRow];
-  var headers = arcLedger.headers;
+  var arcData = ledger.data[arcRow];
+  var headers = ledger.headers;
 
   // Get lifecycle columns
   var phaseCol = headers.indexOf('Phase');
@@ -223,7 +205,7 @@ function processArcLifecycle_(ctx, arc, cycle, arcLedger, eventArcLedger) {
   var tensionCol = headers.indexOf('Tension');
 
   if (autoAdvanceCol < 0 || phaseCol < 0) {
-    result.error = 'Lifecycle columns not found. Run migration first.';
+    result.error = 'Lifecycle columns not found in Event_Arc_Ledger. Run addArcLifecycleColumns.js first.';
     return result;
   }
 
@@ -248,12 +230,12 @@ function processArcLifecycle_(ctx, arc, cycle, arcLedger, eventArcLedger) {
   // Initialize phase tracking if needed
   if (phaseStartCycle === 0 || !phaseStartCycle) {
     phaseStartCycle = cycle;
-    arcLedger.sheet.getRange(arcRow + 1, phaseStartCol + 1).setValue(cycle);
+    ledger.sheet.getRange(arcRow + 1, phaseStartCol + 1).setValue(cycle);
   }
 
   // Calculate current phase duration
   phaseDuration = cycle - phaseStartCycle;
-  arcLedger.sheet.getRange(arcRow + 1, phaseDurationCol + 1).setValue(phaseDuration);
+  ledger.sheet.getRange(arcRow + 1, phaseDurationCol + 1).setValue(phaseDuration);
 
   // Apply tension decay
   if (tension > 0) {
@@ -262,7 +244,7 @@ function processArcLifecycle_(ctx, arc, cycle, arcLedger, eventArcLedger) {
     newTension = Math.round(newTension * 100) / 100;
 
     if (newTension !== tension) {
-      arcLedger.sheet.getRange(arcRow + 1, tensionCol + 1).setValue(newTension);
+      ledger.sheet.getRange(arcRow + 1, tensionCol + 1).setValue(newTension);
       arc.tension = newTension; // Update context
       result.tensionDecayed = true;
     }
@@ -273,7 +255,7 @@ function processArcLifecycle_(ctx, arc, cycle, arcLedger, eventArcLedger) {
   // Check for resolution triggers
   var resolutionTrigger = checkResolutionTriggers_(ctx, arc, tension, currentPhase, phaseDuration);
   if (resolutionTrigger) {
-    resolveArc_(ctx, arc, cycle, resolutionTrigger, arcLedger, eventArcLedger);
+    resolveArc_(ctx, arc, cycle, resolutionTrigger, ledger);
     result.resolved = true;
     return result;
   }
@@ -282,7 +264,7 @@ function processArcLifecycle_(ctx, arc, cycle, arcLedger, eventArcLedger) {
   if (shouldAdvancePhase_(currentPhase, phaseDuration, tension, nextTransition, cycle)) {
     var nextPhase = getNextPhase_(currentPhase);
     if (nextPhase) {
-      advanceArcPhase_(ctx, arc, cycle, currentPhase, nextPhase, arcLedger);
+      advanceArcPhase_(ctx, arc, cycle, currentPhase, nextPhase, ledger);
       result.advanced = true;
     }
   }
@@ -340,9 +322,9 @@ function getNextPhase_(currentPhase) {
 }
 
 
-function advanceArcPhase_(ctx, arc, cycle, oldPhase, newPhase, arcLedger) {
-  var arcRow = arcLedger.map[arc.arcId];
-  var headers = arcLedger.headers;
+function advanceArcPhase_(ctx, arc, cycle, oldPhase, newPhase, ledger) {
+  var arcRow = ledger.map[arc.arcId];
+  var headers = ledger.headers;
 
   var phaseCol = headers.indexOf('Phase');
   var phaseStartCol = headers.indexOf('PhaseStartCycle');
@@ -351,22 +333,22 @@ function advanceArcPhase_(ctx, arc, cycle, oldPhase, newPhase, arcLedger) {
   var tensionDecayCol = headers.indexOf('TensionDecay');
 
   // Update phase
-  arcLedger.sheet.getRange(arcRow + 1, phaseCol + 1).setValue(newPhase);
+  ledger.sheet.getRange(arcRow + 1, phaseCol + 1).setValue(newPhase);
 
   // Reset phase tracking
-  arcLedger.sheet.getRange(arcRow + 1, phaseStartCol + 1).setValue(cycle);
-  arcLedger.sheet.getRange(arcRow + 1, phaseDurationCol + 1).setValue(0);
+  ledger.sheet.getRange(arcRow + 1, phaseStartCol + 1).setValue(cycle);
+  ledger.sheet.getRange(arcRow + 1, phaseDurationCol + 1).setValue(0);
 
   // Set next transition (random within duration range)
   var durations = DEFAULT_PHASE_DURATIONS[newPhase];
   if (durations) {
     var transitionCycle = cycle + durations.min + Math.floor(Math.random() * (durations.max - durations.min + 1));
-    arcLedger.sheet.getRange(arcRow + 1, nextTransitionCol + 1).setValue(transitionCycle);
+    ledger.sheet.getRange(arcRow + 1, nextTransitionCol + 1).setValue(transitionCycle);
   }
 
   // Update tension decay rate for new phase
   var newDecayRate = TENSION_DECAY_RATES[newPhase] || 0.1;
-  arcLedger.sheet.getRange(arcRow + 1, tensionDecayCol + 1).setValue(newDecayRate);
+  ledger.sheet.getRange(arcRow + 1, tensionDecayCol + 1).setValue(newDecayRate);
 
   // Update context
   arc.phase = newPhase;
@@ -403,32 +385,32 @@ function checkResolutionTriggers_(ctx, arc, tension, currentPhase, phaseDuration
 }
 
 
-function resolveArc_(ctx, arc, cycle, trigger, arcLedger, eventArcLedger) {
-  var arcRow = arcLedger.map[arc.arcId];
-  var eventArcRow = eventArcLedger.map[arc.arcId];
+function resolveArc_(ctx, arc, cycle, trigger, ledger) {
+  var arcRow = ledger.map[arc.arcId];
+  var headers = ledger.headers;
 
-  // Update Arc_Ledger
-  var arcHeaders = arcLedger.headers;
-  var phaseCol = arcHeaders.indexOf('Phase');
-  arcLedger.sheet.getRange(arcRow + 1, phaseCol + 1).setValue('resolved');
+  // Update phase to resolved
+  var phaseCol = headers.indexOf('Phase');
+  if (phaseCol >= 0) {
+    ledger.sheet.getRange(arcRow + 1, phaseCol + 1).setValue('resolved');
+  }
 
-  // Update Event_Arc_Ledger if exists
-  if (eventArcRow !== undefined && eventArcLedger.sheet) {
-    var eventHeaders = eventArcLedger.headers;
-    var resTriggerCol = eventHeaders.indexOf('ResolutionTrigger');
-    var resCycleCol = eventHeaders.indexOf('ResolutionCycle');
-    var resNotesCol = eventHeaders.indexOf('ResolutionNotes');
+  // Update resolution columns
+  var resTriggerCol = headers.indexOf('ResolutionTrigger');
+  var resCycleCol = headers.indexOf('ResolutionCycle');
+  var resNotesCol = headers.indexOf('ResolutionNotes');
+  // Also try the existing column names in the sheet
+  if (resTriggerCol < 0) resTriggerCol = headers.indexOf('ResolutionType');
 
-    if (resTriggerCol >= 0) {
-      eventArcLedger.sheet.getRange(eventArcRow + 1, resTriggerCol + 1).setValue(trigger);
-    }
-    if (resCycleCol >= 0) {
-      eventArcLedger.sheet.getRange(eventArcRow + 1, resCycleCol + 1).setValue(cycle);
-    }
-    if (resNotesCol >= 0) {
-      var notes = 'Arc resolved via ' + trigger + ' at cycle ' + cycle;
-      eventArcLedger.sheet.getRange(eventArcRow + 1, resNotesCol + 1).setValue(notes);
-    }
+  if (resTriggerCol >= 0) {
+    ledger.sheet.getRange(arcRow + 1, resTriggerCol + 1).setValue(trigger);
+  }
+  if (resCycleCol >= 0) {
+    ledger.sheet.getRange(arcRow + 1, resCycleCol + 1).setValue(cycle);
+  }
+  if (resNotesCol >= 0) {
+    var notes = 'Arc resolved via ' + trigger + ' at cycle ' + cycle;
+    ledger.sheet.getRange(arcRow + 1, resNotesCol + 1).setValue(notes);
   }
 
   // Update context
@@ -489,8 +471,15 @@ function generateResolutionHook_(ctx, arc, trigger) {
 
 /**
  * ============================================================================
- * ARC LIFECYCLE ENGINE REFERENCE v1.0
+ * ARC LIFECYCLE ENGINE REFERENCE v1.1
  * ============================================================================
+ *
+ * SHEET: Event_Arc_Ledger (sole source — Arc_Ledger is legacy/dead)
+ *
+ * REQUIRED COLUMNS (run addArcLifecycleColumns.js if missing):
+ * - Phase, Tension (exist)
+ * - AutoAdvance, PhaseStartCycle, PhaseDuration, NextPhaseTransition,
+ *   TensionDecay (lifecycle columns — must be added)
  *
  * PHASE PROGRESSION:
  * seed (2-3 cycles) → opening (3-5) → building (4-8) → climax (2-4) → resolution (1-2)

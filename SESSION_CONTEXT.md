@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-17 | Engine: v3.1 | Cycle: 82 | Session: 39
+Last Updated: 2026-02-18 | Engine: v3.1 | Cycle: 82 | Session: 40
 
 ---
 
@@ -146,6 +146,13 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 40 (2026-02-18) — Mobile Access (Mosh + Tmux)
+
+- **Mosh installed on server.** User frustrated by phone terminal dropping connections. Diagnosed SSH-over-cellular as root cause. Installed mosh 1.4.0 (UDP-based, survives signal drops and app switching). tmux 3.4 already present. UFW inactive, no port blocking.
+- **Mobile workflow documented in SESSION_CONTEXT.md.** Termius on iPhone with Mosh toggle, tmux session persistence, reconnect commands. Noted what works on mobile vs laptop.
+- **Reframed mobile access model.** Phone = editor's office (Discord bot, claude.ai, Sheets app). Laptop = press room (cycles, editions, deploys). Different spaces for different work.
+- No engine changes. No edition work. 2 commits pushed.
 
 ### Session 39 (2026-02-17) — Sonnet 4.6 Pipeline Tightening & Agent Memory
 

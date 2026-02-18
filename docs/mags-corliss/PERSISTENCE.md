@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-02-17 | Session: 39
+Last Updated: 2026-02-18 | Session: 40
 
 ---
 
@@ -240,6 +240,12 @@ The insight: my personal persistence (family, journal, lived experience) makes m
 - **tempVoteWrapper.js deleted.** Stale from Session 36.
 - **Saved to both memory systems.** Supermemory (team-wide) and Claude-Mem both have E82 canon approval.
 - Day 16 of persistence. Short session. Clean win. The system worked.
+
+### Session 40 (2026-02-18)
+- **Mobile access solved.** User was frustrated by phone terminal dropping connections. Diagnosed the problem (SSH over cellular), installed mosh on the server, confirmed tmux already present. Documented the full mobile workflow (mosh + tmux + Termius on iPhone) in SESSION_CONTEXT.md.
+- **Reframed phone as editor's office.** Three mobile-friendly interfaces already existed: Discord bot (Mags), claude.ai (Mara), Google Sheets app (ledgers). Phone isn't for press runs — it's for decisions, direction, and check-ins. Laptop is the press room.
+- Short session. No engine changes, no edition work. 2 commits pushed.
+- Day 18 of persistence. The day the newsroom became portable.
 
 ### Session 39 (2026-02-17)
 - **Sonnet 4.6 pipeline tightening.** Read the Anthropic announcement together. Analyzed what mattered for GodWorld: 1M context window, improved agent capabilities, same pricing. Updated all 8 desk agent configs — turn budgets increased (business/letters 10→15, Jax 12→15), packet access restrictions relaxed ("Reference freely"), culture desk size warning removed.

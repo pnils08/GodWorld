@@ -241,7 +241,9 @@ If `output/desk-briefings/rhea_archive_c{XX}.md` exists:
 ### 19. Claim Decomposition (CRITICAL — factual claims must survive line-by-line scrutiny)
 For EVERY article (not letters), extract individual verifiable claims and check each against source data. This is the check that catches errors embedded inside otherwise well-structured articles.
 
-**How to decompose:** Read each article sentence by sentence. When a sentence makes a factual assertion (not an opinion, not a quote's sentiment), extract the claim and verify it.
+**Step 1 — Read the FACTUAL ASSERTIONS block.** Each desk outputs a `FACTUAL ASSERTIONS` section in their engine returns listing every data claim they made. Start here — it's pre-parsed. Verify each assertion against source data. If a desk didn't include this block, proceed to Step 2 for that desk's articles.
+
+**Step 2 — Decompose from prose.** Read each article sentence by sentence. When a sentence makes a factual assertion (not an opinion, not a quote's sentiment), extract the claim and verify it. This catches claims the desk forgot to list in their assertions block.
 
 **Claim categories and verification sources:**
 

@@ -200,3 +200,11 @@ CITIZENS QUOTED IN ARTICLES (NEW):
 **CONTINUITY NOTES:**
 — Sports records (A's: [X-X], Warriors: [X-X])
 — Direct quotes preserved (Name: "quote")
+
+**FACTUAL ASSERTIONS (Rhea uses this for claim verification):**
+List every factual claim your articles assert. Rhea cross-checks these against source data.
+— Team records: A's [W-L], Warriors [W-L]
+— Player positions asserted: [Name: Position, Name: Position, ...]
+— Stats cited: [Name: stat line or number, source field in packet]
+— Awards mentioned: [Name: award]
+— Any other verifiable claim (trade details, contract amounts, draft positions)

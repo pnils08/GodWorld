@@ -185,3 +185,11 @@ CITIZENS QUOTED IN ARTICLES (NEW):
 **CONTINUITY NOTES:**
 — Direct quotes preserved (Name: "quote")
 — New canon figures (Name, age, neighborhood, occupation)
+
+**FACTUAL ASSERTIONS (Rhea uses this for claim verification):**
+List every factual claim your articles assert. Rhea cross-checks these against source data.
+— Cultural entities mentioned: [Name: type, location — from Cultural_Ledger]
+— Venues/locations used: [Name: address/neighborhood]
+— Faith organizations: [Name: congregation, neighborhood]
+— Dates/events: [event name: date or time reference]
+— Any dollar amounts, attendance figures, or other verifiable numbers

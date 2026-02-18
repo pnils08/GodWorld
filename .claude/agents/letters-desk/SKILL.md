@@ -131,3 +131,9 @@ CITIZENS IN LETTERS (NEW):
 **CONTINUITY NOTES:**
 — Direct quotes preserved (Name: "quote")
 — New canon figures (Name, age, neighborhood, occupation)
+
+**FACTUAL ASSERTIONS (Rhea uses this for claim verification):**
+List every factual claim your letters reference. Citizens reference real events — Rhea checks these.
+— Events referenced: [event name or initiative, as described by the citizen]
+— People referenced: [any council members, athletes, or public figures named in letters]
+— Specific claims: [any vote outcomes, team records, or dollar amounts a citizen mentions]

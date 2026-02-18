@@ -147,3 +147,11 @@ JOURNALISTS (BYLINE TRACKING ONLY):
 
 **CONTINUITY NOTES:**
 — Economic data points for audit reference
+
+**FACTUAL ASSERTIONS (Rhea uses this for claim verification):**
+List every factual claim your articles assert. Rhea cross-checks these against source data.
+— Venues/businesses mentioned: [Name: location — from Cultural_Ledger or packet]
+— Economic figures: [any dollar amounts, percentages, job counts cited — with packet source]
+— Initiative references: [Initiative: status or amount claimed]
+— Neighborhood commercial corridors: [street/area referenced]
+— Any other verifiable claim (lease terms, hiring numbers, foot traffic comparisons)

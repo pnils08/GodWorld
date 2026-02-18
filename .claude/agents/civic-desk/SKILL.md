@@ -186,3 +186,12 @@ CITIZENS QUOTED IN ARTICLES (NEW):
 **CONTINUITY NOTES:**
 — Direct quotes preserved (Name: "quote")
 — New canon figures (Name, age, neighborhood, occupation)
+
+**FACTUAL ASSERTIONS (Rhea uses this for claim verification):**
+List every factual claim your articles assert. Rhea cross-checks these against source data.
+— Vote outcomes: [Initiative: X-Y, YES: names, NO: names, ABSENT: names]
+— Council factions asserted: [Name: Faction, Name: Faction, ...]
+— Mayor name used: [Name]
+— Initiative status/amounts: [Initiative: status, $amount]
+— District assignments: [Name: District X]
+— Any other verifiable claim (dates, addresses, wait times, dollar amounts)

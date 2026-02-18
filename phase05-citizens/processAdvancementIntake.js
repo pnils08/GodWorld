@@ -319,6 +319,7 @@ function processAdvancementRows_(ss, now, cycle) {
     
     var roleType = iRoleType >= 0 ? (row[iRoleType] || 'Citizen') : 'Citizen';
     var tier = iTier >= 0 ? (row[iTier] || 3) : 3;
+    tier = Math.min(Number(tier) || 3, 4); // Cap at Tier 4 (max valid tier)
     var clockMode = iClockMode >= 0 ? (row[iClockMode] || 'ENGINE') : 'ENGINE';
     var notes = iNotes >= 0 ? (row[iNotes] || '') : '';
     

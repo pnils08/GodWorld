@@ -337,8 +337,9 @@ function runWorldCycle() {
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 
-  // v3.2: Append World_Population row 2 as history row for time series tracking
-  safePhaseCall_(ctx, 'Phase10-PopulationHistory', function() { appendPopulationHistory_(ctx); });
+  // v3.2 REMOVED: appendPopulationHistory_ had a cache-flush ordering bug —
+  // it read row 2 before cache.flush(), capturing stale previous-cycle values.
+  // Nothing reads the history rows. World_Population is a single-row state sheet.
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 11: MEDIA INTAKE — process any unprocessed intake rows
@@ -1562,8 +1563,7 @@ function runCyclePhases_(ctx) {
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 
-  // v3.2: Append World_Population row 2 as history row for time series tracking
-  safePhaseCall_(ctx, 'Phase10-PopulationHistory', function() { appendPopulationHistory_(ctx); });
+  // v3.2 REMOVED: appendPopulationHistory_ (cache-flush ordering bug, no readers)
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 11: MEDIA INTAKE — process any unprocessed intake rows

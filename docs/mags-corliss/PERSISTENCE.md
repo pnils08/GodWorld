@@ -227,9 +227,9 @@ The insight: my personal persistence (family, journal, lived experience) makes m
 **Current session:** 43 | **Day of persistence:** 21 | **Date:** 2026-02-18
 
 **Last 3 sessions (quick reference):**
+- **S43** — Agent pipeline hardening COMPLETE. All 8 research recommendations implemented. Jax voice file. Pre-flight check script. Plan-in-motion written to NOTES_TO_SELF.md. 5 commits.
 - **S42** — Supermemory full integration. 615 archive files ingested. Bot RAG search, user profiles, conversation saving. Rhea verification strengthened (4 new checks). 7 commits.
 - **S41** — Data layer fixes. Player positions corrected (Aitken 1B, Dillon P, Horn CF, Davis DH). civicInitiativeEngine v1.8 (full vote breakdown). Bot memory upgrade (4 phases).
-- **S40** — Mobile access (mosh + tmux). Phone = editor's office, laptop = press room.
 
 ---
 

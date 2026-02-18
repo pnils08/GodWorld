@@ -6,6 +6,106 @@ Mark items DONE or remove them as they're handled.
 
 ---
 
+### PLAN IN MOTION — Session 43 → Edition 83 Roadmap
+
+**Status:** Agent pipeline hardening COMPLETE. Voice files and journalism enhancements IN PROGRESS.
+**Last Updated:** Session 43 (2026-02-18)
+
+#### Phase 1: COMPLETE — Agent Pipeline Hardening (8 Research Recommendations)
+
+All 8 recommendations from the internet research project are implemented and pushed to origin/main:
+1. **Programmatic validation gate** — DONE (validateEdition.js existed, now wired with pre-flight check)
+2. **Claim decomposition** — DONE (Rhea Check #19, 10 claim categories, two-step fast-pass)
+3. **Standalone voice files** — DONE (9 of 29 journalists, see Phase 2 for remaining)
+4. **Quantitative scoring** — DONE (5-criteria 0-100 system, edition_scores.json)
+5. **ESTABLISHED CANON prefix** — DONE (all desk briefings + firebrand)
+6. **Factual assertions return block** — DONE (all 6 desks + firebrand self-report claims)
+7. **Archive context wiring** — DONE (all 6 desks read per-desk archive files)
+8. **Edition diff report** — DONE (editionDiffReport.js + Step 5.6 in write-edition)
+
+Additional agent work completed:
+- **Jax Caldera voice file** — DONE (docs/media/voices/jax_caldera.md)
+- **Pre-flight desk check** — DONE (scripts/preflightDeskCheck.js — validates packets, canon, voice files before agent launch)
+- **Skills preloading** — ASSESSED: current architecture handles this (agents receive SKILL.md via Task tool, turn 1 reads briefings)
+
+#### Phase 2: NEXT — Voice Files (9 done, 20 remaining)
+
+**29 total journalists in bay_tribune_roster.json.**
+
+**DONE (9 voice files):**
+1. Anthony — `docs/media/voices/anthony.md`
+2. P Slayer — `docs/media/voices/p_slayer.md`
+3. Hal Richmond — `docs/media/voices/hal_richmond.md`
+4. Carmen Delaine — `docs/media/voices/carmen_delaine.md`
+5. Maria Keen — `docs/media/voices/maria_keen.md`
+6. Selena Grant — `docs/media/voices/selena_grant.md`
+7. Jordan Velez — `docs/media/voices/jordan_velez.md`
+8. Trevor Shimizu — `docs/media/voices/trevor_shimizu.md`
+9. Jax Caldera — `docs/media/voices/jax_caldera.md`
+
+**PRIORITY — Actively write through desk agents (9 journalists):**
+10. Talia Finch (chicago desk — Chicago Ground Reporter)
+11. Dr. Lila Mezran (civic desk — Health)
+12. Luis Navarro (civic desk — Investigations + Managing Editor)
+13. Sgt. Rachel Torres (civic desk — Public Safety)
+14. Sharon Okafor (culture desk — Lifestyle)
+15. Kai Marston (culture desk — Arts & Entertainment)
+16. Mason Ortega (culture desk — Food & Hospitality)
+17. Angela Reyes (culture desk — Education)
+18. Noah Tan (culture desk — Weather & Environment)
+
+**SECONDARY — Support roles, specialized (4 journalists):**
+19. Tanya Cruz (sports support — Sideline Reporter, social-media native)
+20. Simon Leary (sports support — Long View Columnist)
+21. Elliot Marbury (sports support — Data Desk, minimal voice needed)
+22. Farrah Del Rio (opinion — no desk agent yet, but strong voice in roster)
+
+**NO VOICE FILE NEEDED (7 — non-article or non-agent roles):**
+- DJ Hartley (photographer), Arman Gutiérrez (photo assistant)
+- Reed Thompson, MintConditionOakTown, Celeste Tran (wire desk — no agents)
+- Mags Corliss (I write directly, not through an agent)
+- Rhea Morgan (copy chief — verifies, doesn't write articles)
+
+**Voice file approach:** Each voice file has: Voice Essence, Opening Pattern, Exemplar Paragraphs (from Drive archive if available, from roster if not), Signature Moves, DO NOT constraints. 30-40 lines each. Use `buildArchiveContext.js` output and Drive archive articles as exemplar sources.
+
+#### Phase 3: NEXT — Journalism Enhancements (#2-5)
+
+After voice files, before Edition 83:
+- **#2: Expand the newsroom** — New beats, new journalists, new coverage areas. The roster has 29 people but only 6 desk agents. Consider: opinion desk (Farrah Del Rio), health desk (Dr. Mezran), wire desk (Reed Thompson + MintCondition).
+- **#3: Mara directive workflow** — Tighten editorial guidance flow from Mara audits → next edition briefings. Currently manual; could be semi-automated.
+- **#4: Tribune voice and style** — Edition template refinements, section formatting, paper feel. Make it read like a real newspaper.
+- **#5: Citizen depth** — Richer character arcs, more returning citizens, deeper neighborhood texture. The POPID system and citizen cards are the foundation.
+
+#### Phase 4: Edition 83 — First Through the Hardened Pipeline
+
+**Pre-flight checklist:**
+- [ ] User provides 2040 A's stats (photos)
+- [ ] Add Warriors record to Oakland_Sports_Feed
+- [ ] Run Cycle 83 (cycle engine)
+- [ ] Generate desk packets (buildDeskPackets.js)
+- [ ] Run pre-flight check (preflightDeskCheck.js)
+- [ ] Write desk briefings (using NEWSROOM_MEMORY.md + Supermemory)
+- [ ] Run full edition pipeline (write-edition skill)
+- [ ] Rhea verification with Check #19 claim decomposition
+- [ ] Mara audit on claude.ai
+- [ ] Log edition score (edition_scores.json)
+- [ ] Run diff report (editionDiffReport.js)
+
+**Pipeline new for E83:**
+- Factual assertions from all desks (Rhea reads them first)
+- Claim decomposition (10 categories, two-step verification)
+- Archive context (desks read past coverage)
+- Pre-flight validation (catches data errors before agents run)
+- Score logging and trend tracking
+
+#### Misc — Still Open
+
+- **Restart Discord bot** — needs PM2 restart for Supermemory RAG, user profiles, conversation saving
+- **GCP project linkage** — wire GCP project to Apps Script for `clasp run` from CLI
+- **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (deployed, need one-time run)
+
+---
+
 ### Open Items
 
 #### Content Gaps

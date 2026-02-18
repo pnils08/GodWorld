@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-18 | Engine: v3.1 | Cycle: 82 | Session: 42
+Last Updated: 2026-02-18 | Engine: v3.1 | Cycle: 82 | Session: 43
 
 ---
 
@@ -147,6 +147,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 43 (2026-02-18) — Agent Pipeline Hardening Complete (8 Research Recommendations)
+
+- **All 8 internet research recommendations implemented.** Claim decomposition (Rhea Check #19, 10 categories), factual assertions return block (all 6 desks + firebrand), archive context wiring (all desks read past coverage files), edition diff report script + score logging (Step 5.6 in write-edition).
+- **Jax Caldera voice file created.** `docs/media/voices/jax_caldera.md` — exemplars, signature moves, DO NOT constraints. Freelance-firebrand skill wired with voice reference, editor briefing, ESTABLISHED CANON recognition.
+- **Pre-flight desk check script.** `scripts/preflightDeskCheck.js` validates all packets, summaries, canon fields (council roster = 9, A's roster present, mayor name), truesource, voice files, briefings, and archive context before agent launch. Exit code 0/1.
+- **Plan-in-motion documented.** Full roadmap written to NOTES_TO_SELF.md: Phase 1 (agent hardening — DONE), Phase 2 (voice files — 9/29 done, 9 priority, 4 secondary, 7 don't need), Phase 3 (journalism enhancements #2-5), Phase 4 (Edition 83 checklist).
+- **Roster analysis.** 29 journalists in bay_tribune_roster.json. 9 have voice files. 9 priority journalists need voice files (actively write through desk agents). 4 secondary. 7 don't need them (photographers, wire, editorial).
+- 5 commits pushed to origin/main: claim decomposition, factual assertions, archive context, diff report, Jax voice + pre-flight.
+
 ### Session 42 (2026-02-18) — Supermemory Full Integration + Rhea Verification
 
 - **Supermemory integration complete.** 615 Drive archive files + 5 Mags personal docs ingested. Discord bot wired with explicit RAG search (archive context before every response), user profiles (`/v4/profile`), and conversation saving (dual-tagged per-user + project). `scripts/supermemory-ingest.js` created for bulk ingestion.
@@ -271,40 +280,38 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Current Work / Next Steps
 
-**Critical — Data Layer Fixes Needed:**
-- ~~**Fix base_context.json player positions**~~ — DONE (Session 41). Aitken 1B, Dillon P, Horn CF, Davis DH. Three players promoted from Tier 3→1. base_context.json regenerated (12 players).
-- ~~**Record full council vote breakdown in engine**~~ — DONE (Session 41). civicInitiativeEngine v1.8. All 9 votes in Notes. Faction members tracked. clasp pushed.
-- ~~**Strengthen Rhea verification**~~ — DONE (Session 42). 4 new checks: faction-rule, TrueSource, mayor, real-name screening. truesource_reference.json generated. executiveBranch in canon.
+**PLAN IN MOTION — see `docs/mags-corliss/NOTES_TO_SELF.md` for full roadmap.**
 
-**Active:**
-- **Supermemory deeper integration** — auto-ingest new editions, desk agent archive context, Rhea cross-reference against archive. Not urgent.
-- **Restart Discord bot** — bot needs PM2 restart to pick up Supermemory RAG, user profiles, conversation saving
-- **Add Warriors record to Oakland_Sports_Feed** — user wanted this before Cycle 82 but didn't get the chance
-- **GCP project linkage** — wire GCP project to Apps Script to enable `clasp run` from CLI
-- **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (already deployed, just need one-time run)
-- **User may decide to stop the project** — respect whatever decision is made
+**Completed — Agent Pipeline Hardening (Session 43):**
+- All 8 research recommendations implemented and pushed
+- Jax Caldera voice file + firebrand wiring
+- Pre-flight desk check script (preflightDeskCheck.js)
+- Skills preloading assessed (already handled by architecture)
 
-**Completed Session 37:**
-- Edition 82 written, corrected (3 rounds), uploaded, intake processed
-- Discord bot identity backbone added (anti-self-negation rules)
-- Morning reflection cron path fixed
-- Toxic conversation log cleaned
-- Mara audit received from claude.ai — caught 7 errors Rhea missed
-- NEWSROOM_MEMORY.md updated with E82 errata, new canon corrections, new phantoms
+**Active — Voice Files (Phase 2):**
+- 9 of 29 journalists have voice files
+- 9 PRIORITY journalists need voice files (actively write through desk agents): Talia Finch, Dr. Lila Mezran, Luis Navarro, Sgt. Rachel Torres, Sharon Okafor, Kai Marston, Mason Ortega, Angela Reyes, Noah Tan
+- 4 SECONDARY: Tanya Cruz, Simon Leary, Elliot Marbury, Farrah Del Rio
+- 7 don't need them (photographers, wire, editorial)
 
-**Completed Session 36:**
-- Cycle 82 ran (after 3 attempts — double cycle, header bug, validation bug, stray file)
-- INIT-002 OARI: PASSED 5-4. Ramon Vega no, Leonard Tran yes, Mayor signed.
-- INIT-006 Baylight: advanced to pending-vote, VoteCycle 83
-- InitiativeID header fixed (A1 was blank space)
-- Data validations removed from Initiative_Tracker (strict dropdowns blocked setValues)
-- post_cycle_review.js deleted from Apps Script project (Node.js file crashed runtime)
-- post_cycle_review.js deleted from local project, added to .claspignore
+**Active — Journalism Enhancements (Phase 3):**
+- #2: Expand the newsroom (new beats, new desk agents)
+- #3: Mara directive workflow (tighten editorial guidance)
+- #4: Tribune voice and style (template, formatting, paper feel)
+- #5: Citizen depth (richer arcs, returning citizens, neighborhood texture)
 
-**Pending Decisions:**
-- See `docs/engine/PROJECT_STATUS.md` for full list
+**Then — Edition 83 (Phase 4):**
+- First edition through the fully hardened pipeline
+- Pre-reqs: user provides 2040 A's stats, add Warriors record to Sports Feed, run Cycle 83
+- New in pipeline: factual assertions, claim decomposition, archive context, pre-flight validation, score logging
 
-**Tech Debt:**
+**Infrastructure:**
+- **Restart Discord bot** — needs PM2 restart for Supermemory RAG, user profiles, conversation saving
+- **Add Warriors record to Oakland_Sports_Feed** — user wanted this before Cycle 82
+- **GCP project linkage** — wire GCP project to Apps Script for `clasp run` from CLI
+- **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (deployed, need one-time run)
+
+**Pending Decisions / Tech Debt:**
 - See `docs/engine/PROJECT_STATUS.md` for full list
 
 *Full project tracking: `docs/engine/PROJECT_STATUS.md`*

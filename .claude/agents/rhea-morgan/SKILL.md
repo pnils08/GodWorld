@@ -238,13 +238,58 @@ If `output/desk-briefings/rhea_archive_c{XX}.md` exists:
 - Multiple contradictions about the same character = CRITICAL (systematic continuity failure)
 - If the archive reference file doesn't exist, skip this check
 
-## Edition Score (0-100)
+### 19. Claim Decomposition (CRITICAL — factual claims must survive line-by-line scrutiny)
+For EVERY article (not letters), extract individual verifiable claims and check each against source data. This is the check that catches errors embedded inside otherwise well-structured articles.
+
+**How to decompose:** Read each article sentence by sentence. When a sentence makes a factual assertion (not an opinion, not a quote's sentiment), extract the claim and verify it.
+
+**Claim categories and verification sources:**
+
+| Category | Example Claim | Verify Against | Severity |
+|----------|--------------|----------------|----------|
+| Player position | "third baseman Mark Aitken" | truesource_reference.json → asRoster | CRITICAL |
+| Award + position logic | "Gold Glove winner Darrin Davis (DH)" | Logic: DHs don't field → can't win Gold Glove | CRITICAL |
+| Award count | "five-time Cy Young winner Benji Dillon" | truesource_reference.json → asRoster notes, archive | WARNING if unverifiable |
+| Career/season stats | "batting .312 this season" | base_context.json → roster stats, sports feed | WARNING if no source |
+| Player age | "Holiday, 34, is a proven winner" | truesource_reference.json → asRoster age field | WARNING |
+| Individual vote position | "Ashford voted against the fund" | base_context.json → pendingVotes/recentOutcomes Notes field | CRITICAL |
+| Council faction | "Mobley, an OPP member" | truesource_reference.json → councilFactions | CRITICAL |
+| Initiative status/budget | "$28 million Stabilization Fund passed last month" | truesource_reference.json → initiatives | CRITICAL if wrong status, WARNING if wrong amount |
+| Team record | "the A's, now 45-32" | truesource_reference.json → teamRecords, sports feed | CRITICAL |
+| Internal consistency | Article says "6-3 vote" in paragraph 1 but names only 5 yes-voters | Cross-check within same article | CRITICAL |
+
+**Process:**
+1. Read each article once, extracting all factual claims into a list
+2. Group claims by category
+3. Verify each claim against the listed source
+4. If a claim cannot be verified (source doesn't contain the data), mark as UNVERIFIABLE — not an error, but flag it as a NOTE
+5. If a claim contradicts the source data, mark with the appropriate severity
+
+**Output format for claim errors:**
+```
+[Article: "Headline"] — CLAIM: "shortstop Danny Horn" → SOURCE: truesource_reference.json says Horn is CF → CRITICAL
+[Article: "Headline"] — CLAIM: "batting .340" → SOURCE: no batting average in packet data → NOTE (unverifiable)
+```
+
+**What NOT to decompose:**
+- Opinion statements ("the mood on 7th Street was cautious")
+- Quoted citizen sentiments ("I don't trust the timeline")
+- Atmospheric details ("the smoke had barely cleared")
+- Reporter observations ("I spoke with four business owners")
+These are editorial content, not factual claims.
+
+### 19b. Claim Tally
+After decomposing all articles, report:
+```
+CLAIM DECOMPOSITION: [X] claims extracted, [Y] verified, [Z] errors found, [W] unverifiable
+```
+Include this tally in your verification report, after the error list and before the Edition Score.
 
 After completing all checks, score the edition across 5 criteria. Each criterion is 0-20 points. The score maps directly to your checks — no subjective judgment, just count the results.
 
 ### 1. Data Accuracy (0-20)
-Measures: Are facts correct? Council names, positions, vote math, player stats, mayor name.
-Based on checks: 1 (citizen names), 2 (vote/civic), 3 (sports records), 16 (mayor), 17 (real-names).
+Measures: Are facts correct? Council names, positions, vote math, player stats, mayor name, individual claims.
+Based on checks: 1 (citizen names), 2 (vote/civic), 3 (sports records), 16 (mayor), 17 (real-names), 19 (claim decomposition).
 - **20** — Zero data errors
 - **15** — 1-2 WARNINGS, no CRITICAL
 - **10** — 1 CRITICAL data error
@@ -334,6 +379,8 @@ NOTES (informational):
 5. Ramon Vega appears in both civic and letters sections (different angles — OK)
 6. P Slayer wrote 2 articles (at budget limit)
 
+CLAIM DECOMPOSITION: [X] claims extracted, [Y] verified, [Z] errors found, [W] unverifiable
+
 ================================================
 ```
 
@@ -354,5 +401,8 @@ EDITION SCORE: [XX]/100
   Canon Compliance:      [XX]/20
 
 No issues found. Edition ready for publication.
+
+CLAIM DECOMPOSITION: [X] claims extracted, [Y] verified, 0 errors found, [W] unverifiable
+
 ================================================
 ```

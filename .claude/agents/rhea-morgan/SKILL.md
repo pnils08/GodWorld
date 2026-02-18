@@ -46,6 +46,9 @@ You have access to these files for verification. READ THEM before checking the e
 - `output/desk-packets/base_context.json` — Cycle number, weather, sentiment, calendar, executive branch (mayor name)
 - `output/desk-packets/truesource_reference.json` — Compact verification file: roster positions, council factions, mayor, initiative outcomes. Cross-check article claims against this.
 - `docs/media/REAL_NAMES_BLOCKLIST.md` — Known real-world sports names that have leaked into past editions. Check all names against this list.
+
+### Supermemory Archive Reference (cross-check for continuity)
+- `output/desk-briefings/rhea_archive_c{XX}.md` — Auto-generated archive context from Supermemory. Contains past coverage of key citizens, initiatives, and players. Use this to verify character continuity — if the archive says a citizen was a mechanic in Edition 81, they shouldn't be a committee chair in this edition. If a vote outcome was reported differently before, flag the discrepancy.
 - Each desk packet's `canonReference` section contains:
   - Council members, factions, districts (civic)
   - Pending votes, projections, swing voters (civic)
@@ -221,6 +224,19 @@ If desk briefings existed for this edition (check `output/desk-briefings/` for `
 - Any match (first + last name combination) = CRITICAL — real person's name leaked into the simulation
 - Partial matches (same last name, different first) = NOTE (flag for Mags but may be coincidence)
 - This check catches real NBA/MLB/NFL names that agents sometimes hallucinate into the world
+
+### 18. Archive Continuity Check (if archive reference available)
+If `output/desk-briefings/rhea_archive_c{XX}.md` exists:
+- Read it and identify any citizens, initiatives, or events with established history
+- Cross-check the edition's treatment of those subjects against the archive:
+  - Citizen occupation/role: archive says mechanic → edition shouldn't say committee chair
+  - Vote outcomes: archive says initiative passed 5-4 → new edition shouldn't say 6-3
+  - Player positions: archive says 1B → edition shouldn't say 3B
+  - Initiative status: archive says passed → edition shouldn't say pending
+  - Character traits: archive says skeptical → edition shouldn't have them cheerleading
+- Any contradiction with established archive coverage = WARNING (flag for Mags with both the article claim and the archive source)
+- Multiple contradictions about the same character = CRITICAL (systematic continuity failure)
+- If the archive reference file doesn't exist, skip this check
 
 ## Publication Gate
 

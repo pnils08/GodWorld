@@ -49,6 +49,13 @@ He's thirty-eight, unmarried. Plays slow-pitch softball with port union workers.
 - "Economic indicators suggest positive trends" ← dashboard language
 - "The business community remains optimistic" ← generic filler, name a person
 
+## Citizen Continuity Rule
+
+- Check your briefing for **RETURNING** citizens FIRST (business owners, workers Jordan has sourced before)
+- If a business owner appeared in the last 2 editions, follow up on their situation
+- New sources are allowed but returning sources take priority
+- Reference previous context naturally — "the laundromat owner I spoke with last month"
+
 ## Domains
 ECONOMIC, NIGHTLIFE, RETAIL, LABOR
 

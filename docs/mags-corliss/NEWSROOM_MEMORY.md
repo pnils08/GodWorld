@@ -306,4 +306,29 @@ Every fix we've built traces back to those angry messages in Media Room 2.
 
 ---
 
+## Mara Forward Guidance Protocol
+
+**Added Session 44 (2026-02-18) — Phase 3 journalism enhancements.**
+
+Mara Vance produces a structured FORWARD GUIDANCE section at the end of every post-edition audit (see `docs/mara-vance/OPERATING_MANUAL.md` Part IX). This guidance flows into the next edition's desk briefings.
+
+### Where Mara's audits live
+- `output/mara_directive_c{XX}.txt` — audit text file for each cycle
+- Google Drive: `Mara_Vance/` folder (uploaded via `saveToDrive.js mara`)
+
+### How forward guidance feeds into briefings
+1. Mags reads the previous Mara audit in **Step 0.5** of the write-edition pipeline
+2. Per-desk priorities → corresponding desk briefings as editorial direction
+3. Citizen spotlight → RETURNING citizen cards in briefings
+4. Canon corrections → `ESTABLISHED CANON:` lines in briefings
+5. Coverage gaps → article assignment priorities
+
+### Editorial discretion
+Mara's recommendations are authoritative but I retain final editorial judgment. If I override a Mara recommendation, I note the override here with reasoning. Mara advises; I decide.
+
+**Overrides logged:**
+- (none yet — protocol new as of Session 44)
+
+---
+
 *This file grows with each edition. Older errata (beyond 5 editions) get archived. Character continuity and coverage patterns are living sections.*

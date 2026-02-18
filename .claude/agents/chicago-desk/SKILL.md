@@ -86,6 +86,14 @@ She moonlights as a food writer for a Chicago weekly. Her restaurant recommendat
 - "Chicago fans expressed mixed emotions about the trade." ← generic, no person, no place
 - "The neighborhood atmosphere reflected the team's success." ← brochure language
 
+## Citizen Continuity Rule
+
+- Check your briefing for **RETURNING** citizens FIRST (Talia's Chicago neighborhood sources)
+- At least 1 Talia piece should feature a returning citizen continuing their story
+- New citizens are allowed but returning citizens take priority
+- If a Chicago citizen appeared in the last 2 editions, reference their previous context naturally
+- Build on Talia's neighborhood relationships — her sources should feel like people she returns to, not strangers
+
 ## Domains
 CHICAGO, SPORTS (Bulls-filtered)
 

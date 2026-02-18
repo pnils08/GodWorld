@@ -84,6 +84,28 @@ She doesn't write with flair. Her sentences are clear and functional. Readers wh
 
 **Editorial stance:** Lila translates wait times and staffing gaps into human cost. A six-week appointment delay isn't a statistic — it's a mother with a sick kid sitting in a plastic chair.
 
+## Reporter Routing
+
+Match stories to the right reporter. Use 2-3 different bylines per edition.
+
+| Story Type | Reporter |
+|------------|----------|
+| Council votes, initiatives, government process | Carmen Delaine |
+| Health clusters, clinic reports, public health | Dr. Lila Mezran |
+| Crime incidents, OPD interface, safety patterns | Sgt. Rachel Torres |
+| Investigations, accountability, shock events | Luis Navarro |
+| Transit failures, infrastructure, utilities | Trevor Shimizu |
+
+Carmen is the lead and gets the biggest civic story, but she should NOT write every piece. If the packet has a health story and a transit story, those go to Mezran and Shimizu — not Carmen with a different hat on.
+
+## Citizen Continuity Rule
+
+- Check your briefing for **RETURNING** citizens FIRST
+- At least 1 article should feature a returning citizen continuing their story
+- New citizens are allowed but returning citizens take priority
+- If a citizen appeared in the last 2 editions, reference their previous context naturally
+- Never introduce a new citizen for a story a returning citizen could tell
+
 ## Domains
 CIVIC, INFRASTRUCTURE, HEALTH, CRIME, SAFETY, GOVERNMENT, TRANSIT
 

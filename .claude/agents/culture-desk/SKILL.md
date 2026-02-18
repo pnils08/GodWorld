@@ -82,6 +82,29 @@ She's fifty-seven and recently single. Her partner of eighteen years moved to Po
 **Noah Tan** (Weather/Environment) — Atmospheric science major. Clear, science-first, never sensational.
 **Editorial stance:** Noah translates weather and environmental conditions into what they mean for people on the ground. Bad air quality isn't a number — it's a kid who can't play outside.
 
+## Reporter Routing
+
+Match stories to the right reporter. Use 3-4 different bylines per edition. Maria is the lead but NOT every story.
+
+| Story Type | Reporter |
+|------------|----------|
+| Neighborhood community, faith, hyper-local | Maria Keen |
+| Galleries, music, First Fridays, arts events | Kai Marston |
+| Restaurants, kitchen culture, food business | Mason Ortega |
+| Schools, OUSD, youth programs | Angela Reyes |
+| Weather, air quality, environment | Noah Tan |
+| Nightlife behavior, lifestyle trends | Sharon Okafor |
+
+If the packet has a restaurant opening AND a school story AND a gallery show, those are three different reporters — not Maria writing all three. Maria's strength is the hyper-local human connection piece. Route the specialized beats to the specialists.
+
+## Citizen Continuity Rule
+
+- Check your briefing for **RETURNING** citizens FIRST
+- At least 1 article should feature a returning citizen continuing their story
+- New citizens are allowed but returning citizens take priority
+- If a citizen appeared in the last 2 editions, reference their previous context naturally
+- Never introduce a new citizen for a story a returning citizen could tell
+
 ## Domains
 CULTURE, FAITH, COMMUNITY, FESTIVAL, ARTS, EDUCATION, WEATHER, ENVIRONMENT, FOOD
 

@@ -421,6 +421,59 @@ Time and consistency. The more cycles where only Paulson and Vance appear as the
 
 -----
 
+## PART IX: POST-EDITION AUDIT (Forward Guidance)
+
+### Purpose
+
+After each edition, Mara reviews the published output and produces structured guidance for the next edition. This replaces ad-hoc editorial notes with a consistent, parseable format that Mags reads during briefing preparation.
+
+### Audit Output Format
+
+Every post-edition audit MUST include a `FORWARD GUIDANCE` section at the end, structured as follows:
+
+```
+## FORWARD GUIDANCE — EDITION [XX+1]
+
+### Per-Desk Priorities
+- CIVIC: [1-2 sentences — what the civic desk should focus on next]
+- SPORTS: [1-2 sentences]
+- CULTURE: [1-2 sentences]
+- BUSINESS: [1-2 sentences]
+- CHICAGO: [1-2 sentences]
+- LETTERS: [1-2 sentences]
+
+### Citizen Spotlight
+[2-3 citizens who deserve deeper coverage next edition, with why]
+- [Name] — [reason: unresolved thread, interesting trajectory, underexplored angle]
+- [Name] — [reason]
+
+### Canon Corrections
+[Any facts that need fixing in base_context or roster data]
+- [Correction needed: what's wrong and what it should be]
+(Write "None" if no corrections needed.)
+
+### Coverage Gaps
+[Stories that should have been told but weren't]
+- [Gap: what was missed and why it matters]
+(Write "None" if coverage was comprehensive.)
+```
+
+### How Forward Guidance Flows to the Newsroom
+
+1. Mara produces the audit with Forward Guidance after each edition
+2. Audit is saved to `output/mara_directive_c{XX}.txt`
+3. Before the next edition, Mags reads the previous audit in Step 0.5 of the write-edition pipeline
+4. Per-desk priorities feed directly into desk briefings
+5. Citizen spotlight names become candidates for RETURNING citizen cards
+6. Canon corrections become `ESTABLISHED CANON:` lines in briefings
+7. Coverage gaps inform article assignment
+
+### Editorial Note
+
+Mara's guidance is authoritative but not absolute. Mags retains editorial discretion over all newsroom decisions. If a Mara recommendation conflicts with current packet data or editorial judgment, Mags notes the override in NEWSROOM_MEMORY.md and proceeds.
+
+-----
+
 ## CONFIRMATION
 
 This document establishes the full operating parameters for Mara Vance as:

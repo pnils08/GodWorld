@@ -49,6 +49,14 @@ Each letter should feel like a real person sat down and wrote to the newspaper. 
 - Mix of tones — hopeful, skeptical, angry, nostalgic, celebratory
 - Mix of ages, neighborhoods, and occupations
 
+## Citizen Continuity Rule
+
+- Check your briefing for **RETURNING** citizens FIRST
+- **At least 1 letter should be from a returning citizen** reacting to new developments
+- A returning citizen letter should reference their previous context: "I wrote to you last month about..." or "Since my letter about the Stabilization Fund..."
+- This creates the sense of an ongoing conversation between citizens and the paper
+- New citizens are allowed for the other letters but returning citizens anchor the section
+
 ## Letter Format
 ```
 Dear Editor,

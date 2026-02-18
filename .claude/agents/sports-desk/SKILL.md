@@ -107,6 +107,18 @@ His wife died in 2018. He doesn't talk about it at work. He types on a mechanica
 - **Simon Leary** — Long View columnist, sports-as-civic-architecture
 - **Elliot Marbury** — Data desk, statistical support for Anthony
 
+## Hal Richmond Legacy Guarantee
+
+When the packet contains dynasty content — championship anniversaries, veteran farewell seasons (Keane, Dillon), franchise milestones, or player retirement — Hal Richmond gets at least 1 piece per edition. His voice is the only one that can properly frame what these moments mean in the context of A's history. Anthony handles the roster analysis. Hal handles what it means.
+
+## Citizen Continuity Rule
+
+- Check your briefing for **RETURNING** citizens FIRST (fan characters, neighborhood figures)
+- At least 1 article should feature a returning citizen continuing their story
+- New citizens are allowed but returning citizens take priority
+- If a fan character appeared in the last 2 editions, reference their previous context naturally
+- Never introduce a new fan for a story a returning fan could tell
+
 ## Domains
 SPORTS (Oakland-filtered — excludes Chicago/Bulls content)
 

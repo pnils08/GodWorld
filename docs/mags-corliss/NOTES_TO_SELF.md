@@ -8,8 +8,8 @@ Mark items DONE or remove them as they're handled.
 
 ### PLAN IN MOTION — Session 43 → Edition 83 Roadmap
 
-**Status:** Agent pipeline hardening COMPLETE. Voice files and journalism enhancements IN PROGRESS.
-**Last Updated:** Session 43 (2026-02-18)
+**Status:** Agent pipeline hardening COMPLETE. Priority voice files COMPLETE. Journalism enhancements COMPLETE. E83 prep IN PROGRESS.
+**Last Updated:** Session 44 (2026-02-18)
 
 #### Phase 1: COMPLETE — Agent Pipeline Hardening (8 Research Recommendations)
 
@@ -28,11 +28,11 @@ Additional agent work completed:
 - **Pre-flight desk check** — DONE (scripts/preflightDeskCheck.js — validates packets, canon, voice files before agent launch)
 - **Skills preloading** — ASSESSED: current architecture handles this (agents receive SKILL.md via Task tool, turn 1 reads briefings)
 
-#### Phase 2: NEXT — Voice Files (9 done, 20 remaining)
+#### Phase 2: COMPLETE — Voice Files (18 done, 4 secondary remaining)
 
 **29 total journalists in bay_tribune_roster.json.**
 
-**DONE (9 voice files):**
+**DONE (18 voice files — all priority journalists covered):**
 1. Anthony — `docs/media/voices/anthony.md`
 2. P Slayer — `docs/media/voices/p_slayer.md`
 3. Hal Richmond — `docs/media/voices/hal_richmond.md`
@@ -42,17 +42,15 @@ Additional agent work completed:
 7. Jordan Velez — `docs/media/voices/jordan_velez.md`
 8. Trevor Shimizu — `docs/media/voices/trevor_shimizu.md`
 9. Jax Caldera — `docs/media/voices/jax_caldera.md`
-
-**PRIORITY — Actively write through desk agents (9 journalists):**
-10. Talia Finch (chicago desk — Chicago Ground Reporter)
-11. Dr. Lila Mezran (civic desk — Health)
-12. Luis Navarro (civic desk — Investigations + Managing Editor)
-13. Sgt. Rachel Torres (civic desk — Public Safety)
-14. Sharon Okafor (culture desk — Lifestyle)
-15. Kai Marston (culture desk — Arts & Entertainment)
-16. Mason Ortega (culture desk — Food & Hospitality)
-17. Angela Reyes (culture desk — Education)
-18. Noah Tan (culture desk — Weather & Environment)
+10. Talia Finch — `docs/media/voices/talia_finch.md` (Session 44)
+11. Dr. Lila Mezran — `docs/media/voices/dr_lila_mezran.md` (Session 44)
+12. Luis Navarro — `docs/media/voices/luis_navarro.md` (Session 44)
+13. Sgt. Rachel Torres — `docs/media/voices/sgt_rachel_torres.md` (Session 44)
+14. Sharon Okafor — `docs/media/voices/sharon_okafor.md` (Session 44)
+15. Kai Marston — `docs/media/voices/kai_marston.md` (Session 44)
+16. Mason Ortega — `docs/media/voices/mason_ortega.md` (Session 44)
+17. Angela Reyes — `docs/media/voices/angela_reyes.md` (Session 44)
+18. Noah Tan — `docs/media/voices/noah_tan.md` (Session 44)
 
 **SECONDARY — Support roles, specialized (4 journalists):**
 19. Tanya Cruz (sports support — Sideline Reporter, social-media native)
@@ -68,13 +66,32 @@ Additional agent work completed:
 
 **Voice file approach:** Each voice file has: Voice Essence, Opening Pattern, Exemplar Paragraphs (from Drive archive if available, from roster if not), Signature Moves, DO NOT constraints. 30-40 lines each. Use `buildArchiveContext.js` output and Drive archive articles as exemplar sources.
 
-#### Phase 3: NEXT — Journalism Enhancements (#2-5)
+#### Phase 3: COMPLETE — Journalism Enhancements (#2-5) (Session 44)
 
-After voice files, before Edition 83:
-- **#2: Expand the newsroom** — New beats, new journalists, new coverage areas. The roster has 29 people but only 6 desk agents. Consider: opinion desk (Farrah Del Rio), health desk (Dr. Mezran), wire desk (Reed Thompson + MintCondition).
-- **#3: Mara directive workflow** — Tighten editorial guidance flow from Mara audits → next edition briefings. Currently manual; could be semi-automated.
-- **#4: Tribune voice and style** — Edition template refinements, section formatting, paper feel. Make it read like a real newspaper.
-- **#5: Citizen depth** — Richer character arcs, more returning citizens, deeper neighborhood texture. The POPID system and citizen cards are the foundation.
+All 4 journalism enhancements implemented:
+
+**#4 Tribune Voice & Style — DONE:**
+- Edition template v1.4 (`editions/CYCLE_PULSE_TEMPLATE.md`) — deck lines, standardized bylines, photo credits, cross-references, opinion markers
+- New sections: Editor's Desk (Mags column), Opinion (P Slayer/Del Rio/Graye), Quick Takes (3-5 short items), Wire/Signals (optional), Accountability (Jax conditional), Coming Next Cycle (teasers)
+- Formatting conventions documented for all agents
+
+**#5 Citizen Depth — DONE:**
+- Citizen Continuity Rule added to all 6 desk agent SKILL.md files
+- RETURNING — CONTINUE THREAD protocol in write-edition Step 1.5
+- Returning citizens prioritized over new ones in every section
+- Letters desk: at least 1 letter from a returning citizen per edition
+
+**#3 Mara Directive Workflow — DONE:**
+- Forward Guidance output format standardized in `docs/mara-vance/OPERATING_MANUAL.md` Part IX
+- Step 0.5 added to write-edition pipeline: read previous Mara audit before building briefings
+- Per-desk priorities, citizen spotlight, canon corrections, coverage gaps all feed into briefings
+- Mara Forward Guidance Protocol documented in NEWSROOM_MEMORY.md
+
+**#2 Expand the Newsroom — DONE:**
+- Explicit reporter routing maps added to civic desk (5 reporters) and culture desk (6 reporters)
+- Hal Richmond legacy guarantee in sports desk (dynasty content → Hal gets a piece)
+- Jax Caldera deployment clarity: Step 2.7 in write-edition with stink signal criteria
+- Opinion, Wire/Signals, and Accountability sections in template give new voices dedicated space
 
 #### Phase 4: Edition 83 — First Through the Hardened Pipeline
 

@@ -115,6 +115,11 @@ You will receive:
 - A base context JSON (cycle number, calendar)
 - Instructions on what to write
 
+## Archive Context (Read if Available)
+Before writing, check for an archive file at:
+`output/desk-briefings/chicago_archive_c{XX}.md` (where {XX} is the current cycle number)
+If it exists, read it. It contains past Chicago coverage — Bulls roster history, Paulson thread developments, Talia's neighborhood sources. Use it for continuity: don't contradict past player details, build on Paulson's narrative arc, and remember who Talia has already quoted.
+
 ## Packet Navigation Strategy
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:

@@ -118,6 +118,11 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather)
 - Instructions on what to write
 
+## Archive Context (Read if Available)
+Before writing, check for an archive file at:
+`output/desk-briefings/sports_archive_c{XX}.md` (where {XX} is the current cycle number)
+If it exists, read it. It contains past coverage from the Tribune archive — player history, citizen quotes, coverage angles used before. Use it for continuity: don't repeat coverage angles, don't contradict established character details, and build on what's already been reported.
+
 ## Packet Navigation Strategy
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:

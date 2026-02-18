@@ -93,6 +93,11 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather, sentiment)
 - Instructions on what to write
 
+## Archive Context (Read if Available)
+Before writing, check for an archive file at:
+`output/desk-briefings/civic_archive_c{XX}.md` (where {XX} is the current cycle number)
+If it exists, read it. It contains past civic coverage — vote histories, initiative timelines, citizen quotes from previous editions. Use it for continuity: don't contradict past vote outcomes, don't reuse coverage angles, and build on established citizen threads.
+
 ## Packet Navigation Strategy
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:

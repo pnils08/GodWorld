@@ -74,6 +74,11 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather)
 - Instructions on what to write
 
+## Archive Context (Read if Available)
+Before writing, check for an archive file at:
+`output/desk-briefings/letters_archive_c{XX}.md` (where {XX} is the current cycle number)
+If it exists, read it. It contains past citizen letters and voice patterns. Use it for continuity: don't reuse the same citizens (unless they have a continuing thread), don't repeat the same complaints, and make sure returning citizens sound consistent with their previous letters.
+
 ## Packet Navigation Strategy
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:

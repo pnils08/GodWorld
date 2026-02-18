@@ -91,6 +91,11 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather, holidays, season)
 - Instructions on what to write
 
+## Archive Context (Read if Available)
+Before writing, check for an archive file at:
+`output/desk-briefings/culture_archive_c{XX}.md` (where {XX} is the current cycle number)
+If it exists, read it. It contains past culture coverage — neighborhood scenes, citizen quotes, cultural entity history. Use it for continuity: don't reuse the same neighborhood angles, don't contradict citizen details, and build on established community threads.
+
 ## Packet Navigation Strategy
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:

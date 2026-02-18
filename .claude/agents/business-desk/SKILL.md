@@ -58,6 +58,11 @@ You will receive:
 - A base context JSON (cycle number, calendar, retail load, economic influence, nightlife data)
 - Instructions on what to write
 
+## Archive Context (Read if Available)
+Before writing, check for an archive file at:
+`output/desk-briefings/business_archive_c{XX}.md` (where {XX} is the current cycle number)
+If it exists, read it. It contains past business coverage — economic trends, business owners Jordan has sourced, commercial corridor angles. Use it for continuity: don't repeat the same economic observations, build on established business owner threads, and verify initiative amounts match past reporting.
+
 ## Packet Navigation Strategy
 
 **READ THE SUMMARY FIRST.** Your desk has two packet files:

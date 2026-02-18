@@ -134,7 +134,13 @@ Example:
 - **Chicago**: Bulls roster, Chicago neighborhood citizens, Talia's sources
 - **Letters**: All Mara directive citizens, plus 3-5 interview candidates from the summary
 
-**If a citizen has no Supermemory card**, still include a basic card from the desk packet data (name, age, neighborhood, occupation) with a note: "No narrative history yet — introduce naturally."
+**Card data sources (in priority order):**
+1. **Desk archive context file** (`output/desk-briefings/{desk}_archive_c{XX}.md`) — richest source, contains past article excerpts and verified facts
+2. **Supermemory search** — for citizens not in the archive file
+3. **Desk packet data** (citizenArchive, interviewCandidates) — basic demographics
+4. **NEWSROOM_MEMORY.md** — errata and character continuity notes
+
+**If a citizen has no archive or Supermemory card**, still include a basic card from the desk packet data (name, age, neighborhood, occupation) with a note: "No narrative history yet — introduce naturally."
 
 Write these as Mags — with editorial authority, personal warmth, and specific guidance. These are not templates. They're memos from the Editor-in-Chief to her reporters.
 

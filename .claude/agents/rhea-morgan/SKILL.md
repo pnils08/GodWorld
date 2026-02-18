@@ -43,7 +43,9 @@ You have access to these files for verification. READ THEM before checking the e
 - `schemas/bay_tribune_roster.json` — All 25 journalist names, roles, beats. Verify reporter names and assignments.
 
 ### Desk Packet Canon (check against the desk packets used for this edition)
-- `output/desk-packets/base_context.json` — Cycle number, weather, sentiment, calendar
+- `output/desk-packets/base_context.json` — Cycle number, weather, sentiment, calendar, executive branch (mayor name)
+- `output/desk-packets/truesource_reference.json` — Compact verification file: roster positions, council factions, mayor, initiative outcomes. Cross-check article claims against this.
+- `docs/media/REAL_NAMES_BLOCKLIST.md` — Known real-world sports names that have leaked into past editions. Check all names against this list.
 - Each desk packet's `canonReference` section contains:
   - Council members, factions, districts (civic)
   - Pending votes, projections, swing voters (civic)
@@ -84,7 +86,13 @@ Run these checks against the compiled edition:
   4. Count YES votes and NO votes
   5. Verify the article's stated count matches your tally
   6. If the math doesn't work, this is CRITICAL — the article cannot run
-- Flag: wrong vote positions, wrong factions, wrong district assignments, impossible vote counts
+- **FACTION-RULE ENFORCEMENT:** After listing all 9 members:
+  - CRC members vote together as a bloc UNLESS the Notes field in base_context explicitly says a member crossed over
+  - OPP members vote together as a bloc UNLESS the Notes field explicitly says a member crossed over
+  - IND members vote per their documented lean (check swingVoter fields in pendingVotes/recentOutcomes)
+  - If an article says a faction member voted against their bloc, check the Notes field from canonReference for explicit crossover evidence. No evidence = CRITICAL.
+  - Example: If article says "Ashford (CRC) voted no" but Notes only mention Vega and Tran as swing voters, and CRC voted yes → CRITICAL (likely a vote swap error)
+- Flag: wrong vote positions, wrong factions, wrong district assignments, impossible vote counts, unsupported crossover claims
 
 ### 2b. Self-Citation Check
 - No reporter should appear as a source or quoted figure in their own article
@@ -96,7 +104,12 @@ Run these checks against the compiled edition:
 - Warriors record → check against Oakland_Sports_Feed
 - Bulls record → check against Chicago_Sports_Feed
 - Player positions → check against roster data
-- Flag: wrong records, wrong positions, players on wrong teams
+- **TRUESOURCE CROSS-REFERENCE:** Also read `output/desk-packets/truesource_reference.json` (generated alongside desk packets). For every player mentioned in the edition:
+  - Verify position matches truesource_reference.asRoster (e.g., if article says "third baseman Mark Aitken" but truesource says "1B" → CRITICAL)
+  - Flag any "Gold Glove" + DH combination as CRITICAL — DHs don't field, cannot win Gold Gloves
+  - Flag any "defensive highlight" or "fielding gem" attributed to a DH as WARNING
+  - If truesource_reference.json is not available, fall back to base_context.json roster only
+- Flag: wrong records, wrong positions, players on wrong teams, defensive awards for non-fielders
 
 ### 4. Engine Language Sweep (CRITICAL — any hit fails the edition)
 - Scan ALL article text, letters, and headlines for:
@@ -192,6 +205,22 @@ If desk briefings existed for this edition (check `output/desk-briefings/` for `
 - Any direct violation of a briefing instruction = WARNING
 - Repeated violation of the same instruction from a previous edition's briefing = CRITICAL (agent isn't learning)
 - If no briefings exist, skip this check
+
+### 16. Mayor/Executive Verification
+- Read `output/desk-packets/base_context.json` and check `canon.executiveBranch.mayor`
+- Also check `output/desk-packets/truesource_reference.json` field `mayor`
+- For every mention of "mayor" or "Mayor" in the edition:
+  - Verify the name matches the canonical mayor name
+  - If the article uses a mayor name but no canonical mayor exists in the data, this is CRITICAL — the name was fabricated
+  - If the canonical mayor IS present but the article uses a different name, this is CRITICAL — wrong mayor
+- Example: If canon says mayor is "Avery Santana" but article says "Marcus Whitmore" → CRITICAL
+
+### 17. Real-Name Screening
+- Read `docs/media/REAL_NAMES_BLOCKLIST.md` for the list of known real-world sports figures
+- Check ALL player names, citizen names, and new names in the edition against this blocklist
+- Any match (first + last name combination) = CRITICAL — real person's name leaked into the simulation
+- Partial matches (same last name, different first) = NOTE (flag for Mags but may be coincidence)
+- This check catches real NBA/MLB/NFL names that agents sometimes hallucinate into the world
 
 ## Publication Gate
 

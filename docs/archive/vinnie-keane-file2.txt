@@ -1,0 +1,28 @@
+[Document Title]: The Wedding Chronicle – Scene I: “Light Over San Sequoia”
+[Archive Collection]: The Richmond Archive / Calm and the Storm Continuity Files
+[Linked Header]: Wedding_Chronicle_Draft_Header_Keane_Olsen.txt
+[POPID-Primary]: POP-00001 (Vinnie Keane)
+[POPID-Secondary]: POP-00002 (Amara Olsen)
+[Author]: Hal Richmond
+[Created]: 2025-11-08
+[File Type]: Narrative Chronicle Entry
+[Status]: DRAFT ACTIVE
+
+=== SCENE I: “LIGHT OVER SAN SEQUOIA” ===
+
+The evening air in San Sequoia moved like a melody — slow, warm, and measured. The Keane wedding gathered not just guests but witnesses to a kind of quiet legacy in motion. Beneath the glow of lanterns, strung between ivy-clad walls and soft oak beams, Amara Olsen took her place at the grand piano.
+
+Her fingers glided across the keys with a grace born of years and family — the eldest of eight, forever the example, forever the harmony that others followed. The tune she played was her own composition, one she had written in the long months between Vinnie’s road trips and the cold nights of empty ballparks. It was called *“The Seventh Inning Sky.”*
+
+Vinnie Keane stood at the terrace edge, still in disbelief that a man who’d spent half his life under stadium lights could ever be this nervous. For all his championships and walk-offs, this was different. This was life — not victory. His suit hung crisp, his tie slightly crooked, and his eyes lingered on Amara with the same focus he once reserved for curveballs.
+
+Anthony Raines sat near the back, notebook half-open, a half-smile across his face. P Slayer, camera over his shoulder, caught the moment — not the ceremony, but the faces. Benji Dillon laughed with Isley Kelley, and Mark Aitken whispered something sharp and clever to Darrin Davis, who clinked his glass in reply. Even Hal Richmond, seated beside Elise, leaned forward, the pen of a lifetime trembling slightly in his hand.
+
+In that moment, Oakland’s dynasty — its men, their wives, their children — all converged in something real. Something that no box score could measure.
+
+And when the vows began, it wasn’t about baseball. It was about the quiet sound of a woman’s voice, the warmth of a man’s hand, and the promise that every ending was only the start of another song.
+
+=== END SCENE I ===
+
+[Notes for Continuity]:
+Scene I establishes tone and emotional linkage between dynasty era and family genesis. References to primary and secondary POPIDs validate mirror import. Secondary record (Amara) marks emotional anchor. Scene written in Hal Richmond’s reflective narration format.

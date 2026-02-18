@@ -1,9 +1,16 @@
 #!/usr/bin/env node
 /**
- * buildDeskPackets.js v1.5
+ * buildDeskPackets.js v1.7
  *
  * Pulls live data from Google Sheets and splits into per-desk JSON packets
  * for independent agent processing in the Media Room.
+ *
+ * v1.7 Changes:
+ * - Executive Branch canon — pulls mayor and deputy mayor from Civic_Office_Ledger
+ *   into canon.executiveBranch. Agents and Rhea now have canonical mayor name.
+ * - TrueSource Reference — generates truesource_reference.json alongside base_context.
+ *   Compact verification file with roster positions, council factions, mayor, initiatives.
+ *   Used by Rhea Morgan for cross-checking article claims.
  *
  * v1.5 Changes:
  * - Sports Feed Digest — parses raw feed entries into structured intelligence:
@@ -47,6 +54,7 @@
  * Writes:
  *   /tmp/desk_packets/{desk}_c{XX}.json  (one per desk)
  *   /tmp/desk_packets/base_context.json
+ *   /tmp/desk_packets/truesource_reference.json
  *   /tmp/desk_packets/manifest.json
  */
 
@@ -76,7 +84,7 @@ const DESKS = {
       'initiative', 'mayor', 'city hall', 'opoa', 'ramirez', 'district',
       'household', 'rent burden', 'housing', 'eviction'
     ],
-    canonSections: ['council', 'pendingVotes', 'statusAlerts', 'recentOutcomes'],
+    canonSections: ['council', 'pendingVotes', 'statusAlerts', 'recentOutcomes', 'executiveBranch'],
     getsSportsFeeds: false,
     getsMara: true
   },
@@ -591,6 +599,36 @@ function generateDeskSummary(packet, deskId, cycle) {
   };
 
   return summary;
+}
+
+function buildExecutiveBranch(civicOfficers) {
+  var mayor = null;
+  var deputyMayor = null;
+  civicOfficers.forEach(function(o) {
+    var title = (o.Title || '').toLowerCase();
+    if (title.indexOf('mayor') !== -1 && title.indexOf('deputy') === -1) {
+      mayor = {
+        name: o.Holder || '',
+        title: o.Title || '',
+        popId: o.PopId || '',
+        status: o.Status || 'active',
+        approvalRating: o.Approval || ''
+      };
+    } else if (title.indexOf('deputy mayor') !== -1) {
+      deputyMayor = {
+        name: o.Holder || '',
+        title: o.Title || '',
+        popId: o.PopId || '',
+        status: o.Status || 'active'
+      };
+    }
+  });
+  return {
+    mayor: mayor ? mayor.name : '',
+    mayorDetail: mayor,
+    deputyMayor: deputyMayor ? deputyMayor.name : '',
+    deputyMayorDetail: deputyMayor
+  };
 }
 
 function buildStatusAlerts(civicOfficers) {
@@ -1543,6 +1581,7 @@ async function main() {
     pendingVotes: buildPendingVotes(initiatives),
     statusAlerts: buildStatusAlerts(civicOfficers),
     recentOutcomes: buildRecentOutcomes(initiatives),
+    executiveBranch: buildExecutiveBranch(civicOfficers),
     asRoster: buildAsRoster(simLedger),
     bullsRoster: buildBullsRoster(simLedger, chicagoCitizens, allChiSports),
     culturalEntities: buildCulturalEntitiesCanon(culturalLedger),
@@ -1553,6 +1592,7 @@ async function main() {
   console.log('  Council members:', canon.council.length);
   console.log('  Pending votes:', canon.pendingVotes.length);
   console.log('  Status alerts:', canon.statusAlerts.length);
+  console.log('  Executive branch — Mayor:', canon.executiveBranch.mayor || '(not found)');
   console.log('  A\'s roster:', canon.asRoster.length);
   console.log('  Bulls roster:', canon.bullsRoster.length);
   console.log('  Cultural entities:', canon.culturalEntities.length);
@@ -1565,7 +1605,7 @@ async function main() {
   var manifest = {
     cycle: CYCLE,
     generated: new Date().toISOString(),
-    generator: 'buildDeskPackets v1.6',
+    generator: 'buildDeskPackets v1.7',
     packets: []
   };
 
@@ -1860,10 +1900,30 @@ async function main() {
     }
   }, null, 2));
 
+  // Write TrueSource reference (compact verification file for Rhea Morgan)
+  var truesourceRef = {
+    generated: new Date().toISOString(),
+    cycle: CYCLE,
+    mayor: canon.executiveBranch.mayor,
+    executiveBranch: canon.executiveBranch,
+    council: canon.council.map(function(c) {
+      return { name: c.member, district: c.district, faction: c.faction, status: c.status };
+    }),
+    asRoster: canon.asRoster.map(function(p) {
+      return { name: p.name, position: p.roleType, popId: p.popId };
+    }),
+    initiatives: canon.pendingVotes.concat(canon.recentOutcomes).map(function(i) {
+      return { name: i.name, id: i.initiativeId, status: i.status, voteBreakdown: i.voteBreakdown || i.notes || '' };
+    })
+  };
+  var truesourceFile = path.join(OUTPUT_DIR, 'truesource_reference.json');
+  fs.writeFileSync(truesourceFile, JSON.stringify(truesourceRef, null, 2));
+  console.log('\nTrueSource reference: ' + truesourceFile);
+
   // Write full citizen archive (standalone reference for agents)
   var archiveFile = path.join(OUTPUT_DIR, 'citizen_archive.json');
   fs.writeFileSync(archiveFile, JSON.stringify(popIdIndex, null, 2));
-  console.log('\nCitizen archive: ' + Object.keys(popIdIndex).length + ' citizens → ' + archiveFile);
+  console.log('Citizen archive: ' + Object.keys(popIdIndex).length + ' citizens → ' + archiveFile);
 
   // Add newsroom memory path to manifest
   manifest.newsroomMemoryPath = path.join(PROJECT_ROOT, 'docs/mags-corliss/NEWSROOM_MEMORY.md');

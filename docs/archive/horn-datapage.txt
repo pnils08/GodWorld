@@ -1,0 +1,56 @@
+
+POPID: POP-00022
+Name: Danny Horn
+Alias: "The Quiet Center"
+Tier: 1
+Role Type: Core
+Year: 2040
+
+--- BIOGRAPHICAL DATA ---
+Birth Year: 2011
+Birthplace: New Jersey, USA (per TrueSource)
+Height: 6'0"
+Weight: 209 lbs (per TrueSource)
+Bats/Throws: Switch / Left (per TrueSource game data)
+Drafted: Round 4, 2020 (per TrueSource)
+MLB Service Time: 6.135 years
+Age: 29 (as of 2040)
+
+--- PROFESSIONAL DATA ---
+Team: Oakland Athletics
+Position: CF (Center Fielder)
+Overall Rating: 98 (ELITE - highest in current roster)
+Potential: A
+Known For: Elite defense, breakout 2039 season, perfectionist mentality, steady leadership.
+Nickname: "The Quiet Center"
+Mike Paulson Quote: "Best player in the league"
+Notable Achievements: Silver Slugger 2039, 2× All-Star (2038-2039), elite defensive metrics
+Legacy Status: New era leader, bridging Dynasty Five to next generation, emerging superstar.
+
+--- PROFESSIONAL TIMELINE ---
+2033-2034: Minnesota Twins (early career struggles)
+2035-2039: Oakland Athletics (development to stardom)
+2039: Breakout season (.322 AVG, 43 HR, 103 RBI, 28 SB)
+2040-2044: Peak contract years ($37.8M AAV - highest on team)
+
+--- IMAGE DATA REFERENCE ---
+POPID_Image_Link: /mnt/data/A_digital_photograph_of_a_professional_baseball_pl.png
+POPID_Creation_Stamp: 2025-11-09 09:19:09
+Image_Type: Portrait / 2040 ID Style
+Visual_Profile: Short brown hair, full beard, blue eyes, wearing a dark grey suit and green tie, poised expression symbolizing quiet strength. A's cap and jersey portrait variant with intense focus.
+
+--- COMMUNITY ENGAGEMENT ---
+Neighborhood: Temescal
+Hosts wiffleball tournaments (Cycle 79-80 documented)
+Deacon Seymour made first public appearances at Horn's tournaments
+Personal wellness advocate (took time for wellness 1/30/26)
+
+--- NOTES ---
+This record represents the canonical likeness and metadata structure for Danny Horn as of simulation year 2040.
+All derivative works or recreations should reference POP-00022 for visual and identity consistency within the Mirror System.
+
+Danny Horn represents the "new era" of Oakland excellence - the bridge between the Dynasty Five championship years and the next generation of A's greatness.
+
+--- LEGACY REFERENCE ---
+Previous POPID: POP-00007 (pre-Sheets system)
+Current POPID: POP-00022 (Simulation_Ledger canonical)

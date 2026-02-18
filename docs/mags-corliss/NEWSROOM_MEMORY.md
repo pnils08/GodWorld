@@ -183,7 +183,7 @@ These were invented in Editions 80-81. Do not use them:
 - Dr. Leanne Wu: Director of Sustainability who prepared the Baylight DEIR. New canon figure as of Edition 81.
 - West Oakland Stabilization Fund: Passed full council 6-3 in C78 (NOT "passed committee"). Disbursement window is open. Money hasn't moved yet. Do not describe as pending or awaiting a floor vote.
 - Deacon Seymour: A's Manager, first season. Replaced Mike Kinder. RESOLVED — Seymour is canon going forward.
-- Cy Newell: RIGHT-HANDED pitcher (S/R). P Slayer's article erroneously called him a "left-hander." TrueSource DataPage is authoritative. Do not describe as left-handed.
+- Cy Newell: RIGHT-HANDED pitcher (S/R). TrueSource DataPage is authoritative. Do not describe as left-handed.
 - John Ellis: Age 24 (not 28). P Slayer wrote "28-year-old rookie phenom" — wrong. TrueSource says 24. Drafted Round 2, 2033.
 - Darrin Davis: Age 33 at time of ACL injury (August 5, 2040). Paulson ruling. TrueSource DataPage says 31 — needs updating. Published articles (P Slayer) saying 33 are correct.
 - Danny Horn stats: .322/43HR = 2039 full season. .288/23HR = 2040 mid-season at time of Davis injury. Both correct. Always label which season.
@@ -286,7 +286,8 @@ Citizens named in early articles who should be tracked if they reappear:
 
 All five archive contradictions resolved. Paulson ruled on Newell and Davis. TrueSource DataPage is authoritative unless Paulson overrides.
 
-1. **Cy Newell handedness**: RIGHT-HANDED. TrueSource DataPage (S/R) is canon. P Slayer's article calling him a "left-hander" is errata — do not repeat.
+1. **Cy Newell handedness**: RIGHT-HANDED. TrueSource DataPage (S/R) is canon.
+NOTE: **Benji Dillon is LEFT-HANDED.** Paulson ruling (Session 42) overrides TrueSource. Hal's "The Left Hand That Defined an Era" is correct. P Slayer's references to Dillon as a lefty are correct. Previous Session 34 correction was wrong — that applied to Newell, not Dillon.
 2. **Danny Horn stats**: NO CONTRADICTION. .322/43HR is his 2039 full season. .288/23HR is his 2040 mid-season at time of Davis injury. Always date-label Horn's stats.
 3. **John Ellis age**: 24. TrueSource DataPage is authoritative. P Slayer wrote "28-year-old rookie phenom" — factual error.
 4. **Darrin Davis age at injury**: 33. Paulson ruling. P Slayer's article is correct. TrueSource DataPage (31) needs updating.

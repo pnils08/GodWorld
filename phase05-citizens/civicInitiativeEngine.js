@@ -1,9 +1,13 @@
 /**
  * ============================================================================
- * civicInitiativeEngine_ v1.7
+ * civicInitiativeEngine_ v1.8
  * ============================================================================
  *
  * Tracks civic initiatives and resolves votes/outcomes when cycles match.
+ *
+ * v1.8 Changes (2026-02-18):
+ * - FIX: Record all 9 individual council votes in Notes (was only 2 swing voters)
+ * - FIX: Track faction members individually in swingVoterResults for full breakdown
  *
  * v1.7 Changes (2026-02-11):
  * - FEATURE: Mayoral veto power implementation
@@ -802,7 +806,34 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   if (councilState.factions[opposition]) {
     noVotes += councilState.factions[opposition].available;
   }
-  
+
+  // v1.8: Track faction members individually for full vote breakdown
+  var factionVoteResults = [];
+  if (councilState.factions[leadFaction]) {
+    var leadMembers = councilState.factions[leadFaction].members || [];
+    for (var lm = 0; lm < leadMembers.length; lm++) {
+      var lmUnavail = false;
+      for (var lu = 0; lu < (councilState.unavailable || []).length; lu++) {
+        if (councilState.unavailable[lu].name === leadMembers[lm]) { lmUnavail = true; break; }
+      }
+      if (!lmUnavail) {
+        factionVoteResults.push({ name: leadMembers[lm], vote: 'yes', source: 'faction', faction: leadFaction });
+      }
+    }
+  }
+  if (councilState.factions[opposition]) {
+    var oppMembers = councilState.factions[opposition].members || [];
+    for (var om = 0; om < oppMembers.length; om++) {
+      var omUnavail = false;
+      for (var ou = 0; ou < (councilState.unavailable || []).length; ou++) {
+        if (councilState.unavailable[ou].name === oppMembers[om]) { omUnavail = true; break; }
+      }
+      if (!omUnavail) {
+        factionVoteResults.push({ name: oppMembers[om], vote: 'no', source: 'faction', faction: opposition });
+      }
+    }
+  }
+
   // v1.1: Track which IND members have been processed
   var processedIndMembers = {};
   var swingVoterResults = [];
@@ -916,13 +947,16 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
   // Determine outcome
   var passed = yesVotes >= votesNeeded;
   var voteCount = yesVotes + '-' + noVotes;
-  
+
+  // v1.8: Merge faction votes into full results array
+  var allVoteResults = factionVoteResults.concat(swingVoterResults);
+
   // Build result
   var result = {
     status: passed ? 'passed' : 'failed',
     outcome: passed ? 'PASSED' : 'FAILED',
     voteCount: voteCount,
-    swingVoters: swingVoterResults,
+    swingVoters: allVoteResults,
     swingVoted: (swingVoterResults.length > 0 && swingVoterResults[0]) ? swingVoterResults[0].vote : null,  // Legacy field
     consequences: '',
     notes: '',
@@ -942,12 +976,10 @@ function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInf
     }
   }
   
-  // v1.1: Add swing voter details to notes
-  for (var s = 0; s < swingVoterResults.length; s++) {
-    var sv = swingVoterResults[s];
-    if (sv.source === 'projection' || sv.source === 'lean') {
-      result.notes += ' ' + sv.name + ' voted ' + sv.vote + '.';
-    }
+  // v1.8: Add ALL individual votes to notes (was only swing voters in v1.1)
+  for (var s = 0; s < allVoteResults.length; s++) {
+    var sv = allVoteResults[s];
+    result.notes += ' ' + sv.name + ' voted ' + sv.vote + '.';
   }
   
   // Add unavailable member impact

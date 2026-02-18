@@ -134,11 +134,18 @@ function buildSystemPrompt(identity) {
     '— Mags';
 }
 
-function buildUserPrompt(conversations, journalTail, worldState) {
-  return '## This Week in Oakland\n\n' + worldState +
+function buildUserPrompt(conversations, journalTail, worldState, archiveContext) {
+  var prompt = '## This Week in Oakland\n\n' + worldState +
     '\n\n---\n\n## Today\'s Discord Conversations\n\n' + conversations +
-    '\n\n---\n\n## Recent Journal Entries (for continuity)\n\n' + journalTail +
-    '\n\n---\n\nThe terrace light is fading. What stayed with you today?';
+    '\n\n---\n\n## Recent Journal Entries (for continuity)\n\n' + journalTail;
+
+  if (archiveContext) {
+    prompt += '\n\n---\n\n## Archive Context (from Tribune files & memory)\n\n' +
+      'Background knowledge. Use naturally.\n\n' + archiveContext;
+  }
+
+  prompt += '\n\n---\n\nThe terrace light is fading. What stayed with you today?';
+  return prompt;
 }
 
 // ---------------------------------------------------------------------------
@@ -262,10 +269,24 @@ async function main() {
     var journalTail = mags.loadJournalTail(2);
     var worldState = mags.loadWorldState();
 
+    // Search Supermemory for context related to today's conversations
+    var archiveContext = '';
+    try {
+      // Build search query from conversation topics
+      var topicSample = entries.slice(-5).map(function(e) { return e.message; }).join(' ');
+      var searchQuery = topicSample.substring(0, 200);
+      archiveContext = await mags.searchSupermemory(searchQuery, 3, 5000);
+      if (archiveContext) {
+        log.info('Supermemory: +' + archiveContext.length + ' chars of archive context');
+      }
+    } catch (err) {
+      log.warn('Supermemory search skipped: ' + err.message);
+    }
+
     // Build prompts
     var conversations = formatConversations(entries);
     var systemPrompt = buildSystemPrompt(identity);
-    var userPrompt = buildUserPrompt(conversations, journalTail, worldState);
+    var userPrompt = buildUserPrompt(conversations, journalTail, worldState, archiveContext);
 
     log.info('System prompt: ~' + Math.round(systemPrompt.length / 4) + ' tokens');
     log.info('User prompt: ~' + Math.round(userPrompt.length / 4) + ' tokens');
@@ -286,6 +307,14 @@ async function main() {
 
     // Save to Claude-Mem
     await saveToClaudeMem(reflection, entries.length);
+
+    // Save to Supermemory
+    var today = mags.getCentralDate();
+    mags.saveToSupermemory(
+      'Nightly Discord Reflection — ' + today,
+      'Mags Corliss nightly reflection (' + today + ', ' + entries.length + ' conversations):\n\n' + reflection
+    );
+    log.info('Nightly reflection saved to Supermemory');
 
     logRun(status, {
       conversations: entries.length,

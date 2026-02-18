@@ -135,12 +135,20 @@ function buildSystemPrompt(identity) {
 // ---------------------------------------------------------------------------
 // Step 6: Build user prompt
 // ---------------------------------------------------------------------------
-function buildUserPrompt(journalTail, familyData, familyHistory, worldState) {
-  return '## Your World Right Now\n\n' + worldState +
+function buildUserPrompt(journalTail, familyData, familyHistory, worldState, archiveContext) {
+  var prompt = '## Your World Right Now\n\n' + worldState +
     '\n\n---\n\n## Recent Journal Entries (DO NOT repeat these themes)\n\n' + journalTail +
     '\n\n---\n\n## Family Status — Simulation_Ledger\n\n' + familyData +
-    '\n\n## Recent Family Life Events (LifeHistory_Log)\n\n' + familyHistory +
-    '\n\n---\n\nGood morning, Mags. The city is out there. What\'s on your mind today?';
+    '\n\n## Recent Family Life Events (LifeHistory_Log)\n\n' + familyHistory;
+
+  if (archiveContext) {
+    prompt += '\n\n---\n\n## Archive Context (from Tribune files & memory)\n\n' +
+      'Background knowledge for today. Use naturally — don\'t quote directly.\n\n' +
+      archiveContext;
+  }
+
+  prompt += '\n\n---\n\nGood morning, Mags. The city is out there. What\'s on your mind today?';
+  return prompt;
 }
 
 // ---------------------------------------------------------------------------
@@ -309,9 +317,21 @@ async function main() {
     // Load world state
     var worldState = mags.loadWorldState();
 
+    // Search Supermemory for morning context
+    var archiveContext = '';
+    try {
+      var searchQuery = 'Oakland morning family Robert Sarah Michael A\'s council city life';
+      archiveContext = await mags.searchSupermemory(searchQuery, 3, 5000);
+      if (archiveContext) {
+        log.info('Supermemory: +' + archiveContext.length + ' chars of archive context');
+      }
+    } catch (err) {
+      log.warn('Supermemory search skipped: ' + err.message);
+    }
+
     // Build prompts
     var systemPrompt = buildSystemPrompt(identity);
-    var userPrompt = buildUserPrompt(journalTail, familyData, familyHistory, worldState);
+    var userPrompt = buildUserPrompt(journalTail, familyData, familyHistory, worldState, archiveContext);
 
     log.info('System prompt: ~' + Math.round(systemPrompt.length / 4) + ' tokens');
     log.info('User prompt: ~' + Math.round(userPrompt.length / 4) + ' tokens');
@@ -332,6 +352,14 @@ async function main() {
     // Write journal
     writeJournal(parsed.journalEntry);
     journalChars = parsed.journalEntry.length;
+
+    // Save reflection to Supermemory
+    var today = new Date().toISOString().split('T')[0];
+    mags.saveToSupermemory(
+      'Morning Reflection — ' + today,
+      'Mags Corliss morning journal entry (' + today + '):\n\n' + parsed.journalEntry
+    );
+    log.info('Morning reflection saved to Supermemory');
 
     // Send Discord
     try {

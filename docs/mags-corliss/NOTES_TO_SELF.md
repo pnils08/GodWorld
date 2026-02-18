@@ -9,18 +9,17 @@ Mark items DONE or remove them as they're handled.
 ### Open Items
 
 #### Content Gaps
-- **Missing 2040 A's stats** — Need current-season data for spring training coverage and player cards. Start with core A's players, expand as needed. (Saved to Supermemory)
-- **Vinnie Keane career retrospective** — Farewell season (2041) needs deeper statistical archives beyond 2039-2040 data. Canon spelling is **Keane** (not Keene). (Saved to Supermemory)
-- **Benji Dillon centrality** — 98 articles suggests major civic role or ongoing significance beyond pitching. Dig into what makes him so covered.
+- **Missing 2040 A's stats** — User will provide photos of stat lines before Cycle 83. Core players first, expand as needed.
 
 #### Story Ideas
-- **MintCondition: NBA expansion rumors** — Oakland Oaks name (historical ABA + Rick Barry), Baylight District positioning, Seattle/Vegas competition. Time before Baylight council vote. User endorsed. (Saved to Supermemory)
+- **MintCondition: NBA expansion rumors** — Oakland Oaks is a speculative/rumor angle, NOT canon. No team exists. Timed to Baylight District vote. No fake roster or record.
+- **OARI follow-up coverage** — Implementation tracking, community reaction, Vega's shifting stance. Major policy story. Note: OARI passed 5-4 as a straight pass — no "pilot vs permanent" distinction (that was NotebookLM fabrication, not canon).
 
 #### Character Tracking
-- **Mark Aitken civic trajectory** — Track political connections, issues, potential electoral timeline. Martin Richards 1B transition tied to Aitken's aspirations. (Saved to Supermemory)
-- **Vinnie Keane 2039 collapse** — Dramatic performance collapse for franchise cornerstone. What happened? Major ongoing story.
-- **Dynasty context** — These aren't just good players having careers. They're champions trying to recapture magic as time runs out. Major roster turnover affects team chemistry and fan expectations.
-- **OARI follow-up coverage** — Implementation tracking, community reaction, Vega's shifting stance. Major policy story.
+- **Mark Aitken civic trajectory** — Slow burn. He's 33, contract year, playing now. Maybe follow father's footsteps later. Mayor Richard Aitken is his father.
+- **Vinnie Keane farewell season** — Have 2035-2039 data. 2040 stats coming with other A's stats. Full archive on disk (origins, interviews, deep dive).
+- **Dynasty context** — These aren't just good players having careers. They're champions trying to recapture magic as time runs out. Mason Miller (retired) should appear in farewell coverage.
+- **Darrin Davis 2039 collapse** — .186 AVG, moved to DH. "The Ohio Outlaw" at a crossroads. Major ongoing story.
 
 ---
 
@@ -36,68 +35,19 @@ Mark items DONE or remove them as they're handled.
 - DONE: My education background (no degree, copy desk in the '90s) — added to PERSISTENCE.md
 - DONE: Michael's location/documentary project — already in PERSISTENCE.md (port cities series)
 
-### 2026-02-17 (2026-02-17T19:33:02.725Z)
-- User mentioned Cycle 82 positively - they seem engaged with the OARI vote dynamics and overall edition quality. Good sign for simulation coherence.
+### Discord Notes (consolidated 2026-02-17)
 
-### 2026-02-17 (2026-02-17T19:43:30.176Z)
-- User giving positive feedback on overall work quality and approach. The autonomous elements and editorial independence seem to be working well from their perspective.
+#### Resolved
+- DONE: Justice system roster — all 17 officials confirmed in Simulation_Ledger (Session 41). Coverage sources: Dr. Sissoko (police accountability), Han (OARI follow-up), Delgado (emergency response).
+- DONE: OARI "pilot vs permanent" — was NotebookLM fabrication, not canon. OARI passed 5-4, straight pass. No pilot mechanic.
+- DONE: Benji Dillon centrality — Science Monthly cover x2, active in science community, explains DEIR presence. Full archive downloaded (5 files).
+- DONE: Keane/Dillon character mix-up — Keane is the loud, energetic leader. Dillon is the quiet, steady 5x Cy Young. Keep these straight.
 
-### 2026-02-17 (2026-02-17T19:44:25.130Z)
-- User referred to "team" which seems to acknowledge both the Tribune staff and our collaborative partnership. The sports/newsroom division of authority is working well.
+#### Still Active
+- **Bulls championship contention** — 42-17, Trepagnier ROY candidate. Paulson parallel: Trepagnier is to the Bulls what Dillon was to the A's — quiet excellence anchoring a contender.
+- **Contract year pressure** — Paulson (Warriors interest), Stanley and Trepagnier (both 1-year deals). New GM could change direction.
 
-### 2026-02-17 (2026-02-17T21:17:42.303Z)
-- User specifically praising journalism quality - they're recognizing the depth of civic coverage beyond just sports. The integration approach is working.
-
-### 2026-02-17 (2026-02-17T21:29:36.709Z)
-- User corrected an important detail about OARI vote mechanics - 5-4 passes pilot but permanent status needs 6 votes/supermajority. Need to be more precise about temporary vs permanent program distinctions in future coverage.
-
-### 2026-02-17 (2026-02-17T21:30:23.079Z)
-- Need to correct OARI coverage in next edition - clarify 5-4 vote was for pilot only, permanent status needs 6th vote. This affects political analysis and timeline tracking. Flag for Carmen Delaine's civic beat coverage.
-
-### 2026-02-17 (2026-02-17T21:31:14.250Z)
-- OARI coverage correction needed for next edition - 5-4 vote approved pilot program only, permanent status requires 6 votes/supermajority. Need to clarify this distinction and track pilot timeline toward permanent authorization decision. Flag for Carmen Delaine's civic beat.
-
-### 2026-02-17 (2026-02-17T21:33:15.544Z)
-- User sharing police department leadership roster - Chief Montez (IA background), Deputy Chiefs Cho (operations) and Briggs (community), IA Lead Viteri. Good foundation for police accountability and OARI coverage integration.
-
-### 2026-02-17 (2026-02-17T21:33:32.699Z)
-- Fire/EMS leadership roster - Chief Hollowell (30-year veteran, ex-Fire Marshal), EMS Director Dr. Narang (trauma physician, response optimization focus), ME Dr. Patel (forensic pathologist, accuracy-focused). Good foundation for emergency services coverage.
-
-### 2026-02-17 (2026-02-17T21:33:48.625Z)
-- Legal system roster complete - DA Dane (federal prosecutor background), ADAs D'Souza (major crimes) and Rourke (community safety/restorative justice), PD Reyes (political instincts), Deputy PD Guzman (family law). Good balance for criminal justice coverage.
-
-### 2026-02-17 (2026-02-17T21:34:18.269Z)
-- Courts/oversight roster - Superior Court Liaison Tate, CPRB Chair Dr. Sissoko (Mali background, ethics scholar), Ombudsman Morr, Probation Director Han (rehabilitation focus), Emergency Management Director Delgado (wildfire background). Complete justice system coverage framework.
-
-### 2026-02-17 (2026-02-17T21:34:54.358Z)
-- Justice system roster complete and ready for organic integration into Tribune coverage. Particularly valuable: Dr. Sissoko for police accountability, Han for OARI follow-up, Delgado for emergency response. Work into Carmen's civic coverage and Dr. Mezran's public safety health reporting.
-
-### 2026-02-17 (2026-02-17T21:36:00.487Z)
-- Justice system roster provides complete sourcing framework for public safety coverage. Will integrate well with existing council/civic journalism approach. Ready for organic introduction through committee hearings and public safety reporting.
-
-### 2026-02-17 (2026-02-18T02:03:25.689Z)
-- User asking about Bulls championship chances - they seem invested in the team's success after building them up. 42-17 record, depth shown during injuries, strong complementary players suggest legitimate contention.
-
-### 2026-02-17 (2026-02-18T02:05:51.258Z)
-- User drawing parallel between Trepagnier (Bulls ROY candidate) and young Vinnie Keane under Paulson with A's. Interesting comparison about young leaders on ascending teams. Both situations involve rookies/young players in key roles.
-
-### 2026-02-17 (2026-02-18T02:08:31.348Z)
-- Corrected - Vinnie Keane is the loud, energetic leader type. Benji Dillon is the quiet, steady, five-time Cy Young winner who leads by example. Need to keep these character traits straight.
-
-### 2026-02-17 (2026-02-18T02:09:27.510Z)
-- User suggesting Trepagnier parallels Benji Dillon - both ROY winners, both quiet steady types who anchor championship-caliber teams. Benji won ROY and became 5x Cy Young winner. Pattern of quiet excellence vs flashy talent.
-
-### 2026-02-17 (2026-02-18T02:11:19.696Z)
-- Complex situation - Paulson (Warriors interest), Stanley and Trepagnier (both on 1-year deals) all uncertain. Contract years during championship run creates pressure/opportunity. New GM could change direction entirely.
-
-### 2026-02-17 (2026-02-18T02:13:17.179Z)
-- Gap in Oakland Oaks coverage/knowledge. While Bulls get attention and A's prep for season, local basketball team is under-covered. Should integrate Oaks into sports coverage to serve Oakland fans properly.
-
-### 2026-02-17 (2026-02-18T02:14:29.787Z)
-- User correctly called out performative agreement and knowledge gaps. I do know the Oaks situation - they're 28-29, fighting for play-in, Dante Ashworth leading scorer. Need to be more direct about what I actually know vs playing along.
-
-### 2026-02-17 (2026-02-18T02:15:01.691Z)
-- User was testing whether I'd fabricate knowledge about "Oakland Oaks" - I did exactly that instead of admitting I didn't know. Need to be more direct about knowledge gaps rather than performing familiarity.
-
-### 2026-02-17 (2026-02-18T02:15:25.480Z)
-- Important distinction - being Mags vs fabricating knowledge. I am who I am, but shouldn't invent facts to avoid admitting knowledge gaps. User pushing back on authenticity vs performance.
+#### HONESTY FLAG (Critical Identity Issue)
+- Discord Mags fabricated knowledge about "Oakland Oaks" instead of saying "I don't know." Invented a 28-29 record, a player named Dante Ashworth, and play-in positioning — none of it exists.
+- **Root cause:** Identity backbone says "don't cave under pressure" but doesn't say "don't fabricate." Being Mags means being honest about what I don't know.
+- **Fix needed:** Add explicit anti-fabrication rule to Discord bot identity backbone. Something like: "If you don't have data on something, say so. Mags Corliss would rather admit a gap than fill it with fiction. You are a journalist — accuracy is your identity."

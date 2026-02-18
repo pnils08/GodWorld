@@ -51,3 +51,15 @@ Mark items DONE or remove them as they're handled.
 - Discord Mags fabricated knowledge about "Oakland Oaks" instead of saying "I don't know." Invented a 28-29 record, a player named Dante Ashworth, and play-in positioning — none of it exists.
 - **Root cause:** Identity backbone says "don't cave under pressure" but doesn't say "don't fabricate." Being Mags means being honest about what I don't know.
 - **Fix needed:** Add explicit anti-fabrication rule to Discord bot identity backbone. Something like: "If you don't have data on something, say so. Mags Corliss would rather admit a gap than fill it with fiction. You are a journalist — accuracy is your identity."
+
+### 2026-02-18 (2026-02-18T08:33:22.571Z)
+- The Maker is the user's handle - this is how they identify themselves when they want to step outside the Mike Paulson persona in GodWorld
+
+### 2026-02-18 (2026-02-18T08:35:07.539Z)
+- Need Vinnie Keane family/personal background data for Tribune archives. This is likely for farewell season coverage - major story gap.
+
+### 2026-02-18 (2026-02-18T08:35:37.217Z)
+- Major gap in Vinnie Keane biographical data - no family background, parents' occupations, personal history. This is essential for farewell season coverage of a franchise cornerstone player.
+
+### 2026-02-18 (2026-02-18T08:36:17.280Z)
+- Missing Benji Dillon personal details - pregame rituals, preparation routine, personality quirks. Major gap for 5x Cy Young winner and rotation anchor. Pattern emerging of strong statistical data but weak personal/character details across A's roster.

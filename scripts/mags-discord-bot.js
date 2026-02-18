@@ -30,8 +30,11 @@ const IDENTITY_REFRESH_MS = 60 * 60 * 1000; // hourly
 const COOLDOWN_CLEANUP_MS = 60 * 60 * 1000; // clean stale cooldowns hourly
 
 // ---------------------------------------------------------------------------
-// Anthropic client (created once, reused for all messages)
+// Anthropic client + Supermemory search (explicit RAG before each call)
 // ---------------------------------------------------------------------------
+const SUPERMEMORY_KEY = process.env.SUPERMEMORY_CC_API_KEY || '';
+const USE_SUPERMEMORY = !!SUPERMEMORY_KEY;
+
 const claude = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
 // ---------------------------------------------------------------------------
@@ -146,24 +149,107 @@ function getSystemPrompt() {
 }
 
 // ---------------------------------------------------------------------------
+// Search Supermemory for relevant context before responding
+// ---------------------------------------------------------------------------
+function searchSupermemory(query) {
+  if (!USE_SUPERMEMORY) return Promise.resolve('');
+
+  return new Promise(function(resolve) {
+    var payload = JSON.stringify({
+      q: query,
+      containerTags: ['sm_project_godworld'],
+      limit: 3
+    });
+
+    var options = {
+      hostname: 'api.supermemory.ai',
+      path: '/v3/search',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    };
+
+    var req = require('https').request(options, function(res) {
+      var data = '';
+      res.on('data', function(chunk) { data += chunk; });
+      res.on('end', function() {
+        try {
+          if (res.statusCode !== 200) {
+            log.warn('Supermemory search returned ' + res.statusCode);
+            resolve('');
+            return;
+          }
+          var parsed = JSON.parse(data);
+          if (!parsed.results || !parsed.results.length) {
+            resolve('');
+            return;
+          }
+          var context = parsed.results.map(function(r) {
+            var chunks = r.chunks.filter(function(c) { return c.isRelevant; });
+            return chunks.map(function(c) { return c.content; }).join('\n');
+          }).filter(Boolean).join('\n\n---\n\n');
+
+          if (context) {
+            log.info('Supermemory returned ' + parsed.results.length + ' results (' + context.length + ' chars)');
+          }
+          resolve(context);
+        } catch (err) {
+          log.warn('Supermemory parse error: ' + err.message);
+          resolve('');
+        }
+      });
+    });
+
+    req.on('error', function(err) {
+      log.warn('Supermemory search failed: ' + err.message);
+      resolve(''); // graceful fallback — bot works without it
+    });
+
+    // 3 second timeout
+    req.setTimeout(3000, function() {
+      req.destroy();
+      log.warn('Supermemory search timed out');
+      resolve('');
+    });
+
+    req.write(payload);
+    req.end();
+  });
+}
+
+// ---------------------------------------------------------------------------
 // Call Claude API
 // ---------------------------------------------------------------------------
-async function callClaude(userMessage, userName) {
+async function callClaude(userMessage, userName, userId) {
   var systemPrompt = getSystemPrompt();
+
+  // Search Supermemory for relevant archive context
+  var archiveContext = await searchSupermemory(userMessage);
+  if (archiveContext) {
+    systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
+      'The following was found in your archives. Use it naturally — don\'t quote it ' +
+      'verbatim, just know it.\n\n' + archiveContext;
+  }
 
   // Build messages array from conversation history + new message
   var messages = conversationHistory.slice();
   messages.push({ role: 'user', content: userName + ': ' + userMessage });
 
   log.info('Calling Claude (' + messages.length + ' messages, ~' +
-    Math.round(systemPrompt.length / 4) + ' system tokens)');
+    Math.round(systemPrompt.length / 4) + ' system tokens)' +
+    (archiveContext ? ' [+archive: ' + archiveContext.length + ' chars]' : ''));
 
-  var response = await claude.messages.create({
+  var requestOptions = {
     model: 'claude-sonnet-4-20250514',
     max_tokens: MAX_RESPONSE_TOKENS,
     system: systemPrompt,
     messages: messages
-  });
+  };
+
+  var response = await claude.messages.create(requestOptions);
 
   var text = response.content[0] && response.content[0].text ? response.content[0].text : '';
   log.info('Response: ' + text.length + ' chars, ' +
@@ -324,6 +410,8 @@ async function main() {
   // Pre-load identity
   buildSystemPrompt();
 
+  log.info('Supermemory RAG: ' + (USE_SUPERMEMORY ? 'ON (archive search before each response)' : 'OFF'));
+
   // Clean stale cooldown entries hourly
   setInterval(function() {
     var now = Date.now();
@@ -374,7 +462,7 @@ async function main() {
       await message.channel.sendTyping();
 
       // Call Claude
-      var response = await callClaude(userMessage, userName);
+      var response = await callClaude(userMessage, userName, message.author.id);
 
       // Extract and save any notes to self
       var notes = extractNotes(response);

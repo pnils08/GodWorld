@@ -1,0 +1,82 @@
+PLAYER INTAKE (Batter) — 2040 SEASON
+
+Name: Vinnie Keene
+Team: ATH
+Position: 3B
+Age: 36
+Overall: 61
+Bats/Throws: S/R
+Height/Weight: 5'9" / 184 lbs
+MLB Service: 16.000
+Drafted: Undrafted
+Secondary Position: 2B, SS
+Hitter Tendency: Whole Field
+Born: Massachusetts
+
+--------------------------------------------------
+
+2040 REGULAR SEASON
+
+G: 58
+PA: 224
+AB: 209
+R: 30
+H: 60
+2B: 7
+3B: 0
+HR: 14
+RBI: 40
+BB: 8
+SO: 35
+HBP: 6
+SF: 0
+SAC: 1
+GIDP: 7
+
+AVG: .287
+OBP: .332
+SLG: .522
+OPS: .854
+TB: 109
+
+SB: 7
+CS: 5
+SB%: .583
+
+--------------------------------------------------
+
+DEFENSE (2040)
+
+PO: 22
+A: 49
+E: 6
+FLD%: .922
+INN: 245.0
+
+--------------------------------------------------
+
+VALUE
+
+WAR: 0.8
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2041: $1.5M
+2042: $1.5M
+2043: FA
+2044: FA
+FA: 2043+
+
+--------------------------------------------------
+
+AWARDS (Career Reference Only)
+
+Most Valuable Player: 2031
+All-Star Appearances: 2025, 2027, 2028, 2029, 2030, 2031, 2032
+Gold Glove: 2027, 2031, 2033
+Silver Slugger: 2027, 2029, 2030, 2031, 2032
+Home Run Derby Winner: 2027, 2031, 2032
+Home Run Champion: 2031
+Playoff MVP: 2029

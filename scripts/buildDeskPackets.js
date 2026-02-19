@@ -187,7 +187,7 @@ const DOMAIN_TO_DESKS = {
 
 // Chicago-specific filtering for SPORTS domain
 const CHICAGO_TEAM_KEYWORDS = ['bulls', 'chicago', 'trepagnier', 'giddey', 'simmons', 'holiday', 'buzelis', 'huerter', 'kessler', 'stanley'];
-const OAKLAND_TEAM_KEYWORDS = ['a\'s', 'warriors', 'keane', 'aitken', 'horn', 'seymour', 'giannis', 'antetokounmpo', 'green', 'moody', 'dillon', 'ramos'];
+const OAKLAND_TEAM_KEYWORDS = ['a\'s', 'warriors', 'keane', 'aitken', 'horn', 'seymour', 'giannis', 'antetokounmpo', 'green', 'moody', 'dillon', 'ramos', 'coles', 'taveras', 'quintero', 'rosales', 'richards', 'rivas', 'kelley', 'davis'];
 
 // ─── SHEETS API SETUP ──────────────────────────────────────
 require('dotenv').config({ path: path.join(PROJECT_ROOT, '.env') });

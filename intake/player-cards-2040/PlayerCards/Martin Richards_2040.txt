@@ -1,0 +1,75 @@
+PLAYER INTAKE — 2040 SEASON
+Name: Martin Richards
+Team: Athletics
+Position: 3B
+Age: 30
+Overall: 89
+Bats/Throws: L/R
+Height/Weight: 5'10" / 169 lbs
+MLB Service: 9.000
+Drafted: Round 1 (2028)
+Secondary Position: 1B
+Hitter Tendency: Pull Hitter
+Born: Maryland
+--------------------------------------------------
+
+2040 REGULAR SEASON
+
+G: 129
+PA: 568
+AB: 499
+R: 81
+H: 148
+2B: 33
+3B: 1
+HR: 26
+RBI: 76
+BB: 62
+SO: 74
+HBP: 4
+SF: 2
+SAC: 1
+GIDP: 10
+
+AVG: .297
+OBP: .377
+SLG: .523
+OPS: .900
+TB: 261
+
+SB: 8
+CS: 4
+SB%: .667
+
+--------------------------------------------------
+
+DEFENSE (2040)
+
+PO: 63
+A: 189
+E: 0
+FLD%: 1.000
+INN: 1146.0
+
+--------------------------------------------------
+
+VALUE
+
+WAR: 6.8
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2041: $20.6M
+2042: FA
+2043: FA
+2044: FA
+FA: 2042
+
+--------------------------------------------------
+
+AWARDS (Career Reference Only)
+
+All-Star: 2034, 2037, 2038
+Silver Slugger:

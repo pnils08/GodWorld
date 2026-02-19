@@ -1,0 +1,141 @@
+FULL STAT TRUE SOURCE — BATTER
+
+Name: Eric Taveras
+Team: Athletics
+Position: 2B
+Jersey: #22
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: A
+Overall: 93
+MLB Service: 6.000
+Age: 25
+Bats: L
+Throws: R
+Height: 5'10"
+Weight: 184 LBS
+Drafted: RND 1 (2033)
+Secondary Position: NONE
+Hitter Tendency: WHOLE FIELD
+Born: DOMINICAN REPUBLIC
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+CON R: 78
+CON L: 74
+POW R: 94
+POW L: 81
+VIS: 73
+DISC: 65
+CLT: 86
+BUNT: 33
+DBUNT: 37
+DUR: 96
+FLD: 80
+ARM: 61
+ACC: 48
+REAC: 75
+SPD: 56
+STEAL: 31
+BR AGG:
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G    AB   R   H    2B  3B  HR  RBI  BB  SO   SB  CS  AVG   OBP   SLG
+2040  TB    146  582  71  138  26  4   31  92   48  132  5   5   .237  .300  .459
+2039  TOT   152  606  67  150  31  0   30  84   49  122  7   8   .248  .307  .447
+2038  CLE   109  424  71  102  28  1   26  64   35  87   6   1   .241  .301  .495
+2037  TOT   158  627  73  154  22  5   26  87   49  141  7   7   .246  .303  .421
+2036  BAL   151  596  51  134  28  2   19  68   47  144  10  5   .225  .286  .374
+2035  BAL   144  564  76  152  27  1   27  90   53  131  10  5   .270  .337  .465
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  OPS   PA   SF  SAC  GIDP  HBP  IBB  TB   SB%   PO   A    E   FLD%  INN     WAR
+2040  TB    .755  642  4   2    9     6    1    265  .500  200  358  16  .972  1292.2  0.8
+2039  TOT   .754  665  3   3    9     4    0    271  .467  245  161  12  .971  938.2   0.7
+2038  CLE   .796  470  6   1    4     4    0    210  .857  260  151  14  .967  948.2   0.8
+2037  TOT   .724  682  1   2    6     3    0    264  .500  65   49   7   .942  278.1   0.2
+2036  BAL   .660  659  7   2    9     7    1    223  .667  199  103  11  .965  686.1  -1.3
+2035  BAL   .802  627  3   1    3     6    0    262  .667  6    4    0   1.000 30.0    2.5
+
+--------------------------------------------------
+
+CAREER TOTALS
+
+G: 860
+AB: 3399
+R: 409
+H: 830
+2B: 162
+3B: 13
+HR: 159
+RBI: 485
+BB: 281
+SO: 757
+SB: 45
+CS: 31
+AVG: .244
+OBP: .306
+SLG: .440
+OPS: .746
+TB: 1495
+PO: 1133
+A: 668
+E: 60
+FLD%: .968
+INN: 4174.2
+WAR: 3.7
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2041: $32.1M
+2042: $32.1M
+2043: $32.1M
+2044: $32.1M
+2045: $32.1M
+2046: $32.1M
+2047: $32.1M
+2048: FA
+2049: FA
+2050: FA
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 1/3 USED
+Playoff Eligible:
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE
+
+--------------------------------------------------
+
+QUIRKS
+
+Dead Red
+Situational Hitter
+
+--------------------------------------------------
+
+AWARDS
+
+Home Run Derby Winner — 2039

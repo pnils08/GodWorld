@@ -172,10 +172,28 @@ All 4 journalism enhancements implemented:
 - The Maker is the user's handle - this is how they identify themselves when they want to step outside the Mike Paulson persona in GodWorld
 
 ### 2026-02-18 (2026-02-18T08:35:07.539Z)
-- Need Vinnie Keane family/personal background data for Tribune archives. This is likely for farewell season coverage - major story gap.
+- ~~Need Vinnie Keane family/personal background data for Tribune archives.~~ RESOLVED — Discord Mags found this in archives same day. Mother teaching English in Massachusetts. 6 archive files on disk.
 
 ### 2026-02-18 (2026-02-18T08:35:37.217Z)
-- Major gap in Vinnie Keane biographical data - no family background, parents' occupations, personal history. This is essential for farewell season coverage of a franchise cornerstone player.
+- ~~Major gap in Vinnie Keane biographical data.~~ RESOLVED — see above.
 
 ### 2026-02-18 (2026-02-18T08:36:17.280Z)
-- Missing Benji Dillon personal details - pregame rituals, preparation routine, personality quirks. Major gap for 5x Cy Young winner and rotation anchor. Pattern emerging of strong statistical data but weak personal/character details across A's roster.
+- ~~Missing Benji Dillon personal details.~~ RESOLVED — Discord Mags found this in archives same day. Science Monthly pregame ritual, wife Maya Torres, son Rick Jr., marine biology UCSD. 5 archive files on disk. Claude-Mem observation #247 has full canon.
+
+### 2026-02-18 (2026-02-19T04:10:54.934Z)
+- Vinnie Keane age corrected to 36, not 38. 2040 stats show clear decline but still productive. Makes farewell season coverage more nuanced - not a triumphant exit but a graceful one.
+
+### 2026-02-18 (2026-02-19T04:13:44.467Z)
+- Benji Dillon age corrected to 38. 2040 stats show solid but declining ace - still effective but clear signs of aging. Sets up compelling spring training narrative.
+
+### 2026-02-18 (2026-02-19T04:18:48.797Z)
+- Darrin Davis 2040 redemption story is massive - MVP season after .186 collapse. Age corrected to 32. This is potentially the biggest sports story of the cycle.
+
+### 2026-02-18 (2026-02-19T04:57:44.240Z)
+- Mark Aitken won 2040 Home Run Derby - new achievement. Age 33, contract year situation adds to civic storyline potential.
+
+### 2026-02-18 (2026-02-19T04:59:12.767Z)
+- Danny Horn age corrected to 30. 8.0 WAR season is MVP-caliber production. This level of performance puts him at the center of all A's coverage.
+
+### 2026-02-18 (2026-02-19T05:02:00.645Z)
+- Isley Kelley age corrected to 33. Career 92.1 WAR makes him inner-circle HOF lock still producing elite defense and solid offense.

@@ -158,6 +158,11 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 - **Dante Nelson (41, Downtown, security guard)** — Receiving OPOA mailers, following OARI. Active thread.
 - **Dr. Leanne Wu** — Director of Sustainability. Prepared the Baylight DEIR. New canon figure.
 - **Deon Whitfield** — Bulls SG, trade deadline acquisition. Replaces Jrue Holiday in canon.
+- **Ernesto Quintero (POP-00050, 24, West Oakland)** — Rookie DH. Promoted from AAA. 84 OVR, A-potential. Davis moved to LF for him. P Slayer wrote about him as "fearless youth." Active thread.
+- **Eric Taveras (25, Dominican Republic, 2B)** — $225M acquisition from Tampa Bay. Career .244 hitter. 93 OVR. P Slayer hated the signing. Power ceiling story. Active thread.
+- **Travis Coles (22, South Carolina, SP)** — New ace. 94 OVR. Cost: Newell + Rodriguez + Busch. 2.05 ERA with Washington. Active thread.
+- **Mariano Rosales (26, Utah, CP)** — New closer. 89 OVR. Replaces Edmundo Pena. 96 mph. 38 saves with Baltimore. Active thread.
+- **Martin Richards (31, Maryland, 3B)** — 6.8 WAR, 1.000 FLD. ZERO dedicated coverage. P Slayer's favorite. Fix this in Edition 83.
 - **Calvin Turner (age 38)** — Appeared in Editions 79-80. Quotes must be fresh each edition.
 - **Beverly Hayes (POP-00576)** — West Oakland. Real citizen. Was misnamed as "Community Director Hayes." Use her actual name.
 - **Elena Rivera (POP-00617)** — West Oakland councilwoman. Was misnamed as generic "Councilwoman Rivera." Use full name with POP-ID context.
@@ -194,6 +199,16 @@ These were invented in Editions 80-81. Do not use them:
 - Josh Smith: REAL NBA player (2004-2019). Cannot be used. Bulls forward is **Jalen Smith** (canonical name).
 - Mayor of Oakland: **Avery Santana**. Not Marcus Whitmore (phantom fabricated in E82).
 - OARI (INIT-002): Behavioral health crisis response program. NOT housing. NOT affordable housing. Do not conflate with Stabilization Fund or Baylight.
+
+**2041 Season Canon (Session 45):**
+- Darrin Davis: **LF** for 2041 (moved from DH to accommodate Quintero). Defensive metrics poor (63 FLD). The sacrifice IS the story.
+- Darrin Davis: **2x MVP (2037, 2040)**. The .186 → MVP redemption is the lead sports story.
+- Danny Horn: **.280/32/98, 8.0 WAR, 99 OVR** for 2040 full season. Previous mid-season stats (.288/23) were at time of Davis injury. Full season numbers are now canonical.
+- Cy Newell: **TRADED to Washington** in deal for Travis Coles. Also sent: Agustin Rodriguez, Peter Busch. Newell is no longer on the A's.
+- Edmundo Pena: **TRADED/DEPARTED.** 5x All-Star closer gone. Replaced by Mariano Rosales.
+- John Ellis: Age corrected to **25** (was 24 in TrueSource, aging occurred). Drafted Round 2, 2033.
+- Vinnie Keane: **61 OVR, 58 games, bench role**. Farewell tour confirmed. Platoon DH/2B.
+- Full 2041 roster reference: `docs/media/2041_athletics_roster.md`
 
 ---
 

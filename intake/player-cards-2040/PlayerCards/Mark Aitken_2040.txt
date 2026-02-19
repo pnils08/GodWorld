@@ -1,0 +1,76 @@
+PLAYER INTAKE — 2040 SEASON
+PLAYER: Mark Aitken
+TEAM: Athletics
+PRIMARY POS: 1B
+SECONDARY POS: 3B
+BATS / THROWS: S / R
+AGE (2040): 33
+OVR: 94
+POTENTIAL: A
+MLB SERVICE: 8.127
+HT / WT: 5'8" / 168 lbs
+BORN: California
+HITTER TENDENCY: Pull Hitter
+
+==============================
+2040 SEASON STATS
+==============================
+G: 144
+AB: 550
+R: 81
+H: 143
+2B: 25
+3B: 1
+HR: 30
+RBI: 79
+BB: 64
+SO: 110
+SB: 9
+CS: 11
+AVG: .260
+OBP: .342
+SLG: .473
+OPS: .815
+PA: 626
+TB: 260
+WAR: 4.7
+FLD%: .993
+INN: 1252.2
+
+==============================
+ATTRIBUTES (2040 Snapshot)
+==============================
+CON R: 77
+CON L: 95
+POW R: 67
+POW L: 92
+VIS: 79
+DISC: 78
+CLT: 81
+BUNT: 41
+DBUNT: 43
+DUR: 98
+FLD: 78
+ARM: 79
+ACC: 69
+REAC: 81
+SPD: 50
+STEAL: 23
+BR AGG: 41
+
+==============================
+CONTRACT
+==============================
+2041: $21.4M
+FA: 2042
+
+==============================
+AWARDS
+==============================
+Rookie of the Year: 2032
+Silver Slugger: 2034, 2036
+All-Star: 2036
+All-Star MVP: 2036
+Gold Glove: 2032, 2038, 2039
+Home Run Derby Winner: 2040
+Playoff MVP: 2037

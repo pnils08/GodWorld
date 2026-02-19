@@ -1,0 +1,78 @@
+PLAYER INTAKE (Pitcher) — 2040 SEASON
+
+Name: John Ellis
+Team: ATH
+Position: SP
+Age: 25
+Overall: 83
+Bats/Throws: S/R
+Height/Weight: 5'10" / 209 lbs
+MLB Service: 1.001
+Drafted: RND 2 (2033)
+Secondary Position: None
+Hitter Tendency: Opposite
+Born: New York
+
+--------------------------------------------------
+
+2040 REGULAR SEASON
+
+G: 32
+GS: 32
+W: 16
+L: 6
+SV: 0
+BS: 0
+HLD: 0
+IP: 185.0
+H: 193
+R: 84
+ER: 80
+HR: 19
+BB: 63
+SO: 124
+ERA: 3.89
+
+WHIP: 1.38
+W-L%: .727
+QS: 14
+CG: 0
+SHO: 0
+HBP: 5
+WP: 4
+TBF: 789
+WAR: 2.5
+K/9: 6.03
+BB/9: 3.06
+HR/9: 0.92
+FIP: 4.10
+ERC: 4.05
+PFR: 1.01
+
+--------------------------------------------------
+
+DEFENSE (2040)
+
+PO: 0
+A: 0
+E: 0
+FLD%: .000
+INN: 185.0
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2041: $780K
+2042: RNW
+2043: ARB
+2044: ARB
+2045: ARB
+2046: FA
+FA: 2046+
+
+--------------------------------------------------
+
+AWARDS (Career Reference Only)
+
+None

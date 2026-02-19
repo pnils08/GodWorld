@@ -1,0 +1,52 @@
+TRUESOURCE_LINEUP_RECORD
+Season: 2041
+Type: Projected Starting Lineup
+Context: VS RHP (DH)
+Source: Image Verified
+
+1. Danny Horn
+POS: CF
+BATS: S
+OVR: 99
+
+2. Martin Richards
+POS: 3B
+BATS: L
+OVR: 89
+
+3. Darrin Davis
+POS: LF
+BATS: R
+OVR: 93
+
+4. Mark Aitken
+POS: 1B
+BATS: S
+OVR: 94
+
+5. Isley Kelley
+POS: SS
+BATS: R
+OVR: 93
+
+6. Eric Taveras
+POS: 2B
+BATS: L
+OVR: 93
+
+7. Vladimir Gonzalez
+POS: RF
+BATS: R
+OVR: 89
+
+8. Jose Colon
+POS: C
+BATS: S
+OVR: 81
+
+9. Ernesto Quintero
+POS: DH
+BATS: R
+OVR: 84
+
+END TRUESOURCE_LINEUP_RECORD

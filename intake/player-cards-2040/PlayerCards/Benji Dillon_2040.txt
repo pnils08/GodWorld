@@ -1,0 +1,80 @@
+PLAYER INTAKE (Pitcher) — 2040 SEASON
+
+Name: Benji Dillon
+Team: ATH
+Position: SP
+Age: 38
+Overall: 75
+Bats/Throws: L/L
+Height/Weight: 6'5" / 219 lbs
+MLB Service: 16.000
+Drafted: Undrafted
+Secondary Position: None
+Hitter Tendency: Whole Field
+Born: California
+
+--------------------------------------------------
+
+2040 REGULAR SEASON
+
+G: 32
+GS: 32
+W: 17
+L: 6
+SV: 0
+BS: 0
+HLD: 0
+IP: 170.0
+H: 169
+R: 71
+ER: 67
+HR: 24
+BB: 59
+SO: 187
+ERA: 3.55
+
+WHIP: 1.34
+W-L%: .739
+QS: 14
+CG: 0
+SHO: 0
+HBP: 2
+WP: 4
+TBF: 717
+WAR: 3.0
+K/9: 9.90
+BB/9: 3.12
+HR/9: 1.27
+FIP: 3.71
+ERC: 4.08
+PFR: 1.45
+
+--------------------------------------------------
+
+DEFENSE (2040)
+
+PO: 0
+A: 0
+E: 0
+FLD%: .000
+INN: 170.0
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2041: $13.0M
+2042: FA
+2043: FA
+2044: FA
+2045: FA
+2046: FA
+FA: 2042+
+
+--------------------------------------------------
+
+AWARDS (Career Reference Only)
+
+Cy Young: 2028, 2032, 2033, 2034, 2037
+Rookie of the Year: 2025
+All-Star Appearances: 2025, 2028, 2031, 2034, 2037

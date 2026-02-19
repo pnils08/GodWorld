@@ -1,0 +1,75 @@
+PLAYER INTAKE — 2040 SEASON
+Name: Danny Horn
+Team: Athletics
+Position: CF
+Age: 30
+Overall: 99
+Bats/Throws: S / L
+Height/Weight: 6'0" / 209 lbs
+MLB Service: 7.135
+Drafted: Round 4 (2029)
+Secondary Position: LF, RF
+Hitter Tendency: Whole Field
+Born: New Jersey
+--------------------------------------------------
+
+2040 REGULAR SEASON
+
+G: 147
+PA: 686
+AB: 607
+R: 94
+H: 170
+2B: 36
+3B: 8
+HR: 32
+RBI: 98
+BB: 67
+SO: 121
+HBP: 5
+SF: 3
+SAC: 4
+GIDP: 4
+
+AVG: .280
+OBP: .355
+SLG: .524
+OPS: .879
+TB: 318
+
+SB: 35
+CS: 5
+SB%: .875
+
+--------------------------------------------------
+
+DEFENSE (2040)
+
+PO: 328
+A: 11
+E: 0
+FLD%: 1.000
+INN: 1301.0
+
+--------------------------------------------------
+
+VALUE
+
+WAR: 8.0
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2041: $37.8M
+2042: $37.8M
+2043: $37.8M
+2044: $37.8M
+FA: 2045
+
+--------------------------------------------------
+
+AWARDS (Career Reference Only)
+
+All-Star: 2038, 2039, 2040
+Silver Slugger: 2039

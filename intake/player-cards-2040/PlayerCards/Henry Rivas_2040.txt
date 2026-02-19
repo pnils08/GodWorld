@@ -1,0 +1,50 @@
+PLAYER INTAKE — 2040 SEASON
+
+Name: Henry Rivas
+Team: Oakland Athletics
+Position: SP
+Age: 29
+Bats: L
+Throws: R
+Height: 6'0"
+Weight: 173 lbs
+Born: Puerto Rico
+Drafted: Round 1 (2029)
+MLB Service: 7.002
+Overall: 91
+Potential: A
+
+— 2040 REGULAR SEASON —
+
+Games: 33
+Games Started: 33
+Wins: 14
+Losses: 12
+Innings Pitched: 184.2
+Hits Allowed: 176
+Runs Allowed: 77
+Earned Runs: 76
+Home Runs Allowed: 24
+Walks: 59
+Strikeouts: 169
+ERA: 3.70
+WHIP: 1.27
+Quality Starts: 17
+WAR: 2.9
+
+— RATE METRICS —
+
+K/9: 8.24
+BB/9: 2.88
+HR/9: 1.17
+FIP: 3.88
+
+— CONTRACT STATUS —
+
+2041: $28,200,000
+2042: $28,200,000
+Free Agent: 2043
+Active Roster: Yes
+40-Man: Yes
+Options Used: 0/3
+Contract Option: None

@@ -1,0 +1,136 @@
+FULL STAT TRUE SOURCE — PITCHER
+
+Name: Mariano Rosales
+Team: Athletics
+Position: CP
+Jersey: #13
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: A
+Overall: 89
+MLB Service: 5.000
+Age: 26
+Bats: S
+Throws: R
+Height: 5'10"
+Weight: 186 LBS
+Drafted: RND 2 (2035)
+Secondary Position: NONE
+Hitter Tendency: EXTREME OPPOSITE
+Born: UTAH
+
+--------------------------------------------------
+
+PITCH REPERTOIRE
+
+4-Seam Fastball — 96 mph
+2-Seam Fastball — 94 mph
+Changeup — 84 mph
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+STA: 26
+H/9: 90
+K/9: 79
+BB/9: 82
+HR/9: 80
+PCLT: 84
+CTRL: 51
+VEL: 99
+BRK: 75
+FLD: 59
+ARM: 73
+ACC: 74
+
+--------------------------------------------------
+
+MLB STATS (BY SEASON)
+
+YEAR  TEAM  G   GS  W   L   SV  BS  HLD  IP    H   R   ER  HR  BB  SO
+2040  BAL   58  0   1   5   38  5   2    56.0  56  29  26  8   13  56
+2039  BAL   67  0   10  6   2   9   27   77.2  52  24  18  4   26  77
+2038  BAL   83  0   7   9   1   5   36   89.2  93  47  41  7   24  61
+2037  BAL   72  0   7   8   0   6   25   77.2  75  33  30  12  29  71
+2036  BAL   74  0   6   7   18  2   18   83.1  57  27  20  5   26  67
+
+--------------------------------------------------
+
+ADVANCED (BY SEASON)
+
+YEAR  TEAM  WHIP  WPCT  QS  CG  SHO  HB  WP  TBF  WAR  K/9  BB/9  HR/9  FIP  ERC  PFR
+2040  BAL   1.23  .167  0   0   0    4   3   230  0.6  9.00 2.09  1.29  3.77 3.70 1.20
+2039  BAL   1.00  .625  0   0   0    3   1   311  1.6  8.92 3.01  0.46  2.81 1.77 1.30
+2038  BAL   1.30  .437  0   0   0    3   2   384  1.1  6.12 2.41  0.70  3.56 3.49 0.90
+2037  BAL   1.34  .467  0   0   0    6   1   333  0.1  8.23 3.36  1.39  4.53 4.03 1.20
+2036  BAL   1.00  .462  0   0   0    2   0   324  1.4  7.24 2.81  0.54  3.18 1.88 1.10
+
+--------------------------------------------------
+
+CAREER TOTALS
+
+G: 354
+GS: 0
+W: 31
+L: 35
+SV: 59
+BS: 27
+HLD: 108
+IP: 384.1
+H: 333
+R: 160
+ER: 135
+HR: 36
+BB: 118
+SO: 332
+
+WHIP: 1.17
+WPCT: .470
+QS: 0
+CG: 0
+SHO: 0
+HB: 18
+WP: 7
+TBF: 1582
+WAR: 4.9
+K/9: 7.77
+BB/9: 2.76
+HR/9: 0.84
+FIP: 3.55
+ERC: 2.88
+PFR: 1.17
+
+--------------------------------------------------
+
+CONTRACT STATUS
+
+2041: $10.1M
+2042: FA
+2043: FA
+2044: FA
+2045: FA
+2046: FA
+2047: FA
+2048: FA
+2049: FA
+2050: FA
+
+--------------------------------------------------
+
+ROSTER STATUS
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 0/3 USED
+Playoff Eligible: -
+On Waivers: NO
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+Cleared Trade Waivers: NO
+Eligible for Rule 5 Draft: NO
+Contract Option: NONE

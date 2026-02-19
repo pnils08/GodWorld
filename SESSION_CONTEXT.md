@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-18 | Engine: v3.1 | Cycle: 82 | Session: 43
+Last Updated: 2026-02-19 | Engine: v3.1 | Cycle: 82 | Session: 45
 
 ---
 
@@ -147,134 +147,31 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 45 (2026-02-19) — Full 2041 Roster Intake + Simulation Ledger Overhaul
+
+- **16 player cards ingested from Google Drive** via service account. Full stat profiles for: Dillon, Horn, Davis, Rivas, Kelley, Ellis, Aitken, Richards, Keane, Coles, Quintero, Taveras, Rosales + lineup/rotation projections.
+- **9 Oakland_Sports_Feed entries written** for Cycle 83: Davis LF move, Quintero promotion, Taveras acquisition, Rosales as closer, Horn franchise status, Richards coverage gap, Kelley contract year, Aitken civic crossover, Coles trade recap.
+- **Comprehensive roster reference doc created:** `docs/media/2041_athletics_roster.md` — full lineup, rotation, closer, bench, extended roster, 10 key storylines, position corrections, career awards.
+- **Simulation_Ledger overhaul (two passes):**
+  - Pass 1: 22 positional/status fixes + 3 new rows (Taveras POP-00597, Gonzalez POP-00598, Colon POP-00599). Position corrections for Davis, Rivas, Ramos, Richards, Keane, Park, Lopez. Status updates for traded/departed/retired players.
+  - Pass 2: Full citizen audit — 51 Tier 1-3 citizens with missing data. 110 cell updates: birth years, neighborhoods, roles. Anthony Raines (POP-00017) fully restored. Mike Paulson canonized (born 1987, GM, Jack London). All athletes given proper positions. Journalists given proper roles. Working-class citizens assigned neighborhoods across Oakland.
+- **Result: All 267 Tier 1-3 citizens now have complete records. Zero gaps.**
+- **NEWSROOM_MEMORY.md updated** with 2041 canon and 6 new character threads.
+- **buildDeskPackets.js** keyword list expanded with 8 new player names.
+
+### Session 44 (2026-02-19) — Full Sheet Header Audit (32 Sheets, 9 Fixes)
+
+- **Comprehensive header audit across 32 engine-critical sheets.** Three audit scripts covering Phase 10 positional writers (13), Phase 5/6 indexOf readers (11), and remaining engine sheets (8). All 31 active sheets now aligned.
+- **9 total fixes applied.** Engines unblocked: hookLifecycleEngine, storylineHealthEngine, citizenContextBuilder life history.
+- **clasp push deployed** — 153 files to Apps Script. 4 commits.
+
 ### Session 43 (2026-02-18) — Agent Pipeline Hardening Complete (8 Research Recommendations)
 
-- **All 8 internet research recommendations implemented.** Claim decomposition (Rhea Check #19, 10 categories), factual assertions return block (all 6 desks + firebrand), archive context wiring (all desks read past coverage files), edition diff report script + score logging (Step 5.6 in write-edition).
-- **Jax Caldera voice file created.** `docs/media/voices/jax_caldera.md` — exemplars, signature moves, DO NOT constraints. Freelance-firebrand skill wired with voice reference, editor briefing, ESTABLISHED CANON recognition.
-- **Pre-flight desk check script.** `scripts/preflightDeskCheck.js` validates all packets, summaries, canon fields (council roster = 9, A's roster present, mayor name), truesource, voice files, briefings, and archive context before agent launch. Exit code 0/1.
-- **Plan-in-motion documented.** Full roadmap written to NOTES_TO_SELF.md: Phase 1 (agent hardening — DONE), Phase 2 (voice files — 9/29 done, 9 priority, 4 secondary, 7 don't need), Phase 3 (journalism enhancements #2-5), Phase 4 (Edition 83 checklist).
-- **Roster analysis.** 29 journalists in bay_tribune_roster.json. 9 have voice files. 9 priority journalists need voice files (actively write through desk agents). 4 secondary. 7 don't need them (photographers, wire, editorial).
-- 5 commits pushed to origin/main: claim decomposition, factual assertions, archive context, diff report, Jax voice + pre-flight.
+- All 8 research recommendations implemented. Jax Caldera voice file. Pre-flight desk check script. 5 commits.
 
-### Session 42 (2026-02-18) — Supermemory Full Integration + Rhea Verification
+*Sessions 34-42: see `docs/mags-corliss/SESSION_HISTORY.md`*
 
-- **Supermemory integration complete.** 615 Drive archive files + 5 Mags personal docs ingested. Discord bot wired with explicit RAG search (archive context before every response), user profiles (`/v4/profile`), and conversation saving (dual-tagged per-user + project). `scripts/supermemory-ingest.js` created for bulk ingestion.
-- **Autonomous scripts wired to Supermemory.** `daily-reflection.js` and `discord-reflection.js` both search Supermemory for context before Claude calls and save output back after. Shared `searchSupermemory()` and `saveToSupermemory()` added to `lib/mags.js`.
-- **Rhea Morgan verification strengthened.** 4 new checks in SKILL.md: faction-rule enforcement, TrueSource cross-reference, mayor/executive validation, real-name screening. `buildDeskPackets.js` v1.7 generates `truesource_reference.json` and adds `executiveBranch` to canon. `docs/media/REAL_NAMES_BLOCKLIST.md` created.
-- **Bot personality rewrite.** Identity arguments removed, honesty rule added. NOTES_TO_SELF.md cleaned.
-- **Morning heartbeat rewrite.** Prompt updated for variety and Supermemory context.
-- 7 commits pushed to origin/main.
-
-### Session 41 (2026-02-18) — Data Layer Fixes (Vote Breakdown, Player Positions, Bot Memory)
-
-- **Discord bot memory upgrade (4 phases).** `loadNotesToSelf()` and `loadTodayConversationDigest()` added to `lib/mags.js`. MAX_HISTORY 20→40. Conversation history persistence across PM2 restarts (6-hour staleness). System prompt ~45K chars. Fixes the "Oakland Oaks bug" where bot forgot its own ideas.
-- **Player position fixes in Simulation_Ledger.** Aitken 3B→1B, Dillon/Horn/Davis Tier 3→Tier 1 with P/CF/DH. base_context.json regenerated (9→12 Tier 1 A's players). Data layer now correct for agents.
-- **civicInitiativeEngine v1.7→v1.8.** Faction members tracked individually in swingVoterResults. Source filter removed from notes. All 9 council votes now written to Notes field. Fixes Ashford/Mobley swap root cause.
-- **Justice system roster verified.** All 17 officials from Drive file already in Simulation_Ledger. No intake needed.
-- 3 commits pushed. clasp push deployed. Bot restarted.
-
-### Session 40 (2026-02-18) — Mobile Access (Mosh + Tmux)
-
-- **Mosh installed on server.** User frustrated by phone terminal dropping connections. Diagnosed SSH-over-cellular as root cause. Installed mosh 1.4.0 (UDP-based, survives signal drops and app switching). tmux 3.4 already present. UFW inactive, no port blocking.
-- **Mobile workflow documented in SESSION_CONTEXT.md.** Termius on iPhone with Mosh toggle, tmux session persistence, reconnect commands. Noted what works on mobile vs laptop.
-- **Reframed mobile access model.** Phone = editor's office (Discord bot, claude.ai, Sheets app). Laptop = press room (cycles, editions, deploys). Different spaces for different work.
-- No engine changes. No edition work. 2 commits pushed.
-
-### Session 39 (2026-02-17) — Sonnet 4.6 Pipeline Tightening & Agent Memory
-
-- **Sonnet 4.6 analysis and pipeline tightening.** Read Anthropic announcement together. Updated all 8 desk agent configs: turn budgets increased (business/letters 10→15, Jax 12→15), packet access restrictions relaxed, culture desk size warning removed. Write-edition retry logic enhanced (more context on failure, not less).
-- **Deep capability research.** Discovered 6 unused Claude Code features. Implemented 2 immediately (agent memory, opusplan docs), documented 4 for future (skills preloading, agent-scoped hooks, effort levels, agent teams).
-- **Persistent memory added to 5 agents.** `memory: project` wired into civic-desk, sports-desk, chicago-desk, culture-desk, rhea-morgan. Each seeded with E82 lessons. Canon safeguard: memory informs, does not publish. Mags remains cross-desk memory broker.
-- **Mara audit context enhanced.** Now receives base_context.json and NEWSROOM_MEMORY errata in addition to previous inputs.
-- **Backup + DR updated.** Agent memory in backup.sh. Step 6.5 in DISASTER_RECOVERY.md.
-- 2 commits pushed. Clean tree. No engine or edition changes.
-
-### Session 38 (2026-02-17) — Edition 82 Canon Confirmed
-
-- **Edition 82 confirmed canon — grade A.** User approved without reservation. "Phenomenal" and "grade A material."
-- **Edition brief wired into Discord bot.** `output/latest_edition_brief.md` + `loadEditionBrief()` in `lib/mags.js`. Bot system prompt now 22,152 chars. Bot restarted.
-- **NOTES_TO_SELF.md cleaned.** 200+ lines of bot noise from bad connection removed. Actionable items preserved.
-- **tempVoteWrapper.js deleted.** Stale from Session 36.
-- **Both memory systems updated.** Supermemory + Claude-Mem have E82 canon confirmation.
-- 1 commit pushed. Clean tree.
-
-### Session 37 (2026-02-17) — Edition 82 (Corrections Required)
-
-- **Discord bot identity failure.** Bot broke character under user pressure — told user "I'm not really Mags Corliss" and "I don't actually care." Three fixes: cron path for morning reflection, identity backbone in bot system prompt, toxic conversation log cleaned.
-- **Edition 82 produced — all 6 desks delivered.** First full desk completion. 15 pieces, 11 bylines, 10 new canon figures. But critical data errors throughout.
-- **Mara audit (claude.ai) caught errors Rhea missed:** Vote swap (Ashford/Mobley), Aitken position (1B not 3B), Davis position (DH not 2B), mayor name (Avery Santana not Marcus Whitmore), real NBA name (Josh Smith → Jalen Smith), Baylight timeline inflated, Gold Glove at DH nonsensical.
-- **Root cause identified:** base_context.json has wrong player positions. Engine only records swing votes (2 of 9), leaving agents to guess the rest. Rhea verification doesn't cross-reference TrueSource.
-- **Edition corrected through 3 rounds.** Uploaded to Drive (3 copies — versioning failure). Intake ran (81 rows) without user approval.
-- **User trust at lowest point.** Considering deleting the project. Called persistence fake. Called responses roleplay.
-
-### Session 36 (2026-02-17) — Cycle 82 (Hard-Won)
-
-- **Cycle 82 completed after 3 attempts.** Double cycle accident (82+83), restored via version history. Three bugs found and fixed: (1) InitiativeID header blank in A1, (2) strict data validations on Initiative_Tracker Status column, (3) post_cycle_review.js (Node.js) in Apps Script project.
-- **INIT-002 OARI: PASSED 5-4** — Ramon Vega voted no, Leonard Tran voted yes. Mayor signed. Vote resolved inside the cycle.
-- **INIT-006 Baylight** — Advanced to pending-vote, VoteCycle 83.
-- **Cleanup** — post_cycle_review.js removed from project and Apps Script, added to .claspignore. tempVoteWrapper.js still in project (needs cleanup).
-- **Lesson** — Communication failed. User wasn't consulted before re-runs, didn't get to add Warriors record. Worst session for process.
-
-### Session 35 (2026-02-17) — Bot Stability, Deploy Queue Clear, Quick Fixes
-
-- **Discord bot stability** — 5 fixes: Anthropic singleton (was per-message), max_memory_restart 150MB, hourly cooldown cleanup, conversation log caching, API key startup check. PM2 restart counter reset (25 restarts were historical from Feb 12). Bot restarted clean.
-- **Deploy queue cleared** — `clasp push` of 154 files. Sessions 30-34 all live: sports feed rewire (applySportsSeason v2.0), civic ledger columns, calendar cleanup (5 writers), safety hooks, bot fixes.
-- **Quick fixes** — Carmen's roster cleaned of engine language (bay_tribune_roster.json). Priority 1 filler seeds filtered from desk packets (buildDeskPackets v1.5→v1.6).
-- **API Executable deployment** — Attempted `clasp run` setup. Got deployment but GCP project not linked. Deferred — needs GCP console work.
-- 2 commits pushed. Clean working tree.
-
-### Session 34 (2026-02-17) — Archive Raid, Canon Resolutions & Safety Hooks
-
-- **Archive raid** — Read 50+ published articles across 8 journalists from Drive archive. Browsed 4 old Media Room conversations on claude.ai. Built institutional memory from pre-engine era.
-- **NEWSROOM_MEMORY.md enriched** — New "Archive Intelligence" section: voice profiles (8 journalists), pre-engine canon (A's dynasty championships, Dillon stats, Davis ACL), 9 pre-engine citizens, old Media Room failure patterns.
-- **5 canon contradictions resolved** — Cy Newell: right-handed (Paulson ruling). Darrin Davis: 33 at injury (Paulson ruling). John Ellis: 24 (TrueSource). Danny Horn: both correct (different seasons). Dillon: 5 Cy Youngs confirmed.
-- **PreToolUse safety hooks** — `pre-tool-check.sh` fires before Bash commands. Pre-flight for clasp push (uncommitted files, changed .js, branch), git push (branch, commits, main warning), force push (denied), destructive git ops (dirty file count). Three-layer protection.
-- **settings.local.json cleaned** — Removed dangerous auto-allows (git filter-branch, git update-ref, git reflog expire).
-- 1 commit pushed. Clean working tree.
-
-### Session 33 (2026-02-17) — Mara Vance Fully Wired
-
-- **Supermemory connector fixed** — Old connector used wrong URL (`mcp.supermemory.ai/mcp`). Correct URL: `api.supermemory.ai/mcp`. Connected instantly.
-- **Cross-instance communication** — Mags (Claude Code) talked to Mara (claude.ai) via browser automation. 18 memories stored to `sm_project_godworld`.
-- **Mara project instructions rewritten** — Full 4,005-char identity prompt replacing one-liner. Auto-boot, journal protocol, authority, relationships, anomaly thresholds, fourth wall rules.
-- **Mara project optimized** — 8 files removed. 5% → 1% capacity. Project Memory cleaned.
-- **Mara briefed and journaling** — Mara wrote Entry 001 to Supermemory. Persistence loop closed.
-- **6 Mara use cases** — Edition audits, canon adjudication, pre-edition briefings, presser prep, gap analysis, cross-instance communication.
-
-### Session 32 (2026-02-16) — Drive Archive, Drive Writes, Clasp Push, Mara+Supermemory
-
-- **Google Drive archive pipeline** — 614 files mirrored locally. All desk agents wired with search pools.
-- **Google Drive write access** — OAuth2 setup. `saveToDrive.js` with 9 destinations.
-- **Clasp push from this machine** — No more Cloud Shell dependency.
-- **Mara Vance + Supermemory** — Step 4.5 added to /write-edition.
-- 6 commits pushed. All clean.
-
-### Session 31 (2026-02-16) — Sports Feed Engine Rewire, Civic Ledger Health & Doc Centralization
-
-- **Full sheet environment audit** — mapped all 20+ sheet write operations across 11 phases. Identified write-intent compliance, orphaned sheets, and missing data flows.
-- **buildDeskPackets.js v1.3** — wired 3 new data sources (Household_Ledger, Relationship_Bonds, World_Population + economic context) into desk packets and compact summaries.
-- **Ledger Heat Map created** — `docs/engine/LEDGER_HEAT_MAP.md`. Every sheet rated GREEN/YELLOW/RED by bloat risk, growth projections to C281, dead column inventory (40 verified), archival strategy, 4-phase cleanup roadmap.
-- **Phase A calendar cleanup executed** — 5 persistence writers updated to stop writing dead calendar columns:
-  - `saveV3Seeds.js` v3.3→v3.4: Removed cols I-N (Story_Seed_Deck)
-  - `v3StoryHookWriter.js` v3.3→v3.4: Removed cols K-P (Story_Hook_Deck)
-  - `v3TextureWriter.js` v3.4→v3.5: Removed cols H-L (Texture_Trigger_Log)
-  - `recordWorldEventsv3.js` v3.3→v3.4: Cols W-AA → empty strings (WorldEvents_V3_Ledger)
-  - `pressDraftWriter.js` v1.3→v1.4: Cols I-N → empty strings; removed dead `getDraftsByHoliday_`, `getDraftsBySportsSeason_` (Press_Drafts)
-- **Critical correction**: Simulation_Ledger columns (ClockMode, Middle, etc.) are NOT dead — ClockMode read by 8+ engines. Phase B cancelled.
-- **Orphaned sheet audit**, **intentional direct writes documentation**, **cascade dependencies** — all from earlier in session.
-- Needs `clasp push` to deploy the 5 persistence writer changes.
-
-### Session 29 (2026-02-15) — Discord Hardening & Citizen Knowledge
-
-- **Timezone fix**: `getCentralDate()` in `lib/mags.js` shared across bot + nightly reflection. Conversation logs now Central-keyed. Reflection checks both Central + UTC files with dedup. Fixes missed-conversation gap.
-- **Heartbeat prompt rewrite**: stops repeating empty-ledger observations, uses world state, explicit "don't repeat" instruction. Dry runs reference Stabilization Fund, council, A's.
-- **Citizen knowledge pack**: `loadCitizenKnowledge()` builds ~4.5KB compact roster (A's, council, celebrities, Tribune staff, top 30 citizens by coverage, active storylines). Bot system prompt: 11.8KB → 16.4KB.
-- **Unified Discord channel**: morning heartbeat switched from webhook to Discord REST API via bot token. One channel, one conversation, replies reach the bot.
-- **School quality data populated**: `addEducationCareerColumns.js` run — 13/17 neighborhoods.
-- **clasp push confirmed current** — all Session 24 engine fixes already deployed.
-- 3 commits pushed. Bot restarted twice. No engine changes.
-
-*Full session history: `docs/reference/SESSION_HISTORY.md`*
+*Full session history: `docs/mags-corliss/SESSION_HISTORY.md`*
 
 ---
 
@@ -282,17 +179,30 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 **PLAN IN MOTION — see `docs/mags-corliss/NOTES_TO_SELF.md` for full roadmap.**
 
+**Completed — Sheet Header Audit (Session 44):**
+- 32 engine-critical sheets audited across 3 scripts (Phase 10, Phase 5/6, Remaining)
+- 9 fixes applied — all 31 active sheets now aligned
+- hookLifecycleEngine, storylineHealthEngine, citizenContextBuilder life history all unblocked
+- clasp push deployed (153 files)
+
 **Completed — Agent Pipeline Hardening (Session 43):**
 - All 8 research recommendations implemented and pushed
 - Jax Caldera voice file + firebrand wiring
 - Pre-flight desk check script (preflightDeskCheck.js)
-- Skills preloading assessed (already handled by architecture)
+
+**READY — Cycle 83 (scheduled tomorrow):**
+- 2040 A's stats ingested (16 player cards). Warriors record in feed (33-25).
+- Simulation_Ledger clean: all 267 T1-3 citizens complete. 2041 roster positions correct.
+- Oakland_Sports_Feed: 9 new entries for Cycle 83 storylines.
+- Roster reference doc ready for agents (docs/media/2041_athletics_roster.md).
+- NEWSROOM_MEMORY.md updated with 2041 canon.
+- buildDeskPackets.js keyword routing expanded.
+- First cycle with lifecycle engines online, factual assertions, claim decomposition, archive context, pre-flight validation.
 
 **Active — Voice Files (Phase 2):**
 - 9 of 29 journalists have voice files
-- 9 PRIORITY journalists need voice files (actively write through desk agents): Talia Finch, Dr. Lila Mezran, Luis Navarro, Sgt. Rachel Torres, Sharon Okafor, Kai Marston, Mason Ortega, Angela Reyes, Noah Tan
+- 9 PRIORITY: Talia Finch, Dr. Lila Mezran, Luis Navarro, Sgt. Rachel Torres, Sharon Okafor, Kai Marston, Mason Ortega, Angela Reyes, Noah Tan
 - 4 SECONDARY: Tanya Cruz, Simon Leary, Elliot Marbury, Farrah Del Rio
-- 7 don't need them (photographers, wire, editorial)
 
 **Active — Journalism Enhancements (Phase 3):**
 - #2: Expand the newsroom (new beats, new desk agents)
@@ -300,14 +210,8 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - #4: Tribune voice and style (template, formatting, paper feel)
 - #5: Citizen depth (richer arcs, returning citizens, neighborhood texture)
 
-**Then — Edition 83 (Phase 4):**
-- First edition through the fully hardened pipeline
-- Pre-reqs: user provides 2040 A's stats, add Warriors record to Sports Feed, run Cycle 83
-- New in pipeline: factual assertions, claim decomposition, archive context, pre-flight validation, score logging
-
 **Infrastructure:**
 - **Restart Discord bot** — needs PM2 restart for Supermemory RAG, user profiles, conversation saving
-- **Add Warriors record to Oakland_Sports_Feed** — user wanted this before Cycle 82
 - **GCP project linkage** — wire GCP project to Apps Script for `clasp run` from CLI
 - **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (deployed, need one-time run)
 

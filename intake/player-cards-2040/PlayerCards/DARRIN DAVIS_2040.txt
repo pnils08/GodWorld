@@ -1,0 +1,91 @@
+PLAYER INTAKE — 2040 SEASON
+DARRIN DAVIS
+
+Profile
+Position: LF (Secondary: CF, RF)
+Age: 32
+Bats/Throws: R/R
+Height/Weight: 5'9" / 186 lbs
+Born: Ohio
+Draft: Round 1 (2026)
+Overall: 93
+Potential: A
+Hitter Tendency: Opposite
+
+Attributes
+CON R: 78
+CON L: 86
+POW R: 94
+POW L: 63
+VIS: 78
+DISC: 71
+CLT: 66
+BUNT: 35
+DBUNT: 20
+DUR: 86
+FLD: 63
+ARM: 68
+ACC: 61
+REAC: 62
+SPD: 74
+STEAL: 90
+BR AGG: 82
+
+2040 Season Stats
+G: 137
+AB: 546
+R: 90
+H: 160
+2B: 32
+3B: 4
+HR: 38
+RBI: 107
+BB: 42
+SO: 84
+SB: 28
+CS: 5
+AVG: .293
+OBP: .347
+SLG: .575
+OPS: .922
+WAR: 5.2
+
+Career Totals (Through 2040)
+G: 1358
+AB: 5345
+R: 913
+H: 1491
+2B: 306
+3B: 67
+HR: 285
+RBI: 848
+BB: 575
+SO: 1044
+SB: 297
+CS: 57
+AVG: .279
+OBP: .351
+SLG: .521
+OPS: .872
+WAR: 41.1
+
+Contract Status
+2041: $28.4M
+2042: $28.4M
+2043–2050: FA
+On Active Roster: Yes
+On 40-Man: Yes
+Options Used: 3/3
+Playoff Eligible: Yes
+Rule 5 Eligible: No
+
+Awards
+MVP: 2037, 2040
+Hank Aaron Award: 2033, 2037
+Silver Slugger: 2032, 2033, 2037, 2038, 2040
+World Series MVP: 2031, 2033
+All-Star Appearances: 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2040
+All-Star MVP: 2038
+Home Run Derby Winner: 2036, 2037, 2038
+Home Run Champion: 2037, 2038, 2040
+Playoff MVP: 2031

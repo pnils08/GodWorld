@@ -10,6 +10,11 @@
  * - Coming-of-age milestones
  * - Civic participation (age-appropriate)
  *
+ * v1.3 Fixes:
+ * - FIX: getNamedYouth_ now computes age from BirthYear when Age column absent
+ * - FIX: getGenericYouth_ uses row-based GC-{N} IDs when PopID/ID column absent
+ * - FIX: getGenericYouth_ builds name from First+Last (Generic_Citizens has no Name col)
+ *
  * v1.2 Fixes:
  * - FIX: No longer creates fake IDs (GEN-N, NAM-N) for citizens without PopID
  * - FIX: getNamedYouth_ now checks POPID column name variant
@@ -21,7 +26,7 @@
  * - Low-QoL neighborhoods generate more stress/resilience events
  * - Hotspot awareness for youth safety events
  *
- * @version 1.2
+ * @version 1.3
  * @tier 6.3
  */
 
@@ -29,7 +34,7 @@
 // CONSTANTS
 // ============================================================================
 
-var YOUTH_ENGINE_VERSION = '1.2';
+var YOUTH_ENGINE_VERSION = '1.3';
 
 // Event generation limits
 var YOUTH_EVENT_LIMITS = {
@@ -207,33 +212,43 @@ function getGenericYouth_(ss) {
   var idx = function(name) { return header.indexOf(name); };
 
   var iId = idx('PopID') !== -1 ? idx('PopID') : idx('ID');
+  var iFirst = idx('First');
+  var iLast = idx('Last');
   var iName = idx('Name');
   var iAge = idx('Age');
   var iNeighborhood = idx('Neighborhood');
   var iStatus = idx('Status');
 
-  // v1.2 FIX: Require valid ID column - don't create fake IDs
-  if (iId < 0) {
-    Logger.log('getGenericYouth_: No PopID or ID column found in Generic_Citizens');
-    return [];
-  }
+  // v1.3: Generic_Citizens may not have a PopID/ID column.
+  // Use row-based synthetic ID (GC-{row}) when no ID column exists.
+  var hasIdCol = (iId >= 0);
 
   var result = [];
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
     var age = Number(row[iAge]) || 0;
     var status = String(row[iStatus] || '').toLowerCase();
-    var citizenId = String(row[iId] || '').trim();
 
-    // v1.2 FIX: Skip rows without valid citizen ID - don't create fake IDs
+    // Build citizen ID: use PopID/ID column if available, otherwise row-based
+    var citizenId = hasIdCol ? String(row[iId] || '').trim() : '';
     if (!citizenId) {
-      continue;
+      citizenId = 'GC-' + (r + 2); // row index (1-based, +1 for header)
+    }
+
+    // Build name: try Name, then First+Last
+    var citizenName = '';
+    if (iName >= 0 && row[iName]) {
+      citizenName = String(row[iName]);
+    } else if (iFirst >= 0 || iLast >= 0) {
+      var first = iFirst >= 0 ? String(row[iFirst] || '') : '';
+      var last = iLast >= 0 ? String(row[iLast] || '') : '';
+      citizenName = (first + ' ' + last).trim();
     }
 
     if (age >= YOUTH_EVENT_LIMITS.MIN_AGE && age <= YOUTH_EVENT_LIMITS.MAX_AGE && status !== 'deceased') {
       result.push({
         id: citizenId,
-        name: String(row[iName] || ''),
+        name: citizenName,
         age: age,
         neighborhood: String(row[iNeighborhood] || ''),
         source: 'generic'
@@ -268,6 +283,7 @@ function getNamedYouth_(ss) {
   var iFirst = idx('First');
   var iLast = idx('Last');
   var iAge = idx('Age');
+  var iBirthYear = idx('BirthYear');
   var iNeighborhood = idx('Neighborhood');
   var iStatus = idx('Status');
 
@@ -277,10 +293,19 @@ function getNamedYouth_(ss) {
     return [];
   }
 
+  // v1.3: Compute current simulation year for age calculation from BirthYear
+  var currentYear = 2041; // Simulation year — aligned with roster intake
+
   var result = [];
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
-    var age = Number(row[iAge]) || 0;
+    // v1.3: Compute age from BirthYear if Age column doesn't exist
+    var age = 0;
+    if (iAge >= 0 && row[iAge]) {
+      age = Number(row[iAge]) || 0;
+    } else if (iBirthYear >= 0 && row[iBirthYear]) {
+      age = currentYear - (Number(row[iBirthYear]) || currentYear);
+    }
     var status = String(row[iStatus] || '').toLowerCase();
     var citizenId = String(row[iId] || '').trim();
 

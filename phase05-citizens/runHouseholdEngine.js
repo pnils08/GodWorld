@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * Household Engine v2.2
+ * Household Engine v2.3
  * ============================================================================
  *
  * Soft, world-aware household context events for Tier-3/4 ENGINE citizens.
@@ -74,6 +74,7 @@ function runHouseholdEngine_(ctx) {
   var econMood = S.economicMood || 50;
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
+  var hRng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var count = 0;
   var LIMIT = 6;
 
@@ -440,7 +441,7 @@ function runHouseholdEngine_(ctx) {
     // Cap chance
     if (chance > 0.12) chance = 0.12;
 
-    if (Math.random() >= chance) continue;
+    if (hRng() >= chance) continue;
 
     // ═══════════════════════════════════════════════════════════════════════
     // BUILD CITIZEN-SPECIFIC POOL
@@ -456,7 +457,7 @@ function runHouseholdEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // PICK AND LOG
     // ═══════════════════════════════════════════════════════════════════════
-    var pick = citizenPool[Math.floor(Math.random() * citizenPool.length)];
+    var pick = citizenPool[Math.floor(hRng() * citizenPool.length)];
     var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
 
     // Determine event tag (v2.2)

@@ -1,7 +1,11 @@
 /**
  * ============================================================================
- * HOUSEHOLD FORMATION ENGINE v1.0
+ * HOUSEHOLD FORMATION ENGINE v1.1
  * ============================================================================
+ *
+ * v1.1 Fixes:
+ * - FIX: Math.random() → ctx.rng for deterministic cycles
+ * - FIX: currentYear 2024 → 2041 (simulation year)
  *
  * Manages household lifecycle: formation, dissolution, births, marriages, income.
  *
@@ -102,6 +106,7 @@ function processHouseholdFormation_(ctx) {
   var ss = ctx.ss;
   var cycle = ctx.config.cycleCount;
   var S = ctx.summary;
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var results = {
     processed: 0,
@@ -140,7 +145,7 @@ function processHouseholdFormation_(ctx) {
     var households = loadHouseholds_(ss);
 
     // Form new households
-    var newHouseholds = formNewHouseholds_(ss, citizens, households, cycle);
+    var newHouseholds = formNewHouseholds_(ss, citizens, households, cycle, rng);
     results.householdsFormed = newHouseholds.length;
 
     // Process births
@@ -163,7 +168,7 @@ function processHouseholdFormation_(ctx) {
     results.rentBurdenCrisis = stressedHouseholds.filter(h => h.rentBurden >= RENT_BURDEN_CRISIS).length;
 
     // Dissolve stressed households
-    var dissolved = dissolveStressedHouseholds_(ss, stressedHouseholds, cycle);
+    var dissolved = dissolveStressedHouseholds_(ss, stressedHouseholds, cycle, rng);
     results.householdsDissolved = dissolved.length;
 
     // Generate story hooks
@@ -295,9 +300,9 @@ function parseJSON(value, defaultValue) {
 // HOUSEHOLD FORMATION
 // ════════════════════════════════════════════════════════════════════════════
 
-function formNewHouseholds_(ss, citizens, existingHouseholds, cycle) {
+function formNewHouseholds_(ss, citizens, existingHouseholds, cycle, rng) {
   var newHouseholds = [];
-  var currentYear = 2024;  // TODO: Get from calendar
+  var currentYear = 2041;  // Simulation year — aligned with roster intake
 
   // Find young adults without households
   var eligibleSingles = [];
@@ -313,7 +318,7 @@ function formNewHouseholds_(ss, citizens, existingHouseholds, cycle) {
 
       // Check if they have minimum income (would need income column)
       // For now, random chance
-      if (Math.random() < 0.15) {  // 15% chance per cycle
+      if (rng() < 0.15) {  // 15% chance per cycle
         eligibleSingles.push(citizen);
       }
     }
@@ -540,14 +545,15 @@ function detectHouseholdStress_(ss, households) {
   return stressed;
 }
 
-function dissolveStressedHouseholds_(ss, stressedHouseholds, cycle) {
+function dissolveStressedHouseholds_(ss, stressedHouseholds, cycle, rng) {
+  rng = rng || Math.random;
   var dissolved = [];
 
   // Only dissolve households in crisis with random chance
   for (var i = 0; i < stressedHouseholds.length; i++) {
     var stressed = stressedHouseholds[i];
 
-    if (stressed.severity === 'crisis' && Math.random() < 0.10) {  // 10% chance
+    if (stressed.severity === 'crisis' && rng() < 0.10) {  // 10% chance
       dissolved.push(stressed.household);
 
       // Mark household as dissolved

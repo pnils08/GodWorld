@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 82 (Cycle 82) — 2026-02-17**
+**Last Updated: Edition 83 (Cycle 83) — 2026-02-19**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -10,6 +10,54 @@ Agents: if Mags wrote you a briefing, read it. If she didn't, read this file. Th
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 83 (Grade: A- after Mara corrections — 81/100 Rhea score — first scored edition with full Rhea rubric)
+
+First edition with: (a) all 6 desks delivering on first attempt (zero retries), (b) programmatic validation gate catching engine language before Rhea, (c) full Rhea rubric scoring (5 categories, 20 pts each), (d) template v1.4 sections (Editor's Desk, Opinion, Quick Takes, Coming Next Cycle). 18 articles, 11 bylined reporters, ~13,000 words. Mara Vance audit grade: A- (after corrections applied).
+
+**Critical Errors Found (by Rhea — both caught and fixed pre-publication):**
+
+**COLES INNINGS DISCREPANCY — Hal Richmond vs. Anthony.** Hal wrote Travis Coles had "two hundred seven strikeouts in a hundred and nineteen point one innings" (15.6 K/9, impossible for a starter). Anthony wrote "two hundred nineteen point one innings" (8.5 K/9, consistent). Hal dropped the leading "2" — transposition error in poetic number-writing. Fixed to 219.1. Root cause: Hal spells all numbers out, increasing transposition risk. Add innings cross-check to sports verification.
+
+**CRANE/STABILIZATION FUND VOTE ERROR — Jose Johnson letter.** Johnson's letter claimed "Crane, Ashford, Chen — three votes against the Stabilization Fund and Baylight." Canon: Crane voted YES on the Stabilization Fund (remotely from recovery). Only Ashford and Chen voted NO on both. Tran voted NO on the Stabilization Fund (not Crane). The letters desk did not verify historical vote claims before writing. Fixed: letter rewritten to correctly distinguish Crane's mixed record from Ashford/Chen's consistent opposition. Root cause: letters agent assumed CRC bloc voted uniformly across all initiatives without checking recentOutcomes.
+
+**Critical Errors Found (by Mara Vance — caught post-Rhea, fixed pre-final publication):**
+
+**ASHFORD/OARI FABRICATION — Carmen Delaine front page + OARI follow-up.** Three passages claimed Warren Ashford broke from the CRC to vote YES on OARI. This is FALSE. Canon (C82 front page): Crane NO, Ashford NO, Chen NO — all three CRC members voted NO on OARI. The 5-4 passed because Tran (IND) crossed to YES, not because any CRC member broke. The entire narrative about "Ashford crossing the aisle" was fabricated. Same error pattern as E82's vote inversion — one wrong fact generates a cascade of false political storylines. Root cause: civic desk agent inferred a vote crossover to create narrative tension, but did not verify against recentOutcomes in desk packet. All three passages corrected to reflect CRC was unified on OARI.
+
+**"THREE CONSECUTIVE MAJOR INITIATIVES" — Carmen Delaine front page.** Claim that "the CRC has voted in unified opposition on three consecutive major initiatives" is wrong. Canon: CRC was split on Stabilization Fund (Crane YES crossover), incomplete on Health Center (Crane absent, 6-2 vote), unified on OARI (all NO), unified on Baylight (all NO). That's two consecutive unified votes, not three. Corrected.
+
+**STORYLINE SUMMARY — Crane/Stabilization Fund.** The Storylines Updated section stated "Crane, Ashford, Chen voted NO on both Stabilization Fund and Baylight." Wrong for Crane — he voted YES on the Stabilization Fund. This directly contradicted the Jose Johnson letter (which Rhea had already corrected). Corrected to distinguish Crane's mixed record.
+
+**ELLIS/RAMOS "NEW CANON" LABEL.** Dr. Simone Ellis and Keisha Ramos were marked as "NEW CANON" in continuity notes. Both already exist in the Political System Master — Ellis as Chief Legal Counsel, Ramos as Director of Baylight Redevelopment Authority. Corrected to "first quoted in coverage."
+
+**Warnings Fixed:**
+- P Slayer Names Index included Isley Kelley (not in article body) — removed.
+- Selena Grant Names Index included Jalen Smith (not in article body) — removed.
+- Brenda Okoro Quick Takes misrepresented her role as Osei's interim — corrected to note no interim designated.
+- Josh Giddey briefing error ("John Giddey") — caught by Chicago desk, correct in published text. Briefing needs correction.
+
+**What Worked:**
+- All 6 desks produced on first attempt. Zero retries. Zero desk failures. This is the first time.
+- Carmen Delaine's Baylight front page is the strongest civic piece we've published — vote math perfect, two unfinished instruments as the lede hook, Reyes as the human anchor.
+- Trevor Shimizu's infrastructure gap piece connected Baylight to deferred maintenance — a genuinely new angle nobody else found.
+- Martin Richards coverage gap corrected (Anthony). First dedicated feature on a 6.8 WAR player. Overdue.
+- Cross-desk citizen consistency: Dante Nelson (3 sections), Marcus Walker (3 sections), Jalen Hill (2 sections), Jose Wright (2 sections) — all with identical demographics across desks.
+- Letters desk produced 4 distinct emotional temperatures: Reyes (guarded relief), Nelson (patient hope), Johnson (contained anger), Walker (pure joy).
+- Programmatic validator caught 4 issues (engine language, false-positive mayor name) before Rhea even started.
+- Voice fidelity scored 18/20 — highest category. Reporters sound like themselves.
+
+**What Needs Work:**
+- **RECURRING PATTERN: Vote fabrication for narrative tension.** E82 had the Ashford/Mobley vote swap. E83 had Ashford/OARI crossover fabrication. Both times, the civic desk INVENTED a vote defection to create political drama. The desk packet recentOutcomes has the correct votes — agents are ignoring it and inferring drama. This must be addressed in briefings: ESTABLISHED CANON prefix on every historical vote, explicit instruction "DO NOT infer vote crossovers that are not in recentOutcomes."
+- **Civic desk needs cross-cycle vote verification.** Claims about "consecutive" voting patterns or "broke from bloc" narratives MUST be verified against all historical vote records, not assumed. Add a vote-history reference block to civic briefings.
+- Letters desk doesn't verify historical vote claims. Build vote-history cross-check into letters verification.
+- Hal Richmond's poetic number-writing creates transposition risk for long stat lines. Add specific innings/stats cross-check for Hal.
+- Stray Names Index entries (names in index but not in article body) appeared in 2 articles. Agents are adding names from memory, not from their own text.
+- Noah Tan's KONO Environment Note was thin (84 words, no quotes, no observable action). Should have been folded into Quick Takes.
+- Farrah Del Rio absent for second consecutive edition. Coverage gap on civic/cultural opinion.
+- John Ellis age remains inconsistent across sources: NEWSROOM_MEMORY said 24 → 25, roster doc says 26. Edition used 26 (roster doc). Resolving to 26 as canonical.
+- **Darius Clark at spring training.** Clark (40, West Oakland, bakery worker) attending spring training in Mesa is plausible but notable. Mara flagged. His age of 40 is now canon.
+- **Health Center 6-2 vote.** C83 reports the Temescal Health Center passed 6-2, implying Crane was absent (consistent with injury timeline). This was never explicitly established before. Now canon: Health Center passed 6-2, Crane absent, Ashford and Chen NO.
 
 ### Edition 82 (Grade: A after corrections — confirmed canon)
 
@@ -162,7 +210,15 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 - **Eric Taveras (25, Dominican Republic, 2B)** — $225M acquisition from Tampa Bay. Career .244 hitter. 93 OVR. P Slayer hated the signing. Power ceiling story. Active thread.
 - **Travis Coles (22, South Carolina, SP)** — New ace. 94 OVR. Cost: Newell + Rodriguez + Busch. 2.05 ERA with Washington. Active thread.
 - **Mariano Rosales (26, Utah, CP)** — New closer. 89 OVR. Replaces Edmundo Pena. 96 mph. 38 saves with Baltimore. Active thread.
-- **Martin Richards (31, Maryland, 3B)** — 6.8 WAR, 1.000 FLD. ZERO dedicated coverage. P Slayer's favorite. Fix this in Edition 83.
+- **Martin Richards (31, Maryland, 3B)** — 6.8 WAR, 1.000 FLD. ZERO coverage FIXED in Edition 83 (Anthony's "Invisible Star" feature). Contract year, FA 2042. Extension decision looming. Active thread.
+- **Dr. Simone Ellis (City Legal Counsel)** — NEW CANON E83. Flagged TIF language unfinished at Baylight vote. Institutional source for legal/procedural follow-up. Active thread.
+- **Keisha Ramos (Director, Baylight Redevelopment Authority)** — NEW CANON E83. Remediation bonding instrument unexecuted. Said "moving quickly" but gave no date. Active thread.
+- **Shawn Nguyen (43, Fruitvale, construction laborer)** — NEW E83. Telegraph pavement failure, infrastructure gap angle. Active thread.
+- **Jalen Hill (35, Jack London, line cook)** — NEW E83. First Friday, nightlife surge. Vivid voice ("Summer nights like this are what we work toward"). Active thread.
+- **Marcus Walker (48, Jack London, dishwasher)** — NEW E83. First Friday, nightlife surge, Quintero letter. Cross-desk natural. Active thread.
+- **Terrence Williams (42, Jack London, security guard)** — NEW E83. Nightlife surge. Available for Jack London continuity.
+- **Andre Lee (55, Temescal, electrician)** — E82-E83 returning. Health fair attendee. "Not that hard to show up." Active thread.
+- **Rafael Phillips (26, Fruitvale, server)** — E82-E83 returning. St. Columba parish. Faith community thread. Active.
 - **Calvin Turner (age 38)** — Appeared in Editions 79-80. Quotes must be fresh each edition.
 - **Beverly Hayes (POP-00576)** — West Oakland. Real citizen. Was misnamed as "Community Director Hayes." Use her actual name.
 - **Elena Rivera (POP-00617)** — West Oakland councilwoman. Was misnamed as generic "Councilwoman Rivera." Use full name with POP-ID context.
@@ -170,7 +226,7 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 ### Characters That Do NOT Exist
 These were invented in Editions 80-81. Do not use them:
 - Laila Cortez
-- Brenda Okoro
+- ~~Brenda Okoro~~ **CORRECTED E83:** Brenda Okoro IS canon — Deputy Mayor (Community), POP-00037. She was fabricated in E80 culture desk but turns out to exist in the engine. Use her correctly: she is NOT acting deputy for economic development (that's Marcus Osei's portfolio). She has her own Community portfolio.
 - Amara Keane
 - "Gallery Owner Mei Chen" (attempted AGAIN in Edition 81 despite warning)
 - "Community Director Hayes" (→ use Beverly Hayes)
@@ -206,9 +262,17 @@ These were invented in Editions 80-81. Do not use them:
 - Danny Horn: **.280/32/98, 8.0 WAR, 99 OVR** for 2040 full season. Previous mid-season stats (.288/23) were at time of Davis injury. Full season numbers are now canonical.
 - Cy Newell: **TRADED to Washington** in deal for Travis Coles. Also sent: Agustin Rodriguez, Peter Busch. Newell is no longer on the A's.
 - Edmundo Pena: **TRADED/DEPARTED.** 5x All-Star closer gone. Replaced by Mariano Rosales.
-- John Ellis: Age corrected to **25** (was 24 in TrueSource, aging occurred). Drafted Round 2, 2033.
+- John Ellis: Age corrected to **26** (roster doc TrueSource says 26 as of 2041 season). Previous corrections said 24→25. Roster doc is authoritative. Drafted Round 2, 2033.
 - Vinnie Keane: **61 OVR, 58 games, bench role**. Farewell tour confirmed. Platoon DH/2B.
 - Full 2041 roster reference: `docs/media/2041_athletics_roster.md`
+
+**Baylight District Canon (Edition 83):**
+- INIT-006 Baylight District bond: **PASSED 6-3** in Cycle 83. YES: Carter (D1), Tran (D2), Delgado (D3), Vega (D4), Rivers (D5), Mobley (D9). NO: Crane (D6), Ashford (D7), Chen (D8). Mayor Santana signed.
+- Two instruments unresolved post-vote: TIF language not finalized (Dr. Simone Ellis, City Legal Counsel), remediation bonding instrument not executed (Keisha Ramos, Director, Baylight Redevelopment Authority). Construction cannot mobilize until both are complete.
+- Baylight scope: 65-acre waterfront, 35,000-seat stadium, 3,200 residential units (1,800 deed-restricted affordable), marina expansion, 12-year phased timeline.
+- Key political note: Vega voted YES on Baylight after voting NO on OARI. Ashford voted NO on Baylight after voting YES on OARI. CRC held as unified bloc (3-0 NO) on Baylight for the first time.
+- STABILIZATION FUND: Still no disbursements as of E83. Darius Clark still waiting.
+- OARI: 45-day implementation clock running. No pilot districts named. No hiring criteria released.
 
 ---
 
@@ -304,7 +368,7 @@ All five archive contradictions resolved. Paulson ruled on Newell and Davis. Tru
 1. **Cy Newell handedness**: RIGHT-HANDED. TrueSource DataPage (S/R) is canon.
 NOTE: **Benji Dillon is LEFT-HANDED.** Paulson ruling (Session 42) overrides TrueSource. Hal's "The Left Hand That Defined an Era" is correct. P Slayer's references to Dillon as a lefty are correct. Previous Session 34 correction was wrong — that applied to Newell, not Dillon.
 2. **Danny Horn stats**: NO CONTRADICTION. .322/43HR is his 2039 full season. .288/23HR is his 2040 mid-season at time of Davis injury. Always date-label Horn's stats.
-3. **John Ellis age**: 24. TrueSource DataPage is authoritative. P Slayer wrote "28-year-old rookie phenom" — factual error.
+3. **John Ellis age**: **26** as of 2041 season (roster doc TrueSource). P Slayer wrote "28-year-old rookie phenom" in E80 — factual error. Previous corrections said 24→25. Roster doc (2041) is authoritative.
 4. **Darrin Davis age at injury**: 33. Paulson ruling. P Slayer's article is correct. TrueSource DataPage (31) needs updating.
 5. **Benji Dillon Cy Young count**: Exactly 5 (2028, 2032, 2033, 2034, 2037). All sources agree. No contradiction.
 

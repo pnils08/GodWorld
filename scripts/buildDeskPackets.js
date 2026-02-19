@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 /**
- * buildDeskPackets.js v1.7
+ * buildDeskPackets.js v1.8
  *
  * Pulls live data from Google Sheets and splits into per-desk JSON packets
  * for independent agent processing in the Media Room.
+ *
+ * v1.8 Changes:
+ * - Auto-runs buildArchiveContext.js after packet generation — queries Supermemory
+ *   for past coverage and writes per-desk archive files. Skips gracefully if
+ *   SUPERMEMORY_CC_API_KEY is not configured. Eliminates forgotten-step pipeline gap.
  *
  * v1.7 Changes:
  * - Executive Branch canon — pulls mayor and deputy mayor from Civic_Office_Ledger
@@ -1386,7 +1391,7 @@ function parseWinPctFromRecord(record) {
 // ─── MAIN ──────────────────────────────────────────────────
 
 async function main() {
-  console.log('=== buildDeskPackets v1.6 (Story Connections Enrichment) ===');
+  console.log('=== buildDeskPackets v1.8 (Auto Archive Context) ===');
   console.log('Cycle:', CYCLE);
   console.log('Pulling live data from Google Sheets...\n');
 
@@ -1933,7 +1938,7 @@ async function main() {
   var manifestFile = path.join(OUTPUT_DIR, 'manifest.json');
   fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
 
-  console.log('\n=== COMPLETE ===');
+  console.log('\n=== DESK PACKETS COMPLETE ===');
   console.log('Output directory:', OUTPUT_DIR);
   console.log('Packets generated:', manifest.packets.length);
   console.log('\nManifest summary:');
@@ -1942,6 +1947,43 @@ async function main() {
                 p.events + ' events, ' + p.seeds + ' seeds, ' +
                 p.hooks + ' hooks, ' + p.storylines + ' storylines');
   });
+
+  // ── Auto-run buildArchiveContext.js ──────────────────────────
+  // Queries Supermemory for past coverage relevant to this cycle's
+  // desk packets. Writes per-desk archive context files that Mags
+  // weaves into briefings. Skips gracefully if API key is missing.
+  var archiveScript = path.join(__dirname, 'buildArchiveContext.js');
+  if (fs.existsSync(archiveScript)) {
+    var hasApiKey = !!(process.env.SUPERMEMORY_CC_API_KEY);
+    if (!hasApiKey) {
+      // Check .env file directly
+      var envPath = path.join(__dirname, '..', '.env');
+      if (fs.existsSync(envPath)) {
+        var envContent = fs.readFileSync(envPath, 'utf-8');
+        hasApiKey = /SUPERMEMORY_CC_API_KEY\s*=\s*.+/.test(envContent);
+      }
+    }
+
+    if (hasApiKey) {
+      console.log('\n=== BUILDING ARCHIVE CONTEXT ===');
+      console.log('Running buildArchiveContext.js for Cycle ' + CYCLE + '...');
+      try {
+        var { execSync } = require('child_process');
+        execSync('node ' + archiveScript + ' ' + CYCLE, {
+          stdio: 'inherit',
+          cwd: path.join(__dirname, '..')
+        });
+      } catch (archiveErr) {
+        console.warn('[WARN] Archive context build failed (non-fatal): ' + archiveErr.message);
+        console.warn('Run manually: node scripts/buildArchiveContext.js ' + CYCLE);
+      }
+    } else {
+      console.log('\n[INFO] Skipping archive context — SUPERMEMORY_CC_API_KEY not configured');
+      console.log('Run manually: node scripts/buildArchiveContext.js ' + CYCLE);
+    }
+  }
+
+  console.log('\n=== ALL DONE ===');
 }
 
 // ─── WEATHER/FIELD EXTRACTORS ──────────────────────────────

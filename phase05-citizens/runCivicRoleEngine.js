@@ -22,6 +22,7 @@
 
 function runCivicRoleEngine_(ctx) {
 
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var ss = ctx.ss;
   var ledger = ss.getSheetByName('Simulation_Ledger');
   var logSheet = ss.getSheetByName('LifeHistory_Log');
@@ -315,7 +316,7 @@ function runCivicRoleEngine_(ctx) {
 
       if (chance > 0.08) chance = 0.08;
 
-      if (Math.random() < chance) {
+      if (rng() < chance) {
         // Build pool of civic notes
         var pool = [
           "Continuing civic responsibilities.",
@@ -353,7 +354,7 @@ function runCivicRoleEngine_(ctx) {
           pool = pool.concat(creationDayCivicNotes);
         }
 
-        baseNote = pool[Math.floor(Math.random() * pool.length)];
+        baseNote = pool[Math.floor(rng() * pool.length)];
         shouldLog = true;
       }
     }

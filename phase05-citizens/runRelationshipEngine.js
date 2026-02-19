@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * Relationship Engine v2.3
+ * Relationship Engine v2.4
  * ============================================================================
  * 
  * Enhancements over v2.2:
@@ -31,6 +31,8 @@
  */
 
 function runRelationshipEngine_(ctx) {
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var ss = ctx.ss;
   var ledger = ss.getSheetByName('Simulation_Ledger');
@@ -462,30 +464,30 @@ function runRelationshipEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // TRIGGER SOCIAL DRIFT
     // ═══════════════════════════════════════════════════════════════════════
-    if (Math.random() < driftChance) {
+    if (rng() < driftChance) {
 
       // Build contextual pool
       var pool = interactionPool.slice();
       var eventTag = "Relationship";
 
       // Add bond-aware events based on citizen's bonds
-      if (hasRivalry && Math.random() < 0.35) {
+      if (hasRivalry && rng() < 0.35) {
         pool = pool.concat(rivalryRels);
       }
-      if (hasAlliance && Math.random() < 0.35) {
+      if (hasAlliance && rng() < 0.35) {
         pool = pool.concat(allianceRels);
       }
-      if (hasMentorship && Math.random() < 0.30) {
+      if (hasMentorship && rng() < 0.30) {
         pool = pool.concat(mentorshipRels);
       }
 
       // Add Arc Events
-      if (activeArc && Math.random() < 0.4) {
+      if (activeArc && rng() < 0.4) {
         pool = pool.concat(arcRels);
       }
 
       // Add Weather Events
-      if (typeof getWeatherEvent_ === 'function' && Math.random() < 0.2) {
+      if (typeof getWeatherEvent_ === 'function' && rng() < 0.2) {
         var weatherEvent = getWeatherEvent_(ctx, false);
         if (weatherEvent) {
           pool.push(weatherEvent.text);
@@ -500,7 +502,7 @@ function runRelationshipEngine_(ctx) {
       }
 
       // Add Media-Influenced Events
-      if (typeof getMediaInfluencedEvent_ === 'function' && Math.random() < 0.15) {
+      if (typeof getMediaInfluencedEvent_ === 'function' && rng() < 0.15) {
         var mediaEvent = getMediaInfluencedEvent_(ctx);
         if (mediaEvent) {
           pool.push(mediaEvent.text);
@@ -510,7 +512,7 @@ function runRelationshipEngine_(ctx) {
       // ═══════════════════════════════════════════════════════════════════════
       // PICK EVENT
       // ═══════════════════════════════════════════════════════════════════════
-      var pick = pool[Math.floor(Math.random() * pool.length)];
+      var pick = pool[Math.floor(rng() * pool.length)];
 
       // Determine event tag based on which pool it came from
       if (rivalryRels.indexOf(pick) >= 0) {

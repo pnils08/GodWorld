@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * generateNamedCitizenEvents_ v2.3
+ * generateNamedCitizenEvents_ v2.4
  * ============================================================================
  *
  * v2.3 Enhancements:
@@ -24,6 +24,8 @@
  */
 
 function generateNamedCitizenEvents_(ctx) {
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var ledger = ctx.ss.getSheetByName('Simulation_Ledger');
   var logSheet = ctx.ss.getSheetByName('LifeHistory_Log');
@@ -526,7 +528,7 @@ function generateNamedCitizenEvents_(ctx) {
     // Cap chance (v2.3: raised from 0.10 to 0.12)
     if (chance > 0.12) chance = 0.12;
 
-    if (Math.random() >= chance) continue;
+    if (rng() >= chance) continue;
 
     // ═══════════════════════════════════════════════════════════════════════
     // DETERMINE EVENT TYPE
@@ -539,11 +541,11 @@ function generateNamedCitizenEvents_(ctx) {
       pool = civEvents;
     }
     else if (isUNI || isMED) {
-      tag = Math.random() < 0.5 ? "Lifestyle" : "Reputation";
+      tag = rng() < 0.5 ? "Lifestyle" : "Reputation";
       pool = tag === "Lifestyle" ? uniMedLifestyle : uniMedReputation;
     }
     else {
-      var roll = Math.random();
+      var roll = rng();
       if (roll < 0.33) { tag = "Lifestyle"; pool = generalLifestyle; }
       else if (roll < 0.66) { tag = "Community"; pool = generalCommunity; }
       else { tag = "Reputation"; pool = generalReputation; }
@@ -589,13 +591,13 @@ function generateNamedCitizenEvents_(ctx) {
     // ADD BOND-AWARE EVENTS
     // ═══════════════════════════════════════════════════════════════════════
     if (!isUNI) {
-      if (hasAlliance && Math.random() < 0.3) {
+      if (hasAlliance && rng() < 0.3) {
         pool = pool.concat(allianceEvents);
       }
-      if (hasRivalry && Math.random() < 0.25) {
+      if (hasRivalry && rng() < 0.25) {
         pool = pool.concat(rivalryEvents);
       }
-      if (hasMentorship && Math.random() < 0.25) {
+      if (hasMentorship && rng() < 0.25) {
         pool = pool.concat(mentorshipEvents);
       }
     }
@@ -603,14 +605,14 @@ function generateNamedCitizenEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // ADD ARC EVENTS
     // ═══════════════════════════════════════════════════════════════════════
-    if (activeArc && !isUNI && Math.random() < 0.3) {
+    if (activeArc && !isUNI && rng() < 0.3) {
       pool = pool.concat(arcEvents);
     }
 
     // ═══════════════════════════════════════════════════════════════════════
     // ADD WEATHER EVENTS
     // ═══════════════════════════════════════════════════════════════════════
-    if (typeof getWeatherEvent_ === 'function' && Math.random() < 0.2) {
+    if (typeof getWeatherEvent_ === 'function' && rng() < 0.2) {
       var weatherEvent = getWeatherEvent_(ctx, false);
       if (weatherEvent) {
         pool.push(weatherEvent.text);
@@ -620,7 +622,7 @@ function generateNamedCitizenEvents_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // ADD MEDIA-INFLUENCED EVENTS
     // ═══════════════════════════════════════════════════════════════════════
-    if (typeof getMediaInfluencedEvent_ === 'function' && Math.random() < 0.15) {
+    if (typeof getMediaInfluencedEvent_ === 'function' && rng() < 0.15) {
       var mediaEvent = getMediaInfluencedEvent_(ctx);
       if (mediaEvent) {
         pool.push(mediaEvent.text);
@@ -628,7 +630,7 @@ function generateNamedCitizenEvents_(ctx) {
     }
 
     // Pick final event description
-    var description = pool[Math.floor(Math.random() * pool.length)];
+    var description = pool[Math.floor(rng() * pool.length)];
 
     // ═══════════════════════════════════════════════════════════════════════
     // DETERMINE FINAL TAG BASED ON CONTENT

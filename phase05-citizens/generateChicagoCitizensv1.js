@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * CHICAGO GENERIC CITIZEN GENERATOR v1.0
+ * CHICAGO GENERIC CITIZEN GENERATOR v1.1
  * ============================================================================
  * 
  * Creates and maintains a Chicago citizen pool for Media Room reference.
@@ -20,7 +20,8 @@
  * Main function — generates and maintains Chicago citizen pool
  */
 function generateChicagoCitizens_(ctx) {
-  
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var ss = ctx.ss;
   var cycle = ctx.config.cycleCount || 0;
   
@@ -68,7 +69,7 @@ function generateChicagoCitizens_(ctx) {
     
     var newCitizens = [];
     for (var n = 0; n < needed; n++) {
-      newCitizens.push(generateChicagoCitizen_(cycle));
+      newCitizens.push(generateChicagoCitizen_(cycle, rng));
     }
     
     // Write new citizens
@@ -93,11 +94,11 @@ function generateChicagoCitizens_(ctx) {
   
   // MAINTAIN: Add 2-5 new citizens per cycle if below target
   else if (activeCitizens.length < targetPool) {
-    var toAdd = Math.floor(Math.random() * 4) + 2;  // 2-5
+    var toAdd = Math.floor(rng() * 4) + 2;  // 2-5
     Logger.log('generateChicagoCitizens_: Adding ' + toAdd + ' citizens');
-    
+
     for (var a = 0; a < toAdd; a++) {
-      var newC = generateChicagoCitizen_(cycle);
+      var newC = generateChicagoCitizen_(cycle, rng);
       sheet.appendRow([
         newC.citizenId,
         newC.name,
@@ -116,14 +117,14 @@ function generateChicagoCitizens_(ctx) {
   
   // CHURN: Remove 0-2 citizens per cycle if above minimum (moved away)
   if (activeCitizens.length > minPool + 5) {
-    var toRemove = Math.floor(Math.random() * 3);  // 0-2
+    var toRemove = Math.floor(rng() * 3);  // 0-2
     if (toRemove > 0) {
       Logger.log('generateChicagoCitizens_: Removing ' + toRemove + ' citizens (moved away)');
       
       // Mark random citizens as inactive
       var removeIndices = [];
       while (removeIndices.length < toRemove && removeIndices.length < activeCitizens.length - minPool) {
-        var idx = Math.floor(Math.random() * activeCitizens.length);
+        var idx = Math.floor(rng() * activeCitizens.length);
         if (removeIndices.indexOf(idx) === -1) {
           removeIndices.push(idx);
         }
@@ -190,19 +191,20 @@ function createChicagoCitizensSheet_(ss) {
 /**
  * Generate a single Chicago citizen
  */
-function generateChicagoCitizen_(cycle) {
-  
-  var gender = Math.random() < 0.5 ? 'M' : 'F';
+function generateChicagoCitizen_(cycle, rng) {
+
+  rng = (typeof rng === 'function') ? rng : Math.random;
+  var gender = rng() < 0.5 ? 'M' : 'F';
   var firstName = gender === 'M' ? pickRandom_(CHICAGO_FIRST_NAMES_M_) : pickRandom_(CHICAGO_FIRST_NAMES_F_);
   var lastName = pickRandom_(CHICAGO_LAST_NAMES_);
-  
-  var neighborhood = pickWeightedRandom_(CHICAGO_NEIGHBORHOODS_);
+
+  var neighborhood = pickWeightedRandom_(CHICAGO_NEIGHBORHOODS_, rng);
   var occupation = getChicagoOccupation_(neighborhood);
-  var age = generateAge_();
-  var tier = generateTier_();
-  
+  var age = generateAge_(rng);
+  var tier = generateTier_(rng);
+
   return {
-    citizenId: 'CHI-' + generateId_(),
+    citizenId: 'CHI-' + generateId_(rng),
     name: firstName + ' ' + lastName,
     age: age,
     gender: gender,
@@ -219,23 +221,25 @@ function generateChicagoCitizen_(cycle) {
 /**
  * Generate age with realistic distribution
  */
-function generateAge_() {
+function generateAge_(rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   // Weighted toward working age
-  var roll = Math.random();
-  if (roll < 0.05) return Math.floor(Math.random() * 10) + 18;       // 18-27: 5%
-  if (roll < 0.30) return Math.floor(Math.random() * 10) + 25;       // 25-34: 25%
-  if (roll < 0.55) return Math.floor(Math.random() * 10) + 35;       // 35-44: 25%
-  if (roll < 0.75) return Math.floor(Math.random() * 10) + 45;       // 45-54: 20%
-  if (roll < 0.90) return Math.floor(Math.random() * 10) + 55;       // 55-64: 15%
-  return Math.floor(Math.random() * 15) + 65;                         // 65-79: 10%
+  var roll = rng();
+  if (roll < 0.05) return Math.floor(rng() * 10) + 18;       // 18-27: 5%
+  if (roll < 0.30) return Math.floor(rng() * 10) + 25;       // 25-34: 25%
+  if (roll < 0.55) return Math.floor(rng() * 10) + 35;       // 35-44: 25%
+  if (roll < 0.75) return Math.floor(rng() * 10) + 45;       // 45-54: 20%
+  if (roll < 0.90) return Math.floor(rng() * 10) + 55;       // 55-64: 15%
+  return Math.floor(rng() * 15) + 65;                         // 65-79: 10%
 }
 
 
 /**
  * Generate tier (most are Tier 4)
  */
-function generateTier_() {
-  var roll = Math.random();
+function generateTier_(rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
+  var roll = rng();
   if (roll < 0.70) return 4;   // 70% Tier 4
   if (roll < 0.90) return 3;   // 20% Tier 3
   if (roll < 0.98) return 2;   // 8% Tier 2
@@ -263,18 +267,19 @@ function getChicagoOccupation_(neighborhood) {
 /**
  * Pick weighted random from object {name: weight}
  */
-function pickWeightedRandom_(weightedObj) {
+function pickWeightedRandom_(weightedObj, rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   var items = [];
   var weights = [];
   var total = 0;
-  
+
   for (var key in weightedObj) {
     items.push(key);
     weights.push(weightedObj[key]);
     total += weightedObj[key];
   }
-  
-  var roll = Math.random() * total;
+
+  var roll = rng() * total;
   var cumulative = 0;
   
   for (var i = 0; i < items.length; i++) {
@@ -291,11 +296,12 @@ function pickWeightedRandom_(weightedObj) {
 /**
  * Generate unique ID
  */
-function generateId_() {
+function generateId_(rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   var chars = '0123456789ABCDEF';
   var id = '';
   for (var i = 0; i < 8; i++) {
-    id += chars[Math.floor(Math.random() * 16)];
+    id += chars[Math.floor(rng() * 16)];
   }
   return id;
 }
@@ -426,7 +432,7 @@ function testChicagoCitizenGeneration_() {
   Logger.log('=== CHICAGO CITIZEN TEST ===');
   
   for (var i = 0; i < 10; i++) {
-    var c = generateChicagoCitizen_(69);
+    var c = generateChicagoCitizen_(69, Math.random);
     Logger.log(c.name + ' | ' + c.age + ' | ' + c.gender + ' | ' + c.neighborhood + ' | ' + c.occupation + ' | Tier ' + c.tier);
   }
   

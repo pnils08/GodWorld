@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * Neighborhood Engine v2.3
+ * Neighborhood Engine v2.4
  * ============================================================================
  *
  * Assigns Tier-3 and Tier-4 citizens to Oakland neighborhoods.
@@ -33,6 +33,8 @@
  */
 
 function runNeighborhoodEngine_(ctx) {
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var ss = ctx.ss;
   var ledger = ss.getSheetByName('Simulation_Ledger');
@@ -187,7 +189,7 @@ function runNeighborhoodEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // DEMOGRAPHIC-AWARE NEIGHBORHOOD PICKER (v2.3)
   // ═══════════════════════════════════════════════════════════════════════════
-  function pickDemographicNeighborhood_(ss, row, neighborhoods, iBirthYear, idxFn) {
+  function pickDemographicNeighborhood_(ss, row, neighborhoods, iBirthYear, idxFn, rng) {
     // Determine citizen type based on age
     var simYear = 2041;
     var citizenType = 'young_professional';
@@ -222,13 +224,13 @@ function runNeighborhoodEngine_(ctx) {
           }
         }
         if (weighted.length > 0) {
-          return weighted[Math.floor(Math.random() * weighted.length)];
+          return weighted[Math.floor(rng() * weighted.length)];
         }
       }
     }
 
     // Fallback: random selection
-    return neighborhoods[Math.floor(Math.random() * neighborhoods.length)];
+    return neighborhoods[Math.floor(rng() * neighborhoods.length)];
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -351,7 +353,7 @@ function runNeighborhoodEngine_(ctx) {
 
     if (!neighborhood || neighborhood === '' || neighborhood === 'Oakland, CA') {
       // v2.3: Use demographic-weighted neighborhood selection
-      neighborhood = pickDemographicNeighborhood_(ss, row, neighborhoods, iBirthYear, idx);
+      neighborhood = pickDemographicNeighborhood_(ss, row, neighborhoods, iBirthYear, idx, rng);
       if (iNeighborhood >= 0) {
         row[iNeighborhood] = neighborhood;
       }
@@ -422,7 +424,7 @@ function runNeighborhoodEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // DRIFT EVENT TRIGGER
     // ═══════════════════════════════════════════════════════════════════════
-    if (Math.random() < driftChance) {
+    if (rng() < driftChance) {
 
       var eventPool = (neighborhoodEvents[neighborhood] || genericEvents).slice();
       var eventTag = "Neighborhood";
@@ -476,7 +478,7 @@ function runNeighborhoodEngine_(ctx) {
         eventPool.push("felt neighbors more engaged with each other");
       }
 
-      var entry = eventPool[Math.floor(Math.random() * eventPool.length)];
+      var entry = eventPool[Math.floor(rng() * eventPool.length)];
 
       // Determine event tag (v2.2)
       if (isFirstFriday && firstFridayEvents[neighborhood] && firstFridayEvents[neighborhood].indexOf(entry) >= 0) {

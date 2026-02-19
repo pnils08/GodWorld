@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * EDUCATION & CAREER ENGINE v1.0
+ * EDUCATION & CAREER ENGINE v1.1
  * ============================================================================
  *
  * Tracks education levels, career progression, and education → career pathways.
@@ -92,10 +92,12 @@ var ADVANCEMENT_CYCLES = {
 // ════════════════════════════════════════════════════════════════════════════
 
 function processEducationCareer_(ctx) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+
   var ss = ctx.ss;
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
 
-  Logger.log('processEducationCareer_ v1.0: Starting...');
+  Logger.log('processEducationCareer_ v1.1: Starting...');
 
   var results = {
     processed: 0,
@@ -106,11 +108,11 @@ function processEducationCareer_(ctx) {
   };
 
   // Step 1: Derive education levels from existing flags
-  var eduResults = deriveEducationLevels_(ss, ctx);
+  var eduResults = deriveEducationLevels_(ss, ctx, rng);
   results.educationUpdated = eduResults.updated;
 
   // Step 2: Update career stages and track progression
-  var careerResults = updateCareerProgression_(ss, cycle);
+  var careerResults = updateCareerProgression_(ss, cycle, rng);
   results.careerAdvanced = careerResults.advanced;
   results.stagnationDetected = careerResults.stagnant;
 
@@ -119,7 +121,7 @@ function processEducationCareer_(ctx) {
   results.incomeAdjusted = incomeResults.updated;
 
   // Step 4: Detect career mobility (advancing/stagnant/declining)
-  var mobilityResults = detectCareerMobility_(ss, ctx, cycle);
+  var mobilityResults = detectCareerMobility_(ss, ctx, cycle, rng);
   results.mobilityEvents = mobilityResults.events;
 
   // Step 5: Check school quality and generate alerts
@@ -127,7 +129,7 @@ function processEducationCareer_(ctx) {
   results.schoolAlerts = schoolResults.alerts;
 
   Logger.log(
-    'processEducationCareer_ v1.0: Complete. ' +
+    'processEducationCareer_ v1.1: Complete. ' +
     'Education: ' + results.educationUpdated + ', ' +
     'Career: ' + results.careerAdvanced + ', ' +
     'Stagnant: ' + results.stagnationDetected + ', ' +
@@ -142,7 +144,7 @@ function processEducationCareer_(ctx) {
 // EDUCATION LEVEL DERIVATION
 // ════════════════════════════════════════════════════════════════════════════
 
-function deriveEducationLevels_(ss, ctx) {
+function deriveEducationLevels_(ss, ctx, rng) {
   var sheet = ss.getSheetByName('Simulation_Ledger');
   if (!sheet) return { updated: 0 };
 
@@ -193,10 +195,10 @@ function deriveEducationLevels_(ss, ctx) {
     } else if (age < 18) {
       eduLevel = EDUCATION_LEVELS.NONE; // Youth
     } else if (age < 22) {
-      eduLevel = Math.random() < 0.8 ? EDUCATION_LEVELS.HS_DIPLOMA : EDUCATION_LEVELS.HS_DROPOUT;
+      eduLevel = rng() < 0.8 ? EDUCATION_LEVELS.HS_DIPLOMA : EDUCATION_LEVELS.HS_DROPOUT;
     } else {
       // Adults: 85% HS diploma, 10% some college, 5% dropout
-      var r = Math.random();
+      var r = rng();
       if (r < 0.05) eduLevel = EDUCATION_LEVELS.HS_DROPOUT;
       else if (r < 0.15) eduLevel = EDUCATION_LEVELS.SOME_COLLEGE;
       else eduLevel = EDUCATION_LEVELS.HS_DIPLOMA;
@@ -218,7 +220,7 @@ function deriveEducationLevels_(ss, ctx) {
 // CAREER PROGRESSION
 // ════════════════════════════════════════════════════════════════════════════
 
-function updateCareerProgression_(ss, cycle) {
+function updateCareerProgression_(ss, cycle, rng) {
   var sheet = ss.getSheetByName('Simulation_Ledger');
   if (!sheet) return { advanced: 0, stagnant: 0 };
 
@@ -272,7 +274,7 @@ function updateCareerProgression_(ss, cycle) {
 
       if (careerStage === CAREER_STAGES.ENTRY && cyclesSincePromotion >= ADVANCEMENT_CYCLES.ENTRY_TO_MID) {
         // Entry → Mid
-        if (yearsInCareer >= 5 && Math.random() < 0.15) {
+        if (yearsInCareer >= 5 && rng() < 0.15) {
           row[iCareerStage] = CAREER_STAGES.MID;
           row[iLastPromotion] = cycle;
           advanced++;
@@ -283,7 +285,7 @@ function updateCareerProgression_(ss, cycle) {
         if (education === 'bachelor') advanceChance = 0.10;
         if (education === 'graduate') advanceChance = 0.15;
 
-        if (yearsInCareer >= 10 && Math.random() < advanceChance) {
+        if (yearsInCareer >= 10 && rng() < advanceChance) {
           row[iCareerStage] = CAREER_STAGES.SENIOR;
           row[iLastPromotion] = cycle;
           advanced++;
@@ -374,7 +376,7 @@ function matchEducationToIncome_(ss) {
 // CAREER MOBILITY DETECTION
 // ════════════════════════════════════════════════════════════════════════════
 
-function detectCareerMobility_(ss, ctx, cycle) {
+function detectCareerMobility_(ss, ctx, cycle, rng) {
   var sheet = ss.getSheetByName('Simulation_Ledger');
   if (!sheet) return { events: 0 };
 
@@ -414,7 +416,7 @@ function detectCareerMobility_(ss, ctx, cycle) {
       mobility = CAREER_MOBILITY.STAGNANT;
 
       // Generate stagnation story hook
-      if (Math.random() < 0.05) {
+      if (rng() < 0.05) {
         var name = (iName >= 0 ? row[iName] : '') + ' ' + (iLast >= 0 ? row[iLast] : '');
         ctx.summary.storyHooks = ctx.summary.storyHooks || [];
         ctx.summary.storyHooks.push({

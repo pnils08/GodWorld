@@ -37,6 +37,7 @@
 
 function checkForPromotions_(ctx) {
 
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var ss = ctx.ss;
 
   var generic = ss.getSheetByName("Generic_Citizens");
@@ -361,7 +362,7 @@ function checkForPromotions_(ctx) {
 
     // World-aware promotion chance
     var chance = promotionChance(0.20, row);
-    if (Math.random() > chance) continue;
+    if (rng() > chance) continue;
 
     // === Promote to Tier-3 ===
     var first = row[gFirst] || "";

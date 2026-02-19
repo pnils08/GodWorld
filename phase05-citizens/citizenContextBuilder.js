@@ -1065,6 +1065,7 @@ function diagnoseLedgerStructure() {
  * Get random citizens from a neighborhood for Media Room to quote
  */
 function getCitizensForQuotes(neighborhood, count) {
+  var rng = Math.random; // centralization prep — no ctx in scope
   var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var citizens = [];
   
@@ -1100,7 +1101,7 @@ function getCitizensForQuotes(neighborhood, count) {
     
     // Shuffle and take requested count
     for (var j = matches.length - 1; j > 0; j--) {
-      var k = Math.floor(Math.random() * (j + 1));
+      var k = Math.floor(rng() * (j + 1));
       var temp = matches[j];
       matches[j] = matches[k];
       matches[k] = temp;

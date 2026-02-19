@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * BOND ENGINE V2.5
+ * BOND ENGINE V2.6
  * ============================================================================
  *
  * Manages citizen relationships with calendar awareness.
+ *
+ * v2.6 Fixes:
+ * - Replaced all Math.random() calls with ctx.rng for deterministic randomness
+ * - Each ctx-receiving function initializes rng fallback: ctx.rng || Math.random
+ * - generateBondId_ now accepts ctx parameter for deterministic ID generation
  *
  * v2.5 Fixes:
  * - Added Simulation_Ledger fallback when Citizen_Directory doesn't exist
@@ -530,6 +535,7 @@ function findColIndex_(headers, possibleNames) {
 // ============================================================
 
 function updateExistingBonds_(ctx) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var S = ctx.summary || {};
   var bonds = ctx.summary.relationshipBonds || [];
   var currentCycle = S.cycleId || ctx.config.cycleCount || 0;
@@ -585,7 +591,7 @@ function updateExistingBonds_(ctx) {
       if (bond.bondType === BOND_TYPES.RIVALRY) {
         intensity += 1;
       } else if (bond.bondType === BOND_TYPES.ALLIANCE) {
-        if (Math.random() < 0.2) intensity -= 0.5;
+        if (rng() < 0.2) intensity -= 0.5;
       }
     }
 
@@ -707,6 +713,7 @@ function updateExistingBonds_(ctx) {
 // ============================================================
 
 function detectNewBonds_(ctx) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var S = ctx.summary || {};
   var currentCycle = S.cycleId || ctx.config.cycleCount || 0;
   var newBonds = [];
@@ -776,7 +783,7 @@ function detectNewBonds_(ctx) {
         var festivalHoods = FESTIVAL_NEIGHBORHOODS[holiday];
         var inFestivalZone = festivalHoods.indexOf(nhA) >= 0 || festivalHoods.indexOf(nhB) >= 0;
 
-        if (inFestivalZone && Math.random() < 0.4) {
+        if (inFestivalZone && rng() < 0.4) {
           newBonds.push(makeBond_(
             citizenA, citizenB,
             BOND_TYPES.FESTIVAL,
@@ -798,7 +805,7 @@ function detectNewBonds_(ctx) {
         var sportsHoods = ['Jack London', 'Downtown'];
         var inSportsZone = sportsHoods.indexOf(nhA) >= 0 || sportsHoods.indexOf(nhB) >= 0;
 
-        if (inSportsZone && Math.random() < 0.3) {
+        if (inSportsZone && rng() < 0.3) {
           newBonds.push(makeBond_(
             citizenA, citizenB,
             BOND_TYPES.SPORTS_RIVAL,
@@ -820,7 +827,7 @@ function detectNewBonds_(ctx) {
         var inArtsDistrict = ARTS_DISTRICT_NEIGHBORHOODS.indexOf(nhA) >= 0 ||
                            ARTS_DISTRICT_NEIGHBORHOODS.indexOf(nhB) >= 0;
 
-        if (inArtsDistrict && Math.random() < 0.35) {
+        if (inArtsDistrict && rng() < 0.35) {
           newBonds.push(makeBond_(
             citizenA, citizenB,
             BOND_TYPES.PROFESSIONAL,
@@ -839,7 +846,7 @@ function detectNewBonds_(ctx) {
 
       // CREATION DAY community bonds
       if (isCreationDay && sameNeighborhood) {
-        if (Math.random() < 0.35) {
+        if (rng() < 0.35) {
           newBonds.push(makeBond_(
             citizenA, citizenB,
             BOND_TYPES.ALLIANCE,
@@ -859,7 +866,7 @@ function detectNewBonds_(ctx) {
       // HOLIDAY GATHERINGS boost neighbor bonds
       var familyHolidays = ['Thanksgiving', 'Holiday', 'Easter', 'MothersDay', 'FathersDay'];
       if (familyHolidays.indexOf(holiday) >= 0 && sameNeighborhood) {
-        if (Math.random() < 0.35) {
+        if (rng() < 0.35) {
           newBonds.push(makeBond_(
             citizenA, citizenB,
             BOND_TYPES.NEIGHBOR,
@@ -898,7 +905,7 @@ function detectNewBonds_(ctx) {
       }
 
       // Same neighborhood = neighbor bond (reduced chance if calendar bonds took priority)
-      if (sameNeighborhood && Math.random() < 0.2) {
+      if (sameNeighborhood && rng() < 0.2) {
         newBonds.push(makeBond_(
           citizenA, citizenB,
           BOND_TYPES.NEIGHBOR,
@@ -915,7 +922,7 @@ function detectNewBonds_(ctx) {
       }
 
       // Single shared domain = professional connection
-      if (sharedDomains.length === 1 && Math.random() < 0.25) {
+      if (sharedDomains.length === 1 && rng() < 0.25) {
         newBonds.push(makeBond_(
           citizenA, citizenB,
           BOND_TYPES.PROFESSIONAL,
@@ -956,7 +963,7 @@ function detectNewBonds_(ctx) {
       var tierA = parseTierLevel_(dataA.TierRole);
       var tierB = parseTierLevel_(dataB.TierRole);
 
-      if (Math.abs(tierA - tierB) >= 2 && sharedDomains.length >= 1 && Math.random() < 0.15) {
+      if (Math.abs(tierA - tierB) >= 2 && sharedDomains.length >= 1 && rng() < 0.15) {
         var mentor = tierA > tierB ? citizenA : citizenB;
         var protege = tierA > tierB ? citizenB : citizenA;
         newBonds.push(makeBond_(
@@ -1176,7 +1183,7 @@ function generateBondSummary_(ctx) {
 
 function makeBond_(citizenA, citizenB, bondType, origin, domainTag, neighborhood, intensity, cycle, notes, ctx) {
   var bond = {
-    bondId: generateBondId_(),
+    bondId: generateBondId_(ctx),
     cycleCreated: cycle,
     citizenA: citizenA,
     citizenB: citizenB,
@@ -1209,11 +1216,12 @@ function makeBond_(citizenA, citizenB, bondType, origin, domainTag, neighborhood
   return bond;
 }
 
-function generateBondId_() {
+function generateBondId_(ctx) {
+  var rng = (typeof ctx !== 'undefined' && ctx && typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
   var id = '';
   for (var i = 0; i < 8; i++) {
-    id += chars.charAt(Math.floor(Math.random() * chars.length));
+    id += chars.charAt(Math.floor(rng() * chars.length));
   }
   return id;
 }
@@ -1515,8 +1523,12 @@ function diagnoseBondEngine() {
 
 /**
  * ============================================================================
- * BOND ENGINE REFERENCE v2.5
+ * BOND ENGINE REFERENCE v2.6
  * ============================================================================
+ *
+ * v2.6 FIXES:
+ * - All Math.random() replaced with ctx.rng for deterministic randomness
+ * - generateBondId_ now accepts ctx for deterministic ID generation
  *
  * v2.5 FIXES:
  * - Simulation_Ledger fallback for citizenLookup when Citizen_Directory missing

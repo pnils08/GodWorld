@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * runCivicElections_ v1.0
+ * runCivicElections_ v1.1
  * ============================================================================
  * 
  * Lightweight election engine for GodWorld civic positions.
@@ -33,6 +33,7 @@ function runCivicElections_(ctx) {
 
   var ss = ctx.ss;
   var S = ctx.summary;
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   
   // ═══════════════════════════════════════════════════════════════════════════
   // CHECK ELECTION WINDOW
@@ -257,7 +258,7 @@ function runCivicElections_(ctx) {
           weighted.push(challengerSource[w]);
         }
       }
-      challenger = weighted[Math.floor(Math.random() * weighted.length)];
+      challenger = weighted[Math.floor(rng() * weighted.length)];
       
       // Remove from pool so they don't run for multiple seats
       var poolIdx = candidatePool.indexOf(challenger);
@@ -280,7 +281,7 @@ function runCivicElections_(ctx) {
     if (seat.isVacant) {
       // Open seat: challenger wins by default
       winner = challenger ? challenger.name : 'TBD';
-      margin = 55 + Math.floor(Math.random() * 20); // 55-75%
+      margin = 55 + Math.floor(rng() * 20); // 55-75%
       marginType = 'comfortable';
       narrative = 'Open seat won without incumbent opposition.';
       
@@ -321,14 +322,14 @@ function runCivicElections_(ctx) {
       if (challenger.civicAdjacent) incumbentScore -= 5;
       
       // Random variance (-10 to +10)
-      var variance = (Math.random() * 20) - 10;
+      var variance = (rng() * 20) - 10;
       incumbentScore += variance;
       
       // Clamp to realistic range
       incumbentScore = Math.max(25, Math.min(75, incumbentScore));
       
       // Roll the dice
-      var roll = Math.random() * 100;
+      var roll = rng() * 100;
       
       if (roll < incumbentScore) {
         winner = incumbentName;

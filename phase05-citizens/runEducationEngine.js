@@ -32,6 +32,7 @@
 
 function runEducationEngine_(ctx) {
 
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var ss = ctx.ss;
   var ledger = ss.getSheetByName('Simulation_Ledger');
   var logSheet = ss.getSheetByName('LifeHistory_Log');
@@ -397,7 +398,7 @@ function runEducationEngine_(ctx) {
 
     if (chance > 0.12) chance = 0.12;
 
-    if (Math.random() >= chance) continue;
+    if (rng() >= chance) continue;
 
     // ═══════════════════════════════════════════════════════════════════════
     // BUILD CITIZEN-SPECIFIC POOL
@@ -412,7 +413,7 @@ function runEducationEngine_(ctx) {
     // ═══════════════════════════════════════════════════════════════════════
     // PICK EVENT
     // ═══════════════════════════════════════════════════════════════════════
-    var pick = pool[Math.floor(Math.random() * pool.length)];
+    var pick = pool[Math.floor(rng() * pool.length)];
     var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
 
     // Determine event tag (v2.2)

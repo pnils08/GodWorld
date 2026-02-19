@@ -216,6 +216,7 @@ function extractIncomeBand_(lifeHistory) {
 }
 
 function calculateIncomeFromBand_(incomeBand, tier) {
+  var rng = Math.random; // centralization prep — no ctx in scope
   var baseIncome = INCOME_BY_BAND[incomeBand] || INCOME_BY_BAND['low'];
 
   // Tier modifiers (higher tier = higher income within band)
@@ -227,7 +228,7 @@ function calculateIncomeFromBand_(incomeBand, tier) {
   else tierMod = 0.8;
 
   // Add randomness (+/- 10%)
-  var variance = 0.9 + (Math.random() * 0.2);
+  var variance = 0.9 + (rng() * 0.2);
 
   return Math.round(baseIncome * tierMod * variance);
 }

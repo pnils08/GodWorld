@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * BOND SEEDING v1.1
+ * BOND SEEDING v1.2
  * ============================================================================
  * 
  * Seeds initial relationship bonds between Oakland citizens.
@@ -26,7 +26,8 @@
  * Main seeding function
  */
 function seedRelationshipBonds_(ctx) {
-  
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var ss = ctx.ss;
   var cycle = ctx.config.cycleCount || 0;
   
@@ -135,9 +136,10 @@ function seedRelationshipBonds_(ctx) {
           members[m1],
           members[m2],
           'family',
-          Math.floor(Math.random() * 3) + 8,  // 8-10 intensity
+          Math.floor(rng() * 3) + 8,  // 8-10 intensity
           'household',
-          cycle
+          cycle,
+          rng
         );
         
         var key = makeBondKey_(members[m1].citizenId, members[m2].citizenId);
@@ -169,8 +171,8 @@ function seedRelationshipBonds_(ctx) {
     while (created < maxNeighborBonds && attempts < maxNeighborBonds * 5) {
       attempts++;
       
-      var n1 = Math.floor(Math.random() * neighbors.length);
-      var n2 = Math.floor(Math.random() * neighbors.length);
+      var n1 = Math.floor(rng() * neighbors.length);
+      var n2 = Math.floor(rng() * neighbors.length);
       
       if (n1 === n2) continue;
       
@@ -178,17 +180,18 @@ function seedRelationshipBonds_(ctx) {
       if (bondSet[key]) continue;
       
       // 20% chance
-      if (Math.random() > 0.20) continue;
-      
-      var bondType = Math.random() < 0.7 ? 'friendship' : 'professional';
+      if (rng() > 0.20) continue;
+
+      var bondType = rng() < 0.7 ? 'friendship' : 'professional';
       
       var bond = createBond_(
         neighbors[n1],
         neighbors[n2],
         bondType,
-        Math.floor(Math.random() * 4) + 3,  // 3-6 intensity
+        Math.floor(rng() * 4) + 3,  // 3-6 intensity
         'neighbor',
-        cycle
+        cycle,
+        rng
       );
       
       bondSet[key] = true;
@@ -218,8 +221,8 @@ function seedRelationshipBonds_(ctx) {
     while (created < maxOccBonds && attempts < maxOccBonds * 5) {
       attempts++;
       
-      var c1 = Math.floor(Math.random() * coworkers.length);
-      var c2 = Math.floor(Math.random() * coworkers.length);
+      var c1 = Math.floor(rng() * coworkers.length);
+      var c2 = Math.floor(rng() * coworkers.length);
       
       if (c1 === c2) continue;
       
@@ -227,17 +230,18 @@ function seedRelationshipBonds_(ctx) {
       if (bondSet[key]) continue;
       
       // 15% chance
-      if (Math.random() > 0.15) continue;
-      
-      var bondType = Math.random() < 0.6 ? 'professional' : 'friendship';
+      if (rng() > 0.15) continue;
+
+      var bondType = rng() < 0.6 ? 'professional' : 'friendship';
       
       var bond = createBond_(
         coworkers[c1],
         coworkers[c2],
         bondType,
-        Math.floor(Math.random() * 4) + 4,  // 4-7 intensity
+        Math.floor(rng() * 4) + 4,  // 4-7 intensity
         'work',
-        cycle
+        cycle,
+        rng
       );
       
       bondSet[key] = true;
@@ -257,8 +261,8 @@ function seedRelationshipBonds_(ctx) {
   var targetRandom = Math.floor(citizens.length * 0.05);  // 5% get random bonds
   
   for (var r = 0; r < targetRandom; r++) {
-    var r1 = Math.floor(Math.random() * citizens.length);
-    var r2 = Math.floor(Math.random() * citizens.length);
+    var r1 = Math.floor(rng() * citizens.length);
+    var r2 = Math.floor(rng() * citizens.length);
     
     if (r1 === r2) continue;
     if (citizens[r1].neighborhood === citizens[r2].neighborhood) continue;  // Must be cross-neighborhood
@@ -266,7 +270,7 @@ function seedRelationshipBonds_(ctx) {
     var key = makeBondKey_(citizens[r1].citizenId, citizens[r2].citizenId);
     if (bondSet[key]) continue;
     
-    var typeRoll = Math.random();
+    var typeRoll = rng();
     var bondType;
     if (typeRoll < 0.4) bondType = 'friendship';
     else if (typeRoll < 0.7) bondType = 'professional';
@@ -277,9 +281,10 @@ function seedRelationshipBonds_(ctx) {
       citizens[r1],
       citizens[r2],
       bondType,
-      Math.floor(Math.random() * 4) + 2,  // 2-5 intensity
+      Math.floor(rng() * 4) + 2,  // 2-5 intensity
       'random',
-      cycle
+      cycle,
+      rng
     );
     
     bondSet[key] = true;
@@ -372,9 +377,9 @@ function createRelationshipBondsSheet_(ss) {
 /**
  * Create a bond object
  */
-function createBond_(citizenA, citizenB, type, intensity, origin, cycle) {
+function createBond_(citizenA, citizenB, type, intensity, origin, cycle, rng) {
   return {
-    bondId: 'BOND-' + generateBondId_(),
+    bondId: 'BOND-' + generateBondId_(rng),
     citizenA: citizenA.citizenId,
     nameA: citizenA.name,
     citizenB: citizenB.citizenId,
@@ -402,11 +407,12 @@ function makeBondKey_(idA, idB) {
 /**
  * Generate unique bond ID
  */
-function generateBondId_() {
+function generateBondId_(rng) {
+  var rand = (typeof rng === 'function') ? rng : Math.random;
   var chars = '0123456789ABCDEF';
   var id = '';
   for (var i = 0; i < 8; i++) {
-    id += chars[Math.floor(Math.random() * 16)];
+    id += chars[Math.floor(rand() * 16)];
   }
   return id;
 }

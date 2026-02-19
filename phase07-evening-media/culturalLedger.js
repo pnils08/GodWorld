@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * registerCulturalEntity_ v2.3
+ * registerCulturalEntity_ v2.4
  * ============================================================================
  *
  * Automatically classifies and registers cultural entities with calendar awareness.
@@ -37,6 +37,8 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // Defensive guard
   if (!ctx) return null;
   if (!ctx.summary) ctx.summary = {};
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var sheet = ensureCulturalLedger_(ctx);
   var data = sheet.getDataRange().getValues();
@@ -362,7 +364,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // ═══════════════════════════════════════════════════════════════════════════
   // CREATE NEW CUL-ID
   // ═══════════════════════════════════════════════════════════════════════════
-  var culId = "CUL-" + (typeof shortId_ === 'function' ? shortId_().toUpperCase() : Math.random().toString(36).substr(2, 6).toUpperCase());
+  var culId = "CUL-" + (typeof shortId_ === 'function' ? shortId_().toUpperCase() : rng().toString(36).substr(2, 6).toUpperCase());
 
   // Build calendar context string (v2.2)
   function buildCalendarContext_() {

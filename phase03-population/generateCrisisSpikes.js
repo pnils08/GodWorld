@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * generateCrisisSpikes_ v2.5
+ * generateCrisisSpikes_ v2.6
  * ============================================================================
  * 
  * World-aware crisis spike generator with GodWorld Calendar integration.
@@ -21,6 +21,8 @@
  */
 
 function generateCrisisSpikes_(ctx) {
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var S = ctx.summary;
   if (!S.worldEvents) S.worldEvents = [];
@@ -120,7 +122,7 @@ function generateCrisisSpikes_(ctx) {
   if (baseChance > 0.9) baseChance = 0.9;
   if (baseChance < 0.2) baseChance = 0.2;
 
-  var MAX_SPIKES = Math.random() < baseChance ? 1 : 2;
+  var MAX_SPIKES = rng() < baseChance ? 1 : 2;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // DOMAINS WITH WORLD-AWARE WEIGHTS
@@ -326,7 +328,7 @@ function generateCrisisSpikes_(ctx) {
         pool.push(dd.name);
       }
     }
-    return pool.length ? pool[Math.floor(Math.random() * pool.length)] : null;
+    return pool.length ? pool[Math.floor(rng() * pool.length)] : null;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -340,7 +342,7 @@ function generateCrisisSpikes_(ctx) {
         pool.push(nb.name);
       }
     }
-    return pool[Math.floor(Math.random() * pool.length)];
+    return pool[Math.floor(rng() * pool.length)];
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -354,11 +356,11 @@ function generateCrisisSpikes_(ctx) {
     domainHits[domain] = (domainHits[domain] || 0) + 1;
 
     var neighborhood = pickNeighborhood();
-    var severity = severityPool[Math.floor(Math.random() * severityPool.length)];
+    var severity = severityPool[Math.floor(rng() * severityPool.length)];
 
     // Impact score based on severity
     var impactBase = severity === 'high' ? 50 : severity === 'medium' ? 30 : 15;
-    var impact = Math.round(impactBase + (Math.random() * 20 - 10));
+    var impact = Math.round(impactBase + (rng() * 20 - 10));
 
     // v2.5: Add calendar context to event
     var event = {

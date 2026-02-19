@@ -39,6 +39,7 @@
  */
 
 function recordWorldEventsv3_(ctx) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var sheet = ctx.ss.getSheetByName('WorldEvents_V3_Ledger');
   if (!sheet) return;
@@ -198,9 +199,9 @@ function recordWorldEventsv3_(ctx) {
     var domain = ev.domain || deriveDomain(desc);
     var eventType = deriveEventType(desc, domain);
 
-    // v3.5: Domain-aware neighborhood (ctx.rng, not Math.random)
+    // v3.5: Domain-aware neighborhood (deterministic rng)
     var pool = domainNeighborhoods[domain] || neighborhoods;
-    var neighborhood = ev.neighborhood || pool[Math.floor(ctx.rng() * pool.length)];
+    var neighborhood = ev.neighborhood || pool[Math.floor(rng() * pool.length)];
 
     rows.push([
       now,                                     // A - Timestamp

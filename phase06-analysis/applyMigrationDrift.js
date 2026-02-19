@@ -1,9 +1,12 @@
 /**
  * ============================================================================
- * applyMigrationDrift_ v2.6
+ * applyMigrationDrift_ v2.7
  * ============================================================================
  *
  * CONNECTED: Reads ctx.summary.economicMood from economicRippleEngine.
+ *
+ * v2.7 Changes:
+ * - rand() fallback now prefers ctx.rng over Math.random()
  *
  * v2.6 Enhancements:
  * - Seeded RNG for deterministic replay mode
@@ -97,7 +100,9 @@ function applyMigrationDrift_(ctx) {
   var rngStateIn = ctx.config.rngState;
   var rng = (rngSeed !== undefined && rngSeed !== null) ? createSeededRng_(rngSeed, rngStateIn) : null;
 
-  function rand() { return rng ? rng.random() : Math.random(); }
+  // v2.7: prefer ctx.rng over Math.random as fallback
+  var _ctxRng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  function rand() { return rng ? rng.random() : _ctxRng(); }
   function rInt(maxInclusive) { return Math.round(rand() * maxInclusive); }
   function rSym(span) { return Math.round((rand() - 0.5) * span); }
   function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
@@ -687,7 +692,7 @@ function renderMigrationBrief_(ctx) {
 
 /**
  * ============================================================================
- * MIGRATION DRIFT REFERENCE v2.6
+ * MIGRATION DRIFT REFERENCE v2.7
  * ============================================================================
  *
  * v2.6 CHANGES:

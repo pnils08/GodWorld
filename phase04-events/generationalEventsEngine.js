@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * GENERATIONAL EVENTS ENGINE V2.3 (schema-safe log + normalized calendar + deterministic RNG)
+ * GENERATIONAL EVENTS ENGINE V2.4 (schema-safe log + normalized calendar + deterministic RNG)
  * ============================================================================
  * Key fixes:
  * - LifeHistory_Log schema-safe writes: do NOT add/move columns; only fill existing,
@@ -106,7 +106,10 @@ function initRng_(ctx, cycle) {
 }
 
 function rand_(ctx) {
-  if (!ctx._rng) return Math.random();
+  if (!ctx._rng) {
+    // v2.4: prefer ctx.rng over Math.random
+    return (typeof ctx.rng === 'function') ? ctx.rng() : Math.random();
+  }
   return ctx._rng();
 }
 
@@ -385,7 +388,7 @@ function runGenerationalEngine_(ctx) {
   generateGenerationalSummary_(ctx);
 
   Logger.log(
-    "runGenerationalEngine_ v2.3: " + ctx.summary.generationalEvents.length +
+    "runGenerationalEngine_ v2.4: " + ctx.summary.generationalEvents.length +
     " events | Recoveries: " + counts.recoveries +
     " | Deaths: " + counts.deaths
   );

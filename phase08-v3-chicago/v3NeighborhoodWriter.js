@@ -1,7 +1,10 @@
 /**
  * ============================================================================
- * saveV3NeighborhoodMap_ v3.5 - ES5 Compatible
+ * saveV3NeighborhoodMap_ v3.6 - ES5 Compatible
  * ============================================================================
+ *
+ * v3.6 Changes:
+ * - Deterministic RNG: all randomness uses ctx.rng (no Math.random)
  *
  * v3.5 Changes:
  * - ES5 compatible (removed const/let, arrow functions, .forEach, .filter, .map, .some, .includes)
@@ -37,6 +40,8 @@ var NMAP_NEIGHBORHOODS = [
 
 
 function saveV3NeighborhoodMap_(ctx) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+
   // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
   var isDryRun = ctx.mode && ctx.mode.dryRun;
   if (isDryRun) {
@@ -192,7 +197,7 @@ function saveV3NeighborhoodMap_(ctx) {
 
   // Helpers
   function round2(n) { return Math.round(n * 100) / 100; }
-  function variance() { return (Math.random() - 0.5) * 0.2; }
+  function variance() { return (rng() - 0.5) * 0.2; }
 
   // Ensure we have enough rows (no clearing)
   var neededRows = 1 + NMAP_NEIGHBORHOODS.length;
@@ -215,7 +220,7 @@ function saveV3NeighborhoodMap_(ctx) {
 
     var nightlife = round2(baseNightlife * effectiveNightlifeMod * (1 + variance()));
     var noise = round2(Math.max(0, baseNoise * effectiveNoiseMod + (variance() * 2)));
-    var crime = Math.max(0, Math.round(baseCrimeCount * profile.crimeMod + (Math.random() < 0.3 ? 1 : 0)));
+    var crime = Math.max(0, Math.round(baseCrimeCount * profile.crimeMod + (rng() < 0.3 ? 1 : 0)));
     var retail = round2(Math.max(0, baseRetail * profile.retailMod * (1 + variance())));
     var eventAttract = Math.max(0, Math.round(baseEventAttract * effectiveEventMod));
     var sent = round2(baseSentiment + effectiveSentimentMod + (variance() * 0.1));
@@ -234,7 +239,7 @@ function saveV3NeighborhoodMap_(ctx) {
   // Write rows 2:N in one call
   sheet.getRange(2, 1, out.length, NEIGHBORHOOD_MAP_HEADERS.length).setValues(out);
 
-  Logger.log('saveV3NeighborhoodMap_ v3.5: Updated ' + out.length + ' neighborhoods | Cycle ' + cycle + ' | Holiday: ' + holiday);
+  Logger.log('saveV3NeighborhoodMap_ v3.6: Updated ' + out.length + ' neighborhoods | Cycle ' + cycle + ' | Holiday: ' + holiday);
 }
 
 

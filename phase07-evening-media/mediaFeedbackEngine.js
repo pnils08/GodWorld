@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * MEDIA FEEDBACK ENGINE V2.2
+ * MEDIA FEEDBACK ENGINE V2.3
  * ============================================================================
  *
  * Creates feedback loops where media coverage influences the simulation,
@@ -191,7 +191,7 @@ function runMediaFeedbackEngine_(ctx) {
   // Step 10: Generate summary for packet
   generateMediaSummary_(ctx);
 
-  Logger.log('runMediaFeedbackEngine_ v2.2: ' + ctx.summary.mediaEffects.mediaNarrative +
+  Logger.log('runMediaFeedbackEngine_ v2.3: ' + ctx.summary.mediaEffects.mediaNarrative +
     ' | Holiday: ' + calendarContext.holiday +
     ' | Sports: ' + calendarContext.sportsSeason);
 }
@@ -1232,38 +1232,39 @@ function getMediaInfluencedEvent_(ctx) {
   var pools = mediaEffects ? mediaEffects.eventPools : null;
   if (!pools) return null;
 
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var effects = mediaEffects;
   var cal = ctx.mediaCalendarContext || {};
 
   // v2.1: Priority to calendar-specific events
   var oaklandPridePool = pools.oakland_pride || [];
-  if (cal.isCreationDay && oaklandPridePool.length > 0 && Math.random() < 0.4) {
+  if (cal.isCreationDay && oaklandPridePool.length > 0 && rng() < 0.4) {
     return {
-      text: oaklandPridePool[Math.floor(Math.random() * oaklandPridePool.length)],
+      text: oaklandPridePool[Math.floor(rng() * oaklandPridePool.length)],
       tag: 'Media-OaklandPride'
     };
   }
 
   var festivalPool = pools.festival || [];
-  if (festivalPool.length > 0 && Math.random() < 0.5) {
+  if (festivalPool.length > 0 && rng() < 0.5) {
     return {
-      text: festivalPool[Math.floor(Math.random() * festivalPool.length)],
+      text: festivalPool[Math.floor(rng() * festivalPool.length)],
       tag: 'Media-Festival'
     };
   }
 
   var holidayPool = pools.holiday || [];
-  if (holidayPool.length > 0 && Math.random() < 0.4) {
+  if (holidayPool.length > 0 && rng() < 0.4) {
     return {
-      text: holidayPool[Math.floor(Math.random() * holidayPool.length)],
+      text: holidayPool[Math.floor(rng() * holidayPool.length)],
       tag: 'Media-Holiday'
     };
   }
 
   var artsPool = pools.arts || [];
-  if (artsPool.length > 0 && cal.isFirstFriday && Math.random() < 0.35) {
+  if (artsPool.length > 0 && cal.isFirstFriday && rng() < 0.35) {
     return {
-      text: artsPool[Math.floor(Math.random() * artsPool.length)],
+      text: artsPool[Math.floor(rng() * artsPool.length)],
       tag: 'Media-Arts'
     };
   }
@@ -1271,9 +1272,9 @@ function getMediaInfluencedEvent_(ctx) {
   // Sports during playoffs/championship
   var sportsPool = pools.sports || [];
   if (sportsPool.length > 0 && (cal.sportsSeason === 'playoffs' || cal.sportsSeason === 'championship')) {
-    if (Math.random() < 0.5) {
+    if (rng() < 0.5) {
       return {
-        text: sportsPool[Math.floor(Math.random() * sportsPool.length)],
+        text: sportsPool[Math.floor(rng() * sportsPool.length)],
         tag: 'Media-Sports'
       };
     }
@@ -1281,40 +1282,40 @@ function getMediaInfluencedEvent_(ctx) {
 
   // Original logic
   var crisisPool = pools.crisis || [];
-  if (effects.crisisSaturation > 0.6 && crisisPool.length > 0 && Math.random() < 0.4) {
+  if (effects.crisisSaturation > 0.6 && crisisPool.length > 0 && rng() < 0.4) {
     return {
-      text: crisisPool[Math.floor(Math.random() * crisisPool.length)],
+      text: crisisPool[Math.floor(rng() * crisisPool.length)],
       tag: 'Media-Crisis'
     };
   }
 
   var anxiousPool = pools.anxious || [];
-  if (effects.anxietyFactor > effects.hopeFactor && anxiousPool.length > 0 && Math.random() < 0.3) {
+  if (effects.anxietyFactor > effects.hopeFactor && anxiousPool.length > 0 && rng() < 0.3) {
     return {
-      text: anxiousPool[Math.floor(Math.random() * anxiousPool.length)],
+      text: anxiousPool[Math.floor(rng() * anxiousPool.length)],
       tag: 'Media-Anxious'
     };
   }
 
   var hopefulPool = pools.hopeful || [];
-  if (effects.hopeFactor > effects.anxietyFactor && hopefulPool.length > 0 && Math.random() < 0.3) {
+  if (effects.hopeFactor > effects.anxietyFactor && hopefulPool.length > 0 && rng() < 0.3) {
     return {
-      text: hopefulPool[Math.floor(Math.random() * hopefulPool.length)],
+      text: hopefulPool[Math.floor(rng() * hopefulPool.length)],
       tag: 'Media-Hopeful'
     };
   }
 
   var celebrityPool = pools.celebrity || [];
-  if (effects.celebrityBuzz > 0.3 && celebrityPool.length > 0 && Math.random() < 0.25) {
+  if (effects.celebrityBuzz > 0.3 && celebrityPool.length > 0 && rng() < 0.25) {
     return {
-      text: celebrityPool[Math.floor(Math.random() * celebrityPool.length)],
+      text: celebrityPool[Math.floor(rng() * celebrityPool.length)],
       tag: 'Media-Celebrity'
     };
   }
 
-  if (sportsPool.length > 0 && Math.random() < 0.2) {
+  if (sportsPool.length > 0 && rng() < 0.2) {
     return {
-      text: sportsPool[Math.floor(Math.random() * sportsPool.length)],
+      text: sportsPool[Math.floor(rng() * sportsPool.length)],
       tag: 'Media-Sports'
     };
   }
@@ -1369,9 +1370,10 @@ function isMediaSaturated_(ctx, topic) {
 
 /**
  * ============================================================================
- * MEDIA FEEDBACK ENGINE REFERENCE v2.2
+ * MEDIA FEEDBACK ENGINE REFERENCE v2.3
  * ============================================================================
  *
+ * v2.3: Deterministic RNG (ctx.rng) replaces Math.random() in getMediaInfluencedEvent_
  * v2.2: ES5 syntax for Google Apps Script compatibility
  *
  * CALENDAR MEDIA MODIFIERS:

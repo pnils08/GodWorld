@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * V3.5 EVENT ARC ENGINE — GODWORLD CALENDAR INTEGRATION
+ * V3.6 EVENT ARC ENGINE — GODWORLD CALENDAR INTEGRATION
  * ============================================================================
  *
  * Manages multi-cycle story arcs with GodWorld Calendar awareness.
+ *
+ * v3.6 Changes:
+ * - Replaced all Math.random() with deterministic ctx.rng
+ * - pickNeighborhoodForDomain_ and generateSafeUuid_ now accept rng parameter
+ * - All arc generation uses rng() for reproducible neighborhood/tension assignment
  *
  * v3.5 Changes:
  * - Safe UUID generation via generateSafeUuid_() (fixes trigger context errors)
@@ -67,8 +72,11 @@ function getCurrentCycle_(ctx) {
 
 /**
  * Pick neighborhood based on domain affinity
+ * @param {string} domain
+ * @param {Function} [rng] - Deterministic RNG function (falls back to Math.random)
  */
-function pickNeighborhoodForDomain_(domain) {
+function pickNeighborhoodForDomain_(domain, rng) {
+  var _rng = (typeof rng === 'function') ? rng : Math.random;
   var matches = [];
   var nhKeys = Object.keys(ARC_NEIGHBORHOOD_DOMAINS);
   for (var i = 0; i < nhKeys.length; i++) {
@@ -79,9 +87,9 @@ function pickNeighborhoodForDomain_(domain) {
     }
   }
   if (matches.length > 0) {
-    return matches[Math.floor(Math.random() * matches.length)];
+    return matches[Math.floor(_rng() * matches.length)];
   }
-  return nhKeys[Math.floor(Math.random() * nhKeys.length)];
+  return nhKeys[Math.floor(_rng() * nhKeys.length)];
 }
 
 
@@ -350,8 +358,10 @@ function eventArcEngine_(ctx) {
 /**
  * v3.5: Safe UUID generation that works in all contexts
  * Falls back to manual generation if Utilities.getUuid() fails
+ * @param {Function} [rng] - Deterministic RNG function (falls back to Math.random)
  */
-function generateSafeUuid_() {
+function generateSafeUuid_(rng) {
+  var _rng = (typeof rng === 'function') ? rng : Math.random;
   try {
     if (typeof Utilities !== 'undefined' && typeof Utilities.getUuid === 'function') {
       return Utilities.getUuid();
@@ -364,7 +374,7 @@ function generateSafeUuid_() {
   var chars = '0123456789abcdef';
   var uuid = '';
   for (var i = 0; i < 32; i++) {
-    uuid += chars[Math.floor(Math.random() * 16)];
+    uuid += chars[Math.floor(_rng() * 16)];
     if (i === 7 || i === 11 || i === 15 || i === 19) {
       uuid += '-';
     }
@@ -378,6 +388,7 @@ function generateSafeUuid_() {
  * Returns an array of arc objects.
  */
 function generateNewArcs_(ctx) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var S = ctx.summary || {};
   var existingArcs = ctx.summary.eventArcs || [];
   var newArcs = [];
@@ -432,14 +443,14 @@ function generateNewArcs_(ctx) {
   }
 
   function makeArc(type, neighborhood, domain, summary) {
-    var initialTension = Math.round((2 + Math.random() * 2) * 100) / 100;
+    var initialTension = Math.round((2 + rng() * 2) * 100) / 100;
     var calTrigger = null;
     if (holiday !== 'none') calTrigger = holiday;
     else if (isFirstFriday) calTrigger = 'FirstFriday';
     else if (isCreationDay) calTrigger = 'CreationDay';
 
     // v3.5: Safe UUID generation (handles trigger context where Utilities may fail)
-    var arcUuid = generateSafeUuid_();
+    var arcUuid = generateSafeUuid_(rng);
 
     return {
       arcId: arcUuid.slice(0, 8),
@@ -473,7 +484,7 @@ function generateNewArcs_(ctx) {
 
   // OAKLAND PRIDE → Festival arc @ Downtown/Lake Merritt
   if (holiday === 'OaklandPride' && !hasActiveArc('festival', '')) {
-    var prideNh = Math.random() < 0.5 ? 'Downtown' : 'Lake Merritt';
+    var prideNh = rng() < 0.5 ? 'Downtown' : 'Lake Merritt';
     newArcs.push(makeArc(
       'festival',
       prideNh,
@@ -594,7 +605,7 @@ function generateNewArcs_(ctx) {
 
   // FIRST FRIDAY → Arts-walk arc @ Uptown/KONO
   if (isFirstFriday && !hasActiveArc('arts-walk', '')) {
-    var artNh = Math.random() < 0.5 ? 'Uptown' : 'KONO';
+    var artNh = rng() < 0.5 ? 'Uptown' : 'KONO';
     newArcs.push(makeArc(
       'arts-walk',
       artNh,
@@ -629,7 +640,7 @@ function generateNewArcs_(ctx) {
 
   // HIGH-SIGNAL INSTABILITY ARC → Fruitvale or West Oakland
   if (isHigh && !hasActiveArc('instability', '')) {
-    var instNh = Math.random() < 0.5 ? 'Fruitvale' : 'West Oakland';
+    var instNh = rng() < 0.5 ? 'Fruitvale' : 'West Oakland';
     newArcs.push(makeArc(
       'instability',
       instNh,
@@ -730,7 +741,7 @@ function generateNewArcs_(ctx) {
 
   // NIGHTLIFE ARC → Jack London (or Uptown)
   if (dynamics.nightlife >= 1.3 && !hasActiveArc('nightlife-surge', '')) {
-    var nlNh = Math.random() < 0.6 ? 'Jack London' : 'Uptown';
+    var nlNh = rng() < 0.6 ? 'Jack London' : 'Uptown';
     newArcs.push(makeArc(
       'nightlife-surge',
       nlNh,
@@ -740,7 +751,7 @@ function generateNewArcs_(ctx) {
   }
 
   // RIVALRY ARC → City-wide
-  if (isHigh && Math.random() < 0.1 && !hasActiveArc('rivalry', '')) {
+  if (isHigh && rng() < 0.1 && !hasActiveArc('rivalry', '')) {
     newArcs.push(makeArc(
       'rivalry',
       '',
@@ -821,8 +832,10 @@ function getArcEventBoost_(ctx, citizenId) {
 
 /**
  * ============================================================================
- * EVENT ARC ENGINE REFERENCE v3.5
+ * EVENT ARC ENGINE REFERENCE v3.6
  * ============================================================================
+ *
+ * v3.6: All Math.random() replaced with deterministic ctx.rng
  *
  * v3.5: Safe UUID generation (generateSafeUuid_) - handles trigger contexts
  *

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * ARC LIFECYCLE ENGINE v1.1 (Week 2: Arc Automation)
+ * ARC LIFECYCLE ENGINE v1.2 (Week 2: Arc Automation)
  * ============================================================================
  *
  * Automates arc phase progression and resolution tracking.
@@ -25,6 +25,9 @@
  * - Called from Phase 06 (analysis) in godWorldEngine2.js
  * - Updates Event_Arc_Ledger (sole source — Arc_Ledger is legacy/dead)
  * - Generates story hooks for phase transitions
+ *
+ * v1.2 Changes:
+ * - Replaced Math.random() with deterministic ctx.rng in advanceArcPhase_
  *
  * v1.1 Changes:
  * - Removed Arc_Ledger dependency (dead sheet, had ArcID/ArcId case mismatch)
@@ -84,7 +87,7 @@ function advanceArcLifecycles_(ctx) {
   var S = ctx.summary;
   var cycle = S.cycleId || (ctx.config ? ctx.config.cycleCount : 0) || 0;
 
-  Logger.log('advanceArcLifecycles_ v1.1: Processing arcs for cycle ' + cycle);
+  Logger.log('advanceArcLifecycles_ v1.2: Processing arcs for cycle ' + cycle);
 
   var results = {
     processed: 0,
@@ -131,7 +134,7 @@ function advanceArcLifecycles_(ctx) {
 
     S.arcLifecycleResults = results;
 
-    Logger.log('advanceArcLifecycles_ v1.1: Complete. ' +
+    Logger.log('advanceArcLifecycles_ v1.2: Complete. ' +
       'Processed: ' + results.processed +
       ', Advanced: ' + results.advanced +
       ', Resolved: ' + results.resolved +
@@ -323,6 +326,7 @@ function getNextPhase_(currentPhase) {
 
 
 function advanceArcPhase_(ctx, arc, cycle, oldPhase, newPhase, ledger) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var arcRow = ledger.map[arc.arcId];
   var headers = ledger.headers;
 
@@ -342,7 +346,7 @@ function advanceArcPhase_(ctx, arc, cycle, oldPhase, newPhase, ledger) {
   // Set next transition (random within duration range)
   var durations = DEFAULT_PHASE_DURATIONS[newPhase];
   if (durations) {
-    var transitionCycle = cycle + durations.min + Math.floor(Math.random() * (durations.max - durations.min + 1));
+    var transitionCycle = cycle + durations.min + Math.floor(rng() * (durations.max - durations.min + 1));
     ledger.sheet.getRange(arcRow + 1, nextTransitionCol + 1).setValue(transitionCycle);
   }
 
@@ -471,7 +475,7 @@ function generateResolutionHook_(ctx, arc, trigger) {
 
 /**
  * ============================================================================
- * ARC LIFECYCLE ENGINE REFERENCE v1.1
+ * ARC LIFECYCLE ENGINE REFERENCE v1.2
  * ============================================================================
  *
  * SHEET: Event_Arc_Ledger (sole source — Arc_Ledger is legacy/dead)

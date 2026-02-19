@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * generateCrisisBuckets_ v2.7
+ * generateCrisisBuckets_ v2.8
  * ============================================================================
  *
  * Adds:
@@ -16,6 +16,8 @@
  */
 
 function generateCrisisBuckets_(ctx) {
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var ss = ctx.ss;
   var popSheet = ss.getSheetByName('World_Population');
@@ -201,7 +203,7 @@ function generateCrisisBuckets_(ctx) {
       var w = Math.max(weights[nh] || 1.0, 0.1);
       for (var j = 0; j < Math.round(w * 10); j++) pool.push(nh);
     }
-    return pool[Math.floor(Math.random() * pool.length)];
+    return pool[Math.floor(rng() * pool.length)];
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -225,7 +227,7 @@ function generateCrisisBuckets_(ctx) {
     var baseTension = crisis.severity === 'high' ? 6 : crisis.severity === 'medium' ? 4 : 2;
 
     var arc = {
-      arcId: 'CRISIS-' + cycle + '-' + Math.random().toString(36).substr(2, 6).toUpperCase(),
+      arcId: 'CRISIS-' + cycle + '-' + rng().toString(36).substr(2, 6).toUpperCase(),
       type: arcType,
       phase: 'early',
       tension: baseTension,
@@ -272,10 +274,10 @@ function generateCrisisBuckets_(ctx) {
   // Helper: bias severity upward during active shock (instead of volume spam)
   function pickSeverity(baseHighMetric) {
     // baseHighMetric is something like illness rate or weather.impact
-    if (shockActive && Math.random() < 0.35) return 'high';
+    if (shockActive && rng() < 0.35) return 'high';
     if (baseHighMetric && baseHighMetric > 0) {
       // leave the caller's logic to decide; this is just a small nudge
-      if (shockFading && Math.random() < 0.15) return 'high';
+      if (shockFading && rng() < 0.15) return 'high';
     }
     return null; // caller decides
   }
@@ -322,7 +324,7 @@ function generateCrisisBuckets_(ctx) {
   healthChance *= calendarMod;
   if (healthChance > 0.40) healthChance = 0.40;
 
-  if (Math.random() < healthChance) {
+  if (rng() < healthChance) {
     var pool;
     if (season === "Winter") {
       pool = ["Respiratory Advisory", "Clinic Overcapacity", "Transit Illness Watch", "Flu Season Strain"];
@@ -334,9 +336,9 @@ function generateCrisisBuckets_(ctx) {
       pool = ["Foodborne Advisory", "Seasonal Allergy Spike", "Air Quality Notice"];
     }
 
-    var subtype = pool[Math.floor(Math.random() * pool.length)];
+    var subtype = pool[Math.floor(rng() * pool.length)];
     var forced = pickSeverity(illness);
-    var severity = forced || (illness >= 0.085 ? 'high' : (Math.random() < 0.5 ? 'low' : 'medium'));
+    var severity = forced || (illness >= 0.085 ? 'high' : (rng() < 0.5 ? 'low' : 'medium'));
 
     var loc = pickNeighborhood(null);
 
@@ -360,7 +362,7 @@ function generateCrisisBuckets_(ctx) {
 
   empChance *= calendarMod;
 
-  if (empChance > 0 && Math.random() < empChance) {
+  if (empChance > 0 && rng() < empChance) {
     var subtype2 = (emp < 0.84) ? "Layoff Pressure" : "Hiring Slowdown";
     var forced2 = pickSeverity(1);
     var severity2 = forced2 || (emp < 0.84 ? 'high' : 'medium');
@@ -382,7 +384,7 @@ function generateCrisisBuckets_(ctx) {
 
   migChance *= calendarMod;
 
-  if (migChance > 0 && Math.random() < migChance) {
+  if (migChance > 0 && rng() < migChance) {
     var subtype3 = (mig > 0) ? "Inflow Strain" : "Outflow Drift";
     var forced3 = pickSeverity(Math.abs(mig) / 300);
     var severity3 = forced3 || (Math.abs(mig) > 300 ? 'high' : 'low');
@@ -409,9 +411,9 @@ function generateCrisisBuckets_(ctx) {
 
   econCrisisChance *= calendarMod;
 
-  if (econCrisisChance > 0 && Math.random() < econCrisisChance) {
+  if (econCrisisChance > 0 && rng() < econCrisisChance) {
     var econPool = ["Budget Tightening", "Business Closures", "Revenue Shortfall", "Service Cuts"];
-    var subtype4 = econPool[Math.floor(Math.random() * econPool.length)];
+    var subtype4 = econPool[Math.floor(rng() * econPool.length)];
     var forced4 = pickSeverity(1);
     var severity4 = forced4 || (econMood <= 30 ? 'high' : 'medium');
     var loc4 = pickNeighborhood({ 'Downtown': 0.3 });
@@ -435,7 +437,7 @@ function generateCrisisBuckets_(ctx) {
 
   infraChance *= calendarMod;
 
-  if (infraChance > 0 && Math.random() < infraChance) {
+  if (infraChance > 0 && rng() < infraChance) {
     var infraPool;
     if (travelHolidays.indexOf(holiday) >= 0) {
       infraPool = ["Transit Overcrowding", "Airport Delays", "Road Congestion", "Parking Shortage"];
@@ -445,7 +447,7 @@ function generateCrisisBuckets_(ctx) {
       infraPool = ["Transit Delays", "Road Hazards", "Power Fluctuations", "Flood Watch"];
     }
 
-    var subtype5 = infraPool[Math.floor(Math.random() * infraPool.length)];
+    var subtype5 = infraPool[Math.floor(rng() * infraPool.length)];
     var forced5 = pickSeverity(weather.impact);
     var severity5 = forced5 || (weather.impact >= 1.4 ? 'high' : 'medium');
     var loc5 = pickNeighborhood({ 'Downtown': 0.2, 'Jack London': 0.2 });
@@ -478,7 +480,7 @@ function generateCrisisBuckets_(ctx) {
 
   safetyChance *= calendarMod;
 
-  if (safetyChance > 0 && Math.random() < safetyChance) {
+  if (safetyChance > 0 && rng() < safetyChance) {
     var safetyPool;
     if (crowdHolidays.indexOf(holiday) >= 0 || (sportsIsOverride && sportsSeason === "championship")) {
       safetyPool = ["Crowd Control Issue", "Public Disturbance", "Celebratory Incident"];
@@ -488,7 +490,7 @@ function generateCrisisBuckets_(ctx) {
       safetyPool = ["Public Disturbance", "Property Incident", "Community Tension"];
     }
 
-    var subtype6 = safetyPool[Math.floor(Math.random() * safetyPool.length)];
+    var subtype6 = safetyPool[Math.floor(rng() * safetyPool.length)];
     var forced6 = pickSeverity(1);
     var severity6 = forced6 || ((dynamics.sentiment || 0) <= -0.4 ? 'high' : 'medium');
     var loc6 = pickNeighborhood(
@@ -513,7 +515,7 @@ function generateCrisisBuckets_(ctx) {
 
   envChance *= calendarMod;
 
-  if (envChance > 0 && Math.random() < envChance) {
+  if (envChance > 0 && rng() < envChance) {
     var envPool;
     if (fireworksHolidays.indexOf(holiday) >= 0) {
       envPool = ["Air Quality Alert", "Noise Pollution Report", "Debris Cleanup Needed"];
@@ -523,7 +525,7 @@ function generateCrisisBuckets_(ctx) {
       envPool = ["Environmental Complaint", "Waste Management Strain", "Green Space Pressure"];
     }
 
-    var subtype7 = envPool[Math.floor(Math.random() * envPool.length)];
+    var subtype7 = envPool[Math.floor(rng() * envPool.length)];
     var forced7 = pickSeverity(weather.impact);
     var severity7 = forced7 || (weather.impact >= 1.4 ? 'high' : 'medium');
     var loc7 = pickNeighborhood(null);
@@ -571,7 +573,7 @@ function generateCrisisBuckets_(ctx) {
     return a && a.cycleCreated === cycle && a.source === 'BUCKET';
   });
   if (newArcs.length > 0) {
-    Logger.log('generateCrisisBuckets_ v2.7: Spawned ' + newArcs.length + ' crisis arcs');
+    Logger.log('generateCrisisBuckets_ v2.8: Spawned ' + newArcs.length + ' crisis arcs');
   }
 
   ctx.summary = S;
@@ -580,7 +582,7 @@ function generateCrisisBuckets_(ctx) {
 
 /**
  * ============================================================================
- * CRISIS BUCKETS v2.7 REFERENCE
+ * CRISIS BUCKETS v2.8 REFERENCE
  * ============================================================================
  *
  * NEW IN v2.7:

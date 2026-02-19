@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * buildEveningFamous_ v2.3
+ * buildEveningFamous_ v2.4
  * ============================================================================
  *
  * World-aware celebrity selection for evening coverage with calendar integration.
@@ -40,6 +40,7 @@ function buildEveningFamous_(ctx) {
     else return;
   }
 
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -336,7 +337,7 @@ function buildEveningFamous_(ctx) {
 
   // Pick 2–4 famous for the evening (v2.2: can be up to 4 on special occasions)
   var count = 2;
-  if (chaos.length > 0 || Math.random() < 0.3) count = 3;
+  if (chaos.length > 0 || rng() < 0.3) count = 3;
   if (weather.impact >= 1.4) count = 3;
 
   // v2.2: Calendar increases sightings
@@ -346,7 +347,7 @@ function buildEveningFamous_(ctx) {
 
   var selected = typeof pickRandomSet_ === 'function'
     ? pickRandomSet_(uniq, count)
-    : uniq.sort(function() { return Math.random() - 0.5; }).slice(0, count);
+    : uniq.sort(function() { return rng() - 0.5; }).slice(0, count);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // ASSIGN NEIGHBORHOODS (v2.2 - calendar-aware)
@@ -360,20 +361,20 @@ function buildEveningFamous_(ctx) {
     // v2.2: Calendar-aware neighborhood assignment
     if (isFirstFriday && (ent.role.indexOf("artist") !== -1 || ent.role.indexOf("gallery") !== -1 || ent.role.indexOf("musician") !== -1)) {
       // Artists on First Friday are in arts districts
-      neighborhood = artsNeighborhoods[Math.floor(Math.random() * artsNeighborhoods.length)];
-    } else if (holiday === "LunarNewYear" && Math.random() < 0.4) {
+      neighborhood = artsNeighborhoods[Math.floor(rng() * artsNeighborhoods.length)];
+    } else if (holiday === "LunarNewYear" && rng() < 0.4) {
       neighborhood = "Chinatown";
-    } else if ((holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") && Math.random() < 0.4) {
+    } else if ((holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") && rng() < 0.4) {
       neighborhood = "Fruitvale";
     } else if ((holiday === "OpeningDay" || sportsSeason === "championship") && ent.role.indexOf("athlete") !== -1) {
       // Athletes near stadium
-      neighborhood = Math.random() < 0.6 ? "Jack London" : "Downtown";
-    } else if (holiday === "OaklandPride" && Math.random() < 0.4) {
+      neighborhood = rng() < 0.6 ? "Jack London" : "Downtown";
+    } else if (holiday === "OaklandPride" && rng() < 0.4) {
       var prideNeighborhoods = ["Downtown", "Lake Merritt", "Uptown"];
-      neighborhood = prideNeighborhoods[Math.floor(Math.random() * prideNeighborhoods.length)];
+      neighborhood = prideNeighborhoods[Math.floor(rng() * prideNeighborhoods.length)];
     } else {
       // Default random neighborhood
-      neighborhood = neighborhoods[Math.floor(Math.random() * neighborhoods.length)];
+      neighborhood = neighborhoods[Math.floor(rng() * neighborhoods.length)];
     }
 
     famousWithLocations.push({

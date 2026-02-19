@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * applyDemographicDrift_ v2.2
+ * applyDemographicDrift_ v2.3
  * ============================================================================
  *
  * Long-term background demographic drift with GodWorld Calendar integration.
@@ -27,6 +27,8 @@
  */
 
 function applyDemographicDrift_(ctx) {
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var sheet = ctx.ss.getSheetByName('World_Population');
   if (!sheet) return;
@@ -84,7 +86,7 @@ function applyDemographicDrift_(ctx) {
   var prevIll = ill;
 
   // Base downward drift
-  ill += (Math.random() - 0.6) * 0.0004;
+  ill += (rng() - 0.6) * 0.0004;
 
   // Winter → slightly more upward pressure
   if (season === "Winter") ill += 0.0003;

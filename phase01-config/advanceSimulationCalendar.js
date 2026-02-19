@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * advanceSimulationCalendar_ v2.2
+ * advanceSimulationCalendar_ v2.3
  * ============================================================================
  *
  * Cycle-based simulation calendar per GODWORLD CALENDAR v1.0.
@@ -23,6 +23,8 @@
  */
 
 function advanceSimulationCalendar_(ctx) {
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var sheet = ctx.ss.getSheetByName('Simulation_Calendar');
   if (!sheet) return;
@@ -219,14 +221,14 @@ function advanceSimulationCalendar_(ctx) {
 
     if (season === "Winter") {
       baseImpact = 1.2;
-      baseType = Math.random() < 0.3 ? "rain" : "clear";
+      baseType = rng() < 0.3 ? "rain" : "clear";
     } else if (season === "Summer") {
       baseImpact = 0.9;
-      baseType = Math.random() < 0.2 ? "hot" : "clear";
+      baseType = rng() < 0.2 ? "hot" : "clear";
     } else if (season === "Fall") {
-      baseType = Math.random() < 0.25 ? "fog" : "clear";
+      baseType = rng() < 0.25 ? "fog" : "clear";
     } else if (season === "Spring") {
-      baseType = Math.random() < 0.25 ? "rain" : "clear";
+      baseType = rng() < 0.25 ? "rain" : "clear";
     }
 
     S.weather = {

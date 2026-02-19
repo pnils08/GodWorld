@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * updateNeighborhoodDemographics_ v1.0
+ * updateNeighborhoodDemographics_ v1.1
  * ============================================================================
  *
  * Tier 3.2 Implementation: Phase 3 (Population) demographics integration.
@@ -17,6 +17,8 @@
  */
 
 function updateNeighborhoodDemographics_(ctx) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+
   // Defensive guard
   if (!ctx || !ctx.ss) return;
   if (!ctx.summary) ctx.summary = {};
@@ -141,24 +143,24 @@ function updateNeighborhoodDemographics_(ctx) {
     // Small natural aging/transitions each cycle
 
     // Students aging into adults (very slow)
-    if (demo.students > 10 && Math.random() < 0.1) {
+    if (demo.students > 10 && rng() < 0.1) {
       demo.students--;
       demo.adults++;
     }
 
     // Adults aging into seniors (very slow)
-    if (demo.adults > 10 && Math.random() < 0.05) {
+    if (demo.adults > 10 && rng() < 0.05) {
       demo.adults--;
       demo.seniors++;
     }
 
     // Senior mortality (very rare)
-    if (demo.seniors > 10 && Math.random() < 0.02) {
+    if (demo.seniors > 10 && rng() < 0.02) {
       demo.seniors--;
     }
 
     // Birth rate (very rare, adds to students)
-    if (demo.adults > 20 && Math.random() < 0.03) {
+    if (demo.adults > 20 && rng() < 0.03) {
       demo.students++;
     }
 
@@ -196,7 +198,7 @@ function updateNeighborhoodDemographics_(ctx) {
   }
 
   ctx.summary = S;
-  Logger.log('updateNeighborhoodDemographics_ v1.0: Updated ' + Object.keys(demographics).length + ' neighborhoods | Cycle ' + cycle);
+  Logger.log('updateNeighborhoodDemographics_ v1.1: Updated ' + Object.keys(demographics).length + ' neighborhoods | Cycle ' + cycle);
 }
 
 

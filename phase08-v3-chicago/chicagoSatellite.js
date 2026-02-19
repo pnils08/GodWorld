@@ -1,9 +1,13 @@
 /**
  * ============================================================================
- * chicagoSatelliteEngine_ v3.6
+ * chicagoSatelliteEngine_ v3.7
  * ============================================================================
  *
  * Generates Chicago snapshot aligned with GodWorld Calendar v1.0.
+ *
+ * v3.7 Enhancements:
+ * - Deterministic RNG: all randomness uses ctx.rng (no Math.random)
+ * - rng passed to helper functions (weather, sentiment, events)
  *
  * v3.6 Enhancements:
  * - ES5 syntax for Google Apps Script compatibility
@@ -37,6 +41,8 @@ function chicagoSatelliteEngine_(ctx) {
   if (!ctx) return;
   if (!ctx.summary) ctx.summary = {};
 
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+
   var S = ctx.summary;
   var cycle = Number(S.absoluteCycle || S.cycleId) || 0;
 
@@ -65,18 +71,18 @@ function chicagoSatelliteEngine_(ctx) {
   // CHICAGO-SPECIFIC WEATHER
   // Chicago baseline: colder than Oakland, lake effect, harsh winters
   // ═══════════════════════════════════════════════════════════
-  var chicagoWeather = generateChicagoWeather_(simMonth, season, holiday);
+  var chicagoWeather = generateChicagoWeather_(simMonth, season, holiday, rng);
 
   // ═══════════════════════════════════════════════════════════
   // CHICAGO SENTIMENT (Independent from Oakland)
   // Based on weather, Bulls performance, and holidays
   // ═══════════════════════════════════════════════════════════
-  var chicagoSentiment = calculateChicagoSentiment_(ctx, chicagoWeather, holiday, holidayPriority, bullsSeason);
+  var chicagoSentiment = calculateChicagoSentiment_(ctx, chicagoWeather, holiday, holidayPriority, bullsSeason, rng);
 
   // ═══════════════════════════════════════════════════════════
   // CHICAGO EVENTS (Non-sports, holiday-aware)
   // ═══════════════════════════════════════════════════════════
-  var chicagoEvents = generateChicagoEvents_(chicagoWeather, chicagoSentiment, simMonth, holiday, isFirstFriday, cycleOfYear);
+  var chicagoEvents = generateChicagoEvents_(chicagoWeather, chicagoSentiment, simMonth, holiday, isFirstFriday, cycleOfYear, rng);
 
   // ═══════════════════════════════════════════════════════════
   // TRAVEL NOTES
@@ -124,7 +130,7 @@ function chicagoSatelliteEngine_(ctx) {
 
   ctx.summary.chicagoFeed = [report];
 
-  Logger.log('chicagoSatelliteEngine_ v3.6: Cycle ' + cycle +
+  Logger.log('chicagoSatelliteEngine_ v3.7: Cycle ' + cycle +
     ' | Weather: ' + chicagoWeather.type +
     ' | Sentiment: ' + chicagoSentiment +
     ' | Holiday: ' + holiday +
@@ -138,7 +144,8 @@ function chicagoSatelliteEngine_(ctx) {
  * Colder baseline, lake effect, harsh winters
  * ============================================================================
  */
-function generateChicagoWeather_(month, season, holiday) {
+function generateChicagoWeather_(month, season, holiday, rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   // Base temps by month (Fahrenheit)
   var baseTemps = {
     1: 25, 2: 28, 3: 38, 4: 48, 5: 58, 6: 68,
@@ -146,11 +153,11 @@ function generateChicagoWeather_(month, season, holiday) {
   };
 
   var temp = baseTemps[month] || 50;
-  temp += Math.round((Math.random() - 0.5) * 15);
+  temp += Math.round((rng() - 0.5) * 15);
 
   var type = 'clear';
   var impact = 1.0;
-  var roll = Math.random();
+  var roll = rng();
 
   if (month >= 11 || month <= 3) {
     // Winter
@@ -185,19 +192,19 @@ function generateChicagoWeather_(month, season, holiday) {
   // Holiday weather biases
   if (holiday === "Independence") {
     // Favor clear for July 4th
-    if (type === 'overcast' && Math.random() < 0.5) type = 'clear';
+    if (type === 'overcast' && rng() < 0.5) type = 'clear';
   }
   if (holiday === "Holiday" || holiday === "NewYearsEve") {
     // Winter holidays - favor snow
-    if (type === 'clear' && Math.random() < 0.3) { type = 'snow'; impact = 1.4; }
+    if (type === 'clear' && rng() < 0.3) { type = 'snow'; impact = 1.4; }
   }
   if (holiday === "Thanksgiving") {
     // November - can be harsh
-    if (type === 'clear' && Math.random() < 0.3) { type = 'cold'; impact = 1.2; }
+    if (type === 'clear' && rng() < 0.3) { type = 'cold'; impact = 1.2; }
   }
   if (holiday === "StPatricksDay") {
     // March - Chicago's big day, variable weather
-    if (Math.random() < 0.4) { type = 'cold'; impact = 1.2; }
+    if (rng() < 0.4) { type = 'cold'; impact = 1.2; }
   }
 
   return { type: type, impact: impact, temp: temp };
@@ -210,7 +217,8 @@ function generateChicagoWeather_(month, season, holiday) {
  * Based on weather, Bulls performance, and holidays
  * ============================================================================
  */
-function calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bullsSeason) {
+function calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bullsSeason, rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   var sentiment = 0;
 
   // ═══════════════════════════════════════════════════════════
@@ -279,7 +287,7 @@ function calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bull
   sentiment += bullsImpact;
 
   // Random daily fluctuation
-  sentiment += (Math.random() - 0.5) * 0.1;
+  sentiment += (rng() - 0.5) * 0.1;
 
   // Clamp and round
   if (sentiment > 0.6) sentiment = 0.6;
@@ -370,7 +378,8 @@ function getBullsSentimentImpact_(ctx) {
  * Non-sports city events for texture (holiday-aware)
  * ============================================================================
  */
-function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFriday, cycleOfYear) {
+function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFriday, cycleOfYear, rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   var events = [];
 
   // ═══════════════════════════════════════════════════════════
@@ -451,7 +460,7 @@ function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFrida
       'Light foot traffic on State Street.',
       'Commuters hurrying without pause.'
     ];
-    events.push(negativeEvents[Math.floor(Math.random() * negativeEvents.length)]);
+    events.push(negativeEvents[Math.floor(rng() * negativeEvents.length)]);
   }
   if (sentiment >= 0.2) {
     var positiveEvents = [
@@ -459,7 +468,7 @@ function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFrida
       'Crowds gathering along the riverwalk.',
       'Street musicians out on Michigan Ave.'
     ];
-    events.push(positiveEvents[Math.floor(Math.random() * positiveEvents.length)]);
+    events.push(positiveEvents[Math.floor(rng() * positiveEvents.length)]);
   }
 
   // ═══════════════════════════════════════════════════════════
@@ -480,7 +489,7 @@ function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFrida
 
   // Cycle-specific Chicago events
   if (cycleOfYear === 11 || cycleOfYear === 12) {  // March
-    if (Math.random() < 0.3) {
+    if (rng() < 0.3) {
       events.push('St. Patrick\'s Day prep underway.');
     }
   }
@@ -488,7 +497,7 @@ function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFrida
   // ═══════════════════════════════════════════════════════════
   // RANDOM CITY TEXTURE (20% chance)
   // ═══════════════════════════════════════════════════════════
-  if (Math.random() < 0.2) {
+  if (rng() < 0.2) {
     var textures = [
       'El train delays on the Red Line.',
       'Construction on Wacker Drive.',
@@ -499,7 +508,7 @@ function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFrida
       'Deep dish debate at Giordano\'s.',
       'Cubs fans heading to Wrigleyville.'
     ];
-    events.push(textures[Math.floor(Math.random() * textures.length)]);
+    events.push(textures[Math.floor(rng() * textures.length)]);
   }
 
   return events.join(' ');

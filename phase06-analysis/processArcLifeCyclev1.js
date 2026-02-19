@@ -1,8 +1,11 @@
 /**
  * ============================================================================
- * ARC RESOLUTION SYSTEM v1.1
+ * ARC RESOLUTION SYSTEM v1.2
  * ============================================================================
  * 
+ * v1.2 Changes:
+ * - Replaced Math.random() with deterministic ctx.rng in tension drift and resolution text
+ *
  * v1.1 Enhancements:
  * - Condition-based resolution (checks actual metrics, not just age)
  * - Health arcs resolve when illness rate drops
@@ -34,7 +37,8 @@
  * Main function — process all active arcs
  */
 function processArcLifecycle_(ctx) {
-  
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+
   var ss = ctx.ss;
   var cycle = ctx.config.cycleCount || 0;
   var arcs = ctx.summary.eventArcs || ctx.v3Arcs || [];
@@ -45,7 +49,7 @@ function processArcLifecycle_(ctx) {
     return;
   }
   
-  Logger.log('processArcLifecycle_ v1.1: Processing ' + arcs.length + ' arcs');
+  Logger.log('processArcLifecycle_ v1.2: Processing ' + arcs.length + ' arcs');
   
   // ═══════════════════════════════════════════════════════════════════════════
   // v1.1: GATHER WORLD STATE FOR CONDITION CHECKING
@@ -124,7 +128,7 @@ function processArcLifecycle_(ctx) {
     // TENSION DRIFT (v1.1: calendar-aware)
     // ═══════════════════════════════════════════════════════════════════════
     
-    var tensionDrift = calculateTensionDrift_(arc, worldState, calendarContext);
+    var tensionDrift = calculateTensionDrift_(arc, worldState, calendarContext, rng);
     
     arc.tension = Math.max(0, Math.min(10, (arc.tension || 0) + tensionDrift));
     arc.tension = Math.round(arc.tension * 100) / 100;
@@ -178,7 +182,7 @@ function processArcLifecycle_(ctx) {
         type: 'arc-resolution',
         domain: resolved.domainTag || resolved.domain || 'GENERAL',
         neighborhood: resolved.neighborhood,
-        text: getResolutionText_(resolved),
+        text: getResolutionText_(resolved, rng),
         priority: 'high',
         linkedArc: resolved.arcId,
         resolutionType: resolved.resolutionType,
@@ -200,7 +204,7 @@ function processArcLifecycle_(ctx) {
     updateArcLedger_(ss, arcs, cycle);
   }
   
-  Logger.log('processArcLifecycle_ v1.1: Complete. Resolutions: ' + resolutions.length + ', Phase changes: ' + phaseChanges.length);
+  Logger.log('processArcLifecycle_ v1.2: Complete. Resolutions: ' + resolutions.length + ', Phase changes: ' + phaseChanges.length);
 }
 
 
@@ -414,19 +418,20 @@ function checkConditionResolution_(arc, worldState, calendar) {
 // v1.1: CALENDAR-AWARE TENSION DRIFT
 // ═══════════════════════════════════════════════════════════════════════════
 
-function calculateTensionDrift_(arc, worldState, calendar) {
+function calculateTensionDrift_(arc, worldState, calendar, rng) {
+  var _rng = (typeof rng === 'function') ? rng : Math.random;
   var age = arc.age || 0;
   var type = arc.type || 'crisis';
   var domain = arc.domainTag || arc.domain || '';
-  
+
   // Base drift: slight upward bias early, downward later
   var drift;
   if (age <= 3) {
-    drift = (Math.random() - 0.35) * 1.3;  // Upward bias
+    drift = (_rng() - 0.35) * 1.3;  // Upward bias
   } else if (age <= 6) {
-    drift = (Math.random() - 0.5) * 1.2;   // Neutral
+    drift = (_rng() - 0.5) * 1.2;   // Neutral
   } else {
-    drift = (Math.random() - 0.65) * 1.5;  // Downward bias
+    drift = (_rng() - 0.65) * 1.5;  // Downward bias
   }
   
   // ─────────────────────────────────────────────────────────────────────────
@@ -546,7 +551,8 @@ function determinePhase_(arc) {
 /**
  * Generate resolution text for story seed (v1.1: with reason)
  */
-function getResolutionText_(arc) {
+function getResolutionText_(arc, rng) {
+  var _rng = (typeof rng === 'function') ? rng : Math.random;
   var type = arc.type || 'event';
   var neighborhood = arc.neighborhood || 'the area';
   var reason = arc.resolutionReason || '';
@@ -621,7 +627,7 @@ function getResolutionText_(arc) {
   var typeTemplates = templates[type] || templates['crisis'];
   var options = typeTemplates[resType] || typeTemplates['default'] || templates['crisis']['default'];
   
-  return options[Math.floor(Math.random() * options.length)];
+  return options[Math.floor(_rng() * options.length)];
 }
 
 
@@ -699,7 +705,7 @@ function updateArcLedger_(ss, arcs, cycle) {
 
 /**
  * ============================================================================
- * ARC LIFECYCLE v1.1 REFERENCE
+ * ARC LIFECYCLE v1.2 REFERENCE
  * ============================================================================
  * 
  * CONDITION-BASED RESOLUTION:

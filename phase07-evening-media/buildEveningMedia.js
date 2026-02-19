@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * buildEveningMedia_ v2.3
+ * buildEveningMedia_ v2.4
  * ============================================================================
  *
  * World-aware evening media selection with GodWorld Calendar integration.
@@ -37,6 +37,7 @@ function buildEveningMedia_(ctx) {
     else return;
   }
 
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -65,7 +66,7 @@ function buildEveningMedia_(ctx) {
   // Helper for random pick
   var pickRandom = function(arr) {
     if (typeof pickRandom_ === 'function') return pickRandom_(arr);
-    return arr[Math.floor(Math.random() * arr.length)];
+    return arr[Math.floor(rng() * arr.length)];
   };
 
   // ═══════════════════════════════════════════════════════════════════════════

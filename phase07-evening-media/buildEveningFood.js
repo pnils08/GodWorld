@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * buildEveningFood_ v2.3
+ * buildEveningFood_ v2.4
  * ============================================================================
  *
  * World-aware restaurant/food selection with GodWorld Calendar integration.
@@ -38,6 +38,7 @@ function buildEveningFood_(ctx) {
     else return;
   }
 
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -398,11 +399,11 @@ function buildEveningFood_(ctx) {
     if (typeof pickRandomSet_ === 'function') {
       return pickRandomSet_(arr, count);
     }
-    return arr.sort(function() { return Math.random() - 0.5; }).slice(0, count);
+    return arr.sort(function() { return rng() - 0.5; }).slice(0, count);
   };
 
   // v2.2: More restaurants on special occasions
-  var restaurantCount = Math.random() < 0.3 ? 3 : 2;
+  var restaurantCount = rng() < 0.3 ? 3 : 2;
   if (holidayPriority === "major" || holidayPriority === "oakland") restaurantCount = 3;
   if (isFirstFriday) restaurantCount = 3;
   if (sportsSeason === "championship") restaurantCount = 4;

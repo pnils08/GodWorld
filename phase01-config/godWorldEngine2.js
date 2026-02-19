@@ -1,7 +1,11 @@
 /**
  * ============================================================================
- * GOD WORLD ENGINE v2.13
+ * GOD WORLD ENGINE v2.14
  * ============================================================================
+ *
+ * v2.14 Changes:
+ * - Replaced Math.random() with ctx.rng in updateWorldPopulation_ (23 instances)
+ * - Deterministic RNG for reproducible population dynamics
  *
  * v2.13 Changes:
  * - Added compressLifeHistory_ call in Phase 9 for TraitProfile generation
@@ -440,7 +444,7 @@ function advanceWorldTime_(ctx) {
 
 /**
  * ============================================================================
- * UPDATE WORLD POPULATION v2.2 (v2.10 - uses cache)
+ * UPDATE WORLD POPULATION v2.3 (v2.14 - deterministic RNG)
  * ============================================================================
  *
  * Safe, realistic city-level population update with GodWorld Calendar integration.
@@ -464,6 +468,8 @@ function advanceWorldTime_(ctx) {
  * - Simulation_Ledger
  */
 function updateWorldPopulation_(ctx) {
+
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   // v2.10: Use cache for reads
   var cached = ctx.cache.getData('World_Population');
@@ -515,7 +521,7 @@ function updateWorldPopulation_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Random micro-shift
-  ill += (Math.random() - 0.5) * 0.001;
+  ill += (rng() - 0.5) * 0.001;
 
   // Seasonal illness pressure
   if (season === "Winter") ill += 0.0008;
@@ -563,7 +569,7 @@ function updateWorldPopulation_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Slight drift to stay realistic
-  emp += (Math.random() - 0.5) * 0.0012;
+  emp += (rng() - 0.5) * 0.0012;
 
   // Sentiment influence
   if (dynamics.sentiment <= -0.4) emp -= 0.0008;
@@ -638,7 +644,7 @@ function updateWorldPopulation_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
 
   // Base fluctuation
-  mig += Math.round((Math.random() - 0.5) * 20);
+  mig += Math.round((rng() - 0.5) * 20);
 
   // TRAVEL HOLIDAYS - High movement volatility
   var travelHolidays = [
@@ -646,7 +652,7 @@ function updateWorldPopulation_(ctx) {
     "MemorialDay", "LaborDay", "Independence"
   ];
   if (travelHolidays.indexOf(holiday) >= 0) {
-    mig += Math.round((Math.random() - 0.5) * 50);
+    mig += Math.round((rng() - 0.5) * 50);
   }
 
   // GATHERING HOLIDAYS - Net inflow for celebrations
@@ -655,7 +661,7 @@ function updateWorldPopulation_(ctx) {
     "Juneteenth", "CincoDeMayo", "DiaDeMuertos"
   ];
   if (gatheringInflow.indexOf(holiday) >= 0) {
-    mig += Math.round(Math.random() * 40);
+    mig += Math.round(rng() * 40);
   }
 
   // CULTURAL HOLIDAYS - Diaspora visitors
@@ -664,7 +670,7 @@ function updateWorldPopulation_(ctx) {
     "BlackHistoryMonth", "PrideMonth", "LunarNewYear"
   ];
   if (culturalVisitorHolidays.indexOf(holiday) >= 0) {
-    mig += Math.round(Math.random() * 25);
+    mig += Math.round(rng() * 25);
   }
 
   // MINOR HOLIDAYS - Slight local movement
@@ -673,55 +679,55 @@ function updateWorldPopulation_(ctx) {
     "MothersDay", "FathersDay", "EarthDay"
   ];
   if (minorHolidays.indexOf(holiday) >= 0) {
-    mig += Math.round((Math.random() - 0.5) * 20);
+    mig += Math.round((rng() - 0.5) * 20);
   }
 
   // CIVIC OBSERVATION HOLIDAYS - Reduced movement
   var civicRestHolidays = ["MLKDay", "PresidentsDay", "VeteransDay"];
   if (civicRestHolidays.indexOf(holiday) >= 0) {
-    mig += Math.round((Math.random() - 0.5) * 10);
+    mig += Math.round((rng() - 0.5) * 10);
   }
 
   // HOLIDAY PRIORITY EFFECTS
   if (holidayPriority === "major") {
-    mig += Math.round((Math.random() - 0.5) * 30);
+    mig += Math.round((rng() - 0.5) * 30);
   } else if (holidayPriority === "oakland") {
-    mig += Math.round(Math.random() * 35);
+    mig += Math.round(rng() * 35);
   } else if (holidayPriority === "cultural") {
-    mig += Math.round(Math.random() * 20);
+    mig += Math.round(rng() * 20);
   }
 
   // FIRST FRIDAY - Draws visitors to arts districts
   if (isFirstFriday) {
-    mig += Math.round(Math.random() * 30);
+    mig += Math.round(rng() * 30);
   }
 
   // CREATION DAY - Settling effect
   if (isCreationDay) {
-    mig += Math.round(Math.random() * 15);
+    mig += Math.round(rng() * 15);
   }
 
   // SPORTS SEASON EFFECTS
   if (sports === "championship") {
-    mig += Math.round(Math.random() * 60);
+    mig += Math.round(rng() * 60);
   } else if (sports === "playoffs" || sports === "post-season") {
-    mig += Math.round(Math.random() * 40);
+    mig += Math.round(rng() * 40);
   } else if (sports === "late-season") {
-    mig += Math.round(Math.random() * 20);
+    mig += Math.round(rng() * 20);
   }
 
   // CHAOS → MOVEMENT VOLATILITY
-  if (chaos.length > 0) mig += Math.round((Math.random() - 0.5) * 30);
-  if (chaos.length >= 5) mig += Math.round((Math.random() - 0.5) * 20);
+  if (chaos.length > 0) mig += Math.round((rng() - 0.5) * 30);
+  if (chaos.length >= 5) mig += Math.round((rng() - 0.5) * 20);
 
   // CITY DYNAMICS
-  if (dynamics.publicSpaces >= 1.4) mig += Math.round((Math.random() - 0.5) * 20);
-  if (dynamics.culturalActivity >= 1.4) mig += Math.round(Math.random() * 15);
-  if (dynamics.communityEngagement >= 1.3) mig += Math.round(Math.random() * 10);
+  if (dynamics.publicSpaces >= 1.4) mig += Math.round((rng() - 0.5) * 20);
+  if (dynamics.culturalActivity >= 1.4) mig += Math.round(rng() * 15);
+  if (dynamics.communityEngagement >= 1.3) mig += Math.round(rng() * 10);
 
   // WEATHER PUSH
-  if (weather.impact >= 1.3) mig += Math.round((Math.random() - 0.5) * 15);
-  if (weather.impact >= 1.5) mig += Math.round((Math.random() - 0.5) * 25);
+  if (weather.impact >= 1.3) mig += Math.round((rng() - 0.5) * 15);
+  if (weather.impact >= 1.5) mig += Math.round((rng() - 0.5) * 25);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // 5. NEW TOTAL POPULATION (v2.11: migration clamped)

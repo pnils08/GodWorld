@@ -1,9 +1,13 @@
 /**
  * ============================================================================
- * saveV3Chicago_ v2.5 - Write-Intent Based
+ * saveV3Chicago_ v2.6 - Write-Intent Based
  * ============================================================================
  *
- * CHANGES FROM v2.4:
+ * CHANGES FROM v2.5:
+ * 1. Deterministic RNG: all randomness uses ctx.rng (no Math.random)
+ * 2. rng passed to derivation helpers (weather, temp, sentiment)
+ *
+ * v2.5 Changes:
  * 1. Uses queueBatchAppendIntent_ instead of direct writes
  * 2. Full dryRun/replay mode support
  *
@@ -26,6 +30,8 @@
  */
 
 function saveV3Chicago_(ctx) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+
   var ss = ctx.ss;
   
   var HEADERS = [
@@ -84,9 +90,9 @@ function saveV3Chicago_(ctx) {
     var used = [];
     
     for (var s = 0; s < sampleCount; s++) {
-      var idx = Math.floor(Math.random() * citizenCount);
+      var idx = Math.floor(rng() * citizenCount);
       while (used.indexOf(idx) !== -1 && used.length < citizenCount) {
-        idx = Math.floor(Math.random() * citizenCount);
+        idx = Math.floor(rng() * citizenCount);
       }
       used.push(idx);
       var c = chicagoCitizens[idx];
@@ -102,7 +108,7 @@ function saveV3Chicago_(ctx) {
   var feed = ctx.summary.chicagoFeed || [];
 
   if (!feed.length) {
-    var derived = deriveChicagoFeedV24_(ctx, godWorldYear, cycleOfYear, simMonth, cycleInMonth, season, holiday);
+    var derived = deriveChicagoFeedV24_(ctx, godWorldYear, cycleOfYear, simMonth, cycleInMonth, season, holiday, rng);
     feed = [derived];
   }
 
@@ -113,8 +119,8 @@ function saveV3Chicago_(ctx) {
   
   for (var i = 0; i < feed.length; i++) {
     var f = feed[i];
-    var weatherType = f.weatherType || deriveChicagoWeatherTypeV24_(simMonth);
-    var temperature = f.temp || f.temperature || deriveChicagoTempV24_(simMonth, weatherType);
+    var weatherType = f.weatherType || deriveChicagoWeatherTypeV24_(simMonth, rng);
+    var temperature = f.temp || f.temperature || deriveChicagoTempV24_(simMonth, weatherType, rng);
     
     rows.push([
       now,
@@ -130,7 +136,7 @@ function saveV3Chicago_(ctx) {
       f.weatherImpact || deriveWeatherImpactV24_(weatherType),
       f.weatherMood || oaklandWeatherMood.primaryMood || deriveWeatherMoodV24_(weatherType),
       f.comfortIndex || oaklandWeatherMood.comfortIndex || deriveComfortIndexV24_(temperature, weatherType),
-      round2V24_(f.sentiment || deriveChicagoSentimentV24_(S)),
+      round2V24_(f.sentiment || deriveChicagoSentimentV24_(S, rng)),
       f.economicMood || S.economicMood || 50,
       f.bullsSeason || getBullsSeasonV24_(ctx) || 'off-season',
       f.events || deriveChicagoEventsV24_(weatherType, simMonth, holiday),
@@ -160,7 +166,7 @@ function saveV3Chicago_(ctx) {
       100
     );
 
-    Logger.log('saveV3Chicago_ v2.5: Queued ' + rows.length + ' row(s) for Cycle ' + absoluteCycle + ' | Citizens: ' + citizenCount);
+    Logger.log('saveV3Chicago_ v2.6: Queued ' + rows.length + ' row(s) for Cycle ' + absoluteCycle + ' | Citizens: ' + citizenCount);
   }
 }
 
@@ -169,12 +175,13 @@ function saveV3Chicago_(ctx) {
 // DERIVATION FUNCTIONS (v2.4 namespaced to avoid collisions)
 // ════════════════════════════════════════════════════════════════════════════
 
-function deriveChicagoFeedV24_(ctx, godWorldYear, cycleOfYear, simMonth, cycleInMonth, season, holiday) {
+function deriveChicagoFeedV24_(ctx, godWorldYear, cycleOfYear, simMonth, cycleInMonth, season, holiday, rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   var S = ctx.summary || {};
   var chicago = S.chicago || ctx.chicago || {};
-  
-  var weatherType = chicago.weatherType || deriveChicagoWeatherTypeV24_(simMonth);
-  var temperature = chicago.temp || deriveChicagoTempV24_(simMonth, weatherType);
+
+  var weatherType = chicago.weatherType || deriveChicagoWeatherTypeV24_(simMonth, rng);
+  var temperature = chicago.temp || deriveChicagoTempV24_(simMonth, weatherType, rng);
   var weatherImpact = chicago.weatherImpact || deriveWeatherImpactV24_(weatherType);
   
   return {
@@ -189,7 +196,7 @@ function deriveChicagoFeedV24_(ctx, godWorldYear, cycleOfYear, simMonth, cycleIn
     weatherImpact: weatherImpact,
     weatherMood: deriveWeatherMoodV24_(weatherType),
     comfortIndex: deriveComfortIndexV24_(temperature, weatherType),
-    sentiment: chicago.sentiment || deriveChicagoSentimentV24_(S),
+    sentiment: chicago.sentiment || deriveChicagoSentimentV24_(S, rng),
     economicMood: S.economicMood || 50,
     bullsSeason: getBullsSeasonV24_(ctx) || 'off-season',
     events: chicago.events || deriveChicagoEventsV24_(weatherType, simMonth, holiday),
@@ -220,7 +227,8 @@ function getMonthFromCycleInternal_(cycleOfYear) {
   return 1;
 }
 
-function deriveChicagoWeatherTypeV24_(simMonth) {
+function deriveChicagoWeatherTypeV24_(simMonth, rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   var patterns = {
     1: ['snow', 'cold', 'cold', 'lake-effect'],
     2: ['snow', 'cold', 'cold', 'freezing-rain'],
@@ -236,10 +244,11 @@ function deriveChicagoWeatherTypeV24_(simMonth) {
     12: ['snow', 'cold', 'snow', 'freezing-rain']
   };
   var options = patterns[simMonth] || ['cold', 'cold', 'cold'];
-  return options[Math.floor(Math.random() * options.length)];
+  return options[Math.floor(rng() * options.length)];
 }
 
-function deriveChicagoTempV24_(simMonth, weatherType) {
+function deriveChicagoTempV24_(simMonth, weatherType, rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   var baseTemps = { 1: 25, 2: 28, 3: 38, 4: 48, 5: 58, 6: 68, 7: 75, 8: 74, 9: 65, 10: 53, 11: 40, 12: 28 };
   var temp = baseTemps[simMonth] || 45;
   if (weatherType === 'snow' || weatherType === 'lake-effect') temp -= 5;
@@ -247,7 +256,7 @@ function deriveChicagoTempV24_(simMonth, weatherType) {
   if (weatherType === 'hot') temp += 8;
   if (weatherType === 'cold') temp -= 3;
   if (weatherType === 'humid') temp += 3;
-  temp += Math.round((Math.random() - 0.5) * 10);
+  temp += Math.round((rng() - 0.5) * 10);
   return temp;
 }
 
@@ -273,11 +282,12 @@ function deriveComfortIndexV24_(temperature, weatherType) {
   return Math.max(0, Math.min(1, round2V24_(comfort)));
 }
 
-function deriveChicagoSentimentV24_(summary) {
+function deriveChicagoSentimentV24_(summary, rng) {
+  rng = (typeof rng === 'function') ? rng : Math.random;
   var sentiment = -0.1;
   if (summary.sportsSeason === 'playoffs' || summary.sportsSeason === 'post-season') sentiment += 0.15;
   if (summary.sportsSeason === 'championship') sentiment += 0.3;
-  sentiment += (Math.random() - 0.5) * 0.1;
+  sentiment += (rng() - 0.5) * 0.1;
   return Math.max(-1, Math.min(1, sentiment));
 }
 

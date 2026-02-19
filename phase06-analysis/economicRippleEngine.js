@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * ECONOMIC RIPPLE ENGINE v2.3
+ * ECONOMIC RIPPLE ENGINE v2.4
  * ============================================================================
  *
  * CONNECTED: Factors in migration drift AND career signals from Career Engine.
@@ -98,8 +98,12 @@ var FESTIVAL_HOLIDAYS = ['OaklandPride', 'ArtSoulFestival', 'Independence'];
 // ═══════════════════════════════════════════════════════════════
 
 function runEconomicRippleEngine_(ctx) {
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var S = ctx.summary || {};
-  
+
+  // v2.4: Store rng on S for helper functions that don't receive ctx
+  S._rng = rng;
+
   S.economicRipples = S.economicRipples || [];
   S.economicMood = S.economicMood || 50;
   S.neighborhoodEconomies = S.neighborhoodEconomies || {};
@@ -160,7 +164,7 @@ function runEconomicRippleEngine_(ctx) {
   ctx.summary = S;
   
   var careerSignals = S.careerSignals || {};
-  Logger.log('runEconomicRippleEngine_ v2.3: mood=' + S.economicMood +
+  Logger.log('runEconomicRippleEngine_ v2.4: mood=' + S.economicMood +
     ' | ripples=' + S.economicRipples.length +
     ' | prevMigration=' + prevMigration +
     ' | layoffs=' + (careerSignals.layoffs || 0));
@@ -421,9 +425,10 @@ function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, ca
   }
   
   var neighborhood = eventNeighborhood || '';
-  if (!neighborhood && trigger.neighborhoods && trigger.neighborhoods.length > 0 && 
+  if (!neighborhood && trigger.neighborhoods && trigger.neighborhoods.length > 0 &&
       trigger.neighborhoods[0] !== 'all') {
-    neighborhood = trigger.neighborhoods[Math.floor(Math.random() * trigger.neighborhoods.length)];
+    var _rng = (typeof S._rng === 'function') ? S._rng : Math.random;
+    neighborhood = trigger.neighborhoods[Math.floor(_rng() * trigger.neighborhoods.length)];
   }
   
   var impact = trigger.impact;
@@ -824,7 +829,7 @@ function generateEconomicSummary_(ctx) {
 
 /**
  * ============================================================================
- * ECONOMIC RIPPLE ENGINE REFERENCE v2.3
+ * ECONOMIC RIPPLE ENGINE REFERENCE v2.4
  * ============================================================================
  *
  * CAREER TRIGGERS (v2.3 - wired to Career Engine):

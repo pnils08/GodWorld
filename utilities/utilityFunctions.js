@@ -3,6 +3,10 @@
  * UTILITY FUNCTIONS - Canonical Location
  * ============================================================================
  *
+ * v2.10 Changes:
+ * - Deterministic RNG prep: Math.random aliased to local rng var in
+ *   pickRandom_, pickRandomSet_, maybePick_ (centralization prep -- no ctx in scope)
+ *
  * v2.9 Consolidation:
  * All shared utility functions should be defined here ONLY.
  * Do not duplicate these functions in other files.
@@ -22,12 +26,14 @@
  */
 
 function pickRandom_(arr) {
+  var rng = Math.random; // centralization prep -- no ctx in scope
   if (!arr || arr.length === 0) return null;
-  var idx = Math.floor(Math.random() * arr.length);
+  var idx = Math.floor(rng() * arr.length);
   return arr[idx];
 }
 
 function pickRandomSet_(arr, count) {
+  var rng = Math.random; // centralization prep -- no ctx in scope
   if (!arr || arr.length === 0) return [];
   if (count >= arr.length) return arr.slice();
 
@@ -35,7 +41,7 @@ function pickRandomSet_(arr, count) {
   var result = [];
 
   for (var i = 0; i < count; i++) {
-    var idx = Math.floor(Math.random() * copy.length);
+    var idx = Math.floor(rng() * copy.length);
     result.push(copy[idx]);
     copy.splice(idx, 1);
   }
@@ -44,7 +50,8 @@ function pickRandomSet_(arr, count) {
 }
 
 function maybePick_(arr) {
-  if (Math.random() < 0.5) return null;
+  var rng = Math.random; // centralization prep -- no ctx in scope
+  if (rng() < 0.5) return null;
   return pickRandom_(arr);
 }
 

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * buildNightlife_ v2.3
+ * buildNightlife_ v2.4
  * ============================================================================
  *
  * World-aware nightlife generator with GodWorld Calendar integration.
@@ -41,6 +41,7 @@ function buildNightlife_(ctx) {
     else return;
   }
 
+  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
   var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -451,7 +452,7 @@ function buildNightlife_(ctx) {
 
   var spots = typeof pickRandomSet_ === 'function'
     ? pickRandomSet_(pool, count)
-    : pool.sort(function() { return Math.random() - 0.5; }).slice(0, count);
+    : pool.sort(function() { return rng() - 0.5; }).slice(0, count);
 
   // ═══════════════════════════════════════════════════════════════════════════
   // BUILD VIBE DESCRIPTION (v2.2 - calendar-aware)

@@ -25,7 +25,7 @@ var NEIGHBORHOOD_DEMOGRAPHICS_HEADERS = [
 /**
  * Standard Oakland neighborhoods for demographics tracking
  */
-var OAKLAND_NEIGHBORHOODS = [
+var DEMO_NEIGHBORHOODS = [
   'Downtown', 'Temescal', 'Laurel', 'West Oakland', 'Fruitvale', 'Jack London',
   'Rockridge', 'Adams Point', 'Grand Lake', 'Piedmont Ave', 'Chinatown',
   'Brooklyn', 'Eastlake', 'Glenview', 'Dimond', 'Ivy Hill', 'San Antonio'
@@ -332,8 +332,8 @@ function seedNeighborhoodDemographicsFromLedger_(ss, cycle) {
 
   // Initialize demographics for all neighborhoods
   var demographics = {};
-  for (var n = 0; n < OAKLAND_NEIGHBORHOODS.length; n++) {
-    var hood = OAKLAND_NEIGHBORHOODS[n];
+  for (var n = 0; n < DEMO_NEIGHBORHOODS.length; n++) {
+    var hood = DEMO_NEIGHBORHOODS[n];
     demographics[hood] = {
       students: 0,
       adults: 0,
@@ -383,7 +383,7 @@ function seedNeighborhoodDemographicsFromLedger_(ss, cycle) {
 
   // Apply neighborhood profiles to ensure realistic distribution
   // If a neighborhood has no citizens, seed with profile-weighted estimates
-  var basePopulation = Math.floor(values.length / OAKLAND_NEIGHBORHOODS.length);
+  var basePopulation = Math.floor(values.length / DEMO_NEIGHBORHOODS.length);
   if (basePopulation < 10) basePopulation = 50; // Minimum seed
 
   for (var hood in demographics) {
@@ -405,7 +405,7 @@ function seedNeighborhoodDemographicsFromLedger_(ss, cycle) {
   // Write to sheet
   batchUpdateNeighborhoodDemographics_(ss, demographics, cycle);
 
-  Logger.log('seedNeighborhoodDemographicsFromLedger_: Seeded ' + OAKLAND_NEIGHBORHOODS.length + ' neighborhoods');
+  Logger.log('seedNeighborhoodDemographicsFromLedger_: Seeded ' + DEMO_NEIGHBORHOODS.length + ' neighborhoods');
 
   return demographics;
 }

@@ -36,9 +36,10 @@
  */
 
 // ═══════════════════════════════════════════════════════════════════════════
-// OAKLAND NEIGHBORHOODS — Domain Affinities (v3.3: expanded to 12)
+// ARC NEIGHBORHOOD DOMAINS — Domain Affinities (v3.3: expanded to 12)
+// NOTE: Renamed from OAKLAND_NEIGHBORHOODS to avoid global collision with v3NeighborhoodWriter.js
 // ═══════════════════════════════════════════════════════════════════════════
-var OAKLAND_NEIGHBORHOODS = {
+var ARC_NEIGHBORHOOD_DOMAINS = {
   'Temescal': ['HEALTH', 'EDUCATION', 'COMMUNITY'],
   'Downtown': ['CIVIC', 'INFRASTRUCTURE', 'BUSINESS', 'FESTIVAL'],
   'Fruitvale': ['COMMUNITY', 'CULTURE', 'SAFETY', 'FESTIVAL'],
@@ -69,10 +70,10 @@ function getCurrentCycle_(ctx) {
  */
 function pickNeighborhoodForDomain_(domain) {
   var matches = [];
-  var nhKeys = Object.keys(OAKLAND_NEIGHBORHOODS);
+  var nhKeys = Object.keys(ARC_NEIGHBORHOOD_DOMAINS);
   for (var i = 0; i < nhKeys.length; i++) {
     var nh = nhKeys[i];
-    var affinities = OAKLAND_NEIGHBORHOODS[nh];
+    var affinities = ARC_NEIGHBORHOOD_DOMAINS[nh];
     if (affinities.indexOf(domain) >= 0) {
       matches.push(nh);
     }

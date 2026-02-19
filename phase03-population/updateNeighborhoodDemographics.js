@@ -214,8 +214,8 @@ function buildNeighborhoodDemographicModifiers_(holiday, isFirstFriday, isCreati
   var modifiers = {};
 
   // Default modifiers
-  for (var i = 0; i < OAKLAND_NEIGHBORHOODS.length; i++) {
-    var hood = OAKLAND_NEIGHBORHOODS[i];
+  for (var i = 0; i < DEMO_NEIGHBORHOODS.length; i++) {
+    var hood = DEMO_NEIGHBORHOODS[i];
     modifiers[hood] = { inflowMod: 1.0, outflowMod: 1.0 };
   }
 

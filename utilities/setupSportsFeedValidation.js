@@ -102,7 +102,7 @@ var OAKLAND_TEAMS = ["A's", 'Warriors'];
 
 var CHICAGO_TEAMS = ['Bulls'];
 
-var OAKLAND_NEIGHBORHOODS = [
+var FEED_NEIGHBORHOODS = [
   '',
   'Downtown',
   'Jack London',
@@ -179,7 +179,7 @@ function setupSportsFeedValidation() {
 
   var oakSheet = ss.getSheetByName('Oakland_Sports_Feed');
   if (oakSheet) {
-    setupFeedSheet_(oakSheet, 'Oakland', OAKLAND_TEAMS, OAKLAND_NEIGHBORHOODS);
+    setupFeedSheet_(oakSheet, 'Oakland', OAKLAND_TEAMS, FEED_NEIGHBORHOODS);
     results.push('Oakland_Sports_Feed: OK');
   } else {
     results.push('Oakland_Sports_Feed: NOT FOUND (skipped)');
@@ -222,7 +222,7 @@ function setupOaklandFeedOnly() {
     SpreadsheetApp.getUi().alert('Oakland_Sports_Feed not found.');
     return;
   }
-  setupFeedSheet_(sheet, 'Oakland', OAKLAND_TEAMS, OAKLAND_NEIGHBORHOODS);
+  setupFeedSheet_(sheet, 'Oakland', OAKLAND_TEAMS, FEED_NEIGHBORHOODS);
   SpreadsheetApp.getUi().alert('Oakland_Sports_Feed setup complete!');
 }
 

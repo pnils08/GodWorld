@@ -29,7 +29,7 @@ var NEIGHBORHOOD_MAP_HEADERS = [
   'CreationDay', 'SportsSeason'
 ];
 
-var OAKLAND_NEIGHBORHOODS = [
+var NMAP_NEIGHBORHOODS = [
   'Downtown', 'Temescal', 'Laurel', 'West Oakland', 'Fruitvale', 'Jack London',
   'Rockridge', 'Adams Point', 'Grand Lake', 'Piedmont Ave', 'Chinatown',
   'Brooklyn', 'Eastlake', 'Glenview', 'Dimond', 'Ivy Hill', 'San Antonio'
@@ -195,7 +195,7 @@ function saveV3NeighborhoodMap_(ctx) {
   function variance() { return (Math.random() - 0.5) * 0.2; }
 
   // Ensure we have enough rows (no clearing)
-  var neededRows = 1 + OAKLAND_NEIGHBORHOODS.length;
+  var neededRows = 1 + NMAP_NEIGHBORHOODS.length;
   if (sheet.getLastRow() < neededRows) {
     sheet.insertRowsAfter(sheet.getLastRow(), neededRows - sheet.getLastRow());
   }
@@ -203,8 +203,8 @@ function saveV3NeighborhoodMap_(ctx) {
   // Build batch rows
   var out = [];
 
-  for (var i = 0; i < OAKLAND_NEIGHBORHOODS.length; i++) {
-    var name = OAKLAND_NEIGHBORHOODS[i];
+  for (var i = 0; i < NMAP_NEIGHBORHOODS.length; i++) {
+    var name = NMAP_NEIGHBORHOODS[i];
     var profile = neighborhoods[name];
     var hMod = holidayMods[name] || {};
 

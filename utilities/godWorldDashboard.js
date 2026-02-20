@@ -334,12 +334,4 @@ function refreshDashboard() {
 }
 
 
-/**
- * Menu
- */
-function onOpen() {
-  SpreadsheetApp.getUi().createMenu('GodWorld')
-    .addItem('Create Dashboard', 'createGodWorldDashboard')
-    .addItem('Refresh Dashboard', 'refreshDashboard')
-    .addToUi();
-}
+// Menu moved to utilities/godWorldMenu.js (consolidated onOpen)

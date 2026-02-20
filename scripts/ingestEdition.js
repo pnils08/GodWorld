@@ -35,6 +35,10 @@ function extractCycle(content, filename) {
   // Try filename: cycle_pulse_edition_82.txt
   var fileMatch = filename.match(/edition[_-](\d+)/i);
   if (fileMatch) return parseInt(fileMatch[1], 10);
+  // Try supplemental: "C83 Supplemental" in header or filename
+  var suppMatch = content.match(/\bC(\d+)\s+Supplemental/i)
+    || filename.match(/[_-]c(\d+)/i);
+  if (suppMatch) return parseInt(suppMatch[1], 10);
   return null;
 }
 

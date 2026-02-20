@@ -321,13 +321,19 @@ function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
 async function callClaude(userMessage, userName, userId) {
   var systemPrompt = getSystemPrompt();
 
-  // Fetch user profile + search archive in parallel
+  // Fetch user profile + search archive + family data in parallel
   var results = await Promise.all([
     searchSupermemory(userMessage),
-    fetchUserProfile(userId)
+    fetchUserProfile(userId),
+    mags.loadFamilyData()
   ]);
   var archiveContext = results[0];
   var userProfile = results[1];
+  var familyData = results[2];
+
+  if (familyData && !familyData.startsWith('(')) {
+    systemPrompt += '\n\n---\n\n' + familyData;
+  }
 
   if (userProfile) {
     systemPrompt += '\n\n---\n\n## About This Person\n\n' +

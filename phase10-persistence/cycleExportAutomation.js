@@ -101,28 +101,8 @@ var CONFIG = {
 
 
 // ════════════════════════════════════════════════════════════════════════════
-// CUSTOM MENU
+// CUSTOM MENU — moved to utilities/godWorldMenu.js (consolidated onOpen)
 // ════════════════════════════════════════════════════════════════════════════
-
-function onOpen() {
-  var ui = SpreadsheetApp.getUi();
-  ui.createMenu('🌍 GodWorld Exports')
-    .addItem('📦 Export Current Cycle (All)', 'exportCurrentCycleAll')
-    .addSeparator()
-    .addItem('📄 Export Riley_Digest', 'exportRileyDigest')
-    .addItem('🌐 Export World_Population', 'exportWorldPopulation')
-    .addItem('👥 Export Simulation_Ledger', 'exportSimulationLedger')
-    .addItem('🔗 Export Continuity_Log', 'exportContinuityLog')
-    .addSeparator()
-    .addItem('📚 Update All Running Mirrors', 'updateAllMirrors')
-    .addItem('🔄 Full Export + Mirror Update', 'fullExportAndMirror')
-    .addSeparator()
-    .addItem('📋 Compile Handoff', 'compileHandoffFromMenu')
-    .addSeparator()
-    .addItem('📁 Open Export Folder', 'openExportFolder')
-    .addItem('⚙️ Show Config', 'showConfig')
-    .addToUi();
-}
 
 
 // ════════════════════════════════════════════════════════════════════════════

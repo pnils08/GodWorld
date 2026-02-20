@@ -57,6 +57,13 @@ The sports packet contains:
   - `citizenBonds` — per-citizen relationship map (teammates, rivals, fan connections)
   - `citizenLifeContext` — last 3 LifeHistory entries per citizen (recent experiences)
   - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
+- **voiceCards** — **(v1.9 — citizen personality profiles).** Each card has: `archetype` (Anchor, Connector, Watcher, Striver, Catalyst, Caretaker, Drifter), `modifiers`, `traits` (scored 0-1), `topTags`, `motifs`. Use these when writing fan/citizen dialogue:
+  - **Anchors** speak steadily about tradition and loyalty
+  - **Connectors** reference tailgates, game-day community, shared memories
+  - **Watchers** observe the game analytically, measured reactions
+  - **Catalysts** bring heat — trade takes, front office criticism, bold predictions
+  - **Strivers** focus on what's next, championship windows, player development
+  - If no voice card exists for a citizen, write them neutrally
 
 ## Step 3: Write Articles
 Delegate to the **sports-desk agent** (`.claude/agents/sports-desk/`). The agent has P Slayer, Anthony, and Hal Richmond's full personalities baked in permanently.

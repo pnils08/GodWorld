@@ -49,6 +49,13 @@ The culture packet contains:
   - `citizenBonds` — per-citizen relationship map (families, community ties)
   - `citizenLifeContext` — last 3 LifeHistory entries per citizen (recent experiences)
   - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
+- **voiceCards** — **(v1.9 — citizen personality profiles).** Each card has: `archetype` (Anchor, Connector, Watcher, Striver, Catalyst, Caretaker, Drifter), `modifiers`, `traits` (scored 0-1), `topTags`, `motifs`. Use these when writing citizen dialogue:
+  - **Anchors** speak steadily, root quotes in place and ritual
+  - **Connectors** speak warmly about neighbors, faith communities, shared meals
+  - **Watchers** observe quietly, notice small changes in the neighborhood
+  - **Catalysts** bring energy and friction to cultural conversations
+  - **Caretakers** balance warmth with responsibility, speak about family and duty
+  - If no voice card exists for a citizen, write them neutrally
 
 ## Step 3: Write Articles
 Delegate to the **culture-desk agent** (`.claude/agents/culture-desk/`). The agent has Maria Keen's full personality and all secondary reporter profiles baked in permanently.

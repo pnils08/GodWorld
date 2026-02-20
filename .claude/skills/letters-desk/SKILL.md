@@ -47,6 +47,14 @@ The letters packet contains:
   - `citizenBonds` — per-citizen relationship map (write letters from people who know each other)
   - `citizenLifeContext` — last 3 LifeHistory entries per citizen (gives letter writers personal history)
   - `coverageEcho` — citizens from previous edition (avoid repeating same voices)
+- **voiceCards** — **(v1.9 — citizen personality profiles).** Each card has: `archetype` (Anchor, Connector, Watcher, Striver, Catalyst, Caretaker, Drifter), `modifiers`, `traits` (scored 0-1), `topTags`, `motifs`. **Letters desk: this is critical.** Every letter IS a citizen's voice. Match the voice card:
+  - **Anchors** write measured letters about stability, what they've built, what they stand to lose
+  - **Connectors** write letters that reference neighbors, community meetings, shared concern
+  - **Watchers** write letters that observe patterns — "I've been watching this for months"
+  - **Catalysts** write sharp letters — direct questions, demands for answers, contained anger
+  - **Strivers** write letters about opportunity, what they need to move forward
+  - **Caretakers** write letters balancing personal impact with community concern
+  - If no voice card exists, write the citizen neutrally based on their occupation and neighborhood
 
 ## Step 3: Write Letters
 Delegate to the **letters-desk agent** (`.claude/agents/letters-desk/`). The agent knows citizen voice rules, letter format, and canon requirements permanently.

@@ -55,6 +55,12 @@ The Chicago packet contains:
   - `citizenBonds` — per-citizen relationship map (teammates, community ties)
   - `citizenLifeContext` — last 3 LifeHistory entries per citizen (recent experiences)
   - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
+- **voiceCards** — **(v1.9 — citizen personality profiles).** Each card has: `archetype` (Anchor, Connector, Watcher, Striver, Catalyst, Caretaker, Drifter), `modifiers`, `traits` (scored 0-1), `topTags`, `motifs`. Use these when writing citizen dialogue:
+  - **Anchors** speak about neighborhood roots, Bulls history, loyalty
+  - **Connectors** reference block parties, barber shops, community gatherings
+  - **Watchers** observe the city analytically, notice what's shifting
+  - **Catalysts** bring intensity — front office pressure, trade demands
+  - If no voice card exists for a citizen, write them neutrally
 
 ## Step 3: Write Articles
 Delegate to the **chicago-desk agent** (`.claude/agents/chicago-desk/`). The agent has Selena Grant and Talia Finch's full personalities baked in permanently, plus the Skyline Tribune section format.

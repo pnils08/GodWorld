@@ -1,10 +1,16 @@
 /**
  * ============================================================================
- * V3.3 STORY HOOK WRITER - Write-Intent Based
+ * V3.5 STORY HOOK WRITER - Write-Intent Based
  * ============================================================================
  *
  * Writes hooks to Story_Hook_Deck sheet with calendar context.
  * Uses V3 write-intents model for persistence.
+ *
+ * v3.5 Changes:
+ * - Hook metadata persistence: 4 new columns (K-N) for SuggestedJournalist,
+ *   SuggestedAngle, VoiceGuidance, MatchConfidence. These were computed in
+ *   storyHook.js but silently dropped at write time. Now persisted to sheet
+ *   and available in desk packets.
  *
  * v3.4 Changes:
  * - Removed dead calendar columns (Holiday through CalendarTrigger)
@@ -24,16 +30,20 @@
  */
 
 var HOOK_DECK_HEADERS = [
-  'Timestamp',        // A
-  'Cycle',            // B
-  'HookID',           // C
-  'HookType',         // D
-  'Domain',           // E
-  'Neighborhood',     // F
-  'Priority',         // G
-  'HookText',         // H
-  'LinkedArcID',      // I
-  'SuggestedDesks'    // J
+  'Timestamp',            // A
+  'Cycle',                // B
+  'HookID',               // C
+  'HookType',             // D
+  'Domain',               // E
+  'Neighborhood',         // F
+  'Priority',             // G
+  'HookText',             // H
+  'LinkedArcID',          // I
+  'SuggestedDesks',       // J
+  'SuggestedJournalist',  // K  (v3.5)
+  'SuggestedAngle',       // L  (v3.5)
+  'VoiceGuidance',        // M  (v3.5)
+  'MatchConfidence'       // N  (v3.5)
 ];
 
 
@@ -69,7 +79,11 @@ function saveV3Hooks_(ctx) {
       h.priority || 1,                  // G  Priority
       h.text || '',                     // H  HookText
       h.linkedArcId || '',              // I  LinkedArcID
-      h.suggestedDesks || ''            // J  SuggestedDesks
+      h.suggestedDesks || '',           // J  SuggestedDesks
+      h.suggestedJournalist || '',      // K  SuggestedJournalist (v3.5)
+      h.suggestedAngle || '',           // L  SuggestedAngle (v3.5)
+      h.voiceGuidance || '',            // M  VoiceGuidance (v3.5)
+      h.matchConfidence || ''           // N  MatchConfidence (v3.5)
     ]);
   }
 
@@ -83,16 +97,16 @@ function saveV3Hooks_(ctx) {
     100
   );
 
-  Logger.log('saveV3Hooks_ v3.4: Queued ' + rows.length + ' hooks for cycle ' + cycle);
+  Logger.log('saveV3Hooks_ v3.5: Queued ' + rows.length + ' hooks for cycle ' + cycle);
 }
 
 
 /**
  * ============================================================================
- * STORY HOOK DECK SCHEMA v3.4
+ * STORY HOOK DECK SCHEMA v3.5
  * ============================================================================
  *
- * COLUMNS (10):
+ * COLUMNS (14):
  * A - Timestamp
  * B - Cycle
  * C - HookID
@@ -103,9 +117,14 @@ function saveV3Hooks_(ctx) {
  * H - HookText
  * I - LinkedArcID
  * J - SuggestedDesks
+ * K - SuggestedJournalist (v3.5 — from rosterLookup matching)
+ * L - SuggestedAngle (v3.5 — angle suggestion from story engine)
+ * M - VoiceGuidance (v3.5 — how the journalist should approach the story)
+ * N - MatchConfidence (v3.5 — none/low/medium/high)
  *
- * Note: Calendar columns (K-P) existed in v3.2-v3.3 but were never read.
- * Removed in v3.4. Existing rows retain historical data in cols K-P.
+ * Note: Calendar columns existed in v3.2-v3.3 (cols K-P) but were never read.
+ * Removed in v3.4, columns K-N repurposed in v3.5 for hook metadata.
+ * Existing pre-v3.5 rows may have stale calendar data in K-N.
  *
  * ============================================================================
  */

@@ -1,9 +1,14 @@
 #!/usr/bin/env node
 /**
- * buildDeskPackets.js v1.8
+ * buildDeskPackets.js v1.9
  *
  * Pulls live data from Google Sheets and splits into per-desk JSON packets
  * for independent agent processing in the Media Room.
+ *
+ * v1.9 Changes:
+ * - Voice Cards — parses TraitProfile from Simulation_Ledger into agent-friendly
+ *   personality objects (archetype, modifiers, traits, topTags, motifs).
+ *   Added to both full packets and summary files as voiceCards field.
  *
  * v1.8 Changes:
  * - Auto-runs buildArchiveContext.js after packet generation — queries Supermemory
@@ -594,6 +599,8 @@ function generateDeskSummary(packet, deskId, cycle) {
     economicContext: packet.economicContext || {},
     // Top bonds by intensity
     topBonds: (packet.bonds || []).slice(0, 5),
+    // v1.9: Voice cards for citizen dialogue (all cards — they're small)
+    voiceCards: packet.voiceCards || {},
     // v1.4: Story connections summary (compact enrichment for agent consumption)
     storyConnections: {
       eventCitizenLinks: ((packet.storyConnections || {}).eventCitizenLinks || []).slice(0, 5),
@@ -748,6 +755,64 @@ function buildCulturalEntitiesCanon(culturalLedger) {
       neighborhood: e.Neighborhood || ''
     };
   }).sort(function(a, b) { return b.fameScore - a.fameScore; });
+}
+
+// ─── VOICE CARDS (v1.9: Citizen Voice Pipeline) ──────────
+
+/**
+ * Build voice cards from TraitProfile data on the Simulation_Ledger.
+ * Maps citizen names to parsed personality profiles so desk agents
+ * know how citizens should sound when quoted.
+ */
+function buildVoiceCards(simLedger, citizenNames) {
+  // Build name→TraitProfile lookup from ledger
+  var profileLookup = {};
+  simLedger.forEach(function(c) {
+    var name = ((c.First || '') + ' ' + (c.Last || '')).trim();
+    if (name && c.TraitProfile) profileLookup[name] = c.TraitProfile;
+  });
+
+  var cards = {};
+  for (var i = 0; i < citizenNames.length; i++) {
+    var name = citizenNames[i];
+    var profileStr = profileLookup[name];
+    if (!profileStr) continue;
+
+    var parsed = parseVoiceCard(profileStr);
+    if (parsed) cards[name] = parsed;
+  }
+  return cards;
+}
+
+/**
+ * Parse a TraitProfile string into an agent-friendly voice card.
+ * Strips internal metadata (V, Hash, Updated, Basis, Entries).
+ */
+function parseVoiceCard(profileStr) {
+  if (!profileStr) return null;
+
+  var card = { archetype: 'Drifter', modifiers: [], traits: {}, topTags: [], motifs: [] };
+  var parts = String(profileStr).split('|');
+
+  for (var i = 0; i < parts.length; i++) {
+    var part = parts[i];
+    var colonIdx = part.indexOf(':');
+    if (colonIdx < 0) continue;
+
+    var key = part.substring(0, colonIdx);
+    var value = part.substring(colonIdx + 1);
+
+    if (key === 'Archetype') card.archetype = value;
+    else if (key === 'Mods') card.modifiers = value ? value.split(',') : [];
+    else if (key === 'TopTags') card.topTags = value ? value.split(',') : [];
+    else if (key === 'Motifs') card.motifs = value ? value.split(',') : [];
+    else if (['V', 'Hash', 'Updated', 'Basis', 'Entries'].indexOf(key) === -1) {
+      var num = parseFloat(value);
+      if (!isNaN(num)) card.traits[key] = num;
+    }
+  }
+
+  return card;
 }
 
 // ─── JOURNALISM AI OPTIMIZATIONS (v1.2) ───────────────────
@@ -1706,6 +1771,9 @@ async function main() {
     var deskCitizenNames = getCitizenNamesFromDeskData(deskEvents, deskSeeds, deskHooks, deskArcs, deskStorylines, candidates, deskQuotes, deskCanon);
     var citizenArchive = buildCitizenArchive(popIdIndex, deskCitizenNames);
 
+    // Voice cards — parsed personality profiles for citizen dialogue (v1.9)
+    var voiceCards = buildVoiceCards(simLedger, deskCitizenNames);
+
     // Build story connections enrichment (v1.4)
     var storyConnections = buildStoryConnections(
       deskEvents, deskCitizenNames, initiatives, activeBonds,
@@ -1741,7 +1809,7 @@ async function main() {
         deskName: desk.name,
         cycle: CYCLE,
         generated: new Date().toISOString(),
-        generator: 'buildDeskPackets v1.6'
+        generator: 'buildDeskPackets v1.9'
       },
       baseContext: baseContext,
       deskBrief: {
@@ -1767,8 +1835,11 @@ async function main() {
         return {
           seedType: s.SeedType, domain: s.Domain, neighborhood: s.Neighborhood,
           priority: parseInt(s.Priority || '1'), text: s.SeedText,
-          themes: s.themes || '', suggestedJournalist: s.suggestedJournalist || '',
-          matchConfidence: s.matchConfidence || '',
+          themes: s.themes || '',
+          suggestedJournalist: s.SuggestedJournalist || s.suggestedJournalist || '',
+          suggestedAngle: s.SuggestedAngle || s.suggestedAngle || '',
+          voiceGuidance: s.VoiceGuidance || s.voiceGuidance || '',
+          matchConfidence: s.MatchConfidence || s.matchConfidence || '',
           priorityScore: s.priorityScore || 0,
           autoPriority: s.priority || false
         };
@@ -1778,8 +1849,11 @@ async function main() {
           hookType: h.HookType, domain: h.Domain, neighborhood: h.Neighborhood,
           priority: parseInt(h.Priority || '1'), text: h.HookText,
           suggestedDesks: h.SuggestedDesks || '',
-          themes: h.themes || '', suggestedJournalist: h.suggestedJournalist || '',
-          matchConfidence: h.matchConfidence || '',
+          themes: h.themes || '',
+          suggestedJournalist: h.SuggestedJournalist || h.suggestedJournalist || '',
+          suggestedAngle: h.SuggestedAngle || h.suggestedAngle || '',
+          voiceGuidance: h.VoiceGuidance || h.voiceGuidance || '',
+          matchConfidence: h.MatchConfidence || h.matchConfidence || '',
           priorityScore: h.priorityScore || 0,
           autoPriority: h.priority || false
         };
@@ -1814,6 +1888,8 @@ async function main() {
       previousCoverage: prevCoverage,
       reporterHistory: reporterHistory,
       citizenArchive: citizenArchive,
+      // v1.9: Voice cards — personality profiles for citizen dialogue
+      voiceCards: voiceCards,
       recentQuotes: deskQuotes.map(function(q) {
         return { name: q.Name || q.CitizenName || '', text: q.EventNote || q.Quote || '', cycle: q.Cycle || '' };
       }),
@@ -1883,6 +1959,7 @@ async function main() {
     var historyCount = Object.keys(reporterHistory).reduce(function(sum, k) { return sum + reporterHistory[k].length; }, 0);
     console.log('  Reporter history:', Object.keys(reporterHistory).length, 'reporters,', historyCount, 'articles');
     console.log('  Citizen archive:', Object.keys(citizenArchive).length, 'citizens matched (of', deskCitizenNames.length, 'extracted)');
+    console.log('  Voice cards:', Object.keys(voiceCards).length, 'citizens with personality profiles');
     console.log('  Full packet:', packetSizeKB, 'KB →', filepath);
     console.log('  Summary:', summarySizeKB, 'KB →', summaryFilepath);
     if (packetSizeKB > 200) {

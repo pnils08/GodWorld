@@ -50,6 +50,14 @@ The civic packet contains:
   - `citizenBonds` — per-citizen relationship map (who knows whom, bond type, intensity)
   - `citizenLifeContext` — last 3 LifeHistory entries per citizen (what they've been through)
   - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
+- **voiceCards** — **(v1.9 — citizen personality profiles).** Each card has: `archetype` (Anchor, Connector, Watcher, Striver, Catalyst, Caretaker, Drifter), `modifiers` (e.g. steady, observant), `traits` (scored 0-1), `topTags`, `motifs`. Use these when writing citizen dialogue:
+  - **Anchors** speak steadily, root quotes in place and routine
+  - **Connectors** speak warmly about community, reference neighbors by name
+  - **Watchers** observe before reacting, measured tone
+  - **Catalysts** bring friction and energy, ask sharp questions
+  - **Strivers** push forward, focus on progress and outcomes
+  - **Caretakers** balance warmth with responsibility
+  - If no voice card exists for a citizen, write them neutrally
 
 ## Step 3: Write Articles
 Delegate to the **civic-desk agent** (`.claude/agents/civic-desk/`). The agent has Carmen Delaine's full personality and all secondary reporter profiles baked in permanently.

@@ -1,10 +1,19 @@
 /**
  * ============================================================================
- * compressLifeHistory.js v1.3
+ * compressLifeHistory.js v1.4
  * ============================================================================
  *
  * Scans LifeHistory and compresses accumulated events into a personality profile
  * stored in TraitProfile (or OriginVault fallback).
+ *
+ * v1.4 Upgrades (additive, ES5 safe):
+ * - CivicRole space bug fix: 'Civic Role' (with space) added alongside 'CivicRole'
+ * - 7 milestone tags: Graduation, Wedding, Birth, Promotion, Retirement, Health, Divorce
+ * - 2 named-citizen tags: Lifestyle, Reputation
+ * - 1 cultural tag: Cultural (written by 3 engines)
+ * - 7 Education/Household subtags matching Career subtag pattern
+ * - 12 dead mappings removed (source:*, relationship:*, arc:generic, qol:low/high)
+ * - Compression frequency reduced 10→5 cycles (aligns with KEEP_RAW_ENTRIES window)
  *
  * v1.3 Upgrades (additive, ES5 safe):
  * - LifeHistory alignment: 14 missing tags added to TAG_TRAIT_MAP
@@ -33,7 +42,7 @@
  * Output example:
  * Archetype:Watcher|Mods:curious,steady|reflective:0.73|social:0.45|TopTags:Neighborhood,Weather,Arc|Motifs:coffee,gallery|Entries:47|Basis:entries|V:1.1|Hash:8f2c1a|Updated:c47
  *
- * @version 1.1
+ * @version 1.4
  * @phase utilities
  * ============================================================================
  */
@@ -42,7 +51,7 @@
 // CONSTANTS
 // ============================================================================
 
-var COMPRESS_VERSION = '1.3';
+var COMPRESS_VERSION = '1.4';
 
 // Decay per unit (entry or cycle depending on basis)
 var TAG_DECAY_RATE = 0.95;
@@ -51,7 +60,7 @@ var TAG_DECAY_RATE = 0.95;
 var KEEP_RAW_ENTRIES = 20;
 
 // Minimum cycles between compression runs per citizen
-var MIN_CYCLES_BETWEEN_COMPRESS = 10;
+var MIN_CYCLES_BETWEEN_COMPRESS = 5;
 
 // Default decay basis
 var DEFAULT_DECAY_BASIS = 'entries';
@@ -66,9 +75,6 @@ var MOTIF_STOPWORDS = {
 var TAG_TRAIT_MAP = {
   // Relationship-oriented
   'Relationship': { social: 0.8, reflective: 0.2 },
-  'relationship:alliance': { social: 0.9, driven: 0.3 },
-  'relationship:rivalry': { volatile: 0.7, driven: 0.5 },
-  'relationship:mentorship': { social: 0.6, reflective: 0.4 },
   'Alliance': { social: 0.8, driven: 0.3 },
   'Rivalry': { volatile: 0.6, driven: 0.4 },
   'Mentorship': { social: 0.5, reflective: 0.5 },
@@ -76,27 +82,20 @@ var TAG_TRAIT_MAP = {
   // Community/Neighborhood
   'Neighborhood': { grounded: 0.7, social: 0.3 },
   'Community': { social: 0.7, grounded: 0.4 },
-  'source:neighborhood': { grounded: 0.6, social: 0.2 },
-  'source:community': { social: 0.6, grounded: 0.3 },
 
   // Reflective/Internal
   'Daily': { grounded: 0.5, reflective: 0.3 },
   'Background': { grounded: 0.4, reflective: 0.2 },
   'Household': { grounded: 0.6, social: 0.2 },
   'Education': { reflective: 0.7, driven: 0.4 },
-  'source:daily': { grounded: 0.4 },
 
   // Work/Achievement
   'Work': { driven: 0.8, grounded: 0.3 },
-  'source:occupation': { driven: 0.7, grounded: 0.2 },
   'Arc': { driven: 0.5, volatile: 0.3 },
-  'arc:generic': { driven: 0.4, volatile: 0.2 },
 
   // External/Reactive
   'Weather': { reflective: 0.4, grounded: 0.3 },
-  'source:weather': { reflective: 0.3 },
   'Media': { reflective: 0.5, volatile: 0.2 },
-  'source:media': { reflective: 0.4 },
 
   // Calendar/Cultural
   'Holiday': { social: 0.5, grounded: 0.4 },
@@ -106,12 +105,9 @@ var TAG_TRAIT_MAP = {
 
   // QoL
   'QoL': { grounded: 0.4, volatile: 0.3 },
-  'qol:low': { volatile: 0.5, grounded: 0.2 },
-  'qol:high': { grounded: 0.6, social: 0.3 },
 
   // Continuity
   'Continuity': { driven: 0.4, reflective: 0.3 },
-  'source:motif': { grounded: 0.4, reflective: 0.2 },
 
   // Career (v1.2: Career Engine integration)
   'Career': { driven: 0.6, grounded: 0.3 },
@@ -121,7 +117,7 @@ var TAG_TRAIT_MAP = {
   'Career-CreationDay': { grounded: 0.5, reflective: 0.4 },
   'Career-Holiday': { social: 0.4, grounded: 0.3 },
 
-  // PostCareer / Retirement Lifestyle (v1.3: LifeHistory alignment)
+  // PostCareer / Retirement Lifestyle (v1.3)
   'PostCareer': { reflective: 0.5, grounded: 0.4 },
   'PostCareer-FirstFriday': { social: 0.6, reflective: 0.3 },
   'PostCareer-CreationDay': { grounded: 0.7, reflective: 0.3 },
@@ -133,13 +129,41 @@ var TAG_TRAIT_MAP = {
   'PostCareer-Influence': { driven: 0.6, social: 0.3 },
   'PostCareer-Wellness': { grounded: 0.6, reflective: 0.4 },
 
-  // Civic & Public Role (v1.3)
+  // Civic & Public Role (v1.3 + v1.4 space bug fix)
   'CivicRole': { driven: 0.6, social: 0.5 },
+  'Civic Role': { driven: 0.6, social: 0.5 },
   'Civic Perception': { social: 0.6, reflective: 0.3 },
 
   // Media & Sports Integration (v1.3)
   'GAME-Micro': { social: 0.4, volatile: 0.3 },
-  'Quoted': { reflective: 0.7, grounded: 0.3 }
+  'Quoted': { reflective: 0.7, grounded: 0.3 },
+
+  // Milestone Events (v1.4: from generationalEventsEngine.js)
+  'Graduation': { driven: 0.7, reflective: 0.4 },
+  'Wedding': { social: 0.8, grounded: 0.5 },
+  'Birth': { grounded: 0.7, social: 0.5 },
+  'Promotion': { driven: 0.8, grounded: 0.3 },
+  'Retirement': { reflective: 0.6, grounded: 0.5 },
+  'Health': { grounded: 0.4, volatile: 0.4 },
+  'Divorce': { volatile: 0.6, reflective: 0.4 },
+
+  // Named-Citizen Tags (v1.4: from generateNamedCitizensEvents.js)
+  'Lifestyle': { grounded: 0.5, social: 0.4 },
+  'Reputation': { social: 0.5, driven: 0.4 },
+
+  // Cultural Events (v1.4: written by 3 engines)
+  'Cultural': { reflective: 0.5, social: 0.4 },
+
+  // Education Subtags (v1.4: matching Career subtag pattern)
+  'Education-FirstFriday': { social: 0.5, reflective: 0.3 },
+  'Education-CreationDay': { grounded: 0.5, reflective: 0.4 },
+  'Education-Holiday': { social: 0.4, reflective: 0.3 },
+  'Education-Cultural': { reflective: 0.6, social: 0.3 },
+
+  // Household Subtags (v1.4: matching Career subtag pattern)
+  'Household-FirstFriday': { social: 0.5, grounded: 0.3 },
+  'Household-CreationDay': { grounded: 0.6, social: 0.3 },
+  'Household-Holiday': { social: 0.5, grounded: 0.4 }
 };
 
 // Archetypes
@@ -725,8 +749,14 @@ function parseProfileString_(profileStr) {
 
 /**
  * ============================================================================
- * COMPRESS LIFE HISTORY REFERENCE v1.2
+ * COMPRESS LIFE HISTORY REFERENCE v1.4
  * ============================================================================
+ *
+ * v1.4 CHANGES:
+ * - 18 new tag mappings (milestones, Lifestyle, Reputation, Cultural, subtags)
+ * - 12 dead mappings removed (source:*, relationship:*, arc:generic, qol:*)
+ * - CivicRole space bug fixed
+ * - Compression frequency: 10 → 5 cycles
  *
  * v1.2 CHANGES:
  * - Career tag mappings: Career, Career-Transition, Career-Training, etc.
@@ -755,6 +785,7 @@ function parseProfileString_(profileStr) {
  * - social, reflective, driven, grounded, volatile (0-1 normalized)
  *
  * DECAY: 0.95 per unit (entry or cycle)
+ * COMPRESS: Every 5 cycles (was 10 in v1.3)
  * TRIM: Keeps last 20 raw entries, compresses older into summary block
  *
  * ACCESSOR:

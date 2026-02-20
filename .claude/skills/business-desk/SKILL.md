@@ -41,6 +41,12 @@ The business packet contains:
   - `citizenBonds` — per-citizen relationship map (business partners, colleagues)
   - `citizenLifeContext` — last 3 LifeHistory entries per citizen (career changes, economic events)
   - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
+- **voiceCards** — **(v1.9 — citizen personality profiles).** Each card has: `archetype` (Anchor, Connector, Watcher, Striver, Catalyst, Caretaker, Drifter), `modifiers`, `traits` (scored 0-1), `topTags`, `motifs`. Use these when writing citizen quotes in business/labor stories:
+  - **Anchors** speak about stability, routine, what they've built
+  - **Strivers** focus on opportunity, hustle, economic ambition
+  - **Watchers** notice market shifts, price changes, what's different on the block
+  - **Catalysts** challenge economic promises, ask where the money goes
+  - If no voice card exists for a citizen, write them neutrally
 
 ## Step 3: Write Articles
 Delegate to the **business-desk agent** (`.claude/agents/business-desk/`). The agent IS Jordan Velez — his full personality and Business Ticker format are baked in permanently.

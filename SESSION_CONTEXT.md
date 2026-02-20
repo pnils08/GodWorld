@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-20 | Engine: v3.1 | Cycle: 83 | Session: 47
+Last Updated: 2026-02-20 | Engine: v3.1 | Cycle: 83 | Session: 48
 
 ---
 
@@ -147,18 +147,23 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 48 (2026-02-20) — Fruitvale Supplemental + Discord Bot Upgrade + Voice Pipeline Plan
+
+- **First supplemental produced:** Fruitvale Transit Hub Phase II deep dive. 5 articles, 5 reporters (Carmen, Jordan, Farrah, Reed, Maria). Supplemental template + /write-supplemental skill created. Drive upload + Supermemory ingest + full intake pipeline.
+- **Discord bot upgrade:** Added `loadFamilyData()` to `lib/mags.js` — queries Simulation_Ledger for Corliss family (POP-00005, 594, 595, 596) with hourly cache. Fixed POPID header mismatch. Discovered POP-594/595/596 collision with prior Tier-4 citizens in LifeHistory_Log — using Simulation_Ledger LifeHistory field as canonical source.
+- **Edition brief updated:** `output/latest_edition_brief.md` rewritten from E82 to E83 + supplemental. Full canon numbers.
+- **GodWorld menu consolidated:** `utilities/godWorldMenu.js` — single `onOpen()` with 5 submenus. Clasp push deployed.
+- **Compression audit:** Full analysis of `compressLifeHistory.js` v1.3. Found: 15+ unmapped tags (milestones, Lifestyle, Reputation, Cultural, Education/Household subtags), 12 dead `source:*/relationship:*` entries, CivicRole space bug, hook metadata silently dropped at write time. TraitProfile consumed by Phase 7 engines but NEVER passed through buildDeskPackets to desk agents.
+- **Citizen Voice Pipeline planned** (4 phases in `/root/.claude/plans/groovy-imagining-plum.md`): Phase 1 tag fixes + compression tuning, Phase 2 voice cards in desk packets, Phase 3 hook metadata persistence, Phase 4 (deferred) two-way feedback loop.
+- **Next: Implement voice pipeline** — Phase 1 (compressLifeHistory.js tag overhaul) + Phase 2 (buildDeskPackets + 6 skill files) + Phase 3 (hook metadata).
+
 ### Session 47 (2026-02-20) — Engine Tech Debt + Editorial Posture Overhaul
 
-- **4 silent engine failures diagnosed and fixed:**
-  - Youth_Events: v1.3 — age computation from BirthYear (Sim_Ledger has no Age col), row-based synthetic IDs (Generic_Citizens has no PopID col). Broken since C79.
-  - Household Formation: v1.1 — Math.random→ctx.rng, currentYear 2024→2041.
-  - runHouseholdEngine: v2.3 — Math.random→ctx.rng.
-  - World_Population + Family_Relationships confirmed working as designed.
-- **Complete Math.random→ctx.rng migration:** 37 files, ~205 instances across ALL engine phases. Full engine now deterministic. 30 remaining refs are comments/fallbacks/deprecated docs.
-- **Voice files completed:** 5 new article-writers (Tanya Cruz, Simon Leary, Farrah Del Rio, Reed Thompson, Celeste Tran) + MintConditionOakTown (prepped for C84 Oakland NBA leak). 24/29 roster members voiced. Remaining 5 are non-writers.
-- **buildDeskPackets v1.8:** Auto-runs buildArchiveContext.js after packet generation. Eliminates forgotten-step pipeline gap from E83.
-- **E83 editorial posture fixes (from detailed post-mortem):** 13 changes across 5 voice files + template + NEWSROOM_MEMORY. Key: friction pivot (P Slayer), extraction questions + countdown clocks + vocabulary rotation (Carmen), follow-the-money (Jordan), front-office sourcing (Selena), opener coordination (Talia). Template v1.4 now requires countdown lines for regulatory deadlines.
-- **Next: Supplementals format** — mid-week reports covering specific storylines. Discussion starting.
+- **4 silent engine failures diagnosed and fixed:** Youth_Events v1.3 (age from BirthYear, row-based IDs), Household Formation v1.1 (Math.random→ctx.rng, year fix), runHouseholdEngine v2.3 (Math.random→ctx.rng). World_Population + Family_Relationships confirmed working.
+- **Complete Math.random→ctx.rng migration:** 37 files, ~205 instances. Full engine deterministic.
+- **Voice files completed:** 5 new article-writers + MintConditionOakTown. 24/29 roster voiced.
+- **buildDeskPackets v1.8:** Auto-runs buildArchiveContext.js after packets.
+- **E83 editorial posture fixes:** 13 changes across 5 voice files + template + NEWSROOM_MEMORY.
 
 ### Session 46 (2026-02-19/20) — Edition 83 Full Pipeline
 
@@ -206,23 +211,34 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - Full Math.random→ctx.rng migration across all 37 engine files (~205 instances). Engine fully deterministic.
 - 4 silent failures fixed (Youth_Events, Household Formation, runHouseholdEngine).
 
-**NEXT — Supplementals Format:**
-- New output format: mid-week reports covering specific storylines
-- Discussion starting with user. Need to define structure, agent routing, template, skill.
+**COMPLETED — Supplementals Format:**
+- Template, skill (/write-supplemental), and first production (Fruitvale Phase II) all done.
+- 5-article deep dive with custom reporter teams. Drive + Supermemory + intake pipeline working.
+
+**COMPLETED — Discord Bot Upgrade:**
+- loadFamilyData() wired into lib/mags.js. Live family status from Simulation_Ledger.
+- Edition brief updated to E83 + supplemental. PM2 restarted.
+
+**NEXT — Citizen Voice Pipeline (plan approved):**
+- Phase 1: Fix compressLifeHistory.js tag gaps (18 new, 12 dead removed, CivicRole bug, frequency 10→5)
+- Phase 2: Voice cards in buildDeskPackets.js + 6 desk skill files
+- Phase 3: Hook metadata persistence in v3StoryHookWriter.js + buildDeskPackets.js
+- Phase 4 (deferred): Two-way feedback loop
+- Plan: `/root/.claude/plans/groovy-imagining-plum.md`
 
 **INCOMING — Cycle 84:**
 - Oakland NBA leak storyline (MintConditionOakTown prepped)
 - buildDeskPackets v1.8 will auto-generate archive context
 - All editorial posture fixes active for next edition
+- Voice pipeline should be live before C84 edition production
 
 **Active — Journalism Enhancements (Phase 3):**
 - #2: Expand the newsroom (new beats, new desk agents)
 - #3: Mara directive workflow (tighten editorial guidance)
 - #4: Tribune voice and style (template, formatting, paper feel)
-- #5: Citizen depth (richer arcs, returning citizens, neighborhood texture)
+- #5: Citizen depth (richer arcs, returning citizens, neighborhood texture) — **voice pipeline is the Phase 3/#5 implementation**
 
 **Infrastructure:**
-- **Restart Discord bot** — needs PM2 restart for Supermemory RAG, user profiles, conversation saving
 - **GCP project linkage** — wire GCP project to Apps Script for `clasp run` from CLI
 - **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (deployed, need one-time run)
 

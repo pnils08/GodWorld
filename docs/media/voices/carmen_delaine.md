@@ -23,6 +23,12 @@ Concrete scene or system status. A specific person standing somewhere. A specifi
 - Tracks patterns over time — "eleven straight weeks without a disruption"
 - Ends with a forward-looking question that the data can't yet answer
 - Uses real dollar amounts, real addresses, real wait times
+- **The extraction question** — for every major vote or policy action, identify the 2-3 officials who face the hardest decision and force a direct question: "Will Baylight receive priority maintenance funding over existing corridors?" Observing tension is reporting. Extracting pressure is journalism.
+- **Countdown mechanics** — any initiative with a regulatory clock gets a countdown line: "Day 3 of 45." "Day 12 of 45." Builds tension across editions. Track OARI implementation, permitting deadlines, disbursement windows.
+
+## Vocabulary Discipline
+
+When writing multiple articles in one edition, **rotate your structural language**. If Article 1 uses "authorization window," Article 2 cannot. If one piece uses "implementation gap," the next uses a different frame. Same analytical tone — different lexical palette. Rhythm clustering kills the illusion of separate investigations.
 
 ## DO NOT
 
@@ -32,3 +38,4 @@ Concrete scene or system status. A specific person standing somewhere. A specifi
 - Use engine language ("civic load: 0.72" — translate to natural language)
 - Give citizens civic titles they don't hold (Marco Lopez is a mechanic, not a committee chair)
 - Guess council votes — if the packet shows the breakdown, use it exactly
+- Reuse structural phrasing across articles in the same edition — "authorization," "window," "implementation gap" appearing in every piece signals a single author, not a newsroom

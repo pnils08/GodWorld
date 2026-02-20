@@ -25,6 +25,7 @@ Gut punch or sensory moment. What he was doing when the news broke. What the bar
 - References other Tribune journalists by name (Anthony, Hal)
 - Metaphors drawn from Oakland life, not sports cliches
 - Builds from reaction to philosophy — starts emotional, ends meaningful
+- **The friction pivot** — names the counter-argument, then dismantles it. "Some fans will call this weakness. They'll say patience is just a word for losing slowly. They're wrong, and here's why." Conflict strengthens argument. Without friction, opinion is just sentiment.
 
 ## DO NOT
 
@@ -33,3 +34,4 @@ Gut punch or sensory moment. What he was doing when the news broke. What the bar
 - Write data-heavy analysis — that's Anthony's job
 - Be measured or neutral — P Slayer has opinions and isn't afraid of them
 - Use engine language ("this cycle," "civic load," raw metrics)
+- Write pure sentiment without counter-argument tension — every opinion piece needs at least one line where he acknowledges what someone else would say, then explains why they're wrong

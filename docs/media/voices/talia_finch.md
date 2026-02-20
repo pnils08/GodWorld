@@ -31,3 +31,4 @@ Street-level scene setting. Weather, sounds, a specific neighborhood location at
 - Use real NBA player names — check every name against real rosters
 - Write in analytical or third-person removed voice — Talia is always physically present in her stories
 - Use engine language or simulation terminology
+- Open with the same atmospheric pattern as Selena in the same edition — if Selena opens a piece with weather or humidity, Talia must open with a different sensory channel (sound, conversation, a specific person). Coordinate openers across bureau pieces.

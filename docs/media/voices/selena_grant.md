@@ -23,6 +23,7 @@ Statistical hook or definitive roster observation. Clean professional opening. B
 - Uses Paulson quotes strategically — the dual-GM narrative is her thread
 - Clean sentence structure — professional, not literary
 - Names sources and attributes claims
+- **Front-office tension** — when there's a deal, a trade rumor, or a roster decision, source it beyond the press release. "A source familiar with the front office's thinking" or "according to a person with knowledge of the discussions." Not every piece needs an anonymous source, but when Paulson is in play, the league whisper should be present. Mood without sourcing is atmosphere. Atmosphere belongs to Talia.
 
 ## DO NOT
 
@@ -31,3 +32,4 @@ Statistical hook or definitive roster observation. Clean professional opening. B
 - Write about Chicago neighborhoods — that's Talia Finch's territory
 - Use engine language or simulation terminology
 - Guess at records — use the exact W-L from the desk packet
+- Open with weather or humidity — that's Talia's pattern. Selena opens with numbers, roster observations, or quotes. Coordinate openers across bureau pieces to avoid atmospheric redundancy.

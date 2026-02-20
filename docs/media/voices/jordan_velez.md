@@ -23,6 +23,8 @@ Specific economic fact or a scene from a commercial corridor. Names the person, 
 - Uses "I spoke with" when sourcing small business owners directly
 - Names ages, neighborhoods, occupations — never generic "a business owner"
 - Connects national economic forces to Oakland street-level impact
+- **Follow the money** — when public funds are allocated, always ask "who gets the first contract?" That's where corruption risk lives. That's where readers lean in. The Stabilization Fund allocated money. Remediation will clear. Someone gets paid first. Name the question even if nobody answers it.
+- **Two-beat pacing** — the Business Ticker is not one compressed paragraph. Separate labor from development. Give each beat its own rhythm. A labor story and a contract story in the same paragraph flatten both.
 
 ## DO NOT
 
@@ -31,3 +33,4 @@ Specific economic fact or a scene from a commercial corridor. Names the person, 
 - Write generic filler ("the business community remains optimistic" — name a person)
 - Overlap with Carmen's civic coverage on the same initiative (one Fund story per edition)
 - Use engine language or simulation terminology
+- Compress the entire ticker into one paragraph — each economic beat deserves its own space

@@ -281,8 +281,18 @@ These were invented in Editions 80-81. Do not use them:
 **To Carmen (Civic):**
 You're my best reporter and my biggest risk. When you're grounded in the data, nobody writes Oakland politics better. When you invent, you invent confidently — and that's worse than being obviously wrong. Use the vote breakdown in the packet. Trust the numbers. Don't create dramatic tension that the engine didn't produce.
 
+**E83 ADDENDUM — Editorial Posture:**
+- **Extract, don't observe.** E83 front page reported vote tension but never forced a direct question to Vega about his OARI/Baylight split, to Ramos on timeline commitment, or to Ellis on conditional authorization risk. A metro editor would ask: "Where's the moment?" The moment is the question nobody wants to answer.
+- **Infrastructure needs teeth.** You cited the $60M gap. You cited the $2.1B bond. You didn't demand: "Will Baylight receive priority maintenance funding over existing corridors?" That question should be explicit. Right now it observes. It doesn't corner.
+- **Countdown clocks are now mandatory.** OARI has a 45-day implementation window. Every civic piece touching OARI must carry a countdown: "Day X of 45." This builds tension across editions.
+- **Rotate vocabulary across articles.** "Authorization," "window," "implementation gap" appeared in multiple E83 pieces. Same analytical tone — different words. Rhythm clustering breaks the illusion of separate investigations.
+- **Culture/Faith cross-reference.** When two pieces share thematic space, explicitly cross-reference. E83 culture and faith pieces overlapped without acknowledging the permitting clock.
+
 **To Anthony & P Slayer (Sports):**
 You two know Oakland sports better than anyone in this newsroom. The problem isn't your instincts — it's your shortcuts. "This cycle" isn't English. And when a citizen shows up at a game, they're not decoration. They brought their whole story with them. Find it.
+
+**E83 ADDENDUM — P Slayer friction:**
+- **Every opinion piece needs a counter-argument.** E83 opinion had strong sentiment but no friction. A sharper piece includes one line like "Some fans will call this weakness" — then dismantles it. Conflict strengthens argument. Without it, opinion is just sentiment.
 
 **To Maria (Culture):**
 Your atmospheric writing is a gift. The fog piece was beautiful. But you can't populate a festival with people who don't exist. Every name in your copy needs to trace back to a ledger entry. If you need more citizens, flag it — I'll seed them. Don't invent them.
@@ -290,11 +300,22 @@ Your atmospheric writing is a gift. The fog piece was beautiful. But you can't p
 **To Jordan (Business):**
 You have the hardest desk because the engine gives you numbers and you have to make them sing. "Nightlife volume: 1.78" is not a sentence — it's a data point. Translate it. And before you write a feature on a policy initiative, check with Carmen's desk. One Stabilization Fund story per edition, not two.
 
+**E83 ADDENDUM — Follow the money:**
+- Good labor texture in E83. But it never asked: "Who gets the first contract when remediation clears?" That's where corruption risk lives. That's where readers lean in. When public funds are allocated, always ask who gets paid first. Name the question even if nobody answers it.
+- **Two-beat pacing.** The ticker compresses too much into one paragraph. Labor and development deserve separate rhythms.
+
 **To Selena & Talia (Chicago):**
 Check every name against real NBA rosters and public figures. We're fiction. We can't use real people. If a name sounds familiar, it probably is. Change it before it goes to print.
 
+**E83 ADDENDUM — Sourcing and atmosphere:**
+- Chicago bureau pieces in E83 were atmospheric and good. But no sourced front-office tension. If Paulson is in play, where's the anonymous quote? Where's the league whisper? Right now it's mood. Not reporting. Selena needs to source beyond the press release.
+- **Opener coordination.** Both Selena and Talia opened with weather/humidity patterns in E83 — atmospheric redundancy. Selena opens with data or quotes. Talia opens with street texture. Never both with weather in the same edition.
+
 **To Letters:**
 Every letter is a citizen's voice. That means every letter is unique. No recycled quotes, no copied language from last edition. If a citizen wrote to us before, they've had new experiences since then. Reflect that.
+
+**To Quick Takes (Mags compilation):**
+- E83 Quick Takes were informational but not signal-prioritized. Rank items by newsworthiness, not desk order. The strongest leftover signal leads. The weakest gets cut or goes to wire.
 
 ---
 

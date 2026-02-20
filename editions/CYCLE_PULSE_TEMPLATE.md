@@ -59,6 +59,13 @@ When stories in different sections connect, add a cross-reference at the end of 
 → See also: Civic Affairs, "Baylight Bond Vote Set for Next Week"
 ```
 
+### Countdown Clocks
+Any initiative with a regulatory deadline, implementation window, or policy clock gets a countdown line in every edition until resolved:
+```
+**OARI Implementation Clock: Day 12 of 45.** No pilot districts named. No hiring criteria released.
+```
+Place the countdown at the top of the relevant article, before the body text. Update the day count each edition. This builds tension across cycles and creates natural follow-up pressure. Active countdowns as of E83: OARI (45-day implementation window), Baylight TIF language (unresolved), Baylight remediation bonding (unresolved).
+
 ### Dividers
 - `---` between articles within a section
 - `===` between major sections (the `############` headers serve this purpose)

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-20 | Engine: v3.1 | Cycle: 83 | Session: 48
+Last Updated: 2026-02-21 | Engine: v3.1 | Cycle: 83 | Session: 49
 
 ---
 
@@ -147,6 +147,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 49 (2026-02-21) — Photo Desk + Newspaper PDF Pipeline
+
+- **Citizen Voice Pipeline implemented (Phases 1-3):** compressLifeHistory.js tag overhaul (18 new tags, 12 dead removed, CivicRole bug fixed), voice cards in buildDeskPackets.js + 6 desk skill files, hook metadata persistence in v3StoryHookWriter.js. Deployed via git push.
+- **Photo generation pipeline built:** `lib/photoGenerator.js` v1.0 — Together AI / FLUX.1 schnell integration, two photographer profiles (DJ Hartley street documentary, Arman Gutiérrez editorial portrait), 17 Oakland scene descriptions, keyword-based scene extraction, auto photo assignment with editorial logic (6 priority rules, max 6 per edition).
+- **Newspaper PDF pipeline built:** `lib/editionParser.js` (shared edition parser), `templates/newspaper.css` (tabloid 11x17 layout, Playfair Display + Libre Baskerville typography, CSS multi-column, drop caps, section dividers), `scripts/generate-edition-pdf.js` (HTML builder + Puppeteer PDF renderer with --preview, --letter, --no-photos flags).
+- **E83 full production run:** 6 AI-generated photos (front page, culture, sports, chicago, civic, business) + 10-page tabloid PDF (2.4 MB). Uploaded to Google Drive.
+- **saveToDrive.js fixed:** Added MIME type detection and binary file streaming for photos/PDFs. Added `pdf` destination shortcut.
+- **generate-edition-photos.js v2.0:** Auto mode (default) uses `assignPhotos()` editorial logic. `--credits-only` flag for v1 backward compat.
+
 ### Session 48 (2026-02-20) — Fruitvale Supplemental + Discord Bot Upgrade + Voice Pipeline Plan
 
 - **First supplemental produced:** Fruitvale Transit Hub Phase II deep dive. 5 articles, 5 reporters (Carmen, Jordan, Farrah, Reed, Maria). Supplemental template + /write-supplemental skill created. Drive upload + Supermemory ingest + full intake pipeline.
@@ -219,23 +228,33 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - loadFamilyData() wired into lib/mags.js. Live family status from Simulation_Ledger.
 - Edition brief updated to E83 + supplemental. PM2 restarted.
 
-**NEXT — Citizen Voice Pipeline (plan approved):**
-- Phase 1: Fix compressLifeHistory.js tag gaps (18 new, 12 dead removed, CivicRole bug, frequency 10→5)
+**COMPLETED — Citizen Voice Pipeline (Phases 1-3):**
+- Phase 1: compressLifeHistory.js tag overhaul (18 new, 12 dead removed, CivicRole bug, frequency 10→5)
 - Phase 2: Voice cards in buildDeskPackets.js + 6 desk skill files
 - Phase 3: Hook metadata persistence in v3StoryHookWriter.js + buildDeskPackets.js
 - Phase 4 (deferred): Two-way feedback loop
-- Plan: `/root/.claude/plans/groovy-imagining-plum.md`
+
+**COMPLETED — Photo Desk + Newspaper PDF Pipeline:**
+- `lib/photoGenerator.js` — Together AI / FLUX.1 schnell, photographer profiles, auto assignment
+- `lib/editionParser.js` — shared parser used by photo + PDF scripts
+- `templates/newspaper.css` — tabloid newspaper stylesheet
+- `scripts/generate-edition-pdf.js` — HTML builder + Puppeteer PDF renderer
+- `scripts/generate-edition-photos.js` v2.0 — auto mode with editorial logic
+- Pipeline: `edition.txt → auto photos → AI generation → HTML layout → PDF render → Drive upload`
+- E83 produced: 6 photos, 10-page PDF, uploaded to Drive
+- API: Together AI (TOGETHER_API_KEY in .env), model: FLUX.1-schnell, ~$0.003/image
 
 **INCOMING — Cycle 84:**
 - Oakland NBA leak storyline (MintConditionOakTown prepped)
 - buildDeskPackets v1.8 will auto-generate archive context
 - All editorial posture fixes active for next edition
-- Voice pipeline should be live before C84 edition production
+- Voice pipeline live — citizen personality data now flows to desk agents
+- **Photo + PDF pipeline ready** — run after edition production for newspaper output
 
 **Active — Journalism Enhancements (Phase 3):**
 - #2: Expand the newsroom (new beats, new desk agents)
 - #3: Mara directive workflow (tighten editorial guidance)
-- #4: Tribune voice and style (template, formatting, paper feel)
+- #4: Tribune voice and style (template, formatting, paper feel) — **newspaper PDF is the Phase 3/#4 implementation**
 - #5: Citizen depth (richer arcs, returning citizens, neighborhood texture) — **voice pipeline is the Phase 3/#5 implementation**
 
 **Infrastructure:**

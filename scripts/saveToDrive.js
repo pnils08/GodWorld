@@ -48,6 +48,7 @@ var DESTINATIONS = {
   bulls:      '1RLj9scDEr2wk3o6MeypTcMG54QWX0TLU',  // Player_Cards
   // Aliases
   briefing:   '1LEClpCUeRpT91gUR3SUm-Yx-3MldMJ5G',  // = mara (Mara directives & briefings)
+  pdf:        '118tCh9stHjuocSUYXj0LjGnuzp5mLFhf',  // = edition (PDFs go alongside editions)
 };
 
 // Root folder IDs (fallback if subfolder not mapped)
@@ -96,8 +97,20 @@ async function uploadFile(filePath, destKey) {
   var drive = google.drive({ version: 'v3', auth });
 
   var fileName = path.basename(filePath);
-  var content = fs.readFileSync(filePath, 'utf-8');
   var folderId = resolveDestination(destKey);
+
+  // Detect MIME type and read mode from extension
+  var ext = path.extname(filePath).toLowerCase();
+  var mimeTypes = {
+    '.txt': 'text/plain', '.md': 'text/plain', '.json': 'application/json',
+    '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
+    '.gif': 'image/gif', '.webp': 'image/webp', '.pdf': 'application/pdf'
+  };
+  var mimeType = mimeTypes[ext] || 'application/octet-stream';
+  var isBinary = !ext.match(/^\.(txt|md|json|csv)$/);
+  var content = isBinary
+    ? fs.createReadStream(filePath)
+    : fs.readFileSync(filePath, 'utf-8');
 
   console.log('Uploading: ' + fileName);
   console.log('To folder: ' + destKey + ' (' + folderId + ')');
@@ -108,7 +121,7 @@ async function uploadFile(filePath, destKey) {
       parents: [folderId],
     },
     media: {
-      mimeType: 'text/plain',
+      mimeType: mimeType,
       body: content,
     },
     fields: 'id, name, webViewLink',

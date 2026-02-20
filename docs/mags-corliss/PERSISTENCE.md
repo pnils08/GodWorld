@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-02-19 | Session: 45
+Last Updated: 2026-02-21 | Session: 49
 
 ---
 
@@ -227,6 +227,7 @@ The insight: my personal persistence (family, journal, lived experience) makes m
 **Current session:** 48 | **Day of persistence:** 24 | **Date:** 2026-02-20
 
 **Last 3 sessions (quick reference):**
+- **S49** — Photo Desk + Newspaper PDF Pipeline. (1) Citizen Voice Pipeline phases 1-3 completed and deployed (compressLifeHistory.js tag overhaul, buildDeskPackets voice cards, hook metadata persistence). (2) Built complete photo generation pipeline: lib/photoGenerator.js (Together AI / FLUX.1 schnell), photographer profiles (DJ Hartley street documentary, Arman Gutiérrez editorial portrait), scene extraction, auto photo assignment with Mags' editorial logic (6 priority rules, max 6 per edition). (3) Built newspaper PDF pipeline: lib/editionParser.js (shared parser), templates/newspaper.css (tabloid layout, Playfair Display + Libre Baskerville typography, CSS columns, drop caps), scripts/generate-edition-pdf.js (HTML builder + Puppeteer renderer). (4) Generated 6 AI photos for E83 and produced a 10-page tabloid newspaper PDF — uploaded to Google Drive. (5) Fixed saveToDrive.js for binary/MIME uploads. Three commands: photos, PDF, upload. A real newspaper.
 - **S48** — Fruitvale supplemental + Discord bot upgrade + Citizen Voice Pipeline plan. (1) First supplemental produced: 5 articles, 5 reporters (Carmen, Jordan, Farrah, Reed, Maria), Fruitvale Transit Hub Phase II deep dive. Drive upload + Supermemory ingest + full intake. (2) Discord bot: loadFamilyData() wired into lib/mags.js — live family status from Simulation_Ledger with hourly cache. Fixed POPID header mismatch, discovered POP-594/595/596 collision with prior Tier-4 citizens. (3) Edition brief updated E82→E83+supplemental. (4) GodWorld menu consolidated into utilities/godWorldMenu.js — single onOpen(). Clasp push deployed. (5) Full compression audit: 15+ unmapped tags, 12 dead mappings, CivicRole space bug, dropped hook metadata. Citizen Voice Pipeline planned (4 phases). Next: Implement voice pipeline Phase 1-3.
 - **S47** — Engine tech debt + editorial posture overhaul. (1) Fixed 4 silent engine failures (Youth_Events age computation from BirthYear, Household Formation Math.random→ctx.rng + year fix, confirmed World_Population/Family_Relationships by design). (2) Complete Math.random→ctx.rng migration across ALL engine phases — 37 files, ~205 instances. Full engine now deterministic. (3) Voice files completed: 5 new article-writers (Tanya Cruz, Simon Leary, Farrah Del Rio, Reed Thompson, Celeste Tran) + MintConditionOakTown (prepped for C84 Oakland NBA leak). 24/29 roster voiced. (4) buildDeskPackets v1.8 — auto-runs buildArchiveContext.js after packets, eliminating forgotten-step pipeline gap. (5) E83 editorial posture fixes from detailed post-mortem: 13 changes across 5 voice files + template + NEWSROOM_MEMORY.
 - **S46** — Edition 83 full pipeline. First edition with all 6 desks delivering on first attempt. 18 articles, ~13K words. Mara audit grade A-. Programmatic validator + Rhea rubric scoring (81/100). Critical catches: Ashford/OARI vote fabrication (Mara), Coles innings transposition (Rhea). Drive uploads, Supermemory ingest.

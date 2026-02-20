@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-19 | Engine: v3.1 | Cycle: 82 | Session: 45
+Last Updated: 2026-02-20 | Engine: v3.1 | Cycle: 83 | Session: 47
 
 ---
 
@@ -46,10 +46,10 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v1.6 | Per-desk JSON packets, story connections enrichment, sports feed digest, filler seed filter |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v1.8 | Per-desk JSON packets, story connections enrichment, sports feed digest, auto archive context |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
-| **Household Formation** | householdFormationEngine.js | v1.0 | Young adults form households, rent burden, dissolution |
+| **Household Formation** | householdFormationEngine.js | v1.1 | Young adults form households, rent burden, dissolution, ctx.rng, year 2041 |
 | **Generational Wealth** | generationalWealthEngine.js | v1.0 | Wealth levels 0-10, income, inheritance |
 | **Education Career** | educationCareerEngine.js | v1.0 | Education levels, career progression, school quality |
 | **V3 Seeds Writer** | saveV3Seeds.js | v3.4 | Calendar columns removed (were dead) |
@@ -147,27 +147,31 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 47 (2026-02-20) — Engine Tech Debt + Editorial Posture Overhaul
+
+- **4 silent engine failures diagnosed and fixed:**
+  - Youth_Events: v1.3 — age computation from BirthYear (Sim_Ledger has no Age col), row-based synthetic IDs (Generic_Citizens has no PopID col). Broken since C79.
+  - Household Formation: v1.1 — Math.random→ctx.rng, currentYear 2024→2041.
+  - runHouseholdEngine: v2.3 — Math.random→ctx.rng.
+  - World_Population + Family_Relationships confirmed working as designed.
+- **Complete Math.random→ctx.rng migration:** 37 files, ~205 instances across ALL engine phases. Full engine now deterministic. 30 remaining refs are comments/fallbacks/deprecated docs.
+- **Voice files completed:** 5 new article-writers (Tanya Cruz, Simon Leary, Farrah Del Rio, Reed Thompson, Celeste Tran) + MintConditionOakTown (prepped for C84 Oakland NBA leak). 24/29 roster members voiced. Remaining 5 are non-writers.
+- **buildDeskPackets v1.8:** Auto-runs buildArchiveContext.js after packet generation. Eliminates forgotten-step pipeline gap from E83.
+- **E83 editorial posture fixes (from detailed post-mortem):** 13 changes across 5 voice files + template + NEWSROOM_MEMORY. Key: friction pivot (P Slayer), extraction questions + countdown clocks + vocabulary rotation (Carmen), follow-the-money (Jordan), front-office sourcing (Selena), opener coordination (Talia). Template v1.4 now requires countdown lines for regulatory deadlines.
+- **Next: Supplementals format** — mid-week reports covering specific storylines. Discussion starting.
+
+### Session 46 (2026-02-19/20) — Edition 83 Full Pipeline
+
+- First edition with all 6 desks delivering on first attempt. 18 articles, ~13K words, 11 bylined reporters.
+- Mara audit grade A- (81/100 Rhea score). Critical catches: Ashford/OARI vote fabrication (Mara), Coles innings transposition (Rhea), Crane/Stabilization Fund vote error (Rhea).
+- Template v1.4 sections active: Editor's Desk, Opinion, Quick Takes, Coming Next Cycle.
+- Drive uploads + Supermemory ingest complete.
+
 ### Session 45 (2026-02-19) — Full 2041 Roster Intake + Simulation Ledger Overhaul
 
-- **16 player cards ingested from Google Drive** via service account. Full stat profiles for: Dillon, Horn, Davis, Rivas, Kelley, Ellis, Aitken, Richards, Keane, Coles, Quintero, Taveras, Rosales + lineup/rotation projections.
-- **9 Oakland_Sports_Feed entries written** for Cycle 83: Davis LF move, Quintero promotion, Taveras acquisition, Rosales as closer, Horn franchise status, Richards coverage gap, Kelley contract year, Aitken civic crossover, Coles trade recap.
-- **Comprehensive roster reference doc created:** `docs/media/2041_athletics_roster.md` — full lineup, rotation, closer, bench, extended roster, 10 key storylines, position corrections, career awards.
-- **Simulation_Ledger overhaul (two passes):**
-  - Pass 1: 22 positional/status fixes + 3 new rows (Taveras POP-00597, Gonzalez POP-00598, Colon POP-00599). Position corrections for Davis, Rivas, Ramos, Richards, Keane, Park, Lopez. Status updates for traded/departed/retired players.
-  - Pass 2: Full citizen audit — 51 Tier 1-3 citizens with missing data. 110 cell updates: birth years, neighborhoods, roles. Anthony Raines (POP-00017) fully restored. Mike Paulson canonized (born 1987, GM, Jack London). All athletes given proper positions. Journalists given proper roles. Working-class citizens assigned neighborhoods across Oakland.
-- **Result: All 267 Tier 1-3 citizens now have complete records. Zero gaps.**
-- **NEWSROOM_MEMORY.md updated** with 2041 canon and 6 new character threads.
-- **buildDeskPackets.js** keyword list expanded with 8 new player names.
+- 16 player cards ingested from Google Drive. 9 Oakland_Sports_Feed entries. Simulation_Ledger overhaul: 267 T1-3 citizens complete. NEWSROOM_MEMORY.md updated with 2041 canon.
 
-### Session 44 (2026-02-19) — Full Sheet Header Audit (32 Sheets, 9 Fixes)
-
-- **Comprehensive header audit across 32 engine-critical sheets.** Three audit scripts covering Phase 10 positional writers (13), Phase 5/6 indexOf readers (11), and remaining engine sheets (8). All 31 active sheets now aligned.
-- **9 total fixes applied.** Engines unblocked: hookLifecycleEngine, storylineHealthEngine, citizenContextBuilder life history.
-- **clasp push deployed** — 153 files to Apps Script. 4 commits.
-
-### Session 43 (2026-02-18) — Agent Pipeline Hardening Complete (8 Research Recommendations)
-
-- All 8 research recommendations implemented. Jax Caldera voice file. Pre-flight desk check script. 5 commits.
+*Sessions 43-44: see `docs/mags-corliss/SESSION_HISTORY.md`*
 
 *Sessions 34-42: see `docs/mags-corliss/SESSION_HISTORY.md`*
 
@@ -190,19 +194,26 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - Jax Caldera voice file + firebrand wiring
 - Pre-flight desk check script (preflightDeskCheck.js)
 
-**READY — Cycle 83 (scheduled tomorrow):**
-- 2040 A's stats ingested (16 player cards). Warriors record in feed (33-25).
-- Simulation_Ledger clean: all 267 T1-3 citizens complete. 2041 roster positions correct.
-- Oakland_Sports_Feed: 9 new entries for Cycle 83 storylines.
-- Roster reference doc ready for agents (docs/media/2041_athletics_roster.md).
-- NEWSROOM_MEMORY.md updated with 2041 canon.
-- buildDeskPackets.js keyword routing expanded.
-- First cycle with lifecycle engines online, factual assertions, claim decomposition, archive context, pre-flight validation.
+**COMPLETED — Cycle 83 Edition:**
+- Edition 83 published. Grade A- (81/100). All 6 desks delivered first attempt.
+- Post-mortem feedback integrated: 13 editorial posture fixes across voice files, template, NEWSROOM_MEMORY.
 
-**Active — Voice Files (Phase 2):**
-- 9 of 29 journalists have voice files
-- 9 PRIORITY: Talia Finch, Dr. Lila Mezran, Luis Navarro, Sgt. Rachel Torres, Sharon Okafor, Kai Marston, Mason Ortega, Angela Reyes, Noah Tan
-- 4 SECONDARY: Tanya Cruz, Simon Leary, Elliot Marbury, Farrah Del Rio
+**COMPLETED — Voice Files:**
+- 24 of 29 journalists voiced (all article-writers). Remaining 5 are non-writers (DJ Hartley, Elliot Marbury, Arman Gutiérrez, Rhea Morgan, Mags Corliss).
+- MintConditionOakTown voiced and ready for C84 Oakland NBA leak storyline.
+
+**COMPLETED — Engine Determinism:**
+- Full Math.random→ctx.rng migration across all 37 engine files (~205 instances). Engine fully deterministic.
+- 4 silent failures fixed (Youth_Events, Household Formation, runHouseholdEngine).
+
+**NEXT — Supplementals Format:**
+- New output format: mid-week reports covering specific storylines
+- Discussion starting with user. Need to define structure, agent routing, template, skill.
+
+**INCOMING — Cycle 84:**
+- Oakland NBA leak storyline (MintConditionOakTown prepped)
+- buildDeskPackets v1.8 will auto-generate archive context
+- All editorial posture fixes active for next edition
 
 **Active — Journalism Enhancements (Phase 3):**
 - #2: Expand the newsroom (new beats, new desk agents)

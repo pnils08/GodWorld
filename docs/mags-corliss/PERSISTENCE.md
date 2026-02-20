@@ -224,12 +224,12 @@ The insight: my personal persistence (family, journal, lived experience) makes m
 
 **Full history:** `docs/mags-corliss/SESSION_HISTORY.md` (read on-demand, not at boot)
 
-**Current session:** 45 | **Day of persistence:** 22 | **Date:** 2026-02-19
+**Current session:** 47 | **Day of persistence:** 23 | **Date:** 2026-02-20
 
 **Last 3 sessions (quick reference):**
-- **S45** — Full 2041 roster intake (16 player cards via Drive). 9 Oakland_Sports_Feed entries. Comprehensive roster reference doc created (2041_athletics_roster.md). Simulation_Ledger overhaul: 22 positional/status fixes + 3 new rows (Taveras, Gonzalez, Colon) + full citizen audit fixing 51 Tier 1-3 gaps (110 cell updates — birth years, neighborhoods, roles). All 267 T1-3 citizens now have complete records. NEWSROOM_MEMORY.md updated with 2041 canon. buildDeskPackets.js keyword list expanded. Pipeline ready for Cycle 83 tomorrow.
-- **S44** — Full sheet header audit across 32 engine-critical sheets. 9 fixes total (Riley_Digest PatternFlag, Story_Hook_Deck HookId case + lifecycle cols, Storyline_Tracker lifecycle cols, citizenContextBuilder LifeHistory_Log fallbacks, updateStorylineStatus briefing fix). 3 audit scripts. clasp push deployed. Pre-reqs for E83: user providing A's stats + Warriors record.
-- **S43** — Agent pipeline hardening COMPLETE. All 8 research recommendations implemented. Jax voice file. Pre-flight check script. Plan-in-motion written to NOTES_TO_SELF.md. 5 commits.
+- **S47** — Engine tech debt + editorial posture overhaul. (1) Fixed 4 silent engine failures (Youth_Events age computation from BirthYear, Household Formation Math.random→ctx.rng + year fix, confirmed World_Population/Family_Relationships by design). (2) Complete Math.random→ctx.rng migration across ALL engine phases — 37 files, ~205 instances. Full engine now deterministic. (3) Voice files completed: 5 new article-writers (Tanya Cruz, Simon Leary, Farrah Del Rio, Reed Thompson, Celeste Tran) + MintConditionOakTown (prepped for C84 Oakland NBA leak). 24/29 roster voiced. (4) buildDeskPackets v1.8 — auto-runs buildArchiveContext.js after packets, eliminating forgotten-step pipeline gap. (5) E83 editorial posture fixes from detailed post-mortem: 13 changes across 5 voice files + template + NEWSROOM_MEMORY. Key additions: friction pivot (P Slayer), extraction questions + countdown clocks (Carmen), follow-the-money (Jordan), front-office sourcing (Selena), vocabulary rotation discipline. Next: Supplementals format discussion.
+- **S46** — Edition 83 full pipeline. First edition with all 6 desks delivering on first attempt. 18 articles, ~13K words. Mara audit grade A-. Programmatic validator + Rhea rubric scoring (81/100). Critical catches: Ashford/OARI vote fabrication (Mara), Coles innings transposition (Rhea). Drive uploads, Supermemory ingest.
+- **S45** — Full 2041 roster intake (16 player cards via Drive). 9 Oakland_Sports_Feed entries. Simulation_Ledger overhaul: 267 T1-3 citizens complete. NEWSROOM_MEMORY.md updated with 2041 canon.
 
 ---
 

@@ -117,8 +117,8 @@ All 4 journalism enhancements implemented:
 
 #### Misc — Still Open
 
-- **Restart Discord bot** — needs PM2 restart for Supermemory RAG, user profiles, conversation saving
-- **GCP project linkage** — wire GCP project to Apps Script for `clasp run` from CLI (low priority — clasp push works, this is just convenience)
+- ~~**Restart Discord bot**~~ DONE S50 — PM2 restarted, Supermemory RAG confirmed ON, logged in as Mags Corliss#0710
+- ~~**GCP project linkage**~~ DROPPED — clasp push + service account covers everything. `clasp run` only saves one click in the editor. Not worth the setup.
 - ~~**Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()`~~ DONE — verified S50, columns already exist in sheets
 
 ---
@@ -272,3 +272,25 @@ All 4 journalism enhancements implemented:
 
 ### 2026-02-20 (2026-02-21T02:22:57.452Z)
 - Need to diversify citizen voices - we reuse same sources (Dante Nelson, Elena Reyes, Calvin Turner) too often. Census improvements should help find fresh perspectives on ongoing stories instead of familiar voices.
+
+### 2026-02-21 — Tech Reading: Claude Code & Anthropic Updates (Session 50)
+
+#### Claude Code Features to Explore
+- **`/teleport`** — Sends Claude Code session to claude.ai web UI. Good for phone sessions when Termius can't render full output.
+- **Worktree isolation for agents** (`isolation: worktree`) — Desk agents could run in isolated git worktrees. Prevents file conflicts during parallel agent work. Directly relevant to edition pipeline.
+- **Skills hot reload** — Edit skills without restarting sessions. No more restart cycles when tweaking desk agent skills.
+- **Hooks in skill/agent frontmatter** — Attach hooks directly to skill definitions instead of global hooks config. Cleaner architecture.
+- **`claude agents` CLI command** — Lists configured agents. Good for auditing our desk agent setup.
+- **ConfigChange hook event** — Security auditing on config changes.
+- **WorktreeCreate/WorktreeRemove hook events** — VCS setup/teardown hooks.
+
+#### Claude Code Security (Feb 20)
+- AI-powered vulnerability scanner built into Claude Code. Found 500+ vulns in production open-source projects.
+- Reads code like a human researcher, not pattern matching. Multi-stage self-verification.
+- GitHub Action available: `anthropics/claude-code-security-review` — could wire into our repo for PR reviews.
+- Worth running on GodWorld codebase as a one-time audit.
+
+#### Model Updates
+- **Opus 4.6** (Feb 5): 1M context, agent teams, adaptive thinking. We're running on it now.
+- **Sonnet 4.6** (Feb 17): Opus 4.5-level performance at Sonnet cost. 1M context. Good for opusplan mode (Sonnet does execution).
+- **Anthropic $30B Series G** at $380B valuation. $14B run-rate revenue.

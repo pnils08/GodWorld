@@ -1,9 +1,15 @@
 /**
  * ============================================================================
- * BOND ENGINE V2.6
+ * BOND ENGINE V2.7
  * ============================================================================
  *
  * Manages citizen relationships with calendar awareness.
+ *
+ * v2.7 Fixes:
+ * - Ledger bloat fix: lastUpdate only stamped for meaningful changes
+ *   (status change, type change, or intensity delta >= 2.0)
+ * - Routine intensity ticks still apply to master state but don't
+ *   trigger Relationship_Bond_Ledger rows (~90% write reduction)
  *
  * v2.6 Fixes:
  * - Replaced all Math.random() calls with ctx.rng for deterministic randomness
@@ -563,6 +569,9 @@ function updateExistingBonds_(ctx) {
     }
 
     var intensity = Number(bond.intensity) || 0;
+    var priorIntensity = intensity;
+    var priorStatus = bond.status;
+    var priorType = bond.bondType;
     var bondAge = currentCycle - (bond.cycleCreated || currentCycle);
 
     var aActive = activeCitizens[bond.citizenA] || false;
@@ -580,7 +589,6 @@ function updateExistingBonds_(ctx) {
       } else if (bond.bondType === BOND_TYPES.SPORTS_RIVAL) {
         intensity += 1.0;
       }
-      bond.lastUpdate = currentCycle;
     }
 
     if (S.cycleWeight === 'high-signal' && bond.bondType === BOND_TYPES.RIVALRY) {
@@ -703,6 +711,14 @@ function updateExistingBonds_(ctx) {
         bond.bondType = BOND_TYPES.PROFESSIONAL;
         bond.notes = (bond.notes || '') + ' [Settled into professional respect C' + currentCycle + ']';
       }
+    }
+
+    // v2.7: Only stamp lastUpdate for meaningful changes — prevents ledger bloat.
+    // Routine intensity ticks still apply to master state (Relationship_Bonds)
+    // but only status changes, type changes, or large intensity shifts get logged.
+    var intensityDelta = Math.abs(bond.intensity - priorIntensity);
+    if (bond.status !== priorStatus || bond.bondType !== priorType || intensityDelta >= 2.0) {
+      bond.lastUpdate = currentCycle;
     }
   }
 }

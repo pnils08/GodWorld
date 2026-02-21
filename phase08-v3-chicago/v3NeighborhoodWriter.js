@@ -211,6 +211,10 @@ function saveV3NeighborhoodMap_(ctx) {
   for (var i = 0; i < NMAP_NEIGHBORHOODS.length; i++) {
     var name = NMAP_NEIGHBORHOODS[i];
     var profile = neighborhoods[name];
+    if (!profile) {
+      Logger.log('saveV3NeighborhoodMap_: No profile for "' + name + '", skipping');
+      continue;
+    }
     var hMod = holidayMods[name] || {};
 
     var effectiveEventMod = profile.eventMod * (hMod.eventMod || 1);

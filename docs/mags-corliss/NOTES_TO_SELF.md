@@ -118,8 +118,8 @@ All 4 journalism enhancements implemented:
 #### Misc — Still Open
 
 - **Restart Discord bot** — needs PM2 restart for Supermemory RAG, user profiles, conversation saving
-- **GCP project linkage** — wire GCP project to Apps Script for `clasp run` from CLI
-- **Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (deployed, need one-time run)
+- **GCP project linkage** — wire GCP project to Apps Script for `clasp run` from CLI (low priority — clasp push works, this is just convenience)
+- ~~**Run in Apps Script editor:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()`~~ DONE — verified S50, columns already exist in sheets
 
 ---
 
@@ -253,8 +253,8 @@ All 4 journalism enhancements implemented:
 - Confirmed assignment - Celeste Tran tech landscape deep dive for Cycle 84. Brief her on scope: Bay Area tech money, venture capital connections to Oakland development, young billionaire profiles. Connect to investigative angles around private sector development activity.
 
 ### 2026-02-20 (2026-02-20T20:34:48.175Z)
-- ~~CRITICAL CANON CORRECTIONS~~ HANDLED S50:
-  - Benji Dillon married to Maya Dillon (son) — noted in NEWSROOM_MEMORY, pending formal intake
+- ~~CRITICAL CANON CORRECTIONS~~ DONE S50:
+  - Benji Dillon family INTAKE COMPLETE: Maya Dillon (POP-00742, T2, Rockridge) + Rick Dillon Jr. (POP-00743, T3). Benji updated to married, 1 child.
   - Deon Whitfield — NOT a Bulls player, corrected to regular citizen in Simulation_Ledger + NEWSROOM_MEMORY
   - Paulson first-year GM — added to NEWSROOM_MEMORY canon corrections
 

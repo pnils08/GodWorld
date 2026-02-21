@@ -259,7 +259,7 @@ These were invented in Editions 80-81. Do not use them:
 **Canon Corrections (Session 50):**
 - Mike Paulson: **FIRST-YEAR** Bulls GM (hired C40). Do NOT write "second-year GM" or "sophomore season." He accepted the position mid-cycle 40 — this is year one.
 - Deon Whitfield: NOT a Bulls player. Regular Tier-4 citizen (POP-00732). Do NOT reference in basketball coverage.
-- Benji Dillon family: Married to **Maya Dillon**, has a son. PENDING INTAKE — Maya and son not yet in Simulation_Ledger.
+- Benji Dillon family: Married to **Maya Dillon** (POP-00742, T2, maiden name Torres, UCSD marine biology). Son **Rick Dillon Jr.** (POP-00743, T3, ~10 years old). All in Rockridge. Intake complete S50.
 
 **2041 Season Canon (Session 45):**
 - Darrin Davis: **LF** for 2041 (moved from DH to accommodate Quintero). Defensive metrics poor (63 FLD). The sacrifice IS the story.

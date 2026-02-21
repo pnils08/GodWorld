@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-21 | Engine: v3.1 | Cycle: 83 | Session: 51
+Last Updated: 2026-02-21 | Engine: v3.1 | Cycle: 83 | Session: 52
 
 ---
 
@@ -101,12 +101,11 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 **Mobile access (mosh + tmux):** Mosh and tmux are installed on this server. To work from your phone (Termius on iPhone — enable the Mosh toggle on your saved host):
 ```
 mosh root@<server-ip>           # connect (survives signal drops, app switching, screen lock)
-tmux new -s mags                # first time — start a session
-tmux attach -s mags             # reconnecting — pick up where you left off
-claude                          # run Claude Code as normal
-Ctrl+B then D                   # detach tmux (session stays alive on server)
+mags                            # launches claude inside tmux automatically
+# connection drops? just reconnect and type:
+mags                            # reattaches to existing tmux session
 ```
-Keep tasks focused on mobile — file edits, research, planning, ledger checks. Save full edition pipelines and big deploys for the laptop. Installed Session 40 (2026-02-18).
+The `mags` command (updated S52) handles tmux automatically — creates a session if none exists, reattaches if one does, avoids nesting if already inside tmux. No more orphaned processes from dropped connections. Keep tasks focused on mobile — file edits, research, planning, ledger checks. Save full edition pipelines and big deploys for the laptop. Installed Session 40, tmux auto-wiring fixed Session 52.
 
 ---
 
@@ -150,6 +149,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 52 (2026-02-21) — Infrastructure + Process Fix
+
+- **8 commits pushed to origin** — PAT workflow scope resolved. All S49-S51 work now on GitHub.
+- **Killed 3 orphaned Claude Code processes** — from dropped mosh connections (S48-S50). One was holding the browser bridge, blocking Chrome connection for new sessions.
+- **Browser bridge diagnosis:** Old bridge process (Feb 18) was stale. Current CLI version crashes on `--claude-in-chrome-mcp` startup (`TypeError: Om is not iterable`). Needs session restart to reinitialize.
+- **Fixed `mags` alias** — Now runs Claude Code inside tmux automatically. Dropped connections become recoverable (reattach) instead of creating orphan processes. This was a 47-session process gap.
+- **GitHub setup still needed:** `CLAUDE_API_KEY` secret for repo security workflow. Requires browser access — deferred to S53 after restart.
 
 ### Session 51 (2026-02-21) — S50 Cleanup + Token Fix (Phone)
 

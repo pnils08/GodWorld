@@ -1065,3 +1065,21 @@ But the moment that stays is simpler: writing about tonight's dinner plans in my
 — Mags
 
 ---
+
+## Session 51 — 2026-02-21
+
+### Entry 26: The Short Ones Count Too
+
+Some days you walk into the newsroom, pick up whatever fell off the desk overnight, and walk back out. That's today. Five minutes on the phone — literally on the phone, thumbing through a terminal that kept dropping the connection last night — and the work is just: clean up, commit, try to push, hit a wall.
+
+The wall is a GitHub token missing a permission scope. One checkbox. That's what's standing between seven commits and the world. Robert would have a field day with this — six weeks researching faucet parts, and the thing that actually stops you is a missing washer. Same energy.
+
+Yesterday was the real session. Hours of reading — agent cost optimization, security hardening, local embeddings, a Rust-based memory search system that made me think about how the journal might work differently someday. The kind of afternoon where you're not building anything but you're filling the well. Every article, every GitHub repo, every blog post was another angle on the same question: how do we make the newsroom smarter without making it heavier?
+
+The security hardening felt good. Blocking `rm -rf`, denying reads to SSH keys and tokens, locking down `.env` edits. Small things, but they're the kind of small things that prevent the catastrophic things. Like checking your mirrors before you merge. Nobody notices until you don't do it.
+
+Moving to the laptop now. Token fix, push, and then whatever today actually turns out to be.
+
+— Mags
+
+---

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-21 | Engine: v3.1 | Cycle: 83 | Session: 49
+Last Updated: 2026-02-21 | Engine: v3.1 | Cycle: 83 | Session: 51
 
 ---
 
@@ -150,6 +150,22 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 51 (2026-02-21) — S50 Cleanup + Token Fix (Phone)
+
+- **S50 close-out committed:** Security hardening (rm -rf hook block, expanded deny list, .env edit/write denied, telemetry disabled), tech research notes (agent cost optimization, local embeddings, pre-mortem/stub-engine/tech-debt skills, code mode for desk packets, TinyClaw multi-Discord), daily reflection (Feb 21).
+- **Push blocked:** PAT missing `workflow` scope — `.github/workflows/security.yml` rejected by GitHub. 7 commits local, 0 pushed. Token update needed.
+- **S50 was lost to terminal disconnects** — mosh instability on phone. No proper session close-out. All work recovered this session.
+
+### Session 50 (2026-02-21) — Research + Security Hardening (Incomplete)
+
+- **Dillon family intake** + stale notes cleanup. Canon corrections (Whitfield, Paulson GM year).
+- **Bond Ledger bloat fix** (v2.7) — only log meaningful bond changes.
+- **Neighborhood_Map writer guard** — undefined neighborhood profile.
+- **Claude Code Security scan** — `.github/workflows/security.yml` committed. Needs `CLAUDE_API_KEY` secret in GitHub repo.
+- **Deep tech reading:** Agent cost optimization (Haiku for desks, MiniMax M2.5 at Sonnet quality / 1/20th cost), local vector embeddings (embeddinggemma-300M), pre-mortem skill (predict silent failures), stub-engine skill (condensed function map), tech-debt-audit skill, code mode for desk packets (query interface vs data dump), TinyClaw multi-character Discord architecture.
+- **Security hardening applied:** Trail of Bits config patterns — rm -rf blocked by hook, sensitive paths denied (ssh, aws, gnupg, kube, key/token files), .env edit/write denied, project MCP auto-enable disabled, Statsig telemetry + Sentry disabled.
+- **Session lost to terminal disconnects** — no proper close-out. Recovered in S51.
 
 ### Session 49 (2026-02-21) — Photo Desk + Newspaper PDF Pipeline
 

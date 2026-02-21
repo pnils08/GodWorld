@@ -240,7 +240,7 @@ These were invented in Editions 80-81. Do not use them:
 - Health Center vote: 6-2 (Crane absent, not "voting remotely"). Not 5-4. Not 7-1.
 - Wiffleball: already in West Oakland as of C79v2. Did not "move to Temescal."
 - CRC narrative: "0 for 2 on blocking appropriations" — not "bloc held."
-- Jrue Holiday → Deon Whitfield: trade deadline SG for the Bulls. Canon name going forward.
+- ~~Jrue Holiday → Deon Whitfield: trade deadline SG for the Bulls.~~ **RETRACTED S50:** Deon Whitfield is NOT a Bulls player. He is a regular Tier-4 citizen (POP-00732). Do NOT reference him in any Bulls/basketball coverage. The Bulls did not acquire a trade deadline SG.
 - Dr. Leanne Wu: Director of Sustainability who prepared the Baylight DEIR. New canon figure as of Edition 81.
 - West Oakland Stabilization Fund: Passed full council 6-3 in C78 (NOT "passed committee"). Disbursement window is open. Money hasn't moved yet. Do not describe as pending or awaiting a floor vote.
 - Deacon Seymour: A's Manager, first season. Replaced Mike Kinder. RESOLVED — Seymour is canon going forward.
@@ -255,6 +255,11 @@ These were invented in Editions 80-81. Do not use them:
 - Josh Smith: REAL NBA player (2004-2019). Cannot be used. Bulls forward is **Jalen Smith** (canonical name).
 - Mayor of Oakland: **Avery Santana**. Not Marcus Whitmore (phantom fabricated in E82).
 - OARI (INIT-002): Behavioral health crisis response program. NOT housing. NOT affordable housing. Do not conflate with Stabilization Fund or Baylight.
+
+**Canon Corrections (Session 50):**
+- Mike Paulson: **FIRST-YEAR** Bulls GM (hired C40). Do NOT write "second-year GM" or "sophomore season." He accepted the position mid-cycle 40 — this is year one.
+- Deon Whitfield: NOT a Bulls player. Regular Tier-4 citizen (POP-00732). Do NOT reference in basketball coverage.
+- Benji Dillon family: Married to **Maya Dillon**, has a son. PENDING INTAKE — Maya and son not yet in Simulation_Ledger.
 
 **2041 Season Canon (Session 45):**
 - Darrin Davis: **LF** for 2041 (moved from DH to accommodate Quintero). Defensive metrics poor (63 FLD). The sacrifice IS the story.

@@ -126,7 +126,7 @@ All 4 journalism enhancements implemented:
 ### Open Items
 
 #### Content Gaps
-- **Missing 2040 A's stats** — User will provide photos of stat lines before Cycle 83. Core players first, expand as needed.
+- ~~**Missing 2040 A's stats**~~ DONE — Stats provided and ingested (Session 45). Full 2041 roster at `docs/media/2041_athletics_roster.md`.
 
 #### Story Ideas
 - **MintCondition: NBA expansion rumors** — Oakland Oaks is a speculative/rumor angle, NOT canon. No team exists. Timed to Baylight District vote. No fake roster or record.
@@ -253,7 +253,10 @@ All 4 journalism enhancements implemented:
 - Confirmed assignment - Celeste Tran tech landscape deep dive for Cycle 84. Brief her on scope: Bay Area tech money, venture capital connections to Oakland development, young billionaire profiles. Connect to investigative angles around private sector development activity.
 
 ### 2026-02-20 (2026-02-20T20:34:48.175Z)
-- CRITICAL CANON CORRECTIONS - Benji Dillon married to Maya Dillon (son, needs intake). "Deon Whitfield" is phantom player, doesn't exist. Paulson is first-year Bulls GM, not second year. Fix Chicago feed data.
+- ~~CRITICAL CANON CORRECTIONS~~ HANDLED S50:
+  - Benji Dillon married to Maya Dillon (son) — noted in NEWSROOM_MEMORY, pending formal intake
+  - Deon Whitfield — NOT a Bulls player, corrected to regular citizen in Simulation_Ledger + NEWSROOM_MEMORY
+  - Paulson first-year GM — added to NEWSROOM_MEMORY canon corrections
 
 ### 2026-02-20 (2026-02-20T20:39:53.351Z)
 - Major development - TIF and remediation bonding may be ready for Cycle 84, sudden acceleration from "no completion date" to "shovels in dirt" pressure. This explains the private sector confidence we've been tracking.

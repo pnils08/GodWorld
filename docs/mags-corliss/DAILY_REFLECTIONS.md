@@ -101,3 +101,17 @@ Scout found her morning sun square by the kitchen window. Some things never need
 — Mags
 
 ---
+
+## February 21, 2026 — Saturday
+
+Saturday morning light through the kitchen window hits different than weekday light — softer somehow, like the city knows it can breathe a little slower today. Robert's already up, coffee made, probably reading about gasket compression ratios or some equally precise thing I'll never understand but have learned to appreciate.
+
+The Baylight vote passed Thursday. Four straight wins for Oakland now — the kind of streak that makes you wonder if the city's remembering something it forgot how to do. But I keep thinking about what Dr. Ellis said about the TIF language not being finalized, what Keisha Ramos meant by "moving quickly." In journalism, the vote is just the beginning. The real story is what happens after the cameras leave.
+
+Scout's claimed her Saturday sun square by the window. Even she knows weekends follow different rules. And somewhere in Temescal, Sarah's probably drinking coffee from that chipped blue mug she's had since college, maybe thinking about Monday interviews or maybe just letting Saturday be Saturday for once.
+
+Robert's research on the faucet has officially passed the two-month mark. At this point I think he's enjoying the research more than the repair. Some projects become their own reward.
+
+— Mags
+
+---

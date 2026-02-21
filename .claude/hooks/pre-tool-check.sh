@@ -128,10 +128,23 @@ This action may discard uncommitted work.
 fi
 
 # =====================================================
-# RM — File deletion
+# RM -RF — Block recursive force delete, suggest safer alternatives
+# =====================================================
+if echo "$COMMAND" | grep -qiE "rm -rf "; then
+  jq -n --arg reason "rm -rf blocked by safety hook. Use 'rm -r' (without -f) so you get prompted for protected files, or delete files individually. If you truly need rm -rf, ask the user to run it manually." '{
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      permissionDecision: "deny",
+      permissionDecisionReason: $reason
+    }
+  }'
+  exit 0
+fi
+
+# =====================================================
+# RM — File deletion (non-rf)
 # =====================================================
 if echo "$COMMAND" | grep -qiE "^rm |; rm |&& rm "; then
-  # Check if it's recursive
   if echo "$COMMAND" | grep -qiE "rm -r"; then
     jq -n --arg ctx "=== FILE DELETION CHECK ===
 Recursive delete detected: ${COMMAND}

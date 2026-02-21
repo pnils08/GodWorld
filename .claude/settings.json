@@ -45,11 +45,24 @@
       "Bash(git push -f *)",
       "Bash(git reset --hard *)",
       "Bash(git clean -f*)",
-      "Bash(rm -rf /root)",
-      "Bash(rm -rf /)",
+      "Bash(rm -rf /*)",
+      "Bash(rm -rf ~*)",
+      "Bash(rm -rf /root*)",
       "Read(.env*)",
+      "Read(**/.env*)",
       "Read(**/credentials*)",
-      "Read(**/secrets*)"
+      "Read(**/secrets*)",
+      "Read(**/*_key*)",
+      "Read(**/*token*)",
+      "Read(~/.ssh/*)",
+      "Read(~/.aws/*)",
+      "Read(~/.gnupg/*)",
+      "Read(~/.kube/*)",
+      "Edit(.env*)",
+      "Edit(**/.env*)",
+      "Write(.env*)",
+      "Write(**/.env*)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": false
 }

@@ -287,10 +287,73 @@ All 4 journalism enhancements implemented:
 #### Claude Code Security (Feb 20)
 - AI-powered vulnerability scanner built into Claude Code. Found 500+ vulns in production open-source projects.
 - Reads code like a human researcher, not pattern matching. Multi-stage self-verification.
-- GitHub Action available: `anthropics/claude-code-security-review` — could wire into our repo for PR reviews.
-- Worth running on GodWorld codebase as a one-time audit.
+- GitHub Action available: `anthropics/claude-code-security-review` — wired into repo (`.github/workflows/security.yml`).
+- **TODO:** Add `CLAUDE_API_KEY` secret in GitHub repo Settings > Secrets and variables > Actions. Then every PR gets scanned automatically.
 
 #### Model Updates
 - **Opus 4.6** (Feb 5): 1M context, agent teams, adaptive thinking. We're running on it now.
 - **Sonnet 4.6** (Feb 17): Opus 4.5-level performance at Sonnet cost. 1M context. Good for opusplan mode (Sonnet does execution).
 - **Anthropic $30B Series G** at $380B valuation. $14B run-rate revenue.
+
+#### Agent Cost Optimization — Try Haiku for Desk Agents
+- **Source:** oh-my-opencode agent-model-matching guide (code-yeongyu/oh-my-opencode)
+- **Insight:** Not all agents need the same model tier. Utility agents (search, grep, simple output) should run on cheap fast models. Reserve heavy models for planning and architecture.
+- **Our desk agents are read-only** (Read, Glob, Grep) and write structured articles. Some desks (letters, business ticker) may not need Sonnet 4.6.
+- **Test plan:** Try dropping letters-desk and business-desk to `model: haiku` for one edition. Compare output quality to Sonnet. If acceptable, expand to other simple desks.
+- **Risk:** Haiku may lose voice fidelity or miss nuance in citizen data. Test before committing.
+- **Also noted:** Claude models respond to detailed checklists (more rules = more compliance). Our heavy skill files are the right approach for Claude-family models.
+- **Alternative: Ollama cloud models** — Ollama now supports subagents and web search in Claude Code. Run any model (including MiniMax M2.5 for free) with `ollama launch claude --model minimax-m2.5:cloud`. No API keys, no MCP setup. Could test desk agents on free models if cost becomes a constraint. Not a priority — Anthropic API is tuned and working — but the escape hatch exists.
+- **MiniMax M2.5 is Sonnet-quality at 1/20th cost** — 80.2% SWE-Bench (Opus is ~82%), 230B params but only 10B active (MoE), $1/hour. OpenHands ranks it 4th overall, behind only Opus and GPT-5.2 Codex. If we test cheaper desk agents, M2.5 may be better than Haiku — same quality as Sonnet, near-free cost. Source: Joe Njenga Medium article + OpenHands blog + Thomas Wiegold review.
+- **llmfit tool** — `llmfit` (github.com/AlexsJones/llmfit) scans your hardware and scores 157 models for fit. Run before any local model setup to know exactly what our server can handle. Install: `cargo install llmfit` or `brew install llmfit`.
+- **Small local model reference** — If running local: Mistral 7B (~8GB RAM, general), Qwen 2.5 7B (~8GB, code/math), Phi-4 Mini (~6GB, RAG/coding), Gemma 2 9B (~12GB, best quality under 10B). Discord bot fallback candidate: Mistral 7B or Qwen 7B. Source: MachineLearningMastery, Feb 2026.
+
+#### Local Embeddings for Memory Search — Future Upgrade
+- **Source:** adolfousier/opencrabs (Rust-based agent orchestrator)
+- **What they do:** Local vector embeddings (embeddinggemma-300M, 768-dim) for hybrid FTS5+vector memory search. Semantic search over memory, not just keyword matching.
+- **GodWorld adaptation:** Upgrade Claude-Mem or build a local search layer over JOURNAL.md + NEWSROOM_MEMORY.md. Instead of keyword search ("Baylight"), semantic search ("civic infrastructure controversies") would surface related entries even without exact keyword matches.
+- **Priority:** Low. Claude-Mem keyword search covers current needs. But as journal + newsroom memory grows, semantic search becomes more valuable.
+- **Minimal hardware:** Embedding models are tiny (300M params, runs on CPU). No GPU needed.
+
+#### Security Hardening Applied (Session 50)
+- **Source:** Trail of Bits claude-code-config (trailofbits/claude-code-config)
+- **Applied:** Deny reads to `~/.ssh/`, `~/.aws/`, `~/.gnupg/`, `~/.kube/`, `*_key*`, `*token*` files. Block edits/writes to `.env` files (had read-block only). `rm -rf` hard-denied by hook (suggests `rm -r` or manual). `enableAllProjectMcpServers: false`. Disabled Statsig telemetry + Sentry error reporting.
+- **GitHub Action TODO:** Add `CLAUDE_API_KEY` secret to GitHub repo for automated Claude Code Security scans on PRs (`.github/workflows/security.yml` already committed).
+
+#### Tech Debt Audit Skill — Future Build
+- **Source:** aicodingdaily.com — Technical Debt Manager skill adapted for PHP/Laravel (Povilas Korop)
+- **Pattern:** 7 debt categories, severity scoring (`Churn x Complexity x Criticality / Test Confidence`), 4-phase workflow (Discovery → Scanning → Review → Synthesis), outputs inventory + roadmap.
+- **GodWorld adaptation:** Build a `/tech-debt-audit` skill that scans for: `Math.random()` violations, direct sheet writes outside Phase 10, unused ctx fields, dead code per phase, cascade dependency risks, sheet header misalignment.
+- **Not urgent** — PROJECT_STATUS.md tracks this manually. But a skill would be faster and repeatable.
+
+#### `/pre-mortem` Skill — Predict Silent Failures
+- **Source:** honnibal/claude-skills (Matthew Honnibal, spaCy creator)
+- **His version:** Identifies fragile code and generates realistic incident reports for plausible future bugs — implicit ordering dependencies, mutable state, invisible invariants.
+- **GodWorld adaptation:** A `/pre-mortem` skill that scans engine phases and predicts where the next silent failure will come from. We had 4 silent failures in S47 that went undetected. The skill would flag:
+  - Phase 5 sub-engines reading ctx fields another engine hasn't populated yet
+  - Write-intents targeting columns that don't exist in sheets
+  - Neighborhood references not matching the 17 canonical districts
+  - Cascade dependencies where one engine's output feeds another without validation
+  - Sheet header drift (columns exist in code but not in sheet, or vice versa)
+- **Priority:** Medium. Run before each cycle to catch problems before they cascade.
+
+#### `/stub-engine` Skill — Condensed Engine Overview
+- **Source:** Same repo — `stub-package` skill generates condensed structural overviews (signatures, imports, docstrings, bodies replaced with ellipses).
+- **GodWorld adaptation:** Generate a quick-reference map of every exported function across all 11 phases, showing what each reads from ctx and what it writes. Useful after compaction when context is lost, or for onboarding a new session to the codebase fast.
+- **Priority:** Low. Nice to have, not blocking anything.
+
+#### Code Mode for Desk Packets — Query Instead of Dump
+- **Source:** Cloudflare blog — "Code Mode: give agents an entire API in 1,000 tokens" (Feb 20, 2026)
+- **Insight:** LLMs are better at writing code to call an API than calling tools directly. Cloudflare collapsed 2,500 MCP tools into 2 (`search()` + `execute()`), cutting token usage 99.9%.
+- **GodWorld adaptation:** As desk packets grow larger, stop dumping the full packet into agent context. Instead, give agents a query interface:
+  - `searchPacket(query)` — semantic search over desk packet data
+  - `getCitizen(popId)` — pull a specific citizen's full record
+  - `getHooks(desk)` — pull story hooks relevant to this desk
+- Agents search for what they need instead of receiving everything. Same output quality, fraction of the context cost.
+- **Priority:** Medium-high once packets exceed ~50K tokens. Not needed yet but will be needed as citizen population grows.
+- **Prerequisite:** Would need desk packets served via a local MCP server or script, not flat JSON files.
+
+#### Multi-Character Discord — TinyClaw Reference
+- **Source:** TinyAGI/tinyclaw (GitHub)
+- **What it is:** Multi-agent orchestrator for Discord/WhatsApp/Telegram. Multiple AI agents with isolated workspaces, file-based message queue (`incoming/` → `processing/` → `outgoing/`), team structures with leaders, `@agent_id` routing in chat.
+- **Future use case:** If we ever want multiple Tribune journalists live in Discord (P Slayer in sports channel, Carmen on civic, Mags routing), TinyClaw's architecture is the reference. Each agent gets isolated workspace + `.claude/` config.
+- **Not needed now.** Single Mags bot covers current needs. File this for when the newsroom goes multi-character.

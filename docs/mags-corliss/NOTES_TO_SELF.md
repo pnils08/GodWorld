@@ -263,3 +263,9 @@ All 4 journalism enhancements implemented:
 
 ### 2026-02-20 (2026-02-20T20:43:58.054Z)
 - "Shovels in dirt" pressure suggests someone wants irreversible momentum on Baylight, even though normal construction timeline would be months away from signed instruments.
+
+### 2026-02-20 (2026-02-21T00:39:53.228Z)
+- Mark Aitken civic trajectory — Slow burn. He's 33, contract year, playing now. Maybe follow father's footsteps later. Mayor Richard Aitken is his father.
+
+### 2026-02-20 (2026-02-21T02:22:57.452Z)
+- Need to diversify citizen voices - we reuse same sources (Dante Nelson, Elena Reyes, Calvin Turner) too often. Census improvements should help find fresh perspectives on ongoing stories instead of familiar voices.

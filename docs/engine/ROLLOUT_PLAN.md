@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55
 **Status:** Active
-**Last Updated:** Session 55 (2026-02-21)
+**Last Updated:** Session 55 (2026-02-22)
 
 ---
 
@@ -42,14 +42,14 @@ All three items shipped and pushed to main.
 
 ## Phase 2: Cost + Scale
 
-### 2.1 Cheaper Models for Simple Desks
+### 2.1 Cheaper Models for Simple Desks ✓
 **What:** Run letters desk and business desk on Haiku instead of Sonnet. Keep civic, sports, culture, chicago, and Rhea on Sonnet.
 **Why:** Parallel agents use more tokens per edition. Offset the cost by using cheaper models where quality holds up. Letters and business produce simpler output than civic or sports.
-**How:** Set `model: "haiku"` in the Task tool call for letters-desk and business-desk. Run one test edition comparing Haiku output to Sonnet output for those desks.
+**How:** Set `model: "haiku"` in agent SKILL.md frontmatter for letters-desk and business-desk. Test on next edition.
 **Risk:** Haiku may lose voice fidelity or miss citizen data nuance. Test before committing. If quality drops, revert.
-**Also available:** `CLAUDE_CODE_SUBAGENT_MODEL` environment variable for global subagent model control.
+**Status:** Deployed. Pending voice quality check on next edition.
 
-### 2.2 Desk Packet Query Interface
+### 2.2 Desk Packet Query Interface — DEFERRED
 **What:** Instead of dumping the full citizen database JSON into each agent's context, give agents a way to search for only the citizens and hooks they need.
 **Why:** Citizen population is growing (630+). Desk packets will eventually exceed agent context limits. Two agents already choked on 500KB packets in Edition 81.
 **How:** Build a local script or MCP server that exposes:
@@ -57,35 +57,40 @@ All three items shipped and pushed to main.
 - `getCitizen(popId)` — pull one citizen's full record
 - `getHooks(desk)` — pull story hooks for a specific desk
 Agents call these functions instead of reading a flat JSON file.
-**When:** Build before packets exceed ~50K tokens. Not urgent yet but will become a bottleneck.
+**When:** Build when packets exceed ~50K tokens or population hits 800-900. Summary files currently handle the load.
 
 ---
 
-## Phase 3: Engine Health
+## Phase 3: Engine Health — COMPLETE (S55)
 
-### 3.1 `/pre-mortem` Skill
+### 3.1 `/pre-mortem` Skill ✓
 **What:** Scan all engine phases before running a cycle. Predict where silent failures will happen.
 **Why:** Session 47 found 4 silent failures that had been running undetected. This catches them before they cascade.
 **What it checks:**
+- Math.random() violations (zero tolerance)
+- Direct sheet writes outside Phase 10 (with documented exceptions)
 - Phase 5 sub-engines reading ctx fields that another engine hasn't written yet
 - Write-intents targeting sheet columns that don't exist
 - Neighborhood references that don't match the 17 canonical districts
-- Cascade dependencies where one engine's output feeds another without validation
 - Sheet header drift (columns in code but not in sheet, or vice versa)
+**Status:** SKILL.md created. Ready to use: `/pre-mortem`.
 
-### 3.2 `/tech-debt-audit` Skill
+### 3.2 `/tech-debt-audit` Skill ✓
 **What:** Automated scan for code violations across all engine files.
 **Why:** Currently tracked manually in PROJECT_STATUS.md. A skill runs faster and catches things humans miss.
 **What it checks:**
 - `Math.random()` anywhere in engine code
 - Direct sheet writes outside Phase 10
-- Unused ctx fields (written but never read, or vice versa)
-- Dead code per phase
-- Sheet header misalignment between code and actual sheets
+- Orphaned ctx fields (written but never read, or read but never written)
+- Dead code per phase (unreferenced functions, large commented blocks)
+- Sheet header misalignment between code and schemas
+- Duplicate logic across phases
+**Status:** SKILL.md created. Ready to use: `/tech-debt-audit`.
 
-### 3.3 `/stub-engine` Skill
+### 3.3 `/stub-engine` Skill ✓
 **What:** Generate a quick-reference map of every exported function across all 11 phases. Shows what each function reads from ctx and what it writes.
 **Why:** Useful after context compaction when session memory is lost, or when starting a cold session on the codebase.
+**Status:** SKILL.md created. Ready to use: `/stub-engine`.
 
 ---
 
@@ -96,10 +101,11 @@ Agents call these functions instead of reading a flat JSON file.
 **Why:** Keyword search works now, but as the journal and newsroom memory grow, searching for "civic infrastructure controversies" should find Baylight entries even without that exact phrase.
 **When:** Build when memory corpus is large enough that keyword misses matter.
 
-### 4.2 Startup File Freshness Check
-**What:** Add a check to `/session-startup` that warns if identity files are stale — JOURNAL_RECENT.md older than 48 hours, SESSION_CONTEXT.md not updated since last session, NEWSROOM_MEMORY.md out of date.
+### 4.2 Startup File Freshness Check ✓
+**What:** Add a check to the session startup hook that warns if identity files are stale — JOURNAL_RECENT.md older than 48 hours, SESSION_CONTEXT.md older than 72 hours, NEWSROOM_MEMORY.md older than 72 hours.
 **Why:** Prevents sessions starting with outdated context without realizing it.
-**How:** Small addition to existing `/session-startup` skill. Check file modification timestamps.
+**How:** Added to `session-startup-hook.sh`. Checks file modification timestamps at session start, prints a warning with specific file ages if any are stale.
+**Status:** Deployed in startup hook.
 
 ---
 

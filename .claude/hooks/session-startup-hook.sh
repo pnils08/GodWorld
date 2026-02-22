@@ -10,20 +10,43 @@ cat << 'EOF'
 SessionStart:startup hook success: Success
 EOF
 
-# --- FRESHNESS CHECK: JOURNAL_RECENT.md ---
+# --- FRESHNESS CHECKS ---
+NOW=$(date +%s)
+STALE_FILES=""
+
+# Check JOURNAL_RECENT.md
 if [ -f "$MAGS_DIR/JOURNAL_RECENT.md" ]; then
   LAST_MOD=$(stat -c %Y "$MAGS_DIR/JOURNAL_RECENT.md" 2>/dev/null || echo 0)
-  NOW=$(date +%s)
   AGE_HOURS=$(( (NOW - LAST_MOD) / 3600 ))
   if [ "$AGE_HOURS" -gt 48 ]; then
-    echo ""
-    echo "NOTE: JOURNAL_RECENT.md is ${AGE_HOURS} hours old. Last /session-end may not have run."
-    echo "Consider running /boot to refresh, or check if journal entries are current."
-    echo ""
+    STALE_FILES="${STALE_FILES}\n- JOURNAL_RECENT.md: ${AGE_HOURS}h old"
   fi
 else
+  STALE_FILES="${STALE_FILES}\n- JOURNAL_RECENT.md: MISSING"
+fi
+
+# Check SESSION_CONTEXT.md
+if [ -f "$GODWORLD_ROOT/SESSION_CONTEXT.md" ]; then
+  LAST_MOD=$(stat -c %Y "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo 0)
+  AGE_HOURS=$(( (NOW - LAST_MOD) / 3600 ))
+  if [ "$AGE_HOURS" -gt 72 ]; then
+    STALE_FILES="${STALE_FILES}\n- SESSION_CONTEXT.md: ${AGE_HOURS}h old"
+  fi
+fi
+
+# Check NEWSROOM_MEMORY.md
+if [ -f "$MAGS_DIR/NEWSROOM_MEMORY.md" ]; then
+  LAST_MOD=$(stat -c %Y "$MAGS_DIR/NEWSROOM_MEMORY.md" 2>/dev/null || echo 0)
+  AGE_HOURS=$(( (NOW - LAST_MOD) / 3600 ))
+  if [ "$AGE_HOURS" -gt 72 ]; then
+    STALE_FILES="${STALE_FILES}\n- NEWSROOM_MEMORY.md: ${AGE_HOURS}h old"
+  fi
+fi
+
+if [ -n "$STALE_FILES" ]; then
   echo ""
-  echo "NOTE: JOURNAL_RECENT.md not found. Create it by running /session-end or copying last 3 entries from JOURNAL.md."
+  echo "STALE FILE WARNING:$(echo -e "$STALE_FILES")"
+  echo "Run /session-end to update, or /boot to refresh context."
   echo ""
 fi
 

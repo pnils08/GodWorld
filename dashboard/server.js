@@ -332,43 +332,121 @@ app.get('/api/edition/latest', (req, res) => {
   });
 });
 
-// Edition list
+// Edition list — full archive including Drive downloads
 app.get('/api/editions', (req, res) => {
-  const edDir = join(ROOT, 'editions');
-  if (!existsSync(edDir)) return res.json({ editions: [] });
+  const editions = getAllEditions();
+  const list = editions.map(e => ({
+    file: e.file,
+    cycle: e.cycle,
+    source: e.source,
+    isSupplemental: e.isSupplemental || false,
+    isBundle: e.isBundle || false,
+    articleCount: e.articles.length,
+  }));
 
-  const files = readdirSync(edDir)
-    .filter(f => f.match(/^cycle_pulse_edition_\d+/))
-    .sort((a, b) => {
-      const na = parseInt(a.match(/\d+/)[0]);
-      const nb = parseInt(b.match(/\d+/)[0]);
-      return nb - na;
-    })
-    .map(f => ({
-      file: f,
-      cycle: parseInt(f.match(/\d+/)[0]),
-    }));
+  // Sort newest first for display
+  list.sort((a, b) => (b.cycle || 0) - (a.cycle || 0));
 
-  res.json({ editions: files });
+  res.json({
+    total: list.length,
+    editions: list,
+  });
 });
 
 // --- Article-Initiative Cross-Reference ---
 
+// Recursively find all .txt files in a directory
+function findTextFiles(dir, results = []) {
+  if (!existsSync(dir)) return results;
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const fullPath = join(dir, entry.name);
+    if (entry.isDirectory()) {
+      findTextFiles(fullPath, results);
+    } else if (entry.name.endsWith('.txt')) {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
+
+// Edition cache — rebuilt on first request, cleared every 5 minutes
+let _editionCache = null;
+let _editionCacheTime = 0;
+const EDITION_CACHE_TTL = 5 * 60 * 1000;
+
 function getAllEditions() {
+  if (_editionCache && Date.now() - _editionCacheTime < EDITION_CACHE_TTL) {
+    return _editionCache;
+  }
+
+  const seen = new Set();
+  const editions = [];
+
+  // Source 1: editions/ directory (canonical, current pipeline)
   const edDir = join(ROOT, 'editions');
-  if (!existsSync(edDir)) return [];
-  return readdirSync(edDir)
-    .filter(f => f.match(/^cycle_pulse_edition_\d+\.txt$/))
-    .sort((a, b) => {
-      const na = parseInt(a.match(/\d+/)[0]);
-      const nb = parseInt(b.match(/\d+/)[0]);
-      return na - nb;
-    })
-    .map(f => {
+  if (existsSync(edDir)) {
+    for (const f of readdirSync(edDir)) {
+      if (!f.endsWith('.txt') || f.endsWith('TEMPLATE.md')) continue;
       const text = readText(join(edDir, f));
+      if (!text) continue;
       const parsed = parseEdition(text);
-      return { file: f, cycle: parsed.header.cycle, articles: parsed.articles };
-    });
+      const key = `${parsed.header.cycle || 0}-${f}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        editions.push({ file: f, path: join(edDir, f), cycle: parsed.header.cycle, articles: parsed.articles, source: 'editions' });
+      }
+    }
+  }
+
+  // Source 2: output/drive-files/ (Drive archive — older editions, supplementals)
+  const driveDir = join(ROOT, 'output/drive-files');
+  if (existsSync(driveDir)) {
+    const driveFiles = findTextFiles(driveDir);
+    for (const fullPath of driveFiles) {
+      const f = fullPath.split('/').pop();
+      // Skip non-edition files (indexes, manifests)
+      if (f.startsWith('_') || f === 'Text_Mirror_Full_2026-02-08.txt') continue;
+      const text = readText(fullPath);
+      if (!text) continue;
+
+      // Try to extract cycle number from filename or content
+      const parsed = parseEdition(text);
+      let cycle = parsed.header.cycle;
+
+      // Fallback: extract cycle from filename patterns like "Cycle_69_..." or "EDITION 74"
+      if (!cycle) {
+        const cycleMatch = f.match(/(?:Cycle[_\s]*(\d+)|EDITION\s*(\d+))/i);
+        if (cycleMatch) cycle = parseInt(cycleMatch[1] || cycleMatch[2]);
+      }
+
+      // For multi-cycle bundles (e.g., "Cycles 12-18"), tag with the end cycle
+      if (!cycle) {
+        const rangeMatch = f.match(/(?:Cycle[s_\s]*(\d+)[-_](\d+))/i);
+        if (rangeMatch) cycle = parseInt(rangeMatch[2]);
+      }
+
+      const key = `${cycle || 0}-${f}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        editions.push({
+          file: f,
+          path: fullPath,
+          cycle,
+          articles: parsed.articles,
+          source: 'drive-archive',
+          isSupplemental: /supplemental|special/i.test(f),
+          isBundle: /\d+[-_]\d+/.test(f),
+        });
+      }
+    }
+  }
+
+  // Sort by cycle ascending
+  editions.sort((a, b) => (a.cycle || 0) - (b.cycle || 0));
+
+  _editionCache = editions;
+  _editionCacheTime = Date.now();
+  return editions;
 }
 
 function matchArticlesToInitiatives(editions, initiatives) {
@@ -478,6 +556,420 @@ app.get('/api/roster', (req, res) => {
   res.json({ roster });
 });
 
+// --- Full-Text Article Search ---
+// Searches across ALL editions and supplementals by keyword, author, section, citizen
+app.get('/api/search/articles', (req, res) => {
+  const { q, author, section, citizen, cycle: cycleFilter, limit: limitStr } = req.query;
+  if (!q && !author && !section && !citizen) {
+    return res.json({ error: 'Provide at least one: q, author, section, or citizen', results: [] });
+  }
+
+  const editions = getAllEditions();
+  let results = [];
+
+  for (const ed of editions) {
+    if (cycleFilter && ed.cycle !== parseInt(cycleFilter)) continue;
+
+    for (const article of ed.articles) {
+      const searchText = `${article.title || ''} ${article.subtitle || ''} ${article.body || ''}`;
+      let match = true;
+
+      if (q) {
+        const pattern = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+        if (!pattern.test(searchText)) match = false;
+      }
+      if (author && match) {
+        if (!article.author?.toLowerCase().includes(author.toLowerCase())) match = false;
+      }
+      if (section && match) {
+        if (!article.section?.toLowerCase().includes(section.toLowerCase())) match = false;
+      }
+      if (citizen && match) {
+        const citizenPattern = new RegExp(citizen.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+        const nameHit = citizenPattern.test(searchText) ||
+          (article.namesIndex && citizenPattern.test(article.namesIndex));
+        if (!nameHit) match = false;
+      }
+
+      if (match) {
+        // Extract snippet around the match
+        let snippet = '';
+        if (q) {
+          const idx = searchText.toLowerCase().indexOf(q.toLowerCase());
+          if (idx >= 0) {
+            const start = Math.max(0, idx - 80);
+            const end = Math.min(searchText.length, idx + q.length + 80);
+            snippet = (start > 0 ? '...' : '') + searchText.slice(start, end) + (end < searchText.length ? '...' : '');
+          }
+        } else {
+          snippet = (article.body || '').split('\n')[0]?.slice(0, 200) || '';
+        }
+
+        results.push({
+          cycle: ed.cycle,
+          file: ed.file,
+          title: article.title,
+          subtitle: article.subtitle || null,
+          section: article.section,
+          author: article.author || null,
+          desk: article.desk || null,
+          namesIndex: article.namesIndex || null,
+          snippet,
+          bodyLength: (article.body || '').length,
+        });
+      }
+    }
+  }
+
+  const limit = parseInt(limitStr) || 50;
+  res.json({
+    query: { q, author, section, citizen, cycle: cycleFilter },
+    total: results.length,
+    showing: Math.min(limit, results.length),
+    results: results.slice(0, limit),
+  });
+});
+
+// --- Citizen Detail ---
+// Full citizen record: ledger data + archive appearances + desk packet data
+app.get('/api/citizens/:popId', (req, res) => {
+  const { popId } = req.params;
+
+  // Layer 1: Ledger data (from cycle archive)
+  const cycleDir = getLatestCycleDir();
+  let ledgerRecord = null;
+
+  if (cycleDir) {
+    const cycleNum = cycleDir.split('/').pop().replace('cycle-', '');
+    const simText = readText(join(cycleDir, `Simulation_Ledger_Cycle_${cycleNum}.txt`));
+    if (simText) {
+      const rows = parseTSV(simText);
+      const row = rows.find(r => r.POPID?.toLowerCase() === popId.toLowerCase());
+      if (row) {
+        ledgerRecord = { ...row };
+      }
+    }
+  }
+
+  // Layer 2: Citizen archive (from desk packets — article appearances)
+  let archiveData = null;
+  const packetDir = join(ROOT, 'output/desk-packets');
+  const latestCivic = readdirSync(packetDir)
+    .filter(f => f.match(/^civic_c\d+\.json$/))
+    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]))[0];
+
+  if (latestCivic) {
+    const packet = readJSON(join(packetDir, latestCivic));
+    const ca = packet?.citizenArchive || {};
+    // Search by popId or name
+    for (const [name, data] of Object.entries(ca)) {
+      if (data.popId?.toLowerCase() === popId.toLowerCase()) {
+        archiveData = { name, ...data };
+        break;
+      }
+    }
+  }
+
+  // Layer 3: Edition appearances (search all editions for this citizen)
+  const editions = getAllEditions();
+  const editionAppearances = [];
+  const searchName = ledgerRecord
+    ? `${ledgerRecord.First} ${ledgerRecord.Last}`
+    : (archiveData?.name || popId);
+
+  if (searchName && searchName !== popId) {
+    const namePattern = new RegExp(searchName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+    for (const ed of editions) {
+      for (const article of ed.articles) {
+        const searchText = `${article.body || ''} ${article.namesIndex || ''}`;
+        if (namePattern.test(searchText)) {
+          editionAppearances.push({
+            cycle: ed.cycle,
+            title: article.title,
+            section: article.section,
+            author: article.author || null,
+          });
+        }
+      }
+    }
+  }
+
+  // Layer 4: Voice card (from citizen_archive.json if exists)
+  const citizenArchiveFile = readJSON(join(packetDir, 'citizen_archive.json'));
+  let voiceCard = null;
+  if (citizenArchiveFile) {
+    for (const [name, data] of Object.entries(citizenArchiveFile)) {
+      if (data.popId?.toLowerCase() === popId.toLowerCase()) {
+        voiceCard = { name, ...data };
+        break;
+      }
+    }
+  }
+
+  if (!ledgerRecord && !archiveData && editionAppearances.length === 0) {
+    return res.status(404).json({ error: `Citizen ${popId} not found`, popId });
+  }
+
+  res.json({
+    popId,
+    ledger: ledgerRecord,
+    archive: archiveData,
+    voiceCard,
+    editionAppearances,
+    totalAppearances: editionAppearances.length + (archiveData?.totalRefs || 0),
+  });
+});
+
+// --- Citizen Coverage Trail ---
+// Which articles mention a citizen across all editions (by name search)
+app.get('/api/citizen-coverage/:nameOrId', (req, res) => {
+  const query = decodeURIComponent(req.params.nameOrId);
+  const editions = getAllEditions();
+  const pattern = new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+  const trail = [];
+
+  for (const ed of editions) {
+    for (const article of ed.articles) {
+      const searchText = `${article.title || ''} ${article.body || ''} ${article.namesIndex || ''}`;
+      if (pattern.test(searchText)) {
+        // Count mentions
+        const mentions = (searchText.match(new RegExp(query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi')) || []).length;
+
+        // Extract first quote or context
+        let context = '';
+        const bodyLines = (article.body || '').split('\n');
+        for (const line of bodyLines) {
+          if (pattern.test(line)) {
+            context = line.slice(0, 200);
+            break;
+          }
+        }
+
+        trail.push({
+          cycle: ed.cycle,
+          title: article.title,
+          section: article.section,
+          author: article.author || null,
+          mentions,
+          context,
+        });
+      }
+    }
+  }
+
+  res.json({
+    query,
+    totalArticles: trail.length,
+    totalMentions: trail.reduce((s, t) => s + t.mentions, 0),
+    trail,
+  });
+});
+
+// --- Story Hooks ---
+// Active hooks from the latest desk packet
+app.get('/api/hooks', (req, res) => {
+  const { desk, domain, priority } = req.query;
+  const packetDir = join(ROOT, 'output/desk-packets');
+  const allHooks = [];
+
+  // Gather hooks from all desk packets for the latest cycle
+  const packets = readdirSync(packetDir)
+    .filter(f => f.match(/^(civic|sports|culture|business|chicago|letters)_c\d+\.json$/))
+    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
+
+  // Group by cycle — only latest
+  const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
+  if (!latestCycle) return res.json({ hooks: [], cycle: null });
+
+  const latestPackets = packets.filter(f => parseInt(f.match(/\d+/)[0]) === latestCycle);
+
+  for (const pFile of latestPackets) {
+    const deskName = pFile.replace(/_c\d+\.json$/, '');
+    const packet = readJSON(join(packetDir, pFile));
+    const hooks = packet?.hooks || [];
+    for (const hook of hooks) {
+      allHooks.push({ ...hook, sourceDesk: deskName });
+    }
+  }
+
+  let filtered = allHooks;
+  if (desk) filtered = filtered.filter(h => h.sourceDesk === desk || h.suggestedDesks?.toLowerCase().includes(desk.toLowerCase()));
+  if (domain) filtered = filtered.filter(h => h.domain?.toLowerCase() === domain.toLowerCase());
+  if (priority) filtered = filtered.filter(h => h.priority >= parseInt(priority));
+
+  // Sort by priority score descending
+  filtered.sort((a, b) => (b.priorityScore || 0) - (a.priorityScore || 0));
+
+  res.json({ cycle: latestCycle, total: filtered.length, hooks: filtered });
+});
+
+// --- Arcs ---
+// Multi-cycle storylines from desk packets
+app.get('/api/arcs', (req, res) => {
+  const { domain, phase } = req.query;
+  const packetDir = join(ROOT, 'output/desk-packets');
+  const arcMap = new Map();
+
+  // Gather arcs from all desk packets for latest cycle
+  const packets = readdirSync(packetDir)
+    .filter(f => f.match(/^(civic|sports|culture|business|chicago|letters)_c\d+\.json$/))
+    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
+
+  const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
+  if (!latestCycle) return res.json({ arcs: [], cycle: null });
+
+  const latestPackets = packets.filter(f => parseInt(f.match(/\d+/)[0]) === latestCycle);
+
+  for (const pFile of latestPackets) {
+    const packet = readJSON(join(packetDir, pFile));
+    const arcs = packet?.arcs || [];
+    for (const arc of arcs) {
+      if (!arcMap.has(arc.arcId)) {
+        arcMap.set(arc.arcId, arc);
+      }
+    }
+  }
+
+  let arcs = Array.from(arcMap.values());
+  if (domain) arcs = arcs.filter(a => a.domain?.toLowerCase() === domain.toLowerCase());
+  if (phase) arcs = arcs.filter(a => a.phase?.toLowerCase() === phase.toLowerCase());
+
+  // Sort by tension descending
+  arcs.sort((a, b) => parseFloat(b.tension || 0) - parseFloat(a.tension || 0));
+
+  res.json({ cycle: latestCycle, total: arcs.length, arcs });
+});
+
+// --- Storylines ---
+// Active storylines from desk packets
+app.get('/api/storylines', (req, res) => {
+  const { status, priority, neighborhood } = req.query;
+  const packetDir = join(ROOT, 'output/desk-packets');
+  const storylineMap = new Map();
+
+  const packets = readdirSync(packetDir)
+    .filter(f => f.match(/^(civic|sports|culture|business|chicago|letters)_c\d+\.json$/))
+    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
+
+  const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
+  if (!latestCycle) return res.json({ storylines: [], cycle: null });
+
+  const latestPackets = packets.filter(f => parseInt(f.match(/\d+/)[0]) === latestCycle);
+
+  for (const pFile of latestPackets) {
+    const deskName = pFile.replace(/_c\d+\.json$/, '');
+    const packet = readJSON(join(packetDir, pFile));
+    const storylines = packet?.storylines || [];
+    for (const sl of storylines) {
+      const key = sl.description?.slice(0, 50) || JSON.stringify(sl);
+      if (!storylineMap.has(key)) {
+        storylineMap.set(key, { ...sl, desks: [deskName] });
+      } else {
+        storylineMap.get(key).desks.push(deskName);
+      }
+    }
+  }
+
+  let storylines = Array.from(storylineMap.values());
+  if (status) storylines = storylines.filter(s => s.status?.toLowerCase() === status.toLowerCase());
+  if (priority) storylines = storylines.filter(s => s.priority?.toLowerCase() === priority.toLowerCase());
+  if (neighborhood) storylines = storylines.filter(s => s.neighborhood?.toLowerCase().includes(neighborhood.toLowerCase()));
+
+  res.json({ cycle: latestCycle, total: storylines.length, storylines });
+});
+
+// --- Edition Score History ---
+app.get('/api/scores', (req, res) => {
+  const scores = readJSON(join(ROOT, 'output/edition_scores.json'));
+  if (!scores) return res.json({ scores: [] });
+  res.json(scores);
+});
+
+// --- Sports Feeds ---
+// Oakland + Chicago sports data from desk packets
+app.get('/api/sports', (req, res) => {
+  const packetDir = join(ROOT, 'output/desk-packets');
+  const latestSports = readdirSync(packetDir)
+    .filter(f => f.match(/^sports_c\d+\.json$/))
+    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]))[0];
+
+  if (!latestSports) return res.json({ feeds: null, digest: null });
+
+  const packet = readJSON(join(packetDir, latestSports));
+  const feeds = packet?.sportsFeeds || {};
+  const digest = packet?.sportsFeedDigest || '';
+
+  // Also get Chicago feeds
+  const latestChicago = readdirSync(packetDir)
+    .filter(f => f.match(/^chicago_c\d+\.json$/))
+    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]))[0];
+
+  let chicagoFeeds = {};
+  let chicagoDigest = '';
+  if (latestChicago) {
+    const cp = readJSON(join(packetDir, latestChicago));
+    chicagoFeeds = cp?.sportsFeeds || {};
+    chicagoDigest = cp?.sportsFeedDigest || '';
+  }
+
+  res.json({
+    oakland: { feeds, digest },
+    chicago: { feeds: chicagoFeeds, digest: chicagoDigest },
+  });
+});
+
+// --- Mara Directives ---
+// Latest Mara Vance directive and audit history
+app.get('/api/mara', (req, res) => {
+  const outputDir = join(ROOT, 'output');
+  const directives = readdirSync(outputDir)
+    .filter(f => f.match(/^mara_directive_c\d+\.txt$/))
+    .sort((a, b) => {
+      const na = parseInt(a.match(/\d+/)[0]);
+      const nb = parseInt(b.match(/\d+/)[0]);
+      return nb - na;
+    });
+
+  const latest = directives[0] ? readText(join(outputDir, directives[0])) : null;
+  const history = directives.map(f => ({
+    file: f,
+    cycle: parseInt(f.match(/\d+/)[0]),
+  }));
+
+  res.json({
+    latest: latest ? { file: directives[0], cycle: parseInt(directives[0].match(/\d+/)[0]), text: latest } : null,
+    history,
+  });
+});
+
+// --- Edition Full Text ---
+// Returns full parsed edition by cycle number
+app.get('/api/edition/:cycle', (req, res) => {
+  const cycle = parseInt(req.params.cycle);
+  const edDir = join(ROOT, 'editions');
+  if (!existsSync(edDir)) return res.status(404).json({ error: 'No editions directory' });
+
+  // Check for main edition and supplementals
+  const files = readdirSync(edDir).filter(f => {
+    const match = f.match(/(\d+)/);
+    return match && parseInt(match[1]) === cycle && f.endsWith('.txt');
+  });
+
+  if (files.length === 0) return res.status(404).json({ error: `No edition for cycle ${cycle}` });
+
+  const editions = files.map(f => {
+    const text = readText(join(edDir, f));
+    const parsed = parseEdition(text);
+    return {
+      file: f,
+      isSupplemental: f.includes('supplemental'),
+      ...parsed,
+    };
+  });
+
+  res.json({ cycle, editions });
+});
+
 // Serve static React build in production
 const distPath = join(__dirname, 'dist');
 if (existsSync(distPath)) {
@@ -490,14 +982,27 @@ if (existsSync(distPath)) {
 }
 
 app.listen(PORT, () => {
-  console.log(`GodWorld Dashboard API running on http://localhost:${PORT}`);
-  console.log(`  /api/health         — Service status`);
-  console.log(`  /api/world-state    — World state (for agents/bot)`);
-  console.log(`  /api/citizens       — Citizen registry (?tier=1&neighborhood=&search=)`);
-  console.log(`  /api/council        — Council + city staff`);
-  console.log(`  /api/neighborhoods  — 17 Oakland neighborhoods`);
-  console.log(`  /api/edition/latest — Latest Cycle Pulse edition`);
-  console.log(`  /api/editions       — All editions list`);
-  console.log(`  /api/initiatives    — Civic initiatives + implementation tracker`);
-  console.log(`  /api/roster         — Bay Tribune journalist roster`);
+  console.log(`GodWorld Dashboard API v2.0 running on http://localhost:${PORT}`);
+  console.log(`\n  DATA`);
+  console.log(`  /api/health              — Service status`);
+  console.log(`  /api/world-state         — World state (agents/bot)`);
+  console.log(`  /api/citizens            — Citizen registry (?tier=&neighborhood=&search=&limit=)`);
+  console.log(`  /api/citizens/:popId     — Full citizen detail + coverage trail`);
+  console.log(`  /api/council             — Council + city staff`);
+  console.log(`  /api/neighborhoods       — 17 Oakland neighborhoods`);
+  console.log(`  /api/sports              — Oakland + Chicago sports feeds`);
+  console.log(`  /api/roster              — Bay Tribune journalist roster`);
+  console.log(`\n  SEARCH`);
+  console.log(`  /api/search/articles     — Full-text article search (?q=&author=&section=&citizen=&cycle=)`);
+  console.log(`  /api/citizen-coverage/:n — Coverage trail for citizen by name`);
+  console.log(`\n  EDITORIAL`);
+  console.log(`  /api/edition/latest      — Latest Cycle Pulse edition`);
+  console.log(`  /api/edition/:cycle      — Full edition + supplementals by cycle`);
+  console.log(`  /api/editions            — All editions list`);
+  console.log(`  /api/initiatives         — Civic initiatives + implementation tracker`);
+  console.log(`  /api/hooks               — Story hooks (?desk=&domain=&priority=)`);
+  console.log(`  /api/arcs                — Multi-cycle arcs (?domain=&phase=)`);
+  console.log(`  /api/storylines          — Active storylines (?status=&priority=&neighborhood=)`);
+  console.log(`  /api/scores              — Edition score history`);
+  console.log(`  /api/mara                — Mara Vance directives`);
 });

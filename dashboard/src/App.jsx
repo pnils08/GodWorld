@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Search,
   Menu,
@@ -8,6 +8,7 @@ import {
   Activity,
   Users,
   ChevronRight,
+  ChevronDown,
   Clock,
   Database,
   ArrowRight,
@@ -22,6 +23,13 @@ import {
   CheckCircle2,
   Timer,
   FileWarning,
+  Zap,
+  BookOpen,
+  GitBranch,
+  Eye,
+  FileText,
+  Hash,
+  Target,
 } from 'lucide-react';
 
 // --- Data Fetching ---
@@ -49,6 +57,13 @@ export default function App() {
   const [citizens, setCitizens] = useState(null);
   const [initiatives, setInitiatives] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
+  const [hooks, setHooks] = useState(null);
+  const [arcs, setArcs] = useState(null);
+  const [storylines, setStorylines] = useState(null);
+  const [articleSearchResults, setArticleSearchResults] = useState(null);
+  const [articleQuery, setArticleQuery] = useState('');
+  const [citizenDetail, setCitizenDetail] = useState(null);
+  const [coverageTrail, setCoverageTrail] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -79,7 +94,7 @@ export default function App() {
     loadAll();
   }, []);
 
-  // Citizen search
+  // Citizen search (header search)
   useEffect(() => {
     if (!searchQuery || searchQuery.length < 2) {
       setSearchResults(null);
@@ -93,6 +108,48 @@ export default function App() {
     }, 300);
     return () => clearTimeout(timer);
   }, [searchQuery]);
+
+  // Article search
+  const runArticleSearch = useCallback(async (q) => {
+    if (!q || q.length < 2) { setArticleSearchResults(null); return; }
+    try {
+      const data = await fetchAPI(`/api/search/articles?q=${encodeURIComponent(q)}&limit=30`);
+      setArticleSearchResults(data);
+    } catch { /* ignore */ }
+  }, []);
+
+  // Load hooks/arcs when INTEL tab is selected
+  useEffect(() => {
+    if (activeTab === 'INTEL' && !hooks) {
+      Promise.all([
+        fetchAPI('/api/hooks'),
+        fetchAPI('/api/arcs'),
+        fetchAPI('/api/storylines?status=active'),
+      ]).then(([h, a, s]) => {
+        setHooks(h);
+        setArcs(a);
+        setStorylines(s);
+      }).catch(() => {});
+    }
+  }, [activeTab, hooks]);
+
+  // Load citizen detail
+  const loadCitizenDetail = useCallback(async (popId) => {
+    try {
+      const [detail, coverage] = await Promise.all([
+        fetchAPI(`/api/citizens/${popId}`),
+        fetchAPI(`/api/citizen-coverage/${encodeURIComponent(popId)}`),
+      ]);
+      setCitizenDetail(detail);
+      // Also try name-based coverage if we have the name
+      if (detail.ledger?.First && detail.ledger?.Last) {
+        const nameCoverage = await fetchAPI(`/api/citizen-coverage/${encodeURIComponent(detail.ledger.First + ' ' + detail.ledger.Last)}`);
+        setCoverageTrail(nameCoverage);
+      } else {
+        setCoverageTrail(coverage);
+      }
+    } catch { /* ignore */ }
+  }, []);
 
   // Faction colors
   const factionColor = (f) => {
@@ -143,7 +200,6 @@ export default function App() {
   const hoods = neighborhoods?.neighborhoods || [];
   const tier1 = citizens?.citizens || [];
 
-  // Metrics from available data
   const avgSentiment = hoods.length
     ? (hoods.reduce((s, h) => s + h.sentiment, 0) / hoods.length).toFixed(2)
     : edHeader.sentiment || '—';
@@ -183,42 +239,88 @@ export default function App() {
         </div>
       </header>
 
-      {/* SEARCH OVERLAY */}
+      {/* SEARCH OVERLAY — Now dual-mode: citizens + articles */}
       {searchOpen && (
-        <div className="fixed inset-0 z-40 bg-black/95 pt-24 px-6">
+        <div className="fixed inset-0 z-40 bg-black/95 pt-24 px-6 overflow-y-auto pb-24">
           <div className="max-w-lg mx-auto">
             <div className="flex items-center gap-3 bg-neutral-900 rounded-2xl border border-white/10 px-4 py-3">
               <Search size={18} className="text-neutral-500" />
               <input
                 type="text"
-                placeholder="Search citizens, neighborhoods..."
+                placeholder="Search citizens, articles, stories..."
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  runArticleSearch(e.target.value);
+                }}
                 autoFocus
                 className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-neutral-600"
               />
               {searchQuery && (
-                <button onClick={() => setSearchQuery('')} className="text-neutral-500">
+                <button onClick={() => { setSearchQuery(''); setArticleSearchResults(null); setSearchResults(null); setCitizenDetail(null); setCoverageTrail(null); }} className="text-neutral-500">
                   <X size={16} />
                 </button>
               )}
             </div>
-            {searchResults && (
-              <div className="mt-4 space-y-2 max-h-[60vh] overflow-y-auto">
+
+            {/* Citizen Results */}
+            {searchResults && searchResults.citizens?.length > 0 && (
+              <div className="mt-4">
                 <p className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mb-2">
-                  {searchResults.total} results
+                  <Users size={10} className="inline mr-1" /> {searchResults.total} citizens
                 </p>
-                {searchResults.citizens.map(c => (
-                  <div key={c.popId} className="p-4 bg-neutral-900/60 rounded-xl border border-white/5 flex justify-between items-center">
-                    <div>
-                      <div className="text-sm font-bold">{c.firstName} {c.lastName}</div>
-                      <div className="text-[10px] text-neutral-500 mt-0.5">
-                        {c.role} {c.neighborhood ? `· ${c.neighborhood}` : ''} · Tier {c.tier}
+                <div className="space-y-2">
+                  {searchResults.citizens.map(c => (
+                    <div
+                      key={c.popId}
+                      className="p-4 bg-neutral-900/60 rounded-xl border border-white/5 flex justify-between items-center cursor-pointer hover:border-sky-500/30 transition-colors"
+                      onClick={() => loadCitizenDetail(c.popId)}
+                    >
+                      <div>
+                        <div className="text-sm font-bold">{c.firstName} {c.lastName}</div>
+                        <div className="text-[10px] text-neutral-500 mt-0.5">
+                          {c.role} {c.neighborhood ? `· ${c.neighborhood}` : ''} · Tier {c.tier}
+                        </div>
                       </div>
+                      <span className="text-[9px] font-mono text-neutral-600">{c.popId}</span>
                     </div>
-                    <span className="text-[9px] font-mono text-neutral-600">{c.popId}</span>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Citizen Detail Panel */}
+            {citizenDetail && (
+              <CitizenDetailPanel
+                detail={citizenDetail}
+                coverage={coverageTrail}
+                onClose={() => { setCitizenDetail(null); setCoverageTrail(null); }}
+              />
+            )}
+
+            {/* Article Results */}
+            {articleSearchResults && articleSearchResults.results?.length > 0 && (
+              <div className="mt-6">
+                <p className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mb-2">
+                  <FileText size={10} className="inline mr-1" /> {articleSearchResults.total} articles
+                </p>
+                <div className="space-y-2">
+                  {articleSearchResults.results.map((r, i) => (
+                    <div key={i} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
+                      <div className="flex justify-between items-start mb-1">
+                        <span className="text-[9px] font-mono text-sky-500">E{r.cycle}</span>
+                        <span className="text-[9px] text-neutral-600">{r.section}</span>
+                      </div>
+                      <h4 className="text-xs font-bold mb-1">{r.title}</h4>
+                      {r.snippet && (
+                        <p className="text-[10px] text-neutral-500 leading-relaxed line-clamp-2">{r.snippet}</p>
+                      )}
+                      {r.author && (
+                        <p className="text-[9px] text-neutral-600 mt-1">{r.author}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -229,16 +331,17 @@ export default function App() {
       {menuOpen && (
         <div className="fixed inset-0 z-40 bg-black pt-24 px-8 space-y-6">
           {[
-            { label: 'Edition Feed', view: 'feed' },
-            { label: 'City Council', view: 'council' },
-            { label: 'Initiative Tracker', view: 'tracker' },
-            { label: 'Neighborhoods', view: 'neighborhoods' },
-            { label: 'Citizen Registry', view: 'citizens' },
+            { label: 'Edition Feed', view: 'feed', tab: 'EDITION' },
+            { label: 'City Council', view: 'council', tab: 'COUNCIL' },
+            { label: 'Initiative Tracker', view: 'tracker', tab: 'TRACKER' },
+            { label: 'Story Intel', view: 'intel', tab: 'INTEL' },
+            { label: 'Neighborhoods', view: 'neighborhoods', tab: 'CITY' },
+            { label: 'Article Search', view: 'search', tab: 'SEARCH' },
           ].map(item => (
             <div
               key={item.view}
               className="group cursor-pointer"
-              onClick={() => { setView(item.view); setMenuOpen(false); }}
+              onClick={() => { setView(item.view); setActiveTab(item.tab); setMenuOpen(false); }}
             >
               <span className="text-4xl font-black uppercase tracking-tighter group-hover:text-sky-500 transition-colors">
                 {item.label}
@@ -276,12 +379,12 @@ export default function App() {
         </section>
 
         {/* TAB BAR */}
-        <div className="flex gap-4 border-b border-white/5 mb-6">
-          {['EDITION', 'COUNCIL', 'TRACKER', 'CITY'].map(tab => (
+        <div className="flex gap-3 border-b border-white/5 mb-6 overflow-x-auto no-scrollbar">
+          {['EDITION', 'COUNCIL', 'TRACKER', 'INTEL', 'CITY', 'SEARCH'].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-2 text-[10px] font-black tracking-widest uppercase transition-colors ${activeTab === tab ? 'text-white border-b-2 border-sky-500' : 'text-neutral-500'}`}
+              className={`pb-2 text-[10px] font-black tracking-widest uppercase transition-colors whitespace-nowrap ${activeTab === tab ? 'text-white border-b-2 border-sky-500' : 'text-neutral-500'}`}
             >
               {tab}
             </button>
@@ -306,7 +409,6 @@ export default function App() {
         {/* COUNCIL TAB */}
         {activeTab === 'COUNCIL' && (
           <section className="space-y-4">
-            {/* Mayor first */}
             {councilMembers.filter(c => c.officeId === 'MAYOR-01').map(m => (
               <div key={m.officeId} className="p-5 bg-neutral-900/60 rounded-2xl border border-sky-500/20">
                 <div className="flex justify-between items-start mb-2">
@@ -317,7 +419,6 @@ export default function App() {
                 <p className="text-xs text-neutral-500 mt-1">{m.notes}</p>
               </div>
             ))}
-            {/* Council grid */}
             <div className="grid grid-cols-1 gap-3">
               {councilMembers.filter(c => c.officeId?.startsWith('COUNCIL-')).map(m => (
                 <div key={m.officeId} className="p-4 bg-neutral-900/40 rounded-xl border border-white/5 flex justify-between items-center">
@@ -336,8 +437,6 @@ export default function App() {
                 </div>
               ))}
             </div>
-
-            {/* Faction summary */}
             <div className="p-4 bg-black rounded-xl border border-white/5 mt-4">
               <h4 className="text-[10px] font-black uppercase tracking-widest text-neutral-500 mb-3">Faction Breakdown</h4>
               <div className="flex gap-4">
@@ -357,10 +456,9 @@ export default function App() {
           </section>
         )}
 
-        {/* TRACKER TAB — Civic Initiatives */}
+        {/* TRACKER TAB */}
         {activeTab === 'TRACKER' && (
           <section className="space-y-4">
-            {/* Summary badges */}
             {initiatives?.summary && (
               <div className="grid grid-cols-4 gap-2 mb-4">
                 <StatusBadge label="Blocked" count={initiatives.summary.blocked} color="red" />
@@ -369,11 +467,9 @@ export default function App() {
                 <StatusBadge label="Active" count={initiatives.summary.inProgress} color="green" />
               </div>
             )}
-
             {(initiatives?.initiatives || []).map(init => (
               <InitiativeCard key={init.id} initiative={init} />
             ))}
-
             {initiatives?.lastUpdated && (
               <p className="text-[9px] text-neutral-600 text-center mt-6 font-mono">
                 Last updated: {initiatives.lastUpdated} by {initiatives.updatedBy}
@@ -382,7 +478,49 @@ export default function App() {
           </section>
         )}
 
-        {/* CITY TAB — Neighborhoods */}
+        {/* INTEL TAB — Hooks, Arcs, Storylines */}
+        {activeTab === 'INTEL' && (
+          <section className="space-y-6">
+            {/* Story Hooks */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <Zap size={14} className="text-amber-400" />
+                <h3 className="text-xs font-black uppercase tracking-widest">Story Hooks</h3>
+                <span className="text-[9px] font-mono text-neutral-600">{hooks?.total || 0}</span>
+              </div>
+              {(hooks?.hooks || []).slice(0, 10).map((hook, i) => (
+                <HookCard key={i} hook={hook} />
+              ))}
+              {!hooks && <p className="text-[10px] text-neutral-600">Loading...</p>}
+            </div>
+
+            {/* Active Arcs */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <GitBranch size={14} className="text-purple-400" />
+                <h3 className="text-xs font-black uppercase tracking-widest">Active Arcs</h3>
+                <span className="text-[9px] font-mono text-neutral-600">{arcs?.total || 0}</span>
+              </div>
+              {(arcs?.arcs || []).slice(0, 10).map((arc, i) => (
+                <ArcCard key={i} arc={arc} />
+              ))}
+            </div>
+
+            {/* Storylines */}
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <BookOpen size={14} className="text-emerald-400" />
+                <h3 className="text-xs font-black uppercase tracking-widest">Active Storylines</h3>
+                <span className="text-[9px] font-mono text-neutral-600">{storylines?.total || 0}</span>
+              </div>
+              {(storylines?.storylines || []).slice(0, 15).map((sl, i) => (
+                <StorylineCard key={i} storyline={sl} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* CITY TAB */}
         {activeTab === 'CITY' && (
           <section className="space-y-3">
             {hoods.sort((a, b) => b.sentiment - a.sentiment).map(h => (
@@ -410,6 +548,11 @@ export default function App() {
           </section>
         )}
 
+        {/* SEARCH TAB — Dedicated article search */}
+        {activeTab === 'SEARCH' && (
+          <ArticleSearchView />
+        )}
+
         {/* KEY CITIZENS */}
         {activeTab === 'EDITION' && tier1.length > 0 && (
           <section className="mt-12 mb-8">
@@ -420,7 +563,9 @@ export default function App() {
             </div>
             <div className="grid grid-cols-2 gap-3">
               {tier1.slice(0, 12).map(c => (
-                <div key={c.popId} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
+                <div key={c.popId} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 cursor-pointer hover:border-sky-500/30 transition-colors"
+                  onClick={() => { setSearchOpen(true); loadCitizenDetail(c.popId); }}
+                >
                   <div className="text-xs font-bold">{c.firstName} {c.lastName}</div>
                   <div className="text-[9px] text-neutral-500 mt-0.5">{c.role}</div>
                   <div className="text-[8px] text-neutral-600 mt-0.5">{c.neighborhood}</div>
@@ -433,11 +578,12 @@ export default function App() {
 
       {/* BOTTOM NAV */}
       <nav className="fixed bottom-6 inset-x-6 h-16 bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full flex items-center justify-around px-4 shadow-2xl z-50 max-w-lg mx-auto">
-        <NavButton icon={Newspaper} active={view === 'feed'} onClick={() => { setView('feed'); setActiveTab('EDITION'); }} />
-        <NavButton icon={Shield} active={view === 'council'} onClick={() => { setView('council'); setActiveTab('COUNCIL'); }} />
-        <NavButton icon={Landmark} active={view === 'tracker'} onClick={() => { setView('tracker'); setActiveTab('TRACKER'); }} />
-        <NavButton icon={MapPin} active={view === 'neighborhoods'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />
-        <NavButton icon={Users} active={view === 'citizens'} onClick={() => { setSearchOpen(true); }} />
+        <NavButton icon={Newspaper} active={activeTab === 'EDITION'} onClick={() => { setView('feed'); setActiveTab('EDITION'); }} />
+        <NavButton icon={Shield} active={activeTab === 'COUNCIL'} onClick={() => { setView('council'); setActiveTab('COUNCIL'); }} />
+        <NavButton icon={Landmark} active={activeTab === 'TRACKER'} onClick={() => { setView('tracker'); setActiveTab('TRACKER'); }} />
+        <NavButton icon={Zap} active={activeTab === 'INTEL'} onClick={() => { setView('intel'); setActiveTab('INTEL'); }} />
+        <NavButton icon={Search} active={activeTab === 'SEARCH'} onClick={() => { setView('search'); setActiveTab('SEARCH'); }} />
+        <NavButton icon={MapPin} active={activeTab === 'CITY'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />
       </nav>
     </div>
   );
@@ -446,11 +592,7 @@ export default function App() {
 // --- Components ---
 
 function MetricCard({ label, value, color, icon }) {
-  const colorMap = {
-    sky: 'text-sky-500',
-    amber: 'text-amber-500',
-    neutral: 'text-neutral-500',
-  };
+  const colorMap = { sky: 'text-sky-500', amber: 'text-amber-500', neutral: 'text-neutral-500' };
   return (
     <div className="p-4 bg-neutral-900 rounded-2xl border border-white/5">
       <div className={`text-[10px] font-bold uppercase mb-1 ${colorMap[color] || colorMap.neutral}`}>{label}</div>
@@ -462,15 +604,10 @@ function MetricCard({ label, value, color, icon }) {
 function ArticleCard({ article, isFirst }) {
   const [expanded, setExpanded] = useState(false);
   const sectionColors = {
-    'FRONT PAGE': 'text-sky-500',
-    'CIVIC AFFAIRS': 'text-emerald-500',
-    'SPORTS': 'text-amber-500',
-    'CULTURE & COMMUNITY': 'text-purple-500',
-    'BUSINESS TICKER': 'text-orange-500',
-    'CHICAGO BUREAU': 'text-red-500',
-    'LETTERS TO THE EDITOR': 'text-neutral-400',
+    'FRONT PAGE': 'text-sky-500', 'CIVIC AFFAIRS': 'text-emerald-500', 'SPORTS': 'text-amber-500',
+    'CULTURE & COMMUNITY': 'text-purple-500', 'BUSINESS TICKER': 'text-orange-500',
+    'CHICAGO BUREAU': 'text-red-500', 'LETTERS TO THE EDITOR': 'text-neutral-400',
   };
-
   const bodyLines = (article.body || '').split('\n').filter(l => l.trim());
   const summary = bodyLines[0] || '';
 
@@ -491,21 +628,11 @@ function ArticleCard({ article, isFirst }) {
         <h3 className={`text-xl font-black leading-tight tracking-tight mb-1 uppercase italic transition-colors ${expanded ? 'text-sky-400' : 'group-hover:text-sky-400'}`}>
           {article.title}
         </h3>
-        {article.subtitle && (
-          <p className="text-xs text-neutral-400 italic mb-3">{article.subtitle}</p>
-        )}
-
-        {!expanded && (
-          <p className="text-sm text-neutral-400 leading-relaxed mb-6 line-clamp-3">
-            {summary}
-          </p>
-        )}
-
+        {article.subtitle && <p className="text-xs text-neutral-400 italic mb-3">{article.subtitle}</p>}
+        {!expanded && <p className="text-sm text-neutral-400 leading-relaxed mb-6 line-clamp-3">{summary}</p>}
         {expanded && (
           <div className="mt-4 space-y-3">
-            {bodyLines.map((line, i) => (
-              <p key={i} className="text-sm text-neutral-300 leading-relaxed">{line}</p>
-            ))}
+            {bodyLines.map((line, i) => <p key={i} className="text-sm text-neutral-300 leading-relaxed">{line}</p>)}
             {article.namesIndex && (
               <div className="pt-3 border-t border-white/5">
                 <span className="text-[9px] font-black text-neutral-600 uppercase tracking-widest">Names Index: </span>
@@ -514,7 +641,6 @@ function ArticleCard({ article, isFirst }) {
             )}
           </div>
         )}
-
         {article.author && (
           <div className={`flex items-center justify-between pt-4 border-t border-white/5 ${expanded ? 'mt-4' : ''}`}>
             <div className="flex items-center gap-2">
@@ -523,9 +649,7 @@ function ArticleCard({ article, isFirst }) {
               </div>
               <div>
                 <span className="text-[10px] font-bold text-neutral-400">{article.author}</span>
-                {article.desk && (
-                  <span className="text-[9px] text-neutral-600 block">{article.desk}</span>
-                )}
+                {article.desk && <span className="text-[9px] text-neutral-600 block">{article.desk}</span>}
               </div>
             </div>
             <div className={`p-2 rounded-full transition-all ${expanded ? 'bg-sky-500 text-black rotate-90' : 'bg-white/5'}`}>
@@ -535,6 +659,251 @@ function ArticleCard({ article, isFirst }) {
         )}
       </div>
     </div>
+  );
+}
+
+function HookCard({ hook }) {
+  const [expanded, setExpanded] = useState(false);
+  const domainColors = {
+    CIVIC: 'text-emerald-400', ECONOMIC: 'text-orange-400', CRIME: 'text-red-400',
+    HEALTH: 'text-pink-400', CULTURE: 'text-purple-400', SPORTS: 'text-amber-400',
+    NIGHTLIFE: 'text-violet-400',
+  };
+  return (
+    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 mb-2 cursor-pointer hover:border-amber-500/20 transition-colors"
+      onClick={() => setExpanded(!expanded)}>
+      <div className="flex justify-between items-start mb-1">
+        <div className="flex items-center gap-2">
+          <span className={`text-[9px] font-black uppercase ${domainColors[hook.domain] || 'text-neutral-500'}`}>{hook.domain}</span>
+          {hook.neighborhood && <span className="text-[9px] text-neutral-600">{hook.neighborhood}</span>}
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-[9px] font-mono text-amber-500">P{hook.priorityScore || hook.priority}</span>
+          <span className="text-[8px] px-1.5 py-0.5 rounded bg-neutral-800 text-neutral-400">{hook.hookType}</span>
+        </div>
+      </div>
+      <p className={`text-[11px] text-neutral-300 leading-relaxed ${expanded ? '' : 'line-clamp-2'}`}>{hook.text}</p>
+      {expanded && hook.suggestedDesks && (
+        <p className="text-[9px] text-sky-500 mt-2">Desk: {hook.suggestedDesks}</p>
+      )}
+    </div>
+  );
+}
+
+function ArcCard({ arc }) {
+  const phaseColors = { early: 'text-sky-400', rising: 'text-amber-400', peak: 'text-red-400', falling: 'text-purple-400', resolved: 'text-green-400' };
+  const tension = parseFloat(arc.tension) || 0;
+  const tensionWidth = Math.min(100, (tension / 5) * 100);
+  return (
+    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 mb-2">
+      <div className="flex justify-between items-start mb-1">
+        <div className="flex items-center gap-2">
+          <span className="text-[9px] font-black uppercase text-purple-400">{arc.domain}</span>
+          <span className={`text-[9px] font-bold ${phaseColors[arc.phase] || 'text-neutral-500'}`}>{arc.phase}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          {arc.neighborhood && <span className="text-[9px] text-neutral-600">{arc.neighborhood}</span>}
+          <span className="text-[9px] font-mono text-neutral-500">age {arc.arcAge}</span>
+        </div>
+      </div>
+      <p className="text-[11px] text-neutral-300 mb-2">{arc.summary}</p>
+      <div className="flex items-center gap-2">
+        <span className="text-[8px] text-neutral-600 uppercase">Tension</span>
+        <div className="flex-1 h-1 bg-neutral-800 rounded-full overflow-hidden">
+          <div className={`h-full rounded-full ${tension > 3 ? 'bg-red-500' : tension > 2 ? 'bg-amber-500' : 'bg-sky-500'}`}
+            style={{ width: `${tensionWidth}%` }} />
+        </div>
+        <span className="text-[9px] font-mono text-neutral-500">{tension.toFixed(1)}</span>
+      </div>
+    </div>
+  );
+}
+
+function StorylineCard({ storyline }) {
+  const priorityColors = { high: 'text-red-400', medium: 'text-amber-400', low: 'text-neutral-500' };
+  return (
+    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 mb-2">
+      <div className="flex justify-between items-start mb-1">
+        <span className={`text-[9px] font-black uppercase ${priorityColors[storyline.priority] || 'text-neutral-500'}`}>
+          {storyline.priority} · {storyline.type}
+        </span>
+        <span className="text-[9px] font-mono text-neutral-600">C{storyline.cycleAdded}</span>
+      </div>
+      <p className="text-[11px] text-neutral-300 leading-relaxed">{storyline.description}</p>
+      <div className="flex gap-2 mt-1.5">
+        {storyline.relatedCitizens && <span className="text-[9px] text-sky-500">{storyline.relatedCitizens}</span>}
+        {storyline.neighborhood && <span className="text-[9px] text-neutral-600">{storyline.neighborhood}</span>}
+        {storyline.desks?.length > 0 && (
+          <span className="text-[8px] text-neutral-600">{storyline.desks.join(', ')}</span>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function CitizenDetailPanel({ detail, coverage, onClose }) {
+  const l = detail.ledger || {};
+  const name = `${l.First || ''} ${l.Last || ''}`.trim() || detail.popId;
+
+  return (
+    <div className="mt-4 p-5 bg-neutral-900 rounded-2xl border border-sky-500/20">
+      <div className="flex justify-between items-start mb-3">
+        <div>
+          <h3 className="text-lg font-black">{name}</h3>
+          <span className="text-[9px] font-mono text-sky-500">{detail.popId}</span>
+        </div>
+        <button onClick={onClose} className="text-neutral-500 hover:text-white">
+          <X size={16} />
+        </button>
+      </div>
+
+      {/* Ledger data */}
+      {l.First && (
+        <div className="grid grid-cols-2 gap-2 mb-4">
+          <MiniDetail label="Tier" value={l.Tier} />
+          <MiniDetail label="Role" value={l.RoleType} />
+          <MiniDetail label="Neighborhood" value={l.Neighborhood} />
+          <MiniDetail label="Status" value={l.Status} />
+          <MiniDetail label="Birth Year" value={l.BirthYear} />
+          <MiniDetail label="Origin" value={l.OriginGame || l.OriginVault || 'Engine'} />
+          {l.ClockMode && <MiniDetail label="Clock" value={l.ClockMode} />}
+          {l.LifeHistory && <MiniDetail label="History" value={l.LifeHistory} />}
+        </div>
+      )}
+
+      {/* Voice card */}
+      {detail.voiceCard && (
+        <div className="mb-4">
+          <h4 className="text-[9px] font-black uppercase tracking-widest text-amber-400 mb-1">Archive</h4>
+          <p className="text-[10px] text-neutral-400">{detail.voiceCard.totalRefs} references across {detail.voiceCard.articles?.length || 0} sources</p>
+        </div>
+      )}
+
+      {/* Coverage trail */}
+      {coverage && coverage.totalArticles > 0 && (
+        <div>
+          <h4 className="text-[9px] font-black uppercase tracking-widest text-sky-400 mb-2">
+            Coverage Trail <span className="text-neutral-600">({coverage.totalArticles} articles, {coverage.totalMentions} mentions)</span>
+          </h4>
+          <div className="space-y-1.5 max-h-48 overflow-y-auto">
+            {coverage.trail.map((t, i) => (
+              <div key={i} className="flex items-start gap-2 p-2 bg-black/30 rounded-lg">
+                <span className="text-[9px] font-mono text-sky-500 shrink-0">E{t.cycle}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="text-[10px] text-neutral-300 font-bold truncate">{t.title}</p>
+                  <p className="text-[9px] text-neutral-500 line-clamp-1">{t.context}</p>
+                </div>
+                <span className="text-[9px] font-mono text-neutral-600 shrink-0">{t.mentions}x</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {detail.totalAppearances === 0 && !coverage?.totalArticles && (
+        <p className="text-[10px] text-neutral-600 italic">No coverage trail found</p>
+      )}
+    </div>
+  );
+}
+
+function MiniDetail({ label, value }) {
+  return (
+    <div>
+      <div className="text-[8px] font-bold text-neutral-600 uppercase">{label}</div>
+      <div className="text-[11px] text-neutral-300">{value || '—'}</div>
+    </div>
+  );
+}
+
+function ArticleSearchView() {
+  const [query, setQuery] = useState('');
+  const [authorFilter, setAuthorFilter] = useState('');
+  const [results, setResults] = useState(null);
+  const [searching, setSearching] = useState(false);
+
+  const search = async () => {
+    if (!query && !authorFilter) return;
+    setSearching(true);
+    try {
+      const params = new URLSearchParams();
+      if (query) params.set('q', query);
+      if (authorFilter) params.set('author', authorFilter);
+      params.set('limit', '40');
+      const data = await fetchAPI(`/api/search/articles?${params}`);
+      setResults(data);
+    } catch { /* ignore */ }
+    setSearching(false);
+  };
+
+  return (
+    <section className="space-y-4">
+      <div className="space-y-3">
+        <div className="flex items-center gap-3 bg-neutral-900 rounded-2xl border border-white/10 px-4 py-3">
+          <Search size={16} className="text-neutral-500 shrink-0" />
+          <input
+            type="text"
+            placeholder="Search all editions..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && search()}
+            className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-neutral-600"
+          />
+          {searching && <Loader size={14} className="text-sky-500 animate-spin" />}
+        </div>
+        <div className="flex gap-2">
+          <input
+            type="text"
+            placeholder="Filter by author..."
+            value={authorFilter}
+            onChange={(e) => setAuthorFilter(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && search()}
+            className="flex-1 bg-neutral-900 rounded-xl border border-white/5 px-3 py-2 text-xs text-white outline-none placeholder:text-neutral-600"
+          />
+          <button
+            onClick={search}
+            className="px-4 py-2 bg-sky-500 text-black text-xs font-black uppercase rounded-xl active:scale-95 transition-transform"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+
+      {results && (
+        <div>
+          <p className="text-[10px] text-neutral-500 font-mono uppercase tracking-widest mb-3">
+            {results.total} results across all editions
+          </p>
+          <div className="space-y-3">
+            {results.results.map((r, i) => (
+              <div key={i} className="p-4 bg-neutral-900/40 rounded-xl border border-white/5">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-[9px] font-mono text-sky-500 font-bold">E{r.cycle}</span>
+                  <span className="text-[9px] text-neutral-600">{r.section}</span>
+                </div>
+                <h4 className="text-sm font-bold mb-1">{r.title}</h4>
+                {r.subtitle && <p className="text-[10px] text-neutral-500 italic mb-1">{r.subtitle}</p>}
+                {r.snippet && (
+                  <p className="text-[10px] text-neutral-400 leading-relaxed line-clamp-3">{r.snippet}</p>
+                )}
+                <div className="flex gap-3 mt-2">
+                  {r.author && <span className="text-[9px] text-neutral-500">{r.author}</span>}
+                  {r.namesIndex && <span className="text-[9px] text-neutral-600 truncate max-w-[200px]">{r.namesIndex}</span>}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {!results && (
+        <div className="p-12 text-center text-neutral-600">
+          <Search size={32} className="mx-auto mb-3 opacity-30" />
+          <p className="text-sm">Search across all editions and supplementals</p>
+          <p className="text-[10px] mt-1">Full archive from Cycle 1 through current</p>
+        </div>
+      )}
+    </section>
   );
 }
 
@@ -565,7 +934,6 @@ function StatusBadge({ label, count, color }) {
 function InitiativeCard({ initiative }) {
   const [expanded, setExpanded] = useState(false);
   const impl = initiative.implementation || {};
-
   const statusConfig = {
     'blocked': { icon: AlertTriangle, color: 'text-red-400', bg: 'bg-red-500/10', border: 'border-red-500/20', label: 'BLOCKED' },
     'stalled': { icon: FileWarning, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', label: 'STALLED' },
@@ -573,15 +941,12 @@ function InitiativeCard({ initiative }) {
     'in-progress': { icon: CheckCircle2, color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20', label: 'IN PROGRESS' },
     'untracked': { icon: CircleDot, color: 'text-neutral-500', bg: 'bg-neutral-500/10', border: 'border-neutral-500/20', label: 'UNTRACKED' },
   };
-
   const cfg = statusConfig[impl.status] || statusConfig['untracked'];
   const StatusIcon = cfg.icon;
 
   return (
-    <div
-      className={`p-5 rounded-2xl border cursor-pointer transition-colors ${cfg.bg} ${cfg.border} hover:bg-neutral-900`}
-      onClick={() => setExpanded(!expanded)}
-    >
+    <div className={`p-5 rounded-2xl border cursor-pointer transition-colors ${cfg.bg} ${cfg.border} hover:bg-neutral-900`}
+      onClick={() => setExpanded(!expanded)}>
       <div className="flex justify-between items-start mb-2">
         <div className="flex items-center gap-2">
           <StatusIcon size={14} className={cfg.color} />
@@ -592,22 +957,16 @@ function InitiativeCard({ initiative }) {
           <span className="text-[9px] font-mono text-neutral-500">C{initiative.voteCycle}</span>
         </div>
       </div>
-
       <h3 className="text-base font-black tracking-tight mb-1">{initiative.name}</h3>
-
       <div className="flex gap-3 mt-2 mb-3">
         <span className="text-[10px] text-neutral-400">{initiative.vote} vote</span>
         <span className="text-[10px] text-neutral-400">{initiative.budget}</span>
-        {initiative.domain && (
-          <span className="text-[10px] text-neutral-500 capitalize">{initiative.domain}</span>
-        )}
+        {initiative.domain && <span className="text-[10px] text-neutral-500 capitalize">{initiative.domain}</span>}
         {initiative.relatedArticles?.length > 0 && (
           <span className="text-[10px] text-sky-500 font-bold">{initiative.relatedArticles.length} articles</span>
         )}
       </div>
-
       <p className="text-xs text-neutral-400 leading-relaxed">{impl.summary}</p>
-
       {expanded && (
         <div className="mt-4 pt-4 border-t border-white/5 space-y-3">
           {impl.pendingItems?.length > 0 && (
@@ -621,7 +980,6 @@ function InitiativeCard({ initiative }) {
               ))}
             </div>
           )}
-
           {impl.keyContacts?.length > 0 && (
             <div>
               <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">Key Contacts</h5>
@@ -630,14 +988,12 @@ function InitiativeCard({ initiative }) {
               ))}
             </div>
           )}
-
           {impl.newsroomNote && (
             <div className="p-3 bg-black/40 rounded-xl">
               <h5 className="text-[9px] font-black uppercase tracking-widest text-sky-500 mb-1">Newsroom Note</h5>
               <p className="text-[11px] text-neutral-300 leading-relaxed italic">{impl.newsroomNote}</p>
             </div>
           )}
-
           {initiative.relatedArticles?.length > 0 && (
             <div>
               <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">
@@ -659,7 +1015,6 @@ function InitiativeCard({ initiative }) {
               </div>
             </div>
           )}
-
           {initiative.engine?.voteBreakdown && (
             <div>
               <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-1">Vote Record</h5>

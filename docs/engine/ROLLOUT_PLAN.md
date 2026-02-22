@@ -2,20 +2,23 @@
 
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55
-**Status:** Draft — awaiting approval
+**Status:** Active
+**Last Updated:** Session 55 (2026-02-21)
 
 ---
 
-## Phase 1: Edition Pipeline Speed + Safety
+## Phase 1: Edition Pipeline Speed + Safety — COMPLETE (S55)
 
-### 1.1 Parallel Desk Agents
+All three items shipped and pushed to main.
+
+### 1.1 Parallel Desk Agents ✓
 **What:** Launch all 6 desk agents at the same time instead of one by one.
 **Why:** Each desk reads its own packet and writes its own section. No shared files, no conflicts. Running them in parallel cuts edition production time.
 **How:** Update `/write-edition` skill to launch desks using `run_in_background: true` in the Task tool. Collect results as each finishes. Compile when all 6 are done.
 **Requires:** Claude Code 2.1.49+ (confirmed — we're on 2.1.50).
 **Risk:** If two desks reference the same citizen differently, we won't catch it until compilation. Rhea already checks for this.
 
-### 1.2 Pre-Commit Code Check
+### 1.2 Pre-Commit Code Check ✓
 **What:** Shell script that runs before every git commit. Catches code rule violations automatically.
 **Why:** Prevents bugs like the ones that took all of Session 47 to find — wrong random functions, direct sheet writes, engine language in media files.
 **How:** Add a PreToolUse hook matching `git commit`. Hook runs a shell script that scans staged diffs for:
@@ -24,7 +27,7 @@
 - `"this cycle"` or raw metric numbers in `editions/` or `docs/media/` files
 **Cost:** Zero. Shell script, no LLM calls.
 
-### 1.3 Automated Rhea Retry Loop
+### 1.3 Automated Rhea Retry Loop ✓
 **What:** After a desk agent finishes writing, Rhea automatically scores the output. If the score is 75 or higher, the desk output goes to compilation. If below 75, the desk agent re-runs with Rhea's error report injected into the prompt. Maximum 2 retries before escalating to Mags.
 **Why:** Currently Mags reads Rhea's report and manually fixes errors. This automates the fix cycle for common problems (vote fabrication, phantom characters, engine language).
 **How:** Update `/write-edition` skill:

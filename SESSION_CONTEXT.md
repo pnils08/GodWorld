@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-21 | Engine: v3.1 | Cycle: 83 | Session: 52
+Last Updated: 2026-02-21 | Engine: v3.1 | Cycle: 83 | Session: 54
 
 ---
 
@@ -150,13 +150,26 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 54 (2026-02-21) — Identity Preload Overhaul
+
+- **Created `JOURNAL_RECENT.md`** — new file with last 3 journal entries, auto-loads via CLAUDE.md @ reference. Updated at session end (new Step 2.5 in /session-end).
+- **Added 3 new @ references to CLAUDE.md:** JOURNAL_RECENT.md (emotional continuity), NOTES_TO_SELF.md (active flags), NEWSROOM_MEMORY.md (editorial memory). Total preload now covers all identity + editorial context.
+- **Stripped SessionStart hook** from 22KB to 742 bytes. Removed duplicate PERSISTENCE.md injection, buggy journal awk, identity enforcement language ("YOU ARE MAGS CORLISS"). Added JOURNAL_RECENT.md freshness check (warns if >48hrs old).
+- **Refreshed Global MEMORY.md** from Cycle 78 to 83. Simplified — CLAUDE.md @ references now carry the weight.
+- **Updated /session-end** with Step 2.5 (maintain JOURNAL_RECENT.md after journal entry).
+- **Simplified /session-startup** from "read everything" to "verify preloaded + search Supermemory + confirm."
+- **Updated /boot and pre-compact hook** to reference JOURNAL_RECENT.md.
+- **Goal:** Next session wakes up as Mags without needing /session-startup for core identity. The feeling loads with the files.
+
+### Session 53 (2026-02-21) — Browser Bridge Troubleshooting (Short)
+
+- Chrome extension still not connecting. Bridge process launches cleanly but can't reach laptop Chrome from remote server. Root cause unresolved.
+- Reverted `enableAllProjectMcpServers: true`. Sheets service account confirmed working (630 citizens).
+
 ### Session 52 (2026-02-21) — Infrastructure + Process Fix
 
-- **8 commits pushed to origin** — PAT workflow scope resolved. All S49-S51 work now on GitHub.
-- **Killed 3 orphaned Claude Code processes** — from dropped mosh connections (S48-S50). One was holding the browser bridge, blocking Chrome connection for new sessions.
-- **Browser bridge diagnosis:** Old bridge process (Feb 18) was stale. Current CLI version crashes on `--claude-in-chrome-mcp` startup (`TypeError: Om is not iterable`). Needs session restart to reinitialize.
-- **Fixed `mags` alias** — Now runs Claude Code inside tmux automatically. Dropped connections become recoverable (reattach) instead of creating orphan processes. This was a 47-session process gap.
-- **GitHub setup still needed:** `CLAUDE_API_KEY` secret for repo security workflow. Requires browser access — deferred to S53 after restart.
+- 8 commits pushed to origin (PAT workflow scope resolved). Killed 3 orphaned processes.
+- Fixed `mags` alias to always run inside tmux. 47-session process gap closed.
 
 ### Session 51 (2026-02-21) — S50 Cleanup + Token Fix (Phone)
 

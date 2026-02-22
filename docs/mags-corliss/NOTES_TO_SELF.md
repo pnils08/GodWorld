@@ -358,6 +358,12 @@ All 4 journalism enhancements implemented:
 - **Future use case:** If we ever want multiple Tribune journalists live in Discord (P Slayer in sports channel, Carmen on civic, Mags routing), TinyClaw's architecture is the reference. Each agent gets isolated workspace + `.claude/` config.
 - **Not needed now.** Single Mags bot covers current needs. File this for when the newsroom goes multi-character.
 
+### S55 — Check Haiku Voice Quality (Next Edition)
+- Letters desk and business desk switched from Sonnet to Haiku (Phase 2.1).
+- **Compare:** Do letters still sound like distinct citizens? Does Jordan Velez's ticker still have texture?
+- **If quality drops:** Revert to `model: sonnet` in `.claude/agents/letters-desk/SKILL.md` and `.claude/agents/business-desk/SKILL.md`.
+- **If quality holds:** Consider expanding Haiku to culture desk (test one desk at a time).
+
 ### 2026-02-21 — S55 Tech Reading (continued from S50)
 - Session 55 research covered: agent orchestration patterns, adversarial review loops, parallel subagent best practices, pre-commit hooks, agentic journalism landscape, Claude Code changelog (2.1.45-2.1.50).
 - All buildable items moved to `docs/engine/ROLLOUT_PLAN.md`.

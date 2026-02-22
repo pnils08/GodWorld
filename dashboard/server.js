@@ -352,6 +352,125 @@ app.get('/api/editions', (req, res) => {
   res.json({ editions: files });
 });
 
+// --- Article-Initiative Cross-Reference ---
+
+function getAllEditions() {
+  const edDir = join(ROOT, 'editions');
+  if (!existsSync(edDir)) return [];
+  return readdirSync(edDir)
+    .filter(f => f.match(/^cycle_pulse_edition_\d+\.txt$/))
+    .sort((a, b) => {
+      const na = parseInt(a.match(/\d+/)[0]);
+      const nb = parseInt(b.match(/\d+/)[0]);
+      return na - nb;
+    })
+    .map(f => {
+      const text = readText(join(edDir, f));
+      const parsed = parseEdition(text);
+      return { file: f, cycle: parsed.header.cycle, articles: parsed.articles };
+    });
+}
+
+function matchArticlesToInitiatives(editions, initiatives) {
+  const results = {};
+  for (const init of initiatives) {
+    const keywords = init.keywords || [init.name];
+    const patterns = keywords.map(k => new RegExp(k.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i'));
+    results[init.id] = [];
+
+    for (const ed of editions) {
+      for (const article of ed.articles) {
+        const searchText = `${article.title || ''} ${article.subtitle || ''} ${article.body || ''}`;
+        const matched = patterns.some(p => p.test(searchText));
+        if (matched) {
+          results[init.id].push({
+            cycle: ed.cycle,
+            title: article.title,
+            section: article.section,
+            author: article.author || null,
+            desk: article.desk || null,
+          });
+        }
+      }
+    }
+  }
+  return results;
+}
+
+// Civic Initiatives — engine outcomes + editorial tracking + related articles
+app.get('/api/initiatives', (req, res) => {
+  // Layer 1: Engine data (recentOutcomes from civic desk packet)
+  const civicPackets = readdirSync(join(ROOT, 'output/desk-packets'))
+    .filter(f => f.match(/^civic_c\d+\.json$/))
+    .sort((a, b) => {
+      const na = parseInt(a.match(/\d+/)[0]);
+      const nb = parseInt(b.match(/\d+/)[0]);
+      return nb - na;
+    });
+
+  let engineOutcomes = [];
+  if (civicPackets[0]) {
+    const packet = readJSON(join(ROOT, 'output/desk-packets', civicPackets[0]));
+    if (packet?.canonReference?.recentOutcomes) {
+      engineOutcomes = packet.canonReference.recentOutcomes;
+    }
+  }
+
+  // Layer 2: Editorial tracker (manually maintained implementation status)
+  const tracker = readJSON(join(ROOT, 'output/initiative_tracker.json'));
+
+  // Layer 3: Cross-reference articles from all editions
+  const editions = getAllEditions();
+  const allTracked = tracker?.initiatives || [];
+  const articleMap = matchArticlesToInitiatives(editions, allTracked);
+
+  // Merge: engine data + editorial tracking + related articles
+  const initiatives = allTracked.map(tracked => {
+    const engine = engineOutcomes.find(e => e.initiativeId === tracked.id);
+    return {
+      ...tracked,
+      relatedArticles: articleMap[tracked.id] || [],
+      engine: engine ? {
+        voteBreakdown: engine.voteBreakdown,
+        policyDomain: engine.policyDomain,
+        affectedNeighborhoods: engine.affectedNeighborhoods,
+      } : null,
+    };
+  });
+
+  // Include any engine initiatives not in tracker
+  const trackedIds = new Set(allTracked.map(t => t.id));
+  const untrackedEngine = engineOutcomes
+    .filter(e => !trackedIds.has(e.initiativeId))
+    .map(e => ({
+      id: e.initiativeId,
+      name: e.name,
+      status: e.status,
+      voteCycle: parseInt(e.voteCycle),
+      vote: e.voteRequirement,
+      budget: e.budget,
+      domain: e.policyDomain,
+      keywords: [e.name],
+      implementation: { status: 'untracked', summary: 'No editorial tracking yet.', pendingItems: [] },
+      relatedArticles: [],
+      engine: { voteBreakdown: e.voteBreakdown, policyDomain: e.policyDomain, affectedNeighborhoods: e.affectedNeighborhoods },
+    }));
+
+  res.json({
+    lastUpdated: tracker?.lastUpdated || null,
+    updatedBy: tracker?.updatedBy || null,
+    cycle: tracker?.cycle || null,
+    initiatives: [...initiatives, ...untrackedEngine],
+    summary: {
+      total: initiatives.length + untrackedEngine.length,
+      blocked: initiatives.filter(i => i.implementation?.status === 'blocked').length,
+      stalled: initiatives.filter(i => i.implementation?.status === 'stalled').length,
+      clockRunning: initiatives.filter(i => i.implementation?.status === 'clock-running').length,
+      inProgress: initiatives.filter(i => i.implementation?.status === 'in-progress').length,
+    },
+  });
+});
+
 // Roster — Bay Tribune journalists
 app.get('/api/roster', (req, res) => {
   const roster = readJSON(join(ROOT, 'schemas/bay_tribune_roster.json'));
@@ -379,5 +498,6 @@ app.listen(PORT, () => {
   console.log(`  /api/neighborhoods  — 17 Oakland neighborhoods`);
   console.log(`  /api/edition/latest — Latest Cycle Pulse edition`);
   console.log(`  /api/editions       — All editions list`);
+  console.log(`  /api/initiatives    — Civic initiatives + implementation tracker`);
   console.log(`  /api/roster         — Bay Tribune journalist roster`);
 });

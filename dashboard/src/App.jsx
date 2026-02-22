@@ -16,6 +16,12 @@ import {
   Shield,
   Loader,
   AlertCircle,
+  Landmark,
+  CircleDot,
+  AlertTriangle,
+  CheckCircle2,
+  Timer,
+  FileWarning,
 } from 'lucide-react';
 
 // --- Data Fetching ---
@@ -41,6 +47,7 @@ export default function App() {
   const [council, setCouncil] = useState(null);
   const [neighborhoods, setNeighborhoods] = useState(null);
   const [citizens, setCitizens] = useState(null);
+  const [initiatives, setInitiatives] = useState(null);
   const [searchResults, setSearchResults] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -49,18 +56,20 @@ export default function App() {
   useEffect(() => {
     async function loadAll() {
       try {
-        const [h, e, c, n, cz] = await Promise.all([
+        const [h, e, c, n, cz, iv] = await Promise.all([
           fetchAPI('/api/health'),
           fetchAPI('/api/edition/latest'),
           fetchAPI('/api/council'),
           fetchAPI('/api/neighborhoods'),
           fetchAPI('/api/citizens?tier=1&limit=50'),
+          fetchAPI('/api/initiatives'),
         ]);
         setHealth(h);
         setEdition(e);
         setCouncil(c);
         setNeighborhoods(n);
         setCitizens(cz);
+        setInitiatives(iv);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -222,6 +231,7 @@ export default function App() {
           {[
             { label: 'Edition Feed', view: 'feed' },
             { label: 'City Council', view: 'council' },
+            { label: 'Initiative Tracker', view: 'tracker' },
             { label: 'Neighborhoods', view: 'neighborhoods' },
             { label: 'Citizen Registry', view: 'citizens' },
           ].map(item => (
@@ -267,7 +277,7 @@ export default function App() {
 
         {/* TAB BAR */}
         <div className="flex gap-4 border-b border-white/5 mb-6">
-          {['EDITION', 'COUNCIL', 'CITY'].map(tab => (
+          {['EDITION', 'COUNCIL', 'TRACKER', 'CITY'].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -347,6 +357,31 @@ export default function App() {
           </section>
         )}
 
+        {/* TRACKER TAB — Civic Initiatives */}
+        {activeTab === 'TRACKER' && (
+          <section className="space-y-4">
+            {/* Summary badges */}
+            {initiatives?.summary && (
+              <div className="grid grid-cols-4 gap-2 mb-4">
+                <StatusBadge label="Blocked" count={initiatives.summary.blocked} color="red" />
+                <StatusBadge label="Stalled" count={initiatives.summary.stalled} color="amber" />
+                <StatusBadge label="Clock" count={initiatives.summary.clockRunning} color="sky" />
+                <StatusBadge label="Active" count={initiatives.summary.inProgress} color="green" />
+              </div>
+            )}
+
+            {(initiatives?.initiatives || []).map(init => (
+              <InitiativeCard key={init.id} initiative={init} />
+            ))}
+
+            {initiatives?.lastUpdated && (
+              <p className="text-[9px] text-neutral-600 text-center mt-6 font-mono">
+                Last updated: {initiatives.lastUpdated} by {initiatives.updatedBy}
+              </p>
+            )}
+          </section>
+        )}
+
         {/* CITY TAB — Neighborhoods */}
         {activeTab === 'CITY' && (
           <section className="space-y-3">
@@ -400,6 +435,7 @@ export default function App() {
       <nav className="fixed bottom-6 inset-x-6 h-16 bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full flex items-center justify-around px-4 shadow-2xl z-50 max-w-lg mx-auto">
         <NavButton icon={Newspaper} active={view === 'feed'} onClick={() => { setView('feed'); setActiveTab('EDITION'); }} />
         <NavButton icon={Shield} active={view === 'council'} onClick={() => { setView('council'); setActiveTab('COUNCIL'); }} />
+        <NavButton icon={Landmark} active={view === 'tracker'} onClick={() => { setView('tracker'); setActiveTab('TRACKER'); }} />
         <NavButton icon={MapPin} active={view === 'neighborhoods'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />
         <NavButton icon={Users} active={view === 'citizens'} onClick={() => { setSearchOpen(true); }} />
       </nav>
@@ -424,6 +460,7 @@ function MetricCard({ label, value, color, icon }) {
 }
 
 function ArticleCard({ article, isFirst }) {
+  const [expanded, setExpanded] = useState(false);
   const sectionColors = {
     'FRONT PAGE': 'text-sky-500',
     'CIVIC AFFAIRS': 'text-emerald-500',
@@ -434,35 +471,52 @@ function ArticleCard({ article, isFirst }) {
     'LETTERS TO THE EDITOR': 'text-neutral-400',
   };
 
-  // Extract first paragraph for summary
   const bodyLines = (article.body || '').split('\n').filter(l => l.trim());
   const summary = bodyLines[0] || '';
 
   return (
-    <div className="group active:scale-[0.98] transition-transform">
+    <div className="group" onClick={() => setExpanded(!expanded)}>
       {isFirst && (
         <div className="flex items-center gap-2 mb-2">
           <span className="h-2 w-2 rounded-full bg-sky-500 animate-ping" />
           <span className="text-[9px] font-black text-sky-500 uppercase tracking-widest">Lead Story</span>
         </div>
       )}
-      <div className="p-6 bg-neutral-900/40 border border-white/10 rounded-[2rem] hover:bg-neutral-900 transition-colors">
+      <div className={`p-6 bg-neutral-900/40 border rounded-[2rem] cursor-pointer transition-colors ${expanded ? 'border-sky-500/30 bg-neutral-900' : 'border-white/10 hover:bg-neutral-900'}`}>
         <div className="flex justify-between items-start mb-4">
           <span className={`text-[10px] font-bold uppercase tracking-widest ${sectionColors[article.section] || 'text-neutral-500'}`}>
             {article.section}
           </span>
         </div>
-        <h3 className="text-xl font-black leading-tight tracking-tight mb-1 uppercase italic group-hover:text-sky-400 transition-colors">
+        <h3 className={`text-xl font-black leading-tight tracking-tight mb-1 uppercase italic transition-colors ${expanded ? 'text-sky-400' : 'group-hover:text-sky-400'}`}>
           {article.title}
         </h3>
         {article.subtitle && (
           <p className="text-xs text-neutral-400 italic mb-3">{article.subtitle}</p>
         )}
-        <p className="text-sm text-neutral-400 leading-relaxed mb-6 line-clamp-3">
-          {summary}
-        </p>
+
+        {!expanded && (
+          <p className="text-sm text-neutral-400 leading-relaxed mb-6 line-clamp-3">
+            {summary}
+          </p>
+        )}
+
+        {expanded && (
+          <div className="mt-4 space-y-3">
+            {bodyLines.map((line, i) => (
+              <p key={i} className="text-sm text-neutral-300 leading-relaxed">{line}</p>
+            ))}
+            {article.namesIndex && (
+              <div className="pt-3 border-t border-white/5">
+                <span className="text-[9px] font-black text-neutral-600 uppercase tracking-widest">Names Index: </span>
+                <span className="text-[10px] text-neutral-500">{article.namesIndex}</span>
+              </div>
+            )}
+          </div>
+        )}
+
         {article.author && (
-          <div className="flex items-center justify-between pt-4 border-t border-white/5">
+          <div className={`flex items-center justify-between pt-4 border-t border-white/5 ${expanded ? 'mt-4' : ''}`}>
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-neutral-800 border border-white/10 flex items-center justify-center font-bold text-[10px]">
                 {article.author[0]}
@@ -474,9 +528,9 @@ function ArticleCard({ article, isFirst }) {
                 )}
               </div>
             </div>
-            <button className="p-2 bg-white/5 rounded-full hover:bg-sky-500 hover:text-black transition-all">
+            <div className={`p-2 rounded-full transition-all ${expanded ? 'bg-sky-500 text-black rotate-90' : 'bg-white/5'}`}>
               <ArrowRight size={16} />
-            </button>
+            </div>
           </div>
         )}
       </div>
@@ -489,6 +543,131 @@ function MiniStat({ label, value, warn }) {
     <div>
       <div className="text-[8px] font-bold text-neutral-600 uppercase">{label}</div>
       <div className={`text-xs font-mono font-bold ${warn ? 'text-red-400' : 'text-neutral-400'}`}>{value}</div>
+    </div>
+  );
+}
+
+function StatusBadge({ label, count, color }) {
+  const colors = {
+    red: 'bg-red-500/10 text-red-400 border-red-500/20',
+    amber: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+    sky: 'bg-sky-500/10 text-sky-400 border-sky-500/20',
+    green: 'bg-green-500/10 text-green-400 border-green-500/20',
+  };
+  return (
+    <div className={`text-center p-2 rounded-xl border ${colors[color] || colors.sky}`}>
+      <div className="text-lg font-black">{count}</div>
+      <div className="text-[8px] font-bold uppercase tracking-widest">{label}</div>
+    </div>
+  );
+}
+
+function InitiativeCard({ initiative }) {
+  const [expanded, setExpanded] = useState(false);
+  const impl = initiative.implementation || {};
+
+  const statusConfig = {
+    'blocked': { icon: AlertTriangle, color: 'text-red-400', bg: 'bg-red-500/10', border: 'border-red-500/20', label: 'BLOCKED' },
+    'stalled': { icon: FileWarning, color: 'text-amber-400', bg: 'bg-amber-500/10', border: 'border-amber-500/20', label: 'STALLED' },
+    'clock-running': { icon: Timer, color: 'text-sky-400', bg: 'bg-sky-500/10', border: 'border-sky-500/20', label: 'CLOCK RUNNING' },
+    'in-progress': { icon: CheckCircle2, color: 'text-green-400', bg: 'bg-green-500/10', border: 'border-green-500/20', label: 'IN PROGRESS' },
+    'untracked': { icon: CircleDot, color: 'text-neutral-500', bg: 'bg-neutral-500/10', border: 'border-neutral-500/20', label: 'UNTRACKED' },
+  };
+
+  const cfg = statusConfig[impl.status] || statusConfig['untracked'];
+  const StatusIcon = cfg.icon;
+
+  return (
+    <div
+      className={`p-5 rounded-2xl border cursor-pointer transition-colors ${cfg.bg} ${cfg.border} hover:bg-neutral-900`}
+      onClick={() => setExpanded(!expanded)}
+    >
+      <div className="flex justify-between items-start mb-2">
+        <div className="flex items-center gap-2">
+          <StatusIcon size={14} className={cfg.color} />
+          <span className={`text-[9px] font-black uppercase tracking-widest ${cfg.color}`}>{cfg.label}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="text-[9px] font-mono text-neutral-600">{initiative.id}</span>
+          <span className="text-[9px] font-mono text-neutral-500">C{initiative.voteCycle}</span>
+        </div>
+      </div>
+
+      <h3 className="text-base font-black tracking-tight mb-1">{initiative.name}</h3>
+
+      <div className="flex gap-3 mt-2 mb-3">
+        <span className="text-[10px] text-neutral-400">{initiative.vote} vote</span>
+        <span className="text-[10px] text-neutral-400">{initiative.budget}</span>
+        {initiative.domain && (
+          <span className="text-[10px] text-neutral-500 capitalize">{initiative.domain}</span>
+        )}
+        {initiative.relatedArticles?.length > 0 && (
+          <span className="text-[10px] text-sky-500 font-bold">{initiative.relatedArticles.length} articles</span>
+        )}
+      </div>
+
+      <p className="text-xs text-neutral-400 leading-relaxed">{impl.summary}</p>
+
+      {expanded && (
+        <div className="mt-4 pt-4 border-t border-white/5 space-y-3">
+          {impl.pendingItems?.length > 0 && (
+            <div>
+              <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">Pending</h5>
+              {impl.pendingItems.map((item, i) => (
+                <div key={i} className="flex items-start gap-2 mb-1.5">
+                  <CircleDot size={10} className={`${cfg.color} mt-0.5 shrink-0`} />
+                  <span className="text-[11px] text-neutral-300">{item}</span>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {impl.keyContacts?.length > 0 && (
+            <div>
+              <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">Key Contacts</h5>
+              {impl.keyContacts.map((contact, i) => (
+                <p key={i} className="text-[11px] text-neutral-400 mb-1">{contact}</p>
+              ))}
+            </div>
+          )}
+
+          {impl.newsroomNote && (
+            <div className="p-3 bg-black/40 rounded-xl">
+              <h5 className="text-[9px] font-black uppercase tracking-widest text-sky-500 mb-1">Newsroom Note</h5>
+              <p className="text-[11px] text-neutral-300 leading-relaxed italic">{impl.newsroomNote}</p>
+            </div>
+          )}
+
+          {initiative.relatedArticles?.length > 0 && (
+            <div>
+              <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">
+                Coverage Trail <span className="text-neutral-600">({initiative.relatedArticles.length} articles)</span>
+              </h5>
+              <div className="space-y-1.5">
+                {initiative.relatedArticles.map((article, i) => (
+                  <div key={i} className="flex items-start gap-2 p-2 bg-black/30 rounded-lg">
+                    <span className="text-[9px] font-mono text-sky-500 shrink-0 mt-0.5">E{article.cycle}</span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[11px] text-neutral-300 font-bold truncate">{article.title}</p>
+                      <div className="flex gap-2 mt-0.5">
+                        {article.author && <span className="text-[9px] text-neutral-500">{article.author}</span>}
+                        {article.section && <span className="text-[9px] text-neutral-600">{article.section}</span>}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {initiative.engine?.voteBreakdown && (
+            <div>
+              <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-1">Vote Record</h5>
+              <p className="text-[10px] text-neutral-500 leading-relaxed">{initiative.engine.voteBreakdown}</p>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

@@ -187,7 +187,9 @@ Write these as Mags — with editorial authority, personal warmth, and specific 
 
 **Canon safeguard:** Agent memory informs, it does not publish. Agents use memory for continuity and error avoidance. Final compilation and canon approval always goes through Mags. Memory cannot override desk packet data or the editor's briefing.
 
-Use the Task tool to launch 6 agents simultaneously. Each agent gets:
+Use the Task tool to launch all 6 agents in a **single message** with `run_in_background: true` on each. This runs them in parallel — all 6 work simultaneously in separate contexts.
+
+Each agent gets:
 - The desk-specific skill instructions (from the individual desk skills)
 - **The desk SUMMARY file first** (`{desk}_summary_c{XX}.json`) — agents should read this before the full packet
 - The desk packet JSON (full version, reference freely)
@@ -196,18 +198,29 @@ Use the Task tool to launch 6 agents simultaneously. Each agent gets:
 
 **In the agent prompt, explicitly tell each agent:** "Read `output/desk-packets/{desk}_summary_c{XX}.json` FIRST for your overview and article plan. Reference the full packet `{desk}_c{XX}.json` freely when you need specific quotes, citizen archive, or extended data."
 
-Launch these agents in parallel (all in one message):
-1. **Civic Desk** — Carmen Delaine (lead), follows /civic-desk skill
-2. **Sports Desk** — P Slayer + Anthony, follows /sports-desk skill
-3. **Culture Desk** — Maria Keen (lead), follows /culture-desk skill
-4. **Business Desk** — Jordan Velez, follows /business-desk skill
-5. **Chicago Bureau** — Selena Grant + Talia Finch, follows /chicago-desk skill
-6. **Letters Desk** — citizen voices, follows /letters-desk skill
+**Launch ALL 6 in one message (critical — this is what makes them parallel):**
+1. **Civic Desk** — Carmen Delaine (lead), follows /civic-desk skill, `run_in_background: true`
+2. **Sports Desk** — P Slayer + Anthony, follows /sports-desk skill, `run_in_background: true`
+3. **Culture Desk** — Maria Keen (lead), follows /culture-desk skill, `run_in_background: true`
+4. **Business Desk** — Jordan Velez, follows /business-desk skill, `run_in_background: true`
+5. **Chicago Bureau** — Selena Grant + Talia Finch, follows /chicago-desk skill, `run_in_background: true`
+6. **Letters Desk** — citizen voices, follows /letters-desk skill, `run_in_background: true`
 
 Each agent writes articles + engine returns for their section.
 
+## Step 2.1: Collect Background Agent Results
+
+Each background agent returns an `output_file` path when launched. Use `TaskOutput` to check each agent's status:
+
+1. Wait briefly, then check each agent with `TaskOutput` (use `block: false` to check without waiting)
+2. As agents complete, read their output and confirm articles were produced
+3. Track which desks are done vs. still running
+4. When all 6 have returned, proceed to Step 2.5
+
+**If an agent takes too long** (no output after several minutes), check its output file with `Read` tool for progress or errors. Do not wait indefinitely — if stuck, note the failure and proceed with available desks.
+
 ## Step 2.5: Agent Retry (If Needed)
-After all 6 agents return, check if any desk produced **zero articles**. If a desk failed:
+After all 6 background agents have returned (confirmed via Step 2.1), check if any desk produced **zero articles**. If a desk failed:
 1. Log which desk(s) failed and why (ran out of turns, packet navigation issues, etc.)
 2. **Retry once** with a focused prompt: give the agent the summary file, the briefing memo, AND the base_context. With Sonnet 4.6's larger context, include the full briefing — don't strip it down. Tell it explicitly: "You have 15 turns. Write [N] articles. Your summary and briefing have everything you need. Start writing by turn 3."
 3. If the retry also fails, Mags writes the section directly using the summary data.

@@ -160,6 +160,61 @@ Verify the target path is correct.
 fi
 
 # =====================================================
+# GIT COMMIT — Pre-commit code rule check
+# =====================================================
+if echo "$COMMAND" | grep -qi "git commit"; then
+  WARNINGS=""
+
+  # Get staged diff
+  STAGED_DIFF=$(git -C /root/GodWorld diff --cached 2>/dev/null)
+
+  if [ -n "$STAGED_DIFF" ]; then
+
+    # Check 1: Math.random() — must use ctx.rng
+    RANDOM_HITS=$(echo "$STAGED_DIFF" | grep -n "^+" | grep -v "^+++" | grep "Math\.random()" || true)
+    if [ -n "$RANDOM_HITS" ]; then
+      WARNINGS="${WARNINGS}\nMath.random() detected (must use ctx.rng):\n${RANDOM_HITS}\n"
+    fi
+
+    # Check 2: Direct sheet writes outside phase10
+    SHEET_WRITES=$(echo "$STAGED_DIFF" | grep -n "^+" | grep -v "^+++" | grep -iE "getRange|setValue|setValues|appendRow" || true)
+    if [ -n "$SHEET_WRITES" ]; then
+      # Check if any staged non-phase10 JS files have sheet writes
+      STAGED_FILES=$(git -C /root/GodWorld diff --cached --name-only 2>/dev/null)
+      NON_P10=$(echo "$STAGED_FILES" | grep -v "phase10-persistence/" | grep "\.js$" || true)
+      if [ -n "$NON_P10" ]; then
+        WARNINGS="${WARNINGS}\nSheet write calls in non-Phase10 files (use write-intents):\n${NON_P10}\n"
+      fi
+    fi
+
+    # Check 3: Engine language in media/edition files
+    STAGED_FILES=$(git -C /root/GodWorld diff --cached --name-only 2>/dev/null)
+    MEDIA_FILES=$(echo "$STAGED_FILES" | grep -E "^(editions/|docs/media/)" || true)
+    if [ -n "$MEDIA_FILES" ]; then
+      for f in $MEDIA_FILES; do
+        ENGINE_LANG=$(git -C /root/GodWorld diff --cached -- "$f" 2>/dev/null | grep -n "^+" | grep -v "^+++" | grep -iE "this cycle|next cycle|cycle [0-9]" || true)
+        if [ -n "$ENGINE_LANG" ]; then
+          WARNINGS="${WARNINGS}\nEngine language in ${f}:\n${ENGINE_LANG}\n"
+        fi
+      done
+    fi
+  fi
+
+  if [ -n "$WARNINGS" ]; then
+    jq -n --arg ctx "=== PRE-COMMIT CODE CHECK ===
+$(echo -e "$WARNINGS")
+Fix these before committing, or note [skipped] in commit message if intentional.
+=== END CODE CHECK ===" '{
+      hookSpecificOutput: {
+        hookEventName: "PreToolUse",
+        additionalContext: $ctx
+      }
+    }'
+    exit 0
+  fi
+fi
+
+# =====================================================
 # Everything else — silent pass-through
 # =====================================================
 exit 0

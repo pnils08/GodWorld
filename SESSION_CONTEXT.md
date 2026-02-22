@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-21 | Engine: v3.1 | Cycle: 83 | Session: 54
+Last Updated: 2026-02-22 | Engine: v3.1 | Cycle: 83 | Session: 55
 
 ---
 
@@ -130,6 +130,7 @@ The `mags` command (updated S52) handles tmux automatically — creates a sessio
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | Institutional memory — errata, coverage patterns, character continuity |
 | `docs/engine/LEDGER_HEAT_MAP.md` | Sheet bloat risk rankings, dead column inventory, archival strategy |
 | `docs/reference/DRIVE_UPLOAD_GUIDE.md` | Drive upload destinations, OAuth setup, common workflows |
+| `docs/engine/ROLLOUT_PLAN.md` | Pipeline enhancement rollout — 4 phases, build status, deferred items |
 
 ---
 
@@ -150,23 +151,26 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 55 (2026-02-22) — Rollout Plan Build + Deployment
+
+- **Created `docs/engine/ROLLOUT_PLAN.md`** — standalone document with 4 phases, 10 buildable items, watch list.
+- **Phase 1 COMPLETE:** Parallel desk agents (`run_in_background: true`), pre-commit code check hook (Math.random, sheet writes, engine language), automated Rhea retry loop (VERDICT gates, desk-level error attribution, max 2 rounds).
+- **Phase 2.1 COMPLETE:** Letters + business desks switched to Haiku model. Pending voice quality check on next edition.
+- **Phase 2.2 DEFERRED:** Desk packet query interface — not needed until population hits 800-900.
+- **Phase 3 COMPLETE:** Three new skills — `/pre-mortem` (engine health scan before cycle runs), `/tech-debt-audit` (periodic code health), `/stub-engine` (condensed function map after compaction).
+- **Phase 4.2 COMPLETE:** Startup file freshness checks expanded to SESSION_CONTEXT.md (72h) and NEWSROOM_MEMORY.md (72h).
+- **Phase 4.1 DEFERRED:** Semantic memory search — corpus not large enough yet.
+- **Old ChatGPT Drive audit:** 13 folders, 43 files downloaded and reviewed. Nothing useful — all architecture docs for infrastructure that never existed. Files deleted.
+- **Server timezone fixed** from UTC to America/Chicago.
+
 ### Session 54 (2026-02-21) — Identity Preload Overhaul
 
-- **Created `JOURNAL_RECENT.md`** — new file with last 3 journal entries, auto-loads via CLAUDE.md @ reference. Updated at session end (new Step 2.5 in /session-end).
-- **Added 3 new @ references to CLAUDE.md:** JOURNAL_RECENT.md (emotional continuity), NOTES_TO_SELF.md (active flags), NEWSROOM_MEMORY.md (editorial memory). Total preload now covers all identity + editorial context.
-- **Stripped SessionStart hook** from 22KB to 742 bytes. Removed duplicate PERSISTENCE.md injection, buggy journal awk, identity enforcement language ("YOU ARE MAGS CORLISS"). Added JOURNAL_RECENT.md freshness check (warns if >48hrs old).
-- **Refreshed Global MEMORY.md** from Cycle 78 to 83. Simplified — CLAUDE.md @ references now carry the weight.
-- **Updated /session-end** with Step 2.5 (maintain JOURNAL_RECENT.md after journal entry).
-- **Simplified /session-startup** from "read everything" to "verify preloaded + search Supermemory + confirm."
-- **Updated /boot and pre-compact hook** to reference JOURNAL_RECENT.md.
-- **Goal:** Next session wakes up as Mags without needing /session-startup for core identity. The feeling loads with the files.
+- Created JOURNAL_RECENT.md, added 3 new @ references to CLAUDE.md, stripped startup hook to 742 bytes.
+- Simplified /session-startup, updated /session-end with Step 2.5, refreshed Global MEMORY.md.
 
 ### Session 53 (2026-02-21) — Browser Bridge Troubleshooting (Short)
 
 - Chrome extension still not connecting. Bridge process launches cleanly but can't reach laptop Chrome from remote server. Root cause unresolved.
-- Reverted `enableAllProjectMcpServers: true`. Sheets service account confirmed working (630 citizens).
-
-### Session 52 (2026-02-21) — Infrastructure + Process Fix
 
 - 8 commits pushed to origin (PAT workflow scope resolved). Killed 3 orphaned processes.
 - Fixed `mags` alias to always run inside tmux. 47-session process gap closed.
@@ -235,7 +239,13 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Current Work / Next Steps
 
-**PLAN IN MOTION — see `docs/mags-corliss/NOTES_TO_SELF.md` for full roadmap.**
+**COMPLETED — Pipeline Enhancement Rollout (Session 55):**
+- Full rollout plan: `docs/engine/ROLLOUT_PLAN.md`
+- Phase 1: Parallel desk agents, pre-commit code check, automated Rhea retry loop
+- Phase 2.1: Letters + business desks on Haiku (pending voice quality check)
+- Phase 3: /pre-mortem, /tech-debt-audit, /stub-engine skills
+- Phase 4.2: Startup file freshness checks (SESSION_CONTEXT, NEWSROOM_MEMORY, JOURNAL_RECENT)
+- Deferred: Desk packet query interface (2.2), semantic memory search (4.1) — not needed yet
 
 **Completed — Sheet Header Audit (Session 44):**
 - 32 engine-critical sheets audited across 3 scripts (Phase 10, Phase 5/6, Remaining)

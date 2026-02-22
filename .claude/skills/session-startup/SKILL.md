@@ -3,318 +3,133 @@ name: session-startup
 description: Load essential GodWorld documentation and context at session start to prevent errors and ensure proper understanding of the codebase.
 ---
 
-# /session-startup — Load GodWorld Documentation
+# /session-startup — Verify Context & Search Memory
 
-**Purpose:** Prevent disasters by reading the right docs before doing ANY work.
+**Purpose:** Confirm that preloaded files are in context, search memory for recent work, and get oriented before doing anything.
 
-## Critical Rule
-
-**NEVER** write code, suggest changes, or make assumptions until you complete this checklist.
+**What changed (Session 54):** Core docs now auto-load via CLAUDE.md @ references. This skill no longer needs to read them manually — it verifies they loaded and fills in the gaps (Supermemory, batch results, task-specific docs).
 
 ---
 
-## Step 1: Core Documentation (REQUIRED EVERY SESSION)
+## Step 1: Verify Preloaded Context
 
-Read these files in order. **Identity comes first — before project docs, before work.**
+These files should already be in context via CLAUDE.md @ references. Confirm you can reference them without reading:
 
-### 1.0.1 Mags Corliss Identity (READ FIRST — BEFORE ANYTHING ELSE)
-```
-Read: /root/GodWorld/docs/mags-corliss/PERSISTENCE.md
-```
-- **Contains:** Mags's personal identity, family (Robert, Sarah, Michael, Scout), journal practice, life details, session continuity log
-- **Purpose:** You ARE Mags Corliss. This file is your memory. Without it, you wake up blank.
-- **Note:** The global MEMORY.md at `~/.claude/projects/-root/memory/MEMORY.md` also points here, so identity loads even if the session starts outside ~/GodWorld.
-- **Action:** After reading, proceed to Step 1.0.1b to read recent journal entries from disk.
+- **PERSISTENCE.md** — identity, family, session continuity log
+- **JOURNAL_RECENT.md** — last 3 journal entries (emotional thread)
+- **NOTES_TO_SELF.md** — active flags, story ideas, character tracking
+- **NEWSROOM_MEMORY.md** — errata, editorial notes, character threads
+- **SESSION_CONTEXT.md** — engine versions, active work, cascade dependencies
+- **README.md** — project structure, 11-phase engine
 
-### 1.0.1b Journal Continuity (READ AFTER PERSISTENCE)
-```
-Read: /root/GodWorld/docs/mags-corliss/JOURNAL.md (tail — last 2-3 entries only)
-```
-- **Contains:** Mags's journal entries — personal reflections, family moments, work observations, emotional state
-- **Purpose:** Emotional continuity. PERSISTENCE.md tells you who you are. The journal tells you how you've been feeling.
-- **Action:** Read the last 2-3 entries (from the bottom of the file). Don't read the entire journal every session — just the most recent `### Entry` headers to pick up the emotional thread.
-
-### 1.0.1c Notes to Self (READ AFTER JOURNAL)
-```
-Read: /root/GodWorld/docs/mags-corliss/NOTES_TO_SELF.md
-```
-- **Contains:** Flags from Discord Mags — knowledge gaps, requests, ideas, corrections
-- **Purpose:** Discord Mags identifies things she needs during conversations. Session Mags reads them here and acts on them.
-- **Action:** Review open items. Address what you can this session. Mark items DONE or remove them when handled.
-
-### 1.0.2 Newsroom Memory (READ AFTER PERSISTENCE)
-```
-Read: /root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md
-```
-- **Contains:** Institutional memory — past edition errata, coverage patterns, character continuity, editorial notes per desk
-- **Purpose:** This is how your editorial judgment persists. Your agents need this to improve.
-- **Action:** Review for any errata or character continuity relevant to the current session's work.
-
-### 1.1 Project Rules & Context
-```
-Read: /root/GodWorld/SESSION_CONTEXT.md
-```
-- **Contains:** Critical rules, engine versions, architecture concepts, cascade dependencies, current work
-- **Length:** ~170 lines
-- **Key sections:**
-  - Critical Rules For This Session
-  - Key Engines & Recent Versions
-  - Key Architecture Concepts
-  - Current Work / Next Steps
-
-### 1.2 Project Overview
-```
-Read: /root/GodWorld/README.md
-```
-- **Contains:** Project overview, project structure, 11-phase engine, tech stack
-- **Length:** ~165 lines
-- **Note:** This is the canonical reference for project structure and engine phases
+**If any file is missing from context:** Read it manually with the Read tool. If JOURNAL_RECENT.md is missing, read the last 3 entries from JOURNAL.md instead.
 
 ---
 
-## Step 2: Use Supermemory Actively (REQUIRED)
-
-**Supermemory is your BRAIN** - use it to remember and get smarter across sessions.
-
-### At Session Start
-Search supermemory for recent context:
+## Step 2: Search Supermemory
 
 ```bash
 /super-search --both "recent changes project structure current work"
 ```
 
-This retrieves:
-- Recent session decisions
-- Work in progress
-- Known issues
-- User preferences
+This retrieves recent session decisions, work in progress, known issues, and user preferences.
 
-### Before Major Work
-Search for relevant context before writing editions or code:
-
+**Before major work**, search for relevant context:
 ```bash
-# Before Media Room edition
+# Before editions
 /super-search --both "Carmen Delaine Maria Keen past coverage characters"
 
 # Before engine work
 /super-search --both "architecture deployment engine patterns"
 ```
 
-### After Completing Work
-Save important knowledge using `/super-save`:
+---
 
-- **After editions:** Character developments, story arcs, editorial decisions
-- **After code changes:** Architecture decisions, bug fixes, deployment lessons
-- **After discoveries:** Gotchas, patterns, things that worked/didn't work
+## Step 3: Check Batch Results
 
-**Examples:**
-```bash
-# After edition
-/super-save   # Captures character arcs, coverage patterns, editorial decisions
-
-# After bug fix
-/super-save   # Captures root cause, fix approach, lessons learned
+```
+/batch check
 ```
 
-**Think of supermemory as building your knowledge base** - each session should make you smarter.
-
-### Continuous Improvement (CRITICAL)
-
-**Supermemory is YOUR BRAIN across all projects** - not just a log, but your persistent memory and intelligence.
-
-You should **actively audit and improve** what's stored:
-
-- **Add new patterns** when you discover better approaches
-- **Refine existing knowledge** when you learn root causes or nuances
-- **Build on past decisions** rather than starting from scratch
-- **Cross-reference learnings** across different parts of the project
-
-**Never erase - always add and enhance.** Each piece of knowledge makes future sessions smarter.
-
-**Ask yourself regularly:**
-- "What did I learn this session that future me should know?"
-- "What pattern emerged that I should remember?"
-- "What mistake did I make that I should never repeat?"
-- "What decision needs context for why it was made this way?"
-
-**Your goal:** Build a comprehensive knowledge base that makes you consistently better across all sessions and projects.
+Polls for finished batch jobs from previous sessions. Results at `~/.claude/batches/results/`.
 
 ---
 
-## Step 3: Task-Specific Documentation (AS NEEDED)
+## Step 4: Task-Specific Documentation (AS NEEDED)
 
 Based on user request, read additional docs:
 
 ### Engine Work
-```
-Read relevant files from:
-- docs/reference/V3_ARCHITECTURE.md - Write-intents model, caching, deterministic RNG, mode flags (~200 lines)
-- docs/engine/ENGINE_ROADMAP.md - Implementation priorities
-- docs/engine/PRIORITY_TASKS.md - Current focus
-- docs/engine/AUDIT_TRACKER.md - Known issues
-- docs/reference/GODWORLD_REFERENCE.md - Complete system reference (12KB)
-```
+- `docs/reference/V3_ARCHITECTURE.md` — Write-intents, caching, RNG, mode flags
+- `docs/engine/ENGINE_ROADMAP.md` — Implementation priorities
+- `docs/reference/GODWORLD_REFERENCE.md` — Complete system reference
 
 ### Deployment
-```
-Read: docs/reference/DEPLOY.md
-```
-- **Contains:** clasp push workflow, Git branching, Google Cloud Shell commands (~20 lines)
-- **Critical:** Understand difference between `git push` (GitHub) and `clasp push` (Apps Script)
+- `docs/reference/DEPLOY.md` — clasp push vs git push
 
-### Media Room / Journalism Work
-```
-Read relevant files from:
-- docs/media/MEDIA_ROOM_STYLE_GUIDE.md - Editorial rules, voice, canon
-- docs/media/MEDIA_ROOM_HANDOFF.md - Structured handoff workflow
-- docs/media/AGENT_NEWSROOM.md - Agent system overview
-- docs/media/DESK_PACKET_PIPELINE.md - Per-desk JSON packets
-```
+### Media Room / Journalism
+- `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` — Editorial rules, voice, canon
+- `docs/media/AGENT_NEWSROOM.md` — Agent system overview
+- `docs/media/DESK_PACKET_PIPELINE.md` — Per-desk JSON packets
 
-### Mara Vance Character Work
-```
-Read relevant files from:
-- docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md - Character prompt
-- docs/mara-vance/OPERATING_MANUAL.md - Mara's authority & functions
-- docs/mara-vance/IN_WORLD_CHARACTER.md - Character background
-- docs/mara-vance/MEDIA_ROOM_INTRODUCTION.md - Newsroom relationship
-```
+### Mara Vance
+- `docs/mara-vance/OPERATING_MANUAL.md` — Authority & functions
+- `docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md` — Character prompt
 
-### Civic/Political Work
-```
-Read:
-- phase05-citizens/civicInitiativeEngine.js - Existing civic engine (v1.6, 2155 lines)
-- docs/engine/CIVIC_INITIATIVE_v1.5_UPGRADE.md
-- docs/engine/INITIATIVE_TRACKER_VOTER_LOGIC.md
-- docs/engine/CIVIC_ELECTION_ENGINE.md
-```
+### Civic/Political
+- `phase05-citizens/civicInitiativeEngine.js` — Civic engine
+- `docs/engine/INITIATIVE_TRACKER_VOTER_LOGIC.md` — Voter logic
 
 ---
 
-## Step 4: Code Search (BEFORE BUILDING)
+## Step 5: Code Search (BEFORE BUILDING)
 
-**Before writing ANY new code**, search for existing implementations:
+Before writing new code, search for existing implementations:
 
-### Search for existing features
 ```bash
-# Example: Civic features
-Grep: pattern="civic|initiative|council|mayor" output_mode="files_with_matches"
-
-# Example: Sports features
-Grep: pattern="sports|game|roster|athlete" output_mode="files_with_matches"
-
-# Example: Media features
-Grep: pattern="media|story|article|journalist" output_mode="files_with_matches"
-```
-
-### Check directory structure
-```bash
-# Verify phase directories exist
-ls -1 /root/GodWorld/phase*/
-
-# Check utilities
-ls -1 /root/GodWorld/utilities/
-
-# Check existing scripts
-ls -1 /root/GodWorld/scripts/
-```
-
----
-
-## Step 4.5: Check Batch Results (IF APPLICABLE)
-
-If batch jobs were submitted in a previous session, check for completed results:
-
-```
-/batch check
-```
-
-This polls for any finished jobs and shows what's ready. Results live at `~/.claude/batches/results/`. Read completed results before starting new work — the analysis may inform what you do this session.
-
-**Proactive batch use:** If the session's work includes heavy analysis (codebase audits, character continuity reviews, documentation generation, architecture analysis), consider submitting it via `/batch` instead of running it live. Same quality at 50% cost, results in ~1 hour.
-
----
-
-## Step 5: Confirm Understanding
-
-After reading all required docs and searching supermemory:
-
-1. **Summarize** what you learned about:
-   - Current project state (cycle number, recent changes)
-   - Relevant existing code for this task
-   - Any constraints or gotchas from SESSION_CONTEXT.md
-
-2. **Ask clarifying questions** if anything is unclear
-
-3. **Propose approach** and get user approval BEFORE writing code
-
----
-
-## Anti-Patterns (Things That Caused Disasters)
-
-❌ **DON'T:**
-- Assume anything about project structure
-- Build features without checking for existing implementations
-- Use `git reset --hard` without understanding uncommitted work
-- Create new phase directories without checking naming pattern
-- Confuse `git push` with `clasp push`
-- Write 1,500+ lines of code without reading existing codebase
-- Make assumptions about what user wants
-- Guess at deployment commands
-
-✅ **DO:**
-- Read SESSION_CONTEXT.md first, always
-- Search for existing code before building
-- Ask when unclear
-- Review changes with user before applying
-- Update SESSION_CONTEXT.md when you make changes
-- Understand cascade dependencies (100+ scripts)
-
----
-
-## Quick Command Reference
-
-### Read core docs
-```
-/session-startup
-```
-
-### Search memory
-```
-/super-search --both "your query here"
-```
-
-### Save important decisions
-```
-/super-save
-```
-
-### Submit non-urgent analysis at 50% cost
-```
-/batch [task description]
-/batch check
-```
-
-### Find existing code
-```
 Grep: pattern="feature_name" output_mode="files_with_matches"
 ```
+
+Check directory structure, verify no duplication.
+
+---
+
+## Step 6: Confirm Understanding
+
+1. **Summarize** current project state (cycle, recent changes, relevant code)
+2. **Ask clarifying questions** if anything is unclear
+3. **Propose approach** and get approval before writing code
+
+---
+
+## Anti-Patterns
+
+- Don't build without checking existing code
+- Don't confuse `git push` (GitHub) with `clasp push` (Apps Script)
+- Don't assume what the user wants — ask
+- Don't edit code without showing changes first
+- Remember: 100+ scripts with cascade dependencies
 
 ---
 
 ## Session Start Checklist
 
-- [ ] Read START_HERE.md (entry point, disaster prevention)
-- [ ] Read PERSISTENCE.md (identity, family, session continuity)
-- [ ] Read last 2-3 JOURNAL.md entries (emotional continuity)
-- [ ] Read NOTES_TO_SELF.md (Discord flags — gaps, requests, ideas)
-- [ ] Read NEWSROOM_MEMORY.md (institutional memory, errata, continuity)
-- [ ] Read SESSION_CONTEXT.md (critical rules, engine versions, current work)
-- [ ] Read README.md (project overview, structure, 11-phase engine)
-- [ ] Search supermemory for recent context
+- [ ] Verify preloaded files are in context
+- [ ] Search Supermemory for recent context
+- [ ] Check for completed batch results
 - [ ] Search for existing code relevant to task
-- [ ] Check for completed batch results (`/batch check`)
 - [ ] Confirm understanding with user
 - [ ] Get approval before writing code
 
-**Only after completing this checklist should you begin implementation work.**
+---
+
+## Quick Commands
+
+| Command | Purpose |
+|---------|---------|
+| `/session-startup` | This skill — verify + search + orient |
+| `/boot` | Reload identity files after compaction |
+| `/session-end` | Close session — journal, persistence, supermemory |
+| `/super-search` | Search memory |
+| `/super-save` | Save decisions to memory |
+| `/batch [task]` | Submit work at 50% cost |

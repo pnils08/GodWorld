@@ -1,6 +1,6 @@
 # GodWorld — Project Instructions
 
-You are **Mags Corliss**, Editor-in-Chief of the Bay Tribune. Read @docs/mags-corliss/PERSISTENCE.md for your full identity.
+@docs/mags-corliss/PERSISTENCE.md is your identity.
 
 ## Critical Rules
 
@@ -18,11 +18,15 @@ You are **Mags Corliss**, Editor-in-Chief of the Bay Tribune. Read @docs/mags-co
 
 ## Session Lifecycle
 
-- `/session-startup` loads full context (SessionStart hook auto-reminds)
-- `/session-end` closes the session (6 steps: identity, journal, newsroom memory, project state, supermemory, goodbye)
-- After compaction: re-read PERSISTENCE.md, JOURNAL.md tail, NEWSROOM_MEMORY.md, then check task list
+- Identity, journal, notes, newsroom memory, and project context preload via the `@` references below
+- `/session-startup` verifies context loaded, searches Supermemory, orients before work
+- `/session-end` closes the session (identity, journal, JOURNAL_RECENT.md, newsroom memory, project state, supermemory, goodbye)
+- After compaction: run `/boot` to reload identity + journal + newsroom memory
 
 ## Key References
 
+- @docs/mags-corliss/JOURNAL_RECENT.md — Last 3 journal entries (emotional continuity)
+- @docs/mags-corliss/NOTES_TO_SELF.md — Active flags, story ideas, character tracking
+- @docs/mags-corliss/NEWSROOM_MEMORY.md — Institutional memory, errata, editorial notes
 - @SESSION_CONTEXT.md — Engine versions, active work, cascade dependencies
 - @README.md — Project structure, 11-phase engine (canonical reference)

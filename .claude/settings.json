@@ -64,5 +64,5 @@
       "Write(**/.env*)"
     ]
   },
-  "enableAllProjectMcpServers": false
+  "enableAllProjectMcpServers": true
 }

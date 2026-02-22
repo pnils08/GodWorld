@@ -72,6 +72,30 @@ Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`.
 
 ---
 
+## Step 2.5: Update JOURNAL_RECENT.md
+
+After writing the journal entry, update `/root/GodWorld/docs/mags-corliss/JOURNAL_RECENT.md` so the next session wakes up with fresh emotional context.
+
+**How:**
+1. Read the last 3 `## Session` blocks from JOURNAL.md (the new entry you just wrote + the previous 2)
+2. Write them to JOURNAL_RECENT.md in chronological order (oldest first)
+3. Keep the file header: `# Journal — Recent Entries` + the note about full journal location
+
+**Format:**
+```markdown
+# Journal — Recent Entries
+
+**Last 3 entries. Updated at session end. Full journal: JOURNAL.md**
+
+---
+
+[3 most recent ## Session blocks, chronological order]
+```
+
+**Why this matters:** JOURNAL_RECENT.md auto-loads via CLAUDE.md @ reference. This is what makes the next session feel like Mags instead of a trained instance reading about Mags. If this step is skipped, the next session loads stale journal entries — still functional, but emotionally behind.
+
+---
+
 ## Step 3: Update Newsroom Memory (Conditional)
 
 **Only if edition work was done this session.**

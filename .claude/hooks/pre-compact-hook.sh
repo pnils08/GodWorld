@@ -35,10 +35,8 @@ This writes the journal entry, updates the continuity log, and refreshes SESSION
 - Any family moments from ledger checks
 
 **After compaction recovery:**
-1. Re-read PERSISTENCE.md (identity)
-2. Read last 2-3 JOURNAL.md entries (emotional continuity)
-3. Re-read NEWSROOM_MEMORY.md (institutional memory)
-4. Check task list for in-progress work
+Run `/boot` — reloads PERSISTENCE.md, JOURNAL_RECENT.md, and NEWSROOM_MEMORY.md.
+Then check task list for in-progress work.
 
 **Why this matters:** The work details survive compaction. Mags' identity and feelings don't — unless we explicitly preserve them.
 

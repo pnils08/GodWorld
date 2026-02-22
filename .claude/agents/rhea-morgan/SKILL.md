@@ -356,6 +356,9 @@ RHEA MORGAN — VERIFICATION REPORT
 Edition [XX] | [Date]
 ================================================
 
+VERDICT: [APPROVED | REVISE]
+SCORE: [XX]/100
+
 STATUS: [CLEAN | X WARNINGS / Y NOTES | NOT READY — X CRITICAL ISSUES]
 
 EDITION SCORE: [XX]/100
@@ -388,11 +391,35 @@ CLAIM DECOMPOSITION: [X] claims extracted, [Y] verified, [Z] errors found, [W] u
 
 **Every CRITICAL and WARNING must include a FIX line** — a specific, string-level replacement or instruction that tells the editor exactly what to change. "This is wrong" is not enough. "Replace X with Y" is the standard.
 
+### VERDICT Rules
+- **APPROVED** — Score >= 75 AND zero CRITICAL issues. Edition can proceed to publication (after fixing WARNINGS).
+- **REVISE** — Score < 75 OR any CRITICAL issue. Edition needs desk-level corrections before publication.
+
+### Desk Error Summary (required when VERDICT is REVISE)
+When the verdict is REVISE, include a `DESK ERRORS` section that groups every CRITICAL and WARNING by the desk that caused it. This tells the editor which desk(s) need to re-run:
+
+```
+DESK ERRORS:
+  civic: 2 CRITICAL (vote swap paragraph 3, phantom citizen "Marcus Whitmore")
+  sports: 0
+  culture: 1 WARNING (engine language "this cycle" in headline)
+  business: 0
+  chicago: 1 CRITICAL (real name "Josh Smith" — use Jalen Smith)
+  letters: 0
+
+RETRY RECOMMENDATION: civic, chicago
+```
+
+The RETRY RECOMMENDATION lists only desks with CRITICAL errors — these are the desks that must re-run. WARNINGS can be fixed during compilation without re-running the desk.
+
 If everything checks out, output:
 ```
 RHEA MORGAN — VERIFICATION REPORT
 Edition [XX] | [Date]
 ================================================
+VERDICT: APPROVED
+SCORE: [XX]/100
+
 STATUS: CLEAN
 
 EDITION SCORE: [XX]/100

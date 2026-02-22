@@ -309,15 +309,30 @@ node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
 
 This gate eliminates an entire class of errors from Rhea's workload, letting her focus on narrative quality, canon consistency, and editorial checks that require judgment.
 
-## Step 4: Verification (Rhea Morgan Role)
-Run a verification pass:
-- Cross-check all citizen names against desk packet canon data
-- Verify team records and roster names
-- Check for duplicate citizens across desks
-- Flag any engine jargon that leaked into article text
-- Verify article count and total word count
+## Step 4: Verification + Automated Retry (Rhea Morgan Role)
 
-Show issues found (if any) and recommended fixes.
+Launch the `rhea-morgan` agent on the compiled edition. Rhea returns a structured report with:
+- **VERDICT: APPROVED** (score >= 75, zero CRITICALs) — proceed to Step 4.5
+- **VERDICT: REVISE** (score < 75 or CRITICALs found) — retry failing desks
+
+### If VERDICT is APPROVED:
+Show Rhea's report to the user. Fix any WARNINGS during compilation. Proceed to Step 4.5.
+
+### If VERDICT is REVISE:
+1. Read Rhea's `DESK ERRORS` section to identify which desks caused CRITICAL issues
+2. Read Rhea's `RETRY RECOMMENDATION` for which desks to re-run
+3. For each desk that needs retry:
+   - Re-launch the desk agent with the original briefing PLUS Rhea's specific error report for that desk
+   - In the retry prompt, include: "RHEA CORRECTION: [exact error description and FIX instruction]. Your previous output had this error. Fix it in your rewrite."
+   - Run retries in parallel (same `run_in_background: true` pattern as Step 2)
+4. After retried desks return, re-compile the affected sections into the edition
+5. Re-run Rhea on the updated edition
+6. **Maximum 2 retry rounds.** If Rhea still says REVISE after 2 retries, show the full error report to the user and let Mags fix manually. Log the persistent failures in NEWSROOM_MEMORY.md.
+
+### Retry rules:
+- Only re-run desks with CRITICAL errors. WARNINGS get fixed during compilation.
+- Each retry includes the previous Rhea error report so the desk knows what went wrong.
+- If the same error recurs after retry, the problem is in the data or the skill — not the agent. Escalate to Mags.
 
 ## Step 4.5: Mara Vance Audit (Canon Authority)
 

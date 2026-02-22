@@ -2,7 +2,7 @@
 name: letters-desk
 description: Letters to the Editor desk agent for The Cycle Pulse. Writes citizen voice letters responding to cycle events. Use when producing letters section of an edition.
 tools: Read, Glob, Grep
-model: sonnet
+model: haiku
 maxTurns: 15
 ---
 

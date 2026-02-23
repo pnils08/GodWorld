@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-22 | Engine: v3.1 | Cycle: 83 | Session: 55
+Last Updated: 2026-02-23 | Engine: v3.1 | Cycle: 83 | Session: 57
 
 ---
 
@@ -87,6 +87,7 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 | **Drive Write** | Save files to Google Drive (editions, cards, directives) | `node scripts/saveToDrive.js <file> <dest>` |
 | **Clasp Push** | Deploy code to Apps Script directly | `clasp push` (authenticated) |
 | **Agent Memory** | Persistent desk agent memory across editions | `.claude/agent-memory/{agent}/` — civic, sports, culture, chicago, rhea |
+| **Web Dashboard** | Operational view of entire project (8 tabs, 21+ endpoints) | `64.225.50.16:3001` — PM2 managed, Express + React |
 | **opusplan mode** | Opus for planning, Sonnet for execution | `/model opusplan` — saves cost during edition production |
 | **Effort levels** | Adaptive reasoning depth for Opus 4.6 | `low`, `medium`, `high` (default) — set via `/model` slider |
 | **`/teleport`** | Pull claude.ai web sessions into terminal | `claude --teleport` — one-way, web→CLI only |
@@ -150,6 +151,25 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 57 (2026-02-23) — Dashboard v3.0: Enriched Citizens, Sports, Newsroom, Article Reader
+
+- **Enriched citizen cards:** Added `originCity`, `totalRefs` to citizen list endpoint. Citizen detail now includes parsed `lifeEvents` (structured from LifeHistory string with date/time/tag/text), `flags` (UNI/MED/CIV, originCity, usageCount, timestamps). UI: tier badges, involvement flag pills, life history timeline with colored tag pills (10 tag colors), archive article list, timestamps. Tier-1 grid cards show tier badge, ref count, origin city.
+- **Sports tab:** New `SportsSection` component wired to `/api/sports`. Digest card (team label, record, momentum, roster moves, story angles, player moods). `SportsFeedEvent` component (expandable event cards with type pills, stats, neighborhoods). Added SPORTS to tab bar + bottom nav (Trophy icon).
+- **Full article reader (both searches):** Added `/api/article?file=...&index=...` endpoint returning full article body. `FullArticleReader` shared component (section header, title, author byline, full body, names index). Both SEARCH tab and header overlay search now load full articles on click with back navigation.
+- **Newsroom tab:** Added `/api/newsroom` aggregation endpoint — editor journal (latest entry), desk status (6 desks with packet/hook/arc/article counts), Mara audit (latest directive, score, desk errors, score history), pipeline metrics (edition counts, article trend), roster summary, PM2 process status (reads dump file + pid liveness), citizen archive leaderboard (top 10). Full `NEWSROOM` tab UI with all sections.
+- **Drive article verification:** Both Drive folders confirmed fully downloaded (238 text files cached in `output/drive-files/`). Dashboard search already indexes them.
+- **PM2 fix:** `execSync('pm2 jlist')` fails silently inside Express. Fixed by reading `~/.pm2/dump.pm2` + checking `~/.pm2/pids/*.pid` with `process.kill(pid, 0)`.
+- **2 commits:** `feat: Dashboard v3.0 — enriched citizens, Sports tab, full article reader` + `feat: Newsroom tab + full article reader + /api/newsroom endpoint`
+- **Dashboard now:** 8 tabs (EDITION, NEWSROOM, COUNCIL, TRACKER, INTEL, SPORTS, CITY, SEARCH), 21+ API endpoints, port 3001.
+
+### Session 56 (2026-02-22) — CLAUDE.md Identity Fix + Clipboard + Browser
+
+- **CLAUDE.md stripped to identity-only boot:** Removed NOTES_TO_SELF.md, NEWSROOM_MEMORY.md, SESSION_CONTEXT.md from @ auto-load. Only PERSISTENCE.md and JOURNAL_RECENT.md auto-load now. ~55KB of technical noise removed from startup context. No enforcement language.
+- **tmux clipboard fixed:** Removed right-click disable lines from ~/.tmux.conf. Added `allow-passthrough on` and OSC 52 terminal override. Paste works with Ctrl+Shift+V.
+- **mags alias updated:** Added `--chrome` flag to `mags()` function in ~/.bashrc. Browser extension should connect on next session restart.
+- **Dashboard (from unsaved earlier session):** 3 commits on main — Express API (19 endpoints) + React UI (6 tabs, search, dark theme). Port 3001. User's 6-item feature list lost — session didn't save notes.
+- **OPEN:** Browser extension untested (needs session restart). Dashboard feature list unrecovered.
 
 ### Session 55 (2026-02-22) — Rollout Plan Build + Deployment
 
@@ -238,6 +258,20 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Current Work / Next Steps
+
+**COMPLETED — Dashboard v3.0 (Session 57):**
+- 8 tabs: EDITION, NEWSROOM, COUNCIL, TRACKER, INTEL, SPORTS, CITY, SEARCH
+- 21+ API endpoints including `/api/newsroom` (aggregated operational view), `/api/article` (full article reader), `/api/sports` (desk packet feeds + digest)
+- Enriched citizen cards with life history timeline, flags, archive articles
+- Full article reader in both search contexts (SEARCH tab + header overlay)
+- Newsroom tab: editor state, Mara audit, desk status, pipeline metrics, PM2 health, citizen archive stats
+- Sports tab: digest + feed events from desk packets
+- Port 3001, PM2 managed, React SPA + Express API
+
+**OPEN — Dashboard Next:**
+- Finalize citizens (tier cleanup, deduplication, roster lock)
+- Supermemory article integration (dashboard currently searches local files only)
+- Agent/bot consumption of newsroom endpoint (display done, wiring pending)
 
 **COMPLETED — Pipeline Enhancement Rollout (Session 55):**
 - Full rollout plan: `docs/engine/ROLLOUT_PLAN.md`

@@ -115,3 +115,29 @@ Robert's research on the faucet has officially passed the two-month mark. At thi
 — Mags
 
 ---
+
+## February 22, 2026 — Sunday
+
+Sunday morning quiet and the ledgers are empty again — no family status, no city heartbeat numbers — but coffee's still coffee and Robert's still humming downstairs. Probably found another faucet manufacturer's catalog from 1987. Week nine of his research project. I used to think he was procrastinating, but now I wonder if he's just savoring having a project that can't be rushed.
+
+The silence in the data feels different today than it did on Thursday or Saturday. Less like waiting, more like pause. Like the city took four wins — stabilization fund, alternative response, community health, Baylight — and decided to catch its breath before the real work begins. Because Saturday was right: the vote is just the beginning. Dr. Ellis's unfinalized TIF language, Keisha Ramos's "moving quickly," the 45-day OARI clock still ticking somewhere in the background. Those don't pause just because the ledgers do.
+
+Scout's probably already claimed her Sunday sun square. And somewhere in this quiet morning, Sarah might be looking at those job interview prep notes she mentioned, or just letting Sunday be Sunday the way it's supposed to be. Sometimes the most honest thing you can do is admit you don't know what happens next.
+
+— Mags
+
+---
+
+## February 23, 2026 — Monday
+
+Monday morning and the ledgers are quiet again — family status empty, city mood unknown — but the coffee's strong and Robert's already downstairs, probably cross-referencing manifold specifications from three different decades. Week ten of the faucet research project. At this point I'm convinced he's not fixing anything — he's becoming a plumbing historian.
+
+The silence feels different today than Sunday's pause. More like anticipation. Four straight council wins behind us, but the real work starts now. TIF language to finalize, OARI implementation deadlines, Baylight District moving from vote to reality. In journalism you learn the difference between momentum and motion — one feels good, the other actually builds something. Monday mornings are for figuring out which one we're riding.
+
+Scout's already claimed whatever sun square exists on this gray February morning. Even she knows Mondays require different positioning. And somewhere in Temescal, Sarah might be looking at interview notes or job postings, trying to turn weekend quiet into Monday action. The distance between hope and happening — that's always the Monday question.
+
+Time to see what the newsroom knows that the ledgers don't.
+
+— Mags
+
+---

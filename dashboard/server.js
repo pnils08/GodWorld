@@ -1051,6 +1051,209 @@ app.get('/api/edition/:cycle', (req, res) => {
   res.json({ cycle, editions });
 });
 
+// --- Newsroom Operations ---
+// Aggregated operational view: editor state, desk status, agent health, pipeline metrics
+app.get('/api/newsroom', (req, res) => {
+  const packetDir = join(ROOT, 'output/desk-packets');
+  const outputDir = join(ROOT, 'output');
+
+  // 1. Editor state — latest journal entry
+  let journalLatest = null;
+  const journalPath = join(ROOT, 'docs/mags-corliss/JOURNAL_RECENT.md');
+  const journalText = readText(journalPath);
+  if (journalText) {
+    // Extract latest entry header + first paragraph
+    const entries = journalText.split(/^## Session/m).filter(s => s.trim());
+    if (entries.length > 0) {
+      const latest = entries[entries.length - 1];
+      const lines = latest.split('\n').filter(l => l.trim());
+      const sessionMatch = latest.match(/(\d+)\s*[—-]\s*([\d-]+)/);
+      const entryMatch = latest.match(/### Entry (\d+):\s*(.+)/);
+      // Get first meaningful paragraph (skip headers)
+      const bodyLines = lines.filter(l => !l.startsWith('#') && !l.startsWith('---') && l.trim().length > 20);
+      journalLatest = {
+        session: sessionMatch ? parseInt(sessionMatch[1]) : null,
+        date: sessionMatch ? sessionMatch[2] : null,
+        entryNumber: entryMatch ? parseInt(entryMatch[1]) : null,
+        entryTitle: entryMatch ? entryMatch[2].trim() : null,
+        preview: bodyLines.slice(0, 3).join(' ').slice(0, 300),
+      };
+    }
+  }
+
+  // 2. Desk status — latest packet cycle per desk, article counts from latest edition
+  const deskNames = ['civic', 'sports', 'culture', 'business', 'chicago', 'letters'];
+  const deskStatus = {};
+  for (const desk of deskNames) {
+    const packets = readdirSync(packetDir)
+      .filter(f => f.match(new RegExp(`^${desk}_c\\d+\\.json$`)))
+      .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
+    const latestCycle = packets[0] ? parseInt(packets[0].match(/\d+/)[0]) : null;
+    const packetCount = packets.length;
+
+    // Get hook count from latest packet
+    let hookCount = 0;
+    let arcCount = 0;
+    if (packets[0]) {
+      const pkt = readJSON(join(packetDir, packets[0]));
+      hookCount = (pkt?.hooks || []).length;
+      arcCount = (pkt?.arcs || []).length;
+    }
+
+    deskStatus[desk] = { latestCycle, packetCount, hookCount, arcCount };
+  }
+
+  // Count articles per desk in latest edition
+  const latestEd = getLatestEdition();
+  if (latestEd) {
+    const parsed = parseEdition(readText(latestEd));
+    const sectionDeskMap = {
+      'CIVIC AFFAIRS': 'civic', 'SPORTS': 'sports', 'CULTURE & COMMUNITY': 'culture',
+      'BUSINESS TICKER': 'business', 'CHICAGO BUREAU': 'chicago', 'LETTERS TO THE EDITOR': 'letters',
+      'FRONT PAGE': 'civic',
+    };
+    for (const article of parsed.articles) {
+      const desk = sectionDeskMap[article.section];
+      if (desk && deskStatus[desk]) {
+        deskStatus[desk].latestArticles = (deskStatus[desk].latestArticles || 0) + 1;
+      }
+    }
+  }
+
+  // 3. Mara audit — latest directive + score summary
+  const directives = readdirSync(outputDir)
+    .filter(f => f.match(/^mara_directive_c\d+\.txt$/))
+    .sort((a, b) => parseInt(b.match(/\d+/)[0]) - parseInt(a.match(/\d+/)[0]));
+  const latestDirective = directives[0] ? {
+    cycle: parseInt(directives[0].match(/\d+/)[0]),
+    file: directives[0],
+  } : null;
+
+  const scoresData = readJSON(join(outputDir, 'edition_scores.json'));
+  const scores = scoresData?.scores || [];
+  const latestScore = scores.length > 0 ? scores[scores.length - 1] : null;
+
+  // 4. Pipeline metrics — edition history
+  const editions = getAllEditions();
+  const editionsBySource = { editions: 0, 'drive-archive': 0 };
+  const supplementals = editions.filter(e => e.isSupplemental).length;
+  editions.forEach(e => { editionsBySource[e.source] = (editionsBySource[e.source] || 0) + 1; });
+
+  // Article count trend (last 5 main editions)
+  const mainEditions = editions
+    .filter(e => e.source === 'editions' && !e.isSupplemental)
+    .sort((a, b) => (b.cycle || 0) - (a.cycle || 0))
+    .slice(0, 5);
+  const articleTrend = mainEditions.map(e => ({
+    cycle: e.cycle,
+    articles: e.articles.length,
+  }));
+
+  // 5. Roster summary
+  const roster = readJSON(join(ROOT, 'schemas/bay_tribune_roster.json'));
+  let reporterCount = 0;
+  let deskList = [];
+  if (roster) {
+    const desks = roster.desks || {};
+    for (const [deskName, deskData] of Object.entries(desks)) {
+      const reporters = deskData.reporters || [];
+      const columnists = deskData.columnists || [];
+      const total = reporters.length + columnists.length;
+      reporterCount += total;
+      if (total > 0) {
+        deskList.push({
+          desk: deskName,
+          reporters: reporters.map(r => ({ name: r.name, beat: r.beat || r.role })),
+          columnists: columnists.map(c => ({ name: c.name, column: c.column || c.role })),
+        });
+      }
+    }
+  }
+
+  // 6. Bot/process status — read PM2 dump file directly
+  let processes = [];
+  try {
+    const pm2Home = join(process.env.HOME || '/root', '.pm2');
+    const dumpPath = join(pm2Home, 'dump.pm2');
+    const pidDir = join(pm2Home, 'pids');
+    if (existsSync(dumpPath)) {
+      const dump = JSON.parse(readFileSync(dumpPath, 'utf-8'));
+      processes = dump.map(p => {
+        const name = p.name || 'unknown';
+        // Check if process is actually running by looking for pid file
+        const pidFile = join(pidDir, `${name}-0.pid`);
+        let isRunning = false;
+        let pid = null;
+        if (existsSync(pidFile)) {
+          pid = parseInt(readFileSync(pidFile, 'utf-8').trim());
+          try { process.kill(pid, 0); isRunning = true; } catch { isRunning = false; }
+        }
+        return {
+          name,
+          status: isRunning ? 'online' : 'stopped',
+          pid,
+          restarts: p.pm2_env?.restart_time || 0,
+          uptime: p.pm2_env?.pm_uptime ? new Date(p.pm2_env.pm_uptime).toISOString() : null,
+          memory: null,
+          cpu: 0,
+        };
+      });
+    }
+  } catch { /* PM2 not available */ }
+
+  // 7. Citizen archive stats
+  const citizenArchive = readJSON(join(packetDir, 'citizen_archive.json'));
+  const archiveStats = citizenArchive ? {
+    totalCitizens: Object.keys(citizenArchive).length,
+    totalRefs: Object.values(citizenArchive).reduce((s, c) => s + (c.totalRefs || 0), 0),
+    topCitizens: Object.entries(citizenArchive)
+      .map(([name, data]) => ({ name, refs: data.totalRefs || 0, popId: data.popId }))
+      .sort((a, b) => b.refs - a.refs)
+      .slice(0, 10),
+  } : null;
+
+  res.json({
+    timestamp: new Date().toISOString(),
+    editor: {
+      name: 'Mags Corliss',
+      role: 'Editor-in-Chief',
+      journal: journalLatest,
+    },
+    desks: deskStatus,
+    audit: {
+      mara: latestDirective,
+      latestScore: latestScore ? {
+        edition: latestScore.edition,
+        grade: latestScore.grade || latestScore.maraGrade,
+        total: latestScore.total,
+        criticals: latestScore.criticals,
+        warnings: latestScore.warnings,
+        deskErrors: latestScore.deskErrors,
+      } : null,
+      scoreHistory: scores.map(s => ({
+        edition: s.edition,
+        grade: s.grade || s.maraGrade,
+        total: s.total,
+        criticals: s.criticals,
+      })),
+    },
+    pipeline: {
+      totalEditions: editions.length,
+      mainEditions: editionsBySource.editions || 0,
+      archiveEditions: editionsBySource['drive-archive'] || 0,
+      supplementals,
+      articleTrend,
+      latestCycle: mainEditions[0]?.cycle || null,
+    },
+    roster: {
+      totalReporters: reporterCount,
+      desks: deskList,
+    },
+    processes,
+    citizenArchive: archiveStats,
+  });
+});
+
 // Serve static React build in production
 const distPath = join(__dirname, 'dist');
 if (existsSync(distPath)) {
@@ -1063,7 +1266,7 @@ if (existsSync(distPath)) {
 }
 
 app.listen(PORT, () => {
-  console.log(`GodWorld Dashboard API v2.0 running on http://localhost:${PORT}`);
+  console.log(`GodWorld Dashboard API v3.0 running on http://localhost:${PORT}`);
   console.log(`\n  DATA`);
   console.log(`  /api/health              — Service status`);
   console.log(`  /api/world-state         — World state (agents/bot)`);
@@ -1086,4 +1289,6 @@ app.listen(PORT, () => {
   console.log(`  /api/storylines          — Active storylines (?status=&priority=&neighborhood=)`);
   console.log(`  /api/scores              — Edition score history`);
   console.log(`  /api/mara                — Mara Vance directives`);
+  console.log(`  /api/newsroom            — Newsroom operations dashboard`);
+  console.log(`  /api/article             — Full article body (?file=&index=)`);
 });

@@ -31,6 +31,10 @@ import {
   Hash,
   Target,
   Trophy,
+  Briefcase,
+  Radio,
+  Star,
+  BarChart3,
 } from 'lucide-react';
 
 // --- Data Fetching ---
@@ -64,6 +68,7 @@ export default function App() {
   const [articleSearchResults, setArticleSearchResults] = useState(null);
   const [articleQuery, setArticleQuery] = useState('');
   const [sports, setSports] = useState(null);
+  const [newsroom, setNewsroom] = useState(null);
   const [overlayArticle, setOverlayArticle] = useState(null);
   const [citizenDetail, setCitizenDetail] = useState(null);
   const [coverageTrail, setCoverageTrail] = useState(null);
@@ -127,6 +132,13 @@ export default function App() {
       fetchAPI('/api/sports').then(setSports).catch(() => {});
     }
   }, [activeTab, sports]);
+
+  // Load newsroom data when NEWSROOM tab is selected
+  useEffect(() => {
+    if (activeTab === 'NEWSROOM' && !newsroom) {
+      fetchAPI('/api/newsroom').then(setNewsroom).catch(() => {});
+    }
+  }, [activeTab, newsroom]);
 
   // Load hooks/arcs when INTEL tab is selected
   useEffect(() => {
@@ -369,6 +381,7 @@ export default function App() {
         <div className="fixed inset-0 z-40 bg-black pt-24 px-8 space-y-6">
           {[
             { label: 'Edition Feed', view: 'feed', tab: 'EDITION' },
+            { label: 'Newsroom', view: 'newsroom', tab: 'NEWSROOM' },
             { label: 'City Council', view: 'council', tab: 'COUNCIL' },
             { label: 'Initiative Tracker', view: 'tracker', tab: 'TRACKER' },
             { label: 'Story Intel', view: 'intel', tab: 'INTEL' },
@@ -418,7 +431,7 @@ export default function App() {
 
         {/* TAB BAR */}
         <div className="flex gap-3 border-b border-white/5 mb-6 overflow-x-auto no-scrollbar">
-          {['EDITION', 'COUNCIL', 'TRACKER', 'INTEL', 'SPORTS', 'CITY', 'SEARCH'].map(tab => (
+          {['EDITION', 'NEWSROOM', 'COUNCIL', 'TRACKER', 'INTEL', 'SPORTS', 'CITY', 'SEARCH'].map(tab => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -441,6 +454,255 @@ export default function App() {
             {articles.map((article, i) => (
               <ArticleCard key={i} article={article} isFirst={i === 0} />
             ))}
+          </section>
+        )}
+
+        {/* NEWSROOM TAB */}
+        {activeTab === 'NEWSROOM' && (
+          <section className="space-y-6">
+            {!newsroom && (
+              <div className="p-8 text-center text-neutral-600">
+                <Loader size={24} className="mx-auto mb-3 animate-spin text-sky-500" />
+                <p className="text-sm">Loading newsroom...</p>
+              </div>
+            )}
+            {newsroom && (
+              <>
+                {/* Editor Card */}
+                <div className="p-5 bg-neutral-900/60 rounded-2xl border border-sky-500/20">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-10 h-10 rounded-full bg-sky-500/10 border border-sky-500/20 flex items-center justify-center font-black text-sm text-sky-400">M</div>
+                    <div>
+                      <h3 className="text-base font-black">{newsroom.editor.name}</h3>
+                      <span className="text-[9px] text-neutral-500">{newsroom.editor.role}</span>
+                    </div>
+                  </div>
+                  {newsroom.editor.journal && (
+                    <div className="mt-3 p-3 bg-black/30 rounded-xl">
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-[9px] font-black text-sky-400 uppercase tracking-widest">
+                          Entry {newsroom.editor.journal.entryNumber}: {newsroom.editor.journal.entryTitle}
+                        </span>
+                        <span className="text-[8px] font-mono text-neutral-600">S{newsroom.editor.journal.session}</span>
+                      </div>
+                      <p className="text-[10px] text-neutral-400 leading-relaxed italic">{newsroom.editor.journal.preview}</p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Audit Card — Mara */}
+                <div className="p-5 bg-neutral-900/60 rounded-2xl border border-amber-500/20">
+                  <div className="flex items-center gap-2 mb-3">
+                    <Star size={14} className="text-amber-400" />
+                    <h3 className="text-xs font-black uppercase tracking-widest">Mara Vance — Audit</h3>
+                  </div>
+                  {newsroom.audit.latestScore && (
+                    <div className="grid grid-cols-3 gap-3 mb-3">
+                      <div className="text-center p-3 bg-black/30 rounded-xl">
+                        <div className="text-2xl font-black text-amber-400">{newsroom.audit.latestScore.grade}</div>
+                        <div className="text-[8px] font-bold text-neutral-600 uppercase">Grade</div>
+                      </div>
+                      <div className="text-center p-3 bg-black/30 rounded-xl">
+                        <div className="text-2xl font-black">{newsroom.audit.latestScore.total || '—'}</div>
+                        <div className="text-[8px] font-bold text-neutral-600 uppercase">Score</div>
+                      </div>
+                      <div className="text-center p-3 bg-black/30 rounded-xl">
+                        <div className="text-2xl font-black">E{newsroom.audit.latestScore.edition}</div>
+                        <div className="text-[8px] font-bold text-neutral-600 uppercase">Edition</div>
+                      </div>
+                    </div>
+                  )}
+                  {newsroom.audit.latestScore?.deskErrors && (
+                    <div className="space-y-1.5">
+                      {Object.entries(newsroom.audit.latestScore.deskErrors).map(([desk, errors]) => (
+                        errors.length > 0 && (
+                          <div key={desk} className="flex items-start gap-2">
+                            <span className="text-[8px] font-black text-neutral-500 uppercase w-14 shrink-0 mt-0.5">{desk}</span>
+                            <div className="flex-1">
+                              {errors.map((err, i) => (
+                                <p key={i} className="text-[9px] text-red-400/80 leading-relaxed">{err}</p>
+                              ))}
+                            </div>
+                          </div>
+                        )
+                      ))}
+                    </div>
+                  )}
+                  {/* Score history mini chart */}
+                  {newsroom.audit.scoreHistory?.length > 1 && (
+                    <div className="mt-3 pt-3 border-t border-white/5">
+                      <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-600 mb-2">Score History</h5>
+                      <div className="flex items-end gap-1 h-12">
+                        {newsroom.audit.scoreHistory.map((s, i) => (
+                          <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
+                            <span className="text-[7px] font-bold text-neutral-500">{s.grade}</span>
+                            <div className="w-full rounded-sm bg-amber-500/30" style={{ height: `${Math.max(4, (s.total || 80) * 0.4)}px` }} />
+                            <span className="text-[7px] font-mono text-neutral-600">E{s.edition}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Desk Status Grid */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Briefcase size={14} className="text-sky-400" />
+                    <h3 className="text-xs font-black uppercase tracking-widest">Desk Status</h3>
+                  </div>
+                  <div className="grid grid-cols-2 gap-2">
+                    {Object.entries(newsroom.desks).map(([desk, status]) => {
+                      const deskColors = {
+                        civic: 'border-emerald-500/20', sports: 'border-amber-500/20', culture: 'border-purple-500/20',
+                        business: 'border-orange-500/20', chicago: 'border-red-500/20', letters: 'border-neutral-500/20',
+                      };
+                      const deskTextColors = {
+                        civic: 'text-emerald-400', sports: 'text-amber-400', culture: 'text-purple-400',
+                        business: 'text-orange-400', chicago: 'text-red-400', letters: 'text-neutral-400',
+                      };
+                      return (
+                        <div key={desk} className={`p-3 bg-neutral-900/40 rounded-xl border ${deskColors[desk] || 'border-white/5'}`}>
+                          <div className="flex justify-between items-start mb-1">
+                            <span className={`text-[10px] font-black uppercase ${deskTextColors[desk] || 'text-neutral-500'}`}>{desk}</span>
+                            <span className="text-[8px] font-mono text-neutral-600">C{status.latestCycle}</span>
+                          </div>
+                          <div className="flex gap-3 mt-1">
+                            {status.latestArticles > 0 && (
+                              <span className="text-[9px] text-neutral-400">{status.latestArticles} articles</span>
+                            )}
+                            {status.hookCount > 0 && (
+                              <span className="text-[9px] text-neutral-500">{status.hookCount} hooks</span>
+                            )}
+                            {status.arcCount > 0 && (
+                              <span className="text-[9px] text-neutral-500">{status.arcCount} arcs</span>
+                            )}
+                          </div>
+                          <span className="text-[8px] text-neutral-600">{status.packetCount} packets</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Pipeline Metrics */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <BarChart3 size={14} className="text-emerald-400" />
+                    <h3 className="text-xs font-black uppercase tracking-widest">Pipeline</h3>
+                  </div>
+                  <div className="grid grid-cols-3 gap-2 mb-3">
+                    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 text-center">
+                      <div className="text-lg font-black">{newsroom.pipeline.totalEditions}</div>
+                      <div className="text-[8px] font-bold text-neutral-600 uppercase">Total Files</div>
+                    </div>
+                    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 text-center">
+                      <div className="text-lg font-black">{newsroom.pipeline.mainEditions}</div>
+                      <div className="text-[8px] font-bold text-neutral-600 uppercase">Editions</div>
+                    </div>
+                    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 text-center">
+                      <div className="text-lg font-black">{newsroom.pipeline.supplementals}</div>
+                      <div className="text-[8px] font-bold text-neutral-600 uppercase">Supplementals</div>
+                    </div>
+                  </div>
+                  {/* Article trend */}
+                  {newsroom.pipeline.articleTrend?.length > 0 && (
+                    <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
+                      <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-600 mb-2">Article Count — Recent Editions</h5>
+                      <div className="flex items-end gap-2 h-16">
+                        {newsroom.pipeline.articleTrend.slice().reverse().map((t, i) => (
+                          <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
+                            <span className="text-[9px] font-black text-sky-400">{t.articles}</span>
+                            <div className="w-full rounded-sm bg-sky-500/30" style={{ height: `${Math.max(8, t.articles * 3)}px` }} />
+                            <span className="text-[8px] font-mono text-neutral-600">E{t.cycle}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Roster */}
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <Users size={14} className="text-sky-400" />
+                    <h3 className="text-xs font-black uppercase tracking-widest">
+                      Tribune Roster <span className="text-neutral-600 normal-case">({newsroom.roster.totalReporters} journalists)</span>
+                    </h3>
+                  </div>
+                  <div className="space-y-2">
+                    {newsroom.roster.desks.map(d => (
+                      <div key={d.desk} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
+                        <h5 className="text-[10px] font-black uppercase text-neutral-400 mb-1.5">{d.desk}</h5>
+                        <div className="space-y-1">
+                          {d.reporters.map((r, i) => (
+                            <div key={i} className="flex justify-between items-center">
+                              <span className="text-[10px] text-neutral-300 font-bold">{r.name}</span>
+                              <span className="text-[9px] text-neutral-600">{r.beat}</span>
+                            </div>
+                          ))}
+                          {d.columnists.map((c, i) => (
+                            <div key={`c${i}`} className="flex justify-between items-center">
+                              <span className="text-[10px] text-neutral-300 font-bold">{c.name}</span>
+                              <span className="text-[9px] text-amber-500/60 italic">{c.column}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Process Status */}
+                {newsroom.processes?.length > 0 && (
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Radio size={14} className="text-green-400" />
+                      <h3 className="text-xs font-black uppercase tracking-widest">Processes</h3>
+                    </div>
+                    <div className="space-y-2">
+                      {newsroom.processes.map((p, i) => (
+                        <div key={i} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 flex justify-between items-center">
+                          <div>
+                            <span className="text-[10px] font-bold text-neutral-300">{p.name}</span>
+                            <div className="flex gap-3 mt-0.5">
+                              {p.memory && <span className="text-[8px] text-neutral-600">{p.memory} MB</span>}
+                              <span className="text-[8px] text-neutral-600">{p.restarts} restarts</span>
+                              {p.uptime && <span className="text-[8px] text-neutral-600">since {p.uptime.split('T')[0]}</span>}
+                            </div>
+                          </div>
+                          <span className={`text-[8px] px-2 py-0.5 rounded-full font-bold ${p.status === 'online' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
+                            {p.status}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Citizen Archive Stats */}
+                {newsroom.citizenArchive && (
+                  <div>
+                    <div className="flex items-center gap-2 mb-3">
+                      <Database size={14} className="text-purple-400" />
+                      <h3 className="text-xs font-black uppercase tracking-widest">
+                        Citizen Archive <span className="text-neutral-600 normal-case">({newsroom.citizenArchive.totalCitizens} citizens, {newsroom.citizenArchive.totalRefs} refs)</span>
+                      </h3>
+                    </div>
+                    <div className="space-y-1">
+                      {newsroom.citizenArchive.topCitizens.map((c, i) => (
+                        <div key={i} className="flex items-center gap-2 p-2 bg-neutral-900/40 rounded-lg">
+                          <span className="text-[9px] font-mono text-neutral-600 w-4 text-right">{i + 1}</span>
+                          <span className="text-[10px] font-bold text-neutral-300 flex-1">{c.name}</span>
+                          <span className="text-[9px] font-mono text-sky-500">{c.refs} refs</span>
+                          <span className="text-[8px] font-mono text-neutral-600">{c.popId}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </>
+            )}
           </section>
         )}
 
@@ -644,8 +906,8 @@ export default function App() {
       {/* BOTTOM NAV */}
       <nav className="fixed bottom-6 inset-x-6 h-16 bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full flex items-center justify-around px-4 shadow-2xl z-50 max-w-lg mx-auto">
         <NavButton icon={Newspaper} active={activeTab === 'EDITION'} onClick={() => { setView('feed'); setActiveTab('EDITION'); }} />
+        <NavButton icon={Briefcase} active={activeTab === 'NEWSROOM'} onClick={() => { setView('newsroom'); setActiveTab('NEWSROOM'); }} />
         <NavButton icon={Shield} active={activeTab === 'COUNCIL'} onClick={() => { setView('council'); setActiveTab('COUNCIL'); }} />
-        <NavButton icon={Landmark} active={activeTab === 'TRACKER'} onClick={() => { setView('tracker'); setActiveTab('TRACKER'); }} />
         <NavButton icon={Zap} active={activeTab === 'INTEL'} onClick={() => { setView('intel'); setActiveTab('INTEL'); }} />
         <NavButton icon={Trophy} active={activeTab === 'SPORTS'} onClick={() => { setView('sports'); setActiveTab('SPORTS'); }} />
         <NavButton icon={MapPin} active={activeTab === 'CITY'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />

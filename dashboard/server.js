@@ -915,6 +915,75 @@ function getArticleIndex() {
   } catch { return null; }
 }
 
+// --- Player Index ---
+// Returns the pre-built player index with optional filters
+let _playerIndexCache = null;
+let _playerIndexCacheTime = 0;
+
+function getPlayerIndex() {
+  const indexPath = join(ROOT, 'output/player-index.json');
+  if (!existsSync(indexPath)) return null;
+  const now = Date.now();
+  if (_playerIndexCache && now - _playerIndexCacheTime < SHEET_CACHE_TTL) return _playerIndexCache;
+  try {
+    _playerIndexCache = JSON.parse(readFileSync(indexPath, 'utf-8'));
+    _playerIndexCacheTime = now;
+    return _playerIndexCache;
+  } catch { return null; }
+}
+
+app.get('/api/players', (req, res) => {
+  const index = getPlayerIndex();
+  if (!index) {
+    return res.status(404).json({ error: 'Player index not built. Run: node scripts/buildPlayerIndex.js --write' });
+  }
+
+  let players = index.players;
+
+  const { sport, team, position, q, limit: limitStr } = req.query;
+  if (sport) players = players.filter(p => p.sport === sport);
+  if (team) players = players.filter(p => p.team?.toLowerCase().includes(team.toLowerCase()));
+  if (position) {
+    const pos = position.toUpperCase();
+    players = players.filter(p => p.position?.toUpperCase().includes(pos));
+  }
+  if (q) {
+    const pattern = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+    players = players.filter(p => pattern.test(p.name || '') || pattern.test(p.alias || ''));
+  }
+
+  const limit = parseInt(limitStr) || 100;
+  res.json({
+    generated: index.generated,
+    stats: index.stats,
+    total: players.length,
+    showing: Math.min(limit, players.length),
+    players: players.slice(0, limit),
+  });
+});
+
+app.get('/api/players/:popId', (req, res) => {
+  const { popId } = req.params;
+  const { name } = req.query;
+  const index = getPlayerIndex();
+  if (!index) {
+    return res.status(404).json({ error: 'Player index not built. Run: node scripts/buildPlayerIndex.js --write' });
+  }
+
+  // Lookup by POPID first
+  let player = index.players.find(p => p.popId?.toLowerCase() === popId.toLowerCase());
+
+  // Fallback: lookup by name (only for universe players to avoid civilian collisions)
+  if (!player && name) {
+    const pattern = new RegExp(name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+    player = index.players.find(p => pattern.test(p.name || ''));
+  }
+
+  if (!player) return res.status(404).json({ error: `Player ${popId} not found`, popId });
+
+  res.json(player);
+});
+
 app.get('/api/articles/index', (req, res) => {
   const index = getArticleIndex();
   if (!index) {
@@ -1183,6 +1252,17 @@ app.get('/api/citizens/:popId', async (req, res) => {
     if (ledgerRecord.HouseholdId) extended.householdId = ledgerRecord.HouseholdId;
   }
 
+  // Player profile enrichment — if this citizen is a universe player
+  // Uses POPID-only matching to avoid name collisions (e.g. civilian Mark Aitken POP-00003
+  // vs. dynasty player Mark Aitken POP-00020)
+  let playerProfile = null;
+  if (flags.universe) {
+    const playerIndex = getPlayerIndex();
+    if (playerIndex) {
+      playerProfile = playerIndex.players.find(p => p.popId?.toLowerCase() === popId.toLowerCase()) || null;
+    }
+  }
+
   res.json({
     popId,
     ledger: ledgerRecord,
@@ -1193,6 +1273,7 @@ app.get('/api/citizens/:popId', async (req, res) => {
     voiceCard,
     editionAppearances,
     totalAppearances: editionAppearances.length + (archiveData?.totalRefs || 0),
+    playerProfile,
   });
 });
 
@@ -1683,6 +1764,8 @@ app.listen(PORT, () => {
   console.log(`  /api/council             — Council + city staff`);
   console.log(`  /api/neighborhoods       — 17 Oakland neighborhoods`);
   console.log(`  /api/sports              — Oakland + Chicago sports feeds`);
+  console.log(`  /api/players             — Player profiles (?sport=&team=&position=&q=)`);
+  console.log(`  /api/players/:popId      — Single player profile`);
   console.log(`  /api/roster              — Bay Tribune journalist roster`);
   console.log(`\n  SEARCH`);
   console.log(`  /api/search/articles     — Full-text article search (?q=&author=&section=&citizen=&cycle=)`);

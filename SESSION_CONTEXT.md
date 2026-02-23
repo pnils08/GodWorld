@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-23 | Engine: v3.1 | Cycle: 83 | Session: 57
+Last Updated: 2026-02-23 | Engine: v3.1 | Cycle: 83 | Session: 58
 
 ---
 
@@ -87,7 +87,7 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 | **Drive Write** | Save files to Google Drive (editions, cards, directives) | `node scripts/saveToDrive.js <file> <dest>` |
 | **Clasp Push** | Deploy code to Apps Script directly | `clasp push` (authenticated) |
 | **Agent Memory** | Persistent desk agent memory across editions | `.claude/agent-memory/{agent}/` — civic, sports, culture, chicago, rhea |
-| **Web Dashboard** | Operational view of entire project (8 tabs, 21+ endpoints) | `64.225.50.16:3001` — PM2 managed, Express + React |
+| **Web Dashboard** | Operational view of entire project (8 tabs, 23+ endpoints) | `64.225.50.16:3001` — PM2 managed, Express + React |
 | **opusplan mode** | Opus for planning, Sonnet for execution | `/model opusplan` — saves cost during edition production |
 | **Effort levels** | Adaptive reasoning depth for Opus 4.6 | `low`, `medium`, `high` (default) — set via `/model` slider |
 | **`/teleport`** | Pull claude.ai web sessions into terminal | `claude --teleport` — one-way, web→CLI only |
@@ -151,6 +151,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 58 (2026-02-23) — Player Profiles System + Course Correction
+
+- **Player index builder:** New `scripts/buildPlayerIndex.js` — parses 97 data files from `archive/non-articles/data/` across 4 file types (A's TrueSource DataPages, Statcast Player Cards, POP-ID DataPages, Bulls TrueSource Profiles). Merges multi-file players by normalized name. 55 players indexed (52 baseball, 3 basketball), 31 with season stats, 12 with Statcast data, 5 with canonical POPIDs. Supports `--dry-run` and `--write`.
+- **New endpoints:** `/api/players` (full index, filters: sport, team, position, name search), `/api/players/:popId` (single player profile). Cached with SHEET_CACHE_TTL.
+- **Citizen enrichment:** `/api/citizens/:popId` gains `playerProfile` field when `flags.universe === true`. POPID-only matching to avoid name collisions (civilian Mark Aitken POP-00003 vs. dynasty player Mark Aitken POP-00020).
+- **1 commit:** `feat: Player Profiles — index builder, API endpoints, citizen enrichment`
+- **OPEN ISSUES FLAGGED BY USER:** (1) Newsroom tab serves editor journal — not Oakland data, useless to users. (2) Drive file reorganization never executed — article indexer maps filenames but doesn't rename/move. (3) Agents and bot don't query the API — the whole point of the endpoints. (4) Dashboard drifting toward system status app instead of Oakland app. (5) Six sessions of drift from user's vision. These must be addressed before building more features.
 
 ### Session 57 (2026-02-23) — Dashboard v3.0: Enriched Citizens, Sports, Newsroom, Article Reader
 

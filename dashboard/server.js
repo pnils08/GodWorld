@@ -222,6 +222,13 @@ app.get('/api/citizens', (req, res) => {
   const rows = parseTSV(simText);
   const { tier, neighborhood, search, limit: limitStr } = req.query;
 
+  // Load citizen archive for ref counts
+  const citizenArchiveForList = readJSON(join(ROOT, 'output/desk-packets/citizen_archive.json')) || {};
+  const refCountMap = {};
+  for (const [name, data] of Object.entries(citizenArchiveForList)) {
+    if (data.popId) refCountMap[data.popId.toLowerCase()] = data.totalRefs || 0;
+  }
+
   let citizens = rows.map(r => ({
     popId: r.POPID,
     firstName: r.First,
@@ -233,6 +240,8 @@ app.get('/api/citizens', (req, res) => {
     neighborhood: r.Neighborhood,
     source: r.OriginGame || r.OriginVault || 'engine',
     clockMode: r.ClockMode,
+    originCity: r.OrginCity || null,
+    totalRefs: refCountMap[r.POPID?.toLowerCase()] || 0,
   }));
 
   if (tier) citizens = citizens.filter(c => c.tier === parseInt(tier));
@@ -608,6 +617,7 @@ app.get('/api/search/articles', (req, res) => {
         results.push({
           cycle: ed.cycle,
           file: ed.file,
+          articleIndex: ed.articles.indexOf(article),
           title: article.title,
           subtitle: article.subtitle || null,
           section: article.section,
@@ -627,6 +637,36 @@ app.get('/api/search/articles', (req, res) => {
     total: results.length,
     showing: Math.min(limit, results.length),
     results: results.slice(0, limit),
+  });
+});
+
+// --- Full Article ---
+// Retrieve a single article's full body by file + articleIndex
+app.get('/api/article', (req, res) => {
+  const { file, index } = req.query;
+  if (!file || index === undefined) {
+    return res.status(400).json({ error: 'Provide file and index params' });
+  }
+
+  const editions = getAllEditions();
+  const ed = editions.find(e => e.file === file);
+  if (!ed) return res.status(404).json({ error: `Edition file not found: ${file}` });
+
+  const articleIdx = parseInt(index);
+  const article = ed.articles[articleIdx];
+  if (!article) return res.status(404).json({ error: `Article index ${index} not found in ${file}` });
+
+  res.json({
+    cycle: ed.cycle,
+    file: ed.file,
+    source: ed.source,
+    title: article.title,
+    subtitle: article.subtitle || null,
+    section: article.section,
+    author: article.author || null,
+    desk: article.desk || null,
+    namesIndex: article.namesIndex || null,
+    body: article.body || '',
   });
 });
 
@@ -710,9 +750,50 @@ app.get('/api/citizens/:popId', (req, res) => {
     return res.status(404).json({ error: `Citizen ${popId} not found`, popId });
   }
 
+  // Parse LifeHistory into structured events
+  let lifeEvents = [];
+  if (ledgerRecord?.LifeHistory) {
+    // Format: "2025-12-27 14:59 — [Education] paid closer attention..." or "Engine Event: Promoted to Tier 2"
+    const raw = ledgerRecord.LifeHistory;
+    // Split on date-stamped entries
+    const parts = raw.split(/(?=\d{4}-\d{2}-\d{2})|(?=Engine Event:)/g).filter(s => s.trim());
+    for (const part of parts) {
+      const dateMatch = part.match(/^(\d{4}-\d{2}-\d{2})\s+(\d{2}:\d{2})?\s*[—-]*\s*(?:\[(\w+)\])?\s*(.*)/);
+      if (dateMatch) {
+        lifeEvents.push({
+          date: dateMatch[1],
+          time: dateMatch[2] || null,
+          tag: dateMatch[3] || 'General',
+          text: dateMatch[4]?.trim() || part.trim(),
+        });
+      } else {
+        const engineMatch = part.match(/^Engine Event:\s*(.*)/);
+        if (engineMatch) {
+          lifeEvents.push({ date: null, time: null, tag: 'Engine', text: engineMatch[1].trim() });
+        } else if (part.trim()) {
+          lifeEvents.push({ date: null, time: null, tag: 'General', text: part.trim() });
+        }
+      }
+    }
+  }
+
+  // Extract flags
+  const flags = {};
+  if (ledgerRecord) {
+    flags.universe = ledgerRecord['UNI (y/n)']?.toLowerCase() === 'yes';
+    flags.media = ledgerRecord['MED (y/n)']?.toLowerCase() === 'yes';
+    flags.civic = ledgerRecord['CIV (y/n)']?.toLowerCase() === 'yes';
+    flags.originCity = ledgerRecord.OrginCity || null;
+    flags.usageCount = parseInt(ledgerRecord.UsageCount) || 0;
+    flags.createdAt = ledgerRecord.CreatedAt || null;
+    flags.lastUpdated = ledgerRecord['Last Updated'] || null;
+  }
+
   res.json({
     popId,
     ledger: ledgerRecord,
+    flags,
+    lifeEvents,
     archive: archiveData,
     voiceCard,
     editionAppearances,

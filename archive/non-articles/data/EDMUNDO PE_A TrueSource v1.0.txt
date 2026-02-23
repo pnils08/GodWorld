@@ -1,0 +1,35 @@
+EDMUNDO PEÑA TrueSource v1.0 — CP
+Oakland Athletics | Dominican Republic | Age 35
+Potential: A
+Overall: 88
+Height / Weight: 6'5" / 219 lbs
+B/T: Right / Right
+Drafted: Round 2 (2026)
+MLB Service Time: 9.000 years
+Pitcher Tendency: Power Pitcher
+
+Year  Team  G   GS  W   L   SV  BS  HLD  IP     H    R    ER   HR  BB  SO   ERA
+2039  ATH   64  0   6   4   47  6   1    62.0   36   21   19   4   19  77   2.76
+2038  ATH   72  0   9   6   43  9   5    69.2   73   44   40   11  29  97   5.17
+2037  ATH   65  0   7   5   42  4   3    61.0   63   26   21   5   22  73   3.1
+2036  ATH   54  0   0   3   35  6   3    48.2   50   20   16   3   13  63   2.96
+2035  ATH   80  0   5   10  16  9   22   80.0   66   41   33   9   32  89   3.71
+2034  ATH   61  0   4   5   16  6   -    65.1   56   27   24   8   29  79   3.32
+2033  ATH   60  0   4   7   41  6   -    60.2   62   36   34   8   40  82   5.04
+2032  ATH   74  0   7   8   10  0   -    95.2   70   29   28   10  36  109  2.63
+2031  ATH   68  0   2   10  27  5   -    77.0   55   50   50   17  42  88   6.89
+
+Career -   598  0   44  61  213 49  91   608.0  553  299  265  75  264 757  3.92
+
+Awards:
+• All-Star (2031, 2032, 2036, 2038, 2039)
+
+Contract Information:
+2040–2041: $10.9M per year | 2042: Option | 2043–2049: Free Agent
+
+Attributes Summary:
+STA 19 | H/9 95 | K/9 95 | BB/9 66 | HR/9 82 | PCLT 75 | CTRL 68 | VEL 52 | BRK 71 | FLD 72 |
+ARM 57 | ACC 67 | REAC 67
+
+Template: Vladimir Gonzalez TrueSource Format | Source: User-Verified Statistics | Division:
+/Player_Cards/

@@ -1,0 +1,170 @@
+A’S UNIVERSE STATCAST PLAYER CARD v1.0
+MARK AITKEN — 3B / 1B
+Age: 32 | B/T: Switch / Right | 5’8”, 168 lbs
+Potential: A | Overall: 93
+Archetype: Contact-Forward, High-Discipline, Two-Way Corner Anchor
+TrueSource Reference: TS-AITKEN–2040  
+
+⸻
+
+CAREER OVERVIEW
+
+Mark Aitken is one of the most consistent two-way corner infielders of his era:
+
+• Rookie of the Year (2032)
+• 3× Gold Glove (2032, 2038, 2039)
+• 2× Silver Slugger (2034, 2036)
+• All-Star + ASG MVP (2036)
+• Playoff MVP (2037)
+• 1170 career hits
+• 195 career HR
+• .273 career AVG
+• .346 career OBP
+• .466 career SLG
+
+He’s the rare hitter whose production is stable across a decade — no wild spikes, no empty seasons.
+
+⸻
+
+STATCAST CONTACT & POWER PROFILE
+
+Hard-Hit%: High vs LHP, average vs RHP
+Barrel%: Strong left-side, moderate right-side
+Avg Exit Velocity: Above average
+Max Exit Velocity: Sneaky high — he can punish mistakes
+Launch Angle: Optimized (10–15° sweet spot)
+Sweet-Spot%: Excellent
+Whiff%: Low — high contact hitter
+Chase%: Low — outstanding plate discipline
+
+Hitting identity:
+Aitken crushes left-handed pitching and survives right-handers with discipline and durability.
+
+He is a modern lefty-killer, the kind that anchors a lineup.
+
+⸻
+
+SPRAY & ZONE BEHAVIOR
+
+Pull / Center / Oppo %: Pull-heavy (by design)
+Hot Zones:
+• Belt-high inside vs LHP
+• Middle-middle vs RHP
+Cold Zones:
+• Elevated high fastballs (diminishing with age)
+
+Summary:
+He is a predictable but powerful pull hitter.
+Pitchers know the plan — they still get burned.
+
+⸻
+
+DEFENSE
+
+Primary: 3B
+Secondary: 1B
+
+FLD: 78 (plus)
+ARM: 79
+REAC: 81 (excellent)
+ACC: 69
+Range: Slightly above average
+
+Defensive Summary:
+Aitken is a true corner anchor.
+He makes the right plays, anticipates well, and has won three Gold Gloves for a reason.
+
+He is not flashy — he is correct.
+
+⸻
+
+RUNNING / ATHLETICISM
+
+Speed: 50
+Steal Rating: 23
+BR Aggressiveness: 45
+
+Summary:
+Not a basepath threat.
+He runs smart, not fast.
+
+⸻
+
+SIM-BASED OFFENSE (Full TrueSource Stats)
+
+2039 — .285 AVG, 20 HR, 37 doubles
+2038 — .284 AVG, 30 HR
+2037 — .264 AVG, 24 HR
+2036 — .296 AVG, 35 HR, 124 RBI (Silver Slugger)
+2035 — .241 AVG, 20 HR
+2034 — .289 AVG, 39 HR (Silver Slugger)
+2033 — struggled (partial season)
+2032 — .278 AVG, 21 HR (ROY)
+
+Summary:
+Aitken posts 30 HR power in peak seasons and 20 HR stability in aging years — with OBP that remains excellent into his 30s.
+
+⸻
+
+PITCH-TYPE PERFORMANCE
+
+Crushes:
+• Left-handed fastballs
+• Hanging sliders
+• Splitters in the zone
+
+Struggles:
+• High ride fastballs
+• Backfoot breaking balls from RHP
+
+⸻
+
+ADVANCED METRICS (Sim-Projected Savant)
+
+xBA: High
+xSLG: Above average
+xwOBA: Borderline All-Star tier
+K%: Low
+BB%: High
+ISO: Sturdy mid-range power
+
+He is a statistical glue player — the kind who lengthens a lineup every year he plays.
+
+⸻
+
+AGE CURVE
+
+At 32, Aitken remains:
+
+• durable (DUR 98),
+• productive,
+• defensively strong,
+• and a hitter who ages slowly due to discipline-first attributes.
+
+Projected decline:
+Late — likely after age 34–35.
+
+⸻
+
+NOTES (ANTHONY — ANALYTICS)
+
+• Aitken’s discipline is his aging armor — hitters who don’t chase age better.
+• Statcast indicators show his xSLG holding steady even as raw power dips.
+• Still elite vs LHP — OPS +130 points vs lefties.
+• His defensive metrics add 1–1.5 WAR even in down seasons.
+• Contract years (2040–2041) align perfectly with a “one last great push” window.
+
+⸻
+
+NOTES (P SLAYER — EMOTIONAL TAKE)
+
+“Aitken is the definition of a professional hitter.
+Not loud, not theatrical — just pain for pitchers.
+He’s the guy who ruins your night because you can’t get the inning to end.”
+
+⸻
+
+NOTES (HAL RICHMOND — HISTORICAL)
+
+“Aitken belongs to the lineage of quiet legends — Tim Salmon, Michael Young, players who built their reputations not by shouting but by showing up.
+He did not define the dynasty, but he strengthened every era he touched.”

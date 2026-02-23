@@ -1,0 +1,84 @@
+Travis Coles — TrueSource_DataPage_v1.0
+POPID: Pending assignment
+Category: Major-League Player
+Organization: Oakland Athletics
+Position: SP
+Draft: Round 1 (2037)
+Age: 21
+Born: South Carolina
+Height: 6'4"
+Weight: 216 lbs
+Bats: R
+Throws: R
+Hitter Tendency: Pull Hitter
+MLB Service Time: 2.000 years
+
+Overall: 94 (↑)
+Potential: A
+
+Pitch Repertoire
+4-Seam Fastball — 98 mph
+12–6 Curve — 81 mph
+Slider — 88 mph
+Splitter — 91 mph
+Cutter — 96 mph
+
+Attributes
+STA: 96
+H/9: 82 (+3)
+K/9: 81 (+1)
+BB/9: 77 (+3)
+HR/9: 67 (+6)
+PCLT: 67 (+6)
+CTRL: 91
+VEL: 71
+BRK: 91
+
+FLD: 55 (+3)
+ARM: 91 (+4)
+ACC: 71 (+3)
+REAC: 46 (+3)
+
+MLB Stats
+2040 — Team: WSH  
+G: 33 | GS: 33 | W: 13 | L: 8 | SV: 0 | BS: 0 | HLD: 0  
+IP: 219.1 | H: 177 | R: 52 | ER: 50 | HR: 17 | BB: 61 | SO: 207 | ERA: 2.05
+
+2039 — Team: WSH  
+G: 33 | GS: 33 | W: 9 | L: 15 | SV: 0 | BS: 0 | HLD: 0  
+IP: 197.2 | H: 179 | R: 92 | ER: 87 | HR: 26 | BB: 51 | SO: 198 | ERA: 3.96
+
+Career Totals  
+G: 66 | GS: 66 | W: 22 | L: 23 | SV: 0 | BS: 0 | HLD: 0  
+IP: 417.0 | H: 356 | R: 144 | ER: 137 | HR: 43 | BB: 112 | SO: 405 | ERA: 2.96
+
+Contract
+2041: RNW  
+2042: ARB  
+2043: ARB  
+2044: ARB  
+2045: FA  
+2046: FA  
+2047: FA  
+2048: FA  
+2049: FA  
+2050: FA
+
+Roster Status
+Active Roster: YES  
+40-Man Roster: YES  
+Minor League Options: 0/3 Used  
+Playoff Eligible: YES  
+On Waivers: NO  
+Designated for Assignment: NO  
+Cleared Optional Waivers: NO  
+Cleared Outright Waivers: NO  
+Cleared Trade Waivers: NO  
+Rule 5 Draft Eligibility: NO  
+Contract Option: NONE
+
+Awards
+All-Star Appearance: 2040
+
+Notes
+High-velocity right-handed starter with elite strikeout ability and advanced command for age twenty-one. Already an All-Star with frontline results across two full MLB seasons.

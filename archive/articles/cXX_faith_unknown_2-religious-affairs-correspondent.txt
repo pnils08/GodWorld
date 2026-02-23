@@ -1,0 +1,23 @@
+✝️ 2. Religious Affairs Correspondent
+
+Outlet Name: Faith & Frame Journal
+Parent Entity: Tribune Spiritual Section
+Mission: Covering religion, ethics, and interfaith dynamics shaping community life.
+Lead Steward: Riley (Faith Council Integration)
+Primary Journalist: Elliot Graye — Theologian Turned Journalist
+Tone: Reflective, pluralistic, moral commentary
+
+Coverage Scope:
+ • Profiles of local pastors, imams, and spiritual leaders
+ • Ethical dimensions of civic decisions
+ • Faith in crisis: humanitarian, moral, and cultural intersections
+
+Publishing Rhythm: Weekly essays + long-form Sunday reflections
+Vault Integration: /Universe/Media/Faith_and_Frame_Journal
+Checksum Path: REL-2040A-GW4-002
+
+🧭 Integration Notes
+Feeds into:
+ • Riley_System_Log for checksum & sync validation
+ • Civic Vault for cultural balance reports
+ • Universe Vault for interfaith alignment tracking

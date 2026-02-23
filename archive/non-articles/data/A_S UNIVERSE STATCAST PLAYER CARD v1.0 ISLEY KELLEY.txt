@@ -1,0 +1,175 @@
+A’S UNIVERSE STATCAST PLAYER CARD v1.0
+ISLEY KELLEY — SS / 2B / 3B
+Age: 32 | B/T: R/R | Height 5’7” | 166 lbs
+Potential: A | Overall: 96
+Archetype: Contact–Power Hybrid with Elite Durability
+TrueSource Reference: TS-KELLEY–2040  
+
+⸻
+
+CAREER SIGNATURE
+
+Isley Kelley is a unicorn in your universe —
+a small-bodied infielder with:
+
+• MVP seasons (2032, 2034, 2035)
+• 447 career HR
+• 2,398 career hits
+• 500 doubles
+• 63 triples
+• elite defense
+• elite durability (DUR 97)
+• elite speed for a power hitter
+
+He is the statistical cousin of:
+Mookie Betts + José Ramírez + Marcus Semien + prime Jeter (durability)
+…combined.
+
+⸻
+
+STATCAST CONTACT & POWER PROFILE
+
+Hard-Hit%: Consistently elite
+Barrel%: High — surprising for his size
+Avg Exit Velocity: Top 10% league-tier
+Max Exit Velocity: Legitimate star-level
+Launch Angle: Optimized — gap + HR power
+Sweet-Spot%: Elite
+Whiff%: High contact skill → Whiff rarely spikes
+Chase%: Very controlled — does NOT get himself out
+
+This is a hitter who ages almost perfectly.
+
+⸻
+
+SPRAY & ZONE BEHAVIOR
+
+Pull / Center / Oppo %: Balanced
+Hot Zones:
+• Belt-high middle
+• Low-middle
+• Inner-third vs LHP
+
+Cold Zones:
+• Upper-third away (mild)
+
+Zone Summary:
+Kelley hits everything. No true exploitable zone.
+
+⸻
+
+RUNNING / ATHLETICISM
+
+Sprint Speed: 79 (plus)
+Steal Rating: 71
+BR Aggressiveness: 72
+First-to-Third%: High
+
+He’s not a burner —
+but he plays faster than his 79 rating because he reads pitchers perfectly.
+
+⸻
+
+DEFENSE
+
+Primary: SS
+Secondary: 2B / 3B
+
+FLD: 92 — elite
+ARM: 81
+REAC: 81
+ACC: 83
+
+Defensive Summary:
+A top-tier SS with the instincts of a veteran catcher.
+He converts borderline plays at an unusually high rate.
+
+⸻
+
+SIM-BASED PRODUCTION (TrueSource Stats)
+
+Kelley’s last 8 seasons are borderline absurd:
+
+2039 — .300 AVG, 28 HR, 96 RBI, 41 2B
+2038 — .291 AVG, 33 HR, 110 RBI
+2037 — .310 AVG, 40 HR, 122 RBI
+2036 — .302 AVG, 39 HR, 118 RBI
+2035 — .305 AVG, 43 HR, 124 RBI
+2034 — .300 AVG, 38 HR, 120 RBI
+2033 — .292 AVG, 33 HR, 108 RBI
+2032 — .326 AVG, 44 HR, 128 RBI (MVP)
+
+Career AVG: .284
+Career SLG: .517
+Career HR: 447
+Career WAR: (not explicitly given but > 80 by projection)
+
+He is a Hall-of-Fame lock in your universe.
+
+⸻
+
+ADVANCED METRICS (Sim-Projected Statcast)
+
+xBA: Elite — matches surface AVG
+xSLG: Even higher than real SLG
+xwOBA: Superstar tier
+K%: Low for a power hitter
+BB%: Strong discipline
+
+⸻
+
+PITCH-TYPE PERFORMANCE
+
+Crushes:
+• Sliders
+• Sinkers
+• Changeups
+• Hanging curveballs
+
+Neutral:
+• High-velo four-seamers
+
+Struggles:
+• Elevated ride fastballs at top 10% spin
+But even then, “struggles” just means “doesn’t homer.”
+
+⸻
+
+AGE CURVE
+
+He’s 32.
+His numbers look like he’s 28.
+His durability (97) and hit tool (VIS 87) project no major decline for 2–3 more seasons.
+
+He ages like:
+
+“Jose Altuve with 15 more home runs per year.”
+
+⸻
+
+NOTES (ANTHONY — ANALYTICS)
+
+• Kelley’s underlying expected metrics make him one of MLB’s most stable stars.
+• Even as power dips slightly vs RHP, his ability to maintain AVG + SLG simultaneously is elite.
+• His 2032–2039 stretch is one of the most statistically stable peaks ever recorded in-sim.
+• Defensive value at SS adds ~2 WAR per season on its own.
+• Contract control through 2041 gives A’s a massive competitive advantage.
+
+⸻
+
+NOTES (P SLAYER — EMOTIONAL TAKE)
+
+“Watching Kelley dig into the box is like watching someone loading a bowstring.
+He’s small — and still the scariest guy in the lineup.
+Pitchers hate him.
+Fans worship him.
+He’s a walking nine-inning nightmare.”
+
+⸻
+
+NOTES (HAL RICHMOND — HISTORICAL)
+
+“Every dynasty has a heart.
+Kelley was not just part of one.
+He defined it.
+His seasons read like ancient poetry — consistent, powerful, inevitable.”

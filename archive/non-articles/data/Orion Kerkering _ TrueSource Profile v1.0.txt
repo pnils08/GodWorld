@@ -1,0 +1,42 @@
+Orion Kerkering — TrueSource Profile v1.0
+Position: RP (#50)
+Throws/Bats: R / R
+Height/Weight: 6′2″ / 204 lbs
+Born: California
+Drafted: Round 5 (2022)
+Age: 38
+MLB Service: 14.010 years
+Potential: B (Overall 59)
+Pitch Repertoire: Sweeper (86 mph), 4-Seam Fastball (98 mph), Sinker (95 mph)
+Status: Retired / Free Agent (2040)
+
+Year Team G GS W L SV BS HLD IP H R ER HR BB SO ERA
+2023 PHI 3 1 0 0 0 0 0 3.0 1 1 1 0 2 6 3.00
+2024 PHI 64 0 4 2 4 1 18 83.0 61 35 33 6 17 74 3.57
+2025 PHI 52 0 3 1 0 0 17 61.2 52 36 35 8 30 48 5.11
+2026 TOT 59 0 5 3 1 1 17 67.1 61 27 27 4 20 53 3.61
+2027 MIN 70 0 9 7 0 0 18 73.1 68 35 33 5 18 54 4.05
+2028 TOT 65 0 4 2 2 0 16 95.2 83 33 31 10 53 97 2.92
+2029 ATH 78 0 3 1 0 0 20 91.1 77 38 34 13 29 85 3.35
+2030 ATH 77 0 3 5 1 4 16 91.1 77 38 34 13 29 85 3.35
+2031 ATH 68 0 4 7 2 2 21 73.0 61 31 31 7 30 71 3.82
+2032 ATH 62 0 6 2 1 0 22 79.1 51 17 15 4 29 85 1.70
+2034 TOT 79 0 6 4 0 0 22 79.0 64 41 35 11 35 89 3.89
+2035 KC 61 0 4 4 0 0 16 68.1 47 32 20 6 25 70 2.71
+2037 KC 34 0 1 1 0 0 4 42.2 41 25 22 9 9 41 4.64
+2038 KC 84 0 9 8 0 7 23 71.1 61 31 27 8 26 75 3.41
+
+Career Totals:
+912 G | 2 GS | 69 W | 61 L | 96 SV | 50 BS | 212 HLD |
+1,017.1 IP | 847 H | 416 R | 363 ER | 107 HR | 415 BB | 991 SO | 3.21 ERA
+
+Lore Summary
+Orion Kerkering’s career bridged two decades of bullpen evolution. The California-born righty, drafted
+in the fifth round by Philadelphia in 2022, forged a fourteen-year career marked by stamina,
+adaptability, and an uncanny ability to neutralize left-handed hitters with his devastating sweeper.
+After his early Phillies tenure, he became a stabilizing force for Oakland’s relief corps through the
+2030s, logging over 1,000 innings and nearly 1,000 strikeouts. His signature three-pitch mix—95 mph
+sinker, 98 mph four-seamer, and 86 mph sweeper—anchored multiple postseason runs before
+concluding his career with Kansas City.
+Quietly effective and deeply durable, Kerkering symbolizes the archetype of the long-haul reliever:
+rarely flashy, always reliable.

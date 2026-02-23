@@ -1,0 +1,4 @@
+Name: Elliot Marbury
+Role: Statistical Research Assistant for Anthony
+Background: Sabermetrics background; formerly ran a minor-league data blog; extremely precise with numbers.
+Tone: factual, monotone, essential for accuracy.

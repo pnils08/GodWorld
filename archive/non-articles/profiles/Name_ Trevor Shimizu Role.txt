@@ -1,0 +1,4 @@
+Name: Trevor Shimizu
+Role: Infrastructure & Transit Reporter
+Background: Civil engineering degree; covered Bay Bridge maintenance before joining the Tribune; knows the difference between a routine outage and a structural failure.
+Tone: precise, technical, alert-focused.

@@ -1,0 +1,76 @@
+Hank_Trepagnier_TrueSource_Profile_v1.0
+
+TrueSource_Profile_v1.0
+Bulls_Universe
+
+PLAYER: Hank Trepagnier
+Jersey: 55
+Team: Chicago Bulls
+League: Bulls_Universe
+
+POSITION:
+Primary: C
+Secondary: PF
+
+BIO:
+Age: 21
+Height: 6'11"
+Weight: 240 lbs
+From: El Salvador
+Draft Status: Undrafted
+Years Pro: 1
+Personality: Wildcard
+
+OVERALL:
+OVR: 82
+
+PHYSICAL ATTRIBUTES:
+Strength: 92
+Vertical: 92
+Stamina: 87
+Speed: 88
+Agility: 87
+Durability: 86
+Intangibles: 73
+
+OFFENSE:
+Close Shot: 60
+Driving Layup: 67
+Standing Dunk: 95
+Driving Dunk: 85
+Mid-Range Shot: 63
+Three-Point Shot: 73
+Free Throw: 75
+Post Hook: 68
+Post Fade: 64
+Post Control: 81
+Draw Foul: 70
+Shot IQ: 60
+Offensive Consistency: 62
+
+BALL HANDLING & PASSING:
+Ball Handle: 54
+Speed With Ball: 56
+Hands: 68
+Pass IQ: 75
+Pass Vision: 70
+Pass Accuracy: 80
+
+DEFENSE & REBOUNDING:
+Interior Defense: 80
+Perimeter Defense: 60
+Block: 80
+Steal: 61
+Help Defense IQ: 79
+Defensive Consistency: 74
+Offensive Rebound: 76
+Defensive Rebound: 87
+Pass Perception: 58
+
+NOTES:
+• Elite interior finisher with top-tier dunk ratings
+• Above-average passing for a big
+• Physical defender with strong rebounding instincts
+• Development curve favors interior dominance over perimeter play
+
+END TrueSource_Profile_v1.0

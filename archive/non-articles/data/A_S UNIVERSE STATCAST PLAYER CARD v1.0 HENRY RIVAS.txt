@@ -1,0 +1,140 @@
+A’S UNIVERSE STATCAST PLAYER CARD v1.0
+HENRY RIVAS — SP (RHP)
+Age: 28 | B/T: L/R | Height 6’0”, 173 lbs
+Potential: A | Overall: 91
+Archetype: Durable Strike-Thrower With Plus Breaking Action
+Service Time: 6.002 years
+TrueSource: TS-RIVAS–2040  
+
+⸻
+
+PITCHING REPERTOIRE — SAVANT INTERPRETATION
+
+2-Seam Fastball — 94 mph
+• Great arm-side run
+• His best early-count strike pitch
+• Used to induce soft contact
+
+Sinker — 90 mph
+• Heavy, late drop
+• Primary groundball generator
+• Excellent vs LHB inside
+
+12–6 Curveball — 75 mph
+• His signature pitch
+• Extreme vertical action
+• Generates freeze strikes & late chase
+• 70-grade shape when sharp
+
+Circle Change — 78 mph
+• Speed differential is massive
+• Right-on-left weapon
+• Produces rollover grounders
+
+Slider — 80 mph
+• Utility pitch
+• Good for mixing; not a kill pitch
+
+Summary:
+This is a deep, old-school five-pitch mix with modern movement profiles.
+Rivas doesn’t overpower — he out-executes hitters.
+
+⸻
+
+STATCAST-STYLE PROJECTIONS (BASED ON ATTRIBUTES)
+
+Velocity Band (Fastballs):
+• 2-Seam: 93.4–95.0 mph
+• Sinker: 89.3–91.1 mph
+
+Miss-Generation:
+• K/9 85 → above-average
+• Slider whiffs modest
+• Curve whiffs high when sequenced properly
+
+Expected Stats:
+• xBA allowed: low
+• xSLG allowed: low-mid
+• HR/9: strong suppression (63)
+• BB/9: excellent control (78 → ~2.0–2.1/9)
+
+Contact Quality Prevention:
+• He has a “limit barrels” profile — rarely gives up flush contact.
+
+⸻
+
+RUN PREVENTION & ERA PATTERN
+
+Recent ERA pattern (TrueSource):
+2039: 3.84
+2038: 3.39
+2037: 3.18
+2036: 4.65
+2035: 3.13
+2034: 2.21
+
+Career ERA: 3.48
+This is the profile of a high-end SP2 with SP1 peaks when the curveball is sharp.
+
+⸻
+
+ROLE & WORKLOAD
+
+STA 80 = reliable innings
+• 180+ IP every healthy season
+• 30+ starts yearly
+• Does not require heavy bullpen support
+
+He is the stabilizer of a rotation.
+
+⸻
+
+DEFENSE
+
+Fielding: 91 (elite)
+Arm Accuracy: 58
+Reaction: 58
+
+This is extremely rare for a pitcher.
+He fields his position like a shortstop—great on comebackers, bunts, and slow rollers.
+
+⸻
+
+DEVELOPMENT TRAJECTORY
+
+At 28 years old, Rivas is the perfect “prime window” pitcher:
+• VEL 91 → stable
+• BRK 74 → high-level pitch movement
+• CTRL 75 → plus command
+• PCLT 76 → limits mistake-zone misses
+
+Projected aging curve:
+• No major decline until age 32–33
+• Maintains control & break longer than velocity
+
+Contract (5 years @ $28.2M) is a steal for his production.
+
+⸻
+
+NOTES (ANTHONY — ANALYTICS)
+
+• Rivas is quietly one of the most efficient pitchers in the league.
+• His H/9 + BB/9 combination is the golden ratio for stability.
+• The 12–6 curveball is his true separator — Statcast-style shape is elite.
+• The slider is shallow; if it develops, his strikeouts will spike.
+• Projection: Top 20 SP in baseball by underlying metrics.
+
+⸻
+
+NOTES (P SLAYER — EMOTIONAL TAKE)
+
+“Rivas doesn’t look dangerous — then he carves you for seven innings.
+Every. Damn. Time.
+He’s the quiet killer in the rotation.”
+
+⸻
+
+NOTES (HAL RICHMOND — HISTORICAL)
+
+“Rivas belongs to the forgotten lineage of command-first pitchers who create longevity through intellect.
+He reads bats the way great writers read crowds.”

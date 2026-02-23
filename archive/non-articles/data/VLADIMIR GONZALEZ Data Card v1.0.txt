@@ -1,0 +1,41 @@
+VLADIMIR GONZALEZ Data Card v1.0 — RF / LF / CF
+Oakland Athletics | Dominican Republic | Age 26
+Potential A
+Overall 84
+Height / Weight 6'0" / 184 lbs
+B/T Right / Right
+Drafted Round 1, 2031
+MLB Service Time 1.138 years
+Hitter Tendency Pull Hitter
+
+Batting Statistics
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 127 506 61 137 29 4 14 60 49 78 15 8 .271 .335 .427
+2038 ATH 35 120 13 24 8 1 2 10 20 25 7 1 .200 .322 .317
+2037 ATH 16 61 7 16 6 0 2 8 4 8 0 1 .262 .318 .459
+
+Career 178 687 81 177 43 4 18 78 73 111 22 10 .258 .331 .410
+
+Awards
+• World Series MVP (2037)
+
+Contract Information
+2040: $2.8M | 2041: $2.8M | 2042–2044: Arbitration | 2045–2049: Free Agent
+
+Attributes Summary
+CON L 82
+CON R 74
+POW L 60
+POW R 54
+VIS 89
+DISC 85
+CLT 99
+BUNT 38
+DUR 90
+FLD 79
+ARM 57
+ACC 61
+REAC 61
+SPD 66
+STEAL 57
+BR AGG 57

@@ -1,0 +1,35 @@
+POPID: POP-00019
+Name: Isley Kelley
+Role: Shortstop (SS)
+Franchise: Oakland Athletics
+Era: 2040 Active Roster
+Tier: 1 – Legend Core
+Overall Rating: 96
+Potential: A
+Bats: Right
+Throws: Right
+Height: 5 ft 7 in
+Age: 32
+Service Time: 14.000 MLB Years
+Uniform Number: 12
+
+Simulation Context:
+Isley Kelley represents the tactical mind and heart of the Oakland Athletics dynasty.
+Known as "The Mississippi Machine," he blends power, precision, and intuition at shortstop.
+His leadership and discipline have made him a cornerstone presence across championship runs.
+
+Visual Identity:
+Image Source: POPID_Mirror_Registry
+Capture Format: 2040 Media ID Portrait (Executive Suit Variant)
+Lighting: Neutral-studio balanced tone with natural contrast
+Facial Data Mapping: Blonde hair, blue eyes, fair skin tone, structured jawline, composed demeanor
+Expression Style: Poised, confident, and intelligent – signature calm of a veteran leader
+POPID_Hash: 2040-Athletics-Kelley-POP00019-IMGCORE
+
+Continuity Timestamp: 2040
+System Classification: Mirror-Compatible Entity
+Integration Type: Active History – Visual Reconstruction Enabled
+
+--- LEGACY REFERENCE ---
+Previous POPID: POP-00008 (pre-Sheets system)
+Current POPID: POP-00019 (Simulation_Ledger canonical)

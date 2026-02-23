@@ -1,0 +1,46 @@
+Steve Conrad — TrueSource Profile v1.0
+Position: RF / CF (#16)
+Team: Philadelphia Phillies
+Throws/Bats: R / S
+Height/Weight: 6′1″ / 187 lbs
+Born: Illinois
+Drafted: Round 1 (2028)
+Age: 29
+MLB Service: 11.000 years
+Potential: A (Overall 86)
+Hitter Tendency: Whole Field
+Quirk: Pinch Hitter
+Contract: Active through 2043, Free Agent 2044
+
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 PHI 140 545 75 133 18 5 27 70 57 125 17 4 .244 .321 .440
+2038 PHI 148 552 83 160 19 5 28 85 73 104 13 7 .290 .378 .480
+2037 ATH 149 550 84 159 20 6 33 98 69 107 18 9 .289 .367 .564
+2036 ATH 152 556 90 166 24 5 36 109 94 124 17 10 .306 .397 .580
+2035 CWS 155 582 99 179 35 4 39 108 94 124 17 10 .304 .401 .570
+2034 CWS 157 609 94 166 30 2 29 93 74 145 15 9 .273 .359 .476
+2033 CWS 158 613 85 164 27 4 29 91 74 131 13 7 .268 .349 .467
+2032 CWS 151 590 68 161 31 4 29 81 74 113 14 7 .273 .360 .453
+2031 CWS 147 563 87 152 24 3 32 94 67 107 17 7 .270 .350 .440
+2030 CWS 144 589 87 139 32 4 48 136 17 5 .280 .337 .475
+
+Career Totals: 
+1,664 G | 6,365 AB | 957 R | 1,821 H | 353 2B | 46 3B | 310 HR | 1,043 RBI | 
+843 BB | 1,328 SO | 184 SB | 75 CS | .286 AVG | .374 OBP | .502 SLG
+
+Awards & Honors
+• Hank Aaron Award (2034, 2035)
+• Silver Slugger (2034–2036)
+• All-Star (2030–2037, seven-time)
+• Batting Title (2035)
+
+Lore Summary
+Steve Conrad stands as one of the most balanced offensive forces of the 2030s — a switch-hitter 
+who merged patience and precision with raw power. Drafted out of Illinois in 2028, his rise 
+through Chicago’s system culminated in back-to-back Hank Aaron Awards and multiple Silver 
+Slugger awards as the heart of the White Sox order.
+
+Conrad later carried his consistent excellence to Oakland and Philadelphia, evolving into a 
+cornerstone veteran presence. With a career .286 average and over 300 home runs, his résumé 
+captures both the artistry and endurance of the modern professional hitter — 
+a true architect of contact, control, and composure.

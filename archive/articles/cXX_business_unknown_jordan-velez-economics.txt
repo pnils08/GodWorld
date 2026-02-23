@@ -1,0 +1,28 @@
+JORDAN VELEZ — Economics
+“The Glenview Delivery Drivers: When Migration Drift Hits the Gig Economy”
+Cycles 30-35 – Delivery Worker Economic Impact Analysis
+Oakland’s migration drift held at -30 for nine consecutive cycles. For most residents, that’s an abstract metric. For delivery drivers, it’s the difference between making rent and falling behind.
+Colin Perez, 38, drives for three delivery apps simultaneously. He lives in Glenview, works twelve-hour shifts, six days a week.
+“Cycles 30-35, my earnings dropped 23%. Not because I worked less—I worked the same hours. But orders dropped. People weren’t ordering delivery. They were ordering to-go and picking it up themselves. That ‘high mobility’ thing everyone’s talking about? That’s my income disappearing.”
+The high-mobility food trend documented in the cycle data represents a behavioral shift: instead of having food delivered, Oakland residents walked to restaurants, ordered to-go, and left. Good for restaurant foot traffic. Devastating for delivery workers.
+Jacob Perez, 52, another delivery driver from Glenview (no relation to Colin), has been doing this work for eight years:
+“I know my neighborhoods. I know which apartments order lunch daily, which families do Friday night pizza. During those cycles, half my regular customers stopped ordering. I called a few—ones I know personally—and asked if everything was okay. They said yes, they’re just ‘picking up themselves now.’ No explanation why.”
+The migration drift metric at -30 means Oakland’s economic signals discourage new arrivals while existing residents consider leaving. For the gig economy, that translates to reduced consumer activity.
+Ronald Adams, 26, delivers for Glenview (coincidentally also lives there):
+“The algorithm doesn’t care about ‘civic tension’ or ‘weather volatility.’ It cares about order volume. When volume drops, they send fewer drivers to the area. That means I sit idle for hours waiting for pings. Can’t make money sitting in my car.”
+Mateo Walker, 47, delivery driver from Jack London:
+“The fog during Cycle 30 was the worst I’ve ever driven in. Couldn’t see two car lengths ahead. Orders came in, but the addresses were wrong—like customers were typing them while distracted. I delivered to three wrong buildings that night. Tips reflected it. One customer reported me for late delivery even though I’d been circling their block in the fog for fifteen minutes trying to find the right door.”
+Tourism load at 0.6 (40% below baseline) compounds the problem. Delivery drivers depend on visitors—hotel deliveries, tourists ordering late night, business travelers. When tourism drops, so do those orders.
+Brian Young, 22, delivers from Jack London, moved to Oakland six months ago:
+“I came here because the gig economy was supposed to be strong. Oakland, San Francisco, Berkeley—lots of orders, decent pay. But if migration drift stays negative, will those jobs still be here? I’m already thinking about leaving. That’s the irony, right? The -30 drift makes me want to leave, which makes the drift more negative.”
+The economic feedback loop: negative migration drift → reduced consumer activity → lower gig earnings → workers consider leaving → drift worsens.
+Travis Williams, 45, bus driver from Chinatown (not a delivery worker, but relevant context):
+“I see the delivery drivers at stoplights. They used to always be moving—ping comes in, they take off. Last two weeks, they’re sitting. Parked on corners, waiting. That’s not how gig work is supposed to function. If they’re waiting, they’re not making money.”
+Employment rate held at 90.87% through Cycle 35—full employment by traditional metrics. But gig workers aren’t captured in that statistic the same way. They’re employed, but their earning potential is tied to consumption patterns, not job availability.
+Devon Lopez, 25, janitor from Jack London, used to deliver before switching to steady employment:
+“I quit delivery work during Cycle 32. Couldn’t handle the income volatility. Some days $180, some days $40. When your rent is $1,400 and your income swings that hard, you can’t plan. Took a janitor job—less money overall, but consistent. That’s the hidden cost of negative drift: people leave high-flex jobs for stable ones, which reduces overall economic dynamism.”
+The East Bay Economic Development Alliance hasn’t issued guidance on gig economy impacts during sustained negative drift periods. When I contacted them, workforce analyst Andre Martinez (quoted in an earlier article) said:
+“We track traditional employment metrics. Gig economy workers are harder to monitor because they’re not on payroll. But anecdotal evidence suggests when civic stress rises and consumption patterns shift, delivery workers are the first to feel it.”
+Colin Perez, the first driver I spoke with, has started applying for warehouse jobs:
+“I love the freedom of delivery work. Set my own hours, work when I want. But if I can’t make rent, freedom doesn’t matter. The -30 drift isn’t an abstract number to me. It’s 23% less earnings. That’s real.”
+Names Index: Colin Perez (Delivery Driver, Glenview); Jacob Perez (Delivery Driver, Glenview); Ronald Adams (Delivery Driver, Glenview); Mateo Walker (Delivery Driver, Jack London); Brian Young (Delivery Driver, Jack London); Travis Williams (Bus Driver, Chinatown); Devon Lopez (Janitor, Jack London); Andre Martinez (Workforce Analyst, East Bay Economic Development Alliance)

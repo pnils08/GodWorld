@@ -1,0 +1,27 @@
+Gary Robertson — TrueSource DataPage v1.0
+Oakland Athletics | RP
+Drafted: Round 4 (2032) | Age: 25 | Height: 5′11″ | Weight: 195 lbs | B/T: S/R
+Born: North Carolina | Potential: B | Overall: 78
+
+Year   Team   G   GS   W   L   SV   BS   HLD   IP     H    R    ER   HR   BB   SO   ERA
+2039   ATH    31   0    1   1    0     1     2    70.1   56   25   24   9    28   59   3.07
+2037   ATH     3   0    0   0    0     0     0     4.1    1    0    0   0     3    6   0.0
+
+Career        34   0    1   1    0     1     2    74.2   57   25   24   9    31   65   2.89
+
+Attributes Summary
+STA: 54   H/9: 94   K/9: 74   BB/9: 64   HR/9: 62   PCLT: 74   CTRL: 65
+VEL: 68   BRK: 67   FLD: 57   ARM: 98   ACC: 70   REAC: 65
+
+Pitch Repertoire:
+• 2-Seam Fastball (89 mph)
+• Changeup (84 mph)
+• Slider (85 mph)
+
+Contract Information
+2040: $780 K | 2041–2042: Renew | 2043–2045: Arb | 2046–2049: FA
+On Active Roster: Yes | On 40-Man: Yes | Minor Opt: 2/3 Used
+
+Audit Line: TS-UPD-013
+Version: v1.0
+Status: Verified — Ready for Player_Cards insertion.

@@ -1,0 +1,133 @@
+MINOR LEAGUE STATCAST REPORT — TRAJECTORY-LOCKED POWER PROSPECT
+
+Player Classification: High-upside bat-first prospect
+Level: Double-A (eligible for promotion)
+Handedness: Right
+DOB: —
+Evaluator: Player Development / Hitting Lab
+
+⸻
+
+Season-to-Date Batted Ball Metrics (Double-A)
+
+Max Exit Velocity: 112.6 mph
+Average Exit Velocity: 89.1 mph
+Hard-Hit Rate: 42.4%
+Barrel Rate: 3.8%
+Sweet-Spot Rate: 19.9%
+
+Average Launch Angle: 2.7°
+Launch Angle Variance: 21.1°
+
+Ground-Ball Rate: 62.0%
+Line-Drive Rate: 17.9%
+Fly-Ball Rate: 20.1%
+
+xwOBA: .335
+Actual wOBA: .289
+Underperformance Gap: –.046
+
+Summary:
+Raw contact authority is well above the level. Trajectory remains the inhibitor.
+
+⸻
+
+High-Impact Contact (≥ 100 mph)
+	•	Total: 73
+	•	Grounders: 51
+	•	Line drives: 14
+	•	Fly balls: 8
+
+Key Diagnostic:
+Forty-nine percent of all hard contact occurs below +5° launch angle — classic “low-lift power” prospect profile.
+
+⸻
+
+Swing Characteristics (via Lab Sensors)
+
+Bat Speed: 70.2 mph
+Attack Angle: –4.1°
+Vertical Bat Angle: –27°
+Hip–Shoulder Separation: 43°
+Contact Depth vs. League Avg: +3.0 inches (deeper)
+
+Hitting Lab Interpretation:
+A strong rotational mover with a deep contact point. Produces power behind him rather than out front. Swing is built to hit low pitches extremely hard but has no natural upward path.
+
+⸻
+
+Pitch-Type Breakdown (Double-A Sample)
+
+Four-Seamers
+	•	Hard-hit rate: 47%
+	•	AVG LA: –0.6°
+	•	wOBA: .251
+Velocity beats him to the spot; contact too deep.
+
+Breaking Balls
+	•	Hard-hit rate: 39%
+	•	AVG LA: 6.4°
+	•	wOBA: .311
+Tends to lift spin better than velocity.
+
+Changeups
+	•	Hard-hit rate: 44%
+	•	AVG LA: 10.1°
+	•	wOBA: .346
+Shows natural lift when timing is slowed — indicator of projectability.
+
+⸻
+
+Spray Tendencies
+
+Pull:
+	•	AVG LA: 1.3°
+	•	Hard-hit grounders: 19
+	•	Fly balls ≥ 98 mph: 2
+
+Center:
+	•	AVG LA: 3.9°
+	•	Hard-hit events: 33
+	•	Average projected distance: 263 ft
+
+Opposite:
+	•	AVG LA: 0.8°
+	•	Oppo grounders: 15
+	•	Oppo fly balls: 1
+
+Summary:
+All-field power potential — none of the fields unlock loft.
+
+⸻
+
+Developmental Path — “Lift Conversion Track”
+
+The organization projects improvement via:
+	•	Early contact training
+	•	Adjusted hand slot and shoulder tilt
+	•	Machine fastballs at the top of zone
+	•	Attack-angle progression from negative angle to +4° over 6–10 weeks
+	•	Occasional “one-hand finish” rounds to encourage upward axis
+
+Expected timeline: noticeable transformation in 25–35 games.
+
+⸻
+
+Optimized Model Projection (Same EV, Corrected LA)
+
+Simulated using a corrected launch angle window (8°–17°).
+
+Projected Changes:
+	•	HR Pace: From 10→21 over full season
+	•	Projected SLG: .501
+	•	Projected Barrel Rate: 11.4%
+	•	Projected wOBA: .369
+	•	Average Hard-Hit Distance: 317 ft (+31 ft)
+
+Organizational Flag: High breakout probability with mechanical refinement.
+
+⸻
+
+Promotion Recommendation
+
+“The underlying power is too real to ignore. He’s an exit-velocity monster stuck in the mud. With even moderate lift, he plays in the middle of a major-league lineup. Without it, he becomes a ground-ball extra-base tease. Assign to Hitting Lab Track C for elevation protocol.”

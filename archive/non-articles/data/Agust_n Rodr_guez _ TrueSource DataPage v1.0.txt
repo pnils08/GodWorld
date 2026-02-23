@@ -1,0 +1,42 @@
+Agustín Rodríguez — TrueSource DataPage v1.0
+Full Name: Agustín Rodríguez
+Age: 29
+Height/Weight: 5'7" / 193 lbs
+Born: Colombia
+Primary Position: SS
+Secondary Positions: 2B, 3B
+Bats/Throws: Right / Right
+Hitter Tendency: Pull Hitter
+Overall: 86 (A Potential)
+Drafted: Round 2, 2031
+MLB Service: 3.007 years
+
+Year   Team   G   AB   R   H   2B   3B   HR   RBI   BB   SO   SB   CS   AVG   OBP   SLG
+2039   ATH   107  367  42  89  17   2    15   50    30   73   13   7   .243  .300  .422
+2038   ATH   90   248  22  50  7    2    5    24    14   41   9    8   .203  .245  .350
+2037   ATH   63   218  22  54  9    0    9    33    22   58   12   5   .248  .322  .404
+2036   ATH   13   48   12  12  3    0    3    7     6    12   3    0   .250  .333  .375
+
+Career — 252  879  99  205  37  0  29  114  72  172  37  15  .233  .293  .395
+
+Offensive Attributes
+Contact R/L: 76 / 74
+Power R/L: 62 / 54
+Vision: 69
+Discipline: 60
+Clutch: 64
+
+Fielding Attributes
+Arm: 87
+Accuracy: 72
+Reaction: 77
+Fielding: 80
+Durability: 91
+
+Contract Status
+2040–2042: $8.3M each year (Arbitration Eligible)
+2043–2049: Free Agent
+
+Active Roster: Yes
+40-Man: Yes
+Minor Options: 3/3 Used

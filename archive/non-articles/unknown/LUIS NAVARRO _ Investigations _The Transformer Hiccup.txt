@@ -1,0 +1,22 @@
+LUIS NAVARRO — Investigations
+“The Transformer Hiccup: Twelve Blocks, Six Minutes, One Electrician’s Warning”
+Cycle 28 – Temescal Power Interruption Investigation
+At approximately 8:47 PM during Cycle 28, a transformer failure knocked out power to twelve blocks in Temescal. PG&E classified it as a “brief service interruption” and restored power within six minutes.
+I spent three days tracking down the electrician who identified the fault.
+His name is Jose Wright, 26, lives in Temescal, works commercial electrical for Bay Area Construction Services. He was walking home from a job site when the lights went out.
+“I heard it before I saw it,” Wright told me over coffee at Crisis Coffee Co. “That sound—like a capacitor discharging wrong. Not a pop. More like a sigh. Then everything went dark.”
+Wright walked two blocks to the transformer station on Telegraph near 51st. The access gate was locked, but he could see the housing unit through the fence.
+“The thermal signature was wrong. You could see heat shimmer around the casing, but the load indicator wasn’t showing red. That means the safety cutoff didn’t trigger properly. The system thought everything was fine while the transformer was cooking itself.”
+Wright called PG&E’s emergency line. Twelve minutes later, a crew arrived. Six minutes after that, power was restored.
+I filed a public records request for the incident report. PG&E’s official statement: “Routine equipment cycling resulted in temporary service interruption. No safety hazard detected. Unit returned to normal operation.”
+But Wright’s account suggests something different: a safety system failure that could have escalated if the transformer had remained under load.
+I contacted Victor Mitchell, 39, a plumber from Dimond who was in Temescal visiting family during the outage.
+“I was at my sister’s place on 49th. Lights went out, came back on. I thought nothing of it until I heard PG&E trucks idling outside for twenty minutes after power returned. If it was routine, why’d they stay?”
+Andre Lee, 55, an electrician from Temescal with thirty years experience, reviewed Wright’s account:
+“If the thermal cutoff didn’t trigger, that’s a serious calibration failure. Those systems are designed with triple redundancy. One failure? That’s maintenance backlog. The cutoff not working? That’s systemic neglect.”
+PG&E declined to provide technical specifications for the transformer unit or maintenance logs. When pressed about whether similar failures have occurred elsewhere in Oakland, spokesperson Jennifer Caldwell stated: “We maintain all equipment according to regulatory standards and investigate all incidents thoroughly.”
+That’s not an answer. That’s a press release.
+Jose Wright is still walking past that transformer twice a day on his way to and from work. He checks it each time.
+“I know what properly maintained equipment sounds like,” he said. “And that transformer? It’s not right. It’s running, but it’s not right.”
+The civic event log classified this as “low severity.” But low severity assumes the safety systems work. If they don’t, the next failure might not resolve in six minutes.
+Names Index: Jose Wright (Electrician, Temescal); Victor Mitchell (Plumber, Dimond); Andre Lee (Electrician, Temescal); Jennifer Caldwell (PG&E Spokesperson)

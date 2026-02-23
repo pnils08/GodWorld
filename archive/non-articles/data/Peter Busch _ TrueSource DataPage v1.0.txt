@@ -1,0 +1,21 @@
+Peter Busch — TrueSource DataPage v1.0
+Team: Oakland Athletics (#3)
+Positions: RF / LF
+Potential: A
+Overall: 86
+Draft: Round 1 (2032)
+Age: 28
+B/T: Right / Right
+Height/Weight: 5'7" / 194 lbs
+Birthplace: California
+Hitter Tendency: Pull Hitter
+MLB Service Time: 2.062 years
+Quirk: Unfazed (Excels when hitting with 2 strikes)
+Award: All-Star (2039)
+
+Year   Team  G    AB   R    H    2B  3B  HR  RBI  BB  SO  SB  CS   AVG   OBP   SLG
+2039   ATH   144  633  85  164   52   2   22   81   39  111 40   6   .259  .303  .452
+2038   ATH   134  534  77  141   30   9   14   68   51   87 36   8   .284  .331  .433
+2037   ATH    25   93   9   19    8   0    1    8    7   25  5   1   .204  .257  .323
+
+Career — 303 1260 171 324 90 11 37 157 97 223 81 15 .257 .311 .434

@@ -1,0 +1,61 @@
+Coaching Staff — Oakland Athletics (2040)
+
+Manager
+• Name: Mike Kinder
+• Attribute Grade: A
+• Boosts: +3 Blocking, +3 Reaction, +3 Contact, +1 Velocity
+• Years Left: 1
+• Salary: $7,333,333
+
+Hitting Coach
+• Name: Dan Perez
+• Years Left: 3
+• Salary: $2,466,666
+
+Pitching Coach
+• Name: Fernando Lima
+• Years Left: 3
+• Salary: $1,400,000
+
+1st Base Coach
+• Name: Babe Bradford
+• Years Left: 3
+• Salary: $1,283,333
+
+3rd Base Coach
+• Name: Stephan Kollars
+• Years Left: 3
+• Salary: $1,775,000
+
+Totals
+• Staff Salary: $16.22M
+• Projected Surplus: $1.77M
+• Available Budget: $6.7M
+
+⸻
+
+Scouting Staff — Oakland Athletics (2040)
+
+Scout 1 — Beverly Peterson
+
+• Salary: $101,700
+• Efficiency: 78
+• Pitchers: 93
+• Discovery: 75
+• Position Players: 96
+
+Scout 2 — Lou Hollis
+
+• Salary: $78,900
+• Efficiency: 61
+• Pitchers: 71
+• Discovery: 77
+• Position Players: 61
+
+Scout 3 — Otis Redd
+
+• Salary: $110,000
+• Efficiency: 74
+• Pitchers: 93
+• Discovery: 98
+• Position Players: 95

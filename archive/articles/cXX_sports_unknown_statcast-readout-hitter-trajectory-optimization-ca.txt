@@ -1,0 +1,108 @@
+STATCAST READOUT — HITTER TRAJECTORY OPTIMIZATION CANDIDATE
+
+Batted Ball Snapshot — Season to Date (Pre-Adjustment)
+
+Max Exit Velocity: 118.4 mph
+Average Exit Velocity: 92.7 mph
+Hard-Hit Rate: 48.3%
+Barrel Rate: 5.9%
+Sweet-Spot Rate: 24.1%
+
+Launch Angle (Avg): 4.2°
+Launch Angle Std Dev: 18.7°
+Ground-Ball Rate: 58.6%
+Line-Drive Rate: 19.4%
+Fly-Ball Rate: 22.0%
+
+xBA: .287
+xSLG: .516
+xwOBA: .365
+Actual wOBA: .318
+Underperformance Delta: –.047
+
+⸻
+
+Trajectory Distribution — EV vs LA Mapping
+
+Batted Balls ≥ 100 mph:
+	•	Total: 96
+	•	LA between –10° and +5°: 61 balls (63.5%)
+	•	LA between +6° and +14°: 21 balls (21.8%)
+	•	LA ≥ 15°: 14 balls (14.5%)
+
+Interpretation: The majority of elite-contact events are trapped in low or negative angles. Contact authority greatly outpaces results.
+
+⸻
+
+Spray Chart Diagnostics
+
+Pull Side:
+	•	AVG LA: 3.1°
+	•	Hard-Hit Pull Grounders: 27
+	•	Pulled Fly Balls ≥ 100 mph: 4
+
+Center:
+	•	AVG LA: 5.0°
+	•	Hard-Hit Balls: 41
+	•	Distance average: 287 ft
+
+Opposite:
+	•	AVG LA: 2.6°
+	•	Hard-Hit Oppo Grounders: 18
+	•	Oppo Fly Balls ≥ 98 mph: 3
+
+Summary: Power is direction-agnostic; trajectory is the sole limiter.
+
+⸻
+
+Idealized Contact Model — “Unlocked Version” Projection
+
+This model simulates identical contact authority with optimized launch angles (10°–18° band).
+
+Projected With Identical EV But Corrected LA:
+	•	Projected HR Pace: 31–36 HR
+	•	Projected SLG: .564
+	•	Projected Barrel Rate: 13.8%
+	•	Projected wOBA: .396
+	•	Average Distance on Hard-Hit Balls: 335 ft (+32 ft jump)
+
+Breakout Flag: Strong
+Power Conversion Efficiency (EV → SLG):
+Current: 61%
+Projected: 88%
+
+⸻
+
+Machine-Tracked Swing Characteristics
+
+Bat Speed (Avg): 74.9 mph
+Attack Angle: –1.3°
+Ideal Attack Angle Range: +4° to +9°
+
+Vertical Bat Angle: –31°
+Hip-Shoulder Separation (Peak): 47°
+Point of Contact (Avg): 2.7 inches deeper than league average
+
+Cause Summary:
+The player’s natural swing is too level and too deep, producing exceptional EV but poor trajectory. Adjusting the attack angle and contact point is expected to correct LA without harming power generation.
+
+⸻
+
+Heatmap Projection After Adjustment (Model)
+Zone	wOBA Before	wOBA After (Proj)
+High-in	.302	.411
+High-middle	.281	.447
+High-away	.268	.399
+Middle-in	.345	.452
+Middle-middle	.410	.512
+Middle-away	.316	.387
+Low-in	.327	.344
+Low-middle	.342	.359
+Low-away	.288	.302
+Biggest improvement: performance on elevated fastballs, which historically punish flat-path hitters.
+
+⸻
+
+Front Office Tag:
+
+“This is a classic low-launch, high-impact profile. The power already exists in full. Unlock the trajectory and you unlock a middle-order bat.”

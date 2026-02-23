@@ -1,0 +1,115 @@
+Louis Cross TrueSource_DataPage_v1.0
+POPID: NOT ASSIGNED
+Record Type: Player Profile – Athletics Universe
+Data Integrity: Verified (Screenshots 2040)
+
+––––––––––––––––––––––––––––––––––––––
+BASIC INFORMATION
+––––––––––––––––––––––––––––––––––––––
+Name: Louis Cross
+Position: RP
+Team: Oakland Athletics (#21)
+Overall: 88
+Potential: B
+MLB® Service Time: 8.063 Years
+Age: 29
+Height: 6'0"
+Weight: 185 lbs
+Bats: Left
+Throws: Left
+Born: Tennessee
+Drafted: Round 3 (2028)
+Secondary Position: None
+Hitter Tendency: Pull Hitter
+
+––––––––––––––––––––––––––––––––––––––
+PITCH REPERTOIRE
+––––––––––––––––––––––––––––––––––––––
+4-Seam Fastball: 96 mph
+Slider: 88 mph
+2-Seam Fastball: 94 mph
+12–6 Curve: 82 mph
+
+––––––––––––––––––––––––––––––––––––––
+ATTRIBUTES
+––––––––––––––––––––––––––––––––––––––
+STA: 42
+H/9: 99
+K/9: 77
+BB/9: 64
+HR/9: 97
+Pitching Clutch (PCLT): 85
+Control (CTRL): 67
+Velocity (VEL): 84
+Break (BRK): 63
+
+Fielding (FLD): 30
+Arm Strength (ARM): 56
+Arm Accuracy (ACC): 57
+Reaction (REAC): 49
+
+––––––––––––––––––––––––––––––––––––––
+CAREER MLB STATS (2036–2040)
+––––––––––––––––––––––––––––––––––––––
+Career Totals:
+G: 624
+GS: 0
+W: 44
+L: 49
+SV: 98
+BS: 52
+HLD: 173
+IP: 668.2
+H: 533
+R: 298
+ER: 254
+HR: 56
+BB: 328
+SO: 558
+ERA: 3.42
+
+––––––––––––––––––––––––––––––––––––––
+SEASON LOG
+––––––––––––––––––––––––––––––––––––––
+2040 – ATH
+G: 0 | GS: 0 | W: 0 | L: 0 | SV: 0 | BS: 0 | HLD: 0
+IP: 0.0 | H: 0 | R: 0 | ER: 0 | HR: 0 | BB: 0 | SO: 0 | ERA: 0.00
+
+2039 – WSH
+G: 66 | GS: 0 | W: 3 | L: 3 | SV: 2 | BS: 2 | HLD: 32
+IP: 72.0 | H: 41 | R: 18 | ER: 17 | HR: 7 | BB: 33 | SO: 68 | ERA: 2.13
+
+2038 – TOT
+G: 86 | GS: 0 | W: 6 | L: 7 | SV: 3 | BS: 7 | HLD: 33
+IP: 88.1 | H: 71 | R: 32 | ER: 24 | HR: 6 | BB: 28 | SO: 77 | ERA: 2.45
+
+2037 – MIA
+G: 77 | GS: 0 | W: 7 | L: 10 | SV: 1 | BS: 5 | HLD: 37
+IP: 84.0 | H: 69 | R: 45 | ER: 35 | HR: 8 | BB: 33 | SO: 83 | ERA: 3.75
+
+2036 – TOT
+G: 66 | GS: 0 | W: 5 | L: 3 | SV: 9 | BS: 4 | HLD: 16
+IP: 71.2 | H: 57 | R: 29 | ER: 28 | HR: 5 | BB: 36 | SO: 61 | ERA: 3.52
+
+––––––––––––––––––––––––––––––––––––––
+CONTRACT & ROSTER STATUS
+––––––––––––––––––––––––––––––––––––––
+2040: $12.0M
+2041: $12.0M
+2042: FA
+2043: FA
+2044: FA
+2045: FA
+
+Active Roster: YES
+40-Man Roster: YES
+Minor League Options: 2/3 USED
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+
+––––––––––––––––––––––––––––––––––––––
+PHOTO REFERENCE
+––––––––––––––––––––––––––––––––––––––
+Portrait: (Not yet assigned)
+POPID: Pending

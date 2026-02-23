@@ -1,0 +1,47 @@
+Dalton Rushing — TrueSource Profile v1.0
+Position: C / 1B / LF / RF
+Throws/Bats: R / L
+Height/Weight: 5′11″ / 220 lbs
+Born: Tennessee
+Drafted: Round 1 (2022)
+Age: 38
+MLB Service: 14.148 years
+Potential: A (Overall 75)
+Status: Free Agent / Likely Retired (2040)
+
+Awards & Honors
+Gold Glove — 2031, 2034, 2037
+Silver Slugger — 2030, 2031, 2032
+All-Star — 2031
+
+Year Team G AB R H 2B 3B HR RBI BB SO SB AVG OBP SLG
+2025 LAD 47 145 22 38 7 0 0 12 25 25 4 .262 .306 .497
+2026 TOT 78 289 51 68 14 1 7 12 63 111 3 .235 .293 .363
+2027 ATH 81 286 35 71 15 1 8 21 55 121 2 .248 .322 .343
+2028 ATH 84 324 39 88 15 1 12 43 42 125 1 .271 .322 .458
+2029 ATH 126 453 48 111 21 5 18 58 27 109 3 .245 .288 .395
+2030 ATH 133 483 61 134 33 0 24 71 59 108 4 .277 .335 .489
+2031 ATH 137 502 66 124 19 4 55 95 7 — — .247 .324 .474
+2032 ATH 151 580 81 172 32 2 28 100 81 104 6 .297 .382 .493
+2033 ATH 154 553 76 148 26 1 28 70 81 104 12 .268 .365 .432
+2034 ATH 144 515 59 132 28 1 25 74 65 110 8 .256 .341 .408
+2035 ATH 104 391 49 112 24 1 11 67 53 68 3 .286 .373 .437
+2036 ATH 132 486 61 136 21 4 19 49 88 — — .280 .348 .447
+2037 ATH 137 501 62 148 27 2 18 62 98 4 — .295 .372 .465
+2038 ATH 132 461 57 115 16 3 19 53 49 103 1 .249 .327 .362
+2039 SF 131 471 45 115 15 0 30 47 40 109 4 .244 .306 .365
+
+Career Totals:
+1,751 G | 6,312 AB | 773 R | 1,672 H | 300 2B | 22 3B | 233 HR | 882 RBI | 
+636 BB | 1,278 SO | 70 SB | .265 AVG | .334 OBP | .430 SLG
+
+Lore Summary
+Dalton Rushing, the steady left-handed backstop from Tennessee, rose from the Dodgers’ 2022
+first-round pick to become one of the Athletics’ most reliable and productive catchers of the 2030s. A
+three-time Silver Slugger and three-time Gold Glove winner, Rushing embodied durability and
+leadership behind the plate. During Oakland’s Dynasty extension years, he served as the offensive
+anchor for multiple playoff runs, combining defensive excellence with consistent .280-range hitting and
+20-plus home run power. His versatility across first base and corner outfield roles further cemented his
+value as a franchise pillar during the transition era.
+Status: Free Agent / Retired (2040)
+Franchise of Origin: Los Angeles Dodgers → Oakland Athletics (Dynasty Era Anchor)

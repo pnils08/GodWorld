@@ -1,0 +1,18 @@
+Buford Park — TrueSource DataPage v1.0
+Team: Las Vegas Aviators (#7)
+Position: 3B / 1B
+Potential: B
+Overall: 82
+Draft: Round 1 (2037)
+Age: 23
+B/T: L / R
+Height/Weight: 5'8" / 177 lbs
+Birthplace: Florida
+Hitter Tendency: Whole Field
+MLB Service Time: 0.132 years
+
+Year   Team   G   AB   R   H   2B   3B   HR   RBI   BB   SO   SB   CS   AVG   OBP   SLG
+2039   ATH    9   27   8   5    1    0    3    4     3    5    1    0   .185  .313  .556
+2038   ATH    26  94   11  16   8    0    3    5     4    24   3    0   .170  .204  .319
+
+Career        35  121  19  21   9    0    6    9     7    29   4    0   .174  .231  .372

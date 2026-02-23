@@ -1,0 +1,20 @@
+TREVOR SHIMIZU — Transit & Infrastructure
+“The Stalled Bus and the School Board: How Micro-Failures Accumulate”
+November 30th, 11:12 PM: A bus stalled on Broadway near 14th Street. Forty-three minutes to clear. Minor incident. Low severity.
+November 30th, 11:13 PM: Oakland Unified School District board meeting descended into procedural dispute over budget amendment language. Meeting extended two hours past scheduled adjournment.
+These events are unrelated. Except they’re both symptoms of the same thing: infrastructure operating at tolerance limits.
+The bus—Line 51—stalled due to what AC Transit is calling “routine mechanical failure.” But here’s the thing: the 51 has had three “routine” breakdowns in November. That’s not routine. That’s a maintenance backlog catching up with a fleet stretched thin.
+The school board dispute wasn’t about the budget itself. It was about a misfiled document—logged separately in the civic event system the same night—that triggered a procedural review. Two board members called for recess. Three refused. The meeting became a referendum on process rather than substance.
+By the time both incidents resolved, it was past 1 AM. The bus passengers transferred to a backup route. The board tabled the amendment for December. Both outcomes functional. Both outcomes inefficient.
+Oakland’s civic infrastructure load has been flagged at “stable” with “minor variance” for the last four days, but stability at high load is different than stability at low load. We’re running at 0.72 traffic load during fog events and 0.8 during cold snaps. That’s operational, but it’s tight.
+The transformer hiccup on November 30th—another “low severity” event—knocked out power to twelve blocks in Temescal for six minutes. PG&E called it a “brief service interruption.” Residents called it another sign that the grid is aging faster than it’s being maintained.
+Add it up:
+	∙	Stalled bus (mechanical)
+	∙	Misfiled document (procedural)
+	∙	Transformer hiccup (electrical)
+	∙	School board dispute (governance)
+Four separate systems. Four micro-failures. All within a 72-hour window.
+None of these events merit headlines. But together, they paint a picture of a city operating at the edge of its tolerance. When everything works, Oakland hums. When one thing breaks, redundancy catches it.
+But what happens when two things break at once? Three? Four?
+We’re about to find out if winter keeps hitting this hard.
+Names Index: None

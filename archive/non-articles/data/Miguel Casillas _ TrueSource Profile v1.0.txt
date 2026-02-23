@@ -1,0 +1,54 @@
+Miguel Casillas — TrueSource Profile v1.0
+Position: SP (#5)
+Teams: Colorado Rockies / Tampa Bay Rays / Oakland Athletics / Chicago White Sox
+Throws/Bats: R / R
+Height/Weight: 6′5″ / 204 lbs
+Born: Pennsylvania
+Drafted: Round 1 (2026)
+Age: 34
+MLB Service: 12.054 years
+Potential: A (Overall 88)
+Hitter Tendency: Opposite Field
+
+Pitch Repertoire:
+4-Seam Fastball (91 mph), Curveball (78 mph), Slider (82 mph)
+
+Attribute Rating      Attribute Rating
+Stamina 79            Velocity 57
+H/9 79                Break 49
+K/9 84                Fielding 22
+BB/9 71               Arm Accuracy 93
+HR/9 62               Pitch Clutch 74
+Control 65            Reaction 31
+
+Year Team GS W L IP H R ER HR BB SO ERA
+2039 CWS 33 12 10 189.0 172 75 71 19 51 199 3.38
+2038 CWS 33 20 10 209.0 165 65 63 6 53 237 2.71
+2037 CWS 33 11 7 181.1 190 89 89 20 59 197 4.42
+2036 CWS 33 17 8 212.1 160 63 62 17 59 228 2.63
+2035 ATH 33 10 6 202.1 185 84 82 22 61 216 3.65
+2034 ATH 33 15 7 189.2 195 92 87 24 51 214 4.13
+2033 TB 33 12 9 204.2 168 61 61 9 41 208 2.68
+2032 TB 33 14 10 198.1 172 70 70 12 47 175 3.18
+2031 TB 33 10 14 175.2 180 94 87 23 71 163 4.46
+2030 TB 31 10 7 174.0 169 79 79 20 59 170 4.08
+2028 COL 25 10 16 150.0 169 87 87 18 63 150 5.22
+2027 COL 10 1 5 51.1 46 24 24 10 25 33 4.21
+
+Career Totals:
+392 GS | 145 W | 122 L | 2280.1 IP | 2076 H | 949 R | 915 ER | 283 HR | 724 BB | 2272 SO | 3.61 ERA
+
+Accolades:
+- Most Valuable Player (2038)
+- Cy Young Awards (2036, 2038)
+- All-Star Appearances (2033, 2036)
+
+Lore Summary
+Miguel Casillas rose from Pennsylvania with the poise of a professor and the power of a craftsman.
+Drafted in 2026, he developed a reputation for cerebral precision — commanding his fastball like
+punctuation. From Colorado’s early grind to Tampa Bay’s stability and Oakland’s contender years,
+Casillas matured into one of baseball’s few true workhorses.
+By 2038, he had reached his peak — a Cy Young and MVP in the same season, leading the league in
+efficiency and control. His transition to Chicago brought experience and depth to a team searching for
+stability. Casillas’s legacy is that of a pitcher who aged with intellect — power diminished, but precision
+sharpened — a symbol of longevity and craft in the A’s Dynasty continuum.

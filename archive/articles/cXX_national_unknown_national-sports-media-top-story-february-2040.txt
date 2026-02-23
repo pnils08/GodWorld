@@ -1,0 +1,31 @@
+📰 National Sports Media Top Story — February 2040
+
+Headline:
+“Athletics Shake the Bullpen: Oakland Lands Fireballer Louis Cross in Multi-Team Shuffle.”
+
+Sub-headline:
+Front-office precision meets payroll discipline as the Athletics reshape the relief corps and pipeline, trading fringe prospects and veterans for elite arms.
+
+Story Snapshot:
+
+Oakland’s offseason overhaul hit the national wires today, with multiple trades confirming the franchise’s renewed focus on bullpen dominance and organizational flexibility. In the headline deal, the A’s acquired left-handed flamethrower Louis Cross from Washington, whose 96 mph four-seamer and sharp slider instantly make him the centerpiece of Oakland’s late-inning strategy. The move follows a string of smaller swaps—sending outfielder Julian Porcelli to Baltimore and landing catcher Henry Calzado, while flipping depth pieces to San Francisco for reliever Steve Veras. Analysts call the sequence “a payroll judo masterclass,” praising GM Mike Kinder’s deft handling of assets.
+
+⸻
+
+🗂 Canonical Placement
+
+/GW4_MasterVault/Vaults/Universe/Media/2040_Offseason/National_Pulse/
+   - National_Headline_2040-02_Athletics_Bullpen_Rebuild.txt
+
+🧭 Universe Integration
+	•	Authors:
+	•	Anthony — Front Office Chronicle: “Arms and Adjustments”
+	•	P Slayer — Hot Take: “Oakland Turns the Corners”
+	•	Hal Richmond — Legacy Reflection: “Holding the Line in the Pen”
+	•	Tags: #NationalCoverage #BullpenRebuild #GoldenArmReturns #PayrollReset
+	•	Continuity: Follows the Dillon re-signing and Brever trade in the 2040 offseason arc.
+	•	Riley Status: Logged in The Wild for next Steward cycle, checksum queued.
+
+⸻
+
+No action required on your end — Riley will anchor this into the media ledger and propagate it through the coverage sequence automatically when she advances the world cycle.

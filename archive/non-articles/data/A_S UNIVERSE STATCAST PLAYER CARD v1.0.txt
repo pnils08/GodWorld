@@ -1,0 +1,138 @@
+A’S UNIVERSE STATCAST PLAYER CARD v1.0
+ARTURO RAMOS — RHP (SP)
+Age: 25 | B/T: S/R | Height 6’0”, 206 lbs
+Origin: Puerto Rico
+Potential: A | Overall: 86
+Archetype: Power–Command Young Ace
+MLB Service Time: 1.001 years
+TrueSource Reference: TS-RAMOS–2040  
+
+⸻
+
+CAREER SNAPSHOT
+
+2039 ROOKIE YEAR (FULL SEASON)
+32 GS | 19–7 | 208.2 IP | 2.80 ERA | 155 K | 32 BB
+• American League Rookie of the Year
+• All-Star
+• Immediate frontline starter
+• One of the best rookie pitching seasons in franchise history
+
+He entered MLB and immediately pitched like a SP1.
+
+⸻
+
+PITCHING REPERTOIRE — SAVANT INTERPRETATION
+
+4-Seam Fastball — 93 mph
+• Ride over the top
+• Late hop effect
+• Generates weak fly balls
+• Command-first heater, not a blow-by weapon
+
+Slider — 86 mph
+• Wipeout when tunneled properly
+• Hard, gyro shape
+• Generates chase swings from RHB
+• Best miss-generator in arsenal
+
+Curveball — 78 mph
+• Sentimental “Puerto Rican pitching school” shape
+• Large vertical depth
+• Early-count strike stealer
+• Works beautifully off slider velocity gap
+
+Summary:
+A three-pitch ace starter —
+two strikeout weapons + one elite sequencing tool.
+
+⸻
+
+STATCAST-STYLE METRICS
+
+Velocity Band:
+Fastball: 92.5–93.8 mph
+Slider: 85.4–87.1 mph
+Curveball: 76.8–79.2 mph
+
+Expected Stats Projection:
+xERA: 3.10–3.35
+xBA allowed: Low
+xSLG allowed: Low–mid
+Hard-Hit% allowed: Strong suppression
+Barrel% allowed: Low for a young pitcher
+
+Plate Discipline Creation:
+– Induces chase with slider
+– Freezes hitters with curveball
+– Walks nearly nonexistent for his age (BB/9 elite)
+
+⸻
+
+RUN PREVENTION PROFILE
+
+ERA Pattern (Rookie Year): 2.80
+HR/9: 25 HR allowed — a bit high
+H/9: 172 hits in 208 IP — excellent
+BB/9: 1.4 — elite
+K/9: 6.7 — low but trending up
+
+Summary:
+He beats hitters by sequencing, not raw velocity.
+
+⸻
+
+DEFENSE & ATHLETICS
+
+Fielding: Average
+Arm Strength: Good
+Pickoff Move: Above-average
+Reaction: Fine
+
+No weaknesses, no standout strengths —
+he does not hurt himself defensively.
+
+⸻
+
+DEVELOPMENT TRAJECTORY
+
+He’s young.
+He’s durable.
+He’s command-first.
+He has two real strikeout pitches.
+This combination is extremely rare.
+
+Projection Curve:
+• 2024–2026: SP2/low-end SP1
+• 2027–2030: Clear SP1 window
+• Long-term durability: Very strong
+
+In plain English:
+He’s going to be a top-five pitcher in your league for a long time.
+
+⸻
+
+NOTES (ANTHONY — ANALYTICS)
+
+• Ramos’s slider tunnels so cleanly off his four-seam that hitters misread the pitch for 25–30 feet.
+• Low walk rate is the SINGLE most important trait for sustainable pitching — he’s elite already.
+• HR rate is his only flaw, and that improves with location refinement.
+• Strikeout totals will rise naturally as he learns to sequence for kill counts.
+• Long-term WAR projection rivals Benji Dillon’s early-career curve.
+
+⸻
+
+NOTES (P SLAYER — EMOTIONAL TAKE)
+
+“He pitches like someone who knows he belongs on a big stage.
+Not scared of anyone.
+Not overwhelmed by anything.
+Ramos shows up like the moment owes him something.”
+
+⸻
+
+NOTES (HAL RICHMOND — HISTORICAL)
+
+“Pitchers like Ramos used to be called ‘control artists.’
+Today, they are engines of dynasties.
+His rookie year stands alongside the great debuts of Oakland’s long, winding history.”

@@ -1,0 +1,30 @@
+Antonio Castro TrueSource DataPage v1.0 — Antonio Casto
+Classification: Verified Core | Source: OCR Extraction (Refined)
+
+Profile Summary
+Name: Antonio Casto
+Age: 27 | Height/Weight: 6’2” / 181 lbs
+Country: Dominican Republic
+Position: 1B
+Potential: B | Overall: 79
+Bats/Throws: Left / Left
+Hitter Tendency: Whole Field
+Drafted: Round 1 (2030)
+Service Time: 3.036 years
+
+Attributes
+CON R 85 | CON L 79 | POW R 56 | POW L 54 | VIS 67 | DISC 82 | CLT 41 | DUR 86 | FLD 56 | ARM 70 | ACC 73 | REAC 64 | SPD 27 | STEAL 28 | BR AGG 28
+
+Year    G   AB  R   H   2B  3B  HR  RBI BB  SO  SB  AVG   OBP   SLG
+2039    98  355 40  99  21  8   13  45  46  53  1   .270  .360  .400
+2038    88  317 45  90  18  5   11  44  37  54  3   .284  .361  .451
+2037    47  167 20  42  13  1   9   23  23  32  3   .251  .342  .365
+2036    18  65  9   17  1   0   2   8   17  17  0   .250  .391  .397
+2035    17  55  7   15  4   1   2   7   12  2   2   .273  .379  .545
+
+Career  271 977 127 227 63  15  27  136 132 169 14  .278  .359  .432
+
+Contract Summary
+2040: $2,000,000 | 2041: Arbitration | 2042: Arbitration | 2043–2049: Free Agent Eligibility
+
+Active Roster: Yes | 40-Man: Yes | Minor Options Used: 3/3

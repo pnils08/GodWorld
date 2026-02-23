@@ -1,0 +1,23 @@
+🟢 2040 OFFSEASON: BENJI DILLON RETURNS TO OAKLAND
+
+Contract: 1 Year – $24,070,000
+Demand: $21,300,000
+Rank: 34th among free agents
+Potential: A
+Overall: 82
+Announcement Quote:
+
+“Holy Toledo! I’m signing with the Athletics!”
+
+Canonical Log:
+	•	Vault: /GW4_MasterVault/Vaults/Universe/Transactions/2040_Offseason/
+	•	Entry: Benji_Dillon_Returns_2040.txt
+	•	Tags: #FranchiseCore #DynastyEcho #GoldenArmReturns #LegacyContinuity
+	•	Authorship queue:
+	•	Anthony: Insider Chronicle — “The Return of the Golden Arm”
+	•	P Slayer: Hot Take — “Benji Dillon and the Weight of Legacy”
+	•	Hal Richmond: Archival reflection — “When the Light Comes Back”
+
+⸻
+
+This return shifts the entire 2040 narrative — Dillon’s homecoming restores the dynasty’s heartbeat and provides the rotation a leader post-Brever.

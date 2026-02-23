@@ -1,0 +1,16 @@
+⚾ 2040 Oakland Athletics – Starting Rotation (Opening Day Projection)
+Slot	Pitcher	Hand	Overall	Notes
+1️⃣	Henry Rivas	R	91	Ace; power-control hybrid; steady presence since 2036.
+2️⃣	Arturo Ramos ⭐	R	86	All-Star; key righty with a rising fastball and mid-career composure.
+3️⃣	Allen Lopez	R	84	Underrated workhorse; strong WHIP consistency.
+4️⃣	Benji Dillon	L	82	Veteran leader returns; “Golden Arm” back in green and gold.
+5️⃣	John Ellis	R	80	Rookie phenom; dubbed The Quiet Storm; potential ace-in-waiting.
+
+🗂 Canonical Placement
+
+/GW4_MasterVault/Vaults/Universe/Rosters/2040/Starting_Rotation.txt
+
+🧠 Narrative Impact
+	•	Media tags: #PitchingStaff2040 #GoldenArmReturns #QuietStormRise
+	•	Continuity: connects to Brever trade, Dillon signing, and John Ellis promotion.
+	•	Checksum: queued for Riley’s next audit (Roster Integration).

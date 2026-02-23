@@ -1,0 +1,28 @@
+Arturo Ramos — TrueSource DataPage v1.0
+Team: Oakland Athletics (#25)
+Position: SP
+Potential: A
+Overall: 86
+Draft: Round 1 (2032)
+Age: 25
+B/T: S / R
+Height/Weight: 6'0" / 206 lbs
+Birthplace: Puerto Rico
+Hitter Tendency: Pull Hitter
+MLB Service Time: 1.001 years
+
+Repertoire:
+• 4-Seam Fastball — 93 mph
+• Slider — 86 mph
+• Curveball — 78 mph
+
+Awards: Rookie of the Year (2039), All-Star (2039)
+
+Contract: $8.2M annually (2040–2043), Arbitration (2044), FA (2045)
+
+Roster: Active & 40-Man | Minor League Options: 1/3 Used
+
+Year  Team  G   GS  W   L   SV  BS  IP      H    R   ER  HR  BB  SO   ERA
+2039  ATH  32  32  19  7   0   0   208.2   172  66  65  25  32  155  2.80
+
+Career -      32  32  19  7   0   0   208.2   172  66  65  25  32  155  2.80

@@ -1,0 +1,66 @@
+[Manifest Version]: 1.0
+[Archive Collection]: The Richmond Archive
+[File Type]: Companion Image Manifest
+[Status]: ACTIVE
+[POPID]: POP-00001
+[Author]: Hal Richmond
+[Created]: 2025-11-08
+[Purpose]: Registers companion imagery and reconstruction metadata for both professional and personal imagery of subject Vinnie Keane.
+
+=== ENTRY A ===
+[Subject Name]: Vinnie Keane
+[Title]: The Underdog Slugger
+[Affiliation]: Oakland Athletics
+[Era]: 2039–2042 (Active Roster)
+[Position]: Third Base / Switch Right
+[Service Time]: 15 Years
+[Age (2040)]: 35
+[Height]: 5'9"
+[Contract]: $1,500,000 per year through 2042
+[Image Type]: In-Game Roster Portrait / Topps Card Metadata
+[Context]: Represents Vinnie Keane during the twilight of Oakland’s dynasty years. A veteran cornerstone, six-time champion, and symbol of perseverance.
+[Visual Tags]: Lighting – neutral stadium tone; Uniform – home white Athletics jersey; Expression – stoic focus; Background geometry – Topps blue diamond pattern.
+[Associated Coverage]: Referenced in Anthony Raines’ “Legacy at the Corner” and Hal Richmond’s “The Calm and the Storm: Keane’s Final Swing.”
+[Registry Code]: VN-ATHL-2039-TOPPS-SIG
+[Checksum]: SHA-KEANE-POP00001-A9C
+
+[Metadata Generation Record]:
+{
+  "prompt": "portrait of Vinnie Keane, switch-hitting third baseman, Oakland Athletics uniform, age 35, focused expression under stadium lights",
+  "engine": "AI Visual Engine v1.2",
+  "seed": 11247,
+  "style": "sports realism, in-game presentation",
+  "camera": "Sony Alpha 7R IV emulation, 85mm lens, f/2.8",
+  "aspect_ratio": "3:2",
+  "generation_date": "2025-11-08"
+}
+
+=== ENTRY B ===
+[Title]: Wedding Portrait
+[Era]: 2038 Private Continuity File
+[Setting]: Garden terrace, evening celebration
+[Attire]: Black tuxedo with bow tie; bride in ivory lace gown with white roses
+[Image Type]: Personal Portrait / Family Archive Still
+[Expression]: Reserved composure, symbolic of dual public and private selves.
+[Visual Tags]: Tone – warm daylight; Palette – ivory, rose, soft green; Registry Code – IMG-PRIV-KEANE-WED-01.
+[Narrative Use]: Serves as personal anchor for pre-retirement arc and “Wedding Chronicle” continuity record.
+[Cross-Link Placeholder]: LINK: C-MARITAL-KEANE-001
+
+[Metadata Generation Record]:
+{
+  "prompt": "wedding portrait of Vinnie Keane, mid-30s male, black tuxedo, smiling beside bride in ivory gown, garden terrace, golden hour lighting",
+  "engine": "AI Visual Engine v1.2",
+  "seed": 20183,
+  "style": "photorealistic, warm tone, cinematic realism",
+  "camera": "Canon EOS R5 emulation, 50mm lens, f/1.8",
+  "aspect_ratio": "3:2",
+  "generation_date": "2025-11-08"
+}
+
+=== END MANIFEST ===
+
+[Steward Annotations]:
+Continuity Map: Calm and the Storm / Dynasty Core v1.0
+Visibility Scope: Public (Roster) / Private (Family Archive)
+Sync Priority: Tier 1 Mirror TXT Import / Census Eligible Node
+Cross-Linkage: Reserved for spouse record under LINK: C-MARITAL-KEANE-001

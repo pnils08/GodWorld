@@ -1,0 +1,449 @@
+
+
+──────────────────────────────
+Miguel Casillas — TrueSource Profile v1.0.txt
+──────────────────────────────
+Miguel Casillas — TrueSource Profile v1.0
+Position: SP (#5)
+Teams: Colorado Rockies / Tampa Bay Rays / Oakland Athletics / Chicago White Sox
+Throws/Bats: R / R
+Height/Weight: 6′5″ / 204 lbs
+Born: Pennsylvania
+Drafted: Round 1 (2026)
+Age: 34
+MLB Service: 12.054 years
+Potential: A (Overall 88)
+Hitter Tendency: Opposite Field
+
+Pitch Repertoire:
+4-Seam Fastball (91 mph), Curveball (78 mph), Slider (82 mph)
+
+Attribute Rating      Attribute Rating
+Stamina 79            Velocity 57
+H/9 79                Break 49
+K/9 84                Fielding 22
+BB/9 71               Arm Accuracy 93
+HR/9 62               Pitch Clutch 74
+Control 65            Reaction 31
+
+Year Team GS W L IP H R ER HR BB SO ERA
+2039 CWS 33 12 10 189.0 172 75 71 19 51 199 3.38
+2038 CWS 33 20 10 209.0 165 65 63 6 53 237 2.71
+2037 CWS 33 11 7 181.1 190 89 89 20 59 197 4.42
+2036 CWS 33 17 8 212.1 160 63 62 17 59 228 2.63
+2035 ATH 33 10 6 202.1 185 84 82 22 61 216 3.65
+2034 ATH 33 15 7 189.2 195 92 87 24 51 214 4.13
+2033 TB 33 12 9 204.2 168 61 61 9 41 208 2.68
+2032 TB 33 14 10 198.1 172 70 70 12 47 175 3.18
+2031 TB 33 10 14 175.2 180 94 87 23 71 163 4.46
+2030 TB 31 10 7 174.0 169 79 79 20 59 170 4.08
+2028 COL 25 10 16 150.0 169 87 87 18 63 150 5.22
+2027 COL 10 1 5 51.1 46 24 24 10 25 33 4.21
+
+Career Totals:
+392 GS | 145 W | 122 L | 2280.1 IP | 2076 H | 949 R | 915 ER | 283 HR | 724 BB | 2272 SO | 3.61 ERA
+
+Accolades:
+- Most Valuable Player (2038)
+- Cy Young Awards (2036, 2038)
+- All-Star Appearances (2033, 2036)
+
+Lore Summary
+Miguel Casillas rose from Pennsylvania with the poise of a professor and the power of a craftsman.
+Drafted in 2026, he developed a reputation for cerebral precision — commanding his fastball like
+punctuation. From Colorado’s early grind to Tampa Bay’s stability and Oakland’s contender years,
+Casillas matured into one of baseball’s few true workhorses.
+By 2038, he had reached his peak — a Cy Young and MVP in the same season, leading the league in
+efficiency and control. His transition to Chicago brought experience and depth to a team searching for
+stability. Casillas’s legacy is that of a pitcher who aged with intellect — power diminished, but precision
+sharpened — a symbol of longevity and craft in the A’s Dynasty continuum.
+
+──────────────────────────────
+Tre’ Morgan — TrueSource Profile v1.0
+──────────────────────────────
+Tre’ Morgan — TrueSource Profile v1.0
+Position: 1B / LF / RF (#25)
+Team: Former Oakland Athletics, later CIN / MIN
+Throws/Bats: L / L
+Height/Weight: 6′0″ / 215 lbs
+Born: Louisiana
+Drafted: Round 3 (2023)
+Age: 37
+MLB Service: 9.136 years
+Potential: B (Overall 68)
+Hitter Tendency: Whole Field
+Award: Gold Glove (2037)
+
+Year Team AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 MIN 27 4 9 2 0 0 4 5 5 0 1 .333 .437 .407
+2038 CIN 405 48 122 19 1 15 43 44 78 10 3 .301 .353 .449
+2037 ATH 500 49 117 14 1 9 38 61 103 13 3 .234 .317 .356
+2036 ATH 368 63 92 17 2 14 53 69 84 8 3 .250 .326 .458
+2035 ATH 315 39 85 9 0 11 40 37 59 3 2 .270 .355 .403
+2034 ATH 268 37 70 8 3 8 31 35 52 5 2 .268 .357 .406
+2033 ATH 485 74 149 34 3 28 88 53 84 10 3 .307 .380 .559
+2032 ATH 315 39 85 9 0 11 40 37 59 3 2 .270 .355 .403
+2031 ATH 325 52 92 14 4 13 43 37 50 1 1 .283 .360 .471
+2030 ATH 147 24 44 7 0 8 21 21 34 4 1 .299 .342 .510
+2029 ATH 153 15 33 2 0 2 5 5 31 2 1 .216 .247 .416
+
+Career Totals:
+888 G | 3,196 AB | 412 R | 887 H | 137 2B | 11 3B | 121 HR | 416 RBI |
+331 BB | 590 SO | 65 SB | 35 CS | .278 AVG | .349 OBP | .441 SLG
+
+Awards & Honors
+• Gold Glove (2037)
+
+Lore Summary
+Tre’ Morgan brought the heartbeat of Louisiana baseball to Oakland’s dugout — a natural leader and
+an unselfish professional who prioritized team balance over personal numbers. A defensive standout at
+first base with quick instincts and a strong arm, his Gold Glove campaign in 2037 underscored years of
+consistency. Though his bat rarely made headlines, his presence did — Morgan was the quiet stabilizer
+on a roster filled with stars, bridging eras with reliability and grace.
+Even as his career carried him to Cincinnati and Minnesota, his best seasons remained intertwined with
+Oakland’s transitional dynasty — a player who defined loyalty through the grind.
+
+──────────────────────────────
+Steve Conrad — TrueSource Profile v1.0
+──────────────────────────────
+Steve Conrad — TrueSource Profile v1.0
+Position: RF / CF (#16)
+Team: Philadelphia Phillies
+Throws/Bats: R / S
+Height/Weight: 6′1″ / 187 lbs
+Born: Illinois
+Drafted: Round 1 (2028)
+Age: 29
+MLB Service: 11.000 years
+Potential: A (Overall 86)
+Hitter Tendency: Whole Field
+Quirk: Pinch Hitter
+Contract: Active through 2043, Free Agent 2044
+
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 PHI 140 545 75 133 18 5 27 70 57 125 17 4 .244 .321 .440
+2038 PHI 148 552 83 160 19 5 28 85 73 104 13 7 .290 .378 .480
+2037 ATH 149 550 84 159 20 6 33 98 69 107 18 9 .289 .367 .564
+2036 ATH 152 556 90 166 24 5 36 109 94 124 17 10 .306 .397 .580
+2035 CWS 155 582 99 179 35 4 39 108 94 124 17 10 .304 .401 .570
+2034 CWS 157 609 94 166 30 2 29 93 74 145 15 9 .273 .359 .476
+2033 CWS 158 613 85 164 27 4 29 91 74 131 13 7 .268 .349 .467
+2032 CWS 151 590 68 161 31 4 29 81 74 113 14 7 .273 .360 .453
+2031 CWS 147 563 87 152 24 3 32 94 67 107 17 7 .270 .350 .440
+2030 CWS 144 589 87 139 32 4 48 136 17 5 .280 .337 .475
+
+Career Totals: 
+1,664 G | 6,365 AB | 957 R | 1,821 H | 353 2B | 46 3B | 310 HR | 1,043 RBI | 
+843 BB | 1,328 SO | 184 SB | 75 CS | .286 AVG | .374 OBP | .502 SLG
+
+Awards & Honors
+• Hank Aaron Award (2034, 2035)
+• Silver Slugger (2034–2036)
+• All-Star (2030–2037, seven-time)
+• Batting Title (2035)
+
+Lore Summary
+Steve Conrad stands as one of the most balanced offensive forces of the 2030s — a switch-hitter 
+who merged patience and precision with raw power. Drafted out of Illinois in 2028, his rise 
+through Chicago’s system culminated in back-to-back Hank Aaron Awards and multiple Silver 
+Slugger awards as the heart of the White Sox order.
+
+Conrad later carried his consistent excellence to Oakland and Philadelphia, evolving into a 
+cornerstone veteran presence. With a career .286 average and over 300 home runs, his résumé 
+captures both the artistry and endurance of the modern professional hitter — 
+a true architect of contact, control, and composure.
+
+──────────────────────────────
+Paul Skenes — TrueSource Profile v1.0
+──────────────────────────────
+Paul Skenes — TrueSource Profile v1.0
+Position: SP
+Throws/Bats: R/R
+Height/Weight: 6′6″ / 260 lbs
+Born: California
+Drafted: Round 1 (2023)
+Age: 37
+MLB Service: 11.000 years
+Status: Free Agent / Retired (2040)
+Potential: A (Overall 58)
+
+Pitch Repertoire
+4-Seam Fastball — 99 mph
+Sinker — 94 mph
+Curveball — 83 mph
+Sweeper — 85 mph
+Slider — 87 mph
+
+Quirk: Outlier I (Primary pitch exceeds velocity limit)
+
+Awards
+Rookie of the Year — 2024
+Gold Glove — 2027
+Cy Young Award — 2029
+All-Star Selections — 2024, 2028, 2029
+
+Year Team GS W L SV IP H R ER HR BB SO ERA
+2024 PIT 23 11 7 0 133.0 124 29 30 12 30 170 1.98
+2025 PIT 33 15 7 0 205.0 173 78 77 20 50 148 3.38
+2026 PIT 33 16 9 0 207.2 168 67 67 17 58 159 2.90
+2027 PIT 33 15 9 0 201.2 178 74 74 23 46 175 3.25
+2028 PIT 26 13 10 0 163.2 128 58 47 17 47 132 2.58
+2029 PIT 33 17 7 0 211.1 206 63 63 24 68 168 2.68
+2030 SD  33 11 10 0 161.0 161 72 72 23 62 159 3.02
+2031 ATH 33 14 10 0 191.2 186 84 80 20 52 153 3.76
+2032 ATH 33 12 7 0 184.2 169 77 72 27 71 127 3.51
+2033 ATH 32 14 9 0 182.2 153 61 61 21 61 122 2.91
+2034 TOT 26 19 8 0 111.2 115 57 57 19 51 78 4.59
+
+Career Totals:
+338 G | 331 GS | 141 W | 77 L | 0 SV | 1995.1 IP | 1675 H | 725 R | 
+698 ER | 233 HR | 609 BB | 1549 SO | 3.14 ERA
+
+Lore Summary
+Paul Skenes, the towering right-hander from California, became one of baseball’s generational arms
+after being selected in the first round of the 2023 draft. His blistering fastball — regularly clocked at
+102 mph — and his signature “Outlier I” trait made him a nightmare for hitters throughout the late
+2020s and early 2030s. He burst onto the scene by winning Rookie of the Year in 2024 and capturing a
+Cy Young Award in 2029, anchoring a Pirates rotation that defined the franchise’s revival. After
+impactful stops in San Diego and Oakland, Skenes closed his career with over 1 500 strikeouts and a
+3.14 ERA — a legacy built on power, precision, and longevity.
+Status: Retired (2040)
+Franchise of Origin: Pittsburgh Pirates → Oakland Athletics Era (Dynasty Adjunct)
+
+──────────────────────────────
+Orion Kerkering — TrueSource Profile v1.0
+──────────────────────────────
+Orion Kerkering — TrueSource Profile v1.0
+Position: RP (#50)
+Throws/Bats: R / R
+Height/Weight: 6′2″ / 204 lbs
+Born: California
+Drafted: Round 5 (2022)
+Age: 38
+MLB Service: 14.010 years
+Potential: B (Overall 59)
+Pitch Repertoire: Sweeper (86 mph), 4-Seam Fastball (98 mph), Sinker (95 mph)
+Status: Retired / Free Agent (2040)
+
+Year Team G GS W L SV BS HLD IP H R ER HR BB SO ERA
+2023 PHI 3 1 0 0 0 0 0 3.0 1 1 1 0 2 6 3.00
+2024 PHI 64 0 4 2 4 1 18 83.0 61 35 33 6 17 74 3.57
+2025 PHI 52 0 3 1 0 0 17 61.2 52 36 35 8 30 48 5.11
+2026 TOT 59 0 5 3 1 1 17 67.1 61 27 27 4 20 53 3.61
+2027 MIN 70 0 9 7 0 0 18 73.1 68 35 33 5 18 54 4.05
+2028 TOT 65 0 4 2 2 0 16 95.2 83 33 31 10 53 97 2.92
+2029 ATH 78 0 3 1 0 0 20 91.1 77 38 34 13 29 85 3.35
+2030 ATH 77 0 3 5 1 4 16 91.1 77 38 34 13 29 85 3.35
+2031 ATH 68 0 4 7 2 2 21 73.0 61 31 31 7 30 71 3.82
+2032 ATH 62 0 6 2 1 0 22 79.1 51 17 15 4 29 85 1.70
+2034 TOT 79 0 6 4 0 0 22 79.0 64 41 35 11 35 89 3.89
+2035 KC 61 0 4 4 0 0 16 68.1 47 32 20 6 25 70 2.71
+2037 KC 34 0 1 1 0 0 4 42.2 41 25 22 9 9 41 4.64
+2038 KC 84 0 9 8 0 7 23 71.1 61 31 27 8 26 75 3.41
+
+Career Totals:
+912 G | 2 GS | 69 W | 61 L | 96 SV | 50 BS | 212 HLD |
+1,017.1 IP | 847 H | 416 R | 363 ER | 107 HR | 415 BB | 991 SO | 3.21 ERA
+
+Lore Summary
+Orion Kerkering’s career bridged two decades of bullpen evolution. The California-born righty, drafted
+in the fifth round by Philadelphia in 2022, forged a fourteen-year career marked by stamina,
+adaptability, and an uncanny ability to neutralize left-handed hitters with his devastating sweeper.
+After his early Phillies tenure, he became a stabilizing force for Oakland’s relief corps through the
+2030s, logging over 1,000 innings and nearly 1,000 strikeouts. His signature three-pitch mix—95 mph
+sinker, 98 mph four-seamer, and 86 mph sweeper—anchored multiple postseason runs before
+concluding his career with Kansas City.
+Quietly effective and deeply durable, Kerkering symbolizes the archetype of the long-haul reliever:
+rarely flashy, always reliable.
+
+──────────────────────────────
+Mason Miller — TrueSource Profile v1.0
+──────────────────────────────
+Mason Miller — TrueSource Profile v1.0 (Photo-Only)
+Role: Closer | Throws: R | Age: 41 | Status: FA (Ret. 2040)
+Quirks: Outlier I • Night Player • Stopper • Homebody
+Awards: All-Star 2024–2036; Reliever of the Year 2028, 2032–2034
+
+Year-by-Year Pitching (OCR from screenshots)
+Year Team G GS W L SV BS HLD IP H R ER HR BB SO ERA
+2023 OAK 10 0 6 0 3 0 1 33.1 24 15 14 2 16 38 3.78
+2024 OAK 55 0 2 2 28 3 6 65.0 36 23 18 6 21 104 2.49
+2025 OAK 69 0 5 5 48 7 3 69.0 50 28 18 7 18 85 3.00
+2026 OAK 71 0 4 5 49 7 1 69.0 50 26 23 8 17 85 3.00
+2027 OAK 61 0 3 4 46 6 6 57.2 49 17 16 1 20 63 2.50
+2028 OAK 68 0 5 5 46 7 2 74.2 44 22 17 8 17 75 2.05
+2029 OAK 69 0 5 1 53 1 4 74.0 40 17 15 4 14 74 1.95
+2030 OAK 59 0 5 6 41 2 5 84.0 43 19 16 7 9 70 2.25
+2031 SD  64 0 5 6 43 2 3 64.1 53 25 19 8 13 55 2.66
+2032 OAK 64 0 2 3 54 5 3 67.1 32  6  4 1 11 67 0.53
+2033 OAK 71 0 2 0 51 6 4 76.0 51 19 10 5 15 66 1.30
+2034 OAK 67 0 1 1 46 4 4 69.0 34 14 10 4 10 75 1.30
+2035 TOT 68 0 5 7 47 4 4 74.1 66 29 20 9 10 72 2.42
+2036 SD  68 0 7 7 43 5 3 68.1 49 25 18 8 18 59 2.37
+2037 SD  57 0 5 5 36 5 6 56.2 51 27 25 9 23 38 3.97
+2038 —   0 0 0 0 0 0 0  0.0  0   0  0 0  0  0  0.00
+2039 —   0 0 0 0 0 0 0  0.0  0   0  0 0  0  0  0.00
+
+Career Totals (from screenshots)
+922 G | 6 W | 70 L | 62 BS | 600 SV | 69 HLD | 974.0 IP |
+685 H | 302 R | 243 ER | 79 HR | 240 BB | 1004 SO | 2.25 ERA
+
+Legacy Note
+Mason Miller anchored Oakland’s bullpen through the 2020s–2030s. Drafted in 2021 (Round 3), he became a dominant closer during the A’s championship window, recording 600 career saves with a 2.25 ERA over fourteen MLB seasons. Reliever of the Year (2028, 2032–2034). Thirteen-time All-Star (2024–2036). Finished as FA at age 41.
+
+TrueSource: Photo-only OCR build • Generated 2025-10-24 • Steward: Riley
+
+──────────────────────────────
+Kris Bubic — TrueSource Profile v1.0
+──────────────────────────────
+Kris Bubic — TrueSource Profile v1.0
+Position: SP
+Throws/Bats: L/L
+Height/Weight: 6′3″ / 225 lbs
+Born: California
+Drafted: Round 1 (2018)
+Age: 42
+MLB Service: 17.028 years
+Status: Free Agent / Retired (2040)
+Potential: A (Overall 55)
+
+Pitch Repertoire
+4-Seam Fastball — 93 mph
+Slider — 84 mph
+Circle Change — 85 mph
+Sinker — 92 mph
+Cutter — 87 mph
+
+Awards
+All-Star Appearances: 2022, 2033
+
+Year  Team  GS  W   L   SV  IP      H    R    ER   HR  BB  SO   ERA
+2020 KC    10  6   4   0   52.0    48   25   22   9   22  49   4.32
+2021 KC    20  7   6   0   130.0   121  67   64   22  54  99   4.43
+2022 KC    28  13  7   0   129.0   157  80   73   23  52  103  3.54
+2023 KC    33  17  9   0   190.1   187  80   69   24  62  178  3.27
+2024 KC    27  9   6   0   130.1   126  39   39   2   39  90   2.67
+2026 KC    33  15  10  0   201.2   211  78   79   26  63  192  3.53
+2027 ATH   33  13  11  0   201.2   201  82   74   16  46  175  3.25
+2028 ATH   33  10  9   0   194.2   187  69   67   15  36  149  3.10
+2029 ATH   33  15  9   0   195.2   179  63   79   24  61  164  3.63
+2030 ATH   33  11  7   0   186.1   183  80   77   12  63  157  3.72
+2032 SD    33  11  7   0   193.0   161  57   53   14  39  136  2.32
+2033 SD    33  12  6   0   205.2   161  53   47   14  48  139  2.32
+2034 PIT   33  11  11  0   177.0   180  79   75   15  74  142  3.81
+2035 TOR   31  10  9   0   162.0   143  68   63   22  58  99   3.50
+2036 TOR   44  9   10  0   144.0   145  72   63   23  58  90   3.94
+2037 MIA   10  5   0   0   53.1    43   27   23   9   23  38   3.97
+
+Career Totals:
+512 G | 434 GS | 161 W | 129 L | 0 SV | 2660.2 IP | 2548 H | 1130 R |
+1075 ER | 294 HR | 843 BB | 2128 SO | 3.64 ERA
+
+Lore Summary
+Kris Bubic, the Californian left-hander drafted in the first round of 2018, enjoyed a seventeen-year
+Major-League career defined by durability and adaptability. Joining Oakland during the late-2020s, he
+became the veteran pillar of the Athletics’ rotation through the franchise’s transition period—bridging
+the dynasty’s bullpen-era dominance into a new generation of starters. Twice an All-Star (2022, 2033),
+Bubic’s command of the sinker-changeup mix and quiet composure made him a steady influence in
+clubhouses across Kansas City, Oakland, San Diego, Pittsburgh, Toronto, and Miami. He retired in
+2040 with 161 wins, 2 128 strikeouts, and over 2 600 innings pitched, leaving behind a record of
+steadiness emblematic of baseball’s journeyman elite.
+Status: Retired (2040)
+Franchise of Origin: Kansas City Royals → Oakland Athletics Era (Transitional Core)
+
+──────────────────────────────
+Dalton Rushing — TrueSource Profile v1.0
+──────────────────────────────
+Dalton Rushing — TrueSource Profile v1.0
+Position: C / 1B / LF / RF
+Throws/Bats: R / L
+Height/Weight: 5′11″ / 220 lbs
+Born: Tennessee
+Drafted: Round 1 (2022)
+Age: 38
+MLB Service: 14.148 years
+Potential: A (Overall 75)
+Status: Free Agent / Likely Retired (2040)
+
+Awards & Honors
+Gold Glove — 2031, 2034, 2037
+Silver Slugger — 2030, 2031, 2032
+All-Star — 2031
+
+Year Team G AB R H 2B 3B HR RBI BB SO SB AVG OBP SLG
+2025 LAD 47 145 22 38 7 0 0 12 25 25 4 .262 .306 .497
+2026 TOT 78 289 51 68 14 1 7 12 63 111 3 .235 .293 .363
+2027 ATH 81 286 35 71 15 1 8 21 55 121 2 .248 .322 .343
+2028 ATH 84 324 39 88 15 1 12 43 42 125 1 .271 .322 .458
+2029 ATH 126 453 48 111 21 5 18 58 27 109 3 .245 .288 .395
+2030 ATH 133 483 61 134 33 0 24 71 59 108 4 .277 .335 .489
+2031 ATH 137 502 66 124 19 4 55 95 7 — — .247 .324 .474
+2032 ATH 151 580 81 172 32 2 28 100 81 104 6 .297 .382 .493
+2033 ATH 154 553 76 148 26 1 28 70 81 104 12 .268 .365 .432
+2034 ATH 144 515 59 132 28 1 25 74 65 110 8 .256 .341 .408
+2035 ATH 104 391 49 112 24 1 11 67 53 68 3 .286 .373 .437
+2036 ATH 132 486 61 136 21 4 19 49 88 — — .280 .348 .447
+2037 ATH 137 501 62 148 27 2 18 62 98 4 — .295 .372 .465
+2038 ATH 132 461 57 115 16 3 19 53 49 103 1 .249 .327 .362
+2039 SF 131 471 45 115 15 0 30 47 40 109 4 .244 .306 .365
+
+Career Totals:
+1,751 G | 6,312 AB | 773 R | 1,672 H | 300 2B | 22 3B | 233 HR | 882 RBI | 
+636 BB | 1,278 SO | 70 SB | .265 AVG | .334 OBP | .430 SLG
+
+Lore Summary
+Dalton Rushing, the steady left-handed backstop from Tennessee, rose from the Dodgers’ 2022
+first-round pick to become one of the Athletics’ most reliable and productive catchers of the 2030s. A
+three-time Silver Slugger and three-time Gold Glove winner, Rushing embodied durability and
+leadership behind the plate. During Oakland’s Dynasty extension years, he served as the offensive
+anchor for multiple playoff runs, combining defensive excellence with consistent .280-range hitting and
+20-plus home run power. His versatility across first base and corner outfield roles further cemented his
+value as a franchise pillar during the transition era.
+Status: Free Agent / Retired (2040)
+Franchise of Origin: Los Angeles Dodgers → Oakland Athletics (Dynasty Era Anchor)
+
+──────────────────────────────
+Carlos Chávez — TrueSource Profile v1.0
+──────────────────────────────
+Carlos Chávez — TrueSource Profile v1.0
+Position: CP (#19)
+Teams: Oakland Athletics / Los Angeles Angels
+Throws/Bats: R / L
+Height/Weight: 6′0″ / 173 lbs
+Born: Panama
+Drafted: Round 3 (2027)
+Age: 30
+MLB Service: 5.052 years
+Potential: B (Overall 85)
+Hitter Tendency: Pull Hitter
+
+Pitch Repertoire:
+Cutter (92 mph), Changeup (84 mph), Slider (85 mph)
+
+Attribute Rating      Attribute Rating
+Stamina 25            Pitch Control 83
+H/9 83                Velocity 78
+K/9 95                Break 65
+BB/9 61               Fielding 60
+HR/9 80               Arm Accuracy 35
+Pitch Clutch 75       Reaction 53
+
+Year   Team  G   GS  W   L   SV  BS  HLD   IP     H    R    ER   HR  BB  SO   ERA
+2039   LAA   75  0   7   8   1   1   35    79.1   70   36   33   6   40   79   3.89
+2038   ATH   78  0   9   8   1   1   36    83.2   79   31   31   13  31   108  3.33
+2037   ATH   76  0   5   7   8   1   35    71.1   70   33   27   9   33   93   3.33
+2036   ATH   69  0   3   7   18  3   41    70.0   63   27   27   7   31   83   3.09
+2035   ATH   74  0   4   6   7   1   34    78.0   76   38   33   8   27   92   3.76
+2034   ATH   13  0   0   1   1   0   8     17.1   15   3    3    1   8    11   1.55
+2033   ATH   5   0   0   1   0   0   0     5.2    7    5    5    2   4    3    8.35
+
+Career Totals:
+386 G | 0 GS | 29 W | 33 L | 26 SV | 35 BS | 155 HLD |
+391.2 IP | 379 H | 179 R | 158 ER | 44 HR | 155 BB | 459 SO | 3.63 ERA
+
+Lore Summary:
+Carlos Chávez emerged from Panama as a precision reliever with a surgeon’s touch and a closer’s edge. 
+His mastery of the cutter-changeup-slider trio defined him as one of the Athletics’ most trusted bullpen arms through the late 2030s. 
+Known for control, composure, and consistency, Chávez anchored the middle innings — a stabilizer who never chased headlines but always delivered results. 
+By the time he joined Los Angeles in 2039, his craft had matured into art: a reliable late-inning option with over 150 holds and nearly 400 innings of work. 
+His ERA told the truth — steady, unspectacular, and indispensable. In a dynasty of fire and flash, Chávez was the quiet engineer of calm.

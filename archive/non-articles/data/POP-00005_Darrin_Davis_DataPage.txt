@@ -1,0 +1,41 @@
+
+POPID: POP-00021
+Name: Darrin Davis
+Alias: "The Ohio Outlaw of Oakland"
+Tier: 1
+Role Type: Legend
+Year: 2040
+
+--- BIOGRAPHICAL DATA ---
+Birth Year: 2009
+Birthplace: Columbus, Ohio, USA
+Height: 5'9"
+Weight: 186 lbs
+Bats/Throws: Right/Right
+Drafted: 2026 (Round 1)
+MLB Service Time: 9.165 years
+Age: 30 (as of 2040)
+
+--- PROFESSIONAL DATA ---
+Team: Oakland Athletics
+Position: LF / CF Hybrid (Primary LF, Secondary CF/RF)
+Overall Rating: 92
+Potential: A
+Known For: Hustle, leadership, relentless playmaking, showmanship with duty.
+Nickname: "The Ohio Outlaw of Oakland"
+Notable Awards: MVP 2037, 2× World Series MVP, 2× Hank Aaron Award, 7× All-Star
+Legacy Status: Core dynasty member alongside Vinnie Keane, Benji Dillon, Isley Kelley, and Mark Aitken.
+
+--- IMAGE DATA REFERENCE ---
+POPID_Image_Link: /mnt/data/A_digital_photograph_features_Darrin_Davis,_a_Cauc.png
+POPID_Creation_Stamp: 2025-11-09 09:07:03
+Image_Type: Portrait / 2040 ID Style
+Visual_Profile: Short light brown hair, blue eyes, athletic build, composed expression, dark gray suit, green tie, studio background. A's cap and jersey portrait variant available.
+
+--- NOTES ---
+This record represents the canonical likeness and data framework for Darrin Davis as of simulation year 2040.
+All derivative works or recreations should reference POP-00021 for visual continuity and identity validation within the Mirror System.
+
+--- LEGACY REFERENCE ---
+Previous POPID: POP-00005 (pre-Sheets system)
+Current POPID: POP-00021 (Simulation_Ledger canonical)

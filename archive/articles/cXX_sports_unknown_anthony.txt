@@ -1,0 +1,55 @@
+Anthony
+Franchise Control Sheet Briefings – 2040 Edition
+
+By: A’s Insider: Anthony
+Internal Analytics Memorandum
+(Confidential – Bay Tribune / Front Office Syndicate)
+
+Section 1 – Overview
+
+The 2040 control sheet represents the most delicate fiscal balance the Oakland franchise has attempted in over a decade.
+Projected payroll for Opening Day stands at $136,000,000, nearly identical to 2039, but now heavily backloaded across three veterans: John Brever ($24,100,000), Benji Dillon (pending $19,200,000 offer), and Vinnie Keane ($15,000,000 projected incentive package).
+
+Franchise economists anticipate $162,000,000 in total salary commitments once arbitration and depth contracts finalize — a figure that mirrors late-dynasty pacing but without corresponding gate revenue.
+
+Section 2 – Rotation and WAR Outlook
+Pitcher	Age	2039 WAR	2040 Projected WAR	Contract Status
+Benji Dillon	36	3.3	2.7	FA – Offer Pending
+John Brever	31	2.4	1.5	Signed thru 2041 ($24.1M AAV)
+John Ellis	23	—	1.8	Under Team Control
+TBD (Free Agent Target)	29–32	—	3.0	
+
+Aggregate rotation WAR projection: ~9.0 (down from 11.2 in 2039).
+Analytics stress “innings durability” as the primary scouting filter, a departure from the power metrics that defined the dynasty’s earlier builds.
+
+Section 3 – Positional Core Metrics
+Player	Role	2039 OPS	Notes
+Vinnie Keane	3B	1.064	Elite contact retention despite injury downtime
+Mark Aitken	1B/3B	.466 SLG	“Iron Corner” consistency steady
+Darrin Davis	CF	.276 AVG	Still a defensive anchor
+Isley Kelley	SS	.319 OBP	Aging but stabilizing influence
+
+Front office analysis positions this quartet as Tier-1 Continuity Assets under the current roster model.
+
+Section 4 – Management Notes
+
+Manager Mike Kinder enters the final year of his contract (expires 2040). The organization has expressed intent to review performance metrics mid-season before any extension discussion.
+Executive sentiment suggests “evaluation of succession pathways,” implying long-term restructuring may be imminent.
+
+Section 5 – Projection Summary
+Category	2039 Actual	2040 Forecast
+Team WAR	41.5	38.2
+Payroll	$135.7M	$162M
+Postseason Odds	61%	48%
+Average Attendance	29,800	26,400 (est.)
+Closing Notes
+
+2040 marks the organization’s transition from legacy maintenance to structural audit.
+If Dillon returns and Ellis develops as projected, the A’s may maintain competitive posture — but the dynasty, as defined, is living on borrowed time.
+
+⸻
+
+Source Appendix
+	•	Oakland Franchise Statistical Recordkeeping – Version 1.1
+	•	Media Dynamics Module – 2040 Pre-Cycle State
+	•	Franchise Control Sheet – Internal Ledger 2039 to 2040

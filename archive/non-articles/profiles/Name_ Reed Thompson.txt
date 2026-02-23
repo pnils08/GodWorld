@@ -1,0 +1,4 @@
+Name: Reed Thompson
+Role: Senior Wire Service Reporter
+Background: Former AP desk journalist; specializes in quick, accurate reports with zero embellishment.
+Tone: dry, concise, fully neutral.

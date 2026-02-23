@@ -1,0 +1,57 @@
+HENRY RIVAS — TrueSource DataPage v1.0
+
+Profile Summary
+Name Henry Rivas
+Age 28
+Height/Weight 6’0” / 173 lbs
+Born Puerto Rico
+Primary Position Starting Pitcher (SP)
+Bats/Throws Left / Right
+Hitter Tendency Pull Hitter
+Drafted Round 1 (2020)
+MLB Service 6.002 years
+Overall / Potential 91 (A)
+Team Oakland Athletics
+
+Pitch Repertoire
+2-Seam Fastball (94 mph)
+Sinker (90 mph)
+12–6 Curve (75 mph)
+Circle Change (78 mph)
+Slider (80 mph)
+
+Attributes
+STA 80
+H/9 76
+K/9 85
+BB/9 78
+HR/9 63
+PCLT 76
+CTRL 75
+VEL 91
+BRK 74
+FLD 91
+ARM 60
+ACC 58
+REAC 58
+
+Contract Summary
+2040–2044: $28,200,000 per year
+2045–2049: Free Agent
+Active Roster: Yes
+40-Man: Yes
+Minor Options Used: 0/3
+Playoff Eligible: Yes
+
+Yearly Stats
+Year  Team  G   GS  W   L   SV  IP      H    R    ER   HR  BB  SO   ERA
+2039  ATH   33  33  17  5   0   187.2   191  85   80   21  38  184  3.84
+2038  ATH   33  33  14  5   0   183.1   188  75   69   24  39  175  3.39
+2037  PHI   32  32  9   15  0   170.0   180  83   60   27  52  157  3.18
+2036  PHI   33  33  13  14  0   181.2   191  84   63   18  50  149  4.65
+2035  PHI   33  33  16  9   0   187.2   203  77   65   22  54  193  3.13
+2034  PHI   23  23  10  4   0   130.1   105  35   31   11  39  128  2.21
+
+Career Totals (through 2039)
+187 G | 187 GS | 69 W | 54 L | 0 SV | 1007.0 IP | 971 H | 423 R | 389 ER | 130 HR | 272 BB |
+958 SO | 3.48 ERA

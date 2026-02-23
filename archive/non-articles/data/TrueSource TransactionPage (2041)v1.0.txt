@@ -1,0 +1,78 @@
+TrueSource TransactionPage v1.0
+Classification: Core
+Source: Manual Extraction
+Verification: TrueSource Verified
+——————————————
+
+ENTITY
+Team: Oakland Athletics
+Offseason: 2041
+Document Type: Transaction Log
+
+——————————————
+SIGNED CONTRACTS
+
+Benji Dillon
+Position: SP
+Contract: 1 year, $13.01M
+
+Bryce Eldridge
+Position: 1B
+Contract: 2 years, $8.00M per year
+
+Eric Taveras
+Position: 2B
+Contract: 7 years, $32.13M per year
+
+——————————————
+COMPLETED TRADES
+
+Trade: Athletics / Orioles
+Orioles Receive:
+– Ross Cabral (C, 25, OVR 74)
+– Edmundo Peña (P, 36, OVR 84)
+– Reggie McGregor (1B, 23, OVR 56)
+
+Athletics Receive:
+– Mariano Rosales (CP, 26, OVR 89)
+
+Trade: Athletics / Reds
+Reds Receive:
+– Allen Lopez (SP, 29, OVR 81)
+– Antonio Casto (1B, 28, OVR 80)
+
+Athletics Receive:
+– Jeremy McCracken (SP, 33, OVR 85)
+
+Trade: Athletics / Nationals
+Nationals Receive:
+– Cy Newell (SP, 27, OVR 84)
+– Agustin Rodriguez (SS, 30, OVR 90)
+– George Whiteley (SP, 21, OVR 71)
+
+Athletics Receive:
+– Travis Coles (SP, 21, OVR 94)
+
+——————————————
+EXECUTED TRADE PROPOSAL (FINALIZED)
+
+Proposal: Orioles / Athletics
+This transaction did occur.
+
+Orioles Proposed:
+– Pablo Almanzar (SP, 22, POT B, OVR 80)
+
+Athletics Proposed:
+– Jeremy McCracken (SP, 33, OVR 85)
+– Chuck Haskett (3B, 25, POT B, OVR 67)
+
+——————————————
+FOOTER
+TS Code: TS-TRN-AOAK-2041-OFF
+Verification Tag: TrueSource Verified
+Steward of Record: Riley
+Date Stamp: 2041-Upload
+
+——————————————
+END OF TRUESOURCE TRANSACTIONPAGE
+—————————————

@@ -1,0 +1,43 @@
+Allen López — TrueSource DataPage v1.0
+Full Name: Allen López
+Age: 28
+Height/Weight: 5'10" / 207 lbs
+Born: Dominican Republic
+Primary Position: SP (Starting Pitcher)
+Bats/Throws: Switch / Right
+Hitter Tendency: Pull Hitter
+Overall: 84 (B Potential)
+Drafted: Round 1, 2030
+MLB Service: 4.000 years
+
+Pitch Repertoire
+4-Seam Fastball — 93 mph
+Sinker — 93 mph
+Curveball — 83 mph
+Cutter — 90 mph
+
+Year Team GS W L SV BS HLD IP H R ER HR BB SO ERA
+2039 ATH 32 14 9 0 0 0 168.1 163 85 79 23 63 158 4.27
+2038 ATH 32 15 10 0 0 0 186.0 138 51 48 10 62 182 2.32
+2037 ATH 32 12 10 0 0 0 180.1 187 92 87 28 54 134 5.16
+2036 ATH 32 10 12 0 0 0 190.0 145 65 68 23 62 197 3.04
+
+Career — 128 51 41 0 0 0 699.1 633 293 282 84 241 671 3.83
+
+Pitching Attributes
+STA: 83 | H/9: 77 | K/9: 78 | BB/9: 63 | HR/9: 57
+PCLT: 64 | CTRL: 52 | VEL: 93 | BRK: 73
+
+Fielding Attributes
+FLD: 44 | ARM: 62 | ACC: 54 | REAC: 39
+
+Awards
+Rookie of the Year (2038)
+All-Star Appearance (2038)
+
+Contract Status
+2040: $7.1M (Arbitration Eligible)
+2041: Arbitration Eligible
+2042–2049: Free Agent
+
+Active Roster: Yes | 40-Man: Yes | Minor Options: 1/3 Used

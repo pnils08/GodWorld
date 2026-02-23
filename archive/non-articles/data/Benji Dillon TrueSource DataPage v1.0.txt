@@ -1,0 +1,38 @@
+Benji Dillon TrueSource DataPage v1.0 — Benji Dillon
+Classification: Verified Core | Source: OCR Extraction (Refined)
+
+Profile Summary
+Name: Benji Dillon
+Age: 36 | Height/Weight: 6’5” / 219 lbs
+Born: California
+Bats/Throws: Left / Left
+Position: Starting Pitcher
+Overall: 82 (A Potential)
+Service Time: 15.000 years MLB
+Hitter Tendency: Whole Field
+Pitch Repertoire: 4-Seam Fastball (98 mph), Changeup (80 mph), Curveball (69 mph), Slider (88 mph)
+
+Awards
+Rookie of the Year — 2025
+Cy Young — 2028, 2032, 2033, 2034, 2037
+All-Star Selections — 2025, 2028, 2031, 2034, 2037
+
+Career Totals
+493 GS | 200 W | 126 L | 2,787.2 IP | 2,748 H | 1,158 R | 1,109 ER | 300 HR | 830 BB | 3,219 SO | 3.58 ERA
+
+Year   G   GS   W   L    IP      H    R    ER   HR   BB   SO   ERA
+2039   32  32   10  10   167.2   159  82   80   17   66   175  4.29
+2038   33  33   7   11   153.2   193  98   95   26   61   144  5.56
+2037   33  33   18  4    195.2   196  51   50   14   64   236  2.30
+2036   33  33   13  8    180.0   180  70   67   23   46   215  3.35
+2035   33  33   12  9    187.2   203  80   77   24   62   202  3.61
+2034   33  33   12  9    202.0   175  69   64   20   49   260  2.85
+2033   33  33   20  7    196.2   204  85   82   22   57   217  3.75
+2032   33  33   17  7    190.0   184  79   78   19   53   220  3.69
+2031   33  33   13  9    196.0   188  72   72   22   45   224  3.31
+2030   32  32   12  9    181.0   175  69   68   18   52   201  3.43
+2029   33  33   10  17   170.1   185  95   91   23   54   207  4.81
+2028   33  33   18  6    198.1   181  70   69   19   49   264  3.13
+2027   33  33   14  9    193.0   193  73   69   22   62   189  3.39
+2026   33  33   10  9    180.2   184  90   82   22   71   205  4.08
+2025   33  33   16  5    191.2   169  69   64   16   64   226  3.01

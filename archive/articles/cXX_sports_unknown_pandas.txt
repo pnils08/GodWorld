@@ -1,0 +1,34 @@
+PANDAS
+
+Idea: Month‑to‑month autocorrelation. Compare discipline metrics (t → t+1) vs. outcome metrics.
+
+Metrics
+	•	Plate discipline (usually stable): O‑Swing%, Z‑Swing%, Contact%, BB%, K%.
+	•	Outcomes (noisier): BABIP, HR/FB.
+
+What to do (5 steps)
+	1.	Build a monthly table for the player: one row per month, columns for the 7 metrics above.
+	2.	For each metric, align month t with month t+1 (drop first/last as needed).
+	3.	Compute Pearson r between the two columns (e.g., O‑Swing%_t vs O‑Swing%_t+1).
+	4.	Repeat for all metrics; optionally bootstrap CIs if n is small.
+	5.	Read it: higher r for discipline than outcomes → more likely real skill shift; outcomes with low r → mostly variance.
+
+Rules of thumb
+	•	If O‑Swing%/Z‑Swing%/Contact% show consistently positive r (≥ ~0.4 with a small‑sample grain of salt) while BABIP or HR/FB hover near 0, weight the surge toward “real approach change,” not luck.
+	•	Check BB% and K% as the bridge stats—more stable than BABIP, less than swing metrics.
+
+Minimal pandas snippet
+
+import pandas as pd
+from scipy.stats import pearsonr
+
+# df: columns = ["month","o_swing","z_swing","contact","bb","k","babip","hr_fb"]
+df = df.sort_values("month")
+def auto_r(col):
+    x = df[col].iloc[:-1].to_numpy()
+    y = df[col].iloc[1:].to_numpy()
+    return pearsonr(x, y)[0]
+
+for col in ["o_swing","z_swing","contact","bb","k","babip","hr_fb"]:
+    print(col, round(auto_r(col), 3))
+

@@ -1,0 +1,447 @@
+
+
+──────────────────────────────
+TRUESOURCE_CONTRACT_RECORDS Bulls_Universe.txt
+──────────────────────────────
+TRUESOURCE_CONTRACT_RECORDS
+Bulls_Universe
+
+PLAYER: Josh Giddey
+POS: PG
+AGE: 23
+OVR: 86
+CONTRACT:
+2025–26: $25.00M
+2026–27: $25.00M
+2027–28: $25.00M
+2028–29: $25.00M
+
+PLAYER: Patrick Williams
+POS: PF
+AGE: 24
+OVR: 77
+CONTRACT:
+2025–26: $18.00M
+2026–27: $18.00M
+2027–28: $18.00M
+2028–29: $18.00M
+
+PLAYER: Kevin Huerter
+POS: SF
+AGE: 27
+OVR: 77
+CONTRACT:
+2025–26: $17.99M
+
+PLAYER: Isaac Okoro
+POS: SF
+AGE: 24
+OVR: 78
+CONTRACT:
+2025–26: $11.00M
+2026–27: $11.81M
+
+PLAYER: Jalen Smith
+POS: C
+AGE: 25
+OVR: 79
+CONTRACT:
+2025–26: $9.00M
+2026–27: $9.43M
+
+PLAYER: Simone Fontecchio
+POS: SF
+AGE: 30
+OVR: 77
+CONTRACT:
+2025–26: $8.31M
+
+PLAYER: Tyus Jones
+POS: PG
+AGE: 25
+OVR: 77
+CONTRACT:
+2025–26: $8.00M
+2026–27: $8.00M
+2027–28: $8.00M
+
+PLAYER: Ayo Dosunmu
+POS: SG
+AGE: 25
+OVR: 81
+CONTRACT:
+2025–26: $7.52M
+
+PLAYER: Matas Buzelis
+POS: PF
+AGE: 21
+OVR: 82
+CONTRACT:
+2025–26: $5.46M
+2026–27: $5.72M
+2027–28: $7.58M
+
+TRUESOURCE_CONTRACT_RECORDS
+Bulls_Universe
+Season Basis: 2025–2026 Forward
+Source: NBA MyGM – Salary Cap Breakdown (Image Verified)
+
+PLAYER: Noa Essengue
+POS: PF
+AGE: 18
+OVR: 73
+CONTRACT:
+2025–26: $5.43M
+2026–27: $5.70M
+2027–28: $5.97M
+2028–29: $8.23M
+
+PLAYER: Walker Kessler
+POS: C
+AGE: 24
+OVR: 85
+CONTRACT:
+2025–26: $4.88M
+
+PLAYER: Terrence Martin
+POS: SG
+AGE: 26
+OVR: 77
+CONTRACT:
+2025–26: $2.30M
+
+PLAYER: Keldon Johnson
+POS: PF
+AGE: 24
+OVR: 72
+CONTRACT:
+2025–26: $2.05M
+
+PLAYER: Adash Stanley
+POS: PG
+AGE: 19
+OVR: 77
+CONTRACT:
+2025–26: $1.27M
+
+PLAYER: Hank Trepagnier
+POS: C
+AGE: 21
+OVR: 83
+CONTRACT:
+2025–26: $1.27M
+
+TRUESOURCE_TRADE_EXCEPTION_RECORDS
+Bulls_Universe
+Season Basis: 2025–2026
+Source: NBA MyGM – Salary Cap Breakdown (Image Verified)
+
+TRADE EXCEPTIONS:
+
+ORIGIN PLAYER: Kentavious Caldwell-Pope
+POS: SG
+AGE: 32
+OVR: 75
+TRADE EXCEPTION VALUE: $19.43M
+STATUS: Active
+
+ORIGIN PLAYER: Zach LaVine
+POS: SG
+AGE: 30
+OVR: 83
+TRADE EXCEPTION VALUE: $6.19M
+STATUS: Active
+
+ORIGIN PLAYER: DeMar DeRozan
+POS: SF
+AGE: 36
+OVR: 83
+TRADE EXCEPTION VALUE: $3.23M
+STATUS: Active
+
+
+END TRUESOURCE_CONTRACT_RECORDS
+
+──────────────────────────────
+TRUESOURCE_TEAM_FINANCIAL_STATE.txt
+──────────────────────────────
+TRUESOURCE_TEAM_FINANCIAL_STATE.txt
+Bulls_Universe
+
+TEAM: Chicago Bulls
+
+TEAM SALARY TOTAL: $0
+SALARY CAP ROOM: $162.65M
+LUXURY TAX ROOM: $70.14M
+
+SEASON BASIS: 2025–2026
+SOURCE: NBA MyGM – Salary Cap Breakdown
+STATUS: Verified (Image Source)
+
+END TEAM FINANCIAL STATE
+
+──────────────────────────────
+Hank Trepagnier TRUESOURCE_EVENT_RECORD.txt
+──────────────────────────────
+Hank Trepagnier TRUESOURCE_EVENT_RECORD.txt
+
+TRUESOURCE_EVENT_RECORD
+Bulls_Universe
+
+PLAYER: Hank Trepagnier
+TEAM: Chicago Bulls
+SEASON: 2025
+EVENT: NBA Cup
+
+AWARD:
+NBA Cup MVP
+
+EVENT PERFORMANCE STATS:
+Points Per Game: 24.7
+Rebounds Per Game: 12.4
+Assists Per Game: 2.9
+Steals Per Game: 0.6
+Blocks Per Game: 0.9
+Field Goal Percentage: 69.2%
+Free Throw Percentage: 80.0%
+Three-Point Percentage: 48.1%
+
+SOURCE:
+NBA MyGM – Performance Awards Screen
+
+STATUS:
+Verified (Image Source)
+
+END TRUESOURCE_EVENT_RECORD
+
+──────────────────────────────
+Noa_Essengue_TrueSource_Profile_v1.0.txt
+──────────────────────────────
+Noa_Essengue_TrueSource_Profile_v1.0
+
+TrueSource_Profile_v1.0
+Bulls_Universe
+
+PLAYER: Noa Essengue
+Jersey: 17
+Team: Chicago Bulls
+League: Bulls_Universe
+
+POSITION:
+Primary: PF
+Secondary: SF
+
+BIO:
+Age: 18
+Height: 6'8"
+Weight: 194 lbs
+From: France
+Draft Status: R1 P12 (2025)
+Years Pro: 0
+Personality: Neutral
+
+OVERALL:
+OVR: 72
+Potential: C
+
+PHYSICAL ATTRIBUTES:
+Strength: 57
+Vertical: 84
+Stamina: 84
+Speed: 85
+Agility: 82
+Durability: 80
+Hustle: 84
+Intangibles: 60
+
+OFFENSE:
+Close Shot: 71
+Driving Layup: 72
+Standing Dunk: 50
+Driving Dunk: 80
+Mid-Range Shot: 70
+Three-Point Shot: 70
+Free Throw: 70
+Post Hook: 60
+Post Fade: 60
+Post Control: 60
+Draw Foul: 76
+Shot IQ: 60
+Offensive Consistency: 50
+
+BALL HANDLING & PASSING:
+Ball Handle: 69
+Speed With Ball: 72
+Hands: 90
+Pass IQ: 60
+Pass Vision: 39
+Pass Accuracy: 60
+
+DEFENSE & REBOUNDING:
+Interior Defense: 60
+Perimeter Defense: 68
+Steal: 60
+Block: 45
+Help Defense IQ: 60
+Defensive Consistency: 45
+Offensive Rebound: 57
+Defensive Rebound: 56
+Pass Perception: 68
+
+END TrueSource_Profile_v1.0
+
+──────────────────────────────
+Adash_Stanley_TrueSource_Profile_v1.0.txt
+──────────────────────────────
+Adash_Stanley_TrueSource_Profile_v1.0
+
+TrueSource_Profile_v1.0
+Bulls_Universe
+
+PLAYER: Adash Stanley
+Jersey: 7
+Team: Chicago Bulls
+League: Bulls_Universe
+
+POSITION:
+Primary: PG
+Secondary: SG
+
+BIO:
+Age: 19
+Height: 6'2"
+Weight: 180 lbs
+From: Poland
+Draft Status: Undrafted
+Years Pro: 1
+Personality: Laid Back
+
+OVERALL:
+OVR: 75
+Potential: A
+
+PHYSICAL ATTRIBUTES:
+Strength: 77
+Vertical: 68
+Stamina: 91
+Speed: 83
+Agility: 81
+Durability: 83
+Hustle: 99
+Intangibles: 65
+
+OFFENSE:
+Close Shot: 75
+Driving Layup: 81
+Standing Dunk: 68
+Driving Dunk: 76
+Mid-Range Shot: 70
+Three-Point Shot: 86
+Free Throw: 77
+Post Hook: 54
+Post Fade: 68
+Post Control: 62
+Draw Foul: 70
+Shot IQ: 69
+Offensive Consistency: 75
+
+BALL HANDLING & PASSING:
+Ball Handle: 77
+Speed With Ball: 85
+Hands: 70
+Pass IQ: 73
+Pass Vision: 71
+Pass Accuracy: 68
+
+DEFENSE & REBOUNDING:
+Interior Defense: 47
+Perimeter Defense: 66
+Steal: 76
+Block: 62
+Help Defense IQ: 68
+Defensive Consistency: 62
+Offensive Rebound: 50
+Defensive Rebound: 61
+Pass Perception: 68
+
+END TrueSource_Profile_v1.0
+
+──────────────────────────────
+Hank_Trepagnier_TrueSource_Profile_v1.0.txt
+──────────────────────────────
+Hank_Trepagnier_TrueSource_Profile_v1.0
+
+TrueSource_Profile_v1.0
+Bulls_Universe
+
+PLAYER: Hank Trepagnier
+Jersey: 55
+Team: Chicago Bulls
+League: Bulls_Universe
+
+POSITION:
+Primary: C
+Secondary: PF
+
+BIO:
+Age: 21
+Height: 6'11"
+Weight: 240 lbs
+From: El Salvador
+Draft Status: Undrafted
+Years Pro: 1
+Personality: Wildcard
+
+OVERALL:
+OVR: 82
+
+PHYSICAL ATTRIBUTES:
+Strength: 92
+Vertical: 92
+Stamina: 87
+Speed: 88
+Agility: 87
+Durability: 86
+Intangibles: 73
+
+OFFENSE:
+Close Shot: 60
+Driving Layup: 67
+Standing Dunk: 95
+Driving Dunk: 85
+Mid-Range Shot: 63
+Three-Point Shot: 73
+Free Throw: 75
+Post Hook: 68
+Post Fade: 64
+Post Control: 81
+Draw Foul: 70
+Shot IQ: 60
+Offensive Consistency: 62
+
+BALL HANDLING & PASSING:
+Ball Handle: 54
+Speed With Ball: 56
+Hands: 68
+Pass IQ: 75
+Pass Vision: 70
+Pass Accuracy: 80
+
+DEFENSE & REBOUNDING:
+Interior Defense: 80
+Perimeter Defense: 60
+Block: 80
+Steal: 61
+Help Defense IQ: 79
+Defensive Consistency: 74
+Offensive Rebound: 76
+Defensive Rebound: 87
+Pass Perception: 58
+
+NOTES:
+• Elite interior finisher with top-tier dunk ratings
+• Above-average passing for a big
+• Physical defender with strong rebounding instincts
+• Development curve favors interior dominance over perimeter play
+
+END TrueSource_Profile_v1.0

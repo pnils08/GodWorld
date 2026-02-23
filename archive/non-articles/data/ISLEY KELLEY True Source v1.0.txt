@@ -1,0 +1,51 @@
+ISLEY KELLEY True Source v1.0 — SS / 2B / 3B
+Oakland Athletics | Mississippi | Age 32
+Potential A
+Overall 96
+Height / Weight 5’7” / 166 lbs
+B/T Right / Right
+Drafted Round 2, 2025
+MLB Service Time 14.000 years
+Hitter Tendency Whole Field
+
+Batting Statistics
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 155 624 102 187 41 3 28 96 68 95 16 5 .300 .363 .538
+2038 ATH 152 618 97 180 38 4 33 110 72 87 14 6 .291 .360 .557
+2037 ATH 158 629 112 195 45 5 40 122 69 92 18 4 .310 .375 .591
+2036 ATH 156 622 108 188 36 6 39 118 66 88 19 7 .302 .369 .579
+2035 ATH 159 635 115 194 39 5 43 124 78 91 22 6 .305 .373 .582
+2034 ATH 160 640 118 192 42 4 38 120 75 89 20 5 .300 .357 .541
+2033 ATH 155 616 99 180 37 5 33 108 62 90 23 6 .292 .354 .532
+2032 ATH 162 634 123 206 40 7 44 128 83 88 24 5 .326 .396 .585
+2031 ATH 160 632 101 186 33 7 37 104 67 92 22 11 .294 .363 .544
+2030 ATH 158 634 90 171 36 7 27 85 64 110 27 7 .270 .343 .468
+2029 ATH 151 622 105 188 42 10 37 87 52 109 20 9 .302 .357 .571
+2028 TOT 153 600 84 164 35 7 27 82 46 91 31 8 .273 .329 .482
+2027 CIN 141 533 58 132 32 2 20 82 47 101 16 11 .248 .309 .428
+2026 CIN 154 578 73 140 29 2 20 71 47 126 15 8 .242 .289 .420
+
+Career ATH 2126 8451 1290 2398 501 63 447 1370 795 1390 268 44 .284 .347 .517
+
+Awards
+Most Valuable Player (2032, 2034, 2035)
+Rookie of the Year (2026)
+Gold Glove (2029, 2030)
+Silver Slugger (2031–2037)
+World Series MVP (2032)
+All-Star (2028–2039)
+
+Contract Information
+2040–2041: $33.8 M AAV
+2042: Free Agent Eligibility
+
+Attributes Summary
+Hitting Rating            Fielding / Defense Rating
+CON L 88                  FLD 92
+CON R 78                  ARM 81
+POW L 81                  ACC 83
+POW R 63                  REAC 81
+VIS 87                    SPD 79
+DISC 66                   STEAL 71
+CLT 77                    BR AGG 72
+DUR 97

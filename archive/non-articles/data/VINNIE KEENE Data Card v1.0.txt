@@ -1,0 +1,59 @@
+VINNIE KEENE Data Card v1.0 — 3B / 2B / SS
+Oakland Athletics | Massachusetts | Age 38
+Potential A
+Overall 94
+Height / Weight 5’9” / 184 lbs
+B/T Switch / Right
+Undrafted Free Agent (2025)
+MLB Service Time 15.000 years
+Hitter Tendency Whole Field
+
+Batting Statistics
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 55 164 47 64 14 1 17 47 35 82 5 1 .315 .341 .680
+2038 ATH 94 328 84 119 36 4 49 119 49 81 4 4 .362 .398 .680
+2037 ATH 150 592 98 174 35 3 34 105 88 157 9 4 .294 .376 .515
+2036 ATH 107 409 63 111 28 2 26 62 38 69 17 3 .271 .338 .504
+2035 ATH 160 647 115 192 37 6 31 105 67 88 17 5 .317 .390 .582
+2034 ATH 150 592 98 174 35 0 24 75 107 157 9 4 .294 .376 .515
+2033 ATH 158 626 87 190 53 7 27 64 116 127 7 7 .304 .347 .564
+2032 ATH 159 634 120 201 37 5 37 67 88 117 5 5 .317 .390 .582
+2031 ATH 160 647 115 192 37 6 35 105 67 88 17 5 .297 .363 .575
+2030 ATH 158 626 87 190 53 7 30 64 110 99 7 7 .304 .347 .564
+2029 ATH 160 619 86 166 34 7 35 113 73 88 5 7 .268 .346 .515
+2028 ATH 160 616 101 166 33 4 40 55 73 73 11 8 .269 .337 .537
+2027 ATH 159 623 111 176 44 5 26 67 84 90 9 7 .283 .359 .547
+2026 ATH 146 570 96 169 41 5 23 58 74 83 10 7 .309 .375 .514
+2025 ATH 144 555 94 153 32 7 29 76 40 83 16 2 .276 .330 .515
+
+Career ATH 2035 7892 1245 2260 492 60 436 1248 764 1305 199 78 .287 .354 .520
+
+Advanced Metrics
+WAR: 83.7
+OPS: .874
+ISO: .233
+BB%: 10.3  K%: 14.9
+
+Awards
+MVP (2031)
+Gold Glove (2027, 2031, 2033)
+Silver Slugger (2027, 2029, 2030, 2031, 2032)
+Home Run Champion (2031)
+Home Run Derby Winner (2027, 2031, 2032)
+All-Star (2025–2032)
+
+Contract Information
+2040–2042: $1.5 M AAV
+2043 FA → 2049 FA
+Active Roster: Yes  40-Man: Yes  Service Time: 15.000  Contract Option: None
+
+Attributes Summary
+Category  Value   Category Value
+CON L     62      FLD     52
+CON R     43      ARM     40
+POW L     68      ACC     41
+POW R     58      REAC    47
+VIS       71      SPD     47
+DISC      19      STEAL   47
+CLT       56      BR AGG  47
+BUNT      7

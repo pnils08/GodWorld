@@ -1,0 +1,51 @@
+
+POP-00020_AITKEN_IMAGE_MANIFEST.txt
+
+Name: Mark Aitken
+POPID: POP-00020
+UNI-ID: UNI-00002
+RoleType: Legend
+Tier: 1
+Position: 1B (First Base)
+Tags: Legend, Dynasty Core, The Iron Corner, The Engineer
+
+IMAGE MANIFEST V1.0
+
+Phase I – Rise & Precision:
+Status: Pending generation (Cal Poly / Minor League representation)
+Metadata: N/A
+
+Phase II – Apex / Home Run Derby Champion:
+Image ID: D8ED6A44-2C9A-4999-BD63-0666C3C6BB79.jpeg
+Image ID: C1C046BA-738C-4044-8309-AED7C1DE3EA4.jpeg
+Description: 2030s peak years, Home Run Derby Champion, displays Aitken's balance of technical mastery and competitive fire.
+Metadata:
+- Resolution: Source-captured
+- Color balance: Mid-saturation daylight
+- Lighting: Stadium artificial / mixed tone
+- Depth field: Moderate (focus on subject, background blur medium)
+- Facial markers: High clarity; ideal for reconstruction if needed
+
+Phase III – Mentor Era / Camp Legacy:
+Image ID: 36BC453F-0AA9-4FDF-8411-C006B181A734.png
+Description: Post-championship mentorship era; Aitken teaching youth players during Athletics Baseball Camp. Symbol of leadership continuity.
+Metadata:
+- Resolution: Source-captured
+- Lighting: Natural daylight, high contrast
+- Focus depth: Wide (sharp subject with context depth)
+- Clothing markers: Athletics uniform variant / mentor patch visible
+
+Phase IV – Civic & Media Continuity:
+Status: Pending creation (Bay Tribune guest column or broadcast appearance)
+Metadata: To be appended upon generation
+Note: Future politician trajectory - MLBPA association representative, showing up at council votes
+
+Associated Works:
+- "The Iron Corner" (Part IV – Richmond Archive Collection)
+- "Dawn of a Dynasty" (Part V – Franchise Convergence Series)
+
+Last Updated: Steward Sync 2040.11.07
+
+--- LEGACY REFERENCE ---
+Previous POPID: POP-00003 (pre-Sheets system)
+Current POPID: POP-00020 (Simulation_Ledger canonical)

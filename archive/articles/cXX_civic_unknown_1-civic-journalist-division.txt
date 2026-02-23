@@ -1,0 +1,23 @@
+🏛 1. Civic Journalist Division
+
+Outlet Name: The Oakland Civic Ledger
+Parent Entity: Bay Tribune Civic Affairs Bureau
+Mission: Chronicling the heartbeat of policy, governance, and local civic identity.
+Lead Steward: Riley (Chief Operations Steward)
+Primary Journalist: Carmen Delaine — Investigative City Affairs Reporter
+Tone: Neutral, fact-heavy, embedded reporting
+
+Coverage Scope:
+ • Council decisions, ordinances, infrastructure, and public accountability
+ • Economic development and local sustainability programs
+ • Citizen spotlight features (profiling residents shaping the city)
+
+Publishing Rhythm: Bi-weekly columns + monthly civic digest
+Vault Integration: /Universe/Media/The_Oakland_Civic_Ledger
+Checksum Path: CIV-2040A-GW4-001
+
+🧭 Integration Notes
+Feeds into:
+ • Riley_System_Log for checksum & sync validation
+ • Civic Ledger for structural continuity
+ • Universe Vault for public record inclusion

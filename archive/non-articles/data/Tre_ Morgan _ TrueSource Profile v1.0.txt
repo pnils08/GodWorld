@@ -1,0 +1,41 @@
+Tre’ Morgan — TrueSource Profile v1.0
+Position: 1B / LF / RF (#25)
+Team: Former Oakland Athletics, later CIN / MIN
+Throws/Bats: L / L
+Height/Weight: 6′0″ / 215 lbs
+Born: Louisiana
+Drafted: Round 3 (2023)
+Age: 37
+MLB Service: 9.136 years
+Potential: B (Overall 68)
+Hitter Tendency: Whole Field
+Award: Gold Glove (2037)
+
+Year Team AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 MIN 27 4 9 2 0 0 4 5 5 0 1 .333 .437 .407
+2038 CIN 405 48 122 19 1 15 43 44 78 10 3 .301 .353 .449
+2037 ATH 500 49 117 14 1 9 38 61 103 13 3 .234 .317 .356
+2036 ATH 368 63 92 17 2 14 53 69 84 8 3 .250 .326 .458
+2035 ATH 315 39 85 9 0 11 40 37 59 3 2 .270 .355 .403
+2034 ATH 268 37 70 8 3 8 31 35 52 5 2 .268 .357 .406
+2033 ATH 485 74 149 34 3 28 88 53 84 10 3 .307 .380 .559
+2032 ATH 315 39 85 9 0 11 40 37 59 3 2 .270 .355 .403
+2031 ATH 325 52 92 14 4 13 43 37 50 1 1 .283 .360 .471
+2030 ATH 147 24 44 7 0 8 21 21 34 4 1 .299 .342 .510
+2029 ATH 153 15 33 2 0 2 5 5 31 2 1 .216 .247 .416
+
+Career Totals:
+888 G | 3,196 AB | 412 R | 887 H | 137 2B | 11 3B | 121 HR | 416 RBI |
+331 BB | 590 SO | 65 SB | 35 CS | .278 AVG | .349 OBP | .441 SLG
+
+Awards & Honors
+• Gold Glove (2037)
+
+Lore Summary
+Tre’ Morgan brought the heartbeat of Louisiana baseball to Oakland’s dugout — a natural leader and
+an unselfish professional who prioritized team balance over personal numbers. A defensive standout at
+first base with quick instincts and a strong arm, his Gold Glove campaign in 2037 underscored years of
+consistency. Though his bat rarely made headlines, his presence did — Morgan was the quiet stabilizer
+on a roster filled with stars, bridging eras with reliability and grace.
+Even as his career carried him to Cincinnati and Minnesota, his best seasons remained intertwined with
+Oakland’s transitional dynasty — a player who defined loyalty through the grind.

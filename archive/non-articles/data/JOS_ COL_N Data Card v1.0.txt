@@ -1,0 +1,29 @@
+JOSÉ COLÓN Data Card v1.0 — C / 3B / LF
+Oakland Athletics | Dominican Republic | Age 27
+Potential: A
+Overall: 76
+Height / Weight: 6'1" / 191 lbs
+B/T: Switch / Right
+Drafted: Round 5 (2032)
+MLB Service Time: 2.045 years
+Hitter Tendency: Pull / Power Balance
+
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 103 359 54 99 18 2 19 53 27 82 8 1 .276 .329 .496
+2038 ATH 21 70 7 20 2 0 2 7 7 15 2 0 .286 .351 .400
+2037 ATH 5 16 2 1 0 0 0 1 2 0 0 0 .062 .062 .062
+2036 MIL 9 30 2 6 0 1 1 3 1 13 2 3 .200 .273 .300
+
+Career - 138 475 67 126 20 2 22 74 37 110 12 4 .265 .321 .420
+
+Contract Information:
+2040–2042: $2.1M per year | 2043–2049: Arbitration / Free Agent
+
+Roster Status:
+Active 26-Man | 2/3 Minor League Options Used
+
+Attributes Summary:
+CON R 68 | CON L 73 | POW R 74 | POW L 77 | VIS 64 | DISC 59 | CLT 71 | DBUNT 42 | DUR 82 |
+FLD 80 | ARM 85 | ACC 70 | REAC 78 | SPD 61 | STEAL 53 | BR AGG 49
+
+Template: TrueSource Format | Source: Photo-Verified User Data | Division: /Player_Cards/

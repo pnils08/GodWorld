@@ -1,0 +1,57 @@
+George Whiteley — TrueSource_DataPage_v1.0
+POPID: Pending assignment
+Category: Prospect
+Rank: #14 prospect in Major League Baseball (2040)
+Organization: Oakland Athletics
+Affiliate: Midland RockHounds (AA)
+
+Identity
+Name: George Whiteley
+Position: SP
+Bats: L
+Throws: R
+Hitter Tendency: Pull Hitter
+Born: Canada
+Age: 20
+Height: 5'10"
+Weight: 189 lbs
+Draft: Round 4 (2037)
+MLB Service Time: 0.000 years
+
+Potential: A
+Current Overall: 69 (↑)
+
+Pitch Repertoire
+4-Seam Fastball — 95 mph
+2-Seam Fastball — 91 mph
+Slider — 88 mph
+Splitter — 91 mph
+Curveball — 82 mph
+
+Attributes
+H/9: 65 (+3)
+K/9: 59 (+4)
+BB/9: 46 (+4)
+HR/9: 47 (+4)
+PCLT: 72 (+2)
+CTRL: 68 (+2)
+VEL: 73 (+1)
+BRK: 69 (+2)
+
+Fielding: 11 (+2)
+ARM: 88 (+2)
+ACC: 58 (+2)
+REAC: 29 (+2)
+
+Contract
+2040: $70K
+2041–2042: RNW
+2043–2045: ARB
+2046: FA
+
+Roster Status: Not on 40-Man Roster
+Minor League Options: 0/3 Used
+Rule 5 Eligibility: Eligible
+
+Notes
+Whiteley profiles as a high-upside developmental starter with advanced velocity for age. FB/SPL combo is plus. Trending positively across all command and break metrics. Ranked #14 in MLB’s prospect rankings entering the 2040 season.

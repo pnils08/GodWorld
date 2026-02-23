@@ -1,0 +1,36 @@
+HITOKI KA — TrueSource DataPage v1.0
+
+Profile Summary
+Name Hitoki Ka
+Age 28
+Height/Weight 6’2” / 208 lbs
+Born California
+Primary Position Relief Pitcher (RP)
+Bats/Throws Right / Right
+Hitter Tendency Whole Field
+Drafted Round 3 (2029)
+MLB Service 5.110 years
+Overall / Potential 86 (B)
+Team Oakland Athletics
+
+Pitch Repertoire
+4-Seam Fastball (95 mph), Slider (87 mph), Changeup (84 mph), Curveball (81 mph)
+
+Contract Summary
+2040–2042: $7,000,000 per year
+2043–2049: Free Agent
+Active Roster: Yes | 40-Man: Yes | Minor Options Used: 2/3 | Playoff Eligible: Yes
+
+Yearly Stats
+Year  Team  G   GS  W   L   SV  BS  HLD   IP     H    R    ER   HR  BB  SO   ERA
+2039  ATH   79   0   7   4   5   4   9    83.1   71   42   34   9   45   91   3.67
+2038  ATH   74   0   7   5   4   5   10   85.0   60   23   20   4   33   84   2.12
+2037  ATH   69   0   5   3   1   1   10   81.2   75   23   23   6   34   77   2.53
+2036  ATH   27   0   1   1   0   0   5    30.2   26   12   11   4   16   28   3.23
+2035  TOT   72   0   4   3   1   1   12   78.2   73   44   41   11  38   81   4.69
+2034  AZ    77   0   6   4   4   11  8    76.1   74   37   31   12  38   74   3.43
+2033  AZ    19   0   1   0   0   0   3    21.1   23   13   12   5   11   12   5.06
+
+Career Totals (through 2039)
+417 G | 0 GS | 32 W | 17 L | 13 SV | 23 BS | 62 HLD |
+482.0 IP | 404 H | 194 R | 172 ER | 51 HR | 201 BB | 440 SO | 3.35 ERA

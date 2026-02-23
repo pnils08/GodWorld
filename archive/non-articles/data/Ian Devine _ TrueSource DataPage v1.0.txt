@@ -1,0 +1,38 @@
+Ian Devine — TrueSource DataPage v1.0
+Team: Oakland Athletics (#20)
+Position: RP
+Potential: B
+Overall: 88
+Draft: Round 4 (2028)
+Age: 30
+B/T: L / R
+Height/Weight: 6'4" / 194 lbs
+Birthplace: Pennsylvania
+Hitter Tendency: Pull Hitter
+MLB Service Time: 7.090 years
+
+Pitch Repertoire:
+4-Seam Fastball (93 mph)
+Slider (86 mph)
+Circle Change (84 mph)
+2-Seam Fastball (91 mph)
+
+Career Accolades:
+• 2037 All-Star Selection
+
+Contract Details:
+2040 — $10.0M
+2041 — $10.0M
+
+Year  Team  G   GS  W   L   SV   BS   IP     H    R    ER   HR  BB  SO   ERA
+2039  ATH   76   0   1   2   2    4    78.1   81   37   35   4   23   86   4.02
+2038  ATH   70   0   8   0   9    2    82.2   77   21   27   4   29   71   2.94
+2037  ATH   65   0   5   1   6    1    94.1   59   19   17   3   19   99   1.64
+2036  ATH   26   0   1   1   0    0    61.2   59   29   29   10  25   52   4.23
+2035  CHC   81   0   2   2   6    7    85.0   87   32   30   10  24   117  3.18
+2034  CHC   89   0   6   4   1    4    100.1  102  41   40   13  47   95   3.58
+2033  ATL   91   0   8   3   4    2    110.2  91   49   45   9   53   93   3.67
+2032  ATL   35   0   2   1   1    2    43.1   43   16   16   6   26   44   3.32
+
+Career — 533 G | 0 GS | 33 W | 16 L | 9 SV | 22 BS | 686.0 IP | 607 H | 255 R | 
+241 ER | 66 HR | 244 BB | 677 SO | 3.26 ERA

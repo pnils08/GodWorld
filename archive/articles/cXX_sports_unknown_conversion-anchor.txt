@@ -1,0 +1,31 @@
+Conversion anchor:
+Exit velocity (mph) → feet per second ≈ mph × 1.4667
+
+Then:
+
+• Pitcher’s mound distance (60 ft 6 in): time ≈ distance / fps
+• 100-ft marker: time ≈ 100 / fps
+• Infield terror zone (120–130 ft): time ≈ 120–130 / fps
+
+Now here’s the cheat sheet for the A’s universe typical power spikes:
+
+115 mph EV
+• Speed: ~169 fps
+• To mound: ~0.36 seconds
+• To 100 ft: ~0.59 seconds
+• To corner infielder (125 ft): ~0.74 seconds
+Tone: “No human reaction time—pure instinct.”
+
+117 mph EV
+• Speed: ~171 fps
+• To mound: ~0.35 seconds
+• To 100 ft: ~0.58 seconds
+• To 125 ft: ~0.73 seconds
+Tone: This is the Keane special. “Third base becomes a survival drill.”
+
+120 mph EV
+• Speed: ~176 fps
+• To mound: ~0.34 seconds
+• To 100 ft: ~0.57 seconds
+• To 125 ft: ~0.71 seconds
+Tone: Ball leaves a vapor trail. Only god-tier defenders survive.

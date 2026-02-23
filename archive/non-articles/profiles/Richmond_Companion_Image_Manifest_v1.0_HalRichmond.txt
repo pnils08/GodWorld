@@ -1,0 +1,31 @@
+[Manifest Version]: 1.0
+[Archive Collection]: The Richmond Archive
+[File Type]: Companion Image Manifest
+[Status]: ACTIVE
+[POPID]: [Insert when assigned]
+[Author]: Hal Richmond
+[Created]: 2025-11-08
+[Purpose]: Registers companion imagery and reconstruction metadata for article-linked portraits or generated visuals.
+
+=== ENTRY ===
+[Subject Name]: Hal Richmond
+[Tags]: Bay Tribune, Senior Historian, Journalism Legacy, Archival Voice
+[Linked Articles]:
+  - The Richmond Archive – Editor’s Note
+  - Hal Richmond – The Legacy Lens
+[Primary Image File]: /Images/HalRichmond_OfficialPortrait.png
+[Image Caption]: “Hal Richmond, Senior Historian of the Bay Tribune, photographed in his Gold Coast study.”
+[Photographer / Generator]: P Slayer Visual Engine v1.2
+[Metadata Generation Record]:
+{
+  "prompt": "portrait of Hal Richmond, elderly male journalist, wearing glasses and brown suit, in warm lighting, holding an open notebook, soft background of study, classic tone, dignified expression",
+  "engine": "AI Visual Engine v1.2",
+  "seed": 42189,
+  "style": "vintage realism, sepia tone, archival portrait",
+  "camera": "Leica M6 emulation, 50mm lens, f/2.4",
+  "aspect_ratio": "3:2",
+  "generation_date": "2025-11-08"
+}
+=== END ENTRY ===
+
+[Notes]: This file marks the official visual registry for Hal Richmond within the Richmond Archive. It links to both press and historical series imagery. Future portraits tied to the POPID will append to this same manifest record.

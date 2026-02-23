@@ -1,0 +1,4 @@
+Name: “MintConditionOakTown” (real name unknown)
+Role: Anonymous Online Rumor Aggregator
+Background: Not authenticated; likely a college student or warehouse worker; posts chaotic rumor threads that sometimes accidentally contain truth.
+Tone: messy, impulsive, unverified, internet-native.

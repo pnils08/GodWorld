@@ -1,0 +1,50 @@
+Darrin Davis TrueSource DataPage v1.0 — Darrin Davis
+Classification: Verified Core | Source: Screenshot OCR Extraction (Full Confirmed Record)
+
+Profile Summary
+Name: Darrin Davis
+Age: 31
+Height/Weight: 5’9” / 186 lbs
+Born: Ohio
+Position: LF (Primary), CF/RF (Secondary)
+Bats/Throws: Right / Right
+Hitter Tendency: Opposite Field
+Drafted: Round 1 (2026)
+MLB Service: 9.165 years
+Overall: 92 (A Potential)
+Team: Oakland Athletics
+
+Attributes
+CON R 79 | CON L 83 | POW R 94 | POW L 57 | VIS 78 | DISC 74 | CLT 67 | DUR 87 | FLD 64 | ARM 69 | ACC 62 | REAC 63 | SPD 75 | STEAL 90 | BR AGG 82
+
+Year  G   AB   R    H    2B  3B  HR  RBI BB  SO  SB   AVG   OBP   SLG
+2039  74  269  33   50   8   3   8   31  22  56  14  .186  .249  .349
+2038  145 568  97   161  26  3   38  104 59  101 26  .283  .355  .525
+2037  140 594  112  183  41  7   46  116 72  122 32  .308  .367  .613
+2036  138 586  98   161  24  4   32  86  68  110 23  .267  .354  .512
+2035  143 581  83   175  41  8   33  81  67  113 30  .301  .374  .513
+
+Career Totals
+1221 G | 4789 AB | 823 R | 1331 H | 274 2B | 63 3B | 247 HR | 741 RBI | 
+533 BB | 960 SO | 269 SB | .277 AVG | .352 OBP | .515 SLG
+
+Awards & Honors
+MVP: 2037
+Hank Aaron Award: 2033, 2037
+World Series MVP: 2031, 2033
+Playoff MVP: 2031
+Silver Slugger: 2032, 2033, 2037, 2038
+All-Star MVP: 2038
+Home Run Derby Winner: 2036, 2037, 2038
+All-Star Appearances: 2032, 2033, 2034, 2035, 2036, 2037, 2038
+World Series Champion: 2031, 2033
+
+Contract Summary
+2040–2042: $28,400,000 per year
+2043–2049: Free Agent
+
+Roster Status
+Active Roster: Yes
+40-Man: Yes
+Minor Options Used: 3/3
+Playoff Eligible: Yes

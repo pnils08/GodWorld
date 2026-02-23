@@ -1,0 +1,41 @@
+
+POPID: POP-00018
+Name: Benji Dillon
+Alias: "The Golden Arm"
+Tier: 1
+Role Type: Legend
+Year: 2040
+
+--- BIOGRAPHICAL DATA ---
+Birth Year: 2006
+Birthplace: California, USA
+Height: 6'2"
+Weight: 210 lbs
+Throws/Bats: Left/Left
+Drafted: 2024 (Round 2)
+MLB Service Time: 14.020 years
+Age: 34 (as of 2040)
+
+--- PROFESSIONAL DATA ---
+Team: Oakland Athletics
+Position: SP (Starting Pitcher)
+Overall Rating: 94
+Potential: A
+Known For: Precision, intelligence, and analytical mastery of pitching mechanics.
+Nickname: "The Golden Arm"
+Notable Awards: Multiple Cy Young Awards, All-Star selections, and World Series championships.
+Legacy Status: Founding member of the Oakland Athletics dynasty core alongside Vinnie Keane, Isley Kelley, Darrin Davis, and Mark Aitken.
+
+--- IMAGE DATA REFERENCE ---
+POPID_Image_Link: /mnt/data/A_digital_photograph_features_Benji_Dillon,_a_prof.png
+POPID_Creation_Stamp: 2025-11-09 09:14:42
+Image_Type: Portrait / 2040 ID Style
+Visual_Profile: Medium-length dark hair, trimmed beard, focused gaze, wearing a tailored charcoal suit and green tie, calm and reflective demeanor.
+
+--- NOTES ---
+This record represents the canonical likeness and metadata structure for Benji Dillon as of simulation year 2040.
+All derivative works or recreations should reference POP-00018 for visual and identity consistency within the Mirror System.
+
+--- LEGACY REFERENCE ---
+Previous POPID: POP-00006 (pre-Sheets system)
+Current POPID: POP-00018 (Simulation_Ledger canonical)

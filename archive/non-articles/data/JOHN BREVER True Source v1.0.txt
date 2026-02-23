@@ -1,0 +1,49 @@
+JOHN BREVER True Source v1.0 — SP #29
+Oakland Athletics | Ohio | Age 31
+Potential B
+Overall 85
+Height / Weight 6’1” / 180 lbs
+B/T Left / Left
+Drafted Round 1, 2026
+MLB Service Time 8.000 years
+Hitter Tendency Whole Field
+
+Pitching Statistics
+Year  Team  G   GS  W   L   SV   IP      H    R    ER   HR  BB  SO   ERA
+2039  ATH   32  32  10  10   0   163.1   178  103  100  22  73  177  5.51
+2038  ATH   32  32  10  10   0   173.2   172  83   81   17  84  191  4.20
+2037  ATH   32  32  11  9    0   164.1   163  93   90   19  67  198  4.93
+2036  ATH   33  33  17  9    0   185.2   160  70   65   14  96  212  3.15
+2035  ATH   32  32  14  6    0   177.2   155  66   64   17  89  213  3.24
+2034  ATH   32  32  14  7    0   180.2   172  84   80   18  91  208  3.99
+2033  ATH   32  32  15  4    0   190.1   179  74   73   15  88  189  3.45
+2032  ATH   32  32  9   8    0   165.2   179  113  107  24  95  176  5.81
+
+Career ATH   257 257 100 62 0 1401.1 1363 686 660 146 683 1554 4.24
+
+Pitch Repertoire
+Slider – 84 mph
+4-Seam Fastball – 92 mph
+Changeup – 84 mph
+Sweeping Curve – 79 mph
+2-Seam Fastball – 90 mph
+
+Attributes Summary
+Category      Value      Category     Value
+STA           78         VEL          79
+H/9           75         BRK          59
+K/9           86         FLD          48
+BB/9          51         ARM          92
+HR/9          62         ACC          78
+PCLT          60         REAC         52
+CTRL          70
+
+Contract Information
+2040: $24.1 M
+2041: $24.1 M
+2042–2049: Free Agent
+On 40-Man Roster: Yes
+Contract Option: None
+
+Awards
+All-Star (2035)

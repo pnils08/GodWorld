@@ -1,0 +1,141 @@
+A’S UNIVERSE STATCAST PLAYER CARD v1.0
+BENJI DILLON — LHP (THE GOLDEN ARM)
+Age: 36 | B/T: L/L | Height: 6’5” | 219 lbs
+Potential: A | Overall: 82 (but plays like a 90)
+Service Time: 15 years
+Archetype: Power–Command Legacy Ace
+TrueSource Reference: TS-DILLON–2040  
+
+⸻
+
+CAREER IDENTIFIER
+
+One of the greatest pitchers in A’s franchise history —
+and one of the most statistically dominant left-handers in your universe.
+
+Career totals:
+200 W | 126 L | 2,787.2 IP | 3,219 SO | 3.58 ERA | 5× Cy Young
+(2028, 2032, 2033, 2034, 2037)
+
+No A’s pitcher has ever paired that much volume with that much dominance for that long.
+
+⸻
+
+PITCH ARSENAL (TRUE SOURCE + STATCAST INTERPRETATION)
+
+4-Seam Fastball — 98 mph (peak), 94–96 now
+• Once elite, now “just” very good
+• Active spin still strong
+• Elevated 4-seam remains his core strikeout pitch
+• Late-career decline: –1.2 mph over last 3 seasons
+
+Changeup — 80 mph
+• His signature pitch
+• Huge separation from fastball makes it deadly
+• Generates weak contact + chase swings
+• Still elite even with velo dip
+
+Slider — 88 mph
+• Hard, modern shape
+• Second out-pitch behind the changeup
+• Best vs. RHB
+
+Curveball — 69 mph
+• Show-me pitch
+• Used to disrupt timing
+• Effectiveness fading with age
+
+Summary:
+He’s transitioning from power-first ace to command-first technician.
+This is exactly how elite careers age.
+
+⸻
+
+STATCAST CONTACT PROFILE
+
+Hard-Hit%: Low allowed (elite sequencing)
+Barrel% allowed: One of the lowest among veteran starters
+Whiff% (pitcher): High — changeup responsible for most
+Chase% induced: Excellent
+xBA allowed: Consistently lower than real BA
+xSLG allowed: Stable — rarely punished
+
+Interpretation:
+His underlying expected stats always outperform his surface ERA.
+
+⸻
+
+REVERSE SPLITS
+
+vs RHB — Dominant
+He is one of the rare LHPs better against righties.
+
+vs LHB — Still strong, but aging shows here first.
+
+⸻
+
+SPRAY & ZONE PROFILE (PITCHING)
+
+Hot zones:
+• Elevated 4-seamer → whiffs
+• Low-away changeup → chase + rollover contact
+
+Cold zones (vulnerable):
+• Middle-middle when fatigued
+• Belt-high sliders left inside
+
+⸻
+
+SIM-BASED TRAITS
+
+Stamina: 95
+Command: 80
+Clutch: 93
+Pitch Control / Pitch Break trending DOWN slightly with age (–2 last season)
+
+But even his “decline” years would be career seasons for most pitchers.
+
+⸻
+
+CAREER ARC PATTERN
+
+Peak seasons:
+2034–2037 (insane stretch, 2 Cy Youngs, 230+ K/year)
+
+Aging seasons:
+2038: 5.56 ERA (command dip)
+2039: 4.29 ERA (velo stabilized)
+
+2040 Projection:
+Strong bounceback candidate —
+early season peripherals show a return to form.
+
+He ages like Justin Verlander + CC Sabathia hybrid.
+
+⸻
+
+NOTES (ANTHONY — ANALYTICS)
+
+• Dillon’s decline is overstated — his xERA and xSLG show he’s still near-elite.
+• Fastball velocity drop is real, but the changeup remains unhittable.
+• Command metrics have stabilized after a 2038 down year.
+• He’s still a Cy Young contender in 2040 due to innings volume + K totals.
+• No other pitcher in the system can replicate his sequencing skill.
+• Projection: 12–15 more quality starts this season barring injury.
+
+⸻
+
+NOTES (P SLAYER — EMOTIONAL TAKE)
+
+“He’s the old lion who still scares the savannah.
+You see the numbers dip, you think he’s done — then he throws seven shutout innings just to remind the world.
+This man refuses to age like a normal human.”
+
+⸻
+
+NOTES (HAL RICHMOND — HISTORICAL)
+
+“Great pitchers decline in two ways: suddenly or slowly.
+Dillon refuses both.
+He descends like a monarch — dignified, dangerous, and still feared.
+When the story of this era is written, his name will anchor its chapters.”

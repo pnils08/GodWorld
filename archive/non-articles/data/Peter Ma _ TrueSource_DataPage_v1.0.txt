@@ -1,0 +1,59 @@
+Peter Ma — TrueSource_DataPage_v1.0
+POPID: Pending assignment
+Category: Draft Prospect
+Organization: Oakland Athletics
+Draft Year: 2040
+Draft Round: Round 1
+Pick Status: Signed
+
+Identity
+Name: Peter Ma
+Position: SP
+Bats: L
+Throws: L
+Born: California
+Age: 19
+Height: 5'10"
+Weight: 202 lbs
+MLB Service: 0.000 years
+Secondary Position: None
+
+Overall: 72
+Potential: B
+Scouted Potential Range: 68–95
+Actual Potential: 80
+
+Pitch Repertoire
+4-Seam Fastball — 92 mph
+Changeup — 84 mph
+Sweeper — 82 mph
+2-Seam Fastball — 89 mph
+
+Attributes
+STA: 94
+H/9: 64
+K/9: 62
+BB/9: 63
+HR/9: 41
+PCLT: 30
+CTRL: 52
+VEL: 69
+BRK: 67
+
+FLD: 36
+ARM: 76
+ACC: 66
+REAC: 41
+
+Contract
+2040: $70K (Signing Contract)
+2041–2042: RNW
+2043–2045: ARB
+2046: FA
+
+Roster Status: Not on 40-Man Roster
+Minor League Options: 0/3 used
+Rule 5 Eligibility: Future eligible
+
+Notes
+Left-handed starter with above-average stamina, strong command development indicators, and a deep four-pitch mix. Actual potential of 80 places him firmly in the organization’s long-term rotation plans.

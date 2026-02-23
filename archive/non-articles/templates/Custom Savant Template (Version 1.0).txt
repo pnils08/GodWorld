@@ -1,0 +1,62 @@
+A’s Universe Custom Savant Template (Version 1.0)
+
+This is the template all future Savant-style player cards will follow:
+
+⸻
+
+A’S UNIVERSE STATCAST TEMPLATE v1.0
+(Plain text, reusable for any player)
+
+PLAYER NAME
+Position:
+Bats / Throws:
+Age:
+
+CONTACT PROFILE
+Hard-Hit%:
+Barrel%:
+Avg Exit Velocity:
+Max Exit Velocity:
+Launch Angle:
+Sweet-Spot%:
+xBA:
+xSLG:
+Whiff%:
+Chase%:
+
+SPRAY & ZONE BEHAVIOR
+Pull / Center / Oppo %:
+Hot Zones:
+Cold Zones:
+High/Low Zone Effectiveness:
+
+BASERUNNING
+Sprint Speed:
+First-to-Third%:
+Steal Jumps Quality:
+
+DEFENSE
+OAA:
+Arm Strength:
+Range Rating:
+Route Efficiency:
+
+PITCHING (if applicable)
+Pitch Mix:
+Velo Bands:
+Spin Rates:
+Active Spin v Gyro Spin:
+Whiff Rates:
+Put-Away Pitch:
+
+NOTES (Anthony / Player Dev)
+Mechanical flags
+Stability projections
+Variance notes
+
+NOTES (Slayer)
+Vibes
+Fan temperature
+
+NOTES (Hal)
+Historical parallels

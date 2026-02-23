@@ -1,0 +1,2064 @@
+
+
+──────────────────────────────
+Cy Newell — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Cy Newell — TrueSource DataPage v1.0
+Affiliation: Las Vegas Aviators (AAA)
+Position: SP | Secondary Position: None
+Potential: B | Overall: 80 ↑ (Positive Delta)
+Bats/Throws: S / R
+Draft: Round 1, 2033 | Born: Canada
+Age: 26 | Height / Weight: 6’4” / 224 lbs
+Hitter Tendency: Opposite
+
+Pitch Repertoire:
+4-Seam Fastball (96 mph)
+Cutter (94 mph)
+Curveball (81 mph)
+Changeup (84 mph)
+
+Performance Summary:
+• Power-built righty with command and control balance across all zones.
+• 96 mph fastball pairs effectively with a late-cutting 94 mph cutter, his out pitch.
+• Excellent zone discipline with 73 CTRL, 65 HR/9, and 80 H/9 profiles.
+• Durable frame built for rotation longevity, with 84 STA and 86 BRK.
+• Velocity and pitch sequencing suggest mid-rotation ceiling; low injury profile.
+
+Contract Details:
+2040: $780K | 2041–2042 RNW | 2043–2044 ARB | 2045 FA
+Status: On 40-Man Roster | 2/3 Minor League Options Used | Rule 5 Eligible 2046
+
+Development Notes:
+• Mixes velocity with intelligence, capable of adapting mid-game to hitters’ adjustments.
+• Fastball-cutter tunnel induces weak contact; changeup keeps hitters off balance.
+• Mentally composed and physically resilient; exhibits leadership qualities on mound.
+• Projected MLB ETA: 2040 (mid-rotation starter candidate).
+
+TS-PRSP-010 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+VLADIMIR GONZALEZ Data Card v1.0.txt
+──────────────────────────────
+VLADIMIR GONZALEZ Data Card v1.0 — RF / LF / CF
+Oakland Athletics | Dominican Republic | Age 26
+Potential A
+Overall 84
+Height / Weight 6'0" / 184 lbs
+B/T Right / Right
+Drafted Round 1, 2031
+MLB Service Time 1.138 years
+Hitter Tendency Pull Hitter
+
+Batting Statistics
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 127 506 61 137 29 4 14 60 49 78 15 8 .271 .335 .427
+2038 ATH 35 120 13 24 8 1 2 10 20 25 7 1 .200 .322 .317
+2037 ATH 16 61 7 16 6 0 2 8 4 8 0 1 .262 .318 .459
+
+Career 178 687 81 177 43 4 18 78 73 111 22 10 .258 .331 .410
+
+Awards
+• World Series MVP (2037)
+
+Contract Information
+2040: $2.8M | 2041: $2.8M | 2042–2044: Arbitration | 2045–2049: Free Agent
+
+Attributes Summary
+CON L 82
+CON R 74
+POW L 60
+POW R 54
+VIS 89
+DISC 85
+CLT 99
+BUNT 38
+DUR 90
+FLD 79
+ARM 57
+ACC 61
+REAC 61
+SPD 66
+STEAL 57
+BR AGG 57
+
+──────────────────────────────
+Thomas Gaspar — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Thomas Gaspar — TrueSource DataPage v1.0
+Oakland Athletics | LF / CF / RF
+Drafted: Round 1 (2033) | Age: 24 | Height: 6′2″ | Weight: 204 lbs | B/T: R/R
+
+Year   Team   G   AB   R   H   2B  3B  HR  RBI  BB  SO  SB  CS   AVG   OBP   SLG
+2039   ATH    17  60  7   14   2   0   4   7    7   7   1   0   .233  .324  .467
+2038   ATH    28  112 19  33   4   0   6   18   11  21  7   2   .295  .360  .491
+
+Career        45  172 26  47   6   0  10   25   18  28  8   2   .273  .347  .483
+
+Attributes Summary
+CON R: 69  CON L: 79  POW R: 58  POW L: 61  VIS: 84  DISC: 85  CLT: 83  BUNT: 54  
+DUR: 68  FLD: 71  ARM: 60  ACC: 50  REAC: 89  SPD: 58  STEAL: 41  BR AGG: 50
+
+Contract Information
+2040: $780 K | 2041–2042: Renew | 2043–2045: Arb | 2046–2049: FA  
+On Active Roster: Yes | On 40-Man: Yes | Minor Opt: 1/3 Used
+
+Audit Line: TS-UPD-012  
+Version: v1.0  
+Status: Verified — Ready for Player_Cards insertion.
+
+──────────────────────────────
+Peter Busch — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Peter Busch — TrueSource DataPage v1.0
+Team: Oakland Athletics (#3)
+Positions: RF / LF
+Potential: A
+Overall: 86
+Draft: Round 1 (2032)
+Age: 28
+B/T: Right / Right
+Height/Weight: 5'7" / 194 lbs
+Birthplace: California
+Hitter Tendency: Pull Hitter
+MLB Service Time: 2.062 years
+Quirk: Unfazed (Excels when hitting with 2 strikes)
+Award: All-Star (2039)
+
+Year   Team  G    AB   R    H    2B  3B  HR  RBI  BB  SO  SB  CS   AVG   OBP   SLG
+2039   ATH   144  633  85  164   52   2   22   81   39  111 40   6   .259  .303  .452
+2038   ATH   134  534  77  141   30   9   14   68   51   87 36   8   .284  .331  .433
+2037   ATH    25   93   9   19    8   0    1    8    7   25  5   1   .204  .257  .323
+
+Career — 303 1260 171 324 90 11 37 157 97 223 81 15 .257 .311 .434
+
+──────────────────────────────
+Martin Richards DataPage v1.0.txt
+──────────────────────────────
+Martin Richards DataPage v1.0
+Team: Oakland Athletics
+Position: 3B / 1B
+B/T: L / R
+Height / Weight: 5'10" / 169 lbs
+Born: Maryland
+Drafted: Round 1 (2028)
+Potential: A
+Overall: 90
+Service Time: 8.000 Years
+
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 90 348 67 105 25 2 25 54 42 44 6 0 .302 .379 .514
+2038 ATH 130 508 75 147 27 1 30 72 58 100 9 6 .289 .380 .498
+2037 ATH 128 503 63 122 25 2 18 55 70 97 14 3 .272 .364 .437
+2036 ATH 150 604 90 188 38 0 30 84 72 113 10 8 .311 .390 .523
+2035 ATH 130 469 60 123 30 2 12 50 69 91 3 3 .260 .361 .409
+2034 ATH 106 500 54 137 20 0 10 61 61 89 2 3 .243 .342 .368
+2033 ATH 16 57 5 12 0 0 1 5 14 2 0 0 .211 .281 .263
+
+Career Totals ATH 888 3397 510 942 193 11 132 461 447 651 69 25 .277 .364 .457
+
+Awards:
+- All-Star (2034, 2037, 2038)
+- Gold Glove (2034, 2037)
+
+──────────────────────────────
+MARK AITKEN Data Card v1.0.txt
+──────────────────────────────
+MARK AITKEN Data Card v1.0 — 3B / 1B
+Oakland Athletics | California | Age 32
+Potential: A
+Overall: 93
+Height / Weight: 5'8" / 168 lbs
+B/T: Switch / Right
+Drafted: Round 4 (2026)
+MLB Service Time: 7.127 years
+Hitter Tendency: Pull Hitter
+Quirk: Night Player
+
+Year  Team  G   AB   R    H    2B  3B  HR  RBI  BB  SO  SB  CS   AVG   OBP   SLG
+2039  ATH  148  579  84  165   37   2   20   75   62  101  14   5   .285  .355  .459
+2038  ATH  152  564  98  160   18   0   30   81   78  102   6   6   .284  .373  .475
+2037  ATH  142  549  81  145   29   1   24   71   69   96  15  15   .264  .348  .463
+2036  ATH  159  615 100  182   34   3   35  124   70  114  17   7   .296  .374  .535
+2035  ATH  124  469  54  113   16   2   20   63   55  105   9   3   .241  .318  .412
+2034  ATH  160  637  99  184   23   4   39  100   63  134  16   7   .289  .355  .521
+2033  ATH   45  183  17   35   13   0    2   27   11   47   2   1   .191  .232  .295
+2032  ATH  156  601  81  167   28   0   21   80   49  123   9   7   .278  .337  .436
+2031  ATH   23   86  11   19    4   1    4   10    7   18   1   0   .221  .280  .430
+
+Career - 1109  4283  623  1170  202  16  195  631  464  840  89  52  .273  .346  .466
+
+Contract Information:
+2040–2041: $21.4M per year | 2042–2049: Free Agent
+
+Roster Status:
+On Active & 40-Man Roster | 2/3 Minor League Options Used
+
+Waiver Status:
+None
+
+Attributes Summary:
+CON R 77 | CON L 96 | POW R 68 | POW L 81 | VIS 80 | DISC 79 | CLT 81 | DBUNT 41 | DUR 98 |
+FLD 78 | ARM 79 | ACC 69 | REAC 81 | SPD 50 | STEAL 23 | BR AGG 45
+
+Awards & Honors:
+Rookie of the Year (2032)
+Gold Glove (2032, 2038, 2039)
+Silver Slugger (2034, 2036)
+All-Star (2036)
+All-Star MVP (2036)
+Playoff MVP (2037)
+
+Template: TrueSource Format | Source: Photo-Verified User Data | Division: /Player_Cards/
+
+──────────────────────────────
+Louis Cross TrueSource_DataPage_v1.0.txt
+──────────────────────────────
+Louis Cross TrueSource_DataPage_v1.0
+POPID: NOT ASSIGNED
+Record Type: Player Profile – Athletics Universe
+Data Integrity: Verified (Screenshots 2040)
+
+––––––––––––––––––––––––––––––––––––––
+BASIC INFORMATION
+––––––––––––––––––––––––––––––––––––––
+Name: Louis Cross
+Position: RP
+Team: Oakland Athletics (#21)
+Overall: 88
+Potential: B
+MLB® Service Time: 8.063 Years
+Age: 29
+Height: 6'0"
+Weight: 185 lbs
+Bats: Left
+Throws: Left
+Born: Tennessee
+Drafted: Round 3 (2028)
+Secondary Position: None
+Hitter Tendency: Pull Hitter
+
+––––––––––––––––––––––––––––––––––––––
+PITCH REPERTOIRE
+––––––––––––––––––––––––––––––––––––––
+4-Seam Fastball: 96 mph
+Slider: 88 mph
+2-Seam Fastball: 94 mph
+12–6 Curve: 82 mph
+
+––––––––––––––––––––––––––––––––––––––
+ATTRIBUTES
+––––––––––––––––––––––––––––––––––––––
+STA: 42
+H/9: 99
+K/9: 77
+BB/9: 64
+HR/9: 97
+Pitching Clutch (PCLT): 85
+Control (CTRL): 67
+Velocity (VEL): 84
+Break (BRK): 63
+
+Fielding (FLD): 30
+Arm Strength (ARM): 56
+Arm Accuracy (ACC): 57
+Reaction (REAC): 49
+
+––––––––––––––––––––––––––––––––––––––
+CAREER MLB STATS (2036–2040)
+––––––––––––––––––––––––––––––––––––––
+Career Totals:
+G: 624
+GS: 0
+W: 44
+L: 49
+SV: 98
+BS: 52
+HLD: 173
+IP: 668.2
+H: 533
+R: 298
+ER: 254
+HR: 56
+BB: 328
+SO: 558
+ERA: 3.42
+
+––––––––––––––––––––––––––––––––––––––
+SEASON LOG
+––––––––––––––––––––––––––––––––––––––
+2040 – ATH
+G: 0 | GS: 0 | W: 0 | L: 0 | SV: 0 | BS: 0 | HLD: 0
+IP: 0.0 | H: 0 | R: 0 | ER: 0 | HR: 0 | BB: 0 | SO: 0 | ERA: 0.00
+
+2039 – WSH
+G: 66 | GS: 0 | W: 3 | L: 3 | SV: 2 | BS: 2 | HLD: 32
+IP: 72.0 | H: 41 | R: 18 | ER: 17 | HR: 7 | BB: 33 | SO: 68 | ERA: 2.13
+
+2038 – TOT
+G: 86 | GS: 0 | W: 6 | L: 7 | SV: 3 | BS: 7 | HLD: 33
+IP: 88.1 | H: 71 | R: 32 | ER: 24 | HR: 6 | BB: 28 | SO: 77 | ERA: 2.45
+
+2037 – MIA
+G: 77 | GS: 0 | W: 7 | L: 10 | SV: 1 | BS: 5 | HLD: 37
+IP: 84.0 | H: 69 | R: 45 | ER: 35 | HR: 8 | BB: 33 | SO: 83 | ERA: 3.75
+
+2036 – TOT
+G: 66 | GS: 0 | W: 5 | L: 3 | SV: 9 | BS: 4 | HLD: 16
+IP: 71.2 | H: 57 | R: 29 | ER: 28 | HR: 5 | BB: 36 | SO: 61 | ERA: 3.52
+
+––––––––––––––––––––––––––––––––––––––
+CONTRACT & ROSTER STATUS
+––––––––––––––––––––––––––––––––––––––
+2040: $12.0M
+2041: $12.0M
+2042: FA
+2043: FA
+2044: FA
+2045: FA
+
+Active Roster: YES
+40-Man Roster: YES
+Minor League Options: 2/3 USED
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+
+––––––––––––––––––––––––––––––––––––––
+PHOTO REFERENCE
+––––––––––––––––––––––––––––––––––––––
+Portrait: (Not yet assigned)
+POPID: Pending
+
+──────────────────────────────
+JOSÉ COLÓN Data Card v1.0.txt
+──────────────────────────────
+JOSÉ COLÓN Data Card v1.0 — C / 3B / LF
+Oakland Athletics | Dominican Republic | Age 27
+Potential: A
+Overall: 76
+Height / Weight: 6'1" / 191 lbs
+B/T: Switch / Right
+Drafted: Round 5 (2032)
+MLB Service Time: 2.045 years
+Hitter Tendency: Pull / Power Balance
+
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 103 359 54 99 18 2 19 53 27 82 8 1 .276 .329 .496
+2038 ATH 21 70 7 20 2 0 2 7 7 15 2 0 .286 .351 .400
+2037 ATH 5 16 2 1 0 0 0 1 2 0 0 0 .062 .062 .062
+2036 MIL 9 30 2 6 0 1 1 3 1 13 2 3 .200 .273 .300
+
+Career - 138 475 67 126 20 2 22 74 37 110 12 4 .265 .321 .420
+
+Contract Information:
+2040–2042: $2.1M per year | 2043–2049: Arbitration / Free Agent
+
+Roster Status:
+Active 26-Man | 2/3 Minor League Options Used
+
+Attributes Summary:
+CON R 68 | CON L 73 | POW R 74 | POW L 77 | VIS 64 | DISC 59 | CLT 71 | DBUNT 42 | DUR 82 |
+FLD 80 | ARM 85 | ACC 70 | REAC 78 | SPD 61 | STEAL 53 | BR AGG 49
+
+Template: TrueSource Format | Source: Photo-Verified User Data | Division: /Player_Cards/
+
+──────────────────────────────
+ISLEY KELLEY True Source v1.0.txt
+──────────────────────────────
+ISLEY KELLEY True Source v1.0 — SS / 2B / 3B
+Oakland Athletics | Mississippi | Age 32
+Potential A
+Overall 96
+Height / Weight 5’7” / 166 lbs
+B/T Right / Right
+Drafted Round 2, 2025
+MLB Service Time 14.000 years
+Hitter Tendency Whole Field
+
+Batting Statistics
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 155 624 102 187 41 3 28 96 68 95 16 5 .300 .363 .538
+2038 ATH 152 618 97 180 38 4 33 110 72 87 14 6 .291 .360 .557
+2037 ATH 158 629 112 195 45 5 40 122 69 92 18 4 .310 .375 .591
+2036 ATH 156 622 108 188 36 6 39 118 66 88 19 7 .302 .369 .579
+2035 ATH 159 635 115 194 39 5 43 124 78 91 22 6 .305 .373 .582
+2034 ATH 160 640 118 192 42 4 38 120 75 89 20 5 .300 .357 .541
+2033 ATH 155 616 99 180 37 5 33 108 62 90 23 6 .292 .354 .532
+2032 ATH 162 634 123 206 40 7 44 128 83 88 24 5 .326 .396 .585
+2031 ATH 160 632 101 186 33 7 37 104 67 92 22 11 .294 .363 .544
+2030 ATH 158 634 90 171 36 7 27 85 64 110 27 7 .270 .343 .468
+2029 ATH 151 622 105 188 42 10 37 87 52 109 20 9 .302 .357 .571
+2028 TOT 153 600 84 164 35 7 27 82 46 91 31 8 .273 .329 .482
+2027 CIN 141 533 58 132 32 2 20 82 47 101 16 11 .248 .309 .428
+2026 CIN 154 578 73 140 29 2 20 71 47 126 15 8 .242 .289 .420
+
+Career ATH 2126 8451 1290 2398 501 63 447 1370 795 1390 268 44 .284 .347 .517
+
+Awards
+Most Valuable Player (2032, 2034, 2035)
+Rookie of the Year (2026)
+Gold Glove (2029, 2030)
+Silver Slugger (2031–2037)
+World Series MVP (2032)
+All-Star (2028–2039)
+
+Contract Information
+2040–2041: $33.8 M AAV
+2042: Free Agent Eligibility
+
+Attributes Summary
+Hitting Rating            Fielding / Defense Rating
+CON L 88                  FLD 92
+CON R 78                  ARM 81
+POW L 81                  ACC 83
+POW R 63                  REAC 81
+VIS 87                    SPD 79
+DISC 66                   STEAL 71
+CLT 77                    BR AGG 72
+DUR 97
+
+──────────────────────────────
+Ian Devine — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Ian Devine — TrueSource DataPage v1.0
+Team: Oakland Athletics (#20)
+Position: RP
+Potential: B
+Overall: 88
+Draft: Round 4 (2028)
+Age: 30
+B/T: L / R
+Height/Weight: 6'4" / 194 lbs
+Birthplace: Pennsylvania
+Hitter Tendency: Pull Hitter
+MLB Service Time: 7.090 years
+
+Pitch Repertoire:
+4-Seam Fastball (93 mph)
+Slider (86 mph)
+Circle Change (84 mph)
+2-Seam Fastball (91 mph)
+
+Career Accolades:
+• 2037 All-Star Selection
+
+Contract Details:
+2040 — $10.0M
+2041 — $10.0M
+
+Year  Team  G   GS  W   L   SV   BS   IP     H    R    ER   HR  BB  SO   ERA
+2039  ATH   76   0   1   2   2    4    78.1   81   37   35   4   23   86   4.02
+2038  ATH   70   0   8   0   9    2    82.2   77   21   27   4   29   71   2.94
+2037  ATH   65   0   5   1   6    1    94.1   59   19   17   3   19   99   1.64
+2036  ATH   26   0   1   1   0    0    61.2   59   29   29   10  25   52   4.23
+2035  CHC   81   0   2   2   6    7    85.0   87   32   30   10  24   117  3.18
+2034  CHC   89   0   6   4   1    4    100.1  102  41   40   13  47   95   3.58
+2033  ATL   91   0   8   3   4    2    110.2  91   49   45   9   53   93   3.67
+2032  ATL   35   0   2   1   1    2    43.1   43   16   16   6   26   44   3.32
+
+Career — 533 G | 0 GS | 33 W | 16 L | 9 SV | 22 BS | 686.0 IP | 607 H | 255 R | 
+241 ER | 66 HR | 244 BB | 677 SO | 3.26 ERA
+
+──────────────────────────────
+HITOKI KA — TrueSource DataPage v1.0.txt
+──────────────────────────────
+HITOKI KA — TrueSource DataPage v1.0
+
+Profile Summary
+Name Hitoki Ka
+Age 28
+Height/Weight 6’2” / 208 lbs
+Born California
+Primary Position Relief Pitcher (RP)
+Bats/Throws Right / Right
+Hitter Tendency Whole Field
+Drafted Round 3 (2029)
+MLB Service 5.110 years
+Overall / Potential 86 (B)
+Team Oakland Athletics
+
+Pitch Repertoire
+4-Seam Fastball (95 mph), Slider (87 mph), Changeup (84 mph), Curveball (81 mph)
+
+Contract Summary
+2040–2042: $7,000,000 per year
+2043–2049: Free Agent
+Active Roster: Yes | 40-Man: Yes | Minor Options Used: 2/3 | Playoff Eligible: Yes
+
+Yearly Stats
+Year  Team  G   GS  W   L   SV  BS  HLD   IP     H    R    ER   HR  BB  SO   ERA
+2039  ATH   79   0   7   4   5   4   9    83.1   71   42   34   9   45   91   3.67
+2038  ATH   74   0   7   5   4   5   10   85.0   60   23   20   4   33   84   2.12
+2037  ATH   69   0   5   3   1   1   10   81.2   75   23   23   6   34   77   2.53
+2036  ATH   27   0   1   1   0   0   5    30.2   26   12   11   4   16   28   3.23
+2035  TOT   72   0   4   3   1   1   12   78.2   73   44   41   11  38   81   4.69
+2034  AZ    77   0   6   4   4   11  8    76.1   74   37   31   12  38   74   3.43
+2033  AZ    19   0   1   0   0   0   3    21.1   23   13   12   5   11   12   5.06
+
+Career Totals (through 2039)
+417 G | 0 GS | 32 W | 17 L | 13 SV | 23 BS | 62 HLD |
+482.0 IP | 404 H | 194 R | 172 ER | 51 HR | 201 BB | 440 SO | 3.35 ERA
+
+──────────────────────────────
+Gary Robertson — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Gary Robertson — TrueSource DataPage v1.0
+Oakland Athletics | RP
+Drafted: Round 4 (2032) | Age: 25 | Height: 5′11″ | Weight: 195 lbs | B/T: S/R
+Born: North Carolina | Potential: B | Overall: 78
+
+Year   Team   G   GS   W   L   SV   BS   HLD   IP     H    R    ER   HR   BB   SO   ERA
+2039   ATH    31   0    1   1    0     1     2    70.1   56   25   24   9    28   59   3.07
+2037   ATH     3   0    0   0    0     0     0     4.1    1    0    0   0     3    6   0.0
+
+Career        34   0    1   1    0     1     2    74.2   57   25   24   9    31   65   2.89
+
+Attributes Summary
+STA: 54   H/9: 94   K/9: 74   BB/9: 64   HR/9: 62   PCLT: 74   CTRL: 65
+VEL: 68   BRK: 67   FLD: 57   ARM: 98   ACC: 70   REAC: 65
+
+Pitch Repertoire:
+• 2-Seam Fastball (89 mph)
+• Changeup (84 mph)
+• Slider (85 mph)
+
+Contract Information
+2040: $780 K | 2041–2042: Renew | 2043–2045: Arb | 2046–2049: FA
+On Active Roster: Yes | On 40-Man: Yes | Minor Opt: 2/3 Used
+
+Audit Line: TS-UPD-013
+Version: v1.0
+Status: Verified — Ready for Player_Cards insertion.
+
+──────────────────────────────
+Arturo Ramos — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Arturo Ramos — TrueSource DataPage v1.0
+Team: Oakland Athletics (#25)
+Position: SP
+Potential: A
+Overall: 86
+Draft: Round 1 (2032)
+Age: 25
+B/T: S / R
+Height/Weight: 6'0" / 206 lbs
+Birthplace: Puerto Rico
+Hitter Tendency: Pull Hitter
+MLB Service Time: 1.001 years
+
+Repertoire:
+• 4-Seam Fastball — 93 mph
+• Slider — 86 mph
+• Curveball — 78 mph
+
+Awards: Rookie of the Year (2039), All-Star (2039)
+
+Contract: $8.2M annually (2040–2043), Arbitration (2044), FA (2045)
+
+Roster: Active & 40-Man | Minor League Options: 1/3 Used
+
+Year  Team  G   GS  W   L   SV  BS  IP      H    R   ER  HR  BB  SO   ERA
+2039  ATH  32  32  19  7   0   0   208.2   172  66  65  25  32  155  2.80
+
+Career -      32  32  19  7   0   0   208.2   172  66  65  25  32  155  2.80
+
+──────────────────────────────
+Antone Bautista — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Antone Bautista — TrueSource DataPage v1.0
+Team: Oakland Athletics
+Position: RP
+Bats/Throws: R/R
+Height / Weight: 5’10” / 198 lbs
+Born: Dominican Republic
+Drafted: Round 2, 2027
+Potential: B
+Overall: 87
+Service Time: 8.053 years
+
+Pitch Repertoire:
+• 4-Seam Fastball – 93 mph
+• Changeup – 84 mph
+• Slider – 86 mph
+• 12–6 Curve – 80 mph
+• 2-Seam Fastball – 90 mph
+
+Attributes
+STA 22   H/9 91
+K/9 73   BB/9 86
+HR/9 92  PCLT 71
+CTRL 79  VEL 74
+BRK 70   FLD 96
+ARM 58   ACC 58
+REAC 89
+
+Year-by-Year MLB Stats
+Year  Team  G  GS  W  L  SV  BS  HLD  IP     H   R   ER  HR  BB  SO  ERA
+2039  ATH   84  0   7  4   0   4   16   108.1  87  33  31  11  23  86  2.58
+2038  ATH   87  0   7  4   4   3   15   106.1  78  23  23  6   25  91  1.95
+2037  ATH   81  0   3  3   3   4   14   101.0  93  37  32  11  25  83  2.30
+2036  ATH   77  0   9  4   0   3   12   96.1   88  37  32  11  26  102 2.99
+2035  ATH   39  0   4  0   0   0   9    62.0   48  22  22  6   20  52  3.19
+2034  ATH   17  0   2  2   0   0   4    37.0   34  13  13  3   11  35  3.16
+2033  ATH   54  0   1  1   0   0   6    69.1   60  26  26  6   31  46  3.38
+2032  ATH   44  0   2  2   0   0   8    68.0   61  29  29  9   15  65  3.84
+2031  ATH   10  0   0  0   0   0   0    14.0   14  6   6   1   3   6   6.23
+2028  ATH   6   0   0  0   6   0   0    5.2    3   2   1   0   2   11  1.59
+
+Contract
+2040 – $8.5M
+2041 – $8.5M
+2042 → FA
+2043–2049 → FA
+
+On Active Roster: YES
+On 40-Man Roster: YES
+Minor League Option: 3/3 USED
+Playoff Eligible: YES
+Rule 5 Draft Eligible: NO
+
+Summary
+Veteran Dominican right-hander with a consistent ERA under 3.00 across seven seasons. Bautista’s
+five-pitch mix and elite control (92 HR/9, 86 BB/9) have made him one of Oakland’s most reliable
+bullpen arms since 2035. Contract stability through 2041 locks him as a midterm bullpen anchor.
+
+──────────────────────────────
+Buford Park — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Buford Park — TrueSource DataPage v1.0
+Team: Las Vegas Aviators (#7)
+Position: 3B / 1B
+Potential: B
+Overall: 82
+Draft: Round 1 (2037)
+Age: 23
+B/T: L / R
+Height/Weight: 5'8" / 177 lbs
+Birthplace: Florida
+Hitter Tendency: Whole Field
+MLB Service Time: 0.132 years
+
+Year   Team   G   AB   R   H   2B   3B   HR   RBI   BB   SO   SB   CS   AVG   OBP   SLG
+2039   ATH    9   27   8   5    1    0    3    4     3    5    1    0   .185  .313  .556
+2038   ATH    26  94   11  16   8    0    3    5     4    24   3    0   .170  .204  .319
+
+Career        35  121  19  21   9    0    6    9     7    29   4    0   .174  .231  .372
+
+──────────────────────────────
+EDMUNDO PEÑA TrueSource v1.0.txt
+──────────────────────────────
+EDMUNDO PEÑA TrueSource v1.0 — CP
+Oakland Athletics | Dominican Republic | Age 35
+Potential: A
+Overall: 88
+Height / Weight: 6'5" / 219 lbs
+B/T: Right / Right
+Drafted: Round 2 (2026)
+MLB Service Time: 9.000 years
+Pitcher Tendency: Power Pitcher
+
+Year  Team  G   GS  W   L   SV  BS  HLD  IP     H    R    ER   HR  BB  SO   ERA
+2039  ATH   64  0   6   4   47  6   1    62.0   36   21   19   4   19  77   2.76
+2038  ATH   72  0   9   6   43  9   5    69.2   73   44   40   11  29  97   5.17
+2037  ATH   65  0   7   5   42  4   3    61.0   63   26   21   5   22  73   3.1
+2036  ATH   54  0   0   3   35  6   3    48.2   50   20   16   3   13  63   2.96
+2035  ATH   80  0   5   10  16  9   22   80.0   66   41   33   9   32  89   3.71
+2034  ATH   61  0   4   5   16  6   -    65.1   56   27   24   8   29  79   3.32
+2033  ATH   60  0   4   7   41  6   -    60.2   62   36   34   8   40  82   5.04
+2032  ATH   74  0   7   8   10  0   -    95.2   70   29   28   10  36  109  2.63
+2031  ATH   68  0   2   10  27  5   -    77.0   55   50   50   17  42  88   6.89
+
+Career -   598  0   44  61  213 49  91   608.0  553  299  265  75  264 757  3.92
+
+Awards:
+• All-Star (2031, 2032, 2036, 2038, 2039)
+
+Contract Information:
+2040–2041: $10.9M per year | 2042: Option | 2043–2049: Free Agent
+
+Attributes Summary:
+STA 19 | H/9 95 | K/9 95 | BB/9 66 | HR/9 82 | PCLT 75 | CTRL 68 | VEL 52 | BRK 71 | FLD 72 |
+ARM 57 | ACC 67 | REAC 67
+
+Template: Vladimir Gonzalez TrueSource Format | Source: User-Verified Statistics | Division:
+/Player_Cards/
+
+──────────────────────────────
+Antonio Castro TrueSource DataPage v1.0.txt
+──────────────────────────────
+Antonio Castro TrueSource DataPage v1.0 — Antonio Casto
+Classification: Verified Core | Source: OCR Extraction (Refined)
+
+Profile Summary
+Name: Antonio Casto
+Age: 27 | Height/Weight: 6’2” / 181 lbs
+Country: Dominican Republic
+Position: 1B
+Potential: B | Overall: 79
+Bats/Throws: Left / Left
+Hitter Tendency: Whole Field
+Drafted: Round 1 (2030)
+Service Time: 3.036 years
+
+Attributes
+CON R 85 | CON L 79 | POW R 56 | POW L 54 | VIS 67 | DISC 82 | CLT 41 | DUR 86 | FLD 56 | ARM 70 | ACC 73 | REAC 64 | SPD 27 | STEAL 28 | BR AGG 28
+
+Year    G   AB  R   H   2B  3B  HR  RBI BB  SO  SB  AVG   OBP   SLG
+2039    98  355 40  99  21  8   13  45  46  53  1   .270  .360  .400
+2038    88  317 45  90  18  5   11  44  37  54  3   .284  .361  .451
+2037    47  167 20  42  13  1   9   23  23  32  3   .251  .342  .365
+2036    18  65  9   17  1   0   2   8   17  17  0   .250  .391  .397
+2035    17  55  7   15  4   1   2   7   12  2   2   .273  .379  .545
+
+Career  271 977 127 227 63  15  27  136 132 169 14  .278  .359  .432
+
+Contract Summary
+2040: $2,000,000 | 2041: Arbitration | 2042: Arbitration | 2043–2049: Free Agent Eligibility
+
+Active Roster: Yes | 40-Man: Yes | Minor Options Used: 3/3
+
+──────────────────────────────
+Allen López — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Allen López — TrueSource DataPage v1.0
+Full Name: Allen López
+Age: 28
+Height/Weight: 5'10" / 207 lbs
+Born: Dominican Republic
+Primary Position: SP (Starting Pitcher)
+Bats/Throws: Switch / Right
+Hitter Tendency: Pull Hitter
+Overall: 84 (B Potential)
+Drafted: Round 1, 2030
+MLB Service: 4.000 years
+
+Pitch Repertoire
+4-Seam Fastball — 93 mph
+Sinker — 93 mph
+Curveball — 83 mph
+Cutter — 90 mph
+
+Year Team GS W L SV BS HLD IP H R ER HR BB SO ERA
+2039 ATH 32 14 9 0 0 0 168.1 163 85 79 23 63 158 4.27
+2038 ATH 32 15 10 0 0 0 186.0 138 51 48 10 62 182 2.32
+2037 ATH 32 12 10 0 0 0 180.1 187 92 87 28 54 134 5.16
+2036 ATH 32 10 12 0 0 0 190.0 145 65 68 23 62 197 3.04
+
+Career — 128 51 41 0 0 0 699.1 633 293 282 84 241 671 3.83
+
+Pitching Attributes
+STA: 83 | H/9: 77 | K/9: 78 | BB/9: 63 | HR/9: 57
+PCLT: 64 | CTRL: 52 | VEL: 93 | BRK: 73
+
+Fielding Attributes
+FLD: 44 | ARM: 62 | ACC: 54 | REAC: 39
+
+Awards
+Rookie of the Year (2038)
+All-Star Appearance (2038)
+
+Contract Status
+2040: $7.1M (Arbitration Eligible)
+2041: Arbitration Eligible
+2042–2049: Free Agent
+
+Active Roster: Yes | 40-Man: Yes | Minor Options: 1/3 Used
+
+──────────────────────────────
+Agustín Rodríguez — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Agustín Rodríguez — TrueSource DataPage v1.0
+Full Name: Agustín Rodríguez
+Age: 29
+Height/Weight: 5'7" / 193 lbs
+Born: Colombia
+Primary Position: SS
+Secondary Positions: 2B, 3B
+Bats/Throws: Right / Right
+Hitter Tendency: Pull Hitter
+Overall: 86 (A Potential)
+Drafted: Round 2, 2031
+MLB Service: 3.007 years
+
+Year   Team   G   AB   R   H   2B   3B   HR   RBI   BB   SO   SB   CS   AVG   OBP   SLG
+2039   ATH   107  367  42  89  17   2    15   50    30   73   13   7   .243  .300  .422
+2038   ATH   90   248  22  50  7    2    5    24    14   41   9    8   .203  .245  .350
+2037   ATH   63   218  22  54  9    0    9    33    22   58   12   5   .248  .322  .404
+2036   ATH   13   48   12  12  3    0    3    7     6    12   3    0   .250  .333  .375
+
+Career — 252  879  99  205  37  0  29  114  72  172  37  15  .233  .293  .395
+
+Offensive Attributes
+Contact R/L: 76 / 74
+Power R/L: 62 / 54
+Vision: 69
+Discipline: 60
+Clutch: 64
+
+Fielding Attributes
+Arm: 87
+Accuracy: 72
+Reaction: 77
+Fielding: 80
+Durability: 91
+
+Contract Status
+2040–2042: $8.3M each year (Arbitration Eligible)
+2043–2049: Free Agent
+
+Active Roster: Yes
+40-Man: Yes
+Minor Options: 3/3 Used
+
+──────────────────────────────
+LOUIS CROSS — Player Profile (2040 Edition).txt
+──────────────────────────────
+LOUIS CROSS — Player Profile (2040 Edition)
+
+Position: RP
+Team: Oakland Athletics (#21)
+Overall: 88
+Potential: B
+Age: 29
+Height / Weight: 6’0” / 185 lbs
+Bats / Throws: Left / Left
+Born: Tennessee
+Drafted: Round 3 (2028)
+Secondary Position: None
+Hitter Tendency: Pull Hitter
+MLB® Service Time: 8.063 years
+
+⸻
+
+PITCH REPERTOIRE
+
+4-Seam Fastball: 96 mph
+Slider: 88 mph
+2-Seam Fastball: 94 mph
+12–6 Curve: 82 mph
+
+⸻
+
+PITCHING ATTRIBUTES
+
+STA: 42
+H/9: 99
+K/9: 77
+BB/9: 64
+HR/9: 97
+Pitching Clutch (PCLT): 85
+Control (CTRL): 67
+Velocity (VEL): 84
+Break (BRK): 63
+
+⸻
+
+FIELDING ATTRIBUTES
+
+Fielding (FLD): 30
+Arm Strength (ARM): 56
+Arm Accuracy (ACC): 57
+Reaction (REAC): 49
+
+⸻
+
+MLB CAREER TOTALS (2036–2040)
+
+G: 624
+GS: 0
+W: 44
+L: 49
+SV: 98
+BS: 52
+HLD: 173
+IP: 668.2
+H: 533
+R: 298
+ER: 254
+HR: 56
+BB: 328
+SO: 558
+ERA: 3.42
+
+⸻
+
+SEASON BREAKDOWN
+
+2040 – ATH
+
+G: 0 | GS: 0 | W: 0 | L: 0 | SV: 0 | BS: 0 | HLD: 0
+IP: 0.0 | H: 0 | R: 0 | ER: 0 | HR: 0 | BB: 0 | SO: 0 | ERA: 0.00
+
+2039 – WSH
+
+G: 66 | GS: 0 | W: 3 | L: 3 | SV: 2 | BS: 2 | HLD: 32
+IP: 72.0 | H: 41 | R: 18 | ER: 17 | HR: 7 | BB: 33 | SO: 68 | ERA: 2.13
+
+2038 – TOT
+
+G: 86 | GS: 0 | W: 6 | L: 7 | SV: 3 | BS: 7 | HLD: 33
+IP: 88.1 | H: 71 | R: 32 | ER: 24 | HR: 6 | BB: 28 | SO: 77 | ERA: 2.45
+
+2037 – MIA
+
+G: 77 | GS: 0 | W: 7 | L: 10 | SV: 1 | BS: 5 | HLD: 37
+IP: 84.0 | H: 69 | R: 45 | ER: 35 | HR: 8 | BB: 33 | SO: 83 | ERA: 3.75
+
+2036 – TOT
+
+G: 66 | GS: 0 | W: 5 | L: 3 | SV: 9 | BS: 4 | HLD: 16
+IP: 71.2 | H: 57 | R: 29 | ER: 28 | HR: 5 | BB: 36 | SO: 61 | ERA: 3.52
+
+⸻
+
+CONTRACT & ROSTER STATUS
+
+2040: $12.0M
+2041: $12.0M
+2042: FA
+2043: FA
+2044: FA
+2045: FA
+
+Active Roster: YES
+40-Man Roster: YES
+Minor League Options: 2/3 USED
+Designated for Assignment: NO
+Cleared Optional Waivers: NO
+Cleared Outright Waivers: NO
+
+⸻
+
+SUMMARY
+
+Louis Cross is an established late-inning left-handed reliever with elite H/9, a high-velocity four-seamer, a sharp slider, and a reliable curveball. With a long history of high-leverage holds and near-100 K seasons, he profiles as a premium setup man and occasional closer.
+
+──────────────────────────────
+Benji Dillon TrueSource DataPage v1.0.txt
+──────────────────────────────
+Benji Dillon TrueSource DataPage v1.0 — Benji Dillon
+Classification: Verified Core | Source: OCR Extraction (Refined)
+
+Profile Summary
+Name: Benji Dillon
+Age: 36 | Height/Weight: 6’5” / 219 lbs
+Born: California
+Bats/Throws: Left / Left
+Position: Starting Pitcher
+Overall: 82 (A Potential)
+Service Time: 15.000 years MLB
+Hitter Tendency: Whole Field
+Pitch Repertoire: 4-Seam Fastball (98 mph), Changeup (80 mph), Curveball (69 mph), Slider (88 mph)
+
+Awards
+Rookie of the Year — 2025
+Cy Young — 2028, 2032, 2033, 2034, 2037
+All-Star Selections — 2025, 2028, 2031, 2034, 2037
+
+Career Totals
+493 GS | 200 W | 126 L | 2,787.2 IP | 2,748 H | 1,158 R | 1,109 ER | 300 HR | 830 BB | 3,219 SO | 3.58 ERA
+
+Year   G   GS   W   L    IP      H    R    ER   HR   BB   SO   ERA
+2039   32  32   10  10   167.2   159  82   80   17   66   175  4.29
+2038   33  33   7   11   153.2   193  98   95   26   61   144  5.56
+2037   33  33   18  4    195.2   196  51   50   14   64   236  2.30
+2036   33  33   13  8    180.0   180  70   67   23   46   215  3.35
+2035   33  33   12  9    187.2   203  80   77   24   62   202  3.61
+2034   33  33   12  9    202.0   175  69   64   20   49   260  2.85
+2033   33  33   20  7    196.2   204  85   82   22   57   217  3.75
+2032   33  33   17  7    190.0   184  79   78   19   53   220  3.69
+2031   33  33   13  9    196.0   188  72   72   22   45   224  3.31
+2030   32  32   12  9    181.0   175  69   68   18   52   201  3.43
+2029   33  33   10  17   170.1   185  95   91   23   54   207  4.81
+2028   33  33   18  6    198.1   181  70   69   19   49   264  3.13
+2027   33  33   14  9    193.0   193  73   69   22   62   189  3.39
+2026   33  33   10  9    180.2   184  90   82   22   71   205  4.08
+2025   33  33   16  5    191.2   169  69   64   16   64   226  3.01
+
+──────────────────────────────
+HENRY RIVAS — TrueSource DataPage v1.0.txt
+──────────────────────────────
+HENRY RIVAS — TrueSource DataPage v1.0
+
+Profile Summary
+Name Henry Rivas
+Age 28
+Height/Weight 6’0” / 173 lbs
+Born Puerto Rico
+Primary Position Starting Pitcher (SP)
+Bats/Throws Left / Right
+Hitter Tendency Pull Hitter
+Drafted Round 1 (2020)
+MLB Service 6.002 years
+Overall / Potential 91 (A)
+Team Oakland Athletics
+
+Pitch Repertoire
+2-Seam Fastball (94 mph)
+Sinker (90 mph)
+12–6 Curve (75 mph)
+Circle Change (78 mph)
+Slider (80 mph)
+
+Attributes
+STA 80
+H/9 76
+K/9 85
+BB/9 78
+HR/9 63
+PCLT 76
+CTRL 75
+VEL 91
+BRK 74
+FLD 91
+ARM 60
+ACC 58
+REAC 58
+
+Contract Summary
+2040–2044: $28,200,000 per year
+2045–2049: Free Agent
+Active Roster: Yes
+40-Man: Yes
+Minor Options Used: 0/3
+Playoff Eligible: Yes
+
+Yearly Stats
+Year  Team  G   GS  W   L   SV  IP      H    R    ER   HR  BB  SO   ERA
+2039  ATH   33  33  17  5   0   187.2   191  85   80   21  38  184  3.84
+2038  ATH   33  33  14  5   0   183.1   188  75   69   24  39  175  3.39
+2037  PHI   32  32  9   15  0   170.0   180  83   60   27  52  157  3.18
+2036  PHI   33  33  13  14  0   181.2   191  84   63   18  50  149  4.65
+2035  PHI   33  33  16  9   0   187.2   203  77   65   22  54  193  3.13
+2034  PHI   23  23  10  4   0   130.1   105  35   31   11  39  128  2.21
+
+Career Totals (through 2039)
+187 G | 187 GS | 69 W | 54 L | 0 SV | 1007.0 IP | 971 H | 423 R | 389 ER | 130 HR | 272 BB |
+958 SO | 3.48 ERA
+
+──────────────────────────────
+Orgin_Core_players.txt
+──────────────────────────────
+Vinnie Keane – “The Underdog Slugger”
+
+Stat Line: .324 / 19 HR / 51 RBI / 1.064 OPS (56 G)
+Analytical Read: OPS over 1.000 plants him in David Ortiz territory for efficiency and punch.
+Comp Pulse: Big Papi’s bat with a touch of Freddie Freeman’s precision.
+Copy Hook: “Keane’s swing still hums like old machinery—loud, precise, and built to last.”
+
+⸻
+
+Isley Kelley – “The Mississippi Machine”
+
+Stat Line: WAR 6.7 / wRC+ 152 / .298 AVG / +15 DRS
+Analytical Read: A two-way consistency that mirrors Chase Utley’s rhythm with Trea Turner’s coverage.
+Comp Pulse: Utley’s brain meets Turner’s glide.
+Copy Hook: “Kelley doesn’t flash—he accumulates, one smart play at a time.”
+
+⸻
+
+Benji Dillon – “The Golden Arm”
+
+Stat Line: 10–10 / 4.26 ERA / 182 K / 1.35 WHIP / 3.3 WAR
+Analytical Read: Strikeout-to-walk ratio aligns with prime Scherzer, even in a down-ERA season.
+Comp Pulse: Mid-career Verlander grit with Scherzer command traces.
+Copy Hook: “Even off peak, Dillon’s fastball still argues its own case.”
+
+⸻
+
+Mark Aitken – “The Iron Corner”
+
+Stat Line: .274 / 197 HR / .466 SLG / 2× Gold Glove, 2× Silver Slugger
+Analytical Read: Defense stabilizes the infield like Arenado; contact profile shades toward Ramírez.
+Comp Pulse: Arenado floor, José Ramírez ceiling.
+Copy Hook: “The glove leads, the brain follows, and the bat just keeps showing up.”
+
+⸻
+
+Darrin Davis – “The Ohio Outlaw of Oakland”
+
+Stat Line: .285 / 18 HR / 32 SB / wRC+ 128 / +8 BsR
+Analytical Read: Mirrors Starling Marte with an extra gear on basepaths.
+Comp Pulse: Marte’s instincts with Grady Sizemore’s old spark.
+Copy Hook: “Davis runs like the game owes him something.”
+
+
+──────────────────────────────
+VINNIE KEENE Data Card v1.0.txt
+──────────────────────────────
+VINNIE KEENE Data Card v1.0 — 3B / 2B / SS
+Oakland Athletics | Massachusetts | Age 38
+Potential A
+Overall 94
+Height / Weight 5’9” / 184 lbs
+B/T Switch / Right
+Undrafted Free Agent (2025)
+MLB Service Time 15.000 years
+Hitter Tendency Whole Field
+
+Batting Statistics
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 55 164 47 64 14 1 17 47 35 82 5 1 .315 .341 .680
+2038 ATH 94 328 84 119 36 4 49 119 49 81 4 4 .362 .398 .680
+2037 ATH 150 592 98 174 35 3 34 105 88 157 9 4 .294 .376 .515
+2036 ATH 107 409 63 111 28 2 26 62 38 69 17 3 .271 .338 .504
+2035 ATH 160 647 115 192 37 6 31 105 67 88 17 5 .317 .390 .582
+2034 ATH 150 592 98 174 35 0 24 75 107 157 9 4 .294 .376 .515
+2033 ATH 158 626 87 190 53 7 27 64 116 127 7 7 .304 .347 .564
+2032 ATH 159 634 120 201 37 5 37 67 88 117 5 5 .317 .390 .582
+2031 ATH 160 647 115 192 37 6 35 105 67 88 17 5 .297 .363 .575
+2030 ATH 158 626 87 190 53 7 30 64 110 99 7 7 .304 .347 .564
+2029 ATH 160 619 86 166 34 7 35 113 73 88 5 7 .268 .346 .515
+2028 ATH 160 616 101 166 33 4 40 55 73 73 11 8 .269 .337 .537
+2027 ATH 159 623 111 176 44 5 26 67 84 90 9 7 .283 .359 .547
+2026 ATH 146 570 96 169 41 5 23 58 74 83 10 7 .309 .375 .514
+2025 ATH 144 555 94 153 32 7 29 76 40 83 16 2 .276 .330 .515
+
+Career ATH 2035 7892 1245 2260 492 60 436 1248 764 1305 199 78 .287 .354 .520
+
+Advanced Metrics
+WAR: 83.7
+OPS: .874
+ISO: .233
+BB%: 10.3  K%: 14.9
+
+Awards
+MVP (2031)
+Gold Glove (2027, 2031, 2033)
+Silver Slugger (2027, 2029, 2030, 2031, 2032)
+Home Run Champion (2031)
+Home Run Derby Winner (2027, 2031, 2032)
+All-Star (2025–2032)
+
+Contract Information
+2040–2042: $1.5 M AAV
+2043 FA → 2049 FA
+Active Roster: Yes  40-Man: Yes  Service Time: 15.000  Contract Option: None
+
+Attributes Summary
+Category  Value   Category Value
+CON L     62      FLD     52
+CON R     43      ARM     40
+POW L     68      ACC     41
+POW R     58      REAC    47
+VIS       71      SPD     47
+DISC      19      STEAL   47
+CLT       56      BR AGG  47
+BUNT      7
+
+──────────────────────────────
+Darrin Davis TrueSource DataPage v1.0.txt
+──────────────────────────────
+Darrin Davis TrueSource DataPage v1.0 — Darrin Davis
+Classification: Verified Core | Source: Screenshot OCR Extraction (Full Confirmed Record)
+
+Profile Summary
+Name: Darrin Davis
+Age: 31
+Height/Weight: 5’9” / 186 lbs
+Born: Ohio
+Position: LF (Primary), CF/RF (Secondary)
+Bats/Throws: Right / Right
+Hitter Tendency: Opposite Field
+Drafted: Round 1 (2026)
+MLB Service: 9.165 years
+Overall: 92 (A Potential)
+Team: Oakland Athletics
+
+Attributes
+CON R 79 | CON L 83 | POW R 94 | POW L 57 | VIS 78 | DISC 74 | CLT 67 | DUR 87 | FLD 64 | ARM 69 | ACC 62 | REAC 63 | SPD 75 | STEAL 90 | BR AGG 82
+
+Year  G   AB   R    H    2B  3B  HR  RBI BB  SO  SB   AVG   OBP   SLG
+2039  74  269  33   50   8   3   8   31  22  56  14  .186  .249  .349
+2038  145 568  97   161  26  3   38  104 59  101 26  .283  .355  .525
+2037  140 594  112  183  41  7   46  116 72  122 32  .308  .367  .613
+2036  138 586  98   161  24  4   32  86  68  110 23  .267  .354  .512
+2035  143 581  83   175  41  8   33  81  67  113 30  .301  .374  .513
+
+Career Totals
+1221 G | 4789 AB | 823 R | 1331 H | 274 2B | 63 3B | 247 HR | 741 RBI | 
+533 BB | 960 SO | 269 SB | .277 AVG | .352 OBP | .515 SLG
+
+Awards & Honors
+MVP: 2037
+Hank Aaron Award: 2033, 2037
+World Series MVP: 2031, 2033
+Playoff MVP: 2031
+Silver Slugger: 2032, 2033, 2037, 2038
+All-Star MVP: 2038
+Home Run Derby Winner: 2036, 2037, 2038
+All-Star Appearances: 2032, 2033, 2034, 2035, 2036, 2037, 2038
+World Series Champion: 2031, 2033
+
+Contract Summary
+2040–2042: $28,400,000 per year
+2043–2049: Free Agent
+
+Roster Status
+Active Roster: Yes
+40-Man: Yes
+Minor Options Used: 3/3
+Playoff Eligible: Yes
+
+──────────────────────────────
+DANNY HORN — TrueSource DataPage v1.0.txt
+──────────────────────────────
+DANNY HORN — TrueSource DataPage v1.0
+
+Profile Summary
+Name Danny Horn
+Age 29
+Height/Weight 6’0” / 209 lbs
+Born New Jersey
+Primary Position CF
+Secondary Positions LF, RF
+Bats/Throws Switch / Left
+Hitter Tendency Whole Field
+Drafted Round 4 (2020)
+MLB Service 6.135 years
+Overall / Potential 98 (A)
+Team Oakland Athletics
+Quirk Day Player (Performs better during day games)
+
+Attributes
+CON R: 83 | CON L: 75 | POW R: 78 | POW L: 61 | VIS: 79 | DISC: 79 | CLT: 79 | DUR: 99 |
+FLD: 98 | ARM: 74 | ACC: 70 | REAC: 99 | SPD: 93 | STEAL: 83 | BR AGG: 73
+
+Contract Summary
+2040–2044: $37,800,000 per year
+2045–2049: Free Agent
+Active Roster: Yes | 40-Man: Yes | Minor Options Used: 3/3 | Playoff Eligible: Yes
+
+Awards & Honors
+Silver Slugger: 2039
+All-Star Appearances: 2038, 2039
+
+Yearly Stats
+Year Team G AB R H 2B 3B HR RBI BB SO SB AVG OBP SLG
+2039 ATH 154 614 120 198 44 13 43 103 66 104 28 .322 .391 .598
+2038 ATH 159 611 83 158 32 10 29 92 64 110 6 .259 .335 .480
+2037 ATH 159 561 83 138 36 8 31 83 81 103 28 .246 .333 .415
+2036 ATH 96 323 33 64 10 5 12 26 14 79 9 .198 .237 .341
+2035 ATH 122 428 55 91 19 11 24 50 45 105 11 .214 .300 .408
+2034 MIN 79 297 40 81 16 9 17 61 47 91 11 .192 .272 .372
+2033 MIN 58 199 11 33 8 0 2 17 60 5 0 .166 .252 .236
+
+Career Totals (through 2039)
+815 G | 2,973 AB | 405 R | 728 H | 161 2B | 39 3B | 111 HR | 372 RBI |
+311 BB | 622 SO | 127 SB | .245 AVG | .320 OBP | .437 SLG
+
+──────────────────────────────
+John Ellis DataPage v1.0.txt
+──────────────────────────────
+John Ellis DataPage v1.0
+Team: Oakland Athletics
+Position: Starting Pitcher
+B/T: S / R
+Height / Weight: 5'10" / 209 lbs
+Born: New York
+Drafted: Round 2 (2033)
+Potential: A
+Overall: 80
+Service Time: 0.001 Years
+Age: 24
+
+Pitch Repertoire:
+- 4-Seam Fastball: 94 mph
+- Slider: 86 mph
+- Changeup: 84 mph
+- Cutter: 92 mph
+
+STA  H/9  K/9  BB/9  HR/9  PCLT  CTRL  VEL  BRK  FLD  ARM  ACC  REAC
+86   60   61   68    69    55    70    83   55   34   99   80   36
+
+Contract Overview:
+- 2040: $780,000
+- 2041: RNW
+- 2043–2045: Arbitration
+- 2046–2049: Free Agent
+
+Year  Team  G  GS  W  L  SV  BS  HLD  IP   H  R  ER  HR  BB  SO  ERA
+2039  -     0  0   0  0  0   0   0    0.0  0  0  0   0   0   0   0.00
+
+Career Totals — 0 0 0 0 0 0 0 0.0 0 0 0 0 0 0 0.00
+
+Scouting Summary:
+John Ellis enters the majors as a polished right-hander with advanced command and a balanced
+four-pitch mix. His 99 arm strength anchors a clean, repeatable delivery. Projected mid-rotation
+potential with a chance to develop into a high-strikeout, low-walk innings-eater reminiscent of a young
+Benji Dillon.
+
+──────────────────────────────
+Starting_Rotation.txt
+──────────────────────────────
+⚾ 2040 Oakland Athletics – Starting Rotation (Opening Day Projection)
+Slot	Pitcher	Hand	Overall	Notes
+1️⃣	Henry Rivas	R	91	Ace; power-control hybrid; steady presence since 2036.
+2️⃣	Arturo Ramos ⭐	R	86	All-Star; key righty with a rising fastball and mid-career composure.
+3️⃣	Allen Lopez	R	84	Underrated workhorse; strong WHIP consistency.
+4️⃣	Benji Dillon	L	82	Veteran leader returns; “Golden Arm” back in green and gold.
+5️⃣	John Ellis	R	80	Rookie phenom; dubbed The Quiet Storm; potential ace-in-waiting.
+
+🗂 Canonical Placement
+
+/GW4_MasterVault/Vaults/Universe/Rosters/2040/Starting_Rotation.txt
+
+🧠 Narrative Impact
+	•	Media tags: #PitchingStaff2040 #GoldenArmReturns #QuietStormRise
+	•	Continuity: connects to Brever trade, Dillon signing, and John Ellis promotion.
+	•	Checksum: queued for Riley’s next audit (Roster Integration).
+
+
+──────────────────────────────
+Benji_Dillon_Returns_2040.txt
+──────────────────────────────
+🟢 2040 OFFSEASON: BENJI DILLON RETURNS TO OAKLAND
+
+Contract: 1 Year – $24,070,000
+Demand: $21,300,000
+Rank: 34th among free agents
+Potential: A
+Overall: 82
+Announcement Quote:
+
+“Holy Toledo! I’m signing with the Athletics!”
+
+Canonical Log:
+	•	Vault: /GW4_MasterVault/Vaults/Universe/Transactions/2040_Offseason/
+	•	Entry: Benji_Dillon_Returns_2040.txt
+	•	Tags: #FranchiseCore #DynastyEcho #GoldenArmReturns #LegacyContinuity
+	•	Authorship queue:
+	•	Anthony: Insider Chronicle — “The Return of the Golden Arm”
+	•	P Slayer: Hot Take — “Benji Dillon and the Weight of Legacy”
+	•	Hal Richmond: Archival reflection — “When the Light Comes Back”
+
+⸻
+
+This return shifts the entire 2040 narrative — Dillon’s homecoming restores the dynasty’s heartbeat and provides the rotation a leader post-Brever.
+
+
+──────────────────────────────
+Copy of Franchise_Era_Ledger_Index.txt
+──────────────────────────────
+Franchise Era Ledger Index v1.0
+Source Spine: Oakland_Athletics_Master_Stats_v1.1_Integrated_2039.xlsx
+Harmony Ref: HVL-2040A
+
+Eras
+- The Rise (2025–2028)
+- The Apex (2029–2035)
+- The Fade (2036–2039)
+
+Linked TrueSource Profiles (sample, 2039):
+- Richards, Martin — 3B
+- Aitken, Mark — 1B
+- Horn, Danny — CF
+- Kelley, Isley — SS
+- Gonzalez, Vladimir — RF
+- Colón, José — C
+- Busch, Peter — LF
+- Rodríguez, Agustín — 2B
+- Davis, Darrin — DH
+- Keane, Vinnie — 3B
+- Owens, Jimmy — 2B
+- Waite, Demarcus — RF
+- Casto, Antonio — 1B
+- Gaspar, Thomas — LF
+- Rivas, Henry — SP
+- Ramos, Arturo — SP
+- Brever, John — SP
+- Lopez, Allen — SP
+- Ellis, John — SP
+- Bautista, Antone — RP
+- Robertson, Gary — RP
+- Ka, Hitoki — RP
+- Devine, Ian — RP
+- Peña, Edmundo — CL
+
+
+──────────────────────────────
+Kevin Clark — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Kevin Clark — TrueSource DataPage v1.0
+Affiliation: Las Vegas Aviators (AAA)
+Position: 3B (2B, RF Secondary)
+Potential: A | Overall: 72 ↑ (Positive Delta)
+Bats/Throws: R / R
+Draft: Round 1, 2037 | Born: Connecticut
+Age: 20 | Height / Weight: 5'9” / 201 lbs
+Hitter Tendency: Pull Hitter
+
+Performance Summary
+• Strong contact and clutch metrics (CLT 82, CON R 68, VIS 56).
+• Early signs of all-around field awareness (FLD 73, REAC 56).
+• Athletic speed profile (SPD 72, BR AGG 70, STEAL 80).
+• Developing power (POW L/R 49) with plus situational hitting instincts.
+
+Player Quirk
+• Pinch Hitter — excels in late-game hitting opportunities off the bench.
+
+Contract Details
+2040: $90K | 2041–2042: RNW | 2043–2044: ARB | 2045+ FA
+Status: Not on 40-Man | 0/3 Minor League Options Used | Not Rule 5 Eligible
+
+Development Notes
+• A raw but toolsy infielder with a plus makeup and strong growth indicators.
+• Contact and discipline skills show polish beyond age; defensive refinement underway.
+• Projects as a future major-league utility cornerstone with high ceiling potential.
+
+TS-PRSP-005 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+Sergio Aybar — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Sergio Aybar — TrueSource DataPage v1.0
+Affiliation: Midland RockHounds (AA)
+Position: C (3B Secondary)
+Potential: A | Overall: 70 ↑ (Positive Delta)
+Bats/Throws: R / R
+Draft: Round 2, 2036 | Born: Wisconsin
+Age: 21 | Height / Weight: 5'10” / 178 lbs
+Hitter Tendency: Pull Hitter
+
+Performance Summary
+• Defensive core already showing elite blocking (BLK 85) and strong reaction (REAC 74).
+• Arm accuracy and field control trending upward (ARM 80, FLD 74).
+• Offensively raw but promising — balanced power (POW L 49) and improving contact (CON L 56).
+• Durability profile above-average for age (DUR 86).
+
+Contract Details
+2040: $80K | 2041–2032: RNW | 2043–2044: ARB | 2045+ FA
+Status: Not on 40-Man | 0/3 Minor League Options Used | Not Rule 5 Eligible
+
+Development Notes
+• Compact frame with above-average defense-first trajectory.
+• Has the physical foundation for durable catcher duties at higher levels.
+• With continued offensive refinement, could evolve into a dual-threat backstop.
+• Expected MLB ETA: Late 2043 / Early 2044.
+
+TS-PRSP-006 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+Ross Cabral — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Ross Cabral — TrueSource DataPage v1.0
+Affiliation: Las Vegas Aviators (AAA)
+Position: C
+Potential: B | Overall: 70 ↑ (Positive Delta)
+Bats/Throws: L / R
+Draft: Round 2, 2034 | Born: California
+Age: 24 | Height / Weight: 6’1” / 210 lbs
+Hitter Tendency: Pull Hitter
+Quirk: Night Player — Performs better during night games
+
+Performance Summary
+• Steady left-handed bat with improving contact skills (62 CON R / 51 CON L).
+• Displays solid plate discipline (54 VIS, 54 DISC) and situational awareness.
+• Defense-first skillset with strong durability (96 DUR) and consistent framing (69 REAC).
+• Above-average arm (64 FLD, 60 ARM, 65 BLK) keeps running game in check.
+• Power metrics are limited, but approach projects playable OBP potential.
+
+Contract Details
+2040: $780K | 2041–2042: RNW | 2043–2044: ARB | 2045+ FA
+Status: On 40-Man Roster | 2/3 Minor League Options Used | Not Rule 5 Eligible
+
+Development Notes
+• Mentally mature, reliable backstop with clear defensive polish and awareness.
+• Excellent endurance for long season workloads, particularly effective under lights.
+• Offense progressing slowly but stable enough for AAA competition.
+• Projected MLB ETA: Late 2041 (Backup / Defensive specialist role).
+
+TS-PRSP-008 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+Richie Ramiro — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Richie Ramiro — TrueSource DataPage v1.0
+Affiliation: Midland RockHounds (AA)
+Position: 1B | Secondary Position: RF
+Potential: B | Overall: 61 ↑ (Positive Delta)
+Bats/Throws: R / R
+Draft: Round 1, 2038 | Born: Dominican Republic
+Age: 21 | Height / Weight: 5’10” / 172 lbs
+Hitter Tendency: Pull Hitter
+Quirk: Stopper — Performs better when team is behind
+
+Performance Summary
+• Developing corner bat with improving contact and raw pull power.
+• Displays solid progress in plate vision (49 VIS) and discipline (43 DISC).
+• Strength-based approach plays well to both gaps; power potential moderate.
+• Defense shows reliability at first base with growing arm coordination in right field.
+• Stopper trait highlights clutch tendencies and resilience under pressure.
+
+Contract Details
+2040: $90K | 2041–2042: RNW | 2043–2044: ARB | 2045 FA
+Status: Not on 40-Man Roster | 0/3 Minor League Options Used | Rule 5 Eligible 2045
+
+Development Notes
+• Underrated worker with drive to improve physical consistency and timing.
+• Compact swing; contact-first mindset suited for situational hitting roles.
+• Improved lower-body mechanics aiding defensive range and throwing balance.
+• Projected MLB ETA: 2043 (Utility 1B/RF bench contributor).
+
+TS-PRSP-009 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+Peter Ma — TrueSource_DataPage_v1.0.txt
+──────────────────────────────
+Peter Ma — TrueSource_DataPage_v1.0
+POPID: Pending assignment
+Category: Draft Prospect
+Organization: Oakland Athletics
+Draft Year: 2040
+Draft Round: Round 1
+Pick Status: Signed
+
+Identity
+Name: Peter Ma
+Position: SP
+Bats: L
+Throws: L
+Born: California
+Age: 19
+Height: 5'10"
+Weight: 202 lbs
+MLB Service: 0.000 years
+Secondary Position: None
+
+Overall: 72
+Potential: B
+Scouted Potential Range: 68–95
+Actual Potential: 80
+
+Pitch Repertoire
+4-Seam Fastball — 92 mph
+Changeup — 84 mph
+Sweeper — 82 mph
+2-Seam Fastball — 89 mph
+
+Attributes
+STA: 94
+H/9: 64
+K/9: 62
+BB/9: 63
+HR/9: 41
+PCLT: 30
+CTRL: 52
+VEL: 69
+BRK: 67
+
+FLD: 36
+ARM: 76
+ACC: 66
+REAC: 41
+
+Contract
+2040: $70K (Signing Contract)
+2041–2042: RNW
+2043–2045: ARB
+2046: FA
+
+Roster Status: Not on 40-Man Roster
+Minor League Options: 0/3 used
+Rule 5 Eligibility: Future eligible
+
+Notes
+Left-handed starter with above-average stamina, strong command development indicators, and a deep four-pitch mix. Actual potential of 80 places him firmly in the organization’s long-term rotation plans.
+
+──────────────────────────────
+Julio Valencia — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Julio Valencia — TrueSource DataPage v1.0
+Affiliation: Midland RockHounds (AA)
+Position: CP
+Potential: A | Overall: 77 ↑ (Positive Delta)
+Bats/Throws: L / L
+Draft: Round 1, 2036 | Born: Dominican Republic
+Age: 22 | Height / Weight: 6'0” / 196 lbs
+Hitter Tendency: Whole Field
+
+Pitch Repertoire
+• 4-Seam Fastball — 94 mph
+• Changeup — 84 mph
+• Sinker — 89 mph
+• Slider — 85 mph
+
+Development Notes
+• Strong command growth (+4 CTRL, +3 BB/9) and advanced composure for age.
+• Fastball velocity trending up, averaging 94 mph with consistent movement.
+• Balanced pitch mix projects mid-rotation or bullpen anchor role potential.
+• Positive development momentum (↑ Overall progression).
+
+Contract Details
+2040: $90K | 2041–2042: RNW | 2043–2044: ARB | 2045+ FA
+Not on 40-Man Roster | Rule 5 Draft Eligible | Minor League Option: 0/3
+
+TS-PRSP-003 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+J.R. Rosado — TrueSource DataPage v1.0.txt
+──────────────────────────────
+J.R. Rosado — TrueSource DataPage v1.0
+Affiliation: Las Vegas Aviators (AAA)
+Position: LF | Secondary Positions: CF, RF
+Potential: B | Overall: 75 ↑ (Positive Delta)
+Bats/Throws: R / R
+Draft: Round 1, 2034 | Born: Dominican Republic
+Age: 26 | Height / Weight: 6’4” / 231 lbs
+Hitter Tendency: Whole Field
+
+Performance Summary
+• Plus contact profile vs LHP (CON L 91) gives lineup flexibility.
+• Developing all-fields approach with improving discipline (VIS 59, DISC 64).
+• Solid defensive reads and arm strength (FLD 72, ARM 66, ACC 72).
+• Durability trending upward (DUR 83) ensures consistent availability.
+• Power lagging but playable in contact-heavy schemes.
+
+Contract Details
+2040: $780K | 2041–2042: RNW | 2043–2044: ARB | 2045+ FA
+Status: On 40-Man Roster | 1/3 Minor League Options Used | Not Rule 5 Eligible
+
+Development Notes
+• Corner OF projection with steady contact growth and strong situational reads.
+• Lacks elite power metrics but compensates with high contact vs southpaws.
+• Mentally mature player, known for clubhouse steadiness and consistent effort.
+• Expected MLB ETA: Early 2042 (4th OF / rotational role).
+
+TS-PRSP-007 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+Gordon Cabrera — TrueSource_DataPage_v1.0.txt
+──────────────────────────────
+Gordon Cabrera — TrueSource_DataPage_v1.0
+POPID: Pending assignment
+Category: Draft Prospect
+Organization: Oakland Athletics
+Draft Year: 2040
+Draft Round: Round 1
+Pick Status: Signed
+
+Identity
+Name: Gordon Cabrera
+Position: 1B
+Bats: L
+Throws: R
+Born: Iowa
+Age: 21
+Height: 5'11"
+Weight: 199 lbs
+MLB Service: 0.000 years
+Secondary Position: None
+
+Overall: 68
+Potential: B
+Scouted Potential Range: 81–91
+Actual Potential: 87
+
+Attributes
+CON L: 52
+CON R: 47
+POW L: 65
+POW R: 68
+VIS: 58
+DISC: 34
+CLT: 53
+BUNT: 10
+DBUNT: 11
+DUR: 36
+
+FLD: 74
+ARM: 48
+ACC: 37
+REAC: 68
+
+SPD: 39
+STEAL: 39
+BR AGG: 58
+
+Contract
+2040: $70K (Signing Contract)
+2041–2042: RNW
+2043–2045: ARB
+2046: FA
+
+Roster Status: Not on 40-Man Roster
+Minor League Options: 0/3 used
+Rule 5 Eligibility: Future eligible
+
+Notes
+Left-handed hitting corner infielder with above-average raw power from both sides of the platoon. Actual potential of 87 marks him as a long-term first base candidate with impact power upside.
+
+──────────────────────────────
+George Whiteley — TrueSource_DataPage_v1.0.txt
+──────────────────────────────
+George Whiteley — TrueSource_DataPage_v1.0
+POPID: Pending assignment
+Category: Prospect
+Rank: #14 prospect in Major League Baseball (2040)
+Organization: Oakland Athletics
+Affiliate: Midland RockHounds (AA)
+
+Identity
+Name: George Whiteley
+Position: SP
+Bats: L
+Throws: R
+Hitter Tendency: Pull Hitter
+Born: Canada
+Age: 20
+Height: 5'10"
+Weight: 189 lbs
+Draft: Round 4 (2037)
+MLB Service Time: 0.000 years
+
+Potential: A
+Current Overall: 69 (↑)
+
+Pitch Repertoire
+4-Seam Fastball — 95 mph
+2-Seam Fastball — 91 mph
+Slider — 88 mph
+Splitter — 91 mph
+Curveball — 82 mph
+
+Attributes
+H/9: 65 (+3)
+K/9: 59 (+4)
+BB/9: 46 (+4)
+HR/9: 47 (+4)
+PCLT: 72 (+2)
+CTRL: 68 (+2)
+VEL: 73 (+1)
+BRK: 69 (+2)
+
+Fielding: 11 (+2)
+ARM: 88 (+2)
+ACC: 58 (+2)
+REAC: 29 (+2)
+
+Contract
+2040: $70K
+2041–2042: RNW
+2043–2045: ARB
+2046: FA
+
+Roster Status: Not on 40-Man Roster
+Minor League Options: 0/3 Used
+Rule 5 Eligibility: Eligible
+
+Notes
+Whiteley profiles as a high-upside developmental starter with advanced velocity for age. FB/SPL combo is plus. Trending positively across all command and break metrics. Ranked #14 in MLB’s prospect rankings entering the 2040 season.
+
+──────────────────────────────
+Frank Reyna — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Frank Reyna — TrueSource DataPage v1.0
+Affiliation: Midland RockHounds (AA)
+Position: RF | Secondary Positions: LF, CF
+Potential: B | Overall: 80 ↑ (Positive Delta)
+Bats/Throws: S / R
+Draft: Round 1, 2037 | Born: Pennsylvania
+Age: 20 | Height / Weight: 6’3” / 197 lbs
+Hitter Tendency: Whole Field
+
+Performance Summary
+• Switch-hitting outfielder with advanced contact and zone recognition on both sides.
+• 74 CON R and 67 POW R showcase gap-to-gap balance and developing power projection.
+• Exceptional discipline (77 VIS, 67 CLT) suggests future leadoff or 2-hole reliability.
+• Defensively sound — 80 ARM and 69 REAC give him strong corner flexibility and closing speed.
+• 70 STEAL potential combined with 66 SPD make him an instinctive, opportunistic baserunner.
+
+Contract Details
+2040: $80K | 2041–2042 RNW | 2043–2045 ARB | 2046 FA
+Status: Not on 40-Man Roster | 0/3 Options Used | Rule 5 Eligible 2046
+
+Development Notes
+• Mature approach at the plate; shows veteran-level poise and pitch tracking.
+• High adaptability across both outfield corners; suitable for CF spot duty if needed.
+• Swing mechanics translate to consistent hard contact, minimizing strikeout risk.
+• Comparable developmental track to mid-2030s OF prospects who became multi-tool assets.
+• MLB ETA: 2041 – projects as a future top-of-order catalyst with defensive stability.
+
+TS-PRSP-011 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+Desmond Morton — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Desmond Morton — TrueSource DataPage v1.0
+Affiliation: Las Vegas Aviators (AAA)
+Position: LF / CF / RF
+Potential: A | Overall: 78 ↑ (Positive Delta)
+Bats/Throws: L / R
+Draft: Round 5, 2034 | Born: Netherlands
+Age: 23 | Height / Weight: 5'10” / 163 lbs
+Hitting Profile: Pull Hitter
+
+Development Notes
+• Elite athleticism (SPD 77, STEAL 79, BR AGG 80) projects as top-of-order threat.
+• Rapid skill growth across offensive metrics (+7 CON R, +7 VIS, +7 CLT).
+• Above-average defensive grades in arm (82) and reaction (82).
+• Quirk: Breaking Ball Hitter — excels against offspeed and breaking pitches.
+
+Contract Details
+2040: $90K | 2041–2042: RNW | 2043–2044: ARB | 2045+: FA
+Eligible for Rule 5 Draft | Not yet on 40-Man Roster
+
+TS-PRSP-002 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+CLEMENTE LOPEZ — Prospect Profile (2040 Edition).txt
+──────────────────────────────
+CLEMENTE LOPEZ — Prospect Profile (2040 Edition)
+
+Position: SP
+Team: Oakland Athletics (#12)
+Overall: 60
+Potential: A
+Age: 19
+Bats/Throws: L / L
+Born: Dominican Republic
+Height/Weight: 5’11”, 185 lbs
+Drafted: Round 1 — 2038
+Hitter Tendency: Whole Field
+MLB® Service: 0.000
+
+⸻
+
+Pitch Repertoire
+
+Slider — 82 mph
+Cutter — 88 mph
+Sinker — 85 mph
+Changeup — 81 mph
+
+A four-pitch mix for a teenage lefty is rare — especially with his early cutter velocity.
+
+⸻
+
+Pitching Tools (20–99)
+
+Stamina: 83
+H/9: 47
+K/9: 41
+BB/9: 46
+HR/9: 50
+Pitch Clutch: 46
+Control: 51
+Velocity: 53
+Break: 65
+
+Fielding: 44
+Arm Strength: 61
+Arm Accuracy: 53
+Reaction: 28
+
+⸻
+
+Scouting Summary
+
+Clemente Lopez is a high-ceiling left-handed starter with raw but promising attributes.
+His A-Potential and 19-year-old age signal he is a long-term developmental piece for Oakland’s rotation pipeline.
+
+Strengths:
+	•	Advanced pitch mix for his age
+	•	Solid stamina foundation (83)
+	•	Above-average breaking ability (BRK 65)
+	•	Strong arm backfield skills
+
+Development Areas:
+	•	Swing-and-miss generation (K/9 41)
+	•	Command consistency (CTRL 51)
+	•	Needs refinement in H/9 and BB/9
+
+Projection:
+A long-term rotation project with mid-rotation upside if development hits. At 19, he’s very early-stage but has the underlying traits to grow into a durable big-league starter.
+
+⸻
+
+Contract & Control
+
+Years of Team Control: 2038–2045
+Arbitration Eligible: 2043–2045
+Free Agency: 2047
+Minor League Options: 0/3 used
+
+Not yet on the 40-man roster.
+
+
+──────────────────────────────
+Clark Saryan — TrueSource DataPage v1.0.txt
+──────────────────────────────
+Clark Saryan — TrueSource DataPage v1.0
+Affiliation: Las Vegas Aviators (AAA)
+Position: CP
+Potential: A | Overall: 78 ↑ (Positive Delta)
+Bats/Throws: L / R
+Draft: Round 2, 2034 | Born: California
+Age: 25 | Height / Weight: 6'5” / 240 lbs
+Hitter Tendency: Pull Hitter
+
+Pitch Repertoire
+• 4-Seam Fastball — 93 mph
+• Changeup — 84 mph
+• Curveball — 79 mph
+• Splitter — 86 mph
+
+Development Notes
+• Advanced control metrics (↑ CTRL +2, PCLT +5) show steady growth in consistency.
+• Power arm with a balanced off-speed mix; notable command of splitter/curveball combo.
+• High strikeout potential, projects as upper-tier bullpen or mid-rotation talent.
+• Positive development trajectory — trending toward MLB readiness.
+
+Contract Details
+2040: $780K | 2041–2042: RNW | 2043–2044: ARB | 2045+ FA
+
+40-Man Roster | 1/3 Minor League Option Used | Not Rule 5 Eligible
+
+TS-PRSP-004 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+Ernesto Quintero — TrueSource DataPage v1.1.txt
+──────────────────────────────
+Ernesto Quintero — TrueSource DataPage v1.1
+Affiliation: Las Vegas Aviators (AAA)
+Position: 3B / 1B
+Potential: A | Overall: 79 ↑ (Positive Delta)
+Bats/Throws: R / R
+Draft: Round 2, 2034 | Born: Pennsylvania
+Age: 23 | Height / Weight: 6'1” / 202 lbs
+Hitting Profile: Whole Field
+
+Development Notes
+• Prospect on upward trajectory; offensive growth noted (+9 CON L, +5 POW R).
+• Excellent durability (99 DUR) indicates long-term reliability potential.
+• Defensive metrics improving steadily with above-average arm strength.
+• Eligible for Rule 5 Draft; projectable major-league contributor by 2041.
+
+Contract Details
+2040–2041: $100K
+2042–2043: Renewals (RNW)
+2044–2045: Arbitration (ARB)
+2046–2049: Free Agent (FA)
+
+TS-PRSP-001 | TrueSource Verified | 2025-10-24 | Steward: Riley
+
+──────────────────────────────
+POP-00003_AITKEN_IMAGE_MANIFEST.txt
+──────────────────────────────
+
+POP-00003_AITKEN_IMAGE_MANIFEST.txt
+
+Name: Mark Aitken
+POPID: POP-00003
+UNI-ID: UNI-00002
+RoleType: Legend
+Tier: 1
+Tags: Legend, Dynasty Core, The Iron Corner
+
+IMAGE MANIFEST V1.0
+
+Phase I – Rise & Precision:
+Status: Pending generation (Cal Poly / Minor League representation)
+Metadata: N/A
+
+Phase II – Apex / Home Run Derby Champion:
+Image ID: D8ED6A44-2C9A-4999-BD63-0666C3C6BB79.jpeg
+Image ID: C1C046BA-738C-4044-8309-AED7C1DE3EA4.jpeg
+Description: 2030s peak years, Home Run Derby Champion, displays Aitken’s balance of technical mastery and competitive fire.
+Metadata:
+- Resolution: Source-captured
+- Color balance: Mid-saturation daylight
+- Lighting: Stadium artificial / mixed tone
+- Depth field: Moderate (focus on subject, background blur medium)
+- Facial markers: High clarity; ideal for reconstruction if needed
+
+Phase III – Mentor Era / Camp Legacy:
+Image ID: 36BC453F-0AA9-4FDF-8411-C006B181A734.png
+Description: Post-championship mentorship era; Aitken teaching youth players during Athletics Baseball Camp. Symbol of leadership continuity.
+Metadata:
+- Resolution: Source-captured
+- Lighting: Natural daylight, high contrast
+- Focus depth: Wide (sharp subject with context depth)
+- Clothing markers: Athletics uniform variant / mentor patch visible
+
+Phase IV – Civic & Media Continuity:
+Status: Pending creation (Bay Tribune guest column or broadcast appearance)
+Metadata: To be appended upon generation
+
+Associated Works:
+- "The Iron Corner" (Part IV – Richmond Archive Collection)
+- "Dawn of a Dynasty" (Part V – Franchise Convergence Series)
+
+Last Updated: Steward Sync 2040.11.07
+
+
+──────────────────────────────
+Richmond_Companion_Image_Manifest_v1.0_VinnieKeane.txt
+──────────────────────────────
+[Manifest Version]: 1.0
+[Archive Collection]: The Richmond Archive
+[File Type]: Companion Image Manifest
+[Status]: ACTIVE
+[POPID]: POP-00001
+[Author]: Hal Richmond
+[Created]: 2025-11-08
+[Purpose]: Registers companion imagery and reconstruction metadata for both professional and personal imagery of subject Vinnie Keane.
+
+=== ENTRY A ===
+[Subject Name]: Vinnie Keane
+[Title]: The Underdog Slugger
+[Affiliation]: Oakland Athletics
+[Era]: 2039–2042 (Active Roster)
+[Position]: Third Base / Switch Right
+[Service Time]: 15 Years
+[Age (2040)]: 35
+[Height]: 5'9"
+[Contract]: $1,500,000 per year through 2042
+[Image Type]: In-Game Roster Portrait / Topps Card Metadata
+[Context]: Represents Vinnie Keane during the twilight of Oakland’s dynasty years. A veteran cornerstone, six-time champion, and symbol of perseverance.
+[Visual Tags]: Lighting – neutral stadium tone; Uniform – home white Athletics jersey; Expression – stoic focus; Background geometry – Topps blue diamond pattern.
+[Associated Coverage]: Referenced in Anthony Raines’ “Legacy at the Corner” and Hal Richmond’s “The Calm and the Storm: Keane’s Final Swing.”
+[Registry Code]: VN-ATHL-2039-TOPPS-SIG
+[Checksum]: SHA-KEANE-POP00001-A9C
+
+[Metadata Generation Record]:
+{
+  "prompt": "portrait of Vinnie Keane, switch-hitting third baseman, Oakland Athletics uniform, age 35, focused expression under stadium lights",
+  "engine": "AI Visual Engine v1.2",
+  "seed": 11247,
+  "style": "sports realism, in-game presentation",
+  "camera": "Sony Alpha 7R IV emulation, 85mm lens, f/2.8",
+  "aspect_ratio": "3:2",
+  "generation_date": "2025-11-08"
+}
+
+=== ENTRY B ===
+[Title]: Wedding Portrait
+[Era]: 2038 Private Continuity File
+[Setting]: Garden terrace, evening celebration
+[Attire]: Black tuxedo with bow tie; bride in ivory lace gown with white roses
+[Image Type]: Personal Portrait / Family Archive Still
+[Expression]: Reserved composure, symbolic of dual public and private selves.
+[Visual Tags]: Tone – warm daylight; Palette – ivory, rose, soft green; Registry Code – IMG-PRIV-KEANE-WED-01.
+[Narrative Use]: Serves as personal anchor for pre-retirement arc and “Wedding Chronicle” continuity record.
+[Cross-Link Placeholder]: LINK: C-MARITAL-KEANE-001
+
+[Metadata Generation Record]:
+{
+  "prompt": "wedding portrait of Vinnie Keane, mid-30s male, black tuxedo, smiling beside bride in ivory gown, garden terrace, golden hour lighting",
+  "engine": "AI Visual Engine v1.2",
+  "seed": 20183,
+  "style": "photorealistic, warm tone, cinematic realism",
+  "camera": "Canon EOS R5 emulation, 50mm lens, f/1.8",
+  "aspect_ratio": "3:2",
+  "generation_date": "2025-11-08"
+}
+
+=== END MANIFEST ===
+
+[Steward Annotations]:
+Continuity Map: Calm and the Storm / Dynasty Core v1.0
+Visibility Scope: Public (Roster) / Private (Family Archive)
+Sync Priority: Tier 1 Mirror TXT Import / Census Eligible Node
+Cross-Linkage: Reserved for spouse record under LINK: C-MARITAL-KEANE-001

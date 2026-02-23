@@ -1,0 +1,42 @@
+Here’s a quick, plug‑and‑play way to make your 2030s A’s legends feel as “real” as Reggie and Giambi—by translating your fiction stats into era‑neutral benchmarks (OPS+ for hitters, WAR for overall value, ERA+ for pitchers).
+
+What these do (plain English):
+	•	OPS+: On‑base plus slugging, adjusted for league and park. One hundred is league average; one hundred fifty means fifty percent better than league average.
+	•	ERA+ (pitchers): Same idea for run prevention. One hundred is average; one hundred thirty means thirty percent better than average.
+	•	WAR: All‑in value (bat, field, baserunning for hitters; run prevention, innings, context for pitchers). Use it as your “season weight.”
+
+How to normalize your fictional seasons fast:
+	1.	For each season, grab league averages for OBP and SLG in your sim year (or set them once per era, e.g., “high‑offense 2031–2035”).
+	2.	Compute each hitter’s OPS = OBP + SLG.
+	3.	OPS+ ≈ 100 × (Player OPS / League OPS), then apply a simple park tweak (e.g., if your park boosts offense five percent, divide player OPS by 1.05 before step 3).
+	4.	Pitchers: ERA+ = 100 × (League ERA / Player ERA) (again, apply park if your park suppresses runs).
+	5.	Use WAR to anchor “peak” vs “prime”: peak = best 3 seasons; prime = best 7.
+
+Quick Oakland comparison anchors (use as targets):
+	•	Reggie Jackson (peak A’s): OPS+ range roughly one hundred sixty–one hundred eighty; MVP‑caliber WAR seasons in the seven–ten band.
+	•	Jason Giambi (1999–2001): OPS+ often one hundred seventy‑plus; back‑to‑back MVP‑level WAR seasons.
+	•	Rickey Henderson (context piece): peak WAR monster; OPS+ strong but value explodes with baserunning and OBP.
+
+Apply to your canon (example skeleton):
+	•	Vinnie Keane (3B, “Underdog Slugger”)
+2034: .312 / .420 / .590 → OPS .1.010 vs league .740 → OPS+ ~ 136; WAR 7.2
+2035: .299 / .402 / .575 → OPS+ ~ 131; WAR 6.5
+2039 (partial):  .324 / power tick → OPS+ ~ 160 pace; WAR 3.8 in 56 games
+Peak index: three‑year OPS+ mean ≈ 143 → “Reggie‑lite peak” with Giambi‑style on‑base thump; Gold‑Glove value can push WAR toward eight‑win ceiling in best year.
+	•	Benji Dillon (LHP, “Golden Arm”)
+2034: ERA 2.72 vs lg 4.10 → ERA+ ~ 151; WAR 6.8
+2035: ERA 3.05 vs lg 4.20 → ERA+ ~ 138; WAR 5.6
+Peak index: two‑year ERA+ mean ≈ 145 → “Hudson‑Mulder‑Zito composite” tier; add innings bulk to chase classic ace lore.
+	•	Isley Kelley (“Mississippi Machine”)
+Prime defined by two‑way (infield) defense + OBP: OPS+ 120–135 range, WAR five–seven with glove lift → “Rickey‑adjacent value pattern” (via OBP/defense, not steals).
+
+How to publish it (clean, repeatable):
+	•	List each player’s Peak OPS+ / ERA+ and Peak 3‑Yr WAR next to an A’s legend comp.
+	•	Add a Park & Era note (“2034–2035 run‑environment was +8% offense”).
+	•	End every story with a Name Index (your human‑name roll‑up), plus a Metrics Key: “OPS+ (one hundred = league avg), ERA+ (one hundred = avg), WAR (season value).”
+
+One‑page template you can reuse:
+	•	Player, Year → AVG / OBP / SLG | OPS | League OPS | Park Factor | OPS+ | WAR
+	•	Pitcher, Year → IP | ERA | League ERA | Park Factor | ERA+ | WAR
+
+If you want, I can take your latest box of sim stats and spit out a small table with OPS+, ERA+, and a neat “Peak Index” line for each core (Keane, Dillon, Kelley, Aitken, Davis) so it drops straight into Richmond/Anthony/Slayer pieces.

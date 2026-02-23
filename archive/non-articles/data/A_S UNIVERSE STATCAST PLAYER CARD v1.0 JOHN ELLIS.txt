@@ -1,0 +1,106 @@
+A’S UNIVERSE STATCAST PLAYER CARD v1.0
+JOHN ELLIS — RHP
+Age: 24 | B/T: S/R | Height 5’10” | 209 lbs
+Draft: 2nd Round, 2033
+Potential: A | Overall: 80
+Archetype: Command-first power sinker/fastball SP
+TrueSource Reference: John Ellis DataPage v1.0  
+
+⸻
+
+PITCHING PROFILE
+
+4-Seam Fastball — 94 mph
+• Velo: MLB-ready
+• Shape: True ride, above-slot carry
+• Usage range: 40–45%
+• Active spin: High enough to challenge up in the zone
+
+Slider — 86 mph
+• Tight, late bite
+• Best miss-direction pitch
+• Whiff-heavy when tunneled off the cutter
+
+Cutter — 92 mph
+• Hard, glove-side blade
+• Generates weak contact
+• Fearless usage vs. LHB
+
+Changeup — 84 mph
+• Clear third offering
+• Not a kill pitch yet
+• Works because command is ahead of development
+
+Summary:
+A true four-pitch mix SP with no “dead pitch.” His arsenal is already balanced for MLB work even with only minor-league innings on record.
+
+⸻
+
+STATCAST-STYLE METRICS (PROJECTED FROM ATTRIBUTES)
+
+Velocity Band (Fastball Family)
+4-Seam: 93.5–95.2 mph
+Cutter: 91.3–92.8 mph
+
+Swing & Miss Profile
+Slider: Primary whiff pitch
+4-Seam: Elevated-zone whiffs, not overpowering
+Changeup: Contact-management rather than miss-generator
+
+Contact Quality Against
+Hard-hit suppression: Slightly above league average
+Barrel tolerance: Good due to pitch mix variety
+
+Command & Control (sim-driven)
+BB/9 indicator: Above-average (CTRL 70 → elite for young SP)
+Zone%: High
+Chase influence: Moderate; relies on sequencing, not deception
+
+⸻
+
+RUN PREVENTION PROFILE
+
+H/9: 60 → Limits hits by sequencing, not raw overpower
+HR/9: 69 → Keeps ball in park with cutter/slider shape
+ERA Projection (first MLB season): ~3.80–4.10
+Innings Pattern: Efficient enough to hit 5–6 per start
+
+⸻
+
+DEFENSIVE & ATHLETIC PROFILE
+
+Arm Strength: 99
+One of the highest in the system — elite for P.
+Fielding: 34
+Weak defender off the mound.
+Reaction: 36
+Slow to hot shots; development focus required.
+
+Summary:
+Best raw arm talent among young pitchers, weakest defensive contributor.
+
+⸻
+
+NOTES (ANTHONY — ANALYTICS)
+
+• Ellis profiles as an innings-eater with deceptive command quality.
+• Cutter/slider pairing is a legitimate MLB backend weapon right now.
+• 4-seam doesn’t overpower hitters — plays up by location, not velocity.
+• Changeup development = key to SP2 ceiling.
+• Command grade (CTRL 70) gives him a rare floor for his age.
+• Projection: 175+ IP seasons by age 26.
+
+⸻
+
+NOTES (P SLAYER — EMOTIONAL TAKE)
+
+“He throws like he’s daring hitters to blink.
+Not the biggest guy, not the scariest, but the ball JUMPS.
+If Dillon is the king, Ellis is the heir who thinks he deserves the throne.”
+
+⸻
+
+NOTES (HAL RICHMOND — HISTORICAL)
+
+“Command-first right-handers have built Oakland’s history quietly.
+Ellis fits that mold — not the storm, but the steady seasons that define eras.”

@@ -1,0 +1,32 @@
+[Manifest Version]: 1.0
+[Archive Collection]: The Richmond Archive
+[File Type]: Companion Image Manifest
+[Status]: ACTIVE
+[POPID]: [Insert when assigned]
+[Author]: Hal Richmond
+[Created]: 2025-11-08
+[Purpose]: Registers companion imagery and reconstruction metadata for article-linked portraits or generated visuals.
+
+=== ENTRY ===
+[Subject Name]: Anthony Raines
+[Tags]: Bay Tribune, Lead Sports Journalist, Athletics Coverage, Field Reporting, Tribune Award Winner
+[Linked Articles]:
+  - Oakland’s Balancing Act: Legacy, Payroll, and a Fading Empire (2039)
+  - The Calm and the Storm Retrospective (2040)
+  - Bay Tribune Award Coverage Series (2040)
+[Primary Image File]: /Images/AnthonyRaines_OfficialPortrait.png
+[Image Caption]: “Anthony Raines, Lead Sports Journalist of the Bay Tribune — captured in the stands of Oakland Coliseum, where every story still feels alive.”
+[Photographer / Generator]: P Slayer Visual Engine v1.2
+[Metadata Generation Record]:
+{
+  "prompt": "portrait of Anthony Raines, mid-40s African-American male sports journalist, sharp smile, warm daylight, stadium backdrop, modern press ID composition",
+  "engine": "AI Visual Engine v1.2",
+  "seed": 42219,
+  "style": "documentary realism, cinematic tone",
+  "camera": "Leica SL2 emulation, 50mm lens, f/2.0",
+  "aspect_ratio": "1:1",
+  "generation_date": "2025-11-08"
+}
+=== END ENTRY ===
+
+[Notes]: This manifest links Anthony Raines’s official portrait and Tribune ID imagery to his sports journalism legacy. When POPID assignment activates, visual continuity will bind his imagery to related Tribune publications and event coverage pieces.

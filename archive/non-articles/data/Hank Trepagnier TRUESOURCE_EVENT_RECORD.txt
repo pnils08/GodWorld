@@ -1,0 +1,30 @@
+Hank Trepagnier TRUESOURCE_EVENT_RECORD.txt
+
+TRUESOURCE_EVENT_RECORD
+Bulls_Universe
+
+PLAYER: Hank Trepagnier
+TEAM: Chicago Bulls
+SEASON: 2025
+EVENT: NBA Cup
+
+AWARD:
+NBA Cup MVP
+
+EVENT PERFORMANCE STATS:
+Points Per Game: 24.7
+Rebounds Per Game: 12.4
+Assists Per Game: 2.9
+Steals Per Game: 0.6
+Blocks Per Game: 0.9
+Field Goal Percentage: 69.2%
+Free Throw Percentage: 80.0%
+Three-Point Percentage: 48.1%
+
+SOURCE:
+NBA MyGM – Performance Awards Screen
+
+STATUS:
+Verified (Image Source)
+
+END TRUESOURCE_EVENT_RECORD

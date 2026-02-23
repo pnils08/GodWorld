@@ -1,0 +1,72 @@
+Noa_Essengue_TrueSource_Profile_v1.0
+
+TrueSource_Profile_v1.0
+Bulls_Universe
+
+PLAYER: Noa Essengue
+Jersey: 17
+Team: Chicago Bulls
+League: Bulls_Universe
+
+POSITION:
+Primary: PF
+Secondary: SF
+
+BIO:
+Age: 18
+Height: 6'8"
+Weight: 194 lbs
+From: France
+Draft Status: R1 P12 (2025)
+Years Pro: 0
+Personality: Neutral
+
+OVERALL:
+OVR: 72
+Potential: C
+
+PHYSICAL ATTRIBUTES:
+Strength: 57
+Vertical: 84
+Stamina: 84
+Speed: 85
+Agility: 82
+Durability: 80
+Hustle: 84
+Intangibles: 60
+
+OFFENSE:
+Close Shot: 71
+Driving Layup: 72
+Standing Dunk: 50
+Driving Dunk: 80
+Mid-Range Shot: 70
+Three-Point Shot: 70
+Free Throw: 70
+Post Hook: 60
+Post Fade: 60
+Post Control: 60
+Draw Foul: 76
+Shot IQ: 60
+Offensive Consistency: 50
+
+BALL HANDLING & PASSING:
+Ball Handle: 69
+Speed With Ball: 72
+Hands: 90
+Pass IQ: 60
+Pass Vision: 39
+Pass Accuracy: 60
+
+DEFENSE & REBOUNDING:
+Interior Defense: 60
+Perimeter Defense: 68
+Steal: 60
+Block: 45
+Help Defense IQ: 60
+Defensive Consistency: 45
+Offensive Rebound: 57
+Defensive Rebound: 56
+Pass Perception: 68
+
+END TrueSource_Profile_v1.0

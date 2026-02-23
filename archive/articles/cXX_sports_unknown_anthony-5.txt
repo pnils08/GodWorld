@@ -1,0 +1,55 @@
+Anthony
+Who’s Next? The September Call-Up Case Through the Data
+
+September doesn’t reward hype, reputation, or box-score impressions. It rewards readiness. Not the kind fans talk themselves into, but the kind the numbers expose when you zoom in close enough. Oakland has four prospects sitting at the edge of the equation — Ernesto Quintero, Desmond Morton, Kevin Clark, and the low-launch/high-EV bat whose Statcast profile reads like an unfinished middle-order hitter.
+
+The question isn’t “Who’s the best prospect?”
+The question is “Who helps right now?”
+
+The data breaks it into tiers.
+
+Ernesto Quintero — The Almost-Finished Product
+Quintero has the cleanest case. His TrueSource report shows the profile of a bat that doesn’t need projection anymore — it needs exposure. His exit velocities sit at the top of the organizational charts, his swing decisions have stabilized, and the scouting notes confirm that the forward-contact shift the hitting lab has been drilling is finally sticking. His problem hasn’t been contact — it’s been lift. And the Statcast trend line shows something important: the last six weeks have seen his average launch angle climb out of the low single digits and into the zone where his power actually matters.
+
+There’s also the defensive versatility. He can hold third base, stand at first, and survive corner outfield innings without damaging the roster. In September, that matters. You don’t call up a role; you call up options.
+
+The only blemish is service-time management, but at this point, the A’s aren’t manipulating development clocks. They’re chasing outs and runs. Quintero gives them both.
+
+Desmond Morton — The High-Ceiling Athlete
+Morton’s case isn’t built on readiness — it’s built on the shape of the ceiling. His TrueSource stats tell the story of a player who flashes star-level production without sustaining it yet. The AAA notes mention his closing speed in the outfield, his ability to beat throws with raw athleticism, and a line-drive profile that hasn’t fully matured into the swing path coaches want. But the key marker is his ability to shrink late-inning defensive risk. When you’re protecting leads in September, you don’t want the third-best defender in the outfield. You want the first.
+
+His Statcast packet confirms the raw tools: 92nd percentile sprint speed equivalent, top-quartile EV when he actually barrels, and a chase-rate drop over the last month that suggests his timing is sharpening.
+
+Morton would be a call-up for innings, speed, and defensive innings stabilization — not for production at the plate. But that has value when the stakes rise.
+
+Kevin Clark — The Skill Set That Forces the Issue
+Clark’s profile is different from the others. The TrueSource page doesn’t show an explosive hitter yet — it shows a complete ballplayer forming at age twenty. His contact rates are higher than Quintero or Morton, his strikeout discipline is cleaner, and his underlying tools look like the kind that survive the jump without shrinking.
+
+The A’s development notes flag something subtle but meaningful: Clark’s hard-hit distribution spikes on pitches below the belt. That plays in September, where veteran pitchers expand down in leverage counts. And the raw athleticism matches the scouting card — quick feet, clean exchanges, and a third-base arm that doesn’t need embellishment.
+
+He’s not ready to take a job.
+But he’s ready to not look out of place if you give him a week.
+
+The Low-Launch / High-EV Prospect — The Wildcard
+This is the most analytically interesting case. The Statcast readout on this unnamed breakout candidate shows a hitter with elite force but suppressed results — the kind of profile where the math insists something is coming. Averaging 104–108 mph exit velocity on squared balls with a launch angle under six degrees is a classic pre-breakout signature. Oakland has built hitters out of less.
+
+But the risk is volatility. September doesn’t reward volatility unless you’re desperate for thunder off the bench. The pitch-tracking data shows he struggles with spin recognition and timing disruption, and his zone-decision heat map is still too red on pitches just above the knees.
+
+If the organization wanted to gamble on noise, this is the swing.
+If they want stability, they look elsewhere.
+
+The Verdict
+If the decision were based purely on ceiling, Morton or the high-EV breakout would go first. But September doesn’t care about future war rooms or offseason projections. It cares about functionality today.
+
+The cleanest answer is Quintero.
+His bat is closest.
+His approach has stabilized.
+His defensive versatility protects the roster.
+And his underlying contact quality suggests the power will show immediately once he sees big-league velocity.
+
+But don’t ignore Clark. If the goal is to reinforce the bottom of the roster with a player who won’t get exposed by the moment, he’s the quiet call that matters late in a pennant push. Morton is a tool bet. The statcast candidate is a lottery ticket.
+
+In a month where every inning counts, the simplest story is also the truest one:
+call up the hitter who’s already finished becoming himself.
+
+Names Index: Anthony (Reporter); Ernesto Quintero (3B/1B/Corner OF); Desmond Morton (OF); Kevin Clark (3B)

@@ -1,0 +1,14 @@
+POPID Photo Reconstruction Record (Template v1.0)
+
+POPID: POP_00001
+Name: Vinnie Keane
+Simulation Year: 2040
+Image_ID: A_digital_photograph_features_a_middle-aged_Caucas.png
+Model: Stable-Diffusion-v1.5 (Base reference for likeness extraction)
+Seed: 482019
+Hash: 2F4A8C97E5B102
+Identity_Embedding_Model: OpenAI-Vision-Embedding-v2
+Identity_Embedding_Vector: [0.3921, -0.2844, 0.6112, -0.0877, 0.4456, -0.3001, 0.2115, -0.5028, 0.6094, -0.3311, ...]
+Semantic_Embedding_Model: CLIP-ViT-L/14
+Semantic_Embedding_Vector: [0.2199, 0.4412, -0.2931, 0.3348, -0.1872, 0.4032, -0.4923, 0.1664, 0.2310, -0.0754, ...]
+Notes: Base likeness record derived from isolated photo of subject (wedding extraction, neutral ID pose). Used as foundational photo DNA for simulation mirror references.

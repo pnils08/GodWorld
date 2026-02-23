@@ -1,0 +1,43 @@
+DANNY HORN — TrueSource DataPage v1.0
+
+Profile Summary
+Name Danny Horn
+Age 29
+Height/Weight 6’0” / 209 lbs
+Born New Jersey
+Primary Position CF
+Secondary Positions LF, RF
+Bats/Throws Switch / Left
+Hitter Tendency Whole Field
+Drafted Round 4 (2020)
+MLB Service 6.135 years
+Overall / Potential 98 (A)
+Team Oakland Athletics
+Quirk Day Player (Performs better during day games)
+
+Attributes
+CON R: 83 | CON L: 75 | POW R: 78 | POW L: 61 | VIS: 79 | DISC: 79 | CLT: 79 | DUR: 99 |
+FLD: 98 | ARM: 74 | ACC: 70 | REAC: 99 | SPD: 93 | STEAL: 83 | BR AGG: 73
+
+Contract Summary
+2040–2044: $37,800,000 per year
+2045–2049: Free Agent
+Active Roster: Yes | 40-Man: Yes | Minor Options Used: 3/3 | Playoff Eligible: Yes
+
+Awards & Honors
+Silver Slugger: 2039
+All-Star Appearances: 2038, 2039
+
+Yearly Stats
+Year Team G AB R H 2B 3B HR RBI BB SO SB AVG OBP SLG
+2039 ATH 154 614 120 198 44 13 43 103 66 104 28 .322 .391 .598
+2038 ATH 159 611 83 158 32 10 29 92 64 110 6 .259 .335 .480
+2037 ATH 159 561 83 138 36 8 31 83 81 103 28 .246 .333 .415
+2036 ATH 96 323 33 64 10 5 12 26 14 79 9 .198 .237 .341
+2035 ATH 122 428 55 91 19 11 24 50 45 105 11 .214 .300 .408
+2034 MIN 79 297 40 81 16 9 17 61 47 91 11 .192 .272 .372
+2033 MIN 58 199 11 33 8 0 2 17 60 5 0 .166 .252 .236
+
+Career Totals (through 2039)
+815 G | 2,973 AB | 405 R | 728 H | 161 2B | 39 3B | 111 HR | 372 RBI |
+311 BB | 622 SO | 127 SB | .245 AVG | .320 OBP | .437 SLG

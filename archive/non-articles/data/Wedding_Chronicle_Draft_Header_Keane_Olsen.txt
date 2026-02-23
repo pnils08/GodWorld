@@ -1,0 +1,32 @@
+[Document Title]: The Wedding Chronicle – Keane & Olsen
+[Archive Collection]: The Richmond Archive / Calm and the Storm Continuity Files
+[File Type]: Narrative Chronicle Draft Header
+[Status]: ACTIVE
+[POPID-Primary]: POP-00001 (Vinnie Keane)
+[POPID-Secondary]: POP-00002 (Amara Olsen)
+[Cross-Link]: LINK: C-MARITAL-KEANE-001
+[Author]: Hal Richmond
+[Created]: 2025-11-08
+[Purpose]: Establishes narrative continuity and metadata structure for the Keane–Olsen Wedding Chronicle, serving as the linking node between professional canon (Athletics Dynasty) and personal continuity (Family Era).
+
+=== STRUCTURE ===
+[Setting Overview]: Garden terrace, late summer evening, 2032. The light over San Sequoia falls like a promise. Friends, family, and teammates gather beneath soft lanterns strung along the ivy stone walls. The pianist, Amara Olsen, plays the opening melody — a piece she composed for the moment.
+
+[Themes]:
+  - Legacy and renewal
+  - Harmony between discipline and emotion
+  - The convergence of art and sport
+  - Family as foundation of continuity
+
+[Linked Visuals]:
+  - Vinnie Keane Wedding Portrait (IMG-PRIV-KEANE-WED-01)
+  - Amara Olsen Official Portrait (IMG-OLSN-STUDIO-01)
+  - [Pending Render] Group Terrace Photo – The Keane Family Circle
+
+[Press Coverage Tags]:
+  - Bay Tribune Society Page
+  - The Calm and the Storm Retrospective – Personal Continuity Insert
+  - “When the Music Met the Glove” by Hal Richmond (Planned Feature)
+
+[Continuity Instructions]:
+This document functions as the header node for all future narrative entries related to the Keane–Olsen union. Each subsequent file (interview transcripts, family profiles, visual attachments) will inherit this header metadata and link via shared POPIDs and Cross-Link reference.

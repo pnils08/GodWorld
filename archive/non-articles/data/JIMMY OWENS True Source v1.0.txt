@@ -1,0 +1,30 @@
+JIMMY OWENS True Source v1.0 — 2B / SS
+Oakland Athletics | Illinois | Age 29
+Potential: B
+Overall: 81
+Height / Weight: 5'7" / 155 lbs
+B/T: Right / Right
+Drafted: Round 1 (2028)
+MLB Service Time: 3.071 years
+Hitter Tendency: Opposite Field
+
+Year Team G AB R H 2B 3B HR RBI BB SO SB CS AVG OBP SLG
+2039 ATH 108 381 58 105 17 3 18 58 30 87 14 1 .276 .329 .478
+2038 ATH 85 292 49 82 16 1 13 46 25 64 12 4 .281 .338 .476
+2037 ATH 30 105 12 23 8 1 3 13 8 20 7 1 .219 .311 .381
+2036 ATH 29 106 13 32 6 1 5 19 4 21 4 0 .302 .321 .528
+
+Career - 252 884 132 242 47 7 39 131 72 192 37 6 .274 .329 .472
+
+Contract Information:
+2040–2042: $5.1M per year | 2043–2049: Free Agent
+
+Roster Status:
+On Active & 40-Man Roster | 3/3 Minor League Options Used
+
+Attributes Summary:
+CON R 61 | CON L 69 | POW R 52 | POW L 64 | VIS 53 | DISC 55 | CLT 42 | DBUNT 28 | DUR 68 |
+FLD 77 | ARM 61 | ACC 94 | REAC 82 | SPD 84 | BR AGG 61
+
+Template: Vladimir Gonzalez TrueSource Format | Source: User-Verified Statistics | Division:
+/Player_Cards/

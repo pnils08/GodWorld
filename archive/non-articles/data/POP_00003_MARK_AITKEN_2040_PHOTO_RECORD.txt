@@ -1,0 +1,14 @@
+POPID Photo Reconstruction Record (Template v1.0)
+
+POPID: POP_00003
+Name: Mark Aitken
+Simulation Year: 2040
+Image_ID: A_digital_photograph_ID_photograph_of_a_middle-age.png
+Model: Stable-Diffusion-v1.5 (Base reference for likeness extraction)
+Seed: 912487
+Hash: 3F9B1C88D7E214
+Identity_Embedding_Model: OpenAI-Vision-Embedding-v2
+Identity_Embedding_Vector: [0.4217, -0.2881, 0.6394, -0.2113, 0.3924, -0.4015, 0.2146, -0.5548, 0.5721, -0.2403, ...]
+Semantic_Embedding_Model: CLIP-ViT-L/14
+Semantic_Embedding_Vector: [0.2711, 0.4558, -0.3012, 0.3269, -0.1875, 0.3587, -0.4983, 0.1952, 0.2319, -0.0854, ...]
+Notes: Base likeness record derived from combined visual references (Athletics uniform and game highlights). Final image adjusted to formal attire for civic leader representation within the 2040 simulation archive.

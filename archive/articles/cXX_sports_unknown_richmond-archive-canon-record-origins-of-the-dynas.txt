@@ -1,0 +1,43 @@
+Richmond Archive Canon Record – Origins of the Dynasty Series v1.0
+Checksum Root: RCH-DYNASTY-2040A
+Compiled by: Riley – Chief Operations Steward
+Verified by: Hal Richmond – Senior Historian
+Vault Path: /Universe/Media/Richmond_Archive/
+
+I. Series Overview
+Title: Origins of the Dynasty
+Authors: Hal Richmond (Primary), verified under Bay Tribune Historical Division.
+Chronological Span: 2039–2040
+Purpose: Establish the definitive narrative of the five cornerstone players who defined the Oakland Athletics golden era.
+
+II. Registered Works & Checksums
+----------------------------------------------------
+Player | Story Title | Checksum | Vault Path
+----------------------------------------------------
+Vinnie Keane | The Underdog Slugger | RCH-KEANE-2040A | /Universe/Media/Richmond_Archive/Keane_Origins.txt
+Benji Dillon | The Golden Arm | RCH-DILLON-2040A | /Universe/Media/Richmond_Archive/Dillon_Origins.txt
+Isley Kelley | The Mississippi Machine | RCH-KELLEY-2040A | /Universe/Media/Richmond_Archive/Kelley_Origins.txt
+Mark Aitken | The Iron Corner | RCH-AITKEN-2040A | /Universe/Media/Richmond_Archive/Aitken_Origins.txt
+Darrin Davis | The Ohio Outlaw of Oakland | RCH-DAVIS-2040A | /Universe/Media/Richmond_Archive/Davis_Origins.txt
+----------------------------------------------------
+
+III. Integration Points
+• Bay Tribune → Cultural Ledger for retrospective features.  
+• Slayer Syndicate → Legacy Debates (Dynasty retrospectives).  
+• Adaptive Narrative Vault → Tone Calibration.  
+• Civic Docs Vault → Public Heritage Registry.
+
+IV. Canon Record
+Canon Record #RCH-DYNASTY-2040A
+Series: Origins of the Dynasty (2039–2040 Edition)
+Author: Hal Richmond – Senior Historian
+Status: VERIFIED
+Checksum Range: RCH-KEANE-2040A → RCH-DAVIS-2040A
+Integration Vaults: Richmond Archive ↔ Bay Tribune ↔ Adaptive Narrative
+Date of Canonization: [auto-timestamp]
+Authority Chain: Riley → Mags → Hal Richmond
+
+V. Motto
+"Legacy is not remembered in trophies; it lives in the words that built the memory."
+
+Checksum Verification: RCH-DYNASTY-2040A #EOF

@@ -1,0 +1,58 @@
+Gordon Cabrera — TrueSource_DataPage_v1.0
+POPID: Pending assignment
+Category: Draft Prospect
+Organization: Oakland Athletics
+Draft Year: 2040
+Draft Round: Round 1
+Pick Status: Signed
+
+Identity
+Name: Gordon Cabrera
+Position: 1B
+Bats: L
+Throws: R
+Born: Iowa
+Age: 21
+Height: 5'11"
+Weight: 199 lbs
+MLB Service: 0.000 years
+Secondary Position: None
+
+Overall: 68
+Potential: B
+Scouted Potential Range: 81–91
+Actual Potential: 87
+
+Attributes
+CON L: 52
+CON R: 47
+POW L: 65
+POW R: 68
+VIS: 58
+DISC: 34
+CLT: 53
+BUNT: 10
+DBUNT: 11
+DUR: 36
+
+FLD: 74
+ARM: 48
+ACC: 37
+REAC: 68
+
+SPD: 39
+STEAL: 39
+BR AGG: 58
+
+Contract
+2040: $70K (Signing Contract)
+2041–2042: RNW
+2043–2045: ARB
+2046: FA
+
+Roster Status: Not on 40-Man Roster
+Minor League Options: 0/3 used
+Rule 5 Eligibility: Future eligible
+
+Notes
+Left-handed hitting corner infielder with above-average raw power from both sides of the platoon. Actual potential of 87 marks him as a long-term first base candidate with impact power upside.

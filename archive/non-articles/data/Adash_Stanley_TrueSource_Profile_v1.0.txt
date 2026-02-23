@@ -1,0 +1,72 @@
+Adash_Stanley_TrueSource_Profile_v1.0
+
+TrueSource_Profile_v1.0
+Bulls_Universe
+
+PLAYER: Adash Stanley
+Jersey: 7
+Team: Chicago Bulls
+League: Bulls_Universe
+
+POSITION:
+Primary: PG
+Secondary: SG
+
+BIO:
+Age: 19
+Height: 6'2"
+Weight: 180 lbs
+From: Poland
+Draft Status: Undrafted
+Years Pro: 1
+Personality: Laid Back
+
+OVERALL:
+OVR: 75
+Potential: A
+
+PHYSICAL ATTRIBUTES:
+Strength: 77
+Vertical: 68
+Stamina: 91
+Speed: 83
+Agility: 81
+Durability: 83
+Hustle: 99
+Intangibles: 65
+
+OFFENSE:
+Close Shot: 75
+Driving Layup: 81
+Standing Dunk: 68
+Driving Dunk: 76
+Mid-Range Shot: 70
+Three-Point Shot: 86
+Free Throw: 77
+Post Hook: 54
+Post Fade: 68
+Post Control: 62
+Draw Foul: 70
+Shot IQ: 69
+Offensive Consistency: 75
+
+BALL HANDLING & PASSING:
+Ball Handle: 77
+Speed With Ball: 85
+Hands: 70
+Pass IQ: 73
+Pass Vision: 71
+Pass Accuracy: 68
+
+DEFENSE & REBOUNDING:
+Interior Defense: 47
+Perimeter Defense: 66
+Steal: 76
+Block: 62
+Help Defense IQ: 68
+Defensive Consistency: 62
+Offensive Rebound: 50
+Defensive Rebound: 61
+Pass Perception: 68
+
+END TrueSource_Profile_v1.0

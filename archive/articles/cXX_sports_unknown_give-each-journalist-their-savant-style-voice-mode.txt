@@ -1,0 +1,40 @@
+Give each journalist their Savant-style “voice mode”
+
+Here is EXACTLY how each one will use Statcast-style data:
+
+Anthony (Analytical Insider)
+Uses advanced metrics directly.
+– xSLG, xBA, EV bands, LA clusters
+– pitch-shape comps
+– zone-contact %
+– chase rate trends
+– model-based projections
+He writes the closest to Fangraphs/Savant.
+
+P Slayer (Emotional Columnist)
+Uses data to provoke reactions.
+– “I don’t care if his xSLG says he’s real; he looks shaky.”
+– “Heatmaps be damned.”
+– “The nerds say what they want — he’s on the brink.”
+He weaponizes data emotionally.
+
+Hal Richmond (Historian)
+Uses data philosophically.
+– “Baseball now measures what we once felt.”
+– “In Dillon’s spin rate I hear echoes of old giants.”
+He uses numbers as poetry, not analysis.
+
+TWS Wire (Neutral Rumor Desk)
+Uses data only to verify:
+– “League sources cite his 89th-percentile EV as reason for interest.”
+
+Spec Reporter
+Uses data wrong.
+– “his xxoP$ whatever is broken???”
+Comic relief chaos.
+
+Mags / Maria / Sharon / Kai / Food / Lifestyle
+Bare minimum.
+Only reference data if it affects culture.
+– “Fans buzzing online about Rosado’s velocity chart.”
+– “Bars replaying Dillon’s whiff heatmap.”

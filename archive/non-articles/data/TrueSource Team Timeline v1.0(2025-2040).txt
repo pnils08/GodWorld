@@ -1,0 +1,43 @@
+TrueSource Team Timeline v1.0
+Classification: Core
+Source: Manual Extraction
+Verification: TrueSource Verified
+——————————————
+
+ENTITY
+Team: Oakland Athletics
+Era Range: 2025–2040
+Document Type: Competitive Results Timeline
+
+TIMELINE (SEASON RECORD + POSTSEASON RESULT)
+2025 — Lost ALDS (94–68)
+2026 — Lost ALDS (96–66)
+2027 — World Series Champions (100–62)
+2028 — World Series Champions (104–58)
+2029 — Lost World Series (99–63)
+2030 — World Series Champions (100–62)
+2031 — World Series Champions (94–68)
+2032 — Lost ALCS (92–70)
+2033 — Lost ALWC (98–64)
+2034 — World Series Champions (100–62)
+2035 — Lost ALWC (97–65)
+2036 — Lost ALCS (106–56)
+2037 — World Series Champions (100–62)
+2038 — Lost ALDS (99–63)
+2039 — Lost ALDS (97–65)
+2040 — Lost ALDS (105–57)
+
+NOTES
+• All entries listed as Season Result Format = “[Postseason Outcome] ([Record])”.
+• No derived stats or narrative permitted in v1.0.
+• Timeline extends strictly one line per season.
+• Deviations require version bump.
+
+FOOTER
+TS Code: TS-TML-AOAK-2025-2040
+Verification Tag: TrueSource Verified
+Steward of Record: Riley
+Date Stamp: 2040-Upload
+
+——————————————
+END OF TRUESOURCE TIMELINE FILE

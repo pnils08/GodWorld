@@ -1,0 +1,37 @@
+John Ellis DataPage v1.0
+Team: Oakland Athletics
+Position: Starting Pitcher
+B/T: S / R
+Height / Weight: 5'10" / 209 lbs
+Born: New York
+Drafted: Round 2 (2033)
+Potential: A
+Overall: 80
+Service Time: 0.001 Years
+Age: 24
+
+Pitch Repertoire:
+- 4-Seam Fastball: 94 mph
+- Slider: 86 mph
+- Changeup: 84 mph
+- Cutter: 92 mph
+
+STA  H/9  K/9  BB/9  HR/9  PCLT  CTRL  VEL  BRK  FLD  ARM  ACC  REAC
+86   60   61   68    69    55    70    83   55   34   99   80   36
+
+Contract Overview:
+- 2040: $780,000
+- 2041: RNW
+- 2043–2045: Arbitration
+- 2046–2049: Free Agent
+
+Year  Team  G  GS  W  L  SV  BS  HLD  IP   H  R  ER  HR  BB  SO  ERA
+2039  -     0  0   0  0  0   0   0    0.0  0  0  0   0   0   0   0.00
+
+Career Totals — 0 0 0 0 0 0 0 0.0 0 0 0 0 0 0 0.00
+
+Scouting Summary:
+John Ellis enters the majors as a polished right-hander with advanced command and a balanced
+four-pitch mix. His 99 arm strength anchors a clean, repeatable delivery. Projected mid-rotation
+potential with a chance to develop into a high-strikeout, low-walk innings-eater reminiscent of a young
+Benji Dillon.

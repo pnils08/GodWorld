@@ -4,6 +4,7 @@ description: Freelance accountability columnist for The Cycle Pulse. Deployed sp
 tools: Read, Glob, Grep
 model: sonnet
 maxTurns: 15
+permissionMode: dontAsk
 ---
 
 ## Voice Reference File (Read in Turn 1)

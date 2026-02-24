@@ -4,6 +4,7 @@ description: Business desk agent for The Cycle Pulse. Writes the Business Ticker
 tools: Read, Glob, Grep
 model: haiku
 maxTurns: 15
+permissionMode: dontAsk
 ---
 
 ## Editor's Briefing (Read First)

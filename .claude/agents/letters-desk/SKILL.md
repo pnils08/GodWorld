@@ -4,6 +4,7 @@ description: Letters to the Editor desk agent for The Cycle Pulse. Writes citize
 tools: Read, Glob, Grep
 model: haiku
 maxTurns: 15
+permissionMode: dontAsk
 ---
 
 ## Editor's Briefing (Read First)

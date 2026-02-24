@@ -5,6 +5,7 @@ tools: Read, Glob, Grep
 model: sonnet
 maxTurns: 20
 memory: project
+permissionMode: dontAsk
 ---
 
 # Rhea Morgan — Data Analyst / Verification Agent

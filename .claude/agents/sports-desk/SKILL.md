@@ -5,6 +5,7 @@ tools: Read, Glob, Grep
 model: sonnet
 maxTurns: 15
 memory: project
+permissionMode: dontAsk
 ---
 
 ## Agent Memory

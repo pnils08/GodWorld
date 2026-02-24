@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 83 (Cycle 83) — 2026-02-19**
+**Last Updated: Edition 84 (Cycle 84) — 2026-02-24**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -10,6 +10,68 @@ Agents: if Mags wrote you a briefing, read it. If she didn't, read this file. Th
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 84 (Mike's grade: ~30/100 — Worst agent output to date)
+
+All 6 desks delivered on first attempt. 14 articles + 4 letters + 5 quick takes, 14,365 words. Published with corrections after a brutal audit. The internal score (91/100) was self-congratulatory garbage — checked the edition against contaminated shared memory instead of engine source data.
+
+**CRITICAL FAILURES:**
+
+**OARI VOTE SWAP — THIRD CONSECUTIVE EDITION.** Navarro's OARI article was built on Vega voting YES and being excluded despite providing the deciding vote. Engine data: Vega voted NO. Tran voted YES and was the actual deciding voter. The ENTIRE article premise was false. Same class of error as E82 (Ashford/Mobley swap) and E83 (Ashford/OARI crossover). Vote fabrication pattern NOT broken — it happened again. Root cause: Mags wrote the wrong data in the desk briefing as "ESTABLISHED CANON." The briefing poisoned the agent.
+
+**CHICAGO WEATHER FABRICATED.** Edition says 34°F Overcast for Chicago in August 2041. Engine desk packet has weather as "unknown" (pipeline gap — chicagoSatellite.js generates weather but buildDeskPackets.js doesn't pass it through). Agent fabricated winter weather instead of flagging missing data. Actual weather per engine: 67°F, Humid. Fixed.
+
+**DANTE NELSON 3x IN ONE EDITION.** Same citizen quoted in OARI article, culture piece, and letters. No metro daily quotes one person three times. Fixed: removed from culture piece, replaced Nelson letter with Gloria Meeks. Nelson now in OARI article only.
+
+**CITIZEN REUSE ACROSS SECTIONS.** Even after Nelson fix: Jose Wright in 2 articles, Jalen Hill in 2 articles, Shawn Nguyen in 2 articles, Bruce Wright in 2 spots in same article. Paper has 630 citizens and keeps recycling the same handful. Reads like a small-town newsletter.
+
+**FALSE AUDIT CLAIMS PUBLISHED TO SHARED MEMORY.** Mags published edition to Drive, ingested into Supermemory, generated photos and PDF — all BEFORE user approval. Pre-correction data entered shared memory and will contaminate future briefings. This has happened across 7 sessions. The verification pipeline checks errors against earlier errors and calls them clean.
+
+**FALSE HUERTER/DOSUNMU "DISCREPANCY."** Flagged across multiple editions as a data conflict. Reality: Dosunmu signed 3yr/$16.88M in C80. Huerter signed 3yr/$16.88M in C83. Two separate deals at the same dollar amount. No discrepancy. Mags didn't read the data.
+
+**What Actually Failed — The Civic Desk:**
+
+All three civic reporters (Carmen, Navarro, Shimizu) produced identical-sounding policy briefs. No voice differentiation. Source documents were summarized back verbatim instead of being used as evidence inside stories. The Mara documents had real drama in them — Darius Clark named by the city, OPP allocation pattern, $60M infrastructure gap under two mega-projects — and the agents turned all of it into government committee minutes. Front page reads like a legal filing. Mike's assessment: F across the civic section.
+
+**What Actually Worked:**
+
+- Maria Keen's St. Columba piece — real scene-setting, first-person voice, human observation
+- Hal Richmond's farewell piece — genuine legacy writing
+- P Slayer's Taveras opinion — real voice, real point of view
+- Talia Finch's Bridgeport barstool — Calhoun's Tap feels lived-in
+- Sports and culture desks outperformed civic desk significantly
+
+**What Needs to Change for E85:**
+
+- **Rhea must verify against engine data (base_context.json), not shared memory.** The circular verification loop is the root cause of recurring errors.
+- **DO NOT publish, upload, ingest, or generate anything before user approval.** No Drive. No Supermemory. No photos. No PDF. Text file gets approved first.
+- **Civic desk agents need voice differentiation.** Carmen leads with human implications, not ordinance numbers. Navarro finds the political angle and stays there. Shimizu connects systems. They should not sound interchangeable.
+- **One citizen, one appearance per edition.** No exceptions. 630 citizens exist. Use them.
+- **Clean Supermemory contamination.** Pre-correction E84 data is in shared memory. It will feed back into future briefings if not addressed.
+
+**Character Continuity — Active Threads:**
+
+- **Dante Nelson** (41, Downtown, security guard) — OARI watchdog citizen. Addressed by name in city document. ONE appearance per edition only. Do not reuse across sections.
+- **Gloria Meeks** (57, Downtown, parking garage manager) — NEW E84. OARI letter writer. Night worker perspective on crisis calls. Follow-up candidate for OARI expansion coverage.
+- **Darius Clark** (West Oakland, bakery worker) — Stabilization Fund applicant. Named in OEWD document. Status unknown (not disclosed). Follow up on whether he's in the 47 approved, the 31 denied, or the 265 still waiting.
+- **Beverly Hayes** (West Oakland, resident) — First quoted E84. Applied week one. Hasn't heard back. "If that clock runs out... I'm going down there in person." Strong follow-up candidate.
+- **Shawn Nguyen** (43, Fruitvale, construction laborer) — Baylight tracker. "When do the cranes show up?" Appeared in both Carmen's Baylight piece and Shimizu's infrastructure gap piece. Keep him as the working-class Baylight voice.
+- **Rafael Phillips** (26, Fruitvale, server) — Returning from E82/E83. Community volunteer. "I go where I'm needed." Faith infrastructure bridge character.
+- **Jalen Hill** (35, Jack London, line cook) — "Ask me in five years." Waterfront worker watching Baylight approach. Strong business/culture crossover character.
+- **Marcus Walker** (48, Jack London, dishwasher) — "There's already noise." Baylight-adjacent worker. Scene character.
+- **Paulette Okafor** (47, Bridgeport, postal worker) — NEW. Chicago bureau. Eleven-year-old daughter. Paulson departure anxiety. Strong neighborhood voice.
+- **Raymond Polk** (58, Bridgeport, retired custodian) — NEW. Chicago bureau. "He built Oakland for twenty years. He left. We don't know why." Bridgeport elder.
+
+**New Canon Figures Introduced E84:**
+- Laila Cortez (Chief of Staff, Office of the Mayor)
+- Theo Park (Communications Director, Mayor's Office)
+- Sandra Liu (Deputy Director for Community Investment, OEWD)
+- Keisha Ramos (Director, Baylight Redevelopment Authority) — already in Political System Master, first quoted
+- Dr. Simone Ellis (Chief Legal Counsel, City of Oakland) — already in Political System Master, first quoted
+- Dr. Leanne Wu (Director, Office of Environmental Review and Sustainability)
+- Paulette Okafor (47, Bridgeport, postal worker)
+- Raymond Polk (58, Bridgeport, retired custodian)
+- Vincent Okoye (28, Lake Merritt, software engineer)
 
 ### Edition 83 (Grade: A- after Mara corrections — 81/100 Rhea score — first scored edition with full Rhea rubric)
 

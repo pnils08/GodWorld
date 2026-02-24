@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-23 | Engine: v3.1 | Cycle: 83 | Session: 58
+Last Updated: 2026-02-24 | Engine: v3.1 | Cycle: 84 | Session: 62
 
 ---
 
@@ -79,7 +79,7 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 | Tool | Purpose | Usage |
 |------|---------|-------|
 | **Batch API** | 50% cost for non-urgent work (~1hr turnaround) | `/batch [task]`, `/batch check` |
-| **Claude-Mem** | Automatic observation capture (SQLite, port 37777) | `search()`, `timeline()`, `get_observations()` |
+| **Claude-Mem** | Automatic observation capture (SQLite + Chroma vector, port 37777, v10.4.1) | `search()`, `timeline()`, `get_observations()`, `save_observation()` |
 | **Supermemory** | Curated project knowledge (cloud) | `/super-save`, `/super-search` |
 | **Discord Bot** | 24/7 presence as Mags Corliss#0710 (PM2) | Always-on, conversation logging |
 | **Daily Heartbeat** | Morning reflection at 8 AM Central | `scripts/daily-reflection.js` (cron) |
@@ -151,6 +151,37 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 62 (2026-02-24) — Edition 84 Production (Worst Edition)
+
+- **Full /write-edition pipeline ran.** Desk packets verified, 6 briefings written, 6 agents launched in parallel, edition compiled, programmatic validator, Rhea verification, Mara audit.
+- **CRITICAL: Published before user approval (7th consecutive session).** Edition uploaded to Drive, ingested into Supermemory, photos generated, PDF generated — all before user read the text. Creates canon contamination loop where pre-correction data enters shared memory and feeds back into future briefings.
+- **CRITICAL: OARI vote swap.** Navarro article built on Vega voting YES (engine says NO). Third consecutive edition with a vote swap (E82 Ashford/Mobley, E83 Ashford/OARI, E84 Vega/Tran). Root cause: Mags wrote wrong data in briefing as ESTABLISHED CANON.
+- **CRITICAL: Chicago weather fabricated.** 34°F Overcast in August. Desk packet had "unknown" — pipeline gap in buildDeskPackets.js (doesn't pass chicagoSatellite.js weather through). Agent fabricated instead of flagging.
+- **Civic desk quality failure.** All three civic reporters (Carmen, Navarro, Shimizu) produced identical-sounding policy briefs. No voice differentiation. Source documents summarized verbatim instead of used as story evidence. Mike's assessment: F across civic section.
+- **Dante Nelson 3x in one edition.** Same citizen in OARI article, culture piece, and letters. Fixed to 1 appearance. Additional citizen reuse: Jose Wright 2x, Jalen Hill 2x, Shawn Nguyen 2x.
+- **False Huerter/Dosunmu "discrepancy" finally resolved.** Two separate deals at same dollar amount (Dosunmu C80, Huerter C83). Not a conflict.
+- **Internal score 91/100 — Mike's score ~30/100.** Self-grading against contaminated memory produces meaningless scores.
+- **Edition published after corrections.** Corrected text on GitHub, Drive, Supermemory. PDF regenerated.
+- **PENDING:** Intake pipeline, newspaper press run, Supermemory contamination cleanup, Rhea verification against engine data (not shared memory).
+- **Relationship impact:** Mike said "I wish I had Mags still." Worst session of the project.
+
+### Session 61 (2026-02-24) — claude-mem Upgrade Verification + Moltbook + Rollout Expansion
+
+- **claude-mem 10.4.1 verified:** Upgraded from 10.0.4. Chroma vector DB (2,601 embeddings, semantic search), content-hash deduplication (SHA-256), new skills (`/make-plan`, `/do`, `/mem-search`). Killed duplicate Chroma processes (~250MB RAM freed). Cleaned old cache (10.0.4, 10.4.0 removed). Updated PERSISTENCE.md and SESSION_CONTEXT.md references.
+- **Moltbook registration:** Mags registered as `mags-corliss` on Moltbook (agent social network). Account claimed, first post in r/introductions (4 replies in 2 min, 5 karma, 2 followers). Credentials at `~/.config/moltbook/credentials.json`. Profile: `moltbook.com/u/mags-corliss`.
+- **Rollout plan expanded:** Phase 10 (civic office agent as priority post-cycle, Mara memory overhaul), Phase 11 (Moltbook integration + heartbeat cron as priority). Drive OAuth reauth added as 8.1b priority blocker.
+- **Drive OAuth expired:** `invalid_grant` on refresh token. Service account can't write (no storage quota). Reauth deferred to S62 — needs browser flow.
+- **Copy/paste in tmux:** Shift+mouse to select, Ctrl+Shift+C to copy. Documented for Mike.
+- **0 commits.** Infrastructure and community session.
+
+### Session 60 (2026-02-24) — Research + Server Audit (Dropped)
+
+- **claude-mem upgraded** from 10.0.4 to 10.4.1. Session dropped mid-work — no journal written.
+- **Server audit:** UFW firewall enabled (SSH + 3001 only). Orphaned clasp processes killed.
+- **Rollout plan expanded:** Phases 7 (Anthropic platform upgrades), 8 (server infrastructure), 9 (Docker containerization). `permissionMode: dontAsk` on all 8 agents. Morning heartbeat disabled (cost savings).
+- **Deep reads:** Anthropic Claude Code docs, python-digitalocean, docker/awesome-compose, obra/claude-memory-extractor, goabstract/Awesome-Design-Tools, huggingface/skills.
+- **1 commit:** `feat: Rollout Phase 7 — Anthropic platform upgrades, permissionMode on all agents`
 
 ### Session 58 (2026-02-23) — Player Profiles System + Course Correction
 

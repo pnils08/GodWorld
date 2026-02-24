@@ -1,0 +1,109 @@
+{
+  "_description": "Edition score history — appended by Mags after each Rhea verification report. Used by scripts/editionDiffReport.js for trend analysis.",
+  "scores": [
+    {
+      "edition": 81,
+      "cycle": 81,
+      "date": "2026-02-14",
+      "grade": "A-",
+      "total": null,
+      "dataAccuracy": null,
+      "voiceFidelity": null,
+      "structuralCompleteness": null,
+      "narrativeQuality": null,
+      "canonCompliance": null,
+      "criticals": 1,
+      "warnings": 3,
+      "notes": 2,
+      "claimDecomposition": null,
+      "deskErrors": {
+        "civic": ["council name errors (5 wrong first names, 2 swapped districts)"],
+        "sports": [],
+        "chicago": [],
+        "culture": ["phantom citizen Mei Chen (AGAIN)"],
+        "business": [],
+        "letters": []
+      },
+      "noteText": "Pre-scoring system. First edition with persistent Mags. Power outage mid-production, 3 desks failed. Mara audit: A- (one blocking Stabilization Fund timeline error)."
+    },
+    {
+      "edition": 82,
+      "cycle": 82,
+      "date": "2026-02-17",
+      "grade": "A",
+      "total": null,
+      "dataAccuracy": null,
+      "voiceFidelity": null,
+      "structuralCompleteness": null,
+      "narrativeQuality": null,
+      "canonCompliance": null,
+      "criticals": 7,
+      "warnings": 2,
+      "notes": 1,
+      "claimDecomposition": null,
+      "deskErrors": {
+        "civic": ["vote swap Ashford/Mobley", "mayor name fabricated (Marcus Whitmore)"],
+        "sports": ["Aitken position 3B not 1B", "Davis position 2B not DH", "Gold Glove for DH"],
+        "chicago": ["real name leak Josh Smith"],
+        "culture": [],
+        "business": [],
+        "letters": []
+      },
+      "noteText": "Pre-scoring system. First edition with all 6 desks delivering. Grade A AFTER corrections (7 criticals found by Mara, all fixed). Rhea missed all 7 criticals. Root causes fixed in Sessions 41-42."
+    },
+    {
+      "edition": 83,
+      "cycle": 83,
+      "date": "2026-02-19",
+      "grade": "A-",
+      "total": 81,
+      "dataAccuracy": 14,
+      "voiceFidelity": 18,
+      "structuralCompleteness": 18,
+      "narrativeQuality": 17,
+      "canonCompliance": 14,
+      "criticals": 5,
+      "warnings": 5,
+      "notes": 8,
+      "claimDecomposition": { "extracted": 41, "verified": 38, "errors": 2, "unverifiable": 1 },
+      "maraGrade": "A-",
+      "deskErrors": {
+        "civic": ["Ashford/OARI crossover fabrication (3 passages — CRC was unified NO on OARI, not split)", "Three consecutive initiatives claim wrong (two, not three)"],
+        "sports": ["Hal Richmond Coles innings 119.1 vs 219.1 (transposition)"],
+        "chicago": [],
+        "culture": [],
+        "business": [],
+        "letters": ["Jose Johnson claimed Crane voted NO on Stabilization Fund (he voted YES)", "Storyline summary wrong for Crane/Stabilization"]
+      },
+      "noteText": "First fully scored edition (Rhea 5-category rubric). First edition with zero desk failures/retries. First with programmatic validation gate. First with template v1.4 sections. 18 articles, 11 reporters. Rhea caught 2 criticals (Coles innings, Crane vote). Mara caught 3 additional criticals (Ashford/OARI fabrication x3 passages, three consecutive claim, storyline summary). All fixed pre-final publication. Mara grade: A- (strongest edition she's reviewed). Voice fidelity (18/20) strongest category. Recurring pattern: vote fabrication for narrative tension (E82 Ashford/Mobley swap, E83 Ashford/OARI crossover)."
+    },
+    {
+      "edition": 84,
+      "cycle": 84,
+      "date": "2026-02-24",
+      "grade": "D",
+      "total": 30,
+      "dataAccuracy": 5,
+      "voiceFidelity": 8,
+      "structuralCompleteness": 7,
+      "narrativeQuality": 5,
+      "canonCompliance": 5,
+      "criticals": 4,
+      "warnings": 4,
+      "notes": 7,
+      "claimDecomposition": { "extracted": 48, "verified": 44, "errors": 4, "unverifiable": 4 },
+      "maraGrade": "A-",
+      "userGrade": "~30/100",
+      "deskErrors": {
+        "civic": ["OARI vote swap — Vega/Tran (third consecutive edition with vote fabrication)", "All 3 civic reporters sound identical — no voice differentiation", "Articles read as policy briefs, not journalism"],
+        "sports": [],
+        "chicago": ["Chicago weather fabricated — 34°F in August (should be 67°F Humid)", "Pipeline gap: buildDeskPackets.js doesn't pass chicagoSatellite.js weather"],
+        "culture": ["Baylight stadium spec error — 18K-20K indoor → 35K open-air (FIXED)", "Dante Nelson quoted 3x across sections (FIXED — reduced to 1)"],
+        "business": [],
+        "letters": [],
+        "pipeline": ["Published to Drive/Supermemory/PDF before user approval (7th consecutive session)", "False Huerter/Dosunmu discrepancy flagged across multiple editions (two separate deals)", "Self-scoring against contaminated memory (91/100 internal vs 30/100 user)", "Citizen reuse: 4 citizens appear in 2+ articles"]
+      },
+      "noteText": "Worst edition by user assessment. OARI vote swap (Vega NO, not YES — third consecutive edition with vote fabrication). Chicago weather fabricated from missing data. Civic desk produced identical-sounding policy briefs with no voice differentiation. Dante Nelson 3x in one edition. Published everything to shared memory before user approval, contaminating canon. Internal score 91 was self-congratulatory — verified against contaminated shared memory instead of engine source data. User grade: ~30/100. Sports and culture desks performed better. Corrections applied post-audit."
+    }
+  ]
+}

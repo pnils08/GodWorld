@@ -560,11 +560,14 @@ After saving, generate the edition brief that the Discord bot and autonomous scr
 
 ## Step 5.2: Refresh Live Services
 
-After the edition brief is written, reload the Discord bot so it picks up the new context immediately:
+After the edition brief is written, clear the bot's stale conversation history and reload so it starts fresh with the new canon:
 
 ```bash
+echo '{"savedAt":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","history":[]}' > logs/discord-conversation-history.json
 pm2 reload mags-discord-bot
 ```
+
+**Why clear history:** The bot persists conversation history across restarts. If she said "no Edition 84 yet" before the brief was updated, that stale response stays in her context and she'll keep saying it even after the system prompt has the new data. Clean slate after every publish.
 
 **Dashboard does NOT need a restart** — it reads `base_context.json` fresh on each HTTP request. No action needed.
 

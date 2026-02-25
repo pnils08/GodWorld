@@ -256,11 +256,14 @@ If no existing brief exists (rare — means no main edition was published), gene
 
 ## Step 4.2: Refresh Live Services
 
-Reload the Discord bot to pick up the updated brief immediately:
+Clear stale conversation history and reload the Discord bot to pick up the updated brief immediately:
 
 ```bash
+echo '{"savedAt":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","history":[]}' > logs/discord-conversation-history.json
 pm2 reload mags-discord-bot
 ```
+
+**Why clear history:** The bot persists conversations across restarts. Stale responses about "no edition yet" will override the new system prompt if the history isn't cleared.
 
 Dashboard doesn't need a restart (reads fresh on each request). Moltbook heartbeat picks up changes on next cron run.
 

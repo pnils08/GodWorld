@@ -183,9 +183,34 @@ node scripts/validateEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
 ```
 Fix any CRITICAL issues before proceeding.
 
+## Step 3.9: USER REVIEW GATE (MANDATORY)
+
+**STOP HERE. DO NOT PROCEED TO STEP 4 WITHOUT EXPLICIT USER APPROVAL.**
+
+Same principle as write-edition Step 4.9. Nothing gets saved, uploaded, or ingested until the user says so.
+
+### Present it as:
+
+```
+SUPPLEMENTAL [{topic}] — READY FOR REVIEW
+
+Articles: {count}
+Word count: ~{total}
+New canon established: {key facts}
+
+[Summary of coverage and any issues]
+
+The supplemental is compiled. Nothing has been saved or published yet.
+Ready to publish? (yes / hold for edits)
+```
+
+Wait for explicit approval. If the user says hold, make edits, then re-present.
+
+---
+
 ## Step 4: Save & Upload
 
-After user approval:
+After user approval (confirmed at Step 3.9):
 
 1. **Save locally:**
    ```
@@ -211,6 +236,35 @@ After user approval:
    - Total word count
    - New canon figures introduced
    - Citizen usage count
+
+## Step 4.1: Update Edition Brief (Auto-Update Bot Context)
+
+After saving, update the edition brief so the Discord bot knows about the supplemental coverage.
+
+**Read** the existing `output/latest_edition_brief.md` first — don't overwrite it. Supplementals ADD to the current cycle's canon; they don't replace the main edition brief.
+
+**Append** a new section to the bottom of the existing brief:
+
+```
+### Supplemental: {Topic} ({Reporter(s)})
+- [Key facts, named citizens, numbers from this supplemental]
+- [Initiative status changes if any]
+- [New citizens introduced]
+```
+
+If no existing brief exists (rare — means no main edition was published), generate a standalone brief from this supplemental using the full format from write-edition Step 5.1.
+
+## Step 4.2: Refresh Live Services
+
+Reload the Discord bot to pick up the updated brief immediately:
+
+```bash
+pm2 reload mags-discord-bot
+```
+
+Dashboard doesn't need a restart (reads fresh on each request). Moltbook heartbeat picks up changes on next cron run.
+
+---
 
 ## Step 4.5: Update Newsroom Memory
 

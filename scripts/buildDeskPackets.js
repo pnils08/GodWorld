@@ -71,6 +71,12 @@
 const fs = require('fs');
 const path = require('path');
 
+// ─── CLI HELPERS ──────────────────────────────────────────
+function getCliArg(flag) {
+  var idx = process.argv.indexOf(flag);
+  return (idx !== -1 && process.argv[idx + 1]) ? process.argv[idx + 1] : null;
+}
+
 // ─── CONFIGURATION ─────────────────────────────────────────
 const CYCLE = parseInt(process.argv[2]) || 84;
 const PROJECT_ROOT = path.resolve(__dirname, '..');
@@ -1627,17 +1633,41 @@ async function main() {
   console.log('  Coverage echo:', Object.keys(coverageEchoMap).length, 'citizens from previous edition');
 
   // ── Build base context ──
+  // Season/month derived from current date (seed metadata columns are unreliable —
+  // column shift bug causes Season to contain citizen names, Holiday to contain
+  // voice guidance text, etc. Fixed S63.)
+  var now = new Date();
+  var monthNames = ['January','February','March','April','May','June',
+    'July','August','September','October','November','December'];
+  var currentMonth = monthNames[now.getMonth()];
+  var seasonMap = { 0:'Winter',1:'Winter',2:'Spring',3:'Spring',4:'Spring',5:'Summer',
+    6:'Summer',7:'Summer',8:'Fall',9:'Fall',10:'Fall',11:'Winter' };
+  var currentSeason = seasonMap[now.getMonth()];
+
+  // CLI overrides: --season Summer --month August --holiday "none" --sports-season offseason
+  var cliSeason = getCliArg('--season');
+  var cliMonth = getCliArg('--month');
+  var cliHoliday = getCliArg('--holiday');
+  var cliSportsSeason = getCliArg('--sports-season');
+
+  // Determine sports season from date
+  var mo = now.getMonth(); // 0-indexed
+  var defaultSportsSeason = 'unknown';
+  if (mo >= 3 && mo <= 8) defaultSportsSeason = 'baseball'; // Apr-Sep
+  else if (mo >= 9 || mo <= 2) defaultSportsSeason = 'basketball'; // Oct-Mar
+  // Both overlap in Oct
+
   var baseContext = {
     cycle: CYCLE,
-    season: seeds.length > 0 ? seeds[0].Season || 'Unknown' : 'Unknown',
-    month: seeds.length > 0 ? seeds[0].Holiday || '' : '',
-    holiday: seeds.length > 0 ? {
-      name: seeds[0].Holiday || 'none',
-      priority: seeds[0].HolidayPriority || 'none'
-    } : { name: 'none', priority: 'none' },
-    isFirstFriday: seeds.length > 0 ? seeds[0].IsFirstFriday === 'TRUE' : false,
-    isCreationDay: seeds.length > 0 ? seeds[0].IsCreationDay === 'TRUE' : false,
-    sportsSeason: seeds.length > 0 ? seeds[0].SportsSeason || 'unknown' : 'unknown',
+    season: cliSeason || currentSeason,
+    month: cliMonth || currentMonth,
+    holiday: {
+      name: cliHoliday || 'none',
+      priority: 'none'
+    },
+    isFirstFriday: now.getDay() === 5 && now.getDate() <= 7,
+    isCreationDay: false,
+    sportsSeason: cliSportsSeason || defaultSportsSeason,
     weather: extractWeatherFromEvents(events),
     sentiment: extractFieldFromEvents(events, 'CitySentiment'),
     migrationDrift: '', // from cycle packet if available

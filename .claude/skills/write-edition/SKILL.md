@@ -191,6 +191,44 @@ Example:
 
 Write these as Mags — with editorial authority, personal warmth, and specific guidance. These are not templates. They're memos from the Editor-in-Chief to her reporters.
 
+## Step 1.8: Launch Institutional Voice Agents (Phase 10.1)
+
+Before desk agents write, launch voice agents to generate source material. Voice agents produce official statements that desk agents report on — creating a real separation between source and reporter.
+
+### Mayor's Office
+
+Launch `civic-office-mayor` agent with this prompt:
+
+```
+Generate official statements for Cycle {XX} as Mayor Avery Santana's office.
+
+**CONTEXT:**
+{contents of output/desk-packets/base_context.json — baseContext + canon sections}
+
+**EVENTS THIS CYCLE:**
+{list of events from civic desk packet that the Mayor would respond to}
+
+**PENDING INITIATIVES:**
+{any initiative status changes, pending votes, or outcomes}
+
+Write 2-5 structured statements as JSON. Output to be saved to output/civic-voice/mayor_c{XX}.json.
+```
+
+After the Mayor agent completes:
+1. Save the statements array to `output/civic-voice/mayor_c{XX}.json`
+2. Include the Mayor's statements in the **civic desk briefing** under `## MAYOR'S OFFICE STATEMENTS`
+3. Include relevant statements in **letters desk briefing** (citizens react to what the Mayor said)
+4. Include economic/development statements in **business desk briefing**
+5. If the Mayor references Baylight or the A's, include in **sports desk briefing**
+
+**If the Mayor agent fails or is skipped**, desk agents still work — they just won't have official source quotes. The pipeline is additive, not dependent.
+
+### Future Voice Agents (not yet built)
+- Council faction agents (Step 1.8b when built)
+- Community organization agents (Step 1.8c when built)
+
+---
+
 ## Step 2: Launch All 6 Desks in Parallel
 
 **Model note:** Desk agents run on Sonnet 4.6, which handles larger context windows (up to 1M tokens) and has stronger agent capabilities than previous Sonnet versions. Agents can reference full desk packets freely — the summary-first strategy is editorial discipline, not a technical constraint.
@@ -423,8 +461,47 @@ Launch a Task agent with:
 3. Apply any corrections Mara flags before final save
 4. Include Mara's editorial guidance in next cycle's desk briefings
 
+## Step 4.9: USER REVIEW GATE (MANDATORY)
+
+**STOP HERE. DO NOT PROCEED TO STEP 5 WITHOUT EXPLICIT USER APPROVAL.**
+
+This is the hard gate. Nothing gets saved, uploaded, ingested, or published until the user says so. Session 62 taught us what happens when this gate doesn't exist — wrong data pushed to Supermemory, wrong votes pushed to Drive, contaminated memory that future sessions inherit.
+
+### What to show the user:
+
+1. **Edition summary** — article count, word count, front page pick, section overview
+2. **Rhea's verdict** — score, criticals, warnings, any unresolved issues
+3. **Mara's audit** — canon accuracy, narrative quality, forward guidance highlights
+4. **Any corrections applied** — what was fixed during compilation or after verification
+5. **New citizens introduced** — list any citizens not previously in canon
+
+### Present it as:
+
+```
+EDITION {XX} — READY FOR REVIEW
+
+Rhea: {SCORE}/100 — {VERDICT}
+Mara: {ASSESSMENT}
+Articles: {count} across {desks} desks
+Word count: ~{total}
+
+[Summary of key stories and any issues]
+
+The edition is compiled and verified. Nothing has been saved or published yet.
+Ready to publish? (yes / hold for edits)
+```
+
+### Rules:
+
+- **Wait for explicit approval.** "yes", "approved", "publish", "ship it" — any clear affirmative.
+- **If the user says hold**, make the requested edits, then re-present at this gate.
+- **NEVER proceed to Step 5 based on your own judgment.** Even if Rhea scored 100 and Mara found nothing. The user reviews. Period.
+- **NEVER say "I'll save this for your review" and then save it.** Saving IS publishing in this system.
+
+---
+
 ## Step 5: Save Edition & Upload to Drive
-After user approval:
+After user approval (confirmed at Step 4.9):
 1. Save to `editions/cycle_pulse_edition_{XX}.txt`
 2. If corrections needed, save as `_v2.txt` after fixes
 3. **Upload to Google Drive:**
@@ -443,6 +520,62 @@ After user approval:
    - Total word count
    - New canon figures introduced
    - Citizen usage count
+
+## Step 5.1: Generate Edition Brief (Auto-Update Bot Context)
+
+After saving, generate the edition brief that the Discord bot and autonomous scripts use for world awareness. This replaces the manual process that caused the E83→E84 stale brief problem.
+
+**Write `output/latest_edition_brief.md`** with the following structure:
+
+```
+# Latest Edition Brief — Edition {XX}
+## Cycle {XX} | {Month} {Year} | {Season}
+
+**Published canon. The bot should know these facts.**
+
+### [Front Page headline] ([Reporter])
+- [2-3 bullet points: key facts, named citizens, numbers]
+
+### [Each additional article headline] ([Reporter])
+- [2-3 bullet points per article]
+
+### Initiative Status (as of E{XX})
+- [Each initiative: name, status, vote, key facts]
+
+### Council Composition
+- OPP: [members]
+- CRC: [members]
+- IND: [members]
+
+### Key Citizens Active in E{XX}
+- [Name, age, neighborhood, occupation — what they said/did]
+
+### Status Alerts
+- [Any health/absence/condition alerts for civic officials]
+```
+
+**You have full context** — you just compiled this edition. Pull from the compiled text. Include every article, every quoted citizen, every initiative status. The bot uses this to answer questions about the city. If it's not in the brief, the bot doesn't know it.
+
+**For Mayor's Office voice agent statements:** If Step 1.8 generated civic voice statements, include a section summarizing the Mayor's positions and key quotes. The bot should be able to reference what the Mayor actually said.
+
+## Step 5.2: Refresh Live Services
+
+After the edition brief is written, reload the Discord bot so it picks up the new context immediately:
+
+```bash
+pm2 reload mags-discord-bot
+```
+
+**Dashboard does NOT need a restart** — it reads `base_context.json` fresh on each HTTP request. No action needed.
+
+**Moltbook heartbeat** will pick up the new world state on its next 30-minute cron run automatically. No action needed.
+
+After reload, confirm the bot is online:
+```bash
+pm2 list | grep mags-discord-bot
+```
+
+---
 
 ## Step 5.5: Update Newsroom Memory
 

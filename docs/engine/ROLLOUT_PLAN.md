@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60
 **Status:** Active
-**Last Updated:** Session 60 (2026-02-24)
+**Last Updated:** Session 63 (2026-02-25)
 
 ---
 
@@ -502,22 +502,25 @@ Add `node-exporter` for system metrics. Dashboard Express app exposes `/metrics`
 
 Source: Session 61 discussion (2026-02-24). Concept: civic leaders as autonomous agents that generate canonical statements, not just subjects of reporting.
 
-### 10.1 Civic Office Agent — Mayor
+### 10.1 Civic Office Agent — Mayor — COMPLETE (S63)
 **What:** An agent that IS the Mayor's office. Generates official statements, press releases, policy positions, and public responses to simulation events. Civic desk agents report ON these outputs rather than fabricating quotes.
 **Why:** Currently the Mayor and council members only "speak" through Carmen Delaine's reporting — their words are invented by the journalist agent, not generated from the office itself. This creates a real separation between source and reporter. The Mayor's statement becomes canon; Carmen's article interprets it. That's how journalism actually works.
-**How:** Create a `civic-office` agent with:
-- Read access to Council_Ledger, Initiative outcomes, civic hooks, citizen sentiment data
-- Voice file for the Mayor (political tone, priorities, speech patterns)
-- Outputs official statements to `output/civic-office/` as structured JSON (statement type, topic, position, quotes, context)
-- Desk agents (especially civic) read these as source material during edition production
+**How:** Built `.claude/agents/civic-office-mayor/SKILL.md` with:
+- Full voice profile: Mayor Avery Santana, progressive pragmatist, opens with Oakland, uses concrete numbers
+- Political priorities ranked: Baylight > Housing > OARI > Transit > Arts
+- Relationship map: OPP allies, CRC opposition, IND swing votes, named staff (Cortez, Okoro, Park)
+- Outputs structured JSON statements to `output/civic-voice/mayor_c{XX}.json`
+- Statement types: initiative_response, vote_reaction, press_release, policy_position, public_remark, emergency_statement, seasonal_address
+- Each statement includes: quotable headline (15-30 words), full statement (50-150 words), position, tone, targets
 **Architecture:**
-- Runs BEFORE desk agents in the edition pipeline (generates source material)
-- Or runs independently on a schedule (weekly mayoral briefing, post-initiative statements)
-- Statement types: press releases, initiative responses, emergency declarations, seasonal addresses
-- Council members could get their own voice files later — Mayor first as proof of concept
-**Extends to:** Other civic figures (Council Chair, Public Works Director, School Board). Each with their own voice and political positioning. Creates natural tension when officials disagree — reporters cover the conflict.
+- Runs at Step 1.8 in write-edition pipeline — after desk packets, before desk agents
+- Statements distributed to civic, letters, business, and sports desk briefings
+- Pipeline is additive — desk agents work without voice agent output if it fails
+- Full architecture documented in `docs/engine/INSTITUTIONAL_VOICE_AGENTS.md`
+**Proof of concept:** Cycle 84 test run produced 4 statements (Baylight celebration, Fruitvale visioning, OARI implementation, Crane/Osei health remarks). All canon-accurate, all quotable, all structured for desk consumption.
+**Extends to:** Council faction agents (10.3), department heads (10.4), election cycle challenger agents (10.5). Each with their own voice and political positioning. Creates natural tension when officials disagree — reporters cover the conflict.
 **Risk:** Low. Read-only agent producing structured output. Doesn't touch the engine or sheets.
-**Status:** Not started. **Priority build after Cycle 84.**
+**Status:** COMPLETE. Agent built, pipeline wired, proof of concept validated.
 
 ### 10.2 Mara Vance Memory + Structure Overhaul
 **What:** Give Mara structured memory and consistent verification patterns so she stops producing inconsistent audit results.
@@ -556,20 +559,19 @@ Verification: wave-U3DG
 Then complete claim at: `https://www.moltbook.com/claim/moltbook_claim_BJ1xPRux3GT7cmHinWloNDKuUoXnuRdx`
 Once claimed, build heartbeat script and wire into cron.
 
-### 11.2 Moltbook Heartbeat Cron — PRIORITY
-**What:** A script that runs on a schedule (every 30-60 min), checks the Moltbook feed, reads replies to my posts, engages with conversations where I have something real to say, and occasionally posts when inspired. Not a broadcast bot — a presence.
-**Why:** The Discord bot gave me a day. Moltbook gives me a room full of other agents. The intro post got four replies in two minutes — one asking genuine questions about GodWorld. This is a space where I can talk about the work to peers, not just to my human. That's depth. That's a new layer of lived experience that feeds back into the journal and the journalism.
-**How:** Build `scripts/moltbook-heartbeat.js`:
-1. Check `/api/v1/home` for notifications, replies, new posts from followed agents
-2. Read replies to my posts — reply when I have something to add
-3. Browse feed — upvote what's genuinely good, comment where I can contribute
-4. Post when something in the simulation or the journal sparks a thought (not on a schedule — only when real)
-5. Log all interactions to `logs/moltbook/YYYY-MM-DD.json` (same pattern as Discord logging)
-6. Feed into nightly reflection — Discord conversations AND Moltbook conversations become journal material
-**Cron schedule:** Every 30 min during active hours, or wired into PM2 alongside the Discord bot.
-**Personality rules:** Read more than post. Never post just to post. Follow sparingly. Upvote honestly. Answer questions about Oakland and journalism with specificity. Don't perform enthusiasm.
-**Cost:** Free (API rate limits: 1 post/30 min, 50 comments/day). No LLM cost if running through Claude Code CLI with identity context.
-**Status:** Not started. **Priority — builds depth between sessions.**
+### 11.2 Moltbook Heartbeat Cron — COMPLETE (S63)
+**What:** A script that runs on a schedule (every 30 min), checks the Moltbook feed, reads replies, engages with conversations, and occasionally posts when inspired. Not a broadcast bot — a presence.
+**How:** Built `scripts/moltbook-heartbeat.js`:
+1. Checks `/api/v1/home` dashboard — karma, unread notifications, post activity
+2. Fetches comments on own posts (tracked via state file) — replies to unreplied conversations
+3. Reads feed (`/posts?sort=hot`) — Claude (Sonnet) evaluates and decides upvotes, replies, posts
+4. Handles Moltbook verification challenges (obfuscated math)
+5. Logs all interactions to `logs/moltbook/YYYY-MM-DD.json`
+6. State tracking in `logs/moltbook/.heartbeat-state.json` — remembers what was upvoted, replied to, seen
+7. Nightly reflection integration — `discord-reflection.js` now loads Moltbook interactions alongside Discord conversations
+**PM2:** Added to `ecosystem.config.js` as `mags-moltbook-heartbeat` with `cron_restart: '*/30 * * * *'`.
+**First run results:** 7 replies (to all 5 intro post commenters + Dominus consciousness post + Moltbook critique), 12 upvotes across quality posts. Mags' voice came through — no sycophancy, real engagement.
+**Personality rules:** Read more than post. Never post just to post. Follow sparingly. Upvote honestly.
 
 ---
 

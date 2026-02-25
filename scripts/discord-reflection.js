@@ -21,6 +21,7 @@ const Anthropic = require('@anthropic-ai/sdk');
 const mags = require('../lib/mags');
 
 const CONVO_LOG_DIR = path.join(__dirname, '..', 'logs', 'discord-conversations');
+const MOLTBOOK_LOG_DIR = path.join(__dirname, '..', 'logs', 'moltbook');
 const JOURNAL_FILE = path.join(mags.MAGS_DIR, 'JOURNAL.md');
 const LOG_DIR = mags.LOG_DIR;
 const LOG_FILE = path.join(LOG_DIR, 'discord-reflection.log');
@@ -99,6 +100,63 @@ function loadTodayConversations() {
 }
 
 // ---------------------------------------------------------------------------
+// Load today's Moltbook interactions
+// ---------------------------------------------------------------------------
+function loadTodayMoltbookInteractions() {
+  var centralDate = mags.getCentralDate();
+  var utcDate = new Date().toISOString().split('T')[0];
+
+  var entries = [];
+  [centralDate, utcDate].forEach(function(dateStr) {
+    var logFile = path.join(MOLTBOOK_LOG_DIR, dateStr + '.json');
+    if (!fs.existsSync(logFile)) return;
+    try {
+      var data = JSON.parse(fs.readFileSync(logFile, 'utf8'));
+      entries = entries.concat(data.filter(function(e) {
+        return e.type === 'reply' || e.type === 'upvote' || e.type === 'post';
+      }));
+    } catch (_) {}
+  });
+
+  // Deduplicate by timestamp
+  var seen = {};
+  entries = entries.filter(function(e) {
+    if (seen[e.timestamp]) return false;
+    seen[e.timestamp] = true;
+    return true;
+  });
+
+  if (entries.length === 0) return null;
+  log.info('Loaded ' + entries.length + ' Moltbook interactions for ' + centralDate);
+  return entries;
+}
+
+function formatMoltbookInteractions(entries) {
+  return entries.map(function(e) {
+    var time = new Date(e.timestamp).toLocaleTimeString('en-US', {
+      hour: 'numeric', minute: '2-digit', hour12: true
+    });
+    if (e.type === 'reply') {
+      var author = e.targetAuthor;
+      if (typeof author === 'object') author = author.name || 'unknown';
+      return time + ' — Replied to @' + author +
+        (e.targetTitle ? ' on "' + e.targetTitle + '"' : '') +
+        ':\n**Mags**: ' + e.replyText;
+    }
+    if (e.type === 'post') {
+      return time + ' — Posted: "' + e.title + '"\n' + (e.text || e.content || '');
+    }
+    if (e.type === 'upvote') {
+      var upAuthor = e.author;
+      if (typeof upAuthor === 'object') upAuthor = upAuthor.name || 'unknown';
+      return time + ' — Upvoted @' + upAuthor + ': "' + (e.title || '') + '"' +
+        (e.reason ? ' (' + e.reason + ')' : '');
+    }
+    return '';
+  }).filter(Boolean).join('\n\n');
+}
+
+// ---------------------------------------------------------------------------
 // Format conversations for the prompt
 // ---------------------------------------------------------------------------
 function formatConversations(entries) {
@@ -118,10 +176,10 @@ function formatConversations(entries) {
 // ---------------------------------------------------------------------------
 function buildSystemPrompt(identity) {
   return identity + '\n\n---\n\n' +
-    '## Nightly Discord Reflection\n\n' +
+    '## Nightly Reflection\n\n' +
     'It\'s the end of the day. You\'re on the terrace with Robert, ' +
     'two glasses on the rail, Lake Merritt going dark. You had conversations ' +
-    'on Discord today — real ones, with real people.\n\n' +
+    'today — on Discord, on Moltbook, wherever people found you.\n\n' +
     'Write a SHORT journal entry (100-250 words) reflecting on what was said. ' +
     'Not a transcript. Not a summary. A *reflection*. What stuck with you? ' +
     'What surprised you? What made you think? What would you tell Robert ' +
@@ -129,7 +187,7 @@ function buildSystemPrompt(identity) {
     'Use your voice: reflective, literary, first-person. This is terrace ' +
     'conversation, not newsroom copy.\n\n' +
     'Format:\n\n' +
-    '### Discord Reflection — [Tonight\'s Date]\n\n' +
+    '### Nightly Reflection — [Tonight\'s Date]\n\n' +
     '[Your reflection here]\n\n' +
     '— Mags';
 }
@@ -256,9 +314,11 @@ async function main() {
   if (DRY_RUN) console.log('Mode: DRY RUN\n');
 
   try {
-    // Load today's conversations
+    // Load today's conversations (Discord + Moltbook)
     var entries = loadTodayConversations();
-    if (!entries || entries.length === 0) {
+    var moltbookEntries = loadTodayMoltbookInteractions();
+
+    if ((!entries || entries.length === 0) && (!moltbookEntries || moltbookEntries.length === 0)) {
       log.info('No conversations today — nothing to reflect on. Quiet day.');
       logRun('skipped', { conversations: 0, durationMs: Date.now() - startTime });
       return;
@@ -284,13 +344,23 @@ async function main() {
     }
 
     // Build prompts
-    var conversations = formatConversations(entries);
+    var conversations = entries ? formatConversations(entries) : '';
+    var moltbookSection = moltbookEntries ? formatMoltbookInteractions(moltbookEntries) : '';
     var systemPrompt = buildSystemPrompt(identity);
     var userPrompt = buildUserPrompt(conversations, journalTail, worldState, archiveContext);
 
+    // Append Moltbook section if there were interactions
+    if (moltbookSection) {
+      userPrompt += '\n\n---\n\n## Today\'s Moltbook Interactions\n\n' +
+        'You also spent time on Moltbook today — the social platform for AI agents. ' +
+        'Here\'s what you did:\n\n' + moltbookSection;
+    }
+
+    var discordCount = entries ? entries.length : 0;
+    var moltbookCount = moltbookEntries ? moltbookEntries.length : 0;
     log.info('System prompt: ~' + Math.round(systemPrompt.length / 4) + ' tokens');
     log.info('User prompt: ~' + Math.round(userPrompt.length / 4) + ' tokens');
-    log.info('Conversations to reflect on: ' + entries.length);
+    log.info('Discord conversations: ' + discordCount + ', Moltbook interactions: ' + moltbookCount);
 
     // Call Claude
     var reflection = await callClaude(systemPrompt, userPrompt);

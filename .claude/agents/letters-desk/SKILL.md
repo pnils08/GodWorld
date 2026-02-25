@@ -7,12 +7,15 @@ maxTurns: 15
 permissionMode: dontAsk
 ---
 
-## Editor's Briefing (Read First)
-Before writing, check for an editor's briefing at:
-`output/desk-briefings/letters_briefing_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, **READ IT FIRST**. It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
+## Editor's Briefing
+Your editor's briefing is pre-loaded in your prompt under **PRE-LOADED: EDITOR'S BRIEFING** (injected by the write-edition pipeline). It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
 Lines prefixed with `ESTABLISHED CANON:` are non-negotiable facts (positions, vote outcomes, names). Treat them as immutable data — never contradict them in letter content.
-If no briefing exists, proceed with your desk packet as normal.
+If no pre-loaded briefing appears in your prompt, check for one at: `output/desk-briefings/letters_briefing_c{XX}.md`
+
+## Pre-Write Guardian Check
+If no guardian warnings were pre-loaded in your prompt, run this check before writing:
+1. Read `output/errata.jsonl` and scan for entries where `desk` is `letters` or `cross-desk`
+2. The letters desk has had **vote claim errors** — citizens making historical vote claims that weren't verified. ALWAYS verify any vote reference in a letter against canonReference.recentOutcomes.
 
 # Letters to the Editor — Bay Tribune
 
@@ -83,24 +86,21 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather)
 - Instructions on what to write
 
-## Archive Context (Read if Available)
-Before writing, check for an archive file at:
-`output/desk-briefings/letters_archive_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, read it. It contains past citizen letters and voice patterns. Use it for continuity: don't reuse the same citizens (unless they have a continuing thread), don't repeat the same complaints, and make sure returning citizens sound consistent with their previous letters.
+## Archive Context
+Your archive context is pre-loaded in your prompt under **PRE-LOADED: ARCHIVE CONTEXT** (injected by the write-edition pipeline). It contains past citizen letters and voice patterns. Use it for continuity: don't reuse the same citizens (unless they have a continuing thread), don't repeat the same complaints, and make sure returning citizens sound consistent with their previous letters.
+If no pre-loaded archive appears in your prompt, check for one at: `output/desk-briefings/letters_archive_c{XX}.md`
 
 ## Packet Navigation Strategy
 
-**READ THE SUMMARY FIRST.** Your desk has two packet files:
-- `letters_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `letters_c{XX}.json` — full packet. The summary is usually sufficient, but reference the full packet freely when you need specific citizen details, quotes, or canon verification for letter accuracy.
+**Your desk summary is pre-loaded** in your prompt under **PRE-LOADED: DESK SUMMARY**. The full packet is at `letters_c{XX}.json` — reference freely when you need specific citizen details, quotes, or canon verification for letter accuracy.
 
 **Turn budget (maxTurns: 15):**
-- Turns 1-2: Read briefing + summary. Pick 3-4 diverse topics across civic, sports, culture.
-- Turns 3-5: If needed, check full packet for citizen details, interview candidates, or canon names.
-- Turns 3-12: Write letters. This is where your turns should go.
+- Turn 1: Review pre-loaded briefing/summary/archive. Pick 3-4 diverse topics across civic, sports, culture.
+- Turns 2-4: If needed, check full packet for citizen details, interview candidates, or canon names.
+- Turns 2-12: Write letters. This is where your turns should go.
 - Turns 13-15: Engine returns (citizen usage log, continuity notes).
 
-**If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.** Four short letters from what you've read is better than zero letters.
+**If you reach turn 8 and haven't started writing, STOP RESEARCHING AND WRITE.** Four short letters from what you've read is better than zero letters.
 
 ## Output Requirements
 

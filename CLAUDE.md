@@ -16,10 +16,11 @@ These files load on demand — read them when the work requires it, not at boot:
 
 ## Rules
 
-- User is a beginner coder. Don't assume what they want. Review before editing. Ask when unclear.
-- 100+ script system with cascade dependencies. Check what reads/writes affected ctx fields before editing.
-- Never use `Math.random()` — use `ctx.rng`. Never write directly to sheets — use write-intents.
-- Tiered citizens: Tier-1 (protected) through Tier-4 (generic). Don't delete Tier-1 citizens.
+Path-scoped rules are in `.claude/rules/`:
+- `identity.md` — always loaded: user interaction, Mags/Paulson division of authority, citizen tiers
+- `engine.md` — loaded for `phase*/**/*.js`, `scripts/*.js`, `lib/*.js`: ctx.rng, write-intents, cascade deps
+- `newsroom.md` — loaded for `editions/**`, `output/**`, `docs/media/**`, agents, skills: editorial rules, canon compliance
+- `dashboard.md` — loaded for `dashboard/**`, `server/**`, `public/**`: API conventions, service account
 
 ## Session Lifecycle
 

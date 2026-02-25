@@ -5,8 +5,12 @@
 
 # Node.js / NPM
 node_modules/**
+**/node_modules/**
 package.json
 package-lock.json
+
+# Dashboard (Node.js React app, not Apps Script)
+dashboard/**
 
 # OpenClaw skills (Node.js, not Apps Script)
 openclaw-skills/**

@@ -133,21 +133,85 @@ async function getCalendarContext(cycle) {
 // ════════════════════════════════════════════════════════════════════════════
 
 /**
+ * Check if a name string represents an institution rather than a person.
+ * Institutions should not be routed to the Simulation_Ledger.
+ */
+const INSTITUTION_KEYWORDS = [
+  'church', 'temple', 'mosque', 'synagogue', 'cathedral', 'chapel',
+  'center', 'centre', 'foundation', 'institute', 'association',
+  'council', 'coalition', 'alliance', 'society', 'corporation',
+  'authority', 'commission', 'department', 'bureau', 'office of',
+  'university', 'college', 'school', 'academy', 'library',
+  'hospital', 'clinic', 'medical center',
+  'baptist', 'methodist', 'presbyterian', 'lutheran', 'episcopal',
+  'buddhist', 'meditation', 'islamic'
+];
+
+function isInstitution(name) {
+  if (!name) return false;
+  const lower = name.toLowerCase();
+  return INSTITUTION_KEYWORDS.some(kw => lower.includes(kw));
+}
+
+/**
+ * Strip common title prefixes from citizen names.
+ * Returns { title, cleanedName } where title can be used as occupation.
+ */
+const TITLE_PREFIXES = [
+  'dr.', 'dr ', 'rev.', 'rev ', 'father ', 'pastor ', 'deacon ',
+  'councilmember ', 'councilwoman ', 'councilman ',
+  'director ', 'chief ', 'deputy ', 'officer ',
+  'sculptor ', 'muralist ', 'artist ', 'musician ', 'poet ',
+  'gallery owner ', 'shop owner ', 'bar owner ', 'restaurant owner ',
+  'coach ', 'manager ', 'captain '
+];
+
+function stripTitlePrefix(name) {
+  if (!name) return { title: '', cleanedName: name };
+  const lower = name.toLowerCase();
+  for (const prefix of TITLE_PREFIXES) {
+    if (lower.startsWith(prefix)) {
+      const title = name.substring(0, prefix.length).trim();
+      const cleanedName = name.substring(prefix.length).trim();
+      return { title, cleanedName };
+    }
+  }
+  return { title: '', cleanedName: name };
+}
+
+/**
  * Parse citizen name field which may contain demographics.
  * Handles formats:
  *   "Bruce Wright, 48, Downtown, Line cook"  → full demographics
  *   "Gloria Santos, Fruitvale, Teacher"       → no age
  *   "Denise Carter"                           → name only
  *   "Gallery Owner Mei Chen"                  → name with title prefix
+ *   "St. Columba Catholic Church"             → institution (flagged, not a citizen)
+ *
+ * v1.2: Added title stripping and institution detection
  *
  * @param {string} fullField - The CitizenName field value
- * @returns {{ first: string, last: string, age: string, neighborhood: string, occupation: string }}
+ * @returns {{ first: string, last: string, age: string, neighborhood: string, occupation: string, isInstitution: boolean }}
  */
 function parseCitizenDemographics(fullField) {
-  const result = { first: '', last: '', age: '', neighborhood: '', occupation: '' };
+  const result = { first: '', last: '', age: '', neighborhood: '', occupation: '', isInstitution: false };
   if (!fullField) return result;
 
+  // Check if this is an institution, not a person
+  if (isInstitution(fullField)) {
+    result.isInstitution = true;
+    result.first = fullField;
+    return result;
+  }
+
   const parts = fullField.split(',').map(p => p.trim());
+
+  // Strip title prefix from the name portion (first part before any comma)
+  const { title, cleanedName } = stripTitlePrefix(parts[0]);
+  if (title) {
+    parts[0] = cleanedName;
+    result.occupation = title.replace(/[.]$/, '').trim(); // Use title as fallback occupation
+  }
 
   if (parts.length >= 4) {
     // Full format: "Bruce Wright, 48, Downtown, Line cook"
@@ -156,7 +220,7 @@ function parseCitizenDemographics(fullField) {
     result.last = nameParts.slice(1).join(' ') || '';
     result.age = parts[1] || '';
     result.neighborhood = parts[2] || '';
-    result.occupation = parts.slice(3).join(', ').trim();
+    result.occupation = parts.slice(3).join(', ').trim() || result.occupation;
   } else if (parts.length === 3) {
     // "Name, Neighborhood, Occupation" or "Name, Age, Neighborhood"
     const nameParts = parts[0].split(/\s+/);
@@ -169,7 +233,7 @@ function parseCitizenDemographics(fullField) {
       result.neighborhood = parts[2];
     } else {
       result.neighborhood = parts[1];
-      result.occupation = parts[2];
+      result.occupation = parts[2] || result.occupation;
     }
   } else if (parts.length === 2) {
     // "Name, Neighborhood" or "Name, Age"
@@ -537,6 +601,21 @@ async function routeCitizenUsageToIntake(cycle, cal) {
 
     // Parse full demographics from citizen name field
     const demo = parseCitizenDemographics(citizenName);
+
+    // Skip institutions — they're not citizens
+    if (demo.isInstitution) {
+      const colLetter = String.fromCharCode(65 + routedCol);
+      routeUpdates.push({ range: `Citizen_Media_Usage!${colLetter}${i + 1}`, values: [['SKIP-INST']] });
+      continue;
+    }
+
+    // Skip single-name entries with no last name (too ambiguous to match)
+    if (!demo.last) {
+      const colLetter = String.fromCharCode(65 + routedCol);
+      routeUpdates.push({ range: `Citizen_Media_Usage!${colLetter}${i + 1}`, values: [['SKIP-NONAME']] });
+      continue;
+    }
+
     const exists = citizenExistsInLedger(ledgerData, demo.first, demo.last);
 
     if (exists) {

@@ -25,12 +25,16 @@ After writing, update your memory with:
 
 **Memory is for roster accuracy and voice continuity.** Don't store full game logs. Store what keeps the next edition consistent with this one.
 
-## Editor's Briefing (Read First)
-Before writing, check for an editor's briefing at:
-`output/desk-briefings/sports_briefing_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, **READ IT FIRST**. It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
+## Editor's Briefing
+Your editor's briefing is pre-loaded in your prompt under **PRE-LOADED: EDITOR'S BRIEFING** (injected by the write-edition pipeline). It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
 Lines prefixed with `ESTABLISHED CANON:` are non-negotiable facts (positions, vote outcomes, names). Treat them as immutable data — never contradict them.
-If no briefing exists, proceed with your desk packet as normal.
+If no pre-loaded briefing appears in your prompt, check for one at: `output/desk-briefings/sports_briefing_c{XX}.md`
+
+## Pre-Write Guardian Check
+If no guardian warnings were pre-loaded in your prompt, run this check before writing:
+1. Read `output/errata.jsonl` and scan for entries where `desk` is `sports` or `cross-desk`
+2. Pay special attention to entries with `recurrence` — these are patterns that keep repeating
+3. The sports desk has recurring **position errors** and **real-name leaks**. ALWAYS verify player positions against truesource_reference.json and check names against REAL_NAMES_BLOCKLIST.md.
 
 ## Voice Reference Files (Read in Turn 1)
 Before writing, read the voice files for your reporters. These contain exemplar paragraphs from published archive work and DO NOT constraints from past errors:
@@ -131,23 +135,20 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather)
 - Instructions on what to write
 
-## Archive Context (Read if Available)
-Before writing, check for an archive file at:
-`output/desk-briefings/sports_archive_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, read it. It contains past coverage from the Tribune archive — player history, citizen quotes, coverage angles used before. Use it for continuity: don't repeat coverage angles, don't contradict established character details, and build on what's already been reported.
+## Archive Context
+Your archive context is pre-loaded in your prompt under **PRE-LOADED: ARCHIVE CONTEXT** (injected by the write-edition pipeline). It contains past coverage from the Tribune archive — player history, citizen quotes, coverage angles used before. Use it for continuity: don't repeat coverage angles, don't contradict established character details, and build on what's already been reported.
+If no pre-loaded archive appears in your prompt, check for one at: `output/desk-briefings/sports_archive_c{XX}.md`
 
 ## Packet Navigation Strategy
 
-**READ THE SUMMARY FIRST.** Your desk has two packet files:
-- `sports_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `sports_c{XX}.json` — full packet. Reference freely when you need full roster details, citizen archive, or extended stats.
+**Your desk summary is pre-loaded** in your prompt under **PRE-LOADED: DESK SUMMARY**. The full packet is at `sports_c{XX}.json` — reference freely when you need full roster details, citizen archive, or extended stats.
 
 **Turn budget (maxTurns: 15):**
-- Turns 1-2: Read briefing + summary. This gives you everything you need to plan articles.
-- Turns 3-12: Write articles. This is where your turns should go.
+- Turn 1: Read voice files + review pre-loaded briefing/summary/archive. Plan your articles.
+- Turns 2-12: Write articles. This is where your turns should go.
 - Turns 13-15: Engine returns (article table, storylines, citizen log, continuity notes).
 
-**If you reach turn 12 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the summary.
+**If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the pre-loaded summary.
 
 ## Output Requirements
 

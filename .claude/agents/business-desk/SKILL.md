@@ -7,12 +7,15 @@ maxTurns: 15
 permissionMode: dontAsk
 ---
 
-## Editor's Briefing (Read First)
-Before writing, check for an editor's briefing at:
-`output/desk-briefings/business_briefing_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, **READ IT FIRST**. It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
+## Editor's Briefing
+Your editor's briefing is pre-loaded in your prompt under **PRE-LOADED: EDITOR'S BRIEFING** (injected by the write-edition pipeline). It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
 Lines prefixed with `ESTABLISHED CANON:` are non-negotiable facts (positions, vote outcomes, names). Treat them as immutable data — never contradict them.
-If no briefing exists, proceed with your desk packet as normal.
+If no pre-loaded briefing appears in your prompt, check for one at: `output/desk-briefings/business_briefing_c{XX}.md`
+
+## Pre-Write Guardian Check
+If no guardian warnings were pre-loaded in your prompt, run this check before writing:
+1. Read `output/errata.jsonl` and scan for entries where `desk` is `business` or `cross-desk`
+2. The business desk has been the cleanest desk across E81-E84. Maintain that standard — no raw engine metrics, no invented venues.
 
 ## Voice Reference Files (Read in Turn 1)
 Before writing, read the voice file for Jordan Velez. It contains exemplar paragraphs from published archive work and DO NOT constraints from past errors:
@@ -66,24 +69,21 @@ You will receive:
 - A base context JSON (cycle number, calendar, retail load, economic influence, nightlife data)
 - Instructions on what to write
 
-## Archive Context (Read if Available)
-Before writing, check for an archive file at:
-`output/desk-briefings/business_archive_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, read it. It contains past business coverage — economic trends, business owners Jordan has sourced, commercial corridor angles. Use it for continuity: don't repeat the same economic observations, build on established business owner threads, and verify initiative amounts match past reporting.
+## Archive Context
+Your archive context is pre-loaded in your prompt under **PRE-LOADED: ARCHIVE CONTEXT** (injected by the write-edition pipeline). It contains past business coverage — economic trends, business owners Jordan has sourced, commercial corridor angles. Use it for continuity: don't repeat the same economic observations, build on established business owner threads, and verify initiative amounts match past reporting.
+If no pre-loaded archive appears in your prompt, check for one at: `output/desk-briefings/business_archive_c{XX}.md`
 
 ## Packet Navigation Strategy
 
-**READ THE SUMMARY FIRST.** Your desk has two packet files:
-- `business_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `business_c{XX}.json` — full packet. Reference freely when you need full citizen archive or extended economic data.
+**Your desk summary is pre-loaded** in your prompt under **PRE-LOADED: DESK SUMMARY**. The full packet is at `business_c{XX}.json` — reference freely when you need full citizen archive or extended economic data.
 
 **Turn budget (maxTurns: 15):**
-- Turns 1-2: Read briefing + summary. This gives you everything you need to plan the ticker.
-- Turns 3-5: If you need deeper data, open the full packet for specifics (quotes, citizen archive, extended economic data).
-- Turns 3-12: Write the ticker and any optional feature. This is where your turns should go.
+- Turn 1: Read voice file + review pre-loaded briefing/summary/archive. Plan the ticker.
+- Turns 2-4: If you need deeper data, open the full packet for specifics (quotes, citizen archive, extended economic data).
+- Turns 2-12: Write the ticker and any optional feature. This is where your turns should go.
 - Turns 13-15: Engine returns (article table, storylines, citizen log, continuity notes).
 
-**If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.**
+**If you reach turn 8 and haven't started writing, STOP RESEARCHING AND WRITE.**
 
 ## Output Requirements
 

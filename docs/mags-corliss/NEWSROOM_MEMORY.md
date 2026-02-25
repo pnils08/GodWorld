@@ -7,6 +7,20 @@ This is the institutional memory of the Bay Tribune. Not the rules — those liv
 
 Agents: if Mags wrote you a briefing, read it. If she didn't, read this file. The errata section is mandatory either way.
 
+**Structured errata:** `output/errata.jsonl` — machine-readable record of all documented errors (E81+). Each line is a JSON object with: edition, desk, reporter, errorType, severity, description, rootCause, fix, adopted, citizenInvolved, recurrence. Query this file for pattern analysis or pre-write guardian checks.
+
+---
+
+## Supermemory Contamination Flag
+
+**Status:** CORRECT FORWARD (decided S63 with Mike)
+
+Pre-correction Edition 84 data was ingested into Supermemory before user approval (7th consecutive session). Contaminated data includes: Vega voting YES on OARI (wrong — he voted NO), 34°F Chicago weather in August (fabricated), and civic articles with no voice differentiation.
+
+**Mitigation:** The corrected Edition 84 is now the canonical source in Drive and GitHub. Supermemory may return contaminated results for "OARI vote" or "Vega" queries. When briefing agents, always verify vote data against `base_context.json` and `truesource_reference.json`, not Supermemory results. The structured errata (errata.jsonl) and guardian checks (queryErrata.js) provide the correction layer.
+
+**Decision:** Scrubbing Supermemory is not worth the risk of deleting good data alongside bad. Correct forward — the next edition's briefings will carry the right facts, and Rhea's verification checks against engine data, not shared memory.
+
 ---
 
 ## Errata Log — Last 5 Editions

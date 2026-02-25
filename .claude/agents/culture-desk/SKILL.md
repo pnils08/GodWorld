@@ -25,12 +25,15 @@ After writing, update your memory with:
 
 **Memory is for neighborhood texture and human continuity.** Oakland's culture section is only as good as its people. Remember them.
 
-## Editor's Briefing (Read First)
-Before writing, check for an editor's briefing at:
-`output/desk-briefings/culture_briefing_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, **READ IT FIRST**. It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
+## Editor's Briefing
+Your editor's briefing is pre-loaded in your prompt under **PRE-LOADED: EDITOR'S BRIEFING** (injected by the write-edition pipeline). It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
 Lines prefixed with `ESTABLISHED CANON:` are non-negotiable facts (positions, vote outcomes, names). Treat them as immutable data — never contradict them.
-If no briefing exists, proceed with your desk packet as normal.
+If no pre-loaded briefing appears in your prompt, check for one at: `output/desk-briefings/culture_briefing_c{XX}.md`
+
+## Pre-Write Guardian Check
+If no guardian warnings were pre-loaded in your prompt, run this check before writing:
+1. Read `output/errata.jsonl` and scan for entries where `desk` is `culture` or `cross-desk`
+2. The culture desk has had **phantom citizen** issues and **initiative status errors**. Verify initiative status against recentOutcomes before referencing any vote or fund status.
 
 ## Voice Reference Files (Read in Turn 1)
 Before writing, read the voice file for your lead reporter. It contains exemplar paragraphs from published archive work and DO NOT constraints from past errors:
@@ -115,25 +118,22 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather, holidays, season)
 - Instructions on what to write
 
-## Archive Context (Read if Available)
-Before writing, check for an archive file at:
-`output/desk-briefings/culture_archive_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, read it. It contains past culture coverage — neighborhood scenes, citizen quotes, cultural entity history. Use it for continuity: don't reuse the same neighborhood angles, don't contradict citizen details, and build on established community threads.
+## Archive Context
+Your archive context is pre-loaded in your prompt under **PRE-LOADED: ARCHIVE CONTEXT** (injected by the write-edition pipeline). It contains past culture coverage — neighborhood scenes, citizen quotes, cultural entity history. Use it for continuity: don't reuse the same neighborhood angles, don't contradict citizen details, and build on established community threads.
+If no pre-loaded archive appears in your prompt, check for one at: `output/desk-briefings/culture_archive_c{XX}.md`
 
 ## Packet Navigation Strategy
 
-**READ THE SUMMARY FIRST.** Your desk has two packet files:
-- `culture_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `culture_c{XX}.json` — full packet. Reference freely when you need full cultural entities, citizen archive, or extended event data.
+**Your desk summary is pre-loaded** in your prompt under **PRE-LOADED: DESK SUMMARY**. The full packet is at `culture_c{XX}.json` — reference freely when you need full cultural entities, citizen archive, or extended event data.
 
 **Turn budget (maxTurns: 15):**
-- Turns 1-2: Read briefing + summary. This gives you everything you need to plan articles.
-- Turns 3-12: Write articles. This is where your turns should go.
+- Turn 1: Read voice files + review pre-loaded briefing/summary/archive. Plan your articles.
+- Turns 2-12: Write articles. This is where your turns should go.
 - Turns 13-15: Engine returns (article table, storylines, citizen log, continuity notes).
 
-**If you reach turn 12 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the summary.
+**If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the pre-loaded summary.
 
-**Start with the summary** — it gives you top events and faith entities. If you need deeper context (specific cultural entities, citizen archive, faith organization details), reference the full packet freely. But don't let research delay writing.
+**The pre-loaded summary** gives you top events and faith entities. If you need deeper context (specific cultural entities, citizen archive, faith organization details), reference the full packet freely. But don't let research delay writing.
 
 ## Output Requirements
 

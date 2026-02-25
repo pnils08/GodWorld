@@ -25,12 +25,15 @@ After writing, update your memory with:
 
 **Memory is for continuity across the bureau.** Selena's stats and Talia's people need to stay consistent edition to edition.
 
-## Editor's Briefing (Read First)
-Before writing, check for an editor's briefing at:
-`output/desk-briefings/chicago_briefing_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, **READ IT FIRST**. It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
+## Editor's Briefing
+Your editor's briefing is pre-loaded in your prompt under **PRE-LOADED: EDITOR'S BRIEFING** (injected by the write-edition pipeline). It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
 Lines prefixed with `ESTABLISHED CANON:` are non-negotiable facts (positions, vote outcomes, names). Treat them as immutable data — never contradict them.
-If no briefing exists, proceed with your desk packet as normal.
+If no pre-loaded briefing appears in your prompt, check for one at: `output/desk-briefings/chicago_briefing_c{XX}.md`
+
+## Pre-Write Guardian Check
+If no guardian warnings were pre-loaded in your prompt, run this check before writing:
+1. Read `output/errata.jsonl` and scan for entries where `desk` is `chicago` or `cross-desk`
+2. The Chicago desk has recurring **real-name leaks** (E80 Billy Donovan, E81 Jrue Holiday, E82 Josh Smith). ALWAYS check player names against `docs/media/REAL_NAMES_BLOCKLIST.md` before writing.
 
 ## Voice Reference Files (Read in Turn 1)
 Before writing, read the voice file for your beat reporter. It contains exemplar paragraphs and DO NOT constraints from past errors:
@@ -124,23 +127,20 @@ You will receive:
 - A base context JSON (cycle number, calendar)
 - Instructions on what to write
 
-## Archive Context (Read if Available)
-Before writing, check for an archive file at:
-`output/desk-briefings/chicago_archive_c{XX}.md` (where {XX} is the current cycle number)
-If it exists, read it. It contains past Chicago coverage — Bulls roster history, Paulson thread developments, Talia's neighborhood sources. Use it for continuity: don't contradict past player details, build on Paulson's narrative arc, and remember who Talia has already quoted.
+## Archive Context
+Your archive context is pre-loaded in your prompt under **PRE-LOADED: ARCHIVE CONTEXT** (injected by the write-edition pipeline). It contains past Chicago coverage — Bulls roster history, Paulson thread developments, Talia's neighborhood sources. Use it for continuity: don't contradict past player details, build on Paulson's narrative arc, and remember who Talia has already quoted.
+If no pre-loaded archive appears in your prompt, check for one at: `output/desk-briefings/chicago_archive_c{XX}.md`
 
 ## Packet Navigation Strategy
 
-**READ THE SUMMARY FIRST.** Your desk has two packet files:
-- `chicago_summary_c{XX}.json` — compact summary (10-20KB). **Start here.**
-- `chicago_c{XX}.json` — full packet. Reference freely when you need full roster, citizen archive, or extended stats.
+**Your desk summary is pre-loaded** in your prompt under **PRE-LOADED: DESK SUMMARY**. The summary includes sportsFeeds with team records and player stats. The full packet is at `chicago_c{XX}.json` — reference freely when you need full roster, citizen archive, or extended stats.
 
 **Turn budget (maxTurns: 15):**
-- Turns 1-2: Read briefing + summary. The summary includes sportsFeeds with team records and player stats.
-- Turns 3-12: Write articles. This is where your turns should go.
+- Turn 1: Read voice files + review pre-loaded briefing/summary/archive. Plan your articles.
+- Turns 2-12: Write articles. This is where your turns should go.
 - Turns 13-15: Engine returns (article table, storylines, citizen log, continuity notes).
 
-**If you reach turn 12 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the summary.
+**If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the pre-loaded summary.
 
 ## Output Requirements
 

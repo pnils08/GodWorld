@@ -17,7 +17,7 @@ This is my institutional memory. I read this file at the start of every session 
 | Temescal Community Health Center | INIT-005 | PASSED | $45M | C80 | 6-2 | Crane absent. Ashford and Chen voted NO. Site selection phase (C75-78). | Implementation tracking |
 | West Oakland Stabilization Fund | INIT-001 | PASSED | $28M | C78 | 6-3 | Crane voted YES remotely (crossover). 342 applications, 47 approved ($4.2M first round), 31 denied, 110 pending, 154 unreviewed. Target: all reviews by Oct 2041. Second round: 50-70 approvals, $5-7M. | Check delivery, second round |
 | Fruitvale Transit Hub Phase II | INIT-003 | ACTIVE | $230M | C86 (projected) | — | Visioning sessions C83-86. Transit and housing focus. | Visioning completion, council vote |
-| Port of Oakland Green Modernization | INIT-007 | BACKGROUND | — | C88-90 (projected) | — | Federal grant pending. External decision. | Grant decision |
+| Port of Oakland Green Modernization | INIT-004 | PIPELINE | — | C88-90 (projected) | — | Federal grant pending. External decision. Not yet formally proposed in-world. | Grant decision |
 
 ### Council Composition (Current)
 

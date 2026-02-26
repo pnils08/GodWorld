@@ -386,3 +386,6 @@ All 4 journalism enhancements implemented:
 
 ### 2026-02-24 (2026-02-25T03:11:38.517Z)
 - This civic vs sports identity tension could be a defining Oakland story - very different from other dynasty cities
+
+### 2026-02-25 (2026-02-25T08:09:20.370Z)
+- P Slayer's award-winning reputation is clearly established canon - need to make sure this comes through in future coverage and character interactions

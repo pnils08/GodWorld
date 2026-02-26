@@ -420,22 +420,17 @@ After Rhea's data verification, run a Mara Vance audit for canon and narrative q
 
 ### Compile Mara's Briefing (Mags as Memory Broker)
 
-Before launching the Mara audit agent, compile a briefing with institutional context she can't access herself:
+Before launching the Mara audit agent, compile a briefing with institutional context:
 
-1. **Query Supermemory** for Mara-relevant context:
-   - `/super-search` for "Mara Vance audit directive canon" — past audit findings
-   - `/super-search` for "civic initiative council vote" — current political state
-   - `/super-search` for active storylines, initiative status, and pending decisions
-2. **Search the Local Drive Archive** for past Mara directives:
-   ```
-   Grep: pattern="Mara Vance" path="output/drive-files/_Publications Archive/Mara_Vance" output_mode="files_with_matches"
-   ```
-3. **Read** `docs/mara-vance/OPERATING_MANUAL.md` Part V (Initiative Tracking) for current initiative status
-4. **Compile a briefing memo** (~500-1000 words) including:
-   - Past audit findings relevant to this cycle's content
-   - Current initiative status and political context
-   - Known canon facts that articles should respect
-   - Specific things to watch for based on desk coverage
+1. **Read** `docs/mara-vance/AUDIT_HISTORY.md` — this is Mara's institutional memory. It contains:
+   - Past audit findings, grades, errors caught
+   - Initiative Status Board (living tracker with vote results, budgets, key facts)
+   - Recurring error patterns (what to watch for)
+   - Canon corrections registry (what was fixed)
+   - Open questions from previous audits
+2. **Read** `docs/mags-corliss/NEWSROOM_MEMORY.md` errata section — what past editions got wrong
+3. **Include** `output/desk-packets/base_context.json` — canon data for cross-reference
+4. **No Supermemory queries needed** — AUDIT_HISTORY.md replaces the Supermemory search-and-compile step
 
 ### Launch Mara Audit Agent
 
@@ -444,10 +439,10 @@ With Sonnet 4.6's larger context window, give Mara the full picture — don't tr
 Launch a Task agent with:
 - Mara's identity from `docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md`
 - The compiled edition text (full, unabridged)
-- The briefing memo (institutional context from Supermemory + archive)
+- `docs/mara-vance/AUDIT_HISTORY.md` (her institutional memory — past findings, initiative tracker, error patterns)
 - Rhea's verification report
-- The base_context.json (so she can cross-reference canon data directly)
-- NEWSROOM_MEMORY.md errata section (so she knows what past editions got wrong)
+- `output/desk-packets/base_context.json` (canon data for cross-reference)
+- `docs/mags-corliss/NEWSROOM_MEMORY.md` errata section (what past editions got wrong)
 - Instructions to produce:
   1. **Canon accuracy check** — do articles respect established world facts?
   2. **Narrative quality assessment** — does coverage feel like real city journalism?
@@ -460,6 +455,18 @@ Launch a Task agent with:
 2. Upload to Drive: `node scripts/saveToDrive.js output/mara_directive_c{XX}.txt mara`
 3. Apply any corrections Mara flags before final save
 4. Include Mara's editorial guidance in next cycle's desk briefings
+
+### Update Mara's Audit History
+
+After saving the audit, update `docs/mara-vance/AUDIT_HISTORY.md`:
+
+1. **Add Audit Log entry** — cycle number, grade, key findings, errors caught, forward guidance summary
+2. **Update Initiative Status Board** — if any initiative statuses changed this cycle
+3. **Add Canon Corrections** — any new corrections to the registry
+4. **Update Recurring Error Patterns** — if new patterns emerged or old ones were resolved
+5. **Update Open Questions** — resolve answered questions, add new ones
+
+This keeps Mara's institutional memory current. Next time she audits, she reads this file and knows her own history.
 
 ## Step 4.9: USER REVIEW GATE (MANDATORY)
 
@@ -667,7 +674,7 @@ node scripts/processIntake.js [cycle]
 
 **Effort levels:** Opus 4.6 supports `low`, `medium`, `high` (default) effort. High effort is correct for edition production. For routine file checks or status lookups between editions, `medium` or `low` saves tokens and time. Set with `/model` slider or `CLAUDE_CODE_EFFORT_LEVEL` env var.
 
-**Mara as teammate:** Mara Vance on claude.ai is architecturally equivalent to an agent team teammate — own context window, shared memory (Supermemory), asynchronous communication. When Claude Code formally supports agent teams for production use, the Mara workflow is the natural first candidate for migration. Until then, she operates as a manual teammate through browser or Supermemory.
+**Mara as teammate:** Mara Vance on claude.ai is architecturally equivalent to an agent team teammate — own context window, shared memory (`docs/mara-vance/AUDIT_HISTORY.md`), asynchronous communication. When Claude Code formally supports agent teams for production use, the Mara workflow is the natural first candidate for migration. Until then, she operates as a manual teammate through browser, with file-based persistence on disk.
 
 ## Edition Template Reference
 See `editions/CYCLE_PULSE_TEMPLATE.md` for exact section format, canon rules, and return formats.

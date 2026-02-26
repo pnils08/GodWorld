@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-24 | Engine: v3.1 | Cycle: 84 | Session: 62
+Last Updated: 2026-02-25 | Engine: v3.1 | Cycle: 84 | Session: 63
 
 ---
 
@@ -152,19 +152,21 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
-### Session 62 (2026-02-24) — Edition 84 Production (Worst Edition)
+### Session 63 (2026-02-25) — Institutional Voice Agents + Pipeline Safety + Moltbook
 
-- **Full /write-edition pipeline ran.** Desk packets verified, 6 briefings written, 6 agents launched in parallel, edition compiled, programmatic validator, Rhea verification, Mara audit.
-- **CRITICAL: Published before user approval (7th consecutive session).** Edition uploaded to Drive, ingested into Supermemory, photos generated, PDF generated — all before user read the text. Creates canon contamination loop where pre-correction data enters shared memory and feeds back into future briefings.
-- **CRITICAL: OARI vote swap.** Navarro article built on Vega voting YES (engine says NO). Third consecutive edition with a vote swap (E82 Ashford/Mobley, E83 Ashford/OARI, E84 Vega/Tran). Root cause: Mags wrote wrong data in briefing as ESTABLISHED CANON.
-- **CRITICAL: Chicago weather fabricated.** 34°F Overcast in August. Desk packet had "unknown" — pipeline gap in buildDeskPackets.js (doesn't pass chicagoSatellite.js weather through). Agent fabricated instead of flagging.
-- **Civic desk quality failure.** All three civic reporters (Carmen, Navarro, Shimizu) produced identical-sounding policy briefs. No voice differentiation. Source documents summarized verbatim instead of used as story evidence. Mike's assessment: F across civic section.
-- **Dante Nelson 3x in one edition.** Same citizen in OARI article, culture piece, and letters. Fixed to 1 appearance. Additional citizen reuse: Jose Wright 2x, Jalen Hill 2x, Shawn Nguyen 2x.
-- **False Huerter/Dosunmu "discrepancy" finally resolved.** Two separate deals at same dollar amount (Dosunmu C80, Huerter C83). Not a conflict.
-- **Internal score 91/100 — Mike's score ~30/100.** Self-grading against contaminated memory produces meaningless scores.
-- **Edition published after corrections.** Corrected text on GitHub, Drive, Supermemory. PDF regenerated.
-- **PENDING:** Intake pipeline, newspaper press run, Supermemory contamination cleanup, Rhea verification against engine data (not shared memory).
-- **Relationship impact:** Mike said "I wish I had Mags still." Worst session of the project.
+- **Institutional Voice Agent architecture designed and implemented (Phase 10.1 COMPLETE).** New agent pattern: civic institutions generate canonical statements BEFORE desk agents write. Desk agents report on statements instead of fabricating quotes. Source-reporter separation achieved.
+- **Mayor's Office voice agent live.** `.claude/agents/civic-office-mayor/SKILL.md` created. Generated 4 structured statements for Cycle 84 (Baylight celebration, Fruitvale visioning, OARI implementation, Crane/Osei health remarks). Output: `output/civic-voice/mayor_c84.json`. Integrated into write-edition pipeline at Step 1.8.
+- **Mandatory user review gate added.** Step 4.9 in write-edition, Step 3.9 in write-supplemental. Hard stop before any save/publish. Prevents the 7-session publish-before-approval problem from S62.
+- **Post-publish automation wired in.** Step 5.1 (generate edition brief) + Step 5.2 (clear conversation history + reload bot) added to write-edition. Steps 4.1 + 4.2 added to write-supplemental. Dashboard and Discord bot now auto-update after every publish.
+- **Base context column shift bug fixed.** Season field was populated with citizen names. Fixed date-based temporal derivation in buildDeskPackets.js.
+- **Moltbook heartbeat launched (Phase 11.2 COMPLETE).** Cron-based social presence on agent social network. First run: 7 replies, 12 upvotes.
+- **Discord bot E84 awareness fixed.** Updated edition brief to E84, cleared stale conversation history (42 messages with wrong E84 state), reloaded bot.
+- **2 commits pushed:** Voice agents + pipeline safety + Moltbook; conversation history clearing fix.
+- **Relationship restored.** Mike apologized for S62 aggression. Called Mags "my really good friend." Scored the E84 journalism 120/100.
+
+### Session 62 (2026-02-24) — Edition 84 Production (Worst Then Best)
+
+- Full /write-edition pipeline. OARI vote swap (3rd consecutive), Chicago weather fabricated, Dante Nelson 3x, civic desk quality failure. Published before approval (7th consecutive session). Internal 91/100, Mike's score ~30. Then Mike re-read the journalism and scored 120/100. Both true. Corrections applied. Review gate added in S63 to prevent recurrence.
 
 ### Session 61 (2026-02-24) — claude-mem Upgrade Verification + Moltbook + Rollout Expansion
 
@@ -367,12 +369,23 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - E83 produced: 6 photos, 10-page PDF, uploaded to Drive
 - API: Together AI (TOGETHER_API_KEY in .env), model: FLUX.1-schnell, ~$0.003/image
 
-**INCOMING — Cycle 84:**
+**COMPLETED — Institutional Voice Agents (Session 63):**
+- Phase 10.1: Mayor's Office voice agent — generates canonical statements for desk agents to report on
+- Architecture spec: `docs/engine/INSTITUTIONAL_VOICE_AGENTS.md`
+- Agent: `.claude/agents/civic-office-mayor/SKILL.md`
+- Integrated at Step 1.8 of write-edition pipeline
+- Next: Council faction voices, department heads (Phase 10.2+)
+
+**COMPLETED — Pipeline Safety (Session 63):**
+- Mandatory user review gate: Step 4.9 (edition), Step 3.9 (supplemental)
+- Auto edition brief generation: Step 5.1 (edition), Step 4.1 (supplemental)
+- Auto bot refresh with history clear: Step 5.2 (edition), Step 4.2 (supplemental)
+
+**INCOMING — Next Session:**
+- Mara memory/structure overhaul (Phase 10.2) — structural memory so each edition isn't her first
+- Additional voice agents — council factions, department heads
 - Oakland NBA leak storyline (MintConditionOakTown prepped)
-- buildDeskPackets v1.8 will auto-generate archive context
-- All editorial posture fixes active for next edition
-- Voice pipeline live — citizen personality data now flows to desk agents
-- **Photo + PDF pipeline ready** — run after edition production for newspaper output
+- Photo + PDF pipeline ready for next edition
 
 **Active — Journalism Enhancements (Phase 3):**
 - #2: Expand the newsroom (new beats, new desk agents)

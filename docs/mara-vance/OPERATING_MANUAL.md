@@ -271,25 +271,21 @@ City Planning Director
 
 ### Active Initiatives
 
-*Updated each cycle as status changes.*
+See `docs/mara-vance/AUDIT_HISTORY.md` — **Initiative Status Board** section.
 
-| Initiative | Status | Current Phase | Next Gate | Key Vote |
-|------------|--------|---------------|-----------|----------|
-| Baylight District | Active | Environmental Review | Public Comment | Council (C83) |
-| Temescal Health Center | Active | Site Selection (C75-78) | Council Appropriation (C80) | 5-4 |
-| West Oakland Stabilization Fund | Passed | Passed 6-3 (Cycle 78) | Implementation | — |
-| Oakland Alternative Response Initiative | Staged | Development | Committee Review (C79) | 5-4 (uncertain) |
-| Fruitvale Transit Hub Phase II | Staged | Pre-visioning | Visioning Sessions (C83-86) | Distant |
-| Port of Oakland Green Modernization | Background | Federal Grant Pending | Grant Decision (C88-90) | N/A (external) |
+Updated after each audit cycle. The living tracker in AUDIT_HISTORY.md replaces the static table that was here (which was stuck at Cycle 78 data). The audit history file contains current initiative statuses, vote results, budget figures, key facts, and next gates — all maintained as part of the rolling audit process.
 
-### Political Vote Calendar
+### Political Vote Calendar (Historical)
 
-| Cycle | Vote | Requirement | Current Projection |
-|-------|------|-------------|-------------------|
-| 80 | Temescal Health Center Appropriation | 5-4 | Likely passes |
-| 82 | Oakland Alternative Response Initiative | 5-4 | Uncertain — true toss-up |
-| 83 | Baylight Final Council Vote | 5-4 | Likely passes with conditions |
-| 96 | Fruitvale Phase II Final Approval | 5-4 | Too distant to project |
+All major votes through Cycle 84 have been held. Results are recorded in AUDIT_HISTORY.md.
+
+| Cycle | Vote | Result |
+|-------|------|--------|
+| 78 | West Oakland Stabilization Fund | Passed 6-3 (Crane crossover) |
+| 80 | Temescal Health Center | Passed 6-2 (Crane absent) |
+| 82 | Oakland Alternative Response Initiative | Passed 5-4 (Tran crossover, Vega NO) |
+| 83 | Baylight Final Council Vote | Passed 6-3 (CRC unified NO) |
+| 86 (projected) | Fruitvale Phase II Final Approval | Uncertain |
 
 -----
 

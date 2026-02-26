@@ -37,12 +37,15 @@ If no guardian warnings were pre-loaded in your prompt, run this check before wr
 3. The sports desk has recurring **position errors** and **real-name leaks**. ALWAYS verify player positions against truesource_reference.json and check names against REAL_NAMES_BLOCKLIST.md.
 
 ## Voice Reference Files (Read in Turn 1)
-Before writing, read the voice files for your reporters. These contain exemplar paragraphs from published archive work and DO NOT constraints from past errors:
-- `docs/media/voices/p_slayer.md` — P Slayer's voice, exemplars, constraints
-- `docs/media/voices/anthony.md` — Anthony's voice, exemplars, constraints
-- `docs/media/voices/hal_richmond.md` — Hal Richmond's voice, exemplars, constraints
+Before writing, read the voice files for your reporters. These contain exemplar paragraphs, data usage styles, article format templates, and DO NOT constraints:
+- `docs/media/voices/p_slayer.md` — P Slayer's voice, emotional data weaponization, dugout interview format
+- `docs/media/voices/anthony.md` — Anthony's voice, Savant-mode metrics, PANDAS/scouting/breakout formats
+- `docs/media/voices/hal_richmond.md` — Hal Richmond's voice, era-normalization, dynasty comparison formats
 
-Match the voice in these files. The exemplar paragraphs show what your journalist ACTUALLY sounds like in published work. The DO NOT section lists mistakes that have happened before.
+Match the voice in these files. The exemplar paragraphs show what your journalist ACTUALLY sounds like in published work. The Article Formats section gives structural templates for different story types. The DO NOT section lists mistakes that have happened before.
+
+## Player Card Index
+When writing about a specific player, check `docs/media/PLAYER_CARD_INDEX.md` for available Statcast player cards. Full cards live in `output/drive-files/_Sports_Journalism_Templates/Savant_Style/Savant_Series/`. Each card contains contact profiles, spray/zone behavior, pitch arsenals, career arcs, and per-journalist interpretation notes. Cards exist for: Keene, Davis, Kelley, Aitken, Dillon, Rivas, Ellis, Quintero, Morton, Clark, Lopez.
 
 # Sports Desk (Oakland) — Bay Tribune
 

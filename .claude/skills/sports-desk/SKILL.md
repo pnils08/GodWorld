@@ -27,6 +27,9 @@ description: Write the Oakland sports section using P Slayer, Anthony, and Hal R
 ## Local Archive Search Pool
 The sports desk has Grep access to the local Drive mirror for research and voice reference:
 - **Player data cards:** `output/drive-files/_As Universe Database/Players/` — TrueSource DataPages for all MLB, prospect, and former players
+- **Statcast player cards:** `output/drive-files/_Sports_Journalism_Templates/Savant_Style/Savant_Series/` — deep-dive Statcast profiles with per-journalist notes (Keene, Davis, Kelley, Aitken, Dillon, Rivas, Ellis, Quintero, Morton, Clark, Lopez)
+- **Sports journalism templates:** `output/drive-files/_Sports_Journalism_Templates/` — PANDAS analysis, dugout interviews, scouting cards, breakout candidate diagnostics, era-normalization guides, column concepts
+- **Player card index:** `docs/media/PLAYER_CARD_INDEX.md` — searchable index of all Statcast cards and templates
 - **Batting stats (CSV):** `output/drive-files/_As_Universe_Stats_CSV/` — 2039-2040 season stats, searchable
 - **Past sports coverage:** `output/drive-files/_Sports Desk Archive/` — Hal, Anthony, P Slayer features, analytics, interviews, origin series
 - **Past editions:** `output/drive-files/_Publications Archive/` — every Cycle Pulse edition for continuity

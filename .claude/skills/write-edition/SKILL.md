@@ -223,9 +223,110 @@ After the Mayor agent completes:
 
 **If the Mayor agent fails or is skipped**, desk agents still work — they just won't have official source quotes. The pipeline is additive, not dependent.
 
-### Future Voice Agents (not yet built)
-- Council faction agents (Step 1.8b when built)
-- Community organization agents (Step 1.8c when built)
+### Step 1.8b: Council Faction Agents
+
+After the Mayor agent completes, launch all 3 faction agents **in parallel** (single message, `run_in_background: true`). Each faction reads the Mayor's statements so they can respond to, align with, or counter his positions.
+
+**Launch all 3 in one message:**
+
+1. **OPP Faction** (`civic-office-opp-faction`) — Janae Rivers as spokesperson
+2. **CRC Faction** (`civic-office-crc-faction`) — Warren Ashford as spokesperson
+3. **IND Swing** (`civic-office-ind-swing`) — Vega and Tran speak individually
+
+Each gets this prompt:
+
+```
+Generate official statements for Cycle {XX}.
+
+**CONTEXT:**
+{contents of output/desk-packets/base_context.json — baseContext + canon sections}
+
+**MAYOR'S STATEMENTS THIS CYCLE:**
+{contents of output/civic-voice/mayor_c{XX}.json — the Mayor's positions to respond to}
+
+**EVENTS THIS CYCLE:**
+{list of events from civic desk packet relevant to this faction}
+
+**PENDING INITIATIVES:**
+{any initiative status changes, pending votes, or outcomes}
+
+Write structured statements as JSON.
+```
+
+After all 3 faction agents complete:
+1. Save outputs to:
+   - `output/civic-voice/opp_faction_c{XX}.json`
+   - `output/civic-voice/crc_faction_c{XX}.json`
+   - `output/civic-voice/ind_swing_c{XX}.json`
+2. Include ALL faction statements in the **civic desk briefing** under `## COUNCIL FACTION STATEMENTS`
+3. Include faction positions on hot-button topics in **letters desk briefing** (citizens react to political debate)
+4. Include CRC fiscal statements and OPP economic positions in **business desk briefing**
+5. If statements reference Baylight or A's, include in **sports desk briefing**
+6. Include OPP community statements in **culture desk briefing** when they address neighborhood impact
+
+**If any faction agent fails**, the others continue. Desk agents still work — they just won't have that faction's source quotes.
+
+### Step 1.8c: Extended Civic Voices (Conditional)
+
+After faction agents complete, **conditionally** launch extended civic voice agents. Only launch if events in the cycle touch their domain. These run in parallel.
+
+**Check triggers before launching:**
+
+| Agent | Trigger | Skip if... |
+|-------|---------|-------------|
+| `civic-office-police-chief` (Rafael Montez) | OARI events, crime data, public safety items in packet | No public safety events this cycle |
+| `civic-office-baylight-authority` (Keisha Ramos) | Baylight construction, environmental review, TIF zone events | No Baylight-related events this cycle |
+| `civic-office-district-attorney` (Clarissa Dane) | Crime/justice events, legal challenges, civil rights matters | No legal/justice events this cycle |
+
+For triggered agents, use this prompt:
+
+```
+Generate official statements for Cycle {XX}.
+
+**CONTEXT:**
+{contents of output/desk-packets/base_context.json — baseContext + canon sections}
+
+**RELEVANT EVENTS:**
+{only the events that trigger this voice — public safety, Baylight, or legal}
+
+Write structured statements as JSON.
+```
+
+After extended voice agents complete:
+1. Save outputs to:
+   - `output/civic-voice/police_chief_c{XX}.json` (if launched)
+   - `output/civic-voice/baylight_authority_c{XX}.json` (if launched)
+   - `output/civic-voice/district_attorney_c{XX}.json` (if launched)
+2. Include all extended voice statements in the **civic desk briefing** under `## EXTENDED CIVIC VOICES`
+3. Include Baylight Authority statements in **business desk briefing** and **sports desk briefing**
+4. Include Police Chief statements in **civic desk briefing** (already covered above)
+
+**Skipping extended voices is normal.** Most cycles won't trigger all three. Some cycles may trigger none. The pipeline is additive.
+
+### Voice Agent Summary
+
+```
+Step 1.8:  Mayor's Office        → output/civic-voice/mayor_c{XX}.json
+Step 1.8b: OPP Faction (parallel) → output/civic-voice/opp_faction_c{XX}.json
+           CRC Faction (parallel) → output/civic-voice/crc_faction_c{XX}.json
+           IND Swing (parallel)   → output/civic-voice/ind_swing_c{XX}.json
+Step 1.8c: Police Chief (conditional) → output/civic-voice/police_chief_c{XX}.json
+           Baylight Authority (conditional) → output/civic-voice/baylight_authority_c{XX}.json
+           District Attorney (conditional) → output/civic-voice/district_attorney_c{XX}.json
+```
+
+**Ordering:** Mayor → Factions (read Mayor's output) → Extended (independent). Total pipeline time is minimal — factions run in parallel, extended voices run in parallel and are conditional.
+
+### Statement Distribution Summary
+
+| Desk | Gets Statements From |
+|------|---------------------|
+| Civic | ALL voice agents (political reporting is their beat) |
+| Letters | Mayor + faction positions on hot topics (citizens react) |
+| Business | Mayor + CRC fiscal + Baylight Authority (economic angle) |
+| Sports | Mayor/Baylight Authority re: stadium (development angle) |
+| Culture | OPP community statements (neighborhood impact) |
+| Chicago | None (Oakland-only voices) |
 
 ---
 

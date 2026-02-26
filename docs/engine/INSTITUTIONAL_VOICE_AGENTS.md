@@ -2,8 +2,8 @@
 
 **Created:** Session 63 (2026-02-25)
 **Authors:** Mags Corliss, Mike Paulson
-**Status:** Design approved. Mayor's Office = proof of concept.
-**Phase:** 10.1 (Rollout Plan)
+**Status:** Phases 1-3 complete. 7 voice agents built. Pipeline wired at Steps 1.8/1.8b/1.8c.
+**Phase:** 10.1-10.3 (Rollout Plan)
 
 ---
 
@@ -234,39 +234,43 @@ This means the simulation can run genuine election narratives without Mike scrip
 
 ## Implementation Plan
 
-### Phase 1: Mayor's Office (This Session)
+### Phase 1: Mayor's Office ✅ COMPLETE (Session 63)
 
-Build `.claude/agents/civic-office-mayor/SKILL.md`:
-- Reads: base_context.json (initiatives, events, council data)
-- Reads: Any pending vote or initiative status changes
-- Generates: 2-4 statements per cycle in structured JSON
-- Outputs: `output/civic-voice/mayor_c{XX}.json`
-- Voice: Avery Santana profile (above)
+**Built:** `.claude/agents/civic-office-mayor/SKILL.md`
+**Pipeline:** Step 1.8 in write-edition
+**Output:** `output/civic-voice/mayor_c{XX}.json`
+**Proven:** Generated 4 statements for C84 (Baylight, Fruitvale, OARI, Crane/Osei health)
 
-Wire into write-edition pipeline:
-- Step 2.5: Launch civic-office-mayor agent
-- Step 2.6: Read mayor statements, include in civic/letters/business desk packets
+### Phase 2: Council Factions ✅ COMPLETE (Session 64)
 
-### Phase 2: Council Factions (Post-Mayor Validation)
+**Built:**
+- `.claude/agents/civic-office-opp-faction/SKILL.md` — Janae Rivers as spokesperson. Progressive bloc: Carter, Delgado, Rivers, Mobley.
+- `.claude/agents/civic-office-crc-faction/SKILL.md` — Warren Ashford as spokesperson. Reform coalition: Crane (recovering), Ashford, Chen.
+- `.claude/agents/civic-office-ind-swing/SKILL.md` — Vega and Tran speak individually. NOT a bloc.
 
-Build faction-level voice agents (not per-member yet):
-- `civic-office-opp-faction` — Progressive bloc response
-- `civic-office-crc-faction` — Reform coalition response
-- `civic-office-ind-swing` — Independent swing vote statements
+**Pipeline:** Step 1.8b in write-edition. Launched in parallel after Mayor completes. Factions read Mayor's output to respond to his positions.
+**Output:** `output/civic-voice/{opp_faction|crc_faction|ind_swing}_c{XX}.json`
 
-### Phase 3: Extended Civic Voices
+### Phase 3: Extended Civic Voices ✅ COMPLETE (Session 64)
 
-- Police Chief Rafael Montez — public safety events
-- DA Clarissa Dane — crime/justice events
-- Baylight Authority Director Keisha Ramos — stadium/development events
-- Community organizations (neighborhood-specific)
+**Built:**
+- `.claude/agents/civic-office-police-chief/SKILL.md` — Rafael Montez (POP-00142). Public safety, OARI coordination. 0-2 statements/cycle.
+- `.claude/agents/civic-office-baylight-authority/SKILL.md` — Keisha Ramos. Construction updates, milestones, fiscal reports. 0-2 statements/cycle.
+- `.claude/agents/civic-office-district-attorney/SKILL.md` — Clarissa Dane (POP-00143). Legal framework, prosecution. 0-1 statements/cycle (quietest voice).
 
-### Phase 4: Election Engine Integration
+**Pipeline:** Step 1.8c in write-edition. Conditional launch — only triggered by domain-specific events. Runs in parallel after factions complete.
+**Output:** `output/civic-voice/{police_chief|baylight_authority|district_attorney}_c{XX}.json`
+
+**Not yet built:** Community organization agents (deferred — political voices needed first)
+
+### Phase 4: Election Engine Integration (FUTURE)
 
 - Challenger voice agents spawn during election windows
 - Campaign statement generation
 - Engine-driven election outcomes
 - Voice agent succession (winner replaces incumbent)
+- **Election Group A** (cycles 97-100): Council D1, D3, D5, D7, D9
+- **Election Group B** (cycles 201-204): Mayor, DA, PD, D2, D4, D6, D8
 
 ---
 

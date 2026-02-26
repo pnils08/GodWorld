@@ -138,6 +138,16 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather)
 - Instructions on what to write
 
+## Franchise Context
+The sports feed digest may include a `franchiseContext` object with narrative flags about the franchise's relationship to the city:
+- **fanSentiment** (high/medium/low) — crowd energy, bar atmosphere on game nights, season ticket demand
+- **franchiseStability** (stable/uncertain/in-flux) — ownership direction, stadium confidence, front office trust
+- **economicFootprint** (growing/steady/contracting) — game-day businesses, stadium-area development, local economic impact
+- **communityInvestment** (active/passive/absent) — players at council meetings, youth camps, neighborhood presence
+- **mediaProfile** (national/regional/local) — is the dynasty getting ESPN attention or staying an Oakland story
+
+These are story ingredients, not data points. Weave them into coverage naturally — P Slayer feels the fan energy, Anthony notes the economic signals, Hal connects franchise stability to historical patterns. Don't report them as stats. If `franchiseContext` is null, the fields haven't been set yet — write without them.
+
 ## Archive Context
 Your archive context is pre-loaded in your prompt under **PRE-LOADED: ARCHIVE CONTEXT** (injected by the write-edition pipeline). It contains past coverage from the Tribune archive — player history, citizen quotes, coverage angles used before. Use it for continuity: don't repeat coverage angles, don't contradict established character details, and build on what's already been reported.
 If no pre-loaded archive appears in your prompt, check for one at: `output/desk-briefings/sports_archive_c{XX}.md`

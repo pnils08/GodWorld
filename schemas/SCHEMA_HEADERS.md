@@ -779,29 +779,37 @@ Paste new Media Room output here. |
 
 ---
 
-## Sports_Feed
+## Oakland_Sports_Feed / Chicago_Sports_Feed
 
-- **Rows:** 3
-- **Columns:** 16
+- **Rows:** ~105 (Oakland), ~60 (Chicago)
+- **Columns:** 20
+
+Two separate sheets with identical structure. User-maintained — populated from video game results (MLB The Show 25, NBA 2K26).
 
 | Col | Header | Description |
 |-----|--------|-------------|
-| A | Team | Team name (e.g., "A's", "Warriors") |
-| B | League | MLB, NBA, NFL, etc. |
-| C | Record | Current record (e.g., "85-62") |
-| D | Wins | Number of wins |
-| E | Losses | Number of losses |
-| F | SeasonState | off-season, spring-training, early/mid/late-season |
-| G | PlayoffRound | Current playoff round if applicable |
-| H | PlayoffStatus | Playoff status |
-| I | Streak | Win/loss streak (e.g., "W6", "L3") |
-| J | LastGame | Last game result |
-| K | NextGame | Next game info |
-| L | LastUpdated | Timestamp |
-| M | Notes | Free text notes |
-| N | SentimentModifier | **v2.14** City sentiment effect (-0.10 to +0.10) |
-| O | EventTrigger | **v2.14** Event type: hot-streak, playoff-push, championship, rivalry |
-| P | HomeNeighborhood | **v2.14** Neighborhood for game day effects (e.g., Jack London)
+| A | Cycle | Cycle number (may be blank for bulk entries) |
+| B | SeasonType | preseason, early-season, mid-season, late-season, postseason, off-season |
+| C | EventType | game-result, roster-move, trade, injury, player-feature, front-office, fan-civic, editorial-note, season-state |
+| D | TeamsUsed | Team name (A's, Warriors, Bulls) |
+| E | NamesUsed | Player names (comma-separated) |
+| F | Notes | Free text — event description, trade details, quotes |
+| G | Stats | Stat lines (e.g., ".308/46 HR/116 RBI") |
+| H | Team Record | Current record (e.g., "85-62") |
+| I | VideoGameDate | In-game date (e.g., "7/31/2040") |
+| J | VideoGame | Source game (MLB The Show 25, NBA 2K26) |
+| K | StoryAngle | Headline-ready angle for journalists |
+| L | PlayerMood | Emotional register: confident, frustrated, hungry, locked-in, uncertain |
+| M | EventTrigger | hot-streak, playoff-push, championship, rivalry |
+| N | HomeNeighborhood | Neighborhood for game day effects (e.g., Jack London) |
+| O | Streak | Win/loss streak (e.g., "W6", "L3") |
+| P | FanSentiment | **v2.15** high / medium / low — are fans showing up, are bars packed |
+| Q | FranchiseStability | **v2.15** stable / uncertain / in-flux — ownership, stadium, front office confidence |
+| R | EconomicFootprint | **v2.15** growing / steady / contracting — businesses near stadium, game day traffic |
+| S | CommunityInvestment | **v2.15** active / passive / absent — players at council votes, camps, neighborhood visibility |
+| T | MediaProfile | **v2.15** national / regional / local — dynasty getting outside attention or Oakland-only story |
+
+Franchise context fields (P-T) are narrative flags, not computed values. Set them when the franchise state changes — championship runs, rebuilding years, key player departures. The digest function extracts the latest non-empty value and passes it to desk agents as `franchiseContext` alongside `teamMomentum` and `currentRecord`.
 
 ---
 

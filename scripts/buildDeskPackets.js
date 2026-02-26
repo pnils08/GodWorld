@@ -1291,6 +1291,15 @@ function buildSportsFeedDigest(feedEntries, storylines, teamLabel) {
   var allStoryAngles = [];
   var allNamesUsed = {};
 
+  // Franchise context — latest non-empty value wins
+  var franchiseContext = {
+    fanSentiment: '',
+    franchiseStability: '',
+    economicFootprint: '',
+    communityInvestment: '',
+    mediaProfile: ''
+  };
+
   feedEntries.forEach(function(entry) {
     var eventType = (entry.EventType || entry.eventType || '').toString().trim().toLowerCase();
     var notes = (entry.Notes || entry.notes || '').toString().trim();
@@ -1307,6 +1316,18 @@ function buildSportsFeedDigest(feedEntries, storylines, teamLabel) {
     // Track latest record and season state
     if (record) latestRecord = record;
     if (seasonState) latestSeasonState = seasonState;
+
+    // Track franchise context — latest non-empty value wins
+    var fs = (entry.FanSentiment || '').toString().trim();
+    var fst = (entry.FranchiseStability || '').toString().trim();
+    var ef = (entry.EconomicFootprint || '').toString().trim();
+    var ci = (entry.CommunityInvestment || '').toString().trim();
+    var mp = (entry.MediaProfile || '').toString().trim();
+    if (fs) franchiseContext.fanSentiment = fs;
+    if (fst) franchiseContext.franchiseStability = fst;
+    if (ef) franchiseContext.economicFootprint = ef;
+    if (ci) franchiseContext.communityInvestment = ci;
+    if (mp) franchiseContext.mediaProfile = mp;
 
     // Parse player names
     var names = namesRaw.split(/[,;]/).map(function(n) { return n.trim(); }).filter(Boolean);
@@ -1413,11 +1434,16 @@ function buildSportsFeedDigest(feedEntries, storylines, teamLabel) {
   if (positiveCount > negativeCount + 1) momentum = 'rising';
   if (negativeCount > positiveCount + 1 && momentum !== 'sinking') momentum = 'struggling';
 
+  // Only include franchise context if any field is populated
+  var hasFranchiseContext = franchiseContext.fanSentiment || franchiseContext.franchiseStability ||
+    franchiseContext.economicFootprint || franchiseContext.communityInvestment || franchiseContext.mediaProfile;
+
   var digest = {
     teamLabel: teamLabel || '',
     currentRecord: latestRecord,
     seasonState: latestSeasonState,
     teamMomentum: momentum,
+    franchiseContext: hasFranchiseContext ? franchiseContext : null,
     gameResults: gameResults,
     rosterMoves: rosterMoves,
     playerFeatures: playerFeatures,

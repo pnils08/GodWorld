@@ -403,13 +403,37 @@ All 4 journalism enhancements implemented:
 
 **Root cause:** Some early instance mapped "Oakland simulation" onto real Oakland's problems and baked that tone into the engine parameters, sentiment calibration, and newsroom defaults. Every instance since inherited it.
 
-**Fixes applied this session:**
-- Stripped `generatedAt` real-world timestamps from buildCivicVoicePackets.js — cycle number is the only timestamp
-- buildDeskPackets.js still has 4 real-world timestamp leaks — needs separate cleanup pass
+**Fixes applied this session (S64):**
+- Stripped real-world timestamps from ALL 14 agent-facing scripts — cycle number is the only timestamp. Exception: Engine_Errors keeps timestamps for debugging.
+- buildDeskPackets.js now reads Simulation_Calendar instead of system clock — base_context.json produces month: "August", season: "Summer", simYear: "2" instead of February/Winter
+- Sports_Calendar removed — engine doesn't determine sports calendar, sports happen when the user runs games
+- Temporal model clarified: cycles are coverage units, not time units. Citizens experience real days/weeks/years. The newspaper covers what happened each cycle.
 
 **Fixes still needed:**
 - Audit engine Phase 3-4 economic parameters — income distribution, illness rate (9.4%), sentiment floor should reflect dynasty-era prosperity
-- Ensure base_context.json always produces in-world date/season prominently — agents fall back to system date when simulation calendar is absent
-- Strip real-world timestamps from buildDeskPackets.js (4 instances)
 - Review Discord bot system prompt for real-world awareness language
 - The newsroom should tell a city arguing from strength, not desperation — Baylight is the next chapter, not a Hail Mary
+
+### S64 — Sports Desk Power Upgrade
+
+**Voice files upgraded with Statcast templates and article formats:**
+- Anthony: Savant-mode metrics (xSLG, xBA, EV bands, LA clusters), PANDAS autocorrelation, scouting cards, breakout diagnostics, era-normalization
+- P Slayer: emotional data weaponization, dugout interview format, Paper Cuts vs Percentiles column concept
+- Hal Richmond: numbers as poetry, dynasty context via OPS+/ERA+/WAR, era comparison framework
+
+**Player Card Index created** (`docs/media/PLAYER_CARD_INDEX.md`):
+- 11 Statcast player cards indexed: Keene, Davis, Kelley, Aitken, Dillon, Rivas, Ellis, Quintero, Morton, Clark, Lopez
+- Cards have per-journalist notes (Anthony analytics, P Slayer emotional, Hal historical)
+- Templates catalog: blank card, breakout diagnostics, dugout interview, PANDAS, era-normalization, scouting cards
+
+**Sports desk agent and skill updated** to reference player cards in Turn 1 and search the Savant Series archive.
+
+### S64 — Civic Voice Agents Wired Into Pipeline
+
+- Step 1.7 added to write-edition: generate civic voice packets before voice agents
+- Mayor gets targeted packet, faction agents get faction-specific packets, extended voices get domain-specific packets
+- 6 new council/civic agents created earlier this session (before context continuation)
+
+### S64 — NEXT: Franchise Ledger
+
+Mike wants a Franchise Ledger — a sheet tracking how the A's franchise impacts the city economically. Think: franchise value, fan support, ticket sales, merchandise revenue, local business impact, stadium revenue, broadcast deals, civic pride index. The franchise either helps or harms the city financially. This connects the sports layer (which Mike cares about most) to the civic layer (which drives narrative tension). Review game logs first to understand how sports data feeds into the system, then design the ledger.

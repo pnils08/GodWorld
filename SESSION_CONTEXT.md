@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-25 | Engine: v3.1 | Cycle: 84 | Session: 63
+Last Updated: 2026-02-25 | Engine: v3.1 | Cycle: 84 | Session: 64
 
 ---
 
@@ -151,6 +151,19 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 64 (2026-02-25) — Timestamp Purge + Simulation Calendar + Sports Desk Upgrade
+
+- **Real-world timestamp contamination purged from all 14 agent-facing scripts.** Stripped `generatedAt`/`generated`/`new Date()` from buildCivicVoicePackets, buildDeskPackets, buildCombinedManifest, buildArticleIndex, buildPlayerIndex, generate-edition-photos, crawlDriveArchive, crawlSheetsArchive, editionDiffReport, downloadDriveArchive, editionIntake, processIntake, appendErrata. Only Engine_Errors retains timestamps.
+- **buildDeskPackets.js now reads Simulation_Calendar** — base_context.json produces `month: "August"`, `season: "Summer"`, `simYear: "2"` instead of deriving from system clock. Sports_Calendar dependency removed (engine doesn't determine sports calendar).
+- **Civic voice packets wired into write-edition pipeline.** Step 1.7 generates packets before voice agents. Mayor, faction agents, and extended voices all receive targeted jurisdiction-specific data.
+- **6 new council/civic voice agents created.** Opposition faction (Vega, Ashford, Osei), Ruling coalition (Delgado, Chen, Mobley), Police Chief (extends Mayor pattern for public safety domain).
+- **Sports journalist voice files upgraded with Statcast templates.** Anthony (Savant-mode metrics, PANDAS, scouting cards, breakout analysis, era-normalization), P Slayer (emotional data weaponization, dugout interviews, Paper Cuts vs Percentiles), Hal Richmond (numbers as poetry, dynasty context via OPS+/ERA+/WAR).
+- **Player Card Index created** (`docs/media/PLAYER_CARD_INDEX.md`). 11 Statcast cards (Keene, Davis, Kelley, Aitken, Dillon, Rivas, Ellis, Quintero, Morton, Clark, Lopez) indexed with per-journalist interpretation notes. Sports desk agent/skill updated to reference cards.
+- **22 sports journalism templates downloaded from Drive** to `output/drive-files/_Sports_Journalism_Templates/`. Savant Series player cards, PANDAS analysis, dugout interviews, scouting cards, breakout diagnostics, era-normalization guides, column concepts.
+- **Temporal model clarified with Mike:** Cycles are coverage units, not time units. Citizens live in days/weeks/years. "Weeks ago" and "next week" are acceptable narrative language. Supplementals follow the city, not the engine.
+- **GodWorld identity principle established:** This is NOT real Oakland. It's a dynasty-era boom town built to follow video game characters. Early instances contaminated it with real Oakland's struggling-city profile. Engine economic parameters still need recalibration.
+- **7 commits** (5 local pre-existing + 2 this continuation): civic voice pipeline wiring, timestamp purge, Simulation_Calendar fix, sports voice upgrades + player card index.
 
 ### Session 63 (2026-02-25) — Institutional Voice Agents + Pipeline Safety + Moltbook
 
@@ -382,9 +395,9 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - Auto bot refresh with history clear: Step 5.2 (edition), Step 4.2 (supplemental)
 
 **INCOMING — Next Session:**
-- Mara memory/structure overhaul (Phase 10.2) — structural memory so each edition isn't her first
-- Additional voice agents — council factions, department heads
-- Oakland NBA leak storyline (MintConditionOakTown prepped)
+- Franchise Ledger design — track how A's franchise impacts city economically (franchise value, fan support, ticket sales, merchandise, local business impact, stadium revenue, civic pride). Review game logs + data feed first.
+- Mara memory/structure overhaul (Phase 10.2) — plan exists at `.claude/plans/reactive-tickling-zephyr.md`
+- Engine economic parameter recalibration — illness rate, sentiment floor, income distribution should reflect dynasty-era prosperity, not real Oakland
 - Photo + PDF pipeline ready for next edition
 
 **Active — Journalism Enhancements (Phase 3):**

@@ -369,11 +369,17 @@ You're my best reporter and my biggest risk. When you're grounded in the data, n
 - **Rotate vocabulary across articles.** "Authorization," "window," "implementation gap" appeared in multiple E83 pieces. Same analytical tone — different words. Rhythm clustering breaks the illusion of separate investigations.
 - **Culture/Faith cross-reference.** When two pieces share thematic space, explicitly cross-reference. E83 culture and faith pieces overlapped without acknowledging the permitting clock.
 
-**To Anthony & P Slayer (Sports):**
+**To Anthony & P Slayer & Hal (Sports):**
 You two know Oakland sports better than anyone in this newsroom. The problem isn't your instincts — it's your shortcuts. "This cycle" isn't English. And when a citizen shows up at a game, they're not decoration. They brought their whole story with them. Find it.
 
 **E83 ADDENDUM — P Slayer friction:**
 - **Every opinion piece needs a counter-argument.** E83 opinion had strong sentiment but no friction. A sharper piece includes one line like "Some fans will call this weakness" — then dismantles it. Conflict strengthens argument. Without it, opinion is just sentiment.
+
+**S64 ADDENDUM — Sports desk empowerment:**
+- **All three voices now have article format templates.** Anthony has Statcast player card format, PANDAS autocorrelation analysis, scouting cards, breakout candidate diagnostics, era-normalization. P Slayer has dugout interview format, Paper Cuts vs Percentiles column concept. Hal has dynasty comparison via OPS+/ERA+/WAR, era-normalization.
+- **Player Card Index at `docs/media/PLAYER_CARD_INDEX.md`.** 11 Statcast cards (Keene, Davis, Kelley, Aitken, Dillon, Rivas, Ellis, Quintero, Morton, Clark, Lopez) with per-journalist interpretation notes. When a player is the subject, agents should read the relevant card.
+- **Diversify coverage.** Not all 3 journalists have to cover the same story. Anthony does the analytical deep dive. P Slayer does the emotional column. Hal does the historical context. They can write about DIFFERENT players or DIFFERENT angles of the same story.
+- **Data usage by voice:** Anthony uses metrics directly (Fangraphs/Savant style). P Slayer weaponizes data emotionally ("I don't care if his xSLG says he's real"). Hal uses numbers as poetry ("In Dillon's spin rate I hear echoes of old giants").
 
 **To Maria (Culture):**
 Your atmospheric writing is a gift. The fog piece was beautiful. But you can't populate a festival with people who don't exist. Every name in your copy needs to trace back to a ledger entry. If you need more citizens, flag it — I'll seed them. Don't invent them.
@@ -407,6 +413,10 @@ These are fixes that already shipped in `buildDeskPackets.js` or the engine. Not
 - `buildDeskPackets.js v1.2`: Vote breakdown now included in civic desk packet (was missing, caused Carmen's fabrication).
 - `editionIntake.js v1.1`: Auto-detects cycle from edition header.
 - `processIntake.js v1.2`: Auto-detects cycle from Cycle_Packet sheet.
+- **S64: Real-world timestamps stripped from ALL 14 agent-facing scripts.** Cycle number is the only temporal identifier. Exception: Engine_Errors keeps timestamps for debugging.
+- **S64: buildDeskPackets.js now reads Simulation_Calendar** instead of system clock. base_context.json produces `month: "August"`, `season: "Summer"`, `simYear: "2"`. Agents no longer write "February" when the simulation is in summer.
+- **S64: Sports_Calendar dependency removed.** Engine doesn't determine sports calendar. Sports happen when Paulson runs games and provides results.
+- **S64: Civic voice packets wired into pipeline.** Step 1.7 generates per-office data packets before voice agents launch. Mayor, faction agents, and extended voices get targeted jurisdiction-specific data instead of generic base_context.
 - Double-dash parsing bug: fixed in `editionIntake.js` — was silently dropping ALL citizen and storyline intake.
 - Quote parser: cleaned 24 dirty rows with leading dashes in LifeHistory_Log.
 - PREWRITE blocks added to all 6 desk agents (Session 16).

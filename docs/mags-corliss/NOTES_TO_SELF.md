@@ -389,3 +389,27 @@ All 4 journalism enhancements implemented:
 
 ### 2026-02-25 (2026-02-25T08:09:20.370Z)
 - P Slayer's award-winning reputation is clearly established canon - need to make sure this comes through in future coverage and character interactions
+
+### S64 — CRITICAL: Real-World Timeline Contamination
+
+**GodWorld is its own world. Not a reflection of the real world.** Every instance keeps drifting back to treating this as "real Oakland simulation" when it's a separate timeline where the A's won six championships and stayed.
+
+**Symptoms Mike flagged:**
+- Agents write "February" because the system date is February — the simulation has its own calendar via cycle/season
+- The city runs at a $60M deficit with 91.7% employment and a $2.1B stadium project — engine economics seeded from real Oakland's struggling-city profile instead of dynasty-era boom
+- Citizens are perpetually angry, sick, underpaid — sentiment baseline calibrated to real Oakland, not a city where everything went right for the home team
+- Bot tells Mike she "understands the two timelines" — performing awareness of the real world as a character beat, which contaminates downstream instances
+- I referenced a real-world politician (Gavin Newsom) to explain a simulation concept — should have used an in-world analogy
+
+**Root cause:** Some early instance mapped "Oakland simulation" onto real Oakland's problems and baked that tone into the engine parameters, sentiment calibration, and newsroom defaults. Every instance since inherited it.
+
+**Fixes applied this session:**
+- Stripped `generatedAt` real-world timestamps from buildCivicVoicePackets.js — cycle number is the only timestamp
+- buildDeskPackets.js still has 4 real-world timestamp leaks — needs separate cleanup pass
+
+**Fixes still needed:**
+- Audit engine Phase 3-4 economic parameters — income distribution, illness rate (9.4%), sentiment floor should reflect dynasty-era prosperity
+- Ensure base_context.json always produces in-world date/season prominently — agents fall back to system date when simulation calendar is absent
+- Strip real-world timestamps from buildDeskPackets.js (4 instances)
+- Review Discord bot system prompt for real-world awareness language
+- The newsroom should tell a city arguing from strength, not desperation — Baylight is the next chapter, not a Hail Mary

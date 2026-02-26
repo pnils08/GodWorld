@@ -180,7 +180,6 @@ async function main() {
   if (results.length > 0) {
     var manifest = {
       edition: parsed.edition,
-      generated: new Date().toISOString(),
       provider: 'together / FLUX.1-schnell',
       photos: results.map(function(r) {
         return {

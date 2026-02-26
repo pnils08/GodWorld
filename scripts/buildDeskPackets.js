@@ -578,7 +578,6 @@ function generateDeskSummary(packet, deskId, cycle) {
       desk: deskId,
       cycle: cycle,
       fullPacketFile: deskId + '_c' + cycle + '.json',
-      generatedAt: new Date().toISOString()
     },
     councilRoster: cr.council || [],
     pendingVotes: (cr.pendingVotes || []).filter(function(v) {
@@ -1704,7 +1703,6 @@ async function main() {
 
   var manifest = {
     cycle: CYCLE,
-    generated: new Date().toISOString(),
     generator: 'buildDeskPackets v1.7',
     packets: []
   };
@@ -1838,7 +1836,6 @@ async function main() {
         desk: deskId,
         deskName: desk.name,
         cycle: CYCLE,
-        generated: new Date().toISOString(),
         generator: 'buildDeskPackets v1.9'
       },
       baseContext: baseContext,
@@ -2014,7 +2011,6 @@ async function main() {
 
   // Write TrueSource reference (compact verification file for Rhea Morgan)
   var truesourceRef = {
-    generated: new Date().toISOString(),
     cycle: CYCLE,
     mayor: canon.executiveBranch.mayor,
     executiveBranch: canon.executiveBranch,

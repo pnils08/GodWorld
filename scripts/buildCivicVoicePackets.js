@@ -264,7 +264,6 @@ function buildFactionPacket(factionId, opts) {
       type: 'civic-voice-packet',
       office: factionId,
       cycle: CYCLE,
-      generatedAt: new Date().toISOString()
     },
     faction: {
       id: factionId,
@@ -300,7 +299,6 @@ function buildOfficePacket(officeId, opts) {
       type: 'civic-voice-packet',
       office: officeId,
       cycle: CYCLE,
-      generatedAt: new Date().toISOString()
     },
     office: officials,
     initiatives: initiatives,
@@ -488,7 +486,7 @@ async function main() {
     return map;
   }
 
-  const manifest = { cycle: CYCLE, generatedAt: new Date().toISOString(), packets: {} };
+  const manifest = { cycle: CYCLE, packets: {} };
 
   // ════════════════════════════════════════════════════════════
   // MAYOR'S OFFICE

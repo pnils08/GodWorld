@@ -121,7 +121,7 @@ async function main() {
 
   // Write a quick search index
   var indexPath = path.join(OUTPUT_DIR, '_INDEX.md');
-  var indexLines = ['# Local Tribune Archive Index', '', '**Downloaded:** ' + new Date().toISOString(), ''];
+  var indexLines = ['# Local Tribune Archive Index', ''];
   textFiles.forEach(function(f) {
     var localDir2 = safeName(f.path);
     var fileName2 = safeName(f.name);

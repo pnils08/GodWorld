@@ -67,7 +67,6 @@ async function main() {
 
   // Step 2: For each spreadsheet, get tab metadata + headers + row counts
   var manifest = {
-    generated: new Date().toISOString(),
     spreadsheetCount: allSpreadsheets.length,
     spreadsheets: [],
   };

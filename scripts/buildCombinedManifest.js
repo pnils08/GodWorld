@@ -94,7 +94,6 @@ async function main() {
   var files = allEntries.filter(function(e) { return !e.isFolder; });
 
   var manifest = {
-    generated: new Date().toISOString(),
     roots: ROOTS,
     totalFolders: folders.length,
     totalFiles: files.length,

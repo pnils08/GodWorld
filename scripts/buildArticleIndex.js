@@ -582,7 +582,6 @@ function buildIndex() {
     // Write JSON index
     const indexPath = join(ROOT, 'output/article-index.json');
     const indexData = {
-      generated: new Date().toISOString(),
       stats,
       entries: entries.map(e => {
         const { extractedArticles, ...rest } = e;
@@ -599,7 +598,7 @@ function buildIndex() {
 
     // Write markdown ledger
     const ledgerPath = join(ROOT, 'output/article-ledger.md');
-    const ledgerLines = ['# Article Index Ledger', '', `Generated: ${new Date().toISOString()}`, ''];
+    const ledgerLines = ['# Article Index Ledger', ''];
 
     // Group by cycle
     const cycles = {};

@@ -792,7 +792,6 @@ function buildPlayerIndex() {
   if (writeMode) {
     const indexPath = join(ROOT, 'output/player-index.json');
     const indexData = {
-      generated: new Date().toISOString(),
       stats,
       players,
     };

@@ -100,7 +100,6 @@ function buildMarkdown(entries) {
   var lines = [];
   lines.push('# Tribune Media Archive — Drive Manifest');
   lines.push('');
-  lines.push('**Generated:** ' + new Date().toISOString());
   lines.push('**Root Folder:** `' + ROOT_FOLDER_ID + '`');
   lines.push('');
 
@@ -167,7 +166,6 @@ async function main() {
 
   // Write JSON manifest
   var manifest = {
-    generated: new Date().toISOString(),
     rootFolderId: ROOT_FOLDER_ID,
     totalEntries: entries.length,
     folders: entries.filter(function(e) { return e.isFolder; }).length,

@@ -102,7 +102,6 @@ var criticalTrend = scores.map(function(s) {
 var lines = [];
 
 lines.push('# Edition Diff Report');
-lines.push('**Generated: ' + new Date().toISOString().split('T')[0] + '**');
 lines.push('**Editions analyzed: ' + scores.length + ' (E' + scores[0].edition + ' — E' + scores[scores.length - 1].edition + ')**');
 lines.push('');
 

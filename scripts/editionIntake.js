@@ -307,9 +307,8 @@ function parseDirectQuotes(section, cycle) {
       // Handles ASCII quotes, smart quotes, and parenthetical qualifiers in name
       const quoteMatch = trimmed.match(/^(?:--|[—–\-])\s*(.+?):\s*["\u201C\u201D](.+)["\u201C\u201D]$/);
       if (quoteMatch) {
-        const now = new Date().toISOString();
         quotes.push([
-          now,                                                    // Timestamp
+          '',                                                     // Timestamp (unused — cycle is the temporal key)
           '',                                                     // POPID (resolved later)
           quoteMatch[1].trim(),                                   // Name
           'Quoted',                                               // EventTag

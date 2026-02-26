@@ -61,7 +61,7 @@ function parseRheaReport(text) {
     if (entryMatch && (inCritical || inWarning)) {
       currentEntry = {
         edition: edition,
-        date: new Date().toISOString().split('T')[0],
+        date: '',
         desk: inferDesk(entryMatch[1], entryMatch[2]),
         reporter: inferReporter(entryMatch[1]),
         errorType: inferErrorType(entryMatch[2]),

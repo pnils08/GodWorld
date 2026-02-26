@@ -299,9 +299,8 @@ async function processArticleIntake(cycle, cal) {
   if (drafts.length === 0) return 0;
 
   // Write to Press_Drafts (14 columns with calendar)
-  const now = new Date().toISOString();
   const rows = drafts.map(d => [
-    now,                    // A  Timestamp
+    '',                     // A  Timestamp (unused — cycle is the temporal key)
     cycle,                  // B  Cycle
     d.reporter,             // C  Reporter
     d.storyType,            // D  StoryType
@@ -423,9 +422,8 @@ async function processStorylineIntake(cycle, cal) {
 
   // Add new storylines to tracker (14 columns with calendar)
   if (newStorylines.length > 0) {
-    const now = new Date().toISOString();
     const rows = newStorylines.map(s => [
-      now,                    // A  Timestamp
+      '',                     // A  Timestamp (unused — cycle is the temporal key)
       cycle,                  // B  CycleAdded
       s.storylineType,        // C  StorylineType
       s.description,          // D  Description
@@ -488,9 +486,8 @@ async function processCitizenUsageIntake(cycle, cal) {
   if (usages.length === 0) return 0;
 
   // Write to Citizen_Media_Usage (12 columns with calendar)
-  const now = new Date().toISOString();
   const rows = usages.map(u => [
-    now,                    // A  Timestamp
+    '',                     // A  Timestamp (unused — cycle is the temporal key)
     cycle,                  // B  Cycle
     u.citizenName,          // C  CitizenName
     u.usageType,            // D  UsageType

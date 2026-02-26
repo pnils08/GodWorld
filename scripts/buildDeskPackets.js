@@ -1472,7 +1472,7 @@ async function main() {
     civicRaw, initiativeRaw, simRaw, genericRaw,
     chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
     storylineRaw, packetRaw, draftsRaw, historyRaw,
-    householdRaw, bondsRaw, worldPopRaw
+    householdRaw, bondsRaw, worldPopRaw, simCalRaw
   ] = await Promise.all([
     sheets.getSheetData('Story_Seed_Deck'),
     sheets.getSheetData('Story_Hook_Deck'),
@@ -1492,7 +1492,8 @@ async function main() {
     sheets.getSheetData('LifeHistory_Log'),
     sheets.getSheetData('Household_Ledger').catch(function() { return []; }),
     sheets.getSheetData('Relationship_Bonds').catch(function() { return []; }),
-    sheets.getSheetData('World_Population').catch(function() { return []; })
+    sheets.getSheetData('World_Population').catch(function() { return []; }),
+    sheets.getSheetData('Simulation_Calendar').catch(function() { return []; })
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
@@ -1632,41 +1633,42 @@ async function main() {
   console.log('  Coverage echo:', Object.keys(coverageEchoMap).length, 'citizens from previous edition');
 
   // ── Build base context ──
-  // Season/month derived from current date (seed metadata columns are unreliable —
-  // column shift bug causes Season to contain citizen names, Holiday to contain
-  // voice guidance text, etc. Fixed S63.)
-  var now = new Date();
-  var monthNames = ['January','February','March','April','May','June',
+  // Calendar from Simulation_Calendar sheet — the simulation's own timeline.
+  // NEVER derive from system date. GodWorld is its own world.
+  var monthNames = ['','January','February','March','April','May','June',
     'July','August','September','October','November','December'];
-  var currentMonth = monthNames[now.getMonth()];
-  var seasonMap = { 0:'Winter',1:'Winter',2:'Spring',3:'Spring',4:'Spring',5:'Summer',
-    6:'Summer',7:'Summer',8:'Fall',9:'Fall',10:'Fall',11:'Winter' };
-  var currentSeason = seasonMap[now.getMonth()];
+  var seasonFromCal = '';
+  var monthFromCal = '';
+  var holidayFromCal = 'none';
+  var simYear = '';
+  var simMonth = 0;
+  if (simCalRaw.length > 1) {
+    var calRow = simCalRaw[1]; // row 0 is headers
+    simYear = calRow[0] || '';
+    simMonth = parseInt(calRow[1]) || 0;
+    monthFromCal = monthNames[simMonth] || '';
+    seasonFromCal = calRow[3] || '';
+    holidayFromCal = calRow[4] || 'none';
+  }
 
-  // CLI overrides: --season Summer --month August --holiday "none" --sports-season offseason
+  // CLI overrides: --season Summer --month August --holiday "none" --sports-season mid-season
   var cliSeason = getCliArg('--season');
   var cliMonth = getCliArg('--month');
   var cliHoliday = getCliArg('--holiday');
   var cliSportsSeason = getCliArg('--sports-season');
 
-  // Determine sports season from date
-  var mo = now.getMonth(); // 0-indexed
-  var defaultSportsSeason = 'unknown';
-  if (mo >= 3 && mo <= 8) defaultSportsSeason = 'baseball'; // Apr-Sep
-  else if (mo >= 9 || mo <= 2) defaultSportsSeason = 'basketball'; // Oct-Mar
-  // Both overlap in Oct
-
   var baseContext = {
     cycle: CYCLE,
-    season: cliSeason || currentSeason,
-    month: cliMonth || currentMonth,
+    simYear: simYear,
+    season: cliSeason || seasonFromCal || 'unknown',
+    month: cliMonth || monthFromCal || 'unknown',
     holiday: {
-      name: cliHoliday || 'none',
-      priority: 'none'
+      name: cliHoliday || holidayFromCal,
+      priority: holidayFromCal !== 'none' ? 'active' : 'none'
     },
-    isFirstFriday: now.getDay() === 5 && now.getDate() <= 7,
+    isFirstFriday: false,
     isCreationDay: false,
-    sportsSeason: cliSportsSeason || defaultSportsSeason,
+    sportsSeason: cliSportsSeason || '',
     weather: extractWeatherFromEvents(events),
     sentiment: extractFieldFromEvents(events, 'CitySentiment'),
     migrationDrift: '', // from cycle packet if available

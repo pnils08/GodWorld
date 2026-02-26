@@ -21,10 +21,12 @@ Before running this skill, the user should have already:
 1. Run the engine cycle (`/run-cycle` or manually)
 2. Built desk packets: `node scripts/buildDeskPackets.js [cycle]`
 3. Built archive context: `node scripts/buildArchiveContext.js [cycle]`
-4. Written a Mara directive (optional but recommended for civic desk)
+4. Built civic voice packets: `node scripts/buildCivicVoicePackets.js [cycle]` (Step 1.7 can also do this)
+5. Written a Mara directive (optional but recommended for civic desk)
 
 Check that `output/desk-packets/manifest.json` exists for this cycle.
 Check that `output/desk-briefings/{desk}_archive_c{XX}.md` files exist (from buildArchiveContext.js).
+Check that `output/civic-voice-packets/manifest.json` exists for this cycle (civic voice data for institutional voice agents).
 
 ## Step 0.5: Read Previous Mara Audit (Forward Guidance)
 
@@ -191,6 +193,29 @@ Example:
 
 Write these as Mags — with editorial authority, personal warmth, and specific guidance. These are not templates. They're memos from the Editor-in-Chief to her reporters.
 
+## Step 1.7: Generate Civic Voice Packets
+
+Before launching voice agents, generate jurisdiction-specific data packets from the Google Sheets:
+
+```bash
+node scripts/buildCivicVoicePackets.js {cycle}
+```
+
+This produces 7 targeted JSON packets to `output/civic-voice-packets/`:
+- `mayor_c{XX}.json` — all initiatives, all events, city-wide metrics
+- `opp_faction_c{XX}.json` — D1/D3/D5/D9 districts, their citizens, crime, transit, faith orgs
+- `crc_faction_c{XX}.json` — D6/D7/D8 districts, their citizens, fiscal metrics
+- `ind_swing_c{XX}.json` — D2/D4 districts, their citizens
+- `police_chief_c{XX}.json` — all neighborhoods crime data, OARI vs non-OARI comparison
+- `baylight_authority_c{XX}.json` — 4 adjacent neighborhoods, affected citizens
+- `district_attorney_c{XX}.json` — city-wide crime summary
+
+**Verify:** Check `output/civic-voice-packets/manifest.json` — confirms cycle number, packet files, citizen counts per faction.
+
+**If the script fails** (usually Google Sheets auth), voice agents can still run with `base_context.json` — the packets are richer but not required.
+
+---
+
 ## Step 1.8: Launch Institutional Voice Agents (Phase 10.1)
 
 Before desk agents write, launch voice agents to generate source material. Voice agents produce official statements that desk agents report on — creating a real separation between source and reporter.
@@ -202,14 +227,10 @@ Launch `civic-office-mayor` agent with this prompt:
 ```
 Generate official statements for Cycle {XX} as Mayor Avery Santana's office.
 
-**CONTEXT:**
-{contents of output/desk-packets/base_context.json — baseContext + canon sections}
+**CIVIC VOICE PACKET:**
+{contents of output/civic-voice-packets/mayor_c{XX}.json}
 
-**EVENTS THIS CYCLE:**
-{list of events from civic desk packet that the Mayor would respond to}
-
-**PENDING INITIATIVES:**
-{any initiative status changes, pending votes, or outcomes}
+This packet contains all active initiatives, city-wide events, population metrics, neighborhood data, council composition, and status alerts — everything your office needs to respond to this cycle.
 
 Write 2-5 structured statements as JSON. Output to be saved to output/civic-voice/mayor_c{XX}.json.
 ```
@@ -233,25 +254,26 @@ After the Mayor agent completes, launch all 3 faction agents **in parallel** (si
 2. **CRC Faction** (`civic-office-crc-faction`) — Warren Ashford as spokesperson
 3. **IND Swing** (`civic-office-ind-swing`) — Vega and Tran speak individually
 
-Each gets this prompt:
+Each gets this prompt (substitute the correct faction packet file):
 
 ```
 Generate official statements for Cycle {XX}.
 
-**CONTEXT:**
-{contents of output/desk-packets/base_context.json — baseContext + canon sections}
+**CIVIC VOICE PACKET:**
+{contents of output/civic-voice-packets/{faction}_c{XX}.json}
+
+This packet contains your faction's districts, neighborhoods, citizens, crime metrics, transit data, faith communities, and active initiatives — everything specific to your jurisdiction.
 
 **MAYOR'S STATEMENTS THIS CYCLE:**
 {contents of output/civic-voice/mayor_c{XX}.json — the Mayor's positions to respond to}
 
-**EVENTS THIS CYCLE:**
-{list of events from civic desk packet relevant to this faction}
-
-**PENDING INITIATIVES:**
-{any initiative status changes, pending votes, or outcomes}
-
 Write structured statements as JSON.
 ```
+
+Packet files by faction:
+- OPP: `output/civic-voice-packets/opp_faction_c{XX}.json`
+- CRC: `output/civic-voice-packets/crc_faction_c{XX}.json`
+- IND: `output/civic-voice-packets/ind_swing_c{XX}.json`
 
 After all 3 faction agents complete:
 1. Save outputs to:
@@ -278,19 +300,23 @@ After faction agents complete, **conditionally** launch extended civic voice age
 | `civic-office-baylight-authority` (Keisha Ramos) | Baylight construction, environmental review, TIF zone events | No Baylight-related events this cycle |
 | `civic-office-district-attorney` (Clarissa Dane) | Crime/justice events, legal challenges, civil rights matters | No legal/justice events this cycle |
 
-For triggered agents, use this prompt:
+For triggered agents, use this prompt (substitute the correct office packet file):
 
 ```
 Generate official statements for Cycle {XX}.
 
-**CONTEXT:**
-{contents of output/desk-packets/base_context.json — baseContext + canon sections}
+**CIVIC VOICE PACKET:**
+{contents of output/civic-voice-packets/{office}_c{XX}.json}
 
-**RELEVANT EVENTS:**
-{only the events that trigger this voice — public safety, Baylight, or legal}
+This packet contains jurisdiction-specific data: neighborhood metrics, crime statistics, OARI comparison data, affected citizens, and relevant initiatives.
 
 Write structured statements as JSON.
 ```
+
+Packet files by office:
+- Police Chief: `output/civic-voice-packets/police_chief_c{XX}.json`
+- Baylight Authority: `output/civic-voice-packets/baylight_authority_c{XX}.json`
+- District Attorney: `output/civic-voice-packets/district_attorney_c{XX}.json`
 
 After extended voice agents complete:
 1. Save outputs to:

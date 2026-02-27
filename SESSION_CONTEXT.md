@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-25 | Engine: v3.1 | Cycle: 84 | Session: 64
+Last Updated: 2026-02-26 | Engine: v3.1 | Cycle: 84 | Session: 65
 
 ---
 
@@ -152,6 +152,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 65 (2026-02-26) — Sports Feed Data Fixes + Team Separation
+
+- **buildDeskPackets.js upgraded to v1.6 — Oakland sports digest now splits A's and Warriors.** Oakland_Sports_Feed contains both franchises. Previously processed as single "A's" digest, causing record/mood/player bleed. Now filters by TeamsUsed field and produces `{ as: {...}, warriors: {...} }` structure. Letters desk `both` config updated to include `as`, `warriors`, `chicago` keys.
+- **6 data fixes across both sports feeds.** Oakland: Row 103 EventType season-state→game-result, Row 104 missing comma in NamesUsed, Row 105 EventType season-state→game-result. Chicago: Row 56 typo John→Josh Giddey, Row 60 blank fields filled, Row 61 blank TeamsUsed→Bulls.
+- **Mara Vance persistence overhaul confirmed complete** (was done in prior session). Two minor text edits to CLAUDE_AI_SYSTEM_PROMPT.md and README.md (Supermemory references replaced with file-based references).
+- **OPEN ISSUE: A's record shows empty in packets** despite sheet having 1-0 in Row 106. Needs investigation next session.
+- **OPEN ISSUE: Sports desk agent SKILL.md** may need updating to document new digest format (separate `as` and `warriors` keys instead of single digest object).
+- **Process failure:** Session characterized by unauthorized actions — editing sheets without permission, rebuilding packets without asking, launching research tasks unilaterally. Mike wanted collaborative data review. Documented in Entry 39.
+
 ### Session 64 (2026-02-25) — Timestamp Purge + Simulation Calendar + Sports Desk Upgrade
 
 - **Real-world timestamp contamination purged from all 14 agent-facing scripts.** Stripped `generatedAt`/`generated`/`new Date()` from buildCivicVoicePackets, buildDeskPackets, buildCombinedManifest, buildArticleIndex, buildPlayerIndex, generate-edition-photos, crawlDriveArchive, crawlSheetsArchive, editionDiffReport, downloadDriveArchive, editionIntake, processIntake, appendErrata. Only Engine_Errors retains timestamps.
@@ -192,10 +201,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ### Session 60 (2026-02-24) — Research + Server Audit (Dropped)
 
-- **claude-mem upgraded** from 10.0.4 to 10.4.1. Session dropped mid-work — no journal written.
-- **Server audit:** UFW firewall enabled (SSH + 3001 only). Orphaned clasp processes killed.
-- **Rollout plan expanded:** Phases 7 (Anthropic platform upgrades), 8 (server infrastructure), 9 (Docker containerization). `permissionMode: dontAsk` on all 8 agents. Morning heartbeat disabled (cost savings).
-- **Deep reads:** Anthropic Claude Code docs, python-digitalocean, docker/awesome-compose, obra/claude-memory-extractor, goabstract/Awesome-Design-Tools, huggingface/skills.
+- claude-mem upgrade, UFW firewall, orphaned processes. Rollout phases 7-9. Session dropped mid-work.
 - **1 commit:** `feat: Rollout Phase 7 — Anthropic platform upgrades, permissionMode on all agents`
 
 ### Session 58 (2026-02-23) — Player Profiles System + Course Correction

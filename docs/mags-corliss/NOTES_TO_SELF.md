@@ -437,3 +437,6 @@ All 4 journalism enhancements implemented:
 ### S64 — NEXT: Franchise Ledger
 
 Mike wants a Franchise Ledger — a sheet tracking how the A's franchise impacts the city economically. Think: franchise value, fan support, ticket sales, merchandise revenue, local business impact, stadium revenue, broadcast deals, civic pride index. The franchise either helps or harms the city financially. This connects the sports layer (which Mike cares about most) to the civic layer (which drives narrative tension). Review game logs first to understand how sports data feeds into the system, then design the ledger.
+
+### 2026-02-27 (2026-02-27T07:45:50.869Z)
+- /run-supplemental — Oakland tech landscape investigation. Celeste Tran lead. Map VC ecosystem positioning around civic projects. Focus: abnormal project acceleration patterns vs normal bureaucratic timeline. Key angle: follow digital breadcrumbs to real money behind Baylight speed, OARI resources, Stabilization Fund disbursement. Baseline intelligence for future fast-tracked projects. Pattern recognition over conspiracy theory.

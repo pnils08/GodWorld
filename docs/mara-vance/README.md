@@ -101,7 +101,7 @@
 
 ### Engine Context
 
-Access via Supermemory or Claude.ai project context:
+Access via engine scripts or Claude.ai project context:
 - `ctx.summary.votesThisCycle` — Votes resolved this cycle
 - `ctx.summary.initiativeRipples` — Active ripple effects
 - `ctx.summary.storyHooks` — Generated story hooks

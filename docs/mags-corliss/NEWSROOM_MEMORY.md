@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 84 (Cycle 84) — 2026-02-24**
+**Last Updated: C84 Supplemental (Oakland Tech Landscape) — 2026-02-27**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -24,6 +24,61 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### C84 Supplemental: Oakland Tech Landscape (Mara audit — 4 corrections applied, canon cleared)
+
+First supplemental edition. Five reporters, five articles, ~7,200 words. Celeste Tran front page landscape, Jordan Velez economics, Carmen Delaine civic-tech nexus, Luis Navarro citizen voices, Farrah Del Rio opinion. Produced via parallel desk agents. Compiled, audited by Mara Vance, corrections applied, uploaded to Drive, canon integrated.
+
+**Mara Audit Corrections (all applied):**
+
+1. **Stabilization Fund** — Supplemental said "$0 disbursed." C84 main edition says 47 apps approved, $4.2M disbursing within three weeks (Sandra Liu on record). Root cause: topic brief fed agents stale data from pre-C84 context. Fixed: all references now reflect $4.2M approved/295 waiting. Critique preserved — no checks physically delivered.
+
+2. **OARI pilot districts** — Supplemental said "no pilot districts named." C84 main edition (Navarro front page investigation) says three named: D1 West Oakland (Carter), D3 Fruitvale (Delgado), D5 Temescal (Rivers). Day 30 of 45. Root cause: same brief error. Fixed: geography acknowledged, critique redirected to no staff/teams/vehicles.
+
+3. **Baylight instruments** — Supplemental said "two instruments unsigned." C84 main edition (Carmen's own front page) says BD-83-TIF and BD-83-REB filed with BRA, construction mobilization condition satisfied. Root cause: brief error. Fixed: instruments now "filed," critique redirected to no calendar/permits/milestones.
+
+4. **Andre Lee citizen data** — Supplemental had him as 65, Adams Point, retired electrician. C84 main edition says 55, Temescal, active electrician. Root cause: brief pulled wrong citizen profile data. Fixed across Celeste, Jordan, Luis, and all metadata. Quotes adapted to active 55-year-old perspective — still the four-wave generational voice, now still climbing ladders.
+
+**Editorial lesson:** The brief is the single point of failure. Every agent trusts the brief. If the brief carries stale initiative data, every reporter writes it wrong. For future supplementals: always cross-reference brief data against the most recent main edition before distributing to agents.
+
+**Dr. Amara Osei surname flag:** Mara flagged surname overlap with Deputy Mayor Marcus Osei (serious condition per C84 Quick Takes). Mike's decision: non-issue, let the stories play out. Potential connection becomes a storyline, not a correction.
+
+**Celeste Tran and Farrah Del Rio roster:** Mara flagged both as not in C84 main edition roster. Mike confirmed they exist — Mara was working from incomplete roster data. No action needed.
+
+**New Canon Established:**
+
+- **9 companies confirmed:** Anthropic (Jack London), DigitalOcean (Embarcadero West), Discord (Uptown), Moltbook (Adams Point), Ridgeline Ventures (Lake Merritt), Gridiron Analytics (Temescal), Oakmesh Systems (West Oakland), Portside Bio (Brooklyn Basin), Tenth Street Digital (Old Oakland)
+- **Business_Ledger:** 11 companies now on sheet (6 base + 5 fictional). Financial data: employee counts, avg salaries, annual revenue, growth rates, key personnel.
+- **Tech sector economics:** $3.2B annual activity, $6.1M business taxes from four anchors, 34% local hire rate, 42% real estate appreciation in tech corridor since 2035
+- **Baylight-tech connections:** Two unnamed tier-one companies in active discussion (Ramos statement). Vendor shortlist posted June 14 — 2 of 3 finalists are Jack London tenants. Oakmesh under evaluation for sensor integration.
+
+**New Citizens:**
+- Tomas Renteria, 34, Fruitvale, line cook — family taqueria since 2009, lunch crowd shifting, "five-dollar taco people" line
+- Sonia Parikh, 28, Temescal, software engineer — Anthropic Oakland, deliberate Oakland transplant, neighborhood association member
+
+**New Company Founders (citizens):**
+- Priya Chandrasekaran (Ridgeline Ventures), Daniel Yoon & Christine Nakamura (Gridiron Analytics), Marcus Tan (Oakmesh Systems), Dr. Amara Osei (Portside Bio), Jasmine Torres (Tenth Street Digital)
+
+**Next Gates:**
+- September 8th: Vega committee, agenda item 4 — Stabilization Fund disbursement timeline review (Farrah flagged)
+- Baylight anchor tenant names: when will the two tier-one companies be disclosed?
+- Oakmesh evaluation outcome for Baylight sensor integration
+- Follow-up: has the Stabilization Fund's $4.2M actually arrived?
+
+**What Worked:**
+- Celeste Tran's ecosystem mapping — nine companies across six neighborhoods, each plausible and distinct
+- Carmen Delaine's "Speed of Money" — strongest investigative framing, pattern without accusation
+- Luis Navarro's citizen voices — Marcus Williams wiring buildings he can't afford to live near is the Oakland paradox
+- Farrah Del Rio's opinion — June 14th vendor shortlist detail is specific and damning
+- Jordan Velez's $6.1M as 0.49% of General Fund — the number that makes a city feel real
+- Parallel agent execution worked cleanly — 4 agents, all returned, minimal reconciliation needed
+
+**What Needs to Change:**
+- **Brief accuracy is non-negotiable.** The brief must be verified against the current main edition. This is the editor's job, not the agents'. I own this one.
+- **Name collision check before compilation.** Celeste and Luis independently created "Priya Chandrasekaran" for different characters. Caught during compilation, but should be caught earlier.
+- **Employee count reconciliation.** Jordan had different numbers than Celeste. Standardize in the brief or add a reconciliation step.
+
+---
 
 ### Edition 84 (Mike's grade: ~30/100 — Worst agent output to date)
 

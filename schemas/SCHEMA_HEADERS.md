@@ -1078,3 +1078,22 @@ Franchise context fields (P-T) are narrative flags, not computed values. Set the
 | AC | CanonStatus |
 
 ---
+
+
+## Business_Ledger
+
+- **Rows:** 6 (base roster, S66)
+- **Columns:** 9
+- **Created:** Session 66 (2026-02-27)
+
+| Col | Header |
+|-----|--------|
+| A | BIZ_ID |
+| B | Name |
+| C | Sector |
+| D | Neighborhood |
+| E | Employee_Count |
+| F | Avg_Salary |
+| G | Annual_Revenue |
+| H | Growth_Rate |
+| I | Key_Personnel |

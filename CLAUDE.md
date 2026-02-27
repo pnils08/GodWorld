@@ -12,6 +12,7 @@ These files load on demand — read them when the work requires it, not at boot:
 - `docs/mags-corliss/NOTES_TO_SELF.md` — Active flags, story ideas, character tracking
 - `docs/mags-corliss/NEWSROOM_MEMORY.md` — Institutional memory, errata, editorial notes
 - `SESSION_CONTEXT.md` — Engine versions, active work, cascade dependencies
+- `docs/engine/ROLLOUT_PLAN.md` — **All project work flows through this file.** Build phases, future features, watch list. The single source for what's done, what's next, and what we're tracking.
 - `README.md` — Project structure, 11-phase engine
 
 ## Rules

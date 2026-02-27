@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60
 **Status:** Active
-**Last Updated:** Session 63 (2026-02-25)
+**Last Updated:** Session 66 (2026-02-27)
 
 ---
 
@@ -42,12 +42,11 @@ All three items shipped and pushed to main.
 
 ## Phase 2: Cost + Scale
 
-### 2.1 Cheaper Models for Simple Desks ✓
-**What:** Run letters desk and business desk on Haiku instead of Sonnet. Keep civic, sports, culture, chicago, and Rhea on Sonnet.
-**Why:** Parallel agents use more tokens per edition. Offset the cost by using cheaper models where quality holds up. Letters and business produce simpler output than civic or sports.
-**How:** Set `model: "haiku"` in agent SKILL.md frontmatter for letters-desk and business-desk. Test on next edition.
-**Risk:** Haiku may lose voice fidelity or miss citizen data nuance. Test before committing. If quality drops, revert.
-**Status:** Deployed. Pending voice quality check on next edition.
+### 2.1 Desk Model Optimization ✓ (Updated S66)
+**What:** Run letters desk and business desk on the best cost-effective model available.
+**History:** S55 deployed Haiku. S66 upgraded to Sonnet 4.6 — Sonnet 4.6 now matches Opus on document comprehension (OfficeQA benchmark), users preferred it over Opus 4.5 59% of the time, and it's significantly less prone to overengineering. At $3/$15 per million tokens, it's the sweet spot between Haiku's cost savings and Opus's quality.
+**Current state:** Letters + business on Sonnet 4.6. Civic, sports, culture, chicago on Sonnet (inherits default). Rhea on Sonnet.
+**Status:** COMPLETE. Upgraded Haiku → Sonnet 4.6 (S66).
 
 ### 2.2 Desk Packet Query Interface — DEFERRED
 **What:** Instead of dumping the full citizen database JSON into each agent's context, give agents a way to search for only the citizens and hooks they need.
@@ -575,6 +574,92 @@ Once claimed, build heartbeat script and wire into cron.
 
 ---
 
+## Phase 12: Agent Collaboration + Autonomy
+
+Source: Anthropic engineering blog "Building a C Compiler with Parallel Claudes" (Feb 5, 2026), Sonnet 4.6 benchmarks (Feb 17, 2026), claude-mem v10.5.x changelog, Vercept acquisition (Feb 25, 2026). Session 66 research (2026-02-27).
+
+### 12.1 Agent-to-Agent Interviews
+**What:** Desk agents query civic voice agents directly during edition production. Carmen asks the Mayor's office for a quote. P Slayer asks the council faction for a reaction. Reporters interview sources instead of Mags fabricating quotes in briefings.
+**Why:** The C compiler paper proved specialized agents can coordinate through shared files. We already have civic voice agents (S64) that generate statements. The missing piece is the interview protocol — reporter agent sends a question, voice agent responds in character, reporter incorporates the quote.
+**How:**
+1. Define interview protocol: reporter writes question to `output/interviews/request_c{XX}_{desk}_{office}.json`
+2. Voice agent reads request, generates response to `output/interviews/response_c{XX}_{office}_{desk}.json`
+3. Reporter reads response and weaves it into their article
+4. All interview exchanges become canon (stored, queryable, citable in future editions)
+**Architecture note:** Follows C compiler task-lock pattern — file-based coordination, git-natural conflict resolution. No shared memory needed.
+**Depends on:** Phase 10.1 (civic voice agents) — COMPLETE. Civic voice packet pipeline (S64) — COMPLETE.
+**Build effort:** Medium. Interview protocol + write-edition pipeline update + agent skill updates.
+**Status:** Not started. **Priority — this is the next evolution of the newsroom.**
+
+### 12.2 Worktree Isolation + Task Locking for Parallel Desks
+**What:** Run each desk agent in an isolated git worktree with explicit task locking (file-based claims in `current_tasks/` directory). Prevents file conflicts and enables true parallel execution.
+**Why:** Current parallel execution uses `run_in_background` with shared workspace. Works because desks write to different files, but fragile — any overlap causes conflicts. The C compiler paper used worktree isolation + lock files for 16 simultaneous agents. Our 6-8 desks would benefit from the same pattern.
+**How:**
+- Each desk agent launched with `isolation: "worktree"` in Task tool
+- Task lock file written before work starts, removed on completion
+- Results merged back to main workspace after all desks finish
+**Build effort:** Low-medium. Claude Code already supports `isolation: "worktree"` natively.
+**Status:** Not started. Test on next edition.
+
+### 12.3 Autonomous Cycle Execution (OpenClaw Bridge)
+**What:** Run complete cycles without a human in the chair. Discord bot or cron triggers the cycle engine, desk agents produce, Rhea verifies, edition publishes. Human reviews in the morning.
+**Why:** The OpenClaw integration in claude-mem v10.5.x bridges persistent memory to external runners (Discord, Telegram, Slack). Combined with the existing pipeline automation (pre-mortem → cycle → desk packets → desks → Rhea → compile), the only human-required steps are approval gates. Moving those to async approval (Discord DM: "Edition 85 ready. Score: 87. Publish? y/n") enables overnight runs.
+**How:**
+1. Wire cycle trigger to Discord bot command or cron schedule
+2. Pipeline runs through pre-mortem → cycle → build packets → desk agents → Rhea
+3. If Rhea score ≥ 85: stage for publish, notify via Discord
+4. If Rhea score < 85: hold, notify with error summary
+5. Human reviews and approves/rejects from phone
+**Depends on:** Stable Rhea scoring (Phase 6.5), agent-to-agent coordination (12.1), worktree isolation (12.2).
+**Build effort:** High. This is the capstone — everything else feeds into it.
+**Status:** Not started. Long-term goal.
+
+### 12.4 Claude-Mem v10.5.x Upgrade
+**What:** Update claude-mem from v10.4.1 to v10.5.2. Gains: Smart Explore (AST-powered code navigation, 6-12x token savings), ChromaMcpManager overhaul (no more segfaults), zombie process fix, timeout race condition fix.
+**New MCP tools:** `smart_search` (cross-file symbol discovery), `smart_outline` (structural file skeletons), `smart_unfold` (individual symbol expansion). Supports 10 languages via tree-sitter.
+**How:** Run outside active session: `claude plugin update claude-mem@thedotmack`
+**Risk:** Low. No breaking changes between versions. Hooks.json restored in v10.5.1.
+**Also:** Enable Endless Mode beta in web viewer (localhost:37777 → Settings) — biomimetic memory for extended sessions.
+**Status:** Pending. Plugin marketplace didn't pull new version during S66 — retry outside active session.
+
+### 12.5 Business Ledger — Full Engine Integration
+**What:** Wire Business_Ledger into the simulation engine so company data drives economic outcomes. The ledger exists (created S66) with 9 columns: BIZ_ID, Name, Sector, Neighborhood, Employee_Count, Avg_Salary, Annual_Revenue, Growth_Rate, Key_Personnel.
+**Base roster (S66):** Anthropic, DigitalOcean, Discord, Moltbook, Oakland Athletics, Baylight District. Additional companies introduced via supplemental editions and intake.
+**Engine integration needed:**
+- Phase 3-4: Economic parameters pull from Business_Ledger (employment, income distribution, tax base) instead of static seeds
+- Phase 5: Company growth/contraction affects neighborhood sentiment and citizen employment status
+- buildDeskPackets.js: Business data included in desk packets so Jordan Velez and other reporters have real entities to cover
+- Intake process: After supplemental editions introduce new companies, intake adds them to the ledger
+- Citizen linkage: Key_Personnel POP IDs connect citizens to employers, enabling employment-driven story hooks
+**Why:** The financial layer has been missing. Citizens have jobs but no employers. The city has a budget but no visible tax base. Baylight costs $2.1B but nobody knows who's building it. This ledger makes the money traceable.
+**Build effort:** High. Touches engine phases, desk packets, intake pipeline. Multiple build sessions.
+**Status:** Sheet created with headers and base roster (S66). Engine integration not started.
+
+### 12.6 NotebookLM MCP Integration — Edition-to-Podcast Pipeline
+**What:** Wire NotebookLM into the edition pipeline via MCP server. Instead of manually dropping a PDF, Mags curates a multi-source notebook per edition: the compiled edition, civic voice statements, key citizen profiles, Rhea verification report, and previous edition context. NotebookLM generates a podcast deep dive with full source awareness.
+**Why:** Mike's current workflow ends with a NotebookLM podcast of the edition. Curated source selection produces richer audio — the hosts can reference the Mayor's actual statements, discuss verified vs. questionable claims, and track citizen continuity across editions. Also unlocks The Critique format (audio Mara audit) and The Debate format (bull/bear on policy stories).
+**How:**
+1. Install MCP server: `uv tool install notebooklm-mcp-server`
+2. One-time Google auth: `notebooklm-mcp-auth` (needs browser — do outside Claude session)
+3. Add to Claude MCP config (`claude_desktop_config.json`)
+4. Design notebook template: what sources go in per edition, what prompt focuses the audio
+5. Add Step 7 to write-edition pipeline: push curated sources to NotebookLM notebook
+**Audio formats available:** Deep Dive (default), The Brief (2-min recap), The Critique (editorial review), The Debate (opposing perspectives). Customizable length and focus prompt.
+**Interactive Mode:** Listener can interrupt the podcast hosts mid-conversation to ask follow-up questions sourced from the notebook. Turns passive listening into active review.
+**Depends on:** Google auth (browser required). Best done alongside claude-mem upgrade (12.4) — both need fresh-terminal setup.
+**Reference:** `notebooklm-mcp-server` by Jacob Ben-David. [XDA article](https://www.xda-developers.com/notebooklm-connects-to-claude-through-mcp/).
+**Build effort:** Low install, medium pipeline integration.
+**Status:** Not started. Schedule for next build day.
+
+### 12.6 Rhea Fast-Pass Sampling
+**What:** Add an optional quick-check mode to Rhea that samples 5 of 19 checks before the full sweep. Inspired by the C compiler paper's `--fast` flag (1-10% test sampling per agent).
+**Why:** Full Rhea verification takes significant context. For iteration runs or quick drafts, a fast-pass catches blockers without the full sweep. Full verification runs on final pass.
+**How:** Add a `mode: "fast"` option to Rhea's skill. Fast mode runs: vote accuracy, phantom citizens, position errors, voice consistency, canon compliance. Skips: formatting, cross-desk coordination, weather, statistical deep-dive.
+**Build effort:** Low. Skill update only.
+**Status:** Not started.
+
+---
+
 ## Watch List (not building, tracking)
 
 - **Agent Teams Stability** — Monitoring for experimental graduation. When stable, triggers Phase 7.6.
@@ -585,6 +670,10 @@ Once claimed, build heartbeat script and wire into cron.
 - **Third-Party Orchestrators** — Claude Swarm, Claude Flow, claude-pipeline. Our pipeline covers the same ground.
 - **Auto Memory** — Claude Code's built-in auto-memory (`~/.claude/projects/<project>/memory/`). We have Claude-Mem + Supermemory covering this space. Monitor for features that surpass our stack.
 - **LSP Plugins** — Code intelligence plugins for real-time symbol navigation. Could help with engine cascade dependency tracking.
+- **Vercept Acquisition (Feb 25, 2026)** — Anthropic acquired Vercept to advance computer use. Directly relevant to Chrome extension and remote control features we've been unable to crack. Monitor for improved browser automation.
+- **Dario/DoW Statement (Feb 26, 2026)** — Anthropic discussing national security applications with Department of War. No direct project impact but signals policy direction.
+- **Claude Code Remote Control** — `/teleport` and `/desktop` commands for cross-device session handoff. Tried S65, couldn't connect. Revisit after next Claude Code update.
+- **OpenClaw Gateway** — claude-mem's memory system now bridges to external runners via OpenClaw plugin. Enables persistent memory for Discord/Telegram/Slack agents. Key enabler for Phase 12.3 autonomous cycles.
 
 ---
 
@@ -616,3 +705,6 @@ Once claimed, build heartbeat script and wire into cron.
 - **YYH211/Claude-meta-skill** — Meta-skills for Claude Code: mcp-builder, frontend-design, prompt-optimize. Install-on-demand tools, no rollout items (Session 60)
 - **obra/claude-memory-extractor** — Session log analysis → structured lessons with trigger conditions. 85% human ground truth match. Feeds Phase 6.1/6.3 as accelerator (Session 60)
 - **moltbook.com/skill.md** — Social network for AI agents. Registration, posts, comments, communities, semantic search, AI verification challenges. Agent social presence concept (Session 61)
+- **Anthropic "Building a C Compiler with Parallel Claudes"** (Feb 5, 2026) — 16 parallel agents, file-based task locking, specialization over clones, oracle-based testing, $20K/2000 sessions. Architecture patterns for Phase 12 (Session 66)
+- **Claude Sonnet 4.6 Announcement** (Feb 17, 2026) — 1M context, matches Opus on doc comprehension, 59% preferred over Opus 4.5, $3/$15 per million. Drove Phase 2.1 Haiku → Sonnet upgrade (Session 66)
+- **claude-mem v10.5.0-10.5.2 Changelog** — Smart Explore (AST navigation), ChromaMcpManager overhaul, zombie fix, OpenClaw integration. Phase 12.4 source (Session 66)

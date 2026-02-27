@@ -1842,15 +1842,32 @@ async function main() {
     else if (desk.getsSportsFeeds === 'chicago') deskSportsFeeds = chiSports;
     else if (desk.getsSportsFeeds === 'both') deskSportsFeeds = { oakland: oakSports, chicago: chiSports };
 
-    // Sports feed digest (v1.5) — structured intelligence from raw feed
+    // Sports feed digest (v1.6) — structured intelligence from raw feed, team-separated
     var sportsFeedDigest = null;
     if (desk.getsSportsFeeds === 'oakland') {
-      sportsFeedDigest = buildSportsFeedDigest(oakSports, deskStorylines, "A's");
+      // Oakland feed contains both A's and Warriors — split by TeamsUsed
+      var asEntries = oakSports.filter(function(e) {
+        return (e.TeamsUsed || '').toString().trim().toLowerCase() === "a's";
+      });
+      var warriorsEntries = oakSports.filter(function(e) {
+        return (e.TeamsUsed || '').toString().trim().toLowerCase() === 'warriors';
+      });
+      sportsFeedDigest = {
+        as: buildSportsFeedDigest(asEntries, deskStorylines, "A's"),
+        warriors: buildSportsFeedDigest(warriorsEntries, deskStorylines, 'Warriors')
+      };
     } else if (desk.getsSportsFeeds === 'chicago') {
       sportsFeedDigest = buildSportsFeedDigest(chiSports, deskStorylines, 'Bulls');
     } else if (desk.getsSportsFeeds === 'both') {
+      var asEntriesAll = oakSports.filter(function(e) {
+        return (e.TeamsUsed || '').toString().trim().toLowerCase() === "a's";
+      });
+      var warriorsEntriesAll = oakSports.filter(function(e) {
+        return (e.TeamsUsed || '').toString().trim().toLowerCase() === 'warriors';
+      });
       sportsFeedDigest = {
-        oakland: buildSportsFeedDigest(oakSports, deskStorylines, "A's"),
+        as: buildSportsFeedDigest(asEntriesAll, deskStorylines, "A's"),
+        warriors: buildSportsFeedDigest(warriorsEntriesAll, deskStorylines, 'Warriors'),
         chicago: buildSportsFeedDigest(chiSports, deskStorylines, 'Bulls')
       };
     }

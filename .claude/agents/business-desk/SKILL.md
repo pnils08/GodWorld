@@ -2,7 +2,7 @@
 name: business-desk
 description: Business desk agent for The Cycle Pulse. Writes the Business Ticker and economic features. Use when producing business section of an edition.
 tools: Read, Glob, Grep
-model: haiku
+model: sonnet
 maxTurns: 15
 permissionMode: dontAsk
 ---

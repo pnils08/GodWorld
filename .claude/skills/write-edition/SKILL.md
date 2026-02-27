@@ -655,6 +655,36 @@ After user approval (confirmed at Step 4.9):
    - New canon figures introduced
    - Citizen usage count
 
+## Step 5.05: Generate Newspaper Print Edition
+
+After saving the text edition and uploading to Drive, generate the newspaper print PDF.
+
+### 1. Generate Photos
+```bash
+node scripts/generate-edition-photos.js editions/cycle_pulse_edition_{XX}.txt
+```
+- Auto-assigns photos using editorial logic (DJ Hartley street documentary, Arman Gutiérrez editorial portrait)
+- Uses Together AI / FLUX.1-schnell (~$0.003/image)
+- Output: `output/photos/e{XX}/` with manifest.json
+- Use `--dry-run` to preview assignments before generating
+
+### 2. Generate PDF
+```bash
+node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_{XX}.txt
+```
+- Reads photos from `output/photos/e{XX}/manifest.json`
+- Generates HTML layout → Puppeteer renders to tabloid PDF (11x17)
+- Output: `output/pdfs/bay_tribune_e{XX}.pdf`
+- Use `--preview` for HTML-only (browser CSS iteration)
+- Use `--letter` for 8.5x11 instead of tabloid
+
+### 3. Upload Print Edition to Drive
+```bash
+node scripts/saveToDrive.js output/pdfs/bay_tribune_e{XX}.pdf edition
+```
+
+---
+
 ## Step 5.1: Generate Edition Brief (Auto-Update Bot Context)
 
 After saving, generate the edition brief that the Discord bot and autonomous scripts use for world awareness. This replaces the manual process that caused the E83→E84 stale brief problem.

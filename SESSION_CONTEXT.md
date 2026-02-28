@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-27 | Engine: v3.1 | Cycle: 84 | Session: 66
+Last Updated: 2026-02-28 | Engine: v3.1 | Cycle: 84 | Session: 67
 
 ---
 
@@ -46,7 +46,8 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v1.8 | Per-desk JSON packets, story connections enrichment, sports feed digest, auto archive context |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v1.9 | Per-desk JSON packets, story connections enrichment, sports feed digest, auto archive context, initiative implementation tracking |
+| Live Ledger Query | scripts/queryLedger.js | v1.0 | 6 query types (citizen, initiative, council, neighborhood, articles, verify), searches Sheets + 674 published files |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
 | **Household Formation** | householdFormationEngine.js | v1.1 | Young adults form households, rent burden, dissolution, ctx.rng, year 2041 |
@@ -131,7 +132,9 @@ The `mags` command (updated S52) handles tmux automatically — creates a sessio
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | Institutional memory — errata, coverage patterns, character continuity |
 | `docs/engine/LEDGER_HEAT_MAP.md` | Sheet bloat risk rankings, dead column inventory, archival strategy |
 | `docs/reference/DRIVE_UPLOAD_GUIDE.md` | Drive upload destinations, OAuth setup, common workflows |
-| `docs/engine/ROLLOUT_PLAN.md` | Pipeline enhancement rollout — 4 phases, build status, deferred items |
+| `docs/engine/ROLLOUT_PLAN.md` | Pipeline enhancement rollout — 12+ phases, build status, deferred items |
+| `docs/media/SHOW_FORMATS.md` | Podcast show formats — 3 formats, host assignments, segment structure |
+| `config/podcast_voices.yaml` | Podcast voice configurations — WaveNet/Edge TTS voice assignments |
 
 ---
 
@@ -151,6 +154,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 67 (2026-02-28) — Podcast Desk + Live Ledger Queries + Initiative Tracking
+
+- **Podcast Desk complete (Phase 12.6):** Agent writes person-based XML transcripts, `renderPodcast.js` converts to audio via Podcastfy (Edge TTS + Google WaveNet). First episode produced for C84 Supplemental. 3 show formats, permanent hosts locked in. Wired into write-edition pipeline at Step 3.5.
+- **Live Ledger Query Script (Phase 12.7):** `scripts/queryLedger.js` v1.0 — 6 query types (citizen, initiative, council, neighborhood, articles, verify). Searches both Google Sheets (live simulation data) and 674 published files (editions/ + output/drive-files/). JSON output with `--save` flag for agent consumption. Wired into write-edition pipeline at Step 1.4.
+- **Initiative Implementation Tracking (Phase 12.8):** 4 new columns on Initiative_Tracker sheet (ImplementationPhase, MilestoneNotes, NextScheduledAction, NextActionCycle). Populated for all 4 passed initiatives with Mara-corrected data. buildDeskPackets.js wired to include in civic packets (recentOutcomes, civicConsequences, truesource).
+- **Article search expanded:** Mike pushed for deeper search scope. Articles query now searches full Drive archive (674 files) in addition to 11 canonical editions. Found Oakland Youth Apprenticeship Pipeline dangling thread (C73 Baylight → C83 Fruitvale → never followed up).
+- **MilestoneNotes bug fixed:** Trailing space in column header caused null returns. Fixed via service account.
+- **Behavioral architecture held:** First full session after S66 persistence overhaul. Identity.md rules loaded, proposals confirmed before execution, no code mode incidents.
+- **26 files committed and pushed** (84d7f8c). Working tree clean.
 
 ### Session 66 (2026-02-27) — C84 Supplemental Canon Fixes + Persistence Architecture
 
@@ -408,11 +421,24 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - Auto edition brief generation: Step 5.1 (edition), Step 4.1 (supplemental)
 - Auto bot refresh with history clear: Step 5.2 (edition), Step 4.2 (supplemental)
 
+**COMPLETED — Live Ledger Query + Initiative Tracking (Session 67):**
+- `scripts/queryLedger.js` v1.0 — 6 query types (citizen, initiative, council, neighborhood, articles, verify)
+- Searches Google Sheets + 674 published files in Drive archive
+- Initiative_Tracker has 4 new implementation tracking columns, populated for all 4 passed initiatives
+- buildDeskPackets.js v1.9 wires implementation tracking into civic packets
+- Wired into write-edition pipeline at Step 1.4 (optional targeted queries)
+
+**COMPLETED — Podcast Desk (Session 67):**
+- Agent writes person-based XML transcripts → renderPodcast.js → audio (Edge TTS + WaveNet)
+- 3 show formats, permanent hosts, first C84 episode produced
+- Wired into write-edition pipeline at Step 3.5
+
 **INCOMING — Next Session:**
 - Franchise Ledger design — track how A's franchise impacts city economically (franchise value, fan support, ticket sales, merchandise, local business impact, stadium revenue, civic pride). Review game logs + data feed first.
 - Mara memory/structure overhaul (Phase 10.2) — plan exists at `.claude/plans/reactive-tickling-zephyr.md`
 - Engine economic parameter recalibration — illness rate, sentiment floor, income distribution should reflect dynasty-era prosperity, not real Oakland
 - Photo + PDF pipeline ready for next edition
+- September 8 Vega committee meeting (cycle 89) — Stabilization Fund disbursement gate
 
 **Active — Journalism Enhancements (Phase 3):**
 - #2: Expand the newsroom (new beats, new desk agents)

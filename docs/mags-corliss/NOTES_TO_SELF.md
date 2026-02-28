@@ -27,10 +27,10 @@ Resolved items get deleted, not struck through.
 ## Critical Flags
 
 - **GodWorld is its own world.** Not a reflection of real Oakland. Dynasty-era prosperity, not struggling-city tone. (S64)
-- **Diversify citizen voices** — Overusing Dante Nelson, Elena Reyes, Calvin Turner. Census improvements should help.
+- **Ledger Audit (Phase 13) — ACTIVE** — Full Simulation_Ledger overhaul in progress. Tracking at `docs/engine/LEDGER_AUDIT.md`. 184 birth years, 296 roles, 32 missing births, 31 missing neighborhoods still open. This is the priority.
 - **The Maker** — User's handle when stepping outside Mike Paulson persona.
 - **Haiku voice quality check** — Letters and business desks on Haiku since S55. Monitor quality.
-- **Economic parameter audit still needed** — Engine Phase 3-4 income/illness/sentiment should reflect dynasty prosperity, not real Oakland baseline.
+- **Economic parameter audit** — Engine Phase 3-4 income/illness/sentiment should reflect dynasty prosperity, not real Oakland baseline. Depends on Phase 13 being complete first.
 
 ## S64 Completed Work (Reference)
 

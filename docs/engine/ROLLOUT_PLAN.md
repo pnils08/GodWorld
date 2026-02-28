@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 68 (2026-02-28)
+**Last Updated:** Session 68 (2026-02-28) — Added Phase 13 (Ledger Audit)
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -513,6 +513,18 @@ Full pipeline: agent → XML transcript → Podcastfy → audio. 3 show formats,
 
 ### 12.8 Initiative Implementation Tracking ✓ (S67)
 4 tracking columns on Initiative_Tracker, wired into desk packets. Details in ROLLOUT_ARCHIVE.md.
+
+---
+
+## Phase 13: Simulation_Ledger Data Integrity Audit — ACTIVE
+
+**Tracking document:** `docs/engine/LEDGER_AUDIT.md` — all progress, decisions, and remaining work live there.
+
+**Why this is a phase:** Every downstream system depends on the Simulation_Ledger being correct — desk packets, queryLedger.js, citizen lookups, age calculations, neighborhood assignments, economic parameters. Bad ledger data cascades everywhere. This audit makes the ledger trustworthy.
+
+**Status:** CORE COMPLETE. 639/639 citizens have specific role, birth year, and neighborhood. 167 unique 2041 demographic voice roles. Remaining: 42 MLB player age review (sports universe), 1 Chicago migration, Rick Dillon family linkage, economic parameter wiring. See LEDGER_AUDIT.md for the full breakdown.
+
+**Started:** Session 68 (2026-02-28)
 
 ---
 

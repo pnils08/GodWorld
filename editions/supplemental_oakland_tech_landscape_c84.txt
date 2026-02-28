@@ -49,7 +49,7 @@ Tenth Street Digital is the startup. Five employees in a room above a barbershop
 
 That's the stack. Nine companies across six neighborhoods — Jack London, Embarcadero West, Uptown, Adams Point, Temescal, West Oakland, Brooklyn Basin, Old Oakland, Lake Merritt. Four anchors with national footprints. Five Oakland-native firms with Oakland-native founders. Total estimated employment: just over nine hundred. Total estimated annual revenue flowing through Oakland: north of $400 million when you include the A's franchise operations and Baylight development entity.
 
-Maya Dillon, 51, has worked in Oakland tech for fifteen years — long enough to remember when the sector meant three companies in a co-working space. "The stack wasn't planned," she said. "Nobody drew a diagram and said put AI here and civic tech here and a VC firm in the middle. The companies showed up because the city was already building things. Baylight, OARI, the transit hub — those projects created the demand. The companies filled it."
+Linda Chow, 51, has worked in Oakland tech for fifteen years — long enough to remember when the sector meant three companies in a co-working space. "The stack wasn't planned," she said. "Nobody drew a diagram and said put AI here and civic tech here and a VC firm in the middle. The companies showed up because the city was already building things. Baylight, OARI, the transit hub — those projects created the demand. The companies filled it."
 
 Andre Lee, 55, electrician, has lived in Temescal since 2003. He's wired half the commercial conversions along Telegraph — including the building DigitalOcean occupies now. "I've seen this before," he said. "New people, new money, new buildings. What I haven't seen before is the money staying. Usually it comes for two years, the lease runs out, and they go back to San Francisco. These ones are still here. That's different. I don't know yet if it's good different."
 
@@ -75,7 +75,7 @@ By Jordan Velez | Bay Tribune Business
 
 ---
 
-Maya Dillon, 51, works in data infrastructure at a firm near the Jack London waterfront. She's been in the industry for fifteen years — the long arc of Oakland's relationship with tech, from scattered startups to the integrated ecosystem moving in now. When I spoke with her this week, she was cautious about the money flowing into the city.
+Linda Chow, 51, works in data infrastructure at a firm near the Jack London waterfront. She's been in the industry for fifteen years — the long arc of Oakland's relationship with tech, from scattered startups to the integrated ecosystem moving in now. When I spoke with her this week, she was cautious about the money flowing into the city.
 
 "I know where the jobs are," she said. "I also know where they're not."
 
@@ -238,13 +238,13 @@ I spent two weeks talking to five people — inside the industry, outside it, ad
 -> See also: Celeste Tran, "The Oakland Stack" — base roster and emerging companies
 -> See also: Jordan Velez, "The Footprint" — economic weight and tax data
 
-MAYA DILLON, 51, ROCKRIDGE — PRODUCT OPERATIONS MANAGER
+LINDA CHOW, 51, ROCKRIDGE — PRODUCT OPERATIONS MANAGER
 
-Maya Dillon has been in Oakland tech longer than most of the companies currently leasing office space along the Estuary. She started in project management at a logistics firm in Jack London Square in 2024, moved into product operations as the sector matured, and now works for one of the mid-size firms that moved its West Coast office to Oakland after the Baylight bond vote passed last year. She lives in the same Rockridge apartment she's rented since 2031.
+Linda Chow has been in Oakland tech longer than most of the companies currently leasing office space along the Estuary. She started in project management at a logistics firm in Jack London Square in 2024, moved into product operations as the sector matured, and now works for one of the mid-size firms that moved its West Coast office to Oakland after the Baylight bond vote passed last year. She lives in the same Rockridge apartment she's rented since 2031.
 
-"I watched this corridor fill in slow motion," Dillon told me from a bench outside the Rockridge BART station. "Ten years ago, there were three tech offices between Lake Merritt and Jack London. Now I can name eleven from memory and I'm probably missing four. The work is good. The money is real. But I notice who's in the elevator with me every morning and it's not a lot of people who were in Oakland when the A's were still bad. I don't know what to do with that except keep showing up."
+"I watched this corridor fill in slow motion," Chow told me from a bench outside the Rockridge BART station. "Ten years ago, there were three tech offices between Lake Merritt and Jack London. Now I can name eleven from memory and I'm probably missing four. The work is good. The money is real. But I notice who's in the elevator with me every morning and it's not a lot of people who were in Oakland when the A's were still bad. I don't know what to do with that except keep showing up."
 
-Dillon's concern isn't about displacement in the way most people frame it. She's not being pushed out. She's watching the ground shift underneath a neighborhood she chose when it was affordable, and wondering if the version of Oakland that attracted her still exists in the version that's attracting everyone else.
+Chow's concern isn't about displacement in the way most people frame it. She's not being pushed out. She's watching the ground shift underneath a neighborhood she chose when it was affordable, and wondering if the version of Oakland that attracted her still exists in the version that's attracting everyone else.
 
 MARCUS WILLIAMS, 45, ROCKRIDGE — JOURNEYMAN ELECTRICIAN
 
@@ -303,8 +303,6 @@ Oakland's tech sector isn't knocking on City Hall's door. It's already inside.
 By Farrah Del Rio | Bay Tribune Opinion
 [OPINION]
 
----
-
 On June 14th at 2:15 PM, the Baylight Authority posted a revised vendor shortlist for the district's fiber-optic backbone contract. Fourteen vendors applied. Three made the shortlist. Two of the three are subsidiaries of companies already leasing office space in Jack London Square. No press conference. No council briefing. A three-page PDF buried on the Authority's procurement portal, timestamped on a Friday afternoon.
 
 Nobody's talking about this. Not the Authority. Not the council. Not the mayor's office, which referred me to Keisha Ramos, who referred me to a spokesperson, who said vendor selection follows standard municipal procurement guidelines. Which is true. And which tells you nothing.
@@ -338,7 +336,7 @@ ARTICLE TABLE — ENGINE INTAKE FORMAT
 |Celeste Tran|feature|civic-initiative|The Oakland Stack|Maps Oakland's nine-company tech ecosystem across six neighborhoods — four national anchors (Anthropic, DigitalOcean, Discord, Moltbook) and five Oakland-native firms (Ridgeline Ventures, Gridiron Analytics, Oakmesh Systems, Portside Bio, Tenth Street Digital) — tracing how civic mega-projects created the demand that built the stack|Baylight District, OARI, A's dynasty, Temescal Community Health Center, Fruitvale Transit Hub|
 |Jordan Velez|feature|civic-initiative|The Footprint|Tech companies in Oakland generate $6.1M in annual business taxes and employ 700 workers directly, but hiring patterns (34% local) and geographic concentration in Jack London/Temescal corridor suggest benefits aren't distributed evenly. Real estate appreciation 42% since 2035 in tech neighborhoods. The economics of growth without inclusion.|Jack London Square, Temescal, Baylight District, Rockridge, West Oakland, East Oakland, Fruitvale|
 |Carmen Delaine|analysis|civic-initiative|The Speed of Money|Civic-tech nexus analysis: hospitality operators at Baylight site within 72 hours of the 6-3 bond vote; drone imagery pre-dates the vote; Ramos confirms two unnamed tier-one tech companies in active discussion; connects Baylight's compressed timeline to private institutional infrastructure. Five-initiative comparison shows Baylight's anomalous speed. Pattern observation, not allegation.|Baylight District, OARI, West Oakland Stabilization Fund, Temescal Community Health Center, Fruitvale Transit Hub Phase II|
-|Luis Navarro|feature|civic-initiative|Who Works Here|Five Oakland residents — tech worker Maya Dillon (51), electrician Marcus Williams (45), electrician Andre Lee (55), line cook Tomas Renteria (34), software engineer Sonia Parikh (28) — on what the tech boom looks like from kitchen tables and job sites. The paradox of wiring buildings you can't afford to live near.|Rockridge, Fruitvale, Temescal, Jack London|
+|Luis Navarro|feature|civic-initiative|Who Works Here|Five Oakland residents — tech worker Linda Chow (51), electrician Marcus Williams (45), electrician Andre Lee (55), line cook Tomas Renteria (34), software engineer Sonia Parikh (28) — on what the tech boom looks like from kitchen tables and job sites. The paradox of wiring buildings you can't afford to live near.|Rockridge, Fruitvale, Temescal, Jack London|
 |Farrah Del Rio|opinion|civic-initiative|The Invisible Hand|Opinion: Baylight fiber-optic vendor shortlist posted June 14 — 2 of 3 finalists are local tech-adjacent firms. Council approved accelerated tech-sector permitting April, 7-2 vote. Stabilization Fund at $4.2M approved but no checks delivered, 295 applicants waiting. The money that builds office towers moves faster than the money that stabilizes neighborhoods. Watch September 8th, Vega committee, agenda item 4.|Baylight, OARI, West Oakland Stabilization Fund|
 
 
@@ -391,7 +389,7 @@ JOURNALISTS:
 — Reed Thompson (referenced as source reporter)
 
 CITIZENS QUOTED:
-— Maya Dillon, 51, Rockridge, Product Operations Manager (POP-00742) — tech insider perspective, watches corridor shift
+— Linda Chow, 51, Rockridge, Product Operations Manager (NEW) — tech insider perspective, watches corridor shift
 — Marcus Williams, 45, Rockridge, Journeyman Electrician (POP-00233) — wires tech offices, rent rising 40%, mortgage denied
 — Andre Lee, 55, Temescal, Electrician (POP-00311) — wired DigitalOcean building in 2006, generational perspective, four waves of money, still working
 — Tomas Renteria, 34, Fruitvale, Line Cook (NEW) — family taqueria on International Blvd since 2009, lunch crowd shifting, four businesses closed on same block
@@ -427,7 +425,7 @@ BAYLIGHT TECH CONNECTIONS:
 — Oakmesh Systems under evaluation for distributed energy monitoring integration.
 
 CITIZENS TO TRACK FORWARD:
-— Maya Dillon (51, Rockridge) — tech insider, corridor observer. Product operations manager.
+— Linda Chow (51, Rockridge) — tech insider, corridor observer. Product operations manager.
 — Marcus Williams (45, Rockridge) — electrician paradox: wires the offices, can't afford the neighborhood. Mortgage denied. Active housing pressure storyline.
 — Andre Lee (55, Temescal) — wired DigitalOcean building in 2006. Four-wave perspective. Still working, still here. Will be here in ten years.
 — Tomas Renteria (34, Fruitvale) — family taqueria since 2009. Lunch crowd demographic shift. Four businesses closed on block.

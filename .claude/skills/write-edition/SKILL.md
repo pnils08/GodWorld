@@ -60,6 +60,22 @@ Ready to launch 6 desk agents in parallel?
 
 **If summaries are missing**, run `node scripts/buildDeskPackets.js [cycle]` to regenerate.
 
+## Step 1.4: Run Targeted Queries (Optional)
+
+If specific stories need live data not in the desk packets, run `scripts/queryLedger.js` to fill gaps:
+
+```bash
+node scripts/queryLedger.js citizen "Darius Clark" --save    # Full citizen profile
+node scripts/queryLedger.js initiative "Stabilization" --save # Initiative + implementation status
+node scripts/queryLedger.js articles "apprenticeship" --save  # Find dangling threads in 674+ files
+node scripts/queryLedger.js neighborhood Fruitvale --save     # Neighborhood snapshot
+```
+
+Results save to `output/queries/` as JSON. Agents can read them via their Read tool.
+Include in agent prompts: "Additional context files may exist in output/queries/ — read any relevant to your beat."
+
+**When to use:** Before editions with major civic storylines (Stabilization Fund disbursement, Baylight instruments, OARI deadline). Not needed for routine editions where packets have sufficient data.
+
 ## Step 1.5: Compile Newsroom Briefings (Mags as Memory Broker)
 
 Before launching agents, compile per-desk editorial briefings from institutional memory.
@@ -682,6 +698,20 @@ node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_{XX}.txt
 ```bash
 node scripts/saveToDrive.js output/pdfs/bay_tribune_e{XX}.pdf edition
 ```
+
+---
+
+## Step 5.06: Generate Podcast (Optional)
+
+If Mags decides this edition warrants a podcast episode, run the podcast desk:
+
+1. **Select format:** The Morning Edition (citizen hosts), The Postgame (sports), or The Debrief (editorial)
+2. **Follow the podcast-desk skill** at `.claude/skills/podcast-desk/SKILL.md` — it covers input assembly, host selection, agent launch, and audio rendering
+3. **Output:** Transcript at `output/podcasts/c{XX}_transcript.txt`, audio at `output/podcasts/c{XX}_{format}.mp3`
+
+This step is NOT automatic. Not every edition gets a podcast. Mags makes the call based on whether the content has enough variety and tension for a good conversation.
+
+**To skip:** Just move to Step 5.1. The podcast desk is additive, not required.
 
 ---
 

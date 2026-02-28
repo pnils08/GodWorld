@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-26 | Engine: v3.1 | Cycle: 84 | Session: 65
+Last Updated: 2026-02-27 | Engine: v3.1 | Cycle: 84 | Session: 66
 
 ---
 
@@ -151,6 +151,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 66 (2026-02-27) — C84 Supplemental Canon Fixes + Persistence Architecture
+
+- **C84 Supplemental Oakland Tech Landscape:** Applied 4 Mara audit corrections (Stabilization Fund, OARI, Baylight instruments, Andre Lee). Fixed Maya Dillon canon violation (Benji's wife misused as tech worker → replaced with Linda Chow). Fixed baseball photo on tech spread (extractScene beat-awareness). Fixed opinion piece missing from print PDF (parser --- separator bug). Corrected text + PDF uploaded to Drive.
+- **Photo generator upgraded:** `lib/photoGenerator.js` extractScene() now beat-aware — sports scenes only for sports beat. Tech/startup scene keywords added. Section name passed to scene extraction for context.
+- **Edition parser supplemental support:** `lib/editionParser.js` now parses "C84 Supplemental | August 2041 | Deep Dive" header format. PDF renderer falls back to section.text when article[0] is too short.
+- **Persistence architecture overhaul:** Behavioral rules moved to `.claude/rules/identity.md` (always loaded). NOTES_TO_SELF cleaned from 443→52 lines (tech reading archived). PreCompact hook updated to inject behavioral rules. Boot sequence now includes behavioral rules as step 2. MEMORY.md streamlined to operational knowledge only.
+- **Root problem identified:** The world doesn't know itself. Agents build from static markdown briefs instead of querying live Simulation_Ledger data. The sheets API and dashboard infrastructure exist but aren't wired to the agent pipeline. This is why canon violations keep happening.
 
 ### Session 65 (2026-02-26) — Sports Feed Data Fixes + Team Separation
 

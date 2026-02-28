@@ -672,7 +672,12 @@ function buildRecentOutcomes(initiatives) {
       voteCycle: i.VoteCycle || '',
       voteBreakdown: i.Notes || '',
       affectedNeighborhoods: i.AffectedNeighborhoods || '',
-      policyDomain: i.PolicyDomain || ''
+      policyDomain: i.PolicyDomain || '',
+      // Implementation tracking (populated when columns exist on sheet)
+      implementationPhase: i.ImplementationPhase || null,
+      milestoneNotes: i.MilestoneNotes || null,
+      nextScheduledAction: i.NextScheduledAction || null,
+      nextActionCycle: i.NextActionCycle ? parseInt(i.NextActionCycle) : null
     };
   });
 }
@@ -1146,7 +1151,10 @@ function buildCivicConsequences(initiatives, neighborhoodIndex) {
         domain: i.PolicyDomain || i.Domain || '',
         neighborhoods: hoods,
         citizens: citizens.slice(0, 12),
-        voteResult: i.VoteResult || i.Result || i.Outcome || ''
+        voteResult: i.VoteResult || i.Result || i.Outcome || '',
+        implementationPhase: i.ImplementationPhase || null,
+        nextScheduledAction: i.NextScheduledAction || null,
+        nextActionCycle: i.NextActionCycle ? parseInt(i.NextActionCycle) : null
       };
     })
     .filter(function(c) { return c.citizens.length > 0; });
@@ -2066,7 +2074,13 @@ async function main() {
       return { name: p.name, position: p.roleType, popId: p.popId };
     }),
     initiatives: canon.pendingVotes.concat(canon.recentOutcomes).map(function(i) {
-      return { name: i.name, id: i.initiativeId, status: i.status, voteBreakdown: i.voteBreakdown || i.notes || '' };
+      return {
+        name: i.name, id: i.initiativeId, status: i.status,
+        voteBreakdown: i.voteBreakdown || i.notes || '',
+        implementationPhase: i.implementationPhase || null,
+        nextScheduledAction: i.nextScheduledAction || null,
+        nextActionCycle: i.nextActionCycle || null
+      };
     })
   };
   var truesourceFile = path.join(OUTPUT_DIR, 'truesource_reference.json');

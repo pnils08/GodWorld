@@ -46,6 +46,8 @@ var DESTINATIONS = {
   prospect:   '1QBDslfH7zLmUPUa-c_AOkG4bWyHHPKrA',  // Top_Prospects_Data_Cards
   // Bulls Universe Database
   bulls:      '1RLj9scDEr2wk3o6MeypTcMG54QWX0TLU',  // Player_Cards
+  // Podcast audio
+  podcast:    '1wLecsc3E1WVuiS-FA1wEoqJm8FNEnSUb',  // Podcasts
   // Aliases
   briefing:   '1LEClpCUeRpT91gUR3SUm-Yx-3MldMJ5G',  // = mara (Mara directives & briefings)
   pdf:        '118tCh9stHjuocSUYXj0LjGnuzp5mLFhf',  // = edition (PDFs go alongside editions)

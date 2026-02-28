@@ -635,21 +635,21 @@ Source: Anthropic engineering blog "Building a C Compiler with Parallel Claudes"
 **Build effort:** High. Touches engine phases, desk packets, intake pipeline. Multiple build sessions.
 **Status:** Sheet created with headers and base roster (S66). Engine integration not started.
 
-### 12.6 NotebookLM MCP Integration — Edition-to-Podcast Pipeline
-**What:** Wire NotebookLM into the edition pipeline via MCP server. Instead of manually dropping a PDF, Mags curates a multi-source notebook per edition: the compiled edition, civic voice statements, key citizen profiles, Rhea verification report, and previous edition context. NotebookLM generates a podcast deep dive with full source awareness.
-**Why:** Mike's current workflow ends with a NotebookLM podcast of the edition. Curated source selection produces richer audio — the hosts can reference the Mayor's actual statements, discuss verified vs. questionable claims, and track citizen continuity across editions. Also unlocks The Critique format (audio Mara audit) and The Debate format (bull/bear on policy stories).
-**How:**
-1. Install MCP server: `uv tool install notebooklm-mcp-server`
-2. One-time Google auth: `notebooklm-mcp-auth` (needs browser — do outside Claude session)
-3. Add to Claude MCP config (`claude_desktop_config.json`)
-4. Design notebook template: what sources go in per edition, what prompt focuses the audio
-5. Add Step 7 to write-edition pipeline: push curated sources to NotebookLM notebook
-**Audio formats available:** Deep Dive (default), The Brief (2-min recap), The Critique (editorial review), The Debate (opposing perspectives). Customizable length and focus prompt.
-**Interactive Mode:** Listener can interrupt the podcast hosts mid-conversation to ask follow-up questions sourced from the notebook. Turns passive listening into active review.
-**Depends on:** Google auth (browser required). Best done alongside claude-mem upgrade (12.4) — both need fresh-terminal setup.
-**Reference:** `notebooklm-mcp-server` by Jacob Ben-David. [XDA article](https://www.xda-developers.com/notebooklm-connects-to-claude-through-mcp/).
-**Build effort:** Low install, medium pipeline integration.
-**Status:** Not started. Schedule for next build day.
+### 12.6 Podcast Desk — Edition-to-Audio Pipeline (was: NotebookLM MCP Integration)
+**What:** Full podcast production desk that writes curated show transcripts with named citizen hosts, then renders audio via Podcastfy (open-source TTS). Replaces the manual NotebookLM workflow with a programmable pipeline where the desk agent controls 100% of editorial content and Podcastfy handles audio rendering.
+**Why:** NotebookLM research (S67) revealed limitations: cookie-based auth (fragile), 3 podcasts/day free tier, can't customize host voices/names, two generic AI voices. Podcastfy's `transcript_file` mode accepts pre-written `<Person1>/<Person2>` XML scripts, skipping LLM generation entirely — the desk agent IS the editorial brain, Podcastfy is just the audio press.
+**Architecture:**
+1. Podcast desk agent (`podcast-desk`) — writes show transcripts with named citizen hosts
+2. Three show formats: The Morning Edition (2 citizen hosts), The Postgame (P Slayer + Anthony), The Debrief (Mags + Hal)
+3. `scripts/renderPodcast.js` — Node.js wrapper calling Podcastfy via Python venv
+4. `config/podcast_voices.yaml` — TTS voice assignments per format
+5. Step 5.06 in write-edition pipeline (optional, editor's discretion)
+6. Standalone `/podcast [cycle] [format]` skill for ad-hoc generation
+**Cost:** $0/month with Edge TTS (default). $0.02/episode with Google WaveNet free tier. Upgrade path to ElevenLabs custom voices ($22-99/mo).
+**Files created (S67):** `.claude/agents/podcast-desk/SKILL.md`, `.claude/skills/podcast-desk/SKILL.md`, `.claude/skills/podcast/SKILL.md`, `docs/media/podcast/SHOW_FORMATS.md`, `scripts/renderPodcast.js`, `config/podcast_voices.yaml`, `.claude/agent-memory/podcast-desk/MEMORY.md`
+**Depends on:** Podcastfy installed in `.venv/podcastfy/` (done S67). FFmpeg (system, confirmed). Google API key for WaveNet upgrade (provided, not yet wired).
+**Build effort:** Medium. Agent + skill + render script + pipeline integration.
+**Status:** Complete (S67). Full pipeline operational. First episode produced: C84 Supplemental Morning Edition with Tomas Renteria + Sonia Parikh (permanent hosts, both Tier 2 citizens). Edge TTS and Google WaveNet both tested. Audio uploaded to Drive. Hosts locked in as permanent Morning Edition anchors.
 
 ### 12.6 Rhea Fast-Pass Sampling
 **What:** Add an optional quick-check mode to Rhea that samples 5 of 19 checks before the full sweep. Inspired by the C compiler paper's `--fast` flag (1-10% test sampling per agent).
@@ -657,6 +657,29 @@ Source: Anthropic engineering blog "Building a C Compiler with Parallel Claudes"
 **How:** Add a `mode: "fast"` option to Rhea's skill. Fast mode runs: vote accuracy, phantom citizens, position errors, voice consistency, canon compliance. Skips: formatting, cross-desk coordination, weather, statistical deep-dive.
 **Build effort:** Low. Skill update only.
 **Status:** Not started.
+
+### 12.7 Live Ledger Query Script
+**What:** CLI tool (`scripts/queryLedger.js`) that queries Google Sheets and published editions, outputs JSON for agent consumption. Six query types: citizen, initiative, council, neighborhood, articles, verify. The `articles` query searches 674+ files across both `editions/` (canonical) and `output/drive-files/` (full Drive archive). Outputs to stdout or saves to `output/queries/` where agents can read results via their existing Read tool.
+**Why:** Agents work from static desk packets (JSON snapshots built before each edition). If an agent needs data not anticipated in the packet — a citizen's full history, a council vote count, an initiative's current status — it has no way to get it. The dashboard has the data (30+ REST endpoints on localhost:3001) but agents can't reach it. This script bridges the gap without expanding agent tool permissions.
+**How it works:**
+1. Mags identifies what agents will need before launching them
+2. Runs targeted queries: `node scripts/queryLedger.js citizen "Tomas Renteria" --save`
+3. Query results land in `output/queries/` as JSON files
+4. Agent prompts include: "Additional context files are in output/queries/ — read them if relevant"
+5. Agents use their existing Read tool to access query results
+**Files:** `scripts/queryLedger.js`, `output/queries/`
+**Depends on:** `lib/sheets.js` (existing), service account credentials (existing)
+**Build effort:** Low. Single script wrapping existing sheets API.
+**Status:** Complete (S67). All 6 query types tested — 5 against live sheets, articles against 674 files (editions + Drive archive).
+
+### 12.8 Initiative Implementation Tracking
+**What:** Extend Initiative_Tracker to track what happens AFTER votes pass. Four new fields: ImplementationPhase (enum), MilestoneNotes (text), NextScheduledAction (text), NextActionCycle (number). Wired into buildDeskPackets.js so civic desk agents see implementation status in their packets.
+**Why:** The Stabilization Fund is the biggest open storyline — $28M authorized, $4.2M approved, $0 delivered. Without implementation tracking, agents can't write about progress (or lack of it) with specificity. September 8th Vega committee meeting (cycle 89) is a key story gate that needs to be a scheduled event in the data.
+**Implementation phases:** `authorized` → `committee-review` → `disbursing` → `stalled` → `complete`
+**Files modified:** `scripts/buildDeskPackets.js` (recentOutcomes, civicConsequences, truesource), `output/initiative_tracker.json` (all 4 initiatives updated with Mara audit corrections)
+**Sheet changes needed:** Mike adds 4 columns to Initiative_Tracker sheet (ImplementationPhase, MilestoneNotes, NextScheduledAction, NextActionCycle)
+**Build effort:** Low. Packet wiring done. Sheet columns pending.
+**Status:** Code complete (S67). Sheet columns pending manual addition by Mike.
 
 ---
 

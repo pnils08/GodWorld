@@ -1,0 +1,47 @@
+# Bay Tribune Podcast — Voice Configuration
+# Maps show formats to TTS providers and voice assignments.
+#
+# TTS models available:
+#   edge     — Microsoft Edge TTS (free, no API key, decent quality)
+#   gemini   — Google Cloud WaveNet (free tier: 1M chars/month, good quality)
+#   openai   — OpenAI TTS ($15-30/M chars, natural voices)
+#   elevenlabs — ElevenLabs ($5-99/mo plans, premium quality, voice cloning)
+#
+# Start with edge (free). Swap to gemini when GOOGLE_API_KEY is set.
+
+morning_edition:
+  tts_model: "gemini"
+  voices:
+    question: "en-US-Wavenet-D"       # Tomas — male, deeper WaveNet voice
+    answer: "en-US-Wavenet-F"         # Sonia — female WaveNet voice
+
+postgame:
+  tts_model: "edge"
+  voices:
+    question: "en-US-EricNeural"      # P Slayer — intense, animated
+    answer: "en-US-GuyNeural"         # Anthony — measured, steady
+
+debrief:
+  tts_model: "edge"
+  voices:
+    question: "en-US-JennyNeural"     # Mags — reflective, warm
+    answer: "en-US-RogerNeural"       # Hal — older, measured, literary
+
+# --- Google WaveNet versions (uncomment when GOOGLE_API_KEY is set) ---
+# morning_edition:
+#   tts_model: "gemini"
+#   voices:
+#     question: "en-US-Wavenet-D"     # Host 1
+#     answer: "en-US-Wavenet-F"       # Host 2
+#
+# postgame:
+#   tts_model: "gemini"
+#   voices:
+#     question: "en-US-Wavenet-J"     # P Slayer
+#     answer: "en-US-Wavenet-D"       # Anthony
+#
+# debrief:
+#   tts_model: "gemini"
+#   voices:
+#     question: "en-US-Wavenet-F"     # Mags
+#     answer: "en-US-Wavenet-D"       # Hal

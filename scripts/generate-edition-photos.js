@@ -113,7 +113,8 @@ async function main() {
       var scene = photoGen.extractScene(
         (s.text || '').substring(0, 800),
         s.headline || '',
-        s.beat
+        s.beat,
+        s.name || ''
       );
       var prompt = photoGen.buildPhotoPrompt({
         headline: s.headline,
@@ -151,6 +152,7 @@ async function main() {
       var result = await photoGen.generatePhoto({
         headline: section.headline,
         text: section.text,
+        sectionName: section.name,
         neighborhood: '',
         weather: parsed.weather,
         beat: section.beat

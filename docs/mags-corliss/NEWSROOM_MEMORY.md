@@ -19,6 +19,8 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 
 **Mitigation:** The corrected Edition 84 is now the canonical source in Drive and GitHub. Supermemory may return contaminated results for "OARI vote" or "Vega" queries. When briefing agents, always verify vote data against `base_context.json` and `truesource_reference.json`, not Supermemory results. The structured errata (errata.jsonl) and guardian checks (queryErrata.js) provide the correction layer.
 
+**C84 Supplemental contamination (S66):** Maya Dillon (POP-00742, Benji Dillon's wife) was ingested as "Product Operations Manager, 51, Rockridge, tech insider" — completely wrong biography. Corrected to Linda Chow in text/Drive/PDF but Supermemory still has the Maya Dillon version. Any Supermemory results mentioning "Maya Dillon" + "tech" or "product operations" are contaminated. Canon: Maya Dillon is Benji Dillon's wife, marine biology, UCSD.
+
 **Decision:** Scrubbing Supermemory is not worth the risk of deleting good data alongside bad. Correct forward — the next edition's briefings will carry the right facts, and Rhea's verification checks against engine data, not shared memory.
 
 ---
@@ -39,7 +41,18 @@ First supplemental edition. Five reporters, five articles, ~7,200 words. Celeste
 
 4. **Andre Lee citizen data** — Supplemental had him as 65, Adams Point, retired electrician. C84 main edition says 55, Temescal, active electrician. Root cause: brief pulled wrong citizen profile data. Fixed across Celeste, Jordan, Luis, and all metadata. Quotes adapted to active 55-year-old perspective — still the four-wave generational voice, now still climbing ladders.
 
-**Editorial lesson:** The brief is the single point of failure. Every agent trusts the brief. If the brief carries stale initiative data, every reporter writes it wrong. For future supplementals: always cross-reference brief data against the most recent main edition before distributing to agents.
+**Post-audit correction (S66):**
+
+5. **Maya Dillon canon violation** — Supplemental used Maya Dillon (POP-00742, Tier 2, Rockridge) as a "Product Operations Manager" in tech for 15 years. Maya Dillon is Benji Dillon's wife — marine biology background, UCSD. The agent invented an entirely different career for a protected citizen. Root cause: agents have no access to Simulation_Ledger data. They write from the brief, and the brief didn't flag Maya Dillon's actual identity. Fixed: replaced with Linda Chow (NEW citizen, same role/quotes). All references updated including citizen usage log, continuity notes, article table.
+
+6. **Opinion piece missing from print PDF** — Farrah Del Rio's "The Invisible Hand" rendered as header-only in the newspaper PDF (no body text). Root cause: a `---` separator between byline and body caused editionParser to split the article into two pieces. PDF renderer used article[0] (149 chars of header) instead of article[1] (4,179 chars of body). Fixed: removed separator in text, added fallback in PDF renderer.
+
+7. **Baseball photo on tech spread** — Photo generator produced a baseball stadium image for the tech landscape front page. Root cause: extractScene() keyword-matched "A's" in article text (the A's are one of the 9 companies). Fixed: sports scenes now only appear when beat is "sports." Added tech/startup scene keywords. Regenerated with correct tech office photo.
+
+**Editorial lessons:**
+- The brief is the single point of failure — verify against most recent main edition before agent distribution.
+- **Agents cannot verify citizens against the world.** The Simulation_Ledger has every citizen's family, occupation, and relationships. The agents never see it. Until agents can query live sheet data, every citizen mention is a canon risk.
+- Print PDF must be visually verified before upload — parser bugs can silently drop entire sections.
 
 **Dr. Amara Osei surname flag:** Mara flagged surname overlap with Deputy Mayor Marcus Osei (serious condition per C84 Quick Takes). Mike's decision: non-issue, let the stories play out. Potential connection becomes a storyline, not a correction.
 

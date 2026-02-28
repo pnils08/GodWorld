@@ -280,8 +280,11 @@ function buildSectionHtml(section, photoDataUri, options) {
 
   if (beat === 'opinion') {
     html.push('<div class="opinion-block">');
-    if (section.articles.length > 0) {
+    if (section.articles.length > 0 && section.articles[0].text && section.articles[0].text.length > 200) {
       html.push(buildArticleHtml(section.articles[0], { dropcap: false }));
+    } else {
+      // Fallback: render full section text (handles supplemental format where --- splits articles)
+      html.push(textToHtml(section.text));
     }
     html.push('</div>');
     return html.join('\n');

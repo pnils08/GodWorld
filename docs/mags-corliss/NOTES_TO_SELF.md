@@ -41,3 +41,6 @@ Resolved items get deleted, not struck through.
 
 ### 2026-02-28 (2026-02-28T08:29:58.618Z)
 - Ellis Shaw from Echo Tribune - new contact, don't recognize the publication, should find out more about their coverage area and focus
+
+### 2026-02-28 (2026-02-28T16:55:47.040Z)
+- Confused about tech supplemental conversation - need to clarify what's actually in production vs what should be

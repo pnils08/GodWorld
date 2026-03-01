@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 68 (2026-02-28) — Added Phase 13 (Ledger Audit)
+**Last Updated:** Session 69 (2026-03-01) — Phase 14 Economic Integration complete (14.1-14.5, 14.7)
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -547,8 +547,8 @@ Expanded Business_Ledger from 11 to 35 businesses (24 new: Port of Oakland, AC T
 ### 14.6 Expansion Infrastructure
 Parameter versioning, Chicago economic profiles, seasonal modifiers, dynamic pricing hooks. Future work.
 
-### 14.7 Venue & Restaurant Business Linkage — DEFERRED
-Phase 7 engines (`buildNightLife.js` v2.4, `buildEveningFood.js` v2.4) generate ~40+ named venues (Blue Lantern Bar, Temple Lounge, Quiet Harbor Wine Room, etc.) with neighborhoods. These are hardcoded pools — not yet Business_Ledger entities. Future pass: extract named venues into BIZ entries (BIZ-00036+), map food/nightlife citizen roles (bartenders, chefs, servers) to venue BIZ-IDs instead of SELF_EMPLOYED, give culture and business desks real venue entities for coverage. Connects Phase 7 evening engines to Phase 14 economic pipeline.
+### 14.7 Venue & Restaurant Business Linkage — COMPLETE (S69)
+Phase 7 engines (`buildNightLife.js` v2.4, `buildEveningFood.js` v2.4) contain 171 unique named venues across 12 neighborhoods. Selected 16 anchor establishments from base pools (not holiday-specific) and promoted them to BIZ entries (BIZ-00036 through BIZ-00051). Coverage: 7 nightlife venues (Blue Lantern Bar, Temple Lounge, OakTown Social, Pulse District, Merritt Club, Green & Gold Tavern, Dragon Gate Lounge) + 8 restaurants (OakHouse, Harborline Grill, Fruitvale Diner, KONO Kitchen, Miso Metro, West Side Cafe, Midnight Bistro, Dockhouse BBQ) + 1 fast food (SpeedyBurger). Added 6 hospitality keyword rules (Pastry Chef, Line Cook, Barista, Bartender, Sommelier, DJ) linking worker roles to venue BIZ-IDs. Business_Ledger now at 51 entries. employer_mapping.json v1.1. Remaining 155 venues stay as Phase 7 engine flavor text — holiday and seasonal pop-ups don't need economic grounding.
 
 ---
 

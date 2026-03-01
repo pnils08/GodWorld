@@ -1,10 +1,10 @@
 {
   "_meta": {
     "description": "Maps RoleType patterns to BIZ-IDs for employer linkage. Five-layer resolution: sports → parenthetical → keyword → selfEmployed → category.",
-    "version": "1.0",
-    "phase": "14.4",
+    "version": "1.1",
+    "phase": "14.7",
     "layerOrder": ["sports", "parenthetical", "keyword", "selfEmployed", "category"],
-    "deferredExpansion": "Nightlife venues, named restaurants, and entertainment establishments — add as BIZ entries in a follow-up pass so culture/business desks can reference real establishments."
+    "venueExpansion": "Phase 14.7: 16 anchor venues from Phase 7 nightlife/food engines promoted to BIZ entries. 171 total venues exist in engine pools; these 16 are the permanent base establishments across 11 neighborhoods."
   },
   "parentheticalLookup": {
     "Port of Oakland": "BIZ-00012",
@@ -87,7 +87,13 @@
     { "pattern": "Parks and Recreation", "bizId": "BIZ-00027" },
     { "pattern": "Park Ranger", "bizId": "BIZ-00031" },
     { "pattern": "Welding Instructor", "bizId": "BIZ-00035" },
-    { "pattern": "Community College", "bizId": "BIZ-00035" }
+    { "pattern": "Community College", "bizId": "BIZ-00035" },
+    { "pattern": "Pastry Chef", "bizId": "BIZ-00043" },
+    { "pattern": "Line Cook", "bizId": "BIZ-00044" },
+    { "pattern": "Barista", "bizId": "BIZ-00038" },
+    { "pattern": "Bartender", "bizId": "BIZ-00036" },
+    { "pattern": "Sommelier", "bizId": "BIZ-00043" },
+    { "pattern": "DJ$", "bizId": "BIZ-00039" }
   ],
   "selfEmployedPatterns": [
     "Owner$",
@@ -140,6 +146,22 @@
     { "bizId": "BIZ-00032", "name": "PG&E Oakland Service Area", "sector": "Utilities", "neighborhood": "City-wide" },
     { "bizId": "BIZ-00033", "name": "Jack London Square Markets", "sector": "Retail & Food", "neighborhood": "Jack London" },
     { "bizId": "BIZ-00034", "name": "Oakland Housing Authority", "sector": "Housing & Social Services", "neighborhood": "City-wide" },
-    { "bizId": "BIZ-00035", "name": "Peralta Community College District", "sector": "Education", "neighborhood": "City-wide" }
+    { "bizId": "BIZ-00035", "name": "Peralta Community College District", "sector": "Education", "neighborhood": "City-wide" },
+    { "bizId": "BIZ-00036", "name": "Blue Lantern Bar", "sector": "Nightlife & Entertainment", "neighborhood": "Jack London" },
+    { "bizId": "BIZ-00037", "name": "Temple Lounge", "sector": "Nightlife & Entertainment", "neighborhood": "Downtown" },
+    { "bizId": "BIZ-00038", "name": "OakTown Social", "sector": "Nightlife & Entertainment", "neighborhood": "Temescal" },
+    { "bizId": "BIZ-00039", "name": "Pulse District", "sector": "Nightlife & Entertainment", "neighborhood": "Downtown" },
+    { "bizId": "BIZ-00040", "name": "Merritt Club", "sector": "Nightlife & Entertainment", "neighborhood": "Lake Merritt" },
+    { "bizId": "BIZ-00041", "name": "Green & Gold Tavern", "sector": "Sports Bar & Dining", "neighborhood": "Jack London" },
+    { "bizId": "BIZ-00042", "name": "Dragon Gate Lounge", "sector": "Nightlife & Entertainment", "neighborhood": "Chinatown" },
+    { "bizId": "BIZ-00043", "name": "OakHouse", "sector": "Restaurant & Dining", "neighborhood": "Rockridge" },
+    { "bizId": "BIZ-00044", "name": "Harborline Grill", "sector": "Restaurant & Dining", "neighborhood": "Jack London" },
+    { "bizId": "BIZ-00045", "name": "Fruitvale Diner", "sector": "Restaurant & Dining", "neighborhood": "Fruitvale" },
+    { "bizId": "BIZ-00046", "name": "KONO Kitchen", "sector": "Restaurant & Dining", "neighborhood": "KONO" },
+    { "bizId": "BIZ-00047", "name": "Miso Metro", "sector": "Restaurant & Dining", "neighborhood": "Downtown" },
+    { "bizId": "BIZ-00048", "name": "West Side Cafe", "sector": "Restaurant & Dining", "neighborhood": "West Oakland" },
+    { "bizId": "BIZ-00049", "name": "Midnight Bistro", "sector": "Restaurant & Dining", "neighborhood": "Downtown" },
+    { "bizId": "BIZ-00050", "name": "Dockhouse BBQ", "sector": "Restaurant & Dining", "neighborhood": "Jack London" },
+    { "bizId": "BIZ-00051", "name": "SpeedyBurger", "sector": "Fast Food & Quick Service", "neighborhood": "Downtown" }
   ]
 }

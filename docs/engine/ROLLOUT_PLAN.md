@@ -538,11 +538,11 @@ Three-file refactor eliminating hardcoded income overwrite. **generationalWealth
 ### 14.3 Household & Neighborhood Aggregation ✓ (S69)
 `scripts/seedHouseholds.js` — 529 households (3 family, 1 single-parent, 525 single), 533 citizens linked. Married pairs matched by shared ChildrenIds. Rent from role housingBurdenPct. Median rent $2,717/mo. 125 owned, 404 rented. `scripts/aggregateNeighborhoodEconomics.js` — MedianIncome and MedianRent populated on Neighborhood_Map for 9 neighborhoods (those matching existing map rows). Employment rate refactor deferred to engine work.
 
-### 14.4 Business Linkage
-Expand Business_Ledger from 11 to 25-40 businesses. Formal citizen→employer mapping via `EmployerBizId` column + `Employment_Roster` tab. Merges with existing Phase 12.5 scope.
+### 14.4 Business Linkage — COMPLETE (S69)
+Expanded Business_Ledger from 11 to 35 businesses (24 new: Port of Oakland, AC Transit, BART, Highland Hospital, OUSD, City of Oakland, Bay Tribune, EBMUD, Baylight Construction, libraries, courts, fire/police, Kaiser, Fruitvale Clinic, parks, community centers, Oakland Tech Collective, PG&E, Jack London Markets, Housing Authority, Peralta College, etc.). Created `scripts/linkCitizensToEmployers.js` with five-layer employer resolution (sports → parenthetical → keyword → self-employed → category default). Results: 635 citizens mapped (102 sports, 30 parenthetical, 141 keyword, 77 self-employed, 285 category), zero unmatched. Created `Employment_Roster` sheet (635 rows). Added `EmployerBizId` column to Simulation_Ledger. Derived Employee_Count and Avg_Salary on Business_Ledger from actual citizen data. Updated `buildDeskPackets.js` to v2.1 with `businessSnapshot` in economicContext and employer data on interview candidates. Deferred: nightlife/restaurant venue BIZ entries, Career Engine BIZ-ID awareness, Economic Ripple business triggers.
 
-### 14.5 Desk Packet Enrichment
-`buildDeskPackets.js` delivers real dollar amounts, business snapshots, and neighborhood economics instead of string categories.
+### 14.5 Desk Packet Enrichment — COMPLETE (S69)
+`buildDeskPackets.js` v2.0: Replaced string income categories (`low`/`mid`/`high`) with dollar-amount buckets (`under50k` through `over200k`), added `medianIncome` (real $), `totalCitizensWithIncome`, and `neighborhoodEconomics[]` from Neighborhood_Map. Interview candidates enriched with `income`, `roleType`, `economicCategory`. Agents now receive real economic numbers. Business snapshots deferred to 14.4.
 
 ### 14.6 Expansion Infrastructure
 Parameter versioning, Chicago economic profiles, seasonal modifiers, dynamic pricing hooks. Future work.

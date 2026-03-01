@@ -464,7 +464,7 @@ function filterCulturalByDomain(entities, deskDomains) {
   });
 }
 
-function getInterviewCandidates(genericCitizens, neighborhoods, simLedgerIndex) {
+function getInterviewCandidates(genericCitizens, neighborhoods, simLedgerIndex, bizIndex) {
   if (!neighborhoods || neighborhoods.length === 0) return [];
   return genericCitizens.filter(function(c) {
     return c.Status === 'Active' && neighborhoods.indexOf(c.Neighborhood) !== -1;
@@ -472,6 +472,8 @@ function getInterviewCandidates(genericCitizens, neighborhoods, simLedgerIndex) 
     var fullName = (c.First + ' ' + c.Last).trim();
     var ledgerData = simLedgerIndex ? simLedgerIndex[fullName] : null;
     var income = ledgerData ? (parseFloat(ledgerData.Income) || 0) : 0;
+    var empBizId = ledgerData ? (ledgerData.EmployerBizId || '') : '';
+    var empBiz = (bizIndex && empBizId) ? bizIndex[empBizId] : null;
     return {
       name: fullName,
       age: c.Age,
@@ -480,6 +482,8 @@ function getInterviewCandidates(genericCitizens, neighborhoods, simLedgerIndex) 
       roleType: ledgerData ? ledgerData.RoleType : (c.Occupation || ''),
       income: income,
       economicCategory: income >= 150000 ? 'high' : (income >= 75000 ? 'mid' : (income > 0 ? 'low' : 'unknown')),
+      employerBizId: empBizId,
+      employerName: empBiz ? empBiz.Name : (empBizId === 'SELF_EMPLOYED' ? 'Self-Employed' : ''),
       emergenceCount: c.EmergenceCount
     };
   });
@@ -1549,7 +1553,7 @@ async function main() {
     chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
     storylineRaw, packetRaw, draftsRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
-    neighborhoodMapRaw
+    neighborhoodMapRaw, businessLedgerRaw
   ] = await Promise.all([
     safeGet('Story_Seed_Deck'),
     safeGet('Story_Hook_Deck'),
@@ -1571,7 +1575,8 @@ async function main() {
     safeGet('Relationship_Bonds'),
     safeGet('World_Population'),
     safeGet('Simulation_Calendar'),
-    safeGet('Neighborhood_Map')
+    safeGet('Neighborhood_Map'),
+    safeGet('Business_Ledger')
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
@@ -1664,8 +1669,33 @@ async function main() {
   // Neighborhood Map: economic data per neighborhood
   var neighborhoodMap = allToObjects(neighborhoodMapRaw);
 
+  // Business Ledger
+  var businesses = allToObjects(businessLedgerRaw);
+  // v2.1: Index businesses by BIZ_ID for citizen employer lookups
+  var bizByIdMap = {};
+  businesses.forEach(function(b) {
+    var bid = (b.BIZ_ID || '').trim();
+    if (bid) bizByIdMap[bid] = b;
+  });
+
   // Economic context from World_Population + Simulation_Ledger + Neighborhood_Map
   var economicContext = buildEconomicContext(worldPopRaw, simLedger, activeHouseholds, neighborhoodMap);
+
+  // v2.1: Business snapshot from Business_Ledger
+  economicContext.businessSnapshot = businesses
+    .filter(function(b) { return b.Name && (parseInt(b.Employee_Count) > 0 || b.Sector); })
+    .map(function(b) {
+      return {
+        bizId: (b.BIZ_ID || '').trim(),
+        name: b.Name,
+        sector: b.Sector || '',
+        neighborhood: b.Neighborhood || '',
+        employeeCount: parseInt(b.Employee_Count) || 0,
+        avgSalary: parseInt(String(b.Avg_Salary || '0').replace(/[$,\s]/g, '')) || 0,
+        growthRate: b.Growth_Rate || ''
+      };
+    })
+    .sort(function(a, b) { return b.employeeCount - a.employeeCount; });
 
   // Cycle packet text
   var packetRows = filterByCycle(packetRaw, CYCLE);
@@ -1693,7 +1723,8 @@ async function main() {
   console.log('  Economy:', economicContext.economyDescription || '(no description)');
   console.log('  Median Income: $' + (economicContext.medianIncome || 0).toLocaleString(),
               '| Citizens w/income:', economicContext.totalCitizensWithIncome,
-              '| Neighborhoods:', economicContext.neighborhoodEconomics.length);
+              '| Neighborhoods:', economicContext.neighborhoodEconomics.length,
+              '| Businesses:', (economicContext.businessSnapshot || []).length);
 
   // ── Read local files ──
   var maraText = '';
@@ -1865,7 +1896,7 @@ async function main() {
 
     // Get interview candidates from neighborhoods in this desk's data
     var neighborhoods = getDeskNeighborhoods(deskEvents, deskSeeds, deskArcs);
-    var candidates = getInterviewCandidates(genericCitizens, neighborhoods, simLedgerByName);
+    var candidates = getInterviewCandidates(genericCitizens, neighborhoods, simLedgerByName, bizByIdMap);
 
     // Get previous coverage + full reporter history
     var prevCoverage = extractPreviousCoverage(prevEdition, reporterNames);
@@ -1945,7 +1976,7 @@ async function main() {
         desk: deskId,
         deskName: desk.name,
         cycle: CYCLE,
-        generator: 'buildDeskPackets v2.0'
+        generator: 'buildDeskPackets v2.1'
       },
       baseContext: baseContext,
       deskBrief: {

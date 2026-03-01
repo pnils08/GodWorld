@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-28 | Engine: v3.1 | Cycle: 84 | Session: 68
+Last Updated: 2026-03-01 | Engine: v3.1 | Cycle: 84 | Session: 69
 
 ---
 
@@ -46,7 +46,10 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v1.9 | Per-desk JSON packets, story connections enrichment, sports feed digest, auto archive context, initiative implementation tracking |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v2.1 | Per-desk JSON packets, dollar-amount economic buckets, business snapshots, employer-enriched candidates |
+| Citizen-Employer Linkage | scripts/linkCitizensToEmployers.js | v1.0 | Five-layer resolution, Employment_Roster, Business_Ledger stats |
+| Neighborhood Economics | scripts/aggregateNeighborhoodEconomics.js | v1.0 | Median income/rent by neighborhood from citizen data |
+| Economic Profile Seeder | scripts/applyEconomicProfiles.js | v1.0 | Role-based income seeding from economic_parameters.json |
 | Live Ledger Query | scripts/queryLedger.js | v1.0 | 6 query types (citizen, initiative, council, neighborhood, articles, verify), searches Sheets + 674 published files |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
@@ -154,6 +157,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 69 (2026-03-01) — Phase 14: Economic Parameter Integration (Complete)
+
+- **Phase 14.1 Economic Wiring:** Created `data/role_mapping.json` (281 RoleType→economic profile mappings), `data/economic_parameters.json` (198 profiles with income, housing burden, health risk across 15 categories). `scripts/applyEconomicProfiles.js` seeds Income + EconomicProfileKey on Simulation_Ledger. 533 citizens with role-based incomes.
+- **Phase 14.2 Household Seeding:** `scripts/seedHouseholdLedger.js` populates Household_Ledger from citizen income data. 529 households aggregated.
+- **Phase 14.3 Neighborhood Economics:** `scripts/aggregateNeighborhoodEconomics.js` calculates MedianIncome/MedianRent per neighborhood from citizen data. 9 neighborhoods with median stats on Neighborhood_Map.
+- **Phase 14.4 Business Linkage:** `data/employer_mapping.json` (five-layer resolution: sports→parenthetical→keyword→selfEmployed→category). `scripts/linkCitizensToEmployers.js` links 635 citizens to 35 employers. Business_Ledger expanded from 11→35 entities. Employment_Roster created. EmployerBizId column added to Simulation_Ledger. Employee_Count/Avg_Salary derived from real citizen data.
+- **Phase 14.5 Desk Packet Enrichment:** `buildDeskPackets.js` v2.0→v2.1. Dollar-amount income buckets, neighborhood economics, business snapshots, employer-enriched interview candidates.
+- **Phase 14.7 Venue & Restaurant Linkage:** 16 anchor venues from Phase 7 engines (buildNightLife.js, buildEveningFood.js) promoted to BIZ entries (BIZ-00036 through BIZ-00051). 7 nightlife + 8 restaurants + 1 fast food. 6 hospitality keyword rules added. Business_Ledger now at 51 entities.
+- **Income override protection:** Refactored three economic engines (applyEconomicProfiles, seedHouseholdLedger, aggregateNeighborhoodEconomics) to preserve seeded incomes — engines calculate from existing data, don't overwrite.
+- **Net result:** 639 master codes now generate real economic output: role-based income → household aggregation → neighborhood medians → employer linkage → desk agent coverage. The economic pipeline is complete.
 
 ### Session 68 (2026-02-28) — Phase 13: Simulation_Ledger Census Audit
 
@@ -445,12 +459,21 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - Each POP-ID is a "master code" human engine — all downstream behavior derives from it
 - Remaining: 42 MLB birth years (Mike's call), economic parameter wiring, Damien Roberts migration
 
+**COMPLETED — Phase 14: Economic Parameter Integration (Session 69):**
+- 14.1 Economic Wiring: 281 role mappings, 198 economic profiles, income seeding
+- 14.2 Household Seeding: 529 households aggregated from citizen income
+- 14.3 Neighborhood Economics: 9 neighborhoods with median income/rent
+- 14.4 Business Linkage: 635 citizens → 35 employers, Employment_Roster, five-layer resolution
+- 14.5 Desk Packet Enrichment: v2.1 with dollar buckets, business snapshots, employer candidates
+- 14.7 Venue Expansion: 16 Phase 7 venues promoted to BIZ entries (51 total)
+- 14.6 Deferred: Chicago profiles, seasonal modifiers, parameter versioning
+
 **INCOMING — Next Session:**
-- Economic parameter wiring — Phase 3-4 income/illness/sentiment should pull from citizen roles, not static seeds. This is what makes 639 master codes generate real economic output.
 - Franchise Ledger design — track how A's franchise impacts city economically. Review game logs + data feed first.
 - Mara memory/structure overhaul (Phase 10.2) — plan exists at `.claude/plans/reactive-tickling-zephyr.md`
 - Photo + PDF pipeline ready for next edition
 - September 8 Vega committee meeting (cycle 89) — Stabilization Fund disbursement gate
+- Edition 85 production — first edition with full economic data in desk packets
 
 **Active — Journalism Enhancements (Phase 3):**
 - #2: Expand the newsroom (new beats, new desk agents)

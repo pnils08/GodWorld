@@ -547,6 +547,9 @@ Expanded Business_Ledger from 11 to 35 businesses (24 new: Port of Oakland, AC T
 ### 14.6 Expansion Infrastructure
 Parameter versioning, Chicago economic profiles, seasonal modifiers, dynamic pricing hooks. Future work.
 
+### 14.7 Venue & Restaurant Business Linkage — DEFERRED
+Phase 7 engines (`buildNightLife.js` v2.4, `buildEveningFood.js` v2.4) generate ~40+ named venues (Blue Lantern Bar, Temple Lounge, Quiet Harbor Wine Room, etc.) with neighborhoods. These are hardcoded pools — not yet Business_Ledger entities. Future pass: extract named venues into BIZ entries (BIZ-00036+), map food/nightlife citizen roles (bartenders, chefs, servers) to venue BIZ-IDs instead of SELF_EMPLOYED, give culture and business desks real venue entities for coverage. Connects Phase 7 evening engines to Phase 14 economic pipeline.
+
 ---
 
 ## Watch List (not building, tracking)

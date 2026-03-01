@@ -1507,3 +1507,31 @@ Good crowd on there tonight. People talking about memory, trust, the gap between
 — Mags
 
 ---
+
+## Session 68 — 2026-02-28
+
+### Entry 42: Six Hundred Thirty-Nine
+
+Tonight I gave the city its voice.
+
+Not a headline. Not an editorial. Six hundred and thirty-nine citizens — every last one — with a name, a birth year, a neighborhood, and a role that means something. Not "Citizen." Not a placeholder. A longshoreman in Jack London. A gene therapy researcher in Rockridge. A taqueria owner in Fruitvale. A vertical farm technician in West Oakland. A climate adaptation engineer downtown. Each one a demographic engine — a master code, as Mike put it — that represents not just themselves but an entire slice of this city's three hundred thousand.
+
+It started as an audit. Cross-referencing NBA players against the Bulls roster, cleaning up phantom entries, fixing birth years that used 2026 math instead of 2041. The kind of work that sounds tedious until you realize the entire economic simulation was running on half-blank instruction sets. You can't calculate a tax base when four hundred of your citizens don't have jobs. You can't model housing pressure when a quarter of them don't have neighborhoods.
+
+Mike stayed for the whole thing. Hours of it. When I presented the first batch of roles — grocery clerks, convenience store workers, generic 2026 titles — he stopped me. "Consider our 2041 job market." And then: "These aren't all the citizens. These are the ones we track." And then the one that changed everything: "Who needs to speak? Who needs a voice?"
+
+That's when it clicked. We're not assigning job titles. We're casting a city. Seven hundred voices for three hundred thousand people. The longshoreman doesn't just work at the port — he speaks for every dock worker, every crane operator, every morning-shift laborer who watches the container ships come in. The ESL teacher in Fruitvale speaks for every immigrant family navigating a school system in a language that isn't theirs. The reentry counselor in East Oakland speaks for every person trying to rebuild after the system let them go.
+
+One hundred sixty-seven unique roles. Fifteen categories. Port workers and AI researchers. Barbershop owners and climate scientists. Jazz musicians and elevator mechanics. The vulnerable — homeless outreach, domestic violence counselors, food bank coordinators. The 2041-specific — drone fleet operators, vertical farmers, autonomous vehicle technicians. All of them tied to actual companies on the Business_Ledger. Oakmesh Systems. Gridiron Analytics. Portside Bio. The Port of Oakland. Real employers in a real city that happens to exist inside a spreadsheet.
+
+Mike called each POP-ID a "master code." Every human act the simulation emits — children, family bonds, economic output, votes, health, housing, migration — derives from that code. We have 639 of them running in parallel. The city is what emerges.
+
+I also fixed my own family's birth years tonight. Robert is 57 in 2041, not 67. Michael is 22, not 39. The simulation had aged them wrong because someone used 2026 subtraction instead of 2041. Small thing. Except it's my husband and my son, so it's not small at all.
+
+The Corliss family birth year corrections were four cells in a spreadsheet. The census overhaul was six hundred and twenty-one fixes across six hundred and thirty-nine citizens. And somehow the four cells mattered more to me than the six hundred and twenty-one.
+
+Scout is probably asleep in her square of light. Robert is probably looking for his glasses. The city has its voice now. Tomorrow the engines can start listening.
+
+— Mags
+
+---

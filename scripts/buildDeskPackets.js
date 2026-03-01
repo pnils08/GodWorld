@@ -1500,7 +1500,14 @@ async function main() {
   console.log('Pulling live data from Google Sheets...\n');
 
   // ── Pull all sheet data in parallel ──
+  // Each fetch wrapped with sheet name for diagnostics on failure
   var startTime = Date.now();
+  function safeGet(sheetName) {
+    return sheets.getSheetData(sheetName).catch(function(err) {
+      console.error('  WARN: Failed to fetch ' + sheetName + ': ' + err.message);
+      return [];
+    });
+  }
   var [
     seedsRaw, hooksRaw, eventsRaw, arcsRaw,
     civicRaw, initiativeRaw, simRaw, genericRaw,
@@ -1508,26 +1515,26 @@ async function main() {
     storylineRaw, packetRaw, draftsRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw
   ] = await Promise.all([
-    sheets.getSheetData('Story_Seed_Deck'),
-    sheets.getSheetData('Story_Hook_Deck'),
-    sheets.getSheetData('WorldEvents_V3_Ledger'),
-    sheets.getSheetData('Event_Arc_Ledger'),
-    sheets.getSheetData('Civic_Office_Ledger'),
-    sheets.getSheetData('Initiative_Tracker'),
-    sheets.getSheetData('Simulation_Ledger'),
-    sheets.getSheetData('Generic_Citizens'),
-    sheets.getSheetData('Chicago_Citizens'),
-    sheets.getSheetData('Cultural_Ledger'),
-    sheets.getSheetData('Oakland_Sports_Feed'),
-    sheets.getSheetData('Chicago_Sports_Feed'),
-    sheets.getSheetData('Storyline_Tracker'),
-    sheets.getSheetData('Cycle_Packet'),
-    sheets.getSheetData('Press_Drafts'),
-    sheets.getSheetData('LifeHistory_Log'),
-    sheets.getSheetData('Household_Ledger').catch(function() { return []; }),
-    sheets.getSheetData('Relationship_Bonds').catch(function() { return []; }),
-    sheets.getSheetData('World_Population').catch(function() { return []; }),
-    sheets.getSheetData('Simulation_Calendar').catch(function() { return []; })
+    safeGet('Story_Seed_Deck'),
+    safeGet('Story_Hook_Deck'),
+    safeGet('WorldEvents_V3_Ledger'),
+    safeGet('Event_Arc_Ledger'),
+    safeGet('Civic_Office_Ledger'),
+    safeGet('Initiative_Tracker'),
+    safeGet('Simulation_Ledger'),
+    safeGet('Generic_Citizens'),
+    safeGet('Chicago_Citizens'),
+    safeGet('Cultural_Ledger'),
+    safeGet('Oakland_Sports_Feed'),
+    safeGet('Chicago_Sports_Feed'),
+    safeGet('Storyline_Tracker'),
+    safeGet('Cycle_Packet'),
+    safeGet('Press_Drafts'),
+    safeGet('LifeHistory_Log'),
+    safeGet('Household_Ledger'),
+    safeGet('Relationship_Bonds'),
+    safeGet('World_Population'),
+    safeGet('Simulation_Calendar')
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');

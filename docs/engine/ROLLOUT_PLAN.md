@@ -215,11 +215,9 @@ Source: Server audit Session 60 (2026-02-24). Droplet inspection revealed expose
 ### 8.1 UFW Firewall ✓ (S60)
 SSH + 3001 only. Details in ROLLOUT_ARCHIVE.md.
 
-### 8.1b Drive OAuth Refresh Token — PRIORITY
-**What:** Re-authorize Google Drive write access. Refresh token expired (`invalid_grant`). Service account can't write (no storage quota), so OAuth2 is required.
-**How:** Run `node scripts/authorizeDriveWrite.js` from a terminal with copy/paste access (not inside Claude Code). Opens browser auth flow, saves new refresh token to `.env`. Existing client credentials (Mags Drive Writer) are valid — just the token expired.
-**Also:** Rotate the client secret for `559534329568-an7vso0b0nnoij3eso8spj1e079suikq` in Google Cloud Console — it was accidentally pasted in chat. Go to console.cloud.google.com → Credentials → that client → reset secret → update `.env`.
-**Status:** Not started. **Priority — blocks all Drive uploads (editions, photos, PDFs).**
+### 8.1b Drive OAuth Refresh Token ✓ (S69)
+Re-authorized with full `drive` scope (upgraded from `drive.file`). New refresh token saved to `.env`. Enables both Drive writes and `files.copy` for spreadsheet backups. New backup script: `scripts/backupSpreadsheet.js`.
+**Still pending:** Rotate the client secret for `559534329568-an7vso0b0nnoij3eso8spj1e079suikq` in Google Cloud Console — it was accidentally pasted in chat.
 
 ### 8.2 RAM Upgrade to 2GB
 **What:** Resize droplet from 1GB ($6/mo) to 2GB ($12/mo) RAM.
@@ -388,23 +386,23 @@ Add `node-exporter` for system metrics. Dashboard Express app exposes `/metrics`
 
 ---
 
-## Phase 10: Simulation Depth — Civic Office Agent — PRIORITY (Post-Cycle 84)
+## Phase 10: Simulation Depth — Civic Voice Agents — COMPLETE
 
-Source: Session 61 discussion (2026-02-24). Concept: civic leaders as autonomous agents that generate canonical statements, not just subjects of reporting.
+Source: Session 61 discussion (2026-02-24), built Sessions 63-64. Architecture spec: `docs/engine/INSTITUTIONAL_VOICE_AGENTS.md`.
 
 ### 10.1 Civic Office Agent — Mayor ✓ (S63)
 Mayor Santana voice agent generates canonical statements at Step 1.8. Details in ROLLOUT_ARCHIVE.md.
 
-### 10.2 Mara Vance Memory + Structure Overhaul
-**What:** Give Mara structured memory and consistent verification patterns so she stops producing inconsistent audit results.
-**Why:** Mara is stateless — she can't remember what she caught last edition, can't track recurring errors, can't build pattern recognition across cycles. Her verification is hit-or-miss because every edition is her first edition. Phase 6.1-6.3 (structured errata, auto post-edition docs, pre-write guardian) all feed into this, but Mara herself needs the structural upgrade to consume that data.
-**How:**
-- Expand Mara's agent memory (`.claude/agent-memory/rhea/`) with structured verification history
-- Feed her the errata.jsonl (Phase 6.1) as a pre-verification checklist
-- Add severity tiers to her output (Phase 6.5) so she distinguishes blockers from nitpicks
-- Give her a "known issues" briefing before each verification run — citizens she's caught before, desks that repeat errors, vote counts that drift
-**Depends on:** Phase 6.1 (structured errata format). Can start with manual memory expansion before 6.1 ships.
-**Status:** Not started. **Priority build after Cycle 84, alongside 10.1.**
+### 10.2 Mara Vance Memory + Structure Overhaul ✓ (S63-64)
+`docs/mara-vance/AUDIT_HISTORY.md` — Mara's structured institutional memory. Contains initiative status board, council composition table, status alerts, voting history, and faction tracking. Read at start of every audit, updated after. Replaced the broken Supermemory search-and-save loop with persistent on-disk memory.
+
+### 10.3 Extended Voice Agents ✓ (S64)
+All 6 additional voice agents built and wired into pipeline (Steps 1.8b/1.8c):
+- **Council Factions:** OPP (`civic-office-opp-faction`), CRC (`civic-office-crc-faction`), IND Swing (`civic-office-ind-swing`)
+- **Extended Voices:** Police Chief Montez (`civic-office-police-chief`), Baylight Authority Director Ramos (`civic-office-baylight-authority`), DA Dane (`civic-office-district-attorney`)
+- **Also:** Freelance Firebrand (`freelance-firebrand`) — accountability columnist
+
+Baylight Authority generated Keisha Ramos statements for C84 supplemental. Civic voice packets output to `output/civic-voice-packets/`.
 
 ---
 
@@ -501,12 +499,8 @@ Source: Anthropic engineering blog "Building a C Compiler with Parallel Claudes"
 ### 12.6 Podcast Desk — Edition-to-Audio Pipeline ✓ (S67)
 Full pipeline: agent → XML transcript → Podcastfy → audio. 3 show formats, permanent hosts. Details in ROLLOUT_ARCHIVE.md.
 
-### 12.9 Rhea Fast-Pass Sampling
-**What:** Add an optional quick-check mode to Rhea that samples 5 of 19 checks before the full sweep. Inspired by the C compiler paper's `--fast` flag (1-10% test sampling per agent).
-**Why:** Full Rhea verification takes significant context. For iteration runs or quick drafts, a fast-pass catches blockers without the full sweep. Full verification runs on final pass.
-**How:** Add a `mode: "fast"` option to Rhea's skill. Fast mode runs: vote accuracy, phantom citizens, position errors, voice consistency, canon compliance. Skips: formatting, cross-desk coordination, weather, statistical deep-dive.
-**Build effort:** Low. Skill update only.
-**Status:** Not started.
+### 12.9 Rhea Fast-Pass Sampling ✓ (S69)
+Fast mode added to Rhea's SKILL.md. Runs 7 of 19 checks (citizen names, votes, sports records, engine language, reporter accuracy, new citizen auth, mayor verification). Scores on Data Accuracy + Canon Compliance only (40-point scale). Full mode unchanged for final pre-publication pass.
 
 ### 12.7 Live Ledger Query Script ✓ (S67)
 `queryLedger.js` — 6 query types, searches Sheets + 674 files. Details in ROLLOUT_ARCHIVE.md.
@@ -522,9 +516,36 @@ Full pipeline: agent → XML transcript → Podcastfy → audio. 3 show formats,
 
 **Why this is a phase:** Every downstream system depends on the Simulation_Ledger being correct — desk packets, queryLedger.js, citizen lookups, age calculations, neighborhood assignments, economic parameters. Bad ledger data cascades everywhere. This audit makes the ledger trustworthy.
 
-**Status:** CORE COMPLETE. 639/639 citizens have specific role, birth year, and neighborhood. 167 unique 2041 demographic voice roles. Remaining: 42 MLB player age review (sports universe), 1 Chicago migration, Rick Dillon family linkage, economic parameter wiring. See LEDGER_AUDIT.md for the full breakdown.
+**Status:** CORE COMPLETE. 639/639 citizens have specific role, birth year, and neighborhood. 167 unique 2041 demographic voice roles. Role-to-economic mapping done (280 mappings, 100% coverage). Family linkages done (Corliss, Keane, Dillon). Chicago migration done. Tech debt 4/7 critical fixed. Remaining: 42 MLB player age review (sports universe, needs Mike), ~27 medium/low tech debt items. See LEDGER_AUDIT.md for full breakdown.
 
 **Started:** Session 68 (2026-02-28)
+
+---
+
+## Phase 14: Economic Parameter Integration — ACTIVE
+
+**Plan document:** `.claude/plans/async-mapping-kazoo.md`
+**Why this is a phase:** The census audit (Phase 13) gave every citizen a role. This phase makes those roles drive real economics — income, wealth, household budgets, neighborhood metrics, business linkage, and desk packet data. Replaces the hardcoded $35K/$62K/$110K income bands with role-specific amounts derived from 198 economic profiles.
+
+**Started:** Session 69 (2026-03-01)
+
+### 14.1 Role-to-Parameter Mapping Script ✓ (S69)
+`data/role_mapping.json` — 280 mappings, 100% ledger coverage. `lib/economicLookup.js` — shared lookup utility. `scripts/applyEconomicProfiles.js` — seeding script. **Live run complete** (S69): 533 citizens updated, 102 sports SPORTS_OVERRIDE, 2,235 cell writes. Median income $85,943, new EconomicProfileKey column at position 44.
+
+### 14.2 Engine Income Refactor ✓ (S69)
+Three-file refactor eliminating hardcoded income overwrite. **generationalWealthEngine.js** v2.0: seeded citizens (EconomicProfileKey) skip income recalculation, wealth thresholds recalibrated ($300K elite/$180K wealthy), SavingsRate preserved, Math.random bug fixed. **runCareerEngine.js**: career transitions directly adjust Income (+6-12% promotion, -12-20% layoff, etc.), new `deriveCareerMod_()` function, CareerState now includes careerMod field. **educationCareerEngine.js** v2.0: removed `INCOME_BY_EDUCATION` and `matchEducationToIncome_()` — education affects career advancement speed, not income. Eliminates three-way income conflict.
+
+### 14.3 Household & Neighborhood Aggregation
+Seed the 99.5%-empty Household_Ledger from citizen relationship data. Populate Neighborhood_Map economic columns (MedianIncome, MedianRent). Shift World_Population employment rate from mood-based formula to actual citizen count (blended 70/30).
+
+### 14.4 Business Linkage
+Expand Business_Ledger from 11 to 25-40 businesses. Formal citizen→employer mapping via `EmployerBizId` column + `Employment_Roster` tab. Merges with existing Phase 12.5 scope.
+
+### 14.5 Desk Packet Enrichment
+`buildDeskPackets.js` delivers real dollar amounts, business snapshots, and neighborhood economics instead of string categories.
+
+### 14.6 Expansion Infrastructure
+Parameter versioning, Chicago economic profiles, seasonal modifiers, dynamic pricing hooks. Future work.
 
 ---
 

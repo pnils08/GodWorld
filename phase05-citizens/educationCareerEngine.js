@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * EDUCATION & CAREER ENGINE v1.1
+ * EDUCATION & CAREER ENGINE v2.0
  * ============================================================================
  *
  * Tracks education levels, career progression, and education → career pathways.
@@ -12,12 +12,17 @@
  * - Career stage tracking (student → entry → mid → senior → retired)
  * - Career advancement based on education + experience
  * - School quality impact on career outcomes
- * - Education → income correlation
+ * - Education → career advancement speed (was income correlation in v1.x)
  * - Career mobility detection
+ *
+ * v2.0 Changes (Phase 14.2):
+ * - Removed INCOME_BY_EDUCATION and matchEducationToIncome_()
+ * - Income no longer overridden by education level
+ * - Education affects career advancement speed, not income directly
+ * - Eliminates three-way income conflict (career/education/role-based)
  *
  * Integration:
  * - Reads UNI/MED/CIV flags from Simulation_Ledger
- * - Updates Income based on education level
  * - Hooks into career engine for promotions
  * - Uses school quality from Neighborhood_Demographics (consolidated)
  *
@@ -69,15 +74,12 @@ var CAREER_MOBILITY = {
   DECLINING: 'declining'
 };
 
-// Education → Income mapping (annual)
-var INCOME_BY_EDUCATION = {
-  'none': 28000,
-  'hs-dropout': 30000,
-  'hs-diploma': 42000,
-  'some-college': 55000,
-  'bachelor': 75000,
-  'graduate': 120000
-};
+// v14.2: REMOVED — Education no longer overrides income.
+// Income is set by applyEconomicProfiles.js (role-based) and adjusted by
+// Career Engine transitions. Education affects career advancement speed,
+// not income directly. Old values preserved as comment for reference:
+// none: 28000, hs-dropout: 30000, hs-diploma: 42000,
+// some-college: 55000, bachelor: 75000, graduate: 120000
 
 // Career stage advancement thresholds (cycles)
 var ADVANCEMENT_CYCLES = {
@@ -116,9 +118,11 @@ function processEducationCareer_(ctx) {
   results.careerAdvanced = careerResults.advanced;
   results.stagnationDetected = careerResults.stagnant;
 
-  // Step 3: Adjust income based on education level
-  var incomeResults = matchEducationToIncome_(ss);
-  results.incomeAdjusted = incomeResults.updated;
+  // Step 3: REMOVED in v14.2 — income no longer derived from education.
+  // Income is set by role-based economic profiles (applyEconomicProfiles.js)
+  // and adjusted by Career Engine transitions. Education affects career
+  // advancement speed (Step 2) but does not override income.
+  results.incomeAdjusted = 0;
 
   // Step 4: Detect career mobility (advancing/stagnant/declining)
   var mobilityResults = detectCareerMobility_(ss, ctx, cycle, rng);
@@ -308,68 +312,14 @@ function updateCareerProgression_(ss, cycle, rng) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
-// EDUCATION → INCOME MATCHING
+// EDUCATION → INCOME MATCHING (REMOVED in v14.2)
 // ════════════════════════════════════════════════════════════════════════════
-
-function matchEducationToIncome_(ss) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { updated: 0 };
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return { updated: 0 };
-
-  var header = values[0];
-  var rows = values.slice(1);
-
-  var idx = function(n) { return header.indexOf(n); };
-  var iEducation = idx('EducationLevel');
-  var iIncome = idx('Income');
-  var iCareerStage = idx('CareerStage');
-  var iStatus = idx('Status');
-
-  if (iEducation < 0 || iIncome < 0) return { updated: 0 };
-
-  var updated = 0;
-
-  for (var r = 0; r < rows.length; r++) {
-    var row = rows[r];
-    if (!row || !Array.isArray(row)) continue; // Skip undefined or invalid rows
-    var status = (row[iStatus] || 'active').toString().toLowerCase();
-    if (status === 'deceased') continue;
-
-    var education = row[iEducation] || 'hs-diploma';
-    var careerStage = iCareerStage >= 0 ? (row[iCareerStage] || 'mid-career') : 'mid-career';
-    var currentIncome = Number(row[iIncome]) || 0;
-
-    // Calculate expected income based on education + career stage
-    var baseIncome = INCOME_BY_EDUCATION[education] || 42000;
-
-    // Career stage modifiers
-    var stageMod = 1.0;
-    if (careerStage === 'student') stageMod = 0.3;
-    else if (careerStage === 'entry-level') stageMod = 0.8;
-    else if (careerStage === 'mid-career') stageMod = 1.0;
-    else if (careerStage === 'senior') stageMod = 1.4;
-    else if (careerStage === 'retired') stageMod = 0.6;
-
-    var expectedIncome = Math.round(baseIncome * stageMod);
-
-    // Only update if current income is way off (>30% difference)
-    var difference = Math.abs(currentIncome - expectedIncome) / expectedIncome;
-    if (difference > 0.3 || currentIncome === 0) {
-      // Gradually adjust toward expected (don't jump immediately)
-      var newIncome = Math.round(currentIncome * 0.7 + expectedIncome * 0.3);
-      row[iIncome] = newIncome;
-      updated++;
-    }
-  }
-
-  if (updated > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
-  }
-
-  return { updated: updated };
-}
+// matchEducationToIncome_() removed. Income is now set by role-based economic
+// profiles (applyEconomicProfiles.js) and adjusted by Career Engine transitions.
+// Education affects career advancement speed (updateCareerProgression_) but
+// does not directly set or override income. This eliminates the three-way
+// income conflict between Career Engine bands, Education income map, and
+// role-based profiles.
 
 
 // ════════════════════════════════════════════════════════════════════════════

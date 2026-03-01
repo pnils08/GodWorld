@@ -22,7 +22,7 @@ const readline = require('readline');
 const fs = require('fs');
 const path = require('path');
 
-const SCOPES = ['https://www.googleapis.com/auth/drive.file'];
+const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const ENV_PATH = path.join(__dirname, '..', '.env');
 
 async function main() {

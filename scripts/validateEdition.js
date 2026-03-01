@@ -105,69 +105,6 @@ function loadBlocklist(filepath) {
   }
 }
 
-/**
- * Extract article sections from the edition text.
- * Returns an array of { heading, byline, text, namesIndex } objects.
- * Also returns the raw full text for global checks.
- */
-function parseEdition(editionText) {
-  const articles = [];
-  // Split on section headers (rows of #)
-  const sections = editionText.split(/#{10,}/);
-
-  for (const section of sections) {
-    const trimmed = section.trim();
-    if (!trimmed) continue;
-
-    // Extract heading (first non-empty line)
-    const lines = trimmed.split('\n').filter(l => l.trim());
-    const heading = lines[0] ? lines[0].trim() : '';
-
-    // Extract byline
-    const bylineMatch = trimmed.match(/By\s+([A-Z][a-zA-Zéñü\s.'-]+)\s*\|/);
-    const byline = bylineMatch ? bylineMatch[1].trim() : '';
-
-    // Extract Names Index
-    const namesMatch = trimmed.match(/Names Index:\s*(.+)/);
-    const namesIndex = namesMatch ? namesMatch[1].trim() : '';
-
-    articles.push({ heading, byline, text: trimmed, namesIndex });
-  }
-
-  return articles;
-}
-
-/**
- * Find all person names in text using a simple heuristic:
- * Two+ consecutive capitalized words (handles first + last names).
- */
-function extractNames(text) {
-  const namePattern = /\b([A-Z][a-zA-Zéñü'-]+(?:\s+[A-Z][a-zA-Zéñü'-]+)+)\b/g;
-  const names = new Set();
-  let match;
-  while ((match = namePattern.exec(text)) !== null) {
-    const candidate = match[1];
-    // Filter out common false positives
-    const skipPrefixes = ['The ', 'West Oakland', 'East Bay', 'Lake Merritt', 'Jack London',
-      'City Council', 'City Hall', 'City Planning', 'North Oakland', 'South Oakland',
-      'United Center', 'Bay Tribune', 'Cycle Pulse', 'Front Page', 'Civic Affairs',
-      'Business Ticker', 'Letters To', 'Names Index', 'Article Table',
-      'Citizen Usage', 'Continuity Notes', 'Storylines Updated', 'Still Active',
-      'Phase Changes', 'End Edition', 'New This', 'San Francisco', 'Silicon Valley',
-      'Google Cloud', 'Apps Script', 'Piedmont Ave', 'Adams Point', 'Port Of',
-      'UC Berkeley', 'Cathedral Of', 'All Star', 'Most Improved', 'Rookie Of',
-      'Gold Glove', 'Cy Young', 'Spring Training', 'Stabilization Fund',
-      'Alternative Response', 'Health Center', 'Community Health',
-      'Baylight District', 'Dear Editor', 'MacArthur BART'];
-    if (skipPrefixes.some(p => candidate.startsWith(p))) continue;
-    // Must have at least a first and last name (2+ words)
-    if (candidate.split(/\s+/).length >= 2) {
-      names.add(candidate);
-    }
-  }
-  return [...names];
-}
-
 // ─── Validation Checks ─────────────────────────────────────────
 
 function checkCouncilNames(editionText, canon) {

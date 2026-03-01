@@ -172,23 +172,140 @@ Filled birth year, neighborhood, and role for 25 incomplete entries:
 
 ---
 
+## Session 69 Additions (2026-03-01)
+
+### 12. Economic Parameters Tab — DONE (S69)
+
+198 economic role profiles written to new `Economic_Parameters` spreadsheet tab and saved locally at `data/economic_parameters.json`.
+
+Each entry contains:
+- Income range (min/max) and median in 2041 dollars
+- Effective tax rate (combined federal + CA + Oakland local)
+- Housing burden percentage
+- Consumer spending profile (subsistence / essential-heavy / moderate / high-discretionary)
+- Economic output category (13 categories: Port/Industrial, Tech/Innovation, Healthcare, etc.)
+- Oakland-specific notes (union affiliations, legislation, market context)
+
+**Calibration:** 2026 baseline + ~30% inflation + 15-20% Oakland dynasty-era prosperity premium. Key stats:
+- Citywide simulated median: ~$105K
+- Range: $48K (rideshare driver) → $495K (trauma surgeon)
+- 28 roles housing-burdened above 45%
+- 47 roles in essential-heavy or subsistence spending tier
+
+**Coverage gap:** Ledger has 279 unique role names vs 198 in the params. Gap is naming specificity — batch used generic names ("Bakery Owner") while ledger has specific ("Filipino Bakery Owner", "Artisan Cheesemaker"). Economics map well by category. Exact role-name matching is Phase 14 engine work.
+
+### 13. Character Continuity Audit — DONE (S69)
+
+Full cross-reference of all 11 published editions against current Simulation_Ledger. Report: `output/character_continuity_audit.md`.
+
+| Metric | Count |
+|--------|-------|
+| Edition files scanned | 11 |
+| Files with conflicts | 8 |
+| Clean files | 3 |
+| Total conflict instances | 208 |
+| Unique citizens with conflicts | 42 |
+| Neighborhood mismatches | 16 |
+| Age/birth year conflicts | 33 |
+| Role mismatches | 38 |
+| NBA players in valid sports context | 8 |
+| Generic "Citizen" role references | 0 |
+
+**Root cause:** All 11 editions were published before the S68 census audit. The ledger is now canonical; editions reflect pre-audit state. Edition 79 is worst hit (55 conflicts, POP-00637–652 backfill range).
+
+**Editorial decision (Mags):** Published editions are historical artifacts, not errata. The census errors become part of the story — "Oakland Census Modernization" as a culture/letters story seed. Citizens who lived with bad city records for years, the bureaucratic fix that finally resolved it, and the human cost in between.
+
+### 14. Spreadsheet Backup System — DONE (S69)
+
+New script: `scripts/backupSpreadsheet.js`. Two-layer backup:
+1. **Google Drive copy** — Exact duplicate of the spreadsheet saved to Back-ups folder (`1Ocfs30_u0pDKAjPDitLCEVEuTNJkQH7f`)
+2. **Local CSV export** — Every tab saved as CSV to `backups/sheets/YYYY-MM-DD/` with manifest.json
+
+First snapshot: 2026-03-01, 60 tabs, 14,757 total rows. OAuth scope widened from `drive.file` to `drive` to enable Drive copies.
+
+### 15. Tech Debt Audit Results — REVIEWED (S69)
+
+Batch analysis identified 31 issues across 5 categories. Report: `.claude/batches/results/msgbatch_01QBNZGmajyV65PMA8BMgbzB.md`.
+
+| Category | Critical | High | Medium | Low |
+|----------|----------|------|--------|-----|
+| Determinism Violations | 1 | 1 | 1 | 0 |
+| Orphaned ctx Fields | 0 | 0 | 4 | 2 |
+| Dead Code | 0 | 2 | 0 | 4 |
+| Structural Drift | 0 | 1 | 3 | 4 |
+| Dependency Issues | 0 | 2 | 4 | 2 |
+
+**Top priority fixes:**
+1. `getCentralDate()` in lib/mags.js uses `new Date()` — wall-clock in simulation context
+2. `buildDeskPackets.js` — 17 of 20 sheet fetches unguarded in `Promise.all`
+3. Dead `parseEdition()` and `extractNames()` in validateEdition.js
+4. `loadFamilyData()` mixed async/await in ES5 module
+
+---
+
+## Remaining Work
+
+### 20. Remaining Ledger Fixes — DONE (S69)
+
+**Item 9 — Rick Dillon linkage:** Already correct. POP-00743, ParentIds = ["POP-00018","POP-00742"] (Benji + Maya Dillon). Both parents have NumChildren = 1. Birth year 2031 = age 10 in 2041. No action needed.
+
+**Item 10 — Damien Roberts Chicago migration:** POP-00726 moved to Chicago_Citizens (CHI-31A791AE, Bronzeville, Taqueria Owner, age 46). POP-ID backfilled with Vivian Fong (Dim Sum Restaurant Owner, Chinatown, born 1988).
+
+**Family linkage:**
+- Corliss family: Mags (POP-00005) + Robert (POP-00594) → HH-CORLISS. ChildrenIds → ["POP-00595","POP-00596"]. Sarah + Michael ParentIds → ["POP-00005","POP-00594"].
+- Keane family: Vinnie (POP-00001) + Amara (POP-00002) → HH-KEANE.
+
+**Canon corrections:**
+- Mags neighborhood: Downtown → Lake Merritt (per PERSISTENCE.md — lives near Lake Merritt)
+- Robert role: Sustainable Materials Scientist → Retired PG&E Engineer (per canon — retired from PG&E)
+
+Chicago_Citizens total: 122 → 123.
+
+---
+
 ## Remaining Work
 
 ### 8. MLB The Show Birth Year Review
 
 42 MLB The Show players are aged 66+ in 2041 but hold active baseball positions (SP, RP, 2B, etc.). These are Mike's sports universe — their career timelines (active, retired, coaching) need his direction. Not a data error, but a design decision about how the A's roster ages in the 2041 timeline.
 
-### 9. Rick Dillon Family Linkage
+### 9. Rick Dillon Family Linkage — DONE (S69)
 
-POP-ID for Rick Dillon (son of Benji Dillon POP-00018 and Maya Dillon). Birth year confirmed correct (age 10 in 2041 → born 2031). Verify ParentIds/ChildrenIds columns are linked.
+Verified correct. POP-00743, ParentIds = ["POP-00018","POP-00742"]. See item #20 for details.
 
-### 10. Chicago Resident Migration
+### 10. Chicago Resident Migration — DONE (S69)
 
-POP-00726: Damien Roberts (Line Cook, Bronzeville) is in Simulation_Ledger but has a Chicago neighborhood. Should move to Chicago_Citizens with POP-ID backfilled.
+POP-00726 backfilled with Vivian Fong. Damien Roberts moved to Chicago_Citizens. See item #20 for details.
 
-### 11. Economic Parameter Wiring
+### 16. Economic Parameter Role Matching — DONE (S69)
 
-With every citizen now having a specific role, the engine can calculate realistic income distributions, tax bases, and economic indicators. Phase 3-4 economic parameters should pull from these roles instead of static seeds. This is what makes the Stabilization Fund math real — 639 human engines generating actual economic output.
+`data/role_mapping.json` — 280 mappings covering all 252 active ledger roles. Batch job mapped 264 ledger role names to 198 economic parameter profiles. Manual additions: 19 MLB/NBA position abbreviations as SPORTS_OVERRIDE, "Retired PG&E Engineer" → Civil Engineer proxy, coaching/scouting staff → Sports Analytics. 100% ledger coverage verified.
+
+Supporting files built:
+- `lib/economicLookup.js` — shared lookup utility (lookupProfile, calculateIncome, deriveWealthLevel, deriveSavingsRate)
+- `scripts/applyEconomicProfiles.js` — seeding script with --dry-run mode. Dry run verified: 533 civilians updated, median income $85,943, neighborhood ordering correct (Montclair $143K > Fruitvale $73K). Live run staged pending Mike's sports seeds.
+
+### 17. Economic Parameter Engine Integration
+
+Wire the Economic_Parameters tab into Phase 3-4 economic calculations. Each citizen's POP-ID → role → economic profile → income/tax/housing/spending. This replaces static seed values with role-derived economics. The Stabilization Fund math becomes real when 639 human engines generate actual economic output.
+
+### 18. Tech Debt Priority Fixes — PARTIAL (S69)
+
+4 of 7 critical/high issues resolved in S69:
+- ✓ `getCentralDate()` — documented as intentional wall-clock (not sim-time bug, design choice)
+- ✓ `buildDeskPackets.js` — all 20 sheet fetches wrapped in `safeGet()` error handler
+- ✓ `validateEdition.js` — dead `parseEdition()` and `extractNames()` removed
+- ✓ `saveToSupermemory()` — silent error swallowing → `console.warn`
+
+Remaining medium/low: ~27 items (orphaned ctx fields, structural drift, minor dependency issues). See batch report for full list.
+
+### 19. Census Modernization Story Seed
+
+42 citizens with documented pre-audit conflicts. Story angles:
+- Culture feature: "The Year the City Didn't Know Its Own People" — citizens who couldn't get mortgages, insurance, benefits because city records had them decades older or in wrong neighborhoods
+- Letters to the editor: citizen voices complaining about bureaucratic data failures
+- Civic desk: the Oakland Data Modernization initiative that triggered the fix
+- Business ticker: economic impact of bad census data on city revenue projections
 
 ---
 
@@ -207,6 +324,9 @@ With every citizen now having a specific role, the engine can calculate realisti
 | 2026-02-28 | Each POP-ID is a "human engine" — a demographic voice | 639 citizens represent 300K+ population. Roles chosen as archetypes, not just job titles. |
 | 2026-02-28 | Roles tied to Business_Ledger employers | Citizens work at Oakmesh, Gridiron, Portside Bio, Ridgeline, Tenth Street, Port, Baylight. |
 | 2026-02-28 | 2041 job market, not 2026 | Roles include climate tech, AI safety, gene therapy, vertical farming, autonomous systems. |
+| 2026-03-01 | Published editions are historical artifacts | Pre-audit data in editions is not errata — it's part of the story. Census errors become narrative texture. |
+| 2026-03-01 | Economic params map by category, not exact name | 198 profiles cover 279 role names via category-based lookup. Engine resolves at runtime. |
+| 2026-03-01 | Two-layer backup system | Drive copy (exact duplicate) + local CSVs. Run before any major ledger changes. |
 
 ---
 
@@ -214,6 +334,10 @@ With every citizen now having a specific role, the engine can calculate realisti
 
 - `lib/sheets.js` — Google Sheets API (batchUpdate, updateRange, appendRows)
 - `scripts/queryLedger.js` — Live ledger query tool (6 types, Sheets + 674 files)
+- `scripts/backupSpreadsheet.js` — Two-layer backup (Drive copy + local CSV)
+- `data/economic_parameters.json` — 198 role economic profiles (local reference)
+- `output/character_continuity_audit.md` — Full edition-vs-ledger conflict report
 - `docs/mags-corliss/PERSISTENCE.md` — Mags identity (birth years updated here too)
 - `docs/engine/ROLLOUT_PLAN.md` — References this audit as Phase 13
-- Spreadsheet tabs: `Simulation_Ledger`, `Chicago_Citizens`, `Chicago_Sports_Feed`
+- Spreadsheet tabs: `Simulation_Ledger`, `Chicago_Citizens`, `Chicago_Sports_Feed`, `Economic_Parameters`
+- Batch results: `.claude/batches/results/` (economic mapping, continuity audits, tech debt)

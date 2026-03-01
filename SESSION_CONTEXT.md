@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-02-28 | Engine: v3.1 | Cycle: 84 | Session: 67
+Last Updated: 2026-02-28 | Engine: v3.1 | Cycle: 84 | Session: 68
 
 ---
 
@@ -155,15 +155,20 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 68 (2026-02-28) — Phase 13: Simulation_Ledger Census Audit
+
+- **Phase 13 CORE COMPLETE:** Full census audit of 639 Simulation_Ledger citizens. 621 total issues found and resolved. Created `docs/engine/LEDGER_AUDIT.md` as dedicated tracking document. Updated ROLLOUT_PLAN.md with Phase 13.
+- **NBA Player Cleanup (18 POP-IDs):** Cross-referenced all NBA entries against Bulls roster. Moved 10 Bulls players to Chicago_Citizens, removed 8 non-franchise entries (Warriors, duplicates). All 18 vacated POP-IDs backfilled with new Oakland citizens. Chicago_Citizens: 106→122.
+- **Birth Year Corrections:** Corliss family calibrated to 2041 math (Mags 1986→55, Robert 1984→57, Michael 2019→22). 55 non-MLB citizens shifted +15 years. 42 MLB The Show players left for Mike's direction.
+- **Missing Data Fills (25 entries):** Backfilled duplicates, repurposed 4 institution POP-IDs (confirmed on Faith_Organizations), filled incomplete entries.
+- **2041 Demographic Voice Roles (399 citizens):** Every generic "Citizen" replaced with a specific 2041 demographic voice role. 167 unique roles across 15 categories. Neighborhood-aware. Business_Ledger-connected. Each POP-ID is a "master code" — a human engine that generates all downstream behavior.
+- **Master Code Philosophy:** Mike articulated core design: each of 639 citizens is a parallel human engine. Family, income, taxes, votes, health, housing, migration all derive from the POP-ID seed. The city emerges from 639 engines running simultaneously.
+- **Remaining:** 42 MLB birth year decisions, Damien Roberts Chicago migration, Rick Dillon family linkage, economic parameter wiring.
+- **Behavioral architecture held.** Second consecutive session with no code mode. Proposals confirmed before execution throughout.
+
 ### Session 67 (2026-02-28) — Podcast Desk + Live Ledger Queries + Initiative Tracking
 
-- **Podcast Desk complete (Phase 12.6):** Agent writes person-based XML transcripts, `renderPodcast.js` converts to audio via Podcastfy (Edge TTS + Google WaveNet). First episode produced for C84 Supplemental. 3 show formats, permanent hosts locked in. Wired into write-edition pipeline at Step 3.5.
-- **Live Ledger Query Script (Phase 12.7):** `scripts/queryLedger.js` v1.0 — 6 query types (citizen, initiative, council, neighborhood, articles, verify). Searches both Google Sheets (live simulation data) and 674 published files (editions/ + output/drive-files/). JSON output with `--save` flag for agent consumption. Wired into write-edition pipeline at Step 1.4.
-- **Initiative Implementation Tracking (Phase 12.8):** 4 new columns on Initiative_Tracker sheet (ImplementationPhase, MilestoneNotes, NextScheduledAction, NextActionCycle). Populated for all 4 passed initiatives with Mara-corrected data. buildDeskPackets.js wired to include in civic packets (recentOutcomes, civicConsequences, truesource).
-- **Article search expanded:** Mike pushed for deeper search scope. Articles query now searches full Drive archive (674 files) in addition to 11 canonical editions. Found Oakland Youth Apprenticeship Pipeline dangling thread (C73 Baylight → C83 Fruitvale → never followed up).
-- **MilestoneNotes bug fixed:** Trailing space in column header caused null returns. Fixed via service account.
-- **Behavioral architecture held:** First full session after S66 persistence overhaul. Identity.md rules loaded, proposals confirmed before execution, no code mode incidents.
-- **26 files committed and pushed** (84d7f8c). Working tree clean.
+- Three new systems: Podcast Desk (Phase 12.6), Live Ledger Query Script (Phase 12.7), Initiative Implementation Tracking (Phase 12.8). Collaborative session. 26 files committed.
 
 ### Session 66 (2026-02-27) — C84 Supplemental Canon Fixes + Persistence Architecture
 
@@ -433,10 +438,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - 3 show formats, permanent hosts, first C84 episode produced
 - Wired into write-edition pipeline at Step 3.5
 
+**COMPLETED — Phase 13: Simulation_Ledger Census Audit (Session 68):**
+- 639/639 citizens with specific role, birth year, and neighborhood. Zero gaps.
+- `docs/engine/LEDGER_AUDIT.md` — dedicated tracking document
+- 167 unique 2041 demographic voice roles across 15 categories
+- Each POP-ID is a "master code" human engine — all downstream behavior derives from it
+- Remaining: 42 MLB birth years (Mike's call), economic parameter wiring, Damien Roberts migration
+
 **INCOMING — Next Session:**
-- Franchise Ledger design — track how A's franchise impacts city economically (franchise value, fan support, ticket sales, merchandise, local business impact, stadium revenue, civic pride). Review game logs + data feed first.
+- Economic parameter wiring — Phase 3-4 income/illness/sentiment should pull from citizen roles, not static seeds. This is what makes 639 master codes generate real economic output.
+- Franchise Ledger design — track how A's franchise impacts city economically. Review game logs + data feed first.
 - Mara memory/structure overhaul (Phase 10.2) — plan exists at `.claude/plans/reactive-tickling-zephyr.md`
-- Engine economic parameter recalibration — illness rate, sentiment floor, income distribution should reflect dynasty-era prosperity, not real Oakland
 - Photo + PDF pipeline ready for next edition
 - September 8 Vega committee meeting (cycle 89) — Stabilization Fund disbursement gate
 

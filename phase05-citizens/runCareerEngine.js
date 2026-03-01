@@ -54,6 +54,8 @@ function runCareerEngine_(ctx) {
   var iLastUpd = idx('LastUpdated');
   var iNeighborhood = idx('Neighborhood');
   var iTierRole = idx('TierRole'); // read-only; do not write
+  var iIncome = idx('Income');
+  var iEconKey = idx('EconomicProfileKey');
 
   if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0 || iLastUpd < 0) return;
 
@@ -161,6 +163,7 @@ function runCareerEngine_(ctx) {
       tenure: 0,
       skill: { general: 0.2 },
       incomeBand: "low",
+      careerMod: 1.0,
       lastTransition: 0
     };
     if (!lifeStr) return st;
@@ -181,6 +184,7 @@ function runCareerEngine_(ctx) {
           if (k === "industry") st.industry = v || st.industry;
           else if (k === "employer") st.employer = v || st.employer;
           else if (k === "income") st.incomeBand = v || st.incomeBand;
+          else if (k === "careerMod") st.careerMod = parseFloat(v) || st.careerMod;
           else if (k === "level") st.level = parseInt(v, 10) || st.level;
           else if (k === "tenure") st.tenure = parseInt(v, 10) || st.tenure;
           else if (k === "lastT") st.lastTransition = parseInt(v, 10) || st.lastTransition;
@@ -220,6 +224,13 @@ function runCareerEngine_(ctx) {
     if (industry === "creative" && level >= 4) return "mid";
     if (level >= 4) return "mid";
     return "low";
+  }
+
+  // v14.2: Career modifier derived from level + tenure (replaces band-based income)
+  function deriveCareerMod_(level, tenure) {
+    var levelMod = [0, 0.92, 0.96, 1.00, 1.05, 1.12][level] || 1.0;
+    var tenureBonus = Math.min(tenure * 0.004, 0.05);
+    return Math.round((levelMod + tenureBonus) * 100) / 100;
   }
 
   function pickInitialIndustry_(tierRole) {
@@ -692,14 +703,25 @@ function runCareerEngine_(ctx) {
       pick = tEv.text;
       eventTag = "Career-Transition";
       st.lastTransition = cycle;
+
+      // v14.2: Adjust income on career transitions for seeded citizens
+      var currentIncome = iIncome >= 0 ? (Number(row[iIncome]) || 0) : 0;
+      var hasEconProfile = iEconKey >= 0 && row[iEconKey] && String(row[iEconKey]).trim() !== '' && String(row[iEconKey]).trim() !== 'SPORTS_OVERRIDE';
+
       if (tEv.type === "promotion") {
         st.level = Math.min(5, st.level + 1);
         st.tenure = Math.max(1, Math.round(st.tenure * 0.55));
+        if (hasEconProfile && currentIncome > 0) {
+          row[iIncome] = Math.round(currentIncome * (1.06 + roll() * 0.06)); // +6-12%
+        }
         S.careerSignals.promotions += 1;
         S.careerSignals.transitions += 1;
       } else if (tEv.type === "layoff") {
         st.tenure = 0;
         st.employer = "small";
+        if (hasEconProfile && currentIncome > 0) {
+          row[iIncome] = Math.round(currentIncome * (0.80 + roll() * 0.08)); // -12-20%
+        }
         S.careerSignals.layoffs += 1;
         S.careerSignals.transitions += 1;
       } else if (tEv.type === "sector_shift") {
@@ -712,11 +734,17 @@ function runCareerEngine_(ctx) {
         }
         st.employer = pickEmployerType_(st.industry);
         st.tenure = 0;
+        if (hasEconProfile && currentIncome > 0) {
+          row[iIncome] = Math.round(currentIncome * (0.90 + roll() * 0.15)); // -10% to +5%
+        }
         S.careerSignals.sectorShifts += 1;
         S.careerSignals.transitions += 1;
       } else if (tEv.type === "lateral") {
         st.employer = pickEmployerType_(st.industry);
         st.tenure = Math.max(1, Math.round(st.tenure * 0.70));
+        if (hasEconProfile && currentIncome > 0) {
+          row[iIncome] = Math.round(currentIncome * (0.97 + roll() * 0.06)); // -3% to +3%
+        }
         S.careerSignals.transitions += 1;
       }
     } else {
@@ -732,6 +760,7 @@ function runCareerEngine_(ctx) {
 
     // v2.3: derived income + aggregates
     st.incomeBand = inferIncomeBand_(st.industry, st.level);
+    st.careerMod = deriveCareerMod_(st.level, st.tenure);
     S.careerSignals.industries[st.industry] = (S.careerSignals.industries[st.industry] || 0) + 1;
 
     var line = stamp + " — [" + eventTag + "] " + pick;
@@ -746,6 +775,7 @@ function runCareerEngine_(ctx) {
         "|level=" + st.level +
         "|tenure=" + st.tenure +
         "|income=" + st.incomeBand +
+        "|careerMod=" + st.careerMod +
         "|lastT=" + (st.lastTransition || 0) +
         "|skill=" + encodeSkill_(st.skill) +
         "|Updated:c" + cycle;
@@ -772,7 +802,7 @@ function runCareerEngine_(ctx) {
           row[iPopID],
           '',
           "CareerState",
-          ("industry=" + st.industry + "|employer=" + st.employer + "|level=" + st.level + "|income=" + st.incomeBand),
+          ("industry=" + st.industry + "|employer=" + st.employer + "|level=" + st.level + "|careerMod=" + st.careerMod),
           '',
           cycle
         ]);

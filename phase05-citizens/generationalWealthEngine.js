@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * GENERATIONAL WEALTH ENGINE v1.0
+ * GENERATIONAL WEALTH ENGINE v2.0
  * ============================================================================
  *
  * Tracks wealth accumulation, inheritance, and economic mobility.
@@ -8,15 +8,23 @@
  * Part of: Week 2 Generational Wealth & Inheritance
  *
  * Features:
- * - Income calculation from career data
+ * - Income from role-based economic profiles (v2.0, was career bands in v1.0)
  * - Wealth level tracking (0-10 scale)
  * - Inheritance mechanics (wealth transfer on death)
  * - Wealth mobility detection (upward/downward movement)
  * - Home ownership tracking
  * - Savings & debt management
  *
+ * v2.0 Changes (Phase 14.2):
+ * - Income no longer recalculated from career bands for seeded citizens
+ * - Career Engine directly adjusts income on transitions (+6-12% promo, etc.)
+ * - Wealth thresholds recalibrated for 2041 ($300K elite, $180K wealthy)
+ * - SavingsRate preserved if already seeded by applyEconomicProfiles.js
+ * - Math.random determinism bug fixed (now accepts ctx.rng)
+ *
  * Integration:
- * - Reads career data from runCareerEngine.js (incomeBand)
+ * - Reads EconomicProfileKey to determine seeded vs unseeded citizens
+ * - Career Engine adjusts Income directly on transitions (v14.2)
  * - Hooks into generationalEventsEngine.js death events
  * - Updates householdFormationEngine.js with real income
  *
@@ -42,6 +50,8 @@
 // ════════════════════════════════════════════════════════════════════════════
 
 // Income bands mapped to dollar amounts (annual)
+// v14.2: LEGACY FALLBACK ONLY — used for citizens without EconomicProfileKey.
+// Seeded citizens get role-based income from applyEconomicProfiles.js.
 var INCOME_BY_BAND = {
   'low': 35000,
   'mid': 62000,
@@ -49,14 +59,16 @@ var INCOME_BY_BAND = {
 };
 
 // Wealth level thresholds (based on income + assets)
+// v14.2: Recalibrated for 2041 Oakland role-based income distribution
 var WEALTH_THRESHOLDS = {
   POVERTY: 0,       // <$30k income
   LOW: 2,           // $30k-$45k
   WORKING: 4,       // $45k-$60k
-  MIDDLE: 5,        // $60k-$85k
-  UPPER_MIDDLE: 7,  // $85k-$120k
-  WEALTHY: 9,       // $120k+
-  ELITE: 10         // $200k+ or significant assets
+  WORKING_PLUS: 5,  // $60k-$85k
+  MIDDLE: 6,        // $85k-$120k
+  UPPER_MIDDLE: 7,  // $120k-$180k
+  WEALTHY: 9,       // $180k-$300k
+  ELITE: 10         // $300k+ or significant assets
 };
 
 // Home ownership thresholds by neighborhood (median home prices)
@@ -113,7 +125,9 @@ function processGenerationalWealth_(ctx) {
   };
 
   // Step 1: Calculate citizen income from career data
-  var incomeResults = calculateCitizenIncomes_(ss);
+  // v14.2: Now skips seeded citizens (income set by applyEconomicProfiles.js,
+  // adjusted by Career Engine transitions). Only recalculates for unseeded citizens.
+  var incomeResults = calculateCitizenIncomes_(ss, ctx);
   results.incomeUpdated = incomeResults.updated;
 
   // Step 2: Calculate wealth levels from income + assets
@@ -153,7 +167,7 @@ function processGenerationalWealth_(ctx) {
 // INCOME CALCULATION
 // ════════════════════════════════════════════════════════════════════════════
 
-function calculateCitizenIncomes_(ss) {
+function calculateCitizenIncomes_(ss, ctx) {
   var sheet = ss.getSheetByName('Simulation_Ledger');
   if (!sheet) return { updated: 0 };
 
@@ -168,8 +182,12 @@ function calculateCitizenIncomes_(ss) {
   var iLife = idx('LifeHistory');
   var iStatus = idx('Status');
   var iTier = idx('Tier');
+  var iEconKey = idx('EconomicProfileKey');
 
   if (iIncome < 0 || iLife < 0) return { updated: 0 };
+
+  // v14.2: Deterministic RNG (fixes Math.random bug from v1.0)
+  var rng = (ctx && typeof ctx.rng === 'function') ? ctx.rng : Math.random;
 
   var updated = 0;
 
@@ -178,14 +196,23 @@ function calculateCitizenIncomes_(ss) {
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased' || status === 'inactive') continue;
 
+    // v14.2: Skip citizens with economic profiles — income already set by
+    // applyEconomicProfiles.js seeding script and adjusted by Career Engine
+    // transitions. Only recalculate for unseeded citizens (fallback path).
+    var econKey = iEconKey >= 0 ? (row[iEconKey] || '').toString().trim() : '';
+    if (econKey !== '' && econKey !== 'SPORTS_OVERRIDE') {
+      continue; // Income managed externally
+    }
+
+    // Fallback: unseeded citizens use legacy band logic
     var lifeHistory = row[iLife] ? row[iLife].toString() : '';
     var tier = Number(row[iTier]) || 5;
 
     // Extract incomeBand from most recent CareerState
     var incomeBand = extractIncomeBand_(lifeHistory);
 
-    // Convert to dollar amount
-    var income = calculateIncomeFromBand_(incomeBand, tier);
+    // Convert to dollar amount (with deterministic RNG)
+    var income = calculateIncomeFromBand_(incomeBand, tier, rng);
 
     row[iIncome] = income;
     updated++;
@@ -215,8 +242,8 @@ function extractIncomeBand_(lifeHistory) {
   return 'low'; // Default
 }
 
-function calculateIncomeFromBand_(incomeBand, tier) {
-  var rng = Math.random; // centralization prep — no ctx in scope
+function calculateIncomeFromBand_(incomeBand, tier, rng) {
+  if (!rng) rng = Math.random; // safety fallback
   var baseIncome = INCOME_BY_BAND[incomeBand] || INCOME_BY_BAND['low'];
 
   // Tier modifiers (higher tier = higher income within band)
@@ -277,9 +304,13 @@ function calculateCitizenWealth_(ss) {
 
     row[iWealth] = wealthLevel;
 
-    // Update savings rate
+    // Update savings rate (preserve seeded values from applyEconomicProfiles.js)
     if (iSavings >= 0) {
-      row[iSavings] = SAVINGS_RATE_BY_WEALTH[wealthLevel] || 0.05;
+      var currentSavings = Number(row[iSavings]) || 0;
+      if (currentSavings <= 0) {
+        // Only set if not already seeded with a role-based savings rate
+        row[iSavings] = SAVINGS_RATE_BY_WEALTH[wealthLevel] || 0.05;
+      }
     }
 
     updated++;
@@ -293,24 +324,24 @@ function calculateCitizenWealth_(ss) {
 }
 
 function deriveWealthLevel_(income, inheritance, netWorth, debt) {
-  var baseWealth = 0;
+  // v14.2: Recalibrated for 2041 Oakland role-based income distribution.
+  // Aligned with economicLookup.js deriveWealthLevel() thresholds.
+  // Uses effective income = income + 5% of net worth as annual yield.
+  var effectiveIncome = income + (netWorth * 0.05);
 
-  // Income-based wealth
-  if (income < 30000) baseWealth = 0;
-  else if (income < 45000) baseWealth = 2;
-  else if (income < 60000) baseWealth = 4;
-  else if (income < 85000) baseWealth = 5;
-  else if (income < 120000) baseWealth = 7;
-  else if (income < 200000) baseWealth = 9;
-  else baseWealth = 10;
+  var baseWealth = 0;
+  if (effectiveIncome >= 300000) baseWealth = 10;      // Elite
+  else if (effectiveIncome >= 180000) baseWealth = 9;   // Wealthy
+  else if (effectiveIncome >= 120000) baseWealth = 7;   // Upper-middle
+  else if (effectiveIncome >= 85000) baseWealth = 6;    // Middle
+  else if (effectiveIncome >= 60000) baseWealth = 5;    // Working+
+  else if (effectiveIncome >= 45000) baseWealth = 4;    // Working
+  else if (effectiveIncome >= 30000) baseWealth = 2;    // Low
+  else baseWealth = 0;                                   // Poverty
 
   // Inheritance boost
   if (inheritance > 100000) baseWealth += 2;
   else if (inheritance > 50000) baseWealth += 1;
-
-  // Net worth boost
-  if (netWorth > 500000) baseWealth += 2;
-  else if (netWorth > 200000) baseWealth += 1;
 
   // Debt penalty
   if (debt >= 8) baseWealth -= 2;

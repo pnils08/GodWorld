@@ -464,16 +464,22 @@ function filterCulturalByDomain(entities, deskDomains) {
   });
 }
 
-function getInterviewCandidates(genericCitizens, neighborhoods) {
+function getInterviewCandidates(genericCitizens, neighborhoods, simLedgerIndex) {
   if (!neighborhoods || neighborhoods.length === 0) return [];
   return genericCitizens.filter(function(c) {
     return c.Status === 'Active' && neighborhoods.indexOf(c.Neighborhood) !== -1;
   }).slice(0, 20).map(function(c) {
+    var fullName = (c.First + ' ' + c.Last).trim();
+    var ledgerData = simLedgerIndex ? simLedgerIndex[fullName] : null;
+    var income = ledgerData ? (parseFloat(ledgerData.Income) || 0) : 0;
     return {
-      name: c.First + ' ' + c.Last,
+      name: fullName,
       age: c.Age,
       neighborhood: c.Neighborhood,
       occupation: c.Occupation,
+      roleType: ledgerData ? ledgerData.RoleType : (c.Occupation || ''),
+      income: income,
+      economicCategory: income >= 150000 ? 'high' : (income >= 75000 ? 'mid' : (income > 0 ? 'low' : 'unknown')),
       emergenceCount: c.EmergenceCount
     };
   });
@@ -976,19 +982,23 @@ function filterBondsForDesk(bonds, deskCitizenNames, deskNeighborhoods, deskDoma
 }
 
 /**
- * Build economic context from World_Population + citizen data
+ * Build economic context from World_Population + citizen data + Neighborhood_Map
+ * v2.0: Dollar-amount income buckets, median income, neighborhood economics
  */
-function buildEconomicContext(worldPopRaw, simLedger, activeHouseholds) {
+function buildEconomicContext(worldPopRaw, simLedger, activeHouseholds, neighborhoodMap) {
   var ctx = {
     employment: '',
     economyDescription: '',
-    incomeDistribution: { low: 0, mid: 0, high: 0, unknown: 0 },
+    incomeDistribution: { under50k: 0, '50k_100k': 0, '100k_150k': 0, '150k_200k': 0, over200k: 0 },
+    medianIncome: 0,
+    totalCitizensWithIncome: 0,
     educationDistribution: {},
     householdStats: {
       total: activeHouseholds.length,
       rentBurdenCount: 0,
       averageIncome: 0
-    }
+    },
+    neighborhoodEconomics: []
   };
 
   // Extract from World_Population row 2
@@ -1001,16 +1011,25 @@ function buildEconomicContext(worldPopRaw, simLedger, activeHouseholds) {
     if (econIdx !== -1) ctx.economyDescription = safe(row[econIdx], '');
   }
 
-  // Income distribution from Simulation_Ledger
-  var totalIncome = 0;
-  var incomeCount = 0;
+  // Income distribution from Simulation_Ledger — real dollar amounts
+  var allIncomes = [];
   simLedger.forEach(function(c) {
-    var income = (c.Income || '').toString().toLowerCase();
-    if (income === 'low') ctx.incomeDistribution.low++;
-    else if (income === 'mid' || income === 'medium') ctx.incomeDistribution.mid++;
-    else if (income === 'high') ctx.incomeDistribution.high++;
-    else if (income) ctx.incomeDistribution.unknown++;
+    var income = parseFloat(c.Income);
+    if (!income || income <= 0) return;
+    allIncomes.push(income);
+    if (income < 50000) ctx.incomeDistribution.under50k++;
+    else if (income < 100000) ctx.incomeDistribution['50k_100k']++;
+    else if (income < 150000) ctx.incomeDistribution['100k_150k']++;
+    else if (income < 200000) ctx.incomeDistribution['150k_200k']++;
+    else ctx.incomeDistribution.over200k++;
   });
+
+  // Median income
+  if (allIncomes.length > 0) {
+    var sorted = allIncomes.slice().sort(function(a, b) { return a - b; });
+    ctx.medianIncome = sorted[Math.floor(sorted.length / 2)];
+  }
+  ctx.totalCitizensWithIncome = allIncomes.length;
 
   // Education distribution from Simulation_Ledger
   simLedger.forEach(function(c) {
@@ -1021,6 +1040,8 @@ function buildEconomicContext(worldPopRaw, simLedger, activeHouseholds) {
   });
 
   // Household income stats
+  var totalIncome = 0;
+  var incomeCount = 0;
   activeHouseholds.forEach(function(h) {
     var income = parseFloat(h.HouseholdIncome || 0);
     if (income > 0) {
@@ -1033,6 +1054,20 @@ function buildEconomicContext(worldPopRaw, simLedger, activeHouseholds) {
     }
   });
   ctx.householdStats.averageIncome = incomeCount > 0 ? Math.round(totalIncome / incomeCount) : 0;
+
+  // Neighborhood economics from Neighborhood_Map
+  if (neighborhoodMap && neighborhoodMap.length > 0) {
+    ctx.neighborhoodEconomics = neighborhoodMap
+      .filter(function(n) { return n.Neighborhood && (parseFloat(n.MedianIncome) > 0); })
+      .map(function(n) {
+        return {
+          neighborhood: n.Neighborhood,
+          medianIncome: parseFloat(n.MedianIncome) || 0,
+          medianRent: parseFloat(n.MedianRent) || 0
+        };
+      })
+      .sort(function(a, b) { return b.medianIncome - a.medianIncome; });
+  }
 
   return ctx;
 }
@@ -1513,7 +1548,8 @@ async function main() {
     civicRaw, initiativeRaw, simRaw, genericRaw,
     chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
     storylineRaw, packetRaw, draftsRaw, historyRaw,
-    householdRaw, bondsRaw, worldPopRaw, simCalRaw
+    householdRaw, bondsRaw, worldPopRaw, simCalRaw,
+    neighborhoodMapRaw
   ] = await Promise.all([
     safeGet('Story_Seed_Deck'),
     safeGet('Story_Hook_Deck'),
@@ -1534,7 +1570,8 @@ async function main() {
     safeGet('Household_Ledger'),
     safeGet('Relationship_Bonds'),
     safeGet('World_Population'),
-    safeGet('Simulation_Calendar')
+    safeGet('Simulation_Calendar'),
+    safeGet('Neighborhood_Map')
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
@@ -1571,6 +1608,12 @@ async function main() {
 
   // Citizens
   var simLedger = allToObjects(simRaw);
+  // v2.0: Index simLedger by name for fast citizen lookups
+  var simLedgerByName = {};
+  simLedger.forEach(function(c) {
+    var name = ((c.First || '') + ' ' + (c.Last || '')).trim();
+    if (name) simLedgerByName[name] = c;
+  });
   var genericCitizens = allToObjects(genericRaw);
   var chicagoCitizens = allToObjects(chicagoRaw);
 
@@ -1618,8 +1661,11 @@ async function main() {
     return status !== 'dissolved' && status !== 'broken' && intensity >= 3;
   });
 
-  // Economic context from World_Population + Simulation_Ledger
-  var economicContext = buildEconomicContext(worldPopRaw, simLedger, activeHouseholds);
+  // Neighborhood Map: economic data per neighborhood
+  var neighborhoodMap = allToObjects(neighborhoodMapRaw);
+
+  // Economic context from World_Population + Simulation_Ledger + Neighborhood_Map
+  var economicContext = buildEconomicContext(worldPopRaw, simLedger, activeHouseholds, neighborhoodMap);
 
   // Cycle packet text
   var packetRows = filterByCycle(packetRaw, CYCLE);
@@ -1645,6 +1691,9 @@ async function main() {
   console.log('  Household Events (C' + CYCLE + '):', cycleHouseholdEvents.length);
   console.log('  Active Bonds (intensity>=3):', activeBonds.length);
   console.log('  Economy:', economicContext.economyDescription || '(no description)');
+  console.log('  Median Income: $' + (economicContext.medianIncome || 0).toLocaleString(),
+              '| Citizens w/income:', economicContext.totalCitizensWithIncome,
+              '| Neighborhoods:', economicContext.neighborhoodEconomics.length);
 
   // ── Read local files ──
   var maraText = '';
@@ -1816,7 +1865,7 @@ async function main() {
 
     // Get interview candidates from neighborhoods in this desk's data
     var neighborhoods = getDeskNeighborhoods(deskEvents, deskSeeds, deskArcs);
-    var candidates = getInterviewCandidates(genericCitizens, neighborhoods);
+    var candidates = getInterviewCandidates(genericCitizens, neighborhoods, simLedgerByName);
 
     // Get previous coverage + full reporter history
     var prevCoverage = extractPreviousCoverage(prevEdition, reporterNames);
@@ -1896,7 +1945,7 @@ async function main() {
         desk: deskId,
         deskName: desk.name,
         cycle: CYCLE,
-        generator: 'buildDeskPackets v1.9'
+        generator: 'buildDeskPackets v2.0'
       },
       baseContext: baseContext,
       deskBrief: {

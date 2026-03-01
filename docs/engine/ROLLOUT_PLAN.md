@@ -535,8 +535,8 @@ Fast mode added to Rhea's SKILL.md. Runs 7 of 19 checks (citizen names, votes, s
 ### 14.2 Engine Income Refactor ✓ (S69)
 Three-file refactor eliminating hardcoded income overwrite. **generationalWealthEngine.js** v2.0: seeded citizens (EconomicProfileKey) skip income recalculation, wealth thresholds recalibrated ($300K elite/$180K wealthy), SavingsRate preserved, Math.random bug fixed. **runCareerEngine.js**: career transitions directly adjust Income (+6-12% promotion, -12-20% layoff, etc.), new `deriveCareerMod_()` function, CareerState now includes careerMod field. **educationCareerEngine.js** v2.0: removed `INCOME_BY_EDUCATION` and `matchEducationToIncome_()` — education affects career advancement speed, not income. Eliminates three-way income conflict.
 
-### 14.3 Household & Neighborhood Aggregation
-Seed the 99.5%-empty Household_Ledger from citizen relationship data. Populate Neighborhood_Map economic columns (MedianIncome, MedianRent). Shift World_Population employment rate from mood-based formula to actual citizen count (blended 70/30).
+### 14.3 Household & Neighborhood Aggregation ✓ (S69)
+`scripts/seedHouseholds.js` — 529 households (3 family, 1 single-parent, 525 single), 533 citizens linked. Married pairs matched by shared ChildrenIds. Rent from role housingBurdenPct. Median rent $2,717/mo. 125 owned, 404 rented. `scripts/aggregateNeighborhoodEconomics.js` — MedianIncome and MedianRent populated on Neighborhood_Map for 9 neighborhoods (those matching existing map rows). Employment rate refactor deferred to engine work.
 
 ### 14.4 Business Linkage
 Expand Business_Ledger from 11 to 25-40 businesses. Formal citizen→employer mapping via `EmployerBizId` column + `Employment_Roster` tab. Merges with existing Phase 12.5 scope.

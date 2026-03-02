@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 72 (2026-03-02) — Phase 15.5 engine flavor, Phase 17 cleanup, neighborhood rebalance
+**Last Updated:** Session 72 (2026-03-02) — Tech debt cleanup (10 fixes/6 files), Phase 15.5 engine flavor, Phase 17 cleanup, neighborhood rebalance
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -124,11 +124,8 @@ Output feeds directly into 6.1 (structured errata) and 6.3 (pre-write guardian) 
 **Reference:** goabstract/Awesome-Design-Tools — Accessibility Tools section. Key tools: Axe, PA11Y, Leonardo (accessible palette generation), Color Oracle (color blindness simulation).
 **Status:** Not started. Ships with 6.4.
 
-### 6.5 Rhea Severity Tiers
-**What:** Update Rhea's verification output to classify findings as Blocker, High, Medium, or Nitpick instead of a flat list with a single score.
-**Why:** The retry loop (Phase 1.3) currently retries on any score below 75. With severity tiers, blockers trigger a retry, nitpicks get logged but don't block compilation. Reduces unnecessary re-runs. OneRedOak pattern: Blocker → High-Priority → Medium-Priority → Nitpick.
-**Depends on:** Nothing. Small update to Rhea's SKILL.md output format.
-**Status:** Not started.
+### 6.5 Rhea Severity Tiers ✓ (Already implemented)
+Rhea's SKILL.md already classifies findings as CRITICAL (blocks publication, triggers REVISE verdict), WARNING (should fix, doesn't block), and NOTE (informational). Retry recommendation targets only desks with CRITICAL errors. 5-category scoring (Data Accuracy, Voice Fidelity, Structural Completeness, Narrative Quality, Canon Compliance) at 0-20 each. Fast mode scores on 2 categories only (/40). Functionally equivalent to Blocker/High/Medium/Nitpick pattern.
 
 ### 6.6 Skill Auto-Suggestion Hook
 **What:** A `UserPromptSubmit` hook that reads the prompt, scores it against known skills/workflows, and suggests relevant ones before work starts. Example: mention "edition" and it suggests loading newsroom memory; mention a citizen name and it suggests checking the ledger.
@@ -235,46 +232,16 @@ Rotate snapshots — keep last 4, delete older ones (DO charges $0.06/GB/mo for 
 **Cost:** ~$0.50-1.00/month depending on disk size.
 **Status:** Not started.
 
-### 8.4 Resource Monitoring + Discord Alerts
-**What:** Cron job that checks disk usage, memory, and PM2 process health. Sends a Discord webhook alert if any threshold is crossed.
-**Why:** Currently no alerting. If disk fills up or the dashboard crashes at 3 AM, nobody knows until the next session. The Discord bot channel is already the communication hub.
-**How:** Shell script on cron (every 6 hours):
-- Disk > 80% → Discord alert
-- Available memory < 100MB → Discord alert
-- PM2 process in "errored" state → Discord alert
-- Dashboard restart count increased → Discord alert
-**Cost:** Zero. Shell script + Discord webhook (free).
-**Status:** Not started.
+### 8.4 Resource Monitoring + Discord Alerts ✓ (S72)
+`scripts/server-health-check.sh` — Cron every 6 hours. Checks: disk >80%, RAM <100MB available, PM2 errored processes, PM2 restart counts >10, dashboard HTTP health. Sends Discord webhook alert on threshold breach. Tested clean: Disk 67%, RAM 646MB.
 
-### 8.5 Log Rotation
-**What:** Configure logrotate for GodWorld logs. Rotate weekly, keep 4 weeks, compress old logs.
-**Why:** Logs are small now (1.5MB) but will grow — especially discord-conversation-history.json and mags-discord-out.log. Logrotate prevents silent disk fill.
-**How:** Create `/etc/logrotate.d/godworld`:
-```
-/root/GodWorld/logs/*.log {
-    weekly
-    rotate 4
-    compress
-    missingok
-    notifempty
-}
-```
-**Status:** Not started.
+### 8.5 Log Rotation ✓ (S72)
+`/etc/logrotate.d/godworld` — weekly rotation, 4 weeks retained, compressed. Covers all `logs/*.log` files. Uses `copytruncate` for PM2 compatibility.
 
-### 8.6 Security Hardening
-**What:** Basic server security beyond the firewall:
-- Disable root SSH login (create a non-root user with sudo)
-- SSH key-only auth (disable password login)
-- Install fail2ban (auto-blocks repeated failed SSH attempts)
-- Unattended security updates (`unattended-upgrades`)
-**Why:** Running as root with password auth is the default DO droplet setup. It's the most common attack vector — bots constantly brute-force SSH on every public IP. Fail2ban alone blocks thousands of attempts daily.
-**How:** Phased:
-1. Install fail2ban (`apt install fail2ban`) — immediate, no disruption
-2. Enable unattended-upgrades — immediate, low risk
-3. Create non-root user + SSH keys — requires Mike to update his SSH config
-4. Disable root login + password auth — do last, after confirming key access works
-**Risk:** Steps 3-4 can lock you out if done wrong. Do them together in a dedicated session with a DO console backup plan.
-**Status:** Not started. Recommend doing fail2ban + unattended-upgrades immediately, user migration later.
+### 8.6 Security Hardening — PARTIAL (S72)
+- ✓ fail2ban installed and active (SSH jail, already blocking brute-force IPs)
+- ✓ unattended-upgrades enabled (was already installed and configured)
+- **Remaining:** Create non-root user + SSH key-only auth + disable root login. Requires Mike to update SSH config. Do in a dedicated session with DO console as backup.
 
 ### 8.7 Dashboard Access Control
 **What:** Add basic auth or IP allowlisting to the dashboard on port 3001.
@@ -477,18 +444,19 @@ Source: Anthropic engineering blog "Building a C Compiler with Parallel Claudes"
 **Also:** Enable Endless Mode beta in web viewer (localhost:37777 → Settings) — biomimetic memory for extended sessions.
 **Status:** Pending. Plugin marketplace didn't pull new version during S66 — retry outside active session.
 
-### 12.5 Business Ledger — Full Engine Integration
-**What:** Wire Business_Ledger into the simulation engine so company data drives economic outcomes. The ledger exists (created S66) with 9 columns: BIZ_ID, Name, Sector, Neighborhood, Employee_Count, Avg_Salary, Annual_Revenue, Growth_Rate, Key_Personnel.
-**Base roster (S66):** Anthropic, DigitalOcean, Discord, Moltbook, Oakland Athletics, Baylight District. Additional companies introduced via supplemental editions and intake.
-**Engine integration needed:**
-- Phase 3-4: Economic parameters pull from Business_Ledger (employment, income distribution, tax base) instead of static seeds
-- Phase 5: Company growth/contraction affects neighborhood sentiment and citizen employment status
-- buildDeskPackets.js: Business data included in desk packets so Jordan Velez and other reporters have real entities to cover
-- Intake process: After supplemental editions introduce new companies, intake adds them to the ledger
-- Citizen linkage: Key_Personnel POP IDs connect citizens to employers, enabling employment-driven story hooks
-**Why:** The financial layer has been missing. Citizens have jobs but no employers. The city has a budget but no visible tax base. Baylight costs $2.1B but nobody knows who's building it. This ledger makes the money traceable.
-**Build effort:** High. Touches engine phases, desk packets, intake pipeline. Multiple build sessions.
-**Status:** Sheet created with headers and base roster (S66). Engine integration not started.
+### 12.5 Business Ledger — Full Engine Integration — MOSTLY COMPLETE (S69)
+**What:** Wire Business_Ledger into the simulation engine so company data drives economic outcomes.
+**Completed (Phase 14.4/14.7/14.5):**
+- ✓ Business_Ledger expanded from 11 to 51 entities (24 institutional + 16 named venues)
+- ✓ `linkCitizensToEmployers.js` — five-layer employer resolution, 658/658 citizens mapped
+- ✓ `EmployerBizId` column on Simulation_Ledger, `Employment_Roster` sheet created
+- ✓ `buildDeskPackets.js` v2.1 — `businessSnapshot` in economicContext, employer data on interview candidates
+- ✓ Citizen-to-employer linkage with derived Employee_Count and Avg_Salary per BIZ entity
+**Remaining (engine-side dynamics):**
+- Career Engine BIZ-ID awareness (job transitions update employer linkage)
+- Economic Ripple Engine business triggers (company growth/contraction → neighborhood sentiment)
+- Intake process for new companies from supplemental editions
+**Status:** Core integration complete. Remaining items are engine-side automation, not data gaps.
 
 ### 12.6 Podcast Desk — Edition-to-Audio Pipeline ✓ (S67)
 Full pipeline: agent → XML transcript → Podcastfy → audio. 3 show formats, permanent hosts. Details in ROLLOUT_ARCHIVE.md.
@@ -586,7 +554,7 @@ Phase 7 engines (`buildNightLife.js` v2.4, `buildEveningFood.js` v2.4) contain 1
 ### 16.3 Celebrity Bridge ✓ (S71)
 `scripts/integrateCelebrities.js` — 9 qualifying celebrities (FameScore 65+, National/Iconic/Global tier). 6 already on Simulation_Ledger from prior emergence pipeline. 3 new additions: Dax Monroe (Iconic athlete, FameScore 95, Tier 2, POP-00769), Kato Rivers (National athlete, FameScore 88, Tier 3, POP-00770), Sage Vienta (Global actor, FameScore 92, Tier 2, POP-00771). UniverseLinks column backfilled on Cultural_Ledger for all 9. 21 celebrities stay Cultural_Ledger only (below threshold).
 
-**Final census: 658 citizens** (639 + 16 faith + 3 celebrity). Role mapping unchanged at 288 — all faith and celebrity roles already existed.
+**Final census: 658 citizens** (639 + 16 faith + 3 celebrity). Role mapping at 295 — all faith and celebrity roles already existed in base set, additional mappings from Phase 15 sports roles.
 
 ---
 

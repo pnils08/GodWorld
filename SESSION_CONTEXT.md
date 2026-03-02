@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-01 | Engine: v3.1 | Cycle: 84 | Session: 70
+Last Updated: 2026-03-01 | Engine: v3.1 | Cycle: 84 | Session: 71
 
 ---
 
@@ -53,6 +53,9 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Player Index Builder | scripts/buildPlayerIndex.js | v2.0 | TrueSource parser: contracts, quirks, status, computed birth years |
 | Athlete Integration | scripts/integrateAthletes.js | v1.0 | Birth years, salaries, traits, post-career roles for 87 A's players |
 | Athlete Prep | scripts/prepAthleteIntegration.js | v1.0 | Duplicate consolidation, backfills, retired status prep |
+| Faith Leader Integration | scripts/integrateFaithLeaders.js | v1.0 | 16 faith leaders → SL Tier 2, LeaderPOPID backfill |
+| Generic Citizens Audit | scripts/auditGenericCitizens.js | v1.0 | Read-only emergence audit, SL cross-reference |
+| Celebrity Integration | scripts/integrateCelebrities.js | v1.0 | Cultural_Ledger top celebrities → SL, UniverseLinks backfill |
 | Live Ledger Query | scripts/queryLedger.js | v1.0 | 6 query types (citizen, initiative, council, neighborhood, articles, verify), searches Sheets + 674 published files |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
@@ -160,6 +163,13 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 71 (2026-03-01) — Phase 16: Citizen Ledger Consolidation (Complete)
+
+- **Faith Leaders:** `scripts/integrateFaithLeaders.js` v1.0 — 16 faith leaders from Faith_Organizations added to Simulation_Ledger as Tier 2 (POP-00753–POP-00768). Protestant, Baptist, Catholic, Methodist, Pentecostal, Reform Jewish, Orthodox Jewish, Muslim, Buddhist, Hindu, Sikh, Jewish Renewal, Unitarian. LeaderPOPID column added to Faith_Organizations and backfilled. Larry Yang (lay teacher) mapped to Community Organizer; all others Senior Pastor / Faith Leader.
+- **Generic_Citizens Audit:** `scripts/auditGenericCitizens.js` v1.0 — 268 Generic_Citizens audited. All 11 emerged citizens confirmed on SL (zero gaps). Emergence engine healthy. Recommendation: keep as-is, defer 2041 occupation vocabulary upgrade.
+- **Celebrity Bridge:** `scripts/integrateCelebrities.js` v1.0 — 9 qualifying celebrities (FameScore 65+, National/Iconic/Global). 6 already on SL from prior emergence. 3 new: Dax Monroe (Iconic athlete, POP-00769, T2), Kato Rivers (National athlete, POP-00770, T3), Sage Vienta (Global actor, POP-00771, T2). UniverseLinks backfilled on Cultural_Ledger for all 9. 21 stay Cultural_Ledger only.
+- **Census:** 639 → 658 citizens (16 faith + 3 celebrity).
 
 ### Session 70 (2026-03-01) — Phase 15: A's Player Integration (Complete)
 

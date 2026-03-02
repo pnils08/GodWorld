@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 70 (2026-03-01) — Phase 15 A's Player Integration complete
+**Last Updated:** Session 71 (2026-03-01) — Phase 16 Citizen Ledger Consolidation complete
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -573,6 +573,26 @@ Phase 7 engines (`buildNightLife.js` v2.4, `buildEveningFood.js` v2.4) contain 1
 
 ### 15.5 Engine Flavor Integration — DEFERRED
 `generateGameModeMicroEvents.js` v1.3 upgrade (TraitProfile-weighted event pools, tier-specific city-life pools). `buildEveningFamous.js` v2.4 upgrade (Tier 1-2 player sightings from ctx.citizenLookup, season-aware weighting). Ship after data layer proves stable through 2-3 cycles. Both files are Apps Script (ES5 — no const/let/arrow functions).
+
+---
+
+## Phase 16: Citizen Ledger Consolidation — COMPLETE (S71)
+
+**Plan document:** `.claude/plans/async-mapping-kazoo.md`
+**Why this is a phase:** Three satellite citizen ledgers (Faith_Organizations, Generic_Citizens, Cultural_Ledger) operated independently from the 639-citizen Simulation_Ledger. Faith leaders existed as text strings only — couldn't vote, age, or appear in stories. Cultural celebrities had FameScores but no POP-IDs. The emergence pipeline needed auditing after the Phase 13 census overhaul.
+
+**Started:** Session 71 (2026-03-01)
+
+### 16.1 Faith Leaders → Simulation_Ledger ✓ (S71)
+`scripts/integrateFaithLeaders.js` — 16 faith leaders from 16 congregations added to Simulation_Ledger as Tier 2 citizens (POP-00753 through POP-00768). Protestant, Baptist, Catholic, Methodist, Pentecostal, Reform Jewish, Orthodox Jewish, Muslim, Buddhist, Hindu, Sikh, Jewish Renewal, Unitarian. Birth years deterministic from name hash (ages 43-70 in 2041). All mapped to "Senior Pastor / Faith Leader" except Larry Yang (Community Organizer — lay teacher). LeaderPOPID column added to Faith_Organizations and backfilled for all 16.
+
+### 16.2 Generic_Citizens Audit ✓ (S71)
+`scripts/auditGenericCitizens.js` — Read-only audit of 268 Generic_Citizens. All 11 emerged citizens confirmed on Simulation_Ledger (zero gaps). Emergence pipeline healthy: generates 1-5 Tier-4 citizens/cycle, promotes at 3+ media mentions. Occupations are 2026-era generic (electrician, mechanic, taxi driver) — pool upgrade to 2041 vocabulary deferred. Recommendation: keep emergence engine as-is.
+
+### 16.3 Celebrity Bridge ✓ (S71)
+`scripts/integrateCelebrities.js` — 9 qualifying celebrities (FameScore 65+, National/Iconic/Global tier). 6 already on Simulation_Ledger from prior emergence pipeline. 3 new additions: Dax Monroe (Iconic athlete, FameScore 95, Tier 2, POP-00769), Kato Rivers (National athlete, FameScore 88, Tier 3, POP-00770), Sage Vienta (Global actor, FameScore 92, Tier 2, POP-00771). UniverseLinks column backfilled on Cultural_Ledger for all 9. 21 celebrities stay Cultural_Ledger only (below threshold).
+
+**Final census: 658 citizens** (639 + 16 faith + 3 celebrity). Role mapping unchanged at 288 — all faith and celebrity roles already existed.
 
 ---
 

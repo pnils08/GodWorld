@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-01 | Engine: v3.1 | Cycle: 84 | Session: 69
+Last Updated: 2026-03-01 | Engine: v3.1 | Cycle: 84 | Session: 70
 
 ---
 
@@ -50,6 +50,9 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Citizen-Employer Linkage | scripts/linkCitizensToEmployers.js | v1.0 | Five-layer resolution, Employment_Roster, Business_Ledger stats |
 | Neighborhood Economics | scripts/aggregateNeighborhoodEconomics.js | v1.0 | Median income/rent by neighborhood from citizen data |
 | Economic Profile Seeder | scripts/applyEconomicProfiles.js | v1.0 | Role-based income seeding from economic_parameters.json |
+| Player Index Builder | scripts/buildPlayerIndex.js | v2.0 | TrueSource parser: contracts, quirks, status, computed birth years |
+| Athlete Integration | scripts/integrateAthletes.js | v1.0 | Birth years, salaries, traits, post-career roles for 87 A's players |
+| Athlete Prep | scripts/prepAthleteIntegration.js | v1.0 | Duplicate consolidation, backfills, retired status prep |
 | Live Ledger Query | scripts/queryLedger.js | v1.0 | 6 query types (citizen, initiative, council, neighborhood, articles, verify), searches Sheets + 674 published files |
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
@@ -157,6 +160,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 70 (2026-03-01) — Phase 15: A's Player Integration (Complete)
+
+- **Player Index Upgrade:** `buildPlayerIndex.js` v2.0 — Added contract parsing ($28.2M/$7.1M/$780K formats), quirk extraction ("Outlier I • Night Player"), status detection (retired/FA/active), computed birth years (2041 - TrueSource age). 55 players indexed, 37 with parsed contracts, 8 with quirks.
+- **Athlete Config:** `data/athlete_config.json` — Salary tiers (MLB_SUPERSTAR $15M+/WL10 down to MINOR_SIGNING/WL4), 14 quirk-to-trait mappings, 13 position defaults, post-career role pools, tier visibility weights.
+- **Ledger Prep:** Mark Aitken consolidated to POP-00003 (Tier 1, Player Rep + Community Liaison). Buford Park canonical at POP-00059. 6 POP-IDs backfilled with civilians (Elena Vásquez, Derek Simmons/A's Marketing Director, Tomas Aguilar, Priya Nair, Marcus Whitfield, Lisa Tanaka). 4 Bulls players replaced. 5 farewell season retirees set to Retired status with corrected birth years.
+- **Full Integration:** 87 players updated — birth years from 2023-era to 2041 math, incomes from $30-48K placeholders to real contracts ($750K-$37.8M) or tier fallbacks ($55K minor/$750K MLB/$250K retired). TraitProfile generated for all 87. 4 retired players transitioned to post-career roles (Scout, Pitching Coach, Broadcasting Analyst). Role mapping expanded to 288 entries. 408 total cell writes.
+- **Deferred:** Engine flavor integration (generateGameModeMicroEvents.js, buildEveningFamous.js) — ship after data proves stable through cycles.
 
 ### Session 69 (2026-03-01) — Phase 14: Economic Parameter Integration (Complete)
 

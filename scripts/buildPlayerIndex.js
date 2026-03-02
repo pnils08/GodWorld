@@ -68,6 +68,90 @@ function normalizeName(name) {
 }
 
 // ---------------------------------------------------------------------------
+// Contract value parsing
+// ---------------------------------------------------------------------------
+
+function parseContractValue(contractString) {
+  if (!contractString) return { annualSalary: null, type: 'UNKNOWN' };
+
+  const str = contractString.replace(/,/g, '');
+
+  // Try formats in priority order:
+  // "$28,200,000 per year" or "$28200000 per year"
+  let m = str.match(/\$?([\d.]+)\s*(?:per year|annually|\/year|AAV)/i);
+  if (m) {
+    const val = parseFloat(m[1]);
+    if (val > 0) return { annualSalary: val, type: val >= 700000 ? 'MLB' : 'MINOR_LEAGUE' };
+  }
+
+  // "$33.8M AAV" or "$7.1M" or "$28.4M per year"
+  m = str.match(/\$([\d.]+)\s*M\b/i);
+  if (m) {
+    const val = parseFloat(m[1]) * 1000000;
+    if (val > 0) return { annualSalary: val, type: val >= 700000 ? 'MLB' : 'MINOR_LEAGUE' };
+  }
+
+  // "$780K" or "$100K"
+  m = str.match(/\$([\d.]+)\s*K\b/i);
+  if (m) {
+    const val = parseFloat(m[1]) * 1000;
+    if (val > 0) return { annualSalary: val, type: val >= 700000 ? 'MLB' : (val >= 100000 ? 'MINOR_LEAGUE' : 'MINOR_SIGNING') };
+  }
+
+  // Plain dollar amount: "$28200000" or "$7100000"
+  m = str.match(/\$([\d]+)/);
+  if (m) {
+    const val = parseInt(m[1]);
+    if (val > 1000) return { annualSalary: val, type: val >= 15000000 ? 'MLB' : (val >= 700000 ? 'MLB' : (val >= 100000 ? 'MINOR_LEAGUE' : 'MINOR_SIGNING')) };
+  }
+
+  // "Arbitration" with no dollar amount
+  if (/arbitration/i.test(str)) return { annualSalary: null, type: 'ARBITRATION' };
+
+  // "Free Agent" with no dollar amount
+  if (/free agent/i.test(str)) return { annualSalary: null, type: 'FREE_AGENT' };
+
+  return { annualSalary: null, type: 'UNKNOWN' };
+}
+
+// ---------------------------------------------------------------------------
+// Quirk extraction
+// ---------------------------------------------------------------------------
+
+function extractQuirks(text) {
+  const quirks = [];
+  // "Quirks: Outlier I • Night Player • Stopper • Homebody"
+  const multiMatch = text.match(/Quirks?:\s*(.+)/i);
+  if (multiMatch) {
+    const raw = multiMatch[1].trim();
+    // Split by bullet, dot, comma, or pipe
+    const parts = raw.split(/\s*[•·|,]\s*/).map(q => q.trim()).filter(q => q.length > 0);
+    quirks.push(...parts);
+  }
+  return quirks;
+}
+
+// ---------------------------------------------------------------------------
+// Status extraction (retired, free agent, etc.)
+// ---------------------------------------------------------------------------
+
+function extractPlayerStatus(text) {
+  // "Status: FA (Ret. 2040)" or "Status: Retired" or "Status: Active"
+  const statusMatch = text.match(/Status:\s*(.+?)(?:\||$)/mi);
+  if (statusMatch) {
+    const raw = statusMatch[1].trim();
+    if (/ret(?:ired|\.)/i.test(raw)) {
+      const yearMatch = raw.match(/(\d{4})/);
+      return { status: 'retired', retiredYear: yearMatch ? parseInt(yearMatch[1]) : null };
+    }
+    if (/free agent|FA/i.test(raw)) return { status: 'free_agent' };
+    if (/active/i.test(raw)) return { status: 'active' };
+    return { status: raw.toLowerCase() };
+  }
+  return null;
+}
+
+// ---------------------------------------------------------------------------
 // File classification
 // ---------------------------------------------------------------------------
 
@@ -298,6 +382,14 @@ function parseAsDataPage(text, fileName) {
     player.contract = contractMatch[1].split('\n').filter(l => l.trim()).map(l => l.trim()).join('; ');
   }
 
+  // Quirks (from TrueSource: "Quirks: Outlier I • Night Player • Stopper")
+  const quirks = extractQuirks(text);
+  if (quirks.length > 0) player.quirks = quirks;
+
+  // Player status (Active, Retired, Free Agent)
+  const statusInfo = extractPlayerStatus(text);
+  if (statusInfo) player.playerStatus = statusInfo;
+
   // Legacy reference / POPID
   const popMatch = text.match(/Current POPID:\s*(POP-\d+)/i);
   if (popMatch) player.popId = popMatch[1];
@@ -393,6 +485,14 @@ function parseStatcastCard(text, fileName) {
   if (halMatch) notes.hal = halMatch[1].trim().replace(/^[""]|[""]$/g, '').trim();
 
   if (Object.keys(notes).length > 0) player.tribuneNotes = notes;
+
+  // Quirks (Statcast cards may include these)
+  const scQuirks = extractQuirks(text);
+  if (scQuirks.length > 0) player.quirks = scQuirks;
+
+  // Player status
+  const scStatus = extractPlayerStatus(text);
+  if (scStatus) player.playerStatus = scStatus;
 
   return player;
 }
@@ -612,6 +712,18 @@ function mergePlayer(existing, incoming) {
       merged.simTraits = { ...(merged.simTraits || {}), ...val };
     } else if (key === 'pitchArsenal' && !merged.pitchArsenal) {
       merged.pitchArsenal = val;
+    } else if (key === 'quirks' && Array.isArray(val)) {
+      // Merge quirk arrays, dedup
+      const existing = merged.quirks || [];
+      const combined = new Set([...existing, ...val]);
+      merged.quirks = Array.from(combined);
+    } else if (key === 'playerStatus' && typeof val === 'object') {
+      // Keep the more detailed status (one with retiredYear beats one without)
+      if (!merged.playerStatus) {
+        merged.playerStatus = val;
+      } else if (val.retiredYear && !merged.playerStatus.retiredYear) {
+        merged.playerStatus = val;
+      }
     } else if (key === 'awards' && val && (!merged.awards || val.length > merged.awards.length)) {
       merged.awards = val;
     } else if (key === 'seasonStats' && !merged.seasonStats) {
@@ -736,6 +848,19 @@ function buildPlayerIndex() {
     }
   }
 
+  // Post-process: computed birth year and parsed contract (Phase 15)
+  for (const p of players) {
+    // Computed birth year from TrueSource age
+    if (p.bio?.age) {
+      p.bio.computedBirthYear = 2041 - p.bio.age;
+    }
+
+    // Parse contract string into structured salary data
+    if (p.contract) {
+      p.parsedContract = parseContractValue(p.contract);
+    }
+  }
+
   // Sort: tier 1 first, then by name
   players.sort((a, b) => {
     const ta = a.tier || 99;
@@ -753,6 +878,11 @@ function buildPlayerIndex() {
     withStats: players.filter(p => p.seasonStats?.length > 0).length,
     withAttributes: players.filter(p => p.attributes).length,
     withStatcast: players.filter(p => p.tribuneNotes || p.simTraits).length,
+    withBirthYear: players.filter(p => p.bio?.computedBirthYear).length,
+    withContract: players.filter(p => p.parsedContract?.annualSalary).length,
+    withQuirks: players.filter(p => p.quirks?.length > 0).length,
+    withStatus: players.filter(p => p.playerStatus).length,
+    retired: players.filter(p => p.playerStatus?.status === 'retired').length,
   };
 
   // Classification breakdown
@@ -776,15 +906,29 @@ function buildPlayerIndex() {
   console.log(`  With season stats: ${stats.withStats}`);
   console.log(`  With attributes:   ${stats.withAttributes}`);
   console.log(`  With Statcast:     ${stats.withStatcast}`);
+  console.log(`  With birth year:   ${stats.withBirthYear}`);
+  console.log(`  With contract $:   ${stats.withContract}`);
+  console.log(`  With quirks:       ${stats.withQuirks}`);
+  console.log(`  With status:       ${stats.withStatus}`);
+  console.log(`  Retired:           ${stats.retired}`);
 
   console.log('\n=== Player List ===');
   for (const p of players) {
+    const salary = p.parsedContract?.annualSalary
+      ? `$${(p.parsedContract.annualSalary / 1000000).toFixed(1)}M`
+      : '-';
+    const born = p.bio?.computedBirthYear || '?';
+    const status = p.playerStatus?.status === 'retired' ? 'RET' : '';
     const flags = [
       p.popId || '-',
       p.sport,
       p.position || '-',
       `OVR:${p.overall || '?'}`,
       p.tier ? `T${p.tier}` : '',
+      `b:${born}`,
+      salary,
+      status,
+      p.quirks?.length ? `Q:${p.quirks.length}` : '',
     ].filter(Boolean).join(' | ');
     console.log(`  ${(p.name || 'UNKNOWN').padEnd(25)} ${flags}`);
   }

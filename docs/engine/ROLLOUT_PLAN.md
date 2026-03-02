@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 69 (2026-03-01) — Phase 14 Economic Integration complete (14.1-14.5, 14.7)
+**Last Updated:** Session 70 (2026-03-01) — Phase 15 A's Player Integration complete
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -549,6 +549,30 @@ Parameter versioning, Chicago economic profiles, seasonal modifiers, dynamic pri
 
 ### 14.7 Venue & Restaurant Business Linkage — COMPLETE (S69)
 Phase 7 engines (`buildNightLife.js` v2.4, `buildEveningFood.js` v2.4) contain 171 unique named venues across 12 neighborhoods. Selected 16 anchor establishments from base pools (not holiday-specific) and promoted them to BIZ entries (BIZ-00036 through BIZ-00051). Coverage: 7 nightlife venues (Blue Lantern Bar, Temple Lounge, OakTown Social, Pulse District, Merritt Club, Green & Gold Tavern, Dragon Gate Lounge) + 8 restaurants (OakHouse, Harborline Grill, Fruitvale Diner, KONO Kitchen, Miso Metro, West Side Cafe, Midnight Bistro, Dockhouse BBQ) + 1 fast food (SpeedyBurger). Added 6 hospitality keyword rules (Pastry Chef, Line Cook, Barista, Bartender, Sommelier, DJ) linking worker roles to venue BIZ-IDs. Business_Ledger now at 51 entries. employer_mapping.json v1.1. Remaining 155 venues stay as Phase 7 engine flavor text — holiday and seasonal pop-ups don't need economic grounding.
+
+---
+
+## Phase 15: A's Player Integration — COMPLETE (S70)
+
+**Plan document:** `.claude/plans/async-mapping-kazoo.md`
+**Why this is a phase:** Phase 14 wired economics for 639 civilians but the 102 A's players were stuck in SPORTS_OVERRIDE limbo: birth years calculated from game year (~2023) instead of simulation year (2041), incomes at ~$40K placeholders, no personality traits, retired players still carrying position codes.
+
+**Started:** Session 70 (2026-03-01)
+
+### 15.1 Player Index Upgrade ✓ (S70)
+`scripts/buildPlayerIndex.js` — Added `parseContractValue()` (handles $28.2M/$7.1M/$780K/$70K formats), `extractQuirks()` (parses "Quirks: Outlier I • Night Player" into arrays), `extractPlayerStatus()` (detects retired/FA/active). Post-processing adds `bio.computedBirthYear = 2041 - age` and `parsedContract` with structured salary data. Output: 55 players indexed (52 baseball, 3 basketball), 52 with computed birth years, 37 with parsed contracts, 8 with quirks, 21 with status, 5 retired.
+
+### 15.2 Athlete Configuration ✓ (S70)
+`data/athlete_config.json` — Salary tiers (MLB_SUPERSTAR $15M+/WL10, MLB_REGULAR $1-15M/WL9, MLB_MINIMUM $700K/WL7, MINOR_LEAGUE $50K/WL5, MINOR_SIGNING/WL4). Fallbacks: active MLB $750K, minor league $55K, retired $250K. 14 quirk-to-trait mappings (Night Player→Watcher/noir, Outlier I→Catalyst/tense, etc.). 13 position-based trait defaults. Post-career roles by player type (pitchers→Pitching Coach/Broadcasting Analyst/Scout, position→Hitting Coach/Community Ambassador/Restaurant Owner, legends→Front Office Advisor/Sports Media Personality). Tier visibility weights for future engine flavor integration.
+
+### 15.3 Ledger Prep & Cleanup ✓ (S70)
+`scripts/prepAthleteIntegration.js` — Mark Aitken consolidated: POP-00003 promoted to Tier 1 with "1B — Player Rep, Community Liaison", POP-00020 backfilled with Elena Vásquez (Waterfront Urban Planner, Jack London). Buford Park: canonical at POP-00059 (T3), POP-00030 backfilled with Derek Simmons (A's Marketing Director, Jack London). 4 Bulls players (POP-00529/531/532/535) replaced with Oakland civilians: Tomas Aguilar (Port logistics), Priya Nair (climate engineer), Marcus Whitfield (youth basketball coach), Lisa Tanaka (loan officer). 5 farewell season retired players set to Status: Retired (Paul Skenes→Scout, Mason Miller→Broadcasting Analyst, Orion Kerkering→Pitching Coach, Kris Bubic→Scout, Dalton Rushing already Retired). 3 ENGINE-mode retirees switched to GAME. Birth years corrected for all 5. 110 cells written.
+
+### 15.4 Full Integration Rollout ✓ (S70)
+`scripts/integrateAthletes.js` — 87 players processed (35 TrueSource-matched, 52 fallback). Birth years corrected from 2023-era to 2041 math. Income: superstars $15M-$37.8M (WL10), regulars $1-15M (WL9), MLB minimum $750K-$780K (WL7), minor league $55K-$100K (WL5). TraitProfile generated for all 87 (8 from TrueSource quirks, 79 from position defaults). 4 retired players transitioned to post-career roles with EconomicProfileKey updated. 298 cells written. Role mapping updated to 288 entries (added Broadcasting Analyst, Community Ambassador, Front Office Advisor, Sports Media Personality, Youth Baseball Instructor, A's Marketing Director).
+
+### 15.5 Engine Flavor Integration — DEFERRED
+`generateGameModeMicroEvents.js` v1.3 upgrade (TraitProfile-weighted event pools, tier-specific city-life pools). `buildEveningFamous.js` v2.4 upgrade (Tier 1-2 player sightings from ctx.citizenLookup, season-aware weighting). Ship after data layer proves stable through 2-3 cycles. Both files are Apps Script (ES5 — no const/let/arrow functions).
 
 ---
 

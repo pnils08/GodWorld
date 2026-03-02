@@ -6,7 +6,7 @@
       "SPORTS_OVERRIDE": "Professional athlete — income from contract data, not role profile. Script applies tax rate only.",
       "RETIRED": "Prefix flag — maps to active equivalent with 0.55-0.65x pension modifier applied by script."
     },
-    "totalMappings": 282,
+    "totalMappings": 288,
     "lastUpdated": "2026-03-01"
   },
 
@@ -269,9 +269,15 @@
   "First Baseman (A's)": "SPORTS_OVERRIDE",
   "Former Manager": "Sports Analytics Engineer (Gridiron)",
   "Hall of Famer from old basketball league MUBA": "SPORTS_OVERRIDE",
+  "Broadcasting Analyst": "Journalist / Reporter",
+  "Community Ambassador (A's)": "Community Organizer",
+  "Front Office Advisor": "Sports Analytics Engineer (Gridiron)",
   "Hitting Coach": "Sports Analytics Engineer (Gridiron)",
   "Pitching Coach": "Sports Analytics Engineer (Gridiron)",
   "Scout": "Sports Analytics Engineer (Gridiron)",
+  "Sports Media Personality": "Podcast Producer",
+  "Youth Baseball Instructor": "After-School Program Director",
+  "A's Marketing Director": "Marketing Manager / Brand Strategist",
   "Third Base Coach": "Sports Analytics Engineer (Gridiron)",
 
   "1B": "SPORTS_OVERRIDE",

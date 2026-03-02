@@ -1,0 +1,94 @@
+{
+  "_meta": {
+    "description": "Configuration for A's player integration: salary tiers, quirk-to-trait mapping, position defaults, post-career roles, tier visibility. Consumed by integrateAthletes.js.",
+    "version": "1.0",
+    "phase": "15",
+    "gameYear": 2041
+  },
+
+  "salaryTiers": [
+    { "tier": "MLB_SUPERSTAR", "minSalary": 15000000, "wealthLevel": 10 },
+    { "tier": "MLB_REGULAR",   "minSalary": 1000000,  "wealthLevel": 9 },
+    { "tier": "MLB_MINIMUM",   "minSalary": 700000,   "wealthLevel": 7 },
+    { "tier": "MINOR_LEAGUE",  "minSalary": 50000,    "wealthLevel": 5 },
+    { "tier": "MINOR_SIGNING", "minSalary": 0,        "wealthLevel": 4 }
+  ],
+
+  "fallbackSalaries": {
+    "activeMLB": 750000,
+    "minorLeague": 55000,
+    "retired": 250000
+  },
+
+  "quirkToTrait": {
+    "Night Player":        { "archetype": "Watcher",   "tone": "noir" },
+    "Day Player":          { "archetype": "Grounded",  "tone": "bright" },
+    "Outlier I":           { "archetype": "Catalyst",  "tone": "tense" },
+    "Outlier II":          { "archetype": "Catalyst",  "tone": "tense" },
+    "Stopper":             { "archetype": "Anchor",    "tone": "plain" },
+    "Homebody":            { "archetype": "Grounded",  "tone": "tender" },
+    "Breaking Ball Hitter":{ "archetype": "Striver",   "tone": "plain" },
+    "Unfazed":             { "archetype": "Anchor",    "tone": "plain" },
+    "Rally Monkey":        { "archetype": "Catalyst",  "tone": "bright" },
+    "Road Warrior":        { "archetype": "Drifter",   "tone": "plain" },
+    "First Pitch Swinger": { "archetype": "Catalyst",  "tone": "bright" },
+    "Tough Out":           { "archetype": "Anchor",    "tone": "tense" },
+    "Clutch":              { "archetype": "Catalyst",  "tone": "tense" },
+    "Situational Hitter":  { "archetype": "Connector", "tone": "plain" }
+  },
+
+  "positionDefaults": {
+    "SP":  { "archetype": "Anchor",    "tone": "plain" },
+    "RP":  { "archetype": "Anchor",    "tone": "plain" },
+    "CP":  { "archetype": "Catalyst",  "tone": "tense" },
+    "CL":  { "archetype": "Catalyst",  "tone": "tense" },
+    "C":   { "archetype": "Watcher",   "tone": "plain" },
+    "1B":  { "archetype": "Grounded",  "tone": "plain" },
+    "DH":  { "archetype": "Grounded",  "tone": "plain" },
+    "2B":  { "archetype": "Connector", "tone": "bright" },
+    "3B":  { "archetype": "Striver",   "tone": "plain" },
+    "SS":  { "archetype": "Striver",   "tone": "plain" },
+    "CF":  { "archetype": "Catalyst",  "tone": "bright" },
+    "LF":  { "archetype": "Drifter",   "tone": "plain" },
+    "RF":  { "archetype": "Drifter",   "tone": "plain" }
+  },
+
+  "postCareerRoles": {
+    "pitcher": [
+      "Pitching Coach",
+      "Broadcasting Analyst",
+      "Scout"
+    ],
+    "positionPlayer": [
+      "Hitting Coach",
+      "Community Ambassador (A's)",
+      "Restaurant Owner"
+    ],
+    "legendTier1": [
+      "Front Office Advisor",
+      "Sports Media Personality"
+    ],
+    "default": "Youth Baseball Instructor"
+  },
+
+  "postCareerRoleMapping": {
+    "Pitching Coach": "Pitching Coach",
+    "Hitting Coach": "Hitting Coach",
+    "Broadcasting Analyst": "Journalist / Reporter",
+    "Community Ambassador (A's)": "Community Organizer",
+    "Front Office Advisor": "Sports Analytics Engineer (Gridiron)",
+    "Sports Media Personality": "Podcast Producer",
+    "Youth Baseball Instructor": "After-School Program Director",
+    "Restaurant Owner": "Restaurant Owner",
+    "Scout": "Scout"
+  },
+
+  "tierVisibility": {
+    "1": { "eveningTextureChance": 0.25, "restaurantSightingChance": 0.30, "storyHookWeight": 3.0 },
+    "2": { "eveningTextureChance": 0.10, "restaurantSightingChance": 0.12, "storyHookWeight": 1.5 },
+    "3": { "eveningTextureChance": 0.02, "restaurantSightingChance": 0.03, "storyHookWeight": 0.5 },
+    "4": { "eveningTextureChance": 0.00, "restaurantSightingChance": 0.01, "storyHookWeight": 0.1 }
+  },
+
+  "isPitcherPosition": ["SP", "RP", "CP", "CL", "Starting Pitcher"]
+}

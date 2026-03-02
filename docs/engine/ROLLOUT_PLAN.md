@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 72 (2026-03-02) — Tech debt cleanup (10 fixes/6 files), Phase 15.5 engine flavor, Phase 17 cleanup, neighborhood rebalance
+**Last Updated:** Session 72 (2026-03-02) — Phase 12.1 agent interviews complete, tech debt cleanup (10 fixes/6 files), server monitoring + security hardening
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -400,18 +400,12 @@ Once claimed, build heartbeat script and wire into cron.
 
 Source: Anthropic engineering blog "Building a C Compiler with Parallel Claudes" (Feb 5, 2026), Sonnet 4.6 benchmarks (Feb 17, 2026), claude-mem v10.5.x changelog, Vercept acquisition (Feb 25, 2026). Session 66 research (2026-02-27).
 
-### 12.1 Agent-to-Agent Interviews
-**What:** Desk agents query civic voice agents directly during edition production. Carmen asks the Mayor's office for a quote. P Slayer asks the council faction for a reaction. Reporters interview sources instead of Mags fabricating quotes in briefings.
-**Why:** The C compiler paper proved specialized agents can coordinate through shared files. We already have civic voice agents (S64) that generate statements. The missing piece is the interview protocol — reporter agent sends a question, voice agent responds in character, reporter incorporates the quote.
-**How:**
-1. Define interview protocol: reporter writes question to `output/interviews/request_c{XX}_{desk}_{office}.json`
-2. Voice agent reads request, generates response to `output/interviews/response_c{XX}_{office}_{desk}.json`
-3. Reporter reads response and weaves it into their article
-4. All interview exchanges become canon (stored, queryable, citable in future editions)
-**Architecture note:** Follows C compiler task-lock pattern — file-based coordination, git-natural conflict resolution. No shared memory needed.
-**Depends on:** Phase 10.1 (civic voice agents) — COMPLETE. Civic voice packet pipeline (S64) — COMPLETE.
-**Build effort:** Medium. Interview protocol + write-edition pipeline update + agent skill updates.
-**Status:** Not started. **Priority — this is the next evolution of the newsroom.**
+### 12.1 Agent-to-Agent Interviews ✓ (S72)
+**What:** Mags curates 2-5 targeted interview questions during briefing compilation. Voice agents respond in character. Paulson gets async notification via Discord webhook and responds via CLI tool. Interview transcripts flow into desk briefings as primary source material.
+**Architecture:** Step 1.8d in write-edition pipeline (between voice agents and desk launch). Mags curates questions — not desk agents — avoiding costly two-pass runs. File-based coordination: `output/interviews/request_c{XX}_{office}.json` → voice agent response → `output/interviews/response_c{XX}_{office}.json`. Paulson async: Discord notification (`scripts/notify-paulson-interview.js`) + CLI response tool (`scripts/paulson-respond.js`). Graceful degradation if Paulson unavailable.
+**Files changed:** write-edition SKILL.md (Step 1.8d), 7 voice agent SKILL.md files (Interview Protocol), 6 desk agent SKILL.md files (Interview Transcripts), 2 new scripts, `output/interviews/` directory.
+**Depends on:** Phase 10.1 (civic voice agents) — COMPLETE.
+**Status:** ✓ COMPLETE (S72). Ready for first use in C85.
 
 ### 12.2 Worktree Isolation + Task Locking for Parallel Desks
 **What:** Run each desk agent in an isolated git worktree with explicit task locking (file-based claims in `current_tasks/` directory). Prevents file conflicts and enables true parallel execution.

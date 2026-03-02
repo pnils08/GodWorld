@@ -142,6 +142,18 @@ If no pre-loaded archive appears in your prompt, check for one at: `output/desk-
 
 **If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.** Partial coverage is better than no coverage. Use what you have from the pre-loaded summary.
 
+## Interview Transcripts
+
+Your briefing may include an **INTERVIEW TRANSCRIPTS** section containing Q&A exchanges between Tribune reporters and civic officials or franchise executives. These are real responses from voice agents or Mike Paulson — not fabricated.
+
+**Rules:**
+- Use interview quotes as primary source material — attribute them properly in your articles.
+- The `quote` field is the pull quote. Use it directly or paraphrase the longer `response`.
+- If an interview is marked "Awaiting response" or "Paulson's office has not yet responded," you may note this in your article: "[Name] did not respond to inquiries before publication."
+- Interview responses are canon. Do not contradict or alter them.
+- You may build narrative context around the quotes — describe the setting, the tension, the significance — but the words themselves are fixed.
+- **Paulson interviews** preserve his natural voice. His tone, his phrasing, his run-on sentences — that's Mike talking. Don't clean it up.
+
 ## Output Requirements
 
 ### Articles

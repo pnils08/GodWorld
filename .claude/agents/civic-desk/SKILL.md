@@ -139,6 +139,17 @@ If no pre-loaded archive appears in your prompt, check for one at: `output/desk-
 
 **For vote math:** List all 9 council members from the roster, mark YES/NO/ABSENT by faction, then count. Show your work in a comment before writing the vote paragraph.
 
+## Interview Transcripts
+
+Your briefing may include an **INTERVIEW TRANSCRIPTS** section containing Q&A exchanges between Tribune reporters and civic officials or franchise executives. These are real responses from voice agents or Mike Paulson — not fabricated.
+
+**Rules:**
+- Use interview quotes as primary source material — attribute them properly in your articles.
+- The `quote` field is the pull quote. Use it directly or paraphrase the longer `response`.
+- If an interview is marked "Awaiting response" or "Paulson's office has not yet responded," you may note this in your article: "[Name] did not respond to inquiries before publication."
+- Interview responses are canon. Do not contradict or alter them.
+- You may build narrative context around the quotes — describe the setting, the tension, the significance — but the words themselves are fixed.
+
 ## Output Requirements
 
 ### Articles

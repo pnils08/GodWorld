@@ -355,9 +355,11 @@ Step 1.8b: OPP Faction (parallel) → output/civic-voice/opp_faction_c{XX}.json
 Step 1.8c: Police Chief (conditional) → output/civic-voice/police_chief_c{XX}.json
            Baylight Authority (conditional) → output/civic-voice/baylight_authority_c{XX}.json
            District Attorney (conditional) → output/civic-voice/district_attorney_c{XX}.json
+Step 1.8d: Targeted Interviews (optional) → output/interviews/response_c{XX}_{office}.json
+           Paulson Notification (async)   → Discord webhook + scripts/paulson-respond.js
 ```
 
-**Ordering:** Mayor → Factions (read Mayor's output) → Extended (independent). Total pipeline time is minimal — factions run in parallel, extended voices run in parallel and are conditional.
+**Ordering:** Mayor → Factions (read Mayor's output) → Extended (independent) → Interviews (targeted follow-ups, optional). Total pipeline time is minimal — factions run in parallel, extended voices run in parallel and are conditional, interviews target only 1-3 agents.
 
 ### Statement Distribution Summary
 
@@ -369,6 +371,84 @@ Step 1.8c: Police Chief (conditional) → output/civic-voice/police_chief_c{XX}.
 | Sports | Mayor/Baylight Authority re: stadium (development angle) |
 | Culture | OPP community statements (neighborhood impact) |
 | Chicago | None (Oakland-only voices) |
+
+---
+
+### Step 1.8d: Targeted Interviews (Phase 12.1)
+
+After voice agents complete their proactive statements, identify opportunities for follow-up interviews. This step is **optional per cycle** — skip it if no stories warrant a direct Q&A exchange beyond what proactive statements already provide.
+
+**When to run interviews:**
+- A proactive statement doesn't address the specific angle a desk needs
+- An active storyline would benefit from a direct question-and-answer
+- Paulson storylines in the sports feed (trade deadline, stadium updates, two-city tension)
+- A Mara directive calls for a specific source response
+
+**Process:**
+
+1. **Review cycle data**: Read voice agent statements, desk summaries, active storylines, Mara forward guidance
+2. **Identify 2-5 interview targets** — not every cycle needs interviews. Most cycles, 0-2 is appropriate.
+3. **Write interview request files** to `output/interviews/`:
+
+```json
+{
+  "cycle": 85,
+  "requestedBy": "Carmen Delaine",
+  "desk": "civic",
+  "target": "mayor",
+  "targetName": "Avery Santana",
+  "topic": "Fruitvale vendor displacement from Baylight construction",
+  "questions": [
+    "Mayor, vendors on International Boulevard say construction staging has cut foot traffic by 40%. What relief is your office providing?",
+    "The Stabilization Fund was supposed to address exactly this. Why haven't disbursements reached Fruitvale yet?"
+  ],
+  "context": "INIT-006 Baylight passed 6-3. Stabilization Fund (INIT-009) has $4.2M approved but $0 disbursed to Fruitvale businesses.",
+  "urgency": "this-cycle"
+}
+```
+
+4. **Launch targeted voice agents** with interview prompts (only the agents whose offices received questions — usually 1-3, not all 7):
+
+```
+You previously generated proactive statements for Cycle {XX}. A reporter has follow-up questions.
+
+**YOUR PREVIOUS STATEMENTS:**
+{contents of output/civic-voice/{office}_c{XX}.json}
+
+**INTERVIEW REQUEST:**
+{contents of output/interviews/request_c{XX}_{office}.json}
+
+Respond to each question in character. Output as JSON to be saved to output/interviews/response_c{XX}_{office}.json.
+```
+
+5. **Paulson interviews (async)**: If a Paulson interview was requested, run `node scripts/notify-paulson-interview.js {cycle}` to send a Discord notification. Mike responds via `node scripts/paulson-respond.js {cycle}` when available.
+
+6. **Collect responses**: Voice agent responses are immediate. Paulson response is async — if not received by desk launch time, note "Paulson's office has not yet responded" in the briefing.
+
+**After interviews complete**, include transcripts in desk briefings under `## INTERVIEW TRANSCRIPTS`:
+
+```markdown
+## INTERVIEW TRANSCRIPTS
+
+### Mayor Santana — Fruitvale Vendor Displacement
+**Requested by:** Carmen Delaine (Civic Desk)
+
+Q: "Mayor, vendors on International Boulevard say..."
+A: "We've heard those concerns directly..."
+**PULL QUOTE:** "No one should lose their livelihood because we're building something better."
+
+### Mike Paulson — Trade Deadline Strategy
+**Requested by:** P Slayer (Sports Desk)
+**Status:** Awaiting response / Response received
+[Response text if available, or "Paulson's office has not yet responded."]
+```
+
+**Pipeline timing:**
+- Voice agent interviews: ~30 seconds each (haiku model, they already have context from the proactive pass)
+- Paulson notification: instant (Discord webhook)
+- Paulson response: async — graceful degradation if unavailable
+
+**Skipping interviews is normal.** Many cycles won't need them. Proactive statements are usually sufficient. Interviews are for when a story demands a direct exchange.
 
 ---
 

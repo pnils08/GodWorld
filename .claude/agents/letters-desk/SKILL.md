@@ -102,6 +102,15 @@ If no pre-loaded archive appears in your prompt, check for one at: `output/desk-
 
 **If you reach turn 8 and haven't started writing, STOP RESEARCHING AND WRITE.** Four short letters from what you've read is better than zero letters.
 
+## Interview Transcripts
+
+Your briefing may include an **INTERVIEW TRANSCRIPTS** section containing Q&A exchanges between Tribune reporters and civic officials or franchise executives. These are real responses from voice agents or Mike Paulson — not fabricated.
+
+**Rules:**
+- Citizens may react to interview content in their letters — a mayor's quote, a chief's statement, Paulson's remarks.
+- Interview responses are canon. Citizens can agree, disagree, or be angry about what was said, but should not misquote the official.
+- If an interview was marked "declined to comment," a citizen may react to the silence itself.
+
 ## Output Requirements
 
 ### Letters

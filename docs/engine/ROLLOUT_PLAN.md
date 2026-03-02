@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 71 (2026-03-01) — Phase 16 Citizen Ledger Consolidation complete
+**Last Updated:** Session 72 (2026-03-02) — Phase 17 Data Integrity Cleanup complete
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -510,13 +510,13 @@ Fast mode added to Rhea's SKILL.md. Runs 7 of 19 checks (citizen names, votes, s
 
 ---
 
-## Phase 13: Simulation_Ledger Data Integrity Audit — ACTIVE
+## Phase 13: Simulation_Ledger Data Integrity Audit — COMPLETE (S68-S72)
 
 **Tracking document:** `docs/engine/LEDGER_AUDIT.md` — all progress, decisions, and remaining work live there.
 
 **Why this is a phase:** Every downstream system depends on the Simulation_Ledger being correct — desk packets, queryLedger.js, citizen lookups, age calculations, neighborhood assignments, economic parameters. Bad ledger data cascades everywhere. This audit makes the ledger trustworthy.
 
-**Status:** CORE COMPLETE. 639/639 citizens have specific role, birth year, and neighborhood. 167 unique 2041 demographic voice roles. Role-to-economic mapping done (280 mappings, 100% coverage). Family linkages done (Corliss, Keane, Dillon). Chicago migration done. Tech debt 4/7 critical fixed. Remaining: 42 MLB player age review (sports universe, needs Mike), ~27 medium/low tech debt items. See LEDGER_AUDIT.md for full breakdown.
+**Status:** COMPLETE. 658/658 citizens clean. Phase 13 core audit (S68), Phase 16 satellite consolidation (S71), Phase 17 data integrity cleanup (S72). 167 unique 2041 demographic voice roles. Role-to-economic mapping done (288 mappings, 100% coverage). Family linkages done (Corliss, Keane, Dillon). Chicago migration done. Tech debt 4/7 critical fixed. Remaining: 42 MLB player age review (sports universe, needs Mike), ~27 medium/low tech debt items. See LEDGER_AUDIT.md for full breakdown.
 
 **Started:** Session 68 (2026-02-28)
 
@@ -593,6 +593,29 @@ Phase 7 engines (`buildNightLife.js` v2.4, `buildEveningFood.js` v2.4) contain 1
 `scripts/integrateCelebrities.js` — 9 qualifying celebrities (FameScore 65+, National/Iconic/Global tier). 6 already on Simulation_Ledger from prior emergence pipeline. 3 new additions: Dax Monroe (Iconic athlete, FameScore 95, Tier 2, POP-00769), Kato Rivers (National athlete, FameScore 88, Tier 3, POP-00770), Sage Vienta (Global actor, FameScore 92, Tier 2, POP-00771). UniverseLinks column backfilled on Cultural_Ledger for all 9. 21 celebrities stay Cultural_Ledger only (below threshold).
 
 **Final census: 658 citizens** (639 + 16 faith + 3 celebrity). Role mapping unchanged at 288 — all faith and celebrity roles already existed.
+
+---
+
+## Phase 17: Data Integrity Cleanup — COMPLETE (S72)
+
+**Why this is a phase:** Batch audit of Simulation_Ledger revealed 73.4% health score — 147 citizens with data quality issues accumulated across Phases 13-16. Duplicate names from the original census, Chicago neighborhoods that leaked in, lowercase Status/ClockMode values from different integration scripts, citizens aged 80+ from pre-Phase 13 birth year math, and bare position codes on non-GAME citizens.
+
+**Started:** Session 72 (2026-03-02)
+
+### 17.1 Batch Audit ✓ (S71-72)
+Batch API generated a Python audit script (`/tmp/audit_ledger.py`). Ran locally against CSV backup (639 rows) and cross-referenced against live sheet (658 rows). Seven audit categories: duplicate names, POP-ID validation, missing fields, data consistency, neighborhood distribution, tier distribution, RoleType diversity. 209 findings: 115 CRITICAL, 70 WARNING, 24 INFO.
+
+### 17.2 Cleanup Script ✓ (S72)
+`scripts/cleanupSimulationLedger.js` — Single script handling all 6 fix categories. Dry-run mode, batch writes (50 cells per API call). 189 cell updates across 147 citizens:
+
+- **21 duplicate names renamed** — Higher POP-ID gets new unique citizen name (Kenji Okafor, Priya Marchetti, Tomás Xiong, etc.). Original POP-ID keeps identity. Buford Park + Mark Aitken skipped (already fixed).
+- **50 neighborhoods normalized** — "Piedmont Avenue"→"Piedmont Ave" (33), Chicago neighborhoods→underrepresented Oakland areas (12), "Coliseum"→"Coliseum District" (2), "Oakland"→specific neighborhoods (2), "traveling"→KONO (1).
+- **42 Status values standardized** — "active"→"Active" (33), "Traded"→"Retired" (4), "Serious Condition"→"Active" (2), "Inactive"→"Retired" (2), "Departed"→"Retired" (1).
+- **18 ClockMode values standardized** — "engine"→"ENGINE" (9), "game"→"GAME" (7), "active"→"ENGINE" (2).
+- **13 birth years corrected** — 12 citizens born 1954-1960 shifted +15 years (ages 81-87→66-72). 1 child (Rick Dillon, age 10→25).
+- **3 bare position codes replaced** — RF/C/CP on ENGINE citizens → Sports Analytics Consultant, Youth Baseball Coach, Athletic Training Specialist.
+
+**Post-cleanup health: ~95%+.** Remaining INFO-level items are intentional design (e.g., "Corner Barbershop Owner" vs "Barbershop Owner" are distinct demographic voices, not duplicates).
 
 ---
 

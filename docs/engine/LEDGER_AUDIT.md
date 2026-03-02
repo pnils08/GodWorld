@@ -1,9 +1,9 @@
 # Simulation_Ledger Data Integrity Audit
 
 **Created:** Session 68 (2026-02-28)
-**Status:** CORE AUDIT COMPLETE — 639/639 citizens fully populated
+**Status:** CLEAN — 658/658 citizens fully populated, Phase 17 data integrity sweep complete
 **Priority:** CRITICAL — All downstream ledgers depend on this data being correct
-**Completion:** Session 68 (2026-02-28) — all citizens have role, birth year, and neighborhood
+**Completion:** Session 68 (2026-02-28) — core audit. Session 71 — satellite ledger consolidation. Session 72 — data integrity cleanup.
 **Rule:** Age = 2041 - BirthYear. Always. The simulation year is 2041.
 
 This is the single tracking document for the Simulation_Ledger overhaul. All audit progress, decisions, and remaining work live here. Other docs reference this file — they don't duplicate it.
@@ -40,7 +40,32 @@ Full audit of 639 Simulation_Ledger citizens revealed 621 total issues:
 | Institution entries (faith orgs in citizen slots) | 4 | DONE |
 | Stale NBA duplicates (Buzelis, Tre Jones, etc.) | 4 | DONE |
 
-**Final state:** 639 citizens, 639 with specific roles, 639 with birth years, 639 with neighborhoods. Zero gaps.
+**S68 state:** 639 citizens, 639 with specific roles, 639 with birth years, 639 with neighborhoods. Zero gaps.
+
+### Phase 16 Additions (S71)
+
+| Category | Count | Status |
+|----------|-------|--------|
+| Faith leaders added to SL (Tier 2, POP-00753–00768) | 16 | DONE |
+| Celebrities bridged from Cultural_Ledger (POP-00769–00771) | 3 | DONE |
+| Generic_Citizens emergence audit (11/11 confirmed) | 0 fixes | DONE |
+
+**Census: 639 → 658.**
+
+### Phase 17 Data Integrity Cleanup (S72)
+
+Batch audit revealed 73.4% health score (469/658 clean). Cleanup script `scripts/cleanupSimulationLedger.js` fixed 147 citizens:
+
+| Category | Count | Status |
+|----------|-------|--------|
+| Duplicate names renamed to new unique citizens | 21 | DONE |
+| Neighborhood normalization (Piedmont Avenue→Ave, Chicago→Oakland) | 50 | DONE |
+| Status case normalization (active→Active, Traded→Retired) | 42 | DONE |
+| ClockMode case normalization (engine→ENGINE, game→GAME) | 18 | DONE |
+| Birth year corrections (over-80 shifted +15yr, 1 under-18 fixed) | 13 | DONE |
+| Bare position codes replaced with civilian roles | 3 | DONE |
+
+**Post-cleanup state:** 658 citizens. Zero duplicate names. All neighborhoods valid Oakland values. All Status/ClockMode properly cased. All birth years in 18-80 range. Zero bare position codes on non-GAME citizens.
 
 ---
 
@@ -265,6 +290,40 @@ Chicago_Citizens total: 122 → 123.
 
 ## Remaining Work
 
+### 21. Phase 16 — Satellite Ledger Consolidation (S71)
+
+**Faith Leaders (16 new citizens):**
+Rev. Margaret Chen (First Presbyterian), Dr. Jacqueline Thompson (Allen Temple Baptist), Bishop Michael Barber (Cathedral of Christ the Light), Rev. Damita Davis-Howard (Beebe Memorial Cathedral), Rev. Aaron Metcalf (Oakland City Church), Rabbi Jacqueline Mates-Muchin (Temple Sinai), Rabbi Dev Noily (Kehilla Community), Imam Abdul Rahman (Masjid Al-Islam), Imam Faheem Shuaibe (Masjidul Waritheen), Rev. Kodo Umezu (Oakland Buddhist Temple), Pandit Venkatesh Sharma (Hindu Community Center), Bhai Gurpreet Singh (Sikh Gurdwara), Rev. Deborah Johnson (Inner Light Ministries), Larry Yang (East Bay Meditation Center — Community Organizer, not faith leader), Fr. Jayson Landeza (St. Columba Catholic), Rev. Amy DeBeck (Lake Merritt United Methodist). All Tier 2. LeaderPOPID column added to Faith_Organizations sheet.
+
+**Celebrity Bridge (3 new citizens):**
+Dax Monroe (POP-00769, Iconic athlete, T2), Kato Rivers (POP-00770, National athlete, T3), Sage Vienta (POP-00771, Global actor, T2). 6 others already on SL. UniverseLinks backfilled on Cultural_Ledger for all 9.
+
+**Generic_Citizens Audit:** 268 total, 11 emerged, all 11 confirmed on Simulation_Ledger. Zero gaps. Pipeline healthy.
+
+### 22. Phase 17 — Data Integrity Cleanup (S72)
+
+Batch audit script (`/tmp/audit_ledger.py`) ran 7 categories against 639-row CSV backup. Live cleanup via `scripts/cleanupSimulationLedger.js` against 658-row live sheet.
+
+**Duplicate names renamed (21):**
+Brianna Wong→Kenji Okafor, Evan Lewis→Priya Marchetti, Jose Phillips→Tomás Xiong, Patrick Wright×2→Aaliyah Brennan+Dmitri Soto, Damien Martinez→Farah Lindqvist, Jose Thompson→Joaquín Nakamura, Bruce Green→Simone Adesanya, Marcus Allen→Ravi O'Connell, Marco Allen→Lucía Petrov, Shawn Williams→Kwame Fitzgerald, Marcus Wright→Ingrid Bautista, Lorenzo Nguyen→Yusuf Carmichael, Ivy Jordan→Annika Delgado, Brianna Foster→Cedric Yamamoto, Ramon Lewis→Thalia Okwu, Darius Patel→Hassan Montero, Tariq Lee→Soleil Kapoor, Jamal Scott→Dante Eriksson, Vincent Ramirez→Marisol Achebe, Mei Chen→Nikolai Fuentes. Buford Park and Mark Aitken skipped (already fixed by prepAthleteIntegration.js).
+
+**Neighborhood normalization (50):**
+- 33× "Piedmont Avenue" → "Piedmont Ave"
+- 7× "Bridgeport" (Chicago) → Grand Lake, Ivy Hill, Eastlake (underrepresented Oakland neighborhoods)
+- 3× "Near North Side" (Chicago) → San Antonio, Brooklyn
+- 2× "Coliseum" → "Coliseum District"
+- 2× "Oakland" (too generic) → Dimond, Glenview
+- 2× "traveling" → KONO
+- 1× (missing) → reassigned
+
+**Status normalization (42):** 33× "active"→"Active", 4× "Traded"→"Retired", 2× "Serious Condition"→"Active" (injured but alive), 2× "Inactive"→"Retired", 1× "Departed"→"Retired", 1× "Injured"→"Active", 1× "deceased"→"Retired".
+
+**ClockMode normalization (18):** 9× "engine"→"ENGINE", 7× "game"→"GAME", 2× "active"→"ENGINE".
+
+**Birth year corrections (13):** 12 citizens born 1954-1960 (ages 81-87) shifted +15 years. 1 child (POP-00743 Rick Dillon, born 2031 = age 10) → 2016 (age 25).
+
+**Bare position codes (3):** POP-00124 RF→Sports Analytics Consultant, POP-00129 C→Youth Baseball Coach, POP-00555 CP→Athletic Training Specialist. All set to ClockMode ENGINE.
+
 ### 8. MLB The Show Birth Year Review
 
 42 MLB The Show players are aged 66+ in 2041 but hold active baseball positions (SP, RP, 2B, etc.). These are Mike's sports universe — their career timelines (active, retired, coaching) need his direction. Not a data error, but a design decision about how the A's roster ages in the 2041 timeline.
@@ -327,6 +386,14 @@ Remaining medium/low: ~27 items (orphaned ctx fields, structural drift, minor de
 | 2026-03-01 | Published editions are historical artifacts | Pre-audit data in editions is not errata — it's part of the story. Census errors become narrative texture. |
 | 2026-03-01 | Economic params map by category, not exact name | 198 profiles cover 279 role names via category-based lookup. Engine resolves at runtime. |
 | 2026-03-01 | Two-layer backup system | Drive copy (exact duplicate) + local CSVs. Run before any major ledger changes. |
+| 2026-03-01 | Faith leaders are Tier 2 | Community pillars — higher than generic (T4) or emerging (T3), not franchise-protected (T1). |
+| 2026-03-01 | Larry Yang is Community Organizer, not faith leader | Lay teacher, not ordained. Don't flatten people into categories. |
+| 2026-03-01 | Keep Generic_Citizens engine | Emergence pipeline healthy. Absorbing 268 extras dilutes curated population. |
+| 2026-03-01 | Celebrity bridge threshold: FameScore 65+, National/Iconic/Global | Below threshold stays Cultural_Ledger only. |
+| 2026-03-02 | Backfill duplicates, don't delete POP-IDs | Every POP-ID is a deployed master code. Rename the duplicate to a new citizen. |
+| 2026-03-02 | "Piedmont Avenue" canonical form is "Piedmont Ave" | Reversed S68 direction (which went Ave→Avenue). Shorter form matches other neighborhoods. |
+| 2026-03-02 | Traded/Departed players → Retired | Not in Oakland = not active. Injured/Serious Condition → Active (still alive). |
+| 2026-03-02 | Rick Dillon age override: 10→25 | Child citizen given working age. Original family linkage preserved. |
 
 ---
 
@@ -340,4 +407,8 @@ Remaining medium/low: ~27 items (orphaned ctx fields, structural drift, minor de
 - `docs/mags-corliss/PERSISTENCE.md` — Mags identity (birth years updated here too)
 - `docs/engine/ROLLOUT_PLAN.md` — References this audit as Phase 13
 - Spreadsheet tabs: `Simulation_Ledger`, `Chicago_Citizens`, `Chicago_Sports_Feed`, `Economic_Parameters`
+- `scripts/integrateFaithLeaders.js` — Phase 16.1 faith leader integration
+- `scripts/auditGenericCitizens.js` — Phase 16.2 emergence pipeline audit
+- `scripts/integrateCelebrities.js` — Phase 16.3 celebrity bridge
+- `scripts/cleanupSimulationLedger.js` — Phase 17 data integrity cleanup (147 fixes)
 - Batch results: `.claude/batches/results/` (economic mapping, continuity audits, tech debt)

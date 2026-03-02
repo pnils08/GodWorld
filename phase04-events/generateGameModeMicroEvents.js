@@ -1,12 +1,18 @@
 /**
  * ============================================================================
- * generateGameModeMicroEvents_ v1.3 (write-intents + namespace safety)
+ * generateGameModeMicroEvents_ v1.4 (TraitProfile integration)
  * ============================================================================
  * - Log schema unchanged
  * - Optional determinism (ctx.rng or ctx.config.rngSeed)
  * - Tagged entries (no includes scanning)
  * - Batch log writes
  * - Per-cycle uniqueness per citizen (no duplicate picked.text for same popId)
+ *
+ * v1.4 Changes:
+ * - TraitProfile column read (iTrait) for personality-based event selection
+ * - 7 archetype-specific event pools (28 total trait events)
+ * - buildEventPool_ accepts traitProfile parameter
+ * - MLB players with traits get personality-flavored events mixed in
  *
  * v1.3 Changes:
  * - FIX: Simulation_Ledger update via queueRangeIntent_ (was direct setValues mid-cycle)
@@ -51,6 +57,7 @@ function generateGameModeMicroEvents_(ctx) {
   var iLife = idx("LifeHistory");
   var iLastUpd = (idx("LastUpdated") >= 0) ? idx("LastUpdated") : idx("Last Updated");
   var iOriginGame = idx("OriginGame");
+  var iTrait = idx("TraitProfile");
 
   if (iPopID < 0 || iClock < 0 || iStatus < 0 || iLife < 0) return;
 
@@ -263,6 +270,64 @@ function generateGameModeMicroEvents_(ctx) {
     "recharged during the break"
   ].map(function(t) { return entry(t, ["context:sportsAtmosphere"], "Season"); });
 
+  // ─────────────────────────────────────────────────────────────────────────
+  // TRAIT-SPECIFIC EVENT POOLS (Phase 15.5)
+  // ─────────────────────────────────────────────────────────────────────────
+  // Archetypes from athlete_config.json. When a GAME citizen has a
+  // TraitProfile (e.g. "Catalyst/bright"), the archetype key adds
+  // personality-flavored events to their pool.
+
+  var traitPools = {
+    Catalyst: [
+      "brought infectious energy to the clubhouse",
+      "sparked a lively conversation among teammates",
+      "rallied spirits during a team gathering",
+      "was the first to organize a group outing"
+    ].map(function(t) { return entry(t, ["role:mlb", "trait:Catalyst"], "Team"); }),
+
+    Anchor: [
+      "provided steady presence in the clubhouse",
+      "offered quiet counsel to a younger teammate",
+      "maintained his routine with characteristic discipline",
+      "kept the team grounded during a hectic stretch"
+    ].map(function(t) { return entry(t, ["role:mlb", "trait:Anchor"], "Team"); }),
+
+    Watcher: [
+      "observed the city from a quiet corner",
+      "took in the scene at a local establishment",
+      "noticed details others missed around town",
+      "spent time studying the rhythm of the neighborhood"
+    ].map(function(t) { return entry(t, ["role:mlb", "trait:Watcher"], "Personal"); }),
+
+    Grounded: [
+      "enjoyed a hearty meal at a neighborhood spot",
+      "spent time in familiar surroundings",
+      "found comfort in a simple routine",
+      "appreciated the stability of home life"
+    ].map(function(t) { return entry(t, ["role:mlb", "trait:Grounded"], "Personal"); }),
+
+    Striver: [
+      "worked on something beyond the baseball field",
+      "pursued a personal project with focus",
+      "studied film or read to sharpen his edge",
+      "channeled competitive energy into a side interest"
+    ].map(function(t) { return entry(t, ["role:mlb", "trait:Striver"], "Personal"); }),
+
+    Connector: [
+      "bridged conversations between different teammate groups",
+      "checked in with a teammate going through a tough stretch",
+      "organized something that brought the team closer",
+      "strengthened a bond with a fellow player"
+    ].map(function(t) { return entry(t, ["role:mlb", "trait:Connector"], "Team"); }),
+
+    Drifter: [
+      "explored a part of Oakland he hadn't visited before",
+      "wandered through the city with no particular destination",
+      "found an unexpected moment of solitude",
+      "let the afternoon unfold without a plan"
+    ].map(function(t) { return entry(t, ["role:mlb", "trait:Drifter"], "Personal"); })
+  };
+
   var holidayPublicPool = {
     Thanksgiving: ["participated in a holiday community event"],
     Holiday: ["attended a holiday charity function"],
@@ -311,7 +376,7 @@ function generateGameModeMicroEvents_(ctx) {
     return "public-figure";
   }
 
-  function buildEventPool_(citizenType) {
+  function buildEventPool_(citizenType, traitProfile) {
     var pool = publicFigureGeneral.concat(publicFigurePersonal);
 
     switch (citizenType) {
@@ -342,6 +407,14 @@ function generateGameModeMicroEvents_(ctx) {
         break;
       default:
         break;
+    }
+
+    // Phase 15.5: Trait-specific events for MLB players
+    if (traitProfile && citizenType.indexOf("mlb-") === 0) {
+      var archetype = traitProfile.split("/")[0];
+      if (archetype && traitPools[archetype]) {
+        pool = pool.concat(traitPools[archetype]);
+      }
     }
 
     if (citizenType.indexOf("mlb-") === 0) {
@@ -435,7 +508,8 @@ function generateGameModeMicroEvents_(ctx) {
     if (chance > 0.15) chance = 0.15;
     if (!hit(chance)) continue;
 
-    var pool = buildEventPool_(citizenType);
+    var traitProfile = (iTrait >= 0) ? (row[iTrait] || "").toString() : "";
+    var pool = buildEventPool_(citizenType, traitProfile);
     var picked = uniquePick_(pool, popId);
     if (!picked) continue;
 
@@ -508,13 +582,16 @@ function generateGameModeMicroEvents_(ctx) {
 
 /**
  * ============================================================================
- * GAME MODE MICRO-EVENTS REFERENCE v1.3
+ * GAME MODE MICRO-EVENTS REFERENCE v1.4
  * ============================================================================
  *
  * Target: ClockMode === "GAME" citizens (public figures)
  * Limit: 15 events per cycle
  *
- * UPGRADE NOTES (v1.3):
+ * UPGRADE NOTES (v1.4):
+ * - TraitProfile integration (Phase 15.5): MLB players with TraitProfile
+ *   get archetype-specific events (Catalyst, Anchor, Watcher, Grounded,
+ *   Striver, Connector, Drifter) added to their event pool
  * - Deterministic RNG via mulberry32GameMode_ seeded by cycle
  * - Writes via write-intents (queueRangeIntent_, queueBatchAppendIntent_)
  * - Per-cycle uniqueness per citizen (no duplicate events)

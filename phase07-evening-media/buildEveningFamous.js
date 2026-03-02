@@ -1,9 +1,15 @@
 /**
  * ============================================================================
- * buildEveningFamous_ v2.4
+ * buildEveningFamous_ v2.5
  * ============================================================================
  *
  * World-aware celebrity selection for evening coverage with calendar integration.
+ *
+ * v2.5 Changes:
+ * - Phase 15.5: Real A's players from Simulation_Ledger replace generic athletes
+ * - Tier 1-2 active MLB GAME citizens pulled dynamically
+ * - Player neighborhoods and TraitProfile included in sighting output
+ * - Falls back to generic ATHLETES if ledger unavailable
  *
  * v2.3 Changes:
  * - ES5 compatible (var instead of const/let, no arrow functions)
@@ -172,13 +178,71 @@ function buildEveningFamous_(ctx) {
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // REAL A'S PLAYERS FROM SIMULATION_LEDGER (Phase 15.5)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Tier 1-2 active MLB GAME citizens replace generic ATHLETES pool.
+  // Falls back to generic ATHLETES if ledger unavailable.
+
+  var REAL_PLAYERS = [];
+  var ss = ctx.ss;
+  if (ss) {
+    var slSheet = ss.getSheetByName("Simulation_Ledger");
+    if (slSheet) {
+      var slData = slSheet.getDataRange().getValues();
+      if (slData.length > 1) {
+        var slH = slData[0];
+        var _iFirst = slH.indexOf("First");
+        var _iLast = slH.indexOf("Last");
+        var _iTier = slH.indexOf("Tier");
+        var _iClock = slH.indexOf("ClockMode");
+        var _iStatus = slH.indexOf("Status");
+        var _iOrigin = slH.indexOf("OriginGame");
+        var _iNeigh = slH.indexOf("Neighborhood");
+        var _iTrait = slH.indexOf("TraitProfile");
+
+        for (var p = 1; p < slData.length; p++) {
+          var pr = slData[p];
+          var pClock = (pr[_iClock] || "").toString().trim().toUpperCase();
+          var pStat = (pr[_iStatus] || "").toString().trim().toLowerCase();
+          var pOrig = (pr[_iOrigin] || "").toString();
+          var pTier = Number(pr[_iTier] || 4);
+
+          if (pClock !== "GAME") continue;
+          if (pStat !== "active") continue;
+          if (pOrig.indexOf("MLB") < 0) continue;
+          if (pTier > 2) continue;
+
+          var pFirst = (pr[_iFirst] || "").toString();
+          var pLast = (pr[_iLast] || "").toString();
+          var pName = (pFirst + " " + pLast).trim();
+          if (!pName || pFirst === pLast) continue;
+
+          var pNeigh = (_iNeigh >= 0) ? (pr[_iNeigh] || "").toString() : "";
+          var pTrait = (_iTrait >= 0) ? (pr[_iTrait] || "").toString() : "";
+
+          REAL_PLAYERS.push({
+            name: pName,
+            role: "A's player",
+            tier: pTier,
+            homeNeighborhood: pNeigh,
+            traitProfile: pTrait
+          });
+        }
+      }
+    }
+  }
+
+  // Use real players when available, keep generic as fallback
+  var athletePool = (REAL_PLAYERS.length > 0) ? REAL_PLAYERS : ATHLETES;
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // WORLD-AWARE SELECTION LOGIC
   // ═══════════════════════════════════════════════════════════════════════════
 
   var pool = [];
 
-  // Base pool (v2.3: use concat instead of spread)
-  pool = pool.concat(ACTORS, MUSICIANS, ATHLETES);
+  // Base pool: actors, musicians, and athletes (real or generic)
+  pool = pool.concat(ACTORS, MUSICIANS, athletePool);
 
   // ───────────────────────────────────────────────────────────────────────────
   // HOLIDAY CELEBRITY WEIGHTING (v2.2)
@@ -205,7 +269,7 @@ function buildEveningFamous_(ctx) {
 
   // Opening Day: athletes and sports figures
   if (holiday === "OpeningDay") {
-    pool = pool.concat(ATHLETES, ATHLETES, SPORTS_LEGENDS, SPORTS_LEGENDS);
+    pool = pool.concat(athletePool, athletePool, SPORTS_LEGENDS, SPORTS_LEGENDS);
   }
 
   // Culinary holidays: chefs
@@ -244,11 +308,11 @@ function buildEveningFamous_(ctx) {
   // SPORTS SEASON (v2.2)
   // ───────────────────────────────────────────────────────────────────────────
   if (sportsSeason === "championship") {
-    pool = pool.concat(ATHLETES, ATHLETES, ATHLETES, SPORTS_LEGENDS);
+    pool = pool.concat(athletePool, athletePool, athletePool, SPORTS_LEGENDS);
   } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
-    pool = pool.concat(ATHLETES, ATHLETES, SPORTS_LEGENDS);
+    pool = pool.concat(athletePool, athletePool, SPORTS_LEGENDS);
   } else if (sportsSeason === "late-season") {
-    pool = pool.concat(ATHLETES, ATHLETES);
+    pool = pool.concat(athletePool, athletePool);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -286,7 +350,7 @@ function buildEveningFamous_(ctx) {
   // ORIGINAL SPORTS BROADCAST
   // ───────────────────────────────────────────────────────────────────────────
   if (sports && sports !== "(none)" && sports !== "off-season") {
-    pool = pool.concat(ATHLETES, ATHLETES);
+    pool = pool.concat(athletePool, athletePool);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -297,7 +361,7 @@ function buildEveningFamous_(ctx) {
   }
 
   if (weatherMood.perfectWeather) {
-    pool = pool.concat(ATHLETES, INFLUENCERS);
+    pool = pool.concat(athletePool, INFLUENCERS);
   }
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -314,7 +378,7 @@ function buildEveningFamous_(ctx) {
   // SEASONAL
   // ───────────────────────────────────────────────────────────────────────────
   if (season === "Summer") {
-    pool = pool.concat(ATHLETES, INFLUENCERS);
+    pool = pool.concat(athletePool, INFLUENCERS);
   }
   if (season === "Winter") {
     pool = pool.concat(ACTORS, AUTHORS);
@@ -366,9 +430,12 @@ function buildEveningFamous_(ctx) {
       neighborhood = "Chinatown";
     } else if ((holiday === "CincoDeMayo" || holiday === "DiaDeMuertos") && rng() < 0.4) {
       neighborhood = "Fruitvale";
-    } else if ((holiday === "OpeningDay" || sportsSeason === "championship") && ent.role.indexOf("athlete") !== -1) {
+    } else if ((holiday === "OpeningDay" || sportsSeason === "championship") && (ent.role.indexOf("athlete") !== -1 || ent.role === "A's player")) {
       // Athletes near stadium
       neighborhood = rng() < 0.6 ? "Jack London" : "Downtown";
+    } else if (ent.role === "A's player" && ent.homeNeighborhood && rng() < 0.5) {
+      // v2.5: Real players spotted in their home neighborhood half the time
+      neighborhood = ent.homeNeighborhood;
     } else if (holiday === "OaklandPride" && rng() < 0.4) {
       var prideNeighborhoods = ["Downtown", "Lake Merritt", "Uptown"];
       neighborhood = prideNeighborhoods[Math.floor(rng() * prideNeighborhoods.length)];
@@ -377,11 +444,19 @@ function buildEveningFamous_(ctx) {
       neighborhood = neighborhoods[Math.floor(rng() * neighborhoods.length)];
     }
 
-    famousWithLocations.push({
+    var sighting = {
       name: ent.name,
       role: ent.role,
       neighborhood: neighborhood
-    });
+    };
+
+    // v2.5: Include trait and tier data for real players
+    if (ent.role === "A's player") {
+      if (ent.traitProfile) sighting.traitProfile = ent.traitProfile;
+      if (ent.tier) sighting.tier = ent.tier;
+    }
+
+    famousWithLocations.push(sighting);
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -417,16 +492,24 @@ function buildEveningFamous_(ctx) {
 
 /**
  * ============================================================================
- * EVENING FAMOUS REFERENCE
+ * EVENING FAMOUS REFERENCE v2.5
  * ============================================================================
  *
  * CELEBRITY POOLS:
- * - ACTORS (5), MUSICIANS (5), ATHLETES (5)
+ * - ACTORS (5), MUSICIANS (5), ATHLETES (5 generic fallback)
+ * - REAL_PLAYERS (dynamic from Simulation_Ledger, Tier 1-2 MLB) - v2.5
  * - INFLUENCERS (4), JOURNALISTS (3), CHEFS (3)
  * - STREAMERS (3), AUTHORS (2), CIVIC (3), BUSINESS (2)
  * - ARTISTS (4) - v2.2
  * - CULTURAL_LEADERS (3) - v2.2
  * - SPORTS_LEGENDS (3) - v2.2
+ *
+ * REAL PLAYER INTEGRATION (v2.5):
+ * - Reads Simulation_Ledger for ClockMode=GAME, Status=active, OriginGame=MLB
+ * - Filters to Tier 1-2 only (superstars and regulars)
+ * - Replaces generic ATHLETES pool when real players available
+ * - Includes homeNeighborhood (50% chance sighted there)
+ * - Includes traitProfile and tier in sighting output
  *
  * CALENDAR POOL WEIGHTING (v2.2):
  *
@@ -466,7 +549,7 @@ function buildEveningFamous_(ctx) {
  *
  * OUTPUT:
  * - famousPeople: Array<string> (names)
- * - famousSightings: Array<{name, role, neighborhood}>
+ * - famousSightings: Array<{name, role, neighborhood, ?traitProfile, ?tier}>
  * - famousSightingsContext: {holiday, holidayPriority, isFirstFriday, isCreationDay, sportsSeason, count}
  *
  * ============================================================================

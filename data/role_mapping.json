@@ -6,10 +6,9 @@
       "SPORTS_OVERRIDE": "Professional athlete — income from contract data, not role profile. Script applies tax rate only.",
       "RETIRED": "Prefix flag — maps to active equivalent with 0.55-0.65x pension modifier applied by script."
     },
-    "totalMappings": 288,
-    "lastUpdated": "2026-03-01"
+    "totalMappings": 295,
+    "lastUpdated": "2026-03-02"
   },
-
   "AC Transit Bus Driver": "Bus Operator",
   "AC Transit Bus Operator": "Bus Operator",
   "AI Safety Researcher (Anthropic)": "AI Safety Researcher (Anthropic)",
@@ -262,9 +261,7 @@
   "Youth Counselor": "Youth Literacy Coordinator",
   "Youth Literacy Advocate": "Youth Literacy Coordinator",
   "waterfront resident": "Dockworker",
-
   "Retired PG&E Engineer": "Civil Engineer (Infrastructure)",
-
   "First Base Coach": "Sports Analytics Engineer (Gridiron)",
   "First Baseman (A's)": "SPORTS_OVERRIDE",
   "Former Manager": "Sports Analytics Engineer (Gridiron)",
@@ -277,20 +274,19 @@
   "Scout": "Sports Analytics Engineer (Gridiron)",
   "Sports Media Personality": "Podcast Producer",
   "Youth Baseball Instructor": "After-School Program Director",
-  "A's Marketing Director": "Marketing Manager / Brand Strategist",
+  "A's Marketing Director": "Event Planner",
   "Third Base Coach": "Sports Analytics Engineer (Gridiron)",
-
   "1B": "SPORTS_OVERRIDE",
   "2B": "SPORTS_OVERRIDE",
   "3B": "SPORTS_OVERRIDE",
-  "C":  "SPORTS_OVERRIDE",
+  "C": "SPORTS_OVERRIDE",
   "CF": "SPORTS_OVERRIDE",
   "CL": "SPORTS_OVERRIDE",
   "CP": "SPORTS_OVERRIDE",
   "DH": "SPORTS_OVERRIDE",
   "LF": "SPORTS_OVERRIDE",
   "OF": "SPORTS_OVERRIDE",
-  "P":  "SPORTS_OVERRIDE",
+  "P": "SPORTS_OVERRIDE",
   "PF": "SPORTS_OVERRIDE",
   "PG": "SPORTS_OVERRIDE",
   "RF": "SPORTS_OVERRIDE",
@@ -298,5 +294,14 @@
   "SF": "SPORTS_OVERRIDE",
   "SG": "SPORTS_OVERRIDE",
   "SP": "SPORTS_OVERRIDE",
-  "SS": "SPORTS_OVERRIDE"
+  "SS": "SPORTS_OVERRIDE",
+  "Senior Pastor / Faith Leader": "Nonprofit Executive Director",
+  "1B — Player Rep, Community Liaison": "SPORTS_OVERRIDE",
+  "Waterfront Urban Planner": "Urban Planner",
+  "Sports Analytics Consultant": "Data Scientist",
+  "Youth Baseball Coach": "School Counselor",
+  "Freight Logistics Coordinator (Port of Oakland)": "Port Logistics Coordinator",
+  "Climate Adaptation Engineer": "Civil Engineer (Infrastructure)",
+  "Small Business Loan Officer": "Insurance Agent",
+  "Athletic Training Specialist": "Physical Therapist"
 }

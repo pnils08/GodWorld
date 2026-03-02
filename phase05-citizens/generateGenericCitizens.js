@@ -239,12 +239,23 @@ function generateGenericCitizens_(ctx) {
   // OCCUPATIONS
   // ═══════════════════════════════════════════════════════════════════════════
   var occupations = [
-    "Barista", "Server", "Cook", "Bartender", "Retail clerk", "Cashier",
-    "Driver", "Warehouse worker", "Mechanic", "Electrician", "Plumber",
-    "Painter", "Teacher", "Nurse", "Office worker", "Security guard",
-    "Hair stylist", "Janitor", "Bus driver", "Delivery driver",
-    "Construction worker", "Landscaper", "Receptionist", "Bank teller",
-    "Pharmacy tech", "Dental assistant", "Home health aide"
+    // Service & hospitality (still essential in 2041)
+    "Barista", "Server", "Cook", "Bartender", "Retail clerk",
+    // Trades & infrastructure (upgraded for 2041 Oakland)
+    "EV mechanic", "Solar panel installer", "Electrician", "Plumber",
+    "Construction worker", "Vertical farm technician",
+    // Transport & logistics (autonomous era)
+    "Fleet dispatcher", "Drone logistics coordinator", "Warehouse worker",
+    "Port automation monitor", "Last-mile delivery driver",
+    // Healthcare (expanded)
+    "Nurse", "Home health aide", "Pharmacy tech", "Community health worker",
+    // Education & community
+    "Teacher", "After-school program aide", "Youth mentor",
+    // Tech-adjacent (Oakland 2041)
+    "Data entry specialist", "IT support technician", "QA tester",
+    // Service & municipal
+    "Security guard", "Building maintenance tech", "Transit operator",
+    "Hair stylist", "Landscaper", "Urban garden worker"
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════

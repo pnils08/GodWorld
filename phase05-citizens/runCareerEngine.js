@@ -1,13 +1,19 @@
 /**
  * ============================================================================
- * Career Engine v2.3.1
+ * Career Engine v2.4
  * ============================================================================
  *
  * Lightweight, calendar-aware, weather-aware career drift generator.
  * Only affects ENGINE-mode Tier-3 and Tier-4 non-UNI/MED/CIV citizens.
- * Never changes RoleType or Status. Logs soft career observations only.
+ * Never changes RoleType or Status. Updates EmployerBizId on transitions.
+ * Logs soft career observations only.
  *
- * v2.3.1 Changes:
+ * v2.4 Changes:
+ * - EmployerBizId updated on career transitions (layoff→clear, sector_shift/lateral→new BIZ-ID)
+ * - businessDeltas added to careerSignals for downstream Economic Ripple Engine
+ * - INDUSTRY_BIZ_POOL maps abstract industries to actual Business_Ledger BIZ-IDs
+ *
+ * v2.3.1 Changes (retained):
  * - Simplified industry model: tech/service/public/creative (was 7)
  * - Simplified employer model: small/large/public (was 6)
  * - careerSignals wired to Economic Ripple Engine
@@ -56,6 +62,7 @@ function runCareerEngine_(ctx) {
   var iTierRole = idx('TierRole'); // read-only; do not write
   var iIncome = idx('Income');
   var iEconKey = idx('EconomicProfileKey');
+  var iEmployerBizId = idx('EmployerBizId'); // v2.4: employer tracking
 
   if (iPopID < 0 || iTier < 0 || iClock < 0 || iLife < 0 || iLastUpd < 0) return;
 
@@ -107,7 +114,8 @@ function runCareerEngine_(ctx) {
       avgTenure: 0,
       avgLevel: 0,
       industries: {},
-      pressure: {}
+      pressure: {},
+      businessDeltas: {}  // v2.4: { "BIZ-00012": { gained: 1, lost: 0 }, ... }
     };
   }
 
@@ -117,6 +125,21 @@ function runCareerEngine_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   var INDUSTRIES = ["tech", "service", "public", "creative"];
   var EMPLOYERS = ["small", "large", "public"];
+
+  // v2.4: BIZ-ID pools for employer resolution on transitions
+  // Mapped from actual Business_Ledger sectors to Career Engine abstract industries
+  // NOTE: Update these pools when new businesses are added to Business_Ledger
+  var INDUSTRY_BIZ_POOL = {
+    tech:     ["BIZ-00001", "BIZ-00008", "BIZ-00009", "BIZ-00010", "BIZ-00011", "BIZ-00030"],
+    service:  ["BIZ-00012", "BIZ-00015", "BIZ-00025", "BIZ-00026", "BIZ-00033", "BIZ-00043", "BIZ-00044", "BIZ-00045"],
+    public:   ["BIZ-00013", "BIZ-00014", "BIZ-00016", "BIZ-00017", "BIZ-00019", "BIZ-00023", "BIZ-00024", "BIZ-00032"],
+    creative: ["BIZ-00018", "BIZ-00028", "BIZ-00038", "BIZ-00039", "BIZ-00036"]
+  };
+
+  function resolveNewBizId_(industry) {
+    var pool = INDUSTRY_BIZ_POOL[industry] || INDUSTRY_BIZ_POOL["service"];
+    return pool[Math.floor(roll() * pool.length)];
+  }
 
   function getIndustrySeasonBias_(industry, season, holiday) {
     var bias = 0;
@@ -708,6 +731,10 @@ function runCareerEngine_(ctx) {
       var currentIncome = iIncome >= 0 ? (Number(row[iIncome]) || 0) : 0;
       var hasEconProfile = iEconKey >= 0 && row[iEconKey] && String(row[iEconKey]).trim() !== '' && String(row[iEconKey]).trim() !== 'SPORTS_OVERRIDE';
 
+      // v2.4: Track current employer for BIZ-ID updates
+      var currentBizId = (iEmployerBizId >= 0) ? safeStr(row[iEmployerBizId]) : '';
+      var isSelfEmployed = currentBizId === 'SELF_EMPLOYED';
+
       if (tEv.type === "promotion") {
         st.level = Math.min(5, st.level + 1);
         st.tenure = Math.max(1, Math.round(st.tenure * 0.55));
@@ -721,6 +748,12 @@ function runCareerEngine_(ctx) {
         st.employer = "small";
         if (hasEconProfile && currentIncome > 0) {
           row[iIncome] = Math.round(currentIncome * (0.80 + roll() * 0.08)); // -12-20%
+        }
+        // v2.4: Clear employer — citizen is now unemployed/searching
+        if (iEmployerBizId >= 0 && currentBizId && !isSelfEmployed) {
+          if (!S.careerSignals.businessDeltas[currentBizId]) S.careerSignals.businessDeltas[currentBizId] = { gained: 0, lost: 0 };
+          S.careerSignals.businessDeltas[currentBizId].lost += 1;
+          row[iEmployerBizId] = '';
         }
         S.careerSignals.layoffs += 1;
         S.careerSignals.transitions += 1;
@@ -737,6 +770,19 @@ function runCareerEngine_(ctx) {
         if (hasEconProfile && currentIncome > 0) {
           row[iIncome] = Math.round(currentIncome * (0.90 + roll() * 0.15)); // -10% to +5%
         }
+        // v2.4: Resolve new employer from new industry
+        if (iEmployerBizId >= 0) {
+          var newBiz = resolveNewBizId_(st.industry);
+          if (currentBizId && !isSelfEmployed && currentBizId !== 'UNMATCHED') {
+            if (!S.careerSignals.businessDeltas[currentBizId]) S.careerSignals.businessDeltas[currentBizId] = { gained: 0, lost: 0 };
+            S.careerSignals.businessDeltas[currentBizId].lost += 1;
+          }
+          if (newBiz) {
+            if (!S.careerSignals.businessDeltas[newBiz]) S.careerSignals.businessDeltas[newBiz] = { gained: 0, lost: 0 };
+            S.careerSignals.businessDeltas[newBiz].gained += 1;
+          }
+          row[iEmployerBizId] = newBiz || '';
+        }
         S.careerSignals.sectorShifts += 1;
         S.careerSignals.transitions += 1;
       } else if (tEv.type === "lateral") {
@@ -744,6 +790,21 @@ function runCareerEngine_(ctx) {
         st.tenure = Math.max(1, Math.round(st.tenure * 0.70));
         if (hasEconProfile && currentIncome > 0) {
           row[iIncome] = Math.round(currentIncome * (0.97 + roll() * 0.06)); // -3% to +3%
+        }
+        // v2.4: Change employer within same industry (avoid same company)
+        if (iEmployerBizId >= 0 && !isSelfEmployed) {
+          var newBiz = resolveNewBizId_(st.industry);
+          var retries = 0;
+          while (newBiz === currentBizId && retries < 4) { newBiz = resolveNewBizId_(st.industry); retries++; }
+          if (currentBizId && currentBizId !== 'UNMATCHED') {
+            if (!S.careerSignals.businessDeltas[currentBizId]) S.careerSignals.businessDeltas[currentBizId] = { gained: 0, lost: 0 };
+            S.careerSignals.businessDeltas[currentBizId].lost += 1;
+          }
+          if (newBiz) {
+            if (!S.careerSignals.businessDeltas[newBiz]) S.careerSignals.businessDeltas[newBiz] = { gained: 0, lost: 0 };
+            S.careerSignals.businessDeltas[newBiz].gained += 1;
+          }
+          row[iEmployerBizId] = newBiz || '';
         }
         S.careerSignals.transitions += 1;
       }
@@ -778,6 +839,7 @@ function runCareerEngine_(ctx) {
         "|careerMod=" + st.careerMod +
         "|lastT=" + (st.lastTransition || 0) +
         "|skill=" + encodeSkill_(st.skill) +
+        "|bizId=" + (iEmployerBizId >= 0 ? safeStr(row[iEmployerBizId]) : "") +
         "|Updated:c" + cycle;
       lifeOut = lifeOut + "\n" + stateLine;
     }

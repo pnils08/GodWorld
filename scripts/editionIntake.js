@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * EDITION INTAKE PARSER v1.1
+ * EDITION INTAKE PARSER v1.2
  * ============================================================================
  *
  * Parses a Cycle Pulse edition file and writes structured data to Google Sheets
@@ -16,6 +16,7 @@
  *   - Storyline_Intake (6 cols): Storyline entries
  *   - Citizen_Usage_Intake (5 cols): Citizen usage entries
  *   - LifeHistory_Log (7 cols): Direct quotes from continuity notes
+ *   - Business_Intake (6 cols): Business mentions from Business Ticker (v1.2)
  *
  * After running this script, run processMediaIntakeV2() in Apps Script
  * to move data from intake sheets to final ledgers (Press_Drafts,
@@ -325,6 +326,88 @@ function parseDirectQuotes(section, cycle) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
+// v1.2: BUSINESS MENTION PARSER (Phase 12.5)
+// Scans Business Ticker section for new business names to stage in
+// Business_Intake for later promotion to Business_Ledger.
+// ════════════════════════════════════════════════════════════════════════════
+
+function parseBusinessMentions(markdown, cycle) {
+  const businesses = [];
+  const seen = new Set();
+
+  // Extract Business Ticker section
+  const bizSection = extractSection(markdown, 'BUSINESS TICKER')
+    || extractSection(markdown, 'BUSINESS');
+  if (!bizSection) return businesses;
+
+  const lines = bizSection.split('\n');
+  const fullText = bizSection;
+
+  // Pattern 1: "opened" / "grand opening" / "new [type]" with quoted or capitalized names
+  //   e.g., "the new bakery 'Flour & Co' opened on Telegraph"
+  //   e.g., "Grand opening of Portside Cafe on 7th Street"
+  const openPatterns = [
+    /(?:new|opened|grand opening of|opening of|launched)\s+(?:a\s+)?(?:new\s+)?(?:restaurant|bar|cafe|gallery|shop|store|bakery|clinic|studio|lounge|bistro|diner|pub|brewery|taproom|coffeehouse|bookstore)?\s*['""]([^'""]+)['""]?/gi,
+    /['""]([^'""]{3,40})['""][\s,]*(?:opened|launched|held its grand opening|debuted)/gi,
+    /grand opening (?:of|for)\s+['""]?([A-Z][A-Za-z\s&'.]{2,35})['""]?/gi
+  ];
+
+  for (const pat of openPatterns) {
+    let m;
+    while ((m = pat.exec(fullText)) !== null) {
+      const name = m[1].trim();
+      if (name.length > 2 && !seen.has(name.toLowerCase())) {
+        seen.add(name.toLowerCase());
+        const sector = inferSector(fullText, m.index);
+        const neighborhood = inferNeighborhood(fullText, m.index);
+        businesses.push([name, sector, neighborhood, 'Detected from Business Ticker', cycle, 'staged']);
+      }
+    }
+  }
+
+  return businesses;
+}
+
+/**
+ * Infer business sector from surrounding context words.
+ */
+function inferSector(text, matchIndex) {
+  const context = text.substring(Math.max(0, matchIndex - 100), matchIndex + 150).toLowerCase();
+  if (/restaurant|dining|cuisine|chef|menu/.test(context)) return 'Restaurant & Dining';
+  if (/bar|pub|taproom|brewery|cocktail|lounge/.test(context)) return 'Nightlife & Entertainment';
+  if (/cafe|coffee|coffeehouse|bakery/.test(context)) return 'Restaurant & Dining';
+  if (/gallery|art|studio|creative/.test(context)) return 'Arts & Creative';
+  if (/shop|store|retail|boutique|bookstore/.test(context)) return 'Retail';
+  if (/clinic|health|medical|dental|therapy/.test(context)) return 'Healthcare';
+  if (/tech|startup|software|ai/.test(context)) return 'Technology';
+  return 'Unknown';
+}
+
+/**
+ * Infer neighborhood from surrounding context using Oakland neighborhood names.
+ */
+function inferNeighborhood(text, matchIndex) {
+  const context = text.substring(Math.max(0, matchIndex - 150), matchIndex + 200);
+  const neighborhoods = [
+    'Downtown', 'Jack London', 'Rockridge', 'Temescal', 'Fruitvale',
+    'Lake Merritt', 'West Oakland', 'Laurel', 'Chinatown', 'Grand Lake',
+    'Old Oakland', 'Uptown', 'KONO', 'Brooklyn Basin', 'Piedmont Avenue',
+    'East Oakland', 'Montclair'
+  ];
+  for (const nh of neighborhoods) {
+    if (context.includes(nh)) return nh;
+  }
+  // Check street names
+  if (/Telegraph/i.test(context)) return 'Temescal';
+  if (/7th Street/i.test(context)) return 'West Oakland';
+  if (/International Blvd|International Boulevard/i.test(context)) return 'Fruitvale';
+  if (/Broadway/i.test(context)) return 'Downtown';
+  if (/College Ave/i.test(context)) return 'Rockridge';
+  return '';
+}
+
+
+// ════════════════════════════════════════════════════════════════════════════
 // MAIN
 // ════════════════════════════════════════════════════════════════════════════
 
@@ -394,12 +477,16 @@ async function main() {
   const citizens = citizenSection ? parseCitizenUsage(citizenSection) : [];
   const quotes = continuitySection ? parseDirectQuotes(continuitySection, cycle) : [];
 
+  // v1.2: Parse business mentions from Business Ticker
+  const businessMentions = parseBusinessMentions(markdown, cycle);
+
   console.log('');
   console.log('Parsed:');
   console.log(`  Articles:      ${articles.length}`);
   console.log(`  Storylines:    ${storylines.length}`);
   console.log(`  Citizens:      ${citizens.length}`);
   console.log(`  Direct Quotes: ${quotes.length}`);
+  console.log(`  Businesses:    ${businessMentions.length}`);
 
   // Dry run: print what would be written
   if (dryRun) {
@@ -430,6 +517,14 @@ async function main() {
     console.log('--- DRY RUN: Quotes (LifeHistory_Log) ---');
     for (const q of quotes) {
       console.log(`  ${q[2]}: "${q[4].substring(24, 80)}..."`);
+    }
+
+    if (businessMentions.length > 0) {
+      console.log('');
+      console.log('--- DRY RUN: Businesses (Business_Intake) ---');
+      for (const b of businessMentions) {
+        console.log(`  ${b[0]} | ${b[1]} | ${b[2] || '(unknown)'}`);
+      }
     }
 
     console.log('');
@@ -470,6 +565,18 @@ async function main() {
     totalWritten += quotes.length;
   }
 
+  // v1.2: Write business mentions to Business_Intake (if sheet exists)
+  if (businessMentions.length > 0) {
+    try {
+      const count = await sheets.appendRows('Business_Intake', businessMentions);
+      console.log(`  -> Business_Intake: ${businessMentions.length} businesses staged`);
+      totalWritten += businessMentions.length;
+    } catch (e) {
+      console.log(`  -> Business_Intake: SKIPPED (${e.message || 'sheet not found'})`);
+      console.log('     Create Business_Intake sheet with headers: Name | Sector | Neighborhood | Description | SourceCycle | Status');
+    }
+  }
+
   console.log('');
   console.log('=== INTAKE COMPLETE ===');
   console.log(`Total rows written: ${totalWritten}`);
@@ -477,6 +584,10 @@ async function main() {
   console.log('Next step: Run processMediaIntakeV2() in Apps Script to move');
   console.log('data from intake sheets to final ledgers (Press_Drafts,');
   console.log('Storyline_Tracker, Citizen_Media_Usage).');
+  if (businessMentions.length > 0) {
+    console.log('');
+    console.log('Business mentions staged. Run processBusinessIntake.js to promote to Business_Ledger.');
+  }
 }
 
 main().catch(err => {

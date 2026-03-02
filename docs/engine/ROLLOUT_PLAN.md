@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 72 (2026-03-02) — Phase 12.1 agent interviews complete, tech debt cleanup (10 fixes/6 files), server monitoring + security hardening
+**Last Updated:** Session 72 (2026-03-02) — Phase 12.5 Business Ledger engine integration complete (Career Engine v2.4, Ripple Engine v2.5, business intake pipeline)
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -438,19 +438,20 @@ Source: Anthropic engineering blog "Building a C Compiler with Parallel Claudes"
 **Also:** Enable Endless Mode beta in web viewer (localhost:37777 → Settings) — biomimetic memory for extended sessions.
 **Status:** Pending. Plugin marketplace didn't pull new version during S66 — retry outside active session. Run: `claude plugin update claude-mem@thedotmack`
 
-### 12.5 Business Ledger — Full Engine Integration — MOSTLY COMPLETE (S69)
+### 12.5 Business Ledger — Full Engine Integration ✓ (S69-S72)
 **What:** Wire Business_Ledger into the simulation engine so company data drives economic outcomes.
-**Completed (Phase 14.4/14.7/14.5):**
+**Data integration (Phase 14.4/14.7/14.5):**
 - ✓ Business_Ledger expanded from 11 to 51 entities (24 institutional + 16 named venues)
 - ✓ `linkCitizensToEmployers.js` — five-layer employer resolution, 658/658 citizens mapped
 - ✓ `EmployerBizId` column on Simulation_Ledger, `Employment_Roster` sheet created
 - ✓ `buildDeskPackets.js` v2.1 — `businessSnapshot` in economicContext, employer data on interview candidates
 - ✓ Citizen-to-employer linkage with derived Employee_Count and Avg_Salary per BIZ entity
-**Remaining (engine-side dynamics):**
-- Career Engine BIZ-ID awareness (job transitions update employer linkage)
-- Economic Ripple Engine business triggers (company growth/contraction → neighborhood sentiment)
-- Intake process for new companies from supplemental editions
-**Status:** Core integration complete. Remaining items are engine-side automation, not data gaps.
+**Engine-side dynamics (S72):**
+- ✓ Career Engine v2.4 — `EmployerBizId` updated on transitions (layoff→clear, sector_shift/lateral→new BIZ-ID from INDUSTRY_BIZ_POOL), `businessDeltas` in careerSignals, deterministic via `roll()`
+- ✓ Economic Ripple Engine v2.5 — `BUSINESS_CONTRACTION`/`BUSINESS_EXPANSION` triggers from businessDeltas, Business_Ledger read for neighborhood resolution, `mapToCanonicalNeighborhood_()` maps 15+ BL neighborhoods to 10 canonical
+- ✓ `processBusinessIntake.js` — promotes staged businesses from Business_Intake to Business_Ledger, assigns BIZ-IDs, updates employer_mapping.json
+- ✓ `editionIntake.js` v1.2 — `parseBusinessMentions()` scans Business Ticker for new business names, stages to Business_Intake
+**Status:** ✓ COMPLETE. Engine-side dynamics wired. Ready for first live run in C85.
 
 ### 12.6 Podcast Desk — Edition-to-Audio Pipeline ✓ (S67)
 Full pipeline: agent → XML transcript → Podcastfy → audio. 3 show formats, permanent hosts. Details in ROLLOUT_ARCHIVE.md.

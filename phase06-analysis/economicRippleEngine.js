@@ -1,12 +1,19 @@
 /**
  * ============================================================================
- * ECONOMIC RIPPLE ENGINE v2.4
+ * ECONOMIC RIPPLE ENGINE v2.5
  * ============================================================================
  *
- * CONNECTED: Factors in migration drift AND career signals from Career Engine.
+ * CONNECTED: Factors in migration drift, career signals, AND per-business
+ * employment deltas from Career Engine v2.4.
  *
- * v2.3 Enhancements:
- * - Wired to Career Engine v2.3.1: reads ctx.summary.careerSignals
+ * v2.5 Enhancements:
+ * - Per-business ripples via careerSignals.businessDeltas from Career Engine v2.4
+ * - BUSINESS_CONTRACTION/EXPANSION triggers routed to specific neighborhoods
+ * - Business_Ledger read for BIZ-ID → neighborhood resolution
+ * - mapToCanonicalNeighborhood_() maps 15+ BL neighborhoods to 10 canonical
+ *
+ * v2.3 Enhancements (retained):
+ * - Wired to Career Engine: reads ctx.summary.careerSignals
  * - Layoffs >= 3 triggers MAJOR_LAYOFFS ripple
  * - Promotions >= 4 triggers WORKFORCE_GROWTH ripple
  * - Sector shifts flagged as career churn
@@ -64,7 +71,11 @@ var ECONOMIC_TRIGGERS = {
   POPULATION_SURGE: { impact: 8, duration: 4, sectors: ['housing', 'retail', 'services'], neighborhoods: ['all'] },
   POPULATION_EXODUS: { impact: -10, duration: 5, sectors: ['retail', 'services', 'housing'], neighborhoods: ['all'] },
   WORKFORCE_GROWTH: { impact: 6, duration: 3, sectors: ['business', 'services'], neighborhoods: ['Downtown', 'Rockridge'] },
-  WORKFORCE_DECLINE: { impact: -8, duration: 4, sectors: ['business', 'services'], neighborhoods: ['Downtown', 'West Oakland'] }
+  WORKFORCE_DECLINE: { impact: -8, duration: 4, sectors: ['business', 'services'], neighborhoods: ['Downtown', 'West Oakland'] },
+
+  // v2.5: Business-specific triggers from Career Engine v2.4 businessDeltas
+  BUSINESS_CONTRACTION: { impact: -8, duration: 4, sectors: ['services', 'retail'], neighborhoods: [] },
+  BUSINESS_EXPANSION: { impact: 5, duration: 3, sectors: ['services', 'business'], neighborhoods: [] }
 };
 
 var NEIGHBORHOOD_ECONOMIES = {
@@ -109,7 +120,23 @@ function runEconomicRippleEngine_(ctx) {
   S.neighborhoodEconomies = S.neighborhoodEconomies || {};
   
   var currentCycle = S.cycleId || ctx.config.cycleCount || 0;
-  
+
+  // v2.5: Load Business_Ledger for BIZ-ID → neighborhood resolution
+  var bizLookup = {};
+  var bizSheet = ctx.ss.getSheetByName('Business_Ledger');
+  if (bizSheet) {
+    var bizVals = bizSheet.getDataRange().getValues();
+    var bizH = bizVals[0];
+    var iBid = bizH.indexOf('BIZ_ID');
+    var iBnh = bizH.indexOf('Neighborhood');
+    var iBnm = bizH.indexOf('Name');
+    for (var b = 1; b < bizVals.length; b++) {
+      var bid = String(bizVals[b][iBid] || '').trim();
+      if (bid) bizLookup[bid] = { name: String(bizVals[b][iBnm] || ''), neighborhood: String(bizVals[b][iBnh] || '') };
+    }
+  }
+  S._bizLookup = bizLookup;
+
   // Calendar context
   var calendarContext = {
     holiday: S.holiday || 'none',
@@ -164,7 +191,7 @@ function runEconomicRippleEngine_(ctx) {
   ctx.summary = S;
   
   var careerSignals = S.careerSignals || {};
-  Logger.log('runEconomicRippleEngine_ v2.4: mood=' + S.economicMood +
+  Logger.log('runEconomicRippleEngine_ v2.5: mood=' + S.economicMood +
     ' | ripples=' + S.economicRipples.length +
     ' | prevMigration=' + prevMigration +
     ' | layoffs=' + (careerSignals.layoffs || 0));
@@ -203,7 +230,7 @@ function detectMigrationRipples_(ctx, currentCycle) {
 
 
 // ═══════════════════════════════════════════════════════════════
-// v2.3: CAREER RIPPLE DETECTION (wired to Career Engine v2.3.1)
+// v2.5: CAREER RIPPLE DETECTION (wired to Career Engine v2.4)
 // ═══════════════════════════════════════════════════════════════
 
 function detectCareerRipples_(ctx, currentCycle) {
@@ -233,6 +260,44 @@ function detectCareerRipples_(ctx, currentCycle) {
     // Not a specific trigger, but affects mood calculation
     S.careerChurn = true;
   }
+
+  // v2.5: Per-business ripples from Career Engine v2.4 businessDeltas
+  var deltas = careerSignals.businessDeltas || {};
+  var bizLookup = S._bizLookup || {};
+  for (var bizId in deltas) {
+    if (!deltas.hasOwnProperty(bizId)) continue;
+    var delta = deltas[bizId];
+    var biz = bizLookup[bizId];
+    if (!biz || !biz.neighborhood) continue;
+    var hood = mapToCanonicalNeighborhood_(biz.neighborhood);
+    if (!hood) continue;
+    var net = (delta.gained || 0) - (delta.lost || 0);
+    if (delta.lost >= 2 && net < 0) {
+      createRipple_(S, 'BUSINESS_CONTRACTION', currentCycle,
+        { description: (biz.name || bizId) + ' lost ' + delta.lost + ' employees' }, hood, cal);
+    }
+    if (delta.gained >= 2 && net > 0) {
+      createRipple_(S, 'BUSINESS_EXPANSION', currentCycle,
+        { description: (biz.name || bizId) + ' added ' + delta.gained + ' employees' }, hood, cal);
+    }
+  }
+}
+
+
+// v2.5: Map Business_Ledger neighborhood names to Ripple Engine canonical names
+function mapToCanonicalNeighborhood_(blNeighborhood) {
+  var canonical = ['Downtown', 'Jack London', 'Rockridge', 'Temescal', 'Fruitvale',
+    'Lake Merritt', 'West Oakland', 'Laurel', 'Chinatown', 'Grand Lake'];
+  var n = (blNeighborhood || '').trim();
+  for (var i = 0; i < canonical.length; i++) {
+    if (n === canonical[i] || n.indexOf(canonical[i]) >= 0) return canonical[i];
+  }
+  if (n === 'Old Oakland' || n === 'Uptown' || n === 'KONO') return 'Downtown';
+  if (n === 'Brooklyn Basin' || n === 'Baylight District' || n === 'Coliseum') return 'Jack London';
+  if (n === 'Piedmont Avenue') return 'Rockridge';
+  if (n === 'East Oakland') return 'Fruitvale';
+  if (n === 'City-wide') return 'Downtown';
+  return null;
 }
 
 
@@ -765,7 +830,9 @@ function generateEconomicSummary_(ctx) {
     POPULATION_SURGE: 'Population growth stimulates housing and retail.',
     POPULATION_EXODUS: 'Population decline impacts local businesses.',
     WORKFORCE_GROWTH: 'Growing workforce expands business activity.',
-    WORKFORCE_DECLINE: 'Shrinking workforce affects business climate.'
+    WORKFORCE_DECLINE: 'Shrinking workforce affects business climate.',
+    BUSINESS_CONTRACTION: 'Local business downsizing sends ripples through the neighborhood.',
+    BUSINESS_EXPANSION: 'Growing employers signal confidence in the local economy.'
   };
   
   S.economicNarrative = strongestRipple ? (narratives[strongestRipple.type] || '') : '';
@@ -829,16 +896,25 @@ function generateEconomicSummary_(ctx) {
 
 /**
  * ============================================================================
- * ECONOMIC RIPPLE ENGINE REFERENCE v2.4
+ * ECONOMIC RIPPLE ENGINE REFERENCE v2.5
  * ============================================================================
  *
- * CAREER TRIGGERS (v2.3 - wired to Career Engine):
+ * CAREER TRIGGERS (v2.3 - aggregate, wired to Career Engine):
  *
  * | Signal | Threshold | Trigger | Impact |
  * |--------|-----------|---------|--------|
  * | layoffs | >= 3 | MAJOR_LAYOFFS | -15 |
  * | promotions | >= 4 | WORKFORCE_GROWTH | +6 |
  * | sectorShifts | >= 3 | (careerChurn flag) | - |
+ *
+ * BUSINESS TRIGGERS (v2.5 - per-business, wired to Career Engine v2.4):
+ *
+ * | Signal | Threshold | Trigger | Impact |
+ * |--------|-----------|---------|--------|
+ * | businessDeltas[BIZ].lost >= 2, net < 0 | BUSINESS_CONTRACTION | -8 |
+ * | businessDeltas[BIZ].gained >= 2, net > 0 | BUSINESS_EXPANSION | +5 |
+ *
+ * Neighborhood resolved via Business_Ledger → mapToCanonicalNeighborhood_().
  *
  * MIGRATION TRIGGERS:
  *

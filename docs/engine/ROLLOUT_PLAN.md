@@ -298,7 +298,7 @@ services:
 **Requires:** Docker + Docker Compose installed on droplet. `apt install docker.io docker-compose-v2`.
 **Risk:** Migration from bare-metal to containers is a significant change. Do it alongside the 2GB RAM upgrade (8.2) — natural rebuild moment. Test locally first if possible.
 **Reference:** docker/awesome-compose — Node/Express + Nginx example, Prometheus + Grafana example.
-**Status:** Not started. Target: alongside RAM upgrade.
+**Status:** Not started. RAM upgrade done (8.2). Docker migration is the next natural rebuild opportunity.
 
 ### 9.2 Nginx Reverse Proxy + SSL
 **What:** Put Nginx in front of the dashboard. Nginx handles SSL (HTTPS via Let's Encrypt), security headers, rate limiting, and proxies requests to the Express server on an internal Docker network.
@@ -337,7 +337,7 @@ Add `node-exporter` for system metrics. Dashboard Express app exposes `/metrics`
 **Depends on:** 9.1 (compose stack). Also needs the 2GB RAM upgrade (8.2) — Prometheus + Grafana add ~256MB.
 **Cost:** Zero (open source). Only costs RAM.
 **Reference:** docker/awesome-compose — Prometheus + Grafana example.
-**Status:** Not started. Build after 9.1 is stable. Supersedes 8.4 shell-script monitoring.
+**Status:** Not started. Build after 9.1 is stable. Extends 8.4 shell-script monitoring (now live) with persistent history and visual dashboards.
 
 ### 9.4 One-Command Disaster Recovery
 **What:** Document and test the full recovery path: new droplet → install Docker → clone repo → `docker compose up -d` → everything works. The `docker-compose.yml` IS the infrastructure documentation.
@@ -442,7 +442,7 @@ Source: Anthropic engineering blog "Building a C Compiler with Parallel Claudes"
 **How:** Run outside active session: `claude plugin update claude-mem@thedotmack`
 **Risk:** Low. No breaking changes between versions. Hooks.json restored in v10.5.1.
 **Also:** Enable Endless Mode beta in web viewer (localhost:37777 → Settings) — biomimetic memory for extended sessions.
-**Status:** Pending. Plugin marketplace didn't pull new version during S66 — retry outside active session.
+**Status:** Pending. Plugin marketplace didn't pull new version during S66 — retry outside active session. Run: `claude plugin update claude-mem@thedotmack`
 
 ### 12.5 Business Ledger — Full Engine Integration — MOSTLY COMPLETE (S69)
 **What:** Wire Business_Ledger into the simulation engine so company data drives economic outcomes.

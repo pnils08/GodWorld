@@ -16,6 +16,7 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const os = require('os');
 
 const ROOT = path.resolve(__dirname, '..');
 const VENV_PYTHON = path.join(ROOT, '.venv', 'podcastfy', 'bin', 'python');
@@ -117,8 +118,7 @@ console.log(`Rendering audio with format: ${format}`);
 console.log('TTS engine starting...');
 
 // Write Python script to a temp file to avoid shell escaping issues
-const os = require('os');
-const tmpScript = path.join(os.tmpdir(), `podcastfy_render_${cycle}.py`);
+const tmpScript = path.join(os.tmpdir(), `podcastfy_render_${cycle}_${Date.now()}.py`);
 fs.writeFileSync(tmpScript, pythonScript);
 
 try {

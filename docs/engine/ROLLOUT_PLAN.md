@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 72 (2026-03-02) — Phase 17 Data Integrity Cleanup complete
+**Last Updated:** Session 72 (2026-03-02) — Phase 15.5 engine flavor, Phase 17 cleanup, neighborhood rebalance
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -219,14 +219,8 @@ SSH + 3001 only. Details in ROLLOUT_ARCHIVE.md.
 Re-authorized with full `drive` scope (upgraded from `drive.file`). New refresh token saved to `.env`. Enables both Drive writes and `files.copy` for spreadsheet backups. New backup script: `scripts/backupSpreadsheet.js`.
 **Still pending:** Rotate the client secret for `559534329568-an7vso0b0nnoij3eso8spj1e079suikq` in Google Cloud Console — it was accidentally pasted in chat.
 
-### 8.2 RAM Upgrade to 2GB
-**What:** Resize droplet from 1GB ($6/mo) to 2GB ($12/mo) RAM.
-**Why:** Server is under constant memory pressure — 566MB of 961MB used, 731MB of swap active. Dashboard has crash-restarted 27 times (PM2 ↺ count), likely from OOM kills during Claude Code sessions. Claude alone uses 212MB.
-**How:** DigitalOcean dashboard → Droplet → Resize → select 2GB plan. Requires a brief shutdown. Or automate via python-digitalocean:
-```python
-droplet.resize('s-1vcpu-2gb')
-```
-**Status:** Planned. Mike to resize via DO dashboard.
+### 8.2 RAM Upgrade to 2GB ✓ (S72)
+Droplet resized from 1GB to 2GB RAM via DigitalOcean dashboard.
 
 ### 8.3 Automated Droplet Snapshots
 **What:** Weekly full-droplet snapshot via python-digitalocean API. Snapshots capture OS, configs, installed packages — everything. Separate from the daily GodWorld file backup.
@@ -516,13 +510,13 @@ Fast mode added to Rhea's SKILL.md. Runs 7 of 19 checks (citizen names, votes, s
 
 **Why this is a phase:** Every downstream system depends on the Simulation_Ledger being correct — desk packets, queryLedger.js, citizen lookups, age calculations, neighborhood assignments, economic parameters. Bad ledger data cascades everywhere. This audit makes the ledger trustworthy.
 
-**Status:** COMPLETE. 658/658 citizens clean. Phase 13 core audit (S68), Phase 16 satellite consolidation (S71), Phase 17 data integrity cleanup (S72). 167 unique 2041 demographic voice roles. Role-to-economic mapping done (288 mappings, 100% coverage). Family linkages done (Corliss, Keane, Dillon). Chicago migration done. Tech debt 4/7 critical fixed. Remaining: 42 MLB player age review (sports universe, needs Mike), ~27 medium/low tech debt items. See LEDGER_AUDIT.md for full breakdown.
+**Status:** COMPLETE. 658/658 citizens clean, all 12 canonical neighborhoods. Phase 13 core audit (S68), Phase 16 satellite consolidation (S71), Phase 17 data integrity cleanup (S72), neighborhood rebalance (S72). 167 unique 2041 demographic voice roles. Role-to-economic mapping done (295 mappings, 100% coverage). Family linkages done (Corliss, Keane, Dillon). Chicago migration done. MLB player age review resolved by Phase 15.4 (87 birth years corrected from 2023-era to 2041 math). Tech debt 4/7 critical fixed. See LEDGER_AUDIT.md for full breakdown.
 
 **Started:** Session 68 (2026-02-28)
 
 ---
 
-## Phase 14: Economic Parameter Integration — ACTIVE
+## Phase 14: Economic Parameter Integration — COMPLETE (S69-S72)
 
 **Plan document:** `.claude/plans/async-mapping-kazoo.md`
 **Why this is a phase:** The census audit (Phase 13) gave every citizen a role. This phase makes those roles drive real economics — income, wealth, household budgets, neighborhood metrics, business linkage, and desk packet data. Replaces the hardcoded $35K/$62K/$110K income bands with role-specific amounts derived from 198 economic profiles.
@@ -571,8 +565,8 @@ Phase 7 engines (`buildNightLife.js` v2.4, `buildEveningFood.js` v2.4) contain 1
 ### 15.4 Full Integration Rollout ✓ (S70)
 `scripts/integrateAthletes.js` — 87 players processed (35 TrueSource-matched, 52 fallback). Birth years corrected from 2023-era to 2041 math. Income: superstars $15M-$37.8M (WL10), regulars $1-15M (WL9), MLB minimum $750K-$780K (WL7), minor league $55K-$100K (WL5). TraitProfile generated for all 87 (8 from TrueSource quirks, 79 from position defaults). 4 retired players transitioned to post-career roles with EconomicProfileKey updated. 298 cells written. Role mapping updated to 288 entries (added Broadcasting Analyst, Community Ambassador, Front Office Advisor, Sports Media Personality, Youth Baseball Instructor, A's Marketing Director).
 
-### 15.5 Engine Flavor Integration — DEFERRED
-`generateGameModeMicroEvents.js` v1.3 upgrade (TraitProfile-weighted event pools, tier-specific city-life pools). `buildEveningFamous.js` v2.4 upgrade (Tier 1-2 player sightings from ctx.citizenLookup, season-aware weighting). Ship after data layer proves stable through 2-3 cycles. Both files are Apps Script (ES5 — no const/let/arrow functions).
+### 15.5 Engine Flavor Integration ✓ (S72)
+`generateGameModeMicroEvents.js` v1.4: TraitProfile column read, 7 archetype-specific event pools (Catalyst, Anchor, Watcher, Grounded, Striver, Connector, Drifter — 28 personality-flavored events), `buildEventPool_()` accepts traitProfile parameter. `buildEveningFamous.js` v2.5: Reads Simulation_Ledger for Tier 1-2 active MLB GAME citizens at runtime, replaces generic ATHLETES pool with real A's players, includes homeNeighborhood (50% sighting chance) and traitProfile/tier in output. Falls back to generic pool if ledger unavailable. Also this session: Generic_Citizens occupation pool upgraded from 27 generic 2026 roles to 30 2041-era roles (EV mechanics, solar installers, vertical farm techs, port automation monitors, drone logistics). Neighborhood rebalance: 63 citizens remapped from 11 non-canonical neighborhoods to nearest canonical equivalent (41-73 per neighborhood across 12 canonical).
 
 ---
 

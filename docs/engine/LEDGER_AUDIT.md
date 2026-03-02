@@ -324,9 +324,9 @@ Brianna Wong→Kenji Okafor, Evan Lewis→Priya Marchetti, Jose Phillips→Tomá
 
 **Bare position codes (3):** POP-00124 RF→Sports Analytics Consultant, POP-00129 C→Youth Baseball Coach, POP-00555 CP→Athletic Training Specialist. All set to ClockMode ENGINE.
 
-### 8. MLB The Show Birth Year Review
+### 8. MLB The Show Birth Year Review — DONE (S70)
 
-42 MLB The Show players are aged 66+ in 2041 but hold active baseball positions (SP, RP, 2B, etc.). These are Mike's sports universe — their career timelines (active, retired, coaching) need his direction. Not a data error, but a design decision about how the A's roster ages in the 2041 timeline.
+Resolved by Phase 15.4: `scripts/integrateAthletes.js` corrected birth years for all 87 players from 2023-era to 2041 math. 5 retired players transitioned to post-career roles (S70/15.3). No longer an open item.
 
 ### 9. Rick Dillon Family Linkage — DONE (S69)
 
@@ -338,7 +338,7 @@ POP-00726 backfilled with Vivian Fong. Damien Roberts moved to Chicago_Citizens.
 
 ### 16. Economic Parameter Role Matching — DONE (S69)
 
-`data/role_mapping.json` — 280 mappings covering all 252 active ledger roles. Batch job mapped 264 ledger role names to 198 economic parameter profiles. Manual additions: 19 MLB/NBA position abbreviations as SPORTS_OVERRIDE, "Retired PG&E Engineer" → Civil Engineer proxy, coaching/scouting staff → Sports Analytics. 100% ledger coverage verified.
+`data/role_mapping.json` — 295 mappings covering all active ledger roles. Batch job mapped 264 ledger role names to 198 economic parameter profiles. Manual additions: 19 MLB/NBA position abbreviations as SPORTS_OVERRIDE, "Retired PG&E Engineer" → Civil Engineer proxy, coaching/scouting staff → Sports Analytics. 100% ledger coverage verified.
 
 Supporting files built:
 - `lib/economicLookup.js` — shared lookup utility (lookupProfile, calculateIncome, deriveWealthLevel, deriveSavingsRate)

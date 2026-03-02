@@ -707,7 +707,7 @@ function buildAsRoster(simLedger) {
   });
 }
 
-function buildBullsRoster(simLedger, chicagoCitizens, chiSports) {
+function buildBullsRoster(simLedger, chiSports) {
   var nameSet = {};
 
   // 1. Check Simulation_Ledger for any Bulls-related citizens
@@ -1697,10 +1697,6 @@ async function main() {
     })
     .sort(function(a, b) { return b.employeeCount - a.employeeCount; });
 
-  // Cycle packet text
-  var packetRows = filterByCycle(packetRaw, CYCLE);
-  var cyclePacketText = packetRows.length > 0 ? (packetRows[0].PacketText || packetRows[0].Briefing || JSON.stringify(packetRows[0])) : '';
-
   console.log('\nData counts:');
   console.log('  Seeds (C' + CYCLE + '):', seeds.length);
   console.log('  Hooks (C' + CYCLE + '):', hooks.length);
@@ -1763,6 +1759,11 @@ async function main() {
   var holidayFromCal = 'none';
   var simYear = '';
   var simMonth = 0;
+  var isFirstFridayFromCal = false;
+  var isCreationDayFromCal = false;
+  if (simCalRaw.length <= 1) {
+    console.warn('  WARN: Simulation_Calendar is empty — season/month/holiday will default to "unknown"');
+  }
   if (simCalRaw.length > 1) {
     var calRow = simCalRaw[1]; // row 0 is headers
     simYear = calRow[0] || '';
@@ -1770,6 +1771,13 @@ async function main() {
     monthFromCal = monthNames[simMonth] || '';
     seasonFromCal = calRow[3] || '';
     holidayFromCal = calRow[4] || 'none';
+
+    // Derive isFirstFriday/isCreationDay from cycle number
+    // Same logic as advanceSimulationCalendar.js
+    var cycleOfYear = ((CYCLE - 1) % 52) + 1;
+    var firstFridayCycles = [1, 6, 10, 14, 18, 23, 27, 31, 36, 40, 45, 49];
+    isFirstFridayFromCal = firstFridayCycles.indexOf(cycleOfYear) >= 0;
+    isCreationDayFromCal = (cycleOfYear === 48);
   }
 
   // CLI overrides: --season Summer --month August --holiday "none" --sports-season mid-season
@@ -1787,12 +1795,11 @@ async function main() {
       name: cliHoliday || holidayFromCal,
       priority: holidayFromCal !== 'none' ? 'active' : 'none'
     },
-    isFirstFriday: false,
-    isCreationDay: false,
+    isFirstFriday: isFirstFridayFromCal,
+    isCreationDay: isCreationDayFromCal,
     sportsSeason: cliSportsSeason || '',
     weather: extractWeatherFromEvents(events),
     sentiment: extractFieldFromEvents(events, 'CitySentiment'),
-    migrationDrift: '', // from cycle packet if available
     cycleWeight: determineCycleWeight(events),
     economicContext: economicContext
   };
@@ -1805,7 +1812,7 @@ async function main() {
     recentOutcomes: buildRecentOutcomes(initiatives),
     executiveBranch: buildExecutiveBranch(civicOfficers),
     asRoster: buildAsRoster(simLedger),
-    bullsRoster: buildBullsRoster(simLedger, chicagoCitizens, allChiSports),
+    bullsRoster: buildBullsRoster(simLedger, allChiSports),
     culturalEntities: buildCulturalEntitiesCanon(culturalLedger),
     reporters: buildReporterList(roster)
   };

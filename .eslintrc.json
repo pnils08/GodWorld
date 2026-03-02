@@ -42,6 +42,20 @@
     "use-isnan": "error",
     "valid-typeof": "error"
   },
+  "overrides": [
+    {
+      "files": [
+        "scripts/buildPlayerIndex.js",
+        "scripts/buildArticleIndex.js",
+        "scripts/reorganizeArchive.js",
+        "dashboard/server.js",
+        "dashboard/vite.config.js"
+      ],
+      "parserOptions": {
+        "sourceType": "module"
+      }
+    }
+  ],
   "ignorePatterns": [
     "node_modules/",
     "*.min.js",

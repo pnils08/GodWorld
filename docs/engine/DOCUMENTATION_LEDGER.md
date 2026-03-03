@@ -52,6 +52,7 @@
 | `docs/reference/V3_ARCHITECTURE.md` | Technical contract — ctx shape, write-intents spec, phase order | On-Demand | Manual (rare) | D |
 | `docs/reference/DEPLOY.md` | Deployment guide (clasp vs git) | On-Demand | Manual (rare) | D |
 | `docs/reference/GODWORLD_REFERENCE.md` | Complete system reference | On-Demand | Manual (rare) | P, D |
+| Communication Hub (Google Sheet) | Mike's visual control panel — Dashboard, Skills, Agent Roster, Upgrade Guide, Stack Health | On-Demand | `/session-end` + manual | All |
 
 ### Engine & Data Integrity (D, X)
 

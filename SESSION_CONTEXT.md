@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-02 | Engine: v3.1 | Cycle: 84 | Session: 73
+Last Updated: 2026-03-02 | Engine: v3.1 | Cycle: 84 | Session: 74
 
 ---
 
@@ -163,6 +163,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 73 (2026-03-02) — Documentation Restructure + Communication Hub
+
+- **One-Place Rule enforced:** Information lives in exactly one file. 5 stale docs archived (`docs/archive/`). SESSION_CONTEXT trimmed 518→222 lines. PERSISTENCE.md scoped to identity-only.
+- **Documentation Ledger created:** `docs/engine/DOCUMENTATION_LEDGER.md` — registry of every active file with purpose, load tier, workflow code, and updater.
+- **Workflow-routed boot:** CLAUDE.md rewritten with auto-greeting + 5 workflow options (Media-Room, Research, Build/Deploy, Maintenance, Cycle Run). Each loads only relevant docs.
+- **Persona selection grounding:** Anthropic's persona selection research baked into boot — deliberate identity grounding before first interaction.
+- **Session-end upgraded:** Step 0 (pre-write .md audit by workflow) and Step 6 (post-write verification) added. Session-startup demoted to manual fallback.
+- **Communication Hub sheet:** `1LcgKRnq2S7lg53irurt6MkVB84OOMhOJ4Ig2nsb218s` — 6 tabs (Dashboard, Skills & Commands, Agent Roster, Upgrade Guide, Git & Deploy, Credentials Reference). Stack health monitoring. Async Mike/Mags notes. ENV var: `COMM_HUB_SHEET_ID`.
+- **Credentials consolidated:** .env expanded from 11→16 variables (added GitHub token, Apps Script API key, DigitalOcean, server IP, Comm Hub sheet ID).
 
 ### Session 72 (2026-03-02) — Phase 12.5: Business Ledger Full Engine Integration (Complete)
 

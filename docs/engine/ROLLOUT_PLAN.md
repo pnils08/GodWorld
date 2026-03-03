@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 72 (2026-03-02) — Phase 12.5 Business Ledger engine integration complete (Career Engine v2.4, Ripple Engine v2.5, business intake pipeline)
+**Last Updated:** Session 73 (2026-03-02) — Documentation restructure, workflow-routed boot, Communication Hub sheet
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -13,11 +13,12 @@
 
 Items that should be addressed in the next session. Updated at session end. Absorbs the old "INCOMING — Next Session" block from SESSION_CONTEXT.md.
 
+- **Edition 85 production** — First edition with full economic data in desk packets. Mike heading to Media-Room workflow.
 - **Franchise Ledger design** — Track how A's franchise impacts city economically. Review game logs + data feed first.
 - **Mara memory/structure overhaul (Phase 10.2)** — Plan exists at `.claude/plans/reactive-tickling-zephyr.md`
-- **Edition 85 production** — First edition with full economic data in desk packets
 - **September 8 Vega committee meeting** (cycle 89) — Stabilization Fund disbursement gate
 - **Dashboard next:** Agent/bot consumption of newsroom endpoint, Supermemory article integration
+- **Communication Hub maintenance** — Update Dashboard status board + Notes from Mags at session-end
 - **GCP project linkage** — Wire GCP project to Apps Script for `clasp run` from CLI
 - **Apps Script one-time runs:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (deployed, need one-time run)
 

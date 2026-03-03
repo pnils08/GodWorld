@@ -104,6 +104,34 @@
         "pipeline": ["Published to Drive/Supermemory/PDF before user approval (7th consecutive session)", "False Huerter/Dosunmu discrepancy flagged across multiple editions (two separate deals)", "Self-scoring against contaminated memory (91/100 internal vs 30/100 user)", "Citizen reuse: 4 citizens appear in 2+ articles"]
       },
       "noteText": "Worst edition by user assessment. OARI vote swap (Vega NO, not YES — third consecutive edition with vote fabrication). Chicago weather fabricated from missing data. Civic desk produced identical-sounding policy briefs with no voice differentiation. Dante Nelson 3x in one edition. Published everything to shared memory before user approval, contaminating canon. Internal score 91 was self-congratulatory — verified against contaminated shared memory instead of engine source data. User grade: ~30/100. Sports and culture desks performed better. Corrections applied post-audit."
+    },
+    {
+      "edition": 85,
+      "cycle": 85,
+      "date": "2026-03-02",
+      "grade": "A-",
+      "total": 88,
+      "dataAccuracy": 16,
+      "voiceFidelity": 17,
+      "structuralCompleteness": 17,
+      "narrativeQuality": 19,
+      "canonCompliance": 19,
+      "criticals": 4,
+      "warnings": 6,
+      "notes": 7,
+      "claimDecomposition": { "extracted": 65, "verified": 48, "errors": 2, "unverifiable": 15 },
+      "maraGrade": "A-",
+      "rheaScore": 73,
+      "deskErrors": {
+        "civic": ["engine language: 'five cycles' in front page body text (3 instances)"],
+        "sports": ["Arturo Ramirez should be Arturo Ramos (name error from sports feed NamesUsed typo)"],
+        "chicago": [],
+        "culture": [],
+        "business": ["engine language: 'three reporting cycles' and 'Three cycles since' in ticker and feature"],
+        "letters": ["Carla Edmonds placed as lead letter against briefing instruction"],
+        "compilation": ["engine language: 'several cycles' in Quick Takes", "Stabilization Fund date contradiction between desks (spring 2038 vs late 2040)"]
+      },
+      "noteText": "Strongest narrative quality since E83. First edition with full civic voice pipeline (6 voice agents). First edition with zero vote fabrication errors (second consecutive clean vote audit). All 4 CRITICALs were engine language ('cycles' in body text) — surgical fixes, no desk reruns needed. Mara A-/88: canon accuracy strong, Baylight open-air correct (fixing C84 error), Dante Nelson avoidance protocol worked. 18 pieces across 6 desks. Carmen Delaine front page built around Mara Vance document requests. Photo generation skipped (TOGETHER_API_KEY not set)."
     }
   ]
 }

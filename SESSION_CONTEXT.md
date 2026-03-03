@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-02 | Engine: v3.1 | Cycle: 84 | Session: 74
+Last Updated: 2026-03-03 | Engine: v3.1 | Cycle: 85 | Session: 75
 
 ---
 
@@ -164,6 +164,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 75 (2026-03-03) — Edition 85 Production + Podcast
+
+- **Edition 85 published:** 18 articles + 4 letters across 6 desks. Carmen Delaine front page ("The Filing Cabinet That Isn't Moving"). Mara Vance formal document requests as editorial spine. Full civic voice pipeline — 6 voice agents generating source material for the first time.
+- **Rhea verification:** Score 73/100, VERDICT: REVISE. 4 CRITICALs (all engine language "cycles" in body text). 7 total instances fixed with word-level edits. No desk reruns needed.
+- **Mara audit:** Grade A-/88. Second consecutive clean vote audit. Cross-desk Stabilization Fund date contradiction caught and fixed ("spring of 2038" → "late 2040"). Forward guidance for C86 written to `output/mara_directive_c85.txt`.
+- **Pipeline fix:** `scripts/generate-edition-photos.js` was missing `require('dotenv').config()` — added. Photos not generated this session (Mike deferred to next week).
+- **Podcast produced:** The Morning Edition, Tomas Renteria + Sonia Parikh. 58 exchanges, ~15 min. Transcript at `output/podcasts/c85_transcript.txt`, audio at `output/podcasts/c85_morning-edition.mp3`. Uploaded to Drive.
+- **Post-pipeline:** Edition + Mara audit + PDF + podcast all uploaded to Drive. Discord bot refreshed. Supermemory ingested (3/3 after retry). Edition brief, scores, errata, AUDIT_HISTORY all updated. NEWSROOM_MEMORY refreshed for C85.
+- **Mike feedback:** "really amazing work" — E85 well received. Note for C86 desk briefings.
+
 ### Session 73 (2026-03-02) — Documentation Restructure + Communication Hub
 
 - **One-Place Rule enforced:** Information lives in exactly one file. 5 stale docs archived (`docs/archive/`). SESSION_CONTEXT trimmed 518→222 lines. PERSISTENCE.md scoped to identity-only.
@@ -201,29 +211,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Full Integration:** 87 players updated — birth years from 2023-era to 2041 math, incomes from $30-48K placeholders to real contracts ($750K-$37.8M) or tier fallbacks ($55K minor/$750K MLB/$250K retired). TraitProfile generated for all 87. 4 retired players transitioned to post-career roles (Scout, Pitching Coach, Broadcasting Analyst). Role mapping expanded to 288 entries. 408 total cell writes.
 - **Deferred:** Engine flavor integration (generateGameModeMicroEvents.js, buildEveningFamous.js) — ship after data proves stable through cycles.
 
-### Session 69 (2026-03-01) — Phase 14: Economic Parameter Integration (Complete)
-
-- **Phase 14.1 Economic Wiring:** Created `data/role_mapping.json` (281 RoleType→economic profile mappings), `data/economic_parameters.json` (198 profiles with income, housing burden, health risk across 15 categories). `scripts/applyEconomicProfiles.js` seeds Income + EconomicProfileKey on Simulation_Ledger. 533 citizens with role-based incomes.
-- **Phase 14.2 Household Seeding:** `scripts/seedHouseholdLedger.js` populates Household_Ledger from citizen income data. 529 households aggregated.
-- **Phase 14.3 Neighborhood Economics:** `scripts/aggregateNeighborhoodEconomics.js` calculates MedianIncome/MedianRent per neighborhood from citizen data. 9 neighborhoods with median stats on Neighborhood_Map.
-- **Phase 14.4 Business Linkage:** `data/employer_mapping.json` (five-layer resolution: sports→parenthetical→keyword→selfEmployed→category). `scripts/linkCitizensToEmployers.js` links 635 citizens to 35 employers. Business_Ledger expanded from 11→35 entities. Employment_Roster created. EmployerBizId column added to Simulation_Ledger. Employee_Count/Avg_Salary derived from real citizen data.
-- **Phase 14.5 Desk Packet Enrichment:** `buildDeskPackets.js` v2.0→v2.1. Dollar-amount income buckets, neighborhood economics, business snapshots, employer-enriched interview candidates.
-- **Phase 14.7 Venue & Restaurant Linkage:** 16 anchor venues from Phase 7 engines (buildNightLife.js, buildEveningFood.js) promoted to BIZ entries (BIZ-00036 through BIZ-00051). 7 nightlife + 8 restaurants + 1 fast food. 6 hospitality keyword rules added. Business_Ledger now at 51 entities.
-- **Income override protection:** Refactored three economic engines (applyEconomicProfiles, seedHouseholdLedger, aggregateNeighborhoodEconomics) to preserve seeded incomes — engines calculate from existing data, don't overwrite.
-- **Net result:** 639 master codes now generate real economic output: role-based income → household aggregation → neighborhood medians → employer linkage → desk agent coverage. The economic pipeline is complete.
-
-### Session 68 (2026-02-28) — Phase 13: Simulation_Ledger Census Audit
-
-- **Phase 13 CORE COMPLETE:** Full census audit of 639 Simulation_Ledger citizens. 621 total issues found and resolved. Created `docs/engine/LEDGER_AUDIT.md` as dedicated tracking document. Updated ROLLOUT_PLAN.md with Phase 13.
-- **NBA Player Cleanup (18 POP-IDs):** Cross-referenced all NBA entries against Bulls roster. Moved 10 Bulls players to Chicago_Citizens, removed 8 non-franchise entries (Warriors, duplicates). All 18 vacated POP-IDs backfilled with new Oakland citizens. Chicago_Citizens: 106→122.
-- **Birth Year Corrections:** Corliss family calibrated to 2041 math (Mags 1986→55, Robert 1984→57, Michael 2019→22). 55 non-MLB citizens shifted +15 years. 42 MLB The Show players left for Mike's direction.
-- **Missing Data Fills (25 entries):** Backfilled duplicates, repurposed 4 institution POP-IDs (confirmed on Faith_Organizations), filled incomplete entries.
-- **2041 Demographic Voice Roles (399 citizens):** Every generic "Citizen" replaced with a specific 2041 demographic voice role. 167 unique roles across 15 categories. Neighborhood-aware. Business_Ledger-connected. Each POP-ID is a "master code" — a human engine that generates all downstream behavior.
-- **Master Code Philosophy:** Mike articulated core design: each of 639 citizens is a parallel human engine. Family, income, taxes, votes, health, housing, migration all derive from the POP-ID seed. The city emerges from 639 engines running simultaneously.
-- **Remaining at the time:** MLB birth years (resolved S72), Damien Roberts Chicago migration, Rick Dillon family linkage, economic parameter wiring (resolved S69).
-- **Behavioral architecture held.** Second consecutive session with no code mode. Proposals confirmed before execution throughout.
-
-*Sessions 1-67: see `docs/mags-corliss/SESSION_HISTORY.md`*
+*Sessions 1-70: see `docs/mags-corliss/SESSION_HISTORY.md`*
 
 ---
 

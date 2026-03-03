@@ -14,8 +14,8 @@ This is my institutional memory. I read this file at the start of every session 
 |------------|-----|--------|--------|------|--------|-----------|-----------|
 | Baylight District | INIT-006 | PASSED | $2.1B | C83 | 6-3 | 35,000-seat open-air stadium, 3,200 residential units, 65 acres. BD-83-TIF (30-year zone, 3% admin cap, 8 use categories) and BD-83-REB (remediation bond, 15% contingency) filed. Construction mobilization condition fulfilled. | Construction timeline from Ramos's office |
 | Oakland Alternative Response Initiative | INIT-002 | PASSED | $12.5M | C82 | 5-4 | Pilot districts: D1 (Carter), D3 (Delgado), D5 (Rivers). D4 (Vega) excluded. 9 initial teams, 15 full deployment. 80-hr training, 21-day application window, 7-member advisory board. 45-day selection window. | First job postings, hiring progress |
-| Temescal Community Health Center | INIT-005 | PASSED | $45M | C80 | 6-2 | Crane absent. Ashford and Chen voted NO. Site selection phase (C75-78). | Implementation tracking |
-| West Oakland Stabilization Fund | INIT-001 | PASSED | $28M | C78 | 6-3 | Crane voted YES remotely (crossover). 342 applications, 47 approved ($4.2M first round), 31 denied, 110 pending, 154 unreviewed. Target: all reviews by Oct 2041. Second round: 50-70 approvals, $5-7M. | Check delivery, second round |
+| Temescal Community Health Center | INIT-005 | PASSED | $45M | C80 | 6-2 | Crane absent. Ashford and Chen voted NO. Priority designation issued C85 after 5-month delay and Mara Vance resubmission. | Construction timeline, groundbreaking date |
+| West Oakland Stabilization Fund | INIT-001 | PASSED | $28M | C78 | 6-3 | Crane voted YES remotely (crossover). 295 applications waiting, $4.2M approved, $0 disbursed. OEWD report directive issued (10 business days). Authorization date: late 2040. | OEWD report delivery, first check cut |
 | Fruitvale Transit Hub Phase II | INIT-003 | ACTIVE | $230M | C86 (projected) | — | Visioning sessions C83-86. Transit and housing focus. | Visioning completion, council vote |
 | Port of Oakland Green Modernization | INIT-004 | PIPELINE | — | C88-90 (projected) | — | Federal grant pending. External decision. Not yet formally proposed in-world. | Grant decision |
 
@@ -43,6 +43,17 @@ This is my institutional memory. I read this file at the start of every session 
 ---
 
 ## Audit Log (Rolling — Last 5 Cycles)
+
+### Cycle 85 — Grade A- (88/100) | Approved With Corrections
+
+**Strongest narrative quality to date. Second consecutive clean vote audit. First full civic voice pipeline.**
+
+- **Canon verified:** All four initiatives accurate — Stabilization Fund ($28M/$4.2M/$0), OARI (5-4, D1/D3/D5, Day 30/45), Temescal Health Center (6-2, Crane absent, priority designation issued), Baylight ($2.1B, 6-3, correctly described as open-air). All nine council members correct with districts, factions, positions. Executive branch accurate. A's roster clean (Arturo Ramos corrected from "Ramirez" — sports feed NamesUsed typo).
+- **Corrections applied:** 7 engine language violations ("cycles" → "months"/"weeks" in body text), Arturo Ramirez → Ramos, letters reordered (Edmonds not lead), Stabilization Fund date harmonized ("spring of 2038" → "late 2040" in Velez ticker to match Delaine front page), Beverly Hayes annotated (no archive profile).
+- **Warnings:** Baylight temporal framing ("eight days later" reads as present-tense when vote was C83). Beverly Hayes needs archive profile. Port of Oakland Green Modernization $320M figure introduced in continuity notes without prior canon. Missing Names Index footers, PREWRITE blocks, Storylines category headers (structural).
+- **Notes:** "47 specific recipients" figure in Carmen's front page unverifiable against packet data. Several player ages unverifiable. OKC record unverifiable. Paulson presser quotes were agent-generated, not from async interview system.
+- **Citizen management:** Dante Nelson correctly avoided per C84 errata. Carla Edmonds returning (E82 → E85) — needs C86 rest. Rose Delgado and Terrence Mobley need editorial space in C86.
+- **Forward guidance given:** OARI Day 45 hard close, Baylight September 15 individual deliverable tracking, Stabilization Fund OEWD report follow-up, Deputy Mayor Osei portfolio management question, Delgado and Mobley activation, Carla Edmonds rest through C86.
 
 ### Cycle 84 — Grade A- | Approved With Corrections
 
@@ -155,7 +166,13 @@ This is my institutional memory. I read this file at the start of every session 
 
 ## Open Questions for Next Audit
 
-1. **Huerter/Dosunmu contract:** Same $16.88M figure attributed to both players. Needs definitive resolution before C85.
-2. **Elliot Graye roster status:** Has byline but not in base_context reporters array. Update needed.
-3. **INIT-006 policyDomain:** Listed as "sports" in Initiative_Tracker. Should be housing/development.
-4. **Executive branch "NEW CANON" labels:** Cortez, Park, Liu, Ramos, Ellis, Wu — verify against Political System Master. If already registered, label as "first quoted in coverage" not "NEW CANON."
+1. **Stabilization Fund authorization date:** Resolved to "late 2040" in E85. Both desks now consistent. Confirm in institutional record.
+2. **Deputy Mayor Osei portfolio:** Who is managing Economic Development in his absence? Two editions of silence. Chase in C86.
+3. **Beverly Hayes archive profile:** Canon citizen with no age/occupation. Needs establishment before C86.
+4. **Port of Oakland Green Modernization budget:** $320M appeared in E85 continuity notes without prior establishment. Source it.
+5. **Huerter/Dosunmu contract:** $16.88M attributed to Huerter in E85 citizen log. Still unresolved for Dosunmu. Carried forward.
+6. **Elliot Graye roster status:** Not in E85. Has byline but not in base_context reporters. Needs resolution.
+7. **Baylight anchor tenant identity:** September 15 deliverable includes "confirmed anchor tenant disclosure." Who is it?
+8. **Temescal Health Center construction timeline:** Priority designation issued. When does groundbreaking happen?
+9. **Rose Delgado public position on Fruitvale Transit Hub:** Coming Next Cycle says she's "campaigning." Confirm before C86 vote story.
+10. **Terrence Mobley (D9):** Five editions without a substantive quote. Give him space or explain the silence.

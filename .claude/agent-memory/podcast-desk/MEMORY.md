@@ -2,6 +2,19 @@
 
 ## Episode History
 
+### Episode 2 — C85 Main Edition: The Filing Cabinet That Isn't Moving (September 2041)
+- Format: The Morning Edition
+- Hosts: Tomas Renteria (Person1) + Sonia Parikh (Person2)
+- Exchanges: 58
+- Stories covered: Stabilization Fund/Delaine front page, Faith institutions/Keen culture piece, A's 7-0 preseason + Devon Green letter, Hal's Vinnie Keane farewell essay
+- Quick Hits: OARI Day 30 (5-4 vote, Tran D2 expansion, Walker frustration, Nina Chen CRC), Velez rent map (Fruitvale 41% rent-burdened), Paulson presser Warriors deflection, Bulls 52-21
+- Stories skipped: Angela Reyes "First Day Back" (Jalen Hill/OUSD), Jalen Hill story — ran short on time
+- Key tension: "The filing cabinet isn't moving but the folding table is open" — Tomas on faith institutions vs. city bureaucracy; Sonia printing Patricia Nolan's letter (lives 2 blocks from Health Center site)
+- Callbacks resolved: September 8th meeting — Sonia attended with neighborhood association, nothing moved. Tomas closed late, couldn't make it.
+- Forward threads: September 15th Baylight deliverables (all five — workforce agreement is the one to watch), Beverly Hayes getting a check from Stabilization Fund ("that's the test")
+- Beverly Hayes personalized: Tomas made Beverly's situation his close watch; Sonia made Sept 15 workforce agreement hers
+- "Failure of will" — Rivers OPP quote that Tomas named and held through the episode
+
 ### Episode 1 — C84 Supplemental: Oakland Tech Landscape (August 2041)
 - Format: The Morning Edition
 - Hosts: Tomas Renteria (Person1) + Sonia Parikh (Person2)
@@ -36,6 +49,16 @@
 - Mags Corliss (Person1) + Hal Richmond (Person2)
 
 ## Show Notes
+
+### Episode 2 Observations
+- 58 exchanges — at the top of target. Dense edition warranted it. Any longer would have needed a story cut.
+- Callback to September 8th meeting opened the episode cold with no preamble — worked. Natural entry point when both hosts had a stake in the outcome.
+- "The filing cabinet isn't moving but the folding table is open" — emerged organically as the episode's thesis line. Tomas generated it; use as a callback in future if the faith/city infrastructure tension comes back.
+- Beverly Hayes as the close watch is more personal than a policy date. Naming one person as the test is better audio than naming a process.
+- Sonia printing out Patricia Nolan's letter — she lives 2 blocks from that site. Keep this geographic stakes detail active for future Health Center coverage.
+- Sports as emotional exhale works. Devon Green's letter and Keane farewell gave the episode room to breathe after 25 exchanges of governance grief.
+- Tomas on Keane: "I've been watching Keane hit balls over that fence since I was in high school. You don't have that history." — natural cultural gap moment. Doesn't need to be a fight. Just true.
+- Quick Hits section ran 8 exchanges (4 pairs) — a little long. Could trim to 6 next time if pacing feels heavy.
 
 ### Episode 1 Observations
 - 48 exchanges hit well within the 40-60 target. Felt like 12-14 minutes.

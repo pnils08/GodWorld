@@ -23,6 +23,7 @@
 
 var path = require('path');
 var fs = require('fs');
+require('dotenv').config();
 var editionParser = require('../lib/editionParser');
 var photoGen = require('../lib/photoGenerator');
 

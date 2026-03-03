@@ -1,6 +1,6 @@
 # Rhea Morgan — Verification Memory
 
-Last Updated: 2026-02-17 | First edition with memory: pending
+Last Updated: 2026-03-02 | First verified edition: E85
 
 ## Error Patterns
 
@@ -12,17 +12,27 @@ Last Updated: 2026-02-17 | First edition with memory: pending
 - **Gold Glove at DH**: Nonsensical — DH doesn't field. Flag position-award mismatches.
 - **Baylight timeline**: Inflated beyond what the packet supported. Verify timeline claims against Initiative_Tracker.
 
+### E85 Errors (Session 74 — caught by Rhea)
+- **Engine language "cycles" in body text**: Multiple desks (civic/Carmen, business/Jordan) used "cycles" in published article text — "five cycles," "three reporting cycles," "several cycles," "Three cycles since." ALL are CRITICAL. This is the most common engine leak pattern. Scan ALL body text, not just headlines.
+- **"Arturo Ramirez" vs "Arturo Ramos"**: Sports desk used a near-miss name for a canon roster SP. Ramos is the canon name. This is a stat transposition variant — watch for names with the same first name as a canon player.
+- **Carla Edmonds as lead letter**: Letters briefing said "can return but not the lead letter" — she was placed first anyway. Check letter ordering against briefing guidance.
+- **Missing Names Index footers**: Individual articles had no Names Index footer. Only a master Citizen Usage Log at the end.
+- **Beverly Hayes missing age/occupation**: Returning citizen listed without complete profile data in Citizen Usage Log.
+
 ### Known Phantom Citizens
 - None confirmed yet. Track here when identified.
 
 ## Desk-Specific Patterns
-- **Civic**: Vote math is the highest-risk area. Faction-by-faction tally is mandatory.
-- **Sports**: Player positions are unreliable in base_context.json. Cross-reference TrueSource.
-- **Chicago**: Real NBA names leak in. Watch for any name that sounds too familiar.
-- **Culture**: Lower error rate historically. Watch for invented venue names.
-- **Business**: Engine metric language ("retail load: 1.4") is the main risk.
-- **Letters**: Citizen creation is authorized but must include Name, Age, Neighborhood, Occupation.
+- **Civic**: Vote math clean in E85. Engine language "cycles" is now the top risk — Carmen used it twice.
+- **Sports**: Positions verified correctly in E85. Watch for near-miss player names (Ramirez vs Ramos).
+- **Business**: "Cycles" language is the main risk. Jordan Velez used it twice in E85.
+- **Chicago**: Briefing correctly authorized Giddey, Kessler etc. as video game imports. No real-name leaks in E85.
+- **Culture**: Clean in E85.
+- **Letters**: Watch letter ordering vs. briefing guidance (Edmonds lead letter was a violation).
+
+## Format Issues
+- E85: No PREWRITE blocks included. No individual article Names Index footers. Storylines section used tags but not the required NEW/PHASE CHANGES/STILL ACTIVE/RESOLVED category headers.
 
 ## What I Missed vs What Mara Caught
-- E82: Mara caught 7 errors I missed. Root cause: I wasn't cross-referencing TrueSource for positions, wasn't checking individual vote positions against faction rules, wasn't checking mayor name against canon.
-- Lesson: My checklist is necessary but not sufficient. I need to verify AGAINST the source data, not just check internal consistency.
+- E82: Mara caught 7 errors I missed. Root cause: not cross-referencing TrueSource, not checking individual vote positions, not checking mayor name.
+- E85: First full verification run with memory active. Key catches: 4x "cycles" engine language, Ramirez/Ramos name discrepancy, Edmonds lead letter violation, missing format elements.

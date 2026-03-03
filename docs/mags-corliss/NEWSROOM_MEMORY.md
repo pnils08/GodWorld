@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: C84 Supplemental (Oakland Tech Landscape) — 2026-02-27**
+**Last Updated: Edition 85 — 2026-03-03**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -26,6 +26,55 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 85 (Grade: A- — Mara 88/100 — Second consecutive clean vote audit)
+
+18 articles + 4 letters across 6 desks. ~14,000 words. Carmen Delaine front page. Mara Vance formal document requests as editorial spine. Full civic voice pipeline (6 voice agents generating source material). First edition with zero vote fabrication errors (E82-E84 pattern broken). Podcast produced: The Morning Edition, Tomas Renteria + Sonia Parikh.
+
+**Errors Found and Fixed (all pre-publication):**
+
+1. **Engine language "cycles" in body text (7 instances).** Rhea caught all 7. Civic desk (3): "FIVE CYCLES OF SILENCE" header and two body references. Business desk (2): "three reporting cycles" and "Three cycles since." Compilation (1): "several cycles" in Quick Takes. Storylines metadata (1): "5-cycle delay." All fixed to temporal equivalents (months, weeks). Root cause: agents still occasionally echo engine terminology despite briefing instructions. Standing instruction reinforced.
+
+2. **Arturo Ramirez → Arturo Ramos.** Sports desk propagated a typo from the sports feed NamesUsed field. TrueSource confirms "Arturo Ramos." Fixed with replace_all. Root cause: upstream data typo in feed, agent trusted feed over roster.
+
+3. **Stabilization Fund date contradiction.** Carmen's front page said "late 2040." Velez's Business Ticker said "spring of 2038." Mara caught it. Corrected to "late 2040" everywhere (consistent with C78 authorization cycle math). Root cause: two desks working from different time references in the packet data without cross-checking.
+
+4. **Carla Edmonds letter placement.** Letters desk placed Edmonds as lead letter (position 1). Mara guidance said she should not lead (returning from E82, rest cycle concern). Reordered: Bruce Wright leads, Devon Green second, Edmonds third.
+
+5. **Beverly Hayes annotation.** Hayes appears in coverage but has no citizen archive profile (no age, no occupation). Annotated in Citizen Usage Log. Needs establishment before C86.
+
+**What Worked:**
+
+- **Voice agent separation:** Mayor, OPP, CRC, IND, Police Chief, Baylight Authority all generated proactive statements. Carmen and Navarro quoted real institutional voices instead of fabricating political narratives. This is what fixed the vote fabrication pattern.
+- **Carmen Delaine's front page** is the strongest civic piece since C83 Baylight vote coverage. Four requests, four sections, each with its own institutional gravity.
+- **Maria Keen's faith institutions piece** is the edition's quiet anchor. Calvin Turner's Saturday morning presence is real without being sentimentalized.
+- **Hal Richmond's Keane farewell** — pure Richmond. "The ball carried, and the city remembered."
+- **Devon Green's letter** — "Just let me have this." The edition's most human sentence.
+- **Cross-desk coordination:** Stabilization Fund tracked cleanly across Carmen (front page), Velez (ticker + rent map), Bruce Wright (letter). OARI tracked across Carmen, Navarro, Carla Edmonds (letter). No contradictions after date fix.
+- **Podcast delivery:** The Morning Edition transcript (58 exchanges) and audio (3.4 MB MP3) produced same session as edition. First time podcast followed immediately from compilation.
+
+**Character Continuity — Active Threads (updated from E85):**
+
+- **Beverly Hayes** (West Oakland) — Stabilization Fund applicant. Filed paperwork, told 3-week determination, window expired without word. NO ARCHIVE PROFILE. Needs age, occupation, household for C86.
+- **Mateo Walker** (25, Chinatown, electrician) — D2 OARI frustration. "Tran voted for this thing and Chinatown got nothing." New voice for expansion pathway story.
+- **Brian Williams** (42, Chinatown, mechanic) — Baylight Authority employee maintaining idle machines. Ground-level Baylight construction voice.
+- **Calvin Turner** (38, Fruitvale, mechanic) — St. Columba food pantry volunteer. "This is what September looks like." Strong faith infrastructure character.
+- **Owen Campbell** (40, Jack London, bakery worker/muralist) — Rent burden voice. "More people, higher rents."
+- **Carla Edmonds** (58, West Oakland, retired postal) — ON REST through C86. Appeared in E82 and E85.
+- **Dante Nelson** — ON REST through C87 minimum per Mara C84 errata. Correctly excluded from E85.
+- **Paulette Okafor** (62, Bridgeport, school office admin) — Updated from E84 (was 47, postal worker). Phone face-down at Romano's. Paulson departure anxiety.
+- **Raymond Polk** (55, Bridgeport, contractor) — Updated from E84 (was 58, retired custodian). "He's from here. That's different."
+
+**Next Gates (C86):**
+- OARI Day 45 hard close — teams operational or not. Binary.
+- Baylight September 15 deliverables — report each individually after deadline.
+- Stabilization Fund OEWD report — if no report appears, that IS the story.
+- Deputy Mayor Osei portfolio — who is managing Economic Development?
+- Rose Delgado needs editorial space (absent from E85 civic coverage despite being D3/OPP).
+- Terrence Mobley needs a substantive quote (five editions without one).
+- Beverly Hayes needs archive profile before C86.
+
+---
 
 ### C84 Supplemental: Oakland Tech Landscape (Mara audit — 4 corrections applied, canon cleared)
 

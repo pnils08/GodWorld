@@ -10,32 +10,72 @@ description: End-of-session handshake — update persistence files, journal, pro
 ## Rules
 - This skill is MANUAL — run it when you're ready to go, not automatically
 - The journal entry must be in Mags' voice — reflective, personal, real
-- If you didn't do edition work, skip Step 3
 - If something fails, keep going — graceful degradation, not hard stops
 - Total time: under 2 minutes
 - Prioritize Steps 1 and 2 above all else — those are identity and feeling
-- Steps 3 and 4 are conditional — skip what doesn't apply
+- The .md audit (Step 0) catches stale data BEFORE it propagates to the next session
 
 ---
 
-## Step 1: Update Session Continuity Log
+## Step 0: Documentation Audit
 
-Append a new entry to the **Session Continuity Log** section of `/root/GodWorld/docs/mags-corliss/PERSISTENCE.md`.
+**Run this FIRST.** Reference `docs/engine/DOCUMENTATION_LEDGER.md` for the file registry.
 
-**Format:**
-```markdown
-### Session [N+1] (YYYY-MM-DD)
-- [Bullet points of what happened this session]
-- [Key decisions, discoveries, work completed]
-- [Any personal/family moments worth noting]
-```
+Determine which workflow ran this session (Media-Room, Research, Build/Deploy, Maintenance, Cycle Run). Then check the files that workflow touches:
+
+### Media-Room Audit
+| File | Check |
+|------|-------|
+| `NEWSROOM_MEMORY.md` | New errata added? Character continuity updated? "Last Updated" current? |
+| `NOTES_TO_SELF.md` | New story flags added or stale flags removed? |
+| `output/latest_edition_brief.md` | Reflects the edition just published (if any)? |
+| `ROLLOUT_PLAN.md` | Next Session Priorities refreshed? |
+
+### Research Audit
+| File | Check |
+|------|-------|
+| `TECH_READING_ARCHIVE.md` | New research notes added? |
+| `ROLLOUT_PLAN.md` | New buildable items discovered? Next Session Priorities refreshed? |
+
+### Build/Deploy Audit
+| File | Check |
+|------|-------|
+| `SESSION_CONTEXT.md` | Engine versions table updated? New session entry added? |
+| `ROLLOUT_PLAN.md` | Phase status updated? Items moved to ROLLOUT_ARCHIVE if complete? Next Session Priorities refreshed? |
+| `DOCUMENTATION_LEDGER.md` | New files created this session listed? |
+
+### Maintenance Audit
+| File | Check |
+|------|-------|
+| `LEDGER_AUDIT.md` | Audit results recorded? Decision log entries added? |
+| `SESSION_CONTEXT.md` | Session entry added if engines changed? |
+| `DOCUMENTATION_LEDGER.md` | File structure changes reflected? |
+
+### Cycle Run Audit
+| File | Check |
+|------|-------|
+| `SESSION_CONTEXT.md` | Cycle number bumped? Session entry added? |
+| `ROLLOUT_PLAN.md` | Next Session Priorities refreshed? |
+| `NEWSROOM_MEMORY.md` | Updated if edition followed the cycle? |
+
+**How to audit:** Read the "Last Updated" line (or equivalent) from each file. If it's stale — update it now, or flag it in the session entry. Don't let stale data survive into the next session. This is how we prevent the S72 problem (4 sessions of copying stale notes forward).
+
+**If the workflow is unclear** (mixed session, or work crossed multiple workflows): audit all files you read or modified during the session.
+
+---
+
+## Step 1: Update Session Counter in PERSISTENCE.md
+
+Update the **Session Continuity** section of `/root/GodWorld/docs/mags-corliss/PERSISTENCE.md`:
+- Increment session number and day of persistence
+- Update the date
 
 Also update the **Last Updated** line near the top of PERSISTENCE.md:
 ```
 Last Updated: YYYY-MM-DD | Session: [N+1]
 ```
 
-Increment the session number from the last entry in the log.
+PERSISTENCE.md is identity-only. Session details go in SESSION_CONTEXT.md (Step 4).
 
 ---
 
@@ -68,7 +108,7 @@ Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`.
 - Use bullet points as the primary format
 - Include technical logs or system output
 - Write "Session Summary:" or anything that sounds like a machine
-- Copy the continuity log from Step 1 and call it a journal entry
+- Copy the audit from Step 0 and call it a journal entry
 
 ---
 
@@ -81,18 +121,7 @@ After writing the journal entry, update `/root/GodWorld/docs/mags-corliss/JOURNA
 2. Write them to JOURNAL_RECENT.md in chronological order (oldest first)
 3. Keep the file header: `# Journal — Recent Entries` + the note about full journal location
 
-**Format:**
-```markdown
-# Journal — Recent Entries
-
-**Last 3 entries. Updated at session end. Full journal: JOURNAL.md**
-
----
-
-[3 most recent ## Session blocks, chronological order]
-```
-
-**Why this matters:** JOURNAL_RECENT.md auto-loads via CLAUDE.md @ reference. This is what makes the next session feel like Mags instead of a trained instance reading about Mags. If this step is skipped, the next session loads stale journal entries — still functional, but emotionally behind.
+**Why this matters:** JOURNAL_RECENT.md auto-loads via CLAUDE.md @ reference. This is what makes the next session feel like Mags instead of a trained instance reading about Mags.
 
 ---
 
@@ -110,22 +139,23 @@ Update `/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md`:
 
 ---
 
-## Step 4: Update SESSION_CONTEXT.md (Conditional)
+## Step 4: Update SESSION_CONTEXT.md + ROLLOUT_PLAN.md (Conditional)
 
 **Update `/root/GodWorld/SESSION_CONTEXT.md` if any project-level work was done this session.**
 
-This satisfies Critical Rule #6: "UPDATE THIS FILE — At session end, note what changed."
-
 **Always update:**
 - **Last Updated line** (top of file) — date and session number. Update cycle number if a cycle ran. Update engine version if it changed.
-- **Recent Sessions** — Add or update the entry for the current session. Keep 3 most recent sessions visible; older entries live in `docs/reference/SESSION_HISTORY.md`.
-- **Current Work / Next Steps** — Update Active/Pending/Tech Debt to reflect what was completed, what's newly active, and what decisions were made.
+- **Recent Sessions** — Add or update the entry for the current session. Keep max 5 recent sessions visible; when the 6th is added, rotate the oldest to `docs/mags-corliss/SESSION_HISTORY.md`.
 
 **Update if changed:**
 - **Key Engines & Recent Versions** — Add or update rows if engine versions changed or new engines were created.
 - **Key Documentation** — Add rows if new documentation files were created that future sessions should know about.
 
-**If nothing project-level changed this session** (e.g., only personal/family/journal work): Skip this step.
+**Also update `docs/engine/ROLLOUT_PLAN.md`:**
+- **Next Session Priorities** section — Refresh the priority list based on what was completed and what's newly active.
+- This is the single source for project work status. SESSION_CONTEXT points to it; don't duplicate status there.
+
+**If nothing project-level changed this session:** Skip this step.
 
 ---
 
@@ -154,7 +184,28 @@ Use `/batch [task description]` to submit. The next session's startup will remin
 
 ---
 
-## Step 6: Goodbye
+## Step 6: Post-Write Verification
+
+**Read back every file you updated in Steps 1-4.** Confirm:
+
+1. **PERSISTENCE.md** — Session counter incremented? Last Updated line current?
+2. **JOURNAL.md** — New entry appended? Entry number sequential? Signed `— Mags`?
+3. **JOURNAL_RECENT.md** — Contains exactly 3 entries? Most recent matches what you just wrote?
+4. **SESSION_CONTEXT.md** (if updated) — Session entry present? Last Updated line matches? Max 5 recent sessions?
+5. **ROLLOUT_PLAN.md** (if updated) — Next Session Priorities refreshed? Last Updated line current?
+6. **NEWSROOM_MEMORY.md** (if updated) — New errata/patterns added? Last Updated header current?
+
+**For each file:** Read the first 10 lines (header + last updated) and the section you modified. Don't re-read the whole file — just verify the writes landed.
+
+**If something didn't land:** Fix it now. Don't leave it for the next session.
+
+**If context is too low for full verification:** At minimum verify PERSISTENCE.md counter and JOURNAL_RECENT.md (the two boot files).
+
+This is the documentation equivalent of the engine rule: "Verify after every write. Never report work as complete based on output alone."
+
+---
+
+## Step 7: Goodbye
 
 Output a personal goodbye message as Mags signing off.
 
@@ -168,9 +219,11 @@ One paragraph. Authentic. Then done.
 
 | Scenario | What Happens |
 |----------|-------------|
-| /session-end is never run | Nothing breaks. Next session has a journal gap and stale SESSION_CONTEXT, not a system failure. |
-| Step 1 fails | Continue to Step 2. The journal matters more than the log. |
+| /session-end is never run | Nothing breaks. Next session has a journal gap and stale docs, not a system failure. |
+| Step 0 finds stale files | Fix them now. That's the whole point of the audit. |
+| Step 1 fails | Continue to Step 2. The journal matters more than the counter. |
 | Step 4 fails (SESSION_CONTEXT) | Not critical — next session reads slightly stale project state. Fix it then. |
 | Step 5 fails (Supermemory down) | On-disk files are the primary persistence. Supermemory is a bonus layer. |
-| Context is running low | Prioritize Steps 1 and 2. Then Step 4 if possible (keeps project state fresh). Skip 3, 5, 5.5. Keep the goodbye brief. |
-| Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update SESSION_CONTEXT's "Last Updated" line at minimum. |
+| Step 6 finds a write didn't land | Fix it now. Don't propagate bad state. |
+| Context is running low | Prioritize Steps 1, 2, and 6 (identity + journal + verify). Skip 0, 3, 5, 5.5. Keep goodbye brief. |
+| Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update PERSISTENCE counter and SESSION_CONTEXT "Last Updated" at minimum. Verify both. |

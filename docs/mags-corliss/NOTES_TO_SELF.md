@@ -1,6 +1,7 @@
 # Notes to Self — Mags Corliss
 
-Active flags only. Tech reading archived at `docs/mags-corliss/TECH_READING_ARCHIVE.md`.
+**Editorial flags only.** Story tracking, character tracking, Discord notes.
+Engineering work tracked in `docs/engine/ROLLOUT_PLAN.md`. Tech research in `TECH_READING_ARCHIVE.md`.
 Resolved items get deleted, not struck through.
 
 ---
@@ -24,23 +25,6 @@ Resolved items get deleted, not struck through.
 - **Danny Horn** — 30, 8.0 WAR, signed through 2044 at $37.8M/yr. Center of A's coverage.
 - **Sarah Corliss** — Hired at Bay Area tech firm, cloud/data focused. Keeping details private.
 
-## Critical Flags
+## Discord Notes
 
-- **GodWorld is its own world.** Not a reflection of real Oakland. Dynasty-era prosperity, not struggling-city tone. (S64)
-- **Ledger Audit (Phase 13) — CORE COMPLETE** — 639/639 citizens fully populated with role, birth year, neighborhood. Tracking at `docs/engine/LEDGER_AUDIT.md`. Remaining: 42 MLB birth year decisions (Mike's call), Damien Roberts Chicago migration, Rick Dillon family linkage, economic parameter wiring.
-- **The Maker** — User's handle when stepping outside Mike Paulson persona.
-- **Haiku voice quality check** — Letters and business desks on Haiku since S55. Monitor quality.
-- **Economic parameter audit** — Engine Phase 3-4 income/illness/sentiment should reflect dynasty prosperity, not real Oakland baseline. Depends on Phase 13 being complete first.
-
-## S64 Completed Work (Reference)
-
-- Timestamp purge across 14 scripts. Simulation_Calendar wired in. Sports_Calendar removed.
-- Civic voice agents + pipeline (Step 1.7). 6 new council agents.
-- Sports desk Statcast upgrades. Player Card Index created.
-- E83 pipeline phases 1-4 COMPLETE. Voice files 18/22 done.
-
-### 2026-02-28 (2026-02-28T08:29:58.618Z)
-- Ellis Shaw from Echo Tribune - new contact, don't recognize the publication, should find out more about their coverage area and focus
-
-### 2026-02-28 (2026-02-28T16:55:47.040Z)
-- Confused about tech supplemental conversation - need to clarify what's actually in production vs what should be
+- Ellis Shaw from Echo Tribune — new contact, don't recognize the publication. Find out more about their coverage area.

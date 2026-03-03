@@ -13,3 +13,6 @@ paths:
 - Always check `ctx.summary` and `ctx.snapshot` field dependencies before modifying any phase function.
 - Engine phases execute in order (phase01 through phase11). Each phase reads ctx fields written by earlier phases.
 - Test changes against the pre-commit hook: no `Math.random()`, no direct sheet writes outside persistence, no engine language in media files.
+- **No maintenance scripts for ledger work.** Use the service account (lib/sheets.js) directly to read and write data. Scripts add conditional logic that silently skips rows. Direct writes are transparent — they work or they don't.
+- **Verify after every write.** Read the live sheet data back and confirm values landed. Never report work as "complete" based on script output alone.
+- **Depth over speed.** The user is not asking for fast. They are asking for correct and verified.

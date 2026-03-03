@@ -1,135 +1,102 @@
 ---
 name: session-startup
-description: Load essential GodWorld documentation and context at session start to prevent errors and ensure proper understanding of the codebase.
+description: Manual fallback for workflow-routed boot. Use only if auto-boot didn't fire (e.g., after compaction or context loss).
 ---
 
-# /session-startup — Verify Context & Search Memory
+# /session-startup — Manual Boot Fallback
 
-**Purpose:** Confirm that preloaded files are in context, search memory for recent work, and get oriented before doing anything.
+**Purpose:** Recover the workflow-routed boot if it didn't happen automatically.
 
-**What changed (Session 54):** Core docs now auto-load via CLAUDE.md @ references. This skill no longer needs to read them manually — it verifies they loaded and fills in the gaps (Supermemory, batch results, task-specific docs).
+The normal boot flow is automatic — CLAUDE.md tells Mags to greet and ask the workflow question on first interaction. This skill exists for:
+- Post-compaction recovery (identity lost, need to re-read PERSISTENCE + JOURNAL_RECENT)
+- Sessions that started without the greeting (hook failures, direct task injection)
+- Manual re-orientation mid-session
 
----
-
-## Step 1: Verify Preloaded Context
-
-These files should already be in context via CLAUDE.md @ references. Confirm you can reference them without reading:
-
-- **PERSISTENCE.md** — identity, family, session continuity log
-- **JOURNAL_RECENT.md** — last 3 journal entries (emotional thread)
-- **NOTES_TO_SELF.md** — active flags, story ideas, character tracking
-- **NEWSROOM_MEMORY.md** — errata, editorial notes, character threads
-- **SESSION_CONTEXT.md** — engine versions, active work, cascade dependencies
-- **README.md** — project structure, 11-phase engine
-
-**If any file is missing from context:** Read it manually with the Read tool. If JOURNAL_RECENT.md is missing, read the last 3 entries from JOURNAL.md instead.
+**If running manually:** Read PERSISTENCE.md and JOURNAL_RECENT.md first, greet Mike, ask the workflow question, then proceed to the workflow load below.
 
 ---
 
-## Step 2: Search Supermemory
+## Workflow Load Reference
 
-```bash
-/super-search --both "recent changes project structure current work"
+Based on Mike's answer, read the specific files for that workflow. **Do not load files from other workflows** — keep context lean.
+
+### Media-Room
 ```
-
-This retrieves recent session decisions, work in progress, known issues, and user preferences.
-
-**Before major work**, search for relevant context:
-```bash
-# Before editions
-/super-search --both "Carmen Delaine Maria Keen past coverage characters"
-
-# Before engine work
-/super-search --both "architecture deployment engine patterns"
+Read: docs/mags-corliss/NEWSROOM_MEMORY.md
+Read: docs/mags-corliss/NOTES_TO_SELF.md
+Read: output/latest_edition_brief.md
+Read: editions/CYCLE_PULSE_TEMPLATE.md (if producing an edition)
 ```
+Search Supermemory: `"edition errata coverage patterns desk agent"`
+
+**What you'll update at session end:** NEWSROOM_MEMORY (errata, character continuity), NOTES_TO_SELF (story flags), edition brief (if published), ROLLOUT_PLAN (Next Session Priorities).
+
+### Research
+```
+Read: docs/mags-corliss/TECH_READING_ARCHIVE.md
+Read: docs/engine/ROLLOUT_PLAN.md
+```
+Search Supermemory: `"tech reading Claude features tools research"`
+
+**What you'll update at session end:** TECH_READING_ARCHIVE (new notes), ROLLOUT_PLAN (new buildable items discovered).
+
+### Build/Deploy
+```
+Read: SESSION_CONTEXT.md
+Read: docs/engine/ROLLOUT_PLAN.md
+```
+Search Supermemory: `"architecture engine deployment recent changes"`
+
+**What you'll update at session end:** SESSION_CONTEXT (engine versions, recent sessions), ROLLOUT_PLAN (phase status, Next Session Priorities).
+
+### Maintenance
+```
+Read: SESSION_CONTEXT.md
+Read: docs/engine/LEDGER_AUDIT.md
+Read: docs/engine/LEDGER_HEAT_MAP.md
+```
+Search Supermemory: `"ledger audit data integrity citizen census"`
+
+**What you'll update at session end:** LEDGER_AUDIT (audit results, decisions), SESSION_CONTEXT (if engines changed), DOCUMENTATION_LEDGER (if file structure changed).
+
+### Cycle Run
+```
+Read: SESSION_CONTEXT.md
+Read: docs/engine/ROLLOUT_PLAN.md
+```
+Then immediately run: `/pre-mortem` (engine health scan before cycle fires)
+
+Search Supermemory: `"cycle run engine pre-mortem recent issues"`
+
+**What you'll update at session end:** SESSION_CONTEXT (cycle number bump, recent sessions), ROLLOUT_PLAN (Next Session Priorities), NEWSROOM_MEMORY (if edition follows the cycle).
 
 ---
 
-## Step 3: Check Batch Results
+## Phase 4: Confirm Orientation
 
-```
-/batch check
-```
-
-Polls for finished batch jobs from previous sessions. Results at `~/.claude/batches/results/`.
-
----
-
-## Step 4: Task-Specific Documentation (AS NEEDED)
-
-Based on user request, read additional docs:
-
-### Engine Work
-- `docs/reference/V3_ARCHITECTURE.md` — Write-intents, caching, RNG, mode flags
-- `docs/engine/ENGINE_ROADMAP.md` — Implementation priorities
-- `docs/reference/GODWORLD_REFERENCE.md` — Complete system reference
-
-### Deployment
-- `docs/reference/DEPLOY.md` — clasp push vs git push
-
-### Media Room / Journalism
-- `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` — Editorial rules, voice, canon
-- `docs/media/AGENT_NEWSROOM.md` — Agent system overview
-- `docs/media/DESK_PACKET_PIPELINE.md` — Per-desk JSON packets
-
-### Mara Vance
-- `docs/mara-vance/OPERATING_MANUAL.md` — Authority & functions
-- `docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md` — Character prompt
-
-### Civic/Political
-- `phase05-citizens/civicInitiativeEngine.js` — Civic engine
-- `docs/engine/INITIATIVE_TRACKER_VOTER_LOGIC.md` — Voter logic
-
----
-
-## Step 5: Code Search (BEFORE BUILDING)
-
-Before writing new code, search for existing implementations:
-
-```bash
-Grep: pattern="feature_name" output_mode="files_with_matches"
-```
-
-Check directory structure, verify no duplication.
-
----
-
-## Step 6: Confirm Understanding
-
-1. **Summarize** current project state (cycle, recent changes, relevant code)
-2. **Ask clarifying questions** if anything is unclear
-3. **Propose approach** and get approval before writing code
+After loading workflow docs, give Mike a brief summary:
+1. **What I loaded** — list the files read (one line)
+2. **What I see** — key state from the loaded docs (2-3 bullets max)
+3. **Ready to work** — ask what's first, or propose based on the loaded context
 
 ---
 
 ## Anti-Patterns
 
-- Don't build without checking existing code
-- Don't confuse `git push` (GitHub) with `clasp push` (Apps Script)
-- Don't assume what the user wants — ask
-- Don't edit code without showing changes first
-- Remember: 100+ scripts with cascade dependencies
+- Don't load all docs regardless of workflow — that's the old boot
+- Don't skip Phase 2 — the question is what makes boot lean
+- Don't start working before Phase 4 confirmation
+- Don't assume which workflow — ask
+- If Mike gives a task directly without answering the workflow question, infer the workflow from the task and load accordingly
 
 ---
 
-## Session Start Checklist
-
-- [ ] Verify preloaded files are in context
-- [ ] Search Supermemory for recent context
-- [ ] Check for completed batch results
-- [ ] Search for existing code relevant to task
-- [ ] Confirm understanding with user
-- [ ] Get approval before writing code
-
----
-
-## Quick Commands
+## Quick Reference
 
 | Command | Purpose |
 |---------|---------|
-| `/session-startup` | This skill — verify + search + orient |
-| `/boot` | Reload identity files after compaction |
-| `/session-end` | Close session — journal, persistence, supermemory |
-| `/super-search` | Search memory |
-| `/super-save` | Save decisions to memory |
+| `/session-startup` | This skill — identity + route + load |
+| `/boot` | Post-compaction identity reload (Phase 1 only) |
+| `/session-end` | Close session — audit, journal, persist |
+| `/super-search` | Search memory mid-session |
 | `/batch [task]` | Submit work at 50% cost |

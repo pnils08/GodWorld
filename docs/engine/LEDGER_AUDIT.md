@@ -324,9 +324,11 @@ Brianna Wong→Kenji Okafor, Evan Lewis→Priya Marchetti, Jose Phillips→Tomá
 
 **Bare position codes (3):** POP-00124 RF→Sports Analytics Consultant, POP-00129 C→Youth Baseball Coach, POP-00555 CP→Athletic Training Specialist. All set to ClockMode ENGINE.
 
-### 8. MLB The Show Birth Year Review — DONE (S70)
+### 8. MLB The Show Birth Year Review — DONE (S72)
 
-Resolved by Phase 15.4: `scripts/integrateAthletes.js` corrected birth years for all 87 players from 2023-era to 2041 math. 5 retired players transitioned to post-career roles (S70/15.3). No longer an open item.
+Phase 15.4 (S70) ran `scripts/integrateAthletes.js` which reported 87 players updated. However, 38 players were silently skipped — the script's birth year logic fell back to preserving existing pre-2000 values when it couldn't compute new ones. Players like Sidney Tumolo (born 1970, age 71 in 2041) and Rich Barnett (born 1961, age 80) went undetected for 2 sessions.
+
+**S72 fix:** All 38 birth years corrected via direct service account writes (`lib/sheets.js` batchUpdate). 3 missing incomes also fixed. Post-write verification confirmed 658/658 clean against live sheet. This incident led to a new engine rule: no maintenance scripts for ledger work — use the service account directly. Verify live data after every write.
 
 ### 9. Rick Dillon Family Linkage — DONE (S69)
 
@@ -394,6 +396,8 @@ Remaining medium/low: ~27 items (orphaned ctx fields, structural drift, minor de
 | 2026-03-02 | "Piedmont Avenue" canonical form is "Piedmont Ave" | Reversed S68 direction (which went Ave→Avenue). Shorter form matches other neighborhoods. |
 | 2026-03-02 | Traded/Departed players → Retired | Not in Oakland = not active. Injured/Serious Condition → Active (still alive). |
 | 2026-03-02 | Rick Dillon age override: 10→25 | Child citizen given working age. Original family linkage preserved. |
+| 2026-03-02 | No maintenance scripts for ledger writes | integrateAthletes.js silently skipped 38 birth years. Direct service account writes are transparent — they work or they don't. |
+| 2026-03-02 | Verify live data after every write | Script output reported "87 updated" but 38 were unchanged. Always read back from live sheet to confirm. |
 
 ---
 

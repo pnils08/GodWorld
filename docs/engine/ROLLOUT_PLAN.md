@@ -9,6 +9,20 @@
 
 ---
 
+## Next Session Priorities
+
+Items that should be addressed in the next session. Updated at session end. Absorbs the old "INCOMING — Next Session" block from SESSION_CONTEXT.md.
+
+- **Franchise Ledger design** — Track how A's franchise impacts city economically. Review game logs + data feed first.
+- **Mara memory/structure overhaul (Phase 10.2)** — Plan exists at `.claude/plans/reactive-tickling-zephyr.md`
+- **Edition 85 production** — First edition with full economic data in desk packets
+- **September 8 Vega committee meeting** (cycle 89) — Stabilization Fund disbursement gate
+- **Dashboard next:** Agent/bot consumption of newsroom endpoint, Supermemory article integration
+- **GCP project linkage** — Wire GCP project to Apps Script for `clasp run` from CLI
+- **Apps Script one-time runs:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (deployed, need one-time run)
+
+---
+
 ## Phase 1: Edition Pipeline Speed + Safety — COMPLETE (S55)
 
 ✓ 1.1 Parallel Desk Agents, 1.2 Pre-Commit Code Check, 1.3 Automated Rhea Retry Loop. Details in ROLLOUT_ARCHIVE.md.

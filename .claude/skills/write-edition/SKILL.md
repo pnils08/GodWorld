@@ -209,6 +209,75 @@ Example:
 
 Write these as Mags — with editorial authority, personal warmth, and specific guidance. These are not templates. They're memos from the Editor-in-Chief to her reporters.
 
+## Step 1.6: Launch Initiative Agents (Phase 15)
+
+Before voice agents, run the civic project initiative agents. These agents make autonomous decisions about their programs and produce civic documents that voice agents and desk agents can react to.
+
+### Step 1.6a: Generate Initiative Packets
+
+```bash
+node scripts/buildInitiativePackets.js {cycle}
+```
+
+Produces 5 per-initiative JSON packets to `output/initiative-packets/`:
+- `stabilization_fund_c{XX}.json` — OEWD Stabilization Fund ($28M)
+- `oari_c{XX}.json` — Oakland Alternative Response Initiative ($12.5M)
+- `transit_hub_c{XX}.json` — Fruitvale Transit Hub Phase II ($230M)
+- `health_center_c{XX}.json` — Temescal Community Health Center ($45M)
+- `baylight_c{XX}.json` — Baylight District ($2.1B)
+
+**Verify:** Check `output/initiative-packets/manifest.json` — confirms cycle number, initiative status, citizen counts.
+
+### Step 1.6b: Launch 5 Initiative Agents (Parallel)
+
+Launch all 5 initiative agents in parallel using the Agent tool. Each reads its packet + memory file, makes decisions, writes civic documents, and updates its memory.
+
+```
+Agent: civic-project-stabilization-fund (haiku)
+  Prompt: "Read your memory file at .claude/agent-memory/stabilization-fund/MEMORY.md,
+           then read your initiative packet at output/initiative-packets/stabilization_fund_c{XX}.json.
+           Execute your cycle {XX} work per your SKILL.md instructions."
+
+Agent: civic-project-oari (haiku)
+  Prompt: [same pattern with oari paths]
+
+Agent: civic-project-transit-hub (haiku)
+  Prompt: [same pattern with transit-hub paths]
+
+Agent: civic-project-health-center (haiku)
+  Prompt: [same pattern with health-center paths]
+
+Agent: civic-office-baylight-authority (haiku)
+  Prompt: "Read your memory file at .claude/agent-memory/baylight-authority/MEMORY.md,
+           then read your initiative packet at output/initiative-packets/baylight_c{XX}.json,
+           then read your civic voice packet at output/civic-voice-packets/baylight_authority_c{XX}.json.
+           Execute your cycle {XX} work per your SKILL.md instructions — produce BOTH voice statements AND civic documents."
+```
+
+**If any agent fails, the rest continue.** Initiative agents are additive — a failed agent means one initiative doesn't advance this cycle, not a pipeline failure.
+
+### Step 1.6c: Verify Initiative Agent Output
+
+After agents complete, verify:
+1. Check `output/civic-documents/{initiative}/decisions_c{XX}.json` exists for each agent
+2. Check that documents were produced (`.md` files in the same directory)
+3. Log which initiatives advanced and which didn't
+
+The decisions JSON files and civic documents are now available for:
+- **Voice agents (Step 1.8)** — Mayor and factions can react to initiative decisions
+- **Desk agents (Step 2+)** — Reporters can write about what happened
+- **Drive upload** — Documents with `driveUploads` arrays will be filed to City_Civic_Database
+
+### Step 1.6d: Upload Civic Documents to Drive
+
+For each initiative agent that produced documents with `driveUploads` in their decisions JSON:
+
+```bash
+node scripts/saveToDrive.js output/civic-documents/{initiative}/{filename} civic
+```
+
+---
+
 ## Step 1.7: Generate Civic Voice Packets
 
 Before launching voice agents, generate jurisdiction-specific data packets from the Google Sheets:

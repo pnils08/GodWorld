@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-03 | Engine: v3.1 | Cycle: 85 | Session: 75
+Last Updated: 2026-03-04 | Engine: v3.1 | Cycle: 85 | Session: 78
 
 ---
 
@@ -48,6 +48,8 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
 | Desk Packet Builder | scripts/buildDeskPackets.js | v2.1 | Per-desk JSON packets, dollar-amount economic buckets, business snapshots, employer-enriched candidates |
 | Citizen-Employer Linkage | scripts/linkCitizensToEmployers.js | v1.0 | Five-layer resolution, Employment_Roster, Business_Ledger stats |
+| Initiative Packet Builder | scripts/buildInitiativePackets.js | v1.0 | Per-initiative JSON packets from 7 Sheets tabs + Mara directive, 5 packets + manifest |
+| Civic Voice Packets | scripts/buildCivicVoicePackets.js | v1.1 | 7 office/faction voice packets + initiative decisions injection |
 | Neighborhood Economics | scripts/aggregateNeighborhoodEconomics.js | v1.0 | Median income/rent by neighborhood from citizen data |
 | Economic Profile Seeder | scripts/applyEconomicProfiles.js | v1.0 | Role-based income seeding from economic_parameters.json |
 | Player Index Builder | scripts/buildPlayerIndex.js | v2.0 | TrueSource parser: contracts, quirks, status, computed birth years |
@@ -164,6 +166,24 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 78 (2026-03-04) — Build: Phase 18 Civic Project Agents (Complete)
+
+- **Phase 18 built in 1 session:** 4 new initiative agents + 1 upgrade + pipeline integration. The core problem from S77 (initiatives don't advance) now has a structural solution — agents that make autonomous decisions and produce civic documents.
+- **5 initiative agents:** Stabilization Fund (Marcus Webb), OARI (Dr. Vanessa Tran-Muñoz), Transit Hub (Elena Soria Dominguez), Health Center (Bobby Chen-Ramirez), Baylight Authority (Keisha Ramos, upgraded). All have Write/Edit tools, 15-turn budgets, persistent memory.
+- **Pipeline integration:** Step 1.6 inserted into write-edition pipeline. `buildInitiativePackets.js` creates per-initiative data packets. Initiative agents run before voice agents. `buildCivicVoicePackets.js` loads initiative decisions and injects them into all 7 voice packets.
+- **City_Civic_Database:** Google Drive folder created by Mike. `saveToDrive.js` updated with `civic` destination. Initiative agents file documents here.
+- **Batch personas:** `msgbatch_0139XNUsrqpPRG7FfssL4Zob` produced 5 detailed character profiles. Larry Okafor-Williams (Port Green) preserved for when INIT-004 activates.
+- **Orphaned file deleted:** `lib/fishAudio.js` removed (S77 cleanup).
+- **Next:** Test standalone agent with C86 packet, then full cycle run.
+
+### Session 77 (2026-03-03) — Build: Fish Audio TTS (Abandoned) + Beverly Hayes + Arc Resolution Identified
+
+- **Fish Audio TTS attempted and abandoned:** Full implementation built (lib/fishAudio.js, renderPodcast.js rewrite, podcast_voices.yaml restructure). Discovered $11/month subscription required for API access. Cost rejected — $150/year for 26 podcasts vs $12/month for entire DigitalOcean server. All changes reverted via `git checkout`. Existing Podcastfy + WaveNet pipeline restored.
+- **Orphaned file:** `lib/fishAudio.js` created but not reverted — needs manual deletion.
+- **Beverly Hayes added:** POP-00772, West Oakland, Home Health Aide, age 58, Tier 3, Stabilization Fund applicant. 659 total citizens. Was a C86 blocker.
+- **Arc resolution identified as #1 priority:** The civic initiative engine has no resolution mechanics. Initiatives go SEED → ACTIVE and stay ACTIVE indefinitely. Every edition reads like nothing moves because the engine generates stasis. This is the core build work — the world needs to advance storylines.
+- **Session errors:** Pipeline overwritten before pricing validated, git checkout commands missing cd prefix, Beverly Hayes ledger entry had column name mismatches (FirstName vs First). All resolved by session end.
+
 ### Session 75 (2026-03-03) — Edition 85 Production + Podcast
 
 - **Edition 85 published:** 18 articles + 4 letters across 6 desks. Carmen Delaine front page ("The Filing Cabinet That Isn't Moving"). Mara Vance formal document requests as editorial spine. Full civic voice pipeline — 6 voice agents generating source material for the first time.
@@ -184,6 +204,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Communication Hub sheet:** `1LcgKRnq2S7lg53irurt6MkVB84OOMhOJ4Ig2nsb218s` — 6 tabs (Dashboard, Skills & Commands, Agent Roster, Upgrade Guide, Git & Deploy, Credentials Reference). Stack health monitoring. Async Mike/Mags notes. ENV var: `COMM_HUB_SHEET_ID`.
 - **Credentials consolidated:** .env expanded from 11→16 variables (added GitHub token, Apps Script API key, DigitalOcean, server IP, Comm Hub sheet ID).
 
+### Session 76 (2026-03-03) — Research: Claude Code Docs Deep Dive + Plugin Install
+
+- **7 plugins installed:** claude-md-management (CLAUDE.md auditor), github (MCP server), commit-commands (git workflows), pr-review-toolkit (PR review agents), playwright (headless browser testing), code-review (code review skill), typescript-lsp (real-time type checking). All user scope, active next session.
+- **Claude-mem upgraded:** 10.4.0 → 10.5.2. Smart Explore (11-18x token savings), hook crash fix, save_observation cleanup. Stale 10.4.0/10.4.1 caches cleared to fix ghost Stop hook errors.
+- **TypeScript language server installed:** v5.1.3 globally for LSP plugin.
+- **Rollout plan expanded:** 7.8 (plugins), 7.9 (remote control — tested, not yet enabled on Max), 7.10 (cloud sessions via --remote), 12.4 completed (claude-mem upgrade), 12.10 (Ming-Omni-TTS podcast voices), 12.11 (MiniMax M2.5 cheap desk agents), 12.12 (Slack integration). Watch List added.
+- **Agent Teams decision:** Test on podcast desk first (non-canon safe). Phase 7.6 updated.
+- **Research noted:** Ming-Omni-TTS (podcast voice upgrade, 0.5B model), MiniMax M2.5 ($0.30/M input, SWE-Bench 80.2%), GPT-5.3-Codex on DigitalOcean, Gemini 3.1 Pro benchmarks.
+- **Chrome extension:** Still disconnected. Native messaging host file issue. `/chrome` recommended for next session.
+- **Remote Control:** `claude remote-control` returns "not yet enabled" despite Max plan. Gradual rollout.
+
 ### Session 72 (2026-03-02) — Phase 12.5: Business Ledger Full Engine Integration (Complete)
 
 - **Career Engine v2.4:** `runCareerEngine.js` now updates EmployerBizId on all career transitions. Layoffs clear BIZ-ID, sector shifts and lateral moves resolve new BIZ-IDs from `INDUSTRY_BIZ_POOL` (4 industry pools mapped to 30 actual BIZ-IDs). Same-company avoidance on laterals. Self-employed citizens protected. Emits `careerSignals.businessDeltas` — per-business gained/lost counts for downstream processing.
@@ -196,22 +227,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **System cleanup:** 26 stale plan files purged, npm cache cleaned (1.2GB reclaimed), 11 apt packages upgraded (kernel 6.8.0-101), Claude-Mem model setting fixed (sonnet-4-5→sonnet-4-6), logs rotated, stale session notes cleaned.
 - **New engine rule:** No maintenance scripts for ledger work — use service account directly. Verify live data after every write.
 
-### Session 71 (2026-03-01) — Phase 16: Citizen Ledger Consolidation (Complete)
-
-- **Faith Leaders:** `scripts/integrateFaithLeaders.js` v1.0 — 16 faith leaders from Faith_Organizations added to Simulation_Ledger as Tier 2 (POP-00753–POP-00768). Protestant, Baptist, Catholic, Methodist, Pentecostal, Reform Jewish, Orthodox Jewish, Muslim, Buddhist, Hindu, Sikh, Jewish Renewal, Unitarian. LeaderPOPID column added to Faith_Organizations and backfilled. Larry Yang (lay teacher) mapped to Community Organizer; all others Senior Pastor / Faith Leader.
-- **Generic_Citizens Audit:** `scripts/auditGenericCitizens.js` v1.0 — 268 Generic_Citizens audited. All 11 emerged citizens confirmed on SL (zero gaps). Emergence engine healthy. Recommendation: keep as-is, defer 2041 occupation vocabulary upgrade.
-- **Celebrity Bridge:** `scripts/integrateCelebrities.js` v1.0 — 9 qualifying celebrities (FameScore 65+, National/Iconic/Global). 6 already on SL from prior emergence. 3 new: Dax Monroe (Iconic athlete, POP-00769, T2), Kato Rivers (National athlete, POP-00770, T3), Sage Vienta (Global actor, POP-00771, T2). UniverseLinks backfilled on Cultural_Ledger for all 9. 21 stay Cultural_Ledger only.
-- **Census:** 639 → 658 citizens (16 faith + 3 celebrity).
-
-### Session 70 (2026-03-01) — Phase 15: A's Player Integration (Complete)
-
-- **Player Index Upgrade:** `buildPlayerIndex.js` v2.0 — Added contract parsing ($28.2M/$7.1M/$780K formats), quirk extraction ("Outlier I • Night Player"), status detection (retired/FA/active), computed birth years (2041 - TrueSource age). 55 players indexed, 37 with parsed contracts, 8 with quirks.
-- **Athlete Config:** `data/athlete_config.json` — Salary tiers (MLB_SUPERSTAR $15M+/WL10 down to MINOR_SIGNING/WL4), 14 quirk-to-trait mappings, 13 position defaults, post-career role pools, tier visibility weights.
-- **Ledger Prep:** Mark Aitken consolidated to POP-00003 (Tier 1, Player Rep + Community Liaison). Buford Park canonical at POP-00059. 6 POP-IDs backfilled with civilians (Elena Vásquez, Derek Simmons/A's Marketing Director, Tomas Aguilar, Priya Nair, Marcus Whitfield, Lisa Tanaka). 4 Bulls players replaced. 5 farewell season retirees set to Retired status with corrected birth years.
-- **Full Integration:** 87 players updated — birth years from 2023-era to 2041 math, incomes from $30-48K placeholders to real contracts ($750K-$37.8M) or tier fallbacks ($55K minor/$750K MLB/$250K retired). TraitProfile generated for all 87. 4 retired players transitioned to post-career roles (Scout, Pitching Coach, Broadcasting Analyst). Role mapping expanded to 288 entries. 408 total cell writes.
-- **Deferred:** Engine flavor integration (generateGameModeMicroEvents.js, buildEveningFamous.js) — ship after data proves stable through cycles.
-
-*Sessions 1-70: see `docs/mags-corliss/SESSION_HISTORY.md`*
+*Sessions 1-71: see `docs/mags-corliss/SESSION_HISTORY.md`*
 
 ---
 

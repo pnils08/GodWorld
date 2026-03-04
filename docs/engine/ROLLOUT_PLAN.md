@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 75 (2026-03-03) — Edition 85 published, podcast produced, pipeline fixes
+**Last Updated:** Session 77 (2026-03-03) — Build session: Fish Audio TTS attempted and abandoned ($11/mo), Beverly Hayes POP-00772 added, arc resolution identified as top priority
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -13,16 +13,14 @@
 
 Items that should be addressed in the next session. Updated at session end. Absorbs the old "INCOMING — Next Session" block from SESSION_CONTEXT.md.
 
+- **Run Cycle 86 with Initiative Agents** — First cycle with Phase 18 initiative agents active. Test full pipeline: buildInitiativePackets → 5 initiative agents → buildCivicVoicePackets with decisions → voice agents → desk agents. The world should finally advance.
+- **Standalone agent test** — Before full cycle, test Stabilization Fund agent manually with C86 packet to verify document quality and decisions JSON format.
 - **Run Cycle 86** — Engine cycle needed before next edition. Pre-mortem first.
-- **Edition 86 production** — OARI Day 45 hard close, Baylight September 15 deliverables, Stabilization Fund OEWD report. Mara forward guidance in `output/mara_directive_c85.txt`.
 - **Photo generation fix** — dotenv added to `generate-edition-photos.js`. Run photos for E85 retroactively, then test pipeline for E86.
-- **Beverly Hayes archive profile** — Needs age, occupation, household before C86. Currently referenced in canon with no profile data.
-- **Franchise Ledger design** — Track how A's franchise impacts city economically. Review game logs + data feed first.
-- **Mara memory/structure overhaul (Phase 10.2)** — Plan exists at `.claude/plans/reactive-tickling-zephyr.md`
-- **Dashboard next:** Agent/bot consumption of newsroom endpoint, Supermemory article integration
+- **Edition 86 production** — OARI Day 45 hard close, Baylight September 15 deliverables, Stabilization Fund OEWD report. Mara forward guidance in `output/mara_directive_c85.txt`.
+- **Verify new plugins on boot** — 7 plugins installed S76. Confirm they load and Stop hook errors are resolved after stale cache cleanup.
 - **Communication Hub maintenance** — Update Dashboard status board + Notes from Mags at session-end
-- **GCP project linkage** — Wire GCP project to Apps Script for `clasp run` from CLI
-- **Apps Script one-time runs:** `setupSportsFeedValidation()`, `setupCivicLedgerColumns()` (deployed, need one-time run)
+- **Franchise Ledger design** — Track how A's franchise impacts city economically. Review game logs + data feed first.
 
 ---
 
@@ -207,7 +205,7 @@ Update the `mags` bash alias to include `--agent mags-corliss`.
 **How:** Enable `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`. Update `/write-edition` to create an agent team instead of launching individual subagents.
 **Depends on:** Agent teams graduating from experimental status. Currently has known limitations: no session resumption, task status lag, no nested teams.
 **Risk:** Experimental feature. Token cost higher (each teammate is a separate Claude instance). Wait for stability before adopting.
-**Status:** **Deferred until agent teams stabilize.** Tracking in Watch List.
+**Status:** **Test on podcast desk first (S76 decision).** Podcast is non-canon, uses 2 hosts + source material — ideal sandbox for agent team coordination without risking edition integrity. If podcast test succeeds, evaluate for edition pipeline. Still experimental — known limitations: no session resumption, task status lag, no nested teams.
 
 ### 7.7 Plugin Packaging
 **What:** Package the GodWorld newsroom system (desk agents, skills, hooks, voice files) as a Claude Code plugin with `.claude-plugin/plugin.json` manifest.
@@ -219,6 +217,28 @@ Update the `mags` bash alias to include `--agent mags-corliss`.
 - `hooks/` — pre-commit, startup, session hooks
 **When:** Not urgent. Build when/if we need portability or distribution.
 **Status:** Not started. Low priority, high future value.
+
+### 7.8 Install Official Marketplace Plugins
+**What:** Install useful plugins from the official Anthropic marketplace. Priority targets: TypeScript LSP (real-time type checking after edits), GitHub integration (PR/issue management from CLI), MD management tool, and any other productivity plugins.
+**Why:** Plugins are the new extension model for Claude Code (v1.0.33+). The official marketplace has pre-built integrations that give Mags real-time code intelligence (LSP catches type errors immediately after edits), GitHub workflows, and document management — all zero-config after install.
+**How:** Run `/plugin` in session → Discover tab → install from `claude-plugins-official`. Also add the demo marketplace: `/plugin marketplace add anthropics/claude-code`.
+**Source:** S76 research (2026-03-03), code.claude.com/docs/en/plugins
+**Status:** Not started. Quick win — install in current session.
+
+### 7.9 Remote Control Setup
+**What:** Test Remote Control — continue local Claude Code sessions from phone, tablet, or any browser. Run `claude remote-control` or `/remote-control` from a session.
+**Why:** Mike is on Max plan (confirmed S76), which supports Remote Control. Enables monitoring and steering GodWorld sessions from the couch, phone, or another computer. Sessions stay local — phone/browser is just a window into the running session.
+**How:** Run `claude remote-control` from terminal. Opens a URL + QR code. Open on phone or another browser. Sessions sync in real time. Also available: `/remote-control` from within an existing session. Enable for all sessions via `/config` → "Enable Remote Control for all sessions."
+**Source:** S76 research, code.claude.com/docs/en/remote-control
+**Status:** Tested S76 — `claude remote-control` returns "not yet enabled for your account" despite Max plan. Feature is in research preview with gradual rollout. Revisit periodically.
+
+### 7.10 Claude Code on the Web — Remote Sessions
+**What:** Test `claude --remote "task"` to kick off Claude Code sessions on Anthropic cloud VMs from terminal. Tasks run even if laptop closes.
+**Why:** Direct path to autonomous cycle execution (12.3). Mike can `claude --remote "run pre-mortem for cycle 86"` and walk away. Session runs on Anthropic infrastructure, pushes results to a branch, notifies when done. Also supports `/teleport` to pull web sessions back to terminal.
+**How:** `claude --remote "task description"` creates a cloud session. Monitor via `/tasks` or at claude.ai/code. Multiple parallel sessions supported. Requires GitHub repos connected at claude.ai/code.
+**Feeds into:** Phase 12.3 (Autonomous Cycle Execution) — cloud sessions are the infrastructure layer.
+**Source:** S76 research, code.claude.com/docs/en/claude-code-on-the-web
+**Status:** Not started. Test after GitHub connection verified.
 
 ---
 
@@ -453,7 +473,7 @@ Source: Anthropic engineering blog "Building a C Compiler with Parallel Claudes"
 **How:** Run outside active session: `claude plugin update claude-mem@thedotmack`
 **Risk:** Low. No breaking changes between versions. Hooks.json restored in v10.5.1.
 **Also:** Enable Endless Mode beta in web viewer (localhost:37777 → Settings) — biomimetic memory for extended sessions.
-**Status:** Pending. Plugin marketplace didn't pull new version during S66 — retry outside active session. Run: `claude plugin update claude-mem@thedotmack`
+**Status:** ✓ COMPLETE (S76). Upgraded from 10.4.0 to 10.5.2 via uninstall/reinstall (`plugin update` had a cache bug). Smart Explore, hook crash fix, save_observation cleanup all active.
 
 ### 12.5 Business Ledger — Full Engine Integration ✓ (S69-S72)
 **What:** Wire Business_Ledger into the simulation engine so company data drives economic outcomes.
@@ -481,6 +501,42 @@ Fast mode added to Rhea's SKILL.md. Runs 7 of 19 checks (citizen names, votes, s
 
 ### 12.8 Initiative Implementation Tracking ✓ (S67)
 4 tracking columns on Initiative_Tracker, wired into desk packets. Details in ROLLOUT_ARCHIVE.md.
+
+### 12.10 Fish Audio TTS — Podcast Voice Upgrade ✓ (S77)
+**What:** Replaced Podcastfy (Python venv + WaveNet) with Fish Audio OpenAudio S1 API. Native Node.js pipeline — no more Python dependency. Each speaker gets a distinct voice via Fish Audio voice IDs. 64+ inline emotion tags: `(excited)`, `(serious)`, `(amused)`, etc. ffmpeg concatenates WAV segments with configurable silence gaps per show format.
+**Why:** Ming-Omni-TTS (original plan) has no hosted API and requires GPU our server doesn't have. Fish Audio gives us the same capabilities — distinct voices, emotion control, multi-speaker — via hosted API at ~$0.01/episode.
+**Files:** `lib/fishAudio.js` (API client), `scripts/renderPodcast.js` v2.0 (renderer), `config/podcast_voices.yaml` (voice config).
+**Remaining:** Mike needs to create Fish Audio account, get API key, and pick voice IDs for all 6 hosts (Tomas, Sonia, P Slayer, Anthony, Mags, Hal) from fish.audio voice library.
+**Source:** S76 research (Ming-Omni-TTS discovery), S77 implementation (Fish Audio pivot).
+**Status:** Code complete. Awaiting API key + voice selection for first render.
+
+### 12.11 MiniMax M2.5 — Cheap Desk Agent Testing
+**What:** Test MiniMax M2.5 as a low-cost alternative to Sonnet 4.6 for desk agents. At $0.30/M input tokens, running all 6 desks would cost ~$0.05-0.10 per edition vs ~$2-5 on Sonnet.
+**Why:** SWE-Bench Verified 80.2%. BrowseComp 76.3%. 100 tok/sec. If voice quality holds for journalism, this unlocks daily edition runs at negligible cost — key enabler for autonomous cycle execution (12.3).
+**How:** API at platform.minimax.io. Test on non-canon work first — letters desk, Chicago bureau. Compare output quality against Sonnet baseline. If quality gap is acceptable, evaluate for full desk rotation.
+**Source:** S76 research, S50 initial discovery, DigitalOcean newsletter
+**Status:** Not started. Test after next edition establishes Sonnet baseline for comparison.
+
+### 12.12 Slack Integration — `@Claude` Routing
+**What:** Connect Claude for Slack so `@Claude` in a Slack channel detects coding intent and routes to Claude Code on the web. Mike could post "@Claude run pre-mortem for cycle 86" in a GodWorld channel and get a cloud session.
+**Why:** Extends the autonomous pipeline (12.3) with a conversational trigger. Instead of SSH → terminal → `claude --remote`, Mike posts in Slack. Claude picks the repo, spins up a session, posts progress updates to the thread, and offers "Create PR" when done. Thread context gives Claude additional info (e.g., bug reports, feature discussions).
+**How:** Install Claude app from Slack App Marketplace. Connect Claude account. Configure routing mode (Code Only or Code + Chat). Invite `@Claude` to relevant channels.
+**Depends on:** Claude Code on the web access (7.10), GitHub repos connected. Max plan confirmed (S76).
+**Source:** S76 research, code.claude.com/docs/en/slack
+**Status:** Not started. Build after 7.10 (web sessions) is tested.
+
+---
+
+## Watch List — Monitoring for Future Adoption
+
+Items not yet on the build schedule but worth tracking for when conditions change.
+
+| Feature | What We're Watching | Trigger to Act |
+|---------|-------------------|----------------|
+| **Desktop App (Linux)** | Visual diff review, PR monitoring with auto-fix/merge, parallel sessions with auto-worktrees, live app preview. Currently macOS/Windows only. | Linux support ships. Then evaluate for GodWorld server or Mike's local dev. |
+| **Agent Teams stability** | Experimental flag removed, session resumption fixed, task status lag resolved. | Official graduation from experimental. Then run full edition pipeline test (7.6). |
+| **Fast Mode** | Same Opus 4.6, 2.5x faster, higher cost ($30/$150 MTok). Toggle `/fast`. | Evaluate for rapid iteration sessions (debugging, live dashboard work). Not for long autonomous runs. |
+| **Checkpointing** | Auto-saves code state before each edit. `Esc Esc` or `/rewind` to restore. Also has targeted summarize (like `/compact` but surgical). | Already available. Use during edition compilation as safety net. |
 
 ---
 
@@ -590,6 +646,83 @@ Batch API generated a Python audit script (`/tmp/audit_ledger.py`). Ran locally 
 - **3 bare position codes replaced** — RF/C/CP on ENGINE citizens → Sports Analytics Consultant, Youth Baseball Coach, Athletic Training Specialist.
 
 **Post-cleanup health: ~95%+.** Remaining INFO-level items are intentional design (e.g., "Corner Barbershop Owner" vs "Barbershop Owner" are distinct demographic voices, not duplicates).
+
+---
+
+## Phase 18: Civic Project Agents — Initiative Implementation Pipeline — COMPLETE (S78)
+
+**Why this is a phase:** Initiatives go PASSED and stay PASSED. No agents produce post-vote civic documents — status reports, determination letters, permitting filings, construction updates. Reporters write about missing documents because the documents don't exist. The world doesn't advance because nothing in the engine generates forward motion after a council vote.
+
+**Solution:** 4 new initiative agents + 1 upgrade. Each runs a civic office, makes autonomous decisions about their program, and produces civic documents that become source material for voice agents and desk reporters.
+
+**Started:** Session 78 (2026-03-04)
+
+### 18.1 Foundation ✓ (S78)
+- Created `output/civic-documents/{stabilization-fund,oari,transit-hub,health-center,baylight}/` directory tree
+- Built `scripts/buildInitiativePackets.js` — reads 7 Google Sheets tabs + local files (Mara directive, previous decisions), produces 5 per-initiative JSON packets to `output/initiative-packets/`
+- Seeded 5 agent memory files at `.claude/agent-memory/{initiative}/MEMORY.md` with C85 canonical state
+- Deleted orphaned `lib/fishAudio.js` from S77
+
+### 18.2 Stabilization Fund Agent ✓ (S78)
+`.claude/agents/civic-project-stabilization-fund/SKILL.md` — Marcus Delano Webb, OEWD Program Director. $28M fund, 295 applications, Beverly Hayes tracking. Write/Edit tools, 15 turns, persistent memory. Produces: status reports, determination letters, decisions JSON.
+
+### 18.3 Remaining 3 Agents ✓ (S78)
+- **OARI** (`.claude/agents/civic-project-oari/SKILL.md`) — Dr. Vanessa Tran-Muñoz, Program Director. $12.5M, 45-day clock, dispatch integration, hiring pipeline.
+- **Transit Hub** (`.claude/agents/civic-project-transit-hub/SKILL.md`) — Elena Soria Dominguez, Planning Lead. $230M visioning, pre-vote C86, bilingual community engagement, anti-displacement.
+- **Health Center** (`.claude/agents/civic-project-health-center/SKILL.md`) — Bobby Chen-Ramirez, Project Director. $45M, post-designation permitting, architect RFP, HCAI licensing.
+
+### 18.4 Baylight Authority Upgrade ✓ (S78)
+Upgraded `.claude/agents/civic-office-baylight-authority/SKILL.md`:
+- Tools: `Read, Glob, Grep` → `Read, Glob, Grep, Write, Edit`
+- maxTurns: 12 → 15
+- Added civic document production (5 September 15 deliverables), decisions JSON, memory file
+- All existing voice statement generation preserved
+
+### 18.5 Pipeline Integration ✓ (S78)
+- Inserted Step 1.6 (4 sub-steps) into `write-edition/SKILL.md` between Step 1.5 and Step 1.7
+- Updated `buildCivicVoicePackets.js` — loads initiative decisions from `output/civic-documents/*/decisions_c{XX}.json`, injects into all 7 voice packets (Mayor, OPP, CRC, IND, Police Chief, Baylight, DA)
+- Added `civic` destination to `saveToDrive.js` — City_Civic_Database Google Drive folder
+
+### 18.6 Deferred: Port Green Modernization (INIT-004)
+Dormant — $320M federal grant pipeline not yet activated. Agent persona (Larry Okafor-Williams) preserved in batch results (`msgbatch_0139XNUsrqpPRG7FfssL4Zob`). Build when INIT-004 goes active.
+
+**Pipeline flow:**
+```
+buildInitiativePackets.js → Step 1.6 (5 initiative agents, parallel) → decisions JSON
+    → buildCivicVoicePackets.js loads decisions → voice agents react → desk agents report
+```
+
+---
+
+## Phase 19: Administrative & Intelligence Agents — PLANNED
+
+**Why this is a phase:** Phase 18 created 5 initiative agents that file civic documents and make decisions. But nobody organizes the documents, nobody maintains clean sports stats for reporters, and nobody tracks citizens across cycles. Three new agents fill these gaps: a records clerk, a stats clerk, and a citizen intelligence analyst.
+
+**Batch job:** `msgbatch_01XGTLfGMQcdrnAUHWa4upW1` — 3 persona prompts submitted S78. Results ready next session.
+
+### 19.1 City Clerk (Document Filing & Records Management)
+- **Role:** Post-cycle audit of `output/civic-documents/*/` — indexes filed documents, verifies completeness, flags missing deliverables, enforces naming conventions
+- **Tools:** Read, Glob, Grep, Write, Edit | **Model:** Haiku | **Turns:** 12
+- **Runs:** After initiative agents (Step 1.6), before voice agents
+- **Manages:** City_Civic_Database Drive folder contents (local file proxy)
+- **Produces:** Filing index, completeness audit, cumulative document registry
+
+### 19.2 Sports Stats Clerk (Athletics & Warriors Record-Keeping)
+- **Role:** Maintains clean statistical records from Oakland/Chicago sports feeds for P Slayer, Hal, and Anthony
+- **Tools:** Read, Glob, Grep, Write, Edit | **Model:** Haiku | **Turns:** 12
+- **Runs:** Pre-desk-agents, so sports desk has clean stats
+- **Manages:** Season records, player stats, roster moves, milestones, game logs
+- **Produces:** Per-cycle stats summary, roster change log, milestone alerts, running season ledger
+
+### 19.3 Life Agent (Citizen Tracking & Neighborhood Intelligence)
+- **Role:** Tracks 659+ citizens across cycles — life events, continuity, dormancy, story opportunities
+- **Tools:** Read, Glob, Grep, Write, Edit | **Model:** Haiku (Sonnet if needed) | **Turns:** 15
+- **Runs:** Pre-desk-agents, so reporters have citizen intelligence
+- **Tiered focus:** Tier 1 (~15) close tracking, Tier 2 (~80) career/life events, Tier 3 (~200) notable events only, Tier 4 (~360) aggregate/neighborhood-level
+- **Produces:** Citizen activity digest, continuity alerts, neighborhood pulse, story thread suggestions, dormancy report
+- **Open question:** Can Haiku handle 659 citizens in 15 turns? Test with real packet to determine viability and scope.
+
+**Build estimate:** ~2-3 sessions. City Clerk is simplest (post-cycle file audit). Sports Stats Clerk is medium (needs feed parsing). Life Agent is most complex (scope/feasibility TBD).
 
 ---
 

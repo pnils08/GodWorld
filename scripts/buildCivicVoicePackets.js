@@ -256,10 +256,10 @@ function buildFactionPacket(factionId, opts) {
   const {
     councilMembers, initiatives, neighborhoodMetrics, crimeMetrics,
     transitMetrics, citizenSummary, lifeEvents, faithOrgs,
-    worldEvents, worldPopulation, districtMap
+    worldEvents, worldPopulation, districtMap, initiativeDecisions
   } = opts;
 
-  return {
+  const packet = {
     meta: {
       type: 'civic-voice-packet',
       office: factionId,
@@ -285,16 +285,23 @@ function buildFactionPacket(factionId, opts) {
       events: worldEvents
     }
   };
+
+  // Phase 15: Include initiative agent decisions so faction agents can react
+  if (initiativeDecisions) {
+    packet.initiativeDecisions = initiativeDecisions;
+  }
+
+  return packet;
 }
 
 function buildOfficePacket(officeId, opts) {
   const {
     officials, initiatives, neighborhoodMetrics, crimeMetrics,
     transitMetrics, citizenSummary, lifeEvents, faithOrgs,
-    worldEvents, worldPopulation, domainEvents
+    worldEvents, worldPopulation, domainEvents, initiativeDecisions
   } = opts;
 
-  return {
+  const packet = {
     meta: {
       type: 'civic-voice-packet',
       office: officeId,
@@ -316,6 +323,13 @@ function buildOfficePacket(officeId, opts) {
       events: worldEvents
     }
   };
+
+  // Phase 15: Include initiative agent decisions so voice agents can react
+  if (initiativeDecisions) {
+    packet.initiativeDecisions = initiativeDecisions;
+  }
+
+  return packet;
 }
 
 // ─── MAIN ─────────────────────────────────────────────────
@@ -488,6 +502,27 @@ async function main() {
 
   const manifest = { cycle: CYCLE, packets: {} };
 
+  // ── Load initiative agent decisions (Phase 15) ──
+  // Initiative agents run before voice agents. Their decisions inform political reactions.
+  const INITIATIVE_DIRS = ['stabilization-fund', 'oari', 'transit-hub', 'health-center', 'baylight'];
+  const initiativeDecisions = {};
+  for (const dir of INITIATIVE_DIRS) {
+    const decPath = path.join(PROJECT_ROOT, `output/civic-documents/${dir}/decisions_c${CYCLE}.json`);
+    try {
+      initiativeDecisions[dir] = JSON.parse(fs.readFileSync(decPath, 'utf-8'));
+      console.log(`  Initiative decisions (${dir}): loaded`);
+    } catch {
+      // No decisions for this cycle — initiative agent may not have run yet
+    }
+  }
+  const hasInitiativeData = Object.keys(initiativeDecisions).length > 0;
+  if (hasInitiativeData) {
+    console.log(`  ${Object.keys(initiativeDecisions).length} initiative decision files loaded`);
+  } else {
+    console.log('  No initiative decisions found (initiative agents may not have run yet)');
+  }
+  console.log('');
+
   // ════════════════════════════════════════════════════════════
   // MAYOR'S OFFICE
   // ════════════════════════════════════════════════════════════
@@ -504,6 +539,7 @@ async function main() {
   const mayorPacket = buildOfficePacket('mayor', {
     officials: mayorOfficials,
     initiatives: getRelevantInitiatives(initiatives, () => true), // Mayor sees all
+    initiativeDecisions: hasInitiativeData ? initiativeDecisions : null, // Phase 15: all initiative decisions
     neighborhoodMetrics: aggregateNeighborhoodMetrics(neighborhoodData),
     crimeMetrics: null, // City-wide summary only
     transitMetrics: transitData,
@@ -554,7 +590,8 @@ async function main() {
       severity: e.Severity, neighborhood: e.Neighborhood
     })),
     worldPopulation: worldPopSummary,
-    districtMap: buildDistrictMap(oppDistricts)
+    districtMap: buildDistrictMap(oppDistricts),
+    initiativeDecisions: hasInitiativeData ? initiativeDecisions : null
   });
 
   fs.writeFileSync(path.join(OUTPUT_DIR, `opp_faction_c${CYCLE}.json`), JSON.stringify(oppPacket, null, 2));
@@ -595,7 +632,8 @@ async function main() {
       severity: e.Severity, neighborhood: e.Neighborhood
     })),
     worldPopulation: worldPopSummary,
-    districtMap: buildDistrictMap(crcDistricts)
+    districtMap: buildDistrictMap(crcDistricts),
+    initiativeDecisions: hasInitiativeData ? initiativeDecisions : null
   });
 
   fs.writeFileSync(path.join(OUTPUT_DIR, `crc_faction_c${CYCLE}.json`), JSON.stringify(crcPacket, null, 2));
@@ -633,7 +671,8 @@ async function main() {
       severity: e.Severity, neighborhood: e.Neighborhood
     })),
     worldPopulation: worldPopSummary,
-    districtMap: buildDistrictMap(indDistricts)
+    districtMap: buildDistrictMap(indDistricts),
+    initiativeDecisions: hasInitiativeData ? initiativeDecisions : null
   });
 
   fs.writeFileSync(path.join(OUTPUT_DIR, `ind_swing_c${CYCLE}.json`), JSON.stringify(indPacket, null, 2));
@@ -704,7 +743,8 @@ async function main() {
       severity: e.Severity, neighborhood: e.Neighborhood
     })),
     worldPopulation: worldPopSummary,
-    domainEvents: getRelevantEvents(worldEvents, ['CRIME', 'SAFETY', 'HEALTH'])
+    domainEvents: getRelevantEvents(worldEvents, ['CRIME', 'SAFETY', 'HEALTH']),
+    initiativeDecisions: hasInitiativeData ? { oari: initiativeDecisions.oari } : null
   });
 
   fs.writeFileSync(path.join(OUTPUT_DIR, `police_chief_c${CYCLE}.json`), JSON.stringify(policePacket, null, 2));
@@ -744,7 +784,8 @@ async function main() {
       severity: e.Severity, neighborhood: e.Neighborhood
     })),
     worldPopulation: worldPopSummary,
-    domainEvents: getRelevantEvents(worldEvents, ['INFRASTRUCTURE', 'ECONOMIC', 'HOUSING'])
+    domainEvents: getRelevantEvents(worldEvents, ['INFRASTRUCTURE', 'ECONOMIC', 'HOUSING']),
+    initiativeDecisions: hasInitiativeData ? { baylight: initiativeDecisions.baylight } : null
   });
 
   fs.writeFileSync(path.join(OUTPUT_DIR, `baylight_authority_c${CYCLE}.json`), JSON.stringify(baylightPacket, null, 2));
@@ -791,7 +832,8 @@ async function main() {
       severity: e.Severity, neighborhood: e.Neighborhood
     })),
     worldPopulation: worldPopSummary,
-    domainEvents: getRelevantEvents(worldEvents, ['CRIME', 'SAFETY'])
+    domainEvents: getRelevantEvents(worldEvents, ['CRIME', 'SAFETY']),
+    initiativeDecisions: hasInitiativeData ? { oari: initiativeDecisions.oari } : null
   });
 
   fs.writeFileSync(path.join(OUTPUT_DIR, `district_attorney_c${CYCLE}.json`), JSON.stringify(daPacket, null, 2));

@@ -37,3 +37,6 @@ Resolved items get deleted, not struck through.
 
 - Ellis Shaw from Echo Tribune — new contact, don't recognize the publication. Find out more about their coverage area.
 - E85 well received by Mike — note for C86 desk briefings that the edition quality was strong.
+
+### 2026-03-03 (2026-03-04T00:32:41.390Z)
+- Should track real estate professionals in the city. Housing is central to Oakland coverage but we don't have individual agents/firms catalogued.

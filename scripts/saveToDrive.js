@@ -19,6 +19,7 @@
  *   prospect   → As Universe Database / Players / Top_Prospects_Data_Cards
  *   bulls      → Bulls Universe Database / Player_Cards
  *   briefing   → Publications Archive / Mara_Vance
+ *   civic      → City_Civic_Database (official civic documents)
  *
  * Or pass a raw folder ID as destination.
  *
@@ -48,6 +49,8 @@ var DESTINATIONS = {
   bulls:      '1RLj9scDEr2wk3o6MeypTcMG54QWX0TLU',  // Player_Cards
   // Podcast audio
   podcast:    '1wLecsc3E1WVuiS-FA1wEoqJm8FNEnSUb',  // Podcasts
+  // City Civic Database — official civic documents filed by initiative agents
+  civic:      '1_nZbCjbjnW5kfA7aqEjb5CooEcYy4fjL',  // City_Civic_Database
   // Aliases
   briefing:   '1LEClpCUeRpT91gUR3SUm-Yx-3MldMJ5G',  // = mara (Mara directives & briefings)
   pdf:        '118tCh9stHjuocSUYXj0LjGnuzp5mLFhf',  // = edition (PDFs go alongside editions)

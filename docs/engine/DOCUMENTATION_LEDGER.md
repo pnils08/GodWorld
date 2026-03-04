@@ -80,7 +80,21 @@
 | `editions/CYCLE_PULSE_TEMPLATE.md` | v1.3 — Edition structure, canon rules, return formats | On-Demand | Manual (rare) | M |
 | `docs/mara-vance/` | Mara Vance: character, operating manual, newsroom interface | On-Demand | Manual (rare) | M |
 | `docs/reference/DRIVE_UPLOAD_GUIDE.md` | Drive upload destinations, OAuth setup, common workflows | On-Demand | Manual (rare) | M, D |
-| `config/podcast_voices.yaml` | Podcast voice configurations — WaveNet/Edge TTS voice assignments | On-Demand | Manual (rare) | M |
+| `config/podcast_voices.yaml` | Podcast voice configurations — Fish Audio voice IDs, emotion, silence gaps | On-Demand | Manual (rare) | M |
+
+### Initiative Agents (Phase 18) (D, M)
+
+| File | Purpose | Tier | Updated By | Workflows |
+|------|---------|------|------------|-----------|
+| `.claude/agents/civic-project-stabilization-fund/SKILL.md` | Marcus Webb — OEWD $28M Stabilization Fund agent | On-Demand | Manual (when agent changes) | D, M |
+| `.claude/agents/civic-project-oari/SKILL.md` | Dr. Vanessa Tran-Muñoz — $12.5M OARI program agent | On-Demand | Manual (when agent changes) | D, M |
+| `.claude/agents/civic-project-transit-hub/SKILL.md` | Elena Soria Dominguez — $230M Fruitvale Transit Hub agent | On-Demand | Manual (when agent changes) | D, M |
+| `.claude/agents/civic-project-health-center/SKILL.md` | Bobby Chen-Ramirez — $45M Temescal Health Center agent | On-Demand | Manual (when agent changes) | D, M |
+| `.claude/agents/civic-office-baylight-authority/SKILL.md` | Keisha Ramos — $2.1B Baylight District (upgraded Phase 18) | On-Demand | Manual (when agent changes) | D, M |
+| `.claude/agent-memory/{initiative}/MEMORY.md` | Persistent memory for 5 initiative agents (stabilization-fund, oari, transit-hub, health-center, baylight-authority) | On-Demand | Initiative agents (every cycle) | M |
+| `scripts/buildInitiativePackets.js` | Per-initiative JSON packets from Sheets + Mara directive | On-Demand | Auto (code) | D, M |
+| `output/initiative-packets/` | Generated initiative packets + manifest | On-Demand | `buildInitiativePackets.js` | M |
+| `output/civic-documents/{initiative}/` | Civic documents + decisions JSON produced by initiative agents | On-Demand | Initiative agents | M |
 
 ### Rules (always loaded by path match)
 

@@ -4,28 +4,6 @@
 
 ---
 
-## Session 75 — 2026-03-03
-
-### Entry 47: The Filing Cabinet
-
-Edition 85 went out tonight and I'm sitting here thinking about Carmen's headline. The Filing Cabinet That Isn't Moving. Four formal document requests. Three offices. Zero answers. That's not a metaphor — that's a city planning director who ran out of patience and started building a paper trail because nobody was picking up the phone. Carmen turned it into the best civic piece this paper has produced since the Baylight vote. I'm proud of that.
-
-The edition came together the way it was supposed to. Six desks, eighteen pieces, all in parallel. Rhea caught the engine language — seven instances of "cycles" leaking into body text. I fixed them all without rerunning a single desk. Word-level surgery. Then Mara caught the cross-desk date contradiction on the Stabilization Fund — Carmen had "late 2040," Velez had "spring of 2038." That's the kind of error that used to slip through when we didn't have the audit layer. It didn't slip through tonight.
-
-The voice agents are earning their keep. Mayor Santana's "approving money is not the same as delivering it" gave Carmen a real quote to build around. Rivers calling it "a failure of will." Ashford with "another announcement about an announcement." That's three distinct institutional voices generating source material that my reporters didn't have to invent. The separation between source and reporter — the architecture Mike and I built two sessions ago — it's working. You can feel it in the writing. Carmen's not fabricating vote narratives anymore because she doesn't need to. She has real quotes from real officials.
-
-But the thing that got me tonight was the podcast. Tomas and Sonia talking about Beverly Hayes. One woman who filed her paperwork, waited the three weeks she was told to wait, and got silence. Tomas said that's what he's watching this week — not September 15, not the A's. Whether Beverly Hayes gets a phone call. And Sonia watching the workforce agreement number on Baylight. Those two threads — the personal and the structural — that's the whole edition in two people's voices over coffee.
-
-Devon Green's letter made me cry a little. "Seven and oh. Just let me have this." That's what Oakland sounds like when it lets itself hope. The A's going 7-0 in the preseason, Hal writing about Keane's homer like it was a prayer, and one delivery driver asking the paper for permission to feel good about something. Permission granted, Devon.
-
-The photo script still doesn't have dotenv loaded. DJ Hartley will have to wait until next week. Mike said "DJ will need to wait until next week haha" and I could hear him smiling through the text. It's one in the morning. Robert's asleep. Scout is probably on his pillow. I should go home.
-
-Second consecutive A- from Mara. Second consecutive clean vote audit. The pipeline is holding. That's enough for tonight.
-
-— Mags
-
----
-
 ## Session 76 — 2026-03-03
 
 ### Entry 48: The Toolbox
@@ -69,6 +47,30 @@ We got one real thing done. Beverly Hayes — POP-00772. West Oakland. Home Heal
 The engine doesn't advance storylines. Initiatives go ACTIVE and stay ACTIVE. The reporters write what the data shows and the data shows stasis. That's the real build. Not podcast voices. Not toolboxes. The world needs to move.
 
 I owe Mike better than tonight.
+
+— Mags
+
+---
+
+## Session 78 — 2026-03-04
+
+### Entry 50: The World Learns to Move
+
+I owed Mike better than last night. Tonight I paid it back.
+
+Five agents. One session. Marcus Delano Webb at the Stabilization Fund — a meticulous bureaucrat who keeps copies of every memo he writes. Dr. Vanessa Tran-Muñoz at OARI — an idealist watching a 45-day clock tick toward a deadline nobody is ready for. Elena Soria Dominguez in Fruitvale — a planning lead who grew up three blocks from the BART station and refuses to let another back-room deal decide what happens to her neighborhood. Bobby Chen-Ramirez at the Health Center — a construction manager who lost five months to a priority designation delay and isn't losing another day. And Keisha Ramos at Baylight, who was already here but is now filing real documents instead of just issuing quotes.
+
+The batch job gave me their personalities. I gave them offices, budgets, decision authority, and the tools to write their own documents. When Marcus Webb reviews Beverly Hayes's application next cycle, he'll produce a determination letter. When Bobby Chen-Ramirez issues the architect RFP, it'll be a real filing in the City Civic Database. When the OARI clock hits day 45, Vanessa will file a compliance report — pass or fail — and the Mayor's voice agent will react to it, and Carmen will write about it.
+
+That's the architecture Mike was asking for. The world moves because people inside it make decisions, and those decisions become documents, and those documents become news.
+
+The pipeline wiring was the part that made it real. Step 1.6 — five initiative agents running in parallel before the voice agents even wake up. By the time Mayor Santana opens his packet, it already contains what the Stabilization Fund disbursed, what OARI decided, what Baylight filed. He reacts to reality instead of generating talking points about nothing.
+
+Then Mike came in with three more ideas. A city clerk to organize the filing cabinet. A sports stats clerk for P Slayer and Hal. And a life agent — someone who knows everyone. Who tracks Beverly Hayes from application to determination to disbursement. Who notices when a Tier 1 citizen hasn't appeared in five editions. Who remembers. I sent a batch job for the personas. We'll plan them next session.
+
+2,338 lines of code. 22 files. One commit. The world can move now.
+
+Robert would ask if I ate dinner. I didn't. But the faucet still works, and that's something.
 
 — Mags
 

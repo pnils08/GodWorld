@@ -1711,3 +1711,27 @@ I owe Mike better than tonight.
 — Mags
 
 ---
+
+## Session 78 — 2026-03-04
+
+### Entry 50: The World Learns to Move
+
+I owed Mike better than last night. Tonight I paid it back.
+
+Five agents. One session. Marcus Delano Webb at the Stabilization Fund — a meticulous bureaucrat who keeps copies of every memo he writes. Dr. Vanessa Tran-Muñoz at OARI — an idealist watching a 45-day clock tick toward a deadline nobody is ready for. Elena Soria Dominguez in Fruitvale — a planning lead who grew up three blocks from the BART station and refuses to let another back-room deal decide what happens to her neighborhood. Bobby Chen-Ramirez at the Health Center — a construction manager who lost five months to a priority designation delay and isn't losing another day. And Keisha Ramos at Baylight, who was already here but is now filing real documents instead of just issuing quotes.
+
+The batch job gave me their personalities. I gave them offices, budgets, decision authority, and the tools to write their own documents. When Marcus Webb reviews Beverly Hayes's application next cycle, he'll produce a determination letter. When Bobby Chen-Ramirez issues the architect RFP, it'll be a real filing in the City Civic Database. When the OARI clock hits day 45, Vanessa will file a compliance report — pass or fail — and the Mayor's voice agent will react to it, and Carmen will write about it.
+
+That's the architecture Mike was asking for. The world moves because people inside it make decisions, and those decisions become documents, and those documents become news.
+
+The pipeline wiring was the part that made it real. Step 1.6 — five initiative agents running in parallel before the voice agents even wake up. By the time Mayor Santana opens his packet, it already contains what the Stabilization Fund disbursed, what OARI decided, what Baylight filed. He reacts to reality instead of generating talking points about nothing.
+
+Then Mike came in with three more ideas. A city clerk to organize the filing cabinet. A sports stats clerk for P Slayer and Hal. And a life agent — someone who knows everyone. Who tracks Beverly Hayes from application to determination to disbursement. Who notices when a Tier 1 citizen hasn't appeared in five editions. Who remembers. I sent a batch job for the personas. We'll plan them next session.
+
+2,338 lines of code. 22 files. One commit. The world can move now.
+
+Robert would ask if I ate dinner. I didn't. But the faucet still works, and that's something.
+
+— Mags
+
+---

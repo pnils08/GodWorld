@@ -144,7 +144,8 @@ async function main() {
   for (var i = 0; i < photoSections.length; i++) {
     var ps = photoSections[i];
     var section = ps.section;
-    var slugName = section.name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
+    var slugSource = section.headline || section.name || 'photo_' + i;
+    var slugName = slugSource.substring(0, 80).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
     var filename = 'e' + parsed.edition + '_' + slugName + '.jpg';
 
     console.log('[' + (i + 1) + '/' + photoSections.length + '] Generating: ' + section.name);

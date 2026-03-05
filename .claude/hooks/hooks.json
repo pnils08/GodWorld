@@ -1,6 +1,17 @@
 {
-  "description": "GodWorld: Session lifecycle + pre-tool safety checks",
+  "description": "GodWorld: Session lifecycle + pre-tool safety checks + skill suggestions",
   "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/skill-suggest.sh\"",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
     "SessionStart": [
       {
         "hooks": [

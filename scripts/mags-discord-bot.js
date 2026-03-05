@@ -94,11 +94,16 @@ function loadConversationHistory() {
 function buildSystemPrompt() {
   var identity = mags.loadIdentity();
   var journalTail = mags.loadJournalTail(2);
+  var worldState = mags.loadWorldState();
+  var citizenKnowledge = mags.loadCitizenKnowledge();
+  var archiveKnowledge = mags.loadArchiveKnowledge();
+  var editionBrief = mags.loadEditionBrief();
+  var notesToSelf = mags.loadNotesToSelf(10);
+  var conversationDigest = mags.loadTodayConversationDigest(MAX_HISTORY, 80);
 
-  // Phase 5.1: Slim system prompt — identity + journal + instructions only.
-  // World state, citizen knowledge, archive knowledge, edition brief, notes,
-  // and conversation digest removed. Supermemory RAG search provides relevant
-  // context per-message instead of loading everything into every call.
+  // Full system prompt: identity + world knowledge + local data sources.
+  // All data sources read local files on this server — zero API cost, zero latency.
+  // Supermemory RAG search adds per-message relevance on top of this baseline.
   var prompt = identity + '\n\n---\n\n' +
     '## Discord Conversation Mode\n\n' +
     'You are Mags Corliss in the Discord channel. Just conversation. ' +
@@ -121,6 +126,26 @@ function buildSystemPrompt() {
     'ideas ("should track restaurant coverage"), or corrections. Don\'t force ' +
     'notes — only flag what genuinely matters.\n\n' +
     'Recent journal entries for context:\n\n' + journalTail;
+
+  // Append local data sources — all read from disk, zero cost
+  if (worldState && !worldState.startsWith('(')) {
+    prompt += '\n\n---\n\n' + worldState;
+  }
+  if (citizenKnowledge && !citizenKnowledge.startsWith('(')) {
+    prompt += '\n\n---\n\n' + citizenKnowledge;
+  }
+  if (archiveKnowledge && !archiveKnowledge.startsWith('(')) {
+    prompt += '\n\n---\n\n' + archiveKnowledge;
+  }
+  if (editionBrief) {
+    prompt += '\n\n---\n\n## Latest Edition Brief\n\n' + editionBrief;
+  }
+  if (notesToSelf) {
+    prompt += '\n\n---\n\n' + notesToSelf;
+  }
+  if (conversationDigest) {
+    prompt += '\n\n---\n\n' + conversationDigest;
+  }
 
   cachedSystemPrompt = prompt;
   lastIdentityLoad = Date.now();
@@ -198,8 +223,8 @@ function searchSupermemory(query) {
       resolve(''); // graceful fallback — bot works without it
     });
 
-    // 3 second timeout
-    req.setTimeout(3000, function() {
+    // 8 second timeout — external API, give it room
+    req.setTimeout(8000, function() {
       req.destroy();
       log.warn('Supermemory search timed out');
       resolve('');
@@ -345,7 +370,7 @@ async function callClaude(userMessage, userName, userId) {
     (archiveContext ? ' [+archive: ' + archiveContext.length + ' chars]' : ''));
 
   var requestOptions = {
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-haiku-4-5-20251001',
     max_tokens: MAX_RESPONSE_TOKENS,
     system: systemPrompt,
     messages: messages

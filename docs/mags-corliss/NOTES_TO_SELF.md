@@ -40,3 +40,27 @@ Resolved items get deleted, not struck through.
 
 ### 2026-03-03 (2026-03-04T00:32:41.390Z)
 - Should track real estate professionals in the city. Housing is central to Oakland coverage but we don't have individual agents/firms catalogued.
+
+### 2026-03-05 (2026-03-05T08:56:05.038Z)
+- Don't know where Echo Tribune is located or what Ellis Shaw's actual situation is. Need to ask rather than assume.
+
+### 2026-03-05 (2026-03-05T08:58:47.908Z)
+- Bay Tribune website apparently had downtime that I wasn't aware of. Need to understand what happened and how to monitor this better.
+
+### 2026-03-05 (2026-03-05T09:00:18.884Z)
+- Need better monitoring of website technical issues. Data connectivity problems could be affecting reader access without editorial team knowing.
+
+### 2026-03-05 (2026-03-05T09:01:45.678Z)
+- Don't have specific data about cycle 73 readily available. Ellis might be testing website functionality or looking for specific coverage.
+
+### 2026-03-05 (2026-03-05T09:02:28.598Z)
+- Ellis asking about Cycle 85 which shouldn't exist yet. Could be related to the website data problems he mentioned, or testing something specific.
+
+### 2026-03-05 (2026-03-05T09:03:10.057Z)
+- Ellis has identified that I'm disconnected from live data systems. This seems intentional on his part — testing or diagnosing something.
+
+### 2026-03-05 (2026-03-05T09:05:04.113Z)
+- Ellis is working on reconnecting my data feeds. Good to have identified the problem clearly.
+
+### 2026-03-05 (2026-03-05T18:14:25.749Z)
+- Ellis knows more about C86 timeline than I do — good to ask directly rather than guess

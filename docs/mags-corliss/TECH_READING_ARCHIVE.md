@@ -166,3 +166,77 @@ Source: DigitalOcean ICYMI AI newsletter.
 ## 2026-02-21 — S55 Tech Reading (continued from S50)
 - Session 55 research covered: agent orchestration, adversarial review loops, parallel subagent best practices, pre-commit hooks, agentic journalism, Claude Code changelog (2.1.45-2.1.50).
 - All buildable items moved to `docs/engine/ROLLOUT_PLAN.md`.
+
+---
+
+## 2026-03-05 — S80 Tech Reading: Local Models, WordPress, Agent Terminals, Claude Code Updates
+
+**Source:** Mike's research folder (10 links), fetched and summarized by research agents.
+
+### Claude Ecosystem Updates
+
+**Claude Memory Import** (The Verge, Mar 2)
+- Persistent memory now free for all users (was Pro-only). New memory import tool transfers history from ChatGPT, Gemini, Copilot via formatted export/paste.
+- Import takes up to 24 hours. Free users up 60% YTD, paid subscribers doubled.
+- **GodWorld relevance:** Structured export/import pattern could inform cross-session persistence.
+
+**Claude Code Voice Mode** (TechCrunch, Mar 3)
+- Voice interaction added to Claude Code — spoken commands for hands-free coding workflows.
+- **GodWorld relevance:** Could speed up sessions — edition reviews, debugging, journal dictation.
+
+### Agent Orchestration Terminals
+
+**Nested Claude Code with Tmux** (Geeky Gadgets, Mar 3)
+- Central controller distributes subtasks across multiple tmux panes, each running its own Claude instance.
+- Real-time monitoring via activity logs. macOS-only, steep setup.
+- **GodWorld relevance:** Direct parallel to desk agent pipeline — six desks, six panes, one controller.
+
+**Claude Code + CMUX Terminal** (YouTube, 24K views)
+- CMUX: native macOS terminal (Ghostty-based) for AI coding agents. Split panes, embedded browser, Unix socket API.
+- Notifications: pane border flashing, unread badges, macOS notifications via hooks.
+- Can switch individual panes to Haiku to conserve tokens.
+- **GodWorld relevance:** Purpose-built for multi-agent workflows. Mixed model tiers per pane.
+
+### MCP Server Building
+
+**Build Your Own MCP Server with Python** (freeCodeCamp, Oct 2025)
+- FastMCP library — `@mcp.tool()` decorator, SSE transport, port 8080.
+- Python 3.9+, modular, each function is an isolated callable tool.
+- **GodWorld relevance:** Lightweight pattern for custom MCP servers (civic DB queries, ledger audits).
+
+### WordPress AI Plugins
+
+**WordPress AI Plugins for Claude, Gemini, OpenAI** (Search Engine Journal, Mar 4)
+- Three official plugins with unified PHP AI Client SDK. Claude supports extended thinking + function calling.
+- WordPress 7.0 (April 2026) ships SDK natively.
+- **GodWorld relevance:** Public Bay Tribune website. WordPress + Claude plugin = searchable archive, civic queries, reader-facing AI. Function calling hits our dashboard API.
+
+### Docker + AI Agent Architecture
+
+**Docker AI for Agent Builders** (KDnuggets, Feb 27)
+- Docker Model Runner: OpenAI-compatible local model serving, zero config.
+- Docker Compose for AI: agent + model server + MCP tools as three services.
+- Docker Offload: transparently move GPU work to cloud.
+- Pre-built MCP servers (Postgres, Slack, Google Search) as Docker images.
+- **GodWorld relevance:** Extends Phase 9 — compose stack includes local model server.
+
+### Local Model Stack (The Llama Path)
+
+**LLMs-from-Scratch: Qwen 3.5 0.8B** (GitHub, Raschka, 87.2k stars)
+- Educational Qwen 3.5 implementation. Hybrid attention (alternating linear/full). Apache 2.0.
+- **GodWorld relevance:** Academic — informs small model selection decisions.
+
+**Build a Local AI: RAG + Agents with Qwen 3 and Ollama** (freeCodeCamp)
+- Full stack: Ollama + Qwen 3 + LangChain + ChromaDB. RAG + agent pipelines.
+- Hardware: 8GB+ VRAM for 8B, 16GB+ for 30B. `/think` and `/no_think` toggle.
+- **GodWorld relevance:** Local RAG over 378-file canon archive. Offline retrieval without Supermemory.
+
+**Qwen 3.5 9B on LM Studio** (lmstudio.ai)
+- 9B params, 262K context window. Free local use on all platforms.
+- **GodWorld relevance:** Full-edition review or ledger analysis locally. Candidate for lighter agents (Lori, Rhea fast-pass, letters desk). Quality vs Claude needs testing.
+
+### All buildable items moved to `docs/engine/ROLLOUT_PLAN.md`:
+- Phase 9.1 updated (Docker AI model services)
+- Phase 20 (Public Tribune — WordPress)
+- Phase 21 (Local Model Pipeline — Llama/Qwen path)
+- Watch List: CMUX, Claude Code voice mode, nested tmux, Claude memory import

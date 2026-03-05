@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import { readFileSync, existsSync, readdirSync } from 'fs';
 import { join, dirname } from 'path';
@@ -10,6 +11,29 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, '..');
 const app = express();
 const PORT = process.env.DASHBOARD_PORT || 3001;
+
+// --- Basic Auth (Phase 8.7) ---
+const DASH_USER = process.env.DASHBOARD_USER;
+const DASH_PASS = process.env.DASHBOARD_PASS;
+
+if (DASH_USER && DASH_PASS) {
+  app.use((req, res, next) => {
+    if (req.path === '/api/health') return next();
+    const auth = req.headers.authorization;
+    if (!auth || !auth.startsWith('Basic ')) {
+      res.set('WWW-Authenticate', 'Basic realm="GodWorld Dashboard"');
+      return res.status(401).send('Authentication required');
+    }
+    const decoded = Buffer.from(auth.slice(6), 'base64').toString();
+    const [user, pass] = decoded.split(':');
+    if (user === DASH_USER && pass === DASH_PASS) return next();
+    res.set('WWW-Authenticate', 'Basic realm="GodWorld Dashboard"');
+    return res.status(401).send('Invalid credentials');
+  });
+  console.log('Dashboard: Basic auth enabled');
+} else {
+  console.log('Dashboard: No auth configured (set DASHBOARD_USER + DASHBOARD_PASS in .env)');
+}
 
 // --- Live Sheets Integration ---
 let sheetsLib = null;

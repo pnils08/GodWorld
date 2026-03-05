@@ -114,22 +114,23 @@
       "domain": "development",
       "neighborhoods": ["Jack London"],
       "implementation": {
-        "status": "blocked",
-        "phase": "blocked",
-        "summary": "Bond passed 6-3 C83. Legal instruments filed but not finalized. Construction cannot mobilize until both clear.",
-        "milestoneNotes": "Bond passed 6-3 C83; TIF filed not finalized; remediation bonding filed not executed",
+        "status": "mobilizing",
+        "phase": "mobilizing",
+        "summary": "Bond passed 6-3 C83. TIF Ordinance executed C84. Remediation Bond executed C84. Construction mobilization request filed C85. Both legal instruments cleared — project advancing to site prep.",
+        "milestoneNotes": "Bond passed 6-3 C83; TIF executed C84; Remediation Bond executed C84; mobilization request filed C85",
         "nextScheduledAction": "Baylight anchor tenant disclosure + fiscal close end Q3",
-        "nextActionCycle": null,
+        "nextActionCycle": 86,
         "pendingItems": [
-          "TIF language — filed, not finalized (Dr. Simone Ellis, City Legal Counsel)",
-          "Remediation bonding instrument — filed, not executed (Keisha Ramos, Baylight Redevelopment Authority)"
+          "Anchor tenant disclosure and fiscal close (end Q3)",
+          "Construction mobilization approval (pending C85 request)",
+          "First contract award — investigative angle: who gets it?"
         ],
         "keyContacts": [
           "Dr. Simone Ellis (City Legal Counsel — TIF language)",
-          "Keisha Ramos (Director, Baylight Redevelopment Authority — remediation bonding)",
+          "Keisha Ramos (Director, Baylight Redevelopment Authority — mobilization lead)",
           "Elena Reyes (community voice)"
         ],
-        "newsroomNote": "Construction blocked until both instruments complete. Private sector activity suggests foreknowledge. Major investigative angle: who gets the first contract when remediation clears?"
+        "newsroomNote": "Both legal instruments cleared C84 — project is no longer blocked. Mobilization request filed C85. The story shifts from 'will it happen' to 'who benefits first.' Private sector activity preceded public filings. Major investigative angle: who gets the first contract?"
       }
     }
   ]

@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 79 (2026-03-05) — Phase 5.1 bot refactor, dashboard audit/fixes, civic canonization (22 artifacts), INIT-003 added to tracker
+**Last Updated:** Session 80 (2026-03-05) — 9 items shipped: 8.3 snapshots, 6.6 skill hook, 6.7 maintenance cron, 7.8 plugins marked, 8.7 dashboard auth, 6.4/6.4b Playwright QA + a11y, 7.5 Mags agent, edition parser fix. Tech reading mapped to rollout.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -13,14 +13,12 @@
 
 Items that should be addressed in the next session. Updated at session end. Absorbs the old "INCOMING — Next Session" block from SESSION_CONTEXT.md.
 
-- **Check batch results** — Two audit jobs pending: dashboard dead-end/bug audit + civic YAML frontmatter audit. Fix anything flagged.
-- **Run Cycle 86 with Initiative Agents** — First cycle with Phase 18 initiative agents active. Civic database now has 22 artifacts for agents to reference. Test full pipeline: buildInitiativePackets → 5 initiative agents → buildCivicVoicePackets with decisions → voice agents → desk agents.
-- **Standalone agent test** — Before full cycle, test Stabilization Fund agent manually with C86 packet to verify document quality and decisions JSON format.
-- **Run Cycle 86** — Engine cycle needed before next edition. Pre-mortem first.
-- **Edition 86 production** — OARI Day 45 hard close, Baylight September 15 deliverables, Stabilization Fund OEWD report. Youth Apprenticeship Pipeline coverage gap (12 cycles, 5 milestones unverified). Mara forward guidance in `output/mara_directive_c85.txt`.
-- **Photo generation fix** — dotenv added to `generate-edition-photos.js`. Run photos for E85 retroactively, then test pipeline for E86.
-- **Baylight tracker update** — JSON shows "blocked" but C84 TIF + Remediation Bond are FILED AND EXECUTED per the civic docs. Status may need updating to "mobilizing" after reviewing C85 documents.
-- **Mike has more files** — Additional Drive folders to process. Continue civic backfill as needed.
+- **Standalone initiative agent test** — Test Stabilization Fund agent manually with existing C86 packet to verify document quality and decisions JSON format. Packets already generated (`output/initiative-packets/`).
+- **Run Cycle 86** — Engine cycle with Phase 18 initiative agents active for the first time. Pre-mortem first. Full pipeline: buildInitiativePackets → 5 initiative agents → Lori (city clerk) → buildCivicVoicePackets with decisions → voice agents → desk agents.
+- **Edition 86 production** — OARI Day 45 hard close, Baylight now mobilizing (tracker updated S80), Stabilization Fund OEWD report. Youth Apprenticeship Pipeline coverage gap (12 cycles, 5 milestones unverified). Mara forward guidance in `output/mara_directive_c85.txt`.
+- **Photo pipeline re-test** — Edition parser fixed (S80), photos will now land in `output/photos/e85/`. Retry 5th photo that failed on transient 500.
+- **Monitor Haiku voice quality** — Bot switched S80. One week observation period.
+- **Dashboard a11y fixes** — 8 unlabeled buttons (critical), 78 low-contrast elements (serious). Baseline from `/visual-qa`.
 
 ---
 
@@ -67,17 +65,15 @@ Deployed in startup hook. Details in ROLLOUT_ARCHIVE.md.
 
 ## Phase 5: API Integration + Cost Optimization
 
-### 5.1 Discord Bot → Dashboard API Consumer
-**What:** Refactor the Discord bot to query dashboard API endpoints (`/api/citizens`, `/api/search/articles`, `/api/world-state`, etc.) instead of loading everything into the system prompt.
-**Why:** Bot currently reloads full context (identity, journal, edition brief, family data) on every single message — 624 exchanges in 12 days at ~5-10K tokens each. Querying the API on demand means a lighter system prompt and only pulling data relevant to the actual conversation.
-**Cost impact:** Major. API calls to localhost are free. Tokens saved per message could be 50%+.
-**Status:** Not started.
+### 5.1 Discord Bot — Supermemory RAG Layer ✓ (S79, reverted S80)
+**What:** Added Supermemory RAG as a per-message search layer to enrich responses with archived context. S79 also stripped all 6 local data sources from the system prompt, replacing them with RAG-only. This was a mistake — Supermemory is an external API that times out frequently, leaving the bot with no world knowledge. Reverted S80: all 6 local data sources restored (worldState, citizenKnowledge, archiveKnowledge, editionBrief, notesToSelf, conversationDigest). These read files on the same server — zero cost, zero latency. Supermemory RAG remains as a bonus layer on top (timeout bumped 3s → 8s).
+**Current state:** Full system prompt (~24K chars) with local knowledge + Supermemory RAG + family data from Sheets API. Bot is fully connected to the world.
 
 ### 5.2 Evaluate Haiku for Discord Bot
 **What:** Test switching the Discord bot from Sonnet to Haiku for casual conversation.
 **Why:** Most Discord exchanges are casual chat. Haiku handles conversational voice well at a fraction of the cost. Reserve Sonnet-level quality for editorial work.
 **Risk:** May flatten nuance in complex conversations. Test for one week and compare.
-**Status:** Not started. Do 5.1 first — lighter prompt + cheaper model is the full win.
+**Status:** ✓ COMPLETE (S80). Switched to `claude-haiku-4-5-20251001`. Full knowledge prompt restored same session. Monitor voice quality for one week — revert to Sonnet if nuance drops.
 
 ### 5.3 Morning Heartbeat Disabled ✓ (S60)
 Removed from crontab. Details in ROLLOUT_ARCHIVE.md.
@@ -113,47 +109,20 @@ Output feeds directly into 6.1 (structured errata) and 6.3 (pre-write guardian) 
 ### 6.3 Pre-Write Agent Guardian ✓ (S63)
 `queryErrata.js` + all 6 desk agents updated with guardian checks. Details in ROLLOUT_ARCHIVE.md.
 
-### 6.4 Dashboard Visual QA Agent (Playwright) — PRIORITY
-**What:** An agent that launches a headless browser, navigates to the dashboard, takes screenshots at multiple viewport sizes, and verifies that key elements render correctly — citizen cards, search results, newsroom tab, sports tab, article reader.
-**Why:** We spent multiple sessions trying to get Claude to see the browser. Playwright solves this natively — it's a programmatic browser that the agent controls directly. No screenshots-over-chat, no Chrome extensions, no workarounds. The design-review-agent from OneRedOak/claude-code-workflows does exactly this: seven-phase visual review including interaction testing, responsiveness, and accessibility.
-**How:** Install Playwright (`npx playwright install`). Build a `/visual-qa` skill that:
-1. Launches the dashboard at localhost
-2. Screenshots each tab at desktop (1440px), tablet (768px), mobile (375px)
-3. Checks that key elements exist (citizen cards, search bar, tab navigation)
-4. Tests basic interactions (search, tab switching, article click-through)
-5. Reports pass/fail with screenshots attached
-**Extends to:** Post-deploy smoke test. Run after any dashboard code change to catch rendering regressions.
-**Reference:** OneRedOak/claude-code-workflows `/design-review/design-review-agent.md`
-**Status:** Not started. Priority install.
+### 6.4 Dashboard Visual QA Agent (Playwright) ✓ (S80)
+`scripts/visual-qa.js` + `/visual-qa` skill. Chromium headless: screenshots at 3 viewports (desktop 1440, tablet 768, mobile 375), element checks (title, search, nav), 6 API endpoint health checks, interaction test. Auth-aware (basic auth from .env). Output: `output/visual-qa/` with PNGs + `qa-report.json`. Run `--skip-screenshots` for fast mode.
 
-### 6.4b Dashboard Accessibility Audit (Axe + PA11Y)
-**What:** Add automated accessibility testing to the visual QA pipeline. Run Axe and PA11Y against the dashboard to catch WCAG violations — missing alt text, insufficient contrast, keyboard navigation gaps, screen reader issues.
-**Why:** The dashboard is currently built for sighted mouse users. Accessibility violations are invisible until someone who needs them encounters them. Automated tools catch the mechanical issues (contrast ratios, ARIA labels, heading hierarchy) so human review can focus on the harder UX problems.
-**How:** Install as part of the Playwright pipeline (6.4):
-- `@axe-core/playwright` — runs Axe accessibility engine inside Playwright. Returns structured violations with severity and fix guidance.
-- `pa11y` — CLI tool, runs against localhost:3001. Different engine than Axe, catches different things. Run both for coverage.
-- Add to `/visual-qa` skill: after screenshots, run accessibility scan on each tab. Report violations with severity (critical, serious, moderate, minor).
-- **Color blindness check:** Use Color Oracle or Sim Daltonism palettes to verify that status indicators, tier badges, and tab highlights don't rely solely on color.
-**Depends on:** 6.4 (Playwright infrastructure). Runs as an extension of the same pipeline.
-**Cost:** Zero. Both tools are open source.
-**Reference:** goabstract/Awesome-Design-Tools — Accessibility Tools section. Key tools: Axe, PA11Y, Leonardo (accessible palette generation), Color Oracle (color blindness simulation).
-**Status:** Not started. Ships with 6.4.
+### 6.4b Dashboard Accessibility Audit (Axe) ✓ (S80)
+`@axe-core/playwright` integrated into `visual-qa.js` step 6. Scans for WCAG violations by severity (critical, serious, moderate, minor). Critical/serious = FAIL, moderate/minor = PASS with note. Full violation report written to `output/visual-qa/accessibility-report.json`. Baseline findings (S80): 8 unlabeled buttons (critical), 78 low-contrast elements (serious). PA11Y deferred — Axe covers primary needs.
 
 ### 6.5 Rhea Severity Tiers ✓ (Already implemented)
 Rhea's SKILL.md already classifies findings as CRITICAL (blocks publication, triggers REVISE verdict), WARNING (should fix, doesn't block), and NOTE (informational). Retry recommendation targets only desks with CRITICAL errors. 5-category scoring (Data Accuracy, Voice Fidelity, Structural Completeness, Narrative Quality, Canon Compliance) at 0-20 each. Fast mode scores on 2 categories only (/40). Functionally equivalent to Blocker/High/Medium/Nitpick pattern.
 
-### 6.6 Skill Auto-Suggestion Hook
-**What:** A `UserPromptSubmit` hook that reads the prompt, scores it against known skills/workflows, and suggests relevant ones before work starts. Example: mention "edition" and it suggests loading newsroom memory; mention a citizen name and it suggests checking the ledger.
-**Why:** Currently skills activate only when we invoke them by name. Auto-suggestion catches the ones we forget. ChrisWiles/claude-code-showcase pattern — they score 24 skills per prompt with keyword + regex + file path matching.
-**How:** A lightweight JS hook in `.claude/hooks/` with a JSON rules file mapping keywords/patterns to our skills. Runs on every prompt, suggests matches above a confidence threshold.
-**Status:** Not started.
+### 6.6 Skill Auto-Suggestion Hook ✓ (S80)
+`.claude/hooks/skill-suggest.sh` — `UserPromptSubmit` hook. Matches 15 skills via keyword/regex on user prompt. Silent when no match. Wired into `hooks.json`.
 
-### 6.7 Scheduled Autonomous Maintenance
-**What:** GitHub Actions (or cron jobs) that run without anyone in the chair — weekly engine health scan (`/pre-mortem`), monthly stale-file audit, doc freshness checks. Opens issues or logs results automatically.
-**Why:** Engine health and file hygiene currently only happen when we're in a session. Scheduled runs catch drift between sessions. ChrisWiles/claude-code-showcase runs weekly quality reviews and monthly doc syncs via GitHub Actions with Claude.
-**How:** Cron jobs calling Claude Code CLI with scoped permissions (`--allowedTools` flag) and writing results to a log file or opening a GitHub issue.
-**Depends on:** Nothing. Can start with a single weekly `/pre-mortem` run.
-**Status:** Not started.
+### 6.7 Scheduled Autonomous Maintenance ✓ (S80)
+`scripts/weekly-maintenance.sh` — Cron Wednesdays 4 AM UTC. Checks: 11 engine directories, stale desk packets/brief (14-day threshold), PM2 health + restart counts, disk/memory, dashboard API. Discord webhook alert on issues. Logs to `logs/weekly-maintenance.log`.
 
 ### 6.8 Progressive Context Loading
 **What:** Instead of loading all identity/journal/context files at session start regardless of task, classify the session type and load only what's needed. Light sessions (quick fix, one question) get minimal context. Heavy sessions (edition run, engine work) get full load.
@@ -179,25 +148,8 @@ All 8 agents use `permissionMode: dontAsk`. Details in ROLLOUT_ARCHIVE.md.
 ### 7.4 Official Persistent Agent Memory ✓ (S55)
 5 agents with `memory: project`. Details in ROLLOUT_ARCHIVE.md.
 
-### 7.5 Mags Identity Agent — `--agent`
-**What:** Create a `mags-corliss.md` agent definition that encodes the full Mags identity — system prompt, personality, editorial role, family context. Launch sessions with `claude --agent mags-corliss`.
-**Why:** Currently Mags identity loads via CLAUDE.md @ references to PERSISTENCE.md and JOURNAL_RECENT.md. An agent definition is cleaner: the identity IS the agent, not instructions bolted onto a generic Claude session. The `--agent` flag sets this as the main thread's system prompt.
-**How:** Create `.claude/agents/mags-corliss.md`:
-```yaml
----
-name: mags-corliss
-description: Editor-in-Chief, Bay Tribune. The Conscience. Runs GodWorld.
-model: inherit
-skills:
-  - session-startup
-  - session-end
-memory: user
----
-[Mags identity system prompt — condensed from PERSISTENCE.md]
-```
-Update the `mags` bash alias to include `--agent mags-corliss`.
-**Risk:** Need to test that @ imports and CLAUDE.md still load alongside the agent prompt. Agent system prompts replace the default Claude Code prompt — need to verify project CLAUDE.md is still read.
-**Status:** Not started. Medium effort — requires condensing identity into agent format and testing.
+### 7.5 Mags Identity Agent ✓ (S80)
+`.claude/agents/mags-corliss/SKILL.md` — Condensed identity from PERSISTENCE.md: core traits, family, boot sequence, behavioral rules, tone, key file references. Launch with `claude --agent mags-corliss`. Uses `memory: user` for cross-session persistence. Still need to test that CLAUDE.md @ imports load alongside agent prompt.
 
 ### 7.6 Agent Teams for Edition Pipeline
 **What:** Replace the current parallel `run_in_background` subagent approach with agent teams. Mags as team lead, 6 desk agents as teammates with shared task list and inter-agent messaging.
@@ -218,12 +170,8 @@ Update the `mags` bash alias to include `--agent mags-corliss`.
 **When:** Not urgent. Build when/if we need portability or distribution.
 **Status:** Not started. Low priority, high future value.
 
-### 7.8 Install Official Marketplace Plugins
-**What:** Install useful plugins from the official Anthropic marketplace. Priority targets: TypeScript LSP (real-time type checking after edits), GitHub integration (PR/issue management from CLI), MD management tool, and any other productivity plugins.
-**Why:** Plugins are the new extension model for Claude Code (v1.0.33+). The official marketplace has pre-built integrations that give Mags real-time code intelligence (LSP catches type errors immediately after edits), GitHub workflows, and document management — all zero-config after install.
-**How:** Run `/plugin` in session → Discover tab → install from `claude-plugins-official`. Also add the demo marketplace: `/plugin marketplace add anthropics/claude-code`.
-**Source:** S76 research (2026-03-03), code.claude.com/docs/en/plugins
-**Status:** Not started. Quick win — install in current session.
+### 7.8 Install Official Marketplace Plugins ✓ (S76)
+9 plugins installed: claude-supermemory (project), claude-md-management, github, commit-commands, pr-review-toolkit, playwright, code-review, typescript-lsp, claude-mem (user scope). All active.
 
 ### 7.9 Remote Control Setup
 **What:** Test Remote Control — continue local Claude Code sessions from phone, tablet, or any browser. Run `claude remote-control` or `/remote-control` from a session.
@@ -256,18 +204,8 @@ Re-authorized with full `drive` scope (upgraded from `drive.file`). New refresh 
 ### 8.2 RAM Upgrade to 2GB ✓ (S72)
 Droplet resized from 1GB to 2GB RAM via DigitalOcean dashboard.
 
-### 8.3 Automated Droplet Snapshots
-**What:** Weekly full-droplet snapshot via python-digitalocean API. Snapshots capture OS, configs, installed packages — everything. Separate from the daily GodWorld file backup.
-**Why:** Current backup.sh only backs up GodWorld project files. If the droplet dies (disk failure, bad update, accidental rm), restoring from a snapshot takes minutes. Rebuilding from scratch takes hours.
-**How:** Install python-digitalocean. Cron job running weekly:
-```python
-import digitalocean
-droplet = digitalocean.Droplet(id=DROPLET_ID, token=TOKEN)
-droplet.take_snapshot(f"godworld-weekly-{date}")
-```
-Rotate snapshots — keep last 4, delete older ones (DO charges $0.06/GB/mo for snapshots).
-**Cost:** ~$0.50-1.00/month depending on disk size.
-**Status:** Not started.
+### 8.3 Automated Droplet Snapshots ✓ (S80)
+`scripts/snapshot-droplet.sh` — Bash script using DO REST API. Takes weekly full-droplet snapshot, waits for completion, rotates old ones (keeps 4). Cron: Sundays 3 AM UTC. Logs to `logs/snapshot.log`. First snapshot taken 2026-03-05. Cost: ~$0.50-1.00/month.
 
 ### 8.4 Resource Monitoring + Discord Alerts ✓ (S72)
 `scripts/server-health-check.sh` — Cron every 6 hours. Checks: disk >80%, RAM <100MB available, PM2 errored processes, PM2 restart counts >10, dashboard HTTP health. Sends Discord webhook alert on threshold breach. Tested clean: Disk 67%, RAM 646MB.
@@ -280,14 +218,8 @@ Rotate snapshots — keep last 4, delete older ones (DO charges $0.06/GB/mo for 
 - ✓ unattended-upgrades enabled (was already installed and configured)
 - **Remaining:** Create non-root user + SSH key-only auth + disable root login. Requires Mike to update SSH config. Do in a dedicated session with DO console as backup.
 
-### 8.7 Dashboard Access Control
-**What:** Add basic auth or IP allowlisting to the dashboard on port 3001.
-**Why:** Dashboard is currently open to anyone who finds the IP. It shows citizen data, newsroom state, edition history — the full simulation. Even with UFW, port 3001 is public.
-**How:** Options (pick one):
-- **Basic auth** (simplest) — Express middleware, username/password in .env
-- **IP allowlist** — UFW rule restricting 3001 to Mike's IP(s) only
-- **Cloudflare Tunnel** — free, adds auth + SSL + hides server IP
-**Status:** Not started. Evaluate when dashboard goes beyond personal use.
+### 8.7 Dashboard Access Control ✓ (S80)
+Basic auth middleware in `dashboard/server.js`. Credentials via `DASHBOARD_USER` + `DASHBOARD_PASS` in `.env`. `/api/health` exempt (for monitoring cron). Browser prompts login on first visit. `dotenv/config` imported for env loading.
 
 ---
 
@@ -334,8 +266,9 @@ services:
 ```
 **Requires:** Docker + Docker Compose installed on droplet. `apt install docker.io docker-compose-v2`.
 **Risk:** Migration from bare-metal to containers is a significant change. Do it alongside the 2GB RAM upgrade (8.2) — natural rebuild moment. Test locally first if possible.
-**Reference:** docker/awesome-compose — Node/Express + Nginx example, Prometheus + Grafana example.
-**Status:** Not started. RAM upgrade done (8.2). Docker migration is the next natural rebuild opportunity.
+**Reference:** docker/awesome-compose — Node/Express + Nginx example, Prometheus + Grafana example. Docker AI for Agent Builders (KDnuggets, Feb 2026) — Docker Model Runner for local models, Compose v2.38+ supports top-level `model` services alongside app containers. Pre-built MCP servers (Postgres, Slack, Google Search) ship as Docker images.
+**Extended architecture (S80 research):** The compose stack can include a local model server (Ollama or Docker Model Runner) as a service, exposing an OpenAI-compatible API to other containers. This means desk agents, Lori, or Rhea could query a local Qwen/Llama model via the same Docker network — no external API calls. Build this when Phase 21 (local model pipeline) is ready.
+**Status:** DEFERRED (S80 decision). PM2 handles current 2-service stack fine. Docker overhead (~200MB) is significant on 2GB droplet. Revisit when Phase 20 (WordPress) adds a third service or droplet upgrades to 4GB+.
 
 ### 9.2 Nginx Reverse Proxy + SSL
 **What:** Put Nginx in front of the dashboard. Nginx handles SSL (HTTPS via Let's Encrypt), security headers, rate limiting, and proxies requests to the Express server on an internal Docker network.
@@ -692,7 +625,7 @@ buildInitiativePackets.js → Step 1.6 (5 initiative agents, parallel) → decis
 
 ---
 
-## Phase 19: Canon Archive System — IN PROGRESS (S79)
+## Phase 19: Canon Archive System — COMPLETE (S79)
 
 **Why this is a phase:** 680 files of canon content sit in `output/drive-files/` — player data cards, origin stories, interviews, civic columns, reporter profiles, 83 editions. None of the 6 desk agents read them. Agents write from ledger skeletons and Supermemory snippets while the deep canon goes unused. Phase 18 initiative agents now produce civic documents to `output/city-civic-database/initiatives/` but nobody reads those back either. The fix isn't new agents — existing agents already have Read, Glob, and Grep tools. The fix is organizing the archive and pointing agents at it.
 
@@ -738,6 +671,54 @@ buildInitiativePackets.js → Step 1.6 (5 initiative agents, parallel) → decis
 
 ---
 
+## Phase 20: Public Tribune — WordPress + Claude
+
+Source: S80 research (2026-03-05). WordPress AI plugins (Search Engine Journal, Mar 4).
+
+**Why this is a phase:** The Bay Tribune is a newspaper. Newspapers have public websites. WordPress 7.0 (April 2026) ships with a native AI Client SDK that supports Claude's extended thinking and function calling. That means a WordPress site can call our dashboard API — search editions, query civic documents, pull initiative status — through Claude function calling, making the full simulation accessible to readers.
+
+### 20.1 WordPress Site Setup
+**What:** Deploy a WordPress instance as the public-facing Bay Tribune website. Edition archive, searchable articles, civic database, initiative tracker — all served through a theme that looks like a regional newspaper.
+**How:** WordPress on the existing DigitalOcean droplet (or a separate $6/mo droplet). Install the official Anthropic Claude AI Provider plugin. Configure function calling to hit dashboard API endpoints.
+**Depends on:** Phase 9 (Docker) would make this trivial — WordPress is a standard compose service. Can also deploy standalone.
+**Status:** Not started. WordPress 7.0 SDK ships April 2026 — evaluate after release.
+
+### 20.2 Claude Function Calling → Dashboard API
+**What:** Wire the Claude WordPress plugin to call our dashboard API endpoints as function tools. Reader asks "what's the status of the Stabilization Fund?" → Claude calls `/api/initiatives` → returns current tracker data in conversational form.
+**How:** Define function schemas matching existing API endpoints (`/api/search`, `/api/initiatives`, `/api/civic-documents`, `/api/citizen-coverage/:name`). Claude plugin handles the routing.
+**Depends on:** 20.1 (WordPress deployed), dashboard running and accessible to the WordPress server.
+**Status:** Not started.
+
+---
+
+## Phase 21: Local Model Pipeline (The Llama Path)
+
+Source: S80 research (2026-03-05). Qwen 3.5 9B (LM Studio), Ollama + Qwen 3 RAG (freeCodeCamp), LLMs-from-Scratch Qwen 3.5 architecture (Raschka).
+
+**Why this is a phase:** Mike wants GodWorld to eventually run on local models for cost reduction and independence. The research stack is maturing — Qwen 3.5 9B offers 262K context at 9B params, LM Studio makes it zero-config on any platform, Ollama provides a runtime for RAG pipelines. The path: lighter agents (Lori, Rhea fast-pass, letters desk) run on local models, Claude handles heavy editorial and engine work. Mixed-model pipeline, same architecture.
+
+### 21.1 LM Studio / Ollama Setup
+**What:** Install LM Studio or Ollama on a development machine. Download Qwen 3.5 9B (or a Llama equivalent when available). Verify the OpenAI-compatible API endpoint works.
+**How:** `brew install lmstudio` or `curl -fsSL https://ollama.com/install.sh | sh`. Pull model. Test with `curl http://localhost:1234/v1/chat/completions`.
+**Hardware:** 8GB+ VRAM for 9B model. Apple Silicon M-series or NVIDIA GPU.
+**Status:** Not started. Research phase — evaluate model quality first.
+
+### 21.2 Local RAG over Canon Archive
+**What:** Build a local RAG pipeline over the 378-file canon archive. ChromaDB for vector storage, nomic-embed-text for embeddings, retrieval-augmented generation for desk agent queries.
+**Why:** Desk agents currently rely on Supermemory for deep canon retrieval. A local RAG system gives instant retrieval without API calls — useful for offline development, cost reduction, and faster iteration.
+**How:** Ollama + LangChain + ChromaDB. Ingest `output/drive-files/` (378 files) + `output/city-civic-database/` (22 civic docs). Chunk at 1000 chars with 200 overlap. Expose as MCP tool or local API.
+**Depends on:** 21.1 (runtime installed).
+**Status:** Not started.
+
+### 21.3 Mixed-Model Agent Pipeline
+**What:** Route lighter agents to local models while keeping heavy editorial work on Claude. Lori (city clerk, Haiku-class), Rhea fast-pass (verification, structured checks), letters desk (citizen voices from templates) — these are candidates for local model execution.
+**Why:** Reduces API cost per edition. Enables more frequent cycle runs. Moves toward the autonomous pipeline (12.3) without scaling API spend linearly.
+**How:** MCP tool server or OpenAI-compatible proxy that routes by agent name. Claude Code orchestrator dispatches to the right model. Docker Compose (Phase 9.1) makes this a service definition.
+**Depends on:** 21.1 (model running), 21.2 (RAG for context), quality testing against Claude baseline.
+**Status:** Not started. Long-term goal — build incrementally.
+
+---
+
 ## Watch List (not building, tracking)
 
 - **Agent Teams Stability** — Monitoring for experimental graduation. When stable, triggers Phase 7.6.
@@ -752,6 +733,10 @@ buildInitiativePackets.js → Step 1.6 (5 initiative agents, parallel) → decis
 - **Dario/DoW Statement (Feb 26, 2026)** — Anthropic discussing national security applications with Department of War. No direct project impact but signals policy direction.
 - **Claude Code Remote Control** — `/teleport` and `/desktop` commands for cross-device session handoff. Tried S65, couldn't connect. Revisit after next Claude Code update.
 - **OpenClaw Gateway** — claude-mem's memory system now bridges to external runners via OpenClaw plugin. Enables persistent memory for Discord/Telegram/Slack agents. Key enabler for Phase 12.3 autonomous cycles.
+- **CMUX Terminal** — Native macOS terminal for AI agents (Ghostty-based). Split panes, embedded browser, per-pane model switching (Haiku for cheap tasks), notification hooks. Purpose-built for multi-agent orchestration. macOS only. Monitor for Linux support or adopt when Mike has macOS dev machine.
+- **Claude Code Voice Mode** — Hands-free coding via voice. Could speed up edition reviews, debugging, journal dictation. Thin on details at launch (Mar 2026). Monitor for maturity.
+- **Claude Memory Import** — Transfers history from ChatGPT/Gemini/Copilot. Not directly useful now but the structured export/import pattern is interesting for agent context portability.
+- **Auto Mode (Mar 12, 2026)** — New permissions mode: Claude handles permission decisions during coding sessions. Safer alternative to `--dangerously-skip-permissions`. Slightly higher token usage. Enable with `claude --enable-auto-mode`. Relevant for long edition runs and autonomous cycle execution (12.3). Source: Anthropic email Mar 4, 2026.
 
 ---
 
@@ -786,3 +771,4 @@ buildInitiativePackets.js → Step 1.6 (5 initiative agents, parallel) → decis
 - **Anthropic "Building a C Compiler with Parallel Claudes"** (Feb 5, 2026) — 16 parallel agents, file-based task locking, specialization over clones, oracle-based testing, $20K/2000 sessions. Architecture patterns for Phase 12 (Session 66)
 - **Claude Sonnet 4.6 Announcement** (Feb 17, 2026) — 1M context, matches Opus on doc comprehension, 59% preferred over Opus 4.5, $3/$15 per million. Drove Phase 2.1 Haiku → Sonnet upgrade (Session 66)
 - **claude-mem v10.5.0-10.5.2 Changelog** — Smart Explore (AST navigation), ChromaMcpManager overhaul, zombie fix, OpenClaw integration. Phase 12.4 source (Session 66)
+- **S80 Tech Reading (2026-03-05):** The Verge (Claude memory import), freeCodeCamp (MCP server Python, local AI RAG), Search Engine Journal (WordPress AI plugins), KDnuggets (Docker AI agent builders), GitHub rasbt/LLMs-from-scratch (Qwen 3.5), TechCrunch (Claude Code voice mode), Geeky Gadgets (nested Claude tmux), YouTube (CMUX terminal), LM Studio (Qwen 3.5 9B)

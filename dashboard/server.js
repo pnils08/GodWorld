@@ -942,8 +942,8 @@ app.get('/api/initiatives', (req, res) => {
     'INIT-001': 'stabilization-fund',
     'INIT-002': 'oari',
     'INIT-003': 'transit-hub',
-    'INIT-004': 'health-center',
-    'INIT-005': 'baylight',
+    'INIT-005': 'health-center',
+    'INIT-006': 'baylight',
   };
 
   // Merge: engine data + editorial tracking + related articles + civic documents

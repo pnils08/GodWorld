@@ -50,6 +50,7 @@ Rules:
 - Tags must alternate — no consecutive same-person blocks
 - Each block should be 1-4 sentences. Natural conversation length. Not monologues.
 - No stage directions, no sound effects, no [laughter] tags — just dialogue
+- Emotion tags in parentheses are optional and will be rendered by Fish Audio TTS if present: `(excited) That's incredible!`, `(serious) Nobody answered.` See full list at https://docs.fish.audio/api-reference/emotion-reference
 - No SSML markup unless specifically instructed
 
 ## How the Hosts Talk

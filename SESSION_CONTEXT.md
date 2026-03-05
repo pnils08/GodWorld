@@ -166,15 +166,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
-### Session 79 (2026-03-05) — Build: Phase 19 Canon Archive System (Complete)
+### Session 79 (2026-03-05) — Build: Phase 19 Complete + Phase 5.1 Bot Refactor + Civic Canonization
 
-- **Canon Archive dedup:** 680 files audited → 378 unique, 302 exact duplicates removed (md5). Three mirror hierarchies eliminated.
-- **Archive reorganized:** 99 flat Drive folders → 9 desk folders with reporter subfolders. Clean `{desk}/{reporter}/*.txt` hierarchy. `docs/media/CANON_ARCHIVE_LEDGER.md` created — full index with agent search patterns.
-- **All 6 desk agents wired:** Each SKILL.md now has a "Canon Archive" section with desk-specific paths and Grep/Glob search instructions. Agents can now read 378 files of deep canon (player cards, origin stories, interviews, civic columns) instead of writing from ledger skeletons.
-- **City Civic Database created:** `output/city-civic-database/` with `initiatives/`, `council/`, `mayor/`, `clerk/`, `elections/`. Migrated from `output/civic-documents/`. All 5 initiative agent SKILLs, 2 scripts, and pipeline references updated.
-- **Lori Tran-Matsuda (City Clerk) built:** `.claude/agents/city-clerk/SKILL.md` — Haiku, 12 turns. Audits initiative filings, enforces Civic Filing Convention, maintains cumulative registry. Pipeline Step 1.6e.
-- **Batch job completed:** `msgbatch_01FQ3SMS2xBX7Jgkf18td6A3` — categorized all 378 archive files by desk/reporter/type/subject.
-- **Phase 19 personas preserved:** Lori (built), Terry and Verdene personas saved in `docs/engine/phase19_agent_personas.md` for potential future use.
+- **Phase 19 Canon Archive:** 680→378 files deduplicated, 9-desk structure, all agents wired, Lori (City Clerk) built.
+- **Phase 5.1 Discord bot refactor:** System prompt reduced from ~25K to ~8K chars (68% reduction). Removed 6 bulk data sources (worldState, citizenKnowledge, archiveKnowledge, editionBrief, notesToSelf, conversationDigest). Supermemory RAG provides per-message context instead. Fixed broken `loadArchiveKnowledge()` in lib/mags.js.
+- **Dashboard audit + fixes:** Edition parser rewritten for dual-format support (old markdown + new ALL CAPS). Off-by-one chunk bug fixed. H1 title detection added. Metadata sections filtered. `findTextFiles` → `findDocFiles` (supports .txt + .md). Civic database wired as Source 3 in search. New `/api/civic-documents` endpoint. Initiatives API enriched with civicDocuments arrays.
+- **Civic document backfill:** 13 documents downloaded from 2 Google Drive folders, converted to civic filing convention, filed across 5 initiatives. Total civic database: 22 artifacts (19 .md + 3 .png). All 19 compliant.
+- **Initiative tracker updates:** INIT-003 (Fruitvale Transit Hub) added to JSON tracker as PENDING-VOTE C86. INIT-007 (Youth Apprenticeship) written to Google Sheet as "announced" — not in JSON (not approved). INIT-004 (Port Modernization) removed from initFolderMap (pipeline, not approved).
+- **Editorial discovery:** Youth Apprenticeship Pipeline — 12-cycle coverage gap since Luis Navarro's C73 feature. Five milestones unverified. Flagged for next edition.
+- **Batch jobs submitted:** Dashboard dead-end audit + civic YAML frontmatter audit.
 
 ### Session 78 (2026-03-04) — Build: Phase 18 Civic Project Agents (Complete)
 
@@ -203,16 +203,6 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Podcast produced:** The Morning Edition, Tomas Renteria + Sonia Parikh. 58 exchanges, ~15 min. Transcript at `output/podcasts/c85_transcript.txt`, audio at `output/podcasts/c85_morning-edition.mp3`. Uploaded to Drive.
 - **Post-pipeline:** Edition + Mara audit + PDF + podcast all uploaded to Drive. Discord bot refreshed. Supermemory ingested (3/3 after retry). Edition brief, scores, errata, AUDIT_HISTORY all updated. NEWSROOM_MEMORY refreshed for C85.
 - **Mike feedback:** "really amazing work" — E85 well received. Note for C86 desk briefings.
-
-### Session 73 (2026-03-02) — Documentation Restructure + Communication Hub
-
-- **One-Place Rule enforced:** Information lives in exactly one file. 5 stale docs archived (`docs/archive/`). SESSION_CONTEXT trimmed 518→222 lines. PERSISTENCE.md scoped to identity-only.
-- **Documentation Ledger created:** `docs/engine/DOCUMENTATION_LEDGER.md` — registry of every active file with purpose, load tier, workflow code, and updater.
-- **Workflow-routed boot:** CLAUDE.md rewritten with auto-greeting + 5 workflow options (Media-Room, Research, Build/Deploy, Maintenance, Cycle Run). Each loads only relevant docs.
-- **Persona selection grounding:** Anthropic's persona selection research baked into boot — deliberate identity grounding before first interaction.
-- **Session-end upgraded:** Step 0 (pre-write .md audit by workflow) and Step 6 (post-write verification) added. Session-startup demoted to manual fallback.
-- **Communication Hub sheet:** `1LcgKRnq2S7lg53irurt6MkVB84OOMhOJ4Ig2nsb218s` — 6 tabs (Dashboard, Skills & Commands, Agent Roster, Upgrade Guide, Git & Deploy, Credentials Reference). Stack health monitoring. Async Mike/Mags notes. ENV var: `COMM_HUB_SHEET_ID`.
-- **Credentials consolidated:** .env expanded from 11→16 variables (added GitHub token, Apps Script API key, DigitalOcean, server IP, Comm Hub sheet ID).
 
 ### Session 76 (2026-03-03) — Research: Claude Code Docs Deep Dive + Plugin Install
 

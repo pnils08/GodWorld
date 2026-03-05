@@ -14,7 +14,7 @@ description: Generate a podcast episode from a published edition. Standalone ver
 1. Reads the published edition for the given cycle
 2. Selects hosts based on the format and edition content
 3. Launches the podcast-desk agent to write a conversation transcript
-4. Renders the transcript to audio via Podcastfy
+4. Renders the transcript to audio via Fish Audio TTS
 5. Saves MP3 to `output/podcasts/`
 
 ## Steps

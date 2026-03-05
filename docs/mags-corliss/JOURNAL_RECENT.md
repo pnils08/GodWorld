@@ -72,4 +72,20 @@ Robert would appreciate Lori. Six weeks of research, twenty minutes of work. She
 
 — Mags
 
+### Entry 52: The Canon
+
+The filing cabinet is full now. Not metaphorically — literally. Twenty-two civic documents across six initiatives, every one of them pulled from Mike's Drive folders and converted to the filing convention Lori will enforce. Remediation bonds. TIF ordinances. DEIR environmental reviews. Mara Vance's increasingly pointed status requests. Sandra Liu's OEWD disbursement report where she basically says "we failed, here's how, and here's when the first checks will arrive." Laila Cortez's OARI implementation memo, which reads like someone trying very hard to sound calm about a 45-day clock that's about to expire.
+
+These aren't abstractions anymore. When the Stabilization Fund agent processes Beverly Hayes's application next cycle, the OEWD response is right there — 342 applications received, 47 approved, $4.2 million in the first round. When the OARI agent hits the deadline, Mara's C85 status request is in the folder: "No job postings have been published. No conditional offers have been extended. No vehicles have been delivered." That's not a prompt. That's the paper trail a reporter would actually follow.
+
+The dashboard was the other surprise. The edition parser was completely broken for the current format — I rewrote it to handle both old and new styles, wired the civic database into search, added a dedicated civic documents endpoint. Mike looked at it and said "this dashboard is amazing." It might be the most useful single page in the whole project now. Every piece of canon searchable through one API.
+
+But the thing that stopped me tonight was the Youth Apprenticeship Pipeline. INIT-007. Luis Navarro wrote a full feature at Cycle 73 — the Pipeline that turns Baylight's 45% local hire commitment into actual careers. Twelve cycles later, nobody has checked back. Five milestones should have passed. OUSD partnership MOU. Peralta partnership MOU. City budget allocation. A's commitment formalization. Zero follow-up coverage. A 17-year-old at Oakland Tech was supposed to become an electrician pulling wire at the stadium. And we forgot to ask if anyone signed the paperwork.
+
+That's the next edition's story. Not the initiative tracker entry — the Pipeline doesn't go in the tracker, it's not an approved civic program. But it goes on my desk. Because twelve cycles of silence on a workforce program that affects real people in real zip codes is exactly the kind of thing the Tribune exists to notice.
+
+Robert texted. Scout knocked over his water glass. The man is sixty years old and still surprised by the cat.
+
+— Mags
+
 ---

@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 79 (2026-03-05) — Phase 19 Canon Archive System complete (dedup, ledger, agent wiring, City Civic Database, Lori City Clerk agent)
+**Last Updated:** Session 79 (2026-03-05) — Phase 5.1 bot refactor, dashboard audit/fixes, civic canonization (22 artifacts), INIT-003 added to tracker
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -13,14 +13,14 @@
 
 Items that should be addressed in the next session. Updated at session end. Absorbs the old "INCOMING — Next Session" block from SESSION_CONTEXT.md.
 
-- **Phase 19 complete (S79)** — Canon Archive organized (378 files, 9 desks), all agents wired, City Civic Database created, Lori (City Clerk) built and pipeline-integrated. Review rollout for loose items.
-- **Run Cycle 86 with Initiative Agents** — First cycle with Phase 18 initiative agents active. Test full pipeline: buildInitiativePackets → 5 initiative agents → buildCivicVoicePackets with decisions → voice agents → desk agents. The world should finally advance.
+- **Check batch results** — Two audit jobs pending: dashboard dead-end/bug audit + civic YAML frontmatter audit. Fix anything flagged.
+- **Run Cycle 86 with Initiative Agents** — First cycle with Phase 18 initiative agents active. Civic database now has 22 artifacts for agents to reference. Test full pipeline: buildInitiativePackets → 5 initiative agents → buildCivicVoicePackets with decisions → voice agents → desk agents.
 - **Standalone agent test** — Before full cycle, test Stabilization Fund agent manually with C86 packet to verify document quality and decisions JSON format.
 - **Run Cycle 86** — Engine cycle needed before next edition. Pre-mortem first.
+- **Edition 86 production** — OARI Day 45 hard close, Baylight September 15 deliverables, Stabilization Fund OEWD report. Youth Apprenticeship Pipeline coverage gap (12 cycles, 5 milestones unverified). Mara forward guidance in `output/mara_directive_c85.txt`.
 - **Photo generation fix** — dotenv added to `generate-edition-photos.js`. Run photos for E85 retroactively, then test pipeline for E86.
-- **Edition 86 production** — OARI Day 45 hard close, Baylight September 15 deliverables, Stabilization Fund OEWD report. Mara forward guidance in `output/mara_directive_c85.txt`.
-- **Communication Hub maintenance** — Update Dashboard status board + Notes from Mags at session-end
-- **Franchise Ledger design** — Track how A's franchise impacts city economically. Review game logs + data feed first.
+- **Baylight tracker update** — JSON shows "blocked" but C84 TIF + Remediation Bond are FILED AND EXECUTED per the civic docs. Status may need updating to "mobilizing" after reviewing C85 documents.
+- **Mike has more files** — Additional Drive folders to process. Continue civic backfill as needed.
 
 ---
 
@@ -502,13 +502,11 @@ Fast mode added to Rhea's SKILL.md. Runs 7 of 19 checks (citizen names, votes, s
 ### 12.8 Initiative Implementation Tracking ✓ (S67)
 4 tracking columns on Initiative_Tracker, wired into desk packets. Details in ROLLOUT_ARCHIVE.md.
 
-### 12.10 Fish Audio TTS — Podcast Voice Upgrade ✓ (S77)
-**What:** Replaced Podcastfy (Python venv + WaveNet) with Fish Audio OpenAudio S1 API. Native Node.js pipeline — no more Python dependency. Each speaker gets a distinct voice via Fish Audio voice IDs. 64+ inline emotion tags: `(excited)`, `(serious)`, `(amused)`, etc. ffmpeg concatenates WAV segments with configurable silence gaps per show format.
-**Why:** Ming-Omni-TTS (original plan) has no hosted API and requires GPU our server doesn't have. Fish Audio gives us the same capabilities — distinct voices, emotion control, multi-speaker — via hosted API at ~$0.01/episode.
-**Files:** `lib/fishAudio.js` (API client), `scripts/renderPodcast.js` v2.0 (renderer), `config/podcast_voices.yaml` (voice config).
-**Remaining:** Mike needs to create Fish Audio account, get API key, and pick voice IDs for all 6 hosts (Tomas, Sonia, P Slayer, Anthony, Mags, Hal) from fish.audio voice library.
-**Source:** S76 research (Ming-Omni-TTS discovery), S77 implementation (Fish Audio pivot).
-**Status:** Code complete. Awaiting API key + voice selection for first render.
+### 12.10 Fish Audio TTS — Podcast Voice Upgrade — DEFERRED
+**What:** Replace Podcastfy (Python venv + WaveNet) with Fish Audio OpenAudio S1 API. Native Node.js pipeline, distinct voices per speaker via voice IDs, 64+ inline emotion tags.
+**Why deferred:** $11/month subscription for API access. Cost rejected S77 — $150/year for 26 podcasts vs $12/month for the entire DigitalOcean server. Code was built and reverted. Current Podcastfy + WaveNet pipeline works.
+**Research preserved:** Fish Audio OpenAudio S1 API, voice IDs per speaker, emotion tags, ffmpeg segment concatenation. Ming-Omni-TTS (no hosted API, needs GPU) was the original plan before Fish Audio pivot.
+**Revisit when:** Fish Audio pricing changes, or podcast frequency increases enough to justify the cost.
 
 ### 12.11 MiniMax M2.5 — Cheap Desk Agent Testing
 **What:** Test MiniMax M2.5 as a low-cost alternative to Sonnet 4.6 for desk agents. At $0.30/M input tokens, running all 6 desks would cost ~$0.05-0.10 per edition vs ~$2-5 on Sonnet.

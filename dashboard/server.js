@@ -119,19 +119,38 @@ function getLatestEdition() {
 
 function parseEdition(text) {
   const lines = text.split('\n');
-  // Header metadata
   const header = {};
-  const headerMatch = text.match(/THE CYCLE PULSE — EDITION (\d+)/);
-  if (headerMatch) header.cycle = parseInt(headerMatch[1]);
 
-  const line3 = lines[2] || '';
-  const parts = line3.split('|').map(s => s.trim());
-  if (parts.length >= 1) header.theme = parts[0];
-  if (parts.length >= 2) header.season = parts[1];
-  if (parts.length >= 3) header.holiday = parts[2];
+  // Detect format: current uses ############ section dividers, older uses #### markdown
+  const usesHashDividers = /^#{10,}$/m.test(text);
+
+  // --- Header parsing (both formats) ---
+  // Current format: "Edition 85 | Cycle 85 | September 2041"
+  const editionMatch = text.match(/Edition\s+(\d+)/i);
+  if (editionMatch) header.cycle = parseInt(editionMatch[1]);
+  // Legacy format: "THE CYCLE PULSE — EDITION 85"
+  if (!header.cycle) {
+    const legacyMatch = text.match(/THE CYCLE PULSE — EDITION (\d+)/);
+    if (legacyMatch) header.cycle = parseInt(legacyMatch[1]);
+  }
+
+  // Parse header metadata from pipe-delimited lines
+  for (const line of lines.slice(0, 10)) {
+    const parts = line.split('|').map(s => s.trim());
+    if (parts.length >= 3 && /\d{4}/.test(line)) {
+      header.theme = parts[0];
+      header.season = parts[1];
+      header.holiday = parts[2];
+    }
+  }
 
   const weatherLine = lines.find(l => l.startsWith('Weather:'));
   if (weatherLine) header.weather = weatherLine.replace('Weather:', '').trim();
+  // Weather in header line: "Back to School | Clear, 63°F"
+  if (!header.weather) {
+    const headerWeather = lines.slice(0, 8).find(l => /\d+°F/.test(l));
+    if (headerWeather) header.weather = headerWeather.trim();
+  }
 
   const sentLine = lines.find(l => l.startsWith('Sentiment:'));
   if (sentLine) {
@@ -141,76 +160,167 @@ function parseEdition(text) {
     header.pattern = sentParts[2]?.replace('Pattern:', '').trim();
   }
 
-  // Parse articles
+  // --- Article parsing ---
   const articles = [];
-  let currentSection = '';
-  let currentArticle = null;
 
-  for (const line of lines) {
-    if (line.startsWith('####') && !line.startsWith('#####')) {
-      const sectionName = line.replace(/#/g, '').trim();
-      if (sectionName) currentSection = sectionName;
-      continue;
+  if (usesHashDividers) {
+    // Current format: split on ############ lines, section name between dividers
+    const chunks = text.split(/^#{10,}$/m);
+    // Skip header chunks (before first section name), then alternate: name, content, name, content
+    const bodyChunks = [];
+    for (let c = 1; c < chunks.length; c++) {
+      const trimmed = chunks[c].trim();
+      if (!trimmed) continue;
+      // Skip the edition header block (contains "CYCLE PULSE" or "Edition \d+")
+      if (/CYCLE PULSE|^Edition\s+\d+/im.test(trimmed) && bodyChunks.length === 0) continue;
+      bodyChunks.push(chunks[c]);
     }
 
-    const bylineMatch = line.match(/^By (.+?) \| (.+)$/);
-    if (bylineMatch && currentArticle) {
-      currentArticle.author = bylineMatch[1].trim();
-      currentArticle.desk = bylineMatch[2].trim();
-      continue;
-    }
+    for (let i = 0; i < bodyChunks.length - 1; i += 2) {
+      const sectionName = bodyChunks[i].trim();
+      const content = bodyChunks[i + 1] || '';
+      if (!sectionName) continue;
 
-    if (line.startsWith('**') && line.endsWith('**') && !line.includes('Names Index')) {
-      const title = line.replace(/\*\*/g, '').trim();
-      if (currentArticle && currentArticle.title) {
-        // This might be a subtitle
-        if (!currentArticle.subtitle) {
+      // Split section content into articles on --- dividers
+      const articleTexts = content.split(/^---$/m);
+      for (const articleText of articleTexts) {
+        const trimmed = articleText.trim();
+        if (!trimmed || trimmed.length < 50) continue;
+
+        const artLines = trimmed.split('\n');
+        let title = '';
+        let subtitle = '';
+        let author = null;
+        let desk = null;
+        let namesIndex = '';
+        const bodyLines = [];
+
+        for (const al of artLines) {
+          const tl = al.trim();
+          if (!tl) continue;
+
+          // Byline: "By Author | Desk"
+          const byMatch = tl.match(/^By (.+?) \| (.+)$/);
+          if (byMatch) {
+            author = byMatch[1].trim();
+            desk = byMatch[2].trim();
+            continue;
+          }
+
+          // Names Index
+          if (tl.startsWith('Names Index:')) {
+            namesIndex = tl.replace('Names Index:', '').trim();
+            continue;
+          }
+
+          // Photo credit — skip
+          if (/^\[Photo:/.test(tl)) continue;
+
+          // Title: first # heading, ALL CAPS line, or **bold** line
+          if (!title) {
+            const h1Match = tl.match(/^#\s+(.+)/);
+            if (h1Match) { title = h1Match[1].trim(); continue; }
+            if (tl.startsWith('**') && tl.endsWith('**')) {
+              title = tl.replace(/\*\*/g, '').trim();
+              continue;
+            }
+            if (/^[A-Z][A-Z\s''',\-:—]{8,}$/.test(tl) && !tl.startsWith('By ')) {
+              title = tl;
+              continue;
+            }
+          }
+
+          // Subtitle: **bold** or ALL CAPS line right after title (before body)
+          if (title && !subtitle && bodyLines.length === 0) {
+            if (tl.startsWith('**') && tl.endsWith('**')) {
+              subtitle = tl.replace(/\*\*/g, '').trim();
+              continue;
+            }
+            if (/^[A-Z][A-Z\s''',\-:—]{8,}$/.test(tl) && !tl.startsWith('By ')) {
+              subtitle = tl;
+              continue;
+            }
+          }
+
+          bodyLines.push(al);
+        }
+
+        if (title) {
+          articles.push({
+            title,
+            subtitle,
+            section: sectionName,
+            author,
+            desk,
+            body: bodyLines.join('\n'),
+            namesIndex,
+          });
+        }
+      }
+    }
+  } else {
+    // Legacy format: #### sections with **bold** titles
+    let currentSection = '';
+    let currentArticle = null;
+
+    for (const line of lines) {
+      if (line.startsWith('####') && !line.startsWith('#####')) {
+        const sectionName = line.replace(/#/g, '').trim();
+        if (sectionName) currentSection = sectionName;
+        continue;
+      }
+
+      const bylineMatch = line.match(/^By (.+?) \| (.+)$/);
+      if (bylineMatch && currentArticle) {
+        currentArticle.author = bylineMatch[1].trim();
+        currentArticle.desk = bylineMatch[2].trim();
+        continue;
+      }
+
+      if (line.startsWith('**') && line.endsWith('**') && !line.includes('Names Index')) {
+        const title = line.replace(/\*\*/g, '').trim();
+        if (currentArticle && currentArticle.title && !currentArticle.subtitle) {
           currentArticle.subtitle = title;
           continue;
         }
+        if (currentArticle && currentArticle.title) articles.push(currentArticle);
+        currentArticle = { title, section: currentSection, body: '' };
+        continue;
       }
-      // Save previous article
-      if (currentArticle && currentArticle.title) {
-        articles.push(currentArticle);
-      }
-      currentArticle = { title, section: currentSection, body: '' };
-      continue;
-    }
 
-    if (line.startsWith('Names Index:') && currentArticle) {
-      currentArticle.namesIndex = line.replace('Names Index:', '').trim();
-      articles.push(currentArticle);
-      currentArticle = null;
-      continue;
-    }
-
-    if (line === '-----') {
-      if (currentArticle && currentArticle.title) {
+      if (line.startsWith('Names Index:') && currentArticle) {
+        currentArticle.namesIndex = line.replace('Names Index:', '').trim();
         articles.push(currentArticle);
         currentArticle = null;
+        continue;
       }
-      continue;
+
+      if (line === '-----') {
+        if (currentArticle && currentArticle.title) {
+          articles.push(currentArticle);
+          currentArticle = null;
+        }
+        continue;
+      }
+
+      if (currentArticle && line.trim()) {
+        currentArticle.body += (currentArticle.body ? '\n' : '') + line;
+      }
     }
 
-    if (currentArticle && line.trim()) {
-      currentArticle.body += (currentArticle.body ? '\n' : '') + line;
-    }
-  }
-
-  if (currentArticle && currentArticle.title) {
-    articles.push(currentArticle);
+    if (currentArticle && currentArticle.title) articles.push(currentArticle);
   }
 
   // Filter out garbage "articles" — metadata lines, section labels, etc.
   const filtered = articles.filter(a => {
     const t = a.title || '';
-    // Too short to be a real title
     if (t.length < 10) return false;
-    // Metadata patterns that aren't articles
     if (/^(ACTIVE|MAJOR|NEW|CITIZEN|STORYLINE|APPROVAL|PHASE|STILL|COMING|COUNCIL)/i.test(t) && t.endsWith(':')) return false;
     if (/^(By |Dear Editor|Names Index|Quick Takes:$)/i.test(t)) return false;
-    if (/^(ESTABLISHED CANON|PREWRITE|FACTUAL ASSERTIONS)/i.test(t)) return false;
-    // Must have some body content (not just a label)
+    if (/^(ESTABLISHED CANON|PREWRITE|FACTUAL ASSERTIONS|CIVIC OFFICIALS:|TEAM RECORDS:)/i.test(t)) return false;
+    // Filter out metadata sections that aren't real articles
+    const metaSections = ['CITIZEN USAGE LOG', 'CONTINUITY NOTES', 'ARTICLE TABLE', 'COMING NEXT CYCLE'];
+    if (metaSections.some(m => (a.section || '').toUpperCase().includes(m))) return false;
     if ((a.body || '').length < 50) return false;
     return true;
   });

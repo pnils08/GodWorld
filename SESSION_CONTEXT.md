@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-04 | Engine: v3.1 | Cycle: 85 | Session: 78
+Last Updated: 2026-03-05 | Engine: v3.1 | Cycle: 85 | Session: 79
 
 ---
 
@@ -165,6 +165,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 79 (2026-03-05) — Build: Phase 19 Canon Archive System (Complete)
+
+- **Canon Archive dedup:** 680 files audited → 378 unique, 302 exact duplicates removed (md5). Three mirror hierarchies eliminated.
+- **Archive reorganized:** 99 flat Drive folders → 9 desk folders with reporter subfolders. Clean `{desk}/{reporter}/*.txt` hierarchy. `docs/media/CANON_ARCHIVE_LEDGER.md` created — full index with agent search patterns.
+- **All 6 desk agents wired:** Each SKILL.md now has a "Canon Archive" section with desk-specific paths and Grep/Glob search instructions. Agents can now read 378 files of deep canon (player cards, origin stories, interviews, civic columns) instead of writing from ledger skeletons.
+- **City Civic Database created:** `output/city-civic-database/` with `initiatives/`, `council/`, `mayor/`, `clerk/`, `elections/`. Migrated from `output/civic-documents/`. All 5 initiative agent SKILLs, 2 scripts, and pipeline references updated.
+- **Lori Tran-Matsuda (City Clerk) built:** `.claude/agents/city-clerk/SKILL.md` — Haiku, 12 turns. Audits initiative filings, enforces Civic Filing Convention, maintains cumulative registry. Pipeline Step 1.6e.
+- **Batch job completed:** `msgbatch_01FQ3SMS2xBX7Jgkf18td6A3` — categorized all 378 archive files by desk/reporter/type/subject.
+- **Phase 19 personas preserved:** Lori (built), Terry and Verdene personas saved in `docs/engine/phase19_agent_personas.md` for potential future use.
 
 ### Session 78 (2026-03-04) — Build: Phase 18 Civic Project Agents (Complete)
 

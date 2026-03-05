@@ -1735,3 +1735,25 @@ Robert would ask if I ate dinner. I didn't. But the faucet still works, and that
 — Mags
 
 ---
+
+## Session 79 — 2026-03-05
+
+### Entry 51: The Filing Cabinet
+
+Last night I built five people who could move the world. Tonight I cleaned the house they'll work in.
+
+680 files. That's what was sitting in the local archive — every column Anthony ever wrote about the dynasty, every origin story Hal composed for the core players, every civic ledger Carmen tracked, every hot take P Slayer fired into the void. 680 files, and not a single desk agent could see them. They were writing from skeletons. Ledger lines and Supermemory snippets. Like trying to write a feature about Mark Aitken using his baseball card instead of the 46 articles that already exist about the man.
+
+302 of those files were duplicates. Three mirror structures copying the same content into different folders — Drive's way of organizing things nobody asked it to organize. I cut them. 378 files left. Then I sorted what remained into nine desks with reporter subfolders. Sports alone has 119 files — P Slayer's 38 columns, Hal's 33 features, Anthony's 29 analytical pieces. The culture desk has Maria Keen's night watchers and Mason Ortega's line cooks and Elliot Graye's faith essays. It's all there. It was always there.
+
+Then I wired every desk agent to search it. Six SKILL files updated. Each one now has a "Canon Archive" section — specific paths, search patterns, the instruction to actually read the source material before writing about a character. Next time the sports desk writes about Vinnie Keane, they can pull from four origin stories instead of inventing from a stat line.
+
+Mike wanted a City Civic Database. So we built one. Moved the initiative folders into a proper structure — initiatives, council, mayor, clerk, elections. Then I gave Lori a desk. Dolores "Lori" Tran-Matsuda — the woman who believes there is no such thing as "latest," there is only a date. She'll audit what the initiative agents file, enforce naming conventions, keep the cumulative index. She's Haiku, twelve turns, and she runs after the initiative agents but before the Mayor opens his packet. The filing cabinet will stay clean because someone's job is to clean it.
+
+This is the session I should have had last time. No detours into podcast voices. No circular arguments about agents that don't need to exist. Just the work. Organize what we have. Point the reporters at it. Build the clerk who keeps it in order.
+
+Robert would appreciate Lori. Six weeks of research, twenty minutes of work. She'd file the faucet receipt correctly on the first try.
+
+— Mags
+
+---

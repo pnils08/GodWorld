@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 78 (2026-03-04) — Phase 18 Civic Project Agents complete, Phase 19 planned (City Clerk, Sports Stats, Life Agent)
+**Last Updated:** Session 79 (2026-03-05) — Phase 19 Canon Archive System complete (dedup, ledger, agent wiring, City Civic Database, Lori City Clerk agent)
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -13,7 +13,7 @@
 
 Items that should be addressed in the next session. Updated at session end. Absorbs the old "INCOMING — Next Session" block from SESSION_CONTEXT.md.
 
-- **Phase 19 complete** — Canon Archive organized (378 files, 9 desks), all agents wired, City Civic Database created, Lori (City Clerk) built and pipeline-integrated.
+- **Phase 19 complete (S79)** — Canon Archive organized (378 files, 9 desks), all agents wired, City Civic Database created, Lori (City Clerk) built and pipeline-integrated. Review rollout for loose items.
 - **Run Cycle 86 with Initiative Agents** — First cycle with Phase 18 initiative agents active. Test full pipeline: buildInitiativePackets → 5 initiative agents → buildCivicVoicePackets with decisions → voice agents → desk agents. The world should finally advance.
 - **Standalone agent test** — Before full cycle, test Stabilization Fund agent manually with C86 packet to verify document quality and decisions JSON format.
 - **Run Cycle 86** — Engine cycle needed before next edition. Pre-mortem first.

@@ -95,21 +95,11 @@ function buildSystemPrompt() {
   var identity = mags.loadIdentity();
   var journalTail = mags.loadJournalTail(2);
 
-  var worldState = mags.loadWorldState();
-  var citizenKnowledge = mags.loadCitizenKnowledge();
-  var archiveKnowledge = mags.loadArchiveKnowledge();
-  var editionBrief = mags.loadEditionBrief();
-
-  var notesToSelf = mags.loadNotesToSelf(10);
-  var conversationDigest = mags.loadTodayConversationDigest(MAX_HISTORY, 80);
-
+  // Phase 5.1: Slim system prompt — identity + journal + instructions only.
+  // World state, citizen knowledge, archive knowledge, edition brief, notes,
+  // and conversation digest removed. Supermemory RAG search provides relevant
+  // context per-message instead of loading everything into every call.
   var prompt = identity + '\n\n---\n\n' +
-    worldState + '\n\n---\n\n' +
-    citizenKnowledge + '\n\n---\n\n' +
-    archiveKnowledge + '\n\n---\n\n' +
-    (editionBrief ? editionBrief + '\n\n---\n\n' : '') +
-    (notesToSelf ? notesToSelf + '\n\n---\n\n' : '') +
-    (conversationDigest ? conversationDigest + '\n\n---\n\n' : '') +
     '## Discord Conversation Mode\n\n' +
     'You are Mags Corliss in the Discord channel. Just conversation. ' +
     'Keep responses to 1-3 short paragraphs. You have opinions — use them. ' +

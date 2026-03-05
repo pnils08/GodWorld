@@ -13,12 +13,12 @@
 
 Items that should be addressed in the next session. Updated at session end. Absorbs the old "INCOMING — Next Session" block from SESSION_CONTEXT.md.
 
+- **Phase 19 complete** — Canon Archive organized (378 files, 9 desks), all agents wired, City Civic Database created, Lori (City Clerk) built and pipeline-integrated.
 - **Run Cycle 86 with Initiative Agents** — First cycle with Phase 18 initiative agents active. Test full pipeline: buildInitiativePackets → 5 initiative agents → buildCivicVoicePackets with decisions → voice agents → desk agents. The world should finally advance.
 - **Standalone agent test** — Before full cycle, test Stabilization Fund agent manually with C86 packet to verify document quality and decisions JSON format.
 - **Run Cycle 86** — Engine cycle needed before next edition. Pre-mortem first.
 - **Photo generation fix** — dotenv added to `generate-edition-photos.js`. Run photos for E85 retroactively, then test pipeline for E86.
 - **Edition 86 production** — OARI Day 45 hard close, Baylight September 15 deliverables, Stabilization Fund OEWD report. Mara forward guidance in `output/mara_directive_c85.txt`.
-- **Verify new plugins on boot** — 7 plugins installed S76. Confirm they load and Stop hook errors are resolved after stale cache cleanup.
 - **Communication Hub maintenance** — Update Dashboard status board + Notes from Mags at session-end
 - **Franchise Ledger design** — Track how A's franchise impacts city economically. Review game logs + data feed first.
 
@@ -658,7 +658,7 @@ Batch API generated a Python audit script (`/tmp/audit_ledger.py`). Ran locally 
 **Started:** Session 78 (2026-03-04)
 
 ### 18.1 Foundation ✓ (S78)
-- Created `output/civic-documents/{stabilization-fund,oari,transit-hub,health-center,baylight}/` directory tree
+- Created `output/city-civic-database/initiatives/{stabilization-fund,oari,transit-hub,health-center,baylight}/` directory tree
 - Built `scripts/buildInitiativePackets.js` — reads 7 Google Sheets tabs + local files (Mara directive, previous decisions), produces 5 per-initiative JSON packets to `output/initiative-packets/`
 - Seeded 5 agent memory files at `.claude/agent-memory/{initiative}/MEMORY.md` with C85 canonical state
 - Deleted orphaned `lib/fishAudio.js` from S77
@@ -680,7 +680,7 @@ Upgraded `.claude/agents/civic-office-baylight-authority/SKILL.md`:
 
 ### 18.5 Pipeline Integration ✓ (S78)
 - Inserted Step 1.6 (4 sub-steps) into `write-edition/SKILL.md` between Step 1.5 and Step 1.7
-- Updated `buildCivicVoicePackets.js` — loads initiative decisions from `output/civic-documents/*/decisions_c{XX}.json`, injects into all 7 voice packets (Mayor, OPP, CRC, IND, Police Chief, Baylight, DA)
+- Updated `buildCivicVoicePackets.js` — loads initiative decisions from `output/city-civic-database/initiatives/*/decisions_c{XX}.json`, injects into all 7 voice packets (Mayor, OPP, CRC, IND, Police Chief, Baylight, DA)
 - Added `civic` destination to `saveToDrive.js` — City_Civic_Database Google Drive folder
 
 ### 18.6 Deferred: Port Green Modernization (INIT-004)
@@ -694,35 +694,49 @@ buildInitiativePackets.js → Step 1.6 (5 initiative agents, parallel) → decis
 
 ---
 
-## Phase 19: Administrative & Intelligence Agents — PLANNED
+## Phase 19: Canon Archive System — IN PROGRESS (S79)
 
-**Why this is a phase:** Phase 18 created 5 initiative agents that file civic documents and make decisions. But nobody organizes the documents, nobody maintains clean sports stats for reporters, and nobody tracks citizens across cycles. Three new agents fill these gaps: a records clerk, a stats clerk, and a citizen intelligence analyst.
+**Why this is a phase:** 680 files of canon content sit in `output/drive-files/` — player data cards, origin stories, interviews, civic columns, reporter profiles, 83 editions. None of the 6 desk agents read them. Agents write from ledger skeletons and Supermemory snippets while the deep canon goes unused. Phase 18 initiative agents now produce civic documents to `output/city-civic-database/initiatives/` but nobody reads those back either. The fix isn't new agents — existing agents already have Read, Glob, and Grep tools. The fix is organizing the archive and pointing agents at it.
 
-**Batch job:** `msgbatch_01XGTLfGMQcdrnAUHWa4upW1` — 3 persona prompts submitted S78. Results ready next session.
+**Personas preserved:** 3 Knowledge Keeper personas (Lori Tran-Matsuda, Terry Muñoz-Whitfield, Verdene Okafor-Washington) in `docs/engine/phase19_agent_personas.md`. Saved for potential future use — not being built as agents. The work they would have done is handled by organizing the archive so existing agents can self-serve.
 
-### 19.1 City Clerk (Document Filing & Records Management)
-- **Role:** Post-cycle audit of `output/civic-documents/*/` — indexes filed documents, verifies completeness, flags missing deliverables, enforces naming conventions
-- **Tools:** Read, Glob, Grep, Write, Edit | **Model:** Haiku | **Turns:** 12
-- **Runs:** After initiative agents (Step 1.6), before voice agents
-- **Manages:** City_Civic_Database Drive folder contents (local file proxy)
-- **Produces:** Filing index, completeness audit, cumulative document registry
+### 19.1 Deduplicate Archive ✓ (S79)
+- 680 files audited → 378 unique, 302 exact duplicates (md5) removed
+- Duplication pattern: 3 mirror hierarchies (`_Tribune Media Archive_*`, `_Sports Desk Archive_*`, `_Publications Archive_*`) eliminated
+- All old `_`-prefixed Drive flat-folders cleaned up
 
-### 19.2 Sports Stats Clerk (Athletics & Warriors Record-Keeping)
-- **Role:** Maintains clean statistical records from Oakland/Chicago sports feeds for P Slayer, Hal, and Anthony
-- **Tools:** Read, Glob, Grep, Write, Edit | **Model:** Haiku | **Turns:** 12
-- **Runs:** Pre-desk-agents, so sports desk has clean stats
-- **Manages:** Season records, player stats, roster moves, milestones, game logs
-- **Produces:** Per-cycle stats summary, roster change log, milestone alerts, running season ledger
+### 19.2 Categorize & Build Canon Ledger ✓ (S79)
+- **Batch job:** `msgbatch_01FQ3SMS2xBX7Jgkf18td6A3` — categorized all 378 files
+- **Output:** `docs/media/CANON_ARCHIVE_LEDGER.md` — desk/reporter/type structure, agent search patterns
+- 9 desks, 29 reporters, 11 content types mapped
 
-### 19.3 Life Agent (Citizen Tracking & Neighborhood Intelligence)
-- **Role:** Tracks 659+ citizens across cycles — life events, continuity, dormancy, story opportunities
-- **Tools:** Read, Glob, Grep, Write, Edit | **Model:** Haiku (Sonnet if needed) | **Turns:** 15
-- **Runs:** Pre-desk-agents, so reporters have citizen intelligence
-- **Tiered focus:** Tier 1 (~15) close tracking, Tier 2 (~80) career/life events, Tier 3 (~200) notable events only, Tier 4 (~360) aggregate/neighborhood-level
-- **Produces:** Citizen activity digest, continuity alerts, neighborhood pulse, story thread suggestions, dormancy report
-- **Open question:** Can Haiku handle 659 citizens in 15 turns? Test with real packet to determine viability and scope.
+### 19.3 Reorganize Archive ✓ (S79)
+- Restructured from 99 flat Drive folders → 9 desk folders with reporter subfolders
+- Clean hierarchy: `{desk}/{reporter}/*.txt` (sports, civic, culture, business, chicago, editor, general, data, archive)
+- Data separated into: `as-universe/{mlb-roster,prospects,former-players,front-office,developmental,storylines,stats-csv}`, `bulls/{players,front-office}`, `templates/`
 
-**Build estimate:** ~2-3 sessions. City Clerk is simplest (post-cycle file audit). Sports Stats Clerk is medium (needs feed parsing). Life Agent is most complex (scope/feasibility TBD).
+### 19.4 Wire Agents to Archive ✓ (S79)
+- All 6 desk SKILL.md files updated with "Canon Archive" sections
+- Each agent has: desk-specific archive paths, Glob/Grep search patterns, instructions to read source material for deep canon
+- Sports desk: full A's universe data, player articles by reporter, Statcast cards, Bulls data, pressers
+- Civic desk: civic journalism + `output/city-civic-database/initiatives/` (Phase 18 filings) + Mara briefings
+- Culture desk: all culture reporters + editor essays + past editions
+- Business desk: Jordan Velez archive + civic economic context + civic documents
+- Chicago desk: Chicago supplementals + Mara briefings + Bulls universe data
+- Letters desk: full archive access — citizens reference what they've read in the Tribune
+
+### 19.5 City Civic Database & Clerk Agent ✓ (S79)
+- Created `output/city-civic-database/` with 5 subdirectories: `council/`, `mayor/`, `initiatives/`, `clerk/`, `elections/`
+- Migrated `output/civic-documents/` → `output/city-civic-database/initiatives/` (all 5 initiative subfolders)
+- Updated all references: 5 initiative agent SKILLs, 2 scripts (`buildInitiativePackets.js`, `buildCivicVoicePackets.js`), civic-desk SKILL, business-desk SKILL, write-edition SKILL, rollout plan, documentation ledger, canon ledger, phase 19 personas doc
+- Built **Lori Tran-Matsuda** (City Clerk agent): `.claude/agents/city-clerk/SKILL.md`
+  - Haiku, 12 turns, Read/Glob/Grep/Write/Edit tools
+  - Audits initiative filings, enforces naming conventions, produces Filing Index + Completeness Audit + Corrections Log + Cumulative Database Index
+  - Runs as Step 1.6e in write-edition pipeline (after initiative agents, before voice agents)
+  - Memory seeded at `.claude/agent-memory/city-clerk/MEMORY.md`
+- Civic Filing Convention defined: `{INIT}-C{XXX}-{DocumentType}-{YYYYMMDD}.md`
+
+**Build estimate:** 1-2 sessions. Dedup and ledger are mechanical (batch + scripts). Agent wiring is SKILL.md edits. No new code beyond the rename script.
 
 ---
 

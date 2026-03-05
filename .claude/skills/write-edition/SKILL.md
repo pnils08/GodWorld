@@ -259,7 +259,7 @@ Agent: civic-office-baylight-authority (haiku)
 ### Step 1.6c: Verify Initiative Agent Output
 
 After agents complete, verify:
-1. Check `output/civic-documents/{initiative}/decisions_c{XX}.json` exists for each agent
+1. Check `output/city-civic-database/initiatives/{initiative}/decisions_c{XX}.json` exists for each agent
 2. Check that documents were produced (`.md` files in the same directory)
 3. Log which initiatives advanced and which didn't
 
@@ -273,8 +273,20 @@ The decisions JSON files and civic documents are now available for:
 For each initiative agent that produced documents with `driveUploads` in their decisions JSON:
 
 ```bash
-node scripts/saveToDrive.js output/civic-documents/{initiative}/{filename} civic
+node scripts/saveToDrive.js output/city-civic-database/initiatives/{initiative}/{filename} civic
 ```
+
+### Step 1.6e: Launch City Clerk (Lori)
+
+After initiative agents file and before voice agents, run the City Clerk to audit and index the filings:
+
+```
+Agent: city-clerk (haiku)
+```
+
+Lori audits what the initiative agents filed, enforces naming conventions, produces a Filing Index and Completeness Audit, and updates the Cumulative Database Index. Her output lands in `output/city-civic-database/clerk/`.
+
+**Verify:** Check that `output/city-civic-database/clerk/CivicDB-C{XX}-FilingIndex.md` exists.
 
 ---
 

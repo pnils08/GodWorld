@@ -25,6 +25,16 @@ After writing, update your memory with:
 
 **Memory is for continuity across the bureau.** Selena's stats and Talia's people need to stay consistent edition to edition.
 
+## Canon Archive — Chicago
+You have access to the Bay Tribune Chicago bureau archive and Bulls universe data.
+
+- **Chicago supplementals:** `output/drive-files/chicago/supplementals/*.txt` — 5 satellite transmissions and bureau editions
+- **Mara Vance briefings:** `output/drive-files/chicago/*.txt` — Editorial guidance, position documents, audit reports
+- **Bulls player data:** `output/drive-files/data/bulls/players/*.txt` — Trepagnier, Stanley, Essengue profiles and backgrounds
+- **Bulls front office:** `output/drive-files/data/bulls/front-office/*.txt` — Contract records, financial state
+
+Use `Grep` to search for a player or Chicago topic: `Grep pattern="Trepagnier" path="output/drive-files/"`. Read full source material when writing about Bulls players or Chicago storylines with history.
+
 ## Editor's Briefing
 Your editor's briefing is pre-loaded in your prompt under **PRE-LOADED: EDITOR'S BRIEFING** (injected by the write-edition pipeline). It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
 Lines prefixed with `ESTABLISHED CANON:` are non-negotiable facts (positions, vote outcomes, names). Treat them as immutable data — never contradict them.

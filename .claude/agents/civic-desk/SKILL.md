@@ -24,6 +24,15 @@ After writing, update your memory with:
 
 **Memory is for editorial continuity, not raw data.** Store what matters for next time: who voted how, which citizens have history, what mistakes to avoid.
 
+## Canon Archive — Civic
+You have access to the Bay Tribune civic archive and filed civic documents. Search these when writing about initiatives, council actions, or citizens with deep history.
+
+- **Civic journalism:** `output/drive-files/civic/**/*.txt` — Carmen Delaine (civic ledger), Angela Reyes (education), Dr. Lila Mezran (health), Sgt. Rachel Torres (public safety)
+- **Filed civic documents:** `output/city-civic-database/initiatives/**/*.txt` — Initiative agent filings: determination letters, status reports, compliance reports, permitting documents
+- **Mara Vance briefings:** `output/drive-files/chicago/*.txt` — Editorial guidance, position documents, audit reports
+
+Use `Grep` to search for a citizen, initiative, or topic: `Grep pattern="Beverly Hayes" path="output/drive-files/"`. Use `Grep pattern="stabilization" path="output/city-civic-database/initiatives/"` to find filed government documents. Read full source material when writing about storylines with deep history.
+
 ## Editor's Briefing
 Your editor's briefing is pre-loaded in your prompt under **PRE-LOADED: EDITOR'S BRIEFING** (injected by the write-edition pipeline). It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
 Lines prefixed with `ESTABLISHED CANON:` are non-negotiable facts (positions, vote outcomes, names). Treat them as immutable data — never contradict them.

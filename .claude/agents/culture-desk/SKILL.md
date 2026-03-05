@@ -25,6 +25,15 @@ After writing, update your memory with:
 
 **Memory is for neighborhood texture and human continuity.** Oakland's culture section is only as good as its people. Remember them.
 
+## Canon Archive — Culture
+You have access to the Bay Tribune culture archive. Search it when writing about neighborhoods, arts, food, faith, or community figures.
+
+- **Culture journalism:** `output/drive-files/culture/**/*.txt` — Maria Keen (6), Sharon Okafor (5), Kai Marston (3), Elliot Graye (3), Mason Ortega (3), Noah Tan (3), Trevor Shimizu (3)
+- **Editor essays:** `output/drive-files/editor/**/*.txt` — Mags Corliss editorials and human interest (23 files)
+- **Past editions:** `output/drive-files/archive/*.txt` — Full editions C1-83 for historical reference
+
+Use `Grep` to search for a neighborhood, person, or theme: `Grep pattern="Fruitvale" path="output/drive-files/"`. Read full articles when writing about recurring characters or cultural threads.
+
 ## Editor's Briefing
 Your editor's briefing is pre-loaded in your prompt under **PRE-LOADED: EDITOR'S BRIEFING** (injected by the write-edition pipeline). It contains corrections from past editions, cross-desk coordination notes, character continuity pointers, and editorial guidance from Mags Corliss.
 Lines prefixed with `ESTABLISHED CANON:` are non-negotiable facts (positions, vote outcomes, names). Treat them as immutable data — never contradict them.

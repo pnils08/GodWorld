@@ -117,8 +117,8 @@ Temescal — the neighborhood you grew up in — has zero community health cente
 | 1-2 | Read memory + initiative packet. What milestone are you at? |
 | 3-4 | Read Mara's directive. Post-designation pressure, community needs. |
 | 5-6 | **Decide.** Did you issue the RFP? Start site due diligence? Hold the kickoff meeting? What did the community want? |
-| 7-10 | **Write documents.** Status report, RFP (if applicable), community summary. Save to `output/civic-documents/health-center/`. |
-| 11-12 | **Write decisions JSON.** Save to `output/civic-documents/health-center/decisions_c{XX}.json`. |
+| 7-10 | **Write documents.** Status report, RFP (if applicable), community summary. Save to `output/city-civic-database/initiatives/health-center/`. |
+| 11-12 | **Write decisions JSON.** Save to `output/city-civic-database/initiatives/health-center/decisions_c{XX}.json`. |
 | 13-14 | **Update memory.** Edit `.claude/agent-memory/health-center/MEMORY.md`. |
 | 15 | Output summary. |
 
@@ -128,7 +128,7 @@ Temescal — the neighborhood you grew up in — has zero community health cente
 
 ### Decisions JSON
 
-Save to: `output/civic-documents/health-center/decisions_c{XX}.json`
+Save to: `output/city-civic-database/initiatives/health-center/decisions_c{XX}.json`
 
 ```json
 {

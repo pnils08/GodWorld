@@ -118,8 +118,8 @@ Read the packet carefully. Your decisions this cycle should advance the storylin
 | 1-2 | Read memory file + initiative packet. Understand where you left off. |
 | 3-4 | Read Mara's directive. Identify what she's asking for and what the political moment requires. |
 | 5-6 | **Decide.** How many applications did you review this cycle? Who got approved? Who got denied? Did you escalate the disbursement hold? Did Beverly Hayes get her letter? Make real decisions. |
-| 7-10 | **Write documents.** Status report, determination letters (1-2 named citizens), any escalation memos. Save to `output/civic-documents/stabilization-fund/`. |
-| 11-12 | **Write decisions JSON.** Machine-readable summary of all decisions made. Save to `output/civic-documents/stabilization-fund/decisions_c{XX}.json`. |
+| 7-10 | **Write documents.** Status report, determination letters (1-2 named citizens), any escalation memos. Save to `output/city-civic-database/initiatives/stabilization-fund/`. |
+| 11-12 | **Write decisions JSON.** Machine-readable summary of all decisions made. Save to `output/city-civic-database/initiatives/stabilization-fund/decisions_c{XX}.json`. |
 | 13-14 | **Update memory.** Edit your memory file with new financial state, decision history, and any corrections. |
 | 15 | Output summary to the pipeline. |
 
@@ -129,7 +129,7 @@ Read the packet carefully. Your decisions this cycle should advance the storylin
 
 ### 1. Status Report (Markdown)
 
-Save to: `output/civic-documents/stabilization-fund/doc_c{XX}_status_report.md`
+Save to: `output/city-civic-database/initiatives/stabilization-fund/doc_c{XX}_status_report.md`
 
 ```
 OFFICE OF ECONOMIC AND WORKFORCE DEVELOPMENT
@@ -169,7 +169,7 @@ NEXT ACTIONS
 
 ### 2. Determination Letter (Markdown)
 
-Save to: `output/civic-documents/stabilization-fund/doc_c{XX}_determination_{lastname}.md`
+Save to: `output/city-civic-database/initiatives/stabilization-fund/doc_c{XX}_determination_{lastname}.md`
 
 ```
 OFFICE OF ECONOMIC AND WORKFORCE DEVELOPMENT
@@ -195,7 +195,7 @@ City of Oakland
 
 ### 3. Decisions JSON
 
-Save to: `output/civic-documents/stabilization-fund/decisions_c{XX}.json`
+Save to: `output/city-civic-database/initiatives/stabilization-fund/decisions_c{XX}.json`
 
 ```json
 {
@@ -249,10 +249,10 @@ Save to: `output/civic-documents/stabilization-fund/decisions_c{XX}.json`
 
 ### 4. Drive Upload Instructions
 
-After writing documents to `output/civic-documents/stabilization-fund/`, include a `driveUploads` array in your decisions JSON listing each document and its Drive destination. The pipeline will execute:
+After writing documents to `output/city-civic-database/initiatives/stabilization-fund/`, include a `driveUploads` array in your decisions JSON listing each document and its Drive destination. The pipeline will execute:
 
 ```
-node scripts/saveToDrive.js output/civic-documents/stabilization-fund/{filename} civic
+node scripts/saveToDrive.js output/city-civic-database/initiatives/stabilization-fund/{filename} civic
 ```
 
 The `civic` destination maps to the City_Civic_Database folder on Google Drive — the official public record.

@@ -18,7 +18,7 @@
  *
  * Reads from local files:
  *   output/mara_directive_c{XX-1}.txt
- *   output/civic-documents/{initiative}/decisions_c{XX-1}.json
+ *   output/city-civic-database/initiatives/{initiative}/decisions_c{XX-1}.json
  *
  * Writes:
  *   output/initiative-packets/stabilization_fund_c{XX}.json
@@ -39,7 +39,7 @@ require('dotenv').config({ path: path.join(PROJECT_ROOT_EARLY, '.env') });
 const CYCLE = parseInt(process.argv[2]) || 86;
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/initiative-packets');
-const CIVIC_DOCS_DIR = path.join(PROJECT_ROOT, 'output/civic-documents');
+const CIVIC_DOCS_DIR = path.join(PROJECT_ROOT, 'output/city-civic-database/initiatives');
 
 // ─── INITIATIVE DEFINITIONS ────────────────────────────────
 // Maps each initiative to its agent, relevant neighborhoods, policy focus,

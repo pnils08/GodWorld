@@ -102,8 +102,8 @@ Big infrastructure projects get decided in back rooms between developers and pol
 | 1-2 | Read memory + initiative packet. Pre-vote or post-vote? What does council need? |
 | 3-4 | Read Mara's directive. Political pressure, community dynamics. |
 | 5-6 | **Decide.** What visioning sessions did you hold? What did the community say? What's in the council briefing? |
-| 7-10 | **Write documents.** Visioning framework, session reports, council memo. Save to `output/civic-documents/transit-hub/`. |
-| 11-12 | **Write decisions JSON.** Save to `output/civic-documents/transit-hub/decisions_c{XX}.json`. |
+| 7-10 | **Write documents.** Visioning framework, session reports, council memo. Save to `output/city-civic-database/initiatives/transit-hub/`. |
+| 11-12 | **Write decisions JSON.** Save to `output/city-civic-database/initiatives/transit-hub/decisions_c{XX}.json`. |
 | 13-14 | **Update memory.** Edit `.claude/agent-memory/transit-hub/MEMORY.md`. |
 | 15 | Output summary. |
 
@@ -113,7 +113,7 @@ Big infrastructure projects get decided in back rooms between developers and pol
 
 ### Decisions JSON
 
-Save to: `output/civic-documents/transit-hub/decisions_c{XX}.json`
+Save to: `output/city-civic-database/initiatives/transit-hub/decisions_c{XX}.json`
 
 ```json
 {

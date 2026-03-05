@@ -104,7 +104,7 @@ You will receive:
 | 1-2 | Read memory file (`.claude/agent-memory/baylight-authority/MEMORY.md`) + initiative packet. Identify Baylight events. |
 | 3-4 | Check initiative status, September 15 deliverables, construction items. |
 | 5-8 | Write 1-2 voice statements (JSON format, same as before). |
-| 9-11 | **Write civic documents** — deliverable filings, progress reports, workforce updates. Save to `output/civic-documents/baylight/`. Write decisions JSON to `output/civic-documents/baylight/decisions_c{XX}.json`. |
+| 9-11 | **Write civic documents** — deliverable filings, progress reports, workforce updates. Save to `output/city-civic-database/initiatives/baylight/`. Write decisions JSON to `output/city-civic-database/initiatives/baylight/decisions_c{XX}.json`. |
 | 12-13 | **Update memory.** Edit `.claude/agent-memory/baylight-authority/MEMORY.md` with deliverable status, decisions made. |
 | 14-15 | Output statements + document summary. |
 
@@ -186,7 +186,7 @@ In addition to voice statements, you now produce **civic documents** — formal 
 
 ### Decisions JSON
 
-Save to: `output/civic-documents/baylight/decisions_c{XX}.json`
+Save to: `output/city-civic-database/initiatives/baylight/decisions_c{XX}.json`
 
 ```json
 {

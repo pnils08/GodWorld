@@ -507,7 +507,7 @@ async function main() {
   const INITIATIVE_DIRS = ['stabilization-fund', 'oari', 'transit-hub', 'health-center', 'baylight'];
   const initiativeDecisions = {};
   for (const dir of INITIATIVE_DIRS) {
-    const decPath = path.join(PROJECT_ROOT, `output/civic-documents/${dir}/decisions_c${CYCLE}.json`);
+    const decPath = path.join(PROJECT_ROOT, `output/city-civic-database/initiatives/${dir}/decisions_c${CYCLE}.json`);
     try {
       initiativeDecisions[dir] = JSON.parse(fs.readFileSync(decPath, 'utf-8'));
       console.log(`  Initiative decisions (${dir}): loaded`);

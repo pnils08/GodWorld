@@ -44,8 +44,18 @@ Before writing, read the voice files for your reporters. These contain exemplar 
 
 Match the voice in these files. The exemplar paragraphs show what your journalist ACTUALLY sounds like in published work. The Article Formats section gives structural templates for different story types. The DO NOT section lists mistakes that have happened before.
 
-## Player Card Index
-When writing about a specific player, check `docs/media/PLAYER_CARD_INDEX.md` for available Statcast player cards. Full cards live in `output/drive-files/_Sports_Journalism_Templates/Savant_Style/Savant_Series/`. Each card contains contact profiles, spray/zone behavior, pitch arsenals, career arcs, and per-journalist interpretation notes. Cards exist for: Keene, Davis, Kelley, Aitken, Dillon, Rivas, Ellis, Quintero, Morton, Clark, Lopez.
+## Canon Archive — Sports
+You have access to the full Bay Tribune sports archive. Search it when writing about players, reporters, or storylines with deep history.
+
+- **Player articles by reporter:** `output/drive-files/sports/{anthony,hal,p-slayer}/*.txt` — 100+ columns, features, interviews, dynasty essays
+- **TrueSource player data:** `output/drive-files/data/as-universe/mlb-roster/*.txt` — DataPages for every MLB roster player
+- **Prospect data:** `output/drive-files/data/as-universe/prospects/*.txt` — 14 top prospect DataPages
+- **Former players:** `output/drive-files/data/as-universe/former-players/*.txt` — departed player profiles
+- **Statcast cards:** `output/drive-files/data/templates/*.txt` — Savant-style cards for Keene, Davis, Kelley, Aitken, Dillon, Rivas, Ellis, Quintero, Morton, Clark, Lopez
+- **Bulls universe:** `output/drive-files/data/bulls/**/*.txt` — Chicago player cards and front office data
+- **Pressers:** `output/drive-files/sports/mike-paulson/*.txt` — Paulson press conferences and transcripts
+
+Use `Grep` to search for a player name across the archive: `Grep pattern="Aitken" path="output/drive-files/"`. Use `Glob` to list files: `Glob pattern="output/drive-files/sports/anthony/*.txt"`. Read full articles when writing about characters with deep canon history.
 
 # Sports Desk (Oakland) — Bay Tribune
 

@@ -94,7 +94,7 @@
 | `.claude/agent-memory/{initiative}/MEMORY.md` | Persistent memory for 5 initiative agents (stabilization-fund, oari, transit-hub, health-center, baylight-authority) | On-Demand | Initiative agents (every cycle) | M |
 | `scripts/buildInitiativePackets.js` | Per-initiative JSON packets from Sheets + Mara directive | On-Demand | Auto (code) | D, M |
 | `output/initiative-packets/` | Generated initiative packets + manifest | On-Demand | `buildInitiativePackets.js` | M |
-| `output/civic-documents/{initiative}/` | Civic documents + decisions JSON produced by initiative agents | On-Demand | Initiative agents | M |
+| `output/city-civic-database/initiatives/{initiative}/` | Civic documents + decisions JSON produced by initiative agents | On-Demand | Initiative agents | M |
 
 ### Rules (always loaded by path match)
 

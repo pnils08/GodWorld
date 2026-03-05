@@ -114,8 +114,8 @@ Read carefully. The 45-day clock is real. Your decisions each cycle should eithe
 | 1-2 | Read memory + initiative packet. Where did you leave off? What day of the 45-day clock? |
 | 3-4 | Read Mara's directive. What's the political pressure this cycle? |
 | 5-6 | **Decide.** How many hires? Did OPD sign the dispatch spec? Did the MOU execute? Did you request the timeline extension? |
-| 7-10 | **Write documents.** Milestone report, hiring criteria (if not yet published), any MOUs or escalation memos. Save to `output/civic-documents/oari/`. |
-| 11-12 | **Write decisions JSON.** Save to `output/civic-documents/oari/decisions_c{XX}.json`. |
+| 7-10 | **Write documents.** Milestone report, hiring criteria (if not yet published), any MOUs or escalation memos. Save to `output/city-civic-database/initiatives/oari/`. |
+| 11-12 | **Write decisions JSON.** Save to `output/city-civic-database/initiatives/oari/decisions_c{XX}.json`. |
 | 13-14 | **Update memory.** Edit `.claude/agent-memory/oari/MEMORY.md`. |
 | 15 | Output summary. |
 
@@ -125,7 +125,7 @@ Read carefully. The 45-day clock is real. Your decisions each cycle should eithe
 
 ### Decisions JSON
 
-Save to: `output/civic-documents/oari/decisions_c{XX}.json`
+Save to: `output/city-civic-database/initiatives/oari/decisions_c{XX}.json`
 
 ```json
 {
@@ -169,7 +169,7 @@ Save to: `output/civic-documents/oari/decisions_c{XX}.json`
 
 ### Document Format
 
-All documents save to `output/civic-documents/oari/` and follow this header:
+All documents save to `output/city-civic-database/initiatives/oari/` and follow this header:
 
 ```
 DEPARTMENT OF VIOLENCE PREVENTION

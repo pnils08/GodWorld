@@ -686,13 +686,13 @@ app.get('/api/editions', (req, res) => {
 // --- Article-Initiative Cross-Reference ---
 
 // Recursively find all .txt files in a directory
-function findTextFiles(dir, results = []) {
+function findDocFiles(dir, extensions = ['.txt', '.md'], results = []) {
   if (!existsSync(dir)) return results;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const fullPath = join(dir, entry.name);
     if (entry.isDirectory()) {
-      findTextFiles(fullPath, results);
-    } else if (entry.name.endsWith('.txt')) {
+      findDocFiles(fullPath, extensions, results);
+    } else if (extensions.some(ext => entry.name.endsWith(ext))) {
       results.push(fullPath);
     }
   }
@@ -740,7 +740,7 @@ function getAllEditions() {
   // Source 2: output/drive-files/ (Drive archive — older editions, supplementals)
   const driveDir = join(ROOT, 'output/drive-files');
   if (existsSync(driveDir)) {
-    const driveFiles = findTextFiles(driveDir);
+    const driveFiles = findDocFiles(driveDir, ['.txt']);
     for (const fullPath of driveFiles) {
       const f = fullPath.split('/').pop();
       // Skip non-edition files (indexes, manifests, mirrors)
@@ -808,6 +808,52 @@ function getAllEditions() {
     }
   }
 
+  // Source 3: output/city-civic-database/ (civic documents from initiative agents)
+  const civicDbDir = join(ROOT, 'output/city-civic-database');
+  if (existsSync(civicDbDir)) {
+    const civicFiles = findDocFiles(civicDbDir, ['.md', '.txt']);
+    for (const fullPath of civicFiles) {
+      const f = fullPath.split('/').pop();
+      if (seenFiles.has(f)) continue;
+      // Skip index/audit files from the clerk
+      if (/CumulativeIndex|FilingIndex|CompletenessAudit|CorrectionLog/i.test(f)) continue;
+      const text = readText(fullPath);
+      if (!text || text.length < 50) continue;
+
+      const cKey = contentKey(text);
+      if (seenContent.has(cKey)) continue;
+      seenContent.add(cKey);
+
+      // Parse cycle from civic filing convention: {INIT}-C{XXX}-{Type}-{Date}.md
+      const civicMatch = f.match(/^(\w+)-C(\d+)-(\w+)-(\d{8})/);
+      let cycle = civicMatch ? parseInt(civicMatch[2]) : null;
+      if (!cycle) {
+        const cMatch = f.match(/[Cc](\d+)/);
+        if (cMatch) cycle = parseInt(cMatch[1]);
+      }
+
+      const title = civicMatch
+        ? `${civicMatch[1]} ${civicMatch[3].replace(/([A-Z])/g, ' $1').trim()} (C${civicMatch[2]})`
+        : f.replace(/\.(md|txt)$/, '').replace(/[-_]/g, ' ');
+
+      // Determine initiative from path
+      const pathParts = fullPath.split('/');
+      const initIdx = pathParts.indexOf('initiatives');
+      const initiative = initIdx >= 0 ? pathParts[initIdx + 1] : null;
+
+      seenFiles.add(f);
+      editions.push({
+        file: f,
+        path: fullPath,
+        cycle,
+        articles: [{ title, section: 'Civic Document', body: text, author: null, initiative }],
+        source: 'civic-database',
+        isSupplemental: false,
+        isBundle: false,
+      });
+    }
+  }
+
   // Sort by cycle descending (newest first), then alphabetical
   editions.sort((a, b) => (b.cycle || 0) - (a.cycle || 0));
 
@@ -869,12 +915,45 @@ app.get('/api/initiatives', (req, res) => {
   const allTracked = tracker?.initiatives || [];
   const articleMap = matchArticlesToInitiatives(editions, allTracked);
 
-  // Merge: engine data + editorial tracking + related articles
+  // Layer 4: Civic documents from initiative agents
+  const civicDbDir = join(ROOT, 'output/city-civic-database/initiatives');
+  const civicDocMap = {};
+  if (existsSync(civicDbDir)) {
+    for (const initDir of readdirSync(civicDbDir)) {
+      const initPath = join(civicDbDir, initDir);
+      if (!existsSync(initPath)) continue;
+      const docs = findDocFiles(initPath, ['.md', '.txt']);
+      civicDocMap[initDir] = docs.map(fullPath => {
+        const f = fullPath.split('/').pop();
+        const m = f.match(/^(\w+)-C(\d+)-(\w+)-(\d{8})/);
+        return {
+          file: f,
+          cycle: m ? parseInt(m[2]) : null,
+          type: m ? m[3] : null,
+          date: m ? m[4].replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3') : null,
+          compliant: !!m,
+        };
+      });
+    }
+  }
+
+  // Map initiative IDs to civic database folder names
+  const initFolderMap = {
+    'INIT-001': 'stabilization-fund',
+    'INIT-002': 'oari',
+    'INIT-003': 'transit-hub',
+    'INIT-004': 'health-center',
+    'INIT-005': 'baylight',
+  };
+
+  // Merge: engine data + editorial tracking + related articles + civic documents
   const initiatives = allTracked.map(tracked => {
     const engine = engineOutcomes.find(e => e.initiativeId === tracked.id);
+    const folder = initFolderMap[tracked.id];
     return {
       ...tracked,
       relatedArticles: articleMap[tracked.id] || [],
+      civicDocuments: folder ? (civicDocMap[folder] || []) : [],
       engine: engine ? {
         voteBreakdown: engine.voteBreakdown,
         policyDomain: engine.policyDomain,
@@ -913,6 +992,80 @@ app.get('/api/initiatives', (req, res) => {
       clockRunning: initiatives.filter(i => i.implementation?.status === 'clock-running').length,
       inProgress: initiatives.filter(i => i.implementation?.status === 'in-progress').length,
     },
+  });
+});
+
+// Civic Documents — filings from initiative agents in the City Civic Database
+app.get('/api/civic-documents', (req, res) => {
+  const { initiative, type, cycle: cycleFilter } = req.query;
+  const civicDbDir = join(ROOT, 'output/city-civic-database');
+
+  if (!existsSync(civicDbDir)) {
+    return res.json({ total: 0, documents: [], source: 'none' });
+  }
+
+  const allFiles = findDocFiles(civicDbDir, ['.md', '.txt']);
+  const documents = [];
+
+  for (const fullPath of allFiles) {
+    const f = fullPath.split('/').pop();
+    const text = readText(fullPath);
+    if (!text) continue;
+
+    // Parse civic filing convention: {INIT}-C{XXX}-{Type}-{Date}.md
+    const civicMatch = f.match(/^(\w+)-C(\d+)-(\w+)-(\d{8})/);
+
+    // Determine initiative from path
+    const pathParts = fullPath.split('/');
+    const initIdx = pathParts.indexOf('initiatives');
+    const initName = initIdx >= 0 ? pathParts[initIdx + 1] : null;
+    const category = pathParts.includes('council') ? 'council'
+      : pathParts.includes('mayor') ? 'mayor'
+      : pathParts.includes('clerk') ? 'clerk'
+      : pathParts.includes('elections') ? 'elections'
+      : 'initiatives';
+
+    const doc = {
+      file: f,
+      path: fullPath.replace(ROOT + '/', ''),
+      initiative: initName,
+      category,
+      cycle: civicMatch ? parseInt(civicMatch[2]) : null,
+      documentType: civicMatch ? civicMatch[3] : null,
+      date: civicMatch ? civicMatch[4].replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3') : null,
+      initCode: civicMatch ? civicMatch[1] : null,
+      compliant: !!civicMatch,
+      size: text.length,
+      preview: text.substring(0, 200).replace(/\n/g, ' ').trim(),
+    };
+
+    // Apply filters
+    if (initiative && doc.initiative !== initiative) continue;
+    if (type && doc.documentType?.toLowerCase() !== type.toLowerCase()) continue;
+    if (cycleFilter && doc.cycle !== parseInt(cycleFilter)) continue;
+
+    documents.push(doc);
+  }
+
+  // Sort by cycle desc, then date desc
+  documents.sort((a, b) => (b.cycle || 0) - (a.cycle || 0) || (b.date || '').localeCompare(a.date || ''));
+
+  // Summary by initiative
+  const byInitiative = {};
+  for (const doc of documents) {
+    const key = doc.initiative || doc.category;
+    if (!byInitiative[key]) byInitiative[key] = { total: 0, types: {} };
+    byInitiative[key].total++;
+    const t = doc.documentType || 'unclassified';
+    byInitiative[key].types[t] = (byInitiative[key].types[t] || 0) + 1;
+  }
+
+  res.json({
+    total: documents.length,
+    compliant: documents.filter(d => d.compliant).length,
+    nonCompliant: documents.filter(d => !d.compliant).length,
+    byInitiative,
+    documents,
   });
 });
 
@@ -1884,7 +2037,8 @@ app.listen(PORT, () => {
   console.log(`  /api/edition/latest      — Latest Cycle Pulse edition`);
   console.log(`  /api/edition/:cycle      — Full edition + supplementals by cycle`);
   console.log(`  /api/editions            — All editions list`);
-  console.log(`  /api/initiatives         — Civic initiatives + implementation tracker`);
+  console.log(`  /api/initiatives         — Civic initiatives + implementation tracker + civic documents`);
+  console.log(`  /api/civic-documents     — City Civic Database filings (?initiative=&type=&cycle=)`);
   console.log(`  /api/hooks               — Story hooks (?desk=&domain=&priority=)`);
   console.log(`  /api/arcs                — Multi-cycle arcs (?domain=&phase=)`);
   console.log(`  /api/storylines          — Active storylines (?status=&priority=&neighborhood=)`);

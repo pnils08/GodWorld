@@ -1,11 +1,11 @@
 # Culture Desk — Editorial Memory
 
-Last Updated: 2026-03-02 | Last edition: E85 (Cycle 85, September 2041)
+Last Updated: 2026-03-06 | Last edition: E86 (Cycle 86, August 2041)
 
 ## Cultural Entities & Venues
 - Muralist Dante Reyes: artist, Jack London neighborhood. Documenting corridor before Baylight demolition.
 - Gallery Owner Mei Chen: PHANTOM — do not use. Listed in E81 errata.
-- St. Columba Catholic Church: Fruitvale. Runs food pantry (Saturdays) + Assumption observance (September).
+- St. Columba Catholic Church: Fruitvale. Runs food pantry (Saturdays) + Assumption observance (August/September). Pastor: Father Manuel Avila (11 years tenure — introduced E86, canon pending verification).
 - Acts Full Gospel Church: West Oakland. Annual community health fair (September).
 - Temple Sinai: Rockridge. Annual fall job training workshop (8 weeks, begins September).
 - Shiva Vishnu Temple: Montclair. Janmashtami observance (September).
@@ -25,7 +25,8 @@ Last Updated: 2026-03-02 | Last edition: E85 (Cycle 85, September 2041)
 - Cathedral of Christ the Light (Lake Merritt) — covered E84
 - Oakland Buddhist Temple (Chinatown) — covered E84
 - East Bay Meditation Center (Downtown) — covered E84
-- Allen Temple — citywide, covered E84 summary reference
+- Allen Temple Baptist Church: East Oakland, 85th Avenue. Saturday food pantry (weekly, no advertising). Covered E84 summary, E86 feature (Elliot Graye).
+- Masjid Al-Islam: East Oakland. Job training workshops (ongoing, new session August 2041). Covered E86.
 
 ## Citizens with Coverage History
 

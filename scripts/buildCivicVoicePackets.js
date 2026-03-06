@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('dotenv').config();
 /**
  * buildCivicVoicePackets.js v1.0
  *

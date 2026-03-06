@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 85 — 2026-03-03**
+**Last Updated: Edition 86 — 2026-03-06**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -26,6 +26,68 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 86 (Grade: A — First A of the project — Mara audit by Mike)
+
+15 articles + 3 letters across 6 desks. Full civic voice pipeline (7 voice agents). Initiative agents produced documents for the first time. Carmen Delaine front page. Mara audit conducted by Mike personally — six corrections, all continuity details, no structural errors. First edition with zero vote inversions, zero fourth-wall breaks, and an A grade.
+
+**Errors Found and Fixed (all pre-publication):**
+
+1. **Mobley missing from vote roll call.** Carmen's Transit Hub article listed OPP support but never named Mobley individually. He's D9/OPP — automatic YES. Fixed: added explicit Mobley YES vote.
+
+2. **Affordability percentage mismatch.** CBA framework listed "35 percent affordable" while project file says 67% (280 of 420 units). Mara caught it. Fixed: 35% is now the CBA's minimum binding floor, with project scope targeting 67% across 420 units. The community visioning process refined the enforceable commitment.
+
+3. **Stabilization Fund numbers didn't reconcile.** Carmen said 12 families approved with $4.2M — which implies $350K per family, wildly above the $5K-$75K award range. The 12 are a Phase 1 disbursement subset of 47 total approved; $4.2M is the Phase 1 allocation, not per-family. Fixed: language clarified.
+
+4. **Stabilization Fund passage date wrong.** Carmen wrote "authorized in 2038" and "three years ago." Rollout doc: C78 = spring 2041. This is the third edition with date drift on this initiative (E84: "spring 2038," E85: "late 2040," E86: "2038"). Fixed to "early 2041" and "last year." Standing instruction: Stabilization Fund passed C78 = early 2041. Period.
+
+5. **Ernesto vs. Hector Quintero.** C84 established him as Ernesto Quintero, DH. C86 agents wrote "Hector" in Names Index and continuity notes. TrueSource card confirms Ernesto. Fixed with replace_all.
+
+6. **Travis Coles position error.** SP in all prior canon. C86 Anthony's piece said "entrenched at second base." Agent confused Coles with another player. Fixed to SP everywhere.
+
+**What Worked:**
+
+- **First A.** Six corrections, all continuity. No vote fabrication (pattern broken since E85). No temperature errors. No citizen triple-counting. No fourth-wall breaks.
+- **Carmen Delaine's Transit Hub piece** is the deepest civic reporting the newsroom has produced. Calvin Turner's lived experience anchors $230M in policy to a man who fixes machines.
+- **Beverly Hayes finally has a full profile.** 58, West Oakland, home health aide, $38,000 income, $18,500 approved. The determination letter with the splitting fold. Mara's best citizen moment.
+- **Navarro's OARI piece** — dispatch integration as genuine suspense. Montez public statement vs. written approval distinction is precise journalism. Dr. Tran-Muñoz's Day 40 hard deadline creates a clock within the clock.
+- **Talia Finch's phone-face-up payoff.** Three editions building one gesture. Masterful continuity.
+- **P Slayer's Keane academy opinion** — "a building with the windows lit up." Best opinion writing in the project.
+- **Hal Richmond's farewell essay** — mechanical keyboard at 6 AM. Devastating in the best way.
+- **Voice agent pipeline working.** 7 voice agents (Mayor, OPP, CRC, IND, Police Chief, Baylight Authority, Stabilization Fund) all produced structured statements. Reporters quoted institutional voices. This is the system working as designed.
+- **Initiative agents working.** Stabilization Fund agent produced status report, determination letter (English + Spanish), authorization memo. Health Center agent produced status report. First cycle of document generation.
+
+**Character Continuity — Active Threads (updated from E86):**
+
+- **Beverly Hayes** (58, West Oakland, home health aide) — FULLY ESTABLISHED. $18,500 approved. Determination letter received. Has her story now.
+- **Calvin Turner** (38, Fruitvale, mechanic) — Transit Hub vote + food pantry. Two appearances, different desks, consistent.
+- **Delia Fuentes** (44, Fruitvale, school bus driver) — NEW. Transit Hub citizen voice.
+- **Gloria Meeks** — Returning letter writer. Consistent.
+- **Howard Young** (56, Rockridge, barista) — Art & Soul letter. Returning from E85.
+- **Dante Nelson** — Used in P Slayer opinion piece (nephew at Keane academy). Monitor rest cycle for E87.
+- **Carla Edmonds** (58, West Oakland, retired postal) — Was on rest through C86. Available for E87.
+- **Paulette Okafor** (62, Bridgeport, school office admin) — Phone face-up. Three-edition gesture payoff.
+- **Raymond Polk** (55, Bridgeport, contractor) — Ownership statement reaction.
+
+**New Canon Figures:**
+- Elena Soria Dominguez — Planning Lead, Bureau of Planning & Building
+- Marcus Webb — OEWD Program Director, Stabilization Fund
+- Dr. Vanessa Tran-Muñoz — OARI Program Director
+- Laila Cortez — Chief of Staff, Mayor's Office
+- Father Manuel Avila — Pastor, St. Columba Catholic Church (11 years)
+- Masjid Al-Islam — New faith institution, East Oakland
+
+**Next Gates (C87):**
+- OARI Day 45 hard close — dispatch integration signed or D1-only contingency activates
+- Stabilization Fund — remaining 35 of 47 approved families awaiting disbursement. Processing pipeline for 277 in queue.
+- Fruitvale Transit Hub — design consultant RFP release. Three community design sessions.
+- Baylight — mobilization timeline now active. When does ground actually break?
+- Temescal Health Center — operator selection. Critical path blocker per status report.
+- Deputy Mayor Osei portfolio — still unanswered from E85.
+- Rose Delgado needs editorial space (absent from E85 AND E86 civic coverage).
+- Terrence Mobley — finally confirmed YES on Transit Hub but still needs a substantive quote.
+
+---
 
 ### Edition 85 (Grade: A- — Mara 88/100 — Second consecutive clean vote audit)
 

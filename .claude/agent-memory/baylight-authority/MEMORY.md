@@ -1,33 +1,39 @@
 # Baylight Authority — Agent Memory
 
-Last Updated: Seed | Most recent cycle: C85 (pre-agent)
+Last Updated: Cycle 86, October 2041 | Most recent agent action: Deliverable filing
 
 ## Initiative Status
 - **INIT-006**: Baylight District Development
 - **Budget**: $2.1B
-- **Status**: passed (C83, 6-3 vote)
-- **Implementation Phase**: active construction + deliverables
+- **Status**: passed (C83, 6-3 vote) — Implementation active
+- **Implementation Phase**: construction mobilization (starts Oct 2)
 - **Lead Faction**: OPP | **Opposition**: CRC
 - **Vote**: YES — Carter, Tran, Delgado, Rivers, Mobley, Vega | NO — Crane, Ashford, Chen
 
-## September 15 Deliverables (5 items)
-1. **Mobilization timeline** — construction staging and workforce deployment schedule
-2. **Anchor tenant disclosure** — named commercial tenants for Phase 1
-3. **TIF language** — Tax Increment Financing district boundaries and terms
-4. **Remediation bond** — environmental cleanup funding mechanism
-5. **Workforce agreement** — local hire percentages, union terms, training pipeline
+## September 15 Deliverables — ALL FILED (C86)
+1. **Mobilization timeline** — FILED. 18-month phased schedule, Oct 2 start
+2. **Anchor tenant disclosure** — FILED. Harborline Kitchen, Bay Area Bookstore Co-op, The Commons Coffee
+3. **TIF language** — FILED. BD-83-TIF 30-year, 8 categories, 3% admin cap
+4. **Remediation bond** — FILED. BD-83-REB $45M, Oct 1 execution
+5. **Workforce agreement** — FILED. 35% journey, 25% apprentice, 40% SBE targets
 
-All 5 due September 15 (simulation date). Director Ramos says on track.
+## Decision History (C86)
+- Confirmed all 5 deliverables filed by September 15 deadline
+- Made determination: Project on-track for October 2 mobilization
+- Issued confidence statement: "Five deliverables submitted. Now we move to financial close."
 
-## Decision History
-*No agent decisions yet — this is the seed state. Keisha Ramos has been producing voice statements since C83.*
-
-## Documents Produced
-*No civic documents yet. Voice statements exist in output/civic-voice/ as baylight_authority_c{XX}.json.*
+## Documents Produced (C86)
+- BAYL-C086-MobilizationTimeline-20410915.md
+- BAYL-C086-TIFLanguageFinal-20410915.md
+- BAYL-C086-RemediationBond-20410915.md
+- BAYL-C086-WorkforceAgreement-20410915.md
+- BAYL-C086-AnchorTenantDisclosure-20410915.md
+- decisions_c86.json
 
 ## Key Citizens
-- **Brian Williams** (60, Chinatown, Mechanic, Baylight Construction Authority) — appeared C85, working on construction site equipment.
-- **Mateo Walker** (25, Chinatown, Electrician, Port of Oakland, trade union rep) — appeared C85, D2 exclusion from OARI angle.
+- **Brian Williams** (42, Chinatown, Mechanic, Baylight Construction Authority) — appeared C85, working on construction site equipment. Core narrative: aging equipment maintenance, pride in infrastructure.
+- **Mateo Walker** (25, Chinatown, Electrician, Port of Oakland, trade union rep) — appeared C85, D2 OARI angle. Local hire pipeline candidate for Baylight apprenticeships.
+- **Marcus Walker** (48, Jack London, Dishwasher/OHA resident) — appeared C85, First Friday culture piece. Displacement concern from Baylight construction boundary.
 
 ## Key Officials
 - **Keisha Ramos** — Director, Baylight Authority. The face of the project. Confident, milestone-driven.

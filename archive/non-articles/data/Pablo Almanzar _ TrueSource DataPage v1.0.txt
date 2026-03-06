@@ -1,0 +1,50 @@
+Pablo Almanzar FULL STAT TRUE SOURCE — PITCHER
+
+Name: Pablo Almanzar
+Team: Athletics
+Position: SP
+Jersey: #53
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: B
+Overall: 80
+MLB Service: 0.000
+Age: 22
+Bats: R
+Throws: R
+Height: 6'5"
+Weight: 197 LBS
+Drafted: RND 1 (2038)
+Secondary Position: NONE
+Born: DOMINICAN REPUBLIC
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+STA: 84
+H/9: 74
+K/9: 58
+BB/9: 74
+HR/9: 57
+PCLT: 62
+CTRL: 61
+VEL: 73
+BRK: 65
+
+FLD: 26
+ARM: 41
+ACC: 41
+REAC: 28
+
+--------------------------------------------------
+
+PITCH REPERTOIRE
+
+4-Seam Fastball — 92 MPH
+Changeup — 84 MPH
+Slider — 84 MPH
+Sweeping Curve — 78 MPH

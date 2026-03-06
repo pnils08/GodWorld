@@ -1,0 +1,45 @@
+Gordon Cabrera FULL STAT TRUE SOURCE — BATTER
+
+Name: Gordon Cabrera
+Team: Athletics
+Position: 1B
+Jersey: #13
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: B
+Overall: 68
+MLB Service: 0.000
+Age: 21
+Bats: L
+Throws: R
+Height: 5'11"
+Weight: 199 LBS
+Drafted: RND 1 (2040)
+Secondary Position: NONE
+Hitter Tendency: WHOLE FIELD
+Born: IOWA
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+CON R: 52
+CON L: 47
+POW R: 63
+POW L: 68
+VIS: 58
+DISC: 34
+CLT: 53
+BUNT: 10
+DBUNT: 11
+DUR: 36
+FLD: 74
+ARM: 48
+ACC: 37
+REAC: 68
+SPD: 39
+STEAL: 39
+BR AGG: 58

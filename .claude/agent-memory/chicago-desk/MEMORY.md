@@ -1,6 +1,6 @@
 # Chicago Desk — Editorial Memory
 
-Last Updated: 2026-02-17 | First edition with memory: pending
+Last Updated: 2026-03-06 | Last edition written: E86 (C86)
 
 ## Bulls Roster Notes
 - **CRITICAL**: Watch for real NBA name leaks. E82 had "Josh Smith" which should be "Jalen Smith" (our canon). If a name sounds like a real NBA player but isn't in the packet roster, FLAG IT.
@@ -8,6 +8,10 @@ Last Updated: 2026-02-17 | First edition with memory: pending
 - Always verify Bulls record against Chicago_Sports_Feed before writing.
 
 ## Chicago Citizens (Talia's Sources)
+
+### E86 (C86, August 2041)
+- **Paulette Okafor** — Bridgeport, school office admin (elementary school, 2 blocks off Halsted). Phone FACE-UP (shifted from face-down in E85). Read ownership statement before arriving at Romano's. Quote: "I'm trying to figure out if that's supposed to be reassuring. Like, 'it's fine, nobody made any promises.' But if nobody made any promises, then he can just leave."
+- **Raymond Polk** — Bridgeport, contractor. Patience framing softening. Quote: "I think he'd be a fool not to at least listen. And I think we'd be fools to hold it against him if he did." Both at Romano's on 35th.
 
 ### E85 (C85, September 2041)
 - **Paulette Okafor** — Bridgeport, school office administration (elementary school, 2 blocks off Halsted). Returning from E84. Processes Paulson/Golden State silence. Phone face-down (vs. face-up in E84). Quote: "At some point the silence is the statement."
@@ -22,12 +26,14 @@ Last Updated: 2026-02-17 | First edition with memory: pending
 - E85: Roster includes real NBA names (Giddey, Kessler, Huerter) — these are intentional canonical imports per the packet/briefing. Use as given. NOT leaks.
 
 ## Bulls Records by Edition
+- E86 (C86): Bulls 56-22, W3 streak, best in East. Beat Knicks 107-99 (Dosunmu 24pts, Stanley 20/5/9/2, Kessler 18/12). Lost to Spurs 111-115 (Kessler 22/10, Trepagnier 9/8/5/2). Stanley 6th tech. Ownership statement: "Long term commitments were not made."
 - E85 (C85): Bulls 52-21, W6 streak, best record in East. OKC stomped 116-101. Trepagnier 29/11. Stanley chippy/technicals.
 - E84 (C84): Bulls 44-20 (per archive). Paulson sat courtside at Chase Center in Bulls red. Warriors 39-28.
 
 ## Paulson Thread Status
 - E84: Paulson at Chase Center in Bulls red. Golden State contact confirmed. Paulson silent.
-- E85: Still silent on Golden State. Bulls now 52-21. Bridgeport reading silence as answer. No comment on Warriors interest.
+- E85: Still silent on Golden State. Bulls now 52-21. Bridgeport reading silence as answer.
+- E86: Ownership statement public — "Long term commitments were not made." Paulson silent on both Golden State AND the ownership statement. Warriors 39-28. Bridgeport shifting from patience to resigned acceptance.
 
 ## Venue Continuity
 - Romano's on 35th — established in Talia's voice profile. Used E84, E85.

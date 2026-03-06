@@ -1,0 +1,51 @@
+Norman Kirkland FULL STAT TRUE SOURCE — BATTER
+
+Name: Norman Kirkland
+Team: Midland RockHounds
+Position: 2B
+Jersey: #8
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: B
+Overall: 71
+MLB Service: 0.000
+Age: 20
+Bats: R
+Throws: R
+Height: 5'9"
+Weight: 198 LBS
+Drafted: RND 1 (2038)
+Secondary Position: 3B, SS
+Hitter Tendency: WHOLE FIELD
+Born: PENNSYLVANIA
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+CON R: 55
+CON L: 75
+POW R: 34
+POW L: 39
+VIS: 77
+DISC: 65
+CLT: 59
+BUNT: 22
+DBUNT: 18
+DUR: 80
+FLD: 74
+ARM: 64
+ACC: 63
+REAC: 60
+SPD: 59
+STEAL: 81
+BR AGG: 49
+
+--------------------------------------------------
+
+QUIRKS
+
+Breaking Ball Hitter

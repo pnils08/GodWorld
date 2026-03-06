@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 80 (2026-03-05) — 9 items shipped: 8.3 snapshots, 6.6 skill hook, 6.7 maintenance cron, 7.8 plugins marked, 8.7 dashboard auth, 6.4/6.4b Playwright QA + a11y, 7.5 Mags agent, edition parser fix. Tech reading mapped to rollout.
+**Last Updated:** Session 82 (2026-03-06) — E86 published (first A grade). Phase 22 added: CIVIC clock mode, arc engine investigation, agent write access + hardcoded directories. Next session priorities updated.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -13,12 +13,17 @@
 
 Items that should be addressed in the next session. Updated at session end. Absorbs the old "INCOMING — Next Session" block from SESSION_CONTEXT.md.
 
-- **Standalone initiative agent test** — Test Stabilization Fund agent manually with existing C86 packet to verify document quality and decisions JSON format. Packets already generated (`output/initiative-packets/`).
-- **Run Cycle 86** — Engine cycle with Phase 18 initiative agents active for the first time. Pre-mortem first. Full pipeline: buildInitiativePackets → 5 initiative agents → Lori (city clerk) → buildCivicVoicePackets with decisions → voice agents → desk agents.
-- **Edition 86 production** — OARI Day 45 hard close, Baylight now mobilizing (tracker updated S80), Stabilization Fund OEWD report. Youth Apprenticeship Pipeline coverage gap (12 cycles, 5 milestones unverified). Mara forward guidance in `output/mara_directive_c85.txt`.
-- **Photo pipeline re-test** — Edition parser fixed (S80), photos will now land in `output/photos/e85/`. Retry 5th photo that failed on transient 500.
+- ✅ ~~Standalone initiative agent test~~ — Initiative agents ran successfully in E86. Documents produced, decisions JSON worked.
+- ✅ ~~Run Cycle 86~~ — Complete. Initiative agents, voice agents, desk agents all ran.
+- ✅ ~~Edition 86 production~~ — Published. First A grade. Mara audit by Mike. Six corrections applied.
+- ✅ ~~Photo pipeline re-test~~ — 3 photos generated for E86, all clean.
+- **Phase 22.3: Agent write access + directories** — Add Write/Edit to 12 agents (6 desk, 6 voice). Hardcode output paths as agent workspaces. Business and letters desks couldn't write in E86.
+- **Phase 22.1: CIVIC clock mode** — Create third mode for council members. Health progression + life history, no career/migration. Crane and Osei frozen for multiple editions.
+- **Phase 22.2: Arc engine investigation** — Diagnose why citizen story arcs aren't advancing. Check Event_Arc_Ledger, arc generation, packet inclusion.
+- **Ledger fix (manual):** Crane → recovering (C83), Osei → serious-condition (C84). Make ledger match narrative.
 - **Monitor Haiku voice quality** — Bot switched S80. One week observation period.
 - **Dashboard a11y fixes** — 8 unlabeled buttons (critical), 78 low-contrast elements (serious). Baseline from `/visual-qa`.
+- **Supermemory ingest retry** — E86 ingest failed (quota exceeded, site down). Retry when service is back.
 
 ---
 
@@ -671,6 +676,102 @@ buildInitiativePackets.js → Step 1.6 (5 initiative agents, parallel) → decis
 
 ---
 
+## Phase 22: Agent Infrastructure Fixes (Post-E86 Audit)
+
+Source: E86 production audit (Session 82, 2026-03-06). Three systemic issues surfaced during the first full initiative-agent edition run.
+
+### 22.1 CIVIC Clock Mode — Health & Life History for Civic Office Holders
+
+**Problem:** Council members and civic office holders are `ClockMode: GAME` because they can't randomly change jobs, migrate, or get economic engine treatment — Mike controls their positions manually, same as sports players. But unlike sports players, civic figures DO need:
+- Health state progression (Elliott Crane has been "recovering" for multiple editions with no progression; Marcus Osei has been in "serious condition" since C84 with no change)
+- Life history events that develop their personality and voice
+- Aging, family events, seasonal observations
+
+The `generationalEventsEngine.js` has full health lifecycle code (hospitalized → recovering → active, or → critical → deceased) but skips all `GAME` mode citizens. Setting civic figures to `ENGINE` would let the career engine randomly promote the mayor or migrate a council member — unacceptable.
+
+**Immediate fix (manual):** Update the ledger NOW:
+- Elliott Crane: Status → `recovering`, StatusStartCycle → 83
+- Marcus Osei: Status → `serious-condition`, StatusStartCycle → 84
+These don't fix the engine gap but at least make the ledger match the narrative.
+
+**Engine fix:** Create a third clock mode: `CIVIC`. Semantics:
+- **ENGINE:** Full simulation — career, economics, health, life history, migration. Most citizens.
+- **GAME:** Fully manual. No engine processing at all. Sports players only.
+- **CIVIC:** Selective simulation — health lifecycle YES, life history YES, aging YES. Career engine NO, migration engine NO, economic engine NO. Council members, mayor, deputy mayor, civic appointees.
+
+**Implementation:**
+1. Add `CIVIC` to the mode check in `generationalEventsEngine.js` (health lifecycle + life milestone generation)
+2. Exclude `CIVIC` from `runCareerEngine.js`, migration engine, and economic ripple engine (already excluded as GAME)
+3. Update ~15 civic office citizens from GAME → CIVIC on the ledger
+4. Test: run one cycle, verify Crane progresses from recovering, Osei progresses from serious-condition, no civic figure gets a random career change
+
+**Depends on:** Nothing. Self-contained engine change.
+**Risk:** Low. Adding a mode is additive — existing ENGINE and GAME behavior unchanged.
+**Status:** Not started. Priority: HIGH — every edition without this writes around frozen civic characters.
+
+### 22.2 Arc Engine Investigation
+
+**Problem:** Mike reports arc engines are still failing. The `Event_Arc_Ledger` read-back was fixed in v3preLoader.js (v3.4) so arcs should persist across cycles, but citizen story arcs aren't visibly progressing in edition output. Needs investigation before a fix can be scoped.
+
+**Investigation checklist:**
+1. Does `Event_Arc_Ledger` have any rows? If empty, arcs aren't being generated.
+2. Are arc phases advancing (early → rising → peak → decline → resolved)?
+3. Do arcs have `involvedCitizens` populated?
+4. Are arc events appearing in `ctx.summary.generationalEvents` during cycle runs?
+5. Are desk agents reading arc data from their packets? Check `buildDeskPackets.js` for arc inclusion.
+6. Is the arc generation code actually being called during Phase 4?
+
+**Status:** Needs investigation. Can't scope fix until root cause is identified.
+
+### 22.3 Agent Write Access + Hardcoded Output Directories
+
+**Problem:** During E86 production, the business desk and letters desk agents couldn't write their own output files — they generated content as response text that the primary session had to manually rescue. Four voice agents had the same issue with JSON files. Root cause: 6 desk agents and 6 voice agents have `tools: Read, Glob, Grep` — no Write tool. Initiative agents (Phase 18) got Write/Edit, which is why they worked.
+
+**Fix — Part A: Add Write/Edit tools to all production agents:**
+- 6 desk agents: business, letters, civic, sports, culture, chicago
+- 6 voice agents: mayor, opp-faction, crc-faction, ind-swing, police-chief, district-attorney
+- Total: 12 SKILL.md files updated
+
+**Fix — Part B: Hardcoded output directories as agent workspace.**
+Each agent gets a designated output path in their SKILL.md. This is their workspace — where they write their work product AND where they can read back their own prior output. The directory serves as the agent's memory of work.
+
+| Agent Type | Agent | Output Directory |
+|-----------|-------|-----------------|
+| Desk | civic-desk | `output/desk-output/civic_c{XX}.md` |
+| Desk | sports-desk | `output/desk-output/sports_c{XX}.md` |
+| Desk | culture-desk | `output/desk-output/culture_c{XX}.md` |
+| Desk | business-desk | `output/desk-output/business_c{XX}.md` |
+| Desk | chicago-desk | `output/desk-output/chicago_c{XX}.md` |
+| Desk | letters-desk | `output/desk-output/letters_c{XX}.md` |
+| Voice | civic-office-mayor | `output/civic-voice/mayor_c{XX}.json` |
+| Voice | civic-office-opp-faction | `output/civic-voice/opp_faction_c{XX}.json` |
+| Voice | civic-office-crc-faction | `output/civic-voice/crc_faction_c{XX}.json` |
+| Voice | civic-office-ind-swing | `output/civic-voice/ind_swing_c{XX}.json` |
+| Voice | civic-office-police-chief | `output/civic-voice/police_chief_c{XX}.json` |
+| Voice | civic-office-district-attorney | `output/civic-voice/district_attorney_c{XX}.json` |
+| Voice | civic-office-baylight-authority | `output/civic-voice/baylight_authority_c{XX}.json` (already has Write) |
+| Initiative | stabilization-fund | `output/city-civic-database/initiatives/stabilization-fund/` (already has Write) |
+| Initiative | oari | `output/city-civic-database/initiatives/oari/` (already has Write) |
+| Initiative | transit-hub | `output/city-civic-database/initiatives/transit-hub/` (already has Write) |
+| Initiative | health-center | `output/city-civic-database/initiatives/health-center/` (already has Write) |
+| Clerk | city-clerk | `output/city-civic-database/clerk/` (already has Write) |
+
+Each SKILL.md gets an **Output Directory** section:
+```
+## Your Output Directory
+Write your work to: `output/desk-output/business_c{XX}.md`
+This is YOUR workspace. You can also read prior editions here to see your past work.
+Previous output: `output/desk-output/business_c{PREV}.md`
+```
+
+**Fix — Part C: Agent memory directories.**
+Each agent already has persistent memory at `.claude/agent-memory/{agent}/MEMORY.md`. Verify all 24 agents have memory directories. Create any missing ones.
+
+**Build effort:** Low. SKILL.md edits only — no new code.
+**Status:** Not started. Priority: HIGH — blocked E86, will block every future edition.
+
+---
+
 ## Phase 20: Public Tribune — WordPress + Claude
 
 Source: S80 research (2026-03-05). WordPress AI plugins (Search Engine Journal, Mar 4).
@@ -716,6 +817,87 @@ Source: S80 research (2026-03-05). Qwen 3.5 9B (LM Studio), Ollama + Qwen 3 RAG 
 **How:** MCP tool server or OpenAI-compatible proxy that routes by agent name. Claude Code orchestrator dispatches to the right model. Docker Compose (Phase 9.1) makes this a service definition.
 **Depends on:** 21.1 (model running), 21.2 (RAG for context), quality testing against Claude baseline.
 **Status:** Not started. Long-term goal — build incrementally.
+
+---
+
+## Phase 23: Cross-AI Feedback Integration
+
+Source: Session 82 (2026-03-06). Reviews from Gemini, GPT, Code Copilot, and GROK — four external AIs that audited published editions, agent SKILL files, engine code, and character depth. All four converged on the same five systemic gaps. This phase addresses them.
+
+**The five problems every AI found independently:**
+1. No character feedback loop — editions generate rich character depth that never feeds back to citizen data
+2. No entity registry — proper nouns drift across desks and cycles (names, roles, affiliations)
+3. Fabricated numbers — agents produce precise statistics with no packet source
+4. No provenance enforcement — no structured way to verify claims after generation
+5. Cross-desk overlap — domains bleed without explicit routing rules
+
+### 23.1 Newsroom Base Patch — Evidence Block + Stats Gating
+
+**What:** Add an Evidence Block requirement to every desk SKILL.md. After each article/letter, agents append a structured claim list with types (FACT/OBS/INFER/QUOTE) and sources. Add a Stats Gating Rule: any prose containing numbers or "reported/confirmed/logged" must be FACT(engine) or FACT(record) with a source — otherwise rewrite without numbers as OBS/INFER. Add Anonymous Source Policy to desks that were missing it (sports, culture, business, chicago).
+**Impact:** Prevents ~70% of fabricated number problems. Gives Rhea pre-parsed claims for verification.
+**Effort:** Low — SKILL.md text edits only.
+**Status:** ✅ Complete (Session 82). All 8 desk SKILLs patched.
+
+### 23.2 Entity Registry + Rhea Claims Table
+
+**What (partial):** Add Business_Ledger reference to business-desk SKILL. Add Claims Table output format to Rhea for CRITICAL errors. Add Evidence Block Verification check (Check 20) and Cross-Edition Drift Check (Check 21) to Rhea.
+**Full entity registry** (future): Build a canonical proper noun registry (`data/entity-registry.json`) that Rhea and desk agents reference — preventing name/role/affiliation drift across cycles.
+**Impact:** Claims Table gives Mags a structured error format. Drift check catches cross-edition inconsistency.
+**Effort:** Low (partial, done) / Medium (full registry).
+**Status:** Partial ✅ (Session 82). Rhea checks added. Full registry not yet built.
+
+### 23.3 Cross-Desk Routing — Domain Ownership Tables
+
+**What:** Add a Domain Ownership section to every desk SKILL.md with an explicit table of which desk owns which domain. Agents know where to route stories that cross boundaries.
+**Impact:** Eliminates duplicate canon from overlapping coverage. Clarifies gray areas (player at a council vote = civic desk, not sports).
+**Effort:** Low — SKILL.md text edits only.
+**Status:** ✅ Complete (Session 82). All 8 desk SKILLs patched.
+
+### 23.4 Cycle Review Framework
+
+**What:** New `/cycle-review` skill implementing GPT's 3-pass review methodology: Pass 1 (structural — format, length, Names Index), Pass 2 (factual — claims against packet data), Pass 3 (editorial — voice consistency, tone, narrative flow). Runs post-Rhea as an editorial quality gate.
+**Source:** GPT's "Cycle Review Framework v1.0" document.
+**Effort:** Medium — new skill file + 3-pass logic.
+**Status:** Not started.
+
+### 23.5 Character Feedback Loop
+
+**What:** New script `scripts/enrichCitizenProfiles.js` that scans published editions, extracts character-depth details (quotes, opinions, relationships, personal stakes), and writes enrichment data back to citizen profiles. Gemini's character audits proved this works — their profiles contained depth sourced entirely from published text.
+**Impact:** Most impactful remaining item. Turns published editions into citizen development data. Solves the "flat citizen" problem all four AIs identified.
+**Effort:** High — new script, sheet integration, careful merge logic.
+**Status:** Not started. Design spec needed.
+
+### 23.6 Jax Caldera Voice Upgrade
+
+**What:** Merge Code Copilot's specific voice rules into the freelance-firebrand SKILL.md. Copilot's Jax spec had sharper constraints on opening locations, question density, and attribution patterns than our existing file.
+**Source:** Code Copilot's "Jax Caldera — Freelance Accountability Writer" spec.
+**Effort:** Low — SKILL.md merge.
+**Status:** Not started.
+
+### 23.7 OakTown Echo — Rival Newsroom
+
+**What:** Register 8 rival journalists from the OakTown Echo as Tier-2 citizens in the Simulation_Ledger. GROK designed a full rival newsroom with beat reporters, a managing editor, and editorial stance. Having them as named citizens means desk agents can reference rival coverage ("as the Echo reported...") and citizens can cite competing sources in letters.
+**Source:** GROK's "OakTown Echo Roster" document.
+**Effort:** Low — ledger entries + citizen creation.
+**Status:** Not started. Deferred — nice to have, not blocking.
+
+### 23.8 Bond Engine Bug Fixes
+
+**What:** Fix 4 real bugs found by Code Copilot in bondEngine.js, bondPersistence.js, and relationshipSeeder.js:
+1. POPID vs name lookup mismatch — bonds reference names but engine uses POPIDs
+2. Header collision guard too narrow — only checks exact match, not partial overlap
+3. Full replace can wipe bonds — sheet overwrite on save instead of merge
+4. Inconsistent ID normalization — some paths normalize, some don't
+**Source:** Code Copilot's bond engine audit documents.
+**Effort:** Medium — code fixes with careful testing.
+**Status:** Not started.
+
+### 23.9 Story Seeds Engine v3.4
+
+**What:** Compare Code Copilot's generalized Story Seeds Engine v3.4 against our existing story generation. Their design uses signal-driven story generation with weighted triggers. Evaluate whether it replaces, augments, or is already covered by our current pipeline.
+**Source:** Code Copilot's "Story Seeds Engine v3.4" document.
+**Effort:** Research — code comparison first.
+**Status:** Not started.
 
 ---
 

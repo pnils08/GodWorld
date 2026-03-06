@@ -1,0 +1,50 @@
+Carmen Mesa FULL STAT TRUE SOURCE — PITCHER
+
+Name: Carmen Mesa
+Team: Las Vegas Aviators
+Position: SP
+Jersey: #15
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: B
+Overall: 78
+MLB Service: 0.000
+Age: 22
+Bats: L
+Throws: R
+Height: 6'2"
+Weight: 191 LBS
+Drafted: RND 1 (2038)
+Secondary Position: NONE
+Born: CUBA
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+STA: 87
+H/9: 59
+K/9: 72
+BB/9: 66
+HR/9: 52
+PCLT: 57
+CTRL: 59
+VEL: 73
+BRK: 75
+
+FLD: 54
+ARM: 81
+ACC: 71
+REAC: 47
+
+--------------------------------------------------
+
+PITCH REPERTOIRE
+
+4-Seam Fastball — 95 MPH
+Slider — 87 MPH
+12–6 Curve — 81 MPH
+2-Seam Fastball — 91 MPH

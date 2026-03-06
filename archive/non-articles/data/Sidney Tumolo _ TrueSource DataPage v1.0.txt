@@ -1,0 +1,45 @@
+Sidney Tumolo FULL STAT TRUE SOURCE — BATTER
+
+Name: Sidney Tumolo
+Team: Athletics
+Position: 2B
+Jersey: #32
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: B
+Overall: 79
+MLB Service: 0.002
+Age: 25
+Bats: R
+Throws: R
+Height: 5'10"
+Weight: 207 LBS
+Drafted: RND 1 (2035)
+Secondary Position: NONE
+Hitter Tendency: WHOLE FIELD
+Born: GERMANY
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+CON R: 73
+CON L: 96
+POW R: 52
+POW L: 51
+VIS: 67
+DISC: 64
+CLT: 68
+BUNT: 29
+DBUNT: 13
+DUR: 47
+FLD: 89
+ARM: 68
+ACC: 60
+REAC: 67
+SPD: 54
+STEAL: 62
+BR AGG: 49

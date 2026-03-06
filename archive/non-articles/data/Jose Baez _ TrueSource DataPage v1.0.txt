@@ -1,0 +1,51 @@
+Jose Baez FULL STAT TRUE SOURCE — PITCHER
+
+Name: Jose Baez
+Team: Athletics
+Position: SP
+Jersey: #8
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: C
+Overall: 80
+MLB Service: 0.000
+Age: 25
+Bats: R
+Throws: R
+Height: 6'5"
+Weight: 224 LBS
+Drafted: RND 1 (2033)
+Secondary Position: NONE
+Born: CALIFORNIA
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+STA: 77
+H/9: 77
+K/9: 75
+BB/9: 48
+HR/9: 51
+PCLT: 60
+CTRL: 60
+VEL: 83
+BRK: 73
+
+FLD: 14
+ARM: 74
+ACC: 82
+REAC: 26
+
+--------------------------------------------------
+
+PITCH REPERTOIRE
+
+4-Seam Fastball — 94 MPH
+Changeup — 86 MPH
+2-Seam Fastball — 91 MPH
+Slider — 85 MPH
+Splitter — 80 MPH

@@ -12,25 +12,108 @@ const ROOT = join(__dirname, '..');
 const app = express();
 const PORT = process.env.DASHBOARD_PORT || 3001;
 
-// --- Basic Auth (Phase 8.7) ---
-const DASH_USER = process.env.DASHBOARD_USER;
-const DASH_PASS = process.env.DASHBOARD_PASS;
+// --- Auth (Phase 8.7) — Basic Auth + Cookie Login for PWA ---
+const DASH_USER = (process.env.DASHBOARD_USER || '').trim();
+const DASH_PASS = (process.env.DASHBOARD_PASS || '').trim();
+const AUTH_COOKIE = 'gw_auth';
+const COOKIE_TOKEN = DASH_USER && DASH_PASS
+  ? Buffer.from(`${DASH_USER}:${DASH_PASS}`).toString('base64')
+  : '';
 
 if (DASH_USER && DASH_PASS) {
+  // Parse cookies
   app.use((req, res, next) => {
-    if (req.path === '/api/health') return next();
+    req.cookies = {};
+    const cookieHeader = req.headers.cookie || '';
+    cookieHeader.split(';').forEach(c => {
+      const idx = c.indexOf('=');
+      if (idx > 0) {
+        const k = c.substring(0, idx).trim();
+        const v = c.substring(idx + 1).trim();
+        req.cookies[k] = v;
+      }
+    });
+    next();
+  });
+
+  // Login page for PWA (no browser auth popup)
+  app.get('/login', (req, res) => {
+    res.send(`<!DOCTYPE html>
+<html><head>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Bay Tribune — Login</title>
+<style>
+  body { background: #0a0a0a; color: #e0e0e0; font-family: -apple-system, system-ui, sans-serif;
+    display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+  .login { background: #1a1a1a; padding: 2rem; border-radius: 12px; width: 300px; }
+  h1 { font-size: 1.2rem; margin: 0 0 1.5rem; color: #00b4d8; }
+  input { width: 100%; padding: 0.75rem; margin: 0.5rem 0; background: #0a0a0a;
+    border: 1px solid #333; border-radius: 6px; color: #e0e0e0; font-size: 1rem; box-sizing: border-box; }
+  button { width: 100%; padding: 0.75rem; margin-top: 1rem; background: #00b4d8; color: #0a0a0a;
+    border: none; border-radius: 6px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+  button:active { background: #0090b0; }
+  .error { color: #ff6b6b; font-size: 0.85rem; margin-top: 0.5rem; display: none; }
+</style></head>
+<body><div class="login">
+  <h1>BAY TRIBUNE</h1>
+  <form id="f" onsubmit="return doLogin(event)">
+    <input name="user" placeholder="Username" autocomplete="username" required>
+    <input name="pass" type="password" placeholder="Password" autocomplete="current-password" required>
+    <button type="submit">Sign In</button>
+    <div class="error" id="err">Invalid credentials</div>
+  </form>
+</div>
+<script>
+function doLogin(e) {
+  e.preventDefault();
+  var f = document.getElementById('f');
+  fetch('/auth', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ user: f.user.value, pass: f.pass.value })
+  }).then(function(r) {
+    if (r.ok) { window.location.href = '/'; }
+    else { document.getElementById('err').style.display = 'block'; }
+  });
+  return false;
+}
+</script></body></html>`);
+  });
+
+  // Auth endpoint — sets cookie on success
+  app.use(express.json());
+  app.post('/auth', (req, res) => {
+    const { user, pass } = req.body || {};
+    if (user === DASH_USER && pass === DASH_PASS) {
+      res.set('Set-Cookie', `${AUTH_COOKIE}=${COOKIE_TOKEN}; Path=/; HttpOnly; SameSite=Strict; Max-Age=2592000`);
+      return res.json({ ok: true });
+    }
+    return res.status(401).json({ error: 'Invalid credentials' });
+  });
+
+  // Auth middleware — accepts basic auth OR cookie
+  app.use((req, res, next) => {
+    if (req.path === '/api/health' || req.path === '/login' || req.path === '/auth') return next();
+
+    // Check cookie first (PWA)
+    if (req.cookies[AUTH_COOKIE] === COOKIE_TOKEN) return next();
+
+    // Check basic auth (browser)
     const auth = req.headers.authorization;
-    if (!auth || !auth.startsWith('Basic ')) {
+    if (auth && auth.startsWith('Basic ')) {
+      const decoded = Buffer.from(auth.slice(6), 'base64').toString();
+      const [user, pass] = decoded.split(':');
+      if (user === DASH_USER && pass === DASH_PASS) return next();
+    }
+
+    // No valid auth — redirect to login page for HTML requests, 401 for API
+    if (req.path.startsWith('/api/')) {
       res.set('WWW-Authenticate', 'Basic realm="GodWorld Dashboard"');
       return res.status(401).send('Authentication required');
     }
-    const decoded = Buffer.from(auth.slice(6), 'base64').toString();
-    const [user, pass] = decoded.split(':');
-    if (user === DASH_USER && pass === DASH_PASS) return next();
-    res.set('WWW-Authenticate', 'Basic realm="GodWorld Dashboard"');
-    return res.status(401).send('Invalid credentials');
+    return res.redirect('/login');
   });
-  console.log('Dashboard: Basic auth enabled');
+  console.log('Dashboard: Auth enabled (basic + cookie login)');
 } else {
   console.log('Dashboard: No auth configured (set DASHBOARD_USER + DASHBOARD_PASS in .env)');
 }

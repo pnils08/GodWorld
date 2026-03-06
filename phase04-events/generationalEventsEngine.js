@@ -241,7 +241,7 @@ function runGenerationalEngine_(ctx) {
     var statusDuration = statusStartCycle > 0 ? (cycle - statusStartCycle) : 0;
 
     if (status === "deceased" || status === "inactive") continue;
-    if (mode !== "ENGINE") continue;
+    if (mode !== "ENGINE" && mode !== "CIVIC") continue;
 
     var age = birthYear ? (simYear - birthYear) : 0;
     var name = ((row[iFirst] || "") + " " + (row[iLast] || "")).trim();

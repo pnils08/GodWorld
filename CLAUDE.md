@@ -3,6 +3,68 @@
 @docs/mags-corliss/PERSISTENCE.md
 @docs/mags-corliss/JOURNAL_RECENT.md
 
+## Architecture
+
+GodWorld is a city simulation engine that generates narrative data, which a newsroom pipeline turns into journalism.
+
+**Dual runtime:** The 11-phase simulation engine runs in **Google Apps Script** (GAS) on a Google Sheets spreadsheet. Local **Node.js** scripts handle post-cycle work: desk packets, photos, PDFs, Drive uploads, Discord bot, dashboard API.
+
+**Directory layout:**
+- `phase01-config/` — Engine orchestrator (`godWorldEngine2.js`), calendar, config
+- `phase02-world-state/` — Weather, sports, city dynamics, transit
+- `phase03-population/` — Demographics, crime, crisis events
+- `phase04-events/` — World events, arcs, citizen micro-events, generational events
+- `phase05-citizens/` — Citizen lifecycle engines (career, household, civic, bonds, intake)
+- `phase06-analysis/` — Pattern detection, civic load, economic ripple, arc lifecycle
+- `phase07-evening-media/` — Evening media, story hooks, textures, media feedback
+- `phase08-v3-chicago/` — V3 integration, Chicago bureau, domain/arc persistence
+- `phase09-digest/` — Cycle compression, TraitProfile generation, finalization
+- `phase10-persistence/` — Write execution, ledger recording, cycle packets
+- `phase11-media-intake/` — Health cause intake from media room
+- `scripts/` — Node.js tooling (desk packets, photos, PDFs, Drive, Discord)
+- `lib/` — Shared Node.js libraries (sheets API, photo generator, edition parser)
+- `utilities/` — GAS utilities (write-intents, sheet cache, schema setup)
+- `dashboard/` — Express API + static frontend
+- `editions/` — Published edition text files
+- `output/` — Desk packets, briefs, supplemental briefs
+
+## Key Commands
+
+```bash
+# Desk packets (pre-edition)
+node scripts/buildDeskPackets.js
+
+# Edition photos (Together AI)
+node scripts/generate-edition-photos.js
+
+# Edition PDF (Puppeteer tabloid)
+node scripts/generate-edition-pdf.js
+
+# Upload to Drive
+node scripts/saveToDrive.js --type edition
+
+# Validate edition
+node scripts/validateEdition.js
+
+# Ingest to Supermemory
+node scripts/ingestEdition.js
+
+# Discord bot
+pm2 start scripts/mags-discord-bot.js --name mags-bot
+
+# Query ledger data
+node scripts/queryLedger.js
+```
+
+## Environment
+
+Required in `.env`:
+- `GODWORLD_SHEET_ID` — Main simulation spreadsheet
+- `COMM_HUB_SHEET_ID` — Communication hub spreadsheet
+- `GOOGLE_APPLICATION_CREDENTIALS` — Path to service account JSON (default: `./credentials/service-account.json`)
+- `TOGETHER_API_KEY` — Together AI for photo generation
+- `DISCORD_TOKEN` — Discord bot token
+
 ---
 
 ## Session Boot
@@ -26,10 +88,10 @@ Use AskUserQuestion with these 5 options. If Mike gives a task directly instead 
 **After getting the answer, load ONLY these files:**
 
 - **Media-Room:** `NEWSROOM_MEMORY.md`, `NOTES_TO_SELF.md`, `output/latest_edition_brief.md`
-- **Research:** `TECH_READING_ARCHIVE.md`, `docs/engine/ROLLOUT_PLAN.md`
-- **Build/Deploy:** `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`
-- **Maintenance:** `SESSION_CONTEXT.md`, `docs/engine/LEDGER_AUDIT.md`, `docs/engine/LEDGER_HEAT_MAP.md`
-- **Cycle Run:** `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, then run `/pre-mortem`
+- **Research:** `TECH_READING_ARCHIVE.md`, `docs/engine/ROLLOUT_PLAN.md`, `docs/engine/ENGINE_MAP.md`
+- **Build/Deploy:** `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `docs/engine/ENGINE_MAP.md`
+- **Maintenance:** `SESSION_CONTEXT.md`, `docs/engine/LEDGER_AUDIT.md`, `docs/engine/LEDGER_HEAT_MAP.md`, `docs/engine/ENGINE_MAP.md`
+- **Cycle Run:** `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `docs/engine/ENGINE_MAP.md`, then run `/pre-mortem`
 
 Then give a brief orientation (what you loaded, key state, ready to work) and ask what's first.
 
@@ -45,6 +107,7 @@ These files load on demand — read them when the work requires it, not at boot:
 - `docs/mags-corliss/NEWSROOM_MEMORY.md` — Institutional memory, errata, editorial notes
 - `SESSION_CONTEXT.md` — Engine versions, tools, cascade dependencies, recent sessions (last 5)
 - `docs/engine/ROLLOUT_PLAN.md` — **All project work flows through this file.** Build phases, next session priorities, future features. The single source for what's done, what's next, and what we're tracking.
+- `docs/engine/ENGINE_MAP.md` — **Engine bible.** Every function the engine calls, in execution order, across all 11 phases. What each function does, what file it lives in, what gates it uses. Read this BEFORE touching any engine code. Includes dead code list and known classification issues.
 - `docs/engine/LEDGER_AUDIT.md` — Simulation_Ledger integrity tracking, audit history, decisions
 - `docs/engine/DOCUMENTATION_LEDGER.md` — File registry: every active doc, its purpose, load tier, workflow
 - `README.md` — Project structure, 11-phase engine

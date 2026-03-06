@@ -1,6 +1,6 @@
 # GodWorld Documentation Ledger
 
-**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 79 (2026-03-05)
+**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 82 (2026-03-06)
 **Purpose:** Single registry of every active documentation file — what it does, when it loads, who updates it, and which workflow it serves.
 **Rule:** If a file isn't listed here, it's either archived or undocumented. Fix that.
 
@@ -62,6 +62,8 @@
 | `docs/engine/LEDGER_HEAT_MAP.md` | Sheet bloat risk rankings, dead column inventory, archival strategy | On-Demand | Manual (during audits) | X |
 | `docs/engine/SHEETS_MANIFEST.md` | Sheet listing — all tabs in the Simulation_Narrative spreadsheet | On-Demand | Manual (rare) | D, X |
 | `docs/engine/INSTITUTIONAL_VOICE_AGENTS.md` | Architecture spec for civic voice agent system (Phase 10.1) | On-Demand | Manual (when agents change) | D, M |
+| `docs/engine/ENGINE_MAP.md` | Condensed stub reference — every exported function across 11 phases, ctx reads/writes, dependencies | On-Demand | `/stub-engine` skill | D |
+| `scripts/post-cycle-review.js` | Post-cycle review script for engine output analysis | On-Demand | Manual (after cycle runs) | D, X |
 | `docs/engine/DOCUMENTATION_LEDGER.md` | **This file.** Registry of all active docs | On-Demand | `/session-end` (when files change) | All |
 
 ### Editorial & Newsroom (M)

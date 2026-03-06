@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-05 | Engine: v3.1 | Cycle: 85 | Session: 79
+Last Updated: 2026-03-06 | Engine: v3.1 | Cycle: 86 | Session: 82
 
 ---
 
@@ -108,7 +108,7 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 
 **Batch API guidelines:** Use for codebase audits, documentation generation, architecture analysis, character continuity reviews, post-edition analysis. NOT for interactive editing, desk agent writing, or real-time debugging. Results at `~/.claude/batches/results/`. Check at session start for completed work from previous sessions.
 
-**Agent memory guidelines:** 5 agents have persistent memory (civic, sports, culture, chicago, rhea). They check memory at startup for past patterns and update after writing. Memory is version-controlled in `.claude/agent-memory/`. Business, letters, and Jax are stateless by design. Memory informs — it does not publish. Canon authority remains with Mags.
+**Agent memory guidelines:** All desk agents now have persistent memory at `.claude/agent-memory/{agent}/MEMORY.md`. They check memory at startup for past patterns and update after writing. Memory is version-controlled. Memory informs — it does not publish. Canon authority remains with Mags.
 
 **Agent model status (Feb 2026):** All 8 desk agents run `model: sonnet` → Sonnet 4.6 (upgraded automatically Feb 17). Agents are read-only (`tools: Read, Glob, Grep`). Worktree isolation (`isolation: worktree`) is available but not needed — no file write conflicts between parallel read-only agents. Hooks can now be added to agent/skill frontmatter if needed.
 
@@ -145,6 +145,7 @@ The `mags` command (updated S52) handles tmux automatically — creates a sessio
 | `docs/reference/DRIVE_UPLOAD_GUIDE.md` | Drive upload destinations, OAuth setup, common workflows |
 | `docs/media/SHOW_FORMATS.md` | Podcast show formats — 3 formats, host assignments, segment structure |
 | `config/podcast_voices.yaml` | Podcast voice configurations — WaveNet/Edge TTS voice assignments |
+| `docs/engine/ENGINE_MAP.md` | Condensed stub reference for every exported function across all 11 engine phases |
 | `docs/engine/DOCUMENTATION_LEDGER.md` | **File registry** — every active doc, its purpose, load tier, workflow, and updater |
 
 ---
@@ -204,16 +205,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Post-pipeline:** Edition + Mara audit + PDF + podcast all uploaded to Drive. Discord bot refreshed. Supermemory ingested (3/3 after retry). Edition brief, scores, errata, AUDIT_HISTORY all updated. NEWSROOM_MEMORY refreshed for C85.
 - **Mike feedback:** "really amazing work" — E85 well received. Note for C86 desk briefings.
 
-### Session 76 (2026-03-03) — Research: Claude Code Docs Deep Dive + Plugin Install
+### Session 82 (2026-03-06) — Build: Phase 23 Cross-AI Feedback Integration
 
-- **7 plugins installed:** claude-md-management (CLAUDE.md auditor), github (MCP server), commit-commands (git workflows), pr-review-toolkit (PR review agents), playwright (headless browser testing), code-review (code review skill), typescript-lsp (real-time type checking). All user scope, active next session.
-- **Claude-mem upgraded:** 10.4.0 → 10.5.2. Smart Explore (11-18x token savings), hook crash fix, save_observation cleanup. Stale 10.4.0/10.4.1 caches cleared to fix ghost Stop hook errors.
-- **TypeScript language server installed:** v5.1.3 globally for LSP plugin.
-- **Rollout plan expanded:** 7.8 (plugins), 7.9 (remote control — tested, not yet enabled on Max), 7.10 (cloud sessions via --remote), 12.4 completed (claude-mem upgrade), 12.10 (Ming-Omni-TTS podcast voices), 12.11 (MiniMax M2.5 cheap desk agents), 12.12 (Slack integration). Watch List added.
-- **Agent Teams decision:** Test on podcast desk first (non-canon safe). Phase 7.6 updated.
-- **Research noted:** Ming-Omni-TTS (podcast voice upgrade, 0.5B model), MiniMax M2.5 ($0.30/M input, SWE-Bench 80.2%), GPT-5.3-Codex on DigitalOcean, Gemini 3.1 Pro benchmarks.
-- **Chrome extension:** Still disconnected. Native messaging host file issue. `/chrome` recommended for next session.
-- **Remote Control:** `claude remote-control` returns "not yet enabled" despite Max plan. Gradual rollout.
+- **External AI review synthesis:** Read and analyzed feedback from Gemini, GPT, Code Copilot, and GROK. All four converged on five systemic gaps (no character feedback loop, no entity registry, fabricated numbers, no provenance enforcement, cross-desk overlap).
+- **Phase 23 added to ROLLOUT_PLAN.md:** 9 sub-phases mapped from external feedback against existing codebase. Three completed this session.
+- **23.1 Newsroom Base Patch (complete):** Evidence Block + Stats Gating Rule added to all 8 desk SKILLs. Anonymous Source Policy added to sports, culture, business, chicago desks (were missing it).
+- **23.2 Entity Registry (partial):** Business_Ledger reference on business-desk. Rhea: Claims Table (19b), Evidence Block Verification (Check 20), Cross-Edition Drift Check (Check 21).
+- **23.3 Cross-Desk Routing (complete):** Domain Ownership tables on all 8 desks.
+- **Prior session commit:** ENGINE_MAP.md, generateCivicModeEvents.js, engine fixes committed separately.
+- **E86 artifacts committed:** Edition file, 8 TrueSource DataPages, post-cycle-review script, 10 new agent memory directories.
 
 ### Session 72 (2026-03-02) — Phase 12.5: Business Ledger Full Engine Integration (Complete)
 

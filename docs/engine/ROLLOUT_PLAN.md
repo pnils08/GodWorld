@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 82 (2026-03-06) — E86 published (first A grade). Phase 22 added: CIVIC clock mode, arc engine investigation, agent write access + hardcoded directories. Next session priorities updated.
+**Last Updated:** Session 82 (2026-03-06) — Phase 23 added (cross-AI feedback integration). 23.1 (newsroom base patch), 23.3 (domain ownership) complete. 23.2 (entity registry) partial. Next session priorities updated.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -13,17 +13,21 @@
 
 Items that should be addressed in the next session. Updated at session end. Absorbs the old "INCOMING — Next Session" block from SESSION_CONTEXT.md.
 
-- ✅ ~~Standalone initiative agent test~~ — Initiative agents ran successfully in E86. Documents produced, decisions JSON worked.
+- ✅ ~~Standalone initiative agent test~~ — Initiative agents ran successfully in E86.
 - ✅ ~~Run Cycle 86~~ — Complete. Initiative agents, voice agents, desk agents all ran.
-- ✅ ~~Edition 86 production~~ — Published. First A grade. Mara audit by Mike. Six corrections applied.
+- ✅ ~~Edition 86 production~~ — Published. First A grade.
 - ✅ ~~Photo pipeline re-test~~ — 3 photos generated for E86, all clean.
-- **Phase 22.3: Agent write access + directories** — Add Write/Edit to 12 agents (6 desk, 6 voice). Hardcode output paths as agent workspaces. Business and letters desks couldn't write in E86.
-- **Phase 22.1: CIVIC clock mode** — Create third mode for council members. Health progression + life history, no career/migration. Crane and Osei frozen for multiple editions.
-- **Phase 22.2: Arc engine investigation** — Diagnose why citizen story arcs aren't advancing. Check Event_Arc_Ledger, arc generation, packet inclusion.
-- **Ledger fix (manual):** Crane → recovering (C83), Osei → serious-condition (C84). Make ledger match narrative.
-- **Monitor Haiku voice quality** — Bot switched S80. One week observation period.
-- **Dashboard a11y fixes** — 8 unlabeled buttons (critical), 78 low-contrast elements (serious). Baseline from `/visual-qa`.
-- **Supermemory ingest retry** — E86 ingest failed (quota exceeded, site down). Retry when service is back.
+- ✅ ~~Phase 23.1: Newsroom Base Patch~~ — Evidence Block + Stats Gating on all 8 desks. Anonymous Source Policy on 4 desks.
+- ✅ ~~Phase 23.3: Domain Ownership~~ — Cross-desk routing tables on all 8 desks.
+- **Phase 23.5: Character Feedback Loop** — `enrichCitizenProfiles.js` — scan editions, extract depth, write back to citizen data. Highest impact remaining.
+- **Phase 23.6: Jax Caldera voice merge** — Copilot's sharper constraints into firebrand SKILL. Low effort.
+- **Phase 23.8: Bond Engine bug fixes** — 4 bugs (POPID lookup, header collision, full replace wipe, ID normalization).
+- **Phase 22.3: Agent write access + directories** — Add Write/Edit to 12 agents. Business and letters desks couldn't write in E86.
+- **Phase 22.1: CIVIC clock mode** — Third mode for council members. Crane and Osei frozen for multiple editions.
+- **Phase 22.2: Arc engine investigation** — Why arcs aren't advancing.
+- **Ledger fix (manual):** Crane → recovering (C83), Osei → serious-condition (C84).
+- **Supermemory ingest retry** — E86 ingest failed (quota exceeded). Retry when service is back.
+- **Dashboard a11y fixes** — 8 unlabeled buttons, 78 low-contrast elements.
 
 ---
 

@@ -1,9 +1,14 @@
 /**
  * ============================================================================
- * V3.6 EVENT ARC ENGINE — GODWORLD CALENDAR INTEGRATION
+ * V3.7 EVENT ARC ENGINE — GODWORLD CALENDAR INTEGRATION
  * ============================================================================
  *
  * Manages multi-cycle story arcs with GodWorld Calendar awareness.
+ *
+ * v3.7 Changes:
+ * - Added staleness pruning: arcs stuck at 'early' for 8+ cycles auto-resolve
+ * - Arcs with near-zero tension (<=0.1) for 4+ cycles also auto-resolve
+ * - Prevents permanent clogging of the 10-arc cap by stale arcs
  *
  * v3.6 Changes:
  * - Replaced all Math.random() with deterministic ctx.rng
@@ -348,6 +353,20 @@ function eventArcEngine_(ctx) {
     } else if (arc.phase === 'peak' && t <= 4) {
       arc.phase = 'decline';
     } else if (arc.phase === 'decline' && t <= 1.5) {
+      arc.phase = 'resolved';
+      arc.cycleResolved = currentCycle;
+    }
+
+    // ═══════════════════════════════════════════════════════════
+    // STALENESS PRUNING (v3.7)
+    // Arcs stuck at 'early' for 8+ cycles or with near-zero tension
+    // are resolved to prevent permanent clogging of the arc cap.
+    // ═══════════════════════════════════════════════════════════
+
+    if (arc.phase === 'early' && arcAge >= 8) {
+      arc.phase = 'resolved';
+      arc.cycleResolved = currentCycle;
+    } else if (arc.phase !== 'resolved' && t <= 0.1 && arcAge >= 4) {
       arc.phase = 'resolved';
       arc.cycleResolved = currentCycle;
     }

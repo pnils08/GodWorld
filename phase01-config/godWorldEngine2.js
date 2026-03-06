@@ -203,7 +203,8 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-Generational', function() { runGenerationalEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Youth', function() { runYouthEngine_(ctx); });
 
-  safePhaseCall_(ctx, 'Phase5-EventArc', function() { eventArcEngine_(ctx); });
+  // eventArcEngine_ removed from Phase 5 — arcs load at Phase 8 preload,
+  // so this was always a no-op. Arc processing happens via v3Integration.
   safePhaseCall_(ctx, 'Phase5-Bonds', function() { runBondEngine_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-Intake', function() { processIntake_(ctx); });
@@ -294,7 +295,9 @@ function runWorldCycle() {
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 8: V3 INTEGRATION + CHICAGO
+  // (CycleWeight moved here from Phase 9 so arc engine has signal data)
   // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase8-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
@@ -305,7 +308,6 @@ function runWorldCycle() {
   // PHASE 9: FINAL ANALYSIS + DIGEST
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase9-DigestSummary', function() { applyCompressedDigestSummary_(ctx); });
-  safePhaseCall_(ctx, 'Phase9-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
   // v2.13: Compress LifeHistory into TraitProfiles for archetype-aware event generation
   safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });
@@ -1442,7 +1444,8 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase5-Generational', function() { runGenerationalEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Youth', function() { runYouthEngine_(ctx); });
 
-  safePhaseCall_(ctx, 'Phase5-EventArc', function() { eventArcEngine_(ctx); });
+  // eventArcEngine_ removed from Phase 5 — arcs load at Phase 8 preload,
+  // so this was always a no-op. Arc processing happens via v3Integration.
   safePhaseCall_(ctx, 'Phase5-Bonds', function() { runBondEngine_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-Intake', function() { processIntake_(ctx); });
@@ -1529,17 +1532,13 @@ function runCyclePhases_(ctx) {
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 8: V3 INTEGRATION + CHICAGO
+  // (CycleWeight moved here from Phase 9 so arc engine has signal data)
   // ═══════════════════════════════════════════════════════════
+  safePhaseCall_(ctx, 'Phase8-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
   safePhaseCall_(ctx, 'Phase8-ChicagoCitizens', function() { generateChicagoCitizens_(ctx); });
-
-  // ═══════════════════════════════════════════════════════════
-  // PHASE 9: FINAL ANALYSIS + DIGEST
-  // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase9-DigestSummary', function() { applyCompressedDigestSummary_(ctx); });
-  safePhaseCall_(ctx, 'Phase9-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
   // v2.13: Compress LifeHistory into TraitProfiles for archetype-aware event generation
   safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });

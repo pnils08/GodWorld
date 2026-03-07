@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * generateGenericCitizenMicroEvents_ v2.4 (schema-safe + cached sets + global uniqueness)
+ * generateGenericCitizenMicroEvents_ v2.5 (tiered micro-events for all citizen tiers)
  * ============================================================================
  * Log schema unchanged: [Date, POPID, Name, Category, Text, NeighborhoodOrEngine, Cycle]
  * Optional determinism: ctx.rng or ctx.config.rngSeed (+cycle mix)
@@ -403,10 +403,15 @@ function generateGenericCitizenMicroEvents_(ctx) {
 
     if (mode !== "ENGINE") continue;
     if (isUNIFlag || isMEDFlag || isCIVFlag) continue;
-    if (tier !== 3 && tier !== 4) continue;
     if (!popId) continue;
 
-    var chance = 0.03;
+    // v2.5: Tiered probability — tier 1-2 get micro-events at lower rate
+    // Tier 1-2: named characters, lower chance (they get events from other engines)
+    // Tier 3-4: generic citizens, standard chance (micro-events are their main texture)
+    var chance;
+    if (tier <= 1) chance = 0.008;
+    else if (tier === 2) chance = 0.015;
+    else chance = 0.03;
 
     if (weather.impact >= 1.3) chance += 0.01;
     if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.35) chance += 0.01;
@@ -498,7 +503,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
  * GENERIC CITIZEN MICRO-EVENTS REFERENCE
  * ============================================================================
  *
- * Target: Tier-3/4 ENGINE citizens (NOT UNI/MED/CIV)
+ * Target: All ENGINE citizens (NOT UNI/MED/CIV). Tier 1-2 at lower rate, tier 3-4 standard.
  * Limit: 12 events per cycle
  *
  * BASE CHANCE: 0.03 (3%)

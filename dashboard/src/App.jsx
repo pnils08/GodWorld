@@ -277,7 +277,10 @@ export default function App() {
 
       {/* SEARCH OVERLAY — Now dual-mode: citizens + articles */}
       {searchOpen && (
-        <div className="fixed inset-0 z-40 bg-black/95 pt-24 px-6 overflow-y-auto pb-24">
+        <div className="fixed inset-0 z-40 bg-black/95 pt-24 px-6 overflow-y-auto pb-24"
+          tabIndex={-1}
+          onKeyDown={(e) => { if (e.key === 'Escape') { setSearchOpen(false); setSearchQuery(''); setSearchResults(null); setArticleSearchResults(null); setCitizenDetail(null); setCoverageTrail(null); setOverlayArticle(null); } }}
+        >
           <div className="max-w-lg mx-auto">
             <div className="flex items-center gap-3 bg-neutral-900 rounded-2xl border border-white/10 px-4 py-3">
               <Search size={18} className="text-neutral-500" />
@@ -297,6 +300,9 @@ export default function App() {
                   <X size={16} />
                 </button>
               )}
+              <button aria-label="Close search" onClick={() => { setSearchOpen(false); setSearchQuery(''); setSearchResults(null); setArticleSearchResults(null); setCitizenDetail(null); setCoverageTrail(null); setOverlayArticle(null); }} className="text-neutral-400 hover:text-white ml-1">
+                <X size={20} />
+              </button>
             </div>
 
             {/* Citizen Results */}
@@ -425,7 +431,7 @@ export default function App() {
             <div className="flex-1 overflow-hidden">
               <div className="text-[10px] font-mono text-sky-400 uppercase tracking-tighter">System Status</div>
               <p className="text-[11px] text-neutral-400 truncate">
-                {edHeader.weather || 'API online'} · {edHeader.pattern ? `Pattern: ${edHeader.pattern}` : `Data: ${health?.data?.latestCycleArchive || 'connected'}`}
+                {edHeader.weather || 'API online'} · {edHeader.pattern ? `Pattern: ${edHeader.pattern}` : `Cycle ${health?.data?.latestCycleArchive?.replace('cycle-', '') || 'connected'}`}
               </p>
             </div>
           </div>
@@ -1416,7 +1422,17 @@ function SportsSection({ city, data, color }) {
   const [showAllFeeds, setShowAllFeeds] = useState(false);
   if (!data) return null;
 
-  const digest = typeof data.digest === 'object' ? data.digest : null;
+  // Digest may be flat ({teamLabel, ...}) or nested by team ({as: {...}, warriors: {...}})
+  let rawDigest = typeof data.digest === 'object' ? data.digest : null;
+  let teamDigests = [];
+  if (rawDigest) {
+    if (rawDigest.teamLabel) {
+      teamDigests = [rawDigest];
+    } else {
+      teamDigests = Object.values(rawDigest).filter(v => v && typeof v === 'object' && v.teamLabel);
+    }
+  }
+  const digest = teamDigests[0] || null;
   const feeds = Array.isArray(data.feeds) ? data.feeds : [];
   const accentColor = color === 'green' ? 'text-green-400' : 'text-red-400';
   const borderColor = color === 'green' ? 'border-green-500/20' : 'border-red-500/20';
@@ -1448,7 +1464,7 @@ function SportsSection({ city, data, color }) {
         <div className={`p-4 bg-neutral-900/60 rounded-2xl border ${borderColor} mb-4`}>
           <div className="flex justify-between items-start mb-3">
             <div>
-              <h4 className={`text-lg font-black ${accentColor}`}>{digest.teamLabel || city}</h4>
+              <h4 className={`text-lg font-black ${accentColor}`}>{digest.teamLabel || city.charAt(0).toUpperCase() + city.slice(1)}</h4>
               <span className="text-[10px] text-neutral-500">{digest.seasonState}</span>
             </div>
             <div className="text-right">
@@ -1522,15 +1538,40 @@ function SportsSection({ city, data, color }) {
           )}
 
           {/* Editorial notes */}
-          {digest.editorialNotes && (
+          {digest.editorialNotes && (Array.isArray(digest.editorialNotes) ? digest.editorialNotes.length > 0 : true) && (
             <div className="mt-3 pt-3 border-t border-white/5">
               <p className="text-[10px] text-neutral-500 italic leading-relaxed">
-                {typeof digest.editorialNotes === 'string' ? digest.editorialNotes : JSON.stringify(digest.editorialNotes)}
+                {typeof digest.editorialNotes === 'string' ? digest.editorialNotes : Array.isArray(digest.editorialNotes) ? digest.editorialNotes.join(' · ') : String(digest.editorialNotes)}
               </p>
             </div>
           )}
         </div>
       )}
+
+      {/* Additional team digests (e.g., Warriors alongside A's for Oakland) */}
+      {teamDigests.slice(1).map((td, idx) => (
+        <div key={idx} className={`p-4 bg-neutral-900/60 rounded-2xl border ${borderColor} mb-4`}>
+          <div className="flex justify-between items-start mb-3">
+            <div>
+              <h4 className={`text-lg font-black ${accentColor}`}>{td.teamLabel}</h4>
+              <span className="text-[10px] text-neutral-500">{td.seasonState}</span>
+            </div>
+            <div className="text-right">
+              {td.currentRecord && <div className="text-xl font-black tracking-tight">{td.currentRecord}</div>}
+              {td.teamMomentum && (
+                <span className={`text-[9px] font-bold uppercase ${momentumColors[td.teamMomentum] || 'text-neutral-500'}`}>
+                  {td.teamMomentum === 'rising' ? '▲' : td.teamMomentum === 'falling' ? '▼' : '●'} {td.teamMomentum}
+                </span>
+              )}
+            </div>
+          </div>
+          {td.editorialNotes && (Array.isArray(td.editorialNotes) ? td.editorialNotes.length > 0 : true) && (
+            <p className="text-[10px] text-neutral-500 italic leading-relaxed">
+              {typeof td.editorialNotes === 'string' ? td.editorialNotes : Array.isArray(td.editorialNotes) ? td.editorialNotes.join(' · ') : String(td.editorialNotes)}
+            </p>
+          )}
+        </div>
+      ))}
 
       {/* Feed events */}
       {feeds.length > 0 && (
@@ -1583,7 +1624,7 @@ function SportsFeedEvent({ event, eventTypeColors }) {
         </div>
       </div>
       <div className="flex items-center gap-2 mb-1">
-        {ev.NamesUsed && <span className="text-[10px] font-bold text-neutral-300">{ev.NamesUsed}</span>}
+        {ev.NamesUsed && ev.NamesUsed.toLowerCase() !== 'none' && <span className="text-[10px] font-bold text-neutral-300">{ev.NamesUsed}</span>}
       </div>
       <p className={`text-[10px] text-neutral-400 leading-relaxed ${expanded ? '' : 'line-clamp-2'}`}>{ev.Notes}</p>
       {expanded && (

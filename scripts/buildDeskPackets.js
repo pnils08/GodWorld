@@ -1,9 +1,15 @@
 #!/usr/bin/env node
 /**
- * buildDeskPackets.js v1.9
+ * buildDeskPackets.js v2.2
  *
  * Pulls live data from Google Sheets and splits into per-desk JSON packets
  * for independent agent processing in the Media Room.
+ *
+ * v2.2 Changes:
+ * - Evening Context — pulls Media_Ledger + Cycle_Packet data into desk packets.
+ *   Culture and business desks get nightlife, food scene, media climate, weather mood.
+ * - Civic Events — parses civic mode events from LifeHistory_Log for civic desk.
+ * - Arc enrichment — adds involved citizens from LifeHistory_Log arc-tagged entries.
  *
  * v1.9 Changes:
  * - Voice Cards — parses TraitProfile from Simulation_Ledger into agent-friendly
@@ -54,7 +60,7 @@
  *   Civic_Office_Ledger, Initiative_Tracker, Simulation_Ledger, Generic_Citizens,
  *   Chicago_Citizens, Cultural_Ledger, Oakland_Sports_Feed, Chicago_Sports_Feed,
  *   Storyline_Tracker, Cycle_Packet, Press_Drafts, LifeHistory_Log,
- *   Household_Ledger, Relationship_Bonds, World_Population
+ *   Household_Ledger, Relationship_Bonds, World_Population, Media_Ledger
  *
  * Reads locally:
  *   /tmp/mara_directive_c{XX}.txt
@@ -622,7 +628,11 @@ function generateDeskSummary(packet, deskId, cycle) {
       civicConsequences: ((packet.storyConnections || {}).civicConsequences || []).slice(0, 3),
       coverageEcho: ((packet.storyConnections || {}).coverageEcho || []).slice(0, 10),
       enrichmentNote: ((packet.storyConnections || {}).enrichmentNote || '')
-    }
+    },
+    // v2.2: Evening context — nightlife, media climate, weather mood
+    eveningContext: packet.eveningContext || {},
+    // v2.2: Civic events from LifeHistory_Log
+    civicEvents: (packet.civicEvents || []).slice(0, 10)
   };
 
   return summary;
@@ -1071,6 +1081,94 @@ function buildEconomicContext(worldPopRaw, simLedger, activeHouseholds, neighbor
         };
       })
       .sort(function(a, b) { return b.medianIncome - a.medianIncome; });
+  }
+
+  return ctx;
+}
+
+/**
+ * v2.2: Build evening context from Media_Ledger + Cycle_Packet text.
+ * Extracts nightlife, food scene, media climate, weather mood, and cultural activity.
+ */
+function buildEveningContext(cycleMedia, packetText) {
+  var ctx = {};
+
+  // Media Ledger entries — structured evening data
+  if (cycleMedia.length > 0) {
+    ctx.mediaEntries = cycleMedia.map(function(m) {
+      return {
+        name: m.Name || '',
+        role: m.RoleType || m.Role || '',
+        neighborhood: m.Neighborhood || '',
+        domain: m.CulturalDomain || m.Domain || '',
+        nightlifeVolume: parseFloat(m.NightlifeVolume) || 0,
+        fameScore: parseInt(m.FameScore) || 0,
+        sentiment: m.Sentiment || '',
+        economicMood: m.EconomicMood || ''
+      };
+    });
+  }
+
+  // Parse Cycle_Packet text for city dynamics and media climate
+  if (packetText) {
+    // City Dynamics section
+    var dynMatch = packetText.match(/--- CITY DYNAMICS ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (dynMatch) {
+      ctx.cityDynamics = {};
+      var lines = dynMatch[1].split('\n');
+      for (var i = 0; i < lines.length; i++) {
+        var parts = lines[i].split(':');
+        if (parts.length >= 2) {
+          var key = parts[0].trim().toLowerCase();
+          var val = parseFloat(parts[1].trim());
+          if (!isNaN(val)) ctx.cityDynamics[key] = val;
+        }
+      }
+    }
+
+    // Media Climate section
+    var mediaMatch = packetText.match(/--- MEDIA CLIMATE ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (mediaMatch) {
+      ctx.mediaClimate = {};
+      var mlines = mediaMatch[1].split('\n');
+      for (var j = 0; j < mlines.length; j++) {
+        var line = mlines[j].trim();
+        if (line.indexOf('Narrative:') === 0) {
+          var nparts = line.split('|');
+          ctx.mediaClimate.narrative = (nparts[0] || '').replace('Narrative:', '').trim();
+          ctx.mediaClimate.intensity = (nparts[1] || '').replace('Intensity:', '').trim();
+        }
+        if (line.indexOf('Crisis Saturation:') === 0) {
+          ctx.mediaClimate.crisisSaturation = line.replace('Crisis Saturation:', '').trim();
+        }
+        if (line.indexOf('Celebrity Buzz:') === 0) {
+          ctx.mediaClimate.celebrityBuzz = line.replace('Celebrity Buzz:', '').trim();
+        }
+      }
+    }
+
+    // Weather Mood section
+    var weatherMatch = packetText.match(/--- WEATHER MOOD ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (weatherMatch) {
+      ctx.weatherMood = {};
+      var wlines = weatherMatch[1].split('\n');
+      for (var k = 0; k < wlines.length; k++) {
+        var wline = wlines[k].trim();
+        if (wline.indexOf('Conditions:') === 0) ctx.weatherMood.conditions = wline.replace('Conditions:', '').trim();
+        if (wline.indexOf('Mood:') === 0) ctx.weatherMood.mood = wline.replace('Mood:', '').trim();
+        if (wline.indexOf('Streak:') === 0) ctx.weatherMood.streak = wline.replace('Streak:', '').trim();
+        if (wline.indexOf('Perfect weather') >= 0) ctx.weatherMood.perfectWeather = true;
+        if (wline.indexOf('Alerts:') >= 0) ctx.weatherMood.alerts = wline.replace(/.*Alerts:\s*/, '').trim();
+      }
+    }
+
+    // Extract nightlife and cultural activity from city dynamics
+    if (ctx.cityDynamics) {
+      ctx.nightlife = ctx.cityDynamics.nightlife || 0;
+      ctx.culturalActivity = ctx.cityDynamics.culturalactivity || 0;
+      ctx.retail = ctx.cityDynamics.retail || 0;
+      ctx.tourism = ctx.cityDynamics.tourism || 0;
+    }
   }
 
   return ctx;
@@ -1553,7 +1651,7 @@ async function main() {
     chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
     storylineRaw, packetRaw, draftsRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
-    neighborhoodMapRaw, businessLedgerRaw
+    neighborhoodMapRaw, businessLedgerRaw, mediaLedgerRaw
   ] = await Promise.all([
     safeGet('Story_Seed_Deck'),
     safeGet('Story_Hook_Deck'),
@@ -1576,7 +1674,8 @@ async function main() {
     safeGet('World_Population'),
     safeGet('Simulation_Calendar'),
     safeGet('Neighborhood_Map'),
-    safeGet('Business_Ledger')
+    safeGet('Business_Ledger'),
+    safeGet('Media_Ledger')
   ]);
 
   console.log('Sheets pulled in ' + (Date.now() - startTime) + 'ms');
@@ -1676,6 +1775,46 @@ async function main() {
   businesses.forEach(function(b) {
     var bid = (b.BIZ_ID || '').trim();
     if (bid) bizByIdMap[bid] = b;
+  });
+
+  // v2.2: Media Ledger — evening media, nightlife, cultural activity
+  var allMedia = allToObjects(mediaLedgerRaw);
+  var cycleMedia = allMedia.filter(function(m) {
+    return String(m.Cycle) === String(CYCLE);
+  });
+  console.log('  Media Ledger entries (C' + CYCLE + '):', cycleMedia.length);
+
+  // v2.2: Parse Cycle_Packet for evening context (city dynamics, media climate)
+  var cyclePacketText = '';
+  var allPackets = allToObjects(packetRaw);
+  var currentPacket = allPackets.filter(function(p) {
+    return String(p.Cycle) === String(CYCLE);
+  });
+  if (currentPacket.length > 0) {
+    cyclePacketText = currentPacket[0].PacketText || '';
+  }
+  var eveningContext = buildEveningContext(cycleMedia, cyclePacketText);
+  console.log('  Evening context:', eveningContext.nightlife ? 'populated' : 'empty',
+              '| Media entries:', (eveningContext.mediaEntries || []).length,
+              '| Dynamics:', eveningContext.cityDynamics ? 'yes' : 'no');
+
+  // v2.2: Civic events from LifeHistory_Log — CIVIC clock mode events this cycle
+  var civicEvents = allHistory.filter(function(h) {
+    return String(h.Cycle) === String(CYCLE) &&
+           ((h.Category || '').toUpperCase() === 'CIVIC' ||
+            (h.EventTag || '').toUpperCase() === 'CIVIC_MODE' ||
+            (h.NeighborhoodOrEngine || '').toUpperCase() === 'CIVIC_ENGINE');
+  });
+  console.log('  Civic events (C' + CYCLE + '):', civicEvents.length);
+
+  // v2.2: Arc-citizen links from LifeHistory_Log — find citizens mentioned in arc events
+  var arcCitizenMap = {};
+  allHistory.forEach(function(h) {
+    if (String(h.Cycle) === String(CYCLE) && h.Category === 'ARC' && h.POPID) {
+      var arcId = (h.EventTag || '').replace('ARC_', '');
+      if (!arcCitizenMap[arcId]) arcCitizenMap[arcId] = [];
+      arcCitizenMap[arcId].push({ popId: h.POPID, name: h.Name || '' });
+    }
   });
 
   // Economic context from World_Population + Simulation_Ledger + Neighborhood_Map
@@ -1983,7 +2122,7 @@ async function main() {
         desk: deskId,
         deskName: desk.name,
         cycle: CYCLE,
-        generator: 'buildDeskPackets v2.1'
+        generator: 'buildDeskPackets v2.2'
       },
       baseContext: baseContext,
       deskBrief: {
@@ -2033,10 +2172,12 @@ async function main() {
         };
       }),
       arcs: deskArcs.map(function(a) {
+        var citizens = arcCitizenMap[a.ArcId] || [];
         return {
           arcId: a.ArcId, domain: a.DomainTag, phase: a.Phase,
           tension: a.Tension, neighborhood: a.Neighborhood,
-          summary: a.Summary, arcAge: a.ArcAge
+          summary: a.Summary, arcAge: a.ArcAge,
+          involvedCitizens: citizens
         };
       }),
       storylines: deskStorylines.map(function(s) {
@@ -2081,7 +2222,18 @@ async function main() {
         filterBondsForDesk(activeBonds, deskCitizenNames, neighborhoods, desk.domains)
       ),
       // v1.4: Story connections enrichment — cross-referenced data for editorial coherence
-      storyConnections: storyConnections
+      storyConnections: storyConnections,
+      // v2.2: Evening context — nightlife, food, media climate, weather mood
+      eveningContext: eveningContext,
+      // v2.2: Civic events — CIVIC clock mode actions from LifeHistory_Log
+      civicEvents: (deskId === 'civic' || deskId === 'letters') ? civicEvents.map(function(h) {
+        return {
+          popId: h.POPID || '', name: h.Name || '',
+          category: h.Category || '', tag: h.EventTag || '',
+          text: h.EventNote || h.Text || '',
+          neighborhood: h.NeighborhoodOrEngine || ''
+        };
+      }) : undefined
     };
 
     // Write packet

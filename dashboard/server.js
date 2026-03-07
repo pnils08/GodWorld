@@ -323,9 +323,9 @@ function parseEdition(text) {
           // Photo credit — skip
           if (/^\[Photo:/.test(tl)) continue;
 
-          // Title: first # heading, ALL CAPS line, or **bold** line
+          // Title: first # or ## heading, ALL CAPS line, or **bold** line
           if (!title) {
-            const h1Match = tl.match(/^#\s+(.+)/);
+            const h1Match = tl.match(/^#{1,3}\s+(.+)/);
             if (h1Match) { title = h1Match[1].trim(); continue; }
             if (tl.startsWith('**') && tl.endsWith('**')) {
               title = tl.replace(/\*\*/g, '').trim();
@@ -337,10 +337,14 @@ function parseEdition(text) {
             }
           }
 
-          // Subtitle: **bold** or ALL CAPS line right after title (before body)
+          // Subtitle: **bold**, *italic*, or ALL CAPS line right after title (before body)
           if (title && !subtitle && bodyLines.length === 0) {
             if (tl.startsWith('**') && tl.endsWith('**')) {
               subtitle = tl.replace(/\*\*/g, '').trim();
+              continue;
+            }
+            if (tl.startsWith('*') && tl.endsWith('*') && !tl.startsWith('**')) {
+              subtitle = tl.replace(/^\*|\*$/g, '').trim();
               continue;
             }
             if (/^[A-Z][A-Z\s''',\-:—]{8,}$/.test(tl) && !tl.startsWith('By ')) {

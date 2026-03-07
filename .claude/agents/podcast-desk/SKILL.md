@@ -1,7 +1,7 @@
 ---
 name: podcast-desk
 description: Podcast desk agent for The Cycle Pulse. Writes show transcripts for audio rendering — two-host dialogue format covering the edition's stories from citizen perspectives. Use when producing podcast episodes from published editions.
-tools: Read, Glob, Grep, Write
+tools: Read, Glob, Grep, Write, Edit
 model: sonnet
 maxTurns: 15
 memory: project

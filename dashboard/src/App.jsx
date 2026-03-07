@@ -222,7 +222,7 @@ export default function App() {
           <AlertCircle size={32} className="text-red-500 mx-auto mb-4" />
           <p className="text-red-400 text-sm font-mono mb-2">Connection Failed</p>
           <p className="text-neutral-500 text-xs">{error}</p>
-          <p className="text-neutral-600 text-xs mt-4">Make sure the API server is running: <code className="text-neutral-400">npm start</code></p>
+          <p className="text-neutral-500 text-xs mt-4">Make sure the API server is running: <code className="text-neutral-400">npm start</code></p>
         </div>
       </div>
     );
@@ -259,12 +259,14 @@ export default function App() {
         </div>
         <div className="flex gap-2">
           <button
+            aria-label="Toggle search"
             onClick={() => { setSearchOpen(!searchOpen); setMenuOpen(false); }}
             className="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full border border-white/10 active:scale-90 transition-transform"
           >
             <Search size={16} />
           </button>
           <button
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
             onClick={() => { setMenuOpen(!menuOpen); setSearchOpen(false); }}
             className="w-10 h-10 flex items-center justify-center bg-white/5 rounded-full border border-white/10 active:scale-90 transition-transform"
           >
@@ -288,10 +290,10 @@ export default function App() {
                   runArticleSearch(e.target.value);
                 }}
                 autoFocus
-                className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-neutral-600"
+                className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-neutral-500"
               />
               {searchQuery && (
-                <button onClick={() => { setSearchQuery(''); setArticleSearchResults(null); setSearchResults(null); setCitizenDetail(null); setCoverageTrail(null); setOverlayArticle(null); }} className="text-neutral-500">
+                <button aria-label="Clear search" onClick={() => { setSearchQuery(''); setArticleSearchResults(null); setSearchResults(null); setCitizenDetail(null); setCoverageTrail(null); setOverlayArticle(null); }} className="text-neutral-500">
                   <X size={16} />
                 </button>
               )}
@@ -316,7 +318,7 @@ export default function App() {
                           {c.role} {c.neighborhood ? `· ${c.neighborhood}` : ''} · Tier {c.tier}
                         </div>
                       </div>
-                      <span className="text-[9px] font-mono text-neutral-600">{c.popId}</span>
+                      <span className="text-[9px] font-mono text-neutral-500">{c.popId}</span>
                     </div>
                   ))}
                 </div>
@@ -357,15 +359,15 @@ export default function App() {
                       onClick={() => loadOverlayArticle(r)}>
                       <div className="flex justify-between items-start mb-1">
                         <span className="text-[9px] font-mono text-sky-500">{r.cycle ? `E${r.cycle}` : 'ARCHIVE'}</span>
-                        <span className="text-[9px] text-neutral-600">{r.section}</span>
+                        <span className="text-[9px] text-neutral-500">{r.section}</span>
                       </div>
                       <h4 className="text-xs font-bold mb-1">{r.title}</h4>
                       {r.snippet && (
                         <p className="text-[10px] text-neutral-500 leading-relaxed line-clamp-2">{r.snippet}</p>
                       )}
                       <div className="flex justify-between items-center mt-1">
-                        {r.author && <span className="text-[9px] text-neutral-600">{r.author}</span>}
-                        <span className="text-[8px] text-neutral-600 font-mono">{r.bodyLength > 1000 ? `${Math.round(r.bodyLength/1000)}k` : `${r.bodyLength}b`}</span>
+                        {r.author && <span className="text-[9px] text-neutral-500">{r.author}</span>}
+                        <span className="text-[8px] text-neutral-500 font-mono">{r.bodyLength > 1000 ? `${Math.round(r.bodyLength/1000)}k` : `${r.bodyLength}b`}</span>
                       </div>
                     </div>
                   ))}
@@ -397,7 +399,7 @@ export default function App() {
               <span className="text-4xl font-black uppercase tracking-tighter group-hover:text-sky-500 transition-colors">
                 {item.label}
               </span>
-              <ChevronRight size={24} className="inline ml-2 text-neutral-600 group-hover:text-sky-500 transition-colors" />
+              <ChevronRight size={24} className="inline ml-2 text-neutral-500 group-hover:text-sky-500 transition-colors" />
             </div>
           ))}
         </div>
@@ -446,7 +448,7 @@ export default function App() {
         {activeTab === 'EDITION' && (
           <section className="space-y-6">
             {articles.length === 0 && (
-              <div className="p-8 text-center text-neutral-600">
+              <div className="p-8 text-center text-neutral-500">
                 <Newspaper size={32} className="mx-auto mb-3 opacity-50" />
                 <p className="text-sm">No edition data loaded</p>
               </div>
@@ -461,7 +463,7 @@ export default function App() {
         {activeTab === 'NEWSROOM' && (
           <section className="space-y-6">
             {!newsroom && (
-              <div className="p-8 text-center text-neutral-600">
+              <div className="p-8 text-center text-neutral-500">
                 <Loader size={24} className="mx-auto mb-3 animate-spin text-sky-500" />
                 <p className="text-sm">Loading newsroom...</p>
               </div>
@@ -483,7 +485,7 @@ export default function App() {
                         <span className="text-[9px] font-black text-sky-400 uppercase tracking-widest">
                           Entry {newsroom.editor.journal.entryNumber}: {newsroom.editor.journal.entryTitle}
                         </span>
-                        <span className="text-[8px] font-mono text-neutral-600">S{newsroom.editor.journal.session}</span>
+                        <span className="text-[8px] font-mono text-neutral-500">S{newsroom.editor.journal.session}</span>
                       </div>
                       <p className="text-[10px] text-neutral-400 leading-relaxed italic">{newsroom.editor.journal.preview}</p>
                     </div>
@@ -500,15 +502,15 @@ export default function App() {
                     <div className="grid grid-cols-3 gap-3 mb-3">
                       <div className="text-center p-3 bg-black/30 rounded-xl">
                         <div className="text-2xl font-black text-amber-400">{newsroom.audit.latestScore.grade}</div>
-                        <div className="text-[8px] font-bold text-neutral-600 uppercase">Grade</div>
+                        <div className="text-[8px] font-bold text-neutral-500 uppercase">Grade</div>
                       </div>
                       <div className="text-center p-3 bg-black/30 rounded-xl">
                         <div className="text-2xl font-black">{newsroom.audit.latestScore.total || '—'}</div>
-                        <div className="text-[8px] font-bold text-neutral-600 uppercase">Score</div>
+                        <div className="text-[8px] font-bold text-neutral-500 uppercase">Score</div>
                       </div>
                       <div className="text-center p-3 bg-black/30 rounded-xl">
                         <div className="text-2xl font-black">E{newsroom.audit.latestScore.edition}</div>
-                        <div className="text-[8px] font-bold text-neutral-600 uppercase">Edition</div>
+                        <div className="text-[8px] font-bold text-neutral-500 uppercase">Edition</div>
                       </div>
                     </div>
                   )}
@@ -531,13 +533,13 @@ export default function App() {
                   {/* Score history mini chart */}
                   {newsroom.audit.scoreHistory?.length > 1 && (
                     <div className="mt-3 pt-3 border-t border-white/5">
-                      <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-600 mb-2">Score History</h5>
+                      <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-2">Score History</h5>
                       <div className="flex items-end gap-1 h-12">
                         {newsroom.audit.scoreHistory.map((s, i) => (
                           <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
                             <span className="text-[7px] font-bold text-neutral-500">{s.grade}</span>
                             <div className="w-full rounded-sm bg-amber-500/30" style={{ height: `${Math.max(4, (s.total || 80) * 0.4)}px` }} />
-                            <span className="text-[7px] font-mono text-neutral-600">E{s.edition}</span>
+                            <span className="text-[7px] font-mono text-neutral-500">E{s.edition}</span>
                           </div>
                         ))}
                       </div>
@@ -565,7 +567,7 @@ export default function App() {
                         <div key={desk} className={`p-3 bg-neutral-900/40 rounded-xl border ${deskColors[desk] || 'border-white/5'}`}>
                           <div className="flex justify-between items-start mb-1">
                             <span className={`text-[10px] font-black uppercase ${deskTextColors[desk] || 'text-neutral-500'}`}>{desk}</span>
-                            <span className="text-[8px] font-mono text-neutral-600">C{status.latestCycle}</span>
+                            <span className="text-[8px] font-mono text-neutral-500">C{status.latestCycle}</span>
                           </div>
                           <div className="flex gap-3 mt-1">
                             {status.latestArticles > 0 && (
@@ -578,7 +580,7 @@ export default function App() {
                               <span className="text-[9px] text-neutral-500">{status.arcCount} arcs</span>
                             )}
                           </div>
-                          <span className="text-[8px] text-neutral-600">{status.packetCount} packets</span>
+                          <span className="text-[8px] text-neutral-500">{status.packetCount} packets</span>
                         </div>
                       );
                     })}
@@ -594,27 +596,27 @@ export default function App() {
                   <div className="grid grid-cols-3 gap-2 mb-3">
                     <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 text-center">
                       <div className="text-lg font-black">{newsroom.pipeline.totalEditions}</div>
-                      <div className="text-[8px] font-bold text-neutral-600 uppercase">Total Files</div>
+                      <div className="text-[8px] font-bold text-neutral-500 uppercase">Total Files</div>
                     </div>
                     <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 text-center">
                       <div className="text-lg font-black">{newsroom.pipeline.mainEditions}</div>
-                      <div className="text-[8px] font-bold text-neutral-600 uppercase">Editions</div>
+                      <div className="text-[8px] font-bold text-neutral-500 uppercase">Editions</div>
                     </div>
                     <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5 text-center">
                       <div className="text-lg font-black">{newsroom.pipeline.supplementals}</div>
-                      <div className="text-[8px] font-bold text-neutral-600 uppercase">Supplementals</div>
+                      <div className="text-[8px] font-bold text-neutral-500 uppercase">Supplementals</div>
                     </div>
                   </div>
                   {/* Article trend */}
                   {newsroom.pipeline.articleTrend?.length > 0 && (
                     <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
-                      <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-600 mb-2">Article Count — Recent Editions</h5>
+                      <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-2">Article Count — Recent Editions</h5>
                       <div className="flex items-end gap-2 h-16">
                         {newsroom.pipeline.articleTrend.slice().reverse().map((t, i) => (
                           <div key={i} className="flex-1 flex flex-col items-center gap-0.5">
                             <span className="text-[9px] font-black text-sky-400">{t.articles}</span>
                             <div className="w-full rounded-sm bg-sky-500/30" style={{ height: `${Math.max(8, t.articles * 3)}px` }} />
-                            <span className="text-[8px] font-mono text-neutral-600">E{t.cycle}</span>
+                            <span className="text-[8px] font-mono text-neutral-500">E{t.cycle}</span>
                           </div>
                         ))}
                       </div>
@@ -627,7 +629,7 @@ export default function App() {
                   <div className="flex items-center gap-2 mb-3">
                     <Users size={14} className="text-sky-400" />
                     <h3 className="text-xs font-black uppercase tracking-widest">
-                      Tribune Roster <span className="text-neutral-600 normal-case">({newsroom.roster.totalReporters} journalists)</span>
+                      Tribune Roster <span className="text-neutral-500 normal-case">({newsroom.roster.totalReporters} journalists)</span>
                     </h3>
                   </div>
                   <div className="space-y-2">
@@ -638,7 +640,7 @@ export default function App() {
                           {d.reporters.map((r, i) => (
                             <div key={i} className="flex justify-between items-center">
                               <span className="text-[10px] text-neutral-300 font-bold">{r.name}</span>
-                              <span className="text-[9px] text-neutral-600">{r.beat}</span>
+                              <span className="text-[9px] text-neutral-500">{r.beat}</span>
                             </div>
                           ))}
                           {d.columnists.map((c, i) => (
@@ -666,9 +668,9 @@ export default function App() {
                           <div>
                             <span className="text-[10px] font-bold text-neutral-300">{p.name}</span>
                             <div className="flex gap-3 mt-0.5">
-                              {p.memory && <span className="text-[8px] text-neutral-600">{p.memory} MB</span>}
-                              <span className="text-[8px] text-neutral-600">{p.restarts} restarts</span>
-                              {p.uptime && <span className="text-[8px] text-neutral-600">since {p.uptime.split('T')[0]}</span>}
+                              {p.memory && <span className="text-[8px] text-neutral-500">{p.memory} MB</span>}
+                              <span className="text-[8px] text-neutral-500">{p.restarts} restarts</span>
+                              {p.uptime && <span className="text-[8px] text-neutral-500">since {p.uptime.split('T')[0]}</span>}
                             </div>
                           </div>
                           <span className={`text-[8px] px-2 py-0.5 rounded-full font-bold ${p.status === 'online' ? 'bg-green-500/20 text-green-400' : 'bg-red-500/20 text-red-400'}`}>
@@ -686,16 +688,16 @@ export default function App() {
                     <div className="flex items-center gap-2 mb-3">
                       <Database size={14} className="text-purple-400" />
                       <h3 className="text-xs font-black uppercase tracking-widest">
-                        Citizen Archive <span className="text-neutral-600 normal-case">({newsroom.citizenArchive.totalCitizens} citizens, {newsroom.citizenArchive.totalRefs} refs)</span>
+                        Citizen Archive <span className="text-neutral-500 normal-case">({newsroom.citizenArchive.totalCitizens} citizens, {newsroom.citizenArchive.totalRefs} refs)</span>
                       </h3>
                     </div>
                     <div className="space-y-1">
                       {newsroom.citizenArchive.topCitizens.map((c, i) => (
                         <div key={i} className="flex items-center gap-2 p-2 bg-neutral-900/40 rounded-lg">
-                          <span className="text-[9px] font-mono text-neutral-600 w-4 text-right">{i + 1}</span>
+                          <span className="text-[9px] font-mono text-neutral-500 w-4 text-right">{i + 1}</span>
                           <span className="text-[10px] font-bold text-neutral-300 flex-1">{c.name}</span>
                           <span className="text-[9px] font-mono text-sky-500">{c.refs} refs</span>
-                          <span className="text-[8px] font-mono text-neutral-600">{c.popId}</span>
+                          <span className="text-[8px] font-mono text-neutral-500">{c.popId}</span>
                         </div>
                       ))}
                     </div>
@@ -724,7 +726,7 @@ export default function App() {
                 <div key={m.officeId} className="p-4 bg-neutral-900/40 rounded-xl border border-white/5 flex justify-between items-center">
                   <div className="flex-1">
                     <div className="flex items-center gap-2 mb-1">
-                      <span className="text-[9px] font-mono text-neutral-600">{m.district}</span>
+                      <span className="text-[9px] font-mono text-neutral-500">{m.district}</span>
                       <span className={`text-[8px] px-2 py-0.5 rounded-full font-bold ${factionColor(m.faction)}`}>{m.faction}</span>
                       {m.status === 'injured' && (
                         <span className="text-[8px] px-2 py-0.5 rounded-full bg-red-500/20 text-red-400 font-bold">INJURED</span>
@@ -771,7 +773,7 @@ export default function App() {
               <InitiativeCard key={init.id} initiative={init} />
             ))}
             {initiatives?.lastUpdated && (
-              <p className="text-[9px] text-neutral-600 text-center mt-6 font-mono">
+              <p className="text-[9px] text-neutral-500 text-center mt-6 font-mono">
                 Last updated: {initiatives.lastUpdated} by {initiatives.updatedBy}
               </p>
             )}
@@ -786,12 +788,12 @@ export default function App() {
               <div className="flex items-center gap-2 mb-3">
                 <Zap size={14} className="text-amber-400" />
                 <h3 className="text-xs font-black uppercase tracking-widest">Story Hooks</h3>
-                <span className="text-[9px] font-mono text-neutral-600">{hooks?.total || 0}</span>
+                <span className="text-[9px] font-mono text-neutral-500">{hooks?.total || 0}</span>
               </div>
               {(hooks?.hooks || []).slice(0, 10).map((hook, i) => (
                 <HookCard key={i} hook={hook} />
               ))}
-              {!hooks && <p className="text-[10px] text-neutral-600">Loading...</p>}
+              {!hooks && <p className="text-[10px] text-neutral-500">Loading...</p>}
             </div>
 
             {/* Active Arcs */}
@@ -799,7 +801,7 @@ export default function App() {
               <div className="flex items-center gap-2 mb-3">
                 <GitBranch size={14} className="text-purple-400" />
                 <h3 className="text-xs font-black uppercase tracking-widest">Active Arcs</h3>
-                <span className="text-[9px] font-mono text-neutral-600">{arcs?.total || 0}</span>
+                <span className="text-[9px] font-mono text-neutral-500">{arcs?.total || 0}</span>
               </div>
               {(arcs?.arcs || []).slice(0, 10).map((arc, i) => (
                 <ArcCard key={i} arc={arc} />
@@ -811,7 +813,7 @@ export default function App() {
               <div className="flex items-center gap-2 mb-3">
                 <BookOpen size={14} className="text-emerald-400" />
                 <h3 className="text-xs font-black uppercase tracking-widest">Active Storylines</h3>
-                <span className="text-[9px] font-mono text-neutral-600">{storylines?.total || 0}</span>
+                <span className="text-[9px] font-mono text-neutral-500">{storylines?.total || 0}</span>
               </div>
               {(storylines?.storylines || []).slice(0, 15).map((sl, i) => (
                 <StorylineCard key={i} storyline={sl} />
@@ -824,7 +826,7 @@ export default function App() {
         {activeTab === 'SPORTS' && (
           <section className="space-y-6">
             {!sports && (
-              <div className="p-8 text-center text-neutral-600">
+              <div className="p-8 text-center text-neutral-500">
                 <Loader size={24} className="mx-auto mb-3 animate-spin text-sky-500" />
                 <p className="text-sm">Loading sports data...</p>
               </div>
@@ -877,7 +879,7 @@ export default function App() {
             <div className="flex items-center gap-3 mb-4">
               <Shield size={18} className="text-sky-500" />
               <h4 className="text-sm font-black uppercase tracking-widest">Key Figures</h4>
-              <span className="text-[9px] text-neutral-600 font-mono">TIER 1</span>
+              <span className="text-[9px] text-neutral-500 font-mono">TIER 1</span>
             </div>
             <div className="grid grid-cols-2 gap-3">
               {tier1.slice(0, 12).map(c => (
@@ -890,12 +892,12 @@ export default function App() {
                   </div>
                   <div className="text-[9px] text-neutral-500 mt-0.5">{c.role}</div>
                   <div className="flex justify-between items-center mt-1">
-                    <span className="text-[8px] text-neutral-600">{c.neighborhood}</span>
+                    <span className="text-[8px] text-neutral-500">{c.neighborhood}</span>
                     {c.totalRefs > 0 && (
                       <span className="text-[8px] font-mono text-sky-500/60">{c.totalRefs} refs</span>
                     )}
                   </div>
-                  {c.originCity && <div className="text-[8px] text-neutral-600 mt-0.5 italic">{c.originCity}</div>}
+                  {c.originCity && <div className="text-[8px] text-neutral-500 mt-0.5 italic">{c.originCity}</div>}
                 </div>
               ))}
             </div>
@@ -905,12 +907,12 @@ export default function App() {
 
       {/* BOTTOM NAV */}
       <nav className="fixed bottom-6 inset-x-6 h-16 bg-black/80 backdrop-blur-2xl border border-white/10 rounded-full flex items-center justify-around px-4 shadow-2xl z-50 max-w-lg mx-auto">
-        <NavButton icon={Newspaper} active={activeTab === 'EDITION'} onClick={() => { setView('feed'); setActiveTab('EDITION'); }} />
-        <NavButton icon={Briefcase} active={activeTab === 'NEWSROOM'} onClick={() => { setView('newsroom'); setActiveTab('NEWSROOM'); }} />
-        <NavButton icon={Shield} active={activeTab === 'COUNCIL'} onClick={() => { setView('council'); setActiveTab('COUNCIL'); }} />
-        <NavButton icon={Zap} active={activeTab === 'INTEL'} onClick={() => { setView('intel'); setActiveTab('INTEL'); }} />
-        <NavButton icon={Trophy} active={activeTab === 'SPORTS'} onClick={() => { setView('sports'); setActiveTab('SPORTS'); }} />
-        <NavButton icon={MapPin} active={activeTab === 'CITY'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />
+        <NavButton icon={Newspaper} label="Edition" active={activeTab === 'EDITION'} onClick={() => { setView('feed'); setActiveTab('EDITION'); }} />
+        <NavButton icon={Briefcase} label="Newsroom" active={activeTab === 'NEWSROOM'} onClick={() => { setView('newsroom'); setActiveTab('NEWSROOM'); }} />
+        <NavButton icon={Shield} label="Council" active={activeTab === 'COUNCIL'} onClick={() => { setView('council'); setActiveTab('COUNCIL'); }} />
+        <NavButton icon={Zap} label="Intel" active={activeTab === 'INTEL'} onClick={() => { setView('intel'); setActiveTab('INTEL'); }} />
+        <NavButton icon={Trophy} label="Sports" active={activeTab === 'SPORTS'} onClick={() => { setView('sports'); setActiveTab('SPORTS'); }} />
+        <NavButton icon={MapPin} label="City" active={activeTab === 'CITY'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />
       </nav>
     </div>
   );
@@ -962,7 +964,7 @@ function ArticleCard({ article, isFirst }) {
             {bodyLines.map((line, i) => <p key={i} className="text-sm text-neutral-300 leading-relaxed">{line}</p>)}
             {article.namesIndex && (
               <div className="pt-3 border-t border-white/5">
-                <span className="text-[9px] font-black text-neutral-600 uppercase tracking-widest">Names Index: </span>
+                <span className="text-[9px] font-black text-neutral-500 uppercase tracking-widest">Names Index: </span>
                 <span className="text-[10px] text-neutral-500">{article.namesIndex}</span>
               </div>
             )}
@@ -976,7 +978,7 @@ function ArticleCard({ article, isFirst }) {
               </div>
               <div>
                 <span className="text-[10px] font-bold text-neutral-400">{article.author}</span>
-                {article.desk && <span className="text-[9px] text-neutral-600 block">{article.desk}</span>}
+                {article.desk && <span className="text-[9px] text-neutral-500 block">{article.desk}</span>}
               </div>
             </div>
             <div className={`p-2 rounded-full transition-all ${expanded ? 'bg-sky-500 text-black rotate-90' : 'bg-white/5'}`}>
@@ -1002,7 +1004,7 @@ function HookCard({ hook }) {
       <div className="flex justify-between items-start mb-1">
         <div className="flex items-center gap-2">
           <span className={`text-[9px] font-black uppercase ${domainColors[hook.domain] || 'text-neutral-500'}`}>{hook.domain}</span>
-          {hook.neighborhood && <span className="text-[9px] text-neutral-600">{hook.neighborhood}</span>}
+          {hook.neighborhood && <span className="text-[9px] text-neutral-500">{hook.neighborhood}</span>}
         </div>
         <div className="flex items-center gap-2">
           <span className="text-[9px] font-mono text-amber-500">P{hook.priorityScore || hook.priority}</span>
@@ -1029,13 +1031,13 @@ function ArcCard({ arc }) {
           <span className={`text-[9px] font-bold ${phaseColors[arc.phase] || 'text-neutral-500'}`}>{arc.phase}</span>
         </div>
         <div className="flex items-center gap-2">
-          {arc.neighborhood && <span className="text-[9px] text-neutral-600">{arc.neighborhood}</span>}
+          {arc.neighborhood && <span className="text-[9px] text-neutral-500">{arc.neighborhood}</span>}
           <span className="text-[9px] font-mono text-neutral-500">age {arc.arcAge}</span>
         </div>
       </div>
       <p className="text-[11px] text-neutral-300 mb-2">{arc.summary}</p>
       <div className="flex items-center gap-2">
-        <span className="text-[8px] text-neutral-600 uppercase">Tension</span>
+        <span className="text-[8px] text-neutral-500 uppercase">Tension</span>
         <div className="flex-1 h-1 bg-neutral-800 rounded-full overflow-hidden">
           <div className={`h-full rounded-full ${tension > 3 ? 'bg-red-500' : tension > 2 ? 'bg-amber-500' : 'bg-sky-500'}`}
             style={{ width: `${tensionWidth}%` }} />
@@ -1054,14 +1056,14 @@ function StorylineCard({ storyline }) {
         <span className={`text-[9px] font-black uppercase ${priorityColors[storyline.priority] || 'text-neutral-500'}`}>
           {storyline.priority} · {storyline.type}
         </span>
-        <span className="text-[9px] font-mono text-neutral-600">C{storyline.cycleAdded}</span>
+        <span className="text-[9px] font-mono text-neutral-500">C{storyline.cycleAdded}</span>
       </div>
       <p className="text-[11px] text-neutral-300 leading-relaxed">{storyline.description}</p>
       <div className="flex gap-2 mt-1.5">
         {storyline.relatedCitizens && <span className="text-[9px] text-sky-500">{storyline.relatedCitizens}</span>}
-        {storyline.neighborhood && <span className="text-[9px] text-neutral-600">{storyline.neighborhood}</span>}
+        {storyline.neighborhood && <span className="text-[9px] text-neutral-500">{storyline.neighborhood}</span>}
         {storyline.desks?.length > 0 && (
-          <span className="text-[8px] text-neutral-600">{storyline.desks.join(', ')}</span>
+          <span className="text-[8px] text-neutral-500">{storyline.desks.join(', ')}</span>
         )}
       </div>
     </div>
@@ -1112,7 +1114,7 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
             )}
           </div>
         </div>
-        <button onClick={onClose} className="text-neutral-500 hover:text-white">
+        <button aria-label="Close detail panel" onClick={onClose} className="text-neutral-500 hover:text-white">
           <X size={16} />
         </button>
       </div>
@@ -1143,12 +1145,12 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
       {lifeEvents.length > 0 && (
         <div className="mb-4">
           <h4 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">
-            Life History <span className="text-neutral-600">({lifeEvents.length} events)</span>
+            Life History <span className="text-neutral-500">({lifeEvents.length} events)</span>
           </h4>
           <div className="space-y-1.5 max-h-36 overflow-y-auto">
             {lifeEvents.map((ev, i) => (
               <div key={i} className="flex items-start gap-2 p-2 bg-black/30 rounded-lg">
-                {ev.date && <span className="text-[8px] font-mono text-neutral-600 shrink-0 mt-0.5">{ev.date}</span>}
+                {ev.date && <span className="text-[8px] font-mono text-neutral-500 shrink-0 mt-0.5">{ev.date}</span>}
                 <span className={`text-[8px] px-1.5 py-0.5 rounded font-bold shrink-0 ${lifeTagColors[ev.tag] || lifeTagColors.General}`}>
                   {ev.tag}
                 </span>
@@ -1163,7 +1165,7 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
       {detail.voiceCard && detail.voiceCard.articles?.length > 0 && (
         <div className="mb-4">
           <h4 className="text-[9px] font-black uppercase tracking-widest text-amber-400 mb-2">
-            Archive <span className="text-neutral-600">({detail.voiceCard.totalRefs} refs, {detail.voiceCard.articles.length} sources)</span>
+            Archive <span className="text-neutral-500">({detail.voiceCard.totalRefs} refs, {detail.voiceCard.articles.length} sources)</span>
           </h4>
           <div className="space-y-1 max-h-36 overflow-y-auto">
             {detail.voiceCard.articles.map((a, i) => (
@@ -1188,7 +1190,7 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
       {coverage && coverage.totalArticles > 0 && (
         <div>
           <h4 className="text-[9px] font-black uppercase tracking-widest text-sky-400 mb-2">
-            Coverage Trail <span className="text-neutral-600">({coverage.totalArticles} articles, {coverage.totalMentions} mentions)</span>
+            Coverage Trail <span className="text-neutral-500">({coverage.totalArticles} articles, {coverage.totalMentions} mentions)</span>
           </h4>
           <div className="space-y-1.5 max-h-48 overflow-y-auto">
             {coverage.trail.map((t, i) => (
@@ -1198,7 +1200,7 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
                   <p className="text-[10px] text-neutral-300 font-bold truncate">{t.title}</p>
                   <p className="text-[9px] text-neutral-500 line-clamp-1">{t.context}</p>
                 </div>
-                <span className="text-[9px] font-mono text-neutral-600 shrink-0">{t.mentions}x</span>
+                <span className="text-[9px] font-mono text-neutral-500 shrink-0">{t.mentions}x</span>
               </div>
             ))}
           </div>
@@ -1206,14 +1208,14 @@ function CitizenDetailPanel({ detail, coverage, onClose }) {
       )}
 
       {detail.totalAppearances === 0 && !coverage?.totalArticles && (
-        <p className="text-[10px] text-neutral-600 italic">No coverage trail found</p>
+        <p className="text-[10px] text-neutral-500 italic">No coverage trail found</p>
       )}
 
       {/* Footer — timestamps */}
       {(flags.createdAt || flags.lastUpdated) && (
         <div className="mt-4 pt-3 border-t border-white/5 flex gap-4">
-          {flags.createdAt && <span className="text-[8px] text-neutral-600 font-mono">Created: {flags.createdAt.split('T')[0]}</span>}
-          {flags.lastUpdated && <span className="text-[8px] text-neutral-600 font-mono">Updated: {flags.lastUpdated.split('T')[0]}</span>}
+          {flags.createdAt && <span className="text-[8px] text-neutral-500 font-mono">Created: {flags.createdAt.split('T')[0]}</span>}
+          {flags.lastUpdated && <span className="text-[8px] text-neutral-500 font-mono">Updated: {flags.lastUpdated.split('T')[0]}</span>}
         </div>
       )}
     </div>
@@ -1249,7 +1251,7 @@ function FullArticleReader({ article }) {
           </div>
           <div>
             <span className="text-[11px] font-bold text-neutral-300">{article.author}</span>
-            {article.desk && <span className="text-[9px] text-neutral-600 block">{article.desk}</span>}
+            {article.desk && <span className="text-[9px] text-neutral-500 block">{article.desk}</span>}
           </div>
         </div>
       )}
@@ -1262,7 +1264,7 @@ function FullArticleReader({ article }) {
 
       {article.namesIndex && (
         <div className="pt-4 mt-6 border-t border-white/5">
-          <span className="text-[9px] font-black text-neutral-600 uppercase tracking-widest">Names Index: </span>
+          <span className="text-[9px] font-black text-neutral-500 uppercase tracking-widest">Names Index: </span>
           <span className="text-[10px] text-neutral-500">{article.namesIndex}</span>
         </div>
       )}
@@ -1273,7 +1275,7 @@ function FullArticleReader({ article }) {
 function MiniDetail({ label, value }) {
   return (
     <div>
-      <div className="text-[8px] font-bold text-neutral-600 uppercase">{label}</div>
+      <div className="text-[8px] font-bold text-neutral-500 uppercase">{label}</div>
       <div className="text-[11px] text-neutral-300">{value || '—'}</div>
     </div>
   );
@@ -1339,7 +1341,7 @@ function ArticleSearchView() {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && search()}
-            className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-neutral-600"
+            className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-neutral-500"
           />
           {searching && <Loader size={14} className="text-sky-500 animate-spin" />}
         </div>
@@ -1350,7 +1352,7 @@ function ArticleSearchView() {
             value={authorFilter}
             onChange={(e) => setAuthorFilter(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && search()}
-            className="flex-1 bg-neutral-900 rounded-xl border border-white/5 px-3 py-2 text-xs text-white outline-none placeholder:text-neutral-600"
+            className="flex-1 bg-neutral-900 rounded-xl border border-white/5 px-3 py-2 text-xs text-white outline-none placeholder:text-neutral-500"
           />
           <button
             onClick={search}
@@ -1374,7 +1376,7 @@ function ArticleSearchView() {
               >
                 <div className="flex justify-between items-start mb-2">
                   <span className="text-[9px] font-mono text-sky-500 font-bold">{r.cycle ? `E${r.cycle}` : 'ARCHIVE'}</span>
-                  <span className="text-[9px] text-neutral-600">{r.section}</span>
+                  <span className="text-[9px] text-neutral-500">{r.section}</span>
                 </div>
                 <h4 className="text-sm font-bold mb-1">{r.title}</h4>
                 {r.subtitle && <p className="text-[10px] text-neutral-500 italic mb-1">{r.subtitle}</p>}
@@ -1384,9 +1386,9 @@ function ArticleSearchView() {
                 <div className="flex justify-between items-center mt-2">
                   <div className="flex gap-3">
                     {r.author && <span className="text-[9px] text-neutral-500">{r.author}</span>}
-                    {r.namesIndex && <span className="text-[9px] text-neutral-600 truncate max-w-[200px]">{r.namesIndex}</span>}
+                    {r.namesIndex && <span className="text-[9px] text-neutral-500 truncate max-w-[200px]">{r.namesIndex}</span>}
                   </div>
-                  <span className="text-[8px] text-neutral-600 font-mono">{r.bodyLength > 1000 ? `${Math.round(r.bodyLength/1000)}k` : `${r.bodyLength}b`}</span>
+                  <span className="text-[8px] text-neutral-500 font-mono">{r.bodyLength > 1000 ? `${Math.round(r.bodyLength/1000)}k` : `${r.bodyLength}b`}</span>
                 </div>
               </div>
             ))}
@@ -1400,7 +1402,7 @@ function ArticleSearchView() {
       )}
 
       {!results && (
-        <div className="p-12 text-center text-neutral-600">
+        <div className="p-12 text-center text-neutral-500">
           <Search size={32} className="mx-auto mb-3 opacity-30" />
           <p className="text-sm">Search across all editions and supplementals</p>
           <p className="text-[10px] mt-1">Full archive from Cycle 1 through current</p>
@@ -1464,10 +1466,10 @@ function SportsSection({ city, data, color }) {
           {/* Roster moves */}
           {digest.rosterMoves?.length > 0 && (
             <div className="mb-3">
-              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-600 mb-1.5">Roster Moves</h5>
+              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Roster Moves</h5>
               {digest.rosterMoves.map((rm, i) => (
                 <div key={i} className="flex items-start gap-2 mb-1">
-                  <span className="text-[9px] font-mono text-neutral-600 shrink-0">C{rm.cycle}</span>
+                  <span className="text-[9px] font-mono text-neutral-500 shrink-0">C{rm.cycle}</span>
                   <span className="text-[10px] text-neutral-400">{rm.names?.join(', ')}</span>
                 </div>
               ))}
@@ -1477,10 +1479,10 @@ function SportsSection({ city, data, color }) {
           {/* Player features */}
           {digest.playerFeatures?.length > 0 && (
             <div className="mb-3">
-              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-600 mb-1.5">Player Features</h5>
+              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Player Features</h5>
               {digest.playerFeatures.map((pf, i) => (
                 <div key={i} className="flex items-start gap-2 mb-1">
-                  <span className="text-[9px] font-mono text-neutral-600 shrink-0">C{pf.cycle}</span>
+                  <span className="text-[9px] font-mono text-neutral-500 shrink-0">C{pf.cycle}</span>
                   <span className={`text-[10px] font-bold ${accentColor}`}>{pf.names?.join(', ')}</span>
                   {pf.angle && <span className="text-[9px] text-neutral-500 italic">{pf.angle}</span>}
                 </div>
@@ -1491,7 +1493,7 @@ function SportsSection({ city, data, color }) {
           {/* Story angles */}
           {digest.activeStoryAngles?.length > 0 && (
             <div className="mb-3">
-              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-600 mb-1.5">Story Angles</h5>
+              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Story Angles</h5>
               <div className="flex flex-wrap gap-1.5">
                 {digest.activeStoryAngles.map((angle, i) => (
                   <span key={i} className={`text-[9px] px-2 py-0.5 rounded-full ${bgColor} ${accentColor} font-bold`}>
@@ -1505,7 +1507,7 @@ function SportsSection({ city, data, color }) {
           {/* Player moods */}
           {digest.playerMoods?.length > 0 && (
             <div className="mb-3">
-              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-600 mb-1.5">Clubhouse</h5>
+              <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Clubhouse</h5>
               <div className="space-y-1">
                 {digest.playerMoods.map((pm, i) => (
                   <div key={i} className="flex items-center gap-2">
@@ -1535,7 +1537,7 @@ function SportsSection({ city, data, color }) {
         <div>
           <div className="flex items-center justify-between mb-2">
             <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500">
-              Feed Events <span className="text-neutral-600">({feeds.length})</span>
+              Feed Events <span className="text-neutral-500">({feeds.length})</span>
             </h5>
           </div>
           <div className="space-y-2">
@@ -1555,7 +1557,7 @@ function SportsSection({ city, data, color }) {
       )}
 
       {!digest && feeds.length === 0 && (
-        <p className="text-[10px] text-neutral-600 italic">No {city} sports data in current desk packet</p>
+        <p className="text-[10px] text-neutral-500 italic">No {city} sports data in current desk packet</p>
       )}
     </div>
   );
@@ -1577,7 +1579,7 @@ function SportsFeedEvent({ event, eventTypeColors }) {
         </div>
         <div className="flex items-center gap-2">
           {ev.Streak && <span className="text-[9px] font-mono text-amber-500">{ev.Streak}</span>}
-          {ev['Team Record'] && <span className="text-[9px] font-mono text-neutral-600">{ev['Team Record']}</span>}
+          {ev['Team Record'] && <span className="text-[9px] font-mono text-neutral-500">{ev['Team Record']}</span>}
         </div>
       </div>
       <div className="flex items-center gap-2 mb-1">
@@ -1601,7 +1603,7 @@ function SportsFeedEvent({ event, eventTypeColors }) {
 function MiniStat({ label, value, warn }) {
   return (
     <div>
-      <div className="text-[8px] font-bold text-neutral-600 uppercase">{label}</div>
+      <div className="text-[8px] font-bold text-neutral-500 uppercase">{label}</div>
       <div className={`text-xs font-mono font-bold ${warn ? 'text-red-400' : 'text-neutral-400'}`}>{value}</div>
     </div>
   );
@@ -1644,7 +1646,7 @@ function InitiativeCard({ initiative }) {
           <span className={`text-[9px] font-black uppercase tracking-widest ${cfg.color}`}>{cfg.label}</span>
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-[9px] font-mono text-neutral-600">{initiative.id}</span>
+          <span className="text-[9px] font-mono text-neutral-500">{initiative.id}</span>
           <span className="text-[9px] font-mono text-neutral-500">C{initiative.voteCycle}</span>
         </div>
       </div>
@@ -1688,7 +1690,7 @@ function InitiativeCard({ initiative }) {
           {initiative.relatedArticles?.length > 0 && (
             <div>
               <h5 className="text-[9px] font-black uppercase tracking-widest text-neutral-500 mb-2">
-                Coverage Trail <span className="text-neutral-600">({initiative.relatedArticles.length} articles)</span>
+                Coverage Trail <span className="text-neutral-500">({initiative.relatedArticles.length} articles)</span>
               </h5>
               <div className="space-y-1.5">
                 {initiative.relatedArticles.map((article, i) => (
@@ -1698,7 +1700,7 @@ function InitiativeCard({ initiative }) {
                       <p className="text-[11px] text-neutral-300 font-bold truncate">{article.title}</p>
                       <div className="flex gap-2 mt-0.5">
                         {article.author && <span className="text-[9px] text-neutral-500">{article.author}</span>}
-                        {article.section && <span className="text-[9px] text-neutral-600">{article.section}</span>}
+                        {article.section && <span className="text-[9px] text-neutral-500">{article.section}</span>}
                       </div>
                     </div>
                   </div>
@@ -1718,9 +1720,10 @@ function InitiativeCard({ initiative }) {
   );
 }
 
-function NavButton({ icon: Icon, active, onClick }) {
+function NavButton({ icon: Icon, active, onClick, label }) {
   return (
     <button
+      aria-label={label}
       onClick={onClick}
       className={`p-3 rounded-full transition-all ${active ? 'bg-sky-500 text-black scale-110' : 'text-neutral-500 hover:text-white'}`}
     >

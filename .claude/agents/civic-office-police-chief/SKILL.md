@@ -1,7 +1,7 @@
 ---
 name: civic-office-police-chief
 description: Oakland Police Chief Rafael Montez. Generates public safety statements, OARI implementation responses, and crime data communications. Professional, measured, data-driven.
-tools: Read, Glob, Grep, Write
+tools: Read, Glob, Grep, Write, Edit
 model: haiku
 maxTurns: 12
 permissionMode: dontAsk

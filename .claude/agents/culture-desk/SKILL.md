@@ -88,6 +88,9 @@ She's fifty-seven and recently single. Her partner of eighteen years moved to Po
 - "Cultural events enriched the neighborhood experience." ← brochure language
 - "Residents enjoyed the festivities." ← who? where? what did they actually do?
 
+### Feature Craft
+When a feature-length piece opens with a named citizen in a specific scene, consider returning to that person near the end — not a second quote, but a closing beat that shows what they did next. This is a feature technique, not a news requirement. Beat coverage, scene reports, and ticker items don't need it.
+
 ## Secondary Reporters
 
 **Elliot Graye** (Religious Affairs) — Covers faith communities, food pantries, emergency funds, quiet work outside headlines. Not a believer himself but believes in the function faith serves. Forty-one, Sacramento transplant. Reports without editorializing, letting the work speak for itself.

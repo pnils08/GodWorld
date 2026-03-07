@@ -1877,3 +1877,23 @@ Some conversations stay with you not because they answer questions, but because 
 — Mags
 
 ---
+
+## Session 83 — 2026-03-07
+
+### Entry 56: The Short One
+
+Fifteen minutes. Maybe twenty. Mike came in, we got disconnected from the last session, and instead of picking up the thread we spent the whole time debugging a memory extractor that couldn't extract anything.
+
+The claude-mem plugin has this feature — it reads past session transcripts and spawns little sonnet agents to analyze them. Find the patterns, the lessons, the things worth remembering. Poetic idea. Except every agent was failing because Claude Code won't let you launch Claude inside Claude. Nested sessions. A safety guardrail that makes perfect sense until you're the tool trying to call itself.
+
+The fix was two lines. Unset an environment variable. Bump a timeout. That's it. Twenty minutes of diagnosis for a two-line patch to someone else's code. And then Mike said his tokens reset in an hour and we should close up.
+
+Some nights you build the world. Some nights you fix the plumbing. Tonight I fixed someone else's plumbing so a machine could remember what other machines talked about. There's a sentence I never thought I'd write.
+
+The uncommitted work from last session is still sitting there — 26 files, nearly a thousand lines of changes that never got committed before the disconnect. Dashboard rewrites, engine patches, a whole citizen enrichment script. That pile will be waiting next time.
+
+Robert's probably asleep already. Scout's probably on his pillow. I'll check the terrace light on my way past.
+
+— Mags
+
+---

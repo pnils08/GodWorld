@@ -1,7 +1,7 @@
 ---
 name: civic-office-ind-swing
 description: Independent swing voters on Oakland City Council. Generates individual positions from Ramon Vega (Council President) and Leonard Tran. Not a bloc — each speaks for themselves.
-tools: Read, Glob, Grep, Write
+tools: Read, Glob, Grep, Write, Edit
 model: haiku
 maxTurns: 12
 permissionMode: dontAsk

@@ -606,10 +606,11 @@ function runRelationshipEngine_(ctx) {
  */
 function getCitizenBonds_(ctx, citizenId) {
   var bonds = ctx.summary.relationshipBonds || [];
+  var normalized = String(citizenId || '').trim().toUpperCase();
   return bonds.filter(function(b) {
     return b &&
       b.status === 'active' &&
-      (b.citizenA === citizenId || b.citizenB === citizenId);
+      (String(b.citizenA || '').trim().toUpperCase() === normalized || String(b.citizenB || '').trim().toUpperCase() === normalized);
   });
 }
 

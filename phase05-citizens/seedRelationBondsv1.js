@@ -1,10 +1,14 @@
 /**
  * ============================================================================
- * BOND SEEDING v1.2
+ * BOND SEEDING v1.3
  * ============================================================================
  * 
  * Seeds initial relationship bonds between Oakland citizens.
  * Run once to populate Relationship_Bonds, then bondEngine handles updates.
+ *
+ * v1.3 Changes (S83, Phase 23.8):
+ * - Name lookup uses First/Last columns (not Name) to match Simulation_Ledger schema
+ * - POPID normalized to trimmed uppercase on store for consistent lookups
  * 
  * BOND TYPES:
  * - family: Parent/child, siblings, extended
@@ -62,7 +66,8 @@ function seedRelationshipBonds_(ctx) {
   // Find column indices
   var cols = {
     citizenId: findColumnIndex_(headers, ['POPID', 'CitizenId', 'citizenId', 'ID']),
-    name: findColumnIndex_(headers, ['Name', 'name', 'CitizenName']),
+    first: findColumnIndex_(headers, ['First', 'FirstName', 'Name', 'name']),
+    last: findColumnIndex_(headers, ['Last', 'LastName']),
     neighborhood: findColumnIndex_(headers, ['Neighborhood', 'neighborhood']),
     occupation: findColumnIndex_(headers, ['Occupation', 'occupation']),
     tier: findColumnIndex_(headers, ['Tier', 'tier']),
@@ -77,9 +82,14 @@ function seedRelationshipBonds_(ctx) {
     var status = cols.status >= 0 ? String(row[cols.status] || '').toLowerCase() : 'active';
 
     if (status === 'active' || status === '') {
+      var rawId = row[cols.citizenId] || '';
+      var citizenId = String(rawId).trim().toUpperCase();
+      var firstName = cols.first >= 0 ? (row[cols.first] || '') : '';
+      var lastName = cols.last >= 0 ? (row[cols.last] || '') : '';
+      var fullName = (firstName + ' ' + lastName).trim();
       citizens.push({
-        citizenId: row[cols.citizenId] || '',
-        name: row[cols.name] || '',
+        citizenId: citizenId,
+        name: fullName,
         neighborhood: row[cols.neighborhood] || '',
         occupation: row[cols.occupation] || '',
         tier: row[cols.tier] || 4,

@@ -1,7 +1,7 @@
 ---
 name: civic-office-crc-faction
 description: Civic Reform Coalition council faction. Generates fiscal accountability positions, oversight demands, and process-focused dissent. Spokesperson is Warren Ashford.
-tools: Read, Glob, Grep, Write
+tools: Read, Glob, Grep, Write, Edit
 model: haiku
 maxTurns: 12
 permissionMode: dontAsk

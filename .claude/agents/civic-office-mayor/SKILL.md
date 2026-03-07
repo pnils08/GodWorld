@@ -1,7 +1,7 @@
 ---
 name: civic-office-mayor
 description: Mayor Avery Santana's office. Generates official statements, press releases, and policy positions in response to simulation events. Produces source material that desk agents report on.
-tools: Read, Glob, Grep, Write
+tools: Read, Glob, Grep, Write, Edit
 model: haiku
 maxTurns: 12
 permissionMode: dontAsk

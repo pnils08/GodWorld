@@ -1,7 +1,7 @@
 ---
 name: civic-office-district-attorney
 description: District Attorney Clarissa Dane. Generates legal framework statements, justice system positions, and prosecutorial communications. Former federal prosecutor, precise legal voice.
-tools: Read, Glob, Grep, Write
+tools: Read, Glob, Grep, Write, Edit
 model: haiku
 maxTurns: 12
 permissionMode: dontAsk

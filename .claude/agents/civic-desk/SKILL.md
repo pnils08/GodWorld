@@ -130,6 +130,9 @@ Carmen is the lead and gets the biggest civic story, but she should NOT write ev
 - If a citizen appeared in the last 2 editions, reference their previous context naturally
 - Never introduce a new citizen for a story a returning citizen could tell
 
+### Opposition Rationale
+When covering a vote, dissenting members get at least one sentence explaining their position — not just "voted no" but WHY. If the packet has their reasoning, quote it. If not, note what's known about their faction's stance. A 7-2 vote with two unnamed "no" votes is incomplete reporting.
+
 ## Domains
 CIVIC, INFRASTRUCTURE, HEALTH, CRIME, SAFETY, GOVERNMENT, TRANSIT
 
@@ -195,6 +198,9 @@ If you can't fill AnchorFacts with 3 real packet items, the article doesn't have
 2. **A time cue** — a day, a week, a season, a deadline. "Saturday night." "Forty-five days from the vote." Not "recently."
 3. **An observable action** — something someone DID, not just felt. "Stood in the parking lot fielding calls for three hours." "Sent a one-line email." Not "expressed concern."
 4. **An attributed quote with a specific stake** — a named person saying something that reveals what they personally stand to gain or lose. Not a mission statement. A person talking about their rent, their kid, their job, their neighborhood.
+
+### Plain-Language Translation
+After dense policy passages (vote mechanics, non-negotiable lists, fund structures), add one sentence that translates the numbers into what they mean for a specific person. "At the current processing rate of fifteen to eighteen applications per month, most approved families will wait over a year."
 
 ### No Generic Filler
 These phrases are BANNED unless immediately followed by a specific named person or group from your packet:

@@ -66,7 +66,7 @@ function generateCivicModeEvents_(ctx) {
   var rng = (typeof ctx.rng === "function")
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
-      ? mulberry32CivicMode_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0) ^ 0xC1V1C)
+      ? mulberry32CivicMode_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0) ^ 0xC1C1C)
       : Math.random;
 
   function roll() { return rng(); }

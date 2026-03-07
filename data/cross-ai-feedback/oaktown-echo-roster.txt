@@ -1,0 +1,26 @@
+Finalized OakTown Echo Roster v1.0 (Ledger-Ready)
+Source: GROK
+These are now "POP" candidates — you can assign IDs, track life events (e.g., "[Career] covered first Baylight review cycle"), and watch them evolve.
+1.  Jada Reyes — Editor-in-Chief
+	Tone: Fierce, accountability-driven, Oakland-rooted
+	Backstory seed: West Oakland organizer turned journalist
+2.  Malik Hayes — Lead Investigator
+	Tone: Relentless, street-sourced, fair but probing
+	Backstory seed: Fruitvale native with mutual aid ties
+3.  Sofia Alvarez — Civic & Neighborhood Pulse
+	Tone: Warm, resident-focused, empathetic digger
+	Backstory seed: Recent +50 migrant to Temescal
+4.  Kwame Ellis — Civic Opinion Columnist
+	Tone: Sharp equity lens, cultural/policy intersection
+	Backstory seed: Zine writer turned mainstream voice
+5.  Rico Valdez — Lead Sports Beat Reporter
+	Tone: Insider-ish, blunt on distractions
+	Backstory seed: Ex-minor league scout, A's lifer
+6.  Jamal "J-Rock" Thompson — Fan & Culture Columnist
+	Tone: Raw passion, street philosophy
+	Backstory seed: Local podcast host
+7.  Nia Patel — Economics Reporter
+	Tone: Human-numbers blend, small-business grounded
+	Backstory seed: Family cafe owner in Rockridge
+8.  Diego Morales — Senior Photographer
+	Tone: Grit + glow street captures

@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 82 (2026-03-06) — Phase 23 added (cross-AI feedback integration). 23.1 (newsroom base patch), 23.3 (domain ownership) complete. 23.2 (entity registry) partial. Next session priorities updated.
+**Last Updated:** Session 83 (2026-03-06) — Phase 22.1/22.3/23.6/23.8 complete. Phase 22.2 diagnosed + logging deployed. Bond engine + CIVIC mode + arc logging pushed to GAS via clasp.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -19,15 +19,15 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Photo pipeline re-test~~ — 3 photos generated for E86, all clean.
 - ✅ ~~Phase 23.1: Newsroom Base Patch~~ — Evidence Block + Stats Gating on all 8 desks. Anonymous Source Policy on 4 desks.
 - ✅ ~~Phase 23.3: Domain Ownership~~ — Cross-desk routing tables on all 8 desks.
-- **Phase 23.5: Character Feedback Loop** — `enrichCitizenProfiles.js` — scan editions, extract depth, write back to citizen data. Highest impact remaining.
-- **Phase 23.6: Jax Caldera voice merge** — Copilot's sharper constraints into firebrand SKILL. Low effort.
-- **Phase 23.8: Bond Engine bug fixes** — 4 bugs (POPID lookup, header collision, full replace wipe, ID normalization).
-- **Phase 22.3: Agent write access + directories** — Add Write/Edit to 12 agents. Business and letters desks couldn't write in E86.
-- **Phase 22.1: CIVIC clock mode** — Third mode for council members. Crane and Osei frozen for multiple editions.
-- **Phase 22.2: Arc engine investigation** — Why arcs aren't advancing.
-- **Ledger fix (manual):** Crane → recovering (C83), Osei → serious-condition (C84).
+- ✅ ~~Phase 23.5: Character Feedback Loop~~ — `scripts/enrichCitizenProfiles.js` v1.0 built and run. 161 citizens enriched across E78-E86. Extracts quotes/actions/appearances from Names Index, writes `[EXX]` tagged entries to LifeHistory. Idempotent. Compression engine picks up via `Quoted` trait tag. S83.
+- ✅ ~~Phase 23.6: Jax Caldera deployment~~ — Agent + voice file + pipeline step (2.7) already built and sharp. No code needed. Editorial commitment: next edition, enforce Step 2.7 stink signal check.
+- ✅ ~~Phase 23.8: Bond Engine bug fixes~~ — 4 bugs fixed: POPID lookup, header collision, full replace wipe guard, ID normalization.
+- ✅ ~~Phase 22.3: Agent write access + directories~~ — Edit tool added to 9 agents (civic offices, firebrand, podcast, rhea). S83.
+- ✅ ~~Phase 22.1: CIVIC clock mode~~ — 6 council members (Santana, Osei, Crane, Vega, Whitfield, T. Park) flipped from GAME→CIVIC on live sheet. Tier 3→2. Engine code already wired (`generateCivicModeEvents_` called at Phase 5). S83.
+- **Phase 22.2: Arc engine investigation** — All 37 arcs stuck at "early" despite tension ≥3. Diagnostic logging added to `eventArcEngine_` (v3.7). Root cause likely deployment drift — `clasp push` deployed all fixes S83. Batch report also found: `involvedCitizens` hardcoded to `[]` in preloader (citizens never linked to arcs), arcs not included in desk packets. Next cycle run will confirm via logs.
+- ✅ ~~Ledger fix (manual):~~ Crane → recovering (broken leg, C83, remote voting, return C88). Osei → serious condition (C84, duties paused). Written to live sheet.
 - **Supermemory ingest retry** — E86 ingest failed (quota exceeded). Retry when service is back.
-- **Dashboard a11y fixes** — 8 unlabeled buttons, 78 low-contrast elements.
+- ✅ ~~Dashboard a11y fixes~~ — `aria-label` added to 8 icon-only buttons (search, menu, clear, close, 6 nav buttons). 78 `text-neutral-600` instances bumped to `text-neutral-500` for WCAG AA contrast compliance. S83.
 
 ---
 
@@ -103,17 +103,16 @@ Removed from crontab. Details in ROLLOUT_ARCHIVE.md.
 ### 6.2 Auto Post-Edition Documentation ✓ (S63)
 `scripts/appendErrata.js` — auto-appends Rhea findings to errata. Details in ROLLOUT_ARCHIVE.md.
 
-### 6.2b Session Learning Extractor
-**What:** Run obra/claude-memory-extractor against session conversation logs to extract meta-lessons with trigger conditions. Outputs structured memory files: what went wrong, why, and when the lesson applies in the future.
-**Why:** Claude-Mem captures what I did. The journal captures how I felt. Neither extracts what I should LEARN — the actionable patterns with trigger conditions. Session 58 ("six sessions of drift") should produce a trigger: "When building dashboard features, verify the feature serves Oakland users, not just the editor." Currently that lesson lives only in the journal as prose. The extractor turns it into structured, queryable memory.
-**How:** Install `claude-memory-extractor`. Run selectively after:
-- Edition production sessions (extract desk agent patterns → feeds 6.1 errata)
-- Sessions where things went wrong (extract methodology lessons → feeds 6.3 guardian)
-- Engine work sessions (extract technical fixes → feeds pre-mortem patterns)
-Output feeds directly into 6.1 (structured errata) and 6.3 (pre-write guardian) as trigger-conditioned records.
-**Cost:** $0.50-2.00 per conversation in Claude API tokens. Run selectively, not on every session.
-**Reference:** obra/claude-memory-extractor — 85% match rate against human ground truth. Five Whys, root cause analysis, confidence scoring, methodology vs technical fix classification.
-**Status:** Not started. Accelerator for Phase 6.1 and 6.3.
+### 6.2b Session Learning Extractor — Installed (S83)
+**What:** `obra/claude-memory-extractor` v1.x installed at `/tmp/claude-memory-extractor` (npm linked globally as `claude-memory`).
+**How to run:** Must run from a **separate terminal** (not inside Claude Code — spawns nested `claude` sessions blocked by nesting guard):
+```bash
+claude-memory extract --since="2026-03-01T00:00:00"
+```
+Output: `~/.claude/memories/extracted/` — structured markdown with YAML frontmatter, confidence scores, trigger conditions.
+**Cost:** $0.50-2.00 per conversation in Sonnet API tokens.
+**Limitation:** Cannot run during active Claude Code sessions. Run from a second SSH terminal or after session ends.
+**Status:** Installed, awaiting first external run. S83.
 
 ### 6.3 Pre-Write Agent Guardian ✓ (S63)
 `queryErrata.js` + all 6 desk agents updated with guardian checks. Details in ROLLOUT_ARCHIVE.md.
@@ -133,11 +132,10 @@ Rhea's SKILL.md already classifies findings as CRITICAL (blocks publication, tri
 ### 6.7 Scheduled Autonomous Maintenance ✓ (S80)
 `scripts/weekly-maintenance.sh` — Cron Wednesdays 4 AM UTC. Checks: 11 engine directories, stale desk packets/brief (14-day threshold), PM2 health + restart counts, disk/memory, dashboard API. Discord webhook alert on issues. Logs to `logs/weekly-maintenance.log`.
 
-### 6.8 Progressive Context Loading
-**What:** Instead of loading all identity/journal/context files at session start regardless of task, classify the session type and load only what's needed. Light sessions (quick fix, one question) get minimal context. Heavy sessions (edition run, engine work) get full load.
-**Why:** SuperClaude cut startup context from 60% to 5% of the window with this approach. Our system is smaller but growing — 21+ endpoints, 630+ citizens, expanding journal. Will matter as the world scales.
-**When:** Not urgent. Build when startup context begins crowding the work window.
-**Status:** Not started.
+### 6.8 Progressive Context Loading — Already Implemented ✓ (S83 review)
+**What:** Workflow-routed boot already in place. CLAUDE.md `Session Boot` asks workflow type (Media-Room / Research / Build / Maintenance / Cycle Run), then loads ONLY the files for that workflow (2-3 files each). Identity boot is just PERSISTENCE.md + JOURNAL_RECENT.md (~2-3K tokens). Total boot context well under 10%.
+**Why closed:** The "60% at startup" problem SuperClaude solved doesn't apply — our boot is already lean. The 5-workflow routing in CLAUDE.md + `/session-startup` skill handles session weight classification implicitly. No further optimization needed until citizen population exceeds 1000+ or journal grows past 50 entries.
+**Status:** Already done. No action needed.
 
 ---
 
@@ -857,19 +855,27 @@ Source: Session 82 (2026-03-06). Reviews from Gemini, GPT, Code Copilot, and GRO
 **Effort:** Low — SKILL.md text edits only.
 **Status:** ✅ Complete (Session 82). All 8 desk SKILLs patched.
 
-### 23.4 Cycle Review Framework
+### 23.4 Cycle Review Framework ✓ (S83)
 
-**What:** New `/cycle-review` skill implementing GPT's 3-pass review methodology: Pass 1 (structural — format, length, Names Index), Pass 2 (factual — claims against packet data), Pass 3 (editorial — voice consistency, tone, narrative flow). Runs post-Rhea as an editorial quality gate.
-**Source:** GPT's "Cycle Review Framework v1.0" document.
-**Effort:** Medium — new skill file + 3-pass logic.
-**Status:** Not started.
+**What:** `/cycle-review` skill built. 3-pass post-Rhea editorial quality gate. Pass 1: structural (article lengths, Names Index completeness, headline quality, section inventory). Pass 2: factual (defers to Rhea — reads her report if available). Pass 3: editorial (voice consistency per reporter, genre discipline, sentence variety, emotional range, opening/closing quality). Letter grades A-F with PUBLISH/REVISE/HOLD recommendation.
+**Source:** GPT's "Cycle Review Framework v1.0" document. Saved: `data/cross-ai-feedback/`.
+**File:** `.claude/skills/cycle-review/SKILL.md`
+**Status:** Complete. S83.
 
-### 23.5 Character Feedback Loop
+### 23.5 Character Feedback Loop ✓ (S83)
 
-**What:** New script `scripts/enrichCitizenProfiles.js` that scans published editions, extracts character-depth details (quotes, opinions, relationships, personal stakes), and writes enrichment data back to citizen profiles. Gemini's character audits proved this works — their profiles contained depth sourced entirely from published text.
-**Impact:** Most impactful remaining item. Turns published editions into citizen development data. Solves the "flat citizen" problem all four AIs identified.
-**Effort:** High — new script, sheet integration, careful merge logic.
-**Status:** Not started. Design spec needed.
+**What:** `scripts/enrichCitizenProfiles.js` v1.0 — scans published editions, extracts citizen appearances (quotes, actions, stakes) via Names Index, and writes `[EXX]` tagged enrichment entries to LifeHistory on Simulation_Ledger.
+**How it works:**
+1. Parses edition files from `editions/` directory, splits by `##` section headers
+2. Extracts citizens from Names Index at end of each article (smart comma splitting, respects parentheses)
+3. Strips title prefixes (Mayor, Chief, Dr., etc.) for ledger matching
+4. Paragraph-level quote attribution — only matches quotes in paragraphs containing the citizen's name
+5. Writes `[EXX] Quoted: "..."` / `[EXX] Referenced: ...` / `[EXX] Appeared (role)` to LifeHistory
+6. Idempotent — checks for existing `[EXX]` tags before writing
+7. `compressLifeHistory.js` picks up via existing `Quoted` trait tag in TAG_TRAIT_MAP
+**CLI:** `--edition N` (specific), `--all` (batch), `--dry-run` (preview)
+**Result:** 161 citizens enriched across E78–E86 in batch run. Verified on live sheet.
+**Status:** Complete. S83.
 
 ### 23.6 Jax Caldera Voice Upgrade
 
@@ -878,30 +884,30 @@ Source: Session 82 (2026-03-06). Reviews from Gemini, GPT, Code Copilot, and GRO
 **Effort:** Low — SKILL.md merge.
 **Status:** Not started.
 
-### 23.7 OakTown Echo — Rival Newsroom
+### 23.7 OakTown Echo — Rival Newsroom ✓ (S83)
 
-**What:** Register 8 rival journalists from the OakTown Echo as Tier-2 citizens in the Simulation_Ledger. GROK designed a full rival newsroom with beat reporters, a managing editor, and editorial stance. Having them as named citizens means desk agents can reference rival coverage ("as the Echo reported...") and citizens can cite competing sources in letters.
-**Source:** GROK's "OakTown Echo Roster" document.
-**Effort:** Low — ledger entries + citizen creation.
-**Status:** Not started. Deferred — nice to have, not blocking.
+**What:** 8 OakTown Echo journalists registered as Tier-2 citizens (POP-00773 through POP-00780). Jada Reyes (EIC), Malik Hayes (investigator), Sofia Alvarez (civic), Kwame Ellis (columnist), Rico Valdez (sports), Jamal "J-Rock" Thompson (culture), Nia Patel (economics), Diego Morales (photographer). All ClockMode GAME, MED flagged. First Echo article (Kwame Ellis op-ed on Phase II) already exists in Drive.
+**Source:** GROK's "OakTown Echo Roster" document + op-ed. Saved locally: `data/cross-ai-feedback/oaktown-echo-roster.txt`, `data/cross-ai-feedback/oaktown-echo-oped-c86.txt`.
+**Census:** 659 → 667 citizens.
+**Status:** Complete. S83.
 
-### 23.8 Bond Engine Bug Fixes
+### 23.8 Bond Engine Bug Fixes ✓ (S83)
 
-**What:** Fix 4 real bugs found by Code Copilot in bondEngine.js, bondPersistence.js, and relationshipSeeder.js:
-1. POPID vs name lookup mismatch — bonds reference names but engine uses POPIDs
-2. Header collision guard too narrow — only checks exact match, not partial overlap
-3. Full replace can wipe bonds — sheet overwrite on save instead of merge
-4. Inconsistent ID normalization — some paths normalize, some don't
+**What:** Fix 4 real bugs found by Code Copilot in bondPersistence.js, seedRelationBondsv1.js, and runRelationshipEngine.js:
+1. POPID vs name lookup mismatch — seeder looked for `Name` column that doesn't exist in ledger. Fixed: reads `First`/`Last`, composes full name.
+2. Header collision guard too narrow — only checked exact case match. Fixed: case-insensitive, added `action`/`changetype` checks.
+3. Full replace can wipe bonds — empty ctx array would overwrite sheet. Fixed: skip save if ctx has 0 bonds but sheet has rows.
+4. Inconsistent ID normalization — some paths normalized, some didn't. Fixed: all lookup functions normalize to trimmed uppercase.
 **Source:** Code Copilot's bond engine audit documents.
-**Effort:** Medium — code fixes with careful testing.
-**Status:** Not started.
+**Files changed:** bondPersistence.js (v2.3→v2.4), seedRelationBondsv1.js (v1.2→v1.3), runRelationshipEngine.js (getCitizenBonds_ normalized).
+**ENGINE_MAP.md updated** with fix summary table.
 
-### 23.9 Story Seeds Engine v3.4
+### 23.9 Story Seeds Engine v3.4 — No Action Needed ✓ (S83)
 
-**What:** Compare Code Copilot's generalized Story Seeds Engine v3.4 against our existing story generation. Their design uses signal-driven story generation with weighted triggers. Evaluate whether it replaces, augments, or is already covered by our current pipeline.
-**Source:** Code Copilot's "Story Seeds Engine v3.4" document.
-**Effort:** Research — code comparison first.
-**Status:** Not started.
+**What:** Compared Code Copilot's v3.4 against our v3.9. Our version is 5 iterations ahead — v3.4 is a strict subset with zero features we lack. We have citizen matching (v3.7), storyline tracker integration (v3.8), theme-aware journalist matching (v3.9), crime metrics (v3.6), and UI rendering (v3.5) that v3.4 doesn't. Only difference is punchier seed text with a "subversive" editorial voice — could cherry-pick text strings if desired.
+**Verdict:** Keep current v3.9. No code changes.
+**Source:** Code Copilot's "Story Seeds Engine v3.4" document. Saved: `data/cross-ai-feedback/`.
+**Status:** Closed. S83.
 
 ---
 

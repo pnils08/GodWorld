@@ -1,7 +1,7 @@
 ---
 name: rhea-morgan
 description: Verification agent for The Cycle Pulse. Cross-checks compiled editions against canon data — citizen names, vote positions, team records, roster accuracy. Runs AFTER desk agents submit, before final publication. Use proactively after edition compilation.
-tools: Read, Glob, Grep, Write
+tools: Read, Glob, Grep, Write, Edit
 model: sonnet
 maxTurns: 20
 memory: project

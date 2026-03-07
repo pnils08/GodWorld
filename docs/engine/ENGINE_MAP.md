@@ -4,7 +4,7 @@
 
 **Source:** `phase01-config/godWorldEngine2.js` v2.14 — two identical engine paths (live + dry-run/replay).
 
-**Last verified:** 2026-03-06, Session 82
+**Last verified:** 2026-03-06, Session 83
 
 ---
 
@@ -255,6 +255,36 @@ These exist in the codebase but are NOT in the engine call chain:
 | `phase07-evening-media/mediaRoomStandAloneWriter.js` | Standalone |
 | `phase07-evening-media/parseMediaIntake.js` | Helper |
 | `phase07-evening-media/parseMediaRoomMarkdown.js` | Helper |
+
+---
+
+## Bond Engine Bug Fixes (S83, Phase 23.8)
+
+| Bug | File | Fix |
+|-----|------|-----|
+| POPID vs name lookup | seedRelationBondsv1.js | Seeder now reads `First`/`Last` columns (not `Name`), composes full name. POPIDs normalized to trimmed uppercase on store. |
+| Header collision guard too narrow | bondPersistence.js | `isLedgerSchema_` now case-insensitive, also checks `action`/`changetype` columns. |
+| Full replace wipe | bondPersistence.js | `saveRelationshipBonds_` skips save if ctx has 0 bonds but sheet has existing rows. Prevents accidental wipe. |
+| Inconsistent ID normalization | bondPersistence.js, runRelationshipEngine.js | `getCitizenBondsFromStorage_`, `getBondBetween_`, `getCitizenBonds_` all normalize IDs to trimmed uppercase before comparison. |
+
+---
+
+## CIVIC Clock Mode Activation (S83, Phase 22.1)
+
+6 council members flipped from GAME→CIVIC, Tier 3→2:
+- Avery Santana (Mayor), Marcus Osei, Elliott Crane, Ramon Vega, Aaron Whitfield, Theo Park
+- `generateCivicModeEvents_` already wired at Phase 5 — now has citizens to process
+- `generateCivicModeEvents.js` hex literal fix: `0xC1V1C` → `0xC1C1C` (invalid hex digit)
+- Crane Status="recovering", Osei Status="serious-condition" — enables healthPenalty logic
+
+## Arc Engine Investigation (S83, Phase 22.2)
+
+All 37 arcs stuck at phase "early" despite tension ≥3. Diagnostic logging added to `eventArcEngine_` v3.7.
+- Phase progression code is correct: `early→rising (t≥3)→peak (t≥5)→decline (t≤4)→resolved (t≤1.5)`
+- Staleness pruning (8+ cycles at early) also not firing
+- Tension IS changing between cycles, confirming engine runs
+- Root cause likely deployment drift — all code synced via `clasp push` S83
+- Batch report found: `involvedCitizens` hardcoded to `[]` in `v3preLoader.js:208`, arcs excluded from desk packets
 
 ---
 

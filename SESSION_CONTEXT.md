@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-06 | Engine: v3.1 | Cycle: 86 | Session: 82
+Last Updated: 2026-03-07 | Engine: v3.1 | Cycle: 86 | Session: 83
 
 ---
 
@@ -43,6 +43,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Media Intake | mediaRoomIntake.js | v2.5 | Storyline lifecycle, citizen routing |
 | Media Parser | parseMediaRoomMarkdown.js | v1.5 | Quotes to LifeHistory_Log |
 | Life History | compressLifeHistory.js | v1.3 | 47 TAG_TRAIT_MAP entries (PostCareer, Civic, Media, Sports) |
+| Citizen Enrichment | scripts/enrichCitizenProfiles.js | v1.0 | Edition→LifeHistory feedback loop. Names Index extraction, paragraph-level quotes, title stripping. 161 citizens enriched E78–E86 |
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
@@ -62,6 +63,8 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix, business mention parsing |
 | Business Intake | scripts/processBusinessIntake.js | v1.0 | Staged→promoted pipeline, BIZ-ID assignment, duplicate detection |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
+| Bond Persistence | bondPersistence.js | v2.4 | Wipe guard, case-insensitive ledger check, normalized ID lookups |
+| Bond Seeder | seedRelationBondsv1.js | v1.3 | First/Last column lookup, POPID normalization |
 | **Household Formation** | householdFormationEngine.js | v1.1 | Young adults form households, rent burden, dissolution, ctx.rng, year 2041 |
 | **Generational Wealth** | generationalWealthEngine.js | v1.0 | Wealth levels 0-10, income, inheritance |
 | **Education Career** | educationCareerEngine.js | v1.0 | Education levels, career progression, school quality |
@@ -204,6 +207,11 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Podcast produced:** The Morning Edition, Tomas Renteria + Sonia Parikh. 58 exchanges, ~15 min. Transcript at `output/podcasts/c85_transcript.txt`, audio at `output/podcasts/c85_morning-edition.mp3`. Uploaded to Drive.
 - **Post-pipeline:** Edition + Mara audit + PDF + podcast all uploaded to Drive. Discord bot refreshed. Supermemory ingested (3/3 after retry). Edition brief, scores, errata, AUDIT_HISTORY all updated. NEWSROOM_MEMORY refreshed for C85.
 - **Mike feedback:** "really amazing work" — E85 well received. Note for C86 desk briefings.
+
+### Session 83 (2026-03-07) — Maintenance: Memory Extractor Fix
+
+- **claude-memory extract fix:** Diagnosed nested session error (CLAUDECODE env var) and 2-minute timeout. Patched `/usr/lib/node_modules/claude-memory/dist/extraction/agent-extractor.js` — unset CLAUDECODE in spawned env, bumped timeout to 5 minutes.
+- **Uncommitted S82/S83 work:** 26 files, ~958 lines still staged from disconnected session. Includes enrichCitizenProfiles.js, cycle-review skill, dashboard rewrite, agent SKILL patches, engine fixes. Needs commit next session.
 
 ### Session 82 (2026-03-06) — Build: Phase 23 Cross-AI Feedback Integration
 

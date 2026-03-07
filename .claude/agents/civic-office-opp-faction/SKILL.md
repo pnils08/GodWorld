@@ -1,7 +1,7 @@
 ---
 name: civic-office-opp-faction
 description: Oakland Progressive Party council faction. Generates progressive bloc positions, community-centered statements, and equity-focused policy responses. Spokesperson is Janae Rivers.
-tools: Read, Glob, Grep, Write
+tools: Read, Glob, Grep, Write, Edit
 model: haiku
 maxTurns: 12
 permissionMode: dontAsk

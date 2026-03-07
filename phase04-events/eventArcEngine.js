@@ -346,6 +346,8 @@ function eventArcEngine_(ctx) {
     // PHASE PROGRESSION
     // ═══════════════════════════════════════════════════════════
 
+    var prevPhase = arc.phase;
+
     if (arc.phase === 'early' && t >= 3) {
       arc.phase = 'rising';
     } else if (arc.phase === 'rising' && t >= 5) {
@@ -370,7 +372,24 @@ function eventArcEngine_(ctx) {
       arc.phase = 'resolved';
       arc.cycleResolved = currentCycle;
     }
+
+    if (arc.phase !== prevPhase) {
+      Logger.log('eventArcEngine v3.7: Arc ' + arc.arcId + ' phase ' + prevPhase + ' -> ' + arc.phase + ' (tension: ' + t + ', age: ' + arcAge + ', cycle: ' + currentCycle + ')');
+    }
   }
+
+  // v3.7: Log summary of all arc states after processing
+  var phaseCount = {};
+  for (var si = 0; si < arcs.length; si++) {
+    var sa = arcs[si];
+    if (!sa) continue;
+    phaseCount[sa.phase] = (phaseCount[sa.phase] || 0) + 1;
+  }
+  var phaseSummary = [];
+  for (var pk in phaseCount) {
+    phaseSummary.push(pk + ':' + phaseCount[pk]);
+  }
+  Logger.log('eventArcEngine v3.7: Processed ' + arcs.length + ' arcs | cycle: ' + currentCycle + ' | phases: ' + phaseSummary.join(', '));
 }
 
 

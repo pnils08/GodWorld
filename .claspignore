@@ -61,6 +61,34 @@ creds.json
 # Stray Node.js scripts in root
 post_cycle_review.js
 
+# Python virtual environments
+.venv/**
+venv/**
+
+# Claude config
+.claude/**
+
+# Credentials
+credentials/**
+
+# Output files (desk packets, briefs, edition output)
+output/**
+
+# Edition text files
+editions/**
+
+# Archive
+archive/**
+
+# Data files
+data/**
+
+# Maintenance scripts (Node.js)
+maintenance/**
+
+# Schemas
+schemas/**
+
 # Misc
 *.log
 *.tmp

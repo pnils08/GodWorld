@@ -1,10 +1,16 @@
 /**
  * ============================================================================
- * BOND PERSISTENCE v2.3 - Write-Intent Based
+ * BOND PERSISTENCE v2.4 - Write-Intent Based
  * ============================================================================
  *
  * Handles loading and saving relationship bonds to/from sheet storage.
  * Works with Bond Engine v2.4 to maintain bonds across cycles.
+ *
+ * v2.4 Changes (S83, Phase 23.8):
+ * - isLedgerSchema_ now case-insensitive, checks action/changetype columns
+ * - saveRelationshipBonds_ skips save if ctx has 0 bonds but sheet has rows (wipe guard)
+ * - getCitizenBondsFromStorage_ normalizes IDs to trimmed uppercase
+ * - getBondBetween_ normalizes IDs to trimmed uppercase
  *
  * v2.3 Changes:
  * - saveRelationshipBonds_ uses queueReplaceIntent_ for V3 write-intents
@@ -85,8 +91,8 @@ function asBool_(v) {
  */
 function isLedgerSchema_(headers) {
   for (var i = 0; i < headers.length; i++) {
-    var h = (headers[i] || '').toString();
-    if (h === 'Timestamp' || h === 'Cycle') {
+    var h = (headers[i] || '').toString().trim().toLowerCase();
+    if (h === 'timestamp' || h === 'cycle' || h === 'action' || h === 'changetype') {
       return true;
     }
   }
@@ -218,6 +224,15 @@ function saveRelationshipBonds_(ctx) {
   }
 
   var currentCycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+
+  // Safety: don't wipe existing bonds if ctx has empty array
+  if (bonds.length === 0 && sheet) {
+    var existingRows = sheet.getLastRow();
+    if (existingRows > 1) {
+      Logger.log('saveRelationshipBonds_ v2.3: WARNING — ctx has 0 bonds but sheet has ' + (existingRows - 1) + ' rows. Skipping save to prevent wipe.');
+      return;
+    }
+  }
 
   // Build all rows (starting with header)
   var allRows = [BOND_SHEET_HEADERS];
@@ -359,10 +374,11 @@ function purgeInactiveBonds_(ctx, maxAge) {
  */
 function getCitizenBondsFromStorage_(ctx, citizenId) {
   var bonds = ctx.summary.relationshipBonds || [];
+  var normalized = String(citizenId || '').trim().toUpperCase();
   var result = [];
   for (var i = 0; i < bonds.length; i++) {
     var b = bonds[i];
-    if (b && (b.citizenA === citizenId || b.citizenB === citizenId)) {
+    if (b && (String(b.citizenA || '').trim().toUpperCase() === normalized || String(b.citizenB || '').trim().toUpperCase() === normalized)) {
       result.push(b);
     }
   }
@@ -375,12 +391,14 @@ function getCitizenBondsFromStorage_(ctx, citizenId) {
  */
 function getBondBetween_(ctx, citizenA, citizenB) {
   var bonds = ctx.summary.relationshipBonds || [];
+  var normA = String(citizenA || '').trim().toUpperCase();
+  var normB = String(citizenB || '').trim().toUpperCase();
   for (var i = 0; i < bonds.length; i++) {
     var b = bonds[i];
-    if (b && (
-      (b.citizenA === citizenA && b.citizenB === citizenB) ||
-      (b.citizenA === citizenB && b.citizenB === citizenA)
-    )) {
+    if (!b) continue;
+    var bA = String(b.citizenA || '').trim().toUpperCase();
+    var bB = String(b.citizenB || '').trim().toUpperCase();
+    if ((bA === normA && bB === normB) || (bA === normB && bB === normA)) {
       return b;
     }
   }

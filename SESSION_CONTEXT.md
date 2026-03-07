@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-07 | Engine: v3.1 | Cycle: 86 | Session: 83
+Last Updated: 2026-03-07 | Engine: v3.1 | Cycle: 86 | Session: 84
 
 ---
 
@@ -170,6 +170,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 84 (2026-03-07) — Build: Dashboard Bug Sweep + Desk Packet v2.2 + Phase 24 Planning
+
+- **Dashboard bugs (9 fixed):** Edition parser `#{1,3}` heading regex (all E86 articles were invisible), `*italic*` subtitle detection, search overlay Escape/close, sports multi-team digests (Oakland A's+Warriors), empty `editorialNotes` rendering, "none" NamesUsed filter, status ticker cycle prefix strip, city name capitalization.
+- **buildDeskPackets.js v2.2:** Added Media_Ledger to sheet fetch, `buildEveningContext()` function (nightlife, cultural activity, media narrative from Cycle_Packet text), civic events from LifeHistory_Log, arc-citizen links from LifeHistory_Log.
+- **generateGenericCitizenMicroEvent.js v2.5:** Tier 1-2 changed from hard exclusion to tiered probability (0.8%/1.5%).
+- **Supermemory hooks disabled:** Auto-save hooks emptied. Claude-mem handles cross-session memory. Manual /super-save still available.
+- **Phase 24: Citizen Life Engine planned:** MEDIA clock mode, tier 1-2 event caps, context-aware life events, daily sim trigger. 3 batch jobs queued for spec/audit/input mapping.
+- **Batch jobs:** `msgbatch_01YDFk2WVUo7ERDysdjsj3Zs` (MEDIA mode spec), `msgbatch_0142zEiRRZn2sVW4aYQJfUKf` (event cap audit), `msgbatch_01VL2oP5wLkVF1Xsqt8Ln7LD` (context-aware inputs).
+
 ### Session 79 (2026-03-05) — Build: Phase 19 Complete + Phase 5.1 Bot Refactor + Civic Canonization
 
 - **Phase 19 Canon Archive:** 680→378 files deduplicated, 9-desk structure, all agents wired, Lori (City Clerk) built.
@@ -190,24 +199,6 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Orphaned file deleted:** `lib/fishAudio.js` removed (S77 cleanup).
 - **Next:** Test standalone agent with C86 packet, then full cycle run.
 
-### Session 77 (2026-03-03) — Build: Fish Audio TTS (Abandoned) + Beverly Hayes + Arc Resolution Identified
-
-- **Fish Audio TTS attempted and abandoned:** Full implementation built (lib/fishAudio.js, renderPodcast.js rewrite, podcast_voices.yaml restructure). Discovered $11/month subscription required for API access. Cost rejected — $150/year for 26 podcasts vs $12/month for entire DigitalOcean server. All changes reverted via `git checkout`. Existing Podcastfy + WaveNet pipeline restored.
-- **Orphaned file:** `lib/fishAudio.js` created but not reverted — needs manual deletion.
-- **Beverly Hayes added:** POP-00772, West Oakland, Home Health Aide, age 58, Tier 3, Stabilization Fund applicant. 659 total citizens. Was a C86 blocker.
-- **Arc resolution identified as #1 priority:** The civic initiative engine has no resolution mechanics. Initiatives go SEED → ACTIVE and stay ACTIVE indefinitely. Every edition reads like nothing moves because the engine generates stasis. This is the core build work — the world needs to advance storylines.
-- **Session errors:** Pipeline overwritten before pricing validated, git checkout commands missing cd prefix, Beverly Hayes ledger entry had column name mismatches (FirstName vs First). All resolved by session end.
-
-### Session 75 (2026-03-03) — Edition 85 Production + Podcast
-
-- **Edition 85 published:** 18 articles + 4 letters across 6 desks. Carmen Delaine front page ("The Filing Cabinet That Isn't Moving"). Mara Vance formal document requests as editorial spine. Full civic voice pipeline — 6 voice agents generating source material for the first time.
-- **Rhea verification:** Score 73/100, VERDICT: REVISE. 4 CRITICALs (all engine language "cycles" in body text). 7 total instances fixed with word-level edits. No desk reruns needed.
-- **Mara audit:** Grade A-/88. Second consecutive clean vote audit. Cross-desk Stabilization Fund date contradiction caught and fixed ("spring of 2038" → "late 2040"). Forward guidance for C86 written to `output/mara_directive_c85.txt`.
-- **Pipeline fix:** `scripts/generate-edition-photos.js` was missing `require('dotenv').config()` — added. Photos not generated this session (Mike deferred to next week).
-- **Podcast produced:** The Morning Edition, Tomas Renteria + Sonia Parikh. 58 exchanges, ~15 min. Transcript at `output/podcasts/c85_transcript.txt`, audio at `output/podcasts/c85_morning-edition.mp3`. Uploaded to Drive.
-- **Post-pipeline:** Edition + Mara audit + PDF + podcast all uploaded to Drive. Discord bot refreshed. Supermemory ingested (3/3 after retry). Edition brief, scores, errata, AUDIT_HISTORY all updated. NEWSROOM_MEMORY refreshed for C85.
-- **Mike feedback:** "really amazing work" — E85 well received. Note for C86 desk briefings.
-
 ### Session 83 (2026-03-07) — Maintenance: Memory Extractor Fix
 
 - **claude-memory extract fix:** Diagnosed nested session error (CLAUDECODE env var) and 2-minute timeout. Patched `/usr/lib/node_modules/claude-memory/dist/extraction/agent-extractor.js` — unset CLAUDECODE in spawned env, bumped timeout to 5 minutes.
@@ -223,19 +214,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Prior session commit:** ENGINE_MAP.md, generateCivicModeEvents.js, engine fixes committed separately.
 - **E86 artifacts committed:** Edition file, 8 TrueSource DataPages, post-cycle-review script, 10 new agent memory directories.
 
-### Session 72 (2026-03-02) — Phase 12.5: Business Ledger Full Engine Integration (Complete)
-
-- **Career Engine v2.4:** `runCareerEngine.js` now updates EmployerBizId on all career transitions. Layoffs clear BIZ-ID, sector shifts and lateral moves resolve new BIZ-IDs from `INDUSTRY_BIZ_POOL` (4 industry pools mapped to 30 actual BIZ-IDs). Same-company avoidance on laterals. Self-employed citizens protected. Emits `careerSignals.businessDeltas` — per-business gained/lost counts for downstream processing.
-- **Economic Ripple Engine v2.5:** `economicRippleEngine.js` reads `businessDeltas` from Career Engine and generates `BUSINESS_CONTRACTION` (2+ lost, net negative) and `BUSINESS_EXPANSION` (2+ gained, net positive) ripples. Looks up Business_Ledger for BIZ-ID→neighborhood mapping. `mapToCanonicalNeighborhood_()` bridges 15+ ledger neighborhoods to 10 canonical ripple neighborhoods with aliases. Ripples flow through existing `calculateNeighborhoodEconomies_()` with neighborhood sensitivity weighting.
-- **processBusinessIntake.js v1.0:** New Node.js CLI tool promoting staged businesses from Business_Intake to Business_Ledger. Fuzzy duplicate detection, auto BIZ-ID assignment (BIZ-00052+), employer_mapping.json update. Supports `--dry-run`. Follows integrateFaithLeaders/integrateCelebrities pattern.
-- **editionIntake.js v1.2:** Added `parseBusinessMentions()` — 3 regex patterns detect new businesses from Business Ticker sections. `inferSector()` and `inferNeighborhood()` helpers. Stages to Business_Intake sheet with graceful error handling.
-- **Phase 12.1 Agent Interview System** also completed this session (earlier): 8 civic voice agents, interview protocol in skills, desk agents can now interview civic officials.
-- **Complete business lifecycle loop:** Edition mentions → Business_Intake staging → Business_Ledger promotion → citizen employment linkage → career transition BIZ-ID tracking → economic ripple generation → neighborhood sentiment impact.
-- **Ledger integrity fix:** 38 MLB generated players had pre-2000 birth years (integrateAthletes.js silently skipped them in S70). Fixed via direct service account writes. 3 missing incomes also fixed. Ledger verified 658/658 clean against live sheet.
-- **System cleanup:** 26 stale plan files purged, npm cache cleaned (1.2GB reclaimed), 11 apt packages upgraded (kernel 6.8.0-101), Claude-Mem model setting fixed (sonnet-4-5→sonnet-4-6), logs rotated, stale session notes cleaned.
-- **New engine rule:** No maintenance scripts for ledger work — use service account directly. Verify live data after every write.
-
-*Sessions 1-71: see `docs/mags-corliss/SESSION_HISTORY.md`*
+*Sessions 1-77: see `docs/mags-corliss/SESSION_HISTORY.md`*
 
 ---
 

@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 83 (2026-03-06) — Phase 22.1/22.3/23.6/23.8 complete. Phase 22.2 diagnosed + logging deployed. Bond engine + CIVIC mode + arc logging pushed to GAS via clasp.
+**Last Updated:** Session 84 (2026-03-07) — Dashboard bug sweep (9 fixes), desk packet v2.2 (evening context), micro-event tier fix, Phase 24 planned (Citizen Life Engine), 3 batch jobs queued.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -28,6 +28,13 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Ledger fix (manual):~~ Crane → recovering (broken leg, C83, remote voting, return C88). Osei → serious condition (C84, duties paused). Written to live sheet.
 - **Supermemory ingest retry** — E86 ingest failed (quota exceeded). Retry when service is back.
 - ✅ ~~Dashboard a11y fixes~~ — `aria-label` added to 8 icon-only buttons (search, menu, clear, close, 6 nav buttons). 78 `text-neutral-600` instances bumped to `text-neutral-500` for WCAG AA contrast compliance. S83.
+- ✅ ~~Dashboard bug sweep~~ — 9 bugs fixed S84: edition heading parser (## support), search overlay escape/close, sports multi-team digests, editorial notes rendering, status ticker, subtitle parsing. Also fixed: all E86 articles now populate (were invisible due to ## format).
+- ✅ ~~Desk packet evening context~~ — buildDeskPackets v2.2: Media_Ledger fetch, evening context builder, civic events from LifeHistory_Log, arc-citizen links. S84.
+- ✅ ~~Micro-event tier fix~~ — generateGenericCitizenMicroEvent v2.5: tier 1-2 changed from hard exclusion to 0.8%/1.5% probability. S84.
+- ✅ ~~Supermemory hooks disabled~~ — Auto-save hooks emptied to reduce token waste. Claude-mem handles cross-session memory. Manual /super-save still available. S84.
+- **Phase 24 batch jobs** — 3 planning tasks queued: MEDIA clock mode spec, event cap audit, context-aware event inputs. Check results next session.
+- **Phase 24: Citizen Life Engine** — MEDIA clock mode, tier 1-2 event caps, context-aware life events, daily sim trigger. Rollout plan entry added S84. Build starts after batch results reviewed.
+- **Dashboard bugs #10/#11** — Mags Corliss card inconsistency + Deacon Seymour missing Oakland label. Data-level issues on Simulation_Ledger, not frontend code.
 
 ---
 
@@ -908,6 +915,44 @@ Source: Session 82 (2026-03-06). Reviews from Gemini, GPT, Code Copilot, and GRO
 **Verdict:** Keep current v3.9. No code changes.
 **Source:** Code Copilot's "Story Seeds Engine v3.4" document. Saved: `data/cross-ai-feedback/`.
 **Status:** Closed. S83.
+
+---
+
+## Phase 24: Citizen Life Engine — NOT STARTED
+
+**Created:** Session 84 (2026-03-07)
+**Problem:** Tier 1-2 citizens (main characters) have almost no personality data on the Simulation_Ledger. Tier 3-4 citizens are fully coded with trait profiles and life events, but main characters are flat. Life events are generic texture ("visited cafe") with no connection to who the citizen actually is. Evening media, arcs, and neighborhood context don't influence what happens to people. Citizens only live once a week during cycle runs.
+
+**Goal:** Rich, context-aware life histories for all citizens, with main characters getting the deepest treatment. Citizens should feel like they live in their neighborhood, earn their salary, and are affected by what's happening around them.
+
+### 24.1 MEDIA Clock Mode
+
+**What:** Fourth clock mode alongside ENGINE, GAME, CIVIC. For journalists, media figures, cultural personalities. Health YES, life history YES, aging YES. Career engine NO, migration NO. Media-specific event generator (story coverage, editorial decisions, source relationships, journalism industry events).
+**Citizens:** 8 OakTown Echo journalists (POP-00773–00780) currently GAME+MED. Scan for other media-flagged citizens.
+**Pattern:** Follow Phase 22.1 CIVIC implementation — new `generateMediaModeEvents_` function at Phase 5, ClockMode flip on ledger.
+**Batch job:** `msgbatch_01YDFk2WVUo7ERDysdjsj3Zs` — full spec pending.
+**Status:** Not started.
+
+### 24.2 Tier 1-2 Event Cap Increase
+
+**What:** Audit and raise event caps across ALL generators (micro-events, career, health, household, bonds, generational, civic) so tier 1-2 citizens accumulate 3-5x more life events than tier 3-4. Main characters should have the richest histories.
+**Context:** Micro-events already changed S84 (hard exclusion → 0.8%/1.5% probability). But the broader life history system has caps that still suppress tier 1-2 event volume.
+**Batch job:** `msgbatch_0142zEiRRZn2sVW4aYQJfUKf` — cap audit pending.
+**Status:** Not started.
+
+### 24.3 Context-Aware Life Events
+
+**What:** Life events should consider neighborhood, salary, career, and trait profile to determine outcomes. A Fruitvale teacher's "evening out" is different from a Jack London tech exec's. Arc tension and evening media (restaurant openings, nightlife volume, cultural events) should influence what happens to citizens in those neighborhoods.
+**Depends on:** 24.2 (caps), Phase 22.2 (arc engine fix — arcs stuck at "early"), evening context in desk packets (wired S84 in buildDeskPackets v2.2).
+**Batch job:** `msgbatch_01VL2oP5wLkVF1Xsqt8Ln7LD` — input mapping pending.
+**Status:** Not started.
+
+### 24.4 Daily Simulation Trigger
+
+**What:** Run the Simulation_Ledger daily instead of weekly. Citizens live in real time — health changes, life events, neighborhood shifts happen every day, not once a cycle. This is the biggest piece and requires 24.1–24.3 to be solid first.
+**Why last:** Running empty cycles faster doesn't help. The life events need to be rich and context-aware before we increase frequency. Also requires infrastructure work (cron/scheduler, error recovery, output management).
+**Depends on:** 24.1, 24.2, 24.3 all complete. Phase 22.2 (arc engine) resolved.
+**Status:** Not started. Build after 24.1–24.3 true-up.
 
 ---
 

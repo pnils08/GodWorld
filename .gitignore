@@ -33,3 +33,6 @@ backups/
 .claude/.supermemory-claude/
 creds.json
 .venv/
+
+# Podcast audio output (uploaded to Drive, not needed in repo)
+data/audio/

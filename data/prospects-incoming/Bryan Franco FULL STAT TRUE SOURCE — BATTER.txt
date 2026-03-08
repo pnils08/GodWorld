@@ -1,0 +1,45 @@
+Bryan Franco FULL STAT TRUE SOURCE — BATTER
+
+Name: Bryan Franco
+Team: Athletics
+Position: SS
+Jersey: #15
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: C
+Overall: 75
+MLB Service: 0.000
+Age: 24
+Bats: L
+Throws: R
+Height: 5'8"
+Weight: 186 LBS
+Drafted: RND 1 (2035)
+Secondary Position: 2B
+Hitter Tendency: PULL HITTER
+Born: MISSOURI
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+CON R: 50
+CON L: 38
+POW R: 78
+POW L: 55
+VIS: 44
+DISC: 41
+CLT: 45
+BUNT: 20
+DBUNT: 15
+DUR: 78
+FLD: 64
+ARM: 76
+ACC: 74
+REAC: 79
+SPD: 56
+STEAL: 56
+BR AGG: 67

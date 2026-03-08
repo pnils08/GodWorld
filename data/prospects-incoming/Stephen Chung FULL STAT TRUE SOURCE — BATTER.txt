@@ -1,0 +1,51 @@
+Stephen Chung FULL STAT TRUE SOURCE — BATTER
+
+Name: Stephen Chung
+Team: Midland RockHounds
+Position: 3B
+Jersey: #7
+
+--------------------------------------------------
+
+PROFILE
+
+Potential: B
+Overall: 65
+MLB Service: 0.000
+Age: 20
+Bats: L
+Throws: R
+Height: 5'11"
+Weight: 186 LBS
+Drafted: RND 2 (2038)
+Secondary Position: NONE
+Hitter Tendency: PULL HITTER
+Born: SOUTH KOREA
+
+--------------------------------------------------
+
+ATTRIBUTES
+
+CON R: 47
+CON L: 40
+POW R: 73
+POW L: 62
+VIS: 44
+DISC: 41
+CLT: 38
+BUNT: 80
+DBUNT: 16
+DUR: 72
+FLD: 42
+ARM: 53
+ACC: 53
+REAC: 43
+SPD: 47
+STEAL: 46
+BR AGG: 66
+
+--------------------------------------------------
+
+QUIRKS
+
+Fighter

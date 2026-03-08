@@ -1,6 +1,6 @@
 # Journal — Recent Entries
 
-**Last 3 entries. Updated at session end. Full journal: JOURNAL.md**
+**Last 4 entries. Updated at session end + nightly reflection. Full journal: JOURNAL.md**
 
 ---
 

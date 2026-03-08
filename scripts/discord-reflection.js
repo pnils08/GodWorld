@@ -233,10 +233,61 @@ async function callClaude(systemPrompt, userPrompt) {
 // ---------------------------------------------------------------------------
 // Append to JOURNAL.md
 // ---------------------------------------------------------------------------
+var JOURNAL_RECENT_FILE = path.join(mags.MAGS_DIR, 'JOURNAL_RECENT.md');
+var MAX_RECENT_ENTRIES = 4;
+
 function appendToJournal(reflection) {
   var content = '\n' + reflection + '\n\n---\n';
   fs.appendFileSync(JOURNAL_FILE, content);
   log.info('Reflection appended to JOURNAL.md');
+}
+
+function updateJournalRecent(reflection) {
+  try {
+    var raw = fs.readFileSync(JOURNAL_RECENT_FILE, 'utf8');
+
+    // Split on ## headers to find entries
+    var headerEnd = raw.indexOf('\n---\n');
+    var header = headerEnd >= 0
+      ? raw.substring(0, headerEnd + 5)
+      : '# Journal — Recent Entries\n\n**Last entries. Updated at session end and nightly reflection. Full journal: JOURNAL.md**\n\n---\n';
+    var body = headerEnd >= 0 ? raw.substring(headerEnd + 5) : raw;
+
+    // Split body into entries on ## boundaries
+    var entries = [];
+    var parts = body.split(/\n(?=## )/);
+    for (var i = 0; i < parts.length; i++) {
+      var trimmed = parts[i].trim();
+      if (trimmed && trimmed.startsWith('## ')) {
+        // Strip trailing --- separator if present
+        trimmed = trimmed.replace(/\n---\s*$/, '').trim();
+        entries.push(trimmed);
+      }
+    }
+
+    // Add the new reflection as an entry
+    var reflectionTrimmed = reflection.trim();
+    // Ensure it starts with ## for consistent formatting
+    if (!reflectionTrimmed.startsWith('## ') && !reflectionTrimmed.startsWith('### ')) {
+      reflectionTrimmed = '## Nightly Reflection\n\n' + reflectionTrimmed;
+    }
+    if (reflectionTrimmed.startsWith('### ')) {
+      reflectionTrimmed = '#' + reflectionTrimmed;
+    }
+    entries.push(reflectionTrimmed);
+
+    // Keep only the last N entries
+    while (entries.length > MAX_RECENT_ENTRIES) {
+      entries.shift();
+    }
+
+    // Rebuild the file
+    var newContent = header + '\n' + entries.join('\n\n---\n\n') + '\n\n---\n';
+    fs.writeFileSync(JOURNAL_RECENT_FILE, newContent);
+    log.info('JOURNAL_RECENT.md updated (' + entries.length + ' entries, max ' + MAX_RECENT_ENTRIES + ')');
+  } catch (err) {
+    log.error('Failed to update JOURNAL_RECENT.md: ' + err.message);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -372,8 +423,9 @@ async function main() {
       return;
     }
 
-    // Append to journal
+    // Append to journal + update recent entries (feeds into session boot)
     appendToJournal(reflection);
+    updateJournalRecent(reflection);
 
     // Save to Claude-Mem
     await saveToClaudeMem(reflection, entries.length);

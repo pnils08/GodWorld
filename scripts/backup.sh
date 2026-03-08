@@ -139,10 +139,9 @@ echo "Archive size: $ARCHIVE_SIZE"
 if [ "$LOCAL_ONLY" = false ]; then
   echo ""
   echo "Uploading to Google Drive..."
-  # Use the publications root as backup destination
-  # saveToDrive.js supports raw folder IDs
+  # Upload to dedicated GodWorld_Backups folder on Drive
   cd "$GODWORLD"
-  if node scripts/saveToDrive.js "$ARCHIVE_PATH" publications 2>&1; then
+  if node scripts/saveToDrive.js "$ARCHIVE_PATH" backup 2>&1; then
     echo "Drive upload complete."
   else
     echo "WARNING: Drive upload failed. Local backup preserved at: $ARCHIVE_PATH"

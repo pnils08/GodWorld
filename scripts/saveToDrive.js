@@ -51,6 +51,8 @@ var DESTINATIONS = {
   podcast:    '1wLecsc3E1WVuiS-FA1wEoqJm8FNEnSUb',  // Podcasts
   // City Civic Database — official civic documents filed by initiative agents
   civic:      '1_nZbCjbjnW5kfA7aqEjb5CooEcYy4fjL',  // City_Civic_Database
+  // Server backups
+  backup:     '1o310nbDxw75MGuRF8PIsfuyRFTT2CJVZ',  // GodWorld_Backups
   // Aliases
   briefing:   '1LEClpCUeRpT91gUR3SUm-Yx-3MldMJ5G',  // = mara (Mara directives & briefings)
   pdf:        '118tCh9stHjuocSUYXj0LjGnuzp5mLFhf',  // = edition (PDFs go alongside editions)

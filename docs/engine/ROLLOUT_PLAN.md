@@ -956,6 +956,43 @@ Source: Session 82 (2026-03-06). Reviews from Gemini, GPT, Code Copilot, and GRO
 
 ---
 
+## Phase 25: Storage Strategy — Deduplicate Across 4 Layers — NOT STARTED
+
+**Created:** Session 85 (2026-03-08)
+**Problem:** Data is dumped everywhere with no strategy. Local disk (24GB, 70% full), Google Drive (200MB available), GitHub, and Supermemory all hold overlapping copies of the same content. Daily backups were keeping 7 copies locally (350MB) while also uploading to Drive AND having weekly DO snapshots — triple redundancy with no purpose. Debug logs accumulate silently. Browser caches for monthly tools eat 1.2GB. The disk fills, the health alerts fire, and nobody knows what lives where or why.
+
+**Goal:** One clear rule for each data type: where it lives, why, and what gets cleaned.
+
+**Proposed storage map:**
+
+| Data Type | Primary Home | Why | Cleanup Rule |
+|-----------|-------------|-----|-------------|
+| Code + docs + config | GitHub | Version control, recovery | n/a |
+| Editions (.txt) | GitHub + Google Drive | Git for history, Drive for sharing/PDF archive | n/a |
+| Photos + PDFs | Google Drive only | Large binaries, no git value | Delete local after upload |
+| Podcast MP3s | Google Drive only | Large binaries, never referenced by code | Delete local after upload |
+| Daily backups (.tar.gz) | Local (2 copies) + Drive | Belt and suspenders, DO snapshots are the third layer | Keep 2 local (was 7) |
+| Civic documents | GitHub + Drive | Git for code access, Drive for civic database sharing | n/a |
+| Debug logs | Nowhere | Zero value after session ends | Auto-delete on rotation |
+| Browser caches (Playwright/Puppeteer) | Local only | Rebuild on demand | Consider clearing after PDF gen |
+| Claude-mem database | Local + backup tarball | Critical for cross-session memory | Backed up daily |
+| Agent memory | GitHub | Version controlled, small files | n/a |
+| Discord conversation logs | Local + backup tarball | Bot reads them for context | Backed up daily |
+| Supermemory | Cloud | RAG search for bot + future WordPress | Edition text only |
+
+**Tasks:**
+- 25.0 Quick wins (S85): backup rotation 7 to 2 days, data/audio/ gitignored, debug + UV cache cleared (~900MB freed)
+- 25.1 Audit what's on Google Drive vs what's local vs what's in git — identify pure duplicates
+- 25.2 Write a post-upload cleanup hook for photos/PDFs/podcasts (delete local after confirmed Drive upload)
+- 25.3 Evaluate browser cache strategy — clear Playwright/Puppeteer after use? Or accept the 1.2GB cost for speed?
+- 25.4 Review Supermemory contents — is it worth the cost? What's actually in there vs what the bot uses?
+- 25.5 Document the final storage map in a reference doc
+
+**Requires:** Dedicated session. Needs Drive audit, Supermemory audit, disk inventory, and decisions about what to cut.
+**Status:** Quick wins done (S85). Full audit not started.
+
+---
+
 ## Watch List (not building, tracking)
 
 - **Agent Teams Stability** — Monitoring for experimental graduation. When stable, triggers Phase 7.6.

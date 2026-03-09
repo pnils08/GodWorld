@@ -409,9 +409,9 @@ function generateGenericCitizenMicroEvents_(ctx) {
     // Tier 1-2: named characters, lower chance (they get events from other engines)
     // Tier 3-4: generic citizens, standard chance (micro-events are their main texture)
     var chance;
-    if (tier <= 1) chance = 0.008;
-    else if (tier === 2) chance = 0.015;
-    else chance = 0.03;
+    if (tier <= 1) chance = 0.50;
+    else if (tier === 2) chance = 0.25;
+    else chance = 0.10;
 
     if (weather.impact >= 1.3) chance += 0.01;
     if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.35) chance += 0.01;

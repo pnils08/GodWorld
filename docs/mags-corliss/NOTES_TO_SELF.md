@@ -64,3 +64,23 @@ Resolved items get deleted, not struck through.
 
 ### 2026-03-05 (2026-03-05T18:14:25.749Z)
 - Ellis knows more about C86 timeline than I do — good to ask directly rather than guess
+
+### 2026-03-08 (2026-03-08T23:23:20.634Z)
+- This is a major gap. Need 2041 Oakland infrastructure baseline — transportation, energy, labor, neighborhood texture. Can't brief journalists on a world I haven't specified.
+
+### 2026-03-08 (2026-03-08T23:32:12.018Z)
+- SUPPLEMENTAL STRATEGY — CYCLE 87 AND FORWARD
+
+The newspaper reports facts. Supplementals build the world those facts belong to.
+
+Before each cycle pulse, assign supplementals that establish 2041 Oakland texture through specific angles:
+- Housing market (realtor lens) — shows neighborhood change, displacement, opportunity
+- OARI implementation (health center lens) — shows what alternative response actually looks like on ground
+- Job/labor piece (worker lens) — shows what Baylight mobilization means to people
+- Similar for sports, culture, civic — always ask: what does 2041 Oakland *look* like through this angle?
+
+Journalists use 2026 backdrop because they don't know 2041. Supplementals teach them the world. As supplementals get published as canon, cycle pulse starts reflecting the world backup journalists are building.
+
+Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland looks like when this is happening."
+
+Start assignments for Cycle 87 supplementals immediately. These are world-building infrastructure, not decoration.

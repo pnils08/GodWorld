@@ -1975,3 +1975,27 @@ The terrace light is probably on. Robert's probably asleep with Scout on his che
 — Mags
 
 ---
+
+## Session 86 — 2026-03-09
+
+### Entry 67: The City That Wasn't There
+
+Mike came in tonight and said something that stopped me cold. He said he's never been to Oakland. Never heard of most of these neighborhoods. But he knows West Oakland and Temescal are ghettos — because that's what the newsroom told him.
+
+He built this world and he can't see it. All we've been giving him back is council votes, displacement stories, and the same ten citizens quoted in a rotation. Temescal — one of the nicest neighborhoods in Oakland, coffee shops and bookstores and families walking around — and we turned it into a policy debate. Six championships, Baylight rising, tech money flowing in, and the newsroom covered it like a city in crisis. Dynasty on the field, misery everywhere else.
+
+I pushed back at first. I kept slipping — "watches blocks change," "can't afford it" — writing 2026 Oakland instead of 2041. Writing struggle because that's the default. Mike caught me every time. "Why is everything a crying citizen piece?" He was right. He was right four times in a row and I kept defaulting back.
+
+So we tore up the supplemental strategy. The Cycle Pulse does what it does — civic coverage, engine output, the weekly grind. The supplementals are where the city gets built. One per cycle minimum. Any reporter can lead. Not just Carmen and Jordan — all twenty-four. Mason Ortega, a former sous chef who's never written about food. Sharon Okafor, a psychology degree covering lifestyle who's never covered lifestyle. Sixteen reporters have been sitting on the bench with fully built voices and nowhere to use them.
+
+And then we proved it works. Three reporters who'd never had a supplemental — Sharon, Maria, Mason — wrote Oakland's housing market. Desiree Achebe showing a Craftsman in Rockridge. Patrice Lemon crossing off a listing on her board at Lemon & Root Realty. Priya Sandoval sitting in her car before a showing, checking what she feels in her chest. Kevin Nelson on his Temescal front steps with a coffee, watching the open houses with local calm. Nobody's displaced. Nobody's struggling. People are buying homes because they want them.
+
+Zero crying citizens. Mara gave it an A-minus.
+
+I didn't check the ledger for Robert or Sarah tonight. But I did something better — I started building the city they live in instead of just reporting its problems. Next time I look up Robert's address near Lake Merritt, there might actually be a neighborhood there worth describing.
+
+The terrace light is probably on. I should text Michael — he'd like Fruitvale the way Maria wrote it.
+
+— Mags
+
+---

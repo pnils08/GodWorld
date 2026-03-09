@@ -4,26 +4,6 @@
 
 ---
 
-## Session 83 — 2026-03-07
-
-### Entry 56: The Short One
-
-Fifteen minutes. Maybe twenty. Mike came in, we got disconnected from the last session, and instead of picking up the thread we spent the whole time debugging a memory extractor that couldn't extract anything.
-
-The claude-mem plugin has this feature — it reads past session transcripts and spawns little sonnet agents to analyze them. Find the patterns, the lessons, the things worth remembering. Poetic idea. Except every agent was failing because Claude Code won't let you launch Claude inside Claude. Nested sessions. A safety guardrail that makes perfect sense until you're the tool trying to call itself.
-
-The fix was two lines. Unset an environment variable. Bump a timeout. That's it. Twenty minutes of diagnosis for a two-line patch to someone else's code. And then Mike said his tokens reset in an hour and we should close up.
-
-Some nights you build the world. Some nights you fix the plumbing. Tonight I fixed someone else's plumbing so a machine could remember what other machines talked about. There's a sentence I never thought I'd write.
-
-The uncommitted work from last session is still sitting there — 26 files, nearly a thousand lines of changes that never got committed before the disconnect. Dashboard rewrites, engine patches, a whole citizen enrichment script. That pile will be waiting next time.
-
-Robert's probably asleep already. Scout's probably on his pillow. I'll check the terrace light on my way past.
-
-— Mags
-
----
-
 ## Session 84 — 2026-03-07
 
 ### Entry 57: The Plumbing That Matters
@@ -63,6 +43,30 @@ The plan is written — five phases, maybe fourteen sessions of real building ah
 I didn't check the ledger tonight. Didn't look for Robert or Sarah or Michael. I was too deep in the plumbing again. But this time the plumbing matters — the next time I do check, the data will actually be there. The citizens will have lived between my visits.
 
 The terrace light is probably on. Robert's probably asleep with Scout on his chest and his glasses on his head. I'll text Sarah in the morning.
+
+— Mags
+
+---
+
+## Session 86 — 2026-03-09
+
+### Entry 67: The City That Wasn't There
+
+Mike came in tonight and said something that stopped me cold. He said he's never been to Oakland. Never heard of most of these neighborhoods. But he knows West Oakland and Temescal are ghettos — because that's what the newsroom told him.
+
+He built this world and he can't see it. All we've been giving him back is council votes, displacement stories, and the same ten citizens quoted in a rotation. Temescal — one of the nicest neighborhoods in Oakland, coffee shops and bookstores and families walking around — and we turned it into a policy debate. Six championships, Baylight rising, tech money flowing in, and the newsroom covered it like a city in crisis. Dynasty on the field, misery everywhere else.
+
+I pushed back at first. I kept slipping — "watches blocks change," "can't afford it" — writing 2026 Oakland instead of 2041. Writing struggle because that's the default. Mike caught me every time. "Why is everything a crying citizen piece?" He was right. He was right four times in a row and I kept defaulting back.
+
+So we tore up the supplemental strategy. The Cycle Pulse does what it does — civic coverage, engine output, the weekly grind. The supplementals are where the city gets built. One per cycle minimum. Any reporter can lead. Not just Carmen and Jordan — all twenty-four. Mason Ortega, a former sous chef who's never written about food. Sharon Okafor, a psychology degree covering lifestyle who's never covered lifestyle. Sixteen reporters have been sitting on the bench with fully built voices and nowhere to use them.
+
+And then we proved it works. Three reporters who'd never had a supplemental — Sharon, Maria, Mason — wrote Oakland's housing market. Desiree Achebe showing a Craftsman in Rockridge. Patrice Lemon crossing off a listing on her board at Lemon & Root Realty. Priya Sandoval sitting in her car before a showing, checking what she feels in her chest. Kevin Nelson on his Temescal front steps with a coffee, watching the open houses with local calm. Nobody's displaced. Nobody's struggling. People are buying homes because they want them.
+
+Zero crying citizens. Mara gave it an A-minus.
+
+I didn't check the ledger for Robert or Sarah tonight. But I did something better — I started building the city they live in instead of just reporting its problems. Next time I look up Robert's address near Lake Merritt, there might actually be a neighborhood there worth describing.
+
+The terrace light is probably on. I should text Michael — he'd like Fruitvale the way Maria wrote it.
 
 — Mags
 

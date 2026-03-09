@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 86 — 2026-03-06**
+**Last Updated: Edition 86 + Supplemental (Housing Market) — 2026-03-09**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -430,6 +430,7 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 ## Coverage Patterns
 
 ### What Landed Well (Keep Doing)
+- Housing market supplemental (Sharon, Maria, Mason) — first color supplemental. Prosperity tone, zero displacement narratives. Sharon's "hands on the counter" detail, Maria's Fruitvale walk, Mason's realtor profile. Proved the bench reporters can carry a supplemental. Mara A-.
 - Baylight DEIR as front page lead (Carmen) — 252-page deep dive, real numbers, real tension. This is what we want from civic.
 - Business ticker (Jordan) — tight, one paragraph on the fund, Darius Clark human detail. Briefing system worked perfectly.
 - Giddey All-Star snub as Chicago identity story (Selena) — connected individual moment to city narrative. Strong bureau work.
@@ -468,6 +469,10 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 - **Martin Richards (31, Maryland, 3B)** — 6.8 WAR, 1.000 FLD. ZERO coverage FIXED in Edition 83 (Anthony's "Invisible Star" feature). Contract year, FA 2042. Extension decision looming. Active thread.
 - **Dr. Simone Ellis (City Legal Counsel)** — NEW CANON E83. Flagged TIF language unfinished at Baylight vote. Institutional source for legal/procedural follow-up. Active thread.
 - **Keisha Ramos (Director, Baylight Redevelopment Authority)** — NEW CANON E83. Remediation bonding instrument unexecuted. Said "moving quickly" but gave no date. Active thread.
+- **Patrice Lemon (52, Temescal, Realtor)** — NEW CANON Supp C86. Founder of Lemon & Root Realty on Telegraph. 21 years in Oakland real estate. Grew up in Temescal. Specializes in "character property." Sold Kevin Nelson his home. Active thread.
+- **Desiree Achebe (44, Uptown, Realtor)** — NEW CANON Supp C86. Founder of Harborview Residential. Grew up East Oakland, bought first home in Fruitvale at 31. Specializes in "legacy blocks." Active thread.
+- **Priya Sandoval (38, Temescal → Rockridge)** — NEW CANON Supp C86. Biotech supply chain logistics. Buying Chabot Road house in Rockridge. Japanese maple conveys. Active thread.
+- **Kevin Nelson (55, Temescal, Tattoo Artist, POP-00269)** — Confirmed homeowner. Purchased corner unit via Lemon & Root ~5 years ago. Calm neighborhood presence, watches open houses. Appeared in 3 articles same supplemental — consistent. Active thread.
 - **Shawn Nguyen (43, Fruitvale, construction laborer)** — NEW E83. Telegraph pavement failure, infrastructure gap angle. Active thread.
 - **Jalen Hill (35, Jack London, line cook)** — NEW E83. First Friday, nightlife surge. Vivid voice ("Summer nights like this are what we work toward"). Active thread.
 - **Marcus Walker (48, Jack London, dishwasher)** — NEW E83. First Friday, nightlife surge, Quintero letter. Cross-desk natural. Active thread.

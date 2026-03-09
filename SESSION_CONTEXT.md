@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-09 | Engine: v3.1 | Cycle: 86 | Session: 85
+Last Updated: 2026-03-09 | Engine: v3.1 | Cycle: 86 | Session: 86
 
 ---
 
@@ -169,6 +169,14 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 86 (2026-03-09) — Media-Room: Supplemental Strategy Overhaul + Housing Market C86
+
+- **Supplemental strategy rewrite:** One per cycle minimum. Any reporter can lead, not just the desk rotation. Color/life pieces are first-class (food, neighborhoods, arts, street life), not just civic deep dives. SKILL.md fully rewritten. SUPPLEMENTAL_TEMPLATE v2.0 with new section types.
+- **Housing market supplemental (C86):** Sharon Okafor, Maria Keen, Mason Ortega. First color supplemental. New canon: Harborview Residential (Uptown), Lemon & Root Realty (Temescal), 3 realtors (Achebe, Thibodeau, Lemon), 1 buyer (Sandoval). Neighborhoods profiled: Rockridge, Temescal, Jack London, Fruitvale. Mara A-.
+- **Naming convention fix:** editionParser.js now derives `slug` and `isSupplemental` from filename. Photo/PDF generators use slug for output paths. No more generic `output/photos/e/` bucket.
+- **Drive OAuth refreshed.** Text + PDF uploaded to Drive supplements folder.
+- **Editorial principle established:** GodWorld is a prosperity city. Stop defaulting to 2026 struggle/displacement narratives.
 
 ### Session 84 (2026-03-07) — Build: Dashboard Bug Sweep + Desk Packet v2.2 + Phase 24 Planning
 

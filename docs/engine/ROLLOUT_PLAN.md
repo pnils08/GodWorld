@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 85 (2026-03-09) — Phase 24 plan written, T1-T2 micro-event rates boosted, 41 civic citizens GAME→CIVIC, arc engine "early"→"seed" fix, Phase 22.1/22.2/23.5 complete.
+**Last Updated:** Session 86 (2026-03-09) — Supplemental strategy overhaul, housing market C86 published, naming convention fix (editionParser slug), Drive OAuth refreshed.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -31,8 +31,13 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Phase 23.5: Agent output directories + memory~~ — All 22 agents have SKILL.md output dirs, all 24 have MEMORY.md. S85.
 - **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validate all three fixes.
 - **Phase 24.1: MEDIA clock mode build** — Start with citizen migration (8 Echo journalists → MEDIA), then build generateMediaModeEvents.js. Plan at `docs/engine/PHASE_24_PLAN.md`.
-- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Supplementals build the world the Cycle Pulse reports on. Any topic, any reporter — rotate the 24-journalist roster, don't default to Carmen/Jordan/Luis. Color pieces (food, neighborhoods, arts, street life) are first-class, not just civic deep dives. Template v2.0 and SKILL.md updated S86. Mike brings ideas, Mags designs coverage — team approach.
-- **Supermemory ingest retry** — E86 ingest failed (quota exceeded). Retry when service is back.
+- ✅ ~~Supplemental strategy overhaul~~ — SKILL.md rewritten, SUPPLEMENTAL_TEMPLATE v2.0, full reporter roster table. S86.
+- ✅ ~~Housing market supplemental C86~~ — Published, Drive uploaded, Supermemory ingested. New canon: 2 agencies, 3 realtors, 1 buyer. S86.
+- ✅ ~~Naming convention fix~~ — editionParser derives slug from filename. Photo/PDF generators use slug for output paths. S86.
+- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage. Template v2.0 and SKILL.md updated S86.
+- **Intake new canon from housing supplemental** — 2 agencies to Business_Ledger, 3 realtors + 1 buyer to Simulation_Ledger. Kevin Nelson LifeHistory update.
+- **Disk organization audit** — Batch job submitted S86. Review results next session. Clean up output directories.
+- **Batch MCP certifi fix** — Broken venv at ~/.cache/uv/environments-v2/claude-batch-mcp-*. Needs deletion + rebuild.
 - **Dashboard bugs #10/#11** — Mags Corliss card inconsistency + Deacon Seymour missing Oakland label. Data-level issues on Simulation_Ledger, not frontend code.
 
 ---

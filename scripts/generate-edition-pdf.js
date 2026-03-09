@@ -560,7 +560,7 @@ async function main() {
   console.log('');
 
   // Load photo manifest
-  var photoDir = path.join(__dirname, '..', 'output', 'photos', 'e' + parsed.edition);
+  var photoDir = path.join(__dirname, '..', 'output', 'photos', parsed.slug || 'e' + parsed.edition);
   var manifestPath = path.join(photoDir, 'manifest.json');
   var manifest = null;
 
@@ -592,7 +592,8 @@ async function main() {
   var outputDir = path.join(__dirname, '..', 'output', 'pdfs');
   fs.mkdirSync(outputDir, { recursive: true });
 
-  var htmlOutputPath = path.join(outputDir, 'e' + parsed.edition + '.html');
+  var fileSlug = parsed.slug || 'e' + parsed.edition;
+  var htmlOutputPath = path.join(outputDir, fileSlug + '.html');
   fs.writeFileSync(htmlOutputPath, newspaperHtml);
   console.log('HTML saved: ' + htmlOutputPath);
 
@@ -604,7 +605,7 @@ async function main() {
   }
 
   // Render PDF
-  var pdfOutputPath = path.join(outputDir, 'bay_tribune_e' + parsed.edition + '.pdf');
+  var pdfOutputPath = path.join(outputDir, 'bay_tribune_' + fileSlug + '.pdf');
   await renderPdf(htmlOutputPath, pdfOutputPath, { letterSize: letterSize });
 
   console.log('');

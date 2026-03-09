@@ -1,114 +1,156 @@
 ---
 name: write-supplemental
-description: Produce a supplemental edition — deep-dive, single-topic coverage with custom reporter teams. Breaking news, canon deep dives, color journalism, sports specials, wire breaks.
+description: Produce a supplemental edition — variety coverage that builds the world beyond the Cycle Pulse. Any topic, any reporter, any format.
 ---
 
 # /write-supplemental — Supplemental Edition Production
 
 ## Usage
 `/write-supplemental [topic]`
-- Produces a single-topic supplemental edition
-- Mags designs the coverage, assigns the team, compiles the result
+- Produces a supplemental edition on any topic
+- Mags picks the reporters, designs the coverage, compiles the result
+- One supplemental per cycle minimum — this is how the city gets built
+
+## Philosophy
+
+The Cycle Pulse is the engine's newspaper — it reports what the simulation produced. Same six desks, same format, same rotation. That's necessary but it's not sufficient. The city needs texture, variety, life.
+
+Supplementals are where the world gets built. A restaurant review canonizes a restaurant. A neighborhood walk canonizes what that neighborhood feels like. A sports deep dive gives the dynasty texture beyond box scores. Every supplemental adds something to the world that the Cycle Pulse can't.
+
+**Any reporter can lead a supplemental.** Not just Carmen and Jordan. There are 24 journalists on the roster and most of them have never gotten a supplemental assignment. Mason Ortega is a former sous chef — give him a food piece. Sharon Okafor covers lifestyle — let her cover lifestyle. Kai Marston was a music blogger — give him First Fridays. The voice files are built for this. Use them.
+
+**The tone is not locked to civic drama.** Supplementals can be breaking news, but they can also be a farmers market, a restaurant opening, a neighborhood walk, a sports feature, a weather story, a school profile. The city should feel like a city, not a council chamber.
+
+**GodWorld is a prosperity city.** Dynasty-era Oakland. People buying homes, opening businesses, enjoying life. Not every story is displacement, struggle, or crisis. Include wealth, aspiration, joy, normalcy.
 
 ## Rules
 - Read SESSION_CONTEXT.md FIRST
-- This is Mags' editorial playground — custom teams, flexible structure
 - Show the user a coverage plan before launching agents
-- One story, many angles, deep canon
+- Get user approval before proceeding to agent launch
+- One story, many angles — or one story, one angle. Size fits the topic.
+- Rotate reporters. Check who's been used recently and who hasn't.
 
-## Step 0: Understand the Topic
+---
 
-The topic comes from one of these sources:
-1. **User drops it** — "here's the Fruitvale plans" or "NBA leak incoming"
-2. **Engine signal** — a major event in the cycle data that deserves deeper treatment
-3. **Mags' editorial instinct** — a storyline that needs space, a color piece the Cycle Pulse can't hold
-4. **Journalist flag** — a reporter's voice file or NOTES_TO_SELF entry suggests a feature
+## Step 0: Pick the Topic
 
-Read whatever the user provides. If it's a Drive link, use the service account (`node scripts/downloadDriveFile.js`). If it's a Mara briefing, read the file. If it's raw canon, absorb it.
+Topics come from anywhere:
+1. **User drops it** — "let's do a food piece" or "what's Temescal look like?"
+2. **Engine signal** — a citizen event, a new business, a neighborhood shift
+3. **Editorial instinct** — Mags sees a gap in the world and fills it
+4. **Journalist flag** — a reporter's voice suggests a feature
+5. **Variety check** — if the last 3 supplementals were civic, do something else
+
+Read whatever the user provides. If it's vague, that's fine — "what's the food scene like?" is a valid topic.
 
 ## Step 1: Design the Coverage Plan
 
-This is where editorial judgment matters. Based on the topic, decide:
+### 1a. Pick the Reporters
 
-### 1a. Classify the Supplemental Type
+**Check the roster first.** Who hasn't had a supplemental? Who's perfect for this topic? The full roster is in `docs/media/voices/` — 24 journalists across every beat.
 
-| Type | Trigger | Typical Size |
-|------|---------|--------------|
-| **Breaking News** | Major development drops | 5-8 articles |
-| **Deep Dive** | Full canon treatment needed | 7-10 articles |
-| **Color** | Neighborhood/culture/texture feature | 3-5 articles |
-| **Sports Special** | Major team event | 4-6 articles |
-| **Wire Break** | Mint or TWS breaks a rumor/leak | 2-4 articles |
+Reporters by specialty (not exhaustive — anyone can cover anything):
 
-### 1b. Assign the Team
+| Reporter | Specialty | Good For |
+|----------|-----------|----------|
+| Mason Ortega | Food & Hospitality | Restaurants, food culture, kitchen life, nightlife |
+| Sharon Okafor | Lifestyle | Daily routines, behavior trends, how people live |
+| Kai Marston | Arts & Entertainment | Galleries, music, First Fridays, cultural events |
+| Angela Reyes | Education | Schools, youth, OUSD, after-school programs |
+| Noah Tan | Weather & Environment | Climate, air quality, seasons, outdoor life |
+| Dr. Lila Mezran | Health | Public health, clinics, medical stories |
+| Sgt. Rachel Torres | Public Safety | Crime, safety, OPD, neighborhood security |
+| Jax Caldera | Accountability | Street-level pressure, policy gaps |
+| Maria Keen | Neighborhoods | Hyper-local culture, community pulse |
+| Simon Leary | Long View | Essays, philosophy, contemplative pieces |
+| Tanya Cruz | Sideline / Social | Behind-the-scenes, real-time dispatches |
+| Selena Grant | Bulls Beat | Chicago basketball, roster analysis |
+| Talia Finch | Chicago Ground | Chicago neighborhoods, street-level texture |
+| MintConditionOakTown | Internet/Rumors | Speculative threads, chaotic truth-seeking |
+| Carmen Delaine | Civic | Government, infrastructure, policy |
+| Jordan Velez | Business/Labor | Economics, workforce, port, development |
+| Luis Navarro | Investigations | Accountability, fact-checking, anomalies |
+| Celeste Tran | Social Trends | Hashtags, streaming data, cultural temperature |
+| Farrah Del Rio | Opinion | Policy critique, cultural commentary |
+| Trevor Shimizu | Infrastructure | Transit, utilities, systems |
+| P Slayer | Fan Voice | Sports opinion, emotional takes |
+| Anthony | Sports Analytics | Data-driven sports, roster breakdowns |
+| Hal Richmond | Sports History | Dynasty context, retrospectives |
+| Reed Thompson | Wire | Neutral verification, quick reports |
 
-Pick reporters based on the story, not the desk. Any reporter can appear in any supplemental. Examples:
+### 1b. Plan the Coverage
 
-- **Civic breaking:** Carmen (news + analysis), Jordan (numbers), Luis (citizen voices), Farrah (opinion)
-- **Sports special:** Anthony (analysis), P Slayer (fan voice), Hal (history), Mint (if leak)
-- **Color feature:** Maria (lead), Luis (voices), Simon Leary (cultural essay)
-- **Wire break:** Mint (thread), Reed Thompson (wire), beat reporter (analysis)
-
-### 1c. Plan the Sections
-
-Design the article lineup. Show the user something like:
+Show the user something like:
 
 ```
 SUPPLEMENTAL: [TOPIC]
-Type: [Breaking News / Deep Dive / Color / Sports Special / Wire Break]
 
 COVERAGE PLAN:
-1. [FRONT PAGE] Carmen Delaine — The news: what happened, what it means
-2. [BY THE NUMBERS] Jordan Velez — Full financial/data breakdown
-3. [ANALYSIS] Carmen Delaine — Political landscape, vote math
-4. [CITIZEN VOICES] Luis Navarro — 4-5 named citizen reactions
-5. [OPINION] Farrah Del Rio — Accountability take
-6. [OPINION] P Slayer — Street-level emotional reaction
+1. Mason Ortega — [assignment, ~word count]
+2. Maria Keen — [assignment, ~word count]
+3. [Reporter] — [assignment, ~word count]
 
-Team: 4 reporters, 6 articles
-Estimated length: ~5,000 words
-
-Ready to launch?
+Team: [N] reporters, [N] articles
 ```
 
-Get user approval before proceeding.
+Keep it simple. The plan is a pitch, not a contract. Get user approval before proceeding.
 
-## Step 1.5: Compile the Topic Brief
+### 1c. Size It Right
 
-Before launching agents, Mags writes the topic brief — the editorial equivalent of desk briefings but focused on one story.
+Not everything needs 7 articles and 10,000 words.
 
-### What goes in the topic brief:
+| Size | Articles | Words | When |
+|------|----------|-------|------|
+| Light | 1-2 | 1,500-3,000 | Neighborhood walk, single-topic color |
+| Standard | 3-5 | 3,000-6,000 | Multi-angle feature, event coverage |
+| Heavy | 5-8 | 5,000-10,000 | Breaking news, deep dive, major event |
 
-1. **The news** — What happened. Raw facts. Canon data from user, Mara, engine, or Supermemory.
-2. **The context** — Where this fits in the simulation timeline. What led to this moment.
-3. **The angle** — What Mags wants covered. Not just "write about X" but "I want the reader to understand Y."
-4. **Canon facts** — Use `ESTABLISHED CANON:` prefix for non-negotiable data.
-5. **Citizen cards** — For any citizens the agents will write about. Same format as edition briefings.
-6. **Archive context** — Past coverage from Supermemory, Drive archive, or NEWSROOM_MEMORY.
-7. **Voice assignments** — Which reporter writes which piece, and what voice file to reference.
+A farmers market piece might be one article from Mason Ortega and one from Maria Keen. That's fine. Not everything is a five-reporter production.
 
-### Topic brief sources (check in order):
-1. **User-provided content** — Drive files, raw text, Mara briefings
-2. **Supermemory** — `/super-search` for relevant past coverage and character history
-3. **Local Drive archive** — `output/drive-files/` for past articles, player cards, stats
-4. **Desk packets** — If a current cycle is loaded, relevant sections may apply
-5. **NEWSROOM_MEMORY.md** — Errata, character continuity, editorial notes
+---
 
-### Save the brief:
+## Step 1.5: Write the Topic Brief
+
+The brief tells the reporters what they need to know. Save to:
 ```
-output/supplemental-briefs/{topic_slug}_brief.md
+output/supplemental-briefs/{topic_slug}_c{XX}_brief.md
 ```
+
+### For color/variety pieces (lightweight brief):
+- **The topic** — What are we covering?
+- **Citizens available** — Pull from the ledger. Include citizens who live in the relevant neighborhood, work in the relevant industry, etc. Don't just use the usual names.
+- **Canon to establish** — What new things does this piece create? (businesses, venues, cultural events, neighborhood texture)
+- **Voice assignments** — Who writes what
+
+### For news/investigative pieces (heavier brief):
+- Add: **The news** (what happened), **The context** (timeline, stakes), **Civic voice statements** (if relevant)
+- Add: **Archive context** from Supermemory or NEWSROOM_MEMORY.md
+
+### Brief sources (check in order):
+1. User-provided content
+2. Supermemory — `/super-search` for relevant past coverage
+3. Simulation_Ledger — citizens in the relevant neighborhood/occupation
+4. Business_Ledger — businesses in the relevant sector
+5. NEWSROOM_MEMORY.md — errata, character continuity
+
+### Key rules for the brief:
+- **Don't prescribe tone.** Give the reporters the facts and let them write.
+- **Don't default to struggle.** If the topic is a neighborhood, show what's good about it, not what's wrong with it.
+- **Use fresh citizens.** Check the Citizen Usage Log — if a citizen has appeared in the last 3 editions, find someone else.
+- **Authorize new canon.** Reporters can discover businesses, venues, cultural events. Specify how many new entities they can create.
+
+---
 
 ## Step 2: Launch Agents
 
-Launch 2-4 agents based on the coverage plan. Unlike edition production (6 desk agents), supplementals use fewer, more focused agents.
+Launch 1-4 agents based on the coverage plan.
 
 ### Agent Configuration
 
 Each agent gets:
 - **The topic brief** (from Step 1.5)
 - **Their voice file(s)** — `docs/media/voices/{reporter}.md`
-- **The supplemental template** — `editions/SUPPLEMENTAL_TEMPLATE.md` (for formatting reference)
+- **The supplemental template** — `editions/SUPPLEMENTAL_TEMPLATE.md`
 - **Their specific assignment** — which articles to write, what angle, target word count
 
 ### Agent Prompt Pattern
@@ -118,16 +160,15 @@ You are [REPORTER NAME], writing for the Bay Tribune supplemental edition on [TO
 
 Read your voice file at docs/media/voices/{name}.md — this is your writing identity.
 Read the supplemental template at editions/SUPPLEMENTAL_TEMPLATE.md — formatting conventions.
-Read the topic brief at output/supplemental-briefs/{topic_slug}_brief.md — your assignment and canon data.
+Read the topic brief at output/supplemental-briefs/{topic_slug}_c{XX}_brief.md — your assignment and canon data.
 
 YOUR ASSIGNMENT:
 - Write [N] article(s):
   1. "[Headline idea]" — [description of angle, ~X words]
-  2. "[Headline idea]" — [description of angle, ~X words]
 
 RULES:
 - Stay in voice. Read the voice file carefully.
-- Use ONLY canon names from the topic brief. Never invent citizens.
+- Use ONLY canon names from the topic brief. Never invent citizens unless authorized.
 - No engine metrics in article text.
 - Include a Names Index after each article.
 - End with an Article Table entry for each article you wrote.
@@ -136,60 +177,42 @@ Write now. Start with your first article.
 ```
 
 ### Parallel vs. Sequential
+- Independent reporters — launch in parallel
+- If one reporter's output feeds another — launch sequentially
 
-- **2-3 independent agents** — launch in parallel (e.g., news + numbers + opinion)
-- **If one agent's output feeds another** — launch sequentially (e.g., wire break → reaction)
-
-### Agent Types
-
-Use `subagent_type` based on the reporter's desk:
-- Civic reporters (Carmen, Luis, Farrah) → `civic-desk`
-- Sports reporters (P Slayer, Anthony, Hal) → `sports-desk`
-- Culture reporters (Maria, Simon) → `culture-desk`
-- Business reporters (Jordan) → `business-desk`
-- Chicago reporters (Selena, Talia) → `chicago-desk`
-- Letters / citizen voices → `letters-desk`
-- Mixed / general → `general-purpose`
-
-**Note:** The agent type gives the agent access to the right tools and search pools. The voice file and topic brief control the actual writing.
+---
 
 ## Step 3: Compile
 
-After agents return, Mags compiles the supplemental:
+After agents return, Mags compiles:
 
-1. **Assemble articles** in editorial order (story logic, not template order)
-2. **Add the header** (see template for format)
+1. **Assemble articles** in editorial order (story logic)
+2. **Add the header** (see template)
 3. **Quality checks:**
-   - Every article has a deck line
-   - Every article has a standardized byline
-   - Cross-references to past or upcoming Cycle Pulse coverage where relevant
-   - 1-2 photo credits for atmospheric moments
-   - Opinion pieces marked with `[OPINION]`
-   - Countdown clocks on any initiative with active deadline
+   - Deck lines under every headline
+   - Standardized bylines
+   - Cross-references to past coverage where relevant
+   - 1-2 photo credits
+   - Opinion pieces marked `[OPINION]`
 4. **Merge intake sections:**
-   - Article Table (all articles)
+   - Article Table
    - Storylines Updated (new canon established)
-   - Citizen Usage Log (all citizens used, grouped)
-   - Continuity Notes (key numbers, timeline, political landscape)
+   - Citizen Usage Log
+   - Continuity Notes
 5. **Add end marker**
 
-Show the compiled supplemental to the user for review.
+Show the compiled supplemental to the user.
 
 ## Step 3.5: Validation (If Civic)
 
-If the supplemental covers civic content (council members, initiatives, votes):
+Only if civic content is involved:
 ```bash
 node scripts/validateEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
 ```
-Fix any CRITICAL issues before proceeding.
 
 ## Step 3.9: USER REVIEW GATE (MANDATORY)
 
-**STOP HERE. DO NOT PROCEED TO STEP 4 WITHOUT EXPLICIT USER APPROVAL.**
-
-Same principle as write-edition Step 4.9. Nothing gets saved, uploaded, or ingested until the user says so.
-
-### Present it as:
+**STOP. Nothing gets saved until the user says yes.**
 
 ```
 SUPPLEMENTAL [{topic}] — READY FOR REVIEW
@@ -198,27 +221,19 @@ Articles: {count}
 Word count: ~{total}
 New canon established: {key facts}
 
-[Summary of coverage and any issues]
-
 The supplemental is compiled. Nothing has been saved or published yet.
 Ready to publish? (yes / hold for edits)
 ```
-
-Wait for explicit approval. If the user says hold, make edits, then re-present.
 
 ---
 
 ## Step 4: Save & Upload
 
-After user approval (confirmed at Step 3.9):
+After user approval:
 
 1. **Save locally:**
    ```
    editions/supplemental_{topic_slug}_c{XX}.txt
-   ```
-   Or for non-cycle-tied specials:
-   ```
-   editions/special_edition_{topic_slug}.txt
    ```
 
 2. **Upload to Google Drive:**
@@ -231,105 +246,61 @@ After user approval (confirmed at Step 3.9):
    node scripts/ingestEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
    ```
 
-4. **Show stats:**
-   - Article count
-   - Total word count
-   - New canon figures introduced
-   - Citizen usage count
-
 ## Step 4.05: Generate Newspaper Print Edition
-
-After saving the text edition and uploading to Drive, generate the newspaper print PDF.
 
 ### 1. Generate Photos
 ```bash
 node scripts/generate-edition-photos.js editions/supplemental_{topic_slug}_c{XX}.txt
 ```
-- Auto-assigns photos using editorial logic (DJ Hartley street documentary, Arman Gutiérrez editorial portrait)
-- Uses Together AI / FLUX.1-schnell (~$0.003/image)
-- Output: `output/photos/e{XX}/` with manifest.json
-- Use `--dry-run` to preview assignments before generating
 
 ### 2. Generate PDF
 ```bash
 node scripts/generate-edition-pdf.js editions/supplemental_{topic_slug}_c{XX}.txt
 ```
-- Reads photos from manifest, embeds into newspaper layout
-- Generates HTML layout → Puppeteer renders to tabloid PDF (11x17)
-- Output: `output/pdfs/bay_tribune_e{XX}.pdf`
-- Use `--letter` for 8.5x11 instead of tabloid
 
 ### 3. Upload Print Edition to Drive
 ```bash
 node scripts/saveToDrive.js output/pdfs/bay_tribune_supplemental_c{XX}_{topic_slug}.pdf supplement
 ```
 
----
+## Step 4.1: Update Edition Brief
 
-## Step 4.1: Update Edition Brief (Auto-Update Bot Context)
+**Read** existing `output/latest_edition_brief.md` first — don't overwrite.
 
-After saving, update the edition brief so the Discord bot knows about the supplemental coverage.
-
-**Read** the existing `output/latest_edition_brief.md` first — don't overwrite it. Supplementals ADD to the current cycle's canon; they don't replace the main edition brief.
-
-**Append** a new section to the bottom of the existing brief:
-
+**Append** a new section:
 ```
 ### Supplemental: {Topic} ({Reporter(s)})
-- [Key facts, named citizens, numbers from this supplemental]
-- [Initiative status changes if any]
-- [New citizens introduced]
+- [Key facts, named citizens, new canon from this supplemental]
 ```
 
-If no existing brief exists (rare — means no main edition was published), generate a standalone brief from this supplemental using the full format from write-edition Step 5.1.
-
 ## Step 4.2: Refresh Live Services
-
-Clear stale conversation history and reload the Discord bot to pick up the updated brief immediately:
 
 ```bash
 echo '{"savedAt":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","history":[]}' > logs/discord-conversation-history.json
 pm2 reload mags-discord-bot
 ```
 
-**Why clear history:** The bot persists conversations across restarts. Stale responses about "no edition yet" will override the new system prompt if the history isn't cleared.
-
-Dashboard doesn't need a restart (reads fresh on each request). Moltbook heartbeat picks up changes on next cron run.
-
----
-
 ## Step 4.5: Update Newsroom Memory
 
-After a supplemental, update `docs/mags-corliss/NEWSROOM_MEMORY.md`:
-- New canon established (numbers, timelines, political positions)
-- Character continuity (new citizens introduced, returning citizens developed)
-- Coverage notes for future editions (what to follow up on)
+Update `docs/mags-corliss/NEWSROOM_MEMORY.md`:
+- New canon established
+- Character continuity
+- Coverage notes for future editions
 
 ## Step 5: Intake (Optional)
 
-If the supplemental contains canon that should flow back into the engine:
+If the supplemental contains canon for the engine:
 ```bash
 node scripts/editionIntake.js editions/supplemental_{topic_slug}_c{XX}.txt --dry-run
 ```
 
 ---
 
-## Quick Reference — Supplemental Types
-
-| Type | Team Size | Articles | Words | Agents |
-|------|-----------|----------|-------|--------|
-| Breaking News | 3-4 reporters | 5-8 | 4,000-8,000 | 2-3 |
-| Deep Dive | 4-6 reporters | 7-10 | 6,000-12,000 | 3-4 |
-| Color | 2-3 reporters | 3-5 | 3,000-6,000 | 2 |
-| Sports Special | 3-5 reporters | 4-6 | 4,000-8,000 | 2-3 |
-| Wire Break | 2-3 reporters | 2-4 | 2,000-4,000 | 1-2 |
-
 ## File Locations
 
 | File | Purpose |
 |------|---------|
-| `editions/SUPPLEMENTAL_TEMPLATE.md` | Template — formatting, sections, intake format |
+| `editions/SUPPLEMENTAL_TEMPLATE.md` | Formatting conventions |
 | `output/supplemental-briefs/` | Topic briefs per supplemental |
 | `editions/supplemental_*.txt` | Published supplementals |
 | `editions/special_edition_*.txt` | Non-cycle-tied specials |
-| `output/drive-files/_Supplementals_Reference/` | Reference supplementals from Cycles 73-76 |

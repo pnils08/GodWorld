@@ -136,7 +136,7 @@ async function main() {
   }
 
   // Generate photos
-  var outputDir = path.join(__dirname, '..', 'output', 'photos', 'e' + parsed.edition);
+  var outputDir = path.join(__dirname, '..', 'output', 'photos', parsed.slug || 'e' + parsed.edition);
   console.log('Output directory: ' + outputDir);
   console.log('');
 
@@ -146,7 +146,8 @@ async function main() {
     var section = ps.section;
     var slugSource = section.headline || section.name || 'photo_' + i;
     var slugName = slugSource.substring(0, 80).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
-    var filename = 'e' + parsed.edition + '_' + slugName + '.jpg';
+    var prefix = parsed.slug || 'e' + parsed.edition;
+    var filename = prefix + '_' + slugName + '.jpg';
 
     console.log('[' + (i + 1) + '/' + photoSections.length + '] Generating: ' + section.name);
 

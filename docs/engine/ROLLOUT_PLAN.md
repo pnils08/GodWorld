@@ -31,7 +31,7 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Phase 23.5: Agent output directories + memory~~ — All 22 agents have SKILL.md output dirs, all 24 have MEMORY.md. S85.
 - **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validate all three fixes.
 - **Phase 24.1: MEDIA clock mode build** — Start with citizen migration (8 Echo journalists → MEDIA), then build generateMediaModeEvents.js. Plan at `docs/engine/PHASE_24_PLAN.md`.
-- **Supplemental strategy for C87** — World-building supplementals to establish 2041 Oakland texture. Housing, OARI, labor, culture angles. Notes in NOTES_TO_SELF.md.
+- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Supplementals build the world the Cycle Pulse reports on. Any topic, any reporter — rotate the 24-journalist roster, don't default to Carmen/Jordan/Luis. Color pieces (food, neighborhoods, arts, street life) are first-class, not just civic deep dives. Template v2.0 and SKILL.md updated S86. Mike brings ideas, Mags designs coverage — team approach.
 - **Supermemory ingest retry** — E86 ingest failed (quota exceeded). Retry when service is back.
 - **Dashboard bugs #10/#11** — Mags Corliss card inconsistency + Deacon Seymour missing Oakland label. Data-level issues on Simulation_Ledger, not frontend code.
 

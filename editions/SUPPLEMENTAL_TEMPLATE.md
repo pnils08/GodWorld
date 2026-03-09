@@ -1,26 +1,28 @@
-# SUPPLEMENTAL EDITION TEMPLATE v1.0
+# SUPPLEMENTAL EDITION TEMPLATE v2.0
 
-**Purpose:** Guide the production of supplemental editions — deep-dive, single-topic coverage that builds canon beyond what the Cycle Pulse can hold. Supplementals are passion pieces, breaking news specials, color journalism, and ESPN-style sports features.
+**Purpose:** Guide the production of supplemental editions — variety coverage that builds the world beyond the Cycle Pulse. Supplementals add texture, canon, and life to GodWorld. One per cycle minimum.
 
 -----
 
 ## WHAT SUPPLEMENTALS ARE
 
-The Cycle Pulse is the weekly paper — a reaction to the week that was. Supplementals are the **magazine**:
+The Cycle Pulse is the weekly paper — locked to what the engine produced. Supplementals are everything else:
 
-- **Breaking News** — Major developments that would dominate a Cycle Pulse (initiative releases, rendering drops, vote results)
-- **Deep Dives** — Canon-building exploration of one topic from multiple angles (A's offseason, Baylight details, council position tracker)
-- **Color Journalism** — The soul of Oakland that doesn't fit in a news cycle (best tacos on International, Temescal street life, faith community profiles, neighborhood texture)
-- **Sports Specials** — ESPN-style coverage of team events (trades, signings, roster moves, season previews)
+- **Color & Texture** — The city at street level. Food, neighborhoods, nightlife, markets, festivals, art, weather, daily life. This is how the world gets built.
+- **Breaking News** — Major developments that need immediate coverage
+- **Deep Dives** — One topic from multiple angles (A's offseason, Baylight details, economic trends)
+- **Sports Features** — ESPN-style coverage of team events, dynasty moments, player profiles
 - **Wire Breaks** — MintConditionOakTown or TWS Wire breaking a rumor or leak
 
-**One story. Many angles. Deep canon.**
+**No fixed formula.** The topic dictates the size, the team, and the structure. A farmers market piece might be two articles. A breaking news event might be eight.
+
+**Any reporter can lead.** There are 24 journalists on the roster. Supplementals are where the bench players get in the game.
 
 -----
 
 ## CANON RULES (SAME AS CYCLE PULSE)
 
-1. **NEVER invent citizen names.** Use ONLY names from canon sources, ledgers, or the topic brief.
+1. **NEVER invent citizen names.** Use ONLY names from canon sources, ledgers, or the topic brief — unless explicitly authorized to create new citizens.
 2. **No engine metrics in article text.** Translate data into journalism.
 3. **Verify names** against canon references before use.
 4. **New canon figures** must be logged in Citizen Usage Log with full details.
@@ -33,10 +35,10 @@ The Cycle Pulse is the weekly paper — a reaction to the week that was. Supplem
 Same as Cycle Pulse Template v1.4:
 - **Deck lines** under every headline
 - **Standardized bylines:** `By [Name] | Bay Tribune [Beat]`
-- **Opinion markers:** `[OPINION]` tag for P Slayer, Farrah Del Rio, Elliot Graye
+- **Opinion markers:** `[OPINION]` tag for opinion pieces
 - **Photo credits:** `[Photo: DJ Hartley / Bay Tribune]` — 1-2 per supplemental
-- **Cross-references:** `→ See also:` when connecting to past or future Cycle Pulse coverage
-- **Countdown clocks** on any initiative with active deadline
+- **Cross-references:** `→ See also:` when connecting to past or future coverage
+- **Countdown clocks** on any initiative with active deadline (civic pieces only)
 
 -----
 
@@ -53,11 +55,16 @@ THE CYCLE PULSE — SUPPLEMENTAL EDITION
 Examples:
 ```
 THE CYCLE PULSE — SUPPLEMENTAL EDITION
-BAYLIGHT DISTRICT: THE FULL PICTURE
-Post-Cycle 73 | Public Release
+TEMESCAL ON A TUESDAY
+Cycle 87 | Neighborhood Life
 
 THE CYCLE PULSE — SUPPLEMENTAL EDITION
-CYCLE 76 | OAKLAND ALTERNATIVE RESPONSE INITIATIVE: BREAKING RELEASE
+WHAT'S COOKING IN OAKLAND
+Cycle 88 | Food & Hospitality
+
+THE CYCLE PULSE — SUPPLEMENTAL EDITION
+BAYLIGHT DISTRICT: THE FULL PICTURE
+Post-Cycle 73 | Public Release
 
 THE CYCLE PULSE — SPECIAL EDITION
 Oakland Media Digest — Offseason 2040-41
@@ -68,34 +75,61 @@ Dynasty Dismantled | Front Office Earthquake | New Era Begins
 
 ## BODY SECTIONS (FLEXIBLE)
 
-Unlike the Cycle Pulse, supplementals have **no fixed section order**. The story dictates the structure. Mags designs the coverage plan — which sections to include, which reporters to assign, what angles to pursue.
+Supplementals have **no fixed section order**. The story dictates the structure. Pick what fits.
 
 ### Available Section Types
 
-Pick what fits the story. Not all are required. Order follows editorial logic, not template hierarchy.
-
+#### News & Analysis
 | Section | Purpose | Typical Reporter |
 |---------|---------|-----------------|
-| **BREAKING / FRONT PAGE** | The news itself — what happened, what it means | Carmen Delaine, lead civic reporter |
-| **THE RENDERING / VISUAL** | What it looks like, cultural/aesthetic analysis | Maria Keen |
-| **BY THE NUMBERS** | Full data breakdown, tables, financial details | Jordan Velez |
-| **ANALYSIS** | Political landscape, vote math, approval path, implications | Carmen Delaine |
-| **WORKFORCE / IMPACT** | Street-level consequences, jobs, displacement, access | Luis Navarro |
-| **COMMUNITY RESPONSE** | Organized group reactions, advocacy positions | Maria Keen or Luis Navarro |
-| **CITIZEN VOICES** | 4-6 named citizens reacting to the topic | Luis Navarro |
-| **OPINION (LONG VIEW)** | Historical perspective, institutional memory | Hal Richmond |
-| **OPINION (STREET)** | Personal/emotional take, accountability pressure | P Slayer, Farrah Del Rio |
-| **LETTERS FROM READERS** | 3-5 citizen letters responding to the topic | (citizen voices) |
-| **WIRE / SOCIAL** | MintConditionOakTown thread, TWS Wire report | Mint, Reed Thompson, Celeste Tran |
-| **SPORTS ANALYSIS** | Statistical deep dive, trade value, roster projection | Anthony |
+| **FRONT PAGE / BREAKING** | The news — what happened, what it means | Carmen Delaine |
+| **BY THE NUMBERS** | Data breakdown, financials, statistics | Jordan Velez |
+| **ANALYSIS** | Political landscape, implications, patterns | Carmen Delaine |
+| **INVESTIGATION** | Accountability, document trail, follow the money | Luis Navarro |
+| **VOTE TRACKER** | Council position table with projections | Carmen Delaine |
+| **TIMELINE** | Key dates, approval pathway, schedule | Compiled |
+
+#### City Life & Color
+| Section | Purpose | Typical Reporter |
+|---------|---------|-----------------|
+| **NEIGHBORHOOD** | What a neighborhood looks, sounds, and feels like | Maria Keen, any reporter |
+| **FOOD & DINING** | Restaurants, kitchens, food culture, vendors | Mason Ortega |
+| **ARTS & CULTURE** | Galleries, music, First Fridays, performances | Kai Marston |
+| **STREET LIFE** | Daily texture — what people do, where they go | Sharon Okafor, Maria Keen |
+| **LIFESTYLE** | How people live — routines, habits, trends | Sharon Okafor |
+| **WEATHER & SEASONS** | Climate, air quality, how the season feels | Noah Tan |
+| **EDUCATION** | Schools, youth programs, student life | Angela Reyes |
+| **HEALTH** | Public health, clinics, wellness | Dr. Lila Mezran |
+| **PUBLIC SAFETY** | Crime patterns, neighborhood security | Sgt. Rachel Torres |
+
+#### Sports
+| Section | Purpose | Typical Reporter |
+|---------|---------|-----------------|
+| **SPORTS ANALYSIS** | Statistical deep dive, roster projection | Anthony |
 | **SPORTS FAN VOICE** | Emotional reaction, fan perspective | P Slayer |
 | **SPORTS HISTORY** | Franchise context, dynasty narrative | Hal Richmond |
-| **VOTE TRACKER** | Council position table with projections | Carmen Delaine |
-| **TIMELINE** | Key dates, approval pathway, implementation schedule | Compiled |
+| **SPORTS ESSAY** | Contemplative, long-view sports culture | Simon Leary |
+| **SIDELINE** | Behind-the-scenes, locker room, real-time | Tanya Cruz |
+
+#### Opinion & Voice
+| Section | Purpose | Typical Reporter |
+|---------|---------|-----------------|
+| **OPINION** | Sharp take, accountability, cultural comment | Farrah Del Rio, P Slayer, Jax Caldera |
+| **THE LONG VIEW** | Historical perspective, institutional memory | Hal Richmond, Simon Leary |
+| **CITIZEN VOICES** | Named citizens speaking about their lives | Luis Navarro, any reporter |
+| **LETTERS FROM READERS** | Citizen letters responding to the topic | (citizen voices) |
+| **PERSONAL ESSAY** | First-person reflection from a reporter | Simon Leary, Maria Keen |
+
+#### Wire & Social
+| Section | Purpose | Typical Reporter |
+|---------|---------|-----------------|
+| **WIRE** | Neutral verified report | Reed Thompson |
+| **SOCIAL / THREAD** | Internet culture, fan threads, rumors | MintConditionOakTown, Celeste Tran |
+| **WORKFORCE / IMPACT** | Jobs, labor, economic consequences | Jordan Velez, Luis Navarro |
+| **COMMUNITY RESPONSE** | Organized group reactions | Maria Keen, Luis Navarro |
 
 ### Section Dividers
 
-Use the same `############` header blocks as the Cycle Pulse:
 ```
 ############################################################
 [SECTION NAME]
@@ -106,15 +140,15 @@ Use the same `############` header blocks as the Cycle Pulse:
 
 ## CITIZEN VOICE GUIDELINES
 
-Supplementals feature **deeper citizen engagement** than regular editions. Each citizen voice should:
+Citizens are people living their lives, not debate participants.
 
-- Be a **named person** with age, neighborhood, and occupation
-- React **specifically to the topic** — not generic sentiment
-- Show a **distinct perspective** (support, skepticism, opposition, conditional support, adjacent concern)
+- Each citizen should be a **named person** with age, neighborhood, and occupation
+- They should react **specifically** — not generic sentiment
+- They should speak from **their own experience** — why this matters to them
 - Include **direct quotes** — 2-4 sentences of authentic voice
-- Connect to the citizen's **lived experience** — why this topic matters to them personally
-
-Aim for **4-6 citizen voices** across the supplemental. Spread across neighborhoods. Include at least one skeptic and one advocate.
+- **Show variety.** Not everyone has a strong opinion. Some people are just living. A citizen at a farmers market can talk about the tomatoes without it being a statement about food equity.
+- **Use fresh names.** If a citizen has appeared in the last 3 editions, find someone else. The simulation has 655 citizens — use them.
+- **Include the full range.** Wealthy citizens, working-class citizens, young professionals, retirees, families. The city is not one income bracket.
 
 -----
 
@@ -139,7 +173,7 @@ For civic supplementals covering initiatives approaching a vote:
 
 ## INTAKE FORMAT (ALWAYS PRESENT)
 
-Every supplemental ends with the same engine-facing format as the Cycle Pulse. This is how supplemental canon integrates back into the simulation.
+Every supplemental ends with engine-facing intake sections. This is how supplemental canon integrates back into the simulation.
 
 ### Article Table
 
@@ -150,11 +184,11 @@ ARTICLE TABLE — ENGINE INTAKE FORMAT
 
 |Reporter      |StoryType|SignalSource    |Headline                        |ArticleText                              |CulturalMentions|
 |--------------|---------|---------------|--------------------------------|-----------------------------------------|----------------|
-|Carmen Delaine|breaking |civic-initiative|Headline here                   |One-line summary of article content      |                |
+|Mason Ortega  |feature  |culture-event  |Headline here                   |One-line summary of article content      |Temescal,food   |
 ```
 
-**StoryType options:** breaking, feature, analysis, opinion, tracker, news, wire, social
-**SignalSource options:** civic-initiative, civic-project, sports-roster, sports-game, culture-event, editorial, wire-report, social-media
+**StoryType options:** breaking, feature, analysis, opinion, tracker, news, wire, social, profile, review, essay
+**SignalSource options:** civic-initiative, civic-project, sports-roster, sports-game, culture-event, neighborhood, food-dining, arts, lifestyle, editorial, wire-report, social-media, weather, education, health, public-safety
 
 ### Storylines Updated
 
@@ -163,8 +197,11 @@ ARTICLE TABLE — ENGINE INTAKE FORMAT
 STORYLINES UPDATED
 ############################################################
 
+NEW CANON:
+— [New businesses, venues, cultural events, neighborhood details established]
+
 NEW INFORMATION:
-— [Bullet list of new canon facts established]
+— [Facts, data points, status changes]
 
 PHASE CHANGES:
 — [Initiative/storyline]: [OLD STATUS] → [NEW STATUS]
@@ -185,6 +222,9 @@ JOURNALISTS:
 
 CITIZENS QUOTED:
 — [Name], [Age], [Neighborhood], [Occupation] ([context])
+
+NEW CITIZENS CREATED:
+— [Name], [Age], [Neighborhood], [Occupation] ([created for this supplemental])
 ```
 
 ### Continuity Notes
@@ -194,8 +234,8 @@ CITIZENS QUOTED:
 CONTINUITY NOTES
 ############################################################
 
-[Key numbers, timeline milestones, political landscape, canon facts
-that future editions and supplementals must respect]
+[Key canon facts, new entities, neighborhood details, business names,
+and anything future editions must respect]
 ```
 
 ### End Marker
@@ -208,44 +248,12 @@ END SUPPLEMENTAL EDITION — [TOPIC]
 
 -----
 
-## SUPPLEMENTAL TYPES — QUICK REFERENCE
-
-### Breaking News Supplemental
-**When:** Major development drops (initiative release, rendering, vote result)
-**Team:** Carmen (news + analysis) + Jordan (numbers) + Luis (citizen voices) + Farrah or P Slayer (opinion)
-**Sections:** Front Page → Analysis → By the Numbers → Citizen Voices → Opinion → Continuity
-**Length:** 5-8 articles, 4,000-8,000 words
-
-### Deep Dive Supplemental
-**When:** A topic needs full canon treatment (Baylight details, health center proposal, offseason moves)
-**Team:** Lead reporter + Maria (visual/cultural) + Jordan (numbers) + Hal (history) + P Slayer (reaction) + Luis (citizen voices)
-**Sections:** Front Page → Rendering/Visual → Numbers → Workforce/Impact → Political Landscape → Opinion × 2 → Letters
-**Length:** 7-10 articles, 6,000-12,000 words
-
-### Color Supplemental
-**When:** Oakland soul needs space (neighborhood profiles, food, faith, culture, seasonal texture)
-**Team:** Maria Keen (lead) + Luis (voices) + P Slayer or Simon Leary (personal essay)
-**Sections:** Feature → Neighborhood Texture → Citizen Voices → Personal Essay → Letters
-**Length:** 3-5 articles, 3,000-6,000 words
-
-### Sports Special
-**When:** Major team event (trades, signings, roster overhaul, season preview, playoff moment)
-**Team:** Anthony (analysis) + P Slayer (fan voice) + Hal (history) + Tanya Cruz (social/breaking) + Mint (if rumor/leak)
-**Sections:** Breaking → Analysis → Fan Voice → History → Wire/Social → Continuity
-**Length:** 4-6 articles, 4,000-8,000 words
-
-### Wire Break
-**When:** Mint or TWS Wire breaks a rumor/leak that needs immediate coverage
-**Team:** Mint or Reed Thompson (wire report) + relevant beat reporter (reaction/analysis) + P Slayer (street take)
-**Sections:** Wire Report → Analysis → Reaction → Continuity
-**Length:** 2-4 articles, 2,000-4,000 words
-
------
-
 ## PRODUCTION NOTES
 
 - Supplementals are **not tied to the engine cycle**. They can drop anytime.
-- They **do not require desk packets**. Data comes from Mags' topic brief, Supermemory archive, user-provided canon, or desk packets when relevant.
-- Agent teams are **custom per supplemental**. Mags assigns the beats based on the story.
+- They **do not require desk packets**. Data comes from the topic brief, Supermemory, ledgers, or user-provided canon.
+- Agent teams are **custom per supplemental**. Any reporter can be assigned to any supplemental.
 - Supplementals use the **same Supermemory ingest and Drive upload** pipeline as regular editions.
 - File naming: `editions/supplemental_{topic_slug}_c{XX}.txt` (or `special_edition_{topic_slug}.txt` for non-cycle-tied specials)
+- **One per cycle minimum.** This is how the world gets texture.
+- **Rotate reporters.** Track who's been used and give the bench players time.

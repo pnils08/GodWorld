@@ -716,7 +716,7 @@ These don't fix the engine gap but at least make the ledger match the narrative.
 
 **Depends on:** Nothing. Self-contained engine change.
 **Risk:** Low. Adding a mode is additive — existing ENGINE and GAME behavior unchanged.
-**Status:** Not started. Priority: HIGH — every edition without this writes around frozen civic characters.
+**Status:** Complete (S85). 41 civic citizens flipped GAME → CIVIC on ledger. Engine code already wired (generateCivicModeEvents.js + generational engine accept CIVIC).
 
 ### 22.2 Arc Engine Investigation
 
@@ -730,7 +730,7 @@ These don't fix the engine gap but at least make the ledger match the narrative.
 5. Are desk agents reading arc data from their packets? Check `buildDeskPackets.js` for arc inclusion.
 6. Is the arc generation code actually being called during Phase 4?
 
-**Status:** Needs investigation. Can't scope fix until root cause is identified.
+**Status:** Root cause found + fixed (S85). Arc creation writes phase "early" (eventArcEngine.js:496, generationalEventsEngine.js:907/960/977) but arcLifecycleEngine.js expected "seed". All 111 arcs stuck. Fix: added `if (currentPhase === 'early') currentPhase = 'seed';` alias in arcLifecycleEngine.js:222. Next cycle run will unstick all arcs.
 
 ### 22.3 Agent Write Access + Hardcoded Output Directories
 
@@ -777,7 +777,7 @@ Previous output: `output/desk-output/business_c{PREV}.md`
 Each agent already has persistent memory at `.claude/agent-memory/{agent}/MEMORY.md`. Verify all 24 agents have memory directories. Create any missing ones.
 
 **Build effort:** Low. SKILL.md edits only — no new code.
-**Status:** Not started. Priority: HIGH — blocked E86, will block every future edition.
+**Status:** Complete (S85). All 22 agents have output directory sections in SKILL.md. All 24 agent memory directories have MEMORY.md files.
 
 ---
 

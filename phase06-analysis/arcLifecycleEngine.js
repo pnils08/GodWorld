@@ -219,6 +219,7 @@ function processArcLifecycle_(ctx, arc, cycle, ledger) {
   }
 
   var currentPhase = String(arcData[phaseCol] || 'seed').toLowerCase();
+  if (currentPhase === 'early') currentPhase = 'seed';
   var phaseStartCycle = Number(arcData[phaseStartCol]) || cycle;
   var phaseDuration = Number(arcData[phaseDurationCol]) || 0;
   var nextTransition = Number(arcData[nextTransitionCol]) || 0;

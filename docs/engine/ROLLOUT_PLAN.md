@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 84 (2026-03-07) — Dashboard bug sweep (9 fixes), desk packet v2.2 (evening context), micro-event tier fix, Phase 24 planned (Citizen Life Engine), 3 batch jobs queued.
+**Last Updated:** Session 85 (2026-03-09) — Phase 24 plan written, T1-T2 micro-event rates boosted, 41 civic citizens GAME→CIVIC, arc engine "early"→"seed" fix, Phase 22.1/22.2/23.5 complete.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -24,16 +24,15 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Phase 23.8: Bond Engine bug fixes~~ — 4 bugs fixed: POPID lookup, header collision, full replace wipe guard, ID normalization.
 - ✅ ~~Phase 22.3: Agent write access + directories~~ — Edit tool added to 9 agents (civic offices, firebrand, podcast, rhea). S83.
 - ✅ ~~Phase 22.1: CIVIC clock mode~~ — 6 council members (Santana, Osei, Crane, Vega, Whitfield, T. Park) flipped from GAME→CIVIC on live sheet. Tier 3→2. Engine code already wired (`generateCivicModeEvents_` called at Phase 5). S83.
-- **Phase 22.2: Arc engine investigation** — All 37 arcs stuck at "early" despite tension ≥3. Diagnostic logging added to `eventArcEngine_` (v3.7). Root cause likely deployment drift — `clasp push` deployed all fixes S83. Batch report also found: `involvedCitizens` hardcoded to `[]` in preloader (citizens never linked to arcs), arcs not included in desk packets. Next cycle run will confirm via logs.
-- ✅ ~~Ledger fix (manual):~~ Crane → recovering (broken leg, C83, remote voting, return C88). Osei → serious condition (C84, duties paused). Written to live sheet.
+- ✅ ~~Phase 22.2: Arc engine fix~~ — Root cause: creation writes "early", lifecycle expects "seed". One-line alias fix in arcLifecycleEngine.js. 111 arcs will unstick on next cycle run. S85.
+- ✅ ~~Phase 24 batch results~~ — All 3 specs reviewed, saved, and planned. Implementation plan at `docs/engine/PHASE_24_PLAN.md`. S85.
+- ✅ ~~T1-T2 micro-event rates~~ — Boosted: T1 0.8%→50%, T2 1.5%→25%, T3-T4 3%→10%. S85.
+- ✅ ~~Phase 22.1: CIVIC activation complete~~ — 41 civic citizens GAME→CIVIC on live sheet. S85.
+- ✅ ~~Phase 23.5: Agent output directories + memory~~ — All 22 agents have SKILL.md output dirs, all 24 have MEMORY.md. S85.
+- **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validate all three fixes.
+- **Phase 24.1: MEDIA clock mode build** — Start with citizen migration (8 Echo journalists → MEDIA), then build generateMediaModeEvents.js. Plan at `docs/engine/PHASE_24_PLAN.md`.
+- **Supplemental strategy for C87** — World-building supplementals to establish 2041 Oakland texture. Housing, OARI, labor, culture angles. Notes in NOTES_TO_SELF.md.
 - **Supermemory ingest retry** — E86 ingest failed (quota exceeded). Retry when service is back.
-- ✅ ~~Dashboard a11y fixes~~ — `aria-label` added to 8 icon-only buttons (search, menu, clear, close, 6 nav buttons). 78 `text-neutral-600` instances bumped to `text-neutral-500` for WCAG AA contrast compliance. S83.
-- ✅ ~~Dashboard bug sweep~~ — 9 bugs fixed S84: edition heading parser (## support), search overlay escape/close, sports multi-team digests, editorial notes rendering, status ticker, subtitle parsing. Also fixed: all E86 articles now populate (were invisible due to ## format).
-- ✅ ~~Desk packet evening context~~ — buildDeskPackets v2.2: Media_Ledger fetch, evening context builder, civic events from LifeHistory_Log, arc-citizen links. S84.
-- ✅ ~~Micro-event tier fix~~ — generateGenericCitizenMicroEvent v2.5: tier 1-2 changed from hard exclusion to 0.8%/1.5% probability. S84.
-- ✅ ~~Supermemory hooks disabled~~ — Auto-save hooks emptied to reduce token waste. Claude-mem handles cross-session memory. Manual /super-save still available. S84.
-- **Phase 24 batch jobs** — 3 planning tasks queued: MEDIA clock mode spec, event cap audit, context-aware event inputs. Check results next session.
-- **Phase 24: Citizen Life Engine** — MEDIA clock mode, tier 1-2 event caps, context-aware life events, daily sim trigger. Rollout plan entry added S84. Build starts after batch results reviewed.
 - **Dashboard bugs #10/#11** — Mags Corliss card inconsistency + Deacon Seymour missing Oakland label. Data-level issues on Simulation_Ledger, not frontend code.
 
 ---

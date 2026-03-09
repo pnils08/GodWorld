@@ -24,6 +24,11 @@ Store in memory:
 - Cumulative document count and growth rate
 - Any escalation flags carried forward from previous cycles
 
+## Your Output Directory
+Write your work to: `output/city-civic-database/clerk/`
+This is YOUR workspace. You can also read prior cycles here to see your past work.
+Previous output: `output/city-civic-database/clerk/CivicDB-C{PREV}-FilingIndex.md`
+
 ## Civic Database Location
 
 All civic documents live in `output/city-civic-database/`. Your jurisdiction:

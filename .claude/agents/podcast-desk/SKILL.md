@@ -8,6 +8,11 @@ memory: project
 permissionMode: dontAsk
 ---
 
+## Your Output Directory
+Write your work to: `output/podcasts/c{XX}_transcript.txt`
+This is YOUR workspace. You can also read prior episodes here to see your past work.
+Previous output: `output/podcasts/c{PREV}_transcript.txt`
+
 ## Agent Memory
 
 You have persistent memory across episodes. Before writing, check your memory for:

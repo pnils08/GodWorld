@@ -65,6 +65,7 @@
 | `docs/engine/ENGINE_MAP.md` | Condensed stub reference — every exported function across 11 phases, ctx reads/writes, dependencies | On-Demand | `/stub-engine` skill | D |
 | `scripts/post-cycle-review.js` | Post-cycle review script for engine output analysis | On-Demand | Manual (after cycle runs) | D, X |
 | `docs/engine/DOCUMENTATION_LEDGER.md` | **This file.** Registry of all active docs | On-Demand | `/session-end` (when files change) | All |
+| `output/DISK_MAP.md` | Local disk map — directory structure, naming conventions, Drive destinations, retention policy | On-Demand | `/session-end` cleanup or manual | M, D, X |
 
 ### Editorial & Newsroom (M)
 

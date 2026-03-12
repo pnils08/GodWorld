@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 86 (2026-03-09) — Supplemental strategy overhaul, housing market C86 published, naming convention fix (editionParser slug), Drive OAuth refreshed.
+**Last Updated:** Session 87 (2026-03-11) — Food scene supplemental C86 published, intake pipeline made mandatory in skills, canon conflict fixes, Moltbook post.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -35,7 +35,9 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Housing market supplemental C86~~ — Published, Drive uploaded, Supermemory ingested. New canon: 2 agencies, 3 realtors, 1 buyer. S86.
 - ✅ ~~Naming convention fix~~ — editionParser derives slug from filename. Photo/PDF generators use slug for output paths. S86.
 - **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage. Template v2.0 and SKILL.md updated S86.
-- **Intake new canon from housing supplemental** — 2 agencies to Business_Ledger, 3 realtors + 1 buyer to Simulation_Ledger. Kevin Nelson LifeHistory update.
+- ✅ ~~Food scene supplemental C86~~ — Published, Drive uploaded, Supermemory ingested, intake run. 7 new citizens, 8 venue textures. Mara: A (best supplemental yet). S87.
+- ✅ ~~Intake pipeline made mandatory~~ — write-supplemental and write-edition SKILL.md updated with dotenv fix and full 3-step intake pipeline. S87.
+- ✅ ~~Intake new canon from housing supplemental~~ — 2 agencies to Business_Ledger, 3 realtors + 1 buyer to Simulation_Ledger. Kevin Nelson LifeHistory update.
 - **Disk organization audit** — Batch job submitted S86. Review results next session. Clean up output directories.
 - **Batch MCP certifi fix** — Broken venv at ~/.cache/uv/environments-v2/claude-batch-mcp-*. Needs deletion + rebuild.
 - **Dashboard bugs #10/#11** — Mags Corliss card inconsistency + Deacon Seymour missing Oakland label. Data-level issues on Simulation_Ledger, not frontend code.

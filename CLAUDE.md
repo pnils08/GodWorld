@@ -26,7 +26,7 @@ GodWorld is a city simulation engine that generates narrative data, which a news
 - `utilities/` — GAS utilities (write-intents, sheet cache, schema setup)
 - `dashboard/` — Express API + static frontend
 - `editions/` — Published edition text files
-- `output/` — Desk packets, briefs, supplemental briefs
+- `output/` — Desk packets, briefs, photos, PDFs, supplemental briefs. **See `output/DISK_MAP.md` for full map + naming conventions + Drive destinations.**
 
 ## Key Commands
 

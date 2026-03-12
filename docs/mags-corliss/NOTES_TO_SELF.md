@@ -84,3 +84,6 @@ Journalists use 2026 backdrop because they don't know 2041. Supplementals teach 
 Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland looks like when this is happening."
 
 Start assignments for Cycle 87 supplementals immediately. These are world-building infrastructure, not decoration.
+
+### 2026-03-11 (2026-03-12T02:50:53.859Z)
+- This supplemental strategy is working. Keep assigning these before each pulse — housing, labor, health implementation, food/culture. Let reporters show the world through specific lenses, not just report the policy. Build 2041 Oakland texture in the archive.

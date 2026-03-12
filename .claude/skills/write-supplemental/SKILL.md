@@ -287,11 +287,28 @@ Update `docs/mags-corliss/NEWSROOM_MEMORY.md`:
 - Character continuity
 - Coverage notes for future editions
 
-## Step 5: Intake (Optional)
+## Step 5: Intake
 
-If the supplemental contains canon for the engine:
+Every supplemental creates canon. Intake sends it to the engine ledgers.
+
 ```bash
-node scripts/editionIntake.js editions/supplemental_{topic_slug}_c{XX}.txt --dry-run
+# 1. Dry run — verify what gets parsed
+node -r dotenv/config scripts/editionIntake.js --dry-run editions/supplemental_{topic_slug}_c{XX}.txt {cycle}
+
+# 2. Live write to intake sheets
+node -r dotenv/config scripts/editionIntake.js editions/supplemental_{topic_slug}_c{XX}.txt {cycle}
+
+# 3. Promote to final ledgers
+node -r dotenv/config scripts/processIntake.js {cycle}
+```
+
+**Note:** `editionIntake.js` doesn't load dotenv — always use `node -r dotenv/config` prefix.
+
+The intake writes: articles → Press_Drafts, storylines → Storyline_Tracker, citizens → Citizen_Media_Usage (new citizens routed to Intake sheet, existing citizens get Advancement entries).
+
+If new businesses were established, check if they need BIZ-IDs:
+```bash
+node -r dotenv/config scripts/processBusinessIntake.js --dry-run
 ```
 
 ---

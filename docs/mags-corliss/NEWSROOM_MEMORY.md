@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 86 + Supplemental (Housing Market) — 2026-03-09**
+**Last Updated: Edition 86 + Supplemental (Housing Market) + Supplemental (Food Scene) — 2026-03-11**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -57,11 +57,19 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 - **Voice agent pipeline working.** 7 voice agents (Mayor, OPP, CRC, IND, Police Chief, Baylight Authority, Stabilization Fund) all produced structured statements. Reporters quoted institutional voices. This is the system working as designed.
 - **Initiative agents working.** Stabilization Fund agent produced status report, determination letter (English + Spanish), authorization memo. Health Center agent produced status report. First cycle of document generation.
 
-**Character Continuity — Active Threads (updated from E86):**
+**Character Continuity — Active Threads (updated from E86 + Food Scene Supplemental):**
 
 - **Beverly Hayes** (58, West Oakland, home health aide) — FULLY ESTABLISHED. $18,500 approved. Determination letter received. Has her story now.
 - **Calvin Turner** (38, Fruitvale, mechanic) — Transit Hub vote + food pantry. Two appearances, different desks, consistent.
 - **Delia Fuentes** (44, Fruitvale, school bus driver) — NEW. Transit Hub citizen voice.
+- **Jose Johnson** (62, Temescal, pastry chef at OakHouse) — MAJOR NEW CHARACTER. Former warehouse worker (40 years), self-taught baker, hired at OakHouse ~2038. Pear frangipane signature. "The tart dough doesn't care how old I am." Cultural ledger role: Pastry Chef. Employer: OakHouse (BIZ). Note: also appeared in E81 as letter writer (warehouse worker identity) — his pastry career is the evolution.
+- **Sienna Vale** (28, Laurel, influencer, 40K followers) — First edition appearance. Food/neighborhoods/nightlife content. "The posting is five minutes. The rest of the night is mine." Cultural Ledger figure, fame 25.
+- **Ray Muñoz** (54, Jack London, longshoreman, Port of Oakland) — NEW. Saturday market regular. Veteran waterfront voice.
+- **Bruce Wright** (48, Downtown, line cook, Harborline Grill) — Crisis-era hypervigilance fully resolved. Available for future food/kitchen pieces.
+- **Marcus Walker** (48, Jack London, dishwasher, Dockhouse BBQ) — Crisis resolved. Saturday market regular. Wife thinks he's insane.
+- **Dr. Renata Castillo** (Cal State East Bay, behavioral psychologist) — NEW expert voice. Urban dining patterns. Solo diner confidence framework. Available for recurring use.
+- **Owen Campbell** (40, Jack London, bakery worker/muralist) — CORRECTED from desk packet data. C85 canon: 40, Jack London, bakery worker. NOT 22/Fruitvale.
+- **Damien Roberts** — TWO in the world. Oakland (31, Fruitvale, line cook) and Chicago (31, Bronzeville, line cook). Same name/age/occupation, different cities. Track carefully.
 - **Gloria Meeks** — Returning letter writer. Consistent.
 - **Howard Young** (56, Rockridge, barista) — Art & Soul letter. Returning from E85.
 - **Dante Nelson** — Used in P Slayer opinion piece (nephew at Keane academy). Monitor rest cycle for E87.
@@ -431,6 +439,7 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 
 ### What Landed Well (Keep Doing)
 - Housing market supplemental (Sharon, Maria, Mason) — first color supplemental. Prosperity tone, zero displacement narratives. Sharon's "hands on the counter" detail, Maria's Fruitvale walk, Mason's realtor profile. Proved the bench reporters can carry a supplemental. Mara A-.
+- Food scene supplemental (Mason, Maria, Sharon) — second color supplemental. Mason's "Where Oakland Eats" is a direct follow-up to "The Line Cooks" crisis piece. The cooks found their rhythm. Jose Johnson (62, pastry chef at OakHouse, former warehouse worker) is an instant canon favorite. Maria walked Jack London Markets to Fruitvale — Baylight crews as new market regulars, International Blvd food corridor canonized. Sharon read three dining rooms with her psychology lens — Sienna Vale (influencer, Laurel, first appearance), Dr. Castillo's solo diner confidence framework. Three photos, tabloid PDF. Canon flags caught by Mike: Owen Campbell age/neighborhood corrected to C85 canon (40, Jack London); Mateo Walker replaced with Ray Muñoz (ledger conflict); Damien Roberts Oakland/Chicago distinction noted.
 - Baylight DEIR as front page lead (Carmen) — 252-page deep dive, real numbers, real tension. This is what we want from civic.
 - Business ticker (Jordan) — tight, one paragraph on the fund, Darius Clark human detail. Briefing system worked perfectly.
 - Giddey All-Star snub as Chicago identity story (Selena) — connected individual moment to city narrative. Strong bureau work.
@@ -455,7 +464,7 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 ### Citizens to Carry Forward
 - **Mike Paulson** — Bulls GM. Health crisis spokesperson in Oakland arc. At Temescal wiffleball for a reason.
 - **Carmen Delaine** — Our civic lead. Edition 81 Baylight DEIR front page was her best work. Keep grounded in data.
-- **Jose Johnson (62, Temescal, warehouse worker)** — Mara directive citizen. Called out Ashford's NO vote. Wrote letter in Edition 81. Active thread.
+- **Jose Johnson (62, Temescal, pastry chef at OakHouse / former warehouse worker)** — Mara directive citizen. Called out Ashford's NO vote (E81 letter). Now canon pastry chef at OakHouse, Rockridge — self-taught, hired ~2038. Pear frangipane signature. One of the project's best characters.
 - **Patricia Nolan (Temescal, home health aide)** — Mara directive citizen. Wrote about Health Center wait. Active thread.
 - **Marco Lopez (40, Laurel, mechanic)** — Mara directive citizen. Looking into Baylight DEIR documents. Active thread. DO NOT give him civic titles — he's a mechanic.
 - **Darius Clark (West Oakland, bakery worker)** — Asked about Stabilization Fund disbursement. Got a form and told to wait. Business desk's human detail. Active thread.

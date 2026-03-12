@@ -995,15 +995,28 @@ After Rhea's verification and any corrections, log the edition score to `output/
 
 The score log builds over time. After 5+ editions, the trend data becomes genuinely useful — showing which desks improve, which errors recur, and whether pipeline changes (voice files, claim decomposition, etc.) are working.
 
-## Step 6: Intake (Optional)
-Ask if the user wants to run the intake pipeline now:
+## Step 6: Intake
+
+Every edition creates canon. Intake sends it to the engine ledgers. Run after every published edition.
+
+```bash
+# 1. Dry run — verify what gets parsed
+node -r dotenv/config scripts/editionIntake.js --dry-run editions/cycle_pulse_edition_{XX}.txt {cycle}
+
+# 2. Live write to intake sheets
+node -r dotenv/config scripts/editionIntake.js editions/cycle_pulse_edition_{XX}.txt {cycle}
+
+# 3. Promote to final ledgers
+node -r dotenv/config scripts/processIntake.js {cycle}
 ```
-node scripts/editionIntake.js editions/cycle_pulse_edition_{XX}.txt --dry-run
-```
-If dry-run looks good:
-```
-node scripts/editionIntake.js editions/cycle_pulse_edition_{XX}.txt
-node scripts/processIntake.js [cycle]
+
+**Note:** `editionIntake.js` doesn't load dotenv — always use `node -r dotenv/config` prefix.
+
+The intake writes: articles → Press_Drafts, storylines → Storyline_Tracker, citizens → Citizen_Media_Usage (new citizens routed to Intake sheet, existing citizens get Advancement entries).
+
+If new businesses were established (Business Ticker or supplemental canon), check:
+```bash
+node -r dotenv/config scripts/processBusinessIntake.js --dry-run
 ```
 
 ## Desk Summary

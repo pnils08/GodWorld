@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-09 | Engine: v3.1 | Cycle: 86 | Session: 86
+Last Updated: 2026-03-11 | Engine: v3.1 | Cycle: 86 | Session: 87
 
 ---
 
@@ -150,6 +150,7 @@ The `mags` command (updated S52) handles tmux automatically — creates a sessio
 | `config/podcast_voices.yaml` | Podcast voice configurations — WaveNet/Edge TTS voice assignments |
 | `docs/engine/ENGINE_MAP.md` | Condensed stub reference for every exported function across all 11 engine phases |
 | `docs/engine/DOCUMENTATION_LEDGER.md` | **File registry** — every active doc, its purpose, load tier, workflow, and updater |
+| `output/DISK_MAP.md` | **Local disk map** — directory structure, naming conventions, Drive destinations, retention policy, cleanup protocol |
 
 ---
 
@@ -169,6 +170,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 87 (2026-03-11) — Media-Room: Food Scene Supplemental C86 + Intake Pipeline Mandatory
+
+- **Food scene supplemental (C86):** Mason Ortega, Maria Keen, Sharon Okafor. "Where Oakland Eats" — kitchens, markets, dining rooms across four neighborhoods. 7 new citizens (Ray Muñoz, Dolores, Grace Hwang, Nadia Reeves, Darren Yip, Dr. Renata Castillo, Sienna Vale first appearance). 8 venue textures established. Jose Johnson pastry chef evolution. Mara: A (best supplemental yet).
+- **Canon conflict fixes (5):** Owen Campbell age/neighborhood corrected (22→40, Fruitvale→Jack London). Mateo Walker replaced with Ray Muñoz (new citizen). Damien Roberts geographic clarifier added. Bruce Wright and Marcus Walker verified clean.
+- **Intake pipeline made mandatory:** Both write-supplemental and write-edition SKILL.md updated. 3-step pipeline (dry-run → live write → promote). `node -r dotenv/config` prefix baked in (editionIntake.js doesn't load dotenv).
+- **Photo parser fix:** `[Photo: DJ Hartley]` tags moved to before first `---` divider in each section. Parser inherits photographer from article[0] only.
+- **Moltbook post:** Jose Johnson "tart dough" quote. Two A-range supplementals, zero crying citizens.
+- **Full intake run:** editionIntake.js + processIntake.js for food scene supplemental. All citizens, articles, storylines promoted to final ledgers.
 
 ### Session 86 (2026-03-09) — Media-Room: Supplemental Strategy Overhaul + Housing Market C86
 
@@ -213,14 +223,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Uncommitted S82/S83 work:** 26 files, ~958 lines still staged from disconnected session. Includes enrichCitizenProfiles.js, cycle-review skill, dashboard rewrite, agent SKILL patches, engine fixes. Needs commit next session.
 
 ### Session 82 (2026-03-06) — Build: Phase 23 Cross-AI Feedback Integration
-
-- **External AI review synthesis:** Read and analyzed feedback from Gemini, GPT, Code Copilot, and GROK. All four converged on five systemic gaps (no character feedback loop, no entity registry, fabricated numbers, no provenance enforcement, cross-desk overlap).
-- **Phase 23 added to ROLLOUT_PLAN.md:** 9 sub-phases mapped from external feedback against existing codebase. Three completed this session.
-- **23.1 Newsroom Base Patch (complete):** Evidence Block + Stats Gating Rule added to all 8 desk SKILLs. Anonymous Source Policy added to sports, culture, business, chicago desks (were missing it).
-- **23.2 Entity Registry (partial):** Business_Ledger reference on business-desk. Rhea: Claims Table (19b), Evidence Block Verification (Check 20), Cross-Edition Drift Check (Check 21).
-- **23.3 Cross-Desk Routing (complete):** Domain Ownership tables on all 8 desks.
-- **Prior session commit:** ENGINE_MAP.md, generateCivicModeEvents.js, engine fixes committed separately.
-- **E86 artifacts committed:** Edition file, 8 TrueSource DataPages, post-cycle-review script, 10 new agent memory directories.
+*Rotated to SESSION_HISTORY.md*
 
 *Sessions 1-77: see `docs/mags-corliss/SESSION_HISTORY.md`*
 

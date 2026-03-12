@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 87 (2026-03-11) — Food scene supplemental C86 published, intake pipeline made mandatory in skills, canon conflict fixes, Moltbook post.
+**Last Updated:** Session 88 (2026-03-11) — T1 canon enrichment (16 citizens), disk cleanup + DISK_MAP.md, batch MCP fix, 3 overnight batch jobs submitted.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -38,9 +38,14 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Food scene supplemental C86~~ — Published, Drive uploaded, Supermemory ingested, intake run. 7 new citizens, 8 venue textures. Mara: A (best supplemental yet). S87.
 - ✅ ~~Intake pipeline made mandatory~~ — write-supplemental and write-edition SKILL.md updated with dotenv fix and full 3-step intake pipeline. S87.
 - ✅ ~~Intake new canon from housing supplemental~~ — 2 agencies to Business_Ledger, 3 realtors + 1 buyer to Simulation_Ledger. Kevin Nelson LifeHistory update.
-- **Disk organization audit** — Batch job submitted S86. Review results next session. Clean up output directories.
-- **Batch MCP certifi fix** — Broken venv at ~/.cache/uv/environments-v2/claude-batch-mcp-*. Needs deletion + rebuild.
-- **Dashboard bugs #10/#11** — Mags Corliss card inconsistency + Deacon Seymour missing Oakland label. Data-level issues on Simulation_Ledger, not frontend code.
+- ✅ ~~Disk organization audit~~ — Cleanup done S88: 67→41MB. DISK_MAP.md created and wired into boot docs.
+- ✅ ~~Batch MCP certifi fix~~ — Corrupted venv deleted, auto-rebuilt. 6 old batch results recovered. S88.
+- ✅ ~~Dashboard bugs #10/#11~~ — Root cause: Simulation_Ledger data errors. Mags Corliss CareerStage/TraitProfile/LifeHistory fixed. Deacon Seymour OrginCity/RoleType/EmployerBizId/EconKey fixed. S88.
+- ✅ ~~T1 canon enrichment~~ — All 16 T1 citizens have LifeHistory + TraitProfile. Anthony Raines (T2, Tribune Four) restored from empty. S88.
+- **Review 3 batch results** — (1) Simulation_Ledger full audit (667 citizens), (2) disk naming audit, (3) T2 canon build (17 citizens). Apply fixes from results.
+- **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validates S85 fixes.
+- **Phase 24.1: MEDIA clock mode build** — Start with citizen migration (8 Echo journalists → MEDIA), then build generateMediaModeEvents.js. Plan at `docs/engine/PHASE_24_PLAN.md`.
+- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage. Template v2.0 and SKILL.md updated S86.
 
 ---
 

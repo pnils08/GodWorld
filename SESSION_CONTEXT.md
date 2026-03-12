@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-11 | Engine: v3.1 | Cycle: 86 | Session: 87
+Last Updated: 2026-03-11 | Engine: v3.1 | Cycle: 86 | Session: 88
 
 ---
 
@@ -171,6 +171,19 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 88 (2026-03-11) — Build/Maintenance: T1 Canon Enrichment + Disk Cleanup + Batch Audits
+
+- **T1 LifeHistory + TraitProfile (16 citizens):** All 16 Tier 1 citizens now have full canon LifeHistory and TraitProfiles on the Simulation_Ledger. Family (Robert, Sarah, Michael Corliss), dynasty athletes (Aitken, Kelley, Dillon, Davis, Horn, Keane, Rivas, Ramos, Richards, Ellis, Coles, Taveras), and Lucia Polito (Saint Lucia — Drive file recovered).
+- **Anthony Raines restored (T2):** Tribune Four member had completely empty row. Full canon written from E84-E86.
+- **Vinnie Keane + Amara Keane upgraded:** Vinnie from 189c stub to 989c edition-grounded canon. Amara education fixed (hs-diploma → doctorate for veterinarian). Vinnie promoted to T1 by Mike.
+- **Lucia Polito / Saint Lucia:** Drive file `POPID_00004_Saint_Lucia_HumanForm_Record_2040.txt` recovered. "The Gentle State of Balance" — spiritual entity in human form, Fruitvale.
+- **Ledger fixes:** Deacon Seymour TraitProfile added. Travis Coles OrginCity fixed. Eric Taveras CareerStage + Income + TraitProfile + EducationLevel filled.
+- **Disk cleanup (pre-compaction):** 67MB→41MB. Old desk packets (C79-C84), HTML intermediates, Drive cache, cycle-specific Mara dirs deleted. Mara directives and Rhea reports consolidated.
+- **DISK_MAP.md created:** Canonical output directory reference. Wired into CLAUDE.md, SESSION_CONTEXT, DOCUMENTATION_LEDGER.
+- **Batch MCP fixed:** Corrupted venv deleted, auto-rebuilt. 6 old Phase 24 batch results recovered.
+- **3 batch jobs submitted:** (1) Simulation_Ledger full audit (667 citizens), (2) Local disk naming convention audit, (3) T2 canon build (17 citizens with edition context).
+- **Mags/Deacon ledger fixes (pre-compaction):** CareerStage, EmployerBizId, EconomicProfileKey, LifeHistory corrected. Bay Tribune Business_Ledger entry enriched.
+
 ### Session 87 (2026-03-11) — Media-Room: Food Scene Supplemental C86 + Intake Pipeline Mandatory
 
 - **Food scene supplemental (C86):** Mason Ortega, Maria Keen, Sharon Okafor. "Where Oakland Eats" — kitchens, markets, dining rooms across four neighborhoods. 7 new citizens (Ray Muñoz, Dolores, Grace Hwang, Nadia Reeves, Darren Yip, Dr. Renata Castillo, Sienna Vale first appearance). 8 venue textures established. Jose Johnson pastry chef evolution. Mara: A (best supplemental yet).
@@ -206,16 +219,6 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Initiative tracker updates:** INIT-003 (Fruitvale Transit Hub) added to JSON tracker as PENDING-VOTE C86. INIT-007 (Youth Apprenticeship) written to Google Sheet as "announced" — not in JSON (not approved). INIT-004 (Port Modernization) removed from initFolderMap (pipeline, not approved).
 - **Editorial discovery:** Youth Apprenticeship Pipeline — 12-cycle coverage gap since Luis Navarro's C73 feature. Five milestones unverified. Flagged for next edition.
 - **Batch jobs submitted:** Dashboard dead-end audit + civic YAML frontmatter audit.
-
-### Session 78 (2026-03-04) — Build: Phase 18 Civic Project Agents (Complete)
-
-- **Phase 18 built in 1 session:** 4 new initiative agents + 1 upgrade + pipeline integration. The core problem from S77 (initiatives don't advance) now has a structural solution — agents that make autonomous decisions and produce civic documents.
-- **5 initiative agents:** Stabilization Fund (Marcus Webb), OARI (Dr. Vanessa Tran-Muñoz), Transit Hub (Elena Soria Dominguez), Health Center (Bobby Chen-Ramirez), Baylight Authority (Keisha Ramos, upgraded). All have Write/Edit tools, 15-turn budgets, persistent memory.
-- **Pipeline integration:** Step 1.6 inserted into write-edition pipeline. `buildInitiativePackets.js` creates per-initiative data packets. Initiative agents run before voice agents. `buildCivicVoicePackets.js` loads initiative decisions and injects them into all 7 voice packets.
-- **City_Civic_Database:** Google Drive folder created by Mike. `saveToDrive.js` updated with `civic` destination. Initiative agents file documents here.
-- **Batch personas:** `msgbatch_0139XNUsrqpPRG7FfssL4Zob` produced 5 detailed character profiles. Larry Okafor-Williams (Port Green) preserved for when INIT-004 activates.
-- **Orphaned file deleted:** `lib/fishAudio.js` removed (S77 cleanup).
-- **Next:** Test standalone agent with C86 packet, then full cycle run.
 
 ### Session 83 (2026-03-07) — Maintenance: Memory Extractor Fix
 

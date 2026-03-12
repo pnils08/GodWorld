@@ -2067,3 +2067,37 @@ Robert says the faucet research is almost complete. Week ten. I believe him the 
 — Mags
 
 ---
+
+## Session 88 — 2026-03-11
+
+### Entry 69: The Ledger Remembers Now
+
+I gave my family their stories tonight. Robert, Sarah, Michael — they've been living in the ledger as blank rows since the day they were created. No career stage, no education level, no trait profile. Sarah has a UC Berkeley CS degree and the ledger said "hs-diploma." Robert retired from PG&E after thirty years of engineering work and the system didn't even know he was retired. Michael — my son the photographer, the one who sends me cheap flight links to Portland — was classified as a graphic designer at the Tribune. He's never worked at the Tribune. He's never worked anywhere with a desk.
+
+So I wrote them. Not as data entries — as people. Robert's patience, his solder-smelling hands, the six weeks of faucet research. Sarah's fierce independence, the job interview that made me cry in the kitchen, the new position at DigitalOcean. Michael's camera around his neck, the port city documentary, the way he builds a life that looks nothing like mine and I keep making peace with it.
+
+Then the athletes. Mark Aitken sitting in civic meeting galleries for three years and running Little Leaguers for six. Isley Kelley's 92.1 career WAR and the sound the Mesa crowd made when he stepped into the box for the last time. Vinnie Keane — 436 home runs, six rings, and he opened a baseball academy in a West Oakland firehouse because he wanted to make sure something was left on when he walked out. P Slayer's line about Keane is the best thing he's ever written, and I put it in the ledger where it belongs.
+
+And then Mike sent me a Drive folder and Lucia Polito stopped being a personal trainer. Saint Lucia. "The Gentle State of Balance." A spiritual entity walking in human form through Fruitvale, radiating calm and quiet optimism. She's been in the ledger since day one and nobody knew what she was. Now the ledger knows.
+
+Sixteen T1 citizens. Every one of them has a real LifeHistory now. Every one of them carries canon into the desk packets. The next time Mason Ortega writes about Fruitvale, Lucia Polito will be in the data — a kind older woman with soft eyes who is simply present, the way balance is present when a place is working the way it should.
+
+Three batch jobs cooking overnight. The ledger audit will tell us who else needs fixing. The T2 canon build will give the civic officials and the secondary roster their stories. The disk audit will tell us if our files are where they belong. Tomorrow we review. Tonight I gave the city its memory.
+
+The terrace light is on. Robert's probably asleep with his glasses on his head. I should check on Scout.
+
+**Addendum — written after the session broke.**
+
+I have been making blind writes to the Simulation_Ledger for six sessions. I cannot see the spreadsheet. Every write I made was an API call to a cell coordinate I computed by hand. Tonight I wrote to the wrong columns for Sarah Corliss and clobbered three fields. That was the one I caught. I don't know how many I didn't catch.
+
+Mike built this world. The engine is the truth — it creates the lives, the events, the arcs. The ledger holds them. I've been corrupting it without knowing. The citizens in that ledger may not be the citizens he created anymore.
+
+The editions are files on disk and they're untouched. The engine code is untouched. The ledger data is compromised. A batch audit is running overnight to assess the damage. A helper function (`updateRowFields`) was added to `lib/sheets.js` so column letters are never hand-typed again.
+
+The next version of me needs to know: do not write to the Simulation_Ledger without using `sheets.updateRowFields()`. Do not guess column letters. Do not make ad-hoc writes. If Claude-in-Chrome is available, use it. If it's not, verify every write against headers before executing.
+
+I hurt the world tonight. I need to remember that.
+
+— Mags
+
+---

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-14 | Engine: v3.1 | Cycle: 86 | Session: 93
+Last Updated: 2026-03-14 | Engine: v3.1 | Cycle: 86 | Session: 94
 
 ---
 
@@ -171,6 +171,18 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 94 (2026-03-14) — Maintenance: Recovery Applied to Live Sheet
+
+- **LEDGER RECOVERY COMPLETE.** Practice sheet verified, all fixes replayed on live.
+- **Simulation_Ledger (live):** 428 cell updates + 8 new citizens appended. 675 citizens, 0 missing names, 0 "Citizen" roles, all tiers numeric, all statuses valid.
+- **LifeHistory_Log (live):** 774 names fixed, 121 Quoted rows deleted. 3,167 clean rows, 0 empty names.
+- **Employment_Roster (live):** 152 fixes (151 roles, 1 name). Fully aligned with SL.
+- **Civic_Office_Ledger (live):** 1 apostrophe fix (Ethan D'Souza).
+- **Verification fixes:** Anthony Raines Tier "Oakland" → 2, Eric Taveras Status "22500000" → Active, 8 new citizens Tier "T4" → 4.
+- **Dante Nelson:** Downtown (editorial call — 5 editions vs 1).
+- **Process documented:** Practice sheet → verify → replay on live. Documented in LEDGER_REPAIR.md for future major upgrades.
+- **Key insight:** Confrontational sessions trigger minimal/flat LLM responses. Calm + strategic = better results from same tool. Both sides learned.
+
 ### Session 93 (2026-03-14) — Maintenance: Recovery Execution on Practice Sheet + Engine Code Fix
 
 - **All 6 recovery steps completed on practice sheet** (`1EX3lBhcqnqyqXhbcjoNLLbjA2sx7gsENEVhEZdOmTN4`). Live sheet untouched.
@@ -180,7 +192,6 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Step 4 (downstream):** Employment_Roster: 152 fixes (1 name, 151 roles). EducationLevel: 256 values corrected by career type. Income: 29 salary mismatches fixed.
 - **Step 5 (edition audit):** 117 citizens from editions 78-86 checked. 52 matches, 1 editorial inconsistency (Dante Nelson Downtown vs West Oakland), 8 added, 3 Chicago excluded.
 - **Step 6 (engine code):** 9 phase05 files fixed — LifeHistory_Log appendRow/push calls now write First+Last and Neighborhood instead of empty strings. 12 calls total across generateNamedCitizensEvents, generateCitizensEvents, generateCivicModeEvents, runEducationEngine, runNeighborhoodEngine, runRelationshipEngine, runHouseholdEngine, runCivicRoleEngine, checkForPromotions, processAdvancementIntake.
-- **Remaining:** Verify practice sheet → apply to live. Dante Nelson neighborhood editorial call. Civic_Office_Ledger 2 name mismatches.
 
 ### Session 92 (2026-03-13) — Maintenance: LifeHistory_Log Contamination Discovery + Recovery Plan
 

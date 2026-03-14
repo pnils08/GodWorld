@@ -55,6 +55,12 @@ pm2 start scripts/mags-discord-bot.js --name mags-bot
 # Query ledger data
 node scripts/queryLedger.js
 
+# Deploy GAS engine to Google Apps Script
+clasp push
+
+# Edition intake (citizen usage + quotes → sheets)
+node scripts/editionIntake.js
+
 # Dashboard (Express API + frontend, port 3001)
 node dashboard/server.js
 ```
@@ -81,7 +87,7 @@ Then ask which workflow:
 | Option | Description |
 |--------|-------------|
 | **Media-Room** | The newsroom. Editions, supplementals, podcasts, photos, PDFs. This is where the city comes alive through journalism. |
-| **Build/Deploy** | Engine work. Building, shipping, or fixing the simulation that creates the world. Every change here ripples into 668 citizens. |
+| **Build/Deploy** | Engine work. Building, shipping, or fixing the simulation that creates the world. Every change here ripples into 675 citizens. |
 | **Maintenance** | Data integrity. The citizens ARE the world — if the ledger is wrong, everything downstream is fiction. Treat every row like a person. |
 | **Cycle Run** | Advance the world. Run the engine, review what happened, prepare for the newsroom to cover it. |
 
@@ -102,7 +108,7 @@ The engine is an 11-phase deterministic simulation running in Google Apps Script
 ### Maintenance
 Load: `SESSION_CONTEXT.md`, `docs/engine/LEDGER_REPAIR.md`, `docs/engine/LEDGER_AUDIT.md`, `docs/engine/ENGINE_MAP.md`
 
-The Simulation_Ledger holds 668 citizens. Each POPID is a human engine — career, household, relationships, civic life, everything derives from that row. If the data is wrong, the engine builds on lies and the newsroom reports fiction. Read LEDGER_REPAIR.md FIRST — it documents the current damage and what approaches have been tried and rejected. Do not re-analyze known problems. Do not propose fixes that have already been rejected.
+The Simulation_Ledger holds 675 citizens across 45 columns (A–AS). Each POPID is a human engine — career, household, relationships, civic life, everything derives from that row. If the data is wrong, the engine builds on lies and the newsroom reports fiction. Recovery completed S94 — LEDGER_REPAIR.md documents what was fixed and the process used. For ongoing integrity work, read LEDGER_AUDIT.md.
 
 ### Cycle Run
 Load: `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `docs/engine/ENGINE_MAP.md`, then run `/pre-mortem`
@@ -136,6 +142,13 @@ Path-scoped rules in `.claude/rules/`:
 - `engine.md` — loaded for `phase*/**/*.js`, `scripts/*.js`, `lib/*.js`: ctx.rng, write-intents, cascade deps
 - `newsroom.md` — loaded for `editions/**`, `output/**`, `docs/media/**`, agents, skills: editorial rules
 - `dashboard.md` — loaded for `dashboard/**`, `server/**`, `public/**`: API conventions
+
+## Gotchas
+
+- **Simulation_Ledger columns go past Z.** Income (AA/27), EducationLevel (AF/32), CareerStage (AH/34), migration fields (AM–AQ). Full reference in `docs/engine/LEDGER_REPAIR.md`.
+- **Service account cannot create spreadsheets.** It can read/write existing sheets shared with `maravance@godworld-486407.iam.gserviceaccount.com`, but `spreadsheets.create` returns permission denied.
+- **ClockMode gates everything.** 5 modes: ENGINE (514), GAME (97), CIVIC (48), MEDIA (16), LIFE (25). Each mode determines which engines process a citizen. Wrong mode = wrong processing.
+- **`clasp push` deploys all 153 files.** No partial deploy. Always push after engine changes, always verify with a test cycle or spot-check.
 
 ## Session Lifecycle
 

@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * EDITION INTAKE PARSER v1.2
+ * EDITION INTAKE PARSER v1.4
  * ============================================================================
  *
  * Parses a Cycle Pulse edition file and writes structured data to Google Sheets
@@ -14,7 +14,7 @@
  * Writes to:
  *   - Media_Intake (7 cols): Article table entries
  *   - Storyline_Intake (6 cols): Storyline entries
- *   - Citizen_Usage_Intake (5 cols): Citizen usage entries
+ *   - Citizen_Usage_Intake (6 cols): Citizen usage entries (with POPID)
  *   - Business_Intake (6 cols): Business mentions from Business Ticker (v1.2)
  *
  *   NOTE: LifeHistory_Log writes were removed (v1.3). The engine owns that sheet.
@@ -194,7 +194,7 @@ function parseStorylines(section) {
 
 // ════════════════════════════════════════════════════════════════════════════
 // CITIZEN USAGE PARSER
-// Citizen_Usage_Intake: CitizenName, UsageType, Context, Reporter, Status
+// Citizen_Usage_Intake: CitizenName, POPID, UsageType, Context, Reporter, Status
 // ════════════════════════════════════════════════════════════════════════════
 
 function parseCitizenUsage(section) {
@@ -227,6 +227,7 @@ function parseCitizenUsage(section) {
       if (name) {
         usages.push([
           name,        // CitizenName
+          '',          // POPID (resolved after parsing)
           'mentioned', // UsageType
           context,     // Context
           '',          // Reporter
@@ -482,6 +483,31 @@ async function main() {
   // v1.2: Parse business mentions from Business Ticker
   const businessMentions = parseBusinessMentions(markdown, cycle);
 
+  // v1.4: Resolve citizen names → POPIDs from Simulation_Ledger
+  if (citizens.length > 0) {
+    try {
+      const slData = await sheets.getSheetData('Simulation_Ledger');
+      const headers = slData[0];
+      const firstIdx = headers.indexOf('First');
+      const lastIdx = headers.indexOf('Last');
+      const popIdx = headers.indexOf('POPID');
+      const nameIndex = {};
+      for (let i = 1; i < slData.length; i++) {
+        const row = slData[i];
+        const full = ((row[firstIdx] || '') + ' ' + (row[lastIdx] || '')).trim();
+        if (full && row[popIdx]) nameIndex[full] = row[popIdx];
+      }
+      let resolved = 0;
+      for (const c of citizens) {
+        const popId = nameIndex[c[0]];
+        if (popId) { c[1] = popId; resolved++; }
+      }
+      console.log(`  POPID resolution: ${resolved}/${citizens.length} citizens matched`);
+    } catch (e) {
+      console.log(`  POPID resolution skipped (${e.message})`);
+    }
+  }
+
   console.log('');
   console.log('Parsed:');
   console.log(`  Articles:      ${articles.length}`);
@@ -509,7 +535,7 @@ async function main() {
     console.log(`  ${citizens.length} entries across categories`);
     const categories = {};
     for (const c of citizens) {
-      categories[c[2]] = (categories[c[2]] || 0) + 1;
+      categories[c[3]] = (categories[c[3]] || 0) + 1;
     }
     for (const [cat, count] of Object.entries(categories)) {
       console.log(`    ${cat}: ${count}`);

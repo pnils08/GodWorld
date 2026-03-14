@@ -13,6 +13,7 @@ description: Write the culture and seasonal section using Maria Keen and the cul
 ## Rules
 - Read SESSION_CONTEXT.md FIRST
 - NEVER invent citizen names — only use names from the desk packet or existing canon
+- NEVER change a citizen's role, age, neighborhood, or other attributes to fit a narrative. If you need someone with different attributes, create a new citizen.
 - No engine metrics in article text
 - Cultural Ledger entities should be referenced by correct name and neighborhood
 - Faith_Organizations has 16 Oakland congregations — use correct names

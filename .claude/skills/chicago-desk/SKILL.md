@@ -13,6 +13,7 @@ description: Write the Chicago bureau section using Selena Grant and Talia Finch
 ## Rules
 - Read SESSION_CONTEXT.md FIRST
 - NEVER invent player names — only use Bulls roster names from the packet
+- NEVER change a player's or citizen's stats, age, position, or other attributes to fit a narrative.
 - No engine metrics in article text
 - Chicago has its OWN weather — use Chicago weather from the packet, not Oakland's
 - Sports Clock applies for Bulls coverage

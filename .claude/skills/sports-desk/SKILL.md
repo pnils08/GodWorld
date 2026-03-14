@@ -13,6 +13,7 @@ description: Write the Oakland sports section using P Slayer, Anthony, and Hal R
 ## Rules
 - Read SESSION_CONTEXT.md FIRST
 - NEVER invent player names — only use names from the A's/Warriors rosters in the packet
+- NEVER change a player's or citizen's stats, age, position, or other attributes to fit a narrative.
 - No engine metrics in article text
 - Verify all player names, positions, and records against Oakland_Sports_Feed in the packet
 - Sports Clock rules: A's and Warriors operate on real sports time (see TIME_CANON_ADDENDUM.md)

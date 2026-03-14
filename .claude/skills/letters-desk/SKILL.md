@@ -13,6 +13,7 @@ description: Write the letters to the editor section with citizen voices.
 ## Rules
 - Read SESSION_CONTEXT.md FIRST
 - NEVER invent citizen names for existing characters — but Letters CAN introduce new citizens
+- NEVER change an existing citizen's role, age, neighborhood, or other attributes to fit a narrative. If you need someone with different attributes, create a new citizen.
 - New citizens MUST have: Name, Age, Neighborhood, Occupation
 - Letters are first-person citizen voice — NOT journalist voice
 - No engine metrics

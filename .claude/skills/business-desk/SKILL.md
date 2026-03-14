@@ -13,6 +13,7 @@ description: Write the business ticker section using Jordan Velez.
 ## Rules
 - Read SESSION_CONTEXT.md FIRST
 - NEVER invent business names — use only businesses from the desk packet
+- NEVER change a citizen's role, age, neighborhood, or other attributes to fit a narrative. If you need someone with different attributes, create a new citizen.
 - No engine metrics in article text
 - Business Ticker has a specific format — follow it exactly
 

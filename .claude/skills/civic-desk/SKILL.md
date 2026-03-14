@@ -13,6 +13,7 @@ description: Write the civic affairs section for an edition using Carmen Delaine
 ## Rules
 - Read SESSION_CONTEXT.md FIRST
 - NEVER invent citizen names — only use names from the desk packet data or existing canon
+- NEVER change a citizen's role, age, neighborhood, or other attributes to fit a narrative. If you need someone with different attributes, create a new citizen.
 - No engine metrics in article text (no "tension score", "severity level", system counts)
 - Verify council members, vote positions against the canon reference in the packet
 - New citizens must be logged in the Citizen Usage Log with full details

@@ -470,27 +470,34 @@ function filterCulturalByDomain(entities, deskDomains) {
   });
 }
 
-function getInterviewCandidates(genericCitizens, neighborhoods, simLedgerIndex, bizIndex) {
+function getInterviewCandidates(simLedger, neighborhoods, bizIndex) {
   if (!neighborhoods || neighborhoods.length === 0) return [];
-  return genericCitizens.filter(function(c) {
-    return c.Status === 'Active' && neighborhoods.indexOf(c.Neighborhood) !== -1;
+  return simLedger.filter(function(c) {
+    var hood = c.Neighborhood || '';
+    var status = (c.Status || '').toLowerCase();
+    var clock = (c.ClockMode || '').toUpperCase();
+    return (status === 'active' || status === 'retired') &&
+           neighborhoods.indexOf(hood) !== -1 &&
+           clock === 'ENGINE'; // Only ENGINE citizens — not GAME (athletes) or CIVIC (officials)
   }).slice(0, 20).map(function(c) {
-    var fullName = (c.First + ' ' + c.Last).trim();
-    var ledgerData = simLedgerIndex ? simLedgerIndex[fullName] : null;
-    var income = ledgerData ? (parseFloat(ledgerData.Income) || 0) : 0;
-    var empBizId = ledgerData ? (ledgerData.EmployerBizId || '') : '';
+    var fullName = ((c.First || '') + ' ' + (c.Last || '')).trim();
+    var income = parseFloat(c.Income) || 0;
+    var empBizId = c.EmployerBizId || '';
     var empBiz = (bizIndex && empBizId) ? bizIndex[empBizId] : null;
+    var birthYear = parseInt(c.BirthYear) || 0;
+    var simYear = 2041; // current sim year
+    var age = birthYear > 0 ? simYear - birthYear : '';
     return {
       name: fullName,
-      age: c.Age,
+      popId: c.POPID,
+      age: age,
       neighborhood: c.Neighborhood,
-      occupation: c.Occupation,
-      roleType: ledgerData ? ledgerData.RoleType : (c.Occupation || ''),
+      role: c.RoleType,
+      tier: c.Tier,
       income: income,
       economicCategory: income >= 150000 ? 'high' : (income >= 75000 ? 'mid' : (income > 0 ? 'low' : 'unknown')),
       employerBizId: empBizId,
-      employerName: empBiz ? empBiz.Name : (empBizId === 'SELF_EMPLOYED' ? 'Self-Employed' : ''),
-      emergenceCount: c.EmergenceCount
+      employerName: empBiz ? empBiz.Name : (empBizId === 'SELF_EMPLOYED' ? 'Self-Employed' : '')
     };
   });
 }
@@ -1224,15 +1231,17 @@ function formatBondsForPacket(bonds) {
 function buildNeighborhoodCitizenIndex(simLedger) {
   var index = {};
   simLedger.forEach(function(c) {
-    var hood = c.Neighborhood || c.neighborhood || '';
-    var name = c.Name || c.CitizenName || '';
+    var hood = c.Neighborhood || '';
+    var first = c.First || '';
+    var last = c.Last || '';
+    var name = (first + ' ' + last).trim();
     if (!hood || !name) return;
     if (!index[hood]) index[hood] = [];
     index[hood].push({
       name: name,
-      popId: c.POP_ID || c.PopId || '',
+      popId: c.POPID || '',
       tier: c.Tier || '',
-      occupation: c.Occupation || c.Career || ''
+      occupation: c.RoleType || ''
     });
   });
   return index;
@@ -2042,7 +2051,7 @@ async function main() {
 
     // Get interview candidates from neighborhoods in this desk's data
     var neighborhoods = getDeskNeighborhoods(deskEvents, deskSeeds, deskArcs);
-    var candidates = getInterviewCandidates(genericCitizens, neighborhoods, simLedgerByName, bizByIdMap);
+    var candidates = getInterviewCandidates(simLedger, neighborhoods, bizByIdMap);
 
     // Get previous coverage + full reporter history
     var prevCoverage = extractPreviousCoverage(prevEdition, reporterNames);

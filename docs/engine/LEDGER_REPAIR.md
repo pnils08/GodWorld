@@ -33,7 +33,7 @@ In Session 68 (Feb 28, 2026), Phase 13 made mass changes to Simulation_Ledger vi
 ### Downstream Sheet Damage
 
 - **Employment_Roster:** 152 fixes applied on practice sheet (1 name, 151 roles)
-- **Civic_Office_Ledger:** 1 apostrophe fix applied (Ethan D'Souza). 1 remaining mismatch.
+- **Civic_Office_Ledger:** 1 apostrophe fix applied (Ethan D'Souza). All mismatches resolved (S94).
 - **Citizen_Media_Usage:** 392 entries with unverifiable names (no POPID column)
 - **Citizen_Usage_Intake:** Had no POPID column — fixed S94 (6-col format, 437/807 backfilled)
 
@@ -110,7 +110,7 @@ Removed LifeHistory_Log writes from `editionIntake.js` v1.3. `parseDirectQuotes`
 ### Step 5: Audit every edition — DONE (S93)
 Cross-referenced 117 citizens from editions 78-86 against practice ledger.
 - 52 exact matches
-- 1 editorial inconsistency: Dante Nelson — Downtown (C79-84) vs West Oakland (C86), needs editorial call
+- 1 editorial inconsistency: Dante Nelson — resolved to Downtown (5 editions vs 1, S94)
 - 8 Oakland citizens not on ledger → added (Step 3)
 - 3 Chicago citizens correctly excluded (don't belong on Simulation_Ledger)
 
@@ -173,9 +173,9 @@ Google Sheets API export does NOT support revision-specific downloads (tested �
 - **Simulation_Ledger:** 428 cell updates (248 EducationLevel, 137 RoleType, 21 Income, 20 Neighborhood, 1 Tier, 1 Status) + 8 new citizens appended (POP-00781–00788)
 - **LifeHistory_Log:** 774 names fixed, 121 Quoted intake rows deleted (3,288 → 3,167 rows)
 - **Employment_Roster:** 152 fixes (151 RoleType, 1 CitizenName)
-- **Civic_Office_Ledger:** 1 apostrophe fix (Ethan D'Souza)
+- **Civic_Office_Ledger:** All fixes applied (Ethan D'Souza apostrophe + remaining mismatch)
 - **Additional fixes found during verification:** Anthony Raines Tier "Oakland" → 2, Eric Taveras Status "22500000" → Active, 8 new citizens Tier "T4" → 4
-- **Dante Nelson:** Downtown (editorial call, 5 editions vs 1)
+- **Dante Nelson:** Neighborhood set to Downtown (5 editions confirmed)
 
 ### Live sheet post-recovery stats:
 - 675 citizens, 0 missing names, 0 "Citizen" roles

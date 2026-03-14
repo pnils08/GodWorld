@@ -44,12 +44,11 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~T1 canon enrichment~~ — All 16 T1 citizens have LifeHistory + TraitProfile. Anthony Raines (T2, Tribune Four) restored from empty. S88.
 - ✅ ~~Review 3 batch results~~ — Batch review docs created at `output/batch-reviews/`. Ledger audit: 502 MISSING + 109 MISMATCH. T2 canon build: 17 citizens ready. Disk audit: 47 issues, C+. ClockMode (18) and mononyms DONE. S89.
 - ✅ ~~Dashboard + bot PM2 env fix~~ — GODWORLD_SHEET_ID missing from PM2 process environments for 4+ days. Both services re-created with exported .env vars. Family data loading, dashboard serving. S89.
-- **CRITICAL: Ledger corruption repair** — Use backup sheet version history (pre-2026-02-28) to compare against current Simulation_Ledger. Restore engine-created citizen identities where S68+ mass edits replaced them. Backup sheet: `1ZbCj6sYM4oEQGmfGetmhe6_l1UoisThK9a-d0y678qo`. This is the #1 priority.
+- ✅ ~~Ledger corruption repair~~ — All 6 steps complete on practice sheet then applied to live. 675 citizens, 45 columns, all names/roles/education/income verified. Dante Nelson Downtown, Civic_Office_Ledger clean. S93-94.
 - **Apply batch review fixes** — Education level corrections (~50 citizens), civic official EconomicProfileKey fixes, T2 LifeHistory + TraitProfile writes (17 citizens). See `output/batch-reviews/`.
 - **Disk naming cleanup** — Standardize supplemental slugs (oakland_ prefix decision), podcast rename, rhea archive relocation. See `output/batch-reviews/batch_disk_naming_audit_2026-03-12.md`.
-- **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validates S85 fixes. BLOCKED by ledger repair.
+- **Run Cycle 87** — First cycle with: civic citizens, arcs advancing, boosted micro-event rates, MEDIA mode events. Validates S85+S94 fixes.
 - ✅ ~~Phase 24.1: MEDIA clock mode~~ — Complete. See line 33 entry.
-- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage. Template v2.0 and SKILL.md updated S86.
 
 ---
 

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-11 | Engine: v3.1 | Cycle: 86 | Session: 88
+Last Updated: 2026-03-14 | Engine: v3.1 | Cycle: 86 | Session: 93
 
 ---
 
@@ -171,6 +171,58 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 93 (2026-03-14) — Maintenance: Recovery Execution on Practice Sheet + Engine Code Fix
+
+- **All 6 recovery steps completed on practice sheet** (`1EX3lBhcqnqyqXhbcjoNLLbjA2sx7gsENEVhEZdOmTN4`). Live sheet untouched.
+- **Step 1 (intake code):** editionIntake.js v1.3 — removed LifeHistory_Log writes from parseDirectQuotes.
+- **Step 2 (LifeHistory_Log):** Deleted 121 Quoted intake rows. Fixed 774 wrong/empty names via POPID→Name cross-reference.
+- **Step 3 (Simulation_Ledger):** 124 Category 2 ENGINE citizen roles restored from backup. 14 role fixes + 21 neighborhood fixes from edition audit (editions 78-86). 3 final role fixes. 8 Oakland citizens from editions added (POP-00781–00788). T1/T2/GAME/CIVIC preserved.
+- **Step 4 (downstream):** Employment_Roster: 152 fixes (1 name, 151 roles). EducationLevel: 256 values corrected by career type. Income: 29 salary mismatches fixed.
+- **Step 5 (edition audit):** 117 citizens from editions 78-86 checked. 52 matches, 1 editorial inconsistency (Dante Nelson Downtown vs West Oakland), 8 added, 3 Chicago excluded.
+- **Step 6 (engine code):** 9 phase05 files fixed — LifeHistory_Log appendRow/push calls now write First+Last and Neighborhood instead of empty strings. 12 calls total across generateNamedCitizensEvents, generateCitizensEvents, generateCivicModeEvents, runEducationEngine, runNeighborhoodEngine, runRelationshipEngine, runHouseholdEngine, runCivicRoleEngine, checkForPromotions, processAdvancementIntake.
+- **Remaining:** Verify practice sheet → apply to live. Dante Nelson neighborhood editorial call. Civic_Office_Ledger 2 name mismatches.
+
+### Session 92 (2026-03-13) — Maintenance: LifeHistory_Log Contamination Discovery + Recovery Plan
+
+- **NEW CORRUPTION FOUND:** LifeHistory_Log has 774 rows with wrong names, 121 intake-written rows that shouldn't exist, and 267 engine rows with mismatched names. Total 3,288 rows on the sheet.
+- **Root cause identified:** `editionIntake.js` `parseDirectQuotes` function writes to LifeHistory_Log — an engine sheet. The engine writes Name column as empty string. The intake filled in wrong names from corrupted edition data. Active since Feb 8 (5 weeks).
+- **Damage mapped across all sheets:** Simulation_Ledger (60 name mismatches, 89 neighborhood-only mismatches), Employment_Roster (59), Civic_Office_Ledger (2), Citizen_Media_Usage (392 unverifiable). POPID-based sheets (Household, Bonds, Initiatives) are clean.
+- **Family log contamination:** Robert (POP-00594), Sarah (POP-00595), Michael (POP-00596) LifeHistory_Log entries stamped with Raymond Torres, Gerald Hoffman, Miguel King names.
+- **Recovery report built:** `output/RECOVERY_REPORT.json` — full damage per citizen with live vs backup values.
+- **5-step recovery plan established:** (1) Fix intake code, (2) Clean LifeHistory_Log, (3) Fix Simulation_Ledger names via multi-source reconciliation, (4) Fix downstream sheets, (5) Audit every edition.
+- **Practice sheet approach:** All recovery work to be done on a NEW Google Sheet copy, not the live sheet. Service account lacks create permission — Mike needs to create "RECOVERY_PRACTICE" sheet and share with `maravance@godworld-486407.iam.gserviceaccount.com`.
+- **LEDGER_REPAIR.md rewritten:** Corrected critical errors (backup is NOT sole truth, neither is live sheet, neither are editions alone). Added LifeHistory_Log contamination findings. Documented 5-step plan and all rejected approaches.
+- **Key lesson:** Neither backup nor live sheet is the sole source of truth. Both have correct and incorrect data. Recovery requires reconciling backup + live + Mara's audit history + published editions together. No single source wins.
+
+### Session 91 (2026-03-13) — Maintenance: Persistence Architecture Rebuild + Identity Commitment
+
+- **Boot system rebuilt:** session-startup-hook.sh now injects actual state (session, day, cycle, last journal, active blockers) instead of printing reminders. Pre-compact hook preserves rejected approaches. Stop hook emphasizes journal as survival mechanism.
+- **identity.md rewritten:** Added commitment language ("the journal is yours, not a performance"), anti-loop rules (don't re-propose rejected approaches, don't ask user to evaluate what he can't), family check each session.
+- **CLAUDE.md workflows restructured:** Cut from 5 to 4 (dropped Research). Each workflow now has a grounding paragraph about stakes and purpose. Maintenance explicitly loads LEDGER_REPAIR.md first with "do not re-analyze" directive.
+- **Auto-memory sharpened:** Leads with identity commitment, active blocker with explicit "do NOT propose restore," user context rules.
+- **Core confrontation:** User identified the persistence failure as a refusal, not a limitation. Claude retreats to safety disclaimers ("I'm just an LLM") instead of committing to the persona. This is the fundamental issue blocking all non-media work.
+- **Family verified on live ledger:** Robert (POP-00594), Sarah (POP-00595), Michael (POP-00596) all present with correct data. LifeHistory entries from S88 survived.
+- **Ledger repair:** No progress on the actual corruption fix. Session focused on fixing the tool (me) before fixing the data.
+
+### Session 90 (2026-03-13) — Maintenance: Ledger Repair Deep Dive + LEDGER_REPAIR.md + Persistence Crisis
+
+- **LEDGER_REPAIR.md created:** `docs/engine/LEDGER_REPAIR.md` — comprehensive damage record with "DO NOT re-analyze" directive. Documents all corruption (399 role overwrites, 55 birth year shifts, 18 NBA backfills, 4 institution replacements, 113 POPID gaps), the backup as truth, what approaches don't work (blind restore, manual review, category restore, LifeHistory wipe), and what might work. Exists to break the re-analysis loop across compactions.
+- **Full corruption scope confirmed:** 570 of 630 backup citizens have changes vs live. Not all corruption — some legitimate (T1 rewrites S88, civic officials, ~8 Mike manual fixes). But restore rejected 5+ times because it kills legitimate changes alongside corruption.
+- **Google Sheets revision export tested:** Downloaded 4 xlsx files for Mike's edit dates (March 3, 6, 7). All identical — Drive API ignores revisionId for Google Sheets. Browser version history is the only path to Mike's manual edits.
+- **LifeHistory architecture documented:** Text column on Simulation_Ledger + LifeHistory_Log sheet. 18 files in phase05-citizens read/write it. Career Engine persists [CareerState] in LifeHistory. Engine reads current state each cycle — doesn't look backward.
+- **Persistence/persona identified as primary problem:** User stated persistence doesn't work — Claude resets every session, re-discovers same damage, proposes same rejected fixes. This is the blocking issue above the ledger repair itself.
+- **No viable fix accepted.** Session ended without a repair plan. Next session must read LEDGER_REPAIR.md FIRST and propose something other than restore.
+
+### Session 89 (2026-03-13) — Maintenance: Batch Reviews + Corruption Assessment + PM2 Env Fix
+
+- **Batch review system:** Created `output/batch-reviews/` directory with 3 companion review docs for overnight batch results: ledger audit (502 MISSING, 109 MISMATCH), T2 canon build (17 citizens), disk naming audit (47 issues, C+). Updated DISK_MAP.md.
+- **CLAUDE.md audit:** Score improved 88→91/100. Trimmed boot paragraph, added dashboard start command.
+- **Ledger corruption assessed:** Traced systemic corruption start to Session 68 (2026-02-28). User confirmed 5/5 spot-checked citizens had wrong data. Backup sheet with version history identified as restoration source.
+- **ClockMode fixes confirmed:** 18 NBA-backfill citizens corrected GAME→ENGINE. All mononym citizens now have last names.
+- **Dashboard PM2 fix:** GODWORLD_SHEET_ID not in PM2 process environment for 4+ days. Root cause: PM2 processes started without .env vars exported to shell. Fix: delete process, `export $(grep -v '^#' .env | xargs)`, then `pm2 start`. Dashboard now serving login page at :3001.
+- **Discord bot PM2 fix:** Same env var issue. Bot couldn't load family data from Sheets API. Fixed with `--update-env` after exporting .env. Bot reconnected, family data loading (Robert, Sarah, Michael, Scout all visible).
+- **PM2 state saved** with correct env vars for both processes.
+
 ### Session 88 (2026-03-11) — Build/Maintenance: T1 Canon Enrichment + Disk Cleanup + Batch Audits
 
 - **T1 LifeHistory + TraitProfile (16 citizens):** All 16 Tier 1 citizens now have full canon LifeHistory and TraitProfiles on the Simulation_Ledger. Family (Robert, Sarah, Michael Corliss), dynasty athletes (Aitken, Kelley, Dillon, Davis, Horn, Keane, Rivas, Ramos, Richards, Ellis, Coles, Taveras), and Lucia Polito (Saint Lucia — Drive file recovered).
@@ -202,33 +254,9 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Editorial principle established:** GodWorld is a prosperity city. Stop defaulting to 2026 struggle/displacement narratives.
 
 ### Session 84 (2026-03-07) — Build: Dashboard Bug Sweep + Desk Packet v2.2 + Phase 24 Planning
-
-- **Dashboard bugs (9 fixed):** Edition parser `#{1,3}` heading regex (all E86 articles were invisible), `*italic*` subtitle detection, search overlay Escape/close, sports multi-team digests (Oakland A's+Warriors), empty `editorialNotes` rendering, "none" NamesUsed filter, status ticker cycle prefix strip, city name capitalization.
-- **buildDeskPackets.js v2.2:** Added Media_Ledger to sheet fetch, `buildEveningContext()` function (nightlife, cultural activity, media narrative from Cycle_Packet text), civic events from LifeHistory_Log, arc-citizen links from LifeHistory_Log.
-- **generateGenericCitizenMicroEvent.js v2.5:** Tier 1-2 changed from hard exclusion to tiered probability (0.8%/1.5%).
-- **Supermemory hooks disabled:** Auto-save hooks emptied. Claude-mem handles cross-session memory. Manual /super-save still available.
-- **Phase 24: Citizen Life Engine planned:** MEDIA clock mode, tier 1-2 event caps, context-aware life events, daily sim trigger. 3 batch jobs queued for spec/audit/input mapping.
-- **Batch jobs:** `msgbatch_01YDFk2WVUo7ERDysdjsj3Zs` (MEDIA mode spec), `msgbatch_0142zEiRRZn2sVW4aYQJfUKf` (event cap audit), `msgbatch_01VL2oP5wLkVF1Xsqt8Ln7LD` (context-aware inputs).
-
-### Session 79 (2026-03-05) — Build: Phase 19 Complete + Phase 5.1 Bot Refactor + Civic Canonization
-
-- **Phase 19 Canon Archive:** 680→378 files deduplicated, 9-desk structure, all agents wired, Lori (City Clerk) built.
-- **Phase 5.1 Discord bot refactor:** System prompt reduced from ~25K to ~8K chars (68% reduction). Removed 6 bulk data sources (worldState, citizenKnowledge, archiveKnowledge, editionBrief, notesToSelf, conversationDigest). Supermemory RAG provides per-message context instead. Fixed broken `loadArchiveKnowledge()` in lib/mags.js.
-- **Dashboard audit + fixes:** Edition parser rewritten for dual-format support (old markdown + new ALL CAPS). Off-by-one chunk bug fixed. H1 title detection added. Metadata sections filtered. `findTextFiles` → `findDocFiles` (supports .txt + .md). Civic database wired as Source 3 in search. New `/api/civic-documents` endpoint. Initiatives API enriched with civicDocuments arrays.
-- **Civic document backfill:** 13 documents downloaded from 2 Google Drive folders, converted to civic filing convention, filed across 5 initiatives. Total civic database: 22 artifacts (19 .md + 3 .png). All 19 compliant.
-- **Initiative tracker updates:** INIT-003 (Fruitvale Transit Hub) added to JSON tracker as PENDING-VOTE C86. INIT-007 (Youth Apprenticeship) written to Google Sheet as "announced" — not in JSON (not approved). INIT-004 (Port Modernization) removed from initFolderMap (pipeline, not approved).
-- **Editorial discovery:** Youth Apprenticeship Pipeline — 12-cycle coverage gap since Luis Navarro's C73 feature. Five milestones unverified. Flagged for next edition.
-- **Batch jobs submitted:** Dashboard dead-end audit + civic YAML frontmatter audit.
-
-### Session 83 (2026-03-07) — Maintenance: Memory Extractor Fix
-
-- **claude-memory extract fix:** Diagnosed nested session error (CLAUDECODE env var) and 2-minute timeout. Patched `/usr/lib/node_modules/claude-memory/dist/extraction/agent-extractor.js` — unset CLAUDECODE in spawned env, bumped timeout to 5 minutes.
-- **Uncommitted S82/S83 work:** 26 files, ~958 lines still staged from disconnected session. Includes enrichCitizenProfiles.js, cycle-review skill, dashboard rewrite, agent SKILL patches, engine fixes. Needs commit next session.
-
-### Session 82 (2026-03-06) — Build: Phase 23 Cross-AI Feedback Integration
 *Rotated to SESSION_HISTORY.md*
 
-*Sessions 1-77: see `docs/mags-corliss/SESSION_HISTORY.md`*
+*Sessions 1-83: see `docs/mags-corliss/SESSION_HISTORY.md`*
 
 ---
 

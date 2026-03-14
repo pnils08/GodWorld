@@ -15,8 +15,10 @@
  *   - Media_Intake (7 cols): Article table entries
  *   - Storyline_Intake (6 cols): Storyline entries
  *   - Citizen_Usage_Intake (5 cols): Citizen usage entries
- *   - LifeHistory_Log (7 cols): Direct quotes from continuity notes
  *   - Business_Intake (6 cols): Business mentions from Business Ticker (v1.2)
+ *
+ *   NOTE: LifeHistory_Log writes were removed (v1.3). The engine owns that sheet.
+ *   parseDirectQuotes still runs for dry-run visibility but never writes.
  *
  * After running this script, run processMediaIntakeV2() in Apps Script
  * to move data from intake sheets to final ledgers (Press_Drafts,
@@ -559,10 +561,10 @@ async function main() {
     totalWritten += citizens.length;
   }
 
+  // v1.3: LifeHistory_Log writes REMOVED — the engine owns that sheet.
+  // parseDirectQuotes still runs for dry-run visibility only.
   if (quotes.length > 0) {
-    const count = await sheets.appendRows('LifeHistory_Log', quotes);
-    console.log(`  -> LifeHistory_Log: ${quotes.length} quotes written`);
-    totalWritten += quotes.length;
+    console.log(`  -> LifeHistory_Log: ${quotes.length} quotes detected (NOT written — engine-owned sheet)`);
   }
 
   // v1.2: Write business mentions to Business_Intake (if sheet exists)

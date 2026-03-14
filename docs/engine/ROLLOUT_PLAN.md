@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 88 (2026-03-11) — T1 canon enrichment (16 citizens), disk cleanup + DISK_MAP.md, batch MCP fix, 3 overnight batch jobs submitted.
+**Last Updated:** Session 89 (2026-03-13) — Batch reviews created, ledger corruption assessed, dashboard + bot PM2 env fix.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -42,8 +42,12 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Batch MCP certifi fix~~ — Corrupted venv deleted, auto-rebuilt. 6 old batch results recovered. S88.
 - ✅ ~~Dashboard bugs #10/#11~~ — Root cause: Simulation_Ledger data errors. Mags Corliss CareerStage/TraitProfile/LifeHistory fixed. Deacon Seymour OrginCity/RoleType/EmployerBizId/EconKey fixed. S88.
 - ✅ ~~T1 canon enrichment~~ — All 16 T1 citizens have LifeHistory + TraitProfile. Anthony Raines (T2, Tribune Four) restored from empty. S88.
-- **Review 3 batch results** — (1) Simulation_Ledger full audit (667 citizens), (2) disk naming audit, (3) T2 canon build (17 citizens). Apply fixes from results.
-- **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validates S85 fixes.
+- ✅ ~~Review 3 batch results~~ — Batch review docs created at `output/batch-reviews/`. Ledger audit: 502 MISSING + 109 MISMATCH. T2 canon build: 17 citizens ready. Disk audit: 47 issues, C+. ClockMode (18) and mononyms DONE. S89.
+- ✅ ~~Dashboard + bot PM2 env fix~~ — GODWORLD_SHEET_ID missing from PM2 process environments for 4+ days. Both services re-created with exported .env vars. Family data loading, dashboard serving. S89.
+- **CRITICAL: Ledger corruption repair** — Use backup sheet version history (pre-2026-02-28) to compare against current Simulation_Ledger. Restore engine-created citizen identities where S68+ mass edits replaced them. Backup sheet: `1ZbCj6sYM4oEQGmfGetmhe6_l1UoisThK9a-d0y678qo`. This is the #1 priority.
+- **Apply batch review fixes** — Education level corrections (~50 citizens), civic official EconomicProfileKey fixes, T2 LifeHistory + TraitProfile writes (17 citizens). See `output/batch-reviews/`.
+- **Disk naming cleanup** — Standardize supplemental slugs (oakland_ prefix decision), podcast rename, rhea archive relocation. See `output/batch-reviews/batch_disk_naming_audit_2026-03-12.md`.
+- **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validates S85 fixes. BLOCKED by ledger repair.
 - **Phase 24.1: MEDIA clock mode build** — Start with citizen migration (8 Echo journalists → MEDIA), then build generateMediaModeEvents.js. Plan at `docs/engine/PHASE_24_PLAN.md`.
 - **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage. Template v2.0 and SKILL.md updated S86.
 

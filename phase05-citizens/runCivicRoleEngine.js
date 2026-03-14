@@ -421,10 +421,10 @@ function runCivicRoleEngine_(ctx) {
       logSheet.appendRow([
         ctx.now,
         row[iPopID],
-        '',
+        name,
         "CivicRole",
         baseNote + context,
-        '',
+        neighborhood,
         cycle
       ]);
     }

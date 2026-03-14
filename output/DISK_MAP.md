@@ -32,6 +32,7 @@ Last Updated: Session 87 (2026-03-11)
 | `civic-voice/` | Civic office voice data | Current + prior | Named: `{office}_c{XX}.json` |
 | `civic-voice-packets/` | Civic voice packets for agents | Current + prior | Named: `{office}_c{XX}.json` + `manifest.json` |
 | `initiative-packets/` | Initiative agent input | Current cycle | |
+| `batch-reviews/` | Actionable summaries of batch API results | Permanent | Named: `batch_{slug}_{date}.md`. Raw results at `~/.claude/batches/results/` |
 | `visual-qa/` | Dashboard QA screenshots | Latest run | |
 
 ### Root Files

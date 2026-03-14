@@ -438,10 +438,10 @@ function runEducationEngine_(ctx) {
       logSheet.appendRow([
         ctx.now,
         row[iPopID],
-        '',
+        ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(),
         eventTag,
         pick,
-        '',
+        neighborhood,
         cycle
       ]);
     }

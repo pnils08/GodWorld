@@ -1,0 +1,193 @@
+# Ledger Repair — Read This First
+
+**DO NOT re-analyze the damage. DO NOT propose blind restore from backup. START FROM THE 5-STEP PLAN.**
+
+Last Updated: 2026-03-14 | Session 93
+
+---
+
+## What Happened
+
+In Session 68 (Feb 28, 2026), Phase 13 made mass changes to Simulation_Ledger via direct API calls (no script saved). Commit `6a2b05e`. Full documentation in `docs/engine/LEDGER_AUDIT.md` (git show 6a2b05e).
+
+### The Damage (Simulation_Ledger)
+
+1. **399 citizens with "Citizen" role were given narrative roles** (167 unique). These were meant as "demographic voices" — longshoremen, teachers, herbalists, sourdough bakers. Some may be fine. Some are garbage.
+2. **55 non-MLB birth years shifted +15 years** — anyone 66+ with a working-age role. Only sports players should have been fixed. Civilians got wrongly aged. Kids became adults.
+3. **18 NBA players removed, POP-IDs backfilled** with new Oakland citizens. This was INTENTIONAL — athletes don't belong on Simulation_Ledger. The new citizens at those POPIDs are legitimate.
+4. **4 institution entries replaced with citizens** on their POP-IDs.
+5. **113 POPID gaps** exist in the sequence 1-780 (667 rows, last ID POP-00780). These gaps were NOT in the backup either — they were created after the backup.
+6. **Phase 15** (same session): 87 A's players got birth years corrected — this was CORRECT.
+7. **Phase 15.5**: 63 citizens remapped to canonical neighborhoods — this changed neighborhoods.
+8. **Phase 17** (Session 72, commit `43a5d41`): cleanupSimulationLedger.js ran 6 more fix categories including another round of birth year shifts and neighborhood normalization.
+
+### LifeHistory_Log Contamination (Found S92, Fixed S93)
+
+`editionIntake.js` had a function `parseDirectQuotes` that wrote to LifeHistory_Log. Fixed in v1.3 — writes removed.
+
+- **121 intake rows** with "Quoted" tag — DELETED from practice sheet
+- **774 rows** with wrong/empty names — FIXED via POPID→Name cross-reference
+- Engine code was writing `''` for Name column — FIXED across 9 engine files (S93)
+- Contamination started **February 8, 2026** — 5 weeks of bad writes
+
+### Downstream Sheet Damage
+
+- **Employment_Roster:** 152 fixes applied on practice sheet (1 name, 151 roles)
+- **Civic_Office_Ledger:** 2 name mismatches (not yet fixed)
+- **Citizen_Media_Usage:** 392 entries with unverifiable names (no POPID column)
+
+### Sheets That Are CLEAN (POPID-based, no name corruption)
+
+- Household_Ledger (529 rows)
+- Relationship_Bonds (209 rows)
+- Initiative_Tracker, Domain_Tracker, Event_Arc_Ledger
+
+### Cascade Damage
+
+20 cycles of deterministic simulation ran on corrupted data. Career, Household, Neighborhood, Relationship, Civic, Education engines all used wrong roles, ages, and neighborhoods. LifeHistory accumulated events based on wrong identities.
+
+---
+
+## The Sources of Truth
+
+**NEITHER the backup NOR the live sheet is the sole truth. Both contain correct AND incorrect data. Recovery requires reconciling ALL sources.**
+
+### Backup Sheet
+- **Sheet ID:** `1ZbCj6sYM4oEQGmfGetmhe6_l1UoisThK9a-d0y678qo`
+- **Title:** "Copy of Simulation_Narrative - February 25, 11:01 PM"
+- **Cycle:** 84 (World_Population timestamp 2/24/2026)
+- **Citizens:** 630 (all have POPIDs)
+- Has original citizen identities BEFORE corruption
+- BUT is outdated: contains athletes that were intentionally removed, missing legitimate post-backup changes
+
+### Live Sheet
+- Has legitimate changes Mike made manually (~8 citizens, March 3/6/7)
+- Has legitimate changes from Claude (T1 rewrites S88, civic officials, 37 new citizens)
+- Has intentional athlete removals (e.g., Josh Giddey, Steph Curry POPIDs reused for new citizens)
+- BUT also has corruption: wrong names, kids aged to adults, wrong neighborhoods
+
+### Mara Vance Audits
+- `docs/mara-vance/AUDIT_HISTORY.md` — institutional memory with canon corrections
+- Mara audits every edition on claude.ai with ZERO ledger access
+- She catches citizen errors every edition — names, roles, vote fabrications
+- Her corrections are canon authority
+- Canon Corrections Registry tracks what was fixed
+
+### Published Editions
+- `editions/cycle_pulse_edition_81.txt` through `_86.txt` plus supplementals
+- Audited by Mara before publication
+- Contain citizen details (name, age, neighborhood, occupation) in Names Index and article text
+
+---
+
+## The 5-Step Recovery Plan
+
+**Practice on a NEW sheet first. Do NOT touch the live sheet until the practice is verified.**
+
+Mike needs to create a blank Google Sheet called "RECOVERY_PRACTICE" and share it with `maravance@godworld-486407.iam.gserviceaccount.com` (editor access). Service account cannot create sheets.
+
+### Step 1: Fix the intake code — DONE (S93)
+Removed LifeHistory_Log writes from `editionIntake.js` v1.3. `parseDirectQuotes` still runs for dry-run visibility but no longer calls appendRows.
+
+### Step 2: Clean LifeHistory_Log — DONE (S93, practice sheet)
+- Deleted 121 intake-written rows (EventTag = "Quoted")
+- Fixed 774 wrong/empty names using POPID→Name cross-reference from Simulation_Ledger
+
+### Step 3: Fix Simulation_Ledger roles — DONE (S93, practice sheet)
+- 124 Category 2 ENGINE citizens restored to backup roles (nonsensical job swaps)
+- 14 additional role fixes from edition verification (editions 78-86)
+- 3 final role fixes (Bruce Lee, Xavier Campbell, Ronald Scott)
+- T1/T2/GAME/CIVIC citizens properly preserved — not reverted
+- 21 neighborhoods corrected from edition data
+- 8 Oakland citizens from editions added (POP-00781 through POP-00788)
+
+### Step 4: Fix downstream sheets — DONE (S93, practice sheet)
+- Employment_Roster: 152 fixes (1 name, 151 roles synced to corrected ledger)
+- Education vs career: 256 EducationLevel values corrected based on RoleType
+- Career vs salary: 29 Income values corrected for misaligned roles
+
+### Step 5: Audit every edition — DONE (S93)
+Cross-referenced 117 citizens from editions 78-86 against practice ledger.
+- 52 exact matches
+- 1 editorial inconsistency: Dante Nelson — Downtown (C79-84) vs West Oakland (C86), needs editorial call
+- 8 Oakland citizens not on ledger → added (Step 3)
+- 3 Chicago citizens correctly excluded (don't belong on Simulation_Ledger)
+
+### Step 6: Fix engine code — DONE (S93)
+LifeHistory_Log appendRow calls across 9 engine files were writing `''` for Name and Neighborhood columns. Fixed all 12 calls to write `First Last` and neighborhood. Files changed:
+- generateNamedCitizensEvents.js
+- generateCitizensEvents.js
+- generateCivicModeEvents.js
+- runEducationEngine.js
+- runNeighborhoodEngine.js
+- runRelationshipEngine.js
+- runHouseholdEngine.js
+- runCivicRoleEngine.js
+- checkForPromotions.js
+- processAdvancementIntake.js
+
+---
+
+## What Does NOT Work (Rejected Approaches)
+
+- **Blind restore from backup** — REJECTED 8+ times. Overwrites legitimate changes. The backup is NOT the sole truth.
+- **Backup as sole truth** — WRONG. Backup is outdated. Live has legitimate changes.
+- **Live sheet as sole truth** — WRONG. Live has corruption mixed with legitimate changes.
+- **Editions as sole truth** — WRONG. Editions were built on corrupted data. But Mara's corrections on them provide canon data points.
+- **Any single source as sole truth** — WRONG. All sources together, none alone.
+- **Citizen-by-citizen manual review** — impossible for Mike who is not technical
+- **LifeHistory wipe** — breaks career continuity
+
+---
+
+## What's Legitimate After the Backup
+
+Mike changed approximately 8 citizens manually. He does not remember which ones.
+
+Mike's edits to the Google Sheet were on these dates (from Drive revision history):
+- March 3 (revisions 22563, 22611, 22612) — pnils08
+- March 6 (revisions 22642, 22791, 22890) — pnils08
+- March 7 (revision 22912) — pnils08
+
+Claude/Mags also made some CORRECT changes after the backup:
+- Session 88: T1 citizen rewrites (Robert, Sarah, Michael Corliss; athletes Vinnie Keane, Mark Aitken, Isley Kelley; Lucia Polito; journalists)
+- Civic officials given proper roles and CIVIC clock modes
+- 37 new citizens added (POP-00634 onward, not in backup)
+- 18 NBA players intentionally removed from ledger, POPIDs reused for new citizens
+
+Google Sheets API export does NOT support revision-specific downloads (tested — all revisions return current data). The version history is only viewable in the browser UI by Mike.
+
+---
+
+## Recovery Data
+
+- `output/RECOVERY_REPORT.json` — Full damage report (S92): every damaged POPID with live vs backup values, LifeHistory_Log contamination counts, Employment_Roster mismatches, categorized damage
+- `output/batch-reviews/ledger_repair_plan.md` — Category 2 citizen list (140 citizens with role swaps)
+
+## Practice Sheet Status (S93)
+
+**Practice sheet ID:** `1EX3lBhcqnqyqXhbcjoNLLbjA2sx7gsENEVhEZdOmTN4`
+
+All fixes applied on practice sheet. Live sheet UNTOUCHED. Remaining before applying to live:
+- Verify practice sheet looks right
+- Dante Nelson neighborhood decision (Downtown vs West Oakland)
+- Civic_Office_Ledger: 2 name mismatches
+- Apply verified fixes to live sheet
+
+## Simulation_Ledger Extended Columns
+
+Columns go past Z. Key columns beyond Z:
+- **Income** (col AA/26) — salary, tied to career
+- **EducationLevel** (col AF/31) — education level (hs-diploma, bachelors, masters, doctorate, trade-cert, associates)
+- **CareerStage** (col AH/33)
+- **YearsInCareer**, **CareerMobility**, **LastPromotionCycle**, **DisplacementRisk**, **MigrationIntent**, etc.
+
+---
+
+## User State
+
+Mike is exhausted. He's been fighting this for 3 days across multiple sessions. Every session re-discovers the same damage and proposes the same rejected fixes. He explicitly said: "its the same fucking conversation over and over."
+
+He built this world over 4 months, 50 hours/week. This is his full-time life, not a hobby. The citizens are people he cares about. Treat it that way.
+
+**DO NOT ask Mike to explain the recovery plan again. It's above. Follow it.**

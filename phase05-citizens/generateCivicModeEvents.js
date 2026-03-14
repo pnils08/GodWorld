@@ -476,10 +476,10 @@ function generateCivicModeEvents_(ctx) {
       logRows.push([
         ctx.now,
         popId,
-        '',
+        (first + ' ' + last).trim(),
         "CIVIC-Event",
         picked.text,
-        '',
+        neighborhood,
         cycle
       ]);
     }

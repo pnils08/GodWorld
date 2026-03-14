@@ -502,10 +502,10 @@ function runNeighborhoodEngine_(ctx) {
         logSheet.appendRow([
           ctx.now,
           row[iPopID],
-          '',
+          ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(),
           eventTag,
           entry,
-          '',
+          neighborhood,
           cycle
         ]);
       }

@@ -578,10 +578,10 @@ function runRelationshipEngine_(ctx) {
         logSheet.appendRow([
           ctx.now,
           row[iPopID],
-          '',
+          ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(),
           eventTag,
           pick,
-          '',
+          neighborhood,
           ctx.summary.cycleId || ctx.summary.absoluteCycle
         ]);
       }

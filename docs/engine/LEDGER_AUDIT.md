@@ -65,7 +65,7 @@ Batch audit revealed 73.4% health score (469/658 clean). Cleanup script `scripts
 | Birth year corrections (over-80 shifted +15yr, 1 under-18 fixed) | 13 | DONE |
 | Bare position codes replaced with civilian roles | 3 | DONE |
 
-**Post-cleanup state:** 658 citizens. Zero duplicate names. All neighborhoods valid Oakland values. All Status/ClockMode properly cased. All birth years in 18-80 range. Zero bare position codes on non-GAME citizens.
+**Post-cleanup state:** 675 citizens (S94). Zero duplicate names. All neighborhoods valid Oakland values. All Status/ClockMode properly cased (ENGINE/GAME/CIVIC/MEDIA/LIFE). All birth years in 18-80 range. Zero bare position codes on non-GAME citizens. 16 journalists now MEDIA mode. 87 A's RoleTypes expanded to readable format. 62 minor leaguers assigned to farm teams.
 
 ---
 

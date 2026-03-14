@@ -129,13 +129,13 @@ The Simulation_Ledger itself has only 511 rows and grows slowly (new named citiz
 | Col | Header | Status | Notes |
 |-----|--------|--------|-------|
 | C | Middle | **DEAD** | Almost always empty. Never read by any engine. |
-| I | ClockMode | **DEAD** | Legacy field. No engine reads it. |
+| I | ClockMode | **ACTIVE** | Read by 8+ engines. Gates ENGINE/GAME/CIVIC/MEDIA processing. Corrected S89. |
 | N | OrginCity | **DEAD** | Misspelled. Only set for game imports. Never read. |
 | Q | Last Updated | **DEAD** | Never read by any engine or consumer. |
 | S | UsageCount | **DEAD** | Never read. Was planned for media tracking. |
 
 **Remediation:**
-1. **Drop 5 dead columns** — saves ~2,555 cells immediately
+1. **Drop 4 dead columns** (Middle, OrginCity, Last Updated, UsageCount) — ClockMode is ACTIVE (read by 8+ engines, corrected S89)
 2. **Enforce LifeHistory compression** — cap text length, summarize old entries
 3. **Future:** Consider moving LifeHistory to a separate sheet with POPID key
 

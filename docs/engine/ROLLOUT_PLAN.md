@@ -30,7 +30,7 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Phase 22.1: CIVIC activation complete~~ — 41 civic citizens GAME→CIVIC on live sheet. S85.
 - ✅ ~~Phase 23.5: Agent output directories + memory~~ — All 22 agents have SKILL.md output dirs, all 24 have MEMORY.md. S85.
 - **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validate all three fixes.
-- **Phase 24.1: MEDIA clock mode build** — Start with citizen migration (8 Echo journalists → MEDIA), then build generateMediaModeEvents.js. Plan at `docs/engine/PHASE_24_PLAN.md`.
+- ✅ ~~Phase 24.1: MEDIA clock mode~~ — 16 journalists GAME→MEDIA. generateMediaModeEvents.js v1.0 built and wired. 87 A's RoleTypes expanded, 62 minor leaguers assigned to farm teams. S94.
 - ✅ ~~Supplemental strategy overhaul~~ — SKILL.md rewritten, SUPPLEMENTAL_TEMPLATE v2.0, full reporter roster table. S86.
 - ✅ ~~Housing market supplemental C86~~ — Published, Drive uploaded, Supermemory ingested. New canon: 2 agencies, 3 realtors, 1 buyer. S86.
 - ✅ ~~Naming convention fix~~ — editionParser derives slug from filename. Photo/PDF generators use slug for output paths. S86.
@@ -48,7 +48,7 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - **Apply batch review fixes** — Education level corrections (~50 citizens), civic official EconomicProfileKey fixes, T2 LifeHistory + TraitProfile writes (17 citizens). See `output/batch-reviews/`.
 - **Disk naming cleanup** — Standardize supplemental slugs (oakland_ prefix decision), podcast rename, rhea archive relocation. See `output/batch-reviews/batch_disk_naming_audit_2026-03-12.md`.
 - **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validates S85 fixes. BLOCKED by ledger repair.
-- **Phase 24.1: MEDIA clock mode build** — Start with citizen migration (8 Echo journalists → MEDIA), then build generateMediaModeEvents.js. Plan at `docs/engine/PHASE_24_PLAN.md`.
+- ✅ ~~Phase 24.1: MEDIA clock mode~~ — Complete. See line 33 entry.
 - **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage. Template v2.0 and SKILL.md updated S86.
 
 ---

@@ -74,6 +74,7 @@
 | 5-GenericMicroEvents | `generateGenericCitizenMicroEvents_()` | phase04-events/generateGenericCitizenMicroEvent.js | Tier 3-4 ENGINE citizens | ClockMode check |
 | 5-GameModeMicroEvents | `generateGameModeMicroEvents_()` | phase04-events/generateGameModeMicroEvents.js | GAME mode citizens | `mode !== "GAME"` skip |
 | 5-CivicModeEvents | `generateCivicModeEvents_()` | phase05-citizens/generateCivicModeEvents.js | CIVIC mode citizens | `mode !== "CIVIC"` skip |
+| 5-MediaModeEvents | `generateMediaModeEvents_()` | phase05-citizens/generateMediaModeEvents.js | MEDIA mode citizens | `mode !== "MEDIA"` skip |
 
 ### 5b: Schema Ensure (idempotent setup)
 
@@ -277,6 +278,21 @@ These exist in the codebase but are NOT in the engine call chain:
 - `generateCivicModeEvents.js` hex literal fix: `0xC1V1C` → `0xC1C1C` (invalid hex digit)
 - Crane Status="recovering", Osei Status="serious-condition" — enables healthPenalty logic
 
+## MEDIA Clock Mode Activation (S94, Phase 24.1)
+
+16 Bay Tribune journalists migrated GAME→MEDIA:
+- Mags Corliss (EIC), Hal Richmond, P Slayer, Jordan Velez, Lila Mezran, Trevor Shimizu, Angela Reyes, Noah Tan, Kai Marston, Sharon Okafor, Mason Ortega, Farrah Del Rio, Reed Thompson, Celeste Tran, Arman Gutierrez, Elliot Marbury
+- `generateMediaModeEvents_` wired at Phase 5a after CivicModeEvents
+- 7 role-specific event pools: editor, columnist, reporter, podcast-host, photographer, analyst, media-staff
+- Base chance 20%, T1 +10%, T2 +5%, cap 45%
+- Context-aware: reads civic load, sentiment, crime, weather, sports season, cultural activity
+- 87 A's players expanded from bare position abbreviations to "Position, Team" format
+- 62 T3 minor leaguers assigned to farm teams (AAA/AA/A affiliates)
+
+**Current ClockMode breakdown:** ENGINE 514, GAME 97, CIVIC 48, MEDIA 16, LIFE 25
+
+---
+
 ## Arc Engine Investigation (S83, Phase 22.2)
 
 All 37 arcs stuck at phase "early" despite tension ≥3. Diagnostic logging added to `eventArcEngine_` v3.7.
@@ -297,3 +313,4 @@ All 37 arcs stuck at phase "early" despite tension ≥3. Diagnostic logging adde
 | MED+CIV double flag | 3 | Undefined behavior — both flags trigger the same exclusions |
 | GAME + no flags | 7 | Get GAME micro-events but classified as generic public-figure type |
 | Tier 1-2 with zero processing | varies | Any Tier 1-2 in LIFE mode or with conflicting flag/mode |
+| **RESOLVED (S94):** MEDIA mode | 16 | Bay Tribune journalists now processed by `generateMediaModeEvents_` with 7 role-specific event pools. |

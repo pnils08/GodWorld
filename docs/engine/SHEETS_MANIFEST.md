@@ -35,7 +35,7 @@
 | Faith_Organizations | 16 | 8 | Organization, FaithTradition, Neighborhood, Founded, Congregation, Leader, Character, ActiveStatus |
 | Crime_Metrics | 17 | 7 | Neighborhood, PropertyCrimeIndex, ViolentCrimeIndex, ResponseTimeAvg, ClearanceRate, IncidentCount, LastUpdated |
 | Transit_Metrics | 108 | 8 | Timestamp, Cycle, Station, RidershipVolume, OnTimePerformance, TrafficIndex, Corridor, Notes |
-| Simulation_Ledger | 628 | 43 | POPID, First, Middle , Last, OriginGame, UNI (y/n), MED (y/n), CIV (y/n), ...(43 total) |
+| Simulation_Ledger | 675 | 45 | POPID, First, Middle, Last, OriginGame, UNI (y/n), MED (y/n), CIV (y/n), ...(45 total) |
 | Generic_Citizens | 265 | 10 | First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, ...(10 total) |
 | Cultural_Ledger | 29 | 20 | Timestamp, CUL-ID, Name, RoleType, FameCategory, CulturalDomain, Status, UniverseLinks, ...(20 total) |
 | Chicago_Citizens | 106 | 10 | CitizenId, Name, Age, Gender, Neighborhood, Occupation, Tier, CreatedCycle, ...(10 total) |

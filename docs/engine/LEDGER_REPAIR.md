@@ -201,10 +201,54 @@ Google Sheets API export does NOT support revision-specific downloads (tested �
 4. Replay specific fixes on live (not tab overwrite)
 5. Verify live after applying
 
-## Simulation_Ledger Extended Columns
+## Simulation_Ledger Full Column Reference
 
-Columns go past Z. Key columns beyond Z:
-- **Income** (col AA/26) — salary, tied to career
-- **EducationLevel** (col AF/31) — education level (hs-diploma, bachelors, masters, doctorate, trade-cert, associates)
-- **CareerStage** (col AH/33)
-- **YearsInCareer**, **CareerMobility**, **LastPromotionCycle**, **DisplacementRisk**, **MigrationIntent**, etc.
+**675 citizens, 45 columns (A–AS).** Updated S94.
+
+| Col | # | Header | Notes |
+|-----|---|--------|-------|
+| A | 1 | POPID | Unique ID (POP-00001 format) |
+| B | 2 | First | First name |
+| C | 3 | Middle | Rarely populated |
+| D | 4 | Last | Last name |
+| E | 5 | OriginGame | Source game/integration |
+| F | 6 | UNI (y/n) | Sports universe flag |
+| G | 7 | MED (y/n) | Media flag |
+| H | 8 | CIV (y/n) | Civic flag |
+| I | 9 | ClockMode | ENGINE / GAME / CIVIC / MEDIA / LIFE |
+| J | 10 | Tier | 1 (protected) through 4 (generic) |
+| K | 11 | RoleType | Role description (e.g. "Shortstop, Oakland A's") |
+| L | 12 | Status | Active, Retired, Traded, etc. |
+| M | 13 | BirthYear | Sim birth year |
+| N | 14 | OrginCity | Origin city (misspelled, legacy) |
+| O | 15 | LifeHistory | Full life history text (heaviest column) |
+| P | 16 | CreatedAt | Creation timestamp |
+| Q | 17 | Last Updated | Last update timestamp |
+| R | 18 | TraitProfile | Personality traits JSON |
+| S | 19 | UsageCount | Media usage count |
+| T | 20 | Neighborhood | Oakland neighborhood |
+| U | 21 | HouseholdId | Household grouping |
+| V | 22 | MaritalStatus | Married, Single, etc. |
+| W | 23 | NumChildren | Number of children |
+| X | 24 | ParentIds | Parent POPIDs |
+| Y | 25 | ChildrenIds | Children POPIDs |
+| Z | 26 | WealthLevel | Wealth tier |
+| AA | 27 | Income | Salary value |
+| AB | 28 | InheritanceReceived | Inheritance flag |
+| AC | 29 | NetWorth | Net worth |
+| AD | 30 | SavingsRate | Savings rate |
+| AE | 31 | DebtLevel | Debt level |
+| AF | 32 | EducationLevel | hs-diploma, bachelors, masters, doctorate, trade-cert, associates |
+| AG | 33 | SchoolQuality | School quality rating |
+| AH | 34 | CareerStage | Career stage |
+| AI | 35 | YearsInCareer | Years in current career |
+| AJ | 36 | CareerMobility | Mobility score |
+| AK | 37 | LastPromotionCycle | Last promotion cycle |
+| AL | 38 | DisplacementRisk | Economic displacement risk |
+| AM | 39 | MigrationIntent | Migration intent flag |
+| AN | 40 | MigrationReason | Why they'd migrate |
+| AO | 41 | MigrationDestination | Where they'd go |
+| AP | 42 | MigratedCycle | Cycle they migrated |
+| AQ | 43 | ReturnedCycle | Cycle they returned |
+| AR | 44 | EconomicProfileKey | Links to economic profile |
+| AS | 45 | EmployerBizId | Links to Business_Ledger |

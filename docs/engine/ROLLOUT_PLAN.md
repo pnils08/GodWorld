@@ -576,8 +576,14 @@ Phase 7 engines (`buildNightLife.js` v2.4, `buildEveningFood.js` v2.4) contain 1
 ### 16.1 Faith Leaders → Simulation_Ledger ✓ (S71)
 `scripts/integrateFaithLeaders.js` — 16 faith leaders from 16 congregations added to Simulation_Ledger as Tier 2 citizens (POP-00753 through POP-00768). Protestant, Baptist, Catholic, Methodist, Pentecostal, Reform Jewish, Orthodox Jewish, Muslim, Buddhist, Hindu, Sikh, Jewish Renewal, Unitarian. Birth years deterministic from name hash (ages 43-70 in 2041). All mapped to "Senior Pastor / Faith Leader" except Larry Yang (Community Organizer — lay teacher). LeaderPOPID column added to Faith_Organizations and backfilled for all 16.
 
-### 16.2 Generic_Citizens Audit ✓ (S71)
-`scripts/auditGenericCitizens.js` — Read-only audit of 268 Generic_Citizens. All 11 emerged citizens confirmed on Simulation_Ledger (zero gaps). Emergence pipeline healthy: generates 1-5 Tier-4 citizens/cycle, promotes at 3+ media mentions. Occupations are 2026-era generic (electrician, mechanic, taxi driver) — pool upgrade to 2041 vocabulary deferred. Recommendation: keep emergence engine as-is.
+### 16.2 Generic_Citizens Audit ✓ (S71) + Pipeline Fix (S94)
+`scripts/auditGenericCitizens.js` — Read-only audit of 268 Generic_Citizens (now 274). All 11 emerged citizens confirmed on Simulation_Ledger (zero gaps). Emergence pipeline healthy: generates 1-5 Tier-4 citizens/cycle, promotes at 3+ media mentions. Occupations are 2026-era generic (electrician, mechanic, taxi driver) — pool upgrade to 2041 vocabulary deferred.
+
+**S94 finding:** `buildDeskPackets.js` was using Generic_Citizens as the interview candidate pool, with Simulation_Ledger overlaid via name-keyed index. 208 of 274 GC entries don't exist on SL. This created split-brain data: `occupation` from GC vs `roleType` from SL on the same candidate object. `buildNeighborhoodCitizenIndex` also used wrong field names (`c.Name`, `c.POP_ID`, `c.Occupation` — none of which exist on SL objects), causing `eventCitizenLinks` to return 0 results for every desk.
+
+**Fix (S94):** `getInterviewCandidates` rewritten to source from Simulation_Ledger directly. ClockMode=ENGINE filter prevents athletes/officials from surfacing as civilian interview subjects. `buildNeighborhoodCitizenIndex` field names corrected. Generic_Citizens no longer used for candidate selection — retained for emergence pipeline only.
+
+**Remaining:** Generic_Citizens occupations are stale 2026-era terms. Pool vocabulary upgrade to 2041 still deferred. Consider whether the sheet should be deprecated entirely in favor of SL-only citizen generation.
 
 ### 16.3 Celebrity Bridge ✓ (S71)
 `scripts/integrateCelebrities.js` — 9 qualifying celebrities (FameScore 65+, National/Iconic/Global tier). 6 already on Simulation_Ledger from prior emergence pipeline. 3 new additions: Dax Monroe (Iconic athlete, FameScore 95, Tier 2, POP-00769), Kato Rivers (National athlete, FameScore 88, Tier 3, POP-00770), Sage Vienta (Global actor, FameScore 92, Tier 2, POP-00771). UniverseLinks column backfilled on Cultural_Ledger for all 9. 21 celebrities stay Cultural_Ledger only (below threshold).

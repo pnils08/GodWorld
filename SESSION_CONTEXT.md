@@ -47,7 +47,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v2.1 | Per-desk JSON packets, dollar-amount economic buckets, business snapshots, employer-enriched candidates |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v2.2 | SL-sourced candidates (no more Generic_Citizens split-brain), ClockMode filter, fixed neighborhoodCitizenIndex |
 | Citizen-Employer Linkage | scripts/linkCitizensToEmployers.js | v1.0 | Five-layer resolution, Employment_Roster, Business_Ledger stats |
 | Initiative Packet Builder | scripts/buildInitiativePackets.js | v1.0 | Per-initiative JSON packets from 7 Sheets tabs + Mara directive, 5 packets + manifest |
 | Civic Voice Packets | scripts/buildCivicVoicePackets.js | v1.1 | 7 office/faction voice packets + initiative decisions injection |
@@ -60,7 +60,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Generic Citizens Audit | scripts/auditGenericCitizens.js | v1.0 | Read-only emergence audit, SL cross-reference |
 | Celebrity Integration | scripts/integrateCelebrities.js | v1.0 | Cultural_Ledger top celebrities → SL, UniverseLinks backfill |
 | Live Ledger Query | scripts/queryLedger.js | v1.0 | 6 query types (citizen, initiative, council, neighborhood, articles, verify), searches Sheets + 674 published files |
-| Edition Intake | scripts/editionIntake.js | v1.2 | Auto-detects cycle, double-dash fix, business mention parsing |
+| Edition Intake | scripts/editionIntake.js | v1.4 | POPID resolution on Citizen_Usage_Intake, auto-detects cycle, business mentions |
 | Business Intake | scripts/processBusinessIntake.js | v1.0 | Staged→promoted pipeline, BIZ-ID assignment, duplicate detection |
 | Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
 | Bond Persistence | bondPersistence.js | v2.4 | Wipe guard, case-insensitive ledger check, normalized ID lookups |
@@ -181,6 +181,10 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Verification fixes:** Anthony Raines Tier "Oakland" → 2, Eric Taveras Status "22500000" → Active, 8 new citizens Tier "T4" → 4.
 - **Dante Nelson:** Downtown (editorial call — 5 editions vs 1).
 - **Process documented:** Practice sheet → verify → replay on live. Documented in LEDGER_REPAIR.md for future major upgrades.
+- **Full edition audit (E1-86 + supplementals):** Downloaded E1-73 archive from Drive. Cross-referenced 298 unique citizens from Names Index sections. 27 role drifts fixed on live ledger. 40 missing citizens identified (tracked, not all need ledger entries).
+- **Citizen pipeline overhaul:** `buildDeskPackets.js` v2.2 — `getInterviewCandidates` rewritten to source from Simulation_Ledger (was Generic_Citizens, 208/274 not on SL). ClockMode=ENGINE filter. `buildNeighborhoodCitizenIndex` field names fixed (eventCitizenLinks went from 0→working). Generic_Citizens retained for emergence pipeline only.
+- **editionIntake.js v1.4:** Citizen_Usage_Intake gains POPID column (6 cols). 807 existing rows backfilled (437 resolved).
+- **Desk skill files:** All 6 desks gain citizen drift protection rule — never change attributes to fit narrative.
 - **Key insight:** Confrontational sessions trigger minimal/flat LLM responses. Calm + strategic = better results from same tool. Both sides learned.
 
 ### Session 93 (2026-03-14) — Maintenance: Recovery Execution on Practice Sheet + Engine Code Fix

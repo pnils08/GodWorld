@@ -33,8 +33,9 @@ In Session 68 (Feb 28, 2026), Phase 13 made mass changes to Simulation_Ledger vi
 ### Downstream Sheet Damage
 
 - **Employment_Roster:** 152 fixes applied on practice sheet (1 name, 151 roles)
-- **Civic_Office_Ledger:** 2 name mismatches (not yet fixed)
+- **Civic_Office_Ledger:** 1 apostrophe fix applied (Ethan D'Souza). 1 remaining mismatch.
 - **Citizen_Media_Usage:** 392 entries with unverifiable names (no POPID column)
+- **Citizen_Usage_Intake:** Had no POPID column — fixed S94 (6-col format, 437/807 backfilled)
 
 ### Sheets That Are CLEAN (POPID-based, no name corruption)
 
@@ -185,6 +186,12 @@ Google Sheets API export does NOT support revision-specific downloads (tested �
 
 ### Practice sheet (reference):
 **ID:** `1EX3lBhcqnqyqXhbcjoNLLbjA2sx7gsENEVhEZdOmTN4` — keep as a pre-recovery snapshot.
+
+### Post-recovery pipeline fixes (S94):
+- **buildDeskPackets.js:** `getInterviewCandidates()` was sourcing from Generic_Citizens (274 rows, 208 not on SL). Rewritten to source from Simulation_Ledger directly. ClockMode=ENGINE filter prevents athletes/officials from appearing as interview subjects. `buildNeighborhoodCitizenIndex()` field names fixed (was using `c.Name`, `c.POP_ID`, `c.Occupation` — none of which exist on SL objects). `eventCitizenLinks` went from 0 results to working.
+- **editionIntake.js v1.4:** Citizen_Usage_Intake gains POPID column (6 cols). Names resolved from SL at write time. 807 existing rows backfilled (437 matched).
+- **All 6 desk skill files:** Citizen drift protection rule added — agents must never change citizen attributes to fit a narrative.
+- **Generic_Citizens sheet:** 274 rows, 208 not on SL. Stale 2026-era occupations. Was being used as interview candidate pool, creating split-brain `occupation`/`roleType` conflicts in desk packets. No longer used for candidate selection. Sheet retained for emergence pipeline only.
 
 ### Process for future major sheet upgrades:
 1. Copy live sheet → practice sheet

@@ -42,6 +42,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Media Packet | buildMediaPacket.js | v2.4 | Voice guidance on story seeds & hooks |
 | Media Intake | mediaRoomIntake.js | v2.5 | Storyline lifecycle, citizen routing |
 | Media Parser | parseMediaRoomMarkdown.js | v1.5 | Quotes to LifeHistory_Log |
+| Media Mode Events | phase05-citizens/generateMediaModeEvents.js | v1.0 | MEDIA clock mode event generator — editor, columnist, reporter, podcast, photo, analyst pools |
 | Life History | compressLifeHistory.js | v1.3 | 47 TAG_TRAIT_MAP entries (PostCareer, Civic, Media, Sports) |
 | Citizen Enrichment | scripts/enrichCitizenProfiles.js | v1.0 | Edition→LifeHistory feedback loop. Names Index extraction, paragraph-level quotes, title stripping. 161 citizens enriched E78–E86 |
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
@@ -185,6 +186,9 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Citizen pipeline overhaul:** `buildDeskPackets.js` v2.2 — `getInterviewCandidates` rewritten to source from Simulation_Ledger (was Generic_Citizens, 208/274 not on SL). ClockMode=ENGINE filter. `buildNeighborhoodCitizenIndex` field names fixed (eventCitizenLinks went from 0→working). Generic_Citizens retained for emergence pipeline only.
 - **editionIntake.js v1.4:** Citizen_Usage_Intake gains POPID column (6 cols). 807 existing rows backfilled (437 resolved).
 - **Desk skill files:** All 6 desks gain citizen drift protection rule — never change attributes to fit narrative.
+- **Sports universe RoleType overhaul:** 87 A's player positions expanded from bare abbreviations (SP, 2B) to readable format (Starting Pitcher, Oakland A's). 62 T3 players assigned to farm teams: Las Vegas Aviators (AAA), Midland RockHounds (AA), Stockton Ports (A). Coaches/staff/GM formatted with team name.
+- **Phase 24.1 MEDIA clock mode:** 16 Bay Tribune journalists migrated GAME→MEDIA on live sheet. Event generator `generateMediaModeEvents_` built and wired into engine orchestrator.
+- **Sports transactions tracking:** Added Phase 24.5 to ROLLOUT_PLAN — trades, releases, call-ups, POPID retirement. Separate build.
 - **Key insight:** Confrontational sessions trigger minimal/flat LLM responses. Calm + strategic = better results from same tool. Both sides learned.
 
 ### Session 93 (2026-03-14) — Maintenance: Recovery Execution on Practice Sheet + Engine Code Fix

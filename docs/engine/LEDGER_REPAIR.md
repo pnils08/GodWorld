@@ -192,6 +192,7 @@ Google Sheets API export does NOT support revision-specific downloads (tested �
 - **editionIntake.js v1.4:** Citizen_Usage_Intake gains POPID column (6 cols). Names resolved from SL at write time. 807 existing rows backfilled (437 matched).
 - **All 6 desk skill files:** Citizen drift protection rule added — agents must never change citizen attributes to fit a narrative.
 - **Generic_Citizens sheet:** 274 rows, 208 not on SL. Stale 2026-era occupations. Was being used as interview candidate pool, creating split-brain `occupation`/`roleType` conflicts in desk packets. No longer used for candidate selection. Sheet retained for emergence pipeline only.
+- **Sports universe RoleTypes (S94):** 87 A's players expanded from bare position abbreviations (SP, 2B) to "Position, Team" format. 62 T3 minor leaguers assigned to farm teams (Las Vegas Aviators AAA, Midland RockHounds AA, Stockton Ports A). 16 Bay Tribune journalists migrated GAME→MEDIA clock mode.
 
 ### Process for future major sheet upgrades:
 1. Copy live sheet → practice sheet

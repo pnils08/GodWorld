@@ -197,6 +197,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-Elections', function() { runCivicElections_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });
@@ -1439,6 +1440,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase5-Elections', function() { runCivicElections_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 
   safePhaseCall_(ctx, 'Phase5-Career', function() { runCareerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Education', function() { runEducationEngine_(ctx); });

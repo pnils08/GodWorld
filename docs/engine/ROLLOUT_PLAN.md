@@ -946,13 +946,20 @@ Source: Session 82 (2026-03-06). Reviews from Gemini, GPT, Code Copilot, and GRO
 
 **Goal:** Rich, context-aware life histories for all citizens, with main characters getting the deepest treatment. Citizens should feel like they live in their neighborhood, earn their salary, and are affected by what's happening around them.
 
-### 24.1 MEDIA Clock Mode
+### 24.1 MEDIA Clock Mode — CITIZEN MIGRATION DONE (S94)
 
 **What:** Fourth clock mode alongside ENGINE, GAME, CIVIC. For journalists, media figures, cultural personalities. Health YES, life history YES, aging YES. Career engine NO, migration NO. Media-specific event generator (story coverage, editorial decisions, source relationships, journalism industry events).
-**Citizens:** 8 OakTown Echo journalists (POP-00773–00780) currently GAME+MED. Scan for other media-flagged citizens.
-**Pattern:** Follow Phase 22.1 CIVIC implementation — new `generateMediaModeEvents_` function at Phase 5, ClockMode flip on ledger.
+**Citizen migration (S94):** 16 Bay Tribune journalists moved GAME→MEDIA on live sheet: Mags Corliss, Hal Richmond, P Slayer, Jordan Velez, Lila Mezran, Trevor Shimizu, Angela Reyes, Noah Tan, Kai Marston, Sharon Okafor, Mason Ortega, Farrah Del Rio, Reed Thompson, Celeste Tran, Arman Gutierrez, Elliot Marbury. OakTown Echo journalists (POP-00773–00780) still need scan.
+**Event generator (S94):** `phase05-citizens/generateMediaModeEvents.js` v1.0 built following `generateCivicModeEvents_` pattern. Role-specific event pools for editor-in-chief, columnist, reporter, podcast host, photographer, analyst, media staff. Context-aware: reads votes, arcs, civic load, sentiment, weather, sports season. Wired into engine orchestrator at both call sites (line 200, 1443).
 **Batch job:** `msgbatch_01YDFk2WVUo7ERDysdjsj3Zs` — full spec pending.
-**Status:** Not started.
+**Status:** COMPLETE. Citizen migration + event generator both done. Deploy via `clasp push`.
+
+### 24.5 Sports Transactions System — NOT STARTED
+
+**What:** System for trades, releases, call-ups (farm↔MLB), and retiring POPIDs for players who leave the Oakland universe. Currently traded players (e.g., David Sennett "Traded Away, former Oakland A's") remain on the ledger as Oakland citizens with no mechanism to move them out or reassign their POPIDs.
+**Scope:** (1) Transaction types: trade, release, call-up, send-down, retirement. (2) POPID lifecycle: active→traded→retired, with POPID reuse policy. (3) Farm system movement: Stockton Ports (A) → Midland RockHounds (AA) → Las Vegas Aviators (AAA) → Oakland A's. (4) Integration with sports feed data from MLB The Show.
+**Also addresses (S94):** 62 T3 players assigned to farm teams (AAA/AA/A) with proper team names in RoleType. 97 total player RoleTypes expanded from bare position abbreviations to "Position, Team" format.
+**Status:** Not started. Needs design session for transaction data model.
 
 ### 24.2 Tier 1-2 Event Cap Increase
 

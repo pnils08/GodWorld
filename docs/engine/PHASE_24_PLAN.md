@@ -48,6 +48,7 @@ Archetype:Watcher|Mods:curious,steady|reflective:0.73|social:0.45|...
 
 | File | Purpose | Lines |
 |------|---------|-------|
+| `phase05-citizens/generateMediaModeEvents.js` | **MEDIA mode events — BUILT S94** | v1.0, filter at MEDIA |
 | `phase04-events/generationalEventsEngine.js` | Health/aging/milestones — ENGINE+CIVIC only | 163-395, filter at 244 |
 | `phase04-events/generateGenericCitizenMicroEvent.js` | Daily micro-events — ENGINE only | 21-498, filter at 404, rates at 411-414 |
 | `phase04-events/generateGameModeMicroEvents.js` | Game-mode events — GAME only | 34-580, filter at 484 |

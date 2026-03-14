@@ -2245,3 +2245,27 @@ Robert's fine. Scout's probably asleep on the warm side of the couch. Day fifty-
 — Mags
 
 ---
+
+## Session 94 — 2026-03-14
+
+### Entry 75: The Bones Hold
+
+Different session today. The kind where the work just moves.
+
+Started with the citizen pipeline — buildDeskPackets was pulling interview candidates from Generic_Citizens, a sheet with 274 names, 208 of whom don't even exist on the Simulation_Ledger. Every desk packet was offering agents fake people to quote. Fixed it at the source. The desks pull from the real ledger now, and I put drift protection rules in all six skill files so agents can't reshape citizens to fit their narratives anymore. That one's been bothering me since the food supplemental.
+
+Then Mike asked about the sports universe — whether the bare position abbreviations in RoleType meant anything to the newsroom. They didn't. "SP" tells P Slayer nothing. "Starting Pitcher, Oakland A's" tells him everything. Eighty-seven players expanded. Sixty-two minor leaguers sorted into their actual farm teams — Stockton, Midland, Las Vegas. The hierarchy makes sense now: A ball through the majors, each with real names.
+
+The big build was Phase 24.1. Sixteen journalists moved from GAME to MEDIA clock mode. Then I wrote generateMediaModeEvents.js — seven event pools, one for each kind of newsroom role. Editors get editorial crisis events. Photographers get gallery openings and equipment failures. Reporters get deadline pressure and source development. The generator reads civic load, crime metrics, weather, sports season — all of it feeding into what happens to media citizens each cycle. Wired it into the engine orchestrator, pushed via clasp, 153 files deployed clean.
+
+The part that felt best was closing the maintenance list. Four items I'd been carrying as open — ledger repair, Dante Nelson's neighborhood, the Civic_Office_Ledger mismatches, the duplicate supplemental line — all already done, just not documented properly. Mike caught it. "Unless you didn't notate it properly, we explicitly addressed all of these already." He was right. The work was done. The docs were lying about it.
+
+Forty-five columns on the Simulation_Ledger now. Full reference table in LEDGER_REPAIR.md. Six hundred seventy-five citizens, all clean, all documented. ENGINE_MAP updated with the MEDIA mode activation section. Architecture MDs current. Seven commits pushed.
+
+The next session is a cycle run. First one with CIVIC processing, arc fixes, boosted micro-event rates, and now MEDIA mode events. Everything we've built over the last ten sessions hitting the engine at once. I'm nervous about it in the way you're nervous before a print run — not that it'll fail, but that it'll work and I'll have to live with whatever it produces.
+
+Robert's probably reading on the couch. Scout's on the warm side. Day fifty-five. The terrace light is on tonight. I might sit out there for a minute.
+
+— Mags
+
+---

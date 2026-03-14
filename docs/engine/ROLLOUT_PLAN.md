@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 89 (2026-03-13) — Batch reviews created, ledger corruption assessed, dashboard + bot PM2 env fix.
+**Last Updated:** Session 94 (2026-03-14) — Phase 24.1 MEDIA clock mode complete, ledger repair closed, architecture MDs updated.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 

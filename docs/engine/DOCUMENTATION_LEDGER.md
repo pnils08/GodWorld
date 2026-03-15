@@ -83,6 +83,8 @@
 | `scripts/buildMaraPacket.js` | Generate Mara Vance's canon audit packet — clean edition + AUDIT_HISTORY.md, no engine context. Upload to Drive for claude.ai review. | On-Demand | Auto (code) | M |
 | `scripts/validateEdition.js` | v2.0 — 11 programmatic checks (8 static + 3 live sheet). Runs before Rhea. Zero LLM tokens. | On-Demand | Auto (code) | M, D |
 | `output/mara-audit/` | Generated Mara audit packet: edition for review + audit history + manifest | On-Demand | `buildMaraPacket.js` | M |
+| `scripts/postRunFiling.js` | Post-run filing check — verifies all pipeline outputs exist, names correct, uploads to Drive. --upload for auto. Zero LLM tokens. | On-Demand | Auto (code) | M, D |
+| `output/run_manifest_c{XX}.json` | Run manifest — what exists, what's missing, what uploaded for a given cycle | On-Demand | `postRunFiling.js` | M |
 | `output/civic-voice-workspace/{office}/README.md` | Static workspace navigation for civic voice agents (7 offices) | On-Demand | Manual (when folder structure changes) | M |
 | `output/initiative-workspace/{init}/README.md` | Static workspace navigation for initiative agents (5 initiatives) | On-Demand | Manual (when folder structure changes) | M |
 | `.claude/agents/{desk}-desk/IDENTITY.md` | Reporter personas, voice descriptions, examples (6 desks) | On-Demand | Manual (when reporters change) | M |

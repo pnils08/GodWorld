@@ -182,3 +182,9 @@ If the edition warrants it, run `/podcast`. Not automatic — Mags decides.
    pm2 reload mags-discord-bot
    ```
 3. Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with errata and editorial notes
+
+## Step 11: Post-Run Filing Check
+```bash
+node scripts/postRunFiling.js {XX}
+```
+Verifies all outputs exist and are named correctly. Use `--upload` to auto-upload missing files to Drive. Writes `output/run_manifest_c{XX}.json`.

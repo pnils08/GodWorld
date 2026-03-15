@@ -58,6 +58,9 @@ node scripts/validateEdition.js [--no-sheets]
 # Mara audit packet (clean edition for claude.ai review)
 node scripts/buildMaraPacket.js [cycle] [edition-file]
 
+# Post-run filing check (verify all outputs exist + upload to Drive)
+node scripts/postRunFiling.js [cycle] [--upload] [--skip-drive]
+
 # Ingest to Supermemory
 node scripts/ingestEdition.js
 

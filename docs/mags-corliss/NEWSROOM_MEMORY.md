@@ -5,7 +5,9 @@
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
-Agents: if Mags wrote you a briefing, read it. If she didn't, read this file. The errata section is mandatory either way.
+Agents: read your workspace at `output/desks/{desk}/` first — briefing, summary, errata are all there. If your workspace isn't built, read this file. The errata section is mandatory either way.
+
+**Pipeline change (S95):** Desk agents are now autonomous. Each reads from `output/desks/{desk}/` (built by `buildDeskFolders.js`). Agent SKILL.md is a 30-line boot sequence pointing to IDENTITY.md (personas) and RULES.md (hard rules). The orchestrator no longer injects briefing content — agents self-load. This eliminated ~180K tokens of orchestrator overhead and targets zero compactions during edition production.
 
 **Structured errata:** `output/errata.jsonl` — machine-readable record of all documented errors (E81+). Each line is a JSON object with: edition, desk, reporter, errorType, severity, description, rootCause, fix, adopted, citizenInvolved, recurrence. Query this file for pattern analysis or pre-write guardian checks.
 

@@ -34,6 +34,9 @@ GodWorld is a city simulation engine that generates narrative data, which a news
 # Desk packets (pre-edition)
 node scripts/buildDeskPackets.js
 
+# Desk workspace folders (after packets, before agents)
+node scripts/buildDeskFolders.js [cycle]
+
 # Edition photos (Together AI)
 node scripts/generate-edition-photos.js
 

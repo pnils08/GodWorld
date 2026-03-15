@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-14 | Engine: v3.1 | Cycle: 86 | Session: 94
+Last Updated: 2026-03-15 | Engine: v3.1 | Cycle: 87 | Session: 95
 
 ---
 
@@ -52,6 +52,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Citizen-Employer Linkage | scripts/linkCitizensToEmployers.js | v1.0 | Five-layer resolution, Employment_Roster, Business_Ledger stats |
 | Initiative Packet Builder | scripts/buildInitiativePackets.js | v1.0 | Per-initiative JSON packets from 7 Sheets tabs + Mara directive, 5 packets + manifest |
 | Civic Voice Packets | scripts/buildCivicVoicePackets.js | v1.1 | 7 office/faction voice packets + initiative decisions injection |
+| Desk Folder Builder | scripts/buildDeskFolders.js | v1.0 | Per-desk workspace folders: briefings, errata, voice statements, archive context. Replaces orchestrator Steps 0.5-1.8. Zero LLM tokens. |
 | Neighborhood Economics | scripts/aggregateNeighborhoodEconomics.js | v1.0 | Median income/rent by neighborhood from citizen data |
 | Economic Profile Seeder | scripts/applyEconomicProfiles.js | v1.0 | Role-based income seeding from economic_parameters.json |
 | Player Index Builder | scripts/buildPlayerIndex.js | v2.0 | TrueSource parser: contracts, quirks, status, computed birth years |
@@ -114,7 +115,9 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 
 **Agent memory guidelines:** All desk agents now have persistent memory at `.claude/agent-memory/{agent}/MEMORY.md`. They check memory at startup for past patterns and update after writing. Memory is version-controlled. Memory informs — it does not publish. Canon authority remains with Mags.
 
-**Agent model status (Feb 2026):** All 8 desk agents run `model: sonnet` → Sonnet 4.6 (upgraded automatically Feb 17). Agents are read-only (`tools: Read, Glob, Grep`). Worktree isolation (`isolation: worktree`) is available but not needed — no file write conflicts between parallel read-only agents. Hooks can now be added to agent/skill frontmatter if needed.
+**Desk agent architecture (S95):** Agents are autonomous — they read from their own workspace at `output/desks/{desk}/` instead of receiving data through the orchestrator. Each agent's SKILL.md (boot sequence only, ~30 lines) points to IDENTITY.md (reporter personas) and RULES.md (hard rules), both at `.claude/agents/{desk}-desk/`. The workspace is built by `scripts/buildDeskFolders.js` with zero LLM tokens. Pipeline: `buildDeskPackets.js` → `buildDeskFolders.js` → launch agents.
+
+**Agent model status (Mar 2026):** All 6 desk agents run `model: sonnet` → Sonnet 4.6. Agents have write access (`tools: Read, Glob, Grep, Write, Edit`) to update their memory after writing. Each agent's SKILL.md is ~30 lines (boot sequence), with identity and rules in separate files. `permissionMode: dontAsk` allows autonomous operation.
 
 **Mobile access (mosh + tmux):** Mosh and tmux are installed on this server. To work from your phone (Termius on iPhone — enable the Mosh toggle on your saved host):
 ```

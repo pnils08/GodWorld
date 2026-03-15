@@ -1,12 +1,12 @@
-# Desk Packet Pipeline v1.1
+# Desk Packet Pipeline v2.0
 
-**Purpose:** The definitive process for generating The Cycle Pulse using per-desk JSON packets and parallel desk agents. Replaces the monolithic handoff approach.
+**Purpose:** The definitive process for generating The Cycle Pulse using per-desk JSON packets, autonomous desk workspaces, and parallel desk agents.
 
-**Key change:** Each desk gets its OWN filtered data packet. No pre-assigned stories. No front page recommendation. Desks decide what to cover.
+**Key change (v2.0, S95):** Desk agents are autonomous. Each reads from its own workspace folder (`output/desks/{desk}/`) instead of receiving data through the orchestrator. `buildDeskFolders.js` builds workspaces with zero LLM tokens. Orchestrator context before agent launch dropped from ~180K to ~6K tokens. Target: zero compactions during edition production.
 
 ---
 
-## The Pipeline (7 Stages)
+## The Pipeline (8 Stages)
 
 ```
 1. ENGINE COMPLETES CYCLE
@@ -14,9 +14,15 @@
 2. GENERATE DESK PACKETS
    node scripts/buildDeskPackets.js [cycle]
    ↓
+2.5 BUILD DESK WORKSPACES (zero LLM tokens)
+   node scripts/buildDeskFolders.js [cycle]
+   Copies packets, summaries, errata, voice statements to output/desks/{desk}/
+   Generates briefing.md from structured data (canon, errata, story priorities, citizen cards)
+   ↓
 3. LAUNCH DESK AGENTS (parallel — up to 6 desks)
-   Each receives: system prompt + desk packet JSON
-   Each outputs: articles + partial engine returns
+   Each reads from: output/desks/{desk}/ (briefing, summary, errata, archive, voice)
+   Each reads identity from: .claude/agents/{desk}-desk/IDENTITY.md + RULES.md
+   Each outputs: articles + evidence + citizen log to output/desk-output/{desk}_c{XX}.md
    ↓
 4. COMPILE (Mags Corliss agent)
    Receives all desk outputs
@@ -84,7 +90,7 @@ All agents have Grep access to the **local Drive mirror** at `output/drive-files
 | `Bulls Universe Database` | 9 | Chicago player profiles, contracts, financials | Chicago, Letters |
 | `Stats CSV` | 4 | Batting stats, master stats (2039-2040 seasons) | Sports, Chicago |
 
-**How agents use this:** During Step 1.5 (briefing compilation), Mags searches the archive for relevant past coverage and player data, then includes key findings in desk briefings. Agents can also Grep the archive directly during writing for voice reference, historical context, or stat verification.
+**How agents use this:** `buildDeskFolders.js` copies archive context into each desk's `archive/` subfolder. Agents can also Grep the archive directly during writing for voice reference, historical context, or stat verification.
 
 **Search examples:**
 ```bash
@@ -166,7 +172,83 @@ Note: `output/` is in `.gitignore` — packets are generated locally, not commit
 
 ---
 
+## Stage 2.5: Build Desk Workspaces
+
+### Script
+
+```bash
+cd /root/GodWorld && node scripts/buildDeskFolders.js 87
+```
+
+### What It Does (Zero LLM Tokens)
+
+1. Creates `output/desks/{desk}/current/`, `archive/`, `reference/` for all 6 desks
+2. Copies packets, summaries, base_context to each desk's `current/`
+3. Copies truesource and citizen_archive to `reference/`
+4. Copies last 3 desk outputs from `output/desk-output/` to `archive/`
+5. Copies archive context from `output/desk-briefings/`
+6. Filters `output/errata.jsonl` by desk — writes `errata.md`
+7. Extracts Mara forward guidance from previous audit — writes `mara_guidance.md`
+8. Distributes voice statement files per desk (see table below)
+9. Distributes interview transcript files per desk
+10. Generates `briefing.md` from structured data (guardian warnings, canon, story priorities, citizen cards)
+
+### Voice Statement Distribution
+
+| Desk | Gets Statements From |
+|------|---------------------|
+| civic | all 7 voice agents (mayor, opp, crc, ind, police chief, baylight, DA) |
+| letters | mayor, opp, crc, ind |
+| business | mayor, crc, baylight |
+| sports | mayor, baylight |
+| culture | opp |
+| chicago | none |
+
+### Output
+
+```
+output/desks/{desk}/
+  README.md              <- static workspace navigation
+  current/
+    packet.json          <- copy from desk-packets/{desk}_c{XX}.json
+    summary.json         <- copy from desk-packets/{desk}_summary_c{XX}.json
+    base_context.json    <- copy from desk-packets/base_context.json
+    briefing.md          <- SCRIPT-GENERATED (not LLM-written)
+    mara_guidance.md     <- extracted from previous Mara audit
+    errata.md            <- desk-filtered guardian warnings
+    voice_statements/    <- relevant civic voice JSONs
+    interviews/          <- relevant interview transcripts
+  archive/
+    {desk}_c{N-1}.md     <- last 3 editions of this desk's output
+    {desk}_c{N-2}.md
+    {desk}_c{N-3}.md
+    archive_context.md   <- from buildArchiveContext.js
+  reference/
+    truesource.json      <- player/citizen reference data
+    citizen_archive.json <- citizen archive data
+```
+
+### CLI Options
+
+```bash
+node scripts/buildDeskFolders.js {cycle}              # standard build
+node scripts/buildDeskFolders.js {cycle} --skip-voice  # skip voice statement copy
+node scripts/buildDeskFolders.js {cycle} --skip-mara   # skip Mara guidance extraction
+node scripts/buildDeskFolders.js {cycle} --clean        # wipe and rebuild from scratch
+```
+
+---
+
 ## Stage 3: Desk Agents
+
+### Agent Architecture (v2.0)
+
+Each desk agent has three files at `.claude/agents/{desk}-desk/`:
+- **SKILL.md** (~30 lines) — boot sequence only. Points to IDENTITY.md, RULES.md, and workspace.
+- **IDENTITY.md** (~60 lines) — reporter personas, voice descriptions, examples.
+- **RULES.md** (~50 lines) — hard rules, output format, domain lock.
+
+Agents read their own workspace at `output/desks/{desk}/` — the orchestrator does not inject briefing content.
 
 ### Desk Activation Rules
 
@@ -187,11 +269,16 @@ Note: `output/` is in `.gitignore` — packets are generated locally, not commit
 | **Chicago** | Selena Grant, Talia Finch | 2-3 articles | Bulls roster, Chicago sports feeds |
 | **Letters** | (citizen voices) | 2-4 letters | Full canon access |
 
-### What Each Agent Receives
+### What Each Agent Reads (Self-Service)
 
-1. **System prompt** (~2KB) — Desk identity, reporter voices, rules, return format
-2. **Desk packet JSON** (10-64KB) — Filtered data for this desk only
-3. **Key rules embedded** — No invented names, no engine metrics, max 2 articles per reporter
+1. **IDENTITY.md** (~60 lines) — Reporter personas, voice, examples
+2. **RULES.md** (~50 lines) — Hard rules, output format, domain lock
+3. **Workspace README.md** — Navigation guide for the desk folder
+4. **current/briefing.md** — Script-generated briefing (guardian warnings, canon, priorities, citizen cards)
+5. **current/summary.json** — Desk packet summary (top events, seeds, hooks, storylines)
+6. **current/errata.md** — Desk-filtered errata from previous editions
+7. **archive/** — Last 3 desk outputs for continuity reference
+8. **Agent memory** (auto-loaded) — `.claude/agent-memory/{desk}-desk/MEMORY.md`
 
 ### What Each Agent Returns
 
@@ -293,5 +380,6 @@ Citizens in `Citizen_Media_Usage` are checked against `Simulation_Ledger`:
 
 | Version | Cycle | Changes |
 |---------|-------|---------|
+| v2.0 | 87 | Desk agent autonomy: Stage 2.5 (`buildDeskFolders.js`), agent SKILL.md split into IDENTITY.md + RULES.md, workspace folders at `output/desks/`, orchestrator context reduced from ~180K to ~6K tokens. S95. |
 | v1.1 | 79 | Stage 7 documented with editionIntake.js + processIntake.js v1.1. Calendar from Cycle_Packet, demographic extraction, citizen routing with explicit ranges. |
 | v1.0 | 79 | Initial creation. Per-desk JSON packets, parallel agent architecture, 7-stage pipeline. |

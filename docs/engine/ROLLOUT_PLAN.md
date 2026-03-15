@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 94 (2026-03-14) — Phase 24.1 MEDIA clock mode complete, ledger repair closed, architecture MDs updated.
+**Last Updated:** Session 95 (2026-03-15) — Desk agent autonomy architecture complete (buildDeskFolders.js + IDENTITY/RULES split + workspace folders). Edition 87 retracted earlier this session; new pipeline ready for rewrite.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -47,8 +47,14 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Ledger corruption repair~~ — All 6 steps complete on practice sheet then applied to live. 675 citizens, 45 columns, all names/roles/education/income verified. Dante Nelson Downtown, Civic_Office_Ledger clean. S93-94.
 - **Apply batch review fixes** — Education level corrections (~50 citizens), civic official EconomicProfileKey fixes, T2 LifeHistory + TraitProfile writes (17 citizens). See `output/batch-reviews/`.
 - **Disk naming cleanup** — Standardize supplemental slugs (oakland_ prefix decision), podcast rename, rhea archive relocation. See `output/batch-reviews/batch_disk_naming_audit_2026-03-12.md`.
-- **Run Cycle 87** — First cycle with: civic citizens, arcs advancing, boosted micro-event rates, MEDIA mode events. Validates S85+S94 fixes.
 - ✅ ~~Phase 24.1: MEDIA clock mode~~ — Complete. See line 33 entry.
+- ✅ ~~Desk agent autonomy architecture~~ — Two-folder architecture: IDENTITY.md + RULES.md (voice folder) + output/desks/{desk}/ (workspace folder). buildDeskFolders.js builds workspaces with zero LLM tokens. Agent SKILL.md reduced from 200-300 lines to ~30 lines (boot sequence only). Orchestrator desk skills reduced from ~100 to ~20 lines. write-edition/SKILL.md reduced from 500+ to ~150 lines. Orchestrator context before agent launch: ~180K → ~6K tokens. Tested: business + sports desks produced clean output with zero factual errors. S95.
+- **Rewrite Edition 87** — Cycle 87 ran but edition was retracted. New pipeline ready for rewrite with autonomous desk agents.
+- **Fix editionIntake.js** — Writes garbage: full demographic strings in CitizenName, misaligned columns, no POPID resolution, no new citizen routing. 852 junk rows for one edition. Pipeline is non-functional.
+- **Fix validateEdition.js** — Doesn't check player first names against base_context.json roster. Add roster name verification.
+- **Lock Paulson title as GM** — In all reference files, briefing templates, and agent prompts. General Manager of Oakland A's and Chicago Bulls.
+- **Fix sports briefing pipeline** — Sports feed summaries fed wrong first names. Briefings must cross-reference base_context.json roster data directly.
+- **Clean Citizen_Media_Usage historical junk** — C79 has 731 garbage rows with same broken format. Earlier cycles may also be affected.
 
 ---
 

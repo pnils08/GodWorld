@@ -2,7 +2,7 @@
 
 **What lives where. Read this before searching for files.**
 
-Last Updated: Session 87 (2026-03-11)
+Last Updated: Session 95 (2026-03-15)
 
 ---
 
@@ -26,9 +26,10 @@ Last Updated: Session 87 (2026-03-11)
 | `rhea-reports/` | Rhea verification reports | Permanent | Named: `rhea_report_c{XX}.txt` |
 | `supplemental-briefs/` | Topic briefs for supplementals | Permanent | Named: `{slug}_c{XX}_brief.md` |
 | `desk-packets/` | Agent input JSON (per desk, per cycle) | Current + prior | Named: `{desk}_c{XX}.json`, `{desk}_summary_c{XX}.json` |
-| `desk-briefings/` | Agent briefing docs | Current + prior | Named: `{desk}_briefing_c{XX}.md`, `{desk}_archive_c{XX}.md` |
+| `desk-briefings/` | **LEGACY** — old agent briefing docs (pre-S95) | Archive | Named: `{desk}_briefing_c{XX}.md`, `{desk}_archive_c{XX}.md` |
 | `desk-output/` | Raw agent output (current cycle) | Current only | Named: `{desk}_c{XX}.md` |
 | `desk-raw/` | Uncompiled desk output (prior cycle) | Prior only | Named: `{desk}_c{XX}_raw.md` |
+| `desks/` | **Per-desk autonomous workspaces** (built by `buildDeskFolders.js`) | Current cycle | `desks/{desk}/current/` (briefing, packets, errata, voice statements), `desks/{desk}/archive/` (last 3 outputs), `desks/{desk}/reference/` (truesource, citizen archive). See README.md in each desk folder. |
 | `civic-voice/` | Civic office voice data | Current + prior | Named: `{office}_c{XX}.json` |
 | `civic-voice-packets/` | Civic voice packets for agents | Current + prior | Named: `{office}_c{XX}.json` + `manifest.json` |
 | `initiative-packets/` | Initiative agent input | Current cycle | |
@@ -115,7 +116,8 @@ PM2-managed services + cron jobs. Rotated automatically.
 Run at session end or when output/ exceeds ~60MB:
 
 1. Delete desk packets older than prior cycle
-2. Delete desk briefings older than prior cycle
+2. Delete desk briefings older than prior cycle (legacy `desk-briefings/`)
+3. Run `node scripts/buildDeskFolders.js {cycle} --clean` to rebuild desk workspaces
 3. Delete civic voice data older than prior cycle
 4. Delete HTML intermediates from pdfs/
 5. Delete drive-files/ cache (re-downloadable)

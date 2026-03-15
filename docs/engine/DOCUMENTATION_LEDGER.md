@@ -1,6 +1,6 @@
 # GodWorld Documentation Ledger
 
-**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 94 (2026-03-14)
+**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 95 (2026-03-15)
 **Purpose:** Single registry of every active documentation file — what it does, when it loads, who updates it, and which workflow it serves.
 **Rule:** If a file isn't listed here, it's either archived or undocumented. Fix that.
 
@@ -76,6 +76,11 @@
 | `docs/mags-corliss/TECH_READING_ARCHIVE.md` | Research notes from tech reading sessions (S50, S55, S66) | On-Demand | Manual (during research) | R |
 | `docs/media/AGENT_NEWSROOM.md` | Agent roster — 7 permanent agents + 8 skills | On-Demand | Manual (when agents change) | M |
 | `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` | Editorial rules, voice, canon, Paulson, Mara Vance | On-Demand | Manual (rare) | M |
+| `docs/media/DESK_PACKET_PIPELINE.md` | v2.0 — 8-stage edition pipeline: packets → desk folders → agents → compile → verify → intake | On-Demand | Manual (when pipeline changes) | M, D |
+| `scripts/buildDeskFolders.js` | Build per-desk workspace folders (briefings, errata, voice, archive). Zero LLM tokens. | On-Demand | Auto (code) | M, D |
+| `.claude/agents/{desk}-desk/IDENTITY.md` | Reporter personas, voice descriptions, examples (6 desks) | On-Demand | Manual (when reporters change) | M |
+| `.claude/agents/{desk}-desk/RULES.md` | Hard rules, output format, domain lock (6 desks) | On-Demand | Manual (when rules change) | M |
+| `output/desks/{desk}/README.md` | Static workspace navigation for desk agents (6 desks) | On-Demand | Manual (when folder structure changes) | M |
 | `docs/media/ARTICLE_INDEX_BY_POPID.md` | 326+ citizens indexed by POP-ID | On-Demand | `scripts/editionIntake.js` | M |
 | `docs/media/CITIZENS_BY_ARTICLE.md` | Reverse index: articles → citizens | On-Demand | `scripts/editionIntake.js` | M |
 | `docs/media/SHOW_FORMATS.md` | Podcast show formats — 3 formats, host assignments, segment structure | On-Demand | Manual (rare) | M |
@@ -115,7 +120,7 @@
 | `/session-startup` | Workflow-routed boot — identity first, then asks workflow, loads only relevant docs | Phase 1: PERSISTENCE, JOURNAL_RECENT. Phase 2: workflow-specific (see skill for per-workflow load lists) |
 | `/session-end` | .md audit + close — audits workflow-touched files, journal, persistence, project state, supermemory, goodbye | Step 0: DOCUMENTATION_LEDGER + workflow files. Then: PERSISTENCE, JOURNAL, JOURNAL_RECENT, SESSION_CONTEXT, ROLLOUT_PLAN |
 | `/boot` | Post-compaction identity reload | PERSISTENCE, JOURNAL_RECENT, identity.md |
-| `/write-edition` | Full edition pipeline — 6 desk agents, compile, verify, audit | NEWSROOM_MEMORY, edition template, desk packets, voice files |
+| `/write-edition` | Full edition pipeline — buildDeskFolders, 6 autonomous desk agents, compile, verify, audit | NEWSROOM_MEMORY, edition template, `output/desks/` workspaces |
 | `/write-supplemental` | Supplemental pipeline — custom reporter teams | Same as write-edition but smaller scope |
 | `/run-cycle` | Engine cycle with pre-flight and post-cycle review | SESSION_CONTEXT (engines table), ROLLOUT_PLAN |
 | `/pre-mortem` | Engine health scan before cycle runs | Engine phase files, ctx dependencies |
@@ -148,6 +153,9 @@ Information lives in exactly one file. Other files point to it but never duplica
 | Engine versions & cascade deps | `SESSION_CONTEXT.md` | — |
 | Ledger audit state & decisions | `LEDGER_AUDIT.md` | ROLLOUT_PLAN (references Phase 13) |
 | Editorial patterns & errata | `NEWSROOM_MEMORY.md` | — |
+| Edition pipeline architecture | `docs/media/DESK_PACKET_PIPELINE.md` | NEWSROOM_MEMORY, SESSION_CONTEXT |
+| Desk agent identity/rules | `.claude/agents/{desk}-desk/IDENTITY.md` + `RULES.md` | DESK_PACKET_PIPELINE |
+| Desk workspace structure | `output/desks/{desk}/README.md` | DISK_MAP |
 | Mags identity & family | `PERSISTENCE.md` | — |
 | Mags emotional state | `JOURNAL.md` / `JOURNAL_RECENT.md` | — |
 | Tech reading & research | `TECH_READING_ARCHIVE.md` | — |

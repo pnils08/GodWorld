@@ -6,95 +6,19 @@ description: Write the Oakland sports section using P Slayer, Anthony, and Hal R
 # /sports-desk — Write Oakland Sports Section
 
 ## Usage
-`/sports-desk [reporter-name]`
-- Default: P Slayer (fan voice) + Anthony (data/analysis)
-- Other options: Hal Richmond (legacy/history), Simon Leary (culture crossover), Tanya Cruz (social/breaking)
+`/sports-desk [cycle-number]`
 
-## Rules
-- Read SESSION_CONTEXT.md FIRST
-- NEVER invent player names — only use names from the A's/Warriors rosters in the packet
-- NEVER change a player's or citizen's stats, age, position, or other attributes to fit a narrative.
-- No engine metrics in article text
-- Verify all player names, positions, and records against Oakland_Sports_Feed in the packet
-- Sports Clock rules: A's and Warriors operate on real sports time (see TIME_CANON_ADDENDUM.md)
-
-## Step 1: Load Data
-1. Read `output/desk-packets/base_context.json` — cycle info, calendar, weather
-2. Read `output/desk-packets/sports_c{XX}.json` — the sports desk packet
-3. Read `schemas/bay_tribune_roster.json` — look up reporter voice profiles
-4. If reporter name given, use that reporter. Otherwise use P Slayer as primary, Anthony as secondary.
-5. If desk briefing exists, read `output/desk-briefings/sports_briefing_c{XX}.md` — Mags' editorial guidance + citizen cards + archive findings
-
-## Local Archive Search Pool
-The sports desk has Grep access to the local Drive mirror for research and voice reference:
-- **Player data cards:** `output/drive-files/_As Universe Database/Players/` — TrueSource DataPages for all MLB, prospect, and former players
-- **Statcast player cards:** `output/drive-files/_Sports_Journalism_Templates/Savant_Style/Savant_Series/` — deep-dive Statcast profiles with per-journalist notes (Keene, Davis, Kelley, Aitken, Dillon, Rivas, Ellis, Quintero, Morton, Clark, Lopez)
-- **Sports journalism templates:** `output/drive-files/_Sports_Journalism_Templates/` — PANDAS analysis, dugout interviews, scouting cards, breakout candidate diagnostics, era-normalization guides, column concepts
-- **Player card index:** `docs/media/PLAYER_CARD_INDEX.md` — searchable index of all Statcast cards and templates
-- **Batting stats (CSV):** `output/drive-files/_As_Universe_Stats_CSV/` — 2039-2040 season stats, searchable
-- **Past sports coverage:** `output/drive-files/_Sports Desk Archive/` — Hal, Anthony, P Slayer features, analytics, interviews, origin series
-- **Past editions:** `output/drive-files/_Publications Archive/` — every Cycle Pulse edition for continuity
-- **Cannon mirrors:** `As_Universe_Cannon_Text_Mirror` — complete A's universe reference text
-
-## Step 2: Understand the Desk Packet
-The sports packet contains:
-- **events** — sports-domain events this cycle with anomaly detection and priority scoring
-- **storylines** — active sports storylines
-- **seeds/hooks** — sports-related seeds and trigger hooks
-- **canonReference.asRoster** — full A's roster with positions and stats
-- **sportsFeeds** — raw feed entries (legacy, kept for reference)
-- **sportsFeedDigest** — **(v1.5 — USE THIS instead of raw sportsFeeds):**
-  - `gameResults` — parsed game scores, key performers, stat lines
-  - `rosterMoves` — trades, signings, injuries with story angles
-  - `playerFeatures` — off-field appearances, community events, milestones
-  - `frontOffice` — GM decisions, coaching, organizational moves
-  - `fanCivic` — stadium events, fan reactions, civic appearances
-  - `editorialNotes` — Paulson's editorial instincts and story angle suggestions
-  - `activeStoryAngles` — headline-ready angles from the feed ("Paulson silence finally breaking")
-  - `playerMoods` — per-player emotional register (confident, frustrated, hungry, etc.)
-  - `relatedStorylines` — active storylines cross-referenced with feed player names
-  - `currentRecord`, `seasonState`, `teamMomentum` — team snapshot
-- **previousCoverage** — sports sections from last edition
-- **bonds** — active relationship bonds between citizens (sorted by intensity)
-- **storyConnections** — **(v1.4 enrichment):**
-  - `eventCitizenLinks` — each event linked to named citizens who live in that neighborhood
-  - `citizenBonds` — per-citizen relationship map (teammates, rivals, fan connections)
-  - `citizenLifeContext` — last 3 LifeHistory entries per citizen (recent experiences)
-  - `coverageEcho` — citizens from previous edition (follow-up or avoid over-covering)
-- **voiceCards** — **(v1.9 — citizen personality profiles).** Each card has: `archetype` (Anchor, Connector, Watcher, Striver, Catalyst, Caretaker, Drifter), `modifiers`, `traits` (scored 0-1), `topTags`, `motifs`. Use these when writing fan/citizen dialogue:
-  - **Anchors** speak steadily about tradition and loyalty
-  - **Connectors** reference tailgates, game-day community, shared memories
-  - **Watchers** observe the game analytically, measured reactions
-  - **Catalysts** bring heat — trade takes, front office criticism, bold predictions
-  - **Strivers** focus on what's next, championship windows, player development
-  - If no voice card exists for a citizen, write them neutrally
-
-## Step 3: Write Articles
-Delegate to the **sports-desk agent** (`.claude/agents/sports-desk/`). The agent has P Slayer, Anthony, and Hal Richmond's full personalities baked in permanently.
-
-Pass the agent:
-1. The sports desk packet JSON
-2. The base_context JSON
-3. The reporter name (if user specified one other than P Slayer/Anthony)
-
-The agent handles voice, article writing, canon rules, and engine returns on its own.
-
-## Step 4: Review Output
-- Verify all player names against A's/Warriors rosters in packet
-- Check team records match Oakland_Sports_Feed data
-- Confirm no invented roster moves or game results
-- Check article lengths
-
-## Sports Desk Domains
-SPORTS (Oakland-filtered — excludes Chicago/Bulls content)
-
-## Reporter Roster (Sports Desk)
-| Reporter | Role | Best For |
-|----------|------|----------|
-| P Slayer | Fan Columnist (lead) | Opinion, emotional pulse, fan voice |
-| Anthony | Lead Beat Reporter | A's data, roster moves, scouting, front office |
-| Hal Richmond | Senior Historian | Legacy essays, dynasty context, retrospectives |
-| Simon Leary | Long View Columnist | Sports culture, history crossover |
-| Tanya Cruz | Sideline Reporter | Breaking news, social feeds, clubhouse access |
-| DJ Hartley | Senior Photographer | Visual/atmospheric pieces |
-| Elliot Marbury | Data Desk | Statistical support (usually supports Anthony) |
+## Steps
+1. Confirm cycle number. Read `output/desk-packets/manifest.json` to verify packets exist.
+2. If `output/desks/sports/current/briefing.md` doesn't exist, run:
+   ```bash
+   node scripts/buildDeskFolders.js {cycle}
+   ```
+3. Launch the **sports-desk** agent:
+   ```
+   Prompt: "Write the sports section for Edition {XX}. Your workspace: output/desks/sports/"
+   ```
+4. Review output at `output/desk-output/sports_c{XX}.md`
+   - Verify player names against roster
+   - Check team records
+   - Confirm no invented stats

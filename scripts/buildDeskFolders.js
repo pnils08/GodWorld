@@ -1,0 +1,483 @@
+#!/usr/bin/env node
+/**
+ * buildDeskFolders.js v1.0
+ *
+ * Populates per-desk workspace folders for autonomous agent operation.
+ * Replaces the orchestrator's manual briefing-writing, errata-filtering,
+ * and voice-statement distribution — all with zero LLM tokens.
+ *
+ * Run AFTER: buildDeskPackets.js, buildArchiveContext.js, voice agents.
+ * Run BEFORE: launching desk agents.
+ *
+ * Usage: node scripts/buildDeskFolders.js [cycleNumber] [--skip-voice] [--skip-mara] [--clean]
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+// ─── CONFIG ──────────────────────────────────────────────
+const CYCLE = parseInt(process.argv[2]) || 87;
+const SKIP_VOICE = process.argv.includes('--skip-voice');
+const SKIP_MARA = process.argv.includes('--skip-mara');
+const CLEAN = process.argv.includes('--clean');
+
+const ROOT = path.resolve(__dirname, '..');
+const DESKS_DIR = path.join(ROOT, 'output/desks');
+const PACKETS_DIR = path.join(ROOT, 'output/desk-packets');
+const BRIEFINGS_DIR = path.join(ROOT, 'output/desk-briefings');
+const DESK_OUTPUT_DIR = path.join(ROOT, 'output/desk-output');
+const VOICE_DIR = path.join(ROOT, 'output/civic-voice');
+const INTERVIEWS_DIR = path.join(ROOT, 'output/interviews');
+const ERRATA_PATH = path.join(ROOT, 'output/errata.jsonl');
+
+const DESK_NAMES = ['sports', 'civic', 'culture', 'business', 'chicago', 'letters'];
+
+// Voice statement distribution table
+const VOICE_DISTRIBUTION = {
+  civic:    ['mayor', 'opp_faction', 'crc_faction', 'ind_swing', 'police_chief', 'baylight_authority', 'district_attorney'],
+  letters:  ['mayor', 'opp_faction', 'crc_faction', 'ind_swing'],
+  business: ['mayor', 'crc_faction', 'baylight_authority'],
+  sports:   ['mayor', 'baylight_authority'],
+  culture:  ['opp_faction'],
+  chicago:  []
+};
+
+// ─── HELPERS ─────────────────────────────────────────────
+function ensureDir(dir) {
+  fs.mkdirSync(dir, { recursive: true });
+}
+
+function copyIfExists(src, dest) {
+  if (fs.existsSync(src)) {
+    fs.copyFileSync(src, dest);
+    return true;
+  }
+  return false;
+}
+
+function readIfExists(filePath) {
+  if (fs.existsSync(filePath)) {
+    return fs.readFileSync(filePath, 'utf8');
+  }
+  return null;
+}
+
+function readJsonIfExists(filePath) {
+  const content = readIfExists(filePath);
+  if (content) {
+    try { return JSON.parse(content); }
+    catch (e) { return null; }
+  }
+  return null;
+}
+
+// ─── ERRATA FILTER ───────────────────────────────────────
+function getErrataForDesk(desk) {
+  if (!fs.existsSync(ERRATA_PATH)) return [];
+  const lines = fs.readFileSync(ERRATA_PATH, 'utf8').trim().split('\n');
+  const entries = lines.map(l => { try { return JSON.parse(l); } catch(e) { return null; } }).filter(Boolean);
+
+  // Filter to this desk + cross-desk, last 3 editions
+  const maxEdition = entries.length > 0 ? Math.max(...entries.map(e => e.edition || 0)) : 0;
+  const cutoff = maxEdition - 2;
+
+  return entries.filter(e =>
+    (e.desk === desk || e.desk === 'cross-desk' || e.desk === 'pipeline') &&
+    (e.edition || 0) >= cutoff
+  );
+}
+
+function formatErrataMarkdown(entries, desk) {
+  if (entries.length === 0) return `# Guardian Warnings — ${desk}\n\nNo warnings for this desk.\n`;
+
+  let md = `# Guardian Warnings — ${desk}\n\n`;
+
+  // Recurring patterns first
+  const recurring = entries.filter(e => e.recurrence);
+  if (recurring.length > 0) {
+    md += `## RECURRING PATTERNS (highest priority)\n`;
+    for (const e of recurring) {
+      md += `- **${e.errorType}** (${e.recurrence}x): ${e.description} — E${e.edition}\n`;
+    }
+    md += '\n';
+  }
+
+  // Then by severity
+  const critical = entries.filter(e => e.severity === 'CRITICAL' && !e.recurrence);
+  if (critical.length > 0) {
+    md += `## CRITICAL\n`;
+    for (const e of critical) {
+      md += `- ${e.errorType}: ${e.description} — E${e.edition}\n`;
+    }
+    md += '\n';
+  }
+
+  const warnings = entries.filter(e => e.severity === 'WARNING' && !e.recurrence);
+  if (warnings.length > 0) {
+    md += `## WARNING\n`;
+    for (const e of warnings) {
+      md += `- ${e.errorType}: ${e.description} — E${e.edition}\n`;
+    }
+    md += '\n';
+  }
+
+  return md;
+}
+
+// ─── MARA GUIDANCE EXTRACTION ────────────────────────────
+function extractMaraGuidance(cycle) {
+  // Try previous cycle's Mara directive
+  const maraPath = path.join(ROOT, `output/mara_directive_c${cycle - 1}.txt`);
+  const maraAltPath = path.join(ROOT, `output/mara-directives/mara_directive_c${cycle - 1}.txt`);
+  const content = readIfExists(maraPath) || readIfExists(maraAltPath);
+  if (!content) return null;
+
+  // Extract FORWARD GUIDANCE section
+  const fwdMatch = content.match(/FORWARD GUIDANCE[:\s]*\n([\s\S]*?)(?:\n#{1,3}\s|\n---|\Z)/i);
+  if (fwdMatch) return fwdMatch[1].trim();
+
+  // Fallback: look for per-desk sections
+  const sections = content.match(/(?:^|\n)(#{1,3}\s.*(?:guidance|next|forward)[\s\S]*?)(?=\n#{1,3}\s|\Z)/gi);
+  if (sections) return sections.join('\n\n').trim();
+
+  return null;
+}
+
+function getMaraGuidanceForDesk(fullGuidance, desk) {
+  if (!fullGuidance) return null;
+
+  // Try to find desk-specific section
+  const deskPattern = new RegExp(`(?:${desk}|${desk.replace('-', ' ')})[:\\s]*([^\\n]+(?:\\n(?!\\*\\*|#{1,3}\\s)[^\\n]+)*)`, 'gi');
+  const match = deskPattern.exec(fullGuidance);
+  if (match) return match[0].trim();
+
+  // Return full guidance if no desk-specific section found
+  return fullGuidance;
+}
+
+// ─── BRIEFING GENERATOR ──────────────────────────────────
+function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errata) {
+  let md = `# ${desk.charAt(0).toUpperCase() + desk.slice(1)} Desk Briefing — Cycle ${cycle}\n\n`;
+
+  // Calendar context
+  if (baseContext) {
+    const bc = baseContext;
+    md += `**Cycle ${cycle}** | ${bc.month || ''} ${bc.simYear || ''} | ${bc.season || ''}\n\n`;
+  }
+
+  // Guardian warnings
+  if (errata && errata.length > 0) {
+    md += `## GUARDIAN WARNINGS\n`;
+    const recurring = errata.filter(e => e.recurrence);
+    for (const e of recurring) {
+      md += `- **RECURRING — ${e.errorType}** (${e.recurrence}x): ${e.description}\n`;
+    }
+    const others = errata.filter(e => !e.recurrence);
+    for (const e of others) {
+      md += `- ${e.severity || 'NOTE'}: ${e.errorType} — ${e.description}\n`;
+    }
+    md += '\n';
+  }
+
+  // Mara forward guidance
+  if (maraGuidance) {
+    md += `## MARA FORWARD GUIDANCE\n${maraGuidance}\n\n`;
+  }
+
+  // Established canon from base_context
+  if (baseContext && baseContext.canon) {
+    md += generateCanonSection(desk, baseContext.canon);
+  }
+
+  // Story priorities from summary
+  if (summary) {
+    md += generateStoryPriorities(desk, summary);
+  }
+
+  // Returning citizens from summary
+  if (summary) {
+    md += generateReturningCitizens(desk, summary);
+  }
+
+  // Citizen reference cards from summary
+  if (summary) {
+    md += generateCitizenCards(desk, summary);
+  }
+
+  return md;
+}
+
+function generateCanonSection(desk, canon) {
+  let md = `## ESTABLISHED CANON\n`;
+
+  if (desk === 'civic' || desk === 'letters') {
+    // Council roster
+    if (canon.council) {
+      md += `### Council\n`;
+      for (const member of canon.council) {
+        md += `ESTABLISHED CANON: ${member.member || member.name} — District ${member.district}, ${member.faction || 'Independent'}\n`;
+      }
+      md += '\n';
+    }
+    // Executive branch
+    if (canon.executiveBranch) {
+      const eb = canon.executiveBranch;
+      if (eb.mayor) md += `ESTABLISHED CANON: Mayor is ${eb.mayor}\n`;
+      if (eb.deputyMayor) md += `ESTABLISHED CANON: Deputy Mayor is ${eb.deputyMayor}\n`;
+      md += '\n';
+    }
+    // Recent outcomes
+    if (canon.recentOutcomes && canon.recentOutcomes.length > 0) {
+      md += `### Recent Vote Outcomes\n`;
+      for (const outcome of canon.recentOutcomes) {
+        md += `ESTABLISHED CANON: ${outcome.initiative || outcome.name} — ${outcome.result || outcome.status} (${outcome.vote || ''})\n`;
+      }
+      md += '\n';
+    }
+  }
+
+  if (desk === 'sports') {
+    if (canon.asRoster && Array.isArray(canon.asRoster)) {
+      md += `### A's Roster (verify all player positions against this)\n`;
+      const starters = canon.asRoster.filter(p => p.status === 'Active' || !p.status).slice(0, 15);
+      for (const p of starters) {
+        md += `ESTABLISHED CANON: ${p.name} — ${p.roleType || p.position || 'roster'}\n`;
+      }
+      md += '\n';
+    }
+  }
+
+  if (desk === 'chicago') {
+    if (canon.bullsRoster && Array.isArray(canon.bullsRoster)) {
+      md += `### Bulls Roster (verify all player names against this)\n`;
+      for (const p of canon.bullsRoster) {
+        md += `ESTABLISHED CANON: ${p.name} — ${p.roleType || p.position || 'roster'}\n`;
+      }
+      md += '\n';
+    }
+  }
+
+  return md;
+}
+
+function generateStoryPriorities(desk, summary) {
+  let md = `## STORY PRIORITIES\n`;
+
+  // Events sorted by priority
+  const events = summary.events || summary.topEvents || [];
+  const sorted = [...events].sort((a, b) => (b.priority || 0) - (a.priority || 0)).slice(0, 5);
+
+  if (sorted.length === 0) {
+    md += `No prioritized events for this cycle.\n\n`;
+    return md;
+  }
+
+  for (let i = 0; i < sorted.length; i++) {
+    const e = sorted[i];
+    md += `${i + 1}. **${e.name || e.title || e.description || 'Event'}** — ${e.neighborhood || 'city-wide'}`;
+    if (e.priority) md += ` (priority: ${e.priority})`;
+    if (e.description && e.description !== e.name) md += `\n   ${e.description}`;
+    md += '\n';
+  }
+  md += '\n';
+
+  // Active storylines
+  const storylines = summary.storylines || summary.activeStorylines || [];
+  if (storylines.length > 0) {
+    md += `### Active Storylines\n`;
+    for (const s of storylines.slice(0, 5)) {
+      md += `- ${s.description || s.name || s.title}`;
+      if (s.citizens) md += ` — involves: ${Array.isArray(s.citizens) ? s.citizens.join(', ') : s.citizens}`;
+      md += '\n';
+    }
+    md += '\n';
+  }
+
+  return md;
+}
+
+function generateReturningCitizens(desk, summary) {
+  // Look for previousCoverage or coverageEcho in the summary
+  const coverage = summary.previousCoverage || summary.coverageEcho || summary.storyConnections?.coverageEcho;
+  if (!coverage) return '';
+
+  let md = `## RETURNING — CONTINUE THREAD\n`;
+  md += `These citizens have active stories. Continue their arcs before introducing anyone new.\n\n`;
+
+  const citizens = Array.isArray(coverage) ? coverage : (coverage.citizens || []);
+  if (citizens.length === 0) return '';
+
+  for (const c of citizens.slice(0, 5)) {
+    const name = c.name || c.citizenName || 'Unknown';
+    const details = [c.age, c.neighborhood, c.occupation].filter(Boolean).join(', ');
+    md += `**${name}** (${details})\n`;
+    if (c.lastArticle || c.context) md += `- Last seen: ${c.lastArticle || c.context}\n`;
+    if (c.quote) md += `- Key quote: "${c.quote}"\n`;
+    md += '\n';
+  }
+
+  return md;
+}
+
+function generateCitizenCards(desk, summary) {
+  const candidates = summary.interviewCandidates || [];
+  const archive = summary.citizenArchive || [];
+  const all = [...candidates, ...archive].slice(0, 10);
+
+  if (all.length === 0) return '';
+
+  let md = `## CITIZEN REFERENCE CARDS\n`;
+  for (const c of all) {
+    const name = c.name || c.citizenName || 'Unknown';
+    const details = [c.age, c.neighborhood, c.occupation].filter(Boolean).join(', ');
+    md += `- **${name}** (${details})`;
+    if (c.popid) md += ` [${c.popid}]`;
+    md += '\n';
+  }
+  md += '\n';
+
+  return md;
+}
+
+// ─── MAIN ────────────────────────────────────────────────
+function main() {
+  console.log(`\n=== buildDeskFolders.js v1.0 — Cycle ${CYCLE} ===\n`);
+
+  // Load shared data
+  const baseContext = readJsonIfExists(path.join(PACKETS_DIR, 'base_context.json'));
+  if (!baseContext) {
+    console.error('ERROR: base_context.json not found. Run buildDeskPackets.js first.');
+    process.exit(1);
+  }
+
+  // Extract Mara guidance once
+  let maraGuidance = null;
+  if (!SKIP_MARA) {
+    maraGuidance = extractMaraGuidance(CYCLE);
+    if (maraGuidance) console.log('  Found previous Mara guidance');
+    else console.log('  No previous Mara guidance found (normal for first cycle)');
+  }
+
+  let totalFiles = 0;
+
+  for (const desk of DESK_NAMES) {
+    console.log(`\n--- ${desk} desk ---`);
+    const deskDir = path.join(DESKS_DIR, desk);
+    const currentDir = path.join(deskDir, 'current');
+    const archiveDir = path.join(deskDir, 'archive');
+    const referenceDir = path.join(deskDir, 'reference');
+    const voiceStmtsDir = path.join(currentDir, 'voice_statements');
+    const interviewsDir = path.join(currentDir, 'interviews');
+
+    // Clean current/ if requested
+    if (CLEAN && fs.existsSync(currentDir)) {
+      fs.rmSync(currentDir, { recursive: true });
+    }
+
+    // Ensure directories
+    ensureDir(currentDir);
+    ensureDir(archiveDir);
+    ensureDir(referenceDir);
+    ensureDir(voiceStmtsDir);
+    ensureDir(interviewsDir);
+
+    let deskFiles = 0;
+
+    // 1. Copy packets
+    if (copyIfExists(path.join(PACKETS_DIR, `${desk}_c${CYCLE}.json`), path.join(currentDir, 'packet.json'))) {
+      console.log(`  packet.json`);
+      deskFiles++;
+    } else {
+      console.log(`  WARNING: No packet found for ${desk}_c${CYCLE}.json`);
+    }
+
+    if (copyIfExists(path.join(PACKETS_DIR, `${desk}_summary_c${CYCLE}.json`), path.join(currentDir, 'summary.json'))) {
+      console.log(`  summary.json`);
+      deskFiles++;
+    }
+
+    // base_context.json
+    copyIfExists(path.join(PACKETS_DIR, 'base_context.json'), path.join(currentDir, 'base_context.json'));
+    deskFiles++;
+
+    // 2. Reference files
+    copyIfExists(path.join(PACKETS_DIR, 'truesource_reference.json'), path.join(referenceDir, 'truesource.json'));
+    copyIfExists(path.join(PACKETS_DIR, 'citizen_archive.json'), path.join(referenceDir, 'citizen_archive.json'));
+
+    // 3. Archive — last 3 desk outputs
+    for (let c = CYCLE - 1; c >= Math.max(CYCLE - 3, 1); c--) {
+      const srcOutput = path.join(DESK_OUTPUT_DIR, `${desk}_c${c}.md`);
+      if (copyIfExists(srcOutput, path.join(archiveDir, `${desk}_c${c}.md`))) {
+        console.log(`  archive: ${desk}_c${c}.md`);
+        deskFiles++;
+      }
+    }
+
+    // Archive context from buildArchiveContext.js
+    const archiveCtxSrc = path.join(BRIEFINGS_DIR, `${desk}_archive_c${CYCLE}.md`);
+    if (copyIfExists(archiveCtxSrc, path.join(archiveDir, 'archive_context.md'))) {
+      console.log(`  archive_context.md`);
+      deskFiles++;
+    }
+
+    // 4. Errata
+    const errataEntries = getErrataForDesk(desk);
+    const errataMd = formatErrataMarkdown(errataEntries, desk);
+    fs.writeFileSync(path.join(currentDir, 'errata.md'), errataMd);
+    console.log(`  errata.md (${errataEntries.length} entries)`);
+    deskFiles++;
+
+    // 5. Mara guidance
+    if (maraGuidance) {
+      const deskMara = getMaraGuidanceForDesk(maraGuidance, desk);
+      if (deskMara) {
+        fs.writeFileSync(path.join(currentDir, 'mara_guidance.md'), `# Mara Forward Guidance — ${desk}\n\n${deskMara}\n`);
+        console.log(`  mara_guidance.md`);
+        deskFiles++;
+      }
+    }
+
+    // 6. Voice statement distribution
+    if (!SKIP_VOICE) {
+      const voicesForDesk = VOICE_DISTRIBUTION[desk] || [];
+      for (const office of voicesForDesk) {
+        const voiceSrc = path.join(VOICE_DIR, `${office}_c${CYCLE}.json`);
+        if (copyIfExists(voiceSrc, path.join(voiceStmtsDir, `${office}.json`))) {
+          console.log(`  voice: ${office}.json`);
+          deskFiles++;
+        }
+      }
+    }
+
+    // 7. Interview distribution
+    if (fs.existsSync(INTERVIEWS_DIR)) {
+      const interviewFiles = fs.readdirSync(INTERVIEWS_DIR).filter(f =>
+        f.startsWith(`response_c${CYCLE}`) && f.endsWith('.json')
+      );
+      for (const iFile of interviewFiles) {
+        // Check if interview is relevant to this desk
+        const interview = readJsonIfExists(path.join(INTERVIEWS_DIR, iFile));
+        if (interview && (interview.desk === desk || interview.desk === 'all' || !interview.desk)) {
+          copyIfExists(path.join(INTERVIEWS_DIR, iFile), path.join(interviewsDir, iFile));
+          console.log(`  interview: ${iFile}`);
+          deskFiles++;
+        }
+      }
+    }
+
+    // 8. Generate briefing.md
+    const summary = readJsonIfExists(path.join(currentDir, 'summary.json'));
+    const deskMara = maraGuidance ? getMaraGuidanceForDesk(maraGuidance, desk) : null;
+    const briefing = generateBriefing(desk, CYCLE, summary, baseContext, deskMara, errataEntries);
+    fs.writeFileSync(path.join(currentDir, 'briefing.md'), briefing);
+    console.log(`  briefing.md (generated)`);
+    deskFiles++;
+
+    console.log(`  Total: ${deskFiles} files`);
+    totalFiles += deskFiles;
+  }
+
+  console.log(`\n=== Done: ${totalFiles} files across ${DESK_NAMES.length} desks ===\n`);
+}
+
+main();

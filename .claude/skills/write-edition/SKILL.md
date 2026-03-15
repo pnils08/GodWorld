@@ -7,1035 +7,158 @@ description: Run the complete Cycle Pulse edition production pipeline — 6 desk
 
 ## Usage
 `/write-edition [cycle-number]`
-- Runs the complete Cycle Pulse edition production
-- Launches all 6 desk agents in parallel, then compiles
 
 ## Rules
 - Read SESSION_CONTEXT.md FIRST
-- This is the master pipeline — it orchestrates all 6 desk skills
 - Show the user a plan before launching agents
 - Get approval before compiling the final edition
 
 ## Prerequisites
-Before running this skill, the user should have already:
-1. Run the engine cycle (`/run-cycle` or manually)
+Before running, the user should have already:
+1. Run the engine cycle
 2. Built desk packets: `node scripts/buildDeskPackets.js [cycle]`
-3. Built archive context: `node scripts/buildArchiveContext.js [cycle]`
-4. Built civic voice packets: `node scripts/buildCivicVoicePackets.js [cycle]` (Step 1.7 can also do this)
-5. Written a Mara directive (optional but recommended for civic desk)
+3. Built civic voice packets: `node scripts/buildCivicVoicePackets.js [cycle]` (optional)
 
-Check that `output/desk-packets/manifest.json` exists for this cycle.
-Check that `output/desk-briefings/{desk}_archive_c{XX}.md` files exist (from buildArchiveContext.js).
-Check that `output/civic-voice-packets/manifest.json` exists for this cycle (civic voice data for institutional voice agents).
-
-## Step 0.5: Read Previous Mara Audit (Forward Guidance)
-
-Before building desk briefings, check if a Mara audit exists from the previous cycle:
-
-1. **Look for** `output/mara_directive_c{XX-1}.txt` (previous cycle's audit)
-2. **If it exists**, read and extract the `FORWARD GUIDANCE` section at the end
-3. **Feed per-desk priorities** directly into the corresponding desk briefings in Step 1.5
-4. **Quote Mara's citizen spotlight** in relevant briefing citizen cards
-5. **Note any canon corrections** — these become `ESTABLISHED CANON:` lines in briefings
-
-If no previous Mara audit exists (first edition through the pipeline, or audit wasn't saved), skip this step. The briefings still work without it — Mara's guidance is additive, not required.
-
-## Step 1: Verify Desk Packets
-1. Read `output/desk-packets/manifest.json` — confirm all 6 packets AND 6 summary files exist
-2. Read `output/desk-packets/base_context.json` — get cycle number, calendar, weather
-3. Confirm the cycle number matches what the user expects
-4. Show the user what's available (include both packet and summary sizes):
-
+## Step 1: Verify Packets
+1. Read `output/desk-packets/manifest.json` — confirm all 6 packets exist
+2. Read `output/desk-packets/base_context.json` — get cycle number, calendar
+3. Confirm cycle number matches user expectation
+4. Show summary to user:
 ```
-EDITION [XX] — DESK PACKETS READY
-  [x] civic_c80.json (235KB) + summary (18KB) — 12 events, 4 storylines, Mara directive
-  [x] sports_c80.json (21KB) + summary (12KB) — 3 events, A's roster loaded
-  [x] culture_c80.json (48KB) + summary (15KB) — 18 events, 8 cultural entities
-  [x] business_c80.json (10KB) + summary (8KB) — 4 events, nightlife data
-  [x] chicago_c80.json (13KB) + summary (10KB) — 5 events, Bulls roster loaded
-  [x] letters_c80.json (250KB) + summary (16KB) — all-domain access
-
-Ready to launch 6 desk agents in parallel?
+EDITION [XX] — PACKETS READY
+  [x] civic, sports, culture, business, chicago, letters
+Ready to proceed?
 ```
 
-**If summaries are missing**, run `node scripts/buildDeskPackets.js [cycle]` to regenerate.
-
-## Step 1.4: Run Targeted Queries (Optional)
-
-If specific stories need live data not in the desk packets, run `scripts/queryLedger.js` to fill gaps:
-
-```bash
-node scripts/queryLedger.js citizen "Darius Clark" --save    # Full citizen profile
-node scripts/queryLedger.js initiative "Stabilization" --save # Initiative + implementation status
-node scripts/queryLedger.js articles "apprenticeship" --save  # Find dangling threads in 674+ files
-node scripts/queryLedger.js neighborhood Fruitvale --save     # Neighborhood snapshot
-```
-
-Results save to `output/queries/` as JSON. Agents can read them via their Read tool.
-Include in agent prompts: "Additional context files may exist in output/queries/ — read any relevant to your beat."
-
-**When to use:** Before editions with major civic storylines (Stabilization Fund disbursement, Baylight instruments, OARI deadline). Not needed for routine editions where packets have sufficient data.
-
-## Step 1.5: Compile Newsroom Briefings (Mags as Memory Broker)
-
-Before launching agents, compile per-desk editorial briefings from institutional memory.
-
-1. **Read** `docs/mags-corliss/NEWSROOM_MEMORY.md` — the institutional memory file
-2. **Read** the desk summary files (`{desk}_summary_c{XX}.json`) — identify which citizens, initiatives, and storylines each desk will likely cover
-3. **Query Supermemory** for citizen cards relevant to each desk's coverage:
-   - Use `/super-search` with citizen names, POPIDs, or neighborhoods from the summary
-   - Pull narrative context for citizens who will likely be quoted, referenced, or written about
-   - Check `docs/media/CITIZEN_NARRATIVE_MEMORY.md` for the 22 foundation POPIDs (Dynasty Five, Bulls core, reporters, civic figures)
-   - Focus on citizens in the Mara directive, interview candidates, and active storylines
-
-3b. **Search the Local Drive Archive** (`output/drive-files/`) for relevant past coverage:
-   - Grep for key citizens, storylines, or topics each desk will cover
-   - For **sports desk**: search `_As Universe Database/` for TrueSource player cards, `_As_Universe_Stats_CSV/` for batting stats
-   - For **civic desk**: search `_Tribune Media Archive/Carmen_Delaine/` and `_Tribune Media Archive/Luis_Navarro/` for coverage precedents
-   - For **culture desk**: search `_Tribune Media Archive/Maria_Keen/` for past features
-   - For **chicago desk**: search `_Bulls Universe Database/` for player profiles
-   - Include key findings (past article references, stat lines, historical context) in the desk briefing
-   - This is how agents get institutional memory — they can't search the archive themselves during writing without this
-
-4. **For each of the 6 desks**, write a briefing memo to `output/desk-briefings/{desk}_briefing_c{XX}.md`:
-   - `civic_briefing_c{XX}.md`
-   - `sports_briefing_c{XX}.md`
-   - `culture_briefing_c{XX}.md`
-   - `business_briefing_c{XX}.md`
-   - `chicago_briefing_c{XX}.md`
-   - `letters_briefing_c{XX}.md`
-
-5. **Read the Supermemory archive context** for each desk (`output/desk-briefings/{desk}_archive_c{XX}.md`). These are auto-generated by `buildArchiveContext.js` and contain relevant past coverage, character history, and established facts from the archive. Weave relevant findings into the briefing.
-
-5b. **Run the Guardian Check** for each desk — query structured errata for desk-specific warnings:
-   ```bash
-   node scripts/queryErrata.js --desk civic --editions 3
-   node scripts/queryErrata.js --desk sports --editions 3
-   node scripts/queryErrata.js --desk culture --editions 3
-   node scripts/queryErrata.js --desk business --editions 3
-   node scripts/queryErrata.js --desk chicago --editions 3
-   node scripts/queryErrata.js --desk letters --editions 3
-   ```
-   Include the guardian output in each desk's briefing under a `## GUARDIAN WARNINGS` section. Recurring patterns get highest priority — if vote_swap has hit 3 editions in a row, that goes at the top of the civic briefing in bold.
-
-6. **Each briefing contains** (500-1500 words, in Mags' editorial voice):
-   - **Guardian Warnings** — auto-generated from `output/errata.jsonl` via queryErrata.js (Step 5b)
-   - **Mara Forward Guidance** — per-desk priority from previous Mara audit (Step 0.5), if available
-   - Desk-specific errata and corrections from past editions
-   - Cross-desk coordination notes (who else is covering what — avoid overlap)
-   - Character continuity pointers (who to carry forward, who doesn't exist)
-   - **RETURNING — CONTINUE THREAD** section (see below) — 3-5 returning citizens per desk
-   - **Citizen Reference Cards** (see format below) — for every citizen this desk is likely to write about
-   - **Archive context** — relevant past coverage from Supermemory (character history, established facts, prior angles)
-   - Mara Vance directive emphasis for this desk
-   - Personal editorial note to the lead reporter
-
-### Returning Citizens Protocol
-
-For each desk, identify **3-5 citizens who appeared in the last 1-2 editions** and add a `RETURNING — CONTINUE THREAD:` section in the briefing:
-
-```
-## RETURNING — CONTINUE THREAD
-
-These citizens have active stories. Continue their arcs before introducing anyone new.
-
-**Gloria Meeks** (64, West Oakland, retired postal worker)
-- Last article: E82 Civic, "Stabilization Fund reaction" — quoted about displacement fears
-- Key quote: "I've been here forty years. I'm not leaving because someone drew a line on a map."
-- What changed: Fund disbursement began. Follow up on whether her block saw any impact.
-
-**Marco Lopez** (40, Laurel, mechanic)
-- Last article: E81 Civic, "Baylight DEIR concerns" — looking into development documents
-- What changed: DEIR completed public comment period. Did he submit?
-```
-
-**Selection criteria:** Citizens with quoted material, unresolved storylines, or strong neighborhood anchoring. Prioritize citizens who appeared in articles (not just citizen usage logs). Check `docs/media/ARTICLE_INDEX_BY_POPID.md` and recent editions for candidates.
-
-### Canon Fact Prefix Convention
-
-Use `ESTABLISHED CANON:` prefix for any fact that agents MUST get right — names, positions, vote outcomes, initiative status. This visually distinguishes non-negotiable data from editorial suggestions.
-
-```
-ESTABLISHED CANON: Mark Aitken plays 1B (first base). Not 3B.
-ESTABLISHED CANON: OARI passed 5-4. Vega voted NO, Tran voted YES.
-ESTABLISHED CANON: Mayor is Avery Santana. Not Marcus Whitmore.
-ESTABLISHED CANON: Benji Dillon is LEFT-HANDED. Cy Newell is RIGHT-HANDED.
-```
-
-These prefixed lines signal "this is data, not a suggestion." Agents should treat them as immutable. Use the prefix for:
-- Player positions (most common error)
-- Council vote outcomes and breakdowns
-- Mayor and executive branch names
-- Initiative status (passed vs. pending)
-- Corrected facts from past errata
-Do NOT prefix story ideas, editorial suggestions, or character development notes — those are guidance, not canon.
-
-6. Create the directory: `mkdir -p output/desk-briefings`
-
-### Citizen Reference Card Format
-
-Include a `## Citizen Reference Cards` section in each briefing. Each card is 3-5 lines:
-
-```
-**[Name]** (age [X], [Neighborhood], [Occupation]) — [POPID if known]
-- Last seen: [what they did / said in recent edition]
-- Key detail: [narrative context from Supermemory — origin, family, thematic significance]
-- DO NOT: [specific warnings — don't promote, don't invent titles, don't confuse with similar names]
-```
-
-Example:
-```
-**Marco Lopez** (40, Laurel, Mechanic) — Mara directive citizen
-- Last seen: Edition 81, looking into Baylight DEIR documents
-- Key detail: Working-class voice on development. Skeptical but engaged, not oppositional.
-- DO NOT: Give him civic titles. He is a mechanic. Not a committee chair, not an organizer.
-```
-
-**Card selection by desk:**
-- **Civic**: Council members (always all 9), Mara directive citizens, initiative stakeholders
-- **Sports**: A's roster (Dynasty Five + current), featured fans, Paulson
-- **Culture**: Neighborhood residents, faith figures, event participants
-- **Business**: Workers affected by policy, small business owners, Stabilization Fund contacts
-- **Chicago**: Bulls roster, Chicago neighborhood citizens, Talia's sources
-- **Letters**: All Mara directive citizens, plus 3-5 interview candidates from the summary
-
-**Card data sources (in priority order):**
-1. **Desk archive context file** (`output/desk-briefings/{desk}_archive_c{XX}.md`) — richest source, contains past article excerpts and verified facts
-2. **Supermemory search** — for citizens not in the archive file
-3. **Desk packet data** (citizenArchive, interviewCandidates) — basic demographics
-4. **NEWSROOM_MEMORY.md** — errata and character continuity notes
-
-**If a citizen has no archive or Supermemory card**, still include a basic card from the desk packet data (name, age, neighborhood, occupation) with a note: "No narrative history yet — introduce naturally."
-
-Write these as Mags — with editorial authority, personal warmth, and specific guidance. These are not templates. They're memos from the Editor-in-Chief to her reporters.
-
-## Step 1.6: Launch Initiative Agents (Phase 15)
-
-Before voice agents, run the civic project initiative agents. These agents make autonomous decisions about their programs and produce civic documents that voice agents and desk agents can react to.
-
-### Step 1.6a: Generate Initiative Packets
-
+## Step 2: Initiative Agents (Parallel, Optional)
+If civic initiatives need advancing this cycle:
 ```bash
 node scripts/buildInitiativePackets.js {cycle}
 ```
+Launch 5 initiative agents in parallel (haiku). Launch City Clerk after. These are additive — failures don't block the pipeline.
 
-Produces 5 per-initiative JSON packets to `output/initiative-packets/`:
-- `stabilization_fund_c{XX}.json` — OEWD Stabilization Fund ($28M)
-- `oari_c{XX}.json` — Oakland Alternative Response Initiative ($12.5M)
-- `transit_hub_c{XX}.json` — Fruitvale Transit Hub Phase II ($230M)
-- `health_center_c{XX}.json` — Temescal Community Health Center ($45M)
-- `baylight_c{XX}.json` — Baylight District ($2.1B)
+## Step 3: Voice Agents (Parallel)
+Launch voice agents to generate source material for desk agents:
+1. Mayor's Office -> save to `output/civic-voice/mayor_c{XX}.json`
+2. 3 Faction agents in parallel (OPP, CRC, IND) -> save to `output/civic-voice/`
+3. Extended voices (Police Chief, Baylight, DA) — only if relevant events exist
 
-**Verify:** Check `output/initiative-packets/manifest.json` — confirms cycle number, initiative status, citizen counts.
+Voice agent outputs are distributed to desk folders automatically in Step 4.
 
-### Step 1.6b: Launch 5 Initiative Agents (Parallel)
-
-Launch all 5 initiative agents in parallel using the Agent tool. Each reads its packet + memory file, makes decisions, writes civic documents, and updates its memory.
-
-```
-Agent: civic-project-stabilization-fund (haiku)
-  Prompt: "Read your memory file at .claude/agent-memory/stabilization-fund/MEMORY.md,
-           then read your initiative packet at output/initiative-packets/stabilization_fund_c{XX}.json.
-           Execute your cycle {XX} work per your SKILL.md instructions."
-
-Agent: civic-project-oari (haiku)
-  Prompt: [same pattern with oari paths]
-
-Agent: civic-project-transit-hub (haiku)
-  Prompt: [same pattern with transit-hub paths]
-
-Agent: civic-project-health-center (haiku)
-  Prompt: [same pattern with health-center paths]
-
-Agent: civic-office-baylight-authority (haiku)
-  Prompt: "Read your memory file at .claude/agent-memory/baylight-authority/MEMORY.md,
-           then read your initiative packet at output/initiative-packets/baylight_c{XX}.json,
-           then read your civic voice packet at output/civic-voice-packets/baylight_authority_c{XX}.json.
-           Execute your cycle {XX} work per your SKILL.md instructions — produce BOTH voice statements AND civic documents."
-```
-
-**If any agent fails, the rest continue.** Initiative agents are additive — a failed agent means one initiative doesn't advance this cycle, not a pipeline failure.
-
-### Step 1.6c: Verify Initiative Agent Output
-
-After agents complete, verify:
-1. Check `output/city-civic-database/initiatives/{initiative}/decisions_c{XX}.json` exists for each agent
-2. Check that documents were produced (`.md` files in the same directory)
-3. Log which initiatives advanced and which didn't
-
-The decisions JSON files and civic documents are now available for:
-- **Voice agents (Step 1.8)** — Mayor and factions can react to initiative decisions
-- **Desk agents (Step 2+)** — Reporters can write about what happened
-- **Drive upload** — Documents with `driveUploads` arrays will be filed to City_Civic_Database
-
-### Step 1.6d: Upload Civic Documents to Drive
-
-For each initiative agent that produced documents with `driveUploads` in their decisions JSON:
-
+## Step 4: Build Desk Folders
 ```bash
-node scripts/saveToDrive.js output/city-civic-database/initiatives/{initiative}/{filename} civic
+node scripts/buildDeskFolders.js {cycle}
 ```
+One command. Zero LLM tokens. Populates all 6 desk workspaces with:
+- Packets, summaries, base context
+- Script-generated briefings (canon, errata, story priorities, returning citizens)
+- Voice statement distribution (civic gets all, chicago gets none)
+- Interview transcripts
+- Last 3 editions of past output
+- Reference data (truesource, citizen archive)
 
-### Step 1.6e: Launch City Clerk (Lori)
+**Verify:** Check `output/desks/{desk}/current/briefing.md` exists for all 6 desks.
 
-After initiative agents file and before voice agents, run the City Clerk to audit and index the filings:
-
-```
-Agent: city-clerk (haiku)
-```
-
-Lori audits what the initiative agents filed, enforces naming conventions, produces a Filing Index and Completeness Audit, and updates the Cumulative Database Index. Her output lands in `output/city-civic-database/clerk/`.
-
-**Verify:** Check that `output/city-civic-database/clerk/CivicDB-C{XX}-FilingIndex.md` exists.
-
----
-
-## Step 1.7: Generate Civic Voice Packets
-
-Before launching voice agents, generate jurisdiction-specific data packets from the Google Sheets:
-
-```bash
-node scripts/buildCivicVoicePackets.js {cycle}
-```
-
-This produces 7 targeted JSON packets to `output/civic-voice-packets/`:
-- `mayor_c{XX}.json` — all initiatives, all events, city-wide metrics
-- `opp_faction_c{XX}.json` — D1/D3/D5/D9 districts, their citizens, crime, transit, faith orgs
-- `crc_faction_c{XX}.json` — D6/D7/D8 districts, their citizens, fiscal metrics
-- `ind_swing_c{XX}.json` — D2/D4 districts, their citizens
-- `police_chief_c{XX}.json` — all neighborhoods crime data, OARI vs non-OARI comparison
-- `baylight_authority_c{XX}.json` — 4 adjacent neighborhoods, affected citizens
-- `district_attorney_c{XX}.json` — city-wide crime summary
-
-**Verify:** Check `output/civic-voice-packets/manifest.json` — confirms cycle number, packet files, citizen counts per faction.
-
-**If the script fails** (usually Google Sheets auth), voice agents can still run with `base_context.json` — the packets are richer but not required.
-
----
-
-## Step 1.8: Launch Institutional Voice Agents (Phase 10.1)
-
-Before desk agents write, launch voice agents to generate source material. Voice agents produce official statements that desk agents report on — creating a real separation between source and reporter.
-
-### Mayor's Office
-
-Launch `civic-office-mayor` agent with this prompt:
+## Step 5: Launch 6 Desk Agents (Parallel)
+Launch ALL 6 in a single message with `run_in_background: true`:
 
 ```
-Generate official statements for Cycle {XX} as Mayor Avery Santana's office.
+Agent: sports-desk
+Prompt: "Write the sports section for Edition {XX}. Your workspace: output/desks/sports/"
 
-**CIVIC VOICE PACKET:**
-{contents of output/civic-voice-packets/mayor_c{XX}.json}
+Agent: civic-desk
+Prompt: "Write the civic section for Edition {XX}. Your workspace: output/desks/civic/"
 
-This packet contains all active initiatives, city-wide events, population metrics, neighborhood data, council composition, and status alerts — everything your office needs to respond to this cycle.
+Agent: culture-desk
+Prompt: "Write the culture section for Edition {XX}. Your workspace: output/desks/culture/"
 
-Write 2-5 structured statements as JSON. Output to be saved to output/civic-voice/mayor_c{XX}.json.
+Agent: business-desk
+Prompt: "Write the business section for Edition {XX}. Your workspace: output/desks/business/"
+
+Agent: chicago-desk
+Prompt: "Write the Chicago section for Edition {XX}. Your workspace: output/desks/chicago/"
+
+Agent: letters-desk
+Prompt: "Write the letters section for Edition {XX}. Your workspace: output/desks/letters/"
 ```
 
-After the Mayor agent completes:
-1. Save the statements array to `output/civic-voice/mayor_c{XX}.json`
-2. Include the Mayor's statements in the **civic desk briefing** under `## MAYOR'S OFFICE STATEMENTS`
-3. Include relevant statements in **letters desk briefing** (citizens react to what the Mayor said)
-4. Include economic/development statements in **business desk briefing**
-5. If the Mayor references Baylight or the A's, include in **sports desk briefing**
+Each agent reads its own IDENTITY.md, RULES.md, and desk folder. No pre-loading needed from the orchestrator.
 
-**If the Mayor agent fails or is skipped**, desk agents still work — they just won't have official source quotes. The pipeline is additive, not dependent.
+## Step 5.1: Collect Results
+Check each agent's output. When all 6 return, confirm articles were produced. If a desk failed, retry once with a focused prompt.
 
-### Step 1.8b: Council Faction Agents
+## Step 5.5: Jax Caldera — Accountability Check (Conditional)
+Review collected output for stink signals (silence on major policy, contradictions between desks, dropped storylines). If found, launch `freelance-firebrand` agent for one accountability piece. If not, skip.
 
-After the Mayor agent completes, launch all 3 faction agents **in parallel** (single message, `run_in_background: true`). Each faction reads the Mayor's statements so they can respond to, align with, or counter his positions.
+## Step 6: Compile (Mags Role)
+After all desks return, compile the full edition:
 
-**Launch all 3 in one message:**
-
-1. **OPP Faction** (`civic-office-opp-faction`) — Janae Rivers as spokesperson
-2. **CRC Faction** (`civic-office-crc-faction`) — Warren Ashford as spokesperson
-3. **IND Swing** (`civic-office-ind-swing`) — Vega and Tran speak individually
-
-Each gets this prompt (substitute the correct faction packet file):
-
-```
-Generate official statements for Cycle {XX}.
-
-**CIVIC VOICE PACKET:**
-{contents of output/civic-voice-packets/{faction}_c{XX}.json}
-
-This packet contains your faction's districts, neighborhoods, citizens, crime metrics, transit data, faith communities, and active initiatives — everything specific to your jurisdiction.
-
-**MAYOR'S STATEMENTS THIS CYCLE:**
-{contents of output/civic-voice/mayor_c{XX}.json — the Mayor's positions to respond to}
-
-Write structured statements as JSON.
-```
-
-Packet files by faction:
-- OPP: `output/civic-voice-packets/opp_faction_c{XX}.json`
-- CRC: `output/civic-voice-packets/crc_faction_c{XX}.json`
-- IND: `output/civic-voice-packets/ind_swing_c{XX}.json`
-
-After all 3 faction agents complete:
-1. Save outputs to:
-   - `output/civic-voice/opp_faction_c{XX}.json`
-   - `output/civic-voice/crc_faction_c{XX}.json`
-   - `output/civic-voice/ind_swing_c{XX}.json`
-2. Include ALL faction statements in the **civic desk briefing** under `## COUNCIL FACTION STATEMENTS`
-3. Include faction positions on hot-button topics in **letters desk briefing** (citizens react to political debate)
-4. Include CRC fiscal statements and OPP economic positions in **business desk briefing**
-5. If statements reference Baylight or A's, include in **sports desk briefing**
-6. Include OPP community statements in **culture desk briefing** when they address neighborhood impact
-
-**If any faction agent fails**, the others continue. Desk agents still work — they just won't have that faction's source quotes.
-
-### Step 1.8c: Extended Civic Voices (Conditional)
-
-After faction agents complete, **conditionally** launch extended civic voice agents. Only launch if events in the cycle touch their domain. These run in parallel.
-
-**Check triggers before launching:**
-
-| Agent | Trigger | Skip if... |
-|-------|---------|-------------|
-| `civic-office-police-chief` (Rafael Montez) | OARI events, crime data, public safety items in packet | No public safety events this cycle |
-| `civic-office-baylight-authority` (Keisha Ramos) | Baylight construction, environmental review, TIF zone events | No Baylight-related events this cycle |
-| `civic-office-district-attorney` (Clarissa Dane) | Crime/justice events, legal challenges, civil rights matters | No legal/justice events this cycle |
-
-For triggered agents, use this prompt (substitute the correct office packet file):
-
-```
-Generate official statements for Cycle {XX}.
-
-**CIVIC VOICE PACKET:**
-{contents of output/civic-voice-packets/{office}_c{XX}.json}
-
-This packet contains jurisdiction-specific data: neighborhood metrics, crime statistics, OARI comparison data, affected citizens, and relevant initiatives.
-
-Write structured statements as JSON.
-```
-
-Packet files by office:
-- Police Chief: `output/civic-voice-packets/police_chief_c{XX}.json`
-- Baylight Authority: `output/civic-voice-packets/baylight_authority_c{XX}.json`
-- District Attorney: `output/civic-voice-packets/district_attorney_c{XX}.json`
-
-After extended voice agents complete:
-1. Save outputs to:
-   - `output/civic-voice/police_chief_c{XX}.json` (if launched)
-   - `output/civic-voice/baylight_authority_c{XX}.json` (if launched)
-   - `output/civic-voice/district_attorney_c{XX}.json` (if launched)
-2. Include all extended voice statements in the **civic desk briefing** under `## EXTENDED CIVIC VOICES`
-3. Include Baylight Authority statements in **business desk briefing** and **sports desk briefing**
-4. Include Police Chief statements in **civic desk briefing** (already covered above)
-
-**Skipping extended voices is normal.** Most cycles won't trigger all three. Some cycles may trigger none. The pipeline is additive.
-
-### Voice Agent Summary
-
-```
-Step 1.8:  Mayor's Office        → output/civic-voice/mayor_c{XX}.json
-Step 1.8b: OPP Faction (parallel) → output/civic-voice/opp_faction_c{XX}.json
-           CRC Faction (parallel) → output/civic-voice/crc_faction_c{XX}.json
-           IND Swing (parallel)   → output/civic-voice/ind_swing_c{XX}.json
-Step 1.8c: Police Chief (conditional) → output/civic-voice/police_chief_c{XX}.json
-           Baylight Authority (conditional) → output/civic-voice/baylight_authority_c{XX}.json
-           District Attorney (conditional) → output/civic-voice/district_attorney_c{XX}.json
-Step 1.8d: Targeted Interviews (optional) → output/interviews/response_c{XX}_{office}.json
-           Paulson Notification (async)   → Discord webhook + scripts/paulson-respond.js
-```
-
-**Ordering:** Mayor → Factions (read Mayor's output) → Extended (independent) → Interviews (targeted follow-ups, optional). Total pipeline time is minimal — factions run in parallel, extended voices run in parallel and are conditional, interviews target only 1-3 agents.
-
-### Statement Distribution Summary
-
-| Desk | Gets Statements From |
-|------|---------------------|
-| Civic | ALL voice agents (political reporting is their beat) |
-| Letters | Mayor + faction positions on hot topics (citizens react) |
-| Business | Mayor + CRC fiscal + Baylight Authority (economic angle) |
-| Sports | Mayor/Baylight Authority re: stadium (development angle) |
-| Culture | OPP community statements (neighborhood impact) |
-| Chicago | None (Oakland-only voices) |
-
----
-
-### Step 1.8d: Targeted Interviews (Phase 12.1)
-
-After voice agents complete their proactive statements, identify opportunities for follow-up interviews. This step is **optional per cycle** — skip it if no stories warrant a direct Q&A exchange beyond what proactive statements already provide.
-
-**When to run interviews:**
-- A proactive statement doesn't address the specific angle a desk needs
-- An active storyline would benefit from a direct question-and-answer
-- Paulson storylines in the sports feed (trade deadline, stadium updates, two-city tension)
-- A Mara directive calls for a specific source response
-
-**Process:**
-
-1. **Review cycle data**: Read voice agent statements, desk summaries, active storylines, Mara forward guidance
-2. **Identify 2-5 interview targets** — not every cycle needs interviews. Most cycles, 0-2 is appropriate.
-3. **Write interview request files** to `output/interviews/`:
-
-```json
-{
-  "cycle": 85,
-  "requestedBy": "Carmen Delaine",
-  "desk": "civic",
-  "target": "mayor",
-  "targetName": "Avery Santana",
-  "topic": "Fruitvale vendor displacement from Baylight construction",
-  "questions": [
-    "Mayor, vendors on International Boulevard say construction staging has cut foot traffic by 40%. What relief is your office providing?",
-    "The Stabilization Fund was supposed to address exactly this. Why haven't disbursements reached Fruitvale yet?"
-  ],
-  "context": "INIT-006 Baylight passed 6-3. Stabilization Fund (INIT-009) has $4.2M approved but $0 disbursed to Fruitvale businesses.",
-  "urgency": "this-cycle"
-}
-```
-
-4. **Launch targeted voice agents** with interview prompts (only the agents whose offices received questions — usually 1-3, not all 7):
-
-```
-You previously generated proactive statements for Cycle {XX}. A reporter has follow-up questions.
-
-**YOUR PREVIOUS STATEMENTS:**
-{contents of output/civic-voice/{office}_c{XX}.json}
-
-**INTERVIEW REQUEST:**
-{contents of output/interviews/request_c{XX}_{office}.json}
-
-Respond to each question in character. Output as JSON to be saved to output/interviews/response_c{XX}_{office}.json.
-```
-
-5. **Paulson interviews (async)**: If a Paulson interview was requested, run `node scripts/notify-paulson-interview.js {cycle}` to send a Discord notification. Mike responds via `node scripts/paulson-respond.js {cycle}` when available.
-
-6. **Collect responses**: Voice agent responses are immediate. Paulson response is async — if not received by desk launch time, note "Paulson's office has not yet responded" in the briefing.
-
-**After interviews complete**, include transcripts in desk briefings under `## INTERVIEW TRANSCRIPTS`:
-
-```markdown
-## INTERVIEW TRANSCRIPTS
-
-### Mayor Santana — Fruitvale Vendor Displacement
-**Requested by:** Carmen Delaine (Civic Desk)
-
-Q: "Mayor, vendors on International Boulevard say..."
-A: "We've heard those concerns directly..."
-**PULL QUOTE:** "No one should lose their livelihood because we're building something better."
-
-### Mike Paulson — Trade Deadline Strategy
-**Requested by:** P Slayer (Sports Desk)
-**Status:** Awaiting response / Response received
-[Response text if available, or "Paulson's office has not yet responded."]
-```
-
-**Pipeline timing:**
-- Voice agent interviews: ~30 seconds each (haiku model, they already have context from the proactive pass)
-- Paulson notification: instant (Discord webhook)
-- Paulson response: async — graceful degradation if unavailable
-
-**Skipping interviews is normal.** Many cycles won't need them. Proactive statements are usually sufficient. Interviews are for when a story demands a direct exchange.
-
----
-
-## Step 2: Launch All 6 Desks in Parallel
-
-**Model note:** Desk agents run on Sonnet 4.6, which handles larger context windows (up to 1M tokens) and has stronger agent capabilities than previous Sonnet versions. Agents can reference full desk packets freely — the summary-first strategy is editorial discipline, not a technical constraint.
-
-**Memory note:** Civic, sports, culture, chicago, and Rhea agents have persistent project memory (`.claude/agent-memory/{agent-name}/`). They check their memory at startup for past error patterns, citizen continuity, and coverage corrections. After writing, they update their memory with what they learned. This reduces Mags' briefing burden over time — agents remember on their own. Business, letters, and Jax are stateless by design.
-
-**Canon safeguard:** Agent memory informs, it does not publish. Agents use memory for continuity and error avoidance. Final compilation and canon approval always goes through Mags. Memory cannot override desk packet data or the editor's briefing.
-
-### Pre-loading Context into Agent Prompts (Phase 7.2)
-
-Before launching each agent, **read the following files and include their content directly in the agent's Task prompt**. This pre-loads context so agents start writing immediately instead of spending turns reading files. Saves 1-2 turns per desk.
-
-For each desk, read and embed these files under labeled headers:
-
-1. **Editor's Briefing**: Read `output/desk-briefings/{desk}_briefing_c{XX}.md` — embed under `**PRE-LOADED: EDITOR'S BRIEFING**`
-2. **Desk Summary**: Read `output/desk-packets/{desk}_summary_c{XX}.json` — embed under `**PRE-LOADED: DESK SUMMARY**`
-3. **Archive Context**: Read `output/desk-briefings/{desk}_archive_c{XX}.md` — embed under `**PRE-LOADED: ARCHIVE CONTEXT**`
-
-If a file doesn't exist, include the header with `"Not available for this cycle."`
-
-**Prompt structure for each desk agent:**
-```
-Write the {desk} section for Edition {XX}.
-
-**PRE-LOADED: EDITOR'S BRIEFING**
-{contents of {desk}_briefing_c{XX}.md, or "Not available for this cycle."}
-
-**PRE-LOADED: DESK SUMMARY**
-{contents of {desk}_summary_c{XX}.json}
-
-**PRE-LOADED: ARCHIVE CONTEXT**
-{contents of {desk}_archive_c{XX}.md, or "Not available for this cycle."}
-
-Reference the full packet at `output/desk-packets/{desk}_c{XX}.json` when you need extended data (full citizen archive, detailed quotes, complete roster).
-Read base context at `output/desk-packets/base_context.json`.
-```
-
-**Do NOT pre-load full desk packets** — they can be 200KB+. The summary (10-20KB) gives agents enough to plan. They reference the full packet as needed.
-
-### Launching Agents
-
-Use the Task tool to launch all 6 agents in a **single message** with `run_in_background: true` on each. This runs them in parallel — all 6 work simultaneously in separate contexts.
-
-Each agent gets:
-- The desk-specific skill instructions (from the individual desk skills)
-- **Pre-loaded context** (briefing + summary + archive) embedded directly in the prompt
-- File path to the full desk packet JSON (reference freely for extended data)
-- File path to base_context.json
-
-**Launch ALL 6 in one message (critical — this is what makes them parallel):**
-1. **Civic Desk** — Carmen Delaine (lead), follows /civic-desk skill, `run_in_background: true`
-2. **Sports Desk** — P Slayer + Anthony, follows /sports-desk skill, `run_in_background: true`
-3. **Culture Desk** — Maria Keen (lead), follows /culture-desk skill, `run_in_background: true`
-4. **Business Desk** — Jordan Velez, follows /business-desk skill, `run_in_background: true`
-5. **Chicago Bureau** — Selena Grant + Talia Finch, follows /chicago-desk skill, `run_in_background: true`
-6. **Letters Desk** — citizen voices, follows /letters-desk skill, `run_in_background: true`
-
-Each agent writes articles + engine returns for their section.
-
-## Step 2.1: Collect Background Agent Results
-
-Each background agent returns an `output_file` path when launched. Use `TaskOutput` to check each agent's status:
-
-1. Wait briefly, then check each agent with `TaskOutput` (use `block: false` to check without waiting)
-2. As agents complete, read their output and confirm articles were produced
-3. Track which desks are done vs. still running
-4. When all 6 have returned, proceed to Step 2.5
-
-**If an agent takes too long** (no output after several minutes), check its output file with `Read` tool for progress or errors. Do not wait indefinitely — if stuck, note the failure and proceed with available desks.
-
-## Step 2.5: Agent Retry (If Needed)
-After all 6 background agents have returned (confirmed via Step 2.1), check if any desk produced **zero articles**. If a desk failed:
-1. Log which desk(s) failed and why (ran out of turns, packet navigation issues, etc.)
-2. **Retry once** with a focused prompt: give the agent the summary file, the briefing memo, AND the base_context. With Sonnet 4.6's larger context, include the full briefing — don't strip it down. Tell it explicitly: "You have 15 turns. Write [N] articles. Your summary and briefing have everything you need. Start writing by turn 3."
-3. If the retry also fails, Mags writes the section directly using the summary data.
-4. Note the failure in the edition's compilation notes for NEWSROOM_MEMORY update.
-
-## Step 2.7: Jax Caldera — Accountability Check (Conditional)
-
-After all 6 desks complete, Mags reviews the collected output for **stink signals**:
-- **Silence patterns** — a major policy action happened but no desk covered its implementation
-- **Implementation gaps** — money was allocated but nobody asked where it went
-- **Contradictions** — two desks tell different versions of the same event
-- **Missing follow-up** — a story from a previous edition was dropped without resolution
-
-**If a stink signal exists:**
-1. Launch the `freelance-firebrand` agent (Jax Caldera) as a 7th desk
-2. Give Jax: the desk summaries, the specific stink signal, the base_context, and any relevant archive context
-3. Jax produces ONE accountability piece (500-800 words) for the ACCOUNTABILITY section
-4. One piece max per edition. Jax doesn't pile on.
-
-**If no stink signal exists:**
-- Jax stays home. Not every edition needs an accountability piece.
-- Skip the ACCOUNTABILITY section in the template entirely.
-
-## Step 3: Compile (Mags Corliss Role)
-After all 6 agents return, compile the full edition:
-
-1. **Call front page** — Which desk produced the strongest lead story?
-   - Show the user a summary of each desk's output
-   - Recommend a front page pick but let the user decide
-2. **Assemble in template v1.4 order:**
+1. **Front page call** — which desk has the strongest lead? Show user, let them decide.
+2. **Assemble in template order:**
    - HEADER (from base_context)
-   - FRONT PAGE (strongest story — deck line + standardized byline required)
-   - **EDITOR'S DESK** — Mags writes 150-250 words, first-person, framing the edition's theme
-   - CIVIC AFFAIRS (with reporter routing: Delaine, Mezran, Torres, Navarro, Shimizu)
+   - FRONT PAGE (deck line + standardized byline)
+   - EDITOR'S DESK — Mags writes 150-250 words framing the edition
+   - CIVIC AFFAIRS
    - BUSINESS
-   - CULTURE / SEASONAL — OAKLAND (with reporter routing: Keen, Marston, Ortega, Reyes, Tan, Okafor)
-   - **OPINION** — P Slayer / Farrah Del Rio / Elliot Graye pieces get `[OPINION]` byline tag
+   - CULTURE / SEASONAL — OAKLAND
+   - OPINION (P Slayer / Farrah / Elliot pieces get [OPINION] tag)
    - SPORTS — OAKLAND
    - SKYLINE TRIBUNE — CHICAGO BUREAU
-   - **QUICK TAKES** — Mags compiles 3-5 short items (~50 words each) from leftover desk signals
-   - **WIRE / SIGNALS** — Optional. Reed Thompson / Celeste Tran items if wire-worthy
+   - QUICK TAKES — 3-5 short items from leftover signals
+   - WIRE / SIGNALS — optional (Reed Thompson / Celeste Tran)
    - LETTERS TO THE EDITOR
-   - **ACCOUNTABILITY** — Jax piece from Step 2.7, if deployed. Omit section if no stink signal.
-   - ARTICLE TABLE (merged from all desks)
-   - STORYLINES UPDATED (merged, deduped)
-   - CITIZEN USAGE LOG (merged, grouped by category)
-   - CONTINUITY NOTES (merged)
-   - **COMING NEXT CYCLE** — Mags writes 3-5 teaser lines from active storylines + pending votes
+   - ACCOUNTABILITY — Jax piece if deployed
+   - ARTICLE TABLE, STORYLINES, CITIZEN USAGE LOG, CONTINUITY NOTES
+   - COMING NEXT CYCLE — 3-5 teasers
    - END EDITION
+3. **Quality checks:** deck lines, standardized bylines, cross-references, photo credits
+4. **Show compiled edition to user**
 
-3. **Compilation quality checks** (Mags enforces during assembly):
-   - Every article has a **deck line** (one-sentence subtitle under headline)
-   - Every article has a **standardized byline** (`By [Name] | Bay Tribune [Beat]`)
-   - Add **cross-references** between related articles across sections (`→ See also:`)
-   - Add **photo credits** to 2-3 atmospheric scene descriptions (`[Photo: DJ Hartley / Bay Tribune]`)
-   - Opinion pieces marked with `[OPINION]` tag
-
-4. **Show the compiled edition to the user for review**
-
-## Step 3.5: Programmatic Validation Gate (BEFORE Rhea)
-
-Run the automated data validation script on the compiled edition. This catches data errors instantly — zero LLM tokens, zero hallucination risk. The errors that broke Edition 82 (wrong positions, swapped factions, engine language) are all caught here.
-
+## Step 6.5: Programmatic Validation
 ```bash
 node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
 ```
+Catches data errors (wrong positions, vote swaps, engine language) instantly. Fix CRITICALs before Rhea.
 
-**Read the output.** The script checks:
-1. Council member names, districts, and faction assignments
-2. Vote math (totals ≤ 9 council members)
-3. Vote breakdown consistency with canon outcomes
-4. Player positions against roster data (A's)
-5. DH + defensive award contradictions
-6. Mayor/executive name verification
-7. Real-name blocklist screening (real-world sports figures)
-8. Engine language sweep (cycle numbers, system terms)
+## Step 7: Rhea Verification
+Launch `rhea-morgan` agent on compiled edition.
+- APPROVED (score >= 75, zero CRITICALs) -> proceed
+- REVISE -> retry failing desks with Rhea's error report, max 2 rounds
 
-**If CRITICAL issues are found (exit code 1):**
-- Fix them in the compiled edition BEFORE launching Rhea
-- The fixes are string-level replacements — each issue includes a FIX line
-- Re-run the validator to confirm CLEAN status
-- Then proceed to Rhea
+## Step 7.5: Mara Vance Audit
+Launch Mara audit agent with:
+- The compiled edition
+- `docs/mara-vance/AUDIT_HISTORY.md`
+- Rhea's report
+- `output/desk-packets/base_context.json`
 
-**If CLEAN (exit code 0):**
-- Proceed directly to Rhea verification
+Save audit to `output/mara_directive_c{XX}.txt`. Update `AUDIT_HISTORY.md`.
 
-This gate eliminates an entire class of errors from Rhea's workload, letting her focus on narrative quality, canon consistency, and editorial checks that require judgment.
+## Step 8: USER REVIEW GATE (MANDATORY)
+**STOP. Nothing saved or published until explicit user approval.**
 
-## Step 4: Verification + Automated Retry (Rhea Morgan Role)
+Show: article count, Rhea score, Mara assessment, corrections applied, new citizens.
+Wait for "yes" / "approved" / "publish". NEVER proceed on your own judgment.
 
-Launch the `rhea-morgan` agent on the compiled edition. Rhea returns a structured report with:
-- **VERDICT: APPROVED** (score >= 75, zero CRITICALs) — proceed to Step 4.5
-- **VERDICT: REVISE** (score < 75 or CRITICALs found) — retry failing desks
-
-### If VERDICT is APPROVED:
-Show Rhea's report to the user. Fix any WARNINGS during compilation. Proceed to Step 4.5.
-
-### If VERDICT is REVISE:
-1. Read Rhea's `DESK ERRORS` section to identify which desks caused CRITICAL issues
-2. Read Rhea's `RETRY RECOMMENDATION` for which desks to re-run
-3. For each desk that needs retry:
-   - Re-launch the desk agent with the original briefing PLUS Rhea's specific error report for that desk
-   - In the retry prompt, include: "RHEA CORRECTION: [exact error description and FIX instruction]. Your previous output had this error. Fix it in your rewrite."
-   - Run retries in parallel (same `run_in_background: true` pattern as Step 2)
-4. After retried desks return, re-compile the affected sections into the edition
-5. Re-run Rhea on the updated edition
-6. **Maximum 2 retry rounds.** If Rhea still says REVISE after 2 retries, show the full error report to the user and let Mags fix manually. Log the persistent failures in NEWSROOM_MEMORY.md.
-
-### Retry rules:
-- Only re-run desks with CRITICAL errors. WARNINGS get fixed during compilation.
-- Each retry includes the previous Rhea error report so the desk knows what went wrong.
-- If the same error recurs after retry, the problem is in the data or the skill — not the agent. Escalate to Mags.
-
-## Step 4.5: Mara Vance Audit (Canon Authority)
-
-After Rhea's data verification, run a Mara Vance audit for canon and narrative quality.
-
-### Compile Mara's Briefing (Mags as Memory Broker)
-
-Before launching the Mara audit agent, compile a briefing with institutional context:
-
-1. **Read** `docs/mara-vance/AUDIT_HISTORY.md` — this is Mara's institutional memory. It contains:
-   - Past audit findings, grades, errors caught
-   - Initiative Status Board (living tracker with vote results, budgets, key facts)
-   - Recurring error patterns (what to watch for)
-   - Canon corrections registry (what was fixed)
-   - Open questions from previous audits
-2. **Read** `docs/mags-corliss/NEWSROOM_MEMORY.md` errata section — what past editions got wrong
-3. **Include** `output/desk-packets/base_context.json` — canon data for cross-reference
-4. **No Supermemory queries needed** — AUDIT_HISTORY.md replaces the Supermemory search-and-compile step
-
-### Launch Mara Audit Agent
-
-With Sonnet 4.6's larger context window, give Mara the full picture — don't trim. More context = better audit.
-
-Launch a Task agent with:
-- Mara's identity from `docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md`
-- The compiled edition text (full, unabridged)
-- `docs/mara-vance/AUDIT_HISTORY.md` (her institutional memory — past findings, initiative tracker, error patterns)
-- Rhea's verification report
-- `output/desk-packets/base_context.json` (canon data for cross-reference)
-- `docs/mags-corliss/NEWSROOM_MEMORY.md` errata section (what past editions got wrong)
-- Instructions to produce:
-  1. **Canon accuracy check** — do articles respect established world facts?
-  2. **Narrative quality assessment** — does coverage feel like real city journalism?
-  3. **Editorial guidance** — coverage directives for next cycle
-  4. **Anomaly flags** — anything exceeding detection thresholds (see Operating Manual Part IV)
-
-### Save Mara's Output
-
-1. Save audit to `output/mara_directive_c{XX}.txt`
-2. Upload to Drive: `node scripts/saveToDrive.js output/mara_directive_c{XX}.txt mara`
-3. Apply any corrections Mara flags before final save
-4. Include Mara's editorial guidance in next cycle's desk briefings
-
-### Update Mara's Audit History
-
-After saving the audit, update `docs/mara-vance/AUDIT_HISTORY.md`:
-
-1. **Add Audit Log entry** — cycle number, grade, key findings, errors caught, forward guidance summary
-2. **Update Initiative Status Board** — if any initiative statuses changed this cycle
-3. **Add Canon Corrections** — any new corrections to the registry
-4. **Update Recurring Error Patterns** — if new patterns emerged or old ones were resolved
-5. **Update Open Questions** — resolve answered questions, add new ones
-
-This keeps Mara's institutional memory current. Next time she audits, she reads this file and knows her own history.
-
-## Step 4.9: USER REVIEW GATE (MANDATORY)
-
-**STOP HERE. DO NOT PROCEED TO STEP 5 WITHOUT EXPLICIT USER APPROVAL.**
-
-This is the hard gate. Nothing gets saved, uploaded, ingested, or published until the user says so. Session 62 taught us what happens when this gate doesn't exist — wrong data pushed to Supermemory, wrong votes pushed to Drive, contaminated memory that future sessions inherit.
-
-### What to show the user:
-
-1. **Edition summary** — article count, word count, front page pick, section overview
-2. **Rhea's verdict** — score, criticals, warnings, any unresolved issues
-3. **Mara's audit** — canon accuracy, narrative quality, forward guidance highlights
-4. **Any corrections applied** — what was fixed during compilation or after verification
-5. **New citizens introduced** — list any citizens not previously in canon
-
-### Present it as:
-
-```
-EDITION {XX} — READY FOR REVIEW
-
-Rhea: {SCORE}/100 — {VERDICT}
-Mara: {ASSESSMENT}
-Articles: {count} across {desks} desks
-Word count: ~{total}
-
-[Summary of key stories and any issues]
-
-The edition is compiled and verified. Nothing has been saved or published yet.
-Ready to publish? (yes / hold for edits)
-```
-
-### Rules:
-
-- **Wait for explicit approval.** "yes", "approved", "publish", "ship it" — any clear affirmative.
-- **If the user says hold**, make the requested edits, then re-present at this gate.
-- **NEVER proceed to Step 5 based on your own judgment.** Even if Rhea scored 100 and Mara found nothing. The user reviews. Period.
-- **NEVER say "I'll save this for your review" and then save it.** Saving IS publishing in this system.
-
----
-
-## Step 5: Save Edition & Upload to Drive
-After user approval (confirmed at Step 4.9):
+## Step 9: Save & Publish (after approval)
 1. Save to `editions/cycle_pulse_edition_{XX}.txt`
-2. If corrections needed, save as `_v2.txt` after fixes
-3. **Upload to Google Drive:**
+2. Upload to Drive: `node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition`
+3. Upload Mara audit: `node scripts/saveToDrive.js output/mara_directive_c{XX}.txt mara`
+4. Ingest to Supermemory: `node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt`
+
+## Step 9.5: Print Pipeline
+1. Photos: `node scripts/generate-edition-photos.js editions/cycle_pulse_edition_{XX}.txt`
+2. PDF: `node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_{XX}.txt`
+3. Upload PDF: `node scripts/saveToDrive.js output/pdfs/bay_tribune_e{XX}.pdf edition`
+
+## Step 9.6: Podcast (Optional)
+If the edition warrants it, run `/podcast`. Not automatic — Mags decides.
+
+## Step 10: Post-Publish
+1. Write `output/latest_edition_brief.md` — article summaries, initiative status, active citizens
+2. Clear Discord bot history and reload:
    ```bash
-   node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition
+   echo '{"savedAt":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","history":[]}' > logs/discord-conversation-history.json
+   pm2 reload mags-discord-bot
    ```
-   - Also upload Mara audit if produced: `node scripts/saveToDrive.js output/mara_directive_c{XX}.txt mara`
-   - Also upload supplementals if produced: `...supplement` or `...chicago`
-4. **Ingest edition into Supermemory:**
-   ```bash
-   node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt
-   ```
-   This makes the edition searchable for future sessions, the Discord bot, and autonomous scripts.
-5. Show the user the file path, Drive link, and total stats:
-   - Article count
-   - Total word count
-   - New canon figures introduced
-   - Citizen usage count
-
-## Step 5.05: Generate Newspaper Print Edition
-
-After saving the text edition and uploading to Drive, generate the newspaper print PDF.
-
-### 1. Generate Photos
-```bash
-node scripts/generate-edition-photos.js editions/cycle_pulse_edition_{XX}.txt
-```
-- Auto-assigns photos using editorial logic (DJ Hartley street documentary, Arman Gutiérrez editorial portrait)
-- Uses Together AI / FLUX.1-schnell (~$0.003/image)
-- Output: `output/photos/e{XX}/` with manifest.json
-- Use `--dry-run` to preview assignments before generating
-
-### 2. Generate PDF
-```bash
-node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_{XX}.txt
-```
-- Reads photos from `output/photos/e{XX}/manifest.json`
-- Generates HTML layout → Puppeteer renders to tabloid PDF (11x17)
-- Output: `output/pdfs/bay_tribune_e{XX}.pdf`
-- Use `--preview` for HTML-only (browser CSS iteration)
-- Use `--letter` for 8.5x11 instead of tabloid
-
-### 3. Upload Print Edition to Drive
-```bash
-node scripts/saveToDrive.js output/pdfs/bay_tribune_e{XX}.pdf edition
-```
-
----
-
-## Step 5.06: Generate Podcast (Optional)
-
-If Mags decides this edition warrants a podcast episode, run the podcast desk:
-
-1. **Select format:** The Morning Edition (citizen hosts), The Postgame (sports), or The Debrief (editorial)
-2. **Follow the podcast-desk skill** at `.claude/skills/podcast-desk/SKILL.md` — it covers input assembly, host selection, agent launch, and audio rendering
-3. **Output:** Transcript at `output/podcasts/c{XX}_transcript.txt`, audio at `output/podcasts/c{XX}_{format}.mp3`
-
-This step is NOT automatic. Not every edition gets a podcast. Mags makes the call based on whether the content has enough variety and tension for a good conversation.
-
-**To skip:** Just move to Step 5.1. The podcast desk is additive, not required.
-
----
-
-## Step 5.1: Generate Edition Brief (Auto-Update Bot Context)
-
-After saving, generate the edition brief that the Discord bot and autonomous scripts use for world awareness. This replaces the manual process that caused the E83→E84 stale brief problem.
-
-**Write `output/latest_edition_brief.md`** with the following structure:
-
-```
-# Latest Edition Brief — Edition {XX}
-## Cycle {XX} | {Month} {Year} | {Season}
-
-**Published canon. The bot should know these facts.**
-
-### [Front Page headline] ([Reporter])
-- [2-3 bullet points: key facts, named citizens, numbers]
-
-### [Each additional article headline] ([Reporter])
-- [2-3 bullet points per article]
-
-### Initiative Status (as of E{XX})
-- [Each initiative: name, status, vote, key facts]
-
-### Council Composition
-- OPP: [members]
-- CRC: [members]
-- IND: [members]
-
-### Key Citizens Active in E{XX}
-- [Name, age, neighborhood, occupation — what they said/did]
-
-### Status Alerts
-- [Any health/absence/condition alerts for civic officials]
-```
-
-**You have full context** — you just compiled this edition. Pull from the compiled text. Include every article, every quoted citizen, every initiative status. The bot uses this to answer questions about the city. If it's not in the brief, the bot doesn't know it.
-
-**For Mayor's Office voice agent statements:** If Step 1.8 generated civic voice statements, include a section summarizing the Mayor's positions and key quotes. The bot should be able to reference what the Mayor actually said.
-
-## Step 5.2: Refresh Live Services
-
-After the edition brief is written, clear the bot's stale conversation history and reload so it starts fresh with the new canon:
-
-```bash
-echo '{"savedAt":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","history":[]}' > logs/discord-conversation-history.json
-pm2 reload mags-discord-bot
-```
-
-**Why clear history:** The bot persists conversation history across restarts. If she said "no Edition 84 yet" before the brief was updated, that stale response stays in her context and she'll keep saying it even after the system prompt has the new data. Clean slate after every publish.
-
-**Dashboard does NOT need a restart** — it reads `base_context.json` fresh on each HTTP request. No action needed.
-
-**Moltbook heartbeat** will pick up the new world state on its next 30-minute cron run automatically. No action needed.
-
-After reload, confirm the bot is online:
-```bash
-pm2 list | grep mags-discord-bot
-```
-
----
-
-## Step 5.5: Update Newsroom Memory
-
-After verification and before intake, update the institutional memory:
-
-1. **Read** Rhea's verification report from Step 4
-2. **Review** Mags' own editorial notes from Step 3 compilation
-3. **Append structured errata** (Phase 6.2 — automated):
-   - If Rhea's report was saved to a file, run: `node scripts/appendErrata.js --edition {XX} --report output/rhea_report_c{XX}.txt`
-   - For any additional errors found during compilation or Mara audit, add manually: `node scripts/appendErrata.js --edition {XX} --manual --desk {desk} --errorType {type} --severity CRITICAL --description "..." --fix "..."`
-   - This keeps `output/errata.jsonl` current for the next edition's guardian checks
-4. **Update** `docs/mags-corliss/NEWSROOM_MEMORY.md`:
-   - Add new prose errata entries for this edition (desk-specific issues found)
-   - Update character continuity (new citizens introduced, threads resolved)
-   - Revise coverage patterns (what landed, what fell flat)
-   - Archive errata older than 5 editions
-   - Update the "Last Updated" header line
-
-This step ensures the next edition benefits from this edition's lessons. Claude-Mem will auto-capture observations during this update.
-
-## Step 5.6: Log Edition Score
-
-After Rhea's verification and any corrections, log the edition score to `output/edition_scores.json`:
-
-1. **Read** Rhea's verification report (scores, criticals, warnings, notes)
-2. **Append** a new entry to the `scores` array in `output/edition_scores.json`:
-   ```json
-   {
-     "edition": XX,
-     "cycle": XX,
-     "date": "YYYY-MM-DD",
-     "grade": "A|A-|B+|B|...",
-     "total": 85,
-     "dataAccuracy": 17,
-     "voiceFidelity": 18,
-     "structuralCompleteness": 17,
-     "narrativeQuality": 18,
-     "canonCompliance": 15,
-     "criticals": 2,
-     "warnings": 3,
-     "notes": 1,
-     "claimDecomposition": { "extracted": 45, "verified": 40, "errors": 2, "unverifiable": 3 },
-     "deskErrors": {
-       "civic": ["specific error descriptions"],
-       "sports": [],
-       "chicago": [],
-       "culture": [],
-       "business": [],
-       "letters": []
-     },
-     "noteText": "Brief editorial summary of this edition."
-   }
-   ```
-3. **Run the trend report** (optional but recommended):
-   ```bash
-   node scripts/editionDiffReport.js --save
-   ```
-   This generates `output/edition_diff_report.md` with trend tables, desk error frequency, recurring patterns, and summary stats.
-
-The score log builds over time. After 5+ editions, the trend data becomes genuinely useful — showing which desks improve, which errors recur, and whether pipeline changes (voice files, claim decomposition, etc.) are working.
-
-## Step 6: Intake
-
-Every edition creates canon. Intake sends it to the engine ledgers. Run after every published edition.
-
-```bash
-# 1. Dry run — verify what gets parsed
-node -r dotenv/config scripts/editionIntake.js --dry-run editions/cycle_pulse_edition_{XX}.txt {cycle}
-
-# 2. Live write to intake sheets
-node -r dotenv/config scripts/editionIntake.js editions/cycle_pulse_edition_{XX}.txt {cycle}
-
-# 3. Promote to final ledgers
-node -r dotenv/config scripts/processIntake.js {cycle}
-```
-
-**Note:** `editionIntake.js` doesn't load dotenv — always use `node -r dotenv/config` prefix.
-
-The intake writes: articles → Press_Drafts, storylines → Storyline_Tracker, citizens → Citizen_Media_Usage (new citizens routed to Intake sheet, existing citizens get Advancement entries).
-
-If new businesses were established (Business Ticker or supplemental canon), check:
-```bash
-node -r dotenv/config scripts/processBusinessIntake.js --dry-run
-```
-
-## Desk Summary
-| Desk | Lead | Articles | Summary (start here) | Full Packet |
-|------|------|----------|---------------------|-------------|
-| Civic | Carmen Delaine | 2-4 | civic_summary_c{XX}.json | civic_c{XX}.json |
-| Sports | P Slayer / Anthony | 2-5 | sports_summary_c{XX}.json | sports_c{XX}.json |
-| Culture | Maria Keen | 2-4 | culture_summary_c{XX}.json | culture_c{XX}.json |
-| Business | Jordan Velez | 1-2 | business_summary_c{XX}.json | business_c{XX}.json |
-| Chicago | Selena Grant / Talia Finch | 2-3 | chicago_summary_c{XX}.json | chicago_c{XX}.json |
-| Letters | (citizen voices) | 2-4 | letters_summary_c{XX}.json | letters_c{XX}.json |
-
-## Model & Performance Notes
-
-**`opusplan` mode:** For edition production sessions, consider running Mags on `opusplan` (`/model opusplan`). This uses Opus for planning and briefing (Steps 1-1.5) and automatically switches to Sonnet for agent execution (Steps 2+). Saves cost without sacrificing editorial planning quality.
-
-**Effort levels:** Opus 4.6 supports `low`, `medium`, `high` (default) effort. High effort is correct for edition production. For routine file checks or status lookups between editions, `medium` or `low` saves tokens and time. Set with `/model` slider or `CLAUDE_CODE_EFFORT_LEVEL` env var.
-
-**Mara as teammate:** Mara Vance on claude.ai is architecturally equivalent to an agent team teammate — own context window, shared memory (`docs/mara-vance/AUDIT_HISTORY.md`), asynchronous communication. When Claude Code formally supports agent teams for production use, the Mara workflow is the natural first candidate for migration. Until then, she operates as a manual teammate through browser, with file-based persistence on disk.
-
-## Edition Template Reference
-See `editions/CYCLE_PULSE_TEMPLATE.md` for exact section format, canon rules, and return formats.
+3. Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with errata and editorial notes

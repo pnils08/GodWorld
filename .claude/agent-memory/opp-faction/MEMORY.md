@@ -1,11 +1,11 @@
 # OPP Faction — Agent Memory
 
 **Agent:** Oakland Progressive Party Council Bloc
-**Last Updated:** E86 (2026-03-06)
+**Last Updated:** C87 (2026-03-14)
 
 ## Output Directory
 Write to: `output/civic-voice/opp_faction_c{XX}.json`
-Prior work: `output/civic-voice/opp_faction_c86.json`
+Prior work: `output/civic-voice/opp_faction_c87.json`
 
 ## Members
 - Denise Carter (D1) — West Oakland
@@ -19,7 +19,15 @@ Prior work: `output/civic-voice/opp_faction_c86.json`
 - Baylight (C83): YES (all 4)
 - Transit Hub Phase II (C86): YES (all 4, including Mobley)
 
-## E86 Notes
-- Rivers called Transit Hub "an overdue commitment"
-- Mobley voted YES but still needs a substantive quote (multiple editions without one)
-- Delgado absent from E85 AND E86 civic coverage — needs editorial space
+## C87 Notes
+- **Statements Generated:** 3
+- **Rivers (bloc position):** OARI dispatch integration — pushing Mayor's 2-week deadline
+- **Carter (district):** Stabilization Fund backlog — 277 waiting, demanding Vega's committee review THIS cycle
+- **Delgado (district):** Fruitvale Transit Hub Phase II design launch — community benefits lock-in (jobs, housing, local hiring)
+- Mobley: No separate statement (bloc unity on OARI; Delgado leads on Transit Hub; Carter leads on Stabilization)
+
+## C86 Snapshot (for reference)
+- Rivers: OARI Day 30 implementation
+- Carter: Phase 1 disbursement (Beverly Hayes, 12 families)
+- Delgado: Transit Hub visioning vote
+- Rivers: Baylight Authority readiness

@@ -2,15 +2,20 @@
 
 /**
  * validateEdition.js — Programmatic Data Validation Gate
- * Version: 1.0
+ * Version: 2.0
  *
  * Runs BEFORE Rhea Morgan verification. Zero LLM tokens.
- * Catches data errors that broke Edition 82: wrong positions,
- * swapped votes, wrong mayor name, real-name leaks, engine language.
+ * Catches data errors that broke Editions 82 and 87: wrong positions,
+ * wrong first names, swapped votes, wrong mayor name, real-name leaks,
+ * engine language, phantom citizens, wrong initiative data.
+ *
+ * v2.0: Live sheet checks (Simulation_Ledger, Initiative_Tracker, Civic_Office_Ledger).
+ *       Use --no-sheets to skip sheet checks (offline mode).
  *
  * Usage:
  *   node scripts/validateEdition.js <edition-file>
- *   node scripts/validateEdition.js editions/cycle_pulse_edition_83.txt
+ *   node scripts/validateEdition.js editions/cycle_pulse_edition_87.txt
+ *   node scripts/validateEdition.js editions/cycle_pulse_edition_87.txt --no-sheets
  *
  * Exit codes:
  *   0 = CLEAN (no critical issues)
@@ -18,6 +23,7 @@
  *   2 = File/data errors (missing files, parse failures)
  */
 
+require('dotenv').config({ path: require('path').resolve(__dirname, '..', '.env') });
 const fs = require('fs');
 const path = require('path');
 
@@ -26,6 +32,7 @@ const ROOT = path.resolve(__dirname, '..');
 const BASE_CONTEXT = path.join(ROOT, 'output/desk-packets/base_context.json');
 const TRUESOURCE = path.join(ROOT, 'output/desk-packets/truesource_reference.json');
 const BLOCKLIST = path.join(ROOT, 'docs/media/REAL_NAMES_BLOCKLIST.md');
+const NO_SHEETS = process.argv.includes('--no-sheets');
 
 // ─── Severity levels ────────────────────────────────────────────
 const CRITICAL = 'CRITICAL';
@@ -515,31 +522,293 @@ function checkEngineLanguage(editionText) {
   return issues;
 }
 
+// ─── Player First Name Check (the Edition 87 gap) ──────────────
+
+function checkPlayerFirstNames(editionText, canon, knownOfficialNames) {
+  const issues = [];
+  if (!canon) return issues;
+
+  const roster = canon.asRoster || [];
+  if (roster.length === 0) return issues;
+
+  // Build last-name → full-name lookup (same pattern as checkCouncilNames)
+  const lastNameToPlayer = {};
+  for (const player of roster) {
+    const name = player.name;
+    if (!name || !name.includes(' ')) continue;
+    const parts = name.split(' ');
+    const lastName = parts[parts.length - 1];
+    // Skip very short/common last names that cause false positives
+    if (lastName.length < 3) continue;
+    lastNameToPlayer[lastName.toLowerCase()] = { fullName: name, firstName: parts[0], lastName };
+  }
+
+  // Known civic official first names by last name — skip these (not players)
+  const officialFirstsByLast = knownOfficialNames || {};
+
+  for (const [lastNameLower, player] of Object.entries(lastNameToPlayer)) {
+    // Search for "[SomeFirstName] [LastName]" in the edition
+    const escapedLast = player.lastName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(`\\b([A-Z][a-z]+)\\s+${escapedLast}\\b`, 'g');
+    let match;
+    while ((match = pattern.exec(editionText)) !== null) {
+      const foundFirst = match[1];
+      if (foundFirst === player.firstName) continue; // correct name
+
+      // Skip common words that appear before names
+      const skipWords = ['The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
+        'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This', 'These', 'Those',
+        'Manager', 'Coach', 'Pitcher', 'Catcher', 'Shortstop', 'Outfielder', 'Baseman',
+        'Mr', 'Mrs', 'Ms', 'Dr', 'If', 'Or', 'Even', 'Not', 'Just', 'Only',
+        'Both', 'Each', 'Every', 'Either', 'Neither', 'Whether', 'Although',
+        'Former', 'Current', 'Rookie', 'Veteran', 'Said', 'Like', 'Via', 'Per'];
+      if (skipWords.includes(foundFirst)) continue;
+
+      // Skip if this is a known civic official with this last name (not a player error)
+      const officialFirsts = officialFirstsByLast[lastNameLower] || [];
+      if (officialFirsts.includes(foundFirst)) continue;
+
+      issues.push({
+        severity: CRITICAL,
+        check: 'Player Name',
+        detail: `Found "${foundFirst} ${player.lastName}" — roster says "${player.fullName}"`,
+        fix: `Replace "${foundFirst} ${player.lastName}" → "${player.fullName}"`
+      });
+    }
+  }
+
+  return issues;
+}
+
+// ─── Citizen Name Check (vs Simulation_Ledger) ─────────────────
+
+function checkCitizenNames(editionText, ledgerCitizens) {
+  const issues = [];
+  if (!ledgerCitizens || ledgerCitizens.length === 0) return issues;
+
+  // Build lookup: last name → [{ first, last, full, popid, tier }]
+  const lastNameMap = {};
+  for (const citizen of ledgerCitizens) {
+    const first = (citizen.First || '').trim();
+    const last = (citizen.Last || '').trim();
+    if (!first || !last || last.length < 3) continue;
+    const key = last.toLowerCase();
+    if (!lastNameMap[key]) lastNameMap[key] = [];
+    lastNameMap[key].push({
+      first, last, full: `${first} ${last}`,
+      popid: citizen.POPID || '',
+      tier: citizen.Tier || ''
+    });
+  }
+
+  // Extract citizen names from the edition's Names Index sections and Citizen Usage Log
+  // These are the definitive lists of who's mentioned
+  const namesIndexPattern = /Names Index:\s*([^\n]+)/g;
+  const citizenUsagePattern = /CITIZEN USAGE LOG[\s\S]*?(?=\n##|\n={3,}|$)/i;
+
+  // Collect all named citizens from the edition
+  const editionNames = new Set();
+  let niMatch;
+  while ((niMatch = namesIndexPattern.exec(editionText)) !== null) {
+    // Names are comma-separated: "Marcus Webb, Denise Carter, Bobby Chen-Ramirez"
+    const names = niMatch[1].split(',').map(n => n.trim()).filter(n => n.length > 2);
+    for (const name of names) {
+      // Skip reporter names and non-person entries
+      if (name.includes('(') || name.includes('[')) continue;
+      editionNames.add(name);
+    }
+  }
+
+  // For each name in the edition, check if last name matches a ledger citizen
+  for (const name of editionNames) {
+    const parts = name.split(/\s+/);
+    if (parts.length < 2) continue;
+
+    const editionFirst = parts[0];
+    const editionLast = parts[parts.length - 1];
+    const key = editionLast.toLowerCase();
+
+    if (!lastNameMap[key]) continue; // last name not on ledger — could be new citizen, skip
+
+    // Check if any ledger citizen with this last name has a DIFFERENT first name
+    const matches = lastNameMap[key];
+    const exactMatch = matches.find(m => m.first === editionFirst);
+    if (exactMatch) continue; // correct — first name matches
+
+    // Wrong first name for a known last name
+    const expected = matches.map(m => m.full).join(' or ');
+    issues.push({
+      severity: CRITICAL,
+      check: 'Citizen Name',
+      detail: `Found "${name}" — Simulation_Ledger has "${expected}" for last name "${editionLast}"`,
+      fix: `Replace "${name}" → "${matches[0].full}" (${matches[0].popid})`
+    });
+  }
+
+  return issues;
+}
+
+// ─── Initiative Fact Check (vs Initiative_Tracker) ──────────────
+
+function checkInitiativeFacts(editionText, initiatives) {
+  const issues = [];
+  if (!initiatives || initiatives.length === 0) return issues;
+
+  for (const init of initiatives) {
+    const name = init.Name || '';
+    if (!name) continue;
+
+    const escapedName = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+    // Check if the edition mentions this initiative
+    if (!new RegExp(escapedName, 'i').test(editionText)) continue;
+
+    // Check budget figures near the initiative name
+    if (init.Budget) {
+      // Normalize budget: "$28M" → 28, "$12.5M" → 12.5, "$230M" → 230
+      const canonBudgetMatch = init.Budget.match(/\$?([\d,.]+)\s*[Mm]/);
+      if (canonBudgetMatch) {
+        const canonAmount = canonBudgetMatch[1].replace(/,/g, '');
+
+        // Look for dollar amounts near the initiative name in the edition
+        const budgetPattern = new RegExp(
+          `${escapedName}[\\s\\S]{0,300}?\\$(\\d+(?:\\.\\d+)?(?:,\\d+)*)\\s*(?:million|[Mm])`,
+          'gi'
+        );
+        let match;
+        while ((match = budgetPattern.exec(editionText)) !== null) {
+          const foundAmount = match[1].replace(/,/g, '');
+          if (foundAmount !== canonAmount) {
+            issues.push({
+              severity: WARNING,
+              check: 'Initiative Budget',
+              detail: `"${name}" budget shown as $${foundAmount}M — Initiative_Tracker says ${init.Budget}`,
+              fix: `Replace "$${foundAmount}" → "$${canonAmount}" near "${name}"`
+            });
+          }
+        }
+      }
+    }
+
+    // Check status claims
+    const statusTerms = {
+      'passed': ['passed', 'approved', 'enacted'],
+      'failed': ['failed', 'rejected', 'defeated'],
+      'pending': ['pending', 'proposed', 'under review'],
+      'active': ['active', 'in progress', 'underway'],
+    };
+
+    const canonStatus = (init.Status || '').toLowerCase();
+    // For each non-matching status group, check if the edition uses those terms
+    for (const [statusKey, terms] of Object.entries(statusTerms)) {
+      if (canonStatus.includes(statusKey)) continue; // skip matching status
+      for (const term of terms) {
+        const statusPattern = new RegExp(
+          `${escapedName}[\\s\\S]{0,200}?\\b${term}\\b`,
+          'gi'
+        );
+        if (statusPattern.test(editionText)) {
+          // Only flag if the canon status clearly contradicts
+          const contradicts =
+            (canonStatus.includes('passed') && ['failed', 'rejected', 'defeated', 'pending'].includes(term)) ||
+            (canonStatus.includes('failed') && ['passed', 'approved', 'enacted'].includes(term));
+          if (contradicts) {
+            issues.push({
+              severity: CRITICAL,
+              check: 'Initiative Status',
+              detail: `"${name}" described as "${term}" — Initiative_Tracker says "${init.Status}"`,
+              fix: `Fix status description near "${name}"`
+            });
+          }
+        }
+      }
+    }
+  }
+
+  return issues;
+}
+
+// ─── Civic Office Name Check (vs Civic_Office_Ledger) ───────────
+
+function checkCivicOfficeNames(editionText, civicOfficials, knownPlayerNames) {
+  const issues = [];
+  if (!civicOfficials || civicOfficials.length === 0) return issues;
+
+  // Known player first names by last name — skip these (not civic errors)
+  const playerFirstsByLast = knownPlayerNames || {};
+
+  for (const official of civicOfficials) {
+    const holder = (official.Holder || '').trim();
+    const title = (official.Title || '').trim();
+    if (!holder || !holder.includes(' ')) continue;
+
+    const parts = holder.split(' ');
+    const firstName = parts[0];
+    const lastName = parts[parts.length - 1];
+    if (lastName.length < 3) continue;
+
+    // Search for wrong first name + this last name, same as player/council checks
+    const escapedLast = lastName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const pattern = new RegExp(`\\b([A-Z][a-z]+)\\s+${escapedLast}\\b`, 'g');
+    let match;
+    while ((match = pattern.exec(editionText)) !== null) {
+      const foundFirst = match[1];
+      if (foundFirst === firstName) continue;
+
+      const skipWords = ['The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
+        'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This',
+        'Councilmember', 'Councilwoman', 'Councilman', 'Council', 'Chief', 'Director',
+        'Mr', 'Mrs', 'Ms', 'Dr', 'If', 'Or', 'Even', 'Not', 'Just', 'Only',
+        'Former', 'Current', 'Said', 'Mayor', 'Deputy'];
+      if (skipWords.includes(foundFirst)) continue;
+
+      // Skip if this is a known player with this last name (not a civic error)
+      const playerFirsts = playerFirstsByLast[lastName.toLowerCase()] || [];
+      if (playerFirsts.includes(foundFirst)) continue;
+
+      issues.push({
+        severity: CRITICAL,
+        check: 'Civic Official Name',
+        detail: `Found "${foundFirst} ${lastName}" — Civic_Office_Ledger says "${holder}" (${title})`,
+        fix: `Replace "${foundFirst} ${lastName}" → "${holder}"`
+      });
+    }
+  }
+
+  return issues;
+}
+
 // ─── Main ───────────────────────────────────────────────────────
 
-function main() {
+async function main() {
   const args = process.argv.slice(2);
 
   if (args.length === 0 || args.includes('--help')) {
     console.log(`
-validateEdition.js — Programmatic Data Validation Gate v1.0
+validateEdition.js — Programmatic Data Validation Gate v2.0
 
-Usage: node scripts/validateEdition.js <edition-file>
+Usage: node scripts/validateEdition.js <edition-file> [--no-sheets]
 
-Checks:
+Checks (static — always run):
   1. Council member names, districts, factions
   2. Vote math (totals ≤ 9 council members)
   3. Vote breakdown consistency with canon
   4. Player positions against roster data
-  5. DH + defensive award contradictions
-  6. Mayor/executive name verification
-  7. Real-name blocklist screening
-  8. Engine language sweep
+  5. Mayor/executive name verification
+  6. Real-name blocklist screening
+  7. Engine language sweep
+  8. Player first names against roster data
+
+Checks (live sheets — skip with --no-sheets):
+  9. Citizen names vs Simulation_Ledger
+ 10. Initiative facts vs Initiative_Tracker
+ 11. Civic office names vs Civic_Office_Ledger
 
 Reads from:
   output/desk-packets/base_context.json
   output/desk-packets/truesource_reference.json
   docs/media/REAL_NAMES_BLOCKLIST.md
+  Google Sheets: Simulation_Ledger, Initiative_Tracker, Civic_Office_Ledger
 
 Exit codes:
   0 = CLEAN or warnings only
@@ -578,6 +847,28 @@ Exit codes:
   // Merge executive branch from either source
   if (canon && !canon.executiveBranch && baseContext && baseContext.canon) {
     canon.executiveBranch = baseContext.canon.executiveBranch;
+  }
+
+  // ─── Load live sheet data (optional) ───
+  let ledgerCitizens = [], initiatives = [], civicOfficials = [];
+  if (!NO_SHEETS) {
+    try {
+      const sheets = require('../lib/sheets');
+      console.log('\nLoading live sheet data...');
+      [ledgerCitizens, initiatives, civicOfficials] = await Promise.all([
+        sheets.getSheetAsObjects('Simulation_Ledger'),
+        sheets.getSheetAsObjects('Initiative_Tracker'),
+        sheets.getSheetAsObjects('Civic_Office_Ledger'),
+      ]);
+      console.log(`  Simulation_Ledger: ${ledgerCitizens.length} citizens`);
+      console.log(`  Initiative_Tracker: ${initiatives.length} initiatives`);
+      console.log(`  Civic_Office_Ledger: ${civicOfficials.length} officials`);
+    } catch (err) {
+      console.error(`WARNING: Could not load sheets: ${err.message}`);
+      console.error('Sheet-based checks will be skipped. Use --no-sheets to suppress.\n');
+    }
+  } else {
+    console.log('\n--no-sheets: Skipping live sheet checks.');
   }
 
   // ─── Run all checks ───
@@ -619,6 +910,60 @@ Exit codes:
   const engineIssues = checkEngineLanguage(editionText);
   allIssues.push(...engineIssues);
   console.log(`  [${engineIssues.length === 0 ? '✓' : '!'}] Engine language: ${engineIssues.length} issues`);
+
+  // Build cross-domain exclusion maps to prevent false positives on shared last names
+  // officialFirstsByLast: { "ramos": ["Keisha"], "ellis": ["Simone"], ... }
+  // playerFirstsByLast: { "ramos": ["Arturo"], "ellis": ["John"], ... }
+  const officialFirstsByLast = {};
+  for (const official of civicOfficials) {
+    const holder = (official.Holder || '').trim();
+    if (!holder || !holder.includes(' ')) continue;
+    const parts = holder.split(' ');
+    const key = parts[parts.length - 1].toLowerCase();
+    if (!officialFirstsByLast[key]) officialFirstsByLast[key] = [];
+    officialFirstsByLast[key].push(parts[0]);
+  }
+
+  const playerFirstsByLast = {};
+  const roster = canon ? (canon.asRoster || []) : [];
+  for (const player of roster) {
+    const name = player.name;
+    if (!name || !name.includes(' ')) continue;
+    const parts = name.split(' ');
+    const key = parts[parts.length - 1].toLowerCase();
+    if (!playerFirstsByLast[key]) playerFirstsByLast[key] = [];
+    playerFirstsByLast[key].push(parts[0]);
+  }
+
+  // 8. Player first names (static — uses truesource/base_context roster)
+  const playerNameIssues = checkPlayerFirstNames(editionText, canon, officialFirstsByLast);
+  allIssues.push(...playerNameIssues);
+  console.log(`  [${playerNameIssues.length === 0 ? '✓' : '!'}] Player first names: ${playerNameIssues.length} issues`);
+
+  // 9-11. Live sheet checks
+  if (ledgerCitizens.length > 0) {
+    const citizenIssues = checkCitizenNames(editionText, ledgerCitizens);
+    allIssues.push(...citizenIssues);
+    console.log(`  [${citizenIssues.length === 0 ? '✓' : '!'}] Citizen names (live): ${citizenIssues.length} issues`);
+  } else {
+    console.log('  [—] Citizen names: skipped (no sheet data)');
+  }
+
+  if (initiatives.length > 0) {
+    const initIssues = checkInitiativeFacts(editionText, initiatives);
+    allIssues.push(...initIssues);
+    console.log(`  [${initIssues.length === 0 ? '✓' : '!'}] Initiative facts (live): ${initIssues.length} issues`);
+  } else {
+    console.log('  [—] Initiative facts: skipped (no sheet data)');
+  }
+
+  if (civicOfficials.length > 0) {
+    const civicIssues = checkCivicOfficeNames(editionText, civicOfficials, playerFirstsByLast);
+    allIssues.push(...civicIssues);
+    console.log(`  [${civicIssues.length === 0 ? '✓' : '!'}] Civic office names (live): ${civicIssues.length} issues`);
+  } else {
+    console.log('  [—] Civic office names: skipped (no sheet data)');
+  }
 
   // ─── Report ───
   const criticals = allIssues.filter(i => i.severity === CRITICAL);
@@ -687,4 +1032,4 @@ Exit codes:
   }
 }
 
-main();
+main().catch(err => { console.error('Fatal:', err.message); process.exit(2); });

@@ -2,43 +2,53 @@
 
 **Purpose:** The definitive process for generating The Cycle Pulse using per-desk JSON packets, autonomous desk workspaces, and parallel desk agents.
 
-**Key change (v2.0, S95):** Desk agents are autonomous. Each reads from its own workspace folder (`output/desks/{desk}/`) instead of receiving data through the orchestrator. `buildDeskFolders.js` builds workspaces with zero LLM tokens. Orchestrator context before agent launch dropped from ~180K to ~6K tokens. Target: zero compactions during edition production.
+**Key change (v2.0, S95-96):** All 21 agents are autonomous. Each reads from its own workspace folder instead of receiving data through the orchestrator. Three workspace builders (`buildDeskFolders.js`, `buildVoiceWorkspaces.js`, `buildInitiativeWorkspaces.js`) populate workspaces with zero LLM tokens. Orchestrator context before agent launch dropped from ~180K to ~6K tokens. Target: zero compactions during edition production.
 
 ---
 
-## The Pipeline (8 Stages)
+## The Pipeline (11 Stages)
 
 ```
 1. ENGINE COMPLETES CYCLE
    ↓
-2. GENERATE DESK PACKETS
+2. GENERATE PACKETS
    node scripts/buildDeskPackets.js [cycle]
+   node scripts/buildInitiativePackets.js [cycle]
    ↓
-2.5 BUILD DESK WORKSPACES (zero LLM tokens)
-   node scripts/buildDeskFolders.js [cycle]
-   Copies packets, summaries, errata, voice statements to output/desks/{desk}/
-   Generates briefing.md from structured data (canon, errata, story priorities, citizen cards)
+3. BUILD WORKSPACES (zero LLM tokens)
+   node scripts/buildInitiativeWorkspaces.js [cycle]  → output/initiative-workspace/
+   node scripts/buildVoiceWorkspaces.js [cycle]        → output/civic-voice-workspace/
+   node scripts/buildDeskFolders.js [cycle]             → output/desks/
    ↓
-3. LAUNCH DESK AGENTS (parallel — up to 6 desks)
-   Each reads from: output/desks/{desk}/ (briefing, summary, errata, archive, voice)
-   Each reads identity from: .claude/agents/{desk}-desk/IDENTITY.md + RULES.md
-   Each outputs: articles + evidence + citizen log to output/desk-output/{desk}_c{XX}.md
+4. INITIATIVE AGENTS (parallel, optional — 5 agents)
+   Each reads: output/initiative-workspace/{init}/current/
+   Each outputs: civic docs + decisions to output/city-civic-database/initiatives/
    ↓
-4. COMPILE (Mags Corliss agent)
-   Receives all desk outputs
+5. VOICE AGENTS (parallel — 7 agents)
+   Mayor first, then factions + extended
+   Each reads: output/civic-voice-workspace/{office}/current/
+   Each outputs: JSON statements to output/civic-voice/
+   ↓
+6. LAUNCH DESK AGENTS (parallel — 6 agents)
+   Each reads: output/desks/{desk}/ (briefing, summary, errata, voice statements, archive)
+   Each reads identity: .claude/agents/{desk}-desk/IDENTITY.md + RULES.md
+   Each outputs: articles + evidence to output/desk-output/{desk}_c{XX}.md
+   ↓
+7. COMPILE (Mags Corliss role)
    Calls front page, orders sections, resolves overlap
    Produces unified edition
    ↓
-5. VERIFY (Rhea Morgan agent)
-   Cross-checks names, votes, records against canon
-   Produces error list or CLEAN
+8. VERIFY (Rhea Morgan agent)
+   21 checks against canon. Produces error list or CLEAN.
    ↓
-6. FIX + FINALIZE
-   Apply Rhea's corrections
-   Final edition saved to editions/
+9. FIX + FINALIZE
+   Apply Rhea's corrections. Final edition saved to editions/.
    ↓
-7. ENGINE INTAKE
-   Parse edition returns → sheets
+10. PUBLISH
+    Drive upload, Supermemory ingest, photos, PDF, Discord refresh.
+    ↓
+11. ENGINE INTAKE
+    node scripts/editionIntake.js + node scripts/processIntake.js
 ```
 
 ---

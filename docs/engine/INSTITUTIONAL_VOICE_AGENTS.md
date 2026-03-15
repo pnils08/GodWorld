@@ -2,7 +2,7 @@
 
 **Created:** Session 63 (2026-02-25)
 **Authors:** Mags Corliss, Mike Paulson
-**Status:** Phases 1-3 complete. 7 voice agents built. Pipeline wired at Steps 1.8/1.8b/1.8c.
+**Status:** Phases 1-3 complete. 7 voice agents built. Two-folder architecture: IDENTITY.md + RULES.md + lean SKILL.md. Workspace builder: `scripts/buildVoiceWorkspaces.js`.
 **Phase:** 10.1-10.3 (Rollout Plan)
 
 ---

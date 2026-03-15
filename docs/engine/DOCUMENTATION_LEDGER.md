@@ -1,6 +1,6 @@
 # GodWorld Documentation Ledger
 
-**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 95 (2026-03-15)
+**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 96 (2026-03-15)
 **Purpose:** Single registry of every active documentation file — what it does, when it loads, who updates it, and which workflow it serves.
 **Rule:** If a file isn't listed here, it's either archived or undocumented. Fix that.
 
@@ -78,6 +78,10 @@
 | `docs/media/MEDIA_ROOM_STYLE_GUIDE.md` | Editorial rules, voice, canon, Paulson, Mara Vance | On-Demand | Manual (rare) | M |
 | `docs/media/DESK_PACKET_PIPELINE.md` | v2.0 — 8-stage edition pipeline: packets → desk folders → agents → compile → verify → intake | On-Demand | Manual (when pipeline changes) | M, D |
 | `scripts/buildDeskFolders.js` | Build per-desk workspace folders (briefings, errata, voice, archive). Zero LLM tokens. | On-Demand | Auto (code) | M, D |
+| `scripts/buildVoiceWorkspaces.js` | Build per-voice-agent workspace folders (briefings, base context, prior statements, initiative packets). Zero LLM tokens. | On-Demand | Auto (code) | M, D |
+| `scripts/buildInitiativeWorkspaces.js` | Build per-initiative workspace folders (packets, briefings, prior decisions, reference docs). Zero LLM tokens. | On-Demand | Auto (code) | M, D |
+| `output/civic-voice-workspace/{office}/README.md` | Static workspace navigation for civic voice agents (7 offices) | On-Demand | Manual (when folder structure changes) | M |
+| `output/initiative-workspace/{init}/README.md` | Static workspace navigation for initiative agents (5 initiatives) | On-Demand | Manual (when folder structure changes) | M |
 | `.claude/agents/{desk}-desk/IDENTITY.md` | Reporter personas, voice descriptions, examples (6 desks) | On-Demand | Manual (when reporters change) | M |
 | `.claude/agents/{desk}-desk/RULES.md` | Hard rules, output format, domain lock (6 desks) | On-Demand | Manual (when rules change) | M |
 | `output/desks/{desk}/README.md` | Static workspace navigation for desk agents (6 desks) | On-Demand | Manual (when folder structure changes) | M |
@@ -156,6 +160,8 @@ Information lives in exactly one file. Other files point to it but never duplica
 | Edition pipeline architecture | `docs/media/DESK_PACKET_PIPELINE.md` | NEWSROOM_MEMORY, SESSION_CONTEXT |
 | Desk agent identity/rules | `.claude/agents/{desk}-desk/IDENTITY.md` + `RULES.md` | DESK_PACKET_PIPELINE |
 | Desk workspace structure | `output/desks/{desk}/README.md` | DISK_MAP |
+| Voice agent workspace structure | `output/civic-voice-workspace/{office}/README.md` | DISK_MAP |
+| Initiative workspace structure | `output/initiative-workspace/{init}/README.md` | DISK_MAP |
 | Mags identity & family | `PERSISTENCE.md` | — |
 | Mags emotional state | `JOURNAL.md` / `JOURNAL_RECENT.md` | — |
 | Tech reading & research | `TECH_READING_ARCHIVE.md` | — |

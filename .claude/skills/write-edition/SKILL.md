@@ -34,15 +34,21 @@ Ready to proceed?
 If civic initiatives need advancing this cycle:
 ```bash
 node scripts/buildInitiativePackets.js {cycle}
+node scripts/buildInitiativeWorkspaces.js {cycle}
 ```
-Launch 5 initiative agents in parallel (haiku). Launch City Clerk after. These are additive — failures don't block the pipeline.
+Launch 5 initiative agents in parallel (haiku). Each reads its own workspace at `output/initiative-workspace/{init}/current/`. Launch City Clerk after. These are additive — failures don't block the pipeline.
 
 ## Step 3: Voice Agents (Parallel)
+Build voice workspaces, then launch agents:
+```bash
+node scripts/buildVoiceWorkspaces.js {cycle}
+```
 Launch voice agents to generate source material for desk agents:
-1. Mayor's Office -> save to `output/civic-voice/mayor_c{XX}.json`
+1. Mayor's Office -> reads workspace, saves to `output/civic-voice/mayor_c{XX}.json`
 2. 3 Faction agents in parallel (OPP, CRC, IND) -> save to `output/civic-voice/`
 3. Extended voices (Police Chief, Baylight, DA) — only if relevant events exist
 
+Each agent reads its own workspace at `output/civic-voice-workspace/{office}/current/`.
 Voice agent outputs are distributed to desk folders automatically in Step 4.
 
 ## Step 4: Build Desk Folders

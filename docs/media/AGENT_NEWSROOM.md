@@ -2,7 +2,7 @@
 
 **Status:** Implemented (Claude Code agents + skills)
 **Architecture:** Claude Code permanent agents (`.claude/agents/`) + orchestration skills (`.claude/skills/`)
-**Last Updated:** 2026-02-09
+**Last Updated:** 2026-03-15
 
 ---
 
@@ -10,9 +10,11 @@
 
 The Agent Newsroom runs inside Claude Code using two layers:
 
-1. **Permanent Agents** (`.claude/agents/`) — Desk workers with journalist personalities baked in. Each has its own model, tools, and system prompt. They don't need to be rebuilt each session.
+1. **Permanent Agents** (`.claude/agents/`) — 21 agents across 4 categories: desk (6), civic voice (7), initiative (5), editorial/utility (3). Each has IDENTITY.md (persona), RULES.md (constraints), and a lean SKILL.md (boot sequence). They don't need to be rebuilt each session.
 
-2. **Orchestration Skills** (`.claude/skills/`) — Playbooks that load data, verify state, and delegate to agents. The skill handles logistics; the agent handles writing.
+2. **Workspace Builders** (`scripts/`) — Zero-LLM scripts that populate per-agent workspace folders before launch: `buildDeskFolders.js` (6 desks), `buildVoiceWorkspaces.js` (7 civic offices), `buildInitiativeWorkspaces.js` (5 initiatives).
+
+3. **Orchestration Skills** (`.claude/skills/`) — Playbooks that verify state and delegate to agents. The skill handles logistics; the agent handles writing.
 
 ```
 /run-cycle (skill)
@@ -32,26 +34,36 @@ Individual desk skills (/civic-desk, /sports-desk, etc.)
    ↓
 2. /run-cycle — pre-flight checks, trigger engine, post-cycle review
    ↓
-3. GENERATE DESK PACKETS
+3. GENERATE PACKETS
    node scripts/buildDeskPackets.js [cycle]
-   Output: output/desk-packets/{desk}_c{XX}.json
+   node scripts/buildInitiativePackets.js [cycle]
    ↓
-4. /write-edition — launches all 6 desk agents in parallel
-   Each agent receives desk packet + base context
-   Each agent writes articles + engine returns
+4. BUILD WORKSPACES (zero LLM tokens)
+   node scripts/buildInitiativeWorkspaces.js [cycle]
+   node scripts/buildVoiceWorkspaces.js [cycle]
+   node scripts/buildDeskFolders.js [cycle]
    ↓
-5. COMPILE (Mags Corliss role — main session)
+5. INITIATIVE AGENTS (parallel, optional)
+   Each reads output/initiative-workspace/{init}/current/
+   ↓
+6. VOICE AGENTS (parallel)
+   Mayor first, then factions + extended
+   Each reads output/civic-voice-workspace/{office}/current/
+   ↓
+7. DESK AGENTS (6 in parallel)
+   Each reads output/desks/{desk}/current/ (includes voice statements)
+   ↓
+8. COMPILE (Mags Corliss role — main session)
    Call front page, order sections, merge returns
    ↓
-6. VERIFY (Rhea Morgan agent)
+9. VERIFY (Rhea Morgan agent)
    Cross-check names, votes, records against canon
-   Uses ARTICLE_INDEX_BY_POPID.md + CITIZENS_BY_ARTICLE.md + live sheet data
    ↓
-7. FIX + FINALIZE
-   Apply corrections, save to editions/
-   ↓
-8. ENGINE INTAKE
-   node scripts/editionIntake.js + node scripts/processIntake.js
+10. FIX + FINALIZE
+    Apply corrections, save to editions/
+    ↓
+11. ENGINE INTAKE
+    node scripts/editionIntake.js + node scripts/processIntake.js
 ```
 
 ---
@@ -88,9 +100,9 @@ For external communication, engine components map to journalism industry termino
 
 ---
 
-## Permanent Agents (7 total)
+## Permanent Agents (21 total)
 
-### Desk Agents (6)
+### Desk Agents (6) — Write journalism
 
 | Agent | Lead Reporter(s) | Model | Domains | Articles |
 |-------|-----------------|-------|---------|----------|
@@ -101,12 +113,41 @@ For external communication, engine components map to journalism industry termino
 | `chicago-desk` | Selena Grant, Talia Finch | Sonnet | CHICAGO, SPORTS (Bulls) | 2-3 |
 | `letters-desk` | (citizen voices) | Sonnet | ALL | 2-4 |
 
-Each agent has:
-- Deep journalist personality profiles from BAY_TRIBUNE_JOURNALIST_PROFILES.pdf
-- Voice patterns, signature themes, sample phrases, backstory
-- Read-only tools (Read, Glob, Grep) — they write articles, not code
-- Canon rules embedded (no invented names, no engine metrics)
-- Engine return format (Article Table, Storylines, Citizen Usage, Continuity)
+Each desk agent has: IDENTITY.md (persona), RULES.md (output format + hard rules), lean SKILL.md (boot sequence). Reads workspace at `output/desks/{desk}/current/`. Write tools (Read, Glob, Grep, Write, Edit). Persistent memory at `.claude/agent-memory/{desk}/MEMORY.md`.
+
+### Civic Voice Agents (7) — Generate source material
+
+| Agent | Speaker(s) | Model | Output |
+|-------|-----------|-------|--------|
+| `civic-office-mayor` | Mayor Avery Santana | Haiku | `output/civic-voice/mayor_c{XX}.json` |
+| `civic-office-opp-faction` | Janae Rivers (OPP) | Haiku | `output/civic-voice/opp_faction_c{XX}.json` |
+| `civic-office-crc-faction` | Warren Ashford (CRC) | Haiku | `output/civic-voice/crc_faction_c{XX}.json` |
+| `civic-office-ind-swing` | Ramon Vega, Leonard Tran | Haiku | `output/civic-voice/ind_swing_c{XX}.json` |
+| `civic-office-police-chief` | Chief Rafael Montez | Haiku | `output/civic-voice/police_chief_c{XX}.json` |
+| `civic-office-baylight-authority` | Director Keisha Ramos | Haiku | `output/civic-voice/baylight_authority_c{XX}.json` |
+| `civic-office-district-attorney` | DA Clarissa Dane | Haiku | `output/civic-voice/district_attorney_c{XX}.json` |
+
+Each voice agent reads workspace at `output/civic-voice-workspace/{office}/current/`. Produces JSON statements that desk agents quote. Not journalists — source material.
+
+### Initiative Agents (5) — Advance civic projects
+
+| Agent | Director | Model | Output |
+|-------|---------|-------|--------|
+| `civic-project-stabilization-fund` | Marcus Webb | Haiku | `output/city-civic-database/initiatives/stabilization-fund/` |
+| `civic-project-oari` | Dr. Vanessa Tran-Munoz | Haiku | `output/city-civic-database/initiatives/oari/` |
+| `civic-project-health-center` | Bobby Chen-Ramirez | Haiku | `output/city-civic-database/initiatives/health-center/` |
+| `civic-project-transit-hub` | Elena Soria Dominguez | Haiku | `output/city-civic-database/initiatives/transit-hub/` |
+| `civic-office-baylight-authority` | Keisha Ramos (dual role) | Haiku | `output/city-civic-database/initiatives/baylight/` |
+
+Each initiative agent reads workspace at `output/initiative-workspace/{init}/current/`. Produces civic documents and decisions JSON.
+
+### Editorial/Utility Agents (3)
+
+| Agent | Role | Model |
+|-------|------|-------|
+| `rhea-morgan` | Verification (21 checks) | Sonnet |
+| `freelance-firebrand` | Jax Caldera — accountability columnist | Sonnet |
+| `city-clerk` | Document hygiene enforcement | Haiku |
 
 ### Verification Agent (1)
 

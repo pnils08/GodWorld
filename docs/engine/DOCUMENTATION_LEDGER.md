@@ -80,6 +80,9 @@
 | `scripts/buildDeskFolders.js` | Build per-desk workspace folders (briefings, errata, voice, archive). Zero LLM tokens. | On-Demand | Auto (code) | M, D |
 | `scripts/buildVoiceWorkspaces.js` | Build per-voice-agent workspace folders (briefings, base context, prior statements, initiative packets). Zero LLM tokens. | On-Demand | Auto (code) | M, D |
 | `scripts/buildInitiativeWorkspaces.js` | Build per-initiative workspace folders (packets, briefings, prior decisions, reference docs). Zero LLM tokens. | On-Demand | Auto (code) | M, D |
+| `scripts/buildMaraPacket.js` | Generate Mara Vance's canon audit packet — clean edition + AUDIT_HISTORY.md, no engine context. Upload to Drive for claude.ai review. | On-Demand | Auto (code) | M |
+| `scripts/validateEdition.js` | v2.0 — 11 programmatic checks (8 static + 3 live sheet). Runs before Rhea. Zero LLM tokens. | On-Demand | Auto (code) | M, D |
+| `output/mara-audit/` | Generated Mara audit packet: edition for review + audit history + manifest | On-Demand | `buildMaraPacket.js` | M |
 | `output/civic-voice-workspace/{office}/README.md` | Static workspace navigation for civic voice agents (7 offices) | On-Demand | Manual (when folder structure changes) | M |
 | `output/initiative-workspace/{init}/README.md` | Static workspace navigation for initiative agents (5 initiatives) | On-Demand | Manual (when folder structure changes) | M |
 | `.claude/agents/{desk}-desk/IDENTITY.md` | Reporter personas, voice descriptions, examples (6 desks) | On-Demand | Manual (when reporters change) | M |

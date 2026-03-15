@@ -52,8 +52,11 @@ node scripts/generate-edition-pdf.js
 # Upload to Drive
 node scripts/saveToDrive.js --type edition
 
-# Validate edition
-node scripts/validateEdition.js
+# Validate edition (v2.0 — live sheet checks)
+node scripts/validateEdition.js [--no-sheets]
+
+# Mara audit packet (clean edition for claude.ai review)
+node scripts/buildMaraPacket.js [cycle] [edition-file]
 
 # Ingest to Supermemory
 node scripts/ingestEdition.js

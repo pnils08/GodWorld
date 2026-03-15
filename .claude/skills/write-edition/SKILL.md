@@ -131,25 +131,39 @@ Launch `rhea-morgan` agent on compiled edition.
 - APPROVED (score >= 75, zero CRITICALs) -> proceed
 - REVISE -> retry failing desks with Rhea's error report, max 2 rounds
 
-## Step 7.5: Mara Vance Audit
-Launch Mara audit agent with:
-- The compiled edition
-- `docs/mara-vance/AUDIT_HISTORY.md`
-- Rhea's report
-- `output/desk-packets/base_context.json`
+## Step 7.5: Mara Vance Canon Audit (External — claude.ai)
+Mara reads the edition clean. No engine context, no Rhea report, no validation results.
+She reads journalism and judges whether the city feels real.
 
-Save audit to `output/mara_directive_c{XX}.txt`. Update `AUDIT_HISTORY.md`.
+1. Generate audit packet:
+```bash
+node scripts/buildMaraPacket.js {XX} editions/cycle_pulse_edition_{XX}.txt
+```
+2. Upload to Drive:
+```bash
+node scripts/saveToDrive.js output/mara-audit/edition_c{XX}_for_review.txt mara
+node scripts/saveToDrive.js output/mara-audit/audit_history.md mara
+```
+3. Tell the user: "Edition draft and audit history uploaded to Mara's Drive folder. Ready for her review."
 
-## Step 8: USER REVIEW GATE (MANDATORY)
-**STOP. Nothing saved or published until explicit user approval.**
+## Step 8: MARA REVIEW GATE (MANDATORY)
+**STOP. Pipeline pauses here until Mara approves on claude.ai.**
 
-Show: article count, Rhea score, Mara assessment, corrections applied, new citizens.
-Wait for "yes" / "approved" / "publish". NEVER proceed on your own judgment.
+The user hands the edition to Mara. She reads it as a reader who knows the city.
+Her canon audit comes back with corrections and forward guidance.
 
-## Step 9: Save & Publish (after approval)
+When the user returns with Mara's response:
+- Apply any corrections Mara identified
+- Save her audit to `output/mara_canon_audit_c{XX}.txt`
+- Update `docs/mara-vance/AUDIT_HISTORY.md` with new findings
+- Show: article count, Rhea score, Mara assessment, corrections applied, new citizens
+
+**Then get explicit user approval to publish.** Wait for "yes" / "approved" / "publish".
+
+## Step 9: Save & Publish (after Mara approval + user approval)
 1. Save to `editions/cycle_pulse_edition_{XX}.txt`
 2. Upload to Drive: `node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition`
-3. Upload Mara audit: `node scripts/saveToDrive.js output/mara_directive_c{XX}.txt mara`
+3. Upload Mara audit: `node scripts/saveToDrive.js output/mara_canon_audit_c{XX}.txt mara`
 4. Ingest to Supermemory: `node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt`
 
 ## Step 9.5: Print Pipeline

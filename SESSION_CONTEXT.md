@@ -55,6 +55,8 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Desk Folder Builder | scripts/buildDeskFolders.js | v1.0 | Per-desk workspace folders: briefings, errata, voice statements, archive context. Zero LLM tokens. |
 | Voice Workspace Builder | scripts/buildVoiceWorkspaces.js | v1.0 | Per-voice-agent workspace folders: briefings, base context, prior statements, initiative packets. Zero LLM tokens. |
 | Initiative Workspace Builder | scripts/buildInitiativeWorkspaces.js | v1.0 | Per-initiative workspace folders: packets, briefings, prior decisions, reference docs. Zero LLM tokens. |
+| Edition Validator | scripts/validateEdition.js | v2.0 | 11 checks: 8 static (names, votes, engine language) + 3 live sheet (citizens, initiatives, civic offices). --no-sheets for offline. |
+| Mara Audit Packet | scripts/buildMaraPacket.js | v1.0 | Clean edition + AUDIT_HISTORY.md for Mara's claude.ai review. No engine context. |
 | Neighborhood Economics | scripts/aggregateNeighborhoodEconomics.js | v1.0 | Median income/rent by neighborhood from citizen data |
 | Economic Profile Seeder | scripts/applyEconomicProfiles.js | v1.0 | Role-based income seeding from economic_parameters.json |
 | Player Index Builder | scripts/buildPlayerIndex.js | v2.0 | TrueSource parser: contracts, quirks, status, computed birth years |

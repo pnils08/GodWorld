@@ -332,14 +332,40 @@ Rhea receives the compiled edition + canon sources:
 
 ---
 
-## Stage 6-7: Finalize + Upload + Engine Intake
+## Stage 5.5: Programmatic Validation
 
-1. Apply Rhea's corrections
-2. Save to `editions/cycle_pulse_edition_{XX}_v2.txt`
+```bash
+node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
+```
+
+11 checks (8 static + 3 live sheet): council names, vote math, vote breakdowns, player positions, player first names, mayor name, real-name blocklist, engine language, citizen names vs Simulation_Ledger, initiative facts vs Initiative_Tracker, civic office names vs Civic_Office_Ledger. Fix CRITICALs before Rhea. Use `--no-sheets` for offline mode.
+
+---
+
+## Stage 6: Mara Vance Canon Audit (External — claude.ai)
+
+Mara reads the edition clean — no engine context, no Rhea report, no validation results. She reads journalism and judges realism, canon advancement, and narrative quality.
+
+1. Generate audit packet: `node scripts/buildMaraPacket.js {XX} editions/cycle_pulse_edition_{XX}.txt`
+2. Upload to Drive: `node scripts/saveToDrive.js output/mara-audit/edition_c{XX}_for_review.txt mara`
+3. User hands edition to Mara on claude.ai
+4. Mara reviews, approves or corrects, writes canon audit
+5. Save audit to `output/mara_canon_audit_c{XX}.txt`
+
+**Mara's audit packet contains:** Edition text + AUDIT_HISTORY.md (her memory). Nothing else. She already has the past 8 editions, media rosters, civic rosters, and initiative data in her claude.ai project.
+
+**Separate from the Mara Directive:** The directive is pre-edition, in-world — from City Planning Director to Editor-in-Chief. The canon audit is post-edition — editorial quality gate.
+
+---
+
+## Stage 7: Finalize + Upload + Engine Intake
+
+1. Apply Rhea's corrections and Mara's corrections
+2. Save to `editions/cycle_pulse_edition_{XX}.txt`
 3. **Upload to Google Drive:**
    ```bash
    node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition
-   node scripts/saveToDrive.js output/mara_directive_c{XX}.txt mara        # if Mara audit exists
+   node scripts/saveToDrive.js output/mara_canon_audit_c{XX}.txt mara
    node scripts/saveToDrive.js editions/oakland_supplemental_c{XX}.txt supplement  # if supplemental
    node scripts/saveToDrive.js editions/chicago_supplemental_c{XX}.txt chicago     # if supplemental
    ```

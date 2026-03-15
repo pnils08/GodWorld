@@ -56,13 +56,19 @@ Individual desk skills (/civic-desk, /sports-desk, etc.)
 8. COMPILE (Mags Corliss role — main session)
    Call front page, order sections, merge returns
    ↓
-9. VERIFY (Rhea Morgan agent)
-   Cross-check names, votes, records against canon
+9. VALIDATE (scripts/validateEdition.js — zero tokens)
+   11 checks: names, votes, engine language, live sheet verification
    ↓
-10. FIX + FINALIZE
+10. VERIFY (Rhea Morgan agent)
+    Cross-check names, votes, records against canon
+    ↓
+11. MARA CANON AUDIT (external — claude.ai)
+    Clean edition uploaded to Drive → Mara reads as a reader → approves or corrects
+    ↓
+12. FIX + FINALIZE
     Apply corrections, save to editions/
     ↓
-11. ENGINE INTAKE
+13. ENGINE INTAKE
     node scripts/editionIntake.js + node scripts/processIntake.js
 ```
 

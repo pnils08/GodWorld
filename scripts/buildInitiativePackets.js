@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 /**
- * buildInitiativePackets.js v1.0
+ * buildInitiativePackets.js v1.1
  *
  * Pulls live data from Google Sheets and local files to build per-initiative
  * JSON packets for civic project agents. Each packet contains the initiative's
  * current state, affected citizens, neighborhood context, business data,
- * Mara's forward guidance, and previous cycle decisions — everything an
- * initiative agent needs to make autonomous decisions and produce documents.
+ * Mara's forward guidance, previous cycle decisions, and voice agent decisions
+ * (Mayor authorizations, faction reactions) — everything an initiative agent
+ * needs to make autonomous decisions and produce documents.
  *
  * Usage: node scripts/buildInitiativePackets.js [cycleNumber]
  *   e.g. node scripts/buildInitiativePackets.js 86
@@ -19,6 +20,8 @@
  * Reads from local files:
  *   output/mara_directive_c{XX-1}.txt
  *   output/city-civic-database/initiatives/{initiative}/decisions_c{XX-1}.json
+ *   output/civic-voice/mayor_c{XX-1}.json (authorization_response, executive_order)
+ *   output/civic-voice/{faction}_c{XX-1}.json (hearing_request, audit_demand, etc.)
  *
  * Writes:
  *   output/initiative-packets/stabilization_fund_c{XX}.json
@@ -153,6 +156,74 @@ function readPreviousDecisions(agentName, prevCycle) {
   } catch {
     return null;
   }
+}
+
+/**
+ * Read voice agent decisions from the previous cycle that affect initiatives.
+ * Scans Mayor statements for authorization_response / executive_order,
+ * and faction statements for hearing_request / audit_demand / committee_referral.
+ * Returns { mayorDecisions: [...], factionReactions: [...] } or null.
+ */
+function readVoiceDecisions(prevCycle) {
+  const voiceDir = path.join(PROJECT_ROOT, 'output/civic-voice');
+  const results = { mayorDecisions: [], factionReactions: [] };
+  let found = false;
+
+  // Mayor decisions
+  const mayorPath = path.join(voiceDir, `mayor_c${prevCycle}.json`);
+  try {
+    const mayorData = JSON.parse(fs.readFileSync(mayorPath, 'utf-8'));
+    const stmts = Array.isArray(mayorData) ? mayorData : (mayorData.statements || []);
+    for (const s of stmts) {
+      if (['authorization_response', 'executive_order', 'appointment'].includes(s.type)) {
+        results.mayorDecisions.push({
+          statementId: s.statementId,
+          type: s.type,
+          topic: s.topic,
+          decision: s.decision || null,
+          amount: s.amount || null,
+          initiative: s.initiative || null,
+          conditions: s.conditions || [],
+          quote: s.quote || ''
+        });
+        found = true;
+      }
+    }
+  } catch { /* no mayor file */ }
+
+  // Faction reactions (OPP, CRC, IND)
+  const factionFiles = [
+    { file: `opp_faction_c${prevCycle}.json`, faction: 'OPP' },
+    { file: `crc_faction_c${prevCycle}.json`, faction: 'CRC' },
+    { file: `ind_swing_c${prevCycle}.json`, faction: 'IND' }
+  ];
+  const reactionTypes = ['hearing_request', 'audit_demand', 'committee_referral',
+    'public_pressure', 'public_accounting', 'swing_endorsement',
+    'conditional_support', 'procedural_objection'];
+
+  for (const { file, faction } of factionFiles) {
+    try {
+      const data = JSON.parse(fs.readFileSync(path.join(voiceDir, file), 'utf-8'));
+      const stmts = Array.isArray(data) ? data : (data.statements || []);
+      for (const s of stmts) {
+        if (reactionTypes.includes(s.type)) {
+          results.factionReactions.push({
+            statementId: s.statementId,
+            faction,
+            speaker: s.speaker || '',
+            type: s.type,
+            topic: s.topic,
+            position: s.position || null,
+            quote: s.quote || '',
+            relatedInitiatives: s.relatedInitiatives || []
+          });
+          found = true;
+        }
+      }
+    } catch { /* no faction file */ }
+  }
+
+  return found ? results : null;
 }
 
 /**
@@ -362,7 +433,7 @@ function buildInitiativeRecord(initiative) {
 
 function buildInitiativePacket(config, opts) {
   const {
-    initiative, prevDecisions, maraDirective, previousDocs,
+    initiative, prevDecisions, voiceDecisions, maraDirective, previousDocs,
     citizenData, neighborhoodContext, businesses, officials, cycle
   } = opts;
 
@@ -383,6 +454,7 @@ function buildInitiativePacket(config, opts) {
     },
     previousCycle: {
       decisions: prevDecisions,
+      voiceDecisions: voiceDecisions,
       documentsProduced: previousDocs
     },
     maraDirective: maraDirective,
@@ -396,7 +468,7 @@ function buildInitiativePacket(config, opts) {
 
 async function main() {
   console.log(`\n╔══════════════════════════════════════════════════╗`);
-  console.log(`║  buildInitiativePackets.js v1.0 — Cycle ${CYCLE}       ║`);
+  console.log(`║  buildInitiativePackets.js v1.1 — Cycle ${CYCLE}       ║`);
   console.log(`╚══════════════════════════════════════════════════╝\n`);
 
   // Create output directory
@@ -463,6 +535,14 @@ async function main() {
   } else {
     console.log(`  Mara directive (C${prevCycle}): not found`);
   }
+
+  // Voice agent decisions from previous cycle (Mayor authorizations, faction reactions)
+  const voiceDecisions = readVoiceDecisions(prevCycle);
+  if (voiceDecisions) {
+    console.log(`  Voice decisions (C${prevCycle}): ${voiceDecisions.mayorDecisions.length} mayor, ${voiceDecisions.factionReactions.length} faction`);
+  } else {
+    console.log(`  Voice decisions (C${prevCycle}): none found`);
+  }
   console.log('');
 
   // ── Build packets ──
@@ -505,10 +585,26 @@ async function main() {
     // Officials
     const officials = getRelevantOfficials(civicOfficers, config.policyDomains);
 
+    // Filter voice decisions relevant to this initiative
+    let initVoiceDecisions = null;
+    if (voiceDecisions) {
+      const relevantMayor = voiceDecisions.mayorDecisions.filter(d =>
+        d.initiative === initId || (d.topic && d.topic.toLowerCase().includes(config.agentName.replace(/-/g, ' ')))
+      );
+      const relevantFaction = voiceDecisions.factionReactions.filter(r =>
+        (r.relatedInitiatives || []).includes(initId) ||
+        (r.topic && r.topic.toLowerCase().includes(config.agentName.replace(/-/g, ' ')))
+      );
+      if (relevantMayor.length > 0 || relevantFaction.length > 0) {
+        initVoiceDecisions = { mayorDecisions: relevantMayor, factionReactions: relevantFaction };
+      }
+    }
+
     // Build packet
     const packet = buildInitiativePacket(config, {
       initiative,
       prevDecisions,
+      voiceDecisions: initVoiceDecisions,
       maraDirective: maraDirectiveText,
       previousDocs,
       citizenData,
@@ -531,6 +627,7 @@ async function main() {
       neighborhoods: config.neighborhoods.length,
       businesses: bizData.length,
       hasPreviousDecisions: !!prevDecisions,
+      hasVoiceDecisions: !!initVoiceDecisions,
       previousDocCount: previousDocs.length
     };
 

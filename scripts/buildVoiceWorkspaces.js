@@ -233,6 +233,30 @@ function main() {
       console.log(`  initiative_packets/ (${Object.keys(manifest.packets).length} files)`);
     }
 
+    // 4b. Initiative agent decisions (pending authorizations, escalations)
+    // Voice agents read these to make binding decisions (Mayor authorizes, factions react)
+    const CIVIC_DB = path.join(ROOT, 'output/city-civic-database/initiatives');
+    const initDirs = ['stabilization-fund', 'oari', 'transit-hub', 'health-center', 'baylight'];
+    let decisionsCount = 0;
+    ensureDir(path.join(currentDir, 'initiative_decisions'));
+    for (const init of initDirs) {
+      // Copy most recent decisions JSON
+      const decisionsFile = path.join(CIVIC_DB, init, `decisions_c${CYCLE}.json`);
+      if (copyIfExists(decisionsFile, path.join(currentDir, 'initiative_decisions', `${init}_decisions_c${CYCLE}.json`))) {
+        decisionsCount++;
+        agentFiles++;
+      }
+      // Also check previous cycle (in case initiative agents haven't run yet this cycle)
+      const prevDecisions = path.join(CIVIC_DB, init, `decisions_c${CYCLE - 1}.json`);
+      if (copyIfExists(prevDecisions, path.join(currentDir, 'initiative_decisions', `${init}_decisions_c${CYCLE - 1}.json`))) {
+        decisionsCount++;
+        agentFiles++;
+      }
+    }
+    if (decisionsCount > 0) {
+      console.log(`  initiative_decisions/ (${decisionsCount} files)`);
+    }
+
     // 5. Generate briefing
     const briefing = generateVoiceBriefing(agent, CYCLE, baseContext);
     fs.writeFileSync(path.join(currentDir, 'briefing.md'), briefing);

@@ -36,12 +36,25 @@ Supplementals are where the world gets built. A restaurant review canonizes a re
 
 Topics come from anywhere:
 1. **User drops it** — "let's do a food piece" or "what's Temescal look like?"
-2. **Engine signal** — a citizen event, a new business, a neighborhood shift
-3. **Editorial instinct** — Mags sees a gap in the world and fills it
-4. **Journalist flag** — a reporter's voice suggests a feature
-5. **Variety check** — if the last 3 supplementals were civic, do something else
+2. **Trigger list** — check `output/supplemental-triggers/triggers_c{XX}.json` for auto-detected candidates (run `node scripts/checkSupplementalTriggers.js {cycle}` if it doesn't exist yet)
+3. **Engine signal** — a citizen event, a new business, a neighborhood shift
+4. **Editorial instinct** — Mags sees a gap in the world and fills it
+5. **Journalist flag** — a reporter's voice suggests a feature
+6. **Variety check** — if the last 3 supplementals were civic, do something else
 
 Read whatever the user provides. If it's vague, that's fine — "what's the food scene like?" is a valid topic.
+
+### Civic Supplemental Types (from triggers)
+
+When the trigger list suggests civic content, use one of these formats:
+
+| Type | What | Who Produces | Format |
+|------|------|-------------|--------|
+| **Civic Dispatch** | Official city communications — press releases, public notices, community alerts | Carmen Delaine + voice agent statements | In-world government output, not journalism. 1-3 short pieces. |
+| **Neighborhood Report** | What life looks like in one neighborhood this cycle. Businesses, events, people, weather. | Maria Keen + culture desk reporters | World-texture, not news coverage. Walk-through format. |
+| **Initiative Spotlight** | Deep dive on one initiative's progress. What happened, what's next, who's affected. | Carmen Delaine or Jordan Velez + civic desk | Feature-length, single-subject, investigative. |
+
+These follow the same Step 1-5 pipeline as any supplemental — they just have a civic angle and draw from voice agent statements as source material.
 
 ## Step 1: Design the Coverage Plan
 

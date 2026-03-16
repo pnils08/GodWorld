@@ -32,7 +32,11 @@ Supplementals are where the world gets built. A restaurant review canonizes a re
 
 ---
 
-## Step 0: Pick the Topic
+## Step 0: Production Log
+
+If `output/production_log_c{XX}.md` exists, read it — you may be resuming after compaction. If not, create one. Update it at every step. This is how you survive context loss mid-run. Same format as the edition production log (see write-edition SKILL.md Step 0.5).
+
+## Step 0.5: Pick the Topic
 
 Topics come from anywhere:
 1. **User drops it** — "let's do a food piece" or "what's Temescal look like?"

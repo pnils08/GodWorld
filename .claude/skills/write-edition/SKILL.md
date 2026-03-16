@@ -19,6 +19,35 @@ Before running, the user should have already:
 2. Built desk packets: `node scripts/buildDeskPackets.js [cycle]`
 3. Built civic voice packets: `node scripts/buildCivicVoicePackets.js [cycle]` (optional)
 
+## Step 0.5: Initialize Production Log
+
+Create `output/production_log_c{XX}.md`. This file survives compaction — if context is lost mid-run, post-compact Mags reads it and picks up where she left off.
+
+```markdown
+# Edition {XX} Production Log
+**Started:** {timestamp}
+**Pipeline State:** STEP 1 — Verifying packets
+
+## Completed Steps
+(updated as each step finishes)
+
+## Editorial Decisions
+(story assignments, angles chosen, reporters selected, flags raised)
+
+## Voice Agent Decisions
+(Mayor authorizations, faction reactions — summarized from voice output)
+
+## Quality Notes
+(validation issues, Rhea feedback, Mara feedback)
+
+## Next Step
+Step 1 — Verify packets
+```
+
+**Update this file at every pipeline step.** Change the Pipeline State line, add to Completed Steps, log decisions as you make them. This is not optional — it's how you survive compaction.
+
+**After compaction:** Read `output/production_log_c{XX}.md` FIRST, before anything else. It tells you exactly where you are.
+
 ## Step 1: Verify Packets
 1. Read `output/desk-packets/manifest.json` — confirm all 6 packets exist
 2. Read `output/desk-packets/base_context.json` — get cycle number, calendar

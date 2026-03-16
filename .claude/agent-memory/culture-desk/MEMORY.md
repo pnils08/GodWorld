@@ -1,6 +1,6 @@
 # Culture Desk — Editorial Memory
 
-Last Updated: 2026-03-06 | Last edition: E86 (Cycle 86, August 2041)
+Last Updated: 2026-03-15 | Last edition: E87 (Cycle 87, August 2041)
 
 ## Cultural Entities & Venues
 - Muralist Dante Reyes: artist, Jack London neighborhood. Documenting corridor before Baylight demolition.
@@ -12,6 +12,8 @@ Last Updated: 2026-03-06 | Last edition: E86 (Cycle 86, August 2041)
 - Cathedral of Christ the Light: Lake Merritt. Weekly food pantry (Saturdays, Grand Avenue).
 - Oakland Buddhist Temple: Chinatown. Obon summer observance (E84 coverage).
 - East Bay Meditation Center: Downtown. Obon observance (E84 coverage).
+- First Presbyterian Church: Downtown Oakland. Summer community support — fellowship hall open evenings. Covered E87 (Elliot Graye).
+- West Side Cafe: West Oakland. Restaurant, counter service, breakfast/lunch. Baylight construction crews as regular customers. Covered E87 (Mason Ortega).
 - Blue Lantern Bar: Jack London nightlife (Business_Ledger BIZ-00036).
 - Harborline Grill: Jack London restaurant (Business_Ledger BIZ-00044).
 - Fruitvale Community Clinic: Fruitvale healthcare (Business_Ledger BIZ-00026).
@@ -26,6 +28,7 @@ Last Updated: 2026-03-06 | Last edition: E86 (Cycle 86, August 2041)
 - Oakland Buddhist Temple (Chinatown) — covered E84
 - East Bay Meditation Center (Downtown) — covered E84
 - Allen Temple Baptist Church: East Oakland, 85th Avenue. Saturday food pantry (weekly, no advertising). Covered E84 summary, E86 feature (Elliot Graye).
+- First Presbyterian Church: Downtown Oakland. Fellowship hall community support (evenings, August). Covered E87 (Elliot Graye).
 - Masjid Al-Islam: East Oakland. Job training workshops (ongoing, new session August 2041). Covered E86.
 
 ## Citizens with Coverage History
@@ -56,6 +59,23 @@ Last Updated: 2026-03-06 | Last edition: E86 (Cycle 86, August 2041)
 - E85: Attended First Friday in Jack London corridor. Tenant in Baylight construction-affected zone. Quote: "But people are still coming out. That means something."
 - DO NOT: Promote to official role.
 
+### Lucia Polito (64, Fruitvale, Self-Employed)
+- E87: Longtime St. Columba parishioner. Volunteering at summer community support pantry, parish hall. Quotes: "I don't think about it. I just come." / "It's not that they do more. It's that they don't stop. Everything else has seasons. This doesn't."
+- Voice card: Guardian archetype. Motifs: calmness, quiet-optimism, ordinary-grace, gentle-balance.
+- DO NOT: invent title/staff role. She is a parishioner and community member.
+
+### Lorenzo Jordan (68, Downtown, Public Defender)
+- E87: Attended First Presbyterian fellowship hall Tuesday evening. Found it as refuge from institutional work. Quotes: "I have days where I've heard enough from official Oakland." / "Maybe just to be somewhere that doesn't keep score."
+- DO NOT: Promote to leadership or advocacy role.
+
+### Kris Bubic (42, West Oakland, Retired Former A's)
+- E87: Regular at West Side Cafe, West Oakland. Morning counter ritual. Quotes: "Back then I was just eating. Now I'm actually here." / "This is the best part of being done."
+- DO NOT: Give athletic titles beyond "retired former A's."
+
+### Clarence Moody (age/neighborhood unconfirmed, Retired Machinist)
+- E87: Attended Janmashtami at Shiva Vishnu Temple, Montclair. Non-Hindu neighbor who comes every year. Quote: "The music gets louder as midnight comes. I like that. Things that build."
+- NOTE: Age and neighborhood not confirmed in packet (POP-00730 in storyConnections only). Do not print age or neighborhood until confirmed.
+
 ### Dorothy Rios (71, Fruitvale area, Retired)
 - E84: Attends St. Columba seniors lunch every week for 3 years. Quote: "I come for the company as much as the food."
 
@@ -76,5 +96,9 @@ Last Updated: 2026-03-06 | Last edition: E86 (Cycle 86, August 2041)
 - Oakland has 17 neighborhoods — use correct names.
 - Mara E84 guidance: ONE faith/community feature per edition, not two parallel faith-as-safety-net pieces.
 - Faith storyline OARI intersection active since C84: churches doing this work before OARI existed.
-- Baylight construction storyline active since C84: Jack London corridor workers/artists absorbing change.
+- Baylight construction storyline active since C84: Jack London corridor workers/artists absorbing change. NOT covered E87 — stays active.
 - Stabilization Fund: $4.2M approved, $0 disbursed — ESTABLISHED CANON. Do not write otherwise.
+- E87: Calvin Turner and Andre Lee both on rest after consecutive E84-E86 appearances. Do not reuse until E89 minimum.
+- E87: Citizen rotation successful — four new first-appearance citizens (Lucia Polito, Lorenzo Jordan, Kris Bubic, Clarence Moody). All four are from packet-confirmed sources.
+- West Side Cafe (West Oakland) established as food coverage venue E87. Active storyline: Baylight crew regular customer base.
+- Juneteenth arc active (early phase) — not covered E87, available for future editions.

@@ -18,10 +18,10 @@ Prior work: `output/civic-voice/crc_faction_c86.json`, `crc_faction_c87.json`
 - Baylight (C83): NO (all 3)
 - Transit Hub Phase II (C86): Ashford YES (crossover), Chen NO, Crane absent
 
-## C87 Statements Generated
-1. **STMT-87-CRC-001** (Ashford) — Stabilization Fund authorization delay (9 cycles, $387K pending). Calls out the gap between 2-week promise and actual timeline.
-2. **STMT-87-CRC-002** (Chen) — OARI Day 35/45 with zero operational teams. Pressures Mayor's arbitrary deadline.
-3. **STMT-87-CRC-003** (Ashford) — Baylight TIF Zone ongoing fiscal risk. Demands oversight dashboard on debt service and taxpayer exposure.
+## C87 Statements Generated (Final)
+1. **STMT-87-CRC-001** (Ashford) — Stabilization Fund: audit_demand type. Mayor says 12 families got checks, 277 waiting. Ashford demands independent external audit of processing pipeline, 2-week review gap, staffing/capacity analysis.
+2. **STMT-87-CRC-002** (Chen) — OARI Day 35/45: process_critique. Mayor pressuring Montez for "this week" signature. Chen questions whether 10 days resolves operational readiness or just meets arbitrary deadline.
+3. **STMT-87-CRC-003** (Ashford) — Baylight TIF Zone: fiscal_warning. CRC demands public-facing quarterly dashboard on: tax increment collected, property values vs projections, annual debt service, cumulative taxpayer exposure.
 
 ## Key Facts (Canon)
 - Stabilization Fund: $28M authorized C78. C87 shows 22 approved ($387K), 0 disbursed. 9-cycle authorization delay confirmed.

@@ -24,11 +24,18 @@ Each letter must include a Names Index line at the end with: citizen name, age, 
 - Howard Young (56, Rockridge, barista) — Art & Soul Festival
 - Delia Fuentes (44, Fruitvale, school bus driver) — Transit Hub Phase II anxiety (NEW in E86)
 
-## E87 Letters
+## E87 Letters (RETRACTED EDITION — first run)
 - Carla Edmonds (51, Eastlake, administrative assistant) — RETURNING, Stabilization Fund queue
 - Sister Rosario Aguilar (67, Fruitvale, retired hospital worker / parish volunteer) — NEW, sacred August / faith calendar
 - Miguel Orozco (71, Fruitvale, retired produce market owner) — NEW, Transit Hub skeptical watch
 - Jemaine Farris (29, West Oakland, line cook) — NEW, summer city energy
+NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new citizens. The four citizens above never published — but they are logged in rest tracking out of caution.
+
+## E87 Letters (REWRITE — fresh citizens, all-new voices)
+- Patricia Osei-Bonsu (47, West Oakland, hospital billing coordinator) — NEW, Stabilization Fund neighbor watching
+- Ruben Castillo (53, Fruitvale, high school history teacher) — NEW, OARI Day 35 frustration
+- Delores Kimura (71, Downtown, retired postal service supervisor) — NEW, First Presbyterian open door
+- Andre Wilkins (34, Jack London, restaurant server) — NEW, sports bar watch gathering / summer city energy
 
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST through E88 minimum
@@ -40,6 +47,10 @@ Each letter must include a Names Index line at the end with: citizen name, age, 
 - Sister Rosario Aguilar: used E87 — REST through E89
 - Miguel Orozco: used E87 — REST through E89
 - Jemaine Farris: used E87 — REST through E89
+- Patricia Osei-Bonsu: used E87 (rewrite) — REST through E89
+- Ruben Castillo: used E87 (rewrite) — REST through E89
+- Delores Kimura: used E87 (rewrite) — REST through E89
+- Andre Wilkins: used E87 (rewrite) — REST through E89
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
-If a briefing recommends a returning citizen who is on mandatory rest, use Carla Edmonds or create a new citizen instead. The rest cycle rule overrides briefing suggestions. Carla Edmonds is now also on rest through E89.
+If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

@@ -32,7 +32,9 @@ Last Updated: Session 95 (2026-03-15)
 | `desks/` | **Per-desk autonomous workspaces** (built by `buildDeskFolders.js`) | Current cycle | `desks/{desk}/current/` (briefing, packets, errata, voice statements), `desks/{desk}/archive/` (last 3 outputs), `desks/{desk}/reference/` (truesource, citizen archive). See README.md in each desk folder. |
 | `civic-voice/` | Civic office voice data | Current + prior | Named: `{office}_c{XX}.json` |
 | `civic-voice-packets/` | Civic voice packets for agents | Current + prior | Named: `{office}_c{XX}.json` + `manifest.json` |
+| `civic-voice-workspace/` | **Per-voice-agent autonomous workspaces** (built by `buildVoiceWorkspaces.js`) | Current cycle | `civic-voice-workspace/{office}/current/` (briefing, base context, mayor statements, initiative packets), `civic-voice-workspace/{office}/archive/` (last 3 statements). See README.md in each folder. |
 | `initiative-packets/` | Initiative agent input | Current cycle | |
+| `initiative-workspace/` | **Per-initiative autonomous workspaces** (built by `buildInitiativeWorkspaces.js`) | Current cycle | `initiative-workspace/{init}/current/` (briefing, packet, base context), `initiative-workspace/{init}/archive/` (prior decisions), `initiative-workspace/{init}/reference/` (historical docs). See README.md in each folder. |
 | `batch-reviews/` | Actionable summaries of batch API results | Permanent | Named: `batch_{slug}_{date}.md`. Raw results at `~/.claude/batches/results/` |
 | `visual-qa/` | Dashboard QA screenshots | Latest run | |
 
@@ -118,7 +120,9 @@ Run at session end or when output/ exceeds ~60MB:
 1. Delete desk packets older than prior cycle
 2. Delete desk briefings older than prior cycle (legacy `desk-briefings/`)
 3. Run `node scripts/buildDeskFolders.js {cycle} --clean` to rebuild desk workspaces
-3. Delete civic voice data older than prior cycle
+4. Run `node scripts/buildVoiceWorkspaces.js {cycle} --clean` to rebuild voice workspaces
+5. Run `node scripts/buildInitiativeWorkspaces.js {cycle} --clean` to rebuild initiative workspaces
+6. Delete civic voice data older than prior cycle
 4. Delete HTML intermediates from pdfs/
 5. Delete drive-files/ cache (re-downloadable)
 6. Verify editions/ and pdfs/ are intact (permanent)

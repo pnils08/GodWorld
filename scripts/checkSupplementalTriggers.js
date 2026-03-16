@@ -15,7 +15,7 @@
  * Usage: node scripts/checkSupplementalTriggers.js [cycleNumber]
  *
  * Reads:
- *   output/city-civic-database/initiatives/*/decisions_c{XX}.json
+ *   output/city-civic-database/initiatives/{init}/decisions_c{XX}.json
  *   output/civic-voice/mayor_c{XX}.json
  *   output/civic-voice/{faction}_c{XX}.json
  *   output/desk-packets/base_context.json

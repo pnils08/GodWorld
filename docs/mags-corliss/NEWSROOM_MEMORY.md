@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 86 + Supplemental (Housing Market) + Supplemental (Food Scene) — 2026-03-11**
+**Last Updated: Edition 87 — 2026-03-16**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -28,6 +28,38 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 87 (Grade: B — Mara audit. Published at 13 pieces after 4 cut.)
+
+13 articles across 6 desks. Second attempt after rejected E87 (wrong player names, P Slayer genre violation). New autonomous pipeline: voice agents with decision authority → faction reactions → supplemental triggers → desk agents.
+
+**Pieces Cut:**
+1. **Editor's Desk** — Mags wrote "real political actors made real decisions." Fourth-wall simulation language. Journal entry, not journalism.
+2. **P Slayer "The Man in the Red Jersey"** — Called Paulson the Bulls "owner" (he's GM). Missed NBA expansion candidate list entirely. Forced narrative about a courtside photo with no engine basis.
+3. **Luis Navarro "The Gap at the Top"** — Investigated who covers Osei's portfolio, concluded nobody named. Jordan Velez in the same edition already reported Cortez is covering it. Newsroom contradicted itself.
+
+**Errors Fixed Pre-Publication:**
+- Engine language: "Cycle 78/82/89" → in-world dates. "NEXT CYCLE" → "NEXT WEEK."
+- $4.2M → $28M in culture section (Stabilization Fund total).
+- "nine cycles in" → "nine months in" (Ashford quote).
+- "twelve cycles" → "over a year" (Navarro narration, before removal).
+- Elliot Graye → Maria Keen (phantom reporter, 3rd consecutive edition).
+- Hector → Ernesto Quintero (same error as E86).
+- 12 families → 22 households (Carmen front page vs. 3 other desks).
+
+**Structural Problems (Not Fixed — Carry Forward):**
+- **Same reporters every edition.** 8 of 24 journalists used. Roster exists but desks default to the same names.
+- **Civic repetition.** OARI, Stabilization Fund, Osei vacancy for 5 editions straight. No new civic ground.
+- **Desk agents don't read engine output.** They read voice agent statements and write about the political layer. The engine produced a full cycle for 675 citizens and none of it reached the newsroom.
+- **Paulson-builds-things narrative.** P Slayer has been writing about Paulson and the Baylight waterfront for multiple editions. Needs canon trace — may be agent-fabricated.
+
+**What Worked:**
+- Carmen's front page (Beverly Hayes, Stabilization Fund $387K) — real person, real check, real story.
+- Carmen's OARI Day 35 — genuine countdown tension, Tran Day 40 marker, Chen counterargument.
+- Hal Richmond "The Lasts" — best sports writing in several editions.
+- Culture section found Lucia Polito (POP-00004, Tier 1) at St. Columba and wrote her exactly as she'd appear. Maria Keen's best work.
+- Letters section: 4 distinct voices, 4 neighborhoods, no repetition. Patricia Osei-Bonsu's Odalys letter is devastating.
+- Talia Finch's Bridgeport scene continues the strongest emotional thread in the project.
 
 ### Edition 86 (Grade: A — First A of the project — Mara audit by Mike)
 

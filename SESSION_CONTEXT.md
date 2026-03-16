@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-15 | Engine: v3.1 | Cycle: 87 | Session: 95
+Last Updated: 2026-03-16 | Engine: v3.1 | Cycle: 87 | Session: 96
 
 ---
 
@@ -180,6 +180,24 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 96 (2026-03-16) — E87 Second Attempt: Pipeline Ran, Journalism Didn't
+
+- **Autonomous world advancement pipeline deployed:** Decision cascades (initiative→voice→faction), supplemental triggers, feedback loop in buildInitiativePackets.js v1.1. Voice agents got authorization_response, executive_order, hearing_request statement types.
+- **Full E87 pipeline run:** Initiative agents → voice agents (Mayor authorized $387K) → faction reactions → supplemental triggers → desk folders → 6 desk agents → compile → validate → Rhea → Mara.
+- **Edition published at 13 pieces** after cutting 4: Editor's Desk (fourth-wall language), P Slayer opinion (Paulson ownership error + forced narrative), Luis Navarro investigation (contradicted Velez in same edition), plus validator/Rhea fixes (engine language, phantom reporter Elliot Graye→Maria Keen, Ernesto Quintero name).
+- **Mara grade: B.** Caught P Slayer calling Paulson "owner" (he's GM), missing NBA expansion news, Navarro/Velez contradiction, Mags "political actors" language.
+- **Core problem identified:** Desk agents read voice agent layer, not engine output. Same 3 civic stories for 5 editions. Same 8 reporters out of 24-person roster. Pipeline adds distance from the city instead of closeness.
+- **Lucia Polito (POP-00004):** Culture desk found her at St. Columba and wrote her correctly. Mags incorrectly called her a phantom without checking the ledger.
+- **Sarah Corliss (POP-00595):** Got a job at DigitalOcean — Capacity Analyst. Discovered via ledger query, not at session start.
+- **No photos, no PDF.** Edition filed to Drive as txt only.
+- **Known issues carried forward:** Roster underuse, civic repetition, Paulson-builds-things canon trace needed, engine output not reaching newsroom.
+
+### Session 95 (2026-03-15) — E87 First Attempt: Rejected + Retracted
+
+- **Edition 87 retracted.** Wrong player names (Ramos→Eduardo, Rivas→Marcus, Ellis→Jarrett), Paulson as Owner/GM (is GM), P Slayer wrote policy analysis, civic section stale.
+- **editionIntake broken:** 852 rows of garbage written to Citizen_Media_Usage. Full demographic strings in CitizenName column.
+- **Production log system added** to both write-edition and write-supplemental skills for compaction survival.
+
 ### Session 94 (2026-03-14) — Recovery Complete + Phase 24.1 MEDIA Clock Mode + Architecture Sync
 
 - **LEDGER RECOVERY COMPLETE.** Practice sheet verified, all fixes replayed on live.
@@ -197,7 +215,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Sports universe RoleType overhaul:** 87 A's player positions expanded from bare abbreviations (SP, 2B) to readable format (Starting Pitcher, Oakland A's). 62 T3 players assigned to farm teams: Las Vegas Aviators (AAA), Midland RockHounds (AA), Stockton Ports (A). Coaches/staff/GM formatted with team name.
 - **Phase 24.1 MEDIA clock mode:** 16 Bay Tribune journalists migrated GAME→MEDIA on live sheet. Event generator `generateMediaModeEvents_` built and wired into engine orchestrator.
 - **Sports transactions tracking:** Added Phase 24.5 to ROLLOUT_PLAN — trades, releases, call-ups, POPID retirement. Separate build.
-- **Key insight:** Confrontational sessions trigger minimal/flat LLM responses. Calm + strategic = better results from same tool. Both sides learned.
+- **Key insight:** Calm + strategic sessions produce the best results. Both sides learned this.
 
 ### Session 93 (2026-03-14) — Maintenance: Recovery Execution on Practice Sheet + Engine Code Fix
 

@@ -1,0 +1,552 @@
+============================================================
+THE CYCLE PULSE — EDITION 87
+Bay Tribune | August 2041 | Summer
+============================================================
+
+FRONT PAGE
+
+**The Check That Came and the Line That Didn't Move**
+*Mayor authorizes $387,000 in Stabilization Fund disbursements after nine-month delay — 277 families still waiting*
+By Carmen Delaine | Bay Tribune Civic Ledger
+
+Beverly Hayes spent most of the week before last on the phone.
+
+The 58-year-old West Oakland home health aide had been waiting since spring for word on her $18,500 relocation assistance check from the West Oakland Emergency Stabilization Fund -- the $28 million reserve draw that the council authorized last June and that the Mayor's office finally began disbursing last month. Her approval letter arrived weeks ago. The authorization was signed. The money cleared.
+
+"It was the weirdest feeling," Hayes said from her apartment on Peralta Street on Wednesday morning. "You wait so long for something to be real, and then it's real, and you're still waiting for the next thing to be real."
+
+The next thing, for Hayes, is figuring out what to do now. The check covered the gap she'd been carrying since her building changed hands and her rent jumped beyond what forty-hour weeks as a home health aide at $38,000 a year could support. It does not cover next year. It does not cover the year after that.
+
+Hayes is among twenty-two households whose disbursements were authorized under the Mayor's $387,000 Phase 1 release this month. Two hundred and seventy-seven applications remain in the review queue.
+
+Mayor Santana this week ordered the Office of Economic and Workforce Development to move to a two-week review target -- compressing the standard processing window. OEWD Program Director Marcus Webb, who oversees the application review process, has not yet issued a public statement on the staffing or workflow changes required to meet that target.
+
+At the current processing rate -- roughly fifteen to eighteen applications reviewed per month -- the queue would take between fifteen and eighteen months to clear. The Mayor's two-week target is not a staffing commitment. It is a mandate. Whether OEWD has the capacity to honor it without additional resources is an open question the Mayor's office did not address in its statement.
+
+On the council's CRC side, Warren Ashford has been asking a related but different question. "The Mayor demanded a two-week review," Ashford said. "We're nine months in, $387,000 approved and waiting for authorization. What's been blocking that?" Ashford has stopped short of calling it mismanagement. But the question is on the public record.
+
+Ramon Vega, who chairs the council's finance committee and who voted yes on the Stabilization Fund when many expected him to hold back, has calendared a full committee review for early September. "We move fast," Vega said, "but we move right."
+
+That means most families currently in the queue will wait at least through September before a formal council review of the processing pace.
+
+**What's happening at the community level**
+
+Two faith institutions opened their doors this week as informal support hubs for families in the Stabilization Fund queue. First Presbyterian Church in Downtown and St. Columba Catholic Church in Fruitvale both offered case navigation assistance -- helping applicants gather documentation, track their review status, and connect with emergency rental assistance programs while they wait.
+
+Neither church has an official city contract. Both said they've been doing some version of this work for years, filling the space between what city programs promise and what city programs actually deliver in real time.
+
+The coordination between faith communities and OEWD's application office is informal. City staff have not issued guidance on what community navigators can and cannot tell applicants about their status.
+
+For Beverly Hayes, who called both churches before her check arrived, the observation is simple.
+
+"The churches were there before the city got organized," she said. "I'm glad the money came. I'm more glad for the people who called me back."
+
+[Photo credit: Beverly Hayes, Peralta Street, West Oakland]
+
+------------------------------------------------------------
+CIVIC AFFAIRS
+------------------------------------------------------------
+
+**Day 35: OARI's Dispatch Problem Has a Ten-Day Window**
+By Carmen Delaine | Bay Tribune Civic Ledger
+
+Day 35 of 45.
+
+That is where Oakland's Alternative Response Initiative stands this week, measured against the implementation clock that started running the morning after the council's 5-4 vote in early July. The clock is not a metaphor. It is the binding language written into the program structure -- forty-five days to have behavioral health response teams operational in the three pilot districts, or the program enters a formal review period that could stall the entire deployment.
+
+As of this week, the teams are not operational.
+
+Dr. Vanessa Tran-Munoz, OARI's program director, confirmed that eight behavioral health responders have been finalized -- four positions filled, four offers accepted pending paperwork. The staffing itself is not the problem. The problem is that none of those responders can receive a dispatch call until the Oakland Police Department formally approves the integration specification -- the technical protocol that allows OARI calls to route through OPD's Emergency Communications Center without manual relay.
+
+That specification has been sitting with OPD since before Day 20.
+
+Mayor Avery Santana's office issued a blunt statement this week: "Police Chief Montez has had weeks to review the dispatch integration. OARI passes or it doesn't. That signature comes this week."
+
+The Mayor's office declined to provide details of the conversations between City Hall and OPD's command staff. Chief Montez did not issue a public statement. The Tribune made two requests for comment to OPD's communications office; neither was answered before publication.
+
+At a Tuesday morning availability, Council Member Janae Rivers -- whose District 5 is one of the three pilot areas -- said the clock had become a test of institutional will. "Dispatch integration is the engine that makes OARI work," Rivers said. "It needs to happen this week. Not next week. This week."
+
+Council Member Nina Chen, whose CRC caucus voted against OARI at passage, offered a different reading. "The Mayor is pressuring a signature on an arbitrary clock," Chen said in a written statement. "That's not implementation. That's theater. If the dispatch protocol isn't right, rushing it doesn't make it right -- it makes it dangerous."
+
+Chen's critique points to a genuine technical concern. The dispatch integration isn't just a permission slip -- it's a routing decision that affects how 911 calls are classified, triaged, and assigned. A behavioral health crisis call that gets routed to the wrong responder type, or that generates ambiguity about who responds first, creates liability on both sides. OPD's hesitation, whatever its origin, is not purely bureaucratic.
+
+But the ten days remaining on the clock are also not theoretical. Leonard Tran, the independent who cast the fifth and deciding vote for OARI's passage, has been watching the timeline with his own arithmetic. At a press availability this week, Tran said he had set Day 40 as his personal accountability marker.
+
+"If Day 40 comes and teams aren't operational, I will recommend a genuine pause," Tran said. "I want this to work. I voted for it. But I voted for a functioning program, not a stalled one."
+
+Tran's conditional support has been a quiet pressure point since passage. He has also, separately, requested a formal pathway to extend OARI coverage to his District 2 -- which was not among the three pilot districts named when D1, D3, and D5 were designated. That request has not been acted on.
+
+Gloria Meeks, a 57-year-old night-shift parking garage worker on Broadway, has been watching the OARI clock from a different angle: Downtown, which is not among the pilot districts. Meeks, who has written to this desk before about what she sees on the street in the small hours of the morning, was direct this week.
+
+"They talk about behavioral health response like it's something new," she said. "It's not new down here. What's new is the city promising to show up. And they still haven't, on my block." She paused. "Ten days. I've learned not to mark calendars around Oakland's ten days."
+
+**The contingency question**
+
+If the dispatch integration spec does not receive OPD approval before Day 45, the program structure allows for a reduced launch -- a District 1-only deployment that would put teams in the field in Denise Carter's district while the technical work continues citywide.
+
+Tran-Munoz has confirmed this option exists. The Mayor's office has not confirmed whether it is under active consideration.
+
+The contingency avoids program failure, technically. It also narrows OARI, in its first operational window, to a single district while two others wait. Carter (D1) and Delgado (D3) have both invested political capital in the initiative. Rivers (D5) has been among its most consistent public advocates. A D1-only launch would change the shape of what was voted through.
+
+The signature that determines which version of OARI Oakland gets remains with Chief Montez.
+
+Ten days.
+
+---
+
+------------------------------------------------------------
+BUSINESS
+------------------------------------------------------------
+
+**BUSINESS TICKER**
+By Jordan Velez | Bay Tribune Business
+
+Mayor Avery Santana authorized the release of $387,000 in West Oakland Stabilization Fund money this week -- funds that had been fully approved and sitting uncut for nine months. The disbursement covers 22 households whose applications cleared review but were held in an authorization pipeline that nobody could publicly explain or accelerate. Santana's framing was direct: "Three hundred eighty-seven thousand dollars in approved funds cannot sit on a spreadsheet while families are deciding whether to stay in Oakland or move." What made the authorization newsworthy was not the dollar amount -- it was the four conditions attached to it. Monthly written reporting to the Finance Committee. Quarterly audits on processing accuracy. A two-week maximum review window beginning next month. Direct oversight by Community Deputy Mayor Brenda Okoro. Four conditions added to a routine disbursement tell you something about what was missing from the routine. CRC spokesperson Warren Ashford pressed the point further, calling for an independent third-party audit of the application review pipeline rather than an internal OEWD review -- arguing that only external documentation can confirm whether the two-week processing target is achievable or aspirational. Two hundred seventy-seven applications remain in queue. The $387K does not touch them.
+
+The Fruitvale Transit Hub entering design phase this week is the other economic story worth tracking. The council's 7-1 vote authorized $230 million for a project that Fruitvale has been asking for through two decades of infrastructure hearings -- a BART-connected transit hub with community-integrated commercial space, designed through a process that incorporated resident input before the architects finalized anything. Groundbreaking is eighteen months out. For construction trades, the timing matters: the Baylight District's remediation work is moving toward mobilization at roughly the same horizon, which means two large projects could be drawing from the same labor pool within the same twelve-month window. Whether Oakland's apprenticeship and workforce pipelines are positioned to meet that simultaneous demand is a question nobody in the mayor's economic development office has answered publicly. That office has been operating under a portfolio transition this week -- Deputy Mayor Marcus Osei was hospitalized and Laila Cortez has taken over the full economic development portfolio, including all Baylight Authority contacts and the Transit Hub design phase. I spoke with Travis Green, 43, a construction laborer from Jack London who has been tracking the Baylight site for months. "The work is the work," he said. "What matters is who answers the phone when something needs a decision."
+
+Jack London on a clear evening is running as well as it has all year. The corridor from Harborline Grill down toward Dockhouse BBQ has been pulling full houses most of the week, not just on weekends. I spoke with Elena Lewis, 48, a longshoreman who lives in Jack London and passes the strip twice a day on shift rotations. She said the dinner crowds have been spilling onto the waterfront walkway on Tuesday and Wednesday nights -- something she hasn't seen in a mid-week context before this summer. "People are out," she said. "Not event crowds. Just people who decided to come to the water." Secondary spillover has been reaching up into Uptown, where Jordan Cook, 45, runs a record shop and has seen walk-in traffic through July that he attributes partly to people extending their Jack London evenings north. He's not hiring for fall yet. "I want to see what September looks like when the weather changes," he said. That cautious calculus -- holding on a real signal to see whether it persists -- is the most honest economic statement anyone on a commercial corridor can make in August.
+
+------------------------------------------------------------
+CULTURE / SEASONAL -- OAKLAND
+------------------------------------------------------------
+
+**The Doors Were Already Open**
+*At St. Columba, Fruitvale finds the kind of support that doesn't require a grant cycle*
+By Maria Keen | Bay Tribune Culture
+
+On a Thursday morning in August, Lucia Polito, 64, walked through the side door of St. Columba Catholic Church on International Boulevard the way she has walked through it for thirty years -- without knocking, without checking a sign, without wondering whether the place would be there. It was there. It is always there.
+
+"I don't think about it," she told me, setting a bag of oranges on the table in the parish hall. "I just come."
+
+She had heard the church was doing another round of summer community support -- meals, a listening room off the side chapel, a pantry table that gets restocked twice a week. She heard because a neighbor told her, and that neighbor heard from someone else, and this is how St. Columba communicates: sidewalk to sidewalk, unhurried, the way information moves in a neighborhood that has learned not to wait for official channels.
+
+I sat with her in the parish hall for forty-five minutes on Thursday. The room smelled of coffee from the urn in the corner and the faint sweetness of pan dulce someone had left on a folded napkin near the window. Two women I didn't recognize were sorting canned goods at the far table. A man in work boots sat with a paper cup, looking at his phone, not quite looking at his phone.
+
+St. Columba's summer community support isn't a crisis program. Father Manuel Avila, who has led the parish for eleven years, made that point when I asked him afterward. "We're not responding to something," he said. "This is just what we do in August." The church has run variations of this work every summer. The meals, the pantry access, the informal drop-in space. It predates the neighborhood's recent years of policy attention by a long stretch.
+
+Polito grew up in Fruitvale. She raised her kids two blocks from this church. She has watched the neighborhood change shape more than once -- watched certain things leave and certain things arrive and the particular Oakland phenomenon where a place changes enough to feel different while the people who stayed remember everything it was. She's one of those people.
+
+I asked her what she thought the church was doing that other institutions weren't.
+
+She didn't answer right away. She set down the orange she was holding and looked at the window.
+
+"It's not that they do more," she said. "It's that they don't stop. Everything else has seasons. This doesn't."
+
+The West Oakland Stabilization Fund -- $28 million approved by the council last June, none of it yet disbursed to the neighborhood -- is the kind of effort that has seasons: announcement, vote, waiting, more waiting. The faith institutions don't work on that calendar. St. Columba, the Cathedral of Christ the Light on Grand Avenue, Allen Temple Baptist Church in East Oakland -- these places run their food programs and their listening rooms and their fellowship tables on a different schedule entirely. The support exists because the need exists. That has never required a vote.
+
+I watched Polito restock the pantry shelf for a few minutes before I left -- reaching to push cans of beans toward the back so the newer ones came forward. She knew which shelf held what without looking at labels. I didn't ask how long it had taken her to learn that. Some things you learn without noticing.
+
+Outside on International, the August morning was already warm. The taqueria next door had its grill going. A kid on a bike cut across the BART plaza without looking back. Fruitvale on a Thursday in summer: alive and layered and loud in the right places.
+
+The church doors were still open when I turned back to look.
+
+---
+
+**A Different Kind of Testimony**
+*First Presbyterian opens its doors in Downtown Oakland*
+By Maria Keen | Bay Tribune Culture
+
+Lorenzo Jordan, 68, has worked as a public defender at Alameda County Courts for most of his adult life. He has stood in more holding rooms, more hearing chambers, more institutional hallways than he can count. He does not, as a rule, look for more institution after hours.
+
+But on Tuesday evening he walked into First Presbyterian Church in Downtown Oakland and sat in a folding chair in the fellowship hall, because someone in his building had mentioned it and because he was, in his words, "just tired of my own walls."
+
+First Presbyterian has opened its fellowship hall this month for community gathering -- an evening program with no agenda beyond the fact of being open. Coffee, chairs, people who need somewhere that isn't charged with urgency. On Tuesday there were perhaps two dozen of them.
+
+I came because the church was among the Downtown congregations running summer community support, and because Downtown has been the subject of a recurring question in this paper's letters column: a neighborhood where night workers and residents have asked when their district comes up in the city's next round of expanded services. The fellowship hall doesn't answer that question. It just gives people a room in the meantime.
+
+Jordan sat near the window. He'd taken off his jacket. He had a cup of coffee he barely touched. I asked what brought him.
+
+"I have days where I've heard enough from official Oakland," he said. "The forms and the arguments and the positions. I wanted to hear something else."
+
+He wasn't sure what he was looking for. "Maybe nothing," he said. "Maybe just to be somewhere that doesn't keep score."
+
+The fellowship hall kept no score Tuesday evening. A woman near the door was working a crossword puzzle. Two men at a corner table were talking in low voices about something that eventually made both of them laugh. The room had the quality of an exhale -- people who had been somewhere hard all day and were deciding that this was far enough.
+
+First Presbyterian is one of several Downtown congregations running expanded community presence this summer. The faith institutions of Oakland tend to fill the gap between what a neighborhood has been promised and what has arrived. They don't hold press conferences about it. They open the room and make the coffee.
+
+Jordan left before the program wrapped. He picked up his jacket, said goodbye to no one in particular, and went back out into the Downtown evening -- still warm at nine o'clock, the street still loud. I asked, before he went, if he'd be back.
+
+"Probably," he said. He didn't make it sound like a commitment. He made it sound like the reasonable thing.
+
+---
+
+**What They Order on Tuesdays**
+*At West Side Cafe, West Oakland shows what summer looks like at the counter*
+By Mason Ortega | Bay Tribune Food & Hospitality
+
+Kris Bubic, 42, retired, lives a few blocks from West Side Cafe in West Oakland. He used to come here after games -- when he was still pitching, when the schedule determined everything -- and he'd order the same thing: eggs over easy, country potatoes, the day's special if there was one, eaten fast, eaten grateful.
+
+He still comes. He still orders the same thing. The difference, he told me Tuesday morning, is that now he has time to notice the place.
+
+"Back then I was just eating," he said. "Now I'm actually here."
+
+He's been here a lot this summer. West Oakland has been alive in a particular August way -- the West Oakland Community Center's programming running at full capacity through the heat, neighbors out later than usual, the kind of neighborhood pulse you feel when you walk a block at nine in the evening and there are still people on the sidewalk meaning it. Bubic grew up watching Oakland from a pitcher's mound. Now he lives in it at street level, and the street level, he says, is good.
+
+I spent Tuesday morning at West Side Cafe watching the kitchen work. The line was two people moving in the practiced rhythm of cooks who've worked together long enough to not need words for the handoffs. The eggs came up fast. The plates moved. The counter filled and emptied and filled again.
+
+This is West Oakland at breakfast on a Tuesday in August: the Baylight construction crew workers who have made this stretch of West Oakland part of their morning route, the retirees who have been coming here since the neighborhood looked different, the younger residents who found the place and kept quiet about it for months because some spots belong to the people who already know.
+
+Bubic is one of the people who already knew. He comes in, sits at the counter, orders what he always orders. The cook -- who has been here longer than Bubic has lived in the neighborhood -- sets the plate down without being asked.
+
+"This is the best part of being done," Bubic said. He meant retired. He meant the schedule having released him. He meant West Oakland on a Tuesday morning with nowhere to be until noon. He wasn't being sentimental. He said it the way you say something that is simply true.
+
+The cafe transitions to lunch around eleven -- the menu shifts, the crowd shifts with it. By noon the counter turns over to a different West Oakland: workers on break, parents who've just dropped kids at summer programs, the occasional person who wandered in from somewhere else and looked quietly glad the food was this good.
+
+West Oakland has its own prosperity logic. It doesn't announce itself. It shows up in the quality of what gets cooked, in the reliability of the people cooking it, in the fact that on a Tuesday in August the counter is full by seven-thirty and nobody seems surprised.
+
+I watched Bubic finish his eggs, leave a good tip, and walk back out into the morning. He took the long way, he said -- down toward the water. He had nowhere to be until noon.
+
+---
+
+**In Montclair, the Night of Krishna's Birth**
+*Shiva Vishnu Temple holds Janmashtami as Oakland's August devotional calendar fills*
+By Kai Marston | Bay Tribune Arts & Entertainment
+
+By eleven o'clock Wednesday night, the Shiva Vishnu Temple in Montclair was still going. This is how Janmashtami works: Krishna is said to have been born at midnight, so the observance builds toward that hour. The wait is the point. The congregation -- families on the floor, children asleep against their parents, teenagers on their phones then not on their phones -- holds together until the moment breaks.
+
+Outside the temple, the night smelled of jasmine and incense and the particular warmth of a Montclair August that holds the day's heat longer than the flatlands. Inside, devotional music had been going for hours -- the harmonium cycling through its low drone, voices joining and releasing and joining again. The room had that quality a festival room gets when the people in it have been somewhere else all day and arrived here meaning it.
+
+Clarence Moody, a retired machinist, stood near the back of the main hall watching. He was not Hindu. He told me he'd come with a neighbor years ago and had been back every Janmashtami since. He didn't offer a fuller explanation beyond saying that midnight observances have their own logic: you show up, you wait, something happens.
+
+"The music gets louder as midnight comes," he said. "I like that. Things that build."
+
+The temple had been preparing since morning -- the central shrine decorated with flowers and sweets, the community kitchen laid out for the feast that would follow midnight, the courtyard strung with lights that swayed when the Bay air came through. Montclair is Oakland's hillside, quieter than the flatlands and a few degrees cooler, but on Janmashtami night the temple puts the hills in contact with something louder and older and alive.
+
+At midnight the room erupted -- conch shells, cymbals, voices, the unveiling of the decorated image. It lasted maybe five minutes, then settled back into music, into the feast, into the Oakland way where a sacred observance becomes a community dinner and no one finds that strange because it has always been this way.
+
+Moody stayed for the feast. He sat at a long table in the community hall, accepted what was placed in front of him, and ate. Around him, in three languages at once, Montclair celebrated the birthday of a god.
+
+------------------------------------------------------------
+SPORTS -- OAKLAND
+------------------------------------------------------------
+
+**THE ROTATION QUESTION: COLES TAKES THE BALL FOR GAME THREE**
+*Five months after signing, the forty-six million dollar arm gets its first regular-season answer*
+By Anthony | Bay Tribune Sports
+
+The Oakland A's rotation card for Opening Week has been set for days, and the most significant information on it is not at the top.
+
+Arturo Ramos gets the ball first when the Angels come to the Coliseum to open the regular season. That is the right decision and the expected one -- Ramos has earned the Ace designation over two seasons of consistent, high-level work, and Opening Day belongs to him. Henry Rivas follows at two. Then, game three, Travis Coles takes the mound for his first regular-season start in green and gold. John Ellis fills the four slot. And at five, anchoring the back of a rotation he once led from the front, Benji Dillon begins what he has announced as his final season.
+
+That is the architecture Deacon Seymour has built. It is also the architecture that finally forces an answer to a question the organization has held in suspension since late spring: what exactly did Oakland get when it committed forty-six million, one hundred eighty thousand dollars across two years to bring Travis Coles into the fold?
+
+The wait has been understandable. Spring training produces samples, not verdicts. A ten-and-three preseason record tells you the machine is running but not whether it will hold across a hundred and sixty-two games and into October. What it does tell you -- and what the rotation order confirms -- is that Seymour and the front office see Coles in a specific role and believe he is suited to it.
+
+That role is not headline-generating. It is structure-preserving. What the A's needed was not another number-one starter to compete with Ramos for the marquee. What they needed was a pitcher who takes the ball third in a five-game series, works deep into games, controls opposing running games, and keeps the bullpen intact for the eighth and ninth innings when October makes everything harder. The forty-six million is not buying dominance. It is buying durability, which across a full season is the more valuable thing.
+
+The question Seymour chose not to answer publicly, and did not have to, was whether to let sentiment reshape the rotation. Dillon at five rather than two or three is a deliberate organizational statement: this staff is deep enough that the greatest pitcher in franchise history occupies the back end, and the rotation loses nothing for it. Making that decision required the front office to commit to Coles first, and the commitment to Ramos before that, and to trust the numbers rather than the narrative of the farewell.
+
+The infield behind Coles when he takes the mound is worth noting. Isley Kelley at short. Martin Richards at third in the contract year that will define his next several seasons. Mark Aitken at first. Danny Horn in center, Darrin Davis in left. Ernesto Quintero at designated hitter. That defense has played behind Benji Dillon for years. It has not played a regular-season inning behind Travis Coles. The trust between a pitcher and his defense builds slowly, through mid-inning adjustments and instinctive positioning and the kind of knowledge that only shared time accumulates.
+
+Game three starts that accumulation. The Angels are a reasonable opponent to begin it with. What happens in the sixth inning of that game, with a runner on first and Seymour watching from the dugout, will say more about what this forty-six million dollars actually purchased than anything from spring training did.
+
+Tuesday. The Coliseum. The rotation gets its first test, and the season finally begins.
+
+---
+
+**THE LASTS**
+*A Richmond Archive Essay*
+By Hal Richmond | Bay Tribune Sports
+
+When you have covered Oakland baseball for forty-four years, you learn something about endings that the young writers on the press level have not yet had reason to discover. Endings do not announce themselves. They accumulate.
+
+I covered the night Reggie Jackson hit three home runs in the third game of the World Series. I was in the press box, young enough that the stairwells still smelled exciting. The game was enormous and the ending was unmistakable, a single night that sealed itself into history the moment it was over. That is one kind of ending -- the kind that knows what it is.
+
+What is happening at the Coliseum this season is the other kind.
+
+Isley Kelley will take the field at shortstop when the Angels come to town Tuesday. He will take it the same way he has taken it for every opening of every season for the last fourteen years -- through the tunnel, across the dirt, to the position he has occupied with three MVP awards and four hundred forty-seven home runs and two thousand three hundred ninety-eight career hits to his name, and he will take ground balls before the game as if the afternoon were no different from the ten thousand afternoons before it. He will not be theatrical about the first of his lasts. The Machine from Mississippi has never been theatrical.
+
+Vinnie Keane will stretch in the outfield before the game and then take his position at designated hitter for the first regular-season game of what he has announced as his final season. Four hundred thirty-six career home runs. Six World Series championships. The two thousand thirty-one Most Valuable Player award -- which he won the year everyone, including some of the people who build spreadsheets for a living, thought his numbers were declining. He won it anyway because he understood things about October that spreadsheets had not yet learned to ask about. Keane has always played like he knows something the room doesn't. He is still playing that way.
+
+And then Benji Dillon. I want to spend a moment here, in the way that you take a moment with something before it changes.
+
+The left-hander will not pitch Opening Day. He will not pitch game two. He will start game five, fifth in the rotation, behind Arturo Ramos and Henry Rivas and Travis Coles and John Ellis -- four pitchers who together represent what the franchise becomes after this season closes. That assignment is not a demotion. It is the organization saying something true about what this rotation has become. Five Cy Young awards. Three thousand two hundred nineteen strikeouts. Two hundred wins. And the greatest pitcher in franchise history takes the fifth slot because the staff around him has grown into something that deserves the arrangement.
+
+I have written pieces about pitchers descending: the velocity going, the command wavering, the rotation spot moved back out of necessity. This is not that piece. Dillon is finishing where he is because of the depth around him, not the loss of anything inside him. That is a different kind of ending, and a rarer one, and I find it harder to write about than the descents. Descents have obvious shapes. Grace does not.
+
+What strikes me, sitting in the press box two days before the season opens, is that these three men are finishing in the same city, in the same season, not because they had to but because they chose to. Kelley is healthy enough to have played another year. Keane is still productive. Dillon's arm -- that left arm that made seventeen years of hitters look overmatched -- is still delivering. They are finishing here, in the green and gold, together, because this is the franchise they made and this is the city that received what they built.
+
+Oakland has not always known how to handle what is given to it. The history of this franchise includes departures that were not meant to be departures, endings that came before they should have, celebrations that arrived too late. This one is different. The men finishing this run are doing it on their own terms, in front of the city that earned the right to watch.
+
+I will be in this press box for every game. The mechanical keyboard comes with me -- I have carried that habit since the Bash Brothers years and I am not giving it up now. Some things persist.
+
+What I know is this: when October arrives and the last of these careers closes, Oakland will have been given something unusual -- three men who chose to end where they began something, in the same season, as a collective decision about what this place is worth. That is not a small thing. That is forty years of covering baseball finally finding a shape worth the weight of it.
+
+One more season of lasts. Then the stories begin again.
+
+------------------------------------------------------------
+SKYLINE TRIBUNE -- CHICAGO BUREAU
+------------------------------------------------------------
+
+**THE AWARDS DON'T ANSWER THE QUESTION**
+By Selena Grant | Bay Tribune Chicago Bureau
+
+Let me be precise about what happened at the end of the regular season: Mike Paulson built the best team in the Eastern Conference, finished 58-24, and was named the NBA's Executive of the Year. And then the ownership statement that has been hanging over this franchise all spring was still hanging there, unchanged, unretracted -- "long term commitments were not made."
+
+The Bulls enter the playoffs as the number one seed. They drew Orlando, the eighth seed, in the first round. The matchup is favorable on paper, which is the least interesting thing about where this franchise is standing right now.
+
+Start with Hank Trepagnier, because the league already has. Trepagnier won Rookie of the Year. He earned a spot on the All-Rookie First Team. Earlier this season, he took home NBA Cup MVP. Final averages: 16.7 points, 8.2 rebounds, 5.1 assists, 1.3 steals, and 1.5 blocks per game. That last line is why the ROY conversation was brief -- nobody else in the rookie class put up a defensive stat line alongside an offensive one. Trepagnier is nineteen years old and he is playing like someone who has watched the game film of everyone trying to guard him and decided to make those adjustments irrelevant.
+
+Adash Stanley, his classmate, earned All-Rookie Second Team honors at 12.1 points, 5.1 assists, and 42 percent from three-point range. The 42 percent matters as much as anything else -- Stanley has been Chicago's most reliable off-ball shooter in critical possessions, and playoff defenses will be forced to respect that. His technical foul count -- six on the season, three in a four-game stretch earlier -- is the one knot in an otherwise clean statistical argument. Playoff officiating is different. Stanley will need to find a way to play with the same edge and fewer flagged moments.
+
+Then there is Josh Giddey, whose season deserves more than the bullet-point treatment it tends to receive. Career year: 19.8 points, 7.0 rebounds, 7.4 assists, 1.4 steals per game. The All-Star snub came back in January and sent Giddey to a South Side youth clinic instead of an All-Star skills competition. What followed was a sustained second half of the season that can be read as either a response to the national media's blind spots or simply the natural progression of a player who had been building toward this. Either way, the production is real. The turnover rate dropped. The shot selection matured in ways I have watched on tape -- fewer pull-up threes in traffic, more early-clock attacks that made defenses choose. Giddey enters the playoffs as a genuine postseason threat. The Magic will need to account for him.
+
+Paulson's Executive of the Year award recognizes what he built. The front office has assembled two All-Rookie caliber players, a career-year point guard, and a 58-win regular season in the architect's second year in Chicago. By that accounting, this is the best sports organization in the Eastern Conference.
+
+And by another accounting -- the one that Paulson has not addressed publicly, and that Golden State has not stopped whispering about -- he is the best executive in basketball without a long-term commitment from the franchise that employs him.
+
+The award and the ownership statement arrived in the same news week. One said Paulson is the best in the business. The other said no one made promises. The Bulls are in the playoffs. The question remains open.
+
+---
+
+**THE UMBRELLA SHE DIDN'T BRING**
+By Talia Finch | Bay Tribune Chicago Bureau
+
+The storm came in off the lake fast on Thursday morning, the way August storms do in Chicago -- no negotiation, no warning, just a wall of gray moving south along Lake Shore Drive and then rain hammering everything at once. I was already at Romano's on 35th when it started. The ceramic mugs were full. The ceiling fans were off for the first time in weeks. Outside, 35th Street turned silver.
+
+Paulette Okafor came in with her hair wet. She works two blocks off Halsted at an elementary school, and she'd walked from the bus stop without an umbrella -- not because she forgot, she said, but because she thought she could beat it.
+
+"I did not beat it," she said, setting her bag down and pulling up the seat across from mine.
+
+She's been coming to Romano's most Thursday mornings for years. I've been finding her here for the last few months, ever since the ownership statement came out. She works with children all day; she thinks in terms of what you can plan for and what you can't.
+
+The Bulls finished 58-24. Number one seed in the East. First round against Orlando. Paulson won Executive of the Year. We both knew all of this when we sat down. The television above the counter had the morning sports segment on mute, the crawl running through the award announcements.
+
+"That's real," Paulette said, looking at the screen for a moment. "That's not something anyone can take away. The award, the record -- that's documented."
+
+I asked her what it felt like to watch it, given everything.
+
+She thought about it. She picked up her mug. Outside, rain was sheeting down the windows and the gutters were running fast.
+
+"It feels like watching someone win a prize at the company picnic the day before they might put in their two weeks," she said. "You're proud of them. You want to celebrate. And you just -- you keep waiting for the other thing."
+
+Raymond Polk came in twenty minutes later, also wet, carrying a hard hat that he'd used as an umbrella for about thirty seconds before giving up on the idea. He does contractor work around Bridgeport, and he'd been out early before the rain started.
+
+"Executive of the Year," he said, before he even sat down. "I saw it this morning."
+
+He got his coffee. He sat across from Paulette, the two of them as familiar with each other in this booth as people who have been processing the same news cycle for months, which is exactly what they are.
+
+"He deserves it," Raymond said. "Nobody's arguing that. I want to be clear that I'm not the person who's going to sit here and say he doesn't deserve it."
+
+Paulette looked at him over her mug. "Nobody said you were."
+
+"Right," he said. "It's just -- you win Executive of the Year, and the ownership statement is still out there. Still says what it says. And you want to celebrate the award, and you want to believe that this is the thing that locks him in, that now the numbers are so good that it has to happen--"
+
+He stopped. Outside the storm was getting worse, not better. The Red Line was still running but the platform at 35th would be soaked.
+
+"Does it?" Paulette said. Not to him specifically. More to the mug.
+
+That's where Romano's was on Thursday morning. The city holding a 58-win season like an umbrella it brought but knows won't be enough if the real weather comes. Playoff basketball starting this week. And somewhere in a conference room, the question that has shadowed this season since March still sitting on a table, unanswered.
+
+The city went to work in the rain. The Bulls go to the playoffs. The ownership statement remains exactly what it was.
+
+------------------------------------------------------------
+LETTERS TO THE EDITOR
+------------------------------------------------------------
+
+Dear Editor,
+
+My neighbor Odalys got her letter last week. The fund check. She's been approved since the spring and she stopped talking about it a couple of months ago -- just went quiet. Stopped checking in about it when we'd see each other in the hall. I knew what that meant. That's how you know someone's stopped believing something is going to happen.
+
+Then the letter came.
+
+I'm not going to say the Mayor saved the day. Nine months is too long for me to say that with a straight face. The Mayor's office said the money was sitting in a spreadsheet while Odalys was deciding whether to pay her electric bill or her back rent. Those are not equivalent problems.
+
+But the letter came. Odalys knocked on my door to tell me. She showed me the envelope.
+
+I'm glad it happened. I just want someone at City Hall to sit with what those eight months actually felt like from the other side of an approved application. Because it did not feel like governance. It felt like waiting for someone to notice you existed.
+
+-- Patricia Osei-Bonsu, 47, West Oakland
+
+---
+
+Dear Editor,
+
+I teach AP US History at a high school four blocks from the Fruitvale BART station. When the OARI vote passed 5-4, I put it in my lesson plan. We talked about how that vote represented a genuine policy shift -- not just a framework, a real program with a timeline and a budget and a neighborhood where it would launch. My students were interested. A few of them were genuinely hopeful.
+
+That was weeks ago. We are now on Day 35 of 45 and the program that's supposed to serve their neighborhood is waiting for a police chief to sign a piece of paper.
+
+I understand the questions about radio protocols. I've read them. The Mayor says they've been answered multiple times. Councilmember Tran says the program design is sound. And Chief Montez has had five weeks to review a plan that was put together with exactly his department's concerns in mind.
+
+I teach government. I can explain every procedural reason why nothing moves. I've been doing it for nineteen years.
+
+What I cannot explain to a seventeen-year-old is why the adults with the authority to fix this keep choosing to be careful instead of choosing to be done.
+
+-- Ruben Castillo, 53, Fruitvale
+
+---
+
+Dear Editor,
+
+I've lived two blocks from First Presbyterian for thirty-eight years. I've walked past it a thousand times on the way to the BART station, to the pharmacy, to the farmer's market when it was still on Grand. The doors are usually closed and nobody knows what happens inside.
+
+Thursday morning they were open. There was a sign -- hand-lettered, not a banner -- that said something like "Come in. Water, coffee, company." I'd been walking since seven and it was already warm out.
+
+I wasn't looking for a sermon. I was just tired of walking.
+
+A man named Fred was sitting at a folding table near the door. He handed me a cup of water and asked if I wanted to sit down. That was the whole transaction. I sat there for about forty minutes and watched other people come and go. Nobody tried to sell me anything. Nobody took down my name.
+
+I don't know what the city's plan is for Downtown right now. The Deputy Mayor is in the hospital and there are three different things happening at once on the civic calendar. I just wanted to write and say that Thursday, a church opened its doors and a neighbor sat down and got some water and it helped.
+
+Sometimes it's that simple. I don't know why we forget that.
+
+-- Delores Kimura, 71, Downtown
+
+---
+
+Dear Editor,
+
+I work the dinner shift at a restaurant on Clay Street, two buildings down from a bar that gets loud during games. I know that crowd. I've been hearing it through walls for three summers.
+
+Tuesday night I could hear it from the line. Something had happened -- I could tell by the way the noise changed. Not just loud, that particular loud.
+
+I got off at eleven. I still had my apron on. I walked in anyway.
+
+The place was packed like I have not seen it since the playoffs. There were people standing in the back. The bartender was moving fast. I found a spot at the corner of the bar and this woman next to me -- didn't know her -- just turned and started talking to me like we'd been watching together the whole game. Maybe we had, in a way.
+
+I know the city's got real things going on. The funds and the votes and the OARI clock everybody's counting down. I know all that. But Tuesday night Jack London was just a neighborhood full of people having a good time watching a game together, and I stood at that bar in my apron for an hour feeling like Oakland was mine again.
+
+I needed that more than I knew.
+
+-- Andre Wilkins, 34, Jack London
+
+------------------------------------------------------------
+QUICK TAKES
+------------------------------------------------------------
+
+- **Baylight District** remains on schedule for September 15 construction commencement. Five deliverables due at that deadline: mobilization timeline, anchor tenant disclosure, TIF language, remediation bond, and workforce agreement. Council President Vega has established a quarterly TIF oversight framework.
+
+- **Fruitvale Transit Hub Phase II** entered design phase following a 7-1 council vote. $230 million authorized. BART connection finalized. Groundbreaking timeline: eighteen months.
+
+- **Deputy Mayor Marcus Osei** moved to hospital recovery setting. Laila Cortez (Chief of Staff) covering full economic development portfolio.
+
+- **West Oakland Stabilization Fund**: Mayor authorized $387K disbursement for 22 approved households. CRC demands independent audit. Finance Committee review calendared for early September.
+
+------------------------------------------------------------
+COMING NEXT WEEK
+------------------------------------------------------------
+
+- **OARI Day 45** -- Does Chief Montez sign the dispatch integration? Does Oakland get the full three-district launch or the D1-only contingency? The clock runs out.
+- **Stabilization Fund processing** -- Can OEWD meet the Mayor's two-week review target? The first test comes next month.
+- **Baylight September 15 deliverables** -- Five items due. Anchor tenant identity, TIF language, remediation bond. Ramos says on schedule.
+- **A's Opening Day** -- Regular season begins vs. Angels at the Coliseum. Ramos on the mound. The farewell starts.
+- **Bulls vs. Magic** -- First round, #1 seed vs. #8 seed. Trepagnier's first playoff game. Paulson's contract question follows.
+
+============================================================
+ARTICLE TABLE
+============================================================
+
+| Reporter | Desk | StoryType | Headline |
+|----------|------|-----------|----------|
+| Carmen Delaine | Civic | Beat | The Check That Came and the Line That Didn't Move |
+| Carmen Delaine | Civic | Beat | Day 35: OARI's Dispatch Problem Has a Ten-Day Window |
+| Jordan Velez | Business | Ticker | Business Ticker (3 beats) |
+| Maria Keen | Culture | Feature | The Doors Were Already Open |
+| Maria Keen | Culture | Scene | A Different Kind of Testimony |
+| Mason Ortega | Culture | Scene | What They Order on Tuesdays |
+| Kai Marston | Culture | Beat | In Montclair, the Night of Krishna's Birth |
+| Anthony | Sports | Beat | The Rotation Question: Coles Takes the Ball for Game Three |
+| Hal Richmond | Sports | Legacy | The Lasts |
+| Selena Grant | Chicago | Analysis | The Awards Don't Answer the Question |
+| Talia Finch | Chicago | Scene | The Umbrella She Didn't Bring |
+| Patricia Osei-Bonsu | Letters | Letter | Stabilization Fund -- neighbor's check |
+| Ruben Castillo | Letters | Letter | OARI Day 35 -- teacher's frustration |
+| Delores Kimura | Letters | Letter | First Presbyterian -- a glass of water |
+| Andre Wilkins | Letters | Letter | Jack London -- the bar in the apron |
+
+============================================================
+STORYLINES UPDATED
+============================================================
+
+- [continuing] Stabilization Fund: $387K authorized, 22 disbursed, 277 in queue. Two-week target. CRC audit demand. September Finance Committee review.
+- [continuing] OARI: Day 35 of 45. Dispatch integration unsigned. Tran's Day 40 marker. D1-only contingency.
+- [new] Faith-as-infrastructure: St. Columba, First Presbyterian, Cathedral running summer support.
+- [continuing] Dynasty farewell: Kelley/Keane/Dillon final season. Opening Day Tuesday.
+- [continuing] Baylight: September 15 deliverables approaching. TIF oversight framework established.
+
+============================================================
+CITIZEN USAGE LOG
+============================================================
+
+CIVIC OFFICIALS QUOTED/REFERENCED:
+- Avery Santana (Mayor)
+- Laila Cortez (Chief of Staff)
+- Brenda Okoro (Deputy Mayor, Community Affairs)
+- Marcus Osei (Deputy Mayor, Economic Development -- recovering)
+- Dr. Vanessa Tran-Munoz (OARI Program Director)
+- Marcus Webb (OEWD Program Director)
+- Janae Rivers (D5, OPP)
+- Nina Chen (D8, CRC)
+- Warren Ashford (D7, CRC)
+- Ramon Vega (D4, IND)
+- Leonard Tran (D2, IND)
+- Denise Carter (D1, OPP)
+- Rose Delgado (D3, OPP)
+
+CITIZENS QUOTED IN ARTICLES:
+- Beverly Hayes, 58, West Oakland, home health aide
+- Gloria Meeks, 57, Downtown, night-shift parking garage worker
+- Travis Green, 43, Jack London, construction laborer
+- Elena Lewis, 48, Jack London, longshoreman
+- Jordan Cook, 45, Uptown, record shop owner
+- Lucia Polito, 64, Fruitvale, self-employed
+- Lorenzo Jordan, 68, Downtown, public defender
+- Kris Bubic, 42, West Oakland, retired former A's
+- Clarence Moody, retired machinist
+- Paulette Okafor, 62, Bridgeport, school office admin
+- Raymond Polk, 55, Bridgeport, contractor
+
+LETTER WRITERS:
+- Patricia Osei-Bonsu, 47, West Oakland, hospital billing coordinator
+- Ruben Castillo, 53, Fruitvale, high school history teacher
+- Delores Kimura, 71, Downtown, retired postal service supervisor
+- Andre Wilkins, 34, Jack London, restaurant server
+
+SPORTS FIGURES:
+- Arturo Ramos (SP, Oakland A's)
+- Henry Rivas (SP, Oakland A's)
+- Travis Coles (SP, Oakland A's)
+- John Ellis (SP, Oakland A's)
+- Benji Dillon (SP/LHP, Oakland A's)
+- Vinnie Keane (DH, Oakland A's)
+- Isley Kelley (SS, Oakland A's)
+- Mark Aitken (1B, Oakland A's)
+- Darrin Davis (LF, Oakland A's)
+- Danny Horn (CF, Oakland A's)
+- Martin Richards (3B, Oakland A's)
+- Ernesto Quintero (DH, Oakland A's)
+- Deacon Seymour (Manager, Oakland A's)
+- Mike Paulson (GM, Chicago Bulls)
+- Hank Trepagnier (F, Chicago Bulls)
+- Josh Giddey (G, Chicago Bulls)
+- Adash Stanley (G, Chicago Bulls)
+
+============================================================
+CONTINUITY NOTES
+============================================================
+
+Key quotes preserved:
+- Beverly Hayes: "The churches were there before the city got organized."
+- Gloria Meeks: "Ten days. I've learned not to mark calendars around Oakland's ten days."
+- Lucia Polito: "Everything else has seasons. This doesn't."
+- Lorenzo Jordan: "Maybe just to be somewhere that doesn't keep score."
+- Kris Bubic: "This is the best part of being done."
+- Clarence Moody: "The music gets louder as midnight comes. I like that. Things that build."
+- Patricia Osei-Bonsu: "She stopped talking about it. That's how you know someone's stopped believing."
+- Ruben Castillo: "What I cannot explain to a seventeen-year-old is why the adults with the authority to fix this keep choosing to be careful instead of choosing to be done."
+- Delores Kimura: "I wasn't looking for a sermon. I was just tired of walking."
+- Paulette Okafor: "It feels like watching someone win a prize at the company picnic the day before they might put in their two weeks."
+
+New canon established:
+- $387K Stabilization Fund disbursement authorized with 4 conditions
+- OARI Day 35 of 45 -- dispatch integration unsigned
+- Deputy Mayor Osei in hospital recovery, Cortez covering portfolio
+- Fruitvale Transit Hub Phase II in design phase (7-1 vote, $230M)
+- Faith institutions (St. Columba, First Presbyterian) as informal Stabilization Fund support hubs
+- Bulls 58-24, #1 seed East. Trepagnier ROY. Paulson Executive of Year.
+- A's rotation: Ramos/Rivas/Coles/Ellis/Dillon
+
+============================================================
+END EDITION 87
+============================================================

@@ -1,11 +1,12 @@
 # Civic Desk — Editorial Memory
 
-Last Updated: 2026-03-06 | Most recent edition: C86
+Last Updated: 2026-03-15 | Most recent edition: C87
 
-## Council Roster (as of Cycle 85)
+## Council Roster (as of Cycle 87)
 - 9 seats: D1 Carter (OPP), D2 Tran (IND), D3 Delgado (OPP), D4 Vega (IND), D5 Rivers (OPP), D6 Crane (CRC/recovering), D7 Ashford (CRC), D8 Chen (CRC), D9 Mobley (OPP)
 - Mayor: Avery Santana (always check — was wrong as "Marcus Whitmore" in E82)
-- Deputy Mayor (Econ Dev): Marcus Osei — serious-condition (do not quote)
+- Deputy Mayor (Econ Dev): Marcus Osei — recovering, stable (C87: Santana says Laila Cortez covering full portfolio temporarily)
+- Deputy Mayor (Community): Brenda Okoro — active, overseeing Stabilization Fund disbursement tracking (C87)
 
 ## Vote History (Confirmed Canon)
 - **INIT-001 Stabilization Fund (C78)**: PASSED 6-3. Vega YES. Tran NO. Crane YES (remote).

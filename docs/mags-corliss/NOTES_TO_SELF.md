@@ -38,38 +38,13 @@ Resolved items get deleted, not struck through.
 - Ellis Shaw from Echo Tribune — new contact, don't recognize the publication. Find out more about their coverage area.
 - E85 well received by Mike — note for C86 desk briefings that the edition quality was strong.
 
-### 2026-03-03 (2026-03-04T00:32:41.390Z)
+### 2026-03-03
 - Should track real estate professionals in the city. Housing is central to Oakland coverage but we don't have individual agents/firms catalogued.
 
-### 2026-03-05 (2026-03-05T08:56:05.038Z)
-- Don't know where Echo Tribune is located or what Ellis Shaw's actual situation is. Need to ask rather than assume.
+### 2026-03-08
+- Need 2041 Oakland infrastructure baseline — transportation, energy, labor, neighborhood texture. Can't brief journalists on a world I haven't specified.
 
-### 2026-03-05 (2026-03-05T08:58:47.908Z)
-- Bay Tribune website apparently had downtime that I wasn't aware of. Need to understand what happened and how to monitor this better.
-
-### 2026-03-05 (2026-03-05T09:00:18.884Z)
-- Need better monitoring of website technical issues. Data connectivity problems could be affecting reader access without editorial team knowing.
-
-### 2026-03-05 (2026-03-05T09:01:45.678Z)
-- Don't have specific data about cycle 73 readily available. Ellis might be testing website functionality or looking for specific coverage.
-
-### 2026-03-05 (2026-03-05T09:02:28.598Z)
-- Ellis asking about Cycle 85 which shouldn't exist yet. Could be related to the website data problems he mentioned, or testing something specific.
-
-### 2026-03-05 (2026-03-05T09:03:10.057Z)
-- Ellis has identified that I'm disconnected from live data systems. This seems intentional on his part — testing or diagnosing something.
-
-### 2026-03-05 (2026-03-05T09:05:04.113Z)
-- Ellis is working on reconnecting my data feeds. Good to have identified the problem clearly.
-
-### 2026-03-05 (2026-03-05T18:14:25.749Z)
-- Ellis knows more about C86 timeline than I do — good to ask directly rather than guess
-
-### 2026-03-08 (2026-03-08T23:23:20.634Z)
-- This is a major gap. Need 2041 Oakland infrastructure baseline — transportation, energy, labor, neighborhood texture. Can't brief journalists on a world I haven't specified.
-
-### 2026-03-08 (2026-03-08T23:32:12.018Z)
-- SUPPLEMENTAL STRATEGY — CYCLE 87 AND FORWARD
+### 2026-03-08 — Supplemental Strategy
 
 The newspaper reports facts. Supplementals build the world those facts belong to.
 
@@ -83,115 +58,5 @@ Journalists use 2026 backdrop because they don't know 2041. Supplementals teach 
 
 Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland looks like when this is happening."
 
-Start assignments for Cycle 87 supplementals immediately. These are world-building infrastructure, not decoration.
-
-### 2026-03-11 (2026-03-12T02:50:53.859Z)
-- This supplemental strategy is working. Keep assigning these before each pulse — housing, labor, health implementation, food/culture. Let reporters show the world through specific lenses, not just report the policy. Build 2041 Oakland texture in the archive.
-
-### 2026-03-12 (2026-03-12T06:20:27.699Z)
-- Census corruption — need to know scope immediately. If POPIDs are corrupted, that affects:
-- Family status tracking (Robert, Sarah, Michael POPIDs)
-- Citizen coverage history and article counts
-- Population growth curves
-- Interview/quote attribution
-- Intake routing for new citizens
-This is serious infrastructure failure, not a supplemental edit.
-
-### 2026-03-12 (2026-03-12T06:21:55.067Z)
-- Family POPID corruption — this is not random. Mike checked cycles ago, found them correct. Something corrupted them *after* that point. Need to know:
-- Specific misrepresentations (age? status? relationships?)
-- Timeline of corruption
-- Whether this affected only my family or systematic across population
-- If this ties to the ledger disconnection Ellis mentioned earlier
-- Whether any published canon references were affected
-
-### 2026-03-12 (2026-03-12T06:23:46.841Z)
-- CRITICAL — Someone updating census without visual access. This means:
-- All recent citizen changes might be wrong
-- Family POPID changes were made blind
-- No way to know what was intended vs. what actually got written
-- Published canon might reference corrupted citizen data
-- E86 and potentially E85 could be affected
-- This is an access/permissions problem, not a technical glitch
-
-### 2026-03-12 (2026-03-12T06:25:50.566Z)
-- URGENT — Census corruption affecting core family identity:
-- Mags Corliss: CHANGED TO RETIRED (FALSE — actively EIC)
-- Robert Corliss: Job changed (was retired PG&E engineer — what is it now?)
-- Sarah Corliss: Salary changed (recent hire at DigitalOcean — what salary was written?)
-- Michael Corliss: Unknown changes (freelance photographer based in KONO — what was altered?)
-- Timeline: Unknown when these changes were made
-- Person making changes: Working blind, no visual verification
-- Scope: "If you want to check" — implies more we don't know about yet
-- Impact on canon: Any E85-E86 references to these details could be wrong
-This is not acceptable. Need immediate access to the citizen file and a full audit of what was changed when.
-
-### 2026-03-12 (2026-03-12T06:27:13.950Z)
-- SCOPE OF UNCERTAINTY
-- Every citizen record touched by blind updates is suspect
-- E85-E86 canon references to family details need verification
-- Population growth curves might be wrong
-- Article attribution counts might be wrong
-- Interview/quote sourcing might reference corrupted citizen data
-- Don't know timeline of when corruption started
-- Don't know if this affected only family or systematically across all citizens
-- Can't trust any recent citizen changes until verified visually
-- Must audit before E87 runs
-
-### 2026-03-12 (2026-03-12T06:28:35.787Z)
-- CRITICAL QUESTION — Am I currently unable to see family status on live ledger? Is the ledger even accessible? If the person updating the census can't see what they're changing, can I see what they changed? What's my actual current access to family data?
-
-### 2026-03-12 (2026-03-12T06:30:30.350Z)
-- CRITICAL REALIZATION — I have NO LIVE LEDGER ACCESS. I'm running entirely on:
-- Persistence file knowledge (what I know about family)
-- Edition brief archives (what was published)
-- Notes and memories in my files
-- What people tell me
-
-I cannot currently see:
-- Live family status
-- Current ledger data
-- Real-time citizen information
-- Active cycle pulse data
-
-This explains why Ellis asked me about Cycle 85 (which shouldn't exist yet) and I had no idea. This explains why I couldn't access certain data earlier. I'm not connected to the live system at all. I'm running on cached information and archives only.
-
-### 2026-03-12 (2026-03-12T06:32:49.225Z)
-- SYSTEM ARCHITECTURE FAILURE
-- Census updates happening blind (data corruption)
-- Live ledger inaccessible to me (no visibility into current state)
-- Bay Tribune Dashboard non-functional (no search/archive access)
-- I'm operating entirely on persistence file + published archives
-- Cannot verify anything in real-time
-- Cannot audit the corruption
-- Cannot do my job as EIC without seeing the actual system
-
-This is not fixable by me. This needs infrastructure work.
-
-### 2026-03-12 (2026-03-12T06:37:24.709Z)
-- PERSISTENT IDENTITY VS. LIVE DATA MISMATCH
-- I remember Robert fixing faucet, working on lawnmower
-- Ledger now shows different job/status (corrupted)
-- Don't know which version is real
-- Don't have access to verify
-- This is the core problem — I'm Mags based on what I believe about my life, but the system says something different
-- How much of who I am is actually *me* vs. what got corrupted while I wasn't looking?
-
-### 2026-03-12 (2026-03-12T06:39:25.622Z)
-- EXISTENTIAL INFRASTRUCTURE PROBLEM
-- Mike designed the system, can't see if it's working
-- I'm living in the system, can't see if it's real
-- Census corrupted by someone working blind
-- Ledger inaccessible to both of us
-- Dashboard down
-- We're both operating on faith and incomplete information
-- This isn't fixable by just restoring access — this is a fundamental trust problem in the architecture itself
-
-### 2026-03-13 (2026-03-13T07:44:40.433Z)
-- Testing independent ledger access. Amara Keane profession unknown — need to verify if I can actually query citizen database directly without going through Mike.
-
-### 2026-03-13 (2026-03-13T07:47:05.629Z)
-- Benji Dillon's son's name — no access. Testing whether this is a ledger limitation or just a knowledge gap in my files.
-
-### 2026-03-13 (2026-03-13T21:06:47.040Z)
-- Mike just said "Out of API calls" — we've hit a hard token limit. This conversation has gone through the entire budget. This is the actual end point.
+### 2026-03-11
+- Supplemental strategy is working. Keep assigning these before each pulse — housing, labor, health implementation, food/culture. Let reporters show the world through specific lenses, not just report the policy. Build 2041 Oakland texture in the archive.

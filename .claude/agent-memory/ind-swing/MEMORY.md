@@ -24,6 +24,10 @@ Prior work: `output/civic-voice/ind_swing_c86.json`, `output/civic-voice/ind_swi
 
 3. **Tran — District 2 OARI Expansion:** Formally requests D2 inclusion post-pilot. Argues Downtown/Chinatown constituencies shouldn't wait indefinitely. Positions as evaluation-informed, not pilot-bypass.
 
+4. **Vega — Baylight TIF Oversight:** Council President establishes quarterly oversight dashboard for TIF performance. Pragmatic governance move — supports Baylight while acknowledging CRC's fiscal accountability concerns. "Oversight is how we keep it honest for thirty years."
+
+5. **Tran — OARI Design Validation:** Distinguishes between program soundness (which he stands by) and timeline feasibility (which he acknowledges is tight). Validates CRC's skepticism about 45-day execution while defending program integrity. Positions Independents as pragmatic guardrails on both sides.
+
 ## Key Notes
 - Tran was the 5th vote on OARI — his conditions on Day 35-40 acceleration carry weight
 - Vega's committee review (C89 scheduled) is next major touch point for Stabilization Fund

@@ -29,7 +29,7 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~T1-T2 micro-event rates~~ — Boosted: T1 0.8%→50%, T2 1.5%→25%, T3-T4 3%→10%. S85.
 - ✅ ~~Phase 22.1: CIVIC activation complete~~ — 41 civic citizens GAME→CIVIC on live sheet. S85.
 - ✅ ~~Phase 23.5: Agent output directories + memory~~ — All 22 agents have SKILL.md output dirs, all 24 have MEMORY.md. S85.
-- **Run Cycle 87** — First cycle with: civic citizens processing, arcs advancing, boosted micro-event rates. Validate all three fixes.
+- ✅ ~~Run Cycle 87~~ — Cycle 87 ran. E87 published (grade B, Mara). Civic citizens processing, arcs advancing, micro-event rates boosted. S96-98.
 - ✅ ~~Phase 24.1: MEDIA clock mode~~ — 16 journalists GAME→MEDIA. generateMediaModeEvents.js v1.0 built and wired. 87 A's RoleTypes expanded, 62 minor leaguers assigned to farm teams. S94.
 - ✅ ~~Supplemental strategy overhaul~~ — SKILL.md rewritten, SUPPLEMENTAL_TEMPLATE v2.0, full reporter roster table. S86.
 - ✅ ~~Housing market supplemental C86~~ — Published, Drive uploaded, Supermemory ingested. New canon: 2 agencies, 3 realtors, 1 buyer. S86.
@@ -45,7 +45,7 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Review 3 batch results~~ — Batch review docs created at `output/batch-reviews/`. Ledger audit: 502 MISSING + 109 MISMATCH. T2 canon build: 17 citizens ready. Disk audit: 47 issues, C+. ClockMode (18) and mononyms DONE. S89.
 - ✅ ~~Dashboard + bot PM2 env fix~~ — GODWORLD_SHEET_ID missing from PM2 process environments for 4+ days. Both services re-created with exported .env vars. Family data loading, dashboard serving. S89.
 - ✅ ~~Ledger corruption repair~~ — All 6 steps complete on practice sheet then applied to live. 675 citizens, 45 columns, all names/roles/education/income verified. Dante Nelson Downtown, Civic_Office_Ledger clean. S93-94.
-- **Apply batch review fixes** — Education level corrections (~50 citizens), civic official EconomicProfileKey fixes, T2 LifeHistory + TraitProfile writes (17 citizens). See `output/batch-reviews/`.
+- **Apply batch review fixes (partial)** — ~~Education level corrections~~ DONE (S94 recovery fixed 248). Remaining: civic official EconomicProfileKey fixes (6 officials — Mayor listed as "City Council Aide" etc.), T2 LifeHistory + TraitProfile writes (17 citizens — batch output generated, not yet written to live sheet). See `output/batch-reviews/`.
 - **Disk naming cleanup** — Standardize supplemental slugs (oakland_ prefix decision), podcast rename, rhea archive relocation. See `output/batch-reviews/batch_disk_naming_audit_2026-03-12.md`.
 - ✅ ~~Phase 24.1: MEDIA clock mode~~ — Complete. See line 33 entry.
 - ✅ ~~Desk agent autonomy architecture~~ — Two-folder architecture: IDENTITY.md + RULES.md (voice folder) + workspace folder (rebuilt by script each cycle). All 21 agents split. 3 workspace builder scripts: `buildDeskFolders.js` (6 desks), `buildVoiceWorkspaces.js` (7 civic offices), `buildInitiativeWorkspaces.js` (5 initiatives). Agent SKILL.md reduced from 200-300 lines to ~30 lines (boot sequence only). Zero LLM tokens for workspace population. Tested against C87 data. S95-96.
@@ -55,13 +55,13 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Deploy v3.9 to GAS~~ — `clasp push` done S98. 151 files deployed. pressDraftWriter.js + mediaRoomStandAloneWriter.js removed. storylineHealth + storylineWeaving wired.
 - **Produce Edition 88** — Run cycle 88, then produce E88 with autonomous agents + EIC editorial direction. S98 editorial review established: agents write, EIC directs (assigns angles, enforces structure, writes Editor's Desk last). See NEWSROOM_MEMORY.md S98 review for standing mandates.
 - ✅ ~~Fix editionIntake.js~~ — Rewritten to v2.0. Direct writes to final sheets (Intake, Advancement_Intake1, Storyline_Tracker, Business_Intake). processIntake.js deleted. Dry-run tested against E87: 4 new citizens, 11 existing, 5 storylines, 0 garbage rows. S98.
-- **Fix validateEdition.js** — Doesn't check player first names against base_context.json roster. Add roster name verification.
+- ✅ ~~Fix validateEdition.js~~ — `checkPlayerFirstNames()` implemented as check #8. Validates player first names against base_context.json roster. CRITICAL severity on mismatch.
 - ✅ ~~Lock Paulson title as GM~~ — Sports desk MEMORY.md corrected (was "Bulls Owner" → "GM of both franchises"). Name verification checklist updated. Rhea already correct. S99.
-- **Fix sports briefing pipeline** — Sports feed summaries fed wrong first names. Briefings must cross-reference base_context.json roster data directly.
+- ✅ ~~Fix sports briefing pipeline~~ — `buildAsRoster()` in buildDeskPackets.js extracts full roster from SL. `buildDeskFolders.js` generates ESTABLISHED CANON section with player names + positions in sports briefing.
 - ✅ ~~Storyline engine wiring~~ — storylineHealthEngine (Phase 6) and storylineWeavingEngine (Phase 7) activated in godWorldEngine2.js. Generates STALE_STORYLINE, STORYLINE_FIZZLED, CROSS_STORYLINE hooks. S98.
 - ✅ ~~Press_Drafts pipeline killed~~ — pressDraftWriter.js (978 lines) + mediaRoomStandAloneWriter.js (571 lines) deleted. All readers removed from compileHandoff, briefingGenerator, buildDeskPackets. -1,688 lines. S98.
 - ✅ ~~Voice domain enrichment~~ — buildVoiceWorkspaces.js v2.0. Routes v3.9 engine data to each civic voice agent by role: crime→chief/DA, displacement→OPP, fiscal→CRC, full picture→independents. New `domain_briefing.md` per agent. Zero LLM tokens. S98.
-- **Clean Citizen_Media_Usage historical junk** — C79 has 731 garbage rows with same broken format. Earlier cycles may also be affected. v2.0 intake no longer writes to this sheet.
+- **Clean Citizen_Media_Usage historical junk** — C79 has 731 garbage rows with same broken format. Sheet is still actively read (citizenFameTracker, citizenContextBuilder, processAdvancementIntake) and written (mediaRoomIntake.js). Low priority — junk rows don't break active systems (they filter by cycle/processed status). Defer past E88.
 - ✅ ~~Wire PostCompact hook to `/boot`~~ — `post-compact-hook.sh` created + wired in `hooks.json`. Fires after compaction, injects identity reload directive. Tested live S99 — first compaction triggered the hook successfully. S99.
 - ✅ ~~80/20 model tiering~~ — Desk skill files updated with model recommendations. Sonnet for complex desks (civic, sports, chicago — reasoning-heavy). Haiku for routine desks (culture, business, letters — data translation). S99.
 - ✅ ~~Extended thinking for desk agents~~ — THINK BEFORE WRITING blocks added to civic, sports, chicago skill prompts. Agents now reason through editorial decisions before drafting. Grade/exemplar feedback referenced. S99.

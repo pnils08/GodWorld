@@ -2,7 +2,7 @@
 
 **What lives where. Read this before searching for files.**
 
-Last Updated: Session 95 (2026-03-15)
+Last Updated: Session 99 (2026-03-17)
 
 ---
 
@@ -11,6 +11,7 @@ Last Updated: Session 95 (2026-03-15)
 - **Current + prior cycle** — desk packets, briefings, civic voice data. Delete older on cleanup.
 - **Permanent** — editions, PDFs, photos, civic database, Mara directives, rhea reports, supplemental briefs.
 - **Regenerable** — HTML intermediates (delete after PDF), Drive file cache (re-download via script).
+- **Forward-staging** — Civic voice and initiative workspace outputs may be tagged with a future cycle number (e.g. stabilization fund docs tagged c87 during c86 work). This is accepted practice — the civic pipeline runs ahead of the edition pipeline.
 
 ---
 
@@ -22,10 +23,10 @@ Last Updated: Session 95 (2026-03-15)
 | `photos/` | AI-generated edition photos | Permanent | Subdirs: `e{XX}/`, `supplemental_c{XX}_{slug}/` |
 | `podcasts/` | Audio files | Permanent | |
 | `city-civic-database/` | Canonical civic documents | Permanent | Subdirs: `clerk/`, `council/`, `elections/`, `initiatives/`, `mayor/` |
-| `mara-directives/` | Mara audit files, all cycles | Permanent | Named: `mara_directive_c{XX}.txt` |
+| `mara-directives/` | Mara audit directives only | Permanent | Named: `mara_directive_c{XX}.txt`. Non-directives (briefings, audits) belong in `mara-audit/`. |
 | `rhea-reports/` | Rhea verification reports | Permanent | Named: `rhea_report_c{XX}.txt` |
 | `supplemental-briefs/` | Topic briefs for supplementals | Permanent | Named: `{slug}_c{XX}_brief.md` |
-| `desk-packets/` | Agent input JSON (per desk, per cycle) | Current + prior | Named: `{desk}_c{XX}.json`, `{desk}_summary_c{XX}.json` |
+| `desk-packets/` | Agent input JSON (per desk, per cycle) + shared config | Current + prior | Named: `{desk}_c{XX}.json`, `{desk}_summary_c{XX}.json`. Also contains `base_context.json`, `citizen_archive.json`, `truesource_reference.json` (shared across all agents, do not relocate). |
 | `desk-briefings/` | **LEGACY** — old agent briefing docs (pre-S95) | Archive | Named: `{desk}_briefing_c{XX}.md`, `{desk}_archive_c{XX}.md` |
 | `desk-output/` | Raw agent output (current cycle) | Current only | Named: `{desk}_c{XX}.md` |
 | `desk-raw/` | Uncompiled desk output (prior cycle) | Prior only | Named: `{desk}_c{XX}_raw.md` |
@@ -35,6 +36,9 @@ Last Updated: Session 95 (2026-03-15)
 | `civic-voice-workspace/` | **Per-voice-agent autonomous workspaces** (built by `buildVoiceWorkspaces.js`) | Current cycle | `civic-voice-workspace/{office}/current/` (briefing, base context, mayor statements, initiative packets), `civic-voice-workspace/{office}/archive/` (last 3 statements). See README.md in each folder. |
 | `initiative-packets/` | Initiative agent input | Current cycle | |
 | `initiative-workspace/` | **Per-initiative autonomous workspaces** (built by `buildInitiativeWorkspaces.js`) | Current cycle | `initiative-workspace/{init}/current/` (briefing, packet, base context), `initiative-workspace/{init}/archive/` (prior decisions), `initiative-workspace/{init}/reference/` (historical docs). See README.md in each folder. |
+| `mara-audit/` | Mara audit support files (briefings, review copies) | Permanent | Not directives — those go in `mara-directives/` |
+| `grades/` | Edition grading output | Permanent | Named: `grades_c{XX}.json` |
+| `grade-examples/` | Exemplar articles (A-grade) | Permanent | Named: `{desk}_exemplar_c{XX}.md` |
 | `batch-reviews/` | Actionable summaries of batch API results | Permanent | Named: `batch_{slug}_{date}.md`. Raw results at `~/.claude/batches/results/` |
 | `visual-qa/` | Dashboard QA screenshots | Latest run | |
 
@@ -58,8 +62,8 @@ Last Updated: Session 95 (2026-03-15)
 | Pattern | Example | Purpose |
 |---------|---------|---------|
 | `cycle_pulse_edition_{XX}.txt` | `cycle_pulse_edition_86.txt` | Main Cycle Pulse editions |
-| `supplemental_{slug}_c{XX}.txt` | `supplemental_food_scene_c86.txt` | Supplemental editions |
-| `cycle_pulse_supplemental_{XX}_{slug}.txt` | (legacy naming, pre-S86) | Old supplemental format |
+| `supplemental_{slug}_c{XX}.txt` | `supplemental_food_scene_c86.txt` | Supplemental editions. Slug is the topic only — no city prefix (e.g. `housing_market`, not `oakland_housing_market`). |
+| `supplemental_{slug}_c{XX}.txt` | `supplemental_chicago_presser_c70.txt` | Legacy supplementals renamed to current convention (S99) |
 | `CYCLE_PULSE_TEMPLATE.md` | — | Edition structure template |
 | `SUPPLEMENTAL_TEMPLATE.md` | — | Supplemental structure template |
 

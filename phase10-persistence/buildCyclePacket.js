@@ -1,9 +1,27 @@
 /**
  * ============================================================================
- * buildCyclePacket_ v3.7 — RAW SNAPSHOT OUTPUT
+ * buildCyclePacket_ v3.9 — RAW SNAPSHOT OUTPUT
  * ============================================================================
  *
  * Complete cycle snapshot for narrative review.
+ *
+ * v3.9 Changes:
+ * - ADDED: NEIGHBORHOOD DYNAMICS section (Phase 2 per-neighborhood texture — 12 hoods)
+ * - ADDED: STORY HOOKS section (engine flags "this is newsworthy" — up to 10)
+ * - ADDED: SHOCK CONTEXT section (Phase 6 anomaly reasons, duration, score)
+ * - ADDED: MIGRATION section (Phase 6 who's moving where, per-neighborhood)
+ * - ADDED: SPOTLIGHT DETAIL section (citizen names, neighborhoods, reasons — not just POPIDs)
+ * - ADDED: NEIGHBORHOOD ECONOMIES section (Phase 6 per-neighborhood economic state)
+ * - ADDED: CYCLE SUMMARY section (Phase 9 one-line narrative + headline)
+ * - ADDED: DEMOGRAPHIC SHIFTS section (Phase 3 population movement)
+ * - ADDED: CITY EVENTS section (Phase 4 festivals, openings, rallies)
+ * - Combined with v3.8: now serializes ~90% of engine output (was ~30%)
+ *
+ * v3.8 Changes:
+ * - ADDED: EVENING CITY section (Phase 7 nightlife, restaurants, crowds, safety)
+ * - ADDED: CRIME SNAPSHOT section (Phase 3 city-wide crime, hotspots, patrol)
+ * - ADDED: TRANSIT section (Phase 2 BART ridership, on-time, traffic, alerts)
+ * - ADDED: CIVIC LOAD section (Phase 6 load level, factors, story hooks)
  *
  * v3.7 Changes:
  * - REMOVED: Story Hooks section (packet is raw snapshot, not story seeding)
@@ -394,6 +412,306 @@ function buildCyclePacket_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════
+  // EVENING CITY (v3.8: Phase 7 evening data for newsroom)
+  // ═══════════════════════════════════════════════════════════
+  var nightlife = S.nightlife || {};
+  var eveningFood = S.eveningFood || {};
+  var crowdMap = S.crowdMap || {};
+  var crowdHotspots = S.crowdHotspots || [];
+
+  var hasEvening = (nightlife.spots && nightlife.spots.length > 0) ||
+                   (eveningFood.restaurants && eveningFood.restaurants.length > 0) ||
+                   crowdHotspots.length > 0;
+
+  if (hasEvening) {
+    lines.push('--- EVENING CITY ---');
+
+    // Nightlife
+    if (nightlife.spots && nightlife.spots.length > 0) {
+      var nightSpots = [];
+      var details = nightlife.spotDetails || [];
+      for (var ni = 0; ni < Math.min(details.length, 8); ni++) {
+        var spot = details[ni];
+        nightSpots.push(spot.name + ' @ ' + (spot.neighborhood || 'unknown'));
+      }
+      lines.push('Nightlife: ' + nightSpots.join(', '));
+      lines.push('NightlifeVibe: ' + (nightlife.vibe || 'normal'));
+      lines.push('NightlifeVolume: ' + round2(nightlife.volume || 0));
+      lines.push('NightlifeMovement: ' + (nightlife.movement || 'normal'));
+    }
+
+    // Food
+    if (eveningFood.restaurants && eveningFood.restaurants.length > 0) {
+      var foodSpots = [];
+      var foodDetails = eveningFood.restaurantDetails || [];
+      for (var fi = 0; fi < Math.min(foodDetails.length, 6); fi++) {
+        var rest = foodDetails[fi];
+        foodSpots.push(rest.name + ' @ ' + (rest.neighborhood || 'unknown'));
+      }
+      lines.push('Restaurants: ' + foodSpots.join(', '));
+      lines.push('FoodTrend: ' + (eveningFood.trend || 'none'));
+    }
+    if (eveningFood.fast && eveningFood.fast.length > 0) {
+      lines.push('FastFood: ' + eveningFood.fast.slice(0, 4).join(', '));
+    }
+
+    // Crowd
+    if (crowdHotspots.length > 0) {
+      lines.push('CrowdHotspots: ' + crowdHotspots.join(', '));
+    }
+    // Top 5 crowd scores
+    var crowdKeys2 = Object.keys(crowdMap);
+    var crowdPairs = [];
+    for (var ci = 0; ci < crowdKeys2.length; ci++) {
+      crowdPairs.push({ hood: crowdKeys2[ci], score: crowdMap[crowdKeys2[ci]] });
+    }
+    crowdPairs.sort(function(a, b) { return b.score - a.score; });
+    if (crowdPairs.length > 0) {
+      var crowdLine = [];
+      for (var cp = 0; cp < Math.min(crowdPairs.length, 5); cp++) {
+        crowdLine.push(crowdPairs[cp].hood + '=' + crowdPairs[cp].score);
+      }
+      lines.push('CrowdMap: ' + crowdLine.join(', '));
+    }
+
+    lines.push('EveningSafety: ' + (S.eveningSafety || 'normal'));
+    lines.push('EveningTraffic: ' + round2(S.eveningTraffic || 0));
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // CRIME SNAPSHOT (v3.8: Phase 3 crime data for newsroom)
+  // ═══════════════════════════════════════════════════════════
+  var crime = S.crimeMetrics || {};
+  var crimeCity = crime.cityWide || {};
+  if (crime.updated) {
+    lines.push('--- CRIME SNAPSHOT ---');
+    lines.push('PropertyCrime: ' + round2(crimeCity.property || 0));
+    lines.push('ViolentCrime: ' + round2(crimeCity.violent || 0));
+    lines.push('Incidents: ' + round2(crimeCity.incidents || 0));
+    lines.push('ResponseTime: ' + round2(crimeCity.response || 0) + 'min');
+    lines.push('ClearanceRate: ' + round2(crimeCity.clearance || 0));
+
+    var hotspots2 = crime.hotspots || [];
+    if (hotspots2.length > 0) {
+      var hotNames = [];
+      for (var hi2 = 0; hi2 < Math.min(hotspots2.length, 4); hi2++) {
+        var hs = hotspots2[hi2];
+        hotNames.push((hs.neighborhood || hs.name || 'unknown') + ' (' + (hs.reason || hs.type || 'elevated') + ')');
+      }
+      lines.push('Hotspots: ' + hotNames.join(', '));
+    }
+
+    var enforce = crime.enforcement || {};
+    if (enforce.patrolStrategy) {
+      lines.push('PatrolStrategy: ' + enforce.patrolStrategy);
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // TRANSIT (v3.8: Phase 2 transit data for newsroom)
+  // ═══════════════════════════════════════════════════════════
+  var transit = S.transitMetrics || {};
+  if (transit.ridership || transit.onTime) {
+    lines.push('--- TRANSIT ---');
+    if (transit.ridership) lines.push('BARTRidership: ' + round2(transit.ridership));
+    if (transit.onTime) lines.push('OnTimeRate: ' + round2(transit.onTime));
+    if (transit.traffic) lines.push('TrafficIndex: ' + round2(transit.traffic));
+    var tAlerts = transit.alerts || [];
+    if (tAlerts.length > 0) {
+      lines.push('Alerts: ' + tAlerts.slice(0, 3).join(', '));
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // CIVIC LOAD (v3.8: Phase 6 analysis for newsroom)
+  // ═══════════════════════════════════════════════════════════
+  var civicLoadVal = S.civicLoad || 'stable';
+  var civicLoadScore = S.civicLoadScore || 0;
+  var civicFactors = S.civicLoadFactors || [];
+  if (civicLoadVal !== 'stable' || civicLoadScore > 0) {
+    lines.push('--- CIVIC LOAD ---');
+    lines.push('Level: ' + civicLoadVal);
+    lines.push('Score: ' + round2(civicLoadScore));
+    if (civicFactors.length > 0) {
+      lines.push('Factors: ' + civicFactors.slice(0, 5).join(', '));
+    }
+    var hooks = S.storyHooks || [];
+    if (hooks.length > 0) {
+      lines.push('StoryHooks: ' + hooks.length);
+      for (var sh = 0; sh < Math.min(hooks.length, 4); sh++) {
+        var hook = hooks[sh];
+        lines.push('  - ' + (hook.headline || hook.summary || hook.type || 'untitled'));
+      }
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // NEIGHBORHOOD DYNAMICS (v3.9: Phase 2 per-neighborhood texture)
+  // ═══════════════════════════════════════════════════════════
+  var nhDynamics = S.neighborhoodDynamics || {};
+  var nhKeys = Object.keys(nhDynamics);
+  if (nhKeys.length > 0) {
+    lines.push('--- NEIGHBORHOOD DYNAMICS ---');
+    for (var ndi = 0; ndi < nhKeys.length; ndi++) {
+      var hood = nhKeys[ndi];
+      var nd = nhDynamics[hood];
+      if (!nd) continue;
+      var ndParts = [];
+      if (nd.traffic !== undefined) ndParts.push('traffic=' + round2(nd.traffic));
+      if (nd.retail !== undefined) ndParts.push('retail=' + round2(nd.retail));
+      if (nd.nightlife !== undefined) ndParts.push('nightlife=' + round2(nd.nightlife));
+      if (nd.sentiment !== undefined) ndParts.push('sentiment=' + round2(nd.sentiment));
+      if (nd.publicSpaces !== undefined) ndParts.push('public=' + round2(nd.publicSpaces));
+      if (nd.culturalActivity !== undefined) ndParts.push('culture=' + round2(nd.culturalActivity));
+      lines.push('  ' + hood + ': ' + ndParts.join(', '));
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // STORY HOOKS (v3.9: engine says "this is newsworthy")
+  // ═══════════════════════════════════════════════════════════
+  var allHooks = S.storyHooks || [];
+  if (allHooks.length > 0) {
+    lines.push('--- STORY HOOKS (' + allHooks.length + ') ---');
+    for (var shi = 0; shi < Math.min(allHooks.length, 10); shi++) {
+      var hook = allHooks[shi];
+      var hookNh = hook.neighborhood ? ' @' + hook.neighborhood : '';
+      var hookDom = hook.domain ? ' (' + hook.domain + ')' : '';
+      var hookPri = hook.priority ? ' [' + hook.priority + ']' : '';
+      lines.push('- ' + (hook.headline || hook.summary || hook.type || hook.angle || 'untitled') + hookDom + hookNh + hookPri);
+    }
+    if (allHooks.length > 10) {
+      lines.push('  ...and ' + (allHooks.length - 10) + ' more');
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // SHOCK CONTEXT (v3.9: Phase 6 anomaly details)
+  // ═══════════════════════════════════════════════════════════
+  var shockFlag = S.shockFlag || 'none';
+  var shockReasons = S.shockReasons || [];
+  if (shockFlag !== 'none' && shockReasons.length > 0) {
+    lines.push('--- SHOCK CONTEXT ---');
+    lines.push('Flag: ' + shockFlag);
+    lines.push('Score: ' + (S.shockScore || 0));
+    if (S.shockDuration) lines.push('Duration: ' + S.shockDuration + ' cycles');
+    lines.push('Reasons:');
+    for (var sri = 0; sri < shockReasons.length; sri++) {
+      lines.push('  - ' + shockReasons[sri]);
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // MIGRATION BRIEF (v3.9: Phase 6 who's moving where)
+  // ═══════════════════════════════════════════════════════════
+  var migBrief = S.migrationBrief || {};
+  var nhMigration = S.neighborhoodMigration || {};
+  if (migBrief.netDrift !== undefined || Object.keys(nhMigration).length > 0) {
+    lines.push('--- MIGRATION ---');
+    if (migBrief.netDrift !== undefined) lines.push('NetDrift: ' + round2(migBrief.netDrift));
+    if (migBrief.inflow !== undefined) lines.push('Inflow: ' + migBrief.inflow);
+    if (migBrief.outflow !== undefined) lines.push('Outflow: ' + migBrief.outflow);
+    if (migBrief.summary) lines.push('Summary: ' + migBrief.summary);
+    var migKeys = Object.keys(nhMigration);
+    if (migKeys.length > 0) {
+      lines.push('ByNeighborhood:');
+      for (var mi = 0; mi < migKeys.length; mi++) {
+        var mh = nhMigration[migKeys[mi]];
+        if (mh && (mh.netChange || mh.net)) {
+          lines.push('  ' + migKeys[mi] + ': ' + round2(mh.netChange || mh.net || 0));
+        }
+      }
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // NAMED SPOTLIGHTS DETAIL (v3.9: full context, not just POPIDs)
+  // ═══════════════════════════════════════════════════════════
+  if (spotlights.length > 0) {
+    var hasDetail = spotlights[0].name || spotlights[0].neighborhood;
+    if (hasDetail) {
+      lines.push('--- SPOTLIGHT DETAIL ---');
+      for (var sdi = 0; sdi < spotlights.length; sdi++) {
+        var sl = spotlights[sdi];
+        var slNh = sl.neighborhood ? ' @' + sl.neighborhood : '';
+        var slReasons = sl.reasons ? ' — ' + (Array.isArray(sl.reasons) ? sl.reasons.join(', ') : sl.reasons) : '';
+        lines.push('- ' + (sl.name || 'POPID ' + sl.popId) + ' (score ' + sl.score + ')' + slNh + slReasons);
+      }
+      lines.push('');
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // NEIGHBORHOOD ECONOMIES (v3.9: Phase 6 per-neighborhood economic state)
+  // ═══════════════════════════════════════════════════════════
+  var nhEcon = S.neighborhoodEconomies || {};
+  var nhEconKeys = Object.keys(nhEcon);
+  if (nhEconKeys.length > 0) {
+    lines.push('--- NEIGHBORHOOD ECONOMIES ---');
+    for (var nei = 0; nei < nhEconKeys.length; nei++) {
+      var neHood = nhEconKeys[nei];
+      var ne = nhEcon[neHood];
+      if (!ne) continue;
+      var neParts = [];
+      if (ne.mood !== undefined) neParts.push('mood=' + round2(ne.mood));
+      if (ne.moodDesc) neParts.push(ne.moodDesc);
+      if (ne.employment !== undefined) neParts.push('emp=' + round2(ne.employment));
+      if (ne.growth !== undefined) neParts.push('growth=' + round2(ne.growth));
+      lines.push('  ' + neHood + ': ' + neParts.join(', '));
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // CYCLE SUMMARY (v3.9: Phase 9 one-line narrative)
+  // ═══════════════════════════════════════════════════════════
+  var compressedLine = S.compressedLine || '';
+  var cycleSummary = S.cycleSummary || {};
+  if (compressedLine || cycleSummary.headline) {
+    lines.push('--- CYCLE SUMMARY ---');
+    if (compressedLine) lines.push('OneLine: ' + compressedLine);
+    if (cycleSummary.headline) lines.push('Headline: ' + cycleSummary.headline);
+    if (cycleSummary.keyEvents) lines.push('KeyEvents: ' + cycleSummary.keyEvents);
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // DEMOGRAPHIC SHIFTS (v3.9: Phase 3 population movement)
+  // ═══════════════════════════════════════════════════════════
+  var demoShifts = S.demographicShifts || [];
+  if (demoShifts.length > 0) {
+    lines.push('--- DEMOGRAPHIC SHIFTS ---');
+    for (var dsi = 0; dsi < Math.min(demoShifts.length, 6); dsi++) {
+      var ds = demoShifts[dsi];
+      var dsNh = ds.neighborhood ? ' @' + ds.neighborhood : '';
+      lines.push('- ' + (ds.description || ds.type || 'shift') + dsNh);
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
+  // CITY EVENTS (v3.9: Phase 4 festivals, openings, rallies)
+  // ═══════════════════════════════════════════════════════════
+  var cityEventDetails = S.cityEventDetails || [];
+  if (cityEventDetails.length > 0) {
+    lines.push('--- CITY EVENTS ---');
+    for (var cei = 0; cei < Math.min(cityEventDetails.length, 8); cei++) {
+      var ce = cityEventDetails[cei];
+      var ceNh = ce.neighborhood ? ' @' + ce.neighborhood : '';
+      lines.push('- ' + (ce.name || 'unnamed') + ceNh);
+    }
+    lines.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════
   // CHICAGO SATELLITE (v3.7: moved to end of packet)
   // ═══════════════════════════════════════════════════════════
   if (chicago.length > 0) {
@@ -440,7 +758,7 @@ function buildCyclePacket_(ctx) {
     ]
   ]);
 
-  Logger.log('buildCyclePacket_ v3.7: Cycle ' + (S.absoluteCycle || S.cycleId) +
+  Logger.log('buildCyclePacket_ v3.8: Cycle ' + (S.absoluteCycle || S.cycleId) +
     ' | Election: ' + civic.electionWindow);
 
   ctx.summary.cyclePacket = packet;

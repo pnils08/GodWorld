@@ -1,9 +1,17 @@
 #!/usr/bin/env node
 /**
- * buildDeskPackets.js v2.2
+ * buildDeskPackets.js v2.3
  *
  * Pulls live data from Google Sheets and splits into per-desk JSON packets
  * for independent agent processing in the Media Room.
+ *
+ * v2.3 Changes:
+ * - Extended evening context parser to read 4 new Cycle_Packet sections:
+ *   EVENING CITY (nightlife spots, restaurants, crowds, safety, vibe)
+ *   CRIME SNAPSHOT (city-wide crime rates, hotspots, patrol strategy)
+ *   TRANSIT (BART ridership, on-time, traffic index, alerts)
+ *   CIVIC LOAD (load level, factors, story hooks)
+ * - These give desk agents access to the living city, not just policy numbers
  *
  * v2.2 Changes:
  * - Evening Context — pulls Media_Ledger + Cycle_Packet data into desk packets.
@@ -1176,6 +1184,217 @@ function buildEveningContext(cycleMedia, packetText) {
       ctx.retail = ctx.cityDynamics.retail || 0;
       ctx.tourism = ctx.cityDynamics.tourism || 0;
     }
+
+    // v3.8: Evening City section (Phase 7 nightlife, restaurants, crowds)
+    var eveningMatch = packetText.match(/--- EVENING CITY ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (eveningMatch) {
+      ctx.eveningCity = {};
+      var elines = eveningMatch[1].split('\n');
+      for (var ei = 0; ei < elines.length; ei++) {
+        var eline = elines[ei].trim();
+        if (eline.indexOf('Nightlife:') === 0) ctx.eveningCity.nightlifeSpots = eline.replace('Nightlife:', '').trim();
+        if (eline.indexOf('NightlifeVibe:') === 0) ctx.eveningCity.vibe = eline.replace('NightlifeVibe:', '').trim();
+        if (eline.indexOf('NightlifeVolume:') === 0) ctx.eveningCity.volume = parseFloat(eline.replace('NightlifeVolume:', '').trim()) || 0;
+        if (eline.indexOf('NightlifeMovement:') === 0) ctx.eveningCity.movement = eline.replace('NightlifeMovement:', '').trim();
+        if (eline.indexOf('Restaurants:') === 0) ctx.eveningCity.restaurants = eline.replace('Restaurants:', '').trim();
+        if (eline.indexOf('FoodTrend:') === 0) ctx.eveningCity.foodTrend = eline.replace('FoodTrend:', '').trim();
+        if (eline.indexOf('FastFood:') === 0) ctx.eveningCity.fastFood = eline.replace('FastFood:', '').trim();
+        if (eline.indexOf('CrowdHotspots:') === 0) ctx.eveningCity.crowdHotspots = eline.replace('CrowdHotspots:', '').trim();
+        if (eline.indexOf('CrowdMap:') === 0) ctx.eveningCity.crowdMap = eline.replace('CrowdMap:', '').trim();
+        if (eline.indexOf('EveningSafety:') === 0) ctx.eveningCity.safety = eline.replace('EveningSafety:', '').trim();
+        if (eline.indexOf('EveningTraffic:') === 0) ctx.eveningCity.traffic = parseFloat(eline.replace('EveningTraffic:', '').trim()) || 0;
+      }
+    }
+
+    // v3.8: Crime Snapshot section (Phase 3)
+    var crimeMatch = packetText.match(/--- CRIME SNAPSHOT ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (crimeMatch) {
+      ctx.crimeSnapshot = {};
+      var clines = crimeMatch[1].split('\n');
+      for (var ci = 0; ci < clines.length; ci++) {
+        var cline = clines[ci].trim();
+        if (cline.indexOf('PropertyCrime:') === 0) ctx.crimeSnapshot.property = parseFloat(cline.replace('PropertyCrime:', '').trim()) || 0;
+        if (cline.indexOf('ViolentCrime:') === 0) ctx.crimeSnapshot.violent = parseFloat(cline.replace('ViolentCrime:', '').trim()) || 0;
+        if (cline.indexOf('Incidents:') === 0) ctx.crimeSnapshot.incidents = parseFloat(cline.replace('Incidents:', '').trim()) || 0;
+        if (cline.indexOf('ResponseTime:') === 0) ctx.crimeSnapshot.responseTime = cline.replace('ResponseTime:', '').trim();
+        if (cline.indexOf('ClearanceRate:') === 0) ctx.crimeSnapshot.clearanceRate = parseFloat(cline.replace('ClearanceRate:', '').trim()) || 0;
+        if (cline.indexOf('Hotspots:') === 0) ctx.crimeSnapshot.hotspots = cline.replace('Hotspots:', '').trim();
+        if (cline.indexOf('PatrolStrategy:') === 0) ctx.crimeSnapshot.patrolStrategy = cline.replace('PatrolStrategy:', '').trim();
+      }
+    }
+
+    // v3.8: Transit section (Phase 2)
+    var transitMatch = packetText.match(/--- TRANSIT ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (transitMatch) {
+      ctx.transit = {};
+      var tlines = transitMatch[1].split('\n');
+      for (var ti = 0; ti < tlines.length; ti++) {
+        var tline = tlines[ti].trim();
+        if (tline.indexOf('BARTRidership:') === 0) ctx.transit.ridership = parseFloat(tline.replace('BARTRidership:', '').trim()) || 0;
+        if (tline.indexOf('OnTimeRate:') === 0) ctx.transit.onTimeRate = parseFloat(tline.replace('OnTimeRate:', '').trim()) || 0;
+        if (tline.indexOf('TrafficIndex:') === 0) ctx.transit.trafficIndex = parseFloat(tline.replace('TrafficIndex:', '').trim()) || 0;
+        if (tline.indexOf('Alerts:') === 0) ctx.transit.alerts = tline.replace('Alerts:', '').trim();
+      }
+    }
+
+    // v3.8: Civic Load section (Phase 6)
+    var civicMatch = packetText.match(/--- CIVIC LOAD ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (civicMatch) {
+      ctx.civicLoad = {};
+      var cvlines = civicMatch[1].split('\n');
+      for (var cvi = 0; cvi < cvlines.length; cvi++) {
+        var cvline = cvlines[cvi].trim();
+        if (cvline.indexOf('Level:') === 0) ctx.civicLoad.level = cvline.replace('Level:', '').trim();
+        if (cvline.indexOf('Score:') === 0) ctx.civicLoad.score = parseFloat(cvline.replace('Score:', '').trim()) || 0;
+        if (cvline.indexOf('Factors:') === 0) ctx.civicLoad.factors = cvline.replace('Factors:', '').trim();
+        if (cvline.indexOf('StoryHooks:') === 0) ctx.civicLoad.storyHookCount = parseInt(cvline.replace('StoryHooks:', '').trim()) || 0;
+        if (cvline.indexOf('  - ') === 0) {
+          if (!ctx.civicLoad.storyHooks) ctx.civicLoad.storyHooks = [];
+          ctx.civicLoad.storyHooks.push(cvline.replace('  - ', ''));
+        }
+      }
+    }
+
+    // v3.9: Neighborhood Dynamics (Phase 2 per-neighborhood texture)
+    var nhDynMatch = packetText.match(/--- NEIGHBORHOOD DYNAMICS ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (nhDynMatch) {
+      ctx.neighborhoodDynamics = {};
+      var ndlines = nhDynMatch[1].split('\n');
+      for (var ndi = 0; ndi < ndlines.length; ndi++) {
+        var ndline = ndlines[ndi].trim();
+        if (!ndline || ndline.indexOf('---') === 0) continue;
+        var ndColonIdx = ndline.indexOf(':');
+        if (ndColonIdx > 0) {
+          var ndHood = ndline.substring(0, ndColonIdx).trim();
+          var ndVals = ndline.substring(ndColonIdx + 1).trim();
+          ctx.neighborhoodDynamics[ndHood] = {};
+          var ndPairs = ndVals.split(',');
+          for (var ndp = 0; ndp < ndPairs.length; ndp++) {
+            var ndEq = ndPairs[ndp].trim().split('=');
+            if (ndEq.length === 2) {
+              ctx.neighborhoodDynamics[ndHood][ndEq[0].trim()] = parseFloat(ndEq[1].trim()) || 0;
+            }
+          }
+        }
+      }
+    }
+
+    // v3.9: Story Hooks (engine says "this is newsworthy")
+    var hooksMatch = packetText.match(/--- STORY HOOKS \(\d+\) ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (hooksMatch) {
+      ctx.storyHooks = [];
+      var hklines = hooksMatch[1].split('\n');
+      for (var hki = 0; hki < hklines.length; hki++) {
+        var hkline = hklines[hki].trim();
+        if (hkline.indexOf('- ') === 0) {
+          ctx.storyHooks.push(hkline.substring(2));
+        }
+      }
+    }
+
+    // v3.9: Shock Context (Phase 6 anomaly details)
+    var shockMatch = packetText.match(/--- SHOCK CONTEXT ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (shockMatch) {
+      ctx.shockContext = {};
+      var sklines = shockMatch[1].split('\n');
+      ctx.shockContext.reasons = [];
+      for (var ski = 0; ski < sklines.length; ski++) {
+        var skline = sklines[ski].trim();
+        if (skline.indexOf('Flag:') === 0) ctx.shockContext.flag = skline.replace('Flag:', '').trim();
+        if (skline.indexOf('Score:') === 0) ctx.shockContext.score = parseFloat(skline.replace('Score:', '').trim()) || 0;
+        if (skline.indexOf('Duration:') === 0) ctx.shockContext.duration = skline.replace('Duration:', '').trim();
+        if (skline.indexOf('  - ') === 0) ctx.shockContext.reasons.push(skline.replace('  - ', ''));
+      }
+    }
+
+    // v3.9: Migration (Phase 6 who's moving where)
+    var migMatch = packetText.match(/--- MIGRATION ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (migMatch) {
+      ctx.migration = {};
+      var mglines = migMatch[1].split('\n');
+      ctx.migration.byNeighborhood = {};
+      var inNeighborhoods = false;
+      for (var mgi = 0; mgi < mglines.length; mgi++) {
+        var mgline = mglines[mgi].trim();
+        if (mgline.indexOf('NetDrift:') === 0) ctx.migration.netDrift = parseFloat(mgline.replace('NetDrift:', '').trim()) || 0;
+        if (mgline.indexOf('Inflow:') === 0) ctx.migration.inflow = mgline.replace('Inflow:', '').trim();
+        if (mgline.indexOf('Outflow:') === 0) ctx.migration.outflow = mgline.replace('Outflow:', '').trim();
+        if (mgline.indexOf('Summary:') === 0) ctx.migration.summary = mgline.replace('Summary:', '').trim();
+        if (mgline === 'ByNeighborhood:') { inNeighborhoods = true; continue; }
+        if (inNeighborhoods && mgline.indexOf(':') > 0) {
+          var mgParts = mgline.split(':');
+          ctx.migration.byNeighborhood[mgParts[0].trim()] = parseFloat(mgParts[1].trim()) || 0;
+        }
+      }
+    }
+
+    // v3.9: Spotlight Detail (citizens with names, neighborhoods, reasons)
+    var spotMatch = packetText.match(/--- SPOTLIGHT DETAIL ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (spotMatch) {
+      ctx.spotlightDetail = [];
+      var splines = spotMatch[1].split('\n');
+      for (var spi = 0; spi < splines.length; spi++) {
+        var spline = splines[spi].trim();
+        if (spline.indexOf('- ') === 0) {
+          ctx.spotlightDetail.push(spline.substring(2));
+        }
+      }
+    }
+
+    // v3.9: Neighborhood Economies (Phase 6 per-neighborhood economic state)
+    var nhEconMatch = packetText.match(/--- NEIGHBORHOOD ECONOMIES ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (nhEconMatch) {
+      ctx.neighborhoodEconomies = {};
+      var nelines = nhEconMatch[1].split('\n');
+      for (var nei = 0; nei < nelines.length; nei++) {
+        var neline = nelines[nei].trim();
+        if (!neline) continue;
+        var neColonIdx = neline.indexOf(':');
+        if (neColonIdx > 0) {
+          var neHood = neline.substring(0, neColonIdx).trim();
+          ctx.neighborhoodEconomies[neHood] = neline.substring(neColonIdx + 1).trim();
+        }
+      }
+    }
+
+    // v3.9: Cycle Summary (Phase 9 one-line narrative)
+    var sumMatch = packetText.match(/--- CYCLE SUMMARY ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (sumMatch) {
+      ctx.cycleSummary = {};
+      var smlines = sumMatch[1].split('\n');
+      for (var smi = 0; smi < smlines.length; smi++) {
+        var smline = smlines[smi].trim();
+        if (smline.indexOf('OneLine:') === 0) ctx.cycleSummary.oneLine = smline.replace('OneLine:', '').trim();
+        if (smline.indexOf('Headline:') === 0) ctx.cycleSummary.headline = smline.replace('Headline:', '').trim();
+        if (smline.indexOf('KeyEvents:') === 0) ctx.cycleSummary.keyEvents = smline.replace('KeyEvents:', '').trim();
+      }
+    }
+
+    // v3.9: Demographic Shifts (Phase 3 population movement)
+    var demoMatch = packetText.match(/--- DEMOGRAPHIC SHIFTS ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (demoMatch) {
+      ctx.demographicShifts = [];
+      var dmlines = demoMatch[1].split('\n');
+      for (var dmi = 0; dmi < dmlines.length; dmi++) {
+        var dmline = dmlines[dmi].trim();
+        if (dmline.indexOf('- ') === 0) {
+          ctx.demographicShifts.push(dmline.substring(2));
+        }
+      }
+    }
+
+    // v3.9: City Events (Phase 4 festivals, openings, rallies)
+    var cityEvMatch = packetText.match(/--- CITY EVENTS ---\n([\s\S]*?)(?=\n---|\n\n$)/);
+    if (cityEvMatch) {
+      ctx.cityEvents = [];
+      var celines = cityEvMatch[1].split('\n');
+      for (var cei = 0; cei < celines.length; cei++) {
+        var celine = celines[cei].trim();
+        if (celine.indexOf('- ') === 0) {
+          ctx.cityEvents.push(celine.substring(2));
+        }
+      }
+    }
   }
 
   return ctx;
@@ -1805,7 +2024,13 @@ async function main() {
   var eveningContext = buildEveningContext(cycleMedia, cyclePacketText);
   console.log('  Evening context:', eveningContext.nightlife ? 'populated' : 'empty',
               '| Media entries:', (eveningContext.mediaEntries || []).length,
-              '| Dynamics:', eveningContext.cityDynamics ? 'yes' : 'no');
+              '| Dynamics:', eveningContext.cityDynamics ? 'yes' : 'no',
+              '| v3.9: hooks=' + (eveningContext.storyHooks || []).length,
+              'hoods=' + Object.keys(eveningContext.neighborhoodDynamics || {}).length,
+              'nhEcon=' + Object.keys(eveningContext.neighborhoodEconomies || {}).length,
+              'shock=' + (eveningContext.shockContext ? 'yes' : 'no'),
+              'migration=' + (eveningContext.migration ? 'yes' : 'no'),
+              'summary=' + (eveningContext.cycleSummary ? 'yes' : 'no'));
 
   // v2.2: Civic events from LifeHistory_Log — CIVIC clock mode events this cycle
   var civicEvents = allHistory.filter(function(h) {

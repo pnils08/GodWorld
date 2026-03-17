@@ -13,7 +13,7 @@ GodWorld runs an **11-phase cycle engine** that simulates city life and outputs 
 - **Citizen Simulation** - Tiered citizen system (Tier-1 protected → Tier-4 generic) with relationships, careers, education, and households
 - **World Events** - 5-20 events per cycle across 8 categories (CIVIC, CRIME, HEALTH, ECONOMIC, CULTURE, SPORTS, CHAOS, CELEBRATION)
 - **17 Oakland Neighborhoods** - Each with mood, local events, demographics, and economic indicators
-- **Media Integration** - Story hooks, press drafts, and briefing packets for journalists
+- **Media Integration** - Story hooks, briefing packets, and autonomous desk agents for journalists
 - **Video Game Integration** - MLB The Show and NBA 2K athletes tracked as citizens
 - **Chicago Satellite** - Parallel simulation focused on Bulls basketball
 
@@ -48,40 +48,15 @@ See [docs/reference/DEPLOY.md](docs/reference/DEPLOY.md) for detailed deployment
 
 ## Development Workflow
 
-### Git Branching with Claude Code
+### Development Workflow
 
-Each Claude Code chat session creates a branch with the format `claude/<task>-<sessionID>`. The session can only push to its own branch.
-
-**Workflow:**
-
-1. **Start from `main`** - New sessions should checkout `main` (the default branch) to get the latest code
-2. **Work on chat branch** - Claude makes changes and pushes to its session branch
-3. **Deploy via clasp** - User deploys to Apps Script from Google Cloud Shell:
-   ```bash
-   cd ~/GodWorld
-   git pull origin <chat-branch>
-   clasp push
-   ```
-4. **Merge to main** - At end of session, merge the chat branch into `main`:
-   ```bash
-   git checkout main
-   git merge <chat-branch>
-   git push origin main
-   ```
-5. **Clean up** - Delete old chat branches as needed
-
-**If merge conflicts occur:** User tells Claude, Claude fixes on the branch, user retries.
-
-### Deployment
-
-Code is deployed to Google Apps Script via clasp from Google Cloud Shell:
+All work happens on `main`. Claude Code commits and pushes directly. Engine code deploys to Google Apps Script via `clasp push`.
 
 ```bash
-cd ~/GodWorld
-clasp push
+clasp push    # Deploy engine to Apps Script (153 files)
 ```
 
-The simulation runs in Apps Script. The GitHub repo is the source of truth for code.
+The GitHub repo is the source of truth for code. The simulation runs in Apps Script.
 
 ## Project Structure
 
@@ -100,10 +75,13 @@ GodWorld/
 ├── phase11-media-intake/ # Feedback processing
 ├── utilities/            # Shared helpers, caching
 ├── schemas/              # Data structure documentation
-├── editions/             # Cycle Pulse editions + template
-├── docs/                 # Architecture & reference docs (reference/, engine/, media/, mara-vance/, archive/)
-├── maintenance/          # Repair utilities
-└── ledgers/              # Archived cycle data
+├── scripts/              # Node.js tooling (desk packets, photos, PDFs, Drive, Discord, grading)
+├── lib/                  # Shared Node.js libraries (sheets API, photo generator, edition parser)
+├── dashboard/            # Express API + static frontend (port 3001)
+├── editions/             # Published Cycle Pulse editions + template
+├── output/               # Desk packets, briefs, photos, PDFs, grades, pipeline logs
+├── docs/                 # Architecture & reference docs (reference/, engine/, media/, mara-vance/)
+└── .claude/              # Agent identities, rules, skills, hooks, memory
 ```
 
 ## The 11-Phase Engine
@@ -130,7 +108,7 @@ GodWorld/
 
 **Relationships:** `Relationship_Bonds`, `LifeHistory_Log`
 
-**Media:** `Media_Briefing`, `Press_Drafts`, `Continuity_Loop`
+**Media:** `Media_Briefing`, `Citizen_Media_Usage`, `Media_Ledger`
 
 **Civic:** `Civic_Office_Ledger`, `Initiative_Tracker`
 
@@ -148,10 +126,11 @@ GodWorld/
 | [PROJECT_GOALS.md](docs/reference/PROJECT_GOALS.md) | Core automation concept and architecture |
 | [GODWORLD_REFERENCE.md](docs/reference/GODWORLD_REFERENCE.md) | Complete system reference |
 | [V3_ARCHITECTURE.md](docs/reference/V3_ARCHITECTURE.md) | Technical design contract |
-| [ENGINE_ROADMAP.md](docs/engine/ENGINE_ROADMAP.md) | Implementation priorities |
+| [ROLLOUT_PLAN.md](docs/engine/ROLLOUT_PLAN.md) | Single source for all project work — active, pending, deferred |
+| [ENGINE_MAP.md](docs/engine/ENGINE_MAP.md) | Every function across all 11 phases |
 | [MEDIA_ROOM_STYLE_GUIDE.md](docs/media/MEDIA_ROOM_STYLE_GUIDE.md) | Newsroom voice, Paulson canon, data rules, editorial chain |
-| [MEDIA_ROOM_HANDOFF.md](docs/media/MEDIA_ROOM_HANDOFF.md) | Structured handoff workflow (96% data reduction) |
-| [SCHEMA_HEADERS.md](schemas/SCHEMA_HEADERS.md) | All ledger schemas |
+| [DESK_PACKET_PIPELINE.md](docs/media/DESK_PACKET_PIPELINE.md) | Edition pipeline: packets → workspaces → agents → compile → verify |
+| [DOCUMENTATION_LEDGER.md](docs/engine/DOCUMENTATION_LEDGER.md) | File registry — every active doc, its purpose, load tier |
 
 ## Main Entry Point
 

@@ -209,7 +209,7 @@ Google Sheets API export does NOT support revision-specific downloads (tested �
 
 ## Simulation_Ledger Full Column Reference
 
-**675 citizens, 45 columns (A–AS).** Updated S94.
+**675 citizens, 46 columns (A–AT).** Updated S99.
 
 | Col | # | Header | Notes |
 |-----|---|--------|-------|

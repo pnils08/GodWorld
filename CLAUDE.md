@@ -123,7 +123,7 @@ The engine is an 11-phase deterministic simulation running in Google Apps Script
 ### Maintenance
 Load: `SESSION_CONTEXT.md`, `docs/engine/LEDGER_REPAIR.md`, `docs/engine/LEDGER_AUDIT.md`, `docs/engine/ENGINE_MAP.md`
 
-The Simulation_Ledger holds 675 citizens across 45 columns (A–AS). Each POPID is a human engine — career, household, relationships, civic life, everything derives from that row. If the data is wrong, the engine builds on lies and the newsroom reports fiction. Recovery completed S94 — LEDGER_REPAIR.md documents what was fixed and the process used. For ongoing integrity work, read LEDGER_AUDIT.md.
+The Simulation_Ledger holds 675 citizens across 46 columns (A–AT). Each POPID is a human engine — career, household, relationships, civic life, everything derives from that row. If the data is wrong, the engine builds on lies and the newsroom reports fiction. Recovery completed S94 — LEDGER_REPAIR.md documents what was fixed and the process used. For ongoing integrity work, read LEDGER_AUDIT.md.
 
 ### Cycle Run
 Load: `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `docs/engine/ENGINE_MAP.md`, then run `/pre-mortem`

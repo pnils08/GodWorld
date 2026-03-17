@@ -59,6 +59,7 @@
 | File | Purpose | Tier | Updated By | Workflows |
 |------|---------|------|------------|-----------|
 | `docs/engine/LEDGER_AUDIT.md` | Simulation_Ledger integrity — audit history, decisions, citizen tracking | On-Demand | Manual (during audits) | X |
+| `docs/engine/LEDGER_REPAIR.md` | Recovery history (S68-S94), post-recovery fixes (S99), process for future major sheet upgrades, full column reference (46 cols A–AT) | On-Demand | Manual (during maintenance) | X |
 | `docs/engine/LEDGER_HEAT_MAP.md` | Sheet bloat risk rankings, dead column inventory, archival strategy | On-Demand | Manual (during audits) | X |
 | `docs/engine/SHEETS_MANIFEST.md` | Sheet listing — all tabs in the Simulation_Narrative spreadsheet | On-Demand | Manual (rare) | D, X |
 | `docs/engine/INSTITUTIONAL_VOICE_AGENTS.md` | Architecture spec for civic voice agent system (Phase 10.1) | On-Demand | Manual (when agents change) | D, M |
@@ -169,6 +170,7 @@ Information lives in exactly one file. Other files point to it but never duplica
 | Session history (S1-67) | `SESSION_HISTORY.md` | SESSION_CONTEXT, PERSISTENCE |
 | Engine versions & cascade deps | `SESSION_CONTEXT.md` | — |
 | Ledger audit state & decisions | `LEDGER_AUDIT.md` | ROLLOUT_PLAN (references Phase 13) |
+| Ledger recovery history & column reference | `LEDGER_REPAIR.md` | CLAUDE.md, MEMORY.md |
 | Editorial patterns & errata | `NEWSROOM_MEMORY.md` | — |
 | Edition pipeline architecture | `docs/media/DESK_PACKET_PIPELINE.md` | NEWSROOM_MEMORY, SESSION_CONTEXT |
 | Desk agent identity/rules | `.claude/agents/{desk}-desk/IDENTITY.md` + `RULES.md` | DESK_PACKET_PIPELINE |

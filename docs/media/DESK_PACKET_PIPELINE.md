@@ -79,7 +79,6 @@ cd /root/GodWorld && node scripts/buildDeskPackets.js 79
 | `Chicago_Sports_Feed` | Bulls game data, trades, signings | Current cycle (fallback: all) |
 | `Storyline_Tracker` | Active/new/developing storylines | Active status only, deduped |
 | `Cycle_Packet` | Raw cycle packet text | Current cycle |
-| `Press_Drafts` | Previous cycle coverage | Previous cycle |
 | `LifeHistory_Log` | Recent quotes (EventTag='quoted') | Current cycle |
 
 Local files read:

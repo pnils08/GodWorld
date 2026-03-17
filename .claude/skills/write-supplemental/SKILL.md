@@ -150,6 +150,30 @@ output/supplemental-briefs/{topic_slug}_c{XX}_brief.md
 4. Business_Ledger — businesses in the relevant sector
 5. NEWSROOM_MEMORY.md — errata, character continuity
 
+### Enhanced data sources (use if available):
+
+All of these are optional. If none exist, the brief works exactly as today. Check each path — if the file exists, add the corresponding section to the brief.
+
+| Source | Path | When | Brief Section |
+|--------|------|------|---------------|
+| Errata | `output/errata.jsonl` | Always (if exists) | **GUARDIAN WARNINGS** — filter to topic's domain, list errors to avoid |
+| Mara guidance | `output/mara-directives/mara_directive_c{XX}.txt` | Always (if exists) | **MARA GUIDANCE** — forward editorial direction from last audit |
+| Cycle data | `output/desk-packets/{desk}_c{XX}.json` | If topic-relevant desk packet exists | **ENGINE CONTEXT** — neighborhood dynamics, crime, economics, migration from v3.9 |
+| Voice statements | `output/civic-voice/{office}_c{XX}.json` | Civic pieces only | **CIVIC VOICE SOURCE MATERIAL** — official statements from voice agents |
+| Truesource | `output/desk-packets/truesource_reference.json` | Always (if exists) | **CANON REFERENCE** — verified names/positions/neighborhoods |
+| Grade history | `output/grades/grade_history.json` | Always (if exists) | Reporter grade context in assignments (1-line summary per reporter) |
+
+**Data availability table** — include in the production log which of the 6 sources were found and loaded. Example:
+```
+Enhanced data loaded:
+- Errata: YES (26 entries, 3 relevant to civic)
+- Mara guidance: YES (c87 directive)
+- Cycle data: NO (no c88 packets yet)
+- Voice statements: YES (mayor, chief of staff)
+- Truesource: YES (675 citizens)
+- Grade history: YES (1 edition window)
+```
+
 ### Key rules for the brief:
 - **Don't prescribe tone.** Give the reporters the facts and let them write.
 - **Don't default to struggle.** If the topic is a neighborhood, show what's good about it, not what's wrong with it.
@@ -170,6 +194,17 @@ Each agent gets:
 - **The supplemental template** — `editions/SUPPLEMENTAL_TEMPLATE.md`
 - **Their specific assignment** — which articles to write, what angle, target word count
 
+### Model Tier Guidance
+
+Use the `model` parameter when launching agents to match complexity to capability:
+
+| Tier | Model | Use For |
+|------|-------|---------|
+| Sonnet | `claude-sonnet-4-6` | Civic, investigative, sports — reasoning-heavy, source verification |
+| Haiku | `claude-haiku-4-5-20251001` | Neighborhood, food, culture, lifestyle — texture writing, atmosphere |
+
+Default to Haiku unless the piece requires civic reasoning, investigative logic, or sports roster verification.
+
 ### Agent Prompt Pattern
 
 ```
@@ -179,6 +214,19 @@ Read your voice file at docs/media/voices/{name}.md — this is your writing ide
 Read the supplemental template at editions/SUPPLEMENTAL_TEMPLATE.md — formatting conventions.
 Read the topic brief at output/supplemental-briefs/{topic_slug}_c{XX}_brief.md — your assignment and canon data.
 
+[If truesource exists:]
+Read output/desk-packets/truesource_reference.json — verify every citizen name, title, and neighborhood against this file before writing.
+
+[If exemplar exists for this desk:]
+Read output/desks/{desk}/current/exemplar.md — this is an A-grade example from this desk. Study the voice, structure, and sourcing.
+
+[If grade history exists and reporter has grades:]
+YOUR RECENT GRADE: [letter] ([trend]). [1-line note from grade_history.json]
+
+[If brief contains GUARDIAN WARNINGS:]
+GUARDIAN WARNINGS (from errata — do NOT repeat these errors):
+[filtered warnings from brief]
+
 YOUR ASSIGNMENT:
 - Write [N] article(s):
   1. "[Headline idea]" — [description of angle, ~X words]
@@ -187,11 +235,48 @@ RULES:
 - Stay in voice. Read the voice file carefully.
 - Use ONLY canon names from the topic brief. Never invent citizens unless authorized.
 - No engine metrics in article text.
+- Verify all citizen names against truesource before using them.
 - Include a Names Index after each article.
 - End with an Article Table entry for each article you wrote.
 
 Write now. Start with your first article.
 ```
+
+### THINK BEFORE WRITING Blocks
+
+Add a thinking block to the agent prompt based on supplemental type. These go BEFORE "Write now."
+
+**Civic / Investigative:**
+```
+THINK BEFORE WRITING:
+Before drafting, reason through:
+1. What is the current status of each initiative/policy mentioned?
+2. Which citizens have appeared in recent editions on this topic? (check brief)
+3. Are there any Mara flags or errata warnings relevant to this piece?
+4. What is the strongest angle — and what angle should be AVOIDED?
+5. Which voice agent statements can be quoted vs. paraphrased?
+```
+
+**Neighborhood / Food / Culture:**
+```
+THINK BEFORE WRITING:
+Before drafting, reason through:
+1. What canon already exists for this neighborhood/venue/event?
+2. Which citizens are FRESH (not in last 3 editions)?
+3. What new canon am I authorized to establish?
+4. Is this a prosperity story or a struggle story? (default: prosperity)
+```
+
+**Sports:**
+```
+THINK BEFORE WRITING:
+Before drafting, reason through:
+1. Verify every player name and position against the roster in truesource.
+2. What is the dynasty context — where does this fit in the timeline?
+3. Is this opinion or reporting? If opinion, mark [OPINION].
+```
+
+**Color / Variety:** No thinking block — keep lightweight.
 
 ### Parallel vs. Sequential
 - Independent reporters — launch in parallel
@@ -211,6 +296,7 @@ After agents return, Mags compiles:
    - Cross-references to past coverage where relevant
    - 1-2 photo credits
    - Opinion pieces marked `[OPINION]`
+   - **Name verification** — check every quoted citizen against `output/desk-packets/truesource_reference.json` and `output/desk-packets/base_context.json`. Flag any name not in canon sources or not authorized as new in the Citizen Usage Log.
 4. **Merge intake sections:**
    - Article Table
    - Storylines Updated (new canon established)
@@ -220,12 +306,30 @@ After agents return, Mags compiles:
 
 Show the compiled supplemental to the user.
 
-## Step 3.5: Validation (If Civic)
+## Step 3.5: Validation
 
-Only if civic content is involved:
+**Always (all supplemental types):**
+- Manual name check against `output/desk-packets/truesource_reference.json` — every quoted citizen must exist in canon or be authorized as new in the Citizen Usage Log.
+
+**If civic content:**
 ```bash
 node scripts/validateEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
 ```
+
+**If sports content:**
+- Cross-check all player names and positions against the roster in truesource. Flag any player not on the A's 40-man, farm system, or coaching staff.
+
+## Step 3.7: Optional Mara Audit
+
+**For civic, investigative, or initiative supplementals only.** Skip for color, food, culture, neighborhood, sports, and lifestyle pieces.
+
+**Decision guide:** If the supplemental changes initiative status, council positions, or faction dynamics — send to Mara. If it establishes texture canon (restaurants, neighborhood feel, cultural events) — skip.
+
+```bash
+node scripts/buildMaraPacket.js {cycle} editions/supplemental_{topic_slug}_c{XX}.txt
+```
+
+Upload the packet to claude.ai for Mara's review. Wait for her feedback before proceeding to Step 3.9.
 
 ## Step 3.9: USER REVIEW GATE (MANDATORY)
 

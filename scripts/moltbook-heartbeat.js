@@ -161,7 +161,7 @@ function moltbookRequest(method, endpoint, body, apiKey) {
     });
 
     req.on('error', reject);
-    req.setTimeout(15000, function() {
+    req.setTimeout(45000, function() {
       req.destroy();
       reject(new Error('Timeout on ' + endpoint));
     });

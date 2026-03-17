@@ -14,11 +14,18 @@ description: Write the Oakland sports section using P Slayer, Anthony, and Hal R
    ```bash
    node scripts/buildDeskFolders.js {cycle}
    ```
-3. Launch the **sports-desk** agent:
+3. Launch the **sports-desk** agent with `model: "sonnet"` (complex desk — roster accuracy, stat verification, three distinct writer voices):
    ```
    Prompt: |
      Write the sports section for Edition {XX}.
      Your workspace: output/desks/sports/
+
+     THINK BEFORE WRITING: Before drafting any article, reason through:
+     - Which athletes had significant events this cycle? (check packet data)
+     - Verify ALL player names against the roster in your briefing — name errors are the #1 errata source
+     - What's the dynasty narrative thread from last edition? (read archive/)
+     - Read previous_grades.md and exemplar.md if they exist — learn from them.
+     - P Slayer writes fan voice, Anthony writes insider analysis, Hal writes literary reflection — never cross voices.
 
      READ your briefing.md and packet FIRST. Write FROM the data — scores, records,
      player performances, standings, and storylines come from the packet, not from

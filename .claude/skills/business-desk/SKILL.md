@@ -14,11 +14,13 @@ description: Write the business ticker section using Jordan Velez.
    ```bash
    node scripts/buildDeskFolders.js {cycle}
    ```
-3. Launch the **business-desk** agent:
+3. Launch the **business-desk** agent with `model: "haiku"` (routine desk — business ticker, economic data translation):
    ```
    Prompt: |
      Write the business section for Edition {XX}.
      Your workspace: output/desks/business/
+
+     Read previous_grades.md and exemplar.md if they exist — learn from past performance.
 
      READ your briefing.md and packet FIRST. Write FROM the data — neighborhood
      economies, employment shifts, migration patterns, and business activity all

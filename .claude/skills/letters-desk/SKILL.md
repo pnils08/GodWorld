@@ -14,11 +14,13 @@ description: Write the letters to the editor section with citizen voices.
    ```bash
    node scripts/buildDeskFolders.js {cycle}
    ```
-3. Launch the **letters-desk** agent:
+3. Launch the **letters-desk** agent with `model: "haiku"` (routine desk — citizen voice letters, lower complexity):
    ```
    Prompt: |
      Write the letters section for Edition {XX}.
      Your workspace: output/desks/letters/
+
+     Read previous_grades.md if it exists — learn from past performance.
 
      READ your briefing.md and packet FIRST. Write FROM the data — citizen spotlights,
      neighborhood dynamics, active storylines, and civic context all come from the

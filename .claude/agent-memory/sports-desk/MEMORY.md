@@ -55,7 +55,7 @@ Last Updated: 2026-03-15 | Last edition written: C87 (fresh rewrite, clean)
 - E82: Aitken 3B → 1B. Davis position wrong (was listed as 2B). Gold Glove at DH nonsensical.
 - E83: Coles stat transposition (207 vs 219.1 innings). Hal spells numbers — extra transposition risk.
 - E85: Arturo Ramirez should be Arturo Ramos. ALWAYS verify: it's RAMOS.
-- E87 rejected: Eduardo Ramos → Arturo Ramos. Marcus Rivas → Henry Rivas. Jarrett Ellis → John Ellis. Paulson listed as Owner/GM → he is Bulls Owner only (not GM). P Slayer wrote policy analysis → corrected to fan column about the team and dynasty.
+- E87 rejected: Eduardo Ramos → Arturo Ramos. Marcus Rivas → Henry Rivas. Jarrett Ellis → John Ellis. Paulson listed as Owner/GM → he is GM only (not owner). P Slayer wrote policy analysis → corrected to fan column about the team and dynasty.
 - Travis Coles: was incorrectly listed as 2B in C86 Names Index. He is SP (Starting Pitcher). ALWAYS verify.
 
 ## Coverage Notes
@@ -78,4 +78,4 @@ Before writing, verify these names are correct (errata-prone):
 5. Travis COLES as SP (not 2B)
 6. Benji DILLON is LEFT-HANDED
 7. Hector QUINTERO is DH (no Gold Gloves)
-8. Mike PAULSON is Bulls Owner (not Owner/GM, not General Manager alone)
+8. Mike PAULSON is GM of Oakland A's and Chicago Bulls — NEVER "owner." General Manager of both franchises.

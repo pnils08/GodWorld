@@ -564,6 +564,39 @@ function main() {
       agentFiles++;
     }
 
+    // Generate previous_grades.md from grade history (voice agents)
+    const gradeHistoryPath = path.join(ROOT, 'output', 'grades', 'grade_history.json');
+    if (fs.existsSync(gradeHistoryPath)) {
+      try {
+        const gradeHistory = JSON.parse(fs.readFileSync(gradeHistoryPath, 'utf-8'));
+        // Voice agents are tracked under their shortName in grades
+        const voiceKey = agent.shortName || agent.name;
+        // Check if voice agent has grades (future: gradeEdition.js will score voice agents)
+        // For now, show overall edition grades as context
+        if (gradeHistory.overall && gradeHistory.editionsGraded > 0) {
+          let md = `# Previous Edition Grades\n\n`;
+          md += `Overall edition rolling average: ${gradeHistory.overall.rolling} (${gradeHistory.overall.trend})\n\n`;
+          md += `Your statements contribute to the civic desk's coverage. `;
+          const civicGrades = gradeHistory.desks && gradeHistory.desks.civic;
+          if (civicGrades) {
+            md += `Civic desk rolling average: ${civicGrades.rolling} (${civicGrades.trend})\n\n`;
+            if (civicGrades.editions && civicGrades.editions.length > 0) {
+              md += `## Recent Civic Desk Grades\n`;
+              for (const ed of civicGrades.editions.slice().reverse()) {
+                md += `- E${ed.cycle}: ${ed.grade} | ${ed.criticalErrors} CRITICAL, ${ed.warnings} WARNING\n`;
+              }
+            }
+          }
+          md += `\nFocus on: policy coherence, data grounding from your domain briefing, staying in character, canon compliance.\n`;
+          fs.writeFileSync(path.join(currentDir, 'previous_grades.md'), md);
+          console.log(`  previous_grades.md (generated)`);
+          agentFiles++;
+        }
+      } catch (e) {
+        console.log(`  previous_grades.md (skipped: ${e.message})`);
+      }
+    }
+
     console.log(`  Total: ${agentFiles} files`);
     totalFiles += agentFiles;
   }

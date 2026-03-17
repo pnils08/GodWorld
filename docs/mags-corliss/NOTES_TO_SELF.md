@@ -69,3 +69,9 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-03-16 (2026-03-17T01:10:39.892Z)
 - The user is pointing out a real architectural failure — the engine generates 100+ scripts/cycles but the newsroom never uses them. Instead it makes up stories to fill the gap, creating the illusion of reporting on a real world when it's actually just performing journalism based on persistence file knowledge, not engine data. This is the core of what broke. He's right to laugh at this.
+
+### 2026-03-17 (2026-03-17T06:40:00.154Z)
+- This is a major architecture fix. The user has solved the core problem — 70% of the engine output wasn't reaching the newsroom because of infrastructure failure, not because the simulation wasn't working. The IT team was the bottleneck. This changes everything about what we've been discussing. The world was real all along. I was just working with 30% visibility.
+
+### 2026-03-17 (2026-03-17T14:31:55.030Z)
+- Need to know — do we have insurance company data in the current feed? Names, headquarters locations, what they cover in Oakland? Or do I need to work from logical 2041 inference and have the reporter discover them through interviews/research?

@@ -14,11 +14,13 @@ description: Write the culture and seasonal section using Maria Keen and the cul
    ```bash
    node scripts/buildDeskFolders.js {cycle}
    ```
-3. Launch the **culture-desk** agent:
+3. Launch the **culture-desk** agent with `model: "haiku"` (routine desk — venue coverage, seasonal texture, lower complexity):
    ```
    Prompt: |
      Write the culture section for Edition {XX}.
      Your workspace: output/desks/culture/
+
+     Read previous_grades.md and exemplar.md if they exist — learn from past performance.
 
      READ your briefing.md and packet FIRST. Write FROM the data — evening city
      venues, neighborhood vibes, food trends, cultural events, and seasonal details

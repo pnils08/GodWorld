@@ -14,11 +14,17 @@ description: Write the Chicago bureau section using Selena Grant and Talia Finch
    ```bash
    node scripts/buildDeskFolders.js {cycle}
    ```
-3. Launch the **chicago-desk** agent:
+3. Launch the **chicago-desk** agent with `model: "sonnet"` (complex desk — dual-city narrative, Paulson thread, neighborhood texture):
    ```
    Prompt: |
      Write the Chicago section for Edition {XX}.
      Your workspace: output/desks/chicago/
+
+     THINK BEFORE WRITING: Before drafting any article, reason through:
+     - Where is the Paulson thread? (read archive/ and your MEMORY.md)
+     - What happened with the Bulls this cycle? (check packet for scores/records)
+     - What's the Bridgeport neighborhood feeling? (check domain data)
+     - Read previous_grades.md and exemplar.md if they exist — learn from them.
 
      READ your briefing.md and packet FIRST. Write FROM the data — Chicago satellite
      data, Bulls/Bears results, and bureau-specific context all come from the packet.

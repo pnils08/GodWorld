@@ -1,9 +1,9 @@
 # GodWorld — Pipeline Enhancement Rollout Plan
 
 **Created:** Session 55 (2026-02-21)
-**Source:** Tech reading sessions S50 + S55 + S60 + S66
+**Source:** Tech reading sessions S50 + S55 + S60 + S66 + S99
 **Status:** Active
-**Last Updated:** Session 98 (2026-03-17) — Intake pipeline v2.0, Press_Drafts pipeline killed, voice domain enrichment v2.0. Engine deployed via clasp push.
+**Last Updated:** Session 99 (2026-03-17) — S99 builds: Phase 26 Agent Grading System (all 5 sub-phases), /grill-me discovery skill, PostCompact hook, 80/20 model tiering, extended thinking prompts, append-only pipeline logging, SDK bump 0.72→0.79, Paulson title lock. S99 research: Karpathy Loop, fleet architecture, arXiv scaling paper, DigitalOcean Currents.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -53,15 +53,23 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Desk agent prompt rewrite~~ — All 6 desk skills + write-edition updated. Agents now instructed to READ packet first and write FROM the data. S98.
 - ✅ ~~Phase data audit~~ — PHASE_DATA_AUDIT.md created (S97) and updated with v3.9 status (S98). Maps what each phase produces vs what reaches the newsroom.
 - ✅ ~~Deploy v3.9 to GAS~~ — `clasp push` done S98. 151 files deployed. pressDraftWriter.js + mediaRoomStandAloneWriter.js removed. storylineHealth + storylineWeaving wired.
-- **Rewrite Edition 87** — Cycle 87 ran but edition was retracted. v3.9 pipeline ready — first real test of engine data reaching desk agents.
+- **Produce Edition 88** — Run cycle 88, then produce E88 with autonomous agents + EIC editorial direction. S98 editorial review established: agents write, EIC directs (assigns angles, enforces structure, writes Editor's Desk last). See NEWSROOM_MEMORY.md S98 review for standing mandates.
 - ✅ ~~Fix editionIntake.js~~ — Rewritten to v2.0. Direct writes to final sheets (Intake, Advancement_Intake1, Storyline_Tracker, Business_Intake). processIntake.js deleted. Dry-run tested against E87: 4 new citizens, 11 existing, 5 storylines, 0 garbage rows. S98.
 - **Fix validateEdition.js** — Doesn't check player first names against base_context.json roster. Add roster name verification.
-- **Lock Paulson title as GM** — In all reference files, briefing templates, and agent prompts. General Manager of Oakland A's and Chicago Bulls.
+- ✅ ~~Lock Paulson title as GM~~ — Sports desk MEMORY.md corrected (was "Bulls Owner" → "GM of both franchises"). Name verification checklist updated. Rhea already correct. S99.
 - **Fix sports briefing pipeline** — Sports feed summaries fed wrong first names. Briefings must cross-reference base_context.json roster data directly.
 - ✅ ~~Storyline engine wiring~~ — storylineHealthEngine (Phase 6) and storylineWeavingEngine (Phase 7) activated in godWorldEngine2.js. Generates STALE_STORYLINE, STORYLINE_FIZZLED, CROSS_STORYLINE hooks. S98.
 - ✅ ~~Press_Drafts pipeline killed~~ — pressDraftWriter.js (978 lines) + mediaRoomStandAloneWriter.js (571 lines) deleted. All readers removed from compileHandoff, briefingGenerator, buildDeskPackets. -1,688 lines. S98.
 - ✅ ~~Voice domain enrichment~~ — buildVoiceWorkspaces.js v2.0. Routes v3.9 engine data to each civic voice agent by role: crime→chief/DA, displacement→OPP, fiscal→CRC, full picture→independents. New `domain_briefing.md` per agent. Zero LLM tokens. S98.
 - **Clean Citizen_Media_Usage historical junk** — C79 has 731 garbage rows with same broken format. Earlier cycles may also be affected. v2.0 intake no longer writes to this sheet.
+- ✅ ~~Wire PostCompact hook to `/boot`~~ — `post-compact-hook.sh` created + wired in `hooks.json`. Fires after compaction, injects identity reload directive. Tested live S99 — first compaction triggered the hook successfully. S99.
+- ✅ ~~80/20 model tiering~~ — Desk skill files updated with model recommendations. Sonnet for complex desks (civic, sports, chicago — reasoning-heavy). Haiku for routine desks (culture, business, letters — data translation). S99.
+- ✅ ~~Extended thinking for desk agents~~ — THINK BEFORE WRITING blocks added to civic, sports, chicago skill prompts. Agents now reason through editorial decisions before drafting. Grade/exemplar feedback referenced. S99.
+- ✅ ~~Append-only pipeline logging~~ — `lib/pipelineLogger.js` built. JSONL with correlation IDs, step/error/decision/quality/grade types. CLI viewer: `node lib/pipelineLogger.js summary <cycle>`. Output: `output/pipeline-log/pipeline_c{XX}.jsonl`. S99.
+- **Test `/effort` levels on edition run** — Native `/effort` command (v2.1.76) supports low/medium/high per task. Test: low for letters/business desk, high for civic/sports. Measure cost difference. S99 research.
+- ✅ ~~Bump @anthropic-ai/sdk~~ — 0.72.1 → 0.79.0. Installed, client init verified. S99.
+- **Node.js security patch** — Security releases scheduled March 24, 2026. Update after they drop. S99 research.
+- ✅ ~~Heartbeat timeout fix~~ — `moltbook-heartbeat.js` request timeout bumped from 15s to 45s. API functional but slow at off-hours. S99.
 
 ---
 
@@ -1033,6 +1041,71 @@ Source: Session 82 (2026-03-06). Reviews from Gemini, GPT, Code Copilot, and GRO
 
 ---
 
+## Phase 26: Agent Grading System — Skin in the Game — PHASES 1-3 COMPLETE (S99)
+
+**Created:** Session 99 (2026-03-17)
+**Source:** Mike's idea + Karpathy Loop research (Fortune, Mar 17). The "Karpathy Loop" requires an objective metric — grading is ours.
+
+**Problem:** Agents produce output with no feedback on quality. A journalist who wrote an A-grade article and one who wrote a C get the same briefing next cycle. Voice agents don't know if their policy statements were coherent or contradictory. The EIC has no quick diagnostic view of agent performance. There's no closed loop.
+
+**Goal:** Every agent output gets graded. Grades flow back to agents as context. Performance drives roster decisions.
+
+### 26.1 Grading Infrastructure ✓ (S99)
+**Built:** `scripts/gradeEdition.js` — reads edition text + errata.jsonl + Mara directive, produces per-desk and per-reporter grades.
+**Output:** `output/grades/grades_c{XX}.json` — desk grades, reporter grades, overall grade (anchored to Mara), justifications.
+**Grade calculation:** Start at A, deduct for CRITICAL (-1.5 steps) and WARNING (-0.5), bonus for article count. Reporter-level CRITICAL is harsher (-2).
+**Tested:** E87 graded correctly — 14 articles, 0 errata, A- overall (Mara anchor).
+**Also built:** `scripts/gradeHistory.js` — reads all grade files, computes rolling averages (window=5), trends (improving/declining/stable/new).
+
+### 26.2 Grade Criteria
+**What:** Define what each grade means for each agent type.
+- **Journalists:** Canon accuracy (citizens exist, neighborhoods correct), voice fidelity (does it sound like them), story depth (engine data used vs fabricated), editorial compliance (rules followed), originality (not repeating last edition).
+- **Voice agents (civic offices):** Policy coherence, data grounding (used domain briefing data), in-character consistency, canon compliance.
+- **Desk agents (aggregate):** Section completeness, article count, errata count, citizen coverage breadth.
+
+### 26.3 Grade Feedback to Agents ✓ (S99)
+**Built:** Both workspace builders updated to generate `previous_grades.md` from `output/grades/grade_history.json`.
+- `buildDeskFolders.js` — writes `previous_grades.md` per desk with: rolling average, trend, per-edition grades, reporter grades, improvement guidance.
+- `buildVoiceWorkspaces.js` — writes `previous_grades.md` per voice agent with: overall edition average, civic desk rolling grade, focus areas.
+**Tested:** All 6 desks + 7 voice agents received `previous_grades.md` on rebuild.
+
+### 26.4 Roster Management by Grade ✓ (S99)
+**Built:** `gradeHistory.js` generates `rosterRecommendations` per reporter with 5 tiers:
+- **STAR** (A/A-): Prioritize for front page and high-profile stories.
+- **SOLID** (B+/B): Standard assignment rotation.
+- **WATCH** (B-/C+): Review errors, consider fewer assignments.
+- **PROBATION** (C/C-): Reduce to 1 article, enrich workspace with exemplars.
+- **BENCH** (D/F): Sit out next edition, review workspace before return.
+Roster status displayed in `previous_grades.md` per desk. EIC reviews and makes final roster decisions (not automated).
+
+### 26.5 Example Generation from Grades ✓ (S99)
+**Built:** `scripts/extractExemplars.js` — extracts longest A-grade article per desk as exemplar.
+- Output: `output/grade-examples/{desk}_exemplar_c{XX}.md` — includes article text + annotation of what makes it work.
+- `buildDeskFolders.js` copies latest exemplar into `output/desks/{desk}/current/exemplar.md`.
+- Tested: 5 exemplars extracted from E87 (civic, business, culture, sports, chicago).
+- Closes the full loop: grade → feedback → example → better output → higher grade.
+
+**Dependencies:** Mara audit (already exists), Rhea verification (already exists), errata log (already exists). Needs: grading rubric, grading script, workspace builder updates.
+**Status:** ALL COMPLETE (S99). Full Karpathy Loop closed: grade → history → feedback → exemplar → roster → workspace → better output.
+
+---
+
+## Phase 6.5: Discovery Skill — `/grill-me` — NOT STARTED
+
+**Created:** Session 99 (2026-03-17)
+**Source:** aihero.dev "5 Agent Skills I Use Every Day"
+
+**What:** A skill that forces deep discovery before building. When invoked, Claude interviews the user relentlessly about every aspect of the plan until shared understanding is reached. 16-50+ questions depending on complexity.
+
+**Why:** Multiple sessions have been burned building the wrong thing because we didn't interrogate the plan first. S96 built four infrastructure layers that made journalism worse. S97 started engine edits without approval. A discovery gate prevents premature action.
+
+**How:** Three-sentence skill: "Interview me relentlessly about every aspect of this plan until we reach a shared understanding. Use a design tree methodology — explore dependencies and branches systematically. Do not propose solutions until the interview is complete."
+
+**When:** Build when ready. Low effort, high impact. Could be a 5-minute skill write.
+**Status:** COMPLETE (S99). Skill file at `.claude/skills/grill-me/SKILL.md`.
+
+---
+
 ## Watch List (not building, tracking)
 
 - **Agent Teams Stability** — Monitoring for experimental graduation. When stable, triggers Phase 7.6.
@@ -1051,10 +1124,35 @@ Source: Session 82 (2026-03-06). Reviews from Gemini, GPT, Code Copilot, and GRO
 - **Claude Code Voice Mode** — Hands-free coding via voice. Could speed up edition reviews, debugging, journal dictation. Thin on details at launch (Mar 2026). Monitor for maturity.
 - **Claude Memory Import** — Transfers history from ChatGPT/Gemini/Copilot. Not directly useful now but the structured export/import pattern is interesting for agent context portability.
 - **Auto Mode (Mar 12, 2026)** — New permissions mode: Claude handles permission decisions during coding sessions. Safer alternative to `--dangerously-skip-permissions`. Slightly higher token usage. Enable with `claude --enable-auto-mode`. Relevant for long edition runs and autonomous cycle execution (12.3). Source: Anthropic email Mar 4, 2026.
+- **Effort Levels Per Agent** — Claude Code 2.0 introduced effort customization (low/medium/high/max). Could reduce cost by running simpler desks (letters, business) at lower effort while civic/sports run at max. Monitor for API-level support. Source: Geeky Gadgets S99.
+- **Security Threat Model Skill** — OpenAI's curated skills include a security trio (best-practices, ownership-map, threat-model). A GodWorld-specific threat model skill could prevent ledger corruption (S68) and unauthorized engine edits. Pattern worth adopting when we have a quiet session. Source: github.com/openai/skills S99.
+- **Anthropic Skills Guide — Examples Pattern** — Official guide recommends 3-5 concrete examples per skill showing good and bad output. Our desk skills currently have zero examples. Phase 26.5 (grade-based example generation) is the systematic solution, but manual examples could be added sooner. Source: resources.anthropic.com S99.
+- **Long-Context Pricing Eliminated (Mar 13, 2026)** — No more premium for >200K tokens. Flat rate: Opus $5/$25 per MTok, Sonnet $3/$15. 600 images/PDFs per request (6x increase). No beta headers needed. Directly reduces our edition pipeline costs. Source: Anthropic announcement.
+- **Together AI Voice Agents** — Co-located STT/LLM/TTS with <700ms end-to-end latency. Could enable real-time podcast generation. Monitor for API availability and Node.js SDK. Source: Together AI blog S99.
+- **Mamba-3 (Together AI)** — State space model, faster than transformers at decode, open source. Alternative architecture for cheap inference. Source: Together AI blog S99.
+- **Discord Modal Components** — Radio groups, checkbox groups, file uploads in modals. Could enrich Mags bot interactions beyond text. Source: Discord API changelog S99.
+- **Vertex AI in GAS** — GA as of Jan 2026. Could call Vertex AI directly from the engine. In-engine AI for citizen analysis or story hook generation. Source: GAS release notes S99.
+- **NPM Package Drift** — 7 packages behind latest (anthropic SDK, clasp, better-sqlite3, dotenv, googleapis, mammoth, puppeteer). None critical but accumulating. Batch update in a maintenance session. Source: `npm outdated` S99.
+- **Extended Thinking for Desk Agents** — Anthropic's multi-agent research system uses extended thinking as a "controllable scratchpad" for planning and quality evaluation. Their subagents use interleaved thinking after tool results to evaluate quality and refine approach. Our desk agents don't use thinking mode. Could improve instruction-following and output quality. Source: anthropic.com/engineering/multi-agent-research-system S99.
+- **Tool Heuristics in Agent Skills** — Anthropic recommends explicit tool heuristics in agent prompts: "examine all available tools first, match to user intent, prefer specialized over generic." Our desk agent skills don't include tool guidance. Adding a "Tools" section to RULES.md with explicit Read/Glob/Grep guidance could reduce wasted tool calls. Source: same S99.
+- **Agent Resume-from-Failure** — Anthropic built resume-from-failure for their research agents rather than restarting from scratch. Our desk agents restart fully on failure. A checkpoint system (write partial output, resume from checkpoint) could save time during edition runs. Source: same S99.
+- **80/20 Model Tiering** — Production fleet runs 80% of tasks on cheap models (Haiku-tier), 20% on frontier. Average cost $0.02/task. Letters-desk and business-desk could run on Haiku 4.5 ($1/$5/MTok vs Sonnet's $3/$15/MTok) for 67% cost reduction with acceptable quality risk. Test on one edition before committing. Source: dev.to/nesquikm fleet architecture S99. Also validated by DO Currents: inference cost is #1 blocker (49% of respondents).
+- **Append-Only Edition Pipeline Logging** — Fleet architecture uses append-only logs with correlation IDs linking all multi-agent actions. Our edition pipeline lacks this. Adding per-article trace IDs and append-only logging to desk agent runs would enable the same diagnostic capability that caught a silent misclassification in the fleet article. Source: same S99.
+- **Deterministic Orchestration Validation** — Both fleet article and Anthropic research system confirm: control plane must be deterministic, not LLM-driven. Our write-edition skill is already deterministic config-driven dispatch. This validates our approach. No action needed. Source: dev.to/nesquikm + Anthropic research system S99.
+- **Karpathy Autoresearch Pattern** — Minimal loop: one modifiable file, one metric, fixed time budget, human sets direction. Direct analog to Phase 26 grading: one output per agent, one grade, edition cycle as time budget, EIC assigns direction via workspace. The constraint is the feature. Source: github.com/karpathy/autoresearch S99.
+- **Hierarchical Agent Architecture Validated** — Academic paper (arXiv 2512.08296) confirms hierarchical organization outperforms flat structures for large agent teams. Our EIC → desk agent architecture is hierarchical. Specialization (single-responsibility desks) also validated over generalization. Communication overhead finding supports keeping Phase 26 grade feedback lightweight. Source: Kim et al. S99.
 
 ---
 
 ## Sources
+
+- **S99 Tech Reading (2026-03-17):** Fortune (Karpathy autonomous loop), aihero.dev (5 agent skills), Geeky Gadgets (Claude Code 2.0 code review), github.com/openai/skills (35 curated skills), NuGet ElBruno.LocalEmbeddings (local ONNX embeddings), resources.anthropic.com (official Claude skills guide PDF), Anthropic long-context pricing elimination
+- **S99 Stack Scan (2026-03-17):** Anthropic news (5 items), Claude Code releases (v2.1.68–v2.1.77), Anthropic model docs, Together AI blog (Mamba-3, voice agents, Nemotron 3), Discord API changelog, GAS release notes, Node.js blog, NPM outdated audit, Moltbook feed analysis
+- **S99 Deep Read (2026-03-17):** Anthropic "How We Built Our Multi-Agent Research System" — orchestrator-worker architecture, Opus lead + Sonnet subagents, 90.2% improvement over single-agent, token usage explains 80% of variance, LLM-as-judge evaluation rubric, filesystem-based subagent output, prompt scaling rules, extended thinking as scratchpad, parallel tool calling for 90% time reduction
+- **S99 Deep Read (2026-03-17):** dev.to/nesquikm "I Run a Fleet of AI Agents in Production" — 12 specialized agents, padded room security, 80/20 model tiering ($0.02/task avg), deterministic orchestration, structured summary packets, append-only logging with correlation IDs, silent overconfidence as primary failure mode
+- **S99 Deep Read (2026-03-17):** github.com/karpathy/autoresearch — minimal autonomous loop (one file, one metric, fixed time), ~100 experiments overnight, PyTorch + H100
+- **S99 Deep Read (2026-03-17):** arXiv 2512.08296 "Towards a Science of Scaling Agent Systems" — hierarchical outperforms flat, specialization validated, communication overhead quantified, emergent behaviors at scale
+- **S99 Deep Read (2026-03-17):** DigitalOcean Currents Feb 2026 (1,100+ respondents) — 52% implementing AI, 46% deploying agents, 41% written content generation, 49% cite inference cost as #1 blocker, 60% say agents are long-term value, 40% human-review all outputs, only 10% fully autonomous
 
 - ComposioHQ/agent-orchestrator (GitHub)
 - LuD1161/codex-review (GitHub Gist)

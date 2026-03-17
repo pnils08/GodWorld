@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 87 — 2026-03-16**
+**Last Updated: Edition 87 — 2026-03-17 (S98 editorial review)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -479,6 +479,36 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 - Giddey All-Star snub as Chicago identity story (Selena) — connected individual moment to city narrative. Strong bureau work.
 - Health Center aftermath as civic continuity — kept the 6-2 vote story moving forward naturally.
 - Letters using Mara directive citizens — Jose Johnson, Patricia Nolan, Marco Lopez, Dante Nelson all felt authentic, connected to real policy outcomes.
+
+### S98 Three-Edition Review (E81, E86, E87 rejected vs published)
+
+**Key finding:** Autonomous desk agents (published E87) produce good journalism but bad structure. They find stories and citizens I didn't find. They made the right front page call ($387K Fund with new conditions vs. OARI clock update). But they dropped P Slayer, dropped the Editor's Desk, and shrank sports to 2 pieces. Mike had to manually cut 3 pieces: P Slayer (called Paulson "owner"), Mags Editor's Desk ("political actors" broke 4th wall), one piece that contradicted another.
+
+**Systemic repetition patterns (E81→E86→E87 rejected):**
+- Jordan's Business Ticker ran Fund math + Baylight filings + Jack London nightlife for 3 editions straight
+- Kai wrote Jack London nightlife 3 editions straight (same bars: Blue Lantern, Dockhouse, Green & Gold)
+- Maria wrote St. Columba faith-fills-the-gap 4 editions (E81, E86, rejected E87, published E87)
+- P Slayer is best with assigned angles (Keane academy, Aitken at DEIR). Worst when open field (NBA expansion speculation).
+
+**What agents did well (published E87):**
+- Found Mason Ortega (new reporter — West Side Cafe, Kris Bubic)
+- Found Lucia Polito (Tier 1, POP-00004) correctly at St. Columba
+- Kai broke out of Jack London — wrote Janmashtami at Shiva Vishnu Temple, found Clarence Moody
+- Jordan connected Transit Hub and Baylight labor pool timelines — original observation
+- Letters: all 4 new writers, all excellent (Patricia Osei-Bonsu, Ruben Castillo, Delores Kimura, Andre Wilkins)
+
+**EIC role clarified (Mike, S98):** "The EIC directs the paper but they should write it." Mags assigns angles, enforces structure, catches errors, writes Editor's Desk after desks produce. Does not produce competing articles.
+
+**Standing editorial mandates for E88+:**
+1. P Slayer writes every edition with an assigned angle — no open-field speculation
+2. Editor's Desk runs every edition — written AFTER desks produce, frames the edition
+3. Elliot Graye writes every edition — his absence correlates with thinner culture coverage
+4. Sports desk produces 3 pieces minimum — Anthony 2 slots + P Slayer or civic crossover
+5. If a reporter covered a location last edition, they can't lead with it this edition
+6. OARI and Fund move to Quick Takes unless a genuine new development breaks
+7. Paulson is GM — never "owner" — lock in all reference files
+
+**NBA expansion storyline:** Published E87 missed this entirely. Oakland on the 2042 candidate list, Baylight arena site as only plausible location, Paulson two-city tension. This is a real developing story that needs coverage in E88.
 
 ### What Fell Flat (Fix Next Time)
 - Packet size killed two agents: 500KB+ packets are too large for agent context windows. Civic and letters desks produced nothing. Need to chunk packets or add summary layers.

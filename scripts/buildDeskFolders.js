@@ -473,6 +473,72 @@ function main() {
     console.log(`  briefing.md (generated)`);
     deskFiles++;
 
+    // 9. Generate previous_grades.md from grade history
+    const gradeHistoryPath = path.join(ROOT, 'output', 'grades', 'grade_history.json');
+    if (fs.existsSync(gradeHistoryPath)) {
+      try {
+        const gradeHistory = JSON.parse(fs.readFileSync(gradeHistoryPath, 'utf-8'));
+        const deskGrades = gradeHistory.desks && gradeHistory.desks[desk];
+        if (deskGrades && deskGrades.editions && deskGrades.editions.length > 0) {
+          let md = `# Previous Grades — ${desk.charAt(0).toUpperCase() + desk.slice(1)} Desk\n\n`;
+          md += `## Rolling Average: ${deskGrades.rolling} | Trend: ${deskGrades.trend}\n\n`;
+          md += `## Last ${deskGrades.editions.length} Edition(s)\n`;
+          for (const ed of deskGrades.editions.slice().reverse()) {
+            md += `- E${ed.cycle}: ${ed.grade} | ${ed.articles} articles, ${ed.criticalErrors} CRITICAL, ${ed.warnings} WARNING\n`;
+          }
+          // Add reporter grades for this desk
+          const deskReporters = Object.entries(gradeHistory.reporters || {})
+            .filter(([, r]) => r.desk === desk);
+          if (deskReporters.length > 0) {
+            md += `\n## Reporter Grades\n`;
+            for (const [name, data] of deskReporters) {
+              md += `- ${name}: ${data.current} (rolling ${data.rolling}, ${data.trend})`;
+              if (data.editions && data.editions.length > 0) {
+                const latest = data.editions[data.editions.length - 1];
+                md += ` — ${latest.articles} article(s) in E${latest.cycle}`;
+              }
+              md += '\n';
+            }
+          }
+          // Add roster recommendations
+          const roster = gradeHistory.rosterRecommendations || {};
+          const deskRoster = Object.entries(roster).filter(([, r]) => r.desk === desk);
+          if (deskRoster.length > 0) {
+            md += `\n## Roster Status\n`;
+            for (const [name, rec] of deskRoster) {
+              const icon = rec.status === 'star' ? 'STAR' :
+                           rec.status === 'solid' ? 'SOLID' :
+                           rec.status === 'watch' ? 'WATCH' :
+                           rec.status === 'probation' ? 'PROBATION' : 'BENCH';
+              md += `- ${name}: [${icon}] ${rec.rolling} — ${rec.note}\n`;
+            }
+          }
+          md += `\n## What This Means\n`;
+          md += `Use these grades to improve your output. If a reporter scored below B, check their recent errors and adjust. If the desk trend is declining, focus on fundamentals: canon accuracy, voice fidelity, engine data usage.\n`;
+          fs.writeFileSync(path.join(currentDir, 'previous_grades.md'), md);
+          console.log(`  previous_grades.md (generated)`);
+          deskFiles++;
+        }
+      } catch (e) {
+        console.log(`  previous_grades.md (skipped: ${e.message})`);
+      }
+    }
+
+    // 10. Copy latest exemplar if one exists
+    const exemplarsDir = path.join(ROOT, 'output', 'grade-examples');
+    if (fs.existsSync(exemplarsDir)) {
+      const exemplarFiles = fs.readdirSync(exemplarsDir)
+        .filter(f => f.startsWith(`${desk}_exemplar_c`) && f.endsWith('.md'))
+        .sort();
+      if (exemplarFiles.length > 0) {
+        const latest = exemplarFiles[exemplarFiles.length - 1];
+        const src = path.join(exemplarsDir, latest);
+        fs.copyFileSync(src, path.join(currentDir, 'exemplar.md'));
+        console.log(`  exemplar.md (from ${latest})`);
+        deskFiles++;
+      }
+    }
+
     console.log(`  Total: ${deskFiles} files`);
     totalFiles += deskFiles;
   }

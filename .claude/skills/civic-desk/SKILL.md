@@ -14,11 +14,18 @@ description: Write the civic affairs section for an edition using Carmen Delaine
    ```bash
    node scripts/buildDeskFolders.js {cycle}
    ```
-3. Launch the **civic-desk** agent:
+3. Launch the **civic-desk** agent with `model: "sonnet"` (complex desk — council votes, initiative logic, faction dynamics require reasoning):
    ```
    Prompt: |
      Write the civic section for Edition {XX}.
      Your workspace: output/desks/civic/
+
+     THINK BEFORE WRITING: Before drafting any article, reason through:
+     - What changed this cycle vs last? (read past output in archive/)
+     - Which storylines advanced and which stalled?
+     - What do the vote numbers actually mean? (count all 9 seats)
+     - Which citizens from the packet have stories worth telling?
+     - Read previous_grades.md and exemplar.md if they exist — learn from them.
 
      READ your briefing.md and packet FIRST. Write FROM the data — council votes,
      initiative statuses, neighborhood dynamics, and civic load all come from the

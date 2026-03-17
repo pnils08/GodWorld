@@ -88,6 +88,8 @@
 | `scripts/gradeHistory.js` | Phase 26 — Rolling averages (5-edition window), trends, roster recommendations (STAR/SOLID/WATCH/PROBATION/BENCH). Output: `output/grades/grade_history.json`. | On-Demand | Auto (code) | M, D |
 | `scripts/extractExemplars.js` | Phase 26 — Extract A-grade articles as desk workspace exemplars. Output: `output/grade-examples/{desk}_exemplar_c{XX}.md`. | On-Demand | Auto (code) | M, D |
 | `lib/pipelineLogger.js` | Append-only JSONL pipeline logging with correlation IDs. CLI viewer: `node lib/pipelineLogger.js summary <cycle>`. Output: `output/pipeline-log/pipeline_c{XX}.jsonl`. | On-Demand | Auto (code) | M, D |
+| `scripts/cleanCitizenMediaUsage.js` | Deduplicates Citizen_Media_Usage sheet, cleans dirty names, removes C79 backlog. --dry-run/--apply. | On-Demand | Manual (maintenance) | X |
+| `scripts/applyCitizenBios.js` | Adds CitizenBio column (AT) to Simulation_Ledger with stable narrative bios + EconomicProfileKey fixes. --dry-run/--apply. | On-Demand | Manual (maintenance) | X |
 | `output/run_manifest_c{XX}.json` | Run manifest — what exists, what's missing, what uploaded for a given cycle | On-Demand | `postRunFiling.js` | M |
 | `output/civic-voice-workspace/{office}/README.md` | Static workspace navigation for civic voice agents (7 offices) | On-Demand | Manual (when folder structure changes) | M |
 | `output/initiative-workspace/{init}/README.md` | Static workspace navigation for initiative agents (5 initiatives) | On-Demand | Manual (when folder structure changes) | M |

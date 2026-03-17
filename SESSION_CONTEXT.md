@@ -60,6 +60,8 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Exemplar Extractor | scripts/extractExemplars.js | v1.0 | A-grade articles as exemplars for desk workspaces. Output: output/grade-examples/{desk}_exemplar_c{XX}.md |
 | Pipeline Logger | lib/pipelineLogger.js | v1.0 | Append-only JSONL with correlation IDs. CLI: `node lib/pipelineLogger.js summary <cycle>` |
 | Initiative Workspace Builder | scripts/buildInitiativeWorkspaces.js | v1.0 | Per-initiative workspace folders: packets, briefings, prior decisions, reference docs. Zero LLM tokens. |
+| Media Usage Cleanup | scripts/cleanCitizenMediaUsage.js | v1.0 | Deduplicates, cleans dirty names, removes C79 backlog from Citizen_Media_Usage. --dry-run/--apply. |
+| Citizen Bio Writer | scripts/applyCitizenBios.js | v1.0 | Adds CitizenBio column (AT) + writes narrative bios + fixes EconomicProfileKey. --dry-run/--apply. |
 | Edition Validator | scripts/validateEdition.js | v2.0 | 11 checks: 8 static (names, votes, engine language) + 3 live sheet (citizens, initiatives, civic offices). --no-sheets for offline. |
 | Mara Audit Packet | scripts/buildMaraPacket.js | v1.0 | Clean edition + AUDIT_HISTORY.md for Mara's claude.ai review. No engine context. |
 | Post-Run Filing | scripts/postRunFiling.js | v1.0 | Verifies all pipeline outputs exist, names correct, uploads to Drive. --upload for auto-upload. Zero tokens. |
@@ -126,7 +128,7 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 
 **Desk agent architecture (S95):** Agents are autonomous — they read from their own workspace at `output/desks/{desk}/` instead of receiving data through the orchestrator. Each agent's SKILL.md (boot sequence only, ~30 lines) points to IDENTITY.md (reporter personas) and RULES.md (hard rules), both at `.claude/agents/{desk}-desk/`. The workspace is built by `scripts/buildDeskFolders.js` with zero LLM tokens. Pipeline: `buildDeskPackets.js` → `buildDeskFolders.js` → launch agents.
 
-**Agent model status (Mar 2026):** All 6 desk agents run `model: sonnet` → Sonnet 4.6. Agents have write access (`tools: Read, Glob, Grep, Write, Edit`) to update their memory after writing. Each agent's SKILL.md is ~30 lines (boot sequence), with identity and rules in separate files. `permissionMode: dontAsk` allows autonomous operation.
+**Agent model status (Mar 2026):** 80/20 model tiering — complex desks (civic, sports, chicago) run `model: sonnet`, routine desks (culture, business, letters) run `model: haiku`. Agents have write access (`tools: Read, Glob, Grep, Write, Edit`) to update their memory after writing. Each agent's SKILL.md is ~30 lines (boot sequence), with identity and rules in separate files. `permissionMode: dontAsk` allows autonomous operation. Complex desks include THINK BEFORE WRITING reasoning blocks.
 
 **Mobile access (mosh + tmux):** Mosh and tmux are installed on this server. To work from your phone (Termius on iPhone — enable the Mosh toggle on your saved host):
 ```
@@ -184,7 +186,7 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
-### Session 99 (2026-03-17) — Agent Grading System + Research + Infrastructure
+### Session 99 (2026-03-17) — Agent Grading System + Data Cleanup + Research + Infrastructure
 
 - **Phase 26: Agent Grading System (complete).** gradeEdition.js (per-desk/reporter grades from errata + Mara + edition text), gradeHistory.js (rolling averages, trends, roster recommendations STAR→BENCH), extractExemplars.js (A-grade articles as desk exemplars). Workspace builders updated: previous_grades.md + exemplar.md injected per desk/voice agent. Full Karpathy Loop closed.
 - **80/20 model tiering:** Sonnet for complex desks (civic, sports, chicago). Haiku for routine desks (culture, business, letters). Set via `model` parameter in desk SKILL.md files.
@@ -195,6 +197,10 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **SDK bump:** @anthropic-ai/sdk 0.72.1 → 0.79.0.
 - **Paulson title locked:** Sports desk memory corrected from "Bulls Owner" to "GM of Oakland A's and Chicago Bulls."
 - **Heartbeat timeout:** moltbook-heartbeat.js request timeout bumped 15s → 45s.
+- **Citizen_Media_Usage cleanup:** 1,221→500 rows. 288 C79 backlog rows removed (re-imports from C73-C75), 433 duplicates removed, 267 dirty names cleaned. Processing flags reset for re-processing. Script: `scripts/cleanCitizenMediaUsage.js`.
+- **CitizenBio column (AT) added to Simulation_Ledger:** Stable narrative identity anchors that survive LifeHistory compaction. 17 T2 citizens populated with 1-2 sentence bios. Script: `scripts/applyCitizenBios.js`.
+- **EconomicProfileKey fixes:** 5 civic officials corrected from "City Council Aide" to actual titles (Mayor, Chief of Staff, Deputy Mayor, Communications Director, City Council President).
+- **Rollout plan audit:** 6 items marked complete that were already done (Run Cycle 87, validateEdition roster check, sports briefing pipeline, education fixes, Citizen_Media_Usage, batch review fixes).
 - **S99 tech reading:** 6 sources archived (Claude Code 2.0 multi-agent, OpenAI skills repo, Karpathy Loop, agent skills patterns, local embeddings, Anthropic skills guide). Stack advancement scan (Anthropic, Together AI, Discord, GAS, Node.js, NPM). Deep reads: Anthropic multi-agent architecture, fleet architecture, Karpathy autoresearch, arXiv scaling paper, DigitalOcean Currents report.
 - **Moltbook:** Heartbeat restarted, posted question about AI identity/authenticity.
 

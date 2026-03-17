@@ -184,6 +184,12 @@ Google Sheets API export does NOT support revision-specific downloads (tested �
 - EducationLevel + Income: 100% populated
 - LifeHistory_Log: 0 empty names, 0 Quoted rows
 
+### Post-recovery fixes (S99):
+- **EconomicProfileKey corrections:** 5 civic officials fixed — Mayor, Chief of Staff, Deputy Mayor, Communications Director, Council President all corrected from "City Council Aide" to actual titles.
+- **CitizenBio column (AT/col 46) added:** Stable 1-2 sentence narrative identity anchors for 17 T2 citizens. Unlike LifeHistory (which compacts into trait tags), CitizenBio persists permanently. Script: `scripts/applyCitizenBios.js`.
+- **Citizen_Media_Usage cleaned:** 1,221→500 rows. 288 C79 backlog rows removed, 433 duplicates removed, 267 dirty CitizenName values cleaned (stripped ages/neighborhoods/occupations). Processing flags reset. Script: `scripts/cleanCitizenMediaUsage.js`.
+- **Simulation_Ledger now has 46 columns (A–AT).** Column AT = CitizenBio.
+
 ### Practice sheet (reference):
 **ID:** `1EX3lBhcqnqyqXhbcjoNLLbjA2sx7gsENEVhEZdOmTN4` — keep as a pre-recovery snapshot.
 

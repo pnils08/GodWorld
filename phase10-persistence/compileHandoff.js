@@ -84,7 +84,6 @@ function compileHandoff(cycleNumber) {
     sections.push(buildSectionWrapper_(2, 'FRONT PAGE RECOMMENDATION', buildSection02_FrontPage_, data));
     sections.push(buildSectionWrapper_(3, 'CIVIC STATUS', buildSection03_CivicStatus_, data));
     sections.push(buildSectionWrapper_(4, 'ACTIVE STORYLINES', buildSection04_Storylines_, data));
-    sections.push(buildSectionWrapper_(5, 'STORY ASSIGNMENTS', buildSection05_Assignments_, data));
     sections.push(buildSectionWrapper_(6, 'WORLD EVENTS', buildSection06_WorldEvents_, data));
     sections.push(buildSectionWrapper_(7, 'STORY SEEDS', buildSection07_StorySeeds_, data));
     sections.push(buildSectionWrapper_(8, 'ARC STATUS', buildSection08_ArcStatus_, data));
@@ -143,7 +142,6 @@ function loadHandoffData_(cache, cycle) {
     briefingText: '',
     packetText: '',
     storylines: [],
-    pressDrafts: [],
     worldEvents: [],
     storySeeds: [],
     civicOfficers: [],
@@ -163,7 +161,6 @@ function loadHandoffData_(cache, cycle) {
 
   data.packetText = loadCyclePacketText_(cache, cycle);
   data.storylines = loadActiveStorylines_(cache, cycle);
-  data.pressDrafts = loadPressDrafts_(cache, cycle);
   data.worldEvents = loadWorldEvents_(cache, cycle);
   data.storySeeds = loadStorySeeds_(cache, cycle);
   data.civicOfficers = loadCivicOfficers_(cache);
@@ -358,45 +355,6 @@ function loadActiveStorylines_(cache, cycle) {
   for (var na = 0; na < noArc.length; na++) results.push(noArc[na]);
 
   Logger.log('loadActiveStorylines_: ' + raw.length + ' raw → ' + results.length + ' deduplicated');
-  return results;
-}
-
-
-/**
- * Loads Press_Drafts for the target cycle. Deduplicates by headline.
- */
-function loadPressDrafts_(cache, cycle) {
-  var values = cache.getValues(SHEET_NAMES.PRESS_DRAFTS);
-  if (values.length < 2) return [];
-
-  var header = values[0];
-  var idx = createColIndex_(header);
-  var iCycle = idx('Cycle');
-  var iReporter = idx('Reporter');
-  var iType = idx('StoryType');
-  var iSignal = idx('SignalSource');
-  var iPrompt = idx('SummaryPrompt');
-  var iDraft = idx('DraftText');
-
-  var seen = {};
-  var results = [];
-  for (var r = 1; r < values.length; r++) {
-    var row = values[r];
-    if (Number(safeColRead_(row, iCycle, 0)) !== cycle) continue;
-
-    var headline = String(safeColRead_(row, iPrompt, '')).trim();
-    var key = headline.toLowerCase().substring(0, 60);
-    if (seen[key]) continue;  // skip duplicate headline
-    seen[key] = true;
-
-    results.push({
-      reporter: String(safeColRead_(row, iReporter, '')),
-      storyType: String(safeColRead_(row, iType, '')),
-      signalSource: String(safeColRead_(row, iSignal, '')),
-      summaryPrompt: headline,
-      draftText: String(safeColRead_(row, iDraft, '')).substring(0, 200)
-    });
-  }
   return results;
 }
 
@@ -1132,34 +1090,6 @@ function buildSection04_Storylines_(data) {
       var ds = groups.dormant[d];
       lines.push('- [' + ds.type + '] ' + ds.description +
         ' (since C' + ds.cycleAdded + ')');
-    }
-  }
-
-  return lines;
-}
-
-
-/**
- * Section 5: STORY ASSIGNMENTS
- * Source: Press_Drafts
- */
-function buildSection05_Assignments_(data) {
-  var lines = [];
-  var drafts = data.pressDrafts;
-
-  if (drafts.length === 0) {
-    return ['(No press drafts for this cycle)'];
-  }
-
-  for (var i = 0; i < drafts.length; i++) {
-    var d = drafts[i];
-    lines.push('- ' + d.reporter + ' | ' + d.storyType +
-      (d.signalSource ? ' | Signal: ' + d.signalSource : ''));
-    if (d.summaryPrompt) {
-      lines.push('  Prompt: ' + d.summaryPrompt);
-    }
-    if (d.draftText) {
-      lines.push('  Draft: ' + d.draftText + (d.draftText.length >= 200 ? '...' : ''));
     }
   }
 

@@ -49,7 +49,6 @@ var CONFIG = {
     // Continuity_Intake/Loop removed — pipeline eliminated
     'Media_Intake',
     'Health_Cause_Queue',
-    'Press_Drafts',
     'Dashboard',
     'Sports_Feed',
     'Cycle_Packet',

@@ -35,7 +35,6 @@ var SHEET_NAMES = {
   // === Media System ===
   MEDIA_BRIEFING: 'Media_Briefing',
   MEDIA_LEDGER: 'Media_Ledger',
-  PRESS_DRAFTS: 'Press_Drafts',
   CITIZEN_MEDIA_USAGE: 'Citizen_Media_Usage',
   // CONTINUITY_LOOP: removed — pipeline eliminated
   CULTURAL_LEDGER: 'Cultural_Ledger',

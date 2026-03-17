@@ -118,17 +118,6 @@ const SCHEMAS = {
       'WeatherMood','MediaIntensity','ActiveArcs'
     ]
   },
-  'Press_Drafts': {
-    file: 'pressDraftWriter.js',
-    version: 'v1.4',
-    writerCols: [
-      'Timestamp','Cycle','Reporter','StoryType','SignalSource',
-      'SummaryPrompt','DraftText','Status',
-      '','','','','','',  // I-N deprecated (empty strings)
-      'LinkedCitizen','CitizenArchetype','CitizenTone',
-      'CitizenNeighborhood','LinkedStoryline','StorylineType'
-    ]
-  },
   'Cycle_Packet': {
     file: 'buildCyclePacket.js',
     version: 'v3.7',

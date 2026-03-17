@@ -250,10 +250,8 @@ These exist in the codebase but are NOT in the engine call chain:
 | `phase07-evening-media/culturalLedger.js` | Not in engine |
 | `phase07-evening-media/citizenFameTracker.js` | Not in engine |
 | `phase07-evening-media/domainTracker.js` | Not in engine |
-| `phase07-evening-media/pressDraftWriter.js` | Not in engine |
 | `phase07-evening-media/updateMediaSpread.js` | Not in engine |
 | `phase07-evening-media/updateTrendTrajectory.js` | Not in engine |
-| `phase07-evening-media/mediaRoomStandAloneWriter.js` | Standalone |
 | `phase07-evening-media/parseMediaIntake.js` | Helper |
 | `phase07-evening-media/parseMediaRoomMarkdown.js` | Helper |
 

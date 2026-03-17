@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66 + S99
 **Status:** Active
-**Last Updated:** Session 99 (2026-03-17) — S99 builds: Phase 26 Agent Grading System, /grill-me, PostCompact hook, 80/20 model tiering, extended thinking, pipeline logging, SDK bump, Paulson title lock, disk naming cleanup, CitizenBio column, EconomicProfileKey fixes, Citizen_Media_Usage cleanup.
+**Last Updated:** Session 99 (2026-03-17) — S99 builds: Phase 26 Agent Grading System, /grill-me, PostCompact hook, 80/20 model tiering, extended thinking, pipeline logging, SDK bump, Paulson title lock, disk naming cleanup, CitizenBio column, EconomicProfileKey fixes, Citizen_Media_Usage cleanup, supplemental pipeline tightening.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -16,7 +16,7 @@ Items that should be addressed in the next session. Updated at session end.
 ### Open
 
 - **Produce Edition 88** — Run cycle 88, then produce E88 with autonomous agents + EIC editorial direction. Agents write, EIC directs (assigns angles, enforces structure, writes Editor's Desk last). See NEWSROOM_MEMORY.md S98 review for standing mandates.
-- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage.
+- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage. Pipeline tightened S99: v3.9 data, grading, thinking blocks, model tiers, errata, truesource, Mara guidance all wired into write-supplemental SKILL.md as conditional sources.
 - **Test `/effort` levels on edition run** — Native `/effort` command supports low/medium/high per task. Test: low for letters/business desk, high for civic/sports. Measure cost difference.
 - **Node.js security patch** — Security releases scheduled March 24, 2026. Update after they drop.
 
@@ -24,7 +24,7 @@ Items that should be addressed in the next session. Updated at session end.
 
 *55 items cleared since S83. Key completions:*
 
-- **S99:** Phase 26 Agent Grading System (grade→history→exemplar→workspace feedback loop), 80/20 model tiering (Sonnet for complex, Haiku for routine), extended thinking prompts, pipeline logging, PostCompact hook, /grill-me skill, SDK bump 0.72→0.79, Paulson title lock, Citizen_Media_Usage cleanup (1,221→500 rows), CitizenBio column (AT) added with 17 T2 bios, EconomicProfileKey fixes (5 civic officials), disk naming cleanup (slugs, podcasts, rhea, mara, retention), heartbeat timeout fix.
+- **S99:** Phase 26 Agent Grading System (grade→history→exemplar→workspace feedback loop), 80/20 model tiering (Sonnet for complex, Haiku for routine), extended thinking prompts, pipeline logging, PostCompact hook, /grill-me skill, SDK bump 0.72→0.79, Paulson title lock, Citizen_Media_Usage cleanup (1,221→500 rows), CitizenBio column (AT) added with 17 T2 bios, EconomicProfileKey fixes (5 civic officials), disk naming cleanup (slugs, podcasts, rhea, mara, retention), heartbeat timeout fix, supplemental pipeline tightened (6 conditional data sources, THINK blocks, model tiers, name verification, expanded validation, optional Mara audit).
 - **S97-98:** Engine-to-newsroom pipeline fix (v3.9, ~30%→~90% data coverage), desk prompt rewrite, phase data audit, v3.9 deployed to GAS, Press_Drafts killed (-1,688 lines), voice domain enrichment v2.0, editionIntake v2.0, storyline engines wired, sports briefing pipeline fixed, validateEdition roster check.
 - **S95-96:** Desk agent autonomy architecture (3 workspace builders, zero LLM tokens), E87 published (grade B), supplemental strategy + housing/food scene supplementals.
 - **S93-94:** Ledger corruption repair (all 6 steps, 675 citizens clean), MEDIA clock mode (16 journalists), citizen pipeline overhaul, sports RoleType expansion.

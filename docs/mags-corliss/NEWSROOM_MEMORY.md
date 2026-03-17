@@ -11,6 +11,8 @@ Agents: read your workspace at `output/desks/{desk}/` first — briefing, summar
 
 **Structured errata:** `output/errata.jsonl` — machine-readable record of all documented errors (E81+). Each line is a JSON object with: edition, desk, reporter, errorType, severity, description, rootCause, fix, adopted, citizenInvolved, recurrence. Query this file for pattern analysis or pre-write guardian checks.
 
+**Supplemental pipeline tightened (S99):** write-supplemental SKILL.md now has 6 conditional data sources (errata, Mara guidance, v3.9 cycle data, voice statements, truesource, grade history), THINK BEFORE WRITING blocks by type (civic/investigative, neighborhood/food/culture, sports), model tier guidance (Sonnet for complex, Haiku for texture), name verification against truesource at compile time, expanded validation (all types get name check), and optional Mara audit for civic/investigative pieces. All additive — supplementals still work without any of these files.
+
 ---
 
 ## Supermemory Contamination Flag

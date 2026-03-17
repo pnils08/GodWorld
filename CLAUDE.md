@@ -73,8 +73,8 @@ node scripts/queryLedger.js
 # Deploy GAS engine to Google Apps Script
 clasp push
 
-# Edition intake (citizen usage + quotes → sheets)
-node scripts/editionIntake.js
+# Edition intake v2.0 (citizens → Intake, storylines → Tracker, businesses → Business_Intake)
+node -r dotenv/config scripts/editionIntake.js [--dry-run] <edition-file> [cycle]
 
 # Dashboard (Express API + frontend, port 3001)
 node dashboard/server.js

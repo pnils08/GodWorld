@@ -33,11 +33,10 @@ Pull these sheets via service account and show a checklist summary.
 - **Chicago_Citizens** — Pool size
 
 ### Media Pipeline (from last edition)
-- **Storyline_Intake** — Processed? (check for unprocessed rows)
-- **Citizen_Usage_Intake** — Processed?
-- **Media_Intake** — Processed?
-- **Press_Drafts** — Latest cycle number in drafts?
-- **Citizen_Media_Usage** — All routed?
+- **Intake** — New citizens staged from last edition? (editionIntake v2.0 writes here directly)
+- **Advancement_Intake1** — Existing citizen updates pending?
+- **Storyline_Tracker** — Active storyline count, any new from last edition?
+- **Business_Intake** — Any staged businesses to promote?
 
 ### Civic State
 - **Initiative_Tracker** — Any pending-vote initiatives this cycle?

@@ -69,7 +69,7 @@ Individual desk skills (/civic-desk, /sports-desk, etc.)
     Apply corrections, save to editions/
     ↓
 13. ENGINE INTAKE
-    node scripts/editionIntake.js + node scripts/processIntake.js
+    node -r dotenv/config scripts/editionIntake.js <edition-file> [cycle]
 ```
 
 ---

@@ -275,7 +275,7 @@ ARTICLE TABLE — ENGINE INTAKE FORMAT
 ############################################################
 STORYLINES UPDATED — ENGINE INTAKE FORMAT
 ############################################################
-FORMAT: This feeds Storyline_Intake. Use pipe-separated fields.
+FORMAT: This feeds Storyline_Tracker via editionIntake v2.0. Use pipe-separated or bracket format.
 Only list NEW and RESOLVED. Do NOT re-list active storylines.
 
 NEW THIS CYCLE:
@@ -517,7 +517,7 @@ Dear Editor,
 11. **Letters** — 2-4 citizen letters in first-person voice. At least 1 from a returning citizen.
 12. **Accountability** — Conditional. Jax Caldera only when Mags identifies a stink signal. One piece max per edition.
 13. **Article Table** — Engine intake format. All articles listed. ArticleText is summary only (1-2 sentences).
-14. **Storylines Updated** — NEW and RESOLVED only. Pipe-separated fields matching Storyline_Intake columns. Do NOT re-list active storylines.
+14. **Storylines Updated** — NEW and RESOLVED only. Pipe-separated or bracket format. Feeds Storyline_Tracker directly via editionIntake v2.0. Do NOT re-list active storylines.
 15. **Citizen Usage Log** — All citizens used, grouped by category. Exact formats required — feeds intake parser. No parentheses inside fields. JOURNALISTS section is byline tracking only — does not feed citizen intake or advancement.
 16. **Continuity Notes** — Sports records, direct quotes, new canon figures ONLY. Do not repeat engine-tracked data.
 17. **Coming Next Cycle** — 3-5 forward-looking teasers compiled by Mags. What the paper is watching next.

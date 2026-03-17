@@ -67,7 +67,7 @@
  *   Story_Seed_Deck, Story_Hook_Deck, WorldEvents_V3_Ledger, Event_Arc_Ledger,
  *   Civic_Office_Ledger, Initiative_Tracker, Simulation_Ledger, Generic_Citizens,
  *   Chicago_Citizens, Cultural_Ledger, Oakland_Sports_Feed, Chicago_Sports_Feed,
- *   Storyline_Tracker, Cycle_Packet, Press_Drafts, LifeHistory_Log,
+ *   Storyline_Tracker, Cycle_Packet, LifeHistory_Log,
  *   Household_Ledger, Relationship_Bonds, World_Population, Media_Ledger
  *
  * Reads locally:
@@ -1895,7 +1895,6 @@ async function main() {
     safeGet('Chicago_Sports_Feed'),
     safeGet('Storyline_Tracker'),
     safeGet('Cycle_Packet'),
-    safeGet('Press_Drafts'),
     safeGet('LifeHistory_Log'),
     safeGet('Household_Ledger'),
     safeGet('Relationship_Bonds'),

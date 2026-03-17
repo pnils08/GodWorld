@@ -19,7 +19,7 @@ GodWorld is a **living city simulation** that generates emergent narratives. The
 - Reads simulation output, writes news content (Bay Tribune Pulse, Council Watch, etc.)
 - **Desk Packet Pipeline:** `docs/media/DESK_PACKET_PIPELINE.md` — per-desk JSON packets from 16 sheets, replaces monolithic handoff
 - **Edition 79 produced via desk packet pipeline** — 6 desk agents (Civic, Sports, Culture, Business, Chicago, Letters) with Mara Vance audit corrections. See `editions/cycle_pulse_edition_79_v2.txt`
-- **Node.js intake pipeline:** `scripts/editionIntake.js` (parse edition → intake sheets) + `scripts/processIntake.js` (intake → final ledgers + citizen routing)
+- **Node.js intake pipeline:** `scripts/editionIntake.js` v2.0 (parse edition → direct writes to Intake, Advancement_Intake1, Storyline_Tracker, Business_Intake)
 - **Production workflow validated:** buildDeskPackets → parallel desk agents → Mags compile → Rhea verify → Mara audit → engine intake
 - **Remaining pain point:** No persistent memory. Returns pipeline works but is manual.
 

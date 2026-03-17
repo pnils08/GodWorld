@@ -312,20 +312,22 @@ Every supplemental creates canon. Intake sends it to the engine ledgers.
 # 1. Dry run — verify what gets parsed
 node -r dotenv/config scripts/editionIntake.js --dry-run editions/supplemental_{topic_slug}_c{XX}.txt {cycle}
 
-# 2. Live write to intake sheets
+# 2. Live write to final sheets (no staging step)
 node -r dotenv/config scripts/editionIntake.js editions/supplemental_{topic_slug}_c{XX}.txt {cycle}
-
-# 3. Promote to final ledgers
-node -r dotenv/config scripts/processIntake.js {cycle}
 ```
 
 **Note:** `editionIntake.js` doesn't load dotenv — always use `node -r dotenv/config` prefix.
 
-The intake writes: articles → Press_Drafts, storylines → Storyline_Tracker, citizens → Citizen_Media_Usage (new citizens routed to Intake sheet, existing citizens get Advancement entries).
+Intake v2.0 writes directly: new citizens → Intake sheet (engine picks up next cycle), existing citizens → Advancement_Intake1, storylines → Storyline_Tracker, businesses → Business_Intake.
 
-If new businesses were established, check if they need BIZ-IDs:
+If new businesses were established, promote them:
 ```bash
 node -r dotenv/config scripts/processBusinessIntake.js --dry-run
+```
+
+Then run enrichment to write edition quotes/appearances to LifeHistory:
+```bash
+node -r dotenv/config scripts/enrichCitizenProfiles.js --edition {cycle}
 ```
 
 ---

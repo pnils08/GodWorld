@@ -246,6 +246,7 @@ function runWorldCycle() {
 
   safePhaseCall_(ctx, 'Phase6-ArcLifecycle', function() { processArcLifecycle_(ctx); });
   safePhaseCall_(ctx, 'Phase6-StorylineStatus', function() { updateStorylineStatus_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Textures', function() { textureTriggerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase6-TransitSignals', function() {
     if (typeof getTransitStorySignals_ === 'function') {
@@ -289,6 +290,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaFeedback', function() { runMediaFeedbackEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-StorylineWeaving', function() { weaveStorylines_(ctx); });
 
   safePhaseCall_(ctx, 'Phase7-SeasonalSeeds', function() { applySeasonalStorySeeds_(ctx); });
   safePhaseCall_(ctx, 'Phase7-ChaosWeights', function() { applyChaosCategoryWeights_(ctx); });
@@ -1487,6 +1489,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase6-ShockMonitor', function() { applyShockMonitor_(ctx); });
   safePhaseCall_(ctx, 'Phase6-ArcLifecycle', function() { processArcLifecycle_(ctx); });
   safePhaseCall_(ctx, 'Phase6-StorylineStatus', function() { updateStorylineStatus_(ctx); });
+  safePhaseCall_(ctx, 'Phase6-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Textures', function() { textureTriggerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase6-TransitSignals', function() {
     if (typeof getTransitStorySignals_ === 'function') {

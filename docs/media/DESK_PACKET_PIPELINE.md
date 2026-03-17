@@ -48,7 +48,7 @@
     Drive upload, Supermemory ingest, photos, PDF, Discord refresh.
     ↓
 11. ENGINE INTAKE
-    node scripts/editionIntake.js + node scripts/processIntake.js
+    node -r dotenv/config scripts/editionIntake.js <edition-file> [cycle]
 ```
 
 ---
@@ -378,14 +378,15 @@ Mara reads the edition clean — no engine context, no Rhea report, no validatio
 ### Scripts
 
 ```bash
-# Step 1: Parse edition text → 4 intake sheets
-node scripts/editionIntake.js [cycle]          # --dry-run to preview
-# Writes: Media_Intake, Storyline_Intake, Citizen_Usage_Intake, LifeHistory_Log (quotes)
+# v2.0: Single script, direct writes to final sheets
+node -r dotenv/config scripts/editionIntake.js --dry-run <edition-file> [cycle]
+node -r dotenv/config scripts/editionIntake.js <edition-file> [cycle]
+# Writes: new citizens → Intake (16 cols), existing → Advancement_Intake1 (10 cols),
+#         storylines → Storyline_Tracker, businesses → Business_Intake
 
-# Step 2: Process intake sheets → final ledgers + citizen routing
-node scripts/processIntake.js [cycle]          # --cleanup to fix broken rows
-# Writes: Press_Drafts (14 cols), Storyline_Tracker (14 cols),
-#         Citizen_Media_Usage (12 cols) → routes to Intake / Advancement_Intake1
+# Then promote businesses and enrich citizen profiles:
+node -r dotenv/config scripts/processBusinessIntake.js
+node -r dotenv/config scripts/enrichCitizenProfiles.js --edition [cycle]
 ```
 
 ### Calendar Context (v1.1)

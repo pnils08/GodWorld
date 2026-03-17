@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 98 (2026-03-16) — Engine-to-newsroom pipeline fix: buildCyclePacket.js v3.9 + buildDeskPackets.js v2.3. Serialization coverage ~30%→~90%. All desk skill prompts updated to instruct agents to read and write from packet data.
+**Last Updated:** Session 98 (2026-03-16) — Intake pipeline v2.0: editionIntake.js rewritten (direct writes, no staging), processIntake.js deleted. storylineHealthEngine + storylineWeavingEngine wired into engine. buildDeskPackets.js Press_Drafts fetch removed.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -54,11 +54,12 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - ✅ ~~Phase data audit~~ — PHASE_DATA_AUDIT.md created (S97) and updated with v3.9 status (S98). Maps what each phase produces vs what reaches the newsroom.
 - **Deploy v3.9 to GAS** — `clasp push` needed for engine-side buildCyclePacket.js changes to take effect on next cycle run.
 - **Rewrite Edition 87** — Cycle 87 ran but edition was retracted. v3.9 pipeline ready — first real test of engine data reaching desk agents.
-- **Fix editionIntake.js** — Writes garbage: full demographic strings in CitizenName, misaligned columns, no POPID resolution, no new citizen routing. 852 junk rows for one edition. Pipeline is non-functional.
+- ✅ ~~Fix editionIntake.js~~ — Rewritten to v2.0. Direct writes to final sheets (Intake, Advancement_Intake1, Storyline_Tracker, Business_Intake). processIntake.js deleted. Dry-run tested against E87: 4 new citizens, 11 existing, 5 storylines, 0 garbage rows. S98.
 - **Fix validateEdition.js** — Doesn't check player first names against base_context.json roster. Add roster name verification.
 - **Lock Paulson title as GM** — In all reference files, briefing templates, and agent prompts. General Manager of Oakland A's and Chicago Bulls.
 - **Fix sports briefing pipeline** — Sports feed summaries fed wrong first names. Briefings must cross-reference base_context.json roster data directly.
-- **Clean Citizen_Media_Usage historical junk** — C79 has 731 garbage rows with same broken format. Earlier cycles may also be affected.
+- ✅ ~~Storyline engine wiring~~ — storylineHealthEngine (Phase 6) and storylineWeavingEngine (Phase 7) activated in godWorldEngine2.js. Generates STALE_STORYLINE, STORYLINE_FIZZLED, CROSS_STORYLINE hooks. S98.
+- **Clean Citizen_Media_Usage historical junk** — C79 has 731 garbage rows with same broken format. Earlier cycles may also be affected. v2.0 intake no longer writes to this sheet.
 
 ---
 

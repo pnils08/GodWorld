@@ -68,9 +68,8 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Generic Citizens Audit | scripts/auditGenericCitizens.js | v1.0 | Read-only emergence audit, SL cross-reference |
 | Celebrity Integration | scripts/integrateCelebrities.js | v1.0 | Cultural_Ledger top celebrities → SL, UniverseLinks backfill |
 | Live Ledger Query | scripts/queryLedger.js | v1.0 | 6 query types (citizen, initiative, council, neighborhood, articles, verify), searches Sheets + 674 published files |
-| Edition Intake | scripts/editionIntake.js | v1.4 | POPID resolution on Citizen_Usage_Intake, auto-detects cycle, business mentions |
+| Edition Intake | scripts/editionIntake.js | v2.0 | Direct writes: new citizens → Intake, existing → Advancement_Intake1, storylines → Storyline_Tracker, businesses → Business_Intake. --dry-run support. processIntake.js eliminated. |
 | Business Intake | scripts/processBusinessIntake.js | v1.0 | Staged→promoted pipeline, BIZ-ID assignment, duplicate detection |
-| Process Intake | scripts/processIntake.js | v1.2 | Auto-detects cycle from Cycle_Packet |
 | Bond Persistence | bondPersistence.js | v2.4 | Wipe guard, case-insensitive ledger check, normalized ID lookups |
 | Bond Seeder | seedRelationBondsv1.js | v1.3 | First/Last column lookup, POPID normalization |
 | **Household Formation** | householdFormationEngine.js | v1.1 | Young adults form households, rent burden, dissolution, ctx.rng, year 2041 |

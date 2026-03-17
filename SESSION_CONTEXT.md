@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-16 | Engine: v3.1 | Cycle: 87 | Session: 96
+Last Updated: 2026-03-17 | Engine: v3.1 | Cycle: 87 | Session: 98
 
 ---
 
@@ -54,7 +54,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Initiative Packet Builder | scripts/buildInitiativePackets.js | v1.0 | Per-initiative JSON packets from 7 Sheets tabs + Mara directive, 5 packets + manifest |
 | Civic Voice Packets | scripts/buildCivicVoicePackets.js | v1.1 | 7 office/faction voice packets + initiative decisions injection |
 | Desk Folder Builder | scripts/buildDeskFolders.js | v1.0 | Per-desk workspace folders: briefings, errata, voice statements, archive context. Zero LLM tokens. |
-| Voice Workspace Builder | scripts/buildVoiceWorkspaces.js | v1.0 | Per-voice-agent workspace folders: briefings, base context, prior statements, initiative packets. Zero LLM tokens. |
+| Voice Workspace Builder | scripts/buildVoiceWorkspaces.js | v2.0 | Per-voice-agent workspace folders + domain briefings. Routes v3.9 engine data by role: crime→chief, displacement→OPP, fiscal→CRC, etc. Zero LLM tokens. |
 | Initiative Workspace Builder | scripts/buildInitiativeWorkspaces.js | v1.0 | Per-initiative workspace folders: packets, briefings, prior decisions, reference docs. Zero LLM tokens. |
 | Edition Validator | scripts/validateEdition.js | v2.0 | 11 checks: 8 static (names, votes, engine language) + 3 live sheet (citizens, initiatives, civic offices). --no-sheets for offline. |
 | Mara Audit Packet | scripts/buildMaraPacket.js | v1.0 | Clean edition + AUDIT_HISTORY.md for Mara's claude.ai review. No engine context. |

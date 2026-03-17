@@ -133,7 +133,7 @@ Each desk agent has: IDENTITY.md (persona), RULES.md (output format + hard rules
 | `civic-office-baylight-authority` | Director Keisha Ramos | Haiku | `output/civic-voice/baylight_authority_c{XX}.json` |
 | `civic-office-district-attorney` | DA Clarissa Dane | Haiku | `output/civic-voice/district_attorney_c{XX}.json` |
 
-Each voice agent reads workspace at `output/civic-voice-workspace/{office}/current/`. Produces JSON statements that desk agents quote. Not journalists — source material.
+Each voice agent reads workspace at `output/civic-voice-workspace/{office}/current/`. Workspace includes `domain_briefing.md` (v2.0) — v3.9 engine data routed by role (crime→chief, displacement→OPP, fiscal→CRC, all→independents). Produces JSON statements that desk agents quote. Not journalists — source material.
 
 ### Initiative Agents (5) — Advance civic projects
 

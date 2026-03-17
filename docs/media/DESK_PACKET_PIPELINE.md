@@ -2,7 +2,7 @@
 
 **Purpose:** The definitive process for generating The Cycle Pulse using per-desk JSON packets, autonomous desk workspaces, and parallel desk agents.
 
-**Key change (v2.0, S95-96):** All 21 agents are autonomous. Each reads from its own workspace folder instead of receiving data through the orchestrator. Three workspace builders (`buildDeskFolders.js`, `buildVoiceWorkspaces.js`, `buildInitiativeWorkspaces.js`) populate workspaces with zero LLM tokens. Orchestrator context before agent launch dropped from ~180K to ~6K tokens. Target: zero compactions during edition production.
+**Key change (v2.0, S95-96):** All 21 agents are autonomous. Each reads from its own workspace folder instead of receiving data through the orchestrator. Three workspace builders (`buildDeskFolders.js`, `buildVoiceWorkspaces.js` v2.0, `buildInitiativeWorkspaces.js`) populate workspaces with zero LLM tokens. Voice agents now receive domain-specific engine data (crime→chief, displacement→OPP, fiscal→CRC) via `domain_briefing.md`. Orchestrator context before agent launch dropped from ~180K to ~6K tokens.
 
 ---
 

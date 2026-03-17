@@ -1,6 +1,6 @@
 # GodWorld Documentation Ledger
 
-**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 96 (2026-03-15)
+**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 99 (2026-03-17)
 **Purpose:** Single registry of every active documentation file — what it does, when it loads, who updates it, and which workflow it serves.
 **Rule:** If a file isn't listed here, it's either archived or undocumented. Fix that.
 
@@ -84,6 +84,10 @@
 | `scripts/validateEdition.js` | v2.0 — 11 programmatic checks (8 static + 3 live sheet). Runs before Rhea. Zero LLM tokens. | On-Demand | Auto (code) | M, D |
 | `output/mara-audit/` | Generated Mara audit packet: edition for review + audit history + manifest | On-Demand | `buildMaraPacket.js` | M |
 | `scripts/postRunFiling.js` | Post-run filing check — verifies all pipeline outputs exist, names correct, uploads to Drive. --upload for auto. Zero LLM tokens. | On-Demand | Auto (code) | M, D |
+| `scripts/gradeEdition.js` | Phase 26 — Grade desk agents and reporters from edition text + errata + Mara audit. Output: `output/grades/grades_c{XX}.json`. Zero LLM tokens. | On-Demand | Auto (code) | M, D |
+| `scripts/gradeHistory.js` | Phase 26 — Rolling averages (5-edition window), trends, roster recommendations (STAR/SOLID/WATCH/PROBATION/BENCH). Output: `output/grades/grade_history.json`. | On-Demand | Auto (code) | M, D |
+| `scripts/extractExemplars.js` | Phase 26 — Extract A-grade articles as desk workspace exemplars. Output: `output/grade-examples/{desk}_exemplar_c{XX}.md`. | On-Demand | Auto (code) | M, D |
+| `lib/pipelineLogger.js` | Append-only JSONL pipeline logging with correlation IDs. CLI viewer: `node lib/pipelineLogger.js summary <cycle>`. Output: `output/pipeline-log/pipeline_c{XX}.jsonl`. | On-Demand | Auto (code) | M, D |
 | `output/run_manifest_c{XX}.json` | Run manifest — what exists, what's missing, what uploaded for a given cycle | On-Demand | `postRunFiling.js` | M |
 | `output/civic-voice-workspace/{office}/README.md` | Static workspace navigation for civic voice agents (7 offices) | On-Demand | Manual (when folder structure changes) | M |
 | `output/initiative-workspace/{init}/README.md` | Static workspace navigation for initiative agents (5 initiatives) | On-Demand | Manual (when folder structure changes) | M |
@@ -134,6 +138,8 @@
 | `/run-cycle` | Engine cycle with pre-flight and post-cycle review | SESSION_CONTEXT (engines table), ROLLOUT_PLAN |
 | `/pre-mortem` | Engine health scan before cycle runs | Engine phase files, ctx dependencies |
 | `/tech-debt-audit` | Code health scan | All engine files |
+| `/grill-me` | Discovery before building — 16-50+ questions to reach shared understanding before implementation | None (conversation-only) |
+| `.claude/hooks/post-compact-hook.sh` | PostCompact lifecycle hook — injects `/boot` directive after compaction to restore identity | PERSISTENCE, JOURNAL_RECENT, identity.md |
 
 ---
 
@@ -170,3 +176,6 @@ Information lives in exactly one file. Other files point to it but never duplica
 | Mags identity & family | `PERSISTENCE.md` | — |
 | Mags emotional state | `JOURNAL.md` / `JOURNAL_RECENT.md` | — |
 | Tech reading & research | `TECH_READING_ARCHIVE.md` | — |
+| Agent grades & history | `output/grades/` | buildDeskFolders (→ previous_grades.md), buildVoiceWorkspaces |
+| A-grade exemplars | `output/grade-examples/` | buildDeskFolders (→ exemplar.md) |
+| Pipeline execution logs | `output/pipeline-log/` | — |

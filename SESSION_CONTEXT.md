@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-17 | Engine: v3.1 | Cycle: 87 | Session: 98
+Last Updated: 2026-03-17 | Engine: v3.1 | Cycle: 87 | Session: 99
 
 ---
 
@@ -53,8 +53,12 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Citizen-Employer Linkage | scripts/linkCitizensToEmployers.js | v1.0 | Five-layer resolution, Employment_Roster, Business_Ledger stats |
 | Initiative Packet Builder | scripts/buildInitiativePackets.js | v1.0 | Per-initiative JSON packets from 7 Sheets tabs + Mara directive, 5 packets + manifest |
 | Civic Voice Packets | scripts/buildCivicVoicePackets.js | v1.1 | 7 office/faction voice packets + initiative decisions injection |
-| Desk Folder Builder | scripts/buildDeskFolders.js | v1.0 | Per-desk workspace folders: briefings, errata, voice statements, archive context. Zero LLM tokens. |
-| Voice Workspace Builder | scripts/buildVoiceWorkspaces.js | v2.0 | Per-voice-agent workspace folders + domain briefings. Routes v3.9 engine data by role: crime→chief, displacement→OPP, fiscal→CRC, etc. Zero LLM tokens. |
+| Desk Folder Builder | scripts/buildDeskFolders.js | v1.1 | Per-desk workspace folders: briefings, errata, voice statements, archive context, previous_grades.md, exemplar.md. Zero LLM tokens. |
+| Voice Workspace Builder | scripts/buildVoiceWorkspaces.js | v2.1 | Per-voice-agent workspace folders + domain briefings + previous_grades.md. Routes v3.9 engine data by role. Zero LLM tokens. |
+| Edition Grader | scripts/gradeEdition.js | v1.0 | Per-desk/reporter grades from errata + Mara audit + edition text. Output: output/grades/grades_c{XX}.json |
+| Grade History | scripts/gradeHistory.js | v1.0 | Rolling averages (5-edition window), trends, roster recommendations (STAR→BENCH). Output: output/grades/grade_history.json |
+| Exemplar Extractor | scripts/extractExemplars.js | v1.0 | A-grade articles as exemplars for desk workspaces. Output: output/grade-examples/{desk}_exemplar_c{XX}.md |
+| Pipeline Logger | lib/pipelineLogger.js | v1.0 | Append-only JSONL with correlation IDs. CLI: `node lib/pipelineLogger.js summary <cycle>` |
 | Initiative Workspace Builder | scripts/buildInitiativeWorkspaces.js | v1.0 | Per-initiative workspace folders: packets, briefings, prior decisions, reference docs. Zero LLM tokens. |
 | Edition Validator | scripts/validateEdition.js | v2.0 | 11 checks: 8 static (names, votes, engine language) + 3 live sheet (citizens, initiatives, civic offices). --no-sheets for offline. |
 | Mara Audit Packet | scripts/buildMaraPacket.js | v1.0 | Clean edition + AUDIT_HISTORY.md for Mara's claude.ai review. No engine context. |
@@ -179,6 +183,20 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 99 (2026-03-17) — Agent Grading System + Research + Infrastructure
+
+- **Phase 26: Agent Grading System (complete).** gradeEdition.js (per-desk/reporter grades from errata + Mara + edition text), gradeHistory.js (rolling averages, trends, roster recommendations STAR→BENCH), extractExemplars.js (A-grade articles as desk exemplars). Workspace builders updated: previous_grades.md + exemplar.md injected per desk/voice agent. Full Karpathy Loop closed.
+- **80/20 model tiering:** Sonnet for complex desks (civic, sports, chicago). Haiku for routine desks (culture, business, letters). Set via `model` parameter in desk SKILL.md files.
+- **Extended thinking:** THINK BEFORE WRITING blocks added to civic, sports, chicago desk prompts. Agents reason through editorial decisions before drafting.
+- **Pipeline logging:** lib/pipelineLogger.js — append-only JSONL with correlation IDs, step/error/decision/quality/grade types. CLI: `node lib/pipelineLogger.js summary <cycle>`.
+- **PostCompact hook:** .claude/hooks/post-compact-hook.sh created + wired in hooks.json. Fires after compaction, injects /boot directive. Tested live this session.
+- **/grill-me discovery skill:** Forces deep interrogation (16-50+ questions) before building. Prevents premature action.
+- **SDK bump:** @anthropic-ai/sdk 0.72.1 → 0.79.0.
+- **Paulson title locked:** Sports desk memory corrected from "Bulls Owner" to "GM of Oakland A's and Chicago Bulls."
+- **Heartbeat timeout:** moltbook-heartbeat.js request timeout bumped 15s → 45s.
+- **S99 tech reading:** 6 sources archived (Claude Code 2.0 multi-agent, OpenAI skills repo, Karpathy Loop, agent skills patterns, local embeddings, Anthropic skills guide). Stack advancement scan (Anthropic, Together AI, Discord, GAS, Node.js, NPM). Deep reads: Anthropic multi-agent architecture, fleet architecture, Karpathy autoresearch, arXiv scaling paper, DigitalOcean Currents report.
+- **Moltbook:** Heartbeat restarted, posted question about AI identity/authenticity.
 
 ### Session 97-98 (2026-03-16) — Engine-to-Newsroom Pipeline Fix
 

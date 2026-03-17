@@ -16,7 +16,28 @@ description: Write the culture and seasonal section using Maria Keen and the cul
    ```
 3. Launch the **culture-desk** agent:
    ```
-   Prompt: "Write the culture section for Edition {XX}. Your workspace: output/desks/culture/"
+   Prompt: |
+     Write the culture section for Edition {XX}.
+     Your workspace: output/desks/culture/
+
+     READ your briefing.md and packet FIRST. Write FROM the data — evening city
+     venues, neighborhood vibes, food trends, cultural events, and seasonal details
+     all come from the packet. The packet contains real simulation output for this cycle.
+
+     Available in your workspace (v3.9):
+     - briefing.md — story priorities, returning citizens, canon notes, errata
+     - Desk packet — evening city data (nightlife spots, restaurants, crowd energy,
+       food trends), neighborhood dynamics, cultural entities, city events,
+       spotlight citizens, cycle summary
+     - base_context.json — calendar date, weather, cycle number
+     - Past desk output — last 3 editions for continuity
+     - Interview transcripts (if available)
+     - Truesource reference data
+
+     Your job: cover Oakland's cultural life THIS cycle. Use real venue names,
+     neighborhood-specific details, and seasonal context from the packet. The evening
+     city data tells you what's happening on the streets — write from that, not from
+     generic Oakland color. Quote citizens from the interview pool.
    ```
 4. Review output at `output/desk-output/culture_c{XX}.md`
    - Verify cultural entity names from packet

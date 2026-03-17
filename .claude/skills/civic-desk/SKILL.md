@@ -16,7 +16,28 @@ description: Write the civic affairs section for an edition using Carmen Delaine
    ```
 3. Launch the **civic-desk** agent:
    ```
-   Prompt: "Write the civic section for Edition {XX}. Your workspace: output/desks/civic/"
+   Prompt: |
+     Write the civic section for Edition {XX}.
+     Your workspace: output/desks/civic/
+
+     READ your briefing.md and packet FIRST. Write FROM the data — council votes,
+     initiative statuses, neighborhood dynamics, and civic load all come from the
+     packet. The packet contains real simulation output for this cycle.
+
+     Available in your workspace (v3.9):
+     - briefing.md — story priorities, returning citizens, canon notes, errata
+     - Desk packet — civic data, neighborhood dynamics, shock context, civic load,
+       initiative updates, demographic shifts, migration patterns
+     - Voice statements — Mayor decisions, faction reactions (in civic-voice/ files)
+     - base_context.json — calendar date, weather, cycle number
+     - Past desk output — last 3 editions for continuity
+     - Interview transcripts (if available)
+     - Truesource reference data
+
+     Your job: cover what happened in Oakland civic life THIS cycle. Use real council
+     votes, named officials, actual initiative statuses from the packet. Neighborhood
+     dynamics and shock context give you local angles beyond City Hall. Quote citizens
+     from the interview pool. Do not default to generic policy summaries.
    ```
 4. Review output at `output/desk-output/civic_c{XX}.md`
    - Verify vote math adds up (9 seats)

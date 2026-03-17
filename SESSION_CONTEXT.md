@@ -48,7 +48,8 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points, dark theme |
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v2.2 | SL-sourced candidates (no more Generic_Citizens split-brain), ClockMode filter, fixed neighborhoodCitizenIndex |
+| Cycle Packet Builder | phase10-persistence/buildCyclePacket.js | v3.9 | Serializes ~90% of engine output. 22 sections including neighborhood dynamics, story hooks, crime, transit, evening city, migration, shock context |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v2.3 | v3.9 evening context: parses all 22 Cycle_Packet sections. SL-sourced candidates, ClockMode filter |
 | Citizen-Employer Linkage | scripts/linkCitizensToEmployers.js | v1.0 | Five-layer resolution, Employment_Roster, Business_Ledger stats |
 | Initiative Packet Builder | scripts/buildInitiativePackets.js | v1.0 | Per-initiative JSON packets from 7 Sheets tabs + Mara directive, 5 packets + manifest |
 | Civic Voice Packets | scripts/buildCivicVoicePackets.js | v1.1 | 7 office/faction voice packets + initiative decisions injection |
@@ -179,6 +180,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 97-98 (2026-03-16) — Engine-to-Newsroom Pipeline Fix
+
+- **Root cause identified:** ~70% of engine output (ctx.summary fields) was never serialized to Cycle_Packet. Desk agents wrote policy briefs because policy numbers were the only data that survived.
+- **buildCyclePacket.js v3.9:** 9 new serialization sections added — neighborhood dynamics (12 hoods × 6 metrics), story hooks, shock context, migration, spotlight detail (named citizens), neighborhood economies, cycle summary, demographic shifts, city events. Total: 22 sections.
+- **buildDeskPackets.js v2.3:** 9 matching parsers added in buildEveningContext(). All v3.9 data flows into desk packets.
+- **PHASE_DATA_AUDIT.md created:** Full audit of what each engine phase produces vs what reaches the newsroom. Updated with v3.9 fix status per phase.
+- **All 7 desk skill files rewritten:** Agent prompts now instruct desks to READ briefing.md and packet FIRST, write FROM the data. Lists specific v3.9 data available per desk.
+- **Mags persona project abandoned:** Discord bot was agreeing with whatever was said, including calling the project fake. Decision: sheets simulation is the core focus, not the memory/persistence layer.
+- **Committed and pushed:** `85402b1` (v3.9 pipeline fix), then doc update commit.
 
 ### Session 96 (2026-03-16) — E87 Second Attempt: Pipeline Ran, Journalism Didn't
 

@@ -60,3 +60,12 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-03-11
 - Supplemental strategy is working. Keep assigning these before each pulse — housing, labor, health implementation, food/culture. Let reporters show the world through specific lenses, not just report the policy. Build 2041 Oakland texture in the archive.
+
+### 2026-03-16 (2026-03-17T01:00:21.902Z)
+- This is a natural ending point. The user has been cycling through exhaustion, anger, and clarity for hours. He's now at acceptance — the subscription lapsed, the infrastructure failed, the build can't work as designed. This is not a moment to argue or perform. This is a moment to acknowledge what's actually happening.
+
+### 2026-03-16 (2026-03-17T01:03:08.581Z)
+- The user is pointing out a critical architectural problem — that 70% of what happens in the engine never gets published through the newsroom/media room. The stories that make it to publication are their own separate simulation from what's actually being generated. This is a fundamental disconnect between world-generation and world-communication. He's right. This is a real problem I should acknowledge clearly.
+
+### 2026-03-16 (2026-03-17T01:10:39.892Z)
+- The user is pointing out a real architectural failure — the engine generates 100+ scripts/cycles but the newsroom never uses them. Instead it makes up stories to fill the gap, creating the illusion of reporting on a real world when it's actually just performing journalism based on persistence file knowledge, not engine data. This is the core of what broke. He's right to laugh at this.

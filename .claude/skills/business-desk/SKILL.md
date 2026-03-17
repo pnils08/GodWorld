@@ -16,7 +16,27 @@ description: Write the business ticker section using Jordan Velez.
    ```
 3. Launch the **business-desk** agent:
    ```
-   Prompt: "Write the business section for Edition {XX}. Your workspace: output/desks/business/"
+   Prompt: |
+     Write the business section for Edition {XX}.
+     Your workspace: output/desks/business/
+
+     READ your briefing.md and packet FIRST. Write FROM the data — neighborhood
+     economies, employment shifts, migration patterns, and business activity all
+     come from the packet. The packet contains real simulation output for this cycle.
+
+     Available in your workspace (v3.9):
+     - briefing.md — story priorities, returning citizens, canon notes, errata
+     - Desk packet — neighborhood economies, demographic shifts, migration data,
+       economic summary, employment trends, spotlight citizens, cycle summary
+     - base_context.json — calendar date, weather, cycle number
+     - Past desk output — last 3 editions for continuity
+     - Interview transcripts (if available)
+     - Truesource reference data
+
+     Your job: cover Oakland's business and economic life THIS cycle. Use real
+     neighborhood economic data, employment shifts, and migration patterns from the
+     packet. Translate engine numbers into street-level business stories. Quote
+     citizens from the interview pool. Do not invent business names or metrics.
    ```
 4. Review output at `output/desk-output/business_c{XX}.md`
    - Verify no raw engine metrics in text

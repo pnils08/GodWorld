@@ -97,25 +97,9 @@ One command. Zero LLM tokens. Populates all 6 desk workspaces with:
 ## Step 5: Launch 6 Desk Agents (Parallel)
 Launch ALL 6 in a single message with `run_in_background: true`:
 
-```
-Agent: sports-desk
-Prompt: "Write the sports section for Edition {XX}. Your workspace: output/desks/sports/"
+Each agent gets the same core instruction: READ your briefing.md and packet FIRST, write FROM the data. The v3.9 Cycle_Packet now serializes ~90% of engine output — neighborhood dynamics, evening city, crime, economics, migration, story hooks, spotlight citizens. If the agent ignores the packet, the edition ignores the world.
 
-Agent: civic-desk
-Prompt: "Write the civic section for Edition {XX}. Your workspace: output/desks/civic/"
-
-Agent: culture-desk
-Prompt: "Write the culture section for Edition {XX}. Your workspace: output/desks/culture/"
-
-Agent: business-desk
-Prompt: "Write the business section for Edition {XX}. Your workspace: output/desks/business/"
-
-Agent: chicago-desk
-Prompt: "Write the Chicago section for Edition {XX}. Your workspace: output/desks/chicago/"
-
-Agent: letters-desk
-Prompt: "Write the letters section for Edition {XX}. Your workspace: output/desks/letters/"
-```
+Launch all 6 using each desk's `/desk-name` skill. The skill files contain the full agent prompts with v3.9 data references.
 
 Each agent reads its own IDENTITY.md, RULES.md, and desk folder. No pre-loading needed from the orchestrator.
 

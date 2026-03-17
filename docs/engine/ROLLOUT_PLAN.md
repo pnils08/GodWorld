@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66
 **Status:** Active
-**Last Updated:** Session 95 (2026-03-15) — Desk agent autonomy architecture complete (buildDeskFolders.js + IDENTITY/RULES split + workspace folders). Edition 87 retracted earlier this session; new pipeline ready for rewrite.
+**Last Updated:** Session 98 (2026-03-16) — Engine-to-newsroom pipeline fix: buildCyclePacket.js v3.9 + buildDeskPackets.js v2.3. Serialization coverage ~30%→~90%. All desk skill prompts updated to instruct agents to read and write from packet data.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -49,7 +49,11 @@ Items that should be addressed in the next session. Updated at session end. Abso
 - **Disk naming cleanup** — Standardize supplemental slugs (oakland_ prefix decision), podcast rename, rhea archive relocation. See `output/batch-reviews/batch_disk_naming_audit_2026-03-12.md`.
 - ✅ ~~Phase 24.1: MEDIA clock mode~~ — Complete. See line 33 entry.
 - ✅ ~~Desk agent autonomy architecture~~ — Two-folder architecture: IDENTITY.md + RULES.md (voice folder) + workspace folder (rebuilt by script each cycle). All 21 agents split. 3 workspace builder scripts: `buildDeskFolders.js` (6 desks), `buildVoiceWorkspaces.js` (7 civic offices), `buildInitiativeWorkspaces.js` (5 initiatives). Agent SKILL.md reduced from 200-300 lines to ~30 lines (boot sequence only). Zero LLM tokens for workspace population. Tested against C87 data. S95-96.
-- **Rewrite Edition 87** — Cycle 87 ran but edition was retracted. New pipeline ready for rewrite with autonomous desk agents.
+- ✅ ~~Engine-to-newsroom pipeline fix~~ — buildCyclePacket.js v3.9 (22 sections, ~90% coverage) + buildDeskPackets.js v2.3 (parses all 22 sections into eveningContext). Committed/pushed S97-98.
+- ✅ ~~Desk agent prompt rewrite~~ — All 6 desk skills + write-edition updated. Agents now instructed to READ packet first and write FROM the data. S98.
+- ✅ ~~Phase data audit~~ — PHASE_DATA_AUDIT.md created (S97) and updated with v3.9 status (S98). Maps what each phase produces vs what reaches the newsroom.
+- **Deploy v3.9 to GAS** — `clasp push` needed for engine-side buildCyclePacket.js changes to take effect on next cycle run.
+- **Rewrite Edition 87** — Cycle 87 ran but edition was retracted. v3.9 pipeline ready — first real test of engine data reaching desk agents.
 - **Fix editionIntake.js** — Writes garbage: full demographic strings in CitizenName, misaligned columns, no POPID resolution, no new citizen routing. 852 junk rows for one edition. Pipeline is non-functional.
 - **Fix validateEdition.js** — Doesn't check player first names against base_context.json roster. Add roster name verification.
 - **Lock Paulson title as GM** — In all reference files, briefing templates, and agent prompts. General Manager of Oakland A's and Chicago Bulls.

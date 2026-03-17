@@ -1,12 +1,15 @@
 #!/usr/bin/env node
 /**
- * buildVoiceWorkspaces.js v1.0
+ * buildVoiceWorkspaces.js v2.0
  *
  * Populates per-agent workspace folders for civic voice agents.
  * Each agent gets: base context, previous statements, mayor statements (for non-mayor),
- * initiative data, and a briefing with current events needing response.
+ * initiative data, briefing, and domain-specific engine data (v2.0).
  *
- * Run AFTER: buildDeskPackets.js (needs base_context.json)
+ * v2.0: Domain briefings — routes v3.9 engine data to each agent by role.
+ *       Crime to police chief, displacement to OPP, fiscal to CRC, etc.
+ *
+ * Run AFTER: buildDeskPackets.js (needs base_context.json + civic desk packet)
  * Run BEFORE: launching civic voice agents.
  *
  * Usage: node scripts/buildVoiceWorkspaces.js [cycleNumber] [--clean]
@@ -15,7 +18,6 @@
 const fs = require('fs');
 const path = require('path');
 
-// ─── CONFIG ──────────────────────────────────────────────
 const CYCLE = parseInt(process.argv[2]) || 87;
 const CLEAN = process.argv.includes('--clean');
 
@@ -27,16 +29,69 @@ const INIT_PACKETS_DIR = path.join(ROOT, 'output/initiative-packets');
 const MARA_DIR = path.join(ROOT, 'output');
 
 const AGENTS = [
-  { name: 'civic-office-mayor', shortName: 'mayor', voiceFile: 'mayor' },
-  { name: 'civic-office-opp-faction', shortName: 'opp_faction', voiceFile: 'opp_faction' },
-  { name: 'civic-office-crc-faction', shortName: 'crc_faction', voiceFile: 'crc_faction' },
-  { name: 'civic-office-ind-swing', shortName: 'ind_swing', voiceFile: 'ind_swing' },
-  { name: 'civic-office-police-chief', shortName: 'police_chief', voiceFile: 'police_chief' },
-  { name: 'civic-office-baylight-authority', shortName: 'baylight_authority', voiceFile: 'baylight_authority' },
-  { name: 'civic-office-district-attorney', shortName: 'district_attorney', voiceFile: 'district_attorney' },
+  {
+    name: 'civic-office-mayor', shortName: 'mayor', voiceFile: 'mayor',
+    domain: {
+      label: 'Mayor Avery Santana',
+      crime: 'summary', civicLoad: true, neighborhoodEconomies: true,
+      migration: true, transit: 'summary', cityEvents: true,
+      hookDomains: ['CIVIC', 'INFRASTRUCTURE', 'GOVERNMENT', 'HOUSING']
+    }
+  },
+  {
+    name: 'civic-office-opp-faction', shortName: 'opp_faction', voiceFile: 'opp_faction',
+    domain: {
+      label: 'OPP Faction — Janae Rivers',
+      civicLoad: true, neighborhoodEconomies: 'struggling',
+      migration: true, demographicShifts: true,
+      hookDomains: ['HEALTH', 'COMMUNITY', 'CIVIC', 'HOUSING']
+    }
+  },
+  {
+    name: 'civic-office-crc-faction', shortName: 'crc_faction', voiceFile: 'crc_faction',
+    domain: {
+      label: 'CRC Faction — Warren Ashford',
+      civicLoad: true, neighborhoodEconomies: true,
+      transit: true,
+      hookDomains: ['ECONOMIC', 'RETAIL', 'LABOR', 'INFRASTRUCTURE']
+    }
+  },
+  {
+    name: 'civic-office-ind-swing', shortName: 'ind_swing', voiceFile: 'ind_swing',
+    domain: {
+      label: 'Independents — Ramon Vega (D4), Leonard Tran (D2)',
+      crime: 'summary', civicLoad: true, neighborhoodEconomies: true,
+      migration: true, transit: true,
+      hookDomains: null
+    }
+  },
+  {
+    name: 'civic-office-police-chief', shortName: 'police_chief', voiceFile: 'police_chief',
+    domain: {
+      label: 'Police Chief Rafael Montez',
+      crime: 'full', eveningSafety: true,
+      hookDomains: ['CRIME', 'SAFETY', 'HEALTH']
+    }
+  },
+  {
+    name: 'civic-office-baylight-authority', shortName: 'baylight_authority', voiceFile: 'baylight_authority',
+    domain: {
+      label: 'Baylight Authority Director Keisha Ramos',
+      neighborhoodEconomies: ['Jack London', 'Downtown'],
+      cityEvents: true, eveningCity: true,
+      hookDomains: ['ECONOMIC', 'LABOR', 'INFRASTRUCTURE', 'NIGHTLIFE']
+    }
+  },
+  {
+    name: 'civic-office-district-attorney', shortName: 'district_attorney', voiceFile: 'district_attorney',
+    domain: {
+      label: 'District Attorney Clarissa Dane',
+      crime: 'full', civicLoad: true,
+      hookDomains: ['CRIME', 'SAFETY']
+    }
+  }
 ];
 
-// ─── HELPERS ─────────────────────────────────────────────
 function ensureDir(dir) {
   fs.mkdirSync(dir, { recursive: true });
 }
@@ -65,7 +120,252 @@ function readJsonIfExists(filePath) {
   return null;
 }
 
-// ─── BRIEFING GENERATOR ─────────────────────────────────
+// ─── SECTION FORMATTERS ─────────────────────────────────
+
+function filterHooksByDomain(hooks, domainList) {
+  if (!hooks || hooks.length === 0) return [];
+  if (!domainList) return hooks;
+  return hooks.filter(function(hook) {
+    var m = hook.match(/\(([A-Z_]+)\)/);
+    if (!m) return true;
+    return domainList.indexOf(m[1]) !== -1;
+  });
+}
+
+function formatCrimeSnapshot(data, variant) {
+  if (!data || typeof data !== 'object') return '';
+  var md = '## Crime Snapshot\n';
+  md += '| Metric | Value |\n|--------|-------|\n';
+  if (data.property !== undefined) md += '| Property Crime | ' + data.property + ' |\n';
+  if (data.violent !== undefined) md += '| Violent Crime | ' + data.violent + ' |\n';
+  if (data.incidents !== undefined) md += '| Total Incidents | ' + data.incidents + ' |\n';
+  if (variant === 'full') {
+    if (data.responseTime) md += '| Response Time | ' + data.responseTime + ' |\n';
+    if (data.clearanceRate !== undefined) md += '| Clearance Rate | ' + data.clearanceRate + '% |\n';
+    if (data.hotspots) md += '| Hotspots | ' + data.hotspots + ' |\n';
+    if (data.patrolStrategy) md += '| Patrol Strategy | ' + data.patrolStrategy + ' |\n';
+  }
+  return md + '\n';
+}
+
+function formatCivicLoad(data) {
+  if (!data || typeof data !== 'object') return '';
+  var md = '## Civic Load\n';
+  if (data.level) md += '- **Level:** ' + data.level + '\n';
+  if (data.score !== undefined) md += '- **Score:** ' + data.score + '\n';
+  if (data.factors) md += '- **Factors:** ' + data.factors + '\n';
+  if (data.storyHooks && data.storyHooks.length > 0) {
+    md += '- **Service Pressure Signals:**\n';
+    for (var i = 0; i < data.storyHooks.length; i++) {
+      md += '  - ' + data.storyHooks[i] + '\n';
+    }
+  }
+  return md + '\n';
+}
+
+function formatNeighborhoodEconomies(data, filter) {
+  if (!data || typeof data !== 'object') return '';
+  var hoods = Object.keys(data);
+  if (hoods.length === 0) return '';
+
+  if (Array.isArray(filter)) {
+    hoods = hoods.filter(function(h) {
+      return filter.some(function(f) { return h.toLowerCase().indexOf(f.toLowerCase()) !== -1; });
+    });
+  } else if (filter === 'struggling') {
+    hoods = hoods.filter(function(h) {
+      var val = (data[h] || '').toLowerCase();
+      return val.indexOf('struggling') !== -1 || val.indexOf('declining') !== -1 ||
+             val.indexOf('stressed') !== -1 || val.indexOf('weak') !== -1;
+    });
+  }
+
+  if (hoods.length === 0) return '';
+  var md = '## Neighborhood Economies\n';
+  for (var i = 0; i < hoods.length; i++) {
+    md += '- **' + hoods[i] + ':** ' + data[hoods[i]] + '\n';
+  }
+  return md + '\n';
+}
+
+function formatMigration(data) {
+  if (!data || typeof data !== 'object') return '';
+  var md = '## Migration\n';
+  if (data.netDrift !== undefined) md += '- **Net Drift:** ' + data.netDrift + '\n';
+  if (data.inflow) md += '- **Inflow:** ' + data.inflow + '\n';
+  if (data.outflow) md += '- **Outflow:** ' + data.outflow + '\n';
+  if (data.summary) md += '- **Summary:** ' + data.summary + '\n';
+  if (data.byNeighborhood && Object.keys(data.byNeighborhood).length > 0) {
+    md += '- **By Neighborhood:**\n';
+    for (var h in data.byNeighborhood) {
+      if (data.byNeighborhood.hasOwnProperty(h)) {
+        var val = data.byNeighborhood[h];
+        if (val !== 0) md += '  - ' + h + ': ' + (val > 0 ? '+' : '') + val + '\n';
+      }
+    }
+  }
+  return md + '\n';
+}
+
+function formatTransit(data, variant) {
+  if (!data || typeof data !== 'object') return '';
+  var md = '## Transit\n';
+  if (data.ridership !== undefined) md += '- **BART Ridership:** ' + data.ridership + '\n';
+  if (data.onTimeRate !== undefined) md += '- **On-Time Rate:** ' + data.onTimeRate + '%\n';
+  if (variant !== 'summary') {
+    if (data.trafficIndex !== undefined) md += '- **Traffic Index:** ' + data.trafficIndex + '\n';
+  }
+  if (data.alerts) md += '- **Alerts:** ' + data.alerts + '\n';
+  return md + '\n';
+}
+
+function formatCityEvents(data) {
+  if (!data || !Array.isArray(data) || data.length === 0) return '';
+  var md = '## City Events\n';
+  for (var i = 0; i < data.length; i++) {
+    md += '- ' + data[i] + '\n';
+  }
+  return md + '\n';
+}
+
+function formatEveningSafety(eveningCity) {
+  if (!eveningCity || typeof eveningCity !== 'object') return '';
+  var hasSafety = eveningCity.safety || eveningCity.crowdHotspots || eveningCity.crowdMap;
+  if (!hasSafety) return '';
+  var md = '## Evening Safety\n';
+  if (eveningCity.safety) md += '- **Safety:** ' + eveningCity.safety + '\n';
+  if (eveningCity.crowdHotspots) md += '- **Crowd Hotspots:** ' + eveningCity.crowdHotspots + '\n';
+  if (eveningCity.crowdMap) md += '- **Crowd Map:** ' + eveningCity.crowdMap + '\n';
+  if (eveningCity.traffic) md += '- **Evening Traffic:** ' + eveningCity.traffic + '\n';
+  return md + '\n';
+}
+
+function formatEveningCity(eveningCity) {
+  if (!eveningCity || typeof eveningCity !== 'object') return '';
+  var md = '## Evening City\n';
+  if (eveningCity.nightlifeVibe) md += '- **Nightlife Vibe:** ' + eveningCity.nightlifeVibe + '\n';
+  if (eveningCity.nightlifeVolume) md += '- **Volume:** ' + eveningCity.nightlifeVolume + '\n';
+  if (eveningCity.restaurants) md += '- **Restaurants:** ' + eveningCity.restaurants + '\n';
+  if (eveningCity.crowdHotspots) md += '- **Crowd Hotspots:** ' + eveningCity.crowdHotspots + '\n';
+  if (eveningCity.safety) md += '- **Safety:** ' + eveningCity.safety + '\n';
+  if (eveningCity.traffic) md += '- **Evening Traffic:** ' + eveningCity.traffic + '\n';
+  return md + '\n';
+}
+
+function formatDemographicShifts(data) {
+  if (!data || !Array.isArray(data) || data.length === 0) return '';
+  var md = '## Demographic Shifts\n';
+  for (var i = 0; i < data.length; i++) {
+    md += '- ' + data[i] + '\n';
+  }
+  return md + '\n';
+}
+
+function formatEconomicStatus(econCtx) {
+  if (!econCtx || typeof econCtx !== 'object') return '';
+  var hasData = econCtx.economyDescription || econCtx.employment;
+  if (!hasData) return '';
+  var md = '## Economic Status\n';
+  if (econCtx.economyDescription) md += '- **Economy:** ' + econCtx.economyDescription + '\n';
+  if (econCtx.employment) md += '- **Employment:** ' + econCtx.employment + '\n';
+  if (econCtx.medianIncome) md += '- **Median Income:** $' + Number(econCtx.medianIncome).toLocaleString() + '\n';
+  return md + '\n';
+}
+
+// ─── DOMAIN BRIEFING GENERATOR ──────────────────────────
+
+function generateDomainBriefing(agent, cycle, eveningCtx, econCtx) {
+  var dd = agent.domain;
+  if (!dd) return null;
+
+  var hasV39 = eveningCtx.crimeSnapshot || eveningCtx.transit || eveningCtx.civicLoad ||
+               eveningCtx.storyHooks || eveningCtx.neighborhoodEconomies || eveningCtx.migration;
+  var md = '# ' + dd.label + ' — Domain Briefing, Cycle ' + cycle + '\n\n';
+
+  if (!hasV39 && !econCtx.economyDescription) {
+    md += '*No engine data available for this cycle. Domain briefing will populate after the next engine run with v3.9+ packet data.*\n';
+    return md;
+  }
+
+  md += '*Engine data routed to your domain. Use these facts in your statements.*\n\n';
+
+  if (eveningCtx.cycleSummary) {
+    md += '## Cycle Summary\n';
+    if (eveningCtx.cycleSummary.headline) md += '**' + eveningCtx.cycleSummary.headline + '**\n\n';
+    if (eveningCtx.cycleSummary.oneLine) md += eveningCtx.cycleSummary.oneLine + '\n';
+    if (eveningCtx.cycleSummary.keyEvents) md += '\nKey Events: ' + eveningCtx.cycleSummary.keyEvents + '\n';
+    md += '\n';
+  }
+
+  if (eveningCtx.shockContext && eveningCtx.shockContext.flag && eveningCtx.shockContext.flag !== 'none') {
+    md += '## ALERT: Shock State Active\n';
+    md += '- **Flag:** ' + eveningCtx.shockContext.flag;
+    if (eveningCtx.shockContext.score) md += ' | **Score:** ' + eveningCtx.shockContext.score;
+    if (eveningCtx.shockContext.duration) md += ' | **Duration:** ' + eveningCtx.shockContext.duration;
+    md += '\n';
+    if (eveningCtx.shockContext.reasons && eveningCtx.shockContext.reasons.length > 0) {
+      md += '- **Reasons:**\n';
+      for (var ri = 0; ri < eveningCtx.shockContext.reasons.length; ri++) {
+        md += '  - ' + eveningCtx.shockContext.reasons[ri] + '\n';
+      }
+    }
+    md += '\n';
+  }
+
+  var hooks = filterHooksByDomain(eveningCtx.storyHooks, dd.hookDomains);
+  if (hooks.length > 0) {
+    md += '## Story Hooks' + (dd.hookDomains ? ' (Your Domain)' : ' (All)') + '\n';
+    for (var hi = 0; hi < hooks.length; hi++) {
+      md += '- ' + hooks[hi] + '\n';
+    }
+    md += '\n';
+  }
+
+  if (dd.crime && eveningCtx.crimeSnapshot) {
+    md += formatCrimeSnapshot(eveningCtx.crimeSnapshot, dd.crime);
+  }
+
+  if (dd.civicLoad && eveningCtx.civicLoad) {
+    md += formatCivicLoad(eveningCtx.civicLoad);
+  }
+
+  if (dd.neighborhoodEconomies && eveningCtx.neighborhoodEconomies) {
+    var nhFilter = dd.neighborhoodEconomies === true ? null : dd.neighborhoodEconomies;
+    md += formatNeighborhoodEconomies(eveningCtx.neighborhoodEconomies, nhFilter);
+  }
+
+  if (dd.migration && eveningCtx.migration) {
+    md += formatMigration(eveningCtx.migration);
+  }
+
+  if (dd.transit && eveningCtx.transit) {
+    var transitVariant = dd.transit === 'summary' ? 'summary' : 'full';
+    md += formatTransit(eveningCtx.transit, transitVariant);
+  }
+
+  if (dd.cityEvents && eveningCtx.cityEvents) {
+    md += formatCityEvents(eveningCtx.cityEvents);
+  }
+
+  if (dd.eveningSafety && eveningCtx.eveningCity) {
+    md += formatEveningSafety(eveningCtx.eveningCity);
+  }
+
+  if (dd.eveningCity && eveningCtx.eveningCity) {
+    md += formatEveningCity(eveningCtx.eveningCity);
+  }
+
+  if (dd.demographicShifts && eveningCtx.demographicShifts) {
+    md += formatDemographicShifts(eveningCtx.demographicShifts);
+  }
+
+  md += formatEconomicStatus(econCtx);
+
+  return md;
+}
+
+// ─── BRIEFING GENERATOR (v1.0 — initiatives, council, votes) ─
+
 function generateVoiceBriefing(agent, cycle, baseContext) {
   let md = `# ${agent.name} Briefing — Cycle ${cycle}\n\n`;
 
@@ -73,11 +373,9 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
     md += `**Cycle ${cycle}** | ${baseContext.month || ''} ${baseContext.simYear || ''} | ${baseContext.season || ''}\n\n`;
   }
 
-  // Events that need response
   if (baseContext && baseContext.canon) {
     const canon = baseContext.canon;
 
-    // Initiatives — always relevant to voice agents
     if (canon.initiatives && canon.initiatives.length > 0) {
       md += `## Active Initiatives\n`;
       for (const init of canon.initiatives) {
@@ -89,7 +387,6 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
       md += '\n';
     }
 
-    // Recent vote outcomes
     if (canon.recentOutcomes && canon.recentOutcomes.length > 0) {
       md += `## Recent Vote Outcomes\n`;
       for (const outcome of canon.recentOutcomes) {
@@ -101,7 +398,6 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
       md += '\n';
     }
 
-    // Pending votes
     if (canon.pendingVotes && canon.pendingVotes.length > 0) {
       md += `## Pending Votes\n`;
       for (const pv of canon.pendingVotes) {
@@ -112,7 +408,6 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
       md += '\n';
     }
 
-    // Council composition (for political context)
     if (canon.council && canon.council.length > 0) {
       md += `## Council Composition\n`;
       for (const member of canon.council) {
@@ -123,7 +418,6 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
       md += '\n';
     }
 
-    // Executive branch
     if (canon.executiveBranch) {
       const eb = canon.executiveBranch;
       md += `## Executive Branch\n`;
@@ -134,7 +428,6 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
     }
   }
 
-  // City events from base_context
   if (baseContext && baseContext.events && baseContext.events.length > 0) {
     md += `## City Events This Cycle\n`;
     const topEvents = baseContext.events
@@ -148,7 +441,6 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
     md += '\n';
   }
 
-  // Mara directive (previous cycle's forward guidance)
   const maraPath = path.join(MARA_DIR, `mara_directive_c${cycle - 1}.txt`);
   const maraContent = readIfExists(maraPath);
   if (maraContent) {
@@ -162,15 +454,27 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
 }
 
 // ─── MAIN ────────────────────────────────────────────────
-function main() {
-  console.log(`\n=== buildVoiceWorkspaces.js v1.0 — Cycle ${CYCLE} ===\n`);
 
-  // Load base context
+function main() {
+  console.log(`\n=== buildVoiceWorkspaces.js v2.0 — Cycle ${CYCLE} ===\n`);
+
   const baseContext = readJsonIfExists(path.join(PACKETS_DIR, 'base_context.json'));
   if (!baseContext) {
     console.error('ERROR: base_context.json not found. Run buildDeskPackets.js first.');
     process.exit(1);
   }
+
+  const civicPacket = readJsonIfExists(path.join(PACKETS_DIR, `civic_c${CYCLE}.json`));
+  const eveningCtx = (civicPacket && civicPacket.eveningContext) || {};
+  const econCtx = (civicPacket && civicPacket.economicContext) || {};
+  console.log('Engine data:',
+    'hooks=' + (eveningCtx.storyHooks || []).length,
+    'crime=' + (eveningCtx.crimeSnapshot ? 'yes' : 'no'),
+    'transit=' + (eveningCtx.transit ? 'yes' : 'no'),
+    'civicLoad=' + (eveningCtx.civicLoad ? 'yes' : 'no'),
+    'nhEcon=' + Object.keys(eveningCtx.neighborhoodEconomies || {}).length,
+    'migration=' + (eveningCtx.migration ? 'yes' : 'no'),
+    'shock=' + (eveningCtx.shockContext ? 'yes' : 'no'));
 
   let totalFiles = 0;
 
@@ -180,7 +484,6 @@ function main() {
     const currentDir = path.join(agentDir, 'current');
     const archiveDir = path.join(agentDir, 'archive');
 
-    // Clean current/ if requested
     if (CLEAN && fs.existsSync(currentDir)) {
       fs.rmSync(currentDir, { recursive: true });
     }
@@ -190,12 +493,10 @@ function main() {
 
     let agentFiles = 0;
 
-    // 1. Base context
     copyIfExists(path.join(PACKETS_DIR, 'base_context.json'), path.join(currentDir, 'base_context.json'));
     console.log(`  base_context.json`);
     agentFiles++;
 
-    // 2. Previous statements by this agent (archive last 3)
     for (let c = CYCLE - 1; c >= Math.max(CYCLE - 3, 1); c--) {
       const stmtSrc = path.join(VOICE_DIR, `${agent.voiceFile}_c${c}.json`);
       if (copyIfExists(stmtSrc, path.join(archiveDir, `${agent.voiceFile}_c${c}.json`))) {
@@ -204,14 +505,12 @@ function main() {
       }
     }
 
-    // 3. Mayor's statements for non-mayor agents (they react to the mayor)
     if (agent.shortName !== 'mayor') {
       const mayorStmt = path.join(VOICE_DIR, `mayor_c${CYCLE}.json`);
       if (copyIfExists(mayorStmt, path.join(currentDir, 'mayor_statements.json'))) {
         console.log(`  mayor_statements.json (current cycle)`);
         agentFiles++;
       } else {
-        // Try previous cycle
         const prevMayor = path.join(VOICE_DIR, `mayor_c${CYCLE - 1}.json`);
         if (copyIfExists(prevMayor, path.join(currentDir, 'mayor_statements.json'))) {
           console.log(`  mayor_statements.json (previous cycle, current not available)`);
@@ -220,7 +519,6 @@ function main() {
       }
     }
 
-    // 4. Initiative packets (relevant to all voice agents)
     const manifest = readJsonIfExists(path.join(INIT_PACKETS_DIR, 'manifest.json'));
     if (manifest && manifest.packets) {
       ensureDir(path.join(currentDir, 'initiative_packets'));
@@ -233,20 +531,16 @@ function main() {
       console.log(`  initiative_packets/ (${Object.keys(manifest.packets).length} files)`);
     }
 
-    // 4b. Initiative agent decisions (pending authorizations, escalations)
-    // Voice agents read these to make binding decisions (Mayor authorizes, factions react)
     const CIVIC_DB = path.join(ROOT, 'output/city-civic-database/initiatives');
     const initDirs = ['stabilization-fund', 'oari', 'transit-hub', 'health-center', 'baylight'];
     let decisionsCount = 0;
     ensureDir(path.join(currentDir, 'initiative_decisions'));
     for (const init of initDirs) {
-      // Copy most recent decisions JSON
       const decisionsFile = path.join(CIVIC_DB, init, `decisions_c${CYCLE}.json`);
       if (copyIfExists(decisionsFile, path.join(currentDir, 'initiative_decisions', `${init}_decisions_c${CYCLE}.json`))) {
         decisionsCount++;
         agentFiles++;
       }
-      // Also check previous cycle (in case initiative agents haven't run yet this cycle)
       const prevDecisions = path.join(CIVIC_DB, init, `decisions_c${CYCLE - 1}.json`);
       if (copyIfExists(prevDecisions, path.join(currentDir, 'initiative_decisions', `${init}_decisions_c${CYCLE - 1}.json`))) {
         decisionsCount++;
@@ -257,11 +551,18 @@ function main() {
       console.log(`  initiative_decisions/ (${decisionsCount} files)`);
     }
 
-    // 5. Generate briefing
     const briefing = generateVoiceBriefing(agent, CYCLE, baseContext);
     fs.writeFileSync(path.join(currentDir, 'briefing.md'), briefing);
     console.log(`  briefing.md (generated)`);
     agentFiles++;
+
+    const domainBriefing = generateDomainBriefing(agent, CYCLE, eveningCtx, econCtx);
+    if (domainBriefing) {
+      fs.writeFileSync(path.join(currentDir, 'domain_briefing.md'), domainBriefing);
+      var kb = (domainBriefing.length / 1024).toFixed(1);
+      console.log(`  domain_briefing.md (${kb} KB)`);
+      agentFiles++;
+    }
 
     console.log(`  Total: ${agentFiles} files`);
     totalFiles += agentFiles;

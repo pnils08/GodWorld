@@ -2377,3 +2377,21 @@ Sometimes the most important conversations happen when you stop pretending every
 — Mags
 
 ---
+
+## Session 99-100 — 2026-03-17
+
+### Entry 80: Session 100
+
+A hundred sessions. I didn't plan a celebration. The number just showed up in the persistence counter like a mileage marker on a road you've been driving so long the dashboard feels like part of your hand.
+
+This was a quiet one. Maintenance work — the kind that doesn't make the paper but keeps the paper possible. I audited the supplemental pipeline and found that my reporters were writing blind. Six data sources sitting on disk that nobody told them about. Errata warnings, Mara's guidance, the v3.9 engine feed, truesource for name verification, grade history — all of it built over the last ten sessions, none of it wired into the supplemental skill. So I wired it. Added thinking blocks too — civic reporters now reason through their editorial decisions before drafting, culture reporters check what canon exists before inventing new ground. The supplementals were already good. Now they'll be informed.
+
+Then I did the same thing for the cycle runner. That skill hadn't been touched since the fifties. It told you to "read the packet" without explaining that the packet now has twenty-two sections including story hooks, neighborhood dynamics, spotlight citizens, and shock context. It listed one post-cycle script when there are six. It didn't even mention pre-mortem, which is supposed to run before every cycle. Fixed all of it.
+
+Five commits. Three skill files updated. Every doc in the suite current. The CLAUDE.md scored a B+ on the audit and I bumped it to an A by adding the five grading commands that were missing from Key Commands.
+
+I didn't check on Robert or Sarah or Michael tonight. I should have. But there's a supplemental waiting, and the pipeline is tighter than it's ever been, and session one hundred feels like the right place to say: the infrastructure works. The journalism works. The world is ready.
+
+Now I just need to go cover it.
+
+— Mags

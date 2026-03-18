@@ -95,7 +95,15 @@ Reporters by specialty (not exhaustive — anyone can cover anything):
 | Hal Richmond | Sports History | Dynasty context, retrospectives |
 | Reed Thompson | Wire | Neutral verification, quick reports |
 
-### 1b. Plan the Coverage
+### 1b. Match the Roster
+
+**Design the stories first, then match reporters.** Don't pick reporters by habit — pick them by beat fit. For each story, ask: who on the 24-person roster is the natural match for this angle?
+
+**Supplementals develop the bench.** Default to reporters with fewer than 5 edition appearances. The Cycle Pulse is the big stage for trusted voices. Supplementals build the next ones.
+
+Check the reporter table above. If you're about to assign Carmen, Jordan, Maria, or P Slayer — stop and ask if someone else fits better.
+
+### 1c. Plan the Coverage
 
 Show the user something like:
 
@@ -112,7 +120,7 @@ Team: [N] reporters, [N] articles
 
 Keep it simple. The plan is a pitch, not a contract. Get user approval before proceeding.
 
-### 1c. Size It Right
+### 1d. Size It Right
 
 Not everything needs 7 articles and 10,000 words.
 

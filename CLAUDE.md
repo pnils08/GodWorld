@@ -76,6 +76,21 @@ clasp push
 # Edition intake v2.0 (citizens → Intake, storylines → Tracker, businesses → Business_Intake)
 node -r dotenv/config scripts/editionIntake.js [--dry-run] <edition-file> [cycle]
 
+# Promote staged businesses after intake
+node -r dotenv/config scripts/processBusinessIntake.js [--dry-run]
+
+# Enrich citizen profiles (edition quotes/appearances → LifeHistory)
+node -r dotenv/config scripts/enrichCitizenProfiles.js --edition [cycle]
+
+# Grade edition (per-desk and per-reporter scores from errata + Mara + text)
+node scripts/gradeEdition.js [cycle]
+
+# Update rolling grade averages and roster recommendations
+node scripts/gradeHistory.js
+
+# Extract A-grade articles as exemplars for next desk workspace build
+node scripts/extractExemplars.js [cycle]
+
 # Dashboard (Express API + frontend, port 3001)
 node dashboard/server.js
 ```

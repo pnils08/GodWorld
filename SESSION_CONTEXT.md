@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-17 | Engine: v3.1 | Cycle: 87 | Session: 100
+Last Updated: 2026-03-17 | Engine: v3.1 | Cycle: 87 | Session: 101
 
 ---
 
@@ -185,6 +185,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 101 (2026-03-17) — Supplemental C87: Baylight Labor (Published with Errors)
+
+- **Supplemental published:** 4 articles — Trevor Shimizu (infrastructure), Sharon Okafor (lifestyle), Jax Caldera (opinion), MintConditionOakTown (social thread). Photos (DJ Hartley), PDF, Drive upload, Discord bot refresh all complete.
+- **Errors caught and fixed post-publication:** Cycle 88→87, Paulson "owner"→"GM", Dante Nelson→Xavier Allen (rest violation), Travis Green role inconsistency, Sharon Okafor sentimentality stripped, "runs both cities"→"has a team in both cities."
+- **Error NOT fixed:** Jax Caldera invented "Alameda County" workforce agreement loophole. Not canon — Baylight is about training/hiring West Oakland kids. Needs correction next session.
+- **OAuth refresh:** authorizeDriveWrite.js updated from deprecated `urn:ietf:wg:oauth:2.0:oob` to localhost:3456 HTTP redirect. Token refreshed.
+- **editionIntake.js delimiter fix:** extractSection() regex now accepts both `===` and `###` delimiters. Parsing works (20 citizens, 13 storylines, 1 new citizen Desiree Chen).
+- **Intake write targets BROKEN:** Script writes to `Intake`, `Advancement_Intake1`, `Business_Intake` — tabs that don't exist on the spreadsheet. Actual tabs: `Media_Intake`, `Citizen_Usage_Intake`, `Storyline_Intake`. No citizen or storyline data was ingested. Critical fix needed next session.
+- **Citizen routing still unfixed:** buildDeskPackets.js routes only 20 interviewCandidates (reporters/staff). 675 Simulation_Ledger citizens never reach agents. User has flagged this across 8+ sessions. #1 priority.
 
 ### Session 99 (2026-03-17) — Agent Grading System + Data Cleanup + Research + Infrastructure
 

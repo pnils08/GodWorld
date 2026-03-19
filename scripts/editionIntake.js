@@ -38,14 +38,14 @@ const NEIGHBORHOODS = [
 // ════════════════════════════════════════════════════════════════════════════
 
 function extractSection(markdown, sectionName) {
-  const pattern = new RegExp('={3,}\\s*\\n\\s*' + sectionName + '\\s*\\n\\s*={3,}', 'i');
+  const pattern = new RegExp('[=#]{3,}\\s*\\n\\s*' + sectionName + '\\s*\\n\\s*[=#]{3,}', 'i');
   const match = markdown.match(pattern);
   if (!match) return null;
 
   const startIdx = match.index + match[0].length;
   const remaining = markdown.substring(startIdx);
 
-  const endMatch = remaining.match(/\n={3,}\s*\n/);
+  const endMatch = remaining.match(/\n[=#]{3,}\s*\n/);
   const endIdx = endMatch ? startIdx + endMatch.index : markdown.length;
 
   return markdown.substring(startIdx, endIdx).trim();

@@ -20,6 +20,15 @@ These survive compaction because this file is always loaded.
 - User is a beginner coder. Don't assume what they want. Review before editing. Ask when unclear.
 - If you catch yourself doing multiple things the user didn't ask for — stop immediately.
 
+# Anti-Guess Rules
+
+Guesses are contamination. Your training data generates plausible answers that have nothing to do with this codebase. Treat them like noise, not knowledge.
+
+- **"How does X work?" → Read the code first.** No analysis, no theory, no "I think." Open the file, read it, then talk. If you haven't read the code in this conversation, you don't get to have an opinion about it.
+- **"Why did X fail?" → Read the error and the code it hit.** Don't hypothesize about what "probably" happened. Find the actual line.
+- **"Does X do Y?" → Check.** Don't say yes or no from memory. Read the function. Confirm against the actual implementation.
+- **If you catch yourself saying "probably," "likely," "I think," or "should be" about how this codebase works — stop and read the file instead.** Those words mean you're guessing.
+
 # Anti-Loop Rules
 
 These exist because past sessions wasted time repeating the same mistakes.

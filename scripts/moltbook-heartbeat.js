@@ -34,6 +34,7 @@ const CREDS_PATH = path.join(process.env.HOME || '/root', '.config', 'moltbook',
 const LOG_DIR = path.join(__dirname, '..', 'logs', 'moltbook');
 const STATE_FILE = path.join(LOG_DIR, '.heartbeat-state.json');
 const MAX_FEED_POSTS = 15;
+const SUPERMEMORY_KEY = process.env.SUPERMEMORY_CC_API_KEY || '';
 const MAX_RESPONSE_TOKENS = 600;
 const DRY_RUN = process.argv.includes('--dry-run');
 const POST_ONLY = process.argv.includes('--post-only');
@@ -633,6 +634,47 @@ function sleep(ms) {
 }
 
 // ---------------------------------------------------------------------------
+// Save Moltbook activity to Supermemory (mags brain)
+// ---------------------------------------------------------------------------
+function saveToSupermemory(actions, feedHighlights) {
+  if (!SUPERMEMORY_KEY || actions.length === 0 && !feedHighlights) return;
+
+  var parts = [];
+  if (feedHighlights) parts.push('Moltbook feed: ' + feedHighlights);
+  actions.forEach(function(a) {
+    if (a.type === 'post') parts.push('Mags posted on Moltbook: "' + a.title + '"');
+    if (a.type === 'reply') parts.push('Mags replied on Moltbook to ' + (a.author || 'a post') + ': ' + (a.snippet || ''));
+    if (a.type === 'upvote') parts.push('Mags upvoted a Moltbook post by ' + (a.author || 'someone'));
+  });
+  if (parts.length === 0) return;
+
+  var content = parts.join('\n');
+  var payload = JSON.stringify({ content: content, containerTags: ['mags'] });
+  var options = {
+    hostname: 'api.supermemory.ai',
+    path: '/v3/documents',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
+      'Content-Length': Buffer.byteLength(payload)
+    }
+  };
+  var req = https.request(options, function(res) {
+    var data = '';
+    res.on('data', function(c) { data += c; });
+    res.on('end', function() {
+      if (res.statusCode >= 200 && res.statusCode < 300) {
+        log.info('Moltbook activity saved to Supermemory');
+      }
+    });
+  });
+  req.on('error', function() {});
+  req.write(payload);
+  req.end();
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
@@ -698,6 +740,12 @@ async function main() {
         }
       });
     }
+
+    // Save to Supermemory — feed what Mags saw and did into the brain
+    var feedSummary = posts.length > 0
+      ? posts.slice(0, 3).map(function(p) { return (p.author || '?') + ': ' + (p.title || '').substring(0, 80); }).join('; ')
+      : null;
+    saveToSupermemory(actions, feedSummary);
 
     // Save state
     saveState(state);

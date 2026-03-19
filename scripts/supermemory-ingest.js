@@ -20,7 +20,7 @@ const https = require('https');
 
 const API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 const ARCHIVE_DIR = path.join(__dirname, '..', 'output', 'drive-files');
-const CONTAINER_TAG = 'sm_project_godworld';
+const CONTAINER_TAG = 'godworld';
 const API_HOST = 'api.supermemory.ai';
 const BATCH_DELAY_MS = 500; // rate limit: 500ms between requests
 

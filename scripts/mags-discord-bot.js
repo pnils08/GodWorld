@@ -172,8 +172,8 @@ function searchSupermemory(query) {
   return new Promise(function(resolve) {
     var payload = JSON.stringify({
       q: query,
-      containerTags: ['sm_project_godworld'],
-      limit: 3
+      containerTags: ['mags'],
+      limit: 5
     });
 
     var options = {
@@ -243,7 +243,7 @@ function fetchUserProfile(discordUserId) {
 
   return new Promise(function(resolve) {
     var payload = JSON.stringify({
-      containerTag: 'discord_user_' + discordUserId
+      containerTag: 'mags'
     });
 
     var options = {
@@ -302,7 +302,7 @@ function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
   var content = userName + ': ' + userMessage + '\nMags: ' + magsResponse;
   var payload = JSON.stringify({
     content: content,
-    containerTags: ['discord_user_' + discordUserId, 'sm_project_godworld']
+    containerTags: ['mags']
   });
 
   var options = {

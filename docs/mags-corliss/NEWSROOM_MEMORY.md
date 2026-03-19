@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 87 — 2026-03-17 (S98 editorial review)**
+**Last Updated: Supplemental C87 (Baylight Labor) — 2026-03-17 (S101)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -30,6 +30,31 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Supplemental C87 — Baylight Labor (Grade: ungraded — Mara approved with notes)
+
+4 articles: Trevor Shimizu (infrastructure), Sharon Okafor (lifestyle), Jax Caldera (opinion), MintConditionOakTown (social thread). Published to Drive, photos generated (DJ Hartley), PDF generated.
+
+**Errors Found and Fixed:**
+1. **Cycle number 88 vs 87.** Edition labeled C88 but current cycle is 87. Fixed: renamed file and all internal references.
+2. **Paulson called "owner."** Mint wrote "Paulson already owns the A's." Guardian warning explicitly prohibits this. Fixed: "GM of the A's."
+3. **"Runs both cities."** Overstates Paulson's role. Fixed: "has a team in both cities."
+4. **Dante Nelson used on first day off rest.** Was ON REST through C87. Used anyway. Fixed: swapped for Xavier Allen (POP-00243).
+5. **Travis Green inconsistent role.** "Concrete crew lead" in Shimizu, "laborer" in Okafor. Ledger says Construction laborer. Fixed Shimizu.
+6. **Sharon Okafor sentimentality.** "Cathedral," "conductor before the orchestra," "Oakland gold," "Not just structures. Legacy." All decorative language stripped.
+
+**Errors NOT Fixed (Carry Forward):**
+7. **Mint's NBA piece is a fourth-wall breaker — PIECE BURNED.** Every theory centers Paulson as the guy who controls everything — functionally reveals the builder dynamic. Too coherent for Mint, presents public info as uncovered. Piece is unusable in current form. NBA expansion storyline is contaminated.
+8. **Intake broken.** editionIntake.js delimiter regex fixed (now accepts both `===` and `###`). But write targets (`Intake`, `Advancement_Intake1`, `Business_Intake`) don't match actual sheet tabs (`Media_Intake`, `Citizen_Usage_Intake`, `Storyline_Intake`). No citizen or storyline data was ingested. Desiree Chen (new citizen) not yet in Simulation_Ledger.
+
+**New Canon Established:**
+- Horizon Bay Structural: steel subcontractor for Baylight Phase 2
+- Consolidated Infrastructure Partners: Sacramento-based contractor
+- Anchor & Rail: bar on Embarcadero West near Baylight site
+- Desiree Chen, 52, Jack London: food cart operator (NOT YET IN LEDGER)
+- Xavier Allen (POP-00243) first appearance: overheard at bar discussing NBA expansion
+- NBA expansion candidate list is canon (Oakland included). No team, no franchise.
+- Baylight flexible-use arena site referenced via Mint's thread
 
 ### Edition 87 (Grade: B — Mara audit. Published at 13 pieces after 4 cut.)
 

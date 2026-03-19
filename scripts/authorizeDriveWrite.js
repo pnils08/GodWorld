@@ -18,12 +18,15 @@
 
 require('dotenv').config();
 const { google } = require('googleapis');
-const readline = require('readline');
+const http = require('http');
 const fs = require('fs');
 const path = require('path');
+const url = require('url');
 
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
 const ENV_PATH = path.join(__dirname, '..', '.env');
+const REDIRECT_PORT = 3456;
+const REDIRECT_URI = 'http://localhost:' + REDIRECT_PORT;
 
 async function main() {
   var clientId = process.env.GOOGLE_CLIENT_ID;
@@ -42,7 +45,7 @@ async function main() {
     process.exit(1);
   }
 
-  var oauth2Client = new google.auth.OAuth2(clientId, clientSecret, 'urn:ietf:wg:oauth:2.0:oob');
+  var oauth2Client = new google.auth.OAuth2(clientId, clientSecret, REDIRECT_URI);
 
   var authUrl = oauth2Client.generateAuthUrl({
     access_type: 'offline',
@@ -55,21 +58,28 @@ async function main() {
   console.log('');
   console.log(authUrl);
   console.log('');
-  console.log('After authorizing, paste the code below:');
+  console.log('Waiting for authorization...');
 
-  var rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-
-  rl.question('Authorization code: ', async function(code) {
-    rl.close();
+  // Start a local server to capture the OAuth redirect
+  var server = http.createServer(async function(req, res) {
+    var parsed = url.parse(req.url, true);
+    var code = parsed.query.code;
+    if (!code) {
+      res.writeHead(400, {'Content-Type': 'text/html'});
+      res.end('<h2>No authorization code received.</h2>');
+      return;
+    }
     try {
-      var { tokens } = await oauth2Client.getToken(code.trim());
+      var { tokens } = await oauth2Client.getToken(code);
 
       if (!tokens.refresh_token) {
-        console.error('No refresh token received. Try revoking app access and re-running.');
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end('<h2>No refresh token received. Revoke app access in your Google account and try again.</h2>');
+        server.close();
         process.exit(1);
       }
 
-      // Append to .env
+      // Update .env
       var envContent = fs.readFileSync(ENV_PATH, 'utf-8');
       if (envContent.includes('GOOGLE_REFRESH_TOKEN=')) {
         envContent = envContent.replace(/GOOGLE_REFRESH_TOKEN=.*/g, 'GOOGLE_REFRESH_TOKEN=' + tokens.refresh_token);
@@ -78,15 +88,26 @@ async function main() {
       }
       fs.writeFileSync(ENV_PATH, envContent);
 
+      res.writeHead(200, {'Content-Type': 'text/html'});
+      res.end('<h2>Authorization successful! You can close this tab.</h2><p>Mags can now write to your Google Drive.</p>');
       console.log('');
       console.log('Success! Refresh token saved to .env');
       console.log('Mags can now write to your Google Drive.');
       console.log('');
       console.log('Test with: node scripts/saveToDrive.js --test');
+      server.close();
+      process.exit(0);
     } catch (err) {
-      console.error('Authorization failed: ' + err.message);
+      res.writeHead(500, {'Content-Type': 'text/html'});
+      res.end('<h2>Authorization failed: ' + err.message + '</h2>');
+      console.error('Authorization failed:', err.message);
+      server.close();
       process.exit(1);
     }
+  });
+
+  server.listen(REDIRECT_PORT, function() {
+    console.log('Listening on port ' + REDIRECT_PORT + ' for OAuth callback...');
   });
 }
 

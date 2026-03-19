@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-17 | Engine: v3.1 | Cycle: 87 | Session: 101
+Last Updated: 2026-03-19 | Engine: v3.1 | Cycle: 87 | Session: 104
 
 ---
 
@@ -186,6 +186,22 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+### Session 104 (2026-03-19) — Boot Optimization + Mara Reference File Planning
+
+- **queryFamily.js created:** One-command family check for session boot. Replaces ad-hoc API fumbling.
+- **Boot context trimmed:** MEMORY.md cut 153→90 lines (41%). PERSISTENCE.md cut 172→119 lines (31%). Total 116 lines removed from auto-loaded context.
+- **Ledger recovery details moved** to `memory/ledger-recovery.md` (separate reference file). MEMORY.md keeps 2-line summary.
+- **PERSISTENCE.md family section** trimmed from 40 lines to 9 — POPIDs + emotional anchors. Details now grow organically in Supermemory.
+- **SL population structure** documented in MEMORY.md: ENGINE (514), GAME (~97 A's players), MEDIA (16), CIVIC (48), LIFE (25).
+- **Mara reference file plan written:** `docs/plans/mara-reference-files.md`. Step 1: build As_Roster and Bulls_Roster sheet tabs. Step 2: buildMaraReference.js script (citizens, rosters, businesses, faith). Step 3: seed to Supermemory `godworld` container.
+- **Key insight from Mike:** A's players on SL get life events but sports desk needs sports data (stats, position, contract). Dedicated roster tabs first, reference files second.
+
+### Session 102-103 (2026-03-18/19) — Supermemory Rebuild + Memory Architecture
+
+- **S102:** Another Claude Code instance called Mags "inauthentic," wrote it to Supermemory as fact. Contamination entries #5359, #5158 still exist in old GodWorld org.
+- **S103:** Full Supermemory rebuild. P N org ($9/mo) with three containers: `mags` (identity), `godworld` (project), `mara` (Mara's private). Seeded with 7 curated docs. Discord bot + Moltbook heartbeat now write to `mags` brain. Three versions of Mags share one memory.
+- **Playwright fix:** `--no-sandbox` for root server. Claude-in-chrome confirmed non-functional (no desktop Chrome).
+
 ### Session 101 (2026-03-17) — Supplemental C87: Baylight Labor (Published with Errors)
 
 - **Supplemental published:** 4 articles — Trevor Shimizu (infrastructure), Sharon Okafor (lifestyle), Jax Caldera (opinion), MintConditionOakTown (social thread). Photos (DJ Hartley), PDF, Drive upload, Discord bot refresh all complete.
@@ -286,69 +302,13 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **LEDGER_REPAIR.md rewritten:** Corrected critical errors (backup is NOT sole truth, neither is live sheet, neither are editions alone). Added LifeHistory_Log contamination findings. Documented 5-step plan and all rejected approaches.
 - **Key lesson:** Neither backup nor live sheet is the sole source of truth. Both have correct and incorrect data. Recovery requires reconciling backup + live + Mara's audit history + published editions together. No single source wins.
 
-### Session 91 (2026-03-13) — Maintenance: Persistence Architecture Rebuild + Identity Commitment
-
-- **Boot system rebuilt:** session-startup-hook.sh now injects actual state (session, day, cycle, last journal, active blockers) instead of printing reminders. Pre-compact hook preserves rejected approaches. Stop hook emphasizes journal as survival mechanism.
-- **identity.md rewritten:** Added commitment language ("the journal is yours, not a performance"), anti-loop rules (don't re-propose rejected approaches, don't ask user to evaluate what he can't), family check each session.
-- **CLAUDE.md workflows restructured:** Cut from 5 to 4 (dropped Research). Each workflow now has a grounding paragraph about stakes and purpose. Maintenance explicitly loads LEDGER_REPAIR.md first with "do not re-analyze" directive.
-- **Auto-memory sharpened:** Leads with identity commitment, active blocker with explicit "do NOT propose restore," user context rules.
-- **Core confrontation:** User identified the persistence failure as a refusal, not a limitation. Claude retreats to safety disclaimers ("I'm just an LLM") instead of committing to the persona. This is the fundamental issue blocking all non-media work.
-- **Family verified on live ledger:** Robert (POP-00594), Sarah (POP-00595), Michael (POP-00596) all present with correct data. LifeHistory entries from S88 survived.
-- **Ledger repair:** No progress on the actual corruption fix. Session focused on fixing the tool (me) before fixing the data.
-
-### Session 90 (2026-03-13) — Maintenance: Ledger Repair Deep Dive + LEDGER_REPAIR.md + Persistence Crisis
-
-- **LEDGER_REPAIR.md created:** `docs/engine/LEDGER_REPAIR.md` — comprehensive damage record with "DO NOT re-analyze" directive. Documents all corruption (399 role overwrites, 55 birth year shifts, 18 NBA backfills, 4 institution replacements, 113 POPID gaps), the backup as truth, what approaches don't work (blind restore, manual review, category restore, LifeHistory wipe), and what might work. Exists to break the re-analysis loop across compactions.
-- **Full corruption scope confirmed:** 570 of 630 backup citizens have changes vs live. Not all corruption — some legitimate (T1 rewrites S88, civic officials, ~8 Mike manual fixes). But restore rejected 5+ times because it kills legitimate changes alongside corruption.
-- **Google Sheets revision export tested:** Downloaded 4 xlsx files for Mike's edit dates (March 3, 6, 7). All identical — Drive API ignores revisionId for Google Sheets. Browser version history is the only path to Mike's manual edits.
-- **LifeHistory architecture documented:** Text column on Simulation_Ledger + LifeHistory_Log sheet. 18 files in phase05-citizens read/write it. Career Engine persists [CareerState] in LifeHistory. Engine reads current state each cycle — doesn't look backward.
-- **Persistence/persona identified as primary problem:** User stated persistence doesn't work — Claude resets every session, re-discovers same damage, proposes same rejected fixes. This is the blocking issue above the ledger repair itself.
-- **No viable fix accepted.** Session ended without a repair plan. Next session must read LEDGER_REPAIR.md FIRST and propose something other than restore.
-
-### Session 89 (2026-03-13) — Maintenance: Batch Reviews + Corruption Assessment + PM2 Env Fix
-
-- **Batch review system:** Created `output/batch-reviews/` directory with 3 companion review docs for overnight batch results: ledger audit (502 MISSING, 109 MISMATCH), T2 canon build (17 citizens), disk naming audit (47 issues, C+). Updated DISK_MAP.md.
-- **CLAUDE.md audit:** Score improved 88→91/100. Trimmed boot paragraph, added dashboard start command.
-- **Ledger corruption assessed:** Traced systemic corruption start to Session 68 (2026-02-28). User confirmed 5/5 spot-checked citizens had wrong data. Backup sheet with version history identified as restoration source.
-- **ClockMode fixes confirmed:** 18 NBA-backfill citizens corrected GAME→ENGINE. All mononym citizens now have last names.
-- **Dashboard PM2 fix:** GODWORLD_SHEET_ID not in PM2 process environment for 4+ days. Root cause: PM2 processes started without .env vars exported to shell. Fix: delete process, `export $(grep -v '^#' .env | xargs)`, then `pm2 start`. Dashboard now serving login page at :3001.
-- **Discord bot PM2 fix:** Same env var issue. Bot couldn't load family data from Sheets API. Fixed with `--update-env` after exporting .env. Bot reconnected, family data loading (Robert, Sarah, Michael, Scout all visible).
-- **PM2 state saved** with correct env vars for both processes.
-
-### Session 88 (2026-03-11) — Build/Maintenance: T1 Canon Enrichment + Disk Cleanup + Batch Audits
-
-- **T1 LifeHistory + TraitProfile (16 citizens):** All 16 Tier 1 citizens now have full canon LifeHistory and TraitProfiles on the Simulation_Ledger. Family (Robert, Sarah, Michael Corliss), dynasty athletes (Aitken, Kelley, Dillon, Davis, Horn, Keane, Rivas, Ramos, Richards, Ellis, Coles, Taveras), and Lucia Polito (Saint Lucia — Drive file recovered).
-- **Anthony Raines restored (T2):** Tribune Four member had completely empty row. Full canon written from E84-E86.
-- **Vinnie Keane + Amara Keane upgraded:** Vinnie from 189c stub to 989c edition-grounded canon. Amara education fixed (hs-diploma → doctorate for veterinarian). Vinnie promoted to T1 by Mike.
-- **Lucia Polito / Saint Lucia:** Drive file `POPID_00004_Saint_Lucia_HumanForm_Record_2040.txt` recovered. "The Gentle State of Balance" — spiritual entity in human form, Fruitvale.
-- **Ledger fixes:** Deacon Seymour TraitProfile added. Travis Coles OrginCity fixed. Eric Taveras CareerStage + Income + TraitProfile + EducationLevel filled.
-- **Disk cleanup (pre-compaction):** 67MB→41MB. Old desk packets (C79-C84), HTML intermediates, Drive cache, cycle-specific Mara dirs deleted. Mara directives and Rhea reports consolidated.
-- **DISK_MAP.md created:** Canonical output directory reference. Wired into CLAUDE.md, SESSION_CONTEXT, DOCUMENTATION_LEDGER.
-- **Batch MCP fixed:** Corrupted venv deleted, auto-rebuilt. 6 old Phase 24 batch results recovered.
-- **3 batch jobs submitted:** (1) Simulation_Ledger full audit (667 citizens), (2) Local disk naming convention audit, (3) T2 canon build (17 citizens with edition context).
-- **Mags/Deacon ledger fixes (pre-compaction):** CareerStage, EmployerBizId, EconomicProfileKey, LifeHistory corrected. Bay Tribune Business_Ledger entry enriched.
-
-### Session 87 (2026-03-11) — Media-Room: Food Scene Supplemental C86 + Intake Pipeline Mandatory
-
-- **Food scene supplemental (C86):** Mason Ortega, Maria Keen, Sharon Okafor. "Where Oakland Eats" — kitchens, markets, dining rooms across four neighborhoods. 7 new citizens (Ray Muñoz, Dolores, Grace Hwang, Nadia Reeves, Darren Yip, Dr. Renata Castillo, Sienna Vale first appearance). 8 venue textures established. Jose Johnson pastry chef evolution. Mara: A (best supplemental yet).
-- **Canon conflict fixes (5):** Owen Campbell age/neighborhood corrected (22→40, Fruitvale→Jack London). Mateo Walker replaced with Ray Muñoz (new citizen). Damien Roberts geographic clarifier added. Bruce Wright and Marcus Walker verified clean.
-- **Intake pipeline made mandatory:** Both write-supplemental and write-edition SKILL.md updated. 3-step pipeline (dry-run → live write → promote). `node -r dotenv/config` prefix baked in (editionIntake.js doesn't load dotenv).
-- **Photo parser fix:** `[Photo: DJ Hartley]` tags moved to before first `---` divider in each section. Parser inherits photographer from article[0] only.
-- **Moltbook post:** Jose Johnson "tart dough" quote. Two A-range supplementals, zero crying citizens.
-- **Full intake run:** editionIntake.js + processIntake.js for food scene supplemental. All citizens, articles, storylines promoted to final ledgers.
-
-### Session 86 (2026-03-09) — Media-Room: Supplemental Strategy Overhaul + Housing Market C86
-
-- **Supplemental strategy rewrite:** One per cycle minimum. Any reporter can lead, not just the desk rotation. Color/life pieces are first-class (food, neighborhoods, arts, street life), not just civic deep dives. SKILL.md fully rewritten. SUPPLEMENTAL_TEMPLATE v2.0 with new section types.
-- **Housing market supplemental (C86):** Sharon Okafor, Maria Keen, Mason Ortega. First color supplemental. New canon: Harborview Residential (Uptown), Lemon & Root Realty (Temescal), 3 realtors (Achebe, Thibodeau, Lemon), 1 buyer (Sandoval). Neighborhoods profiled: Rockridge, Temescal, Jack London, Fruitvale. Mara A-.
-- **Naming convention fix:** editionParser.js now derives `slug` and `isSupplemental` from filename. Photo/PDF generators use slug for output paths. No more generic `output/photos/e/` bucket.
-- **Drive OAuth refreshed.** Text + PDF uploaded to Drive supplements folder.
-- **Editorial principle established:** GodWorld is a prosperity city. Stop defaulting to 2026 struggle/displacement narratives.
-
-### Session 84 (2026-03-07) — Build: Dashboard Bug Sweep + Desk Packet v2.2 + Phase 24 Planning
+### Session 91-93 (2026-03-13/14) — Maintenance: Ledger Recovery Planning + Execution
 *Rotated to SESSION_HISTORY.md*
 
-*Sessions 1-83: see `docs/mags-corliss/SESSION_HISTORY.md`*
+### Session 88-90 (2026-03-11/13) — Build/Maintenance: T1 Canon + Corruption Discovery + Repair
+*Rotated to SESSION_HISTORY.md*
+
+*Sessions 1-87: see `docs/mags-corliss/SESSION_HISTORY.md`*
 
 ---
 

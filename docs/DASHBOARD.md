@@ -265,12 +265,12 @@ The sports desk gets thin data compared to what the dashboard serves:
 
 ### Stale Data Files Referenced by Dashboard
 
-| File | Last Updated | Issue | Fix |
-|------|-------------|-------|-----|
-| `citizen_archive.json` | Mar 16 | 174 entries, GEN-* IDs, wrong POPIDs (Mark Aitken shows POP-00020 not POP-00003) | Rebuild from curated archive |
-| `initiative_tracker.json` | Feb 28 | Stale milestones, stale action cycles | Refresh at cycle/edition |
-| `edition_scores.json` | ~E85 | Missing E86 (A) and E87 (B) scores | Update after each Mara audit |
-| `article-index.json` | Rebuilt S106 | Clean — 244 entries, 0 mirrors | Current |
+| File | Last Updated | Status |
+|------|-------------|--------|
+| `citizen_archive.json` | Mar 16 | Stale — auto-refreshes when `buildDeskPackets.js` runs (E88 pipeline) |
+| `initiative_tracker.json` | Feb 28 | Stale — needs manual refresh before E88 |
+| `edition_scores.json` | S106 | **Current** — E81-E87 scored |
+| `article-index.json` | S106 | **Current** — 244 entries, 0 mirrors |
 
 ---
 

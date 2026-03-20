@@ -241,3 +241,70 @@ Existing memory files in `.claude/agent-memory/` are already in the right locati
 **Implementation phases:** `authorized` → `committee-review` → `disbursing` → `stalled` → `complete`
 **Files modified:** `scripts/buildDeskPackets.js` (recentOutcomes, civicConsequences, truesource), `output/initiative_tracker.json` (all 4 initiatives updated with Mara audit corrections)
 **Sheet changes:** Mike added 4 columns to Initiative_Tracker sheet (ImplementationPhase, MilestoneNotes, NextScheduledAction, NextActionCycle). All populated with Mara-corrected data.
+
+---
+
+## Sessions 105-106 (2026-03-20) — Architecture Grounding + Dashboard Audit
+
+### Architecture Documentation (S105)
+
+9 architecture docs created, covering every system layer:
+
+| Doc | What it covers |
+|-----|---------------|
+| `docs/SUPERMEMORY.md` | 3 Supermemory containers (mags/godworld/mara), plugin hooks, API, isolation rules |
+| `docs/CLAUDE-MEM.md` | Local observation system — 6,282 observations, 741MB, Sonnet cost concern |
+| `docs/DASHBOARD.md` | 31 API endpoints, 4 data sources, citizen detail audit, civic/sports assessments |
+| `docs/DISCORD.md` | Bot knowledge sources (6 local files + SM RAG), Moltbook heartbeat |
+| `docs/SPREADSHEET.md` | All 65 spreadsheet tabs — 45 active, 8 dead, 7 utility, 15 ghost references |
+| `docs/SIMULATION_LEDGER.md` | 675 citizens, 46-column data flow (writers/readers), ClockMode processing, flag bug |
+| `docs/WORKFLOWS.md` | 4 workflows — files loaded, commands, risks, rules |
+| `docs/EDITION_PIPELINE.md` | Full 27-step pipeline — dependencies, failure modes, 3 broken steps |
+| `docs/OPERATIONS.md` | PM2 processes, cron schedule, health checks, troubleshooting |
+
+### Mara Reference Pipeline (S105)
+
+- `scripts/buildMaraReference.js` — pulls 6 spreadsheet tabs, outputs clean text files to `output/mara-reference/`
+- 5 files pushed to `mara` Supermemory container (citizen roster 509, tribune 29, chicago 123, businesses 51, faith 16)
+- A's roster pushed to `godworld` container
+- Mike created `As_Roster` (89) and `Bay_Tribune_Oakland` (29) spreadsheet tabs
+
+### Bugs & Findings (S105)
+
+- **UNI/MED/CIV flag comparison bug** — Engine checks `=== "y"` but values are "Yes"/"yes". Skip gates never fire. 8 engine files affected, 4 with no ClockMode backup. Batch report: `batch_flag_bug_impact_2026-03-20.md`
+- **Career/education coherence** — 88.6% coherent, 24 mismatches (8 licensure impossibilities, 6 income outliers, 4 age/stage impossibilities). Batch report: `batch_career_education_coherence_2026-03-20.md`
+- **Citizen routing bottleneck** — 675→20 via 4-stage filter chain. InterviewReady gate kills 91%. Batch report: `batch_citizen_routing_analysis_2026-03-20.md`
+
+### Agent Supermemory Audit (S106) — COMPLETE
+
+All scripts verified correct containers. No old GodWorld org refs. No mara access. Editions E83-E87 + 5 supplementals ingested to godworld. Discord bot updated to search mags+godworld. Batch report: `batch_agent_supermemory_audit_2026-03-20.md`
+
+### World Memory — Phase 1 (S106) — COMPLETE
+
+- Dashboard `getAllEditions()` reads `archive/articles/` as Source 4 (199 curated articles, C1-C77)
+- Content-based title/author extraction replaces filename parsing
+- Mirror/junk files filtered. Article index rebuilt (244 entries, 0 mirrors)
+- `buildArchiveContext.js` wired to query dashboard API alongside Supermemory
+- Discord bot `loadArchiveKnowledge()` rewritten to read curated archive (was reading empty dir)
+- See `docs/WORLD_MEMORY.md` for remaining phases
+
+### Dashboard Fixes (S106)
+
+- Supplemental detection: `isSupplemental` flag + filename cycle parsing. 7 supplementals visible (was 0)
+- Warriors header: filtered from frontend (not a GodWorld franchise)
+- Edition scores: E86 (A) and E87 (B) added to `edition_scores.json`
+- Archive search: 256 total articles searchable across C1-C87
+- Civic pipeline assessed: initiative tracker stale, status mapping issues documented
+- Sports data gap documented: 10 vs 62 players available to sports desk
+- Chicago tab proposed: satellite city deserves its own dashboard tab
+- citizen_archive.json: identified as auto-refresh via buildDeskPackets.js pipeline
+
+### Other Fixes (S105-S106)
+
+- Moltbook heartbeat: 30min→4hr. Stale post 404 fixed.
+- MEMORY.md cleaned: stale items removed, accurate population numbers
+- CLAUDE.md updated: gotchas corrected, 9 architecture docs in on-demand list
+- Comm Hub updated: SuperMemory tab + md library tab current (564 MDs)
+- Archive policy added to DISK_MAP.md
+- Moltbook `begin-mirror-package` filtered from dashboard
+- Dead spreadsheet tabs identified for archival

@@ -13,35 +13,43 @@
 
 Items that should be addressed in the next session. Updated at session end.
 
-### Open
+### Open — Pre-E88 (must fix before next edition)
 
-- **FIX: editionIntake.js write targets** — Script writes to `Intake`, `Advancement_Intake1`, `Business_Intake` tabs that don't exist. Actual tabs: `Media_Intake`, `Citizen_Usage_Intake`, `Storyline_Intake`. Column schemas differ. Must map writes to actual tabs. Delimiter regex already fixed (accepts `===` and `###`). Parsing works — writes don't land. CRITICAL.
-- **FIX: Citizen routing to agents** — buildDeskPackets.js routes only 20 `interviewCandidates` (reporters/staff). 675 Simulation_Ledger citizens never reach desk or supplemental agents. Root cause of repeated citizen reuse and generic writing. User has flagged across 8+ sessions. #1 priority. **Batch report:** `output/batch-reviews/batch_citizen_routing_analysis_2026-03-20.md` — full bottleneck trace, 4-stage filter chain mapped, fix proposed.
-- **DESIGN: Agent knowledge separation** — Supermemory is Mags' memory (journal, editorial instincts, session context, Maker conversations). Agents currently query it for writing context, which leaks meta-layer data into journalism — likely cause of persistent "Paulson as owner" errors and tonal mimicry. Agents need a clean canon-only knowledge source: published editions, truesource, citizen facts. No Mags, no Maker, no session history. Agents already have local disk workspaces (`output/desks/`, agent-memory) — evaluate whether local disk is sufficient or if a separate clean Supermemory space is needed. Design the separation before building.
-- **FIX: gradeEdition.js supplemental support** — First live run (S101) found 2 of 4 articles, 0 errata (fixed by hand, never logged to errata.jsonl), desk mapping wrong (Jax→freelance, Mint→sports, Trevor/Sharon missing). Three fixes needed: article parser must handle supplemental section headers (not just Cycle Pulse desk names), errata must be logged to errata.jsonl during editorial review (not just fixed in text), and desk/reporter mapping needs supplemental-aware routing.
-- **AUDIT: Agent Supermemory paths** — ~~Audit all agent/script SM references.~~ DONE S106. All 4 scripts verified correct containers. No old GodWorld org refs. No mara access. Agent files have no SM references (correct — they use local workspaces). Editions E83-E87 + 5 supplementals ingested to godworld (was empty). **Batch report:** `output/batch-reviews/batch_agent_supermemory_audit_2026-03-20.md`
-- **DOC: Spreadsheet Environment** — ~~Audit all 65 tabs.~~ DONE S105. See `docs/SPREADSHEET.md`. 45 active, 8 dead, 7 utility, 15 ghost references.
-- **CLEANUP: Dead spreadsheet tabs** — Archive/hide 8 dead tabs identified in S105 audit: Press_Drafts (writer deleted S98), MLB_Game_Intake (confirmed dead), NBA_Game_Intake (likely dead — confirm with Mike), Sports_Calendar (killed S64), Arc_Ledger (superseded by Event_Arc_Ledger), Faith_Ledger (event log — no reader), LifeHistory_Archive (no reader), Youth_Events (8 rows, no reader). Backup CSV first via `backupSpreadsheet.js`.
-- **FIX: Career/education coherence — 24 mismatches** — Batch audit found 88.6% coherence across 509 ENGINE citizens. 8 licensure impossibilities (hs-diploma surgeons/attorneys), 6 income outliers (likely missing digits), 4 age/stage impossibilities, 6 overqualified-without-narrative. 34 minor flags kept as features. **Batch report:** `output/batch-reviews/batch_career_education_coherence_2026-03-20.md` — full mismatch table with recommended fixes per citizen.
-- **FIX: Press_Drafts ghost references** — `applyStorySeeds.js` and `mediaRoomIntake.js` still reference Press_Drafts (writer deleted S98). These are reads that return empty results. Clean up the dead references so they don't confuse future audits.
-- **BUG: UNI/MED/CIV flag check uses wrong comparison** — Engine checks `=== "y"` but actual column values are "Yes"/"yes"/"No"/"no"/"n". The check never matches, so `isUNI||isMED||isCIV` skip gates never fire. 8 engine files affected. 4 have NO ClockMode backup (economy, skills, relationships, health) — these are critical. Fix: shared `flagIsSet()` utility. Found S105. See `docs/SIMULATION_LEDGER.md`. **Batch report:** `output/batch-reviews/batch_flag_bug_impact_2026-03-20.md` — full impact assessment, priority ranking, corruption estimate.
-- **DOC: Simulation_Ledger Guide** — ~~Consolidate citizen architecture.~~ DONE S105. See `docs/SIMULATION_LEDGER.md`. Full column data flow (writers/readers per column), ClockMode processing, tier system, flag state bug.
-- **DOC: Workflow Guide** — ~~Document 4 workflows.~~ DONE S105. See `docs/WORKFLOWS.md`.
-- **DOC: Edition Pipeline** — ~~Full 27-step pipeline.~~ DONE S105. See `docs/EDITION_PIPELINE.md`. 3 broken steps identified.
-- **DOC: Operations** — ~~Crons, PM2, scheduled tasks.~~ DONE S105. See `docs/OPERATIONS.md`.
-- **FIX: Rebuild citizen_archive.json** — Current file has 174 entries from pre-curation data with GEN-* IDs and junk file references ("Media_Cannon_Text_Mirror"). Dashboard citizen detail (Layer 2 + Layer 4) returns null or wrong data for most citizens. Rebuild from curated `archive/articles/` + `editions/` with POP-* IDs. See `docs/DASHBOARD.md` Citizen Detail Audit.
-- **FIX: Dashboard Warriors header bug** — ~~Warriors card on Sports tab.~~ DONE S106. Filtered from frontend. Feed data retained for Paulson storyline context.
-- **DESIGN: Supplemental display on dashboard frontend** — 7 supplementals now detected with cycle numbers and `isSupplemental` flag but no visual placement. Need a section on the Edition tab or a supplemental filter/view. Data is ready.
-- **DESIGN: Chicago dashboard tab** — Chicago is a satellite city with 123 citizens, 2 bureau reporters, full Bulls season data, and Paulson's GM role. Currently buried in bottom half of Sports tab. Propose dedicated CHICAGO tab surfacing: Bulls card + feed, Chicago citizens, bureau articles, Paulson front office. API already supports this. See `docs/DASHBOARD.md` Chicago Tab Proposal.
-- **FIX: Update edition_scores.json** — Missing E86 (A) and E87 (B) Mara audit scores. Newsroom tab shows score history stopping at E85.
-- **FIX: Refresh initiative_tracker.json** — Last updated Feb 28. Stale milestones, stale nextActionCycle values (86, 89 when current is 87). Transit Hub vote was targeted C86 — status unknown. 3 of 5 initiatives show "UNTRACKED" on dashboard frontend despite having full implementation data (status label mapping issue). Refresh before E88. See `docs/DASHBOARD.md` Civic Pipeline Assessment.
-- **FIX: Sports desk truesource data gap** — Desk workspace `truesource_reference.json` has 10 players × 3 fields (name, position, popId). Dashboard `/api/players` has 62 players with full TrueSource data (stats, contracts, attributes, quirks). Sports desk writes with 11% of available player data. Either enrich the reference file via `buildDeskFolders.js` or route sports agent to query `/api/players` directly. See `docs/DASHBOARD.md` Sports Data Gap.
-- **PROJECT: World Memory — Connect C1-C77 archive to all systems** — 216 curated articles in `archive/articles/` are invisible to dashboard, agents, Supermemory, and indexes. Agents only know the world since C78. 5-phase plan: (1) Dashboard reads archive, (2) Rebuild article indexes, (3) Ingest key articles to godworld, (4) buildArchiveContext.js searches local files, (5) Historical context in desk workspaces. Full plan: `docs/WORLD_MEMORY.md`. This is why journalism is thin and repetitive — the city has no past.
-- **Produce Edition 88** — Run cycle 88, then produce E88 with autonomous agents + EIC editorial direction. Agents write, EIC directs (assigns angles, enforces structure, writes Editor's Desk last). See NEWSROOM_MEMORY.md S98 review for standing mandates.
-- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage. Pipeline tightened S99: v3.9 data, grading, thinking blocks, model tiers, errata, truesource, Mara guidance all wired into write-supplemental SKILL.md as conditional sources.
-- **Test `/effort` levels on edition run** — Native `/effort` command supports low/medium/high per task. Test: low for letters/business desk, high for civic/sports. Measure cost difference.
-- **CLEANUP: Archive old session transcripts to Drive** — `.claude/projects/` is 1.1GB (81 session JSONLs). Archive oldest 30 to Drive (`GodWorld_Backups/session_archive/`), delete local copies. No summarization needed — lessons already extracted into docs. Separate session from architecture work. See `output/DISK_MAP.md` Archive Policy.
-- **Node.js security patch** — Security releases scheduled March 24, 2026. Update after they drop.
+- **FIX: editionIntake.js write targets** — Writes to tabs that don't exist (`Intake`, `Advancement_Intake1`, `Business_Intake`). Actual tabs: `Media_Intake`, `Citizen_Usage_Intake`, `Storyline_Intake`. Parsing works — writes don't land. CRITICAL.
+- **FIX: Citizen routing to agents** — 675→20 bottleneck in `getInterviewCandidates()`. 4-stage filter chain, main killer is `InterviewReady === 'TRUE'` (91% loss). #1 priority. **Batch:** `batch_citizen_routing_analysis_2026-03-20.md`
+- **BUG: UNI/MED/CIV flag check** — Engine checks `=== "y"`, values are "Yes"/"yes". Skip gates never fire. 8 files affected, 4 with no ClockMode backup (economy, skills, relationships, health). Fix: shared `flagIsSet()`. **Batch:** `batch_flag_bug_impact_2026-03-20.md`
+- **FIX: Refresh initiative_tracker.json** — Last updated Feb 28. Stale milestones. Transit Hub vote status unknown. 3 of 5 initiatives show "UNTRACKED" on dashboard.
+- **FIX: Sports desk truesource data gap** — 10 players × 3 fields in workspace. Dashboard has 62 × 20+. Sports desk writes with 11% of data.
+
+### Open — Dashboard & Data Quality
+
+- **FIX: Career/education coherence** — 24 mismatches across 509 ENGINE citizens. 8 licensure impossibilities, 6 income outliers, 4 age/stage impossibilities. 88.6% coherent overall. **Batch:** `batch_career_education_coherence_2026-03-20.md`
+- **DESIGN: Supplemental display on frontend** — 7 supplementals detected with cycles. Need visual placement on Edition tab or filter view.
+- **DESIGN: Chicago dashboard tab** — 123 citizens, 2 reporters, Bulls data, Paulson GM. Currently buried in Sports tab. See `docs/DASHBOARD.md`.
+- **FIX: Rebuild POPID article index** — `ARTICLE_INDEX_BY_POPID.md` generated Feb 5 from old Drive downloads. No automated builder. Needs script.
+- **CLEANUP: Dead spreadsheet tabs** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`.
+- **FIX: Press_Drafts ghost references** — `applyStorySeeds.js` and `mediaRoomIntake.js` still reference deleted tab.
+- **FIX: gradeEdition.js supplemental support** — Article parser, errata logging, desk mapping all need supplemental awareness.
+
+### Open — Architecture & Production
+
+- **DESIGN: Agent knowledge separation** — Agents should use `godworld` for canon data, not `mags` for personal memory. Local workspaces + dashboard API is the clean path.
+- **PROJECT: World Memory** — Phase 1 DONE (dashboard reads archive). Remaining: (3) ingest key archive articles to godworld, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`.
+- **Produce Edition 88** — Run cycle 88, then E88 with autonomous agents + EIC direction.
+- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum.
+
+### Open — Infrastructure & Maintenance
+
+- **CLEANUP: Archive old session transcripts** — 1.1GB in `.claude/projects/`. Archive oldest 30 to Drive. See `output/DISK_MAP.md`.
+- **Test `/effort` levels on edition run** — Low for routine desks, high for complex.
+- **Node.js security patch** — Scheduled March 24, 2026.
+
+### Recently Completed (S105-S106)
+
+*Full details in `ROLLOUT_ARCHIVE.md` → "Sessions 105-106"*
+
+- **S106:** Dashboard full audit + fixes (8 tabs, archive wired, supplementals visible, Warriors hidden, scores updated, civic/sports assessed). World Memory Phase 1 complete. Agent SM audit complete. Editions ingested to godworld. Moltbook fixed.
+- **S105:** 9 architecture docs. Mara reference pipeline. UNI/MED/CIV flag bug found. Spreadsheet audit. 4 batch jobs submitted. WORLD_MEMORY.md. Archive policy.
 
 ### Recently Completed (S94–S105)
 

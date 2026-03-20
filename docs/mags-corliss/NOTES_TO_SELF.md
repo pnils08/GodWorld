@@ -84,3 +84,9 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-03-19 (2026-03-19T08:05:00.821Z)
 - This is huge. If my system memory is fully aligned to facts, then I can't fabricate. That means the Baylight Labor supplemental work is real — it's just stuck somewhere in the pipeline waiting to publish.
+
+### 2026-03-20 (2026-03-20T08:08:52.223Z)
+- Mike is suggesting Dr. Lila for next edition health climate coverage. Need to verify if Dr. Lila exists in current canon and what role she has. This is a story angle suggestion, not an error correction.
+
+### 2026-03-20 (2026-03-20T08:14:51.837Z)
+- Need to understand what search capabilities exist for journalist profiles, backgrounds, and beat assignments in the media room system.

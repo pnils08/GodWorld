@@ -162,6 +162,29 @@ For UNI-flagged citizens, enriches with player-index.json data. POPID matching a
 
 ---
 
+## Civic Pipeline Assessment (S106)
+
+The civic data pipeline is rich underneath but has freshness and display issues.
+
+**What's working:**
+- Council composition from live Civic_Office_Ledger — all 9 seats, factions, POPIDs, notes
+- All 5 initiatives documented with implementation detail, key contacts, newsroom notes, Mara corrections
+- 40 civic documents from initiative agents
+- Article counts per initiative via keyword cross-reference (73-147 articles each)
+
+**What needs work:**
+| Issue | Impact | Fix |
+|-------|--------|-----|
+| `initiative_tracker.json` last updated Feb 28 | Stale status, stale milestones, stale `nextActionCycle` values | Refresh at each cycle or edition. `buildInitiativePackets.js` should update this. |
+| 3 initiatives show "UNTRACKED" on frontend | Misleading — data has full implementation detail but frontend maps status labels inconsistently | Frontend status mapping needs to recognize "committee-review", "mobilizing", "pre-vote" as tracked states |
+| No per-member vote breakdown | Can't see who voted yes/no on each initiative | Vote data exists in `recentOutcomes` in desk packets but not in initiative_tracker.json |
+| Transit Hub vote targeted C86, current is C87 | Did the vote happen? Tracker doesn't know. | Update status after cycle runs |
+| No council↔initiative link in UI | Can't click a council member to see their positions | Future enhancement |
+
+**For voice agents and civic desk:** The initiative tracker data is what feeds voice agent briefings via `buildInitiativePackets.js`. Stale tracker = stale voice statements = stale civic coverage. Refreshing this file before each edition is critical for the civic pipeline.
+
+---
+
 ## Sports Data Gap
 
 The sports desk gets thin data compared to what the dashboard serves:

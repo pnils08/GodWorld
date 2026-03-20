@@ -237,7 +237,7 @@ The sports desk gets thin data compared to what the dashboard serves:
 
 | Item | Priority | Description | Tracked In |
 |------|----------|-------------|-----------|
-| **Rebuild citizen_archive.json** | High | Current file has 174 entries from pre-curation data with GEN-* IDs and junk file refs. Needs rebuilding from curated archive + editions with POP-* IDs. | ROLLOUT_PLAN |
+| **Rebuild citizen_archive.json** | High | 174 stale entries with GEN-* IDs and junk file refs. **Auto-refreshes when `buildDeskPackets.js` runs** (edition pipeline step 6). Will be current at E88 production. No manual rebuild needed — just run the pipeline. | — |
 | **Rebuild POPID article index** | High | `ARTICLE_INDEX_BY_POPID.md` (176 citizens) generated Feb 5 from Drive downloads. Needs rebuilding from clean article-index.json. No automated builder exists. | WORLD_MEMORY.md Phase 2 |
 | ~~Rebuild article indexes~~ | — | **DONE S106.** 244 entries, 0 mirrors. | — |
 | ~~Filter archive bundle noise~~ | — | **DONE S106.** Content-based title/author extraction. Junk/mirror filtered. | — |

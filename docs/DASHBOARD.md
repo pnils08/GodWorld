@@ -274,6 +274,58 @@ The sports desk gets thin data compared to what the dashboard serves:
 
 ---
 
+## How the Dashboard Stays Current
+
+The dashboard reads from two categories: live data that auto-refreshes, and local files that require pipeline actions.
+
+### Auto-Refresh (no action needed)
+
+| Data Source | Refresh | Cache | Endpoints Served |
+|-------------|---------|-------|-----------------|
+| **Simulation_Ledger** (live sheet) | Every API call | 5 min | `/api/citizens`, `/api/citizens/:popId`, `/api/world-state` |
+| **Civic_Office_Ledger** (live sheet) | Every API call | 5 min | `/api/council` |
+| **Neighborhood_Demographics** (live sheet) | Every API call | 5 min | `/api/neighborhoods` |
+| **Cycle_Weather** (live sheet) | Every API call | 5 min | `/api/weather` |
+| **Cultural_Ledger** (live sheet) | Every API call | 5 min | `/api/culture` |
+| **Transit_Metrics** (live sheet) | Every API call | 5 min | `/api/transit` |
+| **Faith_Organizations** (live sheet) | Every API call | 5 min | `/api/faith` |
+| **Domain_Tracker** (live sheet) | Every API call | 5 min | `/api/domains` |
+| **Crime_Metrics** (live sheet) | Every API call | 5 min | `/api/world-state` |
+| **World_Config** (live sheet) | Every API call | 5 min | `/api/world-state` |
+| **Edition files** (editions/ + archive/) | 5 min cache | Re-scans dirs | `/api/editions`, `/api/search/articles`, `/api/edition/:cycle` |
+
+### Pipeline-Refresh (requires action)
+
+| File | Generator | When to Run | Endpoints Affected | Current Status |
+|------|-----------|------------|-------------------|---------------|
+| `citizen_archive.json` | `buildDeskPackets.js` | Step 6 of edition pipeline | `/api/citizens` (ref counts), `/api/citizens/:popId` (Layer 2+4), `/api/newsroom` (archive ranking) | Stale (Mar 16) — refreshes at E88 |
+| `base_context.json` | `buildDeskPackets.js` | Step 6 of edition pipeline | `/api/world-state` (fallback), sports digests | Stale — refreshes at E88 |
+| `initiative_tracker.json` | Manual update or `buildInitiativePackets.js` | Before each edition | `/api/initiatives`, `/api/newsroom` | **Stale (Feb 28)** — manual refresh needed |
+| `edition_scores.json` | Manual append after Mara audit | After each Mara audit | `/api/scores`, `/api/newsroom` (score history) | Current (S106 — E81-E87) |
+| `article-index.json` | `buildArticleIndex.js --write` | After each edition | `/api/articles/index` | Current (S106 — 244 entries) |
+| `player-index.json` | `buildPlayerIndex.js --write` | After TrueSource data changes | `/api/players`, `/api/players/:popId` | Current (62 players) |
+| `bay_tribune_roster.json` | Manual schema file | When reporter roster changes | `/api/newsroom` (roster section) | Current |
+
+### What Should Be Automated
+
+These files currently require manual action but could be automated:
+
+| File | Current | Could Be |
+|------|---------|----------|
+| `article-index.json` | Run `buildArticleIndex.js --write` manually after each edition | Add as post-edition pipeline step (after step 14 save) |
+| `edition_scores.json` | Manually append after Mara audit | `gradeEdition.js` could auto-append if Mara audit data is structured |
+| `initiative_tracker.json` | Manual edit | `buildInitiativePackets.js` reads Initiative_Tracker sheet — could write updated JSON as a side effect |
+
+### Dashboard Restart Behavior
+
+On restart (PM2 or `node dashboard/server.js`):
+- All sheet caches clear — first request re-fetches live data
+- Edition cache clears — `getAllEditions()` re-scans all 4 source directories
+- Local JSON files re-read from disk
+- No warm-up needed — first request triggers all loads
+
+---
+
 ## Frontend Status
 
 The frontend is functional but not user-optimized:

@@ -306,15 +306,15 @@ The dashboard reads from two categories: live data that auto-refreshes, and loca
 | `player-index.json` | `buildPlayerIndex.js --write` | After TrueSource data changes | `/api/players`, `/api/players/:popId` | Current (62 players) |
 | `bay_tribune_roster.json` | Manual schema file | When reporter roster changes | `/api/newsroom` (roster section) | Current |
 
-### What Should Be Automated
+### Automated Refresh (S106)
 
-These files currently require manual action but could be automated:
+These files now auto-refresh as part of the pipeline:
 
-| File | Current | Could Be |
-|------|---------|----------|
-| `article-index.json` | Run `buildArticleIndex.js --write` manually after each edition | Add as post-edition pipeline step (after step 14 save) |
-| `edition_scores.json` | Manually append after Mara audit | `gradeEdition.js` could auto-append if Mara audit data is structured |
-| `initiative_tracker.json` | Manual edit | `buildInitiativePackets.js` reads Initiative_Tracker sheet — could write updated JSON as a side effect |
+| File | Automated By | When It Fires |
+|------|-------------|--------------|
+| `article-index.json` | `postRunFiling.js` runs `buildArticleIndex.js --write` | Step 22 of edition pipeline |
+| `edition_scores.json` | `gradeEdition.js` auto-appends new score entry | Step 25 of edition pipeline (dedup by cycle) |
+| `initiative_tracker.json` | `buildInitiativePackets.js` writes fresh tracker from live sheet | Step 2 of edition pipeline |
 
 ### Dashboard Restart Behavior
 

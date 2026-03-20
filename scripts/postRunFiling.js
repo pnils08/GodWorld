@@ -259,6 +259,16 @@ Output: output/run_manifest_c{XX}.json
 
   console.log(`\nManifest: output/run_manifest_c${cycle}.json`);
 
+  // ─── Auto-rebuild article index ───
+  // Keeps dashboard search current after every edition
+  try {
+    console.log('\nRebuilding article index...');
+    execSync('node scripts/buildArticleIndex.js --write', { cwd: ROOT, stdio: 'pipe' });
+    console.log('  Article index rebuilt (output/article-index.json)');
+  } catch (err) {
+    console.warn('  Article index rebuild failed: ' + (err.message || '').split('\n')[0]);
+  }
+
   if (missing > 0) {
     process.exit(1);
   }

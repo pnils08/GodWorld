@@ -369,6 +369,40 @@ function gradeEdition(editionFile, cycle) {
     console.log(`    ${name.padEnd(20)} ${data.grade.padEnd(3)} [${data.desk}] (${data.articles} articles, ${data.criticalErrors}C/${data.warnings}W)`);
   }
 
+  // --- Auto-append to edition_scores.json ---
+  // Keeps dashboard Newsroom tab score history current
+  try {
+    const scoresPath = path.join(ROOT, 'output', 'edition_scores.json');
+    const scoresData = fs.existsSync(scoresPath)
+      ? JSON.parse(fs.readFileSync(scoresPath, 'utf-8'))
+      : { _description: 'Edition score history', scores: [] };
+
+    // Don't duplicate — check if this cycle is already scored
+    const alreadyScored = scoresData.scores.some(s => s.edition === cycle);
+    if (!alreadyScored) {
+      scoresData.scores.push({
+        edition: cycle,
+        cycle: cycle,
+        date: new Date().toISOString().split('T')[0],
+        grade: overallGrade,
+        maraGrade: maraGrade || null,
+        criticals: errata.filter(e => e.severity === 'critical').length,
+        warnings: errata.filter(e => e.severity === 'warning').length,
+        notes: errata.filter(e => e.severity === 'note').length,
+        deskErrors: Object.fromEntries(
+          Object.entries(desks).map(([desk, data]) => [desk, data.criticalErrors > 0 ? [`${data.criticalErrors} critical errors`] : []])
+        ),
+        noteText: `Auto-graded by gradeEdition.js. ${articles.length} articles, ${errata.length} errata entries.`,
+      });
+      fs.writeFileSync(scoresPath, JSON.stringify(scoresData, null, 2));
+      console.log(`\n  Score appended to edition_scores.json (E${cycle}: ${overallGrade})`);
+    } else {
+      console.log(`\n  Score already exists for E${cycle} — skipped append`);
+    }
+  } catch (err) {
+    console.warn('  edition_scores.json append failed: ' + err.message);
+  }
+
   return result;
 }
 

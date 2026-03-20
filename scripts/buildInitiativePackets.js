@@ -638,6 +638,39 @@ async function main() {
   // ── Write manifest ──
   fs.writeFileSync(path.join(OUTPUT_DIR, 'manifest.json'), JSON.stringify(manifest, null, 2));
 
+  // ── Auto-refresh initiative_tracker.json ──
+  // Keeps dashboard Tracker tab current from live sheet data
+  try {
+    const trackerData = {
+      lastUpdated: new Date().toISOString().split('T')[0],
+      updatedBy: 'buildInitiativePackets.js (auto)',
+      initiatives: initiatives.map(init => ({
+        id: init.InitiativeID,
+        name: init.Name || init.InitiativeName || '',
+        keywords: (init.Keywords || '').split(',').map(k => k.trim()).filter(Boolean),
+        status: init.Status || 'UNKNOWN',
+        voteCycle: init.VoteCycle ? parseInt(init.VoteCycle) : null,
+        vote: init.VoteResult || null,
+        budget: init.Budget || null,
+        domain: init.Domain || null,
+        neighborhoods: (init.Neighborhoods || '').split(',').map(n => n.trim()).filter(Boolean),
+        implementation: {
+          status: (init.ImplementationPhase || 'untracked').toLowerCase(),
+          phase: (init.ImplementationPhase || 'untracked').toLowerCase(),
+          summary: init.MilestoneNotes || '',
+          nextScheduledAction: init.NextScheduledAction || null,
+          nextActionCycle: init.NextActionCycle ? parseInt(init.NextActionCycle) : null,
+        },
+      })),
+    };
+
+    const trackerPath = path.join(path.resolve(__dirname, '..'), 'output', 'initiative_tracker.json');
+    fs.writeFileSync(trackerPath, JSON.stringify(trackerData, null, 2));
+    console.log(`\n  Initiative tracker refreshed: output/initiative_tracker.json (${trackerData.initiatives.length} initiatives)`);
+  } catch (err) {
+    console.warn('  initiative_tracker.json refresh failed: ' + err.message);
+  }
+
   const packetCount = Object.keys(manifest.packets).length;
   console.log(`════════════════════════════════════════════════════`);
   console.log(`  ${packetCount} initiative packets written to output/initiative-packets/`);

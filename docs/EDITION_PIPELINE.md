@@ -46,7 +46,7 @@ Skill files define the detailed instructions: `/write-edition` (steps 1-21), `/w
 
 | # | Step | Command / Action | Depends On | Failure Mode |
 |---|------|-----------------|------------|-------------|
-| 22 | Post-run filing | `node scripts/postRunFiling.js [cycle] --upload` | Steps 14-17 | Missing files, wrong names, Drive gaps |
+| 22 | Post-run filing | `node scripts/postRunFiling.js [cycle] --upload` | Steps 14-17 | Missing files, wrong names, Drive gaps. **Also auto-rebuilds article-index.json.** |
 | 23 | Edition intake | `node scripts/editionIntake.js [file] [cycle]` | Step 14 | **CURRENTLY BROKEN** — writes to wrong tab names. No citizen data ingested since S101. |
 | 24 | Citizen enrichment | `node scripts/enrichCitizenProfiles.js --edition [cycle]` | Step 23 | Edition quotes don't flow back to LifeHistory |
 | 25 | Grade edition | `node scripts/gradeEdition.js [cycle]` | Step 14 + errata.jsonl | No performance data for agents |

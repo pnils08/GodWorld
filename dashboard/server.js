@@ -972,8 +972,15 @@ function getAllEditions() {
     for (const f of readdirSync(archiveDir)) {
       if (!f.endsWith('.txt')) continue;
       if (seenFiles.has(f)) continue;
+
+      // Skip non-article files that got mixed into the archive
+      if (/jfif|\.pdf|archived-|autogen-|es5-|realism-audit|story-narrative-enhancement|integration-plan|conversion-anchor|give-each-journalist/i.test(f)) continue;
+
       const text = readText(join(archiveDir, f));
       if (!text || text.length < 100) continue;
+
+      // Skip binary/non-text content
+      if (text.startsWith('\xff\xd8') || text.startsWith('����')) continue;
 
       const cKey = contentKey(text);
       if (seenContent.has(cKey)) continue;
@@ -995,11 +1002,46 @@ function getAllEditions() {
         if (cMatch) cycle = parseInt(cMatch[1]);
       }
 
-      // Extract title from first non-empty line of content
-      const firstLine = text.split('\n').find(l => l.trim().length > 10);
-      const title = firstLine
-        ? firstLine.trim().replace(/^[#=\-*]+\s*/, '').slice(0, 120)
-        : f.replace(/\.txt$/, '').replace(/[_-]/g, ' ');
+      // Extract title and author from content (not filename)
+      const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+      let title = null;
+      let contentAuthor = null;
+
+      // Pattern 1: "REPORTER NAME — Role" on line 1, quoted title on line 2
+      // e.g. 'MARIA KEEN — Cultural Liaison' then '"Laurel\'s Dizzy Spell..."'
+      const bylineMatch = lines[0]?.match(/^([A-Z][A-Z\s.]+)\s*[—-]\s*(.+)/);
+      if (bylineMatch) {
+        contentAuthor = bylineMatch[1].trim().replace(/\b\w+/g, w => w[0] + w.slice(1).toLowerCase());
+        // Look for quoted title on next lines
+        for (let li = 1; li < Math.min(5, lines.length); li++) {
+          const quotedTitle = lines[li].match(/^[""](.+?)[""]$/);
+          if (quotedTitle) { title = quotedTitle[1]; break; }
+          // Also accept non-quoted title if it's not a metadata line
+          if (!lines[li].match(/^(Cycle|Weather|Sentiment|Section|---)/i) && lines[li].length > 15) {
+            title = lines[li].replace(/^[""]|[""]$/g, ''); break;
+          }
+        }
+      }
+
+      // Pattern 2: Edition/section headers (multi-cycle coverage, full editions)
+      // e.g. 'THE CYCLE PULSE — EDITION 79' or 'Cycles 70-72 Coverage'
+      if (!title) {
+        for (let li = 0; li < Math.min(10, lines.length); li++) {
+          const line = lines[li].replace(/^[#=\-*|]+\s*/, '').replace(/\s*[#=\-*|]+$/, '');
+          if (line.length > 10 && !line.match(/^(OAKLAND TRIBUNE|THE CYCLE PULSE$|SECTION|={3,})/i)) {
+            title = line.slice(0, 120);
+            break;
+          }
+        }
+      }
+
+      // Final fallback: use the slug from the filename
+      if (!title) {
+        title = (archiveMatch ? archiveMatch[3] : f.replace(/\.txt$/, '')).replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      }
+
+      // Use content-extracted author over filename-parsed author
+      if (contentAuthor) author = contentAuthor;
 
       // Try to parse as a full edition (multi-article), fall back to single article
       const parsed = parseEdition(text);

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-19 | Engine: v3.1 | Cycle: 87 | Session: 104
+Last Updated: 2026-03-20 | Engine: v3.1 | Cycle: 87 | Session: 105
 
 ---
 
@@ -185,6 +185,19 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 105 (2026-03-20) — Architecture Grounding + Mara Reference Pipeline
+
+- **9 architecture docs created:** SUPERMEMORY.md, CLAUDE-MEM.md, DASHBOARD.md, DISCORD.md, SPREADSHEET.md, SIMULATION_LEDGER.md, WORKFLOWS.md, EDITION_PIPELINE.md, OPERATIONS.md. Every system layer now has a permanent reference doc.
+- **Mara reference pipeline complete:** `buildMaraReference.js` pulls 6 tabs → `output/mara-reference/`. 5 files pushed to `mara` Supermemory container (citizen roster 509, tribune 29, chicago 123, businesses 51, faith 16). A's roster pushed to `godworld`.
+- **Mike created As_Roster (89) and Bay_Tribune_Oakland (29)** spreadsheet tabs with POPIDs.
+- **Spreadsheet audit:** 65 tabs audited. 45 active, 8 dead (Press_Drafts, MLB_Game_Intake, NBA_Game_Intake, Sports_Calendar, Arc_Ledger, Faith_Ledger, LifeHistory_Archive, Youth_Events), 15 ghost references in engine code.
+- **BUG: UNI/MED/CIV flag comparison** — Engine checks `=== "y"` but values are "Yes"/"yes". Skip gates in Phase 5 never fire. A's players getting lifecycle processing they shouldn't. High priority fix.
+- **Discord bot updated:** Now searches `mags` + `godworld` containers (was `mags` only). Writes to `mags` only. `mara` blocked.
+- **Moltbook fixed:** Stale post 404 cleared, frequency 30min → 4hrs.
+- **Archive policy added** to DISK_MAP.md. Session transcript cleanup queued.
+- **CLAUDE.md updated:** Gotchas corrected, new commands added, 9 architecture docs in on-demand list.
+- **Comm Hub updated:** SuperMemory tab + md library tab current (564 total MDs).
 
 ### Session 104 (2026-03-19) — Boot Optimization + Mara Reference File Planning
 

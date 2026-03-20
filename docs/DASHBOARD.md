@@ -246,6 +246,30 @@ The sports desk gets thin data compared to what the dashboard serves:
 
 ---
 
+## Full Tab Audit (S106)
+
+| Tab | Status | Key Issues |
+|-----|--------|-----------|
+| **Edition** | Working | Articles display with titles, reporters, quotes. Key Figures section shows T1 citizens. |
+| **Newsroom** | Working (stale data) | Mags journal current. Mara scores stop at E85 (missing E86-E87). Citizen archive stale (174 entries, wrong POPIDs). PM2 shows dashboard "stopped" while serving the page. Supplemental count shows 0. |
+| **Council** | Working | All 9 seats + mayor from live Sheets. Factions, districts, POPIDs, notes all correct. |
+| **Tracker** | Working (stale data) | 5 initiatives with rich implementation detail. Last updated Feb 28. 3 show "UNTRACKED" despite having data. |
+| **Intel** | Working — strongest tab | 64 story hooks, 37 arcs (all stuck at "early" — known bug), 53 storylines with citizen/desk routing. Rich engine data. |
+| **Sports** | Partially broken | "Warriors" header bug. No player roster in UI. Chicago buried in bottom half. |
+| **City** | Working | 17 neighborhoods ranked by sentiment with crime, nightlife, retail, events metrics. Status flags on pressure zones. |
+| **Search** | Working | Full-text search across 256 articles (editions + archive + civic). Source field in results. |
+
+### Stale Data Files Referenced by Dashboard
+
+| File | Last Updated | Issue | Fix |
+|------|-------------|-------|-----|
+| `citizen_archive.json` | Mar 16 | 174 entries, GEN-* IDs, wrong POPIDs (Mark Aitken shows POP-00020 not POP-00003) | Rebuild from curated archive |
+| `initiative_tracker.json` | Feb 28 | Stale milestones, stale action cycles | Refresh at cycle/edition |
+| `edition_scores.json` | ~E85 | Missing E86 (A) and E87 (B) scores | Update after each Mara audit |
+| `article-index.json` | Rebuilt S106 | Clean — 244 entries, 0 mirrors | Current |
+
+---
+
 ## Frontend Status
 
 The frontend is functional but not user-optimized:

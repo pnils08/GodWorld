@@ -974,7 +974,7 @@ function getAllEditions() {
       if (seenFiles.has(f)) continue;
 
       // Skip non-article files that got mixed into the archive
-      if (/jfif|\.pdf|archived-|autogen-|es5-|realism-audit|story-narrative-enhancement|integration-plan|conversion-anchor|give-each-journalist/i.test(f)) continue;
+      if (/jfif|\.pdf|archived-|autogen-|es5-|realism-audit|story-narrative-enhancement|integration-plan|conversion-anchor|give-each-journalist|mirror-package|begin-mirror/i.test(f)) continue;
 
       const text = readText(join(archiveDir, f));
       if (!text || text.length < 100) continue;

@@ -401,8 +401,8 @@ function buildIndex() {
   // Discover all files
   const sources = [
     { dir: join(ROOT, 'editions'), label: 'editions', priority: 1 },
-    { dir: join(ROOT, 'output/drive-files'), label: 'drive-files', priority: 2 },
-    { dir: join(ROOT, 'docs/archive'), label: 'docs-archive', priority: 3 },
+    { dir: join(ROOT, 'archive/articles'), label: 'archive', priority: 2 },
+    { dir: join(ROOT, 'archive/editions'), label: 'archive-editions', priority: 3 },
   ];
 
   const allFiles = [];

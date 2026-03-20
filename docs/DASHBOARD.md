@@ -300,9 +300,9 @@ The dashboard reads from two categories: live data that auto-refreshes, and loca
 |------|-----------|------------|-------------------|---------------|
 | `citizen_archive.json` | `buildDeskPackets.js` | Step 6 of edition pipeline | `/api/citizens` (ref counts), `/api/citizens/:popId` (Layer 2+4), `/api/newsroom` (archive ranking) | Stale (Mar 16) — refreshes at E88 |
 | `base_context.json` | `buildDeskPackets.js` | Step 6 of edition pipeline | `/api/world-state` (fallback), sports digests | Stale — refreshes at E88 |
-| `initiative_tracker.json` | Manual update or `buildInitiativePackets.js` | Before each edition | `/api/initiatives`, `/api/newsroom` | **Stale (Feb 28)** — manual refresh needed |
-| `edition_scores.json` | Manual append after Mara audit | After each Mara audit | `/api/scores`, `/api/newsroom` (score history) | Current (S106 — E81-E87) |
-| `article-index.json` | `buildArticleIndex.js --write` | After each edition | `/api/articles/index` | Current (S106 — 244 entries) |
+| `initiative_tracker.json` | `buildInitiativePackets.js` (auto S106) | Step 2 of edition pipeline | `/api/initiatives`, `/api/newsroom` | Stale (Feb 28) — **auto-refreshes next pipeline run** |
+| `edition_scores.json` | `gradeEdition.js` (auto S106) | Step 25 of edition pipeline | `/api/scores`, `/api/newsroom` (score history) | Current (S106 — E81-E87) |
+| `article-index.json` | `postRunFiling.js` → `buildArticleIndex.js` (auto S106) | Step 22 of edition pipeline | `/api/articles/index` | Current (S106 — 244 entries) |
 | `player-index.json` | `buildPlayerIndex.js --write` | After TrueSource data changes | `/api/players`, `/api/players/:popId` | Current (62 players) |
 | `bay_tribune_roster.json` | Manual schema file | When reporter roster changes | `/api/newsroom` (roster section) | Current |
 

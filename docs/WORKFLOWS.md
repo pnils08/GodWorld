@@ -24,9 +24,9 @@ node scripts/generate-edition-pdf.js      # Step 16: tabloid PDF
 node scripts/saveToDrive.js --type edition # Step 17: Drive upload
 node scripts/buildMaraPacket.js [cycle] [file] # Step 12: Mara audit packet
 node scripts/validateEdition.js           # Step 10: 11 programmatic checks
-node scripts/postRunFiling.js [cycle]     # Step 22: verify all outputs
+node scripts/postRunFiling.js [cycle]     # Step 22: verify outputs + auto-rebuild article-index.json
 node scripts/editionIntake.js [file]      # Step 23: citizen/storyline intake
-node scripts/gradeEdition.js [cycle]      # Step 25: grade agents
+node scripts/gradeEdition.js [cycle]      # Step 25: grade agents + auto-append edition_scores.json
 ```
 
 **Skills:** `/write-edition`, `/write-supplemental`, `/podcast`, `/cycle-review`

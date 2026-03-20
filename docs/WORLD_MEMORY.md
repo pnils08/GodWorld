@@ -38,7 +38,7 @@ Also in `archive/`:
 | Desk agents | Indirectly — `buildArchiveContext.js` searches Supermemory, `buildDeskFolders.js` puts archive_context.md in workspace | Last 3 desk outputs + SM search results |
 | Discord bot | `output/latest_edition_brief.md` only | Compact summary of most recent edition |
 | Supermemory `godworld` | `ingestEdition.js` | E83-E87 + 5 supplementals ingested S106 (21 docs) |
-| Article indexes | `output/article-index.json`, `output/article-ledger.md` | Structured metadata. Last rebuilt Feb 23 — missing E83-E87. |
+| Article indexes | `output/article-index.json`, `output/article-ledger.md` | Structured metadata. Rebuilt S106 (244 entries). **Auto-refreshes via postRunFiling.js (step 22).** |
 | POP-ID index | `docs/media/ARTICLE_INDEX_BY_POPID.md` | 176 citizens × article appearances. Generated Feb 5 — stale. |
 
 ### Google Drive — Complete but Not Locally Cached
@@ -64,7 +64,7 @@ Also in `archive/`:
 
 | Index | Last Built | Missing |
 |-------|-----------|---------|
-| `output/article-index.json` | Feb 23, 2026 | E83-E87 + all supplementals post-C83 |
+| `output/article-index.json` | S106 | **Rebuilt + auto-refreshes.** 244 entries. `postRunFiling.js` runs `buildArticleIndex.js --write` at step 22. |
 | `output/article-ledger.md` | Feb 23, 2026 | Same |
 | `ARTICLE_INDEX_BY_POPID.md` | Feb 5, 2026 | Everything after Feb 5 |
 | `CITIZENS_BY_ARTICLE.md` | Feb 5, 2026 | Everything after Feb 5 |
@@ -113,12 +113,11 @@ editions/ (18 files, C78-C87)
 **Effort:** Small — add a directory scan block similar to Source 1 and Source 2.
 **Risk:** Archive articles have different format than C78+ editions. Parser may need adjustment.
 
-### Phase 2: Rebuild Article Indexes
+### Phase 2: Rebuild Article Indexes — DONE (S106)
 
-**What:** Re-run index builders against both `editions/` AND `archive/articles/`. Update all 4 index files.
-**Why:** Current indexes are 3-6 weeks stale and don't cover the archive.
-**Scripts:** The index builder that created `article-index.json` and `article-ledger.md` (check S69 for original script).
-**Effort:** Medium — need to verify index builder handles archive naming convention.
+**article-index.json:** Rebuilt S106 from `editions/` + `archive/articles/` + `archive/editions/`. 244 unique entries, 0 mirrors. Source dirs fixed in `buildArticleIndex.js`. **Auto-refreshes** via `postRunFiling.js` (step 22) after every edition.
+
+**ARTICLE_INDEX_BY_POPID.md:** Still needs rebuilding. Generated Feb 5 from old Drive downloads. No automated builder exists — needs a script that cross-references article text against Simulation_Ledger citizen names.
 
 ### Phase 3: Ingest Key Archive Articles to Supermemory
 

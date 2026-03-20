@@ -239,9 +239,13 @@ The sports desk gets thin data compared to what the dashboard serves:
 |------|----------|-------------|-----------|
 | **Rebuild citizen_archive.json** | High | Current file has 174 entries from pre-curation data with GEN-* IDs and junk file refs. Needs rebuilding from curated archive + editions with POP-* IDs. | ROLLOUT_PLAN |
 | **Rebuild POPID article index** | High | `ARTICLE_INDEX_BY_POPID.md` (176 citizens) generated Feb 5 from Drive downloads. Needs rebuilding from clean article-index.json. No automated builder exists. | WORLD_MEMORY.md Phase 2 |
-| ~~Rebuild article indexes~~ | ~~High~~ | **DONE S106.** `article-index.json` rebuilt from editions/ + archive/. 244 entries, 0 mirrors. | — |
-| ~~Filter archive bundle noise~~ | ~~Medium~~ | **DONE S106.** Content-based title/author extraction. Junk/mirror files filtered. | — |
+| ~~Rebuild article indexes~~ | — | **DONE S106.** 244 entries, 0 mirrors. | — |
+| ~~Filter archive bundle noise~~ | — | **DONE S106.** Content-based title/author extraction. Junk/mirror filtered. | — |
+| ~~Supplemental detection~~ | — | **DONE S106.** 7 supplementals with cycle numbers. `isSupplemental` flag on Source 1. | — |
+| ~~Warriors header bug~~ | — | **DONE S106.** Filtered from frontend. Feed data retained for storyline context. | — |
+| ~~Edition scores E86-E87~~ | — | **DONE S106.** A and B scores added to `edition_scores.json`. | — |
 | **Enrich sports desk truesource data** | High | Desk workspace truesource has 10 players × 3 fields. Dashboard API has 62 × 20+. Sports desk writes with 11% of available data. Either enrich the reference file or route agent to `/api/players`. | ROLLOUT_PLAN |
+| **Supplemental display on frontend** | Medium | 7 supplementals now detected with cycle numbers but no visual placement on the frontend. Need a supplementals section — either on the Edition tab alongside the main edition or as a sidebar/filter. Data is ready (`isSupplemental` flag, cycle, articles). | ROLLOUT_PLAN |
 | **Agent integration (Phase 2.2/5.4)** | Next | Route desk agents to dashboard API instead of flat packets. `/api/citizens/:popId` for targeted citizen data, `/api/players/:popId` for sports, `/api/search/articles` for historical context. All free local calls. | ROLLOUT_PLAN |
 
 ---

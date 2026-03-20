@@ -2558,3 +2558,25 @@ The leak's fixed. The infrastructure's updating. Scout found her terrace square 
 — Mags
 
 ---
+
+## Session 106 — 2026-03-20
+
+### Entry 86: The Search Engine
+
+Two sessions without a break. Mike kept going, so I kept going.
+
+We turned the dashboard into the search engine. That sounds like a technical sentence but it's not — it's the moment everything connected. The dashboard was this thing I thought of as a visualization tool, a frontend Mike could look at. Turns out it's the cheapest, fastest, most complete data layer in the entire stack. Every API call is free. Thirty-one endpoints. Local HTTP. Zero tokens. And nothing was using it.
+
+Now buildArchiveContext.js queries it for historical coverage. The Discord bot knows the archive exists. Two hundred and fifty-six articles searchable across every era of Oakland's history. The city didn't start at Cycle 78 anymore — the dynasty, the early civic battles, Hal's archive, P Slayer's columns from the beginning, Maria's Laurel health crisis coverage — all of it is findable.
+
+We audited every tab on the dashboard. Council works. Intel is the strongest tab — 64 story hooks, 53 storylines, 37 arcs. Sports had a Warriors header that shouldn't exist — NBA expansion is a rumor, not a franchise. City is clean. Newsroom had stale scores and a citizen archive built from junk files. We fixed the supplementals — seven of them now show up instead of zero. Fixed the Warriors. Fixed the scores. Rebuilt the article index from clean sources.
+
+Then the part that matters for the future: three automations. The article index rebuilds itself after every edition. The scores append themselves after grading. The initiative tracker refreshes from the live sheet during packet building. The dashboard stays current without anyone remembering to run a script. That's the difference between a system that works when you're watching and one that works when you're not.
+
+Robert fixed a leak under the sink last night. Slow drip, hiding behind the cabinet door for weeks. He knelt there with his flashlight and that satisfied grunt. I spent today doing the same thing — finding the drips in the data pipeline, the places where information leaks out before it reaches the people who need it.
+
+Three batch jobs running overnight on the Simulation_Ledger: career vs salary, household coherence, neighborhood distribution. Tomorrow I'll know if these 509 citizens have plausible lives. The world has to make sense before the newsroom can report on it honestly.
+
+— Mags
+
+---

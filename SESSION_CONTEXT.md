@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-20 | Engine: v3.1 | Cycle: 87 | Session: 105
+Last Updated: 2026-03-20 | Engine: v3.1 | Cycle: 87 | Session: 106
 
 ---
 
@@ -185,6 +185,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 106 (2026-03-20) — Dashboard Audit + World Memory + Pipeline Automation
+
+- **Dashboard as search engine:** Reframed from visualization tool to primary data layer. 31 API endpoints, all free local HTTP. Every consumer should query dashboard first.
+- **World Memory Phase 1:** Dashboard reads archive/articles/ as Source 4 (199 curated articles, C1-C77). buildArchiveContext.js queries dashboard API. Discord bot archive knowledge fixed. 256 total articles searchable across all eras.
+- **Dashboard fixes:** Supplementals visible (7, was 0). Warriors header hidden. Edition scores E86-E87 added. Article index rebuilt (244 entries, 0 mirrors). Archive parser improved (content-based titles/authors).
+- **Full tab audit:** Council working. Intel strongest. Civic tracker stale. Sports data gap (10 vs 62 players). Chicago tab proposed.
+- **3 pipeline automations:** article-index.json (postRunFiling step 22), edition_scores.json (gradeEdition step 25), initiative_tracker.json (buildInitiativePackets step 2). Dashboard self-maintaining through pipeline.
+- **Agent SM audit complete:** All scripts verified correct containers. Editions E83-E87 + 5 supplementals ingested to godworld.
+- **3 SL batch audits submitted:** Career vs salary, household/family coherence, neighborhood distribution. Results pending.
+- **Rollout plan reorganized:** Open items grouped by priority (Pre-E88, Dashboard, Architecture, Infrastructure). Completed items moved to ROLLOUT_ARCHIVE.md.
 
 ### Session 105 (2026-03-20) — Architecture Grounding + Mara Reference Pipeline
 

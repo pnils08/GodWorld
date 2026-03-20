@@ -1548,8 +1548,8 @@ function SportsSection({ city, data, color }) {
         </div>
       )}
 
-      {/* Additional team digests (e.g., Warriors alongside A's for Oakland) */}
-      {teamDigests.slice(1).map((td, idx) => (
+      {/* Additional team digests — filter out Warriors (not a GodWorld franchise) */}
+      {teamDigests.slice(1).filter(td => !/warriors/i.test(td.teamLabel)).map((td, idx) => (
         <div key={idx} className={`p-4 bg-neutral-900/60 rounded-2xl border ${borderColor} mb-4`}>
           <div className="flex justify-between items-start mb-3">
             <div>

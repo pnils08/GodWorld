@@ -842,9 +842,14 @@ function getAllEditions() {
       if (seenContent.has(cKey)) continue;
       seenContent.add(cKey);
       seenFiles.add(f);
-      const cycle = parsed.header.cycle;
+      let cycle = parsed.header.cycle;
+      // Fallback: extract cycle from filename for supplementals (supplemental_*_c{XX}.txt)
+      if (!cycle) {
+        const fnCycle = f.match(/_c(\d+)\./);
+        if (fnCycle) cycle = parseInt(fnCycle[1]);
+      }
       if (cycle) canonicalCycles.add(cycle);
-      editions.push({ file: f, path: join(edDir, f), cycle, articles: parsed.articles, source: 'editions' });
+      editions.push({ file: f, path: join(edDir, f), cycle, articles: parsed.articles, source: 'editions', isSupplemental: /supplemental/i.test(f) });
     }
   }
 

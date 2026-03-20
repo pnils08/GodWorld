@@ -62,6 +62,7 @@
 | `docs/WORKFLOWS.md` | 4 workflows (Media-Room, Build/Deploy, Maintenance, Cycle Run) — files loaded, commands, risks, rules | On-Demand | Manual (when workflows change) | All |
 | `docs/EDITION_PIPELINE.md` | Full 27-step edition pipeline — scripts, dependencies, failure modes, broken steps, supplemental subset | On-Demand | Manual (when pipeline changes) | M, D |
 | `docs/OPERATIONS.md` | PM2 processes, cron schedule, health checks, troubleshooting, mobile access | On-Demand | Manual (when infra changes) | P, D |
+| `docs/WORLD_MEMORY.md` | The city's history in articles — archive state, gaps, execution plan for connecting C1-C77 to all systems | On-Demand | Manual (as phases complete) | M, D, P |
 | `docs/STACK.md` | All services, URLs, credentials, PM2 processes. Points to SUPERMEMORY.md for container details | On-Demand | Manual (when infra changes) | P, D |
 
 ### Engine & Data Integrity (D, X)

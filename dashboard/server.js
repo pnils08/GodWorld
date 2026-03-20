@@ -965,6 +965,71 @@ function getAllEditions() {
     }
   }
 
+  // Source 4: archive/articles/ (curated C1-C77 individual articles, strict naming convention)
+  // Naming: c{cycle}_{desk}_{slug}_{reporter}.txt
+  const archiveDir = join(ROOT, 'archive/articles');
+  if (existsSync(archiveDir)) {
+    for (const f of readdirSync(archiveDir)) {
+      if (!f.endsWith('.txt')) continue;
+      if (seenFiles.has(f)) continue;
+      const text = readText(join(archiveDir, f));
+      if (!text || text.length < 100) continue;
+
+      const cKey = contentKey(text);
+      if (seenContent.has(cKey)) continue;
+      seenContent.add(cKey);
+
+      // Parse naming convention: c{cycle}_{desk}_{slug}_{reporter}.txt
+      const archiveMatch = f.match(/^c(\d+|XX)_([^_]+)_([^_]+)_(.+)\.txt$/);
+      let cycle = null;
+      let desk = null;
+      let author = null;
+
+      if (archiveMatch) {
+        cycle = archiveMatch[1] !== 'XX' ? parseInt(archiveMatch[1]) : null;
+        desk = archiveMatch[2].replace(/-/g, ' ');
+        author = archiveMatch[4].replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+      } else {
+        // Fallback: try to extract cycle from filename
+        const cMatch = f.match(/^c(\d+)/);
+        if (cMatch) cycle = parseInt(cMatch[1]);
+      }
+
+      // Extract title from first non-empty line of content
+      const firstLine = text.split('\n').find(l => l.trim().length > 10);
+      const title = firstLine
+        ? firstLine.trim().replace(/^[#=\-*]+\s*/, '').slice(0, 120)
+        : f.replace(/\.txt$/, '').replace(/[_-]/g, ' ');
+
+      // Try to parse as a full edition (multi-article), fall back to single article
+      const parsed = parseEdition(text);
+      if (parsed.articles.length > 1) {
+        seenFiles.add(f);
+        editions.push({
+          file: f,
+          path: join(archiveDir, f),
+          cycle,
+          articles: parsed.articles,
+          source: 'archive',
+          isSupplemental: /supplemental/i.test(f),
+          isBundle: false,
+        });
+      } else {
+        // Single article file
+        seenFiles.add(f);
+        editions.push({
+          file: f,
+          path: join(archiveDir, f),
+          cycle,
+          articles: [{ title, section: desk || 'Archive', body: text, author }],
+          source: 'archive',
+          isSupplemental: /supplemental/i.test(f),
+          isBundle: false,
+        });
+      }
+    }
+  }
+
   // Sort by cycle descending (newest first), then alphabetical
   editions.sort((a, b) => (b.cycle || 0) - (a.cycle || 0));
 
@@ -1439,6 +1504,7 @@ app.get('/api/search/articles', (req, res) => {
         results.push({
           cycle: ed.cycle,
           file: ed.file,
+          source: ed.source || 'editions',
           articleIndex: ed.articles.indexOf(article),
           title: article.title,
           subtitle: article.subtitle || null,

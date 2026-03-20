@@ -85,7 +85,8 @@ These get injected into the session context before the first user message.
 | Document | Added | Description |
 |----------|-------|-------------|
 | Session summaries | S103+ | Key decisions and deliverables from each session |
-| Edition ingests | Ongoing | Published editions via `scripts/ingestEdition.js` |
+| Editions E83-E87 | S106 | 5 Cycle Pulse editions ingested (chunked, 14 docs). Active coverage window. |
+| Supplementals C83-C87 | S106 | 5 supplementals ingested (7 docs). Fruitvale, tech landscape, housing, food scene, Baylight labor. |
 | Oakland Athletics Roster | S105 | 89 players — POPID, name, position, team, tier, prospect rank. Source: `As_Roster` tab. |
 
 **Ingest script:** `node scripts/ingestEdition.js <edition-file>`

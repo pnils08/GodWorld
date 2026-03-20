@@ -102,6 +102,39 @@ function searchSupermemory(query, limit) {
   });
 }
 
+// ---------------------------------------------------------------------------
+// Search local dashboard API (covers editions/ + archive/articles/ + civic docs)
+// ---------------------------------------------------------------------------
+function searchDashboard(query, limit) {
+  limit = limit || 5;
+  return new Promise(function(resolve) {
+    var http = require('http');
+    var encodedQ = encodeURIComponent(query);
+    var url = 'http://localhost:3001/api/search/articles?q=' + encodedQ + '&limit=' + limit;
+
+    var req = http.get(url, function(res) {
+      var data = '';
+      res.on('data', function(chunk) { data += chunk; });
+      res.on('end', function() {
+        try {
+          if (res.statusCode !== 200) { resolve(''); return; }
+          var parsed = JSON.parse(data);
+          if (!parsed.results || !parsed.results.length) { resolve(''); return; }
+          var context = parsed.results.map(function(r) {
+            var header = '[C' + (r.cycle || '?') + ' ' + (r.source || '') + '] ' + (r.title || 'Untitled');
+            if (r.author) header += ' — ' + r.author;
+            return header + '\n' + (r.snippet || '');
+          }).join('\n\n---\n\n');
+          resolve(context);
+        } catch (err) { resolve(''); }
+      });
+    });
+
+    req.on('error', function() { resolve(''); }); // Dashboard may not be running
+    req.setTimeout(3000, function() { req.destroy(); resolve(''); });
+  });
+}
+
 function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
 // ---------------------------------------------------------------------------
@@ -282,16 +315,18 @@ async function main() {
       }
 
       console.log('  [SEARCH] "' + query + '"');
-      var context = await searchSupermemory(query, 2);
+      var smContext = await searchSupermemory(query, 2);
+      var dashContext = await searchDashboard(query, 3);
+      var context = [smContext, dashContext].filter(Boolean).join('\n\n---\n\n');
       results.push({ query: query, context: context });
 
       if (context) {
-        console.log('  [OK] ' + context.length + ' chars');
+        console.log('  [OK] ' + context.length + ' chars (SM: ' + (smContext || '').length + ', Dash: ' + (dashContext || '').length + ')');
       } else {
         console.log('  [EMPTY]');
       }
 
-      // Rate limit
+      // Rate limit (Supermemory only — dashboard is local)
       await sleep(300);
     }
 
@@ -320,11 +355,13 @@ async function main() {
     }
 
     console.log('  [SEARCH] "' + rq + '"');
-    var rctx = await searchSupermemory(rq, 3);
+    var rSm = await searchSupermemory(rq, 3);
+    var rDash = await searchDashboard(rq, 3);
+    var rctx = [rSm, rDash].filter(Boolean).join('\n\n---\n\n');
     rheaResults.push({ query: rq, context: rctx });
 
     if (rctx) {
-      console.log('  [OK] ' + rctx.length + ' chars');
+      console.log('  [OK] ' + rctx.length + ' chars (SM: ' + (rSm || '').length + ', Dash: ' + (rDash || '').length + ')');
     } else {
       console.log('  [EMPTY]');
     }

@@ -119,6 +119,21 @@ Currently agents read flat JSON packets from `output/desks/`. Routing them to th
 
 ---
 
+## The Dashboard Is the Search Engine
+
+**Every API call is free.** The dashboard runs on the droplet at `localhost:3001`. When any script, agent, or bot queries it, that's local HTTP — no external API, no tokens, no cost. This makes the dashboard the most powerful and cheapest data access layer in the entire stack.
+
+**Implication:** Any time a script needs to find data — citizens, articles, initiatives, player stats — the dashboard API should be the first option, not Supermemory (cloud, rate-limited) or flat JSON packets (context-expensive). One `localhost` call returns exactly what's needed.
+
+**Current consumers:**
+- `buildArchiveContext.js` — searches articles via `/api/search/articles` (added S106)
+- Frontend UI — React app for visual browsing
+
+**Future consumers (Phase 2.2/5.4):**
+- Desk agents querying `/api/citizens/:popId` instead of loading full packets
+- Voice agents checking initiative status via `/api/initiatives`
+- Any script that needs citizen, article, or civic data
+
 ## Frontend Status
 
 The frontend is functional but not user-optimized:
@@ -129,7 +144,7 @@ The frontend is functional but not user-optimized:
 - **Not mobile-friendly** in current state
 - **No real-time updates** — data loads on page load
 
-The backend API is the primary value. The frontend is a visualization layer.
+The frontend is a visualization layer. The backend API is the primary value.
 
 ---
 

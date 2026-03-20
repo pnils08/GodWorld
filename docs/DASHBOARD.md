@@ -116,9 +116,9 @@ Last audited: Session 106 (2026-03-20)
 The dashboard reads from four layers for article data:
 
 1. **`editions/`** (Source 1, canonical) — C78-C87 Cycle Pulse editions + supplementals. 18 files. Current pipeline output. Takes priority for dedup.
-2. **`output/drive-files/`** (Source 2, Drive cache) — **Currently empty.** Intended for cached Drive downloads of older editions.
+2. **`output/drive-files/`** (Source 2, Drive cache) — **Currently empty.** Superseded by Source 4.
 3. **`output/city-civic-database/`** (Source 3, civic docs) — 39 civic documents from initiative agents. Council actions, determination letters, status reports.
-4. **`archive/articles/`** (Source 4, curated archive) — 216 individual articles from C1-C77. Strict naming: `c{cycle}_{desk}_{slug}_{reporter}.txt`. Wired S106.
+4. **`archive/articles/`** (Source 4, curated archive) — 199 clean articles from C1-C77. Strict naming: `c{cycle}_{desk}_{slug}_{reporter}.txt`. Wired S106. Junk/mirror files filtered.
 
 **Total searchable:** 273 articles across all sources and eras.
 
@@ -144,12 +144,12 @@ Reads `citizen_archive.json` from the civic desk packet. Issues:
 - References junk files ("Media_Cannon_Text_Mirror")
 - **Needs rebuilding** from curated `archive/articles/` data
 
-### Layer 3: Edition Appearances — WORKING BUT NOISY
-Searches all editions (including archive) for citizen name matches. Issues:
-- Archive bundle files (e.g. `Cycle_1-69_Text_Mirror`) match as single articles with filenames as titles
-- Multi-edition archive files inflate appearance counts
-- No source field filtering to separate clean matches from junk matches
-- **Needs:** Filter out source=archive entries from bundle/mirror files, or improve archive parser to skip bundles
+### Layer 3: Edition Appearances — WORKING (cleaned S106)
+Searches all editions (including archive) for citizen name matches. S106 fixes:
+- Content-based title/author extraction (not filename parsing)
+- Mirror/junk files filtered from archive Source 4
+- Article index rebuilt from clean sources (244 entries, 0 mirrors)
+- Remaining rough edge: multi-cycle bundle files (C44, C46) still show filename-derived titles for the bundle itself
 
 ### Layer 4: Voice Card — STALE
 Same source as Layer 2 (`citizen_archive.json`). Same staleness issues. Underlying data needs rebuilding.
@@ -162,16 +162,32 @@ For UNI-flagged citizens, enriches with player-index.json data. POPID matching a
 
 ---
 
+## Sports Data Gap
+
+The sports desk gets thin data compared to what the dashboard serves:
+
+| Data Source | Players | Fields per player | Who sees it |
+|-------------|---------|-------------------|-------------|
+| `truesource_reference.json` (desk workspace) | 10 | 3 (name, position, popId) | All desk agents |
+| `player-index.json` (dashboard API) | 62 | 20+ (stats, contracts, attributes, quirks, status) | Dashboard `/api/players` only |
+| `As_Roster` (spreadsheet) | 89 | 8 (POPID, name, position, team, tier, prospect rank) | `buildMaraReference.js`, Supermemory `godworld` |
+
+**The gap:** Sports desk agents see 10 players with 3 fields. The dashboard has 62 players with full TrueSource data. The spreadsheet has 89 with roster data. The sports desk is writing about the A's with 11% of the available player data.
+
+**Fix path:** Either enrich `truesource_reference.json` to include full player-index data, or route the sports desk agent to query `/api/players` directly during writing. The dashboard API serves this data for free.
+
+---
+
 ## Open Dashboard Work
 
 | Item | Priority | Description | Tracked In |
 |------|----------|-------------|-----------|
-| **Rebuild citizen_archive.json** | High | Current archive has 174 entries from pre-curation data with GEN-* IDs and junk file references. Needs rebuilding from curated `archive/articles/` + `editions/`. | ROLLOUT_PLAN |
-| **Rebuild article indexes** | High | `output/article-index.json` and `output/article-ledger.md` last built Feb 23. Missing E83-E87 + archive articles. | WORLD_MEMORY.md Phase 2 |
-| **Filter archive bundle noise** | Medium | Edition appearance search returns junk entries from multi-edition archive bundle files. Either filter bundles from results or improve parser. | WORLD_MEMORY.md |
-| **Article index rebuild for POPID index** | Medium | `ARTICLE_INDEX_BY_POPID.md` (176 citizens) and `CITIZENS_BY_ARTICLE.md` generated Feb 5. Missing 5 editions of citizen appearances. | WORLD_MEMORY.md Phase 2 |
-| **Agent integration (Phase 2.2/5.4)** | Future | Route desk agents to dashboard API instead of flat packets. `/api/citizens/:popId` gives targeted data. | ROLLOUT_PLAN |
-| **Populate drive-files cache** | Low | Source 2 is empty. Could cache Drive editions for offline search. | Not urgent — archive/articles covers the same content. |
+| **Rebuild citizen_archive.json** | High | Current file has 174 entries from pre-curation data with GEN-* IDs and junk file refs. Needs rebuilding from curated archive + editions with POP-* IDs. | ROLLOUT_PLAN |
+| **Rebuild POPID article index** | High | `ARTICLE_INDEX_BY_POPID.md` (176 citizens) generated Feb 5 from Drive downloads. Needs rebuilding from clean article-index.json. No automated builder exists. | WORLD_MEMORY.md Phase 2 |
+| ~~Rebuild article indexes~~ | ~~High~~ | **DONE S106.** `article-index.json` rebuilt from editions/ + archive/. 244 entries, 0 mirrors. | — |
+| ~~Filter archive bundle noise~~ | ~~Medium~~ | **DONE S106.** Content-based title/author extraction. Junk/mirror files filtered. | — |
+| **Enrich sports desk truesource data** | High | Desk workspace truesource has 10 players × 3 fields. Dashboard API has 62 × 20+. Sports desk writes with 11% of available data. Either enrich the reference file or route agent to `/api/players`. | ROLLOUT_PLAN |
+| **Agent integration (Phase 2.2/5.4)** | Next | Route desk agents to dashboard API instead of flat packets. `/api/citizens/:popId` for targeted citizen data, `/api/players/:popId` for sports, `/api/search/articles` for historical context. All free local calls. | ROLLOUT_PLAN |
 
 ---
 

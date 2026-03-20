@@ -185,6 +185,38 @@ The civic data pipeline is rich underneath but has freshness and display issues.
 
 ---
 
+## Sports Tab Assessment (S106)
+
+**What's working:**
+- A's card with record (0-0), season state (regular-season), trend (STEADY)
+- Player features with cycle tags and featured player names
+- Story angles as clickable tags
+- Bulls card with full season data (58-24, playoffs, RISING)
+- Feed events from both Oakland and Chicago sports feeds with event types, records
+
+**Issues:**
+| Issue | Impact | Fix |
+|-------|--------|-----|
+| **"Warriors" header in Oakland section** | Oakland feed events render under a Warriors header. Warriors don't exist in GodWorld (A's + Bulls only). | Frontend bug — feed parser/renderer labels non-A's Oakland events as Warriors |
+| **No player roster on Sports tab** | `/api/players` has 62 players with full TrueSource data. None surfaced in the Sports UI. | Add player roster section to Sports tab, or link to individual player cards |
+| **No player↔coverage link** | Clicking a player name doesn't navigate to their citizen detail or article coverage trail | Future enhancement |
+| **Chicago buried in Sports tab** | Chicago is a satellite city (123 citizens, 2 reporters, full season data, Paulson GM) but shares a tab with Oakland sports | Consider dedicated CHICAGO tab — see below |
+
+## Chicago Tab Proposal
+
+Chicago isn't just a franchise — it's a satellite city with its own civic context:
+- **123 citizens** on Chicago_Citizens tab (separate from SL)
+- **Bulls** — 58-24, #1 seed East, playoffs, Trepagnier ROY, Paulson Executive of Year
+- **Two bureau reporters** — Selena Grant (beats), Talia Finch (neighborhood texture)
+- **Paulson two-city tension** — GM of both A's and Bulls, the storyline that connects both worlds
+- **Bridgeport/Bronzeville/Near North** — Chicago neighborhoods with their own character
+
+A dedicated CHICAGO tab would surface: Bulls card + feed events, Chicago citizens, bureau output, Paulson front office coverage. Currently all of this is compressed into the bottom half of the Sports tab.
+
+**Dashboard API already supports this** — `/api/sports` returns Chicago feeds separately, Chicago_Citizens is a queryable tab, `/api/search/articles?section=chicago` finds bureau coverage.
+
+---
+
 ## Sports Data Gap
 
 The sports desk gets thin data compared to what the dashboard serves:

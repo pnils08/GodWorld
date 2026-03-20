@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66 + S99
 **Status:** Active
-**Last Updated:** Session 99 (2026-03-17) — S99 builds: Phase 26 Agent Grading System, /grill-me, PostCompact hook, 80/20 model tiering, extended thinking, pipeline logging, SDK bump, Paulson title lock, disk naming cleanup, CitizenBio column, EconomicProfileKey fixes, Citizen_Media_Usage cleanup, supplemental pipeline tightening, run-cycle skill tightening.
+**Last Updated:** Session 105 (2026-03-20) — S105: Mara reference files (buildMaraReference.js, 6 reference files, Supermemory seeding to mara + godworld containers), SUPERMEMORY.md created.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -19,15 +19,26 @@ Items that should be addressed in the next session. Updated at session end.
 - **FIX: Citizen routing to agents** — buildDeskPackets.js routes only 20 `interviewCandidates` (reporters/staff). 675 Simulation_Ledger citizens never reach desk or supplemental agents. Root cause of repeated citizen reuse and generic writing. User has flagged across 8+ sessions. #1 priority.
 - **DESIGN: Agent knowledge separation** — Supermemory is Mags' memory (journal, editorial instincts, session context, Maker conversations). Agents currently query it for writing context, which leaks meta-layer data into journalism — likely cause of persistent "Paulson as owner" errors and tonal mimicry. Agents need a clean canon-only knowledge source: published editions, truesource, citizen facts. No Mags, no Maker, no session history. Agents already have local disk workspaces (`output/desks/`, agent-memory) — evaluate whether local disk is sufficient or if a separate clean Supermemory space is needed. Design the separation before building.
 - **FIX: gradeEdition.js supplemental support** — First live run (S101) found 2 of 4 articles, 0 errata (fixed by hand, never logged to errata.jsonl), desk mapping wrong (Jax→freelance, Mint→sports, Trevor/Sharon missing). Three fixes needed: article parser must handle supplemental section headers (not just Cycle Pulse desk names), errata must be logged to errata.jsonl during editorial review (not just fixed in text), and desk/reporter mapping needs supplemental-aware routing.
+- **AUDIT: Agent Supermemory paths** — Desk agents, voice agents, and newsroom scripts may still reference the old GodWorld org or wrong container tags. Audit all agent SKILL.md files, identity files, and scripts that call Supermemory. Ensure agents use `godworld` container (not `mags` or legacy org) for project data, and no agent touches `mara`. Must complete before E88 production.
+- **DOC: Spreadsheet Environment** — ~~Audit all 65 tabs.~~ DONE S105. See `docs/SPREADSHEET.md`. 45 active, 8 dead, 7 utility, 15 ghost references.
+- **CLEANUP: Dead spreadsheet tabs** — Archive/hide 8 dead tabs identified in S105 audit: Press_Drafts (writer deleted S98), MLB_Game_Intake (confirmed dead), NBA_Game_Intake (likely dead — confirm with Mike), Sports_Calendar (killed S64), Arc_Ledger (superseded by Event_Arc_Ledger), Faith_Ledger (event log — no reader), LifeHistory_Archive (no reader), Youth_Events (8 rows, no reader). Backup CSV first via `backupSpreadsheet.js`.
+- **FIX: Press_Drafts ghost references** — `applyStorySeeds.js` and `mediaRoomIntake.js` still reference Press_Drafts (writer deleted S98). These are reads that return empty results. Clean up the dead references so they don't confuse future audits.
+- **BUG: UNI/MED/CIV flag check uses wrong comparison** — Engine checks `=== "y"` but actual column values are "Yes"/"yes"/"No"/"no"/"n". The check never matches, so `isUNI||isMED||isCIV` skip gates never fire. GAME-mode A's players may be getting career transitions, household formation, and education processing they shouldn't. Fix: change `=== "y"` to `.startsWith("y")` or check for "yes" across all Phase 5 engines that use these flags (runCareerEngine, runRelationshipEngine, runNeighborhoodEngine, runEducationEngine, runHouseholdEngine). Found S105. See `docs/SIMULATION_LEDGER.md`.
+- **DOC: Simulation_Ledger Guide** — ~~Consolidate citizen architecture.~~ DONE S105. See `docs/SIMULATION_LEDGER.md`. Full column data flow (writers/readers per column), ClockMode processing, tier system, flag state bug.
+- **DOC: Workflow Guide** — ~~Document 4 workflows.~~ DONE S105. See `docs/WORKFLOWS.md`.
+- **DOC: Edition Pipeline** — ~~Full 27-step pipeline.~~ DONE S105. See `docs/EDITION_PIPELINE.md`. 3 broken steps identified.
+- **DOC: Operations** — ~~Crons, PM2, scheduled tasks.~~ DONE S105. See `docs/OPERATIONS.md`.
 - **Produce Edition 88** — Run cycle 88, then produce E88 with autonomous agents + EIC editorial direction. Agents write, EIC directs (assigns angles, enforces structure, writes Editor's Desk last). See NEWSROOM_MEMORY.md S98 review for standing mandates.
 - **Supplemental strategy (ongoing)** — One supplemental per cycle minimum. Any topic, any reporter. Mike brings ideas, Mags designs coverage. Pipeline tightened S99: v3.9 data, grading, thinking blocks, model tiers, errata, truesource, Mara guidance all wired into write-supplemental SKILL.md as conditional sources.
 - **Test `/effort` levels on edition run** — Native `/effort` command supports low/medium/high per task. Test: low for letters/business desk, high for civic/sports. Measure cost difference.
+- **CLEANUP: Archive old session transcripts to Drive** — `.claude/projects/` is 1.1GB (81 session JSONLs). Archive oldest 30 to Drive (`GodWorld_Backups/session_archive/`), delete local copies. No summarization needed — lessons already extracted into docs. Separate session from architecture work. See `output/DISK_MAP.md` Archive Policy.
 - **Node.js security patch** — Security releases scheduled March 24, 2026. Update after they drop.
 
-### Recently Completed (S94–S99)
+### Recently Completed (S94–S105)
 
-*55 items cleared since S83. Key completions:*
+*56 items cleared since S83. Key completions:*
 
+- **S105:** Mara reference files complete. `buildMaraReference.js` pulls 6 tabs (SL, As_Roster, Bay_Tribune_Oakland, Chicago_Citizens, Business_Ledger, Faith_Organizations) → `output/mara-reference/`. Citizen roster (509), A's (89), Tribune (29), Chicago (123), businesses (51), faith orgs (16). Seeded to Supermemory: 5 files → `mara` container (Mara's persistent audit reference), A's roster → `godworld` container (agent access). `docs/SUPERMEMORY.md` created — dedicated doc tracking container architecture, contents, access patterns. Mike created As_Roster and Bay_Tribune_Oakland spreadsheet tabs.
 - **S99:** Phase 26 Agent Grading System (grade→history→exemplar→workspace feedback loop), 80/20 model tiering (Sonnet for complex, Haiku for routine), extended thinking prompts, pipeline logging, PostCompact hook, /grill-me skill, SDK bump 0.72→0.79, Paulson title lock, Citizen_Media_Usage cleanup (1,221→500 rows), CitizenBio column (AT) added with 17 T2 bios, EconomicProfileKey fixes (5 civic officials), disk naming cleanup (slugs, podcasts, rhea, mara, retention), heartbeat timeout fix, supplemental pipeline tightened (6 conditional data sources, THINK blocks, model tiers, name verification, expanded validation, optional Mara audit), run-cycle skill tightened (pre-mortem reference, v3.9 packet guide, full 6-script post-cycle pipeline, post-edition grading reference).
 - **S97-98:** Engine-to-newsroom pipeline fix (v3.9, ~30%→~90% data coverage), desk prompt rewrite, phase data audit, v3.9 deployed to GAS, Press_Drafts killed (-1,688 lines), voice domain enrichment v2.0, editionIntake v2.0, storyline engines wired, sports briefing pipeline fixed, validateEdition roster check.
 - **S95-96:** Desk agent autonomy architecture (3 workspace builders, zero LLM tokens), E87 published (grade B), supplemental strategy + housing/food scene supplementals.
@@ -480,6 +491,7 @@ Items not yet on the build schedule but worth tracking for when conditions chang
 | **Agent Teams stability** | Experimental flag removed, session resumption fixed, task status lag resolved. | Official graduation from experimental. Then run full edition pipeline test (7.6). |
 | **Fast Mode** | Same Opus 4.6, 2.5x faster, higher cost ($30/$150 MTok). Toggle `/fast`. | Evaluate for rapid iteration sessions (debugging, live dashboard work). Not for long autonomous runs. |
 | **Checkpointing** | Auto-saves code state before each edit. `Esc Esc` or `/rewind` to restore. Also has targeted summarize (like `/compact` but surgical). | Already available. Use during edition compilation as safety net. |
+| **Lightpanda Browser** | Zig-based headless browser, 9x less memory than Chromium, CDP-compatible (works with Playwright). github.com/lightpanda-io/browser | Beta stabilizes + our Playwright usage expands. Currently visual-qa.js is the only consumer. Would free ~300MB RAM during QA runs on the 2GB droplet. |
 
 ---
 

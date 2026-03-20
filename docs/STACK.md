@@ -49,7 +49,9 @@ All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy read-only unt
 |-----------|-----------|------------|---------|
 | `mags` | Mags (Claude Code + Discord bot) | Mags (Claude Code + Discord + Moltbook) | The brain — identity, memory, editorial thinking, conversations |
 | `godworld` | Mags (Claude Code) | Mags (Claude Code), edition ingest scripts | Project knowledge — architecture, what's broken, editions |
-| `mara` | Mara only (claude.ai) | Mara (claude.ai) | Private backup — planning, canon, audits. Nobody else reads this. |
+| `mara` | Mara only (claude.ai) | Mara (claude.ai), reference file pushes from Claude Code | Audit reference — citizen rosters, business registry, faith orgs. Persistent data Mara can recall during audits. |
+
+**Full container contents, access patterns, and refresh cadence:** `docs/SUPERMEMORY.md`
 
 **Hooks (Claude Code plugin):**
 - SessionStart → context hook pulls `mags` + `godworld` profiles

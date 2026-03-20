@@ -53,6 +53,16 @@
 | `docs/reference/DEPLOY.md` | Deployment guide (clasp vs git) | On-Demand | Manual (rare) | D |
 | `docs/reference/GODWORLD_REFERENCE.md` | Complete system reference | On-Demand | Manual (rare) | P, D |
 | Communication Hub (Google Sheet) | Mike's visual control panel — Dashboard, Skills, Agent Roster, Upgrade Guide, Stack Health | On-Demand | `/session-end` + manual | All |
+| `docs/SUPERMEMORY.md` | Supermemory container architecture — 3 containers, contents, access patterns, reference file generation | On-Demand | Manual (when containers change) | P, D |
+| `docs/CLAUDE-MEM.md` | Claude-mem local work history — observations, skills, config, disk usage, cost optimization | On-Demand | Manual (when config changes) | P, D |
+| `docs/DASHBOARD.md` | Dashboard API — 31 endpoints, data sources, frontend tabs, agent integration potential | On-Demand | Manual (when endpoints change) | P, D, M |
+| `docs/DISCORD.md` | Discord bot — knowledge sources, Supermemory integration, crons, Moltbook heartbeat | On-Demand | Manual (when bot changes) | P, I |
+| `docs/SPREADSHEET.md` | All 65 spreadsheet tabs — active, dead, ghost references, row counts, which code reads/writes each | On-Demand | Manual (after audits) | D, X |
+| `docs/SIMULATION_LEDGER.md` | Citizen architecture — 675 citizens, ClockMode processing, tier system, column data flow (A-AT), engine processing by mode | On-Demand | Manual (after audits/changes) | D, X, M |
+| `docs/WORKFLOWS.md` | 4 workflows (Media-Room, Build/Deploy, Maintenance, Cycle Run) — files loaded, commands, risks, rules | On-Demand | Manual (when workflows change) | All |
+| `docs/EDITION_PIPELINE.md` | Full 27-step edition pipeline — scripts, dependencies, failure modes, broken steps, supplemental subset | On-Demand | Manual (when pipeline changes) | M, D |
+| `docs/OPERATIONS.md` | PM2 processes, cron schedule, health checks, troubleshooting, mobile access | On-Demand | Manual (when infra changes) | P, D |
+| `docs/STACK.md` | All services, URLs, credentials, PM2 processes. Points to SUPERMEMORY.md for container details | On-Demand | Manual (when infra changes) | P, D |
 
 ### Engine & Data Integrity (D, X)
 

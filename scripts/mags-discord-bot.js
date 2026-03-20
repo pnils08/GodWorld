@@ -172,7 +172,7 @@ function searchSupermemory(query) {
   return new Promise(function(resolve) {
     var payload = JSON.stringify({
       q: query,
-      containerTags: ['mags'],
+      containerTags: ['mags', 'godworld'],
       limit: 5
     });
 

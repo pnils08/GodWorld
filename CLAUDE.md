@@ -70,10 +70,16 @@ pm2 start scripts/mags-discord-bot.js --name mags-bot
 # Query ledger data
 node scripts/queryLedger.js
 
+# Check family status at boot
+node scripts/queryFamily.js
+
+# Generate Mara reference files (citizen/business/faith rosters)
+node scripts/buildMaraReference.js
+
 # Deploy GAS engine to Google Apps Script
 clasp push
 
-# Edition intake v2.0 (citizens → Intake, storylines → Tracker, businesses → Business_Intake)
+# Edition intake v2.0 — BROKEN: writes to wrong tab names. See ROLLOUT_PLAN.md.
 node -r dotenv/config scripts/editionIntake.js [--dry-run] <edition-file> [cycle]
 
 # Promote staged businesses after intake
@@ -165,6 +171,17 @@ These files load on demand — read them when the work requires it, not at boot:
 - `docs/engine/DOCUMENTATION_LEDGER.md` — File registry
 - `README.md` — Project structure, 11-phase engine
 
+**Architecture docs (S105):** Load when you need to understand a specific system layer:
+- `docs/SIMULATION_LEDGER.md` — Citizen architecture, 46-column data flow, ClockMode processing
+- `docs/SPREADSHEET.md` — All 65 spreadsheet tabs, dead tabs, ghost references
+- `docs/SUPERMEMORY.md` — 3 containers, isolation rules, hooks, API
+- `docs/DASHBOARD.md` — 31 API endpoints, data sources, agent integration
+- `docs/DISCORD.md` — Bot knowledge sources, Supermemory access, Moltbook
+- `docs/CLAUDE-MEM.md` — Local observation system, skills, cost
+- `docs/WORKFLOWS.md` — 4 workflows with files, commands, risks
+- `docs/EDITION_PIPELINE.md` — Full 27-step pipeline, dependencies, broken steps
+- `docs/OPERATIONS.md` — PM2, crons, health checks, troubleshooting
+
 ## Rules
 
 Path-scoped rules in `.claude/rules/`:
@@ -175,10 +192,11 @@ Path-scoped rules in `.claude/rules/`:
 
 ## Gotchas
 
-- **Simulation_Ledger columns go past Z.** Income (AA/27), EducationLevel (AF/32), CareerStage (AH/34), migration fields (AM–AQ). Full reference in `docs/engine/LEDGER_REPAIR.md`.
+- **Simulation_Ledger columns go past Z.** Income (AA/27), EducationLevel (AF/32), CareerStage (AH/34), migration fields (AM–AQ). Full column data flow (writers/readers) in `docs/SIMULATION_LEDGER.md`.
 - **Service account cannot create spreadsheets.** It can read/write existing sheets shared with `maravance@godworld-486407.iam.gserviceaccount.com`, but `spreadsheets.create` returns permission denied.
-- **ClockMode gates everything.** 5 modes: ENGINE (514), GAME (97), CIVIC (48), MEDIA (16), LIFE (25). Each mode determines which engines process a citizen. Wrong mode = wrong processing.
+- **ClockMode gates everything.** 4 active modes: ENGINE (509), GAME (91), CIVIC (46), MEDIA (29). Each mode determines which engines process a citizen. Wrong mode = wrong processing. Full breakdown in `docs/SIMULATION_LEDGER.md`.
 - **`clasp push` deploys all 153 files.** No partial deploy. Always push after engine changes, always verify with a test cycle or spot-check.
+- **After Supermemory rebuilds or major memory changes, operational knowledge may be missing.** Identity and journal survive, but project-specific details (which tabs are dead, how data flows, what's broken) may need re-reading from the architecture docs. When unsure, read the doc — don't guess.
 
 ## Session Lifecycle
 

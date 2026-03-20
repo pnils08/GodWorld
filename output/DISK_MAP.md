@@ -127,6 +127,51 @@ Run at session end or when output/ exceeds ~60MB:
 4. Run `node scripts/buildVoiceWorkspaces.js {cycle} --clean` to rebuild voice workspaces
 5. Run `node scripts/buildInitiativeWorkspaces.js {cycle} --clean` to rebuild initiative workspaces
 6. Delete civic voice data older than prior cycle
-4. Delete HTML intermediates from pdfs/
-5. Delete drive-files/ cache (re-downloadable)
-6. Verify editions/ and pdfs/ are intact (permanent)
+7. Delete HTML intermediates from pdfs/
+8. Delete drive-files/ cache (re-downloadable)
+9. Verify editions/ and pdfs/ are intact (permanent)
+
+---
+
+## Archive Policy — Keep Local Disk Lean
+
+**Goal:** The 25GB droplet runs Claude Code, the engine pipeline, and 3 PM2 services. Local disk is working memory, not long-term storage. Once files are confirmed on Drive, local copies are redundant.
+
+**Current disk pressure (S105):** 17GB / 25GB (73%). Key consumers:
+- `.claude/projects/` — 1.1GB (81 session transcripts, Feb-Mar 2026)
+- `.claude-mem/` — 741MB (observation DB + Chroma vectors)
+- `.claude/plugins/` — 666MB (installed plugins)
+- `node_modules/` — 534MB (NPM deps)
+- `backups/` — 141MB (tar.gz + sheet CSVs)
+
+### Photos & PDFs
+**Rule:** Delete local copies after confirmed Drive upload.
+**How:** `postRunFiling.js --upload` confirms upload. After verification, delete from `output/photos/` and `output/pdfs/`.
+**Savings:** ~25MB now, grows each edition.
+
+### Local Backups
+**Rule:** Keep only the 2 most recent tar.gz files. Older backups live on Drive only.
+**How:** Manual cleanup or script. Sheet CSV backups in `backups/sheets/` follow the same rule.
+**Savings:** ~70MB per cleanup.
+
+### Session Transcripts (`.claude/projects/-root-GodWorld/`)
+**Rule:** Archive oldest sessions to Drive quarterly. No summarization needed — the lessons are already in the docs (identity.md, NEWSROOM_MEMORY, LEDGER_REPAIR, SESSION_CONTEXT, journal).
+**How:**
+1. `tar -czf session_archive_YYYY-MM.tar.gz <oldest-30-jsonl-files-and-dirs>`
+2. Upload to Drive: `GodWorld_Backups/session_archive/`
+3. Verify upload, then delete local originals
+4. Do NOT delete the `memory/` subdirectory (MEMORY.md lives there)
+**Safety:** Raw files preserved on Drive. If we ever need to dig into a specific old session, pull from Drive.
+**Savings:** ~150-200MB per batch of 30 sessions.
+
+### claude-mem Database
+**Rule:** Monitor. If `~/.claude-mem/` passes 1GB, investigate retention or prune old observations.
+**Current:** 741MB (6,282 observations across 120 sessions).
+
+### What NEVER Gets Deleted Locally
+- `editions/` — published canon
+- `docs/` — project knowledge
+- `.claude/rules/` — behavioral rules
+- `.claude/projects/-root-GodWorld/memory/` — auto-memory (MEMORY.md)
+- `credentials/` — service account, API keys
+- `.env` — environment config

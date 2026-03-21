@@ -31,15 +31,10 @@ Determine which workflow ran this session (Media-Room, Research, Build/Deploy, M
 | `output/latest_edition_brief.md` | Reflects the edition just published (if any)? |
 | `ROLLOUT_PLAN.md` | Next Session Priorities refreshed? |
 
-### Research Audit
+### Build/Deploy Audit (also covers Research sessions)
 | File | Check |
 |------|-------|
-| `TECH_READING_ARCHIVE.md` | New research notes added? |
-| `ROLLOUT_PLAN.md` | New buildable items discovered? Next Session Priorities refreshed? |
-
-### Build/Deploy Audit
-| File | Check |
-|------|-------|
+| `TECH_READING_ARCHIVE.md` | New research notes added? (research sessions only) |
 | `SESSION_CONTEXT.md` | Engine versions table updated? New session entry added? |
 | `ROLLOUT_PLAN.md` | Phase status updated? Items moved to ROLLOUT_ARCHIVE if complete? Next Session Priorities refreshed? |
 | `DOCUMENTATION_LEDGER.md` | New files created this session listed? |
@@ -153,6 +148,7 @@ Update `/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md`:
 
 **Also update `docs/engine/ROLLOUT_PLAN.md`:**
 - **Next Session Priorities** section — Refresh the priority list based on what was completed and what's newly active.
+- **Move completed items** to `docs/engine/ROLLOUT_ARCHIVE.md` with full details. Keep a one-line reference on the active plan.
 - This is the single source for project work status. SESSION_CONTEXT points to it; don't duplicate status there.
 
 **If nothing project-level changed this session:** Skip this step.

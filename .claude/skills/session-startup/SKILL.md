@@ -63,7 +63,7 @@ Read: docs/engine/ENGINE_MAP.md
 Then run: /pre-mortem
 ```
 
-A cycle advances 668 citizens through career, household, civic, and relationship engines. Pre-mortem catches silent failures before they compound across cycles.
+A cycle advances 675 citizens (509 ENGINE, 91 GAME, 46 CIVIC, 29 MEDIA) through simulation engines. Pre-mortem catches silent failures before they compound across cycles.
 
 **Update at session end:** SESSION_CONTEXT (cycle bump, session entry), ROLLOUT_PLAN (priorities), NEWSROOM_MEMORY (if edition follows).
 

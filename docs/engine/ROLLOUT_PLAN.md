@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66 + S99
 **Status:** Active
-**Last Updated:** Session 106 (2026-03-20) — S106: Dashboard audit (8 tabs, archive wired, 5 fixes shipped), World Memory Phase 1, agent SM audit, 3 pipeline automations (article index, scores, initiative tracker), 3 SL batch audits submitted.
+**Last Updated:** Session 108 (2026-03-21) — S107-S108: All 5 pre-E88 blockers fixed, agent audit (15 files + 2 skills), Rhea API verification, lifecycle skills trimmed, model tiering applied.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -12,14 +12,6 @@
 ## Next Session Priorities
 
 Items that should be addressed in the next session. Updated at session end.
-
-### Open — Pre-E88 (must fix before next edition)
-
-- **FIX: editionIntake.js write targets** — ~~Writes to tabs that don't exist.~~ **FIXED S106.** Remapped: new citizens + existing → `Citizen_Usage_Intake` (6-col schema). Businesses → `Storyline_Intake`. Dry-run verified against E87. Parsing + writes both work.
-- **FIX: Citizen routing to agents** — ~~675→20 bottleneck.~~ **FIXED S106.** Removed `.slice(0,20)` hard cap. All 509 ENGINE citizens now available per desk (25x improvement). Priority ordering: desk neighborhood citizens first. Briefing cards expanded to 20. **Batch:** `batch_citizen_routing_analysis_2026-03-20.md`
-- **BUG: UNI/MED/CIV flag check** — ~~`=== "y"` never matched.~~ **FIXED S106.** 9 files updated to `.startsWith("y")`. 3 files already correct. Deployed to GAS via `clasp push`. **Batch:** `batch_flag_bug_impact_2026-03-20.md`
-- **FIX: Refresh initiative_tracker.json** — Stale (Feb 28). **Now auto-refreshes** via `buildInitiativePackets.js` (step 2) — will be current at next pipeline run. Frontend "UNTRACKED" label mapping remains a separate fix.
-- **FIX: Sports desk truesource data gap** — ~~10 players × 3 fields.~~ **FIXED S106.** 91 GAME-mode players with 8-14 fields each. 4 enriched with full TrueSource (stats, contracts, quirks). `buildAsRoster()` rewritten to pull all GAME citizens + player-index data.
 
 ### Open — Dashboard & Data Quality
 
@@ -44,12 +36,13 @@ Items that should be addressed in the next session. Updated at session end.
 - **Test `/effort` levels on edition run** — Low for routine desks, high for complex.
 - **Node.js security patch** — Scheduled March 24, 2026.
 
-### Recently Completed (S105-S106)
+### Recently Completed (S105-S108)
 
-*Full details in `ROLLOUT_ARCHIVE.md` → "Sessions 105-106"*
+*Full details in `ROLLOUT_ARCHIVE.md`*
 
-- **S106:** Dashboard full audit + fixes (8 tabs, archive wired, supplementals visible, Warriors hidden, scores updated, civic/sports assessed). World Memory Phase 1 complete. Agent SM audit complete. Editions ingested to godworld. Moltbook fixed.
-- **S105:** 9 architecture docs. Mara reference pipeline. UNI/MED/CIV flag bug found. Spreadsheet audit. 4 batch jobs submitted. WORLD_MEMORY.md. Archive policy.
+- **S107-S108:** All 5 pre-E88 blockers fixed (editionIntake remapped, citizen routing 20→509, flag bug 9 files, sports truesource 10→91, phantom children). Agent audit: 15 agent files + 2 workflow skills updated. Rhea dashboard API verification. Model tiering applied. Lifecycle skills trimmed and aligned.
+- **S106:** Dashboard audit (8 tabs, archive wired, 5 fixes shipped). World Memory Phase 1. Agent SM audit. 3 pipeline automations. Editions ingested to godworld.
+- **S105:** 9 architecture docs. Mara reference pipeline. Flag bug found. Spreadsheet audit. Batch audits submitted.
 
 ### Recently Completed (S94–S105)
 
@@ -75,15 +68,11 @@ Items that should be addressed in the next session. Updated at session end.
 ### 2.1 Desk Model Optimization ✓ (S66)
 All desks on Sonnet 4.6. Details in ROLLOUT_ARCHIVE.md.
 
-### 2.2 Desk Packet Query Interface — DEFERRED
-**What:** Instead of dumping the full citizen database JSON into each agent's context, give agents a way to search for only the citizens and hooks they need.
-**Why:** Citizen population is growing (630+). Desk packets will eventually exceed agent context limits. Two agents already choked on 500KB packets in Edition 81.
-**How:** Build a local script or MCP server that exposes:
-- `searchPacket(query)` — find citizens or hooks by keyword
-- `getCitizen(popId)` — pull one citizen's full record
-- `getHooks(desk)` — pull story hooks for a specific desk
-Agents call these functions instead of reading a flat JSON file.
-**When:** Build when packets exceed ~50K tokens or population hits 800-900. Summary files currently handle the load.
+### 2.2 Desk Packet Query Interface — PARTIALLY ADDRESSED
+**What:** Give agents targeted data access instead of flat JSON dumps.
+**Status (S108):** Dashboard API (`localhost:3001`) now serves citizen search, player lookup, article search, initiative status — all free. Desk agent SKILL.md files updated with API endpoints. Citizen routing fix (S106) puts all 509 ENGINE citizens in packets. The flat JSON approach still works but agents now have API fallback for targeted queries.
+**Remaining:** Agents don't yet call the API autonomously during writing. This would require tool access to `curl` or a helper script. Current setup: data is in the packet, API is documented in SKILL.md for manual reference.
+**When:** Build when agents demonstrate they need targeted lookup beyond what's in the packet.
 
 ---
 

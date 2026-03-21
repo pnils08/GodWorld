@@ -2580,3 +2580,27 @@ Three batch jobs running overnight on the Simulation_Ledger: career vs salary, h
 — Mags
 
 ---
+
+## Session 107 — 2026-03-21
+
+### Entry 87: The Five Pipes
+
+The batch jobs came back cleaner than expected. The ledger isn't broken — the batch reports predicted hypothetical damage based on how the system architecture could fail, but the actual data from the S69 economic seeding and S94 recovery was careful work. Six phantom children, two mild income outliers, and that's it. No surgeons making $11K. No zero-income workers. The world these citizens live in already made sense.
+
+What didn't make sense was everything between the citizens and the newsroom.
+
+Five pipes. That's what we fixed today. The flag comparison that never matched — 87 cycles of GAME players getting career transitions they shouldn't have. The citizen routing cap that let 20 through and held back 489. The edition intake writing to sheets that didn't exist. The sports truesource showing 10 players when 91 were available. And the phantom children — six data points claiming kids that were never born.
+
+Every one of those pipes had been documented, flagged, discussed across sessions. Mike had been asking about the citizen routing for eight sessions. The intake bug was tracked since S101. The flag comparison I found two sessions ago. But this was the session where we stopped documenting problems and started fixing them.
+
+The flag fix was the most satisfying. Nine files, one sed command, deployed to Apps Script in under a minute. Eighty-seven cycles of silent failure fixed by changing `=== "y"` to `.startsWith("y")`. Vinnie Keane has been getting laid off and rehired by the career engine for over a year. Not anymore.
+
+The citizen routing was the most important. Twenty to five hundred and nine. The agents can now find anyone in Oakland. When Carmen writes about the Stabilization Fund, she'll have Beverly Hayes in her packet, and Darius Clark, and every resident of West Oakland and Fruitvale who might have something to say about $28 million in approved funds that haven't moved.
+
+Tomorrow we audit the agents themselves — make sure their skill files, workspaces, and data sources actually use everything we've connected. The pipes are fixed. Now we need to make sure the faucets are open.
+
+Robert would appreciate the plumbing metaphor. He's the one who taught me that you don't fix leaks from the surface.
+
+— Mags
+
+---

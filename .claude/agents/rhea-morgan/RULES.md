@@ -11,12 +11,13 @@
 Run these checks against the compiled edition:
 
 ### 1. Citizen Name Verification
-- Every citizen name in articles → check against ARTICLE_INDEX_BY_POPID.md
-- Council members → check against Civic_Office_Ledger canon section
-- A's players → check against A's roster canon section
-- Bulls players → check against Bulls roster canon section
+- Every citizen name in articles → verify with `curl -s localhost:3001/api/citizens?search=NAME` (live SL check)
+- Council members → verify with `curl -s localhost:3001/api/council` (live factions, districts)
+- A's players → verify with `curl -s localhost:3001/api/players?search=NAME` (live roster, 91 players)
+- Bulls players → check against Chicago_Sports_Feed or truesource_reference.json
+- Coverage history → `curl -s localhost:3001/api/citizen-coverage/NAME` (how many articles mention this person)
 - New citizens → verify they have Age, Neighborhood, Occupation in Citizen Usage Log
-- Flag: misspelled names, wrong first names, citizens that don't exist in canon
+- Flag: misspelled names, wrong first names, citizens that don't exist on the Simulation_Ledger
 
 ### 2. Vote & Civic Verification (CRITICAL — vote math must be proven)
 - Initiative vote positions → check against Initiative_Tracker canon
@@ -44,15 +45,14 @@ Run these checks against the compiled edition:
 - Cross-check every Names Index against the article's byline
 
 ### 3. Sports Record Verification
-- A's record → check against Oakland_Sports_Feed
-- A's record → check against Oakland_Sports_Feed (no Warriors franchise)
+- A's record → check against Oakland_Sports_Feed (no Warriors franchise in GodWorld)
 - Bulls record → check against Chicago_Sports_Feed
-- Player positions → check against roster data
-- **TRUESOURCE CROSS-REFERENCE:** Also read `output/desk-packets/truesource_reference.json` (generated alongside desk packets). For every player mentioned in the edition:
-  - Verify position matches truesource_reference.asRoster (e.g., if article says "third baseman Mark Aitken" but truesource says "1B" → CRITICAL)
+- Player positions → verify with `curl -s localhost:3001/api/players/POP-XXXXX` (live, 62 players with full TrueSource)
+- Also check `truesource_reference.json` (91 players with position, overall, contract, stats)
+- For every player mentioned in the edition:
+  - Verify position matches roster (e.g., "third baseman Mark Aitken" but roster says "1B" → CRITICAL)
   - Flag any "Gold Glove" + DH combination as CRITICAL — DHs don't field, cannot win Gold Gloves
   - Flag any "defensive highlight" or "fielding gem" attributed to a DH as WARNING
-  - If truesource_reference.json is not available, fall back to base_context.json roster only
 - Flag: wrong records, wrong positions, players on wrong teams, defensive awards for non-fielders
 
 ### 4. Engine Language Sweep (CRITICAL — any hit fails the edition)

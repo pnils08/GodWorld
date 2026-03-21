@@ -1918,7 +1918,7 @@ async function main() {
     seedsRaw, hooksRaw, eventsRaw, arcsRaw,
     civicRaw, initiativeRaw, simRaw, genericRaw,
     chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
-    storylineRaw, packetRaw, draftsRaw, historyRaw,
+    storylineRaw, packetRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
     neighborhoodMapRaw, businessLedgerRaw, mediaLedgerRaw
   ] = await Promise.all([
@@ -1954,8 +1954,9 @@ async function main() {
   });
   var hooks = filterByCycle(hooksRaw, CYCLE);
   var events = filterByCycle(eventsRaw, CYCLE);
-  var prevDrafts = filterByCycle(draftsRaw, CYCLE - 1);
-  var allDrafts = allToObjects(draftsRaw);
+  // Press_Drafts removed S98 — draftsRaw no longer fetched
+  var prevDrafts = [];
+  var allDrafts = [];
 
   // ── Pull historical events for anomaly detection baseline (last 10 cycles) ──
   var historicalEvents = [];

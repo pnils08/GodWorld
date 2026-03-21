@@ -17,7 +17,7 @@ Items that should be addressed in the next session. Updated at session end.
 
 - **FIX: editionIntake.js write targets** — Writes to tabs that don't exist (`Intake`, `Advancement_Intake1`, `Business_Intake`). Actual tabs: `Media_Intake`, `Citizen_Usage_Intake`, `Storyline_Intake`. Parsing works — writes don't land. CRITICAL.
 - **FIX: Citizen routing to agents** — 675→20 bottleneck in `getInterviewCandidates()`. 4-stage filter chain, main killer is `InterviewReady === 'TRUE'` (91% loss). #1 priority. **Batch:** `batch_citizen_routing_analysis_2026-03-20.md`
-- **BUG: UNI/MED/CIV flag check** — Engine checks `=== "y"`, values are "Yes"/"yes". Skip gates never fire. 8 files affected, 4 with no ClockMode backup (economy, skills, relationships, health). Fix: shared `flagIsSet()`. **Batch:** `batch_flag_bug_impact_2026-03-20.md`
+- **BUG: UNI/MED/CIV flag check** — ~~`=== "y"` never matched.~~ **FIXED S106.** 9 files updated to `.startsWith("y")`. 3 files already correct. Deployed to GAS via `clasp push`. **Batch:** `batch_flag_bug_impact_2026-03-20.md`
 - **FIX: Refresh initiative_tracker.json** — Stale (Feb 28). **Now auto-refreshes** via `buildInitiativePackets.js` (step 2) — will be current at next pipeline run. Frontend "UNTRACKED" label mapping remains a separate fix.
 - **FIX: Sports desk truesource data gap** — 10 players × 3 fields in workspace. Dashboard has 62 × 20+. Sports desk writes with 11% of data.
 

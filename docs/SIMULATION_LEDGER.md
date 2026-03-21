@@ -214,18 +214,16 @@ Every column is a data point in someone's life. This maps who writes each column
 
 ---
 
-## Flag State — BUG (S105)
+## Flag State — FIXED (S106)
 
-The UNI, MED, and CIV columns contain "Yes"/"yes"/"No"/"no"/"n" values. **But the engine checks `=== "y"` (single lowercase letter).** None of the actual values match, so the skip gates never fire.
+The UNI, MED, and CIV columns contain "Yes"/"yes"/"No"/"no"/"n" values. The engine previously checked `=== "y"` which never matched. **Fixed S106:** 9 engine files updated to `.toLowerCase().startsWith("y")`. 3 files already had correct checks. Deployed to GAS.
 
-**Impact:** GAME-mode A's players are processed by career, household, education, neighborhood, and relationship engines they should be excluded from. Athletes may be getting career transitions, layoffs, or household changes that don't make sense for professional players.
-
-**Actual flag values (S105 live data):**
+**Flag values (live data):**
 - UNI=Yes/yes: 116 citizens (A's players + staff)
 - MED=Yes/yes: 41 citizens (Tribune journalists)
 - CIV=Yes/yes: 72 citizens (civic officials)
 
-**Fix needed:** Change `=== "y"` to `.toLowerCase().startsWith("y")` in all Phase 5 engines. See ROLLOUT_PLAN.md.
+**Skip gates now fire correctly.** GAME-mode players will be excluded from career, household, education, neighborhood, and relationship engines on the next cycle run.
 
 ---
 

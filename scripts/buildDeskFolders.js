@@ -322,7 +322,8 @@ function generateReturningCitizens(desk, summary) {
 function generateCitizenCards(desk, summary) {
   const candidates = summary.interviewCandidates || [];
   const archive = summary.citizenArchive || [];
-  const all = [...candidates, ...archive].slice(0, 10);
+  // Show top 20 priority citizens in briefing (full roster in packet.json)
+  const all = [...candidates, ...archive].slice(0, 20);
 
   if (all.length === 0) return '';
 

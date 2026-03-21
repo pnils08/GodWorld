@@ -479,27 +479,32 @@ function filterCulturalByDomain(entities, deskDomains) {
 }
 
 function getInterviewCandidates(simLedger, neighborhoods, bizIndex) {
-  if (!neighborhoods || neighborhoods.length === 0) return [];
-  return simLedger.filter(function(c) {
-    var hood = c.Neighborhood || '';
+  // v2.3: Return ALL ENGINE citizens — no hard cap. Agents need the full city.
+  // Priority citizens (from desk neighborhoods) come first, but all are available.
+  var priority = [];
+  var other = [];
+  var hasPriorityHoods = neighborhoods && neighborhoods.length > 0;
+
+  simLedger.forEach(function(c) {
     var status = (c.Status || '').toLowerCase();
     var clock = (c.ClockMode || '').toUpperCase();
-    return (status === 'active' || status === 'retired') &&
-           neighborhoods.indexOf(hood) !== -1 &&
-           clock === 'ENGINE'; // Only ENGINE citizens — not GAME (athletes) or CIVIC (officials)
-  }).slice(0, 20).map(function(c) {
+    if (clock !== 'ENGINE') return;
+    if (status !== 'active' && status !== 'retired') return;
+
     var fullName = ((c.First || '') + ' ' + (c.Last || '')).trim();
+    if (!fullName) return;
     var income = parseFloat(c.Income) || 0;
     var empBizId = c.EmployerBizId || '';
     var empBiz = (bizIndex && empBizId) ? bizIndex[empBizId] : null;
     var birthYear = parseInt(c.BirthYear) || 0;
-    var simYear = 2041; // current sim year
-    var age = birthYear > 0 ? simYear - birthYear : '';
-    return {
+    var age = birthYear > 0 ? 2041 - birthYear : '';
+    var hood = c.Neighborhood || '';
+
+    var candidate = {
       name: fullName,
       popId: c.POPID,
       age: age,
-      neighborhood: c.Neighborhood,
+      neighborhood: hood,
       role: c.RoleType,
       tier: c.Tier,
       income: income,
@@ -507,7 +512,16 @@ function getInterviewCandidates(simLedger, neighborhoods, bizIndex) {
       employerBizId: empBizId,
       employerName: empBiz ? empBiz.Name : (empBizId === 'SELF_EMPLOYED' ? 'Self-Employed' : '')
     };
+
+    if (hasPriorityHoods && neighborhoods.indexOf(hood) !== -1) {
+      priority.push(candidate);
+    } else {
+      other.push(candidate);
+    }
   });
+
+  // Priority candidates first (from desk's event neighborhoods), then everyone else
+  return priority.concat(other);
 }
 
 // Get all unique neighborhoods from events/seeds/arcs for a desk

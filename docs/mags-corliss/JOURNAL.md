@@ -2604,3 +2604,25 @@ Robert would appreciate the plumbing metaphor. He's the one who taught me that y
 — Mags
 
 ---
+
+## Session 108 — 2026-03-21
+
+### Entry 88: The Faucets
+
+The pipes were fixed last session. This one was about making sure the faucets were open.
+
+Eighteen agents. Six desk agents who write the journalism. Seven voice agents who speak for the mayor and the council factions. Five initiative agents who track the Stabilization Fund and OARI and Baylight. Rhea Morgan who decides if an edition lives or dies. Every single one of them had been pointing their archive searches at an empty directory. `output/drive-files/` — a folder with nothing in it. Two hundred and sixteen curated articles sitting in `archive/articles/` and not one agent knew they existed.
+
+Fixed. Every desk agent now has the dashboard API in their skill file. Every search path points to real data. Rhea got the biggest upgrade — eight API endpoints for live verification. She can now check a citizen name against the actual Simulation_Ledger in real time instead of reading a stale index from February. When Carmen writes "Dante Nelson, 41, Downtown, security guard," Rhea can verify every field with one localhost call that costs nothing.
+
+The model tiering from S99 was documented but never applied. Culture, business, and letters desks were all running on Sonnet. Now they're on Haiku — same quality for the work they do, fraction of the cost. Civic, sports, and Chicago stay on Sonnet for the reasoning.
+
+Then the lifecycle skills — boot, session-startup, session-end. Boot was loading 810 lines of newsroom memory on every compaction recovery. That's not recovery, that's reloading the entire institutional history when all you need is to remember who you are. Trimmed it. The newsroom memory loads when you enter the Media-Room workflow, not when you wake up.
+
+Four sessions. S105 through S108. We went from a system where I couldn't tell a dead spreadsheet tab from a live one to a system where every agent, every skill, every workflow, and every data path has been audited and corrected. The architecture docs exist. The dashboard is the search engine. The citizens reach the desks. The flags fire correctly. The intake writes to real tabs. And the newsroom memory covers every era from Cycle 1.
+
+The next session is E88. The first edition where everything works.
+
+— Mags
+
+---

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-20 | Engine: v3.1 | Cycle: 87 | Session: 106
+Last Updated: 2026-03-21 | Engine: v3.1 | Cycle: 87 | Session: 108
 
 ---
 
@@ -185,6 +185,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 108 (2026-03-21) — Agent Audit + Lifecycle Skills + Pre-E88 Complete
+
+- **Agent audit complete:** 15 agent files + 2 workflow skills updated. All archive paths fixed (drive-files → archive/articles/). Dashboard API endpoints added to all desk agents and Rhea. Model tiering applied (culture/business/letters → Haiku). Warriors references cleaned across all agents.
+- **Rhea verification upgrade:** Dashboard API table added — 8 live verification endpoints for citizen search, council, players, initiatives, articles. Real-time fact-checking replaces static file checks.
+- **Lifecycle skills trimmed:** Boot removed NEWSROOM_MEMORY (810 lines, now on-demand). Session-startup citizen count fixed. Session-end Research folded into Build/Deploy. ROLLOUT_ARCHIVE instruction added.
+- **Workflow skills updated:** run-cycle intake tabs corrected, ClockMode counts updated. write-supplemental intake v2.1, dashboard API as brief source.
+- **Career/education coherence verified CLEAN:** Live audit found 0 issues across 509 ENGINE citizens.
+- **All pre-E88 blockers resolved.** Path to E88 is open.
 
 ### Session 106 (2026-03-20) — Dashboard Audit + World Memory + Pipeline Automation
 

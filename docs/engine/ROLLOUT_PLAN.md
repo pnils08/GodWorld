@@ -15,7 +15,7 @@ Items that should be addressed in the next session. Updated at session end.
 
 ### Open — Dashboard & Data Quality
 
-- **FIX: Career/education coherence** — 24 mismatches across 509 ENGINE citizens. 8 licensure impossibilities, 6 income outliers, 4 age/stage impossibilities. 88.6% coherent overall. **Batch:** `batch_career_education_coherence_2026-03-20.md`
+- **FIX: Career/education coherence** — ~~24 predicted mismatches.~~ **VERIFIED CLEAN S107-S108.** Live audit found 0 issues across 509 ENGINE citizens. Batch report overestimated — actual data from S69 seeding + S94 recovery was careful. No licensure, income, or age/stage impossibilities.
 - **DESIGN: Supplemental display on frontend** — 7 supplementals detected with cycles. Need visual placement on Edition tab or filter view.
 - **DESIGN: Chicago dashboard tab** — 123 citizens, 2 reporters, Bulls data, Paulson GM. Currently buried in Sports tab. See `docs/DASHBOARD.md`.
 - **FIX: Rebuild POPID article index** — `ARTICLE_INDEX_BY_POPID.md` generated Feb 5 from old Drive downloads. No automated builder. Needs script.

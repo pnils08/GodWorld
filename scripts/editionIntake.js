@@ -11,9 +11,9 @@
  *   node -r dotenv/config scripts/editionIntake.js --dry-run <edition-file> [cycle]
  *
  * Jobs:
- *   1. New citizens (from Citizen Usage Log) → Intake sheet (engine picks up next cycle)
- *   2. Existing citizen notes → Advancement_Intake1
- *   3. Businesses (from Business Ticker) → Business_Intake (run processBusinessIntake.js after)
+ *   1. New citizens (from Citizen Usage Log) → Citizen_Usage_Intake (UsageType: new_citizen)
+ *   2. Existing citizen notes → Citizen_Usage_Intake (UsageType: quoted/letters)
+ *   3. Businesses (from Business Ticker) → Storyline_Intake (StorylineType: business)
  *   4. Storylines → Storyline_Tracker (direct, no staging)
  *   5. Quotes → dry-run display only (enrichCitizenProfiles.js handles LifeHistory)
  *
@@ -456,8 +456,8 @@ async function main() {
 
   console.log('');
   console.log('Citizen routing:');
-  console.log(`  New (→ Intake):              ${newCitizens.length}`);
-  console.log(`  Existing (→ Advancement):    ${existingCitizens.length}`);
+  console.log(`  New (→ Citizen_Usage_Intake): ${newCitizens.length}`);
+  console.log(`  Existing (→ Citizen_Usage):   ${existingCitizens.length}`);
   console.log(`  Skipped (civic/sports/etc):   ${skipped.length}`);
 
   // ── DRY RUN OUTPUT ──
@@ -465,7 +465,7 @@ async function main() {
   if (dryRun) {
     if (newCitizens.length > 0) {
       console.log('');
-      console.log('--- NEW CITIZENS (→ Intake sheet) ---');
+      console.log('--- NEW CITIZENS (→ Citizen_Usage_Intake) ---');
       for (const c of newCitizens) {
         const birthYear = c.age ? WORLD_YEAR - parseInt(c.age) : '';
         console.log(`  ${c.name} | ${c.age || '?'} | ${c.neighborhood || '?'} | ${c.role || '?'} | BirthYear: ${birthYear || '?'}`);
@@ -474,7 +474,7 @@ async function main() {
 
     if (existingCitizens.length > 0) {
       console.log('');
-      console.log('--- EXISTING CITIZENS (→ Advancement_Intake1) ---');
+      console.log('--- EXISTING CITIZENS (→ Citizen_Usage_Intake) ---');
       for (const c of existingCitizens) {
         console.log(`  ${c.name} (${c.popId}) | ${c.context || c.category}`);
       }
@@ -506,7 +506,7 @@ async function main() {
 
     if (businesses.length > 0) {
       console.log('');
-      console.log('--- BUSINESSES (→ Business_Intake) ---');
+      console.log('--- BUSINESSES (→ Storyline_Intake) ---');
       for (const b of businesses) {
         console.log(`  ${b[0]} | ${b[1]} | ${b[2] || '?'}`);
       }
@@ -526,76 +526,65 @@ async function main() {
 
   let totalWritten = 0;
 
-  // Job 1: New citizens → Intake (16 cols)
+  // Job 1: New citizens → Citizen_Usage_Intake (6 cols)
+  // Schema: CitizenName, POPID, UsageType, Context, Reporter, Status
   if (newCitizens.length > 0) {
     const rows = newCitizens.map(c => {
-      const nameParts = c.name.split(' ');
-      const first = nameParts[0] || '';
-      const last = nameParts.slice(1).join(' ') || '';
-      const birthYear = c.age ? WORLD_YEAR - parseInt(c.age) : '';
-
+      const context = [c.age ? `age ${c.age}` : '', c.neighborhood || '', c.role || '']
+        .filter(Boolean).join(', ');
       return [
-        first,                                    // First
-        '',                                       // Middle
-        last,                                     // Last
-        '',                                       // OriginGame
-        'no',                                     // UNI
-        'no',                                     // MED
-        'no',                                     // CIV
-        'ENGINE',                                 // ClockMode
-        4,                                        // Tier
-        c.role || '',                              // RoleType
-        'Active',                                 // Status
-        birthYear,                                // BirthYear
-        'Oakland',                                // OriginCity
-        `Introduced via edition C${cycle}`,       // LifeHistory
-        '',                                       // OriginVault
-        c.neighborhood || ''                      // Neighborhood
+        c.name,                                   // CitizenName
+        '',                                       // POPID (new — no ID yet)
+        'new_citizen',                            // UsageType
+        `New citizen from E${cycle}. ${context}`, // Context
+        'edition-intake',                         // Reporter
+        'pending'                                 // Status
       ];
     });
 
-    await sheets.appendRows('Intake!A:P', rows);
-    console.log(`  → Intake: ${rows.length} new citizens staged`);
+    await sheets.appendRows('Citizen_Usage_Intake!A:F', rows);
+    console.log(`  → Citizen_Usage_Intake: ${rows.length} new citizens staged`);
     totalWritten += rows.length;
   }
 
-  // Job 2: Existing citizens → Advancement_Intake1 (10 cols)
+  // Job 2: Existing citizens → Citizen_Usage_Intake (6 cols)
   if (existingCitizens.length > 0) {
     const rows = existingCitizens.map(c => {
-      const nameParts = c.name.split(' ');
-      const first = nameParts[0] || '';
-      const last = nameParts.slice(1).join(' ') || '';
-      const note = c.context
-        ? `Media usage C${cycle} (${c.category.toLowerCase()}): ${c.context}`
-        : `Media usage C${cycle} (${c.category.toLowerCase()})`;
-
+      const context = c.context
+        ? `C${cycle} ${c.category.toLowerCase()}: ${c.context}`
+        : `C${cycle} ${c.category.toLowerCase()} appearance`;
       return [
-        first,    // First
-        '',       // Middle
-        last,     // Last
-        '',       // RoleType
-        '',       // Tier
-        '',       // ClockMode
-        '',       // CIV
-        '',       // MED
-        '',       // UNI
-        note      // Notes
+        c.name,                                   // CitizenName
+        c.popId || '',                            // POPID
+        c.category.toLowerCase(),                 // UsageType (quoted, letters, etc.)
+        context,                                  // Context
+        'edition-intake',                         // Reporter
+        'pending'                                 // Status
       ];
     });
 
-    await sheets.appendRows('Advancement_Intake1!A:J', rows);
-    console.log(`  → Advancement_Intake1: ${rows.length} existing citizen notes`);
+    await sheets.appendRows('Citizen_Usage_Intake!A:F', rows);
+    console.log(`  → Citizen_Usage_Intake: ${rows.length} existing citizen notes`);
     totalWritten += rows.length;
   }
 
-  // Job 3: Businesses → Business_Intake (6 cols)
+  // Job 3: Businesses → Storyline_Intake (6 cols)
+  // Schema: StorylineType, Description, Neighborhood, RelatedCitizens, Priority, Status
   if (businesses.length > 0) {
     try {
-      await sheets.appendRows('Business_Intake', businesses);
-      console.log(`  → Business_Intake: ${businesses.length} businesses staged`);
-      totalWritten += businesses.length;
+      const rows = businesses.map(b => [
+        'business',                               // StorylineType
+        Array.isArray(b) ? b.join(', ') : String(b), // Description
+        '',                                       // Neighborhood
+        '',                                       // RelatedCitizens
+        'normal',                                 // Priority
+        'pending'                                 // Status
+      ]);
+      await sheets.appendRows('Storyline_Intake!A:F', rows);
+      console.log(`  → Storyline_Intake: ${rows.length} businesses staged`);
+      totalWritten += rows.length;
     } catch (e) {
-      console.log(`  → Business_Intake: SKIPPED (${e.message})`);
+      console.log(`  → Storyline_Intake (businesses): SKIPPED (${e.message})`);
     }
   }
 

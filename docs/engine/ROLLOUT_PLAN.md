@@ -15,7 +15,7 @@ Items that should be addressed in the next session. Updated at session end.
 
 ### Open — Pre-E88 (must fix before next edition)
 
-- **FIX: editionIntake.js write targets** — Writes to tabs that don't exist (`Intake`, `Advancement_Intake1`, `Business_Intake`). Actual tabs: `Media_Intake`, `Citizen_Usage_Intake`, `Storyline_Intake`. Parsing works — writes don't land. CRITICAL.
+- **FIX: editionIntake.js write targets** — ~~Writes to tabs that don't exist.~~ **FIXED S106.** Remapped: new citizens + existing → `Citizen_Usage_Intake` (6-col schema). Businesses → `Storyline_Intake`. Dry-run verified against E87. Parsing + writes both work.
 - **FIX: Citizen routing to agents** — ~~675→20 bottleneck.~~ **FIXED S106.** Removed `.slice(0,20)` hard cap. All 509 ENGINE citizens now available per desk (25x improvement). Priority ordering: desk neighborhood citizens first. Briefing cards expanded to 20. **Batch:** `batch_citizen_routing_analysis_2026-03-20.md`
 - **BUG: UNI/MED/CIV flag check** — ~~`=== "y"` never matched.~~ **FIXED S106.** 9 files updated to `.startsWith("y")`. 3 files already correct. Deployed to GAS via `clasp push`. **Batch:** `batch_flag_bug_impact_2026-03-20.md`
 - **FIX: Refresh initiative_tracker.json** — Stale (Feb 28). **Now auto-refreshes** via `buildInitiativePackets.js` (step 2) — will be current at next pipeline run. Frontend "UNTRACKED" label mapping remains a separate fix.

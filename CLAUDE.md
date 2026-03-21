@@ -79,7 +79,7 @@ node scripts/buildMaraReference.js
 # Deploy GAS engine to Google Apps Script
 clasp push
 
-# Edition intake v2.0 — BROKEN: writes to wrong tab names. See ROLLOUT_PLAN.md.
+# Edition intake v2.1 — citizens → Citizen_Usage_Intake, businesses → Storyline_Intake
 node -r dotenv/config scripts/editionIntake.js [--dry-run] <edition-file> [cycle]
 
 # Promote staged businesses after intake

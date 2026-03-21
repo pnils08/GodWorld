@@ -40,18 +40,15 @@ Pull these sheets via service account and show a checklist summary.
 - **Engine_Errors** — Any errors from last cycle?
 
 ### Citizen Pipeline
-- **Intake** — Citizens waiting to promote? (count + names if <20). editionIntake v2.0 writes new citizens here directly from editions.
-- **Advancement_Intake1** — Existing citizens with updates pending? editionIntake v2.0 writes updates here.
-- **Simulation_Ledger** — Current citizen count (675 expected). ClockMode breakdown: ENGINE/GAME/CIVIC/MEDIA/LIFE.
+- **Citizen_Usage_Intake** — New citizens or appearance notes from last edition? (editionIntake v2.1 writes here)
+- **Simulation_Ledger** — Current citizen count (675 total). ClockMode: ENGINE (509), GAME (91), CIVIC (46), MEDIA (29).
 - **Generic_Citizens** — Pool size (emergence pipeline only — not used for desk packets since S94)
 - **Chicago_Citizens** — Pool size
 
 ### Media Pipeline (from last edition)
-- **Intake** — New citizens staged from last edition?
-- **Advancement_Intake1** — Existing citizen updates pending?
+- **Citizen_Usage_Intake** — New citizens staged? Existing citizen notes pending?
 - **Storyline_Tracker** — Active storyline count, any new from last edition?
-- **Business_Intake** — Any staged businesses to promote? (run `processBusinessIntake.js` if so)
-- **Citizen_Usage_Intake** — Citizen media appearances tracked? (6-col format with POPID)
+- **Storyline_Intake** — Any staged businesses/storylines from last edition?
 
 ### Civic State
 - **Initiative_Tracker** — Any pending-vote initiatives this cycle?
@@ -65,7 +62,7 @@ Pull these sheets via service account and show a checklist summary.
 - **Cultural_Ledger** — Entity count
 
 ### Sports
-- **Oakland_Sports_Feed** — A's/Warriors current records
+- **Oakland_Sports_Feed** — A's current records
 - **Chicago_Sports_Feed** — Bulls current record
 
 ### City Systems
@@ -88,7 +85,7 @@ PRE-FLIGHT: Cycle [XX] → [XX]
 ```
 
 Flag any blockers. Common blockers:
-- Unprocessed rows in Intake, Advancement_Intake1, or Business_Intake from last edition
+- Unprocessed rows in Citizen_Usage_Intake or Storyline_Intake from last edition
 - Engine_Errors from last cycle (must resolve before running again)
 - Cycle_Packet cycle number doesn't match World_Config (stale packet)
 - Empty Relationship_Bonds (seed issue — bonds engine will skip)

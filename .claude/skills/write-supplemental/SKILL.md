@@ -153,10 +153,12 @@ output/supplemental-briefs/{topic_slug}_c{XX}_brief.md
 
 ### Brief sources (check in order):
 1. User-provided content
-2. Supermemory — `/super-search` for relevant past coverage
-3. Simulation_Ledger — citizens in the relevant neighborhood/occupation
-4. Business_Ledger — businesses in the relevant sector
-5. NEWSROOM_MEMORY.md — errata, character continuity
+2. Dashboard API — `curl -s localhost:3001/api/search/articles?q=TOPIC` (256 articles, C1-C87, free)
+3. Supermemory — `/super-search` for past coverage (searches `mags` + `godworld` containers)
+4. Simulation_Ledger — `curl -s localhost:3001/api/citizens?neighborhood=NAME&search=ROLE` (live, 509 ENGINE citizens)
+5. Business_Ledger — businesses in the relevant sector
+6. NEWSROOM_MEMORY.md — errata, character continuity
+7. Archive articles — `archive/articles/c*_{desk}_*.txt` (199 curated articles, C1-C77)
 
 ### Enhanced data sources (use if available):
 
@@ -430,7 +432,7 @@ node -r dotenv/config scripts/editionIntake.js editions/supplemental_{topic_slug
 
 **Note:** `editionIntake.js` doesn't load dotenv — always use `node -r dotenv/config` prefix.
 
-Intake v2.0 writes directly: new citizens → Intake sheet (engine picks up next cycle), existing citizens → Advancement_Intake1, storylines → Storyline_Tracker, businesses → Business_Intake.
+Intake v2.1 writes directly: new citizens + existing → Citizen_Usage_Intake, storylines → Storyline_Tracker, businesses → Storyline_Intake.
 
 If new businesses were established, promote them:
 ```bash

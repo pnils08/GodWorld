@@ -602,9 +602,9 @@ function runCareerEngine_(ctx) {
 
     var tier = Number(row[iTier] || 0);
     var mode = row[iClock] || "ENGINE";
-    var isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
-    var isMED = (row[iMED] || "").toString().toLowerCase() === "y";
-    var isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
+    var isUNI = (row[iUNI] || "").toString().toLowerCase().startsWith("y");
+    var isMED = (row[iMED] || "").toString().toLowerCase().startsWith("y");
+    var isCIV = (row[iCIV] || "").toString().toLowerCase().startsWith("y");
     var neighborhood = iNeighborhood >= 0 ? (row[iNeighborhood] || '') : '';
     var tierRole = iTierRole >= 0 ? row[iTierRole] : "";
     var popId = row[iPopID];

@@ -394,9 +394,9 @@ function generateGenericCitizenMicroEvents_(ctx) {
     var tier = Number(row[iTier] || 0);
     var mode = (row[iClock] || "ENGINE").toString().trim().toUpperCase();
 
-    var isUNIFlag = (iUNI >= 0) ? (row[iUNI] || "").toString().trim().toLowerCase() === "y" : false;
-    var isMEDFlag = (iMED >= 0) ? (row[iMED] || "").toString().trim().toLowerCase() === "y" : false;
-    var isCIVFlag = (iCIV >= 0) ? (row[iCIV] || "").toString().trim().toLowerCase() === "y" : false;
+    var isUNIFlag = (iUNI >= 0) ? (row[iUNI] || "").toString().trim().toLowerCase().startsWith("y") : false;
+    var isMEDFlag = (iMED >= 0) ? (row[iMED] || "").toString().trim().toLowerCase().startsWith("y") : false;
+    var isCIVFlag = (iCIV >= 0) ? (row[iCIV] || "").toString().trim().toLowerCase().startsWith("y") : false;
 
     var popId = (row[iPopID] || "").toString();
     var neighborhood = (iNeighborhood >= 0) ? (row[iNeighborhood] || "").toString() : "";

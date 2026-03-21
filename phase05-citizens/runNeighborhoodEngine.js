@@ -337,9 +337,9 @@ function runNeighborhoodEngine_(ctx) {
 
     var tier = Number(row[iTier] || 0);
     var mode = row[iClockMode] || 'ENGINE';
-    var isUNI = (row[iUNI] || '').toString().toLowerCase() === 'y';
-    var isMED = (row[iMED] || '').toString().toLowerCase() === 'y';
-    var isCIV = (row[iCIV] || '').toString().toLowerCase() === 'y';
+    var isUNI = (row[iUNI] || '').toString().toLowerCase().startsWith('y');
+    var isMED = (row[iMED] || '').toString().toLowerCase().startsWith('y');
+    var isCIV = (row[iCIV] || '').toString().toLowerCase().startsWith('y');
 
     // Only Tier-3/4 ENGINE citizens qualify
     if (tier !== 3 && tier !== 4) continue;

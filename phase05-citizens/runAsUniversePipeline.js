@@ -417,7 +417,7 @@ function runAsUniversePipeline_(ctx) {
 
     var row = rows[r];
 
-    var isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
+    var isUNI = (row[iUNI] || "").toString().toLowerCase().startsWith("y");
     if (!isUNI) continue;
 
     var status = (row[iStatus] || "").toString().trim().toLowerCase();

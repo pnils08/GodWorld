@@ -408,9 +408,9 @@ function generateNamedCitizenEvents_(ctx) {
     if (mode !== "ENGINE") continue;
     if (status !== "active") continue;
 
-    var isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
-    var isMED = (row[iMED] || "").toString().toLowerCase() === "y";
-    var isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
+    var isUNI = (row[iUNI] || "").toString().toLowerCase().startsWith("y");
+    var isMED = (row[iMED] || "").toString().toLowerCase().startsWith("y");
+    var isCIV = (row[iCIV] || "").toString().toLowerCase().startsWith("y");
 
     // ═══════════════════════════════════════════════════════════════════════
     // BASE PROBABILITY

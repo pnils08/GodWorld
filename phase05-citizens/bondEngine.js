@@ -780,9 +780,9 @@ function detectNewBonds_(ctx) {
       var dataB = citizenData[citizenB] || {};
 
       var sharedDomains = [];
-      if (dataA.UNI === 'y' && dataB.UNI === 'y') sharedDomains.push('UNI');
-      if (dataA.MED === 'y' && dataB.MED === 'y') sharedDomains.push('MED');
-      if (dataA.CIV === 'y' && dataB.CIV === 'y') sharedDomains.push('CIV');
+      if ((dataA.UNI || '').toLowerCase().startsWith('y') && (dataB.UNI || '').toLowerCase().startsWith('y')) sharedDomains.push('UNI');
+      if ((dataA.MED || '').toLowerCase().startsWith('y') && (dataB.MED || '').toLowerCase().startsWith('y')) sharedDomains.push('MED');
+      if ((dataA.CIV || '').toLowerCase().startsWith('y') && (dataB.CIV || '').toLowerCase().startsWith('y')) sharedDomains.push('CIV');
 
       var sameTier = dataA.TierRole && dataA.TierRole === dataB.TierRole;
 

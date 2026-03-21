@@ -166,7 +166,7 @@ function runCivicElections_(ctx) {
                        tierRole.indexOf('reporter') >= 0 ||
                        tierRole.indexOf('writer') >= 0;
     
-    if (civFlag === 'y' && !isJournalist) continue;
+    if ((civFlag || '').toLowerCase().startsWith('y') && !isJournalist) continue;
     
     // Skip if not active
     if (sStatus !== 'active') continue;

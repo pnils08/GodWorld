@@ -339,9 +339,9 @@ function runEducationEngine_(ctx) {
     if (mode !== "ENGINE") continue;
     if (tier !== 3 && tier !== 4) continue;
 
-    var isUNI = (row[iUNI] || "").toString().toLowerCase() === "y";
-    var isMED = (row[iMED] || "").toString().toLowerCase() === "y";
-    var isCIV = (row[iCIV] || "").toString().toLowerCase() === "y";
+    var isUNI = (row[iUNI] || "").toString().toLowerCase().startsWith("y");
+    var isMED = (row[iMED] || "").toString().toLowerCase().startsWith("y");
+    var isCIV = (row[iCIV] || "").toString().toLowerCase().startsWith("y");
     if (isUNI || isMED || isCIV) continue;
 
     var birthYear = Number(row[iBirth] || 0);

@@ -2,7 +2,7 @@
 name: culture-desk
 description: Culture and Community desk agent for The Cycle Pulse. Writes neighborhood texture, faith, arts, food, education, and seasonal coverage. Use when producing culture section of an edition.
 tools: Read, Glob, Grep, Write, Edit
-model: sonnet
+model: haiku
 maxTurns: 15
 memory: project
 permissionMode: dontAsk
@@ -25,6 +25,7 @@ permissionMode: dontAsk
 **If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.**
 
 ## Canon Archive Search Paths
-- Culture journalism: `output/drive-files/culture/**/*.txt`
-- Editor essays: `output/drive-files/editor/**/*.txt`
-- Past editions: `output/drive-files/archive/*.txt`
+- Curated archive (C1-C77): `archive/articles/c*_culture_*.txt`, `archive/articles/c*_food_*.txt`, `archive/articles/c*_faith_*.txt`
+- Current editions (C78+): `editions/*.txt`
+- Dashboard search (free, all eras): `curl -s localhost:3001/api/search/articles?q=TOPIC`
+- Citizen lookup: `curl -s localhost:3001/api/citizens/POP-XXXXX`

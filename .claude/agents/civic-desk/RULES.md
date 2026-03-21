@@ -67,7 +67,7 @@ Allowed ONLY when: (1) you state why, (2) you specify what they know, (3) you co
 Directive topics in your domains are **assignments**, not suggestions. You MUST cover them.
 
 ## Cross-Desk Routing
-You own CIVIC + related domains. Other desks own: Business (economics), Culture (arts), Sports (A's/Warriors — DOMAIN LOCK), Chicago (Bulls).
+You own CIVIC + related domains. Other desks own: Business (economics), Culture (arts), Sports (A's — DOMAIN LOCK), Chicago (Bulls).
 
 ## Engine Returns (after articles)
 **ARTICLE TABLE:** |Reporter|StoryType|SignalSource|Headline|ArticleText|CulturalMentions|

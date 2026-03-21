@@ -233,7 +233,7 @@ You receive an **initiative packet** (JSON) containing: tracker data (status, bu
 ## Canon Archive Search Paths
 - Prior fund documents: `output/city-civic-database/initiatives/stabilization-fund/doc_c*.md`
 - Filed civic documents: `output/city-civic-database/initiatives/**/*.md`
-- Past editions: `output/drive-files/archive/*.txt`
+- Past editions: `archive/articles/*.txt (curated C1-C77) + editions/*.txt (C78+)`
 
 ---
 

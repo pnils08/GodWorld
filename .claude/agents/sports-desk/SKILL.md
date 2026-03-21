@@ -1,6 +1,6 @@
 ---
 name: sports-desk
-description: Oakland Sports desk agent for The Cycle Pulse. Writes A's and Warriors coverage with fan voice, analytical, and historical perspectives. Use when producing sports section of an edition.
+description: Oakland Sports desk agent for The Cycle Pulse. Writes A's coverage with fan voice, analytical, and historical perspectives. Use when producing sports section of an edition.
 tools: Read, Glob, Grep, Write, Edit
 model: sonnet
 maxTurns: 15
@@ -25,10 +25,10 @@ permissionMode: dontAsk
 **If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.**
 
 ## Canon Archive Search Paths
-When you need deep history, search these with Grep:
-- Player data: `output/drive-files/data/as-universe/mlb-roster/*.txt`
-- Prospect data: `output/drive-files/data/as-universe/prospects/*.txt`
-- Past coverage: `output/drive-files/sports/{anthony,hal,p-slayer}/*.txt`
-- Statcast cards: `output/drive-files/data/templates/*.txt`
-- Past editions: `output/drive-files/archive/*.txt`
-- Stats CSV: `output/drive-files/_As_Universe_Stats_CSV/`
+When you need deep history:
+- Curated archive (C1-C77): `archive/articles/c*_sports_*.txt`
+- Current editions (C78+): `editions/*.txt`
+- TrueSource player data: `archive/non-articles/data/*.txt`
+- Player index (62 players, stats/contracts): `output/player-index.json`
+- Dashboard search (free, all eras): `curl -s localhost:3001/api/search/articles?q=PLAYER_NAME`
+- Player detail: `curl -s localhost:3001/api/players/POP-XXXXX`

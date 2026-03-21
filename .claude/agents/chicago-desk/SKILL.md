@@ -25,7 +25,7 @@ permissionMode: dontAsk
 **If you reach turn 10 and haven't started writing, STOP RESEARCHING AND WRITE.**
 
 ## Canon Archive Search Paths
-- Chicago supplementals: `output/drive-files/chicago/supplementals/*.txt`
-- Bulls player data: `output/drive-files/data/bulls/players/*.txt`
-- Bulls front office: `output/drive-files/data/bulls/front-office/*.txt`
-- Past editions: `output/drive-files/archive/*.txt`
+- Curated archive (C1-C77): `archive/articles/c*_chicago_*.txt`
+- Current editions (C78+): `editions/*.txt`
+- Chicago citizens: `curl -s localhost:3001/api/search/articles?q=Chicago+Bulls`
+- Dashboard search (free, all eras): `curl -s localhost:3001/api/search/articles?q=TOPIC`

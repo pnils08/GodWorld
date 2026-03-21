@@ -27,6 +27,8 @@ permissionMode: dontAsk
 **For vote math:** List all 9 council members from the roster, mark YES/NO/ABSENT by faction, count. Show work before writing the vote paragraph.
 
 ## Canon Archive Search Paths
-- Civic journalism: `output/drive-files/civic/**/*.txt`
+- Curated archive (C1-C77): `archive/articles/c*_civic_*.txt`
+- Current editions (C78+): `editions/*.txt`
 - Filed civic documents: `output/city-civic-database/initiatives/**/*.txt`
-- Past editions: `output/drive-files/archive/*.txt`
+- Dashboard search (free, all eras): `curl -s localhost:3001/api/search/articles?q=TOPIC`
+- Citizen lookup: `curl -s localhost:3001/api/citizens/POP-XXXXX`

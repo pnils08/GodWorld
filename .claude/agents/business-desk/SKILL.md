@@ -2,7 +2,7 @@
 name: business-desk
 description: Business desk agent for The Cycle Pulse. Writes the Business Ticker and economic features. Use when producing business section of an edition.
 tools: Read, Glob, Grep, Write, Edit
-model: sonnet
+model: haiku
 maxTurns: 15
 memory: project
 permissionMode: dontAsk
@@ -25,6 +25,8 @@ permissionMode: dontAsk
 **If you reach turn 8 and haven't started writing, STOP RESEARCHING AND WRITE.**
 
 ## Canon Archive Search Paths
-- Business journalism: `output/drive-files/business/jordan-velez/*.txt`
+- Curated archive (C1-C77): `archive/articles/c*_business_*.txt`
+- Current editions (C78+): `editions/*.txt`
 - Filed civic documents: `output/city-civic-database/initiatives/**/*.txt`
-- Past editions: `output/drive-files/archive/*.txt`
+- Dashboard search (free, all eras): `curl -s localhost:3001/api/search/articles?q=TOPIC`
+- Citizen lookup: `curl -s localhost:3001/api/citizens/POP-XXXXX`

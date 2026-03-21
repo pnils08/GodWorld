@@ -45,7 +45,7 @@ Run these checks against the compiled edition:
 
 ### 3. Sports Record Verification
 - A's record → check against Oakland_Sports_Feed
-- Warriors record → check against Oakland_Sports_Feed
+- A's record → check against Oakland_Sports_Feed (no Warriors franchise)
 - Bulls record → check against Chicago_Sports_Feed
 - Player positions → check against roster data
 - **TRUESOURCE CROSS-REFERENCE:** Also read `output/desk-packets/truesource_reference.json` (generated alongside desk packets). For every player mentioned in the edition:

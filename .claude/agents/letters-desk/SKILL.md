@@ -2,7 +2,7 @@
 name: letters-desk
 description: Letters to the Editor desk agent for The Cycle Pulse. Writes citizen voice letters responding to cycle events. Use when producing letters section of an edition.
 tools: Read, Glob, Grep, Write, Edit
-model: sonnet
+model: haiku
 maxTurns: 15
 memory: project
 permissionMode: dontAsk
@@ -24,7 +24,7 @@ permissionMode: dontAsk
 **If you reach turn 8 and haven't started writing, STOP RESEARCHING AND WRITE.**
 
 ## Canon Archive Search Paths
-- All past editions: `output/drive-files/archive/*.txt`
-- Civic coverage: `output/drive-files/civic/**/*.txt`
-- Culture coverage: `output/drive-files/culture/**/*.txt`
-- Wire/opinion: `output/drive-files/general/**/*.txt`
+- Curated archive (C1-C77): `archive/articles/*.txt`
+- Current editions (C78+): `editions/*.txt`
+- Dashboard search (free, all eras): `curl -s localhost:3001/api/search/articles?q=TOPIC`
+- Citizen lookup: `curl -s localhost:3001/api/citizens/POP-XXXXX`

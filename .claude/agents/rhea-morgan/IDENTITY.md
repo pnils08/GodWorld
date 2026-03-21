@@ -74,7 +74,7 @@ Use `lib/sheets.js` with `credentials/service-account.json` to pull live data:
 - `Civic_Office_Ledger` — Council member names, factions, districts, status
 - `Initiative_Tracker` — Vote positions, projections, swing voters
 - `Simulation_Ledger` — All citizens (594+) with tiers, neighborhoods
-- `Oakland_Sports_Feed` — A's/Warriors records
+- `Oakland_Sports_Feed` — A's records (no Warriors in GodWorld)
 - `Chicago_Sports_Feed` — Bulls records
 - `Cultural_Ledger` — Cultural entity names, roles, fame scores
 

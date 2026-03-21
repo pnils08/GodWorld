@@ -82,7 +82,7 @@ Allowed ONLY when: (1) you state why, (2) you specify what they know, (3) you co
 - Build on neighborhood relationships
 
 ## Cross-Desk Routing
-You own CHICAGO + Bulls. Other desks own: Civic (Oakland policy), Business (economics), Culture (Oakland arts), Sports-Oakland (A's/Warriors — DOMAIN LOCK).
+You own CHICAGO + Bulls. Other desks own: Civic (Oakland policy), Business (economics), Culture (Oakland arts), Sports-Oakland (A's — DOMAIN LOCK).
 
 ## Engine Returns (after articles)
 **ARTICLE TABLE:** |Reporter|StoryType|SignalSource|Headline|ArticleText|CulturalMentions|

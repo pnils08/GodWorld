@@ -732,16 +732,43 @@ function buildRecentOutcomes(initiatives) {
 }
 
 function buildAsRoster(simLedger) {
+  // v2.3: Pull from all GAME-mode citizens + enrich with player-index data
+  var playerIndex = null;
+  try {
+    var piPath = path.join(PROJECT_ROOT, 'output', 'player-index.json');
+    if (fs.existsSync(piPath)) {
+      playerIndex = JSON.parse(fs.readFileSync(piPath, 'utf-8'));
+    }
+  } catch (e) { /* player index optional */ }
+
+  var piByPopId = {};
+  if (playerIndex && playerIndex.players) {
+    playerIndex.players.forEach(function(p) {
+      if (p.popId) piByPopId[p.popId.toUpperCase()] = p;
+    });
+  }
+
   return simLedger.filter(function(c) {
-    return (c.OriginGame || '') === 'MLB The Show' && c.Tier === '1';
+    var clock = (c.ClockMode || '').toUpperCase();
+    return clock === 'GAME';
   }).map(function(c) {
+    var popId = c.POPID || '';
+    var pi = piByPopId[popId.toUpperCase()] || {};
     return {
-      popId: c.POPID,
+      popId: popId,
       name: (c.First + ' ' + (c.Last || '')).trim(),
       tier: c.Tier,
       roleType: c.RoleType,
       neighborhood: c.Neighborhood,
-      status: c.Status
+      status: c.Status,
+      position: pi.position || null,
+      overall: pi.overall || null,
+      potential: pi.potential || null,
+      contract: pi.contract || null,
+      quirks: pi.quirks || null,
+      seasonStats: pi.seasonStats ? pi.seasonStats.slice(-2) : null,  // last 2 seasons
+      awards: pi.awards ? pi.awards.slice(0, 5) : null,
+      playerStatus: pi.playerStatus || null
     };
   });
 }
@@ -2564,7 +2591,15 @@ async function main() {
       return { name: c.member, district: c.district, faction: c.faction, status: c.status };
     }),
     asRoster: canon.asRoster.map(function(p) {
-      return { name: p.name, position: p.roleType, popId: p.popId };
+      var entry = { name: p.name, position: p.roleType, popId: p.popId, tier: p.tier, status: p.status };
+      if (p.overall) entry.overall = p.overall;
+      if (p.potential) entry.potential = p.potential;
+      if (p.contract) entry.contract = p.contract;
+      if (p.quirks) entry.quirks = p.quirks;
+      if (p.seasonStats) entry.recentStats = p.seasonStats;
+      if (p.awards) entry.awards = p.awards;
+      if (p.playerStatus) entry.playerStatus = p.playerStatus;
+      return entry;
     }),
     initiatives: canon.pendingVotes.concat(canon.recentOutcomes).map(function(i) {
       return {

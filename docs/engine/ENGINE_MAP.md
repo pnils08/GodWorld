@@ -302,13 +302,13 @@ All 37 arcs stuck at phase "early" despite tension ≥3. Diagnostic logging adde
 
 ---
 
-## Known Classification Issues (2026-03-06)
+## Known Classification Issues (updated S106)
 
 | Issue | Count | Description |
 |-------|-------|-------------|
-| `LIFE` mode citizens | 25 | Created by `integrateFaithLeaders.js` and `integrateCelebrities.js`. No engine handler exists. These citizens get ZERO processing. |
-| ENGINE + UNI/MED/CIV flag | 8 | ENGINE mode but flag excludes from career/household/education/neighborhood/relationship engines. Half-processed. |
+| `LIFE` mode citizens | 0 | S105 audit found 0 LIFE-mode citizens on live sheet. Previously 25. Likely reclassified during S94 recovery. |
 | MED+CIV double flag | 3 | Undefined behavior — both flags trigger the same exclusions |
 | GAME + no flags | 7 | Get GAME micro-events but classified as generic public-figure type |
-| Tier 1-2 with zero processing | varies | Any Tier 1-2 in LIFE mode or with conflicting flag/mode |
-| **RESOLVED (S94):** MEDIA mode | 16 | Bay Tribune journalists now processed by `generateMediaModeEvents_` with 7 role-specific event pools. |
+| Tier 1-2 with zero processing | varies | Any Tier 1-2 with conflicting flag/mode |
+| **RESOLVED (S106):** UNI/MED/CIV flag check | 9 files | Flag comparison fixed from `=== "y"` to `.startsWith("y")`. Skip gates now fire correctly. Deployed to GAS. |
+| **RESOLVED (S94):** MEDIA mode | 16→29 | Bay Tribune journalists processed by `generateMediaModeEvents_`. Count updated S105 (29 on live sheet). |

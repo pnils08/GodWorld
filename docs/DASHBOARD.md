@@ -217,19 +217,16 @@ A dedicated CHICAGO tab would surface: Bulls card + feed events, Chicago citizen
 
 ---
 
-## Sports Data Gap
+## Sports Data Gap — FIXED (S106)
 
-The sports desk gets thin data compared to what the dashboard serves:
+The sports desk truesource was enriched:
 
-| Data Source | Players | Fields per player | Who sees it |
-|-------------|---------|-------------------|-------------|
-| `truesource_reference.json` (desk workspace) | 10 | 3 (name, position, popId) | All desk agents |
-| `player-index.json` (dashboard API) | 62 | 20+ (stats, contracts, attributes, quirks, status) | Dashboard `/api/players` only |
-| `As_Roster` (spreadsheet) | 89 | 8 (POPID, name, position, team, tier, prospect rank) | `buildMaraReference.js`, Supermemory `godworld` |
+| Data Source | Before | After |
+|-------------|--------|-------|
+| `truesource_reference.json` (desk workspace) | 10 players × 3 fields | **91 players × 8-14 fields** |
+| `player-index.json` (dashboard API) | 62 players × 20+ | Unchanged — available for deeper queries |
 
-**The gap:** Sports desk agents see 10 players with 3 fields. The dashboard has 62 players with full TrueSource data. The spreadsheet has 89 with roster data. The sports desk is writing about the A's with 11% of the available player data.
-
-**Fix path:** Either enrich `truesource_reference.json` to include full player-index data, or route the sports desk agent to query `/api/players` directly during writing. The dashboard API serves this data for free.
+`buildAsRoster()` rewritten to pull all GAME-mode citizens and enrich with player-index.json data (overall rating, potential, contract, quirks, last 2 seasons stats, awards, player status). 4 T1 dynasty players have full TrueSource enrichment.
 
 ---
 
@@ -244,7 +241,7 @@ The sports desk gets thin data compared to what the dashboard serves:
 | ~~Supplemental detection~~ | — | **DONE S106.** 7 supplementals with cycle numbers. `isSupplemental` flag on Source 1. | — |
 | ~~Warriors header bug~~ | — | **DONE S106.** Filtered from frontend. Feed data retained for storyline context. | — |
 | ~~Edition scores E86-E87~~ | — | **DONE S106.** A and B scores added to `edition_scores.json`. | — |
-| **Enrich sports desk truesource data** | High | Desk workspace truesource has 10 players × 3 fields. Dashboard API has 62 × 20+. Sports desk writes with 11% of available data. Either enrich the reference file or route agent to `/api/players`. | ROLLOUT_PLAN |
+| ~~Enrich sports desk truesource~~ | — | **DONE S106.** 91 players × 8-14 fields. `buildAsRoster()` rewritten. | — |
 | **Supplemental display on frontend** | Medium | 7 supplementals now detected with cycle numbers but no visual placement on the frontend. Need a supplementals section — either on the Edition tab alongside the main edition or as a sidebar/filter. Data is ready (`isSupplemental` flag, cycle, articles). | ROLLOUT_PLAN |
 | **Agent integration (Phase 2.2/5.4)** | Next | Route desk agents to dashboard API instead of flat packets. `/api/citizens/:popId` for targeted citizen data, `/api/players/:popId` for sports, `/api/search/articles` for historical context. All free local calls. | ROLLOUT_PLAN |
 

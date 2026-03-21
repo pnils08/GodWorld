@@ -45,7 +45,7 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 
 **Errors NOT Fixed (Carry Forward):**
 7. **Mint's NBA piece is a fourth-wall breaker — PIECE BURNED.** Every theory centers Paulson as the guy who controls everything — functionally reveals the builder dynamic. Too coherent for Mint, presents public info as uncovered. Piece is unusable in current form. NBA expansion storyline is contaminated.
-8. **Intake broken.** editionIntake.js delimiter regex fixed (now accepts both `===` and `###`). But write targets (`Intake`, `Advancement_Intake1`, `Business_Intake`) don't match actual sheet tabs (`Media_Intake`, `Citizen_Usage_Intake`, `Storyline_Intake`). No citizen or storyline data was ingested. Desiree Chen (new citizen) not yet in Simulation_Ledger.
+8. **Intake FIXED (S106).** editionIntake.js v2.1 — write targets remapped to actual tabs: citizens → `Citizen_Usage_Intake`, businesses → `Storyline_Intake`, storylines → `Storyline_Tracker`. Desiree Chen (new citizen) still not in Simulation_Ledger — needs a live intake run against E87.
 
 **New Canon Established:**
 - Horizon Bay Structural: steel subcontractor for Baylight Phase 2

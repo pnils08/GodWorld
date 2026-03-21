@@ -146,9 +146,9 @@ These tab names appear in the GAS engine code but have no matching tab on the sp
 
 | Ghost Tab | Where Referenced | Likely Reality |
 |-----------|-----------------|---------------|
-| **Intake** | `editionIntake.js` | Should be `Media_Intake`. KNOWN BUG. |
-| **Advancement_Intake** / **Advancement_Intake1** | `editionIntake.js`, `processAdvancementIntake.js` | Should be `Citizen_Usage_Intake`. KNOWN BUG. |
-| **Business_Intake** | `editionIntake.js` | Tab doesn't exist. KNOWN BUG — writes fail silently. |
+| **Intake** | `editionIntake.js` (old) | **FIXED S106.** Now writes to `Citizen_Usage_Intake`. |
+| **Advancement_Intake** / **Advancement_Intake1** | `editionIntake.js` (old), `processAdvancementIntake.js` | **FIXED S106.** Now writes to `Citizen_Usage_Intake`. `processAdvancementIntake.js` still references old name — separate fix. |
+| **Business_Intake** | `editionIntake.js` (old) | **FIXED S106.** Now writes to `Storyline_Intake`. |
 | **Sports_Feed** | `applySportsSeason.js` | Renamed to `Oakland_Sports_Feed`. Code updated S89 but old name may linger. |
 | **Citizens** | `buildDeskPackets.js` | Old name for Simulation_Ledger query. |
 | **Citizen_Directory** | Engine code | Never existed. |
@@ -167,5 +167,5 @@ These tab names appear in the GAS engine code but have no matching tab on the sp
 
 - **Row counts from S105 audit.** Re-run after cycle runs to check growth.
 - **Civic_Office_Ledger and Initiative_Tracker** show ~1000 rows in the grid but actual data is much smaller. Google Sheets allocates rows in advance.
-- **The 3 KNOWN BUG ghost tabs** (Intake, Advancement_Intake1, Business_Intake) are the #1 open priority on ROLLOUT_PLAN.md — `editionIntake.js` writes to tabs that don't exist.
+- **The 3 ghost tab bugs are FIXED (S106).** `editionIntake.js` v2.1 now writes to `Citizen_Usage_Intake` and `Storyline_Intake`. `processAdvancementIntake.js` still references `Advancement_Intake1` — separate fix needed.
 - To archive a dead tab: copy data to a local CSV (`scripts/backupSpreadsheet.js`), then delete or hide the tab. Don't delete without a backup.

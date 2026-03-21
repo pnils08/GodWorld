@@ -47,7 +47,7 @@ Skill files define the detailed instructions: `/write-edition` (steps 1-21), `/w
 | # | Step | Command / Action | Depends On | Failure Mode |
 |---|------|-----------------|------------|-------------|
 | 22 | Post-run filing | `node scripts/postRunFiling.js [cycle] --upload` | Steps 14-17 | Missing files, wrong names, Drive gaps. **Also auto-rebuilds article-index.json.** |
-| 23 | Edition intake | `node scripts/editionIntake.js [file] [cycle]` | Step 14 | **CURRENTLY BROKEN** — writes to wrong tab names. No citizen data ingested since S101. |
+| 23 | Edition intake | `node scripts/editionIntake.js [file] [cycle]` | Step 14 | **FIXED S106** — v2.1. Citizens → Citizen_Usage_Intake, businesses → Storyline_Intake, storylines → Storyline_Tracker. |
 | 24 | Citizen enrichment | `node scripts/enrichCitizenProfiles.js --edition [cycle]` | Step 23 | Edition quotes don't flow back to LifeHistory |
 | 25 | Grade edition | `node scripts/gradeEdition.js [cycle]` | Step 14 + errata.jsonl | No performance data for agents |
 | 26 | Grade history | `node scripts/gradeHistory.js` | Step 25 | Rolling averages not updated, roster recommendations stale |
@@ -59,7 +59,7 @@ Skill files define the detailed instructions: `/write-edition` (steps 1-21), `/w
 
 | Step | Issue | Impact | Tracked In |
 |------|-------|--------|-----------|
-| **23 — Edition intake** | `editionIntake.js` writes to `Intake`, `Advancement_Intake1`, `Business_Intake` — tabs that don't exist. Actual tabs: `Media_Intake`, `Citizen_Usage_Intake`, `Storyline_Intake`. | No citizen or storyline data has been ingested since the rewrite. New citizens from editions never reach the ledger. | ROLLOUT_PLAN #1 priority |
+| ~~23 — Edition intake~~ | **FIXED S106.** v2.1 remapped to actual tabs. Citizens → `Citizen_Usage_Intake`, businesses → `Storyline_Intake`, storylines → `Storyline_Tracker`. | — | — |
 | **24 — Enrichment** | Depends on step 23 landing data. With intake broken, enrichment has nothing to process. | Edition quotes and appearances don't flow back to citizen LifeHistory. | Blocked by step 23 fix |
 | **25 — Grading** | `gradeEdition.js` doesn't support supplemental section headers. Desk/reporter mapping wrong for supplementals. | Supplemental grades incomplete (found 2 of 4 articles in S101). | ROLLOUT_PLAN open item |
 

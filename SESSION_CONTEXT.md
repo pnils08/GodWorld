@@ -49,7 +49,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
 | Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle, priority sort |
 | Cycle Packet Builder | phase10-persistence/buildCyclePacket.js | v3.9 | Serializes ~90% of engine output. 22 sections including neighborhood dynamics, story hooks, crime, transit, evening city, migration, shock context |
-| Desk Packet Builder | scripts/buildDeskPackets.js | v2.3 | v3.9 evening context: parses all 22 Cycle_Packet sections. SL-sourced candidates, ClockMode filter |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v2.4 | v3.9 evening context. All 509 ENGINE citizens in packets (was 20). A's roster: 91 GAME players with player-index enrichment. |
 | Citizen-Employer Linkage | scripts/linkCitizensToEmployers.js | v1.0 | Five-layer resolution, Employment_Roster, Business_Ledger stats |
 | Initiative Packet Builder | scripts/buildInitiativePackets.js | v1.0 | Per-initiative JSON packets from 7 Sheets tabs + Mara directive, 5 packets + manifest |
 | Civic Voice Packets | scripts/buildCivicVoicePackets.js | v1.1 | 7 office/faction voice packets + initiative decisions injection |
@@ -74,7 +74,7 @@ GodWorld is a **living city simulation** for Oakland (with Chicago satellite). I
 | Generic Citizens Audit | scripts/auditGenericCitizens.js | v1.0 | Read-only emergence audit, SL cross-reference |
 | Celebrity Integration | scripts/integrateCelebrities.js | v1.0 | Cultural_Ledger top celebrities → SL, UniverseLinks backfill |
 | Live Ledger Query | scripts/queryLedger.js | v1.0 | 6 query types (citizen, initiative, council, neighborhood, articles, verify), searches Sheets + 674 published files |
-| Edition Intake | scripts/editionIntake.js | v2.0 | Direct writes: new citizens → Intake, existing → Advancement_Intake1, storylines → Storyline_Tracker, businesses → Business_Intake. --dry-run support. processIntake.js eliminated. |
+| Edition Intake | scripts/editionIntake.js | v2.1 | Citizens → Citizen_Usage_Intake, businesses → Storyline_Intake, storylines → Storyline_Tracker. Write targets FIXED S106 (was writing to non-existent tabs). |
 | Business Intake | scripts/processBusinessIntake.js | v1.0 | Staged→promoted pipeline, BIZ-ID assignment, duplicate detection |
 | Bond Persistence | bondPersistence.js | v2.4 | Wipe guard, case-insensitive ledger check, normalized ID lookups |
 | Bond Seeder | seedRelationBondsv1.js | v1.3 | First/Last column lookup, POPID normalization |

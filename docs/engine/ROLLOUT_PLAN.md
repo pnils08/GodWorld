@@ -19,7 +19,7 @@ Items that should be addressed in the next session. Updated at session end.
 - **FIX: Citizen routing to agents** — ~~675→20 bottleneck.~~ **FIXED S106.** Removed `.slice(0,20)` hard cap. All 509 ENGINE citizens now available per desk (25x improvement). Priority ordering: desk neighborhood citizens first. Briefing cards expanded to 20. **Batch:** `batch_citizen_routing_analysis_2026-03-20.md`
 - **BUG: UNI/MED/CIV flag check** — ~~`=== "y"` never matched.~~ **FIXED S106.** 9 files updated to `.startsWith("y")`. 3 files already correct. Deployed to GAS via `clasp push`. **Batch:** `batch_flag_bug_impact_2026-03-20.md`
 - **FIX: Refresh initiative_tracker.json** — Stale (Feb 28). **Now auto-refreshes** via `buildInitiativePackets.js` (step 2) — will be current at next pipeline run. Frontend "UNTRACKED" label mapping remains a separate fix.
-- **FIX: Sports desk truesource data gap** — 10 players × 3 fields in workspace. Dashboard has 62 × 20+. Sports desk writes with 11% of data.
+- **FIX: Sports desk truesource data gap** — ~~10 players × 3 fields.~~ **FIXED S106.** 91 GAME-mode players with 8-14 fields each. 4 enriched with full TrueSource (stats, contracts, quirks). `buildAsRoster()` rewritten to pull all GAME citizens + player-index data.
 
 ### Open — Dashboard & Data Quality
 

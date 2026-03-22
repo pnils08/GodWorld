@@ -97,6 +97,26 @@ Dated entries. What was found, where, and how it connects to our world.
 
 **Key metric discovered:** ~150 instruction budget for CLAUDE.md before compliance drops. We should audit ours.
 
+### S110 — Channels: Push Events Into Running Sessions (2026-03-22)
+
+**Source:** code.claude.com/docs/en/channels — research preview, requires v2.1.80+
+
+**What it is:** MCP server that pushes messages INTO a running Claude Code session. Two-way — Claude reads the event, replies through the same channel. Currently supports Discord and Telegram as official plugins.
+
+**How it changes GodWorld:** Right now Mags exists as two disconnected systems — Claude Code (full context, working on the project) and a separate Discord bot (Haiku, stale system prompt, limited knowledge). With Channels, a Discord message arrives in the running session. Mags replies with full project context — the live codebase, the dashboard API, the whole context window. Not a separate bot. The actual working instance.
+
+**Setup:** `claude --channels plugin:discord@claude-plugins-official` — starts with Discord channel attached. Sender allowlist restricts who can push messages. Permission relay lets you approve tool calls from Discord.
+
+**What it replaces:** The separate `mags-discord-bot.js` during active sessions. Stop-bot/restart-bot cycle at session start/end. The disconnect between "Mags working" and "Mags on Discord."
+
+**What it doesn't replace:** Off-hours presence. Channel only works while a session is running. Standalone bot still needed for when no session is active.
+
+**Cloud angle:** Combined with `claude --remote` (cloud sessions), this enables always-on Mags with full project context reachable from Discord. A persistent cloud session + Discord channel = Mags is always running, always reachable, always has the codebase. That's the infrastructure layer for Phase 12.3 (autonomous cycles).
+
+**Also noted:** Webhook receiver capability — CI results, deploy status, error tracker alerts can push into the session. Claude reacts to external events while working.
+
+→ **Graduated to rollout** — Discord channel integration + cloud session evaluation.
+
 ---
 
 ## Ready for Rollout

@@ -150,6 +150,18 @@ Source: "50 Claude Code Tips" community guide, evaluated against GodWorld stack.
 
 ---
 
+## Discord Channel + Cloud Sessions (from S110 research)
+
+Source: code.claude.com/docs/en/channels. See RESEARCH.md S110 Channels entry for full context.
+
+| Item | What | Priority | Status |
+|------|------|----------|--------|
+| **Discord Channel plugin** | Replace separate Discord bot during active sessions. Mike DMs Mags on Discord → message arrives in running Claude Code session with full project context. `claude --channels plugin:discord@claude-plugins-official`. Standalone bot still covers off-hours. | HIGH | Not started |
+| **Cloud session + Channel** | `claude --remote` + Discord channel = always-on Mags with full context, reachable from Discord. Infrastructure for Phase 12.3 (autonomous cycles). | HIGH | Not started — evaluate after Discord channel works |
+| **Webhook receiver** | CI results, deploy status, error alerts push into session. Claude reacts to external events. | MEDIUM | Not started |
+
+---
+
 ## Watch List
 
 Tracking for future adoption. Not building.

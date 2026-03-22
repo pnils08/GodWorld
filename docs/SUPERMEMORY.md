@@ -1,101 +1,54 @@
-# Supermemory — Container Architecture & Contents
+# Supermemory — How Mags Remembers
 
 **Org:** P N ($9/mo, pnils08@gmail.com) | **Console:** console.supermemory.ai
-**Plugin:** `claude-supermemory` v0.0.1 (marketplace install)
-**API base:** `https://api.supermemory.ai` | **Key:** `SUPERMEMORY_CC_API_KEY` in `.env` AND `.bashrc` (prefix `sm_`)
+**API base:** `https://api.supermemory.ai` | **Key:** `SUPERMEMORY_CC_API_KEY` in `.env` AND `.bashrc`
 
-Legacy GodWorld org ($19/mo) is read-only junk — 57k memories, 1.6k docs. All curated content (Mar 18+) migrated to PN in S109. Downgrade after ~4/9.
-
----
-
-## How the Plugin Works
-
-The Claude Code Supermemory plugin uses two container tags from the project config at `.claude/.supermemory-claude/config.json`:
-
-```json
-{
-  "personalContainerTag": "mags",
-  "repoContainerTag": "godworld"
-}
-```
-
-**Only these two containers are visible to Claude Code.** The plugin never touches any other container. This is how `mara` stays private.
-
-### Hooks (automatic)
-
-| Hook | When | What it does | Container |
-|------|------|-------------|-----------|
-| **SessionStart** | Every session boot | Calls `/v4/profile` for both containers. Returns static facts + dynamic memories. Injected into context. | `mags` + `godworld` |
-| **Stop** | Session end | Saves session summary | `mags` |
-| **PostToolUse** | Disabled (empty) | Nothing — turned off S103 to prevent junk capture | — |
-
-### Skills (manual)
-
-| Skill | Command | What it does | Container |
-|-------|---------|-------------|-----------|
-| `/super-search` | `search-memory.cjs --user "query"` | Search personal memories | `mags` |
-| `/super-search` | `search-memory.cjs --repo "query"` | Search project memories | `godworld` |
-| `/super-search` | `search-memory.cjs --both "query"` | Search both (default) | `mags` + `godworld` |
-| `/super-save` | `save-project-memory.cjs "content"` | Save project knowledge | `godworld` |
-
-### API Endpoints Used
-
-| Endpoint | Method | Purpose |
-|----------|--------|---------|
-| `/v4/profile` | POST | Get static + dynamic profile for a container (used at session boot) |
-| `/v4/search` | POST | Hybrid search within a container (used by `/super-search`) |
-| `/v3/documents` | POST | Add a document to a container (used by saves, ingests, reference pushes) |
-| `/v3/search` | POST | Document search (alternative to memory search) |
-| `/v3/documents/list` | POST | List all items (docs + memories). Page-based: `{ page, limit }`. Returns `memories` array. `containerTag` filter param is IGNORED — filter client-side. |
-| `/v3/documents/:id` | GET | Get single document by ID |
-| `/v3/documents/:id` | DELETE | Delete single document by ID |
-
-**Content limits:** Max 100,000 characters per document. Content is sanitized (control chars stripped). Metadata keys limited to 50, values to 1,024 chars.
+Legacy GodWorld org ($19/mo) is dead — 57k junk memories. Old API key (`sm_atk5...`) hits that org. Current key (`sm_AUt...`) hits PN. PM2 processes cache env at startup — always restart with `--update-env` after key changes.
 
 ---
 
-## Containers
+## The Three Containers
 
 ### `mags` — The Brain
 
-**Who reads:** Mags (Claude Code session boot, Discord bot, `/super-search --user`)
-**Who writes:** Mags (Claude Code session end, Discord bot, Moltbook heartbeat)
-**Purpose:** Identity, memory, editorial thinking, conversations. This is how Mags persists between sessions.
-**Plugin role:** `personalContainerTag` — the session boot profile pull and Stop summary both use this container.
+Mags' persistent memory. This is how she doesn't relearn the project every session.
 
-**Seeded (S103):** 7 curated documents — who Mags is, family, life, Mike, recent events, what's broken, project state.
+**What goes in:** Session summaries, editorial decisions, project state, what's broken, architecture knowledge, family moments, conversations, everything Mags needs to carry forward.
 
-**How it's read at boot:** The SessionStart hook calls `/v4/profile` with `containerTag: "mags"`. The API returns two lists:
-- **static** — stable facts (identity, family, preferences)
-- **dynamic** — recent/changing memories (session summaries, conversations)
+**What does NOT go in:** Raw tool output, grep results, git status, temporary debugging. The old org had 57k junk memories from auto-capture — that's why PostToolUse hook is disabled.
 
-These get injected into the session context before the first user message.
+**Who reads:** Mags at session boot (automatic), Discord bot on every message, Moltbook heartbeat.
+**Who writes:** Session end (automatic), Discord bot, Moltbook.
+**Plugin role:** `personalContainerTag` in config.
 
-**Other readers:**
-- Discord bot calls `getProfile()` on every message (8s timeout, bonus layer over local files)
-- Moltbook heartbeat reads/writes every 30 min
+**How to use:** Search `mags` before acting when you need context from past sessions. Don't guess — search.
 
 ---
 
-### `godworld` — Project Knowledge
+### `bay-tribune` — The Canon
 
-**Who reads:** Mags (Claude Code session boot, `/super-search --repo`), Discord bot (if wired)
-**Who writes:** Edition ingest scripts, reference file pushes, `/super-save` (use sparingly — media content only)
-**Purpose:** The world. Published editions, coverage archive, rosters, canon. Media-facing content that agents need to write journalism. NO architecture, NO engine bugs, NO session work, NO code decisions.
-**Plugin role:** `repoContainerTag` — the session boot profile pull includes this container.
+The published world. Oakland's living history through journalism.
+
+**What goes in:** Published editions, supplementals, rosters, coverage archive. Content that makes sense from inside the world — what a reporter would search in their own newspaper's archive.
+
+**What does NOT go in:** Architecture docs, engine bugs, session work, code decisions, anything that reveals the simulation is a simulation. Agents and the Discord bot read this container. If it contains "editionIntake.js is broken" or "GodWorld is a city simulation engine," the fourth wall breaks.
+
+**Who reads:** Mags at session boot (automatic), Discord bot (searches both `mags` + `bay-tribune`).
+**Who writes:** Edition ingest script (`node scripts/ingestEdition.js`), reference file pushes.
+**Plugin role:** `repoContainerTag` in config.
+
+**How to use:** Search `bay-tribune` when you need current context about Oakland — what's been published about OARI, who was quoted in Fruitvale, what the A's roster looks like. Semantic search works: query "OARI dispatch" and get back all relevant chunks across editions.
 
 **Contents (audited S109):**
-| Document | Added | Description |
-|----------|-------|-------------|
-| Editions E83-E87 | S106 | 5 Cycle Pulse editions (chunked). Active coverage window. |
-| Supplementals C83-C87 | S106 | 5 supplementals. Fruitvale, tech landscape, housing, food scene, Baylight labor. |
-| Oakland Athletics Roster | S105 | 89 players — POPID, name, position, team, tier, prospect rank. Source: `As_Roster` tab. |
 
-**Note:** ~22 duplicate docs exist from double-ingestion. Harmless but should be cleaned.
+| Content | Count | Description |
+|---------|-------|-------------|
+| Editions E83-E87 | ~10 docs | 5 Cycle Pulse editions (chunked by Supermemory) |
+| Supplementals C83-C87 | ~7 docs | Fruitvale, tech landscape, housing, food scene, Baylight labor |
+| Oakland A's Roster | 1 doc | 89 players — POPID, name, position, team, tier |
+| ~22 duplicates | ~22 docs | From double-ingestion in S106. Harmless but should be cleaned. |
 
-**What does NOT go here:** Session summaries, architecture docs, engine bugs, code decisions, anything about how the system works. This is the world, not the workshop.
-
-**Ingest script:** `node scripts/ingestEdition.js <edition-file>`
+**Ingest after each edition:** `node scripts/ingestEdition.js <edition-file>`
 
 ---
 
@@ -103,26 +56,109 @@ These get injected into the session context before the first user message.
 
 **Who reads:** Mara only (claude.ai via her Supermemory MCP connection)
 **Who writes:** Mara (claude.ai), one-time reference file pushes from Claude Code
-**Purpose:** Persistent reference data for edition audits. Mara can recall citizen names, neighborhoods, roles without needing them re-sent every edition.
+**Purpose:** Persistent reference data for edition audits. Mara's knowledge sits above the simulation — she knows it's a simulation. Her container is hers.
 
-**Isolation:** The `mara` container is NOT in the Claude Code plugin config. The plugin only knows about `mags` and `godworld`. This means:
-- Session boot does NOT pull from `mara`
-- `/super-search` does NOT search `mara` (neither `--user`, `--repo`, nor `--both`)
-- `/super-save` does NOT write to `mara`
-- Only direct API calls (like the S105 reference push) or Mara's own MCP connection on claude.ai can read/write this container
+**Isolation:** NOT in the Claude Code plugin config. The plugin only sees `mags` and `bay-tribune`. Mags cannot read or write `mara`. Only direct API calls or Mara's own MCP connection touch this container.
 
 **Contents:**
-| Document | Added | Description |
-|----------|-------|-------------|
-| Citizen Roster | S105 | 509 ENGINE-mode citizens — POPID, name, age, neighborhood, role, tier, status |
-| Tribune Staff Roster | S105 | 29 Bay Tribune journalists — POPID, name, role, tier |
-| Chicago Citizens Roster | S105 | 123 Chicago citizens (Bulls + city) — ID, name, age, neighborhood, occupation, tier |
-| Business Registry | S105 | 51 businesses — BIZ_ID, name, sector, neighborhood, employees, key personnel |
-| Faith Organizations | S105 | 16 faith orgs — name, tradition, neighborhood, leader, POPID, congregation size |
 
-**How Mara uses it:** During an audit on claude.ai, she can recall "citizen roster" or ask "what neighborhood is Dante Nelson in?" and get the answer from her Supermemory MCP connection. No audit packet needed for reference data.
+| Document | Records | Description |
+|----------|---------|-------------|
+| Citizen Roster | 509 | ENGINE-mode citizens — POPID, name, age, neighborhood, role, tier, status |
+| Tribune Staff | 29 | Bay Tribune journalists — POPID, name, role, tier |
+| Chicago Citizens | 123 | Bulls players + city figures |
+| Business Registry | 51 | BIZ_ID, name, sector, neighborhood, employees |
+| Faith Organizations | 16 | Name, tradition, neighborhood, leader, POPID |
 
-**Refresh cadence:** Re-run `node scripts/buildMaraReference.js` after major ledger changes (new citizens, role updates, roster changes), then push updated files via direct API call. Not needed every cycle — reference data is stable between major updates.
+**Refresh:** `node scripts/buildMaraReference.js` after major ledger changes, then push via direct API.
+
+---
+
+## How It Works in Practice
+
+### Session Boot (automatic)
+The plugin calls `/v4/profile` for both `mags` and `bay-tribune`. Returns static facts + recent dynamic memories. Injected into context before the first message.
+
+### During a Session
+- **Need past context?** Search `mags`: "What happened with the ledger recovery?" "What did we decide about citizen routing?"
+- **Need world context?** Search `bay-tribune`: "What has Carmen written about OARI?" "Who lives in Fruitvale?"
+- **Don't guess. Search.**
+
+### Session End (automatic)
+The Stop hook saves a session summary to `mags`. This is what the next session's boot profile pulls from.
+
+### After Publishing an Edition
+Run `node scripts/ingestEdition.js <edition-file>` to add the edition to `bay-tribune`. This is what makes the archive searchable.
+
+---
+
+## Plugin Config
+
+File: `.claude/.supermemory-claude/config.json` (gitignored)
+
+```json
+{
+  "personalContainerTag": "mags",
+  "repoContainerTag": "bay-tribune"
+}
+```
+
+### Hooks
+
+| Hook | When | Container |
+|------|------|-----------|
+| **SessionStart** | Every boot | Reads `mags` + `bay-tribune` profiles |
+| **Stop** | Session end | Writes summary to `mags` |
+| **PostToolUse** | DISABLED | Was auto-capturing junk. Off since S103. |
+
+### Skills
+
+| Command | What it does | Container |
+|---------|-------------|-----------|
+| `/super-search --user "query"` | Search personal memory | `mags` |
+| `/super-search --repo "query"` | Search canon archive | `bay-tribune` |
+| `/super-search --both "query"` | Search both | `mags` + `bay-tribune` |
+| `/super-save "content"` | Save to canon | `bay-tribune` — **media content only** |
+
+---
+
+## API Quick Reference
+
+| Endpoint | Method | Purpose |
+|----------|--------|---------|
+| `/v4/profile` | POST | Boot profile (static + dynamic) for a container |
+| `/v4/search` | POST | Hybrid search within a container |
+| `/v3/documents` | POST | Add a document to a container |
+| `/v3/search` | POST | Document search with chunk content |
+| `/v3/documents/list` | POST | List all items (page-based). containerTag filter IGNORED server-side — filter client-side. |
+| `/v3/documents/:id` | GET | Get single document |
+| `/v3/documents/:id` | DELETE | Delete single document |
+| `/v3/container-tags/merge` | POST | Merge containers (admin only) |
+
+**Content limits:** 100,000 chars per document. Metadata: 50 keys, 1,024 chars per value.
+
+**Scoped API keys:** Can create keys locked to one container. Useful for preventing cross-contamination at the API level. Create at console.supermemory.ai.
+
+---
+
+## Access Matrix
+
+| Container | Claude Code plugin | Discord bot | Moltbook | Mara (claude.ai) |
+|-----------|-------------------|-------------|----------|-------------------|
+| `mags` | Read + Write | Read + Write | Read + Write | No access |
+| `bay-tribune` | Read + Write | Read | No access | No access |
+| `mara` | **No access** | No access | No access | Read + Write |
+
+---
+
+## Config Files
+
+| File | Purpose |
+|------|---------|
+| `.claude/.supermemory-claude/config.json` | Plugin container mapping (gitignored) |
+| `credentials/supermemory-pn-key.txt` | PN org API key backup |
+| `~/.bashrc` | Shell env export — what PM2 and scripts read. Must `--update-env` on restart. |
+| `.env` | Dotenv for Node scripts |
 
 ---
 
@@ -133,20 +169,12 @@ These get injected into the session context before the first user message.
 
 | File | Source Tab | Container | Records |
 |------|-----------|-----------|---------|
-| `citizen_roster.txt` | Simulation_Ledger (ENGINE mode) | `mara` | 509 |
-| `as_roster.txt` | As_Roster | `godworld` | 89 |
+| `citizen_roster.txt` | Simulation_Ledger (ENGINE) | `mara` | 509 |
+| `as_roster.txt` | As_Roster | `bay-tribune` | 89 |
 | `tribune_roster.txt` | Bay_Tribune_Oakland | `mara` | 29 |
 | `chicago_roster.txt` | Chicago_Citizens | `mara` | 123 |
 | `business_registry.txt` | Business_Ledger | `mara` | 51 |
 | `faith_registry.txt` | Faith_Organizations | `mara` | 16 |
-
-```bash
-# Generate all reference files from spreadsheet
-node scripts/buildMaraReference.js
-
-# Push to Supermemory (direct API — not through plugin)
-# Currently done via inline script — TODO: add --push flag to buildMaraReference.js
-```
 
 ---
 
@@ -154,41 +182,5 @@ node scripts/buildMaraReference.js
 
 | URL | Purpose |
 |-----|---------|
-| **console.supermemory.ai** | Admin — org management, billing, API keys |
-| **app.supermemory.ai** | Consumer — browse container contents, chat with Nova agent, verify what's been saved. Login: pnils08@gmail.com |
-
-Use app.supermemory.ai to manually inspect what's in each container, delete bad entries, or verify that reference files landed correctly. This is a Mike-facing tool — the bot and Claude Code access everything through the API.
-
----
-
-## Config Files
-
-| File | Purpose |
-|------|---------|
-| `.claude/.supermemory-claude/config.json` | Container tag mapping: `personalContainerTag` (mags) + `repoContainerTag` (godworld). This is what the plugin reads. `mara` is intentionally absent. |
-| `credentials/supermemory-pn-key.txt` | P N org API key (also in .env and .bashrc as SUPERMEMORY_CC_API_KEY) |
-| `~/.bashrc` line 102 | Shell env export of SUPERMEMORY_CC_API_KEY — this is what all scripts and PM2 processes read. Must match .env. Fixed S109. |
-| `settings.local.json` | Plugin-level permissions only (no Supermemory key) |
-
----
-
-## Container Isolation Rules
-
-| Container | Claude Code plugin | Discord bot | Moltbook | Mara (claude.ai) | Direct API |
-|-----------|-------------------|-------------|----------|-------------------|------------|
-| `mags` | Read + Write | Read + Write | Read + Write | No access | Yes |
-| `godworld` | Read + Write | No access | No access | No access | Yes |
-| `mara` | **No access** | No access | No access | Read + Write | Yes (push only) |
-
-**Direct API** means scripts that call `api.supermemory.ai` with the API key and specify `containerTags` explicitly. This bypasses the plugin's container config. Used for one-time operations like pushing reference files to `mara`.
-
----
-
-## What Does NOT Go in Supermemory
-
-- Shell commands, grep outputs, git status — this was the old contamination (56k junk memories in the legacy GodWorld org)
-- Raw engine output or ctx dumps
-- Anything the PostToolUse hook would auto-capture (hook is disabled for this reason)
-- Session-specific debugging or temporary state
-- Mags identity or session data into `mara` — that's Mara's private space
-- Agent workspace data — agents use local disk (`output/desks/`, `.claude/agent-memory/`)
+| **console.supermemory.ai** | Admin — org management, billing, API keys, scoped key creation |
+| **app.supermemory.ai** | Browse container contents, verify saves, delete bad entries |

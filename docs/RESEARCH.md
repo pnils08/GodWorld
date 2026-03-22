@@ -232,6 +232,22 @@ Dated entries. What was found, where, and how it connects to our world.
 
 **Not a build item.** Product context that ties Channels + Remote Control + Dispatch together.
 
+### S110 — OpenClaw: We Built the Same Thing (2026-03-22)
+
+**Source:** [KDnuggets](https://www.kdnuggets.com/openclaw-explained-the-free-ai-agent-tool-going-viral-already-in-2026), [Wikipedia](https://en.wikipedia.org/wiki/OpenClaw), [DigitalOcean](https://www.digitalocean.com/resources/articles/what-is-openclaw)
+
+**What it is:** Open-source autonomous AI agent framework. 163K GitHub stars. Gateway + Brain + Memory + Skills + Heartbeat architecture. Connects any LLM to messaging platforms. Created by Peter Steinberger (now joining OpenAI). Moving to a foundation. MIT license.
+
+**We independently built the same architecture:** Discord bot (gateway), Claude Code + CLAUDE.md (brain), Supermemory + persistence files (memory), .claude/skills/ (skills), PM2 crons + /loop (heartbeat). Same five components, same patterns, arrived at independently.
+
+**What OpenClaw has that we don't:** Multi-channel messaging (Signal, WhatsApp, Telegram), ClawHub marketplace (5,700+ skills), fully offline local models out of the box.
+
+**What we have that OpenClaw doesn't:** A living world (675 citizens, simulation engine, newsroom), persona depth backed by Anthropic research, per-workflow boot, canon integrity pipeline (bay-tribune, Mara, Rhea), 88 published editions.
+
+**Why Anthropic shipped Channels + Remote Control + Dispatch:** To compete with OpenClaw. We benefit from that competition directly — managed security, same capabilities, our droplet setup avoids the security issues (CVE-2026-25253) that plague OpenClaw.
+
+**Not a build item.** Validates our entire architecture. Confirms we're on the right path and ahead of most people building in this space.
+
 ---
 
 ## Ready for Rollout

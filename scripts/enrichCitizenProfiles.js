@@ -49,41 +49,141 @@ const SKIP_REPORTERS = [
 // ============================================================================
 
 /**
- * Parse an edition file and extract per-article citizen data
+ * Parse an edition file and extract per-article citizen data.
+ * Uses the shared editionParser for section/article splitting.
+ *
+ * Two modes:
+ *   1. If articles contain Names Index lines, use those (E78-E84, E86).
+ *   2. If not, extract citizen names from the citizen usage log section
+ *      and search for their quotes/context across all articles (E85, E87+).
  */
 function parseEdition(filePath) {
-  const text = fs.readFileSync(filePath, 'utf8');
-  const editionMatch = text.match(/EDITION\s+(\d+)/i);
-  const editionNum = editionMatch ? parseInt(editionMatch[1]) : 0;
+  const editionParser = require('../lib/editionParser');
+  const parsed = editionParser.parseEdition(filePath);
+  const editionNum = parseInt(parsed.edition) || 0;
 
-  // Split into articles by section headers (##)
   const articles = [];
-  const sections = text.split(/^#{2,3}\s+/m);
 
-  for (const section of sections) {
-    if (!section.trim()) continue;
+  // Collect all non-meta articles
+  const allArticles = [];
+  for (const section of parsed.sections) {
+    if (section.beat === 'meta') continue;
+    for (const art of (section.articles || [])) {
+      allArticles.push({ text: art.text || '', headline: art.headline || section.headline || '' });
+    }
+  }
 
-    // Find Names Index in this section
-    const namesMatch = section.match(/Names Index:\s*(.+)/i);
+  // Mode 1: Names Index in articles
+  let hasNamesIndex = false;
+  for (const art of allArticles) {
+    const namesMatch = art.text.match(/Names Index:\s*(.+)/i);
     if (!namesMatch) continue;
+    hasNamesIndex = true;
 
-    const headline = section.split('\n')[0].trim();
-    const namesRaw = namesMatch[1];
-    const citizens = parseNamesIndex(namesRaw);
-
-    // For each citizen, extract their context from the article body
+    const citizens = parseNamesIndex(namesMatch[1]);
     for (const citizen of citizens) {
-      const context = extractCitizenContext(section, citizen, headline);
+      const context = extractCitizenContext(art.text, citizen, art.headline);
       if (context) {
         citizen.context = context;
-        citizen.headline = headline;
+        citizen.headline = art.headline;
+      }
+    }
+    articles.push({ headline: art.headline, citizens: citizens.filter(c => c.context) });
+  }
+
+  // Mode 2: No Names Index — extract from citizen usage log section
+  if (!hasNamesIndex) {
+    // Find the citizen usage data in meta sections
+    let citizenLogText = '';
+    for (const section of parsed.sections) {
+      if (section.beat === 'meta' && /citizen/i.test(section.name)) {
+        citizenLogText = section.text || '';
+        break;
+      }
+    }
+    // Also try the section text directly for unnamed citizen blocks
+    if (!citizenLogText) {
+      for (const section of parsed.sections) {
+        if (section.beat === 'meta') {
+          for (const art of (section.articles || [])) {
+            if (/CITIZENS QUOTED|CIVIC OFFICIALS/i.test(art.text || '')) {
+              citizenLogText = art.text;
+              break;
+            }
+          }
+          if (citizenLogText) break;
+        }
       }
     }
 
-    articles.push({ headline, citizens: citizens.filter(c => c.context) });
+    if (citizenLogText) {
+      // Parse citizen names from the usage log
+      const citizenNames = extractCitizenNamesFromLog(citizenLogText);
+
+      // For each citizen, search all articles for quotes/context
+      for (const art of allArticles) {
+        const artCitizens = [];
+        for (const citizen of citizenNames) {
+          const context = extractCitizenContext(art.text, citizen, art.headline);
+          if (context) {
+            artCitizens.push({ ...citizen, context, headline: art.headline });
+          }
+        }
+        if (artCitizens.length > 0) {
+          articles.push({ headline: art.headline, citizens: artCitizens });
+        }
+      }
+    }
   }
 
   return { editionNum, articles };
+}
+
+/**
+ * Extract citizen names from a citizen usage log section.
+ * Returns objects compatible with parseNamesIndex output: { first, last, fullName, details }
+ */
+function extractCitizenNamesFromLog(logText) {
+  const citizens = [];
+  const seen = new Set();
+
+  const lines = logText.split('\n');
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (!trimmed || !trimmed.match(/^[-—]\s+/)) continue;
+
+    const content = trimmed.replace(/^[-—]\s+/, '').trim();
+    // Extract name: "Name, age, neighborhood, role (context)" or "Name (role)"
+    let name = '';
+    const parenMatch = content.match(/^([^(,]+)/);
+    if (parenMatch) name = parenMatch[1].trim();
+
+    // Strip title prefixes
+    const nameLower = name.toLowerCase();
+    for (const prefix of TITLE_PREFIXES) {
+      if (nameLower.startsWith(prefix + ' ')) {
+        name = name.substring(prefix.length + 1).trim();
+        break;
+      }
+    }
+
+    const parts = name.split(/\s+/);
+    if (parts.length < 2) continue;
+    if (SKIP_REPORTERS.includes(name.toLowerCase())) continue;
+
+    const key = name.toLowerCase();
+    if (seen.has(key)) continue;
+    seen.add(key);
+
+    citizens.push({
+      first: parts[0],
+      last: parts[parts.length - 1],
+      fullName: name,
+      details: ''
+    });
+  }
+
+  return citizens;
 }
 
 // Title prefixes to strip when matching names to ledger

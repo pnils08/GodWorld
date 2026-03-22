@@ -38,17 +38,42 @@ const NEIGHBORHOODS = [
 // ════════════════════════════════════════════════════════════════════════════
 
 function extractSection(markdown, sectionName) {
-  const pattern = new RegExp('[=#]{3,}\\s*\\n\\s*' + sectionName + '\\s*\\n\\s*[=#]{3,}', 'i');
+  // Try header-delimited section: ====\n SECTION NAME \n====
+  const pattern = new RegExp('[=#-]{3,}\\s*\\n\\s*' + sectionName + '\\s*\\n\\s*[=#-]{3,}', 'i');
   const match = markdown.match(pattern);
-  if (!match) return null;
+  if (match) {
+    const startIdx = match.index + match[0].length;
+    const remaining = markdown.substring(startIdx);
+    const endMatch = remaining.match(/\n[=#-]{3,}\s*\n/);
+    const endIdx = endMatch ? startIdx + endMatch.index : markdown.length;
+    return markdown.substring(startIdx, endIdx).trim();
+  }
 
-  const startIdx = match.index + match[0].length;
-  const remaining = markdown.substring(startIdx);
+  // Fallback: find section by content markers (handles editions where
+  // citizen/storyline data appears without a labeled section header)
+  if (/CITIZEN USAGE/i.test(sectionName)) {
+    const cidxMatch = markdown.match(/\n(CIVIC OFFICIALS QUOTED[^\n]*\n)/i);
+    if (cidxMatch) {
+      const startIdx = cidxMatch.index + 1;
+      const remaining = markdown.substring(startIdx);
+      const endMatch = remaining.match(/\n[=#-]{3,}\s*\n/);
+      const endIdx = endMatch ? startIdx + endMatch.index : markdown.length;
+      return markdown.substring(startIdx, endIdx).trim();
+    }
+  }
 
-  const endMatch = remaining.match(/\n[=#]{3,}\s*\n/);
-  const endIdx = endMatch ? startIdx + endMatch.index : markdown.length;
+  if (/STORYLINES/i.test(sectionName)) {
+    const sidxMatch = markdown.match(/\n((?:STORYLINES|[-—]\s*\[(?:new|thread|resolved|arc)))/im);
+    if (sidxMatch) {
+      const startIdx = sidxMatch.index + 1;
+      const remaining = markdown.substring(startIdx);
+      const endMatch = remaining.match(/\n[=#-]{3,}\s*\n/);
+      const endIdx = endMatch ? startIdx + endMatch.index : markdown.length;
+      return markdown.substring(startIdx, endIdx).trim();
+    }
+  }
 
-  return markdown.substring(startIdx, endIdx).trim();
+  return null;
 }
 
 // ════════════════════════════════════════════════════════════════════════════

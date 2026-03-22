@@ -117,6 +117,22 @@ Dated entries. What was found, where, and how it connects to our world.
 
 → **Graduated to rollout** — Discord channel integration + cloud session evaluation.
 
+### S110 — Scheduled Tasks: In-Session Cron (2026-03-22)
+
+**Source:** code.claude.com/docs/en/scheduled-tasks
+
+**What it is:** `/loop` runs a prompt on a recurring interval within a running session. One-shot reminders too. Session-scoped (dies on exit), 3-day max, up to 50 tasks. Already installed — this is the `/loop` skill we have.
+
+**Use cases for GodWorld:**
+- Edition production: `/loop 5m check if desk agents finished`
+- Cycle runs: `remind me in 20 minutes to check the cycle packet`
+- Build sessions: `/loop 30m check dashboard health`
+- Deploy watch: `/loop 10m check clasp push status`
+
+**How it connects to Channels:** Channels = push (events arrive), scheduled tasks = pull (Claude polls). Together they cover autonomous operation — Channels for critical alerts, `/loop` for periodic checks. Both feed into the same running session.
+
+**Not a build item.** Already available. Awareness for workflow use. Add to WORKFLOWS.md as a tool reference where relevant.
+
 ---
 
 ## Ready for Rollout

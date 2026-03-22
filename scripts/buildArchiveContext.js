@@ -31,7 +31,7 @@ var path = require('path');
 var https = require('https');
 
 var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
-var CONTAINER_TAG = 'godworld';
+var CONTAINER_TAG = 'bay-tribune';
 var API_HOST = 'api.supermemory.ai';
 var OUTPUT_DIR = path.join(__dirname, '..', 'output', 'desk-briefings');
 var PACKETS_DIR = path.join(__dirname, '..', 'output', 'desk-packets');

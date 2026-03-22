@@ -19,7 +19,7 @@ var path = require('path');
 var https = require('https');
 
 var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
-var CONTAINER_TAG = 'godworld';
+var CONTAINER_TAG = 'bay-tribune';
 var API_HOST = 'api.supermemory.ai';
 var MAX_CHUNK_SIZE = 40000; // Supermemory doc limit safety margin
 

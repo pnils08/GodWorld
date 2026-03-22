@@ -162,6 +162,20 @@ Source: code.claude.com/docs/en/channels. See RESEARCH.md S110 Channels entry fo
 
 ---
 
+## Dashboard Mission Control (from S110 research)
+
+Source: Synthesis of Channels + Remote Control research. See RESEARCH.md S110 Dashboard entry.
+
+| Item | What | Priority | Status |
+|------|------|----------|--------|
+| **Session status panel** | Show running sessions, workflow type, duration, context usage. Mike sees at a glance what's alive. | HIGH | Not started |
+| **Channel status** | Discord connected? Last message? Sender allowlist health. | MEDIUM | Not started |
+| **Health panel** | PM2 processes, disk, RAM, Supermemory containers. Replaces SSH-and-check pattern. | MEDIUM | Not started |
+| **Session history** | When sessions started/ended, workflow, key accomplishments. Persistent log. | LOW | Not started |
+| **Quick actions** | Restart bot, trigger health check, view latest brief. Buttons instead of terminal commands. | LOW | Not started |
+
+---
+
 ## Watch List
 
 Tracking for future adoption. Not building.

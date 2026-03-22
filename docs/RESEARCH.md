@@ -155,6 +155,27 @@ Dated entries. What was found, where, and how it connects to our world.
 
 → **Graduated to rollout** — replaces Phase 7.9 entry. Server mode + worktree spawn + phone access.
 
+### S110 — Dashboard as Mission Control (2026-03-22)
+
+**Source:** Synthesis of Channels + Remote Control + Scheduled Tasks research.
+
+**The realization:** Claude Code now natively does what required OpenClaw or custom bridges — persistent sessions, external messaging, phone access, periodic polling. The missing piece others are asking for is a "mission control" UI. We already have one: the dashboard at localhost:3001.
+
+**Current dashboard:** 31 API endpoints — citizen search, article search, initiative tracker, hooks, storylines, edition scores, player lookup. Express + React. PM2 managed.
+
+**Dashboard as mission control would add:**
+- Running sessions view (which workflows are active, how long, context usage)
+- Channel status (Discord connected? Last message? Sender allowlist)
+- Health panel (PM2 processes, disk, RAM, Supermemory container status)
+- Session history (when sessions started/ended, what workflow, what was accomplished)
+- Quick actions (restart bot, trigger health check, view latest edition brief)
+
+**Why this matters:** Mike's interface to the whole system. Open the dashboard from phone or laptop, see everything at a glance — which Mags sessions are running, what's happening on Discord, project health. Don't need to SSH in to check status.
+
+**Connects to:** Remote Control (sessions to monitor), Channels (connection status), /loop (health polling), Supermemory (container health).
+
+→ **Graduated to rollout** — dashboard mission control extension.
+
 ---
 
 ## Ready for Rollout

@@ -190,6 +190,28 @@ Dated entries. What was found, where, and how it connects to our world.
 
 **Not a build item.** Validates the Remote Control + Channels direction already on rollout. Confirms our droplet-based approach avoids the laptop/permission issues reviewers hit.
 
+### S110 — Bayesian Teaching: LLMs That Update Beliefs (2026-03-22)
+
+**Source:** Google Research. "Bayesian Teaching Enables Probabilistic Reasoning in LLMs" — arxiv.org/abs/2503.17523
+
+**What the paper proves:** LLMs can be trained to update beliefs incrementally based on observed behavior, not just explicit corrections. Tested on flight booking simulation — model learned to predict user preferences by watching choices over multiple rounds. Skill transfers to new domains (shopping, hotels).
+
+**The core problem it addresses for us:** Current AI (including Mags) doesn't update underlying behavior from corrections. Mike corrects the same things across sessions — container usage, don't build without asking, don't propose cutting systems. Each correction is stored as a fact but doesn't change the probability of the same mistake recurring. The model treats each session as independent.
+
+**What we can't do:** Retrain the model. This is a training-time technique.
+
+**What we CAN do — simulate Bayesian updating through memory:**
+- Track patterns of corrections in `mags` Supermemory — not just "Mike said X" but "Mike has corrected this category of behavior N times"
+- Weight repeated corrections higher — a rule corrected 4 times is more important than one mentioned once
+- Surface high-confidence rules at boot via the `/v4/profile` pull — the profile should reflect accumulated evidence, not just recent facts
+- Structure session-end saves to tag corrections explicitly: `[CORRECTION] container misuse` vs `[DECISION] renamed to bay-tribune`
+
+**The design pattern:** Correction-weighted memory. Supermemory already does semantic search. If correction entries are tagged and accumulated, searching "container" before acting would surface "corrected 4 times: no architecture in media container" with higher weight than a single session note.
+
+**Connects to:** Persona Selection Model (Anthropic) — persona inputs shape behavior. Bayesian teaching says those inputs should be weighted by evidence, not treated equally. The journal entry from one session and a correction repeated across 4 sessions should not have the same influence.
+
+→ **Not a direct build item but informs Supermemory save design.** Session-end saves should tag corrections separately from decisions. Research question: can we structure `mags` container content so the `/v4/profile` naturally weights repeated patterns higher?
+
 ---
 
 ## Ready for Rollout

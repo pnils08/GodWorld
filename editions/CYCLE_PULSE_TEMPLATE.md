@@ -1,4 +1,4 @@
-# CYCLE PULSE TEMPLATE v1.4
+# CYCLE PULSE TEMPLATE v1.5
 
 **Purpose:** Standardize section order, journalist distribution, article formatting, and structural consistency across cycles. This template defines both the editorial voice and the engine-facing intake formats.
 
@@ -67,30 +67,29 @@ Any initiative with a regulatory deadline, implementation window, or policy cloc
 Place the countdown at the top of the relevant article, before the body text. Update the day count each edition. This builds tension across cycles and creates natural follow-up pressure. Active countdowns as of E83: OARI (45-day implementation window), Baylight TIF language (unresolved), Baylight remediation bonding (unresolved).
 
 ### Dividers
-- `---` between articles within a section
-- `===` between major sections (the `############` headers serve this purpose)
+- `------------------------------------------------------------` between articles within a section AND around section headers
+- `============================================================` around the header block and the meta sections at the end (ARTICLE TABLE through END EDITION)
+- The intake parser recognizes all three delimiter types (`####`, `====`, `----`). Use `----` for content sections and `====` for the header/meta blocks.
 
 -----
 
 ## SECTION ORDER (fixed)
 
 ```
-############################################################
+============================================================
 THE CYCLE PULSE — EDITION [XX]
-[MONTH] | [WEEK] | [HOLIDAY]
-Weather: [X]°F, [Conditions] | [Descriptor]
-Sentiment: [X.XX] | Migration: [+/-XX] | Pattern: [X]
-############################################################
+Bay Tribune | [Month Year], [Week X] | [Season]
+============================================================
 ```
 
 **Notes:**
 - Omit the holiday line entirely if none — do not write "none."
-- Sentiment, Migration, and Pattern are engine numbers — copy exactly from handoff header data.
+- Weather, sentiment, migration are optional in the header — include if available from handoff data.
 
 ```
-############################################################
+------------------------------------------------------------
 FRONT PAGE
-############################################################
+------------------------------------------------------------
 
 [Lead story — biggest narrative of the cycle]
 [Deck line]
@@ -104,9 +103,9 @@ FRONT PAGE
 
 Names Index: [Name] ([Role]), [Name] ([Role]), ...
 
-############################################################
+------------------------------------------------------------
 EDITOR'S DESK
-############################################################
+------------------------------------------------------------
 
 By Mags Corliss | Bay Tribune
 
@@ -115,9 +114,9 @@ what connects the stories, what the city is feeling, what
 the paper is watching. Reflective, not summarizing. This is
 the editor's voice setting the tone for the whole paper.]
 
-############################################################
+------------------------------------------------------------
 CIVIC AFFAIRS
-############################################################
+------------------------------------------------------------
 
 [Council/initiative updates]
 [City operations]
@@ -129,9 +128,9 @@ Names Index: [Name] ([Role]), [Name] ([Role]), ...
 
 -----
 
-############################################################
+------------------------------------------------------------
 BUSINESS
-############################################################
+------------------------------------------------------------
 
 BUSINESS TICKER — CYCLE [XX]
 
@@ -149,9 +148,9 @@ Names Index: Jordan Velez (Reporter)
 
 -----
 
-############################################################
+------------------------------------------------------------
 CULTURE / SEASONAL — OAKLAND
-############################################################
+------------------------------------------------------------
 
 [Community features]
 [Cultural events]
@@ -162,9 +161,9 @@ Names Index: [Name] ([Role]), [Name] ([Role]), ...
 
 -----
 
-############################################################
+------------------------------------------------------------
 OPINION
-############################################################
+------------------------------------------------------------
 
 [P Slayer sports opinion — when A's or Warriors storyline warrants]
 [Farrah Del Rio civic/cultural opinion — when social issue warrants]
@@ -177,9 +176,9 @@ Names Index: [Name] ([Role]), [Name] ([Role]), ...
 
 -----
 
-############################################################
+------------------------------------------------------------
 SPORTS — OAKLAND
-############################################################
+------------------------------------------------------------
 
 [A's coverage]
 [Warriors coverage — if applicable]
@@ -189,10 +188,10 @@ Names Index: [Name] ([Role]), [Name] ([Role]), ...
 
 -----
 
-############################################################
+------------------------------------------------------------
 SKYLINE TRIBUNE — CHICAGO BUREAU
 Weather: [X]°F, [Conditions]
-############################################################
+------------------------------------------------------------
 
 CHICAGO SPORTS
 [Bulls coverage]
@@ -209,9 +208,9 @@ Note: Use Chicago weather from handoff data — do not invent.
 
 -----
 
-############################################################
+------------------------------------------------------------
 QUICK TAKES
-############################################################
+------------------------------------------------------------
 
 Short items — stories too small for full articles but worth noting.
 3-5 items, ~50 words each. Any desk can contribute. Compiled by
@@ -223,9 +222,9 @@ Mags during edition assembly from leftover desk signals.
 
 -----
 
-############################################################
+------------------------------------------------------------
 WIRE / SIGNALS
-############################################################
+------------------------------------------------------------
 
 (OPTIONAL — include only when wire-worthy items exist)
 
@@ -237,17 +236,17 @@ observations from Celeste Tran. 2-3 items, factual, no analysis.
 
 -----
 
-############################################################
+------------------------------------------------------------
 LETTERS TO THE EDITOR
-############################################################
+------------------------------------------------------------
 
 [2-4 citizen letters]
 
 -----
 
-############################################################
+------------------------------------------------------------
 ACCOUNTABILITY
-############################################################
+------------------------------------------------------------
 
 (CONDITIONAL — include only when a stink signal exists)
 
@@ -259,9 +258,9 @@ Names Index: [Name] ([Role]), [Name] ([Role]), ...
 
 -----
 
-############################################################
-ARTICLE TABLE — ENGINE INTAKE FORMAT
-############################################################
+============================================================
+ARTICLE TABLE
+============================================================
 
 |Reporter|StoryType|SignalSource|Headline|ArticleText|CulturalMentions|
 
@@ -272,10 +271,11 @@ ARTICLE TABLE — ENGINE INTAKE FORMAT
 
 -----
 
-############################################################
-STORYLINES UPDATED — ENGINE INTAKE FORMAT
-############################################################
-FORMAT: This feeds Storyline_Tracker via editionIntake v2.0. Use pipe-separated or bracket format.
+============================================================
+STORYLINES UPDATED
+============================================================
+REQUIRED — This section MUST appear with this exact header.
+Feeds Storyline_Tracker via editionIntake v2.0. Use pipe-separated or bracket format.
 Only list NEW and RESOLVED. Do NOT re-list active storylines.
 
 NEW THIS CYCLE:
@@ -295,11 +295,11 @@ Do NOT list "PHASE CHANGES" — use RESOLVED when a storyline ends.
 
 -----
 
-############################################################
+============================================================
 CITIZEN USAGE LOG
-############################################################
-FORMAT RULES — This section feeds directly into the intake
-parser. Every entry MUST follow the exact format shown.
+============================================================
+REQUIRED — This section MUST appear with this exact header.
+Feeds directly into editionIntake.js. Every entry MUST follow the exact format shown.
 NO parentheses inside any field — parentheses are ONLY used
 for the final field (role, position, context, or count).
 Street addresses go after neighborhood with no parens.
@@ -350,10 +350,11 @@ OTHER CITIZENS:
 
 -----
 
-############################################################
-CONTINUITY NOTES — CYCLE [XX]
-############################################################
-AUDIT SECTION — stays in edition text for cycle-to-cycle reference.
+============================================================
+CONTINUITY NOTES
+============================================================
+REQUIRED — This section MUST appear with this exact header.
+Stays in edition text for cycle-to-cycle reference.
 NOT tracked in sheets (Continuity_Loop eliminated).
 Exception: DIRECT QUOTES route to LifeHistory_Log automatically.
 Do NOT repeat engine-tracked data (council, votes, weather, sentiment).
@@ -373,9 +374,9 @@ Do NOT repeat engine-tracked data (council, votes, weather, sentiment).
 
 -----
 
-############################################################
+============================================================
 COMING NEXT CYCLE
-############################################################
+============================================================
 
 3-5 teaser lines previewing what the Tribune is watching.
 Compiled by Mags from active storylines, pending votes, and
@@ -385,10 +386,9 @@ upcoming events. Gives readers (and agents) forward momentum.
 — [Teaser line]
 — [Teaser line]
 
-================================================================================
+============================================================
 END EDITION [XX]
-Ready for Engine Integration
-================================================================================
+============================================================
 ```
 
 -----
@@ -516,11 +516,11 @@ Dear Editor,
 10. **Wire / Signals** — Optional. 2-3 verified wire items (Reed Thompson) or social observations (Celeste Tran). Skip if nothing warrants it.
 11. **Letters** — 2-4 citizen letters in first-person voice. At least 1 from a returning citizen.
 12. **Accountability** — Conditional. Jax Caldera only when Mags identifies a stink signal. One piece max per edition.
-13. **Article Table** — Engine intake format. All articles listed. ArticleText is summary only (1-2 sentences).
-14. **Storylines Updated** — NEW and RESOLVED only. Pipe-separated or bracket format. Feeds Storyline_Tracker directly via editionIntake v2.0. Do NOT re-list active storylines.
-15. **Citizen Usage Log** — All citizens used, grouped by category. Exact formats required — feeds intake parser. No parentheses inside fields. JOURNALISTS section is byline tracking only — does not feed citizen intake or advancement.
-16. **Continuity Notes** — Sports records, direct quotes, new canon figures ONLY. Do not repeat engine-tracked data.
-17. **Coming Next Cycle** — 3-5 forward-looking teasers compiled by Mags. What the paper is watching next.
+13. **Article Table** — All articles listed. ArticleText is summary only (1-2 sentences). Uses `====` delimiters.
+14. **Storylines Updated** — **REQUIRED with exact header.** NEW and RESOLVED only. Feeds Storyline_Tracker via editionIntake v2.0. Uses `====` delimiters.
+15. **Citizen Usage Log** — **REQUIRED with exact header.** All citizens used, grouped by category. Exact formats required — feeds intake parser. No parentheses inside fields. JOURNALISTS section is byline tracking only. Uses `====` delimiters.
+16. **Continuity Notes** — **REQUIRED with exact header.** Sports records, direct quotes, new canon figures ONLY. Do not repeat engine-tracked data. Uses `====` delimiters.
+17. **Coming Next Cycle** — 3-5 forward-looking teasers compiled by Mags. Uses `====` delimiters.
 
 -----
 
@@ -533,3 +533,4 @@ Dear Editor,
 | v1.2    | 79    | Fixed Citizen Usage Log format with explicit examples and no-parens rule to match intake parser. Restructured Storylines Updated to pipe-separated NEW/RESOLVED only (no STILL ACTIVE re-listing). Simplified Continuity Notes to sports records, quotes, and new canon figures only (removed redundant engine-tracked data). Added Warriors sports category. |
 | v1.3    | 79    | Clarified JOURNALISTS section is byline tracking only — not citizen usage or advancement. Journalists writing articles are reporters, not characters. Only counts as citizen usage if they appear AS A CHARACTER in someone else's story. |
 | v1.4    | 83    | Phase 3 journalism enhancements. Added: Formatting Conventions section (deck lines, byline standard, opinion markers, photo credits, cross-references). New sections: Editor's Desk (Mags column), Opinion (dedicated section for P Slayer/Del Rio/Graye), Quick Takes (3-5 short items), Wire/Signals (optional verified items), Accountability (conditional Jax Caldera), Coming Next Cycle (forward teasers). Added Jax Caldera to journalist roster. Updated article length guidelines for new section types. Expanded Section Notes to cover all 17 sections. |
+| v1.5    | 88    | Delimiter standardization: `----` for content sections, `====` for header + meta sections (ARTICLE TABLE through END EDITION). Matches actual agent output from E87-E88. Parser handles all three formats (####, ====, ----). Marked STORYLINES UPDATED, CITIZEN USAGE LOG, and CONTINUITY NOTES as REQUIRED sections with exact headers — these feed editionIntake.js and enrichCitizenProfiles.js. Removed "ENGINE INTAKE FORMAT" from section headers. |

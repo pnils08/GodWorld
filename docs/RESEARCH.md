@@ -220,6 +220,18 @@ Dated entries. What was found, where, and how it connects to our world.
 
 **One gap noted:** Multi-agent code review for engine code. We have Rhea for editions and /pre-mortem for engine health, but no review gate before `clasp push` deploys all 153 files. A pre-deploy review agent (or subagent) that checks cascade dependencies and flags risky changes could prevent the kind of damage S68 caused.
 
+### S110 — Claude Cowork: Product Context (2026-03-22)
+
+**Source:** [anthropic.com/product/claude-cowork](https://www.anthropic.com/product/claude-cowork)
+
+**What it is:** Anthropic's desktop agent for non-technical users. Operates on local files, folders, applications autonomously. Target: researchers, analysts, legal, finance.
+
+**How it fits:** Two Anthropic paths — Claude Code (developers, terminal) and Cowork (knowledge workers, desktop GUI). Same model, different surfaces. Dispatch for Cowork is the phone-to-desktop bridge. Remote Control is our equivalent — Claude Code on the droplet, accessible through the same claude.ai/code + Claude app interface.
+
+**For us:** Not directly useful (we're headless). But explains the product architecture: when Mike connects to Remote Control from his phone, he's using the same interface layer as Cowork. Our droplet is the compute, the app is the window.
+
+**Not a build item.** Product context that ties Channels + Remote Control + Dispatch together.
+
 ---
 
 ## Ready for Rollout

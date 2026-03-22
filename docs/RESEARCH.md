@@ -248,6 +248,31 @@ Dated entries. What was found, where, and how it connects to our world.
 
 **Not a build item.** Validates our entire architecture. Confirms we're on the right path and ahead of most people building in this space.
 
+### S110 — Stack Scan: Agent Trends + Claude Code Changelog + Living Worlds (2026-03-22)
+
+**Sources:** [ML Mastery](https://machinelearningmastery.com/7-agentic-ai-trends-to-watch-in-2026/), [Claude Code changelog](https://code.claude.com/docs/en/changelog), [Project Sid](https://arxiv.org/html/2411.00114v1), [o-mega living worlds](https://o-mega.ai/articles/simulations-how-ai-is-creating-the-worlds-where-ai-agents-live-2025)
+
+**Claude Code features we should use:**
+- **Effort frontmatter in skills** (mid-March) — set effort per skill, not per session. Research skills low, civic desk high. → Rollout item.
+- **Project configs shared across worktrees** (Mar 3) — CLAUDE.md and auto-memory work across all worktree sessions. Critical for the Architecture Vision. Already built in.
+- **Rate limits in statusline** (mid-March) — show rate limit usage in terminal during edition runs. → Add to status line rollout item.
+- **128K output tokens for Opus** (Mar 17) — up from 64K. Longer compilations possible.
+- **HTTP hooks** (Mar 3) — hooks POST to URLs. Dashboard could receive hook events (session started, file edited, error occurred). → Connects to mission control rollout.
+- **--bare flag** (Mar 20) — scripted non-interactive runs. Could power lightweight automated tasks.
+
+**Agent trend validations:**
+- Three memory types (episodic, semantic, procedural) — we have episodic (journal) and semantic (Supermemory). Missing procedural (learned "how to" patterns). Skills are static, not learned.
+- "Bounded autonomy" with governance agents — Rhea is exactly this. Pattern validated by enterprise.
+- Cost optimization as first-class concern — our 80/20 model tiering matches the industry pattern.
+
+**Living world connections:**
+- **Project Sid** (arXiv) — closest academic analog to GodWorld. Minecraft agents with internal states, democratic voting, emergent social dynamics. We use Oakland instead of Minecraft, journalism instead of gameplay.
+- "Good simulations give agents needs or goals" — our citizens have demographics but not motivations. Phase 24 gap.
+- "Keeping agents consistent over long periods is tricky" — this IS our core problem, acknowledged industry-wide as unsolved.
+- "Emotion models can be layered in" — Mags has this. Citizens don't yet.
+
+→ **Effort frontmatter and HTTP hooks graduated to rollout.** Project Sid noted as academic reference for Phase 24 (Citizen Life Engine).
+
 ---
 
 ## Ready for Rollout

@@ -85,8 +85,8 @@ Agents query dashboard endpoints during writing instead of flat JSON packets. Be
 
 - **7.6 Agent Teams:** Test on podcast desk first. Experimental — known limitations.
 - **7.7 Plugin Packaging:** Not started. Low priority, high future value.
-- **7.9 Remote Control:** Tested S76 — "not yet enabled." Revisit periodically.
-- **7.10 Claude Code on Web:** `claude --remote "task"`. Not started.
+- **7.9 Remote Control (Server Mode):** `claude remote-control` on the droplet. Mike connects from phone/browser. `--spawn worktree` for parallel sessions. S76 blocker likely `DISABLE_TELEMETRY` env var — unset and re-test. See RESEARCH.md S110. **Priority: HIGH.**
+- **7.10 Claude Code on Web:** `claude --remote "task"`. Cloud sandbox from GitHub. Not started.
 
 ### Phase 8.6: Security Hardening — PARTIAL
 

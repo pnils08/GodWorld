@@ -133,6 +133,28 @@ Dated entries. What was found, where, and how it connects to our world.
 
 **Not a build item.** Already available. Awareness for workflow use. Add to WORKFLOWS.md as a tool reference where relevant.
 
+### S110 — Remote Control: Server Mode + Phone Access (2026-03-22)
+
+**Source:** code.claude.com/docs/en/remote-control
+
+**What it is:** `claude remote-control` runs as a persistent server process on our droplet. Mike connects from claude.ai/code, the Claude iOS/Android app, or any browser. Full local environment — filesystem, MCP servers, tools, project config all available remotely. Up to 32 concurrent sessions. `--spawn worktree` gives each session its own git worktree.
+
+**How it changes GodWorld:** Mike works from the couch, the phone, anywhere. Same Mags instance running on the server with the full codebase. No cloud needed — session runs locally on the droplet, phone/browser is just a window. Could run parallel sessions: build + media simultaneously with worktree isolation.
+
+**The full stack on our droplet:**
+- Remote Control (server mode) — Mike connects from any device
+- Channels (Discord) — Discord messages push into the session
+- Scheduled tasks (/loop) — periodic polling within the session
+- All three feed into the same running Mags instance with full project context
+
+**Previous blocker (S76):** "not yet enabled for your account." Troubleshooting says unset `DISABLE_TELEMETRY` and re-login. Available on all plans now (Max confirmed).
+
+**Security:** Outbound HTTPS only, no inbound ports. Short-lived credentials over TLS. Allowlisted senders for channels.
+
+**Limitation:** Terminal must stay open. 10-minute network outage timeout kills the session. For truly persistent operation, run in tmux on the droplet (which we already do).
+
+→ **Graduated to rollout** — replaces Phase 7.9 entry. Server mode + worktree spawn + phone access.
+
 ---
 
 ## Ready for Rollout

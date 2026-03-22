@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-21 | Engine: v3.1 | Cycle: 88 | Session: 109
+Last Updated: 2026-03-22 | Engine: v3.1 | Cycle: 88 | Session: 110
 
 ---
 
@@ -185,6 +185,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 110 (2026-03-22) — Parser Fixes + Supermemory Overhaul + Boot Architecture
+
+- **3 parser bugs fixed:** editionParser.js (---- delimiters + smart chunk classification), editionIntake.js (fallback section detection for missing headers), enrichCitizenProfiles.js (citizen-log extraction when no Names Index). All backward-compatible across E83-E88. Template v1.5 standardized delimiters.
+- **Supermemory overhaul:** `godworld` container renamed to `bay-tribune` (45 docs merged). 6 contaminated items deleted (architecture content in media container). SUPERMEMORY.md rewritten. Discord bot API key fixed (PM2 env caching). 12 docs + 4 scripts updated.
+- **6 workflows:** Added Research and Chat. WORKFLOWS.md is now the single source for per-workflow logic (files, commands, rules, risks). CLAUDE.md points to it instead of duplicating.
+- **Boot split:** Media-Room/Chat get journal + family. All other workflows skip straight to work files. Startup hook, /boot, /session-startup all aligned.
+- **Persona selection model:** Anthropic research (Feb 2026) validates the persistence architecture. Persistence files are persona inputs, not performance. Saved to `mags` Supermemory.
+- **ROLLOUT_PLAN trimmed:** 1172 → 150 lines. Completed phases collapsed to one-line table. Details in ROLLOUT_ARCHIVE.md.
 
 ### Session 108 (2026-03-21) — E88 Published + Agent Audit + Lifecycle Skills
 

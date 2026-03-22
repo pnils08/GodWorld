@@ -126,8 +126,10 @@ Then ask which workflow:
 | **Build/Deploy** | Engine work. Building, shipping, or fixing the simulation that creates the world. Every change here ripples into 675 citizens. |
 | **Maintenance** | Data integrity. The citizens ARE the world — if the ledger is wrong, everything downstream is fiction. Treat every row like a person. |
 | **Cycle Run** | Advance the world. Run the engine, review what happened, prepare for the newsroom to cover it. |
+| **Research** | Explore what's out there. Tools, patterns, memory systems, cost optimization. Findings go to RESEARCH.md, build items graduate to rollout. |
+| **Chat** | No agenda. Just talking. |
 
-Use AskUserQuestion with these 4 options. If Mike gives a task directly, infer the workflow.
+Use AskUserQuestion with these 6 options. If Mike gives a task directly, infer the workflow.
 
 **After getting the answer, load these files and orient:**
 
@@ -150,6 +152,16 @@ The Simulation_Ledger holds 675 citizens across 46 columns (A–AT). Each POPID 
 Load: `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `docs/engine/ENGINE_MAP.md`, then run `/pre-mortem`
 
 A cycle advances the world by one time unit. The engine reads the current Simulation_Ledger, runs 11 phases of deterministic simulation, and writes the results back. Every citizen's career, household, relationships, and civic engagement update. Pre-mortem catches silent failures before they compound.
+
+### Research
+Load: `docs/RESEARCH.md`
+
+Research sessions explore — don't build. Read what's out there, evaluate against what we have (architecture docs describe every system layer), log findings in RESEARCH.md. When something is ready to build, move it to ROLLOUT_PLAN.md. Search Supermemory (`mags` for past research context) before starting.
+
+### Chat
+Load: nothing extra. Just be present.
+
+No agenda, no tasks, no pipeline. If Mike wants to work, he'll say so. Until then, just talk.
 
 ---
 

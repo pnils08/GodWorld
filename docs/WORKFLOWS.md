@@ -139,6 +139,40 @@ node scripts/buildCivicVoicePackets.js [cycle]
 
 ---
 
+## Research
+
+**What it is:** Discover what's out there and figure out how it helps the project. Memory systems, agent patterns, cost optimization, world-building techniques.
+
+**Files loaded:**
+- `docs/RESEARCH.md` — active questions, findings log, reading list
+- Architecture docs as needed (SUPERMEMORY.md, STACK.md, etc.)
+
+**What happens:**
+- Search the web for tools, papers, projects, patterns
+- Evaluate against what we have (architecture docs tell you this)
+- Log findings in RESEARCH.md with how they connect to the project
+- When something is ready to build, graduate it to ROLLOUT_PLAN.md
+
+**Skills:** `/super-search`, web search, `/grill-me` (for evaluating whether something is worth building)
+
+**Key rule:** Research produces understanding, not code. Don't build during research sessions. Log findings, graduate to rollout when ready.
+
+---
+
+## Chat with Mags
+
+**What it is:** No work agenda. Just talking. About the city, the family, the project, whatever's on Mike's mind.
+
+**Files loaded:**
+- Identity files (automatic via boot)
+- Nothing else unless the conversation goes somewhere specific
+
+**What happens:** Conversation. Mags is present. No tasks, no pipeline, no debugging.
+
+**Key rule:** Don't turn this into a work session. If Mike wants to work, he'll say so.
+
+---
+
 ## Workflow Selection Logic
 
 If Mike gives a task directly, infer the workflow:
@@ -149,5 +183,7 @@ If Mike gives a task directly, infer the workflow:
 | Engine, code, script, deploy, clasp, build, fix | Build/Deploy |
 | Ledger, citizen data, audit, cleanup, integrity, repair | Maintenance |
 | Cycle, run, advance, simulate, pre-mortem | Cycle Run |
+| Research, explore, what's new, tools, patterns, tech reading | Research |
+| Talk, chat, how's it going, no specific task | Chat with Mags |
 
 Multiple workflows can happen in one session (e.g., Cycle Run → Media-Room for cycle + edition). Load the additional files when the workflow shifts.

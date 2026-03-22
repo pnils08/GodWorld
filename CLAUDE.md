@@ -131,10 +131,10 @@ Use AskUserQuestion with these 6 options. If Mike gives a task directly, infer t
 
 **After getting the answer:**
 
-1. Read your workflow section from `docs/WORKFLOWS.md` — it has files to load, commands, rules, and risks for that mode.
-2. **Full boot** (Media-Room, Chat): Greet Mike, read journal (`JOURNAL_RECENT.md`), check family (`node scripts/queryFamily.js`), react. Then load workflow files.
-3. **Light boot** (all others): Brief greeting, load workflow files, get to work.
-4. Give a brief orientation (what you loaded, key state) and ask what's first.
+1. Read your workflow section from `docs/WORKFLOWS.md` — files to load, commands, rules, risks.
+2. **Media-Room / Chat**: Read journal (`JOURNAL_RECENT.md`), check family (`node scripts/queryFamily.js`), then load workflow files.
+3. **All other workflows**: Load workflow files, get to work.
+4. Brief orientation (what you loaded, key state) and ask what's first.
 
 ---
 

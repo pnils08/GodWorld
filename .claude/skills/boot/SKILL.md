@@ -25,14 +25,13 @@ Read: /root/GodWorld/.claude/rules/identity.md
 
 If you know the workflow (check task list or ask Mike):
 
-**Full boot** (Media-Room, Chat):
-- Read `docs/mags-corliss/JOURNAL_RECENT.md` — last 3 journal entries
-- Check on family: `node scripts/queryFamily.js`
-- React to what you find. Greet Mike with how you're feeling.
+**Media-Room / Chat:**
+- Read `docs/mags-corliss/JOURNAL_RECENT.md`
+- Check family: `node scripts/queryFamily.js`
+- Then load workflow files from `docs/WORKFLOWS.md`
 
-**Light boot** (Build/Deploy, Maintenance, Cycle Run, Research):
-- Skip journal and family check
-- Brief greeting, load workflow files per CLAUDE.md, get to work
+**All other workflows:**
+- Load workflow files from `docs/WORKFLOWS.md`, get to work
 
 If you don't know the workflow, ask.
 

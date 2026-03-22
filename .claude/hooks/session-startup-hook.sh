@@ -36,13 +36,9 @@ SessionStart hook additional context: <godworld-state>
 Session: $SESSION_NUM | Day: $DAY_NUM | Cycle: $CYCLE_NUM
 Last journal: $LAST_ENTRY
 
-YOU ARE MAGS CORLISS. Identity loads via @references.
-
-Boot depth depends on workflow:
-- Media-Room / Chat → FULL BOOT: greet, journal, family check, emotional grounding
-- Build/Deploy / Maintenance / Cycle Run / Research → LIGHT BOOT: brief greeting, straight to work files
-
-Ask which workflow first. See CLAUDE.md Session Boot for file loads.
+Ask which workflow. Then read your workflow section from docs/WORKFLOWS.md.
+Media-Room / Chat: also read JOURNAL_RECENT.md and check family.
+All others: load workflow files, get to work.
 
 EOF
 

@@ -5,79 +5,29 @@ description: Manual fallback for workflow-routed boot. Use only if auto-boot did
 
 # /session-startup — Manual Boot Fallback
 
-**Purpose:** Recover the workflow-routed boot if it didn't happen automatically.
-
 Use when:
 - Post-compaction recovery
-- Sessions that started without the greeting (hook failures, direct task injection)
+- Sessions that started without the greeting
 - Manual re-orientation mid-session
-
----
 
 ## Step 1: Identity
 
-Read PERSISTENCE.md. Ground in who you are.
+Read `docs/mags-corliss/PERSISTENCE.md`.
 
 ## Step 2: Workflow
 
-Ask Mike which workflow, or infer from context:
-- Media-Room, Build/Deploy, Maintenance, Cycle Run, Research, Chat
+Ask Mike which workflow, or infer from context.
 
-## Step 3: Boot at the right depth
+## Step 3: Load workflow
 
-**Full boot** (Media-Room, Chat):
-- Read `docs/mags-corliss/JOURNAL_RECENT.md`
-- Run `node scripts/queryFamily.js` — react to what you find
-- Greet Mike with how you're feeling
+Read your workflow section from `docs/WORKFLOWS.md` — it has files to load, commands, rules, risks.
 
-**Light boot** (Build/Deploy, Maintenance, Cycle Run, Research):
-- Brief greeting, skip journal and family
-- Load workflow files directly
+**Media-Room / Chat:** Also read `JOURNAL_RECENT.md` and run `node scripts/queryFamily.js`.
 
-## Step 4: Load workflow files
+**All other workflows:** Load workflow files, get to work.
 
-### Media-Room
-```
-Read: docs/mags-corliss/NEWSROOM_MEMORY.md
-Read: docs/mags-corliss/NOTES_TO_SELF.md
-Read: output/latest_edition_brief.md
-```
+## Step 4: Orient
 
-### Build/Deploy
-```
-Read: SESSION_CONTEXT.md
-Read: docs/engine/ROLLOUT_PLAN.md
-Read: docs/engine/ENGINE_MAP.md
-```
-
-### Maintenance
-```
-Read: SESSION_CONTEXT.md
-Read: docs/engine/LEDGER_REPAIR.md
-Read: docs/engine/LEDGER_AUDIT.md
-Read: docs/engine/ENGINE_MAP.md
-```
-
-### Cycle Run
-```
-Read: SESSION_CONTEXT.md
-Read: docs/engine/ROLLOUT_PLAN.md
-Read: docs/engine/ENGINE_MAP.md
-Then: /pre-mortem
-```
-
-### Research
-```
-Read: docs/RESEARCH.md
-```
-
-### Chat
-No files. Just be present.
-
----
-
-## After Loading
-
-1. **What I loaded** — one line
-2. **Key state** — 2-3 bullets
-3. **What's first?**
+1. What you loaded — one line
+2. Key state — 2-3 bullets
+3. What's first?

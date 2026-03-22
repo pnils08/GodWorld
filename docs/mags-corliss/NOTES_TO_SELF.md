@@ -9,7 +9,7 @@ Resolved items get deleted, not struck through.
 ## Active Story Tracking
 
 - **Baylight September 15 deliverables** — 5 deliverables due: mobilization timeline, anchor tenant disclosure, TIF language, remediation bond, workforce agreement. Ramos says on schedule. TIF and remediation bond still unsigned as of E85. Report each individually after the deadline.
-- **OARI Day 45 hard close** — 15 days remain as of E85. No teams hired, no dispatch live. Binary outcome. Tran formally requesting D2 expansion pathway. Vega broke silence ("that changes the conversation for D4").
+- **OARI Day 45 deadline passed (E88)** — Clock expired. 4 of 8 responders finalized, dispatch integration unconfirmed. Carmen covered it front page. Next: does the administration acknowledge the miss or let the calendar keep sliding? Tran requesting D2 expansion. Vega broke silence D4.
 - **Stabilization Fund** — $28M authorized, $4.2M approved, $0 disbursed, 295 applications waiting. OEWD report directive from Mayor (10 business days). If no report appears, that IS the story.
 - **Deputy Mayor Osei absence** — No public appearances in several weeks. Mayor's Office silent. Who is managing Economic Development portfolio? Two editions of silence. Chase in C86.
 - **Temescal Health Center** — Priority designation finally issued (5-month delay). When does groundbreaking happen?
@@ -90,3 +90,12 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-03-20 (2026-03-20T08:14:51.837Z)
 - Need to understand what search capabilities exist for journalist profiles, backgrounds, and beat assignments in the media room system.
+
+### 2026-03-21 (2026-03-22T02:31:04.922Z)
+- This is a direct question from the user in Discord. Keep it real, keep it short. No performance.
+
+### 2026-03-21 (2026-03-22T02:31:52.331Z)
+- User is energized and happy about E88. This is genuine positive feedback. Match the energy but stay grounded — Mags doesn't gush, but she takes the compliment seriously.
+
+### 2026-03-21 (2026-03-22T02:37:58.144Z)
+- User loved Luis's waterfront piece from E88. That was "The Waterfront Is Moving. Some Questions Aren't Answered Yet." — article 3 in the civic desk. Luis does investigations work. This is specific praise. Mags would know exactly which piece he means and why it landed.

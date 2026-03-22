@@ -1,136 +1,131 @@
 {
-  "lastUpdated": "2026-02-28",
-  "updatedBy": "Mags Corliss",
-  "cycle": 84,
+  "lastUpdated": "2026-03-21",
+  "updatedBy": "buildInitiativePackets.js (auto)",
   "initiatives": [
     {
       "id": "INIT-001",
       "name": "West Oakland Stabilization Fund",
-      "keywords": ["Stabilization Fund", "INIT-001"],
-      "status": "PASSED",
+      "keywords": [],
+      "status": "passed",
       "voteCycle": 78,
-      "vote": "6-3",
+      "vote": null,
       "budget": "$28M",
-      "domain": "economic",
-      "neighborhoods": ["West Oakland"],
+      "domain": null,
+      "neighborhoods": [],
       "implementation": {
         "status": "committee-review",
         "phase": "committee-review",
-        "summary": "$28M authorized C78. $4.2M approved for disbursement C81. $0 delivered as of C84. 295 applications pending.",
-        "pendingItems": [
-          "Vega committee review — agenda item 4 (cycle 89, September 8)",
-          "First actual disbursement to applicants",
-          "Status report on 295 pending applications"
-        ],
-        "milestoneNotes": "$28M authorized C78; $4.2M approved C81; 0 disbursed C84; 295 applications waiting",
+        "summary": "$28M authorized C78; $4.2M approved C81; 0 disbursed C84; 295 applications waiting",
         "nextScheduledAction": "Vega committee review — agenda item 4",
-        "nextActionCycle": 89,
-        "keyContacts": ["Darius Clark (applicant, waiting)", "Ramon Vega (committee chair)"],
-        "newsroomNote": "Mara audit corrected: $4.2M IS approved for disbursement, not zero. But zero has been delivered. The gap between approved and delivered is the story. September 8th is the deadline."
+        "nextActionCycle": 89
       }
     },
     {
       "id": "INIT-002",
-      "name": "Oakland Alternative Response Initiative (OARI)",
-      "keywords": ["OARI", "Alternative Response", "INIT-002"],
-      "status": "PASSED",
+      "name": "Oakland Alternative Response Initiative",
+      "keywords": [],
+      "status": "passed",
       "voteCycle": 82,
-      "vote": "5-4",
+      "vote": null,
       "budget": "$12.5M",
-      "domain": "safety",
+      "domain": null,
       "neighborhoods": [],
       "implementation": {
         "status": "clock-running",
         "phase": "clock-running",
-        "summary": "45-day implementation window active. 3 pilot districts named: D1, D3, D5. No hiring criteria released.",
-        "pendingItems": [
-          "Hiring criteria for responders",
-          "Community advisory board formation",
-          "Pilot district operational launch"
-        ],
-        "milestoneNotes": "Passed 5-4 C82; 3 pilot districts named (D1, D3, D5); 45-day clock running",
+        "summary": "Passed 5-4 C82; 3 pilot districts named (D1, D3, D5); 45-day clock running",
         "nextScheduledAction": "45-day implementation deadline",
-        "nextActionCycle": null,
-        "keyContacts": ["Dante Nelson (following OPOA mailers)"],
-        "newsroomNote": "Mara audit corrected: 3 pilot districts ARE named (D1, D3, D5), not none. Every civic piece touching OARI must carry countdown: Day X of 45."
+        "nextActionCycle": null
       }
     },
     {
       "id": "INIT-003",
-      "name": "Fruitvale Transit Hub Phase II",
-      "keywords": ["Fruitvale", "Transit Hub", "Phase II", "INIT-003"],
-      "status": "PENDING-VOTE",
+      "name": "Fruitvale Transit Hub Phase II — Visioning",
+      "keywords": [],
+      "status": "visioning-complete",
       "voteCycle": 86,
       "vote": null,
       "budget": "$230M",
-      "domain": "transit",
-      "neighborhoods": ["Fruitvale"],
+      "domain": null,
+      "neighborhoods": [],
       "implementation": {
-        "status": "pre-vote",
-        "phase": "developer-rfp",
-        "summary": "Scope released C83. Developer RFP and selection underway. Council vote (simple majority 5-4) targeted C86. $22M Housing Trust Fund commitment requires council appropriation.",
-        "pendingItems": [
-          "Developer RFP and selection",
-          "CEQA environmental review",
-          "Council appropriation vote (C86)"
-        ],
-        "milestoneNotes": "Visioning complete; conceptual plan approved; BART MOU negotiated; scope released C83; developer RFP active",
-        "nextScheduledAction": "Council vote — $22M Housing Trust Fund appropriation",
-        "nextActionCycle": 86,
-        "keyContacts": ["Elena Soria Dominguez (planning lead)", "Shawn Nguyen (43, construction laborer, local hire)", "Jose Wright (26, electrician, apprenticeship pipeline)"],
-        "newsroomNote": "$230M transit-oriented development at Fruitvale BART. 420 units, 67% affordable. 50% retail reserved for Fruitvale-based or Latino-owned businesses. Feeds Oakland Youth Apprenticeship Pipeline. Infrastructure sequencing with Baylight flagged by planning office."
+        "status": "untracked",
+        "phase": "untracked",
+        "summary": "",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
+      }
+    },
+    {
+      "id": "INIT-004",
+      "name": "Port of Oakland Green Modernization — Federal Grant",
+      "keywords": [],
+      "status": "pipeline",
+      "voteCycle": null,
+      "vote": null,
+      "budget": "$320M",
+      "domain": null,
+      "neighborhoods": [],
+      "implementation": {
+        "status": "untracked",
+        "phase": "untracked",
+        "summary": "",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
       }
     },
     {
       "id": "INIT-005",
       "name": "Temescal Community Health Center",
-      "keywords": ["Health Center", "Temescal Community Health", "INIT-005"],
-      "status": "PASSED",
+      "keywords": [],
+      "status": "passed",
       "voteCycle": 80,
-      "vote": "6-2",
+      "vote": null,
       "budget": "$45M",
-      "domain": "health",
-      "neighborhoods": ["Temescal"],
+      "domain": null,
+      "neighborhoods": [],
       "implementation": {
         "status": "in-progress",
         "phase": "in-progress",
-        "summary": "Passed 6-2 C80 (Crane absent). Implementation underway.",
-        "milestoneNotes": "Passed 6-2 C80; implementation active",
+        "summary": "Passed 6-2 C80; implementation active",
         "nextScheduledAction": null,
-        "nextActionCycle": null,
-        "pendingItems": [],
-        "keyContacts": ["Patricia Nolan (home health aide, waiting on services)", "Andre Lee (55, Temescal, active — health fair attendee)"],
-        "newsroomNote": "Community health access is the human angle. Track wait times and service availability. Mara corrected Andre Lee: 55/Temescal/active, not 65/Adams Point/retired."
+        "nextActionCycle": null
       }
     },
     {
       "id": "INIT-006",
-      "name": "Baylight District",
-      "keywords": ["Baylight", "DEIR", "TIF", "remediation bonding", "INIT-006"],
-      "status": "PASSED",
+      "name": "Baylight District — Final Council Vote",
+      "keywords": [],
+      "status": "passed",
       "voteCycle": 83,
-      "vote": "6-3",
+      "vote": null,
       "budget": "$2.1B",
-      "domain": "development",
-      "neighborhoods": ["Jack London"],
+      "domain": null,
+      "neighborhoods": [],
       "implementation": {
-        "status": "mobilizing",
-        "phase": "mobilizing",
-        "summary": "Bond passed 6-3 C83. TIF Ordinance executed C84. Remediation Bond executed C84. Construction mobilization request filed C85. Both legal instruments cleared — project advancing to site prep.",
-        "milestoneNotes": "Bond passed 6-3 C83; TIF executed C84; Remediation Bond executed C84; mobilization request filed C85",
+        "status": "blocked",
+        "phase": "blocked",
+        "summary": "Bond passed 6-3 C83; TIF filed not finalized; remediation bonding filed not executed",
         "nextScheduledAction": "Baylight anchor tenant disclosure + fiscal close end Q3",
-        "nextActionCycle": 86,
-        "pendingItems": [
-          "Anchor tenant disclosure and fiscal close (end Q3)",
-          "Construction mobilization approval (pending C85 request)",
-          "First contract award — investigative angle: who gets it?"
-        ],
-        "keyContacts": [
-          "Dr. Simone Ellis (City Legal Counsel — TIF language)",
-          "Keisha Ramos (Director, Baylight Redevelopment Authority — mobilization lead)",
-          "Elena Reyes (community voice)"
-        ],
-        "newsroomNote": "Both legal instruments cleared C84 — project is no longer blocked. Mobilization request filed C85. The story shifts from 'will it happen' to 'who benefits first.' Private sector activity preceded public filings. Major investigative angle: who gets the first contract?"
+        "nextActionCycle": null
+      }
+    },
+    {
+      "id": "INIT-007",
+      "name": "Oakland Youth Apprenticeship Pipeline",
+      "keywords": [],
+      "status": "announced",
+      "voteCycle": null,
+      "vote": null,
+      "budget": "$12.5M",
+      "domain": null,
+      "neighborhoods": [],
+      "implementation": {
+        "status": "untracked",
+        "phase": "untracked",
+        "summary": "",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
       }
     }
   ]

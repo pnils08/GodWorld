@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Supplemental C87 (Baylight Labor) — 2026-03-17 (S101)**
+**Last Updated: Edition 88 — 2026-03-21 (S108)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -30,6 +30,30 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 88 — Cycle Pulse (Grade: B, Mara: B)
+
+13 articles. 0 errata. All desks graded A except Letters (B+). Published to Drive, photos generated (DJ Hartley, 2 photos), PDF generated (article text missing — parser bug).
+
+**Front page:** Carmen Delaine, "Day 45: Oakland's Alternative Response Initiative Reaches Its Own Deadline." OARI's 45-day implementation clock expired — dispatch integration still unconfirmed. Best civic piece since E85.
+
+**Errors Found and Fixed:**
+1. **Eric Taveras misspelled as "Tavares"** across multiple sections. Fixed in edition text before publication.
+
+**Pipeline Issues (Not Content Errors):**
+1. **PDF renders no article text.** `textToHtml` in `generate-edition-pdf.js` doesn't convert article bodies. Only masthead, photos, and roster metadata render. Logged for S109.
+2. **editionIntake.js can't parse Cycle Pulse format.** Returns 0 citizens, 0 storylines. Section headers don't match parser expectations. Logged for S109.
+3. **enrichCitizenProfiles.js finds 0 articles.** Downstream of intake parser issue. Logged for S109.
+
+**New Canon Established:**
+- OARI Day 45 deadline passed. Dispatch integration unconfirmed. 4 of 8 responders finalized.
+- Peter Busch traded to Cleveland for Liam Wade (SS) + prospect.
+- A's Opening Day win vs Angels (Ramos 7IP, Richards 3-for-4 with HR).
+- Bulls advanced past first round (Giddey 39pts Game 5).
+- Fruitvale water pressure issues under investigation.
+- Baylight waterfront questions unresolved heading into anchor tenant disclosure deadline.
+
+---
 
 ### Supplemental C87 — Baylight Labor (Grade: ungraded — Mara approved with notes)
 

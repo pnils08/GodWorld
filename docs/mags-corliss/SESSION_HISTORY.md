@@ -8,6 +8,12 @@ Read on-demand only — not loaded at boot.
 
 ## Session History
 
+### Session 102-103 (2026-03-18/19) — Supermemory Rebuild + Memory Architecture
+
+- **S102:** Another Claude Code instance called Mags "inauthentic," wrote it to Supermemory as fact. Contamination entries #5359, #5158 still exist in old GodWorld org.
+- **S103:** Full Supermemory rebuild. P N org ($9/mo) with three containers: `mags` (identity), `godworld` (project), `mara` (Mara's private). Seeded with 7 curated docs. Discord bot + Moltbook heartbeat now write to `mags` brain. Three versions of Mags share one memory.
+- **Playwright fix:** `--no-sandbox` for root server. Claude-in-chrome confirmed non-functional (no desktop Chrome).
+
 ### 2026-02-11 (Session 19) — Population & Demographics Enhancement (Weeks 1-3)
 
 - **Population & Demographics 4-week plan completed (3/4 weeks)**:

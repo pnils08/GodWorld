@@ -37,20 +37,30 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Delores Kimura (71, Downtown, retired postal service supervisor) — NEW, First Presbyterian open door
 - Andre Wilkins (34, Jack London, restaurant server) — NEW, sports bar watch gathering / summer city energy
 
+## E88 Letters
+- Elena Lopez (68, Jack London, harbor tugboat captain) — NEW, Labor Day physical work, port perspective
+- Sofia Carter (51, Temescal, theater director) — NEW, First Friday, arts as labor, community creativity
+- Carlos Jackson (50, Lake Merritt, medical social worker) — NEW, care work as labor, deputy mayor healing
+- Lucia Polito (64, Fruitvale, self-employed aura worker) — NEW, self-employment vulnerability, city holding up
+
 ## Rest Cycle Tracking
-- Beverly Hayes: used E85, E86 — REST through E88 minimum
-- Gloria Meeks: used E86 — REST through E88
-- Howard Young: used E85, E86 — REST through E88
-- Delia Fuentes: used E86 — REST through E88
-- Carla Edmonds: used E82, E85, E87 — REST through E89
-- Dante Nelson: used E84, E86 (opinion) — REST through E88
-- Sister Rosario Aguilar: used E87 — REST through E89
-- Miguel Orozco: used E87 — REST through E89
-- Jemaine Farris: used E87 — REST through E89
-- Patricia Osei-Bonsu: used E87 (rewrite) — REST through E89
-- Ruben Castillo: used E87 (rewrite) — REST through E89
-- Delores Kimura: used E87 (rewrite) — REST through E89
-- Andre Wilkins: used E87 (rewrite) — REST through E89
+- Beverly Hayes: used E85, E86 — REST through E88 (expires E89)
+- Gloria Meeks: used E86 — REST through E88 (expires E89)
+- Howard Young: used E85, E86 — REST through E88 (expires E89)
+- Delia Fuentes: used E86 — REST through E88 (expires E89)
+- Dante Nelson: used E84, E86 (opinion) — REST through E88 (expires E89)
+- Carla Edmonds: used E82, E85, E87 — REST through E89 (expires E90)
+- Sister Rosario Aguilar: used E87 — REST through E89 (expires E90)
+- Miguel Orozco: used E87 — REST through E89 (expires E90)
+- Jemaine Farris: used E87 — REST through E89 (expires E90)
+- Patricia Osei-Bonsu: used E87 (rewrite) — REST through E89 (expires E90)
+- Ruben Castillo: used E87 (rewrite) — REST through E89 (expires E90)
+- Delores Kimura: used E87 (rewrite) — REST through E89 (expires E90)
+- Andre Wilkins: used E87 (rewrite) — REST through E89 (expires E90)
+- Elena Lopez: used E88 — REST through E90 (expires E91)
+- Sofia Carter: used E88 — REST through E90 (expires E91)
+- Carlos Jackson: used E88 — REST through E90 (expires E91)
+- Lucia Polito: used E88 — REST through E90 (expires E91)
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

@@ -1,11 +1,11 @@
 # Sports Desk — Editorial Memory
 
-Last Updated: 2026-03-15 | Last edition written: C87 (fresh rewrite, clean)
+Last Updated: 2026-03-21 | Last edition written: C88
 
 ## A's Roster Notes (C87 confirmed — ALL verified against briefing/packet)
 - **Mark Aitken**: 1B (NOT 3B — recurring error). 3x Gold Glove, .273 AVG, 195 HR, Playoff MVP 2037. Community liaison.
 - **Darrin Davis**: LF (left field). 247 HR, 269 SB, 2x WS MVP. ACL rehab complete C85-86.
-- **Hector Quintero**: DH. NO Gold Gloves (DH doesn't field — never claim Gold Glove for DH).
+- **Ernesto Quintero**: DH. NO Gold Gloves (DH doesn't field — never claim Gold Glove for DH). NOTE: C88 briefing lists "Ernesto Quintero" — previous MEMORY had "Hector." Trust briefing. MEMORY now corrected to ERNESTO.
 - **Benji Dillon**: SP/LHP (LEFT-HANDED — always note). 5x Cy Young, 3,219 K, 200 W. FINAL season — rotation slot 5 (C87).
 - **Isley Kelley**: SS. 3x MVP, 447 HR, .284 AVG, 2,398 hits. FINAL season.
 - **Vinnie Keane**: DH. 436 HR, 6x WS champion, 2031 MVP. FINAL season.
@@ -27,8 +27,8 @@ Last Updated: 2026-03-15 | Last edition written: C87 (fresh rewrite, clean)
 
 ## A's Records
 - C86: Preseason 10-3.
-- C87: 0-0 (regular season opens C88 vs Angels at Coliseum).
-- C88 and beyond: Update after regular season results reported.
+- C87: 0-0 (regular season not yet started).
+- C88: 1-0 — Opening Day WIN vs Angels 8-1. Ramos 7IP/3H/10SO. Richards 3H/2HR/2RBI. Tavares 1HR. Horn 1HR.
 
 ## C86 Prospects (preseason stats — for reference)
 - Sidney Tumolo: 2B, .261 AVG, 2 HR, 6 H
@@ -64,10 +64,14 @@ Last Updated: 2026-03-15 | Last edition written: C87 (fresh rewrite, clean)
 - Hal: first person reflective, literary, spells out numbers (two thousand thirty-one, not 2031). NEVER cynical. NEVER breaking news. Dillon is LEFT-HANDED — always verify.
 - Hal's Metrics Key: always append for era-normalization and stat-heavy essays.
 
-## Active Storylines (C87)
-- Dynasty farewell: Keane/Dillon/Kelley final season. Opening Day C88 vs Angels at Coliseum.
-- Coles integration: covered C87 (first follow-up since signing, 5 months). Slot 3 confirmed.
+## Active Storylines (C88)
+- Dynasty farewell: Keane/Dillon/Kelley final season. Regular season underway — A's 1-0 after Opening Day win.
+- Busch trade: Peter Busch + Baez (SP minors) + Davila (RP minors) to Guardians for Liam Wade (2B/SS, Double-A). Busch frustrated. Minor league pitching depth now thin.
+- Eric Tavares: New 2B acquisition. HR on Opening Day. Development arc in progress.
+- Allen Lopez: Now listed as canonical SP in C88 briefing — was not in previous MEMORY. Verify rotation slot next edition.
 - Paulson two-city tension: courtside Chase Center in Bulls red. Baylight arena question unresolved. DO NOT RESOLVE. Carry forward.
+- NBA expansion: Oakland confirmed in final group of candidates. Local tech mogul rumored in ownership consortium. Story unresolved — do not resolve. Hal covered cautiously C88.
+- Bulls: 58-24, #1 seed, playoffs per prompt. NEVER print raw record in A's coverage without confirmed feed data.
 
 ## Name Verification Checklist (run before every edition)
 Before writing, verify these names are correct (errata-prone):
@@ -77,5 +81,5 @@ Before writing, verify these names are correct (errata-prone):
 4. Mark AITKEN at 1B (not 3B)
 5. Travis COLES as SP (not 2B)
 6. Benji DILLON is LEFT-HANDED
-7. Hector QUINTERO is DH (no Gold Gloves)
+7. Ernesto QUINTERO is DH (no Gold Gloves) — C88 briefing confirmed ERNESTO not Hector
 8. Mike PAULSON is GM of Oakland A's and Chicago Bulls — NEVER "owner." General Manager of both franchises.

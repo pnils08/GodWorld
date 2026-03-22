@@ -17,10 +17,14 @@
       "notes": 2,
       "claimDecomposition": null,
       "deskErrors": {
-        "civic": ["council name errors (5 wrong first names, 2 swapped districts)"],
+        "civic": [
+          "council name errors (5 wrong first names, 2 swapped districts)"
+        ],
         "sports": [],
         "chicago": [],
-        "culture": ["phantom citizen Mei Chen (AGAIN)"],
+        "culture": [
+          "phantom citizen Mei Chen (AGAIN)"
+        ],
         "business": [],
         "letters": []
       },
@@ -42,9 +46,18 @@
       "notes": 1,
       "claimDecomposition": null,
       "deskErrors": {
-        "civic": ["vote swap Ashford/Mobley", "mayor name fabricated (Marcus Whitmore)"],
-        "sports": ["Aitken position 3B not 1B", "Davis position 2B not DH", "Gold Glove for DH"],
-        "chicago": ["real name leak Josh Smith"],
+        "civic": [
+          "vote swap Ashford/Mobley",
+          "mayor name fabricated (Marcus Whitmore)"
+        ],
+        "sports": [
+          "Aitken position 3B not 1B",
+          "Davis position 2B not DH",
+          "Gold Glove for DH"
+        ],
+        "chicago": [
+          "real name leak Josh Smith"
+        ],
         "culture": [],
         "business": [],
         "letters": []
@@ -65,15 +78,28 @@
       "criticals": 5,
       "warnings": 5,
       "notes": 8,
-      "claimDecomposition": { "extracted": 41, "verified": 38, "errors": 2, "unverifiable": 1 },
+      "claimDecomposition": {
+        "extracted": 41,
+        "verified": 38,
+        "errors": 2,
+        "unverifiable": 1
+      },
       "maraGrade": "A-",
       "deskErrors": {
-        "civic": ["Ashford/OARI crossover fabrication (3 passages — CRC was unified NO on OARI, not split)", "Three consecutive initiatives claim wrong (two, not three)"],
-        "sports": ["Hal Richmond Coles innings 119.1 vs 219.1 (transposition)"],
+        "civic": [
+          "Ashford/OARI crossover fabrication (3 passages — CRC was unified NO on OARI, not split)",
+          "Three consecutive initiatives claim wrong (two, not three)"
+        ],
+        "sports": [
+          "Hal Richmond Coles innings 119.1 vs 219.1 (transposition)"
+        ],
         "chicago": [],
         "culture": [],
         "business": [],
-        "letters": ["Jose Johnson claimed Crane voted NO on Stabilization Fund (he voted YES)", "Storyline summary wrong for Crane/Stabilization"]
+        "letters": [
+          "Jose Johnson claimed Crane voted NO on Stabilization Fund (he voted YES)",
+          "Storyline summary wrong for Crane/Stabilization"
+        ]
       },
       "noteText": "First fully scored edition (Rhea 5-category rubric). First edition with zero desk failures/retries. First with programmatic validation gate. First with template v1.4 sections. 18 articles, 11 reporters. Rhea caught 2 criticals (Coles innings, Crane vote). Mara caught 3 additional criticals (Ashford/OARI fabrication x3 passages, three consecutive claim, storyline summary). All fixed pre-final publication. Mara grade: A- (strongest edition she's reviewed). Voice fidelity (18/20) strongest category. Recurring pattern: vote fabrication for narrative tension (E82 Ashford/Mobley swap, E83 Ashford/OARI crossover)."
     },
@@ -91,17 +117,37 @@
       "criticals": 4,
       "warnings": 4,
       "notes": 7,
-      "claimDecomposition": { "extracted": 48, "verified": 44, "errors": 4, "unverifiable": 4 },
+      "claimDecomposition": {
+        "extracted": 48,
+        "verified": 44,
+        "errors": 4,
+        "unverifiable": 4
+      },
       "maraGrade": "A-",
       "userGrade": "~30/100",
       "deskErrors": {
-        "civic": ["OARI vote swap — Vega/Tran (third consecutive edition with vote fabrication)", "All 3 civic reporters sound identical — no voice differentiation", "Articles read as policy briefs, not journalism"],
+        "civic": [
+          "OARI vote swap — Vega/Tran (third consecutive edition with vote fabrication)",
+          "All 3 civic reporters sound identical — no voice differentiation",
+          "Articles read as policy briefs, not journalism"
+        ],
         "sports": [],
-        "chicago": ["Chicago weather fabricated — 34°F in August (should be 67°F Humid)", "Pipeline gap: buildDeskPackets.js doesn't pass chicagoSatellite.js weather"],
-        "culture": ["Baylight stadium spec error — 18K-20K indoor → 35K open-air (FIXED)", "Dante Nelson quoted 3x across sections (FIXED — reduced to 1)"],
+        "chicago": [
+          "Chicago weather fabricated — 34°F in August (should be 67°F Humid)",
+          "Pipeline gap: buildDeskPackets.js doesn't pass chicagoSatellite.js weather"
+        ],
+        "culture": [
+          "Baylight stadium spec error — 18K-20K indoor → 35K open-air (FIXED)",
+          "Dante Nelson quoted 3x across sections (FIXED — reduced to 1)"
+        ],
         "business": [],
         "letters": [],
-        "pipeline": ["Published to Drive/Supermemory/PDF before user approval (7th consecutive session)", "False Huerter/Dosunmu discrepancy flagged across multiple editions (two separate deals)", "Self-scoring against contaminated memory (91/100 internal vs 30/100 user)", "Citizen reuse: 4 citizens appear in 2+ articles"]
+        "pipeline": [
+          "Published to Drive/Supermemory/PDF before user approval (7th consecutive session)",
+          "False Huerter/Dosunmu discrepancy flagged across multiple editions (two separate deals)",
+          "Self-scoring against contaminated memory (91/100 internal vs 30/100 user)",
+          "Citizen reuse: 4 citizens appear in 2+ articles"
+        ]
       },
       "noteText": "Worst edition by user assessment. OARI vote swap (Vega NO, not YES — third consecutive edition with vote fabrication). Chicago weather fabricated from missing data. Civic desk produced identical-sounding policy briefs with no voice differentiation. Dante Nelson 3x in one edition. Published everything to shared memory before user approval, contaminating canon. Internal score 91 was self-congratulatory — verified against contaminated shared memory instead of engine source data. User grade: ~30/100. Sports and culture desks performed better. Corrections applied post-audit."
     },
@@ -119,19 +165,111 @@
       "criticals": 4,
       "warnings": 6,
       "notes": 7,
-      "claimDecomposition": { "extracted": 65, "verified": 48, "errors": 2, "unverifiable": 15 },
+      "claimDecomposition": {
+        "extracted": 65,
+        "verified": 48,
+        "errors": 2,
+        "unverifiable": 15
+      },
       "maraGrade": "A-",
       "rheaScore": 73,
       "deskErrors": {
-        "civic": ["engine language: 'five cycles' in front page body text (3 instances)"],
-        "sports": ["Arturo Ramirez should be Arturo Ramos (name error from sports feed NamesUsed typo)"],
+        "civic": [
+          "engine language: 'five cycles' in front page body text (3 instances)"
+        ],
+        "sports": [
+          "Arturo Ramirez should be Arturo Ramos (name error from sports feed NamesUsed typo)"
+        ],
         "chicago": [],
         "culture": [],
-        "business": ["engine language: 'three reporting cycles' and 'Three cycles since' in ticker and feature"],
-        "letters": ["Carla Edmonds placed as lead letter against briefing instruction"],
-        "compilation": ["engine language: 'several cycles' in Quick Takes", "Stabilization Fund date contradiction between desks (spring 2038 vs late 2040)"]
+        "business": [
+          "engine language: 'three reporting cycles' and 'Three cycles since' in ticker and feature"
+        ],
+        "letters": [
+          "Carla Edmonds placed as lead letter against briefing instruction"
+        ],
+        "compilation": [
+          "engine language: 'several cycles' in Quick Takes",
+          "Stabilization Fund date contradiction between desks (spring 2038 vs late 2040)"
+        ]
       },
       "noteText": "Strongest narrative quality since E83. First edition with full civic voice pipeline (6 voice agents). First edition with zero vote fabrication errors (second consecutive clean vote audit). All 4 CRITICALs were engine language ('cycles' in body text) — surgical fixes, no desk reruns needed. Mara A-/88: canon accuracy strong, Baylight open-air correct (fixing C84 error), Dante Nelson avoidance protocol worked. 18 pieces across 6 desks. Carmen Delaine front page built around Mara Vance document requests. Photo generation skipped (TOGETHER_API_KEY not set)."
+    },
+    {
+      "edition": 86,
+      "cycle": 86,
+      "date": "2026-03-06",
+      "grade": "A",
+      "total": 95,
+      "maraGrade": "A",
+      "criticals": 0,
+      "warnings": 6,
+      "notes": 0,
+      "deskErrors": {
+        "civic": [
+          "Mobley missing from vote roll call"
+        ],
+        "sports": [
+          "Ernesto vs Hector Quintero",
+          "Travis Coles position SP not 2B"
+        ],
+        "chicago": [],
+        "culture": [],
+        "business": [
+          "Stabilization Fund date wrong (2038 vs 2041)"
+        ],
+        "letters": [],
+        "compilation": [
+          "Affordability percentage mismatch 35% vs 67%"
+        ]
+      },
+      "noteText": "First A grade. 15 articles + 3 letters. Full civic voice pipeline. First edition with zero vote inversions, zero fourth-wall breaks. Mara audit by Mike personally — six corrections, all continuity details, no structural errors."
+    },
+    {
+      "edition": 87,
+      "cycle": 87,
+      "date": "2026-03-16",
+      "grade": "B",
+      "total": 78,
+      "maraGrade": "B",
+      "criticals": 3,
+      "warnings": 4,
+      "notes": 5,
+      "deskErrors": {
+        "civic": [],
+        "sports": [
+          "P Slayer called Paulson owner (he is GM)"
+        ],
+        "chicago": [],
+        "culture": [],
+        "business": [],
+        "letters": [],
+        "compilation": [
+          "Editor Desk fourth-wall language cut",
+          "Luis Navarro contradicted Jordan Velez in same edition",
+          "P Slayer NBA expansion speculation with no engine basis"
+        ]
+      },
+      "noteText": "Second attempt after rejected E87 (wrong player names, P Slayer genre violation). Published at 13 pieces after cutting 4 (Editor Desk, P Slayer, Navarro). New autonomous pipeline: voice agents with decision authority. Core problem: desk agents read voice agent layer, not engine output."
+    },
+    {
+      "edition": 88,
+      "cycle": 88,
+      "date": "2026-03-21",
+      "grade": "B",
+      "maraGrade": "B",
+      "criticals": 0,
+      "warnings": 0,
+      "notes": 0,
+      "deskErrors": {
+        "civic": [],
+        "business": [],
+        "culture": [],
+        "sports": [],
+        "chicago": [],
+        "letters": []
+      },
+      "noteText": "Auto-graded by gradeEdition.js. 12 articles, 0 errata entries."
     }
   ]
 }

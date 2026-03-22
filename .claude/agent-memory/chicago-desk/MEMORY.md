@@ -1,6 +1,6 @@
 # Chicago Desk — Editorial Memory
 
-Last Updated: 2026-03-14 | Last edition written: E87 (C87)
+Last Updated: 2026-03-21 | Last edition written: E88 (C88)
 
 ## Bulls Roster Notes
 - **CRITICAL**: Watch for real NBA name leaks. E82 had "Josh Smith" which should be "Jalen Smith" (our canon). If a name sounds like a real NBA player but isn't in the packet roster, FLAG IT.

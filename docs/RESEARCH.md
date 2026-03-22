@@ -176,6 +176,20 @@ Dated entries. What was found, where, and how it connects to our world.
 
 → **Graduated to rollout** — dashboard mission control extension.
 
+### S110 — Claude Dispatch vs OpenClaw (2026-03-22)
+
+**Source:** [The New Stack](https://thenewstack.io/claude-dispatch-versus-openclaw/), [Latent Space](https://www.latent.space/p/ainews-claude-cowork-dispatch-anthropics), [DEV Community](https://dev.to/ji_ai/claude-code-channels-vs-openclaw-the-tradeoffs-nobodys-talking-about-2h5h)
+
+**Claude Dispatch for Cowork:** Evolution of Remote Control. Phone → dispatches commands to running session. Reviewer found Remote Control "janky," Dispatch improved but still hit permission prompt issues that killed queries.
+
+**Why permission issues don't affect us:** We run `--dangerously-skip-permissions` via the `mags` tmux command. No prompts to block on. Persistent droplet doesn't sleep. Our setup avoids both pain points reviewers hit.
+
+**OpenClaw status:** Founder joining OpenAI. Moving to a foundation, stays MIT open source. Strength: fully offline with local models (relevant to Phase 21). Weakness: no security guardrails.
+
+**Key insight:** Anthropic is building toward the same always-on agent presence that OpenClaw pioneered, but with managed security. For a server-based setup like ours with pre-approved permissions, the Anthropic path (Remote Control + Channels) is cleaner than self-hosting OpenClaw.
+
+**Not a build item.** Validates the Remote Control + Channels direction already on rollout. Confirms our droplet-based approach avoids the laptop/permission issues reviewers hit.
+
 ---
 
 ## Ready for Rollout

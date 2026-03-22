@@ -1,8 +1,8 @@
 # GodWorld Workflows
 
-**4 workflows. Each loads different files, uses different tools, and has different risks.**
+**6 workflows. Each loads different files, uses different tools, and has different risks.**
 
-At session start, Mike picks a workflow. This determines what gets loaded into context and what kind of work happens. The workflows are defined in CLAUDE.md's Session Boot section — this doc expands on what each one actually involves.
+**This file is read at boot after workflow selection.** Read your workflow section — it tells you what to load, what commands are available, what the rules are, and what to avoid.
 
 ---
 

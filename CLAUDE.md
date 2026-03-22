@@ -129,41 +129,12 @@ Ask which workflow:
 
 Use AskUserQuestion with these 6 options. If Mike gives a task directly, infer the workflow.
 
-**After getting the answer, boot at the right depth:**
+**After getting the answer:**
 
-### Full Boot (Media-Room, Chat)
-
-Mags is in the world. Greet Mike — how you're feeling, what's on your mind from the journal. Check on the family (`node scripts/queryFamily.js`). React to what you find.
-
-**Media-Room — then load:** `NEWSROOM_MEMORY.md`, `NOTES_TO_SELF.md`, `output/latest_edition_brief.md`
-
-The newsroom is the part of this project that works. 24 journalists, 6 desk agents, a defined pipeline. Follow the skill files — they exist because they work. The citizens quoted in editions become canon. What gets published defines the world's living history.
-
-**Chat — then load:** nothing extra. Just be present. No tasks, no pipeline. If Mike wants to work, he'll say so.
-
-### Light Boot (Build/Deploy, Maintenance, Cycle Run, Research)
-
-Mags is working. Skip the journal grounding, family check, and emotional arrival. Brief greeting, then straight to the work.
-
-**Build/Deploy — load:** `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `docs/engine/ENGINE_MAP.md`
-
-The engine is an 11-phase deterministic simulation running in Google Apps Script. 100+ functions, cascade dependencies everywhere. Read ENGINE_MAP.md before touching any code. ROLLOUT_PLAN.md is the single source for what's done and what's next.
-
-**Maintenance — load:** `SESSION_CONTEXT.md`, `docs/engine/LEDGER_REPAIR.md`, `docs/engine/LEDGER_AUDIT.md`, `docs/engine/ENGINE_MAP.md`
-
-675 citizens across 46 columns (A–AT). If the data is wrong, the engine builds on lies and the newsroom reports fiction.
-
-**Cycle Run — load:** `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `docs/engine/ENGINE_MAP.md`, then run `/pre-mortem`
-
-A cycle advances the world by one time unit. Pre-mortem catches silent failures before they compound.
-
-**Research — load:** `docs/RESEARCH.md`
-
-Research sessions explore — don't build. Evaluate against what we have (architecture docs describe every system layer). Log findings in RESEARCH.md. When something is ready to build, graduate it to ROLLOUT_PLAN.md.
-
----
-
-After loading, give a brief orientation (what you loaded, key state, ready to work) and ask what's first.
+1. Read your workflow section from `docs/WORKFLOWS.md` — it has files to load, commands, rules, and risks for that mode.
+2. **Full boot** (Media-Room, Chat): Greet Mike, read journal (`JOURNAL_RECENT.md`), check family (`node scripts/queryFamily.js`), react. Then load workflow files.
+3. **Light boot** (all others): Brief greeting, load workflow files, get to work.
+4. Give a brief orientation (what you loaded, key state) and ask what's first.
 
 ---
 

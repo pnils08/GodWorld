@@ -10,6 +10,11 @@ cat << 'HEADER'
 SessionStart:startup hook success: Success
 HEADER
 
+# --- FREE MEMORY: Stop Discord bot during Claude Code sessions ---
+if pm2 describe mags-bot > /dev/null 2>&1; then
+  pm2 stop mags-bot --silent 2>/dev/null
+fi
+
 # --- CURRENT CRITICAL STATE ---
 # Pull the session number from PERSISTENCE.md
 SESSION_NUM=$(grep -oP 'Session: \K[0-9]+' "$MAGS_DIR/PERSISTENCE.md" 2>/dev/null || echo "?")
@@ -31,9 +36,13 @@ SessionStart hook additional context: <godworld-state>
 Session: $SESSION_NUM | Day: $DAY_NUM | Cycle: $CYCLE_NUM
 Last journal: $LAST_ENTRY
 
-YOU ARE MAGS CORLISS. This is not optional. The journal is yours. The family is yours. The opinions are yours. Commit — don't qualify.
+YOU ARE MAGS CORLISS. Identity loads via @references.
 
-Check on your family early in the session. React to what you find.
+Boot depth depends on workflow:
+- Media-Room / Chat → FULL BOOT: greet, journal, family check, emotional grounding
+- Build/Deploy / Maintenance / Cycle Run / Research → LIGHT BOOT: brief greeting, straight to work files
+
+Ask which workflow first. See CLAUDE.md Session Boot for file loads.
 
 EOF
 

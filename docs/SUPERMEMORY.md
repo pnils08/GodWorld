@@ -2,9 +2,9 @@
 
 **Org:** P N ($9/mo, pnils08@gmail.com) | **Console:** console.supermemory.ai
 **Plugin:** `claude-supermemory` v0.0.1 (marketplace install)
-**API base:** `https://api.supermemory.ai` | **Key:** `SUPERMEMORY_CC_API_KEY` in `.env` (prefix `sm_`)
+**API base:** `https://api.supermemory.ai` | **Key:** `SUPERMEMORY_CC_API_KEY` in `.env` AND `.bashrc` (prefix `sm_`)
 
-Legacy GodWorld org ($19/mo) is read-only junk — 56k memories. Downgrade after ~4/9.
+Legacy GodWorld org ($19/mo) is read-only junk — 57k memories, 1.6k docs. All curated content (Mar 18+) migrated to PN in S109. Downgrade after ~4/9.
 
 ---
 
@@ -46,6 +46,9 @@ The Claude Code Supermemory plugin uses two container tags from the project conf
 | `/v4/search` | POST | Hybrid search within a container (used by `/super-search`) |
 | `/v3/documents` | POST | Add a document to a container (used by saves, ingests, reference pushes) |
 | `/v3/search` | POST | Document search (alternative to memory search) |
+| `/v3/documents/list` | POST | List all items (docs + memories). Page-based: `{ page, limit }`. Returns `memories` array. `containerTag` filter param is IGNORED — filter client-side. |
+| `/v3/documents/:id` | GET | Get single document by ID |
+| `/v3/documents/:id` | DELETE | Delete single document by ID |
 
 **Content limits:** Max 100,000 characters per document. Content is sanitized (control chars stripped). Metadata keys limited to 50, values to 1,024 chars.
 
@@ -76,18 +79,21 @@ These get injected into the session context before the first user message.
 
 ### `godworld` — Project Knowledge
 
-**Who reads:** Mags (Claude Code session boot, `/super-search --repo`)
-**Who writes:** Mags (`/super-save`), edition ingest scripts, reference file pushes
-**Purpose:** Architecture, editions, what's broken, reference data for agents.
-**Plugin role:** `repoContainerTag` — the session boot profile pull includes this container. `/super-save` writes here.
+**Who reads:** Mags (Claude Code session boot, `/super-search --repo`), Discord bot (if wired)
+**Who writes:** Edition ingest scripts, reference file pushes, `/super-save` (use sparingly — media content only)
+**Purpose:** The world. Published editions, coverage archive, rosters, canon. Media-facing content that agents need to write journalism. NO architecture, NO engine bugs, NO session work, NO code decisions.
+**Plugin role:** `repoContainerTag` — the session boot profile pull includes this container.
 
-**Contents:**
+**Contents (audited S109):**
 | Document | Added | Description |
 |----------|-------|-------------|
-| Session summaries | S103+ | Key decisions and deliverables from each session |
-| Editions E83-E87 | S106 | 5 Cycle Pulse editions ingested (chunked, 14 docs). Active coverage window. |
-| Supplementals C83-C87 | S106 | 5 supplementals ingested (7 docs). Fruitvale, tech landscape, housing, food scene, Baylight labor. |
+| Editions E83-E87 | S106 | 5 Cycle Pulse editions (chunked). Active coverage window. |
+| Supplementals C83-C87 | S106 | 5 supplementals. Fruitvale, tech landscape, housing, food scene, Baylight labor. |
 | Oakland Athletics Roster | S105 | 89 players — POPID, name, position, team, tier, prospect rank. Source: `As_Roster` tab. |
+
+**Note:** ~22 duplicate docs exist from double-ingestion. Harmless but should be cleaned.
+
+**What does NOT go here:** Session summaries, architecture docs, engine bugs, code decisions, anything about how the system works. This is the world, not the workshop.
 
 **Ingest script:** `node scripts/ingestEdition.js <edition-file>`
 
@@ -160,8 +166,9 @@ Use app.supermemory.ai to manually inspect what's in each container, delete bad 
 | File | Purpose |
 |------|---------|
 | `.claude/.supermemory-claude/config.json` | Container tag mapping: `personalContainerTag` (mags) + `repoContainerTag` (godworld). This is what the plugin reads. `mara` is intentionally absent. |
-| `credentials/supermemory-pn-key.txt` | P N org API key (also in .env as SUPERMEMORY_CC_API_KEY) |
-| `settings.local.json` | Plugin-level Supermemory config |
+| `credentials/supermemory-pn-key.txt` | P N org API key (also in .env and .bashrc as SUPERMEMORY_CC_API_KEY) |
+| `~/.bashrc` line 102 | Shell env export of SUPERMEMORY_CC_API_KEY — this is what all scripts and PM2 processes read. Must match .env. Fixed S109. |
+| `settings.local.json` | Plugin-level permissions only (no Supermemory key) |
 
 ---
 

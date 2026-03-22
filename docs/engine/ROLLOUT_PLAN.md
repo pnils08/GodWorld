@@ -132,6 +132,24 @@ Deduplicate across 4 layers (disk, Drive, GitHub, Supermemory). Quick wins done 
 
 ---
 
+## Session Harness Improvements (from S110 research)
+
+Source: "50 Claude Code Tips" community guide, evaluated against GodWorld stack.
+
+| Item | What | Priority | Status |
+|------|------|----------|--------|
+| **CLAUDE.md instruction audit** | Audit against ~150 instruction budget. Every unnecessary line dilutes the important ones. Count instructions, cut noise. | HIGH | Not started |
+| **PreToolUse ledger protection hook** | Block destructive commands (`rm -rf`) + block direct sheet writes outside persistence scripts. Protect 675 citizens from accidental corruption. | HIGH | Not started |
+| **Terminal status line** | Show session number, cycle, workflow at bottom of terminal. Mike sees state at a glance without asking. `/statusline` generates the script. | HIGH | Not started |
+| **/btw for side questions** | Use during edition production for quick questions without context pollution. No build needed — just awareness. | MEDIUM | Available now |
+| **Smarter compaction hook** | Current post-compact hook exists but is basic. Re-inject: current workflow, active task, modified files, key constraints. | MEDIUM | Upgrade existing |
+| **/branch for risky approaches** | Try experimental fixes without losing context. Both paths stay alive. | MEDIUM | Available now |
+| **Output style per workflow** | Concise for build, explanatory for research. `/config` to set. | LOW | Not started |
+| **Fan-out `claude -p` for batch ops** | Batch file migrations, bulk doc updates with `--allowedTools` scoping. | LOW | Not started |
+| **PostToolUse validation hook** | Run a check after every file edit — e.g., grep for `godworld` in agent-facing files, catch container contamination at write time. | LOW | Not started |
+
+---
+
 ## Watch List
 
 Tracking for future adoption. Not building.

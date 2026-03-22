@@ -85,6 +85,18 @@ Dated entries. What was found, where, and how it connects to our world.
 
 **Semantic search works for canon:** Searching "OARI dispatch" in bay-tribune returns relevant chunks across multiple editions with scores 0.7-0.8. The archive is genuinely searchable by topic. → Validates the bay-tribune container as a functional canon search layer.
 
+### S110 — 50 Claude Code Tips Evaluation (2026-03-22)
+
+**Source:** Community guide, 50 tips sourced from Anthropic docs, Boris Cherny, and user experience.
+
+**Already using:** 16 of 50 tips (skills, subagents, custom agents, MCP servers, @imports, rules/, hooks, permissions, approval gates, /grill-me pattern, desk-write/Rhea-review, 1M context, raw data pasting). Already on rollout: worktree isolation, agent teams, remote control.
+
+**Noise for us:** 5 tips (desktop-only features on a headless server).
+
+**Graduated to rollout:** 9 items added to Session Harness Improvements section. 3 HIGH (CLAUDE.md audit, ledger protection hook, status line), 3 MEDIUM (/btw, smarter compaction, /branch), 3 LOW (output style, fan-out, validation hook).
+
+**Key metric discovered:** ~150 instruction budget for CLAUDE.md before compliance drops. We should audit ours.
+
 ---
 
 ## Ready for Rollout

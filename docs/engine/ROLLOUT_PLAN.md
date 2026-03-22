@@ -1,7 +1,9 @@
 # GodWorld — Rollout Plan
 
-**Status:** Active | **Last Updated:** Session 109 (2026-03-22)
+**Status:** Active | **Last Updated:** Session 110 (2026-03-22)
+**North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** `ROLLOUT_ARCHIVE.md` — read on demand, not at boot.
+**Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
 
 ---
 
@@ -50,10 +52,16 @@ All detail in `ROLLOUT_ARCHIVE.md`.
 | 22 | Agent Infrastructure Fixes (CIVIC mode, arc fix, write access) | S83-85 |
 | 26 | Agent Grading System (Karpathy Loop) | S99 |
 
-### Recently Completed (S109)
+### Recently Completed (S110)
 
-- **3 parser bugs fixed:** editionParser.js (---- delimiters + smart chunk classification), editionIntake.js (fallback section detection), enrichCitizenProfiles.js (citizen-log extraction mode). Template v1.5 standardized.
-- **Supermemory overhaul:** `godworld` container renamed to `bay-tribune`. 6 contaminated items deleted. SUPERMEMORY.md rewritten with workflow. Bot API key fixed (PM2 env caching). 12 docs + 4 scripts updated. Session-end routing clarified.
+- **3 parser bugs fixed:** editionParser.js, editionIntake.js, enrichCitizenProfiles.js. Template v1.5.
+- **Supermemory overhaul:** `godworld` → `bay-tribune`. 6 contaminated items deleted. SUPERMEMORY.md rewritten. Bot API key fixed. 12 docs + 4 scripts updated.
+- **6 workflows:** Added Research and Chat. WORKFLOWS.md is single source for per-workflow logic.
+- **Boot split:** Media-Room/Chat get journal + family. Work sessions skip straight to files.
+- **ARCHITECTURE_VISION.md created:** Jarvis at /root, persistent worktree sessions, per-session Supermemory, shared MDs as data bus, Ollama for lightweight tasks, dashboard as mission control.
+- **RESEARCH.md created:** Active questions, findings log, sources. Research workflow operational.
+- **Rollout trimmed:** 1172 → 150 lines (now ~200 with S110 additions).
+- **Research session:** 10 items evaluated. Channels, Remote Control server mode, scheduled tasks, Dispatch vs OpenClaw, Bayesian teaching, Claude Code changelog, agent trends, living worlds, dashboard as mission control. 20+ items added to rollout.
 
 ### Recently Completed (S105-S108)
 
@@ -103,8 +111,8 @@ Registered and claimed. API key saved. **Pending:** Moltbook heartbeat formattin
 
 ### Phase 12: Agent Collaboration + Autonomy (selected open items)
 
-- **12.2 Worktree Isolation:** Not started. Test on next edition.
-- **12.3 Autonomous Cycle Execution:** Long-term capstone. Everything else feeds into it.
+- **12.2 Worktree Isolation:** Superseded by Remote Control `--spawn worktree` (Phase 7.9). Same goal, native implementation.
+- **12.3 Autonomous Cycle Execution:** Long-term capstone. Depends on: Remote Control (7.9), Channels (Discord), dashboard mission control.
 - **12.10 Fish Audio TTS:** Deferred — $11/mo cost rejected S77.
 - **12.11 MiniMax M2.5:** Not started. Test on next edition for cost comparison.
 - **12.12 Slack Integration:** Not started. Depends on 7.10.

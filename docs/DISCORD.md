@@ -42,12 +42,12 @@ All loaded from disk via `lib/mags.js`:
 
 | Operation | Endpoint | Container | Purpose |
 |-----------|----------|-----------|---------|
-| **Search** | `POST /v3/search` | `mags` + `godworld` | Find relevant memories for the current message. 5 results, 8s timeout. |
+| **Search** | `POST /v3/search` | `mags` + `bay-tribune` | Find relevant memories for the current message. 5 results, 8s timeout. |
 | **User profile** | `POST /v4/profile` | `mags` | Static + dynamic facts about Mike. 2s timeout. |
 | **Save exchange** | `POST /v3/documents` | `mags` only | Every conversation exchange saved for profile building. |
 
 **Container access:**
-- Reads: `mags` (identity/conversations) + `godworld` (project/roster data) — updated S105
+- Reads: `mags` (identity/conversations) + `bay-tribune` (canon/roster data) — updated S109
 - Writes: `mags` only (conversation exchanges)
 - `mara`: NO ACCESS — never searched, never written to
 
@@ -82,7 +82,7 @@ Mike on Discord
   Discord Bot (Haiku)
       │
       ├── Reads local files (identity, journal, world state, citizens)
-      ├── Searches mags + godworld containers (RAG layer)
+      ├── Searches mags + bay-tribune containers (RAG layer)
       ├── Generates response as Mags
       ├── Saves exchange to mags container (brain feed)
       └── Nightly reflection → journal entry (autonomous memory)

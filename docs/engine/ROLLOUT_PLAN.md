@@ -3,7 +3,7 @@
 **Created:** Session 55 (2026-02-21)
 **Source:** Tech reading sessions S50 + S55 + S60 + S66 + S99
 **Status:** Active
-**Last Updated:** Session 108 (2026-03-21) — S107-S108: All 5 pre-E88 blockers fixed, agent audit (15 files + 2 skills), Rhea API verification, lifecycle skills trimmed, model tiering applied.
+**Last Updated:** Session 109 (2026-03-21) — E88 published (grade B, 0 errata). Parser fix (editionParser.js). 3 parser bugs logged (PDF, intake, enrichment). Post-production pipeline complete.
 
 **Completed phases are archived in `ROLLOUT_ARCHIVE.md`.** That file is on-demand — read it only when you need build context, implementation details, or history for a completed phase. It is not loaded at session start.
 
@@ -23,11 +23,16 @@ Items that should be addressed in the next session. Updated at session end.
 - **FIX: Press_Drafts ghost references** — `applyStorySeeds.js` and `mediaRoomIntake.js` still reference deleted tab.
 - **FIX: gradeEdition.js supplemental support** — Article parser, errata logging, desk mapping all need supplemental awareness.
 
+### Open — Post-E88 Parser Fixes
+
+- **FIX: PDF generator not rendering article text** — `generate-edition-pdf.js` renders masthead, photos, and citizen/official rosters but zero article body text. The `textToHtml` function doesn't convert article content within parsed sections into HTML. Two pages of metadata, no journalism. Files: `scripts/generate-edition-pdf.js`, `lib/editionParser.js`.
+- **FIX: editionIntake.js section parsing** — Intake parser can't find `CITIZEN USAGE LOG` or `STORYLINES` sections in Cycle Pulse format. Returns 0 citizen rows, 0 storylines. Same delimiter/format mismatch as the PDF parser bug fixed in S108. File: `scripts/editionIntake.js`.
+- **FIX: enrichCitizenProfiles.js article parsing** — Finds 0 articles with 0 citizen references. Downstream of the intake parser issue — if sections aren't parsed, articles aren't found. File: `scripts/enrichCitizenProfiles.js`.
+
 ### Open — Architecture & Production
 
-- **DESIGN: Agent knowledge separation** — Agents should use `godworld` for canon data, not `mags` for personal memory. Local workspaces + dashboard API is the clean path.
-- **PROJECT: World Memory** — Phase 1 DONE (dashboard reads archive). Remaining: (3) ingest key archive articles to godworld, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`.
-- **Produce Edition 88** — Run cycle 88, then E88 with autonomous agents + EIC direction.
+- **DESIGN: Agent knowledge separation** — Agents should use `bay-tribune` for canon data, not `mags` for personal memory. Local workspaces + dashboard API is the clean path.
+- **PROJECT: World Memory** — Phase 1 DONE (dashboard reads archive). Remaining: (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`.
 - **Supplemental strategy (ongoing)** — One supplemental per cycle minimum.
 
 ### Open — Infrastructure & Maintenance
@@ -40,7 +45,7 @@ Items that should be addressed in the next session. Updated at session end.
 
 *Full details in `ROLLOUT_ARCHIVE.md`*
 
-- **S107-S108:** All 5 pre-E88 blockers fixed (editionIntake remapped, citizen routing 20→509, flag bug 9 files, sports truesource 10→91, phantom children). Agent audit: 15 agent files + 2 workflow skills updated. Rhea dashboard API verification. Model tiering applied. Lifecycle skills trimmed and aligned.
+- **S108:** All 5 pre-E88 blockers fixed (editionIntake remapped, citizen routing 20→509, flag bug 9 files, sports truesource 10→91, phantom children). Agent audit: 15 agent files + 2 workflow skills updated. Rhea dashboard API verification. Model tiering applied. Lifecycle skills trimmed and aligned. **E88 published** (grade B, 13 articles, 0 errata). Parser fix: `editionParser.js` regex widened for `===` delimiters. Photos regenerated (2). PDF renders but missing article text (next session). Intake/enrichment parsers also need delimiter alignment.
 - **S106:** Dashboard audit (8 tabs, archive wired, 5 fixes shipped). World Memory Phase 1. Agent SM audit. 3 pipeline automations. Editions ingested to godworld.
 - **S105:** 9 architecture docs. Mara reference pipeline. Flag bug found. Spreadsheet audit. Batch audits submitted.
 
@@ -48,7 +53,7 @@ Items that should be addressed in the next session. Updated at session end.
 
 *56 items cleared since S83. Key completions:*
 
-- **S105:** Mara reference files complete. `buildMaraReference.js` pulls 6 tabs (SL, As_Roster, Bay_Tribune_Oakland, Chicago_Citizens, Business_Ledger, Faith_Organizations) → `output/mara-reference/`. Citizen roster (509), A's (89), Tribune (29), Chicago (123), businesses (51), faith orgs (16). Seeded to Supermemory: 5 files → `mara` container (Mara's persistent audit reference), A's roster → `godworld` container (agent access). `docs/SUPERMEMORY.md` created — dedicated doc tracking container architecture, contents, access patterns. Mike created As_Roster and Bay_Tribune_Oakland spreadsheet tabs.
+- **S105:** Mara reference files complete. `buildMaraReference.js` pulls 6 tabs (SL, As_Roster, Bay_Tribune_Oakland, Chicago_Citizens, Business_Ledger, Faith_Organizations) → `output/mara-reference/`. Citizen roster (509), A's (89), Tribune (29), Chicago (123), businesses (51), faith orgs (16). Seeded to Supermemory: 5 files → `mara` container (Mara's persistent audit reference), A's roster → `bay-tribune` container (agent access). `docs/SUPERMEMORY.md` created — dedicated doc tracking container architecture, contents, access patterns. Mike created As_Roster and Bay_Tribune_Oakland spreadsheet tabs.
 - **S99:** Phase 26 Agent Grading System (grade→history→exemplar→workspace feedback loop), 80/20 model tiering (Sonnet for complex, Haiku for routine), extended thinking prompts, pipeline logging, PostCompact hook, /grill-me skill, SDK bump 0.72→0.79, Paulson title lock, Citizen_Media_Usage cleanup (1,221→500 rows), CitizenBio column (AT) added with 17 T2 bios, EconomicProfileKey fixes (5 civic officials), disk naming cleanup (slugs, podcasts, rhea, mara, retention), heartbeat timeout fix, supplemental pipeline tightened (6 conditional data sources, THINK blocks, model tiers, name verification, expanded validation, optional Mara audit), run-cycle skill tightened (pre-mortem reference, v3.9 packet guide, full 6-script post-cycle pipeline, post-edition grading reference).
 - **S97-98:** Engine-to-newsroom pipeline fix (v3.9, ~30%→~90% data coverage), desk prompt rewrite, phase data audit, v3.9 deployed to GAS, Press_Drafts killed (-1,688 lines), voice domain enrichment v2.0, editionIntake v2.0, storyline engines wired, sports briefing pipeline fixed, validateEdition roster check.
 - **S95-96:** Desk agent autonomy architecture (3 workspace builders, zero LLM tokens), E87 published (grade B), supplemental strategy + housing/food scene supplementals.

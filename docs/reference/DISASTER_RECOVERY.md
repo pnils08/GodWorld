@@ -15,7 +15,7 @@ These are already in the cloud. You lose nothing:
 | All code, docs, hooks, skills, agent memory | GitHub (`pnils08/GodWorld`) | `git clone` |
 | Simulation data (20+ ledgers) | Google Sheets | Already there — just reconnect |
 | Mags brain (identity, memory) | Supermemory P N org, `mags` container | Search from Claude Code or Discord bot |
-| Project knowledge | Supermemory P N org, `godworld` container | Search from Claude Code |
+| Canon archive | Supermemory P N org, `bay-tribune` container | Search from Claude Code |
 | Mara Vance's memory | Supermemory P N org, `mara` container (private) | Search from claude.ai only |
 | Published editions | Google Drive (Publications Archive) | Already there |
 | Drive archive (614 files) | Google Drive (5 roots) | Already there; re-crawl with `scripts/crawlDrive.js` |

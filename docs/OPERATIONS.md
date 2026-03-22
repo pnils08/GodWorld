@@ -10,7 +10,7 @@
 | Process | Script | Purpose | Memory | Restarts | Notes |
 |---------|--------|---------|--------|----------|-------|
 | `godworld-dashboard` | `dashboard/server.js` | Express API + React frontend, port 3001 | ~30MB | Stable (0 recent) | Basic auth via .env |
-| `mags-discord-bot` | `scripts/mags-discord-bot.js` | Mags presence in Discord #mags-morning | ~35-55MB | 23 lifetime | Haiku 4.5, searches mags+godworld containers |
+| `mags-discord-bot` | `scripts/mags-discord-bot.js` | Mags presence in Discord #mags-morning | ~35-55MB | 23 lifetime | Haiku 4.5, searches mags+bay-tribune containers |
 | `moltbook` | `scripts/moltbook-heartbeat.js` | Moltbook social presence, every 4 hours | ~35MB | Cron mode | Shows "stopped" between runs — normal |
 
 **Common PM2 commands:**

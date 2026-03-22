@@ -37,7 +37,7 @@ Also in `archive/`:
 | Dashboard API | `getAllEditions()` reads `editions/` dir | Parsed articles for search, display, initiative cross-ref |
 | Desk agents | Indirectly — `buildArchiveContext.js` searches Supermemory, `buildDeskFolders.js` puts archive_context.md in workspace | Last 3 desk outputs + SM search results |
 | Discord bot | `output/latest_edition_brief.md` only | Compact summary of most recent edition |
-| Supermemory `godworld` | `ingestEdition.js` | E83-E87 + 5 supplementals ingested S106 (21 docs) |
+| Supermemory `bay-tribune` | `ingestEdition.js` | E83-E87 + 5 supplementals ingested S106 (21 docs) |
 | Article indexes | `output/article-index.json`, `output/article-ledger.md` | Structured metadata. Rebuilt S106 (244 entries). **Auto-refreshes via postRunFiling.js (step 22).** |
 | POP-ID index | `docs/media/ARTICLE_INDEX_BY_POPID.md` | 176 citizens × article appearances. Generated Feb 5 — stale. |
 
@@ -73,9 +73,9 @@ Also in `archive/`:
 
 `getAllEditions()` reads `editions/` (C78-87) and `output/drive-files/` (empty). The API endpoint `/api/search/articles` can only find articles from the last 10 editions. No access to 77 cycles of history.
 
-### Gap 4: Supermemory `godworld` has recent editions only
+### Gap 4: Supermemory `bay-tribune` has recent editions only
 
-E83-E87 ingested S106. E78-E82 and all C1-C77 content not in Supermemory. Agents searching `godworld` for "A's dynasty" or "early Baylight discussions" find nothing.
+E83-E87 ingested S106. E78-E82 and all C1-C77 content not in Supermemory. Agents searching `bay-tribune` for "A's dynasty" or "early Baylight discussions" find nothing.
 
 ---
 
@@ -93,8 +93,8 @@ editions/ (18 files, C78-C87)
          ├── Article Indexes ── article-index.json covers C1-C87
          │                      ARTICLE_INDEX_BY_POPID.md covers all citizens
          │
-         ├── Supermemory ────── godworld container has key articles from all eras
-         │   (godworld)         buildArchiveContext.js searches and finds history
+         ├── Supermemory ────── bay-tribune container has key articles from all eras
+         │   (bay-tribune)      buildArchiveContext.js searches and finds history
          │
          ├── Desk Agents ────── archive_context.md includes relevant historical coverage
          │                      "What happened before" is answerable
@@ -121,8 +121,8 @@ editions/ (18 files, C78-C87)
 
 ### Phase 3: Ingest Key Archive Articles to Supermemory
 
-**What:** Select the most important archive articles (dynasty coverage, civic milestones, neighborhood pieces) and ingest to `godworld`.
-**Why:** `buildArchiveContext.js` searches `godworld`. Agents building desk briefings can then find historical context.
+**What:** Select the most important archive articles (dynasty coverage, civic milestones, neighborhood pieces) and ingest to `bay-tribune`.
+**Why:** `buildArchiveContext.js` searches `bay-tribune`. Agents building desk briefings can then find historical context.
 **Not:** Don't ingest all 216 — curate the 30-50 most important pieces. The rest stay on disk for dashboard search.
 **Effort:** Medium — curation + ingestion.
 

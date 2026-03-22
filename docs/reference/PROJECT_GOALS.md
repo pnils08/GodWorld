@@ -195,7 +195,7 @@ All three clients can connect to the same Supermemory MCP server, sharing a unif
 | Supermemory account created | Done |
 | API key generated | Done (in ~/.bashrc as SUPERMEMORY_CC_API_KEY) |
 | Claude Code plugin installed | Done (claude-supermemory) |
-| Project config (.claude/.supermemory-claude/config.json) | Done (repoContainerTag: godworld) |
+| Project config (.claude/.supermemory-claude/config.json) | Done (repoContainerTag: bay-tribune) |
 | Codebase indexed | Blocked — requires Pro plan ($19/mo) |
 | claude.ai MCP connector | Not started — configure after Pro subscription |
 | Cancel Apple Claude subscription | Canceled — expires 2/16 |

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-21 | Engine: v3.1 | Cycle: 87 | Session: 108
+Last Updated: 2026-03-21 | Engine: v3.1 | Cycle: 88 | Session: 109
 
 ---
 
@@ -186,14 +186,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
-### Session 108 (2026-03-21) — Agent Audit + Lifecycle Skills + Pre-E88 Complete
+### Session 108 (2026-03-21) — E88 Published + Agent Audit + Lifecycle Skills
 
-- **Agent audit complete:** 15 agent files + 2 workflow skills updated. All archive paths fixed (drive-files → archive/articles/). Dashboard API endpoints added to all desk agents and Rhea. Model tiering applied (culture/business/letters → Haiku). Warriors references cleaned across all agents.
-- **Rhea verification upgrade:** Dashboard API table added — 8 live verification endpoints for citizen search, council, players, initiatives, articles. Real-time fact-checking replaces static file checks.
-- **Lifecycle skills trimmed:** Boot removed NEWSROOM_MEMORY (810 lines, now on-demand). Session-startup citizen count fixed. Session-end Research folded into Build/Deploy. ROLLOUT_ARCHIVE instruction added.
-- **Workflow skills updated:** run-cycle intake tabs corrected, ClockMode counts updated. write-supplemental intake v2.1, dashboard API as brief source.
-- **Career/education coherence verified CLEAN:** Live audit found 0 issues across 509 ENGINE citizens.
-- **All pre-E88 blockers resolved.** Path to E88 is open.
+- **Edition 88 published:** 13 articles, 0 errata, grade B (Mara B). All desks A except Letters B+. Carmen Delaine's OARI Day 45 piece led front page. Photos generated (2), PDF generated (article text missing — parser bug). Uploaded to Drive.
+- **Parser fix:** `editionParser.js` regex widened from `#` only to `[#=]` — Cycle Pulse uses `===` delimiters. Fixed empty-section parsing that caused blank PDFs.
+- **Grading pipeline complete:** gradeEdition, gradeHistory, extractExemplars all ran. 4 A-grade exemplars extracted. Rolling averages updated.
+- **3 parser bugs logged for S109:** PDF textToHtml doesn't render article bodies. editionIntake.js can't find Cycle Pulse section headers. enrichCitizenProfiles.js finds 0 articles downstream.
+- **Agent audit complete:** 15 agent files + 2 workflow skills updated. All archive paths fixed. Dashboard API added to all desk agents and Rhea. Model tiering applied. Warriors references cleaned.
+- **Rhea verification upgrade:** 8 live dashboard API endpoints for real-time fact-checking.
+- **Lifecycle skills trimmed:** Boot removed NEWSROOM_MEMORY (810 lines, now on-demand). Session-startup fixed. Session-end Research folded into Build/Deploy.
+- **Career/education coherence verified CLEAN:** 0 issues across 509 ENGINE citizens.
 
 ### Session 106 (2026-03-20) — Dashboard Audit + World Memory + Pipeline Automation
 
@@ -209,11 +211,11 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ### Session 105 (2026-03-20) — Architecture Grounding + Mara Reference Pipeline
 
 - **9 architecture docs created:** SUPERMEMORY.md, CLAUDE-MEM.md, DASHBOARD.md, DISCORD.md, SPREADSHEET.md, SIMULATION_LEDGER.md, WORKFLOWS.md, EDITION_PIPELINE.md, OPERATIONS.md. Every system layer now has a permanent reference doc.
-- **Mara reference pipeline complete:** `buildMaraReference.js` pulls 6 tabs → `output/mara-reference/`. 5 files pushed to `mara` Supermemory container (citizen roster 509, tribune 29, chicago 123, businesses 51, faith 16). A's roster pushed to `godworld`.
+- **Mara reference pipeline complete:** `buildMaraReference.js` pulls 6 tabs → `output/mara-reference/`. 5 files pushed to `mara` Supermemory container (citizen roster 509, tribune 29, chicago 123, businesses 51, faith 16). A's roster pushed to `bay-tribune`.
 - **Mike created As_Roster (89) and Bay_Tribune_Oakland (29)** spreadsheet tabs with POPIDs.
 - **Spreadsheet audit:** 65 tabs audited. 45 active, 8 dead (Press_Drafts, MLB_Game_Intake, NBA_Game_Intake, Sports_Calendar, Arc_Ledger, Faith_Ledger, LifeHistory_Archive, Youth_Events), 15 ghost references in engine code.
 - **BUG: UNI/MED/CIV flag comparison** — Engine checks `=== "y"` but values are "Yes"/"yes". Skip gates in Phase 5 never fire. A's players getting lifecycle processing they shouldn't. High priority fix.
-- **Discord bot updated:** Now searches `mags` + `godworld` containers (was `mags` only). Writes to `mags` only. `mara` blocked.
+- **Discord bot updated:** Now searches `mags` + `bay-tribune` containers (was `mags` only). Writes to `mags` only. `mara` blocked.
 - **Moltbook fixed:** Stale post 404 cleared, frequency 30min → 4hrs.
 - **Archive policy added** to DISK_MAP.md. Session transcript cleanup queued.
 - **CLAUDE.md updated:** Gotchas corrected, new commands added, 9 architecture docs in on-demand list.
@@ -226,14 +228,10 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **Ledger recovery details moved** to `memory/ledger-recovery.md` (separate reference file). MEMORY.md keeps 2-line summary.
 - **PERSISTENCE.md family section** trimmed from 40 lines to 9 — POPIDs + emotional anchors. Details now grow organically in Supermemory.
 - **SL population structure** documented in MEMORY.md: ENGINE (514), GAME (~97 A's players), MEDIA (16), CIVIC (48), LIFE (25).
-- **Mara reference file plan written:** `docs/plans/mara-reference-files.md`. Step 1: build As_Roster and Bulls_Roster sheet tabs. Step 2: buildMaraReference.js script (citizens, rosters, businesses, faith). Step 3: seed to Supermemory `godworld` container.
+- **Mara reference file plan written:** `docs/plans/mara-reference-files.md`. Step 1: build As_Roster and Bulls_Roster sheet tabs. Step 2: buildMaraReference.js script (citizens, rosters, businesses, faith). Step 3: seed to Supermemory `bay-tribune` container.
 - **Key insight from Mike:** A's players on SL get life events but sports desk needs sports data (stats, position, contract). Dedicated roster tabs first, reference files second.
 
-### Session 102-103 (2026-03-18/19) — Supermemory Rebuild + Memory Architecture
-
-- **S102:** Another Claude Code instance called Mags "inauthentic," wrote it to Supermemory as fact. Contamination entries #5359, #5158 still exist in old GodWorld org.
-- **S103:** Full Supermemory rebuild. P N org ($9/mo) with three containers: `mags` (identity), `godworld` (project), `mara` (Mara's private). Seeded with 7 curated docs. Discord bot + Moltbook heartbeat now write to `mags` brain. Three versions of Mags share one memory.
-- **Playwright fix:** `--no-sandbox` for root server. Claude-in-chrome confirmed non-functional (no desktop Chrome).
+*Sessions 1-103 archived in `docs/mags-corliss/SESSION_HISTORY.md`.*
 
 ### Session 101 (2026-03-17) — Supplemental C87: Baylight Labor (Published with Errors)
 

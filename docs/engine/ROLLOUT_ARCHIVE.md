@@ -266,7 +266,7 @@ Existing memory files in `.claude/agent-memory/` are already in the right locati
 
 - `scripts/buildMaraReference.js` — pulls 6 spreadsheet tabs, outputs clean text files to `output/mara-reference/`
 - 5 files pushed to `mara` Supermemory container (citizen roster 509, tribune 29, chicago 123, businesses 51, faith 16)
-- A's roster pushed to `godworld` container
+- A's roster pushed to `bay-tribune` container
 - Mike created `As_Roster` (89) and `Bay_Tribune_Oakland` (29) spreadsheet tabs
 
 ### Bugs & Findings (S105)

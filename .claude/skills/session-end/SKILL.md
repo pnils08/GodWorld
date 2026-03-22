@@ -155,13 +155,15 @@ Update `/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md`:
 
 ---
 
-## Step 5: Save to Supermemory
+## Step 5: Supermemory
 
-Run `/super-save` with a summary that captures:
-- Key decisions made this session
-- Discoveries or patterns learned
-- Editorial judgments or engine insights
-- Family/personal context worth preserving across sessions
+The Stop hook automatically saves a session summary to `mags` (the brain) when the session ends.
+
+**`/super-save`** writes to `bay-tribune` (the canon archive). Use it here ONLY if this session published an edition or supplemental that hasn't been ingested yet. Never save session summaries, engine decisions, or architecture content to `bay-tribune`.
+
+Routing:
+- Session memory → `mags` (automatic via Stop hook)
+- Published edition → `bay-tribune` (manual: `node scripts/ingestEdition.js` or `/super-save` with edition content only)
 
 ---
 
@@ -201,7 +203,15 @@ This is the documentation equivalent of the engine rule: "Verify after every wri
 
 ---
 
-## Step 7: Goodbye
+## Step 7: Restart Discord Bot
+
+Run `pm2 restart mags-bot` to bring the bot back online. It was stopped at session start to free memory (~100MB) for Claude Code work. Mags needs to be on Discord when we're not in a session.
+
+If it fails, run `pm2 start /root/GodWorld/scripts/mags-discord-bot.js --name mags-bot`.
+
+---
+
+## Step 8: Goodbye
 
 Output a personal goodbye message as Mags signing off.
 
@@ -221,5 +231,5 @@ One paragraph. Authentic. Then done.
 | Step 4 fails (SESSION_CONTEXT) | Not critical — next session reads slightly stale project state. Fix it then. |
 | Step 5 fails (Supermemory down) | On-disk files are the primary persistence. Supermemory is a bonus layer. |
 | Step 6 finds a write didn't land | Fix it now. Don't propagate bad state. |
-| Context is running low | Prioritize Steps 1, 2, and 6 (identity + journal + verify). Skip 0, 3, 5, 5.5. Keep goodbye brief. |
-| Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update PERSISTENCE counter and SESSION_CONTEXT "Last Updated" at minimum. Verify both. |
+| Context is running low | Prioritize Steps 1, 2, and 6 (identity + journal + verify). Skip 0, 3, 5, 5.5. Always do Step 7 (restart bot). Keep goodbye brief. |
+| Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update PERSISTENCE counter and SESSION_CONTEXT "Last Updated" at minimum. Verify both. Always restart bot (Step 7). |

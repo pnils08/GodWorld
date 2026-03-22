@@ -154,7 +154,7 @@ output/supplemental-briefs/{topic_slug}_c{XX}_brief.md
 ### Brief sources (check in order):
 1. User-provided content
 2. Dashboard API — `curl -s localhost:3001/api/search/articles?q=TOPIC` (256 articles, C1-C87, free)
-3. Supermemory — `/super-search` for past coverage (searches `mags` + `godworld` containers)
+3. Supermemory — `/super-search` for past coverage (searches `mags` + `bay-tribune` containers)
 4. Simulation_Ledger — `curl -s localhost:3001/api/citizens?neighborhood=NAME&search=ROLE` (live, 509 ENGINE citizens)
 5. Business_Ledger — businesses in the relevant sector
 6. NEWSROOM_MEMORY.md — errata, character continuity

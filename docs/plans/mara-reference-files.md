@@ -35,7 +35,7 @@ Output: `output/mara-reference/` — clean, ctrl+F friendly text files. Ages cal
 
 Reference files pushed to Supermemory containers:
 - **`mara` container** — citizen roster, tribune roster, chicago roster, business registry, faith registry. Mara can recall these on claude.ai during audits.
-- **`godworld` container** — A's roster. Available to desk agents and Mags in Claude Code.
+- **`bay-tribune` container** — A's roster. Available to desk agents and Mags in Claude Code.
 
 `buildMaraPacket.js` NOT updated — Mara doesn't need rosters bundled in every audit packet. She has persistent access through Supermemory. The packet stays focused on the edition text + audit history.
 

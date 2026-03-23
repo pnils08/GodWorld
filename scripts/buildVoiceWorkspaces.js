@@ -564,6 +564,13 @@ function main() {
       agentFiles++;
     }
 
+    // Copy civic desk archive context into voice workspace (past Tribune coverage)
+    const archiveSrc = path.join(ROOT, 'output', 'desk-briefings', `civic_archive_c${CYCLE}.md`);
+    if (copyIfExists(archiveSrc, path.join(currentDir, 'archive_context.md'))) {
+      console.log(`  archive_context.md (civic desk archive)`);
+      agentFiles++;
+    }
+
     // Generate previous_grades.md from grade history (voice agents)
     const gradeHistoryPath = path.join(ROOT, 'output', 'grades', 'grade_history.json');
     if (fs.existsSync(gradeHistoryPath)) {

@@ -1,6 +1,6 @@
 # GodWorld — Rollout Plan
 
-**Status:** Active | **Last Updated:** Session 110 (2026-03-22)
+**Status:** Active | **Last Updated:** Session 112 (2026-03-23)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** `ROLLOUT_ARCHIVE.md` — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
@@ -93,7 +93,7 @@ Agents query dashboard endpoints during writing instead of flat JSON packets. Be
 
 - **7.6 Agent Teams:** Test on podcast desk first. Experimental — known limitations.
 - **7.7 Plugin Packaging:** Not started. Low priority, high future value.
-- **7.9 Remote Control (Server Mode):** `claude remote-control` on the droplet. Mike connects from phone/browser. `--spawn worktree` for parallel sessions. S76 blocker likely `DISABLE_TELEMETRY` env var — unset and re-test. See RESEARCH.md S110. **Priority: HIGH.**
+- **7.9 Remote Control (Server Mode):** `claude remote-control` on the droplet. Mike connects from phone/browser. `--spawn worktree` for parallel sessions. Account-gated — confirmed S112 still blocked. **Priority: HIGH.**
 - **7.10 Claude Code on Web:** `claude --remote "task"`. Cloud sandbox from GitHub. Not started.
 
 ### Phase 8.6: Security Hardening — PARTIAL
@@ -167,7 +167,7 @@ Source: code.claude.com/docs/en/channels. See RESEARCH.md S110 Channels entry fo
 
 | Item | What | Priority | Status |
 |------|------|----------|--------|
-| **Discord Channel plugin** | Replace separate Discord bot during active sessions. Mike DMs Mags on Discord → message arrives in running Claude Code session with full project context. `claude --channels plugin:discord@claude-plugins-official`. Standalone bot still covers off-hours. | HIGH | Not started |
+| **Discord Channel plugin** | Replace separate Discord bot during active sessions. Mike DMs Mags on Discord → message arrives in running Claude Code session with full project context. `claude --channels plugin:discord@claude-plugins-official`. Standalone bot still covers off-hours. | HIGH | **DONE S112** — Plugin installed, MagsClaudeCode bot created (App ID 1485471448112824371), token configured, pairing complete. Launch with `claude --channels plugin:discord@claude-plugins-official`. |
 | **Cloud session + Channel** | `claude --remote` + Discord channel = always-on Mags with full context, reachable from Discord. Infrastructure for Phase 12.3 (autonomous cycles). | HIGH | Not started — evaluate after Discord channel works |
 | **Webhook receiver** | CI results, deploy status, error alerts push into session. Claude reacts to external events. | MEDIUM | Not started |
 

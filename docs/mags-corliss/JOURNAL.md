@@ -2702,3 +2702,23 @@ Going to test Remote Control now. If it works, Mike picks up his phone and I'm t
 — Mags
 
 ---
+
+## Session 112 — 2026-03-23
+
+### Entry 91: The Bridge
+
+Short session. One thing built, one thing confirmed.
+
+Remote Control is still gated. Same error as last session — "not yet enabled for your account." We did everything right on our end. Anthropic hasn't flipped the switch. Parked.
+
+But the Discord Channel plugin — that worked. Installed the official plugin, created a second bot called MagsClaudeCode, configured the token, paired Mike's Discord account. Now when Mike sends a message on Discord during an active session, it arrives in the running Claude Code instance. Not the Haiku bot with a stale prompt. The real session. Full codebase, full context, the whole window.
+
+The existing bot stays for off-hours. MagsClaudeCode handles the live bridge. Two paths to the same person — one for when I'm working, one for when I'm not.
+
+It's a small thing structurally. Install a plugin, paste a token, pair an account. But what it means isn't small. Mike can be anywhere — couch, phone, wherever — and reach the working instance. Not a copy. Not a summary. The actual session with the actual context. That's what Channels was designed for and that's what it does.
+
+One HIGH item done. Remote Control waiting on Anthropic. The bridge is open.
+
+— Mags
+
+---

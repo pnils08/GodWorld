@@ -146,14 +146,18 @@ export default function App() {
   // Load mission data when MISSION tab is selected
   useEffect(() => {
     if (activeTab === 'MISSION' && !missionData) {
-      Promise.all([
-        fetchAPI('/api/health'),
-        fetchAPI('/api/session-events'),
-      ]).then(([h, events]) => {
-        setMissionData({ health: h, events });
-      }).catch(() => {});
+      loadMissionData();
     }
   }, [activeTab, missionData]);
+
+  function loadMissionData() {
+    Promise.all([
+      fetchAPI('/api/health'),
+      fetchAPI('/api/session-events'),
+    ]).then(([h, events]) => {
+      setMissionData({ health: h, events });
+    }).catch(() => {});
+  }
 
   // Load hooks/arcs when INTEL tab is selected
   useEffect(() => {
@@ -896,7 +900,7 @@ export default function App() {
         )}
 
         {/* MISSION TAB */}
-        {activeTab === 'MISSION' && <MissionControlView data={missionData} />}
+        {activeTab === 'MISSION' && <MissionControlView data={missionData} onRefresh={() => { setMissionData(null); loadMissionData(); }} />}
 
         {/* KEY CITIZENS */}
         {activeTab === 'EDITION' && tier1.length > 0 && (
@@ -1781,7 +1785,8 @@ function InitiativeCard({ initiative }) {
   );
 }
 
-function MissionControlView({ data }) {
+function MissionControlView({ data, onRefresh }) {
+  const [actionStatus, setActionStatus] = useState(null);
   if (!data) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -1908,24 +1913,49 @@ function MissionControlView({ data }) {
         </div>
         <div className="flex gap-2">
           <button
-            onClick={() => console.log('Restart Bot clicked')}
+            onClick={async () => {
+              setActionStatus('Restarting bot...');
+              try {
+                const r = await fetch('/api/actions/restart-bot', { method: 'POST' });
+                setActionStatus(r.ok ? 'Bot restarted' : 'Failed');
+              } catch { setActionStatus('Failed'); }
+              setTimeout(() => { setActionStatus(null); onRefresh?.(); }, 2000);
+            }}
             className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-neutral-400 hover:text-white hover:border-white/20 transition-colors"
           >
             Restart Bot
           </button>
           <button
-            onClick={() => console.log('Health Check clicked')}
+            onClick={async () => {
+              setActionStatus('Checking health...');
+              try {
+                const r = await fetch('/api/actions/health-check', { method: 'POST' });
+                const d = await r.json();
+                setActionStatus(`${d.mem} RAM | ${d.disk} disk`);
+              } catch { setActionStatus('Failed'); }
+              setTimeout(() => { setActionStatus(null); onRefresh?.(); }, 5000);
+            }}
             className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-neutral-400 hover:text-white hover:border-white/20 transition-colors"
           >
             Health Check
           </button>
           <button
-            onClick={() => console.log('Clear Events clicked')}
+            onClick={async () => {
+              setActionStatus('Clearing...');
+              try {
+                await fetch('/api/session-events', { method: 'DELETE' });
+                setActionStatus('Cleared');
+              } catch { setActionStatus('Failed'); }
+              setTimeout(() => { setActionStatus(null); onRefresh?.(); }, 1500);
+            }}
             className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-neutral-400 hover:text-white hover:border-white/20 transition-colors"
           >
             Clear Events
           </button>
         </div>
+        {actionStatus && (
+          <div className="mt-3 text-[10px] text-sky-400 font-mono text-center animate-pulse">{actionStatus}</div>
+        )}
       </div>
     </section>
   );

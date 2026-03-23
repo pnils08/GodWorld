@@ -46,7 +46,7 @@ Last audited: Session 113 (2026-03-23)
 
 ---
 
-## API Endpoints (34 total)
+## API Endpoints (37 total)
 
 ### System
 | Endpoint | Data Source | Returns | Health |
@@ -56,6 +56,9 @@ Last audited: Session 113 (2026-03-23)
 | `POST /api/session-events` | Hook input (localhost only) | Accepts session events from Claude Code hooks. No auth required. | Working (S113) |
 | `GET /api/session-events` | In-memory ring buffer | Session event history. Filter: `?since=`, `?type=`. Auth required. | Working (S113) |
 | `POST /api/webhooks` | External services | Accepts webhook events. Requires `x-webhook-secret` header. Secret in `.env`. | Working (S113) |
+| `DELETE /api/session-events` | — | Clears all session events (memory + disk). Auth required. | Working (S113) |
+| `POST /api/actions/restart-bot` | PM2 | Restarts `mags-bot` process. Auth required. | Working (S113) |
+| `POST /api/actions/health-check` | System | Returns disk, RAM, uptime, PM2 process status. Auth required. | Working (S113) |
 
 ### Citizens & People
 | Endpoint | Data Source | Returns | Health |
@@ -346,7 +349,8 @@ The frontend is a visualization layer. The backend API is the primary value.
 
 | File | Purpose |
 |------|---------|
-| `dashboard/server.js` | Express API (~2,300 lines, 34 endpoints) |
+| `dashboard/server.js` | Express API (~2,350 lines, 37 endpoints) |
+| `output/session-events.jsonl` | File-backed session event history (persists across restarts) |
 | `dashboard/src/` | React frontend source (Vite) |
 | `dashboard/dist/` | Built frontend (served as static) |
 | `dashboard/index.html` | Entry point |

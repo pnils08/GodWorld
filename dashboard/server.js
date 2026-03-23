@@ -1,9 +1,10 @@
 import 'dotenv/config';
 import express from 'express';
-import { readFileSync, existsSync, readdirSync } from 'fs';
+import { readFileSync, existsSync, readdirSync, appendFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
+import { execSync } from 'child_process';
 
 const require = createRequire(import.meta.url);
 
@@ -2234,10 +2235,22 @@ app.get('/api/newsroom', (req, res) => {
   });
 });
 
-// --- Session Events + Webhook Receiver ---
-const sessionEvents = [];
-const MAX_SESSION_EVENTS = 200;
+// --- Session Events + Webhook Receiver (file-backed) ---
+const SESSION_EVENTS_FILE = join(ROOT, 'output', 'session-events.jsonl');
+const MAX_SESSION_EVENTS = 500;
 const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || '';
+
+// Load persisted events on startup
+let sessionEvents = [];
+try {
+  if (existsSync(SESSION_EVENTS_FILE)) {
+    const lines = readFileSync(SESSION_EVENTS_FILE, 'utf-8').split('\n').filter(Boolean);
+    sessionEvents = lines.slice(-MAX_SESSION_EVENTS).map(l => { try { return JSON.parse(l); } catch { return null; } }).filter(Boolean);
+    console.log(`Dashboard: Loaded ${sessionEvents.length} session events from disk`);
+  }
+} catch (e) {
+  console.warn('Dashboard: Could not load session events:', e.message);
+}
 
 function pushEvent(event) {
   event.receivedAt = new Date().toISOString();
@@ -2245,6 +2258,8 @@ function pushEvent(event) {
   if (sessionEvents.length > MAX_SESSION_EVENTS) {
     sessionEvents.splice(0, sessionEvents.length - MAX_SESSION_EVENTS);
   }
+  // Append to disk (fire-and-forget)
+  try { appendFileSync(SESSION_EVENTS_FILE, JSON.stringify(event) + '\n'); } catch {}
 }
 
 // Internal: hooks POST from localhost (no auth needed)
@@ -2278,6 +2293,40 @@ app.get('/api/session-events', (req, res) => {
   if (since) results = results.filter(e => e.receivedAt > since);
   if (type) results = results.filter(e => e.type === type);
   res.json(results);
+});
+
+app.delete('/api/session-events', (req, res) => {
+  sessionEvents.length = 0;
+  try { writeFileSync(SESSION_EVENTS_FILE, ''); } catch {}
+  res.json({ ok: true, cleared: true });
+});
+
+// --- Quick Actions ---
+
+app.post('/api/actions/restart-bot', (req, res) => {
+  try {
+    execSync('pm2 restart mags-bot --silent 2>/dev/null', { timeout: 10000 });
+    pushEvent({ type: 'action', action: 'restart-bot', status: 'ok' });
+    res.json({ ok: true, action: 'restart-bot' });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
+});
+
+app.post('/api/actions/health-check', (req, res) => {
+  try {
+    const disk = execSync("df -h / | tail -1 | awk '{print $3\"/\"$2\" (\"$5\")\"}'", { timeout: 5000 }).toString().trim();
+    const mem = execSync("free -h | grep Mem | awk '{print $3\"/\"$2}'", { timeout: 5000 }).toString().trim();
+    const uptime = execSync('uptime -p', { timeout: 5000 }).toString().trim();
+    const pm2 = execSync('pm2 jlist 2>/dev/null', { timeout: 5000 }).toString().trim();
+    let processes = [];
+    try { processes = JSON.parse(pm2).map(p => ({ name: p.name, status: p.pm2_env.status, uptime: p.pm2_env.pm_uptime, restarts: p.pm2_env.restart_time })); } catch {}
+    const result = { disk, mem, uptime, processes, timestamp: new Date().toISOString() };
+    pushEvent({ type: 'action', action: 'health-check', status: 'ok', ...result });
+    res.json({ ok: true, ...result });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 // Serve static React build in production

@@ -6,6 +6,36 @@ Resolved items get deleted, not struck through.
 
 ---
 
+## World Color Gaps (S113 Canon Audit)
+
+Full audit read all 11 editions, 7 supplementals, 40+ archive articles. Ranked by impact on world depth.
+
+**Absent topics:**
+1. **Education** — zero coverage. No named schools, teachers, students. Angela Reyes never published.
+2. **Youth & families** — kids as background only, never subjects
+3. **Parks & outdoor life** — Lake Merritt is backdrop, no other parks exist in canon
+4. **Performing arts** — all arts = galleries/murals. No Fox Theater, Paramount, theater companies
+5. **Daily life rhythm** — no commutes, no mornings, no BART-as-experience
+
+**Absent neighborhoods:** Grand Lake, Laurel, Eastlake, Dimond, Cleveland Heights
+**Thin neighborhoods:** Adams Point, Rockridge, Piedmont Ave, Montclair, East Oakland, Chinatown
+
+**Underrepresented demographics:** children/teens, college students, tech workers in daily life, immigrants (non-English voices), seniors 70+, LGBTQ+, unhoused
+
+**Never-published reporters:** Angela Reyes, Rachel Torres, Reed Thompson, Farrah Del Rio, Jax Caldera, Simon Leary
+**Overworked:** Carmen Delaine (every edition), Maria Keen (10 of 11)
+
+**Dropped storylines to pick up:** Lake Merritt inflow strain, Marcus Osei hospitalization, Mei Chen photography project, Laurel/Uptown health clusters
+
+**Supplemental pipeline priority:**
+1. Education (Angela Reyes) — NEXT
+2. Absent neighborhoods walk (Dimond, Grand Lake, Laurel)
+3. Parks & outdoor Oakland (Noah Tan)
+4. Performing arts / music venues (Kai Marston)
+5. Daily life / commuting (Sharon Okafor)
+
+---
+
 ## Active Story Tracking
 
 - **Baylight September 15 deliverables** — 5 deliverables due: mobilization timeline, anchor tenant disclosure, TIF language, remediation bond, workforce agreement. Ramos says on schedule. TIF and remediation bond still unsigned as of E85. Report each individually after the deadline.

@@ -20,6 +20,8 @@
 - ~~**UPGRADE: Structured critique in gradeEdition.js**~~ — **DONE S113.** 3-signal feedback (reasoning, strengths/weaknesses, directive) per desk and reporter. Flows through `grades_c{XX}.json` → `buildDeskFolders.js` → `previous_grades.md` → agents read at boot. Based on Reagent + RLCF research.
 - ~~**FEATURE: RD diversity injection for agents**~~ — **DONE S113.** 20 creative lenses for desk agents (buildDeskFolders.js), 10 political lenses for voice agents (buildVoiceWorkspaces.js). Random per run. Based on Harvard Recoding-Decoding (arxiv 2603.19519).
 
+- **FIX: Citizen freshness weighting in buildDeskPackets.js** — 370 of 509 ENGINE citizens (73%) have never appeared in any edition. Desk packets keep serving the same 139 names. Need freshness scoring: cross-reference `output/popid-article-index.json` at packet build time, weight unused citizens higher in candidate lists. Combined with RD creative lenses, this should push agents toward the untouched 73%.
+
 ### Open — Architecture & Production
 
 - ~~**DESIGN: Agent knowledge separation**~~ — **DONE S113 (audit).** Already correctly configured: `.claude/.supermemory-claude/config.json` sets `repoContainerTag: "bay-tribune"`, `personalContainerTag: "mags"`. Desk agents don't call supermemory directly — they use local workspaces. `/super-search` searches `bay-tribune` only. Discord bot reads both (intentional). Fixed one stale doc reference in `/write-supplemental`.

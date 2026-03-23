@@ -31,6 +31,7 @@ const MARA_DIR = path.join(ROOT, 'output');
 const AGENTS = [
   {
     name: 'civic-office-mayor', shortName: 'mayor', voiceFile: 'mayor',
+    focusInitiatives: ['oari', 'stabilization_fund', 'baylight', 'health_center', 'transit_hub'],
     domain: {
       label: 'Mayor Avery Santana',
       crime: 'summary', civicLoad: true, neighborhoodEconomies: true,
@@ -40,6 +41,7 @@ const AGENTS = [
   },
   {
     name: 'civic-office-opp-faction', shortName: 'opp_faction', voiceFile: 'opp_faction',
+    focusInitiatives: ['oari', 'stabilization_fund', 'health_center'],
     domain: {
       label: 'OPP Faction — Janae Rivers',
       civicLoad: true, neighborhoodEconomies: 'struggling',
@@ -49,6 +51,7 @@ const AGENTS = [
   },
   {
     name: 'civic-office-crc-faction', shortName: 'crc_faction', voiceFile: 'crc_faction',
+    focusInitiatives: ['baylight', 'transit_hub'],
     domain: {
       label: 'CRC Faction — Warren Ashford',
       civicLoad: true, neighborhoodEconomies: true,
@@ -58,6 +61,7 @@ const AGENTS = [
   },
   {
     name: 'civic-office-ind-swing', shortName: 'ind_swing', voiceFile: 'ind_swing',
+    focusInitiatives: ['oari', 'stabilization_fund', 'baylight', 'health_center', 'transit_hub'],
     domain: {
       label: 'Independents — Ramon Vega (D4), Leonard Tran (D2)',
       crime: 'summary', civicLoad: true, neighborhoodEconomies: true,
@@ -67,6 +71,7 @@ const AGENTS = [
   },
   {
     name: 'civic-office-police-chief', shortName: 'police_chief', voiceFile: 'police_chief',
+    focusInitiatives: ['oari'],
     domain: {
       label: 'Police Chief Rafael Montez',
       crime: 'full', eveningSafety: true,
@@ -75,6 +80,7 @@ const AGENTS = [
   },
   {
     name: 'civic-office-baylight-authority', shortName: 'baylight_authority', voiceFile: 'baylight_authority',
+    focusInitiatives: ['baylight'],
     domain: {
       label: 'Baylight Authority Director Keisha Ramos',
       neighborhoodEconomies: ['Jack London', 'Downtown'],
@@ -84,6 +90,7 @@ const AGENTS = [
   },
   {
     name: 'civic-office-district-attorney', shortName: 'district_attorney', voiceFile: 'district_attorney',
+    focusInitiatives: ['oari'],
     domain: {
       label: 'District Attorney Clarissa Dane',
       crime: 'full', civicLoad: true,
@@ -439,6 +446,52 @@ function generateVoiceBriefing(agent, cycle, baseContext) {
       md += '\n';
     }
     md += '\n';
+  }
+
+  // Inject initiative detail for this agent's focus areas
+  if (agent.focusInitiatives && agent.focusInitiatives.length > 0) {
+    const INIT_NAMES = {
+      oari: 'Oakland Alternative Response Initiative (OARI)',
+      stabilization_fund: 'West Oakland Stabilization Fund',
+      baylight: 'Baylight District',
+      health_center: 'Temescal Community Health Center',
+      transit_hub: 'Fruitvale Transit Hub Phase II'
+    };
+    md += `## Your Focus Initiatives — Operational Detail\n\n`;
+    for (const initKey of agent.focusInitiatives) {
+      const packetFile = path.join(INIT_PACKETS_DIR, `${initKey.replace('_', '-')}_c${cycle}.json`);
+      // Try alternate naming: oari_c88 vs oari-c88
+      const altFile = path.join(INIT_PACKETS_DIR, `${initKey}_c${cycle}.json`);
+      const packet = readJsonIfExists(packetFile) || readJsonIfExists(altFile);
+      if (packet && packet.initiative) {
+        const init = packet.initiative;
+        md += `### ${INIT_NAMES[initKey] || init.name || initKey}\n`;
+        md += `- **Status:** ${init.status || 'unknown'}`;
+        if (init.budget) md += ` | **Budget:** ${init.budget}`;
+        if (init.outcome) md += ` | **Vote:** ${init.outcome} (${init.voteRequirement || ''})`;
+        md += '\n';
+        if (init.implementationPhase) md += `- **Implementation Phase:** ${init.implementationPhase}\n`;
+        if (init.milestoneNotes) md += `- **Milestones:** ${init.milestoneNotes}\n`;
+        if (init.nextScheduledAction) md += `- **Next Action:** ${init.nextScheduledAction}${init.nextActionCycle ? ' (C' + init.nextActionCycle + ')' : ''}\n`;
+        if (init.consequences) md += `- **Status Note:** ${init.consequences}\n`;
+        if (init.implementationClock) md += `- **Implementation Clock:** ${init.implementationClock}\n`;
+        if (init.pilotDistricts) md += `- **Pilot Districts:** ${init.pilotDistricts}\n`;
+        if (init.affectedCitizens) md += `- **Affected Citizens:** ${init.affectedCitizens}\n`;
+        if (init.swingVoter) md += `- **Swing Voter:** ${init.swingVoter}\n`;
+        if (init.leadFaction) md += `- **Lead:** ${init.leadFaction} | **Opposition:** ${init.oppositionFaction || '—'}\n`;
+        if (init.mayoralAction) md += `- **Mayoral Action:** ${init.mayoralAction} (C${init.mayoralActionCycle || '?'})\n`;
+        md += '\n';
+      }
+    }
+    // Surface previous cycle documents for context
+    if (baseContext && baseContext.canon && baseContext.canon.initiatives) {
+      for (const init of baseContext.canon.initiatives) {
+        const key = (init.id || '').toLowerCase().replace('init-002', 'oari').replace('init-001', 'stabilization_fund').replace('init-003', 'health_center').replace('init-004', 'baylight').replace('init-005', 'transit_hub');
+        if (agent.focusInitiatives.includes(key) && init.notes) {
+          md += `> **${init.name || init.initiative}** — ${init.notes}\n\n`;
+        }
+      }
+    }
   }
 
   const maraPath = path.join(MARA_DIR, `mara_directive_c${cycle - 1}.txt`);

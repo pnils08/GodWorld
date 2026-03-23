@@ -19,6 +19,7 @@
 ```bash
 node scripts/buildDeskPackets.js          # Step 6: desk input data
 node scripts/buildDeskFolders.js [cycle]  # Step 7: per-desk workspaces
+node scripts/buildDecisionQueue.js [cycle]  # Optional: refresh voice agent decision queues before edition
 node scripts/generate-edition-photos.js   # Step 15: AI photos
 node scripts/generate-edition-pdf.js      # Step 16: tabloid PDF
 node scripts/saveToDrive.js --type edition # Step 17: Drive upload
@@ -127,6 +128,7 @@ node scripts/buildDeskPackets.js   # Verify data pipeline works
 node scripts/buildDeskPackets.js   # Build desk input from new cycle data
 node scripts/buildDeskFolders.js [cycle]
 node scripts/buildVoiceWorkspaces.js [cycle]
+node scripts/buildDecisionQueue.js [cycle]  # Optional: pending decisions for voice agents
 node scripts/buildInitiativeWorkspaces.js [cycle]
 node scripts/buildInitiativePackets.js [cycle]
 node scripts/buildCivicVoicePackets.js [cycle]

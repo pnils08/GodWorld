@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 88 — 2026-03-21 (S108)**
+**Last Updated: Supplemental C88 Education — 2026-03-23 (S113)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -30,6 +30,26 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Supplemental C88 — Education "First Week" (Grade: A, Mara: A)
+
+3 articles. Angela Reyes (2), Jordan Velez (1). 0 errata. First education coverage in Bay Tribune history. 10 new citizens, 9 existing (all fresh — zero repeats).
+
+**New Canon Established:**
+- 4 OUSD schools: Fruitvale Bilingual Academy, Allen Temple Academy (East Oakland), Claremont Hills Elementary (Rockridge), OUASA (Downtown/KONO)
+- Fruitvale Recreation Center (after-school, Dario Vega director)
+- Gridiron Analytics data literacy program at OUASA (38 enrolled, 22 waitlisted)
+- Oakmesh sensors in school buildings, Tenth Street Digital parent app at 5 schools
+- East Oakland: first canon coverage. Allen Temple Academy is the anchor.
+
+**Reporter Notes:**
+- Angela Reyes: established as education desk. Strong debut — teacher's eye for detail, classroom-specific, earned the personal closing. The gradebook detail is hers. Don't let another reporter use it.
+- Jordan Velez: clean business sidebar. Followed the money without selling the tech.
+- Theo Banks appeared in both Angela articles — rest him next edition.
+
+**Editorial Note:** Originally named "Cesar Chavez Bilingual Academy" — renamed to "Fruitvale Bilingual Academy" after March 2026 sexual abuse allegations. Contaminated Drive copies and Supermemory entries cleaned. In 2041 Oakland, the name would have been changed 15 years ago.
+
+---
 
 ### Edition 88 — Cycle Pulse (Grade: B, Mara: B)
 

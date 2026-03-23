@@ -75,6 +75,7 @@ export default function App() {
   const [citizenDetail, setCitizenDetail] = useState(null);
   const [coverageTrail, setCoverageTrail] = useState(null);
   const [missionData, setMissionData] = useState(null);
+  const [supplementals, setSupplementals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -82,13 +83,14 @@ export default function App() {
   useEffect(() => {
     async function loadAll() {
       try {
-        const [h, e, c, n, cz, iv] = await Promise.all([
+        const [h, e, c, n, cz, iv, eds] = await Promise.all([
           fetchAPI('/api/health'),
           fetchAPI('/api/edition/latest'),
           fetchAPI('/api/council'),
           fetchAPI('/api/neighborhoods'),
           fetchAPI('/api/citizens?tier=1&limit=50'),
           fetchAPI('/api/initiatives'),
+          fetchAPI('/api/editions'),
         ]);
         setHealth(h);
         setEdition(e);
@@ -96,6 +98,7 @@ export default function App() {
         setNeighborhoods(n);
         setCitizens(cz);
         setInitiatives(iv);
+        setSupplementals((eds?.editions || []).filter(ed => ed.isSupplemental).sort((a, b) => (b.cycle || 0) - (a.cycle || 0)));
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -482,6 +485,31 @@ export default function App() {
             {articles.map((article, i) => (
               <ArticleCard key={i} article={article} isFirst={i === 0} />
             ))}
+
+            {/* SUPPLEMENTALS */}
+            {supplementals.length > 0 && (
+              <div className="mt-10">
+                <div className="flex items-center gap-3 mb-4">
+                  <BookOpen size={16} className="text-amber-500" />
+                  <h4 className="text-[10px] font-black uppercase tracking-widest text-amber-500">Supplemental Editions</h4>
+                  <span className="text-[9px] text-neutral-500 font-mono">{supplementals.length}</span>
+                </div>
+                <div className="space-y-3">
+                  {supplementals.map((s, i) => {
+                    const label = s.file.replace('supplemental_', '').replace(/\.txt$/, '').replace(/_c\d+/, '').replace(/_/g, ' ');
+                    return (
+                      <div key={i} className="p-4 bg-neutral-900/60 rounded-xl border border-amber-500/10 hover:border-amber-500/30 transition-colors">
+                        <div className="flex justify-between items-start">
+                          <div className="text-sm font-bold capitalize">{label}</div>
+                          <span className="text-[8px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 font-mono border border-amber-500/20">C{s.cycle}</span>
+                        </div>
+                        <div className="text-[9px] text-neutral-500 mt-1 font-mono">{s.file}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
           </section>
         )}
 

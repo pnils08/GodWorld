@@ -11,7 +11,7 @@
 
 ### Open — Dashboard & Data Quality
 
-- **DESIGN: Supplemental display on frontend** — 7 supplementals detected with cycles. Need visual placement on Edition tab or filter view.
+- ~~**DESIGN: Supplemental display on frontend**~~ — **DONE S113.** Amber-themed supplemental cards on Edition tab below articles. Shows title, cycle badge, filename. 7 supplementals rendered from `/api/editions` `isSupplemental` flag.
 - **DESIGN: Chicago dashboard tab** — 123 citizens, 2 reporters, Bulls data, Paulson GM. Currently buried in Sports tab. See `docs/DASHBOARD.md`.
 - ~~**FIX: Rebuild POPID article index**~~ — **DONE S113.** `scripts/buildPopidArticleIndex.js` created. Cross-references 675 citizens × 234 editions. 241 citizens indexed, 1,795 refs. Run with `--write` to update. Old index: 176 citizens from Feb 5.
 - **CLEANUP: Dead spreadsheet tabs** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`.

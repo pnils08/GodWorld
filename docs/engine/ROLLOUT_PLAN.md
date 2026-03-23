@@ -17,6 +17,8 @@
 - **CLEANUP: Dead spreadsheet tabs** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`.
 - ~~**FIX: Press_Drafts ghost references**~~ — **DONE S113.** Removed Press_Drafts write from `mediaRoomIntake.js`, removed sheet creation/upgrade calls, cleaned comments in `applyStorySeeds.js`. Requires `clasp push` to deploy.
 - **FIX: gradeEdition.js supplemental support** — Article parser, errata logging, desk mapping all need supplemental awareness.
+- **UPGRADE: Structured critique in gradeEdition.js** — Replace letter-grade + one-line errata with 3-signal feedback: reasoning trace (why), focused critique (where it breaks down), score. A judge that reads two articles and explains which is stronger produces richer exemplar feedback than A/B/C/D. Based on Reagent (arxiv 2601.22154) + RLCF (arxiv 2603.14473) research — both validate this pattern. See `docs/RESEARCH.md` S113 entries.
+- **FEATURE: RD diversity injection for agents** — Recoding-Decoding (Harvard, arxiv 2603.19519) injects random priming into LLM prompts to force exploration of tail probability paths. 161% diversity increase, 0.99+ relevance maintained. 10-line wrapper, no model access needed. Three applications: (1) desk agent citizen/angle diversity via `buildDeskFolders.js` briefing injection, (2) supplemental topic brainstorm variety, (3) voice agent political decision unpredictability via `buildVoiceWorkspaces.js`. See `docs/RESEARCH.md` S113 QUEST entry for full algorithm and implementation notes.
 
 ### Open — Architecture & Production
 
@@ -138,6 +140,7 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 ### Phase 25: Storage Strategy — NOT STARTED
 
 Deduplicate across 4 layers (disk, Drive, GitHub, Supermemory). Quick wins done S85. Full audit not started.
+**Tool candidate:** LiteParse (github.com/run-llama/liteparse) — local PDF/Office/image parser, Node.js, no cloud. Could enable PDF-first archiving with local text extraction for Supermemory indexing. `lit screenshot` for visual QA. See `docs/RESEARCH.md` S113 LiteParse entry.
 
 ---
 

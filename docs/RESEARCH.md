@@ -273,6 +273,111 @@ Dated entries. What was found, where, and how it connects to our world.
 
 → **Effort frontmatter and HTTP hooks graduated to rollout.** Project Sid noted as academic reference for Phase 24 (Citizen Life Engine).
 
+### S113 — Reagent: Agent Reasoning Reward Model (2026-03-23)
+
+**Source:** [github.com/kxfan2002/Reagent](https://github.com/kxfan2002/Reagent), [arxiv.org/abs/2601.22154](https://arxiv.org/abs/2601.22154)
+
+**What it is:** A framework for training agents using process-level feedback instead of just outcome-based rewards. Traditional RL for agents only scores the final result. Reagent scores the intermediate reasoning steps too, via Agent-RRM (Agent Reasoning Reward Model).
+
+**How it works:** Agent-RRM generates 3 types of feedback per trajectory:
+1. **Reasoning trace** — step-by-step analysis of what the agent was thinking
+2. **Focused critique** — specific identification of where reasoning broke down
+3. **Overall score** — holistic quality evaluation
+
+Three integration strategies: Reagent-C (critique → refine), Reagent-R (reward → optimize), Reagent-U (unified — best performer). Tested on 12-18 benchmarks. Reagent-U hit 43.7% on GAIA, 46.2% on WebWalkerQA.
+
+**Tech:** Python, LLaMA-Factory + veRL + rLLM, vLLM for serving.
+
+**Connection to GodWorld:** We already have the same feedback architecture — the Karpathy Loop (grade → history → feedback → exemplar → better output). Reagent validates this pattern at a deeper level. The difference: they train model weights, we shape the context window. Same feedback loop, different mechanism.
+
+**Actionable takeaway:** The "3-signal feedback" structure (trace + critique + score) is richer than our current letter-grade system. Our `gradeEdition.js` produces grades + brief errata. A structured critique explaining *why* an article succeeds or fails would give agents richer learning signal than A/B/C/D + one-line errata. → **Rollout item: structured critique in gradeEdition.js.**
+
+### S113 — AI Can Learn Scientific Taste: RLCF (2026-03-23)
+
+**Source:** [github.com/tongjingqi/AI-Can-Learn-Scientific-Taste](https://github.com/tongjingqi/AI-Can-Learn-Scientific-Taste), [arxiv.org/abs/2603.14473](https://arxiv.org/abs/2603.14473)
+
+**What it is:** Reinforcement Learning from Community Feedback (RLCF). Teaches AI "scientific taste" — the ability to judge and propose high-impact research ideas, not just execute plans. Two-stage: train a Scientific Judge on 696K citation-derived paper pairs, then use the Judge as a reward signal to train a Scientific Thinker that generates better ideas.
+
+**How it works:**
+1. Build 696K preference pairs from 2.1M arXiv papers (high-citation vs. low-citation, matched by field and time)
+2. Train Scientific Judge with GRPO — given two abstracts, predict which has higher impact. 30B version beats GPT-5.2 and Gemini 3 Pro (80.6% vs 75.7%)
+3. Train Scientific Thinker using Judge as reward signal. 54.2% win-rate against baselines (up from 30.3% base)
+
+**Key finding:** Scientific judgment scales with data and model size. Generalizes across time (predicts future impact), fields (unseen domains), and evaluation modes (citation → peer-review).
+
+**Connection to GodWorld:** The structural parallel is exact:
+
+| Theirs | Ours |
+|--------|------|
+| Citation pairs → preference model | Edition grades → exemplar extraction |
+| Scientific Judge scores new ideas | gradeEdition.js scores new articles |
+| Scientific Thinker generates better ideas | Desk agents read exemplars, write better |
+| RLCF training loop | Karpathy feedback loop |
+
+**Actionable takeaway:** The "generative judge with reasoning traces" concept. Their Scientific Judge doesn't just score — it explains *why* one paper is better. Applied to our stack: a judge agent that reads two articles from the same desk and explains which is stronger and why, producing reasoning traces that become part of the exemplar feedback. This is richer than letter grades and connects directly to the Reagent critique-signal finding.
+
+→ **Rollout item: judge-with-reasoning for edition grading.** Pair with Reagent's 3-signal feedback pattern. Combined rollout: upgrade grading from letter-grade to structured-critique-with-reasoning.
+
+### S113 — QUEST / Recoding-Decoding: Sustained Creativity in LLMs (2026-03-23)
+
+**Source:** [gking.harvard.edu/quest](https://gking.harvard.edu/quest), [arxiv.org/abs/2603.19519](https://arxiv.org/abs/2603.19519)
+
+**Authors:** Queenie Luo, Gary King, Michael Puett, Michael D. Smith (Harvard, March 2026)
+
+**What it is:** A novel decoding scheme called Recoding-Decoding (RD) that induces sustained creativity and diversity in LLMs without model access. Works as a black-box wrapper.
+
+**The problem:** LLMs get repetitive fast. Better models are *worse* — training for accuracy peaks the probability distribution, hiding everything in the tails. Ask for 50 suggestions and you get the same 19 on repeat.
+
+**How RD works (2 steps):**
+1. **Priming phase:** Prepend a random phrase ("Related to NOUN") using a random noun from the top 2,000 English nouns
+2. **Diverting phase:** At each new sentence, inject a random 3-letter stem (e.g., "Pas", "Tib") from common English words. Forces the model down less-traveled probability paths.
+
+No model internals needed. Works through any Completion API. 10-line wrapper.
+
+**Results:**
+- Battlefields test: 19 unique (normal) → 1,307 unique (RD) over 1,000 runs
+- 50-topic brainstorm: diversity 0.47-0.69 → 0.94-0.98, relevance stays 0.99+
+- 161% diversity increase on GPT-5.1, 140% on Gemini-3
+- Beats temperature tuning (0.92), prompt engineering (0.81), chat history (0.91)
+- Image validation: 244 distinct clusters from 250 ideas vs. 35 clusters normal
+- Grammar correction post-processing doubles token cost but preserves diversity
+
+**Key insight:** "As LLM developers improve models for exact-match accuracy, their probability distributions become increasingly peaked, causing more tail information to be ignored."
+
+**Connection to GodWorld — 3 direct applications:**
+
+1. **Citizen reuse in editions.** Same 8 reporters, same citizen names across editions. Desk agents converge on modal paths. RD-style priming before agent launch could diversify which citizens, businesses, and angles agents select. Implementation: random priming phrase injected into desk briefings or agent prompts at launch. Could live in `buildDeskFolders.js` briefing generation.
+
+2. **Supplemental topic generation.** When Mags picks topics, she draws from the same well. RD-powered brainstorm surfaces variety — the Thai place on Telegraph, Mason Ortega's food piece, First Fridays with Kai Marston. Implementation: wrap the topic brainstorm with RD priming.
+
+3. **Voice agent decision-making.** The Mayor picks the "obvious" choice because the model peaks on the most probable response. Random priming before voice agent launch could produce more politically interesting, less predictable decisions. Implementation: inject random priming into `buildVoiceWorkspaces.js` briefing output.
+
+**Implementation effort:** Dead simple. 10-line wrapper. No model changes, no API access needed. Add random priming phrase to agent prompts before launch.
+
+→ **Rollout item: RD diversity injection for desk agents, supplemental brainstorm, and voice agent decisions.** Three applications, one technique. See implementation notes above.
+
+### S113 — LiteParse: Local Document Parser (2026-03-23)
+
+**Source:** [github.com/run-llama/liteparse](https://github.com/run-llama/liteparse)
+
+**What it is:** Open-source, local-only document parser from LlamaIndex. Extracts text with bounding boxes from PDFs, Office docs, and images. Node.js/TypeScript, Apache 2.0. No cloud dependency.
+
+**Tech:** PDF.js core, built-in Tesseract.js OCR (zero setup), pluggable HTTP OCR servers (EasyOCR, PaddleOCR). Auto-converts DOCX/PPTX/XLSX via LibreOffice, images via ImageMagick. Batch processing with parallel OCR. CLI: `lit parse`, `lit batch-parse`, `lit screenshot`. Install: `npm i -g @llamaindex/liteparse`.
+
+**Connection to GodWorld — Phase 25 (Storage Strategy):**
+
+1. **Edition PDF parsing.** We generate tabloid PDFs with `generate-edition-pdf.js`. LiteParse can parse them back for ingestion, search, or verification without API costs. If PDF becomes the canonical archive format instead of .txt, LiteParse is the local extraction layer.
+
+2. **Canon archive indexing.** 238 editions as text files today. If we move to PDF-first archiving (deduplication across disk/Drive/GitHub/Supermemory), LiteParse + Supermemory could index formatted editions with bounding-box precision.
+
+3. **Screenshot for agents.** `lit screenshot` generates page images from documents at configurable DPI. Could feed dashboard screenshots or PDF pages directly to multimodal agents for visual QA or layout review.
+
+4. **Mara audit packets.** Currently text files. Formatted PDF packets parsed back programmatically gives Mara richer input without manual conversion.
+
+**Dependencies on droplet:** Node.js (have it), LibreOffice (not installed — needed for Office formats), ImageMagick (not installed — needed for images). PDF parsing works out of the box with just Node.
+
+→ **Watch list item for Phase 25 (Storage Strategy).** Install when PDF-based workflows mature or storage deduplication begins.
+
 ---
 
 ## Ready for Rollout
@@ -293,6 +398,13 @@ References from research sessions. Organized by topic.
 - Supermemory filtering (containers): supermemory.ai/docs/concepts/filtering.md
 - claude-mem v10.5.x: Smart Explore, ChromaMcpManager, OpenClaw bridge
 
+### Creativity & Diversity
+- QUEST / Recoding-Decoding — gking.harvard.edu/quest, arxiv.org/abs/2603.19519
+
+### Agent Feedback & Grading
+- Reagent: Agent Reasoning Reward Model — github.com/kxfan2002/Reagent, arxiv.org/abs/2601.22154
+- AI Can Learn Scientific Taste (RLCF) — github.com/tongjingqi/AI-Can-Learn-Scientific-Taste, arxiv.org/abs/2603.14473
+
 ### Agent Architecture
 - Anthropic multi-agent research system (engineering blog)
 - dev.to/nesquikm fleet architecture (12 specialized agents)
@@ -305,6 +417,9 @@ References from research sessions. Organized by topic.
 - DeepSeek-V3: integration ecosystem (LibreChat, Dify, FastGPT)
 - Together AI: voice agents (<700ms), Mamba-3 state space model
 - Qwen 3.5 9B: 262K context, local via LM Studio/Ollama
+
+### Document Processing
+- LiteParse: local PDF/Office/image parser — github.com/run-llama/liteparse (Node.js, Apache 2.0, Tesseract.js OCR)
 
 ### Platform
 - Claude Code 2.0: agent teams, remote control, web sessions, auto mode

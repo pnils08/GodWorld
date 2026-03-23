@@ -28,7 +28,7 @@
 
 - ~~**CLEANUP: Archive old session transcripts**~~ — **DONE S113.** Cleaned 650MB. Observer + root sessions >14d deleted. GodWorld sessions >14d archived to `output/archives/godworld-sessions-pre-20260309.tar.gz` (69MB). Disk: 72% → 70%.
 - **Node.js security patch** — Scheduled March 24, 2026.
-- **CLEANUP: ~22 duplicate docs in bay-tribune container** — From double-ingestion S106. Harmless but bloated.
+- ~~**CLEANUP: ~22 duplicate docs in bay-tribune container**~~ — **DONE S113.** 26 duplicates found and deleted via supermemory API. All from S106 double-ingestion (Mar 21 23:25 originals + Mar 22 02:06 re-ingest). Kept newer copies. Zero duplicates remaining.
 
 ---
 

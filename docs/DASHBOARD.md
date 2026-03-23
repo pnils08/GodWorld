@@ -38,6 +38,7 @@ Last audited: Session 113 (2026-03-23)
 | **Sports** | Oakland + Chicago sports feeds, player index |
 | **City** | Weather, culture events, transit, faith orgs, neighborhoods |
 | **Search** | Full-text article search across all editions and supplementals |
+| **Chicago** | Chicago bureau — Bulls card, feed events, bureau coverage, reporters (menu only) |
 | **Mission** | Mission Control — session events, system health, channel status, quick actions |
 
 **Top cards:** Cycle number, Sentiment score, Neighborhood count, Council seat count, system status.
@@ -335,7 +336,7 @@ On restart (PM2 or `node dashboard/server.js`):
 The frontend is functional but not user-optimized:
 - Dark theme, responsive layout, card-based articles
 - Login page with cookie-based auth
-- Tab navigation across 9 views (Mission Control added S113)
+- Tab navigation across 10 views (Mission Control + Chicago added S113)
 - Key Figures section with Tier 1 citizen cards
 - Mission Control: session events timeline, system health, channel status, quick actions
 - **Not mobile-friendly** in current state

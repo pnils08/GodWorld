@@ -37,6 +37,7 @@ import {
   BarChart3,
   Wifi,
   Server,
+  MapPinned,
 } from 'lucide-react';
 
 // --- Data Fetching ---
@@ -75,6 +76,7 @@ export default function App() {
   const [citizenDetail, setCitizenDetail] = useState(null);
   const [coverageTrail, setCoverageTrail] = useState(null);
   const [missionData, setMissionData] = useState(null);
+  const [chicagoData, setChicagoData] = useState(null);
   const [supplementals, setSupplementals] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -161,6 +163,19 @@ export default function App() {
       setMissionData({ health: h, events });
     }).catch(() => {});
   }
+
+  // Load chicago data when CHICAGO tab is selected
+  useEffect(() => {
+    if (activeTab === 'CHICAGO' && !chicagoData) {
+      Promise.all([
+        fetchAPI('/api/sports'),
+        fetchAPI('/api/search/articles?section=chicago&limit=20'),
+      ]).then(([sportsData, articles]) => {
+        const chi = sportsData?.chicago || {};
+        setChicagoData({ feeds: chi.feeds || [], digest: chi.digest || null, articles: articles?.results || [] });
+      }).catch(() => {});
+    }
+  }, [activeTab, chicagoData]);
 
   // Load hooks/arcs when INTEL tab is selected
   useEffect(() => {
@@ -418,6 +433,7 @@ export default function App() {
             { label: 'Sports', view: 'sports', tab: 'SPORTS' },
             { label: 'Neighborhoods', view: 'neighborhoods', tab: 'CITY' },
             { label: 'Article Search', view: 'search', tab: 'SEARCH' },
+            { label: 'Chicago', view: 'chicago', tab: 'CHICAGO' },
             { label: 'Mission Control', view: 'mission', tab: 'MISSION' },
           ].map(item => (
             <div
@@ -934,6 +950,9 @@ export default function App() {
         {activeTab === 'SEARCH' && (
           <ArticleSearchView />
         )}
+
+        {/* CHICAGO TAB */}
+        {activeTab === 'CHICAGO' && <ChicagoView data={chicagoData} />}
 
         {/* MISSION TAB */}
         {activeTab === 'MISSION' && <MissionControlView data={missionData} onRefresh={() => { setMissionData(null); loadMissionData(); }} />}
@@ -1993,6 +2012,168 @@ function MissionControlView({ data, onRefresh }) {
           <div className="mt-3 text-[10px] text-sky-400 font-mono text-center animate-pulse">{actionStatus}</div>
         )}
       </div>
+    </section>
+  );
+}
+
+function ChicagoView({ data }) {
+  if (!data) {
+    return (
+      <div className="p-8 text-center text-neutral-500">
+        <Loader size={24} className="mx-auto mb-3 animate-spin text-red-500" />
+        <p className="text-sm">Loading Chicago data...</p>
+      </div>
+    );
+  }
+
+  const feeds = data.feeds || [];
+  const articles = data.articles || [];
+
+  // Extract digest info
+  let digest = null;
+  if (data.digest) {
+    if (typeof data.digest === 'object' && data.digest.teamLabel) {
+      digest = data.digest;
+    } else if (typeof data.digest === 'object') {
+      const vals = Object.values(data.digest).filter(v => v && typeof v === 'object' && v.teamLabel);
+      digest = vals[0] || null;
+    }
+  }
+
+  // Extract record/trend from latest feed if no digest
+  const latestFeed = feeds[0] || {};
+  const record = digest?.currentRecord || latestFeed.Record || null;
+  const trend = digest?.teamMomentum || latestFeed.Trend || null;
+  const seasonType = digest?.seasonState || latestFeed.SeasonType || null;
+
+  const eventTypeColors = {
+    'game-result': 'bg-sky-500/20 text-sky-400 border-sky-500/20',
+    'trade': 'bg-amber-500/20 text-amber-400 border-amber-500/20',
+    'transaction': 'bg-amber-500/20 text-amber-400 border-amber-500/20',
+    'roster-move': 'bg-purple-500/20 text-purple-400 border-purple-500/20',
+    'injury': 'bg-red-500/20 text-red-400 border-red-500/20',
+    'milestone': 'bg-amber-500/20 text-amber-400 border-amber-500/20',
+    'signing': 'bg-pink-500/20 text-pink-400 border-pink-500/20',
+    'callup': 'bg-emerald-500/20 text-emerald-400 border-emerald-500/20',
+  };
+  const defaultEventColor = 'bg-neutral-700/40 text-neutral-400 border-neutral-600/20';
+
+  const trendColors = { rising: 'text-green-400', steady: 'text-sky-400', falling: 'text-amber-400', declining: 'text-red-400' };
+  const trendArrow = trend === 'rising' ? '▲' : trend === 'falling' || trend === 'declining' ? '▼' : '●';
+
+  return (
+    <section className="space-y-6">
+
+      {/* BULLS CARD */}
+      <div className="p-4 bg-neutral-900 rounded-2xl border border-red-500/20">
+        <div className="flex justify-between items-start mb-3">
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-red-500/10 rounded-lg">
+              <MapPinned size={18} className="text-red-500" />
+            </div>
+            <div>
+              <h3 className="text-lg font-black text-red-500">Chicago Bulls</h3>
+              {seasonType && <span className="text-[10px] text-neutral-500 uppercase">{seasonType}</span>}
+            </div>
+          </div>
+          <div className="text-right">
+            {record && <div className="text-xl font-black tracking-tight">{record}</div>}
+            {trend && (
+              <span className={`text-[9px] font-bold uppercase ${trendColors[trend] || 'text-neutral-500'}`}>
+                {trendArrow} {trend}
+              </span>
+            )}
+          </div>
+        </div>
+        {digest?.rosterMoves?.length > 0 && (
+          <div className="mt-2 pt-2 border-t border-white/5">
+            <h5 className="text-[8px] font-black uppercase tracking-widest text-neutral-500 mb-1.5">Recent Moves</h5>
+            {digest.rosterMoves.slice(0, 3).map((rm, i) => (
+              <div key={i} className="flex items-start gap-2 mb-1">
+                <span className="text-[9px] font-mono text-neutral-500 shrink-0">C{rm.cycle}</span>
+                <span className="text-[10px] text-neutral-400">{rm.names?.join(', ')}</span>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* FEED EVENTS */}
+      {feeds.length > 0 && (
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">
+            <Activity size={10} className="inline mr-1" /> Feed Events
+          </p>
+          <div className="space-y-2">
+            {feeds.map((f, i) => {
+              const evtType = (f.EventType || '').toLowerCase();
+              const colorClass = eventTypeColors[evtType] || defaultEventColor;
+              return (
+                <div key={i} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
+                  <div className="flex items-center gap-2 mb-1.5">
+                    {f.Cycle && <span className="text-[8px] font-mono text-neutral-500">C{f.Cycle}</span>}
+                    {f.EventType && (
+                      <span className={`text-[8px] px-1.5 py-0.5 rounded-full font-bold uppercase border ${colorClass}`}>
+                        {f.EventType}
+                      </span>
+                    )}
+                    {f.SeasonType && <span className="text-[8px] text-neutral-500 uppercase">{f.SeasonType}</span>}
+                  </div>
+                  {f.Notes && <p className="text-[11px] text-neutral-300 leading-relaxed mb-1">{f.Notes}</p>}
+                  <div className="flex flex-wrap gap-x-4 gap-y-1 mt-1">
+                    {f.TeamsUsed && <span className="text-[9px] text-neutral-500"><Trophy size={9} className="inline mr-0.5" /> {f.TeamsUsed}</span>}
+                    {f.NamesUsed && <span className="text-[9px] text-neutral-500"><Users size={9} className="inline mr-0.5" /> {f.NamesUsed}</span>}
+                    {f.Stats && <span className="text-[9px] text-sky-500 font-mono">{f.Stats}</span>}
+                    {f.Record && <span className="text-[9px] font-mono text-neutral-400">{f.Record}</span>}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {/* BUREAU COVERAGE */}
+      {articles.length > 0 && (
+        <div>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">
+            <Newspaper size={10} className="inline mr-1" /> Bureau Coverage
+          </p>
+          <div className="space-y-2">
+            {articles.map((a, i) => (
+              <div key={i} className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
+                <div className="flex justify-between items-start mb-1">
+                  <span className="text-[9px] font-mono text-red-500">{a.cycle ? `C${a.cycle}` : 'ARCHIVE'}</span>
+                  {a.section && <span className="text-[9px] text-neutral-500">{a.section}</span>}
+                </div>
+                <h4 className="text-xs font-bold mb-1">{a.title}</h4>
+                {a.snippet && (
+                  <p className="text-[10px] text-neutral-500 leading-relaxed line-clamp-2">{a.snippet}</p>
+                )}
+                {a.author && <span className="text-[9px] text-neutral-500 mt-1 block">{a.author}</span>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* BUREAU REPORTERS */}
+      <div>
+        <p className="text-[10px] font-bold uppercase tracking-widest text-red-500 mb-3">
+          <Users size={10} className="inline mr-1" /> Bureau Reporters
+        </p>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
+            <div className="text-xs font-bold">Selena Grant</div>
+            <div className="text-[9px] text-neutral-500 mt-0.5">Beats Reporter</div>
+          </div>
+          <div className="p-3 bg-neutral-900/40 rounded-xl border border-white/5">
+            <div className="text-xs font-bold">Talia Finch</div>
+            <div className="text-[9px] text-neutral-500 mt-0.5">Neighborhood Texture</div>
+          </div>
+        </div>
+      </div>
+
     </section>
   );
 }

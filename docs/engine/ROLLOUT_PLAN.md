@@ -148,7 +148,7 @@ Source: "50 Claude Code Tips" community guide, evaluated against GodWorld stack.
 |------|------|----------|--------|
 | **CLAUDE.md instruction audit** | Audit against ~150 instruction budget. Every unnecessary line dilutes the important ones. Count instructions, cut noise. | HIGH | Not started |
 | **PreToolUse ledger protection hook** | Block destructive commands (`rm -rf`) + block direct sheet writes outside persistence scripts. Protect 675 citizens from accidental corruption. | HIGH | Not started |
-| **Terminal status line** | Show session number, cycle, workflow, and rate limit usage at bottom of terminal. Mike sees state at a glance. `/statusline` generates the script. `rate_limits` field available since mid-March. | HIGH | Not started |
+| **Terminal status line** | Show session number, cycle, workflow, and rate limit usage at bottom of terminal. Mike sees state at a glance. | HIGH | **DONE S110** — `~/.claude/statusline.sh` extended with S/C numbers, 5h rate limit, fixed JSON field mappings. |
 | **/btw for side questions** | Use during edition production for quick questions without context pollution. No build needed — just awareness. | MEDIUM | Available now |
 | **Smarter compaction hook** | Current post-compact hook exists but is basic. Re-inject: current workflow, active task, modified files, key constraints. | MEDIUM | Upgrade existing |
 | **/branch for risky approaches** | Try experimental fixes without losing context. Both paths stay alive. | MEDIUM | Available now |

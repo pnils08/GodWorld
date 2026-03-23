@@ -5,7 +5,7 @@
 
 ## Architecture
 
-GodWorld is a city simulation engine that generates narrative data, which a newsroom pipeline turns into journalism. Dual runtime: 11-phase engine in Google Apps Script, local Node.js scripts for post-cycle work. Full structure in `README.md`, commands in `docs/WORKFLOWS.md`.
+GodWorld is a city simulation engine that generates narrative data, which a newsroom pipeline turns into journalism. Dual runtime: 11-phase engine in Google Apps Script, local Node.js scripts for post-cycle work. Post-engine pipeline: initiative agents → tracker writeback → decision queues → voice agents → desk agents. Full structure in `README.md`, commands in `docs/WORKFLOWS.md`.
 
 ## Session Boot
 
@@ -51,6 +51,7 @@ Path-scoped rules in `.claude/rules/`:
 - **Service account cannot create spreadsheets.** Read/write only on sheets shared with `maravance@godworld-486407.iam.gserviceaccount.com`.
 - **ClockMode gates everything.** ENGINE (509), GAME (91), CIVIC (46), MEDIA (29). Wrong mode = wrong processing.
 - **`clasp push` deploys all 153 files.** No partial deploy. Always verify after.
+- **`applyTrackerUpdates.js` is dry-run by default.** Must pass `--apply` to write to sheet. Always review dry-run output first.
 - **When unsure, read the doc — don't guess.**
 
 ## Session Lifecycle

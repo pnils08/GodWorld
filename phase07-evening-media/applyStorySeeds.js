@@ -34,7 +34,7 @@
  *
  * v3.5 Features (retained):
  * - renderStorySeedsForUI_() for headline/lede/angle format
- * - Outputs ready for mediaRoomBriefingGenerator or Press_Drafts
+ * - Outputs ready for mediaRoomBriefingGenerator
  *
  * v3.4 Features (retained):
  * - Sports generalization (no hardcoded team references)

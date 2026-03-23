@@ -15,7 +15,7 @@
 - **DESIGN: Chicago dashboard tab** — 123 citizens, 2 reporters, Bulls data, Paulson GM. Currently buried in Sports tab. See `docs/DASHBOARD.md`.
 - **FIX: Rebuild POPID article index** — `ARTICLE_INDEX_BY_POPID.md` generated Feb 5 from old Drive downloads. No automated builder. Needs script.
 - **CLEANUP: Dead spreadsheet tabs** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`.
-- **FIX: Press_Drafts ghost references** — `applyStorySeeds.js` and `mediaRoomIntake.js` still reference deleted tab.
+- ~~**FIX: Press_Drafts ghost references**~~ — **DONE S113.** Removed Press_Drafts write from `mediaRoomIntake.js`, removed sheet creation/upgrade calls, cleaned comments in `applyStorySeeds.js`. Requires `clasp push` to deploy.
 - **FIX: gradeEdition.js supplemental support** — Article parser, errata logging, desk mapping all need supplemental awareness.
 
 ### Open — Architecture & Production
@@ -26,7 +26,7 @@
 
 ### Open — Infrastructure & Maintenance
 
-- **CLEANUP: Archive old session transcripts** — 1.1GB in `.claude/projects/`. Archive oldest 30 to Drive. See `output/DISK_MAP.md`.
+- ~~**CLEANUP: Archive old session transcripts**~~ — **DONE S113.** Cleaned 650MB. Observer + root sessions >14d deleted. GodWorld sessions >14d archived to `output/archives/godworld-sessions-pre-20260309.tar.gz` (69MB). Disk: 72% → 70%.
 - **Node.js security patch** — Scheduled March 24, 2026.
 - **CLEANUP: ~22 duplicate docs in bay-tribune container** — From double-ingestion S106. Harmless but bloated.
 

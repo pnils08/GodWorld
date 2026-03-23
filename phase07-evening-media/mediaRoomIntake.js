@@ -52,7 +52,7 @@
  * - Upgrade functions for existing sheets
  *
  * Handles four intake streams from Media Room:
- * 1. Article Table → Press_Drafts (14 columns)
+ * 1. Article Table → cultural mentions to Media_Ledger (Press_Drafts removed S98)
  * 2. Storylines Carried Forward → Storyline_Tracker (14 columns)
  * 3. Citizen Usage Log → Citizen_Media_Usage (12 columns)
  * 4. Continuity Notes → LifeHistory_Log (direct quotes only; everything else is audit-only in edition)
@@ -241,34 +241,8 @@ function processArticleIntake_(ss, cycle, cal) {
 
   if (drafts.length === 0) return 0;
 
-  // Write to Press_Drafts (v2.1: 14 columns with calendar)
-  var pressSheet = ensurePressDraftsSheet_(ss);
-  var now = new Date();
-
-  var rows = [];
-  for (var j = 0; j < drafts.length; j++) {
-    var d = drafts[j];
-    rows.push([
-      now,                    // A  Timestamp
-      cycle,                  // B  Cycle
-      d.reporter,             // C  Reporter
-      d.storyType,            // D  StoryType
-      d.signalSource,         // E  SignalSource
-      d.headline,             // F  SummaryPrompt
-      d.articleText,          // G  DraftText
-      'draft',                // H  Status
-      // v2.1: Calendar columns
-      cal.season,             // I  Season
-      cal.holiday,            // J  Holiday
-      cal.holidayPriority,    // K  HolidayPriority
-      cal.isFirstFriday,      // L  IsFirstFriday
-      cal.isCreationDay,      // M  IsCreationDay
-      cal.sportsSeason        // N  SportsSeason
-    ]);
-  }
-
-  var startRow = pressSheet.getLastRow() + 1;
-  pressSheet.getRange(startRow, 1, rows.length, 14).setValues(rows);
+  // Press_Drafts tab removed S98 — drafts are processed in-memory only.
+  // Cultural mentions still route to Media_Ledger below.
 
   // Process cultural mentions → Media_Ledger
   for (var k = 0; k < drafts.length; k++) {
@@ -691,7 +665,7 @@ function setupMediaIntakeV2() {
   // Quotes route to LifeHistory_Log via parseMediaRoomMarkdown.js
 
   // Ensure output sheets exist too (v2.1 versions with calendar columns)
-  ensurePressDraftsSheet_(ss);
+  // Press_Drafts removed S98 — no longer created
   ensureStorylineTracker_(ss);
   ensureCitizenMediaUsage_(ss);
 
@@ -942,10 +916,7 @@ function upgradeMediaIntakeSheets() {
   var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var upgraded = [];
 
-  // Upgrade Press_Drafts
-  if (upgradeSheetWithCalendarColumns_(ss, 'Press_Drafts', 8)) {
-    upgraded.push('Press_Drafts');
-  }
+  // Press_Drafts removed S98 — no upgrade needed
 
   // Upgrade Storyline_Tracker
   if (upgradeSheetWithCalendarColumns_(ss, 'Storyline_Tracker', 8)) {

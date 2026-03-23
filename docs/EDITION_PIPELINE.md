@@ -11,12 +11,15 @@ Skill files define the detailed instructions: `/write-edition` (steps 1-21), `/w
 | # | Step | Command / Action | Depends On | Failure Mode |
 |---|------|-----------------|------------|-------------|
 | 1 | Init production log | Write `output/production_log_c{XX}.md` | Cycle data exists | Without this, compaction recovery loses the thread |
-| 2 | Initiative packets | `node scripts/buildInitiativePackets.js [cycle]` | Initiative_Tracker sheet data | Missing packets = initiative agents have no data |
-| 3 | Voice workspaces | `node scripts/buildVoiceWorkspaces.js [cycle]` | Step 2 + base context | Voice agents can't find their workspace |
+| 2 | Initiative packets + workspaces | `buildInitiativePackets.js` then `buildInitiativeWorkspaces.js` | Initiative_Tracker sheet data | Missing packets = initiative agents have no data |
+| 2a | Initiative agents | Launch 5 initiative agents (OARI, Stabilization Fund, Health Center, Transit Hub) + City Clerk. Baylight Authority runs in Step 4. | Step 2 | Initiative state doesn't advance |
+| 2b | Apply tracker updates | `applyTrackerUpdates.js [cycle]` — dry run then `--apply` | Step 2a (decisions exist) | Initiative decisions don't write back to sheet. **World doesn't move.** |
+| 2c | Build decision queues | `buildDecisionQueue.js [cycle]` | Step 2b (sheet updated) | Voice agents don't receive pending decisions with consequences |
+| 3 | Voice workspaces | `node scripts/buildVoiceWorkspaces.js [cycle]` | Step 2c + base context | Voice agents can't find their workspace or pending decisions |
 | 4 | Voice agents | Launch 7 civic voice agents (Mayor, OPP, CRC, IND, Police Chief, Baylight, DA) | Step 3 | Missing institutional voices in desk briefings |
 | 5 | Supplemental triggers | Check if civic/sports events warrant a supplemental | Step 4 output | Missed coverage opportunities |
 | 6 | Desk packets | `node scripts/buildDeskPackets.js` | Cycle_Packet on sheet | Agents write from stale or missing data. ~90% of engine output depends on this. |
-| 7 | Desk folders | `node scripts/buildDeskFolders.js [cycle]` | Step 6 | Agents can't find briefings, errata, voice statements, archive context |
+| 7 | Desk folders | `node scripts/buildDeskFolders.js [cycle]` | Step 6 + Step 4 voice output | Agents can't find briefings, errata, voice statements, archive context |
 
 ## Production (Steps 8-13)
 

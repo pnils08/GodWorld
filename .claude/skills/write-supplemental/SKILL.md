@@ -61,6 +61,8 @@ When the trigger list suggests civic content, use one of these formats:
 
 These follow the same Step 1-5 pipeline as any supplemental — they just have a civic angle and draw from voice agent statements as source material.
 
+**Note:** Supplementals do **not** use `buildDecisionQueue`, `buildInitiativePackets`, `buildInitiativeWorkspaces`, or `applyTrackerUpdates`. Those pipelines are Cycle Pulse only. Civic supplementals can reference voice agent **output** from previous cycles as source material (e.g., mayor statements), but supplementals don't generate new voice decisions or advance initiative state.
+
 ## Step 1: Design the Coverage Plan
 
 ### 1a. Pick the Reporters

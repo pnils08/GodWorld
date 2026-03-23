@@ -13,7 +13,7 @@
 
 - **DESIGN: Supplemental display on frontend** — 7 supplementals detected with cycles. Need visual placement on Edition tab or filter view.
 - **DESIGN: Chicago dashboard tab** — 123 citizens, 2 reporters, Bulls data, Paulson GM. Currently buried in Sports tab. See `docs/DASHBOARD.md`.
-- **FIX: Rebuild POPID article index** — `ARTICLE_INDEX_BY_POPID.md` generated Feb 5 from old Drive downloads. No automated builder. Needs script.
+- ~~**FIX: Rebuild POPID article index**~~ — **DONE S113.** `scripts/buildPopidArticleIndex.js` created. Cross-references 675 citizens × 234 editions. 241 citizens indexed, 1,795 refs. Run with `--write` to update. Old index: 176 citizens from Feb 5.
 - **CLEANUP: Dead spreadsheet tabs** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`.
 - ~~**FIX: Press_Drafts ghost references**~~ — **DONE S113.** Removed Press_Drafts write from `mediaRoomIntake.js`, removed sheet creation/upgrade calls, cleaned comments in `applyStorySeeds.js`. Requires `clasp push` to deploy.
 - **FIX: gradeEdition.js supplemental support** — Article parser, errata logging, desk mapping all need supplemental awareness.

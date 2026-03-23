@@ -19,6 +19,7 @@
 ```bash
 node scripts/buildDeskPackets.js          # Step 6: desk input data
 node scripts/buildDeskFolders.js [cycle]  # Step 7: per-desk workspaces
+node scripts/applyTrackerUpdates.js [cycle] --apply  # Optional: write initiative decisions to sheet
 node scripts/buildDecisionQueue.js [cycle]  # Optional: refresh voice agent decision queues before edition
 node scripts/generate-edition-photos.js   # Step 15: AI photos
 node scripts/generate-edition-pdf.js      # Step 16: tabloid PDF
@@ -124,14 +125,16 @@ node scripts/buildDeskPackets.js   # Verify data pipeline works
 # The cycle itself runs in Google Apps Script:
 # Open script.google.com → Run runWorldCycle()
 
-# Post-cycle
-node scripts/buildDeskPackets.js   # Build desk input from new cycle data
-node scripts/buildDeskFolders.js [cycle]
-node scripts/buildVoiceWorkspaces.js [cycle]
-node scripts/buildDecisionQueue.js [cycle]  # Optional: pending decisions for voice agents
-node scripts/buildInitiativeWorkspaces.js [cycle]
-node scripts/buildInitiativePackets.js [cycle]
-node scripts/buildCivicVoicePackets.js [cycle]
+# Post-cycle (order matters — each step feeds the next)
+node scripts/buildDeskPackets.js [cycle]              # 4a: desk input from new cycle data
+node scripts/buildInitiativePackets.js [cycle]        # 4b: per-initiative packets from 7 sheets
+node scripts/buildInitiativeWorkspaces.js [cycle]     # 4c: initiative agent workspaces
+node scripts/applyTrackerUpdates.js [cycle]           # 4c.5: dry run — review before applying
+node scripts/applyTrackerUpdates.js [cycle] --apply   # 4c.5: write decisions to Initiative_Tracker
+node scripts/buildDecisionQueue.js [cycle]            # 4c.6: pending decisions for voice agents
+node scripts/buildVoiceWorkspaces.js [cycle]          # 4d: voice agent workspaces + domain briefings
+node scripts/buildDeskFolders.js [cycle]              # 4e: per-desk workspaces with voice distribution
+node scripts/checkSupplementalTriggers.js [cycle]     # 4f: supplemental candidates
 ```
 
 **Skills:** `/run-cycle`, `/pre-mortem`
@@ -139,7 +142,7 @@ node scripts/buildCivicVoicePackets.js [cycle]
 **Risks:**
 - Running a cycle on corrupted data compounds errors for every citizen
 - Pre-mortem catches silent failures — skip it and you inherit them
-- Post-cycle scripts must run in order (packets → folders → workspaces)
+- Post-cycle scripts must run in order (Steps 4a-4f — see run-cycle SKILL.md)
 
 **Key rule:** Always run `/pre-mortem` first. Review cycle output before starting edition production.
 

@@ -498,7 +498,15 @@ export default function App() {
                   {supplementals.map((s, i) => {
                     const label = s.file.replace('supplemental_', '').replace(/\.txt$/, '').replace(/_c\d+/, '').replace(/_/g, ' ');
                     return (
-                      <div key={i} className="p-4 bg-neutral-900/60 rounded-xl border border-amber-500/10 hover:border-amber-500/30 transition-colors">
+                      <div key={i} className="p-4 bg-neutral-900/60 rounded-xl border border-amber-500/10 hover:border-amber-500/30 transition-colors cursor-pointer"
+                        onClick={async () => {
+                          try {
+                            const data = await fetchAPI(`/api/article/raw?file=${encodeURIComponent(s.file)}`);
+                            setOverlayArticle({ title: label, body: data.text, cycle: data.cycle, file: data.file });
+                            setSearchOpen(true);
+                          } catch {}
+                        }}
+                      >
                         <div className="flex justify-between items-start">
                           <div className="text-sm font-bold capitalize">{label}</div>
                           <span className="text-[8px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 font-mono border border-amber-500/20">C{s.cycle}</span>

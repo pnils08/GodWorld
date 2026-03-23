@@ -1610,6 +1610,31 @@ app.get('/api/article', (req, res) => {
   });
 });
 
+// --- Raw Edition Text ---
+// Returns the full raw text of an edition file (useful for supplementals)
+app.get('/api/article/raw', (req, res) => {
+  const { file } = req.query;
+  if (!file) return res.status(400).json({ error: 'Provide file param' });
+
+  // Sanitize filename — prevent directory traversal
+  const safe = file.replace(/[^a-zA-Z0-9_\-\.]/g, '');
+  const edDir = join(ROOT, 'editions');
+  const filePath = join(edDir, safe);
+
+  if (!existsSync(filePath)) return res.status(404).json({ error: `File not found: ${safe}` });
+
+  const text = readFileSync(filePath, 'utf-8');
+  const cycleMatch = safe.match(/c(\d+)/i);
+  const cycle = cycleMatch ? parseInt(cycleMatch[1]) : null;
+
+  res.json({
+    file: safe,
+    cycle,
+    isSupplemental: /supplemental/i.test(safe),
+    text
+  });
+});
+
 // --- Citizen Detail ---
 // Full citizen record: ledger data + archive appearances + desk packet data
 app.get('/api/citizens/:popId', async (req, res) => {

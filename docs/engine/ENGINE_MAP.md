@@ -4,7 +4,7 @@
 
 **Source:** `phase01-config/godWorldEngine2.js` v2.14 — two identical engine paths (live + dry-run/replay).
 
-**Last verified:** 2026-03-06, Session 83
+**Last verified:** 2026-03-23, Session 113 (engine phases unchanged since S83; post-engine pipeline updated S113)
 
 ---
 
@@ -234,6 +234,25 @@
 
 ---
 
+## Post-Engine Pipeline (Local Node.js — runs AFTER engine cycle)
+
+These scripts run locally on the droplet after the GAS engine completes. They transform engine output into agent workspaces and close the feedback loop. Full pipeline order in `/run-cycle` SKILL.md Steps 4a-4f.
+
+| Step | Script | Purpose |
+|------|--------|---------|
+| 4a | `buildDeskPackets.js` | Split Cycle_Packet into per-desk JSON packets + truesource + citizen archive |
+| 4b | `buildInitiativePackets.js` | Per-initiative packets from 7 sheets + previous voice decisions |
+| 4c | `buildInitiativeWorkspaces.js` | Populate initiative agent workspaces |
+| 4c.5 | `applyTrackerUpdates.js` | **Write initiative decisions back to Initiative_Tracker sheet.** Closes the world-action loop. Dry run by default, `--apply` for live writes. |
+| 4c.6 | `buildDecisionQueue.js` | Map initiative blockers to voice agent offices. Writes `pending_decisions.md` with A/B/C options and consequences. |
+| 4d | `buildVoiceWorkspaces.js` | Per-agent workspaces with domain briefings, RD political lens injection |
+| 4e | `buildDeskFolders.js` | Per-desk workspaces with voice distribution, briefings, errata, RD creative lens injection |
+| 4f | `checkSupplementalTriggers.js` | Scan civic data for supplemental edition candidates |
+
+**Added S113:** Steps 4c.5 and 4c.6 close the voice-agent-world-action-pipeline. Initiative agents make operational decisions → `applyTrackerUpdates.js` writes them to the sheet → `buildDecisionQueue.js` maps blockers to voice agents → voice agents read `pending_decisions.md` and respond → their decisions feed into the next cycle via `buildInitiativePackets.js`. The city moves itself.
+
+---
+
 ## Files NOT Called by the Engine
 
 These exist in the codebase but are NOT in the engine call chain:
@@ -287,7 +306,7 @@ These exist in the codebase but are NOT in the engine call chain:
 - 87 A's players expanded from bare position abbreviations to "Position, Team" format
 - 62 T3 minor leaguers assigned to farm teams (AAA/AA/A affiliates)
 
-**Current ClockMode breakdown:** ENGINE 514, GAME 97, CIVIC 48, MEDIA 16, LIFE 25
+**Current ClockMode breakdown (S105 audit):** ENGINE 509, GAME 91, CIVIC 46, MEDIA 29, LIFE 0
 
 ---
 

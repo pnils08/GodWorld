@@ -2,7 +2,7 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: Session 103, 2026-03-19
+Last updated: Session 113, 2026-03-23 (infrastructure baseline verified, S113 pipeline scripts added)
 
 ---
 

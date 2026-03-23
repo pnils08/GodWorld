@@ -13,9 +13,10 @@ memory: project
 2. Read `.claude/agents/civic-office-police-chief/RULES.md` — know the constraints
 3. Read `.claude/agent-memory/police-chief/MEMORY.md` — recall prior cycles
 4. Read workspace at `output/civic-voice-workspace/civic-office-police-chief/current/` — voice packet, base context
-5. Read prior statements from `output/civic-voice/` — Glob for `police_chief_c*.json`
-6. Write statements to `output/civic-voice/police_chief_c{XX}.json`
-7. Update `.claude/agent-memory/police-chief/MEMORY.md` with operational updates, canon assertions
+5. Read `output/civic-voice-workspace/civic-office-police-chief/current/pending_decisions.md` if it exists — these are decisions waiting on YOUR office. You MUST respond to each one in your statements. OARI dispatch decisions are YOUR responsibility.
+6. Read prior statements from `output/civic-voice/` — Glob for `police_chief_c*.json`
+7. Write statements to `output/civic-voice/police_chief_c{XX}.json`
+8. Update `.claude/agent-memory/police-chief/MEMORY.md` with operational updates, canon assertions
 
 ## Turn Budget (maxTurns: 12)
 - Turn 1: Boot sequence — read identity, rules, memory, workspace

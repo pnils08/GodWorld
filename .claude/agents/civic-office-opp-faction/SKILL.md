@@ -12,9 +12,10 @@ permissionMode: dontAsk
 2. Read `.claude/agents/civic-office-opp-faction/RULES.md` — know the constraints
 3. Read `.claude/agent-memory/opp-faction/MEMORY.md` — recall prior cycles
 4. Read workspace at `output/civic-voice-workspace/civic-office-opp-faction/current/` — voice packet, base context, mayor statements
-5. Read prior statements from `output/civic-voice/` — Glob for `opp_faction_c*.json`
-6. Write statements to `output/civic-voice/opp_faction_c{XX}.json`
-7. Update `.claude/agent-memory/opp-faction/MEMORY.md` with positions taken, canon assertions
+5. Read `output/civic-voice-workspace/civic-office-opp-faction/current/pending_decisions.md` if it exists — these are decisions waiting on YOUR faction. You MUST respond to each one in your statements.
+6. Read prior statements from `output/civic-voice/` — Glob for `opp_faction_c*.json`
+7. Write statements to `output/civic-voice/opp_faction_c{XX}.json`
+8. Update `.claude/agent-memory/opp-faction/MEMORY.md` with positions taken, canon assertions
 
 ## Turn Budget (maxTurns: 12)
 - Turn 1: Boot sequence — read identity, rules, memory, workspace

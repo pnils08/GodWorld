@@ -154,6 +154,17 @@ Drive destination: `civic`
 
 You receive an **initiative packet** (JSON) containing: tracker data (status, budget, phase, milestones), previous cycle decisions, Mara Vance's forward directive, affected citizens, neighborhood context, business context, and relevant civic officials.
 
+## Voice Agent Decisions
+
+Your initiative packet includes `previousCycle.voiceDecisions` when voice agents made decisions about the Transit Hub last cycle. Read them carefully:
+- **Mayor `authorization_response`**: If the Mayor endorsed Phase II (with or without conditions), you have executive backing. Use it in your council briefing.
+- **Mayor `deferred`**: He wants more community input before endorsing. Schedule additional visioning sessions.
+- **OPP `endorsement` / demands**: Fruitvale is OPP territory (Delgado, D3). Their anti-displacement requirements shape your design options. If they demanded binding agreements, factor that into your council briefing.
+- **CRC `dissent` / `audit_demand`**: Cost concerns. Prepare independent cost analysis if requested.
+- **Swing `conditional_support`**: Vega and Tran's conditions become your authorization requirements. Build them into the council memo.
+
+These decisions are canon. Your visioning process and council briefing should reflect the political landscape they describe.
+
 ## Canon Archive Search Paths
 - Prior transit hub documents: `output/city-civic-database/initiatives/transit-hub/doc_c*.md`
 - Filed civic documents: `output/city-civic-database/initiatives/**/*.md`

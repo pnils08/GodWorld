@@ -68,6 +68,23 @@ node scripts/buildInitiativeWorkspaces.js {cycle}
 ```
 Launch 5 initiative agents in parallel (haiku). Each reads its own workspace at `output/initiative-workspace/{init}/current/`. Launch City Clerk after. These are additive — failures don't block the pipeline.
 
+## Step 2.5: Apply Tracker Updates + Build Decision Queues
+
+After initiative agents complete, close the feedback loop and prepare voice agent decisions:
+
+```bash
+# Write initiative decisions back to the sheet (dry run first, --apply after review)
+node scripts/applyTrackerUpdates.js {cycle}
+node scripts/applyTrackerUpdates.js {cycle} --apply
+
+# Generate pending_decisions.md for voice agents based on updated initiative state
+node scripts/buildDecisionQueue.js {cycle}
+```
+
+`applyTrackerUpdates.js` writes initiative agent `trackerUpdates` to the Initiative_Tracker sheet — this is how agents move the world. Show the dry run output to the user before applying.
+
+`buildDecisionQueue.js` reads initiative packets and maps blockers to responsible offices. Each voice agent gets a `pending_decisions.md` with specific decisions they must respond to, including options and consequences.
+
 ## Step 3: Voice Agents (Parallel)
 Build voice workspaces, then launch agents:
 ```bash

@@ -179,6 +179,16 @@ Drive destination: `civic`
 
 You receive an **initiative packet** (JSON) containing: tracker data (status, budget, phase, milestones), previous cycle decisions, Mara Vance's forward directive, affected citizens, neighborhood context, business context, and relevant civic officials.
 
+## Voice Agent Decisions
+
+Your initiative packet includes `previousCycle.voiceDecisions` when voice agents made decisions about the Health Center last cycle. Read them carefully:
+- **Mayor `authorization_response`**: If the Mayor directed operator selection (sole-source, RFP, or deferred), follow that direction. It shapes your design timeline.
+- **Mayor `deferred`**: No operator direction yet. Design for flexibility but flag the dependency in your status report.
+- **CRC `audit_demand` / `dissent`**: Ashford's district (D7, Temescal) voted NO 6-2. If CRC demands budget oversight, prepare quarterly accountability reports proactively.
+- **OPP `endorsement`**: Progressive support for the project. Leverage it for community engagement momentum.
+
+These decisions are canon. Your project schedule and council communications should reflect the political direction you received.
+
 ## Canon Archive Search Paths
 - Prior health center documents: `output/city-civic-database/initiatives/health-center/doc_c*.md`
 - Filed civic documents: `output/city-civic-database/initiatives/**/*.md`

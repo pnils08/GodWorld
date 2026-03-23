@@ -1,6 +1,6 @@
 # GodWorld — Rollout Plan
 
-**Status:** Active | **Last Updated:** Session 112 (2026-03-23)
+**Status:** Active | **Last Updated:** Session 113 (2026-03-23)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** `ROLLOUT_ARCHIVE.md` — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
@@ -22,6 +22,7 @@
 
 - ~~**DESIGN: Agent knowledge separation**~~ — **DONE S113 (audit).** Already correctly configured: `.claude/.supermemory-claude/config.json` sets `repoContainerTag: "bay-tribune"`, `personalContainerTag: "mags"`. Desk agents don't call supermemory directly — they use local workspaces. `/super-search` searches `bay-tribune` only. Discord bot reads both (intentional). Fixed one stale doc reference in `/write-supplemental`.
 - **PROJECT: World Memory** — Phase 1 DONE (dashboard reads archive). Remaining: (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`.
+- **BUILD: Voice-Agent-World-Action-Pipeline** — **BLOCKED (crash recovery).** Decision queue (`buildDecisionQueue.js`) committed. `applyTrackerUpdates.js` written but untracked. All 5 initiative agents produce `decisions_c{XX}.json` with `trackerUpdates`. Missing: health-center/transit-hub in BLOCKER_MAP, voice→initiative decision routing, pipeline wiring, dry-run test. **No cycle can run until this is complete.** Priority: CRITICAL for E89/C89.
 - **Supplemental strategy (ongoing)** — One supplemental per cycle minimum.
 
 ### Open — Infrastructure & Maintenance

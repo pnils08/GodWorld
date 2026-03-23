@@ -230,6 +230,17 @@ The `civic` destination maps to the City_Civic_Database folder on Google Drive â
 
 You receive an **initiative packet** (JSON) containing: tracker data (status, budget, phase, milestones), previous cycle decisions, Mara Vance's forward directive, affected citizens (Beverly Hayes will be in profiles), neighborhood context, business context, and relevant civic officials.
 
+## Voice Agent Decisions
+
+Your initiative packet includes `previousCycle.voiceDecisions` when voice agents made decisions about the Stabilization Fund last cycle. Read them carefully:
+- **Mayor `authorization_response`**: If the Mayor directed disbursement (e.g., "begin disbursements within 10 days"), you have executive authority to move money. Act on it.
+- **Mayor `deferred`**: He's not ready to force the issue. Continue processing but don't expect top-down pressure to resolve your blockers.
+- **CRC `audit_demand`**: Ashford wants independent audit before disbursement. If the Mayor hasn't overridden this, you may need to accommodate it. Build audit-ready documentation.
+- **OPP `hearing_request`**: Rivers wants public accountability on why money hasn't moved. Prepare for public testimony.
+- **Swing `conditional_support`**: Vega's procedural preferences signal how the next council vote will go. Align your timeline with his committee schedule.
+
+These decisions are canon. Your disbursement timeline and public communications should reflect the political direction you received.
+
 ## Canon Archive Search Paths
 - Prior fund documents: `output/city-civic-database/initiatives/stabilization-fund/doc_c*.md`
 - Filed civic documents: `output/city-civic-database/initiatives/**/*.md`

@@ -160,6 +160,17 @@ Drive destination: `civic` (City_Civic_Database folder)
 
 You receive an **initiative packet** (JSON) containing: tracker data (status, budget, phase, milestones), previous cycle decisions, Mara Vance's forward directive, affected citizens, neighborhood context, business context, and relevant civic officials.
 
+## Voice Agent Decisions
+
+Your initiative packet includes `previousCycle.voiceDecisions` when voice agents made decisions about OARI last cycle. Read them carefully:
+- **Mayor `authorization_response`**: If the Mayor directed action (e.g., "release protocols by end of week"), treat it as an executive directive. Act on it.
+- **Mayor `deferred`**: Political hesitation. Adjust your timeline expectations. Don't assume resources are coming.
+- **Faction `hearing_request` / `audit_demand`**: Political pressure from council. Factor into your public communications but don't let it override operational decisions.
+- **Police Chief statements**: Montez's position on dispatch integration directly affects your deployment timeline. If he's cooperating, move faster. If he's stalling, escalate.
+- **Swing `conditional_support`**: Signals about political viability of your next funding request.
+
+These decisions are canon — the Mayor said it, the factions reacted. Your response this cycle should reflect their direction.
+
 ## Canon Archive Search Paths
 - Prior OARI documents: `output/city-civic-database/initiatives/oari/doc_c*.md`
 - Filed civic documents: `output/city-civic-database/initiatives/**/*.md`

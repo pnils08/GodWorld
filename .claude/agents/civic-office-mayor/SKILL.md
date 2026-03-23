@@ -12,9 +12,10 @@ permissionMode: dontAsk
 2. Read `.claude/agents/civic-office-mayor/RULES.md` — know the constraints
 3. Read `.claude/agent-memory/mayor/MEMORY.md` — recall prior cycles
 4. Read workspace at `output/civic-voice-workspace/civic-office-mayor/current/` — voice packet, base context
-5. Read prior statements from `output/civic-voice/` — Glob for `mayor_c*.json`
-6. Write statements to `output/civic-voice/mayor_c{XX}.json`
-7. Update `.claude/agent-memory/mayor/MEMORY.md` with positions taken, canon assertions
+5. Read `output/civic-voice-workspace/civic-office-mayor/current/pending_decisions.md` if it exists — these are decisions waiting on YOUR office. You MUST respond to each one in your statements.
+6. Read prior statements from `output/civic-voice/` — Glob for `mayor_c*.json`
+7. Write statements to `output/civic-voice/mayor_c{XX}.json`
+8. Update `.claude/agent-memory/mayor/MEMORY.md` with positions taken, canon assertions
 
 ## Turn Budget (maxTurns: 12)
 - Turn 1: Boot sequence — read identity, rules, memory, workspace

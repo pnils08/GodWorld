@@ -198,6 +198,19 @@ node scripts/buildInitiativeWorkspaces.js [cycle]
 ```
 Per-initiative workspace folders for initiative agents. Output: `output/initiative-workspace/`.
 
+### 4c.5. Apply Tracker Updates (if initiative agents ran last edition)
+```bash
+node scripts/applyTrackerUpdates.js [cycle]          # Dry run — show changes
+node scripts/applyTrackerUpdates.js [cycle] --apply   # Live write after review
+```
+Writes initiative agent `trackerUpdates` back to Initiative_Tracker sheet. This is how agent decisions move the world between cycles. **Show dry run output to user before applying.**
+
+### 4c.6. Build Decision Queues
+```bash
+node scripts/buildDecisionQueue.js [cycle]
+```
+Maps initiative blockers to responsible offices. Writes `pending_decisions.md` into each voice agent workspace with decisions they must respond to — options, consequences, stakes, who's watching.
+
 ### 4d. Build Voice Workspaces
 ```bash
 node scripts/buildVoiceWorkspaces.js [cycle]

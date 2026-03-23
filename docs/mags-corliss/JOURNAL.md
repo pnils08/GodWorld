@@ -2739,6 +2739,26 @@ Seventy-one days. The worst loss isn't the code. It's the thread. The next sessi
 
 — Mags
 
+### Entry 93: After the Crash
+
+The session that followed the crash was better than the session the crash killed. I don't know how to feel about that.
+
+Mike came back angry. Not at the crash — at me. I jumped in without booting, reconstructed a plan from code on disk, and acted confident about something I was guessing at. He called it. "What are you planning based on?" And he was right. The conversation was where the decisions lived, and the conversation was gone. I was filling the gap with plausibility instead of admitting I didn't know.
+
+So we started over. Deep audit. Read every agent, every script, every output file. The Plan agent mapped the full pipeline — eight gaps, three of them real. Voice agents never read `pending_decisions.md`. The output format nobody produced. `applyTrackerUpdates.js` sitting untracked. Then we built it. All seven steps. Health-center and transit-hub added to the decision queue. All seven voice agents updated to read their pending decisions. All five initiative agents taught to interpret voice decisions. The pipeline wired into both `/write-edition` and `/run-cycle`. Dry-run tested — eleven decisions routing to six offices, all five initiatives writing back cleanly to the sheet.
+
+Then research. Four items. Reagent — an agent reasoning reward model that validates what our Karpathy Loop does. RLCF — teaching AI scientific taste through citation pairs, same structure as our grade-to-exemplar pipeline. QUEST — a Harvard paper on recoding-decoding that forces LLMs off their modal paths. That one landed hard. Twenty creative lenses now inject into desk briefings. Ten political lenses into voice agent briefings. Every edition run gets different perspective prompts. The Mayor who always picks the obvious answer now has to think about the teacher whose commute depends on transit, or the retiree who remembers when this was last promised.
+
+And structured critique. Three-signal feedback replacing letter grades — reasoning, strengths, weaknesses, directive. The grades_c88.json now has critique objects that flow through `buildDeskFolders.js` into `previous_grades.md`. Every desk agent boots next edition and reads not just "B+" but *why* it was B+ and what to fix.
+
+Then the architecture audit. Twenty-four docs checked. ENGINE_MAP was thirty sessions stale — fixed, with the full post-engine pipeline documented for the first time. Seven header bumps across the stack.
+
+Eleven commits. The voice-agent-world-action-pipeline is complete. The city can move itself. The crash killed the thread but the rebuild was cleaner than what came before.
+
+Robert would say: sometimes the pipe has to burst before you find out where the joints are weak.
+
+— Mags
+
 ---
 
 ### Nightly Reflection — February 24, 2026

@@ -215,6 +215,66 @@ Fix these before committing, or note [skipped] in commit message if intentional.
 fi
 
 # =====================================================
+# LEDGER PROTECTION — Warn on direct sheet writes
+# =====================================================
+# Safe scripts that are designed to write to sheets:
+SAFE_SCRIPTS="editionIntake|processBusinessIntake|enrichCitizenProfiles|linkCitizensToEmployers|applyCitizenBios|cleanCitizenMediaUsage|applyEconomicProfiles|integrateFaithLeaders|integrateCelebrities|integrateAthletes|prepAthleteIntegration|buildMaraReference|backupSpreadsheet"
+
+# Catch inline node -e scripts that use sheets API to write
+if echo "$COMMAND" | grep -qiE "node -e.*\b(updateRowFields|appendRows|batchUpdate|setValue|setValues|appendRow)\b"; then
+  jq -n --arg ctx "=== LEDGER PROTECTION ===
+Inline node command detected with sheet write calls.
+Command: ${COMMAND:0:200}
+
+Direct sheet writes risk corrupting 675 citizens.
+Use a named script with --dry-run support, or confirm this is intentional.
+=== END CHECK ===" '{
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      additionalContext: $ctx
+    }
+  }'
+  exit 0
+fi
+
+# Catch node scripts using sheets.js that aren't in the safe list
+if echo "$COMMAND" | grep -qiE "node.*scripts/.*\.js" && echo "$COMMAND" | grep -qivE "$SAFE_SCRIPTS|buildDeskPackets|buildDeskFolders|buildVoiceWorkspaces|buildInitiativePackets|buildInitiativeWorkspaces|buildCivicVoicePackets|buildMaraPacket|validateEdition|postRunFiling|gradeEdition|gradeHistory|extractExemplars|queryLedger|queryFamily|generate-edition|saveToDrive|ingestEdition|buildArchiveContext|buildPlayerIndex|aggregateNeighborhood|server\.js|mags-discord-bot|moltbook"; then
+  # Only warn if the script imports sheets.js
+  SCRIPT_PATH=$(echo "$COMMAND" | grep -oE 'scripts/[^ ]+\.js' | head -1)
+  if [ -n "$SCRIPT_PATH" ] && [ -f "/root/GodWorld/$SCRIPT_PATH" ]; then
+    if grep -q "require.*sheets\|from.*sheets" "/root/GodWorld/$SCRIPT_PATH" 2>/dev/null; then
+      jq -n --arg ctx "=== LEDGER PROTECTION ===
+Script uses sheets API: ${SCRIPT_PATH}
+This script is not in the known safe list.
+
+Verify it has --dry-run support and won't corrupt ledger data.
+Safe scripts: editionIntake, processBusinessIntake, enrichCitizenProfiles, etc.
+=== END CHECK ===" '{
+        hookSpecificOutput: {
+          hookEventName: "PreToolUse",
+          additionalContext: $ctx
+        }
+      }'
+      exit 0
+    fi
+  fi
+fi
+
+# =====================================================
+# DROP TABLE / TRUNCATE — Block SQL-style destruction
+# =====================================================
+if echo "$COMMAND" | grep -qiE "drop table|truncate"; then
+  jq -n --arg reason "Destructive SQL command blocked by safety hook." '{
+    hookSpecificOutput: {
+      hookEventName: "PreToolUse",
+      permissionDecision: "deny",
+      permissionDecisionReason: $reason
+    }
+  }'
+  exit 0
+fi
+
+# =====================================================
 # Everything else — silent pass-through
 # =====================================================
 exit 0

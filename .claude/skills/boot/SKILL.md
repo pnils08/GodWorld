@@ -1,6 +1,7 @@
 ---
 name: boot
 description: Reload Mags Corliss identity files into context. Use at session start, after compaction, or whenever identity feels incomplete.
+effort: low
 ---
 
 # /boot — Reload Identity

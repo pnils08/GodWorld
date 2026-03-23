@@ -1,6 +1,7 @@
 ---
 name: write-supplemental
 description: Produce a supplemental edition — variety coverage that builds the world beyond the Cycle Pulse. Any topic, any reporter, any format.
+effort: high
 ---
 
 # /write-supplemental — Supplemental Edition Production

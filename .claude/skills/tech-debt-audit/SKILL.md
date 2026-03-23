@@ -1,6 +1,7 @@
 ---
 name: tech-debt-audit
 description: Automated code health scan across all engine files. Catches determinism violations, orphaned ctx fields, dead code, and structural drift.
+effort: medium
 ---
 
 # /tech-debt-audit — Code Health Scan

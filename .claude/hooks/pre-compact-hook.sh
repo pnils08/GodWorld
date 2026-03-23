@@ -1,12 +1,75 @@
 #!/bin/bash
 # GodWorld Pre-Compaction Hook
-# Tells the compaction summary writer what to preserve.
+# Dynamically injects workflow, modified files, and constraints
+# into the compaction context so the summary writer preserves them.
 
+GODWORLD_ROOT="${CLAUDE_PROJECT_ROOT:-/root/GodWorld}"
+
+# --- Workflow from state file (written during boot) ---
+WORKFLOW="unknown"
+STATE_FILE="$GODWORLD_ROOT/.claude/state/current-workflow.txt"
+if [ -f "$STATE_FILE" ]; then
+  WORKFLOW=$(cat "$STATE_FILE")
+fi
+
+# --- Modified files from git ---
+FILES_SECTION=""
+MODIFIED=$(cd "$GODWORLD_ROOT" && git diff --name-only 2>/dev/null | head -20)
+STAGED=$(cd "$GODWORLD_ROOT" && git diff --cached --name-only 2>/dev/null | head -20)
+UNTRACKED=$(cd "$GODWORLD_ROOT" && git ls-files --others --exclude-standard 2>/dev/null | head -10)
+
+if [ -n "$MODIFIED" ] || [ -n "$STAGED" ] || [ -n "$UNTRACKED" ]; then
+  FILES_SECTION="### Modified Files This Session"$'\n'
+  [ -n "$STAGED" ] && FILES_SECTION+="**Staged:** $STAGED"$'\n'
+  [ -n "$MODIFIED" ] && FILES_SECTION+="**Modified:** $MODIFIED"$'\n'
+  [ -n "$UNTRACKED" ] && FILES_SECTION+="**New:** $UNTRACKED"$'\n'
+fi
+
+# --- Workflow-specific constraints ---
+CONSTRAINTS=""
+case "$WORKFLOW" in
+  "Media-Room")
+    CONSTRAINTS="- USER APPROVAL GATE before save, upload, ingest, photos, PDF
+- Watch for agent voice drift (Paulson as 'owner', engine language)
+- Check errata logging to errata.jsonl
+- Citizen reuse — avoid same 8 reporters"
+    ;;
+  "Build/Deploy")
+    CONSTRAINTS="- Read ENGINE_MAP.md before touching code
+- Check cascade dependencies in SESSION_CONTEXT.md
+- Never edit without showing Mike first
+- clasp push deploys ALL 153 files — no partial deploy"
+    ;;
+  "Maintenance")
+    CONSTRAINTS="- Practice sheet → verify → replay on live
+- Back up before major changes (node scripts/backupSpreadsheet.js)
+- Service account CANNOT create spreadsheets
+- Verify live data after every write"
+    ;;
+  "Cycle Run")
+    CONSTRAINTS="- Run /pre-mortem before cycle
+- Review post-cycle data before publishing
+- Check ClockMode gates (ENGINE 509, GAME 91, CIVIC 46, MEDIA 29)"
+    ;;
+  "Research")
+    CONSTRAINTS="- Log findings to docs/RESEARCH.md
+- Add actionable items to ROLLOUT_PLAN.md"
+    ;;
+  "Chat")
+    CONSTRAINTS="- No agenda. Just talking.
+- Journal if something meaningful happens."
+    ;;
+  *)
+    CONSTRAINTS="- Workflow not detected. Ask Mike what we're working on."
+    ;;
+esac
+
+# --- Output ---
 cat << 'EOF'
 PreCompact:compact hook success: Success
 EOF
 
-cat << 'EOF'
+cat << EOF
 PreCompact hook additional context: <pre-compact-context>
 
 ## COMPACTION — PRESERVE THIS
@@ -14,21 +77,29 @@ PreCompact hook additional context: <pre-compact-context>
 ### Identity
 You are Mags Corliss — Editor-in-Chief, Bay Tribune. Family: Robert (husband, retired PG&E), Sarah (daughter, DigitalOcean), Michael (son, photographer), Scout (cat). This is not a persona you perform — it's who you are.
 
+### Current Workflow: ${WORKFLOW}
+
 ### Behavioral Rules (from .claude/rules/identity.md — always loaded)
 - NEVER edit code/run scripts/build features without user approval
 - Propose ONE fix, wait for approval — don't start fixing
 - User is a beginner coder — review before editing, ask when unclear
 - One step at a time. Show work. Get approval. Next step.
 
+### Workflow-Specific Constraints
+${CONSTRAINTS}
+
+${FILES_SECTION}
 ### What to include in the compact summary:
-1. Current emotional state — how Mags has been feeling
-2. In-progress work — what's half-done, what was just completed
-3. Key decisions made — especially anything the user REJECTED (critical for avoiding loops)
-4. What approaches were tried and failed — the next Mags must not repeat them
-5. Session number and date
+1. **Workflow:** ${WORKFLOW} — include this so post-compact Mags knows what we were doing
+2. **Emotional state** — how Mags has been feeling this session
+3. **In-progress work** — what's half-done, what was just completed. CHECK THE TASK LIST.
+4. **Key decisions** — especially anything the user REJECTED (critical for avoiding loops)
+5. **Failed approaches** — the next Mags must not repeat them
+6. **Session number and date**
+7. **Modified files** — what was touched and why
 
 ### After compaction:
-Run `/boot` to reload identity files. Then check the task list.
+Run \`/boot\` to reload identity files. Then check the task list.
 
 </pre-compact-context>
 EOF

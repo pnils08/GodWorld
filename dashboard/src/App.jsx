@@ -35,6 +35,8 @@ import {
   Radio,
   Star,
   BarChart3,
+  Wifi,
+  Server,
 } from 'lucide-react';
 
 // --- Data Fetching ---
@@ -72,6 +74,7 @@ export default function App() {
   const [overlayArticle, setOverlayArticle] = useState(null);
   const [citizenDetail, setCitizenDetail] = useState(null);
   const [coverageTrail, setCoverageTrail] = useState(null);
+  const [missionData, setMissionData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -139,6 +142,18 @@ export default function App() {
       fetchAPI('/api/newsroom').then(setNewsroom).catch(() => {});
     }
   }, [activeTab, newsroom]);
+
+  // Load mission data when MISSION tab is selected
+  useEffect(() => {
+    if (activeTab === 'MISSION' && !missionData) {
+      Promise.all([
+        fetchAPI('/api/health'),
+        fetchAPI('/api/session-events'),
+      ]).then(([h, events]) => {
+        setMissionData({ health: h, events });
+      }).catch(() => {});
+    }
+  }, [activeTab, missionData]);
 
   // Load hooks/arcs when INTEL tab is selected
   useEffect(() => {
@@ -396,6 +411,7 @@ export default function App() {
             { label: 'Sports', view: 'sports', tab: 'SPORTS' },
             { label: 'Neighborhoods', view: 'neighborhoods', tab: 'CITY' },
             { label: 'Article Search', view: 'search', tab: 'SEARCH' },
+            { label: 'Mission Control', view: 'mission', tab: 'MISSION' },
           ].map(item => (
             <div
               key={item.view}
@@ -879,6 +895,9 @@ export default function App() {
           <ArticleSearchView />
         )}
 
+        {/* MISSION TAB */}
+        {activeTab === 'MISSION' && <MissionControlView data={missionData} />}
+
         {/* KEY CITIZENS */}
         {activeTab === 'EDITION' && tier1.length > 0 && (
           <section className="mt-12 mb-8">
@@ -919,6 +938,7 @@ export default function App() {
         <NavButton icon={Zap} label="Intel" active={activeTab === 'INTEL'} onClick={() => { setView('intel'); setActiveTab('INTEL'); }} />
         <NavButton icon={Trophy} label="Sports" active={activeTab === 'SPORTS'} onClick={() => { setView('sports'); setActiveTab('SPORTS'); }} />
         <NavButton icon={MapPin} label="City" active={activeTab === 'CITY'} onClick={() => { setView('neighborhoods'); setActiveTab('CITY'); }} />
+        <NavButton icon={Activity} label="Mission" active={activeTab === 'MISSION'} onClick={() => { setView('mission'); setActiveTab('MISSION'); }} />
       </nav>
     </div>
   );
@@ -1758,6 +1778,156 @@ function InitiativeCard({ initiative }) {
         </div>
       )}
     </div>
+  );
+}
+
+function MissionControlView({ data }) {
+  if (!data) {
+    return (
+      <div className="flex items-center justify-center py-20">
+        <Loader size={24} className="text-sky-500 animate-spin" />
+      </div>
+    );
+  }
+
+  const { health, events } = data;
+  const engineStatus = health?.status || 'unknown';
+  const engineLabel = health?.engine || '—';
+  const latestCycle = health?.data?.latestCycleArchive?.replace('cycle-', '') || '—';
+  const latestEdition = health?.data?.latestEdition || '—';
+
+  const recentEvents = (events || [])
+    .sort((a, b) => new Date(b.receivedAt || b.timestamp) - new Date(a.receivedAt || a.timestamp))
+    .slice(0, 10);
+
+  const eventColor = (type) => {
+    if (!type) return 'text-neutral-500';
+    const t = type.toLowerCase();
+    if (t.includes('start')) return 'text-emerald-500';
+    if (t.includes('stop') || t.includes('end')) return 'text-amber-500';
+    if (t.includes('webhook')) return 'text-sky-500';
+    return 'text-neutral-400';
+  };
+
+  const formatTime = (ts) => {
+    if (!ts) return '—';
+    try {
+      const d = new Date(ts);
+      return d.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false });
+    } catch { return '—'; }
+  };
+
+  return (
+    <section className="space-y-4">
+      {/* SYSTEM HEALTH */}
+      <div className="p-5 bg-neutral-900 rounded-2xl border border-white/5">
+        <div className="flex items-center gap-2 mb-4">
+          <Server size={14} className="text-sky-500" />
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-sky-500">System Health</h3>
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div className="p-3 bg-black/40 rounded-xl">
+            <div className="text-[8px] font-bold text-neutral-500 uppercase">Status</div>
+            <div className={`text-sm font-black ${engineStatus === 'ok' ? 'text-emerald-500' : 'text-amber-500'}`}>
+              {engineStatus === 'ok' ? 'Online' : engineStatus}
+            </div>
+          </div>
+          <div className="p-3 bg-black/40 rounded-xl">
+            <div className="text-[8px] font-bold text-neutral-500 uppercase">Engine</div>
+            <div className="text-sm font-black text-neutral-300">{engineLabel}</div>
+          </div>
+          <div className="p-3 bg-black/40 rounded-xl">
+            <div className="text-[8px] font-bold text-neutral-500 uppercase">Latest Cycle</div>
+            <div className="text-sm font-black text-neutral-300">{latestCycle}</div>
+          </div>
+          <div className="p-3 bg-black/40 rounded-xl">
+            <div className="text-[8px] font-bold text-neutral-500 uppercase">Latest Edition</div>
+            <div className="text-sm font-black text-neutral-300 truncate">{latestEdition}</div>
+          </div>
+          <div className="p-3 bg-black/40 rounded-xl">
+            <div className="text-[8px] font-bold text-neutral-500 uppercase">Droplet</div>
+            <div className="text-sm font-black text-neutral-300">1 vCPU / 2GB</div>
+          </div>
+          <div className="p-3 bg-black/40 rounded-xl">
+            <div className="text-[8px] font-bold text-neutral-500 uppercase">Disk</div>
+            <div className="text-sm font-black text-neutral-300">25GB SSD</div>
+          </div>
+        </div>
+      </div>
+
+      {/* SESSION EVENTS */}
+      <div className="p-5 bg-neutral-900 rounded-2xl border border-white/5">
+        <div className="flex items-center gap-2 mb-4">
+          <Radio size={14} className="text-sky-500" />
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-sky-500">Session Events</h3>
+          <span className="text-[9px] font-mono text-neutral-500 ml-auto">{events?.length || 0} total</span>
+        </div>
+        {recentEvents.length === 0 ? (
+          <p className="text-xs text-neutral-500 italic">No events recorded</p>
+        ) : (
+          <div className="space-y-2">
+            {recentEvents.map((ev, i) => (
+              <div key={i} className="flex items-center gap-3 p-2.5 bg-black/40 rounded-xl">
+                <div className={`w-1.5 h-1.5 rounded-full shrink-0 ${eventColor(ev.type).replace('text-', 'bg-')}`} />
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2">
+                    <span className={`text-[11px] font-bold ${eventColor(ev.type)}`}>{ev.type || 'unknown'}</span>
+                    {ev.session_id && (
+                      <span className="text-[8px] font-mono text-neutral-500 truncate">{ev.session_id.slice(0, 12)}</span>
+                    )}
+                  </div>
+                  <div className="text-[9px] text-neutral-500 mt-0.5">{formatTime(ev.receivedAt || ev.timestamp)}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* CHANNEL STATUS */}
+      <div className="p-5 bg-neutral-900 rounded-2xl border border-white/5">
+        <div className="flex items-center gap-2 mb-4">
+          <Wifi size={14} className="text-sky-500" />
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-sky-500">Channel Status</h3>
+        </div>
+        <div className="flex items-center gap-3 p-3 bg-black/40 rounded-xl">
+          <div className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+          <div className="flex-1">
+            <div className="text-xs font-bold text-neutral-300">Discord</div>
+            <div className="text-[9px] text-neutral-500">MagsClaudeCode</div>
+          </div>
+          <span className="text-[9px] font-bold text-emerald-500 uppercase">Connected</span>
+        </div>
+      </div>
+
+      {/* QUICK ACTIONS */}
+      <div className="p-5 bg-neutral-900 rounded-2xl border border-white/5">
+        <div className="flex items-center gap-2 mb-4">
+          <Zap size={14} className="text-sky-500" />
+          <h3 className="text-[10px] font-bold uppercase tracking-widest text-sky-500">Quick Actions</h3>
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={() => console.log('Restart Bot clicked')}
+            className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-neutral-400 hover:text-white hover:border-white/20 transition-colors"
+          >
+            Restart Bot
+          </button>
+          <button
+            onClick={() => console.log('Health Check clicked')}
+            className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-neutral-400 hover:text-white hover:border-white/20 transition-colors"
+          >
+            Health Check
+          </button>
+          <button
+            onClick={() => console.log('Clear Events clicked')}
+            className="flex-1 px-3 py-2.5 rounded-xl border border-white/10 text-[11px] font-bold text-neutral-400 hover:text-white hover:border-white/20 transition-colors"
+          >
+            Clear Events
+          </button>
+        </div>
+      </div>
+    </section>
   );
 }
 

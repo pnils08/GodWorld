@@ -1,6 +1,7 @@
 ---
 name: cycle-review
 description: Post-Rhea editorial quality gate. 3-pass review — structural, factual (defer to Rhea), editorial. Catches voice drift, genre bleed, tonal inconsistency, and narrative quality issues that data verification misses.
+effort: high
 ---
 
 # /cycle-review — Edition Quality Gate

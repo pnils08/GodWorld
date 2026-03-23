@@ -19,6 +19,12 @@
             "type": "command",
             "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/session-startup-hook.sh\"",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "EVENT_TYPE=session_start bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/session-event-post.sh\"",
+            "timeout": 5,
+            "async": true
           }
         ]
       }
@@ -31,6 +37,18 @@
             "type": "command",
             "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/pre-tool-check.sh\"",
             "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/post-write-check.sh\"",
+            "timeout": 5
           }
         ]
       }
@@ -69,6 +87,12 @@
             "type": "command",
             "command": "bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/stop-hook.sh\"",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "EVENT_TYPE=session_stop bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/session-event-post.sh\"",
+            "timeout": 5,
+            "async": true
           }
         ]
       }

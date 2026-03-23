@@ -1,6 +1,7 @@
 ---
 name: pre-mortem
 description: Scan engine phases before a cycle run to predict silent failures. Checks ctx field dependencies, sheet header alignment, code rule violations, and cascade risks.
+effort: high
 ---
 
 # /pre-mortem — Engine Health Scan

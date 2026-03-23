@@ -1,3 +1,9 @@
+---
+name: grill-me
+description: Force deep interrogation of a plan before any code gets written.
+effort: medium
+---
+
 # /grill-me — Discovery Before Building
 
 **Purpose:** Force deep interrogation of a plan before any code gets written. Multiple sessions have been burned building the wrong thing because we didn't ask enough questions first.

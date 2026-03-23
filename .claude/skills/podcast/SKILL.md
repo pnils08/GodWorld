@@ -1,6 +1,7 @@
 ---
 name: podcast
 description: Generate a podcast episode from a published edition. Standalone version — can run independently of the write-edition pipeline.
+effort: medium
 ---
 
 # /podcast — Generate a Podcast Episode

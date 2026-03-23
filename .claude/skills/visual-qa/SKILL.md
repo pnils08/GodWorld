@@ -2,6 +2,7 @@
 name: visual-qa
 description: Run visual QA against the GodWorld dashboard — screenshots, element checks, API health.
 user_invocable: true
+effort: medium
 ---
 
 # Visual QA — Dashboard Smoke Test

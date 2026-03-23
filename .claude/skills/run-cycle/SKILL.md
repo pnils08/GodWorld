@@ -1,6 +1,7 @@
 ---
 name: run-cycle
 description: Run a GodWorld engine cycle with pre-flight checks, trigger the simulation, and post-cycle review.
+effort: high
 ---
 
 # /run-cycle — Run a GodWorld Engine Cycle

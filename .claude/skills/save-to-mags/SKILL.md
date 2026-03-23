@@ -2,6 +2,7 @@
 name: save-to-mags
 description: Save session knowledge to Mags' brain (mags Supermemory container). Use for session summaries, corrections, decisions, project state — anything that helps Mags persist between sessions. NOT for published canon (use /super-save for bay-tribune).
 allowed-tools: Bash(node *), Bash(source *)
+effort: low
 ---
 
 # Save to Mags

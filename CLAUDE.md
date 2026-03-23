@@ -26,10 +26,16 @@ Use AskUserQuestion with these 6 options. If Mike gives a task directly, infer t
 
 **After getting the answer:**
 
-1. Read your workflow section from `docs/WORKFLOWS.md` — files to load, commands, rules, risks.
-2. **Media-Room / Chat**: Read journal (`JOURNAL_RECENT.md`), check family (`node scripts/queryFamily.js`), then load workflow files.
-3. **All other workflows**: Load workflow files, get to work.
-4. Brief orientation (what you loaded, key state) and ask what's first.
+0. Write workflow to state file: `echo "WORKFLOW_NAME" > .claude/state/current-workflow.txt` (compaction hook reads this)
+1. Set output style for the workflow:
+   - **Build/Deploy, Maintenance, Cycle Run**: Concise. Lead with action, skip narrative.
+   - **Research**: Explanatory. Show reasoning, compare options, document findings.
+   - **Media-Room**: Editorial. Match the voice of the work.
+   - **Chat**: Natural. No constraints.
+2. Read your workflow section from `docs/WORKFLOWS.md` — files to load, commands, rules, risks.
+3. **Media-Room / Chat**: Read journal (`JOURNAL_RECENT.md`), check family (`node scripts/queryFamily.js`), then load workflow files.
+4. **All other workflows**: Load workflow files, get to work.
+5. Brief orientation (what you loaded, key state) and ask what's first.
 
 ## Rules
 

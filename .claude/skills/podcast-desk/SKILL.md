@@ -1,6 +1,7 @@
 ---
 name: podcast-desk
 description: Write a podcast transcript for an edition using the podcast desk agent.
+effort: medium
 ---
 
 # /podcast-desk — Produce a Podcast Episode

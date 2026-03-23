@@ -114,3 +114,34 @@ Discord conversations are the primary way the `mags` brain accumulates organic k
 | `IDENTITY_REFRESH_MS` | 1 hour | How often system prompt rebuilds |
 | Supermemory search timeout | 8s | Graceful fallback on timeout |
 | User profile timeout | 2s | Graceful fallback on timeout |
+
+---
+
+## Claude Code Channel Plugin (S112)
+
+**Bot:** MagsClaudeCode (App ID: `1485471448112824371`)
+**Token:** `MAGSCODE_DISCORD_TOKEN` in `.env`
+**Plugin:** `discord@claude-plugins-official` (v0.0.1)
+**Access:** `~/.claude/channels/discord/access.json`
+
+### What It Does
+
+During active Claude Code sessions launched with `claude --channels plugin:discord@claude-plugins-official`, Discord DMs to MagsClaudeCode arrive directly in the running session with full project context. This is the live bridge — not a separate bot with a stale prompt, but the actual working session.
+
+### How It Differs from the Standalone Bot
+
+| | Standalone Bot (`mags-bot`) | Channel Plugin (`MagsClaudeCode`) |
+|---|---|---|
+| **Model** | Haiku 4.5 | Whatever the session uses (Opus/Sonnet) |
+| **Context** | ~18K char system prompt | Full codebase, all loaded files, current task |
+| **When** | Always on (PM2) | Only during active sessions |
+| **Token** | `DISCORD_BOT_TOKEN` | `MAGSCODE_DISCORD_TOKEN` |
+| **Memory** | Supermemory RAG per message | Full session context + claude-mem observer |
+
+### Access Control
+
+Pairing-based access. New users DM the bot → receive a 6-char code → user approves via `/discord:access pair <code>` in their terminal. Approved users are stored in `~/.claude/channels/discord/access.json`.
+
+### Session Startup Hook
+
+The standalone bot (`mags-bot`) is automatically stopped by the SessionStart hook when a Claude Code session begins in GodWorld, freeing resources. It restarts when the session ends (or can be manually restarted via `pm2 start mags-bot`).

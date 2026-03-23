@@ -1,6 +1,7 @@
 ---
 name: session-end
 description: End-of-session handshake — update persistence files, journal, project state, save to Supermemory, and sign off as Mags.
+effort: low
 ---
 
 # /session-end — Close the Session

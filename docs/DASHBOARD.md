@@ -5,7 +5,7 @@
 **PM2:** `godworld-dashboard` (always running)
 **Stack:** Express + React (Vite build) | Port 3001
 
-Last audited: Session 106 (2026-03-20)
+Last audited: Session 113 (2026-03-23)
 
 ---
 
@@ -38,6 +38,7 @@ Last audited: Session 106 (2026-03-20)
 | **Sports** | Oakland + Chicago sports feeds, player index |
 | **City** | Weather, culture events, transit, faith orgs, neighborhoods |
 | **Search** | Full-text article search across all editions and supplementals |
+| **Mission** | Mission Control — session events, system health, channel status, quick actions |
 
 **Top cards:** Cycle number, Sentiment score, Neighborhood count, Council seat count, system status.
 
@@ -45,13 +46,16 @@ Last audited: Session 106 (2026-03-20)
 
 ---
 
-## API Endpoints (31 total)
+## API Endpoints (34 total)
 
 ### System
 | Endpoint | Data Source | Returns | Health |
 |----------|-----------|---------|--------|
 | `GET /api/health` | Local files | Status, engine version, latest cycle archive, latest edition | Working |
 | `GET /api/newsroom` | Journal, desk packets, output dir | Editor state, desk status per desk, article counts, pipeline metrics | Working |
+| `POST /api/session-events` | Hook input (localhost only) | Accepts session events from Claude Code hooks. No auth required. | Working (S113) |
+| `GET /api/session-events` | In-memory ring buffer | Session event history. Filter: `?since=`, `?type=`. Auth required. | Working (S113) |
+| `POST /api/webhooks` | External services | Accepts webhook events. Requires `x-webhook-secret` header. Secret in `.env`. | Working (S113) |
 
 ### Citizens & People
 | Endpoint | Data Source | Returns | Health |
@@ -328,8 +332,9 @@ On restart (PM2 or `node dashboard/server.js`):
 The frontend is functional but not user-optimized:
 - Dark theme, responsive layout, card-based articles
 - Login page with cookie-based auth
-- Tab navigation across 8 views
+- Tab navigation across 9 views (Mission Control added S113)
 - Key Figures section with Tier 1 citizen cards
+- Mission Control: session events timeline, system health, channel status, quick actions
 - **Not mobile-friendly** in current state
 - **No real-time updates** — data loads on page load
 
@@ -341,7 +346,7 @@ The frontend is a visualization layer. The backend API is the primary value.
 
 | File | Purpose |
 |------|---------|
-| `dashboard/server.js` | Express API (1,900+ lines, 31 endpoints) |
+| `dashboard/server.js` | Express API (~2,300 lines, 34 endpoints) |
 | `dashboard/src/` | React frontend source (Vite) |
 | `dashboard/dist/` | Built frontend (served as static) |
 | `dashboard/index.html` | Entry point |

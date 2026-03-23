@@ -94,6 +94,10 @@ function doLogin(e) {
   // Auth middleware — accepts basic auth OR cookie
   app.use((req, res, next) => {
     if (req.path === '/api/health' || req.path === '/login' || req.path === '/auth') return next();
+    // Session events POST: localhost only (hooks), GET: requires auth
+    if (req.path === '/api/session-events' && req.method === 'POST' && (req.ip === '127.0.0.1' || req.ip === '::1' || req.ip === '::ffff:127.0.0.1')) return next();
+    // Webhooks: authenticated by secret header, not dashboard auth
+    if (req.path === '/api/webhooks' && req.method === 'POST') return next();
 
     // Check cookie first (PWA)
     if (req.cookies[AUTH_COOKIE] === COOKIE_TOKEN) return next();
@@ -2228,6 +2232,52 @@ app.get('/api/newsroom', (req, res) => {
     citizenArchive: archiveStats,
     articleIndex: indexStats,
   });
+});
+
+// --- Session Events + Webhook Receiver ---
+const sessionEvents = [];
+const MAX_SESSION_EVENTS = 200;
+const WEBHOOK_SECRET = process.env.WEBHOOK_SECRET || '';
+
+function pushEvent(event) {
+  event.receivedAt = new Date().toISOString();
+  sessionEvents.push(event);
+  if (sessionEvents.length > MAX_SESSION_EVENTS) {
+    sessionEvents.splice(0, sessionEvents.length - MAX_SESSION_EVENTS);
+  }
+}
+
+// Internal: hooks POST from localhost (no auth needed)
+app.post('/api/session-events', (req, res) => {
+  pushEvent({ ...req.body });
+  res.json({ ok: true, count: sessionEvents.length });
+});
+
+// External: webhooks from CI, deploy, monitoring (requires secret)
+app.post('/api/webhooks', (req, res) => {
+  const secret = req.headers['x-webhook-secret'] || req.query.secret;
+  if (!WEBHOOK_SECRET || secret !== WEBHOOK_SECRET) {
+    return res.status(401).json({ error: 'Invalid webhook secret' });
+  }
+  const event = {
+    type: 'webhook',
+    source: req.body.source || 'unknown',
+    title: req.body.title || 'Webhook event',
+    body: req.body.body || '',
+    severity: req.body.severity || 'info',
+    raw: req.body
+  };
+  pushEvent(event);
+  res.json({ ok: true, count: sessionEvents.length });
+});
+
+app.get('/api/session-events', (req, res) => {
+  const since = req.query.since;
+  const type = req.query.type;
+  let results = sessionEvents;
+  if (since) results = results.filter(e => e.receivedAt > since);
+  if (type) results = results.filter(e => e.type === type);
+  res.json(results);
 });
 
 // Serve static React build in production

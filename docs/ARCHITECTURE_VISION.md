@@ -100,10 +100,10 @@ New per-session containers (`build`, `media`, `research`, etc.) would be ADDED a
 | Droplet (2GB, DO) | Running | Sufficient for now. 4GB if running Ollama + multiple sessions. |
 | tmux | Running | Already keeps sessions alive |
 | PM2 | Running | Dashboard, Discord bot |
-| Remote Control | Available | Test `claude remote-control --spawn worktree`. Unset DISABLE_TELEMETRY first. |
-| Channels (Discord) | Available | Install plugin, configure with existing bot token |
-| Supermemory (3 containers) | Running | Add per-session containers when sessions are persistent |
-| Dashboard (31 endpoints) | Running | Extend with session status, channel health, quick actions |
+| Remote Control | Account-gated | `claude remote` returns "not yet enabled." Waiting on Anthropic. |
+| Channels (Discord) | **Running (S112)** | MagsClaudeCode bot paired. Launch with `claude --channels plugin:discord@claude-plugins-official` |
+| Supermemory (4 containers) | Running | `mags`, `bay-tribune`, `mara`, `jarvis`. Add per-session containers when sessions are persistent |
+| Dashboard (34 endpoints) | Running | S113: Mission Control tab, session events API, webhook receiver. |
 | Ollama | Not installed | Phase 21. Install when ready for local model tasks. |
 | Jarvis (/root instance) | Not built | Needs CLAUDE.md at /root level with project routing logic |
 
@@ -127,9 +127,9 @@ New per-session containers (`build`, `media`, `research`, etc.) would be ADDED a
 
 In order of dependency:
 
-1. **Test Remote Control server mode** — `claude remote-control --spawn worktree` on the droplet. Verify multiple sessions work, phone access works, tmux keeps it alive.
-2. **Test Discord Channel** — Install plugin, attach to a running session. Verify messages arrive and replies go back.
-3. **Extend dashboard** — Session status panel. What's running, what workflow, how long.
+1. ~~**Test Remote Control server mode**~~ — Account-gated. Waiting on Anthropic. (S112-S113 confirmed still blocked)
+2. ~~**Test Discord Channel**~~ — **DONE S112.** MagsClaudeCode bot created, paired, messages flow bidirectionally during active sessions.
+3. ~~**Extend dashboard**~~ — **DONE S113.** Mission Control tab with session events, health panel, channel status, quick actions. Webhook receiver for external services.
 4. **Per-session Supermemory containers** — Create `build`, `media`, `research` containers. Route session-end saves to the right one.
-5. **Jarvis layer** — CLAUDE.md at /root with project routing. Own Supermemory container.
+5. ~~**Jarvis layer**~~ — **PARTIAL.** `/root` instance exists with MEMORY.md, `jarvis` supermemory container, and `jarvis-save.js`. Not a separate persona — just Claude at the root level.
 6. **Ollama** — Local model for lightweight tasks. Phase 21.

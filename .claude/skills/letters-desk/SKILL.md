@@ -1,6 +1,7 @@
 ---
 name: letters-desk
 description: Write the letters to the editor section with citizen voices.
+effort: low
 ---
 
 # /letters-desk — Write Letters Section

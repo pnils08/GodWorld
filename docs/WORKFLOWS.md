@@ -66,6 +66,8 @@ node scripts/queryLedger.js   # Query live ledger data
 
 **Key rule:** Read ENGINE_MAP.md before touching code. Check cascade deps. Review before edit. Never edit without showing Mike first.
 
+**Batch operations:** For bulk file migrations or repetitive edits across many files, use `claude -p "task" --allowedTools "Edit,Read,Glob"` in a loop. Scopes tools so parallel runs can't accidentally shell out. Example: `for f in editions/e*/metadata.json; do claude -p "update format in $f" --allowedTools "Edit,Read"; done`
+
 ---
 
 ## Maintenance
@@ -98,6 +100,8 @@ node scripts/buildMaraReference.js       # Regenerate reference files
 - Maintenance scripts have historically skipped rows silently (integrateAthletes.js skipped 38 birth years)
 
 **Key rule:** Practice sheet → verify → replay on live. Verify live data after every write. Back up before any major changes.
+
+**Batch operations:** For bulk citizen repairs or doc updates, use `claude -p "task" --allowedTools "Edit,Read,Glob,Bash(node:*)"` to scope tools safely. Prevents accidental sheet writes outside approved scripts.
 
 ---
 

@@ -20,7 +20,7 @@
 
 ### Open — Architecture & Production
 
-- **DESIGN: Agent knowledge separation** — Agents should use `bay-tribune` for canon data, not `mags` for personal memory. Local workspaces + dashboard API is the clean path.
+- ~~**DESIGN: Agent knowledge separation**~~ — **DONE S113 (audit).** Already correctly configured: `.claude/.supermemory-claude/config.json` sets `repoContainerTag: "bay-tribune"`, `personalContainerTag: "mags"`. Desk agents don't call supermemory directly — they use local workspaces. `/super-search` searches `bay-tribune` only. Discord bot reads both (intentional). Fixed one stale doc reference in `/write-supplemental`.
 - **PROJECT: World Memory** — Phase 1 DONE (dashboard reads archive). Remaining: (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`.
 - **Supplemental strategy (ongoing)** — One supplemental per cycle minimum.
 

@@ -224,6 +224,98 @@ function rollingAverage(currentGrade, previousGrades, deskOrReporter, type) {
   };
 }
 
+// --- Structured critique generators (Reagent 3-signal pattern) ---
+// Each critique has: reasoning (why this grade), strengths, weaknesses, directive (what to do next)
+
+function generateDeskCritique(desk, articles, errata, grade, score) {
+  const criticals = errata.filter(e => e.severity === 'CRITICAL');
+  const warnings = errata.filter(e => e.severity === 'WARNING');
+  const reporters = [...new Set(articles.map(a => a.reporter))];
+
+  // Reasoning trace — why this grade
+  let reasoning = '';
+  if (score >= 9) reasoning = `${desk} desk delivered strong coverage with ${articles.length} articles and minimal errors.`;
+  else if (score >= 7) reasoning = `${desk} desk produced adequate coverage but errata drag the grade. ${criticals.length} critical errors need addressing.`;
+  else if (score >= 5) reasoning = `${desk} desk underperformed. ${criticals.length} critical errors and ${warnings.length} warnings indicate systemic issues.`;
+  else reasoning = `${desk} desk failed this cycle. Major errors dominate the output.`;
+
+  // Strengths
+  const strengths = [];
+  if (articles.length >= 3) strengths.push(`Good coverage breadth (${articles.length} articles)`);
+  if (reporters.length >= 2) strengths.push(`Multiple reporters active (${reporters.join(', ')})`);
+  if (criticals.length === 0) strengths.push('Zero critical errors');
+  if (errata.length === 0) strengths.push('Clean copy — no errata at all');
+
+  // Weaknesses — derived from actual errata
+  const weaknesses = [];
+  const errorTypes = {};
+  for (const e of errata) {
+    const t = e.errorType || 'unclassified';
+    errorTypes[t] = (errorTypes[t] || 0) + 1;
+  }
+  for (const [type, count] of Object.entries(errorTypes)) {
+    if (count >= 2) weaknesses.push(`Recurring: ${type} (${count}x)`);
+    else weaknesses.push(`${type}`);
+  }
+  if (articles.length === 0) weaknesses.push('No articles produced');
+  if (articles.length === 1 && desk !== 'business') weaknesses.push('Thin coverage — only 1 article');
+
+  // Directive — what to improve next edition
+  let directive = '';
+  if (criticals.length > 0) {
+    const topError = criticals[0];
+    directive = `PRIORITY FIX: ${topError.errorType || 'critical error'} — ${topError.description || 'see errata'}. Address this before anything else.`;
+  } else if (warnings.length > 0) {
+    directive = `Clean up ${warnings.length} warning(s). Focus on: ${warnings[0].errorType || warnings[0].description || 'see errata'}.`;
+  } else if (articles.length < 2 && desk !== 'business') {
+    directive = 'Increase coverage breadth. Aim for 2-3 articles minimum.';
+  } else {
+    directive = 'Maintain quality. Experiment with new angles or underused citizens.';
+  }
+
+  return { reasoning, strengths, weaknesses, directive };
+}
+
+function generateReporterCritique(name, articles, errata, grade, score) {
+  const criticals = errata.filter(e => e.severity === 'CRITICAL');
+  const warnings = errata.filter(e => e.severity === 'WARNING');
+
+  // Reasoning trace
+  let reasoning = '';
+  if (score >= 9) reasoning = `${name} delivered clean, strong journalism this cycle.`;
+  else if (score >= 7) reasoning = `${name} produced solid work with minor issues to address.`;
+  else if (score >= 5) reasoning = `${name} had significant errors that undermine otherwise adequate coverage.`;
+  else reasoning = `${name} needs to fundamentally reassess approach — errors dominate the output.`;
+
+  // Strengths
+  const strengths = [];
+  if (articles.length >= 2) strengths.push(`Multiple pieces (${articles.length})`);
+  if (criticals.length === 0 && articles.length > 0) strengths.push('No critical errors');
+  if (errata.length === 0 && articles.length > 0) strengths.push('Completely clean copy');
+  for (const a of articles) {
+    if (a.lineCount > 40) strengths.push(`Substantial depth in "${a.title || 'untitled'}"`);
+  }
+
+  // Weaknesses
+  const weaknesses = [];
+  for (const e of errata) {
+    weaknesses.push(`${e.severity || 'NOTE'}: ${e.errorType || ''} — ${e.description || 'see errata'}`);
+  }
+  if (articles.length === 0) weaknesses.push('No articles produced this cycle');
+
+  // Directive
+  let directive = '';
+  if (criticals.length > 0) {
+    directive = `Fix: ${criticals[0].errorType || criticals[0].description}. This is the priority.`;
+  } else if (warnings.length > 0) {
+    directive = `Address: ${warnings[0].description || warnings[0].errorType}.`;
+  } else {
+    directive = 'Keep it up. Try reaching for a citizen or angle you haven\'t covered before.';
+  }
+
+  return { reasoning, strengths, weaknesses, directive };
+}
+
 // --- Main grading logic ---
 function gradeEdition(editionFile, cycle) {
   const editionText = fs.readFileSync(editionFile, 'utf-8');
@@ -271,6 +363,9 @@ function gradeEdition(editionFile, cycle) {
     const reporters = [...new Set(deskArticles.map(a => a.reporter))];
     if (reporters.length > 0) justParts.push(`reporters: ${reporters.join(', ')}`);
 
+    // Structured critique — 3-signal feedback (Reagent + RLCF pattern)
+    const critique = generateDeskCritique(desk, deskArticles, deskErrata, grade, score);
+
     desks[desk] = {
       grade,
       score: Math.round(score * 10) / 10,
@@ -279,6 +374,7 @@ function gradeEdition(editionFile, cycle) {
       warnings,
       reporters,
       justification: justParts.join('. '),
+      critique,
       rolling: rolling.rolling,
       trend: rolling.trend
     };
@@ -310,6 +406,9 @@ function gradeEdition(editionFile, cycle) {
     if (warnings > 0) justParts.push(`${warnings} WARNING`);
     if (reporterErrata.length === 0) justParts.push('clean');
 
+    // Structured critique — 3-signal feedback (Reagent + RLCF pattern)
+    const critique = generateReporterCritique(name, reporterArticles, reporterErrata, grade, score);
+
     reporters[name] = {
       desk: REPORTER_DESK[name] || reporterArticles[0]?.desk || 'unknown',
       grade,
@@ -318,6 +417,7 @@ function gradeEdition(editionFile, cycle) {
       criticalErrors: criticals,
       warnings,
       justification: justParts.join('. '),
+      critique,
       rolling: rolling.rolling,
       trend: rolling.trend
     };
@@ -362,11 +462,18 @@ function gradeEdition(editionFile, cycle) {
   console.log('  Desk Grades:');
   for (const [desk, data] of Object.entries(desks)) {
     console.log(`    ${desk.padEnd(10)} ${data.grade.padEnd(3)} (${data.articles} articles, ${data.criticalErrors}C/${data.warnings}W)`);
+    if (data.critique) {
+      console.log(`      → ${data.critique.reasoning}`);
+      if (data.critique.directive) console.log(`      → NEXT: ${data.critique.directive}`);
+    }
   }
   console.log('');
   console.log('  Reporter Grades:');
   for (const [name, data] of Object.entries(reporters)) {
     console.log(`    ${name.padEnd(20)} ${data.grade.padEnd(3)} [${data.desk}] (${data.articles} articles, ${data.criticalErrors}C/${data.warnings}W)`);
+    if (data.critique) {
+      console.log(`      → ${data.critique.reasoning}`);
+    }
   }
 
   // --- Auto-append to edition_scores.json ---

@@ -155,9 +155,46 @@ function getMaraGuidanceForDesk(fullGuidance, desk) {
   return fullGuidance;
 }
 
+// ─── RD DIVERSITY PRIMING ─────────────────────────────────
+// Based on Recoding-Decoding (Harvard, arxiv 2603.19519).
+// Random priming forces agents down less-traveled probability paths,
+// producing more diverse citizen selection, angles, and framing.
+const RD_LENSES = [
+  'through the lens of a newcomer arriving this month',
+  'from the perspective of someone who works nights',
+  'as experienced by a teenager in this neighborhood',
+  'through the eyes of a small business owner on this block',
+  'from the vantage of someone who has lived here forty years',
+  'as felt by someone walking home after dark',
+  'through the experience of a parent with young children',
+  'from the perspective of someone who just lost their job',
+  'as seen by an artist looking for studio space',
+  'through the lens of a transit rider who depends on the bus',
+  'from the vantage of someone attending their first council meeting',
+  'as experienced by a retired teacher in this district',
+  'through the eyes of someone sending money home to family abroad',
+  'from the perspective of a street vendor on International Boulevard',
+  'as felt by someone whose rent just increased',
+  'through the lens of a high school coach after practice',
+  'from the vantage of a congregation member on Sunday morning',
+  'as experienced by someone navigating the city in a wheelchair',
+  'through the eyes of a food truck owner at lunchtime',
+  'from the perspective of a night nurse ending a shift at Highland',
+];
+
+function getRandomRDLens() {
+  return RD_LENSES[Math.floor(Math.random() * RD_LENSES.length)];
+}
+
 // ─── BRIEFING GENERATOR ──────────────────────────────────
 function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errata) {
   let md = `# ${desk.charAt(0).toUpperCase() + desk.slice(1)} Desk Briefing — Cycle ${cycle}\n\n`;
+
+  // RD diversity priming — unique perspective each run
+  const lens = getRandomRDLens();
+  md += `## CREATIVE LENS (this edition)\n`;
+  md += `Consider at least one story or angle ${lens}. This is not a constraint — it's a starting point. `;
+  md += `Use it to find citizens and stories you wouldn't otherwise reach.\n\n`;
 
   // Calendar context
   if (baseContext) {
@@ -514,8 +551,33 @@ function main() {
               md += `- ${name}: [${icon}] ${rec.rolling} — ${rec.note}\n`;
             }
           }
+          // Include structured critiques from latest grade if available
+          const latestGradePath = path.join(ROOT, 'output', 'grades');
+          const gradeFiles = fs.existsSync(latestGradePath)
+            ? fs.readdirSync(latestGradePath).filter(f => f.match(/^grades_c\d+\.json$/)).sort()
+            : [];
+          if (gradeFiles.length > 0) {
+            try {
+              const latestGrade = JSON.parse(fs.readFileSync(path.join(latestGradePath, gradeFiles[gradeFiles.length - 1]), 'utf-8'));
+              const deskCritique = latestGrade.desks && latestGrade.desks[desk] && latestGrade.desks[desk].critique;
+              if (deskCritique) {
+                md += `\n## Editorial Critique (Last Edition)\n`;
+                md += `**Assessment:** ${deskCritique.reasoning}\n\n`;
+                if (deskCritique.strengths && deskCritique.strengths.length > 0) {
+                  md += `**Strengths:** ${deskCritique.strengths.join('. ')}.\n\n`;
+                }
+                if (deskCritique.weaknesses && deskCritique.weaknesses.length > 0) {
+                  md += `**Fix These:** ${deskCritique.weaknesses.join('. ')}.\n\n`;
+                }
+                if (deskCritique.directive) {
+                  md += `**DIRECTIVE:** ${deskCritique.directive}\n\n`;
+                }
+              }
+            } catch {}
+          }
+
           md += `\n## What This Means\n`;
-          md += `Use these grades to improve your output. If a reporter scored below B, check their recent errors and adjust. If the desk trend is declining, focus on fundamentals: canon accuracy, voice fidelity, engine data usage.\n`;
+          md += `Use these grades and critiques to improve your output. The editorial critique above is specific feedback from the last edition — prioritize the DIRECTIVE.\n`;
           fs.writeFileSync(path.join(currentDir, 'previous_grades.md'), md);
           console.log(`  previous_grades.md (generated)`);
           deskFiles++;

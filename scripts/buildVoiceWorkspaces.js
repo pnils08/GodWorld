@@ -373,8 +373,33 @@ function generateDomainBriefing(agent, cycle, eveningCtx, econCtx) {
 
 // ─── BRIEFING GENERATOR (v1.0 — initiatives, council, votes) ─
 
+// ─── RD DIVERSITY PRIMING ─────────────────────────────────
+// Based on Recoding-Decoding (Harvard, arxiv 2603.19519).
+// Random political framing forces voice agents toward less predictable decisions.
+const RD_POLITICAL_LENSES = [
+  'Consider how this looks to a voter who supported you but is losing patience',
+  'Think about the constituent who showed up to the last hearing and left angry',
+  'Consider the small business owner who signed the petition but never heard back',
+  'Think about the family that moved to Oakland last year because they believed the city was changing',
+  'Consider the retired city worker who remembers the last time this was promised',
+  'Think about what the Tribune editorial board will write if you delay again',
+  'Consider the organizer who got 200 signatures and is watching your vote',
+  'Think about the teacher whose commute depends on what you decide about transit',
+  'Consider the resident who can\'t attend hearings because they work two jobs',
+  'Think about the neighborhood that hasn\'t seen a public investment in a decade',
+];
+
+function getRandomPoliticalLens() {
+  return RD_POLITICAL_LENSES[Math.floor(Math.random() * RD_POLITICAL_LENSES.length)];
+}
+
 function generateVoiceBriefing(agent, cycle, baseContext) {
   let md = `# ${agent.name} Briefing — Cycle ${cycle}\n\n`;
+
+  // RD diversity priming — unique political pressure each run
+  const lens = getRandomPoliticalLens();
+  md += `## POLITICAL LENS (this cycle)\n`;
+  md += `${lens}. Let this shape your tone and priorities — not your principles, but where you put your weight.\n\n`;
 
   if (baseContext) {
     md += `**Cycle ${cycle}** | ${baseContext.month || ''} ${baseContext.simYear || ''} | ${baseContext.season || ''}\n\n`;

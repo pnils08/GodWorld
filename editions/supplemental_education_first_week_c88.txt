@@ -422,6 +422,54 @@ DO NOT:
 
 TONE: Oakland's education system functions. Schools are maintained. Teachers stay. The default is health, not crisis.
 
+## INTAKE
+
+NEW_CITIZEN: Rosa Medina | — | new | 58, Fruitvale, Principal, Fruitvale Bilingual Academy
+NEW_CITIZEN: Valentina Cruz | — | new | 34, Fruitvale, 3rd-grade bilingual teacher, Fruitvale Bilingual Academy (9 years)
+NEW_CITIZEN: Marcus Ellison | — | new | 41, East Oakland, 5th-grade teacher, Allen Temple Academy (14 years, neighborhood native)
+NEW_CITIZEN: Diane Sato | — | new | 52, Rockridge, 4th-grade teacher, Claremont Hills Elementary (24 years)
+NEW_CITIZEN: Kwame Asante | — | new | 38, KONO, math/data science teacher, OUASA (11 years)
+NEW_CITIZEN: Dario Vega | — | new | 44, Fruitvale, Director, Fruitvale Recreation Center
+NEW_CITIZEN: Keisha Morales | — | new | 29, Temescal, Program coordinator, Gridiron Analytics after-school
+NEW_CITIZEN: Davion Freeman | — | new | 12, East Oakland, student, Allen Temple Academy 5th grade
+NEW_CITIZEN: Jerome Banks | — | new | 14, Downtown, student, OUASA 9th grade, Gridiron Analytics peer mentor
+NEW_CITIZEN: Angela Reyes | — | new | journalist, culture desk, first published byline in education supplemental
+CITIZEN: Brianna Nguyen | — | quoted | Fruitvale parent, 2 children at Fruitvale Bilingual
+CITIZEN: Tomás Aguilar | — | quoted | Fruitvale parent, daughter transferred from Hayward
+CITIZEN: Jamal Thompson | — | quoted | East Oakland parent, son in Ellison's 5th grade
+CITIZEN: Priya Marchetti | — | quoted | Temescal parent, 4th-grader and 1st-grader at Claremont Hills
+CITIZEN: Ariana Lewis | — | quoted | Rockridge parent, daughter starting Claremont Hills
+CITIZEN: Ivy Cook | — | quoted | Downtown parent, son starting 7th grade at OUASA
+CITIZEN: Theo Banks | — | quoted | Downtown parent, daughter 3rd grade, son Jerome in Gridiron
+CITIZEN: Ivy Lopez | — | quoted | Fruitvale parent, 2 children at Fruitvale Rec Center
+CITIZEN: Kevin Park | — | quoted | Rockridge parent, retired, daughter 2nd grade at Claremont Hills
+CITIZEN: Tobias Scott | — | existing_new_role | 47, Lake Merritt, principal of OUASA
+CITIZEN: Marcus Tan | — | referenced | Oakmesh Systems founder
+CITIZEN: Jasmine Torres | — | referenced | 28, Tenth Street Digital founder
+CITIZEN: Daniel Yoon | — | referenced | Gridiron Analytics co-founder
+CITIZEN: Christine Nakamura | — | referenced | Gridiron Analytics co-founder
+CITIZEN: Jordan Velez | — | journalist | business desk reporter
+SCHOOL: Fruitvale Bilingual Academy | Fruitvale | new
+SCHOOL: Allen Temple Academy | East Oakland | new
+SCHOOL: Claremont Hills Elementary | Rockridge | new
+SCHOOL: Oakland Urban Arts and Sciences Academy (OUASA) | Downtown/KONO | new
+BUSINESS: Oakmesh Systems | Fruitvale | existing | air quality sensors in schools
+BUSINESS: Tenth Street Digital | Fruitvale | existing | parent communication app
+BUSINESS: Gridiron Analytics | KONO | existing | after-school data literacy program
+BUSINESS: Oakland Education Foundation | city-wide | existing | co-funds Gridiron program
+QUOTE: Brianna Nguyen | — | "She came home and said, 'Mami, we did science in two languages.' That's the whole point."
+QUOTE: Tomás Aguilar | — | "In Hayward she was losing her Spanish. Here she's getting it back."
+QUOTE: Jamal Thompson | — | "Mr. Ellison could be anywhere. He stays because he's from here."
+QUOTE: Marcus Ellison | — | "I went to school six blocks from here. These kids see that."
+QUOTE: Diane Sato | — | "Twenty-four years. I've had parents who were my students. That's not tenure — that's roots."
+QUOTE: Priya Marchetti | — | "The calm corner isn't therapy. It's just — you're allowed to have a hard morning."
+QUOTE: Kwame Asante | — | "I don't teach them to code. I teach them to ask what the data isn't showing."
+QUOTE: Ivy Cook | — | "He walked in and said, 'This school looks like a spaceship.' That's OUASA working."
+QUOTE: Jerome Banks | — | "Last year I was the kid who didn't get it. Now I'm the one explaining it."
+STORYLINE: NEW | Oakland education system canonized — four schools, four neighborhoods, first education coverage | Rosa Medina, Marcus Ellison, Diane Sato, Kwame Asante | Fruitvale, East Oakland, Rockridge, KONO
+STORYLINE: NEW | Tech-education partnerships — Oakmesh sensors, Tenth Street Digital app, Gridiron Analytics after-school | Marcus Tan, Jasmine Torres, Daniel Yoon | city-wide
+STORYLINE: NEW | After-school ecosystem — Fruitvale Rec Center, Allen Temple tutoring, Gridiron data program | Dario Vega, Keisha Morales, Jerome Banks | Fruitvale, East Oakland, KONO
+
 # ================================================================================
 END SUPPLEMENTAL EDITION — FIRST WEEK / EDUCATION
 Cycle 88 | September 2041 | Ready for Engine Integration

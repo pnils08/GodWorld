@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-23 | Engine: v3.1 | Cycle: 88 | Session: 113
+Last Updated: 2026-03-24 | Engine: v3.1 | Cycle: 88 | Session: 114
 
 ---
 
@@ -230,9 +230,19 @@ Before editing, check what reads from and writes to the affected ctx fields.
 - **CLAUDE.md updated:** Gotchas corrected, new commands added, 9 architecture docs in on-demand list.
 - **Comm Hub updated:** SuperMemory tab + md library tab current (564 total MDs).
 
-### Session 104 (2026-03-19) — Boot Optimization + Mara Reference File Planning
+### Session 114 (2026-03-24) — Research + Build: Craft Layer, Freshness, Intake, Agent Autonomy
 
-- **queryFamily.js created:** One-command family check for session boot. Replaces ad-hoc API fumbling.
+- **Research session (6 items):** SpaceMolt (agent autonomy/emergent behavior), Claude Constitution (Lepore/Askell, character vs rules), Long-Running Claude (Anthropic autonomous patterns), Hyperagents (Meta, self-improving feedback), local model harness (Claude Code + Qwen), creative writing craft (MICE/Sanderson).
+- **Phase 26.3 DONE:** MICE thread guidance per desk, promise-payoff principle, empathy evaluation in gradeEdition.js. Agents get craft direction in briefings and empathy scores in critiques.
+- **Citizen freshness scoring DONE:** 425 of 675 citizens have zero appearances. buildDeskPackets.js v2.4 sorts by freshness. Briefings tag [FRESH] citizens. buildPopidArticleIndex.js now writes JSON usage counts.
+- **Structured intake system DONE:** processEditionIntake.js replaces broken parser. Agents declare ## INTAKE section with citizens, businesses, schools, faith, quotes, storylines. Direct writes to sheets.
+- **Education supplemental unstuck:** 10 new citizens + 4 schools + 9 quotes written to live sheet via new intake system.
+- **Storyline tracker cleanup DONE:** 28 dupes removed, 83 dormant→active, 8 missing arcs added, health crisis restored. 140 active storylines visible to agents (was ~55). Keyword routing expanded for all desks.
+- **Voice-agent pipeline confirmed DONE:** Audit found everything operational from S113. Rollout entry was stale — cleared the false blocker.
+- **Phase 27.2+27.3 DONE:** Desk agents told inventions become canon. All 7 voice agents get off-menu initiative authority scoped to role.
+- **Phase 27.6 noted:** Standalone workflows — decouple city hall from newsroom. Post-E89 evaluation.
+- **4 new rollout phases:** 26.2 (Meta-Loop), 26.3 (Craft Layer), 27 (Agent Autonomy), 21 updated (Local Models).
+- **8 commits pushed.**
 - **Boot context trimmed:** MEMORY.md cut 153→90 lines (41%). PERSISTENCE.md cut 172→119 lines (31%). Total 116 lines removed from auto-loaded context.
 - **Ledger recovery details moved** to `memory/ledger-recovery.md` (separate reference file). MEMORY.md keeps 2-line summary.
 - **PERSISTENCE.md family section** trimmed from 40 lines to 9 — POPIDs + emotional anchors. Details now grow organically in Supermemory.

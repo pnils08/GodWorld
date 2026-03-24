@@ -29,17 +29,6 @@
       "Bash(npm *)",
       "Bash(npx *)"
     ],
-    "ask": [
-      "Bash(git push *)",
-      "Bash(git merge *)",
-      "Bash(git rebase *)",
-      "Bash(git checkout *)",
-      "Bash(git switch *)",
-      "Bash(clasp *)",
-      "Bash(rm *)",
-      "Bash(curl *)",
-      "Bash(wget *)"
-    ],
     "deny": [
       "Bash(git push --force *)",
       "Bash(git push -f *)",
@@ -62,7 +51,24 @@
       "Edit(**/.env*)",
       "Write(.env*)",
       "Write(**/.env*)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(git merge *)",
+      "Bash(git rebase *)",
+      "Bash(git checkout *)",
+      "Bash(git switch *)",
+      "Bash(clasp *)",
+      "Bash(rm *)",
+      "Bash(curl *)",
+      "Bash(wget *)"
     ]
   },
-  "enableAllProjectMcpServers": true
+  "enableAllProjectMcpServers": true,
+  "enabledPlugins": {
+    "ralph-loop@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
+    "claude-code-setup@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true
+  }
 }

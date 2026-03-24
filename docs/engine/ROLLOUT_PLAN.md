@@ -23,6 +23,8 @@
 
 - ~~**FIX: Citizen freshness weighting in buildDeskPackets.js**~~ — **DONE S114.** buildDeskPackets.js v2.4 sorts by freshness. 425 citizens with zero appearances rank first. Briefings tag [FRESH]. buildPopidArticleIndex.js writes JSON usage counts.
 
+- **FEATURE: Photo QA step in edition pipeline.** Send each AI-generated photo + article context to Claude Vision API. Evaluate: does the photo match the article? Wrong tone? Generic AI slop? Anachronistic details? Fits prosperity-era Oakland aesthetic? Flag or reject before PDF generation. Cost: ~16,000 tokens per edition (<$0.05). Fits between Step 15 (photos) and Step 16 (PDF). Script: read photo, base64-encode, send with article summary, get pass/fail + reason. **Priority: MEDIUM — build when next touching photo pipeline.** See `docs/RESEARCH.md` S115 Vision entry.
+
 ### Open — Architecture & Production
 
 - ~~**DESIGN: Agent knowledge separation**~~ — **DONE S113 (audit).** Already correctly configured: `.claude/.supermemory-claude/config.json` sets `repoContainerTag: "bay-tribune"`, `personalContainerTag: "mags"`. Desk agents don't call supermemory directly — they use local workspaces. `/super-search` searches `bay-tribune` only. Discord bot reads both (intentional). Fixed one stale doc reference in `/write-supplemental`.
@@ -31,10 +33,68 @@
 - **Supplemental strategy (ongoing)** — One supplemental per cycle minimum.
 - **DESIGN: Agent Autonomy & Feedback Loop (Phase 27)** — Agents shape the world, not just report it. Intake pipeline evolves to feed agent-generated details back into engine. Inspired by SpaceMolt emergent behavior research. **Priority: HIGH — design direction for GodWorld's next phase.** First step: 27.1 intake evolution. See Phase 27 below.
 
+### Open — Agent Prompt & Skill Audit (from S115 research) — PRIORITY: HIGH
+
+Source: Anthropic prompting guide, extended thinking docs, skill best practices, Claude Code skills reference. See `docs/RESEARCH.md` S115 entries (5 entries).
+
+**TOOL: Install `skill-creator` from Anthropic's skills repo** — `/plugin install example-skills@anthropic-agent-skills`. This skill automates skill evaluation and improvement: writes test prompts, runs via subagents, grades results, iterates. Use it to audit and upgrade our 21 skills instead of manual review. Also installs `mcp-builder` (Phase 21.2/29 reference) and `webapp-testing` (Phase 28.2 reference).
+
+**A. Skill Frontmatter Upgrade (HIGH — do in next Build session)**
+
+Every one of our 21 skills should get these frontmatter fields reviewed and set:
+
+| Field | What to set | Why |
+|-------|-------------|-----|
+| `effort` | `high` for civic/sports/chicago, `medium` for culture/letters/business, `low` for mechanical skills | Per-skill thinking depth. Complex desks get deeper reasoning. |
+| `model` | Leave default for now. Phase 21: set routine desks to local model. | This IS the Phase 21 mechanism. Zero code changes — just frontmatter. |
+| `disable-model-invocation` | `true` on `/run-cycle`, `/write-edition`, `/session-end`, `/write-supplemental`, `/podcast`, `/run-city-hall` | SAFETY GAP: Claude can currently auto-trigger side-effect skills. |
+| `allowed-tools` | Production skills: `Read, Write, Bash, Glob, Grep`. Read-only skills: `Read, Grep, Glob`. | Eliminates approval prompts during pipeline runs. |
+| `argument-hint` | `/write-edition [cycle]`, `/write-supplemental [topic]`, `/podcast [edition]` etc. | Autocomplete UX improvement. |
+
+**B. Dynamic Context Injection (HIGH — integrate into edition pipeline)**
+
+The `` !`command` `` syntax injects live data into skill prompts BEFORE Claude sees them. This could replace manual packet-loading steps:
+- Desk skills inject fresh briefing data: `` !`cat output/desk_packets/civic_packet.json` ``
+- Grade history injected automatically: `` !`cat output/grades/grades_c88.json | jq '.civic'` ``
+- Active storylines pre-loaded: `` !`node scripts/getActiveStorylines.js` ``
+
+Evaluate which `/write-edition` steps can be replaced by bash injection in skill frontmatter. Could eliminate 2-3 manual pipeline steps.
+
+**C. Prompt De-escalation (HIGH — do before next edition run)**
+
+- **AUDIT: De-escalate agent prompts for 4.6.** Scan all SKILL.md and RULES.md for aggressive language ("CRITICAL", "You MUST", "ALWAYS", "If in doubt, use [tool]"). Replace with natural phrasing. Affects: 6 desk agents, 7 voice agents, 5 initiative agents.
+- **AUDIT: Prefilled response check.** Scan for assistant-turn prefills — deprecated in 4.6. **Priority: LOW.**
+
+**D. Thinking Migration (HIGH — urgent, deprecated feature)**
+
+- **MIGRATE: Adaptive thinking.** `budget_tokens` is explicitly deprecated for Opus 4.6, will be removed. Switch civic/sports/chicago desk prompts to adaptive thinking. Gets interleaved thinking for free — Claude reasons between tool calls. Combined with `effort` per skill (section A), this gives fine-grained thinking control.
+- **EVALUATE: `display: "omitted"` for production runs.** Faster streaming, still charged for tokens. **Priority: LOW — test after migration.**
+
+**E. Skill Structure (MEDIUM — do when touching skills)**
+
+- **AUDIT: SKILL.md line counts.** Body under 500 lines. Move excess to reference files (one level deep).
+- **AUDIT: Skill descriptions.** Third person, include WHAT + WHEN. Check with `/context` for budget warnings.
+- **AUDIT: Degrees of freedom.** Pipeline skills = LOW freedom. Research/chat = HIGH freedom.
+- **ADD: Compaction survival prompt.** Anthropic's context-awareness prompt to compaction hook.
+- **REVIEW: Subagent guidance.** When to fork vs direct call. Opus 4.6 over-spawns.
+- **CHECK: Description budget.** Run `/context` to see if 21 skills exceed the 2% / 16,000 char budget. Override with `SLASH_COMMAND_TOOL_CHAR_BUDGET` if needed.
+- **FUTURE: Skill evaluations.** 3+ test scenarios per skill. Do when we next rewrite a skill.
+
 ### Open — Infrastructure & Maintenance
 
 - ~~**CLEANUP: Archive old session transcripts**~~ — **DONE S113.** Cleaned 650MB. Observer + root sessions >14d deleted. GodWorld sessions >14d archived to `output/archives/godworld-sessions-pre-20260309.tar.gz` (69MB). Disk: 72% → 70%.
 - **Node.js security patch** — Scheduled March 24, 2026.
+- **INSTALL: Ralph Loop plugin.** `/plugin install ralph-loop@claude-plugins-official`. Test on one desk agent: `/ralph-loop "Write the civic section" --completion-promise "SECTION COMPLETE" --max-iterations 10`. If output fails `validateEdition.js`, loop feeds it back. This IS Phase 12.4 as a ready-made plugin. **Priority: HIGH — install in next Build session, test on E89.**
+- **INSTALL: Hookify plugin.** `/plugin install hookify@claude-plugins-official`. Create fourth-wall contamination rule: `/hookify Warn when editing files under .claude/agents/ that contain godworld, simulation, engine, or builder`. Replaces custom `post-write-check.sh` with a simpler, no-restart-needed markdown config. **Priority: HIGH — install in next Build session.**
+- **RUN: claude-automation-recommender.** `/plugin install claude-code-setup@claude-plugins-official`, then trigger the automation recommender skill on GodWorld. Gets tailored recommendations for hooks, subagents, skills, plugins, MCP servers we haven't thought of. **Priority: MEDIUM — run once, extract actionable items.**
+- **RUN: claude-md-improver.** `/plugin install claude-md-management@claude-plugins-official`, then run on our CLAUDE.md. Audits against templates and quality criteria. Part of Skill Audit section E. **Priority: MEDIUM.**
+- **ADD: Security review on commits — CONFIRMED WILL DO.** Two steps:
+  1. **Immediate (zero install):** Run `/security-review` before commits touching scripts, dashboard, or credentials. Already ships with Claude Code.
+  2. **GitHub Action:** Set up `anthropics/claude-code-security-review@main` in `.github/workflows/security.yml` to auto-review every push. One workflow file.
+  3. **Custom scan instructions:** Create `docs/security-scan-rules.txt` with GodWorld-specific rules: flag "godworld", "simulation", "engine", "builder", "user" in files under `.claude/agents/` (fourth-wall contamination). Flag service account email or credential paths in any non-config file. Flag bay-tribune container references in non-Supermemory code. This extends the post-write hook (`post-write-check.sh`) with security-review-time coverage.
+  **Priority: HIGH — do in next Build session.**
+- **UPGRADE: Instant compaction pattern.** Replace reactive compaction (wait until full, user waits for summary) with proactive instant compaction — background thread builds session memory once soft threshold is met, ready to swap in instantly when context is full. Pattern from `claude-cookbooks/misc/session_memory_compaction.ipynb`. Uses prompt caching for ~10x cheaper background updates. **Priority: MEDIUM — improves every session, especially long production runs.**
+- **EVALUATE: Context clearing strategy.** Clear old thinking blocks first, then old tool results, while preserving memory files. Beta flag `context-management-2025-06-27`. Pattern from `claude-cookbooks/tool_use/memory_cookbook.ipynb`. **Priority: LOW — evaluate when compaction issues arise.**
 - ~~**CLEANUP: ~22 duplicate docs in bay-tribune container**~~ — **DONE S113.** 26 duplicates found and deleted via supermemory API. All from S106 double-ingestion (Mar 21 23:25 originals + Mar 22 02:06 re-ingest). Kept newer copies. Zero duplicates remaining.
 
 ---
@@ -119,7 +179,7 @@ Registered and claimed. API key saved. **Pending:** Moltbook heartbeat formattin
 ### Phase 12: Agent Collaboration + Autonomy (selected open items)
 
 - **12.2 Worktree Isolation:** Superseded by Remote Control `--spawn worktree` (Phase 7.9). Same goal, native implementation.
-- **12.3 Autonomous Cycle Execution:** Long-term capstone. Depends on: Remote Control (7.9), Channels (Discord), dashboard mission control. **Anthropic published the blueprint (S114):** multi-day Claude Code in tmux, CLAUDE.md + CHANGELOG.md persistence, git checkpoints, Ralph Loop (re-prompt agents claiming completion up to 20x). Gap is trust, not architecture — need reliable automated quality oracles: `validateEdition.js` (structural), Rhea (factual), grade thresholds (quality). All three must pass before autonomous publication. See RESEARCH.md S114 Long-Running Claude entry.
+- **12.3 Autonomous Cycle Execution:** Long-term capstone. Depends on: Remote Control (7.9), Channels (Discord), dashboard mission control. **Two reference implementations now available:** (1) S114 Long-Running Claude — multi-day Claude Code in tmux, CLAUDE.md + CHANGELOG.md persistence, git checkpoints, Ralph Loop. (2) **S115 `autonomous-coding` quickstart** — two-agent pattern (initializer + worker), progress tracked in JSON + git, fresh context each session, auto-continue, defense-in-depth security with bash allowlist. The autonomous-coding pattern maps directly: initializer = create production plan from cycle packet, worker = execute pipeline steps, `feature_list.json` = `production_log.md`, test cases = `validateEdition.js` checks. Gap is still trust — need quality oracles: `validateEdition.js` (structural), Rhea (factual), grade thresholds (quality). All three must pass before autonomous publication. See RESEARCH.md S114 + S115 entries.
 - **12.4 Ralph Loop for Desk Agents:** Re-prompt desk agents that claim completion before validation passes. Run `validateEdition.js` per-desk (not per-edition). Failures route back to agent automatically. Prevents agentic laziness. Pattern from Anthropic's long-running agent research. **Priority: MEDIUM — implement when edition pipeline is stable.**
 - **12.5 Idle Compute Utilization:** Run autonomous tasks when no session is active — batch grading, citizen enrichment, POPID index rebuilds, Supermemory maintenance. Droplet runs 24/7; idle time is waste. Pattern from Anthropic's "opportunity cost" framing. **Priority: LOW — requires Phase 12.3 trust infrastructure first.**
 - **12.10 Fish Audio TTS:** Deferred — $11/mo cost rejected S77.
@@ -147,7 +207,11 @@ WordPress 7.0 (April 2026) ships AI Client SDK supporting Claude function callin
 
 **Mixed-backend strategy:** Opus/Sonnet for civic, sports, chicago desks (complex). Local model for culture, letters, business desks (routine). Same Claude Code harness, same skills, same workspace structure. `buildDeskFolders.js` doesn't care what model runs the agent.
 
-**First step:** Test Qwen 3.5 9B quantized on a GPU droplet running one desk agent (letters or culture). Compare output quality against Sonnet baseline. If passable, expand.
+**Buildable pieces:**
+
+1. **21.1 Quality test.** Test Qwen 3.5 9B quantized on a GPU droplet running one desk agent (letters or culture). Compare output quality against Sonnet baseline. If passable, expand.
+
+2. **21.2 Canon Grounding MCP.** Local models will hallucinate world details (citizen names, businesses, events) because they have no access to GodWorld data. Fix: wrap our existing infrastructure as MCP servers the local model can call through tool use. Three sources to expose: (a) Dashboard API — 31 endpoints including citizen search, article search, initiative tracker, player lookup. (b) Supermemory bay-tribune container — semantic search across published canon. (c) Article archive — 234+ editions searchable by keyword/citizen/storyline. Pattern from Brave Search MCP (S115 research) — same grounding architecture, pointed at our world instead of the web. **Build after 21.1 confirms local models are viable.**
 
 **Depends on:** Phase 27 (agent autonomy) may change what "routine" means — if culture desk gets creative latitude, it may need a stronger model.
 
@@ -218,6 +282,52 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 **Priority:** MEDIUM — requires 3-5 more editions to generate enough data. The Karpathy Loop needs to run a few more times before the meta-loop has signal to work with.
 
+### Phase 29: Codebase Knowledge Graph (Corbell) — NOT STARTED
+
+**Goal:** Give Mags and all agents a queryable map of the entire GodWorld codebase — every function, every dependency, every call path — accessible as MCP tools without reading files.
+
+**Source:** Corbell (github.com/Corbell-AI/Corbell). Open-source CLI, Apache 2.0. See `docs/RESEARCH.md` S115 Corbell entry.
+
+**Why priority HIGH:** Every session starts with context cost — reading docs, tracing dependencies, understanding how scripts connect. Corbell replaces that with MCP queries against a persistent local knowledge graph. After compaction, the graph survives on disk. Extends and replaces `/stub-engine`. Enables Phase 21 local models to understand codebase structure.
+
+**Buildable pieces:**
+
+1. **29.1 Install and index.** `pip install "corbell[anthropic]"`, `corbell init`, `corbell graph build --methods`, `corbell embeddings build`. Index all 153 engine files, 11+ scripts, lib/, agent configs. Verify it fits in 2GB droplet RAM (MiniLM-L6-v2 is ~80MB, SQLite is lightweight). **First step — one session, low risk.**
+
+2. **29.2 MCP server integration.** Add Corbell MCP config to Claude Code settings. Verify the four tools work in-session: `graph_query`, `get_architecture_context`, `code_search`, `list_services`. Test: "What calls sheets.js?" "Which scripts write to Storyline_Tracker?" "What does buildDeskPackets.js depend on?"
+
+3. **29.3 Graph visualization.** Corbell ships a D3.js force-directed graph UI served via Python HTTP. Test on our server — could integrate with dashboard or run standalone. Visual map of the whole codebase. **Low priority — nice to have.**
+
+4. **29.4 Rebuild hook.** Auto-rebuild graph after code changes. Either a post-commit hook or a cron job. Keeps the graph fresh as the codebase evolves. **Build after 29.1-29.2 are working.**
+
+5. **29.5 Agent access.** Expose Corbell MCP tools to desk agents and local models (Phase 21). Agents can query code structure during writing — "what initiative agents exist?" "what does the voice pipeline do?" — without reading files into their context. **Build when Phase 21 is active.**
+
+**Stack fit:** SQLite (same as claude-mem), local embeddings (MiniLM-L6-v2, ~80MB), MCP server (Claude Code native), Python (already on server). No new infrastructure.
+
+**Priority: HIGH — low effort install, high daily value. Build in next Build/Deploy session.**
+
+### Phase 28: Computer Use Integration — NOT STARTED
+
+**Goal:** Give agents the ability to see and interact with visual interfaces — dashboard QA, web-based tools, anything without an API.
+
+**Source:** Anthropic Computer Use Tool beta. Screenshots + mouse/keyboard control inside a Docker container. See `docs/RESEARCH.md` S115 entry.
+
+**Buildable pieces (ordered):**
+
+1. **28.1 Docker container for visual agents.** Linux container with Xvfb virtual display, lightweight desktop (Mutter/Tint2), Firefox. This is the "eyes and hands" environment. Base on Anthropic's reference implementation. **First step — build once, use for everything below.**
+
+2. **28.2 Dashboard visual QA.** ~~Replace with Computer Use agent~~ **Use browser-use-demo pattern instead** (S115 discovery). DOM-aware Playwright automation is more reliable than coordinate-based Computer Use for web UIs — element refs survive layout changes, `read_page` gives structured DOM, `get_page_text` extracts content without vision tokens. Base on Anthropic's `browser-use-demo` quickstart (Docker + Playwright + Chromium + XVFB + Streamlit). Reserve raw Computer Use for non-browser desktop tasks only. **Priority: MEDIUM — clean replacement for fragile Playwright setup.**
+
+3. **28.3 Agent loop mediator script.** Node.js or Python script that runs the Computer Use agent loop — sends Claude's actions to the container, captures screenshots, returns results. Includes: coordinate scaling (API downsamples images, coordinates need mapping back), iteration limiter (prevent runaway costs), action logging. **Build alongside 28.2.**
+
+4. **28.4 Non-API interface fallback.** When agents need to interact with tools that have no API — Google Sheets web UI for edge cases, Supermemory console, GitHub PR review pages, WordPress publishing. Computer Use becomes the universal "I can see it and click it" layer. **Priority: LOW — build when a specific need arises.**
+
+5. **28.5 Autonomous visual verification.** For Phase 12.3 (autonomous cycles): Computer Use agent opens dashboard during cycle runs, checks mission control, verifies edition cards rendered, screenshots sports tab for stat verification. Visual oracle that code checks can't replace. **Priority: LOW — depends on Phase 12.3.**
+
+**Cost note:** Expensive per-interaction (vision tokens per screenshot + 735 tokens per tool definition + system prompt overhead). Not for routine work. Reserve for QA, verification, and no-API-available situations.
+
+**Depends on:** Phase 9 (Docker) is deferred but 28.1 only needs a single container, not a full Compose stack. Can build 28.1 standalone.
+
 ### Phase 25: Storage Strategy — NOT STARTED
 
 Deduplicate across 4 layers (disk, Drive, GitHub, Supermemory). Quick wins done S85. Full audit not started.
@@ -287,4 +397,5 @@ Tracking for future adoption. Not building.
 | Lightpanda Browser | Beta stabilizes, saves 300MB RAM |
 | Claude Code Voice Mode | Maturity improves |
 | Extended Thinking for Agents | Test on civic/sports desks |
+| Computer Use exits beta | Stable + cheaper → expand beyond QA to routine agent tasks |
 | NPM Package Drift | 7 packages behind. Batch update in maintenance session. |

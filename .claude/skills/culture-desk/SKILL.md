@@ -1,7 +1,8 @@
 ---
 name: culture-desk
 description: Write the culture and seasonal section using Maria Keen and the culture desk reporters.
-effort: high
+effort: medium
+disable-model-invocation: true
 ---
 
 # /culture-desk — Write Culture Section

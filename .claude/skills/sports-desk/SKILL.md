@@ -2,6 +2,7 @@
 name: sports-desk
 description: Write the Oakland sports section using P Slayer, Anthony, and Hal Richmond.
 effort: high
+disable-model-invocation: true
 ---
 
 # /sports-desk — Write Oakland Sports Section

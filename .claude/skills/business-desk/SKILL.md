@@ -1,7 +1,8 @@
 ---
 name: business-desk
 description: Write the business ticker section using Jordan Velez.
-effort: medium
+effort: low
+disable-model-invocation: true
 ---
 
 # /business-desk — Write Business Section

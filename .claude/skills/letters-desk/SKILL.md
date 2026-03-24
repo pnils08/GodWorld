@@ -2,6 +2,7 @@
 name: letters-desk
 description: Write the letters to the editor section with citizen voices.
 effort: low
+disable-model-invocation: true
 ---
 
 # /letters-desk — Write Letters Section

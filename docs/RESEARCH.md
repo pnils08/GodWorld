@@ -670,6 +670,563 @@ CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 
 → **Graduated to rollout:** Phase 21 updated with Claude Code harness discovery and hardware options.
 
+### S115 — Brave Search MCP: Grounding Local LLMs With Search (2026-03-24)
+
+**Source:** [xda-developers.com](https://www.xda-developers.com/added-one-tool-to-local-llm-setup-and-it-stopped-making-things-up/)
+
+**What it is:** An MCP server that connects a local LLM to the Brave Search API. Three-layer architecture: Brave search index → MCP server (middleman) → local model. The model gets real-time search results mixed into its context instead of hallucinating answers about things outside its training data. Setup: Brave API key + MCP config JSON in LM Studio or similar.
+
+**The pattern, not the product:** The specific tool (Brave Search) isn't what matters for us. What matters is the architecture — an MCP server that gives a local model access to an external knowledge source through tool use. The model calls the MCP tool, gets grounded data back, writes from facts instead of fabrication.
+
+**Connection to GodWorld:** Phase 21 dependency. When local models run desk agents, they won't have access to GodWorld's world data. They'll hallucinate citizen names, business details, neighborhood events. The fix is the Brave Search MCP pattern pointed at our own canon:
+
+- **Dashboard API as MCP server:** Wrap our 31 API endpoints (citizen search, article search, initiative tracker, player lookup) as MCP tools. Local model asks "who lives in Temescal?" and gets real citizen data back.
+- **Supermemory as MCP server:** Wrap bay-tribune semantic search as an MCP tool. Local model searches published canon before writing. Same grounding, our world instead of the web.
+- **Article archive as MCP server:** Local model can search/read the 234+ edition archive for historical context.
+
+This solves the biggest risk of Phase 21 (local models fabricating world details) using infrastructure we already have (dashboard API, Supermemory, archive).
+
+→ **Graduated to rollout:** Added as Phase 21 buildable piece (21.2 Canon Grounding MCP).
+
+### S115 — Claude Plugins Official: 30+ Plugins Mapped (2026-03-24)
+
+**Source:** [github.com/anthropics/claude-plugins-official](https://github.com/anthropics/claude-plugins-official) — Anthropic's curated plugin directory. Install via `/plugin install {name}@claude-plugins-official`
+
+**30+ plugins across two categories:** internal (Anthropic-maintained) and external (third-party). Full audit:
+
+**HIGH — install or steal from these:**
+
+1. **`ralph-loop/`** — THE Ralph Loop as a plugin. Stop hook blocks Claude's exit and re-feeds the same prompt. Claude sees its previous work in files/git and iterates. Self-referential feedback loop. Commands: `/ralph-loop "task" --max-iterations N --completion-promise "DONE"`, `/cancel-ralph`. **This is Phase 12.4 (Ralph Loop for Desk Agents) as a ready-made plugin.** Install and test on one desk agent: `/ralph-loop "Write the civic section for Edition 89" --completion-promise "SECTION COMPLETE" --max-iterations 10`. If the agent writes something that fails `validateEdition.js`, the loop feeds it back. Install: `/plugin install ralph-loop@claude-plugins-official`
+
+2. **`hookify/`** — Create custom hooks from conversation or explicit instructions WITHOUT editing hooks.json. Markdown config files with YAML frontmatter + regex patterns. Events: bash, file, stop, prompt, all. Actions: warn or block. `/hookify Don't use console.log in TypeScript files` auto-creates the rule. No restart needed. **Directly useful:** `/hookify Warn when editing files under .claude/agents/ that contain 'godworld' or 'simulation'` — our fourth-wall contamination check as a hookify rule instead of a custom shell script.
+
+3. **`claude-code-setup/`** — `claude-automation-recommender` skill analyzes your codebase and recommends Claude Code automations (hooks, subagents, skills, plugins, MCP servers). Read-only analysis. **Run this on GodWorld** to get tailored automation recommendations we haven't thought of. Has reference docs for hooks patterns, MCP servers, plugins, skills, and subagent templates.
+
+4. **`pr-review-toolkit/`** — 6 specialized review agents: `code-reviewer`, `code-simplifier`, `comment-analyzer`, `pr-test-analyzer`, `silent-failure-hunter`, `type-design-analyzer`. Each runs as a subagent. Command: `/review-pr`. **We already have these loaded** (they appear in our agent list). Confirm they're being used during Build sessions.
+
+5. **`plugin-dev/`** — Meta-plugin for BUILDING plugins. Has skills for: agent development, command development, hook development, MCP integration, plugin settings, plugin structure, skill development. Each with examples and references. **Reference for if we ever package GodWorld's skills as a plugin.**
+
+6. **`mcp-server-dev/`** — Skills for building MCP servers and MCP apps. Has references for auth, deployment, tool design, server capabilities. **Reference for Phase 21.2 (Canon Grounding MCP) and Phase 29 (Corbell).**
+
+**MEDIUM — useful references:**
+
+7. **`feature-dev/`** — Feature development plugin with 3 agents: code-architect, code-explorer, code-reviewer. Command: `/feature-dev`. Structured approach to building features. Reference for our Build/Deploy workflow.
+
+8. **`security-guidance/`** — Security hooks that fire automatically. Complement to the security-review action we already logged.
+
+9. **`code-review/`** + `code-simplifier/` + `commit-commands/` — Already installed/available. Verify we're using them.
+
+10. **`claude-md-management/`** — `/revise-claude-md` and `claude-md-improver` skill. Audits and improves CLAUDE.md files. **Run on our CLAUDE.md** as part of the skill audit.
+
+11. **`playground/`** — Interactive playground skill with templates for code maps, concept maps, data explorers, design playgrounds, diff reviews, document critiques. Could be useful for research sessions.
+
+**External plugins of interest:**
+
+12. **`discord/`** — The Discord plugin we already use (MagsClaudeCode bot). Source code is here — `server.ts`, access management skills.
+
+13. **`playwright/`** — Playwright MCP plugin. We already use this but could check for updates.
+
+14. **`context7/`** — Context7 MCP for pulling library/framework docs. Could help desk agents access up-to-date API documentation.
+
+**LOW — skip:**
+- LSP plugins (clangd, gopls, pyright, jdtls, kotlin, lua, php, ruby, rust-analyzer, swift, typescript) — language server integrations, not relevant
+- `explanatory-output-style/`, `learning-output-style/` — output style hooks
+- `math-olympiad/` — math competition solving
+- `agent-sdk-dev/` — for SDK development
+- External: asana, firebase, github, gitlab, linear, slack, supabase, telegram, imessage, laravel-boost, serena, fakechat, greptile
+
+→ **Graduated to rollout:** Ralph Loop plugin install, Hookify for contamination rules, claude-automation-recommender run, claude-md-improver run.
+
+### S115 — Claude Code Security Review: AI-Powered Vulnerability Scanner (2026-03-24)
+
+**Source:** [github.com/anthropics/claude-code-security-review](https://github.com/anthropics/claude-code-security-review) — MIT license
+
+**What it is:** GitHub Action + Claude Code slash command for AI-powered security review of code changes. Claude analyzes diffs semantically — understands code intent, not just pattern matching. Covers full OWASP list: injection, auth bypass, XSS, secrets exposure, deserialization, crypto issues, race conditions, path traversal.
+
+**Two interfaces:**
+1. **GitHub Action** — runs on every PR, posts findings as review comments on specific code lines. Configurable: model selection, directory exclusions, custom filtering/scan instructions, false positive tuning.
+2. **`/security-review` slash command** — already ships with Claude Code, zero install. Uses dynamic context injection (`` !`git diff` ``, `` !`git status` ``) to analyze pending branch changes.
+
+**Architecture:** `github_action_audit.py` (main script) → `prompts.py` (security audit prompt templates) → Claude analysis → `findings_filter.py` (false positive filtering via Claude API) → `comment-pr-findings.js` (PR comment posting). Includes eval framework for testing against arbitrary PRs.
+
+**The slash command skill file is a masterclass in skill design:** Uses `allowed-tools` to scope to read-only git operations. Uses bash injection to pre-load git status, modified files, commits, and full diff. Clear objective with confidence threshold (">80% confident of actual exploitability"). Explicit exclusion list (DoS, rate limiting, secrets-on-disk). Categorized vulnerability checklist. This is what a production-quality skill looks like.
+
+**GodWorld application:**
+- **Immediate:** Run `/security-review` before any commit that touches scripts, dashboard, or credentials-adjacent code. Zero setup needed.
+- **GitHub Action:** Set up on our repo to auto-review every push. Would catch: secrets in agent-facing files, command injection in Node.js scripts that shell out, dashboard API endpoints missing auth, service account credential exposure.
+- **Custom scan instructions:** Add GodWorld-specific rules — "flag any reference to 'godworld', 'simulation', or 'engine' in files under `.claude/agents/`" (the fourth-wall contamination check we do with our post-write hook, but applied at security review time).
+
+**Also noted:** The `/security-review` slash command uses the same dynamic context injection pattern (`` !`command` ``) we identified in the Claude Code Skills Reference entry. Good reference implementation of that pattern.
+
+→ **Graduated to rollout:** Added to Infrastructure & Maintenance.
+
+### S115 — Anthropic Skills Repo: 16 Official Skills + Skill Creator (2026-03-24)
+
+**Source:** [github.com/anthropics/skills](https://github.com/anthropics/skills) — Anthropic's official skills collection. Installable as Claude Code plugin: `/plugin marketplace add anthropics/skills`
+
+**16 skills in the repo.** Categorized by relevance:
+
+**HIGH — steal these or install directly:**
+
+1. **`skill-creator/`** — A skill for CREATING skills. Captures user intent, interviews for edge cases, writes SKILL.md, creates test prompts, runs evaluations via subagents, iterates based on results, optimizes descriptions for triggering. Has dedicated subagents: `analyzer.md`, `comparator.md`, `grader.md`. Has an eval-viewer script for visual review. **This is the tool for our Skill Audit (rollout section A-E).** Instead of manually auditing 21 skills, use skill-creator to evaluate and improve them. Install: `/plugin install example-skills@anthropic-agent-skills`
+
+2. **`mcp-builder/`** — Guide for creating MCP servers (Python FastMCP or TypeScript SDK). 4-phase process: deep research → implementation → evaluation → deployment. Has reference docs for Python and TypeScript patterns, best practices, and evaluation framework. **Directly relevant for Phase 21.2 (Canon Grounding MCP) and Phase 29 (Corbell MCP integration).** When we build MCP servers to expose dashboard API or Supermemory to agents, this is the playbook.
+
+3. **`webapp-testing/`** — Playwright-based testing for local web apps. Includes `scripts/with_server.py` for server lifecycle management. Decision tree: static HTML → read selectors → Playwright script. Dynamic apps → start server → reconnaissance → action. **Directly relevant for Phase 28.2 (Dashboard Visual QA).** Pattern: start dashboard server, navigate, wait for networkidle, screenshot, inspect DOM, verify elements.
+
+4. **`frontend-design/`** — The anti-AI-slop skill. Design thinking before coding, bold aesthetic direction, typography/color/motion/spatial guidelines. Referenced in the Prompting Best Practices doc we already logged. **Could improve our dashboard if we ever redesign.** Also useful pattern: how to write a skill that encourages creative output instead of generic output — relevant for desk agent craft.
+
+**MEDIUM — reference material:**
+
+5. **`pdf/`** — PDF creation/manipulation with scripts. Has `forms.md` for form filling, `reference.md` for API details. **Reference for our PDF pipeline** (`generate-edition-pdf.js`). Could study for patterns.
+
+6. **`claude-api/`** — Full API reference organized by language (Python, TypeScript, Go, Java, C#, Ruby, PHP, cURL). Includes Agent SDK patterns for Python and TypeScript. Has shared docs for error codes, models, tool-use concepts. **Reference when building custom agent loops (Phase 12.3, 21).**
+
+7. **`doc-coauthoring/`** — Collaborative document editing. **Not directly relevant but pattern could apply to how Mags edits Tribune content.**
+
+**LOW — skip for now:**
+- `algorithmic-art/`, `canvas-design/`, `theme-factory/`, `slack-gif-creator/`, `brand-guidelines/`, `internal-comms/`, `web-artifacts-builder/` — creative/enterprise skills not relevant to GodWorld
+- `xlsx/`, `pptx/`, `docx/` — document creation skills, source-available (not open source)
+
+**Key architectural insight from `skill-creator`:**
+- Skills should have "pushy" descriptions that overtrigger slightly rather than undertrigger
+- The evaluation loop (write skill → create test prompts → run via subagents → evaluate → iterate) is the same pattern as our Karpathy Loop for agent grading
+- The skill-creator has its own subagent architecture (analyzer, comparator, grader) — a skill that orchestrates evaluation agents. We could build a similar meta-skill for evaluating desk agent output.
+
+**Installation:** Two plugin packages available:
+- `document-skills` — PDF, DOCX, PPTX, XLSX
+- `example-skills` — all other skills including skill-creator, mcp-builder, webapp-testing
+
+→ **Graduated to rollout:** skill-creator noted as tool for Skill Audit. mcp-builder noted as reference for Phase 21.2 and 29. webapp-testing noted as reference for Phase 28.2.
+
+### S115 — Reasoning Models Don't Improve Embeddings (2026-03-24)
+
+**Source:** "Do Reasoning Models Enhance Embedding Models?" — arxiv.org/abs/2601.21192
+
+**Finding:** Training AI models to reason better (chain-of-thought, step-by-step) does NOT improve how they organize and understand general information for retrieval. Reasoning models and base models perform identically when converted to embedding models for similarity search and document retrieval.
+
+**Method:** Researchers used Hierarchical Representation Similarity Analysis to compare internal representations of base models vs. reasoning-trained versions. Reasoning training reorganizes local neighborhoods but keeps global structure and information encoding nearly identical. When both types go through the same fine-tuning to become search tools, reasoning abilities don't transfer.
+
+**What this means for GodWorld:**
+
+Reasoning and retrieval are fundamentally different skills. This validates our model tiering and informs upcoming phases:
+
+- **Corbell (Phase 29):** `all-MiniLM-L6-v2` (~80MB) is the right embedding model. A reasoning model wouldn't improve code search quality.
+- **Phase 21.2 (Canon Grounding MCP):** Use cheapest available base embedding model for Supermemory/dashboard search. No benefit from reasoning capability in retrieval layer.
+- **Phase 4.1 (Semantic Memory Search):** `embeddinggemma-300M` is fine for journal/memory search. Don't upgrade to reasoning model.
+- **Model tiering confirmed:** Opus/Sonnet for editorial reasoning. Small cheap base models for all embedding/retrieval/similarity tasks. Don't conflate the two.
+
+**Design principle:** Spend reasoning tokens on thinking. Spend embedding tokens on finding. They're different muscles.
+
+### S115 — Claude Cookbooks Full Audit: 60+ Notebooks Mapped (2026-03-24)
+
+**Source:** [github.com/anthropics/claude-cookbooks](https://github.com/anthropics/claude-cookbooks) — MIT, 36k stars, 60+ notebooks across 13 directories
+
+**Full directory mapped.** Here's what's relevant, what's reference, and what to skip:
+
+**HIGH RELEVANCE — steal patterns from these:**
+
+1. **`claude_agent_sdk/` (4 notebooks)** — Tutorial series for building agents with the Claude Agent SDK (Python). Progresses from one-liner research agent → Chief of Staff multi-agent → Observability agent with MCP → SRE incident response agent. Key patterns: `query()` interface, MCP server integration, hooks for compliance/audit, subagent orchestration, memory via CLAUDE.md. The Chief of Staff notebook shows multi-agent coordination with specialized subagents — directly maps to our EIC → desk agent architecture. The SRE notebook shows safety hooks that validate write operations — maps to our ledger protection hook.
+
+2. **`misc/session_memory_compaction.ipynb`** — Proactive session memory management. Two approaches: (a) Traditional compaction (wait until context full, generate summary — slow, user waits). (b) **Instant compaction** — background thread proactively builds session memory once a soft token threshold is met. When context is full, summary is already built, zero wait time. Uses `threading.Thread` with `threading.Lock` for thread-safe state. Prompt caching makes background updates ~10x cheaper by caching the conversation and only billing the summarization instruction. **Directly relevant to our compaction hook — we could adopt the instant compaction pattern.**
+
+3. **`tool_use/memory_cookbook.ipynb`** — Context editing + memory for long-running agents. Client-side memory tool (you control storage). Commands: `view`, `create`, `str_replace_editor`. Cross-conversation learning — agent stores patterns in memory files, retrieves them in future sessions. Context clearing strategy: clear old thinking blocks + tool results while preserving memory files. Uses `clear_thinking_20251015` strategy with beta flag `context-management-2025-06-27`. **Maps to our persistence system. The context clearing strategy (clear thinking blocks first, then old tool results, keep memory) could improve our compaction.**
+
+4. **`patterns/agents/` (3 notebooks)** — Reference implementations from Anthropic's "Building Effective Agents" blog. Covers: prompt chaining, routing, multi-LLM parallelization, orchestrator-workers, evaluator-optimizer. The **orchestrator-workers pattern** is our edition pipeline: EIC analyzes the task, delegates to desk agent workers in parallel, aggregates results. The **evaluator-optimizer** is our Karpathy Loop: generate → evaluate → improve. Already validated by our architecture but useful as reference implementations.
+
+5. **`tool_use/automatic-context-compaction.ipynb`** — Automatic context compaction patterns. Reference for improving our compaction hook.
+
+6. **`tool_use/parallel_tools.ipynb`** — Parallel tool calling patterns. Could inform how we run desk agents in parallel during edition production.
+
+**MEDIUM RELEVANCE — reference material:**
+
+7. **`skills/` (3 notebooks)** — Skills for document generation (Excel, PowerPoint, PDF, Word). Uses beta headers `code-execution-2025-08-25`, `files-api-2025-04-14`, `skills-2025-10-02`. The **Files API pattern** (upload once, reference by `file_id`) is useful for our photo pipeline and dashboard screenshots. The custom skills development notebook shows building domain-specific skills — reference for our desk agent skills.
+
+8. **`multimodal/crop_tool.ipynb`** — Image crop tool that lets Claude zoom into regions. Connects to Computer Use zoom action and vision QA. Reference for Photo QA step.
+
+9. **`multimodal/reading_charts_graphs_powerpoints.ipynb`** — Chart/graph interpretation. Reference for dashboard QA where Claude reads dashboard charts.
+
+10. **`tool_use/vision_with_tools.ipynb`** — Combining vision + tool use. Reference for Photo QA + dashboard QA pipelines.
+
+11. **`misc/batch_processing.ipynb`** — Batch API usage. We already have `/batch` skill but this may have patterns we're not using.
+
+12. **`misc/prompt_caching.ipynb` + `misc/speculative_prompt_caching.ipynb`** — Caching patterns. Could reduce costs on edition pipeline runs where system prompts repeat across desk agents.
+
+13. **`misc/building_evals.ipynb`** — Evaluation framework. Reference for building skill evaluations (from Skill Best Practices audit).
+
+14. **`coding/prompting_for_frontend_aesthetics.ipynb`** — Frontend design prompting. Could improve dashboard UI if we ever redesign.
+
+**LOW RELEVANCE — skip for now:**
+- `capabilities/` (classification, RAG, summarization, text-to-SQL) — general patterns, not GodWorld-specific
+- `third_party/` (Pinecone, MongoDB, LlamaIndex, Wikipedia, etc.) — we use Supermemory, not these
+- `finetuning/` — not on our roadmap
+- `observability/usage_cost_api.ipynb` — might be useful for cost tracking later
+- `tool_use/calculator_tool.ipynb`, `customer_service_agent.ipynb` — basic examples
+- `misc/metaprompt.ipynb`, `misc/how_to_enable_json_mode.ipynb` — basic patterns
+
+→ **Graduated to rollout:** Instant compaction pattern noted for compaction hook upgrade. Agent SDK tutorials noted as reference for Phase 12.3 and 21. Files API pattern noted for photo pipeline.
+
+### S115 — Anthropic Quickstarts: Three Reference Implementations (2026-03-24)
+
+**Source:** [github.com/anthropics/anthropic-quickstarts](https://github.com/anthropics/anthropic-quickstarts) — MIT license, 6 projects
+
+**Repository contains 6 quickstarts.** Three are directly relevant:
+
+---
+
+**1. `autonomous-coding/` — Blueprint for Phase 12.3 (Autonomous Cycles)**
+
+Two-agent pattern for long-running autonomous work:
+- **Initializer agent** (session 1): reads a spec, creates `feature_list.json` with 200 test cases, sets up project structure, initializes git.
+- **Coding agent** (sessions 2+): picks up where the last session left off, implements features one by one, marks them passing in `feature_list.json`.
+
+Key architecture:
+- Progress persisted via `feature_list.json` + git commits (not context window)
+- Each session starts with fresh context window — agent discovers state from filesystem
+- Auto-continues between sessions (3-second delay, Ctrl+C to pause)
+- Defense-in-depth security: OS sandbox + filesystem restrictions + bash command allowlist
+- Uses Claude Agent SDK (`claude-code-sdk` Python package)
+
+**This IS the autonomous cycle pattern.** Replace "feature list" with "edition pipeline steps." Replace "test cases" with `validateEdition.js` checks. Replace "app spec" with cycle packet. The initializer creates the production plan, the coding agent executes pipeline steps, progress is tracked in production_log + git. Same skeleton, different domain.
+
+Files to study: `agent.py` (session logic), `client.py` (SDK config with security hooks), `security.py` (bash allowlist), `prompts/` (initializer + coding prompts).
+
+---
+
+**2. `browser-use-demo/` — Better Fit Than Computer Use for Dashboard QA**
+
+Browser automation via Playwright in Docker. Key difference from Computer Use: **DOM-aware targeting** instead of pixel coordinates.
+
+Unique browser actions (not in Computer Use):
+- `read_page` — get DOM tree with element refs. Use `text="interactive"` to filter.
+- `get_page_text` — extract all text content from the page.
+- `find` — search for text and highlight matches.
+- `form_input` — set form element values directly by ref.
+- `scroll_to` — scroll element into view by ref.
+- `execute_js` — run JavaScript in page context.
+- `navigate` — URL navigation with back/forward history.
+
+Why this beats Computer Use for dashboard QA:
+- Element refs survive layout changes (coordinates don't)
+- DOM access means structured data extraction (not screenshot → vision → guess)
+- Form manipulation for testing dashboard inputs
+- Coordinate scaling handled automatically (1920x1080 viewport → 1456x819 for Claude)
+
+Architecture: Docker container with Playwright + Chromium + XVFB virtual display + VNC/NoVNC server + Streamlit UI. All in one container.
+
+**Recommendation:** Phase 28.2 (Dashboard Visual QA) should use browser-use-demo pattern, not raw Computer Use. Reserve Computer Use for non-browser desktop tasks only.
+
+---
+
+**3. `agents/` — Minimal Agent Loop Reference (<300 lines)**
+
+Educational implementation showing how agents work at the lowest level:
+- `agent.py` — manages Claude API interactions and tool execution loop
+- `tools/` — tool implementations (local + MCP)
+- `utils/` — message history and MCP server connections
+
+Key code pattern:
+```python
+agent = Agent(
+    name="MyAgent",
+    system="You are a helpful assistant.",
+    tools=[ThinkTool()],
+    mcp_servers=[{"type": "stdio", "command": "python", "args": ["-m", "mcp_server"]}]
+)
+response = agent.run("Your task here")
+```
+
+**Connection:** Reference implementation for Phase 21 (local model agents). When we build custom agent harnesses outside Claude Code, this is the template. Shows how to wire tools + MCP servers in minimal code. The ThinkTool pattern (agent reasons explicitly via a tool) is also worth studying for desk agent quality.
+
+---
+
+**Not relevant for GodWorld:**
+- `customer-support-agent/` — Next.js support bot with knowledge base
+- `financial-data-analyst/` — Next.js financial charts
+- `computer-use-demo/` — already logged in separate S115 entry
+
+→ **Graduated to rollout:** Phase 12.3 updated with autonomous-coding reference. Phase 28.2 updated to prefer browser-use-demo over raw Computer Use. Phase 21 reference noted.
+
+### S115 — Vision API: Image Understanding for Photo QA and Dashboard Verification (2026-03-24)
+
+**Source:** [platform.claude.com/docs/en/build-with-claude/vision](https://platform.claude.com/docs/en/build-with-claude/vision) + [claude-cookbooks/multimodal/getting_started_with_vision.ipynb](https://github.com/anthropics/claude-cookbooks/blob/main/multimodal/getting_started_with_vision.ipynb)
+
+**Key technical specs:**
+- Formats: JPEG, PNG, GIF, WebP. Max 5MB per image (API). Max 8000x8000 px.
+- Token cost: `(width × height) / 750` tokens per image. 1000x1000 = ~1,334 tokens (~$0.004).
+- Up to 600 images per API request. Images before text = 30% quality improvement.
+- Optimal: resize to 1568px max long edge, ~1.15 megapixels. Larger images get downscaled server-side (adds latency, no quality benefit).
+- **Files API:** Upload once, reference by `file_id`. Avoids re-encoding for repeated use.
+- **URL source:** Pass image URLs directly instead of base64.
+- Cannot identify people, limited spatial reasoning, approximate counting only.
+
+**Direct application — Edition Photo QA (new pipeline step):**
+
+We generate AI photos for every edition via `generate-edition-photos.js`. Currently nobody verifies them before they go to PDF and Drive. A vision QA step could:
+
+1. Send each generated photo + its source article context to Claude
+2. Claude evaluates: Does the photo match the article? Wrong tone? Generic AI slop? Anachronistic details? Does it fit GodWorld's prosperity-era Oakland aesthetic?
+3. Flag or reject bad photos before PDF generation
+
+**Cost:** ~1,334 tokens per photo × 8-12 photos per edition = ~12,000-16,000 tokens. Under $0.05 per edition at Sonnet pricing. Negligible.
+
+**Implementation:** Add a step between Step 15 (photo generation) and Step 16 (PDF) in the edition pipeline. Script reads each photo, base64-encodes it, sends to Claude with the article headline/summary as context, gets a pass/fail + reason. Failed photos get regenerated or flagged for manual review.
+
+**Also useful for:**
+- Dashboard visual QA (Phase 28.2) — screenshot tabs, send for verification. ~1,050 tokens per 1024x768 screenshot.
+- Supplemental photo verification — `--credits-only` mode photos need same QA.
+- Pre-resize all screenshots/photos to 1568px max before sending to avoid latency hit.
+- Files API for repeated dashboard screenshots — upload once, reuse `file_id`.
+
+→ **Graduated to rollout:** Photo QA step added to edition pipeline priorities.
+
+### S115 — Claude Code Skills Reference: Frontmatter Power Features (2026-03-24)
+
+**Source:** [code.claude.com/docs/en/skills](https://code.claude.com/docs/en/skills)
+
+**What it is:** The complete Claude Code skills reference. Covers everything from SKILL.md format to advanced patterns. Most of this validates what we already do, but several frontmatter fields and patterns are features we're not using.
+
+**Frontmatter fields we should add to our 21 skills:**
+
+1. **`effort` per skill.** Overrides session effort level. Set `effort: high` for complex desks (civic, sports, chicago), `effort: medium` for routine desks (culture, letters, business). Per-skill thinking depth without manual switching. This is the effort parameter from the prompting best practices doc, applied at the skill level. Options: `low`, `medium`, `high`, `max` (Opus 4.6 only).
+
+2. **`model` per skill.** Specifies which model to use. THIS IS THE PHASE 21 MECHANISM. Set `model: sonnet` for routine desks now. When local models are ready, point routine skills at the local endpoint via model override. Same pipeline, different model, zero code changes.
+
+3. **`disable-model-invocation: true`** on side-effect skills. Prevents Claude from auto-triggering. Must set on: `/run-cycle`, `/write-edition`, `/session-end`, `/write-supplemental`, `/podcast` — anything that produces output, modifies files, or has irreversible effects. Currently any of these could be auto-triggered if Claude sees a matching conversation pattern. This is a safety gap.
+
+4. **`allowed-tools`** per skill. Grant specific tool access without per-use approval when the skill is active. Production skills (`/write-edition`, `/run-cycle`) could auto-allow `Read, Write, Bash, Glob, Grep` to eliminate approval prompts during pipeline runs. Read-only skills (`/visual-qa`, `/pre-mortem`) should be `Read, Grep, Glob` only.
+
+5. **`argument-hint`** for autocomplete. Small UX improvement. Example: `/write-edition` gets `argument-hint: [cycle-number]`, `/write-supplemental` gets `argument-hint: [topic]`.
+
+6. **`context: fork` + `agent` field.** Skills can run in isolated subagent contexts using custom agents from `.claude/agents/`. Our desk agents ARE custom agents there (civic-desk, sports-desk, etc.). This could simplify edition pipeline orchestration — each desk skill forks into its own agent context automatically. The `agent` field specifies which subagent type: `Explore`, `Plan`, `general-purpose`, or any custom agent name.
+
+**Dynamic context injection — preprocessing pattern:**
+
+The `` !`command` `` syntax runs shell commands BEFORE the skill content reaches Claude. Output replaces the placeholder. This is preprocessing, not tool use — Claude only sees the final result.
+
+**Application for GodWorld:** Inject live desk data directly into skill prompts:
+```yaml
+## Desk briefing data
+!`node scripts/getDeskData.js civic`
+
+## Previous grades
+!`cat output/grades/grades_c88.json | jq '.civic'`
+
+## Current storylines
+!`node scripts/getActiveStorylines.js`
+```
+
+This eliminates manual packet loading steps from the edition pipeline. The skill arrives pre-loaded with current data. Could replace several steps in `/write-edition`.
+
+**Other notable details:**
+- Custom commands (`.claude/commands/`) merged into skills. Old format still works but skills take precedence if names conflict.
+- Skill description budget: 2% of context window, 16,000 char fallback. With 21 skills, check `/context` for warnings about excluded skills. Override with `SLASH_COMMAND_TOOL_CHAR_BUDGET` env var.
+- Skills from `--add-dir` directories support live change detection — edit during session without restart.
+- `${CLAUDE_SKILL_DIR}` variable resolves to skill's directory. Use in bash injection to reference bundled scripts.
+- `${CLAUDE_SESSION_ID}` for session-specific logging.
+- `user-invocable: false` hides from `/` menu but Claude can still invoke. Use for background knowledge skills.
+- "ultrathink" keyword anywhere in skill content enables extended thinking.
+- Visual output pattern: skills can bundle scripts that generate HTML and open in browser. Could use for codebase visualization.
+
+→ **Graduated to rollout:** Skill Frontmatter Audit added as HIGH priority. Dynamic context injection noted for edition pipeline optimization.
+
+### S115 — Extended Thinking: Interleaved Reasoning + Adaptive Migration (2026-03-24)
+
+**Source:** [platform.claude.com/docs/en/build-with-claude/extended-thinking](https://platform.claude.com/docs/en/build-with-claude/extended-thinking)
+
+**Key new finding — Interleaved thinking:**
+Without interleaved thinking, Claude reasons once at the start, then goes tool-call-blind — it calls tools and responds without reasoning between them. WITH interleaved thinking, Claude reasons between every tool call: think → call tool → think about results → call next tool → think → answer. This is the difference between a reporter who reads all their notes then writes, and one who thinks after each interview.
+
+- **Opus 4.6:** Automatic with adaptive thinking. No config needed.
+- **Sonnet 4.6:** Requires beta header `interleaved-thinking-2025-05-14`
+- **Other Claude 4 models:** Same beta header
+
+**Other actionable findings:**
+- `budget_tokens` manual thinking is explicitly **deprecated** for Opus 4.6, will be removed. Migration to adaptive thinking is now urgent, not optional.
+- `display: "omitted"` — skip thinking text for faster streaming, still charged for tokens. Good for production edition runs where reasoning doesn't need to be visible.
+- Summarized thinking is default for Claude 4 models — you see summaries but pay for full tokens.
+- Thinking blocks from prior turns are removed from context on continuation. Still count as input tokens from cache. Cost tradeoff to be aware of.
+- Changing thinking parameters invalidates message cache. System prompts and tools remain cached.
+
+**Connection to GodWorld:** Our desk agents (civic, sports, chicago) currently use `budget_tokens` extended thinking. Migrating to adaptive thinking gives them interleaved reasoning for free — they'll think between tool calls instead of only at the start. This should improve quality on complex multi-step articles. The `display: "omitted"` option could speed up production runs.
+
+### S115 — Skill Authoring Best Practices: Official Guide (2026-03-24)
+
+**Source:** [platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
+
+**Core principle:** "The context window is a public good." Every token in your skill competes with conversation history, other skills, and the actual request. Only add context Claude doesn't already have.
+
+**Actionable findings for our 21 skills:**
+
+1. **SKILL.md body under 500 lines.** Official recommendation for optimal performance. Need to audit all 21 of ours.
+
+2. **Progressive disclosure.** SKILL.md is the overview → separate files for details. Claude reads SKILL.md when triggered, reads additional files only as needed. Keep the main file lean, push reference material to linked files one level deep.
+
+3. **One level deep references ONLY.** Claude partially reads deeply nested files (`head -100` instead of full read). Everything must link directly from SKILL.md, not from another referenced file.
+
+4. **Degrees of freedom framework:**
+   - **Low freedom** (exact scripts, no parameters): fragile operations where consistency is critical. → Our edition pipeline skills (`/write-edition`, `/run-cycle`).
+   - **Medium freedom** (pseudocode with parameters): preferred pattern exists but variation acceptable. → Our desk skills (`/civic-desk`, `/sports-desk`).
+   - **High freedom** (text instructions): multiple approaches valid, context-dependent. → Our research and chat skills.
+
+5. **Descriptions must be third person** and include both WHAT the skill does and WHEN to use it. Critical for discovery from 100+ skills. Audit needed — our descriptions may use wrong POV or be too vague.
+
+6. **Name format:** lowercase letters, numbers, hyphens only. Max 64 chars. No "anthropic" or "claude" in names.
+
+7. **Feedback loop pattern:** "Run validator → fix errors → repeat." Our `validateEdition.js` → fix → revalidate pattern matches this exactly. Validated.
+
+8. **Evaluation-driven development:** Build evaluations (3+ test scenarios) BEFORE writing skill docs. We haven't done this for any of our 21 skills. The pattern: identify gaps → create evaluations → establish baseline → write minimal instructions → iterate.
+
+9. **Claude A/B iteration:** Use one Claude instance to write/refine the skill, another to test it in real tasks. Iterate based on observed behavior, not assumptions. This is how we should improve desk agent quality.
+
+10. **Utility scripts > generated code.** Pre-made scripts are more reliable, save tokens, save time, ensure consistency. We already do this well (buildDeskPackets.js, buildDeskFolders.js, etc.).
+
+11. **MCP tool references need fully qualified names:** `ServerName:tool_name`. Relevant when we build Corbell MCP (Phase 29) or Canon Grounding MCP (Phase 21.2) — skills must reference them correctly.
+
+12. **Checklist for effective skills** (from the doc): description is specific + includes triggers, body under 500 lines, no time-sensitive info, consistent terminology, concrete examples, one-level-deep references, clear workflows, feedback loops, tested with target models.
+
+→ **Graduated to rollout:** Expanded Agent Prompt Audit section with skill-specific audit items.
+
+### S115 — Claude Cookbooks: Agent Loop Pattern for Tool Use (2026-03-24)
+
+**Source:** [github.com/anthropics/claude-cookbooks/tree/main/extended_thinking](https://github.com/anthropics/claude-cookbooks/tree/main/extended_thinking)
+
+**What's useful (model-agnostic architecture):**
+
+1. **Agent loop pattern.** The canonical while loop: call API → check `stop_reason == "tool_use"` → extract tool call → execute tool → append result as user turn → call API again → repeat until done. This is the loop we'd need to implement for Phase 21 (local model agents) and Phase 12.3 (autonomous cycles) if we build custom agent harnesses outside Claude Code.
+
+2. **Thinking block preservation.** Thinking blocks have cryptographic signatures. When passing conversation history back to the API, you MUST include thinking + redacted_thinking + tool_use blocks unmodified. The API rejects tampered history. Critical for any custom agent loop we build.
+
+3. **Thinking happens before tool calls, not after.** Claude reasons about which tool to use, calls it, gets the result, then responds WITHOUT another thinking phase until the next non-tool-result user turn. Architectural constraint to know.
+
+**What's outdated:** The `budget_tokens` extended thinking config. Use adaptive thinking (`thinking: {type: "adaptive"}`) for 4.6 models instead. See S115 Prompting Best Practices entry.
+
+**Also noted:** The full cookbooks repo has 19 directories including `patterns/agents/` (agent design patterns), `claude_agent_sdk/` (agent SDK examples), `skills/` (skill implementations), `tool_evaluation/` (tool evaluation frameworks). Worth exploring in a future research session for patterns we can steal.
+
+### S115 — Claude Prompting Best Practices: Official Guide for 4.6 Models (2026-03-24)
+
+**Source:** [platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
+
+**What it is:** Anthropic's single reference for prompt engineering with Claude 4.6 models. Covers foundational techniques, output control, tool use, thinking, agentic systems, and migration guidance. Dense with copy-pasteable prompt snippets.
+
+**What we're already doing right (validation):**
+- XML tags for structured prompts (agent briefings, desk packets)
+- Role-setting in system prompts (every agent has identity)
+- Long context data at top of prompt, query at bottom (desk packets above instructions — their tests show 30% quality improvement)
+- Production log for compaction survival (matches their multi-context-window recommendation exactly)
+- Git for state tracking across sessions (SESSION_CONTEXT.md)
+- Anti-overengineering rules (identity.md matches their sample prompt nearly word-for-word)
+- Anti-hallucination / investigate-before-answering (our Anti-Guess Rules match their `<investigate_before_answering>` prompt)
+- Few-shot examples in `<example>` tags (our exemplar system in gradeEdition.js)
+
+**Actionable findings — things to steal:**
+
+1. **Adaptive thinking migration.** Opus 4.6 uses `thinking: {type: "adaptive"}` instead of explicit `budget_tokens`. The model dynamically decides when and how much to think based on query complexity + `effort` parameter. Anthropic says "adaptive thinking reliably drives better performance than extended thinking" in internal evals. We currently use extended thinking with budget_tokens in civic/sports/chicago desk prompts. Should migrate to adaptive + effort setting.
+
+2. **De-escalate agent prompts for 4.6.** Critical finding: "Tools that undertriggered in previous models are likely to trigger appropriately now. Instructions like 'If in doubt, use [tool]' will cause overtriggering." And: "Where you might have said 'CRITICAL: You MUST use this tool when...', you can use more normal prompting like 'Use this tool when...'" Our SKILL.md and RULES.md files were written for Sonnet 3.7/4.0 — they likely have aggressive language that now causes overtriggering or overthinking.
+
+3. **Compaction survival prompt.** Their exact recommendation for agentic systems: "Your context window will be automatically compacted as it approaches its limit, allowing you to continue working indefinitely from where you left off. Therefore, do not stop tasks early due to token budget concerns. As you approach your token budget limit, save your current progress and state to memory before the context window refreshes." We should add this to our compaction hook or system prompt.
+
+4. **Subagent over-spawning.** "Claude Opus 4.6 has a strong predilection for subagents and may spawn them in situations where a simpler, direct approach would suffice." Their fix: explicit guidance on when subagents are and aren't warranted. Relevant for our edition pipeline where subagents run desk work.
+
+5. **Prefilled responses deprecated.** Starting with 4.6, prefilled assistant turns are no longer supported. Need to audit whether any agent prompts use this pattern. Migration paths: structured outputs, direct instructions, XML tags for format control.
+
+6. **General instructions beat prescriptive steps for thinking.** "A prompt like 'think thoroughly' often produces better reasoning than a hand-written step-by-step plan. Claude's reasoning frequently exceeds what a human would prescribe." Applies to our craft layer (26.3) — the MICE thread guidance and promise-payoff instructions might be more effective as general principles than step-by-step instructions.
+
+7. **Structured research prompting.** "Develop several competing hypotheses. Track confidence levels. Regularly self-critique your approach. Update a hypothesis tree or research notes file." Could apply to civic desk agent prompts for investigative pieces.
+
+8. **Context awareness.** Claude 4.6 can track remaining context window. The recommended prompt tells Claude to save progress before compaction hits. We should leverage this — it means Claude can proactively dump state to production log before running out of context.
+
+9. **Vision crop tool.** "Testing has shown consistent uplift on image evaluations when Claude is able to zoom in on relevant regions." Connects to Phase 28 (Computer Use) — the zoom action serves this purpose.
+
+→ **Graduated to rollout:** Items 1-5 added as maintenance tasks (prompt audit). Item 6 noted for Phase 26.3 review.
+
+### S115 — Corbell: Codebase Knowledge Graph as MCP Server (2026-03-24)
+
+**Source:** [github.com/Corbell-AI/Corbell](https://github.com/Corbell-AI/Corbell) — via [reddit.com/r/OpenSourceAI](https://www.reddit.com/r/OpenSourceAI/comments/1s1sjxe/open_source_cli_that_builds_a_crossrepo/)
+
+**What it is:** Open-source CLI that scans your codebase and builds a knowledge graph — typed method signatures, call paths, database/queue dependencies, infrastructure-as-code detection, git change-coupling metrics. Stores everything in local SQLite with sentence-transformer embeddings (`all-MiniLM-L6-v2`, runs locally). Then exposes the graph as an **MCP server** with four tools:
+
+- `graph_query` — service dependencies and call paths
+- `get_architecture_context` — auto-discover which services/files a feature touches
+- `code_search` — semantic search across the embedding index
+- `list_services` — enumerate all services/modules
+
+Entirely local. No cloud. Apache 2.0 license. Supports Python, TypeScript, Go, Java. Also has a force-directed graph visualization UI (D3.js, served via Python stdlib HTTP).
+
+**Extra capabilities:** Pattern learning from existing ADRs/docs, architectural constraint enforcement ("never call X from Y"), spec generation from PRDs using Claude/GPT-4o/Ollama, task decomposition to YAML, Linear export.
+
+**Why this is a priority for GodWorld:**
+
+1. **Context token savings.** Right now, understanding how the codebase connects costs context — reading ENGINE_MAP.md, PHASE_DATA_AUDIT.md, tracing through scripts, opening 5 files to follow one dependency chain. Corbell gives me an MCP tool I can query instead. "What calls `sheets.js`?" "What does `buildDeskPackets.js` depend on?" "Which scripts write to the Storyline_Tracker tab?" One query instead of five file reads.
+
+2. **Replaces and extends `/stub-engine`.** The `/stub-engine` skill generates a condensed reference map of exported functions across 11 engine phases. Corbell is the full version — not just engine functions but every script, every lib, every agent config, with call paths and dependencies between them.
+
+3. **Phase 21 enabler.** Local models running desk agents can query Corbell's MCP tools to understand code structure without burning context on full file reads. This complements the Canon Grounding MCP (21.2) — Corbell handles code understanding, Canon MCP handles world data.
+
+4. **Compaction survival.** After context compaction, the knowledge graph persists on disk. Post-compact Mags can query `get_architecture_context` instead of re-reading docs to rebuild understanding.
+
+5. **Fits our stack.** SQLite (we already use it for claude-mem). Local embeddings (MiniLM-L6-v2 is ~80MB, fits our 2GB droplet). MCP server (Claude Code native). `pip install "corbell[anthropic]"` + `corbell init` + `corbell graph build --methods` + `corbell embeddings build`.
+
+**Setup would be:**
+```bash
+pip install "corbell[anthropic]"
+cd /root/GodWorld
+corbell init
+corbell graph build --methods
+corbell embeddings build
+```
+Then add MCP config to Claude Code settings. Graph becomes queryable in every session.
+
+→ **Graduated to rollout:** Phase 29 (Codebase Knowledge Graph). Priority: HIGH.
+
+### S115 — Computer Use Tool: Claude Sees and Controls a Desktop (2026-03-24)
+
+**Source:** [platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool](https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool)
+
+**What it is:** Beta API that gives Claude a virtual desktop — screenshot capture, mouse clicks, keyboard input, scrolling, dragging. Claude takes a screenshot, sees what's on screen, decides what to do, takes an action, gets a new screenshot, repeats. An "agent loop" where the application is the middleman between Claude and a Linux desktop running inside Docker/VM.
+
+**Supported models:** Opus 4.6, Sonnet 4.6, Opus 4.5 (latest `computer_20251124` tool version with zoom action). Older models use `computer_20250124`. Beta header required.
+
+**Core mechanic:** Schema-less tool — no input schema needed, it's built into the model. You provide `display_width_px`, `display_height_px`, and Claude returns actions: `screenshot`, `left_click`, `type`, `key`, `mouse_move`, `scroll`, `drag`, `zoom` (inspect a screen region at full resolution). Pairs with bash and text editor tools in the same agent loop.
+
+**Key capabilities:**
+- Full mouse control (click, double-click, right-click, drag, modifier+click)
+- Keyboard input (typing, shortcuts, key holds)
+- Scrolling in any direction with amount control
+- Zoom into screen regions for detail inspection (Opus 4.5+ only)
+- Combinable with bash tool and text editor tool in same session
+- Thinking/extended thinking supported for visible reasoning
+- Automatic prompt injection classifier defense on screenshots
+
+**Limitations:**
+- **Latency:** Too slow for real-time human-speed interaction. Best for background tasks.
+- **Vision accuracy:** Can miss click targets, hallucinate coordinates.
+- **Spreadsheet interaction:** Improving but not reliable for cell-level precision.
+- **Cost:** Every screenshot is vision tokens. Every action is an API round-trip. System prompt overhead 466-499 tokens + 735 tokens per tool definition.
+- **Prompt injection:** Text on screen can override instructions. Needs sandboxed environment.
+- **No account creation/social media posting** by design.
+
+**Connection to GodWorld:**
+
+Three concrete use cases identified:
+
+1. **Dashboard visual QA (near-term).** We already have `/visual-qa` but it uses Playwright, which requires `--no-sandbox` on our root server. Computer Use running in a Docker container is the cleaner answer — Claude opens the dashboard in Firefox inside the container, screenshots each tab, evaluates what it sees. No Playwright dependency, proper sandboxing. This is the visual complement to `validateEdition.js` (structural) and Rhea (factual).
+
+2. **Agent interaction with non-API interfaces (medium-term).** Any tool the agents need that doesn't have an API — Google Sheets web UI, Drive folders, Supermemory console, GitHub PR pages. Computer Use is the fallback "I can see it and click it" layer when no API exists. Especially relevant for Phase 20 (WordPress) where the Tribune website might need visual interaction for layout/publishing.
+
+3. **Autonomous cycle monitoring (long-term).** Phase 12.3 autonomous cycles need quality oracles. A Computer Use agent could open the dashboard during a cycle run, check the mission control panel, verify edition cards rendered correctly, screenshot the sports tab to confirm stats populated. Visual verification that code-level checks can't do.
+
+**What we'd need to build:**
+- Docker container with virtual display (Xvfb), lightweight desktop (Mutter/Tint2), Firefox
+- Agent loop script that mediates between Claude API and the container
+- Coordinate scaling handler (screenshots get downsampled, coordinates need mapping back)
+- Iteration limiter to prevent runaway API costs
+
+**Cost concern:** This is expensive per-interaction. Vision tokens for every screenshot + tool definition overhead. Not for routine work. Reserve for verification, QA, and tasks where no API alternative exists.
+
+→ **Graduated to rollout:** Phase 28 (Computer Use Integration) added.
+
 ---
 
 ### Long-Running Agents & Autonomous Execution
@@ -687,6 +1244,36 @@ CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 
 ### Document Processing
 - LiteParse: local PDF/Office/image parser — github.com/run-llama/liteparse (Node.js, Apache 2.0, Tesseract.js OCR)
+
+### Codebase Knowledge Graphs
+- Corbell: CLI that builds a knowledge graph of your codebase, exposes it as MCP server — github.com/Corbell-AI/Corbell (Apache 2.0, SQLite + local embeddings)
+
+### Reference Implementations
+- Anthropic Quickstarts — 6 projects: autonomous-coding (two-agent pattern), browser-use-demo (DOM-aware Playwright), agents (minimal loop), computer-use-demo, customer-support, financial-analyst. github.com/anthropics/anthropic-quickstarts (MIT)
+- Claude Cookbooks — 60+ notebooks: agent SDK tutorials, session memory compaction, memory tool, agent patterns (orchestrator-workers, evaluator-optimizer), parallel tools, vision+tools, batch processing, prompt caching, skills, evals. github.com/anthropics/claude-cookbooks (MIT)
+- Anthropic Skills — 16 official skills: skill-creator (meta-skill for building/evaluating skills), mcp-builder, webapp-testing, frontend-design, PDF/DOCX/PPTX/XLSX, claude-api reference. Installable as Claude Code plugin. github.com/anthropics/skills
+
+### Vision & Multimodal
+- Vision API — image understanding, token costs, Files API, best practices. platform.claude.com/docs/en/build-with-claude/vision
+- Getting Started with Vision cookbook — base64 encoding, URL sources, multi-image. github.com/anthropics/claude-cookbooks/blob/main/multimodal/getting_started_with_vision.ipynb
+
+### Computer Use & Visual Agents
+- Computer Use Tool — Anthropic beta API for desktop automation via screenshot+click agent loop. platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use-tool
+
+### Plugins
+- Claude Plugins Official — 30+ plugins: ralph-loop (iterative agent loops), hookify (markdown-based hooks), claude-code-setup (automation recommender), pr-review-toolkit, plugin-dev, mcp-server-dev, feature-dev, security-guidance, claude-md-management. github.com/anthropics/claude-plugins-official
+
+### Security
+- Claude Code Security Review — AI-powered vulnerability scanner, GitHub Action + `/security-review` slash command. github.com/anthropics/claude-code-security-review (MIT)
+
+### Model Architecture & Capabilities
+- "Do Reasoning Models Enhance Embedding Models?" — reasoning training doesn't improve retrieval. Base models = reasoning models for embedding/similarity tasks. arxiv.org/abs/2601.21192
+
+### Prompt Engineering & Skills
+- Claude Prompting Best Practices — official Anthropic guide for 4.6 models. Adaptive thinking, de-escalation, compaction survival, subagent guidance. platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+- Extended Thinking — interleaved thinking, adaptive vs manual, display:omitted, caching. platform.claude.com/docs/en/build-with-claude/extended-thinking
+- Skill Authoring Best Practices — progressive disclosure, degrees of freedom, evaluation-driven development, 500-line limit. platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices
+- Claude Code Skills Reference — frontmatter fields (effort, model, allowed-tools, disable-model-invocation, context:fork), dynamic context injection, subagent execution, visual output pattern. code.claude.com/docs/en/skills
 
 ### Platform
 - Claude Code 2.0: agent teams, remote control, web sessions, auto mode

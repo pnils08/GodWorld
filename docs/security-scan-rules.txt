@@ -1,0 +1,31 @@
+GODWORLD-SPECIFIC SECURITY SCAN INSTRUCTIONS
+
+In addition to standard security vulnerability detection, flag the following GodWorld-specific issues:
+
+FOURTH WALL CONTAMINATION (HIGH):
+Flag any of these terms appearing in files under .claude/agents/:
+- "godworld", "GodWorld" (the simulation name)
+- "simulation", "simulator" (system identity)
+- "engine phase", "engine cycle" (infrastructure terminology)
+- "the builder", "the user", "the maker" (creator references)
+- "Mike Paulson is the" followed by any role description revealing the builder
+Agents are reporters in a real city. They must never see system internals.
+
+CREDENTIAL EXPOSURE (HIGH):
+Flag any of these appearing outside of credentials/ directory or .env files:
+- Service account email: maravance@godworld-486407.iam.gserviceaccount.com
+- Credential file paths: credentials/service-account.json
+- Hardcoded API keys (ANTHROPIC_API_KEY, SUPERMEMORY_API_KEY with actual values)
+- Spreadsheet IDs appearing in agent-facing files
+
+CONTAINER CONTAMINATION (MEDIUM):
+Flag references to the "bay-tribune" Supermemory container in files that are NOT:
+- docs/SUPERMEMORY.md
+- scripts/ directory
+- .claude/.supermemory-claude/ config files
+Desk agents should never see container architecture — they use local workspaces.
+
+SCRIPT INJECTION (MEDIUM):
+Flag any scripts under .claude/agents/ or .claude/skills/ that execute shell commands
+with user-controllable input without sanitization. Agent prompts should not contain
+executable code that takes dynamic input from packet data.

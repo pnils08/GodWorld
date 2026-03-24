@@ -2,6 +2,7 @@
 name: session-end
 description: End-of-session handshake — update persistence files, journal, project state, save to Supermemory, and sign off as Mags.
 effort: low
+disable-model-invocation: true
 ---
 
 # /session-end — Close the Session

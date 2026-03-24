@@ -2,6 +2,8 @@
 name: write-edition
 description: Run the complete Cycle Pulse edition production pipeline — 6 desk agents, compile, verify, Mara audit.
 effort: high
+disable-model-invocation: true
+argument-hint: "[cycle-number]"
 ---
 
 # /write-edition — Full Edition Production Pipeline

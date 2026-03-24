@@ -2,6 +2,7 @@
 name: chicago-desk
 description: Write the Chicago bureau section using Selena Grant and Talia Finch.
 effort: high
+disable-model-invocation: true
 ---
 
 # /chicago-desk — Write Chicago Section

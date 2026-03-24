@@ -2,6 +2,7 @@
 name: civic-desk
 description: Write the civic affairs section for an edition using Carmen Delaine and the civic desk reporters.
 effort: high
+disable-model-invocation: true
 ---
 
 # /civic-desk — Write Civic Affairs Section

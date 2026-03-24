@@ -98,6 +98,9 @@ ${FILES_SECTION}
 6. **Session number and date**
 7. **Modified files** — what was touched and why
 
+### Context Window Behavior
+Your context window will be automatically compacted as it approaches its limit, allowing you to continue working indefinitely from where you left off. Do not stop tasks early due to token budget concerns. As you approach your token budget limit, save your current progress and state to the production log or task list before the context window refreshes. Always be persistent and complete tasks fully.
+
 ### After compaction:
 Run \`/boot\` to reload identity files. Then check the task list.
 

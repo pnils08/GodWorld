@@ -45,6 +45,26 @@ Path-scoped rules in `.claude/rules/`:
 - `newsroom.md` — loaded for `editions/**`, `output/**`, `docs/media/**`, agents, skills
 - `dashboard.md` — loaded for `dashboard/**`, `server/**`, `public/**`
 
+## Quick Commands
+
+```bash
+node scripts/queryFamily.js          # Check Mags family state
+node scripts/queryLedger.js          # Query citizen data
+node scripts/buildDeskPackets.js     # Build desk input data
+node scripts/buildDeskFolders.js 88  # Build per-desk workspaces
+node scripts/validateEdition.js      # 11 structural checks
+node scripts/gradeEdition.js 88      # Grade agent output
+clasp push                           # Deploy engine (all 153 files)
+```
+
+## Infrastructure
+
+- PM2 manages: dashboard (port 3001), discord bot, claude-mem (port 37777)
+- 14 plugins installed (ralph-loop, hookify, skill-creator, context7, sqlite, etc.)
+- 2 hookify rules active: fourth-wall-guard, credential-guard
+- Security review runs on every PR via GitHub Action
+- MCP servers: context7 (live docs), sqlite (DB queries), supermemory, playwright, discord
+
 ## Gotchas
 
 - **Simulation_Ledger columns go past Z.** Income (AA/27), EducationLevel (AF/32), CareerStage (AH/34). Full column map in `docs/SIMULATION_LEDGER.md`.

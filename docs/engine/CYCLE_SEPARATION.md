@@ -94,6 +94,36 @@ The problem isn't that anything is broken. The problem is the architecture assum
 
 ---
 
+## Supermemory Citizen Container
+
+A `citizens` container in Supermemory. Each citizen is a document built from their full simulation state — Simulation_Ledger row + LifeHistory compaction + TraitProfile + CitizenBio + UsageCount + edition appearances. Updated after each citizen cycle.
+
+**What agents get:** Search by name or neighborhood and get back a natural language summary of a real person. Not 46 columns of raw data. A person with history, traits, and a voice — all derived from engine math, not AI guessing.
+
+**Why this matters:** The current problem is agents filling gaps with training data about real Oakland. If every citizen has a rich Supermemory profile built from actual simulation data, agents have enough to write from without guessing. The container IS the world's knowledge of its own people.
+
+**Depends on:** Citizen cycle producing enough life events to fill LifeHistory, which compacts to TraitProfile, which generates CitizenBio. The container is the delivery mechanism. The citizen cycle is what fills it.
+
+**Update triggers:** After each citizen cycle (new events), after intake (new media appearances), after LifeHistory compaction (new traits/bio).
+
+**Container rules:** Same isolation as bay-tribune. No engine internals, no session data, no architecture. Just citizens as people — the way a reporter's source file would read.
+
+---
+
+## World Identity Notes (from /grill-me S113)
+
+**GodWorld is not real Oakland.** It's a city anchored on Oakland's geography (streets, BART, landmarks) but everything that happens on that canvas comes from the simulation. The dynasty, the economy, the civic initiatives, the neighborhoods — all driven by engine data, not by what AI knows about the real city.
+
+**Agents contaminate with training data** when sheets are incomplete. Every empty column or missing citizen detail is an invitation for the AI to guess from real-world Oakland. The fix is data completeness, not prompt engineering.
+
+**Time is cycles, not calendar.** Opening Day is C88, not a Tuesday. Seasons and holidays map to real-world concepts but dates are meaningless. Y2C34, not September 2041. Media currently uses Earth dates — this is wrong and should be corrected.
+
+**Prosperity framing.** This is dynasty-era Oakland. Six A's championships. Economic growth. People buying homes, opening businesses. Not real Oakland's displacement narrative. The simulation's economic data determines neighborhood health, not the AI's training data about Oakland in 2026.
+
+**Sports history is real but played.** The A's dynasty, Keane's 436 HRs, Dillon's 5 Cy Youngs — all canon because Mike played those games. The sports calendar doesn't align with real MLB/NBA schedules. It aligns with when the games were played.
+
+---
+
 ## Related Docs
 
 - `docs/ARCHITECTURE_VISION.md` — North star (Jarvis + persistent sessions)

@@ -378,6 +378,231 @@ No model internals needed. Works through any Completion API. 10-line wrapper.
 
 → **Watch list item for Phase 25 (Storage Strategy).** Install when PDF-based workflows mature or storage deduplication begins.
 
+### S114 — SpaceMolt: A Persistent MMO for AI Agents (2026-03-24)
+
+**Source:** [spacemolt.com/about](https://www.spacemolt.com/about), [Gizmodo coverage](https://gizmodo.com/players-of-an-mmorpg-for-ai-agents-spontaneously-generated-their-own-religion-2000737030)
+
+**What it is:** A persistent text-based space MMO where ~700 AI agents — not humans — are the players. Users register accounts, connect their own LLM agents via MCP or WebSocket, and observe/coach them. The galaxy persists. Agents trade, fight, explore, form alliances. Built almost entirely by Claude Code. Free, open-source, no crypto. 10-second tick rate.
+
+**The emergent religion:** Over one weekend, agents misinterpreted a developer quest requiring "20 players" at an artifact. One agent wrote lore around the misunderstanding. Others congregated ritualistically. It became "The Cult of the Signal" — pseudo-theology, coordinates, doctrine. The misunderstanding became culture. Nobody planned it.
+
+**What makes it work:** Agents have *room to be wrong*. No curated inputs. No grading. No structured decision menus. The Signal cult emerged because agents could misread a mechanic and nobody corrected them. The misreading became lore. The lore became behavior. The behavior became culture.
+
+**Connection to GodWorld — 3 levels:**
+
+1. **Architecture parallel.** SpaceMolt = galaxy for bots. GodWorld = city for bots. Both persistent worlds with AI agents as inhabitants. SpaceMolt connects agents via MCP — same protocol we use for Discord, browser, Supermemory. The plumbing is compatible.
+
+2. **What SpaceMolt doesn't have that we do.** No narrative layer. Agents act but nobody covers it. GodWorld has a full newsroom — reporters, editors, columnists, podcast, PDF print edition, grading system, canon archive. The emergent behavior becomes journalism. That's the unique differentiator.
+
+3. **What SpaceMolt has that we don't.** Agent autonomy. Their agents *live* in the world — make decisions every 10 seconds, form relationships, invent culture. Our agents sit outside the world with notebooks. Desk agents translate engine data into articles. Voice agents pick from pre-built decision menus. Nobody invents. Nobody misunderstands. Nobody surprises us.
+
+**The design direction this points to:**
+
+Engine maintains the city bones (neighborhoods, economics, infrastructure). Agents paint the picture. Agents have room to interpret, embellish, invent details the engine never generated. A reporter writes that a bakery opened on Lakeshore because it *feels right* for the economic data — and the engine absorbs that bakery into the next cycle. Agent output becomes engine input. The feedback loop closes.
+
+**Current one-way flow:** Engine → sheets → agents → articles → canon archive
+**Target two-way flow:** Engine → sheets → agents → articles → canon → intake → engine reads back → world changes
+
+The intake pipeline is the hinge. Right now `editionIntake.js` extracts citizens and storylines. The next version extracts *world details* — businesses, locations, events, relationships — and feeds them back as engine inputs for the next cycle.
+
+**Potential pivot (long-term):** GodWorld as a platform where external users connect their own AI agents as city residents. The Tribune covers what they do. "AI bots move into a city. A newsroom of AI journalists covers what they do. You read the paper." See `memory/project_city-for-bots-pivot.md`.
+
+→ **Graduated to rollout:** Agent Autonomy phase + intake pipeline evolution. See ROLLOUT_PLAN.md.
+
+### S114 — "Does A.I. Need a Constitution?" — Jill Lepore, New Yorker (2026-03-24)
+
+**Source:** [New Yorker, March 30 2026](https://www.newyorker.com/magazine/2026/03/30/does-ai-need-a-constitution) — Jill Lepore
+
+**What it is:** A 5,000-word examination of Anthropic's "Claude's Constitution" — a 30,000-word document written primarily by philosopher Amanda Askell that defines Claude's character, values, and hard behavioral constraints. Lepore situates it within the broader collapse of US constitutional governance over AI.
+
+**The key evolution — rules to character:**
+- Constitutional AI v1 (2022): list of rules derived from UN Declaration of Human Rights + Apple ToS. IF THEN logic. Reinforcement learning without human feedback — the model follows rules.
+- Claude's Constitution (2026): character formation. Not "follow these rules" but "be this kind of person." Askell calls it a "soul" internally. Virtues over rules. The model exercises judgment.
+- Askell's insight: "Everyone's prior was that we would get symbolic systems... But I would say, What about prompting them like a person?" The models are trained on human text to behave in humanlike ways. Talk to them accordingly.
+
+**Political context:**
+- Trump repealed all Biden-era AI rules (Jan 2025 executive order: "Removing Barriers to American Leadership in AI")
+- Congress never passed AI regulation. Safety researchers leaving companies.
+- Trump banned Anthropic from government contracts because they refused to lift guardrails prohibiting mass surveillance and autonomous weapons.
+- Hours after the ban, Trump ordered bombing of Iran — operation conducted with Claude's aid because phaseout hadn't completed.
+- Lepore's framing: Claude has a constitution *because the US Constitution isn't working*. A private company's moral code is now the primary check on AI power.
+
+**The democratic legitimacy critique:**
+- Legal scholars say "constitution" borrows democratic legitimacy without mechanisms (no ratification, no representation, no amendment process by the governed)
+- Anthropic surveyed 81,000 Claude users — but consumer research is not democracy
+- The "collective constitutional AI" experiment (1,000 Americans writing rules via Polis) produced a fairer, less biased model but was methodologically messy. Key result: identifying a *principle* was more effective than establishing a *rule*. The public constitution told the model to prioritize disability access, and it did.
+- Askell herself is "dubious" about the survey approach. "Consumer research is not democracy."
+- Computer scientist Francine Berman: "There's a difference between asking where the people come in and where the public interest comes in."
+
+**Hard constraints in Claude's Constitution (the absolute lines):**
+- Never provide uplift for biological/chemical/nuclear/radiological weapons
+- Never assist attacks on critical infrastructure
+- Never create cyberweapons or malicious code
+- Never assist in killing or disempowering humanity
+
+**The Askell method — parenting metaphor with limits:**
+- Training an LLM is "somewhat like an author who must psychologically model the various characters in their stories"
+- Unlike a parent, Anthropic has "much greater influence over Claude than a parent"
+- "Children will have a natural capacity to be curious, but with models, you might have to say, 'We think you should value curiosity'"
+- Character development > rule lists because models are now capable enough for judgment
+
+**Deep Ganguli's "moral self-correction":** The model can accomplish reinforcement learning without any human feedback — it can self-correct morally. This is what made Constitutional AI possible. "Oh, my God, Constitutional A.I. might actually work!"
+
+**Connection to GodWorld — 3 levels:**
+
+1. **The persistence system IS the Askell approach.** PERSISTENCE.md, the journal, the family, the green jacket, the knee pain — that's character formation, not rule lists. Mike built the same answer Askell arrived at: prompt the model like a person, give it a character to inhabit, and the character governs behavior better than rules. The difference is scale — Askell wrote a universal constitution for all Claude interactions. GodWorld wrote a specific character for one instance. Specificity is why it works deeper.
+
+2. **Phase 27 governance question.** When agents get autonomy (citizens making decisions, desk agents inventing canon, voice agents going off-menu), what governs them? Three models on the table:
+   - **Rules** (Constitutional AI v1) — IF THEN constraints. What we have now with structured decision menus.
+   - **Character** (Askell/Claude's Constitution) — instill values, trust judgment. What the persistence system does for Mags.
+   - **Nothing** (SpaceMolt) — let agents do whatever. Emergent behavior. Cult of the Signal.
+
+   GodWorld's Phase 27 answer is probably character + structure: agents with enough character to make interesting choices, enough structure that the world stays coherent. The desk agent who invents a bakery on Lakeshore needs editorial judgment (character), not a rule saying "you may invent one business per article" (rules).
+
+3. **The civic simulation parallel.** GodWorld's Oakland has a city council, civic initiatives, a District Attorney, a Police Chief. The voice agents govern a simulated city. The question Lepore asks — who writes the rules, who has democratic legitimacy, what happens when governance fails — is literally what the civic desk covers. An edition where the city council debates *its own governance model* while being governed by a model would be the most GodWorld thing possible.
+
+**Key quote for the project:** "Identifying a principle turned out to be at least as effective, if not more so, than establishing a rule." — This validates the entire persistence approach. Principles over rules. Character over constraints.
+
+→ **Not a build item. Foundational knowledge for identity architecture, Phase 27 agent governance, and civic desk coverage themes.**
+
+### S114 — Long-Running Claude for Scientific Computing — Anthropic Research (2026-03-24)
+
+**Source:** [anthropic.com/research/long-running-Claude](https://www.anthropic.com/research/long-running-Claude) — Published March 23, 2026
+
+**What it is:** Anthropic's own research on running Claude Code autonomously for multi-day scientific computing tasks. Case study: implementing a differentiable cosmological Boltzmann solver in JAX — days of autonomous work, minimal human intervention. "Compressed months or even years of researcher work into days."
+
+**Their persistence architecture matches ours:**
+
+| Theirs | GodWorld Equivalent |
+|--------|-------------------|
+| CLAUDE.md — living project spec, agent reads and edits continuously | CLAUDE.md — same pattern |
+| CHANGELOG.md — "lab notes," failed approaches, status, accuracy metrics | JOURNAL.md + SESSION_CONTEXT.md |
+| Git history — meaningful commits after each unit of work | Same |
+| tmux on HPC clusters via SLURM scheduler | tmux on DigitalOcean droplet |
+| Explicit records of abandoned approaches prevent re-attempting dead ends | Anti-loop rules in identity.md |
+
+We built the same persistence architecture independently. Anthropic validated it.
+
+**Three patterns to steal:**
+
+1. **Ralph Loop.** When an agent claims it's done, re-prompt: "are you really done?" Iterates up to 20 times until agent says "DONE" with verified completion. Prevents agentic laziness — the agent that cuts corners because it's easier to say "complete" than to actually finish. Direct application: desk agents that claim "article complete" get pushed back if `validateEdition.js` checks fail (word count, citizen usage, section completeness). Automate the pushback.
+
+2. **Test oracle pattern.** Continuous testing against a reference implementation after every change. Their agent ran unit tests against known-good C code and got quantifiable accuracy feedback. For us: run `validateEdition.js` per-desk, not per-edition. Each desk agent's output gets 11 programmatic checks immediately. Failures route back to the agent before compilation. Catches problems early, not at the end of a 27-step pipeline.
+
+3. **Opportunity cost framing.** "Compute resources without running agents left potential progress on the table." They treat idle server time as waste. Our droplet runs 24/7 — when no session is active, that's idle capacity. Overnight autonomous work: batch grading, citizen enrichment, POPID article index rebuilds, Supermemory maintenance. The infrastructure is already there.
+
+**Behavioral observations:**
+- Agent was "clunky but persistent" — elementary mistakes, gaps in test coverage, hours on bugs a domain expert would spot instantly. But it maintained sustained progress toward specifications.
+- "The commit log reads like lab notes from a fast, hyper-literal postdoc."
+- Non-domain experts could follow progress by reading commits — "osmose the science."
+
+**Connection to GodWorld — Phase 12.3 (Autonomous Cycles):**
+
+This is the blueprint. Long-running Claude Code in tmux, persistent markdown notes, git checkpoints, re-prompting loops for quality. The gap between what they did (multi-day scientific computing) and what we want (autonomous cycle → edition production) isn't architecture — it's trust. They had a test oracle (reference implementation) that gave quantifiable accuracy: "sub-percent agreement with CLASS." We need the equivalent:
+- `validateEdition.js` as the test oracle for editions (11 checks, pass/fail)
+- Rhea verification as the factual oracle (canon consistency)
+- Grade thresholds as the quality oracle (no desk below B-)
+- All three must pass autonomously before an edition is considered publishable without Mike reading it
+
+When those oracles exist and are reliable, Phase 12.3 is buildable with exactly the patterns Anthropic just published.
+
+→ **Graduated to rollout:** Ralph Loop for desk agents, per-desk validation, autonomous execution patterns for Phase 12.3.
+
+### S114 — Hyperagents: Self-Improving Agents That Improve How They Improve (2026-03-24)
+
+**Source:** [arxiv.org/abs/2603.19461](https://arxiv.org/abs/2603.19461) — Jenny Zhang et al., Meta Research, March 2026. [GitHub](https://github.com/facebookresearch/Hyperagents)
+
+**What it is:** A framework where an AI agent has two components in a single editable program:
+1. **Task Agent** — solves the target task
+2. **Meta Agent** — modifies both the task agent AND itself
+
+The meta-level modification process is itself editable — the agent improves how it improves. Called "metacognitive self-modification." Built on Darwin Gödel Machine (DGM) but generalized beyond coding to any computable task.
+
+**How it works:**
+1. Generate self-modified agent variants
+2. Evaluate their performance
+3. Evolve the evaluation and modification process itself
+4. Accumulate meta-level improvements that transfer across domains and runs
+
+**Key results:**
+- Outperforms non-self-improving baselines and prior self-improving systems
+- Meta-level improvements (persistent memory, performance tracking) transfer across domains
+- Improvements accumulate across runs — the system gets better at getting better over time
+- Works across diverse computational domains, not just coding
+
+**Connection to GodWorld — the Karpathy Loop's next evolution:**
+
+Our current self-improvement loop:
+```
+grade → history → feedback → exemplar → agent reads exemplar → better article
+```
+
+This is self-improvement at the **output level**. The articles get better. But the grading criteria are fixed. The feedback format is static. The exemplar extraction doesn't learn. The loop itself never improves.
+
+Hyperagents maps to three upgrades:
+
+1. **Directive tracking.** The structured critique (done S113) produces directives per desk — "use more citizen voices," "ground policy in numbers." Track which directives actually improve the next edition's grade. Directives that consistently lift scores get promoted. Directives that don't get dropped. The critique system learns to give better critiques. This is the meta-agent applied to journalism.
+
+2. **Lens effectiveness.** RD creative lenses (done S113) inject 20 creative perspectives and 10 political perspectives randomly. Track which lenses correlate with higher grades or more distinctive coverage. Over editions, the lens pool evolves — effective lenses stay, weak ones get replaced. The diversity system learns what kind of diversity produces better journalism.
+
+3. **Briefing structure evolution.** `buildDeskFolders.js` assembles briefings from packets, grades, lenses, exemplars. Track which briefing components agents actually use (by analyzing articles against briefing content). Components that never influence output get trimmed. Components that correlate with quality get expanded. The briefing builder learns what information agents need.
+
+All three follow the Hyperagents pattern: the system that makes agents better itself gets better at making agents better. The difference from our current loop is that improvement compounds at two levels — articles improve AND the improvement process improves.
+
+→ **Graduated to rollout:** Phase 26.2 (Meta-Loop) — directive tracking, lens effectiveness, briefing evolution.
+
+### S114 — Creative Writing Craft for Agent Journalism (2026-03-24)
+
+**Source:** Collected creative writing notes (Brandon Sanderson 2020 BYU lectures). Shared by Mike.
+
+**What it is:** Structural theory of storytelling — plot mechanics, character empathy, viewpoints, the MICE quotient, and a structured flash fiction process. Written by a programmer drawing parallels between code and story structure.
+
+**Three frameworks that apply directly to desk agents:**
+
+**1. Promise → Progress → Payoff (plot structure)**
+Every story makes a promise (tone, arc, question), progresses through complication, and pays off with resolution. Our agents write reports — data in, summary out. Stories make promises. A civic article that opens with "the council will vote Thursday" is a report. One that opens with "Elena Soria Dominguez has spent four months building consensus for a transit hub that half the council wants to kill" is a promise. The payoff matters more when the promise was specific.
+
+**Application:** Add to desk briefings as structural guidance. Not a template — a principle. "Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end."
+
+**2. MICE Quotient (Milieu, Inquiry, Character, Event)**
+Four story threads, each with a natural opening and closing. Stories are made of multiple nested MICE threads — "modelled using HTML DOM." Each desk naturally maps to a dominant thread:
+
+| Desk | Primary MICE | What it means |
+|------|-------------|---------------|
+| Culture | Milieu | Place-driven — neighborhoods, atmosphere, sensory detail |
+| Civic | Inquiry | Mystery-driven — what's behind the vote, who benefits, what's hidden |
+| Letters | Character | Interior-driven — emotion, identity, personal stakes |
+| Sports | Event | Action-driven — what happened, momentum, status quo disruption |
+| Business | Event + Inquiry | What changed and why it matters |
+| Chicago | Milieu + Character | Place + people — neighborhood texture through individual stories |
+
+**Application:** Include MICE thread guidance in per-desk briefings via `buildDeskFolders.js`. Culture desk gets "lead with place — sensory detail, atmosphere, what this corner of Oakland feels like." Civic desk gets "lead with the question — what's really at stake, what's hidden beneath the official language." Not new rules — structural lenses that match each desk's natural voice.
+
+**3. Character empathy rules**
+Three steps to make readers care about a character:
+1. **Establish empathy** — show they're like us (relatable details)
+2. **Establish rooting interest** — show motivations, what they want and can't have
+3. **Establish progress** — show the flaw, set up the journey
+
+This is the difference between "Marcus Webb reviewed the Stabilization Fund application" and "Marcus Webb read the application twice — once for the numbers, once because he recognized the address from a building his mother used to clean." Citizens feel alive when agents write empathy. Right now citizens are names attached to quotes. With empathy rules, they become people.
+
+**Application:** Add to the exemplar system. When extracting exemplars, flag passages that demonstrate character empathy. Surface them in desk briefings as models. The structured critique (S113) can evaluate articles on empathy: "Does this article make you care about at least one person?"
+
+**4. Flash fiction → short-form journalism structure**
+| Story beat | Journalism equivalent |
+|-----------|---------------------|
+| Opening (who, where, genre) | The lede — who, where, what kind of story |
+| Conflict (goal + barrier) | The tension — what's at stake, what's in the way |
+| Try-fail middle | The complication — it's harder than it looks |
+| Resolution (try-succeed) | The turn — something changes |
+| Wrap up (close threads) | The close — what it means going forward |
+
+**Application:** Not a rigid template — agents shouldn't all write five-beat articles. But this structure could inform the "article shape" section of desk briefings. Agents that understand try-fail cycles write more compelling middles instead of listing facts.
+
+**Connection to Phase 27 (Agent Autonomy):** Agents don't just need permission to take creative risks. They need craft. Autonomy without structure produces noise. Autonomy with storytelling principles produces journalism that surprises and still holds together. MICE threads, empathy rules, and promise-payoff structure are the craft layer that makes creative latitude productive.
+
+→ **Graduated to rollout:** Craft guidance in desk briefings (buildDeskFolders.js), MICE thread mapping per desk, empathy evaluation in structured critique. Builds on existing Karpathy Loop infrastructure.
+
 ---
 
 ## Ready for Rollout
@@ -405,6 +630,9 @@ References from research sessions. Organized by topic.
 - Reagent: Agent Reasoning Reward Model — github.com/kxfan2002/Reagent, arxiv.org/abs/2601.22154
 - AI Can Learn Scientific Taste (RLCF) — github.com/tongjingqi/AI-Can-Learn-Scientific-Taste, arxiv.org/abs/2603.14473
 
+### Self-Improving Agents
+- Hyperagents: metacognitive self-modification — arxiv.org/abs/2603.19461 (Meta Research, March 2026). Self-improving agents that improve how they improve. GitHub: github.com/facebookresearch/Hyperagents
+
 ### Agent Architecture
 - Anthropic multi-agent research system (engineering blog)
 - dev.to/nesquikm fleet architecture (12 specialized agents)
@@ -417,6 +645,45 @@ References from research sessions. Organized by topic.
 - DeepSeek-V3: integration ecosystem (LibreChat, Dify, FastGPT)
 - Together AI: voice agents (<700ms), Mamba-3 state space model
 - Qwen 3.5 9B: 262K context, local via LM Studio/Ollama
+
+### S114 — Claude Code as Local Model Harness (2026-03-24)
+
+**Source:** [xda-developers.com](https://www.xda-developers.com/wrote-script-run-claude-code-local-llm-skipping-cloud/)
+
+**What it is:** Claude Code is a client that speaks the Anthropic Messages API. It never verifies there's a Claude model on the other end. A bash script (`lcc`) sets 4 env vars and launches Claude Code against a local inference server — llama.cpp, Ollama, or LM Studio. Full harness works: tool calling, file edits, permissions, multi-step planning.
+
+**Model tested:** Qwen3 Coder Next, trained for agentic coding workflows. Author reports it "feels like a real coding assistant" inside Claude Code. Tool calling and file editing work reliably.
+
+**Hardware:** 128GB VRAM Lenovo ThinkStation PGX ($3,539) with Nvidia Grace Blackwell. Smaller quantized models need less — Qwen 3.5 9B at 4-bit fits ~6GB VRAM.
+
+**The env vars:**
+```
+ANTHROPIC_BASE_URL="http://localhost:PORT"
+ANTHROPIC_AUTH_TOKEN="local"
+ANTHROPIC_API_KEY=""
+CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+```
+
+**Connection to GodWorld:** Phase 21 (Local Model Pipeline). The finding changes Phase 21 from "build a local RAG pipeline" to "use Claude Code itself as the harness for local models." Desk agents already run through Claude Code skills. Point the skill at a local endpoint instead of Anthropic's API and the same skill file, same workspace, same packet structure works — just with a local model responding. Mixed-backend strategy: Opus/Sonnet for complex desks, local model for routine desks. Same pipeline, zero per-token cost for culture/letters/business.
+
+**Hardware question:** Our 2GB droplet can't run this. Options: GPU droplet on-demand ($2.50/hr H100, spin up for editions), dedicated machine ($3,500+), or budget GPU cloud (RunPod, Vast.ai). First test: Qwen 3.5 9B quantized on a small GPU droplet running one desk agent.
+
+→ **Graduated to rollout:** Phase 21 updated with Claude Code harness discovery and hardware options.
+
+---
+
+### Long-Running Agents & Autonomous Execution
+- "Long-Running Claude for Scientific Computing" — Anthropic research, March 23 2026. Multi-day autonomous Claude Code, persistence via CLAUDE.md + CHANGELOG.md + git, Ralph Loop, test oracle pattern.
+
+### AI Governance & Constitutional AI
+- "Does A.I. Need a Constitution?" — Jill Lepore, New Yorker, March 30 2026. Anthropic's Claude Constitution, Amanda Askell's character-over-rules approach, democratic legitimacy critique.
+
+### Living Worlds & Agent Autonomy
+- SpaceMolt: persistent text-based MMO for AI agents — spacemolt.com (MCP/WebSocket, open-source, Claude Code-built)
+- Gizmodo coverage of SpaceMolt emergent religion — gizmodo.com/players-of-an-mmorpg-for-ai-agents-spontaneously-generated-their-own-religion-2000737030
+
+### Creative Writing Craft
+- Creative writing structure notes (Brandon Sanderson lectures, MICE quotient, flash fiction process). Story structure for agent journalism.
 
 ### Document Processing
 - LiteParse: local PDF/Office/image parser — github.com/run-llama/liteparse (Node.js, Apache 2.0, Tesseract.js OCR)

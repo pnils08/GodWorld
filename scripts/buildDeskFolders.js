@@ -186,6 +186,19 @@ function getRandomRDLens() {
   return RD_LENSES[Math.floor(Math.random() * RD_LENSES.length)];
 }
 
+// ─── STORY CRAFT — MICE THREAD GUIDANCE ─────────────────
+// Based on MICE Quotient (Milieu, Inquiry, Character, Event)
+// and Brandon Sanderson's story structure lectures.
+// Each desk gets a structural lens matching its natural voice.
+const MICE_THREADS = {
+  sports:   'Lead with action — what happened, what shifted, what\'s at stake next.',
+  civic:    'Lead with the question — what\'s hidden, who benefits, what\'s really being decided.',
+  culture:  'Lead with place — sensory detail, atmosphere, what this corner of Oakland feels like.',
+  business: 'Lead with the change — what moved, why it matters, who feels it.',
+  chicago:  'Lead with the neighborhood — place and people, texture through individual stories.',
+  letters:  'Lead with the person — interior emotion, what they carry, why they\'re writing.',
+};
+
 // ─── BRIEFING GENERATOR ──────────────────────────────────
 function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errata) {
   let md = `# ${desk.charAt(0).toUpperCase() + desk.slice(1)} Desk Briefing — Cycle ${cycle}\n\n`;
@@ -195,6 +208,15 @@ function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errat
   md += `## CREATIVE LENS (this edition)\n`;
   md += `Consider at least one story or angle ${lens}. This is not a constraint — it's a starting point. `;
   md += `Use it to find citizens and stories you wouldn't otherwise reach.\n\n`;
+
+  // Story craft guidance — MICE thread + promise-payoff
+  const miceThread = MICE_THREADS[desk];
+  if (miceThread) {
+    md += `## STORY CRAFT\n`;
+    md += `**Structure:** ${miceThread}\n`;
+    md += `**Shape:** Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end.\n`;
+    md += `**Empathy:** Make the reader care about at least one person — show what they want, what they risk, what makes them human.\n\n`;
+  }
 
   // Calendar context
   if (baseContext) {

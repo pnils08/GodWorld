@@ -98,6 +98,7 @@ function parseEdition(text) {
     if (letterMatch && currentDesk === 'letters') {
       if (currentArticle) {
         currentArticle.lineCount = i - currentArticle.startLine;
+        currentArticle.text = lines.slice(currentArticle.startLine, i).join('\n');
         articles.push(currentArticle);
       }
       currentArticle = {
@@ -105,7 +106,8 @@ function parseEdition(text) {
         desk: 'letters',
         startLine: i,
         lineCount: 0,
-        title: `Letter from ${letterMatch[1].trim()}`
+        title: `Letter from ${letterMatch[1].trim()}`,
+        text: ''
       };
     }
 
@@ -115,6 +117,7 @@ function parseEdition(text) {
       const reporter = bylineMatch[1].trim();
       if (currentArticle) {
         currentArticle.lineCount = i - currentArticle.startLine;
+        currentArticle.text = lines.slice(currentArticle.startLine, i).join('\n');
         articles.push(currentArticle);
       }
       currentArticle = {
@@ -122,7 +125,8 @@ function parseEdition(text) {
         desk: REPORTER_DESK[reporter] || currentDesk,
         startLine: i,
         lineCount: 0,
-        title: ''
+        title: '',
+        text: ''
       };
       // Look back for title (bold line before byline)
       for (let j = i - 1; j >= Math.max(0, i - 3); j--) {
@@ -136,6 +140,7 @@ function parseEdition(text) {
   }
   if (currentArticle) {
     currentArticle.lineCount = lines.length - currentArticle.startLine;
+    currentArticle.text = lines.slice(currentArticle.startLine).join('\n');
     articles.push(currentArticle);
   }
 
@@ -224,6 +229,62 @@ function rollingAverage(currentGrade, previousGrades, deskOrReporter, type) {
   };
 }
 
+// --- Empathy evaluation (Phase 26.3 — Story Craft) ---
+// Scans article text for signals that the writer made readers care about people.
+// Not AI — pattern matching for observable craft markers.
+
+function evaluateEmpathy(text) {
+  if (!text || text.length < 50) return { score: 0, signals: [], missing: ['no article text'] };
+
+  const signals = [];
+  const missing = [];
+
+  // 1. Direct quotes from citizens (dialogue = voice = empathy)
+  const quoteCount = (text.match(/[""\u201C].{10,}?[""\u201D]/g) || []).length;
+  if (quoteCount >= 3) signals.push(`Strong citizen voice (${quoteCount} quotes)`);
+  else if (quoteCount >= 1) signals.push(`Some citizen voice (${quoteCount} quote${quoteCount > 1 ? 's' : ''})`);
+  else missing.push('No direct quotes — citizens have no voice');
+
+  // 2. Interior language (motivation, emotion, stakes)
+  const interiorWords = /\b(feels?|hopes?|worries|fears?|remembers?|believes?|struggles?|dreams?|misses|wonders|wishes|proud|frustrated|relieved|anxious|grateful|exhausted|determined)\b/gi;
+  const interiorCount = (text.match(interiorWords) || []).length;
+  if (interiorCount >= 3) signals.push('Rich interior life — characters have feelings');
+  else if (interiorCount >= 1) signals.push('Some interior language');
+  else missing.push('No interior language — people are names, not humans');
+
+  // 3. Sensory/concrete detail (place, texture, specificity)
+  const sensoryWords = /\b(smell|sounds? of|taste|morning light|afternoon|evening|rain|wind|corner of|block|street|storefront|window|kitchen|desk|hands|voice|quiet|loud|crowded|empty)\b/gi;
+  const sensoryCount = (text.match(sensoryWords) || []).length;
+  if (sensoryCount >= 3) signals.push('Grounded in sensory detail');
+  else if (sensoryCount >= 1) signals.push('Some concrete detail');
+  else missing.push('Abstract — no sensory grounding');
+
+  // 4. Specific personal details (age, relationship, history)
+  const personalDetail = /\b(\d{2}[- ]year[- ]old|mother|father|daughter|son|husband|wife|partner|neighbor|childhood|grew up|moved here|years ago|since \d{4})\b/gi;
+  const personalCount = (text.match(personalDetail) || []).length;
+  if (personalCount >= 2) signals.push('Characters have personal history');
+  else if (personalCount >= 1) signals.push('Some personal context');
+  else missing.push('No personal details — characters are interchangeable');
+
+  // Score: 0-4 based on how many dimensions hit
+  const dimensions = [quoteCount >= 1, interiorCount >= 1, sensoryCount >= 1, personalCount >= 1];
+  const score = dimensions.filter(Boolean).length;
+
+  return { score, signals, missing };
+}
+
+function evaluateEmpathyForArticles(articles) {
+  if (articles.length === 0) return { avgScore: 0, signals: [], missing: ['no articles'], bestArticle: null };
+
+  const results = articles.map(a => ({ ...evaluateEmpathy(a.text), title: a.title }));
+  const avgScore = results.reduce((sum, r) => sum + r.score, 0) / results.length;
+  const allSignals = [...new Set(results.flatMap(r => r.signals))];
+  const allMissing = [...new Set(results.flatMap(r => r.missing))];
+  const best = results.reduce((a, b) => a.score >= b.score ? a : b, results[0]);
+
+  return { avgScore, signals: allSignals, missing: allMissing, bestArticle: best.score >= 3 ? best.title : null };
+}
+
 // --- Structured critique generators (Reagent 3-signal pattern) ---
 // Each critique has: reasoning (why this grade), strengths, weaknesses, directive (what to do next)
 
@@ -231,6 +292,9 @@ function generateDeskCritique(desk, articles, errata, grade, score) {
   const criticals = errata.filter(e => e.severity === 'CRITICAL');
   const warnings = errata.filter(e => e.severity === 'WARNING');
   const reporters = [...new Set(articles.map(a => a.reporter))];
+
+  // Empathy evaluation — story craft quality
+  const empathy = evaluateEmpathyForArticles(articles);
 
   // Reasoning trace — why this grade
   let reasoning = '';
@@ -245,6 +309,9 @@ function generateDeskCritique(desk, articles, errata, grade, score) {
   if (reporters.length >= 2) strengths.push(`Multiple reporters active (${reporters.join(', ')})`);
   if (criticals.length === 0) strengths.push('Zero critical errors');
   if (errata.length === 0) strengths.push('Clean copy — no errata at all');
+  // Empathy strengths
+  for (const s of empathy.signals) strengths.push(s);
+  if (empathy.bestArticle) strengths.push(`Best craft: "${empathy.bestArticle}"`);
 
   // Weaknesses — derived from actual errata
   const weaknesses = [];
@@ -259,6 +326,8 @@ function generateDeskCritique(desk, articles, errata, grade, score) {
   }
   if (articles.length === 0) weaknesses.push('No articles produced');
   if (articles.length === 1 && desk !== 'business') weaknesses.push('Thin coverage — only 1 article');
+  // Empathy weaknesses
+  for (const m of empathy.missing) weaknesses.push(m);
 
   // Directive — what to improve next edition
   let directive = '';
@@ -267,18 +336,23 @@ function generateDeskCritique(desk, articles, errata, grade, score) {
     directive = `PRIORITY FIX: ${topError.errorType || 'critical error'} — ${topError.description || 'see errata'}. Address this before anything else.`;
   } else if (warnings.length > 0) {
     directive = `Clean up ${warnings.length} warning(s). Focus on: ${warnings[0].errorType || warnings[0].description || 'see errata'}.`;
+  } else if (empathy.avgScore < 2 && articles.length > 0) {
+    directive = 'Craft gap: make readers care about someone. Add direct quotes, personal details, interior emotion. People are the story — not the policy, not the event.';
   } else if (articles.length < 2 && desk !== 'business') {
     directive = 'Increase coverage breadth. Aim for 2-3 articles minimum.';
   } else {
     directive = 'Maintain quality. Experiment with new angles or underused citizens.';
   }
 
-  return { reasoning, strengths, weaknesses, directive };
+  return { reasoning, strengths, weaknesses, directive, empathy: { score: empathy.avgScore, best: empathy.bestArticle } };
 }
 
 function generateReporterCritique(name, articles, errata, grade, score) {
   const criticals = errata.filter(e => e.severity === 'CRITICAL');
   const warnings = errata.filter(e => e.severity === 'WARNING');
+
+  // Empathy evaluation — story craft quality
+  const empathy = evaluateEmpathyForArticles(articles);
 
   // Reasoning trace
   let reasoning = '';
@@ -295,6 +369,8 @@ function generateReporterCritique(name, articles, errata, grade, score) {
   for (const a of articles) {
     if (a.lineCount > 40) strengths.push(`Substantial depth in "${a.title || 'untitled'}"`);
   }
+  // Empathy strengths
+  for (const s of empathy.signals) strengths.push(s);
 
   // Weaknesses
   const weaknesses = [];
@@ -302,6 +378,8 @@ function generateReporterCritique(name, articles, errata, grade, score) {
     weaknesses.push(`${e.severity || 'NOTE'}: ${e.errorType || ''} — ${e.description || 'see errata'}`);
   }
   if (articles.length === 0) weaknesses.push('No articles produced this cycle');
+  // Empathy weaknesses
+  for (const m of empathy.missing) weaknesses.push(m);
 
   // Directive
   let directive = '';
@@ -309,11 +387,13 @@ function generateReporterCritique(name, articles, errata, grade, score) {
     directive = `Fix: ${criticals[0].errorType || criticals[0].description}. This is the priority.`;
   } else if (warnings.length > 0) {
     directive = `Address: ${warnings[0].description || warnings[0].errorType}.`;
+  } else if (empathy.avgScore < 2 && articles.length > 0) {
+    directive = 'Your writing needs people. Add quotes, feelings, personal details — make readers care about someone specific.';
   } else {
     directive = 'Keep it up. Try reaching for a citizen or angle you haven\'t covered before.';
   }
 
-  return { reasoning, strengths, weaknesses, directive };
+  return { reasoning, strengths, weaknesses, directive, empathy: { score: empathy.avgScore } };
 }
 
 // --- Main grading logic ---

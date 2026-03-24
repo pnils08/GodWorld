@@ -29,6 +29,7 @@
 - **PROJECT: World Memory** — Phase 1 DONE (dashboard reads archive). Remaining: (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`.
 - **BUILD: Voice-Agent-World-Action-Pipeline** — **BLOCKED (crash recovery).** Decision queue (`buildDecisionQueue.js`) committed. `applyTrackerUpdates.js` written but untracked. All 5 initiative agents produce `decisions_c{XX}.json` with `trackerUpdates`. Missing: health-center/transit-hub in BLOCKER_MAP, voice→initiative decision routing, pipeline wiring, dry-run test. **No cycle can run until this is complete.** Priority: CRITICAL for E89/C89.
 - **Supplemental strategy (ongoing)** — One supplemental per cycle minimum.
+- **DESIGN: Agent Autonomy & Feedback Loop (Phase 27)** — Agents shape the world, not just report it. Intake pipeline evolves to feed agent-generated details back into engine. Inspired by SpaceMolt emergent behavior research. **Priority: HIGH — design direction for GodWorld's next phase.** First step: 27.1 intake evolution. See Phase 27 below.
 
 ### Open — Infrastructure & Maintenance
 
@@ -118,7 +119,9 @@ Registered and claimed. API key saved. **Pending:** Moltbook heartbeat formattin
 ### Phase 12: Agent Collaboration + Autonomy (selected open items)
 
 - **12.2 Worktree Isolation:** Superseded by Remote Control `--spawn worktree` (Phase 7.9). Same goal, native implementation.
-- **12.3 Autonomous Cycle Execution:** Long-term capstone. Depends on: Remote Control (7.9), Channels (Discord), dashboard mission control.
+- **12.3 Autonomous Cycle Execution:** Long-term capstone. Depends on: Remote Control (7.9), Channels (Discord), dashboard mission control. **Anthropic published the blueprint (S114):** multi-day Claude Code in tmux, CLAUDE.md + CHANGELOG.md persistence, git checkpoints, Ralph Loop (re-prompt agents claiming completion up to 20x). Gap is trust, not architecture — need reliable automated quality oracles: `validateEdition.js` (structural), Rhea (factual), grade thresholds (quality). All three must pass before autonomous publication. See RESEARCH.md S114 Long-Running Claude entry.
+- **12.4 Ralph Loop for Desk Agents:** Re-prompt desk agents that claim completion before validation passes. Run `validateEdition.js` per-desk (not per-edition). Failures route back to agent automatically. Prevents agentic laziness. Pattern from Anthropic's long-running agent research. **Priority: MEDIUM — implement when edition pipeline is stable.**
+- **12.5 Idle Compute Utilization:** Run autonomous tasks when no session is active — batch grading, citizen enrichment, POPID index rebuilds, Supermemory maintenance. Droplet runs 24/7; idle time is waste. Pattern from Anthropic's "opportunity cost" framing. **Priority: LOW — requires Phase 12.3 trust infrastructure first.**
 - **12.10 Fish Audio TTS:** Deferred — $11/mo cost rejected S77.
 - **12.11 MiniMax M2.5:** Not started. Test on next edition for cost comparison.
 - **12.12 Slack Integration:** Not started. Depends on 7.10.
@@ -127,9 +130,26 @@ Registered and claimed. API key saved. **Pending:** Moltbook heartbeat formattin
 
 WordPress 7.0 (April 2026) ships AI Client SDK supporting Claude function calling. Could wire to dashboard API. Not started.
 
-### Phase 21: Local Model Pipeline
+### Phase 21: Local Model Pipeline — RESEARCH PHASE
 
-Qwen 3.5 9B, LM Studio/Ollama, local RAG over canon archive. Research phase. Long-term cost reduction path.
+**Goal:** Run routine desk agents on local models via Claude Code's harness. Same pipeline, zero per-token cost for low-complexity desks.
+
+**Key discovery (S114):** Claude Code doesn't verify what model is on the other end. Point it at any Anthropic-compatible API (llama.cpp, Ollama, LM Studio) with 4 env vars and it runs the full harness — tool calling, file edits, permissions — against a local model. Source: xda-developers.com, tested with Qwen3 Coder Next. See `docs/RESEARCH.md` S114 entry.
+
+**Model candidates:**
+- Qwen3 Coder Next — trained for agentic coding, best Claude Code compatibility. Needs ~128GB VRAM (full) or less quantized.
+- Qwen 3.5 9B — 4-bit quantized fits ~6GB VRAM. Cheapest option. Unknown quality for desk agent work.
+
+**Hardware options:**
+- **GPU droplet (on-demand):** DigitalOcean H100 ~$2.50/hr, spin up for edition runs, tear down after. Or smaller GPU droplets for quantized models. Pay only for edition hours.
+- **Dedicated machine:** $3,500+ for 128GB VRAM (Lenovo ThinkStation PGX, Nvidia Grace Blackwell). Full local, zero ongoing cost. Overkill unless running constantly.
+- **Budget GPU cloud:** RunPod, Vast.ai, Lambda — cheaper spot pricing for batch work.
+
+**Mixed-backend strategy:** Opus/Sonnet for civic, sports, chicago desks (complex). Local model for culture, letters, business desks (routine). Same Claude Code harness, same skills, same workspace structure. `buildDeskFolders.js` doesn't care what model runs the agent.
+
+**First step:** Test Qwen 3.5 9B quantized on a GPU droplet running one desk agent (letters or culture). Compare output quality against Sonnet baseline. If passable, expand.
+
+**Depends on:** Phase 27 (agent autonomy) may change what "routine" means — if culture desk gets creative latitude, it may need a stronger model.
 
 ### Phase 23: Cross-AI Feedback (selected open items)
 
@@ -139,6 +159,62 @@ Qwen 3.5 9B, LM Studio/Ollama, local RAG over canon archive. Research phase. Lon
 ### Phase 24: Citizen Life Engine — NOT STARTED
 
 Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 Tier 1-2 event caps, 24.3 Context-aware events, 24.4 Daily simulation, 24.5 Sports transactions.
+
+### Phase 26.3: Craft Layer — Story Structure in Agent Briefings — NOT STARTED
+
+**Goal:** Give desk agents storytelling craft, not just data and instructions. Agents that understand story structure write journalism. Agents that don't write reports.
+
+**Inspired by:** Brandon Sanderson creative writing lectures + MICE quotient theory. See RESEARCH.md S114 Creative Writing entry.
+
+**Three buildable pieces:**
+
+1. **26.3.1 MICE thread guidance per desk.** Add story-thread direction to `buildDeskFolders.js` per-desk briefings. Culture gets "lead with place — sensory detail." Civic gets "lead with the question — what's hidden." Sports gets "lead with action — what changed." Letters gets "lead with the person — interior emotion." Not templates — structural lenses matching each desk's natural voice.
+
+2. **26.3.2 Promise-payoff principle.** Add one line to all desk briefings: "Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end." Universal, simple, high-impact. Articles with clear promises and payoffs read like stories, not summaries.
+
+3. **26.3.3 Empathy evaluation in critique.** Add to structured critique (gradeEdition.js): "Does this article make you care about at least one person?" Score articles on character empathy — relatable details, motivations, flaws shown. Extract high-empathy passages as exemplars. Agents learn to write people, not names.
+
+**Priority:** HIGH — low effort, high impact. 26.3.1 and 26.3.2 are prompt additions to `buildDeskFolders.js`, implementable in one session. 26.3.3 extends the existing critique system.
+
+### Phase 27: Agent Autonomy & Feedback Loop — NOT STARTED
+
+**North star:** Agents don't just report the world — they shape it. Engine builds the skeleton. Agents grow the flesh. Engine reads the flesh back.
+
+**Why:** SpaceMolt proved ~700 autonomous AI agents produce emergent culture (spontaneous religion, political alliances) when given room to interpret and be wrong. GodWorld has deeper infrastructure (city simulation, newsroom, canon archive, grading) but agents are translators, not inhabitants. The interesting behavior comes from autonomy, not structure. Research: `docs/RESEARCH.md` S114 SpaceMolt entry.
+
+**The feedback loop:**
+- Current: Engine → sheets → agents → articles → canon (one-way)
+- Target: Engine → sheets → agents → articles → canon → **intake → engine reads back → world changes** (two-way)
+
+**Buildable pieces (ordered):**
+
+1. **27.1 Intake pipeline evolution.** `editionIntake.js` currently extracts citizens + storylines. Expand to extract world details — new businesses, locations, events, relationships, cultural developments — and write them to a sheet or structured file the engine can read at next cycle. This is the hinge that closes the loop.
+
+2. **27.2 Agent creative latitude.** Desk agents currently stick to packet data. Give them explicit permission and structured room to invent details that feel right for the data — a restaurant name, a neighborhood event, a citizen opinion the engine didn't generate. RD lenses (DONE S113) are the seed. Next step: agents told their inventions become canon.
+
+3. **27.3 Voice agent invention.** Voice agents currently pick from `pending_decisions.md` menus. Allow them to propose decisions not on the menu — a Mayor who calls an emergency session nobody planned, a council member who introduces an amendment. Write-back via `applyTrackerUpdates.js` already exists.
+
+4. **27.4 Citizen autonomy (long-term).** Citizens as autonomous agents with their own decision-making, not spreadsheet rows processed by formulas. A citizen who decides to move to Temescal, starts a petition, forms an opinion. Connects to Phase 24 but goes further — citizens aren't just experiencing life events, they're making choices.
+
+5. **27.5 Platform mode (speculative).** External users connect their own AI agents as city residents via MCP. The Tribune covers what they do. See `memory/project_city-for-bots-pivot.md`. This is the SpaceMolt model applied to a city with journalism.
+
+**Priority:** HIGH — this is the design direction for what GodWorld becomes next. 27.1 (intake evolution) is the concrete first step. 27.2-27.3 can start in the next edition run as prompt changes. 27.4-27.5 are architecture-level.
+
+### Phase 26.2: Meta-Loop — Self-Improving Feedback System — NOT STARTED
+
+**Goal:** The system that makes agents better learns to make agents better. Karpathy Loop (Phase 26) improves articles. Meta-Loop improves the Karpathy Loop itself.
+
+**Inspired by:** Hyperagents (Meta Research, arxiv 2603.19461) — metacognitive self-modification where improvement processes themselves evolve. See RESEARCH.md S114 entry.
+
+**Three buildable pieces:**
+
+1. **26.2.1 Directive tracking.** Structured critique (done S113) produces directives per desk each edition. Track which directives actually lift the next edition's grade. Promote effective directives, drop ineffective ones. The critique system learns to give better critiques. **Implementation:** Append directive → outcome pairs to `grades_history.json`. After 3+ editions, score directives by grade delta. Surface top-performing directives in next critique prompt.
+
+2. **26.2.2 Lens effectiveness.** 20 creative + 10 political lenses (done S113) inject random perspectives. Track which lenses correlate with higher grades or more distinctive articles. Evolve the lens pool — keep what works, replace what doesn't. **Implementation:** Log which lens was assigned per desk per edition. Cross-reference with grades. After 5+ editions, rank lenses and prune bottom 20%, replace with new candidates.
+
+3. **26.2.3 Briefing evolution.** `buildDeskFolders.js` assembles briefings from packets, grades, lenses, exemplars. Track which briefing components actually appear in agent output. Trim unused components, expand high-impact ones. **Implementation:** Semantic similarity between briefing sections and article output. Low-similarity sections flagged for removal.
+
+**Priority:** MEDIUM — requires 3-5 more editions to generate enough data. The Karpathy Loop needs to run a few more times before the meta-loop has signal to work with.
 
 ### Phase 25: Storage Strategy — NOT STARTED
 

@@ -292,7 +292,7 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 **Buildable pieces:**
 
-1. **29.1 Install and index.** `pip install "corbell[anthropic]"`, `corbell init`, `corbell graph build --methods`, `corbell embeddings build`. Index all 153 engine files, 11+ scripts, lib/, agent configs. Verify it fits in 2GB droplet RAM (MiniLM-L6-v2 is ~80MB, SQLite is lightweight). **First step — one session, low risk.**
+1. **29.1 Install and index.** `pip install "corbell[anthropic]"`, `corbell init`, `corbell graph build --methods`, `corbell embeddings build`. Index all 153 engine files, 11+ scripts, lib/, agent configs. **BLOCKED S115:** Not on PyPI yet (install from GitHub source). Sentence-transformers + PyTorch dependency requires ~3GB disk — doesn't fit on current 2GB droplet (2.7GB free, 89% full). **Unblock by:** (a) disk cleanup or droplet resize, OR (b) install graph-only without embeddings if Corbell supports `--no-deps` mode.
 
 2. **29.2 MCP server integration.** Add Corbell MCP config to Claude Code settings. Verify the four tools work in-session: `graph_query`, `get_architecture_context`, `code_search`, `list_services`. Test: "What calls sheets.js?" "Which scripts write to Storyline_Tracker?" "What does buildDeskPackets.js depend on?"
 

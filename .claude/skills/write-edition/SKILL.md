@@ -16,6 +16,23 @@ argument-hint: "[cycle-number]"
 - Show the user a plan before launching agents
 - Get approval before compiling the final edition
 
+## Live Status (auto-injected)
+
+**Desk packets:**
+```
+!`cat output/desk-packets/manifest.json 2>/dev/null || echo "NO PACKETS — run: node scripts/buildDeskPackets.js [cycle]"`
+```
+
+**Production log (if resuming):**
+```
+!`ls output/production_log_c*.md 2>/dev/null || echo "No production log — fresh start"`
+```
+
+**Desk folders:**
+```
+!`ls output/desks/*/current/briefing.md 2>/dev/null | wc -l | xargs -I{} echo "{}/6 desk folders ready" || echo "0/6 — run buildDeskFolders.js"`
+```
+
 ## Prerequisites
 Before running, the user should have already:
 1. Run the engine cycle

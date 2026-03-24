@@ -51,31 +51,17 @@ Every one of our 21 skills should get these frontmatter fields reviewed and set:
 | `allowed-tools` | Production skills: `Read, Write, Bash, Glob, Grep`. Read-only skills: `Read, Grep, Glob`. | Eliminates approval prompts during pipeline runs. |
 | `argument-hint` | `/write-edition [cycle]`, `/write-supplemental [topic]`, `/podcast [edition]` etc. | Autocomplete UX improvement. |
 
-**B. Dynamic Context Injection (HIGH — integrate into edition pipeline)**
-
-The `` !`command` `` syntax injects live data into skill prompts BEFORE Claude sees them. This could replace manual packet-loading steps:
-- Desk skills inject fresh briefing data: `` !`cat output/desk_packets/civic_packet.json` ``
-- Grade history injected automatically: `` !`cat output/grades/grades_c88.json | jq '.civic'` ``
-- Active storylines pre-loaded: `` !`node scripts/getActiveStorylines.js` ``
-
-Evaluate which `/write-edition` steps can be replaced by bash injection in skill frontmatter. Could eliminate 2-3 manual pipeline steps.
+**~~B. Dynamic Context Injection~~** — **DONE S115.** Added `!`command`` injection to write-edition (packet manifest, production log, desk folder status) and write-supplemental (trigger list, recent supplementals). Desk skills don't benefit — agents already read their own workspace files via the agent loop. The injection wins are in orchestrator skills, not worker skills.
 
 **~~C. Prompt De-escalation~~** — **DONE S115.** Scanned all agent SKILL.md and RULES.md files. MUST/NEVER usage is all editorial guardrails (factual accuracy, fourth-wall, journalism rules) — NOT tool-triggering language. No changes needed. No prefilled responses found.
 
-**D. Thinking Migration (HIGH — urgent, deprecated feature)**
+**~~D. Thinking Migration~~** — **DONE S115.** No migration needed — we never used `budget_tokens` directly. Claude Code uses adaptive thinking automatically. The `effort` frontmatter field (set in section A) IS the thinking control. Interleaved thinking is automatic with Opus 4.6. `display: "omitted"` remains a future optimization for production runs.
 
-- **MIGRATE: Adaptive thinking.** `budget_tokens` is explicitly deprecated for Opus 4.6, will be removed. Switch civic/sports/chicago desk prompts to adaptive thinking. Gets interleaved thinking for free — Claude reasons between tool calls. Combined with `effort` per skill (section A), this gives fine-grained thinking control.
-- **EVALUATE: `display: "omitted"` for production runs.** Faster streaming, still charged for tokens. **Priority: LOW — test after migration.**
-
-**E. Skill Structure (MEDIUM — do when touching skills)**
-
-- **AUDIT: SKILL.md line counts.** Body under 500 lines. Move excess to reference files (one level deep).
-- **AUDIT: Skill descriptions.** Third person, include WHAT + WHEN. Check with `/context` for budget warnings.
-- **AUDIT: Degrees of freedom.** Pipeline skills = LOW freedom. Research/chat = HIGH freedom.
-- ~~**ADD: Compaction survival prompt.**~~ **DONE S115.** Added to `pre-compact-hook.sh`.
-- **REVIEW: Subagent guidance.** When to fork vs direct call. Opus 4.6 over-spawns.
-- **CHECK: Description budget.** Run `/context` to see if 21 skills exceed the 2% / 16,000 char budget. Override with `SLASH_COMMAND_TOOL_CHAR_BUDGET` if needed.
-- **FUTURE: Skill evaluations.** 3+ test scenarios per skill. Do when we next rewrite a skill.
+**~~E. Skill Structure~~** — **DONE S115 (audit complete, no critical issues).**
+- Line counts: all under 500. `write-supplemental` at 473 is highest — approaching but OK.
+- Descriptions: all third person, functional. Desk descriptions are thin but `disable-model-invocation` means they're menu labels, not discovery triggers.
+- ~~Compaction survival prompt~~ — DONE.
+- **Remaining (LOW):** subagent guidance (evaluate after E89), description budget check (run `/context`), skill evaluations (3+ test scenarios, do when rewriting skills).
 
 ### Open — Infrastructure & Maintenance
 

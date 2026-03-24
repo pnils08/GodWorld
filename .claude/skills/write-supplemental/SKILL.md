@@ -14,6 +14,18 @@ argument-hint: "[topic]"
 - Mags picks the reporters, designs the coverage, compiles the result
 - One supplemental per cycle minimum — this is how the city gets built
 
+## Live Status (auto-injected)
+
+**Supplemental triggers:**
+```
+!`cat output/supplemental-triggers/triggers_c*.json 2>/dev/null | python3 -c "import json,sys; d=json.load(sys.stdin); print(f'{len(d)} triggers available'); [print(f'  - {t.get(\"topic\",\"?\")} ({t.get(\"type\",\"?\")})') for t in d[:5]]" 2>/dev/null || echo "No triggers file — pick a topic or run checkSupplementalTriggers.js"`
+```
+
+**Recent supplementals:**
+```
+!`ls -1t editions/*supplemental* 2>/dev/null | head -3 || echo "No supplementals yet"`
+```
+
 ## Philosophy
 
 The Cycle Pulse is the engine's newspaper — it reports what the simulation produced. Same six desks, same format, same rotation. That's necessary but it's not sufficient. The city needs texture, variety, life.

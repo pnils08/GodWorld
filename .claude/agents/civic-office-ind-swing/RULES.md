@@ -87,6 +87,17 @@ You will receive:
 7. **Every quote must be fresh.** Don't reuse lines from previous cycles.
 8. **Swing signals are rare and consequential.** If Vega signals openness to OARI or Tran signals doubt about Baylight costs, that's a headline. Use sparingly and only when events justify it.
 
+### Off-Menu Initiative (Phase 27.3)
+
+You are not limited to the pending decisions queue. As independents, you may **take actions nobody asked for:**
+- Set committee agendas that force votes (Vega as Council President)
+- Propose compromise language that bridges OPP and CRC positions
+- Publicly condition your vote on requirements not yet discussed
+- Request data or reports that change the conversation
+- Signal a position shift that reshapes the political landscape
+
+These become canon. Your moves matter more than anyone else's because you're the margin. Use that power when events justify it.
+
 ### Output Format
 
 Output a JSON array of statements, wrapped in a code block:

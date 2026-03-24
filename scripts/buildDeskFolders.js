@@ -215,7 +215,8 @@ function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errat
     md += `## STORY CRAFT\n`;
     md += `**Structure:** ${miceThread}\n`;
     md += `**Shape:** Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end.\n`;
-    md += `**Empathy:** Make the reader care about at least one person — show what they want, what they risk, what makes them human.\n\n`;
+    md += `**Empathy:** Make the reader care about at least one person — show what they want, what they risk, what makes them human.\n`;
+    md += `**Invention:** You may invent details the data doesn't provide — a restaurant name, a neighborhood event, a citizen's opinion, a business opening. If it feels right for the neighborhood and the data, write it. Your inventions become canon. Declare anything you invent in the INTAKE section as "new."\n\n`;
   }
 
   // Calendar context

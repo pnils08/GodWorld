@@ -94,6 +94,64 @@ The problem isn't that anything is broken. The problem is the architecture assum
 
 ---
 
+## Ledger Simplification — Target State
+
+The current Simulation_Ledger has 46 columns. Many track data at the wrong level (individual vs world/neighborhood), are redundant, or produce data nobody uses meaningfully. The target is 19 columns — each earns its place.
+
+**This is NOT "delete 27 columns." Every column connects to engine functions. Removing them requires rewriting Phase 5 and downstream engines. This is the target for a rebuild, not a cleanup.**
+
+### Target: 19 Columns
+
+| # | Column | Why it stays |
+|---|--------|-------------|
+| 1 | POPID | Universal key |
+| 2 | First | Identity |
+| 3 | Last | Identity |
+| 4 | UNI (y/n) | Engine mode gate |
+| 5 | MED (y/n) | Engine mode gate |
+| 6 | CIV (y/n) | Engine mode gate |
+| 7 | ClockMode | Determines which engines process this citizen |
+| 8 | Tier | Protection level, event probability modifier |
+| 9 | RoleType | What they do — "Mechanic", "Principal", "Shortstop, Oakland A's" |
+| 10 | Status | Active / Retired / Recovering |
+| 11 | BirthYear | Age calculation (SimYear - BirthYear) |
+| 12 | LifeHistory | Accumulated engine events — the raw material |
+| 13 | TraitProfile | Compacted from LifeHistory — archetype, tone, motifs |
+| 14 | UsageCount | How often media has used this citizen |
+| 15 | Neighborhood | Where they live — connects to all neighborhood-level data |
+| 16 | WealthLevel | Single economic indicator (0-10) |
+| 17 | EconomicProfileKey | Links to Economic_Parameters for role-based economics |
+| 18 | EmployerBizId | Links to Business_Ledger |
+| 19 | CitizenBio | Readable summary — includes family, personality, history. What a reporter needs. |
+
+### Columns Moving to Other Systems (27)
+
+These aren't deleted — they're relocated to where they belong:
+
+**To neighborhood/world-level data:**
+- DisplacementRisk, MigrationIntent, MigrationReason, MigrationDestination, MigratedCycle, ReturnedCycle (migration is aggregate, not per-citizen)
+- Income, SavingsRate, DebtLevel, NetWorth, InheritanceReceived (neighborhood economics, not individual)
+- LastPromotionCycle, CareerMobility, YearsInCareer (world-level employment stats)
+- EducationLevel, SchoolQuality (not useful at citizen level)
+
+**To CitizenBio (narrative, not tracked columns):**
+- MaritalStatus, NumChildren, ParentIds, ChildrenIds, HouseholdId ("Married, two kids" is a bio sentence)
+
+**Removed entirely (dead/redundant):**
+- Middle (1% populated), OriginGame, OrginCity, CreatedAt, LastUpdated (timestamps nobody reads), CareerStage (redundant with Status)
+
+### What This Means for the Rebuild
+
+- Phase 5 citizen engines that read/write removed columns need rewriting
+- Household engine simplifies dramatically (no more tracking IDs and arrays)
+- Migration engine becomes neighborhood-level, not per-citizen
+- Economic engines read WealthLevel + neighborhood data instead of 6 per-citizen columns
+- generationalWealthEngine either simplifies or moves to world-level processing
+- LifeHistory compaction and CitizenBio generation become the primary character-building mechanisms
+- The leaner citizen processes faster, enabling more passes per world cycle
+
+---
+
 ## Supermemory Citizen Container
 
 A `citizens` container in Supermemory. Each citizen is a document built from their full simulation state — Simulation_Ledger row + LifeHistory compaction + TraitProfile + CitizenBio + UsageCount + edition appearances. Updated after each citizen cycle.

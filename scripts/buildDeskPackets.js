@@ -478,9 +478,18 @@ function filterCulturalByDomain(entities, deskDomains) {
   });
 }
 
+// Load POPID usage counts for freshness scoring
+var USAGE_COUNTS = null;
+try {
+  USAGE_COUNTS = JSON.parse(fs.readFileSync(path.join(ROOT, 'output', 'popid-usage-counts.json'), 'utf-8'));
+} catch (e) {
+  // First run or file missing — no freshness scoring
+}
+
 function getInterviewCandidates(simLedger, neighborhoods, bizIndex) {
-  // v2.3: Return ALL ENGINE citizens — no hard cap. Agents need the full city.
-  // Priority citizens (from desk neighborhoods) come first, but all are available.
+  // v2.4: Return ALL ENGINE citizens with freshness scoring.
+  // Citizens who have never appeared in any edition sort higher.
+  // Priority citizens (from desk neighborhoods) still come first within each tier.
   var priority = [];
   var other = [];
   var hasPriorityHoods = neighborhoods && neighborhoods.length > 0;
@@ -499,10 +508,14 @@ function getInterviewCandidates(simLedger, neighborhoods, bizIndex) {
     var birthYear = parseInt(c.BirthYear) || 0;
     var age = birthYear > 0 ? 2041 - birthYear : '';
     var hood = c.Neighborhood || '';
+    var popId = c.POPID || '';
+
+    // Freshness score: 0 appearances = freshest, higher = more used
+    var usageCount = (USAGE_COUNTS && popId) ? (USAGE_COUNTS[popId] || 0) : 0;
 
     var candidate = {
       name: fullName,
-      popId: c.POPID,
+      popId: popId,
       age: age,
       neighborhood: hood,
       role: c.RoleType,
@@ -510,7 +523,9 @@ function getInterviewCandidates(simLedger, neighborhoods, bizIndex) {
       income: income,
       economicCategory: income >= 150000 ? 'high' : (income >= 75000 ? 'mid' : (income > 0 ? 'low' : 'unknown')),
       employerBizId: empBizId,
-      employerName: empBiz ? empBiz.Name : (empBizId === 'SELF_EMPLOYED' ? 'Self-Employed' : '')
+      employerName: empBiz ? empBiz.Name : (empBizId === 'SELF_EMPLOYED' ? 'Self-Employed' : ''),
+      usageCount: usageCount,
+      fresh: usageCount === 0
     };
 
     if (hasPriorityHoods && neighborhoods.indexOf(hood) !== -1) {
@@ -519,6 +534,11 @@ function getInterviewCandidates(simLedger, neighborhoods, bizIndex) {
       other.push(candidate);
     }
   });
+
+  // Within each group, sort by freshness (least used first)
+  function freshSort(a, b) { return (a.usageCount || 0) - (b.usageCount || 0); }
+  priority.sort(freshSort);
+  other.sort(freshSort);
 
   // Priority candidates first (from desk's event neighborhoods), then everyone else
   return priority.concat(other);

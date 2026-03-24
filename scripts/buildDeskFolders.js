@@ -382,15 +382,21 @@ function generateCitizenCards(desk, summary) {
   const candidates = summary.interviewCandidates || [];
   const archive = summary.citizenArchive || [];
   // Show top 20 priority citizens in briefing (full roster in packet.json)
+  // Sorted by freshness — least-used citizens first
   const all = [...candidates, ...archive].slice(0, 20);
 
   if (all.length === 0) return '';
 
+  const freshCount = all.filter(c => c.fresh || c.usageCount === 0).length;
   let md = `## CITIZEN REFERENCE CARDS\n`;
+  if (freshCount > 0) {
+    md += `**${freshCount} of these citizens have NEVER appeared in any edition. Prioritize them.**\n\n`;
+  }
   for (const c of all) {
     const name = c.name || c.citizenName || 'Unknown';
     const details = [c.age, c.neighborhood, c.occupation].filter(Boolean).join(', ');
-    md += `- **${name}** (${details})`;
+    const freshTag = (c.fresh || c.usageCount === 0) ? ' [FRESH]' : '';
+    md += `- **${name}** (${details})${freshTag}`;
     if (c.popid) md += ` [${c.popid}]`;
     md += '\n';
   }

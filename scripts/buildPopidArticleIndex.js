@@ -204,6 +204,15 @@ async function main() {
   } else {
     console.log(`\nDry run — use --write to save to ${OUTPUT}`);
   }
+
+  // Always write JSON usage counts for buildDeskPackets.js freshness scoring
+  const usageCounts = {};
+  for (const [name, citizen] of citizenMap) {
+    usageCounts[citizen.popId] = citizen.articles.length;
+  }
+  const jsonPath = path.join(ROOT, 'output', 'popid-usage-counts.json');
+  fs.writeFileSync(jsonPath, JSON.stringify(usageCounts, null, 2));
+  console.log(`\nUsage counts written to ${jsonPath} (${Object.keys(usageCounts).length} citizens)`);
 }
 
 main().catch(e => { console.error(e); process.exit(1); });

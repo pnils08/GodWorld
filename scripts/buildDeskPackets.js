@@ -109,10 +109,11 @@ const DESKS = {
     articleBudget: { min: 2, max: 4, recommended: 3 },
     storylineKeywords: [
       'stabilization', 'council', 'vote', 'oari', 'baylight', 'crane',
-      'health center', 'osei', 'civic load', 'vega', 'carter', 'ashford',
+      'health center', 'osei', 'cortez', 'civic load', 'vega', 'carter', 'ashford',
       'chen', 'rivers', 'tran', 'mobley', 'delgado', 'infrastructure',
       'initiative', 'mayor', 'city hall', 'opoa', 'ramirez', 'district',
-      'household', 'rent burden', 'housing', 'eviction'
+      'household', 'rent burden', 'housing', 'eviction',
+      'mara vance', 'workforce agreement', 'local hiring', 'transit hub'
     ],
     canonSections: ['council', 'pendingVotes', 'statusAlerts', 'recentOutcomes', 'executiveBranch'],
     getsSportsFeeds: false,
@@ -127,7 +128,8 @@ const DESKS = {
       "a's", 'spring training', 'keane', 'seymour', 'warriors', 'giannis',
       'dynasty', 'horn', 'aitken', 'davis', 'mesa', 'coliseum', 'dillon',
       'ramos', 'coles', 'ellis', 'paulson', 'oakland sports', 'antetokounmpo',
-      'green', 'moody', 'championship'
+      'green', 'moody', 'championship', 'expansion', 'nba',
+      'richards', 'quintero', 'taveras', 'wade', 'farewell'
     ],
     canonSections: ['asRoster'],
     getsSportsFeeds: 'oakland',
@@ -142,7 +144,9 @@ const DESKS = {
       'faith', 'interfaith', 'gallery', 'mei chen', 'first friday', 'mural',
       'community', 'art walk', 'cultural', 'church', 'mosque', 'synagogue',
       'temple', 'concert', 'nightlife', 'restaurant', 'school',
-      'household', 'family', 'multigenerational', 'marriage', 'birth'
+      'household', 'family', 'multigenerational', 'marriage', 'birth',
+      'education', 'after-school', 'rec center', 'academy', 'teacher',
+      'calvin turner', 'andre lee', 'housing market', 'arts scene'
     ],
     canonSections: ['culturalEntities'],
     getsSportsFeeds: false,
@@ -156,7 +160,10 @@ const DESKS = {
     storylineKeywords: [
       'economic', 'retail', 'nightlife', 'commerce', 'business', 'port',
       'employment', 'labor', 'restaurant', 'jack london',
-      'household', 'income', 'rent', 'housing cost', 'wealth'
+      'household', 'income', 'rent', 'housing cost', 'wealth',
+      'tech', 'oakmesh', 'gridiron', 'tenth street', 'ridgeline',
+      'workforce', 'hiring', 'housing market', 'real estate',
+      'stabilization fund', 'disbursement'
     ],
     canonSections: [],
     getsSportsFeeds: false,
@@ -170,7 +177,8 @@ const DESKS = {
     storylineKeywords: [
       'bulls', 'trepagnier', 'chicago', 'paulson', 'giddey', 'simmons',
       'holiday', 'united center', 'bridgeport', 'bronzeville', 'stanley',
-      'buzelis', 'huerter', 'kessler'
+      'buzelis', 'huerter', 'kessler', 'romano', 'okafor', 'polk',
+      'expansion', 'nba', 'dosunmu'
     ],
     canonSections: ['bullsRoster'],
     getsSportsFeeds: 'chicago',

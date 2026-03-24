@@ -37,9 +37,9 @@
 
 Source: Anthropic prompting guide, extended thinking docs, skill best practices, Claude Code skills reference. See `docs/RESEARCH.md` S115 entries (5 entries).
 
-**TOOL: Install `skill-creator` from Anthropic's skills repo** — `/plugin install example-skills@anthropic-agent-skills`. This skill automates skill evaluation and improvement: writes test prompts, runs via subagents, grades results, iterates. Use it to audit and upgrade our 21 skills instead of manual review. Also installs `mcp-builder` (Phase 21.2/29 reference) and `webapp-testing` (Phase 28.2 reference).
+**TOOL: ~~Install `skill-creator`~~ — DONE S115.** Installed `skill-creator@claude-plugins-official`. Also installed: ralph-loop, hookify, claude-code-setup.
 
-**A. Skill Frontmatter Upgrade (HIGH — do in next Build session)**
+**~~A. Skill Frontmatter Upgrade~~** — **DONE S115.** `disable-model-invocation: true` added to 12 side-effect skills. Effort levels tuned (culture→medium, business→low). Argument hints on 4 pipeline skills.
 
 Every one of our 21 skills should get these frontmatter fields reviewed and set:
 
@@ -60,10 +60,7 @@ The `` !`command` `` syntax injects live data into skill prompts BEFORE Claude s
 
 Evaluate which `/write-edition` steps can be replaced by bash injection in skill frontmatter. Could eliminate 2-3 manual pipeline steps.
 
-**C. Prompt De-escalation (HIGH — do before next edition run)**
-
-- **AUDIT: De-escalate agent prompts for 4.6.** Scan all SKILL.md and RULES.md for aggressive language ("CRITICAL", "You MUST", "ALWAYS", "If in doubt, use [tool]"). Replace with natural phrasing. Affects: 6 desk agents, 7 voice agents, 5 initiative agents.
-- **AUDIT: Prefilled response check.** Scan for assistant-turn prefills — deprecated in 4.6. **Priority: LOW.**
+**~~C. Prompt De-escalation~~** — **DONE S115.** Scanned all agent SKILL.md and RULES.md files. MUST/NEVER usage is all editorial guardrails (factual accuracy, fourth-wall, journalism rules) — NOT tool-triggering language. No changes needed. No prefilled responses found.
 
 **D. Thinking Migration (HIGH — urgent, deprecated feature)**
 
@@ -75,7 +72,7 @@ Evaluate which `/write-edition` steps can be replaced by bash injection in skill
 - **AUDIT: SKILL.md line counts.** Body under 500 lines. Move excess to reference files (one level deep).
 - **AUDIT: Skill descriptions.** Third person, include WHAT + WHEN. Check with `/context` for budget warnings.
 - **AUDIT: Degrees of freedom.** Pipeline skills = LOW freedom. Research/chat = HIGH freedom.
-- **ADD: Compaction survival prompt.** Anthropic's context-awareness prompt to compaction hook.
+- ~~**ADD: Compaction survival prompt.**~~ **DONE S115.** Added to `pre-compact-hook.sh`.
 - **REVIEW: Subagent guidance.** When to fork vs direct call. Opus 4.6 over-spawns.
 - **CHECK: Description budget.** Run `/context` to see if 21 skills exceed the 2% / 16,000 char budget. Override with `SLASH_COMMAND_TOOL_CHAR_BUDGET` if needed.
 - **FUTURE: Skill evaluations.** 3+ test scenarios per skill. Do when we next rewrite a skill.
@@ -84,13 +81,11 @@ Evaluate which `/write-edition` steps can be replaced by bash injection in skill
 
 - ~~**CLEANUP: Archive old session transcripts**~~ — **DONE S113.** Cleaned 650MB. Observer + root sessions >14d deleted. GodWorld sessions >14d archived to `output/archives/godworld-sessions-pre-20260309.tar.gz` (69MB). Disk: 72% → 70%.
 - **Node.js security patch** — Scheduled March 24, 2026.
-- **INSTALL: Ralph Loop plugin.** `/plugin install ralph-loop@claude-plugins-official`. Test on one desk agent: `/ralph-loop "Write the civic section" --completion-promise "SECTION COMPLETE" --max-iterations 10`. If output fails `validateEdition.js`, loop feeds it back. This IS Phase 12.4 as a ready-made plugin. **Priority: HIGH — install in next Build session, test on E89.**
-- **INSTALL: Hookify plugin.** `/plugin install hookify@claude-plugins-official`. Create fourth-wall contamination rule: `/hookify Warn when editing files under .claude/agents/ that contain godworld, simulation, engine, or builder`. Replaces custom `post-write-check.sh` with a simpler, no-restart-needed markdown config. **Priority: HIGH — install in next Build session.**
-- **RUN: claude-automation-recommender.** `/plugin install claude-code-setup@claude-plugins-official`, then trigger the automation recommender skill on GodWorld. Gets tailored recommendations for hooks, subagents, skills, plugins, MCP servers we haven't thought of. **Priority: MEDIUM — run once, extract actionable items.**
-- **RUN: claude-md-improver.** `/plugin install claude-md-management@claude-plugins-official`, then run on our CLAUDE.md. Audits against templates and quality criteria. Part of Skill Audit section E. **Priority: MEDIUM.**
-- **ADD: Security review on commits — CONFIRMED WILL DO.** Two steps:
-  1. **Immediate (zero install):** Run `/security-review` before commits touching scripts, dashboard, or credentials. Already ships with Claude Code.
-  2. **GitHub Action:** Set up `anthropics/claude-code-security-review@main` in `.github/workflows/security.yml` to auto-review every push. One workflow file.
+- ~~**INSTALL: Ralph Loop plugin.**~~ **DONE S115.** Installed. Test on E89: `/ralph-loop "Write the civic section" --completion-promise "SECTION COMPLETE" --max-iterations 10`.
+- ~~**INSTALL: Hookify plugin.**~~ **DONE S115.** Installed + 2 rules created: `fourth-wall-guard` (agent file contamination), `credential-guard` (service account/API key exposure).
+- ~~**RUN: claude-automation-recommender.**~~ **DONE S115.** Result: context7 MCP + sqlite MCP installed. ESLint auto-fix hook recommended (not yet implemented).
+- ~~**RUN: claude-md-improver.**~~ **DONE S115.** CLAUDE.md upgraded: Quick Commands section + Infrastructure section added. Score: B (82/100).
+- ~~**ADD: Security review on commits — CONFIRMED WILL DO.**~~ **DONE S115.** GitHub Action updated with custom scan rules (`docs/security-scan-rules.txt`). Covers: fourth-wall contamination, credential exposure, container contamination, script injection. `/security-review` available for manual use.
   3. **Custom scan instructions:** Create `docs/security-scan-rules.txt` with GodWorld-specific rules: flag "godworld", "simulation", "engine", "builder", "user" in files under `.claude/agents/` (fourth-wall contamination). Flag service account email or credential paths in any non-config file. Flag bay-tribune container references in non-Supermemory code. This extends the post-write hook (`post-write-check.sh`) with security-review-time coverage.
   **Priority: HIGH — do in next Build session.**
 - **UPGRADE: Instant compaction pattern.** Replace reactive compaction (wait until full, user waits for summary) with proactive instant compaction — background thread builds session memory once soft threshold is met, ready to swap in instantly when context is full. Pattern from `claude-cookbooks/misc/session_memory_compaction.ipynb`. Uses prompt caching for ~10x cheaper background updates. **Priority: MEDIUM — improves every session, especially long production runs.**

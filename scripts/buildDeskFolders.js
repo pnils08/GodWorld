@@ -263,6 +263,30 @@ function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errat
     md += generateCitizenCards(desk, summary);
   }
 
+  // INTAKE output requirement — agents declare what they used/invented
+  md += `## OUTPUT REQUIREMENT: INTAKE SECTION\n\n`;
+  md += `**After your articles, include an ## INTAKE section.** This is how your work feeds back into the world. One line per entry, pipe-delimited.\n\n`;
+  md += `**Format — copy exactly:**\n`;
+  md += '```\n';
+  md += '## INTAKE\n\n';
+  md += 'CITIZEN: Full Name | POP-XXXXX | quoted | context about their role in the article\n';
+  md += 'CITIZEN: Full Name | POP-XXXXX | referenced | brief context\n';
+  md += 'NEW_CITIZEN: Full Name | — | new | age, neighborhood, occupation, one-line bio\n';
+  md += 'BUSINESS: Business Name | Neighborhood | new or existing | type of business\n';
+  md += 'SCHOOL: School Name | Neighborhood | new or existing\n';
+  md += 'FAITH: Organization Name | Neighborhood | new or existing\n';
+  md += 'QUOTE: Full Name | POP-XXXXX | "Exact quote from the article"\n';
+  md += 'STORYLINE: NEW | Description of new story thread | Citizen1, Citizen2 | Neighborhood\n';
+  md += 'STORYLINE: CONTINUING | Description | Citizens involved | Neighborhood\n';
+  md += 'STORYLINE: RESOLVED | Description | Citizens involved | Neighborhood\n';
+  md += '```\n\n';
+  md += `**Rules:**\n`;
+  md += `- Every citizen you name in your articles MUST appear in INTAKE with their POPID from the reference cards above.\n`;
+  md += `- If you invented a citizen, use NEW_CITIZEN with a dash for POPID.\n`;
+  md += `- If you invented a business, school, or faith org, mark it "new."\n`;
+  md += `- Every direct quote MUST appear in a QUOTE line.\n`;
+  md += `- UsageType for CITIZEN: quoted, referenced, central, mentioned, letter_writer\n\n`;
+
   return md;
 }
 

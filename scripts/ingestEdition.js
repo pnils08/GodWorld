@@ -29,16 +29,16 @@ var DRY_RUN = process.argv.includes('--dry-run');
 // Extract cycle number from edition content or filename
 // ---------------------------------------------------------------------------
 function extractCycle(content, filename) {
-  // Try header first: "CYCLE PULSE — EDITION 82"
-  var headerMatch = content.match(/EDITION\s+(\d+)/i);
-  if (headerMatch) return parseInt(headerMatch[1], 10);
-  // Try filename: cycle_pulse_edition_82.txt
+  // Filename first — most reliable
+  // supplemental_education_first_week_c88.txt → 88
+  var cMatch = filename.match(/[_-]c(\d+)\./i);
+  if (cMatch) return parseInt(cMatch[1], 10);
+  // cycle_pulse_edition_88.txt → 88
   var fileMatch = filename.match(/edition[_-](\d+)/i);
   if (fileMatch) return parseInt(fileMatch[1], 10);
-  // Try supplemental: "C83 Supplemental" in header or filename
-  var suppMatch = content.match(/\bC(\d+)\s+Supplemental/i)
-    || filename.match(/[_-]c(\d+)/i);
-  if (suppMatch) return parseInt(suppMatch[1], 10);
+  // Content fallback: "Cycle 88" in header
+  var cycleMatch = content.match(/Cycle\s+(\d+)/i);
+  if (cycleMatch) return parseInt(cycleMatch[1], 10);
   return null;
 }
 
@@ -52,7 +52,7 @@ function splitEdition(content, cycle) {
     sections.push({
       title: 'Cycle Pulse Edition ' + cycle + ' (Full)',
       content: content,
-      tags: ['edition', 'edition-' + cycle]
+      tags: []
     });
     return sections;
   }
@@ -75,7 +75,7 @@ function splitEdition(content, cycle) {
       sections.push({
         title: 'Cycle Pulse Edition ' + cycle + ' (Part ' + chunkNum + ')',
         content: content.slice(pos, end).trim(),
-        tags: ['edition', 'edition-' + cycle]
+        tags: []
       });
       pos = end;
     }
@@ -92,7 +92,7 @@ function splitEdition(content, cycle) {
       sections.push({
         title: 'Cycle Pulse Edition ' + cycle + ' (Part ' + chunkIndex + ')',
         content: currentChunk.trim(),
-        tags: ['edition', 'edition-' + cycle]
+        tags: []
       });
       currentChunk = '';
     }
@@ -103,7 +103,7 @@ function splitEdition(content, cycle) {
     sections.push({
       title: 'Cycle Pulse Edition ' + cycle + ' (Part ' + chunkIndex + ')',
       content: currentChunk.trim(),
-      tags: ['edition', 'edition-' + cycle]
+      tags: []
     });
   }
 

@@ -1,13 +1,13 @@
-====
+============================================================
 THE CYCLE PULSE
 Edition 89 | September 2041 | Bay Tribune Oakland
-====
+============================================================
 
 FRONT PAGE
 STABILIZATION FUND: MAYOR ORDERS CHECKS OUT THE DOOR
 Carmen Delaine, City Hall Correspondent
 
-----
+------------------------------------------------------------
 
 The order came on a Tuesday morning, blunt and without ceremony. Mayor Avery Santana called OEWD Director Marcus Webb into her office and told him what she wanted in writing: every one of the 53 reviewed Stabilization Fund applications cleared for disbursement within ten days. The 277 remaining applications on rolling two-week review, starting now. Deputy Mayor Brenda Okoro on direct oversight. And a written explanation, by end of week, of what exactly had been sitting on someone's desk all of September.
 
@@ -31,7 +31,7 @@ Deputy Mayor Okoro's office confirmed she is taking on direct oversight of proce
 
 Beverly Hayes was not available for comment.
 
-----
+------------------------------------------------------------
 
 EDITOR'S DESK
 By Mags Corliss, Editor-in-Chief
@@ -46,11 +46,11 @@ This edition tracks what happens when promises hit administration, timelines, an
 
 Grace Yamamoto of Adams Point wrote us a letter about the six o'clock light on Lake Merritt. She wanted to say things are fine. We're running it because sometimes that's the story.
 
-----
+------------------------------------------------------------
 
 CIVIC AFFAIRS
 
-====
+============================================================
 
 OARI DAY 34: THE CLOCK IS VISIBLE NOW
 By Luis Navarro, City Hall Reporter
@@ -81,7 +81,7 @@ An emergency services coordinator who works out of the Eastlake fire station and
 
 Eleven days.
 
-----
+------------------------------------------------------------
 
 FRUITVALE VOTED. NOW THE LAWYERS WRITE.
 By Carmen Delaine, City Hall Correspondent
@@ -104,7 +104,7 @@ The design phase vote is not scheduled before November. The intervening period i
 
 Councilmember Carter put the lesson plainly. This is prevention work, she said, not rescue work. "The Stabilization Fund was designed to help families after displacement starts. The Transit Hub gives Fruitvale the chance to lock things down before construction begins, before the speculation wave." The CBA is, in that framing, what the Stabilization Fund would have been if it had arrived ten years earlier.
 
-----
+------------------------------------------------------------
 
 CIVIC BRIEFS
 
@@ -114,11 +114,11 @@ Temescal Health Center: 85 Percent and Moving — SMRT Architects has completed 
 
 Deputy Mayor Osei Absent — Deputy Mayor Marcus Osei (Economic Development) remains absent due to health. Laila Cortez continues to cover his full portfolio.
 
-====
+============================================================
 
 BUSINESS
 
-----
+------------------------------------------------------------
 
 BUSINESS TICKER
 By Jordan Velez, Bay Tribune Business
@@ -131,11 +131,11 @@ The TIF close is October thirty-first. What that means is that two billion one h
 
 The Fruitvale Transit Hub, meanwhile, is in the benefit design phase. Ninety-four residents voted on design preferences this month. Eighty-seven percent ranked the Community Benefit Maximum scenario in their top two choices. The Community Benefit Maximum means thirty-year rent locks for small businesses, thirty-five percent affordable housing with hundred-year affordability protections via community land trust, and real enforcement authority on developer compliance. Council votes in November. Jalen Hill, who works the line at a Jack London restaurant: "One project brings money into the neighborhood through construction. One project brings money in through long-term development and jobs. Both need to work together or both break."
 
-====
+============================================================
 
 CULTURE & COMMUNITY — OAKLAND
 
-----
+------------------------------------------------------------
 
 JUNETEENTH STILL ECHOES: COMMUNITY MARKS FREEDOM'S MEMORY
 By Maria Keen
@@ -154,7 +154,7 @@ St. Columba was hosting a community lunch to mark emancipation and freedom. Noth
 
 At the Cathedral of Christ the Light on Grand Avenue, the Saturday food pantry had its own Juneteenth moment this month — a volunteer named DeMarco brought his uncle, who had never been inside the cathedral before, to see what "free food meant around here." One person brought another. The circle expanded. By the time they left, the uncle was shaking hands with people he'd never met, and said something that landed: "If they're doing this now, I wonder what they were doing in June when I wasn't paying attention."
 
-----
+------------------------------------------------------------
 
 ALLEN TEMPLE OPENS ITS DOORS: EAST OAKLAND ANCHORS A CONVERSATION
 By Elliot Graye
@@ -171,7 +171,7 @@ Allen Temple held community support hours. The kind where you don't fill out for
 
 Acts Full Gospel Church in West Oakland did similar work this month — opening fellowship space, creating the conditions where people could sit and exist without transaction. Not charity as the world uses it. Friendship as the church understands it.
 
-----
+------------------------------------------------------------
 
 FIRST PRESBYTERIAN EXPANDS ITS FELLOWSHIP: TUTORING PROGRAM ROOTS DEEPER DOWNTOWN
 By Angela Reyes
@@ -186,11 +186,11 @@ The program is staffed by volunteers, funded by donations that don't make announ
 
 The volunteers don't frame it that way. They just say: "The kids keep coming. So we keep showing up."
 
-====
+============================================================
 
 SPORTS — OAKLAND
 
-----
+------------------------------------------------------------
 
 COLES STATEMENT
 The A's trade acquisition throws a one-hit complete game, striking out fourteen Angels on opening week. The rotation question everyone asked this winter has an early answer.
@@ -220,7 +220,7 @@ The A's are three and zero. The season is four games old. Neither of these facts
 
 Coles can do this.
 
-----
+------------------------------------------------------------
 
 THE OLD MAN AND THE EIGHTH
 [OPINION]
@@ -265,7 +265,7 @@ DeShawn finished his beer. He didn't say anything else.
 
 He didn't need to.
 
-----
+------------------------------------------------------------
 
 APRIL IS NOT OCTOBER
 Darrin Davis, Ernesto Quintero, and Eric Tavares are cold at the start. Hal Richmond has been here before.
@@ -295,11 +295,11 @@ The A's are collecting data. The players who matter in this city's October story
 
 It always does.
 
-====
+============================================================
 
 SKYLINE TRIBUNE — CHICAGO BUREAU
 
-----
+------------------------------------------------------------
 
 GAME 7 IS NOT THE CEILING
 By Selena Grant, Bay Tribune Chicago Bureau
@@ -320,7 +320,7 @@ A source familiar with the front office's thinking said this week that Paulson's
 
 The Bulls are in the conference semifinals. That is real. So is everything else.
 
-----
+------------------------------------------------------------
 
 A PERSON WHO JUST WATCHES BASKETBALL
 By Talia Finch, Bay Tribune Chicago Bureau
@@ -375,11 +375,11 @@ Raymond laughed. It was a real laugh, which is different from the ones he gives 
 
 Darius Reeves pulled the service window closed at two o'clock exactly. The line had cleared twenty minutes earlier. He'd be back next Friday. If the Bulls were still alive — and they were, they were in the conference semifinals — there would be a line.
 
-====
+============================================================
 
 LETTERS TO THE EDITOR
 
-----
+------------------------------------------------------------
 
 The Check That Hasn't Arrived
 
@@ -395,7 +395,7 @@ I am glad the Mayor issued a directive. I hope it works. But a directive is not 
 
 — Irene Fay, 61, West Oakland
 
-----
+------------------------------------------------------------
 
 What Fruitvale Actually Said
 
@@ -409,7 +409,7 @@ What I want now is simple: a community benefit agreement that is legally binding
 
 — Marisol Trujillo, 44, Fruitvale
 
-----
+------------------------------------------------------------
 
 Day 34
 
@@ -423,7 +423,7 @@ Eleven days. Please finish this.
 
 — Dennis Okafor, 52, East Oakland
 
-----
+------------------------------------------------------------
 
 The Piles Go In
 
@@ -437,7 +437,7 @@ Some things stop being an argument and start being a building. This is that.
 
 — Curtis Webb, 47, West Oakland
 
-----
+------------------------------------------------------------
 
 September Morning
 
@@ -453,7 +453,7 @@ Oakland is a good city. I wanted to say that because nobody writes letters to sa
 
 — Grace Yamamoto, 68, Adams Point
 
-====
+============================================================
 
 QUICK TAKES
 
@@ -462,7 +462,7 @@ QUICK TAKES
 - Port of Oakland Green Modernization federal grant application still in federal pipeline. No update from Washington.
 - First Friday returns October 3. Telegraph Avenue closures begin at 5 PM.
 
-====
+============================================================
 
 COMING NEXT
 
@@ -472,12 +472,12 @@ COMING NEXT
 - Fruitvale Transit Hub: CBA language begins to take shape before C91 vote.
 - A's September stretch: Davis, Quintero, Tavares — do the bats wake up?
 
-====
+============================================================
 
 ARTICLE TABLE
 
 | # | Section | Reporter | Headline | Type |
-|---|---------|----------|----------|------|
+|---|-------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | 1 | Front Page | Carmen Delaine | Stabilization Fund: Mayor Orders Checks Out the Door | News |
 | 2 | Editor's Desk | Mags Corliss | — | Editorial |
 | 3 | Civic | Luis Navarro | OARI Day 34: The Clock Is Visible Now | Investigation |
@@ -498,7 +498,7 @@ ARTICLE TABLE
 | 18 | Letters | Curtis Webb | The Piles Go In | Letter |
 | 19 | Letters | Grace Yamamoto | September Morning | Letter |
 
-====
+============================================================
 
 CITIZEN USAGE LOG
 
@@ -509,7 +509,7 @@ Culture: Lucia Polito (POP-00004), DeMarco (new), DeMarco's Uncle (new)
 Chicago: Josh Giddey, Hank Trepagnier, Adash Stanley, Mike Paulson, Paulette Okafor, Raymond Polk, Darius Reeves (new)
 Letters: Irene Fay (POP-00188), Marisol Trujillo (POP-00267), Dennis Okafor (POP-00391), Curtis Webb (POP-00211), Grace Yamamoto (POP-00156)
 
-====
+============================================================
 
 CONTINUITY NOTES
 
@@ -523,6 +523,6 @@ CONTINUITY NOTES
 - Bulls: Eastern Conference semifinals. Giddey emerging. Stanley technicals a live risk. Paulson silent.
 - Paulette/Raymond: Feeling two things at once. The other thing is still there.
 
-====
+============================================================
 
 END EDITION 89

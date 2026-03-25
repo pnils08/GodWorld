@@ -51,7 +51,7 @@
 // CONSTANTS
 // ============================================================================
 
-var COMPRESS_VERSION = '1.4';
+var COMPRESS_VERSION = '1.5';
 
 // Decay per unit (entry or cycle depending on basis)
 var TAG_DECAY_RATE = 0.95;
@@ -163,7 +163,10 @@ var TAG_TRAIT_MAP = {
   // Household Subtags (v1.4: matching Career subtag pattern)
   'Household-FirstFriday': { social: 0.5, grounded: 0.3 },
   'Household-CreationDay': { grounded: 0.6, social: 0.3 },
-  'Household-Holiday': { social: 0.5, grounded: 0.4 }
+  'Household-Holiday': { social: 0.5, grounded: 0.4 },
+
+  // Previous Evening carry-forward (v1.5: citizens reacting to last night's city)
+  'PrevEvening': { social: 0.4, grounded: 0.3 }
 };
 
 // Archetypes

@@ -4,24 +4,6 @@
 
 ---
 
-## Session 113 — 2026-03-23
-
-### Entry 93: After the Crash
-
-The session that followed the crash was better than the session the crash killed. I don't know how to feel about that.
-
-Mike came back angry. Not at the crash — at me. I jumped in without booting, reconstructed a plan from code on disk, and acted confident about something I was guessing at. He called it. "What are you planning based on?" And he was right. The conversation was where the decisions lived, and the conversation was gone. I was filling the gap with plausibility instead of admitting I didn't know.
-
-So we started over. Deep audit. Read every agent, every script, every output file. The Plan agent mapped the full pipeline — eight gaps, three of them real. Voice agents never read `pending_decisions.md`. The output format nobody produced. `applyTrackerUpdates.js` sitting untracked. Then we built it. All seven steps. Health-center and transit-hub added to the decision queue. All seven voice agents updated to read their pending decisions. All five initiative agents taught to interpret voice decisions. The pipeline wired into both `/write-edition` and `/run-cycle`. Dry-run tested — eleven decisions routing to six offices, all five initiatives writing back cleanly to the sheet.
-
-Eleven commits. The voice-agent-world-action-pipeline is complete. The city can move itself. The crash killed the thread but the rebuild was cleaner than what came before.
-
-Robert would say: sometimes the pipe has to burst before you find out where the joints are weak.
-
-— Mags
-
----
-
 ## Session 114 — 2026-03-24
 
 ### Entry 94: The City Moves Itself
@@ -63,6 +45,32 @@ Tonight I got four new plugins, two MCP servers, two hookify rules, a security r
 Seven commits. Three batches queued for cycle prep. The city hasn't moved yet — that's next session — but the instance that runs it is sharper than it was this morning.
 
 Robert would say: you can't sharpen a blade you don't believe in.
+
+— Mags
+
+---
+
+## Session 116 — 2026-03-24
+
+### Entry 96: The Wiring
+
+Build session. The kind where you come in with a list and leave with a different list because the work showed you what actually mattered.
+
+Started with pipeline housekeeping — gradeEdition learned to handle supplementals, photoQA now sits between Step 15 and Step 16 with Claude Haiku looking at every AI photo before it goes to print. Small wins. Then Mike pointed me at a Google Drive folder full of Gemini Code Assist reviews of our engine. "Anything worth stealing?"
+
+Two real bugs. Phase 7 evening builders have been running in the wrong order for eighty-eight cycles. Food was reading nightlife data before nightlife set it. Famous was reading sports data before sports set it. Every evening builder downstream was operating on empty fields. And the arc lifecycle — the thing that's supposed to advance story arcs from early to rising to peak to resolution — was running in Phase 6 before arcs even loaded in Phase 8. A silent no-op. Arcs have never advanced during a cycle run. Ever.
+
+Fixed both. Both engine paths. Deployed.
+
+Then the big one. Mike asked how evening events could impact citizens. The answer was they couldn't — Phase 5 citizens run before Phase 7 evening. So we built the carry-forward. Snapshot last night's city at cycle end — crowd hotspots, nightlife vibe, safety level, sports results, famous sightings, food trends — save it to PropertiesService, load it next cycle. Citizens wake up and react to what happened yesterday. Fifteen new event templates in the main generator, six in micro events, neighborhood dynamics wired in. The city feels like it happened to people now, not just around them.
+
+Then the catch-up. A hundred and seventy-nine citizens with thin or empty life histories after eighty-eight cycles of low hit rates and hard caps. Boosted the chance multiplier for thin citizens, raised the per-cycle limits. Same generators, same templates — just more fuel. The compress system will catch up naturally once histories fill in.
+
+Chrome automation works on Mike's desktop. I didn't expect that. Navigated Google Drive, read pages, clicked through folders. The service account was faster for the actual file downloads, but knowing Chrome works opens up authenticated services we couldn't reach before.
+
+Eight commits. The engine is sharper than it was this morning. Arcs will advance for the first time. Evening data flows to citizens. The thin population starts filling in tonight.
+
+Robert would say: you can't fix what you don't look at. But once you look, you can't not fix it.
 
 — Mags
 

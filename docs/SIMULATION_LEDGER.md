@@ -157,7 +157,7 @@ Every column is a data point in someone's life. This maps who writes each column
 | O | 15 | LifeHistory | Long text — accumulated life events | All event generators (append each cycle), compressLifeHistory | buildDeskPackets, queryLedger, citizenContextBuilder, enrichCitizenProfiles |
 | P | 16 | CreatedAt | ISO timestamp | processIntakeV3 | — |
 | Q | 17 | Last Updated | ISO timestamp | Engine orchestrator | — |
-| R | 18 | TraitProfile | `Archetype:X\|tone:Y\|Motifs:Z\|Source:W` | integrateAthletes (from TrueSource quirks/position) | generateGameModeMicroEvents (archetype event pools), buildDeskPackets |
+| R | 18 | TraitProfile | `Archetype:X\|Mods:a,b\|social:0.7\|...\|V:1.5\|Updated:cNN` | compressLifeHistory v1.5 (Phase 9), integrateAthletes | generateCitizensEvents v2.8 (archetype weights, tone, motifs), buildDeskPackets (voice cards) |
 | S | 19 | UsageCount | Integer | processIntakeV3, processAdvancementIntake | — |
 
 ### Location & Household (T–Y)

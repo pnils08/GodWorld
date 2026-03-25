@@ -38,7 +38,8 @@ Skill files define the detailed instructions: `/write-edition` (steps 1-21), `/w
 |---|------|-----------------|------------|-------------|
 | 14 | Save edition | Write final .txt to `editions/` | Step 13 (approved) | Edition not in canon archive |
 | 15 | Photos | `node scripts/generate-edition-photos.js` | Step 14 | No visual content. Uses Together AI (FLUX.1-schnell). Use `--credits-only` for supplementals. |
-| 16 | PDF | `node scripts/generate-edition-pdf.js` | Step 15 | No print edition. Check that all articles render (S66 bug: `---` separator dropped an article). |
+| 15.5 | Photo QA | `node scripts/photoQA.js output/photos/{slug}` | Step 15 | Claude Haiku Vision evaluates each photo — match, tone, anachronism, Oakland aesthetic. Pass/flag/fail. ~$0.01/photo. **S116** |
+| 16 | PDF | `node scripts/generate-edition-pdf.js` | Step 15.5 | No print edition. Check that all articles render (S66 bug: `---` separator dropped an article). |
 | 17 | Drive upload | `node scripts/saveToDrive.js --type edition` | Steps 14-16 | Edition not archived off-disk |
 | 18 | Edition brief | Update `output/latest_edition_brief.md` | Step 14 | Discord bot and agents reference stale brief |
 | 19 | Discord refresh | Restart bot to pick up new brief | Step 18 | Bot discusses old edition |

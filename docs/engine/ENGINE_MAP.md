@@ -4,7 +4,7 @@
 
 **Source:** `phase01-config/godWorldEngine2.js` v2.14 — two identical engine paths (live + dry-run/replay).
 
-**Last verified:** 2026-03-23, Session 113 (engine phases unchanged since S83; post-engine pipeline updated S113)
+**Last verified:** 2026-03-24, Session 116 (Phase 7 reordered, arc lifecycle moved to Phase 8, evening carry-forward added, catch-up boost deployed)
 
 ---
 
@@ -16,8 +16,9 @@
 | 1-AdvanceTime | `advanceWorldTime_()` | godWorldEngine2.js | Increment cycle counter, set simulation date |
 | 1-Calendar | `advanceSimulationCalendar_()` | phase01-config/advanceSimulationCalendar.js | Set holiday, season, isFirstFriday, isCreationDay on ctx.summary |
 | 1-ResetAudit | `resetCycleAuditIssues_()` | godWorldEngine2.js | Clear previous cycle's audit flags |
+| 1-PrevEvening | `loadPreviousEvening_()` | phase01-config/loadPreviousEvening.js | Load previous cycle's evening snapshot from PropertiesService. **S116** |
 
-**ctx.summary after Phase 1:** `cycleId`, `simDate`, `simYear`, `season`, `holiday`, `holidayPriority`, `isFirstFriday`, `isCreationDay`
+**ctx.summary after Phase 1:** `cycleId`, `simDate`, `simYear`, `season`, `holiday`, `holidayPriority`, `isFirstFriday`, `isCreationDay`, `previousEvening`
 
 ---
 
@@ -198,8 +199,9 @@
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
 | 9-DigestSummary | `applyCompressedDigestSummary_()` | phase09-digest/applyCompressionDigestSummary.js | Compress cycle data for summary |
-| 9-CompressLifeHistory | `compressLifeHistory_()` | utilities/compressLifeHistory.js | LifeHistory → TraitProfile compression |
+| 9-CompressLifeHistory | `compressLifeHistory_()` | utilities/compressLifeHistory.js | LifeHistory → TraitProfile compression (v1.5) |
 | 9-FinalizePopulation | `finalizeWorldPopulation_()` | phase03-population/finalizeWorldPopulation.js | Lock population numbers |
+| 9-EveningSnapshot | `snapshotEveningForCarryForward_()` | phase09-digest/finalizeCycleState.js | Snapshot evening data for next cycle's citizen events. **S116** |
 | 9-FinalizeCycleState | `finalizeCycleState_()` | phase09-digest/finalizeCycleState.js | Lock cycle state |
 
 ---
@@ -225,6 +227,7 @@
 | 10-MediaBriefing | `generateMediaBriefing_()` | phase07-evening-media/mediaRoomBriefingGenerator.js | Generate media room briefing |
 | 10-MediaLedger | `recordMediaLedger_()` | phase10-persistence/recordMediaLedger.js | Archive media events |
 | 10-CycleSeed | `saveCycleSeed_()` | phase10-persistence/saveV3Seeds.js | Save RNG seed for replay |
+| 10-EveningSnapshot | `saveEveningSnapshot_()` | phase09-digest/finalizeCycleState.js | Save evening snapshot to PropertiesService (~800 bytes). **S116** |
 | 10-ExecuteIntents | `executePersistIntents_()` | utilities/writeIntents.js | Execute all deferred write-intents |
 
 ---

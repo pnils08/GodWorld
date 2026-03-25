@@ -306,8 +306,8 @@ Audit revealed Middle, ClockMode, OrginCity, Last Updated, UsageCount are ALL ac
 
 ### Phase D: Enforce LifeHistory Compression (Future)
 
-`compressLifeHistory.js` (v1.2) exists but needs:
-1. Regular scheduling (every 10-20 cycles)
+`compressLifeHistory.js` (v1.5) runs in Phase 9 every 5 cycles. S116: PrevEvening tag added.
+1. ~~Regular scheduling~~ — runs automatically in engine Phase 9
 2. Max text length enforcement for Simulation_Ledger.LifeHistory column
 3. Monitoring of compression ratio
 

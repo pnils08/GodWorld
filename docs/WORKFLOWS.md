@@ -22,6 +22,7 @@ node scripts/buildDeskFolders.js [cycle]  # Step 7: per-desk workspaces
 node scripts/applyTrackerUpdates.js [cycle] --apply  # Optional: write initiative decisions to sheet
 node scripts/buildDecisionQueue.js [cycle]  # Optional: refresh voice agent decision queues before edition
 node scripts/generate-edition-photos.js   # Step 15: AI photos
+node scripts/photoQA.js output/photos/eXX # Step 15.5: Photo QA (Vision API)
 node scripts/generate-edition-pdf.js      # Step 16: tabloid PDF
 node scripts/saveToDrive.js --type edition # Step 17: Drive upload
 node scripts/buildMaraPacket.js [cycle] [file] # Step 12: Mara audit packet

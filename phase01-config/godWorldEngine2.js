@@ -146,6 +146,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-PrevEvening', function() { loadPreviousEvening_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 2: WORLD STATE (MUST run BEFORE population/events)
@@ -322,6 +323,7 @@ function runWorldCycle() {
   // v2.13: Compress LifeHistory into TraitProfiles for archetype-aware event generation
   safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });
+  safePhaseCall_(ctx, 'Phase9-EveningSnapshot', function() { snapshotEveningForCarryForward_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizeCycleState', function() { finalizeCycleState_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
@@ -351,6 +353,8 @@ function runWorldCycle() {
   // v2.12: Save cycle seed for replay capability
   safePhaseCall_(ctx, 'Phase10-CycleSeed', function() { saveCycleSeed_(ctx); });
 
+  // Save evening snapshot for next cycle's citizen events
+  safePhaseCall_(ctx, 'Phase10-EveningSnapshot', function() { saveEveningSnapshot_(ctx); });
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 
@@ -1563,6 +1567,7 @@ function runCyclePhases_(ctx) {
   // v2.13: Compress LifeHistory into TraitProfiles for archetype-aware event generation
   safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });
+  safePhaseCall_(ctx, 'Phase9-EveningSnapshot', function() { snapshotEveningForCarryForward_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizeCycleState', function() { finalizeCycleState_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
@@ -1586,6 +1591,8 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase10-MediaLedger', function() { recordMediaLedger_(ctx); });
   safePhaseCall_(ctx, 'Phase10-CycleSeed', function() { saveCycleSeed_(ctx); });
 
+  // Save evening snapshot for next cycle's citizen events
+  safePhaseCall_(ctx, 'Phase10-EveningSnapshot', function() { saveEveningSnapshot_(ctx); });
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 

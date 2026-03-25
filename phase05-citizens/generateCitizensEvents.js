@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * Citizens Events Engine v2.7 (TraitProfile consumption + template slotter)
+ * Citizens Events Engine v2.8 (Previous evening carry-forward)
  * ============================================================================
  *
  * Backward compatible:
@@ -522,6 +522,7 @@ function generateCitizensEvents_(ctx) {
       if (tags[ti].indexOf("arc:") === 0) return "Arc";
       if (tags[ti].indexOf("arcType:") === 0) return "Arc";
     }
+    if (has("source:prevEvening")) return "PrevEvening";
     if (has("source:neighborhood")) return "Neighborhood";
     if (has("source:firstFriday")) return "FirstFriday";
     if (has("source:creationDay")) return "CreationDay";
@@ -692,6 +693,99 @@ function generateCitizensEvents_(ctx) {
       pool.push(makeEntry("noticed the air turn humid as weather shifted", ["source:weather", "weather:warm-front"], 1.0, false));
     } else if (frontType === 'atmospheric_river') {
       pool.push(makeEntry("hunkered down as the atmospheric river arrived", ["source:weather", "weather:atmospheric-river"], 1.25, false));
+    }
+
+    return pool;
+  }
+
+  // =========================================================================
+  // PREVIOUS EVENING POOL (carry-forward from last cycle)
+  // =========================================================================
+  function previousEveningPool_(neighborhood) {
+    var pool = [];
+    var prev = S.previousEvening;
+    if (!prev) return pool;
+
+    // Crowd hotspots — citizen recalls last night's busiest areas
+    var hotspots = prev.crowdHotspots || [];
+    if (hotspots.length > 0) {
+      pool.push(makeEntry("heard " + hotspots[0] + " was packed last night",
+        ["source:prevEvening", "evening:crowd"], 1.1, false));
+      if (hotspots.length > 1) {
+        pool.push(makeEntry("avoided " + hotspots[1] + " after hearing about last night's crowds",
+          ["source:prevEvening", "evening:crowd"], 1.05, false));
+      }
+    }
+    // Citizen's own neighborhood was a hotspot
+    if (neighborhood && prev.topCrowds && prev.topCrowds[neighborhood] >= 6) {
+      pool.push(makeEntry("noticed the neighborhood was still buzzing from last night",
+        ["source:prevEvening", "evening:crowd", "nh:" + neighborhood], 1.15, false));
+    }
+
+    // Nightlife volume
+    var vol = prev.nightlifeVolume || 0;
+    if (vol >= 7) {
+      pool.push(makeEntry("still feeling the energy from last night's city buzz",
+        ["source:prevEvening", "evening:nightlife"], 1.1, false));
+      pool.push(makeEntry("overheard coworkers talking about last night's scene",
+        ["source:prevEvening", "evening:nightlife"], 1.0, false));
+    } else if (vol <= 2) {
+      pool.push(makeEntry("noticed the city was quieter than usual last night",
+        ["source:prevEvening", "evening:nightlife"], 1.0, false));
+    }
+
+    // Nightlife vibe
+    var vibe = prev.nightlifeVibe || "normal";
+    if (vibe === "lively" || vibe === "electric" || vibe === "celebratory") {
+      pool.push(makeEntry("someone mentioned last night felt electric downtown",
+        ["source:prevEvening", "evening:vibe"], 1.05, false));
+    } else if (vibe === "cozy" || vibe === "pub-crawl") {
+      pool.push(makeEntry("heard folks kept things low-key last night",
+        ["source:prevEvening", "evening:vibe"], 1.0, false));
+    }
+
+    // Evening safety
+    var safety = prev.eveningSafety || "normal";
+    if (safety === "tense" || safety === "uneasy") {
+      pool.push(makeEntry("stayed cautious after hearing last night felt tense",
+        ["source:prevEvening", "evening:safety"], 1.15, false));
+      pool.push(makeEntry("noticed neighbors being more watchful today",
+        ["source:prevEvening", "evening:safety"], 1.1, false));
+    } else if (safety === "celebratory" || safety === "festive-crowded") {
+      pool.push(makeEntry("still buzzing from last night's celebrations",
+        ["source:prevEvening", "evening:safety"], 1.1, false));
+    }
+
+    // Evening traffic
+    var traffic = prev.eveningTraffic || "light";
+    if (traffic === "heavy" || traffic === "gridlock") {
+      pool.push(makeEntry("adjusted today's plans after last night's gridlock",
+        ["source:prevEvening", "evening:traffic"], 1.05, false));
+    }
+
+    // Food trend
+    if (prev.foodTrend) {
+      pool.push(makeEntry("heard about " + prev.foodTrend + " trending at local restaurants",
+        ["source:prevEvening", "evening:food"], 1.0, false));
+    }
+
+    // Famous sightings
+    var famous = prev.famousNames || [];
+    if (famous.length > 0) {
+      pool.push(makeEntry("overheard someone saw " + famous[0] + " last night",
+        ["source:prevEvening", "evening:famous"], 1.1, false));
+    }
+
+    // Streaming trend
+    if (prev.streamingTrend) {
+      pool.push(makeEntry("caught a conversation about " + prev.streamingTrend + " everyone's watching",
+        ["source:prevEvening", "evening:streaming"], 1.0, false));
+    }
+
+    // Evening sports
+    if (prev.eveningSports) {
+      pool.push(makeEntry("heard folks still talking about last night's " + prev.eveningSports,
+        ["source:prevEvening", "evening:sports"], 1.1, false));
     }
 
     return pool;
@@ -987,6 +1081,13 @@ function generateCitizensEvents_(ctx) {
       if (weather.impact >= 1.3) chance += 0.003;
     }
 
+    // v2.8: Previous evening crowd modifier
+    if (S.previousEvening && S.previousEvening.topCrowds) {
+      var prevCrowdScore = S.previousEvening.topCrowds[neighborhood] || 0;
+      if (prevCrowdScore >= 6) chance += 0.008;
+      if (prevCrowdScore >= 8) chance += 0.005;
+    }
+
     if (typeof getCombinedEventBoost_ === "function") {
       var eventBoost = getCombinedEventBoost_(ctx, popId);
       chance *= eventBoost;
@@ -1059,6 +1160,12 @@ function generateCitizensEvents_(ctx) {
     var wv35 = weatherV35Pool_();
     for (var wi = 0; wi < wv35.length; wi++) {
       pool.push(makeEntry(wv35[wi].text, mergeTags(wv35[wi].tags, calendarTags), wv35[wi].weight, false));
+    }
+
+    // v2.8: Previous evening carry-forward
+    var prevEvePool = previousEveningPool_(neighborhood);
+    for (var pei = 0; pei < prevEvePool.length; pei++) {
+      pool.push(makeEntry(prevEvePool[pei].text, mergeTags(prevEvePool[pei].tags, calendarTags), prevEvePool[pei].weight, false));
     }
 
     // Neighborhood

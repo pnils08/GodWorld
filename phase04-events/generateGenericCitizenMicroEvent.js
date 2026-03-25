@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * generateGenericCitizenMicroEvents_ v2.5 (tiered micro-events for all citizen tiers)
+ * generateGenericCitizenMicroEvents_ v2.6 (previous evening carry-forward + neighborhood dynamics)
  * ============================================================================
  * Log schema unchanged: [Date, POPID, Name, Category, Text, NeighborhoodOrEngine, Cycle]
  * Optional determinism: ctx.rng or ctx.config.rngSeed (+cycle mix)
@@ -339,9 +339,34 @@ function generateGenericCitizenMicroEvents_(ctx) {
     ? ["felt welcomed by neighborhood energy", "noticed community members connecting", "appreciated the local camaraderie"]
     : [];
 
+  // v2.6: Previous evening carry-forward
+  var prevEvePool = [];
+  var prevEve = S.previousEvening;
+  if (prevEve) {
+    var prevHotspots = prevEve.crowdHotspots || [];
+    if (prevHotspots.length > 0) {
+      prevEvePool.push("heard " + prevHotspots[0] + " was lively last night");
+    }
+    if ((prevEve.nightlifeVolume || 0) >= 6) {
+      prevEvePool.push("sensed the after-effects of a busy night in the city");
+    }
+    if (prevEve.eveningSafety === "tense" || prevEve.eveningSafety === "uneasy") {
+      prevEvePool.push("noticed extra caution in the neighborhood today");
+    }
+    if (prevEve.eveningSafety === "celebratory" || prevEve.eveningSafety === "festive-crowded") {
+      prevEvePool.push("caught lingering festive energy from last night");
+    }
+    if (prevEve.eveningSports && prevEve.eveningSports !== "(none)") {
+      prevEvePool.push("overheard sports talk from last night's game");
+    }
+    if (prevEve.famousNames && prevEve.famousNames.length > 0) {
+      prevEvePool.push("heard someone spotted a celebrity in town last night");
+    }
+  }
+
   // Build basePool
   var basePool = base
-    .concat(seasonal, weatherPool, moodPool, chaosPool, sentimentPool, econPool, culturalActivityPool, communityPool);
+    .concat(seasonal, weatherPool, moodPool, chaosPool, sentimentPool, econPool, culturalActivityPool, communityPool, prevEvePool);
 
   if (holiday !== "none" && holidayPools[holiday]) basePool = basePool.concat(holidayPools[holiday]);
   if (isFirstFriday) basePool = basePool.concat(firstFridayPool);
@@ -446,6 +471,25 @@ function generateGenericCitizenMicroEvents_(ctx) {
     var pool = basePool.slice();
     if (neighborhood && neighborhoodPool[neighborhood]) pool = pool.concat(neighborhoodPool[neighborhood]);
 
+    // v2.6: Neighborhood dynamics awareness
+    if (neighborhood && typeof getNeighborhoodDynamics_ === 'function') {
+      var nhDyn = getNeighborhoodDynamics_(ctx, neighborhood);
+      if (nhDyn) {
+        if ((nhDyn.nightlife || 1) >= 1.4 && artsNeighborhoods.indexOf(neighborhood) >= 0) {
+          pool.push("felt the creative buzz of " + neighborhood + "'s nightlife");
+        }
+        if ((nhDyn.communityEngagement || 1) >= 1.4) {
+          pool.push("felt warmth from " + neighborhood + "'s community connections");
+        }
+        if ((nhDyn.sentiment || 0) <= -0.3) {
+          pool.push("picked up on unease specific to " + neighborhood);
+        }
+        if ((nhDyn.sentiment || 0) >= 0.4) {
+          pool.push("felt " + neighborhood + "'s upbeat neighborhood mood");
+        }
+      }
+    }
+
     var pick = uniquePickGlobal_(pool);
     if (!pick) continue;
 
@@ -460,6 +504,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
     else if (sportsPoolArr.indexOf(pick) >= 0) tag = "Sports";
     else if (culturalActivityPool.indexOf(pick) >= 0) tag = "Cultural";
     else if (communityPool.indexOf(pick) >= 0) tag = "Community";
+    else if (prevEvePool.indexOf(pick) >= 0) tag = "PrevEvening";
 
     var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
     var line = stamp + " — [" + tag + "] " + pick;

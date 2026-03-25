@@ -101,6 +101,96 @@ function finalizeCycleState_(ctx) {
 
 /**
  * ============================================================================
+ * snapshotEveningForCarryForward_ v1.0
+ * ============================================================================
+ *
+ * Builds a compact snapshot of this cycle's evening data for carry-forward
+ * to the next cycle. Citizens in Phase 5 can't see Phase 7 evening data,
+ * so we snapshot it here (Phase 9, after Phase 7 is done) and restore it
+ * next cycle via loadPreviousEvening_.
+ *
+ * People's days are shaped by what happened yesterday, not tonight.
+ *
+ * Estimated snapshot size: 500-1500 bytes JSON.
+ * Storage: PropertiesService (9KB per-property limit, 500KB total).
+ *
+ * ============================================================================
+ */
+
+function snapshotEveningForCarryForward_(ctx) {
+  var S = ctx.summary || {};
+  var nightlife = S.nightlife || {};
+  var food = S.eveningFood || {};
+  var sightings = S.famousSightings || [];
+
+  var snapshot = {
+    cycle: S.cycleId || 0,
+    crowdHotspots: S.crowdHotspots || [],
+    nightlifeVolume: S.nightlifeVolume || 0,
+    nightlifeVibe: nightlife.vibe || 'normal',
+    eveningSafety: S.eveningSafety || 'normal',
+    eveningTraffic: S.eveningTraffic || 'light',
+    foodTrend: (food.trend && food.trend !== 'none') ? food.trend : '',
+    streamingTrend: S.streamingTrend || '',
+    eveningSports: S.eveningSports || '',
+    famousNames: []
+  };
+
+  // Compact: just name + neighborhood for first 3 sightings
+  for (var i = 0; i < Math.min(sightings.length, 3); i++) {
+    var s = sightings[i];
+    if (s && s.name) {
+      snapshot.famousNames.push(s.name + (s.neighborhood ? ' in ' + s.neighborhood : ''));
+    }
+  }
+
+  // Compact crowd: top 4 neighborhoods with scores
+  var crowdMap = S.crowdMap || {};
+  var crowdKeys = Object.keys(crowdMap);
+  var crowdPairs = [];
+  for (var ci = 0; ci < crowdKeys.length; ci++) {
+    crowdPairs.push({ hood: crowdKeys[ci], score: crowdMap[crowdKeys[ci]] });
+  }
+  crowdPairs.sort(function(a, b) { return b.score - a.score; });
+  snapshot.topCrowds = {};
+  for (var ti = 0; ti < Math.min(crowdPairs.length, 4); ti++) {
+    snapshot.topCrowds[crowdPairs[ti].hood] = crowdPairs[ti].score;
+  }
+
+  S.eveningSnapshot = snapshot;
+  ctx.summary = S;
+  Logger.log('snapshotEveningForCarryForward_: Built snapshot for cycle ' + snapshot.cycle +
+    ' (' + snapshot.crowdHotspots.length + ' hotspots, vol=' + snapshot.nightlifeVolume +
+    ', safety=' + snapshot.eveningSafety + ')');
+}
+
+
+function saveEveningSnapshot_(ctx) {
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (isDryRun) {
+    Logger.log('saveEveningSnapshot_: Skipped (dry-run mode)');
+    return;
+  }
+
+  var S = ctx.summary || {};
+  var snapshot = S.eveningSnapshot;
+  if (!snapshot) {
+    Logger.log('saveEveningSnapshot_: No snapshot to save');
+    return;
+  }
+
+  try {
+    var json = JSON.stringify(snapshot);
+    PropertiesService.getScriptProperties().setProperty('PREV_EVENING_JSON', json);
+    Logger.log('saveEveningSnapshot_: Saved ' + json.length + ' bytes for cycle ' + snapshot.cycle);
+  } catch (e) {
+    Logger.log('saveEveningSnapshot_: Failed - ' + e.message);
+  }
+}
+
+
+/**
+ * ============================================================================
  * FINALIZE CYCLE STATE REFERENCE
  * ============================================================================
  *

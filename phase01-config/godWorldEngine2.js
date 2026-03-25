@@ -244,9 +244,8 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase6-PatternDetect', function() { applyPatternDetection_(ctx); });
   safePhaseCall_(ctx, 'Phase6-ShockMonitor', function() { applyShockMonitor_(ctx); });
 
-  safePhaseCall_(ctx, 'Phase6-ArcLifecycle', function() { processArcLifecycle_(ctx); });
-  safePhaseCall_(ctx, 'Phase6-StorylineStatus', function() { updateStorylineStatus_(ctx); });
-  safePhaseCall_(ctx, 'Phase6-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
+  // Arc lifecycle moved to Phase 8 (after v3PreloadContext_ loads eventArcs)
+  // Was here as Phase6-ArcLifecycle — but arcs aren't loaded until Phase 8.
   safePhaseCall_(ctx, 'Phase6-Textures', function() { textureTriggerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase6-TransitSignals', function() {
     if (typeof getTransitStorySignals_ === 'function') {
@@ -281,12 +280,16 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   // PHASE 7: EVENING + MEDIA SYSTEMS
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
-  safePhaseCall_(ctx, 'Phase7-Famous', function() { buildEveningFamous_(ctx); });
-  safePhaseCall_(ctx, 'Phase7-Food', function() { buildEveningFood_(ctx); });
+  // Phase 7 ordering: producers before consumers
+  // CityEvents/Nightlife/Sports SET S.cityEvents, S.nightlife, S.nightlifeVolume, S.eveningSports
+  // Food READS S.nightlifeVolume; Famous/EveningMedia READ S.eveningSports
+  // CitySystems READS S.nightlife, S.eveningSports, S.cityEvents (all three)
   safePhaseCall_(ctx, 'Phase7-CityEvents', function() { buildCityEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase7-Nightlife', function() { buildNightlife_(ctx); });
   safePhaseCall_(ctx, 'Phase7-Sports', function() { buildEveningSportsAndStreaming_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-Food', function() { buildEveningFood_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-Famous', function() { buildEveningFamous_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaFeedback', function() { runMediaFeedbackEngine_(ctx); });
@@ -303,6 +306,10 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase8-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
+  // Arc lifecycle runs here — after v3PreloadContext_ loads eventArcs into ctx.summary
+  safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
 
@@ -1487,9 +1494,8 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase6-Migration', function() { applyMigrationDrift_(ctx); });
   safePhaseCall_(ctx, 'Phase6-PatternDetect', function() { applyPatternDetection_(ctx); });
   safePhaseCall_(ctx, 'Phase6-ShockMonitor', function() { applyShockMonitor_(ctx); });
-  safePhaseCall_(ctx, 'Phase6-ArcLifecycle', function() { processArcLifecycle_(ctx); });
-  safePhaseCall_(ctx, 'Phase6-StorylineStatus', function() { updateStorylineStatus_(ctx); });
-  safePhaseCall_(ctx, 'Phase6-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
+  // Arc lifecycle moved to Phase 8 (after v3PreloadContext_ loads eventArcs)
+  // Was here as Phase6-ArcLifecycle — but arcs aren't loaded until Phase 8.
   safePhaseCall_(ctx, 'Phase6-Textures', function() { textureTriggerEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase6-TransitSignals', function() {
     if (typeof getTransitStorySignals_ === 'function') {
@@ -1524,12 +1530,16 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // PHASE 7: EVENING + MEDIA SYSTEMS
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
-  safePhaseCall_(ctx, 'Phase7-Famous', function() { buildEveningFamous_(ctx); });
-  safePhaseCall_(ctx, 'Phase7-Food', function() { buildEveningFood_(ctx); });
+  // Phase 7 ordering: producers before consumers
+  // CityEvents/Nightlife/Sports SET S.cityEvents, S.nightlife, S.nightlifeVolume, S.eveningSports
+  // Food READS S.nightlifeVolume; Famous/EveningMedia READ S.eveningSports
+  // CitySystems READS S.nightlife, S.eveningSports, S.cityEvents (all three)
   safePhaseCall_(ctx, 'Phase7-CityEvents', function() { buildCityEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase7-Nightlife', function() { buildNightlife_(ctx); });
   safePhaseCall_(ctx, 'Phase7-Sports', function() { buildEveningSportsAndStreaming_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-Food', function() { buildEveningFood_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-Famous', function() { buildEveningFamous_(ctx); });
+  safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaFeedback', function() { runMediaFeedbackEngine_(ctx); });
@@ -1543,6 +1553,10 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   safePhaseCall_(ctx, 'Phase8-CycleWeight', function() { applyCycleWeightForLatestCycle_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Preload', function() { v3PreloadContext_(ctx); });
+  // Arc lifecycle runs here — after v3PreloadContext_ loads eventArcs into ctx.summary
+  safePhaseCall_(ctx, 'Phase8-ArcLifecycle', function() { processArcLifecycle_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-StorylineStatus', function() { updateStorylineStatus_(ctx); });
+  safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
   safePhaseCall_(ctx, 'Phase8-ChicagoCitizens', function() { generateChicagoCitizens_(ctx); });

@@ -150,8 +150,8 @@
 | 6-Migration | `applyMigrationDrift_()` | phase06-analysis/applyMigrationDrift.js | Population movement trends |
 | 6-PatternDetect | `applyPatternDetection_()` | phase06-analysis/applyPatternDetection.js | Multi-cycle pattern recognition |
 | 6-ShockMonitor | `applyShockMonitor_()` | phase06-analysis/applyShockMonitor.js | Detect sudden state changes |
-| 6-ArcLifecycle | `processArcLifecycle_()` | phase06-analysis/arcLifecycleEngine.js | Advance arc phases (early→rising→peak→decline→resolved) |
-| 6-StorylineStatus | `updateStorylineStatus_()` | phase06-analysis/updateStorylineStatusv1.2.js | Track storyline health |
+| ~~6-ArcLifecycle~~ | ~~`processArcLifecycle_()`~~ | — | **Moved to Phase 8** (S116). Was no-op here — arcs load in Phase 8. |
+| ~~6-StorylineStatus~~ | ~~`updateStorylineStatus_()`~~ | — | **Moved to Phase 8** (S116). Depends on arc data. |
 | 6-Textures | `textureTriggerEngine_()` | phase07-evening-media/textureTriggers.js | Generate neighborhood texture triggers |
 | 6-TransitSignals | `getTransitStorySignals_()` | (conditional) | Transit-related story signals |
 | 6-FaithSignals | `getFaithStorySignals_()` | (conditional) | Faith-related story signals |
@@ -163,13 +163,13 @@
 
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
-| 7-EveningMedia | `buildEveningMedia_()` | phase07-evening-media/buildEveningMedia.js | TV, movies, streaming selection |
-| 7-Famous | `buildEveningFamous_()` | phase07-evening-media/buildEveningFamous.js | Celebrity/famous citizen sightings |
-| 7-Food | `buildEveningFood_()` | phase07-evening-media/buildEveningFood.js | Restaurant/food scene events |
-| 7-CityEvents | `buildCityEvents_()` | phase04-events/buildCityEvents.js | City-level event compilation |
-| 7-Nightlife | `buildNightlife_()` | phase07-evening-media/buildNightLife.js | Nightlife scene generation |
-| 7-Sports | `buildEveningSportsAndStreaming_()` | phase07-evening-media/sportsStreaming.js | Sports broadcasts, streaming |
-| 7-CitySystems | `buildCityEveningSystems_()` | phase07-evening-media/cityEveningSystems.js | Infrastructure/transit evening updates |
+| 7-CityEvents | `buildCityEvents_()` | phase04-events/buildCityEvents.js | City-level event compilation. **SETS** `S.cityEvents` |
+| 7-Nightlife | `buildNightlife_()` | phase07-evening-media/buildNightLife.js | Nightlife scene generation. **SETS** `S.nightlife`, `S.nightlifeVolume` |
+| 7-Sports | `buildEveningSportsAndStreaming_()` | phase07-evening-media/sportsStreaming.js | Sports broadcasts, streaming. **SETS** `S.eveningSports` |
+| 7-Food | `buildEveningFood_()` | phase07-evening-media/buildEveningFood.js | Restaurant/food scene events. Reads `S.nightlifeVolume` |
+| 7-Famous | `buildEveningFamous_()` | phase07-evening-media/buildEveningFamous.js | Celebrity/famous citizen sightings. Reads `S.eveningSports` |
+| 7-EveningMedia | `buildEveningMedia_()` | phase07-evening-media/buildEveningMedia.js | TV, movies, streaming selection. Reads `S.eveningSports` |
+| 7-CitySystems | `buildCityEveningSystems_()` | phase07-evening-media/cityEveningSystems.js | Infrastructure/transit evening updates. Reads `S.nightlife`, `S.eveningSports`, `S.cityEvents` |
 | 7-MediaPacket | `buildMediaPacket_()` | phase07-evening-media/buildMediaPacket.js | Compile media room briefing packet |
 | 7-MediaFeedback | `runMediaFeedbackEngine_()` | phase07-evening-media/mediaFeedbackEngine.js | Media coverage feedback loops |
 | 7-SeasonalSeeds | `applySeasonalStorySeeds_()` | phase07-evening-media/buildEveningMedia.js | Season-specific story prompts |
@@ -183,7 +183,10 @@
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
 | 8-CycleWeight | `applyCycleWeightForLatestCycle_()` | phase09-digest/applyCycleWeightForLatestCycle.js | Signal scoring (low/medium/high) |
-| 8-V3Preload | `v3PreloadContext_()` | phase08-v3-chicago/v3preLoader.js | Load arc/domain/neighborhood state from ledgers |
+| 8-V3Preload | `v3PreloadContext_()` | phase08-v3-chicago/v3preLoader.js | Load arc/domain/neighborhood state from ledgers. **LOADS** `S.eventArcs` |
+| 8-ArcLifecycle | `processArcLifecycle_()` | phase06-analysis/arcLifecycleEngine.js | Advance arc phases (early→rising→peak→decline→resolved). **Moved from Phase 6 S116** |
+| 8-StorylineStatus | `updateStorylineStatus_()` | phase06-analysis/updateStorylineStatusv1.2.js | Track storyline health. **Moved from Phase 6 S116** |
+| 8-StorylineHealth | `monitorStorylineHealth_()` | phase06-analysis/hookLifecycleEngine.js | Monitor storyline decay. **Moved from Phase 6 S116** |
 | 8-V3Integration | `v3Integration_()` | phase08-v3-chicago/v3Integration.js | V3 module orchestrator (arcs, domains, textures, hooks) |
 | 8-DemographicDrift | `deriveDemographicDrift_()` | phase03-population/deriveDemographicDrift.js | Derive drift metrics |
 | 8-ChicagoCitizens | `generateChicagoCitizens_()` | phase05-citizens/generateChicagoCitizensv1.js | Chicago bureau citizen generation |

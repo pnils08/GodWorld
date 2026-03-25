@@ -17,13 +17,13 @@
 - **CLEANUP: Dead spreadsheet tabs** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`.
 - ~~**FIX: Press_Drafts ghost references**~~ — **DONE S113.** Removed Press_Drafts write from `mediaRoomIntake.js`, removed sheet creation/upgrade calls, cleaned comments in `applyStorySeeds.js`. Requires `clasp push` to deploy.
 - **REDESIGN: Intake system rebuild** — `editionIntake.js` has two known bugs (cycle detection, section parser) but the whole system needs redesign to better support journalism intake. 10 new citizens from education supplemental are parked in `Citizen_Usage_Intake` (status: pending) — route through new jlibs-based intake when ready. Spec draft: `docs/engine/INTAKE_REDESIGN.md` (30% — needs Mike's input). **Priority: Post-E89 target.** See also Phase 27.1.
-- **FIX: gradeEdition.js supplemental support** — Article parser, errata logging, desk mapping all need supplemental awareness.
+- ~~**FIX: gradeEdition.js supplemental support**~~ — **DONE S116.** Supplemental section headers, desk mapping, dynamic desk lists, separate output files (`grades_c{XX}_supplemental_{topic}.json`), type-aware deduplication in `edition_scores.json`. Tested against both C87 baylight and C88 education supplementals.
 - ~~**UPGRADE: Structured critique in gradeEdition.js**~~ — **DONE S113.** 3-signal feedback (reasoning, strengths/weaknesses, directive) per desk and reporter. Flows through `grades_c{XX}.json` → `buildDeskFolders.js` → `previous_grades.md` → agents read at boot. Based on Reagent + RLCF research.
 - ~~**FEATURE: RD diversity injection for agents**~~ — **DONE S113.** 20 creative lenses for desk agents (buildDeskFolders.js), 10 political lenses for voice agents (buildVoiceWorkspaces.js). Random per run. Based on Harvard Recoding-Decoding (arxiv 2603.19519).
 
 - ~~**FIX: Citizen freshness weighting in buildDeskPackets.js**~~ — **DONE S114.** buildDeskPackets.js v2.4 sorts by freshness. 425 citizens with zero appearances rank first. Briefings tag [FRESH]. buildPopidArticleIndex.js writes JSON usage counts.
 
-- **FEATURE: Photo QA step in edition pipeline.** Send each AI-generated photo + article context to Claude Vision API. Evaluate: does the photo match the article? Wrong tone? Generic AI slop? Anachronistic details? Fits prosperity-era Oakland aesthetic? Flag or reject before PDF generation. Cost: ~16,000 tokens per edition (<$0.05). Fits between Step 15 (photos) and Step 16 (PDF). Script: read photo, base64-encode, send with article summary, get pass/fail + reason. **Priority: MEDIUM — build when next touching photo pipeline.** See `docs/RESEARCH.md` S115 Vision entry.
+- ~~**FEATURE: Photo QA step in edition pipeline.**~~ — **DONE S116.** `scripts/photoQA.js` — Claude Haiku Vision evaluates each photo against article context. Pass/flag/fail verdicts, QA report to `qa_report.json`. ~4K tokens per photo. Tested against E88 (2 photos) and education supplemental (3 photos). Fits between Step 15 and Step 16.
 
 ### Open — Architecture & Production
 

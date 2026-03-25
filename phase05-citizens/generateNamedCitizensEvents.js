@@ -79,7 +79,7 @@ function generateNamedCitizenEvents_(ctx) {
   S.cycleActiveCitizens = S.cycleActiveCitizens || [];
 
   var globalEvents = 0;
-  var GLOBAL_EVENT_CAP = 5;
+  var GLOBAL_EVENT_CAP = 10; // CATCH-UP: was 5, temporarily raised. Revert after ~5 cycles.
 
   // ═══════════════════════════════════════════════════════════════════════════
   // UNI + MED EVENT POOLS
@@ -416,6 +416,13 @@ function generateNamedCitizenEvents_(ctx) {
     // BASE PROBABILITY
     // ═══════════════════════════════════════════════════════════════════════
     var chance = 0.02;
+
+    // CATCH-UP: Boost chance for citizens with thin LifeHistory
+    var existingLife = row[iLife] ? row[iLife].toString() : "";
+    var lineCount = existingLife ? existingLife.split("\n").length : 0;
+    if (lineCount <= 2) chance *= 5;
+    else if (lineCount <= 5) chance *= 3;
+    else if (lineCount <= 10) chance *= 1.5;
 
     // Weather modifiers
     if (weather.impact >= 1.3) chance += 0.01;

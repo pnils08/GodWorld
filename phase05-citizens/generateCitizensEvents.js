@@ -153,7 +153,7 @@ function generateCitizensEvents_(ctx) {
 
   // Limit
   var count = 0;
-  var LIMIT = 10;
+  var LIMIT = 25; // CATCH-UP: was 10, temporarily raised to fill thin citizens. Revert after ~5 cycles.
 
   // Active citizens tracker (dedup) - use object for ES5 Set-like behavior
   var activeSetObj = Object.create(null);
@@ -1037,6 +1037,13 @@ function generateCitizensEvents_(ctx) {
 
     // Base chance
     var chance = 0.02;
+
+    // CATCH-UP: Boost chance for citizens with thin LifeHistory
+    var existingLife = row[iLife] ? row[iLife].toString() : "";
+    var lineCount = existingLife ? existingLife.split("\n").length : 0;
+    if (lineCount <= 2) chance *= 5;
+    else if (lineCount <= 5) chance *= 3;
+    else if (lineCount <= 10) chance *= 1.5;
 
     if (weather.impact >= 1.3) chance += 0.01;
     if (dynamics.sentiment <= -0.3) chance += 0.01;

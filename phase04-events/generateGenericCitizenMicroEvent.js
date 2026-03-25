@@ -75,7 +75,7 @@ function generateGenericCitizenMicroEvents_(ctx) {
   var sportsSeason = S.sportsSeason || "off-season";
 
   var eventCount = 0;
-  var EVENT_LIMIT = 12;
+  var EVENT_LIMIT = 25; // CATCH-UP: was 12, temporarily raised. Revert after ~5 cycles.
 
   // BASE POOL
   var base = [
@@ -437,6 +437,13 @@ function generateGenericCitizenMicroEvents_(ctx) {
     if (tier <= 1) chance = 0.50;
     else if (tier === 2) chance = 0.25;
     else chance = 0.10;
+
+    // CATCH-UP: Boost chance for citizens with thin LifeHistory
+    var existingLife = row[iLife] ? row[iLife].toString() : "";
+    var lineCount = existingLife ? existingLife.split("\n").length : 0;
+    if (lineCount <= 2) chance *= 5;
+    else if (lineCount <= 5) chance *= 3;
+    else if (lineCount <= 10) chance *= 1.5;
 
     if (weather.impact >= 1.3) chance += 0.01;
     if (weatherMood.comfortIndex && weatherMood.comfortIndex < 0.35) chance += 0.01;

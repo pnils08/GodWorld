@@ -270,6 +270,41 @@
         "letters": []
       },
       "noteText": "Auto-graded by gradeEdition.js. 12 articles, 0 errata entries."
+    },
+    {
+      "edition": 88,
+      "cycle": 88,
+      "type": "supplemental",
+      "topic": "education_first_week",
+      "date": "2026-03-25",
+      "grade": "B",
+      "maraGrade": "B",
+      "criticals": 0,
+      "warnings": 0,
+      "notes": 0,
+      "deskErrors": {
+        "culture": [],
+        "business": []
+      },
+      "noteText": "Auto-graded by gradeEdition.js. 3 articles, 0 errata entries. Supplemental: education_first_week."
+    },
+    {
+      "edition": 87,
+      "cycle": 87,
+      "type": "supplemental",
+      "topic": "baylight_labor",
+      "date": "2026-03-25",
+      "grade": "B",
+      "maraGrade": "B",
+      "criticals": 0,
+      "warnings": 0,
+      "notes": 0,
+      "deskErrors": {
+        "civic": [],
+        "culture": [],
+        "freelance": []
+      },
+      "noteText": "Auto-graded by gradeEdition.js. 4 articles, 0 errata entries. Supplemental: baylight_labor."
     }
   ]
 }

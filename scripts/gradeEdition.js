@@ -50,7 +50,15 @@ const DESK_HEADERS = {
   'LETTERS TO THE EDITOR': 'letters',
   'LETTERS': 'letters',
   'OPINION': 'sports', // P Slayer opinion lives under sports
-  'PODCAST': 'podcast'
+  'PODCAST': 'podcast',
+  // Supplemental section mappings
+  'EDUCATION': 'culture',
+  'INFRASTRUCTURE': 'civic',
+  'LIFESTYLE': 'culture',
+  'SOCIAL / THREAD': 'freelance',
+  'SOCIAL': 'freelance',
+  'ACCOUNTABILITY': 'freelance',
+  'FRONT PAGE': 'civic'
 };
 
 // --- Reporter-to-desk mapping ---
@@ -71,7 +79,11 @@ const REPORTER_DESK = {
   'Elliot Marbury': 'sports',
   'Selena Grant': 'chicago',
   'Talia Finch': 'chicago',
-  'Jax Caldera': 'freelance'
+  'Jax Caldera': 'freelance',
+  // Supplemental reporters
+  'Sharon Okafor': 'culture',
+  'Angela Reyes': 'culture',
+  'MintConditionOakTown': 'freelance'
 };
 
 // --- Parse edition text ---
@@ -85,7 +97,14 @@ function parseEdition(text) {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
 
-    // Detect desk headers (lines between ---- markers)
+    // Stop parsing at intake/metadata sections
+    if (line === 'ARTICLE TABLE' || line === 'ARTICLE TABLE — ENGINE INTAKE FORMAT' ||
+        line === 'STORYLINES UPDATED' || line === 'CITIZEN USAGE LOG' ||
+        line === 'CONTINUITY NOTES' || line.startsWith('## INTAKE')) {
+      break;
+    }
+
+    // Detect desk headers — both ---- and ############ delimited
     for (const [header, desk] of Object.entries(DESK_HEADERS)) {
       if (line === header || line.startsWith(header)) {
         currentDesk = desk;
@@ -396,6 +415,15 @@ function generateReporterCritique(name, articles, errata, grade, score) {
   return { reasoning, strengths, weaknesses, directive, empathy: { score: empathy.avgScore } };
 }
 
+// --- Supplemental detection ---
+function detectSupplemental(filename) {
+  const base = path.basename(filename).toLowerCase();
+  if (!base.startsWith('supplemental')) return null;
+  // Extract topic: supplemental_{topic}_c{XX}.txt → topic
+  const match = base.match(/^supplemental_(.+?)_c\d+\.txt$/);
+  return match ? match[1] : 'unknown';
+}
+
 // --- Main grading logic ---
 function gradeEdition(editionFile, cycle) {
   const editionText = fs.readFileSync(editionFile, 'utf-8');
@@ -403,8 +431,11 @@ function gradeEdition(editionFile, cycle) {
   const errata = parseErrata(cycle);
   const maraGrade = parseMaraGrade(cycle);
   const previousGrades = loadPreviousGrades(cycle, 4);
+  const supplementalTopic = detectSupplemental(editionFile);
+  const isSupplemental = !!supplementalTopic;
 
-  console.log(`\nGrading Edition ${cycle}`);
+  const label = isSupplemental ? `Supplemental (${supplementalTopic}) C${cycle}` : `Edition ${cycle}`;
+  console.log(`\nGrading ${label}`);
   console.log(`  Articles found: ${articles.length}`);
   console.log(`  Errata entries: ${errata.length}`);
   console.log(`  Mara grade: ${maraGrade || 'not found'}`);
@@ -412,7 +443,17 @@ function gradeEdition(editionFile, cycle) {
 
   // --- Grade per desk ---
   const desks = {};
-  const DESK_NAMES = ['civic', 'business', 'culture', 'sports', 'chicago', 'letters'];
+  // For supplementals: only grade desks that have articles (focused pieces)
+  // For editions: grade all standard desks
+  const STANDARD_DESKS = ['civic', 'business', 'culture', 'sports', 'chicago', 'letters'];
+  const activeDeskNames = isSupplemental
+    ? [...new Set(articles.map(a => a.desk))].filter(Boolean)
+    : STANDARD_DESKS;
+  // Include freelance if present in either type
+  if (!activeDeskNames.includes('freelance') && articles.some(a => a.desk === 'freelance')) {
+    activeDeskNames.push('freelance');
+  }
+  const DESK_NAMES = activeDeskNames;
 
   for (const desk of DESK_NAMES) {
     const deskArticles = articles.filter(a => a.desk === desk);
@@ -516,6 +557,8 @@ function gradeEdition(editionFile, cycle) {
 
   const result = {
     cycle,
+    type: isSupplemental ? 'supplemental' : 'edition',
+    ...(isSupplemental ? { topic: supplementalTopic } : {}),
     date: new Date().toISOString().split('T')[0],
     editionFile: path.basename(editionFile),
     overallGrade,
@@ -530,12 +573,15 @@ function gradeEdition(editionFile, cycle) {
   const gradesDir = path.join(ROOT, 'output', 'grades');
   if (!fs.existsSync(gradesDir)) fs.mkdirSync(gradesDir, { recursive: true });
 
-  const outPath = path.join(gradesDir, `grades_c${cycle}.json`);
+  const outFilename = isSupplemental
+    ? `grades_c${cycle}_supplemental_${supplementalTopic}.json`
+    : `grades_c${cycle}.json`;
+  const outPath = path.join(gradesDir, outFilename);
   fs.writeFileSync(outPath, JSON.stringify(result, null, 2));
   console.log(`\n  Written: ${outPath}`);
 
   // --- Print summary ---
-  console.log(`\n  === Edition ${cycle} Grade Report ===`);
+  console.log(`\n  === ${label} Grade Report ===`);
   console.log(`  Overall: ${overallGrade} (Mara: ${maraGrade || 'n/a'})`);
   console.log(`  Articles: ${articles.length} | Errata: ${errata.length}`);
   console.log('');
@@ -564,12 +610,19 @@ function gradeEdition(editionFile, cycle) {
       ? JSON.parse(fs.readFileSync(scoresPath, 'utf-8'))
       : { _description: 'Edition score history', scores: [] };
 
-    // Don't duplicate — check if this cycle is already scored
-    const alreadyScored = scoresData.scores.some(s => s.edition === cycle);
+    // Don't duplicate — check by cycle + type
+    const scoreKey = isSupplemental ? `${cycle}_supplemental_${supplementalTopic}` : `${cycle}`;
+    const alreadyScored = scoresData.scores.some(s =>
+      isSupplemental
+        ? s.edition === cycle && s.type === 'supplemental' && s.topic === supplementalTopic
+        : s.edition === cycle && s.type !== 'supplemental'
+    );
     if (!alreadyScored) {
       scoresData.scores.push({
         edition: cycle,
         cycle: cycle,
+        type: isSupplemental ? 'supplemental' : 'edition',
+        ...(isSupplemental ? { topic: supplementalTopic } : {}),
         date: new Date().toISOString().split('T')[0],
         grade: overallGrade,
         maraGrade: maraGrade || null,
@@ -579,12 +632,12 @@ function gradeEdition(editionFile, cycle) {
         deskErrors: Object.fromEntries(
           Object.entries(desks).map(([desk, data]) => [desk, data.criticalErrors > 0 ? [`${data.criticalErrors} critical errors`] : []])
         ),
-        noteText: `Auto-graded by gradeEdition.js. ${articles.length} articles, ${errata.length} errata entries.`,
+        noteText: `Auto-graded by gradeEdition.js. ${articles.length} articles, ${errata.length} errata entries.${isSupplemental ? ` Supplemental: ${supplementalTopic}.` : ''}`,
       });
       fs.writeFileSync(scoresPath, JSON.stringify(scoresData, null, 2));
-      console.log(`\n  Score appended to edition_scores.json (E${cycle}: ${overallGrade})`);
+      console.log(`\n  Score appended to edition_scores.json (${isSupplemental ? 'S' : 'E'}${cycle}: ${overallGrade})`);
     } else {
-      console.log(`\n  Score already exists for E${cycle} — skipped append`);
+      console.log(`\n  Score already exists for ${scoreKey} — skipped append`);
     }
   } catch (err) {
     console.warn('  edition_scores.json append failed: ' + err.message);

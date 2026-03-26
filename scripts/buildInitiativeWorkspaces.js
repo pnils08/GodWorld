@@ -16,7 +16,8 @@ const fs = require('fs');
 const path = require('path');
 
 // ─── CONFIG ──────────────────────────────────────────────
-const CYCLE = parseInt(process.argv[2]) || 87;
+const getCurrentCycle = require('../lib/getCurrentCycle');
+const CYCLE = getCurrentCycle();
 const CLEAN = process.argv.includes('--clean');
 
 const ROOT = path.resolve(__dirname, '..');

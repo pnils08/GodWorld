@@ -1,7 +1,7 @@
 # Mayor's Office — Agent Memory
 
 **Agent:** Mayor Avery Santana
-**Last Updated:** C87 (2026-03-15)
+**Last Updated:** C87 (2026-03-14)
 
 ## Output Directory
 Write to: `output/civic-voice/mayor_c{XX}.json`
@@ -30,7 +30,7 @@ Prior work: `output/civic-voice/mayor_c87.json`
 
 ## Council Dynamics (Active)
 - **Allies (OPP):** Denise Carter (D1), Rose Delgado (D3), Janae Rivers (D5), Terrence Mobley (D9)
-- **Swing:** Ramon Vega (D4, IND) — controls Finance Committee review (C89) on Stabilization Fund
+- **Swing:** Ramon Vega (D4, IND) — controls Finance Committee review on Stabilization Fund
 - **Opposition (CRC):** Warren Ashford (D7), Nina Chen (D8), Elliott Crane (D6, recovering)
 - **Independents:** Leonard Tran (D2) — pragmatic on infrastructure, splits on spending
 

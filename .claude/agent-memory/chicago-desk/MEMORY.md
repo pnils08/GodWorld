@@ -30,16 +30,18 @@ Last Updated: 2026-03-21 | Last edition written: E88 (C88)
 - E85: Roster includes real NBA names (Giddey, Kessler, Huerter) — these are intentional canonical imports per the packet/briefing. Use as given. NOT leaks.
 
 ## Bulls Records by Edition
+- E88 (C88): Bulls def. Orlando 4-2 (1st round). Game 5: Bulls 134, Magic 111 (Giddey 39pts/9rebs/4asst). Series avgs: Giddey 25/7/6, Trepagnier 20/8/5.3asst, Stanley 14pts/6asst. Franchise stability: "stable" (upgraded from "uncertain").
 - E87 (C87): Bulls 58-24 FINAL REGULAR SEASON. #1 seed East. L2 streak entering playoffs. Trepagnier ROY + All-Rookie 1st Team + NBA Cup MVP (16.7/8.2/5.1/1.3/1.5). Stanley All-Rookie 2nd Team (12.1pts/5.1asst/42%3pt). Giddey career year (19.8pts/7reb/7.4asst/1.4stl). Paulson Executive of the Year. Playoffs: (1) Bulls vs (8) Orlando.
 - E86 (C86): Bulls 56-22, W3 streak, best in East. Beat Knicks 107-99 (Dosunmu 24pts, Stanley 20/5/9/2, Kessler 18/12). Lost to Spurs 111-115 (Kessler 22/10, Trepagnier 9/8/5/2). Stanley 6th tech. Ownership statement: "Long term commitments were not made."
 - E85 (C85): Bulls 52-21, W6 streak, best record in East. OKC stomped 116-101. Trepagnier 29/11. Stanley chippy/technicals.
 - E84 (C84): Bulls 44-20 (per archive). Paulson sat courtside at Chase Center in Bulls red. Warriors 39-28.
 
 ## Paulson Thread Status
-- E84: Paulson at Chase Center in Bulls red. Golden State contact confirmed. Paulson silent.
-- E85: Still silent on Golden State. Bulls now 52-21. Bridgeport reading silence as answer.
-- E86: Ownership statement public — "Long term commitments were not made." Paulson silent on both Golden State AND the ownership statement. Warriors 39-28. Bridgeport shifting from patience to resigned acceptance.
+- E88: Still silent after first-round win over Orlando. Franchise stability upgraded to "stable." Bridgeport: phone face-up, first uncomplicated win. "I want to get to a second-round game and not think about it."
 - E87: Paulson wins Executive of the Year. Still no contract extension. Ownership statement unretracted. Franchise stability listed as "uncertain" in feed. Bulls enter playoffs as #1 seed — highest stakes yet. Bridgeport: accepting the duality (proud of award, watching for the "other thing").
+- E86: Ownership statement public — "Long term commitments were not made." Paulson silent on both Golden State AND the ownership statement. Warriors 39-28. Bridgeport shifting from patience to resigned acceptance.
+- E85: Still silent on Golden State. Bulls now 52-21. Bridgeport reading silence as answer.
+- E84: Paulson at Chase Center in Bulls red. Golden State contact confirmed. Paulson silent.
 
 ## Venue Continuity
 - Romano's on 35th — established in Talia's voice profile. Used E84, E85.

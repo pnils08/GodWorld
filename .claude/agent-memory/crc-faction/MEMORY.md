@@ -24,10 +24,10 @@ Prior work: `output/civic-voice/crc_faction_c86.json`, `crc_faction_c87.json`
 3. **STMT-87-CRC-003** (Ashford) — Baylight TIF Zone: fiscal_warning. CRC demands public-facing quarterly dashboard on: tax increment collected, property values vs projections, annual debt service, cumulative taxpayer exposure.
 
 ## Key Facts (Canon)
-- Stabilization Fund: $28M authorized C78. C87 shows 22 approved ($387K), 0 disbursed. 9-cycle authorization delay confirmed.
-- OARI: Passed 5-4 (C82). Now D35/45. No operational teams deployed. Mayor pressuring Montez for dispatch signature.
-- Baylight: Passed 6-3 (C83). CRC unanimously opposed. $2.1B project, TIF zone locks 30-year tax revenue.
-- Transit Hub Phase II: Ashford YES (C86 crossover), Chen NO. Launched in C87.
+- Stabilization Fund: $28M authorized C78. $4.2M Phase 1 approved. Disbursement authorized C86. 295 applications waiting.
+- OARI: Passed 5-4 (C82). 45-day implementation clock active. Dispatch integration unsigned as of C86.
+- Baylight: Passed 6-3 (C83). CRC unanimously opposed (Crane, Ashford, Chen = NO). $2.1B project, TIF zone locks 30-year tax revenue.
+- Transit Hub Phase II: Ashford YES (C86 crossover), Chen NO. Community visioning complete. CBA framework in legal review. C91 council vote scheduled.
 
 ## E86 Notes
 - Ashford CRC crossover on Transit Hub is significant — he voted YES because the process was transparent (binding CBA, community visioning). Consistent with his character as the process advocate.

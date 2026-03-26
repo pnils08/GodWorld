@@ -92,7 +92,8 @@ function getCliArg(flag) {
 }
 
 // ─── CONFIGURATION ─────────────────────────────────────────
-const CYCLE = parseInt(process.argv[2]) || 84;
+const getCurrentCycle = require('../lib/getCurrentCycle');
+const CYCLE = getCurrentCycle();
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/desk-packets');
 const MARA_PATH = path.join(PROJECT_ROOT, `output/mara_directive_c${CYCLE}.txt`);

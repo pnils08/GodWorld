@@ -1,9 +1,9 @@
 # Article Index by POP-ID
 
-**Generated:** 2026-03-23 (by buildPopidArticleIndex.js)
-**Sources:** 234 edition files (editions/ + archive/articles/)
-**Citizens indexed:** 241
-**Total references:** 1795
+**Generated:** 2026-03-24 (by buildPopidArticleIndex.js)
+**Sources:** 235 edition files (editions/ + archive/articles/)
+**Citizens indexed:** 250
+**Total references:** 1809
 
 ---
 
@@ -1173,6 +1173,7 @@
 - [C81] c81_civic_carmen-delaine_the-cycle-pulse-edition-81 — Carmen Delaine
 - [C83] ================================================================================ — Carmen Delaine
 - [C84] ================================================================================ — Celeste Tran
+- [C88] ================================================================================ — Angela Reyes
 
 ## POP-00154 — Lila Mezran (T3) — Journalist
 
@@ -1235,6 +1236,7 @@
 - [C23] c23_general_unknown_the-cycle-pulse
 - [C28] c28_education_unknown_angela-reyes-education-desk
 - [C34] c34_health_cycle-39-that-theory_cycles-34-49-dr-lila-mezran-health-desk — Cycle 39, that theory was obsolete.
+- [C88] ================================================================================ — Angela Reyes
 
 ## POP-00157 — Noah Tan (T3) — Journalist
 
@@ -1368,6 +1370,10 @@
 - [—] cycle_pulse_edition_88 — Carmen Delaine
 - [C69] c69_general_unknown_oakland-tribune-2
 
+## POP-00178 — Tobias Scott (T4) — Climate Modeling Scientist
+
+- [C88] ================================================================================ — Angela Reyes
+
 ## POP-00182 — Jordan Cook (T4) — Record Shop Owner
 
 - [—] cycle_pulse_edition_87 — Carmen Delaine
@@ -1375,6 +1381,7 @@
 ## POP-00184 — Brianna Nguyen (T4) — Teacher
 
 - [C44] ================================================================================
+- [C88] ================================================================================ — Angela Reyes
 
 ## POP-00193 — Elena Lewis (T4) — Longshoreman (Port of Oakland)
 
@@ -1476,6 +1483,10 @@
 
 - [C87] ================================================================================ — Trevor Shimizu
 
+## POP-00266 — Priya Marchetti (T4) — Vintage Clothing Store Owner
+
+- [C88] ================================================================================ — Angela Reyes
+
 ## POP-00269 — Kevin Nelson (T4) — Line cook
 
 - [C86] ================================================================================ — Sharon Okafor
@@ -1503,6 +1514,10 @@
 ## POP-00296 — Devon Brown (T4) — Nurse aide
 
 - [—] ================================================================================ — Carmen Delaine
+
+## POP-00304 — Ariana Lewis (T4) — International Trade Consultant
+
+- [C88] ================================================================================ — Angela Reyes
 
 ## POP-00307 — Mina Scott (T4) — Jazz Musician
 
@@ -1537,6 +1552,14 @@
 - [C44] ================================================================================
 - [C46] c46_general_cycle-51-the-first-s_the-cycle-pulse-46-67-txt — Cycle 51, the first snow hit and everyone stopped thinking about respiratory illness and started thinking about pipes and power and whether their cars would start.
 
+## POP-00325 — Ivy Lopez (T4) — ESL Teacher
+
+- [C88] ================================================================================ — Angela Reyes
+
+## POP-00335 — Ivy Cook (T4) — Civil Rights Attorney
+
+- [C88] ================================================================================ — Angela Reyes
+
 ## POP-00360 — Lorenzo Kim (T4) — Hair Stylist
 
 - [C69] c69_general_unknown_oakland-tribune-2
@@ -1546,6 +1569,7 @@
 - [—] cXX_lifestyle_unknown_sharon-okafor-lifestyle
 - [C39] c39_general_the-time-both-incide_the-cycle-pulse-sonnet4-5 — the time both incidents resolved, it was past 1 AM. The bus passengers transferred to a backup route. The board tabled the amendment for December. Both outcomes functional. Both outcomes inefficient.
 - [C40] c40_general_unknown_the-oakland-tribune-cycles-40-43-coverage
+- [C88] ================================================================================ — Angela Reyes
 
 ## POP-00367 — Ronald Allen (T3) — Maintenance Tech
 
@@ -1875,6 +1899,7 @@
 - [C69] c69_general_unknown_oakland-tribune
 - [C70] c70_chicago_selena-grant_the-cycle-pulse — Selena Grant
 - [C80] c80_civic_six-oclock-the-overc_the-cycle-pulse-edition-80 — six o'clock the overcast had thickened but the crowd hadn't entirely thinned. A group of teenagers had taken over the speaker and were playing music I didn't recognize. The elote cart was out of corn. The banner still hung between its poles, swaying slightly.
+- [C88] ================================================================================ — Angela Reyes
 
 ## POP-00542 — Nina Reyes (T4) — Actress
 
@@ -1996,6 +2021,10 @@
 - [C80] c80_civic_six-oclock-the-overc_the-cycle-pulse-edition-80 — six o'clock the overcast had thickened but the crowd hadn't entirely thinned. A group of teenagers had taken over the speaker and were playing music I didn't recognize. The elote cart was out of corn. The banner still hung between its poles, swaying slightly.
 - [C81] c81_civic_carmen-delaine_the-cycle-pulse-edition-81 — Carmen Delaine
 
+## POP-00595 — Sarah Corliss (T1) — Capacity Analyst, DigitalOcean
+
+- [C88] ================================================================================ — Angela Reyes
+
 ## POP-00597 — Eric Taveras (T1) — Second Baseman, Oakland A's
 
 - [—] cycle_pulse_edition_83 — Carmen Delaine
@@ -2014,6 +2043,10 @@
 - [—] cXX_sports_hal-richmondthe-rich_when-the-storm-went-quiet-the-injury-that-changed — Hal RichmondThe Richmond ArchiveAugust 8, 2040
 - [—] cXX_sports_unknown_farrah-del-rio-opinions
 - [C39] c39_general_the-time-both-incide_the-cycle-pulse-sonnet4-5 — the time both incidents resolved, it was past 1 AM. The bus passengers transferred to a backup route. The board tabled the amendment for December. Both outcomes functional. Both outcomes inefficient.
+
+## POP-00604 — Tomás Aguilar (T4) — Barbershop Owner
+
+- [C88] ================================================================================ — Angela Reyes
 
 ## POP-00617 — Elena Rivera (T3) — BART Station Manager
 
@@ -2412,6 +2445,10 @@
 - [—] cycle_pulse_edition_83 — Carmen Delaine
 - [—] Shovels Cleared: Baylight Legal Instruments Filed, Construction Legally Authorized — Carmen Delaine
 
+## POP-00739 — Kwame Asante (T4) — Youth Counselor
+
+- [C88] ================================================================================ — Angela Reyes
+
 ## POP-00743 — Rick Dillon (T3) — Grade Schooler
 
 - [—] cXX_sports_hal-richmond-the-ric_origins-benji-dillon — Hal Richmond - The Richmond
@@ -2488,6 +2525,10 @@
 
 - [C69] c69_general_unknown_oakland-tribune-2
 - [C73] c73_chicago_selena-grant_the-cycle-pulse — Selena Grant
+
+## POP-00778 — Jamal Thompson (T2) — Fan & Culture Columnist, OakTown Echo
+
+- [C88] ================================================================================ — Angela Reyes
 
 ## POP-00781 — Vanessa Thompson (T4) — Barista
 

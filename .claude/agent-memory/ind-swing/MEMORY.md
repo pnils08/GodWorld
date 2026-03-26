@@ -29,7 +29,6 @@ Prior work: `output/civic-voice/ind_swing_c86.json`, `output/civic-voice/ind_swi
 5. **Tran — OARI Design Validation:** Distinguishes between program soundness (which he stands by) and timeline feasibility (which he acknowledges is tight). Validates CRC's skepticism about 45-day execution while defending program integrity. Positions Independents as pragmatic guardrails on both sides.
 
 ## Key Notes
-- Tran was the 5th vote on OARI — his conditions on Day 35-40 acceleration carry weight
-- Vega's committee review (C89 scheduled) is next major touch point for Stabilization Fund
-- Tran's D2 expansion request signals he may negotiate departure from D1/D3/D5 pilot restrictions
+- Tran was the 5th vote on OARI — his conditions carry disproportionate weight
 - Vega has not revisited his NO vote on OARI; D4 still excluded from pilot
+- Tran's D2 expansion request remains active — post-pilot pathway still negotiated with Mayor

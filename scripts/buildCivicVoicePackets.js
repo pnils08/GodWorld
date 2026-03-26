@@ -32,7 +32,8 @@ const fs = require('fs');
 const path = require('path');
 
 // ─── CONFIGURATION ─────────────────────────────────────────
-const CYCLE = parseInt(process.argv[2]) || 84;
+const getCurrentCycle = require('../lib/getCurrentCycle');
+const CYCLE = getCurrentCycle();
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/civic-voice-packets');
 

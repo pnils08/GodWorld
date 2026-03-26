@@ -61,6 +61,5 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Sofia Carter: used E88 — REST through E90 (expires E91)
 - Carlos Jackson: used E88 — REST through E90 (expires E91)
 - Lucia Polito: used E88 — REST through E90 (expires E91)
-
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

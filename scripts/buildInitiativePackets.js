@@ -39,7 +39,8 @@ const path = require('path');
 const PROJECT_ROOT_EARLY = path.resolve(__dirname, '..');
 require('dotenv').config({ path: path.join(PROJECT_ROOT_EARLY, '.env') });
 
-const CYCLE = parseInt(process.argv[2]) || 86;
+const getCurrentCycle = require('../lib/getCurrentCycle');
+const CYCLE = getCurrentCycle();
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/initiative-packets');
 const CIVIC_DOCS_DIR = path.join(PROJECT_ROOT, 'output/city-civic-database/initiatives');

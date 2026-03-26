@@ -23,12 +23,8 @@ const INIT_PACKETS_DIR = path.join(ROOT, 'output/initiative-packets');
 const WORKSPACE_DIR = path.join(ROOT, 'output/civic-voice-workspace');
 const DECISIONS_DIR = path.join(ROOT, 'output/city-civic-database/initiatives');
 
-const CYCLE = parseInt(process.argv[2]) || (() => {
-  try {
-    const bc = JSON.parse(fs.readFileSync(path.join(ROOT, 'output/desk-packets/base_context.json'), 'utf-8'));
-    return bc.cycle || 88;
-  } catch { return 88; }
-})();
+const getCurrentCycle = require('../lib/getCurrentCycle');
+const CYCLE = getCurrentCycle();
 
 // ─── BLOCKER → OFFICE MAPPING ───────────────────────────────────
 // Each initiative can have multiple blockers, each owned by a specific office.

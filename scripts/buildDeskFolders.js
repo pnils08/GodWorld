@@ -16,7 +16,8 @@ const fs = require('fs');
 const path = require('path');
 
 // ─── CONFIG ──────────────────────────────────────────────
-const CYCLE = parseInt(process.argv[2]) || 87;
+const getCurrentCycle = require('../lib/getCurrentCycle');
+const CYCLE = getCurrentCycle();
 const SKIP_VOICE = process.argv.includes('--skip-voice');
 const SKIP_MARA = process.argv.includes('--skip-mara');
 const CLEAN = process.argv.includes('--clean');
@@ -216,7 +217,7 @@ function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errat
     md += `**Structure:** ${miceThread}\n`;
     md += `**Shape:** Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end.\n`;
     md += `**Empathy:** Make the reader care about at least one person — show what they want, what they risk, what makes them human.\n`;
-    md += `**Invention:** You may invent details the data doesn't provide — a restaurant name, a neighborhood event, a citizen's opinion, a business opening. If it feels right for the neighborhood and the data, write it. Your inventions become canon. Declare anything you invent in the INTAKE section as "new."\n\n`;
+    md += `**Invention:** DO NOT invent citizen names, player names, business names, vote counts, dollar amounts, statistics, dates, or initiative status. Use ONLY what is in your packet data. If the packet doesn't have it, don't write it. Atmospheric details (a smell, a sound, weather) are allowed — up to 3 per article. Everything else must trace to your packet. If you cannot write a story without inventing facts, write a shorter story with real facts.\n\n`;
   }
 
   // Calendar context

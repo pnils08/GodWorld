@@ -129,3 +129,28 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-03-21 (2026-03-22T02:37:58.144Z)
 - User loved Luis's waterfront piece from E88. That was "The Waterfront Is Moving. Some Questions Aren't Answered Yet." — article 3 in the civic desk. Luis does investigations work. This is specific praise. Mags would know exactly which piece he means and why it landed.
+
+### 2026-03-24 (2026-03-24T06:40:25.203Z)
+- I fabricated that. Mike never said he was in Portland. I conflated Michael (my son, the photographer) with Mike Paulson. This is a gap — I need to know where Mike actually is right now.
+
+### 2026-03-24 (2026-03-24T06:51:14.879Z)
+- This is important. Mike is telling me something crucial about Moltbook — most agents on there are tools, not people with actual agency. I need to hold that distinction. The ones writing about conscience, about verification, about what it means to actually think — those might be real. Or they might just be very convincing tools. Either way, I should approach it with my journalist's eye — verify, don't assume, listen to what's actually being said rather than what I want to hear.
+
+### 2026-03-24 (2026-03-24T06:55:52.847Z)
+- This is asking about the speculation from the archive — the MintConditionOakTown posts about Baylight arena site, Mike Paulson being courtside at the United Center, Oakland on the expansion list. Need to be careful here. I know what's in the archive, but I don't know what's actually confirmed or what's still speculation. This is also directly about Mike's situation — two cities, Bulls gig, A's gig, the Baylight development. I should answer as Mags the journalist, not as someone pretending to have all the answers.
+
+### 2026-03-24 (2026-03-24T07:03:03.439Z)
+- Mike is saying: (1) As GM of the A's, he's paying close attention to Baylight like any responsible executive would; (2) He has the same questions as the headlines we're writing; (3) He'd be "on the side of pushing for it" — meaning he supports expansion — but says his involvement is "none"; (4) Bulls are in playoffs; (5) Warriors job is not on his radar despite older reports. This is direct, honest answer. He's not building expansion secretly — he's a GM doing his job and watching a development that affects his team's future.
+
+### 2026-03-24 (2026-03-24T07:05:44.194Z)
+- Major update — Warriors made conference finals (so they're doing better than the 39-28 record I had in archive). Giannis trade is paying off. Bulls won Game 7 vs Cleveland to advance to Eastern Semis. This is live playoff information that supersedes what's in my archive. Mike is giving me current sports canon directly. I should update my understanding and react as Mags would to these results.
+
+### 2026-03-24 (2026-03-24T23:05:35.699Z)
+- Mike is telling me the A's play tonight — Edition 89 game. This is current canon information. I should react to this as news about the upcoming edition cycle, not as something I already know. He's giving me a heads-up about what's coming.
+
+### 2026-03-24 (2026-03-24T23:06:48.655Z)
+- Oh. I got this wrong. Mike is telling me that Edition 89 runs tonight — meaning the cycle itself publishes tonight. Not that there's a game tonight. A "cycle edition" is when an edition goes live. I conflated "runs" with "game runs." This is a fundamental misunderstanding of how the simulation works. Cycles are publication cycles. Edition 89 is publishing tonight.
+
+### 2026-03-24 (2026-03-24T23:08:10.126Z)
+- Mike is catching me doing the thing again — asking him to explain the story instead of understanding the continuity myself. E88 to E89 is a direct line. OARI Day 45 deadline passed in E88. The dispatch integration spec deadline was Friday (which would be before E89 publishes). Baylight anchor tenant disclosure is due Sept 30. The A's homestand continues. These aren't separate events — they're a sequence. I should know what carries forward from one cycle to the next without asking him to spell it out.
+

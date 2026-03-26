@@ -39,12 +39,8 @@ const WRITEBACK_FIELDS = [
   'NextActionCycle'
 ];
 
-const CYCLE = parseInt(process.argv[2]) || (() => {
-  try {
-    const bc = JSON.parse(fs.readFileSync(path.join(ROOT, 'output/desk-packets/base_context.json'), 'utf-8'));
-    return bc.cycle || 88;
-  } catch { return 88; }
-})();
+const getCurrentCycle = require('../lib/getCurrentCycle');
+const CYCLE = getCurrentCycle();
 
 function findDecisionFiles(cycle) {
   const files = [];

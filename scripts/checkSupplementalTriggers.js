@@ -27,7 +27,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const CYCLE = parseInt(process.argv[2]) || 87;
+const getCurrentCycle = require('../lib/getCurrentCycle');
+const CYCLE = getCurrentCycle();
 const ROOT = path.resolve(__dirname, '..');
 const OUTPUT_DIR = path.join(ROOT, 'output/supplemental-triggers');
 const CIVIC_DB = path.join(ROOT, 'output/city-civic-database/initiatives');

@@ -32,12 +32,8 @@ const DESK_OUTPUT_DIR = path.join(ROOT, 'output/desk-output');
 const APPLY = process.argv.includes('--apply');
 const EDITION_FLAG = process.argv.includes('--edition');
 
-const CYCLE = parseInt(process.argv.find(a => /^\d+$/.test(a))) || (() => {
-  try {
-    const bc = JSON.parse(fs.readFileSync(path.join(ROOT, 'output/desk-packets/base_context.json'), 'utf-8'));
-    return bc.cycle || 88;
-  } catch { return 88; }
-})();
+const getCurrentCycle = require('../lib/getCurrentCycle');
+const CYCLE = getCurrentCycle();
 
 const DESKS = ['civic', 'sports', 'culture', 'business', 'chicago', 'letters'];
 

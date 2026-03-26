@@ -102,13 +102,15 @@ function initRng_(ctx, cycle) {
   if (ctx.config && typeof ctx.config.rngSeed === "number") {
     return mulberry32_(((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0)) >>> 0);
   }
+  Logger.log('WARNING: generationalEventsEngine initRng_ has no deterministic RNG — cycle may not be reproducible');
   return Math.random;
 }
 
 function rand_(ctx) {
   if (!ctx._rng) {
-    // v2.4: prefer ctx.rng over Math.random
-    return (typeof ctx.rng === 'function') ? ctx.rng() : Math.random();
+    if (typeof ctx.rng === 'function') return ctx.rng();
+    Logger.log('WARNING: generationalEventsEngine rand_ called without deterministic RNG');
+    return Math.random();
   }
   return ctx._rng();
 }

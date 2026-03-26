@@ -158,7 +158,6 @@ function generateChicagoCitizens_(ctx) {
   
   // Store in context for Chicago feed
   ctx.summary.chicagoCitizens = finalCitizens;
-  ctx.summary.chicagoPopulation = finalCitizens.length;
   
   Logger.log('generateChicagoCitizens_: Final pool = ' + finalCitizens.length);
   

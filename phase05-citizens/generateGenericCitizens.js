@@ -93,7 +93,11 @@ function generateGenericCitizens_(ctx) {
   }
 
   function rand() {
-    return rng ? rng() : Math.random();
+    if (!rng) {
+      Logger.log('WARNING: generateGenericCitizens_ rand() called without deterministic RNG — cycle may not be reproducible');
+      rng = ctx.rng || Math.random;
+    }
+    return rng();
   }
 
   function randInt(n) {

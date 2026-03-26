@@ -49,10 +49,6 @@ function processAdvancementIntake_(ctx) {
   var intakeResults = processIntakeRows_(ss, now, cycle);
   results.intakeProcessed = intakeResults.processed;
   
-  if (ctx && ctx.summary) {
-    ctx.summary.advancementResults = results;
-  }
-  
   Logger.log('processAdvancementIntake_ v1.4 complete: ' + JSON.stringify(results));
   return results;
 }

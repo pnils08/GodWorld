@@ -547,3 +547,38 @@ NOT serialized: career/education/household event details (available via LifeHist
 ### Gap:
 
 Health cause data flows from media room → engine → Simulation_Ledger (written directly), but the health briefing narrative doesn't reach the newsroom desk packets.
+
+**Note:** `ctx.summary.healthCauseBriefing` appears only in JSDoc (line 607), not in actual code. The write was never implemented.
+
+---
+
+## Cross-Phase ctx.summary Health (Audit 2026-03-26, Rev 2)
+
+### Connected Pipelines (verified working)
+
+Engine files alias `ctx.summary` as `S`. Initial audit searched for `ctx.summary.field =` and missed `S.field =` writes.
+
+**Career → Economic Ripple → Migration Drift** — CONNECTED
+- `runCareerEngine_()` writes `S.careerSignals` (line 106+) with layoffs, promotions, sectorShifts, businessDeltas
+- `runEconomicRippleEngine_()` reads `S.careerSignals` (line 193+), writes `S.economicMood` (line 638)
+- `applyMigrationDrift_()` reads `S.economicMood` (line 189)
+
+**Pattern Detection → Downstream** — CONNECTED
+- `applyPatternDetection_()` writes `S.patternFlag` — read by 9+ downstream files
+- `S.patternCalendarContext` written alongside but has no readers (orphaned)
+
+### Dead-End Writes
+
+Fields written to ctx.summary but never consumed by any downstream phase, buildCyclePacket, or buildDeskPackets:
+
+| Field | Writer | Phase | Notes |
+|-------|--------|-------|-------|
+| `patternFlag` | applyPatternDetection.js | 6 | Always "none" — no consumer |
+| `patternCalendarContext` | applyPatternDetection.js | 6 | Always {} — no consumer |
+| `storylineUpdates` | updateStorylineStatusv1.2.js | 8 | Array of updates — no consumer |
+| `arcResolutions` | processArcLifeCyclev1.js | 8* | *Superseded file, not in engine |
+| `arcPhaseChanges` | processArcLifeCyclev1.js | 8* | *Superseded file, not in engine |
+| `advancementResults` | processAdvancementIntake.js | 5f | Results array — no consumer |
+| `chicagoPopulation` | generateChicagoCitizensv1.js | 8 | Count only; chicagoCitizens array IS consumed |
+
+These are not bugs — the engine runs fine without consumers. But they represent computation that produces nothing and documentation that implies connections that don't exist.

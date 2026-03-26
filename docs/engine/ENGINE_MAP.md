@@ -123,7 +123,7 @@
 | 5-NamedCitizens | `updateNamedCitizens_()` | godWorldEngine2.js | Update named citizen status/fields |
 | 5-CitizenEvents | `generateCitizensEvents_()` | phase05-citizens/generateCitizensEvents.js | ENGINE-only citizen life events (rich pipeline) |
 | 5-Promotions | `checkForPromotions_()` | phase05-citizens/checkForPromotions.js | Career promotions |
-| 5-Advancement | `processAdvancementIntake_()` | phase05-citizens/processAdvancementIntake.js | Process advancement intake rows |
+| 5-Advancement | `processAdvancementIntake_()` | phase05-citizens/processAdvancementIntake.js | Process advancement intake rows | **⚠ AUDIT:** Writes `ctx.summary.advancementResults` — nothing reads it. |
 
 ### 5g: Tier-5 Engines (direct sheet writes)
 
@@ -146,10 +146,10 @@
 | 6-Spotlights | `applyNamedCitizenSpotlights_()` | phase05-citizens/applyNamedCitizenSpotlight.js | Highlight named citizens for coverage |
 | 6-RecurringCitizens | `computeRecurringCitizens_()` | phase06-analysis/computeRecurringCitizens.js | Identify citizens appearing in multiple data sources |
 | 6-CivicLoad | `applyCivicLoadIndicator_()` | phase06-analysis/applyCivicLoadIndicator.js | Civic system strain level |
-| 6-EconomicRipple | `runEconomicRippleEngine_()` | phase06-analysis/economicRippleEngine.js | Business economic triggers |
+| 6-EconomicRipple | `runEconomicRippleEngine_()` | phase06-analysis/economicRippleEngine.js | Business economic triggers. Reads `S.careerSignals` from Career Engine, writes `S.economicMood`. |
 | 6-InitiativeRipple | `applyActiveInitiativeRipples_()` | (conditional) | Initiative cascading effects |
-| 6-Migration | `applyMigrationDrift_()` | phase06-analysis/applyMigrationDrift.js | Population movement trends |
-| 6-PatternDetect | `applyPatternDetection_()` | phase06-analysis/applyPatternDetection.js | Multi-cycle pattern recognition |
+| 6-Migration | `applyMigrationDrift_()` | phase06-analysis/applyMigrationDrift.js | Population movement trends. Reads `S.economicMood` from Economic Ripple. |
+| 6-PatternDetect | `applyPatternDetection_()` | phase06-analysis/applyPatternDetection.js | Multi-cycle pattern recognition. Writes `S.patternFlag` (9+ readers). `S.patternCalendarContext` is orphaned. |
 | 6-ShockMonitor | `applyShockMonitor_()` | phase06-analysis/applyShockMonitor.js | Detect sudden state changes |
 | ~~6-ArcLifecycle~~ | ~~`processArcLifecycle_()`~~ | — | **Moved to Phase 8** (S116). Was no-op here — arcs load in Phase 8. |
 | ~~6-StorylineStatus~~ | ~~`updateStorylineStatus_()`~~ | — | **Moved to Phase 8** (S116). Depends on arc data. |
@@ -186,11 +186,11 @@
 | 8-CycleWeight | `applyCycleWeightForLatestCycle_()` | phase09-digest/applyCycleWeightForLatestCycle.js | Signal scoring (low/medium/high) |
 | 8-V3Preload | `v3PreloadContext_()` | phase08-v3-chicago/v3preLoader.js | Load arc/domain/neighborhood state from ledgers. **LOADS** `S.eventArcs` |
 | 8-ArcLifecycle | `processArcLifecycle_()` | phase06-analysis/arcLifecycleEngine.js | Advance arc phases (early→rising→peak→decline→resolved). **Moved from Phase 6 S116** |
-| 8-StorylineStatus | `updateStorylineStatus_()` | phase06-analysis/updateStorylineStatusv1.2.js | Track storyline health. **Moved from Phase 6 S116** |
+| 8-StorylineStatus | `updateStorylineStatus_()` | phase06-analysis/updateStorylineStatusv1.2.js | Track storyline health. **Moved from Phase 6 S116** | **⚠ AUDIT:** Writes `ctx.summary.storylineUpdates` — nothing reads it. |
 | 8-StorylineHealth | `monitorStorylineHealth_()` | phase06-analysis/hookLifecycleEngine.js | Monitor storyline decay. **Moved from Phase 6 S116** |
 | 8-V3Integration | `v3Integration_()` | phase08-v3-chicago/v3Integration.js | V3 module orchestrator (arcs, domains, textures, hooks) |
 | 8-DemographicDrift | `deriveDemographicDrift_()` | phase03-population/deriveDemographicDrift.js | Derive drift metrics |
-| 8-ChicagoCitizens | `generateChicagoCitizens_()` | phase05-citizens/generateChicagoCitizensv1.js | Chicago bureau citizen generation |
+| 8-ChicagoCitizens | `generateChicagoCitizens_()` | phase05-citizens/generateChicagoCitizensv1.js | Chicago bureau citizen generation | **⚠ AUDIT:** Writes `ctx.summary.chicagoPopulation` — nothing reads the count (chicagoCitizens array IS read). |
 
 ---
 
@@ -270,7 +270,7 @@ These exist in the codebase but are NOT in the engine call chain:
 | `phase05-citizens/updateCivicLedgerFactions.js` | Not in engine — setup script |
 | `phase06-analysis/hookLifecycleEngine.js` | Not in engine |
 | `phase06-analysis/storylineHealthEngine.js` | Not in engine |
-| `phase06-analysis/processArcLifeCyclev1.js` | Superseded by arcLifecycleEngine.js |
+| `phase06-analysis/processArcLifeCyclev1.js` | **ACTIVE** — called by engine at godWorldEngine2.js:311. arcLifecycleEngine.js has a different 4-param signature and is NOT called. |
 | `phase07-evening-media/storylineWeavingEngine.js` | Not in engine |
 | `phase07-evening-media/culturalLedger.js` | Not in engine |
 | `phase07-evening-media/citizenFameTracker.js` | Not in engine |
@@ -337,3 +337,38 @@ All 37 arcs stuck at phase "early" despite tension ≥3. Diagnostic logging adde
 | Tier 1-2 with zero processing | varies | Any Tier 1-2 with conflicting flag/mode |
 | **RESOLVED (S106):** UNI/MED/CIV flag check | 9 files | Flag comparison fixed from `=== "y"` to `.startsWith("y")`. Skip gates now fire correctly. Deployed to GAS. |
 | **RESOLVED (S94):** MEDIA mode | 16→29 | Bay Tribune journalists processed by `generateMediaModeEvents_`. Count updated S105 (29 on live sheet). |
+
+---
+
+## ctx.summary Field Health (Audit 2026-03-26, Rev 2)
+
+### Connected Pipelines (verified working)
+
+| Chain | Writer | Field | Reader |
+|-------|--------|-------|--------|
+| Career → Economic | runCareerEngine.js | `S.careerSignals` | economicRippleEngine.js |
+| Economic → Migration | economicRippleEngine.js | `S.economicMood` | applyMigrationDrift.js |
+| Pattern → Downstream | applyPatternDetection.js | `S.patternFlag` | 9+ reader files |
+
+Note: All engine files use `var S = ctx.summary`. Grep for `S.fieldName`, not `ctx.summary.fieldName`.
+
+### Orphaned Fields (written but never read — WARNING)
+
+| Field | Writer | Line(s) | Notes |
+|-------|--------|---------|-------|
+| `patternCalendarContext` | applyPatternDetection.js | 36, 46 | Always {} |
+| `storylineUpdates` | updateStorylineStatusv1.2.js | 171 | |
+| `arcResolutions` | processArcLifeCyclev1.js | 200 | Active engine file |
+| `arcPhaseChanges` | processArcLifeCyclev1.js | 201 | Active engine file |
+| `advancementResults` | processAdvancementIntake.js | 53 | |
+| `chicagoPopulation` | generateChicagoCitizensv1.js | 161 | chicagoCitizens array IS read |
+
+### Math.random() Fallbacks (determinism risk)
+
+| File | Line | Status |
+|------|------|--------|
+| generateGenericCitizens.js | 96 | **FIXED S120** — logs warning |
+| generationalEventsEngine.js | 105, 111 | **FIXED S120** — logs warning |
+| v2DeprecationGuide.js | 202 | Open — deprecated helper |
+
+Full audit: `docs/engine/tech_debt_audits/2026-03-26.md`

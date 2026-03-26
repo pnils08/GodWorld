@@ -33,7 +33,6 @@ function applyPatternDetection_(ctx) {
   if (isDryRun) {
     Logger.log('applyPatternDetection_: Skipping (dry-run mode)');
     ctx.summary.patternFlag = "none";
-    ctx.summary.patternCalendarContext = {};
     return;
   }
 
@@ -43,7 +42,6 @@ function applyPatternDetection_(ctx) {
   var lastRow = sheet.getLastRow();
   if (lastRow < 3) {
     ctx.summary.patternFlag = "none";
-    ctx.summary.patternCalendarContext = {};
     return;
   }
 

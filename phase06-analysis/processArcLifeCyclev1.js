@@ -193,13 +193,6 @@ function processArcLifecycle_(ctx) {
     }
   }
   
-  // ═══════════════════════════════════════════════════════════════════════════
-  // STORE RESULTS IN CONTEXT
-  // ═══════════════════════════════════════════════════════════════════════════
-  
-  ctx.summary.arcResolutions = resolutions;
-  ctx.summary.arcPhaseChanges = phaseChanges;
-  
   if (resolutions.length > 0 || phaseChanges.length > 0) {
     updateArcLedger_(ss, arcs, cycle);
   }

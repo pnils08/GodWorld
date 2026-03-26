@@ -167,9 +167,6 @@ function updateStorylineStatus_(ctx) {
     }
   }
   
-  // Store results in context
-  ctx.summary.storylineUpdates = updates;
-  
   Logger.log('updateStorylineStatus_ v1.2: Complete. Dormant: ' + updates.dormant +
     ', Concluded: ' + updates.concluded +
     ', Abandoned: ' + updates.abandoned +

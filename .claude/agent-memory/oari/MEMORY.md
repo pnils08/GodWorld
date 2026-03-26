@@ -72,13 +72,13 @@ Last Updated: C86 | Most recent cycle: C86 | March 2041
 
 ### Blocking Operational Deployment (Day 45)
 1. **OPD Dispatch Integration Approval** — CRITICAL. Escalated to Chief Montez C86. 48-hour response requested. If not approved by Day 40 (March 10), Day 45 deadline cannot be met.
-2. **Hiring acceleration** — 8 more responders needed by Day 45 (currently 4 hired + 4 offered). Recruitment velocity must increase C87-C89. Contingency: 6-8 responder deployment in D1 only, with supplemental staffing request for D3/D5.
+2. **Hiring acceleration** — 8 more responders needed by Day 45 (currently 4 hired + 4 offered). Recruitment velocity must increase C87+. Contingency: 6-8 responder deployment in D1 only, with supplemental staffing request for D3/D5.
 3. **Alameda County MOU signature** — Final negotiation on liability, mandatory reporting, clinical supervision. City Attorney review scheduled C87. Target signing C88 (still meets Day 45 deadline but tight).
 
 ### Not Yet Blocking (but monitored)
 - Highland Hospital clinical agreement (preliminary agreement reached; formal MOU in drafting)
 - Community advisory board buy-in (first meetings positive; ongoing through C87)
-- Training schedule (curriculum finalized; on track for C87-C89 deployment)
+- Training schedule (curriculum finalized; on track for C87+ deployment)
 
 ## Operational Tracking — C86 Status
 

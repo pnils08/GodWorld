@@ -98,7 +98,7 @@ Last Updated: 2026-03-21 | Last edition: E88 (Cycle 88, September 2041)
 - Faith storyline OARI intersection active since C84: churches doing this work before OARI existed.
 - Baylight construction storyline active since C84: Jack London corridor workers/artists absorbing change. NOT covered E87 — stays active.
 - Stabilization Fund: $4.2M approved, $0 disbursed — ESTABLISHED CANON. Do not write otherwise.
-- E87: Calvin Turner and Andre Lee both on rest after consecutive E84-E86 appearances. Do not reuse until E89 minimum.
+- E87: Calvin Turner and Andre Lee both on rest after consecutive E84-E86 appearances. 
 - E87: Citizen rotation successful — four new first-appearance citizens (Lucia Polito, Lorenzo Jordan, Kris Bubic, Clarence Moody). All four are from packet-confirmed sources.
 - West Side Cafe (West Oakland) established as food coverage venue E87. Active storyline: Baylight crew regular customer base.
 - Juneteenth arc active (early phase) — not covered E87, available for future editions.

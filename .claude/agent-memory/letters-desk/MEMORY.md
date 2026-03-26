@@ -44,15 +44,15 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Lucia Polito (64, Fruitvale, self-employed aura worker) — NEW, self-employment vulnerability, city holding up
 
 ## Rest Cycle Tracking
-- Beverly Hayes: used E85, E86 — REST through E88 (expires E89)
-- Gloria Meeks: used E86 — REST through E88 (expires E89)
-- Howard Young: used E85, E86 — REST through E88 (expires E89)
-- Delia Fuentes: used E86 — REST through E88 (expires E89)
-- Dante Nelson: used E84, E86 (opinion) — REST through E88 (expires E89)
-- Carla Edmonds: used E82, E85, E87 — REST through E89 (expires E90)
-- Sister Rosario Aguilar: used E87 — REST through E89 (expires E90)
-- Miguel Orozco: used E87 — REST through E89 (expires E90)
-- Jemaine Farris: used E87 — REST through E89 (expires E90)
+- Beverly Hayes: used E85, E86 — REST expired
+- Gloria Meeks: used E86 — REST expired
+- Howard Young: used E85, E86 — REST expired
+- Delia Fuentes: used E86 — REST expired
+- Dante Nelson: used E84, E86 (opinion) — REST expired
+- Carla Edmonds: used E82, E85, E87 — REST through E90
+- Sister Rosario Aguilar: used E87 — REST through E90
+- Miguel Orozco: used E87 — REST through E90
+- Jemaine Farris: used E87 — REST through E90
 - Patricia Osei-Bonsu: used E87 (rewrite) — REST through E89 (expires E90)
 - Ruben Castillo: used E87 (rewrite) — REST through E89 (expires E90)
 - Delores Kimura: used E87 (rewrite) — REST through E89 (expires E90)

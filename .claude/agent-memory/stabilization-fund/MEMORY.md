@@ -72,7 +72,7 @@ West Oakland (primary), East Oakland, Fruitvale, San Antonio, Coliseum, Elmhurst
 - OEWD report is overdue — **ADDRESSED:** Status reports produced C86 and C87. Escalation memos filed documenting authorization hold with documented evidence trail.
 - 295 applications waiting with no public timeline — **ADDRESSED:** 35 of 295 reviewed across C86-C87. Processing rate 15-18/month established and sustained. Completion timeline C104.
 - Beverly Hayes case represents the individual failure mode — **ADDRESSED:** Beverly Hayes approved C86 ($18,500). Ernesto Quintero approved C87 ($21,000). Both received bilingual determination letters explaining approval and authorization timeline.
-- Vega committee review is the next governance checkpoint — scheduled C89 per initiative tracker. Will present fund status, application pipeline, and authorization delay.
+- Vega committee review is the next governance checkpoint — scheduled per initiative tracker. Will present fund status, application pipeline, and authorization delay.
 - Deputy Mayor Osei absence flagged — Marcus Webb cannot answer this; it is an executive office decision. Memo notes portfolio management gap but that is outside OEWD scope.
 
 ## Institutional Position (C86-C87)

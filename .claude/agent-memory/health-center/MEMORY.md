@@ -81,9 +81,9 @@ Last Updated: Cycle 86 | March 6, 2026
 6. **Pediatric care** — 9 mentions. Young families underserved.
 
 ## Critical Path Constraints
-1. **HCAI plan review** (6-12 months) — longest single gate. Early state coordination essential (C88-89).
+1. **HCAI plan review** (6-12 months) — longest single gate. Early state coordination essential (C88+).
 2. **Operator selection** (council vote needed by C87) — drives design decisions, facility programming.
-3. **Architect capacity** — design development must complete by C89 to support HCAI timeline.
+3. **Architect capacity** — design development must complete by next cycle to support HCAI timeline.
 
 ## Risk Register (High Priority)
 - **Operator selection stalls at council** (HIGH impact, HIGH likelihood) — requires action by end of C87
@@ -93,7 +93,7 @@ Last Updated: Cycle 86 | March 6, 2026
 
 ## Community Trust & Accountability
 - 5-cycle designation delay eroded confidence: "I'll believe it when I see the excavator"
-- Trust-rebuild strategy: (1) Regular visible progress, (2) Transparent scheduling, (3) Direct accountability (Bobby Chen-Ramirez accessible), (4) Local hiring/apprenticeships, (5) Design review meetings (C88, C89)
+- Trust-rebuild strategy: (1) Regular visible progress, (2) Transparent scheduling, (3) Direct accountability (Bobby Chen-Ramirez accessible), (4) Local hiring/apprenticeships, (5) Design review meetings (C88+)
 - Community liaison role recommended (0.5 FTE) for ongoing engagement
 
 ## Key Decision Logic (Cycle 86)

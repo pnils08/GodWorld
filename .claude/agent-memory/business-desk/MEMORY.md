@@ -29,7 +29,7 @@ Prior work: `output/desk-output/business_c87.md`
 - Next beats: Does OEWD hit the two-week review target (C88)? Does Baylight bond execute / mobilization begin? Elena Lewis + Jordan Cook available for follow-up. Darius Clark status still unresolved (five editions). CRC independent audit demand on OEWD processing — track response.
 
 ## E88 Notes (FINAL — edition written)
-- Ticker covered: Two-week review window for Stabilization Fund is NOW LIVE (deadline Cycle 89). 277 in queue. Four accountability conditions operational (monthly FC reporting, quarterly audits, two-week window, Okoro oversight). Baylight construction crews now visible at Jack London restaurants + Saturday market — mobilization observable. Jack London evening surge persists into Labor Day week. Fruitvale Transit Hub design phase active; labor pipeline overlap with Baylight within 18-month window is real timing question.
+- Ticker covered: Two-week review window for Stabilization Fund is NOW LIVE. 277 in queue. Four accountability conditions operational. Baylight construction crews now visible at Jack London. Jack London evening surge persists into Labor Day week. Fruitvale Transit Hub design phase active.
 - Sources used: Ray Muñoz (54, Jack London, longshoreman, POP-00132), Jalen Hill (35, Jack London, line cook, POP-00089).
-- Sources rested: Elena Lewis, Jordan Cook, Travis Green (all available E89+).
+- Sources rested: Elena Lewis, Jordan Cook, Travis Green.
 - Next beats: Did OEWD hit any approvals in first week of two-week window? Does independent audit launch? When does Baylight Phase 1 mobilization peak? Do Jack London evening crowds sustain beyond Labor Day? Darius Clark status STILL unresolved (six editions now). CRC independent audit response?

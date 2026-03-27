@@ -65,6 +65,30 @@
     ]
   },
   "enableAllProjectMcpServers": true,
+  "autoMode": {
+    "allow": [
+      "Read, Edit, Write, Glob, Grep are safe for all project files",
+      "Bash commands for node scripts, git status/log/diff/add/commit, ls, wc, mkdir, chmod, npm, npx",
+      "WebFetch and WebSearch for research",
+      "All MCP tool calls for discord, supermemory, playwright, context7"
+    ],
+    "soft_deny": [
+      "git push — confirm branch and commit count before pushing",
+      "clasp push — always show pre-flight (changed files, branch, uncommitted changes)",
+      "rm commands — verify target path before deleting",
+      "curl/wget — confirm URL before fetching",
+      "git merge/rebase/checkout/switch — confirm current state first",
+      "Any command that writes to Simulation_Ledger or production Google Sheets"
+    ],
+    "environment": [
+      "This is GodWorld — a city simulation engine with a newsroom pipeline",
+      "675 citizens in Simulation_Ledger — destructive sheet operations risk data loss",
+      "Service account credentials in credentials/ — never read or expose",
+      ".env contains API keys — never read or expose",
+      "bay-tribune Supermemory container is agent-facing canon — never write system internals to it",
+      "Agent files (.claude/agents/) must never contain simulation/engine/builder references"
+    ]
+  },
   "enabledPlugins": {
     "ralph-loop@claude-plugins-official": true,
     "hookify@claude-plugins-official": true,

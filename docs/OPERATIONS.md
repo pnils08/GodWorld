@@ -38,7 +38,7 @@ All times in UTC. Server is UTC. Central time = UTC - 5 (CDT) or UTC - 6 (CST).
 **Disabled:**
 | Job | Script | Why |
 |-----|--------|-----|
-| Morning heartbeat (8 AM CST) | `scripts/daily-reflection.js` | Disabled to save API calls |
+| Morning heartbeat (8 AM CST) | `scripts/daily-reflection.js` | Disabled — cron commented out to save API calls |
 
 **Edit crontab:** `crontab -e`
 
@@ -112,6 +112,43 @@ mags                      # Creates/reattaches tmux session
 ```
 
 Keep mobile sessions focused: file edits, research, planning, ledger checks. Save full pipelines for the laptop.
+
+---
+
+## Scheduled Remote Agents (Anthropic Cloud)
+
+3 agents running on Anthropic's cloud infrastructure. Each spawns an isolated session with a fresh git checkout. Manage at https://claude.ai/code/scheduled.
+
+| Agent | Schedule | MCP | What it does |
+|-------|----------|-----|-------------|
+| Daily Mara Canon Sync | 6am CDT daily | Mara | Checks citizen data consistency against repo canon |
+| Weekly Code Review | Monday 6am CDT | — | Reviews past 7 days of commits for engine rule violations |
+| Bay-Tribune Container Audit | 7am CDT daily | Mara | Checks bay-tribune for fourth-wall contamination |
+
+## Claude Code Settings (S120)
+
+| Setting | Where | What |
+|---------|-------|------|
+| AutoDream | user | Background memory consolidation between sessions |
+| Auto Mode | project | Classifier-based permissions (try `/auto` to enable) |
+| Thinking Summaries | user | Show reasoning in transcript (ctrl+o) |
+| Channels | user | MCP servers can push inbound messages |
+
+## Hook Events (11 wired)
+
+| Event | Type | Target |
+|-------|------|--------|
+| SessionStart | HTTP + shell | Dashboard + startup script |
+| UserPromptSubmit | shell | Skill suggestions |
+| PreToolUse (Bash) | shell | Safety checks |
+| PostToolUse (Write/Edit) | shell | Contamination + determinism guard |
+| PostToolUse (Bash) | shell | Post-deploy verification |
+| PreCompact | shell | Workflow state injection |
+| PostCompact | shell | Recovery instructions |
+| Stop | HTTP + shell | Dashboard + journal/persistence |
+| SubagentStart | HTTP | Dashboard — agent launched |
+| SubagentStop | HTTP | Dashboard — agent finished |
+| FileChanged | HTTP | Dashboard — external file change |
 
 ---
 

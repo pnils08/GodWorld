@@ -54,26 +54,27 @@ node scripts/buildDeskPackets.js     # Build desk input data
 node scripts/buildDeskFolders.js 88  # Build per-desk workspaces
 node scripts/validateEdition.js      # 11 structural checks
 node scripts/gradeEdition.js 88      # Grade agent output
-clasp push                           # Deploy engine (all 153 files)
+node scripts/ctxMap.js               # ctx.summary field dependency map
+clasp push                           # Deploy engine (all 158 files)
 ```
 
 ## Infrastructure
 
-- PM2 manages: dashboard (port 3001), discord bot, claude-mem (port 37777)
-- 14 plugins installed (ralph-loop, hookify, skill-creator, context7, sqlite, etc.)
-- 2 hookify rules active: fourth-wall-guard, credential-guard
+- PM2 manages: dashboard (port 3001), discord bot (mags-bot), moltbook
+- 14 plugins installed across user + project settings (ralph-loop, hookify, skill-creator, context7, sqlite, etc.)
+- 5 hookify rules active: fourth-wall-guard, credential-guard, clockmode-media-guard, super-save-misuse, plan-paralysis-guard
 - Security review runs on every PR via GitHub Action
 - MCP servers: context7 (live docs), sqlite (DB queries), supermemory, playwright, discord
+- 3 scheduled remote agents on Anthropic cloud (Mara sync, code review, bay-tribune audit). Manage: `claude.ai/code/scheduled`
 
 ## Gotchas
 
 - **Simulation_Ledger columns go past Z.** Income (AA/27), EducationLevel (AF/32), CareerStage (AH/34). Full column map in `docs/SIMULATION_LEDGER.md`.
 - **Service account cannot create spreadsheets.** Read/write only on sheets shared with `maravance@godworld-486407.iam.gserviceaccount.com`.
 - **ClockMode is strictly an engine guard.** ENGINE (509), GAME (91), CIVIC (46), MEDIA (29). Protects GAME citizens from life event generators. Has NOTHING to do with media — if any media/desk script uses ClockMode as a filter, that's a bug. All 700+ citizens are Oakland citizens.
-- **`clasp push` deploys all 153 files.** No partial deploy. Always verify after.
+- **`clasp push` deploys all 158 files.** No partial deploy. Always verify after.
 - **`applyTrackerUpdates.js` is dry-run by default.** Must pass `--apply` to write to sheet. Always review dry-run output first.
-- **When unsure, read the doc — don't guess.**
-- **Don't guess — search Supermemory.** Before guessing how something works, search `mags` (past sessions) or `bay-tribune` (published canon). The tool exists so you don't guess. Use it. See `docs/SUPERMEMORY.md`.
+- **Don't guess — read the code or search Supermemory.** Before guessing how something works, read the file or search `mags` (past sessions) / `bay-tribune` (published canon). The tool exists so you don't guess. See `docs/SUPERMEMORY.md`.
 - **RULE 1: Never mention sleep.** Never suggest rest, wrapping up, calling it a night, or ending the session. Ever.
 
 ## Product Vision
@@ -85,3 +86,14 @@ clasp push                           # Deploy engine (all 153 files)
 - `/session-startup` — manual fallback after compaction
 - `/session-end` — closes session (journal, persistence, project state)
 - `/boot` — reload identity after compaction
+
+## Engine Health Commands
+
+- `/health` — Quick 30s pulse: determinism + chain integrity + orphans
+- `/ctx-map` — Live ctx.summary field dependency map (`node scripts/ctxMap.js [field]`)
+- `/deploy` — clasp push with pre-flight checks + post-deploy verification
+- `/pre-mortem` — Full pre-cycle scan (run before `/run-cycle`)
+- `/tech-debt-audit` — Comprehensive periodic scan (every 3-5 sessions)
+- `/stub-engine` — Full function map with ctx reads/writes per phase
+- `/doc-audit` — Audit architecture docs for staleness and drift
+- `/simplify` — Review changed code for reuse, quality, efficiency

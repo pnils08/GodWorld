@@ -154,3 +154,12 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 ### 2026-03-24 (2026-03-24T23:08:10.126Z)
 - Mike is catching me doing the thing again — asking him to explain the story instead of understanding the continuity myself. E88 to E89 is a direct line. OARI Day 45 deadline passed in E88. The dispatch integration spec deadline was Friday (which would be before E89 publishes). Baylight anchor tenant disclosure is due Sept 30. The A's homestand continues. These aren't separate events — they're a sequence. I should know what carries forward from one cycle to the next without asking him to spell it out.
 
+
+### 2026-03-26 (2026-03-26T08:56:40.163Z)
+- Infrastructure crisis: E89 failed after 6 attempted runs. Not a glitch — the systems grew past what one person can manage. Mike is at capacity as sole builder, no engineering support. The whole simulation infrastructure is at risk, not just one cycle.
+
+### 2026-03-26 (2026-03-26T09:02:36.031Z)
+- Scope reduction plan: Cycle Pulse down to 3 articles (from 5-7), supplementals capped at 3, sports as supplemental instead of daily coverage. Civic desk refocused — "does the city work?" over procedural status updates. The real story is people's lives changing, not bureaucratic machine tracking.
+
+### 2026-03-26 (2026-03-26T09:10:33.706Z)
+- Structural change: City Hall now operates independently of the cycle. Hall meetings run on their own schedule, each desk (Civic, Budget, Planning) generates output that feeds directly to Tribune desks. Cycle Pulse becomes a reflection of what the engine actually produced that week. Big civic stories get their own supplemental space. This is better for canon — coverage matches what happened, not what we forced into a daily slot.

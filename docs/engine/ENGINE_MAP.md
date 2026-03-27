@@ -4,7 +4,7 @@
 
 **Source:** `phase01-config/godWorldEngine2.js` v2.14 — two identical engine paths (live + dry-run/replay).
 
-**Last verified:** 2026-03-24, Session 116 (Phase 7 reordered, arc lifecycle moved to Phase 8, evening carry-forward added, catch-up boost deployed)
+**Last verified:** 2026-03-27, Session 120 (S120: field health audit, orphan cleanup, processArcLifeCyclev1 corrected as active engine file, ctx.summary dependency map added)
 
 ---
 

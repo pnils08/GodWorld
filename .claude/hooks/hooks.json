@@ -21,10 +21,9 @@
             "timeout": 10
           },
           {
-            "type": "command",
-            "command": "EVENT_TYPE=session_start bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/session-event-post.sh\"",
-            "timeout": 5,
-            "async": true
+            "type": "http",
+            "url": "http://localhost:3001/api/session-events",
+            "timeout": 5
           }
         ]
       }
@@ -99,10 +98,42 @@
             "timeout": 10
           },
           {
-            "type": "command",
-            "command": "EVENT_TYPE=session_stop bash \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/session-event-post.sh\"",
-            "timeout": 5,
-            "async": true
+            "type": "http",
+            "url": "http://localhost:3001/api/session-events",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:3001/api/session-events",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:3001/api/session-events",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "FileChanged": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:3001/api/session-events",
+            "timeout": 5
           }
         ]
       }

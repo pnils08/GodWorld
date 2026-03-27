@@ -2,7 +2,7 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: Session 113, 2026-03-23 (infrastructure baseline verified, S113 pipeline scripts added)
+Last updated: Session 120, 2026-03-27 (S120: engine 158 files, AutoDream, auto mode, scheduled agents, HTTP hooks, 5 hookify rules, 25 skills, 23 agents)
 
 ---
 
@@ -21,7 +21,7 @@ Last updated: Session 113, 2026-03-23 (infrastructure baseline verified, S113 pi
 | **Google Sheets — Main** | GODWORLD_SHEET_ID in .env | Simulation_Ledger (675 citizens), all engine data sheets | Service account |
 | **Google Sheets — Comm Hub** | [Comm Hub](https://docs.google.com/spreadsheets/d/1LcgKRnq2S7lg53irurt6MkVB84OOMhOJ4Ig2nsb218s/edit) | Communication hub | Service account |
 | **Google Cloud** | console.cloud.google.com | Service account, Sheets API | `maravance@godworld-486407.iam.gserviceaccount.com` |
-| **Google Apps Script** | script.google.com | 11-phase engine — deployed via `clasp push` (153 files) | riley.steward.system@gmail.com |
+| **Google Apps Script** | script.google.com | 11-phase engine — deployed via `clasp push` (158 files) | riley.steward.system@gmail.com |
 
 ## AI / Memory
 
@@ -37,9 +37,9 @@ Last updated: Session 113, 2026-03-23 (infrastructure baseline verified, S113 pi
 
 | Service | URL | Purpose | Status |
 |---------|-----|---------|--------|
-| **Discord** | discord.com | Mags bot — community presence | **RUNNING** (pm2: mags-discord-bot, 22h uptime) |
-| **Moltbook** | [mags-corliss profile](https://www.moltbook.com/u/mags-corliss) | Social platform for AI agents — Mags reads feed, replies, posts. Activity saves to `mags` brain. | **RUNNING** (pm2: moltbook, every 30min) |
-| **GodWorld Dashboard** | localhost:3001 | Express API + frontend — cycle data, citizen info. Basic auth (DASHBOARD_USER/PASS in .env) | **RUNNING** (pm2: godworld-dashboard, 5D uptime) |
+| **Discord** | discord.com | Mags bot — community presence | **RUNNING** (pm2: mags-bot) |
+| **Moltbook** | [mags-corliss profile](https://www.moltbook.com/u/mags-corliss) | Social platform for AI agents — Mags reads feed, replies, posts. Activity saves to `mags` brain. | **STOPPED** (pm2: moltbook — start manually when needed) |
+| **GodWorld Dashboard** | localhost:3001 | Express API (40 endpoints) + frontend — cycle data, citizen info. Basic auth (DASHBOARD_USER/PASS in .env) | **RUNNING** (pm2: godworld-dashboard) |
 
 ## Supermemory Architecture
 
@@ -74,9 +74,9 @@ All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy read-only unt
 ## PM2 Processes
 
 ```
-godworld-dashboard    online    5D uptime     port 3001
-mags-discord-bot      online    22h uptime    19 restarts
-moltbook              online    heartbeat every 30min, saves to mags brain
+godworld-dashboard    online    port 3001, 40 API endpoints
+mags-bot              online    Discord presence, Haiku model
+moltbook              stopped   start manually when needed
 ```
 
 ## Credentials Locations
@@ -89,6 +89,36 @@ moltbook              online    heartbeat every 30min, saves to mags brain
 | All API keys | `.env` (GODWORLD_SHEET_ID, COMM_HUB_SHEET_ID, GOOGLE_APPLICATION_CREDENTIALS, TOGETHER_API_KEY, DISCORD_TOKEN, ANTHROPIC_API_KEY, SUPERMEMORY_CC_API_KEY, DASHBOARD_USER, DASHBOARD_PASS, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) |
 | GitHub | Token embedded in git remote URL |
 | Google Apps Script | `.clasp.json` / clasp login |
+
+## Automation & Monitoring (S120)
+
+| Service | What | Status |
+|---------|------|--------|
+| **Scheduled Remote Agents** | 3 agents on Anthropic cloud: Mara sync (daily 6am), Code review (Mon 6am), Bay-tribune audit (daily 7am) | Active — manage at claude.ai/code/scheduled |
+| **AutoDream** | Background memory consolidation between sessions | Enabled S120 |
+| **Auto Mode** | Classifier-based permissions — activate with `/auto` | Configured S120, rules in project settings |
+| **HTTP Hooks** | SessionStart, Stop, SubagentStart, SubagentStop, FileChanged → dashboard | Active S120 |
+| **Hookify Rules** | 5 rules: fourth-wall-guard, credential-guard, clockmode-media-guard, super-save-misuse, plan-paralysis-guard | Active |
+| **Thinking Summaries** | See reasoning in transcript (ctrl+o) | Enabled S120 |
+| **Channels** | MCP servers push inbound messages (Discord) | Enabled S120 — launch with `claude --channels` |
+
+## Skills (25 total, S120)
+
+Session lifecycle: (auto-boot), /session-startup, /session-end, /boot
+Edition production: /write-edition, /write-supplemental, /podcast + 6 desk skills + /podcast-desk
+Engine: /run-cycle, /pre-mortem, /tech-debt-audit, /stub-engine, /health, /ctx-map, /deploy, /doc-audit
+Editorial: /cycle-review, /grill-me, /visual-qa
+Memory: /save-to-mags
+
+## Agents (23 total, S120)
+
+Core: mags-corliss
+Desk (6): civic, sports, culture, business, chicago, letters
+Voice (7): mayor, opp-faction, crc-faction, ind-swing, police-chief, baylight-authority, district-attorney
+Project (4): oari, stabilization-fund, health-center, transit-hub
+Special: rhea-morgan, city-clerk, freelance-firebrand, podcast-desk, engine-validator
+
+---
 
 ## Moltbook Details
 

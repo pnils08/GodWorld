@@ -1248,6 +1248,126 @@ Three concrete use cases identified:
 ### Codebase Knowledge Graphs
 - Corbell: CLI that builds a knowledge graph of your codebase, exposes it as MCP server — github.com/Corbell-AI/Corbell (Apache 2.0, SQLite + local embeddings)
 
+### S120 — Research Batch: AutoDream, HyperAgents, xMemory (2026-03-27)
+
+**Source files:** `output/research/` — 3 PDFs + 1 screenshot from Google Drive folder.
+
+#### AutoDream — Claude Code Background Memory Consolidation
+
+**Source:** Geeky Gadgets article (March 25, 2026). Based on Nate Herk / AI Automation.
+
+**What it is:** Native Claude Code feature. Background sub-agent that runs between sessions to consolidate, prune, and reorganize memory files. Three operations: (1) **Consolidation** — merge related memory files to reduce fragmentation, (2) **Pruning** — remove redundant/stale data, (3) **Reorganization** — restructure for faster recall. Mimics human memory consolidation during sleep.
+
+**Complement to AutoMemory:** AutoMemory captures (writes). AutoDream refines (consolidates/prunes). Together they form a complete memory lifecycle — capture, refine, recall.
+
+**GodWorld relevance:** HIGH. We have 20+ memory files in `~/.claude/projects/-root-GodWorld/memory/`, many overlapping with PERSISTENCE.md, NEWSROOM_MEMORY.md, and Supermemory. AutoDream would consolidate duplicates, prune stale session references, and reorganize by topic. This is exactly the memory bloat problem we've been managing manually.
+
+**Action:** ENABLED S120. Added `"autoDreamEnabled": true` to `~/.claude/settings.json`. Will consolidate memory files between sessions automatically. Monitor for 3-5 sessions to see if it helps or makes unwanted changes.
+
+→ **Implemented** — no rollout entry needed, just a setting.
+
+---
+
+#### HyperAgents — Self-Referential Self-Improving Agents (Meta Research)
+
+**Source:** arXiv 2603.19461 (March 23, 2026). Jenny Zhang et al., Meta/UBC/Vector/Edinburgh.
+
+**What it is:** A "hyperagent" combines the task agent (does work) and the meta agent (improves the task agent) into a single editable program. Unlike standard self-improvement (where a fixed meta-agent improves the task agent), hyperagents can modify their OWN improvement mechanism — "metacognitive self-modification."
+
+**Key results:**
+- On Polyglot coding: 0.140 → 0.340 (comparable to the original Darwin Gödel Machine)
+- On paper review: 0.0 → 0.710 (outperforms static baselines)
+- On robotics reward design: 0.060 → 0.372
+- Meta-improvements TRANSFER across domains — a hyperagent trained on coding writes better paper reviewers
+- Both metacognition AND open-ended exploration are necessary. Remove either and performance collapses.
+
+**Architecture:** Population of hyperagents, each a self-contained Python program. Selection is probabilistic — biased toward high performers that produce strong children. Each generation, selected parents generate modified children. Children are evaluated, added to the archive. The improvement mechanism itself evolves.
+
+**How it maps to GodWorld:**
+
+| HyperAgent concept | GodWorld equivalent | Gap |
+|---|---|---|
+| Task agent | Desk agent (writes articles) | None — exists |
+| Meta agent | gradeEdition.js + extractExemplars.js | Exists but STATIC — doesn't self-modify |
+| Archive of variants | Grade history + exemplars | Exists as data, not as agent variants |
+| Population selection | Grade-based exemplar extraction | Exists but only selects OUTPUT, not AGENT CONFIG |
+| Metacognitive self-modification | **Nothing** | The grading criteria, lens pool, and briefing structure never change based on what worked |
+
+**The gap:** Our Karpathy Loop (Phase 26) closes the output feedback loop — grade articles, extract exemplars, feed back to agents. But the LOOP ITSELF is static. The grading rubric doesn't evolve. The lens pool doesn't evolve. The briefing structure doesn't evolve. Phase 26.2 (Meta-Loop) was designed for this but never started.
+
+**What to steal:**
+1. **Directive tracking** (Phase 26.2.1) — already designed, not built. Track which grading directives actually lift scores. Promote effective ones, drop dead weight.
+2. **Lens evolution** (Phase 26.2.2) — already designed, not built. Track which creative/political lenses correlate with better grades. Evolve the pool.
+3. **Agent identity mutation** — NOT in our rollout. A hyperagent would modify the IDENTITY.md of desk agents based on what produces better output. A sports desk that discovers "lead with the player's interior state" works better than "lead with the score" would rewrite its own IDENTITY.md to prefer that pattern.
+
+→ **Graduated to rollout** — Phase 26.2 priority raised, Phase 26.2.4 (agent identity mutation) added. See ROLLOUT_PLAN.md.
+
+---
+
+#### xMemory — Hierarchical Structured Memory for Multi-Session Agents
+
+**Source:** VentureBeat article (March 25, 2026) + arXiv paper. King's College London / Alan Turing Institute.
+
+**What it is:** A memory framework that replaces flat RAG with a 4-level hierarchy:
+1. **Original messages** — raw conversation turns
+2. **Episodes** — contiguous blocks summarized into coherent chunks
+3. **Semantic nodes** — reusable facts distilled from episodes (deduplication happens here)
+4. **Themes** — high-level groupings of related semantics
+
+**Retrieval:** Top-down search. Start at theme level, navigate to relevant semantic nodes, only drill to episode/message level if "uncertainty gating" determines the extra detail would reduce uncertainty. This is the key insight — similarity is a CANDIDATE signal, uncertainty is a DECISION signal.
+
+**Results:** Token usage drops from 9,000 to 4,700 per query. Answer quality improves across GPT-4, Claude, open-source models. The hierarchy prevents "collapsed retrieval" (top-k similarity returning 10 near-duplicates instead of diverse relevant facts).
+
+**xMemory vs Supermemory:**
+
+| Dimension | Supermemory ($9/mo) | xMemory (MIT open source) |
+|---|---|---|
+| Architecture | Flat similarity search (embedding + cosine) | 4-level hierarchy (themes → semantics → episodes → messages) |
+| Retrieval | Top-k nearest neighbors | Top-down with uncertainty gating |
+| Deduplication | Manual (we deleted 26 duplicates S113) | Automatic at semantic node level |
+| Integration | Claude Code plugin + MCP | Self-hosted, needs LLM calls for processing |
+| Write cost | Cheap (just embed + store) | Expensive (LLM calls to summarize, extract facts, group themes) |
+| Read cost | 9,000+ tokens per query | ~4,700 tokens per query |
+| Our problem it solves | Collapsed retrieval returns duplicates, misses cross-topic connections | Same — but structurally, not by manual container separation |
+| Operational effort | Zero (managed SaaS) | High (self-host, maintain, pay for background LLM processing) |
+
+**Verdict:** xMemory is architecturally superior for our use case (120+ sessions, temporal entanglement, near-duplicates). But it's a research technique, not a product. Implementing it would mean self-hosting + ongoing LLM costs for the write-time processing.
+
+**The real answer:** AutoDream (just enabled) + AutoMemory may solve the same problems natively. Anthropic is building consolidation/pruning/reorganization into Claude Code itself. If AutoDream works well for 3-5 sessions, it replaces the need for xMemory's hierarchy. If it doesn't, xMemory becomes the alternative.
+
+**Also:** Our manual 3-container separation (mags/bay-tribune/mara) is a crude version of xMemory's theme layer. The containers ARE themes — personal (mags), world canon (bay-tribune), audit data (mara). xMemory would make the structure within each container hierarchical too.
+
+→ **Added to Watch List** — evaluate after AutoDream has 5 sessions of data. If memory quality improves, stay with Supermemory + AutoDream. If not, evaluate xMemory self-hosted.
+
+---
+
+#### Claude Team Shipping Calendar (Feb-Mar 2026)
+
+**Source:** Anthropic Research tweet, screenshot of 52-day shipping calendar.
+
+**What we're aware of and using:**
+- AutoMemory, AutoDream (just enabled), Skills 2.0, Hooks system, Subagents, Scheduled triggers, Voice mode, Web app, Desktop app, Plugins, MCP servers, Worktree isolation, Extended thinking, PR review toolkit, Fast mode
+
+**What we're aware of but NOT using yet:**
+- Auto mode (`defaultMode: "auto"`) — classifier-based permission system. Could reduce approval prompts in production.
+- Agent hooks (SubagentStart/SubagentStop) — hook into desk agent lifecycle
+- HTTP hooks — POST to dashboard instead of shell commands. Phase was designed (S113) but not switched.
+- Prompt hooks / Agent hooks — LLM-evaluated hooks. Could replace pattern-based hookify rules with semantic checks.
+- FileChanged hook — react to external file changes (git pull, other processes)
+- Elicitation hooks — hook into user question flow
+
+**What we may have missed (from settings schema):**
+- `showThinkingSummaries` — show thinking in transcript view
+- `promptSuggestionEnabled` — prompt suggestions
+- `channelsEnabled` — inbound push notifications from MCP servers (Discord, etc.)
+- `advisorModel` — server-side advisor tool
+- `plansDirectory` — custom plan file location
+- `autoMode.allow/soft_deny/environment` — fine-grained auto mode rules
+
+→ **Added to rollout** — auto mode evaluation, HTTP hooks migration, agent lifecycle hooks.
+
+---
+
 ### Reference Implementations
 - Anthropic Quickstarts — 6 projects: autonomous-coding (two-agent pattern), browser-use-demo (DOM-aware Playwright), agents (minimal loop), computer-use-demo, customer-support, financial-analyst. github.com/anthropics/anthropic-quickstarts (MIT)
 - Claude Cookbooks — 60+ notebooks: agent SDK tutorials, session memory compaction, memory tool, agent patterns (orchestrator-workers, evaluator-optimizer), parallel tools, vision+tools, batch processing, prompt caching, skills, evals. github.com/anthropics/claude-cookbooks (MIT)

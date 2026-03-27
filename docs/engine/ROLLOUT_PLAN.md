@@ -1,6 +1,6 @@
 # GodWorld — Rollout Plan
 
-**Status:** Active | **Last Updated:** Session 114 (2026-03-24)
+**Status:** Active | **Last Updated:** Session 120 (2026-03-27)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** `ROLLOUT_ARCHIVE.md` — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
@@ -261,7 +261,9 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 3. **26.2.3 Briefing evolution.** `buildDeskFolders.js` assembles briefings from packets, grades, lenses, exemplars. Track which briefing components actually appear in agent output. Trim unused components, expand high-impact ones. **Implementation:** Semantic similarity between briefing sections and article output. Low-similarity sections flagged for removal.
 
-**Priority:** MEDIUM — requires 3-5 more editions to generate enough data. The Karpathy Loop needs to run a few more times before the meta-loop has signal to work with.
+4. **26.2.4 Agent identity mutation (HyperAgent pattern).** Agents modify their own IDENTITY.md based on what produces better output. After 5+ editions with grade history, a meta-agent reads the grade trends, the effective directives (26.2.1), the winning lenses (26.2.2), and rewrites the IDENTITY.md to encode the patterns that work. This is the hyperagent concept from Meta Research (arXiv 2603.19461, March 2026) — the improvement mechanism itself becomes editable. **Implementation:** New script `scripts/evolveAgentIdentity.js` reads grade_history + exemplars + directive tracking, proposes IDENTITY.md patches, human approves. Full autonomy (agent rewrites itself without approval) is Phase 27.4+ territory. See `docs/RESEARCH.md` S120 HyperAgents entry.
+
+**Priority:** MEDIUM-HIGH — raised from MEDIUM after HyperAgents research. Requires 3-5 more editions for data. Phase 26.2.1 (directive tracking) is the prerequisite — start there.
 
 ### Phase 29: Codebase Knowledge Graph (Corbell) — NOT STARTED
 
@@ -380,3 +382,9 @@ Tracking for future adoption. Not building.
 | Extended Thinking for Agents | Test on civic/sports desks |
 | Computer Use exits beta | Stable + cheaper → expand beyond QA to routine agent tasks |
 | NPM Package Drift | 7 packages behind. Batch update in maintenance session. |
+| xMemory (hierarchical memory) | AutoDream fails to solve collapsed retrieval after 5 sessions → evaluate self-hosted xMemory |
+| Auto Mode | Evaluate for production pipelines — could eliminate approval prompts during `/write-edition` |
+| HTTP Hooks migration | Replace shell-based hooks with HTTP POST to dashboard endpoints for unified event stream |
+| Agent lifecycle hooks (SubagentStart/Stop) | Desk agent monitoring — track which agents take longest, fail most |
+| Prompt/Agent hooks | Replace pattern-based hookify rules with semantic LLM-evaluated checks |
+| FileChanged hook | Auto-react to git pulls, external file changes during autonomous operation |

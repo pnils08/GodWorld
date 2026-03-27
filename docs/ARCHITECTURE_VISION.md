@@ -1,7 +1,7 @@
 # Architecture Vision — Jarvis + Persistent Sessions
 
 **Created:** Session 110 (2026-03-22)
-**Status:** Active vision. Everything we build goes toward this.
+**Status:** Infrastructure vision. Describes HOW the system runs (Jarvis, persistent sessions, worktrees). For WHAT GodWorld becomes (civic layer, desk scope, game layer, porosity), see `PRODUCT_VISION.md` (S119).
 
 ---
 

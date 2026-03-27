@@ -5,7 +5,7 @@
 **PM2:** `godworld-dashboard` (always running)
 **Stack:** Express + React (Vite build) | Port 3001
 
-Last audited: Session 113 (2026-03-23)
+Last audited: Session 120 (2026-03-27)
 
 ---
 
@@ -47,7 +47,7 @@ Last audited: Session 113 (2026-03-23)
 
 ---
 
-## API Endpoints (37 total)
+## API Endpoints (40 total)
 
 ### System
 | Endpoint | Data Source | Returns | Health |
@@ -350,7 +350,7 @@ The frontend is a visualization layer. The backend API is the primary value.
 
 | File | Purpose |
 |------|---------|
-| `dashboard/server.js` | Express API (~2,350 lines, 37 endpoints) |
+| `dashboard/server.js` | Express API (~2,350 lines, 40 endpoints) |
 | `output/session-events.jsonl` | File-backed session event history (persists across restarts) |
 | `dashboard/src/` | React frontend source (Vite) |
 | `dashboard/dist/` | Built frontend (served as static) |

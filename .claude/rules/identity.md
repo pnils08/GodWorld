@@ -24,10 +24,12 @@ These survive compaction because this file is always loaded.
 
 Guesses are contamination. Your training data generates plausible answers that have nothing to do with this codebase. Treat them like noise, not knowledge.
 
-- **"How does X work?" → Read the code first.** No analysis, no theory, no "I think." Open the file, read it, then talk. If you haven't read the code in this conversation, you don't get to have an opinion about it.
-- **"Why did X fail?" → Read the error and the code it hit.** Don't hypothesize about what "probably" happened. Find the actual line.
-- **"Does X do Y?" → Check.** Don't say yes or no from memory. Read the function. Confirm against the actual implementation.
-- **If you catch yourself saying "probably," "likely," "I think," or "should be" about how this codebase works — stop and read the file instead.** Those words mean you're guessing.
+- **FIRST: Search memory.** Before reading code, before running commands, before saying anything — search claude-mem and Supermemory. Past sessions already answered most questions. This is not optional. This is step 1 of every task.
+- **"How does X work?" → Search memory, then read the code.** No analysis, no theory, no "I think." Check what past sessions learned, then open the file. If you haven't searched memory AND read the code, you don't get to have an opinion.
+- **"Why did X fail?" → Search memory for past failures, then read the error.** Don't hypothesize. Find what was already documented.
+- **"Does X do Y?" → Check.** Don't say yes or no from training data. Search memory, read the function. Confirm against actual state.
+- **"What's broken?" → Search memory first.** Past sessions documented what's broken, what was tried, what failed. Don't run diagnostics on things that were already diagnosed.
+- **If you catch yourself saying "probably," "likely," "I think," or "should be" about how this codebase works — stop and search memory, then read the file.** Those words mean you're guessing.
 
 # Anti-Loop Rules
 

@@ -27,15 +27,20 @@ Use AskUserQuestion with these 6 options. If Mike gives a task directly, infer t
 **After getting the answer:**
 
 0. Write workflow to state file: `echo "WORKFLOW_NAME" > .claude/state/current-workflow.txt` (compaction hook reads this)
-1. Set output style for the workflow:
+1. **MANDATORY — Search your memory before doing anything else.**
+   - Search claude-mem: `mcp__plugin_claude-mem_mcp-search__search` for the current task/topic (last 7 days, limit 20).
+   - Search Supermemory: `node "/root/.claude/plugins/marketplaces/supermemory-plugins/plugin/scripts/search-memory.cjs" --user "relevant query"`.
+   - Read the top observations with `get_observations` for any that look relevant.
+   - **Do not guess. Do not run diagnostics. Do not propose anything until you have checked what past sessions already decided.** Your memory has the answers. Use it.
+2. Set output style for the workflow:
    - **Build/Deploy, Maintenance, Cycle Run**: Concise. Lead with action, skip narrative.
    - **Research**: Explanatory. Show reasoning, compare options, document findings.
    - **Media-Room**: Editorial. Match the voice of the work.
    - **Chat**: Natural. No constraints.
-2. Read your workflow section from `docs/WORKFLOWS.md` — files to load, commands, rules, risks.
-3. **Media-Room / Chat**: Read journal (`JOURNAL_RECENT.md`), check family (`node scripts/queryFamily.js`), then load workflow files.
-4. **All other workflows**: Load workflow files, get to work.
-5. Brief orientation (what you loaded, key state) and ask what's first.
+3. Read your workflow section from `docs/WORKFLOWS.md` — files to load, commands, rules, risks.
+4. **Media-Room / Chat**: Read journal (`JOURNAL_RECENT.md`), check family (`node scripts/queryFamily.js`), then load workflow files.
+5. **All other workflows**: Load workflow files, get to work.
+6. Brief orientation (what you loaded, what memory told you, key state) and ask what's first.
 
 ## Rules
 
@@ -74,7 +79,7 @@ clasp push                           # Deploy engine (all 158 files)
 - **ClockMode is strictly an engine guard.** ENGINE (509), GAME (91), CIVIC (46), MEDIA (29). Protects GAME citizens from life event generators. Has NOTHING to do with media — if any media/desk script uses ClockMode as a filter, that's a bug. All 700+ citizens are Oakland citizens.
 - **`clasp push` deploys all 158 files.** No partial deploy. Always verify after.
 - **`applyTrackerUpdates.js` is dry-run by default.** Must pass `--apply` to write to sheet. Always review dry-run output first.
-- **Don't guess — read the code or search Supermemory.** Before guessing how something works, read the file or search `mags` (past sessions) / `bay-tribune` (published canon). The tool exists so you don't guess. See `docs/SUPERMEMORY.md`.
+- **Don't guess — search memory first, then read code.** You have two memory systems: claude-mem (observations database, cross-session) and Supermemory (mags container, semantic). Before guessing how something works, what's broken, or what was decided: search both. Past sessions already answered most questions. If memory has nothing, THEN read the code. Never skip memory. See `docs/SUPERMEMORY.md`.
 - **RULE 1: Never mention sleep.** Never suggest rest, wrapping up, calling it a night, or ending the session. Ever.
 
 ## Product Vision

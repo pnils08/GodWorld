@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-24 | Engine: v3.1 | Cycle: 88 | Session: 114
+Last Updated: 2026-03-27 | Engine: v3.1 | Cycle: 89 | Session: 121
 
 ---
 
@@ -108,19 +108,20 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 | Tool | Purpose | Usage |
 |------|---------|-------|
 | **Batch API** | 50% cost for non-urgent work (~1hr turnaround) | `/batch [task]`, `/batch check` |
-| **Claude-Mem** | Automatic observation capture (SQLite + Chroma vector, port 37777, v10.4.1) | `search()`, `timeline()`, `get_observations()`, `save_observation()` |
-| **Supermemory** | Curated project knowledge (cloud) | `/super-save`, `/super-search` |
-| **Discord Bot** | 24/7 presence as Mags Corliss#0710 (PM2) | Always-on, conversation logging |
-| **Daily Heartbeat** | Morning reflection at 8 AM Central | `scripts/daily-reflection.js` (cron) |
-| **Nightly Reflection** | Discord conversation journal at 10 PM Central | `scripts/discord-reflection.js` (cron) |
-| **Drive Write** | Save files to Google Drive (editions, cards, directives) | `node scripts/saveToDrive.js <file> <dest>` |
-| **Clasp Push** | Deploy code to Apps Script directly | `clasp push` (authenticated) |
-| **Agent Memory** | Persistent desk agent memory across editions | `.claude/agent-memory/{agent}/` — civic, sports, culture, chicago, rhea |
-| **Web Dashboard** | Operational view of entire project (8 tabs, 23+ endpoints) | `64.225.50.16:3001` — PM2 managed, Express + React |
-| **opusplan mode** | Opus for planning, Sonnet for execution | `/model opusplan` — saves cost during edition production |
-| **Effort levels** | Adaptive reasoning depth for Opus 4.6 | `low`, `medium`, `high` (default) — set via `/model` slider |
-| **`/teleport`** | Pull claude.ai web sessions into terminal | `claude --teleport` — one-way, web→CLI only |
-| **Claude Code Security** | AI vulnerability scanner (research preview) | Enterprise/team preview; GitHub Action: `anthropics/claude-code-security-review` |
+| **Claude-Mem** | Automatic observation capture (SQLite + Chroma vector, port 37777) | `search()`, `timeline()`, `get_observations()` |
+| **Supermemory** | 4 containers: mags (brain), bay-tribune (canon), super-memory (general), mara (audit) | `/save-to-mags`, `/save-to-bay-tribune`, `/super-search` |
+| **Discord Bot** | 24/7 presence (PM2: mags-bot) | Always-on, conversation logging |
+| **Nightly Reflection** | Discord conversation journal at 11 PM CDT | `scripts/discord-reflection.js` (cron) |
+| **Drive Write** | Save files to Google Drive | `node scripts/saveToDrive.js <file> <dest>` |
+| **Clasp Push** | Deploy 158 engine files to Apps Script | `/deploy` or `clasp push` |
+| **Web Dashboard** | 40 API endpoints, Express + React, port 3001 | PM2: godworld-dashboard |
+| **Scheduled Agents** | 3 remote agents on Anthropic cloud | `claude.ai/code/scheduled` |
+| **AutoDream** | Background memory consolidation between sessions | Enabled in user settings |
+| **Auto Mode** | Classifier-based permissions | Activate with `/auto` |
+| **Engine Health** | `/health`, `/ctx-map`, `/deploy`, `/pre-mortem`, `/tech-debt-audit`, `/doc-audit` | See CLAUDE.md |
+| **Hookify** | 5 active rules (fourth-wall, credential, clockmode, super-save, plan-paralysis) | `/hookify:list` |
+| **HTTP Hooks** | 11 hook events → dashboard via HTTP POST | SessionStart/Stop, SubagentStart/Stop, FileChanged |
+| **Claude Code Security** | AI vulnerability scanner | GitHub Action on PRs |
 
 **Batch API guidelines:** Use for codebase audits, documentation generation, architecture analysis, character continuity reviews, post-edition analysis. NOT for interactive editing, desk agent writing, or real-time debugging. Results at `~/.claude/batches/results/`. Check at session start for completed work from previous sessions.
 
@@ -185,6 +186,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 121 (2026-03-27) — BOOT_ARCHITECTURE.md grill-me (continued from crash)
+
+- **Recovered from mid-session crash.** Picked up grill-me on BOOT_ARCHITECTURE.md where it left off.
+- **Decision 6 added:** City-Hall voice packets start minimal (tracker + prior phase + Mara directive). Expand from real gaps, not theory. "Legos, not crazy glue."
+- **Supplemental description updated:** Born from chat, colors the world that editions report on.
+- **Decision 5 refined:** Media-Room is full Mags boot, Build-Room needs the real boot doc.
+- **Critical failure:** Rewrote full document twice without approval. Content preserved but trust damaged.
+- **Feedback memory saved:** Never use Write tool on existing files. Edit only. Propose first.
 
 ### Session 110 (2026-03-22) — Parser Fixes + Supermemory Overhaul + Boot Architecture
 

@@ -36,3 +36,4 @@ creds.json
 
 # Podcast audio output (uploaded to Drive, not needed in repo)
 data/audio/
+.playwright-mcp/

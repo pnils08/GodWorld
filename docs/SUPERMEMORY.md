@@ -7,7 +7,7 @@ Legacy GodWorld org ($19/mo) is dead — 57k junk memories. Old API key (`sm_atk
 
 ---
 
-## The Three Containers
+## The Four Containers
 
 ### `mags` — The Brain
 
@@ -39,16 +39,27 @@ The published world. Oakland's living history through journalism.
 
 **How to use:** Search `bay-tribune` when you need current context about Oakland — what's been published about OARI, who was quoted in Fruitvale, what the A's roster looks like. Semantic search works: query "OARI dispatch" and get back all relevant chunks across editions.
 
-**Contents (audited S109):**
+**Contents (last audited S113, duplicates cleaned):**
 
 | Content | Count | Description |
 |---------|-------|-------------|
-| Editions E83-E87 | ~10 docs | 5 Cycle Pulse editions (chunked by Supermemory) |
-| Supplementals C83-C87 | ~7 docs | Fruitvale, tech landscape, housing, food scene, Baylight labor |
+| Editions E83-E89 | ~14 docs | 7 Cycle Pulse editions (chunked by Supermemory) |
+| Supplementals C83-C88 | ~10 docs | Fruitvale, tech landscape, housing, food scene, Baylight labor, education |
 | Oakland A's Roster | 1 doc | 89 players — POPID, name, position, team, tier |
-| ~22 duplicates | ~22 docs | From double-ingestion in S106. Harmless but should be cleaned. |
 
 **Ingest after each edition:** `node scripts/ingestEdition.js <edition-file>`
+
+---
+
+### `super-memory` — General Purpose
+
+**What goes in:** Anything that doesn't fit the other three containers. Codebase indexes (`/claude-supermemory:index`), general knowledge saves, experimental content. Safe dumping ground — not agent-facing, not canon, not personal.
+
+**Who reads:** Nobody automatically. Search manually when needed.
+**Who writes:** Reserved for future use — codebase indexing, general plugin saves.
+**Plugin role:** None (not in config). Access via direct API only.
+
+**Created S120.** Currently holds only the seed document. Available if we ever need to separate general indexed content from Mags' brain.
 
 ---
 
@@ -99,9 +110,11 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 ```json
 {
   "personalContainerTag": "mags",
-  "repoContainerTag": "bay-tribune"
+  "repoContainerTag": "mags"
 }
 ```
+
+Both point to `mags`. This means `/super-save` and `/super-search` both hit `mags` by default. Use `/save-to-bay-tribune` for canon saves.
 
 ### Hooks
 
@@ -116,9 +129,11 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 | Command | What it does | Container |
 |---------|-------------|-----------|
 | `/super-search --user "query"` | Search personal memory | `mags` |
-| `/super-search --repo "query"` | Search canon archive | `bay-tribune` |
-| `/super-search --both "query"` | Search both | `mags` + `bay-tribune` |
-| `/super-save "content"` | Save to canon | `bay-tribune` — **media content only** |
+| `/super-search --repo "query"` | Search repo memory | `mags` (repoContainerTag = mags) |
+| `/super-search --both "query"` | Search both | `mags` + `mags` (same currently) |
+| `/super-save "content"` | Save to repo memory | `mags` (repoContainerTag = mags) |
+| `/save-to-mags "content"` | Save session work to Mags' brain | `mags` |
+| `/save-to-bay-tribune "content"` | Save published canon — editions, rosters, game results ONLY | `bay-tribune` |
 
 ---
 
@@ -146,7 +161,8 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 | Container | Claude Code plugin | Discord bot | Moltbook | Mara (claude.ai) |
 |-----------|-------------------|-------------|----------|-------------------|
 | `mags` | Read + Write | Read + Write | Read + Write | No access |
-| `bay-tribune` | Read + Write | Read | No access | No access |
+| `bay-tribune` | Read (boot) + Write (via `/save-to-bay-tribune`) | Read | No access | No access |
+| `super-memory` | No access (direct API only) | No access | No access | No access |
 | `mara` | **No access** | No access | No access | Read + Write |
 
 ---

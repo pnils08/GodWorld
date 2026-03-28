@@ -31,6 +31,7 @@ The 15 active architecture docs in `docs/` (not archive, not media voices, not j
 | `WORLD_MEMORY.md` | Archive system — verify paths and scripts exist |
 | `RESEARCH.md` | Active questions — any answered? Findings log — any graduated to rollout but not marked? |
 | `STACK.md` | PM2 process names + status, file counts (158 engine files), endpoint counts (40), skill count (25), agent count (23), plugin list, Supermemory container state, automation section (scheduled agents, AutoDream, hooks, hookify rules) |
+| `SUPERMEMORY.md` | 4 containers (mags, bay-tribune, super-memory, mara), plugin config matches `.claude/.supermemory-claude/config.json`, access matrix current, bay-tribune contents count matches reality, skills table matches actual commands |
 
 Also check engine docs:
 

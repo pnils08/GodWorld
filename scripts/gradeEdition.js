@@ -83,6 +83,7 @@ const REPORTER_DESK = {
   // Supplemental reporters
   'Sharon Okafor': 'culture',
   'Angela Reyes': 'culture',
+  'Elliot Graye': 'culture',
   'MintConditionOakTown': 'freelance'
 };
 
@@ -130,8 +131,8 @@ function parseEdition(text) {
       };
     }
 
-    // Detect bylines: "By Reporter Name | Bay Tribune ..."
-    const bylineMatch = line.match(/^By\s+(.+?)\s*\|/);
+    // Detect bylines: "By Reporter Name | Bay Tribune ...", "By Reporter Name, Title", or "By Reporter Name" (standalone)
+    const bylineMatch = line.match(/^By\s+(.+?)\s*[|,]/) || (line.match(/^By\s+(\w[\w\s]+)$/) && REPORTER_DESK[line.replace(/^By\s+/, '').trim()] ? line.match(/^By\s+(.+)$/) : null);
     if (bylineMatch && currentDesk) {
       const reporter = bylineMatch[1].trim();
       if (currentArticle) {
@@ -147,11 +148,16 @@ function parseEdition(text) {
         title: '',
         text: ''
       };
-      // Look back for title (bold line before byline)
-      for (let j = i - 1; j >= Math.max(0, i - 3); j--) {
+      // Look back for title (bold **Title** or ALL-CAPS line before byline)
+      for (let j = i - 1; j >= Math.max(0, i - 5); j--) {
         const prev = lines[j].trim();
         if (prev.startsWith('**') && prev.endsWith('**')) {
           currentArticle.title = prev.replace(/\*\*/g, '');
+          break;
+        }
+        // ALL-CAPS title (skip delimiters and empty lines)
+        if (prev.length > 5 && prev === prev.toUpperCase() && /[A-Z]/.test(prev) && !prev.match(/^[-=]{3,}$/)) {
+          currentArticle.title = prev;
           break;
         }
       }

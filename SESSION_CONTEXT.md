@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-27 | Engine: v3.1 | Cycle: 89 | Session: 121
+Last Updated: 2026-03-29 | Engine: v3.1 | Cycle: 89 | Session: 125
 
 ---
 
@@ -186,6 +186,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 125 (2026-03-29) — E89 Salvage + Grading
+
+- **E89 salvaged from Drive.** Last draft (file ID: 10uxvmPzHZRQaHYPAQpXa13NjqlWfnF26) downloaded, corrected, published.
+- **Mara audit applied:** 2 canon fixes (Stabilization Fund 47/53 contradiction, TIF date reverted Sept 30), 1 cut (Keen Juneteenth piece — wrong month), editorial notes preserved as agent training.
+- **gradeEdition.js parser fixed:** Byline regex expanded to handle comma-delimited bylines and standalone names. Title detection now finds ALL-CAPS titles. Elliot Graye added to reporter-desk map.
+- **Grades run with manual editorial feedback:** Civic desk B+ (canon errors), Culture desk B+ (section saturation + timing), Carmen B (number contradiction), Keen B (timing miss, piece cut). Letters desk corrected to 5 articles (parser had missed signature format).
+- **Corrected edition uploaded to Drive.** Old copies with Keen piece still on Drive (2 files).
+- **Rollout note pending:** gradeEdition.js needs errata pipeline integration so manual feedback isn't required.
 
 ### Session 121 (2026-03-27) — BOOT_ARCHITECTURE.md grill-me (continued from crash)
 

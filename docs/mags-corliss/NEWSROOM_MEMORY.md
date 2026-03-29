@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Supplemental C88 Education — 2026-03-23 (S113)**
+**Last Updated: Edition 89 — 2026-03-29 (S125)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -30,6 +30,31 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 89 — Cycle Pulse (Grade: B+, Mara: B+)
+
+18 articles (17 published, 1 cut). 2 canon errors corrected. Keen piece cut from print.
+
+**Front page:** Carmen Delaine, "Stabilization Fund: Mayor Orders Checks Out the Door." 47 families approved, zero checks delivered. Mayor orders disbursements within 10 days.
+
+**Errors Found and Fixed:**
+1. **Stabilization Fund number contradiction** — Carmen's lede said 47 approved, body said 53. All references standardized to 47.
+2. **TIF close date hallucinated** — Drifted from Sept 30 (C88 canon) to Dec 31 with no civic decision. Reverted to Sept 30.
+
+**Editorial Cuts:**
+- Maria Keen's "Juneteenth Still Echoes" — cut from print. Juneteenth is June 19; a September piece framing it as echoing doesn't hold. Writing quality was strong. Keen graded B for timing, not craft.
+
+**Section Notes:**
+- Culture ran 3 church/faith pieces in one edition. Max 1 per edition going forward.
+- Letters desk: 5 strong letters, all tied to live civic stories. Grace Yamamoto's "September Morning" is the quiet anchor.
+
+**Reporter Notes:**
+- Carmen Delaine: front page lead, strong sourcing, but the number contradiction is a serious miss. Must cross-check internal references.
+- Maria Keen: good writer, bad pitch timing. Match stories to the calendar.
+- Talia Finch: best piece in the edition — "A Person Who Just Watches Basketball." Empathy score 4/4.
+- Angela Reyes: clean church tutoring piece. Not her strongest but not every piece needs to be.
+
+---
 
 ### Supplemental C88 — Education "First Week" (Grade: A, Mara: A)
 

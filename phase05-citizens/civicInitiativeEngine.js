@@ -2109,11 +2109,6 @@ function seedInitiativeTracker_() {
      '', '', '', '', '',
      'Fruitvale', 'transit'],
 
-    // Port Green Modernization — Federal Grant C89
-    ['INIT-004', 'Port of Oakland Green Modernization — Federal Grant', 'grant', 'proposed', '$320M', '', 89,
-     'uncertain', '', '', '', '',
-     '', '', '', '', '',
-     'Jack London,West Oakland', 'economic'],
 
     // Temescal Health Center — vote C80
     ['INIT-005', 'Temescal Community Health Center', 'vote', 'proposed', '$45M', '5-4', 80,

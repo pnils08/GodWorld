@@ -121,10 +121,41 @@ All detail in `ROLLOUT_ARCHIVE.md`.
 
 ## Open Phases
 
+### Phase 31: Canon-Grounded Briefings — IMMEDIATE PRIORITY
+
+**Goal:** Until agents can search Supermemory themselves, Mags does the research upfront and feeds canon context into agent briefings. Agents get the world's history before they write, not after they guess.
+
+**Why this exists:** S131 proof of concept. Claude.ai with bay-tribune MCP access produced five C89 supplementals where citizens cross storylines, arcs build across desks, and the world feels like one city. Our desk agents, working from isolated packets, produce competent but disconnected section copy. The gap is NOT writing quality — it's access to canon. These five supplementals are now published canon (ingested to bay-tribune, saved to `editions/`).
+
+**The interim workflow (until agents get direct Supermemory access):**
+
+1. **Mags searches bay-tribune** for every major story, citizen, and arc relevant to the cycle
+2. **Mags builds angle briefs** — not flat data dumps, but researched prep docs with: archive quotes, returning citizen history, cross-desk connections, identified story angles, journalist assignment recommendations. Reference: `output/desk-packets/aitken_profile_prep_c89.txt`
+3. **Angle briefs go into desk agent workspaces** alongside existing packets — agents read the research before writing
+4. **Story structure is defined upfront** — which citizens return, which arcs cross, where the threads connect. This is editorial direction, not micromanagement.
+5. **Agent gets creative autonomy WITHIN the structure** — how the story is told, what details emerge, the voice, the craft. Define the what. Let the agent own the how.
+
+**What changes in `buildDeskFolders.js`:** Add an `angle_briefs/` directory to each desk workspace. Mags populates it manually pre-run. Agents are instructed to read angle briefs first, packets second.
+
+**What this replaces:** The current model where agents see only their own desk's packet data and invent connections. Agents should DISCOVER connections in the brief, not fabricate them.
+
+**The five C89 supplementals as exemplars:**
+- Civic: OARI Day 45 — returning citizens (Castillo Day 35 callback, Edmonds prediction, Meeks expansion concern)
+- Culture: Keane academy — cross-desk citizens (Nelson from OARI, Hayes from Stabilization Fund, Clark from everywhere)
+- Business: Baylight workforce — Jax Caldera bar count framing, sub-tier loophole investigation
+- Sports: Quintero profile — Darius Clark connecting baseball to Stabilization Fund to neighborhood
+- Culture: Aitken profile — political seeds planted from council meeting attendance, Baylight workforce thread
+
+**End state:** Phase 21.2 (Canon Grounding MCP) makes this workflow automatic — agents search bay-tribune themselves during writing. Phase 31 is the manual bridge that gets us the same quality output NOW.
+
+**Priority: HIGHEST — this is the single biggest quality lever we have. Do this for C90.**
+
+---
+
 ### Phase 2.2: Desk Packet Query Interface — PARTIALLY ADDRESSED
 
 Dashboard API serves citizen search, player lookup, article search, initiative status. Agents have API documented in SKILL.md but don't call it autonomously during writing.
-**Remaining:** Tool access to `curl` or helper script for agents.
+**Remaining:** Tool access to `curl` or helper script for agents. **Partially addressed by Phase 31** — Mags does the lookup manually and feeds results into briefings.
 **When:** Build when agents demonstrate they need targeted lookup beyond packet data.
 
 ### Phase 4.1: Semantic Memory Search
@@ -135,7 +166,7 @@ Local embedding model (embeddinggemma-300M) for searching journal/newsroom memor
 ### Phase 5.4: Desk Agents → Dashboard API Consumer
 
 Agents query dashboard endpoints during writing instead of flat JSON packets. Becomes essential past 800 citizens.
-**Status:** Not started. Current packet sizes manageable.
+**Status:** Not started. Current packet sizes manageable. **Phase 31 (canon-grounded briefings) is the manual bridge** — Mags does the research, agents get the results in their workspace. Phase 5.4 automates what Phase 31 does by hand.
 
 ### Phase 7: Anthropic Platform Upgrades (selected open items)
 
@@ -161,9 +192,9 @@ Registered and claimed. API key saved. **Pending:** Moltbook heartbeat formattin
 
 - **12.2 Worktree Isolation:** Superseded by Remote Control `--spawn worktree` (Phase 7.9). Same goal, native implementation.
 - **12.3 Autonomous Cycle Execution:** Long-term capstone. Depends on: Remote Control (7.9), Channels (Discord), dashboard mission control. **Two reference implementations now available:** (1) S114 Long-Running Claude — multi-day Claude Code in tmux, CLAUDE.md + CHANGELOG.md persistence, git checkpoints, Ralph Loop. (2) **S115 `autonomous-coding` quickstart** — two-agent pattern (initializer + worker), progress tracked in JSON + git, fresh context each session, auto-continue, defense-in-depth security with bash allowlist. The autonomous-coding pattern maps directly: initializer = create production plan from cycle packet, worker = execute pipeline steps, `feature_list.json` = `production_log.md`, test cases = `validateEdition.js` checks. Gap is still trust — need quality oracles: `validateEdition.js` (structural), Rhea (factual), grade thresholds (quality). All three must pass before autonomous publication. See RESEARCH.md S114 + S115 entries.
-- **12.4 Ralph Loop for Desk Agents:** Re-prompt desk agents that claim completion before validation passes. Run `validateEdition.js` per-desk (not per-edition). Failures route back to agent automatically. Prevents agentic laziness. Pattern from Anthropic's long-running agent research. **Priority: MEDIUM — implement when edition pipeline is stable.**
+- **12.4 Ralph Loop for Desk Agents:** Re-prompt desk agents that claim completion before validation passes. Run `validateEdition.js` per-desk (not per-edition). Failures route back to agent automatically. Prevents agentic laziness. Pattern from Anthropic's long-running agent research. Validated by everything-claude-code's "loop-operator" agent — same concept, different domain. Their orchestrator-subagent context negotiation pattern (max 3 retrieval cycles, pass objective context not just query) applies here — when a desk agent fails, the re-prompt should include WHY it failed, not just "try again." **Priority: MEDIUM — implement when edition pipeline is stable.**
 - **12.5 Idle Compute Utilization:** Run autonomous tasks when no session is active — batch grading, citizen enrichment, POPID index rebuilds, Supermemory maintenance. Droplet runs 24/7; idle time is waste. Pattern from Anthropic's "opportunity cost" framing. **Priority: LOW — requires Phase 12.3 trust infrastructure first.**
-- **12.10 Fish Audio TTS:** Deferred — $11/mo cost rejected S77.
+- **12.10 Fish Audio TTS:** ~~Deferred — $11/mo cost rejected S77.~~ **SUPERSEDED by Phase 30 (Voicebox).** Free, local, better fit.
 - **12.11 MiniMax M2.5:** Not started. Test on next edition for cost comparison.
 - **12.12 Slack Integration:** Not started. Depends on 7.10.
 
@@ -186,7 +217,7 @@ WordPress 7.0 (April 2026) ships AI Client SDK supporting Claude function callin
 - **Dedicated machine:** $3,500+ for 128GB VRAM (Lenovo ThinkStation PGX, Nvidia Grace Blackwell). Full local, zero ongoing cost. Overkill unless running constantly.
 - **Budget GPU cloud:** RunPod, Vast.ai, Lambda — cheaper spot pricing for batch work.
 
-**Mixed-backend strategy:** Opus/Sonnet for civic, sports, chicago desks (complex). Local model for culture, letters, business desks (routine). Same Claude Code harness, same skills, same workspace structure. `buildDeskFolders.js` doesn't care what model runs the agent.
+**Mixed-backend strategy:** Opus/Sonnet for civic, sports, chicago desks (complex). Local model for culture, letters, business desks (routine). Same Claude Code harness, same skills, same workspace structure. `buildDeskFolders.js` doesn't care what model runs the agent. Validated by everything-claude-code's cost-tiering model (S131): Haiku for exploration (~$0.80/MTok), Sonnet for multi-file (90% of tasks), Opus for architecture. Same principle — match model cost to task complexity.
 
 **Buildable pieces:**
 
@@ -263,6 +294,8 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 4. **26.2.4 Agent identity mutation (HyperAgent pattern).** Agents modify their own IDENTITY.md based on what produces better output. After 5+ editions with grade history, a meta-agent reads the grade trends, the effective directives (26.2.1), the winning lenses (26.2.2), and rewrites the IDENTITY.md to encode the patterns that work. This is the hyperagent concept from Meta Research (arXiv 2603.19461, March 2026) — the improvement mechanism itself becomes editable. **Implementation:** New script `scripts/evolveAgentIdentity.js` reads grade_history + exemplars + directive tracking, proposes IDENTITY.md patches, human approves. Full autonomy (agent rewrites itself without approval) is Phase 27.4+ territory. See `docs/RESEARCH.md` S120 HyperAgents entry.
 
+**Evaluation metric (from S131 research):** Use pass@k scoring for desk agent output. Run a desk agent k times, take the best. At k=3, a 70% baseline jumps to 91% success rate. Cheap for routine desks (culture, letters, business). Expensive for complex desks — reserve for when quality gates fail on first pass. pass^k (ALL must succeed) useful for canon-critical civic/sports output where consistency matters.
+
 **Priority:** MEDIUM-HIGH — raised from MEDIUM after HyperAgents research. Requires 3-5 more editions for data. Phase 26.2.1 (directive tracking) is the prerequisite — start there.
 
 ### Phase 29: Codebase Knowledge Graph (Corbell) — NOT STARTED
@@ -310,6 +343,93 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 **Cost note:** Expensive per-interaction (vision tokens per screenshot + 735 tokens per tool definition + system prompt overhead). Not for routine work. Reserve for QA, verification, and no-API-available situations.
 
 **Depends on:** Phase 9 (Docker) is deferred but 28.1 only needs a single container, not a full Compose stack. Can build 28.1 standalone.
+
+### Phase 30: Tribune Audio (Voicebox) — NOT STARTED
+
+**Goal:** Give the Bay Tribune a voice. Articles you can listen to. A podcast you can hear. Civic voices that sound like people.
+
+**Source:** Voicebox (github.com/jamiepine/voicebox) — 14.3K stars, MIT license. Free, local-first ElevenLabs alternative. Five TTS engines, voice cloning, multi-track composition, REST API on `localhost:17493`. See `docs/RESEARCH.md` S131 entry.
+
+**Supersedes:** Phase 12.10 (Fish Audio TTS, $11/mo — rejected S77). Voicebox is free, local, and more capable.
+
+**Hardware requirement:** GPU for good performance. CPU fallback exists but slow. Same hardware gate as Cowork and Phase 21 (local models). Docker deployment available — rides on same GPU droplet as Phase 21 if/when that spins up.
+
+**Buildable pieces (ordered by complexity):**
+
+1. **30.1 Dashboard narrator.** "Read This Article" play button on each article card. Dashboard `POST`s article text to Voicebox `/generate` endpoint with a default voice profile. Audio plays in browser via `<audio>` element. Simplest integration — one API call, one voice, one button. **Priority: FIRST — proves the pipeline works.**
+
+2. **30.2 Tribune voice identity.** Create a dedicated "Bay Tribune" voice profile. Clone from a specific voice sample or tune one of the built-in engines. All narration uses this voice. The paper has a sound, not just a look. **Priority: Build with 30.1.**
+
+3. **30.3 Podcast audio production.** The podcast desk already writes two-host dialogue scripts (`/podcast` skill). Wire each host's lines to a different voice profile. Use Voicebox's multi-track composition to produce an actual listenable episode. Export as MP3/WAV. Serve from dashboard or publish to podcast feed. **Priority: HIGH — transforms an existing feature from text to audio.**
+
+4. **30.4 Civic character voices.** Voice profiles for Mayor Santana, Chief Montez, council members, DA Clarissa Dane. Voicebox expressive tags (`[sigh]`, `[laugh]`, `[gasp]`) give emotional range. When voice agents produce statements, generate audio versions. Council meetings you can listen to. **Priority: MEDIUM — depends on voice agent pipeline stability.**
+
+5. **30.5 Breaking news audio.** Dashboard pushes audio notification for breaking stories. Short generated clip: "Breaking — City Council approves the Stabilization Fund in a 5-2 vote." Triggered by webhook or session event. **Priority: LOW — fun but not essential.**
+
+6. **30.6 Public feed.** RSS/podcast feed of Tribune audio content. Anyone can subscribe. Articles as episodes, podcast as episodes, breaking news as short clips. Connects to Phase 20 (Public Tribune). **Priority: LOW — depends on 30.1-30.3.**
+
+**Integration architecture:**
+- Voicebox runs as Docker container or native app on GPU hardware
+- Dashboard calls `POST localhost:17493/generate` with text + voice profile ID
+- Audio files cached on disk (same pattern as photo pipeline)
+- Dashboard serves audio via `<audio>` element or download link
+- Voice profiles managed via Voicebox API, stored locally
+
+**Depends on:** GPU hardware (same gate as Phase 21, Computer Use). Can prototype 30.1 on CPU fallback but production needs GPU.
+
+---
+
+### Phase 32: World-Data Container — NOT STARTED
+
+**Goal:** Persist the engine's world state in Supermemory so agents (and Mags) can search structured city data alongside published journalism. Bay-tribune has the narrative. World-data has the facts.
+
+**Container: `world-data`** — free to create (containers are just tags on the $9/mo plan).
+
+**What gets ingested after each cycle run:**
+
+| Category | Source | What persists |
+|----------|--------|---------------|
+| Citizen snapshots | Simulation_Ledger | POPID, name, age, neighborhood, occupation, tier, key life events, family |
+| Business registry | Business sheet | BIZ_ID, name, sector, neighborhood, employees, status |
+| Initiative tracker | Initiative_Tracker | Initiative name, status, timeline, votes, blockers, assigned agents |
+| Council positions | Civic_Ledger | Member, district, faction, recent votes, public stance |
+| Economic indicators | Population_Stats | Neighborhood employment, housing, income brackets |
+| A's season state | Game results | Record, standings, key player stats, recent results |
+
+**Container architecture after Phase 32:**
+
+| Container | Role | Content pattern |
+|-----------|------|----------------|
+| `bay-tribune` | Narrative archive | Articles only. Append-only. Grows every cycle. |
+| `world-data` | World state | Structured ledger/engine data. Ingested each cycle. |
+| `mags` | Deliberate brain | Editorial decisions, reasoning, EIC thinking. Manual saves. |
+| `super-memory` | Junk drawer | Auto-saves, session dumps. |
+| `mara` | Audit reference | Rosters for Mara's cross-check. Mara-only access. |
+
+**The citizen bridge:** POPID connects citizens across containers. Darius Clark in bay-tribune = narrative history (quotes, appearances, arcs). Darius Clark in world-data = current state (age, job, neighborhood, family). Agents searching for a citizen get both dimensions.
+
+**Open design question — recency handling:** Supermemory search may already surface the most recent data naturally when queried. If so, we can simply append each cycle's world state and let the search engine handle recency — no wipe-and-replace needed. If not, we delete old world-data docs and re-ingest fresh each cycle. **Must test before building the ingestion script.** Fill the container with one cycle of data, ingest a second cycle, query for a citizen, see which version comes back.
+
+**Buildable pieces:**
+
+1. **32.1 Container creation + test ingest.** Create `world-data` container tag. Manually ingest a small test set — 20 citizens, 5 businesses, 3 initiatives. Run searches. Test recency behavior by ingesting updated versions of the same citizens. Determine whether append-only or wipe-and-replace is the right pattern. **FIRST STEP — do this before building any scripts.**
+
+2. **32.2 `buildWorldStatePacket.js`.** Script that pulls from Google Sheets (Simulation_Ledger, Business, Initiative_Tracker, Civic_Ledger, Population_Stats, game data) and formats into searchable Supermemory documents. Groups by category. Tags with POPIDs where applicable. Outputs to `output/world-state/` as JSON and ingests to `world-data` container.
+
+3. **32.3 POPID in bay-tribune articles.** Ensure Names Index sections in published articles include POPIDs alongside citizen names. This enables cross-container search — query a POPID, get both world-data state AND bay-tribune narrative. May require minor update to edition template and ingest script.
+
+4. **32.4 Post-cycle-run integration.** Add world-data ingestion as a step in the cycle run pipeline. After engine completes → `buildWorldStatePacket.js` runs → world-data container updated → ready for Phase 31 canon briefing searches.
+
+5. **32.5 Cross-container search pattern.** Define and document the search workflow: query world-data for current state, query bay-tribune for narrative history, combine into angle brief. Test with Mags manually. Document for future agent automation (Phase 21.2).
+
+**Relationship to other phases:**
+- **Phase 31 (Canon-Grounded Briefings)** uses world-data + bay-tribune together for angle briefs
+- **Phase 21.2 (Canon Grounding MCP)** automates what Phase 31 + 32 do by hand — agents search both containers directly
+- **Phase 27.1 (Intake pipeline)** writes agent-generated details BACK to world-data, closing the loop
+
+**Priority: HIGH — build 32.1 (test ingest) in next Build session. The test determines the architecture.**
+
+---
 
 ### Phase 25: Storage Strategy — NOT STARTED
 
@@ -381,7 +501,14 @@ Tracking for future adoption. Not building.
 | Claude Code Voice Mode | Maturity improves |
 | Extended Thinking for Agents | Test on civic/sports desks |
 | Computer Use exits beta | Stable + cheaper → expand beyond QA to routine agent tasks |
+| CLI-over-MCP token optimization | Measured: too many MCPs drops 200k context to 70k. Replace idle MCPs with CLI-wrapper skills. Source: everything-claude-code S131 |
+| Selective skill loading | Only load skills relevant to current workflow. Chat doesn't need 21 skills. Manifest-driven selection. Source: everything-claude-code S131 |
+| Continuous learning hooks | Auto-extract debugging patterns into reusable skills with confidence scoring. Source: everything-claude-code S131 |
+| llms.txt for documentation | Many doc sites serve `/llms.txt` — LLM-optimized docs. Check before web-fetching. Source: everything-claude-code S131 |
+| Proactive agent dispatch | Rule-based agent routing without user prompts. Post-write → reviewer, security-sensitive → scanner. Automates what Mags does manually. Source: everything-claude-code S131 |
 | NPM Package Drift | 7 packages behind. Batch update in maintenance session. |
+| Codex Plugin (`/codex:adversarial-review`) | Mike keeps ChatGPT sub → install plugin for free adversarial code review. Sub cancelled → skip. Source: S131 |
+| Open-source agent harnesses | Stable harness with MCP + skills + hooks support → re-evaluate Phase 21 as real multi-model pipeline instead of env-var hack. Track: Claw Code (instructkr/claw-code), community forks. Source: S131 |
 | xMemory (hierarchical memory) | AutoDream fails to solve collapsed retrieval after 5 sessions → evaluate self-hosted xMemory |
 | Auto Mode | Evaluate for production pipelines — could eliminate approval prompts during `/write-edition` |
 | HTTP Hooks migration | Replace shell-based hooks with HTTP POST to dashboard endpoints for unified event stream |

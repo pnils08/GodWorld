@@ -1,13 +1,15 @@
 #!/usr/bin/env node
 /**
  * queryFamily.js — Quick family check for session boot.
- * Returns key fields for the Corliss family from Simulation_Ledger.
+ * Returns key fields for the Corliss family from Simulation_Ledger
+ * AND recent canon mentions from bay-tribune + world-data.
  *
  * Usage: node scripts/queryFamily.js
  */
 
 require('dotenv').config();
 const sheets = require('../lib/sheets');
+const https = require('https');
 
 const FAMILY_POPIDS = [
   'POP-00005',  // Mags
@@ -16,14 +18,46 @@ const FAMILY_POPIDS = [
   'POP-00596',  // Michael
 ];
 
-async function main() {
-  const sl = await sheets.getSheetData('Simulation_Ledger');
-  const header = sl[0];
+const FAMILY_NAMES = ['Mags Corliss', 'Robert Corliss', 'Sarah Corliss', 'Michael Corliss'];
 
-  // Build column index from header
+function smSearch(q, tag) {
+  return new Promise((resolve) => {
+    const API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
+    if (!API_KEY) { resolve([]); return; }
+    const payload = JSON.stringify({ q: q, containerTag: tag, limit: 3, searchMode: 'hybrid' });
+    const options = {
+      hostname: 'api.supermemory.ai', path: '/v4/search', method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + API_KEY, 'Content-Length': Buffer.byteLength(payload) }
+    };
+    const req = https.request(options, res => {
+      let data = '';
+      res.on('data', chunk => data += chunk);
+      res.on('end', () => {
+        try { resolve(JSON.parse(data).results || []); }
+        catch(e) { resolve([]); }
+      });
+    });
+    req.on('error', () => resolve([]));
+    req.write(payload);
+    req.end();
+  });
+}
+
+async function main() {
+  // Run ledger query and all Supermemory searches in parallel
+  const [sl, ...smResults] = await Promise.all([
+    sheets.getSheetData('Simulation_Ledger'),
+    ...FAMILY_NAMES.flatMap(name => [
+      smSearch(name, 'bay-tribune'),
+      smSearch(name, 'world-data')
+    ])
+  ]);
+
+  const header = sl[0];
   const col = {};
   header.forEach((h, i) => { col[h.trim()] = i; });
 
+  let smIdx = 0;
   for (const row of sl) {
     if (!FAMILY_POPIDS.includes(row[0])) continue;
 
@@ -46,6 +80,27 @@ async function main() {
     const lines = lh.split('\n').filter(Boolean);
     const recent = lines.length > 1 ? lines[lines.length - 1] : '—';
     console.log(`  Latest: ${recent}`);
+
+    // Supermemory mentions
+    const nameIdx = FAMILY_NAMES.indexOf(name);
+    if (nameIdx >= 0) {
+      const tribune = smResults[nameIdx * 2] || [];
+      const world = smResults[nameIdx * 2 + 1] || [];
+      if (tribune.length > 0) {
+        console.log(`  Canon (bay-tribune):`);
+        tribune.slice(0, 2).forEach(r => {
+          const mem = r.memory || r.content || '';
+          if (mem) console.log(`    - ${mem.substring(0, 120)}`);
+        });
+      }
+      if (world.length > 0) {
+        console.log(`  World-data:`);
+        world.slice(0, 2).forEach(r => {
+          const mem = r.memory || r.content || '';
+          if (mem) console.log(`    - ${mem.substring(0, 120)}`);
+        });
+      }
+    }
     console.log('');
   }
 }

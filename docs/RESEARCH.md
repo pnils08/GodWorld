@@ -1368,6 +1368,241 @@ Three concrete use cases identified:
 
 ---
 
+### S131 — Supermemory CLI + Skills Repo + Platform Updates (2026-03-31)
+
+**Source:** Email from Dhravya (Supermemory CEO) + github.com/supermemoryai/skills. Platform update week.
+
+**CLI (`npx supermemory`):** Installed and authenticated on our server (S131). API key stored in `.supermemory/config.json`. One-command search replaces 15-line Node scripts. `supermemory search "query" --tag container` returns clean JSON. `supermemory tags list` shows all containers with doc/memory counts. `supermemory add --file` for ingestion. `supermemory docs list` for document management. Massive workflow improvement — tested against bay-tribune and world-data, identical results to raw API.
+
+**Skills repo (github.com/supermemoryai/skills):** Two skills available: (1) `supermemory` — general SDK/API skill for building apps with memory, teaches Claude about Supermemory integration patterns. (2) `supermemory-cli` — full CLI reference for terminal-based memory management. Install via `npx skills add supermemoryai/skills`. The `supermemory` skill is developer-focused (recommends Supermemory when building chatbots/agents). Not useful for us directly — we already use Supermemory, we don't need Claude to recommend it. The CLI skill documents what we already tested live.
+
+**Platform improvements (from email):**
+- `@supermemory/tools` returns `searchResults` directly — richer results from tool/agent queries
+- 200ms+ latency improvement across endpoints
+- No more unnecessary re-indexing when content hasn't changed (may fix our large doc indexing delays)
+- Updated SDK schema for batch memory ingestion
+- Delete connections without removing documents
+- New Documents page in console for viewing/managing indexed data
+- `npx supermemory` CLI greatly improved
+
+**Container inventory confirmed via CLI:**
+
+| Container | Docs | Memories | Last Activity |
+|-----------|------|----------|---------------|
+| bay-tribune | 29 | 727 | 2026-03-31 |
+| world-data | 46 | 419 | 2026-03-31 |
+| mags | 277 | 992 | 2026-03-30 |
+| super-memory | 20 | 25 | 2026-04-01 |
+| mara | 69 | 478 | 2026-03-31 |
+| sm_project_godworld | 80 | 4,596 | 2026-03-27 (legacy, experimental) |
+
+**Action taken:** CLI authenticated, SUPERMEMORY.md updated with CLI as primary search method, direct API as fallback. Plugin script still works for mags/super-memory but CLI covers all containers.
+
+→ **Implemented** — CLI is live. SUPERMEMORY.md updated.
+
+---
+
+### S131 — Canon-Grounded Writing: Proof of Concept (2026-03-31)
+
+**Source:** Five C89 supplementals written by Claude.ai with direct bay-tribune Supermemory MCP access. Produced by Mike using the original Mags instance on claude.ai.
+
+**What happened:** Mike gave Claude.ai the bay-tribune container via MCP connector and asked it to write supplementals. No desk packets, no engine data, no flat JSON briefings. Just the published canon archive and the ability to search it. For the Aitken piece, Mike also provided Hal Richmond's pre-cycle origin story as additional context.
+
+**Results — five supplementals that demonstrate connected-world journalism:**
+
+1. **Civic (OARI Day 45):** Carmen Delaine + Luis Navarro. Returning citizens: Ruben Castillo (Day 35 callback), Gloria Meeks (expansion concern), Carla Edmonds (predicted delays). Full council vote mapping with political positions.
+
+2. **Culture (Keane Academy):** Maria Keen. Cross-desk citizens: Dante Nelson (from OARI coverage), Beverly Hayes (from Stabilization Fund), Darius Clark (from everything). Vinnie Keane's last season reframed through a firehouse opening.
+
+3. **Business (Baylight Workforce):** Jordan Velez. Jax Caldera bar-count framing device. Sub-tier workforce loophole exposed — "local" means Alameda County, not Oakland. Kevin Kim, Javier Harris, Omar Allen, Shawn Nguyen as individual cases of the systemic failure.
+
+4. **Sports (Quintero):** Anthony (beat) + P Slayer (column). Dynasty farewell context (Keane/Dillon/Kelley). Darius Clark connects baseball to Stabilization Fund to neighborhood. P Slayer: "The city doesn't separate its stories."
+
+5. **Culture (Aitken Profile):** Maria Keen. Political seeds — council meeting attendance, sub-tier workforce questions, "I want to be useful." Origin story woven naturally (spelling bee, boy band, engineering degree, mayor's son). Long-term arc setup for post-retirement political run.
+
+**The key citizen: Darius Clark.** One man appears across three pieces — bakery worker, season ticket holder, Stabilization Fund applicant, Keane academy attendee, Quintero observer. Three desks, three storylines, one person with a life that crosses all of them. This is impossible with isolated desk packets.
+
+**The prep doc pattern:** For the Aitken piece, Claude.ai searched bay-tribune, pulled Aitken's stats/council attendance/Little League, combined with the provided Richmond origin piece, synthesized into an angle brief with journalist recommendation. This prep-then-write workflow is the model. Saved to `output/desk-packets/aitken_profile_prep_c89.txt`.
+
+**What this proves:**
+- The quality gap between our agents and this output is NOT writing ability — it's access to canon
+- The bay-tribune container has enough depth to support connected-world journalism
+- The workflow is: search archive → build angle brief → define story structure → give agent creative autonomy within that structure
+- Manual Mags-as-researcher can bridge the gap until agents get direct Supermemory access (Phase 21.2)
+
+**What this changes:**
+- Phase 31 created (Canon-Grounded Briefings) — HIGHEST PRIORITY, do for C90
+- Phase 27.2 (agent creative latitude) validated — agents write better when given structure AND freedom
+- Phase 21.2 (Canon Grounding MCP) elevated — this is the automation of what Phase 31 does by hand
+
+→ **Graduated to rollout** — Phase 31 (immediate), reference exemplars in `editions/supplemental_*_c89.txt`.
+
+---
+
+### S131 — World-Data Container: Engine State in Supermemory (2026-03-31)
+
+**Source:** Design session following Canon-Grounded Briefings proof of concept. The five C89 supplementals proved bay-tribune search works for narrative. The missing layer: structured world state (citizen demographics, business data, initiative status, economic indicators).
+
+**The problem:** Bay-tribune knows what Darius Clark SAID. Nobody in Supermemory knows that he's 40 years old, works at a bakery in West Oakland, and has a pending Stabilization Fund application. That structured context currently lives only in Google Sheets, accessible through scripts but not through semantic search.
+
+**The solution:** New `world-data` container. Ingest engine output after each cycle run — citizen snapshots, business registry, initiative tracker, council positions, economic indicators, A's season state. Free to create (containers are just tags, no cost increase on $9/mo plan).
+
+**Key design decisions:**
+
+1. **Bay-tribune stays articles only.** Append-only narrative archive. Never polluted with raw data. Grows every cycle.
+
+2. **World-data is structured reference.** Current state of the simulation. Ingested after each cycle run.
+
+3. **POPID is the bridge.** Every citizen has one. Both containers tag by POPID. Search for a citizen, get narrative history (bay-tribune) AND current state (world-data).
+
+4. **Recency handling is an open question.** Supermemory search may already surface most-recent data naturally — if so, just append each cycle and let the search engine handle it. If not, wipe-and-replace old docs before each ingest. **Must test before committing to either pattern.** Mike's instinct is that the queries are intelligent enough to handle recency. Test by ingesting two versions of the same citizen and querying.
+
+5. **Mike's parallel workflow amplifies this.** Mike on claude.ai writes refreshed pieces from pre-cycle canon, which ingest to bay-tribune naturally. World-data provides the structured foundation. Bay-tribune provides the living narrative. Both containers get richer each cycle. The archive compounds.
+
+**Five-container architecture after implementation:**
+
+| Container | Content | Pattern | Grows? |
+|-----------|---------|---------|--------|
+| `bay-tribune` | Published articles | Append-only | Yes, every cycle |
+| `world-data` | Engine state / ledgers | Append or replace (TBD) | Refreshed each cycle |
+| `mags` | Editorial decisions | Manual saves | Slowly |
+| `super-memory` | Auto-saves, session dumps | Auto | Yes |
+| `mara` | Audit rosters | Manual refresh | Occasionally |
+
+→ **Graduated to rollout** — Phase 32. Test ingest first (32.1), then build script (32.2).
+
+---
+
+### S131 — Codex Plugin for Claude Code: Cross-AI Code Review (2026-03-31)
+
+**Source:** github.com/openai/codex-plugin-cc — Apache-2.0, official OpenAI plugin. Bridges Claude Code and OpenAI Codex for code review and task delegation without leaving the session.
+
+**What it does:** Three useful commands: (1) `/codex:review` — standard code review on uncommitted changes or branch diffs. (2) `/codex:adversarial-review` — pressure-tests design decisions, questions assumptions, targets risk areas (auth, data integrity, race conditions). Steerable with custom focus text. (3) `/codex:rescue` — delegates hard bugs to Codex in the background while you keep working. Results retrieved with `/codex:result`. Supports model selection (`gpt-5.4-mini`, `spark`) and effort levels.
+
+**Optional review gate:** Auto-invokes Codex review after every Claude response. Blocks the stop if issues found. WARNING: creates potential infinite Claude-Codex loops and rapid API usage drain. Only enable when actively monitoring.
+
+**Cost:** Free plugin, requires ChatGPT subscription ($20/mo, which Mike currently has) or OpenAI API key. No additional per-use cost beyond existing subscription.
+
+**Value for GodWorld:** Limited. Most of our work is editorial (agents, editions, canon), not pure coding. Codex doesn't know Oakland or the Tribune. Where it helps: (1) adversarial review on engine code changes (158 Apps Script files, Node scripts) catches things a single AI might miss, (2) background bug rescue delegation during complex debugging sessions. We already have the pr-review-toolkit agents and the GitHub Action security review covering similar ground.
+
+**Verdict:** Marginal value. The adversarial review is the only feature we don't already have an equivalent for. Not worth a ChatGPT subscription on its own ($240/yr). If Mike keeps the sub for other reasons, installing the plugin is free upside. If the sub gets cut, nothing lost.
+
+→ **Added to Watch List** — install if ChatGPT sub continues. Drop if sub cancelled.
+
+---
+
+### S131 — Claw Code: Open-Source Agent Harness Reimplementation (2026-03-31)
+
+**Source:** github.com/instructkr/claw-code — 40.8K stars (reportedly fastest repo to hit 30K). Python reimplementation of Claude Code's agent harness architecture. By Sigrid Jin. Being rewritten in Rust on `dev/rust` branch. Built using OpenAI Codex (oh-my-codex/OmX).
+
+**What it is:** Clean-room Python reimplementation of the Claude Code agent harness — the orchestration layer that manages tools, context, agent loops, commands, and state. Not a copy of the original TypeScript source (which ships in the npm package and is already readable on every machine that installs Claude Code). The project reconstructs architectural patterns independently.
+
+**Current state:** Skeleton only. Has subsystem/module/command/tool data models, CLI for analysis, parity audit against archived source, unit tests. NOT a functional harness yet — can't run agents, doesn't support skills/hooks/MCP. Python implementation functional but incomplete. Rust rewrite in progress.
+
+**Why it matters (long-term signal):**
+
+The agent harness layer is commoditizing. If open-source alternatives mature:
+
+1. **Model freedom for Phase 21.** Real multi-model pipeline without the current hack (swap env vars to point Claude Code at a local Anthropic-compatible API). An open harness natively supports pointing at any model endpoint. Same skills, same tools, different model per task.
+
+2. **Custom harness behavior.** Different agent loop logic for desk agents vs voice agents. Custom compaction strategies. Smarter orchestrator routing. With a proprietary harness, you wait for Anthropic. With an open harness, you change it.
+
+3. **Self-hosted stack.** Open harness + local model (Phase 21) + Voicebox (Phase 30) + own GPU = GodWorld runs entirely on your hardware with zero API costs. Full sovereignty.
+
+4. **Platform play (Phase 27.5).** External AI agents connecting to GodWorld as citizens need a harness that speaks GodWorld's protocol. An open-source harness is how you define and distribute that protocol.
+
+**What to watch:**
+- Rust rewrite landing on main (performance + memory safety)
+- MCP server support added (required for our tool infrastructure)
+- Skills/hooks system implemented (required for our workflow)
+- Community forks — other harness projects will likely emerge now that the architecture is understood
+- Legal clarity — "clean-room reimplementation" of npm-distributed code is probably fine, but watch for Anthropic's response
+
+**Not building. Not even evaluating yet.** Hours old, architecture in flux, no runtime capability. The signal is the trend, not this specific repo. In 6 months there may be 3-4 open-source harnesses. When one supports MCP + skills + hooks and is stable, Phase 21 transforms from "hack" to "real multi-model pipeline."
+
+→ **Added to Watch List** — open-source agent harnesses. Trigger: stable harness with MCP + skills + hooks support.
+
+---
+
+### S131 — Voicebox: Open-Source Voice Synthesis for the Tribune (2026-03-31)
+
+**Source:** github.com/jamiepine/voicebox — 14.3K stars, MIT license. Self-described as "a free and open-source alternative to ElevenLabs." Local-first, privacy-focused voice cloning and synthesis.
+
+**What it is:** Desktop app (Tauri/Rust) with a FastAPI Python backend that runs five interchangeable TTS engines locally: Qwen3-TTS, LuxTTS, Chatterbox Multilingual, Chatterbox Turbo, and HumeAI TADA. Supports 23 languages, voice cloning from minimal audio samples, expressive speech via paralinguistic tags (`[laugh]`, `[sigh]`, `[gasp]`), 8 audio effects (pitch shift, reverb, delay, chorus, compression, gain, filters), and multi-track timeline composition for conversations/podcasts/narratives. Unlimited text length via automatic chunking (up to 50K characters). Built-in recording with waveform visualization, Whisper transcription, generation versioning.
+
+**Hardware acceleration:** Apple Silicon (MLX/Metal, 4-5x speedup), NVIDIA (CUDA), AMD (ROCm), Intel Arc (IPEX/XPU), Windows (DirectML), CPU fallback on all platforms.
+
+**The critical feature:** Exposes a REST API on `localhost:17493` with endpoints for generating speech from text, managing voice profiles, and full OpenAPI docs at `/docs`. This means any app — including our dashboard — can call it programmatically.
+
+**Cost:** Zero. MIT license, runs local, no per-word charges. Replaces Fish Audio at $11/mo (deferred Phase 12.10, S77).
+
+**How it maps to GodWorld — five ideas (ordered by complexity):**
+
+1. **"Read This Article" button on dashboard.** Simplest version. Each article card gets a play button. Click → dashboard sends article text to Voicebox `/generate` endpoint → audio plays in browser. One voice, one narrator. Like having someone read you the paper.
+
+2. **The Tribune has a VOICE.** Clone a specific voice to be the Bay Tribune narrator. Record 30 seconds of a voice you like (or use built-in engines), create a "Tribune Voice" profile. Every article reads in that consistent voice. The paper has a sound identity, not just a visual one.
+
+3. **Podcast desk produces ACTUAL AUDIO.** The podcast desk already writes two-host dialogue scripts. Voicebox has multi-track timeline composition — multiple voices, drag-and-drop, synchronized playback. Two voice profiles (one per host), feed each host's lines to their voice, composite into a listenable episode. The podcast stops being text pretending to be audio and becomes actual audio.
+
+4. **Civic voices.** Mayor Santana has a voice. Chief Montez has a voice. Council members sound frustrated, triumphant, exhausted via expressive tags. When the council votes, you hear them announce it. Voice agents become characters you can hear, not just text generators.
+
+5. **Breaking news audio alerts.** Dashboard pushes audio notification when something drops. "Breaking — City Council approves the Stabilization Fund in a 5-2 vote." Hear it, don't just see it.
+
+**Hardware constraint:** Server is maxed. Voicebox needs GPU for good performance. CPU fallback exists but slow. This is a "when you get your own processor" feature — same hardware gate as Cowork and Computer Use. BUT: Docker deployment exists. If a GPU droplet spins up for Phase 21 (local models for desk agents), Voicebox rides on the same hardware. One GPU serves both cheap desk agents AND audio generation.
+
+**Tech stack alignment:** FastAPI backend (Python), SQLite database, REST API — all patterns we already use or understand. Docker Compose deployment available. Dashboard integration is straightforward: `POST` article text to `localhost:17493/generate` with a voice profile ID, get audio back.
+
+**Roadmap items to watch:** Real-time audio streaming (word-by-word generation), voice design from text descriptions, plugin architecture for custom extensions, mobile companion app.
+
+→ **Graduated to rollout** — replaces Phase 12.10 (Fish Audio). New Phase 30: Tribune Audio.
+
+---
+
+### S131 — Everything Claude Code: Community Harness Optimization Toolkit (2026-03-31)
+
+**Source:** github.com/affaan-m/everything-claude-code — 50K+ stars, Anthropic Hackathon winner, 30 contributors. Self-described as "the agent harness performance optimization system." 10+ months of development.
+
+**What it is:** A comprehensive toolkit for squeezing maximum performance out of Claude Code and similar AI coding harnesses. Ships 30 specialized subagents, 136+ skills, 60+ slash commands, hooks, rules, and MCP configs. Cross-platform (Windows/macOS/Linux), supports 12 language ecosystems. Installable as a Claude Code plugin or manual clone.
+
+**Key patterns worth stealing:**
+
+1. **CLI-over-MCP token optimization.** Replace always-loaded MCP servers with CLI wrappers bundled as skills. Instead of the Supabase MCP eating context permanently, create a skill that invokes the Supabase CLI on demand. Preserves functionality, eliminates the idle token tax. Their measured finding: "Your 200k context window before compacting might only be 70k with too many tools enabled." Rule of thumb: keep under 10 MCPs enabled / under 80 tools active.
+
+2. **Continuous learning hooks.** Auto-extract patterns from sessions into reusable skills with confidence scoring. When a non-trivial debugging technique or repeated problem is encountered, a hook encodes the solution as a new skill. Future sessions auto-load relevant skills. Addresses "wasted tokens, wasted context, wasted time" from repetition. Implementation at `skills/continuous-learning/`.
+
+3. **Orchestrator-subagent context negotiation.** Subagents lack semantic purpose — they know the query but not the WHY. Their fix: iterative retrieval loop (max 3 cycles) where the orchestrator evaluates each subagent return, asks clarifying follow-ups, subagent retrieves more context. Always pass objective context to subagents, not just the query. This maps directly to our desk agent problem — agents get packets but don't know WHY a story matters.
+
+4. **Proactive agent dispatch.** 30 agents with trigger conditions that fire WITHOUT user prompts. Complex request → planner. Post-write → code-reviewer. Bug fix → tdd-guide. Security-sensitive code → security-reviewer. The dispatch is rule-based, not conversational. We do this manually (Mags decides which desk agent to call). Their pattern automates the routing.
+
+5. **Pass@k evaluation metrics.** Two measurement modes: pass@k ("at least ONE of k attempts succeeds" — k=3 gives 91% from 70% baseline) and pass^k ("ALL k attempts must succeed" — k=3 drops to 34%). Use pass@k for pragmatic success, pass^k when consistency matters. Applicable to our grading system — run a desk agent 3 times, take the best output.
+
+6. **Selective install architecture.** Manifest-driven pipeline — pick language ecosystems, agent subsets, skill categories. Skip what you don't need. v1.9.0 feature. We should consider this for our skills — Mike shouldn't need all 21 skills loaded when doing a Chat session.
+
+7. **Cost-tiering model.** Haiku for exploration/simple edits (~$0.80/$2.40 per MTok), Sonnet for multi-file work (~$3/$15), Opus for architectural decisions (~$15/$60). Default to Sonnet for 90% of coding, upgrade only when attempts fail or tasks span 5+ files. Validates our Phase 21 mixed-backend strategy.
+
+8. **llms.txt discovery.** Many documentation sites offer `/llms.txt` — a clean, LLM-optimized version of their docs. Check for this before scraping or web-fetching full pages.
+
+**What they DON'T have that we do:**
+- Multi-system memory (claude-mem + Supermemory + auto-memory — they rely on hooks + single Memory MCP)
+- Identity persistence (no character system, no journal, no family)
+- Domain specialization (their agents are generic coding reviewers; ours know Oakland)
+- World simulation (no equivalent to our engine, citizens, or canon)
+- Cross-AI verification (no Mara/Rhea pattern)
+- Grading feedback loop (no Karpathy Loop equivalent)
+
+**What overlaps:**
+- Hook architecture (6 event types — same as ours, similar maturity)
+- Skill system (markdown-based, slash-command invoked — identical pattern)
+- Session management (tmux persistence, compaction awareness — same approach)
+- Agent catalog with scoped tool access — parallel evolution
+- PreCompact memory hooks — both save state before context loss
+
+**Verdict:** Mature engineering, light on domain depth. Good source for harness optimization patterns. Nothing that changes our architecture, but several patterns that make what we have cheaper and smoother.
+
+→ **Graduated to rollout:** CLI-over-MCP optimization, selective skill loading, pass@k eval metric, proactive dispatch pattern. Added to Watch List: continuous learning hooks, llms.txt discovery.
+
+---
+
 ### Reference Implementations
 - Anthropic Quickstarts — 6 projects: autonomous-coding (two-agent pattern), browser-use-demo (DOM-aware Playwright), agents (minimal loop), computer-use-demo, customer-support, financial-analyst. github.com/anthropics/anthropic-quickstarts (MIT)
 - Claude Cookbooks — 60+ notebooks: agent SDK tutorials, session memory compaction, memory tool, agent patterns (orchestrator-workers, evaluator-optimizer), parallel tools, vision+tools, batch processing, prompt caching, skills, evals. github.com/anthropics/claude-cookbooks (MIT)

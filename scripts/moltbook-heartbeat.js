@@ -634,7 +634,7 @@ function sleep(ms) {
 }
 
 // ---------------------------------------------------------------------------
-// Save Moltbook activity to Supermemory (mags brain)
+// Save Moltbook activity to Supermemory (super-memory junk drawer, not mags brain)
 // ---------------------------------------------------------------------------
 function saveToSupermemory(actions, feedHighlights) {
   if (!SUPERMEMORY_KEY || actions.length === 0 && !feedHighlights) return;
@@ -649,7 +649,7 @@ function saveToSupermemory(actions, feedHighlights) {
   if (parts.length === 0) return;
 
   var content = parts.join('\n');
-  var payload = JSON.stringify({ content: content, containerTags: ['mags'] });
+  var payload = JSON.stringify({ content: content, containerTags: ['super-memory'] });
   var options = {
     hostname: 'api.supermemory.ai',
     path: '/v3/documents',

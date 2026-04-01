@@ -31,15 +31,19 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 
 ## Errata Log — Last 5 Editions
 
-### Edition 89 — Cycle Pulse (Grade: B+, Mara: B+)
+### Edition 89 — Cycle Pulse (Grade: B+, Mara: B-)
 
-18 articles (17 published, 1 cut). 2 canon errors corrected. Keen piece cut from print.
+17 articles published, 1 cut. 6 canon errors corrected. Keen piece cut from print.
 
 **Front page:** Carmen Delaine, "Stabilization Fund: Mayor Orders Checks Out the Door." 47 families approved, zero checks delivered. Mayor orders disbursements within 10 days.
 
 **Errors Found and Fixed:**
 1. **Stabilization Fund number contradiction** — Carmen's lede said 47 approved, body said 53. All references standardized to 47.
 2. **TIF close date hallucinated** — Drifted from Sept 30 (C88 canon) to Dec 31 with no civic decision. Reverted to Sept 30.
+3. **Mason Miller misrepresented** — Depicted as minor leaguer/science teacher. Miller is Tier 1 (A's ace). Replaced with new citizen Gil Saucedo.
+4. **Port of Oakland Green Modernization** — Fabricated initiative (INIT-004). No canon basis. Removed from edition and engine.
+5. **Eric Taveras spelling** — Misspelled as "Tavares" (recurring drift, third time). Corrected.
+6. **Fruitvale Transit Hub numbers** — Desk invented figures instead of pulling from canon. Corrected: 89 residents (not 94), 82% Fruitvale (not 77%), 66% Spanish-speaking (not 62%).
 
 **Editorial Cuts:**
 - Maria Keen's "Juneteenth Still Echoes" — cut from print. Juneteenth is June 19; a September piece framing it as echoing doesn't hold. Writing quality was strong. Keen graded B for timing, not craft.
@@ -47,6 +51,7 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 **Section Notes:**
 - Culture ran 3 church/faith pieces in one edition. Max 1 per edition going forward.
 - Letters desk: 5 strong letters, all tied to live civic stories. Grace Yamamoto's "September Morning" is the quiet anchor.
+- Desk agents fabricating civic storylines and misrepresenting data from briefings are the two biggest quality risks going into C90.
 
 **Reporter Notes:**
 - Carmen Delaine: front page lead, strong sourcing, but the number contradiction is a serious miss. Must cross-check internal references.

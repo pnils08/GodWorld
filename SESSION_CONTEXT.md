@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-29 | Engine: v3.1 | Cycle: 89 | Session: 125
+Last Updated: 2026-03-31 | Engine: v3.1 | Cycle: 89 | Session: 131
 
 ---
 
@@ -109,7 +109,7 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 |------|---------|-------|
 | **Batch API** | 50% cost for non-urgent work (~1hr turnaround) | `/batch [task]`, `/batch check` |
 | **Claude-Mem** | Automatic observation capture (SQLite + Chroma vector, port 37777) | `search()`, `timeline()`, `get_observations()` |
-| **Supermemory** | 4 containers: mags (brain), bay-tribune (canon), super-memory (general), mara (audit) | `/save-to-mags`, `/save-to-bay-tribune`, `/super-search` |
+| **Supermemory** | 5 containers: mags (brain), bay-tribune (canon), world-data (city state), super-memory (general), mara (audit) | `/save-to-mags`, `/save-to-bay-tribune`, `/super-search` |
 | **Discord Bot** | 24/7 presence (PM2: mags-bot) | Always-on, conversation logging |
 | **Nightly Reflection** | Discord conversation journal at 11 PM CDT | `scripts/discord-reflection.js` (cron) |
 | **Drive Write** | Save files to Google Drive | `node scripts/saveToDrive.js <file> <dest>` |
@@ -186,6 +186,24 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 131 (2026-03-31) — Research: Canon-Grounded Architecture + World-Data Container
+
+- **Research sweep:** Everything Claude Code (50K stars, harness toolkit), Voicebox (free TTS, Phase 30), Claw Code (open-source harness), Codex Plugin (cross-AI review). All documented in RESEARCH.md S131 entries, actionable items graduated to ROLLOUT_PLAN.md.
+- **Canon-grounded briefings proven (Phase 31):** Mike showed 5 C89 supplementals written by claude.ai with bay-tribune MCP access. Darius Clark appears across 3 desks, arcs cross naturally, citizens return with history. The gap is access to canon, not writing quality. Phase 31 = Mags searches bay-tribune, builds angle briefs, agents write with creative autonomy within defined structure. HIGHEST PRIORITY for C90.
+- **5 C89 supplementals ingested:** OARI Day 45 accountability, Keane academy, Baylight workforce loophole, Quintero/P Slayer dynasty profile, Aitken political seeds. All saved to `editions/` and bay-tribune container.
+- **World-data container created (Phase 32):** Full Simulation_Ledger (675 citizens grouped by 20 neighborhoods), Business Ledger (52), Faith Organizations (16), Employment Roster (658), Cultural Ledger (35), Neighborhood Map (17), Neighborhood Demographics (17). All ingested and search-tested.
+- **Supermemory search documentation fixed:** `containerTag` (singular) not `containerTags` (plural), `searchMode: "hybrid"` required, `/v4/search` is primary endpoint. Previous code used wrong parameter — silent failure returning empty results. Full API reference added to SUPERMEMORY.md.
+- **Search strategy documented:** Simple queries work best. "Temescal" returns all residents. "Teachers" finds educators. IDs (POP-00722, BIZ-00035) don't work well semantically. Two-step workflow: world-data for who they ARE, bay-tribune for what they've SAID.
+- **Cost decision:** Cancel GPT ($20/mo) and Supermemory second org ($19/mo), redirect $39/mo toward bigger droplet for GPU access (Voicebox, local models, Cowork).
+
+### Session 126 (2026-03-29) — E89 Canon Audit + Publish
+
+- **Fabricated initiative removed:** Port of Oakland Green Modernization (INIT-004) — desk agent invented a $320M federal grant with no canon basis. Removed from edition and civicInitiativeEngine.js.
+- **Full canon audit completed:** All 17 articles verified against simulation data. Council roster, civic roles, initiative numbers, sports roster, Chicago section — all clean except 4 fixes below.
+- **Fixes applied:** Eric Taveras spelling (recurring drift), Fruitvale visioning numbers corrected to canon (89 residents/82%/66%), Port line removed.
+- **E89 published:** Drive upload, bay-tribune Supermemory ingest (2 chunks), 2 photos, PDF (982KB), Discord bot reset, newsroom memory updated with all 6 corrections.
+- **Mara grade: B-.** All corrections documented in `output/mara_canon_audit_c89.txt`.
 
 ### Session 125 (2026-03-29) — E89 Salvage + Grading
 

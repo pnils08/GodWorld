@@ -9,19 +9,29 @@ Legacy GodWorld org ($19/mo) is dead — 57k junk memories. Old API key (`sm_atk
 
 ## The Four Containers
 
-### `mags` — The Brain
+### `mags` — The Deliberate Brain
 
-Mags' persistent memory. This is how she doesn't relearn the project every session.
+Mags' curated memory. Only intentional saves go here. This is how she carries forward what matters.
 
-**What goes in:** Session summaries, editorial decisions, project state, what's broken, architecture knowledge, family moments, conversations, everything Mags needs to carry forward.
+**What goes in:** Editorial decisions, journal entries, things Mike and Mags discuss, EIC thinking, reasoning behind project decisions, the WHY behind the WHAT. Saves should capture context that claude-mem doesn't — the conversation, the trade-offs, the human reasoning.
 
-**What does NOT go in:** Raw tool output, grep results, git status, temporary debugging. The old org had 57k junk memories from auto-capture — that's why PostToolUse hook is disabled.
+**What does NOT go in:** Session-end auto-saves, raw tool output, "Mags confirms X" narration, build status updates, grep results, git status. The old org had 57k junk memories from auto-capture. The mags container got polluted again with session-end narration that said "Mags confirms E89 publishes tonight" instead of distilling actual decisions. That's why auto-saves are being moved to `super-memory`.
 
 **Who reads:** Mags at session boot (automatic), Discord bot on every message, Moltbook heartbeat.
-**Who writes:** Session end (automatic), Discord bot, Moltbook.
+**Who writes:** `/save-to-mags` only — manual, deliberate. Discord bot. Moltbook.
 **Plugin role:** `personalContainerTag` in config.
 
-**How to use:** Search `mags` before acting when you need context from past sessions. Don't guess — search.
+**When to save:** At natural decision points — when Mike and Mags agree on a direction, when a plan is finalized, when something fails and the reason is understood, when editorial judgment is applied. Not at session end. Not automatically.
+
+**Good save example:**
+> E89 failed 6 times. Root cause: agents don't read desk packets, invent facts instead. Mara audited 3 drafts — found OARI timeline regression (Day 45→Day 34), Mayor gender change, numbers contradicting within and between editions, TIF dates conflicting in same edition. The writing quality was high but the factual foundation was rotten. Pipeline architecture is the problem — initiative+voice agents run before desk agents, making it too heavy and fragile. Decision: decouple city-hall from edition, build as standalone council meeting model.
+
+**Bad save example (what was actually saved):**
+> Mags Corliss confirms Edition 89 is the cycle edition and publishes tonight.
+
+The good save captures what happened, why, and what was decided. The bad save captures narration about what Mags said she'd do — useless to the next session.
+
+**How mags works with claude-mem:** Claude-mem automatically captures WHAT happened (code changes, decisions made, files modified). Mags captures WHY — the conversation context, the reasoning, the trade-offs. Together they give the next session both the facts and the understanding. Separately, each is incomplete.
 
 ---
 
@@ -44,22 +54,78 @@ The published world. Oakland's living history through journalism.
 | Content | Count | Description |
 |---------|-------|-------------|
 | Editions E83-E89 | ~14 docs | 7 Cycle Pulse editions (chunked by Supermemory) |
-| Supplementals C83-C88 | ~10 docs | Fruitvale, tech landscape, housing, food scene, Baylight labor, education |
+| Supplementals C83-C89 | ~16 docs | Fruitvale, tech landscape, housing, food, Baylight labor, education, OARI, Keane, workforce, Quintero, Aitken, Paulson |
 | Oakland A's Roster | 1 doc | 89 players — POPID, name, position, team, tier |
 
 **Ingest after each edition:** `node scripts/ingestEdition.js <edition-file>`
 
 ---
 
-### `super-memory` — General Purpose
+### `world-data` — The City State
 
-**What goes in:** Anything that doesn't fit the other three containers. Codebase indexes (`/claude-supermemory:index`), general knowledge saves, experimental content. Safe dumping ground — not agent-facing, not canon, not personal.
+The simulation's current state. Structured data from the engine, searchable by plain language.
 
-**Who reads:** Nobody automatically. Search manually when needed.
-**Who writes:** Reserved for future use — codebase indexing, general plugin saves.
-**Plugin role:** None (not in config). Access via direct API only.
+**What goes in:** Citizen registry (grouped by neighborhood), business registry, faith organizations, employment roster, neighborhood map (gentrification, crime, nightlife, sentiment), neighborhood demographics (students, adults, seniors, education stats), cultural ledger.
 
-**Created S120.** Currently holds only the seed document. Available if we ever need to separate general indexed content from Mags' brain.
+**What does NOT go in:** Articles, journalism, quotes, opinions — that's bay-tribune. Engine internals, code, debug info — that breaks the fourth wall.
+
+**Who reads:** Mags (direct API search for angle briefs), future desk agents (Phase 21.2). Mike on claude.ai via MCP.
+**Who writes:** Direct API ingest after each cycle run. Script: `buildWorldStatePacket.js` (Phase 32.2, not built yet — S131 test ingest was manual).
+
+**Contents (first ingest S131):**
+
+| Content | Docs | Records | Description |
+|---------|------|---------|-------------|
+| Citizen Registry | 20 | 675 | Grouped by neighborhood. Name, age, role, tier, career, income, family, displacement risk |
+| Business Registry | 1 | 52 | BIZ_ID, name, sector, neighborhood, employees, revenue, key personnel |
+| Faith Organizations | 1 | 16 | Organization, tradition, neighborhood, leader, congregation size |
+| Employment Roster | 1 | 658 | Who works where. Citizen-to-business mapping |
+| Cultural Ledger | 1 | 35 | Cultural figures, fame category, domain, neighborhood |
+| Neighborhood Map | 1 | 17 | Gentrification phase, crime/noise/nightlife indexes, sentiment, displacement pressure, median income/rent |
+| Neighborhood Demographics | 1 | 17 | Students, adults, seniors, unemployed, school quality, graduation rates |
+
+**How to search — keep queries simple and specific:**
+
+POPIDs and BIZ_IDs are engine trackers — they don't search well semantically. Search by real-world concepts instead.
+
+| Good query | What comes back | Why it works |
+|------------|----------------|--------------|
+| `"Temescal"` | All Temescal citizens, neighborhood data, businesses | Neighborhood name matches across all ledgers |
+| `"Darius Clark"` | His citizen profile, employment, related entries | Name is natural language |
+| `"bakery workers"` | Citizens with bakery worker roles | Job title is natural language |
+| `"mosque Islamic Oakland"` | Masjid Al-Islam, Islamic Center, imam names | Faith tradition + type |
+| `"Fruitvale gentrification displacement"` | Neighborhood map data for Fruitvale | Map concepts are natural language |
+| `"tier 1 players"` | High-profile citizens and athletes | Tier is meaningful in context |
+
+| Bad query | Why it fails |
+|-----------|-------------|
+| `"BIZ-00035"` | ID string — semantic search matches similar IDs, not the right one |
+| `"POP-00722"` | Same problem — IDs are engine artifacts, not searchable concepts |
+| `"electrician in Temescal with season tickets"` | Too specific across containers. Season tickets are in bay-tribune, not world-data |
+
+**The right workflow for complex lookups:**
+1. Search world-data with a simple query: `"electricians"` → find the one in Temescal
+2. Get the citizen name from the result
+3. Search bay-tribune with that name: `"Kevin Kim"` → find his quotes, appearances, story arcs
+4. Combine both into an angle brief
+
+Two simple searches beat one complex query. World-data gives you who they ARE. Bay-tribune gives you what they've SAID and DONE.
+
+---
+
+### `super-memory` — The Junk Drawer
+
+Automatic captures and quick saves. May have useful conversation details. Searchable but not curated.
+
+**What goes in:** Session-end auto-saves (Stop hook), `/super-save` output, conversation details, codebase indexes, anything that doesn't warrant a deliberate `/save-to-mags`. Think of it as the "might be useful later" pile.
+
+**What does NOT go in:** Nothing is forbidden — it's the junk drawer. But don't search it expecting clean answers. Search mags or bay-tribune first.
+
+**Who reads:** Nobody automatically. Search manually when you need conversation context that claude-mem missed.
+**Who writes:** Stop hook (session-end auto-save), `/super-save`, codebase indexing.
+**Plugin role:** `repoContainerTag` in config — so `/super-save` writes here by default.
+
+**Why this exists:** Session-end saves used to go to `mags` and polluted it with "Mags confirms X" narration. Moving auto-saves here keeps `mags` clean for deliberate knowledge while still preserving the conversation record somewhere searchable.
 
 ---
 
@@ -110,30 +176,30 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 ```json
 {
   "personalContainerTag": "mags",
-  "repoContainerTag": "mags"
+  "repoContainerTag": "super-memory"
 }
 ```
 
-Both point to `mags`. This means `/super-save` and `/super-search` both hit `mags` by default. Use `/save-to-bay-tribune` for canon saves.
+`personalContainerTag` → `mags` (deliberate brain). `repoContainerTag` → `super-memory` (junk drawer). This means `/super-save` writes to `super-memory` by default, keeping `mags` clean. `/super-search --user` hits `mags`, `--repo` hits `super-memory`. Use `/save-to-mags` for deliberate brain saves. Use `/save-to-bay-tribune` for canon saves.
 
 ### Hooks
 
 | Hook | When | Container |
 |------|------|-----------|
 | **SessionStart** | Every boot | Reads `mags` + `bay-tribune` profiles |
-| **Stop** | Session end | Writes summary to `mags` |
+| **Stop** | Session end | Writes summary to `super-memory` (was `mags` pre-S122) |
 | **PostToolUse** | DISABLED | Was auto-capturing junk. Off since S103. |
 
 ### Skills
 
 | Command | What it does | Container |
 |---------|-------------|-----------|
-| `/super-search --user "query"` | Search personal memory | `mags` |
-| `/super-search --repo "query"` | Search repo memory | `mags` (repoContainerTag = mags) |
-| `/super-search --both "query"` | Search both | `mags` + `mags` (same currently) |
-| `/super-save "content"` | Save to repo memory | `mags` (repoContainerTag = mags) |
-| `/save-to-mags "content"` | Save session work to Mags' brain | `mags` |
-| `/save-to-bay-tribune "content"` | Save published canon — editions, rosters, game results ONLY | `bay-tribune` |
+| `/super-search --user "query"` | Search Mags' brain | `mags` |
+| `/super-search --repo "query"` | Search junk drawer | `super-memory` |
+| `/super-search --both "query"` | Search both | `mags` + `super-memory` |
+| `/super-save "content"` | Quick save (auto/conversation) | `super-memory` |
+| `/save-to-mags "content"` | **Deliberate save** — decisions, reasoning, editorial thinking | `mags` |
+| `/save-to-bay-tribune "content"` | Published canon — editions, rosters, game results ONLY | `bay-tribune` |
 
 ---
 
@@ -142,9 +208,9 @@ Both point to `mags`. This means `/super-save` and `/super-search` both hit `mag
 | Endpoint | Method | Purpose |
 |----------|--------|---------|
 | `/v4/profile` | POST | Boot profile (static + dynamic) for a container |
-| `/v4/search` | POST | Hybrid search within a container |
+| `/v4/search` | POST | **PRIMARY SEARCH** — hybrid search within a container |
 | `/v3/documents` | POST | Add a document to a container |
-| `/v3/search` | POST | Document search with chunk content |
+| `/v3/search` | POST | Document search — returns raw chunks with content |
 | `/v3/documents/list` | POST | List all items (page-based). containerTag filter IGNORED server-side — filter client-side. |
 | `/v3/documents/:id` | GET | Get single document |
 | `/v3/documents/:id` | DELETE | Delete single document |
@@ -154,16 +220,167 @@ Both point to `mags`. This means `/super-save` and `/super-search` both hit `mag
 
 **Scoped API keys:** Can create keys locked to one container. Useful for preventing cross-contamination at the API level. Create at console.supermemory.ai.
 
+### Search — Correct Usage (CRITICAL)
+
+**The plugin uses `/v4/search` with these exact parameters.** Getting this wrong returns empty results with no error — silent failure.
+
+```javascript
+// CORRECT — what the plugin actually sends
+POST /v4/search
+{
+  "q": "search query here",
+  "containerTag": "bay-tribune",       // SINGULAR — not containerTags
+  "limit": 10,
+  "searchMode": "hybrid"               // REQUIRED — "hybrid" for best results
+}
+
+// Response — results with similarity scores
+{
+  "results": [
+    {
+      "content": "Darius Clark is a 40-year-old bakery worker...",
+      "similarity": 0.741,
+      "updatedAt": "2026-03-31T...",
+      "metadata": { "title": "..." }
+    }
+  ],
+  "total": 5,
+  "timing": 226
+}
+```
+
+**Common mistakes that return empty results silently:**
+- `containerTags` (plural) instead of `containerTag` (singular) → zero results
+- Missing `searchMode: "hybrid"` → may return zero results
+- Using `query` instead of `q` → 400 error
+- Using `/v3/search` instead of `/v4/search` for memory search → different response format
+
+**The two search endpoints:**
+
+| Endpoint | Use case | Key field | Returns |
+|----------|----------|-----------|---------|
+| `/v4/search` | **Primary search.** What the plugin uses. | `containerTag` (singular) + `searchMode: "hybrid"` | Semantic results with `similarity` scores, deduplicated |
+| `/v3/search` | Document-level search with raw chunks. | `containerTags` (plural array) | Raw chunk content with `score`, includes chunk positions |
+
+**Both work but behave differently.** Use `/v4/search` for searching canon and world data. Use `/v3/search` when you need raw chunk content (e.g., for ingestion verification).
+
+### Search — CLI (PRIMARY — use this)
+
+```bash
+# Search any container — one command, clean JSON output
+npx supermemory search "Darius Clark" --tag bay-tribune
+npx supermemory search "Temescal" --tag world-data
+npx supermemory search "OARI dispatch" --tag bay-tribune
+npx supermemory search "bakery workers" --tag world-data
+
+# List all containers with doc/memory counts
+npx supermemory tags list
+
+# View documents in a container
+npx supermemory docs list --tag world-data
+
+# Ingest a file
+npx supermemory add --file editions/supplemental_civic_oari_c89.txt --tag bay-tribune
+
+# Account info
+npx supermemory whoami
+```
+
+CLI is authenticated via project config at `.supermemory/config.json` (API key stored there, S131). Returns JSON — pipe to `jq` or Node for parsing.
+
+### Unified Cross-Container Search (bay-tribune + world-data)
+
+Supermemory does NOT support multi-container search in one call. Each search requires exactly one `containerTag`. For angle briefs, run two searches in parallel and merge results by score.
+
+```bash
+# Two CLI calls — pipe both to a merge script or run sequentially
+npx supermemory search "Darius Clark" --tag bay-tribune --json
+npx supermemory search "Darius Clark" --tag world-data --json
+```
+
+**Or use the unified search function (Node.js — runs both in parallel):**
+
+```javascript
+// Two parallel searches, merged by similarity score, tagged by container
+async function unifiedSearch(q, tags) {
+  var results = await Promise.all(tags.map(tag =>
+    search(q, tag).then(r => (r.results || []).map(m => ({ ...m, container: tag })))
+  ));
+  return results.flat().sort((a, b) => (b.similarity || 0) - (a.similarity || 0));
+}
+var results = await unifiedSearch("Darius Clark", ["bay-tribune", "world-data"]);
+// Results tagged [bay-tribune] or [world-data], sorted by relevance
+```
+
+**Tested S131:** "Darius Clark" returns bay-tribune narrative (bakery worker, season tickets, Stabilization Fund quotes from E83-E89) interleaved with world-data structured profiles. Under 1 second for both calls combined. This is the core function for Phase 31 angle brief building.
+
+### Search — Plugin Script (fallback for mags/super-memory)
+
+```bash
+# Plugin script (searches mags or super-memory only — uses plugin containerTag config)
+node /root/.claude/plugins/marketplaces/supermemory-plugins/plugin/scripts/search-memory.cjs --user "query"   # mags
+node /root/.claude/plugins/marketplaces/supermemory-plugins/plugin/scripts/search-memory.cjs --repo "query"   # super-memory
+```
+
+### Search — Direct API (when CLI or plugin won't work)
+
+```bash
+# Raw API call — any container
+node -e '
+require("dotenv").config();
+const https = require("https");
+const API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
+const payload = JSON.stringify({ q: "QUERY", containerTag: "CONTAINER", limit: 10, searchMode: "hybrid" });
+const req = https.request({
+  hostname: "api.supermemory.ai", path: "/v4/search", method: "POST",
+  headers: { "Content-Type": "application/json", "Authorization": "Bearer " + API_KEY, "Content-Length": Buffer.byteLength(payload) }
+}, res => { let d = ""; res.on("data", c => d += c); res.on("end", () => console.log(d)); });
+req.write(payload); req.end();
+'
+```
+
+### Ingest — Document Creation
+
+```javascript
+// Add a document to any container
+POST /v3/documents
+{
+  "content": "document text here",
+  "containerTags": ["bay-tribune"],     // PLURAL array for ingest
+  "metadata": { "title": "Doc Title", "source": "edition-ingest" }
+}
+```
+
+Note: ingest uses `containerTags` (plural). Search uses `containerTag` (singular). This inconsistency between v3 and v4 APIs is a known gotcha.
+
+### World-Data Ingest — After Each Cycle Run
+
+Citizen registry is grouped by neighborhood (one doc per neighborhood). All other ledgers are one doc each. Total: ~26 documents, ~250KB.
+
+```bash
+# Manual ingest (S131 pattern — will be automated in Phase 32.2)
+node scripts/buildWorldStatePacket.js   # Not yet built — pull sheets, format, POST to /v3/documents
+
+# Current manual test files
+output/world-state-full.json            # 20 neighborhood citizen docs
+output/world-state-test.json            # 20 individual citizen test docs (can be cleaned)
+```
+
+**Large docs take time to index.** Supermemory chunks and embeds each document asynchronously. Small docs (< 5KB) are searchable within seconds. Large docs (20KB+) may take 1-2 minutes. Verify indexing is complete before building angle briefs — run a test search after ingest.
+
 ---
 
 ## Access Matrix
 
-| Container | Claude Code plugin | Discord bot | Moltbook | Mara (claude.ai) |
-|-----------|-------------------|-------------|----------|-------------------|
-| `mags` | Read + Write | Read + Write | Read + Write | No access |
-| `bay-tribune` | Read (boot) + Write (via `/save-to-bay-tribune`) | Read | No access | No access |
-| `super-memory` | No access (direct API only) | No access | No access | No access |
-| `mara` | **No access** | No access | No access | Read + Write |
+| Container | Claude Code plugin | Discord bot | Moltbook | Mara (claude.ai) | Mike (claude.ai) |
+|-----------|-------------------|-------------|----------|-------------------|------------------|
+| `mags` | Read (boot) + Write (`/save-to-mags`) | Read + Write | Read + Write | No access | No access |
+| `bay-tribune` | Read (boot) + Write (`/save-to-bay-tribune`) | Read | No access | No access | Read (MCP) + Write (supplementals) |
+| `world-data` | Read (direct API) + Write (cycle ingest) | No access | No access | No access | Read (MCP) |
+| `super-memory` | Read (`/super-search --repo`) + Write (Stop hook, `/super-save`) | No access | No access | No access | No access |
+| `mara` | **No access** | No access | No access | Read + Write | No access |
+
+**`world-data` (NEW — S131):** Full Simulation_Ledger ingested as neighborhood-grouped citizen registry documents. 675 citizens across 20 neighborhood docs. Searchable by name, neighborhood, occupation, demographics. Ingested via direct API. See Phase 32 in ROLLOUT_PLAN.md.
 
 ---
 

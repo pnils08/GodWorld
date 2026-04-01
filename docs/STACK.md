@@ -2,7 +2,7 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: Session 120, 2026-03-27 (S120: engine 158 files, AutoDream, auto mode, scheduled agents, HTTP hooks, 5 hookify rules, 25 skills, 23 agents)
+Last updated: Session 131, 2026-03-31 (S131: engine 158 files, AutoDream, auto mode, scheduled agents, HTTP hooks, 5 hookify rules, 27 skills, 23 agents, 5 Supermemory containers, CLI installed)
 
 ---
 
@@ -43,19 +43,23 @@ Last updated: Session 120, 2026-03-27 (S120: engine 158 files, AutoDream, auto m
 
 ## Supermemory Architecture
 
-All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy read-only until canceled.
+All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy — canceling, redirecting $19 to bigger droplet.
 
 | Container | Who reads | Who writes | Purpose |
 |-----------|-----------|------------|---------|
-| `mags` | Mags (Claude Code + Discord bot) | Mags (Claude Code + Discord + Moltbook) | The brain — identity, memory, editorial thinking, conversations |
-| `bay-tribune` | Mags (Claude Code + Discord bot) | Edition ingest scripts, reference file pushes | The canon — published editions, rosters, coverage archive. Media content only. |
-| `mara` | Mara only (claude.ai) | Mara (claude.ai), reference file pushes from Claude Code | Audit reference — citizen rosters, business registry, faith orgs. Persistent data Mara can recall during audits. |
+| `mags` | Mags (Claude Code + Discord bot) | Mags (`/save-to-mags` only) | The brain — identity, memory, editorial thinking, conversations |
+| `bay-tribune` | Mags (Claude Code + Discord bot) + Mike (claude.ai MCP) | Edition ingest scripts, reference file pushes | The canon — published editions, supplementals, rosters. Media content only. |
+| `world-data` | Mags (CLI/API) + Mike (claude.ai MCP) | Direct API ingest after cycle runs | City state — citizen registry (by neighborhood), businesses, faith orgs, employment, neighborhood map/demographics |
+| `super-memory` | Manual search (`/super-search --repo`) | Stop hook, `/super-save` | Junk drawer — auto-saves, session dumps |
+| `mara` | Mara only (claude.ai) | Mara (claude.ai), reference file pushes from Claude Code | Audit reference — citizen rosters, business registry, faith orgs |
+
+**CLI:** `npx supermemory search "query" --tag container` — installed S131, authenticated via API key in `.supermemory/config.json`
 
 **Full container contents, access patterns, and refresh cadence:** `docs/SUPERMEMORY.md`
 
 **Hooks (Claude Code plugin):**
 - SessionStart → context hook pulls `mags` + `bay-tribune` profiles
-- Stop → summary hook saves session summary to `mags`
+- Stop → summary hook saves session summary to `super-memory`
 - PostToolUse → disabled (no auto-capture)
 
 ## Claude Code
@@ -102,13 +106,14 @@ moltbook              stopped   start manually when needed
 | **Thinking Summaries** | See reasoning in transcript (ctrl+o) | Enabled S120 |
 | **Channels** | MCP servers push inbound messages (Discord) | Enabled S120 — launch with `claude --channels` |
 
-## Skills (25 total, S120)
+## Skills (27 total, S131)
 
 Session lifecycle: (auto-boot), /session-startup, /session-end, /boot
 Edition production: /write-edition, /write-supplemental, /podcast + 6 desk skills + /podcast-desk
 Engine: /run-cycle, /pre-mortem, /tech-debt-audit, /stub-engine, /health, /ctx-map, /deploy, /doc-audit
 Editorial: /cycle-review, /grill-me, /visual-qa
-Memory: /save-to-mags
+Memory: /save-to-mags, /save-to-bay-tribune
+City-hall: /city-hall
 
 ## Agents (23 total, S120)
 

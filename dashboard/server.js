@@ -233,8 +233,8 @@ function parseEdition(text) {
   const lines = text.split('\n');
   const header = {};
 
-  // Detect format: current uses ############ section dividers, older uses #### markdown
-  const usesHashDividers = /^#{10,}$/m.test(text);
+  // Detect format: current uses ############ or ============ section dividers, older uses #### markdown
+  const usesHashDividers = /^#{10,}$/m.test(text) || /^={10,}$/m.test(text);
 
   // --- Header parsing (both formats) ---
   // Current format: "Edition 85 | Cycle 85 | September 2041"
@@ -276,25 +276,142 @@ function parseEdition(text) {
   const articles = [];
 
   if (usesHashDividers) {
-    // Current format: split on ############ lines, section name between dividers
-    const chunks = text.split(/^#{10,}$/m);
-    // Skip header chunks (before first section name), then alternate: name, content, name, content
-    const bodyChunks = [];
-    for (let c = 1; c < chunks.length; c++) {
-      const trimmed = chunks[c].trim();
-      if (!trimmed) continue;
-      // Skip the edition header block (contains "CYCLE PULSE" or "Edition \d+")
-      if (/CYCLE PULSE|^Edition\s+\d+/im.test(trimmed) && bodyChunks.length === 0) continue;
-      bodyChunks.push(chunks[c]);
+    // E89+ format: section names appear BEFORE ==== dividers, not between them.
+    // Pattern: "SECTION NAME\n====\narticle content\n----\narticle content\nNEXT SECTION\n====\n..."
+    // Front page has no ==== before it — it's everything before the first ====.
+    //
+    // Strategy: find ==== positions, extract section name from the line(s) before each ====,
+    // then content runs from after ==== to the next section name (or EOF).
+
+    const KNOWN_SECTIONS = [
+      'FRONT PAGE', 'CIVIC AFFAIRS', 'CIVIC BRIEFS', 'BUSINESS', 'BUSINESS TICKER',
+      'CULTURE & COMMUNITY', 'CULTURE & COMMUNITY — OAKLAND', 'SPORTS', 'SPORTS — OAKLAND',
+      'CHICAGO BUREAU', 'CHICAGO', 'SKYLINE TRIBUNE — CHICAGO BUREAU',
+      'LETTERS TO THE EDITOR', 'LETTERS',
+      "EDITOR'S DESK", 'QUICK TAKES', 'COMING NEXT', 'ARTICLE TABLE', 'CITIZEN USAGE LOG',
+      'CONTINUITY NOTES'
+    ];
+
+    function matchSection(line) {
+      // Normalize dashes to em-dash for comparison
+      const t = line.trim().toUpperCase().replace(/\u2014/g, '\u2014').replace(/\s*-+\s*/g, ' \u2014 ').replace(/\s+/g, ' ').trim();
+      if (!t || t.length < 4) return null;
+      for (const s of KNOWN_SECTIONS) {
+        const ns = s.toUpperCase().replace(/\u2014/g, '\u2014').replace(/\s*-+\s*/g, ' \u2014 ').replace(/\s+/g, ' ').trim();
+        if (t === ns) return line.trim();
+      }
+      // Strip " — OAKLAND" or " — CHICAGO BUREAU" suffixes and retry
+      const stripped = t.replace(/\s*\u2014\s*(OAKLAND|CHICAGO BUREAU)\s*$/, '');
+      if (stripped !== t) {
+        for (const s of KNOWN_SECTIONS) {
+          const ns = s.toUpperCase().replace(/\u2014/g, '\u2014').replace(/\s*-+\s*/g, ' \u2014 ').replace(/\s+/g, ' ').trim();
+          if (stripped === ns) return line.trim();
+        }
+      }
+      return null;
     }
 
-    for (let i = 0; i < bodyChunks.length - 1; i += 2) {
-      const sectionName = bodyChunks[i].trim();
-      const content = bodyChunks[i + 1] || '';
-      if (!sectionName) continue;
+    // Build sections. E89 format:
+    //   ====           (header top)
+    //   CYCLE PULSE
+    //   Edition line
+    //   ====           (header bottom)
+    //   FRONT PAGE
+    //   article...
+    //   ----
+    //   article...
+    //   ====           (section divider)
+    //   SECTION NAME
+    //   ----
+    //   article...
+    //   ====
+    //   NEXT SECTION
+    //   ...
+    //
+    // Section names come AFTER ==== dividers, not before them.
 
-      // Split section content into articles on --- dividers
-      const articleTexts = content.split(/^---$/m);
+    const sections = [];
+    let currentSection = null;
+    let currentLines = [];
+    let expectingSectionName = false;
+    let headerPassed = false;
+
+    for (let li = 0; li < lines.length; li++) {
+      const line = lines[li];
+      const trimmed = line.trim();
+
+      if (/^[#=]{10,}$/.test(trimmed)) {
+        // Flush current content to current section
+        if (currentSection && currentLines.join('\n').trim()) {
+          sections.push({ name: currentSection, content: currentLines.join('\n') });
+        }
+        currentLines = [];
+        expectingSectionName = true;
+        continue;
+      }
+
+      // After a ==== line, look for the section name in the next non-blank lines
+      if (expectingSectionName) {
+        if (!trimmed) continue; // skip blanks after ====
+        // Check if this is a header line to skip (CYCLE PULSE, Edition)
+        if (/CYCLE PULSE|^Edition\s+\d+/i.test(trimmed)) {
+          // Still in header, keep waiting
+          continue;
+        }
+        const sectionMatch = matchSection(trimmed);
+        if (sectionMatch) {
+          currentSection = sectionMatch;
+          expectingSectionName = false;
+          headerPassed = true;
+          continue;
+        }
+        // Not a known section — could be FRONT PAGE content starting without explicit section name
+        // or content right after header. Treat as content under a default section.
+        if (!currentSection) currentSection = 'FRONT PAGE';
+        expectingSectionName = false;
+        currentLines.push(line);
+        continue;
+      }
+
+      // Before any ==== is hit and no section set yet, accumulate as front page
+      if (!currentSection && !headerPassed) {
+        // Still in header area, skip
+        continue;
+      }
+
+      currentLines.push(line);
+    }
+    // Flush remaining content
+    if (currentSection && currentLines.join('\n').trim()) {
+      sections.push({ name: currentSection, content: currentLines.join('\n') });
+    }
+
+    // Parse articles from each section
+    for (const sec of sections) {
+      const sectionName = sec.name;
+      const content = sec.content;
+
+      // Split section content into articles on --- or ---- dividers
+      // Then merge header-only chunks (title+byline, no body) with the next chunk
+      const rawChunks = content.split(/^-{3,}$/m).map(c => c.trim()).filter(c => c);
+      const articleTexts = [];
+      for (let ci = 0; ci < rawChunks.length; ci++) {
+        const chunk = rawChunks[ci];
+        const chunkLines = chunk.split('\n').filter(l => l.trim());
+        // If chunk is short (just title + byline, ~1-3 lines) and next chunk exists, merge them
+        if (chunkLines.length <= 4 && chunkLines.length > 0 && ci + 1 < rawChunks.length) {
+          // Check if it looks like a header (has ALL CAPS title or byline)
+          const hasTitle = chunkLines.some(l => /^[A-Z][A-Z\s''',\-:—&]{5,}$/.test(l.trim()));
+          const hasByline = chunkLines.some(l => /^By /i.test(l.trim()));
+          const hasSectionName = matchSection(chunkLines[0]) !== null;
+          if ((hasTitle || hasByline) && !hasSectionName) {
+            // Merge with next chunk
+            rawChunks[ci + 1] = chunk + '\n' + rawChunks[ci + 1];
+            continue;
+          }
+        }
+        if (chunk.length >= 20) articleTexts.push(chunk);
+      }
       for (const articleText of articleTexts) {
         const trimmed = articleText.trim();
         if (!trimmed || trimmed.length < 50) continue;
@@ -311,11 +428,15 @@ function parseEdition(text) {
           const tl = al.trim();
           if (!tl) continue;
 
-          // Byline: "By Author | Desk"
-          const byMatch = tl.match(/^By (.+?) \| (.+)$/);
+          // Byline: "By Author, Desk" or "By Author | Desk" or just "By Author"
+          const byMatch = tl.match(/^By (.+?) \| (.+)$/) || tl.match(/^By (.+?), (.+)$/);
           if (byMatch) {
             author = byMatch[1].trim();
             desk = byMatch[2].trim();
+            continue;
+          }
+          if (!author && /^By .+/.test(tl)) {
+            author = tl.replace(/^By /, '').trim();
             continue;
           }
 
@@ -336,7 +457,12 @@ function parseEdition(text) {
               title = tl.replace(/\*\*/g, '').trim();
               continue;
             }
-            if (/^[A-Z][A-Z\s''',\-:—]{8,}$/.test(tl) && !tl.startsWith('By ')) {
+            if (/^[A-Z][A-Z\s''',\-:—&]{5,}$/.test(tl) && !tl.startsWith('By ')) {
+              title = tl;
+              continue;
+            }
+            // Title case line (for letters, features): short line, starts with capital, not a full sentence
+            if (tl.length < 80 && tl.length > 5 && /^[A-Z]/.test(tl) && !/[.!?]$/.test(tl) && !tl.startsWith('To ') && !tl.startsWith('I ') && bodyLines.length === 0) {
               title = tl;
               continue;
             }
@@ -352,7 +478,7 @@ function parseEdition(text) {
               subtitle = tl.replace(/^\*|\*$/g, '').trim();
               continue;
             }
-            if (/^[A-Z][A-Z\s''',\-:—]{8,}$/.test(tl) && !tl.startsWith('By ')) {
+            if (/^[A-Z][A-Z\s''',\-:—&]{5,}$/.test(tl) && !tl.startsWith('By ')) {
               subtitle = tl;
               continue;
             }

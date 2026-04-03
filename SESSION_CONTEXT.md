@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-02 | Engine: v3.1 | Cycle: 89 | Session: 132
+Last Updated: 2026-04-03 | Engine: v3.1 | Cycle: 89 | Session: 133
 
 ---
 
@@ -186,6 +186,16 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 133 (2026-04-03) — Riley Ecosystem Audit + Research + Phase 33 Hooks
+
+- **Riley ecosystem captured:** 40 Apps Script projects pulled via API + browser automation. 34 projects (279 files) saved to `riley/`. 5 legacy engine snapshots (763 files) to `legacy/engine-snapshots/`.
+- **Riley audit:** Identified the Sifter (`pressGeneratePromptsFromLatestCycle`), Feed loop (closed content cycle), stat engine (franchise-stats-master), active triggers (CoreSync daily, PressPulse 7AM, sports 3AM).
+- **RILEY_PLAN.md written:** Full inventory, active triggers, Mags EIC sheet plan, what to keep vs. replace.
+- **Research:** Sandcastle (parallel Docker agents), Everything Claude Code (134K stars, pattern library), Claude Code v2.1.86-91 (conditional hooks, defer/resume, named subagents, 500K MCP results).
+- **Phase 33 implemented (3 of 7):** Config protection hook, pre-compact state save, tool call counter with strategic compaction suggestions.
+- **Editorial direction rewritten:** "What Mike Hates" → "Editorial Direction — E90 Forward." Structural tuning, not complaints.
+- **E90 path decided:** Path B (Phase 31 manual) — run cycle, build packets, Mags does canon research, agents get real editorial direction.
 
 ### Session 132 (2026-04-02) — Research: Engineering Patterns + Ryan Dissertation
 

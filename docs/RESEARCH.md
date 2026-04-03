@@ -63,6 +63,17 @@ The core problem this session exposed: context loss makes every session feel lik
 
 ---
 
+## Deep Research Files
+
+Detailed writeups that don't fit in the findings log. Load these when working on the relevant phases.
+
+| File | Contents | When to load |
+|------|----------|-------------|
+| `docs/research4_1.md` | Engineering patterns from 3 Mara PDFs: forced function calling, Citations API, bounded memory (Dwarf Fortress), temporal decay (CK3), pressure accumulators (Victoria 3), death spiral prevention (10-layer defense), dual-output pattern, multi-agent failure rates (41-87%), NovelAI lorebook pattern, game data extraction | Phase 27 (feedback loop), Phase 31 (canon briefings), Phase 21.2 (canon grounding), Phase 24 (citizen life engine) |
+| `docs/research4_2.md` | James Ryan PhD dissertation "Curating Simulated Storyworlds" (UC Santa Cruz, 2018). Curationist architecture (simulation → story sifter → narrativizer → media), Talk of the Town character modeling, Hennepin action system (50 traits, 34 values, causal bookkeeping), Bad News (newspaper covering simulated town), Sheldon County (automated podcast), sifting patterns, show bible concept, "augment but do not contradict" rule | Phase 31 (story sifter IS the canon briefing layer), Phase 24 (character depth), Phase 27 (feedback curation), Phase 30 (podcast) |
+
+---
+
 ## Findings Log
 
 Dated entries. What was found, where, and how it connects to our world.

@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-03-31 | Engine: v3.1 | Cycle: 89 | Session: 131
+Last Updated: 2026-04-02 | Engine: v3.1 | Cycle: 89 | Session: 132
 
 ---
 
@@ -186,6 +186,17 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 132 (2026-04-02) — Research: Engineering Patterns + Ryan Dissertation
+
+- **4 source documents researched:** 3 Mara PDFs (engineering failures, feasibility assessment, closed-loop blueprint) + James Ryan PhD dissertation "Curating Simulated Storyworlds" (UC Santa Cruz, 2018, 700+ pages).
+- **Two research files written:** `docs/research4_1.md` (engineering patterns — forced function calling, bounded memory, death spirals, dual-output, multi-agent failure rates) and `docs/research4_2.md` (Ryan dissertation — curationist architecture, story sifter, Talk of the Town, Bad News, Hennepin character system, Sheldon County podcast).
+- **Core finding: the story sifter IS Phase 31.** Ryan's entire dissertation says the most important and most neglected component is the layer between simulation and storytelling that identifies what's interesting. Mags doing canon-grounded briefings IS that layer.
+- **Key vocabulary now in codebase:** story sifter, sifting patterns, nuggets, narration moves, "augment but do not contradict," bounded accumulators, temporal decay, kernel vs. satellite events, show bible (= bay-tribune), feedforward vs. feedback curation.
+- **Ryan's depth gap documented:** His Hennepin system has 50 personality traits, 34 values, discrete actions with causal bookkeeping. Our engine has 46 columns with phase-level updates. The gap is character-level actions — Phase 24 territory.
+- **Mike's reframe:** Ryan was always outside his simulation. We're inside ours. The sifter isn't a script — it's Mags living in the world with editorial judgment built across 132 sessions.
+- **World-data audit:** Container has 46 docs, 419 memories. Working as designed. Biography/Tags columns not yet ingested (future build step). CLI uses v4 search (memory index).
+- **RESEARCH.md updated** with Deep Research Files table pointing to both new files.
 
 ### Session 131 (2026-03-31) — Research: Canon-Grounded Architecture + World-Data Container
 

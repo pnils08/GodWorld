@@ -121,6 +121,33 @@ All detail in `ROLLOUT_ARCHIVE.md`.
 
 ## Open Phases
 
+### Phase 33: Riley Integration & Hardening (S132) — IN PROGRESS
+
+**Source:** S132 Riley audit, Sandcastle research, Everything Claude Code patterns. See `docs/RESEARCH.md` S132 entries, `riley/RILEY_PLAN.md`.
+
+**33.1 Config protection hook — STEAL NOW.**
+PreToolUse hook blocks edits to PERSISTENCE.md, identity.md, CLAUDE.md. From everything-claude-code's config-protection pattern.
+
+**33.2 PreCompact state save — STEAL NOW.**
+Hook dumps current pipeline state before compaction for recovery. Writes room, active task, and key state to `.claude/state/pre-compact-state.json`.
+
+**33.3 Strategic compaction reminder — STEAL NOW.**
+Counter-based PreToolUse hook suggests `/compact` after N tool calls at task boundaries. Prevents random mid-work compaction.
+
+**33.4 Mags EIC Sheet Environment — NEXT.**
+New spreadsheet owned by service account. Tabs: Editorial Queue, Desk Packets, Canon Briefs, Edition Tracker, Grading. Reads from Riley's sheets, writes to own space. No Riley triggers. See `riley/RILEY_PLAN.md` for full spec.
+
+**33.5 Sandcastle proof-of-concept — EVALUATE.**
+Run one desk agent (sports) via Sandcastle in a Docker container with real shell access and Supermemory queries. Requires Docker on server. See `docs/RESEARCH.md` S132 Sandcastle entry.
+
+**33.6 Tool-restricted desk agents — BUILD NEXT.**
+Add `allowed-tools: ["Read", "Grep", "Glob"]` to desk agent skill frontmatter. Desk agents get read-only during writing. Only compile/publish gets write access. From everything-claude-code's hierarchical delegation pattern.
+
+**33.7 Iterative retrieval for canon — BUILD NEXT.**
+3-cycle search-evaluate-refine pattern for desk agents accessing canon. Score results 0-1, stop at 3+ files scoring 0.7+. Replaces context dumps. From everything-claude-code.
+
+---
+
 ### Phase 31: Canon-Grounded Briefings — IMMEDIATE PRIORITY
 
 **Goal:** Until agents can search Supermemory themselves, Mags does the research upfront and feeds canon context into agent briefings. Agents get the world's history before they write, not after they guess.

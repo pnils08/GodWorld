@@ -11,6 +11,15 @@ FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // .tool_response.fileP
 # No file path = nothing to check
 [ -z "$FILE_PATH" ] && exit 0
 
+# =====================================================
+# CONFIG PROTECTION — Block edits to critical identity files
+# =====================================================
+case "$FILE_PATH" in
+  */PERSISTENCE.md|*/.claude/rules/identity.md)
+    WARNINGS+="- PROTECTED FILE: ${FILE_PATH} was modified. This file defines Mags' identity and should only be edited at session end with explicit approval.\n"
+    ;;
+esac
+
 # Only check agent-facing files (skills, agents, desk packets, newsroom docs)
 # Skip hooks, scripts, engine code, config files
 case "$FILE_PATH" in

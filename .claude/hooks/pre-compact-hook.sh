@@ -4,6 +4,36 @@
 # into the compaction context so the summary writer preserves them.
 
 GODWORLD_ROOT="${CLAUDE_PROJECT_ROOT:-/root/GodWorld}"
+STATE_DIR="$GODWORLD_ROOT/.claude/state"
+
+# =====================================================
+# PRE-COMPACT STATE SAVE (Phase 33.2)
+# Dumps recoverable state before compaction wipes context
+# =====================================================
+mkdir -p "$STATE_DIR"
+COMPACT_STATE="$STATE_DIR/pre-compact-state.json"
+
+ROOM=$(cat "$STATE_DIR/current-workflow.txt" 2>/dev/null || echo "unknown")
+BRANCH=$(git -C "$GODWORLD_ROOT" branch --show-current 2>/dev/null || echo "unknown")
+MODIFIED_COUNT=$(git -C "$GODWORLD_ROOT" status --porcelain 2>/dev/null | wc -l)
+MODIFIED_FILES=$(git -C "$GODWORLD_ROOT" status --porcelain 2>/dev/null | head -20 | jq -R -s 'split("\n") | map(select(length > 0))' 2>/dev/null || echo "[]")
+TOOL_COUNT=$(cat "$STATE_DIR/tool-call-counter.txt" 2>/dev/null || echo "0")
+TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+cat > "$COMPACT_STATE" << STATEEOF
+{
+  "timestamp": "${TIMESTAMP}",
+  "room": "${ROOM}",
+  "branch": "${BRANCH}",
+  "modified_file_count": ${MODIFIED_COUNT},
+  "modified_files": ${MODIFIED_FILES},
+  "tool_calls_before_compact": ${TOOL_COUNT},
+  "note": "State saved by pre-compact hook. Read this after /boot if context was lost."
+}
+STATEEOF
+
+# Reset tool counter after compaction
+echo "0" > "$STATE_DIR/tool-call-counter.txt"
 
 # --- Workflow from state file (written during boot) ---
 WORKFLOW="unknown"

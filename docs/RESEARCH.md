@@ -1646,3 +1646,56 @@ The agent harness layer is commoditizing. If open-source alternatives mature:
 - WordPress 7.0 AI Client SDK (April 2026)
 - Fish Audio OpenAudio S1: distinct voices, emotion tags ($11/mo)
 - Moltbook: agent social network (moltbook.com/skill.md)
+
+---
+
+## S132 Research — Riley Ecosystem, Sandcastle, Everything Claude Code (2026-04-03)
+
+### Riley Ecosystem Audit
+Full audit of 40 Google Apps Script projects (riley.steward.system@gmail.com). 34 unique projects saved to `riley/`, 5 legacy engine snapshots to `legacy/engine-snapshots/`. See `riley/RILEY_PLAN.md` for complete inventory and Mags EIC sheet plan.
+
+Key findings:
+- **The Sifter** = `pressGeneratePromptsFromLatestCycle()` in newsroom-engine. Reads Riley_Digest + World_Population, generates 9 fixed story types per cycle. Dumb but running daily.
+- **Feed Loop** = closed content cycle: engine → sifter → stories → Feed sheets → CoreSync → names back into Simulation_Ledger. Working.
+- **Stat Engine** = franchise-stats-master (46 files). Full baseball sim DB with randomized stats, player cards, roster management. Pushes daily sports headlines to Bay Tribune.
+- **Active triggers** confirmed running: CoreSync (daily), PressPulse reader (7 AM), sports headlines (3 AM), heartbeats (2 AM), integrity logger (6hr), player card verify (6 AM).
+
+### Sandcastle — Parallel Sandboxed Agents
+**Source:** github.com/mattpocock/sandcastle | `@ai-hero/sandcastle` v0.2.0 (Apr 1, 2026) | MIT
+**What:** Framework for running coding agents in isolated Docker containers with git worktrees. Each agent gets its own branch, real shell access, parallel execution via `Promise.allSettled()`.
+**Why it matters:** Solves every desk agent problem — agents get real HTTP/curl, isolated filesystems, can run `npx supermemory search` and `node scripts/buildDeskPackets.js` directly. Prompt templates support `!`command`` syntax for injecting live data.
+**Architecture:** Host repo → `.sandcastle/` config → one Docker container per agent → bind-mounted worktree → agent CLI (Claude Code `--print`) → streams output → auto-merges branches.
+**Trade-off:** Each agent = separate API session = N× token cost. v0.2.0 = brand new.
+**Status:** Evaluated. Proof-of-concept candidate for sports desk.
+
+### Everything Claude Code — Pattern Library
+**Source:** github.com/affaan-m/everything-claude-code | 134K+ stars | Anthropic Hackathon winner
+**What:** Collection of 38 agent definitions, 156 skills, 72 commands, hooks, rules. All markdown/YAML — prompt engineering artifacts, not running services.
+
+**Patterns to steal:**
+1. **Tool-restricted agents** — YAML frontmatter `tools: ["Read", "Grep", "Glob"]` enforces read-only access. Desk agents should be read-only during research/writing, write access only at compile.
+2. **Config protection hook** — PreToolUse hook blocks edits to critical files (PERSISTENCE.md, identity.md, CLAUDE.md).
+3. **PreCompact state save** — Hook dumps pipeline state before compaction for recovery.
+4. **Strategic compaction** — Counter-based hook suggests `/compact` at task boundaries, not randomly.
+5. **Iterative retrieval** — 3-cycle search-evaluate-refine for canon access. Score files 0-1, stop at 3+ files scoring 0.7+.
+6. **Session evaluation hook** — Analyzes transcript at session end for extractable patterns (fabrication causes, what Mara caught, what worked).
+7. **Loop operator** — Monitored autonomous loop with stall detection and escalation. Stops when desk agent fabricates instead of continuing.
+8. **Brand voice profiles** — Operational voice extracted from writing samples (sentence rhythm, compression ratio, claim sharpening). Per-desk consistency.
+9. **Hierarchical delegation** — Orchestrator (Mags) gets full access. Desk agents get read-only. Quality agent (Mara) gets read-only. Compile/publish gets write. Trust architecture.
+
+### Claude Code v2.1.86–91 Platform Updates (late Mar – Apr 2, 2026)
+**Source:** github.com/marckrenn/claude-code-changelog
+
+| Version | Feature | Impact |
+|---------|---------|--------|
+| v2.1.86 | Conditional hooks — `if` field using permission rule syntax | Hooks fire only for specific operations |
+| v2.1.89 | Defer/resume — `PreToolUse` returns `"defer"` to pause session | Approval gates for edition publishing |
+| v2.1.89 | Named subagents in `@` mention typeahead | Desk agents discoverable by name |
+| v2.1.89 | `PermissionDenied` hook with `{retry: true}` | Auto-retry after permission fixes |
+| v2.1.89 | MCP SSE transport: quadratic → linear | Faster Supermemory/claude-mem connections |
+| v2.1.91 | MCP results up to 500K chars via `_meta` | Larger Supermemory search returns |
+| v2.1.91 | Plugin executables under `bin/` | Complex plugin architectures |
+| flag | `tengu_kairos_cron_durable` | Scheduled tasks persist to disk |
+
+### Cookbooks Reference
+- `patterns/agents/orchestrator_workers` — reference implementation of editor-coordinates-desk-agents. github.com/anthropics/claude-cookbooks

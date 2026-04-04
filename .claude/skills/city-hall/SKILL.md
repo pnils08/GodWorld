@@ -25,6 +25,21 @@ Less data, stronger identity, one clear decision. Bounded input — data is chao
 - Show the user what each voice decided before applying tracker updates.
 - USER APPROVAL GATE before writing to the Initiative_Tracker sheet.
 
+## Agent Coordination (from Paperclip patterns)
+
+**Heartbeat model:** Voices don't run as long sessions. They wake, receive their decision, produce output, done. If a voice has no pending decision this cycle, it doesn't run. No idle agents.
+
+**Atomic topic checkout:** Each initiative/topic is assigned to ONE voice. No two voices produce output about the same initiative unless the decision cascades (Mayor → Chief). Track assignments in the production log:
+```
+## Topic Assignments
+- OARI: Mayor (political) → Montez (operational) → Tran-Muñoz (project)
+- Stabilization Fund: Mayor (enforcement) → Vega (oversight)
+- Baylight: Ramos (construction) → Ashford (oversight)
+```
+This prevents the E90 problem where five articles covered the same two stories. Each topic has a primary owner. Others only speak if the decision flows to them.
+
+**Structured result capture:** Every voice returns the same format — `output/civic-voice/{office}_c{XX}.json` with: office, cycle, statements array, each statement has type, initiative, decision, quote, reasoning. No free-form. The clerk script validates this schema.
+
 ## Prerequisites
 1. Engine cycle has been run
 2. Mike provides the pressure — what needs to happen this cycle, what can't be punted. This can be a Mara directive, feed entries, or just Mike telling you.

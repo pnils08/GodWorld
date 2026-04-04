@@ -1699,3 +1699,19 @@ Key findings:
 
 ### Cookbooks Reference
 - `patterns/agents/orchestrator_workers` — reference implementation of editor-coordinates-desk-agents. github.com/anthropics/claude-cookbooks
+
+### Paperclip — Agent Orchestration Platform
+**Source:** github.com/paperclipai/paperclip | 46K+ stars | MIT
+**What:** Open-source orchestration for coordinating teams of AI agents. Node.js + React + PostgreSQL. Adapter layer bridges to Claude Code, Codex, Gemini, bash scripts, or HTTP endpoints.
+
+**Patterns to steal:**
+1. **Heartbeat model** — agents don't run continuously. Wake on schedule/event, receive work, execute, report, sleep. Heartbeats coalesce (no duplicate runs). Applies to city-hall voices and desk agents — wake, get assignment, produce, done.
+2. **Session ID persistence** — Claude Code session IDs persist between heartbeats so agents retain context across runs. Our agents start cold every time. Persisting IDs gives memory without re-loading.
+3. **Budget caps per agent** — monthly token tracking per role. Prevents one broken agent from burning the whole bill.
+4. **Atomic task checkout** — when an agent picks up work, it's checked out so no other agent grabs it. Prevents two desks writing the same story (the E90 five-civic-articles problem).
+5. **Adapter abstraction** — standardized `execute(agentConfig, context) → result` wrapper. Swap runtimes later.
+6. **Structured result capture** — every heartbeat returns status, token usage, errors, output in a standard schema.
+7. **Skill injection via `--add-dir`** — symlink capabilities into agent workspace without retraining.
+
+**What doesn't fit:** PostgreSQL backend (we use Sheets + Supermemory), generic business ops UI (not newsroom), org chart metaphor (our agents are characters, not employees).
+**Status:** Patterns evaluated. Atomic task checkout and heartbeat model are highest priority for city-hall and edition pipeline.

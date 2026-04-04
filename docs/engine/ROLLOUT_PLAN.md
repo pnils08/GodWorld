@@ -134,16 +134,25 @@ Hook dumps current pipeline state before compaction for recovery. Writes room, a
 **33.3 Strategic compaction reminder — STEAL NOW.**
 Counter-based PreToolUse hook suggests `/compact` after N tool calls at task boundaries. Prevents random mid-work compaction.
 
-**33.4 Mags EIC Sheet Environment — NEXT.**
+**33.4 City-hall skill rewrite — DONE S133.**
+Voices govern (Mayor first, then parallel). Projects hallucinate world details within political frame. City Clerk becomes closer/verifier. No more 7-tab data dumps — IDENTITY.md + pending_decisions.md only. Mags and Mike are the sifters.
+
+**33.5 Bounded trait system — DONE S133.**
+8 traits (1-10 scale) added to all 11 civic agents: Institutional Loyalty, Risk Tolerance, Public Profile, Civic Trust, Pragmatism, Urgency, Empathy, Territorial. Based on Hennepin (Ryan 2018), Dwarf Fortress, Victoria 3. Traits drive decisions — agents read traits before options. Verified against Oakland_Political_System_v1.1.
+
+**33.6 City Clerk verification script — BUILD.**
+Node script (not an agent) that checks: voice outputs exist, project outputs exist, tracker updates applied, production log complete. `scripts/verifyCityHall.js`. Output: `output/city-civic-database/clerk_audit_c{XX}.json`.
+
+**33.8 Mags EIC Sheet Environment — EVALUATE.**
 New spreadsheet owned by service account. Tabs: Editorial Queue, Desk Packets, Canon Briefs, Edition Tracker, Grading. Reads from Riley's sheets, writes to own space. No Riley triggers. See `riley/RILEY_PLAN.md` for full spec.
 
-**33.5 Sandcastle proof-of-concept — EVALUATE.**
+**33.9 Sandcastle proof-of-concept — EVALUATE.**
 Run one desk agent (sports) via Sandcastle in a Docker container with real shell access and Supermemory queries. Requires Docker on server. See `docs/RESEARCH.md` S132 Sandcastle entry.
 
-**33.6 Tool-restricted desk agents — BUILD NEXT.**
+**33.10 Tool-restricted desk agents — BUILD NEXT.**
 Add `allowed-tools: ["Read", "Grep", "Glob"]` to desk agent skill frontmatter. Desk agents get read-only during writing. Only compile/publish gets write access. From everything-claude-code's hierarchical delegation pattern.
 
-**33.7 Iterative retrieval for canon — BUILD NEXT.**
+**33.11 Iterative retrieval for canon — BUILD NEXT.**
 3-cycle search-evaluate-refine pattern for desk agents accessing canon. Score results 0-1, stop at 3+ files scoring 0.7+. Replaces context dumps. From everything-claude-code.
 
 ---

@@ -207,9 +207,27 @@ Show output. **USER APPROVAL GATE.** Then:
 node scripts/applyTrackerUpdates.js {cycle} --apply
 ```
 
-## Step 7: Close City Hall
+## Step 7: Close City Hall — Write Media Handoff
 
-Update production log with final state. City hall output stays in `output/civic-voice/`. This is source material for the edition — desk agents reference it, not the other way around.
+Update production log with final state. Add the **Media Handoff** section at the bottom — this is the plain language summary of what happened in government this cycle.
+
+**The production log IS the civic sift document.** When `/write-edition` runs later, Mags reads this log first. It tells her:
+- What decisions were made and by whom
+- What's dramatic (conflicts, surprises, timing collisions)
+- What moved on the tracker
+- What project details were hallucinated (stadium names, tenant lists, protocol specifics)
+
+**This data is locked canon once written.** The voice decisions, the project details, the tracker updates — all of it becomes the truth of what happened in city government this cycle. The edition reports FROM this document. No desk agent overrides it, reinterprets it, or invents additional civic decisions.
+
+**Media Handoff format:**
+```
+## Media Handoff
+[2-4 sentences: what happened, what's dramatic, what moved]
+[Topic assignments: which desk owns which story if covered]
+[Project details available: what world-building specifics the desks can use]
+```
+
+**Save location:** `output/production_log_city_hall_c{XX}.md` — this file persists. It survives compaction, session changes, and context loss. The edition pipeline reads it.
 
 **City hall is done. Edition is a separate session.**
 

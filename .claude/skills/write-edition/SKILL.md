@@ -102,21 +102,48 @@ For every citizen, player, or entity you plan to include in the edition — sear
 
 This is the job. After reading all inputs, Mags decides what the paper covers.
 
-Write one angle brief per desk to `output/desks/{desk}/current/angle_briefs/c{XX}_{desk}_brief.md`.
+Write one angle brief per REPORTER to `output/reporters/{reporter}/c{XX}_brief.md`.
+
+### The 9 Reporters
+
+| Reporter | Agent | Role | Runs when |
+|----------|-------|------|-----------|
+| Carmen Delaine | `carmen-delaine` | Civic lead | Civic story assigned |
+| P Slayer | `p-slayer` | Sports opinion/fan | Sports story assigned |
+| Anthony | `anthony` | Sports beat/stats | Sports story assigned |
+| Hal Richmond | `hal-richmond` | Sports legacy | Dynasty/farewell content |
+| Jordan Velez | `jordan-velez` | Business/economics | Business story assigned |
+| Maria Keen | `maria-keen` | Culture/neighborhoods | Culture story assigned |
+| Jax Caldera | `jax-caldera` | Freelance accountability | Something smells wrong |
+| Dr. Lila Mezran | `lila-mezran` | Health/human cost | Health event in engine data |
+| Letters | `letters-desk` | Citizen voices | Always — reacts to the edition |
+
+**Each reporter is one agent, one voice, one identity.** No desk agents juggling multiple voices. Each reporter gets their IDENTITY.md and their angle brief. Nothing else.
+
+**Secondary reporters** (Navarro, Shimizu, Torres, Graye, Marston, Ortega, Reyes, Tan, Cruz) launch ONLY when the sift assigns them a specific story. Most cycles they don't run.
+
+**Chicago bureau** (Selena Grant, Talia Finch) is supplemental-only. When a Chicago storyline matters — Paulson at a Bulls game, a trade connection — it runs as a supplemental, not part of the regular edition. Not every cycle. Not a standing bureau.
+
+### Conditional Agents
+
+- **Jax Caldera:** Only launches when the sift finds a gap — silence on a major issue, contradiction between reporters, a story everyone's avoiding. He asks the question nobody wants asked.
+- **Dr. Lila Mezran:** Only launches when the engine produces a health event — crisis spikes, hospital capacity, community health data. She covers the human body the way Maria Keen covers the neighborhood.
+- **Letters desk:** Launches LAST — needs to know what other reporters covered so citizens can react.
+
+### Angle Brief Format
 
 **Each brief contains:**
-- THE LEAD — what this desk's main story is and why
-- SECONDARY — if there's a second story
+- THE STORY — what this reporter is writing and why
 - CITIZENS TO USE — verified names with roles, ages, neighborhoods from the ledger
-- WHAT NOT TO COVER — topics assigned to other desks (atomic checkout)
-- TONE — how this desk should feel this cycle
+- WHAT NOT TO COVER — topics assigned to other reporters (atomic checkout)
+- SPECIFIC DATA — the feed entries, engine data, or production log quotes relevant to this story only
 
 **Rules for the sift:**
 - The engine data comes first. What's the city doing tonight? What happened? Who was out?
 - Mike's feed entries come second. What sports stories did he write?
-- City-hall production log comes third. What civic decisions need one story, not five?
+- City-hall production log comes third. What civic decisions need coverage?
 - Every name verified against the ledger before it goes in a brief
-- No desk gets more than 2-3 stories
+- Each reporter gets 1-2 stories max
 - Topic checkout tracked in the production log
 
 ## Step 3: Build Desk Packets + Folders
@@ -128,30 +155,30 @@ These scripts build the raw data — packets, summaries, briefings, archives, er
 
 **Verify:** Angle briefs exist in `output/desks/{desk}/current/angle_briefs/` for all active desks.
 
-## Step 4: Launch Desk Agents
+## Step 4: Launch Reporter Agents
 
-Launch desks with direct editorial direction in the prompt. Do NOT tell agents to "read the packet and decide what to write." Tell them WHAT to write based on the angle brief.
+Each reporter is launched individually with direct editorial direction. Do NOT tell agents to "read the packet and decide what to write." Tell them WHAT to write.
 
-**Prompt structure per desk:**
+**Prompt structure per reporter:**
 ```
-You are the [desk] desk. Here is your editorial direction:
+You are [Reporter Name]. Here is your assignment:
 
-ARTICLE 1 — [headline/topic]
+ARTICLE — [headline/topic]
 [Specific direction from the angle brief — who, what, angle, citizens to use]
 
-ARTICLE 2 — [headline/topic]
-[Same]
-
-Read your IDENTITY.md at [path]. Use ONLY citizens named above.
-Write articles to [output path]. [word count]. Do NOT spend time reading other files.
+Read your IDENTITY.md at [path]. Use ONLY citizens named in this assignment.
+Write to [output path]. [word count]. Do NOT spend time reading other files — write.
 ```
 
-The key lesson from E90: agents that get told what to write produce articles. Agents that get told to go find what to write spend all their tokens searching and produce nothing.
+**The E90 lesson:** Agents told what to write produce articles. Agents told to figure it out spend all their tokens reading files and produce nothing.
 
 **Launch order:**
-- Sports desk first if Mike provided feed entries (most important stories)
-- Remaining desks in parallel
-- Letters desk last (needs to know what other desks covered to react)
+1. P Slayer, Anthony, Hal first — sports stories from Mike's feed entries
+2. Carmen, Jordan, Maria in parallel — civic/business/culture
+3. Jax and Mezran if assigned — conditional
+4. Letters LAST — needs to know what others covered
+
+**Output:** Each reporter writes to `output/reporters/{reporter}/articles/`. One reporter, one folder, one or two articles.
 
 ## Step 4.5: Read Every Article
 
@@ -178,11 +205,11 @@ Weather: [from engine] | City Mood: [from engine]
 
 FRONT PAGE — [strongest lead, Mike picks]
 EDITOR'S DESK — Mags, 150-250 words
-CIVIC AFFAIRS — from city-hall production log
-BUSINESS — business ticker + any Baylight/economic stories
-CULTURE & COMMUNITY — nightlife, food, events, neighborhoods
+CIVIC AFFAIRS — from city-hall production log (could be 1 article or a 5-line ticker)
+BUSINESS — economic stories, Baylight, ticker items
+CULTURE & COMMUNITY — nightlife, food, events, neighborhoods, health
 SPORTS — OAKLAND — from Mike's feed entries
-SKYLINE TRIBUNE — CHICAGO BUREAU
+ACCOUNTABILITY — Jax piece if deployed
 LETTERS TO THE EDITOR
 ARTICLE TABLE
 CITIZEN USAGE LOG
@@ -190,6 +217,8 @@ STORYLINES UPDATED
 COMING NEXT EDITION
 END EDITION
 ```
+
+**Chicago** is supplemental-only. When a Chicago storyline matters, it runs as a separate supplemental — not part of the regular edition.
 
 **Show compiled edition to Mike.** This is his review point.
 

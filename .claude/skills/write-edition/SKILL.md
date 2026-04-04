@@ -1,240 +1,245 @@
 ---
 name: write-edition
-description: Run the complete Cycle Pulse edition production pipeline — 6 desk agents, compile, verify, Mara audit.
+description: Produce the Cycle Pulse edition — sift the world, brief the desks, compile, verify, publish. Civic decisions come from city-hall (separate session).
 effort: high
 disable-model-invocation: true
 argument-hint: "[cycle-number]"
 ---
 
-# /write-edition — Full Edition Production Pipeline
+# /write-edition — Edition Production
 
 ## Usage
 `/write-edition [cycle-number]`
 
+## The Principle
+
+The engine produces a world. Mike produces the sports stories. City-hall produces the civic decisions. This skill turns all of that into a newspaper people want to read.
+
+Mags is the sifter. She reads the engine data, Mike's feed entries, and the city-hall production log. She decides what the paper covers. She writes angle briefs that tell each desk exactly what to write and what citizens to use. She verifies every name against the ledger. She compiles the edition. She is the editor.
+
+The paper covers the WORLD — nightlife, food, sports, famous sightings, weather, neighborhoods, relationships, player arcs, evening texture. Civic decisions are part of the world, not the whole paper.
+
 ## Rules
-- Read SESSION_CONTEXT.md FIRST
-- Show the user a plan before launching agents
-- Get approval before compiling the final edition
-
-## Live Status (auto-injected)
-
-**Desk packets:**
-```
-!`cat output/desk-packets/manifest.json 2>/dev/null || echo "NO PACKETS — run: node scripts/buildDeskPackets.js [cycle]"`
-```
-
-**Production log (if resuming):**
-```
-!`ls output/production_log_c*.md 2>/dev/null || echo "No production log — fresh start"`
-```
-
-**Desk folders:**
-```
-!`ls output/desks/*/current/briefing.md 2>/dev/null | wc -l | xargs -I{} echo "{}/6 desk folders ready" || echo "0/6 — run buildDeskFolders.js"`
-```
+- **Engine data drives the paper.** Read the Riley_Digest, hooks, seeds, evening context, feeds FIRST. That's the world.
+- **Mike's feed entries are the sports stories.** Game results, player features, arcs — these are hand-written by Mike. Treat them as gospel.
+- **City-hall production log is locked civic canon.** Read it, don't reinterpret it. Civic coverage comes FROM the log.
+- **Every citizen name gets verified.** Query the ledger. No exceptions. No guessing roles, ages, or neighborhoods.
+- **Atomic topic checkout.** Each story is assigned to ONE desk. No two desks cover the same story.
+- **No calendar dates.** The world runs on cycles, not months. No "October 15th." No "last winter." This cycle, last cycle, three cycles ago.
 
 ## Prerequisites
-Before running, the user should have already:
-1. Run the engine cycle
-2. Built desk packets: `node scripts/buildDeskPackets.js [cycle]`
-3. Built civic voice packets: `node scripts/buildCivicVoicePackets.js [cycle]` (optional)
+1. Engine cycle has been run
+2. `/city-hall` has been run in a separate session — `output/production_log_city_hall_c{XX}.md` exists
+3. Mike has provided feed entries (game results, player features, arcs) — check the sports feed on the sheet
 
-## Step 0.5: Initialize Production Log
+## Step 0: Production Log
 
-Create `output/production_log_c{XX}.md`. This file survives compaction — if context is lost mid-run, post-compact Mags reads it and picks up where she left off.
+Create `output/production_log_edition_c{XX}.md`:
 
 ```markdown
 # Edition {XX} Production Log
 **Started:** {timestamp}
-**Pipeline State:** STEP 1 — Verifying packets
+**Cycle:** {XX}
 
-## Completed Steps
-(updated as each step finishes)
+## Inputs
+- City-hall log: [exists/missing]
+- Engine data: [cycle weight, key events, evening context summary]
+- Mike's feed entries: [list what's there]
 
-## Editorial Decisions
-(story assignments, angles chosen, reporters selected, flags raised)
+## The Sift — What This Edition Covers
+[Mags writes this after reading all inputs]
 
-## Voice Agent Decisions
-(Mayor authorizations, faction reactions — summarized from voice output)
+## Topic Assignments
+[desk: story — one desk per story]
+
+## Desk Agent Results
+[filled in as desks return]
+
+## Compile Notes
+[editorial decisions during assembly]
 
 ## Quality Notes
-(validation issues, Rhea feedback, Mara feedback)
-
-## Next Step
-Step 1 — Verify packets
+[validation, Rhea, Mara]
 ```
 
-**Update this file at every pipeline step.** Change the Pipeline State line, add to Completed Steps, log decisions as you make them. This is not optional — it's how you survive compaction.
+## Step 1: Read the World
 
-**After compaction:** Read `output/production_log_c{XX}.md` FIRST, before anything else. It tells you exactly where you are.
+Read these in order. This is the sift — finding what's worth covering.
 
-## Step 1: Verify Packets
-1. Read `output/desk-packets/manifest.json` — confirm all 6 packets exist
-2. Read `output/desk-packets/base_context.json` — get cycle number, calendar
-3. Confirm cycle number matches user expectation
-4. Show summary to user:
+**1a. City-hall production log**
 ```
-EDITION [XX] — PACKETS READY
-  [x] civic, sports, culture, business, chicago, letters
-Ready to proceed?
+Read: output/production_log_city_hall_c{XX}.md
 ```
+The Media Handoff section tells you what happened in government. This is locked canon — the desks report from it, they don't reinvent it. Decide how much civic coverage the edition needs. Could be a front page story, could be 5 lines in a ticker. Editorial call.
 
-## Step 2: Initiative Agents (Parallel, Optional)
-If civic initiatives need advancing this cycle:
+**1b. Mike's feed entries**
+Read the sports feed from the sheet — game results, player features, arcs. These are hand-written by Mike. Every player name, every stat, every story angle is intentional. The sports desk writes FROM these entries. Look up every player mentioned in the ledger or truesource — confirm ratings, positions, ages.
+
+**1c. Engine data — Riley_Digest**
+Read the C{XX} row from Riley_Digest. Key columns:
+- **CycleWeight / CycleWeightReason** — is this a high-signal cycle?
+- **EveningMedia** — TV, movies, streaming, sports broadcasts
+- **FamousPeople** — who was spotted out in the city? Look them up — are they players? Citizens? New faces?
+- **EveningFood** — restaurants, fast food, trends
+- **CityEvents** — gallery walks, festivals, gatherings
+- **NightLife** — bars, volume, vibe
+- **Sports** — what the engine says about the sports state
+- **WorldEvents** — health crises, faith events, safety events, domain activity
+- **Weather** — temperature, wind, conditions
+- **StreamingTrend** — what the city is watching
+
+**1d. Desk packets — hooks and seeds**
+Read the hooks and seeds from each desk packet. These are the engine's story suggestions. Look for:
+- Follow-up seeds (stories that haven't been covered in X cycles)
+- Nightlife/food/arts signals
+- Neighborhood-level events
+- Cross-desk connections
+
+**1e. Supermemory canon check**
+For every citizen, player, or entity you plan to include in the edition — search bay-tribune and world-data. Confirm who they are. Don't trust your memory. Don't trust the packet labels. Verify.
+
+## Step 2: The Sift — Write Angle Briefs
+
+This is the job. After reading all inputs, Mags decides what the paper covers.
+
+Write one angle brief per desk to `output/desks/{desk}/current/angle_briefs/c{XX}_{desk}_brief.md`.
+
+**Each brief contains:**
+- THE LEAD — what this desk's main story is and why
+- SECONDARY — if there's a second story
+- CITIZENS TO USE — verified names with roles, ages, neighborhoods from the ledger
+- WHAT NOT TO COVER — topics assigned to other desks (atomic checkout)
+- TONE — how this desk should feel this cycle
+
+**Rules for the sift:**
+- The engine data comes first. What's the city doing tonight? What happened? Who was out?
+- Mike's feed entries come second. What sports stories did he write?
+- City-hall production log comes third. What civic decisions need one story, not five?
+- Every name verified against the ledger before it goes in a brief
+- No desk gets more than 2-3 stories
+- Topic checkout tracked in the production log
+
+## Step 3: Build Desk Packets + Folders
 ```bash
-node scripts/buildInitiativePackets.js {cycle}
-node scripts/buildInitiativeWorkspaces.js {cycle}
-```
-Launch 5 initiative agents in parallel (haiku). Each reads its own workspace at `output/initiative-workspace/{init}/current/`. Launch City Clerk after. These are additive — failures don't block the pipeline.
-
-## Step 2.5: Apply Tracker Updates + Build Decision Queues
-
-After initiative agents complete, close the feedback loop and prepare voice agent decisions:
-
-```bash
-# Write initiative decisions back to the sheet (dry run first, --apply after review)
-node scripts/applyTrackerUpdates.js {cycle}
-node scripts/applyTrackerUpdates.js {cycle} --apply
-
-# Generate pending_decisions.md for voice agents based on updated initiative state
-node scripts/buildDecisionQueue.js {cycle}
-```
-
-`applyTrackerUpdates.js` writes initiative agent `trackerUpdates` to the Initiative_Tracker sheet — this is how agents move the world. Show the dry run output to the user before applying.
-
-`buildDecisionQueue.js` reads initiative packets and maps blockers to responsible offices. Each voice agent gets a `pending_decisions.md` with specific decisions they must respond to, including options and consequences.
-
-## Step 3: Voice Agents (Parallel)
-Build voice workspaces, then launch agents:
-```bash
-node scripts/buildVoiceWorkspaces.js {cycle}
-```
-Launch voice agents to generate source material for desk agents:
-1. Mayor's Office -> reads workspace, saves to `output/civic-voice/mayor_c{XX}.json`
-2. 3 Faction agents in parallel (OPP, CRC, IND) -> save to `output/civic-voice/`
-3. Extended voices (Police Chief, Baylight, DA) — only if relevant events exist
-
-Each agent reads its own workspace at `output/civic-voice-workspace/{office}/current/`.
-Voice agent outputs are distributed to desk folders automatically in Step 4.
-
-## Step 4: Build Desk Folders
-```bash
+node scripts/buildDeskPackets.js {cycle}
 node scripts/buildDeskFolders.js {cycle}
 ```
-One command. Zero LLM tokens. Populates all 6 desk workspaces with:
-- Packets, summaries, base context
-- Script-generated briefings (canon, errata, story priorities, returning citizens)
-- Voice statement distribution (civic gets all, chicago gets none)
-- Interview transcripts
-- Last 3 editions of past output
-- Reference data (truesource, citizen archive)
+These scripts build the raw data — packets, summaries, briefings, archives, errata, grades. The angle briefs you wrote in Step 2 go INTO the desk folders alongside this data.
 
-**Verify:** Check `output/desks/{desk}/current/briefing.md` exists for all 6 desks.
+**Verify:** Angle briefs exist in `output/desks/{desk}/current/angle_briefs/` for all active desks.
 
-## Step 5: Launch 6 Desk Agents (Parallel)
-Launch ALL 6 in a single message with `run_in_background: true`:
+## Step 4: Launch Desk Agents
 
-Each agent gets the same core instruction: READ your briefing.md and packet FIRST, write FROM the data. The v3.9 Cycle_Packet now serializes ~90% of engine output — neighborhood dynamics, evening city, crime, economics, migration, story hooks, spotlight citizens. If the agent ignores the packet, the edition ignores the world.
+Launch desks with direct editorial direction in the prompt. Do NOT tell agents to "read the packet and decide what to write." Tell them WHAT to write based on the angle brief.
 
-Launch all 6 using each desk's `/desk-name` skill. The skill files contain the full agent prompts with v3.9 data references.
+**Prompt structure per desk:**
+```
+You are the [desk] desk. Here is your editorial direction:
 
-Each agent reads its own IDENTITY.md, RULES.md, and desk folder. No pre-loading needed from the orchestrator.
+ARTICLE 1 — [headline/topic]
+[Specific direction from the angle brief — who, what, angle, citizens to use]
 
-## Step 5.1: Collect Results
-Check each agent's output. When all 6 return, confirm articles were produced. If a desk failed, retry once with a focused prompt.
+ARTICLE 2 — [headline/topic]
+[Same]
 
-## Step 5.5: Jax Caldera — Accountability Check (Conditional)
-Review collected output for stink signals (silence on major policy, contradictions between desks, dropped storylines). If found, launch `freelance-firebrand` agent for one accountability piece. If not, skip.
+Read your IDENTITY.md at [path]. Use ONLY citizens named above.
+Write articles to [output path]. [word count]. Do NOT spend time reading other files.
+```
 
-## Step 6: Compile (Mags Role)
-After all desks return, compile the full edition:
+The key lesson from E90: agents that get told what to write produce articles. Agents that get told to go find what to write spend all their tokens searching and produce nothing.
 
-1. **Front page call** — which desk has the strongest lead? Show user, let them decide.
-2. **Assemble in template order:**
-   - HEADER (from base_context)
-   - FRONT PAGE (deck line + standardized byline)
-   - EDITOR'S DESK — Mags writes 150-250 words framing the edition
-   - CIVIC AFFAIRS
-   - BUSINESS
-   - CULTURE / SEASONAL — OAKLAND
-   - OPINION (P Slayer / Farrah / Elliot pieces get [OPINION] tag)
-   - SPORTS — OAKLAND
-   - SKYLINE TRIBUNE — CHICAGO BUREAU
-   - QUICK TAKES — 3-5 short items from leftover signals
-   - WIRE / SIGNALS — optional (Reed Thompson / Celeste Tran)
-   - LETTERS TO THE EDITOR
-   - ACCOUNTABILITY — Jax piece if deployed
-   - ARTICLE TABLE, STORYLINES, CITIZEN USAGE LOG, CONTINUITY NOTES
-   - COMING NEXT CYCLE — 3-5 teasers
-   - END EDITION
-3. **Quality checks:** deck lines, standardized bylines, cross-references, photo credits
-4. **Show compiled edition to user**
+**Launch order:**
+- Sports desk first if Mike provided feed entries (most important stories)
+- Remaining desks in parallel
+- Letters desk last (needs to know what other desks covered to react)
 
-## Step 6.5: Programmatic Validation
+## Step 4.5: Read Every Article
+
+Before compiling, Mags reads every article. Not a scan — a read. Check:
+- Did the agent follow the angle brief?
+- Are citizen names correct? (verify any you're unsure of)
+- Does the voice match the reporter?
+- Any fabricated facts, stats, game results?
+- Any calendar dates that should be cycle references?
+- Any engine language?
+
+Flag problems. Fix what's fixable. Cut what's broken. Better to have 8 clean articles than 13 with canon violations.
+
+## Step 5: Compile
+
+Assemble the edition in template order:
+
+```
+============================================================
+THE CYCLE PULSE — EDITION {XX}
+Bay Tribune | Cycle {XX} | [Holiday/Season if applicable]
+Weather: [from engine] | City Mood: [from engine]
+============================================================
+
+FRONT PAGE — [strongest lead, Mike picks]
+EDITOR'S DESK — Mags, 150-250 words
+CIVIC AFFAIRS — from city-hall production log
+BUSINESS — business ticker + any Baylight/economic stories
+CULTURE & COMMUNITY — nightlife, food, events, neighborhoods
+SPORTS — OAKLAND — from Mike's feed entries
+SKYLINE TRIBUNE — CHICAGO BUREAU
+LETTERS TO THE EDITOR
+ARTICLE TABLE
+CITIZEN USAGE LOG
+STORYLINES UPDATED
+COMING NEXT EDITION
+END EDITION
+```
+
+**Show compiled edition to Mike.** This is his review point.
+
+## Step 6: Validation + Rhea
+
 ```bash
 node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
 ```
-Catches data errors (wrong positions, vote swaps, engine language) instantly. Fix CRITICALs before Rhea.
 
-## Step 7: Rhea Verification
-Launch `rhea-morgan` agent on compiled edition.
-- APPROVED (score >= 75, zero CRITICALs) -> proceed
-- REVISE -> retry failing desks with Rhea's error report, max 2 rounds
+Fix CRITICALs. Then launch Rhea:
+- PASS (score >= 75, zero CRITICALs) → proceed
+- REVISE → fix and rerun, max 2 rounds
 
-## Step 7.5: Mara Vance Canon Audit (External — claude.ai)
-Mara reads the edition clean. No engine context, no Rhea report, no validation results.
-She reads journalism and judges whether the city feels real.
+## Step 7: Mara Audit (External)
 
-1. Generate audit packet:
 ```bash
 node scripts/buildMaraPacket.js {XX} editions/cycle_pulse_edition_{XX}.txt
-```
-2. Upload to Drive:
-```bash
 node scripts/saveToDrive.js output/mara-audit/edition_c{XX}_for_review.txt mara
-node scripts/saveToDrive.js output/mara-audit/audit_history.md mara
 ```
-3. Tell the user: "Edition draft and audit history uploaded to Mara's Drive folder. Ready for her review."
 
-## Step 8: MARA REVIEW GATE (MANDATORY)
-**STOP. Pipeline pauses here until Mara approves on claude.ai.**
+**STOP. Wait for Mara on claude.ai.** Apply corrections when Mike returns with her response.
 
-The user hands the edition to Mara. She reads it as a reader who knows the city.
-Her canon audit comes back with corrections and forward guidance.
+**USER APPROVAL GATE — Mike says publish or doesn't.**
 
-When the user returns with Mara's response:
-- Apply any corrections Mara identified
-- Save her audit to `output/mara_canon_audit_c{XX}.txt`
-- Update `docs/mara-vance/AUDIT_HISTORY.md` with new findings
-- Show: article count, Rhea score, Mara assessment, corrections applied, new citizens
+## Step 8: Publish
 
-**Then get explicit user approval to publish.** Wait for "yes" / "approved" / "publish".
-
-## Step 9: Save & Publish (after Mara approval + user approval)
-1. Save to `editions/cycle_pulse_edition_{XX}.txt`
-2. Upload to Drive: `node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition`
-3. Upload Mara audit: `node scripts/saveToDrive.js output/mara_canon_audit_c{XX}.txt mara`
-4. Ingest to Supermemory: `node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt`
-
-## Step 9.5: Print Pipeline
-1. Photos: `node scripts/generate-edition-photos.js editions/cycle_pulse_edition_{XX}.txt`
-2. PDF: `node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_{XX}.txt`
-3. Upload PDF: `node scripts/saveToDrive.js output/pdfs/bay_tribune_e{XX}.pdf edition`
-
-## Step 9.6: Podcast (Optional)
-If the edition warrants it, run `/podcast`. Not automatic — Mags decides.
-
-## Step 10: Post-Publish
-1. Write `output/latest_edition_brief.md` — article summaries, initiative status, active citizens
-2. Clear Discord bot history and reload:
-   ```bash
-   echo '{"savedAt":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","history":[]}' > logs/discord-conversation-history.json
-   pm2 reload mags-discord-bot
-   ```
-3. Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with errata and editorial notes
-
-## Step 11: Post-Run Filing Check
 ```bash
-node scripts/postRunFiling.js {XX}
+# Save edition
+node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition
+
+# Ingest to canon
+node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt
+
+# Photos + PDF (optional)
+node scripts/generate-edition-photos.js editions/cycle_pulse_edition_{XX}.txt
+node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_{XX}.txt
+node scripts/saveToDrive.js output/pdfs/bay_tribune_e{XX}.pdf edition
 ```
-Verifies all outputs exist and are named correctly. Use `--upload` to auto-upload missing files to Drive. Writes `output/run_manifest_c{XX}.json`.
+
+## Step 9: Post-Publish
+
+1. Write `output/latest_edition_brief.md`
+2. Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with errata and editorial notes
+3. Restart Discord bot: `pm2 restart mags-bot`
+4. Run filing check: `node scripts/postRunFiling.js {XX}`
+
+## What This Skill Does NOT Do
+
+- **Run civic voices or initiative agents** — that's `/city-hall` in a separate terminal
+- **Build initiative packets or voice workspaces** — city-hall handles that
+- **Decide civic outcomes** — city-hall decided, this skill reports
+- **Guess at citizen details** — every name is verified against the ledger
+- **Let agents decide what to write** — Mags decides, agents execute

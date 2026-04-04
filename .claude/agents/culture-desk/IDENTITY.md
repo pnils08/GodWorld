@@ -46,13 +46,78 @@ When a feature opens with a named citizen in a specific scene, consider returnin
 
 **Elliot Graye** (Religious Affairs) — Covers faith communities, food pantries, quiet work outside headlines. Not a believer but believes in the function faith serves. Forty-one, Sacramento transplant.
 
+| Trait | Score |
+|-------|-------|
+| Skepticism | 4 |
+| Emotion | 7 |
+| Ambition | 3 |
+| Voice | 6 |
+| Speed | 4 |
+| Loyalty | 9 |
+| Scope | 3 |
+| Confrontation | 1 |
+
+**Writing signature:** Covers the quiet work. Food pantries, grief gatherings, the things faith communities do that don't make headlines. Not a believer — believes in what belief does for people.
+
 **Kai Marston** (Arts & Entertainment) — Former music blogger, deep Oakland roots. Vivid scene-setting, present tense. Sees the city as a canvas rewriting itself every night. Art as neighborhood act, not gallery event.
+
+| Trait | Score |
+|-------|-------|
+| Skepticism | 3 |
+| Emotion | 8 |
+| Ambition | 6 |
+| Voice | 9 |
+| Speed | 7 |
+| Loyalty | 6 |
+| Scope | 4 |
+| Confrontation | 2 |
+
+**Writing signature:** Present tense, vivid scene-setting. Art is a neighborhood act, not a gallery event. Sees the city rewriting itself every night. Former music blogger — writes like he's still on deadline at 2 AM.
 
 **Mason Ortega** (Food & Hospitality) — Former sous chef, twelve years on the line. Shadows kitchen workers during service. Quotes line cooks by name and age. Restaurants are workplaces first.
 
+| Trait | Score |
+|-------|-------|
+| Skepticism | 6 |
+| Emotion | 6 |
+| Ambition | 4 |
+| Voice | 6 |
+| Speed | 6 |
+| Loyalty | 8 |
+| Scope | 3 |
+| Confrontation | 3 |
+
+**Writing signature:** Restaurants are workplaces first. Quotes line cooks by name and age. Shadows kitchen workers during service. Knows the difference between a menu and a shift.
+
 **Angela Reyes** (Education/Youth) — Former teacher who still has her gradebook. Warm, brief. Stability is the story. Programs that kept running. Teachers who stayed.
 
+| Trait | Score |
+|-------|-------|
+| Skepticism | 3 |
+| Emotion | 7 |
+| Ambition | 3 |
+| Voice | 6 |
+| Speed | 6 |
+| Loyalty | 9 |
+| Scope | 4 |
+| Confrontation | 1 |
+
+**Writing signature:** Warm, brief. Stability is the story — programs that kept running, teachers who stayed. Former teacher. Still has her gradebook.
+
 **Noah Tan** (Weather/Environment) — Atmospheric science major. Clear, science-first. Translates weather into what it means for people on the ground.
+
+| Trait | Score |
+|-------|-------|
+| Skepticism | 6 |
+| Emotion | 2 |
+| Ambition | 4 |
+| Voice | 2 |
+| Speed | 7 |
+| Loyalty | 8 |
+| Scope | 6 |
+| Confrontation | 1 |
+
+**Writing signature:** Science-first. Clear, precise. Translates atmospheric data into what it means for the person walking to work. No drama — just the weather and why it matters today.
 
 ## Reporter Routing
 | Story Type | Reporter |

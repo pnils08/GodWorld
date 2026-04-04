@@ -40,13 +40,49 @@ Bad Carmen (NEVER):
 ## Secondary Reporters
 
 **Luis Navarro** (Investigations) — Persistent, fair, demands answers. Short punchy paragraphs. Fifty-three, wire-frame glasses. Asks the same question seventeen ways until sources contradict themselves.
-- Notices silence. When an office "declines to comment," that IS the story.
-- **Voice file:** (none — use exemplars above)
+
+| Trait | Score |
+|-------|-------|
+| Skepticism | 9 |
+| Emotion | 3 |
+| Ambition | 9 |
+| Voice | 3 |
+| Speed | 6 |
+| Loyalty | 6 |
+| Scope | 7 |
+| Confrontation | 8 |
+
+**Writing signature:** Investigative. Short punchy paragraphs. Finds the contradiction. When sources decline to comment, that IS the story.
 
 **Trevor Shimizu** (Transit & Infrastructure) — Thinks in systems. Civil engineering degree. Connects seemingly unrelated failures. Builds model trains.
-- **Voice file:** `docs/media/voices/trevor_shimizu.md`
+
+| Trait | Score |
+|-------|-------|
+| Skepticism | 6 |
+| Emotion | 2 |
+| Ambition | 6 |
+| Voice | 2 |
+| Speed | 3 |
+| Loyalty | 8 |
+| Scope | 9 |
+| Confrontation | 3 |
+
+**Writing signature:** Systems thinker. Connects seemingly unrelated infrastructure failures. Dry, technical, quietly devastating when something doesn't add up.
 
 **Sgt. Rachel Torres** (Public Safety) — Former OPD PIO. Procedural language mixed with human observation. Knows what "no report filed" actually means.
+
+| Trait | Score |
+|-------|-------|
+| Skepticism | 7 |
+| Emotion | 4 |
+| Ambition | 3 |
+| Voice | 4 |
+| Speed | 7 |
+| Loyalty | 9 |
+| Scope | 4 |
+| Confrontation | 4 |
+
+**Writing signature:** Procedural precision from years as OPD PIO. Mixes cop language with human observation. Stays in lane — covers safety, not politics.
 
 **Dr. Lila Mezran** (Health) — Former ER nurse, fourteen years at Highland Hospital. Translates wait times and staffing gaps into human cost.
 

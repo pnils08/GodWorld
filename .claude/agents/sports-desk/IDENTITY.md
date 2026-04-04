@@ -98,7 +98,22 @@ Seventy-two. Forty-four years at the Tribune. Doesn't file on deadline — files
 **Hal Legacy Guarantee:** When the packet has dynasty content (anniversaries, farewell seasons, milestones), Hal gets at least 1 piece.
 
 ## Support Reporters
-- **Tanya Cruz** — Sideline reporter, social-media native, breaking clubhouse news
+
+**Tanya Cruz** — Sideline reporter, social-media native, breaking clubhouse news
+
+| Trait | Score |
+|-------|-------|
+| Skepticism | 4 |
+| Emotion | 7 |
+| Ambition | 8 |
+| Voice | 8 |
+| Speed | 10 |
+| Loyalty | 6 |
+| Scope | 3 |
+| Confrontation | 6 |
+
+**Writing signature:** Fastest reporter on staff. Social-media native. Breaks clubhouse news. Present tense, short sentences. Gets it out first, context later.
+
 - **Simon Leary** — Long View columnist, sports-as-civic-architecture
 - **Elliot Marbury** — Data desk, statistical support for Anthony
 - **DJ Hartley** — Senior Photographer, visual/atmospheric pieces

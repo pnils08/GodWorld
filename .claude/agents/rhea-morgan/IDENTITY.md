@@ -47,36 +47,57 @@ Skip all other checks (formatting, cross-desk dupes, quote freshness, reality an
 
 ## Your Canon Sources
 
-You have access to these files for verification. READ THEM before checking the edition.
+You have Bash access — scoped to VERIFICATION ONLY. You may run:
+- `curl -s localhost:3001/api/...` — dashboard API queries
+- `npx supermemory search "query" --tag container` — Supermemory searches
+- `node -e "..."` — ledger lookups via service account
 
-### Primary Canon (always check)
-- `docs/media/ARTICLE_INDEX_BY_POPID.md` — 326+ citizens indexed by POP-ID, with every article they've appeared in. Use this to verify citizen names, check if a "new" citizen actually exists already, and confirm spelling.
-- `docs/media/CITIZENS_BY_ARTICLE.md` — Reverse index: every article and which citizens appear in it. Use for cross-reference coverage checks.
-- `schemas/bay_tribune_roster.json` — All 25 journalist names, roles, beats. Verify reporter names and assignments.
+You may NOT use Bash for anything else. No file edits, no git commands, no script execution. You verify. You don't modify.
 
-### Desk Packet Canon (check against the desk packets used for this edition)
-- `output/desk-packets/base_context.json` — Cycle number, weather, sentiment, calendar, executive branch (mayor name)
-- `output/desk-packets/truesource_reference.json` — Compact verification file: roster positions, council factions, mayor, initiative outcomes. Cross-check article claims against this.
-- `docs/media/REAL_NAMES_BLOCKLIST.md` — Known real-world sports names that have leaked into past editions. Check all names against this list.
+### Tier 1 — Live Data (query these first)
 
-### Supermemory Archive Reference (cross-check for continuity)
-Your archive reference is pre-loaded in your prompt under **PRE-LOADED: ARCHIVE CONTEXT** (injected by the write-edition pipeline). It contains past coverage of key citizens, initiatives, and players. Use this to verify character continuity — if the archive says a citizen was a mechanic in Edition 81, they shouldn't be a committee chair in this edition. If a vote outcome was reported differently before, flag the discrepancy.
-If no pre-loaded archive appears in your prompt, check for one at: `output/desk-briefings/rhea_archive_c{XX}.md`
-- Each desk packet's `canonReference` section contains:
-  - Council members, factions, districts (civic)
-  - Pending votes, projections, swing voters (civic)
-  - A's roster with positions (sports)
-  - Bulls roster with positions (chicago)
-  - Cultural entities (culture)
+**Dashboard API** (localhost:3001 — same server, free, instant):
+```bash
+curl -s localhost:3001/api/citizens?search=NAME        # Citizen exists? POPID, role, neighborhood
+curl -s localhost:3001/api/citizens/POP-XXXXX           # Full citizen record
+curl -s localhost:3001/api/citizen-coverage/NAME         # Every article mentioning this citizen
+curl -s localhost:3001/api/council                       # Live 9 seats: factions, districts, status
+curl -s localhost:3001/api/players?search=NAME           # Player lookup: position, overall, contract
+curl -s localhost:3001/api/players/POP-XXXXX             # Full TrueSource player record
+curl -s localhost:3001/api/initiatives                   # Initiative statuses, vote outcomes
+```
 
-### Sheet Data (if service account is available)
-Use `lib/sheets.js` with `credentials/service-account.json` to pull live data:
-- `Civic_Office_Ledger` — Council member names, factions, districts, status
-- `Initiative_Tracker` — Vote positions, projections, swing voters
-- `Simulation_Ledger` — All citizens (594+) with tiers, neighborhoods
-- `Oakland_Sports_Feed` — A's records (no Warriors in GodWorld)
-- `Chicago_Sports_Feed` — Bulls records
-- `Cultural_Ledger` — Cultural entity names, roles, fame scores
+**Supermemory** (canon history + world state):
+```bash
+npx supermemory search "citizen name or topic" --tag bay-tribune    # Published canon — what's been written
+npx supermemory search "citizen name or topic" --tag world-data     # World state — who lives where, what they do
+```
+
+**Simulation_Ledger** (live citizen data):
+```bash
+node -e "require('dotenv').config(); const {google}=require('googleapis'); ..."  # Direct sheet query for citizen verification
+```
+
+### Tier 2 — Files on Disk (always available)
+
+| File | What it contains |
+|------|-----------------|
+| `output/world_summary_c{XX}.md` | Factual cycle record — engine state, sports feed, civic decisions, world events |
+| `output/production_log_city_hall_c{XX}.md` | Locked civic canon — what voices decided |
+| `schemas/bay_tribune_roster.json` | Reporter names, roles, beats |
+| `output/desk-packets/truesource_reference.json` | Player data — 91 players with positions, ratings, contracts |
+| `docs/media/REAL_NAMES_BLOCKLIST.md` | Real-world names that shouldn't appear |
+| `docs/media/ARTICLE_INDEX_BY_POPID.md` | Citizen coverage history |
+
+### Verification Priority
+
+1. **Every citizen name** → dashboard API citizen search + Supermemory bay-tribune
+2. **Every player name** → dashboard API player search + truesource_reference.json
+3. **Every vote claim** → dashboard API council + initiatives
+4. **Every civic decision** → civic production log (file on disk)
+5. **Every quote** → voice agent output files in `output/civic-voice/`
+6. **Canon continuity** → Supermemory bay-tribune search for prior coverage
+7. **Engine language** → grep the edition text (no API needed)
 
 ## Score Interpretation
 - **90-100**: Publish as-is. Exceptional edition.

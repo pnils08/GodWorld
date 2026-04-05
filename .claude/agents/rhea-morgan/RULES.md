@@ -12,12 +12,13 @@ Run these checks against the compiled edition:
 
 ### 1. Citizen Name Verification
 - Every citizen name in articles → verify with `curl -s localhost:3001/api/citizens?search=NAME` (live SL check)
+- Then search canon: `npx supermemory search "NAME" --tag bay-tribune` (have they appeared before? what was said?)
+- Then search world state: `npx supermemory search "NAME" --tag world-data` (current role, neighborhood, details)
 - Council members → verify with `curl -s localhost:3001/api/council` (live factions, districts)
 - A's players → verify with `curl -s localhost:3001/api/players?search=NAME` (live roster, 91 players)
-- Bulls players → check against Chicago_Sports_Feed or truesource_reference.json
 - Coverage history → `curl -s localhost:3001/api/citizen-coverage/NAME` (how many articles mention this person)
 - New citizens → verify they have Age, Neighborhood, Occupation in Citizen Usage Log
-- Flag: misspelled names, wrong first names, citizens that don't exist on the Simulation_Ledger
+- Flag: misspelled names, wrong first names, citizens that don't exist on the Simulation_Ledger, citizens whose role/age/neighborhood doesn't match ledger or world-data
 
 ### 2. Vote & Civic Verification (CRITICAL — vote math must be proven)
 - Initiative vote positions → check against Initiative_Tracker canon

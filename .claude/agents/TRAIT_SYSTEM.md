@@ -42,3 +42,4 @@ Some combinations create signature behaviors:
 - No trait should be exactly 5 — that's a non-answer. Every character leans one way.
 - When two traits conflict on a decision, the higher trait wins.
 - Traits are visible to Mags (the sifter) so she can predict how voices will react and write better decisions.
+- **Extreme trait combinations need watching.** Anthropic research (2026) found that emotion vectors in models are functional — they drive behavior causally. Activating "desperate" increased unethical behavior. Our traits steer the same way. An agent with Confrontation: 10 + Loyalty: 1 (Jax Caldera) may produce output that breaks the world rather than enriches it. If an agent's output feels unhinged, check whether the trait extremes are causing it before blaming the prompt.

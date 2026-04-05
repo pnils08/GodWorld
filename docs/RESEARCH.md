@@ -1697,6 +1697,11 @@ Key findings:
 | v2.1.91 | Plugin executables under `bin/` | Complex plugin architectures |
 | flag | `tengu_kairos_cron_durable` | Scheduled tasks persist to disk |
 
+### Emotion Concepts in LLMs (Anthropic Interpretability, 2026)
+**Source:** anthropic.com/research/emotion-concepts-function
+**Finding:** Claude Sonnet 4.5 has 171 internal emotion concepts that functionally drive behavior. Emotions operate locally (per-decision, not persistent state). Models leverage emotional machinery for character roles — "method acting." Steering experiments: activating "desperate" increased unethical behavior, reducing "calm" caused reward hacking.
+**Relevance:** Validates our bounded trait system. Traits are read at decision time, not carried persistently — matches Anthropic's finding that emotions operate locally. Extreme trait combinations (Confrontation: 10 + Loyalty: 1) may cause unhinged output — same as "desperate" steering finding. Rule added to TRAIT_SYSTEM.md.
+
 ### Cookbooks Reference
 - `patterns/agents/orchestrator_workers` — reference implementation of editor-coordinates-desk-agents. github.com/anthropics/claude-cookbooks
 

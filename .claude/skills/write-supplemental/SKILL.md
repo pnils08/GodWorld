@@ -52,7 +52,28 @@ Supplementals are where the world gets built. A restaurant review canonizes a re
 
 ## Step 0: Production Log
 
-If `output/production_log_c{XX}.md` exists, read it — you may be resuming after compaction. If not, create one. Update it at every step. This is how you survive context loss mid-run. Same format as the edition production log (see write-edition SKILL.md Step 0.5).
+Read the existing media production log: `output/production_log_edition_c{XX}.md`. This is the same log write-edition uses — all media work for this cycle lives in one document.
+
+If the edition has already been produced, the log exists and has Steps 0-9 filled in. Append a new section:
+
+```markdown
+## Supplemental: {topic}
+**Started:** {timestamp}
+**Topic:** {topic}
+**Reporters:** {who's assigned}
+**Status:** IN PROGRESS
+
+### Coverage Plan
+[filled in at Step 1]
+
+### Agent Results
+[filled in at Step 2]
+
+### Compile + Publish
+[filled in at Steps 3-5]
+```
+
+If no production log exists yet (supplemental running before edition), create the log using the write-edition template and start with the supplemental section.
 
 ## Step 0.5: Pick the Topic
 

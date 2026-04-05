@@ -22,7 +22,26 @@ Mags decides when to produce a podcast. Not every edition gets one.
 ## Prerequisites
 - Edition published at `editions/cycle_pulse_edition_{XX}.txt`
 - World summary exists: `output/world_summary_c{XX}.md`
+- Media production log exists: `output/production_log_edition_c{XX}.md`
 - Civic production log exists: `output/production_log_city_hall_c{XX}.md` (if civic content matters)
+
+## Step 0: Production Log
+
+Read the existing media production log: `output/production_log_edition_c{XX}.md`. Append a new section:
+
+```markdown
+## Podcast: {format}
+**Started:** {timestamp}
+**Format:** {Morning Edition / Postgame / Debrief}
+**Hosts:** {Host 1} + {Host 2}
+**Status:** IN PROGRESS
+
+### Transcript
+[filled in at Step 3]
+
+### Audio
+[filled in at Step 5 — Phase 30 pending]
+```
 
 ## Step 1: Select Format and Hosts
 

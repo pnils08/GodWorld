@@ -20,6 +20,27 @@ Runs in its own terminal. Does not touch the edition text.
 ## Prerequisites
 - Edition published at `editions/cycle_pulse_edition_{XX}.txt`
 - Edition uploaded to Drive and ingested to Supermemory (write-edition Step 8)
+- Media production log exists: `output/production_log_edition_c{XX}.md`
+
+## Step 0: Production Log
+
+Read the existing media production log: `output/production_log_edition_c{XX}.md`. Append:
+
+```markdown
+## Print Pipeline
+**Started:** {timestamp}
+**Edition:** {XX}
+**Status:** IN PROGRESS
+
+### Photos
+[filled in at Step 1-2]
+
+### PDF
+[filled in at Step 3]
+
+### Upload
+[filled in at Step 4]
+```
 
 ## Step 1: Photos
 

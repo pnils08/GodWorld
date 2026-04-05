@@ -13,7 +13,9 @@ argument-hint: "[edition-number]"
 
 ## The Principle
 
-The edition is published. The text is canon. This skill turns it into something you can hold — photos, a PDF, files on Drive. Mechanical work, no editorial judgment.
+The edition is published. The text is canon. This skill turns it into something you can hold — photos, a PDF, files on Drive.
+
+**DJ Hartley** is the art director for this step. His identity (`.claude/agents/dj-hartley/IDENTITY.md`) defines how photos are conceived — what's worth shooting, the mood, the composition. His team (Arman Gutiérrez for portraits, Brianna Lee for community) handles assignments. DJ reads the articles and produces art direction; the image generator executes it.
 
 Runs in its own terminal. Does not touch the edition text.
 
@@ -42,21 +44,30 @@ Read the existing media production log: `output/production_log_edition_c{XX}.md`
 [filled in at Step 4]
 ```
 
-## Step 1: Photos
+## Step 1: Art Direction (DJ Hartley)
+
+DJ reads each article and decides what to photograph. For each article with a visual scene:
+
+1. Read DJ's identity: `.claude/agents/dj-hartley/IDENTITY.md`
+2. DJ produces art direction per article: thesis, mood, motifs, composition, image_prompt (120-180 words)
+3. Assign photo credit: DJ Hartley (games, bars, waterfront, light), Arman Gutiérrez (portraits), Brianna Lee (community)
+
+**Current implementation:** `generate-edition-photos.js` handles this in one step.
+**Future (Phase 21.3):** Local LLM runs DJ's art direction, separate image generator executes the prompt.
 
 ```bash
 node scripts/generate-edition-photos.js editions/cycle_pulse_edition_{XX}.txt
 ```
 
-Generates AI photos for articles with visual scenes. Output to `output/photos/e{XX}/`.
+Output to `output/photos/e{XX}/`.
 
-## Step 2: Photo QA
+## Step 2: Photo QA (DJ reviews)
 
 ```bash
 node scripts/photoQA.js output/photos/e{XX}
 ```
 
-Claude Haiku Vision evaluates each photo against article context. Pass/flag/fail. Fix or regenerate flagged photos.
+Claude Haiku Vision evaluates each photo against article context — DJ's quality check. Pass/flag/fail. Fix or regenerate flagged photos.
 
 ## Step 3: PDF
 

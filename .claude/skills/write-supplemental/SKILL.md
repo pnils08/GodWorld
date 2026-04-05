@@ -28,9 +28,9 @@ argument-hint: "[topic]"
 
 ## Philosophy
 
-The Cycle Pulse is the engine's newspaper — it reports what the simulation produced. Same six desks, same format, same rotation. That's necessary but it's not sufficient. The city needs texture, variety, life.
+The Cycle Pulse is the engine's newspaper — it reports what the simulation produced. Supplementals are where the world gets built. A restaurant review canonizes a restaurant. A neighborhood walk canonizes what that neighborhood feels like. A sports deep dive gives the dynasty texture beyond box scores. Every supplemental adds something to the world that the Cycle Pulse can't.
 
-Supplementals are where the world gets built. A restaurant review canonizes a restaurant. A neighborhood walk canonizes what that neighborhood feels like. A sports deep dive gives the dynasty texture beyond box scores. Every supplemental adds something to the world that the Cycle Pulse can't.
+**Supplementals reflect the current state of the world.** Read the world summary (`output/world_summary_c{XX}.md`) before writing anything. If there's a health crisis in West Oakland, a food piece set there feels it. If the A's are 7-1, a Jack London walk has fans in jerseys. If Rosh Hashanah is happening across three neighborhoods, a culture piece acknowledges it. The supplemental lives in the same city as the edition — same weather, same nightlife, same mood. Different angle, same world.
 
 **Any reporter can lead a supplemental.** Not just Carmen and Jordan. There are 24 journalists on the roster and most of them have never gotten a supplemental assignment. Mason Ortega is a former sous chef — give him a food piece. Sharon Okafor covers lifestyle — let her cover lifestyle. Kai Marston was a music blogger — give him First Fridays. The voice files are built for this. Use them.
 

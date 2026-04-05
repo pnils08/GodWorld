@@ -37,30 +37,72 @@ The paper covers the WORLD — nightlife, food, sports, famous sightings, weathe
 Create `output/production_log_edition_c{XX}.md`:
 
 ```markdown
-# Edition {XX} Production Log
+# Edition {XX} — Media Production Log
 **Started:** {timestamp}
 **Cycle:** {XX}
 
-## Inputs
+## Step 0: Session State
+- Resuming: [yes/no]
 - City-hall log: [exists/missing]
-- Engine data: [cycle weight, key events, evening context summary]
-- Mike's feed entries: [list what's there]
+- Sports feed entries this cycle: [count]
 
-## The Sift — What This Edition Covers
-[Mags writes this after reading all inputs]
+## Step 1: World Summary
+- World summary built: output/world_summary_c{XX}.md
+- Ingested to world-data: [doc ID]
+- Cycle weight: [high-signal/normal]
+- Key data: [2-3 line summary — famous people, food, events, weather]
 
-## Topic Assignments
-[desk: story — one desk per story]
+## Step 2: Stories Picked
+| Story | Reporter | Section Tag |
+|-------|----------|-------------|
+| | | |
 
-## Desk Agent Results
-[filled in as desks return]
+## Step 3: Citizens Verified
+| Citizen | POP-ID | Role | Neighborhood | Story |
+|---------|--------|------|-------------|-------|
+| | | | | |
 
-## Compile Notes
-[editorial decisions during assembly]
+Angle briefs written: [list]
 
-## Quality Notes
-[validation, Rhea, Mara]
+## Step 4: Reporter Results
+| Reporter | Articles | Status |
+|----------|----------|--------|
+| | | |
+
+## Step 4.5: Editorial Review
+- Articles passed: [count]
+- Articles cut: [count + reason]
+- Fixes applied: [list]
+
+## Step 5: Compile
+- Front page: [story, Mike's pick]
+- Total articles: [count]
+- Edition saved: editions/cycle_pulse_edition_{XX}.txt
+
+## Step 6: Validation + Rhea
+- validateEdition.js: [PASS/FAIL + critical count]
+- Rhea score: [XX/100]
+- Rhea verdict: [APPROVED/REVISE]
+- Fixes applied: [list]
+
+## Step 7: Mara
+- Edition uploaded to Drive: [yes/no]
+- Mara verdict: [pending/approved/revise]
+- Corrections applied: [list]
+
+## Step 8: Published
+- Drive: [file ID]
+- Bay-tribune ingest: [doc ID]
+- Canon status: LIVE
+
+## Step 9: Post-Publish
+- latest_edition_brief.md: [written]
+- NEWSROOM_MEMORY.md: [updated]
+- Discord bot: [restarted]
+- Filing check: [pass/fail]
 ```
+
+**Update this file at every step.** This is how you survive compaction and how future sessions know how the edition was made.
 
 ## Step 1: Read the World
 

@@ -143,17 +143,32 @@ Voices govern (Mayor first, then parallel). Projects hallucinate world details w
 **33.6 City Clerk verification script — BUILD.**
 Node script (not an agent) that checks: voice outputs exist, project outputs exist, tracker updates applied, production log complete. `scripts/verifyCityHall.js`. Output: `output/city-civic-database/clerk_audit_c{XX}.json`.
 
-**33.8 Mags EIC Sheet Environment — EVALUATE.**
+**33.7 Write-edition rewrite — DONE S133.**
+City-hall separated. Sift-first architecture. 9 individual reporter agents (Carmen, P Slayer, Anthony, Hal, Jordan, Maria, Jax, Mezran, Letters). Story-driven layout — no fixed sections, no filler. Input stack: media production log, civic production log, Riley_Digest (3 cycles), Oakland Sports Feed (3 cycles). Bypass buildDeskPackets 22-tab dump and Media_Briefing. Reporter bounded traits (8 dimensions). Chicago moved to supplemental-only. Paperclip patterns: heartbeat model, atomic topic checkout, structured result capture.
+
+**33.8 Session evaluation hook — BUILD NEXT.**
+Stop hook analyzes transcript at session end for extractable patterns — what caused fabrication, what Mara caught, what worked. Builds editorial memory automatically. From everything-claude-code.
+
+**33.9 Session ID persistence for reporters — BUILD NEXT.**
+Persist Claude Code session IDs between runs so reporter agents retain context across cycles. From Paperclip.
+
+**33.10 Budget caps per agent — BUILD NEXT.**
+Monthly token tracking per agent role. Prevents one broken reporter from burning the whole Anthropic bill. From Paperclip.
+
+**33.11 Conditional hooks — BUILD NEXT.**
+Add `if` field (permission rule syntax) to existing hooks so they fire only for specific operations. Claude Code v2.1.86 feature.
+
+**33.12 Mags EIC Sheet Environment — EVALUATE.**
 New spreadsheet owned by service account. Tabs: Editorial Queue, Desk Packets, Canon Briefs, Edition Tracker, Grading. Reads from Riley's sheets, writes to own space. No Riley triggers. See `riley/RILEY_PLAN.md` for full spec.
 
-**33.9 Sandcastle proof-of-concept — EVALUATE.**
-Run one desk agent (sports) via Sandcastle in a Docker container with real shell access and Supermemory queries. Requires Docker on server. See `docs/RESEARCH.md` S132 Sandcastle entry.
+**33.13 Sandcastle proof-of-concept — EVALUATE.**
+Run one reporter agent via Sandcastle in a Docker container with real shell access and Supermemory queries. Requires Docker on server. See `docs/RESEARCH.md` S132 Sandcastle entry.
 
-**33.10 Tool-restricted desk agents — BUILD NEXT.**
-Add `allowed-tools: ["Read", "Grep", "Glob"]` to desk agent skill frontmatter. Desk agents get read-only during writing. Only compile/publish gets write access. From everything-claude-code's hierarchical delegation pattern.
+**33.14 Tool-restricted reporter agents — BUILD NEXT.**
+Add `allowed-tools: ["Read", "Grep", "Glob"]` to reporter agent skill frontmatter. Reporters get read-only during writing. Only compile/publish gets write access. From everything-claude-code's hierarchical delegation pattern.
 
-**33.11 Iterative retrieval for canon — BUILD NEXT.**
-3-cycle search-evaluate-refine pattern for desk agents accessing canon. Score results 0-1, stop at 3+ files scoring 0.7+. Replaces context dumps. From everything-claude-code.
+**33.15 Iterative retrieval for canon — BUILD NEXT.**
+3-cycle search-evaluate-refine pattern for reporters accessing canon. Score results 0-1, stop at 3+ files scoring 0.7+. Replaces context dumps. From everything-claude-code.
 
 ---
 

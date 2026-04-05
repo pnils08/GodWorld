@@ -1,6 +1,6 @@
 # Civic Desk — Editorial Memory
 
-Last Updated: 2026-03-21 | Most recent edition: C88
+Last Updated: 2026-04-02 | Most recent edition: C90
 
 ## Council Roster (as of Cycle 88)
 - 9 seats: D1 Carter (OPP), D2 Tran (IND), D3 Delgado (OPP), D4 Vega (IND), D5 Rivers (OPP), D6 Crane (CRC/recovering), D7 Ashford (CRC), D8 Chen (CRC), D9 Mobley (OPP)
@@ -14,12 +14,12 @@ Last Updated: 2026-03-21 | Most recent edition: C88
 - **INIT-005 Temescal Health Center (C80)**: PASSED 6-2. Vega YES, Tran YES. Crane ABSENT.
 - **INIT-006 Baylight (C83)**: PASSED 6-3. YES: Carter, Tran, Delgado, Rivers, Mobley, Vega. NO: Crane, Ashford, Chen.
 
-## Initiative Status (as of C88)
-- Stabilization Fund: $28M authorized. $387K disbursed to 22 households (E87). 277 applications in queue. 2-week review target active. CRC demands independent audit.
-- OARI: DAY 45 REACHED (C88). Dispatch integration spec approval still unconfirmed. 4 responders finalized, 4 under offer. No confirmed active deployment in D1/D3/D5. Tran "recalibrating."
+## Initiative Status (as of C90)
+- Stabilization Fund: $28M authorized. 47 approved checks releasing by Oct 7 (disbursement authority transferred Webb → Okoro). 295 pending at 50/week Vega target. Beverly Hayes check ($18,500) in this wave.
+- OARI: **LIVE** (C90). MOU signed by Chief Montez, effective immediately. D1/D3/D5 co-responder dispatch active. 16/18 responders hired. Tran (D2) conditions renewal funding on specific D2 expansion timeline.
+- Fruitvale Transit Hub Phase II: $230M. Council vote calendared for first November session (Nov 8 tentative). CBA framework ready. Community sessions ongoing through Oct 31.
 - Temescal Health Center: $45M. In-progress. Priority designation issued E85.
-- Baylight: $2.1B. Construction footprint mobilizing near Jack London waterfront. Sept 15 groundbreaking stated by Santana. TIF filed NOT finalized. Anchor tenant unnamed. Ashford "reviewing documents."
-- Fruitvale Transit Hub Phase II: $230M. Authorized C86. Design consultant RFP pending. Community scenario sessions ongoing.
+- Baylight: $2.1B. Foundation piling begins Oct 10. TIF financial close scheduled Sept 30. Ashford (CRC) demanding transparency dashboard as condition precedent to TIF close.
 - Oakland Youth Apprenticeship Pipeline: $12.5M. Announced. No vote scheduled yet.
 
 ## Citizens with Coverage History

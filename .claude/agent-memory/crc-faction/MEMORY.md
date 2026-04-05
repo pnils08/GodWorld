@@ -34,3 +34,12 @@ Prior work: `output/civic-voice/crc_faction_c86.json`, `crc_faction_c87.json`
 - Chen voted NO — consistent fiscal skepticism
 - Ashford called for quarterly performance audit on Stabilization Fund processing speed
 - Nina Chen OARI statement established operational readiness canon
+
+## C90 Decision — Baylight TIF Oversight (FINAL)
+**Decision: Option A — Demand dashboard delivery BEFORE TIF close**
+- Ashford introduced motion requiring Baylight Authority to deliver transparency dashboard as condition precedent to TIF financial close (Sept 30)
+- Dashboard must show: tax increment collected, property value movements, debt service, cumulative taxpayer exposure (quarterly updates)
+- CRC's rationale: Once TIF closes, terms are binding 30 years. No renegotiation window after close. Dashboard is only leverage point.
+- This is not obstruction — it's accountability mechanism. Respects council's majority vote but holds line on fiscal transparency.
+- Sets up floor vote. OPP will oppose the condition. Independents (Vega, Tran) are swing votes.
+- Consistent with Ashford character: process-focused, fiscal conservative, demands data before lock-in

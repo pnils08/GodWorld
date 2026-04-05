@@ -1,6 +1,6 @@
 # Culture Desk — Editorial Memory
 
-Last Updated: 2026-03-21 | Last edition: E88 (Cycle 88, September 2041)
+Last Updated: 2026-04-02 | Last edition: C90 (Cycle 90, October 2041)
 
 ## Cultural Entities & Venues
 - Muralist Dante Reyes: artist, Jack London neighborhood. Documenting corridor before Baylight demolition.
@@ -79,6 +79,10 @@ Last Updated: 2026-03-21 | Last edition: E88 (Cycle 88, September 2041)
 ### Dorothy Rios (71, Fruitvale area, Retired)
 - E84: Attends St. Columba seniors lunch every week for 3 years. Quote: "I come for the company as much as the food."
 
+### Philly Rodriguez (29, Temescal, Vendor)
+- C90: First appearance. Temporary produce stand vendor on Telegraph/18th, helping friend run community garden harvest. Quote: "I wanted to notice seasons again. You don't do that in an office." Theme: seasonal awareness, October rhythm, post-move adjustment.
+- Fresh debut — no prior coverage.
+
 ## Corrections Applied
 - E81: phantom citizens (Mei Chen, Laila Cortez, Brenda Okoro) — never use
 - E81: initiative status error (Stabilization Fund status) — always verify against recentOutcomes
@@ -102,3 +106,4 @@ Last Updated: 2026-03-21 | Last edition: E88 (Cycle 88, September 2041)
 - E87: Citizen rotation successful — four new first-appearance citizens (Lucia Polito, Lorenzo Jordan, Kris Bubic, Clarence Moody). All four are from packet-confirmed sources.
 - West Side Cafe (West Oakland) established as food coverage venue E87. Active storyline: Baylight crew regular customer base.
 - Juneteenth arc active (early phase) — not covered E87, available for future editions.
+- C90: October seasonal rhythm established as story. Philly Rodriguez introduced as seasonal observer/vendor. Student season narrative (West Oakland, Rockridge, Piedmont Ave, Chinatown) established without citizen feature — Angela Reyes observation piece. Storylines: seasonal awareness, neighborhood demographic shift in October.

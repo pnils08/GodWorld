@@ -1,6 +1,6 @@
 # Sports Desk — Editorial Memory
 
-Last Updated: 2026-03-21 | Last edition written: C88
+Last Updated: 2026-04-02 | Last edition written: C90
 
 ## A's Roster Notes (C87 confirmed — ALL verified against briefing/packet)
 - **Mark Aitken**: 1B (NOT 3B — recurring error). 3x Gold Glove, .273 AVG, 195 HR, Playoff MVP 2037. Community liaison.
@@ -29,6 +29,7 @@ Last Updated: 2026-03-21 | Last edition written: C88
 - C86: Preseason 10-3.
 - C87: 0-0 (regular season not yet started).
 - C88: 1-0 — Opening Day WIN vs Angels 8-1. Ramos 7IP/3H/10SO. Richards 3H/2HR/2RBI. Tavares 1HR. Horn 1HR.
+- C90: 7-1. Game results confirmed: 11-3 vs Guardians (Rivas dominant); 9-1 vs San Diego (Coles dominant). Danny Horn: 6 HR on the season. Lead story C90.
 
 ## C86 Prospects (preseason stats — for reference)
 - Sidney Tumolo: 2B, .261 AVG, 2 HR, 6 H
@@ -64,14 +65,17 @@ Last Updated: 2026-03-21 | Last edition written: C88
 - Hal: first person reflective, literary, spells out numbers (two thousand thirty-one, not 2031). NEVER cynical. NEVER breaking news. Dillon is LEFT-HANDED — always verify.
 - Hal's Metrics Key: always append for era-normalization and stat-heavy essays.
 
-## Active Storylines (C88)
-- Dynasty farewell: Keane/Dillon/Kelley final season. Regular season underway — A's 1-0 after Opening Day win.
+## Active Storylines (C90)
+- Danny Horn breakout: 6 HR through 8 games. C90 lead story (P Slayer). Emerging as team's offensive anchor. DeShawn Hartley used as returning citizen witness (Jack London bar scene).
+- Dynasty farewell: Keane/Dillon/Kelley final season continues. A's 7-1. "Does Keane get one more October?" — Hal's angle. Do NOT resolve.
+- Travis Coles acquisition paying off: 2 dominant starts. 9-1 vs San Diego. Anthony angle — rotation unexpectedly elite.
+- Henry Rivas: Dazzled in 11-3 Guardians win. Rotation slot 2 performing at ace level.
+- Bryan Franco: SS rookie. C89 debut. Contributing in C90 games per brief — no specific stats confirmed; handle carefully.
 - Busch trade: Peter Busch + Baez (SP minors) + Davila (RP minors) to Guardians for Liam Wade (2B/SS, Double-A). Busch frustrated. Minor league pitching depth now thin.
-- Eric Tavares: New 2B acquisition. HR on Opening Day. Development arc in progress.
-- Allen Lopez: Now listed as canonical SP in C88 briefing — was not in previous MEMORY. Verify rotation slot next edition.
+- Eric Tavares: 2B acquisition. HR on Opening Day. Development arc in progress.
 - Paulson two-city tension: courtside Chase Center in Bulls red. Baylight arena question unresolved. DO NOT RESOLVE. Carry forward.
-- NBA expansion: Oakland confirmed in final group of candidates. Local tech mogul rumored in ownership consortium. Story unresolved — do not resolve. Hal covered cautiously C88.
-- Bulls: 58-24, #1 seed, playoffs per prompt. NEVER print raw record in A's coverage without confirmed feed data.
+- NBA expansion: Oakland confirmed in final group of candidates. Story unresolved — do not resolve.
+- Bulls: in playoffs, championship territory per C90 brief. NEVER print raw record in A's coverage without confirmed feed data.
 
 ## Name Verification Checklist (run before every edition)
 Before writing, verify these names are correct (errata-prone):

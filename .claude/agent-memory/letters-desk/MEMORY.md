@@ -43,6 +43,15 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Carlos Jackson (50, Lake Merritt, medical social worker) — NEW, care work as labor, deputy mayor healing
 - Lucia Polito (64, Fruitvale, self-employed aura worker) — NEW, self-employment vulnerability, city holding up
 
+## E89 Letters
+(No letters desk output — E89 was salvaged manually)
+
+## E90 Letters
+- Teresa Okafor (56, West Oakland, senior care coordinator) — NEW, Stabilization Fund relief
+- Marcus Webb (49, Fruitvale, community health worker) — NEW, OARI optimism/skepticism
+- Patricia Ashford (63, Jack London, retired accountant) — NEW, Baylight TIF transparency concerns
+- James Morrison (71, Lake Merritt, retired maritime engineer) — NEW, October weather, city love
+
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST expired
 - Gloria Meeks: used E86 — REST expired
@@ -61,5 +70,10 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Sofia Carter: used E88 — REST through E90 (expires E91)
 - Carlos Jackson: used E88 — REST through E90 (expires E91)
 - Lucia Polito: used E88 — REST through E90 (expires E91)
+- Teresa Okafor: used E90 — REST through E92 (expires E93)
+- Marcus Webb (CH worker): used E90 — REST through E92 (expires E93)
+- Patricia Ashford: used E90 — REST through E92 (expires E93)
+- James Morrison: used E90 — REST through E92 (expires E93)
+
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

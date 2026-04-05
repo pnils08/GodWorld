@@ -276,6 +276,8 @@ WordPress 7.0 (April 2026) ships AI Client SDK supporting Claude function callin
 
 2. **21.2 Canon Grounding MCP.** Local models will hallucinate world details (citizen names, businesses, events) because they have no access to GodWorld data. Fix: wrap our existing infrastructure as MCP servers the local model can call through tool use. Three sources to expose: (a) Dashboard API — 31 endpoints including citizen search, article search, initiative tracker, player lookup. (b) Supermemory bay-tribune container — semantic search across published canon. (c) Article archive — 234+ editions searchable by keyword/citizen/storyline. Pattern from Brave Search MCP (S115 research) — same grounding architecture, pointed at our world instead of the web. **Build after 21.1 confirms local models are viable.**
 
+3. **21.3 Local photo prompt generation.** The photo prompt conversion step (article → image prompt) doesn't need Anthropic tokens. A local Qwen 3.5 9B can run an "art director" role that produces structured JSON (thesis, mood, motifs, composition, image_prompt) from article text. Pattern from hn_local_image (github.com/ivanfioravanti/hn_local_image) — intermediate art direction step before image generation. Could also run the image generation itself locally via MLX/FLUX models on Apple Silicon if any work moves to Mike's laptop. See `docs/RESEARCH.md` S134 entry.
+
 **Depends on:** Phase 27 (agent autonomy) may change what "routine" means — if culture desk gets creative latitude, it may need a stronger model.
 
 ### Phase 23: Cross-AI Feedback (selected open items)

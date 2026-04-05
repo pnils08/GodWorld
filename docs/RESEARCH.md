@@ -1702,6 +1702,23 @@ Key findings:
 **Finding:** Claude Sonnet 4.5 has 171 internal emotion concepts that functionally drive behavior. Emotions operate locally (per-decision, not persistent state). Models leverage emotional machinery for character roles — "method acting." Steering experiments: activating "desperate" increased unethical behavior, reducing "calm" caused reward hacking.
 **Relevance:** Validates our bounded trait system. Traits are read at decision time, not carried persistently — matches Anthropic's finding that emotions operate locally. Extreme trait combinations (Confrontation: 10 + Loyalty: 1) may cause unhinged output — same as "desperate" steering finding. Rule added to TRAIT_SYSTEM.md.
 
+### HN Local Image — Local Image Generation Pipeline
+**Source:** github.com/ivanfioravanti/hn_local_image
+**What:** Headlines → art prompts via local LLM (Qwen 3.5 9B) → images via MLX models (Z-Image Turbo, FLUX.2 Klein) → post-processing (dithering for e-ink). Fully local on Apple Silicon, no cloud API costs.
+
+**Prompt conversion pattern (steal for photo pipeline):**
+1. Article text → numbered headlines
+2. System prompt defines "art director" role with style constraints (editorial, scene, blueprint)
+3. LLM produces structured JSON: thesis, mood, motifs, composition, image_prompt (120-180 words)
+4. image_prompt field → image generator
+5. Post-processing strips thinking blocks, extracts JSON, falls back to raw text
+
+**Why it matters:** Our `generate-edition-photos.js` goes article → prompt directly. This adds an intermediate art direction step — LLM thinks about visual metaphor before writing the prompt. Could improve photo quality significantly.
+
+**Local LLM connection:** Qwen 3.5 9B quantized runs the prompt conversion. Same model candidate from Phase 21 (local model pipeline). The photo prompt step could run on a local model — no Anthropic tokens needed for "what should this image look like?"
+
+**Hardware:** Apple Silicon only (MLX). Not actionable on our DO droplet. Relevant if any work moves to Mike's laptop, or if Phase 21 GPU droplet materializes.
+
 ### Cookbooks Reference
 - `patterns/agents/orchestrator_workers` — reference implementation of editor-coordinates-desk-agents. github.com/anthropics/claude-cookbooks
 

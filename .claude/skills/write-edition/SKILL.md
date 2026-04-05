@@ -281,12 +281,15 @@ Fix CRITICALs. Then launch Rhea:
 
 ## Step 7: Mara Audit (External)
 
-```bash
-node scripts/buildMaraPacket.js {XX} editions/cycle_pulse_edition_{XX}.txt
-node scripts/saveToDrive.js output/mara-audit/edition_c{XX}_for_review.txt mara
-```
+Mara is on claude.ai with her own Supermemory access (mara container + bay-tribune + world-data). She knows her job. Don't build her a packet — she searches canon herself.
 
-**STOP. Wait for Mara on claude.ai.** Apply corrections when Mike returns with her response.
+1. Upload edition to Drive: `node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt mara`
+2. Tell Mike the edition is ready for Mara
+3. Mike takes it to Mara on claude.ai
+4. Mara reads, searches, comes back with corrections
+5. Mike brings corrections back — apply them
+
+**STOP. Wait for Mara.** 
 
 **USER APPROVAL GATE — Mike says publish or doesn't.**
 

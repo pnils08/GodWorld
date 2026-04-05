@@ -113,11 +113,17 @@ The world remembers itself. Future cycles can search for what happened in any pa
 **1g. Present to Mike**
 Show Mike the world summary. This is what you sift from together. No stories picked yet — just the world.
 
-## Step 2: The Sift — Write Angle Briefs
+## Step 2: The Sift — Pick Stories Together
 
-This is the job. After reading all inputs, Mags decides what the paper covers.
+Mike and Mags look at the world summary together and pick stories.
 
-Write one angle brief per REPORTER to `output/reporters/{reporter}/c{XX}_brief.md`.
+**How it works:**
+1. Mags proposes story ideas from the world summary — "Martin Richards at Westside Cafe is a feature," "Jose Colon spotted at Miso Metro is a city life piece," "the West Oakland health spike needs Mezran"
+2. Mike says yes, no, or redirects — "that's not a story," "combine those two," "give that to P Slayer not Anthony"
+3. Together we assign each story to a reporter based on their traits and the story's needs
+4. Together we pick citizens for each story (Step 3)
+
+**After a few cycles of doing this manually, we see the pattern and can automate parts of it.**
 
 ### The 9 Reporters
 
@@ -145,30 +151,32 @@ Write one angle brief per REPORTER to `output/reporters/{reporter}/c{XX}_brief.m
 - **Dr. Lila Mezran:** Only launches when the engine produces a health event — crisis spikes, hospital capacity, community health data. She covers the human body the way Maria Keen covers the neighborhood.
 - **Letters desk:** Launches LAST — needs to know what other reporters covered so citizens can react.
 
-### Angle Brief Format
+## Step 3: Verify Citizens + Write Angle Briefs
+
+For each story picked in Step 2:
+
+**3a. Pull citizens by neighborhood**
+Query the Simulation_Ledger for citizens in the neighborhoods relevant to the story. Show Mike candidates with real details — name, age, role, income, neighborhood. Mike picks who fits.
+
+**3b. Verify every name**
+Every citizen, player, or entity in the story gets looked up:
+- Simulation_Ledger for citizen details (role, age, neighborhood, income)
+- Truesource for player ratings, positions, contract details
+- Bay-tribune Supermemory for canon history (have they appeared before? what was said?)
+- World-data Supermemory for current state
+
+No name goes in an angle brief unverified.
+
+**3c. Write angle briefs**
+One brief per reporter to `output/reporters/{reporter}/c{XX}_brief.md`.
 
 **Each brief contains:**
 - THE STORY — what this reporter is writing and why
-- CITIZENS TO USE — verified names with roles, ages, neighborhoods from the ledger
+- CITIZENS TO USE — verified names with roles, ages, neighborhoods
 - WHAT NOT TO COVER — topics assigned to other reporters (atomic checkout)
 - SPECIFIC DATA — the feed entries, engine data, or production log quotes relevant to this story only
 
-**Rules for the sift:**
-- The engine data comes first. What's the city doing tonight? What happened? Who was out?
-- Mike's feed entries come second. What sports stories did he write?
-- City-hall production log comes third. What civic decisions need coverage?
-- Every name verified against the ledger before it goes in a brief
-- Each reporter gets 1-2 stories max
-- Topic checkout tracked in the production log
-
-## Step 3: Build Desk Packets + Folders
-```bash
-node scripts/buildDeskPackets.js {cycle}
-node scripts/buildDeskFolders.js {cycle}
-```
-These scripts build the raw data — packets, summaries, briefings, archives, errata, grades. The angle briefs you wrote in Step 2 go INTO the desk folders alongside this data.
-
-**Verify:** Angle briefs exist in `output/desks/{desk}/current/angle_briefs/` for all active desks.
+Each reporter gets 1-2 stories max. Log all assignments in the media production log.
 
 ## Step 4: Launch Reporter Agents
 

@@ -194,7 +194,31 @@ Flag problems. Fix what's fixable. Cut what's broken. Better to have 8 clean art
 
 ## Step 5: Compile
 
-Assemble the edition in template order:
+The edition is story-driven, not section-driven. No fixed template with slots to fill. The stories this cycle determine the shape of the paper.
+
+**How it works:**
+
+1. Take all the articles that passed review in Step 4.5
+2. Order them by what's most worth reading — the best story leads
+3. Label each with its section tag (SPORTS, CIVIC AFFAIRS, CITY LIFE, BUSINESS, FEATURES, etc.)
+4. If a section has no story this cycle, it doesn't appear. No filler.
+5. Front page is the best story. Could be sports, could be a profile, could be civic. Mike picks.
+
+**Section tags** — labels, not requirements:
+
+| Tag | What goes here |
+|-----|---------------|
+| SPORTS | Game recaps, player features, roster moves, fan columns |
+| CITY LIFE | Nightlife, food, famous sightings, gallery walks, neighborhood texture |
+| CIVIC AFFAIRS | Government decisions — from civic production log. Could be 1 article or a 5-line ticker |
+| BUSINESS | Economic stories, development, Baylight operational, business ticker |
+| FEATURES | Profiles, human interest, long-form |
+| HEALTH | Crisis coverage, community health — when Mezran runs |
+| ACCOUNTABILITY | Jax piece — when something smells wrong |
+| OPINION | P Slayer, editorial columns |
+| LETTERS | Citizen reactions |
+
+**Fixed elements** (every edition):
 
 ```
 ============================================================
@@ -203,13 +227,11 @@ Bay Tribune | Cycle {XX} | [Holiday/Season if applicable]
 Weather: [from engine] | City Mood: [from engine]
 ============================================================
 
-FRONT PAGE — [strongest lead, Mike picks]
+FRONT PAGE — [best story, Mike picks]
 EDITOR'S DESK — Mags, 150-250 words
-CIVIC AFFAIRS — from city-hall production log (could be 1 article or a 5-line ticker)
-BUSINESS — economic stories, Baylight, ticker items
-CULTURE & COMMUNITY — nightlife, food, events, neighborhoods, health
-SPORTS — OAKLAND — from Mike's feed entries
-ACCOUNTABILITY — Jax piece if deployed
+
+[STORIES — ordered by quality, tagged by section]
+
 LETTERS TO THE EDITOR
 ARTICLE TABLE
 CITIZEN USAGE LOG
@@ -218,7 +240,9 @@ COMING NEXT EDITION
 END EDITION
 ```
 
-**Chicago** is supplemental-only. When a Chicago storyline matters, it runs as a separate supplemental — not part of the regular edition.
+**If this cycle has 4 sports stories, 1 culture piece, and no civic news — that's the paper.** No empty sections. No filler.
+
+**Chicago** is supplemental-only. When a Chicago storyline matters, it runs as a separate supplemental.
 
 **Show compiled edition to Mike.** This is his review point.
 

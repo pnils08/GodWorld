@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-03 | Engine: v3.1 | Cycle: 89 | Session: 133
+Last Updated: 2026-04-05 | Engine: v3.1 | Cycle: 90 | Session: 134
 
 ---
 
@@ -186,6 +186,23 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ---
 
 ## Recent Sessions
+
+### Session 134 (2026-04-05) — Full Architecture Rebuild
+
+- **E90 failed (D grade):** Civic theater, wrong sports framing, fabricated Bulls Finals, no engine coverage. Shelved.
+- **City-hall skill rewritten:** Voices govern (Mayor first), projects hallucinate, clerk verifies. Bounded traits (8 dimensions) on all 11 civic agents. Separate terminal, own production log.
+- **Write-edition rewritten:** 27 steps → 9. World summary as foundation. Riley_Digest + Sports Feed + civic log as inputs. Mike and Mags pick stories together. 9 individual reporters replace 6 desk agents. Story-driven layout. No fixed sections.
+- **Reporter trait system:** 8 bounded traits on all 17 reporters.
+- **Rhea gets scoped Bash:** First agent with real dashboard API + Supermemory access.
+- **Edition-print split:** Photos/PDF/upload as separate skill and terminal.
+- **Podcast updated:** World summary input, Voicebox placeholder, Mara simplified.
+- **Write-supplemental updated:** World state awareness, print pipeline split, Mara simplified.
+- **Unified media production log:** All media skills append to one document.
+- **EDITION_PIPELINE.md v2:** Map pointing to skill files. Old 27-step version archived.
+- **WORKFLOWS.md, STACK.md updated:** Stale references fixed, counts corrected.
+- **World summary C90 created:** Factual cycle record ingested to world-data Supermemory.
+- **Paperclip patterns applied:** Heartbeat model, atomic topic checkout, structured result capture.
+- **Next:** Intake skill (separate), droplet upgrade, E91.
 
 ### Session 133 (2026-04-03) — Riley Ecosystem Audit + Research + Phase 33 Hooks
 

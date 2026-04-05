@@ -1719,6 +1719,32 @@ Key findings:
 
 **Hardware:** Apple Silicon only (MLX). Not actionable on our DO droplet. Relevant if any work moves to Mike's laptop, or if Phase 21 GPU droplet materializes.
 
+### World-Data Ingest Design (S134)
+**Problem:** S131 ingest used Documents API — Supermemory chunked 675 citizens into fragments. Search returned pieces, not profiles.
+**Solution:** Use Memories API (`/v4/memories`) — one complete memory per citizen, no chunking. Entity-centric phrasing.
+**Test results (S134):** 5 Temescal citizens ingested via Memories API. Search accuracy dramatically improved — "casino manager" → Philly Rodriguez complete profile, "best player MVP" → Danny Horn with Paulson quote, "who handles press for the mayor" → Theo Park.
+
+**Citizen memory format:**
+```
+{Name} ({POPID}) is a {age}-year-old {RoleType} living in {Neighborhood}.
+Income: ${Income}. {MaritalStatus}, {NumChildren} children. Tier {Tier}.
+{TraitProfile — Archetype, Tone, Motifs, Traits}
+```
+
+**Ingest strategy:**
+- Citizens (675): One memory per citizen with metadata (neighborhood, role, tier, clockMode). TraitProfile IS the voice — stable, rarely changes. Facts update when engine moves them. Delta ingest only.
+- Businesses (52): One memory per business with metadata (neighborhood, sector).
+- Neighborhoods (17): One memory per neighborhood — demographics, vibe, indexes.
+- Faith/cultural (51): One memory per entity.
+- World summary: One document per cycle (Documents API OK — narrative, chunking fine).
+
+**TraitProfile column (17):** 342 of 685 citizens have profiles (Archetype, Tone, Motifs, Traits). 343 missing — BUILD item. Tags are literary instructions for reporters, not numeric scores. Citizens get tags, agents get 1-10 ratings. Two systems, different purposes.
+
+**BUILD items:**
+- `scripts/ingestWorldData.js` — reads ledger, builds memories, delta ingest to world-data via Memories API
+- Generate trait profiles for 343 missing citizens from life history events
+- Clean stale fragmented memories from S131 document ingest
+
 ### Cookbooks Reference
 - `patterns/agents/orchestrator_workers` — reference implementation of editor-coordinates-desk-agents. github.com/anthropics/claude-cookbooks
 

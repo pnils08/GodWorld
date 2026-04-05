@@ -170,6 +170,15 @@ Add `allowed-tools: ["Read", "Grep", "Glob"]` to reporter agent skill frontmatte
 **33.15 Iterative retrieval for canon — BUILD NEXT.**
 3-cycle search-evaluate-refine pattern for reporters accessing canon. Score results 0-1, stop at 3+ files scoring 0.7+. Replaces context dumps. From everything-claude-code.
 
+**33.16 World-data ingest script — BUILD (engine terminal).**
+`scripts/ingestWorldData.js` — reads Simulation_Ledger via service account, builds one memory per citizen using Memories API (`/v4/memories`). Entity-centric phrasing with metadata (neighborhood, role, tier, clockMode). Includes TraitProfile as voice tags. Delta ingest — only update citizens the engine changed. Also ingests businesses (52), neighborhoods (17), faith/cultural (51). See `docs/RESEARCH.md` S134 world-data ingest design.
+
+**33.17 Missing trait profiles — BUILD (engine terminal).**
+343 of 685 citizens have no TraitProfile. Build a script that generates Archetype/Tone/Motifs/Traits from LifeHistory events and engine data. Tags are literary instructions — bounded personality earned from simulation, not assigned. Same philosophy as bounded traits on agents but tag-based instead of numeric.
+
+**33.18 Clean stale world-data memories — BUILD.**
+S131 document ingest created fragmented memories. Replace with Memories API records. Remove old fragments after new memories are confirmed searchable.
+
 ---
 
 ### Phase 31: Canon-Grounded Briefings — IMMEDIATE PRIORITY

@@ -6,13 +6,14 @@
 
 ## Architecture
 
-Three terminals. Two production logs. One world.
+Four terminals. Two production logs. One world.
 
-| Terminal | Skills | Production Log |
-|----------|--------|---------------|
-| **Civic** | `/city-hall` | `production_log_city_hall_c{XX}.md` |
+| Terminal | Focus | Production Log |
+|----------|-------|---------------|
+| **Civic** | `/city-hall` — voices govern, projects hallucinate | `production_log_city_hall_c{XX}.md` |
 | **Media** | `/write-edition`, `/write-supplemental`, `/podcast`, `/edition-print` | `production_log_edition_c{XX}.md` |
-| **Research/Build** | Everything else | None |
+| **Engine** | Engine code, ledger maintenance, ingest scripts, `clasp push`, trait profile generation | None |
+| **Research/Build** | Skills, docs, research, architecture | None |
 
 ---
 

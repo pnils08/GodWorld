@@ -1,60 +1,130 @@
 ---
 name: podcast
-description: Generate a podcast episode from a published edition. Standalone version — can run independently of the write-edition pipeline.
+description: Generate a podcast episode from a published edition — two-host dialogue transcript, optional audio render via Voicebox.
 effort: medium
 disable-model-invocation: true
-argument-hint: "[edition-number]"
+argument-hint: "[cycle-number] [format]"
 ---
 
 # /podcast — Generate a Podcast Episode
 
 ## Usage
 `/podcast [cycle] [format]`
-- cycle: cycle number (e.g., 84)
+- cycle: cycle number (e.g., 91)
 - format: morning_edition (default), postgame, debrief
 
-## What This Does
-1. Reads the published edition for the given cycle
-2. Selects hosts based on the format and edition content
-3. Launches the podcast-desk agent to write a conversation transcript
-4. Renders the transcript to audio via Fish Audio TTS
-5. Saves MP3 to `output/podcasts/`
+## The Principle
 
-## Steps
+The podcast is the edition heard, not read. Two hosts react to what happened in the world this cycle — the stories, the people, the texture. They're not reading articles aloud. They're having a conversation about the city.
 
-### Step 1: Find the Edition
-Look for the edition file:
-- Main edition: `editions/cycle_pulse_edition_{cycle}.txt`
-- Supplemental: `editions/supplemental_*_c{cycle}.txt`
+Mags decides when to produce a podcast. Not every edition gets one.
 
-If neither exists, stop. Can't podcast an edition that doesn't exist.
+## Prerequisites
+- Edition published at `editions/cycle_pulse_edition_{XX}.txt`
+- World summary exists: `output/world_summary_c{XX}.md`
+- Civic production log exists: `output/production_log_city_hall_c{XX}.md` (if civic content matters)
 
-### Step 2: Select Format and Hosts
+## Step 1: Select Format and Hosts
+
 Read `docs/media/podcast/SHOW_FORMATS.md` for format details.
 
-**Morning Edition:** Pick two citizen hosts. Check the edition's CITIZEN USAGE LOG for candidates. Select hosts with contrasting perspectives relevant to the lead story. Present host picks to user for approval.
+| Format | Hosts | When to use |
+|--------|-------|-------------|
+| **Morning Edition** | Two citizen hosts | Default — full edition review from citizen perspectives |
+| **Postgame** | P Slayer + Anthony | After a big sports cycle — game results, roster moves |
+| **Debrief** | Mags + Hal | When the edition needs editorial reflection |
 
-**Postgame:** Hosts are P Slayer and Anthony. No selection needed.
+**Morning Edition host selection:**
+- Check the edition's CITIZEN USAGE LOG for candidates
+- Search world-data Supermemory for citizen details: `npx supermemory search "NAME" --tag world-data`
+- Select hosts with contrasting perspectives relevant to the lead story
+- Present host picks to Mike for approval
 
-**Debrief:** Hosts are Mags and Hal. No selection needed.
+## Step 2: Assemble Inputs
 
-### Step 3: Launch Podcast Desk Agent
-Follow the launch protocol in `.claude/skills/podcast-desk/SKILL.md`:
-- Assemble inputs (edition content, civic voice statements, show format, host assignments)
-- Launch the podcast-desk agent via Task tool
-- Collect the transcript from `output/podcasts/c{cycle}_transcript.txt`
+The podcast agent gets:
 
-### Step 4: Review Transcript
-Show the user a preview — first 10-15 exchanges. Ask if they want to render audio or adjust the script.
+1. **Edition content** — first 3000-5000 words of the published edition (headlines, ledes, key details)
+2. **World summary** — `output/world_summary_c{XX}.md` — the texture the hosts would notice: famous sightings, food, nightlife, weather, streaming, events
+3. **Civic voice statements** — relevant quotes from `output/civic-voice/*_c{XX}.json` (if civic content matters)
+4. **Show format** — from SHOW_FORMATS.md
+5. **Host assignments** — Name, Age, Neighborhood, Occupation, Perspective for each host
 
-### Step 5: Render Audio
-Run: `node scripts/renderPodcast.js {cycle} {format}`
+**Do NOT embed the full edition.** 3000-5000 words is enough. The agent can Read the full file if it needs deeper quotes.
 
-### Step 6: Report
+**No calendar dates.** Cycle references only.
+
+## Step 3: Launch Podcast Agent
+
+Launch using the podcast-desk subagent:
+
 ```
-PODCAST COMPLETE — Edition {cycle}
+subagent_type: podcast-desk
+
+prompt: |
+  Write a podcast transcript for Edition {XX}.
+
+  **SHOW FORMAT**
+  {format section from SHOW_FORMATS.md}
+
+  **HOST ASSIGNMENTS**
+  Host 1 (Person1): {Name}, {Age}, {Neighborhood}, {Occupation}. {Perspective}.
+  Host 2 (Person2): {Name}, {Age}, {Neighborhood}, {Occupation}. {Perspective}.
+
+  **EDITION HIGHLIGHTS**
+  {first 3000-5000 words — headlines, ledes, key details}
+
+  **WORLD TEXTURE** (from world summary — the stuff hosts notice)
+  {Famous people spotted, evening food, nightlife, city events, weather, streaming}
+
+  **CIVIC DECISIONS** (if relevant)
+  {key quotes from voice agent output}
+
+  Cycle: {XX}
+
+  Write the transcript to output/podcasts/c{XX}_transcript.txt
+  Use <Person1> and <Person2> tags for dialogue.
+```
+
+## Step 4: Review Transcript
+
+Show Mike a preview — first 10-15 exchanges. Check:
+- Do hosts sound like real people, not article summaries?
+- Do they reference the world texture (food, weather, sightings)?
+- Any calendar dates? (should be cycle references)
+- Any engine language?
+- Does the conversation flow naturally — disagreements, humor, personal reactions?
+
+Mike approves or adjusts.
+
+## Step 5: Render Audio (when Phase 30 is built)
+
+**Current state:** Audio rendering not available. Phase 30 (Voicebox) will provide:
+- Different voice profiles per host
+- Multi-track composition
+- Expressive tags ([sigh], [laugh], [gasp])
+- REST API on localhost:17493
+- Export to MP3/WAV
+
+**When Phase 30 is ready:**
+```bash
+node scripts/renderPodcast.js {cycle} {format}
+```
+
+**For now:** The transcript IS the deliverable. Save to `output/podcasts/c{XX}_transcript.txt`.
+
+## Step 6: Report
+
+```
+PODCAST — Edition {XX}
   Format: {format name}
   Hosts: {Host 1} + {Host 2}
-  Transcript: output/podcasts/c{cycle}_transcript.txt ({X} exchanges)
-  Audio: output/podcasts/c{cycle}_{format}.mp3 ({X} MB, ~{X} minutes)
+  Transcript: output/podcasts/c{XX}_transcript.txt ({X} exchanges)
+  Audio: [not available — Phase 30 pending]
 ```
+
+## What This Skill Does NOT Do
+
+- **Write journalism** — the podcast reacts to published content, it doesn't create news
+- **Run automatically** — Mags decides when an edition warrants a podcast
+- **Generate audio yet** — waiting for Phase 30 (Voicebox). Transcript only for now.

@@ -275,11 +275,6 @@ node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition
 
 # Ingest to canon
 node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt
-
-# Photos + PDF (optional)
-node scripts/generate-edition-photos.js editions/cycle_pulse_edition_{XX}.txt
-node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_{XX}.txt
-node scripts/saveToDrive.js output/pdfs/bay_tribune_e{XX}.pdf edition
 ```
 
 ## Step 9: Post-Publish
@@ -296,3 +291,4 @@ node scripts/saveToDrive.js output/pdfs/bay_tribune_e{XX}.pdf edition
 - **Decide civic outcomes** — city-hall decided, this skill reports
 - **Guess at citizen details** — every name is verified against the ledger
 - **Let agents decide what to write** — Mags decides, agents execute
+- **Photos, PDFs, or print layout** — that's `/edition-print` in a separate terminal

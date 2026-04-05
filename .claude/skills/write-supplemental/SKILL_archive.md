@@ -39,14 +39,11 @@ Supplementals are where the world gets built. A restaurant review canonizes a re
 **GodWorld is a prosperity city.** Dynasty-era Oakland. People buying homes, opening businesses, enjoying life. Not every story is displacement, struggle, or crisis. Include wealth, aspiration, joy, normalcy.
 
 ## Rules
+- Read SESSION_CONTEXT.md FIRST
 - Show the user a coverage plan before launching agents
 - Get user approval before proceeding to agent launch
 - One story, many angles — or one story, one angle. Size fits the topic.
 - Rotate reporters. Check who's been used recently and who hasn't.
-- **Every citizen name gets verified.** Ledger, truesource, bay-tribune, world-data. No exceptions.
-- **No calendar dates.** Cycles only.
-- **World summary is your context.** Read `output/world_summary_c{XX}.md` for cycle texture — food, nightlife, famous people, weather, events.
-- **Photos, PDF, print — that's `/edition-print`.** Not part of this skill.
 
 ---
 
@@ -173,12 +170,12 @@ output/supplemental-briefs/{topic_slug}_c{XX}_brief.md
 
 ### Brief sources (check in order):
 1. User-provided content
-2. World summary — `output/world_summary_c{XX}.md` — cycle texture, events, food, nightlife, famous people
-3. Bay-tribune Supermemory — `npx supermemory search "TOPIC" --tag bay-tribune` — canon history
-4. World-data Supermemory — `npx supermemory search "TOPIC" --tag world-data` — citizen state
-5. Simulation_Ledger — query via service account for citizens by neighborhood
-6. Truesource — `output/desk-packets/truesource_reference.json` — player data
-7. NEWSROOM_MEMORY.md — errata, character continuity
+2. Dashboard API — `curl -s localhost:3001/api/search/articles?q=TOPIC` (256 articles, C1-C87, free)
+3. Supermemory — `/super-search` for past coverage (searches `bay-tribune` container — canon archive only)
+4. Simulation_Ledger — `curl -s localhost:3001/api/citizens?neighborhood=NAME&search=ROLE` (live, 509 ENGINE citizens)
+5. Business_Ledger — businesses in the relevant sector
+6. NEWSROOM_MEMORY.md — errata, character continuity
+7. Archive articles — `archive/articles/c*_{desk}_*.txt` (199 curated articles, C1-C77)
 
 ### Enhanced data sources (use if available):
 
@@ -186,11 +183,10 @@ All of these are optional. If none exist, the brief works exactly as today. Chec
 
 | Source | Path | When | Brief Section |
 |--------|------|------|---------------|
-| World summary | `output/world_summary_c{XX}.md` | Always | **WORLD CONTEXT** — cycle texture, events, food, nightlife, weather |
 | Errata | `output/errata.jsonl` | Always (if exists) | **GUARDIAN WARNINGS** — filter to topic's domain, list errors to avoid |
 | Mara guidance | `output/mara-directives/mara_directive_c{XX}.txt` | Always (if exists) | **MARA GUIDANCE** — forward editorial direction from last audit |
-| Voice statements | `output/civic-voice/{office}_c{XX}.json` | Civic pieces only | **CIVIC VOICE SOURCE MATERIAL** — from city-hall production log |
-| Civic production log | `output/production_log_city_hall_c{XX}.md` | Civic pieces only | **LOCKED CIVIC CANON** — what voices decided |
+| Cycle data | `output/desk-packets/{desk}_c{XX}.json` | If topic-relevant desk packet exists | **ENGINE CONTEXT** — neighborhood dynamics, crime, economics, migration from v3.9 |
+| Voice statements | `output/civic-voice/{office}_c{XX}.json` | Civic pieces only | **CIVIC VOICE SOURCE MATERIAL** — official statements from voice agents |
 | Truesource | `output/desk-packets/truesource_reference.json` | Always (if exists) | **CANON REFERENCE** — verified names/positions/neighborhoods |
 | Grade history | `output/grades/grade_history.json` | Always (if exists) | Reporter grade context in assignments (1-line summary per reporter) |
 
@@ -356,9 +352,11 @@ node scripts/validateEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
 
 **Decision guide:** If the supplemental changes initiative status, council positions, or faction dynamics — send to Mara. If it establishes texture canon (restaurants, neighborhood feel, cultural events) — skip.
 
-Upload edition to Drive for Mara: `node scripts/saveToDrive.js editions/supplemental_{topic_slug}_c{XX}.txt mara`
+```bash
+node scripts/buildMaraPacket.js {cycle} editions/supplemental_{topic_slug}_c{XX}.txt
+```
 
-Mara has her own Supermemory access (mara + bay-tribune + world-data). She searches canon herself. No packet building needed. Mike takes it to her on claude.ai. Wait for her feedback before proceeding.
+Upload the packet to claude.ai for Mara's review. Wait for her feedback before proceeding to Step 3.9.
 
 ## Step 3.9: USER REVIEW GATE (MANDATORY)
 
@@ -396,9 +394,24 @@ After user approval:
    node scripts/ingestEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
    ```
 
-## Step 4.1: Update Edition Brief
+## Step 4.05: Generate Newspaper Print Edition
 
-**Photos, PDF, print layout — run `/edition-print` in a separate terminal after publishing.**
+### 1. Generate Photos
+```bash
+node scripts/generate-edition-photos.js editions/supplemental_{topic_slug}_c{XX}.txt
+```
+
+### 2. Generate PDF
+```bash
+node scripts/generate-edition-pdf.js editions/supplemental_{topic_slug}_c{XX}.txt
+```
+
+### 3. Upload Print Edition to Drive
+```bash
+node scripts/saveToDrive.js output/pdfs/bay_tribune_supplemental_c{XX}_{topic_slug}.pdf supplement
+```
+
+## Step 4.1: Update Edition Brief
 
 **Read** existing `output/latest_edition_brief.md` first — don't overwrite.
 

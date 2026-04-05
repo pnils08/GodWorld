@@ -1,6 +1,6 @@
 ---
 name: write-edition
-description: Produce the Cycle Pulse edition — sift the world, brief the desks, compile, verify, publish. Civic decisions come from city-hall (separate session).
+description: Produce the Cycle Pulse edition — build world summary, pick stories with Mike, brief reporters, compile, verify, publish. City-hall runs in a separate session.
 effort: high
 disable-model-invocation: true
 argument-hint: "[cycle-number]"
@@ -15,17 +15,18 @@ argument-hint: "[cycle-number]"
 
 The engine produces a world. Mike produces the sports stories. City-hall produces the civic decisions. This skill turns all of that into a newspaper people want to read.
 
-Mags is the sifter. She reads the engine data, Mike's feed entries, and the city-hall production log. She decides what the paper covers. She writes angle briefs that tell each desk exactly what to write and what citizens to use. She verifies every name against the ledger. She compiles the edition. She is the editor.
+Mike and Mags pick stories together. Mags builds the world summary, proposes story ideas, verifies citizens against the ledger, and writes angle briefs. Mike picks which stories run, which citizens fit, and which reporter gets the assignment. Reporters execute — one voice, one identity, one assignment.
 
 The paper covers the WORLD — nightlife, food, sports, famous sightings, weather, neighborhoods, relationships, player arcs, evening texture. Civic decisions are part of the world, not the whole paper.
 
 ## Rules
-- **Engine data drives the paper.** Read the Riley_Digest, hooks, seeds, evening context, feeds FIRST. That's the world.
-- **Mike's feed entries are the sports stories.** Game results, player features, arcs — these are hand-written by Mike. Treat them as gospel.
-- **City-hall production log is locked civic canon.** Read it, don't reinterpret it. Civic coverage comes FROM the log.
-- **Every citizen name gets verified.** Query the ledger. No exceptions. No guessing roles, ages, or neighborhoods.
-- **Atomic topic checkout.** Each story is assigned to ONE desk. No two desks cover the same story.
+- **Four inputs only.** Media production log, civic production log, Riley_Digest (3 cycles), Oakland Sports Feed (3 cycles). No 22-tab packet dumps. No Media_Briefing.
+- **Mike's feed entries are the sports stories.** Game results, player features, arcs — hand-written by Mike. Treat as gospel.
+- **City-hall production log is locked civic canon.** Read it, don't reinterpret it.
+- **Every citizen name gets verified.** Query the ledger, truesource, bay-tribune, world-data. No exceptions.
+- **Atomic topic checkout.** Each story assigned to ONE reporter. No two reporters cover the same story.
 - **No calendar dates.** The world runs on cycles, not months. No "October 15th." No "last winter." This cycle, last cycle, three cycles ago.
+- **Story-driven layout.** No fixed sections to fill. If there's no business story, there's no business section.
 
 ## Prerequisites
 1. Engine cycle has been run
@@ -317,7 +318,10 @@ END EDITION
 node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
 ```
 
-Fix CRITICALs. Then launch Rhea:
+Fix CRITICALs. Then launch Rhea.
+
+Rhea has scoped Bash access — she can query the dashboard API (localhost:3001), search Supermemory (bay-tribune + world-data), and verify against the world summary. She's a real verifier, not a file reader. Her truth sources: world summary, civic production log, truesource, roster, dashboard API, Supermemory canon + world state.
+
 - PASS (score >= 75, zero CRITICALs) → proceed
 - REVISE → fix and rerun, max 2 rounds
 

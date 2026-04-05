@@ -64,39 +64,54 @@ Create `output/production_log_edition_c{XX}.md`:
 
 ## Step 1: Read the World
 
-Read these in order. This is the sift — finding what's worth covering.
+Read these in order. No editorial judgment yet — just gather the facts.
 
-**1a. City-hall production log**
+**1a. Media production log (resume)**
+```
+Read: output/production_log_edition_c{XX}.md (if exists)
+```
+If resuming from a previous session, this tells you where you left off. If starting fresh, create one (Step 0).
+
+**1b. Civic production log (locked canon)**
 ```
 Read: output/production_log_city_hall_c{XX}.md
 ```
-The Media Handoff section tells you what happened in government. This is locked canon — the desks report from it, they don't reinvent it. Decide how much civic coverage the edition needs. Could be a front page story, could be 5 lines in a ticker. Editorial call.
+What city-hall decided. Read it once. Don't reinterpret it. This is canon.
 
-**1b. Mike's feed entries**
-Read the sports feed from the sheet — game results, player features, arcs. These are hand-written by Mike. Every player name, every stat, every story angle is intentional. The sports desk writes FROM these entries. Look up every player mentioned in the ledger or truesource — confirm ratings, positions, ages.
+**1c. Riley_Digest (past 3 cycles)**
+Read C{XX}, C{XX-1}, C{XX-2} from the Riley_Digest sheet. Key data per cycle:
+- Cycle weight, events generated, civic load
+- Weather, traffic, retail, nightlife, tourism
+- Famous people spotted
+- Evening food (restaurants, fast food)
+- Nightlife (bars, vibe, volume)
+- City events
+- Evening media (TV, movies, streaming)
+- World events (health, civic, safety, faith, sports)
+- Demographic shifts
 
-**1c. Engine data — Riley_Digest**
-Read the C{XX} row from Riley_Digest. Key columns:
-- **CycleWeight / CycleWeightReason** — is this a high-signal cycle?
-- **EveningMedia** — TV, movies, streaming, sports broadcasts
-- **FamousPeople** — who was spotted out in the city? Look them up — are they players? Citizens? New faces?
-- **EveningFood** — restaurants, fast food, trends
-- **CityEvents** — gallery walks, festivals, gatherings
-- **NightLife** — bars, volume, vibe
-- **Sports** — what the engine says about the sports state
-- **WorldEvents** — health crises, faith events, safety events, domain activity
-- **Weather** — temperature, wind, conditions
-- **StreamingTrend** — what the city is watching
+**1d. Oakland Sports Feed (past 3 cycles)**
+Read C{XX}, C{XX-1}, C{XX-2} from Oakland_Sports_Feed. These are hand-written by Mike — game results, player features, roster moves, front office decisions, rumors. Every entry is intentional. Treat as gospel.
 
-**1d. Desk packets — hooks and seeds**
-Read the hooks and seeds from each desk packet. These are the engine's story suggestions. Look for:
-- Follow-up seeds (stories that haven't been covered in X cycles)
-- Nightlife/food/arts signals
-- Neighborhood-level events
-- Cross-desk connections
+**1e. Build world summary**
+Combine all of the above into a single factual document: `output/world_summary_c{XX}.md`
 
-**1e. Supermemory canon check**
-For every citizen, player, or entity you plan to include in the edition — search bay-tribune and world-data. Confirm who they are. Don't trust your memory. Don't trust the packet labels. Verify.
+The world summary is:
+- Factual — no editorial judgment, no story picks
+- Complete — engine state, sports feed, civic decisions, world events, demographic shifts, three-cycle trends
+- Permanent — ingest to world-data Supermemory container after writing
+- The thing you and Mike sift from together
+
+Format: see `output/world_summary_c90.md` as the reference template.
+
+**1f. Ingest to world-data**
+```bash
+npx supermemory add "$(cat output/world_summary_c{XX}.md)" --tag world-data --metadata '{"type": "cycle_summary", "cycle": {XX}}'
+```
+The world remembers itself. Future cycles can search for what happened in any past cycle.
+
+**1g. Present to Mike**
+Show Mike the world summary. This is what you sift from together. No stories picked yet — just the world.
 
 ## Step 2: The Sift — Write Angle Briefs
 

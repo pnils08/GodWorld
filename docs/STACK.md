@@ -106,20 +106,27 @@ moltbook              stopped   start manually when needed
 | **Thinking Summaries** | See reasoning in transcript (ctrl+o) | Enabled S120 |
 | **Channels** | MCP servers push inbound messages (Discord) | Enabled S120 — launch with `claude --channels` |
 
-## Skills (27 total, S131)
+## Skills (28 total, S133)
 
 Session lifecycle: (auto-boot), /session-startup, /session-end, /boot
-Edition production: /write-edition, /write-supplemental, /podcast + 6 desk skills + /podcast-desk
+Edition production: /write-edition, /write-supplemental, /podcast, /podcast-desk, /edition-print
 Engine: /run-cycle, /pre-mortem, /tech-debt-audit, /stub-engine, /health, /ctx-map, /deploy, /doc-audit
 Editorial: /cycle-review, /grill-me, /visual-qa
 Memory: /save-to-mags, /save-to-bay-tribune
 City-hall: /city-hall
 
-## Agents (23 total, S120)
+Pipeline v2 (S133): 9 reporters replace 6 desk agents. Story-driven layout. World summary as input. Civic separated to own terminal. See `docs/EDITION_PIPELINE.md`.
+
+## Agents (25 total, S133)
 
 Core: mags-corliss
-Desk (6): civic, sports, culture, business, chicago, letters
+Reporters (9 core): carmen-delaine, p-slayer, anthony, hal-richmond, jordan-velez, maria-keen, jax-caldera, lila-mezran, letters-desk
+Reporters (8 secondary): navarro, shimizu, torres, cruz, graye, marston, ortega, reyes, tan
+Chicago (supplemental): selena-grant, talia-finch
 Voice (7): mayor, opp-faction, crc-faction, ind-swing, police-chief, baylight-authority, district-attorney
+Project (4): stabilization-fund, oari, health-center, transit-hub
+Verification: rhea-morgan (scoped Bash), city-clerk
+Other: freelance-firebrand, podcast-desk, engine-validator
 Project (4): oari, stabilization-fund, health-center, transit-hub
 Special: rhea-morgan, city-clerk, freelance-firebrand, podcast-desk, engine-validator
 

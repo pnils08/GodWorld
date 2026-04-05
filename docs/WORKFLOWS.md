@@ -10,35 +10,48 @@
 
 **What it is:** The newsroom. Editions, supplementals, podcasts, photos, PDFs. This is where the city comes alive through journalism.
 
+**Pipeline v2 (S133).** Skills are the source of truth. See `docs/EDITION_PIPELINE.md` for the full map.
+
 **Files loaded:**
 - `NEWSROOM_MEMORY.md` — institutional memory, errata, character continuity
-- `NOTES_TO_SELF.md` — editorial flags, story tracking
 - `output/latest_edition_brief.md` — what just published
+- `output/world_summary_c{XX}.md` — current cycle world state
+- `output/production_log_edition_c{XX}.md` — media production log (if resuming)
 
-**Key commands:**
+**Skills:**
+- `/write-edition` — build world summary, pick stories with Mike, brief reporters, compile, verify, publish
+- `/write-supplemental` — variety coverage that builds the world
+- `/podcast` — two-host dialogue transcript from published edition
+- `/edition-print` — photos, PDF, Drive upload (post-publish)
+
+**Key scripts (still valid):**
 ```bash
-node scripts/buildDeskPackets.js          # Step 6: desk input data
-node scripts/buildDeskFolders.js [cycle]  # Step 7: per-desk workspaces
-node scripts/applyTrackerUpdates.js [cycle] --apply  # Optional: write initiative decisions to sheet
-node scripts/buildDecisionQueue.js [cycle]  # Optional: refresh voice agent decision queues before edition
-node scripts/generate-edition-photos.js   # Step 15: AI photos
-node scripts/photoQA.js output/photos/eXX # Step 15.5: Photo QA (Vision API)
-node scripts/generate-edition-pdf.js      # Step 16: tabloid PDF
-node scripts/saveToDrive.js --type edition # Step 17: Drive upload
-node scripts/buildMaraPacket.js [cycle] [file] # Step 12: Mara audit packet
-node scripts/validateEdition.js           # Step 10: 11 programmatic checks
-node scripts/postRunFiling.js [cycle]     # Step 22: verify outputs + auto-rebuild article-index.json
-node scripts/editionIntake.js [file]      # Step 23: citizen/storyline intake
-node scripts/gradeEdition.js [cycle]      # Step 25: grade agents + auto-append edition_scores.json
+node scripts/validateEdition.js           # Programmatic checks before Rhea
+node scripts/saveToDrive.js [file] [dest] # Upload to Drive
+node scripts/ingestEdition.js [file]      # Ingest to bay-tribune Supermemory
+node scripts/postRunFiling.js [cycle]     # Verify outputs + article index
+node scripts/editionIntake.js [file]      # Citizen/storyline intake
+node scripts/gradeEdition.js [cycle]      # Grade reporters
+node scripts/generate-edition-photos.js   # AI photos (edition-print)
+node scripts/photoQA.js output/photos/eXX # Photo QA (edition-print)
+node scripts/generate-edition-pdf.js      # Tabloid PDF (edition-print)
 ```
 
-**Skills:** `/write-edition`, `/write-supplemental`, `/podcast`, `/cycle-review`
+**Bypassed scripts (old pipeline, code still exists):**
+- `buildDeskPackets.js` — replaced by world summary + angle briefs
+- `buildDeskFolders.js` — replaced by reporter identity + angle brief
+- `buildInitiativePackets.js` — city-hall terminal handles this
+- `buildCivicVoicePackets.js` — city-hall terminal handles this
+- `buildVoiceWorkspaces.js` — city-hall uses identity + pending decisions only
+- `buildDecisionQueue.js` — Mags writes pending decisions by hand
+- `buildMaraPacket.js` — Mara has her own Supermemory access
 
 **Risks:**
-- Publishing before user approval (happened 7 sessions in a row — S84 era)
+- Publishing before user approval
 - Agent voice drift (Paulson as "owner", engine language leaking)
-- Citizen reuse (same 8 reporters across editions)
-- Errata not logged to errata.jsonl (fixes lost)
+- Citizen invention (verify every name against ledger)
+- Errata not logged to errata.jsonl
+- Calendar dates in articles (cycles only)
 
 **Key rule:** USER APPROVAL GATE before save, upload, ingest, photos, PDF. Text file approved first.
 

@@ -2,6 +2,22 @@
 
 ## Episode History
 
+### Episode 3 — C90 Main Edition: The Check Finally Cleared (October 2041)
+- Format: The Morning Edition
+- Hosts: Tomas Renteria (Person1) + Sonia Parikh (Person2)
+- Exchanges: 48
+- Stories covered: Stabilization Fund disbursement (Beverly Hayes $18,500, Webb loses authority, Okoro in charge, 50/week target), Baylight TIF close (Oct 10 piling, Castillo letter on "before vs simultaneously"), OARI goes live (Rivers/Montez same-morning parallel, Tran D2 leverage), Danny Horn/A's 7-1 (P Slayer's "he's not chasing anymore"), Maria Keen culture piece (Philly Rodriguez vendor stand, October texture), letters (Beverly, Denise Okafor, Robert Tran, Lorraine Castillo)
+- Quick Hits folded into the flow: Maria Keen piece and Castillo letter handled as rapid back-and-forth at the end rather than a separate segment
+- Stories skipped: C90 Coles rotation piece, Chicago/Bulls NBA Finals, Angela Reyes population surge
+- Callbacks resolved: Beverly Hayes check — DELIVERED. Tomas's close watch from Ep2 fully resolved. Baylight fiscal close — DELIVERED. Sonia's close watch from Ep2 resolved with new tension (Castillo letter, "simultaneously" vs "before")
+- New forward threads: Whether Beverly's check actually clears and Okoro's sequencing process for the 295 in queue (Tomas). First OARI call in D1 — does it work? (Tomas). October 10 Baylight piling — does Ashford's motion get a vote before TIF closes? (Sonia)
+- Key tension: "Before means you see the terms and then you agree. Simultaneously means you agree and then you see the terms." — Castillo quote, central to the Baylight debate. Sonia explicitly credits Castillo.
+- "He's not chasing anymore" — DeShawn Hartley's line via P Slayer, the episode's sports anchor
+- Tomas on OARI politics: "Reasonable ask. Aggressive timing." — frames Tran's leverage play without dismissing it
+- Darius Clark (bakery worker, West Oakland) named as the human face of the 295 still waiting — not resolved yet. Good future hook.
+- Cold open resolved fast (4 exchanges). Let both callbacks open naturally from Sonia remembering she promised to watch Beverly.
+- Pacing note: No distinct Quick Hits segment this episode — stories blended into a continuous conversation after sports. Worked because the edition was civic-heavy and the culture pieces served as the exhale. Consider restoring discrete Quick Hits if next edition has more variety.
+
 ### Episode 2 — C85 Main Edition: The Filing Cabinet That Isn't Moving (September 2041)
 - Format: The Morning Edition
 - Hosts: Tomas Renteria (Person1) + Sonia Parikh (Person2)

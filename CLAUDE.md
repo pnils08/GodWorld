@@ -51,6 +51,19 @@ Write room to state: `echo "ROOM" > .claude/state/current-workflow.txt`
 
 Full docs: `docs/SUPERMEMORY.md`. Container config: `.claude/.supermemory-claude/config.json`.
 
+## Terminal Architecture (S135)
+
+4 persistent terminal chats. Each journals and persists its own domain.
+
+| Terminal | Scope | Journals On |
+|----------|-------|-------------|
+| **Research/Build** | Architecture, research, rollout planning, builds | Research findings, design decisions, build outcomes |
+| **Engine/Sheet** | Engine code, sheet structure, clasp deploys | Engine changes, sheet migrations, deploy results |
+| **Media** | Edition production, desk agents, publish pipeline | Editorial decisions, production logs, grades |
+| **Civic** | City-hall, voice agents, initiative tracking | Council decisions, civic production logs |
+
+Handoffs between terminals noted in `ROLLOUT_PLAN.md`. No new Supermemory containers for terminals — tag saves with `[terminal-name]` prefix instead. Engine/sheet work CAN happen in research/build if needed, but the engine/sheet chat persists on all engine state and connections.
+
 ## Product Vision
 
 `docs/PRODUCT_VISION.md` — civic lighter, programs deploy like SimCity, desks see the whole city, sections are porous, Vinnie Keane exists everywhere. Not built yet.

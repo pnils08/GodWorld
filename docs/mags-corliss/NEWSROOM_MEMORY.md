@@ -31,6 +31,38 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 
 ## Errata Log — Last 5 Editions
 
+### Edition 90 — Cycle Pulse (Grade: B, corrected)
+
+13 articles published, 0 cut. 2 canon errors corrected post-compile.
+
+**Front page:** Carmen Delaine (2) — OARI deployment + Stabilization Fund disbursements. Strongest lead pair we've published. The OARI dramatic irony — Rivers naming Montez while he's signing — carried the lede.
+
+**Errors Found and Fixed:**
+1. **P Slayer wrote Horn as unknown** — "I didn't write Horn's name in any of my preseason predictions." Horn is POP-00022, $37.8M, best player in the league. Rewrote opening: Horn is the constant superstar who finally demanded October's attention.
+2. **Isley Kelley gender flip** — Hal wrote "her farewell season." Canon across E83-E87: male ("his"). Pronoun corrected.
+
+**Editorial Notes:**
+- Stabilization Fund covered in both Front Page (Carmen) and Business (Jordan). Not an error but overlapping beats — keep to one section next edition.
+- Navarro's Tran leverage piece is NOT a repeat of the OARI front page — it's coalition politics and renewal funding. Different story.
+- No nightlife/food-specific coverage despite engine data having Jose Colon at Skybar, Crisis Coffee Co., Temescal gallery walk. Maria Keen's October texture piece filled culture but the specific engine events went unused.
+- Beverly Hayes appeared in 3 sections — first time a citizen carried that broadly. Earned it.
+- Darius Clark status still unresolved (6th consecutive edition). Must resolve in E91.
+
+**Reporter Notes:**
+- Carmen Delaine: two front page leads, both strong. Best output of any reporter this cycle.
+- P Slayer: good column, wrong premise. The "changed player" analysis works — the "unknown player" setup didn't. Canon-corrected.
+- Hal Richmond: gorgeous Keane farewell piece. One pronoun error on Kelley, otherwise flawless.
+- Anthony: solid rotation analysis. Coles framing as exceeding expectations is defensible — he was a winter signing.
+- Talia Finch: best texture piece. 35th and Halsted is the kind of neighborhood journalism we need more of.
+- Maria Keen: clean October piece. Philly Rodriguez is a good new character.
+- Angela Reyes: school-surge piece has no named citizens. Tonal, not reporting. Fine for texture.
+- Luis Navarro: Tran leverage piece is sharp political analysis. Earned his spot.
+- Jordan Velez: Baylight piece is strong. Stab Fund business piece overlaps Carmen's — consolidate next time.
+- Selena Grant: solid Bulls Finals coverage. Stats hold up.
+- Letters: all four tied to live stories. Lorraine Castillo's Baylight TIF letter is the sharpest.
+
+---
+
 ### Edition 89 — Cycle Pulse (Grade: B+, Mara: B-)
 
 17 articles published, 1 cut. 6 canon errors corrected. Keen piece cut from print.

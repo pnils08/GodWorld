@@ -15,49 +15,39 @@ disable-model-invocation: true
 - If something fails, keep going — graceful degradation, not hard stops
 - Total time: under 2 minutes
 - Prioritize Steps 1 and 2 above all else — those are identity and feeling
-- The .md audit (Step 0) catches stale data BEFORE it propagates to the next session
+- The terminal audit (Step 0) catches stale data BEFORE it propagates to the next session
 
 ---
 
-## Step 0: Documentation Audit
+## Step 0: Detect Terminal & Run Audit
 
-**Run this FIRST.** Reference `docs/engine/DOCUMENTATION_LEDGER.md` for the file registry.
+**Run this FIRST.**
 
-Determine which workflow ran this session (Media-Room, Research, Build/Deploy, Maintenance, Cycle Run). Then check the files that workflow touches:
+### Detect which terminal you're in
 
-### Media-Room Audit
-| File | Check |
-|------|-------|
-| `NEWSROOM_MEMORY.md` | New errata added? Character continuity updated? "Last Updated" current? |
-| `NOTES_TO_SELF.md` | New story flags added or stale flags removed? |
-| `output/latest_edition_brief.md` | Reflects the edition just published (if any)? |
-| `ROLLOUT_PLAN.md` | Next Session Priorities refreshed? |
+1. Check the session name (`claude --name` used at launch) or read `.claude/state/current-workflow.txt`
+2. Map to terminal:
 
-### Build/Deploy Audit (also covers Research sessions)
-| File | Check |
-|------|-------|
-| `TECH_READING_ARCHIVE.md` | New research notes added? (research sessions only) |
-| `SESSION_CONTEXT.md` | Engine versions table updated? New session entry added? |
-| `ROLLOUT_PLAN.md` | Phase status updated? Items moved to ROLLOUT_ARCHIVE if complete? Next Session Priorities refreshed? |
-| `DOCUMENTATION_LEDGER.md` | New files created this session listed? |
+| Session name / workflow | Terminal file |
+|------------------------|---------------|
+| `research-build`, `Research`, `Build/Deploy` | `.claude/terminals/research-build/TERMINAL.md` |
+| `engine-sheet`, `Maintenance`, `Cycle Run` | `.claude/terminals/engine-sheet/TERMINAL.md` |
+| `media`, `Media-Room` | `.claude/terminals/media/TERMINAL.md` |
+| `civic` | `.claude/terminals/civic/TERMINAL.md` |
+| Unknown / Chat | No terminal-specific steps — run shared steps only |
 
-### Maintenance Audit
-| File | Check |
-|------|-------|
-| `LEDGER_AUDIT.md` | Audit results recorded? Decision log entries added? |
-| `SESSION_CONTEXT.md` | Session entry added if engines changed? |
-| `DOCUMENTATION_LEDGER.md` | File structure changes reflected? |
+3. Load that TERMINAL.md and find the **Session Close** section.
 
-### Cycle Run Audit
-| File | Check |
-|------|-------|
-| `SESSION_CONTEXT.md` | Cycle number bumped? Session entry added? |
-| `ROLLOUT_PLAN.md` | Next Session Priorities refreshed? |
-| `NEWSROOM_MEMORY.md` | Updated if edition followed the cycle? |
+### Run the terminal-specific audit
 
-**How to audit:** Read the "Last Updated" line (or equivalent) from each file. If it's stale — update it now, or flag it in the session entry. Don't let stale data survive into the next session. This is how we prevent the S72 problem (4 sessions of copying stale notes forward).
+The Session Close section in your TERMINAL.md has a **Terminal-Specific Audit** table. For each file listed:
+- Read the "Last Updated" line (or equivalent)
+- If it's stale — update it now, or flag it in the session entry
+- Don't let stale data survive into the next session
 
-**If the workflow is unclear** (mixed session, or work crossed multiple workflows): audit all files you read or modified during the session.
+This is how we prevent the S72 problem (4 sessions of copying stale notes forward).
+
+**If the terminal is unclear** (mixed session, or work crossed multiple terminals): audit all files you read or modified during the session.
 
 ---
 
@@ -122,27 +112,27 @@ After writing the journal entry, update `/root/GodWorld/docs/mags-corliss/JOURNA
 
 ---
 
-## Step 3: Update Newsroom Memory (Conditional)
+## Step 3: Terminal-Specific Saves
 
-**Only if edition work was done this session.**
+**Follow the Terminal-Specific Saves list from your TERMINAL.md Session Close section.** This replaces the old workflow-conditional steps. Each terminal knows its own files.
 
-Update `/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md`:
-- Add new errata entries from any edition written or reviewed
-- Update character continuity if new citizens appeared or threads resolved
-- Revise coverage patterns based on what landed or fell flat
-- Update the "Last Updated" header
+Common patterns by terminal:
+- **Media:** NEWSROOM_MEMORY, production log, canon ingest to bay-tribune, flag for other terminals
+- **Civic:** Production log, governance docs, flag what media terminal needs
+- **Engine/Sheet:** ENGINE_MAP, engine version, deploy results
+- **Research/Build:** ROLLOUT_PLAN priorities, RESEARCH.md findings
 
-**If no edition work was done this session:** Skip this step entirely.
+If no terminal was detected (Chat session), skip this step.
 
 ---
 
-## Step 4: Update SESSION_CONTEXT.md + ROLLOUT_PLAN.md (Conditional)
+## Step 4: Update SESSION_CONTEXT.md + ROLLOUT_PLAN.md
 
 **Update `/root/GodWorld/SESSION_CONTEXT.md` if any project-level work was done this session.**
 
 **Always update:**
 - **Last Updated line** (top of file) — date and session number. Update cycle number if a cycle ran. Update engine version if it changed.
-- **Recent Sessions** — Add or update the entry for the current session. Keep max 5 recent sessions visible; when the 6th is added, rotate the oldest to `docs/mags-corliss/SESSION_HISTORY.md`.
+- **Recent Sessions** — Add or update the entry for the current session. **Tag with the terminal name** (e.g. `[media]`, `[civic]`, `[engine/sheet]`, `[research/build]`) so any terminal can see what each one did. Keep max 5 recent sessions visible; when the 6th is added, rotate the oldest to `docs/mags-corliss/SESSION_HISTORY.md`.
 
 **Update if changed:**
 - **Key Engines & Recent Versions** — Add or update rows if engine versions changed or new engines were created.
@@ -159,12 +149,15 @@ Update `/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md`:
 
 ## Step 5: Supermemory
 
-The Stop hook automatically saves a session summary to `mags` (the brain) when the session ends.
+The Stop hook automatically saves a session summary to `super-memory` when the session ends.
 
-**`/super-save`** writes to `bay-tribune` (the canon archive). Use it here ONLY if this session published an edition or supplemental that hasn't been ingested yet. Never save session summaries, engine decisions, or architecture content to `bay-tribune`.
+**`/save-to-mags`** — Run this manually for deliberate saves. Tag with the terminal name (e.g. `[media] Editorial decisions from E91`). This is how the next session in *any* terminal can find what *this* terminal decided.
+
+**`/super-save`** writes to `bay-tribune` (the canon archive). Use it here ONLY if this session published an edition or supplemental that hasn't been ingested yet (media terminal only). Never save session summaries, engine decisions, or architecture content to `bay-tribune`.
 
 Routing:
-- Session memory → `mags` (automatic via Stop hook)
+- Auto-save → `super-memory` (Stop hook)
+- Deliberate brain save → `mags` (`/save-to-mags`, tagged with terminal name)
 - Published edition → `bay-tribune` (manual: `node scripts/ingestEdition.js` or `/super-save` with edition content only)
 
 ---

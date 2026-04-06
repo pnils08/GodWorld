@@ -1,82 +1,32 @@
 # GodWorld — Rollout Plan
 
-**Status:** Active | **Last Updated:** Session 120 (2026-03-27)
+**Status:** Active | **Last Updated:** Session 135 (2026-04-05)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** `ROLLOUT_ARCHIVE.md` — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
+**Terminal handoffs:** Items tagged `(engine terminal)` or `(media terminal)` are handed off to that persistent chat. Research/build terminal designs; engine/sheet terminal executes code.
 
 ---
 
-## Next Session Priorities
+## Open Work Items
 
-### Open — Dashboard & Data Quality
+### Data & Pipeline
 
-- ~~**DESIGN: Supplemental display on frontend**~~ — **DONE S113.** Amber-themed supplemental cards on Edition tab below articles. Shows title, cycle badge, filename. 7 supplementals rendered from `/api/editions` `isSupplemental` flag.
-- ~~**DESIGN: Chicago dashboard tab**~~ — **DONE S113.** Dedicated Chicago tab via hamburger menu. Bulls card (record, season, trend), feed events with stats, bureau coverage (15+ articles), reporter section (Grant + Finch). Red accent theme.
-- ~~**FIX: Rebuild POPID article index**~~ — **DONE S113.** `scripts/buildPopidArticleIndex.js` created. Cross-references 675 citizens × 234 editions. 241 citizens indexed, 1,795 refs. Run with `--write` to update. Old index: 176 citizens from Feb 5.
-- **CLEANUP: Dead spreadsheet tabs** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`.
-- ~~**FIX: Press_Drafts ghost references**~~ — **DONE S113.** Removed Press_Drafts write from `mediaRoomIntake.js`, removed sheet creation/upgrade calls, cleaned comments in `applyStorySeeds.js`. Requires `clasp push` to deploy.
-- **REDESIGN: Intake system rebuild** — `editionIntake.js` has two known bugs (cycle detection, section parser) but the whole system needs redesign to better support journalism intake. 10 new citizens from education supplemental are parked in `Citizen_Usage_Intake` (status: pending) — route through new jlibs-based intake when ready. Spec draft: `docs/engine/INTAKE_REDESIGN.md` (30% — needs Mike's input). **Priority: Post-E89 target.** See also Phase 27.1.
-- ~~**FIX: gradeEdition.js supplemental support**~~ — **DONE S116.** Supplemental section headers, desk mapping, dynamic desk lists, separate output files (`grades_c{XX}_supplemental_{topic}.json`), type-aware deduplication in `edition_scores.json`. Tested against both C87 baylight and C88 education supplementals.
-- ~~**UPGRADE: Structured critique in gradeEdition.js**~~ — **DONE S113.** 3-signal feedback (reasoning, strengths/weaknesses, directive) per desk and reporter. Flows through `grades_c{XX}.json` → `buildDeskFolders.js` → `previous_grades.md` → agents read at boot. Based on Reagent + RLCF research.
-- ~~**FEATURE: RD diversity injection for agents**~~ — **DONE S113.** 20 creative lenses for desk agents (buildDeskFolders.js), 10 political lenses for voice agents (buildVoiceWorkspaces.js). Random per run. Based on Harvard Recoding-Decoding (arxiv 2603.19519).
+- **CLEANUP: Dead spreadsheet tabs (engine-sheet terminal)** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`. LOW.
+- **REDESIGN: Intake system (design here → engine-sheet terminal)** — `editionIntake.js` has two known bugs. Whole system needs redesign. 10 citizens parked in `Citizen_Usage_Intake`. See Phase 27.1 and `docs/engine/INTAKE_REDESIGN.md` (30%). HIGH.
+- **PROJECT: World Memory remaining (engine-sheet terminal)** — (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`. MEDIUM.
+- **Supplemental strategy (media terminal)** — One supplemental per cycle minimum. Ongoing.
 
-- ~~**FIX: Citizen freshness weighting in buildDeskPackets.js**~~ — **DONE S114.** buildDeskPackets.js v2.4 sorts by freshness. 425 citizens with zero appearances rank first. Briefings tag [FRESH]. buildPopidArticleIndex.js writes JSON usage counts.
+### Infrastructure
 
-- ~~**FEATURE: Photo QA step in edition pipeline.**~~ — **DONE S116.** `scripts/photoQA.js` — Claude Haiku Vision evaluates each photo against article context. Pass/flag/fail verdicts, QA report to `qa_report.json`. ~4K tokens per photo. Tested against E88 (2 photos) and education supplemental (3 photos). Fits between Step 15 and Step 16.
+- **Node.js security patch (engine-sheet terminal)** — Scheduled March 24. Overdue.
+- **UPGRADE: Instant compaction (research-build terminal)** — Proactive compaction before context full. Pattern from `claude-cookbooks/misc/session_memory_compaction.ipynb`. MEDIUM.
+- **EVALUATE: Context clearing strategy (research-build terminal)** — Beta flag `context-management-2025-06-27`. LOW.
 
-### Open — Architecture & Production
+### Agent Prompt & Skill (remaining from S115 audit)
 
-- ~~**DESIGN: Agent knowledge separation**~~ — **DONE S113 (audit).** Already correctly configured: `.claude/.supermemory-claude/config.json` sets `repoContainerTag: "bay-tribune"`, `personalContainerTag: "mags"`. Desk agents don't call supermemory directly — they use local workspaces. `/super-search` searches `bay-tribune` only. Discord bot reads both (intentional). Fixed one stale doc reference in `/write-supplemental`.
-- **PROJECT: World Memory** — Phase 1 DONE (dashboard reads archive). Remaining: (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`.
-- ~~**BUILD: Voice-Agent-World-Action-Pipeline**~~ — **DONE S113.** Fully operational. `buildDecisionQueue.js` + `applyTrackerUpdates.js` wired into `/write-edition` Step 2.5. All 5 initiatives in BLOCKER_MAP. All 6 voice agents read `pending_decisions.md`. Production-tested C85-C87. Rollout entry was stale — pipeline survived the S113 crash intact. Confirmed S114 audit.
-- **Supplemental strategy (ongoing)** — One supplemental per cycle minimum.
-- **DESIGN: Agent Autonomy & Feedback Loop (Phase 27)** — Agents shape the world, not just report it. Intake pipeline evolves to feed agent-generated details back into engine. Inspired by SpaceMolt emergent behavior research. **Priority: HIGH — design direction for GodWorld's next phase.** First step: 27.1 intake evolution. See Phase 27 below.
-
-### Open — Agent Prompt & Skill Audit (from S115 research) — PRIORITY: HIGH
-
-Source: Anthropic prompting guide, extended thinking docs, skill best practices, Claude Code skills reference. See `docs/RESEARCH.md` S115 entries (5 entries).
-
-**TOOL: ~~Install `skill-creator`~~ — DONE S115.** Installed `skill-creator@claude-plugins-official`. Also installed: ralph-loop, hookify, claude-code-setup.
-
-**~~A. Skill Frontmatter Upgrade~~** — **DONE S115.** `disable-model-invocation: true` added to 12 side-effect skills. Effort levels tuned (culture→medium, business→low). Argument hints on 4 pipeline skills.
-
-Every one of our 21 skills should get these frontmatter fields reviewed and set:
-
-| Field | What to set | Why |
-|-------|-------------|-----|
-| `effort` | `high` for civic/sports/chicago, `medium` for culture/letters/business, `low` for mechanical skills | Per-skill thinking depth. Complex desks get deeper reasoning. |
-| `model` | Leave default for now. Phase 21: set routine desks to local model. | This IS the Phase 21 mechanism. Zero code changes — just frontmatter. |
-| `disable-model-invocation` | `true` on `/run-cycle`, `/write-edition`, `/session-end`, `/write-supplemental`, `/podcast`, `/run-city-hall` | SAFETY GAP: Claude can currently auto-trigger side-effect skills. |
-| `allowed-tools` | Production skills: `Read, Write, Bash, Glob, Grep`. Read-only skills: `Read, Grep, Glob`. | Eliminates approval prompts during pipeline runs. |
-| `argument-hint` | `/write-edition [cycle]`, `/write-supplemental [topic]`, `/podcast [edition]` etc. | Autocomplete UX improvement. |
-
-**~~B. Dynamic Context Injection~~** — **DONE S115.** Added `!`command`` injection to write-edition (packet manifest, production log, desk folder status) and write-supplemental (trigger list, recent supplementals). Desk skills don't benefit — agents already read their own workspace files via the agent loop. The injection wins are in orchestrator skills, not worker skills.
-
-**~~C. Prompt De-escalation~~** — **DONE S115.** Scanned all agent SKILL.md and RULES.md files. MUST/NEVER usage is all editorial guardrails (factual accuracy, fourth-wall, journalism rules) — NOT tool-triggering language. No changes needed. No prefilled responses found.
-
-**~~D. Thinking Migration~~** — **DONE S115.** No migration needed — we never used `budget_tokens` directly. Claude Code uses adaptive thinking automatically. The `effort` frontmatter field (set in section A) IS the thinking control. Interleaved thinking is automatic with Opus 4.6. `display: "omitted"` remains a future optimization for production runs.
-
-**~~E. Skill Structure~~** — **DONE S115 (audit complete, no critical issues).**
-- Line counts: all under 500. `write-supplemental` at 473 is highest — approaching but OK.
-- Descriptions: all third person, functional. Desk descriptions are thin but `disable-model-invocation` means they're menu labels, not discovery triggers.
-- ~~Compaction survival prompt~~ — DONE.
-- **Remaining (LOW):** subagent guidance (evaluate after E89), description budget check (run `/context`), skill evaluations (3+ test scenarios, do when rewriting skills).
-
-### Open — Infrastructure & Maintenance
-
-- ~~**CLEANUP: Archive old session transcripts**~~ — **DONE S113.** Cleaned 650MB. Observer + root sessions >14d deleted. GodWorld sessions >14d archived to `output/archives/godworld-sessions-pre-20260309.tar.gz` (69MB). Disk: 72% → 70%.
-- **Node.js security patch** — Scheduled March 24, 2026.
-- ~~**INSTALL: Ralph Loop plugin.**~~ **DONE S115.** Installed. Test on E89: `/ralph-loop "Write the civic section" --completion-promise "SECTION COMPLETE" --max-iterations 10`.
-- ~~**INSTALL: Hookify plugin.**~~ **DONE S115.** Installed + 2 rules created: `fourth-wall-guard` (agent file contamination), `credential-guard` (service account/API key exposure).
-- ~~**RUN: claude-automation-recommender.**~~ **DONE S115.** Result: context7 MCP + sqlite MCP installed. ESLint auto-fix hook recommended (not yet implemented).
-- ~~**RUN: claude-md-improver.**~~ **DONE S115.** CLAUDE.md upgraded: Quick Commands section + Infrastructure section added. Score: B (82/100).
-- ~~**ADD: Security review on commits — CONFIRMED WILL DO.**~~ **DONE S115.** GitHub Action updated with custom scan rules (`docs/security-scan-rules.txt`). Covers: fourth-wall contamination, credential exposure, container contamination, script injection. `/security-review` available for manual use.
-  3. **Custom scan instructions:** Create `docs/security-scan-rules.txt` with GodWorld-specific rules: flag "godworld", "simulation", "engine", "builder", "user" in files under `.claude/agents/` (fourth-wall contamination). Flag service account email or credential paths in any non-config file. Flag bay-tribune container references in non-Supermemory code. This extends the post-write hook (`post-write-check.sh`) with security-review-time coverage.
-  **Priority: HIGH — do in next Build session.**
-- **UPGRADE: Instant compaction pattern.** Replace reactive compaction (wait until full, user waits for summary) with proactive instant compaction — background thread builds session memory once soft threshold is met, ready to swap in instantly when context is full. Pattern from `claude-cookbooks/misc/session_memory_compaction.ipynb`. Uses prompt caching for ~10x cheaper background updates. **Priority: MEDIUM — improves every session, especially long production runs.**
-- **EVALUATE: Context clearing strategy.** Clear old thinking blocks first, then old tool results, while preserving memory files. Beta flag `context-management-2025-06-27`. Pattern from `claude-cookbooks/tool_use/memory_cookbook.ipynb`. **Priority: LOW — evaluate when compaction issues arise.**
-- ~~**CLEANUP: ~22 duplicate docs in bay-tribune container**~~ — **DONE S113.** 26 duplicates found and deleted via supermemory API. All from S106 double-ingestion (Mar 21 23:25 originals + Mar 22 02:06 re-ingest). Kept newer copies. Zero duplicates remaining.
+- **Skill frontmatter reference (all terminals):** `effort`, `model`, `disable-model-invocation`, `allowed-tools`, `argument-hint`. Table in ROLLOUT_ARCHIVE.md.
+- **Remaining (LOW):** subagent guidance (evaluate after next edition), description budget check (`/context`), skill evaluations (3+ test scenarios).
 
 ---
 
@@ -125,58 +75,47 @@ All detail in `ROLLOUT_ARCHIVE.md`.
 
 **Source:** S132 Riley audit, Sandcastle research, Everything Claude Code patterns. See `docs/RESEARCH.md` S132 entries, `riley/RILEY_PLAN.md`.
 
-**33.1 Config protection hook — STEAL NOW.**
-PreToolUse hook blocks edits to PERSISTENCE.md, identity.md, CLAUDE.md. From everything-claude-code's config-protection pattern.
-
-**33.2 PreCompact state save — STEAL NOW.**
-Hook dumps current pipeline state before compaction for recovery. Writes room, active task, and key state to `.claude/state/pre-compact-state.json`.
-
-**33.3 Strategic compaction reminder — STEAL NOW.**
-Counter-based PreToolUse hook suggests `/compact` after N tool calls at task boundaries. Prevents random mid-work compaction.
-
+**33.1 Config protection hook — DONE S133.**
+**33.2 PreCompact state save — DONE S133.**
+**33.3 Strategic compaction reminder — DONE S133.**
 **33.4 City-hall skill rewrite — DONE S133.**
-Voices govern (Mayor first, then parallel). Projects hallucinate world details within political frame. City Clerk becomes closer/verifier. No more 7-tab data dumps — IDENTITY.md + pending_decisions.md only. Mags and Mike are the sifters.
-
 **33.5 Bounded trait system — DONE S133.**
-8 traits (1-10 scale) added to all 11 civic agents: Institutional Loyalty, Risk Tolerance, Public Profile, Civic Trust, Pragmatism, Urgency, Empathy, Territorial. Based on Hennepin (Ryan 2018), Dwarf Fortress, Victoria 3. Traits drive decisions — agents read traits before options. Verified against Oakland_Political_System_v1.1.
+**33.7 Write-edition rewrite — DONE S134.**
 
-**33.6 City Clerk verification script — BUILD.**
+**33.6 City Clerk verification script — BUILD (engine-sheet terminal).**
 Node script (not an agent) that checks: voice outputs exist, project outputs exist, tracker updates applied, production log complete. `scripts/verifyCityHall.js`. Output: `output/city-civic-database/clerk_audit_c{XX}.json`.
 
-**33.7 Write-edition rewrite — DONE S133.**
-City-hall separated. Sift-first architecture. 9 individual reporter agents (Carmen, P Slayer, Anthony, Hal, Jordan, Maria, Jax, Mezran, Letters). Story-driven layout — no fixed sections, no filler. Input stack: media production log, civic production log, Riley_Digest (3 cycles), Oakland Sports Feed (3 cycles). Bypass buildDeskPackets 22-tab dump and Media_Briefing. Reporter bounded traits (8 dimensions). Chicago moved to supplemental-only. Paperclip patterns: heartbeat model, atomic topic checkout, structured result capture.
-
-**33.8 Session evaluation hook — BUILD NEXT.**
+**33.8 Session evaluation hook — BUILD (research-build terminal).**
 Stop hook analyzes transcript at session end for extractable patterns — what caused fabrication, what Mara caught, what worked. Builds editorial memory automatically. From everything-claude-code.
 
-**33.9 Session ID persistence for reporters — BUILD NEXT.**
+**33.9 Session ID persistence for reporters — BUILD (engine-sheet terminal).**
 Persist Claude Code session IDs between runs so reporter agents retain context across cycles. From Paperclip.
 
-**33.10 Budget caps per agent — BUILD NEXT.**
+**33.10 Budget caps per agent — DESIGN (research-build terminal) → BUILD (engine-sheet terminal).**
 Monthly token tracking per agent role. Prevents one broken reporter from burning the whole Anthropic bill. From Paperclip.
 
-**33.11 Conditional hooks — BUILD NEXT.**
-Add `if` field (permission rule syntax) to existing hooks so they fire only for specific operations. Claude Code v2.1.86 feature.
+**33.11 Conditional hooks — DOCUMENTED (research-build terminal). Apply when adding new hooks.**
+`if` field uses permission rule syntax: `Bash(clasp *)`, `Edit(*.md)`, etc. Two-stage filter: `matcher` narrows by tool, `if` narrows by arguments. Current hooks already scoped by `matcher` — no retrofit needed. Apply to future hooks.
 
-**33.12 Mags EIC Sheet Environment — EVALUATE.**
+**33.12 Mags EIC Sheet Environment — EVALUATE (research-build terminal).**
 New spreadsheet owned by service account. Tabs: Editorial Queue, Desk Packets, Canon Briefs, Edition Tracker, Grading. Reads from Riley's sheets, writes to own space. No Riley triggers. See `riley/RILEY_PLAN.md` for full spec.
 
-**33.13 Sandcastle proof-of-concept — EVALUATE.**
+**33.13 Sandcastle proof-of-concept — EVALUATE (research-build terminal).**
 Run one reporter agent via Sandcastle in a Docker container with real shell access and Supermemory queries. Requires Docker on server. See `docs/RESEARCH.md` S132 Sandcastle entry.
 
-**33.14 Tool-restricted reporter agents — BUILD NEXT.**
+**33.14 Tool-restricted reporter agents — BUILD (media terminal).**
 Add `allowed-tools: ["Read", "Grep", "Glob"]` to reporter agent skill frontmatter. Reporters get read-only during writing. Only compile/publish gets write access. From everything-claude-code's hierarchical delegation pattern.
 
-**33.15 Iterative retrieval for canon — BUILD NEXT.**
+**33.15 Iterative retrieval for canon — DESIGN (research-build terminal) → BUILD (media terminal).**
 3-cycle search-evaluate-refine pattern for reporters accessing canon. Score results 0-1, stop at 3+ files scoring 0.7+. Replaces context dumps. From everything-claude-code.
 
-**33.16 World-data ingest script — BUILD (engine terminal).**
+**33.16 World-data ingest script — DESIGN (research-build terminal) → BUILD (engine-sheet terminal).**
 `scripts/ingestWorldData.js` — reads Simulation_Ledger via service account, builds one memory per citizen using Memories API (`/v4/memories`). Entity-centric phrasing with metadata (neighborhood, role, tier, clockMode). Includes TraitProfile as voice tags. Delta ingest — only update citizens the engine changed. Also ingests businesses (52), neighborhoods (17), faith/cultural (51). See `docs/RESEARCH.md` S134 world-data ingest design.
 
-**33.17 Missing trait profiles — BUILD (engine terminal).**
+**33.17 Missing trait profiles — DESIGN (research-build terminal) → BUILD (engine-sheet terminal).**
 343 of 685 citizens have no TraitProfile. Build a script that generates Archetype/Tone/Motifs/Traits from LifeHistory events and engine data. Tags are literary instructions — bounded personality earned from simulation, not assigned. Same philosophy as bounded traits on agents but tag-based instead of numeric.
 
-**33.18 Clean stale world-data memories — BUILD.**
+**33.18 Clean stale world-data memories — BUILD (engine-sheet terminal).**
 S131 document ingest created fragmented memories. Replace with Memories API records. Remove old fragments after new memories are confirmed searchable.
 
 ---
@@ -232,16 +171,16 @@ Agents query dashboard endpoints during writing instead of flat JSON packets. Be
 
 - **7.6 Agent Teams:** Test on podcast desk first. Experimental — known limitations.
 - **7.7 Plugin Packaging:** Not started. Low priority, high future value.
-- **7.9 Remote Control (Server Mode):** `claude remote-control` on the droplet. Mike connects from phone/browser. `--spawn worktree` for parallel sessions. Account-gated — confirmed S112 still blocked. **Priority: HIGH.**
+- **7.9 Remote Control (Server Mode) — WORKING S135.** `claude remote-control` operational. Mike connects from phone/browser. Unblocked as of S135.
 - **7.10 Claude Code on Web:** `claude --remote "task"`. Cloud sandbox from GitHub. Not started.
 
 ### Phase 8.6: Security Hardening — PARTIAL
 
 fail2ban + unattended-upgrades done. **Remaining:** Non-root user + SSH key-only auth + disable root login.
 
-### Phase 9: Docker Containerization — DEFERRED
+### Phase 9: Docker Containerization — DEFERRED (RE-EVALUATE)
 
-DEFERRED (S80). PM2 handles current stack. Docker overhead ~200MB on 2GB droplet. Revisit at 4GB+ or when adding services.
+DEFERRED (S80). PM2 handles current stack. Droplet upgraded S135 — re-evaluate if RAM headroom allows Docker. Needed for Phase 28 (Computer Use), Phase 33.13 (Sandcastle).
 Includes: 9.1 Compose stack, 9.2 Nginx + SSL, 9.3 Prometheus + Grafana, 9.4 One-command disaster recovery.
 
 ### Phase 11.1: Moltbook Registration — PARTIAL

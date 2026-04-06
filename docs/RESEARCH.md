@@ -13,8 +13,8 @@ Don't duplicate — read these when you need to understand a system layer:
 | Simulation engine | `docs/engine/ENGINE_MAP.md` | 11-phase deterministic engine, 100+ functions, Google Apps Script |
 | Citizen data | `docs/SIMULATION_LEDGER.md` | 675 citizens, 46 columns, 4 ClockModes (ENGINE/GAME/CIVIC/MEDIA) |
 | Spreadsheet | `docs/SPREADSHEET.md` | 65 tabs, data flow, dead tabs |
-| Newsroom | `docs/EDITION_PIPELINE.md` | 27-step pipeline, 6 desk agents, 24 journalists |
-| Memory | `docs/SUPERMEMORY.md` | 3 containers: mags (brain), bay-tribune (canon), mara (audit) |
+| Newsroom | `docs/EDITION_PIPELINE.md` | Pipeline v2 (S134): 4 terminals, 9 steps, 9 individual reporters, story-driven layout |
+| Memory | `docs/SUPERMEMORY.md` | 5 containers: mags (brain), bay-tribune (canon), world-data (city state), super-memory (junk drawer), mara (audit) |
 | Local memory | `docs/CLAUDE-MEM.md` | SQLite + Chroma vector, port 37777 |
 | Dashboard | `docs/DASHBOARD.md` | 31 API endpoints, Express + React, port 3001 |
 | Discord | `docs/DISCORD.md` | Mags bot, Haiku, local files + Supermemory RAG |

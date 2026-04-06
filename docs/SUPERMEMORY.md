@@ -156,6 +156,10 @@ Automatic captures and quick saves. May have useful conversation details. Search
 ### Session Boot (automatic)
 The plugin calls `/v4/profile` for both `mags` and `bay-tribune`. Returns static facts + recent dynamic memories. Injected into context before the first message.
 
+### Terminal Tagging (S135)
+
+When saving to any container, prefix with the terminal name: `[research/build]`, `[engine/sheet]`, `[media]`, `[civic]`. This enables filtering saves by source terminal without fragmenting containers into per-terminal silos. The 5 containers stay organized by WHAT the data is — terminal tags track WHERE it came from.
+
 ### During a Session
 - **Need past context?** Search `mags`: "What happened with the ledger recovery?" "What did we decide about citizen routing?"
 - **Need world context?** Search `bay-tribune`: "What has Carmen written about OARI?" "Who lives in Fruitvale?"

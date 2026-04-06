@@ -187,7 +187,10 @@ Before editing, check what reads from and writes to the affected ctx fields.
 
 ## Recent Sessions
 
+**Format (S135+):** Each entry includes `Terminal:` tag — research/build, engine/sheet, media, or civic.
+
 ### Session 134 (2026-04-05) — Full Architecture Rebuild
+**Terminal:** research/build
 
 - **E90 failed (D grade):** Civic theater, wrong sports framing, fabricated Bulls Finals, no engine coverage. Shelved.
 - **City-hall skill rewritten:** Voices govern (Mayor first), projects hallucinate, clerk verifies. Bounded traits (8 dimensions) on all 11 civic agents. Separate terminal, own production log.

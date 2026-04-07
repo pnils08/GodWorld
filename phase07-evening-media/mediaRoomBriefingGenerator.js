@@ -481,6 +481,35 @@ function generateMediaBriefing_(ctx) {
   }
   
   // ═══════════════════════════════════════════════════════════════════════════
+  // SECTION 6b: ARC & STORYLINE HEALTH (v3.0 — from Phase 6 diagnostics)
+  // ═══════════════════════════════════════════════════════════════════════════
+
+  var arcLife = S.arcLifecycleResults || null;
+  var storyHealth = S.storylineHealth || null;
+  var hookLife = S.hookLifecycle || null;
+
+  if (arcLife || storyHealth || hookLife) {
+    briefing.push('### Arc & Storyline Health');
+    if (arcLife) {
+      briefing.push('- Arcs processed: ' + (arcLife.processed || 0) +
+        ', advanced: ' + (arcLife.advanced || 0) +
+        ', resolved: ' + (arcLife.resolved || 0) +
+        ', tension decayed: ' + (arcLife.tensionDecayed || 0));
+    }
+    if (storyHealth) {
+      briefing.push('- Storylines: ' + (storyHealth.active || 0) + ' active' +
+        ', ' + (storyHealth.stale || 0) + ' stale' +
+        ', ' + (storyHealth.fizzled || 0) + ' fizzled');
+    }
+    if (hookLife) {
+      briefing.push('- Hooks: ' + (hookLife.processed || 0) + ' processed' +
+        ', ' + (hookLife.expired || 0) + ' expired' +
+        ', ' + (hookLife.decayed || 0) + ' decayed');
+    }
+    briefing.push('');
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // SECTION 7: STORY SEEDS
   // ═══════════════════════════════════════════════════════════════════════════
   

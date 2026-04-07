@@ -2,7 +2,7 @@
 
 **Source:** S136 full-pipeline audit (4 agents, all 11 phases)
 **Created:** 2026-04-07
-**Status:** Active — work items ready
+**Status:** 7 of 10 items DONE (S136). 3 evaluate items remaining.
 
 ---
 
@@ -12,7 +12,7 @@ S136 audited every ctx.summary field read and write across all 11 engine phases.
 
 ---
 
-## 34.1 — Persist previousCycleState (PRIORITY 1)
+## 34.1 — Persist previousCycleState (PRIORITY 1) — DONE S136
 
 **Problem:** Phase 9 `finalizeCycleState` writes `S.previousCycleState` with shock flag, pattern flag, recovery level, civic load, active cooldowns, cycle weight. Phase 6 `applyShockMonitor` reads it next cycle. But it's **in-memory only** — never saved to PropertiesService or sheets. If the spreadsheet closes between cycles, all cross-cycle state is lost.
 
@@ -34,7 +34,7 @@ S136 audited every ctx.summary field read and write across all 11 engine phases.
 
 ---
 
-## 34.2 — Media Effects → City Dynamics Feedback (PRIORITY 2)
+## 34.2 — Media Effects → City Dynamics Feedback (PRIORITY 2) — DONE S136
 
 **Problem:** Phase 7 `mediaFeedbackEngine.js` writes `S.mediaEffects` — coverage profiles, sentiment pressure, anxiety factor, hope factor, crisis saturation, celebrity buzz, neighborhood effects, trend amplification. Phase 2 `applyCityDynamics.js` reads `S.mediaEffects` (line exists) but **only from the current cycle**, not the previous one. Since mediaFeedbackEngine runs AFTER applyCityDynamics (Phase 7 vs Phase 2), it only affects the current cycle through applySeasonWeights.
 
@@ -57,7 +57,7 @@ The simulation generates media coverage but the city never reacts to it next cyc
 
 ---
 
-## 34.3 — Economic Narrative into Media Briefing (PRIORITY 3)
+## 34.3 — Economic Narrative into Media Briefing (PRIORITY 3) — DONE S136
 
 **Problem:** Phase 6 `economicRippleEngine.js` writes `S.economicRipples`, `S.economicNarrative`, `S.economicSummary`, `S.neighborhoodEconomies`. All four are **orphaned** — nobody reads them. The media briefing gets `S.economicMood` (a single number) but not the narrative explaining WHY the economy shifted or which neighborhoods are affected.
 
@@ -76,7 +76,7 @@ The simulation generates media coverage but the city never reacts to it next cyc
 
 ---
 
-## 34.4 — Neighborhood Memory (PRIORITY 4)
+## 34.4 — Neighborhood Memory (PRIORITY 4) — DONE S136
 
 **Problem:** Phase 8 `v3NeighborhoodWriter` writes detailed neighborhood dynamics to the `Neighborhood_Map` sheet every cycle — nightlife, noise, crime, retail vitality, sentiment per neighborhood. But **no phase ever reads it back**. Neighborhoods reset to blank every cycle and get recalculated from scratch by `applyCityDynamics`.
 
@@ -97,7 +97,7 @@ The simulation generates media coverage but the city never reacts to it next cyc
 
 ---
 
-## 34.5 — Fix isWeekend (PRIORITY 5)
+## 34.5 — Fix isWeekend (PRIORITY 5) — DONE S136
 
 **Problem:** Phase 2 `applySeasonWeights.js` reads `S.isWeekend || false`. Phase 1 `advanceSimulationCalendar.js` never writes it. Weekend logic is permanently dead — seasonal weights never get weekend adjustments.
 
@@ -115,7 +115,7 @@ The simulation generates media coverage but the city never reacts to it next cyc
 
 ---
 
-## 34.6 — Domain Cooldown Persistence (PRIORITY 6)
+## 34.6 — Domain Cooldown Persistence (PRIORITY 6) — DONE S136
 
 **Problem:** Phase 7 `domainTracker.js` writes `S.domainPresence` — tracking which story domains dominated (civic, crime, sports, culture, etc.). Phase 8 `v3DomainWriter` writes this to `Domain_Tracker` sheet. But **neither is read back** next cycle. Domains start fresh every cycle.
 
@@ -135,7 +135,7 @@ The simulation generates media coverage but the city never reacts to it next cyc
 
 ---
 
-## 34.7 — Document Phase 3 Sheet Write Exceptions (PRIORITY 7)
+## 34.7 — Document Phase 3 Sheet Write Exceptions (PRIORITY 7) — DONE S136
 
 **Problem:** Three Phase 3 files write directly to sheets, violating the Phase 10 persistence rule:
 - `applyDemographicDrift.js` → World_Population (lines 262-265)
@@ -170,21 +170,21 @@ Phase 11 is effectively dead code from the engine's perspective.
 
 ---
 
-## 34.9 — Clean Up Orphaned Phase 6 Fields (LOW)
+## 34.9 — Clean Up Orphaned Phase 6 Fields (LOW) — DONE S136
 
 Seven Phase 6 fields are written but never consumed:
 
 | Field | Writer | Action |
 |-------|--------|--------|
-| `economicRipples` | economicRippleEngine | Wire into 34.3 (media briefing) |
-| `economicNarrative` | economicRippleEngine | Wire into 34.3 |
-| `economicSummary` | economicRippleEngine | Wire into 34.3 |
-| `neighborhoodEconomies` | economicRippleEngine + applyMigrationDrift | Wire into 34.3 + 34.4 |
-| `arcLifecycleResults` | arcLifecycleEngine | Evaluate — may be debug-only |
-| `storylineHealth` | storylineHealthEngine | Evaluate — could inform media briefing |
-| `hookLifecycle` | hookLifecycleEngine | Evaluate — could inform story seed generation |
+| `economicRipples` | economicRippleEngine | Wired in buildMediaPacket (34.3) |
+| `economicNarrative` | economicRippleEngine | Wired in briefing + packet (34.3) |
+| `economicSummary` | economicRippleEngine | Wired in briefing (34.3) |
+| `neighborhoodEconomies` | economicRippleEngine + applyMigrationDrift | Wired in briefing (34.3) |
+| `arcLifecycleResults` | arcLifecycleEngine | Wired in briefing Section 6b |
+| `storylineHealth` | storylineHealthEngine | Wired in briefing Section 6b |
+| `hookLifecycle` | hookLifecycleEngine | Wired in briefing Section 6b |
 
-Items 1-4 get wired by 34.3. Items 5-7 need evaluation.
+All 7 orphaned fields now consumed by media briefing and/or media packet.
 
 ---
 
@@ -201,19 +201,19 @@ Items 1-4 get wired by 34.3. Items 5-7 need evaluation.
 
 ---
 
-## Execution Order
+## Execution Order (all DONE except evaluate items)
 
 ```
-34.1  Persist previousCycleState          ← do first, everything depends on it
-34.5  Fix isWeekend                       ← quick win, no dependencies
-34.3  Economic narrative into briefing    ← quick win, no dependencies
-34.7  Document Phase 3 exceptions         ← quick win, no dependencies
-34.2  Media effects → city dynamics       ← depends on 34.1
-34.4  Neighborhood memory                 ← pairs with 34.1
-34.6  Domain cooldown persistence         ← standalone
-34.9  Clean up orphaned fields            ← follows 34.3
-34.8  Phase 11 evaluation                 ← evaluate
-34.10 Chicago deprecation                 ← evaluate
+34.1  Persist previousCycleState          ← DONE S136
+34.5  Fix isWeekend                       ← DONE S136
+34.3  Economic narrative into briefing    ← DONE S136
+34.7  Document Phase 3 exceptions         ← DONE S136
+34.2  Media effects → city dynamics       ← DONE S136
+34.4  Neighborhood memory                 ← DONE S136
+34.6  Domain cooldown persistence         ← DONE S136
+34.9  Clean up orphaned fields            ← DONE S136
+34.8  Phase 11 evaluation                 ← evaluate (future)
+34.10 Chicago deprecation                 ← evaluate (future)
 ```
 
 ---

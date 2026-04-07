@@ -1208,6 +1208,40 @@ function applyCityDynamics_(ctx) {
     finalCity[mk] = blend(prev ? prev[mk] : null, rawCity[mk], mf);
   }
 
+  // ─────────────────────────────────────────────────────────────────────────
+  // MEDIA FEEDBACK (v3.0 — previous cycle's media coverage affects today)
+  // ─────────────────────────────────────────────────────────────────────────
+  var prevState = S.previousCycleState || {};
+  var prevMedia = prevState.mediaEffects || null;
+
+  if (prevMedia) {
+    // Sentiment pressure: heavy crisis coverage → city mood drops
+    // hopeFactor lifts mood, anxietyFactor dampens it
+    var mediaSentiment = (prevMedia.hopeFactor || 0) - (prevMedia.anxietyFactor || 0);
+    finalCity.sentiment += mediaSentiment * 0.04;
+
+    // Crisis saturation: sustained crisis coverage → public spaces empty, engagement drops
+    var crisisSat = prevMedia.crisisSaturation || 0;
+    if (crisisSat > 0.5) {
+      finalCity.publicSpaces -= crisisSat * 0.03;
+      finalCity.communityEngagement -= crisisSat * 0.02;
+    }
+
+    // Celebrity buzz: spotlight on the city → tourism and nightlife tick up
+    var celebBuzz = prevMedia.celebrityBuzz || 0;
+    if (celebBuzz > 0.3) {
+      finalCity.tourism += celebBuzz * 0.02;
+      finalCity.nightlife += celebBuzz * 0.02;
+    }
+
+    // Neighborhood-specific effects from media coverage
+    // (Applied to neighborhood dynamics separately if needed — city-level is aggregate)
+
+    Logger.log('applyCityDynamics_ v3.0: Media feedback applied (sentiment ' +
+      (mediaSentiment * 0.04).toFixed(3) + ', crisisSat ' + crisisSat.toFixed(2) +
+      ', celebBuzz ' + celebBuzz.toFixed(2) + ')');
+  }
+
   finalCity.traffic = clampMult(finalCity.traffic);
   finalCity.retail = clampMult(finalCity.retail);
   finalCity.tourism = clampMult(finalCity.tourism);

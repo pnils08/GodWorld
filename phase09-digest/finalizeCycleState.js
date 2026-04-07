@@ -85,7 +85,10 @@ function finalizeCycleState_(ctx) {
     isFirstFriday: !!S.isFirstFriday,
     isCreationDay: !!S.isCreationDay,
     sportsSeason: S.sportsSeason || "off-season",
-    season: S.season || "Spring"
+    season: S.season || "Spring",
+
+    // v1.2: Media effects for next cycle's city dynamics feedback
+    mediaEffects: compactMediaEffects_(S.mediaEffects)
   };
 
   // This is what downstream scripts read next cycle
@@ -96,6 +99,23 @@ function finalizeCycleState_(ctx) {
 
   S.cycleFinalizedAt = ctx.now || new Date();
   ctx.summary = S;
+}
+
+
+/**
+ * Compact mediaEffects to only the fields needed for next cycle's
+ * city dynamics feedback. Full object is too large for PropertiesService.
+ */
+function compactMediaEffects_(mediaEffects) {
+  if (!mediaEffects) return null;
+  return {
+    sentimentPressure: mediaEffects.sentimentPressure || 0,
+    anxietyFactor: mediaEffects.anxietyFactor || 0,
+    hopeFactor: mediaEffects.hopeFactor || 0,
+    crisisSaturation: mediaEffects.crisisSaturation || 0,
+    celebrityBuzz: mediaEffects.celebrityBuzz || 0,
+    neighborhoodEffects: mediaEffects.neighborhoodEffects || {}
+  };
 }
 
 

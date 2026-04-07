@@ -153,20 +153,15 @@ These aren't in the documented exceptions list in `engine.md`.
 
 ---
 
-## 34.8 — Phase 11 Media Intake Integration (EVALUATE)
+## 34.8 — Phase 11 Media Intake Integration (BLOCKED — same as Phase 27.1)
 
-**Problem:** Phase 11 has two files — `continuityNotesParser.js` and `healthCauseIntake.js`. Neither feeds back into the engine in any meaningful way.
-- `continuityNotesParser.js` writes to `Continuity_Intake` sheet — engine never reads it
-- `healthCauseIntake.js` writes narrative causes to Simulation_Ledger.HealthCause — engine can read it but rarely does
+**Problem:** Phase 11 has two files — `continuityNotesParser.js` and `healthCauseIntake.js`. Neither feeds back into the engine in any meaningful way. Phase 11 is dead code.
 
-Phase 11 is effectively dead code from the engine's perspective.
+**This is the same unsolved problem as Phase 27.1 in ROLLOUT_PLAN.md** — how does what the newspaper publishes get fed back into the simulation? The engine runs → media covers it → coverage dies. Intake is the missing return path.
 
-**Options:**
-- Archive Phase 11 if media intake is handled differently now (pipeline v2 uses desk agents, not intake sheets)
-- OR wire continuity notes into Phase 4 event generation as story seeds
-- Evaluate based on whether the intake redesign (Phase 27.1 in ROLLOUT_PLAN.md) supersedes this
+**Do not track separately.** Phase 27.1 owns this problem. When intake is redesigned, Phase 11 either gets rewritten to match or gets archived. See `docs/engine/INTAKE_REDESIGN.md` (30% spec) and ROLLOUT_PLAN.md Phase 27.
 
-**Effort:** Evaluate first
+**Status:** Blocked on intake design decisions.
 
 ---
 

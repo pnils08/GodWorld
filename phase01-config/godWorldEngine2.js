@@ -155,6 +155,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
+  safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
@@ -1414,6 +1415,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
+  safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });

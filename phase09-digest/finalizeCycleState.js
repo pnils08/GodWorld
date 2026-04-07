@@ -95,7 +95,10 @@ function finalizeCycleState_(ctx) {
 
     // v1.4: Domain presence for editorial balance cooldowns
     domainPresence: S.domainPresence || null,
-    dominantDomain: S.dominantDomain || null
+    dominantDomain: S.dominantDomain || null,
+
+    // v1.5: Edition coverage effects for cross-cycle tracking
+    editionCoverageEffects: S.editionCoverageEffects || null
   };
 
   // This is what downstream scripts read next cycle

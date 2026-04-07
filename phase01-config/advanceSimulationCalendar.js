@@ -208,6 +208,9 @@ function advanceSimulationCalendar_(ctx) {
   S.isCreationDay = isCreationDay;
   S.creationDayAnniversary = creationDayAnniversary;
 
+  // Weekend flag — each cycle is a week, ~29% chance it's weekend-dominant
+  S.isWeekend = rng() < 0.29;
+
   // Formatted cycle reference
   S.cycleRef = "Y" + godWorldYear + "C" + cycleOfYear;
 

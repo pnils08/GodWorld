@@ -168,6 +168,9 @@ function buildMediaPacket_(ctx) {
   pkt.push('5. ECONOMIC SIGNALS');
   pkt.push('───────────────────────────────────────────────────────');
   pkt.push('Economic Mood: ' + (s.economicMood || 50) + '/100');
+  if (s.economicNarrative) {
+    pkt.push('Economic Narrative: ' + s.economicNarrative);
+  }
   var ripples = s.economicRipples || [];
   if (ripples.length > 0) {
     pkt.push('Active Ripples: ' + ripples.length);

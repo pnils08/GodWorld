@@ -239,6 +239,27 @@ function generateMediaBriefing_(ctx) {
   briefing.push('- Civic Load: ' + (S.civicLoad || 'stable'));
   briefing.push('- Sports Season: ' + cal.sportsSeason);
   briefing.push('- Economic Mood: ' + (S.economicMood || '50'));
+
+  // v3.0: Economic narrative from Phase 6 economicRippleEngine
+  if (S.economicNarrative) {
+    briefing.push('- Economic Narrative: ' + S.economicNarrative);
+  }
+  if (S.economicSummary) {
+    briefing.push('- Economic Summary: ' + (typeof S.economicSummary === 'object' ? JSON.stringify(S.economicSummary) : S.economicSummary));
+  }
+  if (S.neighborhoodEconomies) {
+    var econHoods = Object.keys(S.neighborhoodEconomies);
+    if (econHoods.length > 0) {
+      briefing.push('- Neighborhood Economies:');
+      for (var ei = 0; ei < econHoods.length; ei++) {
+        var hood = econHoods[ei];
+        var ne = S.neighborhoodEconomies[hood];
+        if (ne && typeof ne === 'object') {
+          briefing.push('  ' + hood + ': ' + JSON.stringify(ne));
+        }
+      }
+    }
+  }
   briefing.push('');
   
   // ═══════════════════════════════════════════════════════════════════════════

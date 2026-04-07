@@ -147,6 +147,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
   safePhaseCall_(ctx, 'Phase1-PrevEvening', function() { loadPreviousEvening_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-PrevCycleState', function() { loadPreviousCycleState_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 2: WORLD STATE (MUST run BEFORE population/events)
@@ -355,6 +356,8 @@ function runWorldCycle() {
 
   // Save evening snapshot for next cycle's citizen events
   safePhaseCall_(ctx, 'Phase10-EveningSnapshot', function() { saveEveningSnapshot_(ctx); });
+  // Save cycle state for next cycle's analyzers (shock, pattern, recovery)
+  safePhaseCall_(ctx, 'Phase10-CycleState', function() { savePreviousCycleState_(ctx); });
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 
@@ -1402,6 +1405,8 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase1-AdvanceTime', function() { advanceWorldTime_(ctx); });
   safePhaseCall_(ctx, 'Phase1-Calendar', function() { advanceSimulationCalendar_(ctx); });
   safePhaseCall_(ctx, 'Phase1-ResetAudit', function() { resetCycleAuditIssues_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-PrevEvening', function() { loadPreviousEvening_(ctx); });
+  safePhaseCall_(ctx, 'Phase1-PrevCycleState', function() { loadPreviousCycleState_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 2: WORLD STATE
@@ -1593,6 +1598,8 @@ function runCyclePhases_(ctx) {
 
   // Save evening snapshot for next cycle's citizen events
   safePhaseCall_(ctx, 'Phase10-EveningSnapshot', function() { saveEveningSnapshot_(ctx); });
+  // Save cycle state for next cycle's analyzers (shock, pattern, recovery)
+  safePhaseCall_(ctx, 'Phase10-CycleState', function() { savePreviousCycleState_(ctx); });
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 

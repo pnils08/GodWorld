@@ -191,6 +191,48 @@ function saveEveningSnapshot_(ctx) {
 
 /**
  * ============================================================================
+ * savePreviousCycleState_ v1.0
+ * ============================================================================
+ *
+ * Persists S.previousCycleState to PropertiesService so it survives across
+ * spreadsheet close/reopen. Without this, shock arcs, pattern escalation,
+ * recovery trajectories, and civic load history are lost between sessions.
+ *
+ * Mirrors saveEveningSnapshot_ pattern. Called in Phase 10 after
+ * finalizeCycleState_ has built the snapshot.
+ *
+ * Storage: PropertiesService (9KB per-property limit, 500KB total).
+ * Estimated size: 400-800 bytes JSON.
+ *
+ * ============================================================================
+ */
+
+function savePreviousCycleState_(ctx) {
+  var isDryRun = ctx.mode && ctx.mode.dryRun;
+  if (isDryRun) {
+    Logger.log('savePreviousCycleState_: Skipped (dry-run mode)');
+    return;
+  }
+
+  var S = ctx.summary || {};
+  var snapshot = S.previousCycleState;
+  if (!snapshot) {
+    Logger.log('savePreviousCycleState_: No snapshot to save');
+    return;
+  }
+
+  try {
+    var json = JSON.stringify(snapshot);
+    PropertiesService.getScriptProperties().setProperty('PREV_CYCLE_STATE_JSON', json);
+    Logger.log('savePreviousCycleState_: Saved ' + json.length + ' bytes for cycle ' + snapshot.cycle);
+  } catch (e) {
+    Logger.log('savePreviousCycleState_: Failed - ' + e.message);
+  }
+}
+
+
+/**
+ * ============================================================================
  * FINALIZE CYCLE STATE REFERENCE
  * ============================================================================
  *

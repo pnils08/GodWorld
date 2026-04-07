@@ -370,8 +370,88 @@ function buildEveningMedia_(ctx) {
   }
 
   // ───────────────────────────────────────────────────────────────────────────
-  // SPORTS BROADCASTS
+  // SPORTS PROGRAMMING (feed-aware, v3.0)
   // ───────────────────────────────────────────────────────────────────────────
+  var feedEntries = S.sportsFeedEntries || [];
+  var hasBaseball = false;
+  var hasBasketball = false;
+  var hasFootball = false;
+  var feedNames = [];
+
+  for (var si = 0; si < feedEntries.length; si++) {
+    var team = (feedEntries[si].teamsUsed || '').toLowerCase();
+    if (team.indexOf("a's") !== -1 || team === "as") hasBaseball = true;
+    if (team === "nba" || team.indexOf("nba") !== -1) hasBasketball = true;
+    if (team === "nfl" || team.indexOf("nfl") !== -1) hasFootball = true;
+
+    // Collect names from feed for personalized programming
+    var names = (feedEntries[si].namesUsed || '').trim();
+    if (names && names !== '-') {
+      var parts = names.split(',');
+      for (var ni = 0; ni < parts.length; ni++) {
+        var n = parts[ni].trim();
+        if (n && n !== '-') feedNames.push(n);
+      }
+    }
+  }
+
+  // Team-contextual TV — not season-dependent, just team-aware
+  var tvSportsBaseball = [
+    "A's Sports Central", "A's Dynasty Documentary", "Jack London Ballpark Stories",
+    "Oakland Baseball Tonight", "A's Franchise Spotlight",
+    "Inside the A's Front Office", "The Paulson Era: A's Rebuild",
+    "A's Prospect Report", "Coliseum to Jack London: An A's Story"
+  ];
+  var tvSportsBasketball = [
+    "Oakland Basketball Tonight", "Hardwood Stories: Oakland",
+    "NBA Oakland Spotlight", "Court Culture Oakland",
+    "Expansion Draft Special", "Building a Franchise from Scratch"
+  ];
+  var tvSportsFootball = [
+    "Oakland Football Tonight", "Gridiron Oakland",
+    "NFL Oakland Report", "Football Town Oakland"
+  ];
+
+  // Team-contextual movies
+  var moviesSportsBaseball = [
+    "Diamond City", "Ninth Inning", "The Closer", "Ballpark Dreams",
+    "The GM", "Franchise", "Opening Day"
+  ];
+  var moviesSportsBasketball = [
+    "Full Court", "Overtime", "The Sixth Man", "Buzzer Beater",
+    "Expansion", "First Season"
+  ];
+  var moviesSportsFootball = [
+    "End Zone", "Fourth and Long", "Gridiron Glory", "Halftime"
+  ];
+
+  if (hasBaseball) {
+    tv.push(pickRandom(tvSportsBaseball));
+    movies.push(pickRandom(moviesSportsBaseball));
+  }
+  if (hasBasketball) {
+    tv.push(pickRandom(tvSportsBasketball));
+    movies.push(pickRandom(moviesSportsBasketball));
+  }
+  if (hasFootball) {
+    tv.push(pickRandom(tvSportsFootball));
+    movies.push(pickRandom(moviesSportsFootball));
+  }
+
+  // Name-specific programming — if the feed mentions players/staff, build a show around them
+  if (feedNames.length > 0) {
+    var featuredName = pickRandom(feedNames);
+    var nameShows = [
+      "The " + featuredName + " Interview",
+      featuredName + ": In Focus",
+      "One-on-One with " + featuredName,
+      featuredName + " — Player Profile",
+      "Film Room with " + featuredName
+    ];
+    tv.push(pickRandom(nameShows));
+  }
+
+  // Sports broadcast
   var sportsShow = "";
   if (sports && sports !== "(none)") {
     sportsShow = "Oakland Sports Tonight";

@@ -1091,18 +1091,6 @@ function applyCityDynamics_(ctx) {
         if (prevNhood.communityEngagement !== undefined) nm.communityEngagement = nm.communityEngagement * (1 - nhMom) + prevNhood.communityEngagement * nhMom;
       }
 
-      // v3.1: Edition coverage neighborhood effects
-      var editionNhoods = S.editionNeighborhoodEffects || {};
-      var edNh = editionNhoods[nhood] || null;
-      if (edNh) {
-        nm.traffic += edNh.traffic || 0;
-        nm.retail += edNh.retail || 0;
-        nm.nightlife += edNh.nightlife || 0;
-        nm.publicSpaces += edNh.publicSpaces || 0;
-        nm.communityEngagement += edNh.communityEngagement || 0;
-        nm.culturalActivity += edNh.culturalActivity || 0;
-      }
-
       // Clamp
       nm.traffic = clampMult(nm.traffic);
       nm.retail = clampMult(nm.retail);
@@ -1265,15 +1253,6 @@ function applyCityDynamics_(ctx) {
     Logger.log('applyCityDynamics_ v3.0: Media feedback applied (sentiment ' +
       (mediaSentiment * 0.04).toFixed(3) + ', crisisSat ' + crisisSat.toFixed(2) +
       ', celebBuzz ' + celebBuzz.toFixed(2) + ')');
-  }
-
-  // ─────────────────────────────────────────────────────────────────────────
-  // EDITION COVERAGE FEEDBACK (v3.1 — published edition affects city)
-  // ─────────────────────────────────────────────────────────────────────────
-  var editionBoost = S.editionSentimentBoost || 0;
-  if (editionBoost !== 0) {
-    finalCity.sentiment += editionBoost;
-    Logger.log('applyCityDynamics_ v3.1: Edition coverage sentiment: ' + editionBoost.toFixed(3));
   }
 
   finalCity.traffic = clampMult(finalCity.traffic);

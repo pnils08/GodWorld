@@ -97,8 +97,6 @@ function finalizeCycleState_(ctx) {
     domainPresence: S.domainPresence || null,
     dominantDomain: S.dominantDomain || null,
 
-    // v1.5: Edition coverage effects for cross-cycle tracking
-    editionCoverageEffects: S.editionCoverageEffects || null
   };
 
   // This is what downstream scripts read next cycle

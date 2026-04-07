@@ -16,7 +16,6 @@ paths:
   - Phase 5 civic: `civicInitiativeEngine.js` (Initiative_Tracker), `updateCivicLedgerFactions.js` (Civic_Ledger), `generateMonthlyCivicSweep.js` (Civic_Sweep)
   - Phase 6 tracking: `arcLifecycleEngine.js`, `processArcLifeCyclev1.js` (Story_Arcs), `hookLifecycleEngine.js` (Hook tracking), `storylineHealthEngine.js`, `updateStorylineStatusv1.2.js` (Storylines), `applyMigrationDrift.js` (Neighborhood_Map), `economicRippleEngine.js` (Population_Stats)
   - Phase 8: `v3NeighborhoodWriter.js`, `v3DomainWriter.js`, `v3ChicagoWriter.js` — tracking sheets
-  - Phase 2: `applyEditionCoverageEffects.js` (Edition_Coverage_Ratings — marks Processed column)
   - Phase 3: `applyDemographicDrift.js` (World_Population), `updateNeighborhoodDemographics.js` (Neighborhood_Demographics), `updateCrimeMetrics.js` (Crime_Metrics)
   - Phase 9: `applyCycleWeightForLatestCycle.js`, `applyCycleWeight.js` — Cycle_Weight tab
   All non-exception direct writes are bugs. See `docs/engine/tech_debt_audits/` for latest scan.

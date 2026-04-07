@@ -1078,6 +1078,19 @@ function applyCityDynamics_(ctx) {
       if (nhCrime >= 2) { nm.nightlife *= 0.90; nm.sentiment -= 0.08; }
       else if (nhCrime >= 1) { nm.nightlife *= 0.96; nm.sentiment -= 0.03; }
 
+      // v3.0: Neighborhood momentum — blend with previous cycle's state
+      var prevNhoodState = prevState.neighborhoodDynamics || {};
+      var prevNhood = prevNhoodState[nhood] || null;
+      if (prevNhood) {
+        var nhMom = 0.3; // 30% carry-forward from last cycle
+        if (prevNhood.sentiment !== undefined) nm.sentiment = nm.sentiment * (1 - nhMom) + prevNhood.sentiment * nhMom;
+        if (prevNhood.nightlife !== undefined) nm.nightlife = nm.nightlife * (1 - nhMom) + prevNhood.nightlife * nhMom;
+        if (prevNhood.retail !== undefined) nm.retail = nm.retail * (1 - nhMom) + prevNhood.retail * nhMom;
+        if (prevNhood.tourism !== undefined) nm.tourism = nm.tourism * (1 - nhMom) + prevNhood.tourism * nhMom;
+        if (prevNhood.publicSpaces !== undefined) nm.publicSpaces = nm.publicSpaces * (1 - nhMom) + prevNhood.publicSpaces * nhMom;
+        if (prevNhood.communityEngagement !== undefined) nm.communityEngagement = nm.communityEngagement * (1 - nhMom) + prevNhood.communityEngagement * nhMom;
+      }
+
       // Clamp
       nm.traffic = clampMult(nm.traffic);
       nm.retail = clampMult(nm.retail);

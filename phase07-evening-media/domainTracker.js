@@ -247,6 +247,35 @@ function domainTracker_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // DOMAIN COOLDOWN (v3.4 — editorial balance from previous cycle)
+  // ═══════════════════════════════════════════════════════════════════════════
+  var prevState = S.previousCycleState || {};
+  var prevDomains = prevState.domainPresence || null;
+  var prevDominant = prevState.dominantDomain || null;
+
+  if (prevDomains && prevDominant && prevDominant !== 'GENERAL') {
+    // Penalize last cycle's dominant domain — prevents same-domain saturation
+    var cooldownPenalty = Math.floor((domain[prevDominant] || 0) * 0.25);
+    if (cooldownPenalty > 0 && domain[prevDominant]) {
+      domain[prevDominant] = Math.max(0, domain[prevDominant] - cooldownPenalty);
+      Logger.log('domainTracker_ v3.4: Cooldown on ' + prevDominant + ' (-' + cooldownPenalty + ')');
+    }
+
+    // Slight boost to underrepresented domains (those below average)
+    var domainKeys = Object.keys(domain);
+    var totalCount = 0;
+    for (var di = 0; di < domainKeys.length; di++) totalCount += domain[domainKeys[di]];
+    var avgCount = domainKeys.length > 0 ? totalCount / domainKeys.length : 0;
+
+    for (var dj = 0; dj < domainKeys.length; dj++) {
+      var dk = domainKeys[dj];
+      if (dk !== prevDominant && domain[dk] < avgCount && prevDomains[dk] && prevDomains[dk] < avgCount) {
+        domain[dk] = (domain[dk] || 0) + 1;
+      }
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // STORE RESULTS
   // ═══════════════════════════════════════════════════════════════════════════
   ctx.summary.domainPresence = domain;

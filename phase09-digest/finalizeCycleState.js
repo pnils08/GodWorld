@@ -88,7 +88,14 @@ function finalizeCycleState_(ctx) {
     season: S.season || "Spring",
 
     // v1.2: Media effects for next cycle's city dynamics feedback
-    mediaEffects: compactMediaEffects_(S.mediaEffects)
+    mediaEffects: compactMediaEffects_(S.mediaEffects),
+
+    // v1.3: Neighborhood dynamics for cross-cycle momentum
+    neighborhoodDynamics: compactNeighborhoodDynamics_(S.neighborhoodDynamics),
+
+    // v1.4: Domain presence for editorial balance cooldowns
+    domainPresence: S.domainPresence || null,
+    dominantDomain: S.dominantDomain || null
   };
 
   // This is what downstream scripts read next cycle
@@ -248,6 +255,30 @@ function savePreviousCycleState_(ctx) {
   } catch (e) {
     Logger.log('savePreviousCycleState_: Failed - ' + e.message);
   }
+}
+
+
+/**
+ * Compact neighborhoodDynamics to core metrics for next cycle's momentum blend.
+ * Keeps sentiment, nightlife, retail, tourism per neighborhood.
+ */
+function compactNeighborhoodDynamics_(nd) {
+  if (!nd) return null;
+  var compact = {};
+  for (var hood in nd) {
+    if (!nd.hasOwnProperty(hood)) continue;
+    var n = nd[hood];
+    if (!n) continue;
+    compact[hood] = {
+      sentiment: n.sentiment || 0,
+      nightlife: n.nightlife || 1,
+      retail: n.retail || 1,
+      tourism: n.tourism || 1,
+      publicSpaces: n.publicSpaces || 1,
+      communityEngagement: n.communityEngagement || 1
+    };
+  }
+  return compact;
 }
 
 

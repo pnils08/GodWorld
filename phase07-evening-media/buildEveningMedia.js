@@ -228,23 +228,6 @@ function buildEveningMedia_(ctx) {
   var creationDayStreaming = "local history documentaries";
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // SPORTS SEASON MEDIA POOLS (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-  var sportsSeasonTV = {
-    "championship": ["Championship Coverage", "Finals Live", "Title Talk", "Glory Bound"],
-    "playoffs": ["Playoff Central", "Postseason Live", "Do or Die"],
-    "post-season": ["Postseason Wrap", "Playoff Preview", "October Baseball"],
-    "late-season": ["Pennant Race", "Stretch Run", "Playoff Push"]
-  };
-
-  var sportsSeasonMovies = {
-    "championship": ["Championship Dreams", "Glory Day", "The Big Win"],
-    "playoffs": ["Underdog Story", "Game Seven", "Clutch"],
-    "post-season": ["October Magic", "Playoff Run"],
-    "late-season": ["Last Chance", "September Push"]
-  };
-
-  // ═══════════════════════════════════════════════════════════════════════════
   // BUILD MEDIA SELECTIONS
   // ═══════════════════════════════════════════════════════════════════════════
 
@@ -288,19 +271,6 @@ function buildEveningMedia_(ctx) {
     movies.push(pickRandom(creationDayMovies));
     streaming = streaming || creationDayStreaming;
     specialProgramming = specialProgramming ? specialProgramming + ", Creation Day" : "Creation Day community";
-  }
-
-  // ───────────────────────────────────────────────────────────────────────────
-  // SPORTS SEASON PROGRAMMING (v2.2)
-  // ───────────────────────────────────────────────────────────────────────────
-  if (sportsSeason !== "off-season" && sportsSeasonTV[sportsSeason]) {
-    tv.push(pickRandom(sportsSeasonTV[sportsSeason]));
-    movies.push(pickRandom(sportsSeasonMovies[sportsSeason]));
-
-    if (sportsSeason === "championship") {
-      tv.push(pickRandom(sportsSeasonTV[sportsSeason])); // Extra coverage
-      streaming = streaming || "sports documentaries marathon";
-    }
   }
 
   // ───────────────────────────────────────────────────────────────────────────
@@ -404,20 +374,11 @@ function buildEveningMedia_(ctx) {
   // ───────────────────────────────────────────────────────────────────────────
   var sportsShow = "";
   if (sports && sports !== "(none)") {
-    if (sports.toLowerCase().indexOf("game") !== -1 || sports.toLowerCase().indexOf("home") !== -1) {
-      sportsShow = "Sports Central: Game Night";
-    } else if (sports.toLowerCase().indexOf("warriors") !== -1) {
-      sportsShow = "Warriors Live";
-    } else if (sports.toLowerCase().indexOf("a's") !== -1) {
-      sportsShow = "A's Tonight";
-    } else {
-      sportsShow = "League Overview Live";
-    }
+    sportsShow = "Oakland Sports Tonight";
 
-    // v2.2: Sports season enhances broadcast
-    if (sportsSeason === "championship") {
+    if (sportsSeason === "championship" || sportsSeason === "world-series") {
       sportsShow = sportsShow + " - Championship Edition";
-    } else if (sportsSeason === "playoffs") {
+    } else if (sportsSeason === "playoffs" || sportsSeason === "post-season") {
       sportsShow = sportsShow + " - Playoff Special";
     }
   }

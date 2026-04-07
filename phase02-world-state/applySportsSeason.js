@@ -1,125 +1,201 @@
 /**
  * ============================================================================
- * applySportsSeason_ v2.4 (canon-safe fallback, ES5)
+ * applySportsSeason_ v3.0 (feed-driven, ES5)
  * ============================================================================
  *
- * Maker override still rules:
- * 1) World_Config override (sportsState_Oakland / sportsState_Chicago)
- * 2) Fallback: SimMonth -> canon-safe phases ONLY (no playoffs/finals/trades)
+ * ALL sports data comes from Oakland_Sports_Feed. No SimMonth derivation.
+ * No invented seasons. If Mike didn't write it in the feed, it doesn't exist.
  *
- * Canon rule:
- * - Engine NEVER invents playoffs/championship/hot-stove. Those require override.
+ * Priority order:
+ * 1) World_Config override (sportsState_Oakland) — Maker still rules
+ * 2) Oakland_Sports_Feed entries for current cycle — SeasonType, TeamsUsed, etc.
+ * 3) No data → "unknown" (never guess)
  *
- * v2.4 Changes:
- * - ES5 safe: const/let -> var, shorthand properties -> explicit
+ * v3.0 Changes:
+ * - Removed deriveCanonSafeSeasonFromMonth_() — no SimMonth dependency
+ * - Removed Chicago from season derivation (phased out after C91)
+ * - applySportsSeason_() now reads Oakland_Sports_Feed directly
+ * - Stores ALL feed entries for current cycle on S.sportsFeedEntries
+ * - S.sportsSeason comes from feed SeasonType, not month mapping
+ * - applySportsFeedTriggers_() Oakland-only
+ *
  * ============================================================================
  */
 
 function applySportsSeason_(ctx) {
   var S = ctx.summary;
-  var m = Number(S.simMonth || 1);
 
   // ─────────────────────────────────────────────────────────────
   // PRIORITY 1: World_Config override (Maker control)
   // ─────────────────────────────────────────────────────────────
   var oaklandOverride =
     ctx.config.sportsState_Oakland || ctx.config.sportsStateOakland || null;
-  var chicagoOverride =
-    ctx.config.sportsState_Chicago || ctx.config.sportsStateChicago || null;
 
-  if (oaklandOverride || chicagoOverride) {
-    S.sportsSeason = oaklandOverride || "off-season";
-    S.sportsSeasonOakland = oaklandOverride || null;
-    S.sportsSeasonChicago = chicagoOverride || null;
+  if (oaklandOverride) {
+    S.sportsSeason = oaklandOverride;
+    S.sportsSeasonOakland = oaklandOverride;
+    S.sportsSeasonChicago = "";
     S.sportsSource = "config-override";
+    S.sportsFeedEntries = [];
 
-    S.activeSports = buildActiveSportsFromOverride_(oaklandOverride, chicagoOverride);
+    S.activeSports = buildActiveSportsFromOverride_(oaklandOverride);
 
-    Logger.log("applySportsSeason_ v2.3: Using World_Config override");
-    Logger.log("  Oakland: " + (oaklandOverride || "not set"));
-    Logger.log("  Chicago: " + (chicagoOverride || "not set"));
+    Logger.log("applySportsSeason_ v3.0: Using World_Config override");
+    Logger.log("  Oakland: " + oaklandOverride);
 
     ctx.summary = S;
     return;
   }
 
   // ─────────────────────────────────────────────────────────────
-  // PRIORITY 2: SimMonth fallback (canon-safe)
-  // - No playoffs/finals/post-season/pennant without override
+  // PRIORITY 2: Read Oakland_Sports_Feed for current cycle
   // ─────────────────────────────────────────────────────────────
-  var out = deriveCanonSafeSeasonFromMonth_(m);
+  var currentCycle = S.cycleId || S.cycle || 0;
+  var entries = readOaklandFeedEntries_(ctx, currentCycle);
 
-  S.sportsSeason = out.oaklandState; // primary
-  S.sportsSeasonOakland = out.oaklandState;
-  S.sportsSeasonChicago = out.chicagoState;
-  S.activeSports = out.activeSports;
-  S.sportsSource = "simmonth-canon-safe";
+  S.sportsFeedEntries = entries;
+
+  if (entries.length > 0) {
+    // SeasonType from last entry (most recent row wins)
+    var lastEntry = entries[entries.length - 1];
+    S.sportsSeason = lastEntry.seasonType || "unknown";
+    S.sportsSeasonOakland = S.sportsSeason;
+    S.activeSports = deriveActiveSportsFromFeed_(entries);
+    S.sportsSource = "oakland-feed";
+
+    Logger.log("applySportsSeason_ v3.0: " + entries.length + " feed entries for cycle " + currentCycle);
+    Logger.log("  Season: " + S.sportsSeason + ", Active: " + S.activeSports.join(", "));
+  } else {
+    S.sportsSeason = "unknown";
+    S.sportsSeasonOakland = "unknown";
+    S.activeSports = [];
+    S.sportsSource = "oakland-feed-empty";
+
+    Logger.log("applySportsSeason_ v3.0: No feed entries for cycle " + currentCycle);
+  }
+
+  S.sportsSeasonChicago = "";
 
   ctx.summary = S;
 }
 
+
 /**
- * Canon-safe month -> states.
- * Oakland (baseball):
- * - Mar: spring-training
- * - Apr-May: early-season
- * - Jun-Aug: mid-season
- * - Sep-Oct: late-season
- * - Nov-Feb: off-season
- *
- * Chicago (NBA-ish awareness but canon-safe):
- * - Oct: preseason
- * - Nov-Jun: regular-season (NO playoffs/finals unless override)
- * - Jul-Sep: off-season
- *
- * activeSports:
- * - Never emits "*-playoffs" or "*-finals" without override.
+ * Read all Oakland_Sports_Feed rows for the given cycle.
+ * Returns array of structured entry objects.
  */
-function deriveCanonSafeSeasonFromMonth_(m) {
-  var oaklandState = "off-season";
-  var chicagoState = "off-season";
-  var activeSports = [];
+function readOaklandFeedEntries_(ctx, currentCycle) {
+  var ss = ctx.ss;
+  if (!ss) return [];
 
-  // Oakland baseball
-  if (m === 3) {
-    oaklandState = "spring-training";
-    activeSports.push("baseball-spring");
-  } else if (m === 4 || m === 5) {
-    oaklandState = "early-season";
-    activeSports.push("baseball");
-  } else if (m >= 6 && m <= 8) {
-    oaklandState = "mid-season";
-    activeSports.push("baseball");
-  } else if (m === 9 || m === 10) {
-    oaklandState = "late-season";
-    activeSports.push("baseball");
-  } else {
-    oaklandState = "off-season";
+  var sheet = ss.getSheetByName('Oakland_Sports_Feed');
+  if (!sheet) {
+    Logger.log('readOaklandFeedEntries_: Oakland_Sports_Feed not found');
+    return [];
   }
 
-  // Chicago basketball (canon-safe)
-  if (m === 10) {
-    chicagoState = "preseason";
-    activeSports.push("basketball-preseason");
-  } else if (m >= 11 || m <= 6) {
-    chicagoState = "regular-season";
-    activeSports.push("basketball");
-  } else {
-    chicagoState = "off-season";
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) return [];
+
+  var headers = data[0];
+
+  // Find column indices by header name
+  var cycleCol = findColumnIndex_(headers, ['Cycle', 'cycle']);
+  var seasonTypeCol = findColumnIndex_(headers, ['SeasonType', 'seasontype']);
+  var eventTypeCol = findColumnIndex_(headers, ['EventType', 'eventtype']);
+  var teamsCol = findColumnIndex_(headers, ['TeamsUsed', 'teamsused', 'Team', 'team']);
+  var namesCol = findColumnIndex_(headers, ['NamesUsed', 'namesused']);
+  var notesCol = findColumnIndex_(headers, ['Notes', 'notes']);
+  var statsCol = findColumnIndex_(headers, ['Stats', 'stats']);
+  var recordCol = findColumnIndex_(headers, ['Team Record', 'teamrecord', 'record']);
+  var storyAngleCol = findColumnIndex_(headers, ['StoryAngle', 'storyangle']);
+  var playerMoodCol = findColumnIndex_(headers, ['PlayerMood', 'playermood']);
+  var triggerCol = findColumnIndex_(headers, ['EventTrigger', 'eventtrigger', 'trigger']);
+  var neighborhoodCol = findColumnIndex_(headers, ['HomeNeighborhood', 'homeneighborhood', 'neighborhood']);
+  var streakCol = findColumnIndex_(headers, ['Streak', 'streak']);
+  var fanSentimentCol = findColumnIndex_(headers, ['FanSentiment', 'fansentiment']);
+  var franchiseCol = findColumnIndex_(headers, ['FranchiseStability', 'franchisestability']);
+  var economicCol = findColumnIndex_(headers, ['EconomicFootprint', 'economicfootprint']);
+  var communityCol = findColumnIndex_(headers, ['CommunityInvestment', 'communityinvestment']);
+  var mediaProfileCol = findColumnIndex_(headers, ['MediaProfile', 'mediaprofile']);
+
+  var entries = [];
+
+  for (var i = 1; i < data.length; i++) {
+    var row = data[i];
+    var cycle = cycleCol !== -1 ? parseInt(row[cycleCol], 10) : 0;
+    if (isNaN(cycle) || cycle !== currentCycle) continue;
+
+    entries.push({
+      cycle: cycle,
+      seasonType: getColVal_(row, seasonTypeCol),
+      eventType: getColVal_(row, eventTypeCol),
+      teamsUsed: getColVal_(row, teamsCol),
+      namesUsed: getColVal_(row, namesCol),
+      notes: getColVal_(row, notesCol),
+      stats: getColVal_(row, statsCol),
+      teamRecord: getColVal_(row, recordCol),
+      storyAngle: getColVal_(row, storyAngleCol),
+      playerMood: getColVal_(row, playerMoodCol),
+      eventTrigger: getColVal_(row, triggerCol),
+      homeNeighborhood: getColVal_(row, neighborhoodCol),
+      streak: getColVal_(row, streakCol),
+      fanSentiment: getColVal_(row, fanSentimentCol),
+      franchiseStability: getColVal_(row, franchiseCol),
+      economicFootprint: getColVal_(row, economicCol),
+      communityInvestment: getColVal_(row, communityCol),
+      mediaProfile: getColVal_(row, mediaProfileCol)
+    });
   }
 
-  // Default if somehow empty
-  if (activeSports.length === 0) activeSports.push("off-season");
-
-  return { oaklandState: oaklandState, chicagoState: chicagoState, activeSports: activeSports };
+  return entries;
 }
 
+
 /**
- * Build activeSports array from override values (Maker canon).
- * NOTE: This is intentionally allowed to include playoffs/finals/championship,
- * because override is your injected canon.
+ * Safe column value extraction. Returns trimmed string or empty string.
  */
-function buildActiveSportsFromOverride_(oaklandState, chicagoState) {
+function getColVal_(row, colIdx) {
+  if (colIdx === -1) return '';
+  return (row[colIdx] || '').toString().trim();
+}
+
+
+/**
+ * Derive activeSports array from TeamsUsed across all feed entries.
+ */
+function deriveActiveSportsFromFeed_(entries) {
+  var seen = {};
+  var active = [];
+
+  for (var i = 0; i < entries.length; i++) {
+    var team = (entries[i].teamsUsed || '').toLowerCase();
+    if (!team) continue;
+
+    if ((team.indexOf("a's") !== -1 || team === "as" || team === "oakland a's") && !seen.baseball) {
+      seen.baseball = true;
+      active.push("baseball");
+    }
+    if ((team === "nba" || team.indexOf("nba") !== -1) && !seen.basketball) {
+      seen.basketball = true;
+      active.push("basketball");
+    }
+    if ((team === "nfl" || team.indexOf("nfl") !== -1) && !seen.football) {
+      seen.football = true;
+      active.push("football");
+    }
+  }
+
+  return active;
+}
+
+
+/**
+ * Build activeSports array from override value (Maker canon).
+ * Intentionally allowed to include playoffs/finals/championship,
+ * because override is injected canon.
+ */
+function buildActiveSportsFromOverride_(oaklandState) {
   var active = [];
 
   if (oaklandState) {
@@ -134,35 +210,21 @@ function buildActiveSportsFromOverride_(oaklandState, chicagoState) {
     else if (os === "off-season") active.push("baseball-offseason");
   }
 
-  if (chicagoState) {
-    var cs = chicagoState.toLowerCase();
-
-    if (cs === "preseason") active.push("basketball-preseason");
-    else if (cs === "regular-season") active.push("basketball");
-    else if (cs === "playoffs") active.push("basketball-playoffs");
-    else if (cs === "championship" || cs === "finals") active.push("basketball-finals");
-    else if (cs === "off-season") active.push("basketball-offseason");
-  }
-
   if (active.length === 0) active.push("off-season");
   return active;
 }
 
+
 /**
  * ============================================================================
- * applySportsFeedTriggers_ v2.0
+ * applySportsFeedTriggers_ v3.0
  * ============================================================================
  *
- * Reads Oakland_Sports_Feed and Chicago_Sports_Feed (your manual game logs)
- * to calculate city sentiment from team performance.
+ * Reads Oakland_Sports_Feed (your manual game logs) to calculate city
+ * sentiment from team performance.
  *
- * Replaces v1.1 which read from the single Sports_Feed sheet (now dead).
- * Same entry you log for journalism now also drives city mood.
- *
- * How it works:
- *   Scans all feed rows up to the current cycle, builds a snapshot of the
- *   latest state per team (most recent record, season, streak, trigger).
- *   Then calculates sentiment and neighborhood effects from that snapshot.
+ * v3.0 Changes:
+ * - Oakland_Sports_Feed only (Chicago removed — phased out after C91)
  *
  * Feed columns used (by header name, not position):
  *   Cycle           - filters entries to current/past cycles
@@ -205,18 +267,7 @@ function applySportsFeedTriggers_(ctx) {
     allTriggers = allTriggers.concat(oakResult.triggers);
     mergeNeighborhoodEffects_(neighborhoodEffects, oakResult.neighborhoodEffects);
   } else {
-    Logger.log('applySportsFeedTriggers_ v2.0: Oakland_Sports_Feed not found');
-  }
-
-  // Process Chicago_Sports_Feed
-  var chiSheet = ss.getSheetByName('Chicago_Sports_Feed');
-  if (chiSheet) {
-    var chiResult = processFeedSheet_(chiSheet, currentCycle);
-    totalSentiment += chiResult.sentiment;
-    allTriggers = allTriggers.concat(chiResult.triggers);
-    mergeNeighborhoodEffects_(neighborhoodEffects, chiResult.neighborhoodEffects);
-  } else {
-    Logger.log('applySportsFeedTriggers_ v2.0: Chicago_Sports_Feed not found');
+    Logger.log('applySportsFeedTriggers_ v3.0: Oakland_Sports_Feed not found');
   }
 
   // Apply outputs
@@ -227,7 +278,7 @@ function applySportsFeedTriggers_(ctx) {
   // Apply sentiment to city mood if significant
   if (totalSentiment !== 0) {
     S.sentiment = (S.sentiment || 0) + totalSentiment;
-    Logger.log('applySportsFeedTriggers_ v2.0: Total sentiment adjustment: ' + totalSentiment.toFixed(3));
+    Logger.log('applySportsFeedTriggers_ v3.0: Total sentiment adjustment: ' + totalSentiment.toFixed(3));
   }
 
   ctx.summary = S;
@@ -457,29 +508,20 @@ function findColumnIndex_(headers, possibleNames) {
  * SPORTS STATE VALUES
  * ============================================================================
  *
- * World_Config keys (set when inputting game data):
- *
- * sportsState_Oakland:
+ * S.sportsSeason values (from Oakland_Sports_Feed SeasonType or World_Config):
  * - off-season       : No games
  * - spring-training  : Practice games, roster cuts
- * - early-season     : First month of regular season
+ * - early-season     : First stretch of regular season
  * - mid-season       : Core regular season
- * - late-season      : Playoff push
- * - playoffs         : Postseason active (REQUIRES OVERRIDE)
- * - championship     : World Series (REQUIRES OVERRIDE)
+ * - late-season      : End of regular season
+ * - playoffs         : Postseason active
+ * - championship     : Finals / World Series
+ * - unknown          : No feed entries for this cycle
  *
- * sportsState_Chicago:
- * - off-season       : No games
- * - preseason        : Practice/exhibition
- * - regular-season   : NBA regular season
- * - playoffs         : Postseason active (REQUIRES OVERRIDE)
- * - championship     : NBA Finals (REQUIRES OVERRIDE)
- *
- * ============================================================================
- *
- * CANON-SAFE RULE:
- * Engine fallback NEVER emits playoffs/finals/championship/pennant.
- * Those states require Maker override via World_Config.
+ * TeamsUsed values (Oakland_Sports_Feed):
+ * - A's              : Oakland A's baseball
+ * - NBA              : Oakland NBA team (future)
+ * - NFL              : Oakland NFL team (future)
  *
  * ============================================================================
  */

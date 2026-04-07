@@ -46,14 +46,15 @@
   Writes: S.seasonal (weight map: weatherWeight, civicWeight, eventWeight, nightlifeWeight, schoolWeight, sportsWeight, economicWeight, mediaWeight, culturalWeight, communityWeight)
 
 ### applySportsSeason.js
-- **applySportsSeason_(ctx)**
-  Reads: ctx.config.{sportsState_Oakland, sportsState_Chicago}, S.simMonth
-  Writes: S.{sportsSeason, sportsSeasonOakland, sportsSeasonChicago, activeSports, sportsSource}
+- **applySportsSeason_(ctx)** (v3.0 — feed-driven)
+  Reads: ctx.config.{sportsState_Oakland}, S.{cycleId, cycle}
+  Writes: S.{sportsSeason, sportsSeasonOakland, sportsSeasonChicago, activeSports, sportsSource, sportsFeedEntries}
+  Sheets: Oakland_Sports_Feed
 
-- **applySportsFeedTriggers_(ctx)**
-  Reads: S.{sportsSeason, cycleOfYear}
-  Writes: S.{sportsEvents, sportsContext}
-  Sheets: Sports_Feed
+- **applySportsFeedTriggers_(ctx)** (v3.0 — Oakland only)
+  Reads: S.{cycle}
+  Writes: S.{sportsSentimentBoost, sportsEventTriggers, sportsNeighborhoodEffects}
+  Sheets: Oakland_Sports_Feed
 
 ### applyWeatherModel.js
 - **applyWeatherModel_(ctx)**
@@ -380,10 +381,9 @@
   Writes: S.{nightlife, nightlifeVolume}
 
 ### sportsStreaming.js
-- **buildEveningSportsAndStreaming_(ctx)**
-  Reads: S.{sportsSeason, simMonth, economicMood, weather}
-  Writes: S.{eveningSports, eveningSportsDetails, streamingTrend}
-  Sheets: Sports_Feed
+- **buildEveningSportsAndStreaming_(ctx)** (v3.0 — feed-driven)
+  Reads: S.{sportsFeedEntries, sportsSeason, worldEvents, weather, weatherMood, cityDynamics, economicMood, nightlifeVolume, holiday, holidayPriority, isFirstFriday, isCreationDay}
+  Writes: S.{eveningSports, eveningSportsDetails, streamingTrend, eveningSportsCalendarContext}
 
 ### buildEveningFood.js
 - **buildEveningFood_(ctx)**

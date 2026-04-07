@@ -64,7 +64,7 @@ GodWorld uses 40+ Google Sheets ledgers across one spreadsheet. Google Sheets ha
 | Media_Briefing | 6 | 7 | Overwrite | Rebuilt each cycle |
 | Media_Intake | 58 | 7 | Append (batch) | Batch from editions, low cycle rate |
 | MediaRoom_Paste | 1 | 1 | Overwrite | Paste buffer, always 1 row |
-| Sports_Feed | 3 | 16 | Update | 2-3 teams, in-place updates |
+| Sports_Feed | 3 | 16 | DEAD | Replaced by Oakland_Sports_Feed. No engine reads. |
 | Sports_Calendar | 13 | 3 | Static | Reference table |
 | Simulation_Calendar | 2 | 6 | Update | Date config, overwritten |
 | World_Config | 12 | 3 | Static | Engine config key-value pairs |
@@ -82,7 +82,7 @@ GodWorld uses 40+ Google Sheets ledgers across one spreadsheet. Google Sheets ha
 | Household_Ledger | ~50 | ~12 | Append (+2-5) | New (Tier-5), households grow slowly |
 | Neighborhood_Demographics | ~18 | ~10 | Update | Per-neighborhood stats, in-place |
 | Oakland_Sports_Feed | ~3 | ~10 | Update | Team feeds, in-place |
-| Chicago_Sports_Feed | ~3 | ~10 | Update | Team feeds, in-place |
+| Chicago_Sports_Feed | ~3 | ~10 | LEGACY | Engine no longer reads (phased out S136) |
 | Engine_Errors | ~10 | ~5 | Append (sporadic) | Error log, only on failures |
 
 ### ORPHANED — Safe to Remove

@@ -27,13 +27,13 @@
 | Step | Function | File | Purpose |
 |------|----------|------|---------|
 | 2-SeasonalWeights | `applySeasonalWeights_()` | phase02-world-state/applySeasonWeights.js | Season-based multipliers for event domains |
-| 2-SportsSeason | `applySportsSeason_()` | phase02-world-state/applySportsSeason.js | Set sportsSeason (off-season/regular/playoffs/championship) |
-| 2-SportsFeed | `applySportsFeedTriggers_()` | godWorldEngine2.js (v2.14) | Read Sports_Feed sheet for game results |
+| 2-SportsSeason | `applySportsSeason_()` | phase02-world-state/applySportsSeason.js | Read Oakland_Sports_Feed, set sportsSeason from SeasonType, store sportsFeedEntries (v3.0) |
+| 2-SportsFeed | `applySportsFeedTriggers_()` | phase02-world-state/applySportsSeason.js | Oakland feed → sentiment, triggers, neighborhood effects (v3.0) |
 | 2-Weather | `applyWeatherModel_()` | phase02-world-state/applyWeatherModel.js | Temperature, precipitation, visibility, wind, fronts |
 | 2-CityDynamics | `applyCityDynamics_()` | phase02-world-state/applyCityDynamics.js | Sentiment, cultural activity, community engagement, nightlife |
 | 2-Transit | `updateTransitMetrics_Phase2_()` | phase02-world-state/updateTransitMetrics.js | Transit ridership, delays, construction status |
 
-**ctx.summary after Phase 2:** adds `weather`, `sportsSeason`, `sportsFeed`, `cityDynamics`, `seasonalWeights`, `transitMetrics`
+**ctx.summary after Phase 2:** adds `weather`, `sportsSeason`, `sportsFeedEntries`, `activeSports`, `cityDynamics`, `seasonalWeights`, `transitMetrics`
 
 ---
 
@@ -166,7 +166,7 @@
 |------|----------|------|---------|
 | 7-CityEvents | `buildCityEvents_()` | phase04-events/buildCityEvents.js | City-level event compilation. **SETS** `S.cityEvents` |
 | 7-Nightlife | `buildNightlife_()` | phase07-evening-media/buildNightLife.js | Nightlife scene generation. **SETS** `S.nightlife`, `S.nightlifeVolume` |
-| 7-Sports | `buildEveningSportsAndStreaming_()` | phase07-evening-media/sportsStreaming.js | Sports broadcasts, streaming. **SETS** `S.eveningSports` |
+| 7-Sports | `buildEveningSportsAndStreaming_()` | phase07-evening-media/sportsStreaming.js | Feed-driven S.eveningSports from sportsFeedEntries + streaming trends (v3.0) |
 | 7-Food | `buildEveningFood_()` | phase07-evening-media/buildEveningFood.js | Restaurant/food scene events. Reads `S.nightlifeVolume` |
 | 7-Famous | `buildEveningFamous_()` | phase07-evening-media/buildEveningFamous.js | Celebrity/famous citizen sightings. Reads `S.eveningSports` |
 | 7-EveningMedia | `buildEveningMedia_()` | phase07-evening-media/buildEveningMedia.js | TV, movies, streaming selection. Reads `S.eveningSports` |

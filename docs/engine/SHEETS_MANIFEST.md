@@ -15,7 +15,7 @@
 |-----|-----------|---------|-------------------|
 | Dashboard | 0 | 0 |  |
 | World_Population | 1 | 22 | timestamp, totalPopulation, illnessRate, employmentRate, migration, economy, cycle, cycleWeight, ...(22 total) |
-| Sports_Feed | 2 | 18 | Team, League, Record, Wins, Losses, SeasonState, PlayoffRound, PlayoffStatus, ...(18 total) |
+| Sports_Feed | 2 | 18 | DEAD — replaced by Oakland_Sports_Feed. No engine reads. |
 | Handoff_Output | 4 | 3 | Timestamp, Cycle, HandoffText |
 | Cycle_Packet | 40 | 3 | Timestamp, Cycle, PacketText |
 | Riley_Digest | 81 | 28 | Timestamp, Cycle, IntakeProcessed, CitizensAged, EventsGenerated, Issues, CycleWeight, CycleWeightReason, ...(28 total) |
@@ -23,8 +23,8 @@
 | Media_Briefing | 13 | 7 | Timestamp, Cycle, Holiday, HolidayPriority, SportsSeason, ElectionWindow, Briefing |
 | Initiative_Tracker | 6 | 24 | InitiativeID, Name, Type, Status, Budget, VoteRequirement, VoteCycle, Projection, ...(24 total) |
 | Civic_Office_Ledger | 35 | 19 | OfficeId, Title, Type, District, Holder, PopId, TermStart, TermEnd, ...(19 total) |
-| Oakland_Sports_Feed | 52 | 15 | Cycle, SeasonType, EventType, TeamsUsed, NamesUsed, Notes, Stats, Team Record, ...(15 total) |
-| Chicago_Sports_Feed | 57 | 15 | Cycle, SeasonType, EventType, TeamsUsed, NamesUsed, Notes, Stats, Team Record, ...(15 total) |
+| Oakland_Sports_Feed | 52 | 20 | Cycle, SeasonType, EventType, TeamsUsed, NamesUsed, Notes, Stats, Team Record, VideoGameDate, VideoGame, StoryAngle, PlayerMood, EventTrigger, HomeNeighborhood, Streak, FanSentiment, FranchiseStability, EconomicFootprint, CommunityInvestment, MediaProfile |
+| Chicago_Sports_Feed | 57 | 15 | LEGACY after C91 — engine no longer reads. Historical data only. |
 | Chicago_Feed | 48 | 22 | Timestamp, Cycle, GodWorldYear, CycleOfYear, SimMonth, CycleInMonth, Season, Holiday, ...(22 total) |
 | Health_Cause_Queue | 3 | 11 | POPID, Name, Status, StatusStartCycle, CyclesSick, Neighborhood, Tier, Age, ...(11 total) |
 | Press_Drafts | 137 | 20 | Timestamp, Cycle, Reporter, StoryType, SignalSource, SummaryPrompt, DraftText, Status, ...(20 total) |

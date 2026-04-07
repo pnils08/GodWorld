@@ -88,7 +88,7 @@ Game data from Mike's MLB The Show / NBA 2K sessions.
 |-----|------|---------|----------|---------|
 | **Oakland_Sports_Feed** | 118 | ENGINE, SCRIPT | MIKE | A's game results, transactions |
 | **Chicago_Feed** | 53 | ENGINE | MIKE | Chicago city events |
-| **Chicago_Sports_Feed** | 72 | ENGINE, SCRIPT | MIKE | Bulls game results |
+| **Chicago_Sports_Feed** | 72 | LEGACY | MIKE | Bulls game results — engine no longer reads (phased out S136, after C91) |
 
 ---
 

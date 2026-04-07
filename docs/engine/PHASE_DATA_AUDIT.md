@@ -40,8 +40,8 @@ Purpose: Map the gap between what the engine produces and what the desk agents s
 | S.eveningMedia | object | TV, movies, streaming, sports broadcasts, media influence, special programming |
 | S.famousSightings | array | Celebrity sighting objects with locations, context, neighborhood focus |
 | S.famousSightingsContext | object | Sighting intensity, neighborhood focus, weather influence, civic mood effect |
-| S.eveningSports | string | Featured evening sport/game or "(none)" |
-| S.eveningSportsDetails | object | Detailed sports event data |
+| S.eveningSports | string | Feed-derived: StoryAngle from Oakland_Sports_Feed entries joined with " | ", or "(none)" |
+| S.eveningSportsDetails | object | Last feed entry object for current cycle, or null |
 | S.streamingTrend | string | Trending sports streaming topic |
 | S.textureTriggers | array | Texture triggers with domain, neighborhood, textureKey, reason, intensity, signalChain |
 | S.textureCalendarContext | object | Calendar state + trigger count |
@@ -144,11 +144,12 @@ Phase 1 is mostly preserved. Calendar data and population reach the newsroom. Th
 | S.weatherEventPools | object | Available weather event types |
 | S.weatherSummary | object | { type, temp, impact, comfort, mood, energy, social, streak, streakType, alerts, perfectWeather } |
 | S.previousSeason | string | Last cycle's season |
-| S.sportsSeason | string | "off-season" / "pre-season" / "regular" / "late-season" / "playoffs" / "championship" |
-| S.sportsSeasonOakland | string | Oakland-specific sports state |
-| S.sportsSeasonChicago | string | Chicago-specific sports state |
-| S.activeSports | object | Which sports are active |
-| S.sportsSource | string | How sports state was determined |
+| S.sportsSeason | string | From Oakland_Sports_Feed SeasonType or World_Config override. "unknown" if no feed entries. |
+| S.sportsSeasonOakland | string | Same as sportsSeason (Oakland-only since v3.0) |
+| S.sportsSeasonChicago | string | Empty string (Chicago phased out after C91) |
+| S.activeSports | array | Derived from TeamsUsed in feed: "baseball", "basketball", "football" |
+| S.sportsSource | string | "config-override", "oakland-feed", or "oakland-feed-empty" |
+| S.sportsFeedEntries | array | All Oakland_Sports_Feed rows for current cycle — {cycle, seasonType, eventType, teamsUsed, storyAngle, notes, ...} |
 | S.sportsSentimentBoost | number | City sentiment shift from sports results |
 | S.sportsEventTriggers | array | Sports events that trigger city effects |
 | S.sportsNeighborhoodEffects | object | Per-neighborhood effects from sports (traffic, crowd) |

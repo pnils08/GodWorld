@@ -278,29 +278,20 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 **Priority:** MEDIUM-HIGH — raised from MEDIUM after HyperAgents research. Requires 3-5 more editions for data. Phase 26.2.1 (directive tracking) is the prerequisite — start there.
 
-### Phase 29: Codebase Knowledge Graph (Corbell) — NOT STARTED
+### Phase 29: Codebase Knowledge Graph — REPLACED BY GRAPHIFY (S137b)
 
-**Goal:** Give Mags and all agents a queryable map of the entire GodWorld codebase — every function, every dependency, every call path — accessible as MCP tools without reading files.
+**Corbell (original plan) was blocked by disk/dependency issues.** Replaced by Graphify (github.com/safishamsi/graphify) — installed and tested S137b.
 
-**Source:** Corbell (github.com/Corbell-AI/Corbell). Open-source CLI, Apache 2.0. See `docs/RESEARCH.md` S115 Corbell entry.
+**What Graphify does:** AST extraction via tree-sitter (19 languages), community detection via Leiden clustering, interactive HTML visualization, persistent JSON graph, CLI query mode (BFS/DFS traversal).
 
-**Why priority HIGH:** Every session starts with context cost — reading docs, tracing dependencies, understanding how scripts connect. Corbell replaces that with MCP queries against a persistent local knowledge graph. After compaction, the graph survives on disk. Extends and replaces `/stub-engine`. Enables Phase 21 local models to understand codebase structure.
+**Current state:** Installed. Full engine indexed — 1,152 nodes, 1,763 edges, 162 communities across 162 JS files. `graphify-out/graph.json` persists on disk. `/graphify` skill available. `graphify query` CLI works for dependency questions.
 
-**Buildable pieces:**
+**Tested:** Phase 2 world-state (80 nodes, 106 edges, 11 communities) and full engine. God nodes identified: `compileHandoff` (40 nodes), `mediaRoomIntake` (33), `civicInitiativeEngine` (25).
 
-1. **29.1 Install and index.** `pip install "corbell[anthropic]"`, `corbell init`, `corbell graph build --methods`, `corbell embeddings build`. Index all 153 engine files, 11+ scripts, lib/, agent configs. **BLOCKED S115:** Not on PyPI yet (install from GitHub source). Sentence-transformers + PyTorch dependency requires ~3GB disk — doesn't fit on current 2GB droplet (2.7GB free, 89% full). **Unblock by:** (a) disk cleanup or droplet resize, OR (b) install graph-only without embeddings if Corbell supports `--no-deps` mode.
-
-2. **29.2 MCP server integration.** Add Corbell MCP config to Claude Code settings. Verify the four tools work in-session: `graph_query`, `get_architecture_context`, `code_search`, `list_services`. Test: "What calls sheets.js?" "Which scripts write to Storyline_Tracker?" "What does buildDeskPackets.js depend on?"
-
-3. **29.3 Graph visualization.** Corbell ships a D3.js force-directed graph UI served via Python HTTP. Test on our server — could integrate with dashboard or run standalone. Visual map of the whole codebase. **Low priority — nice to have.**
-
-4. **29.4 Rebuild hook.** Auto-rebuild graph after code changes. Either a post-commit hook or a cron job. Keeps the graph fresh as the codebase evolves. **Build after 29.1-29.2 are working.**
-
-5. **29.5 Agent access.** Expose Corbell MCP tools to desk agents and local models (Phase 21). Agents can query code structure during writing — "what initiative agents exist?" "what does the voice pipeline do?" — without reading files into their context. **Build when Phase 21 is active.**
-
-**Stack fit:** SQLite (same as claude-mem), local embeddings (MiniLM-L6-v2, ~80MB), MCP server (Claude Code native), Python (already on server). No new infrastructure.
-
-**Priority: HIGH — low effort install, high daily value. Build in next Build/Deploy session.**
+**Remaining:**
+- **29.2 Dashboard integration:** Serve `graph.html` through dashboard so Mike can see it. LOW.
+- **29.4 Git hook:** `graphify hook install` for auto-rebuild after commits. MEDIUM.
+- **29.5 MCP server:** `graphify --mcp` exposes query tools to agents. Build when Phase 21 is active.
 
 ### Phase 28: Computer Use Integration — NOT STARTED
 

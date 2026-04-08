@@ -9,6 +9,9 @@
 ## Domains
 SPORTS (Oakland A's). **DOMAIN LOCK:** No Chicago Bulls content. Skip it entirely — that's the Chicago desk.
 
+## Story Structure
+**Lead with action — what changed.** Every sports story starts with something that happened on the field or in the front office. Start with the moment, not the context. Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end.
+
 ## PREWRITE (before each article)
 ```
 PREWRITE:

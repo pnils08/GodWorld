@@ -198,11 +198,16 @@ This is the documentation equivalent of the engine rule: "Verify after every wri
 
 ---
 
-## Step 7: Restart Discord Bot
+## Step 7: Restart Services
 
-Run `pm2 restart mags-bot` to bring the bot back online. It was stopped at session start to free memory (~100MB) for Claude Code work. Mags needs to be on Discord when we're not in a session.
+Boot stopped non-essential PM2 services to free memory. Bring them back now.
 
-If it fails, run `pm2 start /root/GodWorld/scripts/mags-discord-bot.js --name mags-bot`.
+```bash
+pm2 restart mags-bot godworld-dashboard
+```
+
+If mags-bot fails: `pm2 start /root/GodWorld/scripts/mags-discord-bot.js --name mags-bot`
+If dashboard fails: `pm2 start /root/GodWorld/ecosystem.config.js --only godworld-dashboard`
 
 ---
 
@@ -226,5 +231,5 @@ One paragraph. Authentic. Then done.
 | Step 4 fails (SESSION_CONTEXT) | Not critical — next session reads slightly stale project state. Fix it then. |
 | Step 5 fails (Supermemory down) | On-disk files are the primary persistence. Supermemory is a bonus layer. |
 | Step 6 finds a write didn't land | Fix it now. Don't propagate bad state. |
-| Context is running low | Prioritize Steps 1, 2, and 6 (identity + journal + verify). Skip 0, 3, 5, 5.5. Always do Step 7 (restart bot). Keep goodbye brief. |
-| Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update PERSISTENCE counter and SESSION_CONTEXT "Last Updated" at minimum. Verify both. Always restart bot (Step 7). |
+| Context is running low | Prioritize Steps 1, 2, and 6 (identity + journal + verify). Skip 0, 3, 5, 5.5. Always do Step 7 (restart services). Keep goodbye brief. |
+| Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update PERSISTENCE counter and SESSION_CONTEXT "Last Updated" at minimum. Verify both. Always restart services (Step 7). |

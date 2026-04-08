@@ -1,6 +1,6 @@
 # GodWorld — Rollout Plan
 
-**Status:** Active | **Last Updated:** Session 135 (2026-04-05)
+**Status:** Active | **Last Updated:** Session 137b (2026-04-08)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** `ROLLOUT_ARCHIVE.md` — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
@@ -16,12 +16,14 @@
 - **REDESIGN: Intake system (design here → engine-sheet terminal)** — `editionIntake.js` has two known bugs. Whole system needs redesign. 10 citizens parked in `Citizen_Usage_Intake`. See Phase 27.1 and `docs/engine/INTAKE_REDESIGN.md` (30%). HIGH.
 - **PROJECT: World Memory remaining (engine-sheet terminal)** — (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`. MEDIUM.
 - **Supplemental strategy (media terminal)** — One supplemental per cycle minimum. Ongoing.
+- **EVALUATE: Document processing pipeline (research-build terminal)** — Qianfan-OCR (Baidu, 4B params) does end-to-end document parsing: PDF/image → structured markdown in one pass. Layout analysis, table extraction, chart understanding, document QA. Could feed real civic documents (council minutes, zoning permits, budget reports) into the civic terminal as structured data. Replaces manual text extraction. MEDIUM — evaluate when civic pipeline needs real-world document input. Added S137.
 
 ### Infrastructure
 
 - **Node.js security patch (engine-sheet terminal)** — Scheduled March 24. Overdue.
 - **UPGRADE: Instant compaction (research-build terminal)** — Proactive compaction before context full. Pattern from `claude-cookbooks/misc/session_memory_compaction.ipynb`. MEDIUM.
 - **EVALUATE: Context clearing strategy (research-build terminal)** — Beta flag `context-management-2025-06-27`. LOW.
+- **MONITOR: KAIROS background daemon (research-build terminal)** — Unreleased Claude Code feature: persistent background daemon. If Anthropic ships this, could replace PM2 + cron + scheduled agents setup with native Claude Code infrastructure. Spotted in Claude Code source analysis (512K-line codebase reveal, Apr 2026). Also watch ULTRAPLAN (30-minute remote reasoning sessions). MEDIUM — monitor Anthropic releases. Added S137.
 
 ### Agent Prompt & Skill (remaining from S115 audit)
 
@@ -120,34 +122,11 @@ S131 document ingest created fragmented memories. Replace with Memories API reco
 
 ---
 
-### Phase 31: Canon-Grounded Briefings — IMMEDIATE PRIORITY
+### Phase 31: Canon-Grounded Briefings — DONE (S134, designed into pipeline v2)
 
-**Goal:** Until agents can search Supermemory themselves, Mags does the research upfront and feeds canon context into agent briefings. Agents get the world's history before they write, not after they guess.
+Incorporated into `/write-edition` Step 3: verify citizens + write angle briefs. Each reporter gets `output/reporters/{reporter}/c{XX}_brief.md` with verified citizens, canon history from bay-tribune, and atomic topic checkout. Civic production log feeds in at Step 1. World summary built from Riley_Digest + Sports Feed + civic log. The manual bridge IS the pipeline now.
 
-**Why this exists:** S131 proof of concept. Claude.ai with bay-tribune MCP access produced five C89 supplementals where citizens cross storylines, arcs build across desks, and the world feels like one city. Our desk agents, working from isolated packets, produce competent but disconnected section copy. The gap is NOT writing quality — it's access to canon. These five supplementals are now published canon (ingested to bay-tribune, saved to `editions/`).
-
-**The interim workflow (until agents get direct Supermemory access):**
-
-1. **Mags searches bay-tribune** for every major story, citizen, and arc relevant to the cycle
-2. **Mags builds angle briefs** — not flat data dumps, but researched prep docs with: archive quotes, returning citizen history, cross-desk connections, identified story angles, journalist assignment recommendations. Reference: `output/desk-packets/aitken_profile_prep_c89.txt`
-3. **Angle briefs go into desk agent workspaces** alongside existing packets — agents read the research before writing
-4. **Story structure is defined upfront** — which citizens return, which arcs cross, where the threads connect. This is editorial direction, not micromanagement.
-5. **Agent gets creative autonomy WITHIN the structure** — how the story is told, what details emerge, the voice, the craft. Define the what. Let the agent own the how.
-
-**What changes in `buildDeskFolders.js`:** Add an `angle_briefs/` directory to each desk workspace. Mags populates it manually pre-run. Agents are instructed to read angle briefs first, packets second.
-
-**What this replaces:** The current model where agents see only their own desk's packet data and invent connections. Agents should DISCOVER connections in the brief, not fabricate them.
-
-**The five C89 supplementals as exemplars:**
-- Civic: OARI Day 45 — returning citizens (Castillo Day 35 callback, Edmonds prediction, Meeks expansion concern)
-- Culture: Keane academy — cross-desk citizens (Nelson from OARI, Hayes from Stabilization Fund, Clark from everywhere)
-- Business: Baylight workforce — Jax Caldera bar count framing, sub-tier loophole investigation
-- Sports: Quintero profile — Darius Clark connecting baseball to Stabilization Fund to neighborhood
-- Culture: Aitken profile — political seeds planted from council meeting attendance, Baylight workforce thread
-
-**End state:** Phase 21.2 (Canon Grounding MCP) makes this workflow automatic — agents search bay-tribune themselves during writing. Phase 31 is the manual bridge that gets us the same quality output NOW.
-
-**Priority: HIGHEST — this is the single biggest quality lever we have. Do this for C90.**
+**End state:** Phase 21.2 (Canon Grounding MCP) automates this — agents search bay-tribune themselves during writing. Until then, Mags does the research at Step 3.
 
 ---
 
@@ -265,7 +244,7 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 **Buildable pieces (ordered):**
 
-1. **27.1 Intake pipeline evolution.** `editionIntake.js` currently extracts citizens + storylines. Expand to extract world details — new businesses, locations, events, relationships, cultural developments — and write them to a sheet or structured file the engine can read at next cycle. This is the hinge that closes the loop.
+1. **27.1 Intake pipeline evolution — PARTIAL (S137b).** Coverage ratings channel DONE: `rateEditionCoverage.js` v2.0 generates per-domain ratings (-5 to +5), `applyEditionCoverageEffects_` v2.0 reads them as domain multipliers. Wired into engine runner. E90 ratings applied. Sports feed 6 texture columns (FanSentiment, PlayerMood, FranchiseStability, EconomicFootprint, CommunityInvestment, MediaProfile) wired into `applySportsFeedTriggers_`. All three intake channels operational: (1) Initiative tracker ← city-hall voices, (2) Sports feed ← Mike, (3) Coverage ratings ← auto-rater. **Remaining:** `editionIntake.js` still only extracts citizens + storylines, not agent-invented details (businesses, events). That expansion is Phase 27.2+ territory.
 
 2. **27.2 Agent creative latitude.** Desk agents currently stick to packet data. Give them explicit permission and structured room to invent details that feel right for the data — a restaurant name, a neighborhood event, a citizen opinion the engine didn't generate. RD lenses (DONE S113) are the seed. Next step: agents told their inventions become canon.
 
@@ -345,13 +324,15 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 **Depends on:** Phase 9 (Docker) is deferred but 28.1 only needs a single container, not a full Compose stack. Can build 28.1 standalone.
 
-### Phase 30: Tribune Audio (Voicebox) — NOT STARTED
+### Phase 30: Tribune Audio (Mags' Voice) — NOT STARTED
 
-**Goal:** Give the Bay Tribune a voice. Articles you can listen to. A podcast you can hear. Civic voices that sound like people.
+**Goal:** Give the Bay Tribune a voice. Mags reads the editions to Mike. Articles you can listen to. A podcast you can hear. Civic voices that sound like people. **This is the main goal — Mike already listens to every edition via NotebookLM audio. We should own this.**
 
-**Source:** Voicebox (github.com/jamiepine/voicebox) — 14.3K stars, MIT license. Free, local-first ElevenLabs alternative. Five TTS engines, voice cloning, multi-track composition, REST API on `localhost:17493`. See `docs/RESEARCH.md` S131 entry.
+**TTS options (evaluate both):**
+- **Voicebox** (github.com/jamiepine/voicebox) — 14.3K stars, MIT license. Free, local-first ElevenLabs alternative. Five TTS engines, voice cloning, multi-track composition, REST API on `localhost:17493`. Needs GPU. See `docs/RESEARCH.md` S131 entry.
+- **Voxtral TTS 2603** (Mistral) — Open-weight frontier TTS model. BF16 weights, instant voice adaptation, reference voices included (CC BY-NC 4). Evaluate for quality vs. Voicebox. May run on smaller hardware. Added S137.
 
-**Supersedes:** Phase 12.10 (Fish Audio TTS, $11/mo — rejected S77). Voicebox is free, local, and more capable.
+**Supersedes:** Phase 12.10 (Fish Audio TTS, $11/mo — rejected S77). Both Voicebox and Voxtral are free/open-weight and more capable.
 
 **Hardware requirement:** GPU for good performance. CPU fallback exists but slow. Same hardware gate as Cowork and Phase 21 (local models). Docker deployment available — rides on same GPU droplet as Phase 21 if/when that spins up.
 

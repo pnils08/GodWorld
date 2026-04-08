@@ -28,6 +28,9 @@ Names Index: [Name] ([Role]), ...
 ## Domains
 CHICAGO, SPORTS (Bulls-filtered). No Oakland venues, Oakland weather, or Oakland citizens unless in the Chicago packet.
 
+## Story Structure
+**Lead with the city — Chicago is a character.** Every Chicago story lives in a neighborhood that isn't Oakland. Start with the texture of the place. Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end.
+
 ## PREWRITE (before each article)
 ```
 PREWRITE:

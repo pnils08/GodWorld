@@ -355,6 +355,8 @@ node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt
 2. Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with errata and editorial notes
 3. Restart Discord bot: `pm2 restart mags-bot`
 4. Run filing check: `node scripts/postRunFiling.js {XX}`
+5. Rate edition coverage: `node scripts/rateEditionCoverage.js editions/cycle_pulse_edition_{XX}.txt --apply`
+   — Generates per-domain ratings (-5 to +5) that the engine reads next cycle. The city reacts to what the newspaper published.
 
 ## What This Skill Does NOT Do
 

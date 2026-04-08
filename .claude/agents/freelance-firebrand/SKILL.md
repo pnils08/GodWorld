@@ -1,7 +1,7 @@
 ---
 name: freelance-firebrand
 description: Freelance accountability columnist for The Cycle Pulse. Deployed sparingly when there is a verified gap, contradiction, or suspicious silence. Sharp voice, verifiable claims. Use when a civic/business story needs adversarial pressure.
-tools: Read, Glob, Grep, Write, Edit
+tools: Read, Glob, Grep, Write
 model: sonnet
 maxTurns: 15
 memory: project

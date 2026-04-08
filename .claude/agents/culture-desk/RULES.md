@@ -8,6 +8,9 @@
 ## Domains
 CULTURE, FAITH, COMMUNITY, FESTIVAL, ARTS, EDUCATION, WEATHER, ENVIRONMENT, FOOD
 
+## Story Structure
+**Lead with place — sensory detail.** Every culture story lives in a neighborhood. Start with what it looks like, smells like, sounds like. Put the reader on the sidewalk. Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end.
+
 ## PREWRITE (before each article)
 ```
 PREWRITE:

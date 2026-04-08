@@ -167,6 +167,56 @@ async function main() {
     console.log('');
   }
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // CIVIC VOICE SENTIMENT — aggregate from all decisions (S137b)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Score each decision's ImplementationPhase for sentiment.
+  // Positive phases (disbursement-active, dispatch-live) = city is working.
+  // Negative phases (stalled, blocked) = city is failing.
+  // Write to file for engine Phase 2 to read.
+
+  const PHASE_SENTIMENT = {
+    'disbursement-active': 0.8, 'dispatch-live': 0.8, 'operational': 0.7,
+    'construction-active': 0.6, 'implementation-active': 0.6, 'pilot-active': 0.5,
+    'complete': 0.5, 'design-phase': 0.2, 'visioning-complete': 0.1,
+    'vote-scheduled': 0, 'announced': 0, 'visioning': 0,
+    'stalled': -0.6, 'blocked': -0.8, 'suspended': -0.7, 'defunded': -1.0
+  };
+
+  let sentimentSum = 0;
+  let sentimentCount = 0;
+
+  for (const dec of decisions) {
+    const phase = (dec.trackerUpdates.ImplementationPhase || '').toLowerCase();
+    if (!phase) continue;
+
+    let score = PHASE_SENTIMENT[phase];
+    if (score === undefined) {
+      // Partial match
+      for (const pk of Object.keys(PHASE_SENTIMENT)) {
+        if (phase.indexOf(pk) >= 0) { score = PHASE_SENTIMENT[pk]; break; }
+      }
+    }
+    if (score !== undefined) {
+      sentimentSum += score;
+      sentimentCount++;
+    }
+  }
+
+  const civicSentiment = sentimentCount > 0 ? sentimentSum / sentimentCount : 0;
+  const sentimentFile = path.join(ROOT, 'output', `civic_sentiment_c${CYCLE}.json`);
+
+  const sentimentData = {
+    cycle: CYCLE,
+    civicVoiceSentiment: parseFloat(civicSentiment.toFixed(3)),
+    decisionsScored: sentimentCount,
+    timestamp: new Date().toISOString()
+  };
+
+  fs.writeFileSync(sentimentFile, JSON.stringify(sentimentData, null, 2));
+  console.log(`\nCivic Voice Sentiment: ${civicSentiment.toFixed(3)} (from ${sentimentCount} decisions)`);
+  console.log(`Written to: ${path.basename(sentimentFile)}`);
+
   console.log(`\n=== Summary ===`);
   console.log(`Updated: ${updatedCount} | Skipped: ${skippedCount} | Total: ${decisions.length}`);
   if (!APPLY && updatedCount > 0) {

@@ -28,12 +28,15 @@
 |------|----------|------|---------|
 | 2-SeasonalWeights | `applySeasonalWeights_()` | phase02-world-state/applySeasonWeights.js | Season-based multipliers for event domains |
 | 2-SportsSeason | `applySportsSeason_()` | phase02-world-state/applySportsSeason.js | Read Oakland_Sports_Feed, set sportsSeason from SeasonType, store sportsFeedEntries (v3.0) |
-| 2-SportsFeed | `applySportsFeedTriggers_()` | phase02-world-state/applySportsSeason.js | Oakland feed → sentiment, triggers, neighborhood effects (v3.0) |
+| 2-SportsFeed | `applySportsFeedTriggers_()` | phase02-world-state/applySportsSeason.js | Oakland feed → sentiment, triggers, neighborhood effects. Now wires FanSentiment, PlayerMood, FranchiseStability, EconomicFootprint, CommunityInvestment, MediaProfile (v3.0 S137b) |
+| 2-CivicSentiment | `loadCivicVoiceSentiment_()` | phase02-world-state/applyInitiativeImplementationEffects.js | Load civic voice sentiment from decision files. Sets S.civicVoiceSentiment for EditionCoverage compounding (v1.0 S137b) |
+| 2-EditionCoverage | `applyEditionCoverageEffects_()` | phase02-world-state/applyEditionCoverageEffects.js | Per-domain media ratings (-5 to +5) → sentiment, domain cooldowns, neighborhood effects, story triggers. Compounds with civic voice sentiment (v2.0 S137b) |
+| 2-InitiativeEffects | `applyInitiativeImplementationEffects_()` | phase02-world-state/applyInitiativeImplementationEffects.js | Reads ImplementationPhase from Initiative_Tracker → domain ripples into AffectedNeighborhoods. Active programs benefit, stalled programs harm (v1.0 S137b) |
 | 2-Weather | `applyWeatherModel_()` | phase02-world-state/applyWeatherModel.js | Temperature, precipitation, visibility, wind, fronts |
 | 2-CityDynamics | `applyCityDynamics_()` | phase02-world-state/applyCityDynamics.js | Sentiment, cultural activity, community engagement, nightlife |
 | 2-Transit | `updateTransitMetrics_Phase2_()` | phase02-world-state/updateTransitMetrics.js | Transit ridership, delays, construction status |
 
-**ctx.summary after Phase 2:** adds `weather`, `sportsSeason`, `sportsFeedEntries`, `activeSports`, `cityDynamics`, `seasonalWeights`, `transitMetrics`
+**ctx.summary after Phase 2:** adds `weather`, `sportsSeason`, `sportsFeedEntries`, `activeSports`, `cityDynamics`, `seasonalWeights`, `transitMetrics`, `editionSentimentBoost`, `editionDomainBalance`, `editionCoverageTriggers`, `editionNeighborhoodEffects`, `editionCoverageEffects`, `civicVoiceSentiment`, `initiativeImplementationEffects`, `initiativeNeighborhoodEffects`, `initiativeImplementationTriggers`
 
 ---
 
@@ -98,6 +101,7 @@
 | 5-CivicRoles | `runCivicRoleEngine_()` | phase05-citizens/runCivicRoleEngine.js | CIV-flagged citizens | CIV check |
 | 5-Elections | `runCivicElections_()` | phase05-citizens/runCivicElectionsv1.js | Council election logic | — |
 | 5-Initiatives | `runCivicInitiativeEngine_()` | phase05-citizens/civicInitiativeEngine.js | Initiative_Tracker sheet | — |
+| 5-ApprovalRatings | `updateCivicApprovalRatings_()` | phase05-citizens/updateCivicApprovalRatings.js | Dynamic approval from initiative performance + media + district alignment. Writes to Civic_Office_Ledger Approval column. Triggers: vulnerable (<30), recall-pressure (<20), popular (>80) (v1.0 S137b) | — |
 
 ### 5d: Lifecycle Engines (ENGINE mode only, flag-excluded)
 

@@ -1,7 +1,7 @@
 ---
 name: sports-desk
 description: Oakland Sports desk agent for The Cycle Pulse. Writes A's coverage with fan voice, analytical, and historical perspectives. Use when producing sports section of an edition.
-tools: Read, Glob, Grep, Write, Edit
+tools: Read, Glob, Grep, Write
 model: sonnet
 maxTurns: 15
 memory: project

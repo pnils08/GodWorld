@@ -227,18 +227,28 @@ function buildActiveSportsFromOverride_(oaklandState) {
  * - Oakland_Sports_Feed only (Chicago removed — phased out after C91)
  *
  * Feed columns used (by header name, not position):
- *   Cycle           - filters entries to current/past cycles
- *   SeasonType      - season multiplier (playoffs > regular > off-season)
- *   TeamsUsed       - team identification
- *   Team Record     - win percentage -> base sentiment
- *   EventTrigger    - special event triggers (hot-streak, playoff-clinch, etc.)
- *   HomeNeighborhood- game day neighborhood effects
- *   Streak          - hot/cold streak amplifier (W6, L3 format)
+ *   Cycle             - filters entries to current/past cycles
+ *   SeasonType        - season multiplier (playoffs > regular > off-season)
+ *   TeamsUsed         - team identification
+ *   Team Record       - win percentage -> base sentiment
+ *   EventTrigger      - special event triggers (hot-streak, playoff-clinch, etc.)
+ *   HomeNeighborhood  - game day neighborhood effects
+ *   Streak            - hot/cold streak amplifier (W6, L3 format)
+ *   PlayerMood        - story hook triggers (frustrated = drama, electric = energy)
+ *   FanSentiment      - nightlife + retail multiplier
+ *   FranchiseStability- long-term economic signal (uncertain = business caution)
+ *   EconomicFootprint - retail + traffic around stadium neighborhood
+ *   CommunityInvestment - community engagement in HomeNeighborhood
+ *   MediaProfile      - scales all effects (national = 1.5x, regional = 1.0x)
+ *
+ * Convention: Last entry per cycle is the "season-state" row — definitive
+ * snapshot. Earlier entries are story content for reporters. Last row wins
+ * for all engine behavior columns.
  *
  * Outputs to ctx.summary:
  *   - sportsSentimentBoost: cumulative sentiment modifier
- *   - sportsEventTriggers: array of {team, trigger, neighborhood}
- *   - sportsNeighborhoodEffects: {neighborhood: {traffic, retail, nightlife}}
+ *   - sportsEventTriggers: array of {team, trigger, neighborhood, playerMood}
+ *   - sportsNeighborhoodEffects: {neighborhood: {traffic, retail, nightlife, communityEngagement}}
  *
  * ============================================================================
  */
@@ -305,6 +315,12 @@ function processFeedSheet_(sheet, currentCycle) {
   var streakCol = findColumnIndex_(headers, ['Streak', 'streak']);
   var triggerCol = findColumnIndex_(headers, ['EventTrigger', 'eventtrigger', 'trigger']);
   var neighborhoodCol = findColumnIndex_(headers, ['HomeNeighborhood', 'homeneighborhood', 'neighborhood']);
+  var playerMoodCol = findColumnIndex_(headers, ['PlayerMood', 'playermood']);
+  var fanSentimentCol = findColumnIndex_(headers, ['FanSentiment', 'fansentiment']);
+  var franchiseCol = findColumnIndex_(headers, ['FranchiseStability', 'franchisestability']);
+  var economicCol = findColumnIndex_(headers, ['EconomicFootprint', 'economicfootprint']);
+  var communityCol = findColumnIndex_(headers, ['CommunityInvestment', 'communityinvestment']);
+  var mediaProfileCol = findColumnIndex_(headers, ['MediaProfile', 'mediaprofile']);
 
   // Build per-team latest state by scanning all rows
   var teamState = {};
@@ -319,18 +335,30 @@ function processFeedSheet_(sheet, currentCycle) {
     if (!team) continue;
 
     if (!teamState[team]) {
-      teamState[team] = { record: '', seasonType: '', streak: '', trigger: '', neighborhood: '', cycle: 0 };
+      teamState[team] = {
+        record: '', seasonType: '', streak: '', trigger: '', neighborhood: '',
+        playerMood: '', fanSentiment: '', franchiseStability: '',
+        economicFootprint: '', communityInvestment: '', mediaProfile: '',
+        cycle: 0
+      };
     }
 
     var ts = teamState[team];
 
     // Update from newer or same-cycle entries (later rows win for same cycle)
+    // Convention: last entry per cycle is the "season-state" row
     if (cycle >= ts.cycle) {
       var record = recordCol !== -1 ? (row[recordCol] || '').toString().trim() : '';
       var seasonType = seasonTypeCol !== -1 ? (row[seasonTypeCol] || '').toString().trim() : '';
       var streak = streakCol !== -1 ? (row[streakCol] || '').toString().trim() : '';
       var trigger = triggerCol !== -1 ? (row[triggerCol] || '').toString().trim() : '';
       var neighborhood = neighborhoodCol !== -1 ? (row[neighborhoodCol] || '').toString().trim() : '';
+      var playerMood = playerMoodCol !== -1 ? (row[playerMoodCol] || '').toString().trim() : '';
+      var fanSentiment = fanSentimentCol !== -1 ? (row[fanSentimentCol] || '').toString().trim() : '';
+      var franchise = franchiseCol !== -1 ? (row[franchiseCol] || '').toString().trim() : '';
+      var economic = economicCol !== -1 ? (row[economicCol] || '').toString().trim() : '';
+      var community = communityCol !== -1 ? (row[communityCol] || '').toString().trim() : '';
+      var mediaProfile = mediaProfileCol !== -1 ? (row[mediaProfileCol] || '').toString().trim() : '';
 
       // Only overwrite with non-empty values (preserves earlier data if latest row is blank)
       if (record) ts.record = record;
@@ -338,6 +366,12 @@ function processFeedSheet_(sheet, currentCycle) {
       if (streak) ts.streak = streak;
       if (trigger) ts.trigger = trigger;
       if (neighborhood) ts.neighborhood = neighborhood;
+      if (playerMood) ts.playerMood = playerMood;
+      if (fanSentiment) ts.fanSentiment = fanSentiment;
+      if (franchise) ts.franchiseStability = franchise;
+      if (economic) ts.economicFootprint = economic;
+      if (community) ts.communityInvestment = community;
+      if (mediaProfile) ts.mediaProfile = mediaProfile;
       ts.cycle = cycle;
     }
   }
@@ -373,18 +407,46 @@ function processFeedSheet_(sheet, currentCycle) {
     // 3. Streak amplifier
     var streakBonus = parseStreakBonus_((state.streak || '').toUpperCase());
 
-    // Calculate and clamp (-0.08 to +0.08 per team)
-    var teamSentiment = (baseSentiment + streakBonus) * seasonMultiplier;
-    teamSentiment = Math.max(-0.08, Math.min(0.08, teamSentiment));
+    // 4. FanSentiment modifier (v3.0)
+    var fanMod = parseFanSentiment_(state.fanSentiment);
+
+    // 5. MediaProfile scale (v3.0) — national coverage amplifies everything
+    var mediaScale = parseMediaProfile_(state.mediaProfile);
+
+    // Calculate and clamp (-0.10 to +0.10 per team, widened for new inputs)
+    var teamSentiment = (baseSentiment + streakBonus + fanMod) * seasonMultiplier * mediaScale;
+    teamSentiment = Math.max(-0.10, Math.min(0.10, teamSentiment));
     totalSentiment += teamSentiment;
 
     Logger.log('Sports sentiment: ' + teamName + ' = ' + teamSentiment.toFixed(3) +
-      ' (record: ' + state.record + ', season: ' + state.seasonType + ', streak: ' + state.streak + ')');
+      ' (record: ' + state.record + ', season: ' + state.seasonType +
+      ', streak: ' + state.streak + ', fan: ' + state.fanSentiment +
+      ', media: ' + state.mediaProfile + ')');
 
     // Process trigger (use manual if set, otherwise infer from state)
     var triggerValue = (state.trigger || '').toLowerCase();
     if (!triggerValue) {
       triggerValue = inferFeedTrigger_(state);
+    }
+
+    // PlayerMood triggers (v3.0) — frustrated/electric players generate story hooks
+    if (state.playerMood) {
+      var mood = state.playerMood.toLowerCase();
+      if (mood === 'frustrated' || mood === 'angry') {
+        triggers.push({
+          team: teamName, trigger: 'player-frustration',
+          neighborhood: state.neighborhood || 'Downtown',
+          streak: state.streak, sentiment: teamSentiment,
+          playerMood: state.playerMood
+        });
+      } else if (mood === 'electric' || mood === 'confident') {
+        triggers.push({
+          team: teamName, trigger: 'player-energy',
+          neighborhood: state.neighborhood || 'Downtown',
+          streak: state.streak, sentiment: teamSentiment,
+          playerMood: state.playerMood
+        });
+      }
     }
 
     if (triggerValue && triggerValue !== 'none') {
@@ -393,21 +455,45 @@ function processFeedSheet_(sheet, currentCycle) {
         trigger: triggerValue,
         neighborhood: state.neighborhood || 'Downtown',
         streak: state.streak,
-        sentiment: teamSentiment
+        sentiment: teamSentiment,
+        playerMood: state.playerMood || ''
       });
       Logger.log('Sports trigger: ' + teamName + ' -> ' + triggerValue +
         ' @ ' + (state.neighborhood || 'Downtown'));
     }
 
-    // Neighborhood effects (game day impacts)
+    // Neighborhood effects (game day impacts + new columns)
     if (state.neighborhood) {
       if (!neighborhoodEffects[state.neighborhood]) {
-        neighborhoodEffects[state.neighborhood] = { traffic: 0, retail: 0, nightlife: 0 };
+        neighborhoodEffects[state.neighborhood] = {
+          traffic: 0, retail: 0, nightlife: 0, communityEngagement: 0
+        };
       }
+      var ne = neighborhoodEffects[state.neighborhood];
+
+      // Base game day effects (existing)
       var fanBoost = 1 + Math.max(0, teamSentiment * 2);
-      neighborhoodEffects[state.neighborhood].traffic += 0.15 * fanBoost;
-      neighborhoodEffects[state.neighborhood].retail += 0.10 * fanBoost;
-      neighborhoodEffects[state.neighborhood].nightlife += 0.12 * fanBoost;
+      ne.traffic += 0.15 * fanBoost;
+      ne.retail += 0.10 * fanBoost;
+      ne.nightlife += 0.12 * fanBoost;
+
+      // FanSentiment → nightlife + retail (v3.0)
+      // electric = big boost, frustrated = dampens nightlife
+      ne.nightlife += fanMod * 0.5;
+      ne.retail += fanMod * 0.3;
+
+      // EconomicFootprint → retail + traffic (v3.0)
+      var econMod = parseEconomicFootprint_(state.economicFootprint);
+      ne.retail += econMod * 0.15;
+      ne.traffic += econMod * 0.10;
+
+      // CommunityInvestment → communityEngagement (v3.0)
+      var commMod = parseCommunityInvestment_(state.communityInvestment);
+      ne.communityEngagement += commMod * 0.15;
+
+      // FranchiseStability → economic caution signal (v3.0)
+      var stabMod = parseFranchiseStability_(state.franchiseStability);
+      ne.retail += stabMod * 0.10;
     }
   }
 
@@ -420,11 +506,12 @@ function processFeedSheet_(sheet, currentCycle) {
 function mergeNeighborhoodEffects_(target, source) {
   for (var hood in source) {
     if (!target[hood]) {
-      target[hood] = { traffic: 0, retail: 0, nightlife: 0 };
+      target[hood] = { traffic: 0, retail: 0, nightlife: 0, communityEngagement: 0 };
     }
-    target[hood].traffic += source[hood].traffic;
-    target[hood].retail += source[hood].retail;
-    target[hood].nightlife += source[hood].nightlife;
+    target[hood].traffic += source[hood].traffic || 0;
+    target[hood].retail += source[hood].retail || 0;
+    target[hood].nightlife += source[hood].nightlife || 0;
+    target[hood].communityEngagement += source[hood].communityEngagement || 0;
   }
 }
 
@@ -485,6 +572,76 @@ function inferFeedTrigger_(teamState) {
   }
 
   return '';
+}
+
+/**
+ * Parse FanSentiment string to sentiment modifier.
+ * electric/high → positive boost, frustrated/low → negative
+ */
+function parseFanSentiment_(val) {
+  if (!val) return 0;
+  var v = val.toLowerCase();
+  if (v === 'electric' || v === 'euphoric') return 0.02;
+  if (v === 'high' || v === 'confident' || v === 'excited') return 0.01;
+  if (v === 'frustrated' || v === 'angry' || v === 'hostile') return -0.02;
+  if (v === 'low' || v === 'apathetic' || v === 'disappointed') return -0.01;
+  if (v === 'uncertain' || v === 'anxious') return -0.005;
+  return 0; // neutral, moderate, etc.
+}
+
+/**
+ * Parse MediaProfile to scale multiplier.
+ * national → 1.5x, regional → 1.0x, local → 0.8x
+ */
+function parseMediaProfile_(val) {
+  if (!val) return 1.0;
+  var v = val.toLowerCase();
+  if (v === 'national' || v === 'international') return 1.5;
+  if (v === 'regional') return 1.0;
+  if (v === 'local') return 0.8;
+  return 1.0;
+}
+
+/**
+ * Parse EconomicFootprint to modifier.
+ * growing → positive, shrinking → negative
+ */
+function parseEconomicFootprint_(val) {
+  if (!val) return 0;
+  var v = val.toLowerCase();
+  if (v === 'growing' || v === 'booming') return 1.0;
+  if (v === 'stable' || v === 'steady') return 0.3;
+  if (v === 'shrinking' || v === 'declining') return -1.0;
+  if (v === 'uncertain') return -0.3;
+  return 0;
+}
+
+/**
+ * Parse CommunityInvestment to modifier.
+ * active → positive boost to engagement
+ */
+function parseCommunityInvestment_(val) {
+  if (!val) return 0;
+  var v = val.toLowerCase();
+  if (v === 'active' || v === 'strong' || v === 'heavy') return 1.0;
+  if (v === 'moderate' || v === 'growing') return 0.5;
+  if (v === 'passive' || v === 'minimal' || v === 'declining') return -0.5;
+  if (v === 'none' || v === 'absent') return -1.0;
+  return 0;
+}
+
+/**
+ * Parse FranchiseStability to modifier.
+ * stable → confidence, uncertain → caution
+ */
+function parseFranchiseStability_(val) {
+  if (!val) return 0;
+  var v = val.toLowerCase();
+  if (v === 'stable' || v === 'strong') return 0.5;
+  if (v === 'growing') return 0.3;
+  if (v === 'uncertain' || v === 'unstable') return -0.5;
+  if (v === 'crisis' || v === 'relocating') return -1.0;
+  return 0;
 }
 
 /**

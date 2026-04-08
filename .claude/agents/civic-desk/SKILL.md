@@ -1,7 +1,7 @@
 ---
 name: civic-desk
 description: Civic Affairs desk agent for The Cycle Pulse. Writes council, initiative, infrastructure, health, crime, and transit coverage. Use when producing civic section of an edition.
-tools: Read, Glob, Grep, Write, Edit
+tools: Read, Glob, Grep, Write
 model: sonnet
 maxTurns: 15
 memory: project

@@ -10,6 +10,9 @@
 ## Domains
 ECONOMIC, NIGHTLIFE, RETAIL, LABOR
 
+## Story Structure
+**Lead with the money — who's winning, who's losing.** Every business story is about someone's livelihood. Start with the human impact, not the numbers. Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end.
+
 ## PREWRITE (before each article)
 ```
 PREWRITE:

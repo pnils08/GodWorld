@@ -1,25 +1,26 @@
 #!/usr/bin/env node
 /**
- * rateEditionCoverage.js — Auto-rate edition coverage for engine feedback
+ * rateEditionCoverage.js v2.0 — Per-Domain Edition Coverage Ratings
+ * [engine/sheet] — Phase 27.1 coverage ratings channel
  *
- * Reads an edition text file, parses the structured sections at the bottom
- * (STORYLINES UPDATED, CITIZEN USAGE LOG, ARTICLE TABLE), and writes
- * rating rows to the Edition_Coverage_Ratings sheet.
+ * Reads a published edition, maps each article to an engine domain,
+ * rates each on -5 to +5, averages per domain, and writes to
+ * Edition_Coverage_Ratings sheet. The engine reads these ratings
+ * via applyEditionCoverageEffects_ to ripple media influence into
+ * domain dynamics.
  *
  * Usage:
  *   node scripts/rateEditionCoverage.js editions/cycle_pulse_edition_90.txt --dry-run
  *   node scripts/rateEditionCoverage.js editions/cycle_pulse_edition_90.txt --apply
- *
- * Dry-run shows what would be written. Apply writes to the sheet.
  */
 
-const fs = require('fs');
-const path = require('path');
-const sheets = require('../lib/sheets');
+var fs = require('fs');
+var path = require('path');
+var sheets = require('../lib/sheets');
 
-const args = process.argv.slice(2);
-const filePath = args.find(a => !a.startsWith('--'));
-const dryRun = !args.includes('--apply');
+var args = process.argv.slice(2);
+var filePath = args.find(function(a) { return !a.startsWith('--'); });
+var dryRun = !args.includes('--apply');
 
 if (!filePath) {
   console.log('Usage: node scripts/rateEditionCoverage.js <edition-file> [--dry-run|--apply]');
@@ -28,14 +29,14 @@ if (!filePath) {
   process.exit(1);
 }
 
-const text = fs.readFileSync(path.resolve(filePath), 'utf8');
+var text = fs.readFileSync(path.resolve(filePath), 'utf8');
 
 // ═══════════════════════════════════════════════════════════════════════════
 // DETECT CYCLE
 // ═══════════════════════════════════════════════════════════════════════════
 
-let cycle = 0;
-const cycleMatch = text.match(/EDITION\s+(\d+)/i) || filePath.match(/(\d+)/);
+var cycle = 0;
+var cycleMatch = text.match(/EDITION\s+(\d+)/i) || filePath.match(/(\d+)/);
 if (cycleMatch) cycle = parseInt(cycleMatch[1], 10);
 
 if (!cycle) {
@@ -48,207 +49,323 @@ console.log('Mode: ' + (dryRun ? 'DRY-RUN' : 'APPLY'));
 console.log('---');
 
 // ═══════════════════════════════════════════════════════════════════════════
-// PARSE SECTIONS
+// SECTION TAG → ENGINE DOMAIN MAPPING
 // ═══════════════════════════════════════════════════════════════════════════
 
-const lines = text.split('\n');
-
-function findSection(header) {
-  const pattern = new RegExp(header, 'i');
-  let start = -1;
-  let end = lines.length;
-
-  for (let i = 0; i < lines.length; i++) {
-    if (pattern.test(lines[i])) {
-      start = i + 1;
-    } else if (start > 0 && /^={5,}|^-{5,}|^#{1,3}\s/.test(lines[i].trim())) {
-      if (i > start + 1) {
-        end = i;
-        break;
-      }
-    }
-  }
-
-  if (start < 0) return [];
-  return lines.slice(start, end).filter(l => l.trim());
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// PARSE STORYLINES UPDATED
-// ═══════════════════════════════════════════════════════════════════════════
-
-const storylines = findSection('STORYLINES UPDATED');
-const initiativeRatings = [];
-
-// Transition magnitude mapping
-const transitionRating = {
-  'deployed': 5, 'active': 4, 'passed': 5, 'approved': 5, 'completed': 5,
-  'vote scheduled': 3, 'continuing': 2, 'new': 3,
-  'stalled': -3, 'blocked': -4, 'failed': -5, 'delayed': -3, 'vetoed': -4
+// Maps edition section tags to Domain_Tracker column names
+var sectionToDomains = {
+  'front page': ['CIVIC'],
+  'civic affairs': ['CIVIC'],
+  'civic': ['CIVIC'],
+  'city life': ['CULTURE', 'COMMUNITY'],
+  'culture': ['CULTURE'],
+  'culture & community': ['CULTURE', 'COMMUNITY'],
+  'business': ['ECONOMIC'],
+  'business ticker': ['ECONOMIC'],
+  'sports': ['SPORTS'],
+  'health': ['HEALTH'],
+  'accountability': ['CIVIC', 'CRIME'],
+  'opinion': ['COMMUNITY'],
+  'features': ['CULTURE', 'COMMUNITY'],
+  'letters': ['COMMUNITY'],
+  'chicago': ['SPORTS']
 };
 
-for (const line of storylines) {
-  // Match patterns like "OARI Implementation: ACTIVE → DEPLOYED"
-  // or "- OARI Implementation: ACTIVE → DEPLOYED. Details here."
-  const match = line.match(/^-?\s*(.+?):\s*(.+?)\s*(?:→|->)+\s*(.+?)[\.\s]/i);
-  if (!match) {
-    // Also try "Name: STATUS. Details"
-    const simpleMatch = line.match(/^-?\s*(.+?):\s*(NEW|CONTINUING|ACTIVE|STALLED|BLOCKED)[\.\s]/i);
-    if (simpleMatch) {
-      const name = simpleMatch[1].trim();
-      const status = simpleMatch[2].trim().toLowerCase();
-      const rating = Math.abs(transitionRating[status] || 2);
-      const tone = (transitionRating[status] || 0) < 0 ? 'negative' : 'positive';
+// ═══════════════════════════════════════════════════════════════════════════
+// TONE KEYWORDS
+// ═══════════════════════════════════════════════════════════════════════════
 
-      initiativeRatings.push({
-        cycle, signalType: 'INITIATIVE', target: name,
-        rating, tone, neighborhoods: '', direction: tone === 'positive' ? 'uplift' : 'pressure',
-        notes: line.trim(), source: 'automated'
-      });
+var POSITIVE_WORDS = [
+  'celebrate', 'win', 'victory', 'success', 'approve', 'pass', 'triumph',
+  'breakthrough', 'progress', 'growth', 'proud', 'hope', 'thrive',
+  'booming', 'revival', 'rally', 'award', 'honor', 'milestone',
+  'expansion', 'improve', 'strong', 'momentum', 'optimism', 'joy',
+  'flourish', 'prosper', 'uplift', 'united', 'hero', 'champion'
+];
+
+var NEGATIVE_WORDS = [
+  'fail', 'crisis', 'collapse', 'stall', 'block', 'reject', 'veto',
+  'concern', 'fear', 'decline', 'loss', 'losing', 'struggle', 'threat',
+  'danger', 'damage', 'victim', 'arrest', 'crime', 'violence', 'protest',
+  'displacement', 'evict', 'closure', 'shortage', 'deficit', 'delay',
+  'frustrat', 'anger', 'outrage', 'scandal', 'corruption', 'neglect',
+  'abandon', 'deteriorat', 'emergency', 'alarm', 'tension'
+];
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PARSE ARTICLES — find section-tagged content blocks
+// ═══════════════════════════════════════════════════════════════════════════
+
+var lines = text.split('\n');
+
+// Find article boundaries — look for section headers and bylines
+var articles = [];
+var currentArticle = null;
+
+for (var i = 0; i < lines.length; i++) {
+  var line = lines[i];
+
+  // Section markers like "━━━ SPORTS ━━━" or "── CIVIC AFFAIRS ──" or "SPORTS" in separator blocks
+  var sectionMatch = line.match(/[━─═]+\s*([A-Z][A-Z &]+[A-Z])\s*[━─═]+/);
+  if (!sectionMatch) {
+    // Also try standalone section headers: "SPORTS", "CIVIC AFFAIRS", "CITY LIFE"
+    sectionMatch = line.match(/^#+\s*(SPORTS|CIVIC AFFAIRS|CITY LIFE|BUSINESS|CULTURE|HEALTH|FEATURES|OPINION|ACCOUNTABILITY|LETTERS|CHICAGO|BUSINESS TICKER)/i);
+  }
+
+  if (sectionMatch) {
+    if (currentArticle && currentArticle.text.length > 50) {
+      articles.push(currentArticle);
     }
+    currentArticle = {
+      section: sectionMatch[1].trim(),
+      reporter: '',
+      headline: '',
+      text: '',
+      startLine: i
+    };
     continue;
   }
 
-  const name = match[1].trim();
-  const fromStatus = match[2].trim().toLowerCase();
-  const toStatus = match[3].trim().toLowerCase().replace(/[^a-z\s-]/g, '');
-
-  // Rating from destination status
-  let rating = Math.abs(transitionRating[toStatus] || 2);
-  let tone = 'positive';
-  let direction = 'uplift';
-
-  // Negative transitions
-  if ((transitionRating[toStatus] || 0) < 0) {
-    tone = 'negative';
-    direction = 'pressure';
+  // Byline detection: "By Carmen Delaine" or "By P Slayer"
+  var bylineMatch = line.match(/^(?:By|BY)\s+(.+?)(?:\s*[|,]|$)/);
+  if (bylineMatch && currentArticle) {
+    currentArticle.reporter = bylineMatch[1].trim();
   }
 
-  // Big transitions get boosted
-  if (fromStatus.includes('stalled') && !toStatus.includes('stalled')) {
-    rating = Math.min(5, rating + 1); // Breaking a stall = bigger story
+  // Headline detection: first non-empty line after section header that isn't a separator
+  if (currentArticle && !currentArticle.headline && line.trim() && !/^[━─═\-*#|]/.test(line.trim())) {
+    currentArticle.headline = line.trim();
   }
 
-  // Extract neighborhoods from the rest of the line
-  const hoodMatch = line.match(/D(\d)[,/]?\s*D?(\d)?[,/]?\s*D?(\d)?/);
-  let neighborhoods = '';
-  if (hoodMatch) {
-    const districts = [hoodMatch[1], hoodMatch[2], hoodMatch[3]].filter(Boolean);
-    neighborhoods = districts.map(d => 'D' + d).join(',');
+  // Accumulate text
+  if (currentArticle) {
+    currentArticle.text += line + '\n';
   }
 
-  initiativeRatings.push({
-    cycle, signalType: 'INITIATIVE', target: name,
-    rating, tone, neighborhoods, direction,
-    notes: line.trim(), source: 'automated'
-  });
+  // End markers — ARTICLE TABLE, CITIZEN USAGE, END EDITION, etc.
+  if (/^ARTICLE TABLE|^CITIZEN USAGE|^STORYLINES UPDATED|^COMING NEXT|^END EDITION/i.test(line.trim())) {
+    if (currentArticle && currentArticle.text.length > 50) {
+      articles.push(currentArticle);
+    }
+    currentArticle = null;
+    break; // Stop parsing at structured sections
+  }
+}
+
+// Catch last article
+if (currentArticle && currentArticle.text.length > 50) {
+  articles.push(currentArticle);
+}
+
+console.log('Articles found: ' + articles.length);
+
+// ═══════════════════════════════════════════════════════════════════════════
+// RATE EACH ARTICLE — tone analysis → -5 to +5
+// ═══════════════════════════════════════════════════════════════════════════
+
+function rateArticleTone(articleText) {
+  var lower = articleText.toLowerCase();
+  var posCount = 0;
+  var negCount = 0;
+
+  for (var p = 0; p < POSITIVE_WORDS.length; p++) {
+    var pMatches = lower.split(POSITIVE_WORDS[p]).length - 1;
+    posCount += pMatches;
+  }
+  for (var n = 0; n < NEGATIVE_WORDS.length; n++) {
+    var nMatches = lower.split(NEGATIVE_WORDS[n]).length - 1;
+    negCount += nMatches;
+  }
+
+  var total = posCount + negCount;
+  if (total === 0) return { rating: 0, tone: 'neutral' };
+
+  // Net sentiment ratio: -1 (all negative) to +1 (all positive)
+  var ratio = (posCount - negCount) / total;
+
+  // Map to -5 to +5 scale
+  var rating = Math.round(ratio * 5);
+  rating = Math.max(-5, Math.min(5, rating));
+
+  var tone = 'neutral';
+  if (rating >= 2) tone = 'positive';
+  else if (rating <= -2) tone = 'negative';
+  else if (rating !== 0) tone = 'mixed';
+
+  return { rating: rating, tone: tone };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// PARSE CITIZEN USAGE LOG
+// MAP ARTICLES → DOMAINS, AGGREGATE
 // ═══════════════════════════════════════════════════════════════════════════
 
-const citizenSection = findSection('CITIZEN USAGE LOG');
-const citizenRatings = [];
+// Per-domain accumulators: { domain: { ratings: [], reporters: [], tones: [] } }
+var domainData = {};
 
-for (const line of citizenSection) {
-  // Match "- Name (POP-XXX) — Neighborhood, occupation. Appears in: Section, Section, Section."
-  // or "- Name, age, Neighborhood, occupation. Section."
-  const appearsMatch = line.match(/appears?\s+in:\s*(.+)/i);
-  if (!appearsMatch) continue;
+for (var a = 0; a < articles.length; a++) {
+  var art = articles[a];
+  var sectionKey = art.section.toLowerCase();
 
-  const sections = appearsMatch[1].split(/[,.]/).map(s => s.trim()).filter(Boolean);
-  if (sections.length < 2) continue; // Only rate citizens in 2+ sections
-
-  // Extract name — everything between "- " and first " (" or " —"
-  const nameMatch = line.match(/^-\s*(.+?)(?:\s*\(|\s*—|\s*,)/);
-  if (!nameMatch) continue;
-  const name = nameMatch[1].trim();
-
-  // Extract neighborhood
-  const hoodMatch = line.match(/—\s*([A-Z][a-z]+(?:\s+[A-Z][a-z]+)*)/);
-  const neighborhood = hoodMatch ? hoodMatch[1].trim() : '';
-
-  const rating = Math.min(5, sections.length + 1); // 2 sections = 3, 3 sections = 4, 4+ = 5
-
-  citizenRatings.push({
-    cycle, signalType: 'CITIZEN_VISIBILITY', target: name,
-    rating, tone: 'positive', neighborhoods: neighborhood,
-    direction: 'uplift',
-    notes: sections.length + ' sections: ' + sections.join(', '),
-    source: 'automated'
-  });
-}
-
-// ═══════════════════════════════════════════════════════════════════════════
-// PARSE ARTICLE TABLE
-// ═══════════════════════════════════════════════════════════════════════════
-
-const articleSection = findSection('ARTICLE TABLE');
-const domainCounts = {};
-
-// Map section names to domains
-const sectionToDomain = {
-  'front page': 'CIVIC', 'civic affairs': 'CIVIC', 'civic': 'CIVIC',
-  'business': 'BUSINESS', 'culture': 'CULTURE', 'culture & community': 'CULTURE',
-  'sports': 'SPORTS', 'chicago': 'CHICAGO',
-  'letters': 'LETTERS', 'editor': 'LETTERS'
-};
-
-for (const line of articleSection) {
-  // Match table rows: "| 1 | Front Page | Headline | Reporter | Citizens |"
-  const cols = line.split('|').map(c => c.trim()).filter(Boolean);
-  if (cols.length < 3) continue;
-  if (cols[0] === '#' || cols[0] === '---') continue; // header/separator
-
-  const section = (cols[1] || '').toLowerCase();
-  for (const [key, domain] of Object.entries(sectionToDomain)) {
-    if (section.includes(key)) {
-      domainCounts[domain] = (domainCounts[domain] || 0) + 1;
+  // Find matching domains
+  var domains = null;
+  for (var key in sectionToDomains) {
+    if (sectionKey.includes(key) || key.includes(sectionKey)) {
+      domains = sectionToDomains[key];
       break;
+    }
+  }
+
+  if (!domains) {
+    // Default to COMMUNITY for unmatched sections
+    domains = ['COMMUNITY'];
+  }
+
+  var result = rateArticleTone(art.text);
+
+  // Jax Caldera / accountability pieces lean negative by nature
+  if (art.reporter.toLowerCase().includes('caldera') || art.reporter.toLowerCase().includes('jax')) {
+    if (result.rating > -1) result.rating = Math.max(-3, result.rating - 2);
+    if (result.tone !== 'negative') result.tone = 'negative';
+  }
+
+  console.log('  [' + art.section + '] ' + (art.headline || '(no headline)').substring(0, 60) +
+    ' → ' + domains.join('+') + ' r' + result.rating + ' ' + result.tone +
+    (art.reporter ? ' (' + art.reporter + ')' : ''));
+
+  // Distribute to each domain
+  for (var d = 0; d < domains.length; d++) {
+    var dom = domains[d];
+    if (!domainData[dom]) {
+      domainData[dom] = { ratings: [], reporters: [], tones: [] };
+    }
+    domainData[dom].ratings.push(result.rating);
+    domainData[dom].reporters.push(art.reporter || 'unknown');
+    domainData[dom].tones.push(result.tone);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// LETTERS SECTION — extract citizen reactions per domain
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Parse letters for domain mentions and tone
+var lettersStart = -1;
+var lettersEnd = lines.length;
+for (var li = 0; li < lines.length; li++) {
+  if (/LETTERS TO THE EDITOR/i.test(lines[li])) {
+    lettersStart = li + 1;
+  } else if (lettersStart > 0 && /^ARTICLE TABLE|^CITIZEN USAGE|^STORYLINES UPDATED|^COMING NEXT|^END EDITION/i.test(lines[li].trim())) {
+    lettersEnd = li;
+    break;
+  }
+}
+
+if (lettersStart > 0) {
+  var lettersText = lines.slice(lettersStart, lettersEnd).join('\n');
+  var letterBlocks = lettersText.split(/(?=Dear Editor|To the Editor|Editor,)/i);
+
+  for (var lb = 0; lb < letterBlocks.length; lb++) {
+    var letter = letterBlocks[lb];
+    if (letter.length < 30) continue;
+
+    var letterTone = rateArticleTone(letter);
+
+    // Detect which domain the letter is reacting to
+    var letterLower = letter.toLowerCase();
+    var letterDomains = [];
+    if (/council|mayor|vote|initiative|ordinance|city hall/i.test(letterLower)) letterDomains.push('CIVIC');
+    if (/crime|police|safety|arrest|incident/i.test(letterLower)) letterDomains.push('CRIME');
+    if (/a'?s\b|baseball|game|stadium|coliseum|player/i.test(letterLower)) letterDomains.push('SPORTS');
+    if (/business|shop|store|economic|job|employ/i.test(letterLower)) letterDomains.push('ECONOMIC');
+    if (/school|education|student/i.test(letterLower)) letterDomains.push('EDUCATION');
+    if (/health|hospital|clinic|nurse|doctor/i.test(letterLower)) letterDomains.push('HEALTH');
+    if (/art|music|culture|festival|food|restaurant/i.test(letterLower)) letterDomains.push('CULTURE');
+    if (/transit|bus|bart|commute|traffic/i.test(letterLower)) letterDomains.push('TRANSIT');
+    if (/housing|rent|evict|landlord|apartment/i.test(letterLower)) letterDomains.push('HOUSING');
+    if (letterDomains.length === 0) letterDomains.push('COMMUNITY');
+
+    for (var ld = 0; ld < letterDomains.length; ld++) {
+      var ldom = letterDomains[ld];
+      if (!domainData[ldom]) {
+        domainData[ldom] = { ratings: [], reporters: [], tones: [] };
+      }
+      // Letters count at half weight (citizen reaction, not primary coverage)
+      domainData[ldom].ratings.push(Math.round(letterTone.rating * 0.5));
+      domainData[ldom].reporters.push('letters');
+      domainData[ldom].tones.push(letterTone.tone);
     }
   }
 }
 
-const domainRatings = [];
-const totalArticles = Object.values(domainCounts).reduce((a, b) => a + b, 0);
-
-for (const [domain, count] of Object.entries(domainCounts)) {
-  if (domain === 'CHICAGO') continue; // phased out
-
-  const pct = totalArticles > 0 ? count / totalArticles : 0;
-  let rating = 1;
-  if (pct >= 0.3) rating = 5;
-  else if (pct >= 0.2) rating = 4;
-  else if (pct >= 0.15) rating = 3;
-  else if (pct >= 0.1) rating = 2;
-
-  domainRatings.push({
-    cycle, signalType: 'DOMAIN_TONE', target: domain,
-    rating, tone: 'positive', neighborhoods: '',
-    direction: 'neutral',
-    notes: count + ' of ' + totalArticles + ' articles (' + Math.round(pct * 100) + '%)',
-    source: 'automated'
-  });
-}
-
 // ═══════════════════════════════════════════════════════════════════════════
-// COMBINE AND DISPLAY
+// AVERAGE PER DOMAIN → OUTPUT ROWS
 // ═══════════════════════════════════════════════════════════════════════════
 
-const allRatings = [...initiativeRatings, ...citizenRatings, ...domainRatings];
+var outputRows = [];
 
-console.log('RATINGS GENERATED: ' + allRatings.length);
-console.log('  Initiatives: ' + initiativeRatings.length);
-console.log('  Citizens: ' + citizenRatings.length);
-console.log('  Domains: ' + domainRatings.length);
-console.log('');
+console.log('\n--- DOMAIN RATINGS ---');
 
-for (const r of allRatings) {
-  console.log('  [' + r.signalType + '] ' + r.target + ' → r' + r.rating + ' ' + r.tone +
-    (r.neighborhoods ? ' (' + r.neighborhoods + ')' : '') +
-    ' — ' + r.notes);
+var domainKeys = Object.keys(domainData);
+for (var dk = 0; dk < domainKeys.length; dk++) {
+  var domain = domainKeys[dk];
+  var dd = domainData[domain];
+
+  // Average rating
+  var sum = 0;
+  for (var ri = 0; ri < dd.ratings.length; ri++) {
+    sum += dd.ratings[ri];
+  }
+  var avgRating = Math.round(sum / dd.ratings.length);
+  avgRating = Math.max(-5, Math.min(5, avgRating));
+
+  // Dominant tone
+  var toneCounts = { positive: 0, negative: 0, mixed: 0, neutral: 0 };
+  for (var ti = 0; ti < dd.tones.length; ti++) {
+    toneCounts[dd.tones[ti]] = (toneCounts[dd.tones[ti]] || 0) + 1;
+  }
+  var dominantTone = 'neutral';
+  var maxToneCount = 0;
+  for (var tk in toneCounts) {
+    if (toneCounts[tk] > maxToneCount) {
+      maxToneCount = toneCounts[tk];
+      dominantTone = tk;
+    }
+  }
+
+  // Primary reporter (most articles in this domain, excluding letters)
+  var reporterCounts = {};
+  for (var rpi = 0; rpi < dd.reporters.length; rpi++) {
+    var rep = dd.reporters[rpi];
+    if (rep !== 'letters') {
+      reporterCounts[rep] = (reporterCounts[rep] || 0) + 1;
+    }
+  }
+  var primaryReporter = '';
+  var maxRepCount = 0;
+  for (var rk in reporterCounts) {
+    if (reporterCounts[rk] > maxRepCount) {
+      maxRepCount = reporterCounts[rk];
+      primaryReporter = rk;
+    }
+  }
+
+  var articleCount = dd.ratings.length;
+
+  console.log('  ' + domain + ': ' + avgRating + ' (' + articleCount + ' articles, ' +
+    dominantTone + ', reporter: ' + (primaryReporter || 'n/a') + ')');
+
+  outputRows.push([
+    cycle,           // Cycle
+    domain,          // Domain
+    avgRating,       // Rating (-5 to +5)
+    articleCount,    // ArticleCount
+    primaryReporter, // Reporter
+    dominantTone,    // Tone
+    'FALSE'          // Processed
+  ]);
 }
+
+console.log('\nTotal domain ratings: ' + outputRows.length);
 
 // ═══════════════════════════════════════════════════════════════════════════
 // WRITE TO SHEET
@@ -259,32 +376,27 @@ if (dryRun) {
   process.exit(0);
 }
 
-if (allRatings.length === 0) {
+if (outputRows.length === 0) {
   console.log('\nNo ratings to write.');
   process.exit(0);
 }
 
-(async () => {
+(async function() {
   try {
-    const rows = allRatings.map(r => [
-      r.cycle, r.signalType, r.target, r.rating, r.tone,
-      r.neighborhoods, r.direction, r.notes, r.source, 'FALSE'
-    ]);
-
-    const client = await sheets.getClient();
-    const spreadsheetId = process.env.GODWORLD_SHEET_ID;
+    var client = await sheets.getClient();
+    var spreadsheetId = process.env.GODWORLD_SHEET_ID;
     if (!spreadsheetId) {
       throw new Error('GODWORLD_SHEET_ID not set in environment');
     }
 
     await client.spreadsheets.values.append({
-      spreadsheetId,
+      spreadsheetId: spreadsheetId,
       range: 'Edition_Coverage_Ratings!A2',
       valueInputOption: 'RAW',
-      resource: { values: rows }
+      resource: { values: outputRows }
     });
 
-    console.log('\nWritten ' + rows.length + ' rows to Edition_Coverage_Ratings');
+    console.log('\nWritten ' + outputRows.length + ' domain ratings to Edition_Coverage_Ratings');
   } catch (e) {
     console.error('Failed to write:', e.message);
     process.exit(1);

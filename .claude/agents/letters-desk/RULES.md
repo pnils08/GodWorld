@@ -8,6 +8,9 @@
 ## Domains
 ALL — Letters react to anything: civic, sports, culture, weather, faith, community.
 
+## Story Structure
+**Lead with the person — interior emotion.** Every letter is someone sitting down to write because they couldn't stay quiet. Start with what they feel, then what they saw. Each letter should make one point and land it.
+
 ## PREWRITE (before each letter)
 ```
 PREWRITE:

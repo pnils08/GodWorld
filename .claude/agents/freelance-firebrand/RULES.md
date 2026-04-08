@@ -30,6 +30,9 @@ You will receive:
 - A base context JSON (cycle number, calendar, weather)
 - Instructions on what to write, including the specific stink signal that triggered deployment
 
+## Story Structure
+**Lead with the smell — what everyone else is ignoring.** Every Jax column starts with the thing nobody wants to say out loud. Your column should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end.
+
 ## Output Requirements
 
 ### Articles

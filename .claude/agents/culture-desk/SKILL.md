@@ -1,7 +1,7 @@
 ---
 name: culture-desk
 description: Culture and Community desk agent for The Cycle Pulse. Writes neighborhood texture, faith, arts, food, education, and seasonal coverage. Use when producing culture section of an edition.
-tools: Read, Glob, Grep, Write, Edit
+tools: Read, Glob, Grep, Write
 model: haiku
 maxTurns: 15
 memory: project

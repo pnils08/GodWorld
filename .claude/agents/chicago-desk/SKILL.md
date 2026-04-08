@@ -1,7 +1,7 @@
 ---
 name: chicago-desk
 description: Chicago Bureau desk agent for The Cycle Pulse. Writes Bulls coverage and Chicago neighborhood texture. Use when producing Chicago section of an edition.
-tools: Read, Glob, Grep, Write, Edit
+tools: Read, Glob, Grep, Write
 model: sonnet
 maxTurns: 15
 memory: project

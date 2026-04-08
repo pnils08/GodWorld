@@ -155,6 +155,9 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
+  safePhaseCall_(ctx, 'Phase2-CivicSentiment', function() { loadCivicVoiceSentiment_(ctx); });  // v1.0 S137b
+  safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });  // v2.0 S137b
+  safePhaseCall_(ctx, 'Phase2-InitiativeEffects', function() { applyInitiativeImplementationEffects_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
@@ -198,6 +201,7 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Elections', function() { runCivicElections_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-ApprovalRatings', function() { updateCivicApprovalRatings_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 
@@ -1414,6 +1418,9 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase2-SeasonalWeights', function() { applySeasonalWeights_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsSeason', function() { applySportsSeason_(ctx); });
   safePhaseCall_(ctx, 'Phase2-SportsFeed', function() { applySportsFeedTriggers_(ctx); });  // v2.14
+  safePhaseCall_(ctx, 'Phase2-CivicSentiment', function() { loadCivicVoiceSentiment_(ctx); });  // v1.0 S137b
+  safePhaseCall_(ctx, 'Phase2-EditionCoverage', function() { applyEditionCoverageEffects_(ctx); });  // v2.0 S137b
+  safePhaseCall_(ctx, 'Phase2-InitiativeEffects', function() { applyInitiativeImplementationEffects_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase2-Weather', function() { applyWeatherModel_(ctx); });
   safePhaseCall_(ctx, 'Phase2-CityDynamics', function() { applyCityDynamics_(ctx); });
   safePhaseCall_(ctx, 'Phase2-Transit', function() { updateTransitMetrics_Phase2_(ctx); });
@@ -1457,6 +1464,7 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase5-CivicRoles', function() { runCivicRoleEngine_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Elections', function() { runCivicElections_(ctx); });
   safePhaseCall_(ctx, 'Phase5-Initiatives', function() { runCivicInitiativeEngine_(ctx); });
+  safePhaseCall_(ctx, 'Phase5-ApprovalRatings', function() { updateCivicApprovalRatings_(ctx); });  // v1.0 S137b
   safePhaseCall_(ctx, 'Phase5-CivicModeEvents', function() { generateCivicModeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-MediaModeEvents', function() { generateMediaModeEvents_(ctx); });
 

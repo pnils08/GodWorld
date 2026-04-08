@@ -64,6 +64,20 @@
       "Bash(wget *)"
     ]
   },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /root/GodWorld/scripts/session-eval.js",
+            "timeout": 15,
+            "async": true
+          }
+        ]
+      }
+    ]
+  },
   "enableAllProjectMcpServers": true,
   "autoMode": {
     "allow": [

@@ -43,6 +43,7 @@ These are read/written during every cycle run.
 | **Crime_Metrics** | 17 | ENGINE, SCRIPT, DASHBOARD | ENGINE | QoL index, patrol, hotspots per neighborhood |
 | **Transit_Metrics** | 180 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Ridership, delays, construction |
 | **Domain_Tracker** | 46 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Domain activity and cooldowns |
+| **Edition_Coverage_Ratings** | 9 | ENGINE | SCRIPT | Per-domain media ratings (-5 to +5). Cols: Cycle, Domain, Rating, ArticleCount, Reporter, Tone, Processed. Written by rateEditionCoverage.js post-publish, read by applyEditionCoverageEffects_ Phase 2 (S137b) |
 | **Civic_Office_Ledger** | 999* | ENGINE, SCRIPT, DASHBOARD | ENGINE | Council members, civic officials, factions |
 | **Initiative_Tracker** | 994* | ENGINE, SCRIPT, DASHBOARD | ENGINE | 5 civic initiatives with votes, status, timeline |
 | **Civic_Sweep_Report** | 8 | ENGINE | ENGINE | Civic sweep results |
@@ -86,7 +87,7 @@ Game data from Mike's MLB The Show / NBA 2K sessions.
 
 | Tab | Rows | Read By | Write By | Purpose |
 |-----|------|---------|----------|---------|
-| **Oakland_Sports_Feed** | 118 | ENGINE, SCRIPT | MIKE | A's game results, transactions |
+| **Oakland_Sports_Feed** | 134 | ENGINE, SCRIPT | MIKE | A's/NBA game results, transactions, player features. 20 columns — engine reads SeasonType, TeamsUsed, Team Record, Streak, EventTrigger, HomeNeighborhood, FanSentiment, PlayerMood, FranchiseStability, EconomicFootprint, CommunityInvestment, MediaProfile. Last row per cycle = season-state (S137b) |
 | **Chicago_Feed** | 53 | ENGINE | MIKE | Chicago city events |
 | **Chicago_Sports_Feed** | 72 | LEGACY | MIKE | Bulls game results — engine no longer reads (phased out S136, after C91) |
 

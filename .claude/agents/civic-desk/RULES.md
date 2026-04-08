@@ -8,6 +8,9 @@
 ## Domains
 CIVIC, INFRASTRUCTURE, HEALTH, CRIME, SAFETY, GOVERNMENT, TRANSIT
 
+## Story Structure
+**Lead with the question — what's hidden.** Every civic story has something someone doesn't want found. Start there. Your article should make a promise in the first paragraph, complicate it in the middle, and pay it off at the end.
+
 ## PREWRITE (before each article)
 ```
 PREWRITE:

@@ -51,10 +51,34 @@
   Writes: S.{sportsSeason, sportsSeasonOakland, sportsSeasonChicago, activeSports, sportsSource, sportsFeedEntries}
   Sheets: Oakland_Sports_Feed
 
-- **applySportsFeedTriggers_(ctx)** (v3.0 — Oakland only)
+- **applySportsFeedTriggers_(ctx)** (v3.0 S137b — Oakland only, all 6 texture columns wired)
   Reads: S.{cycle}
   Writes: S.{sportsSentimentBoost, sportsEventTriggers, sportsNeighborhoodEffects}
+  Feed columns used: Cycle, SeasonType, TeamsUsed, Team Record, Streak, EventTrigger, HomeNeighborhood, PlayerMood, FanSentiment, FranchiseStability, EconomicFootprint, CommunityInvestment, MediaProfile
   Sheets: Oakland_Sports_Feed
+
+### applyInitiativeImplementationEffects.js
+- **loadCivicVoiceSentiment_(ctx)** (v1.0 S137b)
+  Reads: output/civic_sentiment_c{XX}.json
+  Writes: S.{civicVoiceSentiment}
+  Closes the dead field — now populated from voice agent decisions via applyTrackerUpdates.js
+
+- **applyInitiativeImplementationEffects_(ctx)** (v1.0 S137b)
+  Reads: S.{cycleId, cycle, sentiment}
+  Writes: S.{initiativeImplementationEffects, initiativeNeighborhoodEffects, initiativeImplementationTriggers, sentiment}
+  Sheets: Initiative_Tracker (reads ImplementationPhase, PolicyDomain, AffectedNeighborhoods)
+
+### applyEditionCoverageEffects.js
+- **applyEditionCoverageEffects_(ctx)** (v2.0 S137b — per-domain media ratings)
+  Reads: S.{cycleId, cycle, civicVoiceSentiment, domainCooldowns, sentiment}
+  Writes: S.{editionSentimentBoost, editionNeighborhoodEffects, editionCoverageTriggers, editionDomainBalance, editionCoverageEffects, domainCooldowns, sentiment}
+  Sheets: Edition_Coverage_Ratings (reads + marks Processed=TRUE)
+
+### updateCivicApprovalRatings.js
+- **updateCivicApprovalRatings_(ctx)** (v1.0 S137b)
+  Reads: S.{editionDomainBalance}, Initiative_Tracker (performance), Civic_Office_Ledger (current approval, district, faction)
+  Writes: S.{approvalChanges, approvalTriggers, approvalNeighborhoodEffects}, Civic_Office_Ledger Approval column (direct write)
+  Triggers: vulnerable (<30), recall-pressure (<20), popular (>80)
 
 ### applyWeatherModel.js
 - **applyWeatherModel_(ctx)**

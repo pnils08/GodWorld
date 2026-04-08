@@ -1,0 +1,429 @@
+#!/usr/bin/env node
+/**
+ * ingestEditionWiki.js — Wiki-style entity extraction from editions
+ * [engine/sheet] — Phase 35.1 Smart Ingest
+ *
+ * Reads a published edition's structured sections (Names Index, Citizen Usage
+ * Log, Article Table, Storylines Updated, Continuity Notes) and produces
+ * per-entity wiki records in Supermemory's bay-tribune container.
+ *
+ * Instead of chunking the full text, this extracts:
+ * - Per-citizen appearance records (who, where, what, which article)
+ * - Per-initiative status updates (transition, details)
+ * - Cross-references (citizens appearing across multiple sections)
+ * - Contradictions with previous data (flagged, not resolved)
+ *
+ * Runs AFTER ingestEdition.js (which stores the raw chunks).
+ * This adds the entity-level synthesis layer on top.
+ *
+ * Usage:
+ *   node scripts/ingestEditionWiki.js editions/cycle_pulse_edition_90.txt --dry-run
+ *   node scripts/ingestEditionWiki.js editions/cycle_pulse_edition_90.txt --apply
+ */
+
+require('dotenv').config();
+var fs = require('fs');
+var path = require('path');
+var https = require('https');
+
+var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
+var CONTAINER_TAG = 'bay-tribune';
+var API_HOST = 'api.supermemory.ai';
+var DRY_RUN = !process.argv.includes('--apply');
+
+var filePath = process.argv.find(function(a) { return a.endsWith('.txt'); });
+if (!filePath) {
+  console.log('Usage: node scripts/ingestEditionWiki.js <edition-file> [--dry-run|--apply]');
+  process.exit(1);
+}
+
+if (!API_KEY) {
+  console.error('[ERROR] SUPERMEMORY_CC_API_KEY not set');
+  process.exit(1);
+}
+
+var text = fs.readFileSync(path.resolve(filePath), 'utf8');
+var filename = path.basename(filePath);
+
+// Detect cycle
+var cycle = 0;
+var cycleMatch = text.match(/EDITION\s+(\d+)/i) || filename.match(/(\d+)/);
+if (cycleMatch) cycle = parseInt(cycleMatch[1], 10);
+if (!cycle) { console.error('Could not detect cycle'); process.exit(1); }
+
+console.log('Edition: C' + cycle + ' | Mode: ' + (DRY_RUN ? 'DRY-RUN' : 'APPLY'));
+console.log('---');
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PARSE STRUCTURED SECTIONS
+// ═══════════════════════════════════════════════════════════════════════════
+
+var lines = text.split('\n');
+
+function findSection(header, endPatterns) {
+  var start = -1;
+  for (var i = 0; i < lines.length; i++) {
+    if (lines[i].trim() === header || lines[i].trim().indexOf(header) === 0) {
+      start = i + 1;
+      // Skip separator lines
+      while (start < lines.length && /^[=\-─━]+$/.test(lines[start].trim())) start++;
+      break;
+    }
+  }
+  if (start < 0) return [];
+
+  var end = lines.length;
+  for (var j = start; j < lines.length; j++) {
+    for (var ep = 0; ep < endPatterns.length; ep++) {
+      if (lines[j].trim().indexOf(endPatterns[ep]) === 0) {
+        end = j;
+        break;
+      }
+    }
+    if (end !== lines.length) break;
+  }
+  return lines.slice(start, end).filter(function(l) { return l.trim(); });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// EXTRACT NAMES INDEX — per-article citizen appearances
+// ═══════════════════════════════════════════════════════════════════════════
+
+var citizenAppearances = {}; // name → { role, neighborhood, articles: [{section, headline, reporter}] }
+var currentSection = '';
+var currentHeadline = '';
+var currentReporter = '';
+
+for (var i = 0; i < lines.length; i++) {
+  var line = lines[i];
+
+  // Track section context
+  var sectionMatch = line.match(/^-+\s*$/) ? null : line.match(/^(FRONT PAGE|CIVIC AFFAIRS|BUSINESS|CULTURE|SPORTS|CHICAGO|LETTERS|OPINION|HEALTH|ACCOUNTABILITY|FEATURES)/i);
+  if (sectionMatch) currentSection = sectionMatch[1].trim();
+
+  // Track headline (first substantive line after section header)
+  if (currentSection && !currentHeadline && line.trim() && !/^[-=─━]+$/.test(line.trim()) && !/^(By |Names Index)/.test(line.trim())) {
+    if (line.trim().length > 20 && line.trim().length < 200) {
+      currentHeadline = line.trim();
+    }
+  }
+
+  // Track reporter
+  var bylineMatch = line.match(/^By\s+(.+?)(?:\s*\||$)/);
+  if (bylineMatch) currentReporter = bylineMatch[1].trim();
+
+  // Parse Names Index lines
+  if (line.indexOf('Names Index:') >= 0) {
+    var namesStr = line.replace(/^.*Names Index:\s*/, '');
+    // Split on commas that are NOT inside parentheses
+    var names = [];
+    var depth = 0;
+    var current = '';
+    for (var ci2 = 0; ci2 < namesStr.length; ci2++) {
+      var ch = namesStr[ci2];
+      if (ch === '(') depth++;
+      else if (ch === ')') depth--;
+      else if (ch === ',' && depth === 0) {
+        if (current.trim()) names.push(current.trim());
+        current = '';
+        continue;
+      }
+      current += ch;
+    }
+    if (current.trim()) names.push(current.trim());
+
+    for (var ni = 0; ni < names.length; ni++) {
+      var nameEntry = names[ni].trim();
+      if (!nameEntry) continue;
+
+      // Parse: "Name (Role)" or "Name (age, Neighborhood, occupation)"
+      var nameMatch = nameEntry.match(/^(.+?)\s*\((.+)\)$/);
+      var name = nameMatch ? nameMatch[1].trim() : nameEntry;
+      var details = nameMatch ? nameMatch[2].trim() : '';
+
+      // Skip reporters
+      if (details.toLowerCase() === 'reporter' || details.toLowerCase() === 'columnist' ||
+          details.toLowerCase() === 'senior columnist') continue;
+
+      if (!citizenAppearances[name]) {
+        citizenAppearances[name] = { details: details, articles: [] };
+      }
+
+      citizenAppearances[name].articles.push({
+        section: currentSection,
+        headline: currentHeadline,
+        reporter: currentReporter
+      });
+    }
+
+    // Reset for next article
+    currentHeadline = '';
+    currentReporter = '';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PARSE CITIZEN USAGE LOG — returning vs new
+// ═══════════════════════════════════════════════════════════════════════════
+
+var citizenLogLines = findSection('CITIZEN USAGE LOG', ['STORYLINES', 'CONTINUITY', 'COMING NEXT', 'END EDITION']);
+var returningCitizens = [];
+var newCitizens = [];
+var inNew = false;
+
+for (var cli = 0; cli < citizenLogLines.length; cli++) {
+  var cl = citizenLogLines[cli].trim();
+  if (/New Citizens/i.test(cl)) { inNew = true; continue; }
+  if (/Returning Citizens/i.test(cl)) { inNew = false; continue; }
+  if (cl.indexOf('- ') !== 0) continue;
+
+  var entry = cl.substring(2).trim();
+  if (inNew) {
+    newCitizens.push(entry);
+  } else {
+    returningCitizens.push(entry);
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PARSE STORYLINES UPDATED — initiative status transitions
+// ═══════════════════════════════════════════════════════════════════════════
+
+var storylineLines = findSection('STORYLINES UPDATED', ['CONTINUITY', 'COMING NEXT', 'END EDITION']);
+var storylines = [];
+
+for (var sli = 0; sli < storylineLines.length; sli++) {
+  var sl = storylineLines[sli].trim();
+  if (sl.indexOf('- ') !== 0) continue;
+  storylines.push(sl.substring(2).trim());
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// PARSE CONTINUITY NOTES
+// ═══════════════════════════════════════════════════════════════════════════
+
+var continuityLines = findSection('CONTINUITY NOTES', ['COMING NEXT', 'END EDITION']);
+var continuityNotes = [];
+
+for (var cni = 0; cni < continuityLines.length; cni++) {
+  var cn = continuityLines[cni].trim();
+  if (cn.indexOf('- ') !== 0) continue;
+  continuityNotes.push(cn.substring(2).trim());
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// BUILD WIKI MEMORIES
+// ═══════════════════════════════════════════════════════════════════════════
+
+var memories = [];
+
+// 1. Per-citizen appearance records
+var citizenNames = Object.keys(citizenAppearances);
+for (var ci = 0; ci < citizenNames.length; ci++) {
+  var cName = citizenNames[ci];
+  var cData = citizenAppearances[cName];
+
+  var sections = cData.articles.map(function(a) { return a.section; }).filter(Boolean);
+  var uniqueSections = [];
+  for (var us = 0; us < sections.length; us++) {
+    if (uniqueSections.indexOf(sections[us]) < 0) uniqueSections.push(sections[us]);
+  }
+
+  var memText = cName;
+  if (cData.details) memText += ' (' + cData.details + ')';
+  memText += ' appeared in Edition ' + cycle;
+  memText += ' in ' + uniqueSections.length + ' section(s): ' + uniqueSections.join(', ') + '.';
+
+  if (cData.articles.length > 0 && cData.articles[0].headline) {
+    memText += ' Featured in: "' + cData.articles[0].headline.substring(0, 80) + '"';
+    if (cData.articles[0].reporter) memText += ' by ' + cData.articles[0].reporter;
+    memText += '.';
+  }
+
+  // Cross-section flag
+  if (uniqueSections.length >= 2) {
+    memText += ' [CROSS-SECTION: appeared in ' + uniqueSections.length + ' different sections]';
+  }
+
+  memories.push({
+    content: memText,
+    metadata: {
+      type: 'citizen-appearance',
+      citizen: cName,
+      cycle: cycle,
+      sections: uniqueSections.join(','),
+      crossSection: uniqueSections.length >= 2
+    }
+  });
+}
+
+// 2. Returning citizen context
+for (var ri = 0; ri < returningCitizens.length; ri++) {
+  memories.push({
+    content: 'Edition ' + cycle + ' returning citizen: ' + returningCitizens[ri],
+    metadata: {
+      type: 'citizen-returning',
+      cycle: cycle
+    }
+  });
+}
+
+// 3. New citizen introductions
+for (var nci = 0; nci < newCitizens.length; nci++) {
+  memories.push({
+    content: 'Edition ' + cycle + ' introduced new citizen: ' + newCitizens[nci],
+    metadata: {
+      type: 'citizen-new',
+      cycle: cycle
+    }
+  });
+}
+
+// 4. Storyline transitions
+for (var sti = 0; sti < storylines.length; sti++) {
+  memories.push({
+    content: 'Edition ' + cycle + ' storyline update: ' + storylines[sti],
+    metadata: {
+      type: 'storyline-transition',
+      cycle: cycle
+    }
+  });
+}
+
+// 5. Continuity notes
+for (var ctn = 0; ctn < continuityNotes.length; ctn++) {
+  memories.push({
+    content: 'Edition ' + cycle + ' continuity note: ' + continuityNotes[ctn],
+    metadata: {
+      type: 'continuity',
+      cycle: cycle
+    }
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// DISPLAY SUMMARY
+// ═══════════════════════════════════════════════════════════════════════════
+
+console.log('\nWIKI EXTRACTION SUMMARY:');
+console.log('  Citizens found: ' + citizenNames.length);
+console.log('    Cross-section: ' + citizenNames.filter(function(n) {
+  return citizenAppearances[n].articles.map(function(a) { return a.section; })
+    .filter(function(s, i, arr) { return s && arr.indexOf(s) === i; }).length >= 2;
+}).length);
+console.log('  Returning: ' + returningCitizens.length);
+console.log('  New: ' + newCitizens.length);
+console.log('  Storylines: ' + storylines.length);
+console.log('  Continuity notes: ' + continuityNotes.length);
+console.log('  Total memories: ' + memories.length);
+console.log('');
+
+// Show citizen details
+for (var di = 0; di < citizenNames.length; di++) {
+  var dn = citizenNames[di];
+  var dd = citizenAppearances[dn];
+  var ds = dd.articles.map(function(a) { return a.section; }).filter(function(s, i, arr) { return s && arr.indexOf(s) === i; });
+  console.log('  ' + dn + (dd.details ? ' (' + dd.details + ')' : '') +
+    ' → ' + ds.join(', ') + (ds.length >= 2 ? ' [CROSS]' : ''));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WRITE CONTRADICTIONS FILE
+// ═══════════════════════════════════════════════════════════════════════════
+
+// Check for potential contradictions in continuity notes
+var contradictions = continuityNotes.filter(function(n) {
+  return /contradict|conflict|incorrect|wrong|error|mismatch|inconsist/i.test(n);
+});
+
+if (contradictions.length > 0 || newCitizens.length > 0) {
+  var contradictionFile = path.join(__dirname, '..', 'output', 'contradictions_c' + cycle + '.json');
+  var contradictionData = {
+    cycle: cycle,
+    timestamp: new Date().toISOString(),
+    contradictions: contradictions,
+    newCitizensToVerify: newCitizens,
+    crossSectionCitizens: citizenNames.filter(function(n) {
+      return citizenAppearances[n].articles.map(function(a) { return a.section; })
+        .filter(function(s, i, arr) { return s && arr.indexOf(s) === i; }).length >= 2;
+    })
+  };
+  try {
+    var outDir = path.dirname(contradictionFile);
+    if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+    fs.writeFileSync(contradictionFile, JSON.stringify(contradictionData, null, 2));
+    console.log('\nContradictions/flags written to: ' + path.basename(contradictionFile));
+  } catch (e) {
+    // output/ may be gitignored — non-fatal
+  }
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WRITE TO SUPERMEMORY
+// ═══════════════════════════════════════════════════════════════════════════
+
+if (DRY_RUN) {
+  console.log('\n--- DRY RUN — ' + memories.length + ' memories would be written. Use --apply to write.');
+  process.exit(0);
+}
+
+function addMemory(content, metadata) {
+  return new Promise(function(resolve, reject) {
+    var payload = JSON.stringify({
+      memories: [{ content: content }],
+      containerTag: CONTAINER_TAG
+    });
+
+    var options = {
+      hostname: API_HOST,
+      path: '/v4/memories',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + API_KEY,
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    };
+
+    var req = https.request(options, function(res) {
+      var data = '';
+      res.on('data', function(chunk) { data += chunk; });
+      res.on('end', function() {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve({ status: res.statusCode, body: data });
+        } else {
+          reject(new Error('HTTP ' + res.statusCode + ': ' + data));
+        }
+      });
+    });
+
+    req.on('error', reject);
+    req.write(payload);
+    req.end();
+  });
+}
+
+(async function() {
+  var success = 0;
+  var errors = 0;
+
+  for (var mi = 0; mi < memories.length; mi++) {
+    var m = memories[mi];
+    try {
+      await addMemory(m.content, m.metadata);
+      success++;
+      if ((mi + 1) % 10 === 0) console.log('  ... ' + (mi + 1) + '/' + memories.length);
+    } catch (err) {
+      console.error('[FAIL] ' + m.content.substring(0, 80) + ' — ' + err.message);
+      errors++;
+    }
+
+    // Rate limit
+    if (mi < memories.length - 1) {
+      await new Promise(function(r) { setTimeout(r, 300); });
+    }
+  }
+
+  console.log('\n[DONE] Written: ' + success + ', Errors: ' + errors);
+  if (success > 0) console.log('Edition ' + cycle + ' wiki entities are now in bay-tribune');
+})();

@@ -475,6 +475,12 @@ node scripts/rateEditionCoverage.js editions/supplemental_{topic_slug}_c{XX}.txt
 ```
 Generates per-domain ratings (-5 to +5) from the supplemental. The engine reads these next cycle — the city reacts to what the newspaper published, including supplementals. A civic deep dive affects CIVIC domain. A food piece affects CULTURE. Every published piece feeds back.
 
+**Wiki ingest:**
+```bash
+node scripts/ingestEditionWiki.js editions/supplemental_{topic_slug}_c{XX}.txt --apply
+```
+Extracts per-citizen, per-storyline records into bay-tribune. Entity-level knowledge that compounds across editions.
+
 ---
 
 ## File Locations

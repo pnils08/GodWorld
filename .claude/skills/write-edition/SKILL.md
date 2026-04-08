@@ -357,6 +357,8 @@ node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt
 4. Run filing check: `node scripts/postRunFiling.js {XX}`
 5. Rate edition coverage: `node scripts/rateEditionCoverage.js editions/cycle_pulse_edition_{XX}.txt --apply`
    — Generates per-domain ratings (-5 to +5) that the engine reads next cycle. The city reacts to what the newspaper published.
+6. Wiki ingest: `node scripts/ingestEditionWiki.js editions/cycle_pulse_edition_{XX}.txt --apply`
+   — Extracts per-citizen, per-initiative, per-storyline records into bay-tribune. Entity-level knowledge that compounds across editions. Future searches find "Beverly Hayes" as a person, not an edition chunk.
 
 ## What This Skill Does NOT Do
 

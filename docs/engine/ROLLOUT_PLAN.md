@@ -422,7 +422,9 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 4. **35.4 Query result capture.** When Mags does good research (angle briefs, citizen profiles, cross-desk connections), save the synthesis as a wiki page — not just the raw search results. Tag as `query-result`. Best thinking gets collected instead of lost in session transcripts. This is what the `mags` container should become.
 
-5. **35.5 Lint pass automation.** Periodic script that audits bay-tribune + world-data for contradictions between pages, orphan pages (no incoming links), stale pages (not updated in 5+ cycles), and missing pages (referenced but don't exist). Automates what Mara does manually. Weekly cron or batch job.
+5. **35.5 Lint pass automation.** Periodic script that audits bay-tribune + world-data. Seven checks (adapted from claude-memory-compiler): (1) broken cross-references between entities, (2) stale pages not updated in 5+ cycles, (3) orphan pages with no incoming links, (4) duplicate concepts (same citizen under different names), (5) contradictions between pages (E90 says X, E89 says Y), (6) missing pages (referenced but don't exist), (7) outdated content (claims superseded by newer data). Weekly cron or batch job. Output to `output/wiki-lint/` for Mara to review.
+
+6. **35.6 Auto-compile scheduling.** Stop hook or cron that automatically runs `ingestEditionWiki.js` after edition publish instead of requiring manual invocation. Pattern from claude-memory-compiler — their compile triggers after 6 PM. Ours could trigger on file change in `editions/` directory or as part of the Stop hook chain.
 
 **Build order:** 35.1 (smart ingest) → 35.2 (index) → 35.3 (contradictions) → 35.4 (query capture) → 35.5 (lint). Each piece is independently useful.
 

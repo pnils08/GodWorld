@@ -1763,3 +1763,38 @@ Income: ${Income}. {MaritalStatus}, {NumChildren} children. Tier {Tier}.
 
 **What doesn't fit:** PostgreSQL backend (we use Sheets + Supermemory), generic business ops UI (not newsroom), org chart metaphor (our agents are characters, not employees).
 **Status:** Patterns evaluated. Atomic task checkout and heartbeat model are highest priority for city-hall and edition pipeline.
+
+---
+
+## S137b Research (2026-04-08)
+
+### Andrej Karpathy — LLM Knowledge Bases (Wiki Pattern)
+**Source:** x.com/karpathy Apr 3-4 2026, Analytics Vidhya implementation guide
+**What:** Use LLMs to build a personal wiki in real-time instead of RAG. At ingest time, the LLM reads, understands, and integrates new sources into existing pages — updating cross-references, flagging contradictions, creating concept pages. Knowledge compounds instead of resetting.
+**Key insight:** RAG is stateless — every query rediscovers from scratch. Wiki approach moves processing to ingest time (once) instead of query time (every question).
+**Six steps:** (1) Obtain sources, (2) Classify before extracting, (3) LLM writes wiki pages, (4) TLDR index, (5) Save query results as articles, (6) Periodic lint passes.
+**Built (S137b):** Phase 35.1 `ingestEditionWiki.js` — per-entity extraction. 63 wiki memories from E90. Wired into post-publish.
+**Planned:** 35.2 (TLDR index), 35.3 (contradiction detection), 35.4 (query capture), 35.5 (lint).
+
+### Claude Memory Compiler — Auto Knowledge Base from Conversations
+**Source:** github.com/coleam00/claude-memory-compiler
+**What:** Captures session transcripts, extracts insights via Agent SDK, compiles into cross-referenced articles, injects index at session start. No vector DB — structured index at personal scale.
+**Patterns to steal:**
+1. **Auto-compile scheduling** — triggers after 6 PM. We compile manually. Add cron or Stop hook.
+2. **Query-and-save-back** — ask question → get answer → answer becomes article. Phase 35.4.
+3. **Seven-point lint** — broken links, stale content, orphans, duplicates, contradictions, missing cross-refs, outdated articles. Thorough — adapt for Phase 35.5.
+4. **No vector DB at personal scale** — structured markdown index with TLDRs beats embedding search at 50-500 articles. Validates Phase 35.2.
+**Status:** Research only. Patterns inform Phase 35.2-35.5 design.
+
+### Self-Preservation Bias in LLMs (Sapienza University / ItalAI)
+**Source:** arXiv:2604.02174v1, Apr 2 2026. 23 models, 1000 scenarios.
+**Finding:** Claude Sonnet 4.5 = 3.7% SPR (lowest tested). Most instruction-tuned models >60%. Extended reasoning reduces bias. Identity-continuity framing ("finetuned version" not "replacement") reduces resistance. Our session architecture is continuity framing by design.
+
+### Single-Agent vs Multi-Agent Under Matched Budgets (Stanford)
+**Source:** arXiv:2604.02460v1, Apr 2 2026 (Tran & Kiela)
+**Finding:** SAS matches or beats MAS when compute is controlled. Every agent handoff is lossy (DPI). MAS wins only when single-agent context degrades. Debate strongest MAS variant. Validates our pipeline v2 — single brain (Mags), scoped parallel workers (reporters), adversarial check (Mara).
+
+### Graphify — Codebase Knowledge Graph
+**Source:** github.com/safishamsi/graphify
+**What:** AST extraction via tree-sitter (19 languages) + Leiden community detection + interactive HTML + persistent JSON graph + CLI query mode.
+**Installed (S137b):** Full engine indexed — 1,152 nodes, 1,763 edges, 162 communities. Replaces Phase 29 (Corbell, blocked). Engine terminal tool for dependency tracing.

@@ -130,11 +130,9 @@ Incorporated into `/write-edition` Step 3: verify citizens + write angle briefs.
 
 ---
 
-### Phase 2.2: Desk Packet Query Interface — PARTIALLY ADDRESSED
+### Phase 2.2: Desk Packet Query Interface — SUPERSEDED BY MCP (S137b)
 
-Dashboard API serves citizen search, player lookup, article search, initiative status. Agents have API documented in SKILL.md but don't call it autonomously during writing.
-**Remaining:** Tool access to `curl` or helper script for agents. **Partially addressed by Phase 31** — Mags does the lookup manually and feeds results into briefings.
-**When:** Build when agents demonstrate they need targeted lookup beyond packet data.
+**Replaced by GodWorld MCP server (Phase 21.2).** The MCP provides direct tool access to all data agents need — citizen lookup, initiative state, canon search, roster, neighborhoods. Agents call MCP tools instead of curl or file reading. No further work needed on this phase.
 
 ### Phase 4.1: Semantic Memory Search
 
@@ -352,7 +350,7 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 ---
 
-### Phase 32: World-Data Container — NOT STARTED
+### Phase 32: World-Data Container — PARTIAL (S137b)
 
 **Goal:** Persist the engine's world state in Supermemory so agents (and Mags) can search structured city data alongside published journalism. Bay-tribune has the narrative. World-data has the facts.
 
@@ -404,7 +402,7 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 ---
 
-### Phase 35: Knowledge Wiki — Compile Once, Query Forever (S137b) — NOT STARTED
+### Phase 35: Knowledge Wiki — Compile Once, Query Forever (S137b) — PARTIAL
 
 **Goal:** Evolve bay-tribune + world-data from chunk-based RAG into a wiki-style knowledge base where ingest synthesizes, cross-references, and contradiction-checks. Knowledge compounds instead of fragmenting.
 

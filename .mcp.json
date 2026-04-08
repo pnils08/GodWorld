@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "godworld": {
+      "command": "python3",
+      "args": ["scripts/godworld-mcp.py"],
+      "cwd": "/root/GodWorld"
+    }
+  }
+}

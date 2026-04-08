@@ -413,6 +413,34 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 ---
 
+### Phase 35: Knowledge Wiki — Compile Once, Query Forever (S137b) — NOT STARTED
+
+**Goal:** Evolve bay-tribune + world-data from chunk-based RAG into a wiki-style knowledge base where ingest synthesizes, cross-references, and contradiction-checks. Knowledge compounds instead of fragmenting.
+
+**Source:** Andrej Karpathy "LLM Knowledge Bases" (Apr 2026) — use LLMs to build a personal wiki in real-time. Analytics Vidhya implementation guide. Key insight: RAG is stateless — every query rediscovers knowledge from scratch. Wiki approach integrates new sources into existing pages at ingest time.
+
+**Why this matters now:** The feedback loop (S137b) generates more data every cycle — coverage ratings, civic sentiment, citizen life events, initiative effects. All stored but never synthesized. The problem compounds with every cycle. More chunks, more fragmented searches, more context spent rediscovering what we already know.
+
+**Not a new system — an evolution of existing ingest:**
+
+1. **35.1 Smart ingest for bay-tribune.** Upgrade `ingestEdition.js` to extract per-entity updates at ingest time. When E91 mentions Beverly Hayes, don't just chunk the edition — find or create her bay-tribune page, append the new info, flag contradictions with E90, update cross-references to Stabilization Fund and West Oakland. Per-citizen, per-initiative, per-neighborhood pages maintained by the LLM at ingest.
+
+2. **35.2 TLDR index.** Central `wiki/index.md` style document in bay-tribune — one-line TLDRs per citizen, per initiative, per neighborhood. Agents read the index first, drill into relevant pages only. Replaces "search and hope" with "navigate and find."
+
+3. **35.3 Contradiction detection at ingest.** When new data conflicts with existing pages — flag it. E90 says $18,500, E91 says $16,200 — surface the conflict immediately, don't let it sit until Mara catches it weeks later. Output to `output/contradictions_c{XX}.json` for Mara to review.
+
+4. **35.4 Query result capture.** When Mags does good research (angle briefs, citizen profiles, cross-desk connections), save the synthesis as a wiki page — not just the raw search results. Tag as `query-result`. Best thinking gets collected instead of lost in session transcripts. This is what the `mags` container should become.
+
+5. **35.5 Lint pass automation.** Periodic script that audits bay-tribune + world-data for contradictions between pages, orphan pages (no incoming links), stale pages (not updated in 5+ cycles), and missing pages (referenced but don't exist). Automates what Mara does manually. Weekly cron or batch job.
+
+**Build order:** 35.1 (smart ingest) → 35.2 (index) → 35.3 (contradictions) → 35.4 (query capture) → 35.5 (lint). Each piece is independently useful.
+
+**Depends on:** Phase 32 (world-data container) should be complete first — entity-level pages need entity-level data. Phase 33.16 (world-data ingest script) is the prerequisite for 35.1.
+
+**Priority: HIGH — 35.1 is buildable as an upgrade to ingestEdition.js in the next engine session. The feedback loop makes this more urgent with every cycle.**
+
+---
+
 ### Phase 25: Storage Strategy — NOT STARTED
 
 Deduplicate across 4 layers (disk, Drive, GitHub, Supermemory). Quick wins done S85. Full audit not started.

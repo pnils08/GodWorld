@@ -111,8 +111,8 @@ Add `allowed-tools: ["Read", "Grep", "Glob"]` to reporter agent skill frontmatte
 **33.15 Iterative retrieval for canon — DESIGN (research-build terminal) → BUILD (media terminal).**
 3-cycle search-evaluate-refine pattern for reporters accessing canon. Score results 0-1, stop at 3+ files scoring 0.7+. Replaces context dumps. From everything-claude-code.
 
-**33.16 World-data ingest script — DESIGN (research-build terminal) → BUILD (engine-sheet terminal).**
-`scripts/ingestWorldData.js` — reads Simulation_Ledger via service account, builds one memory per citizen using Memories API (`/v4/memories`). Entity-centric phrasing with metadata (neighborhood, role, tier, clockMode). Includes TraitProfile as voice tags. Delta ingest — only update citizens the engine changed. Also ingests businesses (52), neighborhoods (17), faith/cultural (51). See `docs/RESEARCH.md` S134 world-data ingest design.
+**33.16 World-data citizen cards — DONE S137b.**
+`scripts/buildCitizenCards.js` — reads Simulation_Ledger (POPID, First, Last, Tier, RoleType, BirthYear, TraitProfile, Neighborhood, CitizenBio), searches bay-tribune for appearances, compiles per-citizen card, writes to world-data Supermemory. Cards compound with each edition — wiki ingest adds memories, citizen cards synthesize them. Tier 1 (17), Tier 2 (60) written. Tier 3-4 in progress. Supports `--tier`, `--name`, `--limit` filters. GodWorld MCP `lookup_citizen` queries these cards. **Remaining:** businesses (52), neighborhoods (17), faith/cultural (51) — separate scripts needed.
 
 **33.17 Missing trait profiles — DESIGN (research-build terminal) → BUILD (engine-sheet terminal).**
 343 of 685 citizens have no TraitProfile. Build a script that generates Archetype/Tone/Motifs/Traits from LifeHistory events and engine data. Tags are literary instructions — bounded personality earned from simulation, not assigned. Same philosophy as bounded traits on agents but tag-based instead of numeric.

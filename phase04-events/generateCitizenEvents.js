@@ -71,6 +71,84 @@ function generateCitizensEvents_(ctx) {
   var dynamics = S.cityDynamics || { sentiment: 0, culturalActivity: 1, communityEngagement: 1 };
   var econMood = S.economicMood || 50;
 
+  // =========================================================================
+  // NEIGHBORHOOD FEEDBACK EFFECTS (S137b)
+  // Merge all per-neighborhood effects from Phase 2 into one lookup.
+  // Sources: edition coverage, sports, initiative implementation, approval.
+  // =========================================================================
+  var hoodEffects = {};
+
+  function mergeHoodFx_(target, source) {
+    if (!source) return;
+    for (var h in source) {
+      if (!target[h]) target[h] = { retail: 0, nightlife: 0, traffic: 0, sentiment: 0, communityEngagement: 0, culturalActivity: 0, publicSpaces: 0 };
+      var s = source[h];
+      for (var k in s) {
+        if (s.hasOwnProperty(k) && target[h].hasOwnProperty(k)) {
+          target[h][k] += s[k] || 0;
+        }
+      }
+    }
+  }
+
+  mergeHoodFx_(hoodEffects, S.editionNeighborhoodEffects);
+  mergeHoodFx_(hoodEffects, S.sportsNeighborhoodEffects);
+  mergeHoodFx_(hoodEffects, S.initiativeNeighborhoodEffects);
+  mergeHoodFx_(hoodEffects, S.approvalNeighborhoodEffects);
+
+  // Also merge "city" key (city-wide effects from edition coverage) into all neighborhoods
+  if (hoodEffects['city']) {
+    var cityFx = hoodEffects['city'];
+    for (var ch in hoodEffects) {
+      if (ch !== 'city') {
+        for (var ck in cityFx) {
+          if (cityFx.hasOwnProperty(ck) && hoodEffects[ch].hasOwnProperty(ck)) {
+            hoodEffects[ch][ck] += cityFx[ck] * 0.5; // city-wide effects at half strength per neighborhood
+          }
+        }
+      }
+    }
+  }
+
+  // Neighborhood event text pools keyed by effect type
+  var hoodPositiveEvents = [
+    "noticed new energy in the neighborhood",
+    "overheard optimistic conversations at the corner store",
+    "saw a new business opening on the block",
+    "felt the neighborhood coming together",
+    "attended a community meeting that felt different this time",
+    "heard about stabilization funds reaching families nearby",
+    "walked past a construction site that wasn't there last month",
+    "noticed more foot traffic on the main street"
+  ];
+
+  var hoodNegativeEvents = [
+    "felt a shift in the neighborhood's mood",
+    "overheard worried conversations about the block's future",
+    "noticed another storefront going dark",
+    "saw fewer people out in the evening",
+    "felt tension at the bus stop",
+    "heard complaints about city hall at the laundromat",
+    "noticed the neighborhood felt quieter than usual",
+    "worried about changes coming too fast or not at all"
+  ];
+
+  var hoodSportsEvents = [
+    "caught the game at a bar on the corner",
+    "heard cheering through apartment walls after the win",
+    "saw fans in jerseys flooding the waterfront",
+    "got caught in postgame traffic near the stadium",
+    "talked baseball with a stranger at the coffee shop"
+  ];
+
+  var hoodCivicEvents = [
+    "signed a petition at the grocery store",
+    "overheard neighbors debating the council member's last vote",
+    "noticed a community flyer about the upcoming initiative",
+    "attended a town hall in the school gymnasium",
+    "heard about the council member's approval rating dropping"
+  ];
+
   // Calendar context (v2.4)
   var holiday = S.holiday || "none";
   var holidayPriority = S.holidayPriority || "none";
@@ -527,6 +605,16 @@ function generateCitizensEvents_(ctx) {
     else if (sportsSeason === "playoffs" || sportsSeason === "post-season") chance += 0.01;
 
     if (dynamics.culturalActivity >= 1.4) chance += 0.008;
+
+    // Neighborhood feedback chance boost (S137b)
+    // Citizens in neighborhoods with active effects get more events
+    var hoodFx = hoodEffects[neighborhood];
+    if (hoodFx) {
+      var totalActivity = Math.abs(hoodFx.sentiment || 0) + Math.abs(hoodFx.retail || 0) +
+        Math.abs(hoodFx.nightlife || 0) + Math.abs(hoodFx.communityEngagement || 0);
+      if (totalActivity > 0.1) chance += 0.01;  // Active neighborhood
+      if (totalActivity > 0.2) chance += 0.01;  // Very active neighborhood
+    }
     if (dynamics.communityEngagement >= 1.3) chance += 0.005;
 
     // Alliance/Arc boost
@@ -598,11 +686,49 @@ function generateCitizensEvents_(ctx) {
       pool.push(makeEntry(bpEntry.text, mergeTags(bpEntry.tags, calendarTags)));
     }
 
-    // Neighborhood
+    // Neighborhood (static texture)
     if (neighborhood && neighborhoodPools[neighborhood]) {
       var nTexts = neighborhoodPools[neighborhood];
       for (var ni = 0; ni < nTexts.length; ni++) {
         pool.push(makeEntry(nTexts[ni], mergeTags(["source:neighborhood", "neighborhood:" + neighborhood], calendarTags)));
+      }
+    }
+
+    // Neighborhood feedback effects (S137b)
+    // Citizens in neighborhoods with active effects get domain-specific events
+    var hfx = hoodEffects[neighborhood];
+    if (hfx) {
+      var netSentiment = hfx.sentiment || 0;
+      var netRetail = hfx.retail || 0;
+      var netNightlife = hfx.nightlife || 0;
+      var netEngagement = hfx.communityEngagement || 0;
+
+      // Positive neighborhood: add uplifting events
+      if (netSentiment > 0.03 || netRetail > 0.05 || netEngagement > 0.03) {
+        for (var hpi = 0; hpi < hoodPositiveEvents.length; hpi++) {
+          pool.push(makeEntry(hoodPositiveEvents[hpi], mergeTags(["source:feedback", "feedback:positive", "neighborhood:" + neighborhood], calendarTags)));
+        }
+      }
+
+      // Negative neighborhood: add anxiety events
+      if (netSentiment < -0.03 || netRetail < -0.05 || netEngagement < -0.03) {
+        for (var hni = 0; hni < hoodNegativeEvents.length; hni++) {
+          pool.push(makeEntry(hoodNegativeEvents[hni], mergeTags(["source:feedback", "feedback:negative", "neighborhood:" + neighborhood], calendarTags)));
+        }
+      }
+
+      // Sports energy in neighborhood
+      if (netNightlife > 0.05) {
+        for (var hsi = 0; hsi < hoodSportsEvents.length; hsi++) {
+          pool.push(makeEntry(hoodSportsEvents[hsi], mergeTags(["source:feedback", "feedback:sports", "neighborhood:" + neighborhood], calendarTags)));
+        }
+      }
+
+      // Civic pressure in neighborhood (from approval changes)
+      if (netEngagement > 0.02 && netSentiment < 0) {
+        for (var hci = 0; hci < hoodCivicEvents.length; hci++) {
+          pool.push(makeEntry(hoodCivicEvents[hci], mergeTags(["source:feedback", "feedback:civic", "neighborhood:" + neighborhood], calendarTags)));
+        }
       }
     }
 

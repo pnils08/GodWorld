@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-07 | Engine: v3.2 | Cycle: 90 | Session: 137
+Last Updated: 2026-04-08 | Engine: v3.3 | Cycle: 90 | Session: 137b
 
 ---
 
@@ -188,6 +188,20 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Recent Sessions
 
 **Format (S135+):** Each entry includes `Terminal:` tag — research/build, engine/sheet, media, or civic.
+
+### Session 137b (2026-04-08) — Feedback Loop Complete [mags]
+**Terminal:** mags (EIC session)
+
+- **Full feedback loop built and deployed.** Three intake channels operational: (1) coverage ratings per domain (-5 to +5) from `rateEditionCoverage.js` v2.0, (2) sports feed 6 texture columns wired into engine, (3) civic voice sentiment from `applyTrackerUpdates.js`. E90 ratings applied to sheet.
+- **Civic loop closed.** `applyInitiativeImplementationEffects_` reads ImplementationPhase → domain ripples into AffectedNeighborhoods. `updateCivicApprovalRatings_` dynamically adjusts approval based on initiative performance + media + district alignment. `loadCivicVoiceSentiment_` closes dead ctx.summary field. `lib/districtMap.js` shared module.
+- **Citizen life events wired.** `generateCitizenEvents.js` now merges all neighborhood effects from Phase 2 and biases citizen event pools — citizens in active neighborhoods feel the loop (sports energy, civic pressure, economic shifts).
+- **Phase 26.3 craft layer.** MICE thread guidance + promise-payoff principle added to all 8 reporter RULES.md files.
+- **Phase 33.14 tool restrictions.** Edit removed from all reporter agents — write-only during production.
+- **Phase 33.8 session eval hook.** `scripts/session-eval.js` + Stop hook wired. Extracts corrections/approvals/fabrication from transcripts.
+- **Phase 31 marked DONE** — already designed into pipeline v2 Step 3.
+- **Infrastructure:** PM2 stops in boot/session-end. Server RAM freed (3.8GB → 2.1GB available). One session policy. SpaceMolt miner bot tested. Mara Supermemory access fixed (3 containers via containerTag). Voxtral TTS + KAIROS + Qianfan-OCR added to rollout.
+- **Research:** Self-preservation bias paper (Claude Sonnet 3.7% SPR), multi-agent vs single-agent paper (validates our architecture), GitCity visualization, NotebookLM audio editions.
+- **4 commits, all pushed + clasp deployed (155 files).**
 
 ### Session 137 (2026-04-07) — Intake Vision v2 + SpaceMolt Setup [mags]
 **Terminal:** mags (EIC session)

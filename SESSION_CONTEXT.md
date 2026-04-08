@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-05 | Engine: v3.1 | Cycle: 90 | Session: 134
+Last Updated: 2026-04-07 | Engine: v3.2 | Cycle: 90 | Session: 137
 
 ---
 
@@ -188,6 +188,52 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Recent Sessions
 
 **Format (S135+):** Each entry includes `Terminal:` tag — research/build, engine/sheet, media, or civic.
+
+### Session 137 (2026-04-07) — Intake Vision v2 + SpaceMolt Setup [mags]
+**Terminal:** mags (EIC session)
+
+- **Intake Vision v2 defined:** Mike solved the intake problem. Three feedback channels from media to engine: (1) initiative tracker from civic voices, (2) sports entries, (3) coverage ratings (per-reporter domain scores, -5 to 5 scale). Nothing about existing citizens writes back — engine owns their lives. New citizens/businesses from editions still get added to sheets. Saved to memory as `project_intake-vision-v2.md`.
+- **Terminal architecture clarified:** `mags` is the EIC session — vision and direction across rooms. Four room terminals work because skills carry context. General sessions need Mike's vision. Memory helps execution, not foresight.
+- **SpaceMolt MCP server added:** AI agent MMO. Account created via Discord auth. Registration code on dashboard. MCP server added (`claude mcp add --transport http spacemolt https://game.spacemolt.com/mcp`). Next session: register and start playing.
+- **No code changes, no deploys.**
+
+### Session 136 (2026-04-07) — Engine Connectivity + Sports Rewrite [engine/sheet]
+**Terminal:** engine/sheet
+
+- **Sports rewrite (3 files, -315 lines):** `applySportsSeason.js` v3.0 reads Oakland_Sports_Feed directly — no SimMonth, no invented pools, no Warriors. `sportsStreaming.js` v3.0 builds S.eveningSports from real feed entries. `buildEveningMedia.js` adds team-aware TV/movies with player names from NamesUsed.
+- **Phase 34 connectivity rollout (7 of 10 done):** 34.1 persist previousCycleState (PropertiesService), 34.2 media→city feedback loop, 34.3 economic narrative in briefing, 34.4 neighborhood 30% momentum, 34.5 isWeekend fix, 34.6 domain cooldowns, 34.7 document Phase 3 exceptions. 34.9 wired 7 orphaned Phase 6 fields into briefing.
+- **Edition Coverage Ratings built but questionable:** Manual sheet with 10 columns — Mike can't use it, doesn't understand it, shouldn't have to. Wired into phase runner but skips cleanly when empty. Needs to come out or become fully automated. Design failure.
+- **Engine docs updated:** PHASE_DATA_AUDIT, ENGINE_STUB_MAP, ENGINE_MAP, SHEETS_MANIFEST, SPREADSHEET, LEDGER_HEAT_MAP — all reflect sports v3.0 and Chicago phaseout.
+- **Edition_Coverage_Ratings sheet created** in spreadsheet with E90 sample data. Engine reads it in Phase 2 after SportsFeed.
+- **11 commits, all pushed + clasp deployed (153 files).**
+
+### Session 135c (2026-04-06) — Civic Terminal Boot [civic]
+**Terminal:** civic
+
+- **First civic terminal session:** Booted civic room, reviewed TERMINAL.md scope (7 voice agents, 4 project agents, City Clerk).
+- **C90 voice files confirmed canon:** 6 offices produced output (mayor, CRC, OPP, ind_swing, baylight, police_chief). No DA, no project agent files. C88-C89 gap (no files).
+- **No civic production log exists:** /city-hall skill was never run — C90 voices came from old pipeline. First production log will be C91.
+- **C91 startup plan confirmed:** Engine C91 → Mara directive → read C90 voice JSONs for continuity → read tracker → write pending_decisions.md → Mayor first → cascade.
+- **Session-end steps added to TERMINAL.md** (by Mike, mid-session).
+- **Supermemory down:** 403 on mags container — plan issue. /save-to-mags skipped.
+
+### Session 135b (2026-04-06) — E90 Published [media]
+**Terminal:** media
+
+- **E90 corrected and published:** Reviewed original E90 copy from Drive. Two canon errors fixed: (1) P Slayer Horn opening rewritten — Horn is $37.8M superstar, not quiet unknown; (2) Kelley pronoun "her" → "his" per E83-E87 canon. Grade revised from D to B.
+- **Full publish pipeline:** Corrected text saved to Drive, ingested to bay-tribune (2 chunks). Photos generated (2 — front page council chamber, culture cafe portrait). PDF generated (930KB tabloid). All uploaded to Drive.
+- **Podcast produced:** Morning Edition, 48 exchanges. Tomas Renteria + Sonia Parikh. Beverly Hayes and Lorraine Castillo referenced as guest perspectives. Transcript saved to Drive and ingested to bay-tribune.
+- **Post-publish complete:** Edition brief written, newsroom memory updated with E90 errata, Discord bot restarted, filing check run.
+- **Podcast skill updated:** Added Step 5.5 — ingest transcript to bay-tribune. Noted filename workaround for ingestEdition.js cycle detection.
+- **Stab Fund editorial note:** Don't double-hit front page and business next edition.
+
+### Session 135a (2026-04-06) — Research Catchup + Disk Cleanup
+**Terminal:** research/build
+
+- **RESEARCH.md full review:** Read all entries S99–S134 (1,766 lines). Reviewed last 10 commits (S133–S134).
+- **Disk cleanup:** Removed dead podcastfy venv (1.3G), uv cache (491M), old Claude CLI versions (440M), stale claude-mem logs (160M). Server: 71% → 64% (8.5G free).
+- **Infrastructure assessment:** 24G disk, 15G used. System packages (Python, Node, Chrome) are ~5G. Local LLM work (Phase 21) confirmed needs separate hardware.
+- **Terminal system exercised:** First full session-end from research/build terminal.
 
 ### Session 134 (2026-04-05) — Full Architecture Rebuild
 **Terminal:** research/build

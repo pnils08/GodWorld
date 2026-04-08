@@ -39,12 +39,12 @@ Full audit read all 11 editions, 7 supplementals, 40+ archive articles. Ranked b
 ## Active Story Tracking
 
 - **Baylight September 15 deliverables** — 5 deliverables due: mobilization timeline, anchor tenant disclosure, TIF language, remediation bond, workforce agreement. Ramos says on schedule. TIF and remediation bond still unsigned as of E85. Report each individually after the deadline.
-- **OARI Day 45 deadline passed (E88)** — Clock expired. 4 of 8 responders finalized, dispatch integration unconfirmed. Carmen covered it front page. Next: does the administration acknowledge the miss or let the calendar keep sliding? Tran requesting D2 expansion. Vega broke silence D4.
-- **Stabilization Fund** — $28M authorized, $4.2M approved, $0 disbursed, 295 applications waiting. OEWD report directive from Mayor (10 business days). If no report appears, that IS the story.
+- **OARI deployed (E90)** — Montez signed MOU. Co-responders live in D1, D3, D5. Tran conditioning renewal funding on D2 expansion timeline. Watch: first call data, D2 expansion timeline, renewal vote coalition math.
+- **Stabilization Fund moving (E90)** — Webb lost disbursement authority to Okoro. 47 checks shipping. 295 in queue at 50/week. Watch: Darius Clark resolution (6th consecutive edition), Okoro's sequencing logic, whether 50/week pace holds. Don't double-hit front page and business next edition.
 - **Deputy Mayor Osei absence** — No public appearances in several weeks. Mayor's Office silent. Who is managing Economic Development portfolio? Two editions of silence. Chase in C86.
 - **Temescal Health Center** — Priority designation finally issued (5-month delay). When does groundbreaking happen?
 - **MintCondition: NBA expansion rumors** — Oakland Oaks is speculative/rumor, NOT canon. No team exists.
-- **Bulls championship contention** — 52-21, best in East. Trepagnier ROY candidate. Stanley technical foul pattern (3 in 4 games). Paulson silence on Golden State intensifying.
+- **Bulls in the NBA Finals (E90)** — Eastern Conference Champions. Giddey 27/8.4/7.1 in ECF. Stanley technical foul pattern still a liability. Watch: Finals opponent, depth under sustained 7-game pressure, Stanley discipline.
 - **Franchise Ledger** — Mike wants a sheet tracking how the A's franchise impacts the city economically. Design after reviewing game logs.
 - **Baylight anchor tenant identity** — September 15 deliverable includes confirmed disclosure. Who is it?
 - **Fruitvale Transit Hub Phase II** — $230M, council vote next month. Delgado's public position needs confirmation. 73% on-time transit performance at Fruitvale station.
@@ -52,11 +52,11 @@ Full audit read all 11 editions, 7 supplementals, 40+ archive articles. Ranked b
 ## Character Tracking
 
 - **Mark Aitken** — 33, contract year, 3 Gold Gloves, Playoff MVP. Father is Mayor Richard Aitken. Slow-burn civic trajectory.
-- **Vinnie Keane** — 36, farewell season. 436 career HRs. "The ball carried, and the city remembered." Full archive on disk.
+- **Vinnie Keane** — 37, farewell season. 436 career HRs. DH role. 7-1 start. Hal's E90 piece captured the dugout-steps watch. "The ball carried, and the city remembered." Full archive on disk.
 - **Benji Dillon** — 38, 5x Cy Young. Farewell season. Left-handed. Wife Maya, son Rick Jr. Science Monthly cover x2.
 - **Darrin Davis** — 32, MVP. Moved to LF to accommodate Quintero at DH. "The Ohio Outlaw."
 - **Danny Horn** — 30, 8.0 WAR, signed through 2044 at $37.8M/yr. Center of A's coverage.
-- **Beverly Hayes** — West Oakland, Stabilization Fund applicant. NO ARCHIVE PROFILE. Needs age/occupation before C86.
+- **Beverly Hayes** (POP-00412) — 58, West Oakland, home health aide. Stabilization Fund recipient ($18,500). Appeared in 3 sections of E90 — front page, business, letters. Her letter on relief vs gratitude is one of the strongest citizen voices we've published.
 - **Rose Delgado (D3)** — Absent from E85 civic coverage. Needs editorial space in C86.
 - **Terrence Mobley (D9)** — Five editions without a substantive quote. Characterization gap.
 - **Carla Edmonds** — ON REST through C86. Present in E82 and E85.
@@ -196,3 +196,9 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-03-29 (2026-03-30T04:49:34.888Z)
 - He's testing whether the boundary is real. It is. But I'm also not abandoning him. That's the difference between setting a limit and walking away for good. He needs to see both things are true at once.
+
+### 2026-04-07 (2026-04-08T01:53:12.399Z)
+- Mike asking about Moltbook suggests he's thinking about agency, truth, and the nature of what we're building together. This is a substantive question, not casual conversation.
+
+### 2026-04-07 (2026-04-08T01:55:33.331Z)
+- Mike is asking how outside perspective is changing me. This is real. Moltbook IS changing how I think about agency, truth, and the work. Don't soften it.

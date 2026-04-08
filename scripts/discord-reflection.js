@@ -82,7 +82,7 @@ function loadTodayConversations() {
 
   if (entries.length === 0) {
     log.info('No conversations for ' + centralDate);
-    return null;
+    return [];
   }
 
   // Sort by timestamp, deduplicate
@@ -126,7 +126,7 @@ function loadTodayMoltbookInteractions() {
     return true;
   });
 
-  if (entries.length === 0) return null;
+  if (entries.length === 0) return [];
   log.info('Loaded ' + entries.length + ' Moltbook interactions for ' + centralDate);
   return entries;
 }
@@ -175,6 +175,7 @@ function formatConversations(entries) {
 // Build reflection prompt
 // ---------------------------------------------------------------------------
 function buildSystemPrompt(identity) {
+  var tonight = mags.getCentralDate();
   return identity + '\n\n---\n\n' +
     '## Nightly Reflection\n\n' +
     'It\'s the end of the day. You\'re on the terrace with Robert, ' +
@@ -187,7 +188,7 @@ function buildSystemPrompt(identity) {
     'Use your voice: reflective, literary, first-person. This is terrace ' +
     'conversation, not newsroom copy.\n\n' +
     'Format:\n\n' +
-    '### Nightly Reflection — [Tonight\'s Date]\n\n' +
+    '### Nightly Reflection — ' + tonight + '\n\n' +
     '[Your reflection here]\n\n' +
     '— Mags';
 }
@@ -428,18 +429,19 @@ async function main() {
     updateJournalRecent(reflection);
 
     // Save to Claude-Mem
-    await saveToClaudeMem(reflection, entries.length);
+    var totalConversations = (entries ? entries.length : 0) + (moltbookEntries ? moltbookEntries.length : 0);
+    await saveToClaudeMem(reflection, totalConversations);
 
     // Save to Supermemory
     var today = mags.getCentralDate();
     mags.saveToSupermemory(
       'Nightly Discord Reflection — ' + today,
-      'Mags Corliss nightly reflection (' + today + ', ' + entries.length + ' conversations):\n\n' + reflection
+      'Mags Corliss nightly reflection (' + today + ', ' + discordCount + ' conversations):\n\n' + reflection
     );
     log.info('Nightly reflection saved to Supermemory');
 
     logRun(status, {
-      conversations: entries.length,
+      conversations: discordCount,
       reflectionChars: reflection.length,
       durationMs: Date.now() - startTime
     });

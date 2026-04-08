@@ -80,6 +80,12 @@ editions/**
 # Archive
 archive/**
 
+# Riley scripts (separate Apps Script projects)
+riley/**
+
+# Legacy engine snapshots (separate Apps Script projects)
+legacy/**
+
 # Data files
 data/**
 

@@ -132,6 +132,19 @@ node scripts/renderPodcast.js {cycle} {format}
 
 **For now:** The transcript IS the deliverable. Save to `output/podcasts/c{XX}_transcript.txt`.
 
+## Step 5.5: Ingest to bay-tribune
+
+The podcast is canon — citizen voices reacting to the edition. Ingest it so future sessions searching bay-tribune find what the hosts said, not just what the reporters wrote.
+
+**Note:** `ingestEdition.js` detects cycle numbers from filenames. The transcript filename `c90_transcript.txt` doesn't match the expected pattern. Copy with a detectable name before ingesting:
+
+```bash
+cp output/podcasts/c{XX}_transcript.txt /tmp/podcast_edition_{XX}.txt
+node scripts/ingestEdition.js /tmp/podcast_edition_{XX}.txt
+```
+
+**Known issue:** The ingest script titles it "Cycle Pulse Edition {XX}" which doesn't distinguish it from the edition text. Future fix: add podcast-aware titling so searches can tell edition text from podcast transcript.
+
 ## Step 6: Report
 
 ```
@@ -139,6 +152,7 @@ PODCAST — Edition {XX}
   Format: {format name}
   Hosts: {Host 1} + {Host 2}
   Transcript: output/podcasts/c{XX}_transcript.txt ({X} exchanges)
+  Ingested: bay-tribune [doc ID]
   Audio: [not available — Phase 30 pending]
 ```
 

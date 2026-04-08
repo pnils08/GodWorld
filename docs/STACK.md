@@ -2,7 +2,7 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: Session 131, 2026-03-31 (S131: engine 158 files, AutoDream, auto mode, scheduled agents, HTTP hooks, 5 hookify rules, 27 skills, 23 agents, 5 Supermemory containers, CLI installed)
+Last updated: Session 137b, 2026-04-08 (S137b: engine 162 files, 28 skills, 24 agents, 6 Supermemory containers, feedback loop live, Graphify installed, wiki ingest, session-eval hook, spacemolt-miner)
 
 ---
 
@@ -21,7 +21,7 @@ Last updated: Session 131, 2026-03-31 (S131: engine 158 files, AutoDream, auto m
 | **Google Sheets — Main** | GODWORLD_SHEET_ID in .env | Simulation_Ledger (675 citizens), all engine data sheets | Service account |
 | **Google Sheets — Comm Hub** | [Comm Hub](https://docs.google.com/spreadsheets/d/1LcgKRnq2S7lg53irurt6MkVB84OOMhOJ4Ig2nsb218s/edit) | Communication hub | Service account |
 | **Google Cloud** | console.cloud.google.com | Service account, Sheets API | `maravance@godworld-486407.iam.gserviceaccount.com` |
-| **Google Apps Script** | script.google.com | 11-phase engine — deployed via `clasp push` (158 files) | riley.steward.system@gmail.com |
+| **Google Apps Script** | script.google.com | 11-phase engine — deployed via `clasp push` (162 files) | riley.steward.system@gmail.com |
 
 ## AI / Memory
 

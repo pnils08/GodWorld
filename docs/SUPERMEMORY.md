@@ -7,7 +7,7 @@ Legacy GodWorld org ($19/mo) is dead — 57k junk memories. Old API key (`sm_atk
 
 ---
 
-## The Five Containers (updated S133)
+## The Six Containers (updated S137b)
 
 ### `mags` — The Deliberate Brain
 

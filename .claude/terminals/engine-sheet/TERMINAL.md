@@ -136,6 +136,10 @@ These belong to other terminals. Don't edit without coordination.
 | `/tech-debt-audit` | Comprehensive code health | Every 3-5 sessions |
 | `/stub-engine` | Function reference map | Quick lookup |
 | `/doc-audit` | Check docs for staleness | After major changes |
+| `/graphify` | Codebase knowledge graph | Dependency questions, "what connects to what" |
+| `graphify query "question"` | Query the persistent graph (CLI) | "What reads Initiative_Tracker?", "What depends on applySportsSeason?" |
+
+**Graphify graph (S137b):** 1,152 nodes, 1,763 edges, 162 communities. Persists at `graphify-out/graph.json`. Full engine indexed — all 162 JS files across 11 phases + lib + utilities. Use instead of grepping when you need to trace dependencies or understand what a change will break.
 
 ---
 
@@ -155,13 +159,14 @@ When this terminal discovers something that needs design/research:
 
 ## Current Engine State
 
-- **Engine version:** v3.1
+- **Engine version:** v3.3
 - **Cycle:** 90 (October 2041)
 - **Citizens:** 675 (ENGINE 509, GAME 91, CIVIC 46, MEDIA 29)
 - **Columns:** 46 (A-AT). Past Z: Income=col26, EducationLevel=col31, CareerStage=col33
 - **Pipeline:** v2 (S134) — 4 terminals, 9 reporters, bounded traits
+- **Feedback loop (S137b):** 3 intake channels operational — coverage ratings, sports feed (6 texture columns), civic voice sentiment. Initiative ImplementationPhase → neighborhood effects. Approval ratings dynamic. Citizen life events feel the loop.
 - **Last deploy:** Check `git log --oneline -5` and `clasp` status
-- **Open engine items in rollout:** 33.6 (clerk script), 33.16 (world-data ingest), 33.17 (trait profiles)
+- **Open engine items in rollout:** 33.6 (clerk script), 33.16 (world-data ingest), 33.17 (trait profiles), 35.2-35.5 (wiki TLDR index, contradictions, query capture, lint)
 
 ---
 

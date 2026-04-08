@@ -202,11 +202,13 @@ For each story picked in Step 2:
 Query the Simulation_Ledger for citizens in the neighborhoods relevant to the story. Show Mike candidates with real details — name, age, role, income, neighborhood. Mike picks who fits.
 
 **3b. Verify every name**
-Every citizen, player, or entity in the story gets looked up:
-- Simulation_Ledger for citizen details (role, age, neighborhood, income)
-- Truesource for player ratings, positions, contract details
-- Bay-tribune Supermemory for canon history (have they appeared before? what was said?)
-- World-data Supermemory for current state
+Every citizen, player, or entity in the story gets looked up. **Use GodWorld MCP tools — faster and cheaper than reading files:**
+- `lookup_citizen("Name")` — profile + canon history (replaces truesource + Supermemory search)
+- `get_roster("as")` — player data (replaces reading truesource_reference.json)
+- `get_council_member("D4")` — civic officials (replaces reading Civic_Office_Ledger)
+- `get_neighborhood("Temescal")` — neighborhood state
+
+Fallback to direct sheet queries via service account only if MCP is unavailable.
 
 No name goes in an angle brief unverified.
 

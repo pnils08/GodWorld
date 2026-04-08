@@ -60,6 +60,22 @@ Each terminal loads what its TERMINAL.md specifies in the "Always Load" table. N
 
 Full docs: `docs/SUPERMEMORY.md`. Container config: `.claude/.supermemory-claude/config.json`.
 
+## GodWorld MCP (S137b) — USE THIS FIRST
+
+The `godworld` MCP server provides direct tool access to city data. **Use MCP tools instead of reading files or running manual searches.** Saves tokens, sharper results.
+
+| Tool | Use instead of | What it returns |
+|------|---------------|-----------------|
+| `lookup_citizen(name)` | Reading truesource, searching Supermemory | Citizen profile + canon history |
+| `lookup_initiative(name)` | Reading Initiative_Tracker | Initiative state, phase, neighborhoods |
+| `search_canon(query)` | `npx supermemory search --tag bay-tribune` | Published edition content |
+| `search_world(query)` | `npx supermemory search --tag world-data` | City state data |
+| `search_articles(query)` | Dashboard API curl | Article search results |
+| `get_roster(team)` | Reading truesource_reference.json | Player roster |
+| `get_neighborhood(name)` | Reading Neighborhood_Map | Neighborhood state |
+| `get_council_member(district)` | Reading Civic_Office_Ledger | Official + approval + faction |
+| `get_domain_ratings(cycle)` | Reading Edition_Coverage_Ratings | Per-domain media ratings |
+
 ## Terminal Architecture (S135)
 
 4 persistent terminal chats. Each journals and persists its own domain.

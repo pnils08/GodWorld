@@ -260,6 +260,12 @@ async function main() {
     // Build the card
     var card = await buildCard(cit, appearances);
 
+    // Quality gate — skip thin cards with no appearances, no traits, no bio
+    if (appearances.length === 0 && !cit.traitProfile && !cit.bio) {
+      // Bare ledger data only — not worth a Supermemory write
+      continue;
+    }
+
     if (!APPLY) {
       if (ci < 5 || appearances.length > 0) {
         console.log('--- ' + fullName + ' (' + cit.popId + ') ---');

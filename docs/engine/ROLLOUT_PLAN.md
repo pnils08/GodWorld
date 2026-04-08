@@ -518,3 +518,4 @@ Tracking for future adoption. Not building.
 | Agent lifecycle hooks (SubagentStart/Stop) | Desk agent monitoring — track which agents take longest, fail most |
 | Prompt/Agent hooks | Replace pattern-based hookify rules with semantic LLM-evaluated checks |
 | FileChanged hook | Auto-react to git pulls, external file changes during autonomous operation |
+| Overture (visual agent planning) | Mike can see plans visually instead of text walls → install when accessible from Remote Control or web dashboard. github.com/SixHq/Overture. MCP server, React Flow canvas, localhost:3031. Source: S137b |

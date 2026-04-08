@@ -1798,3 +1798,10 @@ Income: ${Income}. {MaritalStatus}, {NumChildren} children. Tier {Tier}.
 **Source:** github.com/safishamsi/graphify
 **What:** AST extraction via tree-sitter (19 languages) + Leiden community detection + interactive HTML + persistent JSON graph + CLI query mode.
 **Installed (S137b):** Full engine indexed — 1,152 nodes, 1,763 edges, 162 communities. Replaces Phase 29 (Corbell, blocked). Engine terminal tool for dependency tracing.
+
+### Overture — Visual AI Agent Planning
+**Source:** github.com/SixHq/Overture
+**What:** MCP server that intercepts agent planning phases and renders interactive flowcharts before execution. Approve/modify/reject visually. Watch nodes light up in real-time. Pause, resume, re-run mid-flight. React Flow canvas with branch detection, file attachment, requirements checklist.
+**Why interesting:** Solves the "wall of text plan" problem — Mike can't evaluate text-based plans. Visual flowcharts would let him see what's about to happen and approve step by step.
+**Why not now:** Opens browser UI at localhost:3031. Mike connects via Remote Control — localhost on server not accessible from his browser. Adds another web UI alongside dashboard (port 3001). Value is for complex multi-step builds which don't happen every session.
+**Trigger to revisit:** KAIROS ships (native daemon), web-accessible dashboard, or Mike works directly on server.

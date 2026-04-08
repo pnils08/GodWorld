@@ -469,6 +469,12 @@ Then run enrichment to write edition quotes/appearances to LifeHistory:
 node -r dotenv/config scripts/enrichCitizenProfiles.js --edition {cycle}
 ```
 
+**Rate coverage for engine feedback:**
+```bash
+node scripts/rateEditionCoverage.js editions/supplemental_{topic_slug}_c{XX}.txt --apply
+```
+Generates per-domain ratings (-5 to +5) from the supplemental. The engine reads these next cycle — the city reacts to what the newspaper published, including supplementals. A civic deep dive affects CIVIC domain. A food piece affects CULTURE. Every published piece feeds back.
+
 ---
 
 ## File Locations

@@ -66,17 +66,18 @@ Create `output/production_log_city_hall_c{XX}.md`:
 
 Update this file at every step. This is how you survive compaction.
 
-## Step 1: Read the Tracker
+## Step 1: Read the Tracker + Approval Ratings
 
-Read Initiative_Tracker from the sheet. Only these columns matter:
-- InitiativeID
-- Name
-- ImplementationPhase
-- MilestoneNotes
-- NextScheduledAction
-- NextActionCycle
+Read Initiative_Tracker from the sheet. Key columns:
+- InitiativeID, Name, ImplementationPhase, MilestoneNotes
+- NextScheduledAction, NextActionCycle
+- AffectedNeighborhoods, PolicyDomain
 
-Log the current state in the production log. Show Mike.
+Also read Civic_Office_Ledger — Approval column for all council members + Mayor.
+
+**Why this matters now (S137b):** ImplementationPhase drives engine behavior — "disbursement-active" ripples economic effects into West Oakland, "dispatch-live" ripples safety effects into D1/D3/D5. Approval ratings are dynamic — they change based on initiative performance, media coverage, and district alignment. A council member at 30 approval is vulnerable. Below 20 triggers recall pressure.
+
+Log tracker state AND approval ratings in the production log. Show Mike.
 
 ## Step 2: Write Pending Decisions
 
@@ -87,6 +88,9 @@ For each voice that has a decision this cycle, write `output/civic-voice-workspa
 - 2-3 real options with real consequences
 - Who's watching
 - "No decision is not an option this cycle."
+- **Their current approval rating** and whether they're vulnerable/popular
+- **Their district's neighborhoods** and how current initiatives are affecting them
+- If media coverage was negative/positive in their domain — tell them the city noticed
 
 **What does NOT go in:**
 - Citizen lists
@@ -206,6 +210,8 @@ Show output. **USER APPROVAL GATE.** Then:
 ```bash
 node scripts/applyTrackerUpdates.js {cycle} --apply
 ```
+
+This also generates `output/civic_sentiment_c{XX}.json` — aggregate voice sentiment from all decisions. The engine reads this in Phase 2 and compounds it with edition coverage ratings. Positive civic decisions + positive civic media coverage = amplified city confidence. Negative both ways = compounding pressure.
 
 ## Step 7: Close City Hall — Write Media Handoff
 

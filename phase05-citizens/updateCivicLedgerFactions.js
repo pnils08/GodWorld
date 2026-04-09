@@ -7,7 +7,7 @@
  * and populates based on known political alignments.
  *
  * FACTIONS:
- * - OPP: Oakland People's Party (progressive)
+ * - OPP: Oakland Progressive Party (progressive)
  * - CRC: Civic Reform Coalition (business-oriented)
  * - IND: Independent (swing voters, non-aligned elected)
  * - STAFF: Appointed officials (no council vote)

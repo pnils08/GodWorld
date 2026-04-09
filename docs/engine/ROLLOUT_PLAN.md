@@ -12,12 +12,12 @@
 
 ### E91 Post-Publish (S139)
 
-- **CANONIZE: Faction full names** — OPP, CRC, IND need canonical full names locked in a reference file. Reporters invented "Oakland Peoples' Power" for OPP. HIGH.
+- **CANONIZE: Faction full names — DONE S139.** OPP = Oakland Progressive Party, CRC = Civic Reform Coalition, IND = Independent. Fixed in engine code, Mara reference docs, and all agent files. Engine had "People's Party" — canonized to "Progressive Party" to match agents.
 - **REINGEST: A's truesource → citizen profile cards** — Player data in world-data is incomplete. Reingest all A's players from truesource to citizen cards so MCP lookups return age, gender, position, contract. Mesa gender/age drift caused by missing data. HIGH.
 - **FIX: validateEdition.js false positives** — 96% false positive rate in E91 (25/26). Needs: hyphenated name handling, sentence fragment filtering, citizen vs player name disambiguation, cycle reference whitelist. MEDIUM.
 - **ADD: Gender to citizen briefs** — Simulation Ledger has no gender column. All angle briefs must specify gender for every citizen. Consider adding gender column to ledger long-term. MEDIUM.
 - **ADD: Maurice Franklin to ledger** — New citizen from Letters desk (63, Rockridge, retired transit supervisor). Needs POP-ID. LOW.
-- **FIX: Mayor Santana gender** — Santana is FEMALE. Canon decision S139. Prior editions had inconsistent pronouns. Lock she/her in mayor agent workspace and all reference files. HIGH.
+- **FIX: Mayor Santana gender — DONE S139.** She/her locked in mayor IDENTITY.md + 8 civic agent files + buildDecisionQueue.js. Published editions with old pronouns are historical — canon corrects forward, not backward.
 
 ### Data & Pipeline
 

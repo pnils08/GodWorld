@@ -36,7 +36,7 @@ This document consolidates all civic governance mechanics for quick reference wh
 
 | Faction | Code | Alignment | Typical Positions |
 |---------|------|-----------|-------------------|
-| Oakland People's Party | OPP | Progressive | Housing, transit, social services |
+| Oakland Progressive Party | OPP | Progressive | Housing, transit, social services |
 | Civic Reform Coalition | CRC | Business | Economic development, infrastructure |
 | Independent | IND | Swing | Case-by-case |
 

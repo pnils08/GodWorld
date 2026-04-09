@@ -24,7 +24,7 @@ The Initiative Tracker implements a 9-seat city council voting system where the 
 
 | Faction | Code | Alignment |
 |---------|------|-----------|
-| Oakland People's Party | `OPP` | Progressive |
+| Oakland Progressive Party | `OPP` | Progressive |
 | Civic Reform Coalition | `CRC` | Business-oriented |
 | Independent | `IND` | Swing voters |
 

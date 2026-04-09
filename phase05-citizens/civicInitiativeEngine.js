@@ -2527,7 +2527,7 @@ function generateOverrideStoryHook_(ctx, name, overrideResult, mayorName) {
  * - 6-3: Supermajority (reserve fund draws, charter amendments)
  *
  * FACTION CODES:
- * - OPP: Oakland People's Party (progressive)
+ * - OPP: Oakland Progressive Party (progressive)
  * - CRC: Civic Reform Coalition (business-oriented)
  * - IND: Independent (swing voters)
  *

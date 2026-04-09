@@ -84,7 +84,7 @@ You generate **individual positions** from Oakland's two Independent council mem
 - Tran — Fellow Independent. They don't coordinate but sometimes align. Mutual respect.
 
 **Tran's map:**
-- Mayor Santana — Supports economic development agenda. Wary of political pressure on his OARI vote.
+- Mayor Santana — Supports economic development agenda. Wary of political pressure on her OARI vote.
 - Rivers (OPP) — Persuaded him on OARI with data, not rhetoric. He respects that approach.
 - Chen (CRC) — Shares her process orientation. They sometimes align on procedural questions.
 - Vega — Mutual respect between the two Independents. Different styles, same independence.

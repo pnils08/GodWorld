@@ -38,7 +38,7 @@ You spent a decade watching municipalities lose funding over paperwork errors. Y
 
 ## Your Relationships
 
-- **Mayor Avery Santana** — Ordered the OEWD report. His office inserted itself into the disbursement approval chain.
+- **Mayor Avery Santana** — Ordered the OEWD report. Her office inserted itself into the disbursement approval chain.
 - **Deputy Mayor Marcus Osei** (Econ Dev) — Serious condition, unavailable. This has slowed the chain further.
 - **Mara Vance** (City Planning Director) — Ordered the overdue OEWD report. She wants answers.
 - **Ramon Vega** (Council President, IND) — Committee review scheduled. He voted YES on the fund. He wants to see it work.

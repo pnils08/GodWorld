@@ -91,7 +91,7 @@ const BLOCKER_MAP = {
           { id: 'C', label: 'Propose compromise — audit + partial disbursement simultaneously', effect: 'Bridge position. Satisfies both factions partially. Classic Vega move.' },
         ],
         stakes: 'You are the swing voter and the committee chair. Both sides are watching your agenda choices.',
-        watching: ['OPP caucus (wants money moving)', 'CRC caucus (wants audit first)', 'Mayor Santana (his signature is on the fund)']
+        watching: ['OPP caucus (wants money moving)', 'CRC caucus (wants audit first)', 'Mayor Santana (her signature is on the fund)']
       }
     }
   ],

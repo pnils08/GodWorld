@@ -87,7 +87,8 @@ For each voice that has a decision this cycle, write `output/civic-voice-workspa
 
 **What goes in:**
 - The situation in plain language — what's stuck, what moved, what's due
-- 2-3 real options with real consequences. Or let them go rogue — like a real council member.
+- 2-3 predefined options with real consequences
+- **Always include an open option:** "Your call. You see something nobody else sees. Make your own move. State what you're doing and why. The consequences are yours." This is where emergent behavior comes from — a Tran who introduces an amendment nobody planned, an Ashford who breaks with CRC, a Rivers who backs down. The bounded trait system controls how often each voice takes the open path vs the safe path. High independence + high risk tolerance = more rogue. High faction loyalty = stays on the menu.
 - Who's watching
 - "No decision is not an option this cycle."
 - **Their current approval rating** and whether they're vulnerable/popular

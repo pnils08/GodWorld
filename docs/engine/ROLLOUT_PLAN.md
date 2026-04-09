@@ -398,6 +398,12 @@ Relationships exist in the engine but don't require upkeep. Add decay mechanics:
 
 **Depends on:** GPU hardware (same gate as Phase 21, Computer Use). Can prototype 30.1 on CPU fallback but production needs GPU.
 
+**Free-tier alternatives tested S140:**
+
+7. **30.7 AiDocMaker article narration (TESTED S140).** aidocmaker.com/g0/audio — free TTS, 30K chars/account, no login. Paste article text → generates audio with download. Tested with E91 Varek piece (997 chars → 1:02 audio). No GPU needed. Free tier covers ~30 articles. Automation path: script extracts article text post-publish, pastes to API (if available) or manual upload. **Priority: LOW — works now, manual. Automate when API access confirmed.**
+
+8. **30.8 AI Song Generator for in-world music (TESTED S140).** aisonggenerator.ai — free, 1 song/day, Google login. Custom mode: title + style + lyrics → full produced song. Tested: "One Last Swing" (Vinnie Keane farewell, americana folk rock). Music becomes a culture event in the engine — fan songs, local musician tributes, viral Oakland anthems. **Three integration points:** (1) Culture desk covers music as stories (Maria Keen territory). (2) Sports feed FanSentiment column notes fan-created content spikes around storylines. (3) Audio archive — songs stored alongside editions on disk, playable from dashboard. **Priority: MEDIUM — free, no infrastructure, produces canon-grade world texture. One song per cycle is enough.**
+
 ---
 
 ### Phase 32: World-Data Container — PARTIAL (S137b)

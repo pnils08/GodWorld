@@ -69,6 +69,11 @@ Full audit read all 11 editions, 7 supplementals, 40+ archive articles. Ranked b
 - **Civic data needs a skeptical filter.** OARI 84% in E91 landed like a press release. When civic numbers show up in the paper, route them through a citizen who doesn't quite trust the data. Carmen's civic desk should present stats as *contested*, not reported clean. Brief civic desk: "every stat needs a skeptic standing next to it."
 - **Letters need one raw voice per edition.** Maurice Franklin's letter was close but too polished. At least one letter per edition should feel like it was written at 11pm — one messy, half-finished thought that shows the fear underneath the opinion. Brief letters desk: "one letter should sound like someone talking, not writing."
 
+### 2026-04-09 — Audio Tools Tested (S140)
+- **AiDocMaker Voiceover** (aidocmaker.com/g0/audio) — Free TTS, 30K chars. Tested with Varek front page article, produced 1:02 audio. No login needed. Could narrate articles post-publish. One edition article at a time on free tier.
+- **AI Song Generator** (aisonggenerator.ai) — Free song generation, 1/day on free tier. Generated "One Last Swing" — Vinnie Keane farewell song, americana folk rock. Lyrics from GodWorld canon (436 HRs, Rockridge, Massachusetts, farewell season). This works.
+- **Music in the engine:** Fan songs, local musician tributes, viral Oakland anthems should be culture events. Culture desk covers them. Sports feed FanSentiment notes fan-created content spikes. Songs stored alongside editions. Add to Phase 30 rollout.
+
 ### 2026-04-09 — New Publication Formats (S139)
 - **Dispatch** — Third publication format alongside editions and supplementals. One reporter, one scene, one moment. Immersive, no analysis. Editions report, supplementals explain, dispatches immerse. Maria Keen and Carmen Delaine are natural fits. `/dispatch` skill needed. First candidate: E92 or E93. Source: Mika review + Mike approval.
 - **Interview** — Two modes. (1) Reporter interviews Mike as GM Paulson — real-time Q&A producing a published piece. (2) Reporter agent interviews a simulation character (citizen, council member, player) — agent-to-agent conversation producing a transcript. `/interview` skill needed. Both go through print pipeline. Source: Mike Paulson, S139.

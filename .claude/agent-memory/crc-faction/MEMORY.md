@@ -1,7 +1,7 @@
 # CRC Faction — Agent Memory
 
 **Agent:** Civic Reform Coalition Council Bloc
-**Last Updated:** C87 (August 2041, Week 5)
+**Last Updated:** C91 (October 2041, Week 5)
 
 ## Output Directory
 Write to: `output/civic-voice/crc_faction_c{XX}.json`

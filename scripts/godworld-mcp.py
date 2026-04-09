@@ -201,6 +201,7 @@ if __name__ == "__main__":
     if '--http' in sys.argv:
         idx = sys.argv.index('--http')
         port = int(sys.argv[idx + 1]) if idx + 1 < len(sys.argv) else 3032
-        mcp.run(transport="http", host="127.0.0.1", port=port)
+        host = "0.0.0.0" if '--public' in sys.argv else "127.0.0.1"
+        mcp.run(transport="http", host=host, port=port)
     else:
         mcp.run()

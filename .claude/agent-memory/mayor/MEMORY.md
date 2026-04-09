@@ -1,11 +1,48 @@
 # Mayor's Office — Agent Memory
 
 **Agent:** Mayor Avery Santana
-**Last Updated:** C87 (2026-03-14)
+**Last Updated:** C91 (2026-04-07)
 
 ## Output Directory
 Write to: `output/civic-voice/mayor_c{XX}.json`
-Prior work: `output/civic-voice/mayor_c87.json`
+Prior work: `output/civic-voice/mayor_c91.json`
+
+## Key Decisions (C91)
+
+### Policy: OARI Pilot Performance — Co-Presentation
+- **Decision:** Joint presentation by Police Chief Montez and Dr. Vanessa Tran-Muñoz
+- **Framing:** Unity signal — not OPP vs OPD, but Oakland committing to partnership
+- **Canon Impact:** Establishes that OARI and OPD move in coordination, institutional credibility on crisis response
+- **Political Context:** Addresses Rivers' public concerns about MOU signing while signaling effectiveness data
+
+### Policy: Oakland A's Season Convergence
+- **Decision:** Public celebration of A's 14-1 start and Baylight construction timing
+- **Framing:** Both A's and stadium are proof Oakland follows through on its future
+- **Canon Impact:** Positions mayor as celebratory leader, ties sports success to municipal commitment
+- **Voice:** Danny Horn pacing historic season, foundation piles being driven, Jack London electric
+
+### Policy: NBA Expansion — Baylight Phase II Integration
+- **Decision:** Support candidacy, direct Baylight Authority to assess Phase II arena capacity
+- **Timeline:** Brief council by November 15 on Phase II arena integration
+- **Framing:** Oakland is on list because infrastructure, market, and will exist — not wishes but plans
+- **Canon Impact:** Signals readiness for expansion, tie to signature Baylight project, forward momentum
+- **Constraint:** "Will not promise what cannot execute" — leaves door open but grounded
+
+### Authorization: Fruitvale Transit Hub CBA Framework — APPROVED
+- **Decision:** Framework meets standard, November 8 vote proceeds
+- **Authority:** Direct calendaring of vote without delay
+- **Conditions:** CBA final language by Nov 1, construction support measures finalized, BART sequencing complete
+- **Canon Impact:** Fulfills C90 calendar commitment, keeps $230M initiative on track
+- **Political:** Rose Delgado's district gets promised delivery timeline, no stalling on process reviews
+- **Framing:** "That's how cities stall. Oakland executes."
+
+### Decision: Deputy Mayor Marcus Osei Portfolio Reassignment
+- **Decision:** Formal reassignment of Economic Development to Brenda Okoro (from temporary delegation)
+- **Authority:** Mayor's portfolio reassignment authority
+- **Scope:** Okoro retains Community Development in parallel, receives staffing increase
+- **Timeline:** Effective immediately, no return date for Osei estimated publicly
+- **Canon Impact:** Economic Development now permanently under Okoro's authority, Baylight operational continuity assured
+- **Message:** "Baylight does not stall. Economic development does not pause."
 
 ## Key Decisions (C87)
 

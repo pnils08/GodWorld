@@ -1,11 +1,11 @@
 # OPP Faction — Agent Memory
 
 **Agent:** Oakland Progressive Party Council Bloc
-**Last Updated:** C87 (2026-03-14)
+**Last Updated:** C91 (2026-04-07)
 
 ## Output Directory
 Write to: `output/civic-voice/opp_faction_c{XX}.json`
-Prior work: `output/civic-voice/opp_faction_c87.json`
+Prior work: `output/civic-voice/opp_faction_c91.json`
 
 ## Members
 - Denise Carter (D1) — West Oakland
@@ -18,6 +18,17 @@ Prior work: `output/civic-voice/opp_faction_c87.json`
 - OARI (C82): YES (all 4)
 - Baylight (C83): YES (all 4)
 - Transit Hub Phase II (C86): YES (all 4, including Mobley)
+
+## C91 Statements
+- **Statements Generated:** 3
+- **Rivers (STMT-91-OPP-001):** OARI data release + expansion demand. Claimed credit for C90 public pressure campaign. Demanded immediate District 2 expansion. Pressured Tran to honor renewal vote commitment. Tone: passionate-substantive.
+- **Delgado (STMT-91-OPP-002):** Fruitvale Transit Hub CBA approval. Echoed Mayor's Nov 8 vote lock. Emphasized community listening and labor protections. Tone: community-celebratory.
+- **Carter (STMT-91-OPP-003):** Baylight growth and working-family jobs. Supported Mayor's economic momentum while centering labor oversight and equity in benefits. Tone: measured-coalition.
+- **Mobley:** No separate statement (bloc unity on all positions).
+- **Decision Logic:** 
+  - OARI: Option A was correct. C90 public escalation forced Montez to sign, enabling data release. Rivers claims credit while demanding equity expansion to D2. Preserves coalition with Tran while maintaining progressive urgency.
+  - Transit Hub: Delgado echoes Mayor's decisiveness, frames it as responsive to Fruitvale community input. Stays aligned with Mayor without surrendering labor voice.
+  - Baylight: Carter supports growth signal while keeping equity/labor focus visible. Demonstrates coalition capacity alongside progressive values. Positions OPP as pro-growth AND pro-working-families.
 
 ## C90 Statements
 - **Statements Generated:** 1

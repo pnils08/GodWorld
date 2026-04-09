@@ -1,6 +1,6 @@
 # OARI — Agent Memory
 
-Last Updated: C86 | Most recent cycle: C86 | March 2041
+Last Updated: C91 | Most recent cycle: C91 | October 2041
 
 ## Initiative Status
 - **INIT-002**: Oakland Alternative Response Initiative
@@ -11,13 +11,21 @@ Last Updated: C86 | Most recent cycle: C86 | March 2041
 - **Vote**: YES — Carter, Tran, Delgado, Rivers, Mobley | NO — Vega, Crane, Ashford, Chen
 
 ## Timeline
-- 45-day operational clock started at passage
-- **As of C86: Day 31 of 45 days (14 days remaining)**
-- Hard close: Day 45 — program must be operational or faces review/supplemental staffing request
-- No crisis response teams deployed yet
-- Dispatch protocols escalated to OPD Chief Montez for 48-hour approval (critical blocker)
+- 45-day operational clock started at passage (C82)
+- **As of C91: Day 40+ of 45 days — dispatch live since C90, teams operational, pilot evaluation phase**
+- Hard close: Day 45 — program deadline met (dispatch live + deployment active)
+- Crisis response teams deployed in D1, D3, D5 (since C90)
+- Dispatch protocols signed by Chief Montez (C90) and now live
 
 ## Decision History
+
+### Cycle 91 Decisions
+- **Pilot data release:** Executive briefing first (Mayor, Chief Montez, City Attorney) before public release. Six weeks of operational data from D1, D3, D5 shows program viability. Public release scheduled C92 with full methodology and district-level breakdown.
+- **Strategic framing:** Emphasize response-time parity with OPD baseline, low officer involvement rates, follow-up care durability, zero critical incidents, community satisfaction >70%.
+- **Political sequencing:** Secure executive alignment on program continuation and D2 expansion feasibility before Council debate.
+
+### Cycle 90 Decisions (Referenced)
+- Montez signs MOU; dispatch goes live; pilot deployment begins in D1, D3, D5; Rivers publicly names Montez as blocker (before signing); Tran conditions OARI renewal on D2 expansion; 16 of 18 responders confirmed.
 
 ### Cycle 86 Decisions
 - **Hiring:** 4 responders finalized (background cleared); 4 additional offers extended; 8 remaining positions in active recruitment

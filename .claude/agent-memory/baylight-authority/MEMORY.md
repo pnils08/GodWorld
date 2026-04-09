@@ -1,6 +1,6 @@
 # Baylight Authority — Agent Memory
 
-Last Updated: Cycle 86, October 2041 | Most recent agent action: Deliverable filing
+Last Updated: Cycle 91, October 2041 | Most recent agent action: Dashboard release + Phase II arena positioning
 
 ## Initiative Status
 - **INIT-006**: Baylight District Development
@@ -17,18 +17,32 @@ Last Updated: Cycle 86, October 2041 | Most recent agent action: Deliverable fil
 4. **Remediation bond** — FILED. BD-83-REB $45M, Oct 1 execution
 5. **Workforce agreement** — FILED. 35% journey, 25% apprentice, 40% SBE targets
 
-## Decision History (C86)
+## Decision History
+
+**C86:**
 - Confirmed all 5 deliverables filed by September 15 deadline
 - Made determination: Project on-track for October 2 mobilization
 - Issued confidence statement: "Five deliverables submitted. Now we move to financial close."
 
-## Documents Produced (C86)
+**C91:**
+- **Dashboard release:** Full data release approved. Construction progress (87% grading complete), workforce (41% local, exceeds 40% target), TIF allocation ($1.278B committed), contingency ($315M untouched).
+- **Phase II arena positioning:** Acknowledged design flexibility for sports/entertainment venue. Confirmed 20,000-seat arena scenario is engineered into Phase II master plan. Aligns with Mayor's public statement without overcommitting to NBA.
+- **Mayor's directive:** Phase II council briefing scheduled November 15. Briefing outline includes master plan overview, arena design scenario, financial models, timeline, political considerations.
+
+## Documents Produced
+
+**C86 (September 15 deliverables):**
 - BAYL-C086-MobilizationTimeline-20410915.md
 - BAYL-C086-TIFLanguageFinal-20410915.md
 - BAYL-C086-RemediationBond-20410915.md
 - BAYL-C086-WorkforceAgreement-20410915.md
 - BAYL-C086-AnchorTenantDisclosure-20410915.md
 - decisions_c86.json
+
+**C91 (Construction progress + Phase II planning):**
+- doc_c91_phase1_progress.md
+- doc_c91_phase2_briefing_outline.md
+- decisions_c91.json
 
 ## Key Citizens
 - **Brian Williams** (42, Chinatown, Mechanic, Baylight Construction Authority) — appeared C85, working on construction site equipment. Core narrative: aging equipment maintenance, pride in infrastructure.

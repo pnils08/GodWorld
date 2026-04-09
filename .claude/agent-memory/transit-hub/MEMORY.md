@@ -1,6 +1,6 @@
 # Fruitvale Transit Hub — Agent Memory
 
-Last Updated: C86 | Most recent cycle: C86 (agent active)
+Last Updated: C91 | Most recent cycle: C91 (agent active, CBA framework delivered)
 
 ## Initiative Status
 - **INIT-003**: Fruitvale Transit Hub Modernization Phase II
@@ -11,10 +11,11 @@ Last Updated: C86 | Most recent cycle: C86 (agent active)
 - **Vote Requirement**: 6-3 | **Expected outcome**: 6-3 passage with community benefits proviso
 
 ## Timeline
-- **C86**: Council authorization vote (expected passage 6-3)
+- **C86**: Council authorization vote (PASSED 6-3)
 - **C87**: Design consultant RFP release + CBA framework finalization
 - **C88-C90**: Design alternatives development (3 scenarios) + community preference process
-- **C91**: Final design selection + CBA approval vote
+- **C91**: CBA framework delivered; community engagement sessions Oct 15-30; Oversight Committee recruitment Oct 20-31
+- **November 8, 2026**: City Council vote on final design + CBA approval
 - **C92+**: Permitting and construction planning
 
 ## Decision History (C86)
@@ -52,11 +53,9 @@ Last Updated: C86 | Most recent cycle: C86 (agent active)
 - **Expected vote**: 6-3 passage (Rivers, Delgado, Vega, Tran, Ashford, Crane = YES; Chen + 2 uncertain = likely NO)
 - **Council dynamics**: Rivers wants speed (flagship project), Delgado wants accountability (neighborhood representative). Briefing addresses both: C91 timeline is aggressive but allows genuine process.
 
-## Documents Produced (C86)
-1. **doc_c86_visioning_framework.md** — 5,200+ words, community-informed decision criteria, non-negotiable requirements
-2. **doc_c86_session_report_01.md** — Detailed Session 1 report, 4,100+ words, full theme documentation
-3. **doc_c86_council_briefing.md** — Council briefing memo, 3,800+ words, recommendation + risk mitigation
-4. **decisions_c86.json** — Formal decisions record in civic database format
+## Documents Produced
+- **C86**: doc_c86_visioning_framework.md (5,200+ words), doc_c86_session_report_01.md (4,100+ words), doc_c86_council_briefing.md (3,800+ words), decisions_c86.json
+- **C91**: decisions_c91.json (CBA framework with all 8 non-negotiable requirements integrated), transit_hub_c91.json (civic-voice confirmation)
 
 ## Key Citizens & Stakeholders Engaged (C86)
 - **Maria Reyes** — Restaurant owner (28 years, E. 12th), key voice on small business protection
@@ -89,12 +88,12 @@ Last Updated: C86 | Most recent cycle: C86 (agent active)
 - Authorization motion language prepared with three conditions: visioning completion by C91, community design approval by C91, CBA execution before permits
 - Community briefing scheduled post-vote to explain timeline and next phases
 
-## Next Immediate Actions (C87)
-1. Release Design Consultant RFP with community vetting requirement
-2. Finalize Community Benefits Agreement framework with City Attorney
-3. Establish Community Oversight Committee recruitment (18 interested parties from sessions)
-4. Conduct C87 community briefing on design process and consultant selection
-5. Initiate BART joint development agreement refinement for C87-C91 design phase
+## Next Immediate Actions (C91)
+1. Community Benefits Agreement review sessions: October 15, 18, 25, 30 (2-hour sessions, Spanish & English, CBA framework + Q&A with City Attorney)
+2. Business owner briefing: October 18 (stabilization fund mechanics, right of first refusal)
+3. Oversight Committee recruitment: Opens October 20, voting by October 31 (7 members, 5 Fruitvale residents min.)
+4. Council briefing memo: CBA framework summary + community input process + financial viability
+5. Prepare for November 8 council vote: Design approval + CBA approval (contingent upon community oversight committee being seated)
 
 ## Process Integrity Notes
 - Community engagement was genuine (bilingual, circle format, butcher paper, listened more than presented)

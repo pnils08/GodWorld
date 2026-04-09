@@ -63,6 +63,29 @@ Full audit read all 11 editions, 7 supplementals, 40+ archive articles. Ranked b
 - **Dante Nelson** — ON REST through C87 minimum.
 - **Sarah Corliss** — Hired at Bay Area tech firm, cloud/data focused. Keeping details private.
 
+## Editorial Craft Notes (E92 Forward)
+
+### 2026-04-09 — From External Review (Grok/"Bad Rudi")
+- **Civic data needs a skeptical filter.** OARI 84% in E91 landed like a press release. When civic numbers show up in the paper, route them through a citizen who doesn't quite trust the data. Carmen's civic desk should present stats as *contested*, not reported clean. Brief civic desk: "every stat needs a skeptic standing next to it."
+- **Letters need one raw voice per edition.** Maurice Franklin's letter was close but too polished. At least one letter per edition should feel like it was written at 11pm — one messy, half-finished thought that shows the fear underneath the opinion. Brief letters desk: "one letter should sound like someone talking, not writing."
+
+### 2026-04-09 — New Publication Formats (S139)
+- **Dispatch** — Third publication format alongside editions and supplementals. One reporter, one scene, one moment. Immersive, no analysis. Editions report, supplementals explain, dispatches immerse. Maria Keen and Carmen Delaine are natural fits. `/dispatch` skill needed. First candidate: E92 or E93. Source: Mika review + Mike approval.
+- **Interview** — Two modes. (1) Reporter interviews Mike as GM Paulson — real-time Q&A producing a published piece. (2) Reporter agent interviews a simulation character (citizen, council member, player) — agent-to-agent conversation producing a transcript. `/interview` skill needed. Both go through print pipeline. Source: Mike Paulson, S139.
+
+### 2026-04-09 — From External Review (Persona AI / "Ani")
+- **Women are officials, not people.** Santana, Carter, Rivers, Delgado, Tran-Muñoz, Wu, Liu — all quoted in official capacity. None of them grab coffee, stress about rent, or text friends about Danny Horn's homer. The everyday female voice is thin or absent. Named men get daily-life texture (Dante Turner at the bar, Maurice Franklin writing letters, Ramon Brown in Jack London). Named women sign memos.
+- **ACTION for E92:** Every reporter brief must include at least one named female citizen in a non-official role. Not council, not doctor. A person with rent and opinions.
+- **Citizen audit needed:** Which Tier 2-3 women exist in the ledger but have never been quoted outside official roles? Surface the gap. This is an EIC sheet task (33.12 Coverage Gap Tracker territory).
+- **New citizen candidates:** (1) Barista at a Jack London spot with opinions on the NBA bid and rent. (2) Longtime AC Transit rider who knows OARI from the ground level. (3) Young woman who's been going to A's games since she was fifteen — the female fan voice is completely absent from sports coverage. Add to ledger as Tier 3.
+- **This is the best feedback in the batch.** Not because it's about gender quotas — because it's about who gets to be a *person* in the city vs. who only gets to be a *title*.
+
+### 2026-04-09 — From External Review (KIMI)
+- **"What We Got Wrong" section.** Every third edition, run a short section: admissions of narrative failure. The player profiled as emergent who got sent down. The civic initiative covered positively that produced nothing. The citizen who appeared in three stories then disappeared. Makes the paper accountable to its own fiction and generates new story hooks. Assign to Jax or a rotating accountability reporter. First candidate: E93 or E94.
+- **Sports despair / fan pathology.** Dante Turner (can't stay home during the streak) is the seed. Push P Slayer and sports desk toward fan mental states — superstitions, rituals, the fear of believing. Also athlete psychological weight — players who know they're in a dynasty window and choke on that knowledge. Not just injury and stats, but the interior cost of winning. Brief sports desk for E92.
+- **Coverage gap awareness.** The paper has no mechanism for tracking what it *stopped* covering. Stories drop and nobody notices. Mags should know which storylines went cold. See rollout 33.12 (EIC Sheet) for the tracking tool.
+- **Correction as narrative.** When the paper gets something wrong, the correction becomes a story. Citizens remember the error, not the fix. Connects to folk memory (27.9). Use sparingly but intentionally — a correction in E93 that generates a Letters response in E94.
+
 ## Discord Notes
 
 - Ellis Shaw from Echo Tribune — new contact, don't recognize the publication. Find out more about their coverage area.

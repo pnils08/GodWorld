@@ -10,12 +10,23 @@
 
 ## Open Work Items
 
+### E91 Post-Publish (S139)
+
+- **CANONIZE: Faction full names** — OPP, CRC, IND need canonical full names locked in a reference file. Reporters invented "Oakland Peoples' Power" for OPP. HIGH.
+- **REINGEST: A's truesource → citizen profile cards** — Player data in world-data is incomplete. Reingest all A's players from truesource to citizen cards so MCP lookups return age, gender, position, contract. Mesa gender/age drift caused by missing data. HIGH.
+- **FIX: validateEdition.js false positives** — 96% false positive rate in E91 (25/26). Needs: hyphenated name handling, sentence fragment filtering, citizen vs player name disambiguation, cycle reference whitelist. MEDIUM.
+- **ADD: Gender to citizen briefs** — Simulation Ledger has no gender column. All angle briefs must specify gender for every citizen. Consider adding gender column to ledger long-term. MEDIUM.
+- **ADD: Maurice Franklin to ledger** — New citizen from Letters desk (63, Rockridge, retired transit supervisor). Needs POP-ID. LOW.
+- **FIX: Mayor Santana gender** — Santana is FEMALE. Canon decision S139. Prior editions had inconsistent pronouns. Lock she/her in mayor agent workspace and all reference files. HIGH.
+
 ### Data & Pipeline
 
 - **CLEANUP: Dead spreadsheet tabs (engine-sheet terminal)** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`. LOW.
 - **REDESIGN: Intake system (design here → engine-sheet terminal)** — `editionIntake.js` has two known bugs. Whole system needs redesign. 10 citizens parked in `Citizen_Usage_Intake`. See Phase 27.1 and `docs/engine/INTAKE_REDESIGN.md` (30%). HIGH.
 - **PROJECT: World Memory remaining (engine-sheet terminal)** — (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`. MEDIUM.
 - **Supplemental strategy (media terminal)** — One supplemental per cycle minimum. Ongoing.
+- **BUILD: `/dispatch` skill (media terminal)** — New publication format: immersive scene piece. One reporter, one location, one moment. No analysis, no multi-angle coverage — you're *there*. Maria Keen at Heinold's when Horn's homer clears the wall. Carmen riding with the OARI co-responder at 2am. Produces a single article through the same print pipeline as editions/supplementals. Skill needs: reporter selection, scene brief (location + moment + mood), canon lookup for grounding, output to `output/reporters/{reporter}/articles/`, photo prompt generation. Three publication formats: editions report, supplementals explain, dispatches immerse. Source: S139 external reviews (Mika). HIGH.
+- **BUILD: `/interview` skill (media terminal)** — Two modes. (1) **Paulson interview:** A reporter agent interviews Mike in character as GM Mike Paulson. Real-time back-and-forth conversation. Produces a published Q&A piece. Mags or any reporter can conduct. (2) **Agent-to-character interview:** A reporter agent interviews a simulation character — citizen, council member, A's player, civic official. Agent-to-agent conversation using voice agent profiles and citizen data from MCP. Produces a published interview transcript. Both modes output to `output/reporters/{reporter}/articles/` and go through print pipeline. Skill needs: interviewer selection, subject lookup (MCP citizen/council/roster data), conversation loop (back-and-forth turns), transcript formatting, canon grounding so questions reference real history. Source: S139 Mike Paulson. HIGH.
 - **EVALUATE: Document processing pipeline (research-build terminal)** — Qianfan-OCR (Baidu, 4B params) does end-to-end document parsing: PDF/image → structured markdown in one pass. Layout analysis, table extraction, chart understanding, document QA. Could feed real civic documents (council minutes, zoning permits, budget reports) into the civic terminal as structured data. Replaces manual text extraction. MEDIUM — evaluate when civic pipeline needs real-world document input. Added S137.
 
 ### Infrastructure
@@ -102,6 +113,14 @@ Monthly token tracking per agent role. Prevents one broken reporter from burning
 **33.12 Mags EIC Sheet Environment — EVALUATE (research-build terminal).**
 New spreadsheet owned by service account. Tabs: Editorial Queue, Desk Packets, Canon Briefs, Edition Tracker, Grading. Reads from Riley's sheets, writes to own space. No Riley triggers. See `riley/RILEY_PLAN.md` for full spec.
 
+**Additional EIC tabs identified from S139 external reviews:**
+- **Coverage Gap Tracker** — Flags storylines that were active 3+ cycles ago with no recent mention. "Refrigerator test" — stories the paper dropped that citizens would still be talking about. Auto-populated from Arc_Ledger + edition content. Generates follow-up assignments. (Source: KIMI review)
+- **"What We Got Wrong" Queue** — Tracks narrative predictions/profiles that didn't hold up. Player profiled as emergent who got sent down, initiative covered positively that stalled, citizen who appeared in 3 stories then vanished. Feeds a rotating accountability section every 3rd edition. (Source: KIMI review)
+- **Correction Log** — When the paper gets something wrong, track the error, the correction, and whether citizens referenced the error in subsequent Letters. Corrections become narrative material, not just errata. Connects to folk memory (27.9). (Source: KIMI review)
+- **Arc Dashboard** — When Phase 37 (arc state machines) is built, surface arc phase + tension + linked citizens here so Mags sees story trajectory at a glance during edition planning. (Source: Grok review)
+
+These tabs turn the EIC sheet from a production tracker into an editorial intelligence system. Many external review suggestions (coverage gaps, corrections, accountability sections, arc awareness) converge on this same tool — Mags needs a sheet that shows what the paper is missing, not just what it's producing.
+
 **33.13 Sandcastle proof-of-concept — EVALUATE (research-build terminal).**
 Run one reporter agent via Sandcastle in a Docker container with real shell access and Supermemory queries. Requires Docker on server. See `docs/RESEARCH.md` S132 Sandcastle entry.
 
@@ -119,6 +138,9 @@ Add `allowed-tools: ["Read", "Grep", "Glob"]` to reporter agent skill frontmatte
 
 **33.18 Clean stale world-data memories — BUILD (engine-sheet terminal).**
 S131 document ingest created fragmented memories. Replace with Memories API records. Remove old fragments after new memories are confirmed searchable.
+
+**33.19 Physical details in citizen cards (S139, from DeepSeek review).**
+Reporters invent physical details per article — a limp, a raspy voice, a nervous habit. But these aren't stored or shared. If Carmen writes "Marcus has a limp" in E88, Maria doesn't know that in E91. Add a `PhysicalDetails` section to citizen cards: gait, voice quality, distinguishing habits, sensory details. Generated once per citizen (Tier 1-2 first), stored in world-data, available to all reporters via MCP `lookup_citizen`. Solves cross-edition consistency for character descriptions. **Implementation:** Extend `buildCitizenCards.js` to include a physical details block. For existing Tier 1-2 citizens, mine bay-tribune for any physical descriptions already published and canonize them. For citizens without published descriptions, generate from TraitProfile + occupation + age. **Connects to:** 33.17 (trait profiles feed physical detail generation), Phase 35.1 (wiki ingest should capture physical descriptions from new articles). **Priority: LOW — quality-of-life improvement. Build after 33.17 (trait profiles) since traits inform physical details.**
 
 ---
 
@@ -214,6 +236,18 @@ WordPress 7.0 (April 2026) ships AI Client SDK supporting Claude function callin
 
 Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 Tier 1-2 event caps, 24.3 Context-aware events, 24.4 Daily simulation, 24.5 Sports transactions.
 
+**24.6 Event bands — narrative taxonomy (S139, from Codex review).**
+Tag each life history event by narrative function: Routine (daily habits, commute), Pivot (turning point — new job, injury, move), Spillover (city-level event affects this person), Contribution (citizen action — organizing, volunteering), Reflection (opinion shift, trust change). Adds narrative weight differentiation — not all events are equal. Helps `compressLifeHistory.js` produce sharper profiles and helps reporters pick the interesting moments from a citizen's history. Implementation: new column in LifeHistory_Log or prefix convention in EventTag. No schema breakage — additive.
+
+**24.7 Neighborhood context anchors (S139, from Codex review).**
+Force a local anchor per life event — a specific intersection, venue, service, or community org. Events like "got a promotion" become "got a promotion at DataWave Systems on Broadway." Grounds life history in Oakland geography using existing neighborhood and business data. Reduces generic text, increases local realism. Implementation: engine event generators reference Neighborhood_Map and Business sheet when composing EventText. Connects to 36.1 (institutions) and 36.2 (business lifecycles) when those are built.
+
+**24.8 Citizen internal vectors — desires, fears, motivations (S139, from DeepSeek review).**
+The bounded trait system (S133) tells reporters *how* a citizen sounds. It doesn't tell the engine *what* a citizen wants. Add hidden internal vectors per citizen: a secret desire (open a food truck, get elected, leave Oakland), a core fear (ending up like a parent, losing the house, being forgotten), a private shame, a quiet pride. These aren't published to the media room by default — they drive engine decisions. A citizen with "open a food truck" desire has higher career-change probability. A citizen with "losing the house" fear reacts more strongly to rent pressure events. Makes citizen behavior character-driven rather than random. **Implementation:** New columns in Simulation_Ledger or a separate Citizen_Motivations sheet. Populated initially for Tier 1-2 citizens (77 people). Engine life-event generators read motivations to weight outcomes. `compressLifeHistory.js` can surface motivations that have been acted on. **Connects to:** Bounded traits (literary surface), Phase 36.3 (neighborhood trends affect fear-driven citizens), Phase 27.4 (citizen autonomy — motivations become decision inputs). **Priority: MEDIUM — the natural next step for the trait system. Design schema when Phase 24 work begins.**
+
+**24.9 Relationship decay & maintenance (S139, from DeepSeek review).**
+Relationships exist in the engine but don't require upkeep. Add decay mechanics: relationships lose strength over cycles without interaction. Different bond types decay at different rates — family ties are durable, workplace bonds fade fast after a job change, neighbor bonds depend on proximity. When a relationship drops below a threshold after being strong, generate a "drift" event (old friends who lost touch, former neighbors who stopped calling). When decayed relationships re-engage, generate a "reconnection" event. Creates organic narrative arcs without scripting them. **Implementation:** New function in Phase 5 (citizens) that runs each cycle. Reads relationship records + LifeHistory_Log for recent interactions. Decrements strength based on bond type and cycles since last contact. Drift/reconnection events written to LifeHistory_Log. **Connects to:** Phase 24.8 (a citizen's fear of "dying alone" amplifies relationship maintenance behavior), Phase 24.6 (drift events tagged as "Pivot" band). **Priority: MEDIUM — clean standalone system. Build after relationship data is confirmed healthy.**
+
 ### Phase 26.3: Craft Layer — Story Structure in Agent Briefings — DONE S114
 
 **Goal:** Give desk agents storytelling craft, not just data and instructions. Agents that understand story structure write journalism. Agents that don't write reports.
@@ -254,7 +288,15 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 
 **Priority:** HIGH — this is the design direction for what GodWorld becomes next. 27.1 (intake evolution) is the concrete first step. 27.2-27.3 DONE S114 (prompt changes live). 27.4-27.5 are architecture-level.
 
-6. **27.6 Standalone workflows — decouple city hall from the newsroom.** Voice agents and initiative agents currently run inside `/write-edition`. City hall shouldn't wait for the newspaper. Build a `/run-city-hall` standalone workflow that runs voice agents + decision queues + tracker writeback independently of edition production. Desk agents read what city hall already did. This pattern generalizes — any system that acts autonomously (city hall, citizen life events, economic cycles) can be a standalone workflow that runs on its own schedule. The edition pipeline becomes a reader, not an orchestrator. **Post-E89 — evaluate after seeing what voice agents do with 27.3 off-menu authority.**
+6. **27.7 Delayed-fuse narrative seeds (S139, from DeepSeek review).** The engine generates events that resolve within the same cycle. This adds a *plant-and-payoff* mechanic: low-signal events tagged with an escalation horizon (e.g., "foundation cracks noticed at 14th & Broadway" in C92 → "sinkhole closes intersection" in C98). Distinct from existing `calendarStorySeeds.js`, which generates per-cycle story prompts for reporters. Delayed-fuse seeds are engine-level facts that persist in a tracking sheet, dormant until their trigger cycle arrives, then escalate into full events. Creates multi-cycle narrative arcs the engine doesn't currently produce. **Implementation:** New sheet `Narrative_Seeds` (SeedID, PlantedCycle, TriggerCycle, Domain, Severity, Description, Status). New engine function reads seeds each cycle, checks if any have reached their trigger, promotes triggered seeds to `worldEvents`. Planting function runs during event generation phases, probabilistically creating seeds based on city state. **Connects to:** Phase 24 (citizen life events could plant personal seeds), Phase 36.1 (institutions could plant institutional seeds — hospital budget shortfall → staffing crisis 5 cycles later). **Priority: MEDIUM — genuine narrative gap. Design the schema first, build when Phase 24 is active.**
+
+7. **27.8 Weather as world texture (S139, from DeepSeek review — PARTIALLY BUILT).** The weather system is more developed than the reviewer knew: `applyWeatherModel.js` already generates `S.weather`, `S.weatherMood`, `S.weatherEvents`, `S.weatherTracking`, and `S.neighborhoodWeather` (per-neighborhood variation). Weather feeds into 25+ downstream functions including seasonal weights, life history, nightlife, evening simulation, and story hooks. `recordCycleWeather.js` persists to `Cycle_Weather` sheet. **What's missing:** (1) Seasonal traditions that citizens anticipate (First Friday in summer vs winter, Lake Merritt in fog season). (2) Weather-driven commerce effects (rain kills foot traffic in commercial districts, heat drives ice cream/beer sales). (3) Multi-cycle weather patterns (3 cycles of rain → flood risk, drought → fire season anxiety). These connect weather to the economic layer and neighborhood trends (Phase 36.3). **Priority: LOW — the system works. These are depth additions, not structural gaps.**
+
+8. **27.9 Folk memory — neighborhood-filtered collective recall (S139, from Gemini review).** The simulation tracks what happened. It doesn't track what people *think* happened. Add a collective memory layer where neighborhoods remember the same event differently based on demographics, economic position, and political alignment. Fruitvale remembers the transit vote as a betrayal; Rockridge remembers it as fiscal responsibility. The Letters desk draws from neighborhood-filtered memory to generate genuinely conflicting citizen perspectives rather than differently-worded versions of the same fact. **Implementation:** After each cycle, a new function generates 2-3 "folk memory" records per major event — short neighborhood-perspective summaries stored in a `Folk_Memory` sheet or appended to neighborhood state. Keyed by event + neighborhood. Reporters and Letters desk receive these as part of their briefing data. Over time, folk memories compound — a neighborhood that felt betrayed by 3 consecutive council votes develops a persistent distrust narrative. **Connects to:** Phase 36.3 (neighborhood trend momentum — folk memory feeds sentiment), Phase 24.8 (citizen motivations shaped by collective neighborhood memory), Phase 35 (wiki could track how events are remembered differently across the city). **Priority: MEDIUM — genuinely original idea. No other reviewer proposed this. Buildable as a post-cycle function once neighborhood state tracking is stable.**
+
+9. **27.10 Negative feedback loops — corrective pressure for golden eras (S139, from Grok review).** The feedback loop (S137b) moves approval ratings and neighborhood effects based on coverage, but it doesn't prevent runaway positive spirals. High approval + winning sports team + steady fund disbursement + rising economic indicators = a smooth ride with no friction. Real cities don't work that way. Add soft ceilings: rapid development spawns housing pressure and displacement anxiety. High approval makes politicians overreach or become complacent (scandal probability rises with sustained high approval). Winning sports teams breed ticket price increases that squeeze lower-income fans. Steady economic growth attracts outside investment that disrupts existing businesses. These aren't random shocks — they're *consequences of success* that create organic counter-pressure. **Implementation:** New engine function in Phase 2 or Phase 3 that reads sustained positive indicators (3+ cycles of rising approval, 5+ cycles of economic growth, etc.) and generates corrective pressure events. Feeds into `worldEvents` and `neighborhoodEffects`. Tunable thresholds so correction isn't guaranteed but becomes increasingly likely. **Connects to:** Phase 36.3 (neighborhood trends — success pressure drives displacement), Phase 36.2 (business lifecycles — growth attracts competition that threatens incumbents), Phase 27.7 (narrative seeds — corrective events can be planted as slow-fuse consequences of prosperity). **Priority: HIGH — this is a balance mechanic the engine genuinely needs. Without it, long runs flatten into comfortable stability. Design thresholds first, build when feedback loop data from C91+ confirms the golden-era pattern.**
+
+10. **27.6 Standalone workflows Voice agents and initiative agents currently run inside `/write-edition`. City hall shouldn't wait for the newspaper. Build a `/run-city-hall` standalone workflow that runs voice agents + decision queues + tracker writeback independently of edition production. Desk agents read what city hall already did. This pattern generalizes — any system that acts autonomously (city hall, citizen life events, economic cycles) can be a standalone workflow that runs on its own schedule. The edition pipeline becomes a reader, not an orchestrator. **Post-E89 — evaluate after seeing what voice agents do with 27.3 off-menu authority.**
 
 ### Phase 26.2: Meta-Loop — Self-Improving Feedback System — NOT STARTED
 
@@ -429,6 +471,75 @@ Rich context-aware life histories. 24.1 MEDIA mode DONE (S94). Remaining: 24.2 T
 **Depends on:** Phase 32 (world-data container) should be complete first — entity-level pages need entity-level data. Phase 33.16 (world-data ingest script) is the prerequisite for 35.1.
 
 **Priority: HIGH — 35.1 is buildable as an upgrade to ingestEdition.js in the next engine session. The feedback loop makes this more urgent with every cycle.**
+
+---
+
+### Phase 36: World Depth — Institutions, Business Lifecycles, Neighborhood Trends (S139) — NOT STARTED
+
+**Source:** External review ("Code Pilot", 2026-04-09). 10 suggestions evaluated — 3 noise (already built), 4 partial/interesting, 3 genuinely new. These are the items with real value.
+
+**Why this matters:** The engine models citizens and neighborhoods well, but the layer between them — institutions, businesses, economic momentum — is thin. Citizens work at businesses that never change. Neighborhoods have mood but not trajectory. Schools and hospitals exist in articles but not in the engine. Deepening this layer makes the city feel like a city.
+
+**36.1 Institution simulation — DESIGN (research-build terminal).**
+Schools, hospitals, unions, churches, nonprofits, developer firms as first-class ledger entities. Each institution owns: budget, reputation, staffing level, neighborhood, alliances, agenda. Institutions generate pressure on events and citizens — a hospital closure affects health outcomes, a union contract affects wages, a school rating affects family migration. Engine phases read institutional state the way they already read citizen state.
+
+**Connects to:** Phase 24 (Citizen Life Engine — context-aware events could reference institutions), Phase 27.4 (citizen autonomy — citizens choose based on institutional quality), Phase 33.16 (remaining entity cards — institutions need cards too).
+
+**Build path:** (1) Design institution schema + ledger tab. (2) Seed 10-15 institutions from existing canon (Temescal Health Center, Oakland schools mentioned in articles, faith orgs already in the ledger). (3) Add institution state reads to relevant engine phases. (4) Institutions evolve each cycle based on funding, events, council decisions.
+
+**Priority: MEDIUM — high realism gain but significant engine work. Design first, build when citizen life engine (Phase 24) is active.**
+
+**36.2 Business lifecycles — DESIGN (research-build terminal) → BUILD (engine-sheet terminal).**
+Businesses currently exist as static rows in the Business sheet (52 entries). They never open, close, expand, relocate, unionize, or get acquired. Add lifecycle events: new business opens in a neighborhood (driven by economic indicators), existing business expands or contracts (driven by neighborhood trend + sector health), business fails (driven by sustained negative pressure), business relocates (neighborhood too expensive → moves to cheaper district). Citizens work there, neighborhoods depend on them, the Tribune covers them.
+
+**Connects to:** Phase 32 (world-data container — business registry already spec'd), Phase 14 (economic parameters — business health feeds from these), 36.3 (neighborhood trends drive business decisions and vice versa).
+
+**Build path:** (1) Add lifecycle columns to Business sheet (Status, Founded, Revenue_Trend, Employee_Count_Delta). (2) New engine function in economic phase that evaluates business health each cycle. (3) Business events feed into Story_Hooks for media coverage. (4) Business failures/openings affect neighborhood economic indicators.
+
+**Priority: MEDIUM — natural extension of existing economic layer. Lower complexity than 36.1. Could build standalone.**
+
+**36.3 Neighborhood trend momentum — DESIGN (research-build terminal) → BUILD (engine-sheet terminal).**
+Neighborhoods already have mood, demographics, and economic indicators. What's missing is *trajectory* — is Temescal heating up or cooling off? Add trend momentum: rent pressure (rising/stable/falling), displacement risk (low/medium/high/critical), transit access score, commercial activity index. Each cycle, trends compound — a neighborhood heating up for 3 cycles starts seeing displacement. Citizens migrate in response — families leave high-displacement neighborhoods, young professionals move toward heating neighborhoods. The engine already tracks neighborhood mood; this adds directionality.
+
+**Connects to:** Phase 24 (citizen life engine — migration as a life event), 36.2 (business lifecycles respond to neighborhood trends), Phase 27.1 (intake — media coverage of gentrification affects perception, which affects trend).
+
+**Build path:** (1) Add trend columns to Neighborhood_Map or Population_Stats (RentPressure, DisplacementRisk, TrendMomentum, CommercialActivity). (2) New engine function that calculates trend from 3-cycle rolling window of economic indicators. (3) Citizen migration logic reads trend data. (4) Displacement events generate Story_Hooks.
+
+**Priority: MEDIUM — cleanest of the three to build. Extends existing neighborhood engine with minimal new schema. Good candidate for first implementation.**
+
+**36.4 Informal economy & mutual aid networks (S139, from Gemini review).**
+The economic layer tracks formal businesses and employment. It doesn't track the informal economy: neighbors watching each other's kids, tool libraries, community fridges, under-the-table repair work, bartering between small vendors. In prosperity-era Oakland, this isn't a "shadow economy" — it's community texture. Lower-income neighborhoods have denser mutual aid networks; wealthier neighborhoods have less. These networks act as economic buffers — when rent pressure rises (36.3), neighborhoods with strong mutual aid absorb the shock better. **Implementation:** Per-neighborhood `MutualAidStrength` score (0-1) influenced by demographics, community engagement (`cityDynamics.communityEngagement`), and faith/cultural org density. High mutual aid dampens negative economic effects. Engine events can reference mutual aid ("neighbors organized a fundraiser for displaced tenants"). Reporters get mutual aid state in desk briefings as neighborhood texture. **Connects to:** Phase 36.1 (faith orgs and nonprofits as institutions that anchor mutual aid), Phase 36.3 (mutual aid as buffer against displacement), Phase 24.7 (neighborhood context anchors — mutual aid events grounded in specific places). **Priority: LOW — world texture, not structural. Build when neighborhood trend system (36.3) is active.**
+
+---
+
+### Phase 37: Arc State Machines — Structured Multi-Cycle Story Arcs (S139, from Grok review) — NOT STARTED
+
+**Source:** Grok review (2026-04-09). The engine tracks arcs in Arc_Ledger and Initiative_Tracker, but arcs don't have explicit structure. They're labels on events, not story trajectories.
+
+**The gap:** An arc like "OARI rollout" or "Okoro power consolidation" currently advances because events happen to reference it. There's no tension meter, no phase progression, no failure condition. The arc doesn't *know* if it's in setup, escalation, crisis, or resolution. Reporters decide that editorially. This works at 91 cycles but won't scale — arcs drift, overlap, or stall without structure.
+
+**What this adds:** First-class arc objects with state machines. Each arc has:
+- **Phases:** Setup → Development → Escalation → Crisis → Resolution (or Failure) → **Legacy**
+- **Tension meter:** 0-100, influenced by events, council votes, citizen actions, coverage
+- **Advancement conditions:** What moves the arc to the next phase (e.g., "3 council members publicly oppose" → escalation)
+- **Failure conditions:** What kills the arc — but failures **pivot, not terminate** ("failing forward"). OARI dispatch delay doesn't kill the arc — it spawns a "pilot friction" sub-arc. Failure states redirect the story.
+- **Legacy phase:** Resolved arcs don't vanish — they linger for 3-10 cycles as reputation, callback material, and context. "OARI's 84% success rate" becomes a recurring citation in future civic coverage. Legacy arcs influence new arcs in the same domain.
+- **Cross-arc pollination:** Arcs feed each other's tension. NBA bid gains +15 tension if A's streak arc is in Climax. Creates emergent drama without scripting it.
+- **Arc density cap:** Max 8 active major arcs to prevent overload. Citizen-scale arcs stay lightweight (status + closure only). Prioritize by tension or editorial interest.
+- **Cooldown:** Arcs that resolve or fail enter cooldown before spawning sequel arcs
+
+**Implementation:**
+1. **37.1 Arc schema.** New columns in Arc_Ledger or a dedicated Arc_States sheet: ArcID, Title, Type (civic/sports/personal/cross-cutting), CurrentPhase, TensionScore, Momentum (-10 to +10), LinkedCitizens (POP-IDs), AdvanceCondition, FailCondition, CyclesInPhase, LastPhaseChange, LegacyCycles, MediaHooks (JSON). DESIGN.
+2. **37.2 Arc evaluator function.** New engine function (Phase 3 or Phase 6) that reads arc state + recent events + initiative status, evaluates advance/fail conditions, updates phase and tension. Writes phase transitions to `worldEvents` as high-priority story hooks. Includes cross-arc pollination pass (arcs in same domain or sharing citizens influence each other's tension).
+3. **37.3 Arc-aware briefings.** `buildDeskFolders.js` includes arc phase, tension, and media hooks in reporter briefs. A reporter covering OARI knows it's in "Escalation" at tension 72, not just that it exists. Changes how they frame the story.
+4. **37.4 Arc seeding from narrative seeds.** When a delayed-fuse seed (27.7) triggers, it can spawn a new arc in Setup phase rather than just a standalone event. Seeds become arc origins.
+5. **37.5 Legacy integration.** Resolved arcs enter Legacy phase. Legacy arcs are read-only but visible to reporters and influence new arcs in the same domain. After LegacyCycles expires, arc moves to archive. `compressLifeHistory.js` can reference legacy arcs when building citizen profiles.
+
+**Design details (from Grok deep-dive, 2026-04-09):** Tension update logic runs one pass over active arcs per cycle. Base change ±5 from neighborhood mood/weather/season. Modifiers from citizen bonds (+10 positive, -15 failure event, +8 sports tie-in). Threshold triggers: ≥80 forces milestone event, ≤20 triggers decay risk (arc fizzles or pivots). Tension ≥95 forces crisis event with cooldown to prevent every cycle being apocalyptic. Orphaned arcs (all linked citizens gone) auto-decay to Legacy.
+
+**Connects to:** Phase 27.7 (narrative seeds spawn arcs), Phase 27.10 (negative feedback loops generate arc tension), Phase 24.8 (citizen motivations interact with arc phase — a citizen whose desire is "stop Baylight" has higher agency during Escalation phase), Phase 27.9 (folk memory — how neighborhoods remember resolved arcs feeds Legacy phase).
+
+**Priority: MEDIUM — structural improvement to multi-cycle storytelling. Design the schema first (37.1). Build after 27.7 (narrative seeds) since seeds feed arcs.**
 
 ---
 

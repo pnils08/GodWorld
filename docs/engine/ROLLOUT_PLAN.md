@@ -272,13 +272,19 @@ Relationships exist in the engine but don't require upkeep. Add decay mechanics:
 
 **Why:** SpaceMolt proved ~700 autonomous AI agents produce emergent culture (spontaneous religion, political alliances) when given room to interpret and be wrong. GodWorld has deeper infrastructure (city simulation, newsroom, canon archive, grading) but agents are translators, not inhabitants. The interesting behavior comes from autonomy, not structure. Research: `docs/RESEARCH.md` S114 SpaceMolt entry.
 
-**The feedback loop:**
-- Current: Engine → sheets → agents → articles → canon (one-way)
-- Target: Engine → sheets → agents → articles → canon → **intake → engine reads back → world changes** (two-way)
+**The feedback loop — OPERATIONAL (S137b):**
+- Engine runs → city-hall decides → media publishes → engine reads all → city reacts next cycle
+
+**Three channels (ALL BUILT S137b):**
+1. Initiative tracker ← city-hall voices via `applyTrackerUpdates.js`
+2. Sports feed ← Mike (6 texture columns) via `applySportsFeedTriggers_`
+3. Coverage ratings ← auto-rater via `rateEditionCoverage.js` → `applyEditionCoverageEffects_`
+
+**Post-publish pipeline (ALL BUILT S137b):** `ingestEdition.js` (raw text → bay-tribune), `ingestEditionWiki.js` (per-entity records → bay-tribune), `buildCitizenCards.js` (citizen profiles → world-data).
 
 **Buildable pieces (ordered):**
 
-1. **27.1 Intake pipeline evolution — PARTIAL (S137b).** Coverage ratings channel DONE: `rateEditionCoverage.js` v2.0 generates per-domain ratings (-5 to +5), `applyEditionCoverageEffects_` v2.0 reads them as domain multipliers. Wired into engine runner. E90 ratings applied. Sports feed 6 texture columns (FanSentiment, PlayerMood, FranchiseStability, EconomicFootprint, CommunityInvestment, MediaProfile) wired into `applySportsFeedTriggers_`. All three intake channels operational: (1) Initiative tracker ← city-hall voices, (2) Sports feed ← Mike, (3) Coverage ratings ← auto-rater. **Remaining:** `editionIntake.js` still only extracts citizens + storylines, not agent-invented details (businesses, events). That expansion is Phase 27.2+ territory.
+1. **27.1 Intake pipeline — DONE S137b.** All three feedback channels operational. Wiki ingest writes per-entity records. Coverage ratings applied in C91. Post-publish steps documented in write-edition Step 9.
 
 2. **27.2 Agent creative latitude.** Desk agents currently stick to packet data. Give them explicit permission and structured room to invent details that feel right for the data — a restaurant name, a neighborhood event, a citizen opinion the engine didn't generate. RD lenses (DONE S113) are the seed. Next step: agents told their inventions become canon.
 
@@ -288,7 +294,7 @@ Relationships exist in the engine but don't require upkeep. Add decay mechanics:
 
 5. **27.5 Platform mode (speculative).** External users connect their own AI agents as city residents via MCP. The Tribune covers what they do. See `memory/project_city-for-bots-pivot.md`. This is the SpaceMolt model applied to a city with journalism.
 
-**Priority:** HIGH — this is the design direction for what GodWorld becomes next. 27.1 (intake evolution) is the concrete first step. 27.2-27.3 DONE S114 (prompt changes live). 27.4-27.5 are architecture-level.
+**Priority:** HIGH — this is the design direction for what GodWorld becomes next. 27.1 DONE S137b. 27.2-27.3 DONE S114 (prompt changes live). 27.4-27.5 are architecture-level.
 
 6. **27.7 Delayed-fuse narrative seeds (S139, from DeepSeek review).** The engine generates events that resolve within the same cycle. This adds a *plant-and-payoff* mechanic: low-signal events tagged with an escalation horizon (e.g., "foundation cracks noticed at 14th & Broadway" in C92 → "sinkhole closes intersection" in C98). Distinct from existing `calendarStorySeeds.js`, which generates per-cycle story prompts for reporters. Delayed-fuse seeds are engine-level facts that persist in a tracking sheet, dormant until their trigger cycle arrives, then escalate into full events. Creates multi-cycle narrative arcs the engine doesn't currently produce. **Implementation:** New sheet `Narrative_Seeds` (SeedID, PlantedCycle, TriggerCycle, Domain, Severity, Description, Status). New engine function reads seeds each cycle, checks if any have reached their trigger, promotes triggered seeds to `worldEvents`. Planting function runs during event generation phases, probabilistically creating seeds based on city state. **Connects to:** Phase 24 (citizen life events could plant personal seeds), Phase 36.1 (institutions could plant institutional seeds — hospital budget shortfall → staffing crisis 5 cycles later). **Priority: MEDIUM — genuine narrative gap. Design the schema first, build when Phase 24 is active.**
 
@@ -440,7 +446,7 @@ Relationships exist in the engine but don't require upkeep. Add decay mechanics:
 **Relationship to other phases:**
 - **Phase 31 (Canon-Grounded Briefings)** uses world-data + bay-tribune together for angle briefs
 - **Phase 21.2 (Canon Grounding MCP)** automates what Phase 31 + 32 do by hand — agents search both containers directly
-- **Phase 27.1 (Intake pipeline)** writes agent-generated details BACK to world-data, closing the loop
+- **Phase 27.1 (Intake pipeline — DONE S137b)** feedback loop operational, wiki ingest writes to world-data
 
 **Priority: HIGH — build 32.1 (test ingest) in next Build session. The test determines the architecture.**
 
@@ -503,7 +509,7 @@ Businesses currently exist as static rows in the Business sheet (52 entries). Th
 **36.3 Neighborhood trend momentum — DESIGN (research-build terminal) → BUILD (engine-sheet terminal).**
 Neighborhoods already have mood, demographics, and economic indicators. What's missing is *trajectory* — is Temescal heating up or cooling off? Add trend momentum: rent pressure (rising/stable/falling), displacement risk (low/medium/high/critical), transit access score, commercial activity index. Each cycle, trends compound — a neighborhood heating up for 3 cycles starts seeing displacement. Citizens migrate in response — families leave high-displacement neighborhoods, young professionals move toward heating neighborhoods. The engine already tracks neighborhood mood; this adds directionality.
 
-**Connects to:** Phase 24 (citizen life engine — migration as a life event), 36.2 (business lifecycles respond to neighborhood trends), Phase 27.1 (intake — media coverage of gentrification affects perception, which affects trend).
+**Connects to:** Phase 24 (citizen life engine — migration as a life event), 36.2 (business lifecycles respond to neighborhood trends), Phase 27.9 (folk memory — media coverage of gentrification affects neighborhood perception).
 
 **Build path:** (1) Add trend columns to Neighborhood_Map or Population_Stats (RentPressure, DisplacementRisk, TrendMomentum, CommercialActivity). (2) New engine function that calculates trend from 3-cycle rolling window of economic indicators. (3) Citizen migration logic reads trend data. (4) Displacement events generate Story_Hooks.
 

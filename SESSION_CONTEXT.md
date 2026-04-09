@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-08 | Engine: v3.3 | Cycle: 90 | Session: 137b
+Last Updated: 2026-04-09 | Engine: v3.3 | Cycle: 91 | Session: 140
 
 ---
 
@@ -188,6 +188,15 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Recent Sessions
 
 **Format (S135+):** Each entry includes `Terminal:` tag — research/build, engine/sheet, media, or civic.
+
+### Session 140 (2026-04-09) — External Review + Quick Fixes [mags]
+**Terminal:** mags (EIC session)
+
+- **External review:** 11 submissions from 9 AI reviewers evaluated E91 and the engine. 17 rollout items added, 9 editorial craft notes. New phases: 36 (World Depth — institutions, business lifecycles, neighborhood trends), 37 (Arc State Machines). New skills proposed: `/dispatch`, `/interview`.
+- **Quick fixes:** Faction names canonized (OPP = Oakland Progressive Party). Mayor Santana gender locked (she/her) across 9 agent files. Maurice Franklin added to ledger (POP-00801). Node.js patched v20.20.0 → v20.20.2.
+- **Dead tab cleanup:** 6 tabs backed up and hidden. Faith_Ledger and Youth_Events confirmed active but orphaned (writers exist, no readers). Export list cleaned of dead/ghost/duplicate tabs.
+- **Intake clarified:** Engine feedback loop DONE (S137b). Old intake scripts are source material for Mags EIC Sheet Environment (33.12), not engine work. Rollout updated.
+- **9 commits pushed.**
 
 ### Session 137b (2026-04-08) — Feedback Loop Complete [mags]
 **Terminal:** mags (EIC session)

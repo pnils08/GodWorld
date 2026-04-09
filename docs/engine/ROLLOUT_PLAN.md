@@ -21,7 +21,9 @@
 
 ### Data & Pipeline
 
-- **CLEANUP: Dead spreadsheet tabs (engine-sheet terminal)** — 8 dead tabs to archive/hide. Backup CSV first. See `docs/SPREADSHEET.md`. LOW.
+- **CLEANUP: Dead spreadsheet tabs — PARTIAL S139.** 6 of 8 tabs backed up and hidden (Press_Drafts, MLB_Game_Intake, NBA_Game_Intake, Sports_Calendar, Arc_Ledger, LifeHistory_Archive). **Faith_Ledger stays** — `ensureFaithLedger.js` actively writes 125 faith events. Needs a consumer (see below). **Youth_Events stays** — `youthActivities.js` actively writes, but ledger has only 1 citizen under age 20 (one 11-year-old). Engine works, population doesn't. Needs kids.
+- **ADD: Faith_Ledger consumer (engine-sheet terminal)** — 125 faith events with no reader. Culture desk should receive faith activity in briefings. Either feed into `buildDeskFolders.js` or surface via MCP. Connects to 36.1 (institutions — faith orgs as first-class entities). MEDIUM.
+- **FIX: Youth population gap (engine-sheet terminal)** — Youth engine (5-22 age range) finds only 21 eligible citizens, 1 actual child. Household formation engine should produce children. Either seed 20-30 children into the ledger manually, or fix `householdFormationEngine.js` to generate offspring for established households. Connects to Phase 24 (citizen life engine). MEDIUM.
 - **REDESIGN: Intake system (design here → engine-sheet terminal)** — `editionIntake.js` has two known bugs. Whole system needs redesign. 10 citizens parked in `Citizen_Usage_Intake`. See Phase 27.1 and `docs/engine/INTAKE_REDESIGN.md` (30%). HIGH.
 - **PROJECT: World Memory remaining (engine-sheet terminal)** — (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`. MEDIUM.
 - **Supplemental strategy (media terminal)** — One supplemental per cycle minimum. Ongoing.
@@ -31,7 +33,7 @@
 
 ### Infrastructure
 
-- **Node.js security patch (engine-sheet terminal)** — Scheduled March 24. Overdue.
+- **Node.js security patch — DONE S139.** v20.20.0 → v20.20.2. Applied 2026-04-09.
 - **UPGRADE: Instant compaction (research-build terminal)** — Proactive compaction before context full. Pattern from `claude-cookbooks/misc/session_memory_compaction.ipynb`. MEDIUM.
 - **EVALUATE: Context clearing strategy (research-build terminal)** — Beta flag `context-management-2025-06-27`. LOW.
 - **MONITOR: KAIROS background daemon (research-build terminal)** — Unreleased Claude Code feature: persistent background daemon. If Anthropic ships this, could replace PM2 + cron + scheduled agents setup with native Claude Code infrastructure. Spotted in Claude Code source analysis (512K-line codebase reveal, Apr 2026). Also watch ULTRAPLAN (30-minute remote reasoning sessions). MEDIUM — monitor Anthropic releases. Added S137.

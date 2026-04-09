@@ -108,20 +108,25 @@ Maintained for reference by scripts and Mara audits.
 
 ---
 
-## Dead Tabs — No Active Code Reads These
+## Hidden Tabs — Backed Up and Archived (S139)
 
-These tabs exist on the spreadsheet but are not read by any active engine phase or script. Candidates for archival or deletion.
+These tabs were backed up to `output/dead-tab-backups/` as CSV and hidden on the spreadsheet. No active engine code reads or writes them.
 
-| Tab | Rows | Why Dead | Notes |
-|-----|------|----------|-------|
-| **Press_Drafts** | 164 | Writer deleted S98 (-1,688 lines). `applyStorySeeds.js` and `mediaRoomIntake.js` still reference the name but the writer is gone. | Safe to archive. |
-| **MLB_Game_Intake** | 76 | Mike confirmed dead S105. No active script reads it. | Safe to archive. |
-| **NBA_Game_Intake** | 41 | Same pattern as MLB_Game_Intake. No active script reads it. | Confirm with Mike before archiving. |
-| **Sports_Calendar** | 12 | Killed S64 — engine doesn't determine sports calendar. Only referenced in `cycleExportAutomation.js` (export utility). | Safe to archive. |
-| **Arc_Ledger** | 37 | Superseded by Event_Arc_Ledger. Legacy. | Safe to archive. |
-| **Faith_Ledger** | 105 | Faith event log. No script or engine reads it. Faith_Organizations is the active org roster. | Confirm purpose with Mike. |
-| **LifeHistory_Archive** | 565 | Archive of compressed life history. No active code reads it. | Backup data — keep on sheet but flag as archive. |
-| **Youth_Events** | 8 | Only 8 rows. No engine or script references found. | Confirm if engine writes here. |
+| Tab | Rows | Why Hidden |
+|-----|------|------------|
+| **Press_Drafts** | 164 | Writer deleted S98. No active code. |
+| **MLB_Game_Intake** | 76 | Mike confirmed dead S105. |
+| **NBA_Game_Intake** | 41 | Same as MLB_Game_Intake. |
+| **Sports_Calendar** | 12 | Killed S64. |
+| **Arc_Ledger** | 37 | Superseded by Event_Arc_Ledger. |
+| **LifeHistory_Archive** | 565 | Offload storage for LifeHistory. No active reader. |
+
+## Active But Orphaned Tabs — Engine Writes, Nothing Reads
+
+| Tab | Rows | Status | What's Needed |
+|-----|------|--------|---------------|
+| **Faith_Ledger** | 125 | `faithEventsEngine.js` (Phase 4) writes via `ensureFaithLedger.js`. Active write target. | Needs a consumer — culture desk briefings or MCP tool. See rollout. |
+| **Youth_Events** | 24 | `runYouthEngine_()` (Phase 5) writes via `youthActivities.js`. Active but sparse — only 21 citizens aged 5-22 in ledger, only 1 actual child (age 11). | Needs children in the ledger. See rollout. |
 
 ---
 

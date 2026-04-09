@@ -16,7 +16,7 @@
 - **REINGEST: A's truesource → citizen profile cards** — Player data in world-data is incomplete. Reingest all A's players from truesource to citizen cards so MCP lookups return age, gender, position, contract. Mesa gender/age drift caused by missing data. HIGH.
 - **FIX: validateEdition.js false positives** — 96% false positive rate in E91 (25/26). Needs: hyphenated name handling, sentence fragment filtering, citizen vs player name disambiguation, cycle reference whitelist. MEDIUM.
 - **ADD: Gender to citizen briefs** — Simulation Ledger has no gender column. All angle briefs must specify gender for every citizen. Consider adding gender column to ledger long-term. MEDIUM.
-- **ADD: Maurice Franklin to ledger** — New citizen from Letters desk (63, Rockridge, retired transit supervisor). Needs POP-ID. LOW.
+- **ADD: Maurice Franklin to ledger — DONE S139.** POP-00801, Tier 3, Rockridge, retired transit supervisor, born 1978. Added to Simulation_Ledger.
 - **FIX: Mayor Santana gender — DONE S139.** She/her locked in mayor IDENTITY.md + 8 civic agent files + buildDecisionQueue.js. Published editions with old pronouns are historical — canon corrects forward, not backward.
 
 ### Data & Pipeline

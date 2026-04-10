@@ -31,7 +31,9 @@
 
   **Core insight:** every failure mode Mike flagged in S140 (dispatch writing profiles instead of scenes, write-edition drifting mid-pipeline, Mara grading everything A- without real verification, editions missing the Temescal health crisis) is a case of "the skill technically ran but didn't do what it was supposed to do." The eval framework is the tool that catches exactly that gap.
 
-  **Pull these files** (minimum useful set):
+  **Source location:** These files live on claude.ai as part of the skill-creator plugin. Don't mirror the whole plugin into the GodWorld repo — reference the canonical versions from claude.ai and only build the GodWorld-specific layer (assertions, eval configs, tie-ins to cycle data and editorial standards). Pull individual files only if we need to customize them for GodWorld.
+
+  **Files to reference** (minimum useful set):
   1. **`agents/grader.md`** — reads transcript + outputs, judges each assertion, explicitly fails "surface-level compliance" (file exists but content is wrong). Also extracts implicit claims from outputs and verifies them independently — counters the "performance grading" problem.
   2. **`agents/analyzer.md`** — diagnoses WHY a failed eval failed. Not just "assertion X didn't pass" but "here's the pattern of failure across runs."
   3. **`scripts/run_eval.py`** — runs one eval cycle: executor produces output, grader judges it, results go to disk.

@@ -116,7 +116,7 @@ For full technical spec: `docs/reference/V3_ARCHITECTURE.md`
 | **Clasp Push** | Deploy 158 engine files to Apps Script | `/deploy` or `clasp push` |
 | **Web Dashboard** | 40 API endpoints, Express + React, port 3001 | PM2: godworld-dashboard |
 | **Scheduled Agents** | 3 remote agents on Anthropic cloud | `claude.ai/code/scheduled` |
-| **AutoDream** | Background memory consolidation between sessions | Enabled in user settings |
+| **AutoDream** | Background memory consolidation — spawns claude-mem observer sessions on every hook event | Enabled; summarizer runs on **Gemini 2.5 Pro free tier** (switched from Sonnet 4.6 on 2026-04-10 / S141 after token burn). Settings: `/root/.claude-mem/settings.json` |
 | **Auto Mode** | Classifier-based permissions | Activate with `/auto` |
 | **Engine Health** | `/health`, `/ctx-map`, `/deploy`, `/pre-mortem`, `/tech-debt-audit`, `/doc-audit` | See CLAUDE.md |
 | **Hookify** | 5 active rules (fourth-wall, credential, clockmode, super-save, plan-paralysis) | `/hookify:list` |

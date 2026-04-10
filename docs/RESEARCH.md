@@ -1805,3 +1805,41 @@ Income: ${Income}. {MaritalStatus}, {NumChildren} children. Tier {Tier}.
 **Why interesting:** Solves the "wall of text plan" problem — Mike can't evaluate text-based plans. Visual flowcharts would let him see what's about to happen and approve step by step.
 **Why not now:** Opens browser UI at localhost:3031. Mike connects via Remote Control — localhost on server not accessible from his browser. Adds another web UI alongside dashboard (port 3001). Value is for complex multi-step builds which don't happen every session.
 **Trigger to revisit:** KAIROS ships (native daemon), web-accessible dashboard, or Mike works directly on server.
+
+---
+
+## S141 Follow-up — AutoDream Cost Audit & Gemini Switch (2026-04-10)
+
+**Trigger:** Weekly Claude token budget hit ~10% before noon with minimal active usage. Investigation into background token burn.
+
+**What the S120 entry got wrong:** The 2026-03-27 research framed AutoDream as *"Native Claude Code feature. Background sub-agent that runs between sessions."* That's half right. AutoDream is a harness-level setting (`autoDreamEnabled: true` in `~/.claude/settings.json`), but the actual behavior — spawning background sessions that summarize conversation into memory — is implemented by the **claude-mem plugin** (thedotmack), not by Claude Code natively. The plugin reads the setting and, when true, runs a persistent Bun daemon (`worker-service.cjs --daemon`) that spawns observer sessions using its own configured provider.
+
+**Investigation findings:**
+- `/root/.claude/projects/-root--claude-mem-observer-sessions/` held **779 observer session files** across 5 days (~150–200/day steady state). 90 MB total.
+- Each observer session was running **Sonnet 4.6** against a chunk of conversation to write a single memory observation.
+- Observer sessions fire on claude-mem's lifecycle hooks: `SessionStart`, `PostToolUse`, `UserPromptSubmit`, `Stop`. Every tool call ≈ one observer session.
+- The daemon is **not PM2-managed** — it's a persistent Bun process parented to init (pid 1), alive across every session close and reopen. Nothing in the default setup tells it to stop.
+- **No rate limits, no idle timeouts, no intervals exist** in the plugin config for the Claude provider path. Verbatim from docs.claude-mem.ai: *"The worker runs continuously as a background process with automatic restarts on failures."*
+
+**Resolution — switched provider to Gemini:**
+- claude-mem's config supports three providers: `claude`, `gemini`, `openrouter`. Gemini has a free tier; OpenRouter has a free model.
+- Config file location: **`/root/.claude-mem/settings.json`** (not the Claude Code settings.json — separate file owned by the plugin).
+- Changed `CLAUDE_MEM_PROVIDER: "claude"` → `"gemini"`, added free API key from aistudio.google.com, restarted the Bun worker daemon to pick up new config.
+- First Gemini run used `gemini-2.5-flash-lite` (default fallback) — **hallucinated observations** about Python 3.11/3.12 adoption that never happened, reported "local disk deletion executed" when no deletion occurred, wrote duplicate entries seconds apart. Quality unacceptable.
+- Tested whether free API key could access `gemini-2.5-pro` directly via curl → confirmed access. Gemini 2.5 Pro is available on the free tier, just with tight per-minute rate limits (plugin's `CLAUDE_MEM_GEMINI_RATE_LIMITING_ENABLED: true` handles throttling).
+- Bumped model to `gemini-2.5-pro`, restarted worker. First Pro observation was clean, specific, correctly categorized, included `why` context — near-Sonnet quality at zero cost.
+- Deleted 11 bad flash-lite observations from the SQLite database (`/root/.claude-mem/claude-mem.db`).
+
+**Outcome:**
+- Weekly Claude token burn from autodream: **stopped**.
+- Memory quality: maintained at near-Sonnet level via Gemini 2.5 Pro.
+- Cost: $0 (free tier).
+- Tradeoff: tight rate limits on 2.5 Pro free tier may throttle observations in very busy sessions. Plugin handles this gracefully — fewer, higher-quality observations beat a flood of noisy ones.
+
+**Lessons:**
+1. AutoDream is claude-mem plugin-driven, not pure native feature. The settings file to watch is `/root/.claude-mem/settings.json`, not `~/.claude/settings.json`.
+2. The claude-mem worker is a Bun daemon — `ps -ef | grep worker-service` to see it, `kill <pid>` to stop it, it auto-respawns on next hook event.
+3. Free-tier API keys at aistudio.google.com can access Gemini 2.5 Pro for small workloads — useful fallback for any plugin that supports provider swapping.
+4. The plugin supports switching providers by design. That was always the escape hatch for this exact problem.
+
+**Docs updated:** MEMORY.md, SESSION_CONTEXT.md, STACK.md, OPERATIONS.md.

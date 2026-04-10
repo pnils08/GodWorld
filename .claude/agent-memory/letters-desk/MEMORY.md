@@ -52,6 +52,11 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Patricia Ashford (63, Jack London, retired accountant) — NEW, Baylight TIF transparency concerns
 - James Morrison (71, Lake Merritt, retired maritime engineer) — NEW, October weather, city love
 
+## C91 Letters
+- Ramon Brown (71, Jack London, retired food truck operator) — NBA expansion/neighborhood change
+- Carlos Harris (61, Downtown, emergency management coordinator) — OARI pilot data, 84% non-police resolution
+- Maurice Franklin (63, Rockridge, retired transit supervisor) — NEW, A's 14-1 streak, city hope
+
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST expired
 - Gloria Meeks: used E86 — REST expired
@@ -74,6 +79,9 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Marcus Webb (CH worker): used E90 — REST through E92 (expires E93)
 - Patricia Ashford: used E90 — REST through E92 (expires E93)
 - James Morrison: used E90 — REST through E92 (expires E93)
+- Ramon Brown: used C91 — REST through C93 (expires C94)
+- Carlos Harris: used C91 — REST through C93 (expires C94)
+- Maurice Franklin: used C91 — REST through C93 (expires C94)
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

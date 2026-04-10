@@ -33,3 +33,14 @@ Prior work: `output/desk-output/business_c87.md`
 - Sources used: Ray Muñoz (54, Jack London, longshoreman, POP-00132), Jalen Hill (35, Jack London, line cook, POP-00089).
 - Sources rested: Elena Lewis, Jordan Cook, Travis Green.
 - Next beats: Did OEWD hit any approvals in first week of two-week window? Does independent audit launch? When does Baylight Phase 1 mobilization peak? Do Jack London evening crowds sustain beyond Labor Day? Darius Clark status STILL unresolved (six editions now). CRC independent audit response?
+
+## C91 Notes (FINAL — edition written)
+- **FRONT PAGE STORY:** NBA Expansion Comes to Oakland. Three power centers converging: Elias Varek's ownership group, Paulson's "premier city destination" endorsement, Mayor Santana (+8 approval to 73) directing Baylight Phase II arena briefing within two cycles.
+- **Varek story (first public appearance):** Elias Varek, 38, West Oakland, founder Civis Systems (40 employees, $60M revenue). Urban systems intelligence firm — models transit, construction, emergency response, utilities. Already embedded in Baylight Phase II planning. Father: Port longshoreman (30 years). At 19, wrote routing scripts for freight dispatcher. Built/sold logistics intelligence company. Philosophy: "Cities don't fail from lack of resources, they fail when systems don't talk to each other."
+- **Jack London corridor:** Baylight A's stadium under construction (TIF closed, foundation piling active, dashboard live). Phase II arena would add 20K seats same district. Dual professional sports infrastructure (baseball + basketball within 5 blocks).
+- **Approval momentum:** Santana 73 (+8), Carter 70 (+5). CRC at 64 with no organized opposition.
+- **Economic projections:** Baylight projects 1,400 construction/operations jobs (40% local = 560 Oakland). Arena would add ~600 permanent jobs. A's stadium brought $140M annual economic activity in Year 1; NBA arena typically doubles that.
+- **Paulson quote:** "The infrastructure exists" — endorsement released this cycle.
+- **Tomas Aguilar quote:** 40, Jack London, Freight Logistics Coordinator at Port. "I'm excited. We're about to have both the A's and the NBA in our neighborhood."
+- **Sources used:** Elias Varek (POP-00789 — first appearance), Mike Paulson (POP-00527), Mayor Avery Santana, Tomas Aguilar (POP-00529 — first use, citizen voice on neighborhood reaction).
+- **Next beats:** Does Baylight Phase II briefing move to financing/council authorization within two cycles? When does Varek's ownership group formalize bid structure? Does arena bring 600+ permanent jobs to Jack London as projected? Secondary: how do other neighborhoods (West Oakland, Fruitvale) view dual-stadium concentration in Jack London?

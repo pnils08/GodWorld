@@ -1,6 +1,6 @@
 # Sports Desk — Editorial Memory
 
-Last Updated: 2026-04-02 | Last edition written: C90
+Last Updated: 2026-04-08 | Last edition written: C91
 
 ## A's Roster Notes (C87 confirmed — ALL verified against briefing/packet)
 - **Mark Aitken**: 1B (NOT 3B — recurring error). 3x Gold Glove, .273 AVG, 195 HR, Playoff MVP 2037. Community liaison.
@@ -65,17 +65,33 @@ Last Updated: 2026-04-02 | Last edition written: C90
 - Hal: first person reflective, literary, spells out numbers (two thousand thirty-one, not 2031). NEVER cynical. NEVER breaking news. Dillon is LEFT-HANDED — always verify.
 - Hal's Metrics Key: always append for era-normalization and stat-heavy essays.
 
-## Active Storylines (C90)
-- Danny Horn breakout: 6 HR through 8 games. C90 lead story (P Slayer). Emerging as team's offensive anchor. DeShawn Hartley used as returning citizen witness (Jack London bar scene).
-- Dynasty farewell: Keane/Dillon/Kelley final season continues. A's 7-1. "Does Keane get one more October?" — Hal's angle. Do NOT resolve.
-- Travis Coles acquisition paying off: 2 dominant starts. 9-1 vs San Diego. Anthony angle — rotation unexpectedly elite.
-- Henry Rivas: Dazzled in 11-3 Guardians win. Rotation slot 2 performing at ace level.
-- Bryan Franco: SS rookie. C89 debut. Contributing in C90 games per brief — no specific stats confirmed; handle carefully.
-- Busch trade: Peter Busch + Baez (SP minors) + Davila (RP minors) to Guardians for Liam Wade (2B/SS, Double-A). Busch frustrated. Minor league pitching depth now thin.
-- Eric Tavares: 2B acquisition. HR on Opening Day. Development arc in progress.
-- Paulson two-city tension: courtside Chase Center in Bulls red. Baylight arena question unresolved. DO NOT RESOLVE. Carry forward.
-- NBA expansion: Oakland confirmed in final group of candidates. Story unresolved — do not resolve.
-- Bulls: in playoffs, championship territory per C90 brief. NEVER print raw record in A's coverage without confirmed feed data.
+## A's Records (continued)
+- C91: 14-1, W11. Henry Rivas out 2 months (dislocated shoulder). Carmen Mesa called up from AA (Midland RockHounds), #14 prospect. P Slayer piece: streak feeling + Mesa callup through scout Beverly Peterson's eyes.
+
+## Active Storylines (C91)
+- A's 14-1, eleven straight wins. Historically dominant start.
+- Henry Rivas: INJURED — dislocated shoulder, out 2 months. Rotation slot 2 now vacant.
+- Carmen Mesa (SP, #14 prospect, 30 yrs, Cuban-born, right-handed): called up from AA Midland to fill Rivas slot. 95 MPH fastball, 12-6 curve, slider. First MLB appearance pending.
+- Danny Horn: 6 HR in 8 games (ongoing). Offensive anchor.
+- Travis Coles: 21 years old, near-perfect through 2 starts.
+- Dynasty farewell: Keane/Dillon/Kelley final season continues. Do NOT resolve.
+- Bryan Franco: SS rookie, contributing.
+- Busch trade: Peter Busch + Baez (SP minors) + Davila (RP minors) to Guardians for Liam Wade (2B/SS, Double-A). Minor league pitching depth thin. NOTE: Mesa callup further depletes AA depth.
+- Eric Tavares: 2B acquisition, development arc in progress.
+- Paulson two-city tension: unresolved. DO NOT RESOLVE.
+- NBA expansion: Oakland in final candidate group. Unresolved. DO NOT RESOLVE.
+
+## Fan Characters / Citizens Quoted (C91 additions)
+
+### ACTIVE — Do Not Retire
+- **DeShawn Hartley**, 59, Jack London, Photographer/Bay Tribune (POP-00015) — C87, C90 P Slayer pieces. RETURNING character.
+- **Paul Skenes**, 37, Jack London, Retired Former A's (POP-00125) — C87 P Slayer piece. RETURNING character.
+- **Beverly Peterson**, West Oakland, A's Scout (POP-00119) — FIRST USE C91 P Slayer. Scouting source on Mesa callup. Phone call scene. Quote: she noticed Mesa's 12-6 curve first. Key line: "He's thirty. He's been in the minors for a while. There's something to be said for a man who's been waiting this long." Can be reused as rotation/prospect expert.
+- **Dante Turner**, 56, Downtown, retired server (POP-00224) — FIRST USE C91 P Slayer. Fan voice. Attended 12 of 14 games during streak. Phone/voicemail scene. Emotional "can't make myself go home" beat. Good for ongoing streak/fan coverage.
+
+### Retired from Recent Rotation
+- **Dante Nelson**, 41, West Oakland, Security Guard — used C86 Keane Academy piece. ERRATA WARNING: overexposed E84. Do NOT reuse without checking cross-desk usage first.
+- **Raymond Polk**, contractor — used E84-E85 Aitken civic crossover. Check before reuse.
 
 ## Name Verification Checklist (run before every edition)
 Before writing, verify these names are correct (errata-prone):

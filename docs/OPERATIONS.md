@@ -129,7 +129,7 @@ Keep mobile sessions focused: file edits, research, planning, ledger checks. Sav
 
 | Setting | Where | What |
 |---------|-------|------|
-| AutoDream | user | Background memory consolidation between sessions |
+| AutoDream | user | Background memory consolidation — claude-mem plugin spawns observer sessions. Summarizer runs on **Gemini 2.5 Pro free tier** (switched from Sonnet 4.6 on 2026-04-10 / S141). Config: `/root/.claude-mem/settings.json` |
 | Auto Mode | project | Classifier-based permissions (try `/auto` to enable) |
 | Thinking Summaries | user | Show reasoning in transcript (ctrl+o) |
 | Channels | user | MCP servers can push inbound messages |

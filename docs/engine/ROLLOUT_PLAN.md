@@ -27,7 +27,35 @@
 - **Intake system — DONE (S137b).** Three feedback channels operational. Wiki ingest (`ingestEditionWiki.js`) + coverage ratings + citizen cards + tracker updates. Old scripts (`editionIntake.js`, `editionIntakeV3.js`, `processEditionIntake.js`) and old design docs (`INTAKE_REDESIGN.md`, `INTAKE_REDESIGN_PLAN.md`) are legacy — cleanup only.
 - **PROJECT: World Memory remaining (engine-sheet terminal)** — (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`. MEDIUM.
 - **Supplemental strategy (media terminal)** — One supplemental per cycle minimum. Ongoing.
-- **BUILD: Skill eval framework — executor + grader agents (research-build terminal) — HIGH S141.** Anthropic's skill-creator plugin ships an eval framework with two agents: an executor that runs a skill against a test prompt and produces a transcript + outputs, and a grader that reads both and judges whether assertions actually passed. Key features for GodWorld: (1) **superficial vs genuine compliance check** — grader explicitly fails assertions that are "technically satisfied" but produce wrong content (catches the dispatch failure mode where an agent writes words in a bar setting and calls it a scene piece). (2) **Implicit claim extraction** — pulls claims out of outputs ("Carmen landed the OARI data without making it a policy paper") and verifies them independently against the artifacts. Counters the "Mara grades everything A- to manipulate me" problem. (3) **Eval critique** — grader critiques the assertions themselves, flagging ones that would pass for clearly wrong output. Tells you when your own test is too weak before it gives false confidence. **Use cases:** write-edition assertions ("front page leads with highest-severity engine signal, not sports"), dispatch assertions ("scene is one location, one moment, no profile dumps"), prep skill assertions (once those exist). **Also relevant:** the skill packager (`utils/package_skill.py`) from the same plugin — turns a skill folder into a distributable `.skill` zip. LOW priority standalone but useful once Mags skills want to be portable across projects. Source: claude.ai skill-creator plugin, S141.
+- **BUILD: Skill eval framework from skill-creator plugin (research-build terminal) — HIGH S141.** Anthropic's skill-creator plugin ships a closed-loop eval system. Pull only the pieces that solve GodWorld's problems.
+
+  **Core insight:** every failure mode Mike flagged in S140 (dispatch writing profiles instead of scenes, write-edition drifting mid-pipeline, Mara grading everything A- without real verification, editions missing the Temescal health crisis) is a case of "the skill technically ran but didn't do what it was supposed to do." The eval framework is the tool that catches exactly that gap.
+
+  **Pull these files** (minimum useful set):
+  1. **`agents/grader.md`** — reads transcript + outputs, judges each assertion, explicitly fails "surface-level compliance" (file exists but content is wrong). Also extracts implicit claims from outputs and verifies them independently — counters the "performance grading" problem.
+  2. **`agents/analyzer.md`** — diagnoses WHY a failed eval failed. Not just "assertion X didn't pass" but "here's the pattern of failure across runs."
+  3. **`scripts/run_eval.py`** — runs one eval cycle: executor produces output, grader judges it, results go to disk.
+  4. **`scripts/run_loop.py`** — **the killer feature.** Runs eval → analyze → improve skill → re-eval → compare, iterating until the skill passes. This is the closed feedback loop that lets a skill improve itself against real assertions. Set editorial standards once, let it iterate, walk away.
+  5. **`scripts/quick_validate.py`** — cheap sanity check that a skill folder is structurally valid. Would have caught today's dispatch skill being built with bad brief structure.
+  6. **`references/schemas.md`** — data schemas for transcripts, grading output, eval config. Read before wiring anything.
+
+  **Skip (for now):**
+  - `agents/comparator.md` — only useful for A/B testing skill versions, not yet needed
+  - `assets/eval-viewer`, `assets/eval_review.html`, `scripts/generate_report.py` — HTML visualization, nice-to-have
+  - `scripts/aggregate_benchmark.py` — only useful once many evals exist
+  - `scripts/improve_description.py` — cosmetic, edits skill descriptions
+
+  **Also note:**
+  - `scripts/package_skill.py` — turns a skill folder into a distributable `.skill` zip. LOW priority standalone but useful once Mags skills want to be portable across projects.
+  - The sibling `mcp-builder` plugin helps build MCP servers — we already have `godworld-mcp` working, so this is reference material for the next MCP server, not an urgent tool.
+
+  **First GodWorld evals to write** (once framework is pulled in):
+  - **write-edition:** "front page leads with highest-severity engine signal, not sports by default"; "at least 3 named female citizens in non-official capacities"; "no article set in a sports bar unless sports is the cycle's top story"
+  - **dispatch (when rebuilt):** "scene is one location, no characters introduced with biographical data dumps, ends on an image not a summary"
+  - **city-hall:** "every pending decision has an outcome written; every outcome references an engine-reachable effect"
+  - **prep skills (when built):** assertions on the shape of the sift output and desk packets
+
+  Source: claude.ai skill-creator plugin, S141.
 
 - **BUILD: Prep skills — extract prep work from write-edition and city-hall (media terminal) — HIGHEST PRIORITY S141.** Mike's insight 2026-04-10: the reason write-edition drifts is that prep work (world summary build, desk packet assembly, voice questions, civic sift) is sandwiched inside the same pipeline as the orchestration work. Mags can't hold a 9-step process when the first 3-4 steps are heavy compilation tasks — she drifts, burns tokens, and breaks rhythm before the editorial work even starts. **The fix:** pull prep into its own skills so by the time write-edition or city-hall opens, all the inputs already exist on disk. Mags' job inside those skills becomes pure orchestration: read the prep, launch reporters, compile, publish. **Skills to build:**
   1. **`/sift` (editorial prep skill)** — The "messy space" where the editorial judgment happens. Opens with engine state + live data. Mags proposes front page, section priorities, reporter assignments. Mike pushes back. `/grill-me` can run inside it. Output: a locked sift document that write-edition reads. **This is where Mags learns to be an editor without a pipeline pulling her forward.**

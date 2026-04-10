@@ -107,7 +107,7 @@ node scripts/queryFamily.js          # Family state
 node scripts/queryLedger.js          # Citizen data
 node scripts/buildDeskPackets.js     # Desk input data
 node scripts/validateEdition.js      # Edition validation
-clasp push                           # Deploy engine (158 files)
+clasp push                           # Deploy engine (128 files)
 npx supermemory search "query" --tag bay-tribune  # Canon search
 npx supermemory search "query" --tag world-data   # City state search
 pm2 restart mags-bot                 # Restart Discord bot

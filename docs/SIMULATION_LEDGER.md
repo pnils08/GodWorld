@@ -1,12 +1,12 @@
 # Simulation_Ledger — Citizen Architecture Guide
 
 **Tab:** `Simulation_Ledger` on GodWorld spreadsheet
-**Citizens:** 675 | **Columns:** 46 (A–AT) | **Sim Year:** 2041
+**Simulation_Ledger rows:** 761 | **Columns:** 46 (A–AT) | **Sim Year:** 2041
 **Age rule:** Age = 2041 - BirthYear. Always.
 
-This is the single source of truth for every simulated person. Not PERSISTENCE.md, not desk packets, not articles. The ledger.
+This is the single source of truth for every simulated person in the main ledger. Other ledgers (Generic_Citizens, Cultural_Ledger, Business_Ledger, Faith_Organizations, Chicago_Citizens) hold additional populations — total world population is **1,200+** across all ledgers combined.
 
-Last audited: Session 105 (2026-03-20) — live data verified.
+Last audited: Session 140 (2026-04-10) — live data verified.
 
 ---
 
@@ -21,7 +21,7 @@ The SL holds ALL simulated people, not just city citizens. ClockMode determines 
 | **CIVIC** | 46 | Government officials, council | Civic-mode events. Council votes, initiative processing. | — |
 | **MEDIA** | 29 | Bay Tribune journalists | Media-mode events. 7 role-specific pools (editor, columnist, reporter, etc.) | `Bay_Tribune_Oakland` |
 
-**Total: 675.** No LIFE-mode citizens remain on the live sheet (S105 audit).
+**Simulation_Ledger total: 761 rows** (S140 count). ClockMode breakdown above is from S105 audit and may have drifted. **Full world population: 1,200+** across Simulation_Ledger + Generic_Citizens (286) + Cultural_Ledger (39) + Business_Ledger (53) + Faith_Organizations (17) + Chicago_Citizens (125). No LIFE-mode citizens remain on the live sheet.
 
 ### GAME Mode Breakdown
 

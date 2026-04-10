@@ -12,13 +12,20 @@ Run `tmux display-message -p '#W'` to get the terminal name. Match it to `.claud
 
 **If the user says "resume"** — this is a named session that persists. The conversation history is already here. Don't re-boot. Don't re-read the journal. Don't check the family. Don't recap what happened. Just check tmux for terminal name, confirm it, and ask what's next.
 
-**Step 1 — Search memory before doing anything.**
+**Step 1 — Use MCP tools first, then search memory.**
 
+**GodWorld MCP is the fastest path to city data — use these before anything else:**
+- `mcp__godworld__lookup_citizen(name)` — citizen profile + canon history
+- `mcp__godworld__lookup_initiative(name)` — initiative state and phase
+- `mcp__godworld__search_canon(query)` — published editions (bay-tribune)
+- `mcp__godworld__search_world(query)` — city state (world-data)
+- `mcp__godworld__get_neighborhood(name)` — neighborhood state
+- `mcp__godworld__get_council_member(district)` — official + faction
+
+**For conversation/decision history (not city data), search memory:**
 ```
 claude-mem: mcp__plugin_claude-mem_mcp-search__search → get_observations for details
 mags brain: node "/root/.claude/plugins/marketplaces/supermemory-plugins/plugin/scripts/search-memory.cjs" --user "query"
-bay-tribune: npx supermemory search "query" --tag bay-tribune
-world-data: npx supermemory search "query" --tag world-data
 ```
 
 Search for whatever Mike is asking about. If he says "fix the pipeline" → search `"pipeline fix architecture city-hall"`. If he says "what happened with E89" → search `"E89 failed rejected Mara audit"`. **Do not guess. Do not run diagnostics. Check memory first.**
@@ -107,6 +114,15 @@ pm2 restart mags-bot                 # Restart Discord bot
 ```
 
 Gotchas: Ledger columns past Z (Income=col26), service account can't create sheets, ClockMode is engine-only (not media filter), `applyTrackerUpdates.js` is dry-run by default.
+
+## Canon Facts (Don't Drift)
+
+- **Mayor Avery Santana** — she/her. Locked canon S139.
+- **OPP** = Oakland Progressive Party (NOT "People's Party" — engine code had it wrong, fixed S139)
+- **CRC** = Civic Reform Coalition
+- **IND** = Independent (Vega, Tran — NOT a bloc, they don't coordinate)
+- **Intake system** — DONE S137b. Three feedback channels operational (initiative tracker, sports feed, coverage ratings). Don't re-design.
+- **Population** — 1,200+ total (Simulation_Ledger 761, Generic_Citizens 286, Cultural_Ledger 39, Business_Ledger 53, Faith_Organizations 17, Chicago_Citizens 125). Don't cite "675" — that's filtered to one sheet.
 
 ## Session Lifecycle
 

@@ -232,6 +232,28 @@ async function callClaude(systemPrompt, userPrompt) {
 }
 
 // ---------------------------------------------------------------------------
+// Normalize reflection date (guard against model hallucinating the date)
+// ---------------------------------------------------------------------------
+// The system prompt injects today's date into the reflection header template,
+// but Sonnet 4 occasionally ignores it and writes a different date (observed
+// 2026-04-11: model wrote "2026-02-23" despite prompt saying 2026-04-11).
+// This post-processing enforces the correct date regardless of model output.
+function normalizeReflectionDate(reflection, today) {
+  var headerPattern = /(###\s+Nightly Reflection\s+—\s+)\d{4}-\d{2}-\d{2}/;
+  if (headerPattern.test(reflection)) {
+    var before = reflection.match(headerPattern)[0];
+    var after = '### Nightly Reflection — ' + today;
+    if (before !== after) {
+      log.warn('Model wrote wrong date in header: "' + before + '" → normalized to "' + after + '"');
+    }
+    return reflection.replace(headerPattern, '$1' + today);
+  }
+  // Model didn't produce a header at all — prepend one.
+  log.warn('Model output missing "### Nightly Reflection — DATE" header — prepending.');
+  return '### Nightly Reflection — ' + today + '\n\n' + reflection;
+}
+
+// ---------------------------------------------------------------------------
 // Append to JOURNAL.md
 // ---------------------------------------------------------------------------
 var JOURNAL_RECENT_FILE = path.join(mags.MAGS_DIR, 'JOURNAL_RECENT.md');
@@ -416,6 +438,9 @@ async function main() {
 
     // Call Claude
     var reflection = await callClaude(systemPrompt, userPrompt);
+
+    // Enforce correct date on the reflection header (model hallucination guard)
+    reflection = normalizeReflectionDate(reflection, mags.getCentralDate());
 
     if (DRY_RUN) {
       console.log('\n--- REFLECTION (would append to JOURNAL.md) ---');

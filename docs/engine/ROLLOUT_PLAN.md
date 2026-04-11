@@ -639,6 +639,8 @@ No single-layer article lands as hard as one that threads all three. Engine-only
 - "My initiatives all cure an engine ailment. Adding a layer to offset the code builds a world."
 - "The journalism is so clever it covers 3 things — engine, simulation, and user actions. That's the hook, the replayability."
 
+**Full S142 design thesis — saved to `mags` Supermemory container.** Document ID: `FzoBwCif9ZA3PGBqv5bBAW` (2026-04-11). Contains the complete S142 framing — five-layer stack, both design principles with rationale, Temescal paradigm case, three-paper source summary, and relationship context. When building this phase in a future session, query by ID directly instead of re-deriving from conversation: `curl -s "https://api.supermemory.ai/v3/documents/FzoBwCif9ZA3PGBqv5bBAW" -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY"` — or search `mags` container for "S142 Design Thesis" / "vibe-code game" / "engine auditor" / "three-layer coverage."
+
 **Priority: HIGHEST.** This is the missing architectural layer that makes the whole stack playable. Without it, the engine is a black box and the media layer is lying about its own world. With it, every crisis gets a remedy handle, every remedy gets measured, every measurement feeds forward, and the loop closes in a form a non-coder can play. **Recommended build sequence:** 38.1 detector first (proves we can read engine state as ailments), 38.2 existing-mitigator check second (proves we can connect ailments to civic project state), 38.3 remedy recommendation third (requires 38.2), 38.4–38.6 can follow in parallel. Added S142.
 
 ---

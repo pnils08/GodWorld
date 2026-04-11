@@ -308,3 +308,68 @@ All scripts verified correct containers. No old GodWorld org refs. No mara acces
 - Archive policy added to DISK_MAP.md
 - Moltbook `begin-mirror-package` filtered from dashboard
 - Dead spreadsheet tabs identified for archival
+
+---
+
+## S142 Archive Pass (2026-04-11)
+
+Cleanup pass on ROLLOUT_PLAN.md to move DONE items out of the active plan. Nothing new built here — just moving pointers. Items below were DONE in earlier sessions and cluttering the open plan; find full detail in git log or the original phase writeups above in this archive.
+
+### Moved out of "E91 Post-Publish" (Open Work Items)
+
+- **Faction full names canonized — S139.** OPP = Oakland Progressive Party, CRC = Civic Reform Coalition, IND = Independent. Engine code + Mara reference + agent files updated. Engine previously had "People's Party" — corrected.
+- **Maurice Franklin added to ledger — S139.** POP-00801, Tier 3, Rockridge, retired transit supervisor, born 1978.
+- **Mayor Santana gender locked — S139.** She/her in mayor IDENTITY.md, 8 civic agent files, buildDecisionQueue.js. Published editions are historical — canon corrects forward, not backward.
+
+### Moved out of Data & Pipeline
+
+- **Intake system — S137b.** Three feedback channels operational (initiative tracker, sports feed, coverage ratings). Wiki ingest (`ingestEditionWiki.js`) + citizen cards + tracker updates. Old scripts (`editionIntake.js`, `editionIntakeV3.js`, `processEditionIntake.js`) and docs (`INTAKE_REDESIGN.md`, `INTAKE_REDESIGN_PLAN.md`) are legacy.
+
+### Moved out of Infrastructure
+
+- **Node.js security patch — S139.** v20.20.0 → v20.20.2. Applied 2026-04-09.
+
+### Phase 33 subitems (moved out of open plan, retained here)
+
+- **33.1 Config protection hook — S133.** PreToolUse hook blocks edits to protected config files outside safe script allowlist.
+- **33.2 PreCompact state save — S133.** Context state captured before compaction so post-compact Mags can recover.
+- **33.3 Strategic compaction reminder — S133.** Prompt-level nudge when context approaches fill.
+- **33.4 City-hall skill rewrite — S133.** Voice agents + decision queues + tracker writeback restructured.
+- **33.5 Bounded trait system — S133.** Numeric trait scores with bounded ranges for agent personas. No more unbounded drift.
+- **33.7 Write-edition rewrite — S134.** 9-step pipeline, story-driven layout, canon-grounded briefs, pipeline v2.
+
+### Whole phases that moved to archive-only reference
+
+- **Phase 31: Canon-Grounded Briefings — DONE S134.** Incorporated into `/write-edition` Step 3: verify citizens + write angle briefs per reporter. Each reporter gets `output/reporters/{reporter}/c{XX}_brief.md` with verified citizens, canon history from bay-tribune, and atomic topic checkout. Civic production log feeds in at Step 1. The manual bridge became the pipeline. End state: Phase 21.2 (Canon Grounding MCP, DONE S137b) automates it.
+
+- **Phase 2.2: Desk Packet Query Interface — SUPERSEDED by MCP S137b.** Replaced by GodWorld MCP server (Phase 21.2). The MCP provides direct tool access to all data agents need — citizen lookup, initiative state, canon search, roster, neighborhoods. Agents call MCP tools instead of curl or file reading. No further work needed.
+
+- **Phase 21.2: Canon Grounding MCP — DONE S137b.** `scripts/godworld-mcp.py` — FastMCP server exposing 10 tools: lookup_citizen, lookup_initiative, search_canon, search_world, search_articles, get_roster, get_neighborhood, get_council_member, get_domain_ratings. Backs onto Supermemory (bay-tribune + world-data), Dashboard API, truesource. Registered in `.mcp.json`. ~250x token reduction per citizen lookup vs reading truesource. Available to all Claude Code sessions, agents, and future local models. HTTP mode for remote agents: `python3 scripts/godworld-mcp.py --http 3032`.
+
+### Session Harness / Discord / Dashboard bucket (all DONE S110–S113)
+
+Moved out of ROLLOUT_PLAN as three separate compressed tables. Detail retained for reference:
+
+**Harness improvements:**
+- CLAUDE.md instruction audit (S110) — 188 → 54 lines, 71% cut, ~111 instructions vs ~150 budget.
+- PreToolUse ledger protection hook (S110) — blocks destructive, warns on sheet writes outside safe scripts.
+- Terminal status line (S110) — `~/.claude/statusline.sh` shows S/C numbers + 5h rate limit.
+- Smarter compaction hook (S113) — `pre-compact-hook.sh` injects workflow, git modified files, workflow constraints.
+- Output style per workflow (S113) — Build=concise, Research=explanatory, Media-Room=editorial, Chat=natural.
+- Fan-out `claude -p` for batch ops (S113) — documented in WORKFLOWS.md.
+- PostToolUse validation hook (S113) — `post-write-check.sh` catches container refs, engine language in agent files, builder/user refs in editorial.
+- Effort frontmatter in skills (S113) — all 21 skills tagged: 9 HIGH, 7 MEDIUM, 5 LOW.
+- HTTP hooks → dashboard (S113) — `POST /api/session-events` (localhost), `session-event-post.sh` fires async on SessionStart/Stop. 200-event ring buffer.
+- `/save-to-mags` skill (S111) — writes directly to `mags` container via Supermemory API, avoids the `/super-save` → `bay-tribune` default.
+
+**Discord Channel + Cloud Sessions:**
+- Discord Channel plugin (S112) — MagsClaudeCode bot created, token configured, pairing complete. Launch: `claude --channels plugin:discord@claude-plugins-official`.
+- Webhook receiver (S113) — `POST /api/webhooks` on dashboard, secret-authenticated, events land in session ring buffer.
+- Still open: Cloud session + Channel (kept in active plan under Infrastructure).
+
+**Dashboard Mission Control (S113):**
+- Session status panel — Mission Control tab, color-coded timeline of session events.
+- Channel status — static panel showing Discord connected state + bot name.
+- Health panel — dashboard status, engine version, cycle/edition, droplet specs from `/api/health`.
+- Session history — file-backed JSONL at `output/session-events.jsonl`, 500-event cap.
+- Quick actions — 3 wired buttons: Restart Bot, Health Check, Clear Events. All require dashboard auth.

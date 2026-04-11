@@ -1,6 +1,6 @@
 # GodWorld — Rollout Plan
 
-**Status:** Active | **Last Updated:** Session 137b (2026-04-08)
+**Status:** Active | **Last Updated:** Session 142 (2026-04-11)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** `ROLLOUT_ARCHIVE.md` — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
@@ -10,21 +10,17 @@
 
 ## Open Work Items
 
-### E91 Post-Publish (S139)
+### Edition Post-Publish (carry-over from E91/S139)
 
-- **CANONIZE: Faction full names — DONE S139.** OPP = Oakland Progressive Party, CRC = Civic Reform Coalition, IND = Independent. Fixed in engine code, Mara reference docs, and all agent files. Engine had "People's Party" — canonized to "Progressive Party" to match agents.
 - **REINGEST: A's truesource → citizen profile cards** — Player data in world-data is incomplete. Reingest all A's players from truesource to citizen cards so MCP lookups return age, gender, position, contract. Mesa gender/age drift caused by missing data. HIGH.
 - **FIX: validateEdition.js false positives** — 96% false positive rate in E91 (25/26). Needs: hyphenated name handling, sentence fragment filtering, citizen vs player name disambiguation, cycle reference whitelist. MEDIUM.
 - **ADD: Gender to citizen briefs** — Simulation Ledger has no gender column. All angle briefs must specify gender for every citizen. Consider adding gender column to ledger long-term. MEDIUM.
-- **ADD: Maurice Franklin to ledger — DONE S139.** POP-00801, Tier 3, Rockridge, retired transit supervisor, born 1978. Added to Simulation_Ledger.
-- **FIX: Mayor Santana gender — DONE S139.** She/her locked in mayor IDENTITY.md + 8 civic agent files + buildDecisionQueue.js. Published editions with old pronouns are historical — canon corrects forward, not backward.
 
 ### Data & Pipeline
 
 - **CLEANUP: Dead spreadsheet tabs — PARTIAL S139.** 6 of 8 tabs backed up and hidden (Press_Drafts, MLB_Game_Intake, NBA_Game_Intake, Sports_Calendar, Arc_Ledger, LifeHistory_Archive). **Faith_Ledger stays** — `ensureFaithLedger.js` actively writes 125 faith events. Needs a consumer (see below). **Youth_Events stays** — `youthActivities.js` actively writes, but ledger has only 1 citizen under age 20 (one 11-year-old). Engine works, population doesn't. Needs kids.
 - **ADD: Faith_Ledger consumer (engine-sheet terminal)** — 125 faith events with no reader. Culture desk should receive faith activity in briefings. Either feed into `buildDeskFolders.js` or surface via MCP. Connects to 36.1 (institutions — faith orgs as first-class entities). MEDIUM.
 - **FIX: Youth population gap (engine-sheet terminal)** — Youth engine (5-22 age range) finds only 21 eligible citizens, 1 actual child. Household formation engine should produce children. Either seed 20-30 children into the ledger manually, or fix `householdFormationEngine.js` to generate offspring for established households. Connects to Phase 24 (citizen life engine). MEDIUM.
-- **Intake system — DONE (S137b).** Three feedback channels operational. Wiki ingest (`ingestEditionWiki.js`) + coverage ratings + citizen cards + tracker updates. Old scripts (`editionIntake.js`, `editionIntakeV3.js`, `processEditionIntake.js`) and old design docs (`INTAKE_REDESIGN.md`, `INTAKE_REDESIGN_PLAN.md`) are legacy — cleanup only.
 - **PROJECT: World Memory remaining (engine-sheet terminal)** — (3) ingest key archive articles to bay-tribune, (5) historical context in desk workspaces. See `docs/WORLD_MEMORY.md`. MEDIUM.
 - **Supplemental strategy (media terminal)** — One supplemental per cycle minimum. Ongoing.
 - **BUILD: Skill eval framework from skill-creator plugin (research-build terminal) — HIGH S141.** Anthropic's skill-creator plugin ships a closed-loop eval system. Pull only the pieces that solve GodWorld's problems.
@@ -72,10 +68,21 @@
 
 ### Infrastructure
 
-- **Node.js security patch — DONE S139.** v20.20.0 → v20.20.2. Applied 2026-04-09.
 - **UPGRADE: Instant compaction (research-build terminal)** — Proactive compaction before context full. Pattern from `claude-cookbooks/misc/session_memory_compaction.ipynb`. MEDIUM.
 - **EVALUATE: Context clearing strategy (research-build terminal)** — Beta flag `context-management-2025-06-27`. LOW.
 - **MONITOR: KAIROS background daemon (research-build terminal)** — Unreleased Claude Code feature: persistent background daemon. If Anthropic ships this, could replace PM2 + cron + scheduled agents setup with native Claude Code infrastructure. Spotted in Claude Code source analysis (512K-line codebase reveal, Apr 2026). Also watch ULTRAPLAN (30-minute remote reasoning sessions). MEDIUM — monitor Anthropic releases. Added S137.
+- **BUILD: Local repo hygiene audit (scheduled agent replacement)** — Replace the three current read-only Supermemory/engine audits (Mara canon sync, bay-tribune contamination, weekly engine code review) with a scheduled agent that scans the local repo for actionable hygiene: files saved to wrong directories, broken naming conventions, directory bloat (size/count thresholds), stale artifacts from old cycles, orphaned outputs. Produces a diff-shaped report every run instead of null-result "all clean." Pending review of current three before kill. MEDIUM. Added S142.
+- **BUILD: Supermemory entry tagger (scheduled agent replacement)** — Instead of auditing Supermemory for contamination (defensive), pull the last N days of new entries from `mags`, `bay-tribune`, `world-data`, `super-memory` and improve their metadata: correct tags, better titles, cross-links between related entries. Builds searchability as a side effect of running. Pairs with the hygiene audit as the new daily scheduled work. MEDIUM. Added S142.
+- **BUILD: Dimensional orthogonality for editorial review panel (from MIA paper)** — Restructure Rhea / cycle-review / Mara so each reviewer checks a strictly non-overlapping dimension. Current overlap: Rhea and Mara both check citizen names and canon drift. MIA framework (arXiv:2604.04503v2 "Memory Intelligence Agent," Apr 2026) defines three orthogonal axes for unsupervised quality review, with importance weights:
+  1. **Reasoning & Logical Consistency** (weight 0.5) — analysis quality, evidence-based deduction, internal contradictions. *GodWorld candidate:* cycle-review.
+  2. **Information Sourcing & Credibility** (weight 0.3) — correct interpretation of retrieved content, hallucination detection, citizen/roster/canon accuracy. *GodWorld candidate:* Rhea.
+  3. **Result Validity** (weight 0.2) — completeness, did-it-actually-answer, gave-up detection. *GodWorld candidate:* Mara or a new editorial completeness reviewer.
+  A fourth "Area Chair" / Final Arbiter agent receives all three scores with weights and makes a single correct/incorrect call. Benefit: coverage without duplication, cheaper total review passes, clearer blame-attribution when an edition fails review. Reference document saved locally at `output/drive-files/Memory_intelligenceAgent.pdf` (34-page PDF from Mike's Drive, pulled S142) — pages 10-11 describe the framework, **page 33 has the reviewer prompts verbatim** (can lift them directly when we build this). MEDIUM. Added S142.
+- **BUILD: Separate process and outcome rewards in editorial grading (from Microsoft UV paper)** — Current grading (coverage ratings, Mara's edition grades, cycle-review scores) collapses process and outcome into a single judgment. The Microsoft Universal Verifier paper (arXiv:2604.06240v1 "The Art of Building Verifiers for Computer Use Agents," Apr 2026) argues these should be tracked as two independent scores:
+  - **Process score** (0.0–1.0 rubric-based): how well the reporter executed the briefed sub-goals — sourcing, structure, craft, fact-checking. Graded independent of whether the final article landed.
+  - **Outcome label** (binary): would a reasonable reader consider the edition's coverage of this story complete? Graded independent of how the reporter got there.
+  The four quadrants tell us different things: high-process/high-outcome = what we want; high-process/low-outcome = environment-blocked (desk packet was thin, not the reporter's fault); low-process/high-outcome = lucky; low-process/low-outcome = actual failure. Pairs with the controllable-vs-uncontrollable distinction: reporters shouldn't be penalized on process for environment blockers (missing civic data, canon gaps) as long as they clearly report the blocker and find an alternative. Reference document: `output/drive-files/Microsoftpaper.pdf` (33-page PDF from Mike's Drive, pulled S142) — §3.2 has the process/outcome formalization, §3.3 has the controllable-vs-uncontrollable taxonomy. MEDIUM. Added S142.
+- **BUILD: Two-pass hallucination check for reporter claims (from Microsoft UV paper)** — Grade each article twice during Rhea's verification pass: once on the reporter's text alone (action-only pass), once with the world-data / canon / citizen cards the reporter had access to (multimodal pass). **Divergence between the two passes is a hallucination flag.** If the reporter claimed "85% of Temescal residents support X" but the world-data doesn't ground that number, the action-only pass scores clean but the multimodal pass scores low — the gap surfaces a fabricated statistic that a single pass would miss. The Microsoft UV paper (§3.4, A.3) shows this catches "subtle but critical failure modes that even humans are likely to miss." Cheap implementation — just grade twice and diff. Reference document: `output/drive-files/Microsoftpaper.pdf`, Figure 5 shows a concrete example of a caught hallucination. MEDIUM. Added S142.
 
 ### Agent Prompt & Skill (remaining from S115 audit)
 
@@ -104,22 +111,9 @@ All detail in `ROLLOUT_ARCHIVE.md`.
 | 22 | Agent Infrastructure Fixes (CIVIC mode, arc fix, write access) | S83-85 |
 | 26 | Agent Grading System (Karpathy Loop) | S99 |
 
-### Recently Completed (S110)
+### Recently Completed (historical)
 
-- **3 parser bugs fixed:** editionParser.js, editionIntake.js, enrichCitizenProfiles.js. Template v1.5.
-- **Supermemory overhaul:** `godworld` → `bay-tribune`. 6 contaminated items deleted. SUPERMEMORY.md rewritten. Bot API key fixed. 12 docs + 4 scripts updated.
-- **6 workflows:** Added Research and Chat. WORKFLOWS.md is single source for per-workflow logic.
-- **Boot split:** Media-Room/Chat get journal + family. Work sessions skip straight to files.
-- **ARCHITECTURE_VISION.md created:** Jarvis at /root, persistent worktree sessions, per-session Supermemory, shared MDs as data bus, Ollama for lightweight tasks, dashboard as mission control.
-- **RESEARCH.md created:** Active questions, findings log, sources. Research workflow operational.
-- **Rollout trimmed:** 1172 → 150 lines (now ~200 with S110 additions).
-- **Research session:** 10 items evaluated. Channels, Remote Control server mode, scheduled tasks, Dispatch vs OpenClaw, Bayesian teaching, Claude Code changelog, agent trends, living worlds, dashboard as mission control. 20+ items added to rollout.
-
-### Recently Completed (S105-S108)
-
-- **S108:** 5 pre-E88 blockers fixed. Agent audit (15 files). E88 published (grade B, 13 articles, 0 errata). Lifecycle skills trimmed.
-- **S106:** Dashboard as search engine. World Memory Phase 1. 3 pipeline automations. Editions ingested.
-- **S105:** 9 architecture docs. Mara reference pipeline. Flag bug found. Spreadsheet audit.
+S105–S141 detail lives in `ROLLOUT_ARCHIVE.md` and git log. Key milestones: S110 Supermemory overhaul + workflow split, S113 harness improvements (hooks, status line, dashboard), S114 craft layer + long-running research, S122 container redesign decided, S131 canon breakthrough, S133 Riley Phase 33.1–33.5, S134 pipeline v2 (4 terminals, 9 reporters, bounded traits), S135 terminal architecture + Remote Control, S137b MCP + wiki ingest + citizen cards + feedback loop operational, S139 external review round + faction canon + Maurice Franklin, S140 dispatch + audio tools + doc audit, S141 skills architecture prep + eval framework + Gemini autodream switch.
 
 ---
 
@@ -129,12 +123,7 @@ All detail in `ROLLOUT_ARCHIVE.md`.
 
 **Source:** S132 Riley audit, Sandcastle research, Everything Claude Code patterns. See `docs/RESEARCH.md` S132 entries, `riley/RILEY_PLAN.md`.
 
-**33.1 Config protection hook — DONE S133.**
-**33.2 PreCompact state save — DONE S133.**
-**33.3 Strategic compaction reminder — DONE S133.**
-**33.4 City-hall skill rewrite — DONE S133.**
-**33.5 Bounded trait system — DONE S133.**
-**33.7 Write-edition rewrite — DONE S134.**
+**Completed subitems (see ROLLOUT_ARCHIVE.md):** 33.1 config protection hook, 33.2 PreCompact state save, 33.3 compaction reminder, 33.4 city-hall rewrite, 33.5 bounded traits (all S133), 33.7 write-edition rewrite (S134), 33.16 world-data citizen cards (S137b, Tier 1-2 done, Tier 3-4 + businesses/neighborhoods/faith remaining — see below).
 
 **33.6 City Clerk verification script — BUILD (engine-sheet terminal).**
 Node script (not an agent) that checks: voice outputs exist, project outputs exist, tracker updates applied, production log complete. `scripts/verifyCityHall.js`. Output: `output/city-civic-database/clerk_audit_c{XX}.json`.
@@ -171,8 +160,8 @@ Add `allowed-tools: ["Read", "Grep", "Glob"]` to reporter agent skill frontmatte
 **33.15 Iterative retrieval for canon — DESIGN (research-build terminal) → BUILD (media terminal).**
 3-cycle search-evaluate-refine pattern for reporters accessing canon. Score results 0-1, stop at 3+ files scoring 0.7+. Replaces context dumps. From everything-claude-code.
 
-**33.16 World-data citizen cards — DONE S137b.**
-`scripts/buildCitizenCards.js` — reads Simulation_Ledger (POPID, First, Last, Tier, RoleType, BirthYear, TraitProfile, Neighborhood, CitizenBio), searches bay-tribune for appearances, compiles per-citizen card, writes to world-data Supermemory. Cards compound with each edition — wiki ingest adds memories, citizen cards synthesize them. Tier 1 (17), Tier 2 (60) written. Tier 3-4 in progress. Supports `--tier`, `--name`, `--limit` filters. GodWorld MCP `lookup_citizen` queries these cards. **Remaining:** businesses (52), neighborhoods (17), faith/cultural (51) — separate scripts needed.
+**33.16 Entity cards — citizens DONE S137b, others remaining.**
+Citizen cards built (Tier 1–2 done, Tier 3–4 in progress) via `scripts/buildCitizenCards.js`, queried through `lookup_citizen` MCP. **Remaining:** businesses (52), neighborhoods (17), faith/cultural (51) — separate scripts needed.
 
 **33.17 Missing trait profiles — DESIGN (research-build terminal) → BUILD (engine-sheet terminal).**
 343 of 685 citizens have no TraitProfile. Build a script that generates Archetype/Tone/Motifs/Traits from LifeHistory events and engine data. Tags are literary instructions — bounded personality earned from simulation, not assigned. Same philosophy as bounded traits on agents but tag-based instead of numeric.
@@ -185,17 +174,8 @@ Reporters invent physical details per article — a limp, a raspy voice, a nervo
 
 ---
 
-### Phase 31: Canon-Grounded Briefings — DONE (S134, designed into pipeline v2)
-
-Incorporated into `/write-edition` Step 3: verify citizens + write angle briefs. Each reporter gets `output/reporters/{reporter}/c{XX}_brief.md` with verified citizens, canon history from bay-tribune, and atomic topic checkout. Civic production log feeds in at Step 1. World summary built from Riley_Digest + Sports Feed + civic log. The manual bridge IS the pipeline now.
-
-**End state:** Phase 21.2 (Canon Grounding MCP) automates this — agents search bay-tribune themselves during writing. Until then, Mags does the research at Step 3.
-
----
-
-### Phase 2.2: Desk Packet Query Interface — SUPERSEDED BY MCP (S137b)
-
-**Replaced by GodWorld MCP server (Phase 21.2).** The MCP provides direct tool access to all data agents need — citizen lookup, initiative state, canon search, roster, neighborhoods. Agents call MCP tools instead of curl or file reading. No further work needed on this phase.
+### Phase 31: Canon-Grounded Briefings — DONE S134. See ROLLOUT_ARCHIVE.md.
+### Phase 2.2: Desk Packet Query Interface — SUPERSEDED by MCP (S137b). See ROLLOUT_ARCHIVE.md.
 
 ### Phase 4.1: Semantic Memory Search
 
@@ -262,7 +242,7 @@ WordPress 7.0 (April 2026) ships AI Client SDK supporting Claude function callin
 
 1. **21.1 Quality test.** Test Qwen 3.5 9B quantized on a GPU droplet running one desk agent (letters or culture). Compare output quality against Sonnet baseline. If passable, expand.
 
-2. **21.2 Canon Grounding MCP — DONE S137b.** `scripts/godworld-mcp.py` — FastMCP server exposing 10 tools: lookup_citizen, lookup_initiative, search_canon, search_world, search_articles, get_roster, get_neighborhood, get_council_member, get_domain_ratings. Backs onto Supermemory (bay-tribune + world-data), Dashboard API, truesource. Registered in `.mcp.json`. ~250x token reduction per citizen lookup vs reading truesource. Available to all Claude Code sessions, agents, and future local models. **HTTP mode available for remote agents:** `python3 scripts/godworld-mcp.py --http 3032`.
+2. **21.2 Canon Grounding MCP — DONE S137b.** `scripts/godworld-mcp.py`, 10 tools, backs onto Supermemory + Dashboard + truesource, ~250x token reduction. HTTP mode at port 3032. See ROLLOUT_ARCHIVE.md for full tool list.
 
 3. **21.3 Local photo prompt generation.** The photo prompt conversion step (article → image prompt) doesn't need Anthropic tokens. A local Qwen 3.5 9B can run an "art director" role that produces structured JSON (thesis, mood, motifs, composition, image_prompt) from article text. Pattern from hn_local_image (github.com/ivanfioravanti/hn_local_image) — intermediate art direction step before image generation. Could also run the image generation itself locally via MLX/FLUX models on Apple Silicon if any work moves to Mike's laptop. See `docs/RESEARCH.md` S134 entry.
 
@@ -289,7 +269,7 @@ The bounded trait system (S133) tells reporters *how* a citizen sounds. It doesn
 **24.9 Relationship decay & maintenance (S139, from DeepSeek review).**
 Relationships exist in the engine but don't require upkeep. Add decay mechanics: relationships lose strength over cycles without interaction. Different bond types decay at different rates — family ties are durable, workplace bonds fade fast after a job change, neighbor bonds depend on proximity. When a relationship drops below a threshold after being strong, generate a "drift" event (old friends who lost touch, former neighbors who stopped calling). When decayed relationships re-engage, generate a "reconnection" event. Creates organic narrative arcs without scripting them. **Implementation:** New function in Phase 5 (citizens) that runs each cycle. Reads relationship records + LifeHistory_Log for recent interactions. Decrements strength based on bond type and cycles since last contact. Drift/reconnection events written to LifeHistory_Log. **Connects to:** Phase 24.8 (a citizen's fear of "dying alone" amplifies relationship maintenance behavior), Phase 24.6 (drift events tagged as "Pivot" band). **Priority: MEDIUM — clean standalone system. Build after relationship data is confirmed healthy.**
 
-### Phase 26.3: Craft Layer — Story Structure in Agent Briefings — DONE S114
+### Phase 26.3: Craft Layer — Story Structure in Agent Briefings — PARTIAL
 
 **Goal:** Give desk agents storytelling craft, not just data and instructions. Agents that understand story structure write journalism. Agents that don't write reports.
 
@@ -305,7 +285,7 @@ Relationships exist in the engine but don't require upkeep. Add decay mechanics:
 
 **Priority:** HIGH — low effort, high impact. 26.3.1 and 26.3.2 are prompt additions to `buildDeskFolders.js`, implementable in one session. 26.3.3 extends the existing critique system.
 
-### Phase 27: Agent Autonomy & Feedback Loop — NOT STARTED
+### Phase 27: Agent Autonomy & Feedback Loop — PARTIAL
 
 **North star:** Agents don't just report the world — they shape it. Engine builds the skeleton. Agents grow the flesh. Engine reads the flesh back.
 
@@ -603,50 +583,13 @@ Deduplicate across 4 layers (disk, Drive, GitHub, Supermemory). Quick wins done 
 
 ---
 
-## Session Harness Improvements (from S110 research)
+## Session Harness / Discord / Dashboard Mission Control — DONE S110–S113
 
-Source: "50 Claude Code Tips" community guide, evaluated against GodWorld stack.
+Harness improvements (CLAUDE.md audit, ledger protection hook, status line, compaction hook, effort frontmatter, post-write check, save-to-mags skill), Discord Channel plugin + webhook receiver, and Dashboard Mission Control (session panel, channel status, health panel, session history, quick actions) all landed in S110–S113. Detail in `ROLLOUT_ARCHIVE.md`.
 
-| Item | What | Priority | Status |
-|------|------|----------|--------|
-| **CLAUDE.md instruction audit** | Audit against ~150 instruction budget. Every unnecessary line dilutes the important ones. | HIGH | **DONE S110** — 188→54 lines (71% cut). 62 lines of reference material moved to per-workflow docs. ~111 instructions total against ~150 budget. |
-| **PreToolUse ledger protection hook** | Block destructive commands + warn on sheet writes outside safe scripts. Protect 675 citizens. | HIGH | **DONE S110** — inline sheet writes warned, unknown scripts using sheets.js warned, drop table/truncate denied, safe script allowlist passes silently. |
-| **Terminal status line** | Show session number, cycle, workflow, and rate limit usage at bottom of terminal. Mike sees state at a glance. | HIGH | **DONE S110** — `~/.claude/statusline.sh` extended with S/C numbers, 5h rate limit, fixed JSON field mappings. |
-| **/btw for side questions** | Use during edition production for quick questions without context pollution. No build needed — just awareness. | MEDIUM | Available now |
-| **Smarter compaction hook** | Current post-compact hook exists but is basic. Re-inject: current workflow, active task, modified files, key constraints. | MEDIUM | **DONE S113** — pre-compact-hook.sh now dynamically injects workflow (from `.claude/state/current-workflow.txt`), git modified files, and workflow-specific constraints. CLAUDE.md boot writes state file at step 0. |
-| **/branch for risky approaches** | Try experimental fixes without losing context. Both paths stay alive. | MEDIUM | Available now |
-| **Output style per workflow** | Concise for build, explanatory for research. `/config` to set. | LOW | **DONE S113** — Added as boot step 1 in CLAUDE.md. Build=concise, Research=explanatory, Media-Room=editorial, Chat=natural. |
-| **Fan-out `claude -p` for batch ops** | Batch file migrations, bulk doc updates with `--allowedTools` scoping. | LOW | **DONE S113** — Documented in WORKFLOWS.md under Build/Deploy and Maintenance with tool-scoped examples. |
-| **PostToolUse validation hook** | Run a check after every file edit — e.g., grep for `godworld` in agent-facing files, catch container contamination at write time. | LOW | **DONE S113** — `post-write-check.sh` fires on Write|Edit. Catches: `godworld` container refs, engine language in agent files, builder/user refs in editorial content. Skips engine/script/config files. |
-| **Effort frontmatter in skills** | Set effort level per skill — research/letters low, civic/sports high. No manual `/effort` switching. Claude Code mid-March feature. | MEDIUM | **DONE S113** — All 21 skills tagged. HIGH: 9 editorial/engine skills. MEDIUM: 7 structured skills. LOW: 5 mechanical/template skills. |
-| **HTTP hooks → dashboard** | Hooks POST to dashboard URLs instead of running shell commands. Session events (start, edit, error) feed into mission control panel. Mar 3 feature. | MEDIUM | **DONE S113** — `POST /api/session-events` endpoint on dashboard (localhost-only, no auth). `session-event-post.sh` hook fires async on SessionStart and Stop. GET requires auth. 200-event ring buffer. |
-| **`/save-to-mags` skill** | Manual save to `mags` container. `/super-save` always writes to `bay-tribune` (plugin hardcoded to `repoContainerTag`). Need a wrapper that calls the API with `containerTags: ["mags"]`. | HIGH | **DONE S111** — Skill at `.claude/skills/save-to-mags/SKILL.md`, calls supermemory API directly. |
-
----
-
-## Discord Channel + Cloud Sessions (from S110 research)
-
-Source: code.claude.com/docs/en/channels. See RESEARCH.md S110 Channels entry for full context.
-
-| Item | What | Priority | Status |
-|------|------|----------|--------|
-| **Discord Channel plugin** | Replace separate Discord bot during active sessions. Mike DMs Mags on Discord → message arrives in running Claude Code session with full project context. `claude --channels plugin:discord@claude-plugins-official`. Standalone bot still covers off-hours. | HIGH | **DONE S112** — Plugin installed, MagsClaudeCode bot created (App ID 1485471448112824371), token configured, pairing complete. Launch with `claude --channels plugin:discord@claude-plugins-official`. |
-| **Cloud session + Channel** | `claude --remote` + Discord channel = always-on Mags with full context, reachable from Discord. Infrastructure for Phase 12.3 (autonomous cycles). | HIGH | Not started — evaluate after Discord channel works |
-| **Webhook receiver** | CI results, deploy status, error alerts push into session. Claude reacts to external events. | MEDIUM | **DONE S113** — `POST /api/webhooks` on dashboard. Secret-authenticated (`x-webhook-secret` header, key in `.env`). Events land in same ring buffer as session events. Query with `GET /api/session-events?type=webhook`. |
-
----
-
-## Dashboard Mission Control (from S110 research)
-
-Source: Synthesis of Channels + Remote Control research. See RESEARCH.md S110 Dashboard entry.
-
-| Item | What | Priority | Status |
-|------|------|----------|--------|
-| **Session status panel** | Show running sessions, workflow type, duration, context usage. Mike sees at a glance what's alive. | HIGH | **DONE S113** — Mission Control tab on dashboard. Shows session events (start/stop/webhook) with color-coded timeline. Activity icon in bottom nav. |
-| **Channel status** | Discord connected? Last message? Sender allowlist health. | MEDIUM | **DONE S113** — Panel in Mission Control showing Discord connected status and MagsClaudeCode bot name. Static for now — live polling in future iteration. |
-| **Health panel** | PM2 processes, disk, RAM, Supermemory containers. Replaces SSH-and-check pattern. | MEDIUM | **DONE S113** — Panel showing dashboard status, engine version, latest cycle/edition, droplet specs (1vCPU/2GB/25GB). Live from `/api/health`. |
-| **Session history** | When sessions started/ended, workflow, key accomplishments. Persistent log. | LOW | **DONE S113** — File-backed JSONL at `output/session-events.jsonl`. Survives dashboard restarts. 500-event cap. |
-| **Quick actions** | Restart bot, trigger health check, view latest brief. Buttons instead of terminal commands. | LOW | **DONE S113** — 3 wired buttons: Restart Bot (`POST /api/actions/restart-bot`), Health Check (returns disk/RAM/uptime/PM2), Clear Events (`DELETE /api/session-events`). All require dashboard auth. |
+**Still open from this bucket:**
+- **Cloud session + Channel** (`claude --remote` + Discord) — infrastructure for Phase 12.3 autonomous cycles. HIGH. Not started.
+- `/btw` and `/branch` — available now, no build needed; awareness only.
 
 ---
 

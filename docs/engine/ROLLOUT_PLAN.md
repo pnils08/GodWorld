@@ -585,6 +585,64 @@ Deduplicate across 4 layers (disk, Drive, GitHub, Supermemory). Quick wins done 
 
 ---
 
+### Phase 38: Engine Auditor — The Hidden Vibe-Code Layer (S142) — NOT STARTED
+
+**North star:** The engine is a problem generator. The newsroom is a translator. City hall is the remedy processor. The next edition is the measurement. GodWorld is a **playable civic simulator with journalism as the user interface** — the player (Mike or a future user) reads narrative-framed engine ailments and responds by proposing world-side mitigators that run through the engine, with the next cycle's edition serving as the measurement of whether the remedy worked. This phase builds the missing auditor that sits between the engine and the newsroom, reading engine state through a code-audit lens and producing ailment-with-remedy briefs that Mags uses to frame editions in ways that invite player response.
+
+**Design principle 1 — prefer in-world mitigators to code fixes (load-bearing, S142 Mike framing):** When the engine produces an ailment, the default remedy path is a *world-side* remedy that the simulation can absorb — advance an existing civic initiative, propose a new one, trigger a character intervention, spawn a community action. Only escalate to tech-side code fixes when the ailment is structurally un-fixable in-world (broken writeback, physics violation, missing cascade, nonsensical math). **Rationale:** tech-side patches fix bugs silently and add nothing to the world; world-side remedies fix the same underlying math *and* produce canon, characters, arcs, neighborhood texture. A health center takes 20 cycles to build and generates 20 cycles of coverage along the way. Both approaches fix the health decay parameter. Only one builds a world.
+
+**Design principle 2 — three-layer coverage in every article (load-bearing, S142 Mike framing):** Every Tribune article worth publishing covers three layers simultaneously:
+
+1. **Engine** — what the code is producing and why (the ailment, the math, the structural cause)
+2. **Simulation** — what that ailment looks like as lived experience (citizens, neighborhoods, events, characters feeling the consequences)
+3. **User actions** — what the player has decided in response and whether it's working (initiatives, council votes, civic project progress, measured outcomes)
+
+No single-layer article lands as hard as one that threads all three. Engine-only is a dry audit nobody wants to read. Simulation-only is a sad story with no stakes or agency. User-action-only is a press release about decisions nobody feels. The three together produce **the hook** (clever multi-layer framing a reader actually wants to keep reading) and **the replayability** (every cycle is a new state of all three layers, so stories stay fresh even when underlying problems recur). Paradigm example: **Beverly Hayes's letter in E90** — one citizen voice covering stabilization fund disbursement mechanics (engine), a home health aide's lived experience of $18,500 (simulation), and Okoro's sequencing logic debate (user actions). Three layers in one letter. That's what a great GodWorld article looks like.
+
+**Per-ailment output schema (seven fields):**
+
+1. **In-world symptom** — what this ailment looks like as a story
+2. **Tech diagnosis** — what's actually happening in the engine code/math (ctx fields, initiative writeback state, sheet columns, cascade chains)
+3. **Existing mitigators check** — does a world-side remedy already exist? What's its status?
+4. **Why mitigators are or aren't working** — if a remedy exists but isn't offsetting the math, where's the gap?
+5. **Recommended remedy path** — world-side preferred (advance existing initiative, propose new one, character intervention, neighborhood action, council vote), tech-side fallback only if world-side is structurally impossible
+6. **Tribune framing brief** — story handles that weave all three coverage layers and give the reader action handles for remedy response
+7. **Measurement plan for next cycle** — specific engine fields, specific initiative milestones, specific coverage tone shifts to verify whether the remedy worked
+
+**Paradigm calibration case — Temescal health crisis:** Recurring across cycles 43, 67, 89, 91. **Tech diagnosis:** base `neighborhoodHealth.Temescal` decay parameter has no firing mitigator. The Temescal Health Center initiative exists in Phase 33 civic state but has been stuck in "architectural review" for 12 cycles — `applyInitiativeImplementationEffects.js` reads the initiative but the construction-complete milestone never fires, so no health effect propagates. **World-side remedy:** advance the health center initiative out of architectural review via Bobby Chen-Ramirez's civic project agent — start construction, produce milestones, let the engine read them. **Tech-side fallback only if:** the initiative's effect trigger is structurally broken (missing sheet column, missing writeback hook). **Tribune framing:** the next cycle's civic desk story should thread engine (health decay math visible as "fourth-cycle deterioration"), simulation (residents worry about the timeline slipping, a citizen quoted on what delay means for them), and user actions (Chen-Ramirez defending the schedule, Council member demanding explanation, Mayor's response). **Measurement:** next cycle, check whether `constructionStart = true` fired, whether health decay rate decreased by the expected mitigator amount, and whether coverage tone shifted from "crisis" to "progress." If yes, remedy worked. If no, escalate to tech-side fix.
+
+**Buildable pieces:**
+
+1. **38.1 Engine ailment detector.** Scan engine state for: repeating events without mitigator advance (event loops), stuck phases across multiple cycles, math imbalances (decay without offset, production without consumption), physics/canon violations, feedback writeback drift (coverage ratings don't propagate, initiative effects don't fire), over/under-production imbalances across domains. Output: structured ailment list with severity, recurrence count, affected citizens/neighborhoods/initiatives, and `cyclesInState` counter for stuck items. **Build first.**
+
+2. **38.2 Existing mitigator check.** For each ailment, cross-reference against Initiative_Tracker, civic project agent state (OARI, Baylight, Stabilization Fund, Temescal Health Center, Transit Hub), Civic_Ledger recent decisions, and neighborhood state to identify whether a world-side remedy already exists. Determine whether the remedy is producing effects (is the engine reading its writebacks, is the math actually offsetting?).
+
+3. **38.3 Remedy path recommendation (world-side preferred).** For each ailment, generate a world-side remedy path first. Categories: advance an existing initiative, propose a new initiative via city hall, character intervention, neighborhood action, council vote, new program. Generate a tech-side fallback path only when the world-side is structurally impossible — and when the fallback fires, produce a clear bug report in engine-build-terminal language (which file, which function, which ctx field, which sheet column, what to fix).
+
+4. **38.4 Tribune framing brief with three-layer coverage.** Translate each ailment into story handles that thread all three coverage layers (engine / simulation / user actions) and invite a remedy response from the reader. Produce per-desk suggestions: civic desk gets the user-actions angle, culture gets the simulation angle, a skeptical voice checks the engine numbers. Pair with existing editorial craft layer (Phase 26.3) and the Microsoft UV capability verification axis (S142). A capability-verification reviewer can later grade articles on whether they actually threaded all three layers.
+
+5. **38.5 Measurement loop.** Each ailment flagged gets a "check next cycle" entry with specific fields to watch. Feeds back into the auditor's learning about which remedy paths actually work. Over time the auditor becomes a recommendation system, not just a detector — "initiatives in phase X of civic project lifecycle historically advance after narrative pressure of type Y is applied."
+
+6. **38.6 Integration into prep chain (S141 architecture).** `/engine-review` skill runs after `/build-world-summary` and before `/sift`. Produces the ailment-and-remedy brief as `output/engine_review_c{XX}.md`. Mags reads this brief in `/sift` for editorial planning instead of extracting priority from the raw world_summary. This is also the **anti-context-bloat move** (Mezzalira S142) — smaller brief, higher signal, less scar tissue in Mags's editorial prep.
+
+**Connects to:**
+- **Phase 27 (Agent Autonomy & Feedback Loop)** — Phase 27 closes the loop by having narrative feed back into engine state. Phase 38 closes the same loop from the opposite direction: engine state feeds forward into narrative planning. Together they make the loop bidirectional.
+- **Phase 33.12 (Coverage Gap Tracker)** — ailments and coverage gaps overlap; the auditor's existing-mitigator check is the engine-side counterpart to the coverage gap tracker's narrative-side check.
+- **Phase 36.1 (Institutions)** — mitigators often live as institutions (schools, hospitals, nonprofits, unions). The auditor needs institutional state to evaluate which mitigators exist and are functional.
+- **Phase 37 (Arc State Machines)** — long-running ailments become arcs. An ailment flagged 3+ cycles without remedy resolution is a candidate for arc promotion to Legacy phase tracking.
+- **Microsoft UV capability verification (S142)** — the auditor's brief defines what "capability" means for each cycle; a capability-verification reviewer needs the auditor to have said what the standard is before it can grade against it.
+- **Mezzalira deterministic-guardrails framing (S142)** — the auditor IS the deterministic guardrail that bounds the nondeterministic media layer by enforcing "engine state before editorial judgment" as a structural constraint.
+
+**Reference:** No external paper — sourced entirely from S142 Remote Control session conversation. Mike's framing, verbatim worth preserving for when we build this:
+- "The engine is a coded system, a workflow, a business in a sense."
+- "The hidden vibe-code game... what the edition reports on is engine health essentially dressed as media."
+- "My initiatives all cure an engine ailment. Adding a layer to offset the code builds a world."
+- "The journalism is so clever it covers 3 things — engine, simulation, and user actions. That's the hook, the replayability."
+
+**Priority: HIGHEST.** This is the missing architectural layer that makes the whole stack playable. Without it, the engine is a black box and the media layer is lying about its own world. With it, every crisis gets a remedy handle, every remedy gets measured, every measurement feeds forward, and the loop closes in a form a non-coder can play. **Recommended build sequence:** 38.1 detector first (proves we can read engine state as ailments), 38.2 existing-mitigator check second (proves we can connect ailments to civic project state), 38.3 remedy recommendation third (requires 38.2), 38.4–38.6 can follow in parallel. Added S142.
+
+---
+
 ## Session Harness / Discord / Dashboard Mission Control — DONE S110–S113
 
 Harness improvements (CLAUDE.md audit, ledger protection hook, status line, compaction hook, effort frontmatter, post-write check, save-to-mags skill), Discord Channel plugin + webhook receiver, and Dashboard Mission Control (session panel, channel status, health panel, session history, quick actions) all landed in S110–S113. Detail in `ROLLOUT_ARCHIVE.md`.

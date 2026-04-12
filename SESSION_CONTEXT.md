@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-10 | Engine: v3.3 | Cycle: 91 | Session: 141
+Last Updated: 2026-04-11 | Engine: v3.3 | Cycle: 91 | Session: 142
 
 ---
 
@@ -188,6 +188,18 @@ Before editing, check what reads from and writes to the affected ctx fields.
 ## Recent Sessions
 
 **Format (S135+):** Each entry includes `Terminal:` tag — research/build, engine/sheet, media, or civic.
+
+### Session 142 (2026-04-11) — Design Thesis + Research Night [remote-control]
+**Terminal:** Remote Control (phone session)
+
+- **Design thesis articulated.** Mike named the five-layer stack (lore → simulation → newsroom → city hall → Mags) and the "hidden vibe-code game" — GodWorld as a playable civic simulator with journalism as UI. Player responds to narrative-framed engine ailments by proposing world-side mitigators. This is the design thesis of the project, made explicit for the first time.
+- **Phase 38 added (HIGHEST priority).** Engine Auditor — the missing layer between engine and newsroom. Reads engine state as code-audit, produces ailment-with-remedy briefs. Two design principles locked in: (1) prefer in-world mitigators to code fixes, (2) three-layer coverage (engine + simulation + user actions) in every article. Temescal health crisis as paradigm calibration case. Mags container doc: `FzoBwCif9ZA3PGBqv5bBAW`.
+- **Three research papers read.** MIA (memory architecture, arXiv:2604.04503v2), Microsoft UV (verifier design, arXiv:2604.06240v1), Mezzalira/O'Reilly (agentic AI architecture commentary). All saved to `output/drive-files/`. Produced 7 Infrastructure rollout bullets: dimensional orthogonality, process/outcome split, two-pass hallucination check, capability verification axis, context bloat audit, local repo hygiene audit, Supermemory entry tagger.
+- **Tools evaluated.** Langflow (skip), n8n (skip), RAGFlow (Watch List — civic document ingestion candidate), OpenVLThinkerV2 (Watch List — GPU-gated vision model).
+- **Nightly reflection date hallucination found + fixed.** Model wrote 2026-02-23 instead of 2026-04-11. Added `normalizeReflectionDate()` post-processing guard to `discord-reflection.js`.
+- **Rollout cleanup.** 696 → 626 lines. DONE items archived. Three S110–S113 tables compressed. Phase headers fixed (26.3 DONE→PARTIAL, 27 NOT STARTED→PARTIAL).
+- **7 project memories saved**, including GPU-as-go-live-gate, three-layer coverage principle, deterministic-guardrails framing, token-efficient citation rules, Mike's research-and-teaching patterns.
+- **9 commits pushed to origin/main.** clasp push confirmed engine current.
 
 ### Session 140 (2026-04-09) — External Review + Quick Fixes [mags]
 **Terminal:** mags (EIC session)

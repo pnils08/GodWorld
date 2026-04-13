@@ -1,6 +1,6 @@
 # Edition Production Pipeline v2
 
-**Redesigned S133.** Skills are the source of truth. This doc is the map.
+**Redesigned S133. Updated S144 (new pipeline skills).** Skills are the source of truth. This doc is the map.
 
 ---
 
@@ -20,7 +20,13 @@ Four terminals. Two production logs. One world.
 ## Cycle Flow
 
 ```
-Mike runs cycle (engine)
+/run-cycle (orchestrator)
+    │
+    ├── Step 1: /pre-flight — verify manual inputs (sports feed, intakes, tracker, ratings)
+    ├── Step 2: /pre-mortem — engine code health scan
+    ├── Step 3: Mike runs cycle (engine in GAS)
+    ├── Step 4: /engine-review — post-cycle world state diagnostic (Phase 38)
+    └── Step 5: /build-world-summary — reads sheets + engine review → world summary doc
     │
     ├── Terminal 1: /city-hall
     │   ├── Read tracker (3 columns)
@@ -150,6 +156,11 @@ Voices govern. Projects hallucinate operational details within the political fra
 
 | Skill | Path |
 |-------|------|
+| `/run-cycle` | `.claude/skills/run-cycle/SKILL.md` |
+| `/pre-flight` | `.claude/skills/pre-flight/SKILL.md` |
+| `/pre-mortem` | `.claude/skills/pre-mortem/SKILL.md` |
+| `/engine-review` | `.claude/skills/engine-review/SKILL.md` |
+| `/build-world-summary` | `.claude/skills/build-world-summary/SKILL.md` |
 | `/city-hall` | `.claude/skills/city-hall/SKILL.md` |
 | `/write-edition` | `.claude/skills/write-edition/SKILL.md` |
 | `/write-supplemental` | `.claude/skills/write-supplemental/SKILL.md` |

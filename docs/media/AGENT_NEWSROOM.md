@@ -2,7 +2,7 @@
 
 **Status:** Implemented (Claude Code agents + skills)
 **Architecture:** Claude Code permanent agents (`.claude/agents/`) + orchestration skills (`.claude/skills/`)
-**Last Updated:** 2026-03-15
+**Last Updated:** 2026-04-13 (S144)
 
 ---
 
@@ -10,66 +10,60 @@
 
 The Agent Newsroom runs inside Claude Code using two layers:
 
-1. **Permanent Agents** (`.claude/agents/`) — 21 agents across 4 categories: desk (6), civic voice (7), initiative (5), editorial/utility (3). Each has IDENTITY.md (persona), RULES.md (constraints), and a lean SKILL.md (boot sequence). They don't need to be rebuilt each session.
+1. **Permanent Agents** (`.claude/agents/`) — 25+ agents across 5 categories: desk (6), civic voice (7), initiative (5), editorial/utility (4+), civic project (3). Each has IDENTITY.md (persona), RULES.md (constraints), and a lean SKILL.md (boot sequence). They don't need to be rebuilt each session. **Note:** S134 moved edition production from 6 desk agents to 9 individual reporters — desk agent infrastructure still exists but reporters are launched directly by `/write-edition`.
 
 2. **Workspace Builders** (`scripts/`) — Zero-LLM scripts that populate per-agent workspace folders before launch: `buildDeskFolders.js` (6 desks), `buildVoiceWorkspaces.js` (7 civic offices), `buildInitiativeWorkspaces.js` (5 initiatives).
 
 3. **Orchestration Skills** (`.claude/skills/`) — Playbooks that verify state and delegate to agents. The skill handles logistics; the agent handles writing.
 
 ```
-/run-cycle (skill)
-  Pre-flight checks (30+ sheets) → User triggers engine → Post-cycle review
+/run-cycle (orchestrator)
+  /pre-flight → /pre-mortem → engine run → /engine-review → /build-world-summary
     ↓
-/write-edition (skill)
-  Verify desk packets → Launch 6 desk agents in parallel → Compile → Verify → Save
+/city-hall (separate terminal)
+  Read tracker → voices govern → tracker updates → production log
     ↓
-Individual desk skills (/civic-desk, /sports-desk, etc.)
-  Load desk packet → Delegate to permanent agent → Return articles + engine returns
+/sift (planned)
+  World summary + engine review + city-hall log → story picks + angle briefs
+    ↓
+/write-edition
+  Read sift output → launch 9 reporters → compile → verify → publish
 ```
 
-### Pipeline Flow
+### Pipeline Flow (S134+, updated S144)
 
 ```
-1. ENGINE COMPLETES CYCLE
+1. /run-cycle ORCHESTRATOR
+   ├── /pre-flight — verify manual inputs (sports feed, tracker, ratings)
+   ├── /pre-mortem — engine code health scan
+   ├── Mike runs engine in GAS
+   ├── /engine-review — world state diagnostic (Phase 38)
+   └── /build-world-summary — factual cycle document
    ↓
-2. /run-cycle — pre-flight checks, trigger engine, post-cycle review
+2. /city-hall (separate terminal)
+   Initiative agents → voice agents (Mayor first) → tracker updates
+   Output: production_log_city_hall_c{XX}.md
    ↓
-3. GENERATE PACKETS
-   node scripts/buildDeskPackets.js [cycle]
-   node scripts/buildInitiativePackets.js [cycle]
+3. /sift (planned — currently part of /write-edition Steps 2-3)
+   Read world summary + engine review + city-hall log
+   Pick stories with Mike, assign reporters, verify citizens, write angle briefs
    ↓
-4. BUILD WORKSPACES (zero LLM tokens)
-   node scripts/buildInitiativeWorkspaces.js [cycle]
-   node scripts/buildVoiceWorkspaces.js [cycle]
-   node scripts/buildDeskFolders.js [cycle]
+4. /write-edition — 9 individual reporters
+   Each gets angle brief → writes articles → Mags reviews
    ↓
-5. INITIATIVE AGENTS (parallel, optional)
-   Each reads output/initiative-workspace/{init}/current/
+5. COMPILE (Mags)
+   Story-driven layout, no fixed sections
    ↓
-6. VOICE AGENTS (parallel)
-   Mayor first, then factions + extended
-   Each reads output/civic-voice-workspace/{office}/current/
+6. VALIDATE + RHEA
+   validateEdition.js (11 checks) → Rhea Morgan (scoped Bash)
    ↓
-7. DESK AGENTS (6 in parallel)
-   Each reads output/desks/{desk}/current/ (includes voice statements)
+7. MARA CANON AUDIT (external — claude.ai)
    ↓
-8. COMPILE (Mags Corliss role — main session)
-   Call front page, order sections, merge returns
+8. PUBLISH
+   Drive upload + bay-tribune ingest + wiki ingest
    ↓
-9. VALIDATE (scripts/validateEdition.js — zero tokens)
-   11 checks: names, votes, engine language, live sheet verification
-   ↓
-10. VERIFY (Rhea Morgan agent)
-    Cross-check names, votes, records against canon
-    ↓
-11. MARA CANON AUDIT (external — claude.ai)
-    Clean edition uploaded to Drive → Mara reads as a reader → approves or corrects
-    ↓
-12. FIX + FINALIZE
-    Apply corrections, save to editions/
-    ↓
-13. ENGINE INTAKE
-    node -r dotenv/config scripts/editionIntake.js <edition-file> [cycle]
+9. POST-PUBLISH
+   Coverage ratings → engine reads next cycle (loop closes)
 ```
 
 ---
@@ -106,20 +100,40 @@ For external communication, engine components map to journalism industry termino
 
 ---
 
-## Permanent Agents (21 total)
+## Permanent Agents (25+)
 
-### Desk Agents (6) — Write journalism
+### Individual Reporters (9 core) — Write journalism (S134+)
 
-| Agent | Lead Reporter(s) | Model | Domains | Articles |
-|-------|-----------------|-------|---------|----------|
-| `civic-desk` | Carmen Delaine | Sonnet | CIVIC, HEALTH, CRIME, TRANSIT, INFRASTRUCTURE | 2-4 |
-| `sports-desk` | P Slayer, Anthony, Hal Richmond | Sonnet | SPORTS (Oakland) | 2-5 |
-| `culture-desk` | Maria Keen | Sonnet | CULTURE, FAITH, ARTS, FOOD, EDUCATION | 2-4 |
-| `business-desk` | Jordan Velez | Sonnet | ECONOMIC, NIGHTLIFE, RETAIL, LABOR | 1-2 |
-| `chicago-desk` | Selena Grant, Talia Finch | Sonnet | CHICAGO, SPORTS (Bulls) | 2-3 |
-| `letters-desk` | (citizen voices) | Sonnet | ALL | 2-4 |
+S134 replaced 6 desk agents with 9 individual reporters. Each reporter is one agent, one voice, one identity. Launched directly by `/write-edition` with a targeted angle brief.
 
-Each desk agent has: IDENTITY.md (persona), RULES.md (output format + hard rules), lean SKILL.md (boot sequence). Reads workspace at `output/desks/{desk}/current/`. Write tools (Read, Glob, Grep, Write, Edit). Persistent memory at `.claude/agent-memory/{desk}/MEMORY.md`.
+| Reporter | Role | Model | Runs when |
+|----------|------|-------|-----------|
+| Carmen Delaine | Civic lead | Sonnet | Civic story assigned |
+| P Slayer | Sports opinion/fan | Sonnet | Sports story assigned |
+| Anthony | Sports beat/stats | Sonnet | Sports story assigned |
+| Hal Richmond | Sports legacy | Sonnet | Dynasty/farewell content |
+| Jordan Velez | Business/economics | Haiku | Business story assigned |
+| Maria Keen | Culture/neighborhoods | Haiku | Culture story assigned |
+| Jax Caldera | Freelance accountability | Sonnet | Something smells wrong (conditional) |
+| Dr. Lila Mezran | Health/human cost | Haiku | Health event in engine data (conditional) |
+| Letters | Citizen voices | Haiku | Always — runs last, reacts to edition |
+
+**Model tiering (S99):** Complex reporters (civic, sports, accountability) run Sonnet. Routine reporters (business, culture, health, letters) run Haiku.
+
+Secondary reporters (Navarro, Shimizu, Torres, Graye, Marston, Ortega, Reyes, Tan, Cruz) launch ONLY when assigned. Chicago bureau (Grant, Finch) is supplemental-only.
+
+### Legacy Desk Agents (6) — Infrastructure preserved
+
+| Agent | Model | Status |
+|-------|-------|--------|
+| `civic-desk` | Sonnet | Infrastructure exists. Not used in pipeline v2. |
+| `sports-desk` | Sonnet | Infrastructure exists. Not used in pipeline v2. |
+| `culture-desk` | Haiku | Infrastructure exists. Not used in pipeline v2. |
+| `business-desk` | Haiku | Infrastructure exists. Not used in pipeline v2. |
+| `chicago-desk` | Sonnet | Infrastructure exists. Not used in pipeline v2. |
+| `letters-desk` | Haiku | Infrastructure exists. Not used in pipeline v2. |
+
+Each desk agent has: IDENTITY.md (persona), RULES.md (output format + hard rules), lean SKILL.md (boot sequence). Persistent memory at `.claude/agent-memory/{desk}/MEMORY.md`.
 
 ### Civic Voice Agents (7) — Generate source material
 
@@ -147,19 +161,15 @@ Each voice agent reads workspace at `output/civic-voice-workspace/{office}/curre
 
 Each initiative agent reads workspace at `output/initiative-workspace/{init}/current/`. Produces civic documents and decisions JSON.
 
-### Editorial/Utility Agents (3)
+### Editorial/Utility Agents (5)
 
 | Agent | Role | Model |
 |-------|------|-------|
-| `rhea-morgan` | Verification (21 checks) | Sonnet |
+| `rhea-morgan` | Verification — scoped Bash, dashboard API, Supermemory | Sonnet |
 | `freelance-firebrand` | Jax Caldera — accountability columnist | Sonnet |
 | `city-clerk` | Document hygiene enforcement | Haiku |
-
-### Verification Agent (1)
-
-| Agent | Role | Model | Runs |
-|-------|------|-------|------|
-| `rhea-morgan` | Data Analyst / Verification | Sonnet | After compilation, before publication |
+| `dj-hartley` | Senior Photographer / art direction | Haiku |
+| `engine-validator` | Engine output validation | Haiku |
 
 Rhea verifies against:
 - `docs/media/ARTICLE_INDEX_BY_POPID.md` — 326+ citizens with POP-IDs
@@ -172,18 +182,20 @@ Rhea's 7-point check: citizen names, vote positions, sports records, engine metr
 
 ---
 
-## Orchestration Skills (8 total)
+## Orchestration Skills
 
 | Skill | Purpose |
 |-------|---------|
-| `/run-cycle` | Pre-flight sheet checks (30+ sheets), engine trigger, post-cycle review |
-| `/write-edition` | Master pipeline — verify packets, launch 6 agents, compile, verify, save |
-| `/civic-desk` | Load civic packet → delegate to civic-desk agent |
-| `/sports-desk` | Load sports packet → delegate to sports-desk agent |
-| `/culture-desk` | Load culture packet → delegate to culture-desk agent |
-| `/business-desk` | Load business packet → delegate to business-desk agent |
-| `/chicago-desk` | Load Chicago packet → delegate to chicago-desk agent |
-| `/letters-desk` | Load letters packet → delegate to letters-desk agent |
+| `/run-cycle` | Orchestrator — calls pre-flight → pre-mortem → engine run → engine-review → build-world-summary |
+| `/pre-flight` | Verify manual inputs (sports feed, intakes, tracker, ratings) |
+| `/pre-mortem` | Engine code health scan (determinism, deps, headers) |
+| `/engine-review` | Post-cycle world state diagnostic (Phase 38) |
+| `/build-world-summary` | Mechanical data assembly → world summary document |
+| `/city-hall` | Civic voices govern — separate terminal |
+| `/write-edition` | Launch 9 reporters from sift output, compile, verify, publish |
+| `/write-supplemental` | Supplemental edition pipeline |
+| `/podcast` | Podcast production (3 show formats) |
+| `/edition-print` | Photos, PDF, Drive upload |
 
 ---
 

@@ -2,7 +2,7 @@
 
 **What lives where. Read this before searching for files.**
 
-Last Updated: Session 99 (2026-03-17)
+Last Updated: Session 144 (2026-04-13)
 
 ---
 
@@ -28,7 +28,14 @@ Last Updated: Session 99 (2026-03-17)
 | `supplemental-briefs/` | Topic briefs for supplementals | Permanent | Named: `{slug}_c{XX}_brief.md` |
 | `desk-packets/` | Agent input JSON (per desk, per cycle) + shared config | Current + prior | Named: `{desk}_c{XX}.json`, `{desk}_summary_c{XX}.json`. Also contains `base_context.json`, `citizen_archive.json`, `truesource_reference.json` (shared across all agents, do not relocate). |
 | `desk-briefings/` | **LEGACY** — old agent briefing docs (pre-S95) | Archive | Named: `{desk}_briefing_c{XX}.md`, `{desk}_archive_c{XX}.md` |
-| `desk-output/` | Raw agent output (current cycle) | Current only | Named: `{desk}_c{XX}.md` |
+| `reporters/` | **Per-reporter article output** (pipeline v2, S134+) | Current cycle | `reporters/{reporter}/articles/`. One reporter, one folder. 7 active: anthony, carmen-delaine, jax-caldera, jordan-velez, letters-desk, maria-keen, p-slayer |
+| `reporters/{reporter}/c{XX}_brief.md` | Angle briefs from `/sift` | Current cycle | One brief per reporter per cycle |
+| `world_summary_c{XX}.md` | World summary from `/build-world-summary` | Permanent | Factual cycle record, ingested to world-data Supermemory |
+| `engine_review_c{XX}.md` | Engine review from `/engine-review` | Permanent | Ailment briefs, improvements, incoherence |
+| `production_log_edition_c{XX}.md` | Edition production log | Permanent | Every step of edition production documented |
+| `production_log_city_hall_c{XX}.md` | City-hall production log | Permanent | Civic voice decisions and tracker updates |
+| `session-evals/` | Session evaluation hook output | Permanent | Named: `YYYY-MM-DD.md` |
+| `desk-output/` | **LEGACY** — raw agent output (pre-S134) | Current only | Named: `{desk}_c{XX}.md` |
 | `desk-raw/` | Uncompiled desk output (prior cycle) | Prior only | Named: `{desk}_c{XX}_raw.md` |
 | `desks/` | **Per-desk autonomous workspaces** (built by `buildDeskFolders.js`) | Current cycle | `desks/{desk}/current/` (briefing, packets, errata, voice statements), `desks/{desk}/archive/` (last 3 outputs), `desks/{desk}/reference/` (truesource, citizen archive). See README.md in each desk folder. |
 | `civic-voice/` | Civic office voice data | Current + prior | Named: `{office}_c{XX}.json` |
@@ -71,7 +78,7 @@ Last Updated: Session 99 (2026-03-17)
 
 ## .claude/agent-memory/ — Persistent Agent Memory
 
-22 agents with `MEMORY.md` files. Memory informs, does not publish. Canon authority is Mags.
+25+ agents with `MEMORY.md` files. Memory informs, does not publish. Canon authority is Mags.
 
 **Desk agents:** business-desk, chicago-desk, civic-desk, culture-desk, letters-desk, podcast-desk, sports-desk
 **Civic offices:** baylight-authority, crc-faction, district-attorney, health-center, ind-swing, mayor, oari, opp-faction, police-chief, stabilization-fund, transit-hub

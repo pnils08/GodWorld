@@ -43,7 +43,7 @@ effort: high
 | `docs/EDITION_PIPELINE.md` | Terminal count, step count, reporter list, civic voice list match current skill files? Inputs table current? |
 | `docs/media/AGENT_NEWSROOM.md` | Reporter count, names, desk assignments match `.claude/agents/` directories? |
 | `docs/media/DESK_PACKET_PIPELINE.md` | Pipeline stages match `buildDeskFolders.js` and `buildDeskPackets.js`? |
-| `docs/media/SHOW_FORMATS.md` | Podcast formats match `/podcast` skill? Host assignments current? |
+| `docs/media/podcast/SHOW_FORMATS.md` | Podcast formats match `/podcast` skill? Host assignments current? |
 | `output/DISK_MAP.md` | Directory structure matches actual `output/` layout? Naming conventions match scripts? |
 
 ### infra — Drift when services change.
@@ -77,7 +77,7 @@ Update this after each audit. `/doc-audit` with no argument picks the oldest.
 |-------|-------------|---------|-------|
 | boot | — | — | Never audited as group |
 | engine | — | — | Never audited as group |
-| media | — | — | Never audited as group |
+| media | 2026-04-13 | S144 | 5 stale, 3 inconsistent, 1 dead ref. AGENT_NEWSROOM most outdated (still says 6 desk agents, S134 moved to 9 reporters). DESK_PACKET_PIPELINE is legacy/superseded. DISK_MAP missing new output dirs. |
 | infra | — | — | Never audited as group |
 | data | — | — | Never audited as group |
 

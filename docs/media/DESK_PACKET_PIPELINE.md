@@ -1,6 +1,8 @@
-# Desk Packet Pipeline v2.0
+# Desk Packet Pipeline v2.0 — LEGACY (Superseded S134)
 
-**Purpose:** The definitive process for generating The Cycle Pulse using per-desk JSON packets, autonomous desk workspaces, and parallel desk agents.
+**⚠️ SUPERSEDED:** This document describes the pre-S134 pipeline using 6 desk agents with workspace builders. S134 replaced this with 9 individual reporters, story-driven layout, and the `/write-edition` skill. The current pipeline is documented in `docs/EDITION_PIPELINE.md`. This file is preserved for reference — the workspace builder scripts still exist and may be reused.
+
+**Original purpose:** The definitive process for generating The Cycle Pulse using per-desk JSON packets, autonomous desk workspaces, and parallel desk agents.
 
 **Key change (v2.0, S95-96):** All 21 agents are autonomous. Each reads from its own workspace folder instead of receiving data through the orchestrator. Three workspace builders (`buildDeskFolders.js`, `buildVoiceWorkspaces.js` v2.0, `buildInitiativeWorkspaces.js`) populate workspaces with zero LLM tokens. Voice agents now receive domain-specific engine data (crime→chief, displacement→OPP, fiscal→CRC) via `domain_briefing.md`. Orchestrator context before agent launch dropped from ~180K to ~6K tokens.
 

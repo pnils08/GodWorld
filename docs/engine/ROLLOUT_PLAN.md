@@ -1,10 +1,12 @@
 # GodWorld — Rollout Plan
 
-**Status:** Active | **Last Updated:** Session 142 (2026-04-11)
+**Status:** Active | **Last Updated:** Session 144 (2026-04-13)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** `ROLLOUT_ARCHIVE.md` — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
 **Terminal handoffs:** Items tagged `(engine terminal)` or `(media terminal)` are handed off to that persistent chat. Research/build terminal designs; engine/sheet terminal executes code.
+
+**Active Build Plan (S144):** Phase 38 (Engine Auditor) is the architectural keystone. Build sequence: (1) Prep skills (`/build-world-summary`, `/sift`), (2) 38.1 ailment detector, (3) 38.2 mitigator check, (4) 38.3-38.4 remedy paths + Tribune framing, (5) 38.5 measurement loop, (6) Phase 37 arc state machines on top, (7) 33.12 EIC Sheet as view layer. Phases 36.1 and 32 are prerequisites. 5.4 demoted. 27.10 and 26.2 downstream. Full analysis in mags Supermemory doc `n5cBYS3vVN5DKrddnNp7K8`.
 
 ---
 

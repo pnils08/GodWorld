@@ -39,15 +39,50 @@ Each upstream skill consolidates its output so sift reads exactly 3 files:
 
 ## Steps
 
-### Step 1: Read Everything
+### Step 1: Extract Threads
 
-Read all inputs. Don't judge yet — gather the full picture.
+Read the 3 documents. Extract every active thread. Then read newsroom memory and annotate threads with history — what was covered before, what's an open arc, what's a gap.
 
-After reading, present to Mike:
-- Top signals from the world summary (cycle weight, shocks, domain counts)
-- Engine review findings (ailments needing coverage, things improving, incoherence)
-- City-hall decisions (what voices decided, what's dramatic)
-- Sports feed highlights (Mike's entries — these are the sports stories)
+Present to Mike in this format:
+
+```
+SIFT — Cycle {XX} Threads
+==========================
+
+WORLD THREADS (from world summary)
+---
+[W1] [one-line thread] | Signal: [engine ailment / trend / shock / texture] | Severity: [HIGH/MED/LOW]
+     History: [newsroom memory annotation — covered in E{XX}, arc open since C{XX}, gap: not covered in 3+ cycles, or NEW]
+
+[W2] ...
+
+SPORTS THREADS (from world summary — Mike's feed entries)
+---
+[S1] [one-line thread] | Signal: [game result / player arc / roster move]
+     History: [annotation]
+
+[S2] ...
+
+CIVIC THREADS (from city-hall production log)
+---
+[C1] [one-line thread] | Signal: [voice decision / conflict / tracker movement]
+     History: [annotation]
+
+[C2] ...
+
+==========================
+Threads: [count] | New: [count] | Continuing arcs: [count] | Gaps: [count]
+```
+
+**What each annotation looks like:**
+- `NEW` — first time this appears, no prior coverage
+- `ARC: E{XX}-present` — ongoing storyline, last covered in E{XX}
+- `GAP: last covered E{XX}, {N} cycles ago` — dropped storyline, refrigerator test candidate
+- `FOLLOW-UP: E{XX} promised [what]` — explicit or implicit promise from previous coverage
+- `RECURRING: C{XX}, C{XX}, C{XX}` — engine keeps producing this, pattern matters
+- `CONNECTS: [thread ID]` — this thread adds context to another thread from a different source
+
+**Cross-source connections matter.** A world thread can add context to a civic arc (season change affects construction timeline). A civic thread can add pressure to a sports arc (stadium deal shifts during a farewell season). A newsroom memory gap can elevate a world thread nobody was covering. When presenting threads, mark connections between them — these cross-source intersections are often the strongest stories.
 
 ### Step 2: Propose Stories
 

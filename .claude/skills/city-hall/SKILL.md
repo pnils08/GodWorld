@@ -281,11 +281,29 @@ Update production log with final state. Add the **Media Handoff** section at the
 **This data is locked canon once written.** The voice decisions, the project details, the tracker updates — all of it becomes the truth of what happened in city government this cycle. The edition reports FROM this document. No desk agent overrides it, reinterprets it, or invents additional civic decisions.
 
 **Media Handoff format:**
+
+The production log is the ONLY civic document sift reads. If a voice quote, decision, or project detail isn't in the media handoff, sift won't see it. Be thorough.
+
 ```
 ## Media Handoff
 [2-4 sentences: what happened, what's dramatic, what moved]
-[Topic assignments: which desk owns which story if covered]
-[Project details available: what world-building specifics the desks can use]
+
+## Voice Decisions (summary with key quotes)
+| Voice | Decision | Key Quote |
+|-------|----------|-----------|
+| Mayor Santana | [what she decided] | "[best quote]" |
+| ... | ... | ... |
+
+## Tracker Updates
+| Initiative | Phase Change | What Moved |
+|-----------|-------------|------------|
+| ... | ... | ... |
+
+## Topic Assignments for Media
+[which desk/reporter owns which civic story if covered]
+
+## Project Details Available
+[world-building specifics the desks can use — operational details, names, places invented by project agents]
 ```
 
 **Save location:** `output/production_log_city_hall_c{XX}.md` — this file persists. It survives compaction, session changes, and context loss. The edition pipeline reads it.

@@ -35,7 +35,7 @@ Follow the C91 template at `output/world_summary_c91.md`. Sections:
 5. **Evening Texture** — famous people, restaurants, fast food, nightlife, city events, evening media, streaming
 6. **World Events** — from Riley_Digest. Health, civic, safety, faith events with severity and neighborhood.
 7. **Three-Cycle Trends** — compare current + previous 2 cycles. What's recurring, escalating, improving, or new.
-8. **Engine Review Findings** — from engine-review output. Ailments, improvements, incoherence. Summarize, don't repeat the full 7-field briefs.
+8. **Engine Review Findings** — from engine-review output. Pull actionable findings INTO this document fully — ailment headlines, what's stuck, what's improving, what's incoherent, recommended remedy paths. The world summary is the ONLY document sift reads for engine state. If a finding isn't in the world summary, sift won't see it. The engine review file stays on disk as the audit trail but its substance lives here.
 9. **Approval Ratings** — from civic production log or Civic_Office_Ledger.
 
 ## Output

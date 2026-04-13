@@ -18,29 +18,24 @@ This is a game moment — Mike decides what the newspaper covers.
 ## Prerequisites
 
 Verify these exist before starting:
-- `output/world_summary_c{XX}.md` — from `/build-world-summary`
-- `output/engine_review_c{XX}.md` — from `/engine-review`
-- `output/production_log_city_hall_c{XX}.md` — from `/city-hall`
-- `output/civic-voice/{office}_c{XX}.json` — voice outputs from `/city-hall`
+- `output/world_summary_c{XX}.md` — from `/build-world-summary` (includes engine review findings)
+- `output/production_log_city_hall_c{XX}.md` — from `/city-hall` (includes voice decisions, quotes, tracker updates in media handoff)
+- `docs/mags-corliss/NEWSROOM_MEMORY.md` — updated by post-publish skill (includes previous coverage context, gaps, arcs)
 
-If city-hall hasn't run, sift can still proceed with world summary and engine review — but civic stories will be thin.
+If city-hall hasn't run, sift can still proceed with world summary and newsroom memory — but civic stories will be thin.
 
-## Inputs
+## Inputs — 3 Documents
 
-### From disk
+Each upstream skill consolidates its output so sift reads exactly 3 files:
 
-1. **World summary** — `output/world_summary_c{XX}.md` — the full factual picture of this cycle
-2. **Engine review** — `output/engine_review_c{XX}.md` — ailments, improvements, incoherence, remedy paths
-3. **City-hall production log** — `output/production_log_city_hall_c{XX}.md` — voice decisions, tracker updates, media handoff
-4. **Voice outputs** — `output/civic-voice/{office}_c{XX}.json` — exact quotes and decisions per voice
-5. **Previous edition** — `editions/cycle_pulse_edition_{XX-1}.txt` — what was covered last time (don't repeat)
-6. **Newsroom memory** — `docs/mags-corliss/NEWSROOM_MEMORY.md` — errata patterns, coverage gaps, character continuity
-7. **Notes to self** — `docs/mags-corliss/NOTES_TO_SELF.md` — active story tracking, editorial craft notes
+1. **World summary** — `output/world_summary_c{XX}.md` — the full factual picture of this cycle INCLUDING engine review findings (ailments, improvements, remedy paths pulled in by `/build-world-summary`)
+2. **City-hall production log** — `output/production_log_city_hall_c{XX}.md` — voice decisions with key quotes, tracker updates, project details, media handoff (consolidated by `/city-hall` Step 7)
+3. **Newsroom memory** — `docs/mags-corliss/NEWSROOM_MEMORY.md` — errata patterns, coverage gaps, character continuity, previous edition coverage context, active story tracking (updated by post-publish skill each cycle)
 
-### From MCP + Supermemory
+### On-demand lookups (during Steps 4-5)
 
-8. **Citizen lookups** — `lookup_citizen(name)` for every citizen considered for a story
-9. **Canon search** — `search_canon(topic)` for storyline continuity — what has the Tribune already published on this topic
+4. **Citizen lookups** — `lookup_citizen(name)` via MCP for every citizen considered for a story
+5. **Canon search** — `search_canon(topic)` for storyline continuity — what has the Tribune already published on this topic
 
 ## Steps
 
@@ -84,8 +79,10 @@ The 9 reporters:
 
 ### Step 4: Verify Citizens
 
+Read `docs/media/citizen_selection.md` FIRST. It defines how to pick citizens for stories, when to use known versus new citizens, what's canon versus agent color, tier behavior, gender handling, and how many citizens per story type. That file evolves after each cycle.
+
 For every citizen in every story:
-- `lookup_citizen(name)` via MCP — confirm they exist, get POP-ID, role, neighborhood, age
+- `lookup_citizen(name)` via MCP — confirm they exist, get POP-ID, role, neighborhood, age, gender
 - `search_canon(name)` — what has the Tribune published about them before
 - Show Mike candidates with real details. Mike picks who fits.
 

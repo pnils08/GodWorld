@@ -41,11 +41,14 @@ Read Riley_Digest (3 cycles), Sports Feed (3 cycles), civic production log (if e
 
 ## What Happens After
 
-These run in separate sessions:
+These run as separate skills (may be same or different sessions):
 
-- `/city-hall` — civic voices govern (reads engine output directly, produces `output/production_log_city_hall_c{XX}.md`)
-- `/sift` — editorial planning (reads world summary + engine review + city-hall log)
-- `/write-edition` — reporter orchestration (reads sift output)
+- `/city-hall-prep` — reads world summary + engine review + sheets → writes pending decisions per voice
+- `/city-hall` — reads pending decisions → launches voice agents → applies tracker updates → production log
+- `/sift` (planned) — reads world summary + engine review + city-hall log → story picks + angle briefs
+- `/write-edition` — reads sift output → launches reporters → compile → publish
+
+**Handoff:** run-cycle produces `output/world_summary_c{XX}.md` and `output/engine_review_c{XX}.md`. City-hall-prep verifies both exist before starting.
 
 ## Legacy Reference
 

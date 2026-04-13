@@ -1,6 +1,6 @@
 # GodWorld Documentation Ledger
 
-**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 113 (2026-03-23)
+**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 144 (2026-04-12)
 **Purpose:** Single registry of every active documentation file — what it does, when it loads, who updates it, and which workflow it serves.
 **Rule:** If a file isn't listed here, it's either archived or undocumented. Fix that.
 
@@ -45,7 +45,7 @@
 | File | Purpose | Tier | Updated By | Workflows |
 |------|---------|------|------------|-----------|
 | `CLAUDE.md` | Zero layer — identity refs, work file index, rules index, session lifecycle | Boot | Manual (rare) | All |
-| `SESSION_CONTEXT.md` | Switchboard — engines, tools, cascade deps, last 5 sessions | Startup | `/session-end` Step 4 | P, D, X |
+| `SESSION_CONTEXT.md` | Tools, infrastructure, last 5 sessions (under 300 lines). Engine versions + cascade deps moved to DOCUMENTATION_LEDGER S144. | Startup | `/session-end` Step 4 | P, D, X |
 | `docs/engine/ROLLOUT_PLAN.md` | **Single source for all project work.** Next priorities, build phases, deferred items, watch list | On-Demand | `/session-end` Step 4 | P, D |
 | `docs/engine/ROLLOUT_ARCHIVE.md` | Completed phase details (moved from ROLLOUT_PLAN when done) | On-Demand | Manual (when phases complete) | P |
 | `README.md` | Project structure, 11-phase engine, tech stack, quick start | On-Demand | Manual (rare) | P, D |
@@ -131,6 +131,79 @@
 | `output/initiative-packets/` | Generated initiative packets + manifest | On-Demand | `buildInitiativePackets.js` | M |
 | `output/city-civic-database/initiatives/{initiative}/` | Civic documents + decisions JSON produced by initiative agents | On-Demand | Initiative agents | M |
 
+### Engine Versions & Cascade Dependencies (D, X)
+
+**Moved from SESSION_CONTEXT.md (S144).** This is the single source for engine file versions and cascade dependencies.
+
+| Engine | File | Version | Notes |
+|--------|------|---------|-------|
+| Main Orchestrator | godWorldEngine2.js | - | Runs all phases |
+| Career Engine | runCareerEngine.js | v2.4 | 4 industries, 3 employer types, EmployerBizId on transitions, businessDeltas output |
+| Economic Ripple | economicRippleEngine.js | v2.5 | Reads careerSignals + businessDeltas, BUSINESS_CONTRACTION/EXPANSION triggers |
+| Civic Initiative | civicInitiativeEngine.js | v1.8 | Full vote breakdown in notes, faction member tracking |
+| Story Hook | storyHook.js | v3.9 | Theme-aware hooks + sports feed triggers |
+| Story Seeds | applyStorySeeds.js | v3.9 | Voice-matched story seeds |
+| Roster Lookup | rosterLookup.js | v2.2 | Theme matching, voice profiles, citizen-to-journalist matching |
+| Media Briefing | mediaRoomBriefingGenerator.js | v2.7 | Consumer wiring, Continuity_Loop reference removed |
+| Media Packet | buildMediaPacket.js | v2.4 | Voice guidance on story seeds & hooks |
+| Media Intake | mediaRoomIntake.js | v2.5 | Storyline lifecycle, citizen routing |
+| Media Parser | parseMediaRoomMarkdown.js | v1.5 | Quotes to LifeHistory_Log |
+| Media Mode Events | phase05-citizens/generateMediaModeEvents.js | v1.0 | MEDIA clock mode event generator |
+| Life History | compressLifeHistory.js | v1.3 | 47 TAG_TRAIT_MAP entries |
+| Citizen Enrichment | scripts/enrichCitizenProfiles.js | v1.0 | Edition→LifeHistory feedback loop |
+| Dashboard | godWorldDashboard.js | v2.1 | 7 cards, 28 data points |
+| Transit Metrics | updateTransitMetrics.js | v1.1 | Previous-cycle events, dayType fix |
+| Faith Events | faithEventsEngine.js | v1.3 | Cap 5 events/cycle |
+| Cycle Packet Builder | phase10-persistence/buildCyclePacket.js | v3.9 | 22 sections |
+| Desk Packet Builder | scripts/buildDeskPackets.js | v2.4 | All 509 ENGINE citizens in packets |
+| Citizen-Employer Linkage | scripts/linkCitizensToEmployers.js | v1.0 | Five-layer resolution |
+| Initiative Packet Builder | scripts/buildInitiativePackets.js | v1.0 | Per-initiative JSON packets |
+| Civic Voice Packets | scripts/buildCivicVoicePackets.js | v1.1 | 7 office/faction voice packets |
+| Desk Folder Builder | scripts/buildDeskFolders.js | v1.1 | Per-desk workspace folders |
+| Voice Workspace Builder | scripts/buildVoiceWorkspaces.js | v2.1 | Per-voice-agent workspace folders |
+| Edition Grader | scripts/gradeEdition.js | v1.0 | Per-desk/reporter grades |
+| Grade History | scripts/gradeHistory.js | v1.0 | Rolling averages, trends, roster recommendations |
+| Exemplar Extractor | scripts/extractExemplars.js | v1.0 | A-grade articles as exemplars |
+| Pipeline Logger | lib/pipelineLogger.js | v1.0 | Append-only JSONL with correlation IDs |
+| Initiative Workspace Builder | scripts/buildInitiativeWorkspaces.js | v1.0 | Per-initiative workspace folders |
+| Media Usage Cleanup | scripts/cleanCitizenMediaUsage.js | v1.0 | Deduplicates, cleans dirty names |
+| Citizen Bio Writer | scripts/applyCitizenBios.js | v1.0 | CitizenBio column (AT) + narrative bios |
+| Edition Validator | scripts/validateEdition.js | v2.0 | 11 checks: 8 static + 3 live sheet |
+| Mara Audit Packet | scripts/buildMaraPacket.js | v1.0 | Clean edition + AUDIT_HISTORY.md |
+| Post-Run Filing | scripts/postRunFiling.js | v1.0 | Verifies outputs, uploads to Drive |
+| Neighborhood Economics | scripts/aggregateNeighborhoodEconomics.js | v1.0 | Median income/rent by neighborhood |
+| Economic Profile Seeder | scripts/applyEconomicProfiles.js | v1.0 | Role-based income seeding |
+| Player Index Builder | scripts/buildPlayerIndex.js | v2.0 | TrueSource parser |
+| Athlete Integration | scripts/integrateAthletes.js | v1.0 | Birth years, salaries, traits |
+| Athlete Prep | scripts/prepAthleteIntegration.js | v1.0 | Duplicate consolidation |
+| Faith Leader Integration | scripts/integrateFaithLeaders.js | v1.0 | 16 faith leaders → SL Tier 2 |
+| Generic Citizens Audit | scripts/auditGenericCitizens.js | v1.0 | Read-only emergence audit |
+| Celebrity Integration | scripts/integrateCelebrities.js | v1.0 | Cultural_Ledger top celebrities → SL |
+| Live Ledger Query | scripts/queryLedger.js | v1.0 | 6 query types |
+| Edition Intake | scripts/editionIntake.js | v2.1 | Citizens → Citizen_Usage_Intake |
+| Business Intake | scripts/processBusinessIntake.js | v1.0 | Staged→promoted pipeline |
+| Bond Persistence | bondPersistence.js | v2.4 | Wipe guard, case-insensitive |
+| Bond Seeder | seedRelationBondsv1.js | v1.3 | First/Last column lookup |
+| Household Formation | householdFormationEngine.js | v1.1 | Young adults form households |
+| Generational Wealth | generationalWealthEngine.js | v1.0 | Wealth levels 0-10 |
+| Education Career | educationCareerEngine.js | v1.0 | Education levels, career progression |
+| V3 Seeds Writer | saveV3Seeds.js | v3.4 | Calendar columns removed |
+| V3 Hooks Writer | v3StoryHookWriter.js | v3.4 | Calendar columns removed |
+| V3 Texture Writer | v3TextureWriter.js | v3.5 | Calendar columns removed |
+| V3 Events Writer | recordWorldEventsv3.js | v3.5 | Only A-G active; 22 dead cols deprecated |
+| Sports Feed Triggers | applySportsSeason.js | v2.0 | Reads Oakland/Chicago feeds |
+
+**Cascade Dependencies:**
+
+- **Career Engine** → Economic Ripple Engine (via ctx.summary.careerSignals + careerSignals.businessDeltas)
+- **Demographics** → Civic Voting, Story Hooks, City Dynamics
+- **World Events** → Arc Engine, Media Briefings
+- **Initiative Outcomes** → Neighborhood Ripples (12-20 cycles)
+- **HouseholdFormation** → GenerationalWealth → EducationCareer (Phase 5 chain, direct sheet writes)
+- **Riley_Digest** → Pattern Detection (Phase 6 reads historical digest for cross-cycle patterns)
+
+Before editing engine code, check what reads from and writes to the affected ctx fields.
+
 ### Rules (always loaded by path match)
 
 | File | Scope | Triggers On |
@@ -178,8 +251,11 @@ Information lives in exactly one file. Other files point to it but never duplica
 | Information | Lives In | Points From |
 |-------------|----------|-------------|
 | Project work status (active/pending/done) | `ROLLOUT_PLAN.md` | SESSION_CONTEXT "Current Work" section |
-| Session history (S1-67) | `SESSION_HISTORY.md` | SESSION_CONTEXT, PERSISTENCE |
-| Engine versions & cascade deps | `SESSION_CONTEXT.md` | — |
+| Session history (S1-133) | `SESSION_HISTORY.md` | SESSION_CONTEXT (last 5 only), PERSISTENCE |
+| Engine versions & cascade deps | `DOCUMENTATION_LEDGER.md` (Engine Versions section) | Moved from SESSION_CONTEXT S144 |
+| Key documentation registry | `DOCUMENTATION_LEDGER.md` (Active Files tables) | SESSION_CONTEXT removed its copy S144 |
+| Architecture concepts (ctx, write-intents, tiers) | `docs/reference/V3_ARCHITECTURE.md` | SESSION_CONTEXT removed its copy S144 |
+| Mobile access (mosh + tmux) | `docs/OPERATIONS.md` | SESSION_CONTEXT removed its copy S144 |
 | Ledger audit state & decisions | `LEDGER_AUDIT.md` | ROLLOUT_PLAN (references Phase 13) |
 | Ledger recovery history & column reference | `LEDGER_REPAIR.md` | CLAUDE.md, MEMORY.md |
 | Editorial patterns & errata | `NEWSROOM_MEMORY.md` | — |

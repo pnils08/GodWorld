@@ -1,12 +1,102 @@
 # GodWorld Session History Archive
 
-**Full session history. Sessions 1-67 archived here. Sessions 68+ in SESSION_CONTEXT.md (last 5) until they rotate here.**
+**Full session history. Sessions 1-133 archived here. Recent sessions in SESSION_CONTEXT.md (last 5) until they rotate here.**
 
 Read on-demand only — not loaded at boot.
 
 ---
 
 ## Session History
+
+### Session 133 (2026-04-03) — Riley Ecosystem Audit + Research + Phase 33 Hooks
+
+- **Riley ecosystem captured:** 40 Apps Script projects pulled via API + browser automation. 34 projects (279 files) saved to `riley/`. 5 legacy engine snapshots (763 files) to `legacy/engine-snapshots/`.
+- **Riley audit:** Identified the Sifter (`pressGeneratePromptsFromLatestCycle`), Feed loop (closed content cycle), stat engine (franchise-stats-master), active triggers (CoreSync daily, PressPulse 7AM, sports 3AM).
+- **RILEY_PLAN.md written:** Full inventory, active triggers, Mags EIC sheet plan, what to keep vs. replace.
+- **Research:** Sandcastle (parallel Docker agents), Everything Claude Code (134K stars, pattern library), Claude Code v2.1.86-91 (conditional hooks, defer/resume, named subagents, 500K MCP results).
+- **Phase 33 implemented (3 of 7):** Config protection hook, pre-compact state save, tool call counter with strategic compaction suggestions.
+- **Editorial direction rewritten:** "What Mike Hates" → "Editorial Direction — E90 Forward." Structural tuning, not complaints.
+- **E90 path decided:** Path B (Phase 31 manual) — run cycle, build packets, Mags does canon research, agents get real editorial direction.
+
+### Session 132 (2026-04-02) — Research: Engineering Patterns + Ryan Dissertation
+
+- **4 source documents researched:** 3 Mara PDFs (engineering failures, feasibility assessment, closed-loop blueprint) + James Ryan PhD dissertation "Curating Simulated Storyworlds" (UC Santa Cruz, 2018, 700+ pages).
+- **Two research files written:** `docs/research4_1.md` (engineering patterns) and `docs/research4_2.md` (Ryan dissertation — curationist architecture, story sifter, Talk of the Town, Bad News, Hennepin character system).
+- **Core finding: the story sifter IS Phase 31.** Ryan's entire dissertation says the most important and most neglected component is the layer between simulation and storytelling that identifies what's interesting.
+- **Mike's reframe:** Ryan was always outside his simulation. We're inside ours. The sifter isn't a script — it's Mags.
+
+### Session 131 (2026-03-31) — Research: Canon-Grounded Architecture + World-Data Container
+
+- **Canon-grounded briefings proven (Phase 31):** Mike showed 5 C89 supplementals written by claude.ai with bay-tribune MCP access. The gap is access to canon, not writing quality. HIGHEST PRIORITY for C90.
+- **5 C89 supplementals ingested** to bay-tribune container.
+- **World-data container created (Phase 32):** Full Simulation_Ledger (675 citizens), Business Ledger (52), Faith Organizations (16), Employment Roster (658), Cultural Ledger (35), Neighborhood Map (17), Demographics (17). All ingested.
+- **Supermemory search documentation fixed:** `containerTag` (singular) not `containerTags` (plural). Previous code used wrong parameter — silent failure.
+
+### Session 126 (2026-03-29) — E89 Canon Audit + Publish
+
+- **Fabricated initiative removed:** Port of Oakland Green Modernization (INIT-004) — desk agent invented a $320M federal grant.
+- **Full canon audit completed:** All 17 articles verified. 4 fixes applied.
+- **E89 published.** Mara grade: B-.
+
+### Session 125 (2026-03-29) — E89 Salvage + Grading
+
+- **E89 salvaged from Drive.** Mara audit applied. gradeEdition.js parser fixed. Grades run with manual editorial feedback.
+
+### Session 121 (2026-03-27) — BOOT_ARCHITECTURE.md grill-me
+
+- **Critical failure:** Rewrote full document twice without approval. Content preserved but trust damaged.
+
+### Session 114 (2026-03-24) — Research + Build: Craft Layer, Freshness, Intake, Agent Autonomy
+
+- **Research session (6 items).** Phase 26.3 DONE (MICE thread guidance). Citizen freshness scoring DONE. Structured intake system DONE. Education supplemental unstuck. Storyline tracker cleanup DONE (140 active from ~55). Boot context trimmed (MEMORY.md -41%, PERSISTENCE.md -31%).
+
+### Session 110 (2026-03-22) — Parser Fixes + Supermemory Overhaul + Boot Architecture
+
+- **3 parser bugs fixed.** Supermemory overhaul (`godworld` → `bay-tribune`). 6 workflows added. Boot split (Media-Room/Chat get journal, others skip to work). ROLLOUT_PLAN trimmed 1172 → 150 lines.
+
+### Session 108 (2026-03-21) — E88 Published + Agent Audit + Lifecycle Skills
+
+- **Edition 88 published:** 13 articles, 0 errata, grade B. Parser fix for `===` delimiters. Grading pipeline complete. Agent audit (15 files). Lifecycle skills trimmed.
+
+### Session 106 (2026-03-20) — Dashboard Audit + World Memory + Pipeline Automation
+
+- **Dashboard reframed as search engine:** 31 API endpoints. World Memory Phase 1 (199 curated articles). 3 pipeline automations. Full tab audit.
+
+### Session 105 (2026-03-20) — Architecture Grounding + Mara Reference Pipeline
+
+- **9 architecture docs created.** Mara reference pipeline complete. Spreadsheet audit (65 tabs). BUG found: UNI/MED/CIV flag comparison.
+
+### Session 101 (2026-03-17) — Supplemental C87: Baylight Labor (Published with Errors)
+
+- **Supplemental published with errors.** Intake write targets BROKEN (wrong tab names). Citizen routing still unfixed.
+
+### Session 99 (2026-03-17) — Agent Grading System + Data Cleanup + Research + Infrastructure
+
+- **Phase 26 complete.** 80/20 model tiering. Extended thinking. Pipeline logging. PostCompact hook. /grill-me skill. Citizen_Media_Usage cleanup. CitizenBio column added. Disk naming cleanup.
+
+### Session 97-98 (2026-03-16) — Engine-to-Newsroom Pipeline Fix
+
+- **Root cause: ~70% of engine output never serialized.** buildCyclePacket.js v3.9 (22 sections). buildDeskPackets.js v2.3 (9 parsers). PHASE_DATA_AUDIT.md created. All 7 desk skill files rewritten.
+
+### Session 96 (2026-03-16) — E87 Second Attempt: Pipeline Ran, Journalism Didn't
+
+- **E87 published (13 pieces).** Mara grade: B. Core problem: desk agents read voice layer, not engine output.
+
+### Session 95 (2026-03-15) — E87 First Attempt: Rejected + Retracted
+
+- **Edition 87 retracted.** editionIntake broken (852 garbage rows).
+
+### Session 94 (2026-03-14) — Recovery Complete + Phase 24.1 MEDIA Clock Mode
+
+- **LEDGER RECOVERY COMPLETE.** 428 cell updates + 8 new citizens. Full edition audit (E1-86). Citizen pipeline overhaul. Sports universe RoleType overhaul. Phase 24.1 MEDIA clock mode.
+
+### Session 93 (2026-03-14) — Recovery Execution on Practice Sheet + Engine Code Fix
+
+- **All 6 recovery steps completed on practice sheet.** 9 phase05 files fixed.
+
+### Session 92 (2026-03-13) — LifeHistory_Log Contamination Discovery + Recovery Plan
+
+- **774 rows with wrong names.** Root cause: editionIntake.js writes to engine sheet. 5-step recovery plan established. Practice sheet approach.
 
 ### Session 102-103 (2026-03-18/19) — Supermemory Rebuild + Memory Architecture
 

@@ -125,25 +125,31 @@ LETTERS: reacts to edition (always runs last)
 
 **Mike responds:** answers to questions + picks from proposals. "Q1: push deployment. Q2: advance it. S1 yes, S2 yes, cut S3, front page should be S1." Simple — no technical decisions.
 
-### Step 3: Assign Reporters
+**After Mike responds:** Create `output/production_log_edition_c{XX}.md`. Log stories picked, front page choice, section tags. This log persists through all remaining steps and into write-edition.
 
-For each story Mike approves:
-- Assign ONE reporter (atomic checkout — no overlap)
-- Log the assignment
+### Step 3: Confirm Reporter Assignments
 
-The 9 reporters:
+Step 2 recommended a reporter per story. Mike may have changed assignments in his response. Lock the final assignments now.
 
-| Reporter | Runs when |
-|----------|-----------|
-| Carmen Delaine | Civic story assigned |
-| P Slayer | Sports opinion assigned |
-| Anthony | Sports beat assigned |
-| Hal Richmond | Dynasty/farewell content |
-| Jordan Velez | Business story assigned |
-| Maria Keen | Culture story assigned |
-| Jax Caldera | Something smells wrong (conditional) |
-| Dr. Lila Mezran | Health event (conditional) |
-| Letters | Always — runs last, reacts to edition |
+- Confirm ONE reporter per story (atomic checkout — no two reporters cover the same topic)
+- Resolve conflicts when two stories share a section tag (e.g., two SPORTS stories split between Anthony and P Slayer based on beat vs opinion)
+- Log final assignments in the production log
+
+The 9 reporters and their section defaults:
+
+| Reporter | Section | Voice |
+|----------|---------|-------|
+| Carmen Delaine | CIVIC AFFAIRS | Civic lead, investigations |
+| P Slayer | SPORTS / OPINION | Fan voice, emotional, reactive |
+| Anthony | SPORTS | Beat reporter, stats, analytical |
+| Hal Richmond | SPORTS / FEATURES | Legacy, dynasty, farewell arcs |
+| Jordan Velez | BUSINESS | Economics, labor, development |
+| Maria Keen | CITY LIFE | Culture, neighborhoods, texture |
+| Jax Caldera | ACCOUNTABILITY | Conditional — gaps, contradictions, silence |
+| Dr. Lila Mezran | HEALTH | Conditional — health events in engine data |
+| Letters | LETTERS | Always runs last — reacts to edition topics |
+
+**Update production log** with final assignment table (story → reporter → section tag).
 
 ### Step 4: Verify Citizens
 
@@ -156,22 +162,15 @@ For every citizen in every story:
 
 No name goes into an angle brief unverified.
 
+**Update production log** with verified citizen table (name, POP-ID, role, neighborhood, gender, story).
+
 ### Step 5: Write Angle Briefs
 
 Read `docs/media/brief_template.md` FIRST. It defines the brief structure, what makes a good brief versus a bad one, word count target (300-500 words), and reference examples. That file evolves after each cycle — it's how briefs get better over time.
 
 Follow the template to write one brief per reporter to `output/reporters/{reporter}/c{XX}_brief.md`.
 
-### Step 6: Create Edition Production Log
-
-Create `output/production_log_edition_c{XX}.md`. This log starts here and write-edition continues it.
-
-Log:
-- Step 0: session state (city-hall log exists, sports feed count)
-- Step 1: world summary reference
-- Step 2: stories picked (table: story, reporter, section tag)
-- Step 3: citizens verified (table: citizen, POP-ID, role, neighborhood, story)
-- Angle briefs written (list of file paths)
+**Update production log** with list of briefs written (file paths).
 
 ### Step 7: Verify Outputs + Completion Checklist
 

@@ -373,3 +373,54 @@ Moved out of ROLLOUT_PLAN as three separate compressed tables. Detail retained f
 - Health panel — dashboard status, engine version, cycle/edition, droplet specs from `/api/health`.
 - Session history — file-backed JSONL at `output/session-events.jsonl`, 500-event cap.
 - Quick actions — 3 wired buttons: Restart Bot, Health Check, Clear Events. All require dashboard auth.
+
+---
+
+## S144: Media Pipeline Chain + MD Lifecycle Automation — COMPLETE
+
+Full edition production chain designed as discrete linked skills with user gates at each boundary. MD lifecycle automation layer built to prevent drift.
+
+### Pipeline Skills Built/Updated
+
+| Skill | Status | Position in Chain |
+|-------|--------|-------------------|
+| `/run-cycle` | Rewritten as orchestrator | Step 1 |
+| `/pre-flight` | Built new — checks manual inputs | Step 1a |
+| `/pre-mortem` | Existing | Step 1b |
+| `/engine-review` | Built new — Phase 38.1 ailment detector | Step 1d |
+| `/build-world-summary` | Built new — mechanical assembly | Step 1e |
+| `/city-hall-prep` | Built new — prepare pending decisions per voice | Step 2a |
+| `/city-hall` | Existing, media handoff expanded | Step 2b |
+| `/sift` | Built new — thread extraction, story proposals, angle briefs | Step 3 |
+| `/write-edition` | Rewritten execution-only (372 → 160 lines) | Step 4 |
+| `/post-publish` | Built new — 13 steps, feedback loop closer | Step 5 |
+| `/edition-print` | Updated — PDF Drive upload, dashboard update | Step 6 (parallel) |
+| `/write-supplemental` | Updated — MCP lookups, criteria refs, intake fixed | Post-cycle |
+| `/dispatch` | Updated — roll call rule, MCP lookups, bench note | Post-cycle |
+| `/interview` | Built new — two modes, theme-driven, Mara audit | Post-cycle |
+| `/podcast` | Updated — ingest restored, runs after post-publish | Post-cycle |
+
+### Trainable Criteria Files (self-updating via /post-publish Step 10)
+
+- `docs/media/story_evaluation.md` — priority signals, front page scoring, three-layer test, changelog
+- `docs/media/brief_template.md` — angle brief structure, good vs bad examples, changelog
+- `docs/media/citizen_selection.md` — MCP lookup rules (citizen vs A's player), canon vs agent color, name collision warning, changelog
+
+### Audit Infrastructure
+
+- `/doc-audit` rewritten with 5 groups (boot/engine/media/infra/data), rotation tracker, criteria file checks
+- `/skill-audit` built — 3 groups (cycle-pipeline/post-cycle-media/identity-session), handoff + reference + agent directory checks
+- `scripts/session-end-audit.sh` — SessionEnd hook, detects md changes, writes report to `output/audit-reports/`, updates `output/audit-state.json`
+- `settings.json` hook chain extended — session-eval.js + session-end-audit.sh both async
+- 6 scheduled agents designed and uploaded to Drive folder `1QoV1eWy28lYbPa2vtkuOqp1wIZcvxtJS`: bay-tribune contamination, engine code review, md freshness rotation, repo hygiene, supermemory entry tagger, mara canon sync (reused slot)
+
+### Document Consolidation
+
+- SESSION_CONTEXT.md trimmed 541 → 81 lines, maintenance rule added, sessions S92-S133 rotated to SESSION_HISTORY.md
+- Engine version table + cascade deps moved to DOCUMENTATION_LEDGER.md
+- One-place rule updated for content moves
+- All 14 pipeline skills registered in DOCUMENTATION_LEDGER Cycle Pipeline section
+
+### Wiki Pattern for Supermemory
+
+All skills that produce canon log Supermemory doc IDs inline in their production log entries. Next cycle queries records directly by ID instead of re-parsing files. Applied to: post-publish Step 12, write-edition Step 6, write-supplemental Step 5f.5, dispatch Step 5f, interview Step 7g. Podcast Step 6 already had the pattern.

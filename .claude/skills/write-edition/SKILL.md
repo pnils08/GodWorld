@@ -28,6 +28,7 @@ If either is missing, `/sift` didn't complete. Don't proceed.
 ## Rules
 - **Reporters read their brief + IDENTITY.md. Nothing else.** No world summary, no city-hall log, no sheet queries.
 - **No calendar dates.** Cycles, not months.
+- **No engine language.** No "cycle weight," "civic load," "sentiment score," "domain count." Citizens don't know these terms. Weather is "cool evening, northwest breeze" not "Weather: 67F from engine."
 - **Story-driven layout.** No fixed sections to fill. No filler.
 - **Every citizen name was verified in sift.** If a reporter introduces a new name not in the brief, flag it.
 
@@ -88,7 +89,7 @@ The edition is story-driven, not section-driven.
 ============================================================
 THE CYCLE PULSE — EDITION {XX}
 Bay Tribune | Cycle {XX} | [Holiday/Season if applicable]
-Weather: [from world summary] | City Mood: [from world summary]
+Weather: [plain language — from production log] | City Mood: [plain language]
 ============================================================
 
 FRONT PAGE — [best story]
@@ -151,7 +152,17 @@ node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition
 node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt
 ```
 
-**Update production log** with Drive file ID and ingest confirmation. Canon status: LIVE.
+**Update production log** with wiki pattern — inline doc IDs for direct query next cycle:
+
+```markdown
+### Step 6: Publish — COMPLETE
+- Edition path: editions/cycle_pulse_edition_{XX}.txt
+- Drive file ID: {id}
+- Bay-tribune ingest: {doc ID}
+- Canon status: LIVE
+```
+
+Deeper ingests (wiki records, coverage ratings, grading) happen in `/post-publish` with their own tagged doc IDs.
 
 ## Handoff
 

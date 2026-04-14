@@ -449,6 +449,29 @@ New citizens and businesses from the supplemental need direct sheet writes to Si
 **5f. Update newsroom memory**
 Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with new canon established, character continuity, coverage notes.
 
+**5f.5. Finalize production log with tagged doc IDs**
+
+Append to the supplemental section in `output/production_log_edition_c{XX}.md`:
+
+```markdown
+## Supplemental: {topic} — COMPLETE
+- Articles: {count}
+- Drive file ID: {id}
+- Wiki entities: {count}
+- Edition text ingest: {doc ID}
+- Coverage ratings applied: {domains}
+- Citizens refreshed: {count}
+
+### Canon Established
+- {key fact 1}
+- {key fact 2}
+
+### Carries Forward
+- {what next cycle's sift should track}
+```
+
+Inline doc IDs = direct query next cycle.
+
 **5g. Refresh Discord bot**
 ```bash
 pm2 restart mags-bot

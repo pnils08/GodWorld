@@ -160,9 +160,42 @@ pm2 restart mags-bot
 ```
 Discord Mags picks up updated production log and Supermemory canon. No separate edition brief needed — she reads the production log and searches bay-tribune directly.
 
-### Step 12: Finalize Production Log
+### Step 12: Finalize Production Log — Wiki Pattern
 
-Update production log with all post-publish steps completed. Log is done.
+Append a Post-Publish section to `output/production_log_edition_c{XX}.md` with inline Supermemory doc IDs. Each canonized artifact gets a doc ID on its line so next cycle queries the record directly instead of re-reading files.
+
+```markdown
+## Post-Publish C{XX} — COMPLETE
+
+### Bay-Tribune Ingest
+- Wiki entities: {count}
+- Edition text: {doc ID}
+- Podcast transcript: {doc ID} (if applicable)
+- Civic wiki: {doc ID} (when 1c is built)
+
+### World-Data Ingest
+- World summary: {doc ID}
+- Citizen cards refreshed: {count}
+- New businesses flagged: {count}
+
+### Sheet Writes
+- Edition_Coverage_Ratings: {domains + ratings written}
+
+### Grading
+- Grades: output/grades/grades_c{XX}.json
+- Grade history updated
+- Exemplars extracted: {count}
+
+### Criteria Files Updated
+- story_evaluation.md: {changelog entry added}
+- brief_template.md: {changelog entry added}
+- citizen_selection.md: {changelog entry added}
+
+### Newsroom Memory
+- Updated with errata, coverage patterns, active arcs
+```
+
+The doc IDs embedded here are the query keys. Next cycle's sift reads this log first, uses the doc IDs for direct Supermemory queries, never needs to re-parse the edition text.
 
 ### Step 13: Completion Checklist
 

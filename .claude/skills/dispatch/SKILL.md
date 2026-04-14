@@ -180,6 +180,26 @@ Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with new canon, character continui
 pm2 restart mags-bot
 ```
 
+**5f. Finalize production log with tagged doc IDs**
+
+Append to the dispatch section in `output/production_log_edition_c{XX}.md`:
+
+```markdown
+## Dispatch: {scene title} — COMPLETE
+- Reporter: {name}
+- Location: {place}
+- Article path: output/reporters/{reporter}/articles/c{XX}_dispatch_{slug}.md
+- Wiki entities: {count if ingested}
+- Coverage rating: {domain if applied}
+- Citizens refreshed: {count}
+
+### Canon Established
+- {new location, citizen, or detail}
+
+### Carries Forward
+- {anything next cycle should track}
+```
+
 ---
 
 ## Examples of Good Dispatch Scenes

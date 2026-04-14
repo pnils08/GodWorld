@@ -172,7 +172,7 @@ Follow the template to write one brief per reporter to `output/reporters/{report
 
 **Update production log** with list of briefs written (file paths).
 
-### Step 7: Verify Outputs + Completion Checklist
+### Step 6: Verify Outputs + Completion Checklist
 
 All of these must be true before sift is complete:
 
@@ -189,7 +189,7 @@ Present checklist to Mike. When approved, sift is done.
 | File | Purpose | Created by |
 |------|---------|------------|
 | `output/reporters/{reporter}/c{XX}_brief.md` | One angle brief per assigned reporter | Step 5 |
-| `output/production_log_edition_c{XX}.md` | Edition production log — started here, continued by write-edition | Step 6 |
+| `output/production_log_edition_c{XX}.md` | Edition production log — created Step 2, updated Steps 3-5, continued by write-edition | Step 2 |
 
 ## Handoff to /write-edition
 

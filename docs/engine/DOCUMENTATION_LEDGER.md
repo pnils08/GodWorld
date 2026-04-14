@@ -213,20 +213,47 @@ Before editing engine code, check what reads from and writes to the affected ctx
 | `.claude/rules/newsroom.md` | Editorial rules, canon compliance | `editions/**`, `output/**`, `docs/media/**`, agents, skills |
 | `.claude/rules/dashboard.md` | API conventions, service account | `dashboard/**`, `server/**`, `public/**` |
 
-### Skills (invoked manually)
+### Skills — Cycle Pipeline (S144)
+
+Full chain in order: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → `/write-edition` → `/post-publish` → `/edition-print` + media skills (supplemental, dispatch, interview, podcast)
+
+| Skill | Purpose | Position in Chain |
+|-------|---------|-------------------|
+| `/run-cycle` | Orchestrator — calls pre-flight, pre-mortem, engine run, engine-review, build-world-summary | Step 1 |
+| `/pre-flight` | Verify manual inputs (sports feed, initiative tracker, coverage ratings) | Step 1a |
+| `/pre-mortem` | Engine code health scan | Step 1b |
+| `/engine-review` | Post-cycle world state diagnostic (Phase 38) | Step 1d |
+| `/build-world-summary` | Mechanical world summary assembly from sheets + engine review | Step 1e |
+| `/city-hall-prep` | Prepare pending decisions for voice agents | Step 2a |
+| `/city-hall` | Voice agents govern, tracker updates, media handoff | Step 2b |
+| `/sift` | Editorial planning — stories, reporters, citizens, angle briefs | Step 3 |
+| `/write-edition` | Launch 9 reporters from sift output, compile, validate, publish | Step 4 |
+| `/post-publish` | Feedback loop closer — canonize, grade, update criteria, close loop | Step 5 |
+| `/edition-print` | Photos, PDF, Drive upload (DJ Hartley art direction) | Step 6a (parallel) |
+| `/write-supplemental` | Supplemental coverage — runs within current cycle | Post-cycle media |
+| `/dispatch` | Immersive scene piece — one reporter, one moment | Post-cycle media |
+| `/interview` | Agent-to-voice or agent-to-Paulson interview with article | Post-cycle media |
+| `/podcast` | Two-host dialogue transcript from published edition | Post-cycle media |
+
+### Skills — Identity & Session
 
 | Skill | Purpose | Key Files Read/Written |
 |-------|---------|----------------------|
-| `/session-startup` | Workflow-routed boot — identity first, then asks workflow, loads only relevant docs | Phase 1: PERSISTENCE, JOURNAL_RECENT. Phase 2: workflow-specific (see skill for per-workflow load lists) |
-| `/session-end` | .md audit + close — audits workflow-touched files, journal, persistence, project state, supermemory, goodbye | Step 0: DOCUMENTATION_LEDGER + workflow files. Then: PERSISTENCE, JOURNAL, JOURNAL_RECENT, SESSION_CONTEXT, ROLLOUT_PLAN |
+| `/session-startup` | Workflow-routed boot | PERSISTENCE, JOURNAL_RECENT, workflow docs |
+| `/session-end` | Close + audit workflow files | DOCUMENTATION_LEDGER + workflow files |
 | `/boot` | Post-compaction identity reload | PERSISTENCE, JOURNAL_RECENT, identity.md |
-| `/write-edition` | Full edition pipeline — buildDeskFolders, 6 autonomous desk agents, compile, verify, audit | NEWSROOM_MEMORY, edition template, `output/desks/` workspaces |
-| `/write-supplemental` | Supplemental pipeline — custom reporter teams | Same as write-edition but smaller scope |
-| `/run-cycle` | Engine cycle with pre-flight and post-cycle review | SESSION_CONTEXT (engines table), ROLLOUT_PLAN |
-| `/pre-mortem` | Engine health scan before cycle runs | Engine phase files, ctx dependencies |
-| `/tech-debt-audit` | Code health scan | All engine files |
-| `/grill-me` | Discovery before building — 16-50+ questions to reach shared understanding before implementation | None (conversation-only) |
-| `.claude/hooks/post-compact-hook.sh` | PostCompact lifecycle hook — injects `/boot` directive after compaction to restore identity | PERSISTENCE, JOURNAL_RECENT, identity.md |
+| `/grill-me` | Discovery before building | None (conversation-only) |
+| `.claude/hooks/post-compact-hook.sh` | PostCompact hook — injects `/boot` | PERSISTENCE, JOURNAL_RECENT, identity.md |
+
+### Trainable Criteria Files (auto-updated by /post-publish Step 10)
+
+| File | Purpose | Read by |
+|------|---------|---------|
+| `docs/media/story_evaluation.md` | Story priority signals, front page scoring, three-layer test | `/sift` Step 2 |
+| `docs/media/brief_template.md` | Angle brief structure, good vs bad examples | `/sift` Step 5, supplemental, dispatch, interview |
+| `docs/media/citizen_selection.md` | Citizen handling, MCP lookups, A's player via get_roster, canon rules | `/sift` Step 4, all media skills |
+
+All three have changelog sections at the bottom. `/post-publish` Step 10 appends an entry per cycle with what changed and why.
 
 ---
 

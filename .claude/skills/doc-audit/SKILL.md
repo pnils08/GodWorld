@@ -45,6 +45,9 @@ effort: high
 | `docs/media/DESK_PACKET_PIPELINE.md` | Pipeline stages match `buildDeskFolders.js` and `buildDeskPackets.js`? |
 | `docs/media/podcast/SHOW_FORMATS.md` | Podcast formats match `/podcast` skill? Host assignments current? |
 | `output/DISK_MAP.md` | Directory structure matches actual `output/` layout? Naming conventions match scripts? |
+| `docs/media/story_evaluation.md` | Changelog growing each cycle (expected: one entry per post-publish run). Front page scoring section present. If no new entries in 3+ cycles, post-publish Step 10 isn't running — flag. |
+| `docs/media/brief_template.md` | Changelog growing. Structure section intact. Good/bad brief examples present. If stale, flag. |
+| `docs/media/citizen_selection.md` | Changelog growing. MCP lookup rule (citizens vs A's players) current. Name collision warning still needed (check if ledger cleanup happened). |
 
 ### infra — Drift when services change.
 

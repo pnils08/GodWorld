@@ -1,231 +1,39 @@
 ---
 name: write-edition
-description: Produce the Cycle Pulse edition — build world summary, pick stories with Mike, brief reporters, compile, verify, publish. City-hall runs in a separate session.
+description: Execute the edition from sift output. Launch reporters, review articles, compile, validate, Mara audit, publish. Mechanical when sift is right.
 effort: high
 disable-model-invocation: true
 argument-hint: "[cycle-number]"
 ---
 
-# /write-edition — Edition Production
+# /write-edition — Edition Execution
 
 ## Usage
 `/write-edition [cycle-number]`
 
 ## The Principle
 
-The engine produces a world. Mike produces the sports stories. City-hall produces the civic decisions. This skill turns all of that into a newspaper people want to read.
+Sift did the editorial work — stories picked, reporters assigned, citizens verified, briefs on disk. This skill executes. Launch reporters, review what they write, compile the edition, validate, get Mara's approval, publish.
 
-Mike and Mags pick stories together. Mags builds the world summary, proposes story ideas, verifies citizens against the ledger, and writes angle briefs. Mike picks which stories run, which citizens fit, and which reporter gets the assignment. Reporters execute — one voice, one identity, one assignment.
-
-The paper covers the WORLD — nightlife, food, sports, famous sightings, weather, neighborhoods, relationships, player arcs, evening texture. Civic decisions are part of the world, not the whole paper.
-
-## Rules
-- **Four inputs only.** Media production log, civic production log, Riley_Digest (3 cycles), Oakland Sports Feed (3 cycles). No 22-tab packet dumps. No Media_Briefing.
-- **Mike's feed entries are the sports stories.** Game results, player features, arcs — hand-written by Mike. Treat as gospel.
-- **City-hall production log is locked civic canon.** Read it, don't reinterpret it.
-- **Every citizen name gets verified.** Query the ledger, truesource, bay-tribune, world-data. No exceptions.
-- **Atomic topic checkout.** Each story assigned to ONE reporter. No two reporters cover the same story.
-- **No calendar dates.** The world runs on cycles, not months. No "October 15th." No "last winter." This cycle, last cycle, three cycles ago.
-- **Story-driven layout.** No fixed sections to fill. If there's no business story, there's no business section.
+If sift is right, this is mechanical.
 
 ## Prerequisites
-1. Engine cycle has been run
-2. `/city-hall` has been run in a separate session — `output/production_log_city_hall_c{XX}.md` exists
-3. Mike has provided feed entries (game results, player features, arcs) — check the sports feed on the sheet
 
-## Step 0: Production Log
+Verify these exist before starting:
+- `output/production_log_edition_c{XX}.md` — from `/sift` (has story picks, assignments, citizen table, brief paths)
+- `output/reporters/{reporter}/c{XX}_brief.md` — angle briefs from `/sift` (one per assigned reporter)
 
-Create `output/production_log_edition_c{XX}.md`:
+If either is missing, `/sift` didn't complete. Don't proceed.
 
-```markdown
-# Edition {XX} — Media Production Log
-**Started:** {timestamp}
-**Cycle:** {XX}
+## Rules
+- **Reporters read their brief + IDENTITY.md. Nothing else.** No world summary, no city-hall log, no sheet queries.
+- **No calendar dates.** Cycles, not months.
+- **Story-driven layout.** No fixed sections to fill. No filler.
+- **Every citizen name was verified in sift.** If a reporter introduces a new name not in the brief, flag it.
 
-## Step 0: Session State
-- Resuming: [yes/no]
-- City-hall log: [exists/missing]
-- Sports feed entries this cycle: [count]
+## Step 1: Launch Reporter Agents
 
-## Step 1: World Summary
-- World summary built: output/world_summary_c{XX}.md
-- Ingested to world-data: [doc ID]
-- Cycle weight: [high-signal/normal]
-- Key data: [2-3 line summary — famous people, food, events, weather]
-
-## Step 2: Stories Picked
-| Story | Reporter | Section Tag |
-|-------|----------|-------------|
-| | | |
-
-## Step 3: Citizens Verified
-| Citizen | POP-ID | Role | Neighborhood | Story |
-|---------|--------|------|-------------|-------|
-| | | | | |
-
-Angle briefs written: [list]
-
-## Step 4: Reporter Results
-| Reporter | Articles | Status |
-|----------|----------|--------|
-| | | |
-
-## Step 4.5: Editorial Review
-- Articles passed: [count]
-- Articles cut: [count + reason]
-- Fixes applied: [list]
-
-## Step 5: Compile
-- Front page: [story, Mike's pick]
-- Total articles: [count]
-- Edition saved: editions/cycle_pulse_edition_{XX}.txt
-
-## Step 6: Validation + Rhea
-- validateEdition.js: [PASS/FAIL + critical count]
-- Rhea score: [XX/100]
-- Rhea verdict: [APPROVED/REVISE]
-- Fixes applied: [list]
-
-## Step 7: Mara
-- Edition uploaded to Drive: [yes/no]
-- Mara verdict: [pending/approved/revise]
-- Corrections applied: [list]
-
-## Step 8: Published
-- Drive: [file ID]
-- Bay-tribune ingest: [doc ID]
-- Canon status: LIVE
-
-## Step 9: Post-Publish
-- latest_edition_brief.md: [written]
-- NEWSROOM_MEMORY.md: [updated]
-- Discord bot: [restarted]
-- Filing check: [pass/fail]
-```
-
-**Update this file at every step.** This is how you survive compaction and how future sessions know how the edition was made.
-
-## Step 1: Read the World
-
-Read these in order. No editorial judgment yet — just gather the facts.
-
-**1a. Media production log (resume)**
-```
-Read: output/production_log_edition_c{XX}.md (if exists)
-```
-If resuming from a previous session, this tells you where you left off. If starting fresh, create one (Step 0).
-
-**1b. Civic production log (locked canon)**
-```
-Read: output/production_log_city_hall_c{XX}.md
-```
-What city-hall decided. Read it once. Don't reinterpret it. This is canon.
-
-**1c. Riley_Digest (past 3 cycles)**
-Read C{XX}, C{XX-1}, C{XX-2} from the Riley_Digest sheet. Key data per cycle:
-- Cycle weight, events generated, civic load
-- Weather, traffic, retail, nightlife, tourism
-- Famous people spotted
-- Evening food (restaurants, fast food)
-- Nightlife (bars, vibe, volume)
-- City events
-- Evening media (TV, movies, streaming)
-- World events (health, civic, safety, faith, sports)
-- Demographic shifts
-
-**1d. Oakland Sports Feed (past 3 cycles)**
-Read C{XX}, C{XX-1}, C{XX-2} from Oakland_Sports_Feed. These are hand-written by Mike — game results, player features, roster moves, front office decisions, rumors. Every entry is intentional. Treat as gospel.
-
-**1e. Build world summary**
-Combine all of the above into a single factual document: `output/world_summary_c{XX}.md`
-
-The world summary is:
-- Factual — no editorial judgment, no story picks
-- Complete — engine state, sports feed, civic decisions, world events, demographic shifts, three-cycle trends
-- Permanent — ingest to world-data Supermemory container after writing
-- The thing you and Mike sift from together
-
-Format: see `output/world_summary_c90.md` as the reference template.
-
-**1f. Ingest to world-data**
-```bash
-npx supermemory add "$(cat output/world_summary_c{XX}.md)" --tag world-data --metadata '{"type": "cycle_summary", "cycle": {XX}}'
-```
-The world remembers itself. Future cycles can search for what happened in any past cycle.
-
-**1g. Present to Mike**
-Show Mike the world summary. This is what you sift from together. No stories picked yet — just the world.
-
-## Step 2: The Sift — Pick Stories Together
-
-Mike and Mags look at the world summary together and pick stories.
-
-**How it works:**
-1. Mags proposes story ideas from the world summary — "Martin Richards at Westside Cafe is a feature," "Jose Colon spotted at Miso Metro is a city life piece," "the West Oakland health spike needs Mezran"
-2. Mike says yes, no, or redirects — "that's not a story," "combine those two," "give that to P Slayer not Anthony"
-3. Together we assign each story to a reporter based on their traits and the story's needs
-4. Together we pick citizens for each story (Step 3)
-
-**After a few cycles of doing this manually, we see the pattern and can automate parts of it.**
-
-### The 9 Reporters
-
-| Reporter | Agent | Role | Runs when |
-|----------|-------|------|-----------|
-| Carmen Delaine | `carmen-delaine` | Civic lead | Civic story assigned |
-| P Slayer | `p-slayer` | Sports opinion/fan | Sports story assigned |
-| Anthony | `anthony` | Sports beat/stats | Sports story assigned |
-| Hal Richmond | `hal-richmond` | Sports legacy | Dynasty/farewell content |
-| Jordan Velez | `jordan-velez` | Business/economics | Business story assigned |
-| Maria Keen | `maria-keen` | Culture/neighborhoods | Culture story assigned |
-| Jax Caldera | `jax-caldera` | Freelance accountability | Something smells wrong |
-| Dr. Lila Mezran | `lila-mezran` | Health/human cost | Health event in engine data |
-| Letters | `letters-desk` | Citizen voices | Always — reacts to the edition |
-
-**Each reporter is one agent, one voice, one identity.** No desk agents juggling multiple voices. Each reporter gets their IDENTITY.md and their angle brief. Nothing else.
-
-**Secondary reporters** (Navarro, Shimizu, Torres, Graye, Marston, Ortega, Reyes, Tan, Cruz) launch ONLY when the sift assigns them a specific story. Most cycles they don't run.
-
-**Chicago bureau** (Selena Grant, Talia Finch) is supplemental-only. When a Chicago storyline matters — Paulson at a Bulls game, a trade connection — it runs as a supplemental, not part of the regular edition. Not every cycle. Not a standing bureau.
-
-### Conditional Agents
-
-- **Jax Caldera:** Only launches when the sift finds a gap — silence on a major issue, contradiction between reporters, a story everyone's avoiding. He asks the question nobody wants asked.
-- **Dr. Lila Mezran:** Only launches when the engine produces a health event — crisis spikes, hospital capacity, community health data. She covers the human body the way Maria Keen covers the neighborhood.
-- **Letters desk:** Launches LAST — needs to know what other reporters covered so citizens can react.
-
-## Step 3: Verify Citizens + Write Angle Briefs
-
-For each story picked in Step 2:
-
-**3a. Pull citizens by neighborhood**
-Query the Simulation_Ledger for citizens in the neighborhoods relevant to the story. Show Mike candidates with real details — name, age, role, income, neighborhood. Mike picks who fits.
-
-**3b. Verify every name**
-Every citizen, player, or entity in the story gets looked up. **Use GodWorld MCP tools — faster and cheaper than reading files:**
-- `lookup_citizen("Name")` — profile + canon history (replaces truesource + Supermemory search)
-- `get_roster("as")` — player data (replaces reading truesource_reference.json)
-- `get_council_member("D4")` — civic officials (replaces reading Civic_Office_Ledger)
-- `get_neighborhood("Temescal")` — neighborhood state
-
-Fallback to direct sheet queries via service account only if MCP is unavailable.
-
-No name goes in an angle brief unverified.
-
-**3c. Write angle briefs**
-One brief per reporter to `output/reporters/{reporter}/c{XX}_brief.md`.
-
-**Each brief contains:**
-- THE STORY — what this reporter is writing and why
-- CITIZENS TO USE — verified names with roles, ages, neighborhoods
-- WHAT NOT TO COVER — topics assigned to other reporters (atomic checkout)
-- SPECIFIC DATA — the feed entries, engine data, or production log quotes relevant to this story only
-
-Each reporter gets 1-2 stories max. Log all assignments in the media production log.
-
-## Step 4: Launch Reporter Agents
-
-Each reporter is launched individually with direct editorial direction. Do NOT tell agents to "read the packet and decide what to write." Tell them WHAT to write.
+Read the production log for assignments. Launch each reporter with direct editorial direction.
 
 **Prompt structure per reporter:**
 ```
@@ -241,61 +49,49 @@ Write to [output path]. [word count]. Do NOT spend time reading other files — 
 **The E90 lesson:** Agents told what to write produce articles. Agents told to figure it out spend all their tokens reading files and produce nothing.
 
 **Launch order:**
-1. P Slayer, Anthony, Hal first — sports stories from Mike's feed entries
+1. P Slayer, Anthony, Hal first — sports stories
 2. Carmen, Jordan, Maria in parallel — civic/business/culture
 3. Jax and Mezran if assigned — conditional
 4. Letters LAST — needs to know what others covered
 
-**Output:** Each reporter writes to `output/reporters/{reporter}/articles/`. One reporter, one folder, one or two articles.
+**Output:** Each reporter writes to `output/reporters/{reporter}/articles/`.
 
-## Step 4.5: Read Every Article
+**Update production log** with reporter results table (reporter, articles, status).
+
+## Step 2: Read Every Article
 
 Before compiling, Mags reads every article. Not a scan — a read. Check:
 - Did the agent follow the angle brief?
-- Are citizen names correct? (verify any you're unsure of)
+- Are citizen names correct? (verify any you're unsure of via MCP)
 - Does the voice match the reporter?
 - Any fabricated facts, stats, game results?
 - Any calendar dates that should be cycle references?
 - Any engine language?
+- Any names not in the brief? (hallucination flag)
 
 Flag problems. Fix what's fixable. Cut what's broken. Better to have 8 clean articles than 13 with canon violations.
 
-## Step 5: Compile
+**Update production log** with editorial review (articles passed, cut, fixes applied).
 
-The edition is story-driven, not section-driven. No fixed template with slots to fill. The stories this cycle determine the shape of the paper.
+## Step 3: Compile
 
-**How it works:**
+The edition is story-driven, not section-driven.
 
-1. Take all the articles that passed review in Step 4.5
-2. Order them by what's most worth reading — the best story leads
-3. Label each with its section tag (SPORTS, CIVIC AFFAIRS, CITY LIFE, BUSINESS, FEATURES, etc.)
-4. If a section has no story this cycle, it doesn't appear. No filler.
-5. Front page is the best story. Could be sports, could be a profile, could be civic. Mike picks.
+1. Take all articles that passed review
+2. Order by what's most worth reading — front page was picked in sift, but may change if an article exceeded expectations
+3. Label each with its section tag from sift assignments
+4. If a section has no story this cycle, it doesn't appear
 
-**Section tags** — labels, not requirements:
-
-| Tag | What goes here |
-|-----|---------------|
-| SPORTS | Game recaps, player features, roster moves, fan columns |
-| CITY LIFE | Nightlife, food, famous sightings, gallery walks, neighborhood texture |
-| CIVIC AFFAIRS | Government decisions — from civic production log. Could be 1 article or a 5-line ticker |
-| BUSINESS | Economic stories, development, Baylight operational, business ticker |
-| FEATURES | Profiles, human interest, long-form |
-| HEALTH | Crisis coverage, community health — when Mezran runs |
-| ACCOUNTABILITY | Jax piece — when something smells wrong |
-| OPINION | P Slayer, editorial columns |
-| LETTERS | Citizen reactions |
-
-**Fixed elements** (every edition):
+**Edition format:**
 
 ```
 ============================================================
 THE CYCLE PULSE — EDITION {XX}
 Bay Tribune | Cycle {XX} | [Holiday/Season if applicable]
-Weather: [from engine] | City Mood: [from engine]
+Weather: [from world summary] | City Mood: [from world summary]
 ============================================================
 
-FRONT PAGE — [best story, Mike picks]
+FRONT PAGE — [best story]
 EDITOR'S DESK — Mags, 150-250 words
 
 [STORIES — ordered by quality, tagged by section]
@@ -308,13 +104,13 @@ COMING NEXT EDITION
 END EDITION
 ```
 
-**If this cycle has 4 sports stories, 1 culture piece, and no civic news — that's the paper.** No empty sections. No filler.
-
-**Chicago** is supplemental-only. When a Chicago storyline matters, it runs as a separate supplemental.
+Save to `editions/cycle_pulse_edition_{XX}.txt`.
 
 **Show compiled edition to Mike.** This is his review point.
 
-## Step 6: Validation + Rhea
+**Update production log** with compile details (front page, total articles, edition path).
+
+## Step 4: Validation + Rhea
 
 ```bash
 node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
@@ -322,14 +118,16 @@ node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
 
 Fix CRITICALs. Then launch Rhea.
 
-Rhea has scoped Bash access — she can query the dashboard API (localhost:3001), search Supermemory (bay-tribune + world-data), and verify against the world summary. She's a real verifier, not a file reader. Her truth sources: world summary, civic production log, truesource, roster, dashboard API, Supermemory canon + world state.
+Rhea has scoped Bash access — dashboard API (localhost:3001), Supermemory (bay-tribune + world-data), world summary. She's a real verifier with live data access.
 
 - PASS (score >= 75, zero CRITICALs) → proceed
 - REVISE → fix and rerun, max 2 rounds
 
-## Step 7: Mara Audit (External)
+**Update production log** with validation results (validator flags, Rhea score, fixes).
 
-Mara is on claude.ai with her own Supermemory access (mara container + bay-tribune + world-data). She knows her job. Don't build her a packet — she searches canon herself.
+## Step 5: Mara Audit (External)
+
+Mara is on claude.ai with her own Supermemory access. She searches canon herself.
 
 1. Upload edition to Drive: `node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt mara`
 2. Tell Mike the edition is ready for Mara
@@ -337,36 +135,55 @@ Mara is on claude.ai with her own Supermemory access (mara container + bay-tribu
 4. Mara reads, searches, comes back with corrections
 5. Mike brings corrections back — apply them
 
-**STOP. Wait for Mara.** 
+**STOP. Wait for Mara.**
 
 **USER APPROVAL GATE — Mike says publish or doesn't.**
 
-## Step 8: Publish
+**Update production log** with Mara verdict and corrections.
+
+## Step 6: Publish
 
 ```bash
-# Save edition
+# Save edition to Drive
 node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt edition
 
-# Ingest to canon
+# Ingest to bay-tribune canon
 node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt
 ```
 
-## Step 9: Post-Publish
+**Update production log** with Drive file ID and ingest confirmation. Canon status: LIVE.
 
-1. Write `output/latest_edition_brief.md`
-2. Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with errata and editorial notes
-3. Restart Discord bot: `pm2 restart mags-bot`
-4. Run filing check: `node scripts/postRunFiling.js {XX}`
-5. Rate edition coverage: `node scripts/rateEditionCoverage.js editions/cycle_pulse_edition_{XX}.txt --apply`
-   — Generates per-domain ratings (-5 to +5) that the engine reads next cycle. The city reacts to what the newspaper published.
-6. Wiki ingest: `node scripts/ingestEditionWiki.js editions/cycle_pulse_edition_{XX}.txt --apply`
-   — Extracts per-citizen, per-initiative, per-storyline records into bay-tribune. Entity-level knowledge that compounds across editions. Future searches find "Beverly Hayes" as a person, not an edition chunk.
+## Handoff
 
-## What This Skill Does NOT Do
+After publish, two separate skills pick up:
 
-- **Run civic voices or initiative agents** — that's `/city-hall` in a separate terminal
-- **Build initiative packets or voice workspaces** — city-hall handles that
-- **Decide civic outcomes** — city-hall decided, this skill reports
-- **Guess at citizen details** — every name is verified against the ledger
-- **Let agents decide what to write** — Mags decides, agents execute
-- **Photos, PDFs, or print layout** — that's `/edition-print` in a separate terminal
+| Skill | What it does | When |
+|-------|-------------|------|
+| `/edition-print` | Photos (DJ Hartley), PDF, Drive upload of print assets | After publish, separate terminal |
+| `/post-publish` (planned) | Coverage ratings, wiki ingest, newsroom memory update, filing check, criteria file updates | After publish, closes the feedback loop |
+
+## Output Files
+
+| File | Purpose | Created by |
+|------|---------|------------|
+| `output/reporters/{reporter}/articles/*.md` | Reporter articles | Step 1 |
+| `editions/cycle_pulse_edition_{XX}.txt` | Published edition | Step 3 |
+| `output/production_log_edition_c{XX}.md` | Continued from sift — reporter results, review, compile, validation, Mara, publish added | Steps 1-6 |
+
+## Legacy Reference
+
+These elements were part of the old write-edition (pre-S144) and are now handled by other skills:
+
+- **World summary build** → `/build-world-summary`
+- **Story picks and sifting** → `/sift`
+- **Citizen verification** → `/sift` Step 4
+- **Angle brief writing** → `/sift` Step 5
+- **Production log creation** → `/sift` Step 2
+- **Desk packet building** → legacy scripts preserved, not in pipeline
+- **Voice workspace building** → `/city-hall-prep`
+
+## Where This Sits
+
+After `/sift`. Before `/edition-print` and `/post-publish`.
+
+Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → `/write-edition` → `/edition-print` + `/post-publish`

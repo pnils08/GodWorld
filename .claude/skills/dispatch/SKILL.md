@@ -36,14 +36,16 @@ The difference: "The bar erupted when Horn's ball cleared the fence" is reportin
 - **One location only.** Name it. Ground it. The reader can smell it.
 - **One moment only.** Not "a day at the cafe." A specific 20 minutes.
 - **Present tense energy.** Even if written in past tense, it reads like you're there now.
-- **Citizen verification.** Every named person checked against ledger, truesource, bay-tribune, world-data. No exceptions.
+- **Citizen verification via MCP.** `lookup_citizen(name)` for citizens, `get_roster("as")` for A's players. Read `docs/media/citizen_selection.md` for full criteria. No exceptions.
+- **Read the brief, don't exhaust it.** The brief lists citizens available in the scene. The dispatch uses only the ones that serve the moment — usually 2-3, not all of them. Don't turn a dispatch into a roll call. Some citizens in the brief are there for color; some don't make the final piece.
+- **Follow brief template for structure.** `docs/media/brief_template.md` — dispatch briefs are different from article briefs but citizen handling, canon rules, and verification standards are the same.
 - **World summary is your context.** Read `output/world_summary_c{XX}.md` — weather, mood, what's happening in the city. The dispatch lives in the same world as the edition.
 - **No calendar dates.** Natural time references only.
 - **Get user approval** on the scene concept and reporter before writing.
 
 ## Reporter Selection Guide
 
-Match the reporter to the scene's emotional register:
+Match the reporter to the scene's emotional register. Dispatches develop the bench — like supplementals, they're a chance for reporters who don't get frequent cycle pulse assignments. When multiple reporters could fit a scene, default to the one with fewer recent bylines.
 
 | Reporter | Best for | Voice |
 |----------|----------|-------|
@@ -53,7 +55,7 @@ Match the reporter to the scene's emotional register:
 | Jordan Velez | Business/development scenes, power spaces | Clean, analytical, present |
 | Hal Richmond | Historical moments, legacy scenes | Atmospheric, literary, patient |
 | Jax Caldera | Accountability moments, tension scenes | Sharp, restless, skeptical |
-| Selena Cruz | Faith, community gatherings | Intimate, respectful, grounded |
+| Tanya Cruz | Sideline, behind-the-scenes, real-time dispatches | Intimate, immediate |
 | Sharon Okafor | Lifestyle, social scenes | Vivid, curious, contemporary |
 | Kai Marston | Music, nightlife, arts scenes | Rhythmic, insider, electric |
 
@@ -151,12 +153,32 @@ If it needs revision, edit directly or re-brief the agent with specific notes.
 
 ---
 
-## Step 5: Post-Publish (same as edition/supplemental)
+## Step 5: Post-Dispatch Ingest
 
-- Coverage ratings if applicable
-- Wiki ingest: `node scripts/ingestEditionWiki.js`
-- Canon notes to bay-tribune if new citizens or locations established
-- Update NOTES_TO_SELF if the dispatch surfaced something worth tracking
+Dispatches handle their own ingest — lighter than supplemental post-publish. A dispatch is one scene, not an edition, so some steps don't apply.
+
+**5a. Wiki ingest (if the dispatch introduced new canon)**
+```bash
+node scripts/ingestEditionWiki.js output/reporters/{reporter}/articles/c{XX}_dispatch_{slug}.md --apply
+```
+Only if new citizens, locations, or businesses were established. A pure atmosphere piece may not need this.
+
+**5b. Coverage ratings (skip for most dispatches)**
+Only apply if the dispatch covers a domain with engine impact (civic decision moments, health crises). Atmosphere pieces skip this.
+
+**5c. Citizen cards refresh**
+```bash
+node scripts/buildCitizenCards.js
+```
+If citizens appeared, their profiles get updated in world-data.
+
+**5d. Update newsroom memory**
+Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with new canon, character continuity, coverage notes.
+
+**5e. Refresh Discord bot**
+```bash
+pm2 restart mags-bot
+```
 
 ---
 
@@ -169,3 +191,11 @@ If it needs revision, edit directly or re-brief the agent with specific notes.
 - Lake Merritt at sunset during First Friday in October
 - The press box when Vinnie Keane steps to the plate for the last time
 - Fruitvale BART platform at 7:15am on a CBA vote day
+
+---
+
+## Where This Sits
+
+Runs within the current cycle, typically after `/write-edition` and `/post-publish` are complete. Dispatches extend coverage — same world, one scene. Can run multiple times per cycle.
+
+Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → `/write-edition` → `/post-publish` → `/edition-print` → then supplementals, dispatches, podcasts as needed

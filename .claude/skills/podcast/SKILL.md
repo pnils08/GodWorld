@@ -134,16 +134,14 @@ node scripts/renderPodcast.js {cycle} {format}
 
 ## Step 5.5: Ingest to bay-tribune
 
-The podcast is canon — citizen voices reacting to the edition. Ingest it so future sessions searching bay-tribune find what the hosts said, not just what the reporters wrote.
-
-**Note:** `ingestEdition.js` detects cycle numbers from filenames. The transcript filename `c90_transcript.txt` doesn't match the expected pattern. Copy with a detectable name before ingesting:
+The podcast is canon — citizen voices reacting to the edition. Post-publish has already run by this point, so podcast handles its own ingest.
 
 ```bash
 cp output/podcasts/c{XX}_transcript.txt /tmp/podcast_edition_{XX}.txt
 node scripts/ingestEdition.js /tmp/podcast_edition_{XX}.txt
 ```
 
-**Known issue:** The ingest script titles it "Cycle Pulse Edition {XX}" which doesn't distinguish it from the edition text. Future fix: add podcast-aware titling so searches can tell edition text from podcast transcript.
+**Known issue:** `ingestEdition.js` filename pattern expects edition format. Copy with detectable name as workaround. Future: podcast-aware ingest path so searches distinguish edition text from podcast transcript.
 
 ## Step 6: Report
 

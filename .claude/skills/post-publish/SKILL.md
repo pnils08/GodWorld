@@ -45,8 +45,7 @@ node scripts/ingestEdition.js editions/cycle_pulse_edition_{XX}.txt
 ```
 Full edition text chunked to bay-tribune. Wiki records rank higher for entity searches. Edition chunks are backup for full-text queries. Log doc IDs.
 
-**1c. Podcast transcript (when produced)**
-If `/podcast` ran this cycle, ingest transcript to bay-tribune. Pure in-world content.
+**Note:** Podcast runs AFTER post-publish as a separate creative process. Podcast handles its own bay-tribune ingest.
 
 ### Step 2: World-Data Updates — City State
 

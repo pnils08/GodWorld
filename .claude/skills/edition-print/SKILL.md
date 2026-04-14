@@ -21,8 +21,14 @@ Runs in its own terminal. Does not touch the edition text.
 
 ## Prerequisites
 - Edition published at `editions/cycle_pulse_edition_{XX}.txt`
-- Edition uploaded to Drive and ingested to Supermemory (write-edition Step 8)
+- Edition uploaded to Drive (`/write-edition` Step 6)
 - Media production log exists: `output/production_log_edition_c{XX}.md`
+
+## Where This Sits
+
+Runs after `/write-edition`. Parallel with `/post-publish`. Both can run independently — edition-print produces visual assets, post-publish handles ingest and feedback.
+
+Full chain: ... → `/write-edition` → `/edition-print` + `/post-publish`
 
 ## Step 0: Production Log
 
@@ -77,19 +83,26 @@ node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_{XX}.txt
 
 Generates tabloid-format PDF. Output to `output/pdfs/bay_tribune_e{XX}.pdf`.
 
-## Step 4: Upload
+## Step 4: Upload to Drive
 
 ```bash
 node scripts/saveToDrive.js output/pdfs/bay_tribune_e{XX}.pdf edition
 ```
 
-Uploads PDF to Drive edition folder.
+Uploads PDF to Drive edition folder. Photos also upload if Drive destination configured.
 
-## Step 5: Verify
+## Step 5: Dashboard Update
+
+The dashboard uses the PDF for its UI. Update the dashboard with the new edition:
+- PDF available at `output/pdfs/bay_tribune_e{XX}.pdf` for dashboard to serve
+- Edition card reflects current cycle
+
+## Step 6: Verify
 
 Check all outputs exist:
 - `output/photos/e{XX}/` — photos generated
 - `output/pdfs/bay_tribune_e{XX}.pdf` — PDF generated
 - Drive upload confirmed
+- Dashboard reflects current edition
 
 Done. Print pipeline complete.

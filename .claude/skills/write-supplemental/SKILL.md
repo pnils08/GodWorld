@@ -43,7 +43,8 @@ The Cycle Pulse is the engine's newspaper — it reports what the simulation pro
 - Get user approval before proceeding to agent launch
 - One story, many angles — or one story, one angle. Size fits the topic.
 - Rotate reporters. Check who's been used recently and who hasn't.
-- **Every citizen name gets verified.** Ledger, truesource, bay-tribune, world-data. No exceptions.
+- **Every citizen name gets verified via MCP.** `lookup_citizen(name)` for profile + canon. `search_canon(name)` for what's been published. No exceptions.
+- **Read criteria files.** `docs/media/story_evaluation.md` for story quality, `docs/media/brief_template.md` for brief structure, `docs/media/citizen_selection.md` for citizen handling. Same standards as sift — supplementals are editions too.
 - **No calendar dates.** Cycles only.
 - **World summary is your context.** Read `output/world_summary_c{XX}.md` for cycle texture — food, nightlife, famous people, weather, events.
 - **Photos, PDF, print — that's `/edition-print`.** Not part of this skill.
@@ -417,24 +418,14 @@ After user approval:
    node scripts/ingestEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
    ```
 
-## Step 4.1: Update Edition Brief
+## Step 4.1: Refresh Live Services
 
-**Photos, PDF, print layout — run `/edition-print` in a separate terminal after publishing.**
-
-**Read** existing `output/latest_edition_brief.md` first — don't overwrite.
-
-**Append** a new section:
-```
-### Supplemental: {Topic} ({Reporter(s)})
-- [Key facts, named citizens, new canon from this supplemental]
-```
-
-## Step 4.2: Refresh Live Services
+Photos, PDF, print layout — run `/edition-print` in a separate terminal after publishing.
 
 ```bash
-echo '{"savedAt":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","history":[]}' > logs/discord-conversation-history.json
-pm2 reload mags-discord-bot
+pm2 restart mags-bot
 ```
+Discord Mags picks up updated production log and Supermemory canon.
 
 ## Step 4.5: Update Newsroom Memory
 
@@ -443,43 +434,39 @@ Update `docs/mags-corliss/NEWSROOM_MEMORY.md`:
 - Character continuity
 - Coverage notes for future editions
 
-## Step 5: Intake
+## Step 5: Post-Supplemental Ingest
 
-Every supplemental creates canon. Intake sends it to the engine ledgers.
+Supplementals handle their own ingest — a lighter version of `/post-publish` with only the steps that apply.
 
-```bash
-# 1. Dry run — verify what gets parsed
-node -r dotenv/config scripts/editionIntake.js --dry-run editions/supplemental_{topic_slug}_c{XX}.txt {cycle}
-
-# 2. Live write to final sheets (no staging step)
-node -r dotenv/config scripts/editionIntake.js editions/supplemental_{topic_slug}_c{XX}.txt {cycle}
-```
-
-**Note:** `editionIntake.js` doesn't load dotenv — always use `node -r dotenv/config` prefix.
-
-Intake v2.1 writes directly: new citizens + existing → Citizen_Usage_Intake, storylines → Storyline_Tracker, businesses → Storyline_Intake.
-
-If new businesses were established, promote them:
-```bash
-node -r dotenv/config scripts/processBusinessIntake.js --dry-run
-```
-
-Then run enrichment to write edition quotes/appearances to LifeHistory:
-```bash
-node -r dotenv/config scripts/enrichCitizenProfiles.js --edition {cycle}
-```
-
-**Rate coverage for engine feedback:**
-```bash
-node scripts/rateEditionCoverage.js editions/supplemental_{topic_slug}_c{XX}.txt --apply
-```
-Generates per-domain ratings (-5 to +5) from the supplemental. The engine reads these next cycle — the city reacts to what the newspaper published, including supplementals. A civic deep dive affects CIVIC domain. A food piece affects CULTURE. Every published piece feeds back.
-
-**Wiki ingest:**
+**5a. Wiki ingest (PRIMARY)**
 ```bash
 node scripts/ingestEditionWiki.js editions/supplemental_{topic_slug}_c{XX}.txt --apply
 ```
-Extracts per-citizen, per-storyline records into bay-tribune. Entity-level knowledge that compounds across editions.
+Per-entity records to bay-tribune. Log entity count.
+
+**5b. Edition text ingest (BACKUP)**
+```bash
+node scripts/ingestEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
+```
+Full text to bay-tribune. Log doc IDs.
+
+**5c. Coverage ratings**
+```bash
+node scripts/rateEditionCoverage.js editions/supplemental_{topic_slug}_c{XX}.txt --apply
+```
+Per-domain ratings to sheet. A food piece affects CULTURE. A civic deep dive affects CIVIC. Every published piece feeds back.
+
+**5d. Citizen cards refresh**
+```bash
+node scripts/buildCitizenCards.js
+```
+Citizens who appeared get updated profiles in world-data.
+
+**5e. Citizen + business intake to sheets (NOT WIRED — needs engine session)**
+New citizens and businesses from the supplemental need direct sheet writes to Simulation_Ledger and Business sheet. Same gap as post-publish Step 5.
+
+**5f. Update newsroom memory**
+Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with new canon established, character continuity, coverage notes.
 
 ---
 
@@ -490,4 +477,12 @@ Extracts per-citizen, per-storyline records into bay-tribune. Entity-level knowl
 | `editions/SUPPLEMENTAL_TEMPLATE.md` | Formatting conventions |
 | `output/supplemental-briefs/` | Topic briefs per supplemental |
 | `editions/supplemental_*.txt` | Published supplementals |
+
+## Where This Sits
+
+Runs after `/write-edition` and `/post-publish` are complete. Supplementals extend coverage of the current cycle — same world, different angle. Can run multiple times per cycle.
+
+The full 24-reporter roster is available (voice files at `docs/media/voices/`). Supplementals develop the bench — default to reporters with fewer edition appearances.
+
+Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → `/write-edition` → `/post-publish` → `/edition-print` → then supplementals, dispatches, podcasts as needed
 | `editions/special_edition_*.txt` | Non-cycle-tied specials |

@@ -13,10 +13,13 @@ Citizens are persistent people with canon histories. They have jobs, neighborhoo
 ## How to Find Citizens
 
 1. **MCP first** — `lookup_citizen(name)` returns profile + canon history from world-data and bay-tribune
-2. **Sheets API backup** — service account reads Simulation_Ledger directly. Gender column now exists on the ledger.
-3. **Canon search** — `search_canon(name)` finds what the Tribune has published about them
+2. **A's players — use `get_roster("as")`** — reads truesource for player-specific data: contracts, quirks, positions, birth years, stats. `lookup_citizen` doesn't return roster-level detail. Use get_roster for any A's player (GAME-mode citizen), lookup_citizen for everyone else.
+3. **Sheets API backup** — service account reads Simulation_Ledger directly. Gender column now exists on the ledger.
+4. **Canon search** — `search_canon(name)` finds what the Tribune has published about them
 
 Searching 20-30 citizens per edition is normal. Don't ration lookups.
+
+**Rule:** For any sports story involving A's players, `get_roster("as")` is mandatory. This applies to sift, write-edition, write-supplemental, dispatch, interview — any skill touching sports citizens.
 
 ## What's Canon vs What's Agent Color
 

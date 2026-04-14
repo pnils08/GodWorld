@@ -43,7 +43,7 @@ The Cycle Pulse is the engine's newspaper — it reports what the simulation pro
 - Get user approval before proceeding to agent launch
 - One story, many angles — or one story, one angle. Size fits the topic.
 - Rotate reporters. Check who's been used recently and who hasn't.
-- **Every citizen name gets verified via MCP.** `lookup_citizen(name)` for profile + canon. `search_canon(name)` for what's been published. No exceptions.
+- **Every name gets verified via MCP.** `lookup_citizen(name)` for citizens. `get_roster("as")` for A's players (contracts, quirks, positions — reads truesource). `search_canon(name)` for what's been published. No exceptions.
 - **Read criteria files.** `docs/media/story_evaluation.md` for story quality, `docs/media/brief_template.md` for brief structure, `docs/media/citizen_selection.md` for citizen handling. Same standards as sift — supplementals are editions too.
 - **No calendar dates.** Cycles only.
 - **World summary is your context.** Read `output/world_summary_c{XX}.md` for cycle texture — food, nightlife, famous people, weather, events.
@@ -196,11 +196,10 @@ output/supplemental-briefs/{topic_slug}_c{XX}_brief.md
 ### Brief sources (check in order):
 1. User-provided content
 2. World summary — `output/world_summary_c{XX}.md` — cycle texture, events, food, nightlife, famous people
-3. Bay-tribune Supermemory — `npx supermemory search "TOPIC" --tag bay-tribune` — canon history
-4. World-data Supermemory — `npx supermemory search "TOPIC" --tag world-data` — citizen state
-5. Simulation_Ledger — query via service account for citizens by neighborhood
-6. Truesource — `output/desk-packets/truesource_reference.json` — player data
-7. NEWSROOM_MEMORY.md — errata, character continuity
+3. Bay-tribune canon — `search_canon("TOPIC")` via MCP — published history
+4. World-data citizens — `lookup_citizen(name)` via MCP for each candidate
+5. Simulation_Ledger — direct sheet query via service account for neighborhood-based candidates
+6. NEWSROOM_MEMORY.md — errata, character continuity, active arcs
 
 ### Enhanced data sources (use if available):
 
@@ -213,7 +212,6 @@ All of these are optional. If none exist, the brief works exactly as today. Chec
 | Mara guidance | `output/mara-directives/mara_directive_c{XX}.txt` | Always (if exists) | **MARA GUIDANCE** — forward editorial direction from last audit |
 | Voice statements | `output/civic-voice/{office}_c{XX}.json` | Civic pieces only | **CIVIC VOICE SOURCE MATERIAL** — from city-hall production log |
 | Civic production log | `output/production_log_city_hall_c{XX}.md` | Civic pieces only | **LOCKED CIVIC CANON** — what voices decided |
-| Truesource | `output/desk-packets/truesource_reference.json` | Always (if exists) | **CANON REFERENCE** — verified names/positions/neighborhoods |
 | Grade history | `output/grades/grade_history.json` | Always (if exists) | Reporter grade context in assignments (1-line summary per reporter) |
 
 **Data availability table** — include in the production log which of the 6 sources were found and loaded. Example:
@@ -221,10 +219,9 @@ All of these are optional. If none exist, the brief works exactly as today. Chec
 Enhanced data loaded:
 - Errata: YES (26 entries, 3 relevant to civic)
 - Mara guidance: YES (c87 directive)
-- Cycle data: NO (no c88 packets yet)
 - Voice statements: YES (mayor, chief of staff)
-- Truesource: YES (675 citizens)
 - Grade history: YES (1 edition window)
+- MCP lookups: 14 citizens verified
 ```
 
 ### Key rules for the brief:
@@ -267,8 +264,11 @@ Read your voice file at docs/media/voices/{name}.md — this is your writing ide
 Read the supplemental template at editions/SUPPLEMENTAL_TEMPLATE.md — formatting conventions.
 Read the topic brief at output/supplemental-briefs/{topic_slug}_c{XX}_brief.md — your assignment and canon data.
 
-[If truesource exists:]
-Read output/desk-packets/truesource_reference.json — verify every citizen name, title, and neighborhood against this file before writing.
+Use MCP to verify every name before writing:
+- `lookup_citizen(name)` for citizens — profile, role, neighborhood, canon history
+- `get_roster("as")` for A's players — contracts, quirks, positions, stats from truesource
+
+Every name in the brief has already been verified — spot check if unsure.
 
 [If exemplar exists for this desk:]
 Read output/desks/{desk}/current/exemplar.md — this is an A-grade example from this desk. Study the voice, structure, and sourcing.
@@ -288,7 +288,7 @@ RULES:
 - Stay in voice. Read the voice file carefully.
 - Use ONLY canon names from the topic brief. Never invent citizens unless authorized.
 - No engine metrics in article text.
-- Verify all citizen names against truesource before using them.
+- Verify all citizen names via MCP lookup_citizen before using them.
 - Include a Names Index after each article.
 - End with an Article Table entry for each article you wrote.
 
@@ -349,7 +349,7 @@ After agents return, Mags compiles:
    - Cross-references to past coverage where relevant
    - 1-2 photo credits
    - Opinion pieces marked `[OPINION]`
-   - **Name verification** — check every quoted citizen against `output/desk-packets/truesource_reference.json` and `output/desk-packets/base_context.json`. Flag any name not in canon sources or not authorized as new in the Citizen Usage Log.
+   - **Name verification** — every quoted citizen should match the brief's verified list. Spot check via MCP `lookup_citizen` if unsure. Flag any name not in canon sources or not authorized as new in the Citizen Usage Log.
 4. **Merge intake sections:**
    - Article Table
    - Storylines Updated (new canon established)
@@ -362,7 +362,7 @@ Show the compiled supplemental to the user.
 ## Step 3.5: Validation
 
 **Always (all supplemental types):**
-- Manual name check against `output/desk-packets/truesource_reference.json` — every quoted citizen must exist in canon or be authorized as new in the Citizen Usage Log.
+- Name verification — every quoted citizen must match the brief's verified list (MCP `lookup_citizen`) or be authorized as new in the Citizen Usage Log.
 
 **If civic content:**
 ```bash
@@ -399,7 +399,7 @@ Ready to publish? (yes / hold for edits)
 
 ---
 
-## Step 4: Save & Upload
+## Step 4: Save & Upload to Drive
 
 After user approval:
 
@@ -413,26 +413,7 @@ After user approval:
    node scripts/saveToDrive.js editions/supplemental_{topic_slug}_c{XX}.txt supplement
    ```
 
-3. **Ingest into Supermemory:**
-   ```bash
-   node scripts/ingestEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
-   ```
-
-## Step 4.1: Refresh Live Services
-
-Photos, PDF, print layout — run `/edition-print` in a separate terminal after publishing.
-
-```bash
-pm2 restart mags-bot
-```
-Discord Mags picks up updated production log and Supermemory canon.
-
-## Step 4.5: Update Newsroom Memory
-
-Update `docs/mags-corliss/NEWSROOM_MEMORY.md`:
-- New canon established
-- Character continuity
-- Coverage notes for future editions
+Supermemory ingest happens in Step 5 with all other post-supplemental work.
 
 ## Step 5: Post-Supplemental Ingest
 
@@ -468,6 +449,15 @@ New citizens and businesses from the supplemental need direct sheet writes to Si
 **5f. Update newsroom memory**
 Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with new canon established, character continuity, coverage notes.
 
+**5g. Refresh Discord bot**
+```bash
+pm2 restart mags-bot
+```
+Discord Mags picks up updated production log and Supermemory canon.
+
+**5h. Print pipeline**
+Photos, PDF, print layout — run `/edition-print` in a separate terminal.
+
 ---
 
 ## File Locations
@@ -485,4 +475,3 @@ Runs after `/write-edition` and `/post-publish` are complete. Supplementals exte
 The full 24-reporter roster is available (voice files at `docs/media/voices/`). Supplementals develop the bench — default to reporters with fewer edition appearances.
 
 Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → `/write-edition` → `/post-publish` → `/edition-print` → then supplementals, dispatches, podcasts as needed
-| `editions/special_edition_*.txt` | Non-cycle-tied specials |

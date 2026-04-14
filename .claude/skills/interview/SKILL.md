@@ -52,6 +52,7 @@ No length target. The conversation shapes itself. Mike decides when it ends.
 - **Subjects don't get preset answers.** Voice agents respond from their identity and recent canon. Mike responds in character.
 - **Off-script is allowed.** The subject can refuse a question, pivot, reveal something unprompted. That's where canon is made.
 - **Citizen verification via MCP.** Anyone named in the interview checked via `lookup_citizen` (citizens) or `get_roster("as")` (A's players). Read `docs/media/citizen_selection.md`.
+- **Follow brief template for the article.** `docs/media/brief_template.md` — interview articles are structured differently than standard briefs but citizen handling and canon rules apply.
 - **No calendar dates.** Cycles and natural time references only.
 - **Transcript saved incrementally during Paulson mode.** If interrupted, nothing's lost.
 - **User approval gate before publishing.** Mike reviews the article before it goes to canon.
@@ -125,24 +126,34 @@ Write 4-6 scripted questions grounded in canon. Save to `output/interviews/c{XX}
 
 ### Mode 1: Voice Interview
 
-Launch both agents. Structure:
-1. Reporter reads IDENTITY.md + brief
-2. Voice reads their IDENTITY.md + recent decisions (no preset answers)
-3. Reporter asks Q1, voice responds
-4. Reporter follows up or moves to Q2
-5. Continue until questions exhausted or conversation has natural ending
-6. Transcript saved to `output/interviews/c{XX}_{subject_slug}_transcript.md`
+Mags mediates — she is the reporter's brain between exchanges. Sequential turns, one agent call per exchange.
+
+1. Read the interview brief and reporter IDENTITY.md
+2. Ask Q1 — write it in the reporter's voice, append to transcript file
+3. Launch voice agent with just: their IDENTITY.md + the brief theme + the current transcript up to Q1
+4. Voice responds. Append their answer to the transcript.
+5. Read the answer. Decide: follow up or move to Q2?
+   - If the answer opened a thread worth pulling, write a follow-up
+   - If it was deflective or complete, move to next scripted question
+6. Repeat until questions exhausted or conversation has natural ending
+7. Final transcript at `output/interviews/c{XX}_{subject_slug}_transcript.md`
+
+**Note:** True autonomous agent-to-agent interviews (both agents passing a transcript back and forth without Mags mediating) is a future build. For now Mags controls the pacing and follow-ups.
+
+**Voice agents can go off-script** — they read their identity and recent canon but get no preset answers. They can refuse a question, pivot, reveal something unprompted. Capture everything they say.
 
 ### Mode 2: Paulson Interview
 
-Launch reporter agent in conversation mode. Mike responds as Paulson in terminal or Discord.
+Runs in terminal. Mike responds as Paulson. (Discord bot interview mode is future work.)
 
+- Launch reporter agent with their IDENTITY.md + brief
 - Reporter asks Q1
-- Mike responds as Paulson
-- Reporter follows up or moves to next scripted question
+- Mike responds in character as Paulson
+- Mags captures the exchange to transcript
+- Reporter reads the answer and follows up or moves to next scripted question
 - Incremental save after each exchange to `output/interviews/c{XX}_paulson_{slug}_transcript.md`
 - Mike ends when natural
-- Reporter doesn't know Mike is Mike
+- Reporter doesn't know Mike is Mike — they're interviewing GM Paulson
 
 ## Step 4: Write the Article
 
@@ -156,18 +167,33 @@ Save to `output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md`
 
 Target: 800-1200 words (Voice mode). Mike-determined for Paulson mode.
 
-## Step 5: User Review Gate
+## Step 5: Mara Audit (Paulson mode, optional for Voice)
+
+**Paulson interviews always go to Mara** — they establish heavy canon (trades, org decisions, dynasty moves). Mara catches continuity issues before publication.
+
+**Voice interviews go to Mara when** they establish initiative state changes, council positions, faction dynamics, or legal framework.
+
+Upload article + transcript to Drive for Mara:
+```bash
+node scripts/saveToDrive.js output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md mara
+node scripts/saveToDrive.js output/interviews/c{XX}_{subject_slug}_transcript.md mara
+```
+
+Mara reads both, returns corrections via Mike.
+
+## Step 6: User Review Gate
 
 **STOP. Nothing gets published until Mike approves.**
 
 Show:
-- Transcript
+- Transcript (full — everything said is canon)
 - Published article
 - Canon established: [list new facts, decisions, revelations]
+- Mara corrections (if applicable)
 
-Mike approves or adjusts. For Paulson interviews, this is where Mike locks what becomes canon — some things said may be kept private, not published.
+Mike approves or adjusts. **If Mike spoke it to a reporter, it's canon.** No public/private split — the full transcript goes to bay-tribune. The article is the polished frame; the transcript is the record.
 
-## Step 6: Save + Upload
+## Step 7: Save + Upload
 
 1. **Transcript:** `output/interviews/c{XX}_{subject_slug}_transcript.md`
 2. **Article:** `output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md`
@@ -177,7 +203,7 @@ Mike approves or adjusts. For Paulson interviews, this is where Mike locks what 
    ```
    Drive destination: https://drive.google.com/drive/folders/1aK9wOSBmglS5YdgnwdQMic1q4PF_pEji
 
-## Step 7: Post-Interview Ingest
+## Step 8: Post-Interview Ingest
 
 Same lighter pattern as dispatch and supplemental.
 
@@ -208,8 +234,31 @@ node scripts/buildCitizenCards.js
 - Active arcs — what opened, closed, shifted
 - Coverage notes — this interview may carry into next cycle's sift
 
-**7g. Update production log**
-Add to the interview section: transcript path, article path, canon established, Drive link. Key details carry forward for next cycle.
+**7g. Update production log with tagged Supermemory doc IDs**
+
+Add to the interview section in the production log:
+
+```markdown
+## Interview: {subject} ({mode}) — COMPLETE
+- Reporter: {name}
+- Theme: {one-line}
+- Transcript: output/interviews/c{XX}_{subject_slug}_transcript.md
+- Article: output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md
+- Drive: {file ID}
+- Article ingested to bay-tribune: {doc ID}
+- Transcript ingested to bay-tribune: {doc ID}
+- Wiki entities: {count}
+
+### Canon Established
+- {key fact 1}
+- {key fact 2}
+- {key fact 3}
+
+### Carries Forward
+- {what next cycle's sift should track}
+```
+
+Inline doc IDs mean next cycle can query details directly via Supermemory without re-reading files. One API call, exact retrieval.
 
 **7h. Refresh Discord bot**
 ```bash

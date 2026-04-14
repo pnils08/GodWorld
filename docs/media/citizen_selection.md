@@ -102,3 +102,11 @@ After each edition:
 2. Did freshness balance work? Too many returning characters? Too many unknowns?
 3. Did any reporter invent details that contradicted canon? What was the source of the error?
 4. Update this file with findings.
+
+---
+
+## Changelog
+
+_Updated by `/post-publish` Step 10 after each edition. What changed and why._
+
+- S144: starter version created. Name collision warning added. No cycle data yet.

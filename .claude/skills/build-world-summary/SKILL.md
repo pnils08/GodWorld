@@ -42,10 +42,7 @@ Follow the C91 template at `output/world_summary_c91.md`. Sections:
 
 Write to `output/world_summary_c{XX}.md`
 
-Then ingest to world-data Supermemory:
-```bash
-npx supermemory add "$(cat output/world_summary_c{XX}.md)" --tag world-data --metadata '{"type": "cycle_summary", "cycle": {XX}}'
-```
+Supermemory ingest happens in `/post-publish`, not here. This skill produces the file. Post-publish canonizes it.
 
 ## What This Skill Does NOT Do
 

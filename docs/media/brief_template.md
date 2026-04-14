@@ -78,3 +78,11 @@ After each edition:
 2. Which briefs produced weak articles? What was missing?
 3. Did any reporter drift from the brief? Why — was the brief unclear or did the reporter ignore it?
 4. Update this file with findings. The next sift reads the updated version.
+
+---
+
+## Changelog
+
+_Updated by `/post-publish` Step 10 after each edition. What changed and why._
+
+- S144: starter version created. No cycle data yet.

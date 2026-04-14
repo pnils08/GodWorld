@@ -45,6 +45,25 @@ Front page was simulation only — home run moment, fan experience. Missed the T
 
 ---
 
+## Front Page Scoring
+
+The front page lead is the story with the most editorial weight this cycle. Score each proposal:
+
+| Factor | Points | What it measures |
+|--------|--------|-----------------|
+| Three-layer coverage | 0-3 | How many layers does it thread (engine + simulation + user actions) |
+| Arc momentum | 0-2 | Is this a continuing arc with movement, or a standalone? Arcs with history score higher. |
+| Severity / stakes | 0-2 | What's at risk? High severity engine ailment or major civic decision scores higher than texture. |
+| Freshness | 0-1 | Was this the front page last edition? If yes, 0. If new lead, 1. |
+| Cross-source connection | 0-1 | Does this story connect threads from different sources (world + civic, sports + civic)? |
+| Citizen impact | 0-1 | Are named citizens feeling this? A faceless policy story scores 0. |
+
+**Max score: 10.** Highest-scoring story is the recommended front page. Present the recommendation. Mike can override.
+
+This scoring is a starter. Update after each cycle based on what actually produced the strongest lead.
+
+---
+
 ## How to Present Proposals
 
 For each story proposed, include:

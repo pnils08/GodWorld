@@ -84,13 +84,46 @@ Threads: [count] | New: [count] | Continuing arcs: [count] | Gaps: [count]
 
 **Cross-source connections matter.** A world thread can add context to a civic arc (season change affects construction timeline). A civic thread can add pressure to a sports arc (stadium deal shifts during a farewell season). A newsroom memory gap can elevate a world thread nobody was covering. When presenting threads, mark connections between them — these cross-source intersections are often the strongest stories.
 
-### Step 2: Propose Stories
+### Step 2: Questions + Story Proposals
 
-Read `docs/media/story_evaluation.md` FIRST. It defines what makes a story worth proposing, how to prioritize signals, the three-layer test, and what weak stories look like. That file evolves after each cycle — it's how the sift gets better over time.
+Read `docs/media/story_evaluation.md` FIRST. It defines what makes a story worth proposing, how to prioritize, the three-layer test, front page scoring, and what weak stories look like. That file evolves after each cycle.
 
-Follow the evaluation criteria to propose stories. Present each proposal in the format specified in that file (story, signal, reporter, citizens, layers, priority).
+**Two modes, presented together:**
 
-Present 6-10 proposals as a menu. Mike picks, redirects, combines, or cuts.
+**Mode A — Questions (engine-driven threads).** For threads with clear engine data — stuck initiatives, recurring ailments, civic decisions with options. Ask the player what they want to do. The answer drives the story angle.
+
+**Mode B — Story Proposals (sports, texture, culture threads).** For threads where the story is already clear from the data. Propose the angle directly.
+
+As the criteria files train over more cycles, more threads shift from proposals to questions.
+
+```
+SIFT — Cycle {XX}
+=============================
+
+QUESTIONS (your answers shape the stories):
+
+[Q1] OARI has been in pilot for 6 cycles. Push for full deployment or keep evaluating?
+     Thread: C2 | Signal: stuck initiative | Affects: D1, D3, D5
+
+[Q2] Temescal health has declined 4 straight cycles. Advance the Health Center or let pressure build?
+     Thread: W3 | Signal: recurring engine ailment | Affects: Temescal
+
+[Q3] ...
+
+STORY PROPOSALS:
+
+⭐ RECOMMENDED FRONT PAGE: [proposal #]
+
+[S1] A's 15-1 — Horn historic pace + Mesa rotation test | SPORTS | Reporter: Anthony | Priority: HIGH
+[S2] Westside Cafe anniversary — Richards off-day texture | CITY LIFE | Reporter: Maria | Priority: MED
+[S3] ...
+
+LETTERS: reacts to edition (always runs last)
+```
+
+**Section tags:** SPORTS, CIVIC AFFAIRS, CITY LIFE, BUSINESS, FEATURES, HEALTH, ACCOUNTABILITY, OPINION, LETTERS
+
+**Mike responds:** answers to questions + picks from proposals. "Q1: push deployment. Q2: advance it. S1 yes, S2 yes, cut S3, front page should be S1." Simple — no technical decisions.
 
 ### Step 3: Assign Reporters
 

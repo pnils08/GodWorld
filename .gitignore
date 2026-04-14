@@ -41,3 +41,5 @@ data/audio/
 # Graphify output (generated knowledge graph artifacts, regenerated on demand)
 graphify-out/
 **/graphify-out/
+output/audit-reports/
+output/audit-state.json

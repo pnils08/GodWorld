@@ -73,6 +73,12 @@
             "command": "node /root/GodWorld/scripts/session-eval.js",
             "timeout": 15,
             "async": true
+          },
+          {
+            "type": "command",
+            "command": "bash /root/GodWorld/scripts/session-end-audit.sh",
+            "timeout": 10,
+            "async": true
           }
         ]
       }

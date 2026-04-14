@@ -13,6 +13,12 @@ The edition is published but not canonized and not fed back to the engine. This 
 
 Everything this skill does makes the next cycle smarter than the last one.
 
+**This is the most important skill in the chain.** If post-publish doesn't run correctly, the next cycle runs blind — no canon to search, no ratings for the engine, no grading feedback, no criteria improvements. Every other skill depends on what this skill produces.
+
+These steps are base concepts. Each edition will likely expose new gaps — a new ingest need, a feedback source we didn't account for, a step that needs splitting or combining. Evaluate this skill after every cycle and update it. It's not done — it's compounding.
+
+Currently this is a teamwork skill — Mags and Mike walk through it together. As steps prove reliable, they automate one at a time. The goal is that this entire skill runs without intervention, but that's earned through cycles of verified correctness, not assumed.
+
 ## Prerequisites
 
 Verify these exist before starting:
@@ -148,7 +154,12 @@ This is how the next session knows what was learned and when. The criteria compo
 ```bash
 node scripts/postRunFiling.js {XX}
 ```
-Write `output/latest_edition_brief.md`. Restart Discord bot: `pm2 restart mags-bot`.
+Verify all pipeline outputs exist and names are correct.
+
+```bash
+pm2 restart mags-bot
+```
+Discord Mags picks up updated production log and Supermemory canon. No separate edition brief needed — she reads the production log and searches bay-tribune directly.
 
 ### Step 12: Finalize Production Log
 
@@ -160,6 +171,7 @@ Update production log with all post-publish steps completed. Log is done.
 - [ ] Edition text ingested (doc IDs)
 - [ ] Citizen cards refreshed in world-data
 - [ ] World summary ingested to world-data (doc ID)
+- [ ] Civic wiki ingested (NOT BUILT — skip until script exists)
 - [ ] Coverage ratings written to sheet
 - [ ] Edition graded
 - [ ] Grade history updated
@@ -167,7 +179,6 @@ Update production log with all post-publish steps completed. Log is done.
 - [ ] Newsroom memory updated
 - [ ] Criteria files updated
 - [ ] Filing check passed
-- [ ] Latest edition brief written
 - [ ] Discord bot restarted
 - [ ] Production log finalized
 

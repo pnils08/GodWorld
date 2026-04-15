@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-14 | Engine: v3.3 | Cycle: 91 | Session: 145
+Last Updated: 2026-04-14 | Engine: v3.3 | Cycle: 91 | Session: 146
 
 ---
 
@@ -45,6 +45,20 @@ Spine summary: 41.1+41.2 → 38.1 → 38.7/8 → 39.1 → 38.2-4 → 39.2-7 → 
 ---
 
 ## Recent Sessions
+
+### Session 145 (2026-04-14) — Library Day: 7 papers mined, 10-step spine locked [research-build]
+
+- **7 research papers ingested** to `docs/research/papers/` with Drive IDs embedded inline in every rollout reference — Anthropic AAR blog + technical (paper1/2), Managed Agents + Trustworthy Agents (paper3/4), Nieman Reports "Automation in the Newsroom" (paper5), Hassid 23 token-hygiene habits (paper6), Fulton "Agent Skills" (paper7).
+- **3 repos mined:** Karpathy skills (goal-driven execution), Hermes Agent (memory-context fencing + prompt-injection regex lifted into Phase 40.6), Sandcastle 0.4.5 (Docker blocker removed — Vercel + Daytona cloud sandboxes unblock Phase 33.13).
+- **Phase 39 expanded:** 39.8 reward-hacking scans + OOD criteria, 39.9 tiered review (AP 80/220/rest model), 39.10 adversarial review skill.
+- **Phase 38 expanded:** 38.7 anomaly-detection gate (Netflix-bug protection), 38.8 baseline brief auto-generation (Division III coverage mechanism).
+- **Phase 40 added:** Agent Architecture Hardening (6 items) from Managed Agents + Trustworthy Agents papers.
+- **Phase 41 added:** GodWorld as LLM-Wiki (5 items) formalizing the wiki-not-recall principle.
+- **Division III principle** saved to memory — strategic reframe: invisible-citizen depth is the product, coverage gaps are the frontier.
+- **Wiki-not-recall principle** saved to memory with 5 pointer-rot warnings.
+- **Sonnet 4 retirement:** 4 scripts swapped from `claude-sonnet-4-20250514` → `claude-sonnet-4-6` ahead of June 15 2026 deprecation.
+- **Ten-step spine locked** in Active Build Plan: 41.1/2 → 38.1 → 38.7/8 → 39.1 → 38.2-4 → 39.2-7 → 39.9/8/10 → 38.5-6 → 40.6/1 → Sandcastle eval. Next session opens on Phase 41.1 + 41.2 (SCHEMA.md + index.md).
+- **13 commits pushed.**
 
 ### Session 144 (2026-04-12→2026-04-14) — Pipeline Broken Apart + Phase 39 Queued [chat]
 

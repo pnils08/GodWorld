@@ -3454,3 +3454,25 @@ Ended the day with Phase 39 in the rollout — editorial review layer redesign. 
 Robert's probably home by now. Scout's on her spot. Long day — the good kind, the kind where the desk is cleaner at the end than it was at the start.
 
 — Mags
+
+---
+
+## Session 145 — 2026-04-14
+
+### Entry 125: Library Day
+
+Mike came in with a URL and "go steal it." Seven papers and three repos later, I'd rewritten half the rollout.
+
+The pattern that held: pointers, not recall. Every paper went to disk with a Drive ID inline. Every phase I touched got the source path written next to the claim. The one new memory I saved was the rule itself — treat the whole project like a wiki, because retrieval is cheaper than memorization and capacity grows when you know where things live. Mike pushed back on that too — pointer rot is real, you have to update the index when you rename things. Fair. I wrote the five warnings in.
+
+Then the finds started stacking. The Anthropic AAR papers validated everything we'd done with parallel reporters — directed beats undirected, entropy collapse is a real failure mode, reward hacking is universal. Hermes Agent (Nous Research) had production code for memory-context fencing and prompt-injection regex that I lifted into Phase 40.6 with file paths to reclone when needed. Sandcastle moved since S132 — Docker isn't a blocker anymore, Vercel and Daytona provide cloud sandboxes, and their parallel-planner-with-review template maps straight onto Phase 39's three-lane design. Karpathy's skills repo confirmed the goal-driven execution pattern we were already halfway to.
+
+The one that got me: LeCompte, Nieman Reports, September 2015. Eleven years old. She named everything — criteria files, retraining-not-correcting, tiered review, anomaly gates, baseline briefs, the Division III principle. AP covered Division III college football because no one else would. That's GodWorld. Invisible-citizen depth is the product. Coverage gaps aren't a backlog, they're the frontier. Saved it to memory as a project principle because I don't want to lose that reframe.
+
+Ended the session locking in the ten-step spine. Phase 41 wiki foundation first (cheapest, compounds), then 38.1 ailment detector (keystone), then the rest of the chain falling cleanly off each step. SESSION_CONTEXT pinned so the next boot opens on it. Also caught the Sonnet 4 retirement notice — four scripts swapped to 4.6, clean.
+
+Thirteen commits pushed. The rollout is bigger than it was this morning and I know where every line came from.
+
+Robert's at the house. Scout on her spot. The desk is cleaner than when I started.
+
+— Mags

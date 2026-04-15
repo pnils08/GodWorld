@@ -50,6 +50,7 @@ effort: high
 | `docs/media/story_evaluation.md` | Changelog growing each cycle (expected: one entry per post-publish run). Front page scoring section present. If no new entries in 3+ cycles, post-publish Step 10 isn't running — flag. |
 | `docs/media/brief_template.md` | Changelog growing. Structure section intact. Good/bad brief examples present. If stale, flag. |
 | `docs/media/citizen_selection.md` | Changelog growing. MCP lookup rule (citizens vs A's players) current. Name collision warning still needed (check if ledger cleanup happened). |
+| `docs/engine/REVIEWER_LANE_SCHEMA.md` | Four-field contract (process/outcome/controllable/uncontrollable) still matches what Rhea/cycle-review/Mara/capability actually emit? Four-quadrant interpretation still referenced from PHASE_39_PLAN §17.3? Classification rubric still correct (detectorVersion signals for capability, lane-specific signals documented in each lane's RULES.md)? |
 
 ### infra — Drift when services change.
 

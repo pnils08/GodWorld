@@ -58,6 +58,7 @@ Inside tmux `godworld` session: this is **window 1** (`Ctrl-b 1`).
 |------|---------------|--------------|
 | `docs/engine/ROLLOUT_PLAN.md` | All project work, terminal handoff tags | Every session |
 | `docs/engine/ROLLOUT_ARCHIVE.md` | Completed phase details | Past work reference |
+| `docs/engine/REVIEWER_LANE_SCHEMA.md` | Phase 39.6 contract — four fields every reviewer lane JSON must satisfy | Phase 39.x work |
 
 ### Riley Integration
 

@@ -486,6 +486,8 @@ Add three fields to every lane output JSON (§§13.2, 15.2, 16.3 already include
 - `controllableFailures: string[]`
 - `uncontrollableFailures: string[]`
 
+Full field contract and four-quadrant interpretation live in `docs/engine/REVIEWER_LANE_SCHEMA.md` (Phase 39.6 scaffolding, S147). Every lane adopts that schema when it produces JSON.
+
 Add same fields to the capability reviewer output (§6 of this plan needs a small update — already has `pass/fail` per assertion; add aggregated `process` + `outcome` at the summary level).
 
 Each reporter agent gets a single per-article output sidecar `output/reporter_outputs/{reporter}_c{XX}.json` with the same fields, populated by the reporter at draft time (self-reported process score, outcome judgement comes from reviewers).

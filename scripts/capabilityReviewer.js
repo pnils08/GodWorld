@@ -92,7 +92,21 @@ function loadAssertions() {
   return JSON.parse(fs.readFileSync(ASSERTIONS_PATH, 'utf8'));
 }
 
+// Failures caused by detector loading or runtime errors, or by deferred
+// dependencies (grader key missing, sheet read timeout) are uncontrollable —
+// they reflect environment, not editorial performance. Everything else is
+// controllable: the edition did not meet the assertion and the newsroom can fix it.
+// See docs/engine/REVIEWER_LANE_SCHEMA.md for the full classification rubric.
+const UNCONTROLLABLE_DETECTOR_VERSIONS = new Set(['load-error', 'runtime-error']);
+
+function classifyFailure(result) {
+  if (UNCONTROLLABLE_DETECTOR_VERSIONS.has(result.detectorVersion)) return 'uncontrollable';
+  return 'controllable';
+}
+
 function summarize(results) {
+  const controllableFailures = [];
+  const uncontrollableFailures = [];
   const summary = {
     total: results.length,
     passed: results.filter((r) => r.pass).length,
@@ -100,12 +114,23 @@ function summarize(results) {
     byCategory: {},
     blockingFailures: [],
     advisoryFailures: [],
+    process: 0,
+    outcome: 0,
+    controllableFailures,
+    uncontrollableFailures,
   };
   for (const r of results) {
     summary.byCategory[r.category] = (summary.byCategory[r.category] || 0) + 1;
     if (!r.pass && r.tier === 'blocking') summary.blockingFailures.push(r.id);
     if (!r.pass && r.tier === 'advisory') summary.advisoryFailures.push(r.id);
+    if (!r.pass) {
+      (classifyFailure(r) === 'controllable' ? controllableFailures : uncontrollableFailures).push(r.id);
+    }
   }
+  // Process: fine-grained fraction of assertions passed (0.0–1.0).
+  summary.process = summary.total === 0 ? 0 : Number((summary.passed / summary.total).toFixed(3));
+  // Outcome: binary gate — 1 if no blocking failures, else 0.
+  summary.outcome = summary.blockingFailures.length === 0 ? 1 : 0;
   return summary;
 }
 

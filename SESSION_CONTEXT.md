@@ -6,15 +6,20 @@ Last Updated: 2026-04-15 | Engine: v3.3 | Cycle: 91 | Session: 147
 
 ---
 
-## Next Session Priority (locked end of S146)
+## Next Session Priority (locked end of S147)
 
-**Start here:** Phase 39.2–39.7 three-lane review redesign. Plan written at `docs/engine/PHASE_39_PLAN.md` §§13–20. Build sequence per §20: 39.6 process/outcome scaffolding → 39.2 Rhea narrow → 39.4 cycle-review narrow → 39.5 Mara narrow → 39.7 Final Arbiter agent + script → 39.3 two-pass hallucination (last, depends on Anthropic API key). All research-build owned, no engine code.
+**Start here:** Spine step 7 — Phase 39.8 (reward-hacking scans + OOD criteria validation) + 39.9 (tiered review Tier A/B/C) + 39.10 (adversarial review skill). All three layer on top of the three-lane chain + Final Arbiter that shipped in S147. 39.9 needs 38.7 anomaly flags for priority — confirm those are still flowing before building.
 
-**Replay fixture:** `editions/cycle_pulse_edition_91.txt` + `output/engine_audit_c91.json` + `output/capability_review_c91.json`. Temescal miss is the canonical "did the new layer catch it" check.
+**Replay fixture:** `editions/cycle_pulse_edition_91.txt` + `output/engine_audit_c91.json` + `output/capability_review_c91.json` + `output/rhea_hallucinations_c91.json` + `output/final_arbiter_c91.json`. Temescal miss + Varek hallucination flag are the canonical "did the layer catch it" checks.
 
-**Open question to surface on resume:** Anthropic API key for programmatic Haiku 4.5 grader calls — needed for 39.3 two-pass hallucination + the 2 grader-only assertions in Phase 39.1's `assertions.json.graderOnlyAssertions`.
+**Tools available this session:** Anthropic API key is in `.env` (`ANTHROPIC_API_KEY`). Haiku 4.5 grader calls work — confirmed in S147 via two-pass detector (28.7s, ~$0.02–0.04 per cycle with prompt caching). The two deferred grader-only assertions in 39.1 (`covers-flagged-ailment-if-running-three-plus-cycles`, `not-press-release-framing`) plus the two added in 39.4 (`voice-consistent-with-reporter-roster`, `genre-discipline`) can now be built.
 
-Spine summary: 41.1+41.2 ✅ → 38.1 ✅ → 38.7/8 ✅ → 39.1 ✅ → 38.2-4 ✅ → **39.2-7 NEXT** → 39.9/8/10 → 38.5-6 → 40.6/40.1 → Sandcastle eval.
+Spine summary: 41.1+41.2 ✅ → 38.1 ✅ → 38.7/8 ✅ → 39.1 ✅ → 38.2-4 ✅ → 39.2-7 + 39.3 ✅ → **39.9/8/10 NEXT** → 38.5-6 → 40.6/40.1 → Sandcastle eval.
+
+**S147 new rules to respect:**
+- Every new .md needs an inbound link before work is called done (index + parent spec + TERMINAL.md + doc-audit group). Memory: `feedback_every-new-md-must-have-inbound-link.md`.
+- Citizen ages are `2041 − BirthYear`, always. Never trust `Age` in derived docs. Rule in `.claude/rules/newsroom.md`. Memory: `project_age-2041-anchor-convention.md`.
+- ROLLOUT_PLAN has real structural issues (909 lines, mixed granularity, duplicated content, stale status markers). Candidate refactor phase — not urgent but worth scheduling.
 
 **Wiki layer is live (S146):** [[docs/SCHEMA]] + [[docs/index]] read at boot via CLAUDE.md Step 0.5 and boot SKILL.md Step 1.5. Audit hooks in `/doc-audit` boot group + `/skill-audit` identity-session group catch drift.
 

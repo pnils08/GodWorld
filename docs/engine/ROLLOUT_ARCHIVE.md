@@ -424,3 +424,58 @@ Full edition production chain designed as discrete linked skills with user gates
 ### Wiki Pattern for Supermemory
 
 All skills that produce canon log Supermemory doc IDs inline in their production log entries. Next cycle queries records directly by ID instead of re-parsing files. Applied to: post-publish Step 12, write-edition Step 6, write-supplemental Step 5f.5, dispatch Step 5f, interview Step 7g. Podcast Step 6 already had the pattern.
+
+## S147: Phase 39 Three-Lane Reviewer + Final Arbiter — COMPLETE (spine step 6)
+
+Session 147 (2026-04-15) closed spine step 6 in one go. All six 39.x sub-phases plus supporting infrastructure shipped. Commits: `1cbd9ba`, `1f40562`, `e3bb393`, `023896f`, `c9d2717`, `e4dbb58`, `ecdc6b1`.
+
+### Phase 39.6 — Process/outcome scaffolding
+
+- `scripts/capabilityReviewer.js` summary now emits `process` (fraction passed), `outcome` (1 iff no blocking failures), `controllableFailures`, `uncontrollableFailures` — the four-field reviewer-lane contract.
+- `docs/engine/REVIEWER_LANE_SCHEMA.md` written — 11-section contract every lane JSON must satisfy, including four-quadrant process×outcome interpretation (high/low process × pass/fail outcome = four diagnostic cells). Wiki-registered in `docs/index.md`, PHASE_39_PLAN §17.3, research-build TERMINAL.md, and `/doc-audit` media group.
+- C91 replay: process 0.667, outcome 0, Temescal still blocks (no regression).
+
+### Phase 39.2 — Rhea → Sourcing Lane
+
+- `.claude/agents/rhea-morgan/IDENTITY.md`: Sourcing Lane framing (MIA charter verbatim, weight 0.3). Score moves from /100 to 0.0–1.0.
+- `RULES.md`: 431 → 185 lines. Five checks survive — `citizen-name-verification`, `vote-civic-verification`, `sports-record-verification`, `canon-continuity`, `quote-attribution`. Full JSON output contract per PHASE_39_PLAN §13.2. FULL/FAST modes eliminated. Explicit table maps every dropped check to its new owner.
+- `scripts/rheaJsonReport.js` (new): validates Rhea's JSON, recomputes derived fields authoritatively, auto-merges hallucination sidecar (39.3) if present, emits `.txt` backwards-compat companion.
+
+### Phase 39.4 — cycle-review → Reasoning Lane
+
+- `.claude/skills/cycle-review/SKILL.md` rewritten. Three checks only — `internal-consistency`, `evidence-based-deduction`, `argument-quality`. Weight 0.5 (heaviest lane). JSON output per §15.2. A/B/C/D/F grade eliminated.
+- `.claude/skills/style-pass/SKILL.md` (new): holds orphaned Pass 3.3–3.6 stylistic flags (sentence variety, emotional range, opening/closing quality). On-demand only, not a publication gate.
+- `scripts/capability-reviewer/assertArticleLengthBalance.js` (new): deterministic. 200–1200 word bounds per article + 3× imbalance check between desks.
+- `scripts/capability-reviewer/assertNamesIndexCompleteness.js` (new): deterministic. Paren-aware splitter handles "Name (D1, OPP)" entries.
+- `assertions.json`: 2 new deterministic assertions + 2 grader-only (`voice-consistent-with-reporter-roster`, `genre-discipline`) awaiting Haiku key... which Mike then surfaced as actually present. The two grader-only stay deferred until their modules are written — they weren't strictly required for spine step 6.
+- C91 replay after new assertions: 6/11 pass, process 0.545. Real findings surfaced (long SPORTS/LETTERS sections, missing EDITOR'S DESK names index).
+
+### Phase 39.5 — Mara → Result Validity Lane
+
+- `docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md`: new "Audit Scope" section. Three checks only — `completeness`, `gave-up-detection`, `coverage-breadth`. Weight 0.2. Explicit defer-to-other-lanes list (Rhea/cycle-review/capability). Required structured-top markdown output format per §16.3.
+- `MEDIA_ROOM_INTRODUCTION.md`: SUMMARY reflects narrowed scope.
+- `scripts/maraJsonReport.js` (new): parses Mara's markdown top section into `output/mara_report_c{XX}.json`. Verdict logic: PASS if all three checks PASS, FAIL if any FAIL, REVISE otherwise. Smoke-tested with synthetic C91 audit (verdict FAIL, score 0.7, outcome 0).
+
+### Phase 39.7 — Final Arbiter
+
+- `.claude/agents/final-arbiter/IDENTITY.md` + `RULES.md`: adapts MIA Final Arbiter prompt (MIA p.33 verbatim). Reads four inputs (three lanes + capability gate), computes weighted score 0.5/0.3/0.2, enforces capability gate as hard halt, issues A/B verdict with blame attribution routed through the four-quadrant rule.
+- `scripts/finalArbiter.js` (new): deterministic orchestrator. No LLM call — all judgment encoded in rules. Writes `output/final_arbiter_c{XX}.json` per §18.3. Exit code 1 on HALT.
+- `.claude/skills/write-edition/SKILL.md`: pipeline updated — Step 4 (Rhea Sourcing Lane), Step 4.1 (cycle-review Reasoning Lane), Step 5 (Mara Result Validity Lane, external), **Step 5.5 (Final Arbiter — publication gate)**, Step 6 (Publish, gated by Arbiter recommendation).
+- C91 replay with synthetic lane inputs + real capability JSON: verdict=B, weightedScore=0.799, gate=BLOCK, recommendation=HALT, blame cites Temescal. All 39.7 acceptance criteria from §18.5 met.
+
+### Phase 39.3 — Two-pass hallucination detection (Mike's Anthropic key surfaced mid-session)
+
+- `scripts/rheaTwoPass.js` (new): Microsoft UV §3.4 pattern. Pass A (Haiku 4.5, text-only) extracts checkable claims; Pass B (Haiku 4.5, text + canon) verifies each claim. Divergence → hallucination flag. Prompt caching on canon context amortizes cost.
+- **Two-tier canon context (S147 fix):** Tier 1 AUTHORITATIVE — sheet-derived rows from Simulation_Ledger / Civic_Office_Ledger / Initiative_Tracker / As_Roster with ages computed as `2041 − BirthYear`. Tier 2 DERIVED — world_summary/engine_review/desk-packets, explicitly labeled as lossy. Pass B system prompt tells Haiku to trust Tier 1 over Tier 2 on conflicts.
+- E91 first run: 14 flags, false-positive rate ~45%. After two-tier rewrite: 1 flag, false-positive rate ~2%. Well under the 10% acceptance target from §14.3.
+- **Upstream bug caught:** the "Varek 31" drift chain. `/city-hall-prep` run for C91 wrote "Varek, 31" to `pending_decisions.md` (age guess without the 2041 anchor). Drifted into `production_log_city_hall_c91.md` and `world_summary_c91.md`. Fix: added "citizen ages = `2041 − BirthYear`" rule to `.claude/rules/newsroom.md` (path-scoped, loads for every editorial skill), saved memory `project_age-2041-anchor-convention.md`, fixed drifted local files.
+
+### Rules & memory additions
+
+- `.claude/rules/newsroom.md`: 2041 age anchor rule. Every editorial skill now loads it.
+- Memory: `feedback_every-new-md-must-have-inbound-link.md` — every new .md must be wired into docs/index + parent spec + TERMINAL.md + doc-audit group before work is called done.
+- Memory: `project_age-2041-anchor-convention.md` — the 2041 reference year, why it exists, how detectors apply it.
+
+### Spine step 6 status
+
+**CLOSED.** Five of six sub-phases done with replay tests passing against E91. Next spine step: **39.8 / 39.9 / 39.10** (spine step 7) — reward-hacking scans, tiered review, adversarial review skill.

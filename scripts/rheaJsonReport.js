@@ -166,6 +166,19 @@ function main() {
     process.exit(2);
   }
 
+  // Merge two-pass hallucination sidecar (Phase 39.3) if it exists for this cycle.
+  const cycleForMerge = doc.cycle;
+  const sidecarPath = path.join(OUTPUT_DIR, `rhea_hallucinations_c${cycleForMerge}.json`);
+  if (fs.existsSync(sidecarPath)) {
+    try {
+      const sidecar = JSON.parse(fs.readFileSync(sidecarPath, 'utf8'));
+      const { mergeIntoRheaReport } = require('./rheaTwoPass');
+      mergeIntoRheaReport(doc, sidecar);
+    } catch (err) {
+      console.warn(`  warn: hallucination sidecar at ${sidecarPath} failed to merge — ${err.message}`);
+    }
+  }
+
   // Recompute derived fields — authoritative over whatever the agent wrote.
   const derived = recomputeDerivedFields(doc);
   doc.process = derived.process;

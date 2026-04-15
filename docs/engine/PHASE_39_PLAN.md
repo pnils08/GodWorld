@@ -71,7 +71,7 @@ No engine code edits. No `clasp push`. Read-only against sheets.
 
 The reviewer reads three things on each invocation:
 
-1. **The compiled edition** at `output/editions/{edition_filename}.md` — produced by write-edition Step 3 (Compile). All articles concatenated.
+1. **The compiled edition** at `editions/cycle_pulse_edition_{XX}.txt` — produced by write-edition Step 3 (Compile). All articles concatenated.
 2. **The engine audit JSON** at `output/engine_audit_c{XX}.json` — produced by `scripts/engineAuditor.js` (Phase 38.1). Source of "what ailments existed this cycle" — the truth the edition should have covered.
 3. **The criteria files** — `docs/media/story_evaluation.md`, `docs/media/brief_template.md`, `docs/media/citizen_selection.md`. Source of rubric assertions.
 
@@ -216,12 +216,12 @@ The reviewer is done when:
 
 ---
 
-## 11. Open questions to surface if blocked
+## 11. Open questions — RESOLVED S146
 
-- **Edition file path convention.** Where does write-edition Step 3 actually write the compiled edition? Confirm the path so `capabilityReviewer.js` reads the right file. Likely `output/editions/{filename}.md` but verify.
-- **Citizen gender source.** The S139 ADD-Gender-to-citizen-briefs item is still MEDIUM/open. If gender data isn't available, assertion #9 falls back to grader-only with low confidence. Acceptable for v1; flag if the grader's coverage is too noisy.
-- **Haiku grader access.** Confirm we have an Anthropic API key wired for direct grader calls (not Mags's Claude Code session — that doesn't scale to per-cycle automation). If not, this becomes a blocker — talk to Mike before building grader-only assertions.
-- **Replay edition path.** E91 was published to Drive. Is there a local copy for the replay test? If not, reviewer needs to be built against C92 or a fresh test fixture instead.
+- **Edition file path convention. ✅** Confirmed: `editions/cycle_pulse_edition_{XX}.txt` (not `output/editions/`). E89, E90, E91 all on disk locally.
+- **Citizen gender source. ✅** Gender = Simulation_Ledger column AU. Not yet ingested to world-data citizen cards (see Open Items "ADD: Ingest gender column AU to world-data"). Capability reviewer reads the sheet directly via `lib/sheets.js` for assertion #9 — same pattern `scripts/engineAuditor.js` uses. Confidence: high when gender resolves.
+- **Haiku grader access. PENDING.** Anthropic API key wiring not yet confirmed. **Build path:** ship the 9 non-grader assertions first (7 deterministic + 2 mixed). Mark the 2 grader-only assertions as TODO until Mike confirms the key. 9 of 11 assertions still produces a meaningful capability review against E91.
+- **Replay edition path. ✅** `editions/cycle_pulse_edition_91.txt` exists locally. Replay test against E91 ready.
 
 ---
 

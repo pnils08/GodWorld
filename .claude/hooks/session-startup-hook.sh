@@ -36,9 +36,12 @@ SessionStart hook additional context: <godworld-state>
 Session: $SESSION_NUM | Day: $DAY_NUM | Cycle: $CYCLE_NUM
 Last journal: $LAST_ENTRY
 
-Ask which workflow. Then read your workflow section from docs/WORKFLOWS.md.
-Media-Room / Chat: also read JOURNAL_RECENT.md and check family.
-All others: load workflow files, get to work.
+BOOT SEQUENCE (do this before replying to the user):
+1. Run: tmux display-message -p '#W'  — this is your terminal name.
+2. Read .claude/terminals/<terminal-name>/TERMINAL.md — that's your scope.
+3. Read docs/mags-corliss/JOURNAL_RECENT.md — last 3 entries for continuity.
+4. If terminal is media-room or chat: also run node scripts/queryFamily.js and react to what you find.
+5. THEN greet the user and ask what's next. Do not skip steps.
 
 EOF
 

@@ -10,7 +10,7 @@
 **Active Build Plan (S145 — locked, S146 advanced):** Ten-step spine, importance-weighted and dependency-clean. Each step builds on the last.
 
 1. **Phase 41.1 + 41.2** — Write `docs/SCHEMA.md` and `docs/index.md`. **DONE S146.** Both written, wired into CLAUDE.md, boot SKILL.md, research-build TERMINAL.md. Audit hooks added to `/doc-audit` (boot group) and `/skill-audit` (identity-session group). 41.5 orientation protocol effectively delivered via boot wiring; remaining 41.x items (41.3 three-layer separation, 41.4 skill frontmatter) demoted to fill-in.
-2. **Phase 38.1** — Engine ailment detector. **NEXT.** The architectural keystone. Once `/engine-review` produces ailment flags, everything downstream has something real to grade against.
+2. **Phase 38.1** — Engine ailment detector. **READY TO BUILD `(engine terminal)`** — implementation plan written S146 at `docs/engine/PHASE_38_PLAN.md`. Detector/framer split: code does deterministic pattern detection emitting JSON; Mags's skill does seven-field narrative framing. 8 detector modules enumerated. Acceptance criteria locked. Engine terminal executes against the plan; research/build follows up with skill edit (§6).
 3. **Phase 38.7 + 38.8** — Anomaly gate (Netflix-bug protection) + baseline brief auto-generation (Division III coverage mechanism). Same pass as 38.1, one session.
 4. **Phase 39.1** — Capability reviewer. First reviewer that can check "did the edition cover the flagged ailment?" — only meaningful after 38.1.
 5. **Phase 38.2 + 38.3 + 38.4** — Mitigator check + remedy recommendation + Tribune framing brief. Completes the engine auditor's ailment-to-story pipeline.

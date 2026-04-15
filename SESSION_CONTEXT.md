@@ -6,6 +6,14 @@ Last Updated: 2026-04-14 | Engine: v3.3 | Cycle: 91 | Session: 145
 
 ---
 
+## Next Session Priority (locked S145)
+
+**Start here:** Phase 41.1 + 41.2 — write `docs/SCHEMA.md` and `docs/index.md`. Pure writing session, no code. Sets conventions for every session after. Full ten-step spine in `docs/engine/ROLLOUT_PLAN.md` "Active Build Plan (S145)" block at the top.
+
+Spine summary: 41.1+41.2 → 38.1 → 38.7/8 → 39.1 → 38.2-4 → 39.2-7 → 39.9/8/10 → 38.5-6 → 40.6/40.1 → Sandcastle eval.
+
+---
+
 ## Maintenance Rule
 
 **Keep this file under 300 lines.** At session end, rotate any session older than the most recent 5 to `docs/mags-corliss/SESSION_HISTORY.md`. Engine versions, cascade dependencies, and the documentation registry live in `docs/engine/DOCUMENTATION_LEDGER.md` — do not duplicate them here. Project description lives in `README.md`. Critical rules live in `.claude/rules/identity.md`. Architecture concepts live in `docs/reference/V3_ARCHITECTURE.md`. Mobile/mosh instructions live in `docs/OPERATIONS.md`.

@@ -6,7 +6,24 @@
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
 **Terminal handoffs:** Items tagged `(engine terminal)` or `(media terminal)` are handed off to that persistent chat. Research/build terminal designs; engine/sheet terminal executes code.
 
-**Active Build Plan (S144):** Phase 38 (Engine Auditor) is the architectural keystone. Build sequence: (1) Prep skills (`/build-world-summary`, `/sift`), (2) 38.1 ailment detector, (3) 38.2 mitigator check, (4) 38.3-38.4 remedy paths + Tribune framing, (5) 38.5 measurement loop, (6) Phase 37 arc state machines on top, (7) 33.12 EIC Sheet as view layer. Phases 36.1 and 32 are prerequisites. 5.4 demoted. 27.10 and 26.2 downstream. Full analysis in mags Supermemory doc `n5cBYS3vVN5DKrddnNp7K8`.
+**Active Build Plan (S145 — locked):** Ten-step spine, importance-weighted and dependency-clean. Each step builds on the last.
+
+1. **Phase 41.1 + 41.2** — Write `docs/SCHEMA.md` and `docs/index.md`. Pure writing, one session. Sets conventions every future session uses. Cheapest first so the cleanup dividend compounds.
+2. **Phase 38.1** — Engine ailment detector. The architectural keystone. Once `/engine-review` produces ailment flags, everything downstream has something real to grade against.
+3. **Phase 38.7 + 38.8** — Anomaly gate (Netflix-bug protection) + baseline brief auto-generation (Division III coverage mechanism). Same pass as 38.1, one session.
+4. **Phase 39.1** — Capability reviewer. First reviewer that can check "did the edition cover the flagged ailment?" — only meaningful after 38.1.
+5. **Phase 38.2 + 38.3 + 38.4** — Mitigator check + remedy recommendation + Tribune framing brief. Completes the engine auditor's ailment-to-story pipeline.
+6. **Phase 39.2–39.7** — Three-lane scope redesign (Rhea = sourcing, cycle-review = reasoning, Mara = result-validity), process/outcome split, Final Arbiter.
+7. **Phase 39.9 + 39.8 + 39.10** — Tiered review (needs 38.7 anomaly flags for priority) + reward-hacking scans + adversarial review skill.
+8. **Phase 38.5 + 38.6** — Measurement loop + prep-chain integration. Closes the engine auditor's feedback loop.
+9. **Phase 40.6 + 40.1** — Layered injection defense + session-log interface. Orthogonal to spine; slot in opportunistically.
+10. **Sandcastle + Daytona evaluation** — Parallel infrastructure track. One session, doesn't block anything.
+
+**Fill-in (between spine sessions):** Phase 40.2–40.5 (cattle refactor, credentials, four-component doc, Plan Mode gate), Phase 41.3–41.5 (three-layer separation, skill frontmatter, orientation protocol), Phase 26.2 briefing evolution, Phase 33.12 Coverage Gap + Corpus Bias tabs, Phase 37 arc state machines.
+
+**Prerequisites:** Phase 36.1 institutions and Phase 32 are prerequisites for the engine-auditor's mitigator check (38.2) to have full institutional state to read. 5.4 demoted. 27.10 and 26.2 downstream.
+
+**Full analysis:** mags Supermemory doc `n5cBYS3vVN5DKrddnNp7K8` (S144 keystone framing, still load-bearing). S145 additions live inline in this file — Phase 39.8/9/10, 40.x, 41.x, 38.7/8, Division III principle in memory, token-hygiene habits table.
 
 ---
 

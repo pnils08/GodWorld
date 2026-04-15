@@ -127,36 +127,73 @@ Read `output/capability_review_c{XX}.json`. Show Mike the summary.
 
 **Update production log** with capability review counts (passed/total, blocking, advisory) and any overrides taken.
 
-## Step 4: Validation + Rhea
+## Step 4: Validation + Rhea (Sourcing Lane)
 
 ```bash
 node scripts/validateEdition.js editions/cycle_pulse_edition_{XX}.txt
 ```
 
-Fix CRITICALs. Then launch Rhea.
+Fix CRITICALs. Then launch Rhea as the **Sourcing Lane** (Phase 39.2, weight 0.3).
 
-Rhea has scoped Bash access — dashboard API (localhost:3001), Supermemory (bay-tribune + world-data), world summary. She's a real verifier with live data access.
+Rhea has scoped Bash access — dashboard API (localhost:3001), Supermemory (bay-tribune + world-data), world summary. She's a real verifier with live data access. After Phase 39.2 she produces `output/rhea_report_c{XX}.json` in the reviewer-lane schema.
 
-- PASS (score >= 75, zero CRITICALs) → proceed
-- REVISE → fix and rerun, max 2 rounds
+```bash
+# After Rhea writes her JSON, validate + emit .txt companion:
+node scripts/rheaJsonReport.js {XX}
+```
 
-**Update production log** with validation results (validator flags, Rhea score, fixes).
+- verdict PASS → proceed
+- verdict REVISE → fix and rerun, max 2 rounds
+- verdict FAIL → halt, route back to desks
 
-## Step 5: Mara Audit (External)
+**Update production log** with validation results and Rhea's lane score.
 
-Mara is on claude.ai with her own Supermemory access. She searches canon herself.
+## Step 4.1: Cycle-Review (Reasoning Lane)
 
-1. Upload edition to Drive: `node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt mara`
+Run `/cycle-review` as the **Reasoning Lane** (Phase 39.4, weight 0.5). Produces `output/cycle_review_c{XX}.json`.
+
+- Internal consistency, evidence-based deduction, argument quality.
+- Does NOT re-check names, votes, stats, engine language — those belong to Rhea and capability.
+- verdict PASS/REVISE/FAIL same semantics as Rhea.
+
+**Update production log** with cycle-review lane score.
+
+## Step 5: Mara Audit (Result Validity Lane, External)
+
+Mara is on claude.ai — **Result Validity Lane** (Phase 39.5, weight 0.2).
+
+1. Upload edition + sift brief + engine review to Drive: `node scripts/saveToDrive.js editions/cycle_pulse_edition_{XX}.txt mara`
 2. Tell Mike the edition is ready for Mara
 3. Mike takes it to Mara on claude.ai
-4. Mara reads, searches, comes back with corrections
-5. Mike brings corrections back — apply them
+4. Mara produces a markdown audit with the structured top per PHASE_39_PLAN §16.3
+5. Mike saves it to `output/mara_audit_c{XX}.md`
+
+```bash
+# Parse Mara's markdown into lane JSON:
+node scripts/maraJsonReport.js {XX}
+```
 
 **STOP. Wait for Mara.**
 
-**USER APPROVAL GATE — Mike says publish or doesn't.**
+**Update production log** with Mara's lane score and any editorial notes from her prose.
 
-**Update production log** with Mara verdict and corrections.
+## Step 5.5: Final Arbiter (Phase 39.7)
+
+```bash
+node scripts/finalArbiter.js {XX}
+```
+
+Deterministic computation — reads the four lane JSONs (reasoning, sourcing, result-validity, capability), applies the 0.5/0.3/0.2 weights, enforces the capability gate as a hard block, emits `output/final_arbiter_c{XX}.json` with a single verdict (A/B), blame attribution, and a publish recommendation:
+
+- **PROCEED** — verdict A, weighted score ≥ 0.75, capability gate passed.
+- **PROCEED-WITH-NOTES** — verdict A, weighted score 0.60–0.75, capability gate passed. Log items for next cycle's briefing.
+- **HALT** — verdict B. Exit code 1. Do NOT proceed to Step 6.
+
+The Arbiter is the **publication gate** — Step 6 runs only if the recommendation is PROCEED or PROCEED-WITH-NOTES.
+
+**USER APPROVAL GATE — Mike reviews the Arbiter JSON and says publish or doesn't.**
+
+**Update production log** with Arbiter verdict, weighted score, and blame attribution.
 
 ## Step 6: Publish
 

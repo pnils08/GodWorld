@@ -162,9 +162,9 @@ async function callClaude(systemPrompt, userPrompt) {
 
   const claude = new Anthropic({ apiKey: apiKey });
 
-  log.info('Calling Claude (claude-sonnet-4-20250514, max_tokens: 1500)...');
+  log.info('Calling Claude (claude-sonnet-4-6, max_tokens: 1500)...');
   const response = await claude.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1500,
     system: systemPrompt,
     messages: [{ role: 'user', content: userPrompt }]

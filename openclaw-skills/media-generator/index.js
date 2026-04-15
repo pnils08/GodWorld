@@ -238,7 +238,7 @@ async function execute(context) {
 
     try {
       const response = await claude.messages.create({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: 2000,
         system: profile.systemPrompt,
         messages: [{ role: 'user', content: userPrompt }]

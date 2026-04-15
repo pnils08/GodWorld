@@ -167,15 +167,19 @@ function exportAllHeaders() {
   // Log it (can copy from execution log)
   Logger.log(markdown);
 
-  // Also show in a dialog for easy copying
-  var html = HtmlService.createHtmlOutput(
-    '<pre style="font-size:11px; max-height:500px; overflow:auto;">' +
-    markdown.replace(/</g, '&lt;').replace(/>/g, '&gt;') +
-    '</pre>' +
-    '<p><button onclick="google.script.host.close()">Close</button></p>'
-  ).setWidth(600).setHeight(500);
-
-  SpreadsheetApp.getUi().showModalDialog(html, 'Schema Headers - Copy This');
+  // Also show in a dialog for easy copying (skip if no UI context,
+  // e.g. when called programmatically by exportAndPushToGitHub)
+  try {
+    var html = HtmlService.createHtmlOutput(
+      '<pre style="font-size:11px; max-height:500px; overflow:auto;">' +
+      markdown.replace(/</g, '&lt;').replace(/>/g, '&gt;') +
+      '</pre>' +
+      '<p><button onclick="google.script.host.close()">Close</button></p>'
+    ).setWidth(600).setHeight(500);
+    SpreadsheetApp.getUi().showModalDialog(html, 'Schema Headers - Copy This');
+  } catch (uiErr) {
+    Logger.log('UI dialog skipped (no UI context): ' + uiErr.message);
+  }
 
   return markdown;
 }

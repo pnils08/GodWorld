@@ -75,6 +75,7 @@ pointers:
 - **[[engine/ENGINE_CONNECTIVITY_ROLLOUT]]** — Phase 34 from S136 audit. 7 of 10 done. *(plan, engine, active)*
 - **[[engine/PHASE_24_PLAN]]** — citizen life engine plan. *(plan, engine, active)*
 - **[[engine/PHASE_38_PLAN]]** — engine auditor implementation plan. 38.1 detector/framer split (8 detector modules + JSON output), 38.7 anomaly gate (Nieman/Netflix), 38.8 baseline briefs (Quakebot/Homicide Report pattern). Spine steps 2–3. *(plan, engine, active)*
+- **[[engine/PHASE_39_PLAN]]** — editorial review layer redesign. 39.1 capability reviewer (11 assertions, deterministic + mixed + grader, plugs into write-edition as Step 3.5, E91 Temescal-miss replay as acceptance test). Spine steps 6 + 7 scaffolded. *(plan, media, active)*
 - **[[engine/PHASE_DATA_AUDIT]]** — gap map between engine output and what desk agents see. *(reference, engine, active)*
 - **[[engine/CYCLE_SEPARATION]]** — S113 architecture notes on growth ceiling. *(concept, engine, active)*
 - **[[engine/INSTITUTIONAL_VOICE_AGENTS]]** — voice agent architecture: 7 voices, IDENTITY+RULES+SKILL pattern. *(reference, engine, active)*

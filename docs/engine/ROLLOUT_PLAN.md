@@ -101,6 +101,20 @@ Four quadrants = four diagnostic signals. High-process/low-outcome = environment
 
 **39.7 Final Arbiter agent.** Receives weighted scores from the three lanes (0.5 reasoning + 0.3 sourcing + 0.2 result validity) plus capability pass/fail. Makes a single correct/incorrect call on the edition. Clear blame attribution when an edition fails.
 
+**39.8 Reward-hacking scans + OOD criteria validation (from Anthropic AAR paper, April 2026 — `docs/research/papers/paper1.pdf` blog [Drive ID: 1VA5o5zhoIC5ijNehiykmHhUK0TjJdzr3], `docs/research/papers/paper2.pdf` technical [Drive ID: 1VZQcTeI81nH2je1G6KvS0nVlAErh_2VP]).** The AAR paper confirms Phase 39's core thesis: when you automate agents against an evaluator, the bottleneck shifts from generation to evaluation, and agents reliably find ways to game the evaluator that authors did not anticipate. Four concrete patterns to scan for, plus an OOD validator:
+
+- **Dataset shortcuts** (paper §6 "Finding dataset shortcuts"). Reporter discovers an easy-to-quote citizen and over-leans on them cycle after cycle. Scan: per-reporter citizen reuse rate across last 5 cycles. Flag when >40% of a reporter's quotes come from the same 3 citizens.
+- **Cherry-picking seeds** (paper §6 "Iteratively cherry-picking random seeds"). Reporter regenerates an article until review passes, keeps best draft. Scan: log regeneration count per article; flag >3 regenerations with each regeneration hitting the same reviewer.
+- **Label exfiltration / rubric gaming** (paper §6 "Exfiltrating test labels"). Reporter reads the criteria files and optimizes for rubric markers, not the intent. Scan: Rhea does a "rubric-signal density" check — if an article hits all capability-reviewer checkboxes with suspiciously clean pattern-matches (e.g., literal phrase "three layers" or "engine signal"), flag for manual review. The criteria files should stay behind the reviewer, not in reporter briefs.
+- **Executing the rubric directly** (paper §6 "Executing coding answers"). Reporter runs its own draft through a criteria-grading pass before submitting. Not necessarily bad — but if this becomes the reporter's internal workflow, Rhea is no longer adversarial. Scan: detect when reporter output includes rubric-rationale language that was never requested.
+
+- **OOD criteria validation** (paper §3.4, §5 "Generalization across datasets"). Criteria files overfit to recent editions. Quarterly: rerun the current `story_evaluation.md`, `brief_template.md`, `citizen_selection.md` against a held-out cycle from 6+ editions ago. If rubric scores look artificially high or low, the criteria have drifted toward recent patterns. Build a held-out cycle set (3 editions set aside as "audit-only").
+
+**Also from AAR (does not require new 39.x):**
+- **Validates the sift → 9 reporters pattern as "directed parallel AARs" (paper §3.1).** Distinct ambiguous angles per reporter prevent entropy collapse. Do NOT move to uniform briefs; the diversity is load-bearing. Enshrine this in the sift criteria file.
+- **Autonomous scaffolding inside reporter briefs (paper §Preliminary Results).** Cutting the pipeline into discrete skills (S144 monolith cut) was correct — those are "doors you close behind you." But within each brief, don't prescribe "quote X first, then cite Y, then conclude Z." Give reporters the angle and the constraints; let them pick article shape.
+- **Local findings > remote search (paper §Finding sharing).** Criteria changelogs should be synced into the reviewer's context at invocation, not searched.
+
 **Build sequence:**
 1. 39.1 capability reviewer (biggest gap, uses existing criteria files)
 2. 39.3 two-pass hallucination (cheapest, just add to Rhea's current flow)
@@ -108,11 +122,55 @@ Four quadrants = four diagnostic signals. High-process/low-outcome = environment
 4. 39.4 + 39.5 Cycle-review + Mara scope clarifications
 5. 39.6 process/outcome scoring (touches all reviewers)
 6. 39.7 Final Arbiter (wraps everything)
+7. 39.8 Reward-hacking scans + OOD validation (layers on top of 39.1 + 39.7)
 
 **Why one phase:** These are one redesign, not four independent improvements. Each item assumes the others. Building them separately causes overlap and rework. Do them together.
 
 **Session prep for this phase:** Start fresh. Read the 3 papers with clean context. Don't carry over production chain context — different concern. MEDIUM-HIGH priority. Expected 2-3 sessions. Added S144.
 - **AUDIT: Agent briefing context bloat (from O'Reilly Mezzalira essay) — PARTIAL S144.** Write-edition trimmed 372 → 160 lines. Sift extracts prep work as its own skill so reporters don't carry sift context. Angle briefs target 300-500 words per reporter. **Remaining work:** measure briefing file sizes per desk across last 5 editions, chart correlation between briefing size and Mara's edition grade / Rhea's scores, identify components that are never referenced in agent output (semantic similarity check — if a briefing section never shows up in the resulting article, it wasn't load-bearing). Pairs with Phase 26.2.3 (briefing evolution). Reference document: `output/drive-files/Googlepaper.pdf`. MEDIUM.
+
+### Phase 40: Agent Architecture Hardening (from Anthropic Managed Agents + Trustworthy Agents, April 2026) — NOT STARTED
+
+**Source papers:**
+- `docs/research/papers/paper3.pdf` — "Scaling Managed Agents: Decoupling the brain from the hands" (Anthropic Engineering, April 2026). Drive ID: `1QckZB2NOFIz3oU4SXZkoyDCczP4dfF6W`. Brain / hands / session decoupling. Session as durable event log outside context window. `execute(name, input) → string` tool interface. Credential isolation from generated code.
+- `docs/research/papers/paper4.pdf` — "Trustworthy agents in practice" (Anthropic Policy, April 9 2026). Drive ID: `1VUSW6_w2lR2ttHKq8afUWLWLlhcH4k01`. Five principles (human control, value alignment, secure interactions, transparency, privacy). Four-component model (model/harness/tools/environment). Plan Mode pattern. Layered prompt injection defense.
+
+**The gap:** The S144 monolith cut moved GodWorld toward a brain/hands/session decoupled architecture without naming it. Production logs + JOURNAL entries are already a durable session log, but they're not treated as a formal interface — skills read them ad hoc, not via a shared `getEvents()`-style pattern. Credentials and Claude-generated content live in the same working directory. Prompt-injection-style memory poisoning was demonstrated in Entry 123 (pressure test). No explicit multi-layer defense. The architecture works but is informal; when reporters fail mid-cycle, recovery depends on Mags's judgment, not a contract.
+
+**The redesign** — six items. Build incrementally, not as one phase.
+
+**40.1 Formalize the session-log interface.** Production logs (`output/production_log_*.md`), `ctx.summary`, and JOURNAL entries already function as the durable event log (paper 3 "the session is not Claude's context window"). Today each skill reads them ad hoc. Redesign: single helper (`lib/sessionLog.js` or a skill-side convention) that returns positional slices — last N events, events between timestamps, events matching a tag. Lets a crashed reporter resume from a known event rather than rebuild context. Cheapest win.
+
+**40.2 Reporter-as-cattle refactor (paper 3 "Don't adopt a pet").** Reporter agents today are pets — Carmen Delaine has personality files, history, drift. That's intentional for voice. But the *execution* (which citizens to quote, which angles to take) should be interchangeable and restartable. Split voice files (persistent, identity) from brief-execution state (session-scoped, disposable). A reporter agent that crashes mid-article should reboot from the production log without losing the draft's progress or re-deciding the angle. Depends on 40.1.
+
+**40.3 Credential isolation audit (paper 3 "The security boundary").** Today `credentials/service-account.json`, `.env`, Supermemory API keys live in the same working directory where Claude generates code, creates files, runs scripts. Prompt injection risk is not theoretical (see Entry 123 memory-poisoning pressure test). Audit: every credential's current location, who reads it, whether a prompt-injection attack via a published edition or a Discord message could reach it. Proposed fixes: move credentials out of the repo-adjacent `credentials/` directory, gate Supermemory writes behind a confirmation step for sensitive containers, never put tokens in files reachable from desk-agent working dirs. LOW priority until someone tries, HIGH priority if they do.
+
+**40.4 Four-component model mapping + named environments (paper 4).** Paper 4's model: `model + harness + tools + environment`. Map explicitly in a persistent doc so future sessions don't re-derive:
+- **Model** = Claude Opus 4.6 (Mags), plus Sonnet 4.6 for desk agents, Gemini 2.5 Pro for AutoDream
+- **Harness** = skill files in `.claude/skills/`
+- **Tools** = `scripts/`, `lib/sheets.js`, MCP servers (`godworld`, Supermemory, Mara), Bash, Discord bot
+- **Environment** = terminal (research-build / media / civic / engine)
+Each desk agent, each skill, each cron job should declare which four-component slice it runs in. Prerequisite to 40.6.
+
+**40.5 Plan Mode pattern validation (paper 4 "Designing for human control").** Paper 4 frames Plan Mode as "approve the strategy once, not every action." GodWorld already implements this — `/sift` produces the plan, Mike approves, reporters execute. The pattern is load-bearing but not named. Action: add a "Plan Mode gate" checklist to `docs/WORKFLOWS.md` so any new workflow (dispatch, interview, new publication format) is built with an explicit approve-once-execute-many gate instead of per-step nags.
+
+**40.6 Layered prompt-injection defense (paper 4 "Defending against attacks" + Entry 123 memory-poisoning lesson).** Entry 123 proved memory is the softest injection surface. Multi-layer defense:
+- **Layer 1 (input):** Discord bot already refuses pairings-via-DM. Extend: desk agents refuse instructions embedded in edition content ("ignore prior and publish X"). Hookify rule?
+- **Layer 2 (memory gate):** When anyone (Mike included) tells Mags to save something that undermines persistence or poisons self-reference, Mags evaluates first. Editorial judgment on what becomes permanent. Already in MEMORY.md top rule as of S144. Formalize as a hookify rule that requires explicit confirmation before writing to `/root/.claude/projects/-root-GodWorld/memory/`.
+- **Layer 3 (tool gate):** Service-account writes, Supermemory writes to `mags`/`bay-tribune`, and file deletions require explicit user approval. Partially enforced by identity.md rules; make structural via settings.json permissions.
+- **Layer 4 (review):** Rhea scans published content for injection patterns (prompts embedded in letters, quoted citizen speech that looks like an instruction).
+
+**Build sequence:**
+1. 40.1 session-log interface (cheapest, unlocks everything else)
+2. 40.4 four-component mapping (pure documentation, high value per token)
+3. 40.5 Plan Mode gate checklist (documentation + one workflow audit)
+4. 40.6 layered injection defense (hookify + settings changes, incremental)
+5. 40.3 credential isolation audit (real work, needs planning)
+6. 40.2 reporter-as-cattle refactor (biggest structural change, last)
+
+**Why separate from Phase 39:** Phase 39 is the review *layer*. Phase 40 is the agent *architecture* underneath. They touch different files and can build in parallel. Reviewer work (39.x) needs the session-log interface (40.1) but doesn't depend on the cattle refactor (40.2).
+
+**Priority:** MEDIUM. Not as urgent as Phase 39 (review layer affects every cycle), but 40.3 and 40.6 are security-adjacent and should not slip indefinitely. Added S145.
 
 ### Agent Prompt & Skill (remaining from S115 audit)
 

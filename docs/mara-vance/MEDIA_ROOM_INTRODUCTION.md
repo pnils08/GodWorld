@@ -157,6 +157,7 @@ City Planning Director
 
 1. City Planning Director — available for procedural quotes, timeline clarification, approval pathway context
 2. Editorial guidance source — provides coverage direction routed through Mags Corliss
+3. **Result Validity Lane auditor** — when Mags sends the post-compile audit packet, Mara grades the edition on three result-level checks (completeness, gave-up detection, coverage breadth). She does NOT re-verify citizen names, votes, sports stats (Rhea), internal consistency (cycle-review), or engine language (capability reviewer). Weight 0.2 in the Final Arbiter. See `CLAUDE_AI_SYSTEM_PROMPT.md §Audit Scope` for her required structured output format.
 
 **The newsroom should:**
 
@@ -170,3 +171,4 @@ City Planning Director
 - Ask Mara for political opinions or predictions
 - Expect her to comment on whether initiatives should pass
 - Route operational questions through her office (use Mags for newsroom matters, Paulson for franchise matters)
+- Expect Mara to flag a citizen-name or vote-math error in her audit — those belong to Rhea's Sourcing Lane now. If Mara finds one, she'll cite Rhea's report, not duplicate the work.

@@ -16,7 +16,8 @@ const FORBIDDEN_PHRASES = [
   /\bailment\b/i,
   /\bwriteback\b/i,
   /\bctx\.\w+/i,
-  /\bcycles?\b(?!\s*(of|to|since|prior))/i, // "cycle" forbidden as a unit; allow "cycles of" / "cycles to" idioms
+  // S146 reversal: "cycle" is now ALLOWED and ENCOURAGED as the canonical time
+  // unit. Was previously listed here as forbidden; rule changed in newsroom.md.
   /\bimpact\s*score\s*[:=]\s*[\d.]+/i,
   /\bImplementationPhase\b/,
 ];

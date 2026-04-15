@@ -184,15 +184,19 @@ function getFrontPageArticle(parsed) {
 // Words that strongly indicate a candidate is NOT a person name.
 // Used as a first-word filter to suppress headline fragments and possessives.
 const NON_NAME_FIRST_WORDS = new Set([
-  'The', 'A', 'An', 'NBA', 'MLB', 'NFL', 'NHL', 'AP', 'AC',
+  'The', 'A', 'An', 'And', 'But', 'Or', 'So', 'For', 'Yet', 'Because',
+  'When', 'While', 'If', 'Unless', 'Although', 'After', 'Before',
+  'NBA', 'MLB', 'NFL', 'NHL', 'AP', 'AC', 'GM', 'CEO', 'CFO', 'COO',
   'Oakland', "Oakland's", 'Bay', "Bay's", 'Chicago', "Chicago's",
   'San', 'New', 'East', 'West', 'North', 'South', 'Lake',
   'Jack', 'Jack London', 'Adams', 'Civic', 'Civis', 'Phase',
-  'Bulls', 'Athletics', 'Warriors', 'Giants',
-  'Bay Tribune', 'Cycle', 'Edition', 'Mayor', 'Council',
-  'Director', 'Captain', 'Chief', 'President',
-  'Finals', 'Series', 'Game', 'Inning',
+  'Bulls', 'Athletics', "Athletics'", 'Warriors', 'Giants',
+  'American', 'National', 'Federal', 'State', 'County',
+  'Bay Tribune', 'Cycle', 'Edition', 'Mayor', 'Council', 'Councilmember',
+  'Director', 'Captain', 'Chief', 'President', 'Senator', 'Secretary',
+  'Finals', 'Series', 'Game', 'Inning', 'League', 'Conference',
   'Names', 'Final', 'Score', 'Sports', 'Letters', 'Editor',
+  'Freight', 'Transit', 'Police', 'Fire', 'Health',
 ]);
 
 function extractNameCandidates(text) {

@@ -41,6 +41,8 @@ const SHEETS_TO_READ = [
   'Simulation_Ledger',
   'Civic_Office_Ledger',
   'Initiative_Tracker',
+  'As_Roster',
+  'Bay_Tribune_Oakland',
 ];
 
 async function getCurrentCycle() {

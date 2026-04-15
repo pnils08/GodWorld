@@ -35,33 +35,52 @@ const PUBLIC_FIGURES_OK = new Set([
   'Mike Paulson', 'Avery Santana', 'Mags Corliss',
 ]);
 
-function loadCanonNames(citizenRows, councilRows, truesource) {
+function addNameToSet(set, name) {
+  if (!name || typeof name !== 'string') return;
+  const trimmed = name.trim();
+  if (!trimmed) return;
+  set.add(trimmed.toLowerCase());
+  const last = trimmed.split(/\s+/).pop();
+  if (last && last.length > 3) set.add(last.toLowerCase());
+}
+
+// Build "First Last" (and "First Last" with first name only) from a sheet row
+// whose headers are First / Middle / Last (the GodWorld convention — note the
+// trailing space on the "Middle " header).
+function addRowNamesToSet(set, row) {
+  if (!row) return;
+  const first = (row.First || row.FirstName || '').trim();
+  const middle = (row['Middle '] || row.Middle || row.MiddleName || '').trim();
+  const last = (row.Last || row.LastName || '').trim();
+  if (first && last) {
+    addNameToSet(set, `${first} ${last}`);
+    if (middle) addNameToSet(set, `${first} ${middle} ${last}`);
+  }
+  if (last && last.length > 3) set.add(last.toLowerCase());
+  if (first && first.length > 3) set.add(first.toLowerCase());
+  // Some sheets may use CitizenName / Name / FullName / OfficialName / PlayerName
+  for (const key of ['CitizenName', 'Name', 'FullName', 'OfficialName', 'PlayerName']) {
+    if (row[key]) addNameToSet(set, row[key]);
+  }
+}
+
+function loadCanonNames(citizenRows, councilRows, asRosterRows, tribuneOaklandRows, truesource) {
   const set = new Set();
-  for (const row of citizenRows || []) {
-    const name = row.CitizenName || row.Name || '';
-    if (name) {
-      set.add(name.toLowerCase());
-      const last = name.split(/\s+/).pop();
-      if (last && last.length > 3) set.add(last.toLowerCase());
-    }
-  }
-  for (const row of councilRows || []) {
-    const name = row.OfficialName || row.Name || '';
-    if (name) {
-      set.add(name.toLowerCase());
-      const last = name.split(/\s+/).pop();
-      if (last && last.length > 3) set.add(last.toLowerCase());
-    }
-  }
+  for (const row of citizenRows || []) addRowNamesToSet(set, row);
+  for (const row of councilRows || []) addRowNamesToSet(set, row);
+  // As_Roster — A's player and staff. Authoritative for sports references.
+  for (const row of asRosterRows || []) addRowNamesToSet(set, row);
+  // Bay_Tribune_Oakland — curated index of named citizens. Mike's hand-built
+  // index, easier to search than Simulation_Ledger for journalism purposes.
+  for (const row of tribuneOaklandRows || []) addRowNamesToSet(set, row);
+  // Legacy file-based truesource — kept as fallback if sheets unavailable
   if (truesource) {
     const visit = (obj) => {
       if (!obj || typeof obj !== 'object') return;
       if (Array.isArray(obj)) return obj.forEach(visit);
-      for (const [k, v] of Object.entries(obj)) {
+      for (const v of Object.values(obj)) {
         if (typeof v === 'string' && /^[A-Z][a-z]+(?:\s+[A-Z][a-z]+)+$/.test(v)) {
-          set.add(v.toLowerCase());
-          const last = v.split(/\s+/).pop();
-          if (last && last.length > 3) set.add(last.toLowerCase());
+          addNameToSet(set, v);
         } else if (typeof v === 'object') {
           visit(v);
         }
@@ -70,9 +89,7 @@ function loadCanonNames(citizenRows, councilRows, truesource) {
     visit(truesource);
   }
   for (const f of PUBLIC_FIGURES_OK) {
-    set.add(f.toLowerCase());
-    const last = f.split(/\s+/).pop();
-    if (last && last.length > 3) set.add(last.toLowerCase());
+    addNameToSet(set, f);
   }
   return set;
 }
@@ -108,6 +125,8 @@ function check(ctx) {
   const canonSet = loadCanonNames(
     sheets.Simulation_Ledger,
     sheets.Civic_Office_Ledger,
+    sheets.As_Roster,
+    sheets.Bay_Tribune_Oakland,
     truesource
   );
 
@@ -126,7 +145,10 @@ function check(ctx) {
   for (const cand of allCandidates) {
     const lower = cand.toLowerCase();
     if (canonSet.has(lower)) continue;
-    const last = cand.split(/\s+/).pop().toLowerCase();
+    // Try possessive stripped ("Mike Paulson's" -> "mike paulson")
+    const stripped = lower.replace(/['']s$/i, '').trim();
+    if (stripped !== lower && canonSet.has(stripped)) continue;
+    const last = cand.split(/\s+/).pop().replace(/['']s$/i, '').toLowerCase();
     if (last.length > 3 && canonSet.has(last)) continue;
     unresolved.push(cand);
   }

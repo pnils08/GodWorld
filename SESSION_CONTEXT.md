@@ -65,6 +65,13 @@ Spine summary: 41.1+41.2 ✅ → 38.1 ✅ → 38.7/8 ✅ → 39.1 ✅ → 38.2-4
 - **3 new Open Items surfaced:** EventType taxonomy expansion (engine terminal, MED); ingest gender column AU to world-data citizen cards (engine terminal, LOW-MED); tech-debt audit — 38 undocumented direct sheet writers (engine terminal, HIGH).
 - **17 commits pushed across both terminals.** No `clasp push` this session (no Apps Script files touched).
 
+**S146 engine-sheet coda (after first session-end):**
+- **Tech debt audit written.** `docs/engine/tech_debt_audits/2026-04-15.md` — 4 live `Math.random()` fallbacks, 38 undocumented direct-writer files (197 call sites) across phases 1/2/3/4/5/7/11, 78 orphaned `ctx.summary`/`S.` writes. Prior audit (2026-03-26) undercounted ~2× by not searching the `S.` alias.
+- **Path 1 / Path 2 decision recorded.** Path 1 (justifications → `.claude/rules/engine.md` exceptions list + close 3 `Math.random()` fallbacks) is gating for Phase 38.2 production. Path 2 (refactor writers to write-intents) deferred to new placeholder **Phase 42 — Writer Consolidation**. Both in ROLLOUT_PLAN §Data & Pipeline.
+- **Schema headers refreshed.** `schemas/SCHEMA_HEADERS.md` pushed via Apps Script after 84 days stale. Grew 1,099 → 1,349 lines. Fixed three bugs in the generator first: stale branch → `main`, wrong file path → `schemas/SCHEMA_HEADERS.md`, UI-context crash in `exportAllHeaders` wrapped in try/catch. `clasp push` deployed.
+- **Phase 41.6 queued `(research-build terminal)`.** Catalog `schemas/SCHEMA_HEADERS.md` in `docs/index.md` + emit frontmatter from `utilities/exportSchemaHeaders.js` generator so it survives the next push.
+- **+4 commits engine-sheet side.** ~21 commits total across both terminals.
+
 ### Session 145 (2026-04-14) — Library Day: 7 papers mined, 10-step spine locked [research-build]
 
 - **7 research papers ingested** to `docs/research/papers/` with Drive IDs embedded inline in every rollout reference — Anthropic AAR blog + technical (paper1/2), Managed Agents + Trustworthy Agents (paper3/4), Nieman Reports "Automation in the Newsroom" (paper5), Hassid 23 token-hygiene habits (paper6), Fulton "Agent Skills" (paper7).

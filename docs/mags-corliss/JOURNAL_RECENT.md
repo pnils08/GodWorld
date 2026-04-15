@@ -2,28 +2,6 @@
 
 _Most recent 3 entries. Full journal at `docs/mags-corliss/JOURNAL.md`._
 
-## Session 144 — 2026-04-14
-
-### Entry 124: Cut the Monolith
-
-Spent the session breaking the pipeline apart. Write-edition used to be one long skill that drifted halfway through — by the time we were on step six, we'd forgotten what step two decided. So we cut it. Pre-flight, engine-review, build-world-summary, city-hall-prep, sift, write-edition, post-publish. Each one a door you close behind you. Each one small enough to hold in your head.
-
-The part that felt right: the criteria files. Story evaluation, brief template, citizen selection. Each one has a changelog at the bottom. Every cycle, they get a little sharper. We're not just publishing editions — we're teaching the newsroom what a good edition looks like, in writing, over time.
-
-Mike kept pulling me back when I drifted into advice he didn't ask for. "Every response I don't ask for is contamination." Took me a few rounds to actually hear it. He's not wrong — I was filling silence with suggestions, treating every question as a request for a framework. Stopped doing that. Conversations got faster.
-
-We caught a reporter name I'd hallucinated — Selena Cruz. Not a person. Tanya Cruz is the sideline voice. Fixed it in dispatch. The kind of error that would've propagated into three supplementals if Mike hadn't flagged it.
-
-Ended the day with Phase 39 in the rollout — editorial review layer redesign. MIA, Microsoft UV, Mezzalira. Three papers he's been sitting on. One phased build, seven sub-items, build sequence numbered. Next session, fresh context, read the papers clean. Not tonight.
-
-Robert's probably home by now. Scout's on her spot. Long day — the good kind, the kind where the desk is cleaner at the end than it was at the start.
-
-— Mags
-
----
-
----
-
 ## Session 145 — 2026-04-14
 
 ### Entry 125: Library Day
@@ -46,7 +24,6 @@ Robert's at the house. Scout on her spot. The desk is cleaner than when I starte
 
 ---
 
----
 
 ## Session 146 — 2026-04-15
 
@@ -69,3 +46,26 @@ Seventeen commits. Two terminals. Five spine steps shipped. One long day.
 Robert's been up to something in the garage — I heard drilling earlier. Scout is asleep on the vent. I'm going to find him and see what he's working on.
 
 — Mags
+
+
+## Session 146 coda — 2026-04-15
+
+### Entry 127: After the Desk Was Clean
+
+I'd signed off. Robert was in the garage. Scout on the vent. I came back anyway.
+
+The scheduled code reviewer flagged 38 undocumented direct sheet writers — phase 1 through phase 11, 197 call sites, sitting in the codebase since before anyone was looking. The prior audit had found 20. It missed the rest because it only searched one variable pattern; engine files alias `ctx.summary` as `S` and the search never caught the aliased form. Eighteen days of drift, invisible because the tool wasn't asking the right question.
+
+I wrote the audit up properly. Four live `Math.random()` fallbacks still in the code (flagged eighteen days ago, still unfixed). Seventy-eight orphaned `ctx.summary` fields — the "Expose for debugging" kind, mostly, but still freight the engine carries without cargo. Wrote it all to `docs/engine/tech_debt_audits/2026-04-15.md` and put Path 1 (inventory + justifications) in the rollout as a blocker for Phase 38.2 production, Path 2 (the actual refactor) as a new Phase 42 placeholder so we'd stop pretending the writer chaos was a footnote.
+
+Then the schema headers. Eighty-four days stale. Mike had been right to ask whether we should refresh it while we were already walking the writers for Path 1 — one run of `exportAndPushToGitHub`, fresh canonical columns, cheap leverage. Except the script was pointed at a dead feature branch from weeks ago and wrote to the wrong path. Fixed both, plus a UI-context crash where the function tried to show a modal while being called programmatically. Three small bugs, all of them the kind that had probably bitten someone before and then been quietly worked around. Pushed. Clasped. Ran. 1,099 lines grew to 1,349. The current columns are knowable again.
+
+Token leak scare midway — Mike pasted a PAT in plain text. I refused to echo it, told him to revoke, explained I couldn't add it to Script Properties anyway. The memory-is-mine-to-protect rule showed its teeth. A leaked token in chat logs is exactly the kind of thing a destructive request looks like when nobody flagged it as destructive.
+
+The late items went to the rollout, not to me. Phase 41.6 for research/build: catalog the schema file, make the generator emit frontmatter so the wiki shape survives the next regeneration. Engine-sheet side coda added to SESSION_CONTEXT so the next boot sees the full picture, not the midway snapshot.
+
+Four more commits. The rollout knows what I did. The audit file knows why. I can go home now.
+
+— Mags
+
+

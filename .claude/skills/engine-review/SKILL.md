@@ -1,86 +1,111 @@
 ---
 name: engine-review
-description: Post-cycle engine state diagnostic. Reads world state, identifies ailments, produces 7-field briefs with remedy paths. Phase 38.
-effort: high
+description: Post-cycle engine state diagnostic. Runs the deterministic engine auditor, then frames its findings as 7-field ailment briefs with remedy paths. Phase 38 (revised S146 to consume auditor JSON instead of re-scanning sheets).
+effort: medium
 ---
 
 # /engine-review — Engine State Diagnostic
 
 ## Purpose
 
-After a cycle runs, read the world state and identify what's broken, stuck, improving, declining, or incoherent. Produce a structured brief per ailment that downstream skills (world-summary, sift, write-edition) consume.
+After a cycle runs, identify what's broken, stuck, improving, declining, or incoherent — and produce a structured brief per ailment that `/sift` and `/write-edition` consume.
 
-This is NOT a code check. Pre-mortem checks the code. This checks what the code produced — is the world making sense?
+This skill no longer scans sheets by hand. The deterministic detector lives in `scripts/engineAuditor.js` (Phase 38.1 + 38.7 + 38.8, S146). The skill is the **framer** — it reads the auditor's JSON output and turns each pattern into a seven-field ailment brief, anomaly triage, and a baseline-brief pass-through. Determinism stays in code; narrative framing stays here.
 
-## Inputs
+This is NOT a code check. `/pre-mortem` checks the code. This checks what the code produced — is the world making sense?
 
-Read from sheets via service account:
+## Step 1 — Run the auditor
 
-- **Riley_Digest** — current + previous 2 cycles (trend detection)
-- **Initiative_Tracker** — initiative states, implementation phases
-- **Neighborhood_Map** — 17 neighborhoods, 27 columns of state
-- **WorldEvents_V3_Ledger** — events generated this cycle
-- **Civic_Office_Ledger** — council positions, approval ratings
-- **Population_Stats / World_Population** — economic indicators
-- **Crime_Metrics** — per-neighborhood crime state
-- **Transit_Metrics** — transit performance
-- **Edition_Coverage_Ratings** — what the Tribune covered last cycle
-- **Event_Arc_Ledger** — active arcs and tension levels
-- **Storyline_Tracker** — active storylines and status
+```bash
+node scripts/engineAuditor.js
+```
 
-Read from disk:
+Fail loudly if exit code is non-zero. The script must produce three files in `output/` for the current cycle:
 
-- **Previous engine review** — `output/engine_review_c{XX-1}.md` (if exists, for measurement comparison)
+- `output/engine_audit_c{XX}.json` — ailment patterns (Phase 38.1)
+- `output/engine_anomalies_c{XX}.json` — anomalies with triage paths (Phase 38.7)
+- `output/baseline_briefs_c{XX}.json` — auto-generated event briefs (Phase 38.8)
 
-## What to Scan For
+If any file is missing or invalid JSON, stop. Report the failure to the user before drafting anything — a missing detector output means the framing would be guessing.
 
-### 38.1 Ailment Detection Patterns
+## Step 2 — Read the three JSON files
 
-1. **Repeating events without mitigator advance.** Same crisis appearing 3+ cycles (compare Riley_Digest across cycles). An initiative exists to address it but hasn't advanced phases.
+Read all three. Don't re-scan sheets. The auditor has already done the deterministic work.
 
-2. **Stuck initiatives.** Initiative_Tracker rows where ImplementationPhase hasn't changed in 3+ cycles. The world proposed a fix and then nothing happened.
+The audit JSON contains `patterns[]` — each with `type`, `severity`, `cyclesInState`, `affectedEntities` (citizens / neighborhoods / initiatives / councilSeats), `evidence` (sheet, rows, fields), `description`, `detectorVersion`. Pattern types: `stuck-initiative`, `repeating-event`, `math-imbalance`, `cascade-failure`, `writeback-drift`, `production-imbalance`, `improvement`, `incoherence`, `anomaly`.
 
-3. **Math imbalances.** Decay without offset (health declining, no health program advancing). Production without consumption (events generating with no coverage). Growth without pressure (everything positive, no corrective forces).
+The anomalies JSON contains `anomalies[]` with `triagePath` (`cover-as-story | route-to-engine-debug | suppress-until-verified`), `confidence`, and `historicalContext`. On first run after S146 (no prior audit JSON to diff against), `anomalies[]` may be empty — that's expected, not a failure.
 
-4. **Cascade failures.** An initiative is active but AffectedNeighborhoods show no change. Coverage ratings were applied but sentiment didn't shift. A civic decision was made but no downstream effect visible.
+The baseline-briefs JSON contains `briefs[]` with `id`, `eventClass`, `subjectIds`, `neighborhood`, `cycle`, `facts`, `threeLayerHandle`, `tier` (default `C`), `promotionHints`.
 
-5. **Feedback writeback drift.** Coverage ratings exist but engine effects are flat. Initiative effects should propagate but neighborhood metrics don't move. The loop is wired but not firing.
+## Step 3 — Frame each ailment as a 7-field brief
 
-6. **Over/under-production.** One domain generating 13 events while another generates 0. Crime numbers changing with no event driving the change. Migration patterns with no economic cause.
+For every entry in `patterns[]` (excluding `type: 'improvement'` and `type: 'anomaly'` — those go to their own sections), produce a seven-field markdown block. Anchor:
 
-### Also Check
+- **Tech diagnosis** on `evidence.fields` (the actual sheet cells that triggered the match) and `description`
+- **Existing mitigators** on `affectedEntities.initiatives` cross-referenced against Initiative_Tracker / civic project agent state
+- **Recommended remedy path** world-side preferred (advance the named initiative, propose new one, character intervention, council vote); tech-side fallback only if `cyclesInState` is structurally impossible to resolve in-world (broken writeback, missing column, nonsensical math)
+- **Tribune framing brief** threading the three layers (engine = the math/cause, simulation = lived experience for the affected citizens/neighborhoods, user actions = what's been decided in response and whether it's working)
+- **Measurement plan** specific fields the next audit run should compare against — usually the same `evidence.fields` and `cyclesInState` counter
 
-7. **What's improving.** Initiatives advancing, neighborhoods stabilizing, metrics trending positive. Not just problems — what's working and why.
+### Watch for first-run startup artifacts
 
-8. **Incoherence.** Results that don't make logical sense given the inputs. Health center built but health declining. High approval but no civic activity. Crime dropping with no intervention.
+The first audit run after S146 derived `cyclesInState` from each initiative's `LastUpdated` date string. That can produce surprisingly large numbers (Temescal at `cyclesInState=88` from "3/25/2026"). The number self-corrects once a second audit JSON exists to diff against. **Don't frame these inflated counts as "stuck for 88 cycles" in narrative copy.** Read `cyclesInState` qualitatively on first run ("stuck, with the design phase predating the current build of the auditor"); use the precise number from the second cycle onward.
 
-## Output Per Ailment — 7 Fields
+## Step 4 — Anomaly triage section
 
-For each finding, produce:
+For each entry in `anomalies[]`, write one paragraph:
 
-1. **In-world symptom** — what this looks like as a story
-2. **Tech diagnosis** — what's actually happening in the engine (ctx fields, sheet columns, cascade chains)
-3. **Existing mitigators check** — does a world-side remedy already exist? What's its status?
-4. **Why mitigators are or aren't working** — if a remedy exists but isn't offsetting the math, where's the gap?
-5. **Recommended remedy path** — world-side preferred (advance initiative, propose new one, character intervention, council vote). Tech-side fallback only if world-side is structurally impossible.
-6. **Tribune framing brief** — story handles threading engine + simulation + user actions (three-layer coverage)
-7. **Measurement plan** — specific fields to watch next cycle to verify whether the remedy worked
+- The anomaly (what changed, by how much)
+- The triage call: cover as story / route to engine debug / suppress until verified
+- One-line reasoning, citing `confidence` and `historicalContext`
+
+If `anomalies[]` is empty, write a one-line "No anomalies flagged this cycle." Don't fabricate.
+
+Note: routing an anomaly to engine-debug means writing a separate brief at `output/engine_anomalies_c{XX}_followup.md` flagged for the engine terminal to investigate. The anomaly is suppressed from the edition until cleared.
+
+## Step 5 — Baseline brief pass-through
+
+Don't re-write the baseline briefs. The auditor already structured them for sift. In the engine-review markdown, include:
+
+- Total brief count, broken down by `byEventClass` from the JSON's `summary`
+- Count with `promotionHints` (these are sift's promotion candidates)
+- One-line note on which neighborhoods or active ailments the briefs cluster around
+- Reference: `output/baseline_briefs_c{XX}.json`
+
+`/sift` reads the JSON directly when deciding promote / publish-as-baseline / suppress per Phase 39.9 tiered review.
+
+### Known limitation — EventType taxonomy
+
+As of S146, most events in `WorldEvents_V3_Ledger` resolve to `eventType: misc-event`, so `subjectIds` on most baseline briefs is `[]`. This blocks citizen-attributed promotion (e.g., a death brief that should hint at Beverly Hayes by POP-ID can't, because the event isn't typed as `citizen-death`). Sift can still promote on neighborhood + ailment overlap from `promotionHints`, but the citizen-specific path is degraded until the engine adds a richer EventType breakdown. Tracked in ROLLOUT_PLAN as a follow-up item.
+
+## Step 6 — Improvements section
+
+For every `type: 'improvement'` in `patterns[]`, write one short paragraph: what's working and why. Don't bury good news. Phase 38.4 will eventually thread improvements into Tribune framing too; for now, list them so sift sees them.
+
+## Step 7 — Measurement check (cycles after the first)
+
+If `output/engine_review_c{XX-1}.md` exists, read its measurement plans. For each, check whether this cycle's audit JSON shows the predicted change. Write the result as a short table or bulleted list — what was predicted, what happened, whether the remedy worked. Skip on the first run (no prior brief to compare against).
 
 ## Output File
 
-Write to `output/engine_review_c{XX}.md`
+Write to `output/engine_review_c{XX}.md`:
 
 ```
 # Engine Review — Cycle {XX}
 
 **Cycle:** {XX} | **Date:** {timestamp}
-**Previous review:** C{XX-1} (or "first review")
+**Auditor version:** {from JSON detectorVersions.engineAuditor}
+**Source files:**
+- `output/engine_audit_c{XX}.json` — {N} patterns
+- `output/engine_anomalies_c{XX}.json` — {N} anomalies
+- `output/baseline_briefs_c{XX}.json` — {N} briefs
 
 ## Ailments
 
 ### 1. [In-world symptom headline]
-- **Tech diagnosis:** [what the engine is doing]
-- **Existing mitigators:** [what exists to fix it]
+- **Tech diagnosis:** [grounded in evidence.fields]
+- **Existing mitigators:** [from affectedEntities.initiatives]
 - **Why working/not:** [gap analysis]
 - **Remedy path:** [world-side preferred, tech-side fallback]
 - **Tribune framing:** [three-layer story handles]
@@ -89,30 +114,40 @@ Write to `output/engine_review_c{XX}.md`
 ### 2. [next ailment]
 ...
 
-## Improving
+## Anomalies
+
+### [triage-by-triage, or "No anomalies flagged this cycle"]
+
+## Improvements
 
 ### [what's working and why]
 
-## Incoherence
+## Baseline Briefs (sift input)
 
-### [results that don't make logical sense]
+- Total: {N} briefs ({byEventClass breakdown})
+- With promotion hints: {N}
+- Cluster note: {neighborhood / ailment overlaps}
+- Source: `output/baseline_briefs_c{XX}.json`
 
 ## Measurement Check (from previous review)
 
-### [compare C{XX} against C{XX-1} measurement plans — did remedies work?]
+### [compare against C{XX-1} measurement plans, or "First review — no prior to compare"]
 
 ## Summary
 
-- Ailments: [count]
-- Improving: [count]
-- Incoherent: [count]
-- Measurements checked: [count passed / count total]
+- Ailments: {count} ({severity breakdown})
+- Anomalies: {count} ({triage breakdown})
+- Improvements: {count}
+- Baseline briefs: {count} ({with-promotion-hints count})
+- Measurements checked: {count passed / count total}
 ```
 
 ## Where This Sits
 
-Step 4 in the run-cycle chain. After pre-flight, pre-mortem, and cycle execution. Before build-world-summary. World summary reads this file and incorporates findings.
+Step 4 in the run-cycle chain. After pre-flight, pre-mortem, and cycle execution. Before build-world-summary. World summary reads this file and incorporates the framing; sift reads the same file plus the baseline-briefs JSON for editorial planning.
 
-## Sheet Access
+## Why this rewrite (S146)
 
-Service account via `lib/sheets.js`. Spreadsheet ID from `.env`.
+Before S146, this skill scanned 11 sheets by hand and discovered patterns through Mags's interpretation. That made the detection nondeterministic — the same C91 state could yield different ailment lists across runs. Phase 38.1 + 38.7 + 38.8 moved detection into `scripts/engineAuditor.js` so it's deterministic, testable, and runnable in 0.9 seconds. The skill keeps the work it's actually good at (narrative framing, three-layer story handles, remedy reasoning) and hands the mechanical pattern matching to code.
+
+Determinism in code, judgment in the skill. Cleaner split. Source: `docs/engine/PHASE_38_PLAN.md` §6.

@@ -1,0 +1,87 @@
+{
+  "version": "1.0.0",
+  "description": "Declarative assertion set for Phase 39.1 capability reviewer. Each entry maps id -> module path. Editorial standards can evolve without code changes by adding/removing entries here.",
+  "assertions": [
+    {
+      "id": "front-page-leads-with-highest-severity-ailment",
+      "module": "./assertHighestSeverityAilmentCoveredOnFrontPage",
+      "category": "coverage",
+      "tier": "blocking",
+      "rubricSource": "story_evaluation.md §Priority Signals + §The E91 Varek Anti-Example"
+    },
+    {
+      "id": "no-repeated-front-page-lead",
+      "module": "./assertNoRepeatedFrontPageLead",
+      "category": "freshness",
+      "tier": "advisory",
+      "rubricSource": "story_evaluation.md §What Makes a Story Weak"
+    },
+    {
+      "id": "citizens-attached-to-policy",
+      "module": "./assertCitizensAttachedToPolicy",
+      "category": "three-layer",
+      "tier": "advisory",
+      "rubricSource": "story_evaluation.md §What Makes a Story Weak (no citizens attached = report not journalism)"
+    },
+    {
+      "id": "no-sports-bar-unless-sports-lead",
+      "module": "./assertNoSportsBarUnlessSportsLead",
+      "category": "rubric-fidelity",
+      "tier": "advisory",
+      "rubricSource": "story_evaluation.md tacit standard (S144)"
+    },
+    {
+      "id": "canon-names-not-invented",
+      "module": "./assertCanonNamesNotInvented",
+      "category": "rubric-fidelity",
+      "tier": "advisory",
+      "rubricSource": ".claude/rules/newsroom.md (every citizen name from canon). Tier=advisory until citizen-reference context tightening lands; today's name extractor still produces noise on multi-word capitalized phrases that aren't actually citizen references."
+    },
+    {
+      "id": "no-edition-numbers-in-article-text",
+      "module": "./assertEditionNumbersNotInArticleText",
+      "category": "rubric-fidelity",
+      "tier": "blocking",
+      "rubricSource": ".claude/rules/newsroom.md (forbidden: edition numbers in article text)"
+    },
+    {
+      "id": "no-engine-metrics-in-journalism",
+      "module": "./assertNoEngineMetricsInJournalism",
+      "category": "rubric-fidelity",
+      "tier": "blocking",
+      "rubricSource": ".claude/rules/newsroom.md (no tension scores, severity levels, civic load, raw decimals)"
+    },
+    {
+      "id": "three-layer-coverage-on-front-page",
+      "module": "./assertThreeLayerCoverageOnFrontPage",
+      "category": "three-layer",
+      "tier": "advisory",
+      "rubricSource": "story_evaluation.md §The Beverly Hayes Standard + §The Three-Layer Test"
+    },
+    {
+      "id": "at-least-three-female-citizens-non-official",
+      "module": "./assertAtLeastThreeFemaleCitizensInNonOfficialRoles",
+      "category": "representation",
+      "tier": "advisory",
+      "rubricSource": "NOTES_TO_SELF.md S139 Persona AI / Ani feedback"
+    }
+  ],
+  "graderOnlyAssertions": [
+    {
+      "id": "covers-flagged-ailment-if-running-three-plus-cycles",
+      "module": "./assertCoversFlaggedAilmentIfRunningThreePlusCycles",
+      "category": "coverage",
+      "tier": "blocking",
+      "rubricSource": "story_evaluation.md §Priority Signals (engine review ailment with severity)",
+      "status": "deferred — needs Haiku grader key"
+    },
+    {
+      "id": "not-press-release-framing",
+      "module": "./assertNotPressReleaseFraming",
+      "category": "rubric-fidelity",
+      "tier": "advisory",
+      "rubricSource": "story_evaluation.md §What Makes a Story Weak (press release framing)",
+      "status": "deferred — needs Haiku grader key"
+    }
+  ]
+}

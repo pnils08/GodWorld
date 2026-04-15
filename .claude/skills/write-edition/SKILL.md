@@ -111,6 +111,22 @@ Save to `editions/cycle_pulse_edition_{XX}.txt`.
 
 **Update production log** with compile details (front page, total articles, edition path).
 
+## Step 3.5: Capability Review (Phase 39.1, S146)
+
+Run the editorial capability gate before validation. Catches structural editorial gaps that Rhea + Mara don't check — the front page missing the highest-severity engine ailment, citizen names that don't resolve to canon, engine metrics leaking into journalism. The Varek anti-example (E91 front-paged NBA expansion while Temescal ran four cycles uncovered) is exactly what this gate makes structurally impossible.
+
+```bash
+node scripts/capabilityReviewer.js {XX}
+```
+
+Or invoke `/capability-review` for the wrapped flow with the markdown summary.
+
+Read `output/capability_review_c{XX}.json`. Show Mike the summary.
+
+**Blocking failures halt this step.** For each, choose with Mike: (a) fix and re-run (route back to relevant reporter or `/sift`), (b) override and proceed (logs the failure for next sift), or (c) defer publish entirely. Advisory failures ship with a flag in the production log and don't gate.
+
+**Update production log** with capability review counts (passed/total, blocking, advisory) and any overrides taken.
+
 ## Step 4: Validation + Rhea
 
 ```bash

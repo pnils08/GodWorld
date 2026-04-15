@@ -132,6 +132,9 @@ Tier assignment happens once at sift, flows through the pipeline. Saves agent-ho
 6. 39.7 Final Arbiter (wraps everything)
 7. 39.8 Reward-hacking scans + OOD validation (layers on top of 39.1 + 39.7)
 8. 39.9 Tiered review (prereq: 39.1-39.7 complete, needs 38.x anomaly flag ideally)
+9. 39.10 Adversarial review skill (independent of 39.1-39.9, can build anytime)
+
+**39.10 Adversarial review skill (from Jonathan Fulton, "Agent Skills: The Cheat Codes for Claude Code", Apr 2026 — `docs/research/papers/paper7.pdf` [Drive ID: 1TEm_f_50K6qkDZAt3ZygaytVCpUsLC_-]).** Fulton's Codex Review Plugin exposes two modes: normal review (bugs, improvements, logic validation) and adversarial review (actively tries to break the code — race conditions, missed null checks, happy-path assumptions, architectural devil's-advocate). He runs adversarial before every PR and it catches issues that pass three rounds of human review. Direct analog: `/adversarial-edition-review` skill that runs against a compiled edition before publish, looking for: contradictions between articles, claims with no ledger source, civic stats that only hold in one framing, citizen quotes that could be read multiple ways, narrative gaps that happy-path reading would miss. Complements 39.8's reward-hacking scans (which look for agents gaming the evaluator) — adversarial review looks for problems that would survive the normal review. LOW-MEDIUM priority, high leverage, can build independently.
 
 **Why one phase:** These are one redesign, not four independent improvements. Each item assumes the others. Building them separately causes overlap and rework. Do them together.
 
@@ -250,6 +253,23 @@ Source: `/tmp/hermes-agent/hermes-already-has-routines.md` + `docs/engine/ROLLOU
 
 - **Skill frontmatter reference (all terminals):** `effort`, `model`, `disable-model-invocation`, `allowed-tools`, `argument-hint`. Table in ROLLOUT_ARCHIVE.md.
 - **Remaining (LOW):** subagent guidance (evaluate after next edition), description budget check (`/context`), skill evaluations (3+ test scenarios).
+- **Caveman output-compression pattern (from Fulton, S145).** Source: `docs/research/papers/paper7.pdf` [Drive ID: 1TEm_f_50K6qkDZAt3ZygaytVCpUsLC_-]. Caveman is a skill that forces terse agent output — "Done. Token validation updated. Error handling added. API compatible." instead of four sentences of preamble. Claimed 75% token savings with zero information loss. Comes bundled with a CLAUDE.md memory-compression tool. Applies to GodWorld in two places: (1) audit each `.claude/skills/*/SKILL.md` for verbose preamble that could be compressed without losing instruction clarity, (2) apply to CLAUDE.md itself — pairs with Anthropic's own warning (via Hassid, paper 6) that bloated CLAUDE.md makes Claude ignore actual instructions, and with Mezzalira context-bloat audit already in Phase 39 section. Desk-agent voice files are the *exception* — voice is load-bearing, don't compress. LOW priority, mechanical work. Apply during next skill-audit pass.
+- **Token-hygiene habits inventory (from Hassid, S145).** Source: `docs/research/papers/paper6.html` — Ruben Hassid "23 tricks to stop hitting Claude usage limits." Most of the 23 habits are already practiced. Cross-reference table:
+  | Habit | GodWorld status |
+  |-------|----------------|
+  | Skills load on demand, CLAUDE.md loads every session | Already true S144 monolith cut; validated |
+  | Keep CLAUDE.md short, move detail to skills | In-flight via Mezzalira audit + Phase 41.4 frontmatter |
+  | Batch questions in one prompt (1 reload vs 3) | Partially — sift does this, others don't. Worth formalizing per skill |
+  | Stable prompt library → partial caching | Related to Hermes prompt-cache protection (Phase 40 arch patterns block) |
+  | Projects cache uploaded files | We don't use Anthropic Projects; Sandcastle/Daytona equivalent in Phase 33.13 |
+  | Start fresh when session gets long | Our `/boot` and production-log pattern |
+  | Don't mix topics in one chat | Terminal architecture (research-build/media/civic/engine) already enforces this |
+  | Turn features off by default | Applies per-skill via `allowed-tools` frontmatter (Phase 41.4) |
+  | Sonnet for simple, Opus for heavy | Already do via autodream→Gemini, desk agents→Sonnet, Mags→Opus |
+  | Rolling 5-hour window | Relevant to scheduled-agent spacing; worth auditing whether our 3 daily crons cluster |
+  | Stop retrying when Claude can't solve | Anti-loop rule already in identity.md |
+
+  Net: three new actions. (a) Formalize "batch per skill" as a rule in skill-audit. (b) Audit scheduled-agent timing for 5-hour-window clustering. (c) When next adopting sandbox persistence (Phase 33.13 Sandcastle), include file-caching semantics equivalent to Anthropic Projects. LOW.
 - **Goal-Driven Execution retrofit (from Karpathy, S145).** Source: `https://github.com/forrestchang/andrej-karpathy-skills` — Karpathy guidelines skill. Core quote: *"Don't tell it what to do, give it success criteria and watch it go."* Our skills mostly say what to do; few declare how to verify it worked. Retrofit: every skill under `.claude/skills/` gets a top-of-file "Success criteria" block listing verifiable checks (file exists, field matches, grade ≥ threshold, citizen count in range). Stronger criteria → skill can loop autonomously. `/sift` already does this informally via Mike's plan approval; formalize across the rest. MEDIUM priority — pair with the next skill-audit pass. Principles 1–3 of the source repo (think before coding / simplicity / surgical changes) already covered by `.claude/rules/identity.md`; don't import those — only the goal-driven framing is additive.
 
 ---

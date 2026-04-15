@@ -307,7 +307,13 @@ New spreadsheet owned by service account. Tabs: Editorial Queue, Desk Packets, C
 These tabs turn the EIC sheet from a production tracker into an editorial intelligence system. Many external review suggestions (coverage gaps, corrections, accountability sections, arc awareness) converge on this same tool — Mags needs a sheet that shows what the paper is missing, not just what it's producing.
 
 **33.13 Sandcastle proof-of-concept — EVALUATE (research-build terminal).**
-Run one reporter agent via Sandcastle in a Docker container with real shell access and Supermemory queries. Requires Docker on server. See `docs/RESEARCH.md` S132 Sandcastle entry.
+Run one reporter agent via Sandcastle with real shell access and Supermemory queries. Source: `https://github.com/mattpocock/sandcastle` (cloned at `/tmp/sandcastle` S145, version 0.4.5). See also `docs/RESEARCH.md` S132 Sandcastle entry.
+
+**S145 update — Docker blocker removed.** As of 0.4.1+, Sandcastle is provider-agnostic with four built-in sandbox providers: Docker, Podman (rootless), **Vercel** (cloud Firecracker microVMs via `@vercel/sandbox`), and **Daytona** (isolated). Vercel and Daytona providers require no Docker on our server — they run the sandbox in a hosted microVM. This unblocks the PoC: pick `vercel()` or `daytona()` in the `sandbox:` option of `run()`, set the relevant API keys in `.sandcastle/.env`, skip Docker install entirely.
+
+**Parallel win — reviewer templates map to Phase 39.** Sandcastle 0.4.1 ships `sequential-reviewer` and `parallel-planner-with-review` templates where a reviewer agent enforces `CODING_STANDARDS.md` during review. Direct structural analog to Phase 39's Rhea + cycle-review + Mara three-lane design. If we run Phase 39 reviewers inside Sandcastle sandboxes with `parallel-planner-with-review`, we get process isolation + reproducibility + commit-level attribution for free. Worth prototyping against Phase 39.1 (capability reviewer) first since it's the least coupled to existing code.
+
+**Convergence flag — Daytona shows up twice.** Both Hermes Agent (watch item above) and Sandcastle (here) use Daytona as their isolated-sandbox backend. If we pick Daytona for one, we get ecosystem alignment for free. Worth a single-session Daytona evaluation before committing to any sandbox provider.
 
 **33.14 Tool-restricted reporter agents — BUILD (media terminal).**
 Add `allowed-tools: ["Read", "Grep", "Glob"]` to reporter agent skill frontmatter. Reporters get read-only during writing. Only compile/publish gets write access. From everything-claude-code's hierarchical delegation pattern.
@@ -355,7 +361,7 @@ fail2ban + unattended-upgrades done. **Remaining:** Non-root user + SSH key-only
 
 ### Phase 9: Docker Containerization — DEFERRED (RE-EVALUATE)
 
-DEFERRED (S80). PM2 handles current stack. Droplet upgraded S135 — re-evaluate if RAM headroom allows Docker. Needed for Phase 28 (Computer Use), Phase 33.13 (Sandcastle).
+DEFERRED (S80). PM2 handles current stack. Droplet upgraded S135 — re-evaluate if RAM headroom allows Docker. Needed for Phase 28 (Computer Use). **Phase 33.13 (Sandcastle) no longer needs Docker as of S145** — Sandcastle 0.4.1+ ships Vercel + Daytona cloud-sandbox providers that bypass local Docker entirely.
 Includes: 9.1 Compose stack, 9.2 Nginx + SSL, 9.3 Prometheus + Grafana, 9.4 One-command disaster recovery.
 
 ### Phase 11.1: Moltbook Registration — PARTIAL

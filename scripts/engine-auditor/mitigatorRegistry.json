@@ -1,0 +1,99 @@
+{
+  "registryVersion": "1.0.0",
+  "updated": "2026-04-15",
+  "note": "Maps ailment categories to the initiative types that mitigate them + the engine field each mitigator should move. Extend by adding entries — no code change required.",
+  "categories": {
+    "health": {
+      "keywords": ["health", "clinic", "medical", "hospital"],
+      "initiativeDomains": ["health"],
+      "expectedMetric": {
+        "sheet": "Neighborhood_Map",
+        "field": "Sentiment",
+        "sign": "positive",
+        "magnitudeThreshold": 0.02
+      },
+      "stuckPhaseThreshold": 5
+    },
+    "safety": {
+      "keywords": ["safety", "crime", "police", "alternative-response", "oari"],
+      "initiativeDomains": ["safety"],
+      "expectedMetric": {
+        "sheet": "Crime_Metrics",
+        "field": "ViolentCrimeIndex",
+        "sign": "negative",
+        "magnitudeThreshold": 0.05
+      },
+      "stuckPhaseThreshold": 5
+    },
+    "transit": {
+      "keywords": ["transit", "bart", "bus", "hub", "fruitvale"],
+      "initiativeDomains": ["transit"],
+      "expectedMetric": {
+        "sheet": "Neighborhood_Map",
+        "field": "Sentiment",
+        "sign": "positive",
+        "magnitudeThreshold": 0.02
+      },
+      "stuckPhaseThreshold": 5
+    },
+    "economic": {
+      "keywords": ["economic", "stabilization", "jobs", "workforce", "business"],
+      "initiativeDomains": ["economic", "workforce"],
+      "expectedMetric": {
+        "sheet": "Neighborhood_Map",
+        "field": "RetailVitality",
+        "sign": "positive",
+        "magnitudeThreshold": 0.02
+      },
+      "stuckPhaseThreshold": 5
+    },
+    "housing": {
+      "keywords": ["housing", "zoning", "displacement", "stabilization", "baylight"],
+      "initiativeDomains": ["housing", "economic"],
+      "expectedMetric": {
+        "sheet": "Neighborhood_Map",
+        "field": "DisplacementPressure",
+        "sign": "negative",
+        "magnitudeThreshold": 0.03
+      },
+      "stuckPhaseThreshold": 5
+    },
+    "sports": {
+      "keywords": ["sports", "stadium", "arena", "as", "bulls"],
+      "initiativeDomains": ["sports"],
+      "expectedMetric": {
+        "sheet": "Neighborhood_Map",
+        "field": "EventAttractiveness",
+        "sign": "positive",
+        "magnitudeThreshold": 0.02
+      },
+      "stuckPhaseThreshold": 5
+    },
+    "culture": {
+      "keywords": ["culture", "arts", "festival", "community"],
+      "initiativeDomains": ["culture"],
+      "expectedMetric": {
+        "sheet": "Neighborhood_Map",
+        "field": "Sentiment",
+        "sign": "positive",
+        "magnitudeThreshold": 0.02
+      },
+      "stuckPhaseThreshold": 5
+    }
+  },
+  "signalToCategory": {
+    "Sentiment-low": "culture",
+    "CrimeIndex-high": "safety",
+    "RetailVitality-low": "economic",
+    "DisplacementPressure-high": "housing"
+  },
+  "phaseProgressionHints": {
+    "note": "Phases ordered earliest → latest. 'stuck' means cyclesInPhase exceeds threshold without advance.",
+    "health": ["proposed", "design-phase", "construction-active", "operational"],
+    "safety": ["proposed", "pilot_evaluation", "rollout", "operational"],
+    "transit": ["proposed", "vote-scheduled", "visioning", "construction-active", "operational"],
+    "economic": ["proposed", "passed", "disbursement-active", "completed"],
+    "housing": ["proposed", "passed", "construction-active", "completed"],
+    "sports": ["proposed", "passed", "construction-active", "operational"]
+  }
+}

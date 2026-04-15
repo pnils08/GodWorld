@@ -1,0 +1,98 @@
+{
+  "templatesVersion": "1.0.0",
+  "updated": "2026-04-15",
+  "note": "World-side action templates per gap × ailment-category. Order = most-likely-to-work first. 38.3 recommendRemedy fills {initiativeId}, {category}, {neighborhood} placeholders from pattern data.",
+  "worldSide": {
+    "no-mitigator": {
+      "default": [
+        {
+          "type": "propose-new-initiative",
+          "target": "council:any",
+          "action": "propose a new {category} initiative targeting {neighborhood}",
+          "rationale": "no existing mitigator addresses this ailment",
+          "expectedEngineEffect": "{category} metrics stabilize if council passes + agent implements",
+          "confidence": "medium"
+        },
+        {
+          "type": "mayoral-pressure",
+          "target": "office:mayor",
+          "action": "mayor's office highlights the gap in public remarks",
+          "rationale": "surfaces the issue into council agenda",
+          "expectedEngineEffect": "approval / visibility shift feeds civic-load metric",
+          "confidence": "low"
+        }
+      ]
+    },
+    "mitigator-stuck": {
+      "default": [
+        {
+          "type": "advance-initiative",
+          "target": "{initiativeId}",
+          "action": "advance {initiativeId} out of {currentPhase}",
+          "rationale": "initiative is the right remedy but has not moved — unblock the responsible agent or scheduled action",
+          "expectedEngineEffect": "{expectedField} moves {expectedSign} once phase advances",
+          "confidence": "high"
+        },
+        {
+          "type": "mayoral-pressure",
+          "target": "office:mayor",
+          "action": "mayor's office directs civic-project agent to expedite review",
+          "rationale": "phase advance requires institutional push",
+          "expectedEngineEffect": "NextScheduledAction fires within 1-2 cycles",
+          "confidence": "medium"
+        },
+        {
+          "type": "council-vote",
+          "target": "council:any",
+          "action": "council votes on expediting milestone review",
+          "rationale": "adds political weight behind the advance",
+          "expectedEngineEffect": "initiative phase advances",
+          "confidence": "medium"
+        }
+      ]
+    },
+    "mitigator-firing-but-insufficient": {
+      "default": [
+        {
+          "type": "propose-new-initiative",
+          "target": "council:any",
+          "action": "layer a second {category} initiative alongside the existing one",
+          "rationale": "one mitigator is firing but ailment severity has not dropped — insufficient magnitude",
+          "expectedEngineEffect": "combined effect exceeds threshold",
+          "confidence": "medium"
+        },
+        {
+          "type": "character-intervention",
+          "target": "neighborhood:{neighborhood}",
+          "action": "neighborhood organizer / local leader drives ground-level action",
+          "rationale": "grassroots complement to institutional remedy",
+          "expectedEngineEffect": "citizen-level coverage + sentiment feedback",
+          "confidence": "medium"
+        }
+      ]
+    },
+    "remedy-working": {
+      "default": [
+        {
+          "type": "none",
+          "target": "",
+          "action": "no remedy needed — monitor",
+          "rationale": "mitigator is firing and severity is dropping",
+          "expectedEngineEffect": "severity drops to medium/low next cycle",
+          "confidence": "high"
+        }
+      ]
+    }
+  },
+  "techSideTriggers": {
+    "note": "Tech-side fallback fires only when the writeback chain itself is broken. Detected when: initiative status=passed AND implementationPhase indicates rollout/active AND effectsFiring=false AND priorAuditCount>=3 (enough cycles to rule out noise).",
+    "bugReportHints": {
+      "health": "Check phase05/applyInitiativeImplementationEffects.js — health-domain writeback to Neighborhood_Map.Sentiment",
+      "safety": "Check phase05/applyInitiativeImplementationEffects.js + phase03/updateCrimeMetrics.js — ViolentCrimeIndex writeback",
+      "transit": "Check phase02/applyInitiativeImplementationEffects.js — transit effects on Sentiment + Transit_Metrics",
+      "economic": "Check phase06/economicRippleEngine.js + phase10 persistence for RetailVitality",
+      "housing": "Check phase06/applyMigrationDrift.js + DisplacementPressure writeback",
+      "sports": "Check phase05/runAsUniversePipeline.js + phase08 writers for EventAttractiveness"
+    }
+  }
+}

@@ -35,6 +35,12 @@ const ailmentDetectors = {
 const anomalyDetector = require('./engine-auditor/detectAnomalies');
 const baselineBriefs = require('./engine-auditor/generateBaselineBriefs');
 
+const enrichers = [
+  { name: 'checkMitigators', module: require('./engine-auditor/checkMitigators') },
+  { name: 'recommendRemedy', module: require('./engine-auditor/recommendRemedy') },
+  { name: 'generateTribuneFraming', module: require('./engine-auditor/generateTribuneFraming') },
+];
+
 const SHEETS_TO_READ = [
   'Riley_Digest',
   'Initiative_Tracker',
@@ -162,6 +168,18 @@ async function main() {
       patterns.push(...found);
       detectorVersions[name] = detector.version || DETECTOR_VERSION;
       console.log(`  ${name}: ${found.length}`);
+    } catch (err) {
+      console.error(`  ${name} FAILED: ${err.message}`);
+      detectorVersions[name] = 'ERROR';
+    }
+  }
+
+  console.log('Running enrichers (38.2 + 38.3 + 38.4)...');
+  for (const { name, module } of enrichers) {
+    try {
+      module.enrich(patterns, ctx);
+      detectorVersions[name] = module.version || DETECTOR_VERSION;
+      console.log(`  ${name}: enriched ${patterns.length} patterns`);
     } catch (err) {
       console.error(`  ${name} FAILED: ${err.message}`);
       detectorVersions[name] = 'ERROR';

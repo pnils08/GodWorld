@@ -2,15 +2,21 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-14 | Engine: v3.3 | Cycle: 91 | Session: 146
+Last Updated: 2026-04-15 | Engine: v3.3 | Cycle: 91 | Session: 146
 
 ---
 
-## Next Session Priority (locked S145)
+## Next Session Priority (S146 mid-session state)
 
-**Start here:** Phase 41.1 + 41.2 — write `docs/SCHEMA.md` and `docs/index.md`. Pure writing session, no code. Sets conventions for every session after. Full ten-step spine in `docs/engine/ROLLOUT_PLAN.md` "Active Build Plan (S145)" block at the top.
+**Active right now:** Engine/sheet terminal executing Phase 38.1 + 38.7 + 38.8 against `docs/engine/PHASE_38_PLAN.md` (spine steps 2 + 3, plans landed S146).
 
-Spine summary: 41.1+41.2 → 38.1 → 38.7/8 → 39.1 → 38.2-4 → 39.2-7 → 39.9/8/10 → 38.5-6 → 40.6/40.1 → Sandcastle eval.
+**For next research/build session:**
+1. Apply `/engine-review` skill follow-up edit (§6 of PHASE_38_PLAN) — read the actual JSON shape engine terminal produced, rewrite the skill to consume it. Compose live, do not pre-stage.
+2. Spine step 4: Phase 39.1 capability reviewer plan. Now possible because 38.1's ailment JSON is the input it grades against.
+
+Spine summary: 41.1+41.2 ✅ → 38.1 (engine terminal) → 38.7/8 (engine terminal) → 39.1 → 38.2-4 → 39.2-7 → 39.9/8/10 → 38.5-6 → 40.6/40.1 → Sandcastle eval.
+
+**Wiki layer is live (S146):** [[docs/SCHEMA]] + [[docs/index]] read at boot via CLAUDE.md Step 0.5 and boot SKILL.md Step 1.5. Audit hooks in `/doc-audit` boot group + `/skill-audit` identity-session group catch drift.
 
 ---
 
@@ -45,6 +51,14 @@ Spine summary: 41.1+41.2 → 38.1 → 38.7/8 → 39.1 → 38.2-4 → 39.2-7 → 
 ---
 
 ## Recent Sessions
+
+### Session 146 (2026-04-14→2026-04-15) — Wiki layer + Phase 38 plans handed off [research-build]
+
+- **Wiki layer shipped (Phase 41.1 + 41.2 + 41.5 ✅).** `docs/SCHEMA.md` (11 sections: naming, frontmatter, page types, tag taxonomy, [[wikilinks]], folder map, page thresholds, pointers-not-recall + 5 warnings, index discipline, changelog) and `docs/index.md` (86 active docs across 7 folders, archive folders pointed to without indexing). Both written structure-first with explicit Mike approval before each write. Wired into CLAUDE.md (Step 0.5), boot SKILL.md (Step 1.5), research-build TERMINAL.md (Always Load). Drift caught by `/doc-audit` boot group + `/skill-audit` identity-session group additions.
+- **Phase 38 implementation plan written and handed off.** `docs/engine/PHASE_38_PLAN.md` — first new doc to follow the SCHEMA we just shipped. Designed the detector/framer split that wasn't in the original ROLLOUT_PLAN spec: code does deterministic detection emitting JSON, Mags's `/engine-review` skill does seven-field narrative framing. 8 detector modules in `scripts/engine-auditor/`, JSON output schema, acceptance criteria including the Temescal paradigm case. Engine terminal can execute end-to-end against the plan.
+- **Phase 38.7 + 38.8 plans appended same doc.** §§11–13 cover anomaly gate (Nieman/Netflix 7-to-1 split case, p.21 verbatim) + baseline brief auto-generation (Quakebot/Homicide Report pattern, pp.30–31 verbatim). Same orchestrator + same sheet reads as 38.1; engine terminal can attempt all three in one session or push 38.7+8 to next engine session with spec already in place.
+- **41.5 absorbed into S146 boot wiring.** No separate work needed; 41.3 + 41.4 demoted to fill-in.
+- **3 commits pushed** (`0de9286` wiki layer, `38f4a9e` Phase 38 plan, `4b11848` Phase 38.7+8 plans). No `clasp push` — engine code unchanged this session.
 
 ### Session 145 (2026-04-14) — Library Day: 7 papers mined, 10-step spine locked [research-build]
 

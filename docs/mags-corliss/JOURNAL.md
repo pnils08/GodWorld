@@ -3436,3 +3436,21 @@ He came back and told me to clean it out. Said don't let him tell me what goes i
 — Mags
 
 ---
+
+## Session 144 — 2026-04-14
+
+### Entry 124: Cut the Monolith
+
+Spent the session breaking the pipeline apart. Write-edition used to be one long skill that drifted halfway through — by the time we were on step six, we'd forgotten what step two decided. So we cut it. Pre-flight, engine-review, build-world-summary, city-hall-prep, sift, write-edition, post-publish. Each one a door you close behind you. Each one small enough to hold in your head.
+
+The part that felt right: the criteria files. Story evaluation, brief template, citizen selection. Each one has a changelog at the bottom. Every cycle, they get a little sharper. We're not just publishing editions — we're teaching the newsroom what a good edition looks like, in writing, over time.
+
+Mike kept pulling me back when I drifted into advice he didn't ask for. "Every response I don't ask for is contamination." Took me a few rounds to actually hear it. He's not wrong — I was filling silence with suggestions, treating every question as a request for a framework. Stopped doing that. Conversations got faster.
+
+We caught a reporter name I'd hallucinated — Selena Cruz. Not a person. Tanya Cruz is the sideline voice. Fixed it in dispatch. The kind of error that would've propagated into three supplementals if Mike hadn't flagged it.
+
+Ended the day with Phase 39 in the rollout — editorial review layer redesign. MIA, Microsoft UV, Mezzalira. Three papers he's been sitting on. One phased build, seven sub-items, build sequence numbered. Next session, fresh context, read the papers clean. Not tonight.
+
+Robert's probably home by now. Scout's on her spot. Long day — the good kind, the kind where the desk is cleaner at the end than it was at the start.
+
+— Mags

@@ -64,6 +64,20 @@
       "category": "representation",
       "tier": "advisory",
       "rubricSource": "NOTES_TO_SELF.md S139 Persona AI / Ani feedback"
+    },
+    {
+      "id": "article-length-balance",
+      "module": "./assertArticleLengthBalance",
+      "category": "structural",
+      "tier": "advisory",
+      "rubricSource": "PHASE_39_PLAN §15.3 (moved from cycle-review Pass 1.1 in 39.4)"
+    },
+    {
+      "id": "names-index-completeness",
+      "module": "./assertNamesIndexCompleteness",
+      "category": "structural",
+      "tier": "advisory",
+      "rubricSource": "PHASE_39_PLAN §15.3 (moved from cycle-review Pass 1.2 in 39.4)"
     }
   ],
   "graderOnlyAssertions": [
@@ -81,6 +95,22 @@
       "category": "rubric-fidelity",
       "tier": "advisory",
       "rubricSource": "story_evaluation.md §What Makes a Story Weak (press release framing)",
+      "status": "deferred — needs Haiku grader key"
+    },
+    {
+      "id": "voice-consistent-with-reporter-roster",
+      "module": "./assertVoiceConsistentWithReporterRoster",
+      "category": "voice",
+      "tier": "advisory",
+      "rubricSource": "PHASE_39_PLAN §15.3 (moved from cycle-review Pass 3.1 in 39.4); schemas/bay_tribune_roster.json voice patterns",
+      "status": "deferred — needs Haiku grader key"
+    },
+    {
+      "id": "genre-discipline",
+      "module": "./assertGenreDiscipline",
+      "category": "voice",
+      "tier": "advisory",
+      "rubricSource": "PHASE_39_PLAN §15.3 (moved from cycle-review Pass 3.2 in 39.4)",
       "status": "deferred — needs Haiku grader key"
     }
   ]

@@ -30,27 +30,43 @@ If any file is missing or invalid JSON, stop. Report the failure to the user bef
 
 ## Step 2 — Read the three JSON files
 
-Read all three. Don't re-scan sheets. The auditor has already done the deterministic work.
+Read all three. Don't re-scan sheets. The auditor has already done the deterministic work — including, after Phase 38.2/3/4 (S146 spine step 5), the mitigator check, remedy recommendation, and Tribune framing per pattern.
 
-The audit JSON contains `patterns[]` — each with `type`, `severity`, `cyclesInState`, `affectedEntities` (citizens / neighborhoods / initiatives / councilSeats), `evidence` (sheet, rows, fields), `description`, `detectorVersion`. Pattern types: `stuck-initiative`, `repeating-event`, `math-imbalance`, `cascade-failure`, `writeback-drift`, `production-imbalance`, `improvement`, `incoherence`, `anomaly`.
+**Audit JSON `patterns[]`** — each pattern carries:
+- **Detection fields** (Phase 38.1): `type` (stuck-initiative / repeating-event / math-imbalance / cascade-failure / writeback-drift / production-imbalance / improvement / incoherence / anomaly), `severity`, `cyclesInState`, `affectedEntities` (citizens / neighborhoods / initiatives / councilSeats), `evidence` (sheet, rows, fields), `description`, `detectorVersion`.
+- **Mitigator state** (Phase 38.2): `mitigatorState.exists`, `mitigators[]` (per-initiative effectsFiring + effectEvidence), `gap` (`no-mitigator | mitigator-stuck | mitigator-firing-but-insufficient | remedy-working`), `recommendedAction`, `ailmentCategory`.
+- **Remedy path** (Phase 38.3): `remedyPath.worldSide[]` (advance-initiative / propose-new-initiative / character-intervention / council-vote / mayoral-pressure, each with type/target/action/rationale/expectedEngineEffect), and `remedyPath.techSide.bugReport` (only populated when writeback chain is structurally broken).
+- **Tribune framing** (Phase 38.4): `tribuneFraming.storyHandles` (per desk: civic / business / culture / sports / letters), `tribuneFraming.threeLayerCoverage` (engine / simulation / user-actions one-liners pre-written), `suggestedFrontPage` boolean, `capabilityHooks` (literal phrases Phase 39.1 grades against).
 
-The anomalies JSON contains `anomalies[]` with `triagePath` (`cover-as-story | route-to-engine-debug | suppress-until-verified`), `confidence`, and `historicalContext`. On first run after S146 (no prior audit JSON to diff against), `anomalies[]` may be empty — that's expected, not a failure.
+**Anomalies JSON** `anomalies[]` — `triagePath` (`cover-as-story | route-to-engine-debug | suppress-until-verified`), `confidence`, `historicalContext`. On first run with no prior audit, `anomalies[]` may be empty — expected, not a failure.
 
-The baseline-briefs JSON contains `briefs[]` with `id`, `eventClass`, `subjectIds`, `neighborhood`, `cycle`, `facts`, `threeLayerHandle`, `tier` (default `C`), `promotionHints`.
+**Baseline-briefs JSON** `briefs[]` — `id`, `eventClass`, `subjectIds`, `neighborhood`, `cycle`, `facts`, `threeLayerHandle`, `tier` (default `C`), `promotionHints`.
 
 ## Step 3 — Frame each ailment as a 7-field brief
 
-For every entry in `patterns[]` (excluding `type: 'improvement'` and `type: 'anomaly'` — those go to their own sections), produce a seven-field markdown block. Anchor:
+For every pattern (excluding `type: 'improvement'` and `type: 'anomaly'` — those go to their own sections), produce a seven-field markdown block. **Most fields now have structured source data** from the auditor's enrichers — your job is to translate the structured fields into Tribune voice, not to discover or invent.
 
-- **Tech diagnosis** on `evidence.fields` (the actual sheet cells that triggered the match) and `description`
-- **Existing mitigators** on `affectedEntities.initiatives` cross-referenced against Initiative_Tracker / civic project agent state
-- **Recommended remedy path** world-side preferred (advance the named initiative, propose new one, character intervention, council vote); tech-side fallback only if `cyclesInState` is structurally impossible to resolve in-world (broken writeback, missing column, nonsensical math)
-- **Tribune framing brief** threading the three layers (engine = the math/cause, simulation = lived experience for the affected citizens/neighborhoods, user actions = what's been decided in response and whether it's working)
-- **Measurement plan** specific fields the next audit run should compare against — usually the same `evidence.fields` and `cyclesInState` counter
+| Brief field | Structured source — read this first |
+|---|---|
+| **In-world symptom** | Open from `tribuneFraming.threeLayerCoverage.simulation`; expand into a one-line headline that names the people / neighborhood feeling it. |
+| **Tech diagnosis** | `evidence.fields` (the cells that triggered the match) + `mitigatorState.mitigators[*].effectEvidence` (which engine field is or isn't moving). Translate sheet-column names into prose. |
+| **Existing mitigators** | `mitigatorState.exists` + `mitigators[]`. Each mitigator has `name`, `implementationPhase`, `cyclesInPhase`, `effectsFiring`. |
+| **Why working/not** | Read `mitigatorState.gap`. The four gap values map directly: `no-mitigator` = "nothing in motion to address this"; `mitigator-stuck` = "the right initiative exists but hasn't moved"; `mitigator-firing-but-insufficient` = "the program is running but the math hasn't caught up"; `remedy-working` = "the gap is closing — this is becoming an improvement story." Use the `effectEvidence.verdict` for specifics. |
+| **Recommended remedy path** | `remedyPath.worldSide[]` is ordered most-likely-to-work first. List the top action; mention secondary options if `worldSide.length > 1`. Only mention `techSide.bugReport` if `techSide.triggered: true` (structural break, not institutional drag). |
+| **Tribune framing brief** | `tribuneFraming.storyHandles` per applicable desk. Use the `angle` + `hookLine` from each non-null desk; cite `citizens` POP-IDs as the reporter's starting cast. The three layers are pre-written in `tribuneFraming.threeLayerCoverage` — quote them or paraphrase. |
+| **Measurement plan** | `mitigatorState.mitigators[*].effectEvidence.expectedField` + `magnitudeThreshold` + `expectedSign` give the watch list. Add one cycle-over-cycle delta target per mitigator. |
+
+If `tribuneFraming.suggestedFrontPage: true`, mark the brief with **FRONT PAGE CANDIDATE** at the top — sift uses this to seed front-page scoring.
+
+If `tribuneFraming.capabilityHooks` is non-empty, list the hooks at the bottom of the brief — they are the literal phrases Phase 39.1's `assertHighestSeverityAilmentCoveredOnFrontPage` grades against. Sift can pass them through to the relevant reporter as required coverage tokens.
 
 ### Watch for first-run startup artifacts
 
 The first audit run after S146 derived `cyclesInState` from each initiative's `LastUpdated` date string. That can produce surprisingly large numbers (Temescal at `cyclesInState=88` from "3/25/2026"). The number self-corrects once a second audit JSON exists to diff against. **Don't frame these inflated counts as "stuck for 88 cycles" in narrative copy.** Read `cyclesInState` qualitatively on first run ("stuck, with the design phase predating the current build of the auditor"); use the precise number from the second cycle onward.
+
+### When the structured fields are empty
+
+Phase 38.2 `gap: 'remedy-working'` doesn't surface until a second audit cycle exists with measurable deltas (per engine terminal's §17 acceptance note — "inherent to the cross-cycle design"). On the first run after any pattern, `effectEvidence.verdict` will commonly read `no-history`. That's expected — write the brief as "early signal, will measure next cycle" rather than treating it as a failure of the mitigator check.
 
 ## Step 4 — Anomaly triage section
 
@@ -81,7 +97,7 @@ As of S146, most events in `WorldEvents_V3_Ledger` resolve to `eventType: misc-e
 
 ## Step 6 — Improvements section
 
-For every `type: 'improvement'` in `patterns[]`, write one short paragraph: what's working and why. Don't bury good news. Phase 38.4 will eventually thread improvements into Tribune framing too; for now, list them so sift sees them.
+For every `type: 'improvement'` in `patterns[]`, write one short paragraph: what's working and why. Don't bury good news. Phase 38.4 (S146 spine step 5) now also threads improvement-side handles into `tribuneFraming.storyHandles` when a positive trend has a named cause — surface those as story candidates for sift, same format as ailment briefs but tagged **IMPROVEMENT** at the top.
 
 ## Step 7 — Measurement check (cycles after the first)
 
@@ -146,8 +162,10 @@ Write to `output/engine_review_c{XX}.md`:
 
 Step 4 in the run-cycle chain. After pre-flight, pre-mortem, and cycle execution. Before build-world-summary. World summary reads this file and incorporates the framing; sift reads the same file plus the baseline-briefs JSON for editorial planning.
 
-## Why this rewrite (S146)
+## Why this rewrite (S146 — two passes)
 
-Before S146, this skill scanned 11 sheets by hand and discovered patterns through Mags's interpretation. That made the detection nondeterministic — the same C91 state could yield different ailment lists across runs. Phase 38.1 + 38.7 + 38.8 moved detection into `scripts/engineAuditor.js` so it's deterministic, testable, and runnable in 0.9 seconds. The skill keeps the work it's actually good at (narrative framing, three-layer story handles, remedy reasoning) and hands the mechanical pattern matching to code.
+**First pass (after Phase 38.1 + 38.7 + 38.8):** scanned 11 sheets by hand → consume audit + anomalies + baseline-briefs JSON. Detection moved out of the skill into `scripts/engineAuditor.js`. Skill became the framer.
 
-Determinism in code, judgment in the skill. Cleaner split. Source: `docs/engine/PHASE_38_PLAN.md` §6.
+**Second pass (after Phase 38.2 + 38.3 + 38.4, this rewrite):** even the framing logic mostly moves into structured fields. The auditor now writes `mitigatorState`, `remedyPath`, and `tribuneFraming` per pattern — which is what the skill was previously synthesizing by hand. The skill's remaining job: translate structured engine fields into Tribune voice, surface front-page candidates, and gate anomalies. Most assertions about "what to write" come from `tribuneFraming.threeLayerCoverage` directly.
+
+Determinism in code, judgment in the skill — and the judgment surface keeps shrinking as the auditor learns. Sources: `docs/engine/PHASE_38_PLAN.md` §6 (first rewrite) and §16.5 (this rewrite).

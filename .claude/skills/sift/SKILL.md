@@ -24,18 +24,20 @@ Verify these exist before starting:
 
 If city-hall hasn't run, sift can still proceed with world summary and newsroom memory — but civic stories will be thin.
 
-## Inputs — 3 Documents
+## Inputs — 3 Documents + 2 Auditor JSONs
 
-Each upstream skill consolidates its output so sift reads exactly 3 files:
+Sift reads three narrative documents PLUS two structured-JSON inputs from the engine auditor (Phase 38, S146 spine steps 2/3/5):
 
-1. **World summary** — `output/world_summary_c{XX}.md` — the full factual picture of this cycle INCLUDING engine review findings (ailments, improvements, remedy paths pulled in by `/build-world-summary`)
+1. **World summary** — `output/world_summary_c{XX}.md` — the full factual picture of this cycle INCLUDING engine review framing (mitigatorState/remedyPath/tribuneFraming pulled in via `/build-world-summary` + `/engine-review`)
 2. **City-hall production log** — `output/production_log_city_hall_c{XX}.md` — voice decisions with key quotes, tracker updates, project details, media handoff (consolidated by `/city-hall` Step 7)
 3. **Newsroom memory** — `docs/mags-corliss/NEWSROOM_MEMORY.md` — errata patterns, coverage gaps, character continuity, previous edition coverage context, active story tracking (updated by post-publish skill each cycle)
+4. **Engine audit JSON** — `output/engine_audit_c{XX}.json` — `patterns[]` with structured fields per pattern. Sift reads `tribuneFraming.storyHandles[desk]` directly when proposing stories instead of synthesizing angles from raw narrative. Also reads `tribuneFraming.suggestedFrontPage` for front-page seeding and `tribuneFraming.capabilityHooks` for required coverage tokens to pass through to reporters.
+5. **Baseline briefs JSON** — `output/baseline_briefs_c{XX}.json` — auto-generated event briefs from Phase 38.8. Sift decides per brief: **promote** (rewrite with reporter voice, full feature), **publish-as-baseline** (Tier C automated, light review), or **suppress**.
 
 ### On-demand lookups (during Steps 4-5)
 
-4. **Citizen lookups** — `lookup_citizen(name)` via MCP for every citizen considered for a story
-5. **Canon search** — `search_canon(topic)` for storyline continuity — what has the Tribune already published on this topic
+6. **Citizen lookups** — `lookup_citizen(name)` via MCP for every citizen considered for a story
+7. **Canon search** — `search_canon(topic)` for storyline continuity — what has the Tribune already published on this topic
 
 ## Steps
 
@@ -88,6 +90,16 @@ Threads: [count] | New: [count] | Continuing arcs: [count] | Gaps: [count]
 
 Read `docs/media/story_evaluation.md` FIRST. It defines what makes a story worth proposing, how to prioritize, the three-layer test, front page scoring, and what weak stories look like. That file evolves after each cycle.
 
+**The auditor has done the discovery work.** After Phase 38.4 (S146 spine step 5), every audit pattern carries `tribuneFraming.storyHandles[desk]` with pre-written angle + hookLine + candidate citizens. Sift's job is now **validate + rank + decide**, not discover. Workflow per pattern:
+
+1. Read `tribuneFraming.storyHandles` — pick the desk(s) that have non-null handles
+2. Cross-check the suggested angle against `story_evaluation.md` priority signals + three-layer test
+3. Promote `tribuneFraming.suggestedFrontPage: true` patterns to the front-page candidate pool
+4. For improvements, do the same with `type: 'improvement'` patterns that carry handles
+5. Then add Mode A questions for ambiguous threads + Mode B proposals for sports/texture threads not in the auditor output
+
+If the auditor's suggested angle is weak (fails the three-layer test or repeats last edition's lead), reject it and propose your own. The auditor seeds; sift gates.
+
 **Two modes, presented together:**
 
 **Mode A — Questions (engine-driven threads).** For threads with clear engine data — stuck initiatives, recurring ailments, civic decisions with options. Ask the player what they want to do. The answer drives the story angle.
@@ -95,6 +107,18 @@ Read `docs/media/story_evaluation.md` FIRST. It defines what makes a story worth
 **Mode B — Story Proposals (sports, texture, culture threads).** For threads where the story is already clear from the data. Propose the angle directly.
 
 As the criteria files train over more cycles, more threads shift from proposals to questions.
+
+### Step 2b: Baseline brief triage
+
+Read `output/baseline_briefs_c{XX}.json`. For each entry in `briefs[]`, decide:
+
+- **Promote to feature** — rewrite with reporter voice, additional reporting, may move to Tier A or B. Use when `promotionHints` flags a citizen with prior coverage, the brief's neighborhood overlaps an active high-severity ailment, or the subject is Tier-1/Tier-2.
+- **Publish as baseline** — Tier C automated, light review per Phase 39.9. Most routine items default here. The brief copies through to the edition with minimal editing.
+- **Suppress** — only when the brief is genuinely noise (e.g., the 14th business that paid quarterly taxes this cycle).
+
+Default to **publish as baseline** if undecided. Per the Division III principle (memory: `project_division-three-principle.md`), under-coverage is the bigger risk than over-coverage. The baseline-brief mechanism is exactly what lets us cover what no real newsroom could staff.
+
+Carry `tribuneFraming.capabilityHooks` from any promoted patterns through to the assigned reporter as required coverage tokens — these are the literal phrases Phase 39.1's `assertHighestSeverityAilmentCoveredOnFrontPage` will grade against at write-edition Step 3.5.
 
 ```
 SIFT — Cycle {XX}

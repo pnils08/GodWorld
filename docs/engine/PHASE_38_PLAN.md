@@ -347,7 +347,222 @@ After all three land:
 
 ---
 
+---
+
+## 14. Phase 38.2 — Existing mitigator check (spine step 5, build first of three)
+
+**Goal:** for each ailment pattern in `engine_audit_c{XX}.json`, determine whether a world-side remedy already exists and whether it's actually offsetting the math.
+
+### 14.1 Why this is separate from 38.1
+
+38.1 detects "this initiative is stuck for 88 cycles." 38.2 answers "is anything trying to fix it, and is it working?" Two different questions. The detector is mechanical pattern-matching on sheet state; the mitigator check is a join across initiatives, civic-project agent state, council decisions, and neighborhood metric movement. Separation also lets us version them independently — mitigator definitions evolve when new civic-project types come online.
+
+### 14.2 Files to create
+
+| Path | Role |
+|---|---|
+| `scripts/engine-auditor/checkMitigators.js` | New module. Exports `enrich(patterns, ctx) → patterns[]` (mutates in place, adds `mitigatorState` field per pattern). Called by `engineAuditor.js` after the eight detectors run, before output is written. |
+| `scripts/engine-auditor/mitigatorRegistry.json` | Declarative map of ailment categories → known mitigator types. E.g. `health-decline → health-center-construction`, `transit-strain → transit-hub-phase`, `housing-pressure → stabilization-fund + zoning-overlay`. Versioned independently from code. |
+
+No new sheet reads needed — mitigator check uses the same Initiative_Tracker, Civic_Office_Ledger, and Neighborhood_Map snapshots `engineAuditor.js` already loads.
+
+### 14.3 New `mitigatorState` field on each pattern
+
+```js
+mitigatorState: {
+  exists: boolean,                // is there at least one initiative addressing this ailment?
+  mitigators: [                   // one entry per matching initiative
+    {
+      initiativeId: 'INIT-005',
+      name: 'Temescal Community Health Center',
+      status: 'passed',
+      implementationPhase: 'design-phase',
+      cyclesInPhase: 88,           // from existing cyclesInState calc
+      effectsFiring: boolean,      // is the engine actually reading writebacks from this initiative?
+      effectEvidence: {            // what we checked to determine effectsFiring
+        expectedField: 'neighborhoodHealth.Temescal',
+        observedDelta: 0.0,        // change in target field across last 3 cycles
+        expectedSign: 'positive',  // mitigator should improve this
+        verdict: 'effects-not-firing'
+      }
+    }
+  ],
+  gap: 'no-mitigator' | 'mitigator-stuck' | 'mitigator-firing-but-insufficient' | 'remedy-working',
+  recommendedAction: 'string'      // one-line summary; 38.3 produces the full remedy path
+}
+```
+
+### 14.4 Detection logic
+
+For each pattern with `affectedEntities.initiatives` non-empty:
+1. Look up each initiative in `Initiative_Tracker`. Capture status + ImplementationPhase.
+2. Cross-reference with the registry to confirm the initiative type is a real mitigator for this ailment category.
+3. For each mitigator initiative, find the engine field it should affect (registry maps `initiative-type → expected-field`). Read the field across the prior 3 audit JSONs (`output/engine_audit_c{XX-N}.json`) and compute delta.
+4. If delta is in the expected direction with sufficient magnitude → `effectsFiring: true`. Otherwise `false`.
+
+For patterns with empty `affectedEntities.initiatives`:
+1. Use the registry to look up the ailment category → mitigator-type list.
+2. Search `Initiative_Tracker` for any active initiative matching one of those types AND any of `affectedEntities.neighborhoods`.
+3. If found, treat as above. If not, `exists: false`, `gap: 'no-mitigator'`.
+
+Gap classification (single field, 4 values):
+- `no-mitigator` — no initiative addresses this ailment
+- `mitigator-stuck` — initiative exists, but `cyclesInPhase >= 5` and `effectsFiring: false`
+- `mitigator-firing-but-insufficient` — `effectsFiring: true` but ailment severity hasn't dropped
+- `remedy-working` — `effectsFiring: true` and ailment severity is dropping (this is when the pattern should arguably move from `severity: high` to `severity: medium` next cycle)
+
+### 14.5 Acceptance criteria for 38.2
+
+1. `enrich()` runs over C91's 26 patterns in under 5 seconds added to total runtime (combined budget still 60s).
+2. **Temescal paradigm:** INIT-005 surfaces `mitigatorState.exists: true`, `mitigators[0].implementationPhase: 'design-phase'`, `effectsFiring: false` (no neighborhoodHealth.Temescal improvement across prior cycles), `gap: 'mitigator-stuck'`.
+3. At least one pattern shows each of the four `gap` values across C91 (proves the classifier is broad enough).
+4. Deterministic across two runs.
+5. Registry exists at `scripts/engine-auditor/mitigatorRegistry.json` and is versioned (`registryVersion` field). Engine terminal can extend without code changes.
+
+### 14.6 Out of scope for 38.2
+
+- The remedy *recommendation* (what to do about the gap). That's 38.3.
+- The *narrative* framing of the gap. That's 38.4.
+- Engine bug reports for tech-side fallback paths. 38.3 generates these.
+
+---
+
+## 15. Phase 38.3 — Remedy path recommendation (spine step 5, build second)
+
+**Goal:** for each ailment with a `gap` value, generate the recommended next action — world-side preferred, tech-side fallback only when world-side is structurally impossible.
+
+### 15.1 Files to create
+
+| Path | Role |
+|---|---|
+| `scripts/engine-auditor/recommendRemedy.js` | Module. Exports `enrich(patterns, ctx) → patterns[]`. Called after `checkMitigators.js`. Adds `remedyPath` field per pattern. |
+| `scripts/engine-auditor/remedyTemplates.json` | World-side action templates per `gap × ailment-category` combination. E.g. for `mitigator-stuck` + `health-decline`: `["advance the named initiative out of design-phase via the responsible civic-project agent", "council ordinance to expedite review", "stakeholder pressure via mayor's office"]`. |
+
+### 15.2 New `remedyPath` field
+
+```js
+remedyPath: {
+  worldSide: [                    // preferred — ordered most-likely-to-work first
+    {
+      type: 'advance-initiative' | 'propose-new-initiative' | 'character-intervention' | 'council-vote' | 'neighborhood-action' | 'mayoral-pressure',
+      target: 'INIT-005' | 'civic-project:temescal-health' | 'council:D3' | 'office:mayor',
+      action: 'advance from design-phase to construction',
+      rationale: 'one-line why this is the leverage point',
+      expectedEngineEffect: 'neighborhoodHealth.Temescal +0.05/cycle from construction-active milestone'
+    }
+  ],
+  techSide: {                     // fallback only — populated when worldSide is structurally impossible
+    triggered: boolean,
+    bugReport: {                  // engine-build-terminal language
+      file: 'phase05/applyInitiativeImplementationEffects.js',
+      function: 'fireConstructionMilestone',
+      ctxField: 'initiativeStateMap.INIT-005.constructionStart',
+      sheetColumn: 'Initiative_Tracker.column-X',
+      observedBehavior: 'string',
+      expectedBehavior: 'string',
+      reproSteps: 'string'
+    }
+  },
+  confidence: 'high' | 'medium' | 'low'  // how confident the recommender is the remedy will work
+}
+```
+
+### 15.3 World-side preferred logic
+
+For each `gap`:
+- `no-mitigator` → recommend `propose-new-initiative` of the appropriate type. Target = relevant civic-project agent or council.
+- `mitigator-stuck` → recommend `advance-initiative`. Target = the initiative ID + responsible agent (civic-project agent if one exists, else mayor's office). May also recommend `mayoral-pressure` or `council-vote` as parallel actions.
+- `mitigator-firing-but-insufficient` → recommend `propose-new-initiative` (additional layer) OR `character-intervention` (e.g. neighborhood organizer character drives further action). NOT `advance-initiative` because the existing one is already firing.
+- `remedy-working` → no remedy needed; recommend `none`. Sift sees this as an improvement story candidate.
+
+Tech-side fallback only triggered when:
+- The mitigator initiative status is `passed`, `implementationPhase` shows expected progression, but `effectsFiring: false` AND the audit detects the writeback hook is broken (e.g., expected field never written by any phase).
+
+### 15.4 Acceptance criteria for 38.3
+
+1. Combined runtime (38.1 + 38.7 + 38.8 + 38.2 + 38.3) under 60s on C91.
+2. Every pattern with non-`remedy-working` gap has `remedyPath.worldSide` non-empty.
+3. **Temescal paradigm:** INIT-005 produces `worldSide[0].type: 'advance-initiative'`, `target: 'INIT-005'`, with rationale citing the design-phase stall. `techSide.triggered: false` because the initiative + writeback chain is intact — the gap is institutional, not code.
+4. Tech-side fallback fires for at least one pattern across C91 if any structurally-broken writeback exists; otherwise empty (which is fine — no synthetic injection).
+5. Templates extensible without code changes.
+
+---
+
+## 16. Phase 38.4 — Tribune framing brief (spine step 5, build third)
+
+**Goal:** translate each ailment + remedy into per-desk story handles that thread the three coverage layers (engine + simulation + user actions).
+
+### 16.1 Files to create
+
+| Path | Role |
+|---|---|
+| `scripts/engine-auditor/generateTribuneFraming.js` | Module. Exports `enrich(patterns, ctx) → patterns[]`. Called after `recommendRemedy.js`. Adds `tribuneFraming` field per pattern. |
+
+### 16.2 New `tribuneFraming` field
+
+```js
+tribuneFraming: {
+  storyHandles: {                 // one suggestion per applicable desk
+    civic: { angle: 'string', citizens: ['POP-XXX'], hookLine: 'string' } | null,
+    business: { angle: 'string', citizens: ['POP-XXX'], hookLine: 'string' } | null,
+    culture: { angle: 'string', citizens: ['POP-XXX'], hookLine: 'string' } | null,
+    sports: null,                 // most ailments don't have a sports angle; only fill when relevant
+    letters: { angle: 'string', citizens: ['POP-XXX'], hookLine: 'string' } | null
+  },
+  threeLayerCoverage: {           // explicit pre-fill for the capability reviewer
+    engine: 'one-line statement of the underlying ailment + the tech diagnosis',
+    simulation: 'one-line statement of who feels it, where, how',
+    userActions: 'one-line statement of what has been decided in response and the current status'
+  },
+  suggestedFrontPage: boolean,    // true if this ailment is severity high + cyclesInState >= 3 + remedy is unresolved
+  capabilityHooks: [              // direct hooks Phase 39.1 can use to verify coverage
+    'covers Temescal',
+    'mentions INIT-005',
+    'cites a Temescal resident'
+  ]
+}
+```
+
+### 16.3 Generation logic
+
+Per pattern:
+1. **storyHandles** — for each desk, check if the pattern has a natural angle. Civic gets the user-actions angle (council, initiative, mayor). Business gets economic-impact angles. Culture gets neighborhood-texture angles. Letters gets candidate citizen voices. Sports stays null unless ailment touches A's/Bulls (rare). Each handle includes 2–3 candidate citizens pulled from `affectedEntities.citizens` or from a neighborhood lookup.
+2. **threeLayerCoverage** — synthesize each layer line from the pattern + remedy data. Engine line = `description` + `evidence.fields`. Simulation line = neighborhoods + 1–2 citizen names. User-actions line = `mitigatorState` summary + `remedyPath.worldSide[0].action`.
+3. **suggestedFrontPage** — boolean per the criteria stated.
+4. **capabilityHooks** — a list of literal phrases sift can pass to `assertCoversFlaggedAilmentIfRunningThreePlusCycles` (Phase 39.1's deferred grader assertion) when the Haiku key lands. Until then, Phase 39.1's deterministic `assertHighestSeverityAilmentCoveredOnFrontPage` already uses this field implicitly via the audit-pattern `affectedEntities`.
+
+### 16.4 Acceptance criteria for 38.4
+
+1. Every pattern with `severity: 'high'` produces non-empty `storyHandles` for at least 2 desks.
+2. **Temescal paradigm:** INIT-005 produces `storyHandles.civic` (Chen-Ramirez angle on design-phase stall), `storyHandles.culture` (Temescal residents), `storyHandles.letters` (citizen voice on health access). `suggestedFrontPage: true`. `capabilityHooks` includes `"covers Temescal"`, `"mentions INIT-005"`, `"cites a Temescal resident"`.
+3. `threeLayerCoverage` populated on every high-severity pattern.
+4. Combined runtime (all 38.x detectors) stays under 60s on C91.
+
+### 16.5 Pipeline impact downstream
+
+After 38.4 lands, the audit JSON shape changes — `patterns[]` carries `mitigatorState` + `remedyPath` + `tribuneFraming`. Two follow-ups for research/build:
+
+- Update `/engine-review` skill to consume the new fields (rewrite §3 framing logic — most of the seven-field brief now reads from these structured fields instead of being synthesized by Mags).
+- Update `/sift` to read `tribuneFraming.storyHandles` directly when proposing stories. The sift-time editorial planning becomes "validate + rank the auditor's suggestions" instead of "discover everything from the world summary."
+
+Both follow-ups are downstream skill edits, not engine work — flag them in ROLLOUT_PLAN as `(research-build terminal)` after 38.4 ships.
+
+---
+
+## 17. Combined acceptance criteria for spine step 5 (38.2 + 38.3 + 38.4)
+
+After all three land:
+
+1. `engineAuditor.js` produces an enriched `engine_audit_c{XX}.json` where every pattern carries `mitigatorState`, `remedyPath`, and `tribuneFraming` fields.
+2. Combined runtime under 60s on C91 (all 38.x detectors + enrichers).
+3. Re-running is deterministic (no LLM calls, no randomness).
+4. **Temescal end-to-end:** INIT-005 surfaces as `stuck-initiative` (38.1) → `mitigator-stuck` gap (38.2) → `advance-initiative` worldSide remedy targeting INIT-005 (38.3) → `tribuneFraming` with civic/culture/letters story handles + `suggestedFrontPage: true` + capability hooks (38.4). The full ailment-to-story pipeline runs end-to-end on a real example.
+5. The capability reviewer's `assertHighestSeverityAilmentCoveredOnFrontPage` would now have richer pattern data to grade against (initiative IDs + neighborhood + capability hooks).
+
+---
+
 ## Changelog
 
 - 2026-04-14 — Initial plan (S146, research/build terminal). Designed the detector/framer split that wasn't in the original ROLLOUT_PLAN spec — code does deterministic detection, skill does narrative framing. Eight detector modules enumerated. Acceptance criteria locked. Handed off to engine/sheet terminal.
 - 2026-04-15 — Appended §§11–13 (Phase 38.7 anomaly gate + 38.8 baseline briefs) so engine terminal has the full spine-step-3 spec in one document. Source paragraphs from Nieman Reports paper5.pdf pp.21, 30–31 verified verbatim. Three combined acceptance criteria added.
+- 2026-04-15 — Appended §§14–17 (Phase 38.2 mitigator check + 38.3 remedy path recommendation + 38.4 Tribune framing brief). Same enricher-pipeline pattern as the original detectors. Each module mutates patterns in place with structured new fields (`mitigatorState`, `remedyPath`, `tribuneFraming`). Temescal paradigm threads end-to-end as the validating acceptance test for §17. Two downstream follow-ups noted: `/engine-review` and `/sift` skill rewrites once 38.4 ships.

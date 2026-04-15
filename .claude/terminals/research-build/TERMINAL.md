@@ -24,6 +24,8 @@ Inside tmux `godworld` session: this is **window 1** (`Ctrl-b 1`).
 |------|---------|
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
+| `docs/SCHEMA.md` | Doc conventions — naming, frontmatter, tags, folder map (Phase 41.1, S146) |
+| `docs/index.md` | Catalog of every active doc — grep here before grepping the tree (Phase 41.2, S146) |
 | `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions |
 | `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 journal entries — continuity |
 | `.claude/terminals/research-build/TERMINAL.md` | This file — your scope, your docs, your rules |

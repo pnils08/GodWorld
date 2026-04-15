@@ -1,15 +1,16 @@
 # GodWorld — Rollout Plan
 
-**Status:** Active | **Last Updated:** Session 144 (2026-04-13)
+**Status:** Active | **Last Updated:** Session 146 (2026-04-14)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** `ROLLOUT_ARCHIVE.md` — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
+**Wiki layer:** `docs/SCHEMA.md` (conventions) + `docs/index.md` (catalog) — read at boot. (Phase 41.1 + 41.2, S146.)
 **Terminal handoffs:** Items tagged `(engine terminal)` or `(media terminal)` are handed off to that persistent chat. Research/build terminal designs; engine/sheet terminal executes code.
 
-**Active Build Plan (S145 — locked):** Ten-step spine, importance-weighted and dependency-clean. Each step builds on the last.
+**Active Build Plan (S145 — locked, S146 advanced):** Ten-step spine, importance-weighted and dependency-clean. Each step builds on the last.
 
-1. **Phase 41.1 + 41.2** — Write `docs/SCHEMA.md` and `docs/index.md`. Pure writing, one session. Sets conventions every future session uses. Cheapest first so the cleanup dividend compounds.
-2. **Phase 38.1** — Engine ailment detector. The architectural keystone. Once `/engine-review` produces ailment flags, everything downstream has something real to grade against.
+1. **Phase 41.1 + 41.2** — Write `docs/SCHEMA.md` and `docs/index.md`. **DONE S146.** Both written, wired into CLAUDE.md, boot SKILL.md, research-build TERMINAL.md. Audit hooks added to `/doc-audit` (boot group) and `/skill-audit` (identity-session group). 41.5 orientation protocol effectively delivered via boot wiring; remaining 41.x items (41.3 three-layer separation, 41.4 skill frontmatter) demoted to fill-in.
+2. **Phase 38.1** — Engine ailment detector. **NEXT.** The architectural keystone. Once `/engine-review` produces ailment flags, everything downstream has something real to grade against.
 3. **Phase 38.7 + 38.8** — Anomaly gate (Netflix-bug protection) + baseline brief auto-generation (Division III coverage mechanism). Same pass as 38.1, one session.
 4. **Phase 39.1** — Capability reviewer. First reviewer that can check "did the edition cover the flagged ailment?" — only meaningful after 38.1.
 5. **Phase 38.2 + 38.3 + 38.4** — Mitigator check + remedy recommendation + Tribune framing brief. Completes the engine auditor's ailment-to-story pipeline.
@@ -19,7 +20,7 @@
 9. **Phase 40.6 + 40.1** — Layered injection defense + session-log interface. Orthogonal to spine; slot in opportunistically.
 10. **Sandcastle + Daytona evaluation** — Parallel infrastructure track. One session, doesn't block anything.
 
-**Fill-in (between spine sessions):** Phase 40.2–40.5 (cattle refactor, credentials, four-component doc, Plan Mode gate), Phase 41.3–41.5 (three-layer separation, skill frontmatter, orientation protocol), Phase 26.2 briefing evolution, Phase 33.12 Coverage Gap + Corpus Bias tabs, Phase 37 arc state machines.
+**Fill-in (between spine sessions):** Phase 40.2–40.5 (cattle refactor, credentials, four-component doc, Plan Mode gate), Phase 41.3 + 41.4 (three-layer separation, skill frontmatter — 41.5 absorbed into S146 boot wiring), Phase 26.2 briefing evolution, Phase 33.12 Coverage Gap + Corpus Bias tabs, Phase 37 arc state machines.
 
 **Prerequisites:** Phase 36.1 institutions and Phase 32 are prerequisites for the engine-auditor's mitigator check (38.2) to have full institutional state to read. 5.4 demoted. 27.10 and 26.2 downstream.
 
@@ -214,7 +215,7 @@ Each desk agent, each skill, each cron job should declare which four-component s
 
 **Priority:** MEDIUM. Not as urgent as Phase 39 (review layer affects every cycle), but 40.3 and 40.6 are security-adjacent and should not slip indefinitely. Added S145.
 
-### Phase 41: GodWorld as LLM-Wiki (from Karpathy + Hermes `llm-wiki` skill) — NOT STARTED
+### Phase 41: GodWorld as LLM-Wiki (from Karpathy + Hermes `llm-wiki` skill) — IN PROGRESS (41.1 + 41.2 + 41.5 DONE S146)
 
 **Source:** `/tmp/hermes-agent/skills/research/llm-wiki/SKILL.md` (reclone from `https://github.com/NousResearch/hermes-agent` when needed). Based on Karpathy's gist `https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f` (already cited in `docs/RESEARCH.md` as "LLM Knowledge Bases"). Direct operational expression of the `feedback_wiki-not-recall.md` principle saved S145.
 
@@ -222,9 +223,9 @@ Each desk agent, each skill, each cron job should declare which four-component s
 
 **The redesign — five items:**
 
-**41.1 Write `docs/SCHEMA.md`.** Defines: file naming, frontmatter fields (title, created, updated, type, tags, sources), `[[wikilinks]]` convention, tag taxonomy for GodWorld domain (civic, engine, sports, media, citizens, research, architecture), page thresholds (when to split, archive), entity vs concept vs comparison vs query page types. Single source of truth for how the project-internal wiki is structured. Cheap win.
+**41.1 Write `docs/SCHEMA.md`. — DONE S146.** 11 sections written: purpose, file naming, frontmatter standard, page types, tag taxonomy, wikilinks, folder map, page thresholds, pointers-not-recall (with 5 pointer-rot warnings), index discipline, changelog. File at `docs/SCHEMA.md` carries its own frontmatter and changelog as living examples.
 
-**41.2 Write `docs/index.md`.** Sectioned catalog of every durable artifact in `docs/` with one-line summaries + pointer. Replaces ad-hoc grepping. MEMORY.md is already an index for the persistent-memory layer — this does the same for project docs.
+**41.2 Write `docs/index.md`. — DONE S146.** 86 active docs cataloged across 7 folders with one-line summaries and tag annotations. Each entry uses `[[wikilink]]` convention. Archive folders pointed to without individual indexing. File at `docs/index.md`.
 
 **41.3 Three-layer separation.** Current `docs/` mixes raw sources, agent-owned synthesis, and logs. Formalize:
 - **Raw** (`docs/research/papers/` — already exists S145, keep as-is; immutable).
@@ -234,7 +235,7 @@ Most existing content maps to one of these without moving; do a pass to place ne
 
 **41.4 Skill frontmatter standard (connects to Phase 39/40 skill-audit).** Hermes skills use `name`, `description`, `version`, `license`, `metadata.hermes.tags`, `metadata.hermes.related_skills`, `metadata.hermes.config`. Our `.claude/skills/*/SKILL.md` files have inconsistent frontmatter. Adopt Hermes's pattern (minus hermes-specific fields) so we're closer to the `agentskills.io` open standard and our skills self-describe in a queryable way. Pairs with the S115 skill-audit remainder.
 
-**41.5 Session-start orientation protocol.** Hermes's llm-wiki skill mandates: read `SCHEMA.md` + `index.md` + last 30 lines of `log.md` before doing anything. We already do this loosely via boot + JOURNAL_RECENT. Formalize as: every terminal boot reads `docs/SCHEMA.md` + `docs/index.md` + JOURNAL_RECENT, in that order, before any domain work. Prevents duplicate-page creation and drift from conventions.
+**41.5 Session-start orientation protocol. — DONE S146.** Boot reads SCHEMA.md + index.md before behavioral rules. CLAUDE.md Step 0.5 references the wiki layer. Research-build TERMINAL.md "Always Load" table includes both files. `/doc-audit` boot group and `/skill-audit` identity-session group updated to verify these references stay live.
 
 **Build sequence:**
 1. 41.1 SCHEMA.md (pure writing, zero code)

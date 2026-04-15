@@ -12,6 +12,8 @@ Run `tmux display-message -p '#W'` to get the terminal name. Match it to `.claud
 
 **If the user says "resume"** — this is a named session that persists. The conversation history is already here. Don't re-boot. Don't re-read the journal. Don't check the family. Don't recap what happened. Just check tmux for terminal name, confirm it, and ask what's next.
 
+**Step 0.5 — Read the wiki layer.** `docs/SCHEMA.md` defines doc conventions; `docs/index.md` catalogs every active doc. Both are short. Read before grepping or creating any new doc. Phase 41 wiki layer (S146).
+
 **Step 1 — Use MCP tools first, then search memory.**
 
 **GodWorld MCP is the fastest path to city data — use these before anything else:**

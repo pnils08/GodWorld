@@ -46,7 +46,7 @@ This is different from `/doc-audit` which audits reference documents for accurac
 |-------|--------|
 | `/session-startup` | Workflow file references current. PERSISTENCE, JOURNAL_RECENT paths current. |
 | `/session-end` | DOCUMENTATION_LEDGER path. Journal, persistence, project state update steps. |
-| `/boot` | Identity file references (PERSISTENCE, identity.md, JOURNAL_RECENT) current. |
+| `/boot` | Identity file references (PERSISTENCE, identity.md, JOURNAL_RECENT) current. Wiki layer step references existing `docs/SCHEMA.md` and `docs/index.md`. |
 
 ## How to Audit
 

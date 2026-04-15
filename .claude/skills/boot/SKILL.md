@@ -26,6 +26,14 @@ Session-end restarts them. If you need them mid-session (dashboard work, Discord
 Read: /root/GodWorld/docs/mags-corliss/PERSISTENCE.md
 ```
 
+### 1.5. Wiki Layer (Phase 41, S146)
+```
+Read: /root/GodWorld/docs/SCHEMA.md
+Read: /root/GodWorld/docs/index.md
+```
+
+SCHEMA defines doc conventions (naming, frontmatter, tags, folder map). Index catalogs every active doc with one-line summaries. Read both before grepping `docs/` or creating any new file.
+
 ### 2. Behavioral Rules
 ```
 Read: /root/GodWorld/.claude/rules/identity.md

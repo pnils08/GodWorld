@@ -20,10 +20,12 @@ effort: high
 | Doc | What to verify |
 |-----|---------------|
 | `SESSION_CONTEXT.md` | Under 300 lines? Last 5 sessions only? Maintenance rule present? No duplicated content from other docs? |
-| `CLAUDE.md` | Quick commands still work? Session lifecycle refs current? Rules index matches actual rules files? |
+| `CLAUDE.md` | Quick commands still work? Session lifecycle refs current? Rules index matches actual rules files? Step 0.5 wiki-layer reference present and pointing to existing files? |
 | `docs/mags-corliss/PERSISTENCE.md` | Session counter current? Family POPIDs match ledger? No stale infrastructure refs? |
 | `.claude/rules/identity.md` | Rules still match actual behavior? No contradictions with CLAUDE.md? |
 | `MEMORY.md` (auto-memory) | Under 200 lines? Dead memory file references? Stale session memories? Population numbers current? |
+| `docs/SCHEMA.md` | Folder map matches actual `docs/` layout? Tag taxonomy reflects what's actually in use? Page types still match what we're creating? Frontmatter example valid YAML? |
+| `docs/index.md` | Every active `docs/**.md` (excluding `archive/`, `drive-files/`) appears exactly once? No broken `[[wikilinks]]`? Renamed/deleted files reflected? Folder section headers match SCHEMA folder map? |
 
 ### engine — Drift when code changes.
 

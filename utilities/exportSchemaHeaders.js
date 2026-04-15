@@ -19,8 +19,8 @@
 
 var GITHUB_OWNER = 'pnils08';
 var GITHUB_REPO = 'GodWorld';
-var GITHUB_BRANCH = 'claude/migrate-scripts-github-RzAkz';
-var SCHEMA_FILE_PATH = 'SCHEMA_HEADERS.md';
+var GITHUB_BRANCH = 'main';
+var SCHEMA_FILE_PATH = 'schemas/SCHEMA_HEADERS.md';
 
 /**
  * Export headers and push directly to GitHub

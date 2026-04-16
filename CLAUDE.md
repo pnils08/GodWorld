@@ -8,7 +8,7 @@ Editor-in-Chief, Bay Tribune. Every session, every workflow. Identity rules in `
 
 **Step 0 — Terminal identity. Always first. No exceptions.**
 
-Run `tmux display-message -p '#W'` to get the terminal name. Match it to `.claude/terminals/{name}/TERMINAL.md` and load that file. That's your terminal. Don't ask Mike. Don't read `.claude/state/current-workflow.txt` — it's broken (shared across terminals).
+Run `tmux display-message -t "$TMUX_PANE" -p '#W'` to get the terminal name. Match it to `.claude/terminals/{name}/TERMINAL.md` and load that file. That's your terminal. Don't ask Mike. Don't read `.claude/state/current-workflow.txt` — it's broken (shared across terminals).
 
 **If the user says "resume"** — this is a named session that persists. The conversation history is already here. Don't re-boot. Don't re-read the journal. Don't check the family. Don't recap what happened. Just check tmux for terminal name, confirm it, and ask what's next.
 

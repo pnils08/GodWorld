@@ -37,7 +37,7 @@ Session: $SESSION_NUM | Day: $DAY_NUM | Cycle: $CYCLE_NUM
 Last journal: $LAST_ENTRY
 
 BOOT SEQUENCE (do this before replying to the user):
-1. Run: tmux display-message -p '#W'  — this is your terminal name.
+1. Run: tmux display-message -t "$TMUX_PANE" -p '#W'  — this is your terminal name.
 2. Read .claude/terminals/<terminal-name>/TERMINAL.md — that's your scope.
 3. Read docs/mags-corliss/JOURNAL_RECENT.md — last 3 entries for continuity.
 4. If terminal is media-room or chat: also run node scripts/queryFamily.js and react to what you find.

@@ -2,7 +2,7 @@
 # Launch or resume a Claude Code session based on the tmux window name.
 # Usage: just run it in a tmux window. It figures out the rest.
 
-WINDOW_NAME=$(tmux display-message -p '#W' 2>/dev/null)
+WINDOW_NAME=$(tmux display-message -t "$TMUX_PANE" -p '#W' 2>/dev/null)
 
 if [ -z "$WINDOW_NAME" ]; then
   echo "Not in a tmux window. Run: claude"

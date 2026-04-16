@@ -111,6 +111,35 @@ Save to `editions/cycle_pulse_edition_{XX}.txt`.
 
 **Update production log** with compile details (front page, total articles, edition path).
 
+## Step 3.25: Adversarial Review + Tier Classification + Reward Hacking Scan (Phase 39.8/39.9/39.10, S148)
+
+Three deterministic pre-review steps, all run in parallel after compile:
+
+```bash
+# 1. Adversarial review — devil's advocate probe (5 lenses)
+# Run /adversarial-review or do manually per the skill
+# Outputs: inline findings (contradictions, unsourced claims, narrative gaps)
+
+# 2. Tier classification — assigns A/B/C to each article
+node scripts/tierClassifier.js {XX}
+# Outputs: output/tier_assignments_c{XX}.json
+
+# 3. Reward hacking scan — checks for evaluator gaming
+node scripts/rewardHackingScanner.js {XX}
+# Outputs: output/reward_hacking_scan_c{XX}.json
+```
+
+Read the tier assignments — they control how much review each article gets downstream:
+- **Tier A** (full review): front page, Tier-1 citizens, engine-flagged ailments, contested civic stories → all three reviewer lanes + capability + two-pass hallucination
+- **Tier B** (editor pass): neighborhood features, routine council, sports recaps → Rhea + cycle-review only
+- **Tier C** (automated only): letters, baseline briefs, box-score equivalents → Rhea regex + anomaly flag only
+
+If the reward hacking scanner flags HIGH severity (rubric gaming or rubric execution detected), investigate before proceeding — a reporter may be optimizing for the rubric instead of writing journalism.
+
+If adversarial review recommends HALT, fix the findings before proceeding to capability review.
+
+**Update production log** with tier counts (A/B/C), reward hacking scan results, adversarial review recommendation.
+
 ## Step 3.5: Capability Review (Phase 39.1, S146)
 
 Run the editorial capability gate before validation. Catches structural editorial gaps that Rhea + Mara don't check — the front page missing the highest-severity engine ailment, citizen names that don't resolve to canon, engine metrics leaking into journalism. The Varek anti-example (E91 front-paged NBA expansion while Temescal ran four cycles uncovered) is exactly what this gate makes structurally impossible.

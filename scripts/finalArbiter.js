@@ -204,11 +204,15 @@ async function main() {
   const sourcingPath = path.join(OUTPUT_DIR, `rhea_report_c${cycle}.json`);
   const resultPath = path.join(OUTPUT_DIR, `mara_report_c${cycle}.json`);
   const capabilityPath = path.join(OUTPUT_DIR, `capability_review_c${cycle}.json`);
+  const tierPath = path.join(OUTPUT_DIR, `tier_assignments_c${cycle}.json`);
+  const rewardHackingPath = path.join(OUTPUT_DIR, `reward_hacking_scan_c${cycle}.json`);
 
   const reasoningDoc = loadJson(reasoningPath);
   const sourcingDoc = loadJson(sourcingPath);
   const resultDoc = loadJson(resultPath);
   const capabilityDoc = loadJson(capabilityPath);
+  const tierDoc = loadJson(tierPath);
+  const rewardHackingDoc = loadJson(rewardHackingPath);
 
   const laneInputs = {
     reasoning: { doc: reasoningDoc, ...validateLane('reasoning', reasoningDoc) },
@@ -249,6 +253,10 @@ async function main() {
 
   const blameAttribution = buildBlameAttribution(laneInputs, capability);
 
+  // Phase 39.8/39.9 enrichment (S148) — include tier distribution and reward-hacking scan
+  const tierSummary = tierDoc && tierDoc.summary ? tierDoc.summary : null;
+  const rewardHackingSummary = rewardHackingDoc && rewardHackingDoc.summary ? rewardHackingDoc.summary : null;
+
   const output = {
     cycle,
     arbiterVersion: ARBITER_VERSION,
@@ -259,6 +267,8 @@ async function main() {
     capabilityGate,
     blameAttribution,
     publishRecommendation,
+    tierDistribution: tierSummary,
+    rewardHackingScan: rewardHackingSummary,
   };
 
   const outputPath = path.join(OUTPUT_DIR, `final_arbiter_c${cycle}.json`);

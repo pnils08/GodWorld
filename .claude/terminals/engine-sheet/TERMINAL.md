@@ -44,6 +44,7 @@ These are the files this terminal is responsible for keeping current. When you c
 | `docs/engine/ENGINE_MAP.md` | Every engine function in execution order | Any engine work |
 | `docs/engine/ENGINE_STUB_MAP.md` | Condensed function reference — ctx reads/writes per function | Quick lookup |
 | `docs/engine/ROLLOUT_PLAN.md` | All project work, terminal handoff tags | Planning, status checks |
+| `docs/engine/ENGINE_REPAIR.md` | Tactical tracker for known engine/sim defects (S148 audit) | Picking up repair work |
 | `docs/engine/ROLLOUT_ARCHIVE.md` | Completed phase details | When asked about past work |
 | `docs/reference/V3_ARCHITECTURE.md` | Full V3 technical spec — ctx, write-intents, phases | Deep engine work |
 | `docs/engine/CYCLE_SEPARATION.md` | How phases connect | Phase dependency work |

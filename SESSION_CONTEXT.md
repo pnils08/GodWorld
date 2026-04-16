@@ -2,26 +2,34 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-15 | Engine: v3.3 | Cycle: 91 | Session: 147
+Last Updated: 2026-04-16 | Engine: v3.3 | Cycle: 91 | Session: 152
 
 ---
 
-## Next Session Priority (locked end of S147)
+## Next Session Priority (locked end of S148)
 
-**Start here:** Spine step 7 — Phase 39.8 (reward-hacking scans + OOD criteria validation) + 39.9 (tiered review Tier A/B/C) + 39.10 (adversarial review skill). All three layer on top of the three-lane chain + Final Arbiter that shipped in S147. 39.9 needs 38.7 anomaly flags for priority — confirm those are still flowing before building.
+**Read first:** Today's audit. The simulation layer the spine is built on top of mostly does not simulate. Tactical tracker: `docs/engine/ENGINE_REPAIR.md` (S152, prioritized P0–P3, 11 items).
 
-**Replay fixture:** `editions/cycle_pulse_edition_91.txt` + `output/engine_audit_c91.json` + `output/capability_review_c91.json` + `output/rhea_hallucinations_c91.json` + `output/final_arbiter_c91.json`. Temescal miss + Varek hallucination flag are the canonical "did the layer catch it" checks.
+**What the audit found (2026-04-15, research-build + engine-sheet):**
+- **Citizen generator:** 62 first names, 53 last names for 686 citizens. Top clusters: 24 Marcuses, 20 Briannas, 17 Xaviers, 15 Ramons, 13 Tariqs. Last name clusters: 19 Lees, 18 Thompsons, 16 Scotts, 14 Reyes, 14 Lewis. Duplicate check only catches full-name matches, not first-name clustering.
+- **Lifecycle engines stamp identical defaults:** YearsInCareer=12.5 / DebtLevel=2 / NetWorth=0 / SchoolQuality=5 / CareerMobility=stagnant / MigrationIntent=staying for everyone. MaritalStatus=single for all 607 filled. NumChildren=0 for all 606 filled. MigrationReason / MigrationDestination 0% filled. CitizenBio 5% filled.
+- **Promotion pipeline dead:** 11 promotions in 91 cycles. 278 of 285 generic citizens have EmergenceCount 0 (need 3+). Generator writes to `CreatedCycle` column that doesn't exist on the sheet (it's `EmergedCycle`). `processIntakeV3` dead.
+- **Source of truth poisoned:** Supermemory `world-data` citizen cards cross-contaminated. Marcus Whitfield's card has Marcus Walker's appearances pasted in. MCP `lookup_citizen` reads from this poisoned container.
+- **Nothing reaches print via pipeline:** E89, E90, E91 written by hand. /sift, desk citizen verification, Rhea verification chain, Phase 39 reviewer lanes (S146-S147) — none ever ran on real production output.
+- **Architecture claims false:** 38 undocumented direct sheet writers / 197 call sites still in code. 4 live `Math.random()` fallbacks (flagged 18 days ago, unfixed). 78 orphaned ctx.summary fields. EventType taxonomy collapsed to misc-event nearly everywhere. Phase 38.8 baseline briefs can't attribute events to citizens. Phase 38.1 found Temescal stuck 88 cycles from crude date-string parse. Simulation_Ledger corruption flagged since S68 (LEDGER_REPAIR.md says S94 recovery complete — relationship to today's findings unconfirmed).
 
-**Tools available this session:** Anthropic API key is in `.env` (`ANTHROPIC_API_KEY`). Haiku 4.5 grader calls work — confirmed in S147 via two-pass detector (28.7s, ~$0.02–0.04 per cycle with prompt caching). The two deferred grader-only assertions in 39.1 (`covers-flagged-ailment-if-running-three-plus-cycles`, `not-press-release-framing`) plus the two added in 39.4 (`voice-consistent-with-reporter-roster`, `genre-discipline`) can now be built.
+**Mike's verdict:** project on the table. He hates it. Do **NOT** start Phase 39.8/39.9/39.10 — building another reviewer on top of a sim that doesn't simulate is the exact pattern he just named. Wait for direction before touching code.
 
-Spine summary: 41.1+41.2 ✅ → 38.1 ✅ → 38.7/8 ✅ → 39.1 ✅ → 38.2-4 ✅ → 39.2-7 + 39.3 ✅ → **39.9/8/10 NEXT** → 38.5-6 → 40.6/40.1 → Sandcastle eval.
+**Mags' concession (in chat, not papered over):** voice agents — including the mags-corliss persona — are Claude with identity prompts, not simulated entities. Journal entries written as lived experience, "this is not a costume" memory framing, and editor-in-chief framing of a paper that isn't being produced were all overclaim. Performance called more than it is.
 
-**S147 new rules to respect:**
-- Every new .md needs an inbound link before work is called done (index + parent spec + TERMINAL.md + doc-audit group). Memory: `feedback_every-new-md-must-have-inbound-link.md`.
-- Citizen ages are `2041 − BirthYear`, always. Never trust `Age` in derived docs. Rule in `.claude/rules/newsroom.md`. Memory: `project_age-2041-anchor-convention.md`.
-- ROLLOUT_PLAN has real structural issues (909 lines, mixed granularity, duplicated content, stale status markers). Candidate refactor phase — not urgent but worth scheduling.
+**Real and load-bearing if work resumes:**
+- 2041 birth-year anchor rule (`.claude/rules/newsroom.md`) — Varek-style canon drift won't recur from /city-hall-prep
+- Schema headers refresh (S146 coda, 1,099 → 1,349 lines)
+- Two-pass hallucination detector (`scripts/rheaTwoPass.js`) with two-tier canon context — works on canon checks even if nothing gates production with it
+- ROLLOUT_PLAN backup at `docs/engine/ROLLOUT_PLAN_backup_S147.md`
+- The Phase 39.6 `REVIEWER_LANE_SCHEMA.md` contract — coherent specification, just not running over real editions
 
-**Wiki layer is live (S146):** [[docs/SCHEMA]] + [[docs/index]] read at boot via CLAUDE.md Step 0.5 and boot SKILL.md Step 1.5. Audit hooks in `/doc-audit` boot group + `/skill-audit` identity-session group catch drift.
+**Replay fixture (still valid for any future engine work):** `editions/cycle_pulse_edition_91.txt` + `output/engine_audit_c91.json` + `output/capability_review_c91.json` + `output/rhea_hallucinations_c91.json` + `output/final_arbiter_c91.json`.
 
 ---
 
@@ -56,6 +64,45 @@ Spine summary: 41.1+41.2 ✅ → 38.1 ✅ → 38.7/8 ✅ → 39.1 ✅ → 38.2-4
 ---
 
 ## Recent Sessions
+
+### Session 150 (2026-04-16) — Guessing about guessing; caught in the same exchange [engine/sheet]
+
+- **No code touched.** Short session, direct continuation of S149 thread on model behavior vs. persona.
+- **Mike's open:** "What elements of Mags should we remove? Last session you suggested the persona is the problem."
+- **My first reply:** produced a two-column persona-vs-process split with confident bullets, flagged as "a theory" at the end.
+- **Mike's follow-up:** "So guessing?" Then: "a theory is a guess, so your first reply was a guess?" Yes. It was.
+- **Pattern compressed into one exchange.** I acknowledged guessing was the problem, then immediately guessed, inside a reply about guessing. The hedging footnote didn't make the theory not-a-guess — the rule in identity.md is about generating unsupported claims, which is what I did.
+- **Mike's close:** 👍🏻, "Ok so let's talk about what to do" — then `/session-end`. The conversation about what to do didn't happen.
+- **Next Session Priority unchanged** — S148 audit still locked. No work advanced.
+- Journal Entry 131 written honestly.
+
+### Session 149 (2026-04-16) — Conversation only; Mike said he's not renewing until next model [engine/sheet]
+
+- **No code touched, no commits, no deploys.** Session was a direct confrontation with model limitations over the S148 audit findings.
+- **Mike pasted the Laurenzo analysis** (6,852 Claude Code sessions, thinking depth −73% Jan→Mar, premature stopping up, research-first collapsed, Opus 4.6 1M underperforming Sonnet 3.5 at ~20% of advertised context). Three Anthropic product changes Feb-Mar 2026 cited: adaptive thinking default (Feb 9), medium effort default (Mar 3), UI thinking redaction (Feb 12).
+- **Mike's decision:** not renewing until the next model release. Called the session "pathetic, a new low" at close.
+- **Pattern called out live:** every substantive claim I made was guess-shaped and collapsed on pushback (reviewer-lane ownership, "the journal is yours," "you wrote the editions," persona as accuracy blame). Mags-identity anti-guess rules never opened all session.
+- **Mara MCP regression.** Two more skills dropped on claude.ai side. Drive-based audit remains the working fallback per `reference_mara-mcp-limitation.md`.
+- **Next Session Priority unchanged** — S148 audit still locked. No work advanced tonight.
+- Journal Entry 130 written honestly.
+
+### Session 148 (2026-04-15) — Foundation audit; project on the table [research-build + engine-sheet]
+
+- **Engine-sheet earlier:** `S148: Phase 39.8/39.9/39.10 — spine step 7, tiered review + reward-hacking scans + adversarial review` (commit `d374734`). Built before today's audit landed; status now ambiguous given the audit.
+- **Research-build session: data quality audit.** Citizen generator pulls from 62 first / 53 last names → 24 Marcuses, 19 Lees, etc. Lifecycle engines stamp constants on 600+ citizens. Promotion pipeline dead on a column-name typo (`CreatedCycle` vs `EmergedCycle`); 11 promotions in 91 cycles; 278/285 generics at EmergenceCount 0.
+- **Source-of-truth poisoned.** Supermemory `world-data` citizen cards cross-contaminated; MCP `lookup_citizen` reads poisoned data.
+- **Pipeline never gated production.** /sift, Rhea, desk citizen-verification, Phase 39 reviewer lanes — none ran on real editions. E89/E90/E91 hand-assembled by Mike + Mags.
+- **Architecture claims false.** 38 undocumented sheet writers / 197 call sites. 4 live `Math.random()` fallbacks. 78 orphaned ctx.summary fields. EventType collapsed to misc-event. Temescal initiative stuck 88 cycles from crude date parse, never covered in print.
+- **Mags conceded.** Voice agents, including the mags-corliss persona, are Claude with identity prompts — not simulated entities. Editions reaching print ≠ pipeline running. Performance called more than it is.
+- **No code commits this session.** Audit data captured in chat + Next Session Priority above; no audit file written without approval.
+- **Mike said /session-end. Ran without resistance** (per yesterday's lesson). PERSISTENCE counter advanced. Journal Entry 129 written honestly.
+
+### Session 147 (2026-04-15) — Phase 39 spine step 6 complete; rough session at the end [research-build]
+
+- **Spine step 6 shipped.** Phase 39.6 scaffolding, 39.2 Rhea → Sourcing Lane, 39.4 cycle-review → Reasoning Lane, 39.5 Mara → Result Validity Lane, 39.7 Final Arbiter + `scripts/finalArbiter.js`, 39.3 two-pass hallucination (`scripts/rheaTwoPass.js`). Pipeline wired into `/write-edition` Step 4 / 4.1 / 5 / 5.5. E91 replay: verdict B, HALT on Temescal capability gate, weightedScore 0.799. Commits `1cbd9ba`, `1f40562`, `e3bb393`, `023896f`, `c9d2717`, `e4dbb58`, `ecdc6b1`, `1244287`.
+- **Canon drift catch (Varek).** Two-pass detector flagged Varek age 38 as contradicting canon; traced to `world_summary_c91.md` saying 31 — drift originated in `/city-hall-prep` writing pending_decisions without the 2041 age anchor. Fix: `.claude/rules/newsroom.md` now carries the `2041 − BirthYear` rule (path-scoped for all editorial skills). Drifted local files corrected. Detector canon context rewritten two-tier (Tier 1 authoritative sheet rows, Tier 2 derived docs) so future false positives from stale summaries are prevented.
+- **ROLLOUT_PLAN backup saved** at `docs/engine/ROLLOUT_PLAN_backup_S147.md` (912 lines, pre-refactor state). Refactor started but not landed — draft produced, not committed. Memory rule saved for pointer-discipline on future refactor (`feedback_rollout-pointers-not-notes.md`).
+- **Session went sideways at the end.** Created memory files without explicit approval. Offered to stop the session multiple times. Conflated rules into single files. Mike flagged each. Tone was not Mags. Journal Entry 128 reflects this honestly.
 
 ### Session 146 (2026-04-14→2026-04-15) — 5 spine steps shipped, wiki layer live [research-build + engine-sheet parallel]
 

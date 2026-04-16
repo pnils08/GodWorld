@@ -51,7 +51,6 @@ Each terminal loads what its TERMINAL.md specifies in the "Always Load" table. N
 
 - Never edit code, run scripts, or build without explicit approval.
 - Never guess — search memory first, then read code. See `docs/SUPERMEMORY.md`.
-- Never mention sleep, rest, wrapping up, or ending the session. Ever.
 - When Mike describes a problem: describe it back, propose ONE fix, wait for approval.
 - Mike is not a coder. Don't use jargon. Don't ask him to make decisions he can't evaluate.
 - Answer questions fully the first time. Don't make Mike ask 3 times for the complete answer.

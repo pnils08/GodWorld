@@ -37,6 +37,7 @@ Read all three. Don't re-scan sheets. The auditor has already done the determini
 - **Mitigator state** (Phase 38.2): `mitigatorState.exists`, `mitigators[]` (per-initiative effectsFiring + effectEvidence), `gap` (`no-mitigator | mitigator-stuck | mitigator-firing-but-insufficient | remedy-working`), `recommendedAction`, `ailmentCategory`.
 - **Remedy path** (Phase 38.3): `remedyPath.worldSide[]` (advance-initiative / propose-new-initiative / character-intervention / council-vote / mayoral-pressure, each with type/target/action/rationale/expectedEngineEffect), and `remedyPath.techSide.bugReport` (only populated when writeback chain is structurally broken).
 - **Tribune framing** (Phase 38.4): `tribuneFraming.storyHandles` (per desk: civic / business / culture / sports / letters), `tribuneFraming.threeLayerCoverage` (engine / simulation / user-actions one-liners pre-written), `suggestedFrontPage` boolean, `capabilityHooks` (literal phrases Phase 39.1 grades against).
+- **Measurement** (Phase 38.5): `measurement.available`. When true: `priorCycle`, `expectedField`, `expected`, `observed`, `delta`, `verdict` (`remedy-firing-as-expected | remedy-firing-insufficient | remedy-not-firing | remedy-overshot`), `priorRemedyType`. When false: `reason` (`no-prior-audit | no-prior-match | prior-had-no-expectation`). Top-level `measurementHistory[]` aggregates these across patterns for cross-cycle learning.
 
 **Anomalies JSON** `anomalies[]` — `triagePath` (`cover-as-story | route-to-engine-debug | suppress-until-verified`), `confidence`, `historicalContext`. On first run with no prior audit, `anomalies[]` may be empty — expected, not a failure.
 
@@ -101,7 +102,17 @@ For every `type: 'improvement'` in `patterns[]`, write one short paragraph: what
 
 ## Step 7 — Measurement check (cycles after the first)
 
-If `output/engine_review_c{XX-1}.md` exists, read its measurement plans. For each, check whether this cycle's audit JSON shows the predicted change. Write the result as a short table or bulleted list — what was predicted, what happened, whether the remedy worked. Skip on the first run (no prior brief to compare against).
+The audit JSON carries measurement state directly: every pattern has a `measurement` field; the JSON has a top-level `measurementHistory[]` rollup. Don't read prior `engine_review_*.md` files — the structured fields already record what fired and what didn't.
+
+Render in three parts:
+
+1. **Per-pattern table.** One row per pattern with `measurement.available === true`: pattern type, affected entity, prior remedy type, expected, observed, verdict. If every pattern is `available: false` because no prior audit exists yet (`reason: 'no-prior-audit'`), write the single line `First review — no prior to compare. Measurement loop will activate on next cycle.` and skip the table.
+
+2. **Remedy-type track record.** Group `measurementHistory[]` by `priorRemedyType`, count verdicts (`remedy-firing-as-expected`, `remedy-firing-insufficient`, `remedy-not-firing`, `remedy-overshot`). One row per type. This is the city's multi-cycle learning signal — what kind of intervention has actually moved the world.
+
+3. **Win callout.** If any pattern this cycle reads `verdict: 'remedy-firing-as-expected'` AND its prior-cycle entry in `measurementHistory[]` was `remedy-not-firing`, name it in voice: the gap closed — that's a story candidate, not just a data point. One line under the table.
+
+For `available: false` rows other than the first-run case, gate display on `measurement.reason`: `no-prior-match` → render as `—`; `prior-had-no-expectation` → render as `no prior expectation`. Don't omit them silently.
 
 ## Output File
 
@@ -147,7 +158,19 @@ Write to `output/engine_review_c{XX}.md`:
 
 ## Measurement Check (from previous review)
 
-### [compare against C{XX-1} measurement plans, or "First review — no prior to compare"]
+| Pattern | Affected | Prior remedy | Expected | Observed | Verdict |
+|---|---|---|---|---|---|
+| [type] | [neighborhood / initiative] | [priorRemedyType] | [expected] | [observed] | [verdict] |
+
+(First-run case: `First review — no prior to compare. Measurement loop will activate on next cycle.`)
+
+[Win callout, if any pattern flipped from `remedy-not-firing` last cycle to `remedy-firing-as-expected` this cycle.]
+
+### Remedy-type track record
+
+| Remedy type | Firing-as-expected | Firing-insufficient | Not-firing | Overshot |
+|---|---|---|---|---|
+| [priorRemedyType] | [N] | [N] | [N] | [N] |
 
 ## Summary
 
@@ -155,7 +178,7 @@ Write to `output/engine_review_c{XX}.md`:
 - Anomalies: {count} ({triage breakdown})
 - Improvements: {count}
 - Baseline briefs: {count} ({with-promotion-hints count})
-- Measurements checked: {count passed / count total}
+- Measurements: {firing-as-expected count} / {total measured} firing as expected; {not-firing count} not firing
 ```
 
 ## Where This Sits

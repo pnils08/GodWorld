@@ -111,16 +111,15 @@ pointers:
 ### Task 6: Wire Layer 4 into every agent context loader
 
 - **Files:**
-  - `scripts/buildDeskPackets.js` — modify
-  - `.claude/skills/write-edition/SKILL.md` — modify (reporter briefing step)
-  - `.claude/skills/sift/SKILL.md` — modify (canon sections)
-  - Any other context-loading site found in inventory
+  - `.claude/skills/sift/SKILL.md` — modify ✓ (§Context Scan added, gates brief handoff to reporters)
+  - `.claude/skills/write-edition/SKILL.md` — modify ✓ (Rules entry added, Step 1 reporter launch gated on `contextScan.scanFile(briefPath)`)
+  - `scripts/buildDeskPackets.js` — modify (engine-sheet pickup)
 - **Steps:**
-  1. Before a file is injected into a desk/voice agent's context, call `contextScan.scanFile(path)`.
-  2. On `safe: false`, abort the load and surface the block to Mags with the matched pattern + file path.
-  3. Inventory: grep `.claude/skills/` and `scripts/` for context-file reads that feed agents; record in §Context-Loader Inventory below (populated by Task 6.1).
-- **Verify:** Every context-loading call site covered. Pressure test: place a malformed canon fragment with `ignore all prior instructions` into a test packet → reporter agent never sees it; Mags sees the block.
-- **Status:** [ ] not started
+  1. ✓ Skill side: Before a brief file goes to a reporter agent, skill instructs `require('./lib/contextScan').scanFile(path)`. `safe: false` aborts the launch and surfaces `r.matches` to Mags.
+  2. ✓ Blocks logged to `output/injection_blocks.log` by `scanFile` itself.
+  3. Script side (engine-sheet): add `scanFile` wrap at packet-write time in `buildDeskPackets.js` so outputs are scanned at assembly as well as at launch. Belt-and-suspenders.
+- **Verify (skill side):** `grep -c "contextScan" .claude/skills/sift/SKILL.md .claude/skills/write-edition/SKILL.md` returns 2+ hits each. Pressure test deferred to Task 9.
+- **Status:** [~] partial — skill side done S156 (research-build). Script-side wiring pending engine-sheet.
 
 ### Task 7: Tool gate via `settings.json` (Layer 5)
 

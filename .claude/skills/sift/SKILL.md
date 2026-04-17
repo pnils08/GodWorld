@@ -50,6 +50,21 @@ const fencedPriorCoverage = wrap(canonExcerpt, 'bay-tribune');
 
 Full convention: [[SUPERMEMORY]] §Memory Fence.
 
+## Context Scan (Phase 40.6 Layer 4)
+
+Before a brief file is handed to a reporter, scan it for prompt-injection patterns. Catches poisoned canon excerpts, malicious citizen quotes, hidden HTML, invisible unicode — anything the Layer 4 regex set flags.
+
+```javascript
+const scan = require('/root/GodWorld/lib/contextScan');
+const r = scan.scanFile('output/briefs/civic_c91.md');
+if (!r.safe) {
+  // abort handoff, surface matches to Mags, do not launch reporter
+  console.error('Injection flagged:', r.matches);
+}
+```
+
+Blocks are appended to `output/injection_blocks.log`. Never silently skip a flagged brief — stop and surface the match. Full regex set and source in `lib/contextScan.js` header.
+
 ## Steps
 
 ### Step 1: Extract Threads

@@ -40,7 +40,9 @@ Scan all engine files for `ctx.summary.*` and `ctx.config.*` WRITES (assignments
 **How to check:**
 1. Grep all `.js` files in `phase*/` for `ctx.summary.\w+ =` and `ctx.config.\w+ =` patterns
 2. For each unique field name found, grep for reads of that field
-3. Report unread fields as WARNING with the file:line where they're written
+3. **Before reporting as orphaned — walk the bulk-serialization graph.** `utilities/exportCycleArtifacts.js` runs `JSON.parse(JSON.stringify(ctx.summary))` every cycle and writes the entire object to `cycle-<N>-summary.json` in the Drive cycle-artifact archive. `phase10-persistence/buildCyclePacket.js` assembles a packet that includes most of `ctx.summary` too. Any field that lands in either serializer IS consumed — just by bulk serialization, not a per-field read. Flag a `ctx.summary` field as orphaned ONLY if it is ALSO excluded from those serializers (rare). Otherwise, omit it from the report. The 2026-04-15 audit wrongly flagged 78 ctx.summary fields as orphaned because it skipped this step; all 78 were live. Don't rediscover this.
+4. `ctx.config.*` fields are different — no bulk serializer consumes them, so the normal write-without-read check applies.
+5. Report unread fields as WARNING with the file:line where they're written.
 
 ### 4. Orphaned ctx Fields (Read but Never Written)
 Inverse of #3. Any field that is read but never written will be `undefined` at runtime — a silent failure.

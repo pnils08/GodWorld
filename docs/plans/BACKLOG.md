@@ -476,13 +476,14 @@ The economic layer tracks formal businesses and employment. It doesn't track the
 
 ---
 
-## Phase 41 — GodWorld as LLM-Wiki — IN PROGRESS (41.1 + 41.2 + 41.5 DONE S146)
+## Phase 41 — GodWorld as LLM-Wiki — IN PROGRESS (41.1 + 41.2 + 41.5 DONE S146, 41.6 DONE S156)
 
 **Source:** `/tmp/hermes-agent/skills/research/llm-wiki/SKILL.md`. Based on Karpathy's gist `https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f` (already cited in `docs/RESEARCH.md` as "LLM Knowledge Bases"). Direct operational expression of the `feedback_wiki-not-recall.md` principle saved S145.
 
 **41.1 — DONE S146.** [[SCHEMA]] written.
 **41.2 — DONE S146.** [[index]] written.
 **41.5 — DONE S146.** Session-start orientation protocol (boot reads SCHEMA + index before behavioral rules).
+**41.6 — DONE S156.** `schemas/SCHEMA_HEADERS.md` catalogued in [[index]] under new `schemas/` folder section. Generator `utilities/exportSchemaHeaders.js` now emits YAML frontmatter (title/created/updated/type/tags/sources/pointers) ahead of the H1, so regeneration preserves wiki shape. Engine-sheet deploys the generator change on next `clasp push`.
 
 **41.3 Three-layer separation.** Current `docs/` mixes raw sources, agent-owned synthesis, and logs. Formalize:
 - **Raw** (`docs/research/papers/` — already exists S145, keep as-is; immutable).

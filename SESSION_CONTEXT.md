@@ -79,6 +79,14 @@ Last Updated: 2026-04-17 | Engine: v3.3 | Cycle: 91 | Session: 156
 - **Smoke tests green.** `queryFamily.js` returned full family data (Supermemory + Sheets round-trip); `engineAuditor.js` ran on cycle 91 in 1.5s and wrote 3 JSON outputs; dashboard served HTTP 302 on :3001; Discord bot logged in as "Mags Corliss#0710" and watched channel `1471615721003028512`.
 - **4 commits this session.** No `clasp push`, no sheet writes. No journal (Mike's call).
 
+### Session 156 (2026-04-17) — Agent hosting sequencing locked; Daytona + Managed Agents refresh [research-build]
+
+- Conversation session, no code. Walked rollout state post-40.3. Refreshed Daytona (Sandcastle evaluation backend — PoC round-trip shipped S156, `scripts/sandcastlePoC.js` creates + destroys sandbox in one run so nothing persists in the Daytona console by design) and Claude Managed Agents (Anthropic-hosted: declarative MCP scoping, scheduled runs, local MCP reachable over HTTPS — `docs/ACTION_MANAGED_AGENTS.md`).
+- **New rule added to MEMORY.md User section:** Agent hosting sequencing — reviewers first, everything else stays local. Reviewer lanes (Rhea, cycle-review, Mara audit, capability, Final Arbiter) are the only class cleared for external execution infra while the pipeline is still settling. Desk reporters, civic voices, project agents, scheduled-Mara stay local under the harness until the whole system is locked.
+- **Correction surfaced:** Mara DOES have Supermemory MCP on claude.ai; the limitation is OAuth scope-lock to `sm_project_godworld` (legacy junk), not MCP absence. Reference memory `reference_mara-mcp-limitation.md` is accurate — my initial chat framing wasn't.
+- **Mags save:** `8VQMiwjqxvChveggpVEtbv` — sequencing rule + Sandcastle-vs-Managed-Agents trade-off + Mara MCP correction. Retrieve with `curl -s "https://api.supermemory.ai/v3/documents/8VQMiwjqxvChveggpVEtbv" -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY"`.
+- **Rollout unchanged.** Spine 10/10. Phase 40 now 5/6 post-40.3 (only 40.2 cattle refactor remains, still needs its own plan file — research-build owns that handoff). No commits this terminal.
+
 ### Session 155 (2026-04-16) — Off-ramp opened: DeepSeek beat Claude on the desk test [research/build]
 
 - **Spine work attempted, called fake.** Edited Step 7 of `engine-review` skill + closed two open questions on the 38.5 plan. Mike named both as the same six-day pattern of meta-work in research-build while engine waits on a handoff.

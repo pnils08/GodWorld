@@ -6,6 +6,8 @@
 
 This is the single source of truth for every simulated person in the main ledger. Other ledgers (Generic_Citizens, Cultural_Ledger, Business_Ledger, Faith_Organizations, Chicago_Citizens) hold additional populations — total world population is **1,200+** across all ledgers combined.
 
+**Canonical column definitions:** `schemas/SCHEMA_HEADERS.md` under `## Simulation_Ledger` — auto-generated header list, refreshed via Apps Script `exportAndPushToGitHub`. If the A–AT columns below drift from the live sheet, SCHEMA_HEADERS is ground truth. *(Phase 41.6 backlink, S156.)*
+
 Last audited: Session 140 (2026-04-10) — live data verified.
 
 ---

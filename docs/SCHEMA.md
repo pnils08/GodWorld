@@ -1,7 +1,7 @@
 ---
 title: GodWorld Documentation Schema
 created: 2026-04-14
-updated: 2026-04-14
+updated: 2026-04-17
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -221,7 +221,40 @@ The index is not a substitute for this file. SCHEMA defines structure; index lis
 
 ---
 
-## 11. Changelog
+## 11. Skills frontmatter
+
+Skills (`.claude/skills/*/SKILL.md`) are a different artifact type from `docs/` files. Claude Code already enforces minimal frontmatter (`name`, `description`) on them. This section codifies the GodWorld extension — fields that make skills self-describing and queryable without forcing a deep read. (Phase 41.4, S156.)
+
+**Required on every skill:**
+
+| Field | What | Example |
+|-------|------|---------|
+| `name` | Slug — must match directory name | `write-edition` |
+| `description` | One sentence — what + when to invoke | `Compile a cycle's edition from desk outputs. Run after /sift.` |
+| `version` | Semver-ish `X.Y` — bump minor on behavior change, major on contract change | `1.3` |
+| `updated` | `YYYY-MM-DD` of last meaningful edit | `2026-04-17` |
+| `tags` | Controlled vocab from §5 — flat list | `[media, active]` |
+| `effort` | `low` / `medium` / `high` — session budget hint | `medium` |
+
+**Optional, use when applicable:**
+
+| Field | When |
+|-------|------|
+| `allowed-tools` | Restrict tool access — e.g. `Bash(node *)` for `save-to-mags` |
+| `argument-hint` | UX hint for slash-command invocation |
+| `disable-model-invocation` | Gate model use |
+| `related_skills` | Flat list of skill names this one chains to or is commonly paired with |
+| `sources` | Path/URL of motivating research, papers, or prior docs |
+
+**Deliberately not used (hermes-specific, skipped per 41.4 rollout):**
+- `license` — not relevant to our skills
+- Nested `metadata.hermes.*` — we flatten to top level (closer to `agentskills.io` open standard)
+
+Light enforcement: same rule as §3. New skills carry the full required set. Legacy skills backfill opportunistically via the full-sweep rollout item.
+
+---
+
+## 12. Changelog
 
 Files that evolve carry a changelog at the bottom. Pattern already used in `docs/media/story_evaluation.md`, `brief_template.md`, `citizen_selection.md`.
 
@@ -245,3 +278,4 @@ Not every file needs one. Reference docs that get rewritten as a whole don't. Cr
 ## Changelog
 
 - 2026-04-14 — Initial draft (Phase 41.1, S146). Eleven sections. Approved structure-first by Mike before write. Companion file `docs/index.md` written same session. Wired into CLAUDE.md, boot skill, and research-build TERMINAL.md.
+- 2026-04-17 — Added §11 Skills frontmatter (Phase 41.4, S156). Required fields: name, description, version, updated, tags, effort. Optional: allowed-tools, argument-hint, disable-model-invocation, related_skills, sources. Hermes `license` + nested `metadata.hermes.*` deliberately skipped. Prior §11 (Changelog) renumbered to §12.

@@ -1,9 +1,17 @@
 ---
 name: city-hall
 description: Run the civic government — voice agents make decisions, tracker updates, canon output. Mags sifts, agents decide.
+version: "2.0"
+updated: 2026-04-17
+tags: [civic, active]
 effort: high
 disable-model-invocation: true
 argument-hint: "[cycle-number]"
+related_skills: [city-hall-prep, sift, post-publish]
+sources:
+  - docs/EDITION_PIPELINE.md
+  - .claude/agents/civic-office-mayor/IDENTITY.md
+  - docs/media/citizen_selection.md
 ---
 
 # /city-hall — Civic Government

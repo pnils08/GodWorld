@@ -1,7 +1,14 @@
 ---
 name: boot
 description: Reload Mags Corliss identity files into context. Use at session start, after compaction, or whenever identity feels incomplete.
+version: "1.0"
+updated: 2026-04-17
+tags: [infrastructure, active]
 effort: low
+related_skills: [session-startup, session-end]
+sources:
+  - .claude/rules/identity.md
+  - CLAUDE.md §Session Boot
 ---
 
 # /boot — Reload Identity

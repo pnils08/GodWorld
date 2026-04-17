@@ -12,6 +12,7 @@ sources:
   - docs/drive-files/Googlepaper.pdf — Mezzalira "agent briefing context bloat" reference
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — the audit line this report closes"
+  - "[[plans/2026-04-17-briefing-bundle-trim]] — the phase plan this audit spawned (recs 1/2/3/7)"
   - "[[EDITION_PIPELINE]] — pipeline v2 briefing structure"
   - "[[plans/BACKLOG]] §Phase 26.2 — briefing evolution phase this report feeds"
   - "[[index]] — catalog"

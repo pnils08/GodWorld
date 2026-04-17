@@ -1,9 +1,17 @@
 ---
 name: write-edition
 description: Execute the edition from sift output. Launch reporters, review articles, compile, validate, Mara audit, publish. Mechanical when sift is right.
+version: "2.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: high
 disable-model-invocation: true
 argument-hint: "[cycle-number]"
+related_skills: [sift, post-publish, style-pass, capability-review, skill-check]
+sources:
+  - docs/EDITION_PIPELINE.md
+  - docs/media/story_evaluation.md
+  - docs/media/brief_template.md
 ---
 
 # /write-edition — Edition Execution

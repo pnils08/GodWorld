@@ -1,8 +1,10 @@
 # GodWorld Spreadsheet Environment
 
-**Sheet ID:** `GODWORLD_SHEET_ID` in `.env`
+**Sheet ID:** `GODWORLD_SHEET_ID` in `/root/.config/godworld/.env` (relocated S156 Phase 40.3)
 **Service account:** `maravance@godworld-486407.iam.gserviceaccount.com` (read/write, CANNOT create new sheets)
 **Total tabs:** 65 | **Active:** ~45 | **Dead/Legacy:** ~12 | **Utility:** ~8
+
+**Canonical column map:** `schemas/SCHEMA_HEADERS.md` — auto-generated row/col counts and A/B/C header list for every tab. Refresh via Apps Script `exportAndPushToGitHub` in `utilities/exportSchemaHeaders.js`. Ground truth when this doc's tab descriptions drift. *(Phase 41.6 backlink, S156.)*
 
 Last audited: Session 105 (2026-03-20)
 

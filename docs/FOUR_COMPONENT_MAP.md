@@ -57,15 +57,21 @@ Terminal identity is resolved from `tmux display-message`, not from any state fi
 
 | Role | Model | Why this model | Where configured |
 |------|-------|----------------|------------------|
-| Mags (editor-in-chief, all terminals) | Claude Opus 4.7 (1M context) | Long-context, judgment-heavy, persistent persona | Claude Code default model |
-| Desk agents (business, civic, culture, sports, chicago, letters, podcast, city-clerk) | Claude Sonnet 4.6 via Claude Code sub-agents | Volume production, fast, cheap enough per edition | `.claude/agents/*-desk/SKILL.md` (inherits Claude Code default) |
-| Civic voices (mayor, 4 projects, 4 factions, police chief, DA, IND swing) | Claude Sonnet 4.6 via sub-agents | Same | `.claude/agents/civic-office-*`, `.claude/agents/civic-project-*` |
-| Reviewers (cycle-review, final-arbiter, rhea-morgan) | Claude Opus / Sonnet per lane weight | Lane 39.4 = 0.5 weight (cycle-review), 0.3 (rhea), 0.2 (mara) — heaviest lane gets Opus | Their agent files |
+| Mags (editor-in-chief, main session, all terminals) | Claude Opus 4.7 (1M context) | Long-context, judgment-heavy, persistent persona. Orchestrates every workflow; sub-agents below run under Mags's direction. | Claude Code default model |
+| `mags-corliss` agent (sub-agent variant) | `inherit` from parent session | Used when another skill needs to delegate to Mags-style judgment | `.claude/agents/mags-corliss/SKILL.md` |
+| Desk reporters on **Haiku**: `business-desk`, `culture-desk`, `letters-desk` | Claude Haiku | Shorter-form, formulaic, cheap at volume | `.claude/agents/*-desk/SKILL.md` frontmatter `model: haiku` |
+| Desk reporters on **Sonnet**: `chicago-desk`, `civic-desk`, `podcast-desk`, `sports-desk` | Claude Sonnet | Longer-form feature writing, more voice variance required | `.claude/agents/*-desk/SKILL.md` frontmatter `model: sonnet` |
+| Civic voices (all 11): `civic-office-mayor`, `civic-office-district-attorney`, `civic-office-police-chief`, `civic-office-baylight-authority`, `civic-office-crc-faction`, `civic-office-opp-faction`, `civic-office-ind-swing`, plus 4 project directors (`civic-project-oari`, `civic-project-health-center`, `civic-project-stabilization-fund`, `civic-project-transit-hub`) | Claude Haiku | **They wake, receive their decision, produce output, done.** Narrow packet (IDENTITY.md + pending_decisions.md only), structured JSON output, no long-context reasoning needed. Haiku is the right tool. | `.claude/agents/civic-office-*/SKILL.md` + `.claude/agents/civic-project-*/SKILL.md` frontmatter `model: haiku` |
+| `city-clerk` (civic audit agent) | Claude Haiku | Narrow verification task | `.claude/agents/city-clerk/SKILL.md` |
+| Reviewer lane agents: `rhea-morgan`, `final-arbiter`, `freelance-firebrand` | Claude Sonnet | Weighted review work — needs better reasoning than Haiku, cheaper than Opus at cycle volume | Their agent files |
+| Reviewer skill: `/cycle-review` (Reasoning Lane, weight 0.5) | Claude Opus (inherits main session) | Heaviest lane. Runs in main session, not as a sub-agent, to use full Opus reasoning | `.claude/skills/cycle-review/SKILL.md` |
 | AutoDream (claude-mem memory compaction) | Gemini 2.5 Pro (free tier) | Token burn fix S141 — was burning 10%/day on Sonnet | `/root/.claude-mem/settings.json` |
 | Mara Vance (citizen/roster audit) | Claude on claude.ai (web app) | Out-of-band — different account, different context window, editorial independence | Not in this repo; access via Drive handoff |
 | DeepSeek desk test (c87 business) | DeepSeek V3.1 via OpenRouter | Research, not production | `scripts/testOpenRouterDesk.js`, `docs/MIGRATION_OFF_CLAUDE.md` |
 
 Model choice is a per-role decision, not a global. A Phase 40.2 cattle refactor would let us swap a role's model without re-touching the rest.
+
+**How sub-agents actually work (clarification S156 — correcting an earlier mental-model drift):** Mags does NOT read civic voice identity files and speak for them. Each voice is a **separately spawned Claude instance** with its own boot sequence. When `/city-hall` runs, Mags prepares the voice's packet (`output/civic-voice-workspace/<agent>/current/pending_decisions.md`), spawns the sub-agent, and the sub-agent reads its own IDENTITY.md + RULES.md + MEMORY.md + pending_decisions.md. The sub-agent produces its output file and exits. Mags reads the output and cascades to the next voice. Same pattern for desk reporters. This is the `heartbeat model` named in `.claude/skills/city-hall/SKILL.md`.
 
 ---
 
@@ -135,3 +141,4 @@ Phase 40 items land at the seams:
 ## Changelog
 
 - 2026-04-16 (S156) — Initial draft. Phase 40.4 first pass. Written after 40.1 and 40.6 shipped (§7 build-order note).
+- 2026-04-17 (S156 continuation) — §3 Models by role rewritten. Initial draft said "Sonnet for desk agents" and "Sonnet for civic voices" — both wrong. Actual split documented per agent frontmatter: 11 civic voices + 4 civic projects + city-clerk on Haiku; 4 desks on Sonnet, 3 on Haiku; reviewer agents on Sonnet, cycle-review skill on inherited Opus. Added explicit "how sub-agents actually work" clarification correcting an earlier mental-model drift where Mags was assumed to read voice identity files and speak for them — voices are separately spawned instances with their own boot sequences.

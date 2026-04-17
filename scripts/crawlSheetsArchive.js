@@ -168,11 +168,11 @@ async function main() {
 // discovered to contain a live ANTHROPIC_API_KEY; GitHub secret-scanning
 // blocked the push. This scrubs that class of exposure at source.
 var SECRET_PATTERNS_ = [
-  // Any sk- prefixed key of any variant (sk-ant-, sk-proj-, sk-or-v1-, sk-xx-, etc.)
-  // Catches OpenRouter (missed first pass), Anthropic, OpenAI, Cohere, and any future sk-* provider.
+  // sk- keys of any variant (sk-ant-*, sk-proj-*, sk-or-v1-*, etc.) — Anthropic, OpenAI, OpenRouter, Cohere
   /sk-[a-z0-9_-]{2,}-?[A-Za-z0-9_-]{20,}/g,
-  /sk_[A-Za-z0-9]{20,}/g,                          // Stripe secret + Supermemory user tokens
-  /sm_[A-Za-z0-9]{30,}/g,                          // Supermemory API keys
+  // Generic prefix_... keys where body can contain underscores — catches sm_*, sk_*, dtn_*, atk_*, etc.
+  // Widened after S156 audit — previous `sm_[A-Za-z0-9]{30,}` missed real Supermemory keys that contain '_' in the body.
+  /\b[a-z]{2,4}_[A-Za-z0-9_]{20,}/g,
   /ghp_[A-Za-z0-9]{30,}/g,                         // GitHub personal tokens
   /gho_[A-Za-z0-9]{30,}/g,                         // GitHub OAuth tokens
   /github_pat_[A-Za-z0-9_]{30,}/g,                 // GitHub fine-grained PATs

@@ -176,6 +176,7 @@ pointers:
 - **[[plans/2026-04-16-phase-38-6-skill-shrink]]** — Phase 38.6 skill shrink: `/engine-review` Step 7 consumes structured `measurement` from 38.5 instead of parsing prior-cycle markdown. Research-build terminal. Blocked-by 38.5 for full test. *(plan, media, active)*
 - **[[plans/2026-04-16-phase-40-1-session-log-interface]]** — Phase 40.1 session-log interface: `lib/sessionLog.js` read-only helper returning positional slices (last N / since timestamp). DONE S156 — `readByTag` dropped from MVP per inventory; session-end skill migrated as proof. *(plan, engine, complete)*
 - **[[plans/2026-04-16-phase-40-6-injection-defense]]** — Phase 40.6 layered injection defense: six-layer stack (input refusal, memory fence, memory-write gate, context scan, tool gate, Rhea review). Layers 2 and 4 ported from Hermes. Research-build drafted; engine/sheet builds. *(plan, security, active)*
+- **[[plans/2026-04-16-phase-40-3-credential-audit]]** — Phase 40.3 credential isolation audit: full inventory of env secrets + on-disk credentials, reachability analysis across 5 injection surfaces + 27 sub-agents, 8-task relocation plan. Research-build drafted S156; engine/sheet picks up when priority rises. *(plan, security, active)*
 - **[[plans/mara-reference-files]]** — Mara reference files plan. COMPLETE S105. *(plan, civic, archived)*
 
 ---

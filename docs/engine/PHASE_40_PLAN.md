@@ -63,6 +63,8 @@ Today `credentials/service-account.json`, `.env`, Supermemory API keys live in t
 
 **LOW priority until someone tries, HIGH priority if they do.**
 
+**PLAN DRAFTED S156.** See [[plans/2026-04-16-phase-40-3-credential-audit]]. Full inventory complete — 11 env secrets, 2 repo-root credential files, 4 sub-agent reachability classes, 5 injection surfaces. Highest-blast vectors identified: service-account.json (sheet compromise), SUPERMEMORY_CC_API_KEY (canon poisoning). 8 execution tasks scoped for engine-sheet terminal pickup. Core fix: relocate credentials to `/root/.config/godworld/`, deny Read on credential paths in `.claude/settings.json`, gate Supermemory writes via hookify rule, extend Discord bot refusal patterns.
+
 ### 40.4 Four-component model mapping + named environments (paper 4)
 
 Paper 4's model: `model + harness + tools + environment`. Map explicitly in a persistent doc so future sessions don't re-derive:
@@ -129,3 +131,4 @@ Each item can be its own session. When one is ready to build, fork a dated plan 
 - 2026-04-16 — §40.6 execution plan drafted at [[plans/2026-04-16-phase-40-6-injection-defense]] (S156, research-build). Hermes source confirmed, regex set reproduced verbatim. Ready for engine/sheet to build.
 - 2026-04-16 — §40.4 four-component map shipped at [[FOUR_COMPONENT_MAP]] (S156, research-build). Out of planned build-sequence order (spec put 40.4 before 40.6) but 40.6 shipped fine without it because defense layers already implicitly assumed the component boundaries; map now documents them.
 - 2026-04-16 — §40.5 Plan Mode gate shipped in [[WORKFLOWS]] §Plan Mode Gate (S156, research-build). Five-item checklist + four anti-patterns. S140 `/dispatch` drift named as canonical anti-example.
+- 2026-04-16 — §40.3 credential audit plan drafted at [[plans/2026-04-16-phase-40-3-credential-audit]] (S156, research-build). Inventory + reachability + 8-task execution plan. Engine-sheet terminal picks up when priority rises.

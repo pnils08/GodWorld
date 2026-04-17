@@ -178,6 +178,13 @@ pointers:
 - **[[plans/2026-04-16-phase-40-6-injection-defense]]** — Phase 40.6 layered injection defense: six-layer stack (input refusal, memory fence, memory-write gate, context scan, tool gate, Rhea review). Layers 2 and 4 ported from Hermes. Research-build drafted; engine/sheet builds. *(plan, security, active)*
 - **[[plans/2026-04-16-phase-40-3-credential-audit]]** — Phase 40.3 credential isolation audit: full inventory of env secrets + on-disk credentials, reachability analysis across 5 injection surfaces + 27 sub-agents, 8-task relocation plan. Research-build drafted S156; engine/sheet picks up when priority rises. *(plan, security, active)*
 - **[[plans/mara-reference-files]]** — Mara reference files plan. COMPLETE S105. *(plan, civic, archived)*
+- **[[plans/2026-04-17-briefing-bundle-trim]]** — trim per-desk c-cycle briefing bundle: `base_context.json` shared load, always-empty packet fields deleted, `interviewCandidates` 520→20 via relevance scoring, briefing versioning added via post-publish. Addresses recs 1/2/3/7 from the S156 bloat audit. Research-build drafted S156; media terminal executes. *(plan, media, active)*
+
+---
+
+## `docs/research/` — research artifacts and audits
+
+- **[[research/briefing_bloat_audit_2026-04-17]]** — c91 snapshot: `interviewCandidates` 1.2% hit rate, `base_context.json` identical across 6 desks, `summary.json` duplicates `packet.json`, archive-context stale for 4/6 desks. Flags briefing-versioning gap as blocker for retro audits. *(reference, media, research, active)*
 
 ---
 
@@ -199,5 +206,6 @@ pointers:
 - 2026-04-14 — Initial catalog (Phase 41.2, S146). 86 active docs across 7 folders. Companion to [[SCHEMA]]. Will fold [[engine/DOCUMENTATION_LEDGER]] in over time.
 - 2026-04-16 — Added [[plans/TEMPLATE]] (S152). Plan file contract for the rollout split.
 - 2026-04-17 — Phase 41.6 S156: added `schemas/` folder section catalogueing `SCHEMA_HEADERS.md`. Generator `utilities/exportSchemaHeaders.js` now emits frontmatter so the wiki shape survives regeneration.
+- 2026-04-17 — Briefing bloat audit S156: added `docs/research/` folder section with [[research/briefing_bloat_audit_2026-04-17]].
 - 2026-04-16 — Added [[plans/2026-04-16-phase-38-5-measurement-loop]] + [[plans/2026-04-16-phase-38-6-skill-shrink]] (S152). Phase 38.5/38.6 split out of ROLLOUT_PLAN §Phase 38 as two separate plan files — one per terminal.
 - 2026-04-16 — ROLLOUT_PLAN compression (S152, same session). 914 → 182 lines. Extracted Phase 33, 40 to per-phase plan files; skill-eval-framework to its own plan; Phase 4.1, 5.4, 7–12, 20–37, 41 remainder → [[plans/BACKLOG]]. Research reference material (Hermes patterns, S115 remainder) moved to BACKLOG too.

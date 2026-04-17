@@ -52,11 +52,15 @@ pointers:
 | Path | What it holds | Readers |
 |------|---------------|---------|
 | `credentials/service-account.json` | **CRITICAL — Google Sheets R/W on the spreadsheet.** Leaked = full city-state compromise, write access to Simulation_Ledger and every other tab | `lib/sheets.js` (central), `scripts/post-cycle-review.js`, `scripts/gdrive_fetch.js`, `scripts/gdrive_fetch2.js`, `scripts/check-youth-citizens.js`, `scripts/cleanup_storyline_tracker.js` — plus every phase file that routes through `lib/sheets.js` |
-| `credentials/supermemory-pn-key.txt` | Supermemory P N org API key (backup of env var) | Manual — referenced in `docs/SUPERMEMORY.md` only |
+| `credentials/supermemory-pn-key.txt` | Supermemory P N org API key (duplicate of env var) | **None in code — dead artifact.** Only referenced in `docs/STACK.md` and `docs/SUPERMEMORY.md`. Safe to delete (Q1 resolved, Task 0 below). |
+| `~/.pm2/dump.pm2` | **NEWLY FLAGGED S156 Q2.** PM2 resurrection dump — contains the full env block in plaintext: `ANTHROPIC_API_KEY`, `DISCORD_BOT_TOKEN`, `DISCORD_WEBHOOK_URL`, `GOOGLE_CLIENT_ID`, `TOGETHER_API_KEY`, and `GODWORLD_SHEET_ID`. Not in repo dir (outside the working-directory blast radius) but still a credential file under a bot-reachable user account. | PM2 daemon on resurrection (`pm2 resurrect`) |
 | `/root/.config/moltbook/credentials.json` | Moltbook OAuth creds — already outside repo dir | `scripts/moltbook-heartbeat.js` |
 | `/root/.config/spacemolt/credentials.json` | SpaceMolt OAuth — already outside repo dir | `scripts/spacemolt-miner.js` |
 
 **Good news on the last two:** the moltbook and spacemolt credentials already follow the target pattern (outside repo working dir). That's the template for `.env` + `credentials/`.
+
+**Dead keys found in PM2 env (S156 Q2 investigation):**
+- `TOGETHER_API_KEY` is cached in PM2 but grep across `scripts/` + `lib/` shows it's referenced only in `scripts/generate-edition-photos.js` (deprecated per `docs/CANCELLATION.md`) and `lib/photoGenerator.js`. Should be rotated on Together.ai side and removed from PM2 env since the photo pipeline is inactive.
 
 ### Injection surfaces that could reach a Read call on these paths
 
@@ -93,6 +97,18 @@ pointers:
 
 ## Tasks
 
+### Task 0: Delete dead-weight credential files (added S156 Q1)
+
+- **Files:**
+  - `credentials/supermemory-pn-key.txt` — delete (duplicates env var, no readers in code)
+  - PM2 env `TOGETHER_API_KEY` — remove via `pm2 delete mags-bot && pm2 save` after env file update, or `pm2 set env.TOGETHER_API_KEY ""` (photo pipeline is deprecated per `docs/CANCELLATION.md`)
+- **Steps:**
+  1. Delete `credentials/supermemory-pn-key.txt`.
+  2. Rotate the Together.ai key on their side (we're not using it; rotating is housekeeping).
+  3. Remove `TOGETHER_API_KEY` from `.env` and PM2 env.
+- **Verify:** `grep -r "supermemory-pn-key" .` returns only doc references (which Task 7 updates). `cat ~/.pm2/dump.pm2 | grep TOGETHER_API_KEY` returns nothing.
+- **Status:** [ ]
+
 ### Task 1: Lock the inventory
 
 - **Files:**
@@ -104,19 +120,21 @@ pointers:
 - **Verify:** Inventory covers all 27 agents. No blind spots.
 - **Status:** [ ]
 
-### Task 2: Relocate `.env`
+### Task 2: Relocate `.env` + refresh PM2 env
 
 - **Files:**
   - `/root/.config/godworld/.env` — create (move, don't copy-and-leave)
   - Every script using `process.env.*` where dotenv loads from `.env` — update dotenv load path
-  - `package.json` scripts section — if any hardcode `.env` path
+  - `ecosystem.config.js` — PM2 ecosystem config (confirmed present in repo root, S156 Q2)
+  - `~/.pm2/dump.pm2` — refresh via `pm2 save` after env changes to avoid stale env on resurrection
 - **Steps:**
   1. Create `/root/.config/godworld/` with `chmod 700`.
-  2. Move `.env` to `/root/.config/godworld/.env`.
+  2. Move `.env` to `/root/.config/godworld/.env` (`chmod 600`).
   3. Add `require('dotenv').config({ path: '/root/.config/godworld/.env' })` at the top of every script currently calling `dotenv.config()` without a path. Or: create `lib/env.js` that handles the load once, require it first in every script. Prefer the lib pattern.
-  4. Update PM2 ecosystem config (if any) to pass the new env file explicitly.
-  5. Update systemd unit files for any daemons (check `systemctl list-unit-files | grep godworld` first).
-- **Verify:** `grep -r "dotenv.config()" scripts/ lib/ dashboard/` returns zero or only `lib/env.js`. PM2 processes restart cleanly. Discord bot reconnects. Dashboard responds on :3001.
+  4. Update `ecosystem.config.js` — set `env_file` or explicit `env` block sourcing from the new path.
+  5. **No systemd to update** (confirmed S156 Q2 — `systemctl list-unit-files | grep -iE "mags|godworld|dashboard"` returns nothing).
+  6. After scripts + ecosystem update, run `pm2 delete all && pm2 start ecosystem.config.js && pm2 save` so `~/.pm2/dump.pm2` rewrites with the new env load path (otherwise resurrection still carries the old cached env).
+- **Verify:** `grep -r "dotenv.config()" scripts/ lib/ dashboard/` returns zero or only `lib/env.js`. PM2 processes restart cleanly. Discord bot reconnects. Dashboard responds on :3001. `cat ~/.pm2/dump.pm2 | grep GOOGLE_APPLICATION_CREDENTIALS` shows the new path.
 - **Status:** [ ]
 
 ### Task 3: Relocate `credentials/`
@@ -200,11 +218,11 @@ pointers:
 
 ---
 
-## Open questions
+## Open questions — RESOLVED S156
 
-- [ ] **Should `credentials/supermemory-pn-key.txt` exist at all?** It duplicates the env var. Safer to delete and keep one source of truth.
-- [ ] **Is there a systemd unit for `mags-bot`?** Moving `.env` may break PM2 env loading if PM2 inherits from `.bashrc`. Confirm path.
-- [ ] **Should sub-agents have a narrower Read allowlist per role?** Reporters need Read on their briefing files and MCP outputs, not arbitrary repo files. Worth scoping as follow-up to Task 4.
+- [x] **Should `credentials/supermemory-pn-key.txt` exist at all?** **No.** Grep confirms zero readers in code — only referenced in `docs/STACK.md` and `docs/SUPERMEMORY.md`. Dead artifact. Task 0 deletes it.
+- [x] **Is there a systemd unit for `mags-bot`?** **No.** `systemctl list-unit-files | grep -iE "mags\|godworld\|dashboard"` returns nothing. PM2 is the only daemon manager. But `~/.pm2/dump.pm2` caches the full env on `pm2 save` — including `ANTHROPIC_API_KEY`, `DISCORD_BOT_TOKEN`, `TOGETHER_API_KEY`, etc. in plaintext. **This is a newly flagged credential file** (see Inventory §2). Task 2 now includes a `pm2 delete all && pm2 start && pm2 save` sequence to force the dump to rewrite with the new env paths.
+- [x] **Should sub-agents have a narrower Read allowlist per role?** **Out of scope for 40.3 — path-deny is the right answer, not per-role allow.** Investigation found: 20 of 27 agents already declare narrow `tools:` frontmatter (Read, Glob, Grep, Write, with Edit added for civic offices/projects, Bash only for `rhea-morgan`). Two inherit "all tools" (`mags-corliss`, `final-arbiter`). The Read tool itself doesn't path-scope — narrowing would need per-invocation filesystem policy, which `.claude/settings.json` can't express per-agent. Task 4's global `permissions.deny` on credential paths is the correct enforcement layer. Per-agent path allowlists belong in a future Phase 42-ish item once per-role filesystem scoping is worth the complexity.
 
 ---
 
@@ -219,3 +237,4 @@ pointers:
 ## Changelog
 
 - 2026-04-16 (S156) — Initial draft (research-build terminal). Inventory complete, 8 tasks scoped, 3 open questions flagged. Engine-sheet terminal picks up for execution when ready.
+- 2026-04-16 (S156) — Open questions resolved while findings were fresh. Added Task 0 (delete `credentials/supermemory-pn-key.txt` + remove `TOGETHER_API_KEY` from PM2 env). Added `~/.pm2/dump.pm2` as a newly flagged credential file in the inventory — contains plaintext env on every `pm2 save`. Task 2 expanded to include `pm2 delete all && pm2 start && pm2 save` to refresh the dump after env relocation. No systemd units confirmed. Per-agent Read allowlist parked as Phase 42 followup.

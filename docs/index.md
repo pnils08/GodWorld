@@ -38,6 +38,7 @@ pointers:
 - **[[PRODUCT_VISION_GRILLME]]** — decisions and open questions from the S119 grill-me interrogation of the product vision. *(concept, architecture, active)*
 - **[[ARCHITECTURE_VISION]]** — Jarvis at /root, persistent sessions, the technical north star Phase 41 builds toward. *(concept, architecture, active)*
 - **[[BOOT_ARCHITECTURE]]** — boot sequence design across terminals. *(reference, architecture, active)*
+- **[[FOUR_COMPONENT_MAP]]** — `model + harness + tools + environment` cross-section. Per-role model choices, terminal inventory, skill slice samples, Phase 40 seam map. *(reference, architecture, active)*
 - **[[WORKFLOWS]]** — per-workflow logic, room definitions. *(reference, architecture, active)*
 
 ### Stack & ops

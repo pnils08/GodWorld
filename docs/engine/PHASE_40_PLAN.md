@@ -72,11 +72,15 @@ Paper 4's model: `model + harness + tools + environment`. Map explicitly in a pe
 - **Tools** = `scripts/`, `lib/sheets.js`, MCP servers (`godworld`, Supermemory, Mara), Bash, Discord bot
 - **Environment** = terminal (research-build / media / civic / engine)
 
-Each desk agent, each skill, each cron job should declare which four-component slice it runs in. **Prerequisite to 40.6.**
+Each desk agent, each skill, each cron job should declare which four-component slice it runs in. **Prerequisite to 40.6** (satisfied retroactively — 40.6 shipped S156 before this doc landed; the map now documents what the defense layers already assume).
+
+**DONE S156.** See [[FOUR_COMPONENT_MAP]]. Covers terminal inventory, per-role model choices, harness layers, tools by kind, representative skill slices, and the Phase 40 seam map (§7) tying each Phase 40 item to the component boundary it operates on. Per-skill frontmatter declaration is opportunistic backfill, not enforced.
 
 ### 40.5 Plan Mode pattern validation (paper 4 "Designing for human control")
 
 Paper 4 frames Plan Mode as "approve the strategy once, not every action." GodWorld already implements this — `/sift` produces the plan, Mike approves, reporters execute. The pattern is load-bearing but not named. Action: add a "Plan Mode gate" checklist to `docs/WORKFLOWS.md` so any new workflow (dispatch, interview, new publication format) is built with an explicit approve-once-execute-many gate instead of per-step nags.
+
+**DONE S156.** `docs/WORKFLOWS.md` now carries a "Plan Mode Gate — shared across workflows" section at end-of-file. Five-item checklist plus four named anti-patterns (the S140 `/dispatch` drift is called out explicitly). Every new workflow passes this before shipping.
 
 ### 40.6 Layered prompt-injection defense (paper 4 "Defending against attacks" + Entry 123 memory-poisoning lesson + Hermes production patterns)
 
@@ -123,3 +127,5 @@ Each item can be its own session. When one is ready to build, fork a dated plan 
 - 2026-04-16 — §40.1 execution plan drafted at [[plans/2026-04-16-phase-40-1-session-log-interface]] (S156, research-build). Ready for engine/sheet to build.
 - 2026-04-16 — §40.1 BUILT (S156, engine/sheet). `lib/sessionLog.js` + `lib/sessionLog.test.js`. `readByTag` dropped from MVP per inventory (zero consumers). Migration target: `.claude/skills/session-end/SKILL.md` line 107 now calls `readLast(journal, 3)`. 17/17 tests passing on synthetic + real production logs and JOURNAL.md.
 - 2026-04-16 — §40.6 execution plan drafted at [[plans/2026-04-16-phase-40-6-injection-defense]] (S156, research-build). Hermes source confirmed, regex set reproduced verbatim. Ready for engine/sheet to build.
+- 2026-04-16 — §40.4 four-component map shipped at [[FOUR_COMPONENT_MAP]] (S156, research-build). Out of planned build-sequence order (spec put 40.4 before 40.6) but 40.6 shipped fine without it because defense layers already implicitly assumed the component boundaries; map now documents them.
+- 2026-04-16 — §40.5 Plan Mode gate shipped in [[WORKFLOWS]] §Plan Mode Gate (S156, research-build). Five-item checklist + four anti-patterns. S140 `/dispatch` drift named as canonical anti-example.

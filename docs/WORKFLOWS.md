@@ -210,3 +210,26 @@ If Mike gives a task directly, infer the workflow:
 | Talk, chat, how's it going, no specific task | Chat with Mags |
 
 Multiple workflows can happen in one session (e.g., Cycle Run → Media-Room for cycle + edition). Load the additional files when the workflow shifts.
+
+---
+
+## Plan Mode Gate — shared across workflows
+
+Paper 4 ("Designing for human control") calls this approve-the-strategy-once-not-every-action. GodWorld already runs this way: `/sift` produces the plan, Mike approves, reporters execute. `/city-hall-prep` produces pending decisions, Mike reviews, voices decide. The gate is load-bearing — per-step nags break it, and per-action autonomy violates it.
+
+**Any new multi-step workflow must pass this checklist before shipping:**
+
+1. **Single plan artifact.** The workflow produces one reviewable plan (file or structured output) before execution starts. Examples: production log Step 2 for `/sift`, pending_decisions files for `/city-hall-prep`, skill-check output JSON for `/skill-check` (post-hoc variant).
+2. **Explicit approval handoff.** The plan is presented to Mike with a clear decision surface: pick / cut / reorder / override. No silent defaults.
+3. **No per-step re-approval.** Once the plan is approved, execution runs to completion without asking Mike to confirm each action inside. Exceptions are the hard-coded approval gates in `.claude/rules/identity.md` (saving editions, Drive uploads, Supermemory ingest, photo generation, PDF generation) — those apply to final boundary actions, not to intermediate steps inside a workflow.
+4. **Override is logged, not argued.** If Mike overrides a plan element ("cut S3, change reporter on S5"), the workflow records the override with reason and continues. No re-asking, no re-proposing.
+5. **Failure re-enters plan mode.** If execution blocks mid-run — citizen not found, missing intake, detector failure — the workflow stops and re-plans, rather than improvising. Partial completion is fine; silent improvisation is not.
+
+**Anti-patterns this gate prevents:**
+
+- "Should I also do X?" after the plan was approved — if X wasn't in the plan, it's a new plan.
+- Mid-execution nags that re-surface decisions the plan already resolved.
+- Workflows that execute first and plan after (`/dispatch` S140 drift was this pattern).
+- Workflows that claim Plan Mode in the name but ask per-step confirmation in practice.
+
+New workflow, new skill, new cron, new scheduled agent: run it through this checklist before it ships. If any item fails, redesign the gate before the workflow goes live.

@@ -93,8 +93,24 @@ function getCliArg(flag) {
 
 // ─── CONFIGURATION ─────────────────────────────────────────
 const getCurrentCycle = require('../lib/getCurrentCycle');
+const contextScan = require('../lib/contextScan');
 const CYCLE = getCurrentCycle();
 const PROJECT_ROOT = path.resolve(__dirname, '..');
+
+// Phase 40.6 Layer 4 — scan any packet we write and abort the build on a hit.
+function writeAndScanPacket(filepath, content) {
+  fs.writeFileSync(filepath, content);
+  const result = contextScan.scanFile(filepath);
+  if (!result.safe) {
+    const first = result.matches[0] || {};
+    throw new Error(
+      'Phase 40.6 Layer 4: injection pattern detected in packet ' +
+      filepath + ' — patternId=' + (first.patternId || 'unknown') +
+      ' line=' + (first.lineNumber || '?') + '. Packet build aborted. ' +
+      'See output/injection_blocks.log for full match set.'
+    );
+  }
+}
 const OUTPUT_DIR = path.join(PROJECT_ROOT, 'output/desk-packets');
 const MARA_PATH = path.join(PROJECT_ROOT, `output/mara_directive_c${CYCLE}.txt`);
 const ROSTER_PATH = path.join(PROJECT_ROOT, 'schemas/bay_tribune_roster.json');
@@ -2544,14 +2560,14 @@ async function main() {
     var filename = deskId + '_c' + CYCLE + '.json';
     var filepath = path.join(OUTPUT_DIR, filename);
     var jsonStr = JSON.stringify(packet, null, 2);
-    fs.writeFileSync(filepath, jsonStr);
+    writeAndScanPacket(filepath, jsonStr);
 
     // Generate desk summary (compact version for agent consumption)
     var summary = generateDeskSummary(packet, deskId, CYCLE);
     var summaryFilename = deskId + '_summary_c' + CYCLE + '.json';
     var summaryFilepath = path.join(OUTPUT_DIR, summaryFilename);
     var summaryStr = JSON.stringify(summary, null, 2);
-    fs.writeFileSync(summaryFilepath, summaryStr);
+    writeAndScanPacket(summaryFilepath, summaryStr);
 
     var packetSizeKB = Math.round(jsonStr.length / 1024 * 10) / 10;
     var summarySizeKB = Math.round(summaryStr.length / 1024 * 10) / 10;
@@ -2599,7 +2615,7 @@ async function main() {
 
   // Write base context
   var baseFile = path.join(OUTPUT_DIR, 'base_context.json');
-  fs.writeFileSync(baseFile, JSON.stringify({
+  writeAndScanPacket(baseFile, JSON.stringify({
     baseContext: baseContext,
     canon: canon,
     householdStats: {
@@ -2642,12 +2658,12 @@ async function main() {
     })
   };
   var truesourceFile = path.join(OUTPUT_DIR, 'truesource_reference.json');
-  fs.writeFileSync(truesourceFile, JSON.stringify(truesourceRef, null, 2));
+  writeAndScanPacket(truesourceFile, JSON.stringify(truesourceRef, null, 2));
   console.log('\nTrueSource reference: ' + truesourceFile);
 
   // Write full citizen archive (standalone reference for agents)
   var archiveFile = path.join(OUTPUT_DIR, 'citizen_archive.json');
-  fs.writeFileSync(archiveFile, JSON.stringify(popIdIndex, null, 2));
+  writeAndScanPacket(archiveFile, JSON.stringify(popIdIndex, null, 2));
   console.log('Citizen archive: ' + Object.keys(popIdIndex).length + ' citizens → ' + archiveFile);
 
   // Add newsroom memory path to manifest
@@ -2656,7 +2672,7 @@ async function main() {
 
   // Write manifest
   var manifestFile = path.join(OUTPUT_DIR, 'manifest.json');
-  fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2));
+  writeAndScanPacket(manifestFile, JSON.stringify(manifest, null, 2));
 
   console.log('\n=== DESK PACKETS COMPLETE ===');
   console.log('Output directory:', OUTPUT_DIR);

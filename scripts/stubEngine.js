@@ -37,38 +37,33 @@ const PHASES = [
   { dir: 'utilities', label: 'Utilities' },
 ];
 
-// Extract top-level function declarations with a brace-depth walk so we can
-// attribute reads/writes per function.
+// Extract top-level function declarations. Top-level functions always start at
+// column 0 (indent=0) in this codebase — use that as the delimiter instead of
+// brace tracking, which breaks on regex/string literals containing unmatched
+// braces (e.g. `/=>\s*[{(]/g` in v2DeprecationGuide.js:83).
 function extractFunctions(source) {
   const lines = source.split('\n');
   const funcs = [];
-  let current = null;
-  let depth = 0;
+  const funcLines = [];  // indexes of lines matching `^function `
 
   for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
-    // Detect top-level function declaration (we only care about depth=0)
-    const m = depth === 0 && line.match(/^\s*function\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)/);
-    if (m) {
-      current = {
-        name: m[1],
-        params: m[2].trim(),
-        line: i + 1,
-        body: [],
-      };
-      funcs.push(current);
+    if (/^function\s+[A-Za-z_][A-Za-z0-9_]*\s*\(/.test(lines[i])) {
+      funcLines.push(i);
     }
+  }
 
-    if (current) current.body.push(line);
-
-    // Update brace depth by counting (ignoring braces in strings/comments is imperfect but good enough)
-    for (const ch of line) {
-      if (ch === '{') depth++;
-      else if (ch === '}') {
-        depth--;
-        if (depth === 0 && current) current = null;
-      }
-    }
+  for (let k = 0; k < funcLines.length; k++) {
+    const startIdx = funcLines[k];
+    const endIdx = k + 1 < funcLines.length ? funcLines[k + 1] : lines.length;
+    const header = lines[startIdx];
+    const m = header.match(/^function\s+([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)/);
+    if (!m) continue;
+    funcs.push({
+      name: m[1],
+      params: m[2].trim(),
+      line: startIdx + 1,
+      body: lines.slice(startIdx, endIdx),
+    });
   }
 
   return funcs;

@@ -140,19 +140,39 @@ Why double brackets: future tooling (graph view, backlinks panel, dead-link audi
 
 ## 7. Folder map
 
+### Three-layer principle (Phase 41.3, S156)
+
+Every `docs/` folder serves one of three purposes:
+
+| Layer | Role | Who writes | Folders |
+|-------|------|-----------|---------|
+| **Raw** | Immutable source material. Papers, external references, binary artifacts. Never edit, only cite. | Humans on ingest | `docs/research/papers/`, `docs/drive-files/`, `docs/archive/` |
+| **Agent-owned** | Synthesis, plans, criteria, wiki entries, comparisons, concepts. Actively edited. The bulk of the wiki. | Terminal agents (research-build, media, civic, engine-sheet) | `docs/` top-level, `engine/`, `media/`, `reference/`, `plans/`, `entities/`, `concepts/`, `comparisons/`, `research/` (non-papers) |
+| **Log** | Append-only history. Journals, session reflections, changelogs of long-lived files. | Agents at session-end | `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/DAILY_REFLECTIONS.md`, `docs/mags-corliss/SESSION_HISTORY.md`, and the `## Changelog` section at the bottom of agent-owned files |
+
+The point of labeling layers: when a new doc arrives, you know whether it's a source to cite (raw), a thing to keep revising (agent-owned), or a dated entry (log). Don't mix them inside one file — a changelog at the bottom of a plan is fine; a journal entry replacing a plan's body is not.
+
+### Folder tree
+
 ```
 docs/
-├── SCHEMA.md              — this file
-├── index.md               — catalog of every active doc
-├── *.md                   — top-level concept + reference (PRODUCT_VISION, STACK, etc.)
-├── engine/                — engine internals: phase plans, ledger maps, rollout
-├── media/                 — newsroom artifacts: criteria, indexes, style guides
-├── mags-corliss/          — Mags persistence: journal, persona, newsroom memory
-├── mara-vance/            — Mara persistence: persona, audit history, op manual
-├── reference/             — operational how-tos: deploy, recovery, drive guide
-├── plans/                 — in-flight plans not yet promoted to engine/
-├── archive/               — frozen, read-only history
-└── drive-files/           — binary artifacts (PDFs, source papers); not navigation targets
+├── SCHEMA.md              — this file (agent-owned, reference)
+├── index.md               — catalog of every active doc (agent-owned, reference)
+├── *.md                   — top-level concept + reference (PRODUCT_VISION, STACK, etc.) (agent-owned)
+├── engine/                — engine internals: phase plans, ledger maps, rollout (agent-owned)
+├── media/                 — newsroom artifacts: criteria, indexes, style guides (agent-owned)
+├── mags-corliss/          — Mags persistence: journal (log) + persona/memory (agent-owned)
+├── mara-vance/            — Mara persistence: persona, audit history, op manual (agent-owned)
+├── reference/             — operational how-tos: deploy, recovery, drive guide (agent-owned)
+├── plans/                 — in-flight plans not yet promoted to engine/ (agent-owned)
+├── research/              — findings + papers
+│   ├── *.md               — audit reports, research notes (agent-owned)
+│   └── papers/            — source PDFs (raw, immutable)
+├── entities/              — citizen/business/faith-org wiki pages (agent-owned, new S156)
+├── concepts/              — architectural principles in long form (agent-owned, new S156)
+├── comparisons/           — side-by-side evaluations (agent-owned, new S156)
+├── archive/               — frozen, read-only history (raw, immutable)
+└── drive-files/           — binary artifacts (PDFs, source papers) (raw, immutable)
 ```
 
 Where to put a new doc:
@@ -160,6 +180,11 @@ Where to put a new doc:
 - Editorial, desks, criteria, citizen indexes → `media/`
 - Persona-owned (Mags or Mara) → that persona's folder
 - Operational how-to → `reference/`
+- Long-form architectural principle referenced from multiple places → `concepts/`
+- Durable human-edited citizen/business wiki page → `entities/`
+- Side-by-side tool/model/approach evaluation → `comparisons/`
+- In-flight plan not yet executed → `plans/`
+- Research audit or findings report → `research/` (papers go in `research/papers/`)
 - Top-level vision, architecture, schema → `docs/` root
 - When in doubt → root, then move it once a folder pattern emerges
 
@@ -279,3 +304,4 @@ Not every file needs one. Reference docs that get rewritten as a whole don't. Cr
 
 - 2026-04-14 — Initial draft (Phase 41.1, S146). Eleven sections. Approved structure-first by Mike before write. Companion file `docs/index.md` written same session. Wired into CLAUDE.md, boot skill, and research-build TERMINAL.md.
 - 2026-04-17 — Added §11 Skills frontmatter (Phase 41.4, S156). Required fields: name, description, version, updated, tags, effort. Optional: allowed-tools, argument-hint, disable-model-invocation, related_skills, sources. Hermes `license` + nested `metadata.hermes.*` deliberately skipped. Prior §11 (Changelog) renumbered to §12.
+- 2026-04-17 — Expanded §7 Folder map with three-layer principle (Phase 41.3, S156). Raw / agent-owned / log roles labeled on every folder. Added `docs/entities/`, `docs/concepts/`, `docs/comparisons/` to the tree with README.md stubs. Placement rules updated to route new docs to the right layer.

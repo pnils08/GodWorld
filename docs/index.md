@@ -185,6 +185,25 @@ pointers:
 ## `docs/research/` — research artifacts and audits
 
 - **[[research/briefing_bloat_audit_2026-04-17]]** — c91 snapshot: `interviewCandidates` 1.2% hit rate, `base_context.json` identical across 6 desks, `summary.json` duplicates `packet.json`, archive-context stale for 4/6 desks. Flags briefing-versioning gap as blocker for retro audits. *(reference, media, research, active)*
+- **`docs/research/papers/`** — source PDFs (raw layer). Referenced by `sources:` frontmatter in agent-owned docs. Not indexed individually.
+
+---
+
+## `docs/entities/` — agent-owned entity wiki pages (new S156, Phase 41.3)
+
+- **[[entities/README|README]]** — what goes here: durable, human-maintained citizen/business/faith-org pages when Supermemory isn't the right home. *(reference, architecture, active)*
+
+---
+
+## `docs/concepts/` — architectural concepts and principles (new S156, Phase 41.3)
+
+- **[[concepts/README|README]]** — what goes here: long-form explanations of load-bearing ideas (three-layer-coverage, deterministic-guardrails, etc.). Complements short-form rules in MEMORY.md. *(reference, architecture, active)*
+
+---
+
+## `docs/comparisons/` — side-by-side evaluations (new S156, Phase 41.3)
+
+- **[[comparisons/README|README]]** — what goes here: tool/model/approach comparisons that outlive the decision. DeepSeek vs Claude, packet vs summary, Sandcastle+Daytona vs Managed Agents. *(reference, architecture, research, active)*
 
 ---
 
@@ -207,5 +226,6 @@ pointers:
 - 2026-04-16 — Added [[plans/TEMPLATE]] (S152). Plan file contract for the rollout split.
 - 2026-04-17 — Phase 41.6 S156: added `schemas/` folder section catalogueing `SCHEMA_HEADERS.md`. Generator `utilities/exportSchemaHeaders.js` now emits frontmatter so the wiki shape survives regeneration.
 - 2026-04-17 — Briefing bloat audit S156: added `docs/research/` folder section with [[research/briefing_bloat_audit_2026-04-17]].
+- 2026-04-17 — Phase 41.3 S156: added `docs/entities/`, `docs/concepts/`, `docs/comparisons/` folder sections with README.md stubs. Three-layer principle (raw/agent-owned/log) codified in [[SCHEMA]] §7.
 - 2026-04-16 — Added [[plans/2026-04-16-phase-38-5-measurement-loop]] + [[plans/2026-04-16-phase-38-6-skill-shrink]] (S152). Phase 38.5/38.6 split out of ROLLOUT_PLAN §Phase 38 as two separate plan files — one per terminal.
 - 2026-04-16 — ROLLOUT_PLAN compression (S152, same session). 914 → 182 lines. Extracted Phase 33, 40 to per-phase plan files; skill-eval-framework to its own plan; Phase 4.1, 5.4, 7–12, 20–37, 41 remainder → [[plans/BACKLOG]]. Research reference material (Hermes patterns, S115 remainder) moved to BACKLOG too.

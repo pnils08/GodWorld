@@ -476,7 +476,7 @@ The economic layer tracks formal businesses and employment. It doesn't track the
 
 ---
 
-## Phase 41 — GodWorld as LLM-Wiki — IN PROGRESS (41.1 + 41.2 + 41.5 DONE S146, 41.4 + 41.6 DONE S156 — only 41.3 remaining)
+## Phase 41 — GodWorld as LLM-Wiki — DONE S156 (41.1 + 41.2 + 41.5 DONE S146, 41.3 + 41.4 + 41.6 DONE S156)
 
 **Source:** `/tmp/hermes-agent/skills/research/llm-wiki/SKILL.md`. Based on Karpathy's gist `https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f` (already cited in `docs/RESEARCH.md` as "LLM Knowledge Bases"). Direct operational expression of the `feedback_wiki-not-recall.md` principle saved S145.
 
@@ -485,11 +485,7 @@ The economic layer tracks formal businesses and employment. It doesn't track the
 **41.5 — DONE S146.** Session-start orientation protocol (boot reads SCHEMA + index before behavioral rules).
 **41.6 — DONE S156.** `schemas/SCHEMA_HEADERS.md` catalogued in [[index]] under new `schemas/` folder section. Generator `utilities/exportSchemaHeaders.js` now emits YAML frontmatter (title/created/updated/type/tags/sources/pointers) ahead of the H1, so regeneration preserves wiki shape. Engine-sheet deploys the generator change on next `clasp push`.
 
-**41.3 Three-layer separation.** Current `docs/` mixes raw sources, agent-owned synthesis, and logs. Formalize:
-- **Raw** (`docs/research/papers/` — already exists S145, keep as-is; immutable).
-- **Agent-owned** (`docs/entities/` for citizen/council-member wiki pages when not in Supermemory; `docs/concepts/` for architectural concepts like three-layer-coverage, deterministic-guardrails; `docs/comparisons/` for side-by-sides).
-- **Log** (`docs/mags-corliss/JOURNAL.md` already plays this role; append-only, rotated).
-Most existing content maps to one of these without moving; do a pass to place new additions correctly.
+**41.3 Three-layer separation — DONE S156.** Framework codified in [[SCHEMA]] §7 with raw/agent-owned/log labels on every folder. Three new folders created with README.md stubs catalogued in [[index]]: `docs/entities/` (durable citizen/business/faith wiki pages when Supermemory isn't the right home), `docs/concepts/` (long-form architectural principles, companion to short-form rules in MEMORY.md), `docs/comparisons/` (tool/model/approach side-by-sides). Existing content already mapped to the right layer — no sweep needed. New docs route by the guidance at the bottom of §7.
 
 **41.4 Skill frontmatter standard (connects to Phase 39/40 skill-audit) — DONE S156.** Standard codified in [[SCHEMA]] §11 (required: `name`, `description`, `version`, `updated`, `tags`, `effort`; optional: `allowed-tools`, `argument-hint`, `disable-model-invocation`, `related_skills`, `sources`; deliberately skipped: hermes `license` + nested `metadata.hermes.*`). Exemplars applied first: `boot` / `write-edition` / `city-hall`. Full sweep completed same session — all 41 skills now carry the six required fields. Two pre-existing `effort` gaps fixed (`save-to-bay-tribune`, `skill-check`). Optional fields (`related_skills`, `sources`) backfilled only on exemplars — remaining skills can add on-touch. Pairs with S115 skill-audit remainder.
 

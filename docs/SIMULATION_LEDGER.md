@@ -1,14 +1,14 @@
 # Simulation_Ledger — Citizen Architecture Guide
 
 **Tab:** `Simulation_Ledger` on GodWorld spreadsheet
-**Simulation_Ledger rows:** 761 | **Columns:** 46 (A–AT) | **Sim Year:** 2041
+**Simulation_Ledger rows:** 761 | **Columns:** 47 (A–AU) | **Sim Year:** 2041
 **Age rule:** Age = 2041 - BirthYear. Always.
 
 This is the single source of truth for every simulated person in the main ledger. Other ledgers (Generic_Citizens, Cultural_Ledger, Business_Ledger, Faith_Organizations, Chicago_Citizens) hold additional populations — total world population is **1,200+** across all ledgers combined.
 
-**Canonical column definitions:** `schemas/SCHEMA_HEADERS.md` under `## Simulation_Ledger` — auto-generated header list, refreshed via Apps Script `exportAndPushToGitHub`. If the A–AT columns below drift from the live sheet, SCHEMA_HEADERS is ground truth. *(Phase 41.6 backlink, S156.)*
+**Canonical column definitions:** `schemas/SCHEMA_HEADERS.md` under `## Simulation_Ledger` — auto-generated header list, refreshed via Apps Script `exportAndPushToGitHub`. SCHEMA_HEADERS currently reports **47 columns** — the A–AT table below covers 46; column AU (Gender, confirmed S146) is not yet documented in §Column Reference. When the sheet drifts from this doc, SCHEMA_HEADERS is ground truth. *(Phase 41.6 backlink, S156.)*
 
-Last audited: Session 140 (2026-04-10) — live data verified.
+Last audited: Session 156 (2026-04-17) — row/column count verified against SCHEMA_HEADERS. Sub-counts (ClockMode / Tier / Status / Flag state) last verified S105-S140 and likely drifted — re-verify on next cycle run.
 
 ---
 

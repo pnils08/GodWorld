@@ -67,6 +67,7 @@ async function main() {
 
   // Step 2: For each spreadsheet, get tab metadata + headers + row counts
   var manifest = {
+    generated: new Date().toISOString(),
     spreadsheetCount: allSpreadsheets.length,
     spreadsheets: [],
   };
@@ -162,6 +163,33 @@ async function main() {
   console.log('\nDone! ' + manifest.spreadsheetCount + ' spreadsheets, ' + totalTabs + ' tabs, ~' + totalRows + ' data rows.');
 }
 
+// S156 (Phase 40.3 follow-up): redact anything that looks like a credential
+// before emitting to the manifest markdown. A Google Sheet header cell was
+// discovered to contain a live ANTHROPIC_API_KEY; GitHub secret-scanning
+// blocked the push. This scrubs that class of exposure at source.
+var SECRET_PATTERNS_ = [
+  /sk-ant-api\d{2}-[A-Za-z0-9_-]{20,}/g,           // Anthropic
+  /sk-proj-[A-Za-z0-9_-]{20,}/g,                   // OpenAI project keys
+  /sk_[A-Za-z0-9]{20,}/g,                          // generic sk_ keys (Stripe, Supermemory user-tokens, etc.)
+  /sm_[A-Za-z0-9]{30,}/g,                          // Supermemory API keys
+  /ghp_[A-Za-z0-9]{30,}/g,                         // GitHub personal tokens
+  /gho_[A-Za-z0-9]{30,}/g,                         // GitHub OAuth tokens
+  /github_pat_[A-Za-z0-9_]{30,}/g,                 // GitHub fine-grained PATs
+  /AIza[A-Za-z0-9_-]{35,}/g,                       // Google API keys
+  /MT[A-Za-z0-9]{20,}\.[A-Za-z0-9_-]{6,}\.[A-Za-z0-9_-]{20,}/g, // Discord bot tokens
+  /xox[baprs]-[A-Za-z0-9-]{10,}/g,                 // Slack tokens
+  /Bearer\s+[A-Za-z0-9_.-]{20,}/g,                 // Bearer tokens
+];
+
+function redactSecrets_(s) {
+  if (typeof s !== 'string') return s;
+  var out = s;
+  for (var i = 0; i < SECRET_PATTERNS_.length; i++) {
+    out = out.replace(SECRET_PATTERNS_[i], '[REDACTED-SECRET]');
+  }
+  return out;
+}
+
 function buildMarkdown(manifest) {
   var lines = [];
   lines.push('# Google Sheets Manifest');
@@ -196,7 +224,7 @@ function buildMarkdown(manifest) {
       totalTabs++;
       totalRows += tab.dataRows;
 
-      var headerPreview = tab.headers.slice(0, 8).join(', ');
+      var headerPreview = tab.headers.slice(0, 8).map(redactSecrets_).join(', ');
       if (tab.headers.length > 8) headerPreview += ', ...(' + tab.headers.length + ' total)';
 
       lines.push('| ' + tab.title + ' | ' + tab.dataRows + ' | ' + tab.headers.length + ' | ' + headerPreview + ' |');

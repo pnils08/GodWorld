@@ -30,7 +30,7 @@ effort: high
 | `docs/SCHEMA.md` | Folder map matches actual `docs/` layout? Tag taxonomy reflects what's actually in use? Page types still match what we're creating? Frontmatter example valid YAML? |
 | `docs/index.md` | Every active `docs/**.md` (excluding `archive/`, `drive-files/`) appears exactly once? No broken `[[wikilinks]]`? Renamed/deleted files reflected? Folder section headers match SCHEMA folder map? |
 
-### engine — Drift when code changes.
+### engine — Drift when code changes. Owned by engine-sheet terminal.
 
 | Doc | What to verify |
 |-----|---------------|
@@ -40,6 +40,9 @@ effort: high
 | `docs/engine/SHEETS_MANIFEST.md` | Sheet names match actual spreadsheet tabs? |
 | `docs/engine/PHASE_DATA_AUDIT.md` | ctx.summary fields match current code? |
 | `docs/engine/ROLLOUT_PLAN.md` | Open items — any completed but not marked? Stale priorities? Line count reasonable? |
+| `docs/engine/LEDGER_HEAT_MAP.md` | Bloat rankings still accurate? Dead column inventory current? Cycle/session header fresh? |
+| `docs/engine/LEDGER_REPAIR.md` | Column reference (A-AU) still accurate? Recovery history complete? "DO NOT re-analyze" header intact? |
+| `docs/engine/LEDGER_AUDIT.md` | Audit history complete? No stale tracking entries? Citizen count aligned with current SL (761)? |
 
 ### media — Drift when pipeline or reporters change.
 
@@ -67,15 +70,14 @@ effort: high
 | `docs/CLAUDE-MEM.md` | Bun daemon (NOT PM2)? Port 37777? SQLite + Chroma still the stack? AutoDream config matches `/root/.claude-mem/settings.json`? |
 | `docs/FOUR_COMPONENT_MAP.md` | Terminal count matches `.claude/terminals/` subdirs? Skill count (§4 harness table) matches `ls .claude/skills/ \| wc -l`? Agent count (§4 note) matches `ls .claude/agents/ \| wc -l`? Models per role current (AutoDream still Gemini? Desk agents still Sonnet?)? Cron inventory (§2) matches `crontab -l`? §7 seam map reflects current Phase 40 status — DONE/PENDING flags match [[engine/PHASE_40_PLAN]] changelog? |
 
-### data — Drift when sheets change.
+### data — Drift when sheets change. Cross-terminal top-level docs only.
+
+Scope limited to top-level (`docs/*.md`) cross-terminal docs. `docs/engine/LEDGER_*.md` files moved to engine group S156 to respect terminal ownership (engine-sheet edits engine/ folder; research-build edits top-level).
 
 | Doc | What to verify |
 |-----|---------------|
-| `docs/SIMULATION_LEDGER.md` | Citizen count, column count (46), column numbers match live sheet? ClockMode counts current? |
-| `docs/SPREADSHEET.md` | Tab count matches actual spreadsheet? New/deleted tabs since last audit? |
-| `docs/engine/LEDGER_HEAT_MAP.md` | Bloat rankings still accurate? Dead column inventory current? |
-| `docs/engine/LEDGER_REPAIR.md` | Column reference (A-AT) still accurate? Recovery history complete? |
-| `docs/engine/LEDGER_AUDIT.md` | Audit history complete? No stale tracking entries? |
+| `docs/SIMULATION_LEDGER.md` | Citizen count, column count (47 per SCHEMA_HEADERS), column numbers match live sheet? ClockMode counts current? Last-audited session recent? |
+| `docs/SPREADSHEET.md` | Tab count matches SCHEMA_HEADERS (53 visible + hidden + utility)? Simulation_Ledger row count matches SL? New/deleted tabs since last audit? |
 
 ---
 
@@ -89,7 +91,7 @@ Update this after each audit. `/doc-audit` with no argument picks the oldest.
 | engine | 2026-04-17 | S156 | 5 stale, 2 inconsistent, 0 dead refs. ENGINE_MAP "Last verified S120" (21 days stale — no safeRand_ or Phase 38/39/40 refs). ENGINE_STUB_MAP claims 122 JS files, actual 125 — regenerate via /stub-engine. SHEETS_MANIFEST 57 days stale. PHASE_DATA_AUDIT no freshness header, no Phase 40 coverage. DOC_LEDGER 12 sessions stale BUT deprecated per docs/index.md header (folding into index over time). No dead file refs. |
 | media | 2026-04-13 | S144 | 5 stale, 3 inconsistent, 1 dead ref. AGENT_NEWSROOM most outdated (still says 6 desk agents, S134 moved to 9 reporters). DESK_PACKET_PIPELINE is legacy/superseded. DISK_MAP missing new output dirs. |
 | infra | 2026-04-17 | S156 | 12 stale, 3 inconsistent, 1 dead ref. STACK.md most outdated (S137b header, skill/agent counts 13-behind, `.env` paths missed post-40.3 sweep, droplet name drift, "675 citizens" stale per CLAUDE.md). DISCORD.md + OPERATIONS.md both say "mags-discord-bot" but live PM2 is "mags-bot" (40.3 resolution). Supermemory "6 containers" claim in three docs but every table lists 5. OPERATIONS.md missing spacemolt-miner from PM2 table. FOUR_COMPONENT_MAP.md current. |
-| data | — | — | Never audited as group |
+| data | 2026-04-17 | S156 | Partial — research-build fixed 2 cross-terminal docs. SIMULATION_LEDGER.md: row/column drift fixed (761 rows, 47 cols A-AU per SCHEMA_HEADERS — doc had 46/AT); last-audited bumped to S156; ClockMode/Tier/Status/Flag sub-counts flagged as stale (S105-S140). SPREADSHEET.md: tab count explained (53 visible + 6 hidden + utility ≈ 65); Simulation_Ledger row 675→761, cols 46→47 (AU Gender); per-tab row counts flagged stale — SCHEMA_HEADERS is authoritative. **Deferred to engine-sheet:** docs/engine/LEDGER_HEAT_MAP.md (extremely stale — C81/S30/2026-02-16, 10+ cycles out of date, projections outdated), docs/engine/LEDGER_REPAIR.md (S94/2026-03-14 RECOVERY COMPLETE — dating language stale but load-bearing "DO NOT re-analyze" intact), docs/engine/LEDGER_AUDIT.md (S68-S72 audit history — 658/639 citizen counts pre-recovery stale). |
 
 ---
 

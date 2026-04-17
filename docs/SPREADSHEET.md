@@ -2,11 +2,11 @@
 
 **Sheet ID:** `GODWORLD_SHEET_ID` in `/root/.config/godworld/.env` (relocated S156 Phase 40.3)
 **Service account:** `maravance@godworld-486407.iam.gserviceaccount.com` (read/write, CANNOT create new sheets)
-**Total tabs:** 65 | **Active:** ~45 | **Dead/Legacy:** ~12 | **Utility:** ~8
+**Total tabs:** ~65 total (53 visible in SCHEMA_HEADERS + 6 hidden/archived + utility tabs) | **Active:** ~45 | **Hidden (S139):** 6 | **Utility:** ~8
 
-**Canonical column map:** `schemas/SCHEMA_HEADERS.md` — auto-generated row/col counts and A/B/C header list for every tab. Refresh via Apps Script `exportAndPushToGitHub` in `utilities/exportSchemaHeaders.js`. Ground truth when this doc's tab descriptions drift. *(Phase 41.6 backlink, S156.)*
+**Canonical column map:** `schemas/SCHEMA_HEADERS.md` — auto-generated row/col counts and A/B/C header list for every visible tab (53 as of 2026-04-15 refresh). Refresh via Apps Script `exportAndPushToGitHub` in `utilities/exportSchemaHeaders.js`. Ground truth when this doc's tab descriptions drift. *(Phase 41.6 backlink, S156.)*
 
-Last audited: Session 105 (2026-03-20)
+Last audited: Session 156 (2026-04-17) — header row counts refreshed from SCHEMA_HEADERS (2026-04-15). Per-tab row counts in the Active Tabs tables below are still from S105 and will have drifted — SCHEMA_HEADERS is the authoritative source for any specific tab.
 
 ---
 
@@ -33,7 +33,7 @@ These are read/written during every cycle run.
 | **World_Population** | 1 | ENGINE | ENGINE | Birth/death/migration totals |
 | **World_Drift_Report** | 1 | ENGINE | ENGINE | Demographic drift metrics |
 | **Cycle_Weather** | 12 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Weather by cycle |
-| **Simulation_Ledger** | 675 | ENGINE, SCRIPT, DASHBOARD | ENGINE | **The citizens.** 46 columns (A-AT). All ClockModes. |
+| **Simulation_Ledger** | 761 | ENGINE, SCRIPT, DASHBOARD | ENGINE | **The citizens.** 47 columns (A-AU; Gender in AU confirmed S146). All ClockModes. |
 | **LifeHistory_Log** | 3,223 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Citizen life events. 7 columns. |
 | **Generic_Citizens** | 277 | ENGINE, SCRIPT | ENGINE | Emergence pipeline — Tier 4 citizen generation |
 | **Household_Ledger** | 529 | ENGINE | ENGINE | Household groupings, rent, ownership |

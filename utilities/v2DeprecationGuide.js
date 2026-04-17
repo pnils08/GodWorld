@@ -198,9 +198,9 @@ function v3Random_(ctx) {
   if (ctx && ctx.rng) {
     return ctx.rng();
   }
-  // Fallback for non-V3 execution (log warning)
-  Logger.log('WARNING: v3Random_ called without ctx.rng - using Math.random()');
-  return Math.random();
+  // No callers as of S156 — if this ever fires, route the caller to ctx.rng
+  // instead of adding a fallback back. (Phase 40.3 Path 1 — Math.random removed.)
+  throw new Error('v3Random_ called without ctx.rng — fix the caller to pass a ctx with rng');
 }
 
 

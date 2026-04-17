@@ -94,8 +94,10 @@ function generateGenericCitizens_(ctx) {
 
   function rand() {
     if (!rng) {
-      Logger.log('WARNING: generateGenericCitizens_ rand() called without deterministic RNG — cycle may not be reproducible');
-      rng = ctx.rng || Math.random;
+      if (!ctx.rng) {
+        throw new Error('generateGenericCitizens.rand(): ctx.rng required (Phase 40.3 Path 1 — Math.random fallback removed)');
+      }
+      rng = ctx.rng;
     }
     return rng();
   }

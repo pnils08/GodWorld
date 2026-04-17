@@ -92,11 +92,12 @@ Run one reporter agent via Sandcastle with real shell access and Supermemory que
 
 Direct structural analog to Phase 39's three-lane review (Rhea + cycle-review + Mara + Final Arbiter): the implementer/reviewer pairing exists in both, and the per-branch sandbox gives commit-level attribution + process isolation for free.
 
-**Fit verdict for GodWorld:**
+**Fit findings for GodWorld (factual, no recommendation):**
 - **Match:** strong on structure. Sandcastle's `reviewer` primitive is isomorphic to any single Phase 39 lane.
-- **Material gain:** modest. Current Phase 39 reviewers are deterministic and local; sandboxing buys reproducibility and audit trail rather than safety. Higher payoff if we ever run reviewers on untrusted input (e.g., user-submitted desk packets).
-- **Integration cost:** non-trivial. Needs a working sandbox provider (Daytona rejected tonight; Docker requires local install; Vercel requires a separate account). Needs rewrap of capability-reviewer / cycle-review / Rhea / Mara as sandcastle templates. Each reviewer would run in its own sandbox per cycle.
-- **Recommendation:** **park for now.** Phase 39 ships today without Sandcastle. Revisit if (a) we need commit-level attribution per reviewer lane, (b) reviewers become non-deterministic (e.g., add a grader-LLM step), or (c) we run reviewers on data from outside the trust boundary. Do not block spine progression on this.
+- **Material gain:** sandboxing buys reproducibility and commit-level audit trail on every reviewer run. Current Phase 39 reviewers are deterministic and local; the audit trail is the main addition.
+- **Integration work required:** working sandbox provider (Daytona rejected tonight but Tier 1 is free — fresh key would unblock; Docker requires local install; Vercel requires a separate account). Rewrap each of the four lanes (Rhea / cycle-review / Mara / capability-reviewer / Final Arbiter) as sandcastle templates. Each reviewer runs in its own sandbox per cycle.
+- **Potential triggers for a full build:** commit-level attribution per reviewer lane; reviewers becoming non-deterministic (e.g., add a grader-LLM step); running reviewers on data from outside the trust boundary.
+- **Decision pending Mike.** Research-build doesn't unilaterally park infrastructure evaluations.
 
 ### 33.14 Tool-restricted reporter agents — BUILD (media terminal)
 

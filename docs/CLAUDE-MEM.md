@@ -106,19 +106,11 @@ Monitor this. If it grows past 1GB, investigate retention/cleanup options.
 
 ---
 
-## Cost Optimization — TODO
+## Cost Optimization — DONE (S141, 2026-04-10)
 
-The PostToolUse hook calls Sonnet 4.6 to summarize every tool call into an observation. Over 120 sessions and 6,282 observations, that's significant token spend.
+The PostToolUse hook originally called Sonnet 4.6 to summarize every tool call. Token burn was running ~10%/day. **Switched to Gemini 2.5 Pro free tier** on S141. Config: `/root/.claude-mem/settings.json` — `CLAUDE_MEM_PROVIDER: "gemini"`, `CLAUDE_MEM_GEMINI_MODEL: "gemini-2.5-pro"`, API key in `CLAUDE_MEM_GEMINI_API_KEY`. Free tier handles current observation volume without issue.
 
-**Cheaper alternatives (need API keys):**
-- `CLAUDE_MEM_PROVIDER: "openrouter"` + `CLAUDE_MEM_OPENROUTER_MODEL: "xiaomi/mimo-v2-flash:free"` — literally free
-- `CLAUDE_MEM_PROVIDER: "gemini"` + `CLAUDE_MEM_GEMINI_MODEL: "gemini-2.5-flash-lite"` — free tier
-
-Both require API keys we don't currently have:
-- OpenRouter: sign up at openrouter.ai, get free API key, set `CLAUDE_MEM_OPENROUTER_API_KEY`
-- Gemini: Google AI Studio, get free API key, set `CLAUDE_MEM_GEMINI_API_KEY`
-
-Either would eliminate the observation summarization cost entirely.
+Fallback options remain configured in settings.json (OpenRouter with `xiaomi/mimo-v2-flash:free`) if Gemini rate limits bite.
 
 ---
 

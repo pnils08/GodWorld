@@ -546,7 +546,7 @@ function detectHouseholdStress_(ss, households) {
 }
 
 function dissolveStressedHouseholds_(ss, stressedHouseholds, cycle, rng) {
-  rng = rng || Math.random;
+  if (typeof rng !== 'function') throw new Error('householdFormationEngine.dissolveStressedHouseholds_: rng parameter required (Phase 40.3 Path 1)');
   var dissolved = [];
 
   // Only dissolve households in crisis with random chance

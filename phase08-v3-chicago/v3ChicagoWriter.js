@@ -176,7 +176,7 @@ function saveV3Chicago_(ctx) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function deriveChicagoFeedV24_(ctx, godWorldYear, cycleOfYear, simMonth, cycleInMonth, season, holiday, rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('v3ChicagoWriter.deriveChicagoFeedV24_: rng parameter required (Phase 40.3 Path 1)');
   var S = ctx.summary || {};
   var chicago = S.chicago || ctx.chicago || {};
 
@@ -228,7 +228,7 @@ function getMonthFromCycleInternal_(cycleOfYear) {
 }
 
 function deriveChicagoWeatherTypeV24_(simMonth, rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('v3ChicagoWriter.deriveChicagoWeatherTypeV24_: rng parameter required (Phase 40.3 Path 1)');
   var patterns = {
     1: ['snow', 'cold', 'cold', 'lake-effect'],
     2: ['snow', 'cold', 'cold', 'freezing-rain'],
@@ -248,7 +248,7 @@ function deriveChicagoWeatherTypeV24_(simMonth, rng) {
 }
 
 function deriveChicagoTempV24_(simMonth, weatherType, rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('v3ChicagoWriter.deriveChicagoTempV24_: rng parameter required (Phase 40.3 Path 1)');
   var baseTemps = { 1: 25, 2: 28, 3: 38, 4: 48, 5: 58, 6: 68, 7: 75, 8: 74, 9: 65, 10: 53, 11: 40, 12: 28 };
   var temp = baseTemps[simMonth] || 45;
   if (weatherType === 'snow' || weatherType === 'lake-effect') temp -= 5;
@@ -283,7 +283,7 @@ function deriveComfortIndexV24_(temperature, weatherType) {
 }
 
 function deriveChicagoSentimentV24_(summary, rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('v3ChicagoWriter.deriveChicagoSentimentV24_: rng parameter required (Phase 40.3 Path 1)');
   var sentiment = -0.1;
   if (summary.sportsSeason === 'playoffs' || summary.sportsSeason === 'post-season') sentiment += 0.15;
   if (summary.sportsSeason === 'championship') sentiment += 0.3;

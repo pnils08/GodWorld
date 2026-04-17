@@ -1,6 +1,9 @@
 ---
 name: run-cycle
 description: Orchestrate a full engine cycle — pre-flight, pre-mortem, engine run, engine review, world summary.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: high
 disable-model-invocation: true
 argument-hint: "[cycle-number]"

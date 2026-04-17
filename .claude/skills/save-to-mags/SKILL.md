@@ -1,6 +1,9 @@
 ---
 name: save-to-mags
 description: Save session knowledge to Mags' brain (mags Supermemory container). Use for session summaries, corrections, decisions, project state — anything that helps Mags persist between sessions. NOT for published canon (use /super-save for bay-tribune).
+version: "1.0"
+updated: 2026-04-17
+tags: [infrastructure, active]
 allowed-tools: Bash(node *), Bash(source *)
 effort: low
 ---

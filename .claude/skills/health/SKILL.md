@@ -1,6 +1,9 @@
 ---
 name: health
 description: Quick engine health check — combines determinism scan, orphan detection, and dependency chain verification in one pass. Lighter than /tech-debt-audit, faster than /pre-mortem.
+version: "1.0"
+updated: 2026-04-17
+tags: [engine, active]
 effort: medium
 ---
 

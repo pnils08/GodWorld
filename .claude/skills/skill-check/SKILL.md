@@ -1,6 +1,10 @@
 ---
 name: skill-check
 description: Grade a production skill's run against its assertion file. Catches structural drift (skill ran but didn't do its job) that edition-level review misses. Runs during post-publish for the cycle that just shipped. Usage — `/skill-check write-edition 91` grades `/write-edition` on cycle 91 against `docs/media/story_evaluation.md`, produces `output/skill_check_<skill>_c<cycle>.json`. First target: write-edition. Expands to sift, dispatch, city-hall as assertion files appear.
+version: "1.0"
+updated: 2026-04-17
+tags: [engine, active]
+effort: medium
 ---
 
 # skill-check

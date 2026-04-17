@@ -1,6 +1,9 @@
 ---
 name: style-pass
 description: On-demand per-article stylistic review — sentence variety, emotional range, opening/closing quality. Invoked by /sift or the editor when narrative voice needs a closer look. NOT part of the three-lane reviewer chain (Phase 39.4, S147).
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: low
 ---
 

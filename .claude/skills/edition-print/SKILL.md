@@ -1,6 +1,9 @@
 ---
 name: edition-print
 description: Post-publish print pipeline — photos, PDF, Drive upload. Runs after write-edition publishes.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: low
 disable-model-invocation: true
 argument-hint: "[edition-number]"

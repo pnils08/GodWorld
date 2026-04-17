@@ -1,6 +1,9 @@
 ---
 name: skill-audit
 description: Audit skill files for drift — script paths, file references, prerequisites, handoffs, chain position. Skills are behavior, not reference — they need a different audit than doc-audit.
+version: "1.0"
+updated: 2026-04-17
+tags: [engine, active]
 effort: medium
 argument-hint: "[group]"
 ---

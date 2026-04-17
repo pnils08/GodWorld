@@ -1,6 +1,9 @@
 ---
 name: city-hall-prep
 description: Prepare all inputs for city-hall voice agents. Reads tracker, approvals, world summary, engine review, coverage ratings, previous log, canon, Mara directive. Writes pending decisions per voice.
+version: "1.0"
+updated: 2026-04-17
+tags: [civic, active]
 effort: high
 argument-hint: "[cycle-number]"
 ---

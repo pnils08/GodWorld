@@ -1,6 +1,9 @@
 ---
 name: stub-engine
 description: Generate a condensed reference map of every exported function across all 11 engine phases. Shows ctx reads, ctx writes, and dependencies per function.
+version: "1.0"
+updated: 2026-04-17
+tags: [engine, active]
 effort: medium
 ---
 

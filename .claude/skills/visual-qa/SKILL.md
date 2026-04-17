@@ -1,6 +1,9 @@
 ---
 name: visual-qa
 description: Run visual QA against the GodWorld dashboard — screenshots, element checks, API health.
+version: "1.0"
+updated: 2026-04-17
+tags: [infrastructure, active]
 user_invocable: true
 effort: medium
 ---

@@ -1,6 +1,9 @@
 ---
 name: chicago-desk
 description: Write the Chicago bureau section using Selena Grant and Talia Finch.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: high
 disable-model-invocation: true
 ---

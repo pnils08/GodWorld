@@ -191,8 +191,7 @@ function createChicagoCitizensSheet_(ss) {
  * Generate a single Chicago citizen
  */
 function generateChicagoCitizen_(cycle, rng) {
-
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('generateChicagoCitizensv1.generateChicagoCitizen_: rng parameter required (Phase 40.3 Path 1)');
   var gender = rng() < 0.5 ? 'M' : 'F';
   var firstName = gender === 'M' ? pickRandom_(CHICAGO_FIRST_NAMES_M_) : pickRandom_(CHICAGO_FIRST_NAMES_F_);
   var lastName = pickRandom_(CHICAGO_LAST_NAMES_);
@@ -221,7 +220,7 @@ function generateChicagoCitizen_(cycle, rng) {
  * Generate age with realistic distribution
  */
 function generateAge_(rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('generateChicagoCitizensv1.generateAge_: rng parameter required (Phase 40.3 Path 1)');
   // Weighted toward working age
   var roll = rng();
   if (roll < 0.05) return Math.floor(rng() * 10) + 18;       // 18-27: 5%
@@ -237,7 +236,7 @@ function generateAge_(rng) {
  * Generate tier (most are Tier 4)
  */
 function generateTier_(rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('generateChicagoCitizensv1.generateTier_: rng parameter required (Phase 40.3 Path 1)');
   var roll = rng();
   if (roll < 0.70) return 4;   // 70% Tier 4
   if (roll < 0.90) return 3;   // 20% Tier 3
@@ -267,7 +266,7 @@ function getChicagoOccupation_(neighborhood) {
  * Pick weighted random from object {name: weight}
  */
 function pickWeightedRandom_(weightedObj, rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('generateChicagoCitizensv1.pickWeightedRandom_: rng parameter required (Phase 40.3 Path 1)');
   var items = [];
   var weights = [];
   var total = 0;
@@ -296,7 +295,7 @@ function pickWeightedRandom_(weightedObj, rng) {
  * Generate unique ID
  */
 function generateId_(rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('generateChicagoCitizensv1.generateId_: rng parameter required (Phase 40.3 Path 1)');
   var chars = '0123456789ABCDEF';
   var id = '';
   for (var i = 0; i < 8; i++) {

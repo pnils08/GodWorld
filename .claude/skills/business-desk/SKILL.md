@@ -1,6 +1,9 @@
 ---
 name: business-desk
 description: Write the business ticker section using Jordan Velez.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: low
 disable-model-invocation: true
 ---

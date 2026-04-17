@@ -1,6 +1,9 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads world summary, engine review, city-hall log. Proposes stories, assigns reporters, verifies citizens, writes angle briefs. The game moment.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: high
 argument-hint: "[cycle-number]"
 ---

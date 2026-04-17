@@ -243,7 +243,7 @@ function extractIncomeBand_(lifeHistory) {
 }
 
 function calculateIncomeFromBand_(incomeBand, tier, rng) {
-  if (!rng) rng = Math.random; // safety fallback
+  if (typeof rng !== 'function') throw new Error('generationalWealthEngine.calculateIncomeFromBand_: rng parameter required (Phase 40.3 Path 1)');
   var baseIncome = INCOME_BY_BAND[incomeBand] || INCOME_BY_BAND['low'];
 
   // Tier modifiers (higher tier = higher income within band)

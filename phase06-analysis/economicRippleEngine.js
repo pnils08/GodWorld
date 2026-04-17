@@ -492,7 +492,8 @@ function createRipple_(S, triggerType, cycle, sourceEvent, eventNeighborhood, ca
   var neighborhood = eventNeighborhood || '';
   if (!neighborhood && trigger.neighborhoods && trigger.neighborhoods.length > 0 &&
       trigger.neighborhoods[0] !== 'all') {
-    var _rng = (typeof S._rng === 'function') ? S._rng : Math.random;
+    if (typeof S._rng !== 'function') throw new Error('economicRippleEngine.createRipple_: S._rng required (Phase 40.3 Path 1)');
+    var _rng = S._rng;
     neighborhood = trigger.neighborhoods[Math.floor(_rng() * trigger.neighborhoods.length)];
   }
   

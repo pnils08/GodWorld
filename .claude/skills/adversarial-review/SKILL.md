@@ -1,6 +1,9 @@
 ---
 name: adversarial-review
 description: Adversarial edition review — actively tries to break the compiled edition before publish. Probes contradictions, unsourced claims, narrative gaps, and framing that only holds under one reading. Complements reward-hacking scans (39.8) which watch for evaluator gaming. This watches for content problems that normal review misses.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: medium
 argument-hint: "[cycle-number]"
 ---

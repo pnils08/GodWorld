@@ -1,6 +1,9 @@
 ---
 name: civic-desk
 description: Write the civic affairs section for an edition using Carmen Delaine and the civic desk reporters.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: high
 disable-model-invocation: true
 ---

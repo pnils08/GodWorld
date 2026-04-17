@@ -1,6 +1,9 @@
 ---
 name: deploy
 description: Deploy engine to Google Apps Script via clasp push with pre-flight checks, verification, and rollback guidance.
+version: "1.0"
+updated: 2026-04-17
+tags: [engine, active]
 disable-model-invocation: true
 effort: medium
 ---

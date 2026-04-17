@@ -1,6 +1,9 @@
 ---
 name: pre-flight
 description: Verify manual inputs are ready before running a cycle. Sports feed, intakes, initiative tracker, coverage ratings.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: low
 ---
 

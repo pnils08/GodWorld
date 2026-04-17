@@ -1,6 +1,9 @@
 ---
 name: engine-review
 description: Post-cycle engine state diagnostic. Runs the deterministic engine auditor, then frames its findings as 7-field ailment briefs with remedy paths. Phase 38 (revised S146 to consume auditor JSON instead of re-scanning sheets).
+version: "1.0"
+updated: 2026-04-17
+tags: [engine, active]
 effort: medium
 ---
 

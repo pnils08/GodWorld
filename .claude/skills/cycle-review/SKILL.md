@@ -1,6 +1,9 @@
 ---
 name: cycle-review
 description: Reasoning Lane of the three-lane reviewer chain. Checks internal consistency, evidence-based deduction, and argument quality in compiled editions. Weight 0.5 — the heaviest lane. Runs after Rhea (Sourcing Lane) and before Mara (Result Validity Lane). Phase 39.4.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: medium
 ---
 

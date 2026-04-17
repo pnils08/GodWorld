@@ -1,6 +1,9 @@
 ---
 name: session-startup
 description: Manual fallback for workflow-routed boot. Use only if auto-boot didn't fire (e.g., after compaction or context loss).
+version: "1.0"
+updated: 2026-04-17
+tags: [infrastructure, active]
 effort: low
 ---
 

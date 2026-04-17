@@ -1,6 +1,9 @@
 ---
 name: podcast-desk
 description: Podcast desk agent — writes two-host dialogue transcripts from edition content and world texture. Called by /podcast.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: medium
 disable-model-invocation: true
 ---

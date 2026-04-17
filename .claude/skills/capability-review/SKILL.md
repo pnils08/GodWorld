@@ -1,6 +1,9 @@
 ---
 name: capability-review
 description: Phase 39.1 capability reviewer wrapper. Runs the deterministic editorial assertions against a compiled edition, surfaces blocking failures that should halt publish, and writes a markdown summary alongside the JSON.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: low
 ---
 

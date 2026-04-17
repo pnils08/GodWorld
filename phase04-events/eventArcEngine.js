@@ -81,7 +81,8 @@ function getCurrentCycle_(ctx) {
  * @param {Function} [rng] - Deterministic RNG function (falls back to Math.random)
  */
 function pickNeighborhoodForDomain_(domain, rng) {
-  var _rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('eventArcEngine.pickNeighborhoodForDomain_: rng parameter required (Phase 40.3 Path 1)');
+  var _rng = rng;
   var matches = [];
   var nhKeys = Object.keys(ARC_NEIGHBORHOOD_DOMAINS);
   for (var i = 0; i < nhKeys.length; i++) {
@@ -399,7 +400,8 @@ function eventArcEngine_(ctx) {
  * @param {Function} [rng] - Deterministic RNG function (falls back to Math.random)
  */
 function generateSafeUuid_(rng) {
-  var _rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('eventArcEngine.generateSafeUuid_: rng parameter required (Phase 40.3 Path 1)');
+  var _rng = rng;
   try {
     if (typeof Utilities !== 'undefined' && typeof Utilities.getUuid === 'function') {
       return Utilities.getUuid();

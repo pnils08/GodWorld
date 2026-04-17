@@ -418,7 +418,8 @@ function makeBondKey_(idA, idB) {
  * Generate unique bond ID
  */
 function generateBondId_(rng) {
-  var rand = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('seedRelationBondsv1.generateBondId_: rng parameter required (Phase 40.3 Path 1)');
+  var rand = rng;
   var chars = '0123456789ABCDEF';
   var id = '';
   for (var i = 0; i < 8; i++) {

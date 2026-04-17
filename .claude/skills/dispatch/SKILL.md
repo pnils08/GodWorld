@@ -1,6 +1,9 @@
 ---
 name: dispatch
 description: Immersive scene piece — one reporter, one location, one moment. Editions report, supplementals explain, dispatches immerse.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: high
 disable-model-invocation: true
 argument-hint: "[scene description]"

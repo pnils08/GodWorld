@@ -1,6 +1,9 @@
 ---
 name: interview
 description: Produce an interview — reporter agent interviews a civic voice or Mike as GM Paulson. Transcript + published article in one run. Interviews can spawn world-altering canon.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: high
 disable-model-invocation: true
 argument-hint: "[mode] [subject]"

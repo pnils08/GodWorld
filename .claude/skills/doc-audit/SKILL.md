@@ -1,6 +1,9 @@
 ---
 name: doc-audit
 description: Audit architecture and system docs for staleness, inaccuracy, and drift from actual codebase state. Grouped into 5 tiers for thorough coverage.
+version: "1.0"
+updated: 2026-04-17
+tags: [engine, active]
 effort: high
 ---
 

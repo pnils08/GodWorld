@@ -1,6 +1,9 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Makes the next cycle smarter.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: high
 argument-hint: "[cycle-number]"
 ---

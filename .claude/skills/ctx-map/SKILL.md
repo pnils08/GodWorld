@@ -1,6 +1,9 @@
 ---
 name: ctx-map
 description: Generate a live ctx.summary field dependency map showing which phase writes each field and which phases read it. Catches broken chains and orphans.
+version: "1.0"
+updated: 2026-04-17
+tags: [engine, active]
 effort: low
 ---
 

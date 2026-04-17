@@ -744,8 +744,7 @@ function getCouncilStateFromSimLedger_(ctx) {
  * v1.5: Now accepts rng function for deterministic simulation
  */
 function resolveCouncilVote_(ctx, row, header, councilState, sentiment, swingInfo, demoContext, rng) {
-  // v1.5: Use passed rng or fallback
-  rng = rng || Math.random;
+  if (typeof rng !== 'function') throw new Error('civicInitiativeEngine.resolveCouncilVote_: rng parameter required (Phase 40.3 Path 1)');
 
   // v1.3: Demographics context (optional for backwards compatibility)
   demoContext = demoContext || { demographics: {}, affectedNeighborhoods: [] };
@@ -1250,7 +1249,7 @@ function calculateDemographicInfluence_(demoContext) {
  * v1.5: Now accepts rng function for deterministic simulation
  */
 function resolveExternalDecision_(ctx, row, header, sentiment, rng) {
-  rng = rng || Math.random;
+  if (typeof rng !== 'function') throw new Error('civicInitiativeEngine.resolveExternalDecision_: rng parameter required (Phase 40.3 Path 1)');
   
   var idx = function(n) { return header.indexOf(n); };
   

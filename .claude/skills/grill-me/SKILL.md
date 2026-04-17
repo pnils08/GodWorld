@@ -1,6 +1,9 @@
 ---
 name: grill-me
 description: Force deep interrogation of a plan before any code gets written.
+version: "1.0"
+updated: 2026-04-17
+tags: [infrastructure, active]
 effort: medium
 ---
 

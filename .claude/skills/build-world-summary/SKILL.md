@@ -1,6 +1,9 @@
 ---
 name: build-world-summary
 description: Mechanical data assembly after a cycle run. Reads sheets + engine-review, produces world summary document. No editorial judgment.
+version: "1.0"
+updated: 2026-04-17
+tags: [engine, active]
 effort: medium
 ---
 

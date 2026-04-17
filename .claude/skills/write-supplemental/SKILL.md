@@ -1,6 +1,9 @@
 ---
 name: write-supplemental
 description: Produce a supplemental edition — variety coverage that builds the world beyond the Cycle Pulse. Any topic, any reporter, any format.
+version: "1.0"
+updated: 2026-04-17
+tags: [media, active]
 effort: high
 disable-model-invocation: true
 argument-hint: "[topic]"

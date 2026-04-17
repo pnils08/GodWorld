@@ -145,7 +145,7 @@ function chicagoSatelliteEngine_(ctx) {
  * ============================================================================
  */
 function generateChicagoWeather_(month, season, holiday, rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('chicagoSatellite.generateChicagoWeather_: rng parameter required (Phase 40.3 Path 1)');
   // Base temps by month (Fahrenheit)
   var baseTemps = {
     1: 25, 2: 28, 3: 38, 4: 48, 5: 58, 6: 68,
@@ -218,7 +218,7 @@ function generateChicagoWeather_(month, season, holiday, rng) {
  * ============================================================================
  */
 function calculateChicagoSentiment_(ctx, weather, holiday, holidayPriority, bullsSeason, rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('chicagoSatellite.calculateChicagoSentiment_: rng parameter required (Phase 40.3 Path 1)');
   var sentiment = 0;
 
   // ═══════════════════════════════════════════════════════════
@@ -379,7 +379,7 @@ function getBullsSentimentImpact_(ctx) {
  * ============================================================================
  */
 function generateChicagoEvents_(weather, sentiment, month, holiday, isFirstFriday, cycleOfYear, rng) {
-  rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('chicagoSatellite.generateChicagoEvents_: rng parameter required (Phase 40.3 Path 1)');
   var events = [];
 
   // ═══════════════════════════════════════════════════════════

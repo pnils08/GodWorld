@@ -412,7 +412,8 @@ function checkConditionResolution_(arc, worldState, calendar) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 function calculateTensionDrift_(arc, worldState, calendar, rng) {
-  var _rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('processArcLifeCyclev1.calculateTensionDrift_: rng parameter required (Phase 40.3 Path 1)');
+  var _rng = rng;
   var age = arc.age || 0;
   var type = arc.type || 'crisis';
   var domain = arc.domainTag || arc.domain || '';
@@ -545,7 +546,8 @@ function determinePhase_(arc) {
  * Generate resolution text for story seed (v1.1: with reason)
  */
 function getResolutionText_(arc, rng) {
-  var _rng = (typeof rng === 'function') ? rng : Math.random;
+  if (typeof rng !== 'function') throw new Error('processArcLifeCyclev1.getResolutionText_: rng parameter required (Phase 40.3 Path 1)');
+  var _rng = rng;
   var type = arc.type || 'event';
   var neighborhood = arc.neighborhood || 'the area';
   var reason = arc.resolutionReason || '';

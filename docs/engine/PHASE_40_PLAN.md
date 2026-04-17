@@ -49,6 +49,8 @@ Production logs (`output/production_log_*.md`), `ctx.summary`, and JOURNAL entri
 
 **Cheapest win.** Build first.
 
+**Execution plan:** [[plans/2026-04-16-phase-40-1-session-log-interface]] (research-build drafted S156; engine/sheet built S156). **DONE S156** — `lib/sessionLog.js` ships `readLast(path, n)` and `readSince(path, isoTimestamp)`. `readByTag` dropped from MVP per inventory (no current consumer). Session-end skill migrated as the proof migration. 17/17 tests passing.
+
 ### 40.2 Reporter-as-cattle refactor (paper 3 "Don't adopt a pet")
 
 Reporter agents today are pets — Carmen Delaine has personality files, history, drift. That's intentional for voice. But the *execution* (which citizens to quote, which angles to take) should be interchangeable and restartable. Split voice files (persistent, identity) from brief-execution state (session-scoped, disposable). A reporter agent that crashes mid-article should reboot from the production log without losing the draft's progress or re-deciding the angle.
@@ -95,6 +97,8 @@ Entry 123 proved memory is the softest injection surface. Multi-layer defense. H
   - Invisible unicode set: `\u200b \u200c \u200d \u2060 \ufeff \u202a-\u202e`
   
   On match, block the file load and log what was blocked. This is the layer that protects against a poisoned letters-desk output or a published edition injecting instructions into the next cycle's voice agent.
+
+**Execution plan:** [[plans/2026-04-16-phase-40-6-injection-defense]] (research-build drafted S156; engine/sheet builds).
 - **Layer 5 (tool gate):** Service-account writes, Supermemory writes to `mags`/`bay-tribune`, and file deletions require explicit user approval. Partially enforced by identity.md rules; make structural via settings.json permissions.
 - **Layer 6 (review):** Rhea scans published content for injection patterns (prompts embedded in letters, quoted citizen speech that looks like an instruction) — same regex set as Layer 4, applied to desk output before publish.
 
@@ -116,3 +120,6 @@ Each item can be its own session. When one is ready to build, fork a dated plan 
 ## Changelog
 
 - 2026-04-16 — Extracted from [[engine/ROLLOUT_PLAN]] §Phase 40 (S152). Content preserved verbatim; frontmatter + structure added to match PHASE_38_PLAN / PHASE_39_PLAN shape.
+- 2026-04-16 — §40.1 execution plan drafted at [[plans/2026-04-16-phase-40-1-session-log-interface]] (S156, research-build). Ready for engine/sheet to build.
+- 2026-04-16 — §40.1 BUILT (S156, engine/sheet). `lib/sessionLog.js` + `lib/sessionLog.test.js`. `readByTag` dropped from MVP per inventory (zero consumers). Migration target: `.claude/skills/session-end/SKILL.md` line 107 now calls `readLast(journal, 3)`. 17/17 tests passing on synthetic + real production logs and JOURNAL.md.
+- 2026-04-16 — §40.6 execution plan drafted at [[plans/2026-04-16-phase-40-6-injection-defense]] (S156, research-build). Hermes source confirmed, regex set reproduced verbatim. Ready for engine/sheet to build.

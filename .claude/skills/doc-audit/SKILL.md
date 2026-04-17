@@ -62,6 +62,7 @@ effort: high
 | `docs/DISCORD.md` | Bot name, model, knowledge sources, Supermemory integration current? |
 | `docs/SUPERMEMORY.md` | 6 containers listed? Isolation rules match config? Access matrix current? Skills table matches actual commands? |
 | `docs/CLAUDE-MEM.md` | Bun daemon (NOT PM2)? Port 37777? SQLite + Chroma still the stack? AutoDream config matches `/root/.claude-mem/settings.json`? |
+| `docs/FOUR_COMPONENT_MAP.md` | Terminal count matches `.claude/terminals/` subdirs? Skill count (§4 harness table) matches `ls .claude/skills/ \| wc -l`? Agent count (§4 note) matches `ls .claude/agents/ \| wc -l`? Models per role current (AutoDream still Gemini? Desk agents still Sonnet?)? Cron inventory (§2) matches `crontab -l`? §7 seam map reflects current Phase 40 status — DONE/PENDING flags match [[engine/PHASE_40_PLAN]] changelog? |
 
 ### data — Drift when sheets change.
 

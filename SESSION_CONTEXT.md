@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-16 | Engine: v3.3 | Cycle: 91 | Session: 155
+Last Updated: 2026-04-17 | Engine: v3.3 | Cycle: 91 | Session: 156
 
 ---
 
@@ -64,6 +64,20 @@ Last Updated: 2026-04-16 | Engine: v3.3 | Cycle: 91 | Session: 155
 ---
 
 ## Recent Sessions
+
+### Session 156 (2026-04-17) — Phase 40.3 credential isolation shipped end-to-end [engine-sheet]
+
+- **Lint workflow fixed.** `.eslintrc.json` `ecmaVersion` bumped 2020 → 2022 to support numeric separators. `scripts/rheaTwoPass.js:215` was blocking every push on GitHub Actions. Commit `aec38ff`.
+- **Phase 40.3 executed in three commits.** Plan: [[plans/2026-04-16-phase-40-3-credential-audit]]. All 9 tasks closed (8 + Task 0). Phase 40 now at 5 of 6 — only 40.2 cattle refactor remains.
+  - `056eae0` safe tasks: 25-agent Read-reachability inventory, 4 absolute-path deny rules added to `.claude/settings.json`, Supermemory write-gate added to `.claude/hooks/pre-tool-check.sh` (blocks curl mutations + `npx supermemory add/ingest/update/delete` unless command matches allowlist), `DISASTER_RECOVERY.md` + `STACK.md` + `SUPERMEMORY.md` updated, `credentials/supermemory-pn-key.txt` deleted (dead duplicate).
+  - `91d8649` live-infra tasks (one PM2 restart window per Mike's approval): `.env` and `credentials/service-account.json` relocated to `/root/.config/godworld/` (chmod 700 parent, 600 files); `lib/env.js` created as central loader with `override: true` so the relocated file wins over stale shell/PM2 env; 78 `require('dotenv').config(...)` sites in `scripts/` swept to `require('/root/GodWorld/lib/env')`; 9 hardcoded credential/env paths fixed; `dashboard/server.js` ES-module dotenv converted; `ecosystem.config.js` rewritten to match the live PM2 registry names (mags-bot, godworld-dashboard, moltbook, spacemolt-miner — drift from S137b resolved, dashboard added: it was ad-hoc, never declarative); `~/.bashrc` `GOOGLE_APPLICATION_CREDENTIALS` updated; `TOGETHER_API_KEY` removed from `.env` and swept from `~/.pm2/dump.pm2`; Discord bot file-read refusal shipped (`scripts/mags-discord-bot.js` + `CREDENTIAL_PATH_PATTERNS` + Layer 4 contextScan integration + `logs/discord-injection-attempts.log`).
+  - `a104910` rollout + PHASE_40_PLAN flip from plan-drafted → DONE.
+- **Drift findings (worth future-you knowing — saved to mags `V2uJ5F3PFTKn7suyyGpWUk`, retrieve with `curl -s "https://api.supermemory.ai/v3/documents/V2uJ5F3PFTKn7suyyGpWUk" -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY"`).**
+  1. `~/.bashrc` had `GOOGLE_APPLICATION_CREDENTIALS` pointed at `~/.config/gcloud/service-account.json` — a separate pre-existing copy of the same `maravance@godworld-486407` service account, different file contents. `lib/sheets.js` had been reading from `~/.config/gcloud/`, not the repo's `credentials/`, via the env var default path. Resolved by overwriting `/root/.config/godworld/credentials/service-account.json` with the live file (md5 verified match) and pointing `.bashrc` at the new path.
+  2. `ecosystem.config.js` names (`mags-discord-bot`, `mags-moltbook-heartbeat`, `spacemolt-miner`) never matched the live PM2 registry (`mags-bot`, `godworld-dashboard`, `moltbook`). `godworld-dashboard` had been started ad-hoc and was never in the config file. Drift predated S156; fixed in the rewrite.
+- **Audit re-run clean.** Zero hits for old credential/env paths across code: `grep './credentials/service-account'`, `grep '/root/GodWorld/credentials/service-account'`, `grep "require('dotenv').config"`, `grep "path.join(__dirname, '..', '.env')"`, `grep TOGETHER_API_KEY ~/.pm2/dump.pm2` — all 0.
+- **Smoke tests green.** `queryFamily.js` returned full family data (Supermemory + Sheets round-trip); `engineAuditor.js` ran on cycle 91 in 1.5s and wrote 3 JSON outputs; dashboard served HTTP 302 on :3001; Discord bot logged in as "Mags Corliss#0710" and watched channel `1471615721003028512`.
+- **4 commits this session.** No `clasp push`, no sheet writes. No journal (Mike's call).
 
 ### Session 155 (2026-04-16) — Off-ramp opened: DeepSeek beat Claude on the desk test [research/build]
 

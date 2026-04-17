@@ -86,14 +86,14 @@ pointers:
 ### Task 4: Hookify rule for memory-write confirmation (Layer 3)
 
 - **Files:**
-  - `.claude/hooks/pre-tool-check.sh` — modify OR new hookify rule file
-  - `.claude/hooks/hooks.json` — modify
+  - `.claude/hooks/memory-write-gate.sh` — create ✓
+  - `.claude/hooks/hooks.json` — modify (add Write|Edit PreToolUse entry) ✓
 - **Steps:**
-  1. Add a rule that triggers on any `Write` or `Edit` tool call targeting a path under `/root/.claude/projects/-root-GodWorld/memory/`.
-  2. Rule action: block and print the attempted write's summary; require explicit user confirmation to retry.
-  3. Test: attempt a write to a file in the memory dir without approval; confirm the block fires.
-- **Verify:** Manual test — attempt write to `memory/test_block.md`, confirm block message. Log entry in hook audit output.
-- **Status:** [ ] not started
+  1. ✓ New script inspects `tool_input.file_path` on every Write/Edit call. Match on `/root/.claude/projects/-root-GodWorld/memory/` prefix → emit `permissionDecision: "deny"` with a reason that surfaces to Mags.
+  2. ✓ Blocked attempts appended to `output/injection_blocks.log` for audit.
+  3. ✓ Tested: memory-path input produces deny JSON with reason; non-memory input exits 0 silently.
+- **Verify:** `echo '{"tool_input":{"file_path":"/root/.claude/projects/-root-GodWorld/memory/x.md"}}' | bash .claude/hooks/memory-write-gate.sh` returns permissionDecision:deny. Non-memory path exits 0 silently.
+- **Status:** [x] done — S156
 
 ### Task 5: Port Hermes context-file scanner to `lib/contextScan.js`
 

@@ -166,13 +166,13 @@ pointers:
 ### Task 10: Back-link from parent phase doc and register in index
 
 - **Files:**
-  - `docs/engine/PHASE_40_PLAN.md` — modify
-  - `docs/index.md` — modify
+  - `docs/engine/PHASE_40_PLAN.md` — modify ✓
+  - `docs/index.md` — modify ✓
 - **Steps:**
-  1. In PHASE_40_PLAN.md §40.6, append `[[plans/2026-04-16-phase-40-6-injection-defense]]` as execution plan. Changelog line.
-  2. Add an index entry under `docs/plans/`.
-- **Verify:** Both files grep positive for `phase-40-6-injection-defense`.
-- **Status:** [ ] not started
+  1. ✓ PHASE_40_PLAN §40.6 carries the execution-plan pointer; changelog line added dated 2026-04-16.
+  2. ✓ `docs/index.md` carries the plan entry under `docs/plans/`.
+- **Verify:** `grep -c "phase-40-6-injection-defense" docs/engine/PHASE_40_PLAN.md docs/index.md` returns 2 and 1 respectively.
+- **Status:** [x] done — S156
 
 ---
 

@@ -16,7 +16,7 @@
  *   - credentials/service-account.json for Sheets reads
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');

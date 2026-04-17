@@ -1,5 +1,5 @@
 const { google } = require('googleapis');
-require('dotenv').config({ path: '/root/GodWorld/.env' });
+require('/root/GodWorld/lib/env');
 
 const SPREADSHEET_ID = process.env.GODWORLD_SHEET_ID;
 const TAB_NAME = 'Storyline_Tracker';
@@ -7,7 +7,7 @@ const TAB_NAME = 'Storyline_Tracker';
 async function main() {
   // --- Auth ---
   const auth = new google.auth.GoogleAuth({
-    keyFile: '/root/GodWorld/credentials/service-account.json',
+    keyFile: '/root/.config/godworld/credentials/service-account.json',
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
   });
   const sheets = google.sheets({ version: 'v4', auth });

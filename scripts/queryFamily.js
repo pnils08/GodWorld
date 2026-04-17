@@ -7,7 +7,7 @@
  * Usage: node scripts/queryFamily.js
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const sheets = require('../lib/sheets');
 const https = require('https');
 

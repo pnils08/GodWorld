@@ -19,7 +19,7 @@ const { chromium } = require('playwright');
 const AxeBuilder = require('@axe-core/playwright').default;
 const path = require('path');
 const fs = require('fs');
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 
 const BASE_URL = `http://localhost:${process.env.DASHBOARD_PORT || 3001}`;
 const OUTPUT_DIR = path.join(__dirname, '..', 'output', 'visual-qa');

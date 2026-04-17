@@ -1,8 +1,8 @@
 #!/usr/bin/env node
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const auth = new google.auth.GoogleAuth({
-  keyFile: 'credentials/service-account.json',
+  keyFile: '/root/.config/godworld/credentials/service-account.json',
   scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']
 });
 const s = google.sheets({ version: 'v4', auth });

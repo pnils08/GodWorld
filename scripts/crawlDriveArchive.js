@@ -11,7 +11,7 @@
  * Default root: 10Y-X48HloGv9EEllWSm-Mycpmbj_9DVS (Tribune Media Archive)
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');

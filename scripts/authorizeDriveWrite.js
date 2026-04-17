@@ -16,7 +16,7 @@
  * After running, GOOGLE_REFRESH_TOKEN will be added to .env automatically.
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const http = require('http');
 const fs = require('fs');
@@ -24,7 +24,7 @@ const path = require('path');
 const url = require('url');
 
 const SCOPES = ['https://www.googleapis.com/auth/drive'];
-const ENV_PATH = path.join(__dirname, '..', '.env');
+const ENV_PATH = process.env.GODWORLD_ENV_FILE || '/root/.config/godworld/.env';
 const REDIRECT_PORT = 3456;
 const REDIRECT_URI = 'http://localhost:' + REDIRECT_PORT;
 

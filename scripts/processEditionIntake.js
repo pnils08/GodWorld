@@ -22,7 +22,7 @@
  *   Storyline_Tracker — storyline tracking (new entries only)
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');

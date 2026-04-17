@@ -37,7 +37,7 @@ const path = require('path');
 
 // ─── CONFIGURATION ─────────────────────────────────────────
 const PROJECT_ROOT_EARLY = path.resolve(__dirname, '..');
-require('dotenv').config({ path: path.join(PROJECT_ROOT_EARLY, '.env') });
+require('/root/GodWorld/lib/env');
 
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const CYCLE = getCurrentCycle();

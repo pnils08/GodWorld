@@ -3,7 +3,7 @@
  * Pull specific POPIDs from Simulation_Ledger
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 
 const SHEET_ID = process.env.GODWORLD_SHEET_ID;

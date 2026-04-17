@@ -5,7 +5,7 @@
  * Usage: node scripts/updateDriveFile.js <fileId> <localFilePath>
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const fs = require('fs');
 

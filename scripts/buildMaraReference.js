@@ -18,7 +18,7 @@
  */
 
 const path = require('path');
-require('dotenv').config({ path: path.resolve(__dirname, '..', '.env') });
+require('/root/GodWorld/lib/env');
 
 const sheets = require('../lib/sheets');
 const fs = require('fs');

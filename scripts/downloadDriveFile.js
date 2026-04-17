@@ -3,7 +3,7 @@
  * Download a file from Google Drive using service account
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const fs = require('fs');
 

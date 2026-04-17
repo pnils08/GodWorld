@@ -22,7 +22,7 @@
  *   R=TraitProfile, T=Neighborhood, AT=CitizenBio
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 var fs = require('fs');
 var path = require('path');
 var https = require('https');

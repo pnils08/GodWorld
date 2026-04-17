@@ -28,7 +28,7 @@
  *   node scripts/rheaTwoPass.js 91 --dry     # skip API calls, print what would happen
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const Anthropic = require('@anthropic-ai/sdk');

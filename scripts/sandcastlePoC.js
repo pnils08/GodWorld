@@ -13,7 +13,7 @@
  * Does NOT wrap a reporter agent — that comes after the round-trip works.
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 
 const { Daytona } = require('@daytona/sdk');
 

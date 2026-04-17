@@ -10,7 +10,7 @@
  *   node scripts/downloadDriveArchive.js --refresh  # incremental (skip existing files)
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');

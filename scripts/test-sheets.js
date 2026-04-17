@@ -6,7 +6,7 @@
  *   node scripts/test-sheets.js
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const sheets = require('../lib/sheets');
 
 async function main() {

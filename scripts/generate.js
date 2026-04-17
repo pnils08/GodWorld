@@ -8,7 +8,7 @@
  * Requires .env file with ANTHROPIC_API_KEY
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const path = require('path');
 const { execute } = require('../openclaw-skills/media-generator/index.js');
 

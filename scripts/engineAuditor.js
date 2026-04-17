@@ -14,7 +14,7 @@
  * Plan: docs/engine/PHASE_38_PLAN.md
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');

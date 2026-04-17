@@ -33,7 +33,7 @@
  *   node scripts/tierClassifier.js 91       # explicit cycle
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const { parse, extractNameCandidates, extractInitiativeIds } = require('./capability-reviewer/parseEdition');

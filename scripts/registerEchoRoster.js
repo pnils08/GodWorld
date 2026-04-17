@@ -2,7 +2,7 @@
  * One-time script: Register 8 OakTown Echo journalists on Simulation_Ledger.
  * Run: node scripts/registerEchoRoster.js
  */
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const sheets = require('../lib/sheets');
 
 async function main() {

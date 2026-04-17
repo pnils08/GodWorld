@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 /**
  * buildCivicVoicePackets.js v1.0
  *

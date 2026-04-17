@@ -26,7 +26,7 @@ const OUTPUT = path.join(ROOT, 'docs', 'media', 'ARTICLE_INDEX_BY_POPID.md');
 const WRITE = process.argv.includes('--write');
 
 // Load .env for dashboard auth
-require('dotenv').config({ path: path.join(ROOT, '.env') });
+require('/root/GodWorld/lib/env');
 const DASH_AUTH = process.env.DASHBOARD_USER && process.env.DASHBOARD_PASS
   ? 'Basic ' + Buffer.from(`${process.env.DASHBOARD_USER}:${process.env.DASHBOARD_PASS}`).toString('base64')
   : '';

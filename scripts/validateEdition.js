@@ -23,7 +23,7 @@
  *   2 = File/data errors (missing files, parse failures)
  */
 
-require('dotenv').config({ path: require('path').resolve(__dirname, '..', '.env') });
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 

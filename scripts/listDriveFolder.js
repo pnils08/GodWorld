@@ -3,7 +3,7 @@
  * List files in a Google Drive folder using service account
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 
 const CREDENTIALS_PATH = process.env.GOOGLE_APPLICATION_CREDENTIALS;

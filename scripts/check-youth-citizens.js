@@ -6,7 +6,7 @@ const CURRENT_SIM_YEAR = 2041;
 
 async function main() {
   const auth = new google.auth.GoogleAuth({
-    keyFile: '/root/GodWorld/credentials/service-account.json',
+    keyFile: '/root/.config/godworld/credentials/service-account.json',
     scopes: ['https://www.googleapis.com/auth/spreadsheets.readonly']
   });
   const sheets = google.sheets({ version: 'v4', auth });

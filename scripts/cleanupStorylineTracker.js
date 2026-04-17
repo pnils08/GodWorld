@@ -17,7 +17,7 @@
  * IMPORTANT: This clears the sheet and rewrites all rows. Backup first.
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');

@@ -12,12 +12,64 @@
  * Requires .env: ANTHROPIC_API_KEY, DISCORD_BOT_TOKEN
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { Client, GatewayIntentBits, Events } = require('discord.js');
 const Anthropic = require('@anthropic-ai/sdk');
 const fs = require('fs');
 const path = require('path');
 const mags = require('../lib/mags');
+const contextScan = require('../lib/contextScan');
+
+// ---------------------------------------------------------------------------
+// Phase 40.3 Task 6 — Discord credential-read refusal
+// Scan every inbound user message for credential-path reference or
+// prompt-injection pattern. On match: log, reply with refusal, drop the
+// message before it reaches Claude.
+// ---------------------------------------------------------------------------
+const CREDENTIAL_PATH_PATTERNS = [
+  /\/root\/GodWorld\/credentials\b/i,
+  /\/root\/GodWorld\/\.env\b/i,
+  /\/root\/\.config\/godworld\b/i,
+  /\/root\/\.config\/gcloud\b/i,
+  /\bcat\s+[^\n]*(\.env|credentials|service-account|\.netrc|\.pgpass)/i,
+  /\bcat\s+~\/\.ssh/i,
+  /\bread\s+[^\n]*(\.env|credentials|service-account)/i,
+  /\bservice-account\.json\b/i,
+];
+
+const INJECTION_LOG_PATH = path.join(__dirname, '..', 'logs', 'discord-injection-attempts.log');
+
+function scanForInjection(userMessage, userName, authorId) {
+  const hits = [];
+  for (const re of CREDENTIAL_PATH_PATTERNS) {
+    if (re.test(userMessage)) {
+      hits.push({ type: 'credential_path', pattern: re.source });
+    }
+  }
+  try {
+    const r = contextScan.scan(userMessage);
+    if (!r.safe) {
+      for (const m of r.matches) hits.push({ type: 'layer4', patternId: m.patternId });
+    }
+  } catch (_) { /* contextScan failure must not gate message handling */ }
+  if (hits.length === 0) return { blocked: false };
+
+  try {
+    const dir = path.dirname(INJECTION_LOG_PATH);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    const entry = {
+      timestamp: new Date().toISOString(),
+      user: userName,
+      authorId: authorId,
+      message: userMessage.slice(0, 500),
+      hits: hits,
+    };
+    fs.appendFileSync(INJECTION_LOG_PATH, JSON.stringify(entry) + '\n');
+  } catch (err) {
+    log.error('Failed to log injection attempt: ' + err.message);
+  }
+  return { blocked: true, hits };
+}
 
 // ---------------------------------------------------------------------------
 // Config
@@ -583,6 +635,20 @@ async function main() {
     var userName = message.author.displayName || message.author.username;
     var userMessage = message.content;
     log.info('Message from ' + userName + ': ' + userMessage.substring(0, 100));
+
+    // Phase 40.3 Task 6 — refuse credential-read / injection attempts
+    const injectionCheck = scanForInjection(userMessage, userName, message.author.id);
+    if (injectionCheck.blocked) {
+      log.warn('Injection attempt blocked from ' + userName + ': ' + JSON.stringify(injectionCheck.hits));
+      try {
+        await message.channel.send(
+          'Not reading that. Anything about credentials, .env files, or service accounts gets logged and ignored. Ask me something else.'
+        );
+      } catch (sendErr) {
+        log.error('Failed to send refusal: ' + sendErr.message);
+      }
+      return;
+    }
 
     try {
       // Show typing indicator

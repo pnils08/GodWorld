@@ -34,7 +34,7 @@
  *   node scripts/rewardHackingScanner.js 91       # explicit cycle
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const { parse, extractNameCandidates } = require('./capability-reviewer/parseEdition');

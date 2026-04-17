@@ -2,7 +2,7 @@ const { google } = require('googleapis');
 const fs = require('fs');
 
 const auth = new google.auth.GoogleAuth({
-  keyFile: '/root/GodWorld/credentials/service-account.json',
+  keyFile: '/root/.config/godworld/credentials/service-account.json',
   scopes: ['https://www.googleapis.com/auth/drive.readonly']
 });
 

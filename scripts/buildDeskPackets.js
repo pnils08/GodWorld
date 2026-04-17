@@ -245,7 +245,7 @@ const CHICAGO_TEAM_KEYWORDS = ['bulls', 'chicago', 'trepagnier', 'giddey', 'simm
 const OAKLAND_TEAM_KEYWORDS = ['a\'s', 'warriors', 'keane', 'aitken', 'horn', 'seymour', 'giannis', 'antetokounmpo', 'green', 'moody', 'dillon', 'ramos', 'coles', 'taveras', 'quintero', 'rosales', 'richards', 'rivas', 'kelley', 'davis'];
 
 // ─── SHEETS API SETUP ──────────────────────────────────────
-require('dotenv').config({ path: path.join(PROJECT_ROOT, '.env') });
+require('/root/GodWorld/lib/env');
 const sheets = require(path.join(PROJECT_ROOT, 'lib/sheets'));
 
 // ─── HELPERS ───────────────────────────────────────────────
@@ -2693,7 +2693,7 @@ async function main() {
     var hasApiKey = !!(process.env.SUPERMEMORY_CC_API_KEY);
     if (!hasApiKey) {
       // Check .env file directly
-      var envPath = path.join(__dirname, '..', '.env');
+      var envPath = process.env.GODWORLD_ENV_FILE || '/root/.config/godworld/.env';
       if (fs.existsSync(envPath)) {
         var envContent = fs.readFileSync(envPath, 'utf-8');
         hasApiKey = /SUPERMEMORY_CC_API_KEY\s*=\s*.+/.test(envContent);

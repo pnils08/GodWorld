@@ -23,7 +23,7 @@
 
 var path = require('path');
 var fs = require('fs');
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 var editionParser = require('../lib/editionParser');
 var photoGen = require('../lib/photoGenerator');
 

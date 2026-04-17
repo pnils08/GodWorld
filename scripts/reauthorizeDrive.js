@@ -13,13 +13,13 @@
  *      Or: create output/drive-auth-code.txt with just the code, run again
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');
 
 const CODE_FILE = path.join(__dirname, '..', 'output', 'drive-auth-code.txt');
-const ENV_FILE = path.join(__dirname, '..', '.env');
+const ENV_FILE = process.env.GODWORLD_ENV_FILE || '/root/.config/godworld/.env';
 const REDIRECT_URI = 'http://localhost:3847/oauth2callback';
 
 var clientId = process.env.GOOGLE_CLIENT_ID;

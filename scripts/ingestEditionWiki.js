@@ -21,7 +21,7 @@
  *   node scripts/ingestEditionWiki.js editions/cycle_pulse_edition_90.txt --apply
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 var fs = require('fs');
 var path = require('path');
 var https = require('https');

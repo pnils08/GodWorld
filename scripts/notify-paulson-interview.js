@@ -8,7 +8,7 @@
  * Sends: Discord webhook with formatted interview questions
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const https = require('https');

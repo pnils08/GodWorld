@@ -1,4 +1,9 @@
-import 'dotenv/config';
+import dotenv from 'dotenv';
+import fs from 'fs';
+// Phase 40.3 — env relocated outside repo. Override so stale shell/PM2 env
+// doesn't shadow the canonical values.
+const __envPath = process.env.GODWORLD_ENV_FILE || '/root/.config/godworld/.env';
+if (fs.existsSync(__envPath)) dotenv.config({ path: __envPath, override: true });
 import express from 'express';
 import { readFileSync, existsSync, readdirSync, appendFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';

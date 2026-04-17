@@ -13,7 +13,7 @@
  * Requires .env: ANTHROPIC_API_KEY
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const http = require('http');

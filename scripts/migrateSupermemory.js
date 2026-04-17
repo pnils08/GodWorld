@@ -23,7 +23,7 @@ const path = require('path');
 const GW_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 
 // Parse .env directly to get P N key (dotenv won't override shell env)
-const envPath = path.join(__dirname, '..', '.env');
+const envPath = process.env.GODWORLD_ENV_FILE || '/root/.config/godworld/.env';
 const envContent = fs.readFileSync(envPath, 'utf8');
 const pnMatch = envContent.match(/^SUPERMEMORY_CC_API_KEY\s*=\s*"?([^"\n]+)"?/m);
 const PN_KEY = pnMatch ? pnMatch[1].trim() : null;

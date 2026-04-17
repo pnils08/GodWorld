@@ -26,7 +26,7 @@
  *   node scripts/capabilityReviewer.js 91       # explicit cycle
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');

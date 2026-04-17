@@ -5,7 +5,7 @@
  * Create narrative memory saves for supermemory
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const fs = require('fs');
 const { execSync } = require('child_process');

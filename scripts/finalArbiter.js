@@ -26,7 +26,7 @@
  *   2 — pipeline error (missing lane JSON, malformed input)
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 

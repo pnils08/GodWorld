@@ -1,11 +1,16 @@
 node_modules/
 package-lock.json
 
-# Environment variables (secrets)
+# Environment variables (secrets) — Phase 40.3 relocated to /root/.config/godworld/.env
+# These patterns remain as belt-and-suspenders: any stray .env or credentials/ in the
+# repo working dir MUST be ignored even if accidentally created.
 .env
+.env.*
 
-# Service account credentials (never commit)
+# Service account credentials (never commit) — Phase 40.3 relocated outside repo
 credentials/
+*.service-account.json
+*service-account.json
 
 # SQLite database (local persistence, not tracked)
 godworld/godworld.db

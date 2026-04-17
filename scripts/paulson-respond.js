@@ -13,7 +13,7 @@
  * Writes: output/interviews/response_c{cycle}_paulson.json
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');

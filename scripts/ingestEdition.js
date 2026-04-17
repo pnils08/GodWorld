@@ -13,7 +13,7 @@
  * Requires .env: SUPERMEMORY_CC_API_KEY
  */
 
-require('dotenv').config();
+require('/root/GodWorld/lib/env');
 var fs = require('fs');
 var path = require('path');
 var https = require('https');

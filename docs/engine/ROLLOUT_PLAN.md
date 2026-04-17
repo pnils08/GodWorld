@@ -26,9 +26,9 @@ The planned rollout, in order. Read top to bottom: this is what the project has 
 | 7 | 39.9 + 39.8 + 39.10 tiered review + reward-hacking scans + adversarial review | DONE | S148 | [[engine/PHASE_39_PLAN]] |
 | 8 | 38.5 measurement loop (engine) + 38.6 skill shrink | DONE | S156 | [[plans/2026-04-16-phase-38-5-measurement-loop]], [[plans/2026-04-16-phase-38-6-skill-shrink]] |
 | 9 | 40.1 session-log interface + 40.6 layered injection defense | DONE | S156 | [[plans/2026-04-16-phase-40-1-session-log-interface]], [[plans/2026-04-16-phase-40-6-injection-defense]] |
-| **10** | **Sandcastle + Daytona evaluation** | **EVALUATED — decision pending Mike** | S156 | [[engine/PHASE_33_PLAN]] §33.13 |
+| 10 | Sandcastle + Daytona evaluation | DONE | S156 | [[engine/PHASE_33_PLAN]] §33.13 |
 
-**Where we are:** Step 9 closed S156 — all six Layer tasks shipped (Layer 2 memoryFence, Layer 3 memory-write gate hook, Layer 4 contextScan + skill/script wiring, Layer 5 tool-gate permissions, Layer 6 Rhea injection scan + agent extension). Pressure test: all three Entry 123 vectors blocked. Step 10 — Daytona PoC blocked on invalid key (fresh Tier 1 key would unblock; it's a free plan); code-side fit analysis in §33.13 shows Sandcastle is structurally isomorphic to Phase 39's reviewer lanes. Findings logged, decision on whether to build sits with Mike.
+**Spine walked — all 10 steps closed S156.** Step 9 shipped all six Phase 40.6 Layer tasks (memoryFence, memory-write gate hook, contextScan + skill/script wiring, tool-gate permissions, Rhea injection scan + agent extension); Entry 123 pressure test all three vectors blocked. Step 10 closed via code inspection of `/tmp/sandcastle` 0.4.5 templates + live PoC round-trip — `scripts/sandcastlePoC.js` created a Daytona Tier 1 sandbox, ran `echo` and `uname` inside it, destroyed cleanly. Findings + Phase 39 fit analysis in §33.13. Off-spine work lives in the sections below.
 
 **Full analysis:** mags Supermemory doc `n5cBYS3vVN5DKrddnNp7K8` (S144 keystone framing, still load-bearing).
 

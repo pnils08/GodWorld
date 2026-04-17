@@ -83,7 +83,7 @@ Run one reporter agent via Sandcastle with real shell access and Supermemory que
 
 **S156 readiness check — research-build.** Confirmed state: `/tmp/sandcastle` is the 0.4.5 clone with both providers on disk (`src/sandboxes/daytona.ts`, `src/sandboxes/vercel.ts`). Daytona provider needs `@daytona/sdk` peer dep + `DAYTONA_API_KEY` + optional `DAYTONA_API_URL` and `DAYTONA_TARGET`. Vercel provider needs `@vercel/sandbox` peer dep + Vercel account + token.
 
-**S156 PoC attempt.** Daytona Tier 1 free plan confirmed viable on paper (10 vCPU / 10 GiB / 30 GiB pool, 4 vCPU per sandbox). Installed `@daytona/sdk@0.167.0` + `dotenv`. Wrote `scripts/sandcastlePoC.js` — minimum-viable round-trip (create → echo → delete). Live run: API returned `Invalid credentials`. Mike declined to rotate the key. PoC parked with script in place.
+**S156 PoC — LIVE AND PASSING.** Daytona Tier 1 free plan confirmed functional (10 vCPU / 10 GiB / 30 GiB pool, 4 vCPU per sandbox). Installed `@daytona/sdk@0.167.0` + `dotenv`. `scripts/sandcastlePoC.js` minimum-viable round-trip (create → echo → uname → delete) ran clean: sandbox `74e84e20-bbde-4549-a82a-c5365ca47623`, `echo "hello from daytona"` returned exit 0, `uname -a` confirmed Ubuntu 6.8.0-90 kernel inside the microVM, cleanup succeeded. One false start: the initial key write truncated 9 chars in a shell echo, surfaced as `401 Unauthorized` — repair was a one-liner in node (`writeFileSync` after regex replace). No Docker/Podman on the host — that's the point: Daytona microVMs replace local container runtime entirely.
 
 **S156 code evaluation — Sandcastle / Phase 39 fit.** Inspected `/tmp/sandcastle/src/templates/`:
 

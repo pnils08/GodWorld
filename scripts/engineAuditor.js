@@ -39,6 +39,7 @@ const enrichers = [
   { name: 'checkMitigators', module: require('./engine-auditor/checkMitigators') },
   { name: 'recommendRemedy', module: require('./engine-auditor/recommendRemedy') },
   { name: 'generateTribuneFraming', module: require('./engine-auditor/generateTribuneFraming') },
+  { name: 'measureRemedies', module: require('./engine-auditor/measureRemedies') },
 ];
 
 const SHEETS_TO_READ = [
@@ -226,6 +227,7 @@ async function main() {
     previousCycle: cycle - 1,
     patterns,
     summary: summarize(patterns),
+    measurementHistory: ctx.measurementHistory || [],
     snapshots: persistedSnapshots,
     citizenIncomes,
   };

@@ -34,12 +34,22 @@ function fill(template, pattern) {
     .replace(/\{expectedField\}/g, expectedField)
     .replace(/\{expectedSign\}/g, expectedSign);
 
+  const measurementSpec = evidence.expectedField
+    ? {
+        field: evidence.expectedField,
+        sign: evidence.expectedSign || 'positive',
+        magnitudeThreshold: evidence.magnitudeThreshold,
+        neighborhoodsChecked: evidence.neighborhoodsChecked || [],
+      }
+    : null;
+
   return {
     type: template.type,
     target: resolve(template.target),
     action: resolve(template.action),
     rationale: resolve(template.rationale),
     expectedEngineEffect: resolve(template.expectedEngineEffect),
+    measurementSpec,
   };
 }
 

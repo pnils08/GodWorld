@@ -24,11 +24,11 @@ The planned rollout, in order. Read top to bottom: this is what the project has 
 | 5 | 38.2 + 38.3 + 38.4 mitigator + remedy + Tribune framing | DONE | S146 | [[engine/PHASE_38_PLAN]] |
 | 6 | 39.2–39.7 + 39.3 three-lane review + Final Arbiter + two-pass hallucination | DONE | S147 | [[engine/PHASE_39_PLAN]] |
 | 7 | 39.9 + 39.8 + 39.10 tiered review + reward-hacking scans + adversarial review | DONE | S148 | [[engine/PHASE_39_PLAN]] |
-| **8** | **38.5 + 38.6 measurement loop + skill shrink** | **ACTIVE** | **next** | [[plans/2026-04-16-phase-38-5-measurement-loop]], [[plans/2026-04-16-phase-38-6-skill-shrink]] |
+| **8** | **38.5 measurement loop (engine) + 38.6 skill shrink** | **38.5 DONE S156, 38.6 ACTIVE** | S156 / next | [[plans/2026-04-16-phase-38-5-measurement-loop]], [[plans/2026-04-16-phase-38-6-skill-shrink]] |
 | 9 | 40.6 + 40.1 layered injection defense + session-log interface | READY | — | [[engine/PHASE_40_PLAN]] §40.1, §40.6 |
 | 10 | Sandcastle + Daytona evaluation | READY | — | [[engine/PHASE_33_PLAN]] §33.13 |
 
-**Where we are:** 7 steps done. Step 8 is next — two plan files ready for engine/sheet and research/build to pick up. Steps 9 and 10 follow; their plans exist but nothing from them has been built yet.
+**Where we are:** 7.5 steps done. Step 8 engine half (38.5) shipped S156 — measurement loop wired into auditor, deterministic, 19/19 tests passing. Step 8 skill half (38.6) is the next pickup for research/build. Steps 9 and 10 follow; plans exist but nothing built.
 
 **Full analysis:** mags Supermemory doc `n5cBYS3vVN5DKrddnNp7K8` (S144 keystone framing, still load-bearing).
 
@@ -71,6 +71,7 @@ Work with plan files that is NOT on the spine. Use when the next spine step is b
 
 ### Infrastructure
 
+- **MIGRATE: Desk agents off Claude → OpenRouter+DeepSeek (research-build terminal) — ACTIVE S154.** First desk test (business c87) done. DeepSeek V3.1 first-shot beat 3-pass Claude on prose quality at ~1/25th cost. Plan + next steps + what-survives in [[MIGRATION_OFF_CLAUDE]]. HIGH.
 - **UPGRADE: Instant compaction (research-build terminal)** — Proactive compaction before context full. Pattern from `claude-cookbooks/misc/session_memory_compaction.ipynb`. MEDIUM.
 - **EVALUATE: Context clearing strategy (research-build terminal)** — Beta flag `context-management-2025-06-27`. LOW.
 - **MONITOR: KAIROS background daemon (research-build terminal)** — Unreleased Claude Code feature: persistent background daemon. If Anthropic ships this, could replace PM2 + cron + scheduled agents setup with native Claude Code infrastructure. Also watch ULTRAPLAN (30-minute remote reasoning sessions). MEDIUM. Added S137.

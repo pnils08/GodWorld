@@ -561,8 +561,77 @@ After all three land:
 
 ---
 
+## 18. Phase 38.5 — Measurement loop (spine step 8, build first of two)
+
+### 18.1 Goal
+
+Add a deterministic enricher that measures whether prior-cycle remedy predictions actually fired, writing a structured `measurement` field per pattern and a top-level `measurementHistory[]` rollup. Closes the feedback loop the auditor has been missing — every recommendation gets graded next cycle.
+
+### 18.2 Files
+
+- `scripts/engine-auditor/measureRemedies.js` — new enricher module, mirrors `checkMitigators` / `recommendRemedy` / `generateTribuneFraming` shape.
+- `scripts/engine-auditor/recommendRemedy.js` — modified `fill()` adds `measurementSpec` to each `worldSide[]` entry, derived from the mitigator's `effectEvidence` (no JSON template change needed).
+- `scripts/engineAuditor.js` — appends `measureRemedies` to enrichers array; writes `ctx.measurementHistory` to top-level `measurementHistory[]` field in audit JSON.
+- `scripts/engine-auditor/fixtures/engine_audit_c90_temescal.json` — synthetic prior-cycle fixture for testing.
+- `scripts/engine-auditor/measureRemedies.test.js` — standalone test, 6 cases, 19 assertions.
+
+### 18.3 Schema added
+
+Per pattern:
+```
+measurement: {
+  available: boolean,
+  reason?: 'no-prior-audit' | 'no-prior-match' | 'prior-had-no-expectation',
+  priorCycle?: number,
+  expectedField?: string,        // e.g. "Neighborhood_Map.Sentiment"
+  expected?: number,             // signed magnitudeThreshold (per cycle)
+  observed?: number,             // currentValue - priorValue
+  delta?: number,                // observed - expected
+  verdict?: 'remedy-firing-as-expected' | 'remedy-firing-insufficient'
+           | 'remedy-not-firing' | 'remedy-overshot',
+  priorRemedyType?: string,
+}
+```
+
+Top-level rollup: `measurementHistory: [{ cycle, patternType, priorRemedyType, verdict, affectedEntities }]`.
+
+### 18.4 Logic
+
+1. Match each current pattern to a prior pattern by `type` + overlapping `affectedEntities.initiatives` (or, if both empty, neighborhoods). Tie-break on severity then `cyclesInState`.
+2. Read `prior.remedyPath.worldSide[0].measurementSpec` for the structured prediction (`field`, `sign`, `magnitudeThreshold`).
+3. Look up the field's value in current `ctx.snapshot` and prior `priorAudit.snapshots`. Delta = current − prior.
+4. Classify verdict by comparing observed delta to expected: within ±20% of expected → `firing-as-expected`; opposite sign or zero → `not-firing`; same sign but magnitude < expected → `firing-insufficient`; > 1.5× expected → `overshot`.
+
+### 18.5 Path resolution (open question from plan file: RESOLVED)
+
+Plan offered Path A (add `measurementSpec` to `remedyTemplates.json` + resolver) vs. Path B (read directly from `mitigatorState.effectEvidence`). Implementation is functionally Path A but cleaner — `measurementSpec` is derived in `recommendRemedy.fill()` from the existing `evidence.expectedField` / `expectedSign` / `magnitudeThreshold`. No JSON template change. Backwards-compatible with everything that consumes the prose `expectedEngineEffect` today.
+
+### 18.6 Acceptance criteria
+
+1. ✅ `node scripts/engineAuditor.js` on C91 (no prior audit on disk) completes; every pattern carries `measurement: { available: false, reason: 'no-prior-audit' }`.
+2. ✅ With injected fixture (`ENGINE_AUDITOR_PRIOR_FIXTURE=scripts/engine-auditor/fixtures/engine_audit_c90_temescal.json`), C91's Temescal pattern receives `measurement.available === true` with the expected/observed/delta/verdict fields.
+3. ✅ Top-level `measurementHistory[]` populated when measurements fire.
+4. ✅ Combined runtime under 60s on C91 (measured: 1.3s with fixture, 3.0s without).
+5. ✅ Deterministic across two runs on same inputs (verified: byte-identical JSON output).
+6. ✅ Schema documented as JSDoc header in `measureRemedies.js`.
+7. ✅ Test suite passes — 19/19 assertions across 6 scenarios (`no-prior-audit`, `remedy-not-firing`, `remedy-firing-as-expected`, `remedy-overshot`, `remedy-firing-insufficient`, `no-prior-match`).
+
+### 18.7 Out of scope (per plan)
+
+- Multi-cycle remedy-type success rates (e.g., "advance-initiative worked 3/7 over the last 20 cycles") — that's the `/engine-review` skill's job (38.6), not the auditor.
+- Engine-side fix for broken writeback chains — still 38.3 tech-side fallback territory.
+- Narrative framing of measurement results — `/engine-review` skill (38.6).
+
+### 18.8 Downstream
+
+- `/engine-review` skill Step 7 already wired to consume these fields (S154 commit `539f084`). Builds the per-pattern table, remedy-type track record, and win callout.
+- Phase 38.6 skill-shrink plan ([[plans/2026-04-16-phase-38-6-skill-shrink]]) is separately scoped and unblocked by this work.
+
+---
+
 ## Changelog
 
 - 2026-04-14 — Initial plan (S146, research/build terminal). Designed the detector/framer split that wasn't in the original ROLLOUT_PLAN spec — code does deterministic detection, skill does narrative framing. Eight detector modules enumerated. Acceptance criteria locked. Handed off to engine/sheet terminal.
 - 2026-04-15 — Appended §§11–13 (Phase 38.7 anomaly gate + 38.8 baseline briefs) so engine terminal has the full spine-step-3 spec in one document. Source paragraphs from Nieman Reports paper5.pdf pp.21, 30–31 verified verbatim. Three combined acceptance criteria added.
 - 2026-04-15 — Appended §§14–17 (Phase 38.2 mitigator check + 38.3 remedy path recommendation + 38.4 Tribune framing brief). Same enricher-pipeline pattern as the original detectors. Each module mutates patterns in place with structured new fields (`mitigatorState`, `remedyPath`, `tribuneFraming`). Temescal paradigm threads end-to-end as the validating acceptance test for §17. Two downstream follow-ups noted: `/engine-review` and `/sift` skill rewrites once 38.4 ships.
+- 2026-04-16 — Appended §18 (Phase 38.5 measurement loop). Implemented S154/S156 per [[plans/2026-04-16-phase-38-5-measurement-loop]]. Closes spine step 8 (engine side); 38.6 skill shrink remains.

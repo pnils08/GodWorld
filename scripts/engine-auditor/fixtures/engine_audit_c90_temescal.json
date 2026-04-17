@@ -1,0 +1,76 @@
+{
+  "cycle": 90,
+  "generatedAt": "2026-04-08T00:00:00.000Z",
+  "detectorVersions": { "engineAuditor": "1.0.0" },
+  "previousCycle": 89,
+  "patterns": [
+    {
+      "type": "stuck-initiative",
+      "severity": "high",
+      "cyclesInState": 88,
+      "description": "Temescal community health center initiative stuck in construction-active.",
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": ["Temescal"],
+        "initiatives": ["INIT-005"],
+        "councilSeats": []
+      },
+      "evidence": { "fields": { "PolicyDomain": "health" }, "signals": [] },
+      "mitigatorState": {
+        "exists": true,
+        "gap": "mitigator-stuck",
+        "ailmentCategory": "health",
+        "recommendedAction": "advance INIT-005 out of construction-active",
+        "mitigators": [
+          {
+            "initiativeId": "INIT-005",
+            "name": "Temescal Community Health Center",
+            "status": "passed",
+            "implementationPhase": "construction-active",
+            "cyclesInPhase": 88,
+            "effectsFiring": false,
+            "effectEvidence": {
+              "expectedField": "Neighborhood_Map.Sentiment",
+              "observedDelta": 0,
+              "expectedSign": "positive",
+              "magnitudeThreshold": 0.05,
+              "verdict": "effects-not-firing",
+              "neighborhoodsChecked": ["Temescal"]
+            }
+          }
+        ]
+      },
+      "remedyPath": {
+        "worldSide": [
+          {
+            "type": "advance-initiative",
+            "target": "INIT-005",
+            "action": "advance INIT-005 out of construction-active",
+            "rationale": "initiative is the right remedy but has not moved",
+            "expectedEngineEffect": "Neighborhood_Map.Sentiment moves positive once phase advances",
+            "measurementSpec": {
+              "field": "Neighborhood_Map.Sentiment",
+              "sign": "positive",
+              "magnitudeThreshold": 0.05,
+              "neighborhoodsChecked": ["Temescal"]
+            }
+          }
+        ],
+        "techSide": { "triggered": false, "bugReport": null },
+        "confidence": "high"
+      }
+    }
+  ],
+  "summary": { "highSeverity": 1, "mediumSeverity": 0, "lowSeverity": 0, "byType": { "stuck-initiative": 1 }, "improvements": 0, "incoherence": 0 },
+  "snapshots": {
+    "Initiative_Tracker": [
+      { "InitiativeID": "INIT-005", "Name": "Temescal Community Health Center", "Status": "passed", "ImplementationPhase": "construction-active", "AffectedNeighborhoods": "Temescal", "PolicyDomain": "health" }
+    ],
+    "Neighborhood_Map": [
+      { "Neighborhood": "Temescal", "Sentiment": 0.42, "RetailVitality": 0.50 }
+    ],
+    "Civic_Office_Ledger": [],
+    "Crime_Metrics": []
+  },
+  "citizenIncomes": {}
+}

@@ -50,7 +50,7 @@ pointers:
   2. Add a JSDoc header block documenting the `measurement` field schema (see §Schema below in Open Questions if schema lands elsewhere).
   3. Stub returns patterns unchanged. Verify `engineAuditor.js` still runs end-to-end after import wiring.
 - **Verify:** `node scripts/engineAuditor.js` exits 0, output JSON unchanged from prior run (diff should be empty aside from timestamps).
-- **Status:** [ ] not started
+- **Status:** [x] done — S156
 
 ### Task 2: Read prior-cycle audit JSON
 
@@ -62,7 +62,7 @@ pointers:
   3. Read file if exists; parse JSON; validate it contains a `patterns[]` array. If any step fails, set `ctx.priorAudit = null` and continue (not an error).
   4. If file exists and parses, set `ctx.priorAudit = { cycle, patterns }`.
 - **Verify:** Run against C91 with no C90 file → `ctx.priorAudit === null`. Run with a stub C90 file containing an empty patterns array → `ctx.priorAudit.patterns.length === 0`.
-- **Status:** [ ] not started
+- **Status:** [x] done — S156
 
 ### Task 3: Pattern-matching logic (current ↔ prior)
 
@@ -74,7 +74,7 @@ pointers:
   3. If no prior match, `measurement = { available: false, reason: 'no-prior-match' }`.
   4. If prior match exists but prior pattern had no `remedyPath.worldSide[0].expectedEngineEffect` populated, `measurement = { available: false, reason: 'prior-had-no-expectation' }`.
 - **Verify:** Synthetic fixture — prior patterns `[A, B]` with A matching current pattern on `affectedEntities.initiatives: ['INIT-005']`; assert current pattern for Temescal resolves to prior A.
-- **Status:** [ ] not started
+- **Status:** [x] done — S156
 
 ### Task 4: Compute observed delta + verdict
 
@@ -91,7 +91,7 @@ pointers:
      - `|observed| > 0 && |observed| < |expected|` → `remedy-firing-insufficient`
      - `|observed| > 1.5 * |expected|` → `remedy-overshot`
 - **Verify:** Synthetic C90 → C91 fixture where Temescal health stayed flat (observed=0) when expected=+0.05 → verdict is `remedy-not-firing`, delta=-0.05.
-- **Status:** [ ] not started
+- **Status:** [x] done — S156
 
 ### Task 5: Populate measurement field on current patterns
 
@@ -101,7 +101,7 @@ pointers:
   1. Mutate each matched current pattern: `pattern.measurement = { available: true, priorCycle, expectedField, expected, observed, delta, verdict, priorRemedyType: prior.remedyPath.worldSide[0].type }`.
   2. Return the mutated patterns array.
 - **Verify:** After enricher runs, every current pattern has a `measurement` field. None throw on access.
-- **Status:** [ ] not started
+- **Status:** [x] done — S156
 
 ### Task 6: Top-level `measurementHistory[]` rollup
 
@@ -112,7 +112,7 @@ pointers:
   1. After per-pattern enrichment, collect an array of `{ cycle, patternType, priorRemedyType, verdict, affectedEntities }` entries for every pattern with `measurement.available === true`.
   2. Orchestrator writes this array as the top-level `measurementHistory[]` field in the final audit JSON. Not nested under `summary` — it's its own field because future cycles will want to append across many cycles.
 - **Verify:** C91 output JSON has top-level `measurementHistory: []` when no prior; has populated entries when a prior fixture is in place.
-- **Status:** [ ] not started
+- **Status:** [x] done — S156
 
 ### Task 7: Wire the enricher into the orchestrator
 
@@ -122,7 +122,7 @@ pointers:
   1. After the `generateTribuneFraming.enrich(patterns, ctx)` call, add `patterns = await require('./engine-auditor/measureRemedies').enrich(patterns, ctx)`.
   2. Preserve the existing post-enricher summary rollup.
 - **Verify:** `node scripts/engineAuditor.js` produces `engine_audit_c{XX}.json` with every pattern carrying a `measurement` field (even if `available: false`). Diff against prior run shows the new field and nothing else.
-- **Status:** [ ] not started
+- **Status:** [x] done — S156
 
 ### Task 8: Fixture test
 
@@ -135,7 +135,7 @@ pointers:
   3. With current C91 `neighborhoodHealth.Temescal = 0.42` (unchanged), run enricher.
   4. Assert C91's Temescal pattern receives `measurement.verdict === 'remedy-not-firing'`, `delta === -0.05`.
 - **Verify:** `node scripts/engine-auditor/measureRemedies.test.js` exits 0 with passing assertion.
-- **Status:** [ ] not started
+- **Status:** [x] done — S156
 
 ### Task 9: Update PHASE_38_PLAN.md with 38.5 section
 
@@ -146,16 +146,24 @@ pointers:
   2. Update the plan's top-of-file pointers frontmatter to add the 38.5 spine reference.
   3. Add a changelog line: `2026-04-16 — Appended §18 (Phase 38.5 measurement loop). Implemented S??? per [[plans/2026-04-16-phase-38-5-measurement-loop]].`
 - **Verify:** `grep -c "Phase 38.5" docs/engine/PHASE_38_PLAN.md` returns ≥ 2 (one in TOC/header, one in new section).
-- **Status:** [ ] not started
+- **Status:** [x] done — S156
 
 ---
 
-## Open questions
+## Open questions — RESOLVED 2026-04-16 (S154)
 
-Block before Task 4 if any of these can't be resolved by reading existing code.
+- [x] **Snapshot location — RESOLVED.** Verified against `output/engine_audit_c91.json`. Audit JSON `snapshots` carries: `Initiative_Tracker`, `Neighborhood_Map`, `Civic_Office_Ledger`, `Crime_Metrics`. `Neighborhood_Map` IS persisted, so neighborhood-health comparisons work. The earlier note ("only citizenIncomes + Crime_Metrics") was outdated. Task 4 can read prior `neighborhoodHealth` directly from `priorAudit.snapshots.Neighborhood_Map`.
+- [x] **`expectedEngineEffect` parse format — RESOLVED, BUT BLOCKING IN A DIFFERENT WAY.** Read `scripts/engine-auditor/remedyTemplates.json`. Strings are free-form descriptive prose with template variables, not the inferred `<field> <sign><mag>/cycle from <trigger>` grammar. Examples:
+  - `"{category} metrics stabilize if council passes + agent implements"`
+  - `"{expectedField} moves {expectedSign} once phase advances"`
+  - `"NextScheduledAction fires within 1-2 cycles"`
+  - `"severity drops to medium/low next cycle"`
 
-- [ ] **Snapshot location.** Task 4 assumes the prior audit JSON carries per-field snapshots (`snapshots.neighborhoodMap.Temescal.health`). PHASE_38_PLAN.md §2 references "thin snapshot persistence so cross-cycle diffs work next run" — engine terminal confirmed S146 that citizenIncomes + Crime_Metrics snapshots are persisted (§Phase 38.7/38.8 acceptance notes). Need to confirm which other sheets' snapshots are persisted. If `neighborhoodMap.health` is NOT snapshotted, Task 4 needs an upstream change to add it, or it needs to read current-cycle sheet state twice (once for "prior" from an earlier audit call and once for "current") which breaks determinism.
-- [ ] **`expectedEngineEffect` parse format.** The format `<field-path> <sign><magnitude>/cycle from <trigger>` is my inference from the example in PHASE_38_PLAN.md §15.2. Need to read `scripts/engine-auditor/recommendRemedy.js` to confirm the actual string shape and whether to define a stricter grammar here or to produce `expectedEngineEffect` as a structured object in 38.3 going forward.
+  **Implication for Task 4:** the original Task 4 plan (regex-parse the prose) won't work — there is no consistent grammar to parse. Two viable paths:
+  - **Path A (smaller — recommended).** Add a structured `measurementSpec: { field, sign, magnitudeThreshold }` field to each remedy template in `remedyTemplates.json`, populated by `recommendRemedy.js` alongside the existing prose `expectedEngineEffect`. Task 4 reads `measurementSpec` directly. Upstream change scope: ~9 templates in one JSON file + one resolver line in `recommendRemedy.js`. Backwards-compatible with everything that consumes the prose string today.
+  - **Path B (larger).** Drop the explicit-prediction approach. Use the existing `mitigatorState.mitigators[*].effectEvidence.expectedField + expectedSign + magnitudeThreshold` (already structured per Step 2 of the engine-review skill) as the measurement spec. Task 4 doesn't need `expectedEngineEffect` at all — it reads the mitigator's expected field directly. Requires re-scoping Task 3 (matching) and Task 4 (delta computation) around mitigator entries instead of remedyPath entries.
+
+  **Decision needed before engine starts Task 4:** which path. Path A keeps the plan's logic intact and adds one small upstream change. Path B removes the parsing problem entirely but reshapes the matching logic. Either resolves the blocker.
 
 ---
 
@@ -170,3 +178,4 @@ Block before Task 4 if any of these can't be resolved by reading existing code.
 ## Changelog
 
 - 2026-04-16 — Initial draft (S152, research-build terminal). First plan written against [[plans/TEMPLATE]]. Scoped to 9 tasks after discovering 38.6 skill integration (spine-step-5 follow-ups) already landed S146, so this plan focuses only on the new enricher and leaves the skill edit to a separate plan.
+- 2026-04-16 — Implemented (S154/S156, engine-sheet terminal). All 9 tasks done. Path A resolved — `measurementSpec` derived in `recommendRemedy.fill()` from existing `effectEvidence` (no `remedyTemplates.json` change needed). Test suite 19/19 passing. Live auditor verified deterministic with fixture; Temescal C90→C91 produces `remedy-not-firing` verdict end-to-end. Schema added per pattern, `measurementHistory[]` rollup at top level. PHASE_38_PLAN.md §18 documents the build.

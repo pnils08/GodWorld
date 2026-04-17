@@ -5,7 +5,7 @@
 **PM2:** `godworld-dashboard` (always running)
 **Stack:** Express + React (Vite build) | Port 3001
 
-Last audited: Session 120 (2026-03-27)
+Last audited: Session 156 (2026-04-17) — 40 endpoints verified, frontend tabs current.
 
 ---
 

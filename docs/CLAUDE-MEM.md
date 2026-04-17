@@ -24,18 +24,16 @@ If both try to be "the memory," it's noise. Supermemory is the brain. Claude-mem
 
 Every tool call triggers the PostToolUse hook, which summarizes what happened into a typed observation:
 
-| Type | Count | What it captures |
-|------|-------|-----------------|
-| discovery | 3,898 | Code patterns, data findings, system state |
-| change | 920 | File modifications, config updates |
-| feature | 795 | New scripts, skills, functionality |
-| bugfix | 338 | Error fixes, repair work |
-| decision | 278 | Architectural choices, editorial calls |
-| refactor | 53 | Code restructuring |
+| Type | What it captures |
+|------|-----------------|
+| discovery | Code patterns, data findings, system state |
+| change | File modifications, config updates |
+| feature | New scripts, skills, functionality |
+| bugfix | Error fixes, repair work |
+| decision | Architectural choices, editorial calls |
+| refactor | Code restructuring |
 
-**Total:** 6,282 observations across 120 sessions (since Feb 12, 2026)
-
-Each observation includes: title, narrative, type, concepts, files read/modified, discovery tokens, content hash (dedup).
+Each observation includes: title, narrative, type, concepts, files read/modified, discovery tokens, content hash (dedup). Counts drift every session — check live via the claude-mem MCP tools (`mcp__plugin_claude-mem_mcp-search__timeline`) rather than pinning a snapshot here.
 
 ---
 

@@ -1,10 +1,10 @@
 # Discord Bot — Mags Corliss Presence
 
 **Script:** `scripts/mags-discord-bot.js` v2.10.0
-**PM2:** `mags-discord-bot` (always running)
+**PM2:** `mags-bot` (always running — renamed from `mags-discord-bot` S156 via Phase 40.3 ecosystem.config.js rewrite)
 **Channel:** `#mags-morning` (ID: `1471615721003028512`)
 **Model:** Haiku 4.5 (switched S80 from Sonnet for cost)
-**Token:** `DISCORD_BOT_TOKEN` in `.env`
+**Token:** `DISCORD_BOT_TOKEN` in `/root/.config/godworld/.env` (relocated S156 via Phase 40.3)
 
 ---
 

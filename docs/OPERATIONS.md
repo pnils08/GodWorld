@@ -7,17 +7,18 @@
 
 ## PM2 Processes (Always Running)
 
-| Process | Script | Purpose | Memory | Restarts | Notes |
-|---------|--------|---------|--------|----------|-------|
-| `godworld-dashboard` | `dashboard/server.js` | Express API + React frontend, port 3001 | ~30MB | Stable (0 recent) | Basic auth via .env |
-| `mags-discord-bot` | `scripts/mags-discord-bot.js` | Mags presence in Discord #mags-morning | ~35-55MB | 23 lifetime | Haiku 4.5, searches mags+bay-tribune containers |
-| `moltbook` | `scripts/moltbook-heartbeat.js` | Moltbook social presence, every 4 hours | ~35MB | Cron mode | Shows "stopped" between runs — normal |
+| Process | Script | Purpose | Memory | Notes |
+|---------|--------|---------|--------|-------|
+| `godworld-dashboard` | `dashboard/server.js` | Express API + React frontend, port 3001 | ~50MB | Basic auth via `/root/.config/godworld/.env` |
+| `mags-bot` | `scripts/mags-discord-bot.js` | Mags presence in Discord #mags-morning | ~50MB | Haiku 4.5, searches mags+bay-tribune containers. Renamed from `mags-discord-bot` S156 via Phase 40.3 ecosystem.config.js rewrite. |
+| `moltbook` | `scripts/moltbook-heartbeat.js` | Moltbook social presence | ~35MB | Cron mode — shows "stopped" between runs, normal |
+| `spacemolt-miner` | `scripts/spacemolt-miner.js` | SpaceMolt daily mining runs | ~35MB | Cron mode — 3x daily, shows "stopped" between runs |
 
 **Common PM2 commands:**
 ```bash
 pm2 list                    # Status of all processes
-pm2 logs mags-discord-bot   # Live bot logs
-pm2 restart mags-discord-bot # Restart after code change
+pm2 logs mags-bot           # Live bot logs
+pm2 restart mags-bot        # Restart after code change
 pm2 save                    # Persist process list for reboot survival
 ```
 
@@ -75,7 +76,7 @@ free -m
 curl -s http://localhost:3001/api/health | python3 -m json.tool
 
 # Discord bot
-pm2 logs mags-discord-bot --lines 10 --nostream
+pm2 logs mags-bot --lines 10 --nostream
 
 # Moltbook
 pm2 logs moltbook --lines 10 --nostream
@@ -94,7 +95,7 @@ curl -s http://localhost:37777/health
 | Symptom | Likely Cause | Fix |
 |---------|-------------|-----|
 | Dashboard returns 502 | PM2 process crashed | `pm2 restart godworld-dashboard` |
-| Bot not responding in Discord | PM2 process crashed or rate limited | `pm2 restart mags-discord-bot`, check error log |
+| Bot not responding in Discord | PM2 process crashed or rate limited | `pm2 restart mags-bot`, check error log |
 | Supermemory timeouts in bot log | API latency or outage | Graceful — bot falls back to local files. Wait it out. |
 | Disk >80% | Session transcripts, claude-mem, backups | Run archive policy from DISK_MAP.md |
 | `clasp push` fails | Auth expired | `clasp login` to re-authenticate |

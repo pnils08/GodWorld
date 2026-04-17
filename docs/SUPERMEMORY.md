@@ -7,7 +7,9 @@ Legacy GodWorld org ($19/mo) is dead — 57k junk memories. Old API key (`sm_atk
 
 ---
 
-## The Six Containers (updated S137b)
+## The Six Containers (updated S156)
+
+**Five active + one legacy.** Active: `mags`, `bay-tribune`, `world-data`, `super-memory`, `mara`. Legacy: `sm_project_godworld` (57k junk memories on the old GodWorld org — never read, never written to, left in place until the old org is fully deprecated). When code or docs say "6 containers," the 6th is the legacy junk drawer.
 
 ### `mags` — The Deliberate Brain
 

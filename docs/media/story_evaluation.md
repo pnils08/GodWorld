@@ -86,3 +86,4 @@ Present 6-10 proposals. Mike picks 5-8. Not every proposal runs. That's the sift
 _Updated by `/post-publish` Step 10 after each edition. What changed and why._
 
 - S144: starter version created. No cycle data yet.
+- S156 (C91 retrospective): first skill-check run — 2/5 passed (A1 Temescal dropped, A2 front-page-vs-engine-signal anti-Varek violation, A3 sports-heavy on civic-heavy cycle). A2 caught a structural failure Mara's report framed as judgment; lines 42-44 (Varek anti-example) are the live rule skill-check reads. Evidence: `output/skill_check_write-edition_c91.json`.

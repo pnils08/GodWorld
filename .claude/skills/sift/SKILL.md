@@ -175,6 +175,23 @@ LETTERS: reacts to edition (always runs last)
 
 **Mike responds:** answers to questions + picks from proposals. "Q1: push deployment. Q2: advance it. S1 yes, S2 yes, cut S3, front page should be S1." Simple — no technical decisions.
 
+**Before Mike responds:** Dump the full proposal set to `output/sift_proposals_c{XX}.json` — every question (Q1..Qn), every story proposal (S1..Sn), every baseline-brief decision (promote / baseline / suppress), and the recommended front page. Shape:
+
+```json
+{
+  "cycle": {XX},
+  "generatedAt": "<ISO>",
+  "questions": [{ "id": "Q1", "text": "...", "thread": "C2", "signal": "stuck-initiative", "affects": ["D1"] }],
+  "proposals": [{ "id": "S1", "title": "...", "section": "SPORTS", "reporter": "Anthony", "priority": "HIGH", "layers": ["engine","simulation"], "sourceSignal": "..." }],
+  "baselineDecisions": [{ "briefId": "...", "decision": "promote|baseline|suppress", "reason": "..." }],
+  "recommendedFrontPage": "S1",
+  "engineSignalsCovered": ["TEMESCAL_HEALTH", "OARI_PILOT"],
+  "engineSignalsUncovered": []
+}
+```
+
+This file is the ground truth for `/skill-check sift {XX}` — it records what sift actually proposed before Mike's picks narrowed it. Do not skip.
+
 **After Mike responds:** Create `output/production_log_edition_c{XX}.md`. Log stories picked, front page choice, section tags. This log persists through all remaining steps and into write-edition.
 
 ### Step 3: Confirm Reporter Assignments

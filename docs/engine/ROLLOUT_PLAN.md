@@ -43,7 +43,7 @@ Work with plan files that is NOT on the spine. Use when the next spine step is b
 | Phase 33 — Riley integration (12 subitems remaining) | Pre-S145 work, 7 of 19 done | [[engine/PHASE_33_PLAN]] |
 | Phase 40.2–40.5 — cattle refactor, credentials, four-component doc, Plan Mode gate | Phase 40 has 6 sub-items; only 40.1 + 40.6 are on the spine | [[engine/PHASE_40_PLAN]] §40.2–40.5 |
 | Phase 41 remainder — 41.3, 41.4, 41.6 | Phase 41.1/41.2/41.5 were step 1; the rest is smaller cleanup | [[plans/BACKLOG]] §Phase 41 |
-| Skill eval framework | HIGH priority, separate from spine — grades skills against criteria files | [[plans/skill-eval-framework]] |
+| Skill eval framework | HIGH priority, separate from spine — grades skills against criteria files. **First skill `/skill-check` shipped S156** covering `/write-edition`; expand to sift, city-hall, dispatch. | [[plans/skill-eval-framework]] |
 
 ---
 
@@ -71,7 +71,7 @@ Work with plan files that is NOT on the spine. Use when the next spine step is b
 
 ### Infrastructure
 
-- **MIGRATE: Desk agents off Claude → OpenRouter+DeepSeek (research-build terminal) — ACTIVE S154.** First desk test (business c87) done. DeepSeek V3.1 first-shot beat 3-pass Claude on prose quality at ~1/25th cost. Plan + next steps + what-survives in [[MIGRATION_OFF_CLAUDE]]. HIGH.
+- **MIGRATE: Desk agents off Claude → OpenRouter+DeepSeek (research-build terminal) — RESEARCH/WATCH S156.** First desk test (business c87) done. DeepSeek V3.1 first-shot beat 3-pass Claude on prose quality at ~1/25th cost. Plan + next steps + what-survives in [[MIGRATION_OFF_CLAUDE]]. **Reclassified from HIGH → research/watch S156** — spine is walked, API pressure is off, and migrating would unravel the harness that produces cycles. Not cycle-bearing work; revisit if cost/limits bite again or if the migration becomes goal-aligned rather than escape-aligned.
 - **UPGRADE: Instant compaction (research-build terminal)** — Proactive compaction before context full. Pattern from `claude-cookbooks/misc/session_memory_compaction.ipynb`. MEDIUM.
 - **EVALUATE: Context clearing strategy (research-build terminal)** — Beta flag `context-management-2025-06-27`. LOW.
 - **MONITOR: KAIROS background daemon (research-build terminal)** — Unreleased Claude Code feature: persistent background daemon. If Anthropic ships this, could replace PM2 + cron + scheduled agents setup with native Claude Code infrastructure. Also watch ULTRAPLAN (30-minute remote reasoning sessions). MEDIUM. Added S137.

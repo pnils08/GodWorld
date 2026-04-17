@@ -117,7 +117,10 @@ Distill into `docs/mags-corliss/NEWSROOM_MEMORY.md`:
 
 ### Step 10: Update Criteria Files
 
+**First run `/skill-check write-edition {XX}`** — grades the skill's run against `docs/media/story_evaluation.md` and writes `output/skill_check_write-edition_c{XX}.json`. That JSON is the main feedback source for this step: its `assertions`, `reviewerOverlap`, and `evalFeedback` tell you exactly which criteria held and which need sharpening.
+
 Read these feedback sources:
+- `output/skill_check_write-edition_c{XX}.json` — structural assertion pass/fail + eval-feedback suggestions
 - `output/grades/grades_c{XX}.json` — per-reporter scores, which articles scored high/low
 - `output/production_log_edition_c{XX}.md` — Mara corrections, Rhea flags, editorial review (what got cut and why)
 - Mike's feedback — ask what worked and what didn't. Capture in conversation.

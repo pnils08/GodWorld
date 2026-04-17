@@ -1,8 +1,12 @@
 # Engine Phase Data Audit
 
+**Last refreshed:** Session 156 (2026-04-17) — appended Phase 40 coverage section; header added; other phase sections unchanged from S146 baseline.
+
 What each phase writes to ctx.summary, what gets serialized to Cycle_Packet, and what reaches the newsroom via buildDeskPackets.js.
 
 Purpose: Map the gap between what the engine produces and what the desk agents see.
+
+**Note on section order:** Phase 7 leads this file by historical accident of append-patched growth; canonical order is Phase 1 → 11. Read by phase number, not file order.
 
 ---
 
@@ -583,3 +587,23 @@ Fields written to ctx.summary but never consumed by any downstream phase, buildC
 | `chicagoPopulation` | generateChicagoCitizensv1.js | 8 | Count only; chicagoCitizens array IS consumed |
 
 These are not bugs — the engine runs fine without consumers. But they represent computation that produces nothing and documentation that implies connections that don't exist.
+
+**S156 UPDATE:** Every `ctx.summary` field is consumed via `utilities/exportCycleArtifacts.js:112` — `JSON.parse(JSON.stringify(S))` serializes the whole summary to the Drive cycle-artifact archive (`cycle-<N>-summary.json`) every cycle. Fields listed above as "dead-end" are still live via bulk serialization. They aren't consumed by a named phase, but they DO land in the artifact. See `docs/engine/tech_debt_audits/2026-04-15.md` changelog 2026-04-17 for the methodology correction.
+
+---
+
+## Phase 40 — Agent Architecture Hardening (cross-cutting)
+
+**Status at S156:** 5 of 6 sub-items DONE. Only 40.2 (reporter-as-cattle refactor) remains. Full plan: `docs/engine/PHASE_40_PLAN.md`.
+
+**Cross-cutting nature:** Phase 40 doesn't sit in a single `phase*/` directory. It's architecture hardening that touches: hooks (`/root/GodWorld/.claude/hooks/`), settings (`.claude/settings.json`), credentials layout (`/root/.config/godworld/` relocation), bot refusal logic (`scripts/mags-discord-bot.js`), and the determinism helper (`utilities/safeRand.js`).
+
+### Writes to ctx.summary:
+None. Phase 40 doesn't produce cycle data. It's infrastructure.
+
+### New engine dependencies (S156):
+- **`utilities/safeRand.js` — `safeRand_(ctx)` helper.** Replaces ~57 inline `(typeof ctx.rng === 'function') ? ctx.rng : Math.random` patterns across phases 1-8 and 10. Returns `ctx.rng` if present, else seeded `mulberry32_` from `ctx.config.rngSeed`, else throws. No silent Math.random fallback. Audit trail: `docs/engine/tech_debt_audits/2026-04-15.md`.
+- **Credential paths relocated** (Phase 40.3). `lib/sheets.js` default is now `/root/.config/godworld/credentials/service-account.json`. `GODWORLD_ENV_FILE` env var points to `/root/.config/godworld/.env`. No engine code path change — just the filesystem location.
+
+### What reaches the newsroom:
+Nothing. Phase 40 is invisible to the pipeline. The hardening only matters if injection or credential compromise is attempted — at which point the deny rules, refusal patterns, and throw-on-missing-rng stop it loudly instead of silently.

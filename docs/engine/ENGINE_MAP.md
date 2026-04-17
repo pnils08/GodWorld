@@ -4,7 +4,9 @@
 
 **Source:** `phase01-config/godWorldEngine2.js` v2.14 — two identical engine paths (live + dry-run/replay).
 
-**Last verified:** 2026-03-27, Session 120 (S120: field health audit, orphan cleanup, processArcLifeCyclev1 corrected as active engine file, ctx.summary dependency map added)
+**Last verified:** 2026-04-17, Session 156. Phase dispatch sequence below unchanged from S120. Phase 38 auditor, Phase 39 reviewer lanes, and Phase 40 architecture hardening all shipped S146-S156 as cross-cutting work OUTSIDE this map: Phase 38 auditor runs as Node script `scripts/engineAuditor.js` (post-cycle), Phase 39 reviewers run as Node scripts (`finalArbiter.js`, `rheaTwoPass.js`, `capabilityReviewer.js`, `rewardHackingScanner.js`, `tierClassifier.js`) in the edition review lane, Phase 40 is hooks + settings + credential layout + `utilities/safeRand.js` helper. None alter the phase*/ dispatch below.
+
+**S156 helper added:** `utilities/safeRand.js` — `safeRand_(ctx)` is the canonical deterministic RNG resolver called from every phase. Returns `ctx.rng` or throws; never silently falls back to `Math.random`. Replaces 57 inline fallbacks across phases. See `docs/engine/tech_debt_audits/2026-04-15.md`.
 
 ---
 

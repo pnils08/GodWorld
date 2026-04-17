@@ -1,8 +1,11 @@
 # GodWorld Documentation Ledger
 
-**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 144 (2026-04-12)
+**Created:** Session 73 (2026-03-02) | **Last Updated:** Session 144 (2026-04-12) | **Status banner added:** S156 (2026-04-17)
+
+**STATUS: DEPRECATED — folding into `docs/index.md` (the Phase 41.2 wiki catalog, S146).** This ledger is no longer the canonical doc registry. `docs/index.md` is — it's kept current, covers every active doc in `docs/**`, and is wired into boot (CLAUDE.md Step 0.5). New docs since S144 land in `docs/index.md`, not here. This file is preserved for workflow-tier metadata (M/R/P/D/X/I classification) that `docs/index.md` doesn't carry yet. When that metadata migrates, this file archives.
+
 **Purpose:** Single registry of every active documentation file — what it does, when it loads, who updates it, and which workflow it serves.
-**Rule:** If a file isn't listed here, it's either archived or undocumented. Fix that.
+**Rule:** If a file isn't listed here, it's either archived or undocumented. Fix that. (Current authoritative registry: `docs/index.md`.)
 
 ---
 

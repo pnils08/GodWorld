@@ -1,8 +1,16 @@
 # Engine Stub Map
 
-**Generated:** 2026-03-26 | **Session:** 120 | **Files:** 122 JS across 11 phases + utilities
+**Generated:** 2026-03-26 | **Session:** 120 | **Header touched:** 2026-04-17 (S156) | **Files in engine tree as of S156:** 125 JS across 11 phases + utilities (was 122 at generation; +3 since: `utilities/safeRand.js` added S156, plus 2 other additions between S120 and S156)
 
 **Purpose:** Compact reference of every engine function's ctx footprint. Use after compaction, cold starts, or when debugging cascade dependencies.
+
+**S156 NOTE — partial freshness.** The per-function entries below reflect the S120 snapshot. Function signatures and ctx footprints haven't been regenerated since. Specifically not yet mapped:
+- `utilities/safeRand.js::safeRand_(ctx)` — new S156 deterministic-RNG resolver, called from every phase that uses randomness. Reads `ctx.rng`, `ctx.config.rngSeed`, `ctx.summary.cycleId`. Throws if neither present.
+- The 55+ phase files that had inline `(typeof ctx.rng === 'function') ? ctx.rng : Math.random` replaced with `safeRand_(ctx)` still have the same ctx footprint — just route through the helper now.
+- The 22 parameter-rng helpers that now throw on missing `rng` parameter (same footprint, louder failure mode).
+- Phase 40.3 moved `.env` and `credentials/service-account.json` outside the repo working dir. Engine code reads env the same way; just the filesystem location changed.
+
+**To fully regenerate:** run `/stub-engine` skill — walks all 125 files and re-emits ctx footprints per function. Costs a scan pass.
 
 **Convention:** All engine files alias `var S = ctx.summary`. Reads/writes listed as `S.field` mean `ctx.summary.field`.
 

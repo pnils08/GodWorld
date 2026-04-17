@@ -168,9 +168,10 @@ async function main() {
 // discovered to contain a live ANTHROPIC_API_KEY; GitHub secret-scanning
 // blocked the push. This scrubs that class of exposure at source.
 var SECRET_PATTERNS_ = [
-  /sk-ant-api\d{2}-[A-Za-z0-9_-]{20,}/g,           // Anthropic
-  /sk-proj-[A-Za-z0-9_-]{20,}/g,                   // OpenAI project keys
-  /sk_[A-Za-z0-9]{20,}/g,                          // generic sk_ keys (Stripe, Supermemory user-tokens, etc.)
+  // Any sk- prefixed key of any variant (sk-ant-, sk-proj-, sk-or-v1-, sk-xx-, etc.)
+  // Catches OpenRouter (missed first pass), Anthropic, OpenAI, Cohere, and any future sk-* provider.
+  /sk-[a-z0-9_-]{2,}-?[A-Za-z0-9_-]{20,}/g,
+  /sk_[A-Za-z0-9]{20,}/g,                          // Stripe secret + Supermemory user tokens
   /sm_[A-Za-z0-9]{30,}/g,                          // Supermemory API keys
   /ghp_[A-Za-z0-9]{30,}/g,                         // GitHub personal tokens
   /gho_[A-Za-z0-9]{30,}/g,                         // GitHub OAuth tokens
@@ -179,6 +180,10 @@ var SECRET_PATTERNS_ = [
   /MT[A-Za-z0-9]{20,}\.[A-Za-z0-9_-]{6,}\.[A-Za-z0-9_-]{20,}/g, // Discord bot tokens
   /xox[baprs]-[A-Za-z0-9-]{10,}/g,                 // Slack tokens
   /Bearer\s+[A-Za-z0-9_.-]{20,}/g,                 // Bearer tokens
+  // Generic high-entropy catch-all: any single token ≥32 chars of [A-Za-z0-9] that's
+  // not an obvious sheet/drive ID (those start with a digit + have dashes/underscores).
+  // Errs on the side of over-redaction — a false positive in a header preview is fine.
+  /\b[A-Za-z][A-Za-z0-9]{31,}\b/g,
 ];
 
 function redactSecrets_(s) {

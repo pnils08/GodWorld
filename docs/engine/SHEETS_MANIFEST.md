@@ -132,7 +132,7 @@
 | Git & Deploy | 30 | 1 | GIT & DEPLOY REFERENCE |
 | Credentials Reference | 26 | 1 | CREDENTIALS REFERENCE |
 | z_Basic /commands | 25 | 2 | AMXd^3vd2kHi-J, ?? |
-| OpenRouter | 2 | 2 | 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, OpenRouter API |
+| OpenRouter | 2 | 2 | [REDACTED-OPENROUTER-API-KEY], OpenRouter API |
 | Sheet11 | 33 | 2 | AMXd^3vd2kHi-J, droplet |
 | Sheet10 | 15 | 1 | ~/.bashrc — new godworld command + tg alias:                                                                                                       
   - Type godworld → creates 4 named tmux windows, attaches                                                                                           

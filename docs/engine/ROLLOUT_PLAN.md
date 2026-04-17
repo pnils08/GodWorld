@@ -41,9 +41,9 @@ Work with plan files that is NOT on the spine. Use when the next spine step is b
 | Item | Why off-spine | Detail |
 |------|---------------|--------|
 | Phase 33 — Riley integration (12 subitems remaining) | Pre-S145 work, 7 of 19 done | [[engine/PHASE_33_PLAN]] |
-| Phase 40.2–40.5 — cattle refactor, credentials, four-component doc, Plan Mode gate | Phase 40 has 6 sub-items; only 40.1 + 40.6 are on the spine | [[engine/PHASE_40_PLAN]] §40.2–40.5 |
+| Phase 40.2 cattle refactor + 40.3 credential audit (plan drafted, execution deferred) | Phase 40 has 6 sub-items; 40.1 + 40.4 + 40.5 + 40.6 DONE S156; 40.3 plan ready for engine-sheet pickup when priority rises; 40.2 still needs its own plan file | [[engine/PHASE_40_PLAN]], [[plans/2026-04-16-phase-40-3-credential-audit]] |
 | Phase 41 remainder — 41.3, 41.4, 41.6 | Phase 41.1/41.2/41.5 were step 1; the rest is smaller cleanup | [[plans/BACKLOG]] §Phase 41 |
-| Skill eval framework | HIGH priority, separate from spine — grades skills against criteria files. **First skill `/skill-check` shipped S156** covering `/write-edition`; expand to sift, city-hall, dispatch. | [[plans/skill-eval-framework]] |
+| Skill eval framework | HIGH priority, separate from spine — grades skills against criteria files. **First skill `/skill-check` shipped S156** covering `/write-edition` + `/sift`. Sift patched to dump full proposal set so next cycle grades cleanly. Expand to city-hall, dispatch when their assertion files land. | [[plans/skill-eval-framework]] |
 
 ---
 
@@ -178,3 +178,4 @@ Tracking for future adoption. Not building.
 ## Changelog
 
 - 2026-04-16 (S152) — Major compression. Spine reframed as "7 done / 3 active-or-parked." Phase 33, 38, 39, 40 design content extracted to individual plan files. Phase 41 remaining items, research patterns, and all other embedded phase designs moved to [[plans/BACKLOG]]. Session Harness compressed to one-line pointer. Active Plans table added as top-of-file navigation. Size: 914 → ~150 lines.
+- 2026-04-16 (S156, research-build) — Phase 40 progress: 40.4 four-component map + 40.5 Plan Mode gate shipped as docs; 40.3 credential audit plan drafted at [[plans/2026-04-16-phase-40-3-credential-audit]] (9 tasks, 3 open questions resolved S156). Phase 40 at 4.5/6: 40.1/40.4/40.5/40.6 DONE, 40.3 plan-ready, 40.2 still pending own plan file. Skill-eval framework: first skill `/skill-check` shipped covering write-edition + sift; sift patched to persist full proposal set. Migration-off-Claude reclassified HIGH → research/watch (spine walked, API pressure off).

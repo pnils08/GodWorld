@@ -61,7 +61,13 @@
       "Bash(clasp *)",
       "Bash(rm *)",
       "Bash(curl *)",
-      "Bash(wget *)"
+      "Bash(wget *)",
+      "Bash(node scripts/ingestEdition*)",
+      "Bash(node scripts/ingestEditionWiki*)",
+      "Bash(node scripts/buildCitizenCards*)",
+      "Bash(npx supermemory add*)",
+      "Bash(npx supermemory ingest*)",
+      "Bash(curl *api.supermemory.ai*)"
     ]
   },
   "hooks": {

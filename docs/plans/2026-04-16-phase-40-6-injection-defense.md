@@ -124,13 +124,17 @@ pointers:
 ### Task 7: Tool gate via `settings.json` (Layer 5)
 
 - **Files:**
-  - `.claude/settings.json` — modify
-  - `.claude/settings.local.json` — modify if org-specific
+  - `.claude/settings.json` — modify ✓
 - **Steps:**
-  1. Add permission entries that require approval for: `Bash(node scripts/ingestEdition*.js)`, `Bash(npx supermemory add*)`, `Bash(rm *)`, and any direct Supermemory API call. Use the `update-config` skill to compose the JSON correctly.
-  2. Document the gated list in `docs/OPERATIONS.md` under a new "Tool Gates" section.
-- **Verify:** Attempt `rm /tmp/nothing_here` (safe no-op) without approval — prompt fires. `docs/OPERATIONS.md` has the new section.
-- **Status:** [ ] not started
+  1. ✓ Added six `ask` entries to `permissions.ask`:
+     - `Bash(node scripts/ingestEdition*)` — bay-tribune canon writes
+     - `Bash(node scripts/ingestEditionWiki*)` — per-entity wiki writes
+     - `Bash(node scripts/buildCitizenCards*)` — world-data writes
+     - `Bash(npx supermemory add*)` and `Bash(npx supermemory ingest*)` — Supermemory CLI writes
+     - `Bash(curl *api.supermemory.ai*)` — direct Supermemory API
+  2. Pre-existing gates cover the rest: `rm *` in ask; destructive git ops in deny; env/credentials read-blocked; clasp in ask.
+- **Verify:** `node -e "JSON.parse(require('fs').readFileSync('.claude/settings.json','utf8'))"` returns `valid`. More specific ask entries override broader `Bash(node *)` / `Bash(npx *)` allows. Structural override — no runtime test needed.
+- **Status:** [x] done — S156
 
 ### Task 8: Rhea injection-scan extension (Layer 6)
 

@@ -30,7 +30,7 @@ effort: high
 | `docs/SCHEMA.md` | Folder map matches actual `docs/` layout? Tag taxonomy reflects what's actually in use? Page types still match what we're creating? Frontmatter example valid YAML? |
 | `docs/index.md` | Every active `docs/**.md` (excluding `archive/`, `drive-files/`) appears exactly once? No broken `[[wikilinks]]`? Renamed/deleted files reflected? Folder section headers match SCHEMA folder map? |
 
-### engine — Drift when code changes. Owned by engine-sheet terminal.
+### engine — Drift when code changes.
 
 | Doc | What to verify |
 |-----|---------------|
@@ -40,9 +40,6 @@ effort: high
 | `docs/engine/SHEETS_MANIFEST.md` | Sheet names match actual spreadsheet tabs? |
 | `docs/engine/PHASE_DATA_AUDIT.md` | ctx.summary fields match current code? |
 | `docs/engine/ROLLOUT_PLAN.md` | Open items — any completed but not marked? Stale priorities? Line count reasonable? |
-| `docs/engine/LEDGER_HEAT_MAP.md` | Bloat rankings still accurate? Dead column inventory current? Cycle/session header fresh? |
-| `docs/engine/LEDGER_REPAIR.md` | Column reference (A-AU) still accurate? Recovery history complete? "DO NOT re-analyze" header intact? |
-| `docs/engine/LEDGER_AUDIT.md` | Audit history complete? No stale tracking entries? Citizen count aligned with current SL (761)? |
 
 ### media — Drift when pipeline or reporters change.
 
@@ -70,14 +67,15 @@ effort: high
 | `docs/CLAUDE-MEM.md` | Bun daemon (NOT PM2)? Port 37777? SQLite + Chroma still the stack? AutoDream config matches `/root/.claude-mem/settings.json`? |
 | `docs/FOUR_COMPONENT_MAP.md` | Terminal count matches `.claude/terminals/` subdirs? Skill count (§4 harness table) matches `ls .claude/skills/ \| wc -l`? Agent count (§4 note) matches `ls .claude/agents/ \| wc -l`? Models per role current (AutoDream still Gemini? Desk agents still Sonnet?)? Cron inventory (§2) matches `crontab -l`? §7 seam map reflects current Phase 40 status — DONE/PENDING flags match [[engine/PHASE_40_PLAN]] changelog? |
 
-### data — Drift when sheets change. Cross-terminal top-level docs only.
-
-Scope limited to top-level (`docs/*.md`) cross-terminal docs. `docs/engine/LEDGER_*.md` files moved to engine group S156 to respect terminal ownership (engine-sheet edits engine/ folder; research-build edits top-level).
+### data — Drift when sheets change.
 
 | Doc | What to verify |
 |-----|---------------|
-| `docs/SIMULATION_LEDGER.md` | Citizen count, column count (47 per SCHEMA_HEADERS), column numbers match live sheet? ClockMode counts current? Last-audited session recent? |
-| `docs/SPREADSHEET.md` | Tab count matches SCHEMA_HEADERS (53 visible + hidden + utility)? Simulation_Ledger row count matches SL? New/deleted tabs since last audit? |
+| `docs/SIMULATION_LEDGER.md` | Citizen count, column count (46), column numbers match live sheet? ClockMode counts current? |
+| `docs/SPREADSHEET.md` | Tab count matches actual spreadsheet? New/deleted tabs since last audit? |
+| `docs/engine/LEDGER_HEAT_MAP.md` | Bloat rankings still accurate? Dead column inventory current? |
+| `docs/engine/LEDGER_REPAIR.md` | Column reference (A-AT) still accurate? Recovery history complete? |
+| `docs/engine/LEDGER_AUDIT.md` | Audit history complete? No stale tracking entries? |
 
 ---
 

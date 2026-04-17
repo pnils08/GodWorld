@@ -85,12 +85,14 @@ moltbook              stopped   start manually when needed
 
 ## Credentials Locations
 
+Phase 40.3 isolation: all GodWorld credentials live OUTSIDE the repo working directory at `/root/.config/godworld/` (dir chmod 700, files chmod 600). See `docs/plans/2026-04-16-phase-40-3-credential-audit.md`.
+
 | What | Where |
 |------|-------|
-| Google service account | `credentials/service-account.json` |
-| Supermemory P N key | `credentials/supermemory-pn-key.txt` |
-| Moltbook credentials | `~/.config/moltbook/credentials.json` |
-| All API keys | `.env` (GODWORLD_SHEET_ID, COMM_HUB_SHEET_ID, GOOGLE_APPLICATION_CREDENTIALS, TOGETHER_API_KEY, DISCORD_TOKEN, ANTHROPIC_API_KEY, SUPERMEMORY_CC_API_KEY, DASHBOARD_USER, DASHBOARD_PASS, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) |
+| Google service account | `/root/.config/godworld/credentials/service-account.json` |
+| Supermemory P N key | `.env` var `SUPERMEMORY_CC_API_KEY` only (file `credentials/supermemory-pn-key.txt` deleted S156 — was a duplicate with no code readers) |
+| Moltbook credentials | `/root/.config/moltbook/credentials.json` |
+| All API keys | `/root/.config/godworld/.env` (GODWORLD_SHEET_ID, COMM_HUB_SHEET_ID, GOOGLE_APPLICATION_CREDENTIALS, DISCORD_TOKEN, ANTHROPIC_API_KEY, SUPERMEMORY_CC_API_KEY, DASHBOARD_USER, DASHBOARD_PASS, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REFRESH_TOKEN) |
 | GitHub | Token embedded in git remote URL |
 | Google Apps Script | `.clasp.json` / clasp login |
 

@@ -421,9 +421,9 @@ output/world-state-test.json            # 20 individual citizen test docs (can b
 | File | Purpose |
 |------|---------|
 | `.claude/.supermemory-claude/config.json` | Plugin container mapping (gitignored) |
-| `credentials/supermemory-pn-key.txt` | PN org API key backup |
+| ~~`credentials/supermemory-pn-key.txt`~~ | **Deleted S156 (Phase 40.3 Task 0).** Was a duplicate of the env var with no code readers. |
 | `~/.bashrc` | Shell env export — what PM2 and scripts read. Must `--update-env` on restart. |
-| `.env` | Dotenv for Node scripts |
+| `/root/.config/godworld/.env` | Dotenv for Node scripts (Phase 40.3 — relocated outside repo working dir) |
 
 ---
 

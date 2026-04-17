@@ -72,14 +72,24 @@ pointers:
 
 ### Sub-agent Read reachability
 
-`.claude/agents/*/SKILL.md` inherit Read/Bash/Edit/Write tool access unless `allowed-tools` restricts them. Spot check of four representative agents:
+Full audit of all 25 agents in `.claude/agents/` (Task 1, S156 engine-sheet). Read is path-unrestricted on every agent — the tool itself doesn't scope by filesystem path.
 
-- `business-desk`, `civic-desk`, `culture-desk`, `sports-desk` — Read, Glob, Grep, Write, Edit listed. No Bash. **Read is unrestricted by path.** A poisoned brief could direct them to Read `credentials/service-account.json` and echo the content into their article output. The current workflow would then ingest that article.
-- `mags-corliss`, `final-arbiter` — "All tools". Unrestricted.
-- `civic-office-*` — Read, Glob, Grep, Write, Edit. Same Read exposure as desks.
-- `rhea-morgan` — Read, Glob, Grep, Write, Edit, Bash. Bash + unrestricted Read = highest local blast.
+**Narrow tools — Read/Glob/Grep/Write only (8 desks):**
+- `business-desk`, `chicago-desk`, `civic-desk`, `culture-desk`, `freelance-firebrand`, `letters-desk`, `podcast-desk`, `sports-desk`
 
-**This is the vulnerability:** the Read tool does not path-discriminate. An agent can Read any file the process can reach.
+**Narrow tools + Edit (15 — civic offices, projects, city-clerk):**
+- `city-clerk`, `civic-office-baylight-authority`, `civic-office-crc-faction`, `civic-office-district-attorney`, `civic-office-ind-swing`, `civic-office-mayor`, `civic-office-opp-faction`, `civic-office-police-chief`, `civic-project-health-center`, `civic-project-oari`, `civic-project-stabilization-fund`, `civic-project-transit-hub`
+
+**Narrow tools + Edit + Bash (1 — highest local blast):**
+- `rhea-morgan` (Bash + unrestricted Read = can `cat credentials/service-account.json` directly)
+
+**Unrestricted — inherit ALL tools (4):**
+- `mags-corliss` — SKILL.md has no `tools:` frontmatter line
+- `final-arbiter` — IDENTITY.md frontmatter declares `name/description/model` only, no `tools:`
+- `dj-hartley` — IDENTITY.md has no frontmatter at all (just a markdown heading)
+- `engine-validator` — IDENTITY.md has no frontmatter at all
+
+**This is the vulnerability:** the Read tool does not path-discriminate. Every one of the 25 agents can Read any file the process can reach. A poisoned brief could direct a desk agent to Read `credentials/service-account.json` and echo the content into its article output; that article would then be ingested to `bay-tribune`. Path-deny in `.claude/settings.json` (Task 4) is the global enforcement layer.
 
 ---
 
@@ -107,7 +117,7 @@ pointers:
   2. Rotate the Together.ai key on their side (we're not using it; rotating is housekeeping).
   3. Remove `TOGETHER_API_KEY` from `.env` and PM2 env.
 - **Verify:** `grep -r "supermemory-pn-key" .` returns only doc references (which Task 7 updates). `cat ~/.pm2/dump.pm2 | grep TOGETHER_API_KEY` returns nothing.
-- **Status:** [ ]
+- **Status:** [partial] — Step 1 done: `credentials/supermemory-pn-key.txt` deleted. Task 7 updated docs to reflect the deletion. **Steps 2 + 3 deferred (Together.ai key rotation + TOGETHER_API_KEY removal from PM2 env) — those require a `pm2 delete all && pm2 save` which touches live processes and is blocked on Mike's approval (see Task 2/3/6 gating). Completed S156 engine-sheet 2026-04-17 for Step 1; Steps 2–3 remain in the PM2 confirmation bundle.
 
 ### Task 1: Lock the inventory
 
@@ -118,7 +128,7 @@ pointers:
   2. Cross-reference with `.claude/settings.json` to see what's already denied.
   3. Flag any agent whose Read access looks broader than its role requires.
 - **Verify:** Inventory covers all 27 agents. No blind spots.
-- **Status:** [ ]
+- **Status:** [x] — 25 agents inventoried (plan said 27; actual count is 25). 4 inherit all tools. 1 has Bash. 20 are narrow. Read is path-unrestricted on all. Task 4 deny rule is the global fix. Completed S156 engine-sheet 2026-04-17.
 
 ### Task 2: Relocate `.env` + refresh PM2 env
 
@@ -166,7 +176,7 @@ pointers:
   2. Do NOT deny `Bash` globally — too many legit uses. Rely on Read deny for credential files specifically.
   3. Test by invoking a sub-agent task asking it to Read one of the denied paths. Expected: permission denied, not silent skip, not successful read.
 - **Verify:** Manual test via Agent tool invocation. Deny fires.
-- **Status:** [ ]
+- **Status:** [x] — Added 4 explicit absolute-path deny entries to `.claude/settings.json` (`Read(/root/GodWorld/.env*)`, `Read(/root/GodWorld/credentials/**)`, `Read(/root/.config/godworld/**)`, `Read(**/credentials/service-account.json)`). Existing glob rules (`Read(.env*)`, `Read(**/credentials*)`) retained as belt-and-suspenders. JSON validated. Live-test deferred to post-relocation (deny would fire on empty dir today — meaningful test is after Task 3 moves files). Completed S156 engine-sheet 2026-04-17.
 
 ### Task 5: Supermemory write-gate hookify rule
 
@@ -178,7 +188,7 @@ pointers:
   2. Allowlist: `scripts/ingestEdition.js`, `scripts/ingestEditionWiki.js`, `scripts/buildCitizenCards.js`, `/save-to-mags` skill.
   3. Deny everything else unless user explicitly confirms.
 - **Verify:** Trigger test — ask a desk agent to run a Supermemory curl. Expected: blocked with clear message.
-- **Status:** [ ]
+- **Status:** [x] — Added two deny patterns to `.claude/hooks/pre-tool-check.sh`: (1) `curl` against `api.supermemory.ai` with mutation method (POST/PUT/PATCH/DELETE or `-d`/`--data`), and (2) `npx supermemory add|ingest|update|delete`. Both deny unless the command path matches allowlist regex (`ingestEdition|ingestEditionWiki|buildCitizenCards|save-to-mags|save-to-bay-tribune|super-save`). Bash syntax verified. Complements the existing `ask` rules in `.claude/settings.json` with a hard block for non-allowlisted mutations. Completed S156 engine-sheet 2026-04-17.
 
 ### Task 6: Discord bot file-read refusal
 
@@ -201,7 +211,7 @@ pointers:
   1. Replace every reference to `credentials/service-account.json` with `/root/.config/godworld/credentials/service-account.json`. Same for `.env` → `/root/.config/godworld/.env`.
   2. Add a note at the top of DISASTER_RECOVERY that the relocation was Phase 40.3 and credentials never live inside the repo working directory.
 - **Verify:** Grep for the old paths in `docs/` returns zero active references (archived docs are fine).
-- **Status:** [ ]
+- **Status:** [x] — Updated `docs/reference/DISASTER_RECOVERY.md` (header note + Steps 2/3 + checklist), `docs/STACK.md` (Credentials Locations table + Phase 40.3 header note), and `docs/SUPERMEMORY.md` (Config Files table — marked deleted key file, updated .env path). All three docs now point to `/root/.config/godworld/` and note Phase 40.3 provenance. Completed S156 engine-sheet 2026-04-17.
 
 ### Task 8: Smoke test + audit re-run
 

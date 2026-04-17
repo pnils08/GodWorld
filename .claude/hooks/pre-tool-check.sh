@@ -275,6 +275,44 @@ if echo "$COMMAND" | grep -qiE "drop table|truncate"; then
 fi
 
 # =====================================================
+# SUPERMEMORY WRITE GATE — Phase 40.3 Task 5
+# Block writes to bay-tribune / mags / world-data containers from
+# anything other than the allowlisted ingest scripts + /save-to-mags.
+# Ask-gate in settings.json catches the allowlisted cases; this adds
+# a hard deny for the non-allowlisted mutation patterns.
+# =====================================================
+SM_ALLOWLIST="ingestEdition|ingestEditionWiki|buildCitizenCards|save-to-mags|save-to-bay-tribune|super-save"
+
+# Pattern 1: curl mutation against api.supermemory.ai (POST/PUT/PATCH/DELETE)
+if echo "$COMMAND" | grep -qiE "curl.*api\.supermemory\.ai" && \
+   echo "$COMMAND" | grep -qiE "\-X (POST|PUT|PATCH|DELETE)|--data|--data-raw|-d "; then
+  if ! echo "$COMMAND" | grep -qiE "$SM_ALLOWLIST"; then
+    jq -n --arg reason "Supermemory write blocked by Phase 40.3 write-gate. Mutations to bay-tribune/mags/world-data must run through the allowlisted ingest scripts (ingestEdition, ingestEditionWiki, buildCitizenCards) or /save-to-mags / /super-save skills. If this is intentional, ask Mike to run it manually." '{
+      hookSpecificOutput: {
+        hookEventName: "PreToolUse",
+        permissionDecision: "deny",
+        permissionDecisionReason: $reason
+      }
+    }'
+    exit 0
+  fi
+fi
+
+# Pattern 2: npx supermemory add/ingest/update from non-allowlisted context
+if echo "$COMMAND" | grep -qiE "npx supermemory (add|ingest|update|delete)"; then
+  if ! echo "$COMMAND" | grep -qiE "$SM_ALLOWLIST"; then
+    jq -n --arg reason "Supermemory CLI mutation blocked by Phase 40.3 write-gate. Use the allowlisted ingest scripts or /save-to-mags / /super-save." '{
+      hookSpecificOutput: {
+        hookEventName: "PreToolUse",
+        permissionDecision: "deny",
+        permissionDecisionReason: $reason
+      }
+    }'
+    exit 0
+  fi
+fi
+
+# =====================================================
 # Everything else — silent pass-through
 # =====================================================
 exit 0

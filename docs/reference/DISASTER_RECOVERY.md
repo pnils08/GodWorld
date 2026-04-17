@@ -2,7 +2,9 @@
 
 **If the machine dies, this is how you rebuild.**
 
-Last Updated: 2026-02-17 | Session: 39
+Last Updated: 2026-04-17 | Session: 156
+
+**IMPORTANT — Phase 40.3 relocation:** `.env` and `credentials/` live at `/root/.config/godworld/`, NOT inside the repo. They must never be placed inside the working directory. See `docs/plans/2026-04-16-phase-40-3-credential-audit.md` for the rationale.
 
 ---
 
@@ -33,7 +35,7 @@ npm install
 
 ### Step 2: Restore .env
 
-Create `/root/GodWorld/.env` with these keys:
+Create `/root/.config/godworld/.env` with `chmod 600` (parent dir `chmod 700`). It lives OUTSIDE the repo working directory — this is Phase 40.3 isolation. Keys:
 
 ```
 # Anthropic (Claude API)
@@ -54,23 +56,31 @@ DISCORD_BOT_TOKEN=              # From: https://discord.com/developers/applicati
 DISCORD_CHANNEL_ID=             # Right-click channel → Copy Channel ID (dev mode on)
 ```
 
-**If you have a backup archive:** Extract `.env` from it:
+**If you have a backup archive:** Extract `.env` from it and place it at the new Phase 40.3 location:
 ```bash
-tar -xzf backups/godworld_backup_YYYY-MM-DD_HHMM.tar.gz -C /tmp root/GodWorld/.env
-cp /tmp/root/GodWorld/.env /root/GodWorld/.env
+mkdir -p /root/.config/godworld && chmod 700 /root/.config/godworld
+tar -xzf backups/godworld_backup_YYYY-MM-DD_HHMM.tar.gz -C /tmp root/.config/godworld/.env 2>/dev/null \
+  || tar -xzf backups/godworld_backup_YYYY-MM-DD_HHMM.tar.gz -C /tmp root/GodWorld/.env  # older backups
+cp /tmp/root/.config/godworld/.env /root/.config/godworld/.env 2>/dev/null \
+  || cp /tmp/root/GodWorld/.env /root/.config/godworld/.env
+chmod 600 /root/.config/godworld/.env
 ```
 
 ### Step 3: Restore Service Account
 
-The service account JSON goes in `credentials/service-account.json`.
+The service account JSON goes in `/root/.config/godworld/credentials/service-account.json` (Phase 40.3 — OUTSIDE the repo working directory).
 
 **From backup:**
 ```bash
-tar -xzf backups/godworld_backup_YYYY-MM-DD_HHMM.tar.gz -C /tmp root/GodWorld/credentials/
-cp -r /tmp/root/GodWorld/credentials/ /root/GodWorld/credentials/
+mkdir -p /root/.config/godworld/credentials && chmod 700 /root/.config/godworld
+tar -xzf backups/godworld_backup_YYYY-MM-DD_HHMM.tar.gz -C /tmp root/.config/godworld/credentials/ 2>/dev/null \
+  || tar -xzf backups/godworld_backup_YYYY-MM-DD_HHMM.tar.gz -C /tmp root/GodWorld/credentials/  # older backups
+cp -r /tmp/root/.config/godworld/credentials/. /root/.config/godworld/credentials/ 2>/dev/null \
+  || cp -r /tmp/root/GodWorld/credentials/. /root/.config/godworld/credentials/
+chmod 600 /root/.config/godworld/credentials/*
 ```
 
-**From scratch:** Go to Google Cloud Console → IAM & Admin → Service Accounts → Create key (JSON). Download to `credentials/service-account.json`.
+**From scratch:** Go to Google Cloud Console → IAM & Admin → Service Accounts → Create key (JSON). Download to `/root/.config/godworld/credentials/service-account.json`.
 
 ### Step 4: Restore Clasp Auth
 
@@ -202,8 +212,8 @@ Everything else survives in GitHub, Google Sheets, Google Drive, or Supermemory.
 
 - [ ] `git clone` from GitHub
 - [ ] `npm install`
-- [ ] Restore `.env` (from backup or recreate keys)
-- [ ] Restore `credentials/service-account.json`
+- [ ] Restore `/root/.config/godworld/.env` (chmod 600; parent dir chmod 700)
+- [ ] Restore `/root/.config/godworld/credentials/service-account.json` (chmod 600)
 - [ ] Restore `.clasp.json` and `~/.clasprc.json`
 - [ ] Restore Claude-Mem DB (if backup exists)
 - [ ] `pm2 start ecosystem.config.js && pm2 save`

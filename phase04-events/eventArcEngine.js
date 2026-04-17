@@ -426,7 +426,7 @@ function generateSafeUuid_(rng) {
  * Returns an array of arc objects.
  */
 function generateNewArcs_(ctx) {
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var S = ctx.summary || {};
   var existingArcs = ctx.summary.eventArcs || [];
   var newArcs = [];

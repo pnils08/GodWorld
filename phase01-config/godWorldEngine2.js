@@ -493,7 +493,7 @@ function advanceWorldTime_(ctx) {
  */
 function updateWorldPopulation_(ctx) {
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   // v2.10: Use cache for reads
   var cached = ctx.cache.getData('World_Population');

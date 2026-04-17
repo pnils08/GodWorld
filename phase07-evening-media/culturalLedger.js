@@ -38,7 +38,7 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   if (!ctx) return null;
   if (!ctx.summary) ctx.summary = {};
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var sheet = ensureCulturalLedger_(ctx);
   var data = sheet.getDataRange().getValues();

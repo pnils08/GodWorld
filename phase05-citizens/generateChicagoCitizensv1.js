@@ -21,7 +21,7 @@
  */
 function generateChicagoCitizens_(ctx) {
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var ss = ctx.ss;
   var cycle = ctx.config.cycleCount || 0;
   

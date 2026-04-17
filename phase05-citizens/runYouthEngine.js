@@ -67,7 +67,7 @@ function runYouthEngine_(ctx) {
   var ss = ctx.ss;
   var S = ctx.summary || {};
   var cycle = S.absoluteCycle || 0;
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   // Ensure schema exists
   if (typeof ensureYouthEventsSchema_ === 'function') {

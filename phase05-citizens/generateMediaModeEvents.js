@@ -65,8 +65,7 @@ function generateMediaModeEvents_(ctx) {
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
       ? mulberry32MediaMode_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0) ^ 0xD1A)
-      : Math.random;
-
+      : (function(){ throw new Error('generateMediaModeEvents: ctx.rng or ctx.config.rngSeed required (Phase 40.3 Path 1)'); })();
   function roll() { return rng(); }
   function hit(p) { return roll() < p; }
   function pickOne(arr) { return arr[Math.floor(roll() * arr.length)]; }

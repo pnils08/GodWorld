@@ -79,7 +79,7 @@ function runCivicInitiativeEngine_(ctx) {
 
   var ss = ctx.ss;
   // v1.5 FIX: Use deterministic RNG from context
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var sheet = ss.getSheetByName('Initiative_Tracker');
   

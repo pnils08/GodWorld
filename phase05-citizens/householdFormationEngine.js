@@ -106,7 +106,7 @@ function processHouseholdFormation_(ctx) {
   var ss = ctx.ss;
   var cycle = ctx.config.cycleCount;
   var S = ctx.summary;
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var results = {
     processed: 0,

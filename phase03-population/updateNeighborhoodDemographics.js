@@ -17,7 +17,7 @@
  */
 
 function updateNeighborhoodDemographics_(ctx) {
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   // Defensive guard
   if (!ctx || !ctx.ss) return;

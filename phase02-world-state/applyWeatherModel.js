@@ -147,8 +147,7 @@ function applyWeatherModel_(ctx) {
   var rng = (typeof ctx.rng === 'function') ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === 'number')
       ? mulberry32_(ctx.config.rngSeed >>> 0)
-      : Math.random;
-
+      : (function(){ throw new Error('applyWeatherModel: ctx.rng or ctx.config.rngSeed required (Phase 40.3 Path 1)'); })();
   function clamp(x, lo, hi) { return x < lo ? lo : (x > hi ? hi : x); }
 
   // Box-Muller normal (stable; single-call cached spare)
@@ -1072,7 +1071,7 @@ function getWeatherEvent_(ctx, preferSpecial) {
   var pools = ctx && ctx.summary && ctx.summary.weatherEventPools;
   if (!pools) return null;
 
-  var rng = (ctx && typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   if (preferSpecial && pools.special && pools.special.length > 0 && rng() < 0.3) {
     return { text: pools.special[Math.floor(rng() * pools.special.length)], tag: 'Weather-Special' };
@@ -1099,7 +1098,7 @@ function getNeighborhoodWeatherEvent_(ctx, neighborhood) {
   var pools = nhPools && nhPools[neighborhood];
   if (!pools || pools.length === 0) return null;
 
-  var rng = (ctx && typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   if (rng() < 0.25) {
     return {

@@ -84,8 +84,7 @@ function generateCitizensEvents_(ctx) {
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
       ? mulberry32_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
-      : Math.random;
-
+      : (function(){ throw new Error('generateCitizensEvents: ctx.rng or ctx.config.rngSeed required (Phase 40.3 Path 1)'); })();
   function roll() { return rng(); }
   function chanceHit(p) { return roll() < p; }
   function pickOne(arr) { return arr[Math.floor(roll() * arr.length)]; }

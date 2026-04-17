@@ -92,8 +92,7 @@ function runAsUniversePipeline_(ctx) {
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
       ? mulberry32_uni_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
-      : Math.random;
-
+      : (function(){ throw new Error('runAsUniversePipeline: ctx.rng or ctx.config.rngSeed required (Phase 40.3 Path 1)'); })();
   // ═══════════════════════════════════════════════════════════════════════════
   // CANON-SAFE SPORTS STATE HANDLING (v3.0)
   // Engine must never simulate league operations. It can only:

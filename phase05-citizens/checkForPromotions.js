@@ -37,7 +37,7 @@
 
 function checkForPromotions_(ctx) {
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var ss = ctx.ss;
 
   var generic = ss.getSheetByName("Generic_Citizens");

@@ -49,8 +49,7 @@ function textureTriggerEngine_(ctx) {
   var rng = (typeof ctx.rng === 'function') ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === 'number')
       ? mulberry32_(ctx.config.rngSeed >>> 0)
-      : Math.random;
-
+      : (function(){ throw new Error('textureTriggers: ctx.rng or ctx.config.rngSeed required (Phase 40.3 Path 1)'); })();
   // ═══════════════════════════════════════════════════════════════════════════
   // CALENDAR CONTEXT
   // ═══════════════════════════════════════════════════════════════════════════

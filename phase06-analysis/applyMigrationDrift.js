@@ -101,7 +101,7 @@ function applyMigrationDrift_(ctx) {
   var rng = (rngSeed !== undefined && rngSeed !== null) ? createSeededRng_(rngSeed, rngStateIn) : null;
 
   // v2.7: prefer ctx.rng over Math.random as fallback
-  var _ctxRng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var _ctxRng = safeRand_(ctx);
   function rand() { return rng ? rng.random() : _ctxRng(); }
   function rInt(maxInclusive) { return Math.round(rand() * maxInclusive); }
   function rSym(span) { return Math.round((rand() - 0.5) * span); }

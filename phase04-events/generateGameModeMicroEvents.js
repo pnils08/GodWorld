@@ -68,8 +68,7 @@ function generateGameModeMicroEvents_(ctx) {
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number")
       ? mulberry32GameMode_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
-      : Math.random;
-
+      : (function(){ throw new Error('generateGameModeMicroEvents: ctx.rng or ctx.config.rngSeed required (Phase 40.3 Path 1)'); })();
   function roll() { return rng(); }
   function hit(p) { return roll() < p; }
   function pickOne(arr) { return arr[Math.floor(roll() * arr.length)]; }

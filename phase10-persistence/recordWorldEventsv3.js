@@ -39,7 +39,7 @@
  */
 
 function recordWorldEventsv3_(ctx) {
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var sheet = ctx.ss.getSheetByName('WorldEvents_V3_Ledger');
   if (!sheet) return;

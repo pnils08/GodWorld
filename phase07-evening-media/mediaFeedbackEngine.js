@@ -1232,7 +1232,7 @@ function getMediaInfluencedEvent_(ctx) {
   var pools = mediaEffects ? mediaEffects.eventPools : null;
   if (!pools) return null;
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var effects = mediaEffects;
   var cal = ctx.mediaCalendarContext || {};
 

@@ -541,7 +541,7 @@ function findColIndex_(headers, possibleNames) {
 // ============================================================
 
 function updateExistingBonds_(ctx) {
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var S = ctx.summary || {};
   var bonds = ctx.summary.relationshipBonds || [];
   var currentCycle = S.cycleId || ctx.config.cycleCount || 0;
@@ -729,7 +729,7 @@ function updateExistingBonds_(ctx) {
 // ============================================================
 
 function detectNewBonds_(ctx) {
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var S = ctx.summary || {};
   var currentCycle = S.cycleId || ctx.config.cycleCount || 0;
   var newBonds = [];
@@ -1233,7 +1233,7 @@ function makeBond_(citizenA, citizenB, bondType, origin, domainTag, neighborhood
 }
 
 function generateBondId_(ctx) {
-  var rng = (typeof ctx !== 'undefined' && ctx && typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
   var id = '';
   for (var i = 0; i < 8; i++) {

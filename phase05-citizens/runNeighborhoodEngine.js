@@ -34,7 +34,7 @@
 
 function runNeighborhoodEngine_(ctx) {
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var ss = ctx.ss;
   var ledger = ss.getSheetByName('Simulation_Ledger');

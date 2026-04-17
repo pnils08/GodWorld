@@ -187,7 +187,7 @@ function calculateCitizenIncomes_(ss, ctx) {
   if (iIncome < 0 || iLife < 0) return { updated: 0 };
 
   // v14.2: Deterministic RNG (fixes Math.random bug from v1.0)
-  var rng = (ctx && typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var updated = 0;
 

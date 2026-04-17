@@ -109,7 +109,7 @@ var FESTIVAL_HOLIDAYS = ['OaklandPride', 'ArtSoulFestival', 'Independence'];
 // ═══════════════════════════════════════════════════════════════
 
 function runEconomicRippleEngine_(ctx) {
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var S = ctx.summary || {};
 
   // v2.4: Store rng on S for helper functions that don't receive ctx

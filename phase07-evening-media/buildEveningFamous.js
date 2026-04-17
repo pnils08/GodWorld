@@ -46,7 +46,7 @@ function buildEveningFamous_(ctx) {
     else return;
   }
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════

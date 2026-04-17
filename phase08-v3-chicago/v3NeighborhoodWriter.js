@@ -40,7 +40,7 @@ var NMAP_NEIGHBORHOODS = [
 
 
 function saveV3NeighborhoodMap_(ctx) {
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   // DRY-RUN FIX: Skip direct sheet writes in dry-run mode
   var isDryRun = ctx.mode && ctx.mode.dryRun;

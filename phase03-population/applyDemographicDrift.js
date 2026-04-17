@@ -28,7 +28,7 @@
 
 function applyDemographicDrift_(ctx) {
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var sheet = ctx.ss.getSheetByName('World_Population');
   if (!sheet) return;

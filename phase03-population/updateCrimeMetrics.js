@@ -163,7 +163,7 @@ function updateCrimeMetrics_Phase3_(ctx) {
     else if (domain === 'CELEBRATION' || domain === 'FESTIVAL') celebrationEvents++;
   }
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   // Build adjacency graph
   var adjacency = buildCrimeAdjacencyGraph_(S);
@@ -601,7 +601,7 @@ function calculateCityWideCategoriesFromMap_(metricsMap) {
 function generateCrimeEvents_(ctx) {
   var ss = ctx.ss;
   var S = ctx.summary || {};
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var metrics = {};
   if (typeof getCrimeMetrics_ === 'function') {

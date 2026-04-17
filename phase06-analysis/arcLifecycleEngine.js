@@ -327,7 +327,7 @@ function getNextPhase_(currentPhase) {
 
 
 function advanceArcPhase_(ctx, arc, cycle, oldPhase, newPhase, ledger) {
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var arcRow = ledger.map[arc.arcId];
   var headers = ledger.headers;
 

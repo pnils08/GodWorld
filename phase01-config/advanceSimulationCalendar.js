@@ -24,7 +24,7 @@
 
 function advanceSimulationCalendar_(ctx) {
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var sheet = ctx.ss.getSheetByName('Simulation_Calendar');
   if (!sheet) return;

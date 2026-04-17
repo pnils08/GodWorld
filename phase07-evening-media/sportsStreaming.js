@@ -26,7 +26,7 @@ function buildEveningSportsAndStreaming_(ctx) {
   if (!ctx) return;
   if (!ctx.summary) ctx.summary = {};
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
   var S = ctx.summary;
 
   // ═══════════════════════════════════════════════════════════════════════════

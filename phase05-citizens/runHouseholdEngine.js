@@ -74,7 +74,7 @@ function runHouseholdEngine_(ctx) {
   var econMood = S.economicMood || 50;
   var cycle = S.absoluteCycle || S.cycleId || ctx.config.cycleCount || 0;
 
-  var hRng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var hRng = safeRand_(ctx);
   var count = 0;
   var LIMIT = 6;
 

@@ -62,8 +62,7 @@ function worldEventsEngine_(ctx) {
   var rng = (typeof ctx.rng === 'function') ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === 'number')
       ? mulberry32_(((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0)) >>> 0)
-      : Math.random;
-
+      : (function(){ throw new Error('worldEventsEngine: ctx.rng or ctx.config.rngSeed required (Phase 40.3 Path 1)'); })();
   var W = (S.seasonal) ? S.seasonal : {
     weatherWeight: 1, eventWeight: 1, civicWeight: 1,
     nightlifeWeight: 1, schoolWeight: 1, sportsWeight: 1

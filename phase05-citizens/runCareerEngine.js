@@ -89,8 +89,7 @@ function runCareerEngine_(ctx) {
     ? ctx.rng
     : (ctx.config && typeof ctx.config.rngSeed === "number" && typeof mulberry32_ === "function")
       ? mulberry32_((ctx.config.rngSeed >>> 0) ^ (cycle >>> 0))
-      : Math.random;
-  function roll() { return rng(); }
+      : (function(){ throw new Error('runCareerEngine: ctx.rng or ctx.config.rngSeed required (Phase 40.3 Path 1)'); })();  function roll() { return rng(); }
   function chanceHit(p) { return roll() < p; }
   function pickOne(arr) { return arr[Math.floor(roll() * arr.length)]; }
   function clamp(n, a, b) { return Math.max(a, Math.min(b, n)); }

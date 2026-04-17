@@ -25,7 +25,7 @@
 
 function generateNamedCitizenEvents_(ctx) {
 
-  var rng = (typeof ctx.rng === 'function') ? ctx.rng : Math.random;
+  var rng = safeRand_(ctx);
 
   var ledger = ctx.ss.getSheetByName('Simulation_Ledger');
   var logSheet = ctx.ss.getSheetByName('LifeHistory_Log');

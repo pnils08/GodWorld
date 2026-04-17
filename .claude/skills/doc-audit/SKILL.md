@@ -86,9 +86,9 @@ Update this after each audit. `/doc-audit` with no argument picks the oldest.
 | Group | Last Audited | Session | Notes |
 |-------|-------------|---------|-------|
 | boot | — | — | Never audited as group |
-| engine | — | — | Never audited as group |
+| engine | 2026-04-17 | S156 | 5 stale, 2 inconsistent, 0 dead refs. ENGINE_MAP "Last verified S120" (21 days stale — no safeRand_ or Phase 38/39/40 refs). ENGINE_STUB_MAP claims 122 JS files, actual 125 — regenerate via /stub-engine. SHEETS_MANIFEST 57 days stale. PHASE_DATA_AUDIT no freshness header, no Phase 40 coverage. DOC_LEDGER 12 sessions stale BUT deprecated per docs/index.md header (folding into index over time). No dead file refs. |
 | media | 2026-04-13 | S144 | 5 stale, 3 inconsistent, 1 dead ref. AGENT_NEWSROOM most outdated (still says 6 desk agents, S134 moved to 9 reporters). DESK_PACKET_PIPELINE is legacy/superseded. DISK_MAP missing new output dirs. |
-| infra | — | — | Never audited as group |
+| infra | 2026-04-17 | S156 | 12 stale, 3 inconsistent, 1 dead ref. STACK.md most outdated (S137b header, skill/agent counts 13-behind, `.env` paths missed post-40.3 sweep, droplet name drift, "675 citizens" stale per CLAUDE.md). DISCORD.md + OPERATIONS.md both say "mags-discord-bot" but live PM2 is "mags-bot" (40.3 resolution). Supermemory "6 containers" claim in three docs but every table lists 5. OPERATIONS.md missing spacemolt-miner from PM2 table. FOUR_COMPONENT_MAP.md current. |
 | data | — | — | Never audited as group |
 
 ---

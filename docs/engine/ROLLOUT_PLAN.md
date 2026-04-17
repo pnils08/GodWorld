@@ -24,11 +24,11 @@ The planned rollout, in order. Read top to bottom: this is what the project has 
 | 5 | 38.2 + 38.3 + 38.4 mitigator + remedy + Tribune framing | DONE | S146 | [[engine/PHASE_38_PLAN]] |
 | 6 | 39.2–39.7 + 39.3 three-lane review + Final Arbiter + two-pass hallucination | DONE | S147 | [[engine/PHASE_39_PLAN]] |
 | 7 | 39.9 + 39.8 + 39.10 tiered review + reward-hacking scans + adversarial review | DONE | S148 | [[engine/PHASE_39_PLAN]] |
-| 8 | 38.5 measurement loop (engine) + 38.6 skill shrink | DONE | S156 | [[plans/2026-04-16-phase-38-5-measurement-loop]], [[plans/2026-04-16-phase-38-6-skill-shrink]] |
-| **9** | **40.1 session-log interface + 40.6 layered injection defense** | **40.1 DONE S156, 40.6 PLAN READY** | S156 / next | [[plans/2026-04-16-phase-40-1-session-log-interface]], [[plans/2026-04-16-phase-40-6-injection-defense]] |
+| **8** | **38.5 measurement loop (engine) + 38.6 skill shrink** | **38.5 DONE S156, 38.6 ACTIVE** | S156 / next | [[plans/2026-04-16-phase-38-5-measurement-loop]], [[plans/2026-04-16-phase-38-6-skill-shrink]] |
+| 9 | 40.6 + 40.1 layered injection defense + session-log interface | READY | — | [[engine/PHASE_40_PLAN]] §40.1, §40.6 |
 | 10 | Sandcastle + Daytona evaluation | READY | — | [[engine/PHASE_33_PLAN]] §33.13 |
 
-**Where we are:** 8.5 steps done. Spine step 9 half closed S156 — `lib/sessionLog.js` ships `readLast` + `readSince` (17/17 tests, real-data verified, session-end skill migrated). Spine step 9 second half (40.6 injection defense) is next pickup. Step 10 plan exists but nothing built.
+**Where we are:** 7.5 steps done. Step 8 engine half (38.5) shipped S156 — measurement loop wired into auditor, deterministic, 19/19 tests passing. Step 8 skill half (38.6) is the next pickup for research/build. Steps 9 and 10 follow; plans exist but nothing built.
 
 **Full analysis:** mags Supermemory doc `n5cBYS3vVN5DKrddnNp7K8` (S144 keystone framing, still load-bearing).
 

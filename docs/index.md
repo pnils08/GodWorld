@@ -47,7 +47,6 @@ pointers:
 - **[[DISCORD]]** — Discord bot architecture. *(reference, infrastructure, active)*
 - **[[CLAUDE-MEM]]** — claude-mem architecture, autodream, scheduled agents. *(reference, infrastructure, active)*
 - **[[SUPERMEMORY]]** — 6 containers, API patterns, terminal-tag isolation rules. *(reference, infrastructure, active)*
-- **[[MIGRATION_OFF_CLAUDE]]** — S154 desk-agent migration: DeepSeek V3.1 via OpenRouter beat 3-pass Claude on c87 business desk for 1/25th the cost. Test script + next steps + what survives. *(project, infrastructure, active)*
 - **[[ACTION_MANAGED_AGENTS]]** — research on Claude Managed Agents. Ready to evaluate. *(reference, research, active)*
 - **[[CANCELLATION]]** — monthly costs and cancellation paths for every paid service. *(reference, infrastructure, active)*
 
@@ -173,8 +172,6 @@ pointers:
 - **[[plans/skill-eval-framework]]** — Anthropic skill-creator eval loop pulled into GodWorld. Grades against story_evaluation/brief_template/citizen_selection. HIGH priority, not started. *(plan, architecture, active)*
 - **[[plans/2026-04-16-phase-38-5-measurement-loop]]** — Phase 38.5 enricher: compares prior-cycle remedy predictions against observed engine state, adds `measurement` field per pattern. Engine/sheet terminal. *(plan, engine, active)*
 - **[[plans/2026-04-16-phase-38-6-skill-shrink]]** — Phase 38.6 skill shrink: `/engine-review` Step 7 consumes structured `measurement` from 38.5 instead of parsing prior-cycle markdown. Research-build terminal. Blocked-by 38.5 for full test. *(plan, media, active)*
-- **[[plans/2026-04-16-phase-40-1-session-log-interface]]** — Phase 40.1 session-log interface: `lib/sessionLog.js` read-only helper returning positional slices (last N / since timestamp). DONE S156 — `readByTag` dropped from MVP per inventory; session-end skill migrated as proof. *(plan, engine, complete)*
-- **[[plans/2026-04-16-phase-40-6-injection-defense]]** — Phase 40.6 layered injection defense: six-layer stack (input refusal, memory fence, memory-write gate, context scan, tool gate, Rhea review). Layers 2 and 4 ported from Hermes. Research-build drafted; engine/sheet builds. *(plan, security, active)*
 - **[[plans/mara-reference-files]]** — Mara reference files plan. COMPLETE S105. *(plan, civic, archived)*
 
 ---

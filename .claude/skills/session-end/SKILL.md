@@ -104,11 +104,7 @@ Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`.
 After writing the journal entry, update `/root/GodWorld/docs/mags-corliss/JOURNAL_RECENT.md` so the next session wakes up with fresh emotional context.
 
 **How:**
-1. Read the last 3 `## Session` blocks from JOURNAL.md (the new entry you just wrote + the previous 2). Use `lib/sessionLog.js`:
-   ```bash
-   node -e "console.log(require('./lib/sessionLog').readLast('docs/mags-corliss/JOURNAL.md', 3).map(e => '## ' + e.step + '\n\n' + e.body).join('\n\n'))"
-   ```
-   The `readLast(path, n)` helper returns the last N parsed `## Session` blocks in chronological order. Phase 40.1 — see `lib/sessionLog.js` JSDoc for schema. Don't hand-grep section boundaries.
+1. Read the last 3 `## Session` blocks from JOURNAL.md (the new entry you just wrote + the previous 2)
 2. Write them to JOURNAL_RECENT.md in chronological order (oldest first)
 3. Keep the file header: `# Journal — Recent Entries` + the note about full journal location
 

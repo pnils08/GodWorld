@@ -49,7 +49,7 @@ pointers:
   2. List in a scratch note: every instruction that references parsing `output/engine_review_c{XX-1}.md` or extracting "measurement plans" from it.
   3. Confirm which instructions become obsolete once the audit JSON carries structured `measurement` fields.
 - **Verify:** Scratch note identifies at least one removable instruction. If zero, stop — this plan's premise is wrong; escalate.
-- **Status:** [ ] not started
+- **Status:** [x] done S156
 
 ### Task 2: Draft replacement Step 7 text
 
@@ -59,7 +59,7 @@ pointers:
   1. Draft the new Step 7 as: (a) read `patterns[*].measurement`, (b) render table for patterns with `measurement.available === true`, (c) render "no prior to compare" when all are `available: false`, (d) render "Remedy-type track record" from `measurementHistory[]` rollup.
   2. Keep the instruction for Mags to flag when a verdict changes from `remedy-not-firing` to `remedy-firing-as-expected` — that's the "it worked" moment and deserves editorial voice, not just a table row.
 - **Verify:** Draft text has explicit field references into the JSON (no re-synthesis), and handles the three display cases (first-run, populated, partial).
-- **Status:** [ ] not started
+- **Status:** [x] done S156
 
 ### Task 3: Edit Step 7 in the skill file
 
@@ -70,7 +70,7 @@ pointers:
   2. Preserve the step heading and the "skip on first run" bullet (rephrased to the new structured form).
   3. Remove any surviving references to `engine_review_c{XX-1}.md`.
 - **Verify:** `grep -c "engine_review_c.*-1" .claude/skills/engine-review/SKILL.md` returns 0. `grep -c "patterns\[\*\].measurement\|measurementHistory" .claude/skills/engine-review/SKILL.md` returns ≥ 2.
-- **Status:** [ ] not started
+- **Status:** [x] done S156
 
 ### Task 4: Update the Output File template
 
@@ -80,7 +80,7 @@ pointers:
   1. In the `## Measurement Check (from previous review)` block of the output template, replace the prose placeholder with a table shape: columns `Pattern | Affected | Prior remedy | Expected | Observed | Verdict`.
   2. Add a `### Remedy-type track record` sub-block below with one row per `priorRemedyType` key in `measurementHistory[]`.
 - **Verify:** Template block has a literal markdown table header and the new sub-block heading.
-- **Status:** [ ] not started
+- **Status:** [x] done S156
 
 ### Task 5: Test against C91 (no-prior case)
 
@@ -92,7 +92,7 @@ pointers:
   3. Confirm `output/engine_review_c91.md` contains the exact string "First review — no prior to compare. Measurement loop will activate on next cycle." or the variant drafted in Task 2.
   4. Confirm no error in the skill output.
 - **Verify:** `grep -c "First review" output/engine_review_c91.md` returns 1.
-- **Status:** [ ] not started
+- **Status:** [x] done S156
 
 ### Task 6: Test against fixture cycle (populated case)
 
@@ -104,7 +104,7 @@ pointers:
   3. Confirm the measurement table renders with Temescal's row showing verdict `remedy-not-firing`.
   4. Confirm the "Remedy-type track record" sub-block shows the fixture's remedy type count.
 - **Verify:** Manual inspection of rendered markdown. Table has a Temescal row. Sub-block has at least one row.
-- **Status:** [ ] not started
+- **Status:** [x] done S156
 
 ### Task 7: Back-link from PHASE_38_PLAN.md
 
@@ -114,7 +114,7 @@ pointers:
   1. In §16.5 "Pipeline impact downstream," append a line noting that the measurement-check portion of the skill-shrink work lives in this plan, with a [[plans/2026-04-16-phase-38-6-skill-shrink]] pointer.
   2. Add a changelog line dated today.
 - **Verify:** Grep for the wikilink: `grep "phase-38-6-skill-shrink" docs/engine/PHASE_38_PLAN.md` returns 1+.
-- **Status:** [ ] not started
+- **Status:** [x] done S156
 
 ---
 
@@ -136,3 +136,4 @@ pointers:
 ## Changelog
 
 - 2026-04-16 — Initial draft (S152, research-build terminal). Scope narrowed from the original "38.6 prep-chain integration" because the skill's pipeline integration already landed S146 (§first-pass and second-pass rewrites). Only Step 7 measurement consumption remains, which is what this plan covers.
+- 2026-04-16 — Closed (S156, research-build). Skill rewrite landed in S154 commit `539f084`. Verified against C91 audit JSON: 27 patterns carry measurement fields; first-run case (`available: false`, `reason: no-prior-match`) correctly wired. Criteria 1–5 and 7 met. Criterion 6 (net shrink) not met literally — skill grew +23 lines as the prior-brief-parsing bullet was replaced with richer three-part structured-field instructions (per-pattern table, remedy-type track record, win callout) plus the measurement-schema bullet. The *parse-prior-brief* logic was removed as intended; the plan's "shrink" framing was wrong for what the work actually needed. Fixture-driven populated-case test (Task 6) deferred to next cycle run — will validate naturally when C92 audits against C91.

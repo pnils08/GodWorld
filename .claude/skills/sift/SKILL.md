@@ -39,6 +39,17 @@ Sift reads three narrative documents PLUS two structured-JSON inputs from the en
 6. **Citizen lookups** — `lookup_citizen(name)` via MCP for every citizen considered for a story
 7. **Canon search** — `search_canon(topic)` for storyline continuity — what has the Tribune already published on this topic
 
+## Memory Fence (Phase 40.6 Layer 2)
+
+Angle briefs produced by Step 5 are consumed by desk reporter agents. Any excerpts pulled from `search_canon`, `lookup_citizen`, `search_world`, or `NEWSROOM_MEMORY.md` that land inside a brief must be wrapped first — the reporter model treats fenced content as data, not instructions.
+
+```javascript
+const { wrap } = require('/root/GodWorld/lib/memoryFence');
+const fencedPriorCoverage = wrap(canonExcerpt, 'bay-tribune');
+```
+
+Full convention: [[SUPERMEMORY]] §Memory Fence.
+
 ## Steps
 
 ### Step 1: Extract Threads

@@ -66,6 +66,17 @@ Verify these exist before starting:
 
 If either is missing, `/run-cycle` didn't complete. Don't proceed.
 
+## Memory Fence (Phase 40.6 Layer 2)
+
+`pending_decisions_*.md` packets and voice briefings are consumed by voice agents — a downstream model context. Any content pulled from prior logs, `search_canon`, or Supermemory results that lands in a packet must be wrapped before the voice agent sees it.
+
+```javascript
+const { wrap } = require('/root/GodWorld/lib/memoryFence');
+const fencedCanon = wrap(canonExcerpt, 'bay-tribune');
+```
+
+Full convention: [[SUPERMEMORY]] §Memory Fence. Covers the threat model and when *not* to fence.
+
 ## Steps
 
 ### Step 0: Production Log

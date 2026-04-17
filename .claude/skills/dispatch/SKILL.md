@@ -42,6 +42,7 @@ The difference: "The bar erupted when Horn's ball cleared the fence" is reportin
 - **World summary is your context.** Read `output/world_summary_c{XX}.md` — weather, mood, what's happening in the city. The dispatch lives in the same world as the edition.
 - **No calendar dates.** Natural time references only.
 - **Get user approval** on the scene concept and reporter before writing.
+- **Memory Fence (Phase 40.6 Layer 2).** Scene briefs assembled in Step 1 pull recalled citizen/canon context that the reporter agent reads. Wrap recalled excerpts via `require('/root/GodWorld/lib/memoryFence').wrap(text, 'bay-tribune')` before embedding. Full convention: [[SUPERMEMORY]] §Memory Fence.
 
 ## Reporter Selection Guide
 

@@ -48,6 +48,7 @@ The Cycle Pulse is the engine's newspaper — it reports what the simulation pro
 - **No calendar dates.** Cycles only.
 - **World summary is your context.** Read `output/world_summary_c{XX}.md` for cycle texture — food, nightlife, famous people, weather, events.
 - **Photos, PDF, print — that's `/edition-print`.** Not part of this skill.
+- **Memory Fence (Phase 40.6 Layer 2).** Reporter briefs carry recalled canon from `search_canon` and world-data queries. Wrap those excerpts via `require('/root/GodWorld/lib/memoryFence').wrap(text, 'bay-tribune')` before embedding them in the brief. Full convention: [[SUPERMEMORY]] §Memory Fence.
 
 ---
 

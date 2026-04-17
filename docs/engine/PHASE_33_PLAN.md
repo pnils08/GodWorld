@@ -81,15 +81,22 @@ Run one reporter agent via Sandcastle with real shell access and Supermemory que
 
 **Convergence flag — Daytona shows up twice.** Both Hermes Agent (ROLLOUT_PLAN Open Work Items — Infrastructure) and Sandcastle (here) use Daytona as their isolated-sandbox backend. If we pick Daytona for one, we get ecosystem alignment for free. Worth a single-session Daytona evaluation before committing to any sandbox provider.
 
-**S156 readiness check — research-build.** Confirmed state: `/tmp/sandcastle` is the 0.4.5 clone with both providers on disk (`src/sandboxes/daytona.ts`, `src/sandboxes/vercel.ts`). Daytona provider needs `@daytona/sdk` peer dep + `DAYTONA_API_KEY` + optional `DAYTONA_API_URL` and `DAYTONA_TARGET`. Vercel provider needs `@vercel/sandbox` peer dep + Vercel account + token. Neither runs without a Mike-provisioned account. Full PoC requires:
+**S156 readiness check — research-build.** Confirmed state: `/tmp/sandcastle` is the 0.4.5 clone with both providers on disk (`src/sandboxes/daytona.ts`, `src/sandboxes/vercel.ts`). Daytona provider needs `@daytona/sdk` peer dep + `DAYTONA_API_KEY` + optional `DAYTONA_API_URL` and `DAYTONA_TARGET`. Vercel provider needs `@vercel/sandbox` peer dep + Vercel account + token.
 
-1. Mike picks a provider (Daytona preferred — convergence with Hermes Agent).
-2. Mike creates the account and generates an API key.
-3. Add the peer dep to `package.json` (e.g. `npm i @daytona/sdk`) and the key to `.env` (`DAYTONA_API_KEY=...`).
-4. Copy sandcastle into GodWorld as a dep (`npm i @ai-hero/sandcastle`) or import from `/tmp/sandcastle` directly for the PoC.
-5. Wrap one reporter agent's invocation with Sandcastle's `run()` using `daytona()` as the `sandbox:` option. Phase 39.1 capability reviewer is the least-coupled starting point per the parallel-planner-with-review note above.
+**S156 PoC attempt.** Daytona Tier 1 free plan confirmed viable on paper (10 vCPU / 10 GiB / 30 GiB pool, 4 vCPU per sandbox). Installed `@daytona/sdk@0.167.0` + `dotenv`. Wrote `scripts/sandcastlePoC.js` — minimum-viable round-trip (create → echo → delete). Live run: API returned `Invalid credentials`. Mike declined to rotate the key. PoC parked with script in place.
 
-No evaluation blocking on research-build right now — waiting on provisioning. Flag for next session when Mike returns with an API key.
+**S156 code evaluation — Sandcastle / Phase 39 fit.** Inspected `/tmp/sandcastle/src/templates/`:
+
+- **`sequential-reviewer`** (106 lines) — implement-then-review loop, one issue per iteration. Phase 1 sonnet implementer on a branch, Phase 2 sonnet reviewer on the same branch. Middle complexity.
+- **`parallel-planner-with-review`** (251 lines) — four-phase orchestration: opus planner emits a dependency graph of unblocked issues, per-issue sandbox runs implementer (100 iters) then reviewer (1 iter) concurrently via `Promise.allSettled`, merge agent consolidates.
+
+Direct structural analog to Phase 39's three-lane review (Rhea + cycle-review + Mara + Final Arbiter): the implementer/reviewer pairing exists in both, and the per-branch sandbox gives commit-level attribution + process isolation for free.
+
+**Fit verdict for GodWorld:**
+- **Match:** strong on structure. Sandcastle's `reviewer` primitive is isomorphic to any single Phase 39 lane.
+- **Material gain:** modest. Current Phase 39 reviewers are deterministic and local; sandboxing buys reproducibility and audit trail rather than safety. Higher payoff if we ever run reviewers on untrusted input (e.g., user-submitted desk packets).
+- **Integration cost:** non-trivial. Needs a working sandbox provider (Daytona rejected tonight; Docker requires local install; Vercel requires a separate account). Needs rewrap of capability-reviewer / cycle-review / Rhea / Mara as sandcastle templates. Each reviewer would run in its own sandbox per cycle.
+- **Recommendation:** **park for now.** Phase 39 ships today without Sandcastle. Revisit if (a) we need commit-level attribution per reviewer lane, (b) reviewers become non-deterministic (e.g., add a grader-LLM step), or (c) we run reviewers on data from outside the trust boundary. Do not block spine progression on this.
 
 ### 33.14 Tool-restricted reporter agents — BUILD (media terminal)
 

@@ -26,9 +26,11 @@ The planned rollout, in order. Read top to bottom: this is what the project has 
 | 7 | 39.9 + 39.8 + 39.10 tiered review + reward-hacking scans + adversarial review | DONE | S148 | [[engine/PHASE_39_PLAN]] |
 | 8 | 38.5 measurement loop (engine) + 38.6 skill shrink | DONE | S156 | [[plans/2026-04-16-phase-38-5-measurement-loop]], [[plans/2026-04-16-phase-38-6-skill-shrink]] |
 | 9 | 40.1 session-log interface + 40.6 layered injection defense | DONE | S156 | [[plans/2026-04-16-phase-40-1-session-log-interface]], [[plans/2026-04-16-phase-40-6-injection-defense]] |
-| **10** | **Sandcastle + Daytona evaluation** | **READY** | — | [[engine/PHASE_33_PLAN]] §33.13 |
+| 10 | Sandcastle + Daytona evaluation | EVALUATED — PARKED | S156 | [[engine/PHASE_33_PLAN]] §33.13 |
 
-**Where we are:** 9 steps done. Spine step 9 closed S156 — all six Layer tasks shipped (Layer 2 memoryFence, Layer 3 memory-write gate hook, Layer 4 contextScan + skill/script wiring, Layer 5 tool-gate permissions, Layer 6 Rhea injection scan + agent extension). Pressure test: all three Entry 123 vectors blocked. Step 10 plan exists but nothing built.
+**Where we are:** 10 steps touched. Step 9 closed S156 — all six Layer tasks shipped (Layer 2 memoryFence, Layer 3 memory-write gate hook, Layer 4 contextScan + skill/script wiring, Layer 5 tool-gate permissions, Layer 6 Rhea injection scan + agent extension). Pressure test: all three Entry 123 vectors blocked. Step 10 evaluated S156 — Daytona PoC blocked on invalid key; code-side fit analysis concludes Sandcastle is structurally aligned with Phase 39 but adds operational complexity without material gain over current deterministic reviewers. Parked pending trigger conditions listed in §33.13.
+
+**Spine walked.** All ten steps either shipped or evaluated-and-parked. Next work is off-spine — see "Other Ready Work" and "Open Work Items" below for picks.
 
 **Full analysis:** mags Supermemory doc `n5cBYS3vVN5DKrddnNp7K8` (S144 keystone framing, still load-bearing).
 

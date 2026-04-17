@@ -81,6 +81,16 @@ Run one reporter agent via Sandcastle with real shell access and Supermemory que
 
 **Convergence flag — Daytona shows up twice.** Both Hermes Agent (ROLLOUT_PLAN Open Work Items — Infrastructure) and Sandcastle (here) use Daytona as their isolated-sandbox backend. If we pick Daytona for one, we get ecosystem alignment for free. Worth a single-session Daytona evaluation before committing to any sandbox provider.
 
+**S156 readiness check — research-build.** Confirmed state: `/tmp/sandcastle` is the 0.4.5 clone with both providers on disk (`src/sandboxes/daytona.ts`, `src/sandboxes/vercel.ts`). Daytona provider needs `@daytona/sdk` peer dep + `DAYTONA_API_KEY` + optional `DAYTONA_API_URL` and `DAYTONA_TARGET`. Vercel provider needs `@vercel/sandbox` peer dep + Vercel account + token. Neither runs without a Mike-provisioned account. Full PoC requires:
+
+1. Mike picks a provider (Daytona preferred — convergence with Hermes Agent).
+2. Mike creates the account and generates an API key.
+3. Add the peer dep to `package.json` (e.g. `npm i @daytona/sdk`) and the key to `.env` (`DAYTONA_API_KEY=...`).
+4. Copy sandcastle into GodWorld as a dep (`npm i @ai-hero/sandcastle`) or import from `/tmp/sandcastle` directly for the PoC.
+5. Wrap one reporter agent's invocation with Sandcastle's `run()` using `daytona()` as the `sandbox:` option. Phase 39.1 capability reviewer is the least-coupled starting point per the parallel-planner-with-review note above.
+
+No evaluation blocking on research-build right now — waiting on provisioning. Flag for next session when Mike returns with an API key.
+
 ### 33.14 Tool-restricted reporter agents — BUILD (media terminal)
 
 Add `allowed-tools: ["Read", "Grep", "Glob"]` to reporter agent skill frontmatter. Reporters get read-only during writing. Only compile/publish gets write access. From everything-claude-code's hierarchical delegation pattern.

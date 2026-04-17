@@ -2,7 +2,7 @@
 
 **What lives where. Read this before searching for files.**
 
-Last Updated: Session 144 (2026-04-13)
+Last Updated: Session 156 (2026-04-17) — directory structure re-verified against live `output/` (retention policy and top-level dirs still accurate; S156 output files present: `baseline_briefs_c91.json`, `engine_audit_c91.json`, `capability_review_c91.json`, `final_arbiter_c91.json`, `rhea_hallucinations_c91.json`, `skill_check_*.json`).
 
 ---
 

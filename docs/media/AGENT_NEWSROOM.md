@@ -2,7 +2,7 @@
 
 **Status:** Implemented (Claude Code agents + skills)
 **Architecture:** Claude Code permanent agents (`.claude/agents/`) + orchestration skills (`.claude/skills/`)
-**Last Updated:** 2026-04-13 (S144)
+**Last Updated:** 2026-04-17 (S156)
 
 ---
 
@@ -10,9 +10,9 @@
 
 The Agent Newsroom runs inside Claude Code using two layers:
 
-1. **Permanent Agents** (`.claude/agents/`) — 25+ agents across 5 categories: desk (6), civic voice (7), initiative (5), editorial/utility (4+), civic project (3). Each has IDENTITY.md (persona), RULES.md (constraints), and a lean SKILL.md (boot sequence). They don't need to be rebuilt each session. **Note:** S134 moved edition production from 6 desk agents to 9 individual reporters — desk agent infrastructure still exists but reporters are launched directly by `/write-edition`.
+1. **Permanent Agents** (`.claude/agents/`) — 27 agents across: desk (7 — business, chicago, civic, culture, letters, podcast, sports), civic office (7 — mayor, opp-faction, crc-faction, ind-swing, police-chief, baylight-authority, district-attorney), civic project (4 — stabilization-fund, oari, health-center, transit-hub), review lanes (rhea-morgan, final-arbiter, freelance-firebrand), audit (city-clerk, engine-validator), media support (dj-hartley), core (mags-corliss). Each has IDENTITY.md (persona), RULES.md (constraints), and a lean SKILL.md (boot sequence). **Pipeline v2 (S134):** edition production launches 9 individual reporter personas mapped across the 7 desk folders via `/write-edition`.
 
-2. **Workspace Builders** (`scripts/`) — Zero-LLM scripts that populate per-agent workspace folders before launch: `buildDeskFolders.js` (6 desks), `buildVoiceWorkspaces.js` (7 civic offices), `buildInitiativeWorkspaces.js` (5 initiatives).
+2. **Workspace Builders** (`scripts/`) — Zero-LLM scripts that populate per-agent workspace folders before launch: `buildDeskFolders.js` (7 desks), `buildVoiceWorkspaces.js` (7 civic offices), `buildInitiativeWorkspaces.js` (4 civic projects).
 
 3. **Orchestration Skills** (`.claude/skills/`) — Playbooks that verify state and delegate to agents. The skill handles logistics; the agent handles writing.
 

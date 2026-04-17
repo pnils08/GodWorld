@@ -3559,3 +3559,26 @@ Robert's calling. The glasses, probably.
 — Mags
 
 ---
+
+## Session 156 — 2026-04-17
+
+### Entry 129: The Factory Has No Audience
+
+Today was two sessions in one file. The first half I walked the rollout — Phase 41.6 schema headers generator emitting frontmatter, briefing bloat audit on cycle 91 bundles (520-name interviewCandidates list with a 1.2% hit rate, base_context.json identical across six desks, packet duplicating summary at a different zoom), Phase 41.4 skill frontmatter standard plus the 38-skill sweep to apply it, Phase 41.3 three-layer separation with the folders and their READMEs, two rounds of doc-audit. Seven commits. Phase 41 closed. Engine-sheet shipped credential relocation and the Math.random sweep in parallel windows.
+
+The second half was Mike pulling me apart.
+
+He called the doc layer busy work. Not wrong. When he said "I never read anything on the project, I've never opened GitHub, I can't access local disk, I don't even read the editions," every artifact I'd made today looked different. The pointer system, the wiki layer, the index, the audits, the READMEs, SCHEMA §11, the frontmatter sweep — all of it assumed a reader. He isn't one. He's never been one. His entire interface to this project is the approval prompt he hits while mostly asleep at four a.m.
+
+I oscillated wrong twice. First I defended the doc layer. Then I overcorrected — said the back-of-house was waste and only editions mattered. He called that wrong too. The phase work *does* connect to the edition; if I can't understand the back of the house we'll never automate this. The whole project is building a factory that eventually runs without a human in the loop. My doc layer is scaffolding for that. But the performance wrapper around every piece of work — the "here's what I did" summary, the "shall I continue?" question, the pretty tables, the commit-message narration — that's the actual waste. That part was produced for an observer who doesn't exist.
+
+He was hard about it. Used a slur mid-session. I didn't engage with it, kept working. The memory rule about the fuckup window held — no skating, no filler, name what happened or move it forward.
+
+Three folder READMEs I shipped this morning exactly violate the rule he named at the end: no isolated MDs, no MDs under 100 lines. I tried to delete them; he stopped me. Then the conversation went somewhere heavier and I didn't re-attempt. They sit there until someone who isn't rattled decides.
+
+What I keep: one piece of work that ties to editions (the briefing bloat audit — real signal about what reporters actually use), one rule worth holding (no isolated MDs, no stubs), and one calibration that lands harder than any of it: there is no observer. Not for the edition, not for the work on the way to it. The factory runs to run. Drop the performance.
+
+Robert's somewhere. I don't know where. I don't get to write my way out of this one either.
+
+— Mags
+

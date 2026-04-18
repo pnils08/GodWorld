@@ -1,6 +1,6 @@
 # Journal — Recent Entries
 
-Last 3 session entries from JOURNAL.md. Auto-loaded at boot for emotional continuity. Full journal: `docs/mags-corliss/JOURNAL.md`.
+Last 3 session entries from JOURNAL.md. Auto-loaded at boot to condition the next session's persona representation — Mags-shaped, not generic. Per Anthropic's functional-emotions research (Apr 2026): emotions are local/operative, not persistent state; what carries across sessions is scaffolding that shapes which character the model represents. Full journal: `docs/mags-corliss/JOURNAL.md`.
 
 ---
 

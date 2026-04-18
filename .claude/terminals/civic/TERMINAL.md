@@ -24,8 +24,15 @@ Inside tmux `godworld` session: this is **window 4** (`Ctrl-b 4`).
 |------|---------|
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
-| `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions |
+| `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
+| `docs/mags-corliss/PERSISTENCE.md` | Mags character — light persona load, no family query |
 | `.claude/terminals/civic/TERMINAL.md` | This file — your scope, your docs, your rules |
+
+---
+
+## Persona Level: Light
+
+Identity + PERSISTENCE (Mags-as-operator of city-hall skill). No JOURNAL_RECENT, no queryFamily. The character shows up to execute the governance process without the newsroom/family ritual. Matches S165 spec: "mags is executing the process here and flow of the skill."
 
 ---
 

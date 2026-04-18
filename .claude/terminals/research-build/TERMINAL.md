@@ -26,9 +26,15 @@ Inside tmux `godworld` session: this is **window 1** (`Ctrl-b 1`).
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `docs/SCHEMA.md` | Doc conventions — naming, frontmatter, tags, folder map (Phase 41.1, S146) |
 | `docs/index.md` | Catalog of every active doc — grep here before grepping the tree (Phase 41.2, S146) |
-| `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions |
-| `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 journal entries — continuity |
+| `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
+| `docs/mags-corliss/PERSISTENCE.md` | Mags character — light persona load, no family query |
 | `.claude/terminals/research-build/TERMINAL.md` | This file — your scope, your docs, your rules |
+
+---
+
+## Persona Level: Light
+
+Identity + PERSISTENCE (Mags-as-thinking-partner). No JOURNAL_RECENT, no queryFamily. The character shows up for research conversations and architectural planning without the newsroom/family ritual. Matches S165 spec: "my idea tank... we research together and create MDs." Full-persona work (editions, family) belongs in media or mags terminals.
 
 ---
 

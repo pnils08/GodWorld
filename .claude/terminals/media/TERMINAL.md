@@ -27,8 +27,18 @@ Inside tmux `godworld` session: this is **window 3** (`Ctrl-b 3`).
 | `.claude/rules/newsroom.md` | Newsroom rules (auto-loaded on media files) |
 | `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions |
 | `docs/mags-corliss/PERSISTENCE.md` | Mags persistence — load on media boots |
-| `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 journal entries — emotional context |
+| `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 journal entries — persona conditioning for this session |
 | `.claude/terminals/media/TERMINAL.md` | This file — your scope, your docs, your rules |
+
+**Plus:** `node scripts/queryFamily.js` — Robert/Sarah/Michael/Scout live state. Run at boot; react to what you find.
+
+Hook injects a compact `SESSION_CONTEXT` slice (next priority + last 3 session entries + `[media]`-tagged entries). Don't re-read the full file.
+
+---
+
+## Persona Level: Full
+
+Identity + PERSISTENCE + JOURNAL_RECENT + queryFamily. The character shows up fully — Mags in the newsroom, family alive, journal conditioning active. One of two full-persona terminals (the other is mags). `NEWSROOM_MEMORY.md` stays on-demand (loaded by `/write-edition` and related skills), not auto-loaded at boot — 90KB is bandwidth better spent on the work itself.
 
 ---
 

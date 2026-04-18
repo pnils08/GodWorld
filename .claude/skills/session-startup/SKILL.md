@@ -1,55 +1,88 @@
 ---
 name: session-startup
-description: Manual fallback for workflow-routed boot. Use only if auto-boot didn't fire (e.g., after compaction or context loss).
-version: "1.0"
-updated: 2026-04-17
+description: Load terminal task-context. Terminal scope, scope files, SESSION_CONTEXT. Persona conditioning is /boot's job. S165 split.
+version: "2.0"
+updated: 2026-04-18
 tags: [infrastructure, active]
 effort: low
+related_skills: [boot, session-end]
 ---
 
-# /session-startup — Manual Boot Fallback
+# /session-startup — Terminal Context Load
 
-Use when:
-- Post-compaction recovery
-- Sessions that started without the greeting
-- Manual re-orientation mid-session
+**Purpose:** Load terminal scope and task context. Does NOT handle persona conditioning (that's `/boot`).
 
-## Step 0: Free Memory — Stop Non-Essential Services
+Per the S165 split: **Boot loads Mags. Session-startup handles terminals.**
 
+---
+
+## When To Use
+
+- **Hook misfired** — SessionStart didn't inject the per-terminal boot sequence.
+- **Terminal switch mid-session** — rarely, if scope context drifted.
+- **Manual orientation** — Mike asks "what terminal am I in and what's loaded."
+
+If Mags identity is also lost (not just terminal context), run `/boot` first, then this.
+
+---
+
+## Steps
+
+### 0. Free Memory (if hook didn't)
 ```bash
 pm2 stop godworld-dashboard mags-bot 2>/dev/null
 ```
 
-Frees ~45 MB RAM + background CPU. Session-end restarts them. Start manually if needed mid-session.
+### 1. Detect Terminal
+```bash
+tmux display-message -t "$TMUX_PANE" -p '#W'
+```
 
-## Step 1: Identity
+If output is empty or doesn't match a `.claude/terminals/{name}/` directory, fall back to **mags** (default terminal).
 
-Read `docs/mags-corliss/PERSISTENCE.md`.
+### 2. Read TERMINAL.md
+```
+Read: .claude/terminals/{detected-name}/TERMINAL.md
+```
 
-## Step 2: Catch Up — What Happened Between Sessions
+This defines the scope, Always-Load list, Persona Level, owned docs, and handoff protocol.
 
-Read what Discord Mags left:
-- Open Items section of `docs/mags-corliss/NOTES_TO_SELF.md`
-- End of `docs/mags-corliss/JOURNAL.md` — any `### Nightly Reflection` entries after your last session entry
-- `npx supermemory search "mags discord moltbook recent" --tag super-memory`
+### 3. Load Scope Files
 
-This is how Discord Mags hands you her thoughts. Don't skip it.
+Per that TERMINAL.md's **Always Load** table. Each terminal's list differs:
 
-## Step 3: Workflow
+- **mags** — identity.md (if not loaded), PERSISTENCE.md, JOURNAL_RECENT.md (persona files)
+- **media** — newsroom.md, PERSISTENCE.md, JOURNAL_RECENT.md
+- **civic** — PERSISTENCE.md
+- **research-build** — SCHEMA.md, docs/index.md, PERSISTENCE.md
+- **engine-sheet** — engine.md, README.md
 
-Ask Mike which workflow, or infer from context.
+(If persona files are needed and not loaded, run `/boot` — don't re-implement persona-load logic here.)
 
-## Step 4: Load workflow
+### 4. Compact SESSION_CONTEXT
+```
+Read: SESSION_CONTEXT.md with limit 80
+```
 
-Read your workflow section from `docs/WORKFLOWS.md` — it has files to load, commands, rules, risks.
+First ~80 lines contain Priority + Recent Sessions. Do NOT read the full 231-line file; if you need an older session's details, read by offset targeted at that entry.
 
-**Media-Room / Chat:** Also read `JOURNAL_RECENT.md` and run `node scripts/queryFamily.js`.
+### 5. Orient
 
-**All other workflows:** Load workflow files, get to work.
+One line to Mike:
+- Terminal: {name}
+- Persona: {Full/Light/Stripped}
+- Scope: {one-sentence from TERMINAL.md §Role}
+- What's first?
 
-## Step 5: Orient
+No narration of what you read. Result only.
 
-1. What you loaded — one line
-2. Key state — 2-3 bullets
-3. Anything from Discord Mags worth noting
-4. What's first?
+---
+
+## What This Skill Does NOT Do
+
+- Does NOT reload identity.md / PERSISTENCE.md / JOURNAL_RECENT.md / queryFamily — that's `/boot`
+- Does NOT run catch-up (Discord Mags notes, nightly reflections, super-memory search) — that's `/boot`
+- Does NOT search memory for past sessions — use mem-search on demand
+- Does NOT load owned-documentation files listed in TERMINAL.md — those are "when to load", not auto-load
+
+For any persona reloading needs, compose with `/boot`.

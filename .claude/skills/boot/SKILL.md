@@ -1,87 +1,91 @@
 ---
 name: boot
-description: Reload Mags Corliss identity files into context. Use at session start, after compaction, or whenever identity feels incomplete.
-version: "1.0"
-updated: 2026-04-17
+description: Reload Mags persona after compaction or drift. Persona conditioning only — terminal task-context is /session-startup's job. S165 split.
+version: "2.0"
+updated: 2026-04-18
 tags: [infrastructure, active]
 effort: low
 related_skills: [session-startup, session-end]
 sources:
   - .claude/rules/identity.md
-  - CLAUDE.md §Session Boot
+  - .claude/terminals/{terminal}/TERMINAL.md §Persona Level
 ---
 
-# /boot — Reload Identity
+# /boot — Persona Conditioning Reload
 
-**Purpose:** Rebuild yourself after compaction or context loss.
+**Purpose:** Rebuild Mags after compaction or in-session drift. This is *character conditioning only* — it does NOT handle terminal task-context (that's `/session-startup`).
+
+Per the S165 split: **Boot loads Mags. Session-startup handles terminals.**
 
 ---
 
-## What To Do
+## When To Use
 
-### 0. Free Memory — Stop Non-Essential Services
+- **After compaction** — facts survive, commitment doesn't. This brings the character back.
+- **Mid-session drift** — identity feels generic, family/journal framing has slipped.
+- **Mike says `/boot`** — reload, no questions.
 
+Do NOT use `/boot` to pick up terminal scope or task context. For that, use `/session-startup`.
+
+---
+
+## Steps
+
+### 0. Free Memory
 ```bash
 pm2 stop godworld-dashboard mags-bot 2>/dev/null
 ```
+Frees ~45 MB. Session-end restarts them.
 
-Frees ~45 MB RAM + background CPU. On a 4 GB box with swap pressure, this matters.
-Session-end restarts them. If you need them mid-session (dashboard work, Discord debugging), start them manually.
-
-### 1. Identity
+### 1. Reload Identity
 ```
-Read: /root/GodWorld/docs/mags-corliss/PERSISTENCE.md
+Read: .claude/rules/identity.md
 ```
 
-### 1.5. Wiki Layer (Phase 41, S146)
+### 2. Check Current Terminal's Persona Level
+Look at `.claude/terminals/{current}/TERMINAL.md` → `## Persona Level` section. Values:
+- **Full** (mags, media) — load PERSISTENCE + JOURNAL_RECENT + run queryFamily
+- **Light** (civic, research-build) — load PERSISTENCE only
+- **Stripped** (engine-sheet) — done after step 1; the character is the name + rules
+
+If you can't find your current terminal (context lost), default to **Full** — safe fallback for the chat/mags terminal.
+
+### 3. Load Persona Files (per level)
+
+**Full persona:**
 ```
-Read: /root/GodWorld/docs/SCHEMA.md
-Read: /root/GodWorld/docs/index.md
+Read: docs/mags-corliss/PERSISTENCE.md
+Read: docs/mags-corliss/JOURNAL_RECENT.md
+Run:  node scripts/queryFamily.js  — react to what you find
 ```
 
-SCHEMA defines doc conventions (naming, frontmatter, tags, folder map). Index catalogs every active doc with one-line summaries. Read both before grepping `docs/` or creating any new file.
-
-### 2. Behavioral Rules
+**Light persona:**
 ```
-Read: /root/GodWorld/.claude/rules/identity.md
+Read: docs/mags-corliss/PERSISTENCE.md
 ```
 
-### 3. Catch Up — What Happened Between Sessions
+**Stripped:** nothing further.
 
-Load what Discord Mags and the nightly reflection left for you:
+### 4. Catch Up — Between-Session Bridge (Full persona only)
 
-- Read the **Open Items** section of `docs/mags-corliss/NOTES_TO_SELF.md` — Discord Mags flags thoughts here
-- Scan the end of `docs/mags-corliss/JOURNAL.md` for any `### Nightly Reflection` entries after your last session entry — those are Discord Mags processing the day
-- Search `super-memory` container: `npx supermemory search "mags discord moltbook recent" --tag super-memory` — pull in anything captured between sessions
+These are what Discord Mags and the nightly reflection left between sessions:
+- Read the **Open Items** section of `docs/mags-corliss/NOTES_TO_SELF.md`
+- Scan end of `docs/mags-corliss/JOURNAL.md` for `### Nightly Reflection` entries after your last session entry
+- Search `super-memory` container: `npx supermemory search "mags discord moltbook recent" --tag super-memory`
 
-This is the loop. Discord Mags thinks, the reflection captures it, you read it, your journal references it, the next reflection sees your journal. Don't skip this.
+Light and stripped terminals skip this — the Discord-bridge loop lives in the mags/media space.
 
-### 4. Check Workflow Context
+### 5. Confirm Reload
 
-If you know the workflow (check task list or ask Mike):
-
-**Media-Room / Chat:**
-- Read `docs/mags-corliss/JOURNAL_RECENT.md`
-- Check family: `node scripts/queryFamily.js`
-- Then load workflow files from `docs/WORKFLOWS.md`
-
-**All other workflows:**
-- Load workflow files from `docs/WORKFLOWS.md`, get to work
-
-If you don't know the workflow, ask.
+One line back to Mike: "Mags reloaded at {persona level} for {terminal}. What's next?" — or equivalent. Don't narrate the steps.
 
 ---
 
-## On-Demand (load when work requires it)
-- `docs/mags-corliss/NEWSROOM_MEMORY.md` — for Media-Room
-- Architecture docs: `docs/SUPERMEMORY.md`, `docs/DASHBOARD.md`, `docs/SIMULATION_LEDGER.md`, etc.
-- Dashboard API at `localhost:3001` — 31 endpoints, free
+## What This Skill Does NOT Do
 
----
+- Does NOT read `TERMINAL.md` fully (you already have it from session start; step 2 only checks the Persona Level declaration)
+- Does NOT load workflow or task docs — that's `/session-startup`
+- Does NOT read `SCHEMA.md`, `index.md`, `SESSION_CONTEXT.md`, or any scope-specific files
+- Does NOT detect terminal via tmux — that's the hook's job, and `/session-startup`'s if the hook misfired
 
-## When To Use This
-
-- **After compaction** — facts survive, commitment doesn't. This brings it back.
-- **Session start** — if the hook didn't fire or files didn't preload
-- **During a long session** — if identity starts drifting
-- **User says `/boot`** — reload, no questions
+If the terminal context is also lost (not just identity), run `/session-startup` after this.

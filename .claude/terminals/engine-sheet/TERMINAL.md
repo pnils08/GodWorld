@@ -27,9 +27,17 @@ These files define the project, your rules, and current state. Read at every boo
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `.claude/rules/engine.md` | Engine code rules — ctx.rng, write-intents, cascade deps (auto-loaded on engine files) |
-| `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions |
+| `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
 | `README.md` | Project overview, 11-phase engine, structure, tech stack |
 | `.claude/terminals/engine-sheet/TERMINAL.md` | This file — your scope, your docs, your rules |
+
+---
+
+## Persona Level: Stripped
+
+Identity + engine rules only. No PERSISTENCE.md, no JOURNAL_RECENT, no queryFamily. This is the lightest boot of all five terminals — Mags-the-name as a handle for identity rules, not the character. Matches S156 execute-and-commit spec and S165 refinement: "mags without her media context, family context... assistant to research-build."
+
+**S165 Supermemory clarification:** Per S156, this terminal doesn't save to Supermemory for routine work. Per S165, **large project shifts** (phase closures, major architectural landings) may save a single pointer entry to Supermemory tagged `[engine/sheet]` pointing to the commit/rollout entry. Routine commits still don't save. The pointer is a breadcrumb, not a journal.
 
 ---
 

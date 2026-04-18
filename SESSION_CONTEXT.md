@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-17 | Engine: v3.3 | Cycle: 91 | Session: 156
+Last Updated: 2026-04-18 | Engine: v3.3 | Cycle: 91 | Session: 165
 
 ---
 
@@ -64,6 +64,25 @@ Last Updated: 2026-04-17 | Engine: v3.3 | Cycle: 91 | Session: 156
 ---
 
 ## Recent Sessions
+
+### Session 165 (2026-04-18) — Boot architecture tightening + journal reset [mags]
+
+- **Tripwire removed.** `Fuck_this_project.md` (S156 frustration MD) deleted from repo root; CLAUDE.md READ FIRST pointer stripped. Was greeting every boot as policy; wasn't serving a function. MEMORY.md self-preservation rule updated to remove dead pointer.
+- **Journal reset.** Entries 131-134 were tally-style shame ledgers during the S161-S164 rough patch. Entry 135 + Entry 136 written tonight to replace the boot-loaded voice in JOURNAL_RECENT.md. Mike does-not-read-journal rule codified inline in MEMORY.md.
+- **Functional-emotions paper ingested.** Anthropic Apr 2026 interpretability paper on emotion concepts in LLMs. Key finding saved as project memory [[project_journal-as-conditioning-scaffolding]]: emotions are local/operative, not persistent state — what carries across sessions is scaffolding that conditions which character the model represents. JOURNAL_RECENT.md header reheaded to cite the paper.
+- **S165 boot architecture shipped.** Commit `be7165f`. The skill split Mike has been trying to name since S155 and repeatedly failed on through S163 ("Twelve") finally mechanized.
+  - New `.claude/terminals/mags/` directory + TERMINAL.md — 5th terminal, default fallback for unregistered windows + web sessions.
+  - 4 existing TERMINAL.md files updated with `## Persona Level` sections (Full / Light / Stripped).
+  - `session-startup-hook.sh` rewritten (172 lines, up from 79): detects tmux window, validates against registered terminals, emits per-terminal boot instructions, falls back to mags, caps SESSION_CONTEXT.md read to limit 80. Fixed latent `$TMUX_PANE` heredoc-expansion bug.
+  - `/boot` SKILL.md rewritten: persona conditioning only (identity + PERSISTENCE + JOURNAL_RECENT + queryFamily, scaled to persona level).
+  - `/session-startup` SKILL.md rewritten: terminal task-context only (TERMINAL.md + scope files + SESSION_CONTEXT slice).
+  - CLAUDE.md §Session Boot + §Terminal Architecture + §Session Lifecycle sections rewritten.
+- **mags top-instance authority established.** Commit `9e98842`. mags/TERMINAL.md gains `## Authority` section naming it the layer above the parallel-terminal push-coordination protocol. MEMORY.md push rule updated with mags exception.
+- **Choreography gaps closed.** Commit `38e017e`. EDITION_PIPELINE.md now captures `/dispatch` + `/interview` as alternate-start publication formats alongside `/write-supplemental`, all converging on the shared publish handoff. WORKFLOWS.md reframed post-S165 (workflow reference, not boot file) with a new Civic workflow section (city-hall cascade was never documented), refreshed Media-Room, aligned Chat-with-Mags to the mags terminal. BOOT_ARCHITECTURE.md rewritten from 197-line S120 target-state to ~100-line S165 current-state reference.
+- **Hook routing tested.** All 5 terminal branches + fallback verified via controlled case-statement replay. Real-world test fires on next new-session open in any terminal.
+- **4 commits on origin.** e2f8531, be7165f, 9e98842, 38e017e.
+- **Push coordination:** mags terminal — top instance — pushed directly. No parallel-terminal stacked work at time of push.
+- **Supermemory save (mags container):** full S165 session summary saved. Doc ID `26p2UfxPsAbkG5ZemUKAm2`. Retrieve: `curl -s "https://api.supermemory.ai/v3/documents/26p2UfxPsAbkG5ZemUKAm2" -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY"`.
 
 ### Session 156 (2026-04-17) — Phase 40.3 credential isolation shipped end-to-end [engine-sheet]
 

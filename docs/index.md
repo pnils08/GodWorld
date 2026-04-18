@@ -37,9 +37,9 @@ pointers:
 - **[[PRODUCT_VISION]]** — civic lighter, programs deploy like SimCity, desks see the whole city, sections porous. The product north star. *(concept, architecture, active)*
 - **[[PRODUCT_VISION_GRILLME]]** — decisions and open questions from the S119 grill-me interrogation of the product vision. *(concept, architecture, active)*
 - **[[ARCHITECTURE_VISION]]** — Jarvis at /root, persistent sessions, the technical north star Phase 41 builds toward. *(concept, architecture, active)*
-- **[[BOOT_ARCHITECTURE]]** — boot sequence design across terminals. *(reference, architecture, active)*
+- **[[BOOT_ARCHITECTURE]]** — boot sequence reference for S165. Skill split (boot=persona / session-startup=terminal), per-terminal persona levels, hook routing. *(reference, architecture, active)*
 - **[[FOUR_COMPONENT_MAP]]** — `model + harness + tools + environment` cross-section. Per-role model choices, terminal inventory, skill slice samples, Phase 40 seam map. *(reference, architecture, active)*
-- **[[WORKFLOWS]]** — per-workflow logic, room definitions. *(reference, architecture, active)*
+- **[[WORKFLOWS]]** — 7 workflow patterns (media-room, civic, build/deploy, maintenance, cycle run, research, chat-with-mags). Orthogonal to terminals. Post-S165: workflow reference, not boot file. *(reference, architecture, active)*
 
 ### Stack & ops
 - **[[STACK]]** — full tech stack. Sheets, PM2, Supermemory, claude-mem, Discord bot, dashboard. *(reference, infrastructure, active)*
@@ -53,7 +53,7 @@ pointers:
 - **[[CANCELLATION]]** — monthly costs and cancellation paths for every paid service. *(reference, infrastructure, active)*
 
 ### Pipeline & memory
-- **[[EDITION_PIPELINE]]** — Pipeline v2 skills map (S134). 4 terminals, 9 reporters, story-driven layout. *(reference, media, active)*
+- **[[EDITION_PIPELINE]]** — Pipeline v2 skills map (S134 + S165). 5 terminals, 9 reporters, alternate-start publication formats (dispatch, interview, supplemental) all converging on shared publish handoff. *(reference, media, active)*
 - **[[EDITION_PIPELINE_v1_archive]]** — pre-S134 pipeline reference. *(archive, media, archived)*
 - **[[WORLD_MEMORY]]** — world memory project status: archive ingest, desk historical context. *(plan, media, active)*
 

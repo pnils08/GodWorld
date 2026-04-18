@@ -1,6 +1,6 @@
 # Edition Production Pipeline v2
 
-**Redesigned S133. Updated S144 (new pipeline skills).** Skills are the source of truth. This doc is the map.
+**Redesigned S133. Updated S144 (new pipeline skills). S165: added dispatch + interview as alternate publication formats.** Skills are the source of truth. This doc is the map.
 
 ---
 
@@ -73,6 +73,28 @@ Four terminals. Two production logs. One world.
         ├── PDF (generate-edition-pdf.js)
         └── Upload to Drive
 ```
+
+### Alternate-start publication formats (media terminal)
+
+These are their own entry points — not cycle-dependent — but share the media production log and converge on the same post-publish handoff (bay-tribune ingest + world-data update) as `/write-edition`.
+
+```
+/dispatch [scene]  — Immersive scene piece
+    ├── One reporter, one location, one moment
+    ├── No multi-angle, no analysis — the reader is *there*
+    ├── Scene brief (Step 1) → reporter agent → compile → validate
+    ├── User approval on concept + reporter before write
+    └── Publish + intake (same handoff as /write-edition end)
+
+/interview [mode] [subject]  — Interview production
+    ├── Mode 1: voice  — reporter agent interviews a civic voice agent
+    ├── Mode 2: paulson  — reporter agent interviews Mike as GM Paulson
+    ├── Transcript + published article in one run
+    ├── Canon gateway — what gets said becomes world-altering
+    └── Publish + intake (same handoff as /write-edition end)
+```
+
+**Handoff pattern.** Editions, supplementals, dispatches, and interviews are alternate starting points, but they all converge on the same ending: publish to Drive + ingest to bay-tribune + world-data update + errata log. Podcast and edition-print are post-edition add-ons, not alternate starts.
 
 ---
 
@@ -164,6 +186,8 @@ Voices govern. Projects hallucinate operational details within the political fra
 | `/city-hall` | `.claude/skills/city-hall/SKILL.md` |
 | `/write-edition` | `.claude/skills/write-edition/SKILL.md` |
 | `/write-supplemental` | `.claude/skills/write-supplemental/SKILL.md` |
+| `/dispatch` | `.claude/skills/dispatch/SKILL.md` |
+| `/interview` | `.claude/skills/interview/SKILL.md` |
 | `/podcast` | `.claude/skills/podcast/SKILL.md` |
 | `/edition-print` | `.claude/skills/edition-print/SKILL.md` |
 

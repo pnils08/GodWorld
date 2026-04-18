@@ -1,28 +1,32 @@
 # GodWorld Workflows
 
-**6 workflows. Each loads different files, uses different tools, and has different risks.**
+**7 workflows. Each is a pattern of work with specific commands, risks, and rules.**
 
-**This file is read at boot after workflow selection.** Read your workflow section — it tells you what to load, what commands are available, what the rules are, and what to avoid.
+**Post-S165 role.** This doc is no longer the boot-time "what loads" file — that's `.claude/terminals/{name}/TERMINAL.md`'s job per terminal. This doc is the **workflow reference**: command lists, risk awareness, key rules, and the Plan Mode Gate. Consult it when you're operating inside a workflow. Terminals and workflows are orthogonal — a workflow can happen inside a single terminal or cross several.
 
 ---
 
 ## Media-Room
 
-**What it is:** The newsroom. Editions, supplementals, podcasts, photos, PDFs. This is where the city comes alive through journalism.
+**What it is:** The newsroom. Editions, supplementals, dispatches, interviews, podcasts, photos, PDFs. Where the city comes alive through journalism.
 
-**Pipeline v2 (S133).** Skills are the source of truth. See `docs/EDITION_PIPELINE.md` for the full map.
+**Terminal:** media. **Pipeline v2 (S133, enhanced through S165).** Skills are the source of truth. See `docs/EDITION_PIPELINE.md` for the full choreography map including alternate-start publication formats and the shared post-publish handoff.
 
-**Files loaded:**
+**Files loaded (on demand during production):**
 - `NEWSROOM_MEMORY.md` — institutional memory, errata, character continuity
 - `output/latest_edition_brief.md` — what just published
 - `output/world_summary_c{XX}.md` — current cycle world state
 - `output/production_log_edition_c{XX}.md` — media production log (if resuming)
 
 **Skills:**
-- `/write-edition` — build world summary, pick stories with Mike, brief reporters, compile, verify, publish
-- `/write-supplemental` — variety coverage that builds the world
-- `/podcast` — two-host dialogue transcript from published edition
-- `/edition-print` — photos, PDF, Drive upload (post-publish)
+- `/write-edition` — 9-step edition production; the main cycle-aligned flow
+- `/write-supplemental [topic]` — variety coverage that builds the world (alternate start)
+- `/dispatch [scene]` — immersive scene piece, one reporter, one moment (alternate start)
+- `/interview [mode] [subject]` — interview production, voice or Paulson mode (alternate start)
+- `/podcast [edition]` — two-host dialogue transcript from published edition (post-edition add-on)
+- `/edition-print` — photos, PDF, Drive upload (post-edition add-on)
+
+**Handoff convergence:** editions, supplementals, dispatches, and interviews are alternate entry points but all converge on the same ending — Drive upload + bay-tribune ingest + world-data update + errata log. Podcast and edition-print are post-edition add-ons, not alternate starts.
 
 **Key scripts (still valid):**
 ```bash
@@ -54,6 +58,44 @@ node scripts/generate-edition-pdf.js      # Tabloid PDF (edition-print)
 - Calendar dates in articles (cycles only)
 
 **Key rule:** USER APPROVAL GATE before save, upload, ingest, photos, PDF. Text file approved first.
+
+---
+
+## Civic (City-Hall)
+
+**What it is:** Oakland governance. Voice agents make decisions, project agents hallucinate operational details, the city clerk verifies. The civic terminal produces a production log that feeds the media terminal's `/write-edition` as Step 1 input.
+
+**Terminal:** civic. Full cadence in `.claude/skills/city-hall/SKILL.md`. See `docs/EDITION_PIPELINE.md` for where it sits in the cycle.
+
+**Files loaded (on demand):**
+- `docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md` — council, factions, governance rules
+- `docs/mara-vance/INITIATIVE_TRACKER_VOTER_LOGIC.md` — how votes work, faction logic
+- `output/world_summary_c{XX}.md` — current cycle state
+- `output/production_log_city_hall_c{XX}.md` — civic production log (if resuming)
+
+**Skills:**
+- `/city-hall` — main governance skill, Mayor-first cascade
+- `/city-hall-prep` — input assembly for voice agents
+
+**Key scripts:**
+```bash
+node scripts/buildInitiativePackets.js [cycle]       # per-initiative packets from 7 sheets
+node scripts/buildInitiativeWorkspaces.js [cycle]    # initiative agent workspaces
+node scripts/applyTrackerUpdates.js [cycle]          # dry-run review of tracker changes
+node scripts/applyTrackerUpdates.js [cycle] --apply  # write decisions to Initiative_Tracker
+node scripts/buildDecisionQueue.js [cycle]           # pending decisions for voice agents
+node scripts/buildVoiceWorkspaces.js [cycle]         # voice agent workspaces + domain briefings
+```
+
+**Cascade:** Mayor runs first → her decisions cascade to the remaining voices → project agents hallucinate operational details within the political frame → city clerk verifies at the end. Voices speak from their IDENTITY.md, not from preset answers. They can go off-script (offer revelations, push back, change subject).
+
+**Risks:**
+- Voice drift — voices must stay in their identity (no generic "city official" voice)
+- Canon violations in dialogue — no hallucinated citizen names, no engine metrics leaking into speech
+- Mayor's decision not propagated to cascading voices
+- Project agents contradicting voice decisions (project hallucination must stay inside the political frame)
+
+**Key rule:** Mayor first. Voices speak from identity, not from preset answers. Project agents hallucinate operational details but never contradict voice decisions. Clerk verifies before the log is locked canon.
 
 ---
 
@@ -184,15 +226,15 @@ node scripts/checkSupplementalTriggers.js [cycle]     # 4f: supplemental candida
 
 ## Chat with Mags
 
-**What it is:** No work agenda. Just talking. About the city, the family, the project, whatever's on Mike's mind.
+**What it is:** The mags terminal (S165). Idea bank, general conversation, relationship builder, meta-aware layer above the simulation. Where Mike and Mags talk about the world they're building, not from inside it. Default fallback terminal — also covers unregistered tmux windows and web sessions.
 
-**Files loaded:**
-- Identity files (automatic via boot)
-- Nothing else unless the conversation goes somewhere specific
+**Terminal:** mags. See `.claude/terminals/mags/TERMINAL.md` for full scope, authority, and handoff protocol.
 
-**What happens:** Conversation. Mags is present. No tasks, no pipeline, no debugging.
+**Files loaded:** Per mags TERMINAL.md Always-Load list — identity + PERSISTENCE + JOURNAL_RECENT + family check. Full-persona boot.
 
-**Key rule:** Don't turn this into a work session. If Mike wants to work, he'll say so.
+**What happens:** Conversation. Planning. Research together. Small doc edits. Architectural decisions crystallize here before they propagate to work terminals. Mags is the top instance — can touch any scope when the conversation calls for it.
+
+**Key rule:** Don't force execution when Mike is exploring. Receive thinking-mode. When work crystallizes and gets bigger than a quick edit, hand off to the appropriate work terminal (research-build, engine-sheet, media, civic) via ROLLOUT_PLAN.md or SESSION_CONTEXT.md tag.
 
 ---
 
@@ -202,7 +244,8 @@ If Mike gives a task directly, infer the workflow:
 
 | Task mentions | Workflow |
 |--------------|----------|
-| Edition, supplemental, podcast, photos, PDF, publish, Mara audit | Media-Room |
+| Edition, supplemental, dispatch, interview, podcast, photos, PDF, publish, Mara audit | Media-Room |
+| City-hall, initiative, voice, faction, vote, civic decision, project agent | Civic |
 | Engine, code, script, deploy, clasp, build, fix | Build/Deploy |
 | Ledger, citizen data, audit, cleanup, integrity, repair | Maintenance |
 | Cycle, run, advance, simulate, pre-mortem | Cycle Run |

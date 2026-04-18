@@ -99,9 +99,23 @@ Other skills (engine health, writing, city-hall, etc.) belong to the terminals t
 
 ---
 
+## Authority (S165)
+
+Mags is the top instance. The 4 work terminals (research-build, engine-sheet, media, civic) operate in parallel and coordinate through `ROLLOUT_PLAN.md` + push windows. **Mags is above that protocol.**
+
+- Can touch any scope (engine, newsroom, civic, architecture) when conversation needs it
+- Can commit and push without gating on other terminals' state — mags is the instance monitoring whether they're active
+- Can reshape boot, skills, rules, memory — this is the layer where architecture decisions land before they propagate
+
+The parallel-terminal push-coordination rule in MEMORY.md applies to the 4 work terminals, not to mags. When another terminal is explicitly active and has stacked work, mags still coordinates; otherwise mags acts.
+
+Authority is scope, not license. Still follow the conversation — don't execute what wasn't asked for.
+
+---
+
 ## Handoff Protocol
 
-This terminal is upstream of all the work terminals. Ideas and plans crystallize here, then hand off:
+Ideas and plans often crystallize here, then hand off to where execution belongs:
 
 - **Architectural plans → research-build** via `ROLLOUT_PLAN.md` draft or a plan file under `/root/.claude/plans/`
 - **Editorial decisions → media** via `SESSION_CONTEXT.md` note tagged `[mags→media]`

@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 90 — 2026-04-06 (S135)**
+**Last Updated: Edition 91 — 2026-04-19 (S166 backfill of S148 gap)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -30,6 +30,83 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 91 — Cycle Pulse (Grade: A-, Mara pending corrections — shipped 2026-04-09)
+
+12 articles, 0 cut. ~5,540 words. Pipeline v2 first full run. Front page: Jordan Velez's NBA Expansion (Varek + Paulson + Baylight Phase II) — Mike's pick. **Darius Clark arc closed after 7 consecutive editions** — Carmen sidebar confirmed $15K Stab Fund check in week-two batch. Longest open arc in the project, now canon.
+
+**Rhea: INCOMPLETE.** Ran out of tokens searching stale local JSON instead of routing to MCP/sheet. E91 shipped without a full hallucination pass. E92 must route Rhea to MCP from the start.
+
+**Errors Found and Fixed (pre-publication editorial review):**
+1. **Denise Carter typo** (Jordan Velez, NBA front page) — corrected.
+2. **CRC faction-name drift x2** — Jordan (NBA) and Jax (Okoro). Both corrected to "Civic Reform Coalition." Canon lock from S139 not fully propagating to reporters.
+3. **P Slayer scaffolding leak** — draft-mode structural language in final text; stripped.
+4. **Prospect rank error** (sports desk, rotation piece) — corrected per current roster.
+5. **Ramon Brown letter** — construction reference misplaced, corrected to match letter subject.
+6. **Arturo Ramos → Esteban Ramos** — `validateEdition.js` caught 1 real flag among 25 false positives. Fixed. Validator signal-to-noise still ~4%.
+
+**Errors Found and Fixed (Mara post-compile, A- pending → A- final):**
+7. **Carmen Mesa pronouns** — corrected to she/her per ledger. Agent defaulted masculine on new citizen.
+8. **Carmen Mesa age** — corrected per 2041 − BirthYear anchor.
+9. **Danny Horn contract figure** — corrected per current canon.
+10. **Eric Taveras age** — corrected per 2041 anchor. Recurrence: E88 had Taveras spelling drift, E91 had age drift.
+11. **OPP faction name** — confirmed "Oakland Progressive Party" across edition. S139 canon lock reinforced against engine-code "People's Party" residue.
+12. **Mayor Santana gender** — confirmed she/her per S139 lock.
+
+**What Worked:**
+- **Clark arc closed.** Seven editions of Mara flagging this; E90 called "must resolve in E91." Carmen earned it — Okoro authority, week-two batch, $15K, ledger-level detail.
+- **NBA expansion as a coordinated front page** — Varek + Paulson + Baylight Phase II threaded as one story instead of three. Three-name lead worked.
+- **Anthony's Fourteen and One** — Horn pace, Coles emergence, Rivas injury, Mesa callup all in one rotation essay. Best rotation analysis since E86.
+- **P Slayer's Mesa piece** — Beverly Peterson (NEW scout) as the voice under the moment; Dante Turner (NEW retired server) as the emotional anchor. Streak feeling earned without forcing.
+- **Jax Caldera's Okoro consolidation** — unnamed-source accountability piece. Beat is establishing.
+- **Maria Keen's Westside Cafe 50th** — Martin Richards anchors neighborhood texture. Clean.
+
+**Editorial Notes:**
+- Zero nightlife or food-scene coverage (second edition in a row). Engine data exists; desks aren't using it. E92 needs explicit culture-desk scene assignment.
+- Mike Paulson on front page — handled as GM throughout (not owner). Clean cross-simulation bridge.
+- Letters section down to 3 (E90 had 4). All tied to live stories. Maurice Franklin added to ledger post-publish (POP-00801, S139 commit).
+- **Mara narrowed to Result Validity Lane post-E91** — S147 commit `e3bb393`. E92 uses her alongside Rhea (Sourcing) and cycle-review (Reasoning), not as sole auditor.
+
+**Reporter Notes:**
+- **Jordan Velez** — front-page NBA/Phase II. Strong three-name coordination. Two fixes (Denise Carter typo, CRC name).
+- **Anthony** — rotation piece. Prospect rank miss corrected. Horn contract and Taveras age flagged by Mara.
+- **P Slayer** — Mesa callup + streak feeling. Scaffolding stripped in review. Mesa pronoun/age flagged by Mara — reporter did not verify new citizen against ledger.
+- **Carmen Delaine** — OARI pilot data (~680w) + Clark closer + Transit CBA brief. Three-piece civic anchor. Clark resolution earned after 7 editions.
+- **Maria Keen** — Westside Cafe 50th. Clean neighborhood piece, no errata.
+- **Jax Caldera** — Okoro consolidation. CRC name fix. Accountability beat working.
+- **Letters Desk** — 3 letters (Ramon Brown, Carlos Harris, Maurice Franklin). Brown letter needed construction-reference fix.
+
+**Character Continuity — Active Threads (updated from E91):**
+- **Darius Clark** (West Oakland, bakery worker) — ARC CLOSED. $15K, week-two batch, Okoro authority.
+- **Elias Varek** (POP-00789, NEW) — 38, West Oakland, Civic Systems founder. NBA ownership group head. Major new character; expect recurrence on NBA/civic axis.
+- **Tomas Aguilar** (POP-00529, NEW) — Jack London, Freight Logistics at Port. Front-page Baylight jobs voice.
+- **Beverly Peterson** (POP-00119, NEW) — West Oakland, A's scout. Mesa callup thread.
+- **Dante Turner** (POP-00224, NEW) — Downtown, retired server. P Slayer emotional anchor for streak.
+- **Carmen Mesa** (POP-00081) — SP, called up from AA. Pronouns + age locked this edition. Sports canon going forward.
+- **Brenda Okoro** (POP-00037) — Deputy Mayor. Economic Development authority consolidated (Jax piece). Osei permanently replaced (from city-hall C91 log).
+- **Ramon Brown** (POP-00458, NEW letter writer) — Jack London, retired food truck op.
+- **Carlos Harris** (POP-00318, NEW letter writer) — Downtown, emergency management coordinator.
+- **Maurice Franklin** (POP-00801, NEW letter writer) — added to ledger post-publish S139.
+
+**Post-Publish:**
+- Coverage ratings to Edition_Coverage_Ratings: **SPORTS +2, ECONOMIC +3, HOUSING +3, CRIME -2, COMMUNITY 0, CULTURE 0**.
+- Wiki ingest: 33 entities, 0 errors.
+- Bay-tribune text ingest: 2 chunks, 0 errors.
+- Drive: `1e8MX6CaDmatqNZMiXOyeBFJVW2itdos6`.
+- Filing check: 11/20 at close (photos/PDF deferred to `/edition-print`).
+- **NEWSROOM_MEMORY backfilled S166 (2026-04-19).** Gap was S148-S166 (10 days of engine/architecture work, no new edition, no trigger).
+- **errata.jsonl backfilled S166.** Restart point — no backfill attempted for E86-E90 (prose errata lives in sections below; structured jsonl restarts clean at E91).
+
+**Next Gates (E92):**
+- **Route Rhea to MCP from the start.** No repeat of token-exhaustion on local JSON.
+- **Phase 39 reviewer chain first live run** — capability gate + Rhea (Sourcing) + cycle-review (Reasoning 0.5 weight) + Mara (Result Validity) + Final Arbiter. Specified S146-S148, never run against real pre-publish output.
+- **Transit Hub vote November 8** — $230M, CBA delivered, Ashford wanting cost caps. All 9 council members must be placed.
+- **NBA expansion briefing deadline November 15** — Mayor directed Baylight Phase II feasibility report. Civic/business lead.
+- **D2 OARI expansion** — Tran leveraging renewal funding. Coalition politics, not policy.
+- **Youth Pipeline (INIT-007)** — announced, zero implementation. Governance gap.
+- **CRC governance gap** — Crane/Ashford/Chen all at 64 approval, no active storylines in D6/D7/D8.
+
+---
 
 ### Edition 90 — Cycle Pulse (Grade: B, corrected)
 

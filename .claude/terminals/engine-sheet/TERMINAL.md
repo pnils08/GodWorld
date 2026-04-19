@@ -169,13 +169,14 @@ When this terminal discovers something that needs design/research:
 ## Current Engine State
 
 - **Engine version:** v3.3
-- **Cycle:** 90 (October 2041)
-- **Citizens:** 675 (ENGINE 509, GAME 91, CIVIC 46, MEDIA 29)
-- **Columns:** 46 (A-AT). Past Z: Income=col26, EducationLevel=col31, CareerStage=col33
+- **Cycle:** 92 (ran 2026-04-19 02:12 — `Riley_Digest` row for C92 present; Phase2-CityDynamics error recurring but non-blocking — see ENGINE_REPAIR follow-ups)
+- **Citizens:** 761 in Simulation_Ledger (total population 1,200+ across all citizen tabs). See `docs/SIMULATION_LEDGER.md` for tier + mode breakdown.
+- **Columns:** 47 (A-AU). Past Z: Income=col26, EducationLevel=col31, CareerStage=col33, Gender=col47 (AU).
 - **Pipeline:** v2 (S134) — 4 terminals, 9 reporters, bounded traits
 - **Feedback loop (S137b):** 3 intake channels operational — coverage ratings, sports feed (6 texture columns), civic voice sentiment. Initiative ImplementationPhase → neighborhood effects. Approval ratings dynamic. Citizen life events feel the loop.
 - **Last deploy:** Check `git log --oneline -5` and `clasp` status
-- **Open engine items in rollout:** 33.6 (clerk script), 33.16 (world-data ingest), 33.17 (trait profiles), 35.2-35.5 (wiki TLDR index, contradictions, query capture, lint)
+- **Open engine items (post-E92):** See `docs/engine/ENGINE_REPAIR.md` (rows 8, 9, 10, 11, 12, 13, 14) and `docs/engine/ROLLOUT_PLAN.md` "Data & Pipeline" section.
+- **Refresh rule:** Update this block whenever a cycle runs or schema shifts. Stale state here poisons every engine-sheet boot.
 
 ---
 

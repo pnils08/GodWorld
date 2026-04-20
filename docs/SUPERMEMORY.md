@@ -298,6 +298,27 @@ POST /v4/search
 
 **Both work but behave differently.** Use `/v4/search` for searching canon and world data. Use `/v3/search` when you need raw chunk content (e.g., for ingestion verification).
 
+### Aggregate Memories (verified S168)
+
+`/v4/search` accepts `aggregate: true`. When set, the response's first result is a **synthesized record** stitched from multiple source memories, followed by the individual chunks. New fields on aggregated results: `isAggregated: true`, synthetic `id` (`aggregated_*`), `rootMemoryId: null`, `documents[]`, `chunks[]`.
+
+```javascript
+POST /v4/search
+{
+  "q": "Darius Clark",
+  "containerTag": "bay-tribune",
+  "limit": 5,
+  "searchMode": "hybrid",
+  "aggregate": true
+}
+```
+
+**When to use:** Angle briefs, citizen lookups for sift/write-edition, any reporter context where coherent narrative beats raw chunk dumps. Reduces prompt size and cross-chunk contradiction risk.
+
+**When NOT to use:** Verification, debugging, anywhere you need source chunks independently. Use baseline search.
+
+**Verified S168:** `world-data` query "Temescal gentrification" — baseline returned 3 disjoint memories (~0.71 sim); aggregate returned one synthesized record (0.95 sim) weaving Philly Rodriguez's income with Temescal's health-crisis designation. Source: `supermemory.ai/blog/solving-the-precision-recall-tradeoff-search-result-aggregation/`.
+
 ### Search — CLI (PRIMARY — use this)
 
 ```bash
@@ -335,15 +356,17 @@ npx supermemory search "Darius Clark" --tag world-data --json
 **Or use the unified search function (Node.js — runs both in parallel):**
 
 ```javascript
-// Two parallel searches, merged by similarity score, tagged by container
-async function unifiedSearch(q, tags) {
+// Two parallel searches, merged by similarity score, tagged by container.
+// aggregate:true on each call returns one synthesized record per container + source chunks.
+async function unifiedSearch(q, tags, { aggregate = true } = {}) {
   var results = await Promise.all(tags.map(tag =>
-    search(q, tag).then(r => (r.results || []).map(m => ({ ...m, container: tag })))
+    search(q, tag, { aggregate }).then(r => (r.results || []).map(m => ({ ...m, container: tag })))
   ));
   return results.flat().sort((a, b) => (b.similarity || 0) - (a.similarity || 0));
 }
 var results = await unifiedSearch("Darius Clark", ["bay-tribune", "world-data"]);
-// Results tagged [bay-tribune] or [world-data], sorted by relevance
+// Each container returns aggregated + chunk results; all sorted by similarity across containers.
+// See §Aggregate Memories for the /v4/search aggregate:true payload shape.
 ```
 
 **Tested S131:** "Darius Clark" returns bay-tribune narrative (bakery worker, season tickets, Stabilization Fund quotes from E83-E89) interleaved with world-data structured profiles. Under 1 second for both calls combined. This is the core function for Phase 31 angle brief building.
@@ -402,6 +425,23 @@ output/world-state-test.json            # 20 individual citizen test docs (can b
 
 **Large docs take time to index.** Supermemory chunks and embeds each document asynchronously. Small docs (< 5KB) are searchable within seconds. Large docs (20KB+) may take 1-2 minutes. Verify indexing is complete before building angle briefs — run a test search after ingest.
 
+### SDK Wrapper (`@supermemory/tools`) — desk-agent migration path
+
+When desk agents migrate off Claude (see [[MIGRATION_OFF_CLAUDE]]), `@supermemory/tools` handles memory retrieval for any OpenAI-compatible provider — OpenRouter, DeepSeek, etc. — via `baseUrl` override:
+
+```typescript
+import { withSupermemory } from "@supermemory/tools/openai"
+
+const client = withSupermemory(openai, "desk-civic-c92", {
+  baseUrl: "https://openrouter.ai/api/v1",
+  mode: "query"   // "profile" | "query" | "full"
+})
+```
+
+Retrieval-only by default. Container selection via the userId argument. Compose with `lib/memoryFence.js` on retrieved content — the wrapper handles retrieval glue; we keep the fence layer.
+
+**Not adopted today.** Phase 40.7 hook when desk agents go to OpenRouter.
+
 ---
 
 ## Access Matrix
@@ -416,6 +456,8 @@ output/world-state-test.json            # 20 individual citizen test docs (can b
 
 **`world-data` (NEW — S131):** Full Simulation_Ledger ingested as neighborhood-grouped citizen registry documents. 675 citizens across 20 neighborhood docs. Searchable by name, neighborhood, occupation, demographics. Ingested via direct API. See Phase 32 in ROLLOUT_PLAN.md.
 
+**Hermes runtime integration (not adopted — pointer only).** Supermemory ships a native Hermes Agent memory provider: `pip install supermemory` + `hermes config set memory.provider supermemory`, container via `SUPERMEMORY_CONTAINER_TAG=hermes-{terminal}`. Matches the `$HERMES_HOME` profile-isolation pattern in [[plans/BACKLOG]] §S145. Daytona is the convergence point — `@daytona/sdk` installed, `scripts/sandcastlePoC.js` round-trip verified. Wire only if Phase 33.13 or 40.x picks Hermes as a reviewer/desk runtime.
+
 ---
 
 ## Config Files
@@ -426,6 +468,8 @@ output/world-state-test.json            # 20 individual citizen test docs (can b
 | ~~`credentials/supermemory-pn-key.txt`~~ | **Deleted S156 (Phase 40.3 Task 0).** Was a duplicate of the env var with no code readers. |
 | `~/.bashrc` | Shell env export — what PM2 and scripts read. Must `--update-env` on restart. |
 | `/root/.config/godworld/.env` | Dotenv for Node scripts (Phase 40.3 — relocated outside repo working dir) |
+
+**Google Drive connector (capability, not yet wired).** Folder/file-scoped Drive sync into any container via hosted OAuth picker or API. PDFs supported, continuous sync, `documentLimit` parameter. Use case: auto-ingest a research-papers Drive folder into a `research` container so paper content is searchable (today we only search abstracts that made it into `RESEARCH.md`). Setup requires your-side OAuth — not wired until we decide to use it.
 
 ---
 
@@ -451,3 +495,9 @@ output/world-state-test.json            # 20 individual citizen test docs (can b
 |-----|---------|
 | **console.supermemory.ai** | Admin — org management, billing, API keys, scoped key creation |
 | **app.supermemory.ai** | Browse container contents, verify saves, delete bad entries |
+
+---
+
+## Changelog
+
+- 2026-04-19 — S168. Supermemory 2026-04-19 changelog email review. Added §Aggregate Memories (verified live `/v4/search` `aggregate:true` flag against world-data). Added §SDK Wrapper (`@supermemory/tools`) as the desk-migration memory glue path. Added Hermes runtime integration pointer under Access Matrix (not adopted; pre-wired if 33.13 or 40.x picks Hermes). Added Google Drive connector capability note under Config Files. Updated `unifiedSearch()` example to default `aggregate: true` on each parallel container call.

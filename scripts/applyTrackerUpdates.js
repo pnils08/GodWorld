@@ -179,7 +179,7 @@ async function main() {
     'disbursement-active': 0.8, 'dispatch-live': 0.8, 'operational': 0.7,
     'construction-active': 0.6, 'implementation-active': 0.6, 'pilot-active': 0.5,
     'complete': 0.5, 'design-phase': 0.2, 'visioning-complete': 0.1,
-    'vote-scheduled': 0, 'announced': 0, 'visioning': 0,
+    'vote-ready': 0.3, 'vote-scheduled': 0, 'announced': 0, 'visioning': 0,
     'stalled': -0.6, 'blocked': -0.8, 'suspended': -0.7, 'defunded': -1.0
   };
 
@@ -187,7 +187,17 @@ async function main() {
   let sentimentCount = 0;
 
   for (const dec of decisions) {
-    const phase = (dec.trackerUpdates.ImplementationPhase || '').toLowerCase();
+    // Use trackerUpdate phase if present; else fall back to current tracker state.
+    // A decision that reaffirms the current phase (no flip) is still a civic signal.
+    let phase = (dec.trackerUpdates.ImplementationPhase || '').toLowerCase();
+    if (!phase) {
+      const currentRow = trackerRows.find(r =>
+        r.InitiativeID === dec.initiativeId ||
+        r.ID === dec.initiativeId ||
+        r.id === dec.initiativeId
+      );
+      if (currentRow) phase = (currentRow.ImplementationPhase || '').toLowerCase();
+    }
     if (!phase) continue;
 
     let score = PHASE_SENTIMENT[phase];

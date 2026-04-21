@@ -1,6 +1,6 @@
 # Edition Production Pipeline v2
 
-**Redesigned S133. Updated S144 (new pipeline skills). S165: added dispatch + interview as alternate publication formats.** Skills are the source of truth. This doc is the map.
+**Redesigned S133. S144 added sift/post-publish/reviewer chain. S148 shipped Phase 39 reviewer lanes + Final Arbiter. S165 added dispatch/interview alternate starts. S170 refresh to match shipped skills.** Skills are the source of truth. This doc is the map. When they disagree, the skills win.
 
 ---
 
@@ -10,91 +10,160 @@ Four terminals. Two production logs. One world.
 
 | Terminal | Focus | Production Log |
 |----------|-------|---------------|
-| **Civic** | `/city-hall` — voices govern, projects hallucinate | `production_log_city_hall_c{XX}.md` |
-| **Media** | `/write-edition`, `/write-supplemental`, `/podcast`, `/edition-print` | `production_log_edition_c{XX}.md` |
-| **Engine** | Engine code, ledger maintenance, ingest scripts, `clasp push`, trait profile generation | None |
+| **Civic** | `/city-hall-prep` → `/city-hall` — voices govern, projects hallucinate | `production_log_city_hall_c{XX}.md` |
+| **Media** | `/sift` → `/write-edition` → `/post-publish` + `/edition-print`; also `/write-supplemental`, `/dispatch`, `/interview`, `/podcast` | `production_log_edition_c{XX}.md` |
+| **Engine** | Engine code, ledger maintenance, ingest scripts, `clasp push`, trait profile generation. Hosts `/run-cycle`, `/pre-flight`, `/pre-mortem`, `/engine-review`, `/build-world-summary` | None |
 | **Research/Build** | Skills, docs, research, architecture | None |
 
 ---
 
-## Cycle Flow
+## Master Chain
 
 ```
 /run-cycle (orchestrator)
-    │
-    ├── Step 1: /pre-flight — verify manual inputs (sports feed, intakes, tracker, ratings)
-    ├── Step 2: /pre-mortem — engine code health scan
-    ├── Step 3: Mike runs cycle (engine in GAS)
-    ├── Step 4: /engine-review — post-cycle world state diagnostic (Phase 38)
-    └── Step 5: /build-world-summary — reads sheets + engine review → world summary doc
-    │
-    ├── Terminal 1: /city-hall
-    │   ├── Read tracker (3 columns)
-    │   ├── Mike provides pressure
-    │   ├── Mags writes pending decisions
-    │   ├── Mayor runs first → decisions cascade
-    │   ├── Remaining voices parallel
-    │   ├── Project agents hallucinate details
-    │   ├── Apply tracker updates
-    │   └── Output: civic production log (locked canon)
-    │
-    ├── Terminal 2: /write-edition
-    │   ├── Step 0: Production log
-    │   ├── Step 1: Read the world (civic log, Riley_Digest 3 cycles, Sports Feed 3 cycles → world summary → ingest to world-data)
-    │   ├── Step 2: Pick stories together (Mike + Mags)
-    │   ├── Step 3: Verify citizens + write angle briefs
-    │   ├── Step 4: Launch 9 reporter agents
-    │   ├── Step 4.5: Read every article
-    │   ├── Step 5: Compile (story-driven, no fixed sections)
-    │   ├── Step 6: Validation + Rhea (scoped Bash, real data access)
-    │   ├── Step 7: Mara audit (external, her own Supermemory)
-    │   ├── Step 8: Publish (Drive + ingest to bay-tribune)
-    │   └── Step 9: Post-publish
-    │
-    ├── /write-supplemental (same terminal, appends to production log)
-    │   ├── Pick topic
-    │   ├── Design coverage plan
-    │   ├── Write brief (world summary as context)
-    │   ├── Launch reporters
-    │   ├── Compile + validate
-    │   ├── Publish + intake
-    │   └── Reflects current world state
-    │
-    ├── /podcast (same terminal, appends to production log)
-    │   ├── Select format (Morning Edition / Postgame / Debrief)
-    │   ├── Pick hosts
-    │   ├── Launch podcast-desk agent
-    │   ├── Review transcript
-    │   └── Audio render (Phase 30 pending)
-    │
-    └── /edition-print (same terminal, appends to production log)
-        ├── Photos (generate-edition-photos.js)
-        ├── Photo QA (photoQA.js — Haiku Vision)
-        ├── PDF (generate-edition-pdf.js)
-        └── Upload to Drive
+    ├── /pre-flight            — verify manual inputs (sports feed, intakes, tracker, ratings)
+    ├── /pre-mortem            — engine code health scan
+    ├── Mike runs cycle in GAS — engine runs in Google's cloud
+    ├── /engine-review         — Phase 38 auditor → 7-field pattern briefs
+    └── /build-world-summary   — factual world summary, ingest to world-data
+                │
+                ▼
+/city-hall-prep                — reads world summary + engine review + sheets → pending_decisions.md per voice
+                │
+                ▼
+/city-hall                     — voices govern, projects hallucinate, tracker updates (locked canon)
+                │
+                ▼
+/sift                          — editorial planning, the game moment (Mags proposes, Mike picks)
+                │
+                ▼
+/write-edition                 — executes sift output: launch reporters, review, compile, reviewer chain, publish
+                │
+                ├──▶ /edition-print      (parallel — DJ Hartley art direction, photos, PDF, Drive)
+                ├──▶ /post-publish       (feedback loop close — canon, ratings, grading, criteria)
+                └──▶ /podcast            (optional post-edition add-on — audio)
 ```
 
-### Alternate-start publication formats (media terminal)
+**Handoff:** every stage leaves on-disk output the next stage reads. No in-memory handoffs.
 
-These are their own entry points — not cycle-dependent — but share the media production log and converge on the same post-publish handoff (bay-tribune ingest + world-data update) as `/write-edition`.
+---
+
+## /write-edition — Internal Reviewer Chain
+
+Write-edition is not atomic. It launches reporters, then runs a **four-lane review + deterministic arbiter** before publishing. The reviewer "skills" (`/adversarial-review`, `/capability-review`, `/cycle-review`) are not separate pipeline entries — they are **internal sub-steps** invoked from within write-edition.
+
+| Step | Action | Skill / Script | Gate |
+|------|--------|---------------|------|
+| 1 | Launch reporter agents (assignments from sift) | desk agents | — |
+| 2 | Mags reads every article | — | manual |
+| 3 | Compile edition (story-driven, no fixed sections) | — | Mike review |
+| 3.25 | Adversarial review + tier classification + reward hacking scan (parallel) | `/adversarial-review`, `tierClassifier.js`, `rewardHackingScanner.js` | HALT if adversarial recommends it |
+| 3.5 | **Capability review (Phase 39.1)** — deterministic editorial gate | `/capability-review` → `capabilityReviewer.js` | blocking failures halt |
+| 4 | Validation + **Rhea (Sourcing Lane, weight 0.3)** | `validateEdition.js` + `rheaTwoPass.js` → `rheaJsonReport.js` | PASS / REVISE / FAIL |
+| 4.1 | **Cycle-review (Reasoning Lane, weight 0.5)** | `/cycle-review` | PASS / REVISE / FAIL |
+| 5 | **Mara audit (Result Validity Lane, weight 0.2)** — external, claude.ai | Mara on claude.ai → `maraJsonReport.js` | PASS / REVISE / FAIL |
+| 5.5 | **Final Arbiter (Phase 39.7)** — reads the four lane JSONs, applies weights, emits single verdict | `finalArbiter.js` | PROCEED / PROCEED-WITH-NOTES / HALT |
+| 6 | Publish — `saveToDrive.js` + `ingestEdition.js` | — | after Arbiter PROCEED |
+
+**Weights:** reasoning 0.5 + sourcing 0.3 + result-validity 0.2 = 1.0. Capability is a hard gate, not weighted. Weighted score ≥ 0.75 = PROCEED, 0.60–0.75 = PROCEED-WITH-NOTES, below = HALT.
+
+**Tier classification** (Step 3.25) controls downstream review depth:
+- Tier A — front page, Tier-1 citizens, engine ailments, contested civic → all three lanes + capability + two-pass hallucination
+- Tier B — neighborhood features, routine council, sports recaps → Rhea + cycle-review only
+- Tier C — letters, baseline briefs, box-score equivalents → Rhea regex + anomaly flag only
+
+---
+
+## /city-hall — Internal Layers
+
+City-hall is not atomic either. Internal order matters because Mayor's decisions cascade.
+
+| Step | Layer | Agents | Output |
+|------|-------|--------|--------|
+| 0 | — | — | production log created |
+| 1 | — | — | read Initiative_Tracker + Civic_Office_Ledger approvals |
+| 2 | — | Mags writes | `pending_decisions.md` per voice |
+| 3 | **Layer 1: Mayor first** | `civic-office-mayor` | `mayor_c{XX}.json` |
+| — | cascade | — | update each remaining voice's pending_decisions with Mayor's relevant decisions |
+| 4 | **Layer 2: Voices parallel** | police-chief, opp, crc, ind-swing, baylight-authority, district-attorney | `{voice}_c{XX}.json` |
+| 5 | **Layer 3: Project agents** | civic-project-stabilization-fund, oari, health-center, transit-hub | `{project}_c{XX}.json` |
+| 5.5 | — | — | verify all outputs exist |
+| 5.6 | **City Clerk (closer)** | `city-clerk` | `clerk_audit_c{XX}.json` |
+| 6 | — | Mags + Mike | review all decisions, apply tracker updates via `applyTrackerUpdates.js --apply` |
+| 7 | — | Mags | Close city hall — write Media Handoff section to production log (canon-locked) |
+
+**`city-hall-prep` runs before Step 0** as its own skill — reads world summary + engine review + sheets, writes the pending_decisions skeleton per voice.
+
+**City Clerk is NOT a participant** — it's a closer that verifies tracker updates saved, all voice/project outputs landed, production log is complete, media handoff is ready.
+
+---
+
+## /post-publish — Feedback Loop Closer
+
+Edition is published but not canonized and not fed back to the engine. This skill makes the next cycle smarter than the last. **13 steps.**
+
+| # | Step | Key script |
+|---|------|-----------|
+| 1 | Bay-tribune ingest — wiki (primary) + edition text (backup) | `ingestEditionWiki.js`, `ingestEdition.js` |
+| 2 | World-data updates — citizen cards, new businesses, world summary ingest | `buildCitizenCards.js`, `supermemory add` |
+| 3 | Civic wiki — per-official records (script not built yet) | — |
+| 4 | Coverage ratings to Edition_Coverage_Ratings sheet | `rateEditionCoverage.js --apply` |
+| 5 | Citizen + business intake to sheets (not wired — needs engine session) | — |
+| 6 | Grade edition — per-desk + per-reporter | `gradeEdition.js` |
+| 7 | Update grade history (rolling 5-edition window) | `gradeHistory.js` |
+| 8 | Extract exemplars (A-grade articles → desk workspaces) | `extractExemplars.js` |
+| 9 | Update `NEWSROOM_MEMORY.md` — errata, coverage patterns, arcs | — |
+| 10 | Update criteria files (story_evaluation, brief_template, citizen_selection) after `/skill-check write-edition {XX}` | `/skill-check`, `gradeEdition.js` |
+| 11 | Filing + cleanup; restart mags-bot | `postRunFiling.js`, `pm2 restart mags-bot` |
+| 12 | Finalize production log — wiki pattern with inline Supermemory doc IDs | — |
+| 13 | Completion checklist | — |
+
+**Loop closes:** post-publish writes ratings → next `/pre-flight` reads them → engine Phase 2 reflects them → next cycle's world state is shaped by what the newspaper published.
+
+---
+
+## Alternate-Start Publication Formats
+
+Not cycle-dependent. Their own entry points. Share the media production log. Converge on the same publish handoff (bay-tribune + world-data + errata log).
 
 ```
-/dispatch [scene]  — Immersive scene piece
+/write-supplemental [topic]    — supplemental edition on a specific topic
+    ├── Pick topic, design coverage plan
+    ├── Write brief (world summary as context)
+    ├── Launch reporters → compile → validate
+    └── Publish + intake (same handoff as /write-edition end)
+
+/dispatch [scene]              — immersive scene piece
     ├── One reporter, one location, one moment
-    ├── No multi-angle, no analysis — the reader is *there*
-    ├── Scene brief (Step 1) → reporter agent → compile → validate
-    ├── User approval on concept + reporter before write
-    └── Publish + intake (same handoff as /write-edition end)
+    ├── Scene brief → reporter agent → compile → validate
+    └── User approval on concept + reporter before write
 
-/interview [mode] [subject]  — Interview production
-    ├── Mode 1: voice  — reporter agent interviews a civic voice agent
-    ├── Mode 2: paulson  — reporter agent interviews Mike as GM Paulson
+/interview [mode] [subject]    — interview production
+    ├── Mode: voice (reporter interviews a civic voice agent)
+    ├── Mode: paulson (reporter interviews Mike as GM Paulson)
     ├── Transcript + published article in one run
-    ├── Canon gateway — what gets said becomes world-altering
-    └── Publish + intake (same handoff as /write-edition end)
+    └── Canon gateway — what gets said becomes world-altering
 ```
 
-**Handoff pattern.** Editions, supplementals, dispatches, and interviews are alternate starting points, but they all converge on the same ending: publish to Drive + ingest to bay-tribune + world-data update + errata log. Podcast and edition-print are post-edition add-ons, not alternate starts.
+---
+
+## Post-Edition Add-Ons
+
+Not alternate starts. Run AFTER an edition publishes. Append to the media production log.
+
+```
+/podcast                       — audio companion
+    ├── Select format (Morning Edition / Postgame / Debrief)
+    ├── Pick hosts → launch podcast-desk agent
+    ├── Review transcript
+    └── Audio render (Phase 30 pending) + own bay-tribune ingest
+
+/edition-print                 — print assets (DJ Hartley art director)
+    ├── Photos (generate-edition-photos.js)
+    ├── Photo QA (photoQA.js — Haiku Vision)
+    ├── PDF (generate-edition-pdf.js)
+    └── Upload to Drive
+```
 
 ---
 
@@ -102,93 +171,113 @@ These are their own entry points — not cycle-dependent — but share the media
 
 | Input | Source | Used by |
 |-------|--------|---------|
-| Riley_Digest (3 cycles) | Simulation_Narrative sheet | write-edition Step 1 |
-| Oakland_Sports_Feed (3 cycles) | Simulation_Narrative sheet | write-edition Step 1 |
-| Civic production log | city-hall output | write-edition Step 1 |
-| World summary | Built from above, ingested to world-data | All media skills |
+| Riley_Digest (3 cycles) | Simulation_Narrative sheet | `/build-world-summary` |
+| Oakland_Sports_Feed (3 cycles) | Simulation_Narrative sheet | `/build-world-summary` |
+| `engine_audit_c{XX}.json` | Phase 38 auditor (inside `/engine-review`) | `/sift` for storyHandles + capabilityHooks |
+| `baseline_briefs_c{XX}.json` | Phase 38.8 generator | `/sift` Step 2b triage |
+| `engine_anomalies_c{XX}.json` | Phase 38.7 anomaly gate | `/sift`, `/write-edition` Tier C flagging |
+| Civic production log | `/city-hall` Step 7 | `/sift` Step 1 |
+| World summary | `/build-world-summary` output | All media skills |
 | Truesource | `truesource_reference.json` | Citizen/player verification |
 | Bay-tribune Supermemory | Canon archive | Verification, continuity |
-| World-data Supermemory | Citizen state, cycle summaries | Verification, context |
+| World-data Supermemory | Citizen cards, cycle summaries | Verification, context |
+| `NEWSROOM_MEMORY.md` | `/post-publish` Step 9 | `/sift` Step 1 |
 
 ---
 
-## Reporters (9 core + secondaries)
+## Reporters (9 core)
 
-| Reporter | Role | Traits System |
-|----------|------|--------------|
-| Carmen Delaine | Civic lead | 8 bounded reporter traits |
-| P Slayer | Sports opinion | 8 bounded reporter traits |
-| Anthony | Sports beat | 8 bounded reporter traits |
-| Hal Richmond | Sports legacy | 8 bounded reporter traits |
-| Jordan Velez | Business | 8 bounded reporter traits |
-| Maria Keen | Culture | 8 bounded reporter traits |
-| Jax Caldera | Accountability | 8 bounded reporter traits (conditional) |
-| Dr. Lila Mezran | Health | 8 bounded reporter traits (conditional) |
-| Letters | Citizen voices | No traits — citizen voices |
+| Reporter | Section | Voice | Traits |
+|----------|---------|-------|--------|
+| Carmen Delaine | CIVIC AFFAIRS | Civic lead, investigations | 8 bounded |
+| P Slayer | SPORTS / OPINION | Fan voice, emotional, reactive | 8 bounded |
+| Anthony | SPORTS | Beat, stats, analytical | 8 bounded |
+| Hal Richmond | SPORTS / FEATURES | Legacy, dynasty, farewell | 8 bounded |
+| Jordan Velez | BUSINESS | Economics, labor, development | 8 bounded |
+| Maria Keen | CITY LIFE | Culture, neighborhoods, texture | 8 bounded |
+| Jax Caldera | ACCOUNTABILITY | Gaps, contradictions, silence | 8 bounded, conditional |
+| Dr. Lila Mezran | HEALTH | Health events in engine data | 8 bounded, conditional |
+| Letters | LETTERS | Citizen voices, always last | No traits |
 
 Secondary reporters launch only when assigned. Chicago bureau (Grant, Finch) is supplemental-only.
 
 ---
 
-## Civic Voices (11 agents with bounded traits)
+## Civic Voices (12 agents)
 
-| Agent | Role | Traits System |
-|-------|------|--------------|
-| Mayor Santana | Executive authority | 8 bounded civic traits |
-| Chief Montez | Public safety | 8 bounded civic traits |
-| OPP (Rivers) | Progressive caucus | 8 bounded civic traits |
-| CRC (Ashford) | Reform coalition | 8 bounded civic traits |
-| Vega (IND) | Council President | 8 bounded civic traits |
-| Tran (IND) | Swing voter | 8 bounded civic traits |
-| DA Dane | Legal framework | 8 bounded civic traits |
-| Baylight (Ramos) | Stadium project | 8 bounded civic traits |
-| OARI (Tran-Muñoz) | Crisis response | 8 bounded civic traits |
-| Stab Fund (Webb) | Disbursement | 8 bounded civic traits |
-| Health Ctr (Chen-Ramirez) | Facility design | 8 bounded civic traits |
-| Transit Hub (Soria D.) | CBA framework | 8 bounded civic traits |
+| Agent | Role | Traits |
+|-------|------|--------|
+| Mayor Santana | Executive authority | 8 bounded civic |
+| Chief Montez | Public safety | 8 bounded civic |
+| OPP (Rivers) | Progressive caucus | 8 bounded civic |
+| CRC (Ashford) | Reform coalition | 8 bounded civic |
+| Vega (IND) | Council President | 8 bounded civic |
+| Tran (IND) | Swing voter | 8 bounded civic |
+| DA Dane | Legal framework | 8 bounded civic |
+| Baylight (Ramos) | Stadium project | 8 bounded civic |
+| OARI (Tran-Muñoz) | Crisis response | 8 bounded civic |
+| Stab Fund (Webb) | Disbursement | 8 bounded civic |
+| Health Ctr (Chen-Ramirez) | Facility design | 8 bounded civic |
+| Transit Hub (Soria D.) | CBA framework | 8 bounded civic |
 
 Voices govern. Projects hallucinate operational details within the political frame. City Clerk verifies at the end.
 
 ---
 
-## Verification
+## Verification — Four Gates
 
-| Verifier | Access | When |
-|----------|--------|------|
-| Rhea Morgan | Scoped Bash — dashboard API, Supermemory, ledger queries | Step 6, after compile |
-| Mara Vance | Own Supermemory MCP (mara + bay-tribune + world-data) | Step 7, external on claude.ai |
-| validateEdition.js | Programmatic checks | Step 6, before Rhea |
+| Gate | Phase | Access | When |
+|------|-------|--------|------|
+| `validateEdition.js` | pre-39 programmatic | Local | Step 4, before Rhea |
+| Capability review | 39.1, hard gate | `capabilityReviewer.js` | Step 3.5 |
+| Rhea (Sourcing Lane, 0.3) | 39.2 | Scoped Bash — dashboard API, Supermemory, ledger | Step 4 |
+| Cycle-review (Reasoning Lane, 0.5) | 39.4 | Edition text + briefs | Step 4.1 |
+| Mara (Result Validity Lane, 0.2) | 39.5, external | Own Supermemory MCP (mara + bay-tribune + world-data) on claude.ai | Step 5 |
+| Final Arbiter | 39.7 | Reads the four lane JSONs | Step 5.5 |
+
+Lane schema contract: `docs/engine/REVIEWER_LANE_SCHEMA.md` — four fields (process / outcome / controllableFailures / uncontrollableFailures) every reviewer JSON must satisfy.
 
 ---
 
 ## Key Principles
 
 - **World summary is the foundation.** Built from Riley_Digest + Sports Feed + civic log. Ingested to world-data. Everything reads from it.
-- **Mike and Mags pick stories together.** Mags proposes, Mike picks. No one decides alone.
+- **Mike and Mags pick stories together.** Mags proposes, Mike picks in `/sift`. No one decides alone.
 - **Every name verified.** Ledger, truesource, bay-tribune, world-data. No exceptions.
 - **Story-driven layout.** No fixed sections. If there's no business story, there's no business section.
-- **No calendar dates.** Cycles only.
-- **Agents get identity + assignment.** No 170K char data dumps. Bounded input.
+- **Cycles only.** Edition numbers FORBIDDEN in article text. "Cycle" allowed and encouraged (per `.claude/rules/newsroom.md`, S146 reversal).
+- **Ages: `2041 − BirthYear`.** Every citizen age uses the 2041 anchor. Don't trust `Age` in derived docs.
+- **Agents get identity + assignment.** No 170K char data dumps. Bounded input. Memory Fence (Layer 2) + Context Scan (Layer 4) before every brief handoff.
 - **One production log per terminal.** Civic has its own. Media skills all append to one.
+- **City-hall is mandatory — never skippable.** No alternate path. Voices govern every cycle (when decisions are due); the edition reports FROM city-hall's output.
 - **The world runs on cycles.** The newspaper covers what the engine produced. The engine doesn't simulate sports — Mike does.
 
 ---
 
 ## Skill Files (authoritative)
 
-| Skill | Path |
-|-------|------|
-| `/run-cycle` | `.claude/skills/run-cycle/SKILL.md` |
-| `/pre-flight` | `.claude/skills/pre-flight/SKILL.md` |
-| `/pre-mortem` | `.claude/skills/pre-mortem/SKILL.md` |
-| `/engine-review` | `.claude/skills/engine-review/SKILL.md` |
-| `/build-world-summary` | `.claude/skills/build-world-summary/SKILL.md` |
-| `/city-hall` | `.claude/skills/city-hall/SKILL.md` |
-| `/write-edition` | `.claude/skills/write-edition/SKILL.md` |
-| `/write-supplemental` | `.claude/skills/write-supplemental/SKILL.md` |
-| `/dispatch` | `.claude/skills/dispatch/SKILL.md` |
-| `/interview` | `.claude/skills/interview/SKILL.md` |
-| `/podcast` | `.claude/skills/podcast/SKILL.md` |
-| `/edition-print` | `.claude/skills/edition-print/SKILL.md` |
+| Skill | Path | Role |
+|-------|------|------|
+| `/run-cycle` | `.claude/skills/run-cycle/SKILL.md` | Orchestrator |
+| `/pre-flight` | `.claude/skills/pre-flight/SKILL.md` | Engine gate 1 |
+| `/pre-mortem` | `.claude/skills/pre-mortem/SKILL.md` | Engine gate 2 |
+| `/engine-review` | `.claude/skills/engine-review/SKILL.md` | Post-cycle auditor |
+| `/build-world-summary` | `.claude/skills/build-world-summary/SKILL.md` | Factual summary |
+| `/city-hall-prep` | `.claude/skills/city-hall-prep/SKILL.md` | Pending decisions builder |
+| `/city-hall` | `.claude/skills/city-hall/SKILL.md` | Civic government |
+| `/sift` | `.claude/skills/sift/SKILL.md` | Editorial planning |
+| `/write-edition` | `.claude/skills/write-edition/SKILL.md` | Edition execution |
+| `/adversarial-review` | `.claude/skills/adversarial-review/SKILL.md` | Internal Step 3.25 |
+| `/capability-review` | `.claude/skills/capability-review/SKILL.md` | Internal Step 3.5 (hard gate) |
+| `/cycle-review` | `.claude/skills/cycle-review/SKILL.md` | Internal Step 4.1 (reasoning lane) |
+| `/style-pass` | `.claude/skills/style-pass/SKILL.md` | On-demand per-article voice review |
+| `/save-to-bay-tribune` | `.claude/skills/save-to-bay-tribune/SKILL.md` | Publish handoff |
+| `/post-publish` | `.claude/skills/post-publish/SKILL.md` | Feedback loop close |
+| `/skill-check` | `.claude/skills/skill-check/SKILL.md` | Skill-vs-assertion grader |
+| `/write-supplemental` | `.claude/skills/write-supplemental/SKILL.md` | Alternate start |
+| `/dispatch` | `.claude/skills/dispatch/SKILL.md` | Alternate start |
+| `/interview` | `.claude/skills/interview/SKILL.md` | Alternate start |
+| `/podcast` | `.claude/skills/podcast/SKILL.md` | Post-edition add-on |
+| `/edition-print` | `.claude/skills/edition-print/SKILL.md` | Post-edition add-on |
 
 **The skills are the pipeline.** This doc is the map. When they disagree, the skill wins.

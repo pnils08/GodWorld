@@ -2,7 +2,7 @@
 
 **Read this when selecting citizens for stories in /sift Step 4. Updated after each cycle based on what worked.**
 
-Last Updated: S144 (starter version — refine after C92)
+Last Updated: S170 (C92)
 
 ---
 
@@ -12,14 +12,19 @@ Citizens are persistent people with canon histories. They have jobs, neighborhoo
 
 ## How to Find Citizens
 
-1. **MCP first** — `lookup_citizen(name)` returns profile + canon history from world-data and bay-tribune
-2. **A's players — use `get_roster("as")`** — reads truesource for player-specific data: contracts, quirks, positions, birth years, stats. `lookup_citizen` doesn't return roster-level detail. Use get_roster for any A's player (GAME-mode citizen), lookup_citizen for everyone else.
-3. **Sheets API backup** — service account reads Simulation_Ledger directly. Gender column now exists on the ledger.
-4. **Canon search** — `search_canon(name)` finds what the Tribune has published about them
+**Canon hierarchy (S170 — locked after C92 Civis/Civic confusion).** Sheets are primary canon. Everything else is derivative.
+
+1. **Sheets are primary.** Simulation_Ledger is canon for citizens. Business_Ledger is canon for businesses. Civic_Office_Ledger is canon for officials. Initiative_Tracker is canon for programs. When these disagree with anything else, the sheet wins.
+2. **`lookup_citizen(name)` and `search_world(...)` are the primary derivative layer** and what desks should use in practice — they read the sheets. Fast enough, structured enough, token-cheap. Use these.
+3. **Bay-tribune (`search_canon`) is the storyline canon** — what the Tribune has *published* about someone. Treat it as authoritative for character history, published quotes, prior arcs. But if an edition claim disagrees with the ledger (wrong age, wrong neighborhood), the sheet wins and the edition has drifted.
+4. **World-data cards and civic-voice JSONs are derivatives** that can drift from the sheet. Do not trust them alone for a canon fact. Verify against the sheet when a claim matters.
+5. **A's players — `get_roster("as")` is mandatory.** Reads truesource for contracts, quirks, positions, birth years, stats. `lookup_citizen` doesn't return roster-level detail. Any sports story involving A's players uses this.
 
 Searching 20-30 citizens per edition is normal. Don't ration lookups.
 
-**Rule:** For any sports story involving A's players, `get_roster("as")` is mandatory. This applies to sift, write-edition, write-supplemental, dispatch, interview — any skill touching sports citizens.
+**Editorial-fix rule (S170).** When an article needs a citizen swap during review (wrong age, wrong neighborhood, professional-athlete misuse, name-reuse flag), run a FRESH `search_world` query with the specific role/neighborhood/age constraints. Do NOT reach back into the already-verified-pool for a replacement — that pool was filtered for other stories and will produce another "same 10 citizens every article" outcome. Fresh query, fresh voice.
+
+**Professional athletes are not general-citizen voices.** A's players (and any pro athlete) only appear in SPORTS coverage or in stories where the athlete's role is the point. Do not use Vladimir Gonzalez, Darrin Davis, etc. as a Fruitvale bus driver / West Oakland resident / general citizen quote in civic / business / accountability / city-life pieces. C92 caught one: Vladimir Gonzalez was used as a Fruitvale transit-hub voice in Carmen's Transit piece. Swapped to Delia Fuentes (school bus driver, Fruitvale, canon E86). Rule added.
 
 ## What's Canon vs What's Agent Color
 
@@ -113,3 +118,4 @@ After each edition:
 _Updated by `/post-publish` Step 10 after each edition. What changed and why._
 
 - S144: starter version created. Name collision warning added. No cycle data yet.
+- S170 (C92): canon hierarchy locked — sheets are primary, everything else derivative. Added editorial-fix rule (fresh `search_world` query, never reach into verified pool) after Ernesto Quintero age conflict triggered Marcus Wright reuse which Mike flagged as "same 10 citizens every article." Added professional-athletes-are-not-general-citizens rule after Vladimir Gonzalez was used as a Fruitvale bus driver / transit voice in Carmen's Transit piece; swapped to Delia Fuentes. Fresh voices introduced this cycle: Marcus Carter POP-00319, Nikolai Fuentes POP-00717, DeShawn Mitchell POP-00708, Lorenzo Nguyen POP-00314, Gloria Hutchins POP-00727. Citizen drift flags sent to engine-repair: Darrin Davis world-data card says "Oakland native" but canon is Ohio; Varek age inconsistency between briefs and canon; Civis Systems / Civic Systems confusion from voice JSONs — sheet (Business_Ledger BIZ-00052) is Civis Systems.

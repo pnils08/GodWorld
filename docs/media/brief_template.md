@@ -2,7 +2,7 @@
 
 **Follow this when writing angle briefs in /sift Step 5. Updated after each cycle based on what produced good articles.**
 
-Last Updated: S144 (starter version — refine after C92)
+Last Updated: S170 (C92)
 
 ---
 
@@ -62,6 +62,21 @@ Target: 300-500 words per brief. Enough to write from. Not enough to get lost in
 - **Invented citizens.** Names not verified via MCP. The reporter writes about someone who doesn't exist.
 - **No exclusions.** Without "what not to cover," two reporters write overlapping stories.
 - **Gender missing.** Reporter invents or assumes. Include gender for every citizen.
+- **Structural pre-prescription on civic pieces.** Briefs that stack official voice quotes + canon context + "use these quotes" produce officials-quoting-officials copy with zero non-official citizen voice. The reporter executes what's in front of them. If the brief is all official material, the article is all official material. C92 OARI coalition and Youth Apprenticeship pieces failed exactly this way (skill-check A6 fail, S170). See "Scene-First Brief Design" below.
+
+## Scene-First Brief Design (civic/policy pieces)
+
+Added S170 after C92. On civic or policy stories, do NOT open the brief with "Here are five official quotes, write a piece weaving them together." That prescription structurally forces officials-quoting-officials copy.
+
+Instead:
+
+1. **Open with a scene or a citizen.** Name a specific person in a specific place feeling the policy. "Patricia Nolan walks past the Temescal & 47th corner every morning" — THAT is the opening direction.
+2. **Then widen to the decision or stakes.** Now the reporter knows the story is about a human first, a policy second.
+3. **Officials come in as context, not as the story.** "Santana announced X; here is what that means for Nolan and Carter."
+4. **Require at least one non-official citizen quote per civic/policy piece.** Beverly Hayes Standard — someone feeling the policy, not just officials making it.
+5. **Trust reporter voice.** Do not include every voice-JSON quote. Pick the 1–2 that matter and let the reporter frame the rest from their beat.
+
+The front-page Mayor's Day piece by Carmen (C92) worked because the rewritten brief opened on Nolan, not on five Mayor decisions. The first brief draft was a civic-affairs roll-call — the rewrite made it journalism.
 
 ---
 
@@ -86,3 +101,4 @@ After each edition:
 _Updated by `/post-publish` Step 10 after each edition. What changed and why._
 
 - S144: starter version created. No cycle data yet.
+- S170 (C92): added "Scene-First Brief Design" section + a 6th bad-brief pattern ("structural pre-prescription on civic pieces"). Evidence: skill-check A6 fail — OARI and Youth Apprenticeship pieces had zero non-official citizen voice because briefs stacked official quotes + canon + directives. Front-page Carmen piece succeeded only after the first brief was rewritten scene-first on Patricia Nolan. Rule going forward: civic briefs open with a citizen/scene, not with official material.

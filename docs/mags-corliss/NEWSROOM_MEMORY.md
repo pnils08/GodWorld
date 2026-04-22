@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 91 — 2026-04-19 (S166 backfill of S148 gap)**
+**Last Updated: Edition 92 — 2026-04-22 (S170)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -30,6 +30,86 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 92 — Cycle Pulse (Grade: B — EIC B-floor override on rubber-stamp auto-A, published 2026-04-22)
+
+12 articles + letters. Shipped to bay-tribune (2 chunks, 0 errors) and Drive edition folder. Coverage ratings written to Edition_Coverage_Ratings sheet. Front-page rewritten mid-cycle after first draft landed as civic-affairs roll-call.
+
+**Grade note:** Auto-grader (`gradeEdition.js`) returned A across all desks and reporters — rubber-stamp pattern matching Mara's same failure mode (E91 errata and forward). EIC override applied: B floor across all desks and reporters, master `_note` on file flagging "Real critical review not conducted this cycle; treat as provisional." Mara was removed from the project this cycle. Auto-grading without critical review is not a grade — it's shipping-confirmation dressed in letters.
+
+**Structural pipeline failures caught this cycle:**
+
+1. **Compile reinvented instead of template consulted.** `editions/CYCLE_PULSE_TEMPLATE.md` (v1.5, C88) specifies section order, deck-line format, byline format, `[OPINION]` tags, required meta sections (STORYLINES UPDATED, CITIZEN USAGE LOG, CONTINUITY NOTES), delimiter conventions (`====` for header/meta, `----` for content), and parser-compatible section headers. I wrote a compile script from scratch. Resulting errors: EDITOR'S DESK ordered before FRONT PAGE (basic newspaper structure), deck lines missing on every article, no OPINION tags on P Slayer/Hal features, meta sections in wrong format, parser-mismatch requiring multiple recompiles. **Next cycle: read CYCLE_PULSE_TEMPLATE.md before writing any compile code.**
+
+2. **Six articles shipped without bylines.** Jordan Velez (both), Jax Caldera, Maria Keen, P Slayer, letters desk all returned from agents without `**By {Name} | Bay Tribune {Desk}**` lines. My compile extractor looked for the pattern, didn't find it, emitted the body without author. Reader doesn't know who wrote half the paper. **Next cycle: desk agent prompts must require the byline format explicitly; compile must fail-loud not fail-silent on missing bylines.**
+
+3. **Brief over-prescription produces voiceless civic copy.** Briefs this cycle gave reporters voice-JSON quotes + canon + "write this with these quotes." Output was dutiful information-copy, not voiced journalism. Carmen's first front page was five subheads on five Mayor decisions — a taxonomy because that's what the brief structure asked for. Rewrote brief scene-first (Patricia Nolan walking past the Temescal corner, pull back to the other four decisions from there) and she produced a real piece. **Next cycle: briefs should give angle and scene orientation, not structural pre-prescription. Trust reporters to find the story.**
+
+4. **Rhea pre-loaded toward PASS on first run; cycle-review self-written.** Rhea's first-cycle prompt included "validateEdition flags are known 96% FP, don't re-flag these." That's editor-manipulating-reviewer-toward-pass, not independent review. Cycle-review JSON (Reasoning Lane) was written by me directly, not run as an independent check. Both redone on second pass after Mike caught it. Rhea's re-run flagged a canon-continuity finding (Civis vs Civic) that turned out to be her reading stale voice-JSONs instead of the sheet. **Next cycle: reviewer prompts must not pre-commit to verdicts; cycle-review as a skill needs to produce its own JSON via independent reading, not EIC assertion.**
+
+5. **Civis Systems canon drift — agent-output trusted instead of sheet.** Spent significant cycle time on "Civis Systems" (E91 published spelling, world-data canon_correction) vs "Civic Systems" (C92 civic-voice JSONs, world_summary, production_log). Business_Ledger sheet resolved it in one row: **BIZ-00052 = Civis Systems**. Sheet is canon. Every civic-voice JSON that says "Civic Systems" is drift. **Foundational rule reaffirmed and enforced going forward: sheets are primary canon. All citizen names query Simulation_Ledger. All businesses query Business_Ledger. World-data container and civic-voice JSONs are derivatives, not canon. Bay-tribune holds storylines (narrative canon), not citizen specifics.**
+
+**New voices introduced (5):**
+- **Marcus Carter** (POP-00319, 54, Temescal, hair stylist) — Mezran Temescal piece
+- **Nikolai Fuentes** (POP-00717, 58, Uptown, street photographer) — Maria First Friday
+- **DeShawn Mitchell** (POP-00708, 50, Uptown, graffiti restoration artist) — Maria First Friday
+- **Lorenzo Nguyen** (POP-00314, 58, Jack London, crane operator Port of Oakland) — Jordan Baylight
+- **Gloria Hutchins** (POP-00727, 68, West Oakland, retired school bus driver) — letters
+
+**Returning voices:**
+- **Patricia Nolan** (POP-00729, 55, Temescal, retired teacher) — front page + Temescal piece. E85 "patience is turning into being ignored" quote carried forward. NEWSROOM_MEMORY previously had her as "home health aide" — **canon corrected: retired teacher per Simulation_Ledger.**
+- **Delia Fuentes** (44, Fruitvale, school bus driver) — Transit piece. Returning on-topic voice from E86.
+
+**Citizen drift flagged for engine-repair:**
+- **POP-00021 Darrin Davis** — world-data card says "Oakland native"; Mike's canon is **Ohio**, living in Laurel. Anthony's Davis Game article corrected in print ("born and raised in Ohio, now a Laurel resident"). Citizen card needs updating.
+- **Elias Varek age drift** — world_summary_c92 line 40 says "31, West Oakland"; production_log_city_hall_c92 line 60 says "38, West Oakland." Simulation_Ledger/world-data = 38 (Birth 2003). Production-log source drift.
+- **Civis Systems drift** — C92 civic-voice JSONs, world_summary_c92, production_log_city_hall_c92 all say "Civic Systems." Canon (Business_Ledger BIZ-00052, E91 published, world-data E91 Mara correction) = "Civis Systems."
+
+**Section counts:**
+- FRONT PAGE: 1 (Carmen Mayor's Day umbrella)
+- CIVIC: 4 (Temescal, Transit, OARI, Youth Apprenticeship) — **too dense; future editions: split into sub-sections or reduce**
+- BUSINESS: 2 (Baylight dashboard+RFP, Stab Fund)
+- CULTURE: 1 (First Friday)
+- SPORTS: 3 (Davis Game, Taveras, Keane farewell)
+- LETTERS: 4 (Rodriguez/Green/Walker/Hutchins)
+- CHICAGO: 0 (bureau killed)
+- ACCOUNTABILITY: folded into CIVIC (Jax Youth Apprenticeship piece)
+- QUICK TAKES, WIRE/SIGNALS: 0 (not generated)
+
+**Active arcs going into C93:**
+- **Temescal Health Center**: Mayor-directed C93 architect contract (Perkins&Will Oakland), C94 site acquisition (Temescal Ave & 47th), C95 HCAI filing. Alameda Health System operator. Watch whether C93 architect contract lands.
+- **Transit Hub Phase II vote**: scheduled for C93. Soria Dominguez 7-of-8 CBA verified; 8th (Oversight Committee) closes pre-vote. Vega YES-if-CBA, rejected Ashford's cost-cap amendment. Watch the amendment floor fight and the main vote.
+- **OARI coalition math**: Rivers filing D2 motion. Tran condition: named implementation cycle. DA Dane's three legal items + quarterly prosecutorial audit proposal. Framework names C95 as decision point. Watch motion text for C94 vs C95 naming.
+- **Youth Apprenticeship Pipeline**: Jax's question stands — v1.0 spec (C73) with $12.5M financing including $2M A's Ownership Group; Baylight piling 28% underway; pipeline launch status not confirmed publicly. Watch for Workforce Development Board progress report.
+- **Baylight Phase II**: RFP opens C93 open-competitive (Civis Systems eligible, no executed contract). Comprehensive feasibility scope per Mayor's directive. Phase II council briefing by C94.
+- **Stab Fund signature queue**: 191 approved applications queued for exec-auth signatures. C95 clearance achievable if signature pace holds.
+- **Osei portfolio permanently reassigned to Okoro** (resolved this cycle).
+
+**Sports records**:
+- A's 18-1, W15. Darrin Davis Game: 4h/3hr/9rbi vs Cubs.
+- Taveras: .333 / 9 HR (MLB lead) / 16 RBI / .768 SLG through 19 games.
+- Keane: .353 / 2 HR / 17 AB in farewell platoon role.
+
+**Coverage gaps worth flagging:**
+- **Community/Education**: COMMUNITY rating -1 this cycle (thin). No schools, no teachers, no students.
+- **Chicago**: 0 coverage (bureau killed).
+- **No Quick Takes or Wire/Signals** this cycle — template sections skipped.
+- **Faith**: 5 events in Riley_Digest, 0 edition coverage (baseline briefs only per editorial decision Q4=C).
+
+**Process notes for C93:**
+- Use `editions/CYCLE_PULSE_TEMPLATE.md` as compile spec FROM THE START.
+- Reviewer chain: Rhea independent prompt (no pre-commitment), cycle-review as skill-produced JSON, Mara DELETED from project (lane weight collapses, Final Arbiter needs re-spec for 3-lane).
+- Brief design: scene-first, person-first, trust reporter voice, avoid structural pre-prescription.
+- Canon verification: sheets (`queryLedger citizen`, Business_Ledger direct) ONLY for citizen/business specifics. Bay-tribune for storyline continuity. World-data and civic-voice JSONs are derivative.
+- Auto-grader pattern is broken (rubber-stamp A) — treat grades as provisional pending real critical review until the grader is fixed.
+
+**E92 Photo Pipeline — drags the publication (Mike feedback 2026-04-22):**
+- Front page photo (Temescal corner, Mayor's Day umbrella) came back as blight / poverty street-doc from FLUX. Per Mike: "this isn't a ghetto Oakland simulation." Root cause: DJ IDENTITY.md had no guard against the real-world Oakland visual prior; FLUX defaulted to training data.
+- Broader problem Mike named: **"zero creativity and drags down the publication, it's not visualizing all I'm doing."** Two photos per edition (front + culture), naive prompts, visual output doesn't reflect the Baylight development / Temescal Health Center construction / dynasty ballpark / Mayor's Day civic event / thriving neighborhood context the simulation is actually producing.
+- Fix this session: added "Canon: This Is Prosperity-Era Oakland" section to `.claude/agents/dj-hartley/IDENTITY.md` — blocks poverty shorthand, requires specific-address specific-block prompting, requires visualizing what's being built.
+- **Not fixed (deferred):** photo pipeline rebuild. Needs: (1) more than 2 photos per edition, (2) DJ producing real art direction from the articles (not the generator synthesizing its own thesis), (3) prompts that name specific locations/buildings/scenes from the edition, (4) photoQA.js actually returning real vision output (currently placeholder strings), (5) `generate-edition-pdf.js` date header pulled from edition meta not hard-coded "October 2041." Added to print-pipeline backlog in production log.
+
+---
 
 ### Edition 91 — Cycle Pulse (Grade: A-, Mara pending corrections — shipped 2026-04-09)
 

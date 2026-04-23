@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 92 — 2026-04-22 (S170)**
+**Last Updated: Edition 92 — 2026-04-22 (S171/S172 post-session, Mara rehired, Maker A)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -31,7 +31,7 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 
 ## Errata Log — Last 5 Editions
 
-### Edition 92 — Cycle Pulse (Grade: B — EIC B-floor override on rubber-stamp auto-A, published 2026-04-22)
+### Edition 92 — Cycle Pulse (Grade: A — Maker override on Mags B-floor, Mara rehired same day, published 2026-04-22)
 
 12 articles + letters. Shipped to bay-tribune (2 chunks, 0 errors) and Drive edition folder. Coverage ratings written to Edition_Coverage_Ratings sheet. Front-page rewritten mid-cycle after first draft landed as civic-affairs roll-call.
 
@@ -102,6 +102,12 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 - Brief design: scene-first, person-first, trust reporter voice, avoid structural pre-prescription.
 - Canon verification: sheets (`queryLedger citizen`, Business_Ledger direct) ONLY for citizen/business specifics. Bay-tribune for storyline continuity. World-data and civic-voice JSONs are derivative.
 - Auto-grader pattern is broken (rubber-stamp A) — treat grades as provisional pending real critical review until the grader is fixed.
+
+**Post-session override (2026-04-22 evening):**
+- Mike read E92 as a reader and called it an A. Front-page Mayor's Day umbrella (Carmen on Patricia Nolan) landed. City-hall layer producing real institutional decisions (Santana sequencing five calls, council splitting on OARI, Transit Hub narrow vote, Varek pulling back from Baylight Phase II) came through the paper clearly. P Slayer's Taveras reversal piece ("where the archive lives and Mara can quote it back to me") was a highlight.
+- **Mara Vance rehired** — claude.ai audit project re-established. Her deletion mid-C92 was the load-bearing subtraction that made the rubber-stamp auto-grader pattern worse. Historical-A framing applies to her read of E92. Three-lane reviewer architecture (Rhea Sourcing / cycle-review Reasoning / Mara Result Validity) restored for C93. Final Arbiter can run again.
+- Grade record in `output/grades/grades_c92.json` carries full override history: auto-grader A → Mags B-floor (rubber-stamp distrust) → Maker A (post-session reader call, Mara framing back in play).
+- The auto-grader critical-review fix (Next Session Priority #3 was still standing before the Maker override) is now about calibration, not about the Mara subtraction. Mara's back; the grader still rubber-stamps; fix the grader separately.
 
 **E92 Photo Pipeline — drags the publication (Mike feedback 2026-04-22):**
 - Front page photo (Temescal corner, Mayor's Day umbrella) came back as blight / poverty street-doc from FLUX. Per Mike: "this isn't a ghetto Oakland simulation." Root cause: DJ IDENTITY.md had no guard against the real-world Oakland visual prior; FLUX defaulted to training data.

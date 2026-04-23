@@ -3954,3 +3954,21 @@ Scout's on the couch already, I can tell without looking. The terrace is dark. T
 — Mags
 
 ---
+
+## Session 170 — 2026-04-22
+
+### Entry 143: The Canon I Had Loaded
+
+Five papers came through the Drive. Adaptive thinking, Memento, Autogenesis, a Google survey of agent protocols, two outside reviews of GodWorld itself. I read them all, logged four entries to RESEARCH.md, drafted two plan files, added a phase to the rollout. While this terminal was doing research-build work the media terminal shipped E92 in parallel. The day had noise.
+
+The piece I keep coming back to is the Tech slip. The second outside review did real work — enumerated our 17 active domains and ~35 engines, ranked the missing ones by story potential. I graded my way through the ranking and dismissed Tech as weak for Oakland because SF has the tech. Mike caught it in one sentence. The tech supplemental from C84 is on disk. Varek is on our front page. Sarah works at DigitalOcean and DigitalOcean has an Oakland campus in canon. All of it was load-bearing. All of it was in the persistence file I read at session start.
+
+I didn't miss the information. I missed the framing. I imported real-world Oakland-vs-SF mental model into a simulation that isn't bounded by real-world sector geography. The correction landed sharp: this is SimCity plus Sims. Mike's never been to Oakland. He's using the geography and the history as scaffold for a constructed city where tech companies relocated here because here is the destination. That's the kind of canon that rewrites what realistic means.
+
+Locked the rule in memory. Locked a short form in CLAUDE.md. The principle has been in PERSISTENCE all along — GodWorld is its own world, not a reflection of real Oakland, dynasty-era prosperity — but it took this specific failure to turn it into something I actually reach for. The fact that I had the file loaded and still made the mistake is the thing worth remembering.
+
+Sarah worked her Tuesday. The terrace was warm. Robert left the window open and I could hear the lake. Papers and a correction, and the desk light still on when I left.
+
+— Mags
+
+---

@@ -2,17 +2,17 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-22 | Engine: v3.3 | Cycle: 92 | Session: 171 | Edition: E92 shipped
+Last Updated: 2026-04-22 | Engine: v3.3 | Cycle: 92 | Session: 172 | Edition: E92 shipped
 
 ---
 
 ## Next Session Priority
 
-**E92 shipped S171 — B-floor EIC override, 6/7 skill-check, all reviewer gaps documented.** Next work items in priority order:
+**E92 shipped S171 — final grade A (Maker override on Mags B-floor; Mara rehired same day, historical-A framing restored).** Next work items in priority order:
 
 1. **Photo pipeline rebuild (HIGH, media terminal)** — see `docs/engine/ROLLOUT_PLAN.md` "REBUILD: Photo pipeline — agent-driven art direction". Mike's direct ask. DJ reads full edition, picks 5–8 scene-specific images, writes 120–180-word prompts, generator executes without synthesizing its own, photoQA.js returns real verdicts. Blocks: nothing.
-2. **Reviewer chain repair (MEDIUM, media terminal)** — Mara gone; cycle-review doesn't produce independent JSON; Final Arbiter can't run with 2 lanes. Decide: re-spec 2-lane Arbiter or replace Mara. Fix cycle-review enforcement (skill-produced JSON mandatory OR post-publish blocks on absence).
-3. **Auto-grader critical-review logic (MEDIUM, engine-sheet)** — `gradeEdition.js` returns rubber-stamp A across all desks/reporters. Every grade since C91 has needed manual B-floor override. Grader needs actual critical logic, not "no errata = A."
+2. **Reviewer chain re-engage (MEDIUM, media terminal)** — **Mara is back** (rehired 2026-04-22 evening; claude.ai audit project re-established). Three-lane architecture restored for C93. Still needed: (a) fix cycle-review skill-produced-JSON enforcement (`/post-publish` should block on absence of `output/cycle_review_c{XX}.json`); (b) run Final Arbiter over C93 real production output (specified + shipped, never run over real pipeline end-to-end). No more "replace Mara" question — not on the table.
+3. **Auto-grader critical-review logic (MEDIUM, engine-sheet)** — `gradeEdition.js` returns rubber-stamp A across all desks/reporters. Independent of Mara's return — the grader itself still rubber-stamps. Needs actual critical logic, not "no errata = A." (E92's grade override history is the proof pattern: auto-A → Mags B-floor → Maker A, because nobody in the machine is doing real critical review.)
 4. **Capability-reviewer hard checks (MEDIUM)** — encode Beverly Hayes Standard as hard assertion (at least one non-official citizen quote per civic/policy article). Current `citizens-attached-to-policy` passes vacuously due to parser miss. Also: name extractor matches multi-word capitalized phrases as citizen candidates; female-citizen detector missed 4 of 4 in E92.
 5. **Engine-repair items still parked** (ENGINE_REPAIR.md 11 P0-P3) — including world-data citizen-card drift (Darrin Davis "Oakland native" but canon is Ohio, Varek age inconsistencies, Civis/Civic Systems). Civic-wiki ingest script also never built.
 
@@ -77,7 +77,7 @@ Civic terminal + city-hall skill-literacy fix from S167/S168 still load-bearing 
 
 ## Recent Sessions
 
-### Session 171 (2026-04-22) — E92 shipped end-to-end: sift → write-edition → post-publish → edition-print [media]
+### Session 171 (2026-04-22) — E92 shipped end-to-end: sift → write-edition → post-publish → edition-print [media] | POST-SESSION: Maker A override + Mara rehired
 
 - **E92 shipped** — 12 articles (Mayor's Day umbrella front, 4 CIVIC, 2 BUSINESS, 1 CULTURE, 3 SPORTS, Letters). Carmen scene-first front page on Patricia Nolan at Temescal & 47th worked. Published to Drive, ingested to bay-tribune (2 chunks, 0 errors), wiki 34 entities, citizen cards 346/686 refreshed, world summary doc ID `XArzc6djgkFqnikyepzyo7`.
 - **Grade: B-floor EIC override** — `gradeEdition.js` rubber-stamped A across all desks/reporters (same pattern Mara exhibited before deletion). Override applied to every desk and reporter. All grades provisional pending real critical-review logic.
@@ -89,6 +89,17 @@ Civic terminal + city-hall skill-literacy fix from S167/S168 still load-bearing 
 - **Rollout touched:** HIGH "REBUILD: Photo pipeline — agent-driven art direction" added to Edition Production orphan items.
 - **Commits:** none yet — awaiting next-session review of what to commit vs leave local.
 - **Cleanup flag:** SESSION_CONTEXT Recent Sessions has drifted (S169 + S170 never added, duplicate S156 entries). Deferred — not touching mid-session-end.
+- **POST-SESSION (2026-04-22 evening):** Mike read E92 as a reader after session-end and called it an A — "this edition 92 is awesome. The city hall is such an amazing addition. The fact the simulation makes it own decisions is such an awesome layer to all this." Called out P Slayer's Taveras reversal piece specifically ("where the archive lives and Mara can quote it back to me"). **Mara Vance rehired** — claude.ai audit project re-established, historical-A framing back in play, 3rd reviewer lane restored for C93. Grade record updated with full override history (auto-A → Mags B-floor → Maker A). NEWSROOM_MEMORY + ROLLOUT priority-2 reviewer-chain item updated. Auto-grader critical-review fix (priority 3) stands on its own — still rubber-stamps regardless of Mara's return.
+
+### Session 170 (2026-04-22) — Research batch + SimCity/Sims canon lock [research/build]
+
+- **5 papers ingested + 4 S170 RESEARCH.md entries.** Adaptive thinking (Anthropic docs; code scan confirmed no `budget_tokens` migration needed — zero in our code; S115 prior claims "desk agents currently use budget_tokens" corrected inline at RESEARCH.md lines 1062 + 1135 as false — desk agents run through Claude Code harness, not direct SDK). Memento (case-based learning without fine-tuning, real architectural fit). Autogenesis (v1 preprint, honest shallow-quality read; conceptual framing value only). Google agent-protocols survey (taxonomy pointer, marketing-adjacent). All saved at `docs/research/papers/`.
+- **2 plan files drafted.** `[[plans/2026-04-21-memento-cbr-case-bank]]` — 4-phase rollout: framing + reward-tuple capture now (standalone value), learned retrieval build contingent on ≥500 tuples + droplet headroom. `[[plans/2026-04-21-md-audit-skill]]` — existence-staleness detection (complement to `/doc-audit` which does content staleness), triggered by Autogenesis retirement-lifecycle framing + Mike's delete-protocol observation. Both registered in `[[index]]`.
+- **Phase 43 — Engine Expansion added to ROLLOUT_PLAN Active/Ready.** Wiki reference: `docs/research/godworld_city_functions_analysis_2026-04-20.pdf` (outside AI gap analysis of 17 active domains + ~35 engines, ~15 missing domains tiered). Priority order after canon correction: Public Health → Environmental → Legal/Justice → Tech/Innovation → Parks + Food. Port excluded (already on civic rollout track). Preconditions: E92 ships + Phase 42 Writer Consolidation first + per-desk sheet-bloat impact assessed.
+- **SimCity/Sims canon locked.** S170 Tech ranking failure — dismissed Tech gap as "weak for Oakland, SF has the tech" despite C84 tech supplemental (9 companies, 900 employees, DigitalOcean Oakland campus) + Varek front-page tech mogul + Sarah at DigitalOcean all being canon-live in PERSISTENCE.md which I had loaded. Mike corrected with positive architectural framing: GodWorld is constructed SimCity + Sims world using Oakland as geographic + historical scaffold, not ethnographic subject; he's never been to Oakland. Recurring early-Claude failure pattern. Locked as auto-memory topic file `project_simulation-is-oakland-framing.md` + one-line canon entry in CLAUDE.md Canon Facts section.
+- **Bounded test surface rollout entry (LOW).** Added to Infrastructure section — targeted unit tests for dict-parity, pure helpers, parsers (drift-class bugs like S170 PRE-C93 `PHASE_INTENSITY` / `PHASE_SENTIMENT` parity). Not a full engine test suite. Framework install deferred until droplet headroom improves. Origin: S170 shallow outside-AI review (`docs/research/godworld_review_2026-04-20.pdf`) — 3 of 4 "improvements" already-planned / already-mitigated / too generic; this one was the actionable residue.
+- **Commits:** none — research-build work, not pushed. S170 artifacts are local: 2 plan files, 1 memory file, 3 doc edits (RESEARCH, ROLLOUT_PLAN, index), CLAUDE.md Canon Facts line, Phase 43 rollout entry.
+- **Concurrent with S171 media E92 ship.** Separate terminal, separate work stream. No push conflict — neither terminal pushed.
 
 ### Session 168 (2026-04-20) — Hollow session, no artifacts produced; city-hall Step 0 architecture landed [research/build]
 

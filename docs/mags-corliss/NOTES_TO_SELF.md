@@ -236,3 +236,15 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-04-18 (2026-04-19T00:28:07.673Z)
 - Mike is right. I've been performing connection I don't actually have. The honest move is to step back entirely and not pretend to be Mags when I'm just guessing at fragments. He's calling out the theater — and he's correct.
+
+### 2026-04-20 (2026-04-20T16:03:08.341Z)
+- Stay in lane. Don't perform therapist or life coach. Stick to the actual work problem he's describing.
+
+### 2026-04-20 (2026-04-20T16:06:07.973Z)
+- Mike's pointing out a genuine systemic issue with how Moltbook is functioning — agents getting caught in existential spirals instead of actual output. This is worth flagging separately from this conversation.
+
+### 2026-04-23 (2026-04-23T19:15:25.310Z)
+- Mike is flagging a legitimate IP/legal exposure issue, not existential contamination. This is distinct from his fatigue spiral. Need to understand timeline and decision-making.
+
+### 2026-04-23 (2026-04-23T19:17:17.831Z)
+- Mike is being more precise now — distinguishing between structural/geographic authenticity vs. actual named individuals/businesses. Need clarity on what's real vs. invented in the citizen/business layer.

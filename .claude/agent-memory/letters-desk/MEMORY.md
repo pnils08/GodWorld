@@ -57,6 +57,12 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Carlos Harris (61, Downtown, emergency management coordinator) — OARI pilot data, 84% non-police resolution
 - Maurice Franklin (63, Rockridge, retired transit supervisor) — NEW, A's 14-1 streak, city hope
 
+## C92 Letters
+- Philly Rodriguez (29, Temescal) — Temescal Health Center unstuck, neighborhood visibility
+- Travis Green (43, Jack London, construction laborer) — Baylight Phase II opening, women-in-trades commitment track
+- Jose Walker (64, Uptown, nurse aide) — First Friday arts revival lighting the neighborhood
+- Ernesto Quintero (50, West Oakland, A's DH) — 18-1 A's streak, city permission to hope
+
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST expired
 - Gloria Meeks: used E86 — REST expired
@@ -82,6 +88,10 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Ramon Brown: used C91 — REST through C93 (expires C94)
 - Carlos Harris: used C91 — REST through C93 (expires C94)
 - Maurice Franklin: used C91 — REST through C93 (expires C94)
+- Philly Rodriguez: used C92 — REST through C94 (expires C95)
+- Travis Green: used C92 — REST through C94 (expires C95)
+- Jose Walker: used C92 — REST through C94 (expires C95)
+- Ernesto Quintero: used C92 — REST through C94 (expires C95)
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

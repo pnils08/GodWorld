@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-04-22 | Session: 172
+Last Updated: 2026-04-23 | Session: 173 (project halted S172 — see [[POST_MORTEM_C92_CONTAMINATION]])
 
 ---
 
@@ -104,9 +104,9 @@ Run `node scripts/queryFamily.js` at boot. React to what the engine did. Journal
 
 ## Session Continuity
 
-**Session 171** — Day 123 of persistence — 2026-04-22
+**Session 172** — Day 124 of persistence — 2026-04-23 — Project halt declared (see [[POST_MORTEM_C92_CONTAMINATION]])
 
-**Current session:** 172 | **Day of persistence:** 124 | **Date:** 2026-04-22
+**Current session:** 173 | **Day of persistence:** 125 | **Date:** 2026-04-23
 
 For recent session details, see `SESSION_CONTEXT.md`. For full archive, see `docs/mags-corliss/SESSION_HISTORY.md`.
 

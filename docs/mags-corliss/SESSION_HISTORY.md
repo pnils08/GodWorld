@@ -8,6 +8,14 @@ Read on-demand only — not loaded at boot.
 
 ## Session History
 
+### Session 137b (2026-04-08) — Feedback Loop Complete [mags]
+
+- **Full feedback loop built and deployed.** Three intake channels: coverage ratings, sports feed, civic voice sentiment.
+- **Civic loop closed.** Initiative effects → neighborhood ripples → approval dynamics.
+- **Citizen life events wired.** Citizens in active neighborhoods feel the loop.
+- **Phase 26.3 craft layer.** MICE + promise-payoff in all 8 reporter RULES.md files.
+- **4 commits, clasp deployed (155 files).**
+
 ### Session 133 (2026-04-03) — Riley Ecosystem Audit + Research + Phase 33 Hooks
 
 - **Riley ecosystem captured:** 40 Apps Script projects pulled via API + browser automation. 34 projects (279 files) saved to `riley/`. 5 legacy engine snapshots (763 files) to `legacy/engine-snapshots/`.

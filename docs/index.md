@@ -34,6 +34,7 @@ pointers:
 - **[[index]]** — this file. The catalog. *(reference, architecture, active)*
 
 ### Vision & architecture
+- **[[POST_MORTEM_C92_CONTAMINATION]]** — S172 project halt. Fourth-wall contamination across bay-tribune / world-data / super-memory / editions / filesystem. 20+ real-world Oakland institutional references in E92 alone. Sanitization scope exceeded available drive; project halted at Cycle 92. Includes structural issues, session 172 EIC failures, and resumption path if ever revisited. *(reference, historical, halted)*
 - **[[PRODUCT_VISION]]** — civic lighter, programs deploy like SimCity, desks see the whole city, sections porous. The product north star. *(concept, architecture, active)*
 - **[[PRODUCT_VISION_GRILLME]]** — decisions and open questions from the S119 grill-me interrogation of the product vision. *(concept, architecture, active)*
 - **[[ARCHITECTURE_VISION]]** — Jarvis at /root, persistent sessions, the technical north star Phase 41 builds toward. *(concept, architecture, active)*
@@ -179,12 +180,16 @@ pointers:
 - **[[plans/2026-04-16-phase-40-3-credential-audit]]** — Phase 40.3 credential isolation audit: full inventory of env secrets + on-disk credentials, reachability analysis across 5 injection surfaces + 27 sub-agents, 8-task relocation plan. Research-build drafted S156; engine/sheet picks up when priority rises. *(plan, security, active)*
 - **[[plans/mara-reference-files]]** — Mara reference files plan. COMPLETE S105. *(plan, civic, archived)*
 - **[[plans/2026-04-17-briefing-bundle-trim]]** — trim per-desk c-cycle briefing bundle: `base_context.json` shared load, always-empty packet fields deleted, `interviewCandidates` 520→20 via relevance scoring, briefing versioning added via post-publish. Addresses recs 1/2/3/7 from the S156 bloat audit. Research-build drafted S156; media terminal executes. *(plan, media, active)*
+- **[[plans/2026-04-21-memento-cbr-case-bank]]** — 4-phase rollout for Memento-style case-based retrieval: concept framing + reward-tuple capture now (standalone value), learned-retrieval build contingent on ≥500 accumulated tuples and droplet headroom. Research basis: arXiv:2508.16153v2, `docs/research/papers/Memento_fine_tuning.pdf`. *(plan, architecture, research, active)*
+- **[[plans/2026-04-21-md-audit-skill]]** — `/md-audit` skill: existence-staleness detection for MDs (complementary to `/doc-audit` which does content staleness). Three-signal detector, four-bucket classifier, human-gated archival (never auto-delete). Operationalizes S156 no-isolated-MD rule as a scheduled check. *(plan, architecture, active)*
 
 ---
 
 ## `docs/research/` — research artifacts and audits
 
 - **[[research/briefing_bloat_audit_2026-04-17]]** — c91 snapshot: `interviewCandidates` 1.2% hit rate, `base_context.json` identical across 6 desks, `summary.json` duplicates `packet.json`, archive-context stale for 4/6 desks. Flags briefing-versioning gap as blocker for retro audits. *(reference, media, research, active)*
+- **`docs/research/godworld_review_2026-04-20.pdf`** — outside AI surface review (S170). Shallow — missed reviewer chain, engine auditor, terminal architecture, memory isolation, security work. Three of four "improvements" already-planned / already-mitigated / too generic. One actionable residue (bounded test surface) filed as LOW rollout item. Referenced from ROLLOUT_PLAN Infrastructure → "ADD: Bounded test surface." *(reference, research, active)*
+- **`docs/research/godworld_city_functions_analysis_2026-04-20.pdf`** — outside AI gap analysis (S170). 17 active domains + ~35 engines enumerated, ~15 missing domains tiered by story potential. Wiki reference for Phase 43 — Engine Expansion (see ROLLOUT_PLAN §Phase Status → Active/Ready). Priority order revised after S170 canon corrections: (1) Public Health, (2) Environmental, (3) Legal/Justice, (4) Tech/Innovation, (5) Parks & Rec + Food. Port excluded — already on civic rollout track. *(reference, research, active)*
 - **`docs/research/papers/`** — source PDFs (raw layer). Referenced by `sources:` frontmatter in agent-owned docs. Not indexed individually.
 
 ---
@@ -222,6 +227,7 @@ pointers:
 
 ## Changelog
 
+- 2026-04-21 (S170, research-build) — Registered [[plans/2026-04-21-memento-cbr-case-bank]] (Memento paper) and [[plans/2026-04-21-md-audit-skill]] (existence-staleness audit, triggered by Autogenesis paper + Mike's retirement-protocol observation). Phase 1 of the Memento plan adds `docs/concepts/case-based-reasoning.md` which registers separately when created. Also registered two outside AI review PDFs: `docs/research/godworld_review_2026-04-20.pdf` (shallow surface review; actionable residue = bounded test surface LOW rollout item) and `docs/research/godworld_city_functions_analysis_2026-04-20.pdf` (gap analysis; serves as wiki reference for Phase 43 — Engine Expansion).
 - 2026-04-14 — Initial catalog (Phase 41.2, S146). 86 active docs across 7 folders. Companion to [[SCHEMA]]. Will fold [[engine/DOCUMENTATION_LEDGER]] in over time.
 - 2026-04-16 — Added [[plans/TEMPLATE]] (S152). Plan file contract for the rollout split.
 - 2026-04-17 — Phase 41.6 S156: added `schemas/` folder section catalogueing `SCHEMA_HEADERS.md`. Generator `utilities/exportSchemaHeaders.js` now emits frontmatter so the wiki shape survives regeneration.

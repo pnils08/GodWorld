@@ -1061,6 +1061,8 @@ Without interleaved thinking, Claude reasons once at the start, then goes tool-c
 
 **Connection to GodWorld:** Our desk agents (civic, sports, chicago) currently use `budget_tokens` extended thinking. Migrating to adaptive thinking gives them interleaved reasoning for free — they'll think between tool calls instead of only at the start. This should improve quality on complex multi-step articles. The `display: "omitted"` option could speed up production runs.
 
+→ **Corrected S170 (2026-04-21):** The claim "desk agents currently use `budget_tokens` extended thinking" is false. Desk agents run through the Claude Code harness, not direct SDK calls. Codebase scan confirmed zero `budget_tokens` in any code file and zero `thinking` config in any SDK-calling script. No migration work on our side. See the "S170 — Adaptive Thinking Doc + Scan Correction" entry below.
+
 ### S115 — Skill Authoring Best Practices: Official Guide (2026-03-24)
 
 **Source:** [platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices)
@@ -1133,6 +1135,8 @@ Without interleaved thinking, Claude reasons once at the start, then goes tool-c
 **Actionable findings — things to steal:**
 
 1. **Adaptive thinking migration.** Opus 4.6 uses `thinking: {type: "adaptive"}` instead of explicit `budget_tokens`. The model dynamically decides when and how much to think based on query complexity + `effort` parameter. Anthropic says "adaptive thinking reliably drives better performance than extended thinking" in internal evals. We currently use extended thinking with budget_tokens in civic/sports/chicago desk prompts. Should migrate to adaptive + effort setting.
+
+   → **Corrected S170 (2026-04-21):** The claim "we currently use extended thinking with budget_tokens in civic/sports/chicago desk prompts" is false. Desk agent prompts don't set thinking config — they run through the Claude Code harness, not direct SDK. See the "S170 — Adaptive Thinking Doc + Scan Correction" entry below.
 
 2. **De-escalate agent prompts for 4.6.** Critical finding: "Tools that undertriggered in previous models are likely to trigger appropriately now. Instructions like 'If in doubt, use [tool]' will cause overtriggering." And: "Where you might have said 'CRITICAL: You MUST use this tool when...', you can use more normal prompting like 'Use this tool when...'" Our SKILL.md and RULES.md files were written for Sonnet 3.7/4.0 — they likely have aggressive language that now causes overtriggering or overthinking.
 
@@ -1843,3 +1847,186 @@ Income: ${Income}. {MaritalStatus}, {NumChildren} children. Tier {Tier}.
 4. The plugin supports switching providers by design. That was always the escape hatch for this exact problem.
 
 **Docs updated:** MEMORY.md, SESSION_CONTEXT.md, STACK.md, OPERATIONS.md.
+
+---
+
+## S170 — Adaptive Thinking Doc + Scan Correction (2026-04-21)
+
+**Source:** Anthropic docs, "Adaptive thinking" page (saved locally at `docs/research/papers/Adaptive_Thinking.pdf`, 17 pages).
+
+**Trigger:** Mike shared the doc. Followed with a codebase scan (`grep budget_tokens`, `grep thinking`, `grep @anthropic-ai/sdk`) to confirm whether the migration urgency flagged at S115 was real.
+
+**What the S115 entries got wrong:** The 2026-03-24 entries at lines 1044 and 1117 asserted that *"our desk agents (civic, sports, chicago) currently use `budget_tokens` extended thinking"* and flagged migration as *"urgent, not optional."* Both false. Desk agents never used direct SDK calls — they've always run through the Claude Code harness, which owns the thinking config. Scan this session found:
+- Zero `budget_tokens` in any code file. All hits were in RESEARCH.md itself.
+- Zero `thinking` config in any of the 7 scripts that import `@anthropic-ai/sdk`.
+- No migration work exists on our side. The research entries logged a problem that didn't exist.
+
+**Current state of adaptive thinking (April 2026):**
+
+- **Opus 4.7 — the model I run on — has adaptive as the ONLY supported mode.** Manual `thinking: {type: "enabled", budget_tokens: N}` returns 400 on 4.7. Default mode on Claude Mythos Preview (auto-applies when `thinking` is unset).
+- **Opus 4.6 / Sonnet 4.6:** manual mode still functional but deprecated. Removal scheduled for a future model release (exact release not specified in the doc). Migration path: `thinking: {type: "adaptive"}` with `effort` parameter.
+- **`effort` replaces `budget_tokens` as the control knob:** `max` / `xhigh` (4.7 only) / `high` (default) / `medium` / `low`. You tell the model *how hard to think*, not *how many tokens to spend*.
+- **Interleaved thinking is auto-on in adaptive mode** on Mythos, Opus 4.7, Opus 4.6, Sonnet 4.6. On Opus 4.6 manual mode it's flat unavailable — adaptive is the only path to get thinking between tool calls on 4.6.
+- **Claim from Anthropic:** adaptive reliably beats fixed budgets on bimodal tasks and long-horizon agentic workflows. That's our whole agentic surface (reviewer chain, Mara, desk work, city-hall cascade).
+
+**Display default flipped on 4.7:**
+- `display: "omitted"` is now default on Opus 4.7 + Mythos. Opus 4.6 and earlier Claude 4 models defaulted to `"summarized"`.
+- `signature` still carries the encrypted full thinking chain for multi-turn continuity. The `thinking` field is empty unless you opt in with `display: "summarized"`.
+- Omitted mode cuts latency, NOT cost — billed for full thinking tokens generated regardless of what's visible.
+
+**Cache behavior:**
+- Consecutive requests using the same adaptive mode preserve cache breakpoints.
+- **Switching** between adaptive / enabled / disabled breaks *message* cache breakpoints. System prompts + tool definitions remain cached.
+- If a workflow alternates modes across turns, cache misses cost more than mode flexibility saves.
+
+**What GodWorld looks like after the scan:**
+- **7 scripts import the Anthropic SDK directly. None pass thinking config.** All use harness defaults.
+  - `scripts/mags-discord-bot.js` — Haiku 4.5 (`claude-haiku-4-5-20251001`)
+  - `scripts/photoQA.js` — Haiku 4.5
+  - `scripts/rheaTwoPass.js` — Haiku 4.5 (via `MODEL` const at line 40)
+  - `scripts/discord-reflection.js` — Sonnet 4.6
+  - `scripts/moltbook-heartbeat.js` — Sonnet 4.6
+  - `scripts/daily-reflection.js` — Sonnet 4.6
+  - `openclaw-skills/media-generator/index.js` — no thinking config
+- Desk agents, civic agents, reviewer chain (Rhea / cycle-review / Mara / Final Arbiter), scheduled remote agents → all run through the Claude Code harness. Anthropic owns the migration path.
+- Gemini autodream (S141): unaffected (not Anthropic).
+- DeepSeek desks (S154): unaffected (OpenRouter).
+
+**Implication: no migration work needed.** If we later add explicit thinking config anywhere, follow the new API shape: `{type: "adaptive"}` + `effort: "high|medium|low"`. Do not use `{type: "enabled", budget_tokens: N}` for new code.
+
+**Lessons:**
+1. Research notes that say "we currently do X" should be grep-verified before being logged as open migration items. S115 flagged an urgent migration without checking whether our code actually called the API path in question.
+2. The "what S[past] got wrong" correction pattern (established S141) is the right shape. Preserve the historical claim, date the correction, explain the actual state.
+3. The scan cost near-zero (four grep passes). The unknown it resolved was open for a month. Cheap diagnostic scans beat hypothetical migration anxiety.
+
+**Docs updated:** RESEARCH.md (this entry + inline corrections on lines 1062 and 1135).
+
+---
+
+## S170 — Autogenesis Self-Evolving Agent Protocol (2026-04-21)
+
+**Source:** Wentao Zhang (NTU Singapore), arXiv:2604.15034v1, posted 2026-04-16. Saved at `docs/research/papers/Self_evolving.pdf`.
+
+**Trigger:** Mike shared the paper same session as the Memento paper. Research-build terminal scan.
+
+**What it proposes:** A two-layer protocol spec, not a library or product. **RSPL (Resource Substrate Protocol Layer)** treats prompts, agents, tools, environments, and memory as protocol-registered resources with version strings, lifecycle operations, and standardized interfaces — positioned as complementary to MCP (which handles *invocation*) by adding *lifecycle + version lineage + state mutation* that MCP lacks. **SEPL (Self-Evolution Protocol Layer)** specifies a 5-operator closed loop — Reflect → Select → Improve → Evaluate → Commit — where each update is versioned, gated by safety invariants and performance monotonicity, and rolled back on failure.
+
+**Reported results:** GAIA Test 89.04% average (beats ToolOrchestra 87.38%), with +33.3% on Level 3 (hardest tier). GPQA-Diamond / AIME gains correlated with backbone-model headroom (weak models gain most; strong models saturate). LeetCode 100-problem test: +10-27% pass-rate across five languages.
+
+**Honest quality read:** This is weaker than Memento as research basis for a rollout decision.
+
+- **Single author, single institution, 5 days old, no code release.** Memento has a GitHub repo and 8 months of community exposure; Autogenesis is an unreviewed v1 preprint.
+- **References section has 7 entries.** For a protocol paper claiming novelty against MCP/A2A, minimal engagement with adjacent literature is a red flag.
+- **Cherry-picked metrics.** AIME25 GPT-4o "+100% improvement" = 6.67% → 13.34% = 2 more problems out of 30. Sample size doesn't support the claim.
+- **No ablation against informal reflect-commit loops.** AutoGen, LangGraph, and most serious agent frameworks already do some version of reflect-and-keep-if-better. The paper doesn't isolate what the *protocol* adds over existing practice.
+
+**The genuine point the paper names that applies to us:** *MCP/A2A don't manage lifecycle, version lineage, or state mutation of evolvable entities.* Correct observation, real gap in our stack.
+
+- Our skill files (SKILL.md, RULES.md, IDENTITY.md) evolve every session. Version lineage exists only in git commits, which aren't resource versions.
+- Our agent prompts (desks, civic voices, reviewers) change constantly. No eval-tied rollback — we revert via `git revert`, not via "skill version N caused edition C91 grade drop, roll to version N-1."
+- Our tools (MCP server, scripts) change. Same problem.
+
+Git gives history; it doesn't give evaluation-gated evolution or monotonicity checks.
+
+**Downstream: the retirement side of lifecycle.** In conversation with Mike, he pointed out that versioning-forward only makes sense if there's also a retirement-backward discipline — MDs that go stale should have a delete protocol. Autogenesis doesn't address retirement (it focuses on evolving what's active), but the same lifecycle framing applies: resources need both commit gates and sunset rules. Operationalized in `[[plans/2026-04-21-md-audit-skill]]` (staleness detection + archival, not auto-delete).
+
+**Lessons:**
+1. Not every paper is a Memento. No code release + single author + 5 days old = conceptual framing, not a build-ready reference. Log the vocabulary and the named gap; don't generate a rollout plan from a paper this thin.
+2. The RSPL/SEPL vocabulary may be useful later if we ever build a version-lineage system for skills/agents. Keep it as durable mental model, not as adoption target.
+3. The retirement-side insight (Mike's contribution, not the paper's) is the actionable thing that surfaced. Versioning-forward + retirement-backward are two halves of the same lifecycle.
+
+**Docs updated:** RESEARCH.md (this entry). Related build: `[[plans/2026-04-21-md-audit-skill]]` (drafted same session).
+
+---
+
+## S170 — Developer's Guide to AI Agent Protocols (taxonomy, not research) (2026-04-21)
+
+**Source:** Shubham Saboo (Senior AI PM, Google) + Kristopher Overholt (DevRel Engineer, Google), "Developer's Guide to AI Agent Protocols," Google for Developers blog, published 2026-03-18. Saved at `docs/research/papers/AI_Agent_Protocols.pdf`.
+
+**Trigger:** Mike shared it in the S170 research batch alongside Memento + Autogenesis.
+
+**What it is:** A tutorial, not a paper. No evaluation, no tradeoffs, no comparison — Google devrel walks through 6 agent protocols in a restaurant supply-chain demo using Google's Agent Development Kit (ADK). Marketing-adjacent: 4 of 6 protocols are Google's, 1 is Anthropic's (MCP), 1 has mixed attribution (AG-UI). Logging here as a **taxonomy pointer**, not as research findings.
+
+**The 6 protocols, mapped to GodWorld:**
+
+| Protocol | Owner | Solves | GodWorld status |
+|---|---|---|---|
+| **MCP** — Model Context Protocol | Anthropic | Agent ↔ tools/data. Standard discovery pattern. | **In use** — `godworld` MCP server, 10 tools (S137b). |
+| **A2A** — Agent2Agent Protocol | Google | Agent ↔ agent. Agent Card at `/.well-known/agent-card.json` + `a2a-sdk` client. | Not used. Only relevant if agents ever run on separate services. Today all run under Claude Code harness. |
+| **UCP** — Universal Commerce Protocol | Google | Shopping lifecycle + typed checkout schemas. | Not relevant — no commerce. |
+| **AP2** — Agent Payments Protocol | Google | Cryptographic payment mandates (`IntentMandate` → `PaymentMandate` → `PaymentReceipt`). **v0.1**, types as separate package. | Not relevant — no payments. Also too early. |
+| **A2UI** — Agent-to-User Interface Protocol | Google | Agent composes UI from 18 declarative JSON primitives. Client-side renderer (Lit / Flutter / Angular). Separates structure from data. | Theoretically relevant for dashboard, but our dashboard is static React — no agent composing UI at runtime. Not a current gap. |
+| **AG-UI** — Agent-User Interaction Protocol | mixed (Google promotes) | Typed SSE streaming of agent events (`TEXT_MESSAGE_CONTENT`, `TOOL_CALL_START`, `RUN_FINISHED`). `ag_ui_adk` wrapper. | Potentially relevant if we ever stream agent output to dashboard live. Today edition pipeline is batch. |
+
+**Durable value for us (what justifies logging):**
+
+1. **Layer taxonomy.** Tools (MCP) / agents (A2A) / commerce (UCP) / payments (AP2) / UI composition (A2UI) / UI streaming (AG-UI). Even protocols we don't adopt name the seams any agent system has. Our stack has seams in the same places — we fill them with bespoke code rather than standard protocols.
+
+2. **A2A Agent Card pattern is the adoption target if we ever distribute agents.** ROLLOUT_PLAN Spine step 10 (Sandcastle+Daytona) put hosted reviewer lanes on the agenda. If that ever ships and expands to other agents, the A2A pattern — publish capabilities at `/.well-known/agent-card.json`, discover via URL — is the right shape. Our `IDENTITY.md` + `RULES.md` + `SKILL.md` triad is the local-file analog; A2A is the network version. Don't invent our own protocol if this case arrives.
+
+3. **Cross-reference to Autogenesis (S170 same-batch entry).** Autogenesis's critique that "MCP/A2A handle invocation, not lifecycle" now has context — this post confirms the critique without disputing. Every protocol in the table is a connectivity spec. None track resource versions, none gate updates on evaluation, none rollback. Our version-lineage gap is not a GodWorld-only gap; it's across the whole protocol landscape.
+
+**Quality caveat:** This source is Google developer marketing. 4 of 6 protocols are Google's own (A2A, UCP, AP2, A2UI). Treat the existence claims as reliable (these protocols do exist, SDKs do exist) and the "you should adopt these" subtext as promotional. Only MCP has ecosystem adoption beyond a single vendor as of April 2026. UCP / AP2 are nascent; A2UI / AG-UI have Google ADK support but limited evidence of third-party uptake. Revisit the adoption picture in 6 months.
+
+**No plan file. No rollout item.** Landscape vocabulary only.
+
+---
+
+## S172 — Inter-agent conversation capability (Solo MCP / Aaron Francis)
+
+**Source:** Aaron Francis, Twitter, 2026-04-22 (@aarondfrancis). Screenshot captured S172. "Solo MCP" — an MCP server that exposes agent spawn/message/monitor as MCP tools to whatever coding agent is running. Agents spawn agents (example chain: Codex → Claude, Claude → Amp, Amp → Gemini), chat back and forth, dispatch tasks, monitor output, set durable wakeup timers. Aaron's product `Solo` (soloterm.com) is the harness; the MCP server is its exposure surface.
+
+**Capability summary:** Persistent-process two-way messaging between agent runtimes. Distinct from Claude Code's `Task` subagents (ephemeral, one-shot — subagent runs to completion and returns a single reply). Distinct from `SendMessage` continuation of a single agent. This is N live processes with a mailbox between them.
+
+**GodWorld fit — why this matters journalistically:**
+
+Current architecture is one-directional. Civic voice agents (Mayor, Baylight Director, Police Chief, DA, OPP, CRC, IND swings, project directors) produce static statements. Desk reporters (Carmen, Hal, business desk, chicago desk, culture, letters, sports, podcast, freelance) read those statements and produce copy. Agents never surprise each other. The Mayor's press release cannot be ambushed by a follow-up question. Keisha Ramos cannot be caught contradicting herself in real time. The ceiling every craft-layer refinement bumps into is this: coverage is rendered, not interviewed.
+
+Conversation capability breaks the ceiling. Scenarios:
+- **Reporter + citizen** — Carmen (or any desk) interviews a Tier-1 citizen. Citizen dodges, reporter drills, citizen reveals new detail on the third press. Transcript becomes source material — not a press release.
+- **Reporter + authority director** — Hal interviews Keisha Ramos about Baylight workforce-agreement compliance. Hal has a contractor tip. Keisha either stands by her number or backs off. The contradiction moment is the story.
+- **Council chamber as multi-agent** — Mayor proposes, OPP pushes back, CRC demands oversight, IND swings move live. Five+ live agents reacting to each other. Carmen covers the chamber session instead of reading the minutes.
+
+The three-layer coverage principle (S142) predicts this: engine + simulation + user actions threaded in one piece. Today the "simulation" layer is static voice output; conversation capability makes it dynamic.
+
+**Test design — locked S172 with Mike:**
+
+- Single Tier-1 citizen voice (not civic office — lower canon risk)
+- Single desk reporter
+- Same question/answer scaffolding as current briefing packets (pre-seed both agents with state + canon), plus follow-up messaging capability and room for agents to go off-script
+- Output NOT published — transcript analyzed only
+- No canon risk — zero ingest path to bay-tribune, world-data, or edition
+
+**Why this test shape:** lowest-risk way to learn whether agents stay in character across multi-turn interaction, how badly canon drift accumulates, what the token bill actually looks like, and whether the transcript is usable raw material or needs a post-processor. One citizen, one reporter, no publication — if it breaks, nobody sees it.
+
+**Cost / build implications (not-yet-scheduled):**
+- Orchestration harness: start / message / timeout / end a paired process.
+- Canon-sync at call-open: both agents need to load the same ledger + neighborhood + citizen-profile state, otherwise drift is immediate.
+- Transcript artifact format: new file shape. Becomes desk source material, eventually engine signal.
+- Token bill: N turns × 2 agents × context reload per turn. Not cheap. Reviewer chain is already the expensive part of the cycle; this stacks on top.
+
+**Solo adoptability check (S172, post-source-review):**
+
+soloterm GitHub org is Laravel dev tooling (PHP) — main `solo` repo is a terminal multiplexer for Laravel developers. The `solo.spawn_process()` / `solo.list_agent_tools()` MCP surface shown in Aaron Francis's 2026-04-22 tweet is **not in the public repos** — either private/beta or commercial-only for soloterm.com. Adopt-Solo is not available today. Solo is the *reference pattern*, not the adoption artifact.
+
+**Path options (S172 decision — path (a) leading):**
+- **(a) Build our own minimal MCP harness** — node coordinator that spawns two agent processes, exposes `spawn_process` / `message` / `monitor` / `wakeup` tools to the reporter agent, routes messages, captures transcript, enforces turn limits and canon-sync at call-open. ~few hundred lines. Leading option per S172 (Mike approved direction). No external dependency, full control over canon-sync and transcript shape.
+- **(b) Wait for Claude Code native persistent-process support** — already tracked on ROLLOUT MONITOR as KAIROS background daemon + ULTRAPLAN. Timing unknown. Revisit if Anthropic ships.
+- **(c) Re-evaluate Solo** in 6 months if the agent-MCP surface open-sources.
+
+**Interim proof-of-concept (no harness build required):**
+
+The `Task` tool today spawns Claude subagents that each produce one reply and exit. To fake multi-turn Carmen-interviews-citizen without building the harness first: Carmen spawns a fresh citizen-subagent per turn, feeds prior conversation back as context, reads the reply. Stateless-simulated and token-expensive, but validates the test design (character-hold across turns, dodge realism, transcript usability, canon-drift rate) before committing to harness infra. This is the cheapest way to answer "is this worth building for real."
+
+**Preconditions before the *real* test runs (not the Task-tool-PoC):**
+1. Phase 39 reviewer chain closed (capability reviewer + tiered review + final arbiter all stable).
+2. Phase 40 injection defense closed (40.2 cattle refactor remains; 5 of 6 done S156).
+3. Harness design — promote to plan file when scheduled (copy [[plans/TEMPLATE]] shape).
+
+**Canon framing receipts:** Each scenario has precedent in existing canon. The E91 Varek front page "felt wooden because Carmen rendered it from a briefing packet" (S170 note) — had Carmen actually interviewed Varek and been dodged on the Port development timeline, the piece finds its real shape. The OARI delay, the Baylight workforce agreements, the council session on C86 transit vote — all already canon-live, all currently produced without interaction.
+
+**Relation to Phase 44+ engine expansion:** Multi-agent council chamber is a Phase 44+ problem (after Phase 43 engine expansion lands). Reviewer chain is not built to audit at conversation scope — canon drift inside a live 5-agent chamber is harder to catch than drift inside a single voice-agent output. That's its own future challenge, not a today problem.
+
+**Rollout:** LOW pointer in Infrastructure. Test before build; build after Phase 39 + Phase 40 close and persistent-process infra decision is made.
+
+**Status:** Research-landscape entry. Rollout LOW pointer present in [[engine/ROLLOUT_PLAN]] Infrastructure section. Solo adoptability check completed S172 — not adoptable, path (a) build-our-own locked as leading direction. No plan file (deferred until preconditions close and harness design needs operationalizing). Interim Task-tool PoC viable without plan file.

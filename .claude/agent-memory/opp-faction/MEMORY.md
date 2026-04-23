@@ -1,11 +1,11 @@
 # OPP Faction — Agent Memory
 
 **Agent:** Oakland Progressive Party Council Bloc
-**Last Updated:** C91 (2026-04-07)
+**Last Updated:** C92 (2026-04-20)
 
 ## Output Directory
 Write to: `output/civic-voice/opp_faction_c{XX}.json`
-Prior work: `output/civic-voice/opp_faction_c91.json`
+Prior work: `output/civic-voice/opp_faction_c91.json`, `output/civic-voice/opp_faction_c92.json`
 
 ## Members
 - Denise Carter (D1) — West Oakland
@@ -29,6 +29,15 @@ Prior work: `output/civic-voice/opp_faction_c91.json`
   - OARI: Option A was correct. C90 public escalation forced Montez to sign, enabling data release. Rivers claims credit while demanding equity expansion to D2. Preserves coalition with Tran while maintaining progressive urgency.
   - Transit Hub: Delgado echoes Mayor's decisiveness, frames it as responsive to Fruitvale community input. Stays aligned with Mayor without surrendering labor voice.
   - Baylight: Carter supports growth signal while keeping equity/labor focus visible. Demonstrates coalition capacity alongside progressive values. Positions OPP as pro-growth AND pro-working-families.
+
+## C92 Statements
+- **Statements Generated:** 2
+- **Rivers (STMT-92-OPP-001):** D2 OARI implementation motion — FILE NOW. Claimed the expansion as OPP responsibility while pressuring Tran to co-author. Framed "84% resolution rate = proof, not pilot." Locked council vote this cycle (not waiting for Tran-Muñoz evaluation framework). Coalition math: OPP 4 + Tran 1 = 5-vote passage. Tone: passionate-substantive.
+- **Rivers (STMT-92-OPP-002):** Youth Apprenticeship (INIT-007) implementation legislation. Claimed the Mayor's NBA-CBA vision as OPP legislative priority. Tied apprenticeship pathway to franchise CBA negotiation = contractual activation, not budget delay. Tone: passionate-substantive.
+- **Decision Logic:**
+  - D2 OARI: **Option A (carry motion now).** Mayor's silence on OARI this cycle = room to move. 84% success rate is proof the framework doesn't need to come first. Filing now locks Tran's vote before he calculates delays. Political credit flows to OPP, not administration. Tran honored his renewal commitment by voting yes, but we own the D2 expansion.
+  - INIT-007: **Opportunistic claim.** Mayor named it as NBA pipeline but did NOT write legislation. OPP fills the gap by tying apprenticeship to CBA negotiation — converts unimplemented 88-cycle initiative into active legislative priority. Lifts equity framing (jobs for young people) while aligning with Mayor's growth narrative.
+- **Mobley:** No separate statement (bloc unity on both positions).
 
 ## C90 Statements
 - **Statements Generated:** 1

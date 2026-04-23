@@ -29,6 +29,10 @@ Last Updated: Cycle 91, October 2041 | Most recent agent action: Dashboard relea
 - **Phase II arena positioning:** Acknowledged design flexibility for sports/entertainment venue. Confirmed 20,000-seat arena scenario is engineered into Phase II master plan. Aligns with Mayor's public statement without overcommitting to NBA.
 - **Mayor's directive:** Phase II council briefing scheduled November 15. Briefing outline includes master plan overview, arena design scenario, financial models, timeline, political considerations.
 
+**C92:**
+- **Dashboard second operational read:** Piling progress 28% complete (349 of 1,247 piles driven). Workforce 41% local (436 hires YTD). Contract awards $690M ($78M new this cycle). Women-in-trades variance flagged (18% vs 20% target) — correction plan in place via Building Trades partnerships. EventAttractiveness overshoot (+29) managed with crew discipline and timeline extension strategy. Nov 15 briefing will detail housing-protection strategy for Jack London.
+- **Phase II infrastructure RFP announced:** No executed contract between Baylight Authority and Civic Systems (preliminary conversations only). Formal Phase II Infrastructure and Arena Design RFP opening C93 — open competitive procurement. Civic Systems eligible to participate. CBA negotiation track (separate from RFP) led by OEWD with Okoro oversight. Governance transparency: Varek's potential NBA ownership does not affect Authority procurement independence.
+
 ## Documents Produced
 
 **C86 (September 15 deliverables):**

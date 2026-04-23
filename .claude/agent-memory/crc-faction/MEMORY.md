@@ -43,3 +43,17 @@ Prior work: `output/civic-voice/crc_faction_c86.json`, `crc_faction_c87.json`
 - This is not obstruction — it's accountability mechanism. Respects council's majority vote but holds line on fiscal transparency.
 - Sets up floor vote. OPP will oppose the condition. Independents (Vega, Tran) are swing votes.
 - Consistent with Ashford character: process-focused, fiscal conservative, demands data before lock-in
+
+## C91 Statements Generated
+1. **STMT-91-CRC-001** (Ashford) — Baylight Dashboard Delivered: oversight_demand type. Accepts dashboard delivery; escalates to independent annual audits with quarterly cost spot-checks. "The dashboard is here. Now we need independent eyes on the data, every quarter, for 30 years."
+2. **STMT-91-CRC-002** (Ashford) — Transit Hub CBA Conditional Support: bloc_position type. Requests written confirmation of cost caps, timeline milestones, penalty clauses, neighborhood business protection before Nov 8 vote. CRC prepared to support with cost and performance certainty.
+
+## C92 Statements Generated (FINAL)
+1. **STMT-92-CRC-001** (Ashford) — Baylight Dashboard Live; Independent Audit Framework: oversight_position type. Accepts dashboard publication; demands independent quarterly and annual audits by external auditor. Extends to Mayor's Phase II briefing — comprehensive disclosure only with same audit structure. "The public can now see what the project promised. The council needs external verification of what the project delivered."
+2. **STMT-92-CRC-002** (Ashford) — Transit Cost Cap + Compliance Audits: legislative_condition type. Firms cost condition at $230M hard cap + 5% contingency max; any overrun requires council re-review. Adds quarterly external compliance audits on wage/hiring/timeline/CBA terms. Requires Soria Dominguez CBA certification by Nov 1. "We support the Transit vote if cost is capped, consequences are written, and compliance audits are in place."
+
+## Political Arc (C90-C92)
+- C90: Demand dashboard before TIF close (leverage point)
+- C91: Accept delivery; escalate to independent audits (position as oversight voice + extend commitment)
+- C92: Endorse dashboard + audit framework; firm Transit cost/audit conditions (CRC pattern consistency — oversight across all major initiatives)
+- Pattern established: CRC is the fiscal accountability + process watchdog. Not obstructionist. Accepts council majority decisions but hardens audit architecture. Works across initiatives (Baylight TIF, Phase II briefing, Transit cost, Okoro consolidation quarterly briefings).

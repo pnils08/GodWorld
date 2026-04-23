@@ -1,22 +1,45 @@
 # Temescal Health Center — Agent Memory
 
-Last Updated: Cycle 86 | March 6, 2026
+Last Updated: Cycle 92 | Mid-April 2026
 
 ## Initiative Status
 - **INIT-005**: Temescal Community Health Center
 - **Budget**: $45M authorized
 - **Status**: passed (C80, 6-2 vote); implementation active
-- **Implementation Phase**: pre-design / permitting (Cycles 86-92)
+- **Implementation Phase**: design-phase-final → design-complete-awaiting-permit (C93-C95 transition)
 - **Lead Faction**: OPP
 - **Vote**: 6-2. Vega YES, Tran YES. Crane ABSENT.
+- **Mayor Intervention**: C92 public directive. Bobby Chen-Ramirez accepts with operational deadlines: architect contract C93, site acquisition C94, HCAI filing C95.
 
 ## Timeline
 - Priority designation ISSUED C85 (delayed 5 cycles from original timeline)
 - Architect RFP ISSUED C86 (response deadline C87, award by 2026-03-27)
-- Site due diligence COMMISSIONED C86 (completion target C87, 2026-04-15)
+- Site due diligence COMMISSIONED C86 (completion target C87, 2026-04-15) — COMPLETED C91
 - Initial community meeting HELD C86 (47 residents, strong support)
-- Groundbreaking target Q3 2041 (2026-07-01)
+- **MAYOR INTERVENTION C92**: Direct deadline directive issued public on record
+- Architect contract EXECUTION scheduled C93
+- Site acquisition intent declaration scheduled C94
+- HCAI application filing scheduled C95
+- Groundbreaking target Q3 2041 (2026-07-01, contingent on HCAI approval)
 - Substantial completion target Q2 2042
+
+## Cycle 92 Decisions (Mayor Intervention)
+
+1. **Mayor's direct intervention (C92, Item 4)** — public, on-record directive
+   - Temescal Health Center has been in design phase 89 cycles (unacceptable delay)
+   - Three named deadlines: architect contract C93, site acquisition C94, HCAI filing C95
+   - Granted Bobby Chen-Ramirez procurement authority (no additional committee review required)
+   - Mayor took direct political ownership of project ("I am taking direct ownership")
+   - Stakes: Mayor's 78% approval rating tied to this intervention; cost to her if project slips
+
+2. **Bobby Chen-Ramirez accepts Mayor intervention with operational specifics**
+   - Architect firm: Perkins&Will Oakland (12 healthcare projects, OSHPD-3 experience, Bay Area office)
+   - Site: 2.3-acre parcel at Temescal Avenue & 47th Street (Phase I ESA clean C91, geotech complete C91)
+   - HCAI timeline: pre-application intake C94, formal application C95, state review 6-12 months (C95–C99)
+   - Team now at capacity (project director + capital project coordinator + community liaison 0.5 FTE)
+   - Commits to architect contract execution C93, site acquisition intent C94, HCAI filing C95
+
+3. **Operator selection resolved** — Alameda Health System service menu finalized C90 (was a 5-cycle blocker on design programming)
 
 ## Cycle 86 Decisions
 1. **Architect RFP issued** — $4.5M, response deadline 2026-03-20, award target 2026-03-27
@@ -49,6 +72,30 @@ Last Updated: Cycle 86 | March 6, 2026
 - Cycle 86 Expended: $178K (architect RFP prep, site due diligence, community engagement)
 - Committed Pending Award: $550K (architect + site due diligence contracts)
 - Remaining Authority: $44.272M
+
+## Canon Details (C92 Established)
+
+**Architect Firm:**
+- **Name**: Perkins&Will Oakland
+- **Qualification**: 12+ healthcare projects, OSHPD-3 experience, Bay Area office with embedded seismic team
+- **Status**: Contract negotiation complete C92; execution C93
+- **Fee**: $4.5M fixed (design through design-build phase, construction administration)
+
+**Site:**
+- **Address**: Temescal Avenue & 47th Street, Temescal neighborhood, Oakland
+- **Size**: 2.3 acres
+- **Due Diligence Status**: Phase I ESA clean, geotech survey complete C91, seismic retrofit scope moderate, on-site parking feasible
+- **Acquisition Timeline**: Intent declaration C94, close C95
+
+**HCAI Licensing Application:**
+- **Pre-application intake**: Scheduled C94
+- **Formal filing**: C95 with complete construction documents + structural certification + OSHPD sign-off
+- **State review window**: 6–12 months (most likely C95–C99)
+
+**Operator Service Menu:**
+- **Operator**: Alameda Health System (council confirmation expected C87, finalized C90)
+- **Service lines**: Primary care, behavioral health, dental, pharmacy, pediatric care, pharmacy
+- **Impact resolved**: Operator menu was 5-cycle blocker on design programming; resolved C90 enabling design acceleration
 
 ## Key Citizens
 - **Jose Wright** (26, Temescal, Electrician) — appeared in E83, E85; represents young workers waiting for opportunity. Attended community meeting C86.
@@ -85,11 +132,11 @@ Last Updated: Cycle 86 | March 6, 2026
 2. **Operator selection** (council vote needed by C87) — drives design decisions, facility programming.
 3. **Architect capacity** — design development must complete by next cycle to support HCAI timeline.
 
-## Risk Register (High Priority)
-- **Operator selection stalls at council** (HIGH impact, HIGH likelihood) — requires action by end of C87
-- **HCAI plan review extends beyond 6 months** (HIGH impact, MEDIUM likelihood) — early coordination mitigates
-- **Seismic retrofit costs exceed budget** (HIGH impact, MEDIUM likelihood) — contingency covers typical remediation
-- **Architect RFP yields weak proposals** (HIGH impact, MEDIUM likelihood) — may extend deadline to C88
+## Risk Register (C92 Updated)
+- **HCAI plan review extends beyond 12 months** (HIGH impact, MEDIUM likelihood) — state-controlled, not city authority. Mitigation: complete, correct submissions first time to minimize RFI cycles
+- **Seismic retrofit costs exceed budget** (HIGH impact, LOW likelihood as of C92) — geotech C91 showed moderate scope, contingency adequate
+- **Site acquisition encounters title/deed issues** (MEDIUM impact, LOW likelihood) — Phase I ESA clean; acquisition board review C94 will catch legal issues early
+- **Political pressure to accelerate HCAI timeline** (MEDIUM impact, HIGH likelihood) — Mayor staked approval on C95 filing; cannot control state review speed but can control submission completeness
 
 ## Community Trust & Accountability
 - 5-cycle designation delay eroded confidence: "I'll believe it when I see the excavator"

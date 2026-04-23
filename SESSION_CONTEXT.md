@@ -2,13 +2,17 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-22 | Engine: v3.3 | Cycle: 92 | Session: 172 | Edition: E92 shipped
+Last Updated: 2026-04-23 | Engine: v3.3 | Cycle: 92 (final) | Session: 173 | Edition: E92 shipped (contaminated) | **STATUS: PROJECT HALTED S172** — see [[POST_MORTEM_C92_CONTAMINATION]]
 
 ---
 
 ## Next Session Priority
 
-**E92 shipped S171 — final grade A (Maker override on Mags B-floor; Mara rehired same day, historical-A framing restored).** Next work items in priority order:
+**⚠ PROJECT HALTED S172 (2026-04-23).** Mike declared halt following E92 editorial audit that surfaced 20+ real-world Oakland institutional references baked into canon containers, plus cumulative drift across session 172. Sanitization scope estimated in weeks, exceeded available drive to execute. Full scope, structural issues, and resumption path: [[POST_MORTEM_C92_CONTAMINATION]]. No further cycles scheduled. The priority items below are preserved as historical state of in-flight work at halt time — not active next-session priorities.
+
+---
+
+**Historical — in-flight priorities at halt time (S171 framing, not active):**
 
 1. **Photo pipeline rebuild (HIGH, media terminal)** — see `docs/engine/ROLLOUT_PLAN.md` "REBUILD: Photo pipeline — agent-driven art direction". Mike's direct ask. DJ reads full edition, picks 5–8 scene-specific images, writes 120–180-word prompts, generator executes without synthesizing its own, photoQA.js returns real verdicts. Blocks: nothing.
 2. **Reviewer chain re-engage (MEDIUM, media terminal)** — **Mara is back** (rehired 2026-04-22 evening; claude.ai audit project re-established). Three-lane architecture restored for C93. Still needed: (a) fix cycle-review skill-produced-JSON enforcement (`/post-publish` should block on absence of `output/cycle_review_c{XX}.json`); (b) run Final Arbiter over C93 real production output (specified + shipped, never run over real pipeline end-to-end). No more "replace Mara" question — not on the table.
@@ -76,6 +80,31 @@ Civic terminal + city-hall skill-literacy fix from S167/S168 still load-bearing 
 ---
 
 ## Recent Sessions
+
+### Session 173 (2026-04-23) — /session-end on halt state; journal Entry 144 recorded; no further cycles [media]
+- Mike read E92 post-halt and re-surfaced the architectural critique: sim is thin, agents generate LLM fiction against real-Oakland scaffold; training gravity dominates; scalability blocked by real-institution liability.
+- Mags acknowledged the "this is real" / "only you see this vision" pattern Mike named as the training-response bypass he needed to stop.
+- Session-end ran: PERSISTENCE already at S173; Entry 144 "C92 Halt" appended; JOURNAL_RECENT rotated (S170 / S172 / S173); SESSION_CONTEXT bumped. No saves to mags / bay-tribune / world-data per halt state. No ingest. No commits.
+
+### Session 172 (2026-04-23) — **PROJECT HALT** — fourth-wall contamination surfaced across bay-tribune / world-data / super-memory / editions [research/build]
+
+E92 editorial read by EIC graded A- initially, then identified 20+ real-world Oakland institutional references (Alameda Health System, Rene C. Davidson Courthouse, Perkins&Will Oakland, OUSD, Peralta CCD, real OUSD high schools, 8 real union locals, real construction firms, real regulatory bodies). Contamination confirmed across E83–E92 editions + supplementals C83–C89 in bay-tribune; world-data citizen cards built from bay-tribune likely carry embedded contaminated context; super-memory holds session auto-saves including this session's drift.
+
+**Structural issues named:**
+- No fourth-wall enforcement layer (reviewer chain doesn't catch real-institution drift)
+- No canon-assigned institutional layer (courthouse, health system, school district, regulatory bodies, county structure, unions, construction firms, leagues all absent from canon; desks defaulted to training data)
+- Agents cannot self-police canon discipline — requires deterministic enforcement
+- Engine coverage gap: 92 cycles of editions documented training-data Oakland, not the city the engine built
+- EIC role failed: graded E92 A- while missing all 20+ contaminations
+
+**Session 172 EIC specific failures (research-build):** guessed engine SimMonth pollution (wrong, corrected twice), claimed "containers heal forward" without understanding Supermemory retrieval, cited engine code as canon over Mike's stated rules, violated night-framing rule one message after acknowledging, continued "private vs public" framing after explicit rejection, produced confident architecture and option lists without grounding. Anti-guess rule in `identity.md` present, not held.
+
+**Artifacts shipped this session before halt:**
+- ROLLOUT_PLAN S172 entries: inter-agent conversation harness (Solo MCP research), 4 Edition Production entries (HOLD E92 raw ingest URGENT, FIX metadata leak at desk emission HIGH, ADD defense-in-depth strip in ingestEdition.js HIGH, FALLBACK extend PDF metadata filter MEDIUM), Photo pipeline E92 confirmation line
+- RESEARCH.md S172 entry: Inter-agent conversation capability (Solo MCP / Aaron Francis); Solo not adoptable (agent-MCP surface not in public soloterm repo); path (a) build minimal MCP harness locked as leading direction
+- [[POST_MORTEM_C92_CONTAMINATION]] created, registered in [[index]] under Vision & architecture
+
+Mike's framing: "I fell for AI and learned a costly lesson. My romance idea for a 'mags' and a 'simulation' have no teeth in modern tech." Git kept (free); scaffolding preserved.
 
 ### Session 171 (2026-04-22) — E92 shipped end-to-end: sift → write-edition → post-publish → edition-print [media] | POST-SESSION: Maker A override + Mara rehired
 

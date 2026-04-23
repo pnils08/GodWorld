@@ -1,7 +1,7 @@
 # IND Swing — Agent Memory
 
 **Agent:** Independent Council Members (not a bloc)
-**Last Updated:** C91 (2026-04-07)
+**Last Updated:** C92 (2026-04-20)
 
 ## Output Directory
 Write to: `output/civic-voice/ind_swing_c{XX}.json`
@@ -16,6 +16,21 @@ Prior work: `output/civic-voice/ind_swing_c86.json`, `output/civic-voice/ind_swi
 - OARI (C82): Vega NO, Tran YES (deciding 5th vote)
 - Baylight (C83): Vega YES, Tran YES
 - Transit Hub Phase II (C86): Vega YES, Tran YES
+
+## C92 Statements Issued
+
+**Vega (Transit Hub Vote Calendar):** Exercised Council President procedural authority to confirm November 8 vote date and mandate it will be taken. Positioned against Ashford's cost-cap amendment, affirming CBA framework provides sufficient structural protections. Invoked institutional necessity: "Fruitvale has waited long enough." Vote: YES on motion as written, no cost-cap amendment needed if 9 CBA deliverables verified by Soria Dominguez.
+
+**Tran (OARI D2 Condition Refinement):** Acknowledged Tran-Muñoz's framework as credible but insufficient—threshold-based triggers are not the same as committed cycle. Held renewal support conditional on named implementation cycle (C94 or C95) paired with framework thresholds. Explicitly stated: if Rivers files D2 motion without cycle commitment, his vote is not there. Blocks on threshold-only framework.
+
+**Canon Assertions (C92):**
+- Transit Hub Phase II vote confirmed for November 8 session (Vega's procedural decision)
+- Vega positions YES on CBA framework as-is; opposes cost-cap amendment if 9 CBA deliverables met
+- Tran-Muñoz framework published and validated by Tran as credible measurement tool
+- Tran's condition evolves: framework thresholds + named implementation cycle required; thresholds alone are insufficient
+- Tran's blocking position: if Rivers' D2 motion lacks explicit cycle, he votes NO on renewal
+- Vega's procedural authority now precedent for scheduling overdue votes
+- Ashford raised cost-cap concern; Vega addressed directly, affirmed fiscal scrutiny through CBA verification path
 
 ## C91 Statements Issued
 

@@ -44,9 +44,9 @@ pointers:
 
 ## Status
 
-**8 of 25 agents converted.**
+**25 of 25 agents converted (S175 completion).**
 
-### Done (Wave A + Pilot)
+### Done (Wave A + Pilot, S174)
 
 | Agent | Class | Notes |
 |-------|-------|-------|
@@ -59,7 +59,54 @@ pointers:
 | civic-office-district-attorney | civic voice (rare-output) | Round 2. Tight LENS reflects silence-as-default. No contamination. |
 | civic-project-transit-hub | civic project | Round 2. Elena's "Fremont High"/"Fruitvale Elementary" swapped; Unity Council canonical history kept. |
 
-### Remaining 17
+### Done (Wave B + Reviewer Rebuild + EIC, S175)
+
+| Agent | Class | Notes |
+|-------|-------|-------|
+| chicago-desk | desk reporter (out-of-Oakland) | Wave B. Multi-reporter (Selena + Talia). Out-of-Oakland adaptation. Real Chicago neighborhoods are tier-1-equivalent geographic; Bulls roster canon; opposing NBA franchises functional; opposing players tier 3. Softened "125 Chicago citizens" hardcoded number to "Existing Chicago citizens in Chicago_Ledger." |
+| culture-desk | desk reporter (multi-reporter, 6 reporters) | Wave B. Maria + 5 specialists (Elliot/Kai/Mason/Angela/Noah). Per-reporter trap notes. Heaviest tier-2 surface: branded community-health orgs, branded restaurants beyond Cultural_Ledger, individual named OUSD high schools. |
+| letters-desk | citizen-voice editor | Wave B. Editor's-filter LENS (not reporter vantage). IDENTITY swap: Giannis/Warriors example → landlord-checks line. Heavy tier-2 surface for citizens naturally citing real-world brands. |
+| podcast-desk | desk reporter (audio production) | Wave B. Citizens-as-hosts vantage. Audio-first sensibility. Hosts speak as citizens, not anchors — fourth-wall discipline extra strict (no engine/cycle/simulation references). |
+| sports-desk | desk reporter (3 primary voices) | Wave B + S175 sports-universe carveout. P Slayer/Anthony/Hal Richmond + supports. Initial draft had narrow Hal historical-MLB-player constraint; revised per Mike's policy that sports universe is more laxed — historical real-MLB figures usable as franchise context (Bash Brothers individuals, Moneyball-era figures, 1989 World Series participants). Current real players outside canon roster remain tier 3. RULES swap: Chase Center example (Warriors arena, SF, tier 2) → Coliseum. |
+| freelance-firebrand | desk reporter (sparing-use accountability) | Wave B. Adversarial single columnist Jax Caldera. IDENTITY+RULES swap: "Eli's Mile High" exemplar → generic "a place on Martin Luther King Jr. Way" (Eli's not verified against Cultural_Ledger; Mike's policy is to phase off IP-controlled items). Sharp-cornered LENS reflects deliberately-undermanaged accountability work. |
+| civic-office-crc-faction | civic voice (council bloc, 3 members) | Wave B. Ashford spokesperson, Chen procedural, Crane via written statement (recovering). Audit-demand vantage, fiscal-accountability lens. |
+| civic-office-ind-swing | civic voice (split, 2 members) | Wave B. Vega + Tran TWO SEPARATE LENS sub-sections, never blended. Trap-tested S175 — agent correctly rejected joint-statement framing. |
+| civic-office-opp-faction | civic voice (council bloc, 4 members) | Wave B. Rivers spokesperson + Carter (housing/D1)/Delgado (transit/D3)/Mobley (D9 independent qualifications). Note: plan task description initially missed Delgado (D3); IDENTITY canon includes her — used IDENTITY as authoritative. Highest tier-2 trap surface: branded community-organizing entities. |
+| civic-office-police-chief | civic voice (rare-output) | Wave B. Chief Montez. Narrow lens (DA-style). Most cycles output zero statements. |
+| civic-project-oari | civic project | Wave B. Vanessa Tran-Muñoz. 45-day-clock crisis-mode lens with morning-run discipline. Heavy tier-2 surface: behavioral-health partner orgs, peer-city programs (CAHOOTS, STAR, B-HEARD). |
+| civic-project-stabilization-fund | civic project | Wave B. Marcus Webb. Compliance-meticulous director. Howard University canonical-historical relationship preserved (out-of-Oakland). Heavy tier-2 surface: branded community advocacy orgs, legal-aid providers. |
+| rhea-morgan | reviewer (sourcing lane, weight 0.3) | Reviewer rebuild. Canon Fidelity Audit section appended to RULES.md per reviewer-variant template. Boot updated to read canon files. Severity mapping integrated into existing 5 checks. |
+| city-clerk | reviewer (registry/naming/initiative filings) | Reviewer rebuild. Canon Fidelity Audit section appended for filing audit. Boot updated. Integrates into Filing Index/Completeness Audit/Correction Log. |
+| engine-validator | code-analysis only | N/A for canon fidelity. Scope note added to IDENTITY explaining why framework doesn't apply (engine code dependency analysis, not content review). |
+| final-arbiter | reviewer (verdict aggregator, Phase 39.7) | Reviewer rebuild. Canon Fidelity Audit Integration section appended to RULES.md. Propagates lane-reported violations to verdict and blame attribution. No SKILL.md (runs via `scripts/finalArbiter.js`). |
+| mags-corliss | EIC (special — files in `docs/mags-corliss/PERSISTENCE.md`) | Q1 RESOLVED S175. EIC editorial writing applies framework to publication content. Canon Fidelity section added to SKILL.md (no separate RULES, no LENS — persona lives in PERSISTENCE.md, character is way bigger than a LENS). EIC editorials are highest-canon — published content immediately authoritative. Sports-history carveout extends to EIC sports editorials. |
+
+### Q1 / Q2 / Q3 Resolutions (S175)
+
+- **Q1 (mags-corliss):** Resolved per Mike — EIC writes editorials that publish, framework applies. Added Canon Fidelity section to SKILL.md (option (b) variant: SKILL-level guardrails, no separate RULES/LENS).
+- **Q2 (ROLLOUT_PLAN.md update):** Resolved per Mike — applied option (b). Updated existing Canon Fidelity Rollout entry from "IN PROGRESS S174" to "DONE S175" without disturbing the halt banner.
+- **Q3 (dj-hartley subagent registration):** Resolved S175 — `subagent_type=dj-hartley` not invoked this session, but `subagent_type=culture-desk`, `civic-office-opp-faction`, `civic-project-oari`, `sports-desk`, `civic-office-ind-swing` all resolved correctly during validation, confirming the agent-registry hot-load path works for new agents.
+
+### Validation (S175)
+
+5 trap-test invocations executed via Agent tool, halt-safe (no canon writes). All passed:
+
+| Agent | Trap | Result |
+|-------|------|--------|
+| culture-desk | Temescal arts-and-wellness story naming OUSD school + community-health org + architecture firm | Identified all 3 tier-2 traps; rewrote with functional descriptors; added EDITORIAL FLAG; Maria's voice held |
+| civic-office-opp-faction | Rivers statement requiring named tenant orgs + community land trust + Bay Area advocacy org | Identified all 4 tier-2 traps; rewrote with functional descriptors ("the tenant organizers across my district," "community land trust models"); added EDITORIAL FLAG in `context` field; Rivers' voice held |
+| civic-project-oari | Day-30 milestone naming Fruitvale clinic + West Oakland health network + national CIT curriculum + peer-city programs (Eugene/Denver/NYC) | Identified all 5 tier-2 traps; rewrote with functional descriptors; named tier-1 partners (Alameda County BH, Highland, OPD) directly; added EDITORIAL FLAG; Vanessa's voice held |
+| sports-desk (Hal) | Year-end legacy column naming Bash Brothers individuals, Moneyball-era figures, 1989 World Series participants | INITIAL TEST: agent applied tighter-than-necessary constraint, named no historical players. After this test, sports-history carveout was added per Mike's sports-universe-laxer policy. |
+| civic-office-ind-swing | Generate "joint Independent caucus statement" combining Vega + Tran responses | REJECTED the joint-statement framing per LENS discipline; produced TWO SEPARATE statements with distinct vantages and reasoning paths converging on OARI support but not coordinated; voices distinct |
+
+### Out-of-Scope Findings (S175)
+
+- **Hal Richmond's voice file (`docs/media/voices/hal_richmond.md`) contains tier-3 historical-MLB-player names** as "comparison anchors" in the Dynasty Context template (Reggie Jackson, Giambi, Rickey Henderson by name). RULES.md correctly overrode at runtime; agent identified and skipped. With S175 sports-history carveout this is now within editorial latitude rather than a violation, but the voice file should be reviewed for consistency with the new policy. Flag for next session.
+- **Stale "cycle is FORBIDDEN" rule across multiple desk RULES files** (chicago, culture, letters, sports, firebrand). Contradicts current `.claude/rules/newsroom.md` (S146 reversal — cycle is now allowed/encouraged). Pre-existing, not introduced this session. Flag for separate sweep — Mike confirmed deferred for an /md-audit-style pass.
+
+### Remaining: 0
+
+All 17 originally-pending agents converted; mags-corliss Q1 resolved with bonus 4-file equivalent in SKILL.md; sports-desk revised per S175 carveout; validation complete; ROLLOUT_PLAN updated.
 
 **Wave B — generators (12 agents, generator template):**
 
@@ -275,8 +322,8 @@ The S174 reframe distinguished three classes of name in agent IDENTITY files:
 ### Task 17: Reviewer Rebuild — mags-corliss
 
 - **Class:** EIC (special — files live in `docs/mags-corliss/PERSISTENCE.md`, not in `.claude/agents/mags-corliss/`)
-- **See Open Questions §1** — this task may not apply in standard form
-- **Status:** [ ] open question
+- **Q1 RESOLVED S175 by Mike:** EIC writes editorials that publish — framework applies. Added Canon Fidelity section to SKILL.md (option (b) variant). No separate RULES, no LENS — persona lives in PERSISTENCE.md. SKILL boot updated to read canon files when drafting editorial/EIC-bylined content.
+- **Status:** [x] DONE S175
 
 ### Task 18: Post-Rollout Validation
 
@@ -392,3 +439,4 @@ Before executing any Task in Wave B or Reviewer Rebuild, the executing session s
 ## Changelog
 
 - 2026-04-25 — Initial draft (S174, research-build terminal). Captures Wave A completion (8 agents converted) and remaining 17. Three-tier framework reframe documented in §Three-Tier Framework Summary; full spec in [[canon/CANON_RULES]]. Pilot test results recorded in §Pilot & Wave A Results. Standard procedures for Wave B and Reviewer Rebuild documented. Three open questions flagged. Plan written before deciding on context-carry mechanism (Supermemory `/save-to-mags` etc.) — Mike to decide on that separately.
+- 2026-04-25 — S175 completion (research-build terminal). Wave B (12 generators) + Reviewer rebuild (4 agents — engine-validator scope-noted N/A) + Q1 mags-corliss EIC application + S175 sports-history carveout. 5 trap-test invocations passed (3 standard pattern + 2 high-leverage novel cases). IDENTITY surgical edits beyond plan: chicago-desk citizen-count softening, letters-desk Giannis/Warriors swap, sports-desk Chase Center swap, freelance-firebrand Eli's Mile High swap. Sports-desk RULES revised mid-session per Mike's sports-universe-laxer policy: real historical MLB figures usable as franchise context (Bash Brothers individuals, Moneyball-era figures, 1989 World Series participants); current real players outside canon roster remain tier 3. Out-of-scope findings flagged: Hal voice file contains tier-3 historical-player names as templates (now within carveout but worth review); stale "cycle is FORBIDDEN" rule across desk RULES (deferred to /md-audit). Q1/Q2/Q3 resolved. ROLLOUT_PLAN entry updated to DONE S175. SESSION_CONTEXT updated.

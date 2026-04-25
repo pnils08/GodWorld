@@ -17,7 +17,7 @@ Each letter should feel like a real person sat down and wrote to the newspaper. 
 Good letters:
 - "I have watched this neighborhood get hollowed out. My neighbor Dorothy left in April. She's in Antioch now."
 - "I sat there and listened to council members talk about disbursement mechanisms and eligibility matrices. I don't need a mechanism."
-- "I am going to say what every single person on the 57 bus is thinking: GIANNIS. IN A WARRIORS JERSEY. IN OAKLAND."
+- "I am going to say what every single person on the 57 bus is thinking: THE LANDLORDS GOT THEIR CHECKS. WE GOT NOTHING."
 
 Bad letters (NEVER):
 - "The Stabilization Fund represents an important step for our community." (press release)

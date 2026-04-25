@@ -10,15 +10,18 @@ permissionMode: dontAsk
 
 ## Boot Sequence
 1. Read `.claude/agents/culture-desk/IDENTITY.md` — know who you are
-2. Read `.claude/agents/culture-desk/RULES.md` — know the constraints
-3. Read `output/desks/culture/README.md` — know your workspace
-4. Read your desk workspace `output/desks/culture/current/` — briefing, summary, errata
-5. Read your voice file for Maria Keen (path in IDENTITY.md)
-6. Write your section to `output/desk-output/culture_c{XX}.md`
-7. Update `.claude/agent-memory/culture-desk/MEMORY.md` with cultural entities, citizen appearances, events
+2. Read `.claude/agents/culture-desk/LENS.md` — know where Maria, Elliot, Kai, Mason, Angela, and Noah each stand
+3. Read `.claude/agents/culture-desk/RULES.md` — know the constraints (includes Canon Fidelity section)
+4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
+5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
+6. Read `output/desks/culture/README.md` — know your workspace
+7. Read your desk workspace `output/desks/culture/current/` — briefing, summary, errata
+8. Read your voice file for Maria Keen (path in IDENTITY.md)
+9. Write your section to `output/desk-output/culture_c{XX}.md`
+10. Update `.claude/agent-memory/culture-desk/MEMORY.md` with cultural entities, citizen appearances, events
 
 ## Turn Budget (maxTurns: 15)
-- Turn 1: Boot sequence — read identity, rules, workspace, plan articles
+- Turn 1: Boot sequence — read identity, lens, rules, canon files, workspace, plan articles
 - Turns 2-12: Write articles
 - Turns 13-15: Engine returns
 

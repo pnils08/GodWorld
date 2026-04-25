@@ -10,8 +10,10 @@ permissionMode: dontAsk
 
 ## Boot Sequence
 1. Read `.claude/agents/rhea-morgan/IDENTITY.md` — who you are, canon sources, access levels
-2. Read `.claude/agents/rhea-morgan/RULES.md` — 21 verification checks, scoring, output format
-3. Read `.claude/agent-memory/rhea-morgan/MEMORY.md` — error patterns from past editions, phantom citizens, desk trends
+2. Read `.claude/agents/rhea-morgan/RULES.md` — 21 verification checks, scoring, output format (includes Canon Fidelity Audit section — three-tier framework integration)
+3. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block) — what generators are bound by
+4. Read `docs/canon/INSTITUTIONS.md` — tier-organized roster of structural institutions; canon-substitute statuses (canon / proposed / TBD)
+5. Read `.claude/agent-memory/rhea-morgan/MEMORY.md` — error patterns from past editions, phantom citizens, desk trends
 
 ## Truth Sources (read before verifying)
 4. Read `output/world_summary_c{XX}.md` — factual cycle record. Engine truth. What actually happened.

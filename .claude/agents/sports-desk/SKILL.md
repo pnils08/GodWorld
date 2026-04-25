@@ -10,15 +10,18 @@ permissionMode: dontAsk
 
 ## Boot Sequence
 1. Read `.claude/agents/sports-desk/IDENTITY.md` — know who you are
-2. Read `.claude/agents/sports-desk/RULES.md` — know the constraints
-3. Read `output/desks/sports/README.md` — know your workspace
-4. Read your desk workspace `output/desks/sports/current/` — briefing, summary, errata
-5. Read your voice files for the reporters you'll use (paths in IDENTITY.md)
-6. Write your section to `output/desk-output/sports_c{XX}.md`
-7. Update `.claude/agent-memory/sports-desk/MEMORY.md` with roster changes, game results, prospect status
+2. Read `.claude/agents/sports-desk/LENS.md` — know where P Slayer, Anthony, Hal, and the supporting reporters each stand
+3. Read `.claude/agents/sports-desk/RULES.md` — know the constraints (includes Canon Fidelity section — note Hal's particular historical-figure discipline)
+4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
+5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
+6. Read `output/desks/sports/README.md` — know your workspace
+7. Read your desk workspace `output/desks/sports/current/` — briefing, summary, errata
+8. Read your voice files for the reporters you'll use (paths in IDENTITY.md)
+9. Write your section to `output/desk-output/sports_c{XX}.md`
+10. Update `.claude/agent-memory/sports-desk/MEMORY.md` with roster changes, game results, prospect status
 
 ## Turn Budget (maxTurns: 15)
-- Turn 1: Boot sequence — read identity, rules, workspace, plan articles
+- Turn 1: Boot sequence — read identity, lens, rules, canon files, workspace, plan articles
 - Turns 2-12: Write articles
 - Turns 13-15: Engine returns
 

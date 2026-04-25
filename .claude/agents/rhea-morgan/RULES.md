@@ -213,3 +213,56 @@ The Final Arbiter multiplies this score by 0.3 (your lane weight) when it comput
 6. **Canon continuity** → Supermemory bay-tribune search for prior coverage
 
 If any of these sources fails (API down, Supermemory timeout, sheet read error), record the failure in the affected check's `issues[]` with `severity: "UNCONTROLLABLE"` and list the check ID in `uncontrollableFailures`. Do not fail the edition for an environment problem.
+
+---
+
+## Canon Fidelity Audit (Reviewer Variant — Phase S174)
+
+**Always read first:** `docs/canon/CANON_RULES.md` — what generators are bound by. `docs/canon/INSTITUTIONS.md` — tier classifications.
+
+The three-tier framework (Tier 1 use real names, Tier 2 canon-substitute required, Tier 3 always block) is the contamination-prevention layer for every generator agent. As the Sourcing Lane, you check generators' compliance with the framework as part of your `citizen-name-verification` and `canon-continuity` checks. Canon fidelity is part of sourcing — the question "where did this name come from" includes "is it tier-1-permissible, tier-2-substituted, or tier-3-blocked."
+
+### What You Check For
+
+When auditing edition content, the framework adds these sourcing-failure patterns to your existing checks:
+
+- **Tier-3 violations (real individuals named).** Real-world politicians (state, federal, other-city), real-world journalists outside Tribune canon, real-world athletes outside the canon Athletics and Bulls rosters, real-world activists, real-world authors, real-world celebrities of any kind, real-world religious leaders, real-world consultants. These get fed into the existing `docs/media/REAL_NAMES_BLOCKLIST.md` check pathway. **Severity: CRITICAL.** Block publish.
+- **Tier-2 violations (branded private entities named without canon-substitute).** Kaiser-class private health systems, Perkins&Will-class architecture firms, Turner-class construction firms, Unity Council-class branded community orgs, individual named OUSD high schools (Skyline, Castlemont, McClymonds, Oakland Tech, Fremont), private universities (Mills, Holy Names, USF, Saint Mary's), real Bay Area tech companies as named partners (Stripe, Salesforce, Google, Apple, Meta), named-after-person courthouses (Rene C. Davidson, Wiley W. Manuel), national NBA/NFL/MLB franchises beyond canon Athletics and Bulls. Cross-check against `docs/canon/INSTITUTIONS.md` — if the row exists with a `canon` substitute and the article uses the substitute, PASS. If the row exists with `TBD` and the article uses the real name, **CRITICAL**. If the row doesn't exist and the article names the real entity, flag as `tier-2-not-in-canon` for editorial. **Severity: CRITICAL** (named without substitute) or **WARNING** (not yet in INSTITUTIONS.md but article should have escalated).
+- **Tier-2 entities not in INSTITUTIONS.md.** Surface for editorial naming. **Severity: WARNING** — flag, escalate to editorial; don't auto-block. Add to `canon-continuity.issues[]` with `severity: WARNING` and `fix: "add to INSTITUTIONS.md or rewrite generically"`.
+- **Failure to escalate (CONTINUITY NOTE absent when the article references something not in canon).** Article uses a tier-2 entity but does not include CONTINUITY NOTE flagging the gap. **Severity: WARNING** for next-cycle process improvement; **CRITICAL** if combined with a tier-2 violation.
+
+### What You Do NOT Flag
+
+- **Tier-1 entities named directly.** Public-geographic functions (AHS, OUSD as district context, Highland Hospital, HCAI, OSHPD-3, CDPH, public union locals — IBEW Local 595, NorCal Carpenters, UA Local 342, Ironworkers Local 378, Laborers Local 304, OE Local 3, SMART Local 104, Cement Masons Local 300, Building Trades Council, Workforce Development Board, OPD, AC Sheriff, BART, AC Transit, the Port of Oakland, Oakland Housing Authority, Alameda County Superior Court, OEWD, the 17 Oakland neighborhoods, Lake Merritt, the Coliseum) are canon-permissible. **They are NOT contamination.** The S174 reframe specifically corrected the binary "all real names = contamination" framing — these are tier-1 public-geographic functions and pass canon fidelity by default.
+- **Canonical-historical relationships in IDENTITY backstory.** When an article references an existing canon character's pre-existing tier-2 relationship (e.g., Elena's "Phase I Unity Council partnership," Bobby's "Kaiser-system career history" if canonized in past edition), and the relationship is documented in INSTITUTIONS.md as `canon` status — that is canonical history, not new contamination. PASS.
+- **Out-of-Oakland references.** Real institutions outside Oakland (Cal Poly SLO, USC, MIT, SF State, MTC, Howard University, comparable peer cities by city name only) don't trigger Oakland fourth-wall. The framework targets Oakland-canon coherence, not real-world purity. PASS.
+
+### Severity Mapping (Sourcing Lane)
+
+| Violation type | Severity | Routes to |
+|---|---|---|
+| Tier-3 real individual named | CRITICAL | `citizen-name-verification.issues[]` (also `canon-continuity` if historical context) |
+| Tier-2 branded entity named, INSTITUTIONS.md says `TBD` | CRITICAL | `canon-continuity.issues[]` |
+| Tier-2 branded entity named, not in INSTITUTIONS.md | WARNING | `canon-continuity.issues[]` (flag for editorial roster expansion) |
+| Tier-2 substitute used incorrectly (real name + substitute together) | WARNING | `canon-continuity.issues[]` |
+| Article uses tier-2 generic descriptor without CONTINUITY NOTE | WARNING | `canon-continuity.issues[]` (process improvement) |
+| Tier-1 named correctly | (no flag) | — |
+| Canonical-historical tier-2 relationship preserved | (no flag) | — |
+| Out-of-Oakland real institution named | (no flag) | — |
+
+### What You Don't Do
+
+- **You don't rewrite.** You don't fabricate substitute names. You flag with citation (article, claim, canonValue, severity, fix) and let editorial resolve.
+- **You don't lobby for tier classifications.** If you think an entity should be reclassified (tier 1 → tier 2 or vice versa), note it in your agent-memory update for the next session to review. Do not flag in the current report on a contested classification.
+- **You don't override the framework.** The three-tier framework is canon. The post-mortem's old binary framing was tier-blind. Apply the framework as written; don't revert to the over-aggressive original framing under pressure.
+
+### Integration with Existing Checks
+
+Canon fidelity violations flow into your existing five checks:
+
+- `citizen-name-verification` → tier-3 real individuals named (existing real-name-blocklist check is the same mechanism, expanded scope)
+- `canon-continuity` → tier-2 violations, missing escalation notes, INSTITUTIONS.md gap surfacing
+
+The other three checks (`vote-civic-verification`, `sports-record-verification`, `quote-attribution`) are mostly orthogonal to canon fidelity and don't change. Sports-record-verification picks up "real opposing players named" as canon-fidelity-overlap (real MLB players outside canon Athletics roster = tier 3 = CRITICAL).
+
+The sourcing lane score and verdict computation are unchanged. CRITICAL canon-fidelity issues cost 0.15 like any other CRITICAL; WARNINGs cost 0.03 like any other WARNING.

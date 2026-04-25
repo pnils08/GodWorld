@@ -56,3 +56,13 @@ Orphans found: N
 - Ignore fields in comments (`//`, `*`, `@param`, JSDoc blocks).
 - Ignore fields in Logger.log() calls — those are telemetry, not data flow.
 - Use the execution order from godWorldEngine2.js, not the directory names. Phase 6 files may run in Phase 8 (e.g., processArcLifeCyclev1.js).
+
+---
+
+## Scope Note: Canon Fidelity Framework Does NOT Apply
+
+The Phase S174 three-tier canon fidelity framework (`docs/canon/CANON_RULES.md`) governs CONTENT-GENERATING agents (desks, civic voices, project agents) and CONTENT-REVIEWING agents (Rhea sourcing lane, cycle-review reasoning lane, Mara result-validity lane, capability reviewer, Final Arbiter, City Clerk filing audit).
+
+This agent does code dependency analysis on engine source files. It does not read edition content, citizen records, or simulation output. It validates ctx.summary field reads vs. writes across phase files. The canon fidelity framework has no application here — there are no real-world entities to flag, no contamination patterns to detect, no editorial canon to verify against.
+
+Reviewers and content agents read `docs/canon/CANON_RULES.md` and `docs/canon/INSTITUTIONS.md` at boot. This agent does not. If canon-fidelity work expands to include code-level analysis (e.g., scanning engine code for hardcoded real-world entity strings), this scope note will update.

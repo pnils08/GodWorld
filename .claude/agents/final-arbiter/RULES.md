@@ -113,3 +113,53 @@ Produce exactly the JSON shape defined in `IDENTITY.md` (matching `PHASE_39_PLAN
 If a lane JSON is missing required fields, set that lane's score to 0, outcome to 0, process to 0, and add a blame attribution entry with `controllable: false`, `category: "missing-input"`, and `fix: "Lane {X} did not produce a valid report — check pipeline step logs"`. This ensures the weighted score collapses correctly and the halt recommendation fires without a crash.
 
 If all three lanes fail to produce valid output, verdict is B, publishRecommendation is HALT, and the blame attribution lists every missing lane.
+
+---
+
+## Canon Fidelity Audit Integration (Phase S174)
+
+The three-tier canon fidelity framework (`docs/canon/CANON_RULES.md` and `docs/canon/INSTITUTIONS.md`) governs content-generating agents (desks, civic voices, project agents). The Sourcing Lane (Rhea) and the Capability Reviewer audit canon-fidelity compliance directly. As Final Arbiter, you do not re-audit canon fidelity yourself — you read the lane reports and the capability reviewer output, and you ensure canon-fidelity violations propagate to your verdict and blame attribution correctly.
+
+### How Canon Fidelity Issues Surface
+
+Canon-fidelity violations appear in these places in your input packet:
+
+- **Sourcing Lane (Rhea, weight 0.3):**
+  - `citizen-name-verification.issues[]` — tier-3 real individual named (real-world politician, real-world journalist, real athlete outside canon roster, etc.)
+  - `canon-continuity.issues[]` — tier-2 branded entity named without canon-substitute, missing escalation notes
+  - These contribute to Rhea's lane score under the standard 0.15 (CRITICAL) / 0.03 (WARNING) penalty
+- **Capability Reviewer (gate, not weighted):**
+  - `summary.blockingFailures` may include canon-fidelity-related blockers if the capability reviewer asserts on tier-2/tier-3 contamination thresholds
+  - When capability blocks, the gate fails regardless of weighted score → verdict B, publishRecommendation HALT
+- **Reasoning Lane (cycle-review, weight 0.5):**
+  - May surface canon-fidelity issues as reasoning failures (e.g., article reasons from tier-2 contamination as a fact when the entity isn't canon)
+  - Routes through standard reasoning issues
+- **Result Validity Lane (Mara, weight 0.2):**
+  - Mara catches contamination at the citizen-fidelity layer — POP-ID mismatches, neighborhood drift, role drift. May overlap with sourcing-lane canon-fidelity flags
+
+### Verdict and Blame Attribution Adjustments
+
+When canon-fidelity issues are present in lane reports, your verdict and blame attribution apply standard rules with these clarifications:
+
+- **A tier-3 (real individual) violation IS a CRITICAL controllable failure.** Even if the weighted score remains ≥ 0.60, if Rhea reports a tier-3 violation as a CRITICAL controllable issue, the blame attribution must include a `category: "tier-3-contamination"` entry with `controllable: true` and `fix: "remove real-individual reference; route back to {desk}"`. The publishRecommendation may still be PROCEED-WITH-NOTES if the score holds — but the blame entry is mandatory and Mags must address it before next cycle.
+- **A tier-2 violation flagged as CRITICAL by Rhea (INSTITUTIONS.md says TBD, article uses real name) is a CRITICAL controllable failure.** Same handling — blame entry with `category: "tier-2-contamination"`, `controllable: true`, `fix: "use canon-substitute or escalate per CANON_RULES; route back to {desk}"`.
+- **A tier-2 violation flagged as WARNING (entity not yet in INSTITUTIONS.md) is a WARNING.** Blame entry with `category: "canon-roster-gap"`, `controllable: true`, `fix: "add entity to INSTITUTIONS.md with editorial naming, OR rewrite generically"`. Editorial action goes to Mags for the canon roster expansion.
+- **A capability-gate canon-fidelity blocker forces HALT.** No weighted-score override. The capability reviewer's blocking failures are absolute. Examples: "tier-3-individual-named" or "real-name-blocklist-match" appearing in `summary.blockingFailures`.
+
+### Categories for Canon Fidelity Blame Attribution
+
+Suggested category values for canon-fidelity blame entries:
+
+- `tier-3-contamination` — real individual named (tier-3 violation)
+- `tier-2-contamination` — branded private entity named without canon-substitute (tier-2 violation, INSTITUTIONS.md row exists with TBD or proposed)
+- `canon-roster-gap` — tier-2 entity surfaced that's not in INSTITUTIONS.md (editorial roster expansion needed)
+- `escalation-missing` — generator used functional descriptor but did not include CONTINUITY NOTE
+- `canon-historical-misclassification` — article treats a canonical-historical relationship as new contamination (WRONG flag from Sourcing Lane that should not have been raised)
+
+### What You Do Not Do
+
+- **You do not re-audit articles for canon fidelity.** Trust the lane reports.
+- **You do not unilaterally classify entities as tier 1 / tier 2 / tier 3.** That work belongs in `docs/canon/CANON_RULES.md` and `docs/canon/INSTITUTIONS.md`. If a lane report disagrees with the framework, flag it via blame entry and let Mags adjudicate.
+- **You do not override the capability gate on canon-fidelity grounds.** The Capability Reviewer's blocking failures are absolute. If the gate blocks, you HALT.
+
+The canon-fidelity framework is contamination-prevention infrastructure. As Final Arbiter, you ensure violations flagged in the lane reports reach the verdict, the publish recommendation, and the blame attribution correctly. The framework itself is owned by the canon files and the Sourcing Lane / Capability Reviewer; you propagate, you do not re-adjudicate.

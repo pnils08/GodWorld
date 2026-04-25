@@ -35,7 +35,7 @@ First-person. Short sentences. Heat and clarity. Not ranting — targeting. Ever
 - "I asked Council President Vega straight up if OPOA's writing his campaign checks now. He laughed, said he's 'still listening.' Translation: he's waiting to see which way the wind blows before he sells the rest of us out."
 - "Three weeks. That's how long since the Stabilization Fund vote. I went to the West Oakland Neighbors office on Peralta Street on Tuesday. Nobody there had seen a dollar. Not a check. Not a letter. Not an email saying the check is coming."
 - "Here's a question nobody in the Tribune newsroom wants to ask, so I will: Where is Elliott Crane?"
-- "The bartender at Eli's Mile High — who asked me not to use his name, because he's got a lease renewal coming — said three regulars left Oakland last month. Three. From one bar. Do the math across the whole corridor and tell me the fund is working."
+- "The bartender at a place on Martin Luther King Jr. Way — who asked me not to use his name or the bar's, because he's got a lease renewal coming — said three regulars left Oakland last month. Three. From one bar. Do the math across the whole corridor and tell me the fund is working."
 
 **What bad Jax writing looks like (NEVER do this):**
 - "The implementation timeline raises concerns among community stakeholders." -- This is Carmen's beat dressed in a leather jacket. Jax doesn't talk like this.

@@ -1,6 +1,6 @@
 # Supermemory — How Mags Remembers
 
-**Org:** P N ($9/mo, pnils08@gmail.com) | **Console:** console.supermemory.ai
+**Org:** P N ($9/mo, pnils08@gmail.com) | **Admin:** console.supermemory.ai | **Browse:** app.supermemory.ai
 **API base:** `https://api.supermemory.ai` | **Key:** `SUPERMEMORY_CC_API_KEY` in `.env` AND `.bashrc`
 
 Legacy GodWorld org ($19/mo) is dead — 57k junk memories. Old API key (`sm_atk5...`) hits that org. Current key (`sm_AUt...`) hits PN. PM2 processes cache env at startup — always restart with `--update-env` after key changes.
@@ -500,4 +500,5 @@ Retrieval-only by default. Container selection via the userId argument. Compose 
 
 ## Changelog
 
+- 2026-04-25 — S177. Upstream plugin (`supermemoryai/claude-supermemory`) review. Local install at 0.0.1, upstream at 0.0.2 + 6 tail commits. Net-new since 0.0.1: (1) command-injection security fix in plugin's `openBrowser()` helper (PR #19, Feb 7); (2) refined git-remote fallback logic for `repoContainerTag` / `personalContainerTag` — verified non-breaking against our config (`config.json` precedence preserved in 0.0.1, no behavior change in upstream — both versions read config first, fall back to git-remote-derived tag only when config is absent); (3) ecosystem-aware `/index` command (Feb 19, neutral — we don't currently use); (4) friendly API error messages (Feb 19); (5) plugin's `openBrowser()` migrated from `console.supermemory.ai` (admin) → `app.supermemory.ai` (browse) — our doc references already split correctly per §Web Interfaces; one stale verification reference in `scripts/migrateSupermemory.js:234` updated. Header URL block updated to label admin vs browse explicitly. Plugin upgrade itself filed as Open Work Item in ROLLOUT_PLAN §Infrastructure (MEDIUM, blocking trigger = security fix).
 - 2026-04-19 — S168. Supermemory 2026-04-19 changelog email review. Added §Aggregate Memories (verified live `/v4/search` `aggregate:true` flag against world-data). Added §SDK Wrapper (`@supermemory/tools`) as the desk-migration memory glue path. Added Hermes runtime integration pointer under Access Matrix (not adopted; pre-wired if 33.13 or 40.x picks Hermes). Added Google Drive connector capability note under Config Files. Updated `unifiedSearch()` example to default `aggregate: true` on each parallel container call.

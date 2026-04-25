@@ -231,7 +231,7 @@ async function main() {
 
   if (!dryRun && migrated > 0) {
     console.log(`\nNext steps:`);
-    console.log(`1. Verify in P N console: console.supermemory.ai`);
+    console.log(`1. Verify in P N: app.supermemory.ai (browse) / console.supermemory.ai (admin)`);
     console.log(`2. Update .bashrc line 102: replace GodWorld key with P N key`);
     console.log(`3. source ~/.bashrc`);
     console.log(`4. Restart Discord bot: pm2 restart mags-bot`);

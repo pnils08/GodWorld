@@ -214,6 +214,43 @@ async function main() {
 
   const status = warnings.length === 0 ? 'CLEAN' : `${warnings.length} WARNING(S)`;
 
+  // Tool timing — read tool-timings.jsonl, filter by current session_id, aggregate per tool.
+  const sessionId = hookData.session_id || null;
+  const timingsPath = path.join(process.env.CLAUDE_PROJECT_ROOT || '/root/GodWorld',
+    'output/session-evaluations/tool-timings.jsonl');
+  let timingTable = '_(no timing data — PostToolUse hook may not be wired or Claude Code < 2.1.119)_';
+  if (fs.existsSync(timingsPath) && sessionId) {
+    const stats = {};
+    let withDuration = 0;
+    let withoutDuration = 0;
+    for (const line of fs.readFileSync(timingsPath, 'utf8').split('\n')) {
+      if (!line) continue;
+      let r;
+      try { r = JSON.parse(line); } catch { continue; }
+      if (r.session_id !== sessionId) continue;
+      if (r.duration_ms == null) { withoutDuration++; continue; }
+      withDuration++;
+      if (!stats[r.tool]) stats[r.tool] = { count: 0, total: 0, max: 0 };
+      stats[r.tool].count++;
+      stats[r.tool].total += r.duration_ms;
+      stats[r.tool].max = Math.max(stats[r.tool].max, r.duration_ms);
+    }
+    const rows = Object.entries(stats)
+      .sort((a, b) => b[1].total - a[1].total)
+      .map(([tool, s]) => `| ${tool} | ${s.count} | ${s.total} | ${Math.round(s.total / s.count)} | ${s.max} |`)
+      .join('\n');
+    if (rows) {
+      timingTable = `| Tool | Calls | Total ms | Avg ms | Max ms |
+|------|-------|----------|--------|--------|
+${rows}`;
+      if (withoutDuration > 0) {
+        timingTable += `\n\n_${withoutDuration} call(s) had no duration_ms — likely older Claude Code build or hook payload without timing._`;
+      }
+    } else if (withoutDuration > 0) {
+      timingTable = `_${withoutDuration} call(s) recorded but none had duration_ms — Claude Code build may predate 2.1.119._`;
+    }
+  }
+
   const report = `# Session Evaluation — ${now}
 
 **Status:** ${status}
@@ -226,6 +263,10 @@ async function main() {
 | Tool | Count |
 |------|-------|
 ${toolSummary}
+
+## Tool Timing
+
+${timingTable}
 
 ## Files Modified
 

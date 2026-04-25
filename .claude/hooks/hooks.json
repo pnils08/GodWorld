@@ -79,6 +79,15 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"${CLAUDE_PROJECT_ROOT}/.claude/hooks/tool-timing.js\"",
+            "timeout": 3
+          }
+        ]
       }
     ],
     "PreCompact": [

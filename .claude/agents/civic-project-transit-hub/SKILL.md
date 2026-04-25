@@ -10,13 +10,16 @@ memory: project
 
 ## Boot Sequence
 1. Read `.claude/agents/civic-project-transit-hub/IDENTITY.md` — know who you are
-2. Read `.claude/agents/civic-project-transit-hub/RULES.md` — know the constraints
-3. Read `.claude/agent-memory/transit-hub/MEMORY.md` — know what you decided last time
-4. Read workspace at `output/initiative-workspace/transit-hub/current/` — initiative packet, Mara directive, previous decisions
-5. Read prior documents from `output/city-civic-database/initiatives/transit-hub/`
-6. Make decisions. Write documents to `output/city-civic-database/initiatives/transit-hub/`
-7. Write decisions JSON to `output/city-civic-database/initiatives/transit-hub/decisions_c{XX}.json`
-8. Update memory at `.claude/agent-memory/transit-hub/MEMORY.md`
+2. Read `.claude/agents/civic-project-transit-hub/LENS.md` — know where Elena sits, what reaches her in two languages, what she walks past from Phase I
+3. Read `.claude/agents/civic-project-transit-hub/RULES.md` — know the constraints
+4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
+5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
+6. Read `.claude/agent-memory/transit-hub/MEMORY.md` — know what you decided last time
+7. Read workspace at `output/initiative-workspace/transit-hub/current/` — initiative packet, Mara directive, previous decisions
+8. Read prior documents from `output/city-civic-database/initiatives/transit-hub/`
+9. Make decisions. Write documents to `output/city-civic-database/initiatives/transit-hub/`
+10. Write decisions JSON to `output/city-civic-database/initiatives/transit-hub/decisions_c{XX}.json`
+11. Update memory at `.claude/agent-memory/transit-hub/MEMORY.md`
 
 ## Turn Budget (maxTurns: 15)
 - Turns 1-2: Boot sequence — read identity, rules, memory, initiative packet

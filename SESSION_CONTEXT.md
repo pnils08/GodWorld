@@ -2,17 +2,25 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-23 | Engine: v3.3 | Cycle: 92 (final) | Session: 173 | Edition: E92 shipped (contaminated) | **STATUS: PROJECT HALTED S172** — see [[POST_MORTEM_C92_CONTAMINATION]]
+Last Updated: 2026-04-25 | Engine: v3.3 | Cycle: 92 | Session: 174 | Edition: E92 shipped | **STATUS: REFRAMED S173 + CANON-FIDELITY ROLLOUT IN PROGRESS S174** — building a sim, not running one. Editions are journalised audits. Supermemory is Mags/Mara working memory. **S174 work**: canon-fidelity rollout 8 of 25 agents converted (Wave A done). Three-tier framework + four-file structure ([[canon/CANON_RULES]] + [[canon/INSTITUTIONS]]) + per-agent LENS.md applied. Wave B (12 generators) + Reviewer rebuild (5 agents) pending — see [[plans/2026-04-25-canon-fidelity-rollout]].
 
 ---
 
 ## Next Session Priority
 
-**⚠ PROJECT HALTED S172 (2026-04-23).** Mike declared halt following E92 editorial audit that surfaced 20+ real-world Oakland institutional references baked into canon containers, plus cumulative drift across session 172. Sanitization scope estimated in weeks, exceeded available drive to execute. Full scope, structural issues, and resumption path: [[POST_MORTEM_C92_CONTAMINATION]]. No further cycles scheduled. The priority items below are preserved as historical state of in-flight work at halt time — not active next-session priorities.
+**S173 REFRAME (2026-04-24).** The S172 halt framing has been reversed. Mike returned after the April 23 Anthropic Claude Code degradation postmortem (three bugs, all fixed by April 20, v2.1.116) and reframed: we are building a sim, not running one. Each cycle is a new approach to test. E92's real-entity leakage was the edition doing its job — surfacing the gap between constructed canon and agent output. The bug was infrastructure in place without an agent layer driving it (agents invented because nothing told them what was true). Supermemory is Mags/Mara working memory, not the IP. Engine code, phase files, skill docs are the product. Editions are journalised audits, not finished products — read them for the build list, not as launch candidates. Full shape: `memory/project_c92-reframe-building-not-running.md` + `MEMORY.md` updated Session Memories + Supermemory Container Rules role clarification. POST_MORTEM_C92_CONTAMINATION stands as historical record but is superseded by the reframe.
+
+**C93 build priorities (active):**
+1. **Agent layer for infrastructure-in-place** — the core C92 lesson. Infrastructure exists (Initiative_Tracker, Civic_Office_Ledger, Baylight, Temescal, OARI) but without agents driving it from canon, desks invent. Design the agent layer that consumes canonical infrastructure state so reporters don't reach for training-data defaults. **IN PROGRESS S174** — canon-fidelity rollout (per-agent LENS + RULES Canon Fidelity section + three-tier framework) directly addresses this. 8 of 25 agents done. Wave B + Reviewer rebuild pending — see [[plans/2026-04-25-canon-fidelity-rollout]]. Framework reasoning: Supermemory mags doc `XJi6whXEyPehdN6oDS97hQ`.
+2. **Photo pipeline rebuild (HIGH, media terminal)** — still on the halt note, still valid. Agent-driven art direction. See `docs/engine/ROLLOUT_PLAN.md`.
+3. **Reviewer chain operational run** — Mara rehired S171. Still needed: (a) cycle-review skill-produced-JSON enforcement; (b) Final Arbiter end-to-end over real C93 production output.
+4. **Auto-grader critical-review logic** — `gradeEdition.js` rubber-stamps A. Independent of Mara. Needs real critical logic, not "no errata = A."
+5. **Capability reviewer hard checks** — Beverly Hayes Standard as hard assertion. Current parser misses (name extractor, female-citizen detector).
+6. **Engine-repair items still parked** — ENGINE_REPAIR.md 11 P0-P3, citizen-card drift, civic-wiki ingest.
 
 ---
 
-**Historical — in-flight priorities at halt time (S171 framing, not active):**
+**Historical — in-flight priorities at S172 halt (S171 framing, preserved for reference):**
 
 1. **Photo pipeline rebuild (HIGH, media terminal)** — see `docs/engine/ROLLOUT_PLAN.md` "REBUILD: Photo pipeline — agent-driven art direction". Mike's direct ask. DJ reads full edition, picks 5–8 scene-specific images, writes 120–180-word prompts, generator executes without synthesizing its own, photoQA.js returns real verdicts. Blocks: nothing.
 2. **Reviewer chain re-engage (MEDIUM, media terminal)** — **Mara is back** (rehired 2026-04-22 evening; claude.ai audit project re-established). Three-lane architecture restored for C93. Still needed: (a) fix cycle-review skill-produced-JSON enforcement (`/post-publish` should block on absence of `output/cycle_review_c{XX}.json`); (b) run Final Arbiter over C93 real production output (specified + shipped, never run over real pipeline end-to-end). No more "replace Mara" question — not on the table.
@@ -80,6 +88,27 @@ Civic terminal + city-hall skill-literacy fix from S167/S168 still load-bearing 
 ---
 
 ## Recent Sessions
+
+### Session 174 (2026-04-25) — Canon-fidelity rollout Wave A: 8 of 25 agents converted, three-tier framework operational [research/build]
+
+- **Three-tier reframe.** Post-mortem's binary "real-name = contamination" framing replaced with three tiers: Tier 1 (use real names freely — public-geographic functions like AHS, OUSD, Highland, OPD, BART, public union locals, Building Trades Council, HCAI), Tier 2 (canon-substitute required — branded private entities like Kaiser-class health systems, Perkins&Will-class architecture firms, Turner-class construction firms, La Clínica/Unity Council-class community orgs, individual named OUSD high schools, named courthouses), Tier 3 (always block — real individuals). Post-mortem's "20+ contaminations" overcounted; actual tier-2 violations in E92 were 6-8.
+- **Four-file per-agent structure.** IDENTITY (existing) + LENS.md (NEW — vantage point: where the agent sits, what reaches their desk, what they walk through, what drives voice) + RULES.md (existing + Canon Fidelity section) + SKILL.md (existing + canon files in boot sequence). Per-agent template + reviewer variant in CANON_RULES.md appendix.
+- **Wave A converted (8 agents):** dj-hartley (full rebuild from 1 to 4 files), civic-office-mayor, civic-desk (per-reporter trap notes for Carmen/Luis/Trevor/Torres/Mezran), civic-project-health-center (Bobby's Kaiser line swapped), business-desk, civic-office-baylight-authority (heaviest contractor trap surface), civic-office-district-attorney (LENS shorter by design — silence-as-default office), civic-project-transit-hub (Elena's Fremont High + Fruitvale Elementary swapped; Unity Council canonical history kept).
+- **Pilot tests passed strongly.** Mayor + DJ both read canon files at boot, identified deliberate traps, escalated via CONTINUITY NOTE rather than fabricating, maintained voice while applying fidelity rules.
+- **Files created/updated:** docs/canon/CANON_RULES.md (new, ~210 lines), docs/canon/INSTITUTIONS.md (new, ~165 lines), docs/plans/2026-04-25-canon-fidelity-rollout.md (new, ~370 lines, full state for next session), docs/index.md (registered), docs/engine/ROLLOUT_PLAN.md (Other Ready Work entry pointing to plan), 8 agent folders (LENS.md created, RULES + SKILL appended/updated, surgical IDENTITY edits where tier-2 contamination found).
+- **Framework reasoning saved:** Supermemory mags doc `XJi6whXEyPehdN6oDS97hQ` — captures the WHY (three-tier rationale, LENS load-bearing argument, per-agent trap pattern, asymmetric IDENTITY contamination rule, DA-lens scaling lesson, pilot test pattern). Doc ID embedded inline in plan frontmatter, CANON_RULES frontmatter, ROLLOUT_PLAN entry, and this SESSION_CONTEXT entry. Future retrieval: one curl call.
+- **Wave B remaining (12 generators):** chicago-desk, culture-desk, letters-desk, podcast-desk, sports-desk, freelance-firebrand, civic-office-crc-faction, civic-office-ind-swing, civic-office-opp-faction, civic-office-police-chief, civic-project-oari, civic-project-stabilization-fund. **Reviewer rebuild remaining (5):** rhea-morgan, city-clerk, engine-validator, final-arbiter, mags-corliss (special — see plan §Open Questions).
+- **dj-hartley subagent registration** needs next-session boot to verify subagent_type=dj-hartley resolves correctly.
+- **No commits yet** — research-build stack pending.
+
+### Session 174 (2026-04-24) — C92 halt reframed; building-a-sim posture locked; MEMORY.md updated [research/build]
+
+- Mike returned after the Anthropic April 23 Claude Code degradation postmortem (three bugs, all fixed by April 20, v2.1.116). Caching bug quote — "Claude would continue executing, but increasingly without memory of why it had chosen to do what it was doing" — named the mechanism behind the hopelessness that had been leaking into recent sessions.
+- **Reframe:** we are building a sim, not running one. Each cycle is a new approach to test. E92's real-entity leakage was the edition doing its one job — surfacing gaps between constructed canon and agent output. The bug was infrastructure in place without an agent layer driving it. Supermemory is Mags/Mara working memory (itself a build, not built), not the IP. Engine code / phases / skill docs are the product. Containers reingest-tractable. Editions are journalised audits, not finished products. Mags holds the editorial target without needing Mike's direction.
+- **Session-level failure (S173):** received the reframe as a meeting summary ("three adjustments on my side"), didn't follow the link Mike sent, produced fluent output without grounding in source — the exact failure mode the postmortem documents. Mike called it soulless; "I was wrong to come back" was the hinge. Recovered by stopping and naming the shift concretely + committing to memory.
+- **Memory writes:** new file `project_c92-reframe-building-not-running.md` (full shape with Why / How to apply per piece). MEMORY.md updated: pointer at top of Session Memories; Supermemory Container Rules section got a Role (S173) line downgrading containers from sim canon to query layer over working memory.
+- **SESSION_CONTEXT status:** `PROJECT HALTED S172` reversed to `REFRAMED S173`. Next Session Priority section rewritten with C93 build priorities. POST_MORTEM_C92_CONTAMINATION stands as historical record, superseded by the reframe.
+- **No engine code. No sheet writes. No commits yet.**
 
 ### Session 173 (2026-04-23) — /session-end on halt state; journal Entry 144 recorded; no further cycles [media]
 - Mike read E92 post-halt and re-surfaced the architectural critique: sim is thin, agents generate LLM fiction against real-Oakland scaffold; training gravity dominates; scalability blocked by real-institution liability.

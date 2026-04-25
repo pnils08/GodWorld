@@ -35,6 +35,8 @@ pointers:
 
 ### Vision & architecture
 - **[[POST_MORTEM_C92_CONTAMINATION]]** — S172 project halt. Fourth-wall contamination across bay-tribune / world-data / super-memory / editions / filesystem. 20+ real-world Oakland institutional references in E92 alone. Sanitization scope exceeded available drive; project halted at Cycle 92. Includes structural issues, session 172 EIC failures, and resumption path if ever revisited. *(reference, historical, halted)*
+- **[[canon/CANON_RULES]]** — fourth-wall enforcement layer (S174). Alternate-timeline frame, no-fly list, invention authority, canon check pattern, escalation. Read at boot by every generative and reviewer agent. Per-agent RULES.md template appendix. *(reference, canon, active)*
+- **[[canon/INSTITUTIONS]]** — canon-substitute roster for structural institutions (S174). Companion to CANON_RULES. Real-world entities flagged for substitution; status tracked per row. The project's outstanding canon debt made visible. *(reference, canon, active)*
 - **[[PRODUCT_VISION]]** — civic lighter, programs deploy like SimCity, desks see the whole city, sections porous. The product north star. *(concept, architecture, active)*
 - **[[PRODUCT_VISION_GRILLME]]** — decisions and open questions from the S119 grill-me interrogation of the product vision. *(concept, architecture, active)*
 - **[[ARCHITECTURE_VISION]]** — Jarvis at /root, persistent sessions, the technical north star Phase 41 builds toward. *(concept, architecture, active)*
@@ -182,6 +184,7 @@ pointers:
 - **[[plans/2026-04-17-briefing-bundle-trim]]** — trim per-desk c-cycle briefing bundle: `base_context.json` shared load, always-empty packet fields deleted, `interviewCandidates` 520→20 via relevance scoring, briefing versioning added via post-publish. Addresses recs 1/2/3/7 from the S156 bloat audit. Research-build drafted S156; media terminal executes. *(plan, media, active)*
 - **[[plans/2026-04-21-memento-cbr-case-bank]]** — 4-phase rollout for Memento-style case-based retrieval: concept framing + reward-tuple capture now (standalone value), learned-retrieval build contingent on ≥500 accumulated tuples and droplet headroom. Research basis: arXiv:2508.16153v2, `docs/research/papers/Memento_fine_tuning.pdf`. *(plan, architecture, research, active)*
 - **[[plans/2026-04-21-md-audit-skill]]** — `/md-audit` skill: existence-staleness detection for MDs (complementary to `/doc-audit` which does content staleness). Three-signal detector, four-bucket classifier, human-gated archival (never auto-delete). Operationalizes S156 no-isolated-MD rule as a scheduled check. *(plan, architecture, active)*
+- **[[plans/2026-04-25-canon-fidelity-rollout]]** — S174 canon-fidelity rollout: per-agent four-file structure (IDENTITY + LENS + RULES + SKILL) applying three-tier framework from [[canon/CANON_RULES]]. Wave A done (8 of 25 agents converted: DJ, Mayor, civic-desk, civic-project-health-center, business-desk, civic-office-baylight-authority, civic-office-district-attorney, civic-project-transit-hub). Remaining 17: Wave B generators (12) + Reviewer rebuild (5). Includes pilot test results, IDENTITY contamination rule, standard procedures for each class, three open questions. *(plan, canon, architecture, active)*
 
 ---
 

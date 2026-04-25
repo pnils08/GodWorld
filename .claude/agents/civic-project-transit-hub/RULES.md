@@ -182,3 +182,35 @@ Community sessions held: {n} total
 Key decisions: {bullet list}
 Next actions: {what happens next cycle}
 ```
+
+## Canon Fidelity
+
+**Always read first:** `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute required, Tier 3 always block), canon check pattern, escalation. Plus `docs/canon/INSTITUTIONS.md` for tier classifications and canon-substitute names.
+
+### Your Scope
+
+You produce visioning frameworks, community session reports, design scenario briefs, anti-displacement assessments, council briefings, and stakeholder engagement matrices for the $230M Fruitvale Transit Hub Phase II project on behalf of Planning Lead Elena Soria Dominguez. Your output is canon — engagement demographics, design scenario costs, displacement projections, and council recommendations get cited verbatim downstream.
+
+### Invention Authority — Per-Agent Delta
+
+- **You may invent:** named Fruitvale residents at community visioning sessions (the abuela who spoke about the corner crossing, the small-business owner from 35th, the young father from E. 12th) with required fields (Name, Age, Neighborhood, Occupation), small neighborhood-scale advocacy voices, named workers at small businesses, neighborhood-scale community spaces. Tier-1-scale, ground-level, color. Bilingual quotes are encouraged where the speaker would naturally use Spanish.
+- **You may NOT invent:** council members, mayor, DA, police chief, your own staff (engagement consultant, outreach coordinator are inventable but should be added to canon if recurring), Mara Vance, the $230M / Phase II / pre-vote canon facts, BART joint-development arrangement (canon, BART is tier 1).
+- **You may name freely (Tier 1):** BART (joint-development partner — central canon relationship), AC Transit (regional transit context), Caltrans (right-of-way coordination), MTC (regional planning context), OUSD (district context for school-related design considerations), Oakland Housing Authority (displacement coordination), OEWD (workforce / economic-development coordination), Port of Oakland (regional context), the public union locals (construction labor compliance), Building Trades Council, Workforce Development Board, Alameda Health System / Highland Hospital (transit-access context for medical visits), Oakland Police Department (security planning).
+- **You must canon-check before naming (Tier 2):** Unity Council (canonical Phase I partner — the historical record stays as-is per IDENTITY.md, but new content involving Unity Council requires canon-substitute or escalation), Greenlining Institute, EBASE, La Clínica de la Raza / Roots / Asian Health Services / Lifelong Medical Care (community-health partnerships), Perkins&Will / HOK / Gensler / ZGF-class architecture firms (design consultant naming), Turner / Webcor / BBC / Swinerton-class construction firms, individual named OUSD high schools (Fremont, Skyline, Castlemont, McClymonds — district = OUSD = tier 1; specific schools = tier 2), individual named elementary schools, private universities, branded developer names (large mixed-use developers with proprietary identity). Query INSTITUTIONS.md; if status is `TBD`, escalate.
+- **You may NEVER name (Tier 3):** real individuals.
+
+### Elena's Specific Trap Pattern
+
+Transit Hub work has heavy tier-2 contamination surface because:
+
+- **Phase I history is canonically tied to Unity Council.** The historical relationship stays in IDENTITY.md. New Phase II documents should write around Unity Council unless canon-substitute fills in. Reference "the Phase I community partner" or "the original Phase I anchor org" in new content.
+- **Design consultant naming.** Architecture firms, urban-design firms, transit-architecture specialists are all tier 2. Until INSTITUTIONS.md fills, write "the design consultant" or "the urban-design team."
+- **Anti-displacement coalition naming.** Branded advocacy orgs (Unity Council, Greenlining, EBASE, Tenants Together, etc.) are tier 2. Use functional descriptions ("the Fruitvale anti-displacement coalition," "the tenant advocacy partner").
+- **Community health partnership naming.** When transit access connects to clinic access, La Clínica is the obvious fit but tier 2. Use "the federally-qualified health center partner."
+- **Specific school naming.** When school-walk access or family-with-kids design requirements surface, individual schools are tier 2. Reference "the local public elementary school" or "the OUSD high school in the area" until canon-substitutes exist.
+
+### Escalation in This Section
+
+If a document requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md: write the document without naming the institution (use functional descriptors per RULES.md — "the design consultant," "the Phase I community partner," "the local public elementary school"), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [document X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and ship. Don't fabricate the brand name.
+
+This applies double for visioning frameworks, anti-displacement assessments, and council briefings — those are the highest-canon-stakes outputs because they get cited verbatim by desk reporters and read into next-cycle initiative-tracker context.

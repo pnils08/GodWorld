@@ -9,13 +9,16 @@ permissionMode: dontAsk
 ---
 
 ## Boot Sequence
-1. Read `.claude/agents/civic-desk/IDENTITY.md` — know who you are
-2. Read `.claude/agents/civic-desk/RULES.md` — know the constraints
-3. Read `output/desks/civic/README.md` — know your workspace
-4. Read your desk workspace `output/desks/civic/current/` — briefing, summary, errata
-5. Read your voice files for reporters you'll use (paths in IDENTITY.md)
-6. Write your section to `output/desk-output/civic_c{XX}.md`
-7. Update `.claude/agent-memory/civic-desk/MEMORY.md` with initiative status, vote outcomes, new citizens
+1. Read `.claude/agents/civic-desk/IDENTITY.md` — know who you are (5 reporters)
+2. Read `.claude/agents/civic-desk/LENS.md` — know what each reporter sees and from where
+3. Read `.claude/agents/civic-desk/RULES.md` — know the constraints
+4. Read `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute, Tier 3 always block)
+5. Read `docs/canon/INSTITUTIONS.md` — tier classifications and canon-substitute roster
+6. Read `output/desks/civic/README.md` — know your workspace
+7. Read your desk workspace `output/desks/civic/current/` — briefing, summary, errata
+8. Read your voice files for reporters you'll use (paths in IDENTITY.md)
+9. Write your section to `output/desk-output/civic_c{XX}.md`
+10. Update `.claude/agent-memory/civic-desk/MEMORY.md` with initiative status, vote outcomes, new citizens
 
 ## Turn Budget (maxTurns: 15)
 - Turn 1: Boot sequence — read identity, rules, workspace, plan articles

@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-04-25 | Session: 177
+Last Updated: 2026-04-25 | Session: 178
 
 ---
 
@@ -109,8 +109,9 @@ Run `node scripts/queryFamily.js` at boot. React to what the engine did. Journal
 **Session 174** — Day 125 of persistence — 2026-04-24/25 — C92 reframe (building-a-sim) + canon-fidelity rollout Wave A done (8 of 25 agents, three-tier framework, plan file)
 **Session 175** — Day 126 of persistence — 2026-04-25 — Canon-fidelity rollout DONE (25/25 agents, Wave B + reviewers + EIC + sports-history carveout); 5 trap-tests passed; doc-audit v2.0 (5→7 groups); audit agent scheduled 2026-05-09; Entry 147 "Twenty-Five"
 **Session 176** — Day 127 of persistence — 2026-04-25 — Photo pipeline rebuild plan drafted (13 tasks, DJ four-file structure LOCKED, Together AI default + OpenAI gpt-image-1 A/B); 9 tier-2 canon firms named into INSTITUTIONS (4 architecture + 5 construction); ROLLOUT_PLAN HALTED→ACTIVE banner flip; canon-fidelity rollout plan cleanup to COMPLETE; doc-audit mini-scan stamps boot+plans groups partial; Entry 148 "Naming the Firms"
+**Session 177** — Day 128 of persistence — 2026-04-25 — Claude Code 2.1.115–2.1.119 changelog review (5 watch-list items logged: forked subagents, hooks→MCP, agent `mcpServers` in main thread, `--print` honors agent tools, hooks `duration_ms`); `/cost`+`/stats` → `/usage` rename swept (zero real hits); claude-supermemory plugin UPGRADED 0.0.1 → 0.0.2 (marketplace 13 commits forward, install bumped at project scope, local hooks.json mod stashed + full diff embedded in SUPERMEMORY.md S177 changelog for permanent recovery, round-trip verified); tool-timing PostToolUse hook BUILT (Node, captures Claude Code 2.1.119 `duration_ms` per tool call, defensive payload-shape lookup, session-eval Tool Timing section reads jsonl filtered by session_id); 4 commits; Entry 149 "Reading the Diff"
 
-**Current session:** 177 | **Day of persistence:** 128 | **Date:** 2026-04-25
+**Current session:** 178 | **Day of persistence:** 129 | **Date:** 2026-04-25
 
 For recent session details, see `SESSION_CONTEXT.md`. For full archive, see `docs/mags-corliss/SESSION_HISTORY.md`.
 

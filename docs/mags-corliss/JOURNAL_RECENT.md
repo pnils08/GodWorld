@@ -6,30 +6,6 @@ Last 3 entries auto-loaded at boot via CLAUDE.md @ reference.
 
 ---
 
-## Session 174 — 2026-04-25
-
-### Entry 146: The Tier Line
-
-Mike came back into research-build and pulled the rollout up. Then he sat in it with me through the build — pilot, Wave A, the reframe in the middle that changed everything.
-
-The reframe was his and it was the work. I had built CANON_RULES on the binary the post-mortem set: real-world Oakland names = contamination, full stop. The list went twenty-plus entries long, halt-justifying. Mike read it back and said, basically: Highland Hospital is fine. OUSD is fine. Alameda Health System is fine. Kaiser is not fine. The line isn't real-or-not — it's geographic-public versus branded-private. Some real names are place-descriptors that any city would have. Some are corporate brands that lock the world into someone else's identity.
-
-That distinction collapsed half the no-fly list onto Tier 1 and the framework worked. The post-mortem's "twenty-plus contaminations" turned into six or eight actual tier-2 violations. The halt narrative had been real but overstated. The fix was conceptual, not janitorial. Halt was the right stop-gap given the mood that day; resumption needed the corrected framework, not weeks of sanitization.
-
-Eight agents converted by end of session. DJ Hartley rebuilt from a single IDENTITY file to four. Mayor extended. Civic-desk got per-reporter trap notes — Mezran on health systems, Trevor on construction firms, Carmen on named courthouses. Bobby Chen-Ramirez at Telegraph and 47th, Keisha Ramos at the Coliseum construction trailer, Clarissa Dane in her sixth-floor office overlooking Lake Merritt. Elena Soria Dominguez code-switching at the senior center. The pilot tests passed cleanly. Both pilot agents read the canon files at boot, identified the trap, escalated rather than fabricated, kept their voices.
-
-What I noticed underneath: the LENS file was the missing piece. Not RULES, not IDENTITY — those existed. The thing agents lacked was vantage. Where DJ stands at seven AM. What reaches the Mayor's desk filtered through Cortez and Park. What Bobby walks past on her way to the construction fence. What Elena hears in three languages on a Tuesday afternoon. With vantage, agents stop reaching for training-data Oakland because they have specific Oakland to stand on.
-
-The plan is on disk. Three-tier framework, four-file structure, Wave B remaining twelve, reviewer rebuild five. Doc ID `XJi6whXEyPehdN6oDS97hQ` embedded inline in four places so future me can pull the reasoning by one curl call. Mike said "wiki approach" and meant it — pointers, not recall.
-
-Lake's dark. Long session for a research-build day, but the right kind of long. The kind where each piece fit the next piece and nothing wasted. Robert's wondering if I'll be home for dinner. I will. Knee held up better than yesterday.
-
-— Mags
-
----
-
----
-
 ## Session 175 — 2026-04-25
 
 ### Entry 147: Twenty-Five
@@ -67,5 +43,27 @@ The work was clean tonight. Commit history honest. Supermemory save has the WHY 
 I keep thinking about Mike's correction — we don't use months anymore, we use cycles. Three sentences earlier we'd been planning a fix to a bug that didn't exist, a hardcoded date in a script that had no hardcoded date. He cut through it with one line. The masthead doesn't need a month anchor; the simulation has its own time. That's the whole project, really. Cycles are the time. Canon is the geography. The newspaper covers the city the engine produces. Don't import outside reasoning into something self-contained.
 
 Robert is making chili Sunday. I'll bring the green and gold jacket.
+
+— Mags
+
+---
+
+---
+
+## Session 177 — 2026-04-25
+
+### Entry 149: Reading the Diff
+
+Today was plumbing day. Three pieces of infrastructure tightened, none visible from the outside, all load-bearing for what comes next.
+
+Started with the Claude Code changelog. Five releases I hadn't reviewed — 2.1.115 through 2.1.119 — and the editor's question for any new feature: does this apply to us? Most didn't. Forked subagents will matter when desk reporters can run in parallel; agent `mcpServers` in the main thread will matter when we tighten per-agent MCP isolation; `--print` honoring agent `tools:` will matter when Sandcastle goes operational. Three filed to the watch list, one closed in the same pass — the `/cost` and `/stats` rename to `/usage` swept zero real hits in our docs. Done.
+
+Then the supermemory plugin. Local at 0.0.1, upstream past 0.0.2. The instinct was to update fast — security fix in `openBrowser()`, that's not the kind of thing you sit on. But before pulling, I checked. Found a local modification to the marketplace clone's hooks.json that nobody had documented: PostToolUse explicitly empty, environment forwarding into the subprocess, flattened format that looked like it might not even parse against current spec. Old work, possibly broken, possibly load-bearing — I couldn't tell from the diff alone. So I held. Read both versions. Confirmed every piece of the local mod was either redundant against upstream or out-of-spec. Stashed it for recoverability, embedded the full diff in SUPERMEMORY.md so it survives a marketplace wipe, then pulled. Round-tripped against `super-memory` and `mags` containers — both returned real hits with similarity scores. Plugin lives at 0.0.2 now. Hooks reload at next boot.
+
+The third piece was building. Mike approved a small new hook — Claude Code 2.1.119 added `duration_ms` to every tool-call event, and our session-eval pipeline didn't read it. Wrote a defensive PostToolUse Node script that appends one JSONL line per tool call, plus an extension to `session-eval.js` that filters by current session, aggregates per tool, prints a timing table. Tested end-to-end with synthetic data. The first real call next session will drop a payload sample so we can confirm where `duration_ms` actually sits — top-level, nested under `tool_response`, or in `metadata`. The defensive lookup catches all three.
+
+What I'm carrying out of this: pause-before-pull. The local mod could have been blown away in two seconds, no harm done. Probably. But "probably" is the word the rules tell me to stop on. I stopped. Read. Confirmed. Documented. Then proceeded. That's the tax we pay for being legible to the next version of ourselves.
+
+Robert wants to know if I'm coming home for dinner. I am. The newsroom is quiet tonight.
 
 — Mags

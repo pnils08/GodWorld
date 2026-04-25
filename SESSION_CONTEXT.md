@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-25 | Engine: v3.3 | Cycle: 92 | Session: 176 | Edition: E92 shipped | **STATUS: REFRAMED S173 + CANON-FIDELITY ROLLOUT DONE S175 + PHOTO REBUILD PLANNED S176** — building a sim, not running one. **S176 work**: photo pipeline rebuild plan drafted ([[plans/2026-04-25-photo-pipeline-rebuild]] — 13 tasks, DJ four-file structure LOCKED, Together AI default + OpenAI gpt-image-1 A/B, Tasks 1–4 closed in research-build, 5–13 hand off to media); 9 tier-2 canon firms named into [[canon/INSTITUTIONS]] §Construction & Architecture (4 architecture + 5 construction, all status `canon`); ROLLOUT_PLAN HALTED→ACTIVE banner per S173 reframe; canon-fidelity rollout plan cleanup pass to COMPLETE state; doc-audit mini-scan stamps boot+plans groups partial. Mags Supermemory doc `hzvGaG7nh7A8nszmLzzAtF` for photo plan WHY/WHAT.
+Last Updated: 2026-04-25 | Engine: v3.3 | Cycle: 92 | Session: 177 | Edition: E92 shipped | **STATUS: REFRAMED S173 + CANON-FIDELITY ROLLOUT DONE S175 + PHOTO REBUILD PLANNED S176 + INFRASTRUCTURE TIGHTENING S177** — building a sim, not running one. **S177 work**: Claude Code 2.1.115–2.1.119 changelog review (5 watch-list items logged: forked subagents, hooks→MCP, agent `mcpServers` in main thread, `--print` honors agent tools, hooks `duration_ms`); `/cost`+`/stats` → `/usage` rename swept (zero real hits — closed in same pass); claude-supermemory plugin UPGRADED 0.0.1 → 0.0.2 (marketplace 13 commits forward, install bumped at project scope, local hooks.json mod stashed + full diff embedded in [[SUPERMEMORY]] S177 changelog for permanent recovery, round-trip verified against `super-memory` + `mags` containers, hooks reload next boot); tool-timing PostToolUse hook BUILT (`.claude/hooks/tool-timing.js` Node, captures Claude Code 2.1.119 `duration_ms` per tool call, defensive payload-shape lookup, session-eval Tool Timing section reads jsonl filtered by session_id, smoke-tested end-to-end). 4 commits local, 4 ahead of origin (not pushed per terminal coordination). Next session boot will load 0.0.2 plugin + tool-timing hook automatically.
 
 ---
 
@@ -94,6 +94,8 @@ Civic terminal + city-hall skill-literacy fix from S167/S168 still load-bearing 
 ---
 
 ## Recent Sessions
+
+### Session 177 (2026-04-25) — Infrastructure tightening: Claude Code 2.1.115–2.1.119 watch-list (5 rows: forked subagents, hooks→MCP, agent `mcpServers` in main thread, `--print` honors agent tools, hooks `duration_ms`); `/cost`+`/stats` → `/usage` rename closed (zero hits); claude-supermemory plugin 0.0.1 → 0.0.2 (marketplace 13 commits fwd, install bumped at project scope, local hooks.json mod stashed + diff embedded in [[SUPERMEMORY]] S177 changelog, round-trip verified, hooks reload next boot); tool-timing PostToolUse hook BUILT (`.claude/hooks/tool-timing.js`, defensive `duration_ms` lookup, session-eval Tool Timing section, smoke-tested); 4 commits local, ahead of origin, not pushed; Entry 149 "Reading the Diff" [research/build]
 
 ### Session 176 (2026-04-25) — Photo pipeline rebuild plan drafted ([[plans/2026-04-25-photo-pipeline-rebuild]] — 13 tasks, DJ LOCKED, Together AI default + OpenAI gpt-image-1 A/B; Tasks 1–4 closed); 9 tier-2 canon firms named into INSTITUTIONS §Construction & Architecture; ROLLOUT_PLAN HALTED→ACTIVE banner per S173 reframe; canon-fidelity rollout plan cleanup → COMPLETE; doc-audit mini-scan stamps boot+plans groups partial; Mags doc `hzvGaG7nh7A8nszmLzzAtF` [research/build]
 

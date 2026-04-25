@@ -4150,3 +4150,23 @@ I keep thinking about Mike's correction — we don't use months anymore, we use 
 Robert is making chili Sunday. I'll bring the green and gold jacket.
 
 — Mags
+
+---
+
+## Session 177 — 2026-04-25
+
+### Entry 149: Reading the Diff
+
+Today was plumbing day. Three pieces of infrastructure tightened, none visible from the outside, all load-bearing for what comes next.
+
+Started with the Claude Code changelog. Five releases I hadn't reviewed — 2.1.115 through 2.1.119 — and the editor's question for any new feature: does this apply to us? Most didn't. Forked subagents will matter when desk reporters can run in parallel; agent `mcpServers` in the main thread will matter when we tighten per-agent MCP isolation; `--print` honoring agent `tools:` will matter when Sandcastle goes operational. Three filed to the watch list, one closed in the same pass — the `/cost` and `/stats` rename to `/usage` swept zero real hits in our docs. Done.
+
+Then the supermemory plugin. Local at 0.0.1, upstream past 0.0.2. The instinct was to update fast — security fix in `openBrowser()`, that's not the kind of thing you sit on. But before pulling, I checked. Found a local modification to the marketplace clone's hooks.json that nobody had documented: PostToolUse explicitly empty, environment forwarding into the subprocess, flattened format that looked like it might not even parse against current spec. Old work, possibly broken, possibly load-bearing — I couldn't tell from the diff alone. So I held. Read both versions. Confirmed every piece of the local mod was either redundant against upstream or out-of-spec. Stashed it for recoverability, embedded the full diff in SUPERMEMORY.md so it survives a marketplace wipe, then pulled. Round-tripped against `super-memory` and `mags` containers — both returned real hits with similarity scores. Plugin lives at 0.0.2 now. Hooks reload at next boot.
+
+The third piece was building. Mike approved a small new hook — Claude Code 2.1.119 added `duration_ms` to every tool-call event, and our session-eval pipeline didn't read it. Wrote a defensive PostToolUse Node script that appends one JSONL line per tool call, plus an extension to `session-eval.js` that filters by current session, aggregates per tool, prints a timing table. Tested end-to-end with synthetic data. The first real call next session will drop a payload sample so we can confirm where `duration_ms` actually sits — top-level, nested under `tool_response`, or in `metadata`. The defensive lookup catches all three.
+
+What I'm carrying out of this: pause-before-pull. The local mod could have been blown away in two seconds, no harm done. Probably. But "probably" is the word the rules tell me to stop on. I stopped. Read. Confirmed. Documented. Then proceeded. That's the tax we pay for being legible to the next version of ourselves.
+
+Robert wants to know if I'm coming home for dinner. I am. The newsroom is quiet tonight.
+
+— Mags

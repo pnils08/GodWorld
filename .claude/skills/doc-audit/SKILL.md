@@ -181,12 +181,12 @@ Update this after each audit. `/doc-audit` with no argument picks the oldest.
 
 | Group | Last Audited (v2.0) | Session | Notes |
 |-------|--------------------|---------|-------|
-| boot | — | — | **v2.0 expanded** — added 3 per-path rules (newsroom/engine/dashboard), CANON_RULES, INSTITUTIONS, BOOT_ARCHITECTURE, POST_MORTEM_C92_CONTAMINATION. MEMORY.md spec corrected (24.4KB, not 200 lines). Needs full re-audit. |
+| boot | 2026-04-25 (partial) | S176 | **Partial S176 scan only** — PERSISTENCE.md line 112 S175→S176 fixed; 13 other boot docs (CLAUDE.md, identity rules, newsroom rules, engine rules, dashboard rules, MEMORY.md, SCHEMA.md, index.md, CANON_RULES.md, INSTITUTIONS.md, BOOT_ARCHITECTURE.md, POST_MORTEM_C92_CONTAMINATION.md, SESSION_CONTEXT.md) not audited. **v2.0 expanded** — added 3 per-path rules, CANON_RULES, INSTITUTIONS, BOOT_ARCHITECTURE, POST_MORTEM. MEMORY.md spec corrected (24.4KB). Full re-audit still pending. |
 | engine | — | — | **v2.0 expanded** — added 7 per-phase plans, ENGINE_REPAIR, REVIEWER_LANE_SCHEMA, INSTITUTIONAL_VOICE_AGENTS, CYCLE_SEPARATION, phase19_agent_personas, ENGINE_CONNECTIVITY_ROLLOUT, ROLLOUT_ARCHIVE. DOC_LEDGER sunset-flagged. S156 partial-audit notes preserved below. |
 | media | — | — | **v2.0 expanded** — added ~17 missing media docs (REAL_NAMES_BLOCKLIST active, archive indexes, criteria changelogs, DRIVE/CITIZEN_NARRATIVE/STYLE_GUIDE/etc.). DESK_PACKET_PIPELINE flagged SUPERSEDED (do not maintain). Sports-history carveout (S175) noted. |
 | infra | — | — | **v2.0 expanded** — added MIGRATION_OFF_CLAUDE, ACTION_MANAGED_AGENTS, CANCELLATION, WORKFLOWS, RESEARCH, research4_1, research4_2, briefing_bloat_audit. S156 patches preserved. |
 | data | — | — | **v2.0 corrections** — column count corrected to 47/A-AU (was 46/A-AT). schemas/SCHEMA_HEADERS added as authoritative. Ledger docs (HEAT_MAP/REPAIR/AUDIT) deferred to engine-sheet. |
-| plans | — | — | **v2.0 NEW group** — never audited. 13 plan files, highest-drift category. Status accuracy critical. |
+| plans | 2026-04-25 (partial) | S176 | **Partial S176 scan only** — photo-pipeline-rebuild.md frontmatter draft→active flipped (matches TEMPLATE lifecycle: approved + Tasks 1–4 done = active); index.md entry tag matched. 12 other plan files not audited. **v2.0 NEW group** — highest-drift category. Status accuracy critical. Full re-audit still pending. |
 | persona | — | — | **v2.0 NEW group** — never audited. mags-corliss/ (8 files, mostly logs) + mara-vance/ (10 files, all reference). v1.7 versions in CIVIC_VETO + INITIATIVE_TRACKER need version verification. |
 
 ### S156 Historical Audit Notes (preserved for context — group scopes since expanded)

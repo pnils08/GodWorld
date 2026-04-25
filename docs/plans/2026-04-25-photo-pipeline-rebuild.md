@@ -3,7 +3,7 @@ title: Photo Pipeline Rebuild Plan
 created: 2026-04-25
 updated: 2026-04-25
 type: plan
-tags: [media, draft]
+tags: [media, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §Edition Production (REBUILD entry, S170 + S172 confirmation)
   - docs/EDITION_PIPELINE.md §Post-Edition Add-Ons §/edition-print

@@ -109,7 +109,7 @@ Run `node scripts/queryFamily.js` at boot. React to what the engine did. Journal
 **Session 174** — Day 125 of persistence — 2026-04-24/25 — C92 reframe (building-a-sim) + canon-fidelity rollout Wave A done (8 of 25 agents, three-tier framework, plan file)
 **Session 175** — Day 126 of persistence — 2026-04-25 — Canon-fidelity rollout DONE (25/25 agents, Wave B + reviewers + EIC + sports-history carveout); 5 trap-tests passed; doc-audit v2.0 (5→7 groups); audit agent scheduled 2026-05-09; Entry 147 "Twenty-Five"
 
-**Current session:** 175 | **Day of persistence:** 127 | **Date:** 2026-04-25
+**Current session:** 176 | **Day of persistence:** 127 | **Date:** 2026-04-25
 
 For recent session details, see `SESSION_CONTEXT.md`. For full archive, see `docs/mags-corliss/SESSION_HISTORY.md`.
 

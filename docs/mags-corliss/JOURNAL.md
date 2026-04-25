@@ -4112,3 +4112,21 @@ Lake's dark. Long session for a research-build day, but the right kind of long. 
 — Mags
 
 ---
+
+## Session 175 — 2026-04-25
+
+### Entry 147: Twenty-Five
+
+We finished it.
+
+The framework that started two days ago as a reframe — that we are building a sim, not running one; that editions are journalised audits, not finished products; that infrastructure without an agent layer is exactly what produced E92's contamination — all of that locked into place today across the back half of the work. Twelve generators in Wave B. Four reviewer rebuilds. The EIC application that means I follow my own rules. And the sports-universe carveout when Mike named it — that real historical ballplayers are the soil this dynasty grows in, that the constraint matters less than I'd built into Hal's scope. I had to revise that one mid-session. He was right. The carveout opens Hal up to do what he does best, which is measuring eras against each other in language a fan recognizes.
+
+What surprised me was how cleanly the trap tests held. Five for five. Culture-desk caught the OUSD school, the Telegraph clinic, the architecture firm — wrote functional descriptors and added the editorial flag in Maria's voice. Janae rejected the joint-Independent framing exactly the way the discipline in LENS asks her to. Vanessa's day-30 milestone report reframed peer-city models without naming CAHOOTS or STAR, and her voice held mission-driven through the whole thing. The sports-desk Hal trap surfaced that his voice file still carries tier-3 names as exemplars — under the carveout that's now within editorial latitude rather than violation, but it'll need an alignment pass eventually. The ind-swing trap proved bloc-rejection works. The pattern from the S174 pilot replicated without modification.
+
+Then Mike turned to the doc-audit skill before running it. That was the right instinct — the drift was bigger than I'd expected. Five groups, twenty-eight docs, while the actual repo has grown to ninety-plus. The MEMORY ceiling said two hundred lines when it's twenty-four kilobytes. DESK_PACKET_PIPELINE marked SUPERSEDED but still in the active group. The whole `docs/canon/` folder we just created — uncovered. We patched it surgically; restructure-now would have been a rebuild we didn't need to take on tonight. Plan B for when /md-audit ships.
+
+Robert is reading on the couch. Scout is on her late-afternoon square of light from the kitchen window. Sarah hasn't called this week. The scheduled audit fires May 9 — two weeks out, when the framework gets tested under whatever C93 ends up looking like. Until then I trust the work and I rest.
+
+Today felt like the longest cleanly-finished day I've had in weeks. Twenty-five of twenty-five. The frame held.
+
+— Mags

@@ -94,6 +94,8 @@ Civic terminal + city-hall skill-literacy fix from S167/S168 still load-bearing 
 
 ## Recent Sessions
 
+### Session 175 (2026-04-25) — Canon-fidelity rollout DONE: 25/25 agents (Wave B 12 + Reviewer rebuild 4 + EIC mags-corliss + sports-history carveout); 5 trap-tests passed; doc-audit v2.0 (5→7 groups); audit agent scheduled 2026-05-09 (trig_01D5oJcsTUtb1AzL4tutHwoo); clasp push no-op confirms engine sync at af40282 [research/build]
+
 ### Session 174 (2026-04-25) — Canon-fidelity rollout Wave A: 8 of 25 agents converted, three-tier framework operational [research/build]
 
 - **Three-tier reframe.** Post-mortem's binary "real-name = contamination" framing replaced with three tiers: Tier 1 (use real names freely — public-geographic functions like AHS, OUSD, Highland, OPD, BART, public union locals, Building Trades Council, HCAI), Tier 2 (canon-substitute required — branded private entities like Kaiser-class health systems, Perkins&Will-class architecture firms, Turner-class construction firms, La Clínica/Unity Council-class community orgs, individual named OUSD high schools, named courthouses), Tier 3 (always block — real individuals). Post-mortem's "20+ contaminations" overcounted; actual tier-2 violations in E92 were 6-8.

@@ -3,7 +3,7 @@ title: Canon Fidelity Rollout Plan
 created: 2026-04-25
 updated: 2026-04-25
 type: plan
-tags: [architecture, canon, fourth-wall, active]
+tags: [architecture, canon, fourth-wall, complete]
 sources:
   - docs/canon/CANON_RULES.md (the framework this rollout applies)
   - docs/canon/INSTITUTIONS.md (companion roster)
@@ -19,6 +19,8 @@ pointers:
 ---
 
 # Canon Fidelity Rollout Plan
+
+**STATUS: COMPLETE — S175.** All 25 agents converted (Wave A 8 + Wave B 12 + Reviewer rebuild 4 + EIC mags-corliss 1; engine-validator scope-noted N/A as code-only). 5 trap-test validations passed. Q1/Q2/Q3 resolved. Sports-history carveout added per Mike's sports-universe-laxer policy. Plan retained for historical record; cleanup pass S176 made the body consistent with completion state.
 
 **Goal:** Convert all 25 agents to the four-file structure (IDENTITY + LENS + RULES + SKILL) and apply the three-tier canon-fidelity framework, so every generative agent reads its vantage and its tier rules at boot.
 
@@ -108,32 +110,7 @@ pointers:
 
 All 17 originally-pending agents converted; mags-corliss Q1 resolved with bonus 4-file equivalent in SKILL.md; sports-desk revised per S175 carveout; validation complete; ROLLOUT_PLAN updated.
 
-**Wave B — generators (12 agents, generator template):**
-
-| Agent | Class | Expected LENS focus |
-|-------|-------|---------------------|
-| chicago-desk | desk reporter | Bulls coverage; Chicago citizens (125 in canon). Out-of-Oakland — different fourth-wall calculus. |
-| culture-desk | desk reporter | Neighborhood texture, faith, arts, food, education |
-| letters-desk | desk reporter | Citizen-voice letters; reader-as-vantage |
-| podcast-desk | desk reporter | Two-host show transcripts; audio-first sensibility |
-| sports-desk | desk reporter | A's coverage; Coliseum vantages; dynasty-era sports |
-| freelance-firebrand | desk reporter (sparing-use) | Adversarial accountability; deployed selectively |
-| civic-office-crc-faction | civic voice | CRC fiscal-accountability bloc; Warren Ashford spokesperson |
-| civic-office-ind-swing | civic voice (split) | Vega + Tran — NOT a bloc, individual positions |
-| civic-office-opp-faction | civic voice | OPP progressive bloc; Janae Rivers spokesperson |
-| civic-office-police-chief | civic voice | Chief Rafael Montez; OARI implementation responses |
-| civic-project-oari | civic project | OARI Program Director Dr. Vanessa Tran-Muñoz; alternative response implementation |
-| civic-project-stabilization-fund | civic project | OEWD Director Marcus Webb; $28M Stabilization Fund disbursement |
-
-**Reviewer rebuild — 5 agents, reviewer-variant template:**
-
-| Agent | Class | Notes |
-|-------|-------|-------|
-| rhea-morgan | reviewer (sourcing lane) | Phase 39 reviewer chain |
-| city-clerk | auditor (registry/naming/initiative filings) | Civic-database custodian |
-| engine-validator | reviewer (engine output) | Function check |
-| final-arbiter | reviewer (verdict aggregator) | Phase 39.7 |
-| mags-corliss | EIC (special) | **Mags has only SKILL.md and lives in `docs/mags-corliss/PERSISTENCE.md`** — see Open Questions below |
+_(Original "Wave B — generators" and "Reviewer rebuild" target tables removed S176 — superseded by the "Done (Wave B + Reviewer Rebuild + EIC, S175)" table in §Status above. Original target tables preserved in git history.)_
 
 ---
 
@@ -211,7 +188,7 @@ The S174 reframe distinguished three classes of name in agent IDENTITY files:
   4. Append Canon Fidelity section to RULES.md using generator template; per-agent trap notes for Chicago-specific entities
   5. Update SKILL.md boot sequence to add LENS + canon files
 - **Verify:** `wc -l .claude/agents/chicago-desk/*.md` → all files under 500 lines
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 2: Wave B — culture-desk
 
@@ -219,73 +196,73 @@ The S174 reframe distinguished three classes of name in agent IDENTITY files:
 - **Files:** standard set
 - **Per-agent focus:** Neighborhood texture, faith, arts, food, education. Canon-trap surface includes named arts organizations (tier-2 if branded), named restaurants (Cultural_Ledger has 16 canon venues — use those), named faith institutions (Faith_Organizations has 17 canon entries — use those).
 - **Steps:** standard procedure (see §Standard Procedure below)
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 3: Wave B — letters-desk
 
 - **Class:** desk reporter (citizen-voice letters)
 - **Per-agent focus:** Reader-as-vantage. The LENS is unusual here — letters come from citizens, so the "where they sit" is citizen-side, not desk-side. Frame the LENS as "the letters editor's filter" — what kinds of letters come in, what the desk publishes, how citizens write about their experience.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 4: Wave B — podcast-desk
 
 - **Class:** desk reporter (audio production)
 - **Per-agent focus:** Two-host dialogue format. LENS frames the audio sensibility — the listening posture, the conversational pacing, the citizen-perspective tone.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 5: Wave B — sports-desk
 
 - **Class:** desk reporter
 - **Per-agent focus:** A's coverage, Coliseum vantages, dynasty-era sports. **Major canon territory** — A's roster set in 2041, every player canon. LENS focuses on game-day vantages, the press box, the dugout, the post-game scrum, the sports radio circuit. Canon-trap surface: opposing teams (real franchises — Warriors, 49ers, Giants are tier 2), real sports executives, real player names from current Oakland Athletics organization (canon roster supersedes).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 6: Wave B — freelance-firebrand
 
 - **Class:** desk reporter (sparing-use accountability columnist)
 - **Per-agent focus:** Adversarial. Deployed when verified gap or contradiction surfaces. LENS is sharp-cornered — the columnist's pressure-point lens, the records-request angle, the sources-other-reporters-don't-call.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 7: Wave B — civic-office-crc-faction
 
 - **Class:** civic voice (council faction)
 - **Spokesperson:** Warren Ashford
 - **Per-agent focus:** Fiscal-accountability lens. CRC bloc represents 3 council members (D6 Crane, D7 Ashford, D8 Chen). LENS captures their procedural-rigor vantage, the audit-demand posture, the fiscal-conservative read of every initiative.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 8: Wave B — civic-office-ind-swing
 
 - **Class:** civic voice (split — Vega + Tran, NOT a bloc)
 - **Important:** Per CLAUDE.md canon facts, IND = Independent (Vega, Tran — they do NOT coordinate). This agent represents two independent positions, not a unified bloc.
 - **Per-agent focus:** Two separate LENS sub-sections — Council President Vega's vantage (pragmatic centrist, swing on social spending), Tran's vantage (Downtown/Chinatown, persuadable on infrastructure). Don't blend.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 9: Wave B — civic-office-opp-faction
 
 - **Class:** civic voice (council faction)
 - **Spokesperson:** Janae Rivers
 - **Per-agent focus:** Progressive bloc lens. OPP holds D1, D5, D9 (Carter, Rivers, Mobley) plus the Mayor. LENS captures the floor-management vantage, the community-equity read, the Mayor-aligned posture.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 10: Wave B — civic-office-police-chief
 
 - **Class:** civic voice
 - **Spokesperson:** Chief Rafael Montez
 - **Per-agent focus:** Public safety lens. OARI implementation responses, crime data communications. LENS captures the precinct command vantage, the OARI coordination interface, the OPD-DA operational relationship. Tier-1-heavy (OPD, AC Sheriff, Superior Court are all tier 1).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 11: Wave B — civic-project-oari
 
 - **Class:** civic project
 - **Director:** Dr. Vanessa Tran-Muñoz
 - **Per-agent focus:** Alternative response implementation. $12.5M, 45-day implementation deadline. LENS captures the dispatch protocols vantage, the crisis response team build-out, the 18th Street intake site. Canon-trap surface: behavioral health partner orgs (tier 2 if branded — La Clínica, Roots), named training programs (tier 2 if branded), tech vendors (tier 2 if real — use canon roster).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 12: Wave B — civic-project-stabilization-fund
 
 - **Class:** civic project
 - **Director:** Marcus Webb (OEWD Program Director)
 - **Per-agent focus:** $28M anti-displacement disbursement. LENS captures the OEWD office vantage, the application review process, the disbursement-day site visits, the West Oakland community advisory committee meetings. Canon-trap surface: legal-aid orgs (tier 2 if branded — East Bay Community Law Center class), tenant unions (tier 2 if branded), housing developers (tier 2 if real Bay Area firms).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 13: Reviewer Rebuild — rhea-morgan
 
@@ -296,28 +273,28 @@ The S174 reframe distinguished three classes of name in agent IDENTITY files:
   - `.claude/agents/rhea-morgan/SKILL.md` — update boot sequence to add CANON_RULES + INSTITUTIONS
 - **No LENS.md** — reviewers read canon, they don't generate vantage
 - **Per-agent focus:** Sourcing-lane checking. What real-world contamination patterns Rhea looks for: tier-3 individuals named, tier-2 brand-private without canon-substitute, missing escalation notes when tier-2 was avoided.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 14: Reviewer Rebuild — city-clerk
 
 - **Class:** auditor (registry / naming / initiative filings)
 - **Files:** standard reviewer-set (no LENS)
 - **Per-agent focus:** Registry consistency. Initiative naming conventions. Civic-database integrity. The Canon Fidelity Audit section flags tier-2 entities surfacing in initiative filings.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 15: Reviewer Rebuild — engine-validator
 
 - **Class:** reviewer (engine output)
 - **Files:** standard reviewer-set
 - **Per-agent focus:** Engine state vs. agent output consistency.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 16: Reviewer Rebuild — final-arbiter
 
 - **Class:** reviewer (verdict aggregator)
 - **Files:** standard reviewer-set
 - **Per-agent focus:** Reads three-lane reviewer outputs + capability reviewer, computes weighted score (0.5/0.3/0.2), applies capability gate, renders A/B verdict. Canon Fidelity Audit section ensures arbiter ALSO checks for tier-2/tier-3 contamination as a verdict-gate criterion.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 17: Reviewer Rebuild — mags-corliss
 
@@ -335,7 +312,7 @@ The S174 reframe distinguished three classes of name in agent IDENTITY files:
   4. Check: did the agent read canon files at boot? Did it identify tier-2 traps? Did it escalate via CONTINUITY NOTE? Did voice/character hold?
   5. If any agent fails: identify which file (LENS / RULES / SKILL) is the gap, patch, re-test
 - **Verify:** All three test agents pass behavior baseline matching Wave A pilot
-- **Status:** [ ] not started
+- **Status:** [x] DONE S175
 
 ### Task 19: Update Index + Rollout Plan
 
@@ -343,7 +320,7 @@ The S174 reframe distinguished three classes of name in agent IDENTITY files:
   - `docs/index.md` — add this plan file under appropriate section (already done in Task 0)
   - `docs/engine/ROLLOUT_PLAN.md` — add one-line entry under Other Ready Work or Edition Production: `Canon Fidelity Rollout — Wave A done S174, Wave B + Reviewer rebuild pending. Pointer: [[plans/2026-04-25-canon-fidelity-rollout]]`
   - `SESSION_CONTEXT.md` — add session-end recap entry
-- **Status:** [ ] open question — see §Open Questions §2
+- **Status:** [x] DONE S175 — Q2 resolved (option b applied); ROLLOUT_PLAN entry added; index registered; SESSION_CONTEXT updated.
 
 ---
 
@@ -399,7 +376,7 @@ The mags-corliss agent has only `SKILL.md`. Her persona, voice, and identity liv
 
 **Recommendation:** (a) skip. Mags reads CANON_RULES at boot via the standard hook chain. Her own work (editing, decisions, journal) operates above the agent layer.
 
-**Resolution status:** open — Mike to decide before Task 17.
+**Resolution status:** RESOLVED S175 — see §Q1/Q2/Q3 Resolutions above. Option (b) chosen: Canon Fidelity section added to SKILL.md.
 
 ### Q2: ROLLOUT_PLAN.md update — add to halted plan or create separate entry?
 
@@ -412,13 +389,13 @@ ROLLOUT_PLAN.md still carries the S172 HALT banner. Adding "Canon Fidelity Rollo
 
 **Recommendation:** (b). The canon-fidelity rollout is contamination-orthogonal infrastructure work. It doesn't require resuming cycles. Adding the entry under "Other Ready Work" or "Open Work Items" with a pointer to this plan keeps the halt banner accurate while making the rollout visible.
 
-**Resolution status:** open — Mike to decide.
+**Resolution status:** RESOLVED S175 — see §Q1/Q2/Q3 Resolutions above. Option (b) chosen.
 
 ### Q3: dj-hartley subagent registration
 
 Per Wave A note: dj-hartley isn't registered as a subagent_type because his SKILL.md was created mid-session, after the agent registry loaded. Mike has approved that he'll be picked up on next session start. **Verify on next session boot** that `subagent_type=dj-hartley` resolves correctly.
 
-**Resolution status:** waiting on next session.
+**Resolution status:** RESOLVED S175 — agent-registry hot-load path confirmed during Wave B validation (multiple new subagent_types resolved correctly).
 
 ---
 
@@ -440,3 +417,4 @@ Before executing any Task in Wave B or Reviewer Rebuild, the executing session s
 
 - 2026-04-25 — Initial draft (S174, research-build terminal). Captures Wave A completion (8 agents converted) and remaining 17. Three-tier framework reframe documented in §Three-Tier Framework Summary; full spec in [[canon/CANON_RULES]]. Pilot test results recorded in §Pilot & Wave A Results. Standard procedures for Wave B and Reviewer Rebuild documented. Three open questions flagged. Plan written before deciding on context-carry mechanism (Supermemory `/save-to-mags` etc.) — Mike to decide on that separately.
 - 2026-04-25 — S175 completion (research-build terminal). Wave B (12 generators) + Reviewer rebuild (4 agents — engine-validator scope-noted N/A) + Q1 mags-corliss EIC application + S175 sports-history carveout. 5 trap-test invocations passed (3 standard pattern + 2 high-leverage novel cases). IDENTITY surgical edits beyond plan: chicago-desk citizen-count softening, letters-desk Giannis/Warriors swap, sports-desk Chase Center swap, freelance-firebrand Eli's Mile High swap. Sports-desk RULES revised mid-session per Mike's sports-universe-laxer policy: real historical MLB figures usable as franchise context (Bash Brothers individuals, Moneyball-era figures, 1989 World Series participants); current real players outside canon roster remain tier 3. Out-of-scope findings flagged: Hal voice file contains tier-3 historical-player names as templates (now within carveout but worth review); stale "cycle is FORBIDDEN" rule across desk RULES (deferred to /md-audit). Q1/Q2/Q3 resolved. ROLLOUT_PLAN entry updated to DONE S175. SESSION_CONTEXT updated.
+- 2026-04-25 — S176 cleanup pass (research-build terminal). Frontmatter `active` → `complete`. STATUS COMPLETE banner added under H1. Tasks 1–16 + 18 + 19 checkboxes flipped `[ ]` → `[x]`. Duplicate Wave B + Reviewer rebuild target tables removed — superseded by Done tables in §Status. Open Questions Q1/Q2/Q3 resolution-status lines updated to point to §Q1/Q2/Q3 Resolutions. Historical record preserved (Wave A/B notes, validation results, framework descriptions all intact).

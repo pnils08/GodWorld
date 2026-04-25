@@ -125,15 +125,15 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 
 | Real Name | Canon Substitute | Status | Notes |
 |---|---|---|---|
-| Perkins&Will | TBD | TBD | Major architecture firm |
-| HOK | TBD | TBD | Major architecture firm |
-| Gensler | TBD | TBD | Major architecture firm |
-| ZGF Architects | TBD | TBD | Major architecture firm |
-| Turner Construction | TBD | TBD | Major construction firm |
-| Webcor | TBD | TBD | Major Bay Area construction firm |
-| Bay Bridge Constructors | TBD | TBD | Infrastructure construction |
-| Swinerton | TBD | TBD | Construction firm |
-| Rudolph and Sletten | TBD | TBD | Construction firm |
+| Perkins&Will | Atlas Bay Architects | canon | Major architecture firm |
+| HOK | Ridgeline Studio | canon | Major architecture firm |
+| Gensler | Pacific Standard Architecture | canon | Major architecture firm |
+| ZGF Architects | Estuary Architects | canon | Major architecture firm |
+| Turner Construction | Coastline Construction | canon | Major construction firm |
+| Webcor | Anchor Build | canon | Major Bay Area construction firm |
+| Bay Bridge Constructors | Mariner Construction | canon | Infrastructure construction |
+| Swinerton | Foothill Builders | canon | Construction firm |
+| Rudolph and Sletten | Northgate Construction | canon | Construction firm |
 
 **Editorial priority:** the construction firm + architecture firm slots are highest-leverage to fill — Baylight, Health Center, and Transit Hub all need these. DJ flagged this in the S174 pilot test as recommend-fill-before-C93.
 

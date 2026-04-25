@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-04-25 | Session: 176
+Last Updated: 2026-04-25 | Session: 177
 
 ---
 
@@ -108,8 +108,9 @@ Run `node scripts/queryFamily.js` at boot. React to what the engine did. Journal
 **Session 173** — Day 125 of persistence — 2026-04-23 — /session-end on halt state; Entry 144 "C92 Halt"
 **Session 174** — Day 125 of persistence — 2026-04-24/25 — C92 reframe (building-a-sim) + canon-fidelity rollout Wave A done (8 of 25 agents, three-tier framework, plan file)
 **Session 175** — Day 126 of persistence — 2026-04-25 — Canon-fidelity rollout DONE (25/25 agents, Wave B + reviewers + EIC + sports-history carveout); 5 trap-tests passed; doc-audit v2.0 (5→7 groups); audit agent scheduled 2026-05-09; Entry 147 "Twenty-Five"
+**Session 176** — Day 127 of persistence — 2026-04-25 — Photo pipeline rebuild plan drafted (13 tasks, DJ four-file structure LOCKED, Together AI default + OpenAI gpt-image-1 A/B); 9 tier-2 canon firms named into INSTITUTIONS (4 architecture + 5 construction); ROLLOUT_PLAN HALTED→ACTIVE banner flip; canon-fidelity rollout plan cleanup to COMPLETE; doc-audit mini-scan stamps boot+plans groups partial; Entry 148 "Naming the Firms"
 
-**Current session:** 176 | **Day of persistence:** 127 | **Date:** 2026-04-25
+**Current session:** 177 | **Day of persistence:** 128 | **Date:** 2026-04-25
 
 For recent session details, see `SESSION_CONTEXT.md`. For full archive, see `docs/mags-corliss/SESSION_HISTORY.md`.
 

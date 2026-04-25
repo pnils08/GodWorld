@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-25 | Engine: v3.3 | Cycle: 92 | Session: 175 | Edition: E92 shipped | **STATUS: REFRAMED S173 + CANON-FIDELITY ROLLOUT DONE S175** — building a sim, not running one. Editions are journalised audits. Supermemory is Mags/Mara working memory. **S175 work**: canon-fidelity rollout COMPLETE — 25 of 25 agents converted (Wave A 8 done S174 + Wave B 12 done S175 + Reviewer rebuild 4 done S175 + EIC mags-corliss done S175; engine-validator scope-noted N/A as code-only). Three-tier framework + four-file structure ([[canon/CANON_RULES]] + [[canon/INSTITUTIONS]]) operational. S175 sports-history carveout added per Mike's sports-universe-laxer policy. 5 trap-test validations passed. See [[plans/2026-04-25-canon-fidelity-rollout]] for full record.
+Last Updated: 2026-04-25 | Engine: v3.3 | Cycle: 92 | Session: 176 | Edition: E92 shipped | **STATUS: REFRAMED S173 + CANON-FIDELITY ROLLOUT DONE S175 + PHOTO REBUILD PLANNED S176** — building a sim, not running one. **S176 work**: photo pipeline rebuild plan drafted ([[plans/2026-04-25-photo-pipeline-rebuild]] — 13 tasks, DJ four-file structure LOCKED, Together AI default + OpenAI gpt-image-1 A/B, Tasks 1–4 closed in research-build, 5–13 hand off to media); 9 tier-2 canon firms named into [[canon/INSTITUTIONS]] §Construction & Architecture (4 architecture + 5 construction, all status `canon`); ROLLOUT_PLAN HALTED→ACTIVE banner per S173 reframe; canon-fidelity rollout plan cleanup pass to COMPLETE state; doc-audit mini-scan stamps boot+plans groups partial. Mags Supermemory doc `hzvGaG7nh7A8nszmLzzAtF` for photo plan WHY/WHAT.
 
 ---
 
@@ -12,7 +12,7 @@ Last Updated: 2026-04-25 | Engine: v3.3 | Cycle: 92 | Session: 175 | Edition: E9
 
 **C93 build priorities (active):**
 1. **Agent layer for infrastructure-in-place** — the core C92 lesson. Infrastructure exists (Initiative_Tracker, Civic_Office_Ledger, Baylight, Temescal, OARI) but without agents driving it from canon, desks invent. Design the agent layer that consumes canonical infrastructure state so reporters don't reach for training-data defaults. **DONE S175** — canon-fidelity rollout complete. 25 of 25 agents now have per-agent LENS + RULES Canon Fidelity + three-tier framework reads at boot. Wave A + Wave B + Reviewer rebuild + EIC mags-corliss application + sports-history carveout. 5 trap-test validations passed. See [[plans/2026-04-25-canon-fidelity-rollout]]. Framework reasoning: Supermemory mags doc `XJi6whXEyPehdN6oDS97hQ`. **Next:** run C93 with the canon-fidelity-aware agent layer to confirm end-to-end behavior under live cycle conditions.
-2. **Photo pipeline rebuild (HIGH, media terminal)** — still on the halt note, still valid. Agent-driven art direction. See `docs/engine/ROLLOUT_PLAN.md`.
+2. **Photo pipeline rebuild (HIGH, media terminal)** — Plan drafted S176: [[plans/2026-04-25-photo-pipeline-rebuild]]. 13 tasks; Tasks 1–4 (research-build audits + DJ worked example) closed S176; Tasks 5–13 (build/execute) hand off to media. DJ four-file canon-fidelity structure LOCKED post-S175 — wiring pipeline AROUND DJ, do not modify his agent files. Together AI/FLUX dev default; OpenAI gpt-image-1 A/B comparison task included. Regen: 1 retry then editorial flag. Mags doc `hzvGaG7nh7A8nszmLzzAtF`.
 3. **Reviewer chain operational run** — Mara rehired S171. Still needed: (a) cycle-review skill-produced-JSON enforcement; (b) Final Arbiter end-to-end over real C93 production output. Final Arbiter now has Canon Fidelity Audit Integration section S175 — propagates lane-reported tier violations to verdict and blame attribution.
 4. **Auto-grader critical-review logic** — `gradeEdition.js` rubber-stamps A. Independent of Mara. Needs real critical logic, not "no errata = A."
 5. **Capability reviewer hard checks** — Beverly Hayes Standard as hard assertion. Current parser misses (name extractor, female-citizen detector).
@@ -21,7 +21,8 @@ Last Updated: 2026-04-25 | Engine: v3.3 | Cycle: 92 | Session: 175 | Edition: E9
 **S175 follow-ups (low priority, deferred):**
 - Hal's voice file (`docs/media/voices/hal_richmond.md`) review for consistency with S175 sports-history carveout (now within editorial latitude rather than violation, but worth aligning).
 - Stale "cycle is FORBIDDEN" rule across desk RULES (chicago, culture, letters, sports, firebrand) — pre-existing, contradicts current `.claude/rules/newsroom.md`. Deferred to /md-audit-style sweep.
-- INSTITUTIONS.md tier-2 canon-substitute filling — many rows still TBD. Editorial fills as story-need surfaces. DJ flagged construction firm + architecture firm slots as highest-leverage (Baylight, Health Center, Transit Hub all need these).
+- INSTITUTIONS.md tier-2 canon-substitute filling — Construction + Architecture rows filled S176 (9 firms, all `canon` status). Other tier-2 sections (Health & Medical, Education, Civic & Legal, Labor advocacy, Sports franchises) still TBD. Editorial fills as story-need surfaces.
+- Business_Ledger ingest of 9 new canon firms (engine-sheet terminal, S176 added to ROLLOUT_PLAN Data & Pipeline). MEDIUM.
 
 ---
 
@@ -93,6 +94,8 @@ Civic terminal + city-hall skill-literacy fix from S167/S168 still load-bearing 
 ---
 
 ## Recent Sessions
+
+### Session 176 (2026-04-25) — Photo pipeline rebuild plan drafted ([[plans/2026-04-25-photo-pipeline-rebuild]] — 13 tasks, DJ LOCKED, Together AI default + OpenAI gpt-image-1 A/B; Tasks 1–4 closed); 9 tier-2 canon firms named into INSTITUTIONS §Construction & Architecture; ROLLOUT_PLAN HALTED→ACTIVE banner per S173 reframe; canon-fidelity rollout plan cleanup → COMPLETE; doc-audit mini-scan stamps boot+plans groups partial; Mags doc `hzvGaG7nh7A8nszmLzzAtF` [research/build]
 
 ### Session 175 (2026-04-25) — Canon-fidelity rollout DONE: 25/25 agents (Wave B 12 + Reviewer rebuild 4 + EIC mags-corliss + sports-history carveout); 5 trap-tests passed; doc-audit v2.0 (5→7 groups); audit agent scheduled 2026-05-09 (trig_01D5oJcsTUtb1AzL4tutHwoo); clasp push no-op confirms engine sync at af40282 [research/build]
 

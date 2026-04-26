@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: Edition 92 — 2026-04-22 (S171/S172 post-session, Mara rehired, Maker A)**
+**Last Updated: 2026-04-26 — S178 first /interview run (Mayor Santana on OARI's C95 decision, Carmen Delaine, voice mode)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -114,6 +114,39 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 - Broader problem Mike named: **"zero creativity and drags down the publication, it's not visualizing all I'm doing."** Two photos per edition (front + culture), naive prompts, visual output doesn't reflect the Baylight development / Temescal Health Center construction / dynasty ballpark / Mayor's Day civic event / thriving neighborhood context the simulation is actually producing.
 - Fix this session: added "Canon: This Is Prosperity-Era Oakland" section to `.claude/agents/dj-hartley/IDENTITY.md` — blocks poverty shorthand, requires specific-address specific-block prompting, requires visualizing what's being built.
 - **Not fixed (deferred):** photo pipeline rebuild. Needs: (1) more than 2 photos per edition, (2) DJ producing real art direction from the articles (not the generator synthesizing its own thesis), (3) prompts that name specific locations/buildings/scenes from the edition, (4) photoQA.js actually returning real vision output (currently placeholder strings), (5) `generate-edition-pdf.js` date header pulled from edition meta not hard-coded "October 2041." Added to print-pipeline backlog in production log.
+
+---
+
+### Interview C92 — Mayor Avery Santana on OARI's Cycle-95 Decision (Carmen Delaine, Civic — S178, published 2026-04-26)
+
+First run of the `/interview` skill. Voice mode, agent-to-agent mediated. The Mayor went on record about OARI's C95 D2 expansion decision: the chartered ViolentCrimeIndex moved +2 against an expected −0.05; Tran-Muñoz reframed the renewal threshold to non-police resolution + complaint volume; Rivers filing the D2 motion this cycle; Tran (IND/D2) demanding a committed implementation cycle; Montez moved from C91 routing concerns to C92 operational support; DA Dane named three legal-framework items as governance gates.
+
+**Files:**
+- Brief: `output/interviews/c92_santana_brief.md`
+- Transcript: bay-tribune `KivnmK764ady8HtVX4de5b` | local `output/interviews/c92_santana_transcript.md`
+- Article: bay-tribune `Fh7atwRnjWRVQTeGjg5Dvv` | local `output/reporters/carmen_delaine/articles/c92_interview_santana.md` | Drive `1heIlDEWqmMtXd0vsuaVFIZn1ttMl2RHY`
+- Mara review copies: article `1F4eK32uRvARQ__TEazpzVwJEiYNlnsVl`, transcript `1XOwWm-56WkT3AKkeibFXIOV3wXB93nEm`
+
+**New canon established (load-bearing for next cycles):**
+1. **OARI scope language** — Mayor named the program's actual job on the record: *"low-level conflicts, noise, welfare checks, disputes."* First articulation of OARI's scope outside the chartered metric.
+2. **Process division** — Tran-Muñoz led the framework reframe; Mayor set the deadline (C95) and political stakes. Canonical division: **project director owns technical content, Mayor owns deadline + political reality.** Applies as default mental model to Baylight/Ramos, Health Center/Chen-Ramirez, Transit Hub/Soria Dominguez.
+3. **Bridge mechanic for D2 expansion vote** — Rivers files motion C92 → friendly amendment in committee carries Tran's named-cycle commitment → target eight votes. Mayor mentioned "maybe Ramon" as possible carrier; print kept it generic. Vega's role uncommitted canon.
+4. **DA gate triage** — Mayor's hybrid: scene-safety authority (MOU, 2-3 weeks via Cortez + Montez, doesn't gate motion); evidentiary protocols (carry into expansion w/ mid-C96 deadline as motion condition); **escalation triggers HARD GATE on funding** — motion passes expansion authority, no money flows until protocol DA-signed and OPD-trained.
+5. **Sunset-vote contingency** — Mayor commits she won't bring the same expansion ask back if C95 fails. Forces council to vote whether OARI continues or sunsets. *"I won't ask for expansion twice on the same data. But I will ask for a decision."* New procedural canon for how Santana handles signature-initiative defeats.
+
+**Active arcs for next sift:**
+- D2 expansion vote architecture — does Rivers file? does the friendly amendment emerge? who carries it if not Vega?
+- Mid-C96 evidentiary-protocol deadline becomes tracked deliverable if expansion passes
+- Escalation-trigger funding gate as new precedent — could re-apply where DA has standing
+- Mayor's "I'd rather lose a clean vote than indefinite pilot" frame is a tonal anchor; watch whether it holds if the motion actually fails
+
+**Editorial flags from the run:**
+- Mayor agent held character + substance across 6 sequential per-question calls; transcript history threaded into each prompt for continuity. Free of real-world peer-program references (CAHOOTS / STAR / Eugene / Denver) — canon-fidelity rollout from S175 fired correctly here. (Contrast: civic-project-health-center failed in C92 with Perkins&Will leak — separate ROLLOUT item.)
+- Q1 agent output ran together "Tran-Muñoz" (the Director) and "Leonard Tran" (Council); cleaned to disambiguate before publish.
+- Names Index initially mislabeled Laila Cortez as Deputy Mayor; corrected to Chief of Staff. **C92 locked canon (per Mara audit 2026-04-24): Marcus Osei's Economic Development portfolio transferred PERMANENTLY to Brenda Okoro, who now holds three portfolios under a 90-day council-oversight checkpoint expiring C95.** Cortez is not the cover; my interim "Cortez covering Osei" label was wrong canon and got fixed before final.
+- `/interview` skill Step 8a/8b prescribed scripts (`ingestEditionWiki.js` / `ingestEdition.js`) that don't fit interview-shape inputs — `.md` rejected and cycle-regex would tag as Cycle 95 from headline. Swapped to `/save-to-bay-tribune` direct API. Skill bug logged in ROLLOUT_PLAN as MEDIUM.
+
+**Status:** AWAITING MARA REVIEW. Heavy procedural canon (sunset-vote contingency, escalation-trigger funding gate, eight-vote bridge architecture) — Mara's notes come back through Mike before this cycles forward.
 
 ---
 
@@ -830,6 +863,7 @@ The worst edition we've ever published. Every desk failed. Here's what happened 
 - **Darius Clark (West Oakland, bakery worker)** — Asked about Stabilization Fund disbursement. Got a form and told to wait. Business desk's human detail. Active thread.
 - **Dante Nelson (41, Downtown, security guard)** — Receiving OPOA mailers, following OARI. Active thread.
 - **Dr. Leanne Wu** — Director of Sustainability. Prepared the Baylight DEIR. New canon figure.
+- **Brenda Okoro** — Deputy Mayor (Community), now consolidated with Economic Development + a third portfolio post-C92 Osei transfer. Three-portfolio holder under 90-day council-oversight clock expiring C95. Quarterly briefings mandated. **Active arc:** does the consolidation hold past C95, does any council member move to split it back out, does Okoro's delivery on Economic Development match her Community track record. Mayor's "conscience on displacement" per IDENTITY — now also wears the development hat. The role-tension is the story.
 - **Deon Whitfield** — Bulls SG, trade deadline acquisition. Replaces Jrue Holiday in canon.
 - **Ernesto Quintero (POP-00050, 24, West Oakland)** — Rookie DH. Promoted from AAA. 84 OVR, A-potential. Davis moved to LF for him. P Slayer wrote about him as "fearless youth." Active thread.
 - **Eric Taveras (25, Dominican Republic, 2B)** — $225M acquisition from Tampa Bay. Career .244 hitter. 93 OVR. P Slayer hated the signing. Power ceiling story. Active thread.
@@ -872,6 +906,8 @@ These were invented in Editions 80-81. Do not use them:
 - ~~Jrue Holiday → Deon Whitfield: trade deadline SG for the Bulls.~~ **RETRACTED S50:** Deon Whitfield is NOT a Bulls player. He is a regular Tier-4 citizen (POP-00732). Do NOT reference him in any Bulls/basketball coverage. The Bulls did not acquire a trade deadline SG.
 - Dr. Leanne Wu: Director of Sustainability who prepared the Baylight DEIR. New canon figure as of Edition 81.
 - West Oakland Stabilization Fund: Passed full council 6-3 in C78 (NOT "passed committee"). Disbursement window is open. Money hasn't moved yet. Do not describe as pending or awaiting a floor vote.
+- **Marcus Osei → Brenda Okoro portfolio transfer (LOCKED C92, Mara audit 2026-04-24):** Osei's Economic Development portfolio transferred PERMANENTLY to Brenda Okoro after his hospitalization (C72 traffic collision, twenty cycles of limbo C72→C92). Okoro now holds **three portfolios** under a 90-day council oversight checkpoint expiring **C95** — same cycle as the Health Center HCAI filing. Quarterly briefings mandated. Do not write "Cortez covering Osei" — that was a transitional state pre-C92. Do not describe Osei as "returning to office."
+- **Civis Systems vs Civic Systems (RESOLVED, Mara audit 2026-04-24):** Canonical name is **Civis Systems** (Varek's company, BIZ-00052). Voice-JSON drift to "Civic Systems" across multiple C92 outputs is wrong. Sheets are primary canon — Business_Ledger row resolves it.
 - Deacon Seymour: A's Manager, first season. Replaced Mike Kinder. RESOLVED — Seymour is canon going forward.
 - Cy Newell: RIGHT-HANDED pitcher (S/R). TrueSource DataPage is authoritative. Do not describe as left-handed.
 - John Ellis: Age 24 (not 28). P Slayer wrote "28-year-old rookie phenom" — wrong. TrueSource says 24. Drafted Round 2, 2033.

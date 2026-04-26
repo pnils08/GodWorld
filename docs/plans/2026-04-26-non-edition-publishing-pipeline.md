@@ -142,13 +142,21 @@ pointers:
   - `scripts/photoQA.js` — modify
   - `scripts/generate-edition-pdf.js` — modify
   - `scripts/saveToDrive.js` — modify
+- **Pattern carried from T6 (`1880c3e`) + T7 (`33167b2`) — apply consistently:**
+  - `ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript']`
+  - `--type` defaults to `edition` for back-compat; bad values rejected with allowed-list error
+  - `--cycle N` required when `type ≠ edition` (no fallback extraction — would mistag canon for new filename shapes); for `edition`, existing extraction logic preserved
+  - Dry-run prints a prominent `[METADATA] {…}` block at top of stdout so the post-publish verifier can read shape without parsing the whole run
+  - Edge-case checklist before commit: missing `--cycle` on non-edition errors out cleanly; edition default is back-compat-preserved; bad `--type` rejected
+  - **Don't change downstream API/SDK call shapes** (Supermemory endpoint conventions, Drive SDK calls, Together AI / OpenAI image API calls) — flag plumbing only
 - **Steps:**
-  1. Each script accepts `--type` and resolves the input path via the standardized filename convention.
-  2. Photo budget honors per-type limits from T4.
+  1. Each script accepts `--type` and resolves the input path via the standardized filename convention (`cycle_pulse_<type>_<cycle>_<slug>.txt` for non-edition; `cycle_pulse_edition_<cycle>.txt` for edition).
+  2. Photo budget honors per-type limits from T4 (5–8 for edition, 1–3 for interview/supplemental/dispatch).
   3. PDF masthead pulls from the `.txt` header block (already standardized via T1).
-  4. Drive folder routing: editions go to existing folder; interviews/supplementals/dispatches go to a non-edition subfolder (or same folder with type-prefixed filename — pick one in implementation).
-- **Verify:** Each script runs against `editions/cycle_pulse_interview_92_santana.txt` with `--type interview` and produces expected output without error.
-- **Status:** [ ] not started
+  4. Drive folder routing: editions go to existing folder; interviews/supplementals/dispatches go to a non-edition subfolder (or same folder with type-prefixed filename — pick one in implementation). **Open judgment call** — read `.claude/skills/edition-print/SKILL.md` v1.1 to see if media terminal has expressed a preference; otherwise pick subfolder (cleaner Drive UI long-term, matches per-type retrieval).
+  5. **Don't modify DJ Hartley's agent files** — print pipeline was rebuilt S175/S176 around DJ's four-file canon-fidelity structure. Wire pipeline AROUND DJ; he stays untouched.
+- **Verify:** Each script runs against `editions/cycle_pulse_interview_92_santana.txt` with `--type interview` and produces expected output without error. C92 fixture still doesn't exist — use any existing edition .txt with `--type interview --cycle 92 --dry-run` like T6/T7 verifiers did. Real `--apply` smoke deferred to T10 media validation.
+- **Status:** [ ] not started — next engine-sheet task
 
 ### Task 10: Validation — re-run C92 Mayor interview through unified pipeline
 

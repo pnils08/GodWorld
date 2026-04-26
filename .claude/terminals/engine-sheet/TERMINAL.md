@@ -176,6 +176,7 @@ When this terminal discovers something that needs design/research:
 - **Feedback loop (S137b):** 3 intake channels operational — coverage ratings, sports feed (6 texture columns), civic voice sentiment. Initiative ImplementationPhase → neighborhood effects. Approval ratings dynamic. Citizen life events feel the loop.
 - **Last deploy:** Check `git log --oneline -5` and `clasp` status
 - **Open engine items (post-E92):** See `docs/engine/ENGINE_REPAIR.md` (rows 8, 9, 10, 11, 12, 13, 14) and `docs/engine/ROLLOUT_PLAN.md` "Data & Pipeline" section.
+- **Active plan (S180):** [docs/plans/2026-04-26-non-edition-publishing-pipeline.md](../../../docs/plans/2026-04-26-non-edition-publishing-pipeline.md) — engine-sheet owns T6–T9. T6 (ingestEdition.js, `1880c3e`) + T7 (ingestEditionWiki.js, `33167b2`) DONE S180. T8 (rateEditionCoverage.js) gated on C93 observation. **T9 next**: print scripts × 4 — pattern + judgment-call notes inlined at plan §T9 head.
 - **Refresh rule:** Update this block whenever a cycle runs or schema shifts. Stale state here poisons every engine-sheet boot.
 
 ---

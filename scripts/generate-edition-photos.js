@@ -1,20 +1,31 @@
 #!/usr/bin/env node
 /**
  * ============================================================================
- * Edition Photo Generator v2.0
+ * Edition Photo Generator v2.1
  * ============================================================================
  *
- * Reads a Cycle Pulse edition and generates photos using AI.
+ * Reads a Cycle Pulse publishable artifact (edition, interview, supplemental,
+ * dispatch, interview-transcript) and generates photos using AI.
  * Default mode: auto-assigns photos using Mags' editorial logic.
  *
  * Usage:
  *   node scripts/generate-edition-photos.js editions/cycle_pulse_edition_83.txt
  *   node scripts/generate-edition-photos.js editions/cycle_pulse_edition_83.txt --dry-run
  *   node scripts/generate-edition-photos.js editions/cycle_pulse_edition_83.txt --credits-only
+ *   node scripts/generate-edition-photos.js editions/cycle_pulse_interview_92_santana.txt --type interview --cycle 92
  *
  * Flags:
+ *   --type {edition|interview|supplemental|dispatch|interview-transcript}
+ *           Default: edition. Determines per-type photo budget + output dir.
+ *   --cycle N
+ *           Required when --type ≠ edition (non-edition filenames don't
+ *           always carry cycle in the legacy parser regex).
  *   --dry-run       Show prompts without generating images
  *   --credits-only  Only generate for articles with [Photo:] tags (v1 behavior)
+ *
+ * Per-type photo budget (cap on auto-assignments):
+ *   edition: 5–8 (existing assignPhotos default)
+ *   interview / supplemental / dispatch / interview-transcript: 1–3
  *
  * Requires: TOGETHER_API_KEY in .env
  *
@@ -27,6 +38,55 @@ require('/root/GodWorld/lib/env');
 var editionParser = require('../lib/editionParser');
 var photoGen = require('../lib/photoGenerator');
 
+var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
+
+var PHOTO_BUDGET = {
+  'edition':              { min: 5, max: 8 },
+  'interview':            { min: 1, max: 3 },
+  'supplemental':         { min: 1, max: 3 },
+  'dispatch':             { min: 1, max: 3 },
+  'interview-transcript': { min: 1, max: 3 }
+};
+
+// ---------------------------------------------------------------------------
+// CLI flag parsing — --type / --cycle (T9 pattern, mirrors T6/T7)
+// ---------------------------------------------------------------------------
+function parseFlag(name) {
+  var i = process.argv.indexOf('--' + name);
+  if (i === -1 || i === process.argv.length - 1) return null;
+  return process.argv[i + 1];
+}
+
+function parseType() {
+  var raw = parseFlag('type');
+  if (!raw) return 'edition';
+  if (ALLOWED_TYPES.indexOf(raw) === -1) {
+    console.error('[ERROR] --type must be one of: ' + ALLOWED_TYPES.join(', '));
+    process.exit(1);
+  }
+  return raw;
+}
+
+function parseCycleFlag() {
+  var raw = parseFlag('cycle');
+  if (!raw) return null;
+  var n = parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 1) {
+    console.error('[ERROR] --cycle must be a positive integer');
+    process.exit(1);
+  }
+  return n;
+}
+
+// Derive slug suffix from non-edition filename:
+// cycle_pulse_interview_92_santana.txt → "santana"
+function deriveNonEditionSlug(filename, type) {
+  var base = path.basename(filename);
+  var pattern = new RegExp('^cycle_pulse_' + type + '_\\d+_(.+)\\.txt$');
+  var m = base.match(pattern);
+  return m ? m[1] : null;
+}
+
 // ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
@@ -35,14 +95,34 @@ async function main() {
   var args = process.argv.slice(2);
   var dryRun = args.includes('--dry-run');
   var creditsOnly = args.includes('--credits-only');
-  var editionFile = args.find(function(a) { return !a.startsWith('--'); });
+  var type = parseType();
+  var cycleFlag = parseCycleFlag();
+
+  // First non-flag positional that's NOT a flag value (skip values consumed by --type/--cycle)
+  var editionFile = null;
+  for (var ai = 0; ai < args.length; ai++) {
+    var a = args[ai];
+    if (a.startsWith('--')) continue;
+    var prev = args[ai - 1];
+    if (prev === '--type' || prev === '--cycle') continue;
+    editionFile = a;
+    break;
+  }
 
   if (!editionFile) {
-    console.log('Usage: node scripts/generate-edition-photos.js <edition-file> [--dry-run] [--credits-only]');
+    console.log('Usage: node scripts/generate-edition-photos.js <source.txt> [--type <type>] [--cycle N] [--dry-run] [--credits-only]');
     console.log('');
     console.log('  Default: auto-assigns photos using editorial logic');
+    console.log('  --type:        edition|interview|supplemental|dispatch|interview-transcript (default edition)');
+    console.log('  --cycle N:     required when --type ≠ edition');
     console.log('  --credits-only: only articles with [Photo:] tags (v1 behavior)');
-    console.log('  --dry-run: show prompts without generating images');
+    console.log('  --dry-run:     show prompts without generating images');
+    process.exit(1);
+  }
+
+  if (type !== 'edition' && cycleFlag === null) {
+    console.error('[ERROR] --cycle is required for --type ' + type +
+      ' (no fallback extraction for non-edition types).');
     process.exit(1);
   }
 
@@ -53,14 +133,37 @@ async function main() {
   }
 
   console.log('');
-  console.log('=== Bay Tribune Photo Generator v2.0 ===');
+  console.log('=== Bay Tribune Photo Generator v2.1 ===');
   console.log('');
 
   // Parse the edition
   var parsed = editionParser.parseEdition(fullPath);
+
+  // For non-edition types, override edition/slug from flags + filename so
+  // output paths follow the T1 contract (cycle_pulse_<type>_<cycle>_<slug>.txt).
+  // Edition default keeps the legacy parser-derived slug (back-compat).
+  if (type !== 'edition') {
+    var slugSuffix = deriveNonEditionSlug(fullPath, type);
+    parsed.edition = String(cycleFlag);
+    parsed.slug = type + '_c' + cycleFlag + (slugSuffix ? '_' + slugSuffix : '');
+  }
+
+  var resolvedCycle = cycleFlag !== null ? cycleFlag : (parsed.edition || null);
+  var budget = PHOTO_BUDGET[type] || PHOTO_BUDGET.edition;
+
+  console.log('[METADATA] ' + JSON.stringify({
+    type: type,
+    cycle: resolvedCycle,
+    slug: parsed.slug,
+    photoBudget: budget,
+    source: path.basename(fullPath)
+  }, null, 2));
+  console.log('');
+
   console.log('Edition: ' + parsed.edition);
   console.log('Weather: ' + parsed.weather);
   console.log('Sections found: ' + parsed.sections.length);
+  console.log('Photo budget (' + type + '): ' + budget.min + '–' + budget.max);
   console.log('');
 
   var photoSections;
@@ -89,6 +192,15 @@ async function main() {
         reason: a.reason
       };
     });
+  }
+
+  // Per-type budget cap — assignPhotos may return more than the non-edition
+  // budget allows; slice down to budget.max. Min is informational (T10
+  // validation will check end-to-end coverage).
+  if (photoSections.length > budget.max) {
+    console.log('Capping photo assignments at type budget: ' +
+      photoSections.length + ' → ' + budget.max + ' (' + type + ')');
+    photoSections = photoSections.slice(0, budget.max);
   }
 
   if (photoSections.length === 0) {
@@ -185,6 +297,10 @@ async function main() {
   if (results.length > 0) {
     var manifest = {
       edition: parsed.edition,
+      type: type,
+      cycle: resolvedCycle,
+      slug: parsed.slug,
+      photoBudget: budget,
       provider: 'together / FLUX.1-schnell',
       photos: results.map(function(r) {
         return {

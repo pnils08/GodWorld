@@ -7,24 +7,40 @@
  *
  * Usage:
  *   node scripts/saveToDrive.js <local-file> <destination>
+ *   node scripts/saveToDrive.js <local-file> --type <type> [--cycle N]
  *   node scripts/saveToDrive.js --test
  *
  * Destinations (shortcuts):
- *   edition    → Publications Archive / 1_The_Cycle_Pulse / Y_001
- *   supplement → Publications Archive / 2_Oakland_Supplementals
- *   chicago    → Publications Archive / Chicago_Supplementals
- *   mara       → Publications Archive / Mara_Vance
- *   presser    → Publications Archive / Mike_Paulson_Pressers
- *   player     → As Universe Database / Players / MLB_Roster_Data_Cards
- *   prospect   → As Universe Database / Players / Top_Prospects_Data_Cards
- *   bulls      → Bulls Universe Database / Player_Cards
- *   briefing   → Publications Archive / Mara_Vance
- *   civic      → City_Civic_Database (official civic documents)
+ *   edition              → Publications Archive / 1_The_Cycle_Pulse / Y_001
+ *   supplement           → Publications Archive / 2_Oakland_Supplementals
+ *   supplemental         → alias of supplement (matches --type spelling)
+ *   interview            → alias of supplement (non-edition subfolder, T9)
+ *   dispatch             → alias of supplement (non-edition subfolder, T9)
+ *   interview-transcript → alias of supplement (non-edition subfolder, T9)
+ *   chicago              → Publications Archive / Chicago_Supplementals
+ *   mara                 → Publications Archive / Mara_Vance
+ *   presser              → Publications Archive / Mike_Paulson_Pressers
+ *   player               → As Universe Database / Players / MLB_Roster_Data_Cards
+ *   prospect             → As Universe Database / Players / Top_Prospects_Data_Cards
+ *   bulls                → Bulls Universe Database / Player_Cards
+ *   briefing             → Publications Archive / Mara_Vance
+ *   civic                → City_Civic_Database (official civic documents)
  *
  * Or pass a raw folder ID as destination.
  *
+ * --type flag (T9, mirrors T6/T7 plumbing pattern):
+ *   When --type is given, destination auto-resolves from the type if no
+ *   positional <destination> is provided. Edition routes to the edition
+ *   folder; non-edition types route to the shared supplement folder
+ *   (the "non-edition subfolder" — type-prefixed PDF filenames keep them
+ *   distinguishable in shared storage).
+ *
+ *   --type {edition|interview|supplemental|dispatch|interview-transcript}
+ *   --cycle N            informational; required when --type ≠ edition
+ *
  * Examples:
  *   node scripts/saveToDrive.js editions/cycle_pulse_edition_82.txt edition
+ *   node scripts/saveToDrive.js output/pdfs/bay_tribune_interview_c92_santana.pdf --type interview --cycle 92
  *   node scripts/saveToDrive.js output/mara_directive_c82.txt mara
  *   node scripts/saveToDrive.js --test
  */
@@ -33,6 +49,45 @@ require('/root/GodWorld/lib/env');
 const { google } = require('googleapis');
 const fs = require('fs');
 const path = require('path');
+
+const ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
+
+// Type → destination-key resolution. Edition has its own folder; non-edition
+// types share the supplement folder (filename prefix disambiguates).
+const TYPE_TO_DEST = {
+  'edition': 'edition',
+  'supplemental': 'supplement',
+  'interview': 'supplement',
+  'dispatch': 'supplement',
+  'interview-transcript': 'supplement'
+};
+
+function parseFlag(name) {
+  const i = process.argv.indexOf('--' + name);
+  if (i === -1 || i === process.argv.length - 1) return null;
+  return process.argv[i + 1];
+}
+
+function parseType() {
+  const raw = parseFlag('type');
+  if (!raw) return null;
+  if (ALLOWED_TYPES.indexOf(raw) === -1) {
+    console.error('[ERROR] --type must be one of: ' + ALLOWED_TYPES.join(', '));
+    process.exit(1);
+  }
+  return raw;
+}
+
+function parseCycleFlag() {
+  const raw = parseFlag('cycle');
+  if (!raw) return null;
+  const n = parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 1) {
+    console.error('[ERROR] --cycle must be a positive integer');
+    process.exit(1);
+  }
+  return n;
+}
 
 // Destination folder IDs — from combined manifest (mapSubfolders overrides at runtime)
 var DESTINATIONS = {
@@ -56,6 +111,12 @@ var DESTINATIONS = {
   // Aliases
   briefing:   '1LEClpCUeRpT91gUR3SUm-Yx-3MldMJ5G',  // = mara (Mara directives & briefings)
   pdf:        '118tCh9stHjuocSUYXj0LjGnuzp5mLFhf',  // = edition (PDFs go alongside editions)
+  // T9 non-edition aliases — share the supplement folder; type-prefixed
+  // filenames disambiguate. Spelling consistency with --type values.
+  supplemental:           '1rv1mTZ8A1ep8u6dIONsEsGmayNkCJg-F',  // = supplement
+  interview:              '1rv1mTZ8A1ep8u6dIONsEsGmayNkCJg-F',  // = supplement
+  dispatch:               '1rv1mTZ8A1ep8u6dIONsEsGmayNkCJg-F',  // = supplement
+  'interview-transcript': '1rv1mTZ8A1ep8u6dIONsEsGmayNkCJg-F',  // = supplement
 };
 
 // Root folder IDs (fallback if subfolder not mapped)
@@ -199,6 +260,12 @@ async function mapSubfolders() {
       DESTINATIONS[key] = folder.id;
     }
   });
+
+  // Re-sync T9 non-edition aliases to the (possibly updated) supplement ID.
+  // Aliases must follow when mapSubfolders refreshes the supplement folder.
+  ['supplemental', 'interview', 'dispatch', 'interview-transcript'].forEach(function(alias) {
+    DESTINATIONS[alias] = DESTINATIONS.supplement;
+  });
 }
 
 async function main() {
@@ -209,22 +276,72 @@ async function main() {
   }
 
   var args = process.argv.slice(2);
-  if (args.length < 2) {
+  var typeFlag = parseType();
+  var cycleFlag = parseCycleFlag();
+  var dryRun = args.includes('--dry-run');
+
+  // First positional that isn't a flag value (skip --type/--cycle's value).
+  var positionals = [];
+  for (var ai = 0; ai < args.length; ai++) {
+    var a = args[ai];
+    if (a.startsWith('--')) continue;
+    var prev = args[ai - 1];
+    if (prev === '--type' || prev === '--cycle') continue;
+    positionals.push(a);
+  }
+
+  var filePath = positionals[0];
+  var dest = positionals[1];
+
+  // --type drives destination resolution when no positional <destination> is given.
+  if (!dest && typeFlag) {
+    dest = TYPE_TO_DEST[typeFlag];
+  }
+
+  if (!filePath || !dest) {
     console.log('Usage: node scripts/saveToDrive.js <local-file> <destination>');
+    console.log('       node scripts/saveToDrive.js <local-file> --type <type> [--cycle N]');
     console.log('');
-    console.log('Destinations: edition, supplement, chicago, mara, presser, player, prospect, bulls');
+    console.log('Destinations: edition, supplement, supplemental, interview, dispatch,');
+    console.log('              interview-transcript, chicago, mara, presser, player,');
+    console.log('              prospect, bulls, briefing, pdf, civic, podcast, backup');
     console.log('Or pass a raw Drive folder ID.');
+    console.log('');
+    console.log('--type {edition|interview|supplemental|dispatch|interview-transcript}');
+    console.log('--cycle N      required when --type ≠ edition (informational metadata)');
+    console.log('--dry-run      log the resolved destination + metadata; skip upload');
     console.log('');
     console.log('Run --test to verify write access.');
     process.exit(0);
   }
 
-  var filePath = args[0];
-  var dest = args[1];
+  // T9 contract: --cycle required when --type ≠ edition. Informational here
+  // (Drive upload doesn't tag with cycle), but enforced for pipeline symmetry.
+  if (typeFlag && typeFlag !== 'edition' && cycleFlag === null) {
+    console.error('[ERROR] --cycle is required for --type ' + typeFlag);
+    process.exit(1);
+  }
 
   if (!fs.existsSync(filePath)) {
     console.error('File not found: ' + filePath);
     process.exit(1);
+  }
+
+  // Print the metadata block — post-publish verifier reads stdout to confirm
+  // type/cycle plumbed through the print pipeline.
+  console.log('[METADATA] ' + JSON.stringify({
+    type: typeFlag || null,
+    cycle: cycleFlag,
+    destinationKey: dest,
+    destinationFolder: resolveDestination(dest),
+    file: path.basename(filePath),
+    dryRun: dryRun
+  }, null, 2));
+
+  if (dryRun) {
+    console.log('[DRY] Would upload ' + path.basename(filePath) +
+      ' → ' + dest + ' (' + resolveDestination(dest) + ')');
+    return;
   }
 
   await uploadFile(filePath, dest);

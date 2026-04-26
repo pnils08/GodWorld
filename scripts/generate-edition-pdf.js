@@ -1,26 +1,34 @@
 #!/usr/bin/env node
 /**
  * ============================================================================
- * Bay Tribune Edition PDF Generator v1.0
+ * Bay Tribune Edition PDF Generator v1.1
  * ============================================================================
  *
- * Transforms a Cycle Pulse edition .txt file + photos into a newspaper-style
- * PDF using HTML/CSS layout + Puppeteer rendering.
+ * Transforms a Cycle Pulse publishable artifact (edition, interview,
+ * supplemental, dispatch, interview-transcript) + photos into a newspaper-
+ * style PDF using HTML/CSS layout + Puppeteer rendering. Type-aware via
+ * --type flag (T9).
  *
  * Usage:
  *   node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_83.txt
  *   node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_83.txt --preview
  *   node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_83.txt --letter
  *   node scripts/generate-edition-pdf.js editions/cycle_pulse_edition_83.txt --no-photos
+ *   node scripts/generate-edition-pdf.js editions/cycle_pulse_interview_92_santana.txt --type interview --cycle 92
  *
  * Flags:
+ *   --type {edition|interview|supplemental|dispatch|interview-transcript}
+ *           Default: edition. Determines slug + output paths + masthead label.
+ *   --cycle N
+ *           Required when --type ≠ edition.
  *   --preview    Generate HTML only, skip PDF (for CSS iteration in browser)
  *   --letter     Use Letter (8.5x11) instead of Tabloid (11x17)
  *   --no-photos  Text-only layout (if photos not yet generated)
  *
- * Output:
- *   output/pdfs/e83.html          (always — intermediate HTML)
- *   output/pdfs/bay_tribune_e83.pdf  (unless --preview)
+ * Output paths:
+ *   edition       → output/pdfs/e<XX>.html, output/pdfs/bay_tribune_e<XX>.pdf
+ *   non-edition   → output/pdfs/<type>_c<XX>[_<slug>].html,
+ *                   output/pdfs/bay_tribune_<type>_c<XX>[_<slug>].pdf
  *
  * Requires: puppeteer (npm install puppeteer)
  *
@@ -30,6 +38,42 @@
 var path = require('path');
 var fs = require('fs');
 var editionParser = require('../lib/editionParser');
+
+var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
+
+function parseFlag(name) {
+  var i = process.argv.indexOf('--' + name);
+  if (i === -1 || i === process.argv.length - 1) return null;
+  return process.argv[i + 1];
+}
+
+function parseType() {
+  var raw = parseFlag('type');
+  if (!raw) return 'edition';
+  if (ALLOWED_TYPES.indexOf(raw) === -1) {
+    console.error('[ERROR] --type must be one of: ' + ALLOWED_TYPES.join(', '));
+    process.exit(1);
+  }
+  return raw;
+}
+
+function parseCycleFlag() {
+  var raw = parseFlag('cycle');
+  if (!raw) return null;
+  var n = parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 1) {
+    console.error('[ERROR] --cycle must be a positive integer');
+    process.exit(1);
+  }
+  return n;
+}
+
+function deriveNonEditionSlug(filename, type) {
+  var base = path.basename(filename);
+  var pattern = new RegExp('^cycle_pulse_' + type + '_\\d+_(.+)\\.txt$');
+  var m = base.match(pattern);
+  return m ? m[1] : null;
+}
 
 // ---------------------------------------------------------------------------
 // Text-to-HTML Converter
@@ -385,10 +429,25 @@ function buildNewspaperHtml(parsed, options) {
   html.push('<body>');
   html.push('<div class="page-wrapper">');
 
-  // Masthead
+  // Masthead — label adjusts by type. Edition keeps "Edition <N>" (back-compat);
+  // non-edition uses "<TypeLabel>, Cycle <N>" so the printed banner reflects
+  // the artifact category.
+  var mastheadType = options.type || 'edition';
+  var mastheadCycle = options.cycle != null ? options.cycle : (parsed.edition || '?');
+  var mastheadSub;
+  if (mastheadType === 'edition') {
+    mastheadSub = 'The Cycle Pulse &mdash; Edition ' + escapeHtml(parsed.edition || '?');
+  } else {
+    var typeLabel = mastheadType.split('-').map(function(w) {
+      return w.charAt(0).toUpperCase() + w.slice(1);
+    }).join(' ');
+    mastheadSub = 'The Cycle Pulse &mdash; ' + escapeHtml(typeLabel) +
+      ', Cycle ' + escapeHtml(String(mastheadCycle));
+  }
+
   html.push('<div class="masthead">');
   html.push('  <div class="masthead-flag">The Bay Tribune</div>');
-  html.push('  <div class="masthead-sub">The Cycle Pulse &mdash; Edition ' + escapeHtml(parsed.edition || '?') + '</div>');
+  html.push('  <div class="masthead-sub">' + mastheadSub + '</div>');
   var metaParts = [];
   if (parsed.date) metaParts.push(parsed.date);
   metaParts.push('Oakland, California');
@@ -530,14 +589,34 @@ async function main() {
   var preview = args.includes('--preview');
   var letterSize = args.includes('--letter');
   var noPhotos = args.includes('--no-photos');
-  var editionFile = args.find(function(a) { return !a.startsWith('--'); });
+  var type = parseType();
+  var cycleFlag = parseCycleFlag();
+
+  // First positional that isn't a flag value (skip --type/--cycle's value)
+  var editionFile = null;
+  for (var ai = 0; ai < args.length; ai++) {
+    var a = args[ai];
+    if (a.startsWith('--')) continue;
+    var prev = args[ai - 1];
+    if (prev === '--type' || prev === '--cycle') continue;
+    editionFile = a;
+    break;
+  }
 
   if (!editionFile) {
-    console.log('Usage: node scripts/generate-edition-pdf.js <edition-file> [--preview] [--letter] [--no-photos]');
+    console.log('Usage: node scripts/generate-edition-pdf.js <source.txt> [--type <type>] [--cycle N] [--preview] [--letter] [--no-photos]');
     console.log('');
-    console.log('  --preview    HTML only, skip PDF (for CSS iteration)');
-    console.log('  --letter     8.5x11 instead of 11x17 tabloid');
-    console.log('  --no-photos  Text-only layout');
+    console.log('  --type:        edition|interview|supplemental|dispatch|interview-transcript (default edition)');
+    console.log('  --cycle N:     required when --type ≠ edition');
+    console.log('  --preview      HTML only, skip PDF (for CSS iteration)');
+    console.log('  --letter       8.5x11 instead of 11x17 tabloid');
+    console.log('  --no-photos    Text-only layout');
+    process.exit(1);
+  }
+
+  if (type !== 'edition' && cycleFlag === null) {
+    console.error('[ERROR] --cycle is required for --type ' + type +
+      ' (no fallback extraction for non-edition types).');
     process.exit(1);
   }
 
@@ -548,11 +627,30 @@ async function main() {
   }
 
   console.log('');
-  console.log('=== Bay Tribune PDF Generator v1.0 ===');
+  console.log('=== Bay Tribune PDF Generator v1.1 ===');
   console.log('');
 
   // Parse edition
   var parsed = editionParser.parseEdition(fullPath);
+
+  // Override slug/edition for non-edition types so output paths follow the
+  // T1 contract. Edition default keeps the legacy parser-derived slug.
+  if (type !== 'edition') {
+    var slugSuffix = deriveNonEditionSlug(fullPath, type);
+    parsed.edition = String(cycleFlag);
+    parsed.slug = type + '_c' + cycleFlag + (slugSuffix ? '_' + slugSuffix : '');
+  }
+
+  var resolvedCycle = cycleFlag !== null ? cycleFlag : (parsed.edition || null);
+
+  console.log('[METADATA] ' + JSON.stringify({
+    type: type,
+    cycle: resolvedCycle,
+    slug: parsed.slug,
+    source: path.basename(fullPath)
+  }, null, 2));
+  console.log('');
+
   console.log('Edition: ' + parsed.edition);
   console.log('Date: ' + parsed.date);
   console.log('Weather: ' + parsed.weather);
@@ -585,7 +683,9 @@ async function main() {
     manifest: manifest,
     usePhotos: !noPhotos,
     cssPath: cssPath,
-    letterSize: letterSize
+    letterSize: letterSize,
+    type: type,
+    cycle: resolvedCycle
   });
 
   // Save HTML

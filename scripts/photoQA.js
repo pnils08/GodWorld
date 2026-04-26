@@ -3,12 +3,23 @@
  * photoQA.js — Photo Quality Assurance via Claude Vision
  *
  * Reads a photo manifest and evaluates each photo against its article context.
- * Runs between Step 15 (photo generation) and Step 16 (PDF generation).
+ * Runs between Step 1 (photo generation) and Step 3 (PDF generation) of
+ * /edition-print. Type-aware via --type flag (T9).
  *
  * Usage:
  *   node scripts/photoQA.js <photo-dir>
  *   node scripts/photoQA.js output/photos/e88
  *   node scripts/photoQA.js output/photos/e88 --dry-run
+ *   node scripts/photoQA.js output/photos/interview_c92_santana --type interview --cycle 92
+ *
+ * Flags:
+ *   --type {edition|interview|supplemental|dispatch|interview-transcript}
+ *           Default: read from manifest.type, else "edition". Routes into
+ *           qa_report.json metadata + QA-prompt context.
+ *   --cycle N
+ *           Default: read from manifest.cycle. Override for fixture replays.
+ *   --dry-run
+ *           List photos and contexts without invoking Claude Vision.
  *
  * Evaluates:
  *   - Does the photo match the article subject?
@@ -30,6 +41,35 @@ const path = require('path');
 require('/root/GodWorld/lib/env');
 
 const Anthropic = require('@anthropic-ai/sdk');
+
+const ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
+
+function parseFlag(name) {
+  const i = process.argv.indexOf('--' + name);
+  if (i === -1 || i === process.argv.length - 1) return null;
+  return process.argv[i + 1];
+}
+
+function parseTypeFlag() {
+  const raw = parseFlag('type');
+  if (!raw) return null;
+  if (ALLOWED_TYPES.indexOf(raw) === -1) {
+    console.error('[ERROR] --type must be one of: ' + ALLOWED_TYPES.join(', '));
+    process.exit(1);
+  }
+  return raw;
+}
+
+function parseCycleFlag() {
+  const raw = parseFlag('cycle');
+  if (!raw) return null;
+  const n = parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 1) {
+    console.error('[ERROR] --cycle must be a positive integer');
+    process.exit(1);
+  }
+  return n;
+}
 
 const QA_PROMPT = `You are a photo editor at the Bay Tribune, a newspaper in Oakland, California (set in 2041).
 You are reviewing an AI-generated photo before it goes to print. The photo accompanies a specific article.
@@ -110,11 +150,24 @@ function extractArticleSummary(sectionText) {
 async function main() {
   const args = process.argv.slice(2);
   const dryRun = args.includes('--dry-run');
-  const photoDir = args.find(a => !a.startsWith('--'));
+  const typeFlag = parseTypeFlag();
+  const cycleFlag = parseCycleFlag();
+
+  // First positional that isn't a flag value (skip --type/--cycle's value)
+  let photoDir = null;
+  for (let ai = 0; ai < args.length; ai++) {
+    const a = args[ai];
+    if (a.startsWith('--')) continue;
+    const prev = args[ai - 1];
+    if (prev === '--type' || prev === '--cycle') continue;
+    photoDir = a;
+    break;
+  }
 
   if (!photoDir) {
-    console.log('Usage: node scripts/photoQA.js <photo-dir> [--dry-run]');
+    console.log('Usage: node scripts/photoQA.js <photo-dir> [--type <type>] [--cycle N] [--dry-run]');
     console.log('Example: node scripts/photoQA.js output/photos/e88');
+    console.log('Example: node scripts/photoQA.js output/photos/interview_c92_santana --type interview --cycle 92');
     process.exit(1);
   }
 
@@ -127,9 +180,25 @@ async function main() {
   }
 
   const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
+
+  // Type/cycle resolution: flag wins, else manifest, else default to edition.
+  // Non-edition manifest without --type override is fine (manifest is canon).
+  const resolvedType = typeFlag || manifest.type || 'edition';
+  const resolvedCycle = cycleFlag !== null
+    ? cycleFlag
+    : (manifest.cycle != null ? manifest.cycle : (manifest.edition || null));
+
   console.log('');
   console.log('=== Bay Tribune Photo QA ===');
-  console.log(`Edition: ${manifest.edition}`);
+  console.log('[METADATA] ' + JSON.stringify({
+    type: resolvedType,
+    cycle: resolvedCycle,
+    photoDir: path.basename(fullDir),
+    photoCount: manifest.photos.length,
+    source: 'manifest+flags'
+  }, null, 2));
+  console.log(`Type: ${resolvedType}  Cycle: ${resolvedCycle}`);
+  console.log(`Edition (manifest): ${manifest.edition}`);
   console.log(`Photos: ${manifest.photos.length}`);
   console.log(`Mode: ${dryRun ? 'dry-run' : 'live'}`);
   console.log('');
@@ -224,6 +293,8 @@ async function main() {
   // Write report
   const report = {
     edition: manifest.edition,
+    type: resolvedType,
+    cycle: resolvedCycle,
     date: new Date().toISOString().split('T')[0],
     summary: { pass: passes, flag: flags, fail: fails, errors },
     tokens: { input: totalInput, output: totalOutput },

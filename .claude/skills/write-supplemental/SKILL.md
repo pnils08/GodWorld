@@ -1,8 +1,8 @@
 ---
 name: write-supplemental
 description: Produce a supplemental edition — variety coverage that builds the world beyond the Cycle Pulse. Any topic, any reporter, any format.
-version: "1.0"
-updated: 2026-04-17
+version: "1.1"
+updated: 2026-04-26
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -363,6 +363,22 @@ After agents return, Mags compiles:
 
 Show the compiled supplemental to the user.
 
+## Step 3.4: Compile to `.txt`
+
+The editorial compile (Step 3) produced article body + tracking data. Now wrap it in the [[EDITION_PIPELINE]] §Published `.txt` Format Contract envelope — Bay Tribune masthead + 5 structural sections (HEADER / BODY / NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED / ARTICLE TABLE).
+
+**Output:** `editions/cycle_pulse_supplemental_<cycle>_<slug>.txt`
+
+- Body: the assembled article(s)
+- Article Table: one row per article (`<slug> | <reporter> | <section> | <word count>`)
+- Masthead `<TYPE>=SUPPLEMENTAL`, descriptor = topic theme
+
+Slug rule: 1–3 words from the topic theme, lowercase, underscore-separated (e.g., `health_center_unstuck`). Editorial pick at authoring time. Once published, immutable. Replicated identically across filename, masthead descriptor, sift queries, MCP search, Mara, packets, production log, bay-tribune metadata.
+
+Names Index, Citizen Usage Log, Businesses Named populated from the citizens/businesses cited in the body — separate sections after the body, never inline (S172 metadata-leak rule).
+
+`Y<n>C<m>` math: `n = floor((cycle-1) / 52) + 1`, `m = ((cycle-1) % 52) + 1`. No month names.
+
 ## Step 3.5: Validation
 
 **Always (all supplemental types):**
@@ -370,7 +386,7 @@ Show the compiled supplemental to the user.
 
 **If civic content:**
 ```bash
-node scripts/validateEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
+node scripts/validateEdition.js editions/cycle_pulse_supplemental_<cycle>_<slug>.txt
 ```
 
 **If sports content:**
@@ -382,9 +398,9 @@ node scripts/validateEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
 
 **Decision guide:** If the supplemental changes initiative status, council positions, or faction dynamics — send to Mara. If it establishes texture canon (restaurants, neighborhood feel, cultural events) — skip.
 
-Upload edition to Drive for Mara: `node scripts/saveToDrive.js editions/supplemental_{topic_slug}_c{XX}.txt mara`
+Upload the `.txt` (canon) to Drive for Mara: `node scripts/saveToDrive.js editions/cycle_pulse_supplemental_<cycle>_<slug>.txt mara`
 
-Mara has her own Supermemory access (mara + bay-tribune + world-data). She searches canon herself. No packet building needed. Mike takes it to her on claude.ai. Wait for her feedback before proceeding.
+Mara audits the `.txt` (same format she audits everywhere else). She has her own Supermemory access (mara + bay-tribune + world-data) and searches canon herself. No packet building needed. Mike takes it to her on claude.ai. Wait for her feedback before proceeding.
 
 ## Step 3.9: USER REVIEW GATE (MANDATORY)
 
@@ -403,87 +419,26 @@ Ready to publish? (yes / hold for edits)
 
 ---
 
-## Step 4: Save & Upload to Drive
+## Step 4: Save (post-approval)
 
-After user approval:
+After user approval, the `.txt` at `editions/cycle_pulse_supplemental_<cycle>_<slug>.txt` is canon. The file was already written in Step 3.4; this step is the post-approval mark.
 
-1. **Save locally:**
-   ```
-   editions/supplemental_{topic_slug}_c{XX}.txt
-   ```
+PDF rendering + Drive upload moves to `/edition-print --type supplemental` (Step 5, parallel with `/post-publish`).
 
-2. **Upload to Google Drive:**
-   ```bash
-   node scripts/saveToDrive.js editions/supplemental_{topic_slug}_c{XX}.txt supplement
-   ```
+## Step 5: Post-Supplemental Pipeline
 
-Supermemory ingest happens in Step 5 with all other post-supplemental work.
+After Step 4 the `.txt` is approved canon on disk. Two skills converge here, run in parallel:
 
-## Step 5: Post-Supplemental Ingest
-
-Supplementals handle their own ingest — a lighter version of `/post-publish` with only the steps that apply.
-
-**5a. Wiki ingest (PRIMARY)**
-```bash
-node scripts/ingestEditionWiki.js editions/supplemental_{topic_slug}_c{XX}.txt --apply
 ```
-Per-entity records to bay-tribune. Log entity count.
-
-**5b. Edition text ingest (BACKUP)**
-```bash
-node scripts/ingestEdition.js editions/supplemental_{topic_slug}_c{XX}.txt
-```
-Full text to bay-tribune. Log doc IDs.
-
-**5c. Coverage ratings**
-```bash
-node scripts/rateEditionCoverage.js editions/supplemental_{topic_slug}_c{XX}.txt --apply
-```
-Per-domain ratings to sheet. A food piece affects CULTURE. A civic deep dive affects CIVIC. Every published piece feeds back.
-
-**5d. Citizen cards refresh**
-```bash
-node scripts/buildCitizenCards.js
-```
-Citizens who appeared get updated profiles in world-data.
-
-**5e. Citizen + business intake to sheets (NOT WIRED — needs engine session)**
-New citizens and businesses from the supplemental need direct sheet writes to Simulation_Ledger and Business sheet. Same gap as post-publish Step 5.
-
-**5f. Update newsroom memory**
-Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with new canon established, character continuity, coverage notes.
-
-**5f.5. Finalize production log with tagged doc IDs**
-
-Append to the supplemental section in `output/production_log_edition_c{XX}.md`:
-
-```markdown
-## Supplemental: {topic} — COMPLETE
-- Articles: {count}
-- Drive file ID: {id}
-- Wiki entities: {count}
-- Edition text ingest: {doc ID}
-- Coverage ratings applied: {domains}
-- Citizens refreshed: {count}
-
-### Canon Established
-- {key fact 1}
-- {key fact 2}
-
-### Carries Forward
-- {what next cycle's sift should track}
+/post-publish --type supplemental --cycle <XX> --source editions/cycle_pulse_supplemental_<XX>_<slug>.txt
+/edition-print --type supplemental --cycle <XX> --source editions/cycle_pulse_supplemental_<XX>_<slug>.txt
 ```
 
-Inline doc IDs = direct query next cycle.
+`/post-publish --type supplemental` handles canon ingest (bay-tribune wiki + text), citizen card refresh, newsroom memory update, production log finalize, mags-bot restart. Per-substep verification gates per the [[../post-publish/SKILL|post-publish]] matrix; the supplemental row of that matrix governs which substeps run (coverage ratings C93-gated, skip by default; criteria-files + grading + exemplars are edition-only).
 
-**5g. Refresh Discord bot**
-```bash
-pm2 restart mags-bot
-```
-Discord Mags picks up updated production log and Supermemory canon.
+`/edition-print --type supplemental` handles DJ art direction (1–3 photos), PDF render, Drive upload.
 
-**5h. Print pipeline**
-Photos, PDF, print layout — run `/edition-print` in a separate terminal.
+Both skills append to the same supplemental section of `output/production_log_edition_c{XX}.md` with inline Supermemory doc IDs for direct query next cycle.
 
 ---
 

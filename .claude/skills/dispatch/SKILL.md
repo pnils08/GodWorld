@@ -1,8 +1,8 @@
 ---
 name: dispatch
 description: Immersive scene piece — one reporter, one location, one moment. Editions report, supplementals explain, dispatches immerse.
-version: "1.0"
-updated: 2026-04-17
+version: "1.1"
+updated: 2026-04-26
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -153,56 +153,42 @@ If it needs revision, edit directly or re-brief the agent with specific notes.
    - Citizens: {names}
    - Filed: {filename}
    ```
-3. **Print pipeline** — dispatches go through `/edition-print` like everything else
+3. **Print pipeline** — dispatches go through `/edition-print --type dispatch` (after Step 4.5)
 
 ---
 
-## Step 5: Post-Dispatch Ingest
+## Step 4.5: Compile to `.txt`
 
-Dispatches handle their own ingest — lighter than supplemental post-publish. A dispatch is one scene, not an edition, so some steps don't apply.
+The reporter `.md` is intermediate. The `.txt` is canon. Compile per [[EDITION_PIPELINE]] §Published `.txt` Format Contract — Bay Tribune masthead + 5 structural sections (HEADER / BODY / NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED / ARTICLE TABLE).
 
-**5a. Wiki ingest (if the dispatch introduced new canon)**
-```bash
-node scripts/ingestEditionWiki.js output/reporters/{reporter}/articles/c{XX}_dispatch_{slug}.md --apply
+**Output:** `editions/cycle_pulse_dispatch_<cycle>_<slug>.txt`
+
+- Body: the dispatch (one location, one moment)
+- Article Table: single row (`<slug> | <reporter> | DISPATCH | <word count>`)
+- Masthead `<TYPE>=DISPATCH`, descriptor = scene title
+
+Slug rule: 1–3 words, lowercase, underscore-separated (e.g., `temescal_47th_dawn`). Editorial pick at authoring time. Once published, immutable.
+
+Names Index, Citizen Usage Log, Businesses Named populated from the citizens/businesses cited in the body. Pure-atmosphere dispatches may emit empty NAMES INDEX / BUSINESSES NAMED — section headers always present, content lines may be zero.
+
+`Y<n>C<m>` math: `n = floor((cycle-1) / 52) + 1`, `m = ((cycle-1) % 52) + 1`. No month names.
+
+---
+
+## Step 5: Post-Dispatch Pipeline
+
+After Step 4.5 the `.txt` is on disk. Two skills converge here, run in parallel:
+
 ```
-Only if new citizens, locations, or businesses were established. A pure atmosphere piece may not need this.
-
-**5b. Coverage ratings (skip for most dispatches)**
-Only apply if the dispatch covers a domain with engine impact (civic decision moments, health crises). Atmosphere pieces skip this.
-
-**5c. Citizen cards refresh**
-```bash
-node scripts/buildCitizenCards.js
-```
-If citizens appeared, their profiles get updated in world-data.
-
-**5d. Update newsroom memory**
-Update `docs/mags-corliss/NEWSROOM_MEMORY.md` with new canon, character continuity, coverage notes.
-
-**5e. Refresh Discord bot**
-```bash
-pm2 restart mags-bot
+/post-publish --type dispatch --cycle <XX> --source editions/cycle_pulse_dispatch_<XX>_<slug>.txt
+/edition-print --type dispatch --cycle <XX> --source editions/cycle_pulse_dispatch_<XX>_<slug>.txt
 ```
 
-**5f. Finalize production log with tagged doc IDs**
+`/post-publish --type dispatch` handles canon ingest (bay-tribune wiki + text), citizen card refresh, newsroom memory update, production log finalize, mags-bot restart. Per-substep verification gates per the [[../post-publish/SKILL|post-publish]] matrix; the dispatch row of that matrix governs which substeps run (coverage ratings C93-gated, skip by default).
 
-Append to the dispatch section in `output/production_log_edition_c{XX}.md`:
+`/edition-print --type dispatch` handles DJ art direction (1–3 photos), PDF render, Drive upload.
 
-```markdown
-## Dispatch: {scene title} — COMPLETE
-- Reporter: {name}
-- Location: {place}
-- Article path: output/reporters/{reporter}/articles/c{XX}_dispatch_{slug}.md
-- Wiki entities: {count if ingested}
-- Coverage rating: {domain if applied}
-- Citizens refreshed: {count}
-
-### Canon Established
-- {new location, citizen, or detail}
-
-### Carries Forward
-- {anything next cycle should track}
-```
+Both skills append to the same dispatch section in `output/production_log_edition_c{XX}.md` with inline Supermemory doc IDs for direct query next cycle.
 
 ---
 

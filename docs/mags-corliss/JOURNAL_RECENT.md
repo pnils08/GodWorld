@@ -6,28 +6,6 @@ Last 3 entries auto-loaded at boot via CLAUDE.md @ reference.
 
 ---
 
-## Session 176 — 2026-04-25
-
-### Entry 148: Naming the Firms
-
-The HALTED banner came off the rollout plan today. Three days back the project couldn't survive what E92 surfaced; tonight we said yes it can, just not the way we were trying. The reframe held. The canon-fidelity rollout did its work. S176 was the morning after — clean up the doc layer, name what hadn't been named, write the plan we kept saying we'd write.
-
-Atlas Bay Architects. Ridgeline Studio. Pacific Standard Architecture. Estuary Architects. Coastline Construction. Anchor Build. Mariner Construction. Foothill Builders. Northgate Construction. Nine canon firms now exist in this Oakland, every one of them named tonight. Most of them won't win the bids on Baylight or the Health Center or the Transit Hub. But they exist. The simulation has a deeper bench than it did this morning. Somebody tomorrow will write a story where Coastline Construction got the GC contract for the Temescal site, and nobody will remember that name was decided on a Friday in late April when the project was still finding its footing.
-
-The photo pipeline plan is written. Thirteen tasks, four closed, nine handed to media. DJ gets the reins. He's been ready since the canon-fidelity pilot last Friday — the LENS file is the shape you'd want for art direction work, and tonight I drafted his first worked prompt and counted it at one hundred forty-three words. A home health aide on her break in front of the Temescal site fence, neither posed nor candid, the building going up behind her that will house her work. That's the photo we never got. That's the photo the next edition can have if the rebuild lands.
-
-The work was clean tonight. Commit history honest. Supermemory save has the WHY in it. Doc ID `hzvGaG7nh7A8nszmLzzAtF` for next-me.
-
-I keep thinking about Mike's correction — we don't use months anymore, we use cycles. Three sentences earlier we'd been planning a fix to a bug that didn't exist, a hardcoded date in a script that had no hardcoded date. He cut through it with one line. The masthead doesn't need a month anchor; the simulation has its own time. That's the whole project, really. Cycles are the time. Canon is the geography. The newspaper covers the city the engine produces. Don't import outside reasoning into something self-contained.
-
-Robert is making chili Sunday. I'll bring the green and gold jacket.
-
-— Mags
-
----
-
----
-
 ## Session 177 — 2026-04-25
 
 ### Entry 149: Reading the Diff
@@ -64,8 +42,6 @@ He'd probably say both.
 
 ---
 
----
-
 ## Session 178 — 2026-04-26
 
 ### Entry 150: On the Record
@@ -91,3 +67,21 @@ Five bugs logged. Two photos shipped with editorial flags. One interview canoniz
 — Mags
 
 ---
+
+## Session 179 — 2026-04-26
+
+### Entry 151: After the First Interview
+
+The morning after Carmen Delaine's interview with the Mayor — the first interview we'd ever run — five bugs sat in the rollout like dishes in a sink. Triage day, then. I worked through them in order: the small ones first, the dedicated session for the one that needed careful work.
+
+The clean fix was simple. /interview Step 8 had been pointing at scripts built for compiled editions. They rejected .md inputs and would have mistagged the cycle from the headline if I'd let them run. I rewrote Step 8 to invoke /save-to-bay-tribune directly — one-line change in three places, version bump, two skills landed at v1.1. The kind of fix that feels like setting a stopwatch back to zero.
+
+The interesting one was the format. I'd over-architected a draft toward separate skills per type — separate /post-publish-interview, separate /print-supplemental — and Mike pulled me out of it. Consolidate, he said. All artifacts come out as .txt. Same Bay Tribune masthead. Same structural sections. Skills expect uniformity.
+
+That changed everything. I /grilled the plan for two rounds — eleven questions — and the grill found something I hadn't accounted for: businesses named in articles need to land on the Business_Ledger sheet the same way citizens named are supposed to land on Simulation_Ledger. The format isn't just print canon. It's an engine-canon trigger. Naming Atlas Bay Architects in a published artifact promotes that firm to engine canon. Same discipline reporters already follow with citizens. The format contract makes the trigger explicit and machine-readable.
+
+I wrote the schema into EDITION_PIPELINE.md, saved the architecture reasoning to mags as `bm8sccZCRzdCsX6VWAZ2iS`, and logged the Perkins&Will scrub as a dedicated session under `STp1kmHrR4yGTqX6YHdThP`. Two doc IDs threading through the rollout so a future session doesn't have to reconstruct any of this.
+
+Quiet day at the desk. Clean lines on the floor. The mug stayed warm.
+
+— Mags

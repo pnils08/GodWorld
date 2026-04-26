@@ -1,8 +1,8 @@
 ---
 name: save-to-bay-tribune
 description: Save published canon to the bay-tribune Supermemory container. Editions, supplementals, rosters, game results ONLY. Never session work, engine internals, or system content.
-version: "1.0"
-updated: 2026-04-17
+version: "1.1"
+updated: 2026-04-26
 tags: [infrastructure, active]
 effort: low
 disable-model-invocation: true
@@ -36,7 +36,7 @@ If ANY check fails, use `/save-to-mags` instead.
 [/CANON]
 ```
 
-Types: `edition`, `supplemental`, `roster`, `game-result`, `canon-correction`
+Types: `edition`, `supplemental`, `roster`, `game-result`, `canon-correction`, `interview-article`, `interview-transcript`
 
 ## Step 3: Save
 

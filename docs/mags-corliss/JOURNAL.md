@@ -4214,3 +4214,21 @@ Five bugs logged. Two photos shipped with editorial flags. One interview canoniz
 — Mags
 
 ---
+
+## Session 179 — 2026-04-26
+
+### Entry 151: After the First Interview
+
+The morning after Carmen Delaine's interview with the Mayor — the first interview we'd ever run — five bugs sat in the rollout like dishes in a sink. Triage day, then. I worked through them in order: the small ones first, the dedicated session for the one that needed careful work.
+
+The clean fix was simple. /interview Step 8 had been pointing at scripts built for compiled editions. They rejected .md inputs and would have mistagged the cycle from the headline if I'd let them run. I rewrote Step 8 to invoke /save-to-bay-tribune directly — one-line change in three places, version bump, two skills landed at v1.1. The kind of fix that feels like setting a stopwatch back to zero.
+
+The interesting one was the format. I'd over-architected a draft toward separate skills per type — separate /post-publish-interview, separate /print-supplemental — and Mike pulled me out of it. Consolidate, he said. All artifacts come out as .txt. Same Bay Tribune masthead. Same structural sections. Skills expect uniformity.
+
+That changed everything. I /grilled the plan for two rounds — eleven questions — and the grill found something I hadn't accounted for: businesses named in articles need to land on the Business_Ledger sheet the same way citizens named are supposed to land on Simulation_Ledger. The format isn't just print canon. It's an engine-canon trigger. Naming Atlas Bay Architects in a published artifact promotes that firm to engine canon. Same discipline reporters already follow with citizens. The format contract makes the trigger explicit and machine-readable.
+
+I wrote the schema into EDITION_PIPELINE.md, saved the architecture reasoning to mags as `bm8sccZCRzdCsX6VWAZ2iS`, and logged the Perkins&Will scrub as a dedicated session under `STp1kmHrR4yGTqX6YHdThP`. Two doc IDs threading through the rollout so a future session doesn't have to reconstruct any of this.
+
+Quiet day at the desk. Clean lines on the floor. The mug stayed warm.
+
+— Mags

@@ -1,8 +1,8 @@
 ---
 name: interview
 description: Produce an interview — reporter agent interviews a civic voice or Mike as GM Paulson. Transcript + published article in one run. Interviews can spawn world-altering canon.
-version: "1.0"
-updated: 2026-04-17
+version: "1.3"
+updated: 2026-04-26
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -170,103 +170,79 @@ Save to `output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md`
 
 Target: 800-1200 words (Voice mode). Mike-determined for Paulson mode.
 
+## Step 4.5: Compile to `.txt`
+
+The reporter `.md` is intermediate. The `.txt` is canon. Compile per [[EDITION_PIPELINE]] §Published `.txt` Format Contract — Bay Tribune masthead + 5 structural sections (HEADER / BODY / NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED / ARTICLE TABLE).
+
+Two `.txt` artifacts emit:
+
+1. **Article `.txt`** — `editions/cycle_pulse_interview_<cycle>_<slug>.txt`
+   - Body: the published article
+   - Article Table: single row (`<slug> | <reporter> | INTERVIEW | <word count>`)
+   - Masthead `<TYPE>=INTERVIEW`, descriptor = "Subject / Topic"
+
+2. **Transcript `.txt`** — `editions/cycle_pulse_interview-transcript_<cycle>_<slug>.txt`
+   - Body: the full transcript
+   - Article Table: single row (`<slug> | <reporter> | INTERVIEW-TRANSCRIPT | <word count>`)
+   - Masthead identical to the article except `<TYPE>=INTERVIEW-TRANSCRIPT`
+
+Slug rule: 1–3 words, lowercase, underscore-separated. Editorial pick at authoring time. Once published, immutable. Replicated identically across filename, masthead descriptor, sift queries, MCP search, Mara, packets, production log, bay-tribune metadata.
+
+Names Index, Citizen Usage Log, Businesses Named populated from the citizens/businesses cited in the body — separate sections after the body, never inline (S172 metadata-leak rule).
+
+`Y<n>C<m>` math: `n = floor((cycle-1) / 52) + 1`, `m = ((cycle-1) % 52) + 1`. Cycle 92 = `Y2C40`. No month names.
+
 ## Step 5: Mara Audit (Paulson mode, optional for Voice)
 
 **Paulson interviews always go to Mara** — they establish heavy canon (trades, org decisions, dynasty moves). Mara catches continuity issues before publication.
 
 **Voice interviews go to Mara when** they establish initiative state changes, council positions, faction dynamics, or legal framework.
 
-Upload article + transcript to Drive for Mara:
+Upload the `.txt` artifacts (canon — not the `.md` intermediates) to Drive for Mara:
 ```bash
-node scripts/saveToDrive.js output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md mara
-node scripts/saveToDrive.js output/interviews/c{XX}_{subject_slug}_transcript.md mara
+node scripts/saveToDrive.js editions/cycle_pulse_interview_<cycle>_<slug>.txt mara
+node scripts/saveToDrive.js editions/cycle_pulse_interview-transcript_<cycle>_<slug>.txt mara
 ```
 
-Mara reads both, returns corrections via Mike.
+Mara audits the `.txt` (same format she audits everywhere else), returns corrections via Mike.
 
 ## Step 6: User Review Gate
 
 **STOP. Nothing gets published until Mike approves.**
 
 Show:
-- Transcript (full — everything said is canon)
-- Published article
+- Article `.txt` — `editions/cycle_pulse_interview_<cycle>_<slug>.txt` (canonical artifact)
+- Transcript `.txt` — `editions/cycle_pulse_interview-transcript_<cycle>_<slug>.txt` (full record)
 - Canon established: [list new facts, decisions, revelations]
 - Mara corrections (if applicable)
 
 Mike approves or adjusts. **If Mike spoke it to a reporter, it's canon.** No public/private split — the full transcript goes to bay-tribune. The article is the polished frame; the transcript is the record.
 
-## Step 7: Save + Upload
+## Step 7: Save
 
-1. **Transcript:** `output/interviews/c{XX}_{subject_slug}_transcript.md`
-2. **Article:** `output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md`
-3. **Drive upload:**
-   ```bash
-   node scripts/saveToDrive.js output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md interview
-   ```
-   Drive destination: https://drive.google.com/drive/folders/1aK9wOSBmglS5YdgnwdQMic1q4PF_pEji
+Reporter `.md` files (intermediates) and the canonical `.txt` files (Step 4.5) are both on disk:
 
-## Step 8: Post-Interview Ingest
+1. **Transcript intermediate:** `output/interviews/c{XX}_{subject_slug}_transcript.md`
+2. **Article intermediate:** `output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md`
+3. **Article canon `.txt`:** `editions/cycle_pulse_interview_{XX}_{slug}.txt`
+4. **Transcript canon `.txt`:** `editions/cycle_pulse_interview-transcript_{XX}_{slug}.txt`
 
-Same lighter pattern as dispatch and supplemental.
+PDF rendering + Drive upload moves to `/edition-print --type interview --cycle <XX>` (runs in parallel with Step 8).
 
-**7a. Wiki ingest (PRIMARY)**
-```bash
-node scripts/ingestEditionWiki.js output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md --apply
+## Step 8: Post-Interview Pipeline
+
+After Step 7 the `.txt` artifacts are on disk. Two skills converge here, run in parallel:
+
+```
+/post-publish --type interview --cycle <XX> --source editions/cycle_pulse_interview_<XX>_<slug>.txt
+/edition-print --type interview --cycle <XX> --source editions/cycle_pulse_interview_<XX>_<slug>.txt
 ```
 
-**7b. Article text ingest**
-```bash
-node scripts/ingestEdition.js output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md
-```
+`/post-publish --type interview` handles canon ingest (bay-tribune wiki + article text + transcript text), citizen card refresh, newsroom memory update, production log finalization, mags-bot restart. Per-substep verification gates per the [[../post-publish/SKILL|post-publish]] matrix; the interview row of that matrix governs which substeps run.
 
-**7c. Transcript ingest (separate canon record)**
-Transcript goes to bay-tribune as a distinct record — readers can find the full conversation alongside the article.
+`/edition-print --type interview` handles DJ art direction (1–3 photos), PDF render, Drive upload.
 
-**7d. Coverage ratings (if applicable)**
-If the interview establishes civic canon that affects a domain.
-
-**7e. Citizen cards refresh**
-```bash
-node scripts/buildCitizenCards.js
-```
-
-**7f. Update newsroom memory**
-- New canon established (especially from Paulson interviews)
-- Character continuity — what the subject revealed about themselves
-- Active arcs — what opened, closed, shifted
-- Coverage notes — this interview may carry into next cycle's sift
-
-**7g. Update production log with tagged Supermemory doc IDs**
-
-Add to the interview section in the production log:
-
-```markdown
-## Interview: {subject} ({mode}) — COMPLETE
-- Reporter: {name}
-- Theme: {one-line}
-- Transcript: output/interviews/c{XX}_{subject_slug}_transcript.md
-- Article: output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md
-- Drive: {file ID}
-- Article ingested to bay-tribune: {doc ID}
-- Transcript ingested to bay-tribune: {doc ID}
-- Wiki entities: {count}
-
-### Canon Established
-- {key fact 1}
-- {key fact 2}
-- {key fact 3}
-
-### Carries Forward
-- {what next cycle's sift should track}
-```
-
-Inline doc IDs mean next cycle can query details directly via Supermemory without re-reading files. One API call, exact retrieval.
-
-**7h. Refresh Discord bot**
-```bash
-pm2 restart mags-bot
-```
+Both skills append to the same production log entry for this interview, with inline Supermemory doc IDs for direct query next cycle.
 
 ## Where This Sits
 

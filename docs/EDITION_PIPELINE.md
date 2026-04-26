@@ -48,6 +48,119 @@ Four terminals. Two production logs. One world.
 
 ---
 
+## Published `.txt` Format Contract
+
+**The keystone.** All publishable artifacts — edition, interview, supplemental, dispatch — converge on one canonical `.txt` shape with the Bay Tribune masthead and five structural sections. The skills expect uniformity; the ingest scripts depend on it; the format IS the API between authoring and downstream pipeline.
+
+Source: [[plans/2026-04-26-non-edition-publishing-pipeline]] T1.
+
+### Filename convention
+
+```
+editions/cycle_pulse_<type>_<cycle>_<slug>.txt
+```
+
+- `<type>` ∈ `{edition, interview, supplemental, dispatch}`
+- `<cycle>` is the engine cycle number (e.g., `92`)
+- `<slug>` is omitted for `edition` (editions are already cycle-unique); required for the other three
+- Slug is 1–3 words, lowercase, underscore-separated, editorial pick at authoring time
+
+Companion artifact: interviews emit a second `.txt` with `<type>=interview-transcript` carrying the full transcript, masthead identical except for the type label.
+
+### Masthead block
+
+Every type carries the same five-line masthead. No exceptions.
+
+```
+============================================================
+THE CYCLE PULSE — <TYPE> <CYCLE> "<descriptor>"
+Bay Tribune | Cycle <N> | Y<n>C<m> | <Season>, <Week>
+Weather: <weather phrase> | City Mood: <mood phrase>
+============================================================
+```
+
+- `<TYPE>` uppercase: `EDITION` / `INTERVIEW` / `SUPPLEMENTAL` / `DISPATCH` / `INTERVIEW-TRANSCRIPT`
+- `<descriptor>`: subject for interview ("Santana / OARI"), headline for supplemental/dispatch; omitted for edition
+- `Y<n>C<m>` math: `n = floor((cycle-1) / 52) + 1`, `m = ((cycle-1) % 52) + 1` → cycle 92 = `Y2C40`. Replaces all month references (real-world calendar months don't align with the cycle clock and confuse cross-references with sports-time)
+- Season + Week emitted by engine (e.g., `Fall, First Friday`) — kept; only month names are forbidden
+- Weather + City Mood line is on every type (uniformity rule)
+
+### Structural sections — order is law
+
+```
+HEADER (masthead)
+    ↓
+BODY (article prose)
+    ↓
+------------------------------------------------------------
+NAMES INDEX
+------------------------------------------------------------
+CITIZEN USAGE LOG
+------------------------------------------------------------
+BUSINESSES NAMED
+------------------------------------------------------------
+ARTICLE TABLE
+============================================================
+```
+
+- All five tracking sections appear AFTER the article body. Never inline. (S172 metadata-leak constraint encoded as format law — the leak source was desk reporters appending audit blocks inside article body; this rule prevents recurrence.)
+- Section headers always present even when empty (uniformity for ingest scripts — empty sections still parse).
+
+### Per-section content spec
+
+| Section | Row format | Inclusion rule |
+|---|---|---|
+| **NAMES INDEX** | `<POP-ID> \| <Name> \| <Role/Title>` | Citizens explicitly named in body |
+| **CITIZEN USAGE LOG** | `<POP-ID> \| <mention count> \| <quoted? Y/N>` | Any citizen explicitly named (1+ mention) |
+| **BUSINESSES NAMED** | `<BIZ-ID or NEW> \| <Name> \| <Sector> \| <Neighborhood>` | Any business explicitly named in body |
+| **ARTICLE TABLE** | `<slug> \| <reporter> \| <section> \| <word count>` | Multi-row for edition; single-row for interview/supplemental/dispatch |
+
+**BUSINESSES NAMED maps to Business_Ledger columns A–D** (BIZ_ID, Name, Sector, Neighborhood). E–I (Employee_Count, Avg_Salary, Annual_Revenue, Growth_Rate, Key_Personnel) left for the engine to populate. New businesses (no existing BIZ_ID) marked `NEW` for ingest pickup.
+
+### Per-type variants
+
+The artifact differs only in body shape and Article Table row count. Section headers + masthead + Names/Citizen/Business sections are identical across types.
+
+| Type | Article Table rows | Body shape | Companion artifacts |
+|---|---|---|---|
+| Edition | multi (1 per article) | section-by-section, multi-article | none |
+| Interview | single | one Q&A or framed conversation | transcript `.txt` (same masthead, `type=interview-transcript`) |
+| Supplemental | single or multi | topic deep-dive | none |
+| Dispatch | single | one scene, one moment | none |
+
+### Slug discipline — the retrieval-token rule
+
+The slug is the canonical search keyword set for the artifact. Once published, **never changes**. Treat as immutable.
+
+Replicated identically across every query surface:
+
+- Filename
+- Masthead descriptor (human-readable form)
+- `/sift` queries when next cycle references the artifact
+- MCP `search_canon` queries
+- Mara audit references
+- Desk packet citations
+- Production log pointers
+- bay-tribune Supermemory metadata
+
+Editorial picks at authoring time. The authoring skill proposes a default derived from the brief's theme; Mags overrides if needed. Slug examples:
+- Interview: `santana_oari` (subject + topic)
+- Supplemental: `health_center_unstuck` (theme phrase)
+- Dispatch: `temescal_47th_dawn` (location + time)
+
+### Engine-canon ingest triggers
+
+Published artifacts are not just print canon — they trigger engine state writes. Naming a citizen or business in a published artifact causes that entity to enter engine canon.
+
+| Section | Existing path | Status |
+|---|---|---|
+| NAMES INDEX | `buildCitizenCards.js` refreshes world-data citizen cards with cross-references to bay-tribune | Existing — citizen-card refresh works; sheet-level Simulation_Ledger intake for genuinely-new citizens still pending the engine-sheet intake build |
+| BUSINESSES NAMED | none — `ingestBusinessesNamed.js` to be built (engine-sheet, ROLLOUT-tagged item) | Pending — writes Business_Ledger cols A–D, flags `NEW` rows for engine to fill cols E–I next cycle |
+
+**Editorial implication:** reporters and Mags must cite businesses with care — naming a business in a published artifact promotes that business to engine canon. Same discipline already applies to citizens. The format makes the trigger explicit and machine-readable.
+
+---
+
 ## /write-edition — Internal Reviewer Chain
 
 Write-edition is not atomic. It launches reporters, then runs a **four-lane review + deterministic arbiter** before publishing. The reviewer "skills" (`/adversarial-review`, `/capability-review`, `/cycle-review`) are not separate pipeline entries — they are **internal sub-steps** invoked from within write-edition.

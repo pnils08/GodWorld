@@ -1,14 +1,27 @@
 #!/usr/bin/env node
 /**
- * Ingest a Cycle Pulse edition into Supermemory — scripts/ingestEdition.js
+ * Ingest a Cycle Pulse publishable artifact into Supermemory — scripts/ingestEdition.js
  *
- * Saves the compiled edition as a searchable document in Supermemory,
- * tagged for the GodWorld project. Future sessions, the Discord bot,
- * and autonomous scripts can then search for past edition content.
+ * Saves a published .txt (edition, interview, supplemental, dispatch, or
+ * interview-transcript companion) as a searchable document in Supermemory,
+ * tagged bay-tribune. Future sessions, the Discord bot, and autonomous
+ * scripts can then search for past canon content.
  *
  * Usage:
  *   node scripts/ingestEdition.js editions/cycle_pulse_edition_82.txt
  *   node scripts/ingestEdition.js editions/cycle_pulse_edition_82.txt --dry-run
+ *   node scripts/ingestEdition.js editions/cycle_pulse_interview_92_santana.txt --type interview --cycle 92
+ *   node scripts/ingestEdition.js editions/cycle_pulse_interview-transcript_92_santana.txt --type interview-transcript --cycle 92
+ *
+ * Flags:
+ *   --type {edition|interview|supplemental|dispatch|interview-transcript}
+ *           Default: edition. Plumbed into bay-tribune metadata for retrieval filtering.
+ *   --cycle N
+ *           Overrides cycle extraction from filename/content. Required when --type ≠ edition
+ *           (non-edition filenames don't always carry cycle in the legacy regex shape).
+ *   --dry-run
+ *           Skip the Supermemory API call. Prints the metadata block + per-chunk
+ *           preview so the post-publish verifier can confirm shape.
  *
  * Requires .env: SUPERMEMORY_CC_API_KEY
  */
@@ -23,7 +36,46 @@ var CONTAINER_TAG = 'bay-tribune';
 var API_HOST = 'api.supermemory.ai';
 var MAX_CHUNK_SIZE = 40000; // Supermemory doc limit safety margin
 
+var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
+
 var DRY_RUN = process.argv.includes('--dry-run');
+
+// ---------------------------------------------------------------------------
+// CLI flag parsing — --type / --cycle
+// ---------------------------------------------------------------------------
+function parseFlag(name) {
+  var i = process.argv.indexOf('--' + name);
+  if (i === -1 || i === process.argv.length - 1) return null;
+  return process.argv[i + 1];
+}
+
+function parseType() {
+  var raw = parseFlag('type');
+  if (!raw) return 'edition';
+  if (ALLOWED_TYPES.indexOf(raw) === -1) {
+    console.error('[ERROR] --type must be one of: ' + ALLOWED_TYPES.join(', '));
+    process.exit(1);
+  }
+  return raw;
+}
+
+function parseCycleFlag() {
+  var raw = parseFlag('cycle');
+  if (!raw) return null;
+  var n = parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 1) {
+    console.error('[ERROR] --cycle must be a positive integer');
+    process.exit(1);
+  }
+  return n;
+}
+
+function titleCaseType(type) {
+  // edition → Edition; interview-transcript → Interview Transcript
+  return type.split('-').map(function(w) {
+    return w.charAt(0).toUpperCase() + w.slice(1);
+  }).join(' ');
+}
 
 // ---------------------------------------------------------------------------
 // Extract cycle number from edition content or filename
@@ -43,14 +95,15 @@ function extractCycle(content, filename) {
 }
 
 // ---------------------------------------------------------------------------
-// Split edition into sections for chunked ingestion
+// Split a publishable artifact into sections for chunked ingestion
 // ---------------------------------------------------------------------------
-function splitEdition(content, cycle) {
+function splitEdition(content, cycle, type) {
   var sections = [];
+  var label = 'Cycle Pulse ' + titleCaseType(type) + ' ' + cycle;
 
   if (content.length <= MAX_CHUNK_SIZE) {
     sections.push({
-      title: 'Cycle Pulse Edition ' + cycle + ' (Full)',
+      title: label + ' (Full)',
       content: content,
       tags: []
     });
@@ -73,7 +126,7 @@ function splitEdition(content, cycle) {
         if (breakAt > pos + MAX_CHUNK_SIZE * 0.5) end = breakAt;
       }
       sections.push({
-        title: 'Cycle Pulse Edition ' + cycle + ' (Part ' + chunkNum + ')',
+        title: label + ' (Part ' + chunkNum + ')',
         content: content.slice(pos, end).trim(),
         tags: []
       });
@@ -90,7 +143,7 @@ function splitEdition(content, cycle) {
     if (currentChunk.length + part.length > MAX_CHUNK_SIZE && currentChunk.length > 0) {
       chunkIndex++;
       sections.push({
-        title: 'Cycle Pulse Edition ' + cycle + ' (Part ' + chunkIndex + ')',
+        title: label + ' (Part ' + chunkIndex + ')',
         content: currentChunk.trim(),
         tags: []
       });
@@ -101,7 +154,7 @@ function splitEdition(content, cycle) {
   if (currentChunk.trim()) {
     chunkIndex++;
     sections.push({
-      title: 'Cycle Pulse Edition ' + cycle + ' (Part ' + chunkIndex + ')',
+      title: label + ' (Part ' + chunkIndex + ')',
       content: currentChunk.trim(),
       tags: []
     });
@@ -113,16 +166,17 @@ function splitEdition(content, cycle) {
 // ---------------------------------------------------------------------------
 // POST a document to Supermemory
 // ---------------------------------------------------------------------------
-function addDocument(title, content, extraTags) {
+function addDocument(title, content, extraTags, metaExtras) {
   return new Promise(function(resolve, reject) {
     var tags = [CONTAINER_TAG].concat(extraTags || []);
+    var metadata = Object.assign({
+      title: title,
+      source: 'edition-ingest'
+    }, metaExtras || {});
     var payload = JSON.stringify({
       content: content,
       containerTags: tags,
-      metadata: {
-        title: title,
-        source: 'edition-ingest'
-      }
+      metadata: metadata
     });
 
     var options = {
@@ -158,9 +212,11 @@ function addDocument(title, content, extraTags) {
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
+  var type = parseType();
+  var cycleFlag = parseCycleFlag();
   var editionPath = process.argv.find(function(a) { return a.endsWith('.txt'); });
   if (!editionPath) {
-    console.error('Usage: node scripts/ingestEdition.js <edition-file.txt> [--dry-run]');
+    console.error('Usage: node scripts/ingestEdition.js <source.txt> [--type <type>] [--cycle N] [--dry-run]');
     process.exit(1);
   }
 
@@ -176,18 +232,40 @@ async function main() {
 
   var content = fs.readFileSync(editionPath, 'utf-8').trim();
   var filename = path.basename(editionPath);
-  var cycle = extractCycle(content, filename);
 
-  if (!cycle) {
-    console.error('[ERROR] Could not detect cycle number from file');
-    process.exit(1);
+  // Cycle resolution: --cycle wins. Otherwise fall back to filename/content
+  // for edition only — non-edition types must pass --cycle so a stray "Cycle 92"
+  // mention in body doesn't mistag canon.
+  var cycle = cycleFlag;
+  if (cycle === null) {
+    if (type === 'edition') {
+      cycle = extractCycle(content, filename);
+    }
+    if (cycle === null) {
+      console.error('[ERROR] --cycle is required for --type ' + type +
+        ' (no fallback extraction for non-edition types).');
+      process.exit(1);
+    }
   }
 
-  console.log('[INFO] Ingesting Edition ' + cycle + ' into Supermemory');
+  var label = titleCaseType(type);
+  console.log('[INFO] Ingesting ' + label + ' (cycle ' + cycle + ') into Supermemory');
   console.log('[INFO] File: ' + editionPath + ' (' + Math.round(content.length / 1024) + 'KB)');
   if (DRY_RUN) console.log('[INFO] Mode: DRY RUN');
 
-  var sections = splitEdition(content, cycle);
+  var metaExtras = { type: type, cycle: cycle };
+
+  // Print the metadata block prominently — post-publish verifier reads stdout
+  // to confirm type/cycle plumbed correctly.
+  console.log('[METADATA] ' + JSON.stringify({
+    title: 'Cycle Pulse ' + label + ' ' + cycle,
+    source: 'edition-ingest',
+    type: type,
+    cycle: cycle,
+    container: CONTAINER_TAG
+  }, null, 2));
+
+  var sections = splitEdition(content, cycle, type);
   console.log('[INFO] Split into ' + sections.length + ' chunk(s)');
 
   var success = 0;
@@ -202,7 +280,7 @@ async function main() {
     }
 
     try {
-      await addDocument(section.title, section.content, section.tags);
+      await addDocument(section.title, section.content, section.tags, metaExtras);
       console.log('[OK] ' + section.title + ' (' + section.content.length + ' chars)');
       success++;
     } catch (err) {
@@ -218,7 +296,7 @@ async function main() {
 
   console.log('\n[DONE] Success: ' + success + ', Errors: ' + errors);
   if (errors === 0 && !DRY_RUN) {
-    console.log('[INFO] Edition ' + cycle + ' is now searchable in Supermemory');
+    console.log('[INFO] ' + label + ' ' + cycle + ' is now searchable in Supermemory (type=' + type + ')');
   }
 }
 

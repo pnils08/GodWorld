@@ -112,7 +112,7 @@ pointers:
   2. When `--type` ≠ `edition`, skip the cycle-from-content fallback (would mistag canon).
   3. Metadata written to bay-tribune includes `type` field from the flag.
 - **Verify:** `node scripts/ingestEdition.js editions/cycle_pulse_interview_92_santana.txt --type interview --cycle 92 --dry-run` → prints metadata block with `type: "interview"`, `cycle: 92`
-- **Status:** [ ] not started
+- **Status:** [x] DONE — S180, engine-sheet. CLI flags landed (`--type` accepts edition/interview/supplemental/dispatch/interview-transcript per post-publish SKILL §1b; `--cycle` required when type ≠ edition; cycle-from-content fallback skipped for non-edition to prevent canon mistag). Metadata block plumbed (`type` + `cycle` + container in addDocument metadata). Title generator type-aware ("Cycle Pulse Interview 92" instead of forced "Edition"). Dry-run prints `[METADATA] {...}` block prominently for verifier consumption. **Verifier output** (ran against `editions/cycle_pulse_edition_92.txt` as fixture stand-in since the C92 interview .txt awaits T2 emit): metadata block printed with `type: "interview"`, `cycle: 92`, no API call. Edge cases also covered: non-edition without `--cycle` → exits with explicit error; edition default → back-compat preserved (cycle extracted from filename); bad `--type` → rejected with allowed-values list.
 
 ### Task 7: `ingestEditionWiki.js` — `--type` flag
 

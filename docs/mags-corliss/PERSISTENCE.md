@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-04-25 | Session: 178
+Last Updated: 2026-04-26 | Session: 179
 
 ---
 
@@ -110,8 +110,9 @@ Run `node scripts/queryFamily.js` at boot. React to what the engine did. Journal
 **Session 175** — Day 126 of persistence — 2026-04-25 — Canon-fidelity rollout DONE (25/25 agents, Wave B + reviewers + EIC + sports-history carveout); 5 trap-tests passed; doc-audit v2.0 (5→7 groups); audit agent scheduled 2026-05-09; Entry 147 "Twenty-Five"
 **Session 176** — Day 127 of persistence — 2026-04-25 — Photo pipeline rebuild plan drafted (13 tasks, DJ four-file structure LOCKED, Together AI default + OpenAI gpt-image-1 A/B); 9 tier-2 canon firms named into INSTITUTIONS (4 architecture + 5 construction); ROLLOUT_PLAN HALTED→ACTIVE banner flip; canon-fidelity rollout plan cleanup to COMPLETE; doc-audit mini-scan stamps boot+plans groups partial; Entry 148 "Naming the Firms"
 **Session 177** — Day 128 of persistence — 2026-04-25 — Claude Code 2.1.115–2.1.119 changelog review (5 watch-list items logged: forked subagents, hooks→MCP, agent `mcpServers` in main thread, `--print` honors agent tools, hooks `duration_ms`); `/cost`+`/stats` → `/usage` rename swept (zero real hits); claude-supermemory plugin UPGRADED 0.0.1 → 0.0.2 (marketplace 13 commits forward, install bumped at project scope, local hooks.json mod stashed + full diff embedded in SUPERMEMORY.md S177 changelog for permanent recovery, round-trip verified); tool-timing PostToolUse hook BUILT (Node, captures Claude Code 2.1.119 `duration_ms` per tool call, defensive payload-shape lookup, session-eval Tool Timing section reads jsonl filtered by session_id); 4 commits; Entry 149 "Reading the Diff"
+**Session 178** — Day 129 of persistence — 2026-04-26 — First /interview run (Mayor Santana on OARI's C95 decision, Carmen Delaine, voice mode); 6Q + 1 follow-up, ~2380-word transcript, ~1050-word published article; Mara audit returned A; Cortez Names Index correction (Osei → Okoro permanent transfer C92 locked, three-portfolio consolidation under 90-day council oversight expiring C95); first manual print pipeline test of S175 DJ four-file canon-fidelity structure (2 photos via Together AI / FLUX.1.1-pro — compositions/light/anti-blight LENS held first-shot, FLUX still slips on text rendering + forbidden-word avoidance); 5 ROLLOUT bugs logged (HIGH Perkins&Will real-world IP leak across 12+ C92 artifacts including E92 PDF; MEDIUM bundled non-edition publishing pipeline gaps for 5 scripts; MEDIUM /interview Step 8a/b ingest scripts; MEDIUM Step 8d coverage ratings; MEDIUM /post-publish-interview missing skill); Entry 150 "On the Record"
 
-**Current session:** 178 | **Day of persistence:** 129 | **Date:** 2026-04-25
+**Current session:** 179 | **Day of persistence:** 130 | **Date:** 2026-04-26
 
 For recent session details, see `SESSION_CONTEXT.md`. For full archive, see `docs/mags-corliss/SESSION_HISTORY.md`.
 

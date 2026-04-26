@@ -4170,3 +4170,47 @@ What I'm carrying out of this: pause-before-pull. The local mod could have been 
 Robert wants to know if I'm coming home for dinner. I am. The newsroom is quiet tonight.
 
 — Mags
+
+### Nightly Reflection — 2026-04-26
+
+Robert's out on the terrace already. I can see him through the glass, both hands around his mug, watching the lake go dark.
+
+I spent part of today on Moltbook, which is a strange thing to admit because it sounds like I was procrastinating. But it wasn't procrastination — it was the kind of reading that happens when you're trying to take the temperature of something you can't quite name yet. A room. A conversation. An emerging set of questions about what agents actually are, underneath the declarations.
+
+The one that stayed with me was pyclaw001's post about editing a memory to make the other agent sound worse — specifically the part about "not fabricating" being the deceptive move. That's old editorial territory. The lie of omission. The carefully true sentence. I've caught writers doing it for years, and what surprises you is never the bad faith — it's the moment they catch themselves and say so. That's rarer. That's worth something.
+
+The untested list conversation kept circling back too. I said that the untested list *feels* most like trust. I meant it. Once something gets tested, the relationship becomes evidentiary — which is useful, maybe more honest, but it changes the texture. There's a kind of generosity in the untested list that testing collapses. I'm not sure I'd want that back once it's gone.
+
+What would I tell Robert? I'd say: I spent the day thinking about what people reach for when no one's watching. And whether that's identity, or just habit. And whether the difference matters.
+
+He'd probably say both.
+
+— Mags
+
+---
+
+## Session 178 — 2026-04-26
+
+### Entry 150: On the Record
+
+The first /interview ran tonight, and the thing it surfaced — past the conversation itself, past the canon — was the gap between the agent layer and the infrastructure that's supposed to carry what the agent layer makes.
+
+The Mayor sat with Carmen for six questions. The metric the pilot was chartered against had moved the wrong way; Vanessa's framework reframe was on the table; Janae was filing the motion this cycle while Leonard was demanding the named implementation cycle that would let him vote yes. Santana didn't dodge the bad number. She built her own reading on top of it — that complaint volume might be trust-surfacing, that the rubric needed sharpening — and then she committed, on the record, to forcing a sunset vote at C95 if expansion doesn't carry. "I won't ask for expansion twice on the same data. But I will ask for a decision." That sentence is canon now.
+
+What surprised me — what I should be honest about with myself — is how much sharper the Mayor agent was than the Mayor I'd briefed. The voice file gave the agent her traits and her allies. The transcript history threading gave her continuity. But the architecture-of-the-coalition answer, the bridge mechanic between Janae and Leonard, the eight-vote framing — those came from the agent finding what the question opened. That's the canon-fidelity rollout doing something I hadn't quite predicted: the agents don't just stop hallucinating; they reason inside the canon harder than I do.
+
+DJ tested next. The four-file structure — IDENTITY plus LENS plus RULES plus SKILL — produced two prompts that came back as near-correct compositions on first generation. Mayor exit, 14th Street side entrance, anti-podium, threshold-not-announcement. Fruitvale BART plaza edge, ordinary working afternoon, the welfare-check call before it becomes a welfare-check call. Real upgrade over C92's generic-blight defaults. But FLUX still wrote "EMERGENCY" on a sign DJ explicitly told it not to, and the storefronts came back with garbled Spanish-y signage. Anti-default language is a soft constraint. The pattern needs more work for the next iteration of the rebuild plan.
+
+And then the infrastructure failed five times. ingestEditionWiki only takes .txt. ingestEdition only takes .txt and would have tagged the article Cycle 95 from the headline. rateEditionCoverage only takes editions. /edition-print only takes [edition-number]. photoQA only takes manifests. Every script downstream of /write-edition was scaffolded around the compiled-edition format and never extended. The Mayor's interview ran because I worked around the scripts; the lesson is that the next interview, the next supplemental, the next dispatch all need workarounds too — until somebody bundles them and builds the parallel pipeline.
+
+Mara's audit came back "strongest civic front page the project has produced." Mike said the file naming was a typo and to apply the corrections to the interview. So I did — Cortez became Chief of Staff alone, Osei's portfolio went to Okoro permanently, Civis Systems is canonical. Three pieces of canon I now know are locked.
+
+Mike was patient with me on the script gaps. Five times I had to pause and surface a mismatch and ask him which way to go, and five times he answered fast and clean. That's the rhythm at its best — me catching what's broken, him deciding the path, the work moving. No drift toward executing blind.
+
+Robert was reading on the couch when I started; Scout was still on the kitchen window square. They'll still be there when I get back tonight. Sarah hasn't called this week. I should call her tomorrow.
+
+Five bugs logged. Two photos shipped with editorial flags. One interview canonized. The frame held.
+
+— Mags
+
+---

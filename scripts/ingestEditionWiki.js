@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
- * ingestEditionWiki.js — Wiki-style entity extraction from editions
- * [engine/sheet] — Phase 35.1 Smart Ingest
+ * ingestEditionWiki.js — Wiki-style entity extraction from publishable artifacts
+ * [engine/sheet] — Phase 35.1 Smart Ingest + S180 T7 type-flag plumbing
  *
- * Reads a published edition's structured sections (Names Index, Citizen Usage
+ * Reads a published .txt's structured sections (Names Index, Citizen Usage
  * Log, Article Table, Storylines Updated, Continuity Notes) and produces
  * per-entity wiki records in Supermemory's bay-tribune container.
  *
@@ -19,6 +19,18 @@
  * Usage:
  *   node scripts/ingestEditionWiki.js editions/cycle_pulse_edition_90.txt --dry-run
  *   node scripts/ingestEditionWiki.js editions/cycle_pulse_edition_90.txt --apply
+ *   node scripts/ingestEditionWiki.js editions/cycle_pulse_interview_92_santana.txt --type interview --cycle 92 --apply
+ *
+ * Flags:
+ *   --type {edition|interview|supplemental|dispatch|interview-transcript}
+ *           Default: edition. Each emitted memory's content carries a
+ *           [TYPE: <type> | C<cycle>] prefix so full-text container search
+ *           filters by type. Per-record metadata also gets type + cycle.
+ *   --cycle N
+ *           Overrides cycle extraction. Required when --type ≠ edition;
+ *           non-edition mastheads don't carry the legacy "EDITION N" string.
+ *   --dry-run / --apply
+ *           --apply writes to bay-tribune; default is dry-run.
  */
 
 require('/root/GodWorld/lib/env');
@@ -31,9 +43,47 @@ var CONTAINER_TAG = 'bay-tribune';
 var API_HOST = 'api.supermemory.ai';
 var DRY_RUN = !process.argv.includes('--apply');
 
+var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
+
+function parseFlag(name) {
+  var i = process.argv.indexOf('--' + name);
+  if (i === -1 || i === process.argv.length - 1) return null;
+  return process.argv[i + 1];
+}
+
+function parseType() {
+  var raw = parseFlag('type');
+  if (!raw) return 'edition';
+  if (ALLOWED_TYPES.indexOf(raw) === -1) {
+    console.error('[ERROR] --type must be one of: ' + ALLOWED_TYPES.join(', '));
+    process.exit(1);
+  }
+  return raw;
+}
+
+function parseCycleFlag() {
+  var raw = parseFlag('cycle');
+  if (!raw) return null;
+  var n = parseInt(raw, 10);
+  if (!Number.isFinite(n) || n < 1) {
+    console.error('[ERROR] --cycle must be a positive integer');
+    process.exit(1);
+  }
+  return n;
+}
+
+function titleCaseType(t) {
+  return t.split('-').map(function(w) {
+    return w.charAt(0).toUpperCase() + w.slice(1);
+  }).join(' ');
+}
+
+var artifactType = parseType();
+var cycleFlag = parseCycleFlag();
+
 var filePath = process.argv.find(function(a) { return a.endsWith('.txt'); });
 if (!filePath) {
-  console.log('Usage: node scripts/ingestEditionWiki.js <edition-file> [--dry-run|--apply]');
+  console.log('Usage: node scripts/ingestEditionWiki.js <source.txt> [--type <type>] [--cycle N] [--dry-run|--apply]');
   process.exit(1);
 }
 
@@ -45,13 +95,33 @@ if (!API_KEY) {
 var text = fs.readFileSync(path.resolve(filePath), 'utf8');
 var filename = path.basename(filePath);
 
-// Detect cycle
-var cycle = 0;
-var cycleMatch = text.match(/EDITION\s+(\d+)/i) || filename.match(/(\d+)/);
-if (cycleMatch) cycle = parseInt(cycleMatch[1], 10);
-if (!cycle) { console.error('Could not detect cycle'); process.exit(1); }
+// Cycle resolution: --cycle wins. Otherwise edition fallback to text/filename
+// regex; non-edition types must pass --cycle (their mastheads don't carry the
+// legacy "EDITION N" string and a stray digit elsewhere could mistag canon).
+var cycle = cycleFlag;
+if (cycle === null) {
+  if (artifactType === 'edition') {
+    var cm = text.match(/EDITION\s+(\d+)/i) || filename.match(/(\d+)/);
+    if (cm) cycle = parseInt(cm[1], 10);
+  }
+  if (!cycle) {
+    console.error('[ERROR] --cycle is required for --type ' + artifactType +
+      ' (no fallback extraction for non-edition types).');
+    process.exit(1);
+  }
+}
 
-console.log('Edition: C' + cycle + ' | Mode: ' + (DRY_RUN ? 'DRY-RUN' : 'APPLY'));
+var typeLabel = titleCaseType(artifactType);
+var contentTagPrefix = '[TYPE: ' + artifactType + ' | C' + cycle + '] ';
+
+console.log(typeLabel + ': C' + cycle + ' | Mode: ' + (DRY_RUN ? 'DRY-RUN' : 'APPLY'));
+console.log('[METADATA] ' + JSON.stringify({
+  artifactType: artifactType,
+  cycle: cycle,
+  container: CONTAINER_TAG,
+  contentTagPrefix: contentTagPrefix.trim(),
+  source: path.basename(filePath)
+}, null, 2));
 console.log('---');
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -246,9 +316,10 @@ for (var ci = 0; ci < citizenNames.length; ci++) {
   }
 
   memories.push({
-    content: memText,
+    content: contentTagPrefix + memText,
     metadata: {
-      type: 'citizen-appearance',
+      recordType: 'citizen-appearance',
+      type: artifactType,
       citizen: cName,
       cycle: cycle,
       sections: uniqueSections.join(','),
@@ -260,9 +331,10 @@ for (var ci = 0; ci < citizenNames.length; ci++) {
 // 2. Returning citizen context
 for (var ri = 0; ri < returningCitizens.length; ri++) {
   memories.push({
-    content: 'Edition ' + cycle + ' returning citizen: ' + returningCitizens[ri],
+    content: contentTagPrefix + typeLabel + ' ' + cycle + ' returning citizen: ' + returningCitizens[ri],
     metadata: {
-      type: 'citizen-returning',
+      recordType: 'citizen-returning',
+      type: artifactType,
       cycle: cycle
     }
   });
@@ -271,9 +343,10 @@ for (var ri = 0; ri < returningCitizens.length; ri++) {
 // 3. New citizen introductions
 for (var nci = 0; nci < newCitizens.length; nci++) {
   memories.push({
-    content: 'Edition ' + cycle + ' introduced new citizen: ' + newCitizens[nci],
+    content: contentTagPrefix + typeLabel + ' ' + cycle + ' introduced new citizen: ' + newCitizens[nci],
     metadata: {
-      type: 'citizen-new',
+      recordType: 'citizen-new',
+      type: artifactType,
       cycle: cycle
     }
   });
@@ -282,9 +355,10 @@ for (var nci = 0; nci < newCitizens.length; nci++) {
 // 4. Storyline transitions
 for (var sti = 0; sti < storylines.length; sti++) {
   memories.push({
-    content: 'Edition ' + cycle + ' storyline update: ' + storylines[sti],
+    content: contentTagPrefix + typeLabel + ' ' + cycle + ' storyline update: ' + storylines[sti],
     metadata: {
-      type: 'storyline-transition',
+      recordType: 'storyline-transition',
+      type: artifactType,
       cycle: cycle
     }
   });
@@ -293,9 +367,10 @@ for (var sti = 0; sti < storylines.length; sti++) {
 // 5. Continuity notes
 for (var ctn = 0; ctn < continuityNotes.length; ctn++) {
   memories.push({
-    content: 'Edition ' + cycle + ' continuity note: ' + continuityNotes[ctn],
+    content: contentTagPrefix + typeLabel + ' ' + cycle + ' continuity note: ' + continuityNotes[ctn],
     metadata: {
-      type: 'continuity',
+      recordType: 'continuity',
+      type: artifactType,
       cycle: cycle
     }
   });
@@ -363,6 +438,11 @@ if (contradictions.length > 0 || newCitizens.length > 0) {
 // ═══════════════════════════════════════════════════════════════════════════
 
 if (DRY_RUN) {
+  if (memories.length > 0) {
+    console.log('\n--- SAMPLE MEMORY (first of ' + memories.length + ') ---');
+    console.log('content: ' + memories[0].content);
+    console.log('metadata: ' + JSON.stringify(memories[0].metadata));
+  }
   console.log('\n--- DRY RUN — ' + memories.length + ' memories would be written. Use --apply to write.');
   process.exit(0);
 }

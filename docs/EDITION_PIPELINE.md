@@ -154,8 +154,8 @@ Published artifacts are not just print canon — they trigger engine state write
 
 | Section | Existing path | Status |
 |---|---|---|
-| NAMES INDEX | `buildCitizenCards.js` refreshes world-data citizen cards with cross-references to bay-tribune | Existing — citizen-card refresh works; sheet-level Simulation_Ledger intake for genuinely-new citizens still pending the engine-sheet intake build |
-| BUSINESSES NAMED | none — `ingestBusinessesNamed.js` to be built (engine-sheet, ROLLOUT-tagged item) | Pending — writes Business_Ledger cols A–D, flags `NEW` rows for engine to fill cols E–I next cycle |
+| NAMES INDEX | `buildCitizenCards.js` refreshes world-data citizen cards + `scripts/ingestPublishedEntities.js` (S180) appends genuinely-new citizens to Simulation_Ledger | Active — both card refresh and sheet-level intake operational; new citizens land with `Status=pending` for engine demographic fill next cycle |
+| BUSINESSES NAMED | `scripts/ingestPublishedEntities.js` (S180, engine-sheet) | Active — writes Business_Ledger cols A–D for new entities; cols E–I left blank for engine fill next cycle. Existing businesses are matched, never modified. Same script also handles NAMES INDEX → Simulation_Ledger appends (Status=`pending`, Tier=4). |
 
 **Editorial implication:** reporters and Mags must cite businesses with care — naming a business in a published artifact promotes that business to engine canon. Same discipline already applies to citizens. The format makes the trigger explicit and machine-readable.
 

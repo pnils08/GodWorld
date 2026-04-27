@@ -1,7 +1,7 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.1"
+version: "1.2"
 updated: 2026-04-26
 tags: [media, active]
 effort: high
@@ -43,7 +43,7 @@ Flags:
 | 2c world summary | ✓ | — | — | — |
 | 3 civic wiki | ✓ (when built) | — | — | — |
 | 4 coverage ratings | ✓ | — (C93-gated) | — (C93-gated) | — (C93-gated) |
-| 5 citizen+business intake | ✓ (engine-pending) | ✓ (engine-pending) | ✓ (engine-pending) | ✓ (engine-pending) |
+| 5 citizen+business intake | ✓ | ✓ | ✓ | ✓ |
 | 6 grade | ✓ | — | — | — |
 | 7 grade history | ✓ | — | — | — |
 | 8 exemplars | ✓ | — | — | — |
@@ -107,9 +107,9 @@ Citizens who appeared get updated profiles in world-data. New citizens get cards
 **Verification gate:** stdout reports refreshed/created card count ≥ 1 when NAMES INDEX is non-empty. If NAMES INDEX is empty (some dispatches), gate is met by stdout "0 citizens to refresh — empty NAMES INDEX."
 
 **2b. New businesses**
-If BUSINESSES NAMED contains rows tagged `NEW`, flag them for the engine-sheet intake build (rollout item — `ingestBusinessesNamed.js`). Until that script lands, log the rows here for the next engine session to pick up.
+Flagged here for visibility; actual writes happen in Step 5 via `ingestPublishedEntities.js` (which reads BUSINESSES NAMED and appends new entries to Business_Ledger).
 
-**Verification gate:** BUSINESSES NAMED parsed; NEW rows (if any) logged to production log Step 12.
+**Verification gate:** BUSINESSES NAMED parsed; NEW rows count logged to production log Step 12 — actual append verification lives in Step 5's output JSON.
 
 **2c. World summary ingest** (`--type edition` only)
 ```bash
@@ -136,11 +136,21 @@ For non-edition types: gated on the C93 observation outcome (plan T8). Default b
 
 **Verification gate:** edition: sheet row count increased OR stdout reports per-domain rating list. Non-edition: explicit gate-skip message logged.
 
-### Step 5: Citizen + Business Intake to Sheets (NOT WIRED)
+### Step 5: Citizen + Business Intake to Sheets
 
-New citizens and businesses from the artifact need direct sheet writes to Simulation_Ledger and Business_Ledger via service account. Engine-sheet build pending (rollout item — standing intake `ingestPublishedEntities.js`). Until built, this step logs the citizens/businesses needing intake to the production log for the next engine session.
+```bash
+node scripts/ingestPublishedEntities.js editions/cycle_pulse_<type>_<cycle>_<slug>.txt --type <type> --cycle <XX> --apply
+```
 
-**Verification gate:** NAMES INDEX + BUSINESSES NAMED rows logged to production log Step 12 with status "pending engine-sheet intake."
+Reads NAMES INDEX + BUSINESSES NAMED sections from the published `.txt` and appends genuinely new entities to canonical engine sheets:
+- **Simulation_Ledger** — new citizens land with `Status=pending`, `Tier=4`, `ClockMode=ENGINE`, blank demographics. Engine fills demographic columns next cycle. Existing citizens are NEVER modified — name drifts logged as warnings, not overwrites.
+- **Business_Ledger** — new businesses land with cols A–D populated, E–I blank for engine fill.
+
+Handles two NAMES INDEX formats: T1 strict (`POP-NNNNN | Name | Role`) and pre-T1 freeform (`Name — Description`). Pre-T1 fallback parser allows replay of existing fixtures. BUSINESSES NAMED is T1-strict only; absent section returns 0 gracefully.
+
+Default mode is `--dry-run`; pass `--apply` to write. Output: `output/intake_published_entities_c<XX>_<slug>.json` with full resolution detail (matched / candidates / ambiguous / phantom / appended).
+
+**Verification gate:** `output/intake_published_entities_c<XX>_<slug>.json` written; if `--apply`, `appended` arrays show all rows verified-by-readback (`ok: true`).
 
 ### Step 6: Grade Edition (`--type edition` only)
 ```bash

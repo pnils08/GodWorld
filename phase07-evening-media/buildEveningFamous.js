@@ -410,7 +410,7 @@ function buildEveningFamous_(ctx) {
   if (sportsSeason === "championship") count = 4;
 
   var selected = typeof pickRandomSet_ === 'function'
-    ? pickRandomSet_(uniq, count)
+    ? pickRandomSet_(uniq, count, rng)
     : uniq.sort(function() { return rng() - 0.5; }).slice(0, count);
 
   // ═══════════════════════════════════════════════════════════════════════════

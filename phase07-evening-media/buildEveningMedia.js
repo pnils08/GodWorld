@@ -65,7 +65,7 @@ function buildEveningMedia_(ctx) {
 
   // Helper for random pick
   var pickRandom = function(arr) {
-    if (typeof pickRandom_ === 'function') return pickRandom_(arr);
+    if (typeof pickRandom_ === 'function') return pickRandom_(arr, rng);
     return arr[Math.floor(rng() * arr.length)];
   };
 

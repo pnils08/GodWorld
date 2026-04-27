@@ -3,18 +3,20 @@
  * UTILITY FUNCTIONS - Canonical Location
  * ============================================================================
  *
- * v2.10 Changes:
- * - Deterministic RNG prep: Math.random aliased to local rng var in
- *   pickRandom_, pickRandomSet_, maybePick_ (centralization prep -- no ctx in scope)
+ * v2.15 Changes (S180, ENGINE_REPAIR Row 12):
+ * - pickRandom_, pickRandomSet_, maybePick_ now require an `rng` parameter
+ *   and throw if missing. Matches S156 Phase 40.3 Path 1 pattern (closes
+ *   the reference-pass Math.random sites the af40282 invocation-only
+ *   sweep missed).
  *
  * v2.9 Consolidation:
  * All shared utility functions should be defined here ONLY.
  * Do not duplicate these functions in other files.
  *
  * Available functions:
- * - pickRandom_(arr) - Pick random element from array
- * - pickRandomSet_(arr, count) - Pick multiple unique random elements
- * - maybePick_(arr) - 50% chance to pick random element
+ * - pickRandom_(arr, rng) - Pick random element from array
+ * - pickRandomSet_(arr, count, rng) - Pick multiple unique random elements
+ * - maybePick_(arr, rng) - 50% chance to pick random element
  * - shortId_() - Generate 8-char uppercase UUID
  * - ensureSheet_(ss, name, headers) - Get or create sheet
  * - colIndex_(letter) - Convert column letter to index (A=1)
@@ -25,15 +27,15 @@
  * ============================================================================
  */
 
-function pickRandom_(arr) {
-  var rng = Math.random; // centralization prep -- no ctx in scope
+function pickRandom_(arr, rng) {
+  if (typeof rng !== 'function') throw new Error('pickRandom_: rng parameter required (Phase 40.3 Path 1)');
   if (!arr || arr.length === 0) return null;
   var idx = Math.floor(rng() * arr.length);
   return arr[idx];
 }
 
-function pickRandomSet_(arr, count) {
-  var rng = Math.random; // centralization prep -- no ctx in scope
+function pickRandomSet_(arr, count, rng) {
+  if (typeof rng !== 'function') throw new Error('pickRandomSet_: rng parameter required (Phase 40.3 Path 1)');
   if (!arr || arr.length === 0) return [];
   if (count >= arr.length) return arr.slice();
 
@@ -49,10 +51,10 @@ function pickRandomSet_(arr, count) {
   return result;
 }
 
-function maybePick_(arr) {
-  var rng = Math.random; // centralization prep -- no ctx in scope
+function maybePick_(arr, rng) {
+  if (typeof rng !== 'function') throw new Error('maybePick_: rng parameter required (Phase 40.3 Path 1)');
   if (rng() < 0.5) return null;
-  return pickRandom_(arr);
+  return pickRandom_(arr, rng);
 }
 
 function shortId_() {

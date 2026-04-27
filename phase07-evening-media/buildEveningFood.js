@@ -397,7 +397,7 @@ function buildEveningFood_(ctx) {
   // v2.3: ES5 compatible pickRandom
   var pickRandom = function(arr, count) {
     if (typeof pickRandomSet_ === 'function') {
-      return pickRandomSet_(arr, count);
+      return pickRandomSet_(arr, count, rng);
     }
     return arr.sort(function() { return rng() - 0.5; }).slice(0, count);
   };

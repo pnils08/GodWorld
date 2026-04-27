@@ -193,11 +193,11 @@ function createChicagoCitizensSheet_(ss) {
 function generateChicagoCitizen_(cycle, rng) {
   if (typeof rng !== 'function') throw new Error('generateChicagoCitizensv1.generateChicagoCitizen_: rng parameter required (Phase 40.3 Path 1)');
   var gender = rng() < 0.5 ? 'M' : 'F';
-  var firstName = gender === 'M' ? pickRandom_(CHICAGO_FIRST_NAMES_M_) : pickRandom_(CHICAGO_FIRST_NAMES_F_);
-  var lastName = pickRandom_(CHICAGO_LAST_NAMES_);
+  var firstName = gender === 'M' ? pickRandom_(CHICAGO_FIRST_NAMES_M_, rng) : pickRandom_(CHICAGO_FIRST_NAMES_F_, rng);
+  var lastName = pickRandom_(CHICAGO_LAST_NAMES_, rng);
 
   var neighborhood = pickWeightedRandom_(CHICAGO_NEIGHBORHOODS_, rng);
-  var occupation = getChicagoOccupation_(neighborhood);
+  var occupation = getChicagoOccupation_(neighborhood, rng);
   var age = generateAge_(rng);
   var tier = generateTier_(rng);
 
@@ -248,12 +248,13 @@ function generateTier_(rng) {
 /**
  * Get occupation weighted by neighborhood
  */
-function getChicagoOccupation_(neighborhood) {
+function getChicagoOccupation_(neighborhood, rng) {
+  if (typeof rng !== 'function') throw new Error('generateChicagoCitizensv1.getChicagoOccupation_: rng parameter required (Phase 40.3 Path 1)');
   var occupations = CHICAGO_OCCUPATIONS_BY_NEIGHBORHOOD_[neighborhood];
   if (!occupations) {
     occupations = CHICAGO_OCCUPATIONS_DEFAULT_;
   }
-  return pickRandom_(occupations);
+  return pickRandom_(occupations, rng);
 }
 
 

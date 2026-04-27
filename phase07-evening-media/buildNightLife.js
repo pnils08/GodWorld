@@ -451,7 +451,7 @@ function buildNightlife_(ctx) {
   if (volume >= 8) pool = pool.concat(LATE_NIGHT);
 
   var spots = typeof pickRandomSet_ === 'function'
-    ? pickRandomSet_(pool, count)
+    ? pickRandomSet_(pool, count, rng)
     : pool.sort(function() { return rng() - 0.5; }).slice(0, count);
 
   // ═══════════════════════════════════════════════════════════════════════════

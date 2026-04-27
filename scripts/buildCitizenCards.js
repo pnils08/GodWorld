@@ -242,19 +242,33 @@ async function main() {
   var written = 0;
   var errors = 0;
   var withAppearances = 0;
+  var rawAppearancesTotal = 0;     // pre-filter — for cross-contamination metrics
+  var filteredOutTotal = 0;        // dropped by full-name post-filter
 
   for (var ci = 0; ci < citizens.length; ci++) {
     var cit = citizens[ci];
     var fullName = cit.first + ' ' + cit.last;
 
-    // Search bay-tribune for appearances
-    var appearances = [];
+    // Search bay-tribune for appearances. Hybrid (vector + keyword) search
+    // returns first-name matches, so post-filter on the citizen's full name
+    // — without this every "Marcus *" card collected every other Marcus's
+    // appearances. Strict substring match (case-insensitive); accepts the
+    // false-negative cost of dropping last-name-only later mentions in
+    // favor of zero false positives. See ENGINE_REPAIR Row 2 / S181.
+    var rawResults = [];
     try {
-      appearances = await searchSupermemory(fullName, 'bay-tribune');
+      rawResults = await searchSupermemory(fullName, 'bay-tribune');
     } catch (e) {
       // No appearances — that's fine
     }
 
+    var fullNameLc = fullName.toLowerCase();
+    var appearances = rawResults.filter(function(r) {
+      return String(r.memory || '').toLowerCase().indexOf(fullNameLc) >= 0;
+    });
+
+    rawAppearancesTotal += rawResults.length;
+    filteredOutTotal += (rawResults.length - appearances.length);
     if (appearances.length > 0) withAppearances++;
 
     // Build the card
@@ -293,9 +307,12 @@ async function main() {
 
   console.log('');
   console.log('[DONE] Citizens: ' + citizens.length +
-    ' | With appearances: ' + withAppearances +
+    ' | With appearances (post-filter): ' + withAppearances +
     ' | Written: ' + written +
     ' | Errors: ' + errors);
+  console.log('[FILTER] Raw bay-tribune hits: ' + rawAppearancesTotal +
+    ' | Filtered out (cross-contamination): ' + filteredOutTotal +
+    ' | Kept: ' + (rawAppearancesTotal - filteredOutTotal));
 
   if (!APPLY && citizens.length > 5) {
     console.log('\nShowed first 5 + citizens with appearances. Use --apply to write all.');

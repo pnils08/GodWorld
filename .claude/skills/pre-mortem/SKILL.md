@@ -1,8 +1,8 @@
 ---
 name: pre-mortem
 description: Scan engine phases before a cycle run to predict silent failures. Checks ctx field dependencies, sheet header alignment, code rule violations, and cascade risks.
-version: "1.1"
-updated: 2026-04-19
+version: "1.2"
+updated: 2026-04-26
 tags: [engine, active]
 effort: high
 ---
@@ -82,9 +82,30 @@ Read `schemas/SCHEMA_HEADERS.md` for the canonical column list. Compare against 
 Flag any mismatch as WARNING — column in code but not in sheet means silent data loss.
 
 ### 5. Neighborhood Reference Validation
-Scan all engine files for neighborhood string literals. GodWorld has 17 canonical Oakland districts. Any reference to a neighborhood not in the canonical list is a WARNING.
+Scan all engine files for neighborhood string literals. **GodWorld neighborhoods live in two layers** (S180 reconciliation under ENGINE_REPAIR Row 14):
 
-The 17 districts: Downtown, West Oakland, East Oakland, Fruitvale, Temescal, Rockridge, Piedmont, Jack London, Lake Merritt, Grand Lake, Laurel, Dimond, Montclair, Brooklyn, Chinatown, Adams Point, Uptown.
+**Citizen layer (Simulation_Ledger) — canon-12.** Where citizens live. Source-of-truth canonical:
+`Temescal, Downtown, Fruitvale, Lake Merritt, West Oakland, Laurel, Rockridge, Jack London, Uptown, KONO, Chinatown, Piedmont Ave`
+
+**World-state layer (Neighborhood_Map sheet) — 17 fine-grained children.** Demographic / wealth / festival / migration tracking buckets:
+`Adams Point, Brooklyn, Chinatown, Dimond, Downtown, Eastlake, Fruitvale, Glenview, Grand Lake, Ivy Hill, Jack London, Laurel, Piedmont Ave, Rockridge, San Antonio, Temescal, West Oakland`
+
+The two layers are connected by parent-child mapping (encoded inline at `phase05-citizens/checkForPromotions.js:190-209`):
+- Lake Merritt ← Adams Point, Grand Lake, Lakeshore, Eastlake
+- Fruitvale ← Ivy Hill, San Antonio
+- Laurel ← Dimond, Glenview, Maxwell Park
+- Downtown ← Old Oakland, City Center
+- Jack London ← Jack London Square
+- KONO ← Koreatown-Northgate, Koreatown, Northgate
+- Rockridge ← Montclair, Claremont
+- Temescal ← Longfellow, Shafter
+- West Oakland ← Brooklyn (parent inferred from updateCivicApprovalRatings.js DISTRICT_HOODS)
+
+**Validation rule:** A neighborhood reference is canonical if it appears in EITHER list, OR is a child name in the parent-child mapping. Anything else is a WARNING.
+
+NOT warnings: `Eastlake`, `San Antonio`, `Glenview`, `Ivy Hill`, `Adams Point`, `Brooklyn`, `Dimond`, `Grand Lake` (all valid world-state children); `KONO`, `Lake Merritt`, `Uptown` (all valid canon-parents).
+
+WARNINGS: anything outside both lists, e.g. `Coliseum District` (transit area, not a neighborhood), `Elmhurst`, `Jingletown`, `East Oakland` (legacy stray — not a row in Neighborhood_Map), `HH-KEANE` (household ID leaked into Neighborhood column).
 
 ### 6. Write-Intent Target Validation
 Scan Phase 10 persistence files for write-intent processing. Check that every target sheet name referenced in write-intent handlers matches an actual sheet. A write-intent targeting a non-existent sheet is a silent failure — the data just disappears.
@@ -105,7 +126,7 @@ CRITICAL (will cause silent failures in the cycle):
 WARNINGS (acknowledged off-path or doc drift):
 3. [file:line] — Column "HousingStress" in householdFormationEngine.js not found in SCHEMA_HEADERS.md
 4. [file:line] — Math.random in civicInitiativeEngine.js:2009 — manual-vote path, outside cycle (known acknowledged)
-5. [file:line] — Neighborhood "Eastlake" in storyHook.js:89 not in canonical 17 districts
+5. [file:line] — Neighborhood "Coliseum District" in someFile.js:89 not in canon-12 OR Neighborhood_Map 17 OR child-mapping
 
 CLEAN:
 - Math.random cycle-path: 0 violations

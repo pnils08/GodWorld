@@ -178,8 +178,9 @@ async function main() {
   const PHASE_SENTIMENT = {
     'disbursement-active': 0.8, 'dispatch-live': 0.8, 'operational': 0.7,
     'construction-active': 0.6, 'implementation-active': 0.6, 'pilot-active': 0.5,
-    'complete': 0.5, 'design-phase': 0.2, 'visioning-complete': 0.1,
-    'vote-ready': 0.3, 'vote-scheduled': 0, 'announced': 0, 'visioning': 0,
+    'pilot_evaluation': 0.5, 'complete': 0.5, 'design-phase': 0.2,
+    'visioning-complete': 0.1, 'legislation-filed': 0.1, 'vote-ready': 0.3,
+    'vote-scheduled': 0, 'announced': 0, 'visioning': 0,
     'stalled': -0.6, 'blocked': -0.8, 'suspended': -0.7, 'defunded': -1.0
   };
 

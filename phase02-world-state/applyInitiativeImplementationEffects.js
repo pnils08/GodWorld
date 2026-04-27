@@ -113,7 +113,9 @@ function applyInitiativeImplementationEffects_(ctx) {
 
   var PHASE_INTENSITY = {
     'announced': 0,
+    'legislation-filed': 0.05,
     'vote-scheduled': 0,
+    'vote-ready': 0.15,
     'visioning': 0.1,
     'visioning-complete': 0.15,
     'design-phase': 0.2,
@@ -123,6 +125,7 @@ function applyInitiativeImplementationEffects_(ctx) {
     'disbursement-active': 1.0,
     'dispatch-live': 1.0,
     'pilot-active': 0.6,
+    'pilot_evaluation': 0.6,
     'operational': 0.9,
     'complete': 0.5,
     'stalled': -0.5,

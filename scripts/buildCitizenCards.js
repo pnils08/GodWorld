@@ -140,12 +140,25 @@ function writeMemory(content) {
 async function buildCard(citizen, appearances) {
   var lines = [];
 
-  // Header
+  // Header — identity-level fields. Gender included so Mara's canon-fidelity
+  // checks can verify pronoun/gender claims against ledger truth.
   lines.push(citizen.first + ' ' + citizen.last + ' (' + citizen.popId + ')');
-  lines.push('Neighborhood: ' + (citizen.neighborhood || 'Unknown') +
-    ' | Role: ' + (citizen.role || 'Unknown') +
-    ' | Tier: ' + citizen.tier +
-    ' | Birth: ' + (citizen.birthYear || '?'));
+  var headerParts = [
+    'Neighborhood: ' + (citizen.neighborhood || 'Unknown'),
+    'Role: ' + (citizen.role || 'Unknown'),
+    'Tier: ' + citizen.tier,
+    'Birth: ' + (citizen.birthYear || '?')
+  ];
+  if (citizen.gender) headerParts.push('Gender: ' + citizen.gender);
+  lines.push(headerParts.join(' | '));
+
+  // Operational metadata — render only when populated so empty cards stay clean.
+  if (citizen.employerBizId) {
+    lines.push('Employer: ' + citizen.employerBizId);
+  }
+  if (citizen.usageCount && parseInt(citizen.usageCount, 10) > 0) {
+    lines.push('Usage: ' + citizen.usageCount + ' mentions');
+  }
 
   // Trait profile
   if (citizen.traitProfile) {
@@ -188,7 +201,7 @@ async function main() {
 
   var res = await client.spreadsheets.values.get({
     spreadsheetId: spreadsheetId,
-    range: 'Simulation_Ledger!A:AT'
+    range: 'Simulation_Ledger!A:AU'
   });
 
   var rows = res.data.values || [];
@@ -199,7 +212,9 @@ async function main() {
 
   console.log('[buildCitizenCards] Ledger rows: ' + (rows.length - 1));
 
-  // Column indices (0-based): A=0, B=1, D=3, J=9, K=10, M=12, R=17, T=19, AT=45
+  // Column indices (0-based): A=0 POPID, B=1 First, D=3 Last, J=9 Tier,
+  // K=10 RoleType, M=12 BirthYear, R=17 TraitProfile, S=18 UsageCount,
+  // T=19 Neighborhood, AS=44 EmployerBizId, AT=45 CitizenBio, AU=46 Gender.
   var citizens = [];
   for (var i = 1; i < rows.length; i++) {
     var r = rows[i];
@@ -210,8 +225,11 @@ async function main() {
     var role = (r[10] || '').trim();
     var birthYear = (r[12] || '').trim();
     var traitProfile = (r[17] || '').trim();
+    var usageCount = (r[18] || '').trim();
     var neighborhood = (r[19] || '').trim();
+    var employerBizId = (r[44] || '').trim();
     var bio = (r[45] || '').trim();
+    var gender = (r[46] || '').trim();
 
     if (!popId || !first) continue;
 
@@ -227,8 +245,11 @@ async function main() {
       role: role,
       birthYear: birthYear,
       traitProfile: traitProfile,
+      usageCount: usageCount,
       neighborhood: neighborhood,
-      bio: bio
+      employerBizId: employerBizId,
+      bio: bio,
+      gender: gender
     });
   }
 

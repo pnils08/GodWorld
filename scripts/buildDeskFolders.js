@@ -200,8 +200,35 @@ const MICE_THREADS = {
   letters:  'Lead with the person — interior emotion, what they carry, why they\'re writing.',
 };
 
+// ─── FAITH ACTIVITY (S180) ──────────────────────────────
+// Render Faith_Ledger digest into a culture-desk briefing section.
+// Pre-S180 the ledger had ~125 events with no reader; this surfaces them.
+function generateFaithSection(faithDigest) {
+  if (!faithDigest || !faithDigest.current || faithDigest.current.length === 0) return '';
+
+  let md = `## FAITH ACTIVITY THIS CYCLE\n`;
+  md += `*${faithDigest.totals.thisCycle} event(s) across ${Object.keys(faithDigest.byTradition || {}).length} tradition(s).*\n\n`;
+
+  for (const ev of faithDigest.current) {
+    const att = ev.attendance ? ` (~${ev.attendance})` : '';
+    const hood = ev.neighborhood ? ` — ${ev.neighborhood}` : '';
+    md += `- **${ev.organization}** (${ev.faithTradition})${hood}: ${ev.description || ev.eventType}${att}\n`;
+  }
+
+  if (faithDigest.recent && faithDigest.recent.length > 0) {
+    md += `\n*Recent context (last ${faithDigest.recentWindow || 2} cycles):* ${faithDigest.recent.length} event(s) — `;
+    md += faithDigest.recent.slice(0, 3).map(e =>
+      `${e.organization} (C${e.cycle}, ${e.eventType})`).join('; ');
+    if (faithDigest.recent.length > 3) md += `; +${faithDigest.recent.length - 3} more`;
+    md += `.\n`;
+  }
+
+  md += `\n`;
+  return md;
+}
+
 // ─── BRIEFING GENERATOR ──────────────────────────────────
-function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errata) {
+function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errata, faithDigest) {
   let md = `# ${desk.charAt(0).toUpperCase() + desk.slice(1)} Desk Briefing — Cycle ${cycle}\n\n`;
 
   // RD diversity priming — unique perspective each run
@@ -243,6 +270,11 @@ function generateBriefing(desk, cycle, summary, baseContext, maraGuidance, errat
   // Mara forward guidance
   if (maraGuidance) {
     md += `## MARA FORWARD GUIDANCE\n${maraGuidance}\n\n`;
+  }
+
+  // Faith activity (culture desk only) — Faith_Ledger digest, S180
+  if (desk === 'culture' && faithDigest) {
+    md += generateFaithSection(faithDigest);
   }
 
   // Established canon from base_context
@@ -450,6 +482,14 @@ function main() {
     else console.log('  No previous Mara guidance found (normal for first cycle)');
   }
 
+  // Faith_Ledger digest (S180) — culture desk briefing consumer
+  const faithDigest = readJsonIfExists(path.join(ROOT, 'output', `faith_digest_c${CYCLE}.json`));
+  if (faithDigest) {
+    console.log(`  Faith digest: ${faithDigest.totals.thisCycle} event(s) this cycle`);
+  } else {
+    console.log('  No faith digest found (run scripts/buildFaithDigest.js to generate)');
+  }
+
   let totalFiles = 0;
 
   for (const desk of DESK_NAMES) {
@@ -560,7 +600,7 @@ function main() {
     // 8. Generate briefing.md
     const summary = readJsonIfExists(path.join(currentDir, 'summary.json'));
     const deskMara = maraGuidance ? getMaraGuidanceForDesk(maraGuidance, desk) : null;
-    const briefing = generateBriefing(desk, CYCLE, summary, baseContext, deskMara, errataEntries);
+    const briefing = generateBriefing(desk, CYCLE, summary, baseContext, deskMara, errataEntries, faithDigest);
     fs.writeFileSync(path.join(currentDir, 'briefing.md'), briefing);
     console.log(`  briefing.md (generated)`);
     deskFiles++;

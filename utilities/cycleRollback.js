@@ -52,7 +52,7 @@ function rollbackToCycle78() {
     { name: 'Youth_Events', cycleCol: 'Cycle' },
     { name: 'Chicago_Feed', cycleCol: 'Cycle' },
     { name: 'Neighborhood_Demographics', cycleCol: 'Cycle' },
-    { name: 'Generic_Citizens', cycleCol: 'CreatedCycle' },
+    { name: 'Generic_Citizens', cycleCol: 'EmergedCycle' },
     { name: 'Chicago_Citizens', cycleCol: 'CreatedCycle' },
     { name: 'Initiative_Tracker', cycleCol: 'VoteCycle' },
     { name: 'Election_Log', cycleCol: 'Cycle' },

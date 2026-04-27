@@ -536,6 +536,12 @@ function routeCitizenUsageToIntake_(ss, cycle, cal) {
   var intakeSheet = ss.getSheetByName('Intake');
   var advSheet = ss.getSheetByName('Advancement_Intake1');
   if (!advSheet) advSheet = ss.getSheetByName('Advancement_Intake');
+  if (!advSheet) {
+    // Lazy-create: pipeline self-heals if tab was reset/migrated.
+    // Schema matches the appendRow shape below (10 cols A–J).
+    advSheet = ss.insertSheet('Advancement_Intake1');
+    advSheet.appendRow(['First', 'Middle', 'Last', 'RoleType', 'Tier', 'ClockMode', 'CIV', 'MED', 'UNI', 'Notes']);
+  }
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];

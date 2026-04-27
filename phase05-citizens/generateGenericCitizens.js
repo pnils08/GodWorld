@@ -55,7 +55,7 @@ function generateGenericCitizens_(ctx) {
   var iOccupation = idx('Occupation');
   var iEmergenceCount = idx('EmergenceCount');
   var iStatus = idx('Status');
-  var iCreatedCycle = idx('CreatedCycle');
+  var iEmergedCycle = idx('EmergedCycle');
   var iLifeHistory = idx('LifeHistory');
 
   // v2.4: Required header guard for duplicate checking
@@ -492,7 +492,7 @@ function generateGenericCitizens_(ctx) {
     if (iOccupation >= 0) newRow[iOccupation] = occupation;
     if (iEmergenceCount >= 0) newRow[iEmergenceCount] = 0;
     if (iStatus >= 0) newRow[iStatus] = 'Active';
-    if (iCreatedCycle >= 0) newRow[iCreatedCycle] = cycle;
+    if (iEmergedCycle >= 0) newRow[iEmergedCycle] = "Cycle " + cycle;
 
     // ═══════════════════════════════════════════════════════════════════════
     // WORLD + CALENDAR AWARE LIFEHISTORY (v2.2)

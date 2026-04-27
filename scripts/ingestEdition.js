@@ -22,6 +22,9 @@
  *   --dry-run
  *           Skip the Supermemory API call. Prints the metadata block + per-chunk
  *           preview so the post-publish verifier can confirm shape.
+ *   --no-strip
+ *           Disable defense-in-depth metadata-leak strip. Default is ON (strip).
+ *           Use only for raw-replay debugging — production ingest should always strip.
  *
  * Requires .env: SUPERMEMORY_CC_API_KEY
  */
@@ -39,6 +42,79 @@ var MAX_CHUNK_SIZE = 40000; // Supermemory doc limit safety margin
 var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
 
 var DRY_RUN = process.argv.includes('--dry-run');
+var NO_STRIP = process.argv.includes('--no-strip');
+
+// ---------------------------------------------------------------------------
+// Defense-in-depth metadata strip (S172 — HIGH ROLLOUT item, S180 build)
+// ---------------------------------------------------------------------------
+// Drops audit-block leaks that occasionally land in compiled .txt artifacts
+// when desk reporters append metadata blocks inside article body. Patterns:
+//   - `## EVIDENCE`, `## Names Index` (markdown-header forms)
+//   - `ARTICLE TABLE ENTRIES:`, `CITIZEN USAGE LOG:`, `CONTINUITY NOTES:`,
+//     `FACTUAL ASSERTIONS:` — uppercase WITH colon (distinguishes from T1
+//     official sections which use no colon)
+//   - `**ARTICLE TABLE ENTRIES:**` etc. — bold variants from desk .md
+//   - `Names Index:` followed by content on the same line — single-line drop
+//
+// Stops on next `---` markdown divider, 60-dash section divider, `===` break,
+// or T1 official section header (`NAMES INDEX`, `BUSINESSES NAMED`,
+// `ARTICLE TABLE` — those without a trailing colon are the canonical
+// post-body sections and stay).
+//
+// Pairs with the desk-emission FIX (separate ROLLOUT item) — this is the
+// "defense-in-depth" safety net so silent regressions can't poison
+// bay-tribune canon retrieval.
+function stripMetadataLeaks(content) {
+  var lines = content.split('\n');
+  var out = [];
+  var inLeak = false;
+  var blocksStripped = 0;
+  var linesStripped = 0;
+  var firstSample = null;
+  var sampleBuf = [];
+  var blockStart = /^(##\s+(EVIDENCE|Names\s+Index)\s*$|ARTICLE TABLE ENTRIES:\s*$|CITIZEN USAGE LOG:\s*$|CONTINUITY NOTES:\s*$|FACTUAL ASSERTIONS:\s*$|\*\*\s*(ARTICLE TABLE ENTRIES|CITIZEN USAGE LOG|CONTINUITY NOTES|FACTUAL ASSERTIONS|NAMES INDEX|Names Index)\s*:?\s*\*\*\s*$)/;
+  var inlineNamesIndex = /^Names Index:\s*\S/;
+  var stopDash = /^---+\s*$/;
+  var stopEquals = /^=+\s*$/;
+  var stopSixtyDash = /^-{20,}\s*$/;
+  var t1Section = /^(NAMES INDEX|BUSINESSES NAMED|ARTICLE TABLE)\s*$/;
+
+  for (var i = 0; i < lines.length; i++) {
+    var line = lines[i];
+    if (inLeak) {
+      linesStripped++;
+      if (sampleBuf.length < 8) sampleBuf.push(line);
+      if (stopDash.test(line) || stopEquals.test(line) || stopSixtyDash.test(line) || t1Section.test(line)) {
+        inLeak = false;
+        if (firstSample === null) firstSample = sampleBuf.join(' \\n ');
+        sampleBuf = [];
+        out.push(line);
+      }
+      continue;
+    }
+    if (blockStart.test(line)) {
+      inLeak = true;
+      blocksStripped++;
+      linesStripped++;
+      sampleBuf = [line];
+      continue;
+    }
+    if (inlineNamesIndex.test(line)) {
+      blocksStripped++;
+      linesStripped++;
+      if (firstSample === null) firstSample = '[inline] ' + line.slice(0, 100);
+      continue;
+    }
+    out.push(line);
+  }
+
+  return {
+    content: out.join('\n'),
+    blocksStripped: blocksStripped,
+    linesStripped: linesStripped,
+    firstSample: firstSample,
+  };
+}
 
 // ---------------------------------------------------------------------------
 // CLI flag parsing — --type / --cycle
@@ -230,8 +306,17 @@ async function main() {
     process.exit(1);
   }
 
-  var content = fs.readFileSync(editionPath, 'utf-8').trim();
+  var rawContent = fs.readFileSync(editionPath, 'utf-8').trim();
   var filename = path.basename(editionPath);
+
+  // Defense-in-depth metadata strip (S172 ROLLOUT) — ON by default.
+  var content = rawContent;
+  var stripStats = null;
+  if (!NO_STRIP) {
+    var stripResult = stripMetadataLeaks(rawContent);
+    content = stripResult.content;
+    stripStats = stripResult;
+  }
 
   // Cycle resolution: --cycle wins. Otherwise fall back to filename/content
   // for edition only — non-edition types must pass --cycle so a stray "Cycle 92"
@@ -250,7 +335,22 @@ async function main() {
 
   var label = titleCaseType(type);
   console.log('[INFO] Ingesting ' + label + ' (cycle ' + cycle + ') into Supermemory');
-  console.log('[INFO] File: ' + editionPath + ' (' + Math.round(content.length / 1024) + 'KB)');
+  console.log('[INFO] File: ' + editionPath + ' (' + Math.round(rawContent.length / 1024) + 'KB raw)');
+  if (stripStats) {
+    if (stripStats.blocksStripped > 0) {
+      console.log('[STRIP] Metadata leaks removed: ' + stripStats.blocksStripped +
+        ' block(s), ' + stripStats.linesStripped + ' line(s). Post-strip: ' +
+        Math.round(content.length / 1024) + 'KB');
+      if (stripStats.firstSample) {
+        console.log('[STRIP] Sample of first stripped block: ' +
+          stripStats.firstSample.slice(0, 200));
+      }
+    } else {
+      console.log('[STRIP] No metadata leaks detected.');
+    }
+  } else {
+    console.log('[STRIP] Disabled (--no-strip). Raw content will be ingested.');
+  }
   if (DRY_RUN) console.log('[INFO] Mode: DRY RUN');
 
   var metaExtras = { type: type, cycle: cycle };

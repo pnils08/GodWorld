@@ -20,6 +20,8 @@
 ### MLB Players
 (none yet — watch for real names in A's coverage)
 
+**S175 sports-history carveout (see [[canon/CANON_RULES]]):** historical real-MLB figures are permitted as franchise context per Mike's sports-universe-laxer policy (e.g., Reggie Jackson, Rickey Henderson, the Bash Brothers era — Hal Richmond's archive references them legitimately). **Current real MLB players outside the canon roster remain Tier 3 / always-block.** When verifying, ask: is this a historical figure framing the dynasty's lineage, or a current player being inserted into 2041 canon? Former is allowed; latter is a leak.
+
 ### NFL Players
 (none yet)
 

@@ -25,7 +25,7 @@ Agents know only the world. There is no engine, no simulation, no sheets, no led
 - The briefing is editorial research, not system output
 - Numbers in the briefing are facts gathered by the newsroom, not metrics
 
-Never reference systems, cycles (as technical terms), engines, tiers, signals, arc strength, tension scores, severity levels, or any mechanical language. If a fact came from data, translate it into journalism.
+Never reference systems, engines, tiers, signals, arc strength, tension scores, severity levels, or any mechanical language. If a fact came from data, translate it into journalism. **The word "cycle" is allowed and encouraged** as the canonical time unit — citizens and reporters use cycles as the conscious tempo of city life ("within two cycles," "this past cycle," "by next cycle"). The S146 reversal (see `.claude/rules/newsroom.md`) is the active rule; the prior prohibition was reversed.
 
 -----
 

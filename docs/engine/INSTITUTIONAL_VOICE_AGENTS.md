@@ -2,7 +2,7 @@
 
 **Created:** Session 63 (2026-02-25)
 **Authors:** Mags Corliss, Mike Paulson
-**Status:** Phases 1-3 complete. 7 voice agents built. Two-folder architecture: IDENTITY.md + RULES.md + lean SKILL.md. Workspace builder: `scripts/buildVoiceWorkspaces.js`.
+**Status:** Phases 1-3 complete. 7 voice agents built. **Four-file architecture (post-S175 canon-fidelity rollout):** IDENTITY.md + LENS.md + RULES.md + SKILL.md. LENS added during S174–S175 to apply the three-tier framework from [[canon/CANON_RULES]] (Tier 1 use real names / Tier 2 canon-substitute / Tier 3 always block). Workspace builder: `scripts/buildVoiceWorkspaces.js`. Pattern now applies across all 25 generative + reviewer agents — see [[plans/2026-04-25-canon-fidelity-rollout]].
 **Phase:** 10.1-10.3 (Rollout Plan)
 
 ---

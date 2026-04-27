@@ -86,6 +86,19 @@ Each terminal's specific scope, Always-Load list, owned docs, and session-close 
 
 `docs/PRODUCT_VISION.md` — civic lighter, programs deploy like SimCity, desks see the whole city, sections are porous, Vinnie Keane exists everywhere. Not built yet.
 
+## Project Frame (S173, 2026-04-24)
+
+**Building a sim, not running one.** Each cycle is a new approach to test. Editions are journalised audits, not finished products — read them for the build list, not as launch candidates. Supermemory is Mags/Mara working memory; engine code, phase files, skill docs are the product. The C92 contamination event surfaced the canonical gap (infrastructure in place without an agent layer driving canon) — closed S175 via the canon-fidelity rollout.
+
+## Canon-Fidelity Layer (S175)
+
+**Three-tier framework** lives in `docs/canon/CANON_RULES.md`:
+- **Tier 1** — use real names (cities, weather, public figures who don't operate in Oakland)
+- **Tier 2** — canon-substitute (institutions that DO operate in Oakland — see `docs/canon/INSTITUTIONS.md`)
+- **Tier 3** — always block (current real MLB players, current real Oakland firms)
+
+Every content-generating + content-reviewing agent (25/25) has per-agent four-file structure: IDENTITY + LENS + RULES + SKILL. When adding new agents or editing existing ones, preserve this shape.
+
 ## Quick Reference
 
 ```bash

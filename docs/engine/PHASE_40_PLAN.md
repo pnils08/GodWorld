@@ -19,7 +19,7 @@ pointers:
 
 # Phase 40 Implementation Plan — Agent Architecture Hardening
 
-**Status:** Parked (see [[engine/ROLLOUT_PLAN]] §Parked). Designed S145. Six items, build incrementally.
+**Status:** 5 of 6 DONE. 40.1 session-log interface + 40.3 credential audit + 40.4 four-component map + 40.5 Plan Mode gate + 40.6 layered injection defense all shipped S156. Only 40.2 cattle refactor remains — still needs its own plan file before build. Plan retained as architectural reference. Designed S145.
 
 **Priority:** MEDIUM. Not as urgent as Phase 39 (review layer affects every cycle), but 40.3 and 40.6 are security-adjacent and should not slip indefinitely.
 

@@ -19,7 +19,7 @@ pointers:
 
 **Spine step:** 2 of 10 (after 41.1 + 41.2 wiki layer).
 **Terminal handoff:** `(engine terminal)` — research/build wrote this plan; engine/sheet terminal executes.
-**Status:** Ready to build. Designed S146.
+**Status:** MOSTLY DONE S146. 38.1 detector + 38.2/38.3/38.4 enrichers + 38.7 anomaly gate + 38.8 baseline briefs all shipped S146 (spine steps 2, 3, 5). 38.5 measurement loop and 38.6 skill shrink extracted to separate plan files: [[plans/2026-04-16-phase-38-5-measurement-loop]] (DONE S156) + [[plans/2026-04-16-phase-38-6-skill-shrink]] (DONE S156). All Phase 38 sub-phases now closed. This plan file remains for design intent + spec reference.
 
 ---
 

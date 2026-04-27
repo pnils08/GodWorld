@@ -28,7 +28,7 @@ pointers:
 
 **Spine steps:** 4 (39.1 capability reviewer), 6 (39.2–39.7 three-lane redesign), 7 (39.8 reward-hacking + 39.9 tiered review + 39.10 adversarial).
 **This document covers spine step 4 in full implementation detail.** Steps 6 + 7 are scaffolded with build-readiness notes; full implementation specs added after step 4 lands and we know the actual reviewer-output shapes.
-**Status:** 39.1 ready to build. Designed S146.
+**Status:** DONE S147–S148. All Phase 39 sub-phases (39.1–39.10) shipped: 39.1 capability reviewer + 39.2 Rhea Sourcing Lane + 39.3 two-pass hallucination + 39.4 cycle-review Reasoning Lane + 39.5 Mara Result Validity Lane + 39.6 Reviewer Lane Schema (four-field contract — see [[engine/REVIEWER_LANE_SCHEMA]]) + 39.7 Final Arbiter + 39.8 reward-hacking scans + 39.9 tiered review + 39.10 adversarial review. Plan file retained for design intent + implementation reference. Operational-run gap remains (Final Arbiter never run end-to-end over real C93 production output) — tracked in [[engine/ROLLOUT_PLAN]] §Active C93 priorities.
 
 ---
 

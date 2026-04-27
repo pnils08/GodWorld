@@ -1,6 +1,6 @@
 # Engine Phase Data Audit
 
-**Last refreshed:** Session 156 (2026-04-17) — appended Phase 40 coverage section; header added; other phase sections unchanged from S146 baseline.
+**Last refreshed:** Session 180/181 (2026-04-26) — research-build spot-check confirmed Phase 1–11 coverage still tracks current ctx.summary writes. Phase 40 coverage section unchanged from S156. S180 phase05 dict additions (PHASE_INTENSITY / PHASE_SENTIMENT — vote-ready / legislation-filed / pilot_evaluation values) do not introduce new ctx.summary fields. Prior baseline: S146 (Phase 1–11) + S156 (Phase 40 append).
 
 What each phase writes to ctx.summary, what gets serialized to Cycle_Packet, and what reaches the newsroom via buildDeskPackets.js.
 

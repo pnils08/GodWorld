@@ -2,7 +2,7 @@
 
 **What lives where. Read this before searching for files.**
 
-Last Updated: Session 156 (2026-04-17) — directory structure re-verified against live `output/` (retention policy and top-level dirs still accurate; S156 output files present: `baseline_briefs_c91.json`, `engine_audit_c91.json`, `capability_review_c91.json`, `final_arbiter_c91.json`, `rhea_hallucinations_c91.json`, `skill_check_*.json`).
+Last Updated: Session 180/181 (2026-04-26) — research-build /doc-audit media spot-check confirmed retention policy + top-level dirs still accurate. C92 output files present: `baseline_briefs_c92.json`, `engine_audit_c92.json`, `engine_review_c92.md`, `world_summary_c92.md`, `production_log_edition_c92.md`, `production_log_city_hall_c92.md`, civic-voice/*_c92.json (11 voices), faith_digest_c92.json (S180), intake_player_truesource.json (S180), intake_published_entities_c92*.json (S180). Prior baseline: S156 (2026-04-17).
 
 ---
 

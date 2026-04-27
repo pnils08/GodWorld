@@ -2,7 +2,7 @@
 
 **Created:** Session 85 (2026-03-08)
 **Source specs:** `~/.claude/batches/results/media-clock-mode_phase24.md`, `event-cap-audit_phase24.md`, `context-aware-inputs_phase24.md`
-**Engine version:** v3.1 | Cycle: 86 | GAS-based (Google Apps Script)
+**Engine version (at draft):** v3.1, Cycle 86. **Current state:** v3.3, Cycle 92. Plan still active per [[engine/ROLLOUT_PLAN]] §Active/Ready; specs reflect v3.1 patterns but are forward-compatible (write-intent API + ctx.rng helpers unchanged). Re-verify pattern references against current `lib/` + `utilities/` before build start.
 
 ---
 

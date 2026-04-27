@@ -39,13 +39,17 @@ const https = require('https');
 const { google } = require('googleapis');
 const sheets = require('../lib/sheets');
 
-const DRIVE_ROOT = '1kJTjCkDBm0fYjU_ca4ul-qliMzdddv9S';  // MLB_Roster_Data_Cards
+const DRIVE_ROOT_MLB = '1kJTjCkDBm0fYjU_ca4ul-qliMzdddv9S';        // MLB_Roster_Data_Cards
+const DRIVE_ROOT_PROSPECTS = '1QBDslfH7zLmUPUa-c_AOkG4bWyHHPKrA';  // Top_Prospects_Data_Cards
 const CONTAINER_TAG = 'world-data';
 const API_HOST = 'api.supermemory.ai';
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 
 const APPLY = process.argv.includes('--apply');
 const DRY_RUN = !APPLY;
+const INCLUDE_FLAT = process.argv.includes('--include-flat');           // top-level files in MLB_Roster_Data_Cards
+const INCLUDE_PROSPECTS = process.argv.includes('--include-prospects'); // Top_Prospects_Data_Cards
+const SKIP_SUBFOLDER = process.argv.includes('--skip-subfolder');       // skip Pass A (use after first --apply)
 
 function parseFlag(name) {
   const i = process.argv.indexOf('--' + name);
@@ -54,7 +58,7 @@ function parseFlag(name) {
 }
 
 const PLAYER_FILTER = parseFlag('player');
-const FOLDER_OVERRIDE = parseFlag('folder') || DRIVE_ROOT;
+const FOLDER_OVERRIDE = parseFlag('folder') || DRIVE_ROOT_MLB;
 
 const API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 if (APPLY && !API_KEY) {
@@ -143,6 +147,11 @@ function extractPopIdFromFilename(filename) {
   return m ? normalizePopId(m[0]) : null;
 }
 
+// Strip combining diacritics so "López" matches "Lopez" in the ledger.
+function stripDiacritics(s) {
+  return s.normalize('NFD').replace(/[̀-ͯ]/g, '');
+}
+
 let ledgerCache = null;
 async function loadLedger() {
   if (ledgerCache) return ledgerCache;
@@ -151,14 +160,20 @@ async function loadLedger() {
   const popIdx = 0;
   const firstIdx = headers.indexOf('First');
   const lastIdx = headers.indexOf('Last');
-  const map = new Map();  // first+last lower → popId
+  // Two-tier map: keyed both with and without diacritics so accented input
+  // names (Allen López, José Colón) match ledger rows stored without accents
+  // (or vice versa).
+  const map = new Map();
   for (let i = 1; i < rows.length; i++) {
     const r = rows[i];
     const pop = (r[popIdx] || '').trim();
     const first = (r[firstIdx] || '').trim();
     const last = (r[lastIdx] || '').trim();
     if (pop && first && last) {
-      map.set((first + ' ' + last).toLowerCase(), pop);
+      const exact = (first + ' ' + last).toLowerCase();
+      const stripped = stripDiacritics(exact);
+      if (!map.has(exact)) map.set(exact, pop);
+      if (!map.has(stripped)) map.set(stripped, pop);
     }
   }
   ledgerCache = map;
@@ -171,7 +186,77 @@ async function resolvePopIdByName(playerName) {
   if (tokens.length < 2) return null;
   const first = tokens[0];
   const last = tokens[tokens.length - 1];
-  return ledger.get((first + ' ' + last).toLowerCase()) || null;
+  const exact = (first + ' ' + last).toLowerCase();
+  return ledger.get(exact) || ledger.get(stripDiacritics(exact)) || null;
+}
+
+// ---------------------------------------------------------------------------
+// Flat-file player-name extraction
+// ---------------------------------------------------------------------------
+// Filenames vary widely:
+//   "Allen López — TrueSource DataPage v1.0.txt"          → Allen López
+//   "Bryan Franco FULL STAT TRUE SOURCE — BATTER.txt"     → Bryan Franco
+//   "Carmen Mesa FULL STAT TRUE SOURCE — PITCHER.txt"     → Carmen Mesa
+//   "Eric Taveras_2040.txt"                               → Eric Taveras
+//   "John Ellis DataPage v1.0.txt"                        → John Ellis
+//   "JOSÉ COLÓN Data Card v1.0.txt"                       → José Colón
+//   "Mariano Rosales_TrueSource.txt"                      → Mariano Rosales
+//   "Travis_Cole_TrueSource_DataPage_v1.0.txt"            → Travis Cole
+//   "VLADIMIR GONZALEZ Data Card v1.0.txt"                → Vladimir Gonzalez
+//   "HENRY RIVAS — TrueSource DataPage v1.0.txt"          → Henry Rivas
+function extractPlayerNameFromFlatFilename(filename) {
+  let name = filename.replace(/\.txt$/i, '');
+  // Normalize: convert underscores to spaces FIRST so all suffix patterns
+  // can use whitespace consistently. Filenames mix `_TrueSource_DataPage`
+  // and ` — TrueSource DataPage` and hybrid `— TrueSource_DataPage` forms.
+  name = name.replace(/_/g, ' ').replace(/\s+/g, ' ').trim();
+  // Strip known suffix patterns
+  const suffixPatterns = [
+    /\s+FULL\s+STAT\s+TRUE\s+SOURCE\s+[—–-]\s+(BATTER|PITCHER).*$/i,
+    /\s+[—–-]\s+TrueSource\s+DataPage.*$/i,
+    /\s+TrueSource\s+DataPage(\s+v[\d.]+)?$/i,
+    /\s+TrueSource$/i,
+    /\s+DataPage(\s+v[\d.]+)?$/i,
+    /\s+Data\s+Card(\s+v[\d.]+)?$/i,
+    /\s+2040$/,
+    /\s+[—–-]\s+Player\s+Profile.*$/i,
+    /\s+[—–-]\s+Prospect\s+Profile.*$/i,
+  ];
+  for (const re of suffixPatterns) {
+    name = name.replace(re, '');
+  }
+  name = name.replace(/\s+/g, ' ').trim();
+  if (!name) return null;
+  // Title-case if all-uppercase (preserves diacritics) — split on whitespace
+  // and only capitalize the FIRST character of each token, leaving the rest
+  // lowercase. Avoids the `\b\w` Unicode boundary bug where `Ó` next to `N`
+  // gets the `N` recapitalized.
+  const isAllCaps = /^[A-ZÁÀÂÄÃÅÉÈÊËÍÌÎÏÓÒÔÖÕÚÙÛÜÑÇ\s.'-]+$/.test(name) &&
+                    /[A-Z]{3,}/.test(name);
+  if (isAllCaps) {
+    name = name.split(/\s+/).map(token => {
+      if (!token) return token;
+      return token.charAt(0).toUpperCase() + token.slice(1).toLowerCase();
+    }).join(' ');
+  }
+  return name;
+}
+
+// Group flat files by extracted player name (some players have 2 files, e.g.
+// Buford Park has both a FULL STAT and a DataPage).
+function groupFilesByPlayer(flatFiles) {
+  const groups = new Map();
+  const skipped = [];
+  for (const f of flatFiles) {
+    const name = extractPlayerNameFromFlatFilename(f.name);
+    if (!name) {
+      skipped.push({ file: f.name, reason: 'name_unparseable' });
+      continue;
+    }
+    if (!groups.has(name)) groups.set(name, []);
+    groups.get(name).push(f);
+  }
+  return { groups, skipped };
 }
 
 // ---------------------------------------------------------------------------
@@ -212,6 +297,278 @@ function addDocument(title, content, metadata) {
 }
 
 // ---------------------------------------------------------------------------
+// Per-player ingest helper — used by all three passes
+// ---------------------------------------------------------------------------
+async function processPlayerGroup(playerName, fileContents, opts, results) {
+  // opts: { sourceLabel, recordType, sourceFolder, sourcePass, alreadyResolvedPopIds }
+  const { sourceLabel, recordType, sourceFolder, sourcePass, alreadyResolvedPopIds } = opts;
+
+  // Resolve POPID — DataPage content first, then filename, then ledger lookup
+  let popId = null;
+  let popIdSource = null;
+  let legacyPopId = null;
+  for (const fc of fileContents) {
+    const fromContent = extractPopIdFromContent(fc.content);
+    if (fromContent && !popId) {
+      popId = fromContent;
+      popIdSource = 'datapage:' + fc.name;
+    }
+    const fromName = extractPopIdFromFilename(fc.name);
+    if (fromName && !popId) {
+      popId = fromName;
+      popIdSource = 'filename:' + fc.name;
+    }
+  }
+  if (!popId) {
+    const ledgerPop = await resolvePopIdByName(playerName);
+    if (ledgerPop) {
+      popId = ledgerPop;
+      popIdSource = 'ledger_lookup';
+    }
+  }
+  // Legacy POPID detection: filename-only (content scans were too noisy —
+  // see Wedding Chronicle / Amara Keane case from earlier S180 build).
+  if (popId) {
+    for (const fc of fileContents) {
+      const fromName = extractPopIdFromFilename(fc.name);
+      if (fromName && fromName !== popId && !legacyPopId) {
+        legacyPopId = fromName;
+      }
+    }
+  }
+
+  if (!popId) {
+    console.log(`  POPID UNRESOLVED — skip.`);
+    results.push({ player: playerName, sourcePass, status: 'popid_unresolved', filesIngested: 0 });
+    return null;
+  }
+
+  // Determine final type — supplementary if Pass A already covered this POPID
+  let finalType = recordType;
+  if (alreadyResolvedPopIds && alreadyResolvedPopIds.has(popId) && recordType === 'player_truesource') {
+    finalType = 'player_truesource_supplementary';
+  }
+
+  console.log(`  POPID: ${popId} (source: ${popIdSource})${legacyPopId ? ' | legacy: ' + legacyPopId : ''}${finalType !== recordType ? ' | type: ' + finalType : ''}`);
+
+  // Build content blob with header + concatenated files
+  const header = [
+    `=== PLAYER TRUESOURCE — ${playerName} ===`,
+    `POPID: ${popId}` + (legacyPopId ? ` (legacy: ${legacyPopId})` : ''),
+    `Source: ${sourceLabel}`,
+    `Files (${fileContents.length}): ${fileContents.map(f => f.pathFromPlayer || f.name).join(', ')}`,
+    `Ingested: ${new Date().toISOString()}`,
+    '',
+  ].join('\n');
+
+  const body = fileContents.map(fc =>
+    `\n----------------------------------------\nFILE: ${fc.pathFromPlayer || fc.name}\nModified: ${fc.modifiedTime}\n----------------------------------------\n\n${fc.content}\n`
+  ).join('');
+
+  const fullContent = header + body;
+  const titlePrefix = finalType === 'player_truesource_supplementary' ? 'Player TrueSource (supplementary)'
+    : finalType === 'player_truesource_prospect' ? 'Player TrueSource (prospect)'
+    : 'Player TrueSource';
+  const docTitle = `${titlePrefix}: ${playerName} (${popId})`;
+  const metadata = {
+    type: finalType,
+    popId,
+    playerName,
+    sourceFolder,
+    filesCount: fileContents.length,
+    sourcePass,
+  };
+  if (legacyPopId) metadata.legacyPopId = legacyPopId;
+
+  if (DRY_RUN) {
+    console.log(`  [DRY] Would POST ${fullContent.length} chars to world-data`);
+    console.log(`        title: "${docTitle}"`);
+    console.log(`        metadata: ${JSON.stringify(metadata)}`);
+    results.push({
+      player: playerName,
+      popId,
+      legacyPopId,
+      popIdSource,
+      sourcePass,
+      finalType,
+      status: 'would_ingest',
+      filesIngested: fileContents.length,
+      contentSize: fullContent.length,
+    });
+    return popId;
+  }
+
+  try {
+    const resp = await addDocument(docTitle, fullContent, metadata);
+    let docId = null;
+    try { const j = JSON.parse(resp.body); docId = j.id || j.documentId || null; } catch {}
+    console.log(`  [OK] Ingested — HTTP ${resp.status}${docId ? ', doc ' + docId : ''}`);
+    results.push({
+      player: playerName,
+      popId,
+      legacyPopId,
+      popIdSource,
+      sourcePass,
+      finalType,
+      status: 'ingested',
+      filesIngested: fileContents.length,
+      contentSize: fullContent.length,
+      docId,
+      httpStatus: resp.status,
+    });
+  } catch (err) {
+    console.error(`  [FAIL] ${err.message}`);
+    results.push({
+      player: playerName,
+      popId,
+      legacyPopId,
+      popIdSource,
+      sourcePass,
+      finalType,
+      status: 'failed',
+      filesIngested: fileContents.length,
+      error: err.message,
+    });
+  }
+  // Rate limit between players
+  await new Promise(r => setTimeout(r, 500));
+  return popId;
+}
+
+// ---------------------------------------------------------------------------
+// Pass A — subfolder walk (existing behavior)
+// ---------------------------------------------------------------------------
+async function runPassSubfolders(drive, results, resolvedPopIds) {
+  const rootChildren = await listFolderChildren(drive, FOLDER_OVERRIDE);
+  const playerFolders = rootChildren.filter(f =>
+    f.mimeType === 'application/vnd.google-apps.folder' &&
+    (!PLAYER_FILTER || f.name.toLowerCase().includes(PLAYER_FILTER.toLowerCase().replace(/\s+/g, '_')))
+  );
+
+  console.log(`=== Pass A: Subfolder walk — ${playerFolders.length} player folder(s) ===`);
+  if (playerFolders.length === 0) return;
+  console.log(`Folders: ${playerFolders.map(f => f.name).join(', ')}`);
+  console.log('');
+
+  for (const playerFolder of playerFolders) {
+    const playerName = playerFolder.name.trim().replace(/_/g, ' ');
+    console.log(`[PLAYER] ${playerName} (${playerFolder.id})`);
+
+    const txtFiles = await walkTextFiles(drive, playerFolder.id);
+    if (txtFiles.length === 0) {
+      console.log('  No .txt files anywhere — skip.');
+      results.push({ player: playerName, sourcePass: 'subfolder', status: 'no_txt_files', filesIngested: 0 });
+      console.log('');
+      continue;
+    }
+    console.log(`  Found ${txtFiles.length} .txt file(s) total`);
+    const fileContents = [];
+    for (const f of txtFiles) {
+      const text = await downloadTextFile(drive, f.id);
+      fileContents.push({ name: f.name, pathFromPlayer: f.pathFromPlayer, modifiedTime: f.modifiedTime, size: f.size, content: text });
+      console.log(`    - ${f.pathFromPlayer} (${f.size || text.length} bytes)`);
+    }
+    const popId = await processPlayerGroup(playerName, fileContents, {
+      sourceLabel: `MLB_Roster_Data_Cards/${playerFolder.name}/`,
+      recordType: 'player_truesource',
+      sourceFolder: playerFolder.name,
+      sourcePass: 'subfolder',
+      alreadyResolvedPopIds: null,
+    }, results);
+    if (popId) resolvedPopIds.add(popId);
+    console.log('');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Pass B — flat-file walk in MLB_Roster_Data_Cards (top-level files)
+// ---------------------------------------------------------------------------
+async function runPassFlatMLB(drive, results, resolvedPopIds) {
+  const rootChildren = await listFolderChildren(drive, FOLDER_OVERRIDE);
+  const flatFiles = rootChildren.filter(f =>
+    f.mimeType !== 'application/vnd.google-apps.folder' &&
+    f.name.toLowerCase().endsWith('.txt')
+  );
+
+  if (flatFiles.length === 0) {
+    console.log('=== Pass B: MLB flat-files — none found ===');
+    return;
+  }
+
+  const { groups, skipped } = groupFilesByPlayer(flatFiles);
+  console.log(`=== Pass B: MLB flat-files — ${flatFiles.length} files, ${groups.size} player(s) ===`);
+  if (skipped.length > 0) {
+    console.log('Unparseable filenames (skipped):');
+    skipped.forEach(s => console.log(`  - ${s.file} (${s.reason})`));
+  }
+  console.log('');
+
+  for (const [playerName, files] of groups) {
+    if (PLAYER_FILTER && !playerName.toLowerCase().includes(PLAYER_FILTER.toLowerCase())) continue;
+    console.log(`[PLAYER] ${playerName} (flat — ${files.length} file(s))`);
+    const fileContents = [];
+    for (const f of files) {
+      const text = await downloadTextFile(drive, f.id);
+      fileContents.push({ name: f.name, pathFromPlayer: f.name, modifiedTime: f.modifiedTime, size: f.size, content: text });
+      console.log(`    - ${f.name} (${f.size || text.length} bytes)`);
+    }
+    const popId = await processPlayerGroup(playerName, fileContents, {
+      sourceLabel: 'MLB_Roster_Data_Cards/ (top-level flat-files)',
+      recordType: 'player_truesource',
+      sourceFolder: '(flat)',
+      sourcePass: 'flat_mlb',
+      alreadyResolvedPopIds: resolvedPopIds,
+    }, results);
+    if (popId) resolvedPopIds.add(popId);
+    console.log('');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Pass C — flat-file walk in Top_Prospects_Data_Cards
+// ---------------------------------------------------------------------------
+async function runPassProspects(drive, results, resolvedPopIds) {
+  const rootChildren = await listFolderChildren(drive, DRIVE_ROOT_PROSPECTS);
+  const flatFiles = rootChildren.filter(f =>
+    f.mimeType !== 'application/vnd.google-apps.folder' &&
+    f.name.toLowerCase().endsWith('.txt')
+  );
+
+  if (flatFiles.length === 0) {
+    console.log('=== Pass C: Top_Prospects flat-files — none found ===');
+    return;
+  }
+
+  const { groups, skipped } = groupFilesByPlayer(flatFiles);
+  console.log(`=== Pass C: Top_Prospects flat-files — ${flatFiles.length} files, ${groups.size} prospect(s) ===`);
+  if (skipped.length > 0) {
+    console.log('Unparseable filenames (skipped):');
+    skipped.forEach(s => console.log(`  - ${s.file} (${s.reason})`));
+  }
+  console.log('');
+
+  for (const [playerName, files] of groups) {
+    if (PLAYER_FILTER && !playerName.toLowerCase().includes(PLAYER_FILTER.toLowerCase())) continue;
+    console.log(`[PROSPECT] ${playerName} (${files.length} file(s))`);
+    const fileContents = [];
+    for (const f of files) {
+      const text = await downloadTextFile(drive, f.id);
+      fileContents.push({ name: f.name, pathFromPlayer: f.name, modifiedTime: f.modifiedTime, size: f.size, content: text });
+      console.log(`    - ${f.name} (${f.size || text.length} bytes)`);
+    }
+    const popId = await processPlayerGroup(playerName, fileContents, {
+      sourceLabel: 'Top_Prospects_Data_Cards/',
+      recordType: 'player_truesource_prospect',
+      sourceFolder: 'Top_Prospects_Data_Cards',
+      sourcePass: 'prospects',
+      alreadyResolvedPopIds: resolvedPopIds,
+    }, results);
+    if (popId) resolvedPopIds.add(popId);
+    console.log('');
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Main
 // ---------------------------------------------------------------------------
 async function main() {
@@ -221,166 +578,45 @@ async function main() {
     container: CONTAINER_TAG,
     mode: DRY_RUN ? 'DRY-RUN' : 'APPLY',
     playerFilter: PLAYER_FILTER || '(all)',
+    passes: {
+      subfolders: true,
+      flatMLB: INCLUDE_FLAT,
+      prospects: INCLUDE_PROSPECTS,
+    },
   }, null, 2));
   console.log('---');
 
   const drive = getDriveClient();
-  const rootChildren = await listFolderChildren(drive, FOLDER_OVERRIDE);
-  const playerFolders = rootChildren.filter(f =>
-    f.mimeType === 'application/vnd.google-apps.folder' &&
-    (!PLAYER_FILTER || f.name.toLowerCase().includes(PLAYER_FILTER.toLowerCase().replace(/\s+/g, '_')))
-  );
-
-  if (playerFolders.length === 0) {
-    console.log('[INFO] No player folders matched.');
-    process.exit(0);
-  }
-
-  console.log(`Found ${playerFolders.length} player folder(s): ${playerFolders.map(f => f.name).join(', ')}`);
-  console.log('');
-
   const results = [];
+  const resolvedPopIds = new Set();
 
-  for (const playerFolder of playerFolders) {
-    const playerName = playerFolder.name.trim().replace(/_/g, ' ');
-    console.log(`[PLAYER] ${playerName} (${playerFolder.id})`);
-
-    // Walk all .txt files under the player folder (root + True_Source/ +
-    // POP_NNNNN/ subdirs all combined). Drive convention varies per player.
-    const txtFiles = await walkTextFiles(drive, playerFolder.id);
-    if (txtFiles.length === 0) {
-      console.log('  No .txt files anywhere under this folder — skip.');
-      results.push({ player: playerName, status: 'no_txt_files', filesIngested: 0 });
-      continue;
-    }
-
-    console.log(`  Found ${txtFiles.length} .txt file(s) total`);
-
-    // Pull each file + concatenate
-    const fileContents = [];
-    for (const f of txtFiles) {
-      const text = await downloadTextFile(drive, f.id);
-      fileContents.push({ name: f.name, pathFromPlayer: f.pathFromPlayer, modifiedTime: f.modifiedTime, size: f.size, content: text });
-      console.log(`    - ${f.pathFromPlayer} (${f.size || text.length} bytes, modified ${f.modifiedTime})`);
-    }
-
-    // Resolve POPID — try DataPage content first, then filename, then ledger lookup
-    let popId = null;
-    let popIdSource = null;
-    let legacyPopId = null;
-    for (const fc of fileContents) {
-      const fromContent = extractPopIdFromContent(fc.content);
-      if (fromContent && !popId) {
-        popId = fromContent;
-        popIdSource = 'datapage:' + fc.name;
-      }
-      const fromName = extractPopIdFromFilename(fc.name);
-      if (fromName && !popId) {
-        popId = fromName;
-        popIdSource = 'filename:' + fc.name;
-      }
-    }
-    if (!popId) {
-      const ledgerPop = await resolvePopIdByName(playerName);
-      if (ledgerPop) {
-        popId = ledgerPop;
-        popIdSource = 'ledger_lookup';
-      }
-    }
-    // Legacy POPID detection: filename-only, since narrative content can
-    // legitimately reference other people (e.g., Vinnie Keane's Wedding
-    // Chronicle mentions Amara Keane / POP-00002 — not a legacy ID).
-    if (popId) {
-      for (const fc of fileContents) {
-        const fromName = extractPopIdFromFilename(fc.name);
-        if (fromName && fromName !== popId && !legacyPopId) {
-          legacyPopId = fromName;
-        }
-      }
-    }
-
-    if (!popId) {
-      console.log(`  POPID UNRESOLVED — skip.`);
-      results.push({ player: playerName, status: 'popid_unresolved', filesIngested: 0 });
-      continue;
-    }
-
-    console.log(`  POPID: ${popId} (source: ${popIdSource})${legacyPopId ? ' | legacy: ' + legacyPopId : ''}`);
-
-    // Build single content blob with header + concatenated files
-    const header = [
-      `=== PLAYER TRUESOURCE — ${playerName} ===`,
-      `POPID: ${popId}` + (legacyPopId ? ` (legacy: ${legacyPopId})` : ''),
-      `Drive folder: MLB_Roster_Data_Cards/${playerFolder.name}/`,
-      `Files (${fileContents.length}): ${fileContents.map(f => f.pathFromPlayer).join(', ')}`,
-      `Ingested: ${new Date().toISOString()}`,
-      '',
-    ].join('\n');
-
-    const body = fileContents.map(fc =>
-      `\n----------------------------------------\nFILE: ${fc.pathFromPlayer}\nModified: ${fc.modifiedTime}\n----------------------------------------\n\n${fc.content}\n`
-    ).join('');
-
-    const fullContent = header + body;
-    const docTitle = `Player TrueSource: ${playerName} (${popId})`;
-    const metadata = {
-      type: 'player_truesource',
-      popId,
-      playerName,
-      sourceFolder: playerFolder.name,
-      filesCount: txtFiles.length,
-    };
-    // Supermemory rejects null metadata values — only include legacyPopId
-    // when actually present.
-    if (legacyPopId) metadata.legacyPopId = legacyPopId;
-
-    if (DRY_RUN) {
-      console.log(`  [DRY] Would POST ${fullContent.length} chars to world-data`);
-      console.log(`        title: "${docTitle}"`);
-      console.log(`        metadata: ${JSON.stringify(metadata)}`);
-      results.push({
-        player: playerName,
-        popId,
-        legacyPopId,
-        popIdSource,
-        status: 'would_ingest',
-        filesIngested: txtFiles.length,
-        contentSize: fullContent.length,
-      });
-    } else {
+  if (!SKIP_SUBFOLDER) {
+    await runPassSubfolders(drive, results, resolvedPopIds);
+  } else {
+    // Pre-seed resolvedPopIds from the prior report (if present) so
+    // supplementary detection still works in flat/prospects passes.
+    const priorReportPath = path.join(PROJECT_ROOT, 'output', 'intake_player_truesource.json');
+    if (fs.existsSync(priorReportPath)) {
       try {
-        const resp = await addDocument(docTitle, fullContent, metadata);
-        let docId = null;
-        try { const j = JSON.parse(resp.body); docId = j.id || j.documentId || null; } catch {}
-        console.log(`  [OK] Ingested — HTTP ${resp.status}${docId ? ', doc ' + docId : ''}`);
-        results.push({
-          player: playerName,
-          popId,
-          legacyPopId,
-          popIdSource,
-          status: 'ingested',
-          filesIngested: txtFiles.length,
-          contentSize: fullContent.length,
-          docId,
-          httpStatus: resp.status,
-        });
-      } catch (err) {
-        console.error(`  [FAIL] ${err.message}`);
-        results.push({
-          player: playerName,
-          popId,
-          legacyPopId,
-          popIdSource,
-          status: 'failed',
-          filesIngested: txtFiles.length,
-          error: err.message,
-        });
+        const prior = JSON.parse(fs.readFileSync(priorReportPath, 'utf8'));
+        const seeded = (prior.results || [])
+          .filter(r => r.sourcePass === 'subfolder' && (r.status === 'ingested' || r.status === 'would_ingest'))
+          .map(r => r.popId)
+          .filter(Boolean);
+        seeded.forEach(p => resolvedPopIds.add(p));
+        console.log(`=== Pass A skipped (--skip-subfolder). Pre-seeded ${seeded.length} POPID(s) from prior report. ===`);
+        console.log('');
+      } catch {
+        console.log('=== Pass A skipped (--skip-subfolder). Prior report unreadable; supplementary detection disabled. ===');
+        console.log('');
       }
-      // Rate limit between players
-      await new Promise(r => setTimeout(r, 500));
+    } else {
+      console.log('=== Pass A skipped (--skip-subfolder). No prior report; supplementary detection disabled. ===');
+      console.log('');
     }
-    console.log('');
   }
+  if (INCLUDE_FLAT) await runPassFlatMLB(drive, results, resolvedPopIds);
+  if (INCLUDE_PROSPECTS) await runPassProspects(drive, results, resolvedPopIds);
 
   // Write report
   const outDir = path.join(PROJECT_ROOT, 'output');
@@ -388,17 +624,29 @@ async function main() {
   const outPath = path.join(outDir, 'intake_player_truesource.json');
   const report = {
     timestamp: new Date().toISOString(),
-    driveRoot: FOLDER_OVERRIDE,
+    driveRootMLB: FOLDER_OVERRIDE,
+    driveRootProspects: INCLUDE_PROSPECTS ? DRIVE_ROOT_PROSPECTS : null,
     container: CONTAINER_TAG,
     mode: DRY_RUN ? 'dry-run' : 'apply',
     playerFilter: PLAYER_FILTER || null,
+    passes: {
+      subfolders: true,
+      flatMLB: INCLUDE_FLAT,
+      prospects: INCLUDE_PROSPECTS,
+    },
     totals: {
-      players: results.length,
+      records: results.length,
       ingested: results.filter(r => r.status === 'ingested').length,
       wouldIngest: results.filter(r => r.status === 'would_ingest').length,
       noTxtFiles: results.filter(r => r.status === 'no_txt_files').length,
       popIdUnresolved: results.filter(r => r.status === 'popid_unresolved').length,
       failed: results.filter(r => r.status === 'failed').length,
+      bySourcePass: {
+        subfolder: results.filter(r => r.sourcePass === 'subfolder').length,
+        flat_mlb: results.filter(r => r.sourcePass === 'flat_mlb').length,
+        prospects: results.filter(r => r.sourcePass === 'prospects').length,
+      },
+      uniquePopIdsResolved: resolvedPopIds.size,
     },
     results,
   };

@@ -126,10 +126,13 @@ BOOT
     ;;
 esac
 
-# --- ACTIVE BLOCKERS ---
+# --- LEDGER NOTE ---
+# S94 recovery is complete (2026-03-14). LEDGER_REPAIR.md retains its
+# "DO NOT re-analyze" framing as historical guidance — don't re-litigate
+# the S68 corruption. Current ledger state is tracked in LEDGER_AUDIT.md.
 if [ -f "$GODWORLD_ROOT/docs/engine/LEDGER_REPAIR.md" ]; then
   if head -5 "$GODWORLD_ROOT/docs/engine/LEDGER_REPAIR.md" | grep -q -i "DO NOT"; then
-    echo "ACTIVE BLOCKER: Simulation_Ledger is corrupted since Session 68. Read docs/engine/LEDGER_REPAIR.md before proposing ANY ledger fix. Do not re-analyze the damage."
+    echo "LEDGER NOTE: docs/engine/LEDGER_REPAIR.md retains historical 'DO NOT re-analyze' guidance from the S68 corruption window. S94 recovery COMPLETE; current ledger state in docs/engine/LEDGER_AUDIT.md (S181 refresh 2026-04-27). Refresh tool: scripts/auditSimulationLedger.js."
     echo ""
   fi
 fi

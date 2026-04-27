@@ -1,12 +1,127 @@
 # Simulation_Ledger Data Integrity Audit
 
 **Created:** Session 68 (2026-02-28)
-**Status:** CLEAN — 658/658 citizens fully populated, Phase 17 data integrity sweep complete
+**Last Refresh:** Session 181 (2026-04-27) — S94 RECOVERY VERIFIED; small post-S94 drift identified
 **Priority:** CRITICAL — All downstream ledgers depend on this data being correct
-**Completion:** Session 68 (2026-02-28) — core audit. Session 71 — satellite ledger consolidation. Session 72 — data integrity cleanup.
 **Rule:** Age = 2041 - BirthYear. Always. The simulation year is 2041.
 
 This is the single tracking document for the Simulation_Ledger overhaul. All audit progress, decisions, and remaining work live here. Other docs reference this file — they don't duplicate it.
+
+> **Document timeline.** S68 baseline (this doc) → S94 corruption recovery (`LEDGER_REPAIR.md`) → S99 schema bump + civic-officials cleanup (`LEDGER_REPAIR.md` post-recovery section) → S181 verification + drift snapshot (this section, below). Read top-down for current state; the historical S68 / S69 / S72 sections below are archive.
+
+---
+
+## Current State — S181 refresh (2026-04-27)
+
+**Verifier:** `scripts/auditSimulationLedger.js` (run from engine-sheet to refresh).
+
+### Headline numbers
+
+| Metric | Value | Note |
+|--------|-------|------|
+| Schema | 47 cols A–AU | Was 46 A–AT post-S99; Gender (AU) added since |
+| Total rows | 760 | Includes blank-row gaps |
+| Extant citizens | 686 | S94 closure reported 675 → +11 net since |
+| POPID range | POP-00001 → POP-00801 | |
+| POPID gaps | 115 | LEDGER_REPAIR §"What Happened" reported 113; +2 new gaps since |
+| Tier distribution | 17 T1 / 60 T2 / 218 T3 / 391 T4 | All numeric ✓ |
+| Status enum | 675 Active, 9 Retired, 1 "Recovering", 1 "recovering" | Case-mismatch sentinel — see drift |
+| Age sanity (2041 anchor) | 0 out-of-bounds | All BirthYear values yield ages 0–110 ✓ |
+| RoleType="Citizen" sentinel | **4 citizens** | Drift — see below |
+
+### S94 recovery claims — **VERIFIED HOLDING**
+
+LEDGER_REPAIR.md §"Recovery Status: COMPLETE (S94)" claims hold against live data:
+
+| Claim | S94 baseline | S181 live | Holds? |
+|-------|--------------|-----------|--------|
+| 0 missing names | 0 | 0 missing First, 0 missing Last | ✅ |
+| 0 "Citizen" RoleTypes | 0 | 4 (post-S94 drift only — see below) | ✅ for S94 cohort; ⚠ for new |
+| Tiers all numeric | yes | yes (1–4) | ✅ |
+| EducationLevel populated | 100% | 98.5% (10 missing — all post-S94 additions) | ✅ for S94 cohort |
+| Income populated | 100% | 100% | ✅ |
+| Headcount | 675 | 686 (+11) | ✅ growth, no shrinkage |
+
+**Verdict:** S94 recovery stands. The historical corruption (S68 mass-role-mangling, age-shift contamination, 4 institution-as-citizen entries, etc.) does not regenerate. New drift is small and localized.
+
+### Tier × ClockMode matrix (S181)
+
+| | ENGINE | GAME | CIVIC | MEDIA | LIFE |
+|---|---|---|---|---|---|
+| **T1** | 4 | 12 | 0 | 1 | 0 |
+| **T2** | 45 | 5 | 7 | 3 | 0 |
+| **T3** | 88 | 72 | 34 | 24 | 0 |
+| **T4** | 384 | 1 | 5 | 1 | 0 |
+
+LIFE clock mode is in the enum but has 0 citizens — never adopted. Worth removing from documentation if not planned.
+
+### Drift surfaced by S181 audit
+
+1. **`RoleType="Citizen"` literal — 4 citizens** (all post-S94 additions, all T4 ENGINE):
+   - POP-00794 Irene Fay (West Oakland, female)
+   - POP-00795 Marisol Trujillo (Fruitvale, female)
+   - POP-00798 Grace Yamamoto (Adams Point, female)
+   - POP-00801 Maurice Franklin (Rockridge, male)
+
+   **Root cause:** intake/generation default fallback. `phase05-citizens/processAdvancementIntake.js:296` does `var roleType = iRoleType >= 0 ? (row[iRoleType] || 'Citizen') : 'Citizen';` — when the intake row doesn't specify a role, the default is the literal string "Citizen", which is exactly the anti-pattern S94 fixed (399 such cases).
+
+   **Tracked:** `ENGINE_REPAIR.md` Row 17.
+
+2. **Status case-mismatch — 1 row.** "Recovering" + "recovering" both present. Free-text input drift; trim/casefold at write time would prevent.
+
+3. **POPID gap drift — +2 since S94.** Recovery left 113 gaps; live now has 115. Indicates 2 rows were created then deleted (or POPIDs were skipped). Not actionable without a writer trace.
+
+4. **Post-S94 EducationLevel + Gender gaps.** 10 of 13 post-S94 citizens have empty EducationLevel; 3 have empty Gender. Same intake path as the "Citizen" role default — citizens emerged via media-room intake don't get demographic backfill.
+
+### Per-column completeness (cols below 100%)
+
+Population tracked by `auditSimulationLedger.js`. Highlights:
+
+| Column | Populated | % | Note |
+|--------|-----------|---|------|
+| Middle | 3 | 0.4% | Rarely used, expected sparse |
+| OriginGame | 224 | 32.7% | Set only for sports/game-mode citizens |
+| OrginCity | 259 | 37.8% | Set only for non-Oakland origin |
+| LifeHistory | 649 | 94.6% | 37 citizens with empty narrative |
+| Last Updated | 265 | 38.6% | Most rows never re-stamped |
+| TraitProfile | 342 | 49.9% | Half the population missing personality JSON |
+| UsageCount | 162 | 23.6% | Media-usage tracking sparse |
+| HouseholdId | 532 | 77.6% | 154 unhoused — see Phase 24 plan |
+| MaritalStatus / NumChildren / ParentIds / ChildrenIds | 596–607 | 86–88% | Lifecycle-engine baseline coverage |
+| WealthLevel / Income / NetWorth / SavingsRate / DebtLevel | 595–676 | 87–98.5% | Economic engine coverage |
+| EducationLevel | 676 | 98.5% | 10 missing (post-S94) |
+| **MigrationReason** | **0** | **0%** | **Column exists, never written by any engine** |
+| **MigrationDestination** | **0** | **0%** | **Same — orphan column** |
+| MigratedCycle / ReturnedCycle / MigrationIntent | 596 | 86.9% | Migration writer covers intent + cycles, not reason/destination |
+| EconomicProfileKey | 655 | 95.5% | |
+| EmployerBizId | 658 | 95.9% | Phase 5 employer assignment |
+| **CitizenBio** | **32** | **4.7%** | S99 added for 17 T2 citizens; 32 now — slow growth, expected |
+| Gender | 683 | 99.6% | 3 missing (post-S94) |
+
+Two columns at 0%: `MigrationReason` and `MigrationDestination`. Schema reservation, no writer. Either (a) a planned engine never landed, (b) the intent-only writer path was meant to populate them and doesn't, or (c) safe to drop. Worth a future ENGINE_REPAIR row.
+
+### Narrative-column observations
+
+- **LifeHistory 94.6%** is healthy — 37 citizens with empty narrative are mostly post-S94 additions and a few legacy gaps.
+- **TraitProfile 49.9%** is half-populated. The trait-bounded refactor (S134 pipeline v2 / research4_1) was meant to standardize this. Status of the rollout: unclear from live data.
+- **CitizenBio 4.7%** is by-design narrow per S99 (T2 narrative anchors).
+
+### Non-canon-12 neighborhood occurrences
+
+169 citizens use neighborhood strings outside the canon-12 list this audit checks:
+
+| Count | Value | Likely classification |
+|-------|-------|----------------------|
+| 69 | Uptown | Fine-grained child of Downtown (Row 14 ontology) |
+| 50 | Laurel | Fine-grained child of East Oakland |
+| 44 | Piedmont Ave | Format drift of "Piedmont Avenue" |
+| 1 each | HH-KEANE, KONO, Downtown Oakland, Coliseum District, Jingletown | One-offs — possible household-ID leak ("HH-KEANE"), legitimate neighborhood ("KONO" = Koreatown-Northgate-Oakland), or fine-grained children |
+
+Per Row 14 closure (S180), engine code is correct under canon-12 ← fine-grained-17 parent-child layering — child names are accepted. The audit's canon-12 check above flags everything below the parent layer, so 119 of these are NOT actual drift, they're correct fine-grained children. The format-drift cases (`Piedmont Ave` vs `Piedmont Avenue`, `Downtown Oakland` vs `Downtown`) and the HH-KEANE leak are the candidates for cleanup. Low priority; localized.
+
+### Refresh cadence
+
+Run `node scripts/auditSimulationLedger.js` whenever a major ledger-touching cycle ships, or before any decision that depends on ledger health. JSON output (`--json`) suitable for ingestion into reviewer pipelines.
 
 ---
 

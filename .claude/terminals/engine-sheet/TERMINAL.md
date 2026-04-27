@@ -177,6 +177,7 @@ When this terminal discovers something that needs design/research:
 - **Last deploy:** Check `git log --oneline -5` and `clasp` status
 - **Open engine items (post-E92):** See `docs/engine/ENGINE_REPAIR.md` (rows 8, 9, 10, 11, 12, 13, 14) and `docs/engine/ROLLOUT_PLAN.md` "Data & Pipeline" section.
 - **Active plan (S180):** [docs/plans/2026-04-26-non-edition-publishing-pipeline.md](../../../docs/plans/2026-04-26-non-edition-publishing-pipeline.md) — engine-sheet owns T6–T9. T6 (ingestEdition.js, `1880c3e`) + T7 (ingestEditionWiki.js, `33167b2`) + T9 (4 print scripts, S180) DONE. T8 (rateEditionCoverage.js) gated on C93 observation. **Phase 2 (engine-sheet) complete.** Phase 3 = T10 media validation run against C92 Mayor interview.
+- **S181 entry-task:** ENGINE_REPAIR Row 13 — SCHEMA_HEADERS full alignment diff (parked end of S180). Run `/tech-debt-audit` §4 + regenerate `schemas/SCHEMA_HEADERS.md` via `exportAllHeaders()` + diff write-intent column sets against the post-Phase-38/39/40 commits.
 - **Refresh rule:** Update this block whenever a cycle runs or schema shifts. Stale state here poisons every engine-sheet boot.
 
 ---

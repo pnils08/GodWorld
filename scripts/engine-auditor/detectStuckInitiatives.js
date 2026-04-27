@@ -46,9 +46,16 @@ function detect(ctx) {
     }
 
     if (cyclesInState == null) {
-      const lastCycle = parseCycleHint(row.LastUpdated) || parseCycleHint(row.NextActionCycle);
-      if (lastCycle != null && lastCycle <= cycle) {
-        cyclesInState = cycle - lastCycle;
+      // Cold-start fallback: no prior audits to derive cyclesInState from.
+      // LastUpdated is a date-string timestamp ("4/21/2026"), NOT a cycle —
+      // do not parseCycleHint it (regex matches the month digit and yields
+      // wildly wrong cycle counts). NextActionCycle is forward-looking
+      // (deadline), so the <= cycle guard rejects it. VoteCycle records the
+      // cycle the initiative was voted on — closest "how long since active"
+      // proxy without phase-change history.
+      const voteCycle = parseCycleHint(row.VoteCycle);
+      if (voteCycle != null && voteCycle <= cycle) {
+        cyclesInState = cycle - voteCycle;
       } else {
         cyclesInState = 0;
       }

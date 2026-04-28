@@ -3,7 +3,7 @@ title: Female Citizen Balance Ingest Plan
 created: 2026-04-28
 updated: 2026-04-28
 type: plan
-tags: [engine, citizens, architecture, draft]
+tags: [engine, citizens, architecture, done]
 sources:
   - docs/engine/ROLLOUT_PLAN.md (S184 INGEST item — UNBLOCKED → this plan)
   - docs/plans/2026-04-28-intake-side-citizen-derivation.md (library this plan consumes)
@@ -266,3 +266,5 @@ None — all four S184 calls locked (count=150, name pool=fresh curated list, wr
 ## Changelog
 
 - 2026-04-28 — Initial draft (S184, research-build). All 4 Mike calls locked at draft time. Phase 1 + Phase 2 done in same session as plan write: `data/citizen_female_first_names.json` shipped (150 names, 7 origins, 9 tier-3 swaps logged), CDFs specced inline. Phase 3-5 handed to engine-sheet. Library + script-pattern template both proven S184; this plan composes them.
+- 2026-04-28 — **Phase 3+4 DONE** (S184, engine-sheet, commit `c583356`). `scripts/ingestFemaleCitizensBalance.js` shipped — Node + service-account direct-write, djb2 determinism, dry-run default + `--apply` flag. All 5 gates green on dry-run. Mid-run decisions (Mike): (a) Notes-marker dropped — SL has no Notes column and adding one would be 4th-wall-breaking; POPID-range collision check is the sole idempotency guard. (b) AI Safety Researcher (Anthropic) allowed canon (in-stack entity, not a 4th-wall break). (c) Youth Pastor + Senior Pastor / Faith Leader added to ROLE_DENYLIST — library's freq-weighted draw was amplifying live SL faith-leader skew 2% → 17%. (d) Gate 4 age-bracket threshold loosened ±5% → ±7% (≈2σ for n=150 sampling on a 22% bucket; statistically appropriate for ingest size). Pool tuning: rejection-with-retry switched to filter-then-draw (build available subset by combined-count<cap, draw uniform) — exact exhaustion semantics, no retry-budget collisions on deterministic seeds.
+- 2026-04-28 — **Phase 5 DONE** (S184, engine-sheet). Live `--apply` ran clean: 150 rows landed at POP-00802..POP-00951, all Gender=female. Three sample rows spot-checked in live SL match dry-run JSON byte-for-byte. **Final female share: 44.26%** (370F / 836 POPID-bearing rows; exceeds ≥40% acceptance criterion). Audit JSON `output/female_balance_ingest_c92.json` retained (gitignored). Acceptance criteria 1-7 all met. Followup queued: new POPIDs need wd-citizen cards via `scripts/buildCitizenCards.js` — separate task, targeted POPID-range run vs. full --no-quality-gate sweep TBD.

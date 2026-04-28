@@ -54,7 +54,7 @@ No length target. The conversation shapes itself. Mike decides when it ends.
 - **Questions are scripted, follow-ups are organic.** 4-6 prepared questions per interview. Reporter uses them as starting points. They follow up based on answers.
 - **Subjects don't get preset answers.** Voice agents respond from their identity and recent canon. Mike responds in character.
 - **Off-script is allowed.** The subject can refuse a question, pivot, reveal something unprompted. That's where canon is made.
-- **Citizen verification via MCP.** Anyone named in the interview checked via `lookup_citizen` (citizens) or `get_roster("as")` (A's players). Read `docs/media/citizen_selection.md`.
+- **Citizen verification via MCP.** Anyone named in the interview checked via `lookup_citizen` (citizens) or `get_roster("as")` (A's players). For business / faith / cultural / neighborhood context when the interview touches those domains, use `lookup_business` / `lookup_faith_org` / `lookup_cultural` / `get_neighborhood_state`. Full tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix. Read `docs/media/citizen_selection.md`.
 - **Follow brief template for the article.** `docs/media/brief_template.md` — interview articles are structured differently than standard briefs but citizen handling and canon rules apply.
 - **No calendar dates.** Cycles and natural time references only.
 - **Transcript saved incrementally during Paulson mode.** If interrupted, nothing's lost.

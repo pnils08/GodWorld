@@ -202,8 +202,9 @@ output/supplemental-briefs/{topic_slug}_c{XX}_brief.md
 2. World summary — `output/world_summary_c{XX}.md` — cycle texture, events, food, nightlife, famous people
 3. Bay-tribune canon — `search_canon("TOPIC")` via MCP — published history
 4. World-data citizens — `lookup_citizen(name)` via MCP for each candidate
-5. Simulation_Ledger — direct sheet query via service account for neighborhood-based candidates
-6. NEWSROOM_MEMORY.md — errata, character continuity, active arcs
+5. World-data domain cards (when supplemental is sector-focused) — `lookup_business` / `lookup_faith_org` / `lookup_cultural` / `get_neighborhood_state` via MCP. Full inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
+6. Simulation_Ledger — direct sheet query via service account for neighborhood-based candidates
+7. NEWSROOM_MEMORY.md — errata, character continuity, active arcs
 
 ### Enhanced data sources (use if available):
 

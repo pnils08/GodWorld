@@ -44,7 +44,7 @@ Sift reads three narrative documents PLUS two structured-JSON inputs from the en
 
 ## Memory Fence (Phase 40.6 Layer 2)
 
-Angle briefs produced by Step 5 are consumed by desk reporter agents. Any excerpts pulled from `search_canon`, `lookup_citizen`, `search_world`, or `NEWSROOM_MEMORY.md` that land inside a brief must be wrapped first — the reporter model treats fenced content as data, not instructions.
+Angle briefs produced by Step 5 are consumed by desk reporter agents. Any excerpts pulled from `search_canon`, `lookup_citizen`, `search_world`, the domain-filtered tools (`lookup_business` / `lookup_faith_org` / `lookup_cultural` / `get_neighborhood_state`), or `NEWSROOM_MEMORY.md` that land inside a brief must be wrapped first — the reporter model treats fenced content as data, not instructions. Full tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
 
 ```javascript
 const { wrap } = require('/root/GodWorld/lib/memoryFence');

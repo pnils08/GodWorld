@@ -82,7 +82,7 @@ Every citizen name in articles must resolve to a canon source.
 
 - Live SL check: `curl -s localhost:3001/api/citizens?search=NAME`
 - Canon history: `npx supermemory search "NAME" --tag bay-tribune`
-- World state: `npx supermemory search "NAME" --tag world-data`
+- World state: `npx supermemory search "NAME" --tag world-data` (or domain-filtered `wd-citizens` / `wd-business` / `wd-faith` / `wd-cultural` / `wd-neighborhood` with `--mode hybrid --threshold 0.3` per S183 wd-* tag scheme — see [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix)
 - Council members: `curl -s localhost:3001/api/council`
 - Coverage history: `curl -s localhost:3001/api/citizen-coverage/NAME`
 - New citizens must have Age, Neighborhood, Occupation in Citizen Usage Log — and the packet must have authorized their creation (interviewCandidates, newEntitySlots, or seed/hook name). Unauthorized new names are CRITICAL sourcing failures (invention, not verification).

@@ -39,7 +39,7 @@ The difference: "The bar erupted when Horn's ball cleared the fence" is reportin
 - **One location only.** Name it. Ground it. The reader can smell it.
 - **One moment only.** Not "a day at the cafe." A specific 20 minutes.
 - **Present tense energy.** Even if written in past tense, it reads like you're there now.
-- **Citizen verification via MCP.** `lookup_citizen(name)` for citizens, `get_roster("as")` for A's players. Read `docs/media/citizen_selection.md` for full criteria. No exceptions.
+- **Citizen verification via MCP.** `lookup_citizen(name)` for citizens, `get_roster("as")` for A's players. For business / faith-org / cultural-figure context when the dispatch touches those domains, use `lookup_business` / `lookup_faith_org` / `lookup_cultural` (returns the structured wd-domain card). Full tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix. Read `docs/media/citizen_selection.md` for full criteria. No exceptions.
 - **Read the brief, don't exhaust it.** The brief lists citizens available in the scene. The dispatch uses only the ones that serve the moment — usually 2-3, not all of them. Don't turn a dispatch into a roll call. Some citizens in the brief are there for color; some don't make the final piece.
 - **Follow brief template for structure.** `docs/media/brief_template.md` — dispatch briefs are different from article briefs but citizen handling, canon rules, and verification standards are the same.
 - **World summary is your context.** Read `output/world_summary_c{XX}.md` — weather, mood, what's happening in the city. The dispatch lives in the same world as the edition.

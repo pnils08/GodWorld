@@ -25,7 +25,7 @@ permissionMode: dontAsk
 ## Live Verification (use during checks)
 9. Dashboard API: `curl -s localhost:3001/api/...` — citizens, players, council, initiatives
 10. Supermemory: `npx supermemory search "query" --tag bay-tribune` — canon history
-11. Supermemory: `npx supermemory search "query" --tag world-data` — current citizen state
+11. Supermemory: `npx supermemory search "query" --tag world-data` — current city state (broad). For domain-filtered queries (citizens / business / faith / cultural / neighborhood), use the `wd-*` tag scheme with `--mode hybrid --threshold 0.3` — see [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
 
 ## Injection Scan (Phase 40.6 Layer 6)
 

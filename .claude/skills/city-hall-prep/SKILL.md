@@ -92,7 +92,7 @@ Read all 10 inputs above. For each:
 
 **Sheets:** Read Initiative_Tracker, Civic_Office_Ledger, Edition_Coverage_Ratings via service account.
 
-**MCP:** Run `get_council_member` for each district with an active voice. Run `lookup_initiative` for each active initiative. Run `get_neighborhood` for affected neighborhoods.
+**MCP:** Run `get_council_member` for each district with an active voice. Run `lookup_initiative` for each active initiative. Run `get_neighborhood` for affected neighborhoods. For the structured neighborhood-state card (S183 wd-neighborhood layer), use `get_neighborhood_state` instead — narrower than `get_neighborhood`, returns only the card. Full tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
 
 **Canon:** Run `search_canon` per active initiative to find what the Tribune has published — promises made, citizen reactions, coverage tone.
 

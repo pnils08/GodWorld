@@ -60,8 +60,15 @@ curl -s localhost:3001/api/initiatives                   # Initiative statuses, 
 **Supermemory** (canon history + world state):
 ```bash
 npx supermemory search "citizen name or topic" --tag bay-tribune    # Published canon — what's been written
-npx supermemory search "citizen name or topic" --tag world-data     # World state — who lives where, what they do
+npx supermemory search "citizen name or topic" --tag world-data     # World state — broad city-data search
+# Domain-filtered (S183 wd-* tag scheme — narrower retrieval, faster):
+npx supermemory search "name" --tag wd-citizens --mode hybrid --threshold 0.3      # Citizen card only
+npx supermemory search "name" --tag wd-business --mode hybrid --threshold 0.3      # Business card only
+npx supermemory search "name" --tag wd-faith --mode hybrid --threshold 0.3         # Faith org card only
+npx supermemory search "name" --tag wd-cultural --mode hybrid --threshold 0.3      # Cultural figure card only
+npx supermemory search "name" --tag wd-neighborhood --mode hybrid --threshold 0.3  # Neighborhood card only
 ```
+Full container/tag/tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix. Note: short structured cards (wd-*) require `--mode hybrid --threshold 0.3` — defaults return zero hits (S183 M1-M4 finding).
 
 **Simulation_Ledger** (live citizen data):
 ```bash

@@ -32,9 +32,11 @@ All loaded from disk via `lib/mags.js`:
 | World state | `loadWorldState()` | A's roster, civic status, pending votes, recent outcomes |
 | Citizen knowledge | `loadCitizenKnowledge()` | Top citizens by media references, council, cultural figures, reporters |
 | Archive knowledge | `loadArchiveKnowledge()` | Historical context from canon archive |
-| Edition brief | `loadEditionBrief()` | What just published |
+| Edition brief | `loadEditionBrief()` | First 80 lines of latest `output/production_log_edition_c{XX}.md` |
 | Notes to self | `loadNotesToSelf(10)` | Editorial flags, story tracking |
 | Conversation digest | `loadTodayConversationDigest()` | Today's rolling conversation (80 char previews) |
+
+No standalone bot context files. Bot reads what the publish pipeline already produces.
 
 **System prompt:** ~18K chars, rebuilt hourly.
 

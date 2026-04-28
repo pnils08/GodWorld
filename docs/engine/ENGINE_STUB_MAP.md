@@ -1543,44 +1543,16 @@
   Writes: S.nightlife, S.nightlifeVolume
   RNG: ctx.rng / safeRand_(ctx)
 
-### citizenFameTracker.js
-- **updateCitizenFameFromMedia_(ss, cycle, cal)**
+### citizenFameTracker.js — RETIRED S184 (ENGINE_REPAIR Row 15)
 
-- **loadCitizenLedgers_(ss)**
-  Sheets: Chicago_Citizens, Cultural_Ledger, Generic_Citizens, Simulation_Ledger
-
-- **buildNameMap_(data, headers, nameCol)**
-
-- **getUnprocessedMediaMentions_(ss, cycle)**
-  Sheets: Citizen_Media_Usage
-
-- **groupMentionsByCitizen_(mentions)**
-
-- **processCitizenMentions_(ss, ledgers, citizenName, mentions, cycle)**
-
-- **updateSimulationLedgerCitizen_(ss, ledger, citizenKey, mentions, cycle)**
-
-- **updateGenericCitizen_(ss, ledger, citizenKey, mentions, cycle)**
-
-- **updateChicagoCitizen_(ss, ledger, citizenKey, mentions, cycle)**
-
-- **syncCulturalLedgerFame_(ss, ledger, citizenKey, mentions, cycle)**
-
-- **updateStorylineCoverage_(ss, cycle)**
-  Sheets: Storyline_Tracker
-
-- **calculateMentionPoints_(mentions)**
-
-- **calculateFameTrend_(oldFame, newFame, lastMentionCycle, currentCycle)**
-
-- **determineNotoriety_(mentions, fameScore)**
-
-- **markMentionsProcessed_(ss, mentions)**
-  Sheets: Citizen_Media_Usage
-
-- **splitName_(fullName)**
-
-- **normalizeIdentity_(str)**
+File deleted. The cross-tab fame propagator was a no-op for many cycles because
+the expected fame columns were never added to Simulation_Ledger / Generic_Citizens
+/ Chicago_Citizens. The signal it tried to compute is already covered by the tier
+system + UsageCount (SL appearance counter, drives tier promotion) + EmergenceCount
+(GC, drives generic → SL promotion). Cultural_Ledger keeps its own independent
+FameScore — that system is live and read by recordMediaLedger / compileHandoff /
+citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
+`scripts/rollbackCitizenFameColumns.js` retained for archaeology.
 
 ### cityEveningSystems.js
 - **buildCityEveningSystems_(ctx)**

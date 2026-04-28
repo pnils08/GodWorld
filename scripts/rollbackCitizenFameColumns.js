@@ -1,7 +1,12 @@
 /**
  * ============================================================================
- * ROLLBACK: CITIZEN FAME & MEDIA EXPOSURE COLUMNS (Week 1)
+ * ROLLBACK: CITIZEN FAME & MEDIA EXPOSURE COLUMNS (Week 1) — RETIRED S184
  * ============================================================================
+ *
+ * RETIRED: citizenFameTracker.js was deleted S184 (ENGINE_REPAIR Row 15). The
+ * fame columns this script targets were never applied in production, so this
+ * rollback is a no-op against the current spreadsheet. Script retained for
+ * archaeology only — do not run.
  *
  * Removes the 18 columns added by addCitizenFameColumns.js migration.
  *

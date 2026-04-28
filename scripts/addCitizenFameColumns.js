@@ -1,7 +1,13 @@
 /**
  * ============================================================================
- * CITIZEN FAME & MEDIA EXPOSURE MIGRATION (Week 1)
+ * CITIZEN FAME & MEDIA EXPOSURE MIGRATION (Week 1) — RETIRED S184
  * ============================================================================
+ *
+ * RETIRED: citizenFameTracker.js was deleted S184 (ENGINE_REPAIR Row 15). The
+ * cross-tab propagator never ran in production because these columns were
+ * never applied via this migration. Fame signal is now covered by tier system
+ * + UsageCount + EmergenceCount; Cultural_Ledger fame stays as its own system.
+ * Script retained for archaeology only — do not run.
  *
  * Adds 18 new columns across 5 sheets to track citizen fame from media coverage.
  *

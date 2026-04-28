@@ -1,18 +1,20 @@
 /**
  * ============================================================================
- * MEDIA ROOM INTAKE v2.6
+ * MEDIA ROOM INTAKE v2.7
  * ============================================================================
  *
  * Aligned with MEDIA_ROOM_INSTRUCTIONS v2.0 and GodWorld Calendar v1.0
  *
- * v2.6 Enhancements (Week 1: Citizen Fame & Media Exposure):
- * - updateCitizenFameFromMedia_: Tracks citizen fame from media mentions
- *   Updates FameScore, MediaMentions, FameTrend on Simulation_Ledger
- *   Flags Generic_Citizens for promotion when mentions exceed threshold
- *   Syncs with Cultural_Ledger and Chicago_Citizens fame systems
- *   Updates Storyline_Tracker coverage metrics
- * - Integrated into processAllIntakeSheets_ after citizen routing
- * - Requires: citizenFameTracker.js and 18 new columns (run migration first)
+ * v2.7 Changes (S184 — ENGINE_REPAIR Row 15):
+ * - citizenFameTracker retired. The cross-tab fame propagator was a no-op
+ *   for many cycles because the expected columns (FameScore, MediaMentions,
+ *   FameTrend, etc.) were never added to Simulation_Ledger / Generic_Citizens
+ *   / Chicago_Citizens; tracker logged "FameScore column not found" and
+ *   returned. The signal it tried to compute is already covered by the tier
+ *   system + UsageCount (SL appearance counter, drives tier promotion) +
+ *   EmergenceCount (GC, drives generic → SL promotion). Cultural_Ledger keeps
+ *   its own independent FameScore — that system is live and read by
+ *   recordMediaLedger / compileHandoff / citizenContextBuilder.
  *
  * v2.5 Enhancements:
  * - routeCitizenUsageToIntake_: Routes Citizen_Media_Usage rows to Intake (new)
@@ -145,10 +147,8 @@ function processAllIntakeSheets_(ss, cycle, cal) {
   results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
   results.citizenRouting = routeCitizenUsageToIntake_(ss, cycle, cal);
 
-  // v2.6: Week 1 fame tracking — update citizen fame scores from media mentions
-  if (typeof updateCitizenFameFromMedia_ === 'function') {
-    results.fameTracking = updateCitizenFameFromMedia_(ss, cycle, cal);
-  }
+  // v2.7 (S184 — Row 15): citizenFameTracker retired. Tier system + UsageCount
+  // + EmergenceCount cover the same signal. Cultural_Ledger fame intact.
 
   // Continuity pipeline removed — quotes route to LifeHistory_Log via
   // parseContinuityNotes_ in parseMediaRoomMarkdown.js during parse step.

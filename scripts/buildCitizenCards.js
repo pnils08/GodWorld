@@ -46,6 +46,7 @@ var DOMAIN_TAG = 'wd-citizens';
 var API_HOST = 'api.supermemory.ai';
 var APPLY = process.argv.includes('--apply');
 var WIPE_OLD = process.argv.includes('--wipe-old');
+var WIPE_ONLY = process.argv.includes('--wipe-only'); // S183: wipe and exit (no writes) — recovery passes after partial bulk runs
 
 // Parse options
 var limitArg = process.argv.indexOf('--limit');
@@ -298,14 +299,25 @@ async function wipeOldCitizenCards(citizens) {
   var deleted = 0;
   var failed = 0;
   for (var k = 0; k < matches.length; k++) {
-    var del = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
-    var ok = del.status === 204 || del.status === 200;
-    if (!ok && del.status === 409) {
-      await smSleep(20000);
-      var del2 = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
-      ok = del2.status === 204 || del2.status === 200;
+    var ok = false;
+    var lastStatus = null;
+    // S183: 4-attempt retry — 409 (indexing settle, 20s) and 401/429 (rate-limit, 8s).
+    // Original 409-only retry lost ~70% of DELETEs on R2 first attempt; this
+    // pattern recovered the substrate cleanly.
+    for (var attempt = 0; attempt < 4 && !ok; attempt++) {
+      var del = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
+      lastStatus = del.status;
+      ok = del.status === 204 || del.status === 200;
+      if (ok) break;
+      if (del.status === 409) {
+        await smSleep(20000);
+      } else if (del.status === 401 || del.status === 429) {
+        await smSleep(WRITE_RETRY_SLEEP_MS);
+      } else {
+        break; // non-recoverable
+      }
     }
-    if (ok) deleted++; else failed++;
+    if (ok) deleted++; else { failed++; if (failed <= 5) console.log('    [DEL FAIL] id=' + matches[k].id + ' last_status=' + lastStatus); }
     if ((k + 1) % 100 === 0 || k === matches.length - 1) {
       console.log('  DELETE ' + (k + 1) + '/' + matches.length + ' — ok=' + deleted + ' failed=' + failed);
     }
@@ -447,8 +459,16 @@ async function main() {
   // sweep the substrate. Scoped by POPID-content match so player_truesource
   // and seed business-card stay untouched.
   var wipeReport = null;
-  if (APPLY && WIPE_OLD) {
+  if (APPLY && (WIPE_OLD || WIPE_ONLY)) {
     wipeReport = await wipeOldCitizenCards(citizens);
+    if (WIPE_ONLY) {
+      console.log('\n=== --wipe-only set: skipping writes, exiting after wipe ===');
+      console.log('[WIPE-OLD] candidates: ' + wipeReport.candidates +
+        ' | matched (POPID-scoped): ' + wipeReport.matched +
+        ' | deleted: ' + wipeReport.deleted +
+        ' | failed: ' + wipeReport.failed);
+      return;
+    }
     console.log('[wipe-old] sleeping ' + (WIPE_INDEXING_SLEEP_MS / 1000) + 's for async indexing to settle before writes');
     await smSleep(WIPE_INDEXING_SLEEP_MS);
   } else if (APPLY && !WIPE_OLD) {

@@ -59,7 +59,7 @@ pointers:
   3. Map intake → ledger column flow: which intake sheet row column → which ledger column (per `phase05-citizens/processAdvancementIntake.js` mapping).
   4. Output `output/intake_path_inventory.md` — table per path, classification per field.
 - **Verify:** every intake path has a row in the inventory; every field has a classification per path.
-- **Status:** [ ] not started
+- **Status:** **DONE S184** (research-build). Output: `output/intake_path_inventory.md`. 9 paths audited (3 live MUST FIX, 4 ALIGN/out-of-scope, 2 dormant one-time integrations). Reference pattern found: `integrateFaithLeaders.js:deriveRoleType()`.
 
 #### Task 1.2: Disposition pass
 - **Files:** this plan file (append "Phase 1 findings" subsection).
@@ -68,7 +68,7 @@ pointers:
   - **DORMANT** — code path not currently invoked; flag for cleanup but don't block.
   - **CORRECT** — already computes a real value; no change.
 - **Verify:** plan changelog entry added; `output/intake_path_inventory.md` referenced.
-- **Status:** [ ] not started
+- **Status:** **DONE S184** (this section + changelog).
 
 ### Phase 2 — Canonical source decision (research-build)
 
@@ -137,6 +137,39 @@ Each of 8 fields gets a spec block with: input parameters (seed string, age, nei
 
 ---
 
+## Phase 1 findings
+
+**Source:** `output/intake_path_inventory.md` (Task 1.1, 2026-04-28).
+
+**9 paths audited, 8-field classification matrix per path produced.** Three live cycle paths flagged MUST FIX:
+
+| Path | What's wrong |
+|---|---|
+| `mediaRoomIntake.js:591` | Hardcodes `'Citizen'` literal as RoleType. Truthy → bypasses S184 Path B fallback when row promotes to ledger. Single-line fix. |
+| `processAdvancementIntake.js:405-418` | Path B handles RoleType correctly post-S184; the other 7 target fields ship blank. Extension target — same Path B pattern, 7 more fields. |
+| `ingestPublishedEntities.js:399-415` | S180 standing intake. **Largest gap — all 8 target fields ship blank** on every published-artifact intake. Comment acknowledges "engine fills next cycle" but lifecycle engines fire only on triggers, so blanks persist. |
+
+**Reference pattern found:** `integrateFaithLeaders.js:81 deriveRoleType(leaderName, orgCharacter)` — proven intake-side derivation in production, the cleanest example in the codebase. Phase 3 derivation specs should model on this shape + `processAdvancementIntake.js:pickDemographicVoiceRole_()` (djb2 + pool draw) + `scripts/backfillLifecycleDefaults.js` (djb2 + age-bracket CDF).
+
+**Out of scope confirmed:**
+- `generateGenericCitizens.js` — different schema (Generic_Citizens uses Occupation, not RoleType; 8 lifecycle fields not in tab). Gap surfaces at promotion via processAdvancementIntake, not at generation.
+- `integrateAthletes.js` — updates existing rows, no creation
+- `editionIntake.js` — staging tab only
+
+**Dormant (one-time, lower priority):**
+- `integrateCelebrities.js` — RoleType already computed externally; lifecycle fields blank but rare-run
+- `integrateFaithLeaders.js` — already correct for RoleType; lifecycle fields blank but rare-run
+
+**Architectural recommendation (locks in for Phase 3):** build a shared derivation library, two implementations hitting the same per-field specs:
+- **Apps Script side** — `utilities/citizenDerivation.gs` consumed by `processAdvancementIntake.js` + `mediaRoomIntake.js`
+- **Node side** — parallel module consumed by `ingestPublishedEntities.js` (or direct port from `backfillLifecycleDefaults.js`)
+
+Phase 3 derivation specs become the single source of truth that both implementations must match. Phase 5 validation runs the synthetic-citizen fixture through ALL three paths to confirm parity.
+
+**Mike's hint context confirmed:** the recently shipped citizen + business intake `ingestPublishedEntities.js` (S180) has the largest 8-field gap. It bypasses both Path B (no `processAdvancementIntake.js` involvement) and the lifecycle engines' trigger-based fill (Status='pending' rows just sit blank).
+
+---
+
 ## Open questions
 
 - [ ] **One combined `deriveCitizenProfile(seed, age, neighborhood)` function or per-field functions?** Phase 3 decision. Combined = atomic call site; per-field = composable.
@@ -188,3 +221,4 @@ Engine-sheet executes Tasks 4.1–4.2 from research-build's specs after each Pha
 ## Changelog
 
 - 2026-04-28 — Initial draft (S184, research-build). Combines two engine-sheet S184 followups (Row 4 lifecycle defaults forward-looking; Row 17 RoleType upstream computation) under shared architectural theme: intake-side derivation > engine-side fallback. Same pattern as Row 5 name-cluster fix (caps at generator-side). Reference impl: `scripts/backfillLifecycleDefaults.js` (Node) ports to Apps Script. Path B fallback in `processAdvancementIntake.js` preserved as defense-in-depth.
+- 2026-04-28 — Phase 1 inventory complete (Tasks 1.1 + 1.2, S184, research-build). Output: `output/intake_path_inventory.md`. 9 paths audited. **3 MUST FIX live cycle paths:** `mediaRoomIntake.js:591` (hardcoded 'Citizen' literal bypasses Path B), `processAdvancementIntake.js:405-418` (extend Path B pattern to 7 more fields), `ingestPublishedEntities.js:399-415` (largest gap — all 8 target fields blank, S180 standing intake). **Reference pattern found:** `integrateFaithLeaders.js:deriveRoleType()`. **Architectural recommendation:** shared derivation library, two implementations (Apps Script `utilities/citizenDerivation.gs` for engine-cycle paths + Node parallel module for `ingestPublishedEntities.js`), both hitting Phase 3 specs as single source of truth.

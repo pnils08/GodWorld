@@ -47,6 +47,7 @@ var API_HOST = 'api.supermemory.ai';
 var APPLY = process.argv.includes('--apply');
 var WIPE_OLD = process.argv.includes('--wipe-old');
 var WIPE_ONLY = process.argv.includes('--wipe-only'); // S183: wipe and exit (no writes) — recovery passes after partial bulk runs
+var NO_QUALITY_GATE = process.argv.includes('--no-quality-gate'); // S183: write thin cards too (cold-start fix). Combined with --wipe-old, also wipes already-tagged wd-citizens for a clean rebuild.
 
 // Parse options
 var limitArg = process.argv.indexOf('--limit');
@@ -255,7 +256,12 @@ async function wipeOldCitizenCards(citizens) {
       var it = items[i];
       var tags = Array.isArray(it.containerTags) ? it.containerTags : [];
       if (!tags.includes(CONTAINER_TAG)) continue;
-      if (tags.includes(DOMAIN_TAG)) continue; // already retrofitted
+      // Idempotency filter: skip docs already carrying our domain tag so
+      // re-runs don't target previous writes. Disabled when --no-quality-gate
+      // is set so the flag effectively means "rebuild from scratch": wipe
+      // all citizen-shape docs (tagged or not) and re-write all matched
+      // citizens, including thin ones that previously hit the line-515 gate.
+      if (!NO_QUALITY_GATE && tags.includes(DOMAIN_TAG)) continue;
       ids.push(it.id);
     }
     if (page < totalPages) await smSleep(WIPE_LIST_SLEEP_MS);
@@ -511,8 +517,13 @@ async function main() {
     // Build the card
     var card = await buildCard(cit, appearances);
 
-    // Quality gate — skip thin cards with no appearances, no traits, no bio
-    if (appearances.length === 0 && !cit.traitProfile && !cit.bio) {
+    // Quality gate — skip thin cards with no appearances, no traits, no bio.
+    // Disabled by --no-quality-gate (S183 cold-start fix): thin cards are a
+    // discovery surface for "who lives in X / who works as Y" queries, not
+    // pollution. Hybrid search ranks by similarity, so thin cards only
+    // surface on direct name/role/neighborhood queries — exactly what
+    // discovery looks like.
+    if (!NO_QUALITY_GATE && appearances.length === 0 && !cit.traitProfile && !cit.bio) {
       // Bare ledger data only — not worth a Supermemory write
       continue;
     }

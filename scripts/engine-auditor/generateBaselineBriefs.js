@@ -7,15 +7,37 @@
  * Emits to output/baseline_briefs_c{XX}.json — NOT merged into the main audit
  * JSON (briefs are not ailments).
  *
- * v1 scope (per §12.2 — skip classes not currently in the ledger):
+ * v1.1 scope (S184, ENGINE_REPAIR Row 6):
  *   - world event each (WorldEvents_V3_Ledger this cycle)
  *   - council vote (Initiative_Tracker.VoteCycle === cycle)
  *   - initiative milestone (phase changed vs prior audit)
  *   - approval shift > 5pts (Civic_Office_Ledger vs prior audit)
- * Births/deaths/graduations deferred until EventType taxonomy supports them.
+ *   - citizen life event (LifeHistory_Log structural tags this cycle) — NEW v1.1
+ *
+ * Citizen life events (births, promotions, advancements, civic roles, retirements,
+ * stabilizations) live in LifeHistory_Log keyed by POPID. Reading them here closes
+ * the subjectIds=[] gap on three of four prior brief classes — these briefs
+ * populate subjectIds and unblock citizen-attributed sift promotion (Beverly Hayes
+ * paradigm, three-layer coverage principle). The pre-S184 comment claimed these
+ * were "deferred until EventType taxonomy supports them"; the actual gap was that
+ * the auditor wasn't reading the right tab.
  */
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
+
+// S184 (Row 6) — structural EventTag values worth a baseline brief.
+// Excludes high-frequency texture tags (Micro-Event, Daily, Relationship,
+// Household, Career, Education, Neighborhood, GAME-Micro, MEDIA-Event,
+// Holiday, Weather, Cultural, Community, FirstFriday, Health, Recovery,
+// youth-*, *-Holiday, *-FirstFriday) — those are color, not structural events.
+const STRUCTURAL_LIFE_TAGS = new Set([
+  'Life Event',     // generational events (births into population, deaths)
+  'Promotion',      // intake → ledger (citizen "emerged")
+  'Advancement',    // tier change (T4 → T3, etc.)
+  'CivicRole',      // assumed civic role
+  'Retirement',     // career end
+  'Stabilized',     // post-trauma stabilization
+]);
 
 function num(v) {
   if (v == null || v === '') return null;
@@ -169,6 +191,59 @@ function generate(ctx, ailmentPatterns) {
       }));
     });
   }
+
+  // --- Citizen life events (LifeHistory_Log structural tags this cycle) ---
+  // S184 (Row 6) — closes the subjectIds=[] gap. Each row gets POPID attribution.
+  const lifeEvents = (snapshot.LifeHistory_Log || []).filter(r =>
+    parseInt(r.Cycle, 10) === cycle && STRUCTURAL_LIFE_TAGS.has(r.EventTag)
+  );
+  lifeEvents.forEach((e, idx) => {
+    const popId = e.POPID;
+    if (!popId) return;
+    const tag = e.EventTag;
+    const text = e.EventText || '';
+    // LifeHistory neighborhoods include placeholder values like 'Engine' or 'Generational'.
+    // Resolve to a real neighborhood from the ledger when placeholder.
+    const rawNbhd = e.Neighborhood;
+    const isPlaceholder = !rawNbhd || rawNbhd === 'Engine' || rawNbhd === 'Generational';
+    const ledgerRow = citizenByPopId.get(popId);
+    const nbhd = isPlaceholder ? (ledgerRow ? ledgerRow.Neighborhood : null) : rawNbhd;
+
+    const tier = tierOf(popId);
+    const hints = [];
+    if (tier === '1' || tier === '2') hints.push(`Tier-${tier} citizen — feature candidate`);
+    if (nbhd && activeAilmentNeighborhoods.has(nbhd)) hints.push(`${nbhd} has active ailment — life event contextualizes it`);
+    if (tag === 'Life Event' && /\bborn\b/i.test(text)) hints.push('Birth into population — three-layer handle for citizen-attributed coverage');
+    if (tag === 'Promotion') hints.push('Citizen emerged — first-named appearance candidate');
+    if (tag === 'Advancement' && ledgerRow && (ledgerRow.Tier === '2' || ledgerRow.Tier === 2)) hints.push('Advanced to Tier 2 — narrative weight');
+    if (tag === 'CivicRole') hints.push('Civic role assumed — ties citizen to council/initiative coverage');
+    if (tag === 'Retirement') hints.push('Career end — narrative arc closure');
+    if (tag === 'Stabilized') hints.push('Post-trauma stabilization — recovery arc');
+
+    briefs.push(makeBrief({
+      id: makeId('life', `${popId}-${idx}`),
+      eventClass: 'citizen-life-event',
+      subjectIds: [popId],
+      neighborhood: nbhd,
+      facts: {
+        popId,
+        name: e.Name || (ledgerRow ? `${ledgerRow.First || ''} ${ledgerRow.Last || ''}`.trim() : ''),
+        tag,
+        text: text.slice(0, 200),
+        cycle: e.Cycle,
+        tier: ledgerRow ? ledgerRow.Tier : null,
+        role: ledgerRow ? ledgerRow.RoleType : null,
+      },
+      threeLayerHandle: {
+        engine: `${tag} fired in C${cycle}`,
+        simulation: ledgerRow
+          ? `${ledgerRow.First || ''} ${ledgerRow.Last || ''} (tier=${ledgerRow.Tier || '?'}, role=${ledgerRow.RoleType || '?'})`
+          : `POPID=${popId}`,
+        userActions: '',
+      },
+      promotionHints: hints,
+    }));
+  });
 
   // --- Approval shifts > 5pts ---
   const council = snapshot.Civic_Office_Ledger || [];

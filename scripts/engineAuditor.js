@@ -56,6 +56,7 @@ const SHEETS_TO_READ = [
   'Event_Arc_Ledger',
   'Storyline_Tracker',
   'Simulation_Ledger',
+  'LifeHistory_Log',  // S184 (Row 6): citizen life events for baseline-brief subject attribution
 ];
 
 async function getCurrentCycle() {

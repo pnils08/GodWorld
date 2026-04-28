@@ -32,7 +32,8 @@ function runHouseholdEngine_(ctx) {
 
   var ss = ctx.ss;
   var ledger = ss.getSheetByName('Simulation_Ledger');
-  var logSheet = ss.getSheetByName('LifeHistory_Log');
+  // LifeHistory_Log handle removed S184 B0 — appends now route through
+  // queueAppendIntent_ (executor resolves the sheet at execute time).
   if (!ledger) return;
 
   var values = ledger.getDataRange().getValues();
@@ -476,8 +477,10 @@ function runHouseholdEngine_(ctx) {
     row[iLife] = existing ? existing + "\n" + line : line;
     row[iLastUpd] = ctx.now;
 
-    if (logSheet) {
-      logSheet.appendRow([
+    queueAppendIntent_(
+      ctx,
+      'LifeHistory_Log',
+      [
         ctx.now,
         row[iPopID],
         ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(),
@@ -485,8 +488,10 @@ function runHouseholdEngine_(ctx) {
         pick,
         neighborhood,
         cycle
-      ]);
-    }
+      ],
+      'household event',
+      'citizens'
+    );
 
     // Track for summary
     householdEvents.push({

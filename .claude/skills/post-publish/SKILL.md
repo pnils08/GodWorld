@@ -113,9 +113,15 @@ Flagged here for visibility; actual writes happen in Step 5 via `ingestPublished
 
 **2c. World summary ingest** (`--type edition` only)
 ```bash
-npx supermemory add "$(cat output/world_summary_c{XX}.md)" --tag world-data --metadata '{"type": "cycle_summary", "cycle": <XX>}'
+source ~/.bashrc && curl -s -X POST "https://api.supermemory.ai/v3/documents" \
+  -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d "$(jq -n \
+    --rawfile content output/world_summary_c{XX}.md \
+    --arg cycle "<XX>" \
+    '{content: $content, containerTags: ["world-data", "wd-summary"], metadata: {type: "cycle_summary", cycle: $cycle}}')"
 ```
-World summary is per-cycle, not per-artifact. Non-edition types skip this without flag.
+World summary is per-cycle, not per-artifact. Non-edition types skip this without flag. Tag pair `["world-data", "wd-summary"]` (S184) — the broad `world-data` tag keeps existing `search_world` queries working; the `wd-summary` tag enables filtered retrieval (find me only the summaries, not the entity cards). See [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
 
 **Verification gate:** doc ID returned.
 

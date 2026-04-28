@@ -114,17 +114,24 @@ Task count + scope determined after Phase 1 inventory. Each skill needing update
 2. **`/post-publish` line 116 `wd-summary` candidate.** World summary ingests with bare `--tag world-data`. Open question: add `wd-summary` second tag for filtered queries (parallel to entity card pattern)?
 3. **No skills cite the M1–M4 tools yet.** `lookup_business`, `lookup_faith_org`, `lookup_cultural`, `get_neighborhood_state` shipped S183 (commit `c77cb37`). MINOR ENRICH category captures this — desk-relevant skills should know to call these tools when domain-specific context is needed.
 
-**Open scope question:** extend audit to `.claude/agents/`? 17 agents (desk reporters, civic voices, civic projects) have IDENTITY+LENS+RULES+SKILL files that commonly cite Supermemory. Skills-only is what the rollout entry named, but agent files are the actual point of contact for many lookups.
+**Scope confirmed (Mike S184):** extended to `.claude/agents/`. **Result:** only `rhea-morgan` references Supermemory (3 files: IDENTITY, RULES, SKILL — all use CLI `npx supermemory search` pattern). The other 16 agents (desks, voices, civic projects) correctly consume pre-fenced packets from skills and don't retrieve directly — that's the Memory Fence architecture working as designed (Phase 40.6 Layer 2). No agent expansion needed beyond rhea.
 
-**Recommended Phase 3 task batches:**
+**Rhea-morgan disposition:** UPDATE — switch citizen-verification path to MCP `lookup_citizen` (combines world-data + bay-tribune in one call, handles M1-M4 threshold tuning); keep CLI as fallback for ad-hoc/debugging queries. 3 file edits (IDENTITY / RULES / SKILL) added to Batch B.
 
-| Batch | Skills | Tasks | Edit type |
+**Recommended Phase 3 task batches (post-agent extension, Mike S184 calls):**
+
+| Batch | Files | Tasks | Edit type |
 |---|---|---|---|
-| A — bug fix | save-to-mags | 1 | one-line correction |
-| B — UPDATE | podcast, post-publish | 2 | replace CLI / decide on `wd-summary` |
-| C — MINOR ENRICH | write-edition, dispatch, interview, city-hall-prep, sift, write-supplemental | 6 | cite new MCP tools where relevant |
+| A — bug fix | save-to-mags | 1 | one-line correction (line 17 `/super-save` → `/save-to-bay-tribune`) |
+| B — UPDATE | podcast, post-publish, rhea IDENTITY/RULES/SKILL | 5 | replace CLI patterns with MCP, add `wd-summary` to post-publish line 116 (Mike S184 ADD), Rhea citizen-verify path to MCP |
+| C — MINOR ENRICH | write-edition, dispatch, interview, city-hall-prep, sift, write-supplemental | 6 | cite new MCP tools (`lookup_business` / `lookup_faith_org` / `lookup_cultural` / `get_neighborhood_state`) where relevant |
 
-**Total Phase 2 + Phase 3:** 1 matrix + 9 skill files = 10 edits. Plus Phase 4 validation.
+**Locked decisions (Mike S184):**
+1. Scope = all (skills + agents). Audit confirmed only rhea-morgan among 17 agents needs updates.
+2. `wd-summary` = ADD to post-publish line 116 — parallel design pattern with entity cards, M1-M4 established that structured world-data content benefits from domain-tag filtering, summaries answer different questions than entity cards and should be filterable separately.
+3. Batch order: Phase 2 matrix first (prereq for ENRICH) → Batch A (bug fix, cheap) → Batch B (UPDATE) → Batch C (ENRICH) → Phase 4 validation.
+
+**Total Phase 2 + Phase 3:** 1 matrix + 12 file edits = 13 edits. Plus Phase 4 validation.
 
 ---
 

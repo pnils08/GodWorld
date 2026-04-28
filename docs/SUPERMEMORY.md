@@ -153,6 +153,65 @@ Automatic captures and quick saves. May have useful conversation details. Search
 
 ---
 
+## Search/save matrix (S184)
+
+**The at-a-glance reference for "I need X — what tool, what tag, what container?"** Skills and agents cite this matrix instead of duplicating Supermemory guidance inline. Updated 2026-04-28 (S184). Reflects post-S183 world-data tag scheme (`wd-citizens`, `wd-business`, `wd-faith`, `wd-cultural`, `wd-neighborhood`, `wd-initiative`, `wd-player-truesource`, `wd-summary`) + M1-M4 retrieval tools.
+
+### Read operations
+
+| Use case | Container/tag | Primary tool | CLI fallback | Notes |
+|---|---|---|---|---|
+| Citizen by name (profile + canon history) | `world-data` + `bay-tribune` | MCP `lookup_citizen(name)` | `npx supermemory search "name" --tag world-data` and `--tag bay-tribune` | MCP combines both calls into one response |
+| Business by name | `wd-business` | MCP `lookup_business(name)` | `npx supermemory search "name" --tag wd-business --mode hybrid --threshold 0.3` | 52 cards in container |
+| Faith org by name | `wd-faith` | MCP `lookup_faith_org(name)` | `npx supermemory search "name" --tag wd-faith --mode hybrid --threshold 0.3` | 16 cards |
+| Cultural figure by name | `wd-cultural` | MCP `lookup_cultural(name)` | `npx supermemory search "name" --tag wd-cultural --mode hybrid --threshold 0.3` | 39 cards. May coexist with a `wd-citizens` card for the same POPID — use `lookup_citizen` for citizen profile, `lookup_cultural` for fame/domain profile |
+| Neighborhood state card | `wd-neighborhood` | MCP `get_neighborhood_state(name)` | `npx supermemory search "name" --tag wd-neighborhood --mode hybrid --threshold 0.3` | 17 cards. Narrower than `get_neighborhood` (which queries broad world-data and mixes in unrelated mentions) |
+| Initiative by name (state + milestones) | `world-data` (broad) | MCP `lookup_initiative(name)` | `npx supermemory search "name initiative" --tag wd-initiative` | tool currently queries broad world-data; `wd-initiative` tag exists for direct CLI filtering |
+| Council member by district/name | `world-data` (broad) | MCP `get_council_member(district)` | `npx supermemory search "council district" --tag world-data` | |
+| A's roster | local file | MCP `get_roster("as")` | read `output/desk-packets/truesource_reference.json` | not Supermemory-backed |
+| Canon by topic (free text) | `bay-tribune` | MCP `search_canon(query)` | `npx supermemory search "topic" --tag bay-tribune` | published edition content |
+| World state by topic (free text) | `world-data` (broad) | MCP `search_world(query)` | `npx supermemory search "topic" --tag world-data` | for narrower domain queries use the `wd-<domain>` MCP tools above |
+| Articles by topic | dashboard API | MCP `search_articles(query)` | `curl localhost:3001/api/search/articles?q=topic` | |
+| Coverage ratings for cycle | sheets via dashboard | MCP `get_domain_ratings(cycle)` | read Edition_Coverage_Ratings sheet | |
+| World summary by cycle | `world-data` + `wd-summary` | none yet (use CLI) | `npx supermemory search "cycle N summary" --tag wd-summary` | tag added S184; future MCP tool candidate `get_world_summary(cycle)` |
+| Mags' deliberate brain | `mags` | plugin only | `super-search --user "query"` (or `--both` for mags + super-memory) | conversation context, decisions, reasoning |
+| Junk drawer / auto-saves | `super-memory` | plugin only | `super-search --repo "query"` | session-end auto-saves, `/super-save` output |
+
+### Write operations
+
+| Use case | Container/tag | Primary tool | CLI / API fallback | Notes |
+|---|---|---|---|---|
+| Deliberate decision (Mags' brain) | `mags` | skill `/save-to-mags` | `curl /v3/documents -d '{"containerTags":["mags"]...}'` | manual, intentional only — never session-end narration |
+| Published edition / canon | `bay-tribune` | skill `/save-to-bay-tribune` OR `node scripts/ingestEdition.js` | `curl /v3/documents -d '{"containerTags":["bay-tribune"]...}'` | published canon only — never session work, engine internals, or simulation-as-simulation content |
+| Citizen card | `world-data` + `wd-citizens` | `node scripts/buildCitizenCards.js --apply` | — | writer handles tag pair + POPID-content-scoped wipe |
+| Business card | `world-data` + `wd-business` | `node scripts/buildBusinessCards.js --apply` | — | BIZID-content-scoped wipe |
+| Faith card | `world-data` + `wd-faith` | `node scripts/buildFaithCards.js --apply` | — | FAITH-ID-content-scoped wipe |
+| Cultural card | `world-data` + `wd-cultural` | `node scripts/buildCulturalCards.js --apply` | — | cultural-POPID-content-scoped wipe |
+| Neighborhood card | `world-data` + `wd-neighborhood` | `node scripts/buildNeighborhoodCards.js --apply` | — | neighborhood-name-scoped wipe |
+| Initiative card | `world-data` + `wd-initiative` | `node scripts/buildInitiativeCards.js --apply` | — | INIT-ID-content-scoped wipe |
+| Player truesource | `world-data` + `wd-player-truesource` | `node scripts/ingestPlayerTrueSource.js --apply` | — | truesource-header-scoped wipe |
+| World summary (per-cycle) | `world-data` + `wd-summary` | post-publish skill via API | `curl /v3/documents -d '{"containerTags":["world-data","wd-summary"]...}'` | tag pair added S184 |
+| Quick conversation note | `super-memory` | skill `/super-save` | plugin handles | junk drawer; not for canon or deliberate decisions |
+| Session auto-save | `super-memory` | Stop hook (automatic) | — | runs on session end |
+
+### Container quick reference
+
+| Container | Role | Primary readers | Primary writers |
+|---|---|---|---|
+| `mags` | Deliberate brain | Mags boot, Discord bot, Moltbook | `/save-to-mags`, Discord bot, Moltbook |
+| `bay-tribune` | Published canon | Mags boot, Discord bot, agents | `ingestEdition.js`, `/save-to-bay-tribune` |
+| `world-data` | City state — entity cards + per-cycle summaries | MCP tools (`lookup_*`, `search_world`, `get_*`) | per-domain writers (`build*Cards.js`, `ingestPlayerTrueSource.js`), post-publish |
+| `super-memory` | Junk drawer + auto-saves | manual `super-search --repo` | Stop hook, `/super-save` |
+| `mara` | Mara's private | Mara only (claude.ai) | Mara only |
+
+### Retrieval mode override (S183 finding)
+
+For short structured cards (entity cards under `wd-*` tags), default CLI search params (`mode='memories'`, `threshold=0.6`) return zero hits. **Use:** `--mode hybrid --threshold 0.3`.
+
+Empirical (S183 M1-M4 commit `c77cb37`): Masjid Al-Islam `wd-faith` query returned 0 results with defaults vs similarity 0.72 with hybrid+0.3. The M1-M4 MCP tools handle this internally; CLI fallbacks must override explicitly.
+
+---
+
 ## How It Works in Practice
 
 ### Session Boot (automatic)

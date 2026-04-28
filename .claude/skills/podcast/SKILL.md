@@ -58,7 +58,7 @@ Read `docs/media/podcast/SHOW_FORMATS.md` for format details.
 
 **Morning Edition host selection:**
 - Check the edition's CITIZEN USAGE LOG for candidates
-- Search world-data Supermemory for citizen details: `npx supermemory search "NAME" --tag world-data`
+- Look up citizen details via MCP: `lookup_citizen(name)` (combines world-data card + bay-tribune appearances). See [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
 - Select hosts with contrasting perspectives relevant to the lead story
 - Present host picks to Mike for approval
 

@@ -1,8 +1,8 @@
 ---
 name: save-to-mags
-description: Save session knowledge to Mags' brain (mags Supermemory container). Use for session summaries, corrections, decisions, project state — anything that helps Mags persist between sessions. NOT for published canon (use /super-save for bay-tribune).
-version: "1.0"
-updated: 2026-04-17
+description: Save session knowledge to Mags' brain (mags Supermemory container). Use for session summaries, corrections, decisions, project state — anything that helps Mags persist between sessions. NOT for published canon (use /save-to-bay-tribune for canon).
+version: "1.1"
+updated: 2026-04-28
 tags: [infrastructure, active]
 allowed-tools: Bash(node *), Bash(source *)
 effort: low
@@ -14,7 +14,7 @@ Save session knowledge to the `mags` Supermemory container.
 
 **This is Mags' brain.** Session summaries, corrections, decisions, editorial thinking, project state. Content that helps the next session start smarter.
 
-**Do NOT use for:** Published editions, rosters, canon content. Those go to `bay-tribune` via `/super-save` or `node scripts/ingestEdition.js`.
+**Do NOT use for:** Published editions, rosters, canon content. Those go to `bay-tribune` via `/save-to-bay-tribune` or `node scripts/ingestEdition.js`. (`/super-save` writes to `super-memory` — the junk drawer — not bay-tribune. Don't confuse them.) See [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix for the full container map.
 
 ## Step 1: Format Content
 

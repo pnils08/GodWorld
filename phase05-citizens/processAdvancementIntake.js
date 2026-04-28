@@ -22,6 +22,61 @@ var NON_EMERGENCE_USAGE_TYPES = [
   'byline', 'stats', 'official', 'roster', 'routine', 'coverage', 'announcement'
 ];
 
+// S184 Row 17 fix — demographic-voice fallback pool (Path B).
+// Used only when an intake row's RoleType is empty AND the citizen is NEW.
+// Preferred path: upstream intake writers compute RoleType. This pool is the
+// safety-net so the literal "Citizen" sentinel never lands on the live ledger.
+// Source: live Simulation_Ledger top demographic voices (S94 cohort) + LEDGER_AUDIT §7
+// 15-category distribution. Neighborhood-blind by design — fallback is a safety net,
+// not a replacement for real upstream role assignment.
+var DEMOGRAPHIC_VOICE_ROLES = [
+  // Port & Labor
+  'Longshoreman', 'Crane Operator', 'Trade Union Representative', 'Harbor Tugboat Captain', 'Container Yard Supervisor',
+  // Construction
+  'Site Foreman', 'Ironworker', 'Construction Engineer', 'Construction Safety Inspector', 'Construction Laborer',
+  // Transit & Infrastructure
+  'BART Station Manager', 'Bus Driver', 'Smart Grid Technician', 'Sea Level Monitoring Technician',
+  // Healthcare
+  'ER Nurse', 'Trauma Surgeon', 'Mental Health Counselor', 'Nurse Aide', 'Home Health Aide',
+  // Education
+  'Public School Teacher', 'ESL Instructor', 'Youth Literacy Coordinator',
+  // Tech & Innovation
+  'Autonomous Systems Engineer', 'Biotech Lab Director', 'AI Safety Researcher',
+  // Small Business
+  'Taqueria Owner', 'Independent Bookstore Owner', 'Craft Brewery Owner', 'Tea House Owner', 'Sourdough Baker', 'Vintage Clothing Store Owner', 'Food Truck Operator',
+  // Creative & Arts
+  'Muralist', 'Theater Director', 'Fashion Designer', 'Hip-Hop Producer',
+  // Professional
+  'Immigrant Legal Aid Worker', 'Public Defender', 'Corporate Accountant',
+  // Government & Civic
+  'City Building Inspector', 'Social Worker', 'Firefighter', 'Emergency Management Coordinator',
+  // Faith & Community
+  'Community Organizer', 'Mutual Aid Network Organizer', 'Refugee Resettlement Case Worker', 'Tenant Advocate',
+  // 2041-specific
+  'Climate Adaptation Engineer', 'Vertical Farm Technician', 'Drone Fleet Coordinator',
+  // Trades
+  'Electrician', 'Plumber', 'Solar Installer', 'Mechanic', 'Carpenter', 'Welder',
+  // Service & Hospitality
+  'Barista', 'Line Cook', 'Server', 'Bartender', 'Hair Stylist', 'Taxi Driver',
+  // The Vulnerable
+  'Homeless Outreach Worker', 'Ex-Offender Reentry Counselor', 'Domestic Violence Shelter Coordinator'
+];
+
+// Deterministic per-citizen draw — same first+last always maps to same role.
+// djb2 string hash; Apps Script-safe (no crypto / Buffer / Math.random).
+function hashSeed_(s) {
+  var h = 5381;
+  s = String(s || '');
+  for (var i = 0; i < s.length; i++) {
+    h = ((h << 5) + h + s.charCodeAt(i)) | 0;
+  }
+  return Math.abs(h);
+}
+
+function pickDemographicVoiceRole_(seed) {
+  return DEMOGRAPHIC_VOICE_ROLES[hashSeed_(seed) % DEMOGRAPHIC_VOICE_ROLES.length];
+}
+
 function processAdvancementIntake_(ctx) {
   var ss = ctx ? ctx.ss : openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var now = ctx ? ctx.now : new Date();
@@ -313,7 +368,11 @@ function processAdvancementRows_(ss, now, cycle) {
     
     if (!first && !last) continue;
     
-    var roleType = iRoleType >= 0 ? (row[iRoleType] || 'Citizen') : 'Citizen';
+    // S184 Row 17 — split: rawRole is what the intake row carries (may be empty).
+    // For EXISTING citizens: empty rawRole → preserve current ledger value (no overwrite — see line ~334 truthy guard).
+    // For NEW citizens: empty rawRole → demographic-voice fallback (literal "Citizen" sentinel never lands).
+    var rawRole = iRoleType >= 0 ? String(row[iRoleType] || '').trim() : '';
+    var roleType = rawRole; // existing-row branch uses rawRole directly via truthy guard
     var tier = iTier >= 0 ? (row[iTier] || 3) : 3;
     tier = Math.min(Number(tier) || 3, 4); // Cap at Tier 4 (max valid tier)
     var clockMode = iClockMode >= 0 ? (row[iClockMode] || 'ENGINE') : 'ENGINE';
@@ -341,13 +400,16 @@ function processAdvancementRows_(ss, now, cycle) {
     } else {
       maxPop++;
       var newPopId = 'POP-' + String(maxPop).padStart(5, '0');
+      // S184 Row 17 — new citizens get demographic-voice fallback when intake omits RoleType.
+      // Deterministic per (first, last, popId) so re-runs don't churn role assignment.
+      var newRoleType = rawRole || pickDemographicVoiceRole_(first + '|' + last + '|' + newPopId);
       var newRow = new Array(ledgerHeaders.length).fill('');
       if (lPopId >= 0) newRow[lPopId] = newPopId;
       if (lFirst >= 0) newRow[lFirst] = first;
       if (lMiddle >= 0) newRow[lMiddle] = middle;
       if (lLast >= 0) newRow[lLast] = last;
       if (lTier >= 0) newRow[lTier] = tier;
-      if (lRoleType >= 0) newRow[lRoleType] = roleType;
+      if (lRoleType >= 0) newRow[lRoleType] = newRoleType;
       if (lClockMode >= 0) newRow[lClockMode] = clockMode;
       if (lStatus >= 0) newRow[lStatus] = 'Active';
       if (lLifeHistory >= 0) newRow[lLifeHistory] = 'Promoted to Tier ' + tier + ' in Cycle ' + cycle + '. ' + notes;

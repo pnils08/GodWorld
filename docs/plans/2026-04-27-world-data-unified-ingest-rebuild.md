@@ -186,14 +186,17 @@ Existing 27 docs from `ingestPlayerTrueSource.js` (S180). Retrofit: re-run with 
 
 ## Trigger cadence + wipe policy
 
+**Revised post-Phase-1 (2026-04-27).** See [§Phase 1 findings](#phase-1-findings) below for inventory-driven changes (business is not green-field; engine-state cleanup added).
+
 | Domain | Trigger | First-run wipe | Subsequent runs |
 |---|---|---|---|
-| citizens | post-publish (canon adds appearances) | DELETE all old un-tagged citizen cards (per Mike S182: write-new-and-delete-old) | DELETE-by-tag `wd-citizens` before write |
-| business | post-cycle (state evolves) | green-field (no prior writer) | DELETE-by-tag `wd-business` before write |
-| faith | post-cycle (Faith_Ledger events appear per cycle) | green-field | DELETE-by-tag `wd-faith` before write |
-| cultural | post-publish (fame shifts via media) | green-field | DELETE-by-tag `wd-cultural` before write |
-| neighborhood | post-cycle (demographics shift, gentrification phase changes) | green-field | DELETE-by-tag `wd-neighborhood` before write |
-| initiative | post-cycle (phase/milestone changes) + post-publish (canon adds detail) | green-field | DELETE-by-tag `wd-initiative` before write |
+| **engine-state cleanup (one-time)** | sequenced before R1 | DELETE 8 stale engine-state aggregate dumps (World Summary / Neighborhood Demographics / Map / Employment Roster per-cycle dumps from pre-S131 era) | n/a — no recurring writer |
+| citizens | post-publish (canon adds appearances) | DELETE all 1,573 old un-tagged citizen cards (per Mike S182: write-new-and-delete-old) | DELETE-by-tag `wd-citizens` before write |
+| business | post-cycle (state evolves) | DELETE 1 pre-existing card (Civis Systems BIZ-00052, doc id `9ztiB31aPUrv4zPfRCUAoQ`, dated 2026-04-09) before fresh ingest | DELETE-by-tag `wd-business` before write |
+| faith | post-cycle (Faith_Ledger events appear per cycle) | green-field (confirmed 0 docs in Phase 1 inventory) | DELETE-by-tag `wd-faith` before write |
+| cultural | post-publish (fame shifts via media) | green-field (confirmed 0 docs) | DELETE-by-tag `wd-cultural` before write |
+| neighborhood | post-cycle (demographics shift, gentrification phase changes) | green-field (confirmed 0 domain-cards; 2 stale aggregate dumps fall under engine-state cleanup row above) | DELETE-by-tag `wd-neighborhood` before write |
+| initiative | post-cycle (phase/milestone changes) + post-publish (canon adds detail) | green-field (confirmed 0 docs) | DELETE-by-tag `wd-initiative` before write |
 | player_truesource | on-demand (when Drive content updates) | retrofit re-run + DELETE old un-tagged | DELETE-by-tag `wd-player-truesource` before re-run |
 
 **Clean-slate-by-tag (canonical wipe primitive for all writers):**
@@ -205,6 +208,42 @@ Existing 27 docs from `ingestPlayerTrueSource.js` (S180). Retrofit: re-run with 
 **Async-indexing gotcha (verified S182):** writes return `status: queued`; search and DELETE may return 409 for ~15-30s after a write. Writers built on `buildCitizenCards.js` post-S181 already rate-limit at 300ms between writes; the wipe pass needs an explicit settling period before re-write.
 
 **Scope guarantee:** DELETE-by-tag is filtered to `wd-<domain>` membership client-side, so a wipe of `wd-business` cannot accidentally DELETE citizens, faith, or any other domain. Player_truesource and other multi-tag domains are isolated by their own tag.
+
+---
+
+## Phase 1 findings
+
+**Source:** `output/world_data_inventory.json` (engine-sheet Task 1.1, commit `3b844a5`, audited 2026-04-28T02:07Z). Two-pass enumeration (list-walk + GET-classify), classSum verified, 0 fetch failures.
+
+**Scope correction:** S181 mags doc estimated ~2,412 records; that figure was the org-wide total across all containers (orgTotalItems = 2,415). Actual `world-data` container holds **1,609 docs**. Plan body wipe figures updated.
+
+| Class | Count | Disposition |
+|---|---|---|
+| citizen-card | 1,573 | DELETE all in Task R1 (write-new + DELETE-old per Mike S182). Of these, ~398 are post-S181 clean writes; rest are pre-S181 contaminated. Cheaper to wipe all and re-run from current sheet state than to age-discriminate. |
+| player_truesource | 27 | wipe in Task R2 retrofit. Matches S180 ingestion exactly. |
+| business-card | 1 | **CORRECTION:** business is NOT green-field. 1 pre-existing card (Civis Systems BIZ-00052, doc id `9ztiB31aPUrv4zPfRCUAoQ`, 2026-04-09) must be DELETEd in Task W1 wipe phase. Wipe-policy table updated above. |
+| faith-card | 0 | confirmed green-field |
+| cultural-card | 0 | confirmed green-field |
+| neighborhood-card | 0 | confirmed green-field |
+| initiative-card | 0 | confirmed green-field |
+| registry-one-liner | 0 | not present in current container |
+| unknown | 8 | **engine-state aggregate dumps** — see disposition below |
+
+**Engine-state aggregate dumps (8 docs, "unknown" class):**
+
+Pre-S131-era manual `buildWorldStatePacket`-style ingests. Content includes explicit engine vocabulary ("Cycle Weight: HIGH-SIGNAL," "Events Generated: 72," "Migration Drift: 6") that breaks the simulation-as-real-world frame per [[POST_MORTEM_C92_CONTAMINATION]] (S172). Composition:
+
+| Title pattern | Approx count |
+|---|---|
+| `# World Summary — Cycle <N>` | ~3 (cycles 90, 92, plus 1 other) |
+| `OAKLAND NEIGHBORHOOD DEMOGRAPHICS — Cycle 89` | 1 |
+| `OAKLAND NEIGHBORHOOD MAP — Cycle 89` | 1 |
+| `OAKLAND EMPLOYMENT ROSTER — Cycle 89` | 1 |
+| Other engine-state shape | ~2 |
+
+**Disposition: DELETE all 8.** world-data is the city-facing surface (citizens, businesses, faith orgs, neighborhoods as they exist in-world); engine telemetry lives in sheets and engine code, not here. The new per-domain card layer (W1–W5) replaces what these dumps were trying to do, with proper canon-fidelity and tag scheme. Sequenced as new **Task R0**, before R1, so the citizen retrofit operates on a clean substrate.
+
+**Multi-class anomalies (10):** MLB-player citizen cards whose bios contain truesource-flavored phrases. Primary class `citizen-card` correctly holds — the truesource match is content artifact, not misclassification. No action.
 
 ---
 
@@ -233,6 +272,19 @@ Existing 27 docs from `ingestPlayerTrueSource.js` (S180). Retrofit: re-run with 
 - **Steps:** Read `output/world_data_inventory.json`. Confirm wipe-policy table per domain. Record any surprise classifications (player_truesource older versions, gender-drift cards, prompt-injection-shaped content, content from undocumented writers) and their disposition.
 - **Verify:** plan changelog entry added with classification counts.
 - **Status:** [ ] not started
+
+### Phase 1.5 — Engine-state aggregate dump cleanup (engine-sheet)
+
+#### Task R0: DELETE 8 stale engine-state aggregate dumps
+- **Files:** ad-hoc DELETE pass, no new script needed (consume `output/world_data_inventory.json` `classes.unknown.samples` for doc IDs, plus the full inventory for any unknown beyond the sample list)
+- **Steps:**
+  1. From `output/world_data_inventory.json` collect ALL doc IDs in `classes.unknown` (sample list shows 5; full count is 8 — pull the rest from the inventory's full data structure or re-run the audit script with `--list-class unknown` if such a flag is added).
+  2. For each doc id: `DELETE /v3/documents/{id}` (rate-limited, 300ms between).
+  3. Wait 30s for queue to settle.
+  4. Re-run `scripts/auditWorldData.js`; verify `classes.unknown.count = 0` and `worldDataCount = 1601` (1,609 − 8).
+- **Verify:** post-delete inventory shows zero engine-state aggregate dumps; world-data total = 1,601.
+- **Status:** [ ] not started
+- **Why now:** sequenced before R1 so the citizen retrofit operates on a clean substrate. These docs predate the canon-fidelity work and contain explicit engine vocabulary that breaks the simulation-as-real-world frame per S172 POST_MORTEM. The new per-domain card layer (W1–W5) replaces what these dumps tried to do, with proper tagging.
 
 ### Phase 2 — Citizen retrofit (engine-sheet)
 
@@ -359,12 +411,13 @@ Per writer: dry-run prints card; apply writes one record; MCP lookup retrieves; 
 
 Engine-sheet executes in this order (each phase produces an artifact research-build can verify):
 1. Task 1.3 first (verify /v3/documents path).
-2. Task 1.1 (inventory script + run).
-3. Task 1.2 (decision pass — research-build appends findings to this plan).
-4. Task R1 (citizen retrofit) — proves the retrofit + wipe pattern on the largest, most-used domain.
-5. Tasks W1–W5 (five new writers, in any order — independent).
-6. Task R2 (player_truesource retrofit).
-7. Tasks M1–M4 (MCP tools — once writers populate the tags, the lookups work).
+2. Task 1.1 (inventory script + run). **DONE S182** (commit `3b844a5`).
+3. Task 1.2 (decision pass — research-build appends findings to this plan). **DONE S182** (this section).
+4. Task R0 (engine-state aggregate dump cleanup) — DELETE 8 stale docs before retrofit substrate is touched.
+5. Task R1 (citizen retrofit) — proves the retrofit + wipe pattern on the largest, most-used domain.
+6. Tasks W1–W5 (five new writers, in any order — independent).
+7. Task R2 (player_truesource retrofit).
+8. Tasks M1–M4 (MCP tools — once writers populate the tags, the lookups work).
 
 Research-build re-engages between steps if specs need revision (esp. after Phase 1 inventory may surface unanticipated content shapes).
 
@@ -373,3 +426,4 @@ Research-build re-engages between steps if specs need revision (esp. after Phase
 ## Changelog
 
 - 2026-04-27 — Initial draft (S182, research-build). Tag-and-search behavior verified empirically (probe doc `XQseCdoQpsb6SZCUM6i12o`, since deleted). Card shapes approved by Mike with three explicit calls: (a) MCP query-surface design drives card shape; (b) citizen wipe is write-new-and-delete-old, not retrofit; (c) `wd-` prefix locked.
+- 2026-04-27 — Phase 1 findings appended (S182, research-build, post-engine-sheet Task 1.1 commit `3b844a5`). Inventory: 1,609 world-data docs (correction: S181 estimated 2,412; that was org-wide, not container scope). Surprises: 1 pre-existing business card (Civis Systems BIZ-00052 — business is NOT green-field; wipe table revised), 8 engine-state aggregate dumps (World Summary / Neighborhood Demographics / Map / Employment Roster per-cycle dumps from pre-S131 era — fourth-wall contamination per S172 POST_MORTEM, slated for DELETE). New Phase 1.5 / Task R0 added: engine-state aggregate dump cleanup, sequenced before citizen retrofit R1. Phase order + handoff updated. Wipe-policy table revised inline.

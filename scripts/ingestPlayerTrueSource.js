@@ -1,13 +1,18 @@
 #!/usr/bin/env node
 /**
  * ingestPlayerTrueSource.js — A's truesource Drive → world-data Supermemory
- * [engine/sheet] — S180 build, ROLLOUT_PLAN "REINGEST: A's truesource → citizen profile cards"
+ * [engine/sheet] — S180 build, S183 R2 retrofit (dual-tagged + wipe-old)
  *
  * Reads rich truesource canon (per-season intake, POP-ID DataPage, TrueSource
  * v1.0 attribute sheets) from Drive `MLB_Roster_Data_Cards/{player}/True_Source/`
  * and ingests as supplemental memories in world-data Supermemory keyed by
  * POPID. Doesn't replace citizen cards — adds a parallel truesource layer
  * MCP lookup_citizen can retrieve for elite Tier-1/Tier-2 A's players.
+ *
+ * S183 R2 retrofit: writes now carry containerTags ['world-data',
+ * 'wd-player-truesource']. Adds --wipe-old flag that wipes prior truesource
+ * docs by content signature (=== PLAYER TRUESOURCE — header) before re-ingest.
+ * addDocument now uses W1 hardening (retry-on-401/429 with 8s backoff).
  *
  * Drive root (from saveToDrive.js DESTINATIONS.player):
  *   1kJTjCkDBm0fYjU_ca4ul-qliMzdddv9S — MLB_Roster_Data_Cards
@@ -18,10 +23,13 @@
  * First+Last lookup), and POSTs to world-data with metadata routing.
  *
  * Usage:
- *   node scripts/ingestPlayerTrueSource.js --dry-run               # default — no writes
- *   node scripts/ingestPlayerTrueSource.js --apply                 # write to world-data
- *   node scripts/ingestPlayerTrueSource.js --player "Danny Horn"   # one player only
- *   node scripts/ingestPlayerTrueSource.js --folder <ID> --apply   # override Drive root
+ *   node scripts/ingestPlayerTrueSource.js --dry-run                          # default — no writes
+ *   node scripts/ingestPlayerTrueSource.js --apply                            # write to world-data (no wipe)
+ *   node scripts/ingestPlayerTrueSource.js --apply --wipe-old                 # wipe prior truesource + re-write
+ *   node scripts/ingestPlayerTrueSource.js --apply --include-flat             # add MLB top-level flat-files
+ *   node scripts/ingestPlayerTrueSource.js --apply --include-prospects        # add Top_Prospects passes
+ *   node scripts/ingestPlayerTrueSource.js --player "Danny Horn"              # one player only
+ *   node scripts/ingestPlayerTrueSource.js --folder <ID> --apply              # override Drive root
  *
  * Output: output/intake_player_truesource.json (per-player results +
  * POPID resolution + Drive file inventory).
@@ -42,6 +50,7 @@ const sheets = require('../lib/sheets');
 const DRIVE_ROOT_MLB = '1kJTjCkDBm0fYjU_ca4ul-qliMzdddv9S';        // MLB_Roster_Data_Cards
 const DRIVE_ROOT_PROSPECTS = '1QBDslfH7zLmUPUa-c_AOkG4bWyHHPKrA';  // Top_Prospects_Data_Cards
 const CONTAINER_TAG = 'world-data';
+const DOMAIN_TAG = 'wd-player-truesource';                         // S183 R2 — dual-tag retrofit
 const API_HOST = 'api.supermemory.ai';
 const PROJECT_ROOT = path.resolve(__dirname, '..');
 
@@ -50,6 +59,18 @@ const DRY_RUN = !APPLY;
 const INCLUDE_FLAT = process.argv.includes('--include-flat');           // top-level files in MLB_Roster_Data_Cards
 const INCLUDE_PROSPECTS = process.argv.includes('--include-prospects'); // Top_Prospects_Data_Cards
 const SKIP_SUBFOLDER = process.argv.includes('--skip-subfolder');       // skip Pass A (use after first --apply)
+const WIPE_OLD = process.argv.includes('--wipe-old');                   // S183 R2 — pre-pass wipe of prior truesource docs
+const WIPE_ONLY = process.argv.includes('--wipe-only');                 // S183 R2 — wipe and exit (no Drive walk, no writes)
+
+// W1 hardening constants (S183 R2)
+const WRITE_MAX_RETRIES = 3;
+const WRITE_RETRY_SLEEP_MS = 8000;
+const WIPE_LIST_PAGE_SIZE = 100;
+const WIPE_LIST_SLEEP_MS = 200;
+const WIPE_GET_CONCURRENCY = 3;
+const WIPE_GET_EMPTY_RETRY = 2;
+const WIPE_LIST_RETRIES = 3;
+const WIPE_INDEXING_SLEEP_MS = 30000;
 
 function parseFlag(name) {
   const i = process.argv.indexOf('--' + name);
@@ -260,40 +281,195 @@ function groupFilesByPlayer(flatFiles) {
 }
 
 // ---------------------------------------------------------------------------
-// Supermemory POST
+// Supermemory API helpers (S183 R2 — W1 hardening pattern)
 // ---------------------------------------------------------------------------
-function addDocument(title, content, metadata) {
+function smRequest(method, apiPath, body) {
   return new Promise((resolve, reject) => {
-    const payload = JSON.stringify({
-      content,
-      containerTags: [CONTAINER_TAG],
-      metadata: Object.assign({ title, source: 'player-truesource-ingest' }, metadata),
-    });
-    const options = {
-      hostname: API_HOST,
-      path: '/v3/documents',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + API_KEY,
-        'Content-Length': Buffer.byteLength(payload),
-      },
+    const payload = body ? JSON.stringify(body) : null;
+    const headers = {
+      'Authorization': 'Bearer ' + API_KEY,
+      'Accept': 'application/json',
     };
-    const req = https.request(options, (res) => {
+    if (payload) {
+      headers['Content-Type'] = 'application/json';
+      headers['Content-Length'] = Buffer.byteLength(payload);
+    }
+    const req = https.request({
+      hostname: API_HOST,
+      path: apiPath,
+      method,
+      headers,
+    }, (res) => {
       let data = '';
-      res.on('data', (chunk) => { data += chunk; });
+      res.on('data', (c) => { data += c; });
       res.on('end', () => {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          resolve({ status: res.statusCode, body: data });
-        } else {
-          reject(new Error('HTTP ' + res.statusCode + ': ' + data));
-        }
+        let parsed = null;
+        try { parsed = data ? JSON.parse(data) : null; } catch { parsed = data; }
+        resolve({ status: res.statusCode, body: parsed });
       });
     });
     req.on('error', reject);
-    req.write(payload);
+    req.setTimeout(15000, () => { req.destroy(); reject(new Error('Timeout')); });
+    if (payload) req.write(payload);
     req.end();
   });
+}
+
+function smSleep(ms) { return new Promise((r) => setTimeout(r, ms)); }
+
+// ---------------------------------------------------------------------------
+// Supermemory POST — dual-tagged write with retry-on-401/429
+// ---------------------------------------------------------------------------
+async function addDocument(title, content, metadata) {
+  const body = {
+    content,
+    containerTags: [CONTAINER_TAG, DOMAIN_TAG],
+    metadata: Object.assign({ title, source: 'player-truesource-ingest' }, metadata),
+  };
+  for (let attempt = 0; attempt <= WRITE_MAX_RETRIES; attempt++) {
+    const r = await smRequest('POST', '/v3/documents', body);
+    if (r.status >= 200 && r.status < 300) {
+      const responseBody = typeof r.body === 'string' ? r.body : JSON.stringify(r.body);
+      return { status: r.status, body: responseBody };
+    }
+    if ((r.status === 401 || r.status === 429) && attempt < WRITE_MAX_RETRIES) {
+      console.log('  [retry] write got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
+      await smSleep(WRITE_RETRY_SLEEP_MS);
+      continue;
+    }
+    throw new Error('HTTP ' + r.status + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
+  }
+  throw new Error('addDocument exhausted ' + (WRITE_MAX_RETRIES + 1) + ' attempts');
+}
+
+// ---------------------------------------------------------------------------
+// Wipe-old — content-signature-scoped DELETE of prior truesource docs (S183 R2)
+// ---------------------------------------------------------------------------
+// Filter: docs with 'world-data' tag AND no 'wd-player-truesource' tag AND
+// content starts with `=== PLAYER TRUESOURCE — ` (the canonical header
+// added by processPlayerGroup). Cannot collide with citizen / business /
+// faith / cultural / neighborhood / initiative cards because their content
+// signatures differ.
+//
+// Spec deviation from R2 plan: plan called for POPID-content-scoped wipe,
+// but POPIDs are discovered DURING the passes (Drive walk + DataPage parse
+// + ledger fallback) — not knowable ahead of time without a full duplicate
+// pre-discovery pass. Content-signature-scope is functionally equivalent
+// when re-ingesting the same roster (deletes the same set), and safer when
+// the roster changes (cleanly removes orphans rather than leaving stale
+// truesource for departed players).
+async function listPageWithRetry(page, retries) {
+  let r = await smRequest('POST', '/v3/documents/list', { limit: WIPE_LIST_PAGE_SIZE, page });
+  let attempt = 0;
+  while (attempt < retries && r.status !== 200) {
+    console.log('  [retry] list page ' + page + ' returned ' + r.status + '; sleeping 5s');
+    await smSleep(5000);
+    r = await smRequest('POST', '/v3/documents/list', { limit: WIPE_LIST_PAGE_SIZE, page });
+    attempt++;
+  }
+  return r;
+}
+
+async function getDocWithRetry(id, retries) {
+  let r = await smRequest('GET', '/v3/documents/' + id, null);
+  let attempt = 0;
+  while (attempt < retries && r.status === 200 && r.body && (!r.body.content || r.body.content.length === 0)) {
+    await smSleep(500);
+    r = await smRequest('GET', '/v3/documents/' + id, null);
+    attempt++;
+  }
+  return r;
+}
+
+function isTruesourceContent(content) {
+  if (!content) return false;
+  // Header signature canonical from processPlayerGroup line ~356
+  return /^===\s*PLAYER TRUESOURCE\s+[—-]/.test(content);
+}
+
+async function wipeOldTruesourceCards() {
+  console.log('\n=== R2 wipe-old: enumerating world-data via /v3/documents/list ===');
+  const probe = await listPageWithRetry(1, WIPE_LIST_RETRIES);
+  if (probe.status !== 200) {
+    throw new Error('wipe-old: list page 1 returned ' + probe.status);
+  }
+  const totalPages = probe.body.pagination.totalPages;
+  const ids = [];
+  for (let page = 1; page <= totalPages; page++) {
+    const r = page === 1 ? probe : await listPageWithRetry(page, WIPE_LIST_RETRIES);
+    if (r.status !== 200) {
+      throw new Error('wipe-old: list page ' + page + ' returned ' + r.status + ' after retries — aborting');
+    }
+    for (const it of (r.body.memories || [])) {
+      const tags = Array.isArray(it.containerTags) ? it.containerTags : [];
+      if (!tags.includes(CONTAINER_TAG)) continue;
+      // Idempotency: skip docs already carrying our domain tag — re-runs
+      // must not target the dual-tagged writes we just made.
+      if (tags.includes(DOMAIN_TAG)) continue;
+      ids.push(it.id);
+    }
+    if (page < totalPages) await smSleep(WIPE_LIST_SLEEP_MS);
+  }
+  console.log('[wipe-old] world-data candidates: ' + ids.length);
+
+  console.log('[wipe-old] GET pass to filter by truesource content signature (concurrency=' + WIPE_GET_CONCURRENCY + ')');
+  const matches = [];
+  let emptyAfterRetry = 0;
+  let fetched = 0;
+  for (let i = 0; i < ids.length; i += WIPE_GET_CONCURRENCY) {
+    const batch = ids.slice(i, i + WIPE_GET_CONCURRENCY);
+    const results = await Promise.all(batch.map((id) =>
+      getDocWithRetry(id, WIPE_GET_EMPTY_RETRY).then((r) => ({ id, r }))
+    ));
+    for (const { id, r } of results) {
+      fetched++;
+      if (r.status !== 200 || !r.body) continue;
+      const content = r.body.content || '';
+      if (content.length === 0) { emptyAfterRetry++; continue; }
+      if (isTruesourceContent(content)) {
+        matches.push({ id });
+      }
+    }
+    if (fetched % 200 === 0 || (i + WIPE_GET_CONCURRENCY) >= ids.length) {
+      console.log('  GET ' + fetched + '/' + ids.length + ' — wipe matches so far: ' + matches.length + ' | empty-after-retry: ' + emptyAfterRetry);
+    }
+  }
+  if (emptyAfterRetry > 0) {
+    throw new Error('wipe-old: ' + emptyAfterRetry + ' docs returned empty content after retry. Refusing to apply with incomplete data.');
+  }
+  console.log('[wipe-old] truesource matches to DELETE: ' + matches.length);
+
+  console.log('[wipe-old] DELETE pass');
+  let deleted = 0;
+  let failed = 0;
+  for (let k = 0; k < matches.length; k++) {
+    let ok = false;
+    let lastStatus = null;
+    // Try up to 4 times: handle 409 (indexing settle, 20s) and 401/429 (rate-limit, 8s)
+    for (let attempt = 0; attempt < 4 && !ok; attempt++) {
+      const del = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
+      lastStatus = del.status;
+      ok = del.status === 204 || del.status === 200;
+      if (ok) break;
+      if (del.status === 409) {
+        await smSleep(20000);
+      } else if (del.status === 401 || del.status === 429) {
+        await smSleep(WRITE_RETRY_SLEEP_MS);
+      } else {
+        // Non-recoverable status — bail
+        break;
+      }
+    }
+    if (ok) deleted++; else { failed++; if (failed <= 5) console.log('    [DEL FAIL] id=' + matches[k].id + ' last_status=' + lastStatus); }
+    if ((k + 1) % 25 === 0 || k === matches.length - 1) {
+      console.log('  DELETE ' + (k + 1) + '/' + matches.length + ' — ok=' + deleted + ' failed=' + failed);
+    }
+    await smSleep(200);
+  }
+  console.log('[wipe-old] DELETE results: ' + deleted + ' ok / ' + failed + ' failed');
+  console.log('[wipe-old] sleeping ' + (WIPE_INDEXING_SLEEP_MS / 1000) + 's for async indexing to settle before writes');
+  await smSleep(WIPE_INDEXING_SLEEP_MS);
+  return { candidates: ids.length, matched: matches.length, deleted, failed };
 }
 
 // ---------------------------------------------------------------------------
@@ -576,7 +752,9 @@ async function main() {
   console.log('[METADATA] ' + JSON.stringify({
     driveRoot: FOLDER_OVERRIDE,
     container: CONTAINER_TAG,
+    domainTag: DOMAIN_TAG,
     mode: DRY_RUN ? 'DRY-RUN' : 'APPLY',
+    wipeOld: WIPE_OLD,
     playerFilter: PLAYER_FILTER || '(all)',
     passes: {
       subfolders: true,
@@ -589,6 +767,23 @@ async function main() {
   const drive = getDriveClient();
   const results = [];
   const resolvedPopIds = new Set();
+  let wipeReport = null;
+
+  // R2 wipe pass — runs BEFORE any ingest pass so re-writes land on a clean substrate
+  if (APPLY && (WIPE_OLD || WIPE_ONLY)) {
+    wipeReport = await wipeOldTruesourceCards();
+    if (WIPE_ONLY) {
+      console.log('\n=== --wipe-only set: skipping all ingest passes, exiting after wipe ===');
+      const outDir = path.join(PROJECT_ROOT, 'output');
+      if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+      const outPath = path.join(outDir, 'intake_player_truesource_wipe_only.json');
+      fs.writeFileSync(outPath, JSON.stringify({ timestamp: new Date().toISOString(), mode: 'wipe-only', wipeReport }, null, 2));
+      console.log('Report: ' + outPath);
+      return;
+    }
+  } else if (APPLY && !WIPE_OLD) {
+    console.log('[ingestPlayerTrueSource] --wipe-old not set — writes will land alongside any existing un-tagged truesource docs.');
+  }
 
   if (!SKIP_SUBFOLDER) {
     await runPassSubfolders(drive, results, resolvedPopIds);
@@ -627,6 +822,9 @@ async function main() {
     driveRootMLB: FOLDER_OVERRIDE,
     driveRootProspects: INCLUDE_PROSPECTS ? DRIVE_ROOT_PROSPECTS : null,
     container: CONTAINER_TAG,
+    domainTag: DOMAIN_TAG,
+    wipeOld: WIPE_OLD,
+    wipeReport,
     mode: DRY_RUN ? 'dry-run' : 'apply',
     playerFilter: PLAYER_FILTER || null,
     passes: {

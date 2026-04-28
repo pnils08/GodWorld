@@ -154,48 +154,39 @@ function smSleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
 // ═══════════════════════════════════════════════════════════════════════════
 // WRITE MEMORY TO WORLD-DATA — /v3/documents with dual tags + metadata
+// Retry-on-401/429 hardening (S182): bulk applies of 1k+ writes back-to-back
+// can trip Supermemory's rolling-window cap, surfacing as 401 "userId or
+// orgId not found" rather than 429 (observed during W1 bulk apply). Defensive
+// retry on either with 8s backoff, up to 3 retries.
 // ═══════════════════════════════════════════════════════════════════════════
 
-function writeMemory(content, citizen) {
-  return new Promise(function(resolve, reject) {
-    var meta = {
-      title: citizen.first + ' ' + citizen.last,
-      popid: citizen.popId,
-      source: 'buildCitizenCards.js'
-    };
-    var payload = JSON.stringify({
-      content: content,
-      containerTags: [CONTAINER_TAG, DOMAIN_TAG],
-      metadata: meta
-    });
-    var options = {
-      hostname: API_HOST,
-      path: '/v3/documents',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + API_KEY,
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-    var req = https.request(options, function(res) {
-      var data = '';
-      res.on('data', function(chunk) { data += chunk; });
-      res.on('end', function() {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          var parsed = null;
-          try { parsed = JSON.parse(data); } catch (e) {}
-          resolve({ status: res.statusCode, id: parsed && parsed.id });
-        } else {
-          reject(new Error('HTTP ' + res.statusCode + ': ' + data));
-        }
-      });
-    });
-    req.on('error', reject);
-    req.setTimeout(15000, function() { req.destroy(); reject(new Error('Timeout')); });
-    req.write(payload);
-    req.end();
-  });
+var WRITE_MAX_RETRIES = 3;
+var WRITE_RETRY_SLEEP_MS = 8000;
+
+async function writeMemory(content, citizen) {
+  var meta = {
+    title: citizen.first + ' ' + citizen.last,
+    popid: citizen.popId,
+    source: 'buildCitizenCards.js'
+  };
+  var body = {
+    content: content,
+    containerTags: [CONTAINER_TAG, DOMAIN_TAG],
+    metadata: meta
+  };
+  for (var attempt = 0; attempt <= WRITE_MAX_RETRIES; attempt++) {
+    var r = await smRequest('POST', '/v3/documents', body);
+    if (r.status >= 200 && r.status < 300) {
+      return { status: r.status, id: r.body && r.body.id };
+    }
+    if ((r.status === 401 || r.status === 429) && attempt < WRITE_MAX_RETRIES) {
+      console.log('  [retry] write got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
+      await smSleep(WRITE_RETRY_SLEEP_MS);
+      continue;
+    }
+    throw new Error('HTTP ' + r.status + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
+  }
+  throw new Error('writeMemory exhausted ' + (WRITE_MAX_RETRIES + 1) + ' attempts');
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -527,8 +518,10 @@ async function main() {
         errors++;
       }
 
-      // Rate limit — 300ms between writes
-      await new Promise(function(r) { setTimeout(r, 300); });
+      // Rate limit — 500ms between writes (bumped from 300ms post-S182 W1
+      // bulk-apply rate-limit observation; retry-on-401 in writeMemory is the
+      // primary defense, this is just inter-write breathing room).
+      await smSleep(500);
     }
   }
 

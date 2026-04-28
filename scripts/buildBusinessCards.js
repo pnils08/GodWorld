@@ -138,49 +138,41 @@ function searchSupermemory(query, container) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// WRITE — /v3/documents with dual tags + metadata
+// WRITE — /v3/documents with dual tags + metadata, retry-on-401/429
 // ═══════════════════════════════════════════════════════════════════════════
+// Rate-limit hardening (S182): bulk applies of 52+ writes back-to-back can
+// trip Supermemory's rolling-window cap, surfacing as 401 "userId or orgId
+// not found" rather than 429 — defensive retry on either with 8s backoff,
+// up to 3 retries. Combined with bumped inter-write sleep this kept a 52-row
+// W1 bulk run alive after partial failure.
 
-function writeMemory(content, biz) {
-  return new Promise(function(resolve, reject) {
-    var meta = {
-      title: biz.name,
-      biz_id: biz.bizId,
-      source: 'buildBusinessCards.js'
-    };
-    var payload = JSON.stringify({
-      content: content,
-      containerTags: [CONTAINER_TAG, DOMAIN_TAG],
-      metadata: meta
-    });
-    var options = {
-      hostname: API_HOST,
-      path: '/v3/documents',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + API_KEY,
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-    var req = https.request(options, function(res) {
-      var data = '';
-      res.on('data', function(chunk) { data += chunk; });
-      res.on('end', function() {
-        if (res.statusCode >= 200 && res.statusCode < 300) {
-          var parsed = null;
-          try { parsed = JSON.parse(data); } catch (e) {}
-          resolve({ status: res.statusCode, id: parsed && parsed.id });
-        } else {
-          reject(new Error('HTTP ' + res.statusCode + ': ' + data));
-        }
-      });
-    });
-    req.on('error', reject);
-    req.setTimeout(15000, function() { req.destroy(); reject(new Error('Timeout')); });
-    req.write(payload);
-    req.end();
-  });
+var WRITE_MAX_RETRIES = 3;
+var WRITE_RETRY_SLEEP_MS = 8000;
+
+async function writeMemory(content, biz) {
+  var meta = {
+    title: biz.name,
+    biz_id: biz.bizId,
+    source: 'buildBusinessCards.js'
+  };
+  var body = {
+    content: content,
+    containerTags: [CONTAINER_TAG, DOMAIN_TAG],
+    metadata: meta
+  };
+  for (var attempt = 0; attempt <= WRITE_MAX_RETRIES; attempt++) {
+    var r = await smRequest('POST', '/v3/documents', body);
+    if (r.status >= 200 && r.status < 300) {
+      return { status: r.status, id: r.body && r.body.id };
+    }
+    if ((r.status === 401 || r.status === 429) && attempt < WRITE_MAX_RETRIES) {
+      console.log('  [retry] write got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
+      await smSleep(WRITE_RETRY_SLEEP_MS);
+      continue;
+    }
+    throw new Error('HTTP ' + r.status + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
+  }
+  throw new Error('writeMemory exhausted ' + (WRITE_MAX_RETRIES + 1) + ' attempts');
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -451,7 +443,7 @@ async function main() {
         console.error('[FAIL] ' + biz.name + ': ' + e.message);
         errors++;
       }
-      await smSleep(300);
+      await smSleep(500); // bumped from 300ms — survived 52-row bulk apply post-S182
     }
   }
 

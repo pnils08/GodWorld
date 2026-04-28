@@ -259,31 +259,31 @@ Pre-S131-era manual `buildWorldStatePacket`-style ingests. Content includes expl
   3. Classify by content shape: `citizen-card` (matches "(POP-XXXXX)" header line), `business-card` ("BIZ-XXXXX"), `faith-card` ("FAITH-XXX"), `player_truesource` (via metadata.source or recognizable shape from `ingestPlayerTrueSource.js`), `registry-one-liner` (single short line, pre-S131 ingest), `unknown`.
   4. Output `output/world_data_inventory.json` with per-classification counts + sample doc IDs (5 per class) + total count.
 - **Verify:** total doc count matches `npx supermemory tags list` for world-data; counts sum to total.
-- **Status:** [ ] not started
+- **Status:** **DONE S182** (engine-sheet, commit `3b844a5`). Two-pass design (list-walk + GET-classify) shipped — list endpoint titles unreliable (boilerplate `Direct memories (1)` hides real titles), so Pass 2 fetches each doc to read content head + metadata.title. Output written to `output/world_data_inventory.json`.
 
 #### Task 1.3: Verify `/v3/documents` POST works for buildCitizenCards.js retrofit
 - **Files:** ad-hoc test, no new file
 - **Steps:** POST a test card via `/v3/documents` with `containerTags: ['world-data', 'wd-citizens-test']` and the existing buildCitizenCards card text. Confirm searchable by `wd-citizens-test`. DELETE after. (`/v4/memories` was the existing endpoint; verify `/v3/documents` is the right swap.)
 - **Verify:** test card retrievable, DELETE returns 204.
-- **Status:** [ ] not started
+- **Status:** **DONE S182** (verified inline by R1 retrofit commit `6ec7a61` — `/v3/documents` POST shipped with `containerTags: ['world-data', 'wd-citizens']` payload shape; tag-and-search behavior already verified in research-build plan-prep with probe doc `XQseCdoQpsb6SZCUM6i12o`).
 
 #### Task 1.2: Decision pass on inventory
 - **Files:** this plan file (update — append a "Phase 1 findings" subsection)
 - **Steps:** Read `output/world_data_inventory.json`. Confirm wipe-policy table per domain. Record any surprise classifications (player_truesource older versions, gender-drift cards, prompt-injection-shaped content, content from undocumented writers) and their disposition.
 - **Verify:** plan changelog entry added with classification counts.
-- **Status:** [ ] not started
+- **Status:** **DONE S182** (research-build, this section + Phase 1 findings above).
 
 ### Phase 1.5 — Engine-state aggregate dump cleanup (engine-sheet)
 
 #### Task R0: DELETE 8 stale engine-state aggregate dumps
-- **Files:** ad-hoc DELETE pass, no new script needed (consume `output/world_data_inventory.json` `classes.unknown.samples` for doc IDs, plus the full inventory for any unknown beyond the sample list)
+- **Files:** `scripts/wipeWorldDataSnapshots.js` (NEW, shipped S182).
 - **Steps:**
-  1. From `output/world_data_inventory.json` collect ALL doc IDs in `classes.unknown` (sample list shows 5; full count is 8 — pull the rest from the inventory's full data structure or re-run the audit script with `--list-class unknown` if such a flag is added).
-  2. For each doc id: `DELETE /v3/documents/{id}` (rate-limited, 300ms between).
-  3. Wait 30s for queue to settle.
-  4. Re-run `scripts/auditWorldData.js`; verify `classes.unknown.count = 0` and `worldDataCount = 1601` (1,609 − 8).
+  1. Two-pass design (list endpoint titles unreliable — list response shows boilerplate `Direct memories (1)`; metadata.title in GET response holds the real value). Pass 1 lists `/v3/documents/list` and collects world-data IDs. Pass 2 GETs each, matches metadata.title and content head against engine-state dump signatures.
+  2. Snapshot patterns matched: World Summary, Oakland City and Sports Summary, Neighborhood Map, Neighborhood Demographics, Employment Roster, Faith Organizations, Business Registry, Cultural Ledger.
+  3. Hardened against rate-limit during apply: per-page retry on non-200 (3 attempts, 5s sleep), abort-on-error after retries (one earlier attempt silently skipped pages 21-25 on 401s and only deleted 1 of 8 — abort-on-error closes that hole). GET retries on empty content for transient API behavior.
+  4. Dry-run by default; `--apply` DELETEs each, sleeps 30s, recounts.
 - **Verify:** post-delete inventory shows zero engine-state aggregate dumps; world-data total = 1,601.
-- **Status:** [ ] not started
+- **Status:** **DONE S182** (engine-sheet, commit `265c503`). 8/8 deleted. world-data 1,609 → 1,601. Org total 2,415 → 2,407.
 - **Why now:** sequenced before R1 so the citizen retrofit operates on a clean substrate. These docs predate the canon-fidelity work and contain explicit engine vocabulary that breaks the simulation-as-real-world frame per S172 POST_MORTEM. The new per-domain card layer (W1–W5) replaces what these dumps tried to do, with proper tagging.
 
 ### Phase 2 — Citizen retrofit (engine-sheet)
@@ -292,19 +292,20 @@ Pre-S131-era manual `buildWorldStatePacket`-style ingests. Content includes expl
 - **Files:** `scripts/buildCitizenCards.js` (modify)
 - **Steps:**
   1. Switch `writeMemory()` from `/v4/memories` POST → `/v3/documents` POST. New payload shape: `{content: <card>, containerTags: ['world-data', 'wd-citizens'], metadata: {title: '<First Last>', popid: '<POP-XXXXX>', source: 'buildCitizenCards.js'}}`.
-  2. Add `--wipe-old` flag: enumerate via `/v3/documents/list`, filter client-side for docs containing `'world-data'` but NOT `'wd-citizens'` (the un-tagged old cards), DELETE each one. Sleep 30s after wipe before write phase.
-  3. Default `--wipe-old` ON for `--apply` runs (Mike S182: write-new + delete-old). `--no-wipe-old` for partial reruns (e.g., single-citizen --name updates).
+  2. Add `--wipe-old` flag with **POPID-content-scoped filter** (the canonical wipe pattern engine-sheet established at R1 — every domain writer follows this shape): enumerate via `/v3/documents/list`, keep docs with `'world-data'` AND no `'wd-citizens'` tag, GET each, extract `(POP-XXXXX)` header from content, DELETE only if POPID is in the citizen set being written. Truesource (27 docs) and the Civis business card stay untouched because their content shape doesn't carry citizen POPIDs that match. Sleep 30s after wipe before write phase.
+  3. Default `--wipe-old` OFF (opt-in for the retrofit migration). `--apply --wipe-old` for the production run; `--apply --name "Beverly Hayes" --wipe-old` auto-scopes the wipe to that single citizen's POPID.
   4. Output report: pre-wipe count, deleted count, post-wipe count, written count.
-- **Verify:** dry-run on 5 citizens shows the new payload shape; apply on `--name "Beverly Hayes"` writes one card with the new tag pair, DELETE-old phase removes the prior un-tagged Beverly Hayes card.
-- **Status:** [ ] not started
+- **Verify:** dry-run on 5 citizens shows the new payload shape; apply on `--name "Beverly Hayes" --wipe-old` writes one card with the new tag pair, wipe phase removes only the prior Beverly Hayes citizen-card doc (truesource and business cards untouched).
+- **Status:** **CODE DONE S182** (engine-sheet, commit `6ec7a61`). Retrofit shipped with POPID-content-scoped wipe. Apply pending — production run on full 1,573 citizens hasn't been kicked off yet.
 
 ### Phase 3 — Five new writers (engine-sheet)
 
-Modeled on `buildCitizenCards.js` post-S181 + Task R1. Each writer:
+Modeled on `buildCitizenCards.js` post-S181 + R1 retrofit (commit `6ec7a61`). Each writer:
 - Reads source sheet (Phase 0 already manifest in SHEETS_MANIFEST.md).
 - Builds card per shape spec (above).
 - Optionally hybrid-searches bay-tribune for appearances + full-name post-filters.
-- Wipes by tag, then writes with `containerTags: ['world-data', 'wd-<domain>']`.
+- **Implements ID-content-scoped wipe matching R1's pattern** (the canonical writer wipe primitive): enumerate `/v3/documents/list`, keep docs with `'world-data'` AND no `'wd-<domain>'` tag, GET each, extract the domain ID from content header (`(BIZ-XXXXX)` for business / `(FAITH-XXX)` for faith / etc.), DELETE only if the ID is in the entity set being written. Cross-domain content stays untouched. This is tighter than tag-membership filtering and preserves graceful degradation if a writer fails partway.
+- Writes with `containerTags: ['world-data', 'wd-<domain>']`.
 - Rate limits at 300ms between writes.
 - Outputs report: enumerated, written, errors, with-appearances.
 
@@ -353,9 +354,9 @@ Modeled on `buildCitizenCards.js` post-S181 + Task R1. Each writer:
 #### Task R2: `ingestPlayerTrueSource.js` retrofit + DELETE-old pass
 - **Files:** `scripts/ingestPlayerTrueSource.js` (modify)
 - **Steps:**
-  1. Switch write call to `/v3/documents` if not already (verify in Task 1.3).
+  1. Switch write call to `/v3/documents` if not already (verified by R1).
   2. Add `'wd-player-truesource'` to containerTags array.
-  3. Add `--wipe-old` flag matching R1 pattern. DELETE old un-tagged truesource docs (filter for content shape from prior 27 ingests).
+  3. Add `--wipe-old` flag matching R1's POPID-content-scoped pattern. Filter: docs with `'world-data'` AND no `'wd-player-truesource'` tag, GET each, match against truesource content signature (`=== PLAYER TRUESOURCE — <name> ===` header line), DELETE only if the player POPID is in the truesource set being written. Citizen cards stay untouched even when POPIDs overlap (different content header shape).
   4. Re-run end-to-end on 27 known docs.
 - **Verify:** all 27 truesource docs retrievable via `containerTag: 'wd-player-truesource'`; no old un-tagged truesource docs remain.
 - **Status:** [ ] not started
@@ -410,13 +411,13 @@ Per writer: dry-run prints card; apply writes one record; MCP lookup retrieves; 
 ## Phase order + handoff
 
 Engine-sheet executes in this order (each phase produces an artifact research-build can verify):
-1. Task 1.3 first (verify /v3/documents path).
+1. Task 1.3 (verify /v3/documents path). **DONE S182** (verified inline by R1 retrofit).
 2. Task 1.1 (inventory script + run). **DONE S182** (commit `3b844a5`).
 3. Task 1.2 (decision pass — research-build appends findings to this plan). **DONE S182** (this section).
-4. Task R0 (engine-state aggregate dump cleanup) — DELETE 8 stale docs before retrofit substrate is touched.
-5. Task R1 (citizen retrofit) — proves the retrofit + wipe pattern on the largest, most-used domain.
-6. Tasks W1–W5 (five new writers, in any order — independent).
-7. Task R2 (player_truesource retrofit).
+4. Task R0 (engine-state aggregate dump cleanup). **DONE S182** (commit `265c503`, world-data 1,609 → 1,601).
+5. Task R1 (citizen retrofit) — proves the retrofit + POPID-content-scoped wipe pattern on the largest, most-used domain. **CODE DONE S182** (commit `6ec7a61`); **APPLY PENDING** — production run on 1,573 citizens not yet kicked off.
+6. Tasks W1–W5 (five new writers, in any order — independent). Each follows R1's ID-content-scoped wipe pattern with its own domain ID (BIZ / FAITH / cultural POPID / neighborhood name / INIT-ID).
+7. Task R2 (player_truesource retrofit) — same wipe pattern, scoped by truesource header shape.
 8. Tasks M1–M4 (MCP tools — once writers populate the tags, the lookups work).
 
 Research-build re-engages between steps if specs need revision (esp. after Phase 1 inventory may surface unanticipated content shapes).
@@ -427,3 +428,4 @@ Research-build re-engages between steps if specs need revision (esp. after Phase
 
 - 2026-04-27 — Initial draft (S182, research-build). Tag-and-search behavior verified empirically (probe doc `XQseCdoQpsb6SZCUM6i12o`, since deleted). Card shapes approved by Mike with three explicit calls: (a) MCP query-surface design drives card shape; (b) citizen wipe is write-new-and-delete-old, not retrofit; (c) `wd-` prefix locked.
 - 2026-04-27 — Phase 1 findings appended (S182, research-build, post-engine-sheet Task 1.1 commit `3b844a5`). Inventory: 1,609 world-data docs (correction: S181 estimated 2,412; that was org-wide, not container scope). Surprises: 1 pre-existing business card (Civis Systems BIZ-00052 — business is NOT green-field; wipe table revised), 8 engine-state aggregate dumps (World Summary / Neighborhood Demographics / Map / Employment Roster per-cycle dumps from pre-S131 era — fourth-wall contamination per S172 POST_MORTEM, slated for DELETE). New Phase 1.5 / Task R0 added: engine-state aggregate dump cleanup, sequenced before citizen retrofit R1. Phase order + handoff updated. Wipe-policy table revised inline.
+- 2026-04-27 — Engine-sheet shipped Tasks 1.1 / R0 / R1-code in rapid succession (commits `3b844a5` / `265c503` / `6ec7a61`). Status updates layered onto plan: 1.1/1.2/1.3/R0 marked DONE; R1 marked CODE DONE with apply pending. R1's POPID-content-scoped wipe filter (deletes only docs whose POPID is in the citizen set being written) is **tighter than the original "tag-membership" filter described in the plan** — it preserves player_truesource (27 docs) and the Civis business card (BIZ-00052) during the citizen rebuild. **Plan revision:** R1's wipe pattern (POPID-content-scoped) becomes the canonical writer wipe primitive for W1–W5 + R2 — each domain writer scopes by its own ID extraction (BIZ-XXXXX / FAITH-XXX / etc.). Replaces an aborted global-wipe revision attempt that would have downgraded the safety property engine-sheet shipped. Phase 3 writer pattern + R2 spec updated to reflect.

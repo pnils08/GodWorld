@@ -50,6 +50,7 @@ require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
+const citizenDerivation = require('../lib/citizenDerivation');  // S184 (Phase 4.1.c) — intake-side derivation library
 
 const ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
 
@@ -302,7 +303,9 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
     }
   }
 
-  return { headers, matched, phantom, ambiguous, candidates, maxPopNum };
+  // S184 (Phase 4.1.c) — pass raw rows through so appendCitizens can build a
+  // ledgerFreq snapshot without a second sheet fetch.
+  return { headers, matched, phantom, ambiguous, candidates, maxPopNum, rows };
 }
 
 // ---------------------------------------------------------------------------
@@ -367,18 +370,33 @@ async function resolveBusinesses(parsed, sheetsClient, sheetId) {
 // ---------------------------------------------------------------------------
 // Append rows + verify
 // ---------------------------------------------------------------------------
-async function appendCitizens(candidates, headers, maxPopNum, sheetsClient, sheetId) {
+async function appendCitizens(candidates, headers, maxPopNum, sheetsClient, sheetId, ledgerRows) {
   if (candidates.length === 0) return [];
 
   const now = new Date().toISOString();
   const rowsToAppend = [];
   const popIds = [];
 
+  // S184 (Phase 4.1.c) — build ledgerFreq snapshot once per ingest call for
+  // neighborhood-aware RoleType + EducationLevel draws. ledgerRows is the
+  // full sheet (header at row 0) passed through from resolveCitizens.
+  const ledgerFreq = ledgerRows && ledgerRows.length > 0
+    ? citizenDerivation.buildLedgerFreqSnapshot(headers, ledgerRows, { includesHeader: true })
+    : { byNeighborhood: {}, citywide: { roleTypes: {}, educationByAge: {} } };
+
   for (let i = 0; i < candidates.length; i++) {
     const c = candidates[i];
     const popNum = maxPopNum + 1 + i;
     const popId = 'POP-' + String(popNum).padStart(5, '0');
     popIds.push(popId);
+
+    // S184 (Phase 4.1.c) — derive 8 demographic + lifecycle fields per candidate.
+    // Pre-T1 NAMES INDEX entries lack BirthYear / Neighborhood; defaults: age 38,
+    // neighborhood drawn by frequency-weighted citywide distribution.
+    const seed = c.first + '|' + (c.last || '') + '|' + popId;
+    const birthYear = c.birthYear ? parseInt(c.birthYear, 10) : 2003;
+    const age = 2041 - (Number.isFinite(birthYear) && birthYear > 1900 ? birthYear : 2003);
+    const profile = citizenDerivation.deriveCitizenProfile(seed, age, c.neighborhood || '', ledgerFreq);
 
     // Build row aligned with headers
     const row = headers.map(h => {
@@ -388,6 +406,16 @@ async function appendCitizens(candidates, headers, maxPopNum, sheetsClient, shee
       if (h === 'Last') return c.last;
       if (h === 'CreatedAt') return now;
       if (h === 'Last Updated') return now;
+      if (h === 'BirthYear') return birthYear;
+      if (h === 'Neighborhood') return profile._neighborhood;
+      if (h === 'RoleType') return profile.RoleType;
+      if (h === 'EducationLevel') return profile.EducationLevel;
+      if (h === 'Gender') return profile.Gender;
+      if (h === 'YearsInCareer') return profile.YearsInCareer;
+      if (h === 'DebtLevel') return profile.DebtLevel;
+      if (h === 'NetWorth') return profile.NetWorth;
+      if (h === 'MaritalStatus') return profile.MaritalStatus;
+      if (h === 'NumChildren') return profile.NumChildren;
       if (NEW_CITIZEN_DEFAULTS[h] !== undefined) return NEW_CITIZEN_DEFAULTS[h];
       return '';
     });
@@ -595,7 +623,7 @@ async function main() {
   let businessAppended = [];
   if (apply) {
     console.log('--apply: writing to live sheets');
-    citizenAppended = await appendCitizens(citizenResolution.candidates, citizenResolution.headers, citizenResolution.maxPopNum, sheetsClient, sheetId);
+    citizenAppended = await appendCitizens(citizenResolution.candidates, citizenResolution.headers, citizenResolution.maxPopNum, sheetsClient, sheetId, citizenResolution.rows);
     businessAppended = await appendBusinesses(bizResolution.candidates, bizResolution.maxBizNum, sheetsClient, sheetId);
 
     const allOk = citizenAppended.every(r => r.ok) && businessAppended.every(r => r.ok);

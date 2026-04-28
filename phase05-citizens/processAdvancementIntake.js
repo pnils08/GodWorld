@@ -338,7 +338,11 @@ function processAdvancementRows_(ss, now, cycle) {
   var iTier = findColByName_(intakeHeaders, 'Tier');
   var iClockMode = findColByName_(intakeHeaders, 'ClockMode');
   var iNotes = findColByName_(intakeHeaders, 'Notes');
-  
+  // S184 (Phase 4.1.b) — optional columns; not in default Advancement_Intake1
+  // schema but present if upstream writer adds them.
+  var iBirthYear = findColByName_(intakeHeaders, 'BirthYear');
+  var iNeighborhood = findColByName_(intakeHeaders, 'Neighborhood');
+
   var lPopId = findColByName_(ledgerHeaders, 'POPID');
   var lFirst = findColByName_(ledgerHeaders, 'First');
   var lMiddle = findColByName_(ledgerHeaders, 'Middle');
@@ -351,6 +355,21 @@ function processAdvancementRows_(ss, now, cycle) {
   var lCreatedAt = findColByName_(ledgerHeaders, 'CreatedAt');
   var lLastUpdated = findColByName_(ledgerHeaders, 'Last Updated');
   var lUsageCol = findColByName_(ledgerHeaders, 'UsageCount');
+  // S184 (Phase 4.1.b) — 7 lifecycle/demographic ledger columns for derivation
+  var lEducationLevel = findColByName_(ledgerHeaders, 'EducationLevel');
+  var lGender = findColByName_(ledgerHeaders, 'Gender');
+  var lYearsInCareer = findColByName_(ledgerHeaders, 'YearsInCareer');
+  var lDebtLevel = findColByName_(ledgerHeaders, 'DebtLevel');
+  var lNetWorth = findColByName_(ledgerHeaders, 'NetWorth');
+  var lMaritalStatus = findColByName_(ledgerHeaders, 'MaritalStatus');
+  var lNumChildren = findColByName_(ledgerHeaders, 'NumChildren');
+  var lBirthYear = findColByName_(ledgerHeaders, 'BirthYear');
+  var lNeighborhood = findColByName_(ledgerHeaders, 'Neighborhood');
+
+  // S184 (Phase 4.1.b) — build ledger frequency snapshot ONCE per intake batch.
+  // Used by deriveCitizenProfile_ for neighborhood-aware RoleType + EducationLevel draws.
+  // citizenDerivation library auto-loaded from utilities/citizenDerivation.js.
+  var ledgerFreq = buildLedgerFreqSnapshot_(ledgerHeaders, ledgerData, { includesHeader: true });
   
   var maxPop = 0;
   for (var r = 1; r < ledgerData.length; r++) {
@@ -400,9 +419,24 @@ function processAdvancementRows_(ss, now, cycle) {
     } else {
       maxPop++;
       var newPopId = 'POP-' + String(maxPop).padStart(5, '0');
-      // S184 Row 17 — new citizens get demographic-voice fallback when intake omits RoleType.
-      // Deterministic per (first, last, popId) so re-runs don't churn role assignment.
-      var newRoleType = rawRole || pickDemographicVoiceRole_(first + '|' + last + '|' + newPopId);
+
+      // S184 (Phase 4.1.b) — derive 8 demographic + lifecycle fields for the new
+      // citizen via the shared citizenDerivation library. Intake row may not
+      // carry BirthYear or Neighborhood (Advancement_Intake1 default schema is
+      // 10 cols without them); helper falls back to age 38 + frequency-weighted
+      // neighborhood draw. RoleType derivation runs through the same library;
+      // pickDemographicVoiceRole_ is no longer the primary path — it remains as
+      // a final-tier fallback inside deriveRoleType_.
+      var seed = first + '|' + last + '|' + newPopId;
+      var rawBirthYear = (iBirthYear >= 0) ? Number(row[iBirthYear]) : NaN;
+      var birthYear = (!isNaN(rawBirthYear) && rawBirthYear > 1900) ? rawBirthYear : 2003;
+      var age = 2041 - birthYear;
+      var rawNbhd = (iNeighborhood >= 0) ? String(row[iNeighborhood] || '').trim() : '';
+      var profile = deriveCitizenProfile_(seed, age, rawNbhd, ledgerFreq, {
+        roleTypeOverride: rawRole || null  // honor explicit intake RoleType if set
+      });
+      var newRoleType = profile.RoleType;
+
       var newRow = new Array(ledgerHeaders.length).fill('');
       if (lPopId >= 0) newRow[lPopId] = newPopId;
       if (lFirst >= 0) newRow[lFirst] = first;
@@ -416,6 +450,16 @@ function processAdvancementRows_(ss, now, cycle) {
       if (lCreatedAt >= 0) newRow[lCreatedAt] = now;
       if (lLastUpdated >= 0) newRow[lLastUpdated] = now;
       if (lUsageCol >= 0) newRow[lUsageCol] = 0;
+      // S184 (Phase 4.1.b) — 7 derived fields + BirthYear + Neighborhood
+      if (lBirthYear >= 0 && !newRow[lBirthYear]) newRow[lBirthYear] = birthYear;
+      if (lNeighborhood >= 0 && !newRow[lNeighborhood]) newRow[lNeighborhood] = profile._neighborhood;
+      if (lEducationLevel >= 0) newRow[lEducationLevel] = profile.EducationLevel;
+      if (lGender >= 0) newRow[lGender] = profile.Gender;
+      if (lYearsInCareer >= 0) newRow[lYearsInCareer] = profile.YearsInCareer;
+      if (lDebtLevel >= 0) newRow[lDebtLevel] = profile.DebtLevel;
+      if (lNetWorth >= 0) newRow[lNetWorth] = profile.NetWorth;
+      if (lMaritalStatus >= 0) newRow[lMaritalStatus] = profile.MaritalStatus;
+      if (lNumChildren >= 0) newRow[lNumChildren] = profile.NumChildren;
       ledgerSheet.appendRow(newRow);
       if (logSheet) {
         logSheet.appendRow([now, newPopId, (first + ' ' + last).trim(), 'Promotion',

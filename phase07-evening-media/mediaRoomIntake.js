@@ -588,7 +588,7 @@ function routeCitizenUsageToIntake_(ss, cycle, cal) {
           'no',                     // G: CIV
           'ENGINE',                 // H: ClockMode
           4,                        // I: Tier (default for media-introduced)
-          'Citizen',                // J: RoleType
+          '',                       // J: RoleType (S184 — empty so Path B fires at promotion in processAdvancementIntake.js)
           'Active',                 // K: Status
           '',                       // L: BirthYear
           'Oakland',                // M: OriginCity
@@ -1326,7 +1326,7 @@ function processCategoryEntries_(ss, entries, category, ledgerData, cycle, cal, 
           category === 'CIV' ? 'yes' : 'no', // G: CIV (y/n)
           'ENGINE',                 // H: ClockMode
           3,                        // I: Tier
-          citizen.role || 'Citizen', // J: RoleType
+          citizen.role || '',       // J: RoleType (S184 — empty so Path B fires at promotion)
           'Active',                 // K: Status
           '',                       // L: BirthYear
           'Oakland',                // M: OriginCity
@@ -1412,7 +1412,7 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
           'no',                     // CIV
           'ENGINE',
           4,                        // Tier 4 for quoted citizens
-          citizen.occupation || 'Citizen',
+          citizen.occupation || '',  // S184 — empty so Path B fires at promotion
           'Active',
           birthYear,
           'Oakland',

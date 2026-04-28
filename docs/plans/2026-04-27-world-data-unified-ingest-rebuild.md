@@ -1,7 +1,7 @@
 ---
 title: World-Data Unified Ingest Rebuild
 created: 2026-04-27
-updated: 2026-04-27
+updated: 2026-04-28
 type: plan
 tags: [architecture, infrastructure, draft]
 sources:
@@ -295,49 +295,70 @@ Pre-S131-era manual `buildWorldStatePacket`-style ingests. Content includes expl
   2. Add `--wipe-old` flag with **POPID-content-scoped filter** (the canonical wipe pattern engine-sheet established at R1 — every domain writer follows this shape): enumerate via `/v3/documents/list`, keep docs with `'world-data'` AND no `'wd-citizens'` tag, GET each, extract `(POP-XXXXX)` header from content, DELETE only if POPID is in the citizen set being written. Truesource (27 docs) and the Civis business card stay untouched because their content shape doesn't carry citizen POPIDs that match. Sleep 30s after wipe before write phase.
   3. Default `--wipe-old` OFF (opt-in for the retrofit migration). `--apply --wipe-old` for the production run; `--apply --name "Beverly Hayes" --wipe-old` auto-scopes the wipe to that single citizen's POPID.
   4. Output report: pre-wipe count, deleted count, post-wipe count, written count.
-- **Verify:** dry-run on 5 citizens shows the new payload shape; apply on `--name "Beverly Hayes" --wipe-old` writes one card with the new tag pair, wipe phase removes only the prior Beverly Hayes citizen-card doc (truesource and business cards untouched).
-- **Status:** **CODE DONE S182** (engine-sheet, commit `6ec7a61`). Retrofit shipped with POPID-content-scoped wipe. Apply pending — production run on full 1,573 citizens hasn't been kicked off yet.
+- **Verify:** dry-run on 5 citizens shows the new payload shape; apply on `--name "Beverly Hayes" --wipe-old` writes one card with the new tag pair, wipe phase removes only the prior Beverly Hayes citizen-card docs (truesource and business cards untouched).
+- **Status:** **CODE DONE + BEVERLY VERIFIED S182** (engine-sheet, commits `6ec7a61` retrofit + `b24f3ed` rate-limit hardening). Single-citizen `--apply --name "Beverly Hayes" --wipe-old` succeeded: wipe matched 2 (Beverly had a duplicate in the substrate — both deleted), 1 dual-tagged card written, GET-by-ID confirms `containerTags: ["world-data","wd-citizens"]`. **Bulk apply on remaining 1,571 citizens DEFERRED** — single window not friendly for the heavy combined wipe (~1,600 GETs) + write (~1,571 writes) load. Beverly's actual POPID is **POP-00772** (plan validation table figure of POP-00583 is stale).
 
 ### Phase 3 — Five new writers (engine-sheet)
 
-Modeled on `buildCitizenCards.js` post-S181 + R1 retrofit (commit `6ec7a61`). Each writer:
+Modeled on `buildCitizenCards.js` post-S181 + R1 retrofit (commit `6ec7a61`) + W1's rate-limit hardening (commit `b24f3ed`). Each writer:
 - Reads source sheet (Phase 0 already manifest in SHEETS_MANIFEST.md).
 - Builds card per shape spec (above).
 - Optionally hybrid-searches bay-tribune for appearances + full-name post-filters.
-- **Implements ID-content-scoped wipe matching R1's pattern** (the canonical writer wipe primitive): enumerate `/v3/documents/list`, keep docs with `'world-data'` AND no `'wd-<domain>'` tag, GET each, extract the domain ID from content header (`(BIZ-XXXXX)` for business / `(FAITH-XXX)` for faith / etc.), DELETE only if the ID is in the entity set being written. Cross-domain content stays untouched. This is tighter than tag-membership filtering and preserves graceful degradation if a writer fails partway.
+- **Implements ID-content-scoped wipe matching R1's pattern** (the canonical writer wipe primitive): enumerate `/v3/documents/list`, keep docs with `'world-data'` AND no `'wd-<domain>'` tag, GET each, extract the domain ID from content header (`(BIZ-XXXXX)` for business / `(FAITH-XXX)` for faith / etc.), DELETE only if the ID is in the entity set being written. Cross-domain content stays untouched. Tighter than tag-membership filtering — preserves graceful degradation if a writer fails partway and naturally catches partial-run residue on retry (W1 proved this: a 36-write failure left 16 partial dual-tagged cards, which the next `--apply --wipe-old` correctly caught and re-wrote alongside the rest).
 - Writes with `containerTags: ['world-data', 'wd-<domain>']`.
-- Rate limits at 300ms between writes.
+- Rate limits at **500ms** between writes (bumped from 300ms post-W1; see "Writer hardening pattern" below).
 - Outputs report: enumerated, written, errors, with-appearances.
 
+### Writer hardening pattern (post-W1, canonical for W2–W5 + R2)
+
+Bulk applies of 50+ writes back-to-back trip Supermemory's rolling-window rate cap. The cap surfaces as **HTTP 401 "Either userId or orgId not found"** — NOT 429 — which initially looked like an auth failure. Observed during W1 bulk run: wipe pass + 16 writes succeeded, then 36 consecutive 401s ate the rest of the run.
+
+**Mandatory writer skeleton** (from `scripts/buildBusinessCards.js` commit `b24f3ed`):
+
+1. **`smRequest(method, apiPath, body)`** — promise-wrapped https.request returning `{status, body}` (does NOT throw on non-2xx). Reusable across write/list/GET/DELETE.
+2. **`writeMemory(content, entity)`** — wraps `smRequest('POST', '/v3/documents', ...)` with retry-on-401-OR-429: up to 3 retries (4 attempts total per write), 8s sleep between attempts. The retry rationale: the cap is rolling, so backoff naturally lets the next write through. Constants: `WRITE_MAX_RETRIES = 3`, `WRITE_RETRY_SLEEP_MS = 8000`.
+3. **`listPageWithRetry(page, retries)`** — same retry primitive for `/v3/documents/list` pages. List 401s less often than writes but it happens. Constants: 3 retries, 5s sleep.
+4. **`getDocWithRetry(id, retries)`** — retries on **empty content** (different failure mode — transient API behavior under heavy load returns 200 with `content: ""`). 2 retries, 500ms sleep. Used by the wipe-old GET pass.
+5. **Inter-write sleep: `await smSleep(500)`** between writes. Lower values (300ms) failed in W1's bulk run; 500ms held.
+6. **Abort-on-incomplete-enumeration**: if any list page returns non-200 after retries, throw rather than silently skip. Partial enumeration with `--apply` is unsafe (an earlier wipeWorldDataSnapshots apply silently skipped 5 pages on 401s and only deleted 1 of 8 dumps).
+7. **Settling sleep**: 30s between wipe pass and write pass to let async indexing catch up. Constant: `WIPE_INDEXING_SLEEP_MS = 30000`.
+
+**Recovery from partial bulk run:** simply re-run `--apply --wipe-old`. The ID-content-scoped wipe catches partial dual-tagged docs (their content header still matches the domain ID pattern) and DELETEs them before the fresh write pass. Idempotent by design.
+
+**Targeted retry without wipe:** if only a handful of entities failed in a bulk run (W1 had 2: BART + Highland), re-run with `--apply --biz BIZ-NNNNN` (or `--name "X"`) and **omit `--wipe-old`** — single-entity writes don't burn the rate-window. W1 closed cleanly this way.
+
 #### Task W1: `scripts/buildBusinessCards.js` (NEW)
-- **Source:** Business_Ledger (~52 rows).
+- **Source:** Business_Ledger (52 rows verified).
 - **Card shape:** wd-business spec above.
 - **Tag pair:** `['world-data', 'wd-business']`.
-- **Wipe:** DELETE-by-tag `wd-business`.
-- **Verify:** BIZ-00035 (Joaquin's Bakery) renders with employees, owner, recent canon if any.
-- **Status:** [ ] not started
+- **Wipe:** BIZ-content-scoped DELETE (canonical R1 pattern). Plan-original "DELETE-by-tag wd-business" wouldn't catch the un-tagged Civis seed.
+- **Verify:** **CORRECTION** — plan-original fixture `BIZ-00035 Joaquin's Bakery` is wrong; actual ledger row 35 is **Peralta Community College District** (City-wide, 1 employee, 0 appearances). Use **BIZ-00052 Civis Systems** as the rich verification fixture (West Oakland, Urban Systems Intelligence, 40 employees, full financials, founder Elias Varek, 5 bay-tribune appearances from Baylight/NBA-bid storyline).
+- **Status:** **DONE S182** (engine-sheet, commits `f32a5d8` writer + `b24f3ed` hardening). 52/52 cards written with dual `['world-data','wd-business']` tags. Civis seed deduplicated in wipe pass. Bulk apply hit rate-limit on first run (16/52 written, 36 401s); re-run after hardening completed 50/52; targeted retries closed the last 2 (BART BIZ-00014, Highland BIZ-00015). Verified via list-walk: `wd-business` count = 52.
 
 #### Task W2: `scripts/buildFaithCards.js` (NEW)
 - **Source:** Faith_Organizations + Faith_Ledger (last 2 cycles).
 - **Card shape:** wd-faith spec above.
 - **Tag pair:** `['world-data', 'wd-faith']`.
-- **Wipe:** DELETE-by-tag `wd-faith`.
+- **Wipe:** FAITH-content-scoped DELETE (canonical R1 pattern — extract `(FAITH-XXX)` from header, scope to entity set being written). Inventory confirms green-field for `wd-faith`; no pre-existing un-tagged faith cards in world-data.
+- **Apply hardening:** copy `smRequest`/`writeMemory`/`listPageWithRetry`/`getDocWithRetry`/`smSleep` from `scripts/buildBusinessCards.js` per "Writer hardening pattern" above. Inter-write sleep 500ms.
 - **Verify:** Masjid Al-Islam renders with leader, congregation, recent ledger events.
 - **Status:** [ ] not started
 
 #### Task W3: `scripts/buildCulturalCards.js` (NEW)
-- **Source:** Cultural_Ledger (40 rows).
+- **Source:** Cultural_Ledger (~40 rows).
 - **Card shape:** wd-cultural spec above.
 - **Tag pair:** `['world-data', 'wd-cultural']`.
-- **Wipe:** DELETE-by-tag `wd-cultural`.
-- **Verify:** Beverly Hayes renders with Music domain + fame tier; coexists with her wd-citizens card.
+- **Wipe:** Cultural-POPID-content-scoped DELETE OR by CUL-ID if Cultural_Ledger uses one (sample row showed `CUL-ID: CUL-3913E3E5` style — research-build to confirm shape). Green-field for `wd-cultural`.
+- **Apply hardening:** copy from `scripts/buildBusinessCards.js`.
+- **Verify:** Beverly Hayes renders with Music domain + fame tier; coexists with her wd-citizens card (different content header shape, both retrieval surfaces work).
 - **Status:** [ ] not started
 
 #### Task W4: `scripts/buildNeighborhoodCards.js` (NEW)
 - **Source:** Neighborhood_Map + Neighborhood_Demographics.
 - **Card shape:** wd-neighborhood spec above.
 - **Tag pair:** `['world-data', 'wd-neighborhood']`.
-- **Wipe:** DELETE-by-tag `wd-neighborhood`.
+- **Wipe:** Neighborhood-name-content-scoped DELETE (no ID pattern — match on header line equal to one of the 17 neighborhood names being written). Green-field for `wd-neighborhood`.
+- **Apply hardening:** copy from `scripts/buildBusinessCards.js`.
 - **Verify:** Temescal renders with phase, sentiment, top-5 businesses + citizens.
 - **Status:** [ ] not started
 
@@ -345,7 +366,8 @@ Modeled on `buildCitizenCards.js` post-S181 + R1 retrofit (commit `6ec7a61`). Ea
 - **Source:** Initiative_Tracker (current state only — defer history per Open Question 1).
 - **Card shape:** wd-initiative spec above.
 - **Tag pair:** `['world-data', 'wd-initiative']`.
-- **Wipe:** DELETE-by-tag `wd-initiative`.
+- **Wipe:** INIT-content-scoped DELETE (extract `(INIT-XXX)` from header). Green-field for `wd-initiative`.
+- **Apply hardening:** copy from `scripts/buildBusinessCards.js`.
 - **Verify:** INIT-001 (Stabilization Fund) renders with phase, neighborhoods, recent milestones.
 - **Status:** [ ] not started
 
@@ -386,7 +408,7 @@ Modeled on `buildCitizenCards.js` post-S181 + R1 retrofit (commit `6ec7a61`). Ea
 
 - [ ] **Initiative card history:** current-state-only is the default. Promote to per-cycle-snapshots only if Mara audit on a C93+ edition flags missing initiative history. (Blocks Task W5 only if revisited.)
 - [ ] **Faith card granularity:** one card per org with embedded recent events is the default. Promote to per-org-per-event-batch only if Mara audit flags retrieval gaps. (Blocks Task W2 only if revisited.)
-- [ ] **`/v4/memories` vs `/v3/documents` for writes:** Task 1.3 verifies `/v3/documents` works. If it does, all writers use it. If `/v4/memories` proves to support multi-tag writes too, the choice is preference; default to `/v3/documents` for consistency with what was verified S182.
+- [x] **`/v4/memories` vs `/v3/documents` for writes:** RESOLVED S182. `/v3/documents` is the writer endpoint for all retrofits. R1 + W1 ship on it. `/v4/memories` is no longer used by any active writer in this project.
 
 ---
 
@@ -396,15 +418,33 @@ C92 dry-run for each writer:
 
 | Writer | Fixture entity | Expected card content |
 |---|---|---|
-| buildCitizenCards (R1) | Beverly Hayes (POP-00583) | Header + neighborhood + role + tier + birth + gender + appearances; old un-tagged Beverly card deleted |
-| buildBusinessCards (W1) | Joaquin's Bakery (BIZ-00035) | Header + Temescal + Food & Bev + employees + recent canon if any |
+| buildCitizenCards (R1) | **Beverly Hayes (POP-00772)** | Header + neighborhood (West Oakland) + role (Community Director, Tenant Rights Advocate) + tier 3 + birth 1983 + gender female + 5 bay-tribune appearances; old un-tagged Beverly card(s) deleted (verified S182 — found 2 duplicates, both wiped). |
+| buildBusinessCards (W1) | **Civis Systems (BIZ-00052)** *(plan-original BIZ-00035 fixture is wrong — actual ledger row 35 is Peralta CCD)* | Header + West Oakland + Urban Systems Intelligence + 40 employees + financials ($142K avg salary, $60M revenue, 15% growth) + Key Personnel (Elias Varek, founder) + 5 bay-tribune appearances. |
 | buildFaithCards (W2) | Masjid Al-Islam | Header + tradition + leader + congregation + recent Faith_Ledger events |
-| buildCulturalCards (W3) | Beverly Hayes cultural card | Music domain + fame tier; coexists with wd-citizens card |
+| buildCulturalCards (W3) | Beverly Hayes (POP-00772) cultural card | Music domain + fame tier; coexists with her wd-citizens card |
 | buildNeighborhoodCards (W4) | Temescal | Phase + sentiment + top-5 businesses + top-5 citizens |
 | buildInitiativeCards (W5) | INIT-001 (Stabilization Fund) | pilot_evaluation phase + neighborhoods + recent MilestoneNotes |
 | ingestPlayerTrueSource (R2) | Vinnie Keane (POP-00001) | Existing truesource content, now retrievable via `wd-player-truesource` |
 
 Per writer: dry-run prints card; apply writes one record; MCP lookup retrieves; old un-tagged docs (where applicable) gone.
+
+---
+
+## Substrate snapshot at S182 close
+
+| Container | Count | Notes |
+|---|---|---|
+| Org-wide total | **2,457** | All Supermemory containers combined |
+| world-data total | **1,653** | Pre-S182: 1,609. After R0 (-8): 1,601. After R1 Beverly (-2 +1): 1,600. After W1 (+52 -1 Civis): 1,653. *Actual list-walk verified S182.* |
+| `wd-citizens` tagged | **1** | Beverly Hayes (POP-00772) only — R1 single-citizen verification. **Bulk apply on remaining 1,571 deferred.** |
+| `wd-business` tagged | **52** | Full Business_Ledger ingested W1. Includes the deduplicated Civis Systems re-write. |
+| Un-tagged citizen-cards | **~1,571** | Need R1 bulk `--apply --wipe-old` (heavy: ~1,600 GETs + 1,571 DELETEs + 1,571 writes — split across windows or run with retry hardening). |
+| Un-tagged player_truesource | **27** | Awaiting R2 retrofit. |
+| Other un-tagged in world-data | **0** | Confirmed clean — all engine-state dumps deleted in R0, Civis seed deduplicated in W1, no other rogue shapes found in inventory. |
+
+Reconciliation math: 2,415 (S182 start) − 8 R0 + 0 R1 net + 51 W1 net = 2,458 expected; actual 2,457 (1 doc difference within Supermemory's eventual-consistency window or list-walk timing — within tolerance).
+
+Fresh-terminal pickup state: substrate is clean and deterministic. Each remaining task (W2, W3, W4, W5, R2, M1-M4) is independent — start any of them by copying `scripts/buildBusinessCards.js` as the canonical writer template.
 
 ---
 
@@ -415,9 +455,9 @@ Engine-sheet executes in this order (each phase produces an artifact research-bu
 2. Task 1.1 (inventory script + run). **DONE S182** (commit `3b844a5`).
 3. Task 1.2 (decision pass — research-build appends findings to this plan). **DONE S182** (this section).
 4. Task R0 (engine-state aggregate dump cleanup). **DONE S182** (commit `265c503`, world-data 1,609 → 1,601).
-5. Task R1 (citizen retrofit) — proves the retrofit + POPID-content-scoped wipe pattern on the largest, most-used domain. **CODE DONE S182** (commit `6ec7a61`); **APPLY PENDING** — production run on 1,573 citizens not yet kicked off.
-6. Tasks W1–W5 (five new writers, in any order — independent). Each follows R1's ID-content-scoped wipe pattern with its own domain ID (BIZ / FAITH / cultural POPID / neighborhood name / INIT-ID).
-7. Task R2 (player_truesource retrofit) — same wipe pattern, scoped by truesource header shape.
+5. Task R1 (citizen retrofit) — proves the retrofit + POPID-content-scoped wipe pattern on the largest, most-used domain. **CODE DONE + BEVERLY VERIFIED S182** (commits `6ec7a61` + `b24f3ed`); **BULK APPLY PENDING** — production run on remaining 1,571 citizens deferred for a friendlier rate-limit window or a chunked approach.
+6. Tasks W1–W5 (five new writers, in any order — independent). Each follows R1's ID-content-scoped wipe pattern + W1's hardening (see "Writer hardening pattern" above). **W1 DONE S182** (commits `f32a5d8` + `b24f3ed`); W2–W5 not started.
+7. Task R2 (player_truesource retrofit) — same wipe pattern, scoped by truesource header shape, plus W1 hardening.
 8. Tasks M1–M4 (MCP tools — once writers populate the tags, the lookups work).
 
 Research-build re-engages between steps if specs need revision (esp. after Phase 1 inventory may surface unanticipated content shapes).
@@ -429,3 +469,4 @@ Research-build re-engages between steps if specs need revision (esp. after Phase
 - 2026-04-27 — Initial draft (S182, research-build). Tag-and-search behavior verified empirically (probe doc `XQseCdoQpsb6SZCUM6i12o`, since deleted). Card shapes approved by Mike with three explicit calls: (a) MCP query-surface design drives card shape; (b) citizen wipe is write-new-and-delete-old, not retrofit; (c) `wd-` prefix locked.
 - 2026-04-27 — Phase 1 findings appended (S182, research-build, post-engine-sheet Task 1.1 commit `3b844a5`). Inventory: 1,609 world-data docs (correction: S181 estimated 2,412; that was org-wide, not container scope). Surprises: 1 pre-existing business card (Civis Systems BIZ-00052 — business is NOT green-field; wipe table revised), 8 engine-state aggregate dumps (World Summary / Neighborhood Demographics / Map / Employment Roster per-cycle dumps from pre-S131 era — fourth-wall contamination per S172 POST_MORTEM, slated for DELETE). New Phase 1.5 / Task R0 added: engine-state aggregate dump cleanup, sequenced before citizen retrofit R1. Phase order + handoff updated. Wipe-policy table revised inline.
 - 2026-04-27 — Engine-sheet shipped Tasks 1.1 / R0 / R1-code in rapid succession (commits `3b844a5` / `265c503` / `6ec7a61`). Status updates layered onto plan: 1.1/1.2/1.3/R0 marked DONE; R1 marked CODE DONE with apply pending. R1's POPID-content-scoped wipe filter (deletes only docs whose POPID is in the citizen set being written) is **tighter than the original "tag-membership" filter described in the plan** — it preserves player_truesource (27 docs) and the Civis business card (BIZ-00052) during the citizen rebuild. **Plan revision:** R1's wipe pattern (POPID-content-scoped) becomes the canonical writer wipe primitive for W1–W5 + R2 — each domain writer scopes by its own ID extraction (BIZ-XXXXX / FAITH-XXX / etc.). Replaces an aborted global-wipe revision attempt that would have downgraded the safety property engine-sheet shipped. Phase 3 writer pattern + R2 spec updated to reflect.
+- 2026-04-28 — S182 close. Engine-sheet shipped R1 single-citizen verification (Beverly POP-00772, 2 dupes wiped + 1 dual-tagged write, dual tags confirmed via GET) and full W1 (commits `f32a5d8` writer + `b24f3ed` rate-limit hardening). W1 first-attempt bulk apply hit Supermemory's rolling-window cap (surfaces as 401 "userId or orgId not found", NOT 429) — 16/52 succeeded, then 36 consecutive 401s. Hardening shipped: retry-on-401-OR-429 in `writeMemory` with 8s backoff (3 retries), inter-write sleep 300ms→500ms, abort-on-incomplete-list-enumeration kept. Re-run completed 50/52, targeted retries closed the last 2. Final verified state: 52 docs `wd-business`, 1 doc `wd-citizens`. **Plan amendments this entry:** (a) R1 status updated with verification details + corrected POPID; (b) W1 status DONE with commit refs + fixture correction (BIZ-00035 is Peralta CCD, not Joaquin's Bakery — use Civis BIZ-00052); (c) new "Writer hardening pattern (post-W1)" subsection codifies the rate-limit playbook for W2–W5 + R2; (d) Validation fixture table corrected; (e) Open Question 3 (`/v4/memories` vs `/v3/documents`) marked resolved; (f) new "Substrate snapshot at S182 close" subsection captures current world-data composition for fresh-terminal pickup.

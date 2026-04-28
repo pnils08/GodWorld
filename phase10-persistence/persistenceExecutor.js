@@ -35,7 +35,7 @@ function executePersistIntents_(ctx) {
     executed: 0,
     skipped: 0,
     errors: [],
-    byKind: { cell: 0, range: 0, append: 0, replace: 0 },
+    byKind: { cell: 0, range: 0, append: 0, replace: 0, ensure: 0 },
     bySheet: {},
     dryRun: false,
     replay: false,
@@ -69,6 +69,11 @@ function executePersistIntents_(ctx) {
   var updates = ctx.persist.updates || [];
   var logs = ctx.persist.logs || [];
 
+  // Sort replaceOps by priority — ensure intents (25) fire before replace (50).
+  replaceOps.sort(function(a, b) {
+    return (a.priority || 50) - (b.priority || 50);
+  });
+
   // Sort updates by priority
   updates.sort(function(a, b) {
     return (a.priority || 100) - (b.priority || 100);
@@ -78,15 +83,37 @@ function executePersistIntents_(ctx) {
     return (a.priority || 200) - (b.priority || 200);
   });
 
-  // Execute replace operations first (they clear sheets)
+  // Execute replace + ensure operations first.
+  // Idempotency: collapse duplicate ensure intents on same tab to a single
+  // creation. Replace ops do not collapse (writer chose to clear).
+  var ensuredTabs = {};
   for (var i = 0; i < replaceOps.length; i++) {
-    var result = executeReplaceIntent_(ctx, replaceOps[i]);
-    if (result.success) {
-      stats.executed++;
-      stats.byKind.replace++;
-      stats.bySheet[replaceOps[i].tab] = (stats.bySheet[replaceOps[i].tab] || 0) + 1;
+    var op = replaceOps[i];
+    if (op.kind === 'ensure') {
+      if (ensuredTabs[op.tab]) {
+        stats.skipped++;
+        continue;
+      }
+      ensuredTabs[op.tab] = true;
+      var ensureResult = executeEnsureIntent_(ctx, op);
+      if (ensureResult.success) {
+        stats.executed++;
+        stats.byKind.ensure++;
+        stats.bySheet[op.tab] = (stats.bySheet[op.tab] || 0) + 1;
+      } else {
+        stats.errors.push(ensureResult.error);
+      }
+    } else if (op.kind === 'replace') {
+      var replaceResult = executeReplaceIntent_(ctx, op);
+      if (replaceResult.success) {
+        stats.executed++;
+        stats.byKind.replace++;
+        stats.bySheet[op.tab] = (stats.bySheet[op.tab] || 0) + 1;
+      } else {
+        stats.errors.push(replaceResult.error);
+      }
     } else {
-      stats.errors.push(result.error);
+      stats.errors.push('Unknown replaceOps intent kind for ' + op.tab + ': ' + op.kind);
     }
   }
 
@@ -143,6 +170,42 @@ function executePersistIntents_(ctx) {
   clearAllIntents_(ctx);
 
   return stats;
+}
+
+
+/**
+ * Executes an ensure-tab intent.
+ * Creates the tab and writes headers if missing; no-op if tab already exists.
+ * Idempotency-collapse for same-tab repeats is handled by caller.
+ */
+function executeEnsureIntent_(ctx, intent) {
+  try {
+    var validation = validateIntent_(intent);
+    if (!validation.valid) {
+      return { success: false, error: 'Ensure validation failed: ' + validation.error };
+    }
+
+    var sheet = ctx.ss.getSheetByName(intent.tab);
+    if (sheet) {
+      // Tab exists — no-op. Headers are not enforced against existing tab
+      // (writer is responsible for header alignment when reading existing data).
+      Logger.log('executeEnsureIntent_: ' + intent.tab + ' already exists — no-op');
+      return { success: true };
+    }
+
+    sheet = ctx.ss.insertSheet(intent.tab);
+    var headers = (intent.values && intent.values[0]) || [];
+    if (headers.length > 0) {
+      sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+      sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+      sheet.setFrozenRows(1);
+    }
+    Logger.log('executeEnsureIntent_: Created ' + intent.tab + ' with ' + headers.length + ' headers');
+    return { success: true };
+
+  } catch (e) {
+    return { success: false, error: 'Ensure ' + intent.tab + ': ' + e.message };
+  }
 }
 
 
@@ -427,9 +490,10 @@ function bridgeSetValues_(ctx, sheetName, startRow, startCol, values, reason, do
  * ============================================================================
  *
  * EXECUTION ORDER:
- * 1. Replace operations (priority 50) - clear and write entire sheets
- * 2. Updates (priority 100) - cell, range, append operations
- * 3. Logs (priority 200) - audit log appends
+ * 1. Ensure operations (priority 25) - create tab + headers if missing
+ * 2. Replace operations (priority 50) - clear and write entire sheets
+ * 3. Updates (priority 100) - cell, range, append operations
+ * 4. Logs (priority 200) - audit log appends
  *
  * MODE FLAGS:
  * - ctx.mode.dryRun = true: Log intents, don't execute
@@ -450,7 +514,7 @@ function bridgeSetValues_(ctx, sheetName, startRow, startCol, values, reason, do
  *   executed: number,     // Total intents executed
  *   skipped: number,      // Skipped (dryRun/replay)
  *   errors: string[],     // Error messages
- *   byKind: { cell, range, append, replace },
+ *   byKind: { cell, range, append, replace, ensure },
  *   bySheet: { sheetName: count },
  *   dryRun: boolean,
  *   replay: boolean,

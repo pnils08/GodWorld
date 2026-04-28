@@ -218,6 +218,43 @@ function queueReplaceIntent_(ctx, tab, allRows, reason, domain, priority) {
 
 
 /**
+ * Queues an ensure-tab intent. Creates the tab and writes headers if missing;
+ * no-op if the tab already exists. Fires at execute time before any cell /
+ * range / append intents on the same tab.
+ *
+ * Used by intake writers and lazy-create flows that need a tab to exist before
+ * routing data through the cell/range/append intent layer. Replaces the
+ * ad-hoc pattern: `var sh = ss.getSheetByName(name) || ss.insertSheet(name);`
+ *
+ * Multiple ensure intents for the same tab in one cycle collapse to a single
+ * execution (idempotent) — the executor tracks ensured-tab names per run.
+ *
+ * @param {Object} ctx - Engine context
+ * @param {string} tab - Sheet name
+ * @param {any[]} headers - 1D array of column header strings (may be empty)
+ * @param {string} reason - Description
+ * @param {string} domain - Owning domain
+ * @param {number} [priority=25] - Lower than replace (50) so ensures fire first
+ */
+function queueEnsureTabIntent_(ctx, tab, headers, reason, domain, priority) {
+  if (!ctx.persist) initializePersistContext_(ctx);
+
+  var intent = createWriteIntent_(
+    tab,
+    'ensure',
+    null,
+    [headers || []],     // values = single row of headers (2D shape)
+    reason || 'ensure tab exists',
+    domain || 'unknown',
+    priority || 25
+  );
+
+  ctx.persist.replaceOps.push(intent);
+  return intent;
+}
+
+
+/**
  * Queues a log entry (append to audit/log sheets).
  * Logs are processed after updates.
  * @param {Object} ctx - Engine context
@@ -348,7 +385,7 @@ function validateIntent_(intent) {
     return { valid: false, error: 'Intent missing valid tab name' };
   }
 
-  var validKinds = ['cell', 'range', 'append', 'replace'];
+  var validKinds = ['cell', 'range', 'append', 'replace', 'ensure'];
   var kindValid = false;
   for (var i = 0; i < validKinds.length; i++) {
     if (intent.kind === validKinds[i]) {
@@ -380,16 +417,18 @@ function validateIntent_(intent) {
  * ============================================================================
  *
  * INTENT KINDS:
+ * - ensure: Create tab + write headers if missing; no-op if tab exists
  * - cell: Write single value at specific row/col
  * - range: Write 2D array starting at row/col
  * - append: Add rows at end of sheet
  * - replace: Clear sheet and write all data (for master state)
  *
  * EXECUTION ORDER:
- * 1. Replace operations (priority 50)
- * 2. Cell/range updates (priority 100)
- * 3. Appends (priority 100)
- * 4. Logs (priority 200)
+ * 1. Ensure operations (priority 25) — tab + header bootstrap
+ * 2. Replace operations (priority 50)
+ * 3. Cell/range updates (priority 100)
+ * 4. Appends (priority 100)
+ * 5. Logs (priority 200)
  *
  * DRY-RUN MODE:
  * When ctx.mode.dryRun = true:

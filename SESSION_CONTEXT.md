@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-28 | Engine: v3.3 | Cycle: 92 | Session: 184 | Edition: E92 shipped + Mayor interview canonized | **STATUS: S184 ENGINE-REPAIR SWEEP + INTAKE-SIDE CITIZEN DERIVATION DONE (engine-sheet 6 commits — Rows 2/4/5/6/15/17 closed + intake derivation library; research-build 5 commits — plan + Phase 1-5 spec + validation review)** — building a sim, not running one.
+Last Updated: 2026-04-28 | Engine: v3.3 | Cycle: 92 | Session: 184 | Edition: E92 shipped + Mayor interview canonized | **STATUS: S184 PARALLEL-TERMINAL SESSION — engine-sheet 6 ENGINE_REPAIR rows closed + intake derivation library; research-build 11 commits driving 3 plans to DONE (skill supermemory alignment + discord-bot Task 1 + intake-side citizen derivation)** — building a sim, not running one.
 
 **S184 work [engine/sheet]** (6 commits pushed to origin/main, `a112b18..b56e41c`):
 1. **Row 2 + Row 17 closed** (`a112b18`) — wd citizen contamination bookkeeping close-out (S183 R1 cold-start fix already wiped 408 prior wd-citizens, wrote 686 fresh; tracker behind reality). Row 17 RoleType demographic-voice fallback shipped: `phase05-citizens/processAdvancementIntake.js` declares 65-role pool spanning S94's 15 demographic categories; deterministic per-(first,last,popId) djb2 hash; backfilled 2 live `Citizen` sentinel rows (POP-00798 → Independent Bookstore Owner, POP-00801 → Drone Fleet Coordinator). Live sentinel count: 0.
@@ -17,6 +17,20 @@ Last Updated: 2026-04-28 | Engine: v3.3 | Cycle: 92 | Session: 184 | Edition: E9
 **S184 ROLLOUT additions:** POP-00004 Lucia Polito column-misalignment (single-row); empty-cell rows in lifecycle fields (74-165 rows missing BirthYear or shorter than schema); WorldEvents_V3_Ledger keyword classifier polish (recordWorldEventsv3.deriveDomain coverage, separate from subject-attribution gap which is closed).
 
 **S184 clasp deploys:** 4 pushes total. Apps Script-side now 157 files (was 156 + utilities/citizenDerivation.js NEW + phase07/citizenFameTracker.js DELETED).
+
+---
+
+**S184 work [research/build]** (11 commits pushed to origin/main, spanning `017903b..b14435d`):
+
+1. **Skill supermemory alignment plan COMPLETE** through Phase 4 + scheduled validation (`017903b` plan + Phase 1 inventory; `5422c8e` matrix + Batches A/B; `b4188a8` Batch C ENRICH; `99b53a0` Phase 4 validation pass). Plan: [[plans/2026-04-28-skill-supermemory-alignment]]. Search/save matrix added to [[SUPERMEMORY]] §Search/save matrix as authoritative reference for all skills + agents (15 read use cases / 12 write use cases / 5 containers / retrieval mode override note). 12 file edits across 8 skills + 3 rhea-morgan agent files. Notable bug fix: `/save-to-mags` was directing canon saves to `/super-save` (wrong container — writes super-memory not bay-tribune); corrected to `/save-to-bay-tribune`. `/post-publish` world-summary now tags `['world-data', 'wd-summary']` (Mike S184 ADD — parallel design with entity cards). Phase 4 retrieval validation: 7/7 active wd-* tags return populated content. **Background agent scheduled** (`trig_018dwtLumnA5LdsqwvyutHp1`) — fires Tue May 12 10am Chicago for T+14d follow-up verification on real C93 outputs.
+
+2. **Discord-bot edition currency Task 1 DONE** (`776aded`) — `/post-publish` SKILL.md gets new "Step 5b: Refresh base_context.json + desk packets (all types)" between Step 5 (intake to sheets) and Step 6 (grade edition). Single command `node scripts/buildDeskPackets.js <XX>` keeps the Discord bot's worldview current after any publish event (edition / dispatch / interview / supplemental). Skill v1.2 → v1.3. Engine-sheet retains Tasks 2/3/4/6 (lib/mags.js rewrite, latest_edition_brief.md delete, DISCORD.md update, smoke test); media retains Task 5 (letters-desk RULES + MEMORY refs).
+
+3. **Intake-side citizen derivation plan COMPLETE** (`38ac775` plan drafted; `7295fc0` Phase 1 inventory; `a7682f8` Phases 2+3 specs locked + 200-female-citizen sibling rollout item; `33d4615` Phase 4 engine-sheet handoff specs; `b14435d` Phase 5 validation review). Plan: [[plans/2026-04-28-intake-side-citizen-derivation]]. Combines two engine-sheet S184 followups (Row 4 lifecycle defaults forward-looking + Row 17 RoleType upstream computation). 8 fields specced (RoleType, EducationLevel, Gender, YearsInCareer, DebtLevel, NetWorth, MaritalStatus, NumChildren) + inline-computed CareerStage. Phase 1 inventory found 3 MUST FIX live cycle paths (`mediaRoomIntake.js:591` hardcoded 'Citizen'; `processAdvancementIntake.js:405-418` Path B extension; `ingestPublishedEntities.js:399-415` largest gap with all 8 fields blank in S180 standing intake). Phase 2 source map locked per Mike sign-off (RoleType + EducationLevel via live SL frequency by neighborhood; Gender canonical 51/49 female-lean go-forward only; lifecycle fields direct port from `scripts/backfillLifecycleDefaults.js`; CareerStage inline). Phase 3 derivation specs locked (8 per-field functions + orchestrator + 4 helpers, Apps Script-safe djb2/CDF). Phase 4 engine-sheet handoff specs locked (library `utilities/citizenDerivation.gs` + `lib/citizenDerivation.js` + sync helper + per-path implementation specs). Phase 5 validation reviewed independently — 5/5 gates green, deterministic per-seed across runs.
+
+**Sibling ROLLOUT item filed:** ~200-female-citizen ingest (gender-ratio correction, MEDIUM). Live SL is 67M/33F across 760 rows; existing canon untouched per Mike's S184 constraint; go-forward correction via intake path using new derivation library with explicit `gender='female'` override. Library now exists → item flipped from blocked-by → UNBLOCKED at session-end.
+
+**Three plans driven from draft → done in single session.** Two-terminal parallel work pattern proven clean: 17 commits between research-build + engine-sheet, no collisions, no waiting.
 
 ---
 

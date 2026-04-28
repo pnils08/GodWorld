@@ -1315,7 +1315,44 @@ function runDryRunCycle() {
   Logger.log('  Sheets affected: ' + Object.keys(summary.bySheet || {}).length);
   Logger.log('═══════════════════════════════════════════════════════════');
 
+  // Phase 42 verification harness — structured snapshot between markers.
+  // Capture via `clasp logs` then grep PHASE42_VERIFY_BEGIN..END for the JSON.
+  // Per-writer breakdown surfaces beyond the byDomain/bySheet tallies in summary.
+  var perWriter = computePhase42PerWriter_(ctx);
+  Logger.log('PHASE42_VERIFY_BEGIN');
+  Logger.log(JSON.stringify({
+    schemaVersion: 1,
+    capturedAt: new Date().toISOString(),
+    cycleId: ctx.summary && ctx.summary.cycleId,
+    summary: summary,
+    perWriter: perWriter
+  }));
+  Logger.log('PHASE42_VERIFY_END');
+
   return summary;
+}
+
+
+/**
+ * Per-writer intent counts for the Phase 42 verification harness. Walks all
+ * pending intents and groups by (tab, kind, domain) — that's the diff axis
+ * for verifying a migration changes only the intended writer's intent shape.
+ * @param {Object} ctx - Engine context (post-cycle, intents not yet cleared)
+ * @returns {Object} { 'tab|kind|domain': count, ... }
+ */
+function computePhase42PerWriter_(ctx) {
+  var out = {};
+  if (!ctx.persist) return out;
+  var all = []
+    .concat(ctx.persist.replaceOps || [])
+    .concat(ctx.persist.updates || [])
+    .concat(ctx.persist.logs || []);
+  for (var i = 0; i < all.length; i++) {
+    var it = all[i];
+    var key = (it.tab || '?') + '|' + (it.kind || '?') + '|' + (it.domain || '?');
+    out[key] = (out[key] || 0) + 1;
+  }
+  return out;
 }
 
 

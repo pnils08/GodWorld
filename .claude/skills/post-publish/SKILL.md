@@ -1,8 +1,8 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.2"
-updated: 2026-04-26
+version: "1.3"
+updated: 2026-04-28
 tags: [media, active]
 effort: high
 argument-hint: "[--type edition|interview|supplemental|dispatch] [--cycle XX] [--source <path>]"
@@ -157,6 +157,18 @@ Handles two NAMES INDEX formats: T1 strict (`POP-NNNNN | Name | Role`) and pre-T
 Default mode is `--dry-run`; pass `--apply` to write. Output: `output/intake_published_entities_c<XX>_<slug>.json` with full resolution detail (matched / candidates / ambiguous / phantom / appended).
 
 **Verification gate:** `output/intake_published_entities_c<XX>_<slug>.json` written; if `--apply`, `appended` arrays show all rows verified-by-readback (`ok: true`).
+
+### Step 5b: Refresh `base_context.json` + desk packets (all types)
+```bash
+node scripts/buildDeskPackets.js <XX>
+```
+Rebuilds `output/desk-packets/base_context.json` (the cycle source-of-truth that `lib/mags.js loadWorldState()` reads for the Discord bot's hourly system-prompt rebuild) plus the 9 desk packets. Without this step, the Discord bot reports a stale cycle until the next manual cycle run.
+
+Side effect: takes ~60 seconds. Harmless — desk packets get rebuilt anyway pre-cycle, and the bot's worldview catches up on its next hourly tick.
+
+Plan reference: [[../../../docs/plans/2026-04-26-discord-bot-edition-currency]] Task 1 (S180 surfaced; S184 wired here).
+
+**Verification gate:** `output/desk-packets/base_context.json` mtime updated; `cycle` field in the JSON matches `<XX>`.
 
 ### Step 6: Grade Edition (`--type edition` only)
 ```bash

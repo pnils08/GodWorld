@@ -49,7 +49,7 @@ pointers:
   3. Document why: this is what `lib/mags.js loadWorldState()` reads to know the current cycle. Without this step, the Discord bot reports a stale cycle until the next manual cycle run.
   4. Bump skill `updated:` to today's date and `version` minor.
 - **Verify:** `grep "buildDeskPackets" .claude/skills/post-publish/SKILL.md` → returns the new step.
-- **Status:** [ ] not started
+- **Status:** **DONE S184** (research-build). New "Step 5b: Refresh base_context.json + desk packets" inserted between Step 5 (intake to sheets) and Step 6 (grade edition) — runs all-types so dispatch / interview / supplemental publishes also keep the bot's worldview current. Skill version bumped 1.2 → 1.3, updated 2026-04-28. Verification gate cites `base_context.json` mtime + cycle-field match.
 
 ### Task 2: Rewrite `loadEditionBrief()` in `lib/mags.js` to read latest production log (engine-sheet)
 
@@ -138,3 +138,4 @@ None — all resolved during S180 conversation with Mike.
 ## Changelog
 
 - 2026-04-26 — Initial draft (S180, research-build). Surfaced when bot was C90-anchored despite E91 + E92 + Mayor interview canonized; `base_context.json` frozen at C90 from April 3 and `latest_edition_brief.md` frozen at E90 from April 5. Mike's editorial direction: bot should read what already exists, no special-purpose Discord MD files.
+- 2026-04-28 — Task 1 DONE (S184, research-build). `/post-publish` SKILL.md gets new "Step 5b: Refresh base_context.json + desk packets (all types)" inserted between Step 5 and Step 6. Cross-type — runs for dispatch / interview / supplemental publishes too, not just editions, so the bot's worldview stays current after any publish event. Skill 1.2 → 1.3. Engine-sheet picks up Tasks 2/3/4/6 (lib/mags.js rewrite, file delete, DISCORD.md update, smoke test). Media picks up Task 5 (letters-desk RULES + MEMORY refs).

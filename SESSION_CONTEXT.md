@@ -2,7 +2,37 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-27 | Engine: v3.3 | Cycle: 92 | Session: 181 | Edition: E92 shipped + Mayor interview canonized | **STATUS: REFRAMED S173 + CANON-FIDELITY ROLLOUT DONE S175 + PHOTO REBUILD PLANNED S176 + INFRASTRUCTURE TIGHTENING S177 + FIRST /INTERVIEW + DJ FOUR-FILE STRUCTURE TESTED S178 + S178 BUG TRIAGE + FORMAT-CONTRACT SCHEMA LANDED S179 + S180 ENGINE-SHEET CLOSE-OUT + S181 ENGINE-REPAIR SWEEP (8 commits, 6 rows closed [1/2/3/9/10/13/16], 3 rows added [15/17/world-data], world-data citizen layer rebuilt)** — building a sim, not running one.
+Last Updated: 2026-04-28 | Engine: v3.3 | Cycle: 92 | Session: 183 | Edition: E92 shipped + Mayor interview canonized | **STATUS: REFRAMED S173 + CANON-FIDELITY ROLLOUT DONE S175 + PHOTO REBUILD PLANNED S176 + INFRASTRUCTURE TIGHTENING S177 + FIRST /INTERVIEW + DJ FOUR-FILE STRUCTURE TESTED S178 + S178 BUG TRIAGE + FORMAT-CONTRACT SCHEMA LANDED S179 + S180 ENGINE-SHEET CLOSE-OUT + S181 ENGINE-REPAIR SWEEP + S182 W1 + S183 WORLD-DATA UNIFIED INGEST COMPLETE (9 commits — W2/W3/W4/W5/R2/M1-M4/R1 bulk + cold-start fix; 843 world-data docs, 100% domain-tagged, 0 orphans)** — building a sim, not running one.
+
+**S183 work [engine/sheet]** (9 commits pushed to origin/main, `12d4ba9..1fc2526`):
+1. **W2 — buildFaithCards.js** (`2d7b103`, NEW) — 16/16 wd-faith from Faith_Organizations + Faith_Ledger. Org-name-scoped wipe (no FAITH-XXX ID column on sheet — first-line name match, mirrors W4 pattern for ID-less domains). 2 targeted retries closed rate-limit stragglers.
+2. **W3 — buildCulturalCards.js** (`9818335`, NEW) — 39/39 wd-cultural from Cultural_Ledger. CUL-ID-content-scoped wipe via `\(CUL-[A-F0-9]{6,}\)` regex; cannot collide with R1's POP- or W1's BIZ- regex by construction. POP cross-ref written WITHOUT parens (`Universe link: POP-XXXXX`) so R1 wipe can't collateral-delete dual-listed entities (Beverly = both citizen + cultural).
+3. **W4 — buildNeighborhoodCards.js** (`fb1ddf0`, NEW) — 17/17 wd-neighborhood from Neighborhood_Map + Demographics + Business_Ledger + Simulation_Ledger + lib/districtMap. Bare-name header + name-scoped wipe. NOTABLE BUSINESSES + NOTABLE CITIZENS write IDs WITHOUT parens (`- POP-00583 — Beverly [stylist, tier 2]`) to stay outside R1/W1 wipe regexes. Surfaced: 8 SL neighborhood names diverge from NM ("Downtown Oakland" vs "Downtown" / "Coliseum District" vs "Coliseum" / Lake Merritt / Uptown / KONO / Montclair / East Oakland / Jingletown) — left as separate cleanup task.
+4. **W5 — buildInitiativeCards.js** (`2b91585`, NEW) — 6/6 wd-initiative from Initiative_Tracker (row 4 / INIT-004 gap, no card). INIT-ID-scoped wipe. Card body adds NEXT (NextScheduledAction), RECENT MILESTONES (truncated 600-char MilestoneNotes blob), CONSEQUENCES.
+5. **R2 — ingestPlayerTrueSource.js retrofit** (`b41e1a6`) — 27/27 dual-tagged via 3-pass (subfolder/flat-MLB/prospects). addDocument wrapped in W1 retry-on-401/429. **Spec deviation locked**: wipe is content-signature-scoped (`=== PLAYER TRUESOURCE —` header), not POPID-scoped, because POPIDs discovered DURING passes (Drive walk + DataPage parse + ledger fallback). Recovery patches added: DELETE retry-on-401/429 (R1's was 409-only — would lose ~70%), idempotency filter, `--wipe-only` flag.
+6. **M1-M4 — domain-filtered MCP tools** (`c77cb37`) — `lookup_business` / `lookup_faith_org` / `lookup_cultural` / `get_neighborhood_state` added to scripts/godworld-mcp.py. **Retrieval-gap fix**: existing `supermemory_search` helper used CLI default mode='memories' + threshold=0.6 (too strict for short structured cards — Masjid Al-Islam wd-faith query returned 0 with defaults vs sim 0.72 with `--mode hybrid --threshold 0.3`). Helper extended with optional mode/threshold/limit kwargs (defaults preserved → existing tools unchanged); M1-M4 opt-in.
+7. **R1 bulk close** (`5bdfcf9`) — buildCitizenCards.js DELETE retry-on-401/429 patch + `--wipe-only` flag (mirrors R2). Background bulk: 686 ledger-matched citizens, 408 wd-citizens written (404 + 4 retries — Jango Lango / Tyrie Groin / Maya Torres-Dillon / Tomas Renteria). 278 citizens silent-skipped by line-515 quality gate (no appearances + no traits + no bio).
+8. **R1 cold-start fix** (`1fc2526`) — Identified the gate creates a structural cold-start trap (thin citizen never gets discovered → never gets enriched → stays thin → keeps being skipped). Added `--no-quality-gate` flag that (a) skips line-515 gate, (b) drops wipe idempotency filter so already-tagged docs get re-wiped. Full rebuild: wiped all 408 prior wd-citizens, wrote 686 fresh (682 in bulk + 4 targeted retries — Broderick Mitchell / Travis Paiz / Dak Leo / Lisa Tanaka). **Final substrate: 843 world-data docs, 100% domain-tagged, 0 orphans, 0 cold-start-trap citizens.**
+
+**S183 substrate snapshot (post-cold-start-fix):**
+| Tag | Count |
+|---|---|
+| wd-citizens | 686 |
+| wd-business | 52 |
+| wd-cultural | 39 |
+| wd-player-truesource | 27 |
+| wd-neighborhood | 17 |
+| wd-faith | 16 |
+| wd-initiative | 6 |
+| **Total world-data** | **843** |
+| Untagged in world-data | **0** |
+
+**S183 plan file** [[plans/2026-04-27-world-data-unified-ingest-rebuild]] is end-to-end DONE. Fresh-terminal pickup state at the bottom of the plan orients the next session in two paragraphs. Open follow-ups documented: NM↔SL neighborhood-name reconciliation (W4 surfaced); citizen-card automation — wire R1 / W2-W5 / R2 into post-cycle or post-publish hook so they re-run as canon evolves (currently manual).
+
+No clasp deploy this session — all 9 commits are scripts in `scripts/` (Node-only, not Apps Script). Engine version unchanged at v3.3.
+
+---
+
 
 **S181 work [engine/sheet]** (8 commits pushed to origin/main, `51dacc6..26dcd8f`):
 1. **Tech debt audit + SCHEMA_HEADERS regen** (`51dacc6`) — `scripts/regenSchemaHeaders.js` shipped (clasp run unavailable, fell back to local Node + service account per engine.md). Live-sheet diff harmless: +Ledger_Index (46×7), +LifeHistory_Archive (566×7), Influence_Tracker 11→6 cols. Audit doc `docs/engine/tech_debt_audits/2026-04-27.md`.

@@ -11,15 +11,27 @@
  * Cards get richer with each edition as wiki ingest adds memories.
  *
  * Usage:
- *   node scripts/buildCitizenCards.js --dry-run          # show what would be written
- *   node scripts/buildCitizenCards.js --apply             # write all cards
- *   node scripts/buildCitizenCards.js --apply --limit 50  # first 50 citizens
- *   node scripts/buildCitizenCards.js --apply --tier 1    # tier 1 only
- *   node scripts/buildCitizenCards.js --apply --name "Beverly Hayes"  # one citizen
+ *   node scripts/buildCitizenCards.js --dry-run                          # preview new payload shape
+ *   node scripts/buildCitizenCards.js --apply                            # write all cards (no wipe)
+ *   node scripts/buildCitizenCards.js --apply --wipe-old                 # wipe old un-tagged citizen cards then write
+ *   node scripts/buildCitizenCards.js --apply --limit 50                 # first 50 citizens
+ *   node scripts/buildCitizenCards.js --apply --tier 1                   # tier 1 only
+ *   node scripts/buildCitizenCards.js --apply --name "Beverly Hayes"     # one citizen, no wipe
+ *   node scripts/buildCitizenCards.js --apply --name "X" --wipe-old      # one citizen, scoped wipe of that POPID
+ *
+ * Write payload (post-S182): /v3/documents POST with
+ *   containerTags: ['world-data', 'wd-citizens']
+ *   metadata: { title, popid, source: 'buildCitizenCards.js' }
+ *
+ * --wipe-old: enumerate world-data, GET each candidate (no wd-citizens tag
+ * yet), match POPID from "(POP-XXXXX)" content header against the citizen
+ * set being written, DELETE each match. Other domains (player_truesource,
+ * business cards) are not touched.
  *
  * Columns from Simulation_Ledger:
  *   A=POPID, B=First, D=Last, J=Tier, K=RoleType, M=BirthYear,
- *   R=TraitProfile, T=Neighborhood, AT=CitizenBio
+ *   R=TraitProfile, S=UsageCount, T=Neighborhood, AS=EmployerBizId,
+ *   AT=CitizenBio, AU=Gender
  */
 
 require('/root/GodWorld/lib/env');
@@ -30,8 +42,10 @@ var sheets = require('../lib/sheets');
 
 var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 var CONTAINER_TAG = 'world-data';
+var DOMAIN_TAG = 'wd-citizens';
 var API_HOST = 'api.supermemory.ai';
 var APPLY = process.argv.includes('--apply');
+var WIPE_OLD = process.argv.includes('--wipe-old');
 
 // Parse options
 var limitArg = process.argv.indexOf('--limit');
@@ -42,6 +56,14 @@ var TIER_FILTER = tierArg > 0 ? parseInt(process.argv[tierArg + 1], 10) : null;
 
 var nameArg = process.argv.indexOf('--name');
 var NAME_FILTER = nameArg > 0 ? process.argv[nameArg + 1] : null;
+
+// Wipe-old GET pass tuning
+var WIPE_LIST_PAGE_SIZE = 100;
+var WIPE_LIST_SLEEP_MS = 200;
+var WIPE_GET_CONCURRENCY = 3;
+var WIPE_GET_EMPTY_RETRY = 2;
+var WIPE_LIST_RETRIES = 3;
+var WIPE_INDEXING_SLEEP_MS = 30000;
 
 if (!API_KEY) {
   console.error('[ERROR] SUPERMEMORY_CC_API_KEY not set');
@@ -93,19 +115,62 @@ function searchSupermemory(query, container) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// WRITE MEMORY TO WORLD-DATA
+// SUPERMEMORY API HELPERS
 // ═══════════════════════════════════════════════════════════════════════════
 
-function writeMemory(content) {
+function smRequest(method, apiPath, body) {
   return new Promise(function(resolve, reject) {
-    var payload = JSON.stringify({
-      memories: [{ content: content }],
-      containerTag: CONTAINER_TAG
+    var payload = body ? JSON.stringify(body) : null;
+    var headers = {
+      'Authorization': 'Bearer ' + API_KEY,
+      'Accept': 'application/json'
+    };
+    if (payload) {
+      headers['Content-Type'] = 'application/json';
+      headers['Content-Length'] = Buffer.byteLength(payload);
+    }
+    var req = https.request({
+      hostname: API_HOST,
+      path: apiPath,
+      method: method,
+      headers: headers
+    }, function(res) {
+      var data = '';
+      res.on('data', function(c) { data += c; });
+      res.on('end', function() {
+        var parsed = null;
+        try { parsed = data ? JSON.parse(data) : null; } catch (e) { parsed = data; }
+        resolve({ status: res.statusCode, body: parsed });
+      });
     });
+    req.on('error', reject);
+    req.setTimeout(15000, function() { req.destroy(); reject(new Error('Timeout')); });
+    if (payload) req.write(payload);
+    req.end();
+  });
+}
 
+function smSleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WRITE MEMORY TO WORLD-DATA — /v3/documents with dual tags + metadata
+// ═══════════════════════════════════════════════════════════════════════════
+
+function writeMemory(content, citizen) {
+  return new Promise(function(resolve, reject) {
+    var meta = {
+      title: citizen.first + ' ' + citizen.last,
+      popid: citizen.popId,
+      source: 'buildCitizenCards.js'
+    };
+    var payload = JSON.stringify({
+      content: content,
+      containerTags: [CONTAINER_TAG, DOMAIN_TAG],
+      metadata: meta
+    });
     var options = {
       hostname: API_HOST,
-      path: '/v4/memories',
+      path: '/v3/documents',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -113,24 +178,150 @@ function writeMemory(content) {
         'Content-Length': Buffer.byteLength(payload)
       }
     };
-
     var req = https.request(options, function(res) {
       var data = '';
       res.on('data', function(chunk) { data += chunk; });
       res.on('end', function() {
         if (res.statusCode >= 200 && res.statusCode < 300) {
-          resolve({ status: res.statusCode });
+          var parsed = null;
+          try { parsed = JSON.parse(data); } catch (e) {}
+          resolve({ status: res.statusCode, id: parsed && parsed.id });
         } else {
           reject(new Error('HTTP ' + res.statusCode + ': ' + data));
         }
       });
     });
-
     req.on('error', reject);
-    req.setTimeout(10000, function() { req.destroy(); reject(new Error('Timeout')); });
+    req.setTimeout(15000, function() { req.destroy(); reject(new Error('Timeout')); });
     req.write(payload);
     req.end();
   });
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// WIPE-OLD — POPID-content-scoped DELETE of un-tagged citizen cards
+// ═══════════════════════════════════════════════════════════════════════════
+// Filter rationale: after the world-data unified ingest plan landed, citizen
+// cards write with ['world-data', 'wd-citizens']; existing pre-retrofit cards
+// only have 'world-data'. We want to wipe the OLD un-tagged cards before
+// writing fresh ones — but world-data also contains player_truesource (27)
+// and a seed business-card (1) sharing the sole-world-data tag, which other
+// retrofits (R2, W1) own. So wipe-old uses a POPID-content match scoped to
+// the citizen set we're about to write: only DELETEs docs whose content
+// header is "(POP-XXXXX)" AND whose POPID is in the target set AND that
+// don't already carry the 'wd-citizens' tag.
+//
+// Behavior:
+//   full --apply --wipe-old:    target = all 1,573 citizens → wipes 1,573
+//   --apply --name "X" --wipe-old: target = {X's popId}     → wipes only X
+//   player_truesource / business-card / engine-state dumps: untouched
+
+function popIdFromContent(content) {
+  if (!content) return null;
+  var m = content.match(/\(POP-(\d{4,})\)/);
+  return m ? 'POP-' + m[1] : null;
+}
+
+async function listPageWithRetry(page, retries) {
+  var r = await smRequest('POST', '/v3/documents/list', { limit: WIPE_LIST_PAGE_SIZE, page: page });
+  var attempt = 0;
+  while (attempt < retries && r.status !== 200) {
+    console.log('  [retry] list page ' + page + ' returned ' + r.status + '; sleeping 5s');
+    await smSleep(5000);
+    r = await smRequest('POST', '/v3/documents/list', { limit: WIPE_LIST_PAGE_SIZE, page: page });
+    attempt++;
+  }
+  return r;
+}
+
+async function getDocWithRetry(id, retries) {
+  var r = await smRequest('GET', '/v3/documents/' + id, null);
+  var attempt = 0;
+  while (attempt < retries && r.status === 200 && r.body && (!r.body.content || r.body.content.length === 0)) {
+    await smSleep(500);
+    r = await smRequest('GET', '/v3/documents/' + id, null);
+    attempt++;
+  }
+  return r;
+}
+
+async function wipeOldCitizenCards(citizens) {
+  console.log('\n[wipe-old] enumerating world-data via /v3/documents/list');
+  var probe = await listPageWithRetry(1, WIPE_LIST_RETRIES);
+  if (probe.status !== 200) {
+    throw new Error('wipe-old: list page 1 returned ' + probe.status);
+  }
+  var totalPages = probe.body.pagination.totalPages;
+  var ids = [];
+  for (var page = 1; page <= totalPages; page++) {
+    var r = page === 1 ? probe : await listPageWithRetry(page, WIPE_LIST_RETRIES);
+    if (r.status !== 200) {
+      throw new Error('wipe-old: list page ' + page + ' returned ' + r.status + ' after retries — aborting');
+    }
+    var items = r.body.memories || [];
+    for (var i = 0; i < items.length; i++) {
+      var it = items[i];
+      var tags = Array.isArray(it.containerTags) ? it.containerTags : [];
+      if (!tags.includes(CONTAINER_TAG)) continue;
+      if (tags.includes(DOMAIN_TAG)) continue; // already retrofitted
+      ids.push(it.id);
+    }
+    if (page < totalPages) await smSleep(WIPE_LIST_SLEEP_MS);
+  }
+  console.log('[wipe-old] world-data candidates (no wd-citizens tag yet): ' + ids.length);
+
+  var allowedPopIds = {};
+  citizens.forEach(function(c) { allowedPopIds[c.popId] = true; });
+  console.log('[wipe-old] target POPID set size: ' + Object.keys(allowedPopIds).length);
+
+  console.log('[wipe-old] GET pass to extract POPID per doc (concurrency=' + WIPE_GET_CONCURRENCY + ')');
+  var matches = [];
+  var emptyAfterRetry = 0;
+  var fetched = 0;
+  for (var i2 = 0; i2 < ids.length; i2 += WIPE_GET_CONCURRENCY) {
+    var batch = ids.slice(i2, i2 + WIPE_GET_CONCURRENCY);
+    var results = await Promise.all(batch.map(function(id) {
+      return getDocWithRetry(id, WIPE_GET_EMPTY_RETRY).then(function(r) { return { id: id, r: r }; });
+    }));
+    for (var j = 0; j < results.length; j++) {
+      fetched++;
+      var rr = results[j].r;
+      if (rr.status !== 200 || !rr.body) continue;
+      var content = rr.body.content || '';
+      if (content.length === 0) { emptyAfterRetry++; continue; }
+      var popId = popIdFromContent(content);
+      if (popId && allowedPopIds[popId]) {
+        matches.push({ id: results[j].id, popId: popId });
+      }
+    }
+    if (fetched % 200 === 0 || (i2 + WIPE_GET_CONCURRENCY) >= ids.length) {
+      console.log('  GET ' + fetched + '/' + ids.length + ' — wipe matches so far: ' + matches.length + ' | empty-after-retry: ' + emptyAfterRetry);
+    }
+  }
+  if (emptyAfterRetry > 0) {
+    throw new Error('wipe-old: ' + emptyAfterRetry + ' docs returned empty content even after retry. Refusing to apply with incomplete data — re-run after rate-limit cooldown.');
+  }
+  console.log('[wipe-old] matches to DELETE: ' + matches.length);
+
+  console.log('[wipe-old] DELETE pass');
+  var deleted = 0;
+  var failed = 0;
+  for (var k = 0; k < matches.length; k++) {
+    var del = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
+    var ok = del.status === 204 || del.status === 200;
+    if (!ok && del.status === 409) {
+      await smSleep(20000);
+      var del2 = await smRequest('DELETE', '/v3/documents/' + matches[k].id, null);
+      ok = del2.status === 204 || del2.status === 200;
+    }
+    if (ok) deleted++; else failed++;
+    if ((k + 1) % 100 === 0 || k === matches.length - 1) {
+      console.log('  DELETE ' + (k + 1) + '/' + matches.length + ' — ok=' + deleted + ' failed=' + failed);
+    }
+    await smSleep(200);
+  }
+  console.log('[wipe-old] DELETE results: ' + deleted + ' ok / ' + failed + ' failed');
+  return { candidates: ids.length, matched: matches.length, deleted: deleted, failed: failed };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -259,6 +450,20 @@ async function main() {
     console.log('[buildCitizenCards] Limited to: ' + citizens.length);
   }
 
+  // Wipe-old (R1 retrofit): DELETE old un-tagged citizen cards before writing
+  // fresh ones with the dual ['world-data', 'wd-citizens'] tag pair. Opt-in
+  // via --wipe-old; defaults OFF so partial reruns / accidental --apply don't
+  // sweep the substrate. Scoped by POPID-content match so player_truesource
+  // and seed business-card stay untouched.
+  var wipeReport = null;
+  if (APPLY && WIPE_OLD) {
+    wipeReport = await wipeOldCitizenCards(citizens);
+    console.log('[wipe-old] sleeping ' + (WIPE_INDEXING_SLEEP_MS / 1000) + 's for async indexing to settle before writes');
+    await smSleep(WIPE_INDEXING_SLEEP_MS);
+  } else if (APPLY && !WIPE_OLD) {
+    console.log('[buildCitizenCards] --wipe-old not set — writes will land alongside any existing un-tagged cards.');
+  }
+
   // Process each citizen
   var written = 0;
   var errors = 0;
@@ -304,13 +509,14 @@ async function main() {
     if (!APPLY) {
       if (ci < 5 || appearances.length > 0) {
         console.log('--- ' + fullName + ' (' + cit.popId + ') ---');
+        console.log('PAYLOAD: containerTags=[' + CONTAINER_TAG + ', ' + DOMAIN_TAG + '] | metadata.title="' + fullName + '" | metadata.popid="' + cit.popId + '"');
         console.log(card.substring(0, 300));
         console.log('  [' + appearances.length + ' appearances]');
         console.log('');
       }
     } else {
       try {
-        await writeMemory(card);
+        await writeMemory(card, cit);
         written++;
         if ((ci + 1) % 25 === 0) {
           console.log('  ... ' + (ci + 1) + '/' + citizens.length +
@@ -334,6 +540,12 @@ async function main() {
   console.log('[FILTER] Raw bay-tribune hits: ' + rawAppearancesTotal +
     ' | Filtered out (cross-contamination): ' + filteredOutTotal +
     ' | Kept: ' + (rawAppearancesTotal - filteredOutTotal));
+  if (wipeReport) {
+    console.log('[WIPE-OLD] candidates: ' + wipeReport.candidates +
+      ' | matched (POPID-scoped): ' + wipeReport.matched +
+      ' | deleted: ' + wipeReport.deleted +
+      ' | failed: ' + wipeReport.failed);
+  }
 
   if (!APPLY && citizens.length > 5) {
     console.log('\nShowed first 5 + citizens with appearances. Use --apply to write all.');

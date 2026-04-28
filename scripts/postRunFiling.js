@@ -100,13 +100,6 @@ function buildChecklist(cycle) {
       dest: null,
       required: true,
     },
-    // Edition brief
-    {
-      name: 'Edition brief',
-      path: 'output/latest_edition_brief.md',
-      dest: null,
-      required: false,
-    },
   ];
 }
 

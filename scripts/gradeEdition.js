@@ -13,7 +13,6 @@
  *   - Edition text file (required)
  *   - output/errata.jsonl (error log)
  *   - output/mara_directive_c{XX}*.txt (Mara's grade)
- *   - output/latest_edition_brief.md (edition summary)
  *
  * Output:
  *   - output/grades/grades_c{XX}.json
@@ -202,14 +201,6 @@ function parseMaraGrade(cycle) {
       const gradeMatch = text.match(/(?:Grade|grade|GRADE)[:\s]+([A-F][+-]?)/);
       if (gradeMatch) return gradeMatch[1];
     }
-  }
-
-  // Check edition brief
-  const briefPath = path.join(ROOT, 'output', 'latest_edition_brief.md');
-  if (fs.existsSync(briefPath)) {
-    const text = fs.readFileSync(briefPath, 'utf-8');
-    const gradeMatch = text.match(/Grade:\s*([A-F][+-]?)/);
-    if (gradeMatch) return gradeMatch[1];
   }
 
   return null;

@@ -75,17 +75,6 @@ if [ -d "$PACKETS_DIR" ]; then
   fi
 fi
 
-# Check edition brief
-BRIEF="$PROJECT_DIR/output/latest_edition_brief.md"
-if [ -f "$BRIEF" ]; then
-  BRIEF_AGE=$(( ($(date +%s) - $(stat -c %Y "$BRIEF")) / 86400 ))
-  if [ "$BRIEF_AGE" -gt "$STALE_DAYS" ]; then
-    add_issue "Edition brief is ${BRIEF_AGE} days old (threshold: ${STALE_DAYS})"
-  else
-    add_report "Edition brief: ${BRIEF_AGE} days old (OK)"
-  fi
-fi
-
 # 3. PM2 process health
 add_report ""
 add_report "--- PM2 Health ---"

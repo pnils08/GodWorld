@@ -270,16 +270,214 @@ function deriveCitizenProfile(seed, age, neighborhood, ledgerFreq) {
 
 ### Phase 4 — Engine-sheet handoff (research-build → engine-sheet)
 
-#### Task 4.1: Per-intake-path task specs
-- **Files:** this plan file (append §Engine-sheet tasks).
-- **Steps:** for each MUST-FIX path from Phase 1 disposition, write a concrete engine-sheet task spec — file, lines to modify, replacement logic per field, rate-limit considerations, verification gate.
-- Likely scope: `mediaRoomIntake.js` line 591 (and any others Phase 1 surfaces) — replace literal `'Citizen'` with derivation call; `processAdvancementIntake.js` — extend Path B to populate EducationLevel + Gender + lifecycle fields when blank (one-stop intake derivation block).
+#### Task 4.2: Library extraction — DONE S184 (spec)
+
+**Decision: shared lib, two implementations.** Phase 1 surfaced 3 MUST FIX paths needing the same derivation; per-path inlining would 3× the maintenance surface. Library lives at:
+
+- **Apps Script:** `utilities/citizenDerivation.gs` (in engine source folder, clasp-pushed)
+- **Node:** `lib/citizenDerivation.js` (sister module, same per-field specs)
+
+**Apps Script library structure (`utilities/citizenDerivation.gs`):**
+
+```javascript
+// ═══════════════════════════════════════════════════════════════
+// citizenDerivation.gs — intake-side derivation library
+// Spec: docs/plans/2026-04-28-intake-side-citizen-derivation.md
+// ═══════════════════════════════════════════════════════════════
+
+// Embedded canonical pool (sync'd from data/economic_parameters.json
+// at clasp-push time via scripts/syncEconomicParameters.js — see Task 4.3)
+var ECONOMIC_PARAMETERS = [
+  { role: 'Longshoreman', category: 'Port & Labor', medianIncome: 138000, ... },
+  ...  // 198 entries
+];
+
+// Inline neighborhood gender variance table (small, low-churn)
+var NEIGHBORHOOD_GENDER_VARIANCE = {
+  'Adams Point': 0.53, 'Lake Merritt': 0.52, 'Rockridge': 0.51, 'Temescal': 0.51,
+  'Fruitvale': 0.50, 'West Oakland': 0.50, 'Jack London': 0.49, 'Coliseum': 0.49,
+  ...  // full 17-neighborhood table
+};
+var BASE_FEMALE_PCT = 0.51;
+
+// Helpers (port from scripts/backfillLifecycleDefaults.js:48-78)
+function hashSeed_(s) { /* djb2 */ }
+function rand01_(seed, salt) { /* hashSeed → [0,1) */ }
+function pickFromCDF_(r, cdf) { /* cumulative draw */ }
+function ageBracket_(age) { /* '18-29' | '30-44' | ... */ }
+
+// Per-field derivation
+function deriveRoleType(seed, neighborhood, ledgerFreq) { /* §Phase 3.1 */ }
+function deriveEducationLevel(seed, neighborhood, age, ledgerFreq) { /* §Phase 3.2 */ }
+function deriveGender(seed, neighborhood) { /* §Phase 3.3 */ }
+function deriveYearsInCareer(seed, age, careerStage) { /* §Phase 3.4 — port */ }
+function deriveDebtLevel(seed, age, income) { /* §Phase 3.4 — port */ }
+function deriveNetWorth(seed, age, income, careerStage) { /* §Phase 3.4 — port */ }
+function deriveMaritalStatus(seed, age) { /* §Phase 3.4 — port */ }
+function deriveNumChildren(seed, age, maritalStatus) { /* §Phase 3.4 — port */ }
+function computeCareerStage_(seed, age, roleType) { /* §Phase 3.5 inline */ }
+
+// Income lookup (helper)
+function lookupIncome_(roleType) {
+  for (var i = 0; i < ECONOMIC_PARAMETERS.length; i++) {
+    if (ECONOMIC_PARAMETERS[i].role === roleType) return ECONOMIC_PARAMETERS[i].medianIncome;
+  }
+  return 60000;  // fallback
+}
+
+// Ledger freq snapshot — read once per intake batch
+function buildLedgerFreqSnapshot(ledgerHeaders, ledgerData) {
+  // Reads RoleType, EducationLevel, Neighborhood, BirthYear columns
+  // Returns { byNeighborhood: {...}, citywide: {...} }
+}
+
+// Orchestrator
+function deriveCitizenProfile(seed, age, neighborhood, ledgerFreq) {
+  var roleType = deriveRoleType(seed, neighborhood, ledgerFreq);
+  var income = lookupIncome_(roleType);
+  var careerStage = computeCareerStage_(seed, age, roleType);
+  var maritalStatus = deriveMaritalStatus(seed, age);
+  return {
+    RoleType: roleType,
+    EducationLevel: deriveEducationLevel(seed, neighborhood, age, ledgerFreq),
+    Gender: deriveGender(seed, neighborhood),
+    YearsInCareer: deriveYearsInCareer(seed, age, careerStage),
+    DebtLevel: deriveDebtLevel(seed, age, income),
+    NetWorth: deriveNetWorth(seed, age, income, careerStage),
+    MaritalStatus: maritalStatus,
+    NumChildren: deriveNumChildren(seed, age, maritalStatus)
+  };
+}
+```
+
+**Node sister module (`lib/citizenDerivation.js`):** same shape, idiomatic Node:
+- `require('../data/economic_parameters.json')` instead of embedded constant
+- `module.exports = { deriveCitizenProfile, deriveRoleType, ... }`
+- `buildLedgerFreqSnapshot` takes data already loaded by `lib/sheets.js`
+
+**Status:** **DONE S184** (spec). Both implementations share the same per-field algorithm; only ECONOMIC_PARAMETERS access differs (embedded constant Apps Script, require() in Node).
+
+#### Task 4.3: Apps Script economic_parameters.json sync
+
+- **Files:** `scripts/syncEconomicParameters.js` (NEW — engine-sheet) + `utilities/citizenDerivation.gs` ECONOMIC_PARAMETERS constant
+- **Steps:**
+  1. Build `scripts/syncEconomicParameters.js` — reads `data/economic_parameters.json`, generates the JS-array literal text for the `ECONOMIC_PARAMETERS` constant, writes/replaces the constant block in `utilities/citizenDerivation.gs`.
+  2. Run the script before each clasp deploy when `data/economic_parameters.json` has changed.
+  3. Add a header comment in citizenDerivation.gs: `// AUTO-GENERATED constant — re-run scripts/syncEconomicParameters.js if data/economic_parameters.json changes`.
+- **Why:** Apps Script can't `require()` JSON; embedding-at-deploy is the standard pattern. 198 entries × ~10 keys each = ~10KB embedded — well under Apps Script size limits.
+- **Verify:** `grep "Longshoreman" utilities/citizenDerivation.gs` returns the embedded role; clasp push succeeds.
 - **Status:** [ ] not started
 
-#### Task 4.2: Apps Script library extraction
-- **Decision question:** does the derivation logic live as a shared Apps Script utility (e.g., `utilities/citizenDerivation.gs`) imported by both `mediaRoomIntake.js` and `processAdvancementIntake.js`, or is it inlined per-path?
-- Shared lib = single source of truth for djb2/CDF/derivation; inlined = simpler diff + fewer dependencies.
-- Default: shared lib if Phase 1 surfaces 2+ paths needing the same derivation.
+#### Task 4.1: Per-intake-path implementation specs
+
+##### Task 4.1.a: `mediaRoomIntake.js:591` — replace 'Citizen' literal
+
+- **Files:** `phase07-evening-media/mediaRoomIntake.js` (modify)
+- **Steps:**
+  1. Strip the hardcoded `'Citizen'` at line 591. Replace with empty string `''` so downstream `processAdvancementIntake.js` Path B fallback fires when the row is later promoted.
+  2. **Why empty, not derivation:** the new-citizen path at line 581 has `Neighborhood` blank (line 597). Derivation needs neighborhood. Defer derivation to `processAdvancementIntake.js` where neighborhood is computed during promotion.
+  3. Update header comment: change `'Citizen'` line note to `'(empty — Path B in processAdvancementIntake fires demographic-voice draw at promotion)'`.
+- **Verify:** `grep "'Citizen'," phase07-evening-media/mediaRoomIntake.js` returns zero hits in the new-citizen Intake row block; smoke test confirms new-citizen Intake rows ship with col J blank.
+- **Status:** [ ] not started
+
+##### Task 4.1.b: `processAdvancementIntake.js:419` — extend Path B to populate 7 lifecycle fields
+
+- **Files:** `phase05-citizens/processAdvancementIntake.js` (modify)
+- **Steps:**
+  1. Add at top of file: `// citizenDerivation.gs functions are global in Apps Script` (no import needed in Apps Script — sibling utilities are auto-loaded).
+  2. Before line 406 (newRow construction), build ledgerFreq snapshot once per intake batch:
+     ```javascript
+     var ledgerFreq = buildLedgerFreqSnapshot(ledgerHeaders, ledgerData);
+     ```
+  3. Inside the new-citizen branch (line 401-419), after computing `newRoleType` and `newPopId`, derive remaining 7 fields:
+     ```javascript
+     var seed = first + '|' + last + '|' + newPopId;
+     var age = 2041 - parseInt(birthYear || 2003, 10);  // age anchor 2041
+     var neighborhood = lookupNeighborhood_(intakeRow);  // from intake row's neighborhood col, fallback to neighborhood-aware draw
+     var profile = deriveCitizenProfile(seed, age, neighborhood, ledgerFreq);
+     // Override RoleType only if rawRole was empty; respect upstream truthy values
+     var newRoleType = rawRole || profile.RoleType;
+     ```
+  4. Map profile fields to ledger columns. Lookup column indices (similar to existing pattern at lines 337-347):
+     ```javascript
+     var lEducationLevel = findColByName_(ledgerHeaders, 'EducationLevel');
+     var lGender = findColByName_(ledgerHeaders, 'Gender');
+     var lYearsInCareer = findColByName_(ledgerHeaders, 'YearsInCareer');
+     var lDebtLevel = findColByName_(ledgerHeaders, 'DebtLevel');
+     var lNetWorth = findColByName_(ledgerHeaders, 'NetWorth');
+     var lMaritalStatus = findColByName_(ledgerHeaders, 'MaritalStatus');
+     var lNumChildren = findColByName_(ledgerHeaders, 'NumChildren');
+     ```
+  5. Inside newRow construction (after line 412), set each of the 7 fields:
+     ```javascript
+     if (lEducationLevel >= 0) newRow[lEducationLevel] = profile.EducationLevel;
+     if (lGender >= 0) newRow[lGender] = profile.Gender;
+     if (lYearsInCareer >= 0) newRow[lYearsInCareer] = profile.YearsInCareer;
+     if (lDebtLevel >= 0) newRow[lDebtLevel] = profile.DebtLevel;
+     if (lNetWorth >= 0) newRow[lNetWorth] = profile.NetWorth;
+     if (lMaritalStatus >= 0) newRow[lMaritalStatus] = profile.MaritalStatus;
+     if (lNumChildren >= 0) newRow[lNumChildren] = profile.NumChildren;
+     ```
+- **Constraint:** all 7 writes inside the new-citizen branch only (line 401 `else` block). The existing-citizen branch (line 374-399) stays unchanged — no overwrites of existing rows.
+- **Verify:** smoke-test single-citizen intake (e.g., `processAdvancementIntake_(ctx)` against a fixture row); confirm new SL row has all 8 target fields populated; existing rows untouched (diff before/after shows zero changes to non-new rows).
+- **Status:** [ ] not started
+
+##### Task 4.1.c: `ingestPublishedEntities.js:399` — full derivation at append time
+
+- **Files:** `scripts/ingestPublishedEntities.js` (modify)
+- **Steps:**
+  1. Add at top: `const citizenDerivation = require('../lib/citizenDerivation');`
+  2. Before the `appendCitizens` function (line 370), build ledgerFreq once per ingest call. Pull existing SL data via the `sheetsClient` already loaded:
+     ```javascript
+     async function buildLedgerFreqForIngest(sheetsClient, sheetId, headers) {
+       const res = await sheetsClient.spreadsheets.values.get({
+         spreadsheetId: sheetId,
+         range: 'Simulation_Ledger!A1:AU',
+       });
+       return citizenDerivation.buildLedgerFreqSnapshot(headers, res.data.values || []);
+     }
+     ```
+  3. Inside `appendCitizens` row construction (line 380-396), call orchestrator per candidate:
+     ```javascript
+     const seed = c.first + '|' + (c.last || '') + '|' + popId;
+     const age = c.birthYear ? (2041 - parseInt(c.birthYear, 10)) : 30;  // default to 30 when birthYear unknown
+     const neighborhood = c.neighborhood || '';  // pre-T1 NAMES INDEX may not have neighborhood
+     const profile = citizenDerivation.deriveCitizenProfile(seed, age, neighborhood, ledgerFreq);
+     ```
+  4. Map profile to row by header name (extends the existing header-driven row builder at line 384):
+     ```javascript
+     const row = headers.map(h => {
+       if (h === 'POPID') return popId;
+       if (h === 'First') return c.first;
+       if (h === 'Middle') return c.middle || '';
+       if (h === 'Last') return c.last;
+       if (h === 'CreatedAt') return now;
+       if (h === 'Last Updated') return now;
+       if (h === 'RoleType') return profile.RoleType;
+       if (h === 'EducationLevel') return profile.EducationLevel;
+       if (h === 'Gender') return profile.Gender;
+       if (h === 'YearsInCareer') return profile.YearsInCareer;
+       if (h === 'DebtLevel') return profile.DebtLevel;
+       if (h === 'NetWorth') return profile.NetWorth;
+       if (h === 'MaritalStatus') return profile.MaritalStatus;
+       if (h === 'NumChildren') return profile.NumChildren;
+       if (NEW_CITIZEN_DEFAULTS[h] !== undefined) return NEW_CITIZEN_DEFAULTS[h];
+       return '';
+     });
+     ```
+  5. Update header comment at lines 16-18: change `engine fills next cycle` to `intake-side derivation populates 8 demographic + lifecycle fields per spec; lifecycle engines refine on triggers`.
+  6. Update `Status: 'pending'` default — keep it (Phase 1 inventory confirmed this is correct sentinel for engine to identify intake-derived rows for any future demographic refinement).
+- **Verify:** dry-run on the C92 fixture (Mayor Santana interview .txt or any T1-format published artifact); confirm `output/intake_published_entities_c<XX>_<slug>.json` shows new candidate citizens have all 8 fields populated; spot-check 3 candidates have realistic, deterministic values.
+- **Status:** [ ] not started
+
+#### Task 4.4: lookupNeighborhood helper
+
+- **Decision question:** when `processAdvancementIntake.js` promotes a Generic_Citizen → Simulation_Ledger, neighborhood comes from the Generic_Citizens row (always populated by `generateGenericCitizens.js`). When it promotes from Advancement_Intake1, neighborhood may be blank (mediaRoomIntake doesn't set it).
+- **Spec:** add helper `lookupNeighborhood_(intakeRow, ledgerHeaders)`:
+  - First check intake row for Neighborhood column (Generic_Citizens path)
+  - If blank, draw a random neighborhood weighted by live SL neighborhood frequency (caps the unknown-neighborhood case to plausible distribution)
+  - Returns string; never returns empty
+- **Why:** every lifecycle field downstream depends on neighborhood for live-frequency draws; can't defer.
 - **Status:** [ ] not started
 
 ### Phase 5 — Validation (research-build → engine-sheet)
@@ -378,4 +576,5 @@ Engine-sheet executes Tasks 4.1–4.2 from research-build's specs after each Pha
 - 2026-04-28 — Initial draft (S184, research-build). Combines two engine-sheet S184 followups (Row 4 lifecycle defaults forward-looking; Row 17 RoleType upstream computation) under shared architectural theme: intake-side derivation > engine-side fallback. Same pattern as Row 5 name-cluster fix (caps at generator-side). Reference impl: `scripts/backfillLifecycleDefaults.js` (Node) ports to Apps Script. Path B fallback in `processAdvancementIntake.js` preserved as defense-in-depth.
 - 2026-04-28 — Phase 1 inventory complete (Tasks 1.1 + 1.2, S184, research-build). Output: `output/intake_path_inventory.md`. 9 paths audited. **3 MUST FIX live cycle paths:** `mediaRoomIntake.js:591` (hardcoded 'Citizen' literal bypasses Path B), `processAdvancementIntake.js:405-418` (extend Path B pattern to 7 more fields), `ingestPublishedEntities.js:399-415` (largest gap — all 8 target fields blank, S180 standing intake). **Reference pattern found:** `integrateFaithLeaders.js:deriveRoleType()`. **Architectural recommendation:** shared derivation library, two implementations (Apps Script `utilities/citizenDerivation.gs` for engine-cycle paths + Node parallel module for `ingestPublishedEntities.js`), both hitting Phase 3 specs as single source of truth.
 - 2026-04-28 — Phase 2 source map locked (Tasks 2.1 + 2.2, S184, research-build, Mike sign-off). `data/economic_parameters.json` confirmed as 198-entry role pool with economic metadata; no neighborhood metadata (eliminated need for separate mapping file — using live-SL frequency by neighborhood instead). Per-field decisions: RoleType + EducationLevel via live SL frequency by neighborhood (filter RoleType against economic_parameters.json 198-pool to ensure canonical economic profile available downstream); Gender canonical 51/49 female-lean with mild neighborhood variance — go-forward only, existing 760 SL rows untouched (live skew is 67M/33F; canonical corrects over time, sibling ROLLOUT item handles ~200-woman ingest separately); 5 lifecycle fields direct port from `scripts/backfillLifecycleDefaults.js` (proven calibration, already Apps Script-safe); CareerStage computed inline within derivation library (no new column). Constraint locked: NO existing-row writes anywhere in this plan — intake-time derivation only.
-- 2026-04-28 — Phase 3 derivation specs locked (Tasks 3.1–3.6, S184, research-build). 8 per-field functions + orchestrator (`deriveCitizenProfile`) + 4 internal helpers (hashSeed/rand01/pickFromCDF/ageBracket) ported verbatim from `backfillLifecycleDefaults.js`. Two implementations: Apps Script `utilities/citizenDerivation.gs` and Node `lib/citizenDerivation.js`, both hitting same per-field specs. `ledgerFreq` snapshot built once per intake batch for live-SL frequency draws; cached in module/script-property scope. Phase 4 engine-sheet handoff (per-intake-path task specs + library extraction) is next. Plan is now spec-complete; engine-sheet picks up implementation from here.
+- 2026-04-28 — Phase 3 derivation specs locked (Tasks 3.1–3.6, S184, research-build). 8 per-field functions + orchestrator (`deriveCitizenProfile`) + 4 internal helpers (hashSeed/rand01/pickFromCDF/ageBracket) ported verbatim from `backfillLifecycleDefaults.js`. Two implementations: Apps Script `utilities/citizenDerivation.gs` and Node `lib/citizenDerivation.js`, both hitting same per-field specs. `ledgerFreq` snapshot built once per intake batch for live-SL frequency draws; cached in module/script-property scope.
+- 2026-04-28 — Phase 4 engine-sheet handoff specs locked (Tasks 4.1–4.4, S184, research-build). **Library extraction (4.2):** shared lib at `utilities/citizenDerivation.gs` (Apps Script, embedded ECONOMIC_PARAMETERS constant) + `lib/citizenDerivation.js` (Node, `require()`s data/economic_parameters.json). **Sync helper (4.3):** new `scripts/syncEconomicParameters.js` regenerates the Apps Script embedded constant from the canonical JSON before clasp pushes. **Per-path implementation specs (4.1):** (a) `mediaRoomIntake.js:591` — replace 'Citizen' literal with empty string so Path B fires at promotion; (b) `processAdvancementIntake.js:419` — extend new-citizen branch with `deriveCitizenProfile()` call + 7 column writes (existing-citizen branch untouched); (c) `ingestPublishedEntities.js:399` — `require('../lib/citizenDerivation')` + per-candidate orchestrator call + extend header-driven row builder to map all 8 profile fields. **Constraint enforced everywhere:** all 7 lifecycle writes inside new-citizen branches only — `processAdvancementIntake.js` existing-citizen branch (line 374-399) stays untouched; `ingestPublishedEntities.js` `appendCitizens()` only handles candidates not already in SL by construction; `mediaRoomIntake.js:591` literal change affects only newly-routed Intake rows. ZERO existing-row writes anywhere in this plan, per Mike's S184 constraint. **Helper (4.4):** `lookupNeighborhood_()` for the Generic_Citizens vs Advancement_Intake1 promotion-source split — fallback to live SL neighborhood frequency if intake row is blank. Plan is now spec-complete through Phase 4; Phase 5 validation is the final gate. Engine-sheet has executable specs to pick up implementation.

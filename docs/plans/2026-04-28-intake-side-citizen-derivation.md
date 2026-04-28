@@ -93,25 +93,180 @@ pointers:
 
 ### Phase 3 — Per-field derivation specs (research-build)
 
-Each of 8 fields gets a spec block with: input parameters (seed string, age, neighborhood, dependent fields), output type, derivation logic in Apps Script-safe pseudocode (no Math.random, no crypto, no Buffer; djb2 + CDF only), example outputs for 3 sample citizens.
+**Source map locked S184 (Phase 2.2):** RoleType + EducationLevel via live-SL frequency by neighborhood; Gender canonical 51/49 female-lean (go-forward only, existing canon untouched); 5 lifecycle fields ported from `scripts/backfillLifecycleDefaults.js`; CareerStage computed inline (no new column).
 
-#### Task 3.1: RoleType derivation spec
-- Connects to `processAdvancementIntake.js` Path B (already shipped). Plan adds the upstream-side spec (neighborhood-aware draw).
-- Inputs: `(seed, neighborhood, age?)`. Output: role string from canonical source.
-- **Status:** [ ] not started
+**Library shape (Task 4.2 decision):** shared derivation library, two implementations hitting the same per-field specs:
+- **Apps Script:** `utilities/citizenDerivation.gs` — consumed by `phase05-citizens/processAdvancementIntake.js` and `phase07-evening-media/mediaRoomIntake.js`
+- **Node:** `lib/citizenDerivation.js` — consumed by `scripts/ingestPublishedEntities.js`
 
-#### Task 3.2: EducationLevel derivation spec
-- New territory. Likely live-ledger frequency draw by neighborhood + age-bracket.
-- **Status:** [ ] not started
+Both implementations expose the same 8 per-field functions plus orchestrator:
 
-#### Task 3.3: Gender derivation spec
-- New territory. Likely neighborhood frequency draw, or canonical 50/50 with variance.
-- **Status:** [ ] not started
+```
+hashSeed(s)                              → 32-bit unsigned int (djb2)
+rand01(popId, salt)                      → [0,1) deterministic draw
+pickFromCDF(r, cdf)                      → value from [(value, cumProb), ...]
+ageBracket(age)                          → '18-29' | '30-44' | '45-59' | '60-74' | '75+'
+deriveRoleType(seed, neighborhood, ledgerFreq) → string
+deriveEducationLevel(seed, neighborhood, age, ledgerFreq) → string
+deriveGender(seed, neighborhood, neighborhoodVariance) → 'female' | 'male'
+deriveYearsInCareer(popId, age, careerStage) → number
+deriveDebtLevel(popId, age, income)      → number 0-10
+deriveNetWorth(popId, age, income, careerStage) → number (USD)
+deriveMaritalStatus(popId, age)          → 'single' | 'married' | 'partnered' | 'divorced' | 'widowed'
+deriveNumChildren(popId, age, maritalStatus) → number 0-5
+deriveCitizenProfile(seed, age, neighborhood, ledgerFreq) → { all 8 fields }
+```
 
-#### Task 3.4: Lifecycle defaults derivation spec (5 fields together)
-- Port `scripts/backfillLifecycleDefaults.js` deriveYearsInCareer / deriveDebtLevel / deriveNetWorth / deriveMaritalStatus / deriveNumChildren to Apps Script-safe pseudocode.
-- The reference impl is Node — Apps Script port needs `hashSeed` (already djb2, portable), `rand01` (also portable), `pickFromCDF` (portable), `ageBracket` (portable). All five derive functions translate cleanly.
-- **Status:** [ ] not started
+Internal helpers `hashSeed`, `rand01`, `pickFromCDF`, `ageBracket` ported verbatim from `scripts/backfillLifecycleDefaults.js:48-78` — already Apps Script-safe (no Math.random / crypto / Buffer; pure djb2 + integer math).
+
+**`ledgerFreq` parameter:** a precomputed snapshot of live SL frequency distributions, structured as:
+```
+{
+  byNeighborhood: {
+    'Temescal': { roleTypes: { 'Stylist': 12, 'Bookseller': 4, ... }, educationByAge: { '18-29': { 'hs-diploma': 8, 'bachelors': 5 }, ... } },
+    'Fruitvale': { ... },
+    ...
+  },
+  citywide: { roleTypes: {...}, educationByAge: {...} }  // fallback for thin neighborhoods
+}
+```
+Built once per intake batch by reading Simulation_Ledger headers + RoleType + EducationLevel + Neighborhood + BirthYear columns. Cached for the duration of the intake call. Apps Script side caches in script properties; Node side caches in module scope.
+
+#### Task 3.1: RoleType derivation spec — DONE S184
+
+**Inputs:** `(seed, neighborhood, ledgerFreq)`. **Output:** role string.
+
+**Logic:**
+1. If `ledgerFreq.byNeighborhood[neighborhood]?.roleTypes` has ≥10 entries → frequency-weighted draw via `rand01(seed, 'role') × totalCount` cumulative scan.
+2. Else → fallback to citywide RoleType frequency, same draw mechanism.
+3. Filter result against `economic_parameters.json` 198-pool — if drawn role isn't in the canonical pool, retry with next-highest frequency match. Caps retries at 5; if exhausted, fall through to `pickDemographicVoiceRole_(seed)` (the Path B 65-role pool).
+
+**Why filter against economic_parameters.json:** ensures every NEW citizen has a canonical economic profile available downstream (Income, taxRate, housingBurden) for the lifecycle derivations. Existing rows with non-canonical roles are not touched.
+
+**Example outputs (validation fixture):**
+| Citizen | Neighborhood | Likely top freq draws |
+|---|---|---|
+| Maria Vega (POP-99001) | Fruitvale | Hospitality / Healthcare / Cultural roles weighted from current Fruitvale SL distribution |
+| Tobias Wing (POP-99002) | Rockridge | Tech / Academic / Creative roles |
+| Kevin Park (POP-99003) | Jack London | Port & Labor / Maritime / Service roles |
+
+**Status:** [x] spec locked S184.
+
+#### Task 3.2: EducationLevel derivation spec — DONE S184
+
+**Inputs:** `(seed, neighborhood, age, ledgerFreq)`. **Output:** one of `hs-diploma | bachelors | masters | associates | trade-cert | doctorate`.
+
+**Logic:**
+1. Compute `bracket = ageBracket(age)`.
+2. If `ledgerFreq.byNeighborhood[neighborhood]?.educationByAge[bracket]` has ≥5 entries → frequency-weighted draw via `rand01(seed, 'edu')`.
+3. Else → fallback to `ledgerFreq.citywide.educationByAge[bracket]`.
+4. Skip the literal `"-"` sentinel found in 1 row during Phase 1 inventory (Phase 4 will also flag it as a one-off cleanup, but derivation must not propagate it).
+
+**Why age-bracket conditioning:** education attainment is age-correlated (younger cohorts more bachelor-heavy in Oakland 2041, older skew hs-diploma). Live SL distribution captures this as it stands.
+
+**Status:** [x] spec locked S184.
+
+#### Task 3.3: Gender derivation spec — DONE S184
+
+**Inputs:** `(seed, neighborhood)`. **Output:** `female | male`.
+
+**Logic — go-forward correction (existing 760 rows untouched):**
+
+```
+const BASE_FEMALE_PCT = 0.51;  // canonical lean (corrects 67/33 live skew over time)
+const NEIGHBORHOOD_VARIANCE = {
+  // Slight per-neighborhood variance, ±0.02 from base. Calibrated against
+  // real Oakland census + prosperity-era assumptions. All values are p(female).
+  'Adams Point': 0.53,         // older / more single-female households
+  'Lake Merritt': 0.52,
+  'Rockridge': 0.51,
+  'Temescal': 0.51,
+  'Fruitvale': 0.50,
+  'West Oakland': 0.50,
+  'Jack London': 0.49,         // port-labor lean male
+  'Coliseum': 0.49,
+  ...                          // full table in Apps Script + Node libs
+};
+const p = NEIGHBORHOOD_VARIANCE[neighborhood] || BASE_FEMALE_PCT;
+return rand01(seed, 'gender') < p ? 'female' : 'male';
+```
+
+**Why canonical not live-frequency:** live SL is 67% male / 33% female (462M / 220F across 760 rows) — a real demographic gap that originated in pre-S184 generation logic. Live-frequency draws would perpetuate the skew; canonical with neighborhood variance corrects toward real-Oakland baseline (~50/50 with mild lean) over time. Existing canon untouched per Mike S184.
+
+**Sibling rollout item (separate from this plan):** ~200-female-citizen ingest via the intake path to accelerate ratio correction. Uses this same `deriveGender` function with explicit `gender='female'` override flag, so derivation logic is preserved — just gender draw is bypassed.
+
+**Status:** [x] spec locked S184.
+
+#### Task 3.4: Lifecycle defaults derivation spec (5 fields) — DONE S184
+
+Port `scripts/backfillLifecycleDefaults.js` lines 80-197 verbatim. All five functions are already Apps Script-safe (djb2 + CDF + integer math, no Math.random / crypto / Buffer).
+
+**deriveYearsInCareer(popId, age, careerStage)** — port from line 80. Age-bracket bell curves; retirees (`careerStage === 'retired'` OR age ≥ 65) get peak career length 30-45 years.
+
+**deriveDebtLevel(popId, age, income)** — port from line 103. Returns 0-10 integer. Income-inverse + age curve (younger + lower income → higher debt; older + higher income → lower debt). bell-centered around 2-3.
+
+**deriveNetWorth(popId, age, income, careerStage)** — port from line 125. Age-conditioned baseline + income multiplier + retiree bonus. Wobble factor 0.4×–2.5× for spread.
+
+**deriveMaritalStatus(popId, age)** — port from line 159. Age-bracket CDF:
+- 18-29: single 60%, partnered 18%, married 20%, divorced 2%
+- 30-44: single 24%, partnered 11%, married 56%, divorced 9%
+- 45-59: single 12%, partnered 5%, married 56%, divorced 23%, widowed 4%
+- 60-74: single 9%, partnered 3%, married 49%, divorced 25%, widowed 14%
+- 75+: single 6%, partnered 2%, married 36%, divorced 20%, widowed 36%
+
+**deriveNumChildren(popId, age, maritalStatus)** — port from line 175. Age + marriage-conditioned fertility CDF. Returns 0-5 integer with peak at 0 for younger / single, peak at 1-2 for partnered/married middle-bracket.
+
+**Status:** [x] spec locked S184 — direct port from reference impl, no new logic.
+
+#### Task 3.5: CareerStage derivation (computed inline) — DONE S184
+
+**Inputs:** `(seed, age, roleType)`. **Output:** `early | mid | senior | retired`.
+
+**Computed inline within the derivation library** — not a column write. Used by `deriveYearsInCareer` and `deriveNetWorth` as input parameter. No Simulation_Ledger column added (per Mike S184 constraint).
+
+**Logic:**
+```
+function computeCareerStage(seed, age, roleType) {
+  if (age >= 65) return 'retired';
+  if (age < 25) return 'early';
+  if (age < 40) return 'mid';
+  if (age < 55) return rand01(seed, 'career') < 0.3 ? 'senior' : 'mid';
+  return 'senior';
+}
+```
+
+Lightweight — age-bracket bell with light role-aware variance. The 30% rand01 split at 40-54 captures career-progression variance (some hit senior at 40, some still mid at 54).
+
+**Note:** existing `phase05-citizens/runCareerEngine.js` computes CareerStage from career arc on triggers. This is the intake-time pre-computation so lifecycle functions have a value to work with at row-creation. runCareerEngine.js can override later via its own logic — no conflict because it only updates on triggers.
+
+**Status:** [x] spec locked S184.
+
+#### Task 3.6: `deriveCitizenProfile` orchestrator — DONE S184
+
+**Inputs:** `(seed, age, neighborhood, ledgerFreq)`. **Output:** object with all 8 fields.
+
+**Logic (dependency-ordered):**
+```
+function deriveCitizenProfile(seed, age, neighborhood, ledgerFreq) {
+  const roleType = deriveRoleType(seed, neighborhood, ledgerFreq);
+  const income = lookupIncome(roleType);  // from economic_parameters.json medianIncome
+  const careerStage = computeCareerStage(seed, age, roleType);
+  return {
+    RoleType: roleType,
+    EducationLevel: deriveEducationLevel(seed, neighborhood, age, ledgerFreq),
+    Gender: deriveGender(seed, neighborhood),
+    YearsInCareer: deriveYearsInCareer(seed, age, careerStage),
+    DebtLevel: deriveDebtLevel(seed, age, income),
+    NetWorth: deriveNetWorth(seed, age, income, careerStage),
+    MaritalStatus: deriveMaritalStatus(seed, age),
+    NumChildren: deriveNumChildren(seed, age, deriveMaritalStatus(seed, age))
+  };
+}
+```
+
+**`lookupIncome(roleType)` helper:** reads `data/economic_parameters.json`, finds entry where `entry.role === roleType`, returns `entry.medianIncome`. Fallback to 60000 if role not found (keeps lifecycle derivations from breaking on edge cases).
+
+**Status:** [x] spec locked S184.
 
 ### Phase 4 — Engine-sheet handoff (research-build → engine-sheet)
 
@@ -222,3 +377,5 @@ Engine-sheet executes Tasks 4.1–4.2 from research-build's specs after each Pha
 
 - 2026-04-28 — Initial draft (S184, research-build). Combines two engine-sheet S184 followups (Row 4 lifecycle defaults forward-looking; Row 17 RoleType upstream computation) under shared architectural theme: intake-side derivation > engine-side fallback. Same pattern as Row 5 name-cluster fix (caps at generator-side). Reference impl: `scripts/backfillLifecycleDefaults.js` (Node) ports to Apps Script. Path B fallback in `processAdvancementIntake.js` preserved as defense-in-depth.
 - 2026-04-28 — Phase 1 inventory complete (Tasks 1.1 + 1.2, S184, research-build). Output: `output/intake_path_inventory.md`. 9 paths audited. **3 MUST FIX live cycle paths:** `mediaRoomIntake.js:591` (hardcoded 'Citizen' literal bypasses Path B), `processAdvancementIntake.js:405-418` (extend Path B pattern to 7 more fields), `ingestPublishedEntities.js:399-415` (largest gap — all 8 target fields blank, S180 standing intake). **Reference pattern found:** `integrateFaithLeaders.js:deriveRoleType()`. **Architectural recommendation:** shared derivation library, two implementations (Apps Script `utilities/citizenDerivation.gs` for engine-cycle paths + Node parallel module for `ingestPublishedEntities.js`), both hitting Phase 3 specs as single source of truth.
+- 2026-04-28 — Phase 2 source map locked (Tasks 2.1 + 2.2, S184, research-build, Mike sign-off). `data/economic_parameters.json` confirmed as 198-entry role pool with economic metadata; no neighborhood metadata (eliminated need for separate mapping file — using live-SL frequency by neighborhood instead). Per-field decisions: RoleType + EducationLevel via live SL frequency by neighborhood (filter RoleType against economic_parameters.json 198-pool to ensure canonical economic profile available downstream); Gender canonical 51/49 female-lean with mild neighborhood variance — go-forward only, existing 760 SL rows untouched (live skew is 67M/33F; canonical corrects over time, sibling ROLLOUT item handles ~200-woman ingest separately); 5 lifecycle fields direct port from `scripts/backfillLifecycleDefaults.js` (proven calibration, already Apps Script-safe); CareerStage computed inline within derivation library (no new column). Constraint locked: NO existing-row writes anywhere in this plan — intake-time derivation only.
+- 2026-04-28 — Phase 3 derivation specs locked (Tasks 3.1–3.6, S184, research-build). 8 per-field functions + orchestrator (`deriveCitizenProfile`) + 4 internal helpers (hashSeed/rand01/pickFromCDF/ageBracket) ported verbatim from `backfillLifecycleDefaults.js`. Two implementations: Apps Script `utilities/citizenDerivation.gs` and Node `lib/citizenDerivation.js`, both hitting same per-field specs. `ledgerFreq` snapshot built once per intake batch for live-SL frequency draws; cached in module/script-property scope. Phase 4 engine-sheet handoff (per-intake-path task specs + library extraction) is next. Plan is now spec-complete; engine-sheet picks up implementation from here.

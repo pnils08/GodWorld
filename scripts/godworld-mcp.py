@@ -43,11 +43,25 @@ PROJECT_ROOT = Path(__file__).parent.parent
 # HELPERS
 # ═══════════════════════════════════════════════════════════════════════════
 
-def supermemory_search(query: str, container: str, limit: int = 5) -> str:
-    """Search a Supermemory container."""
+def supermemory_search(query: str, container: str, limit: int = 5,
+                       mode: str = None, threshold: float = None) -> str:
+    """Search a Supermemory container.
+
+    mode: None (CLI default 'memories'), 'hybrid', or 'documents'. Use 'hybrid'
+        for the wd-* domain tags — short structured cards are missed by the
+        default memories-mode threshold of 0.6.
+    threshold: None (CLI default 0.6) or a 0-1 float. Lower for richer recall
+        on short cards.
+    """
     try:
+        cmd = ['npx', 'supermemory', 'search', query, '--tag', container,
+               '--limit', str(limit)]
+        if mode:
+            cmd.extend(['--mode', mode])
+        if threshold is not None:
+            cmd.extend(['--threshold', str(threshold)])
         result = subprocess.run(
-            ['npx', 'supermemory', 'search', query, '--tag', container],
+            cmd,
             capture_output=True, text=True, timeout=15,
             cwd=str(PROJECT_ROOT)
         )
@@ -190,6 +204,59 @@ def get_domain_ratings(cycle: int) -> str:
     # Also search for cycle-specific data
     canon = supermemory_search(f"Edition {cycle} coverage rating domain", 'bay-tribune', 3)
     return f"=== COVERAGE RATINGS C{cycle} ===\n{canon}"
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+# DOMAIN-FILTERED LOOKUPS (S183 — wd-* tag scheme, plan tasks M1-M4)
+# Each tool queries a single domain tag instead of the broad world-data tag,
+# returning only that domain's card without citizen/faith/cultural noise.
+# Existing tools (lookup_citizen, get_neighborhood, etc.) continue to query
+# the broad world-data tag and keep working — every domain card still
+# carries it.
+# ═══════════════════════════════════════════════════════════════════════════
+
+@mcp.tool()
+def lookup_business(name: str) -> str:
+    """Look up a business by name. Returns the wd-business card: BIZ-ID, sector,
+    neighborhood, employees, financials, key personnel, and bay-tribune appearances.
+    Use for: business-focused articles, employer profiles, sector analysis.
+    Narrower than search_world — returns only business cards (52 in world-data)."""
+    return supermemory_search(name, 'wd-business', 3, mode='hybrid', threshold=0.3)
+
+
+@mcp.tool()
+def lookup_faith_org(name: str) -> str:
+    """Look up a faith organization by name. Returns the wd-faith card: tradition,
+    neighborhood, leader, congregation size, recent Faith_Ledger events, and
+    bay-tribune appearances.
+    Use for: faith coverage, community-program reporting, religious-leader profiles.
+    Narrower than search_world — returns only faith cards (16 in world-data)."""
+    return supermemory_search(name, 'wd-faith', 3, mode='hybrid', threshold=0.3)
+
+
+@mcp.tool()
+def lookup_cultural(name: str) -> str:
+    """Look up a cultural figure by name (athletes, musicians, public personalities).
+    Returns the wd-cultural card: CUL-ID, domain (Sports/Arts/etc.), fame category,
+    fame score, trend trajectory, and bay-tribune appearances.
+    Use for: fame/celebrity coverage, cultural-sector reporting, sports figures
+    outside roster context.
+    Note: a cultural figure may also have a wd-citizens card (e.g., Beverly Hayes
+    is both citizen + cultural figure). Use lookup_citizen for the citizen profile,
+    lookup_cultural for the fame/domain profile.
+    Narrower than search_world — returns only cultural cards (39 in world-data)."""
+    return supermemory_search(name, 'wd-cultural', 3, mode='hybrid', threshold=0.3)
+
+
+@mcp.tool()
+def get_neighborhood_state(name: str) -> str:
+    """Get a neighborhood's state card from wd-neighborhood: district, gentrification
+    phase, population, median income/rent, sentiment, crime index, displacement
+    pressure, top businesses, top citizens, and bay-tribune appearances.
+    Use when you need the structured neighborhood-state record specifically.
+    Narrower than the existing get_neighborhood tool — returns only the
+    neighborhood card (17 in world-data) without mixing in unrelated mentions."""
+    return supermemory_search(name, 'wd-neighborhood', 3, mode='hybrid', threshold=0.3)
 
 
 # ═══════════════════════════════════════════════════════════════════════════

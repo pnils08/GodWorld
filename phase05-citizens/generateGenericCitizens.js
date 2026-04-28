@@ -1,9 +1,16 @@
 /**
  * ============================================================================
- * generateGenericCitizens_ v2.6
+ * generateGenericCitizens_ v2.7
  * ============================================================================
  *
  * World-aware background citizen generation with GodWorld Calendar integration.
+ *
+ * v2.7 Changes from v2.6 (S184 — ENGINE_REPAIR Row 5):
+ * - Pool expansion: 62 → 186 first names, 53 → 144 last names (26,784 combos)
+ * - Per-name caps in getUniqueName: max 3 per first name, max 4 per last name
+ *   (counts include existing GC population; pre-v2.6 clusters grandfathered)
+ * - Distribution diverse for 2041 Oakland (Latino, Black, Asian, South Asian,
+ *   Anglo, African, Middle Eastern); no Tier 3 real-public-figure names
  *
  * v2.6 Changes from v2.5:
  * - Deterministic RNG support via ctx.rng or seededRng_ pattern
@@ -215,30 +222,73 @@ function generateGenericCitizens_(ctx) {
   if (baseCount < 0) baseCount = 0;
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // NAME POOLS (v2.6: Expanded for variety - 62 first, 53 last = 3,286 combos)
+  // NAME POOLS (v2.7: 186 first × 144 last = 26,784 combos)
   // ═══════════════════════════════════════════════════════════════════════════
   var firstNames = [
-    // Original 37
+    // v2.6 base (62) — preserved
     "Carlos", "Mina", "Andre", "Jordan", "Brianna", "Sofia", "Tariq", "Elena", "Marcus",
     "Kaila", "Tobias", "Lorenzo", "Ariana", "Xavier", "Lila", "Darius", "Ramon", "Ivy",
     "Maya", "Jamal", "Priya", "Diego", "Aaliyah", "Oscar", "Jasmine", "Terrell", "Camila",
     "Wei", "Mei", "Jun", "Yuki", "Kenji", "Anh", "Linh", "Tran", "Esperanza", "Guadalupe",
-    // v2.6 additions (25 more - diverse Oakland-appropriate names)
     "Destiny", "Isaiah", "Natasha", "DeShawn", "Monique", "Tyrell", "Alicia", "Malik",
     "Vanessa", "Cedric", "Leticia", "Dwayne", "Gabriela", "Kwame", "Nina", "Rashid",
-    "Bianca", "Trevon", "Imani", "Hector", "Sakura", "Javier", "Miriam", "Kofi", "Lucia"
+    "Bianca", "Trevon", "Imani", "Hector", "Sakura", "Javier", "Miriam", "Kofi", "Lucia",
+    // v2.7 additions — Latino feminine
+    "Adriana", "Catalina", "Daniela", "Elisa", "Fernanda", "Graciela", "Itzel", "Liliana",
+    "Manuela", "Noelia", "Paloma", "Rosalinda", "Teresa", "Valentina", "Ximena", "Yolanda",
+    // v2.7 additions — Latino masculine
+    "Adrian", "Alejandro", "Cesar", "Dante", "Eduardo", "Emilio", "Felipe", "Gustavo",
+    "Ignacio", "Jorge", "Mateo", "Nestor", "Rafael", "Salvador", "Tomas", "Vicente",
+    // v2.7 additions — Black feminine
+    "Asha", "Brielle", "Deja", "Ebony", "Janelle", "Latoya", "Nia", "Octavia",
+    "Rashida", "Tamika", "Zora",
+    // v2.7 additions — Black masculine
+    "Antoine", "Bryce", "Carlton", "Devonte", "Ezra", "Jalen", "Kendrick", "Marquise",
+    "Omari", "Rasheed", "Theo", "Tyrese",
+    // v2.7 additions — East/Southeast Asian
+    "Aiko", "Akira", "Daichi", "Eiji", "Hana", "Hiroshi", "Hyejin", "Kazuki",
+    "Long", "Mai", "Minh", "Phuong", "Reiko", "Ren", "Satoshi", "Sora", "Thi", "Wen",
+    // v2.7 additions — South Asian
+    "Aarav", "Aditya", "Anika", "Arjun", "Deepa", "Esha", "Ishaan", "Kavya",
+    "Mira", "Neel", "Pooja", "Ravi", "Roshan", "Shreya", "Tara", "Vikram",
+    // v2.7 additions — Middle Eastern / North African
+    "Amira", "Farid", "Layla", "Nasir", "Omar", "Rania", "Soraya", "Yusuf", "Zara",
+    // v2.7 additions — African (West/East)
+    "Adaeze", "Chidi", "Folake", "Mansa", "Nala", "Themba",
+    // v2.7 additions — Anglo / mixed
+    "Audrey", "Beatrix", "Clara", "Dahlia", "Eleanor", "Felix", "Iris", "Julian",
+    "Kira", "Lena", "Margot", "Nora", "Owen", "Penelope", "Quinn", "Reed", "Sage",
+    "Una", "Violet", "Wren"
   ];
 
   var lastNames = [
-    // Original 33
+    // v2.6 base (53) — preserved
     "Lopez", "Carter", "Nguyen", "Patel", "Jackson", "Harris", "Wong", "Thompson",
     "Brown", "Lee", "Lewis", "Jordan", "Reyes", "Scott", "Ward", "Foster", "Cook",
     "Martinez", "Robinson", "Kim", "Davis", "Garcia", "Chen", "Williams", "Santos",
     "Tran", "Chung", "Park", "Liu", "Hernandez", "Ramirez", "Cruz", "Mendoza",
-    // v2.6 additions (20 more - diverse Oakland-appropriate names)
     "Washington", "Morales", "Okonkwo", "Yamamoto", "Rivera", "Freeman", "Gutierrez",
     "Singh", "Jefferson", "Flores", "Muhammad", "Torres", "Coleman", "Vasquez", "Adams",
-    "Espinoza", "Nakamura", "Reed", "Delgado", "Franklin"
+    "Espinoza", "Nakamura", "Reed", "Delgado", "Franklin",
+    // v2.7 additions — Latino
+    "Aguilar", "Alvarez", "Cabrera", "Castillo", "Ortiz", "Pena", "Rojas", "Salazar",
+    "Sandoval", "Sanchez", "Soto", "Vega", "Velazquez", "Zamora",
+    // v2.7 additions — Black
+    "Booker", "Crenshaw", "Dawson", "Gaines", "Hayes", "Holloway", "Pinckney", "Sterling",
+    "Whitfield",
+    // v2.7 additions — East/Southeast Asian
+    "Cao", "Choi", "Doan", "Fukuda", "Han", "Hashimoto", "Hong", "Hwang", "Inoue",
+    "Kang", "Lai", "Le", "Mori", "Murakami", "Ng", "Oh", "Pham", "Sasaki",
+    "Shimizu", "Suzuki", "Takahashi", "Tanaka", "Truong", "Wu", "Xu", "Yamada",
+    "Yang", "Zhang", "Zhou",
+    // v2.7 additions — South Asian
+    "Banerjee", "Desai", "Ghosh", "Gupta", "Joshi", "Kapoor", "Kumar", "Mehta",
+    "Mukherjee", "Nair", "Pillai", "Rao", "Reddy", "Sharma", "Shah", "Verma",
+    // v2.7 additions — Anglo
+    "Carmichael", "Crawford", "Donovan", "Faulkner", "Holcomb", "Kessler", "Lockhart",
+    "McAllister", "Norwood", "Oakley", "Quinlan", "Stafford", "Underwood", "Vance",
+    // v2.7 additions — African (West/East)
+    "Abebe", "Adeyemi", "Bello", "Diop", "Fofana", "Gebre", "Mensah", "Owusu", "Tadesse"
   ];
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -301,13 +351,18 @@ function generateGenericCitizens_(ctx) {
     return String(s || '').trim().toLowerCase();
   }
 
-  // v2.6: Build hash set for O(1) duplicate checking
+  // v2.6: Build hash set for O(1) duplicate checking.
+  // v2.7 (S184 — Row 5): Also tracks per-first and per-last counts for cluster caps.
   var existingNames = {};
+  var firstCounts = {};
+  var lastCounts = {};
   for (var r = 1; r < genericValues.length; r++) {
     var ef = norm(genericValues[r][iFirst]);
     var el = norm(genericValues[r][iLast]);
     if (ef && el) {
       existingNames[ef + '|' + el] = true;
+      firstCounts[ef] = (firstCounts[ef] || 0) + 1;
+      lastCounts[el] = (lastCounts[el] || 0) + 1;
     }
   }
 
@@ -316,15 +371,27 @@ function generateGenericCitizens_(ctx) {
     return existingNames[norm(first) + '|' + norm(last)] === true;
   }
 
-  // v2.6: Get unique name with hash set tracking
+  // v2.7 — cluster caps. Pre-v2.6 generations created clusters (Ronald=11, Johnson=12);
+  // those are grandfathered in via the count snapshot. Cap blocks NEW additions to any
+  // first name already at FIRST_NAME_CAP+ or last name at LAST_NAME_CAP+.
+  var FIRST_NAME_CAP = 3;
+  var LAST_NAME_CAP = 4;
+
+  // v2.7: Get unique name with hash set + per-name cap tracking
   function getUniqueName(maxAttempts) {
     var attempts = 0;
     while (attempts < maxAttempts) {
       var f = randItem(firstNames);
       var l = randItem(lastNames);
-      var key = norm(f) + '|' + norm(l);
-      if (!existingNames[key]) {
-        existingNames[key] = true; // Mark as used
+      var fKey = norm(f);
+      var lKey = norm(l);
+      var key = fKey + '|' + lKey;
+      if (!existingNames[key] &&
+          (firstCounts[fKey] || 0) < FIRST_NAME_CAP &&
+          (lastCounts[lKey] || 0) < LAST_NAME_CAP) {
+        existingNames[key] = true;
+        firstCounts[fKey] = (firstCounts[fKey] || 0) + 1;
+        lastCounts[lKey] = (lastCounts[lKey] || 0) + 1;
         return { first: f, last: l };
       }
       attempts++;

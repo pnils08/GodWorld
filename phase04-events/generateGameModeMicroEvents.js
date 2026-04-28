@@ -553,23 +553,13 @@ function generateGameModeMicroEvents_(ctx) {
 
   // Write-intents: defer writes to Phase 10 persistence
   if (eventCount > 0) {
-    if (typeof queueRangeIntent_ === 'function') {
-      queueRangeIntent_(ctx, 'Simulation_Ledger', 2, 1, rows,
-        'game mode micro events — update LifeHistory for ' + eventCount + ' citizens',
-        'events', 100);
-    } else {
-      // Fallback: direct write if write-intents not loaded
-      ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
-    }
+    queueRangeIntent_(ctx, 'Simulation_Ledger', 2, 1, rows,
+      'game mode micro events — update LifeHistory for ' + eventCount + ' citizens',
+      'events', 100);
 
     if (logRows.length > 0) {
-      if (typeof queueBatchAppendIntent_ === 'function') {
-        queueBatchAppendIntent_(ctx, 'LifeHistory_Log', logRows,
-          'game mode micro event log entries', 'events', 200);
-      } else if (logSheet) {
-        var startRow = logSheet.getLastRow() + 1;
-        logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
-      }
+      queueBatchAppendIntent_(ctx, 'LifeHistory_Log', logRows,
+        'game mode micro event log entries', 'events', 200);
     }
   }
 

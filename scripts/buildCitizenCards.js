@@ -59,6 +59,25 @@ var TIER_FILTER = tierArg > 0 ? parseInt(process.argv[tierArg + 1], 10) : null;
 var nameArg = process.argv.indexOf('--name');
 var NAME_FILTER = nameArg > 0 ? process.argv[nameArg + 1] : null;
 
+// --popid-range A:B — inclusive numeric range filter on POPID. Format: 'POP-00802:POP-00951'.
+// Used for targeted post-ingest card builds (e.g., S184 female citizen balance).
+var rangeArg = process.argv.indexOf('--popid-range');
+var POPID_RANGE_LO = null, POPID_RANGE_HI = null;
+if (rangeArg > 0) {
+  var rangeRaw = String(process.argv[rangeArg + 1] || '').trim();
+  var rangeMatch = rangeRaw.match(/^POP-(\d+):POP-(\d+)$/);
+  if (!rangeMatch) {
+    console.error('[ERROR] --popid-range expects format POP-XXXXX:POP-YYYYY (got: ' + rangeRaw + ')');
+    process.exit(1);
+  }
+  POPID_RANGE_LO = parseInt(rangeMatch[1], 10);
+  POPID_RANGE_HI = parseInt(rangeMatch[2], 10);
+  if (POPID_RANGE_LO > POPID_RANGE_HI) {
+    console.error('[ERROR] --popid-range low > high (' + POPID_RANGE_LO + ' > ' + POPID_RANGE_HI + ')');
+    process.exit(1);
+  }
+}
+
 // Wipe-old GET pass tuning
 var WIPE_LIST_PAGE_SIZE = 100;
 var WIPE_LIST_SLEEP_MS = 200;
@@ -436,6 +455,12 @@ async function main() {
     // Filters
     if (TIER_FILTER !== null && tier !== TIER_FILTER) continue;
     if (NAME_FILTER && (first + ' ' + last).toLowerCase().indexOf(NAME_FILTER.toLowerCase()) < 0) continue;
+    if (POPID_RANGE_LO !== null) {
+      var popMatch = popId.match(/^POP-(\d+)$/);
+      if (!popMatch) continue;
+      var popNum = parseInt(popMatch[1], 10);
+      if (popNum < POPID_RANGE_LO || popNum > POPID_RANGE_HI) continue;
+    }
 
     citizens.push({
       popId: popId,

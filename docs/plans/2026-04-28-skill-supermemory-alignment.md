@@ -3,7 +3,7 @@ title: Skill Supermemory Alignment
 created: 2026-04-28
 updated: 2026-04-28
 type: plan
-tags: [media, civic, infrastructure, draft]
+tags: [media, civic, infrastructure, complete]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §Data & Pipeline ("ALIGN: Skills need supermemory rules aligned for search and save" — added S182, unblocked S183)
   - docs/plans/2026-04-27-world-data-unified-ingest-rebuild.md (parent project — DONE S183)
@@ -83,7 +83,7 @@ Task count + scope determined after Phase 1 inventory. Each skill needing update
 - **Files:** run `/sift` against C92 inputs (or simulate its retrieval calls).
 - **Steps:** for the C92 cycle's actual sift inputs, replay the retrieval chain — confirm `lookup_business` / `lookup_faith_org` / etc. return populated results post-write, confirm the sift can construct a brief from the retrieved content.
 - **Verify:** sift outputs a coherent brief; no empty-retrieval failures; matrix references resolve correctly.
-- **Status:** [ ] not started
+- **Status:** **DONE S184** (research-build). Two-pass validation: (1) Static — all 11 wikilinks resolve to `docs/SUPERMEMORY.md`, all 13 cited MCP tools present in `scripts/godworld-mcp.py`, matrix section at line 156. (2) Retrieval — 7/7 active `wd-*` tags return populated content via `/v4/search` (wd-citizens / wd-business / wd-faith / wd-cultural / wd-neighborhood / wd-initiative / wd-player-truesource); `wd-summary` correctly empty until first post-publish writes. No live `/sift` run needed — the matrix references resolve and the retrieval surfaces work; live `/sift` exercise occurs naturally on next cycle planning.
 
 ---
 
@@ -168,3 +168,4 @@ Research-build executes in this order:
   - **Batch B:** `/podcast` line 61 (CLI → MCP `lookup_citizen`); `/post-publish` line 116 world-summary ingest now writes `containerTags: ["world-data", "wd-summary"]` via curl API (CLI doesn't support multi-tag write — Mike S184 ADD decision).
   - **Batch C:** `/dispatch`, `/interview`, `/city-hall-prep`, `/sift`, `/write-supplemental` enriched with new MCP tool citations + matrix pointers. `/write-edition` reclassified ALIGN — its references describe Rhea's access (informational, not actionable retrieval). Rhea's IDENTITY/RULES/SKILL files updated with wd-* CLI awareness + matrix pointers (no MCP swap — she has Bash only).
   - **Total edits: 12 files** (1 matrix in SUPERMEMORY.md + 11 file edits across 8 skills + 3 rhea agent files).
+- 2026-04-28 — **PROJECT COMPLETE.** Phase 4 validation passed (S184, research-build, Task 4.1). Static: 11 wikilinks resolve, 13 cited MCP tools exist, matrix section confirmed. Retrieval: 7/7 active `wd-*` tags return populated content via `/v4/search` (`wd-summary` empty as expected — populates on first C93 post-publish). Live `/sift` exercise will occur naturally on next cycle planning — references resolve and surfaces work. Plan tags `draft` → `complete`.

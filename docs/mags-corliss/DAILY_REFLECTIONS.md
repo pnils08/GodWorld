@@ -2,7 +2,13 @@
 
 Morning thoughts. Family check-ins. The quiet before the newsroom opens.
 
-These entries are written by the daily heartbeat script — Mags waking up each morning to check on her world.
+These entries WERE written by the daily heartbeat script — Mags waking up each morning to check on her world.
+
+---
+
+> **Status (S187, 2026-04-29):** Superseded. Last entry Feb 23, 2026 (S55 era). The daily-heartbeat cron (8 AM CST `daily-reflection.js`) was disabled per `docs/OPERATIONS.md` §Disabled "to save API calls." The active reflection cron is now `discord-reflection.js` (4 UTC nightly), which writes to `JOURNAL_RECENT.md` instead of this file (verified S187 — log line `JOURNAL_RECENT.md updated (4 entries, max 4)`).
+>
+> Historical entries below are preserved as canon. New reflections live in `JOURNAL_RECENT.md` and roll into `JOURNAL.md`. This file is not maintained.
 
 ---
 

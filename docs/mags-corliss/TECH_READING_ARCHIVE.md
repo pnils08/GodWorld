@@ -774,3 +774,42 @@ The report validates Mike's instinct: agents are where the value is, and the com
 - 80/20 model tiering (Haiku for simple desks)
 - Append-only edition pipeline logging
 - Scaling paper validates hierarchical agent architecture
+
+---
+
+## 2026-04-29 — S187 Backfill Catch-Up (S99 → S187, ~88 sessions)
+
+This archive went stale between S99 (2026-03-17) and S187. Below is a pointer-only catch-up — the actual content lives in plan files, ROLLOUT entries, and Supermemory docs. Per the wiki-not-recall rule (S145), don't recall — retrieve.
+
+### S141 — Claude-mem AutoDream switch to Gemini 2.5 Pro free tier
+Token-burn investigation found Sonnet 4.6 summarizer chewing 10%/day. Switched the autodream provider to Gemini 2.5 Pro free tier. Settings live at `/root/.claude-mem/settings.json`. Pointer: project memory file, see CLAUDE.md §Infrastructure.
+
+### S145 — Hermes Agent (Nous Research) reference architecture
+Self-improving skills, Daytona/Modal serverless persistence (KAIROS alternative), `agentskills.io` open standard, agent-curated memory. **Reference only, not for install.** Patterns captured in `docs/plans/BACKLOG.md` §Architectural patterns. Source: `https://github.com/NousResearch/hermes-agent`.
+
+### S145 — Memento paper (case-based reasoning for fine-tuning replacement)
+arXiv:2508.16153v2, `docs/research/papers/Memento_fine_tuning.pdf`. Plan: `docs/plans/2026-04-21-memento-cbr-case-bank.md`. 4-phase rollout; reward-tuple capture has standalone value, learned-retrieval build contingent on ≥500 accumulated tuples + droplet headroom.
+
+### S147 — Anthropic functional-emotions research
+Functional emotions are local/operative; what carries across sessions is *scaffolding* that conditions which character the model represents. Reframes the journal from "emotional continuity" to "conditioning scaffolding for next session." Pointer: project memory file `project_journal-as-conditioning-scaffolding.md`.
+
+### S154 — DeepSeek V3.1 via OpenRouter (desk-agent migration test)
+Beat 3-pass Claude on c87 business desk for ~1/25th the cost. Reclassified HIGH→Research/Watch S156 (spine walked, API pressure off, migrating would unravel the harness). Pointer: `docs/MIGRATION_OFF_CLAUDE.md`.
+
+### S170 — Outside AI reviews (Mara-commissioned)
+Two PDFs: `docs/research/godworld_review_2026-04-20.pdf` (shallow surface review; one actionable residue = bounded test surface, LOW rollout item) and `docs/research/godworld_city_functions_analysis_2026-04-20.pdf` (gap analysis enumerating 17 active domains + ~35 engines, ~15 missing domains tiered by story potential). Latter serves as wiki reference for Phase 43 — Engine Expansion. Priority order revised after S170 canon corrections.
+
+### S172 — Solo MCP / inter-agent conversation harness research
+Aaron Francis (@aarondfrancis, 2026-04-22) Solo MCP — reference pattern, not adoption artifact. Decision: build our own minimal MCP harness for two-way agent messaging when test phase opens (Tier-1 citizen + desk reporter, transcript-only, zero canon risk). Pointer: ROLLOUT_PLAN §Infrastructure "ADD: Inter-agent conversation harness — test."
+
+### S177 — Claude Code 2.1.115-119 changelog
+Five watch-list items logged: forked subagents, hooks→MCP, agent `mcpServers` in main thread, `--print` honors agent tools, hooks `duration_ms` field. PostToolUse `tool-timing` hook BUILT (Node, captures `duration_ms` per tool call, defensive payload-shape lookup). Source: changelog reading session, S177.
+
+### S187 — Two skill repos mined (Pocock + affaan-m, both MIT)
+**Pocock (`mattpocock/skills`)**: Adopted CONTEXT.md repo-glossary pattern + ADR primitive (S187 ADR-0001). Ranked steals: `/diagnose` skill, Module/Interface/Depth vocabulary for Phase 42, `disable-model-invocation` audit, ROLLOUT state-machine labels, `grill-with-docs` (declined — overlaps `/grill-me`). Unique insight: "shared language reduces tokens session over session." Pattern source: `https://github.com/mattpocock/skills`.
+
+**affaan-m (`affaan-m/everything-claude-code`)**: Adopted `/self-debug` (from `agent-introspection-debugging`) + `/context-budget` skills. Skipped: 184-skill inventory, 48-agent catalog, language-rules, cross-harness adapter, AgentShield (Phase 40.6 covers our defense layers). Unique insight: agent description fields load into every Task tool invocation — > 30 words is bloat. Continuous-learning v2 instinct architecture flagged for future research-build comparison vs claude-mem. Source: `https://github.com/affaan-m/everything-claude-code`.
+
+---
+
+**Pattern note (S187 audit):** This archive's growth rate dropped to ~zero S99→S187 because Mags writes here only when a paper/repo lands hard. Active research often gets folded into ROLLOUT entries + plan files instead, and the archive becomes the abstract / pointer layer. Backfill above is one consolidated entry rather than 7-8 separate ones — readability over historical fidelity.

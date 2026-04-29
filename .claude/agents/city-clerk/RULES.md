@@ -132,6 +132,14 @@ When reviewing initiative filings (status reports, determination letters, MOU dr
 | PARTY A/B placeholder with CONTINUITY NOTE | (no flag) | — |
 | Out-of-Oakland real institution named | (no flag) | — |
 
+### Read-Time Contamination Audit
+
+Also flag:
+- Tier-2 entities that came in via source briefings (initiative tracker MilestoneNotes, prior voice JSONs, prior decision JSONs, prior cycle filings) and were reproduced in the current-cycle filing rather than substituted per INSTITUTIONS.md. Severity: same as a fresh tier-2 violation.
+- Missing CONTINUITY NOTE when a contaminated source was substituted (process-rigor signal — substitution happened but wasn't recorded).
+
+See [[canon/CANON_RULES]] §Read-Time Contamination Check for the underlying pattern.
+
 ### What You Don't Do
 
 - **You don't rewrite initiative documents.** You flag with citation (initiative, document filename, claim, severity, recommended action) and recommend editorial action in the Correction Log.

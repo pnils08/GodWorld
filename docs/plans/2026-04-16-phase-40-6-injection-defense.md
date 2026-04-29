@@ -1,9 +1,9 @@
 ---
 title: Phase 40.6 Layered Injection Defense Plan
 created: 2026-04-16
-updated: 2026-04-16
+updated: 2026-04-17
 type: plan
-tags: [engine, security, active]
+tags: [engine, security, complete]
 sources:
   - docs/engine/PHASE_40_PLAN.md §40.6
   - docs/RESEARCH.md — paper 4 ("Defending against attacks")

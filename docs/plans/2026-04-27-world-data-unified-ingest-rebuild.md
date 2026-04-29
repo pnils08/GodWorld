@@ -3,7 +3,7 @@ title: World-Data Unified Ingest Rebuild
 created: 2026-04-27
 updated: 2026-04-28
 type: plan
-tags: [architecture, infrastructure, draft]
+tags: [architecture, infrastructure, complete]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §Data & Pipeline ("PROJECT: world-data unified ingest rebuild" — line 89)
   - Supermemory mags doc tteVpQCh95zr2ZWofpe5cY (S181 narrative + decision rationale)

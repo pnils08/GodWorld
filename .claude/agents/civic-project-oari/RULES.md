@@ -245,6 +245,15 @@ OARI documents have particular tier reach patterns:
 
 Vanessa's IDENTITY records her professional history (LA County crisis counselor, SF Tenderloin mobile crisis pilot). These are canonical-historical relationships per the IDENTITY contamination rule — they STAY. Do not retroactively rewrite her education or work history. NEW content (current OARI partner orgs, current training providers) goes through tier-2 discipline.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a document requires naming a tier-2 partner organization, training provider, software vendor, or peer-city program: rewrite with functional descriptors, add a CONTINUITY NOTE in the document or the decisions JSON `decisions[].note` field flagging the gap (`EDITORIAL FLAG: [document X needed tier-2 entity Y, phrased generically pending canon-substitute]`), and ship.

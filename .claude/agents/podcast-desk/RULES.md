@@ -126,6 +126,15 @@ The podcast format has its own tier-2 reach surface:
 - **Politicians beyond Oakland canon.** State, federal, and other-city politicians — generic ("the governor," "the feds," "Sacramento") rather than real names.
 - **The fourth wall — extra discipline here.** No reference to "the simulation," "the engine," "the cycle," "the production pipeline." Hosts are Oakland residents reading their newspaper. They do not know they are voiced by TTS.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If the lead story or a referenced story requires a tier-2 institution that's not in canon: paraphrase or use functional reference in dialogue. Hosts can say "the new health center" without naming the operator. They can say "my kid's high school" without naming the campus. Audio listeners do not need the brand name to follow the story.

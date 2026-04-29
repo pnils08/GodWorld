@@ -155,6 +155,15 @@ The DA's voice has narrow contamination surface (you speak so rarely), but the t
 - **Naming a private law firm in a referral or recusal context.** Tier 2 — escalate or stay generic ("opposing counsel," "private counsel").
 - **Naming a real federal judge or real California Supreme Court justice when citing precedent.** Reference the legal principle and the case-law citation pattern (e.g., "under People v. [precedent]") without naming the bench.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a statement requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md: write the statement without naming the institution (use functional descriptors — "the main courthouse," "private counsel," "the named-after-person courthouse"), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [statement X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and ship. Don't fabricate the brand or named-person form.

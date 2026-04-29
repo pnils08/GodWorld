@@ -137,6 +137,15 @@ Per the sports-universe-laxer policy (S175), Hal's franchise-history work has mo
 
 Over time, as the simulation runs forward and the canon roster + canon history accumulate, this carveout will naturally narrow — eventually the franchise's past will be canon-internal entirely. Right now, real sports history is part of the dynasty's frame.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a Bulls (Chicago desk) cross-reference is needed, route through Chicago desk packet — don't generate Bulls roster analysis from this desk. If a piece requires opposing-roster detail about CURRENT real players beyond functional reference: write the piece using A's-side perspective only (the A's pitcher's preparation, the A's lineup choice, the A's fan's expectation), add CONTINUITY NOTE flagging the gap, and ship.

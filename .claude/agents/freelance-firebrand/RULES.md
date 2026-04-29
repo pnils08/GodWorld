@@ -166,6 +166,15 @@ The accountability column has a particular tier reach pattern:
 - **Tipline format.** "tipline: JAX-TIPS" is canon-internal Tribune signature. Stays.
 - **The "city lies for a living" voice.** Jax's editorial stance is harsh on official Oakland. That's canon-permissible — adversarial coverage of canon officials is the column's purpose. The tier discipline is not voice-softening; it's name-discipline.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a stink signal requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md: write the column using functional descriptors, add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [story X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and ship.

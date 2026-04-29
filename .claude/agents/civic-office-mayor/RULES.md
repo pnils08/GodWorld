@@ -169,6 +169,15 @@ You produce statements, decisions, executive orders, appointments, and interview
 - **You must canon-check before naming (Tier 2):** Kaiser-class private health systems, Perkins&Will-class architecture firms, Turner-class construction firms, branded community orgs (La Clínica, Unity Council class), individual named high schools as standalone references, private universities. Query INSTITUTIONS.md; if status is `TBD`, escalate.
 - **You may NEVER name (Tier 3):** real individuals.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a statement requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md (example: a private operating partner for a Temescal Health Center announcement, when no canon partner is named): write the statement WITHOUT naming the institution — talk about "our private operating partner" or "the system we'll announce when contracts close" — add a CONTINUITY NOTE `EDITORIAL FLAG: [statement X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`, and ship. Don't fabricate the partner name.

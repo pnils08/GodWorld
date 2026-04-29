@@ -479,3 +479,80 @@ Session 147 (2026-04-15) closed spine step 6 in one go. All six 39.x sub-phases 
 ### Spine step 6 status
 
 **CLOSED.** Five of six sub-phases done with replay tests passing against E91. Next spine step: **39.8 / 39.9 / 39.10** (spine step 7) — reward-hacking scans, tiered review, adversarial review skill.
+
+---
+
+## Tactical Closures — S156–S186 Archive Sweep (S186)
+
+Closed line items extracted from active ROLLOUT_PLAN.md sections during the S186 archive sweep. Full closure detail preserved here; ROLLOUT_PLAN.md retains active items only. Each entry is reproduced verbatim from the rollout at archive time so future sessions can recover the exact state without git archaeology.
+
+### Edition Post-Publish closures
+
+#### POP-00004 Lucia Polito row drift — DONE S185 (engine-sheet)
+
+Two cells repaired via direct service-account write to live sheet: K5 `RoleType="Aura "` → `"Aura Wellness Practitioner"` (canonical per S184 split-recovery analysis, restores lost half); M5 `BirthYear=1982` → `1977` (canon LifeHistory + CitizenBio agree). DebtLevel was already repaired between S184 and S185 (now numeric "2"). Verified live post-write. Closed.
+
+#### Empty-cell rows in lifecycle fields — RESOLVED S185 audit
+
+S185 audit re-verified: 0 citizens with POPID are missing BirthYear (count is `withPopMissingBirth.length === 0` across 836 real-citizen rows). The "74-165 rows shorter than schema" S184 framing was actually counting **74 blank rows in the sheet** (no POPID, no name, just trailing/scattered empty rows) — sheet-padding, not citizen-data drift. Optional separate task: delete the 74 blank rows for sheet hygiene; not blocking anything. NOT NEEDED for citizen integrity. (74 trailing blanks subsequently deleted via the Sheet-hygiene blank-row delete entry below.)
+
+#### Ingest gender column AU to world-data citizen cards — DONE S181 (engine-sheet, commit `e4c69a5`)
+
+`scripts/buildCitizenCards.js` reads col 46 (Gender) and writes to world-data card header alongside Tier/Birth. EmployerBizId + UsageCount also added in same commit. Mara's canon-fidelity audits now have ledger-truth gender data via card retrieval. Closed.
+
+#### WorldEvents_V3_Ledger keyword classifier polish — DONE S185 (engine-sheet, commit `8a509a9`, v3.5 → v3.6, deployed)
+
+Three fixes: (1) word-boundary regex in `deriveDomain` (`\bkeyword\b`) prevents "as" substring-matching "last"/"mass"/"Hassan"; (2) domainMap pre-sorted by descending key length so multi-word phrases ("kitchen fire", "lost dog") win over short collisions; (3) domainMap +8 keywords (misfiled, missing funds, document, audit, eviction, lease, permit, application) for General fall-through reduction; (4) `health-alert` → `health-event` (less alarmist, no downstream readers of the literal). Smoke-test 8/8 fixtures pass. Generator-side case discipline (UPPERCASE vs Title Case across event generators) intentionally NOT touched — applyShockMonitor expects UPPERCASE; case normalization is a separate task (still active in rollout). Closed.
+
+### Data & Pipeline closures
+
+#### Tech debt audit 2026-04-15 — Path 1 CLOSED S156 (engine-sheet)
+
+Audit: `docs/engine/tech_debt_audits/2026-04-15.md`. Commits: `76a408c` (38 writers → exceptions list + 4 flagged Math.random), `af40282` (55 cycle-path silent fallbacks → `safeRand_(ctx)` helper in `utilities/safeRand.js`), `e4362c8`/`1c82425` (22 parameter-rng helper throws), `ab91955` (Warnings section triage: 78 ctx.summary "orphans" reclassified as bulk-serialized via `exportCycleArtifacts`, schema header staleness closed retroactive), `bb55dd5` (`/tech-debt-audit` skill updated to walk serializer graph before flagging ctx.summary orphans — prevents re-discovery). Silent-fallback Math.random class eliminated across engine. Path 2 (Phase 42 Writer Consolidation) remains active in ROLLOUT_PLAN.
+
+#### Dead-code detection scan — DONE S185 (engine-sheet)
+
+Audit pointer: [[engine/tech_debt_audits/2026-04-29-dead-code-scan]]. Scanner: `scripts/scanDeadCode.js`. 143 files, 909 function declarations, 884 unique names. **74 unreferenced** with allowlist applied (Apps Script triggers + bare-named entry points + string-literal dispatch). Categorized: **38 KEEP** (standby APIs from S184/S185 in-progress work + planned-feature scaffold referenced in roadmap docs + manual debug entry points), **31 DELETE candidates** (v2-deprecation helpers, persistence-executor bridges, markdown-parser sub-helpers, phase-timing debug, event-arc-engine internals, media intake setup helpers, `nextPopIdSafe_`), **0 REVIEW** (all 74 placed into KEEP or DELETE this pass). Verdict shipped — DELETE-batch execution captured in next entry. Closed audit.
+
+#### Dead-code DELETE batch — DONE S185 (engine-sheet, commit `bbdca3a`, clasp deployed)
+
+Removed 20 truly-dead functions across 7 files (audit-doc count corrected from "31" to "20" in same commit; original summary was off): v2DeprecationGuide.js (5), persistenceExecutor.js (3 bridges), parseMediaRoomMarkdown.js (3 sub-helpers), cycleModes.js (3 timing helpers), eventArcEngine.js (3 internals), mediaRoomIntake.js (2 setup), godWorldEngine2.js (1 — `nextPopIdSafe_`). Net 722 lines removed. Re-ran scanner post-edit: 74 → 56 unreferenced (delta -18 vs 20 deletions because 2 transitive unrefs surfaced where deleted functions were sole callers — candidates for next dead-code pass). 8 originally-uncategorized unrefs deferred to next audit pass per audit doc.
+
+#### POST-E92 ENGINE REPAIR: /pre-mortem C92 findings — DONE S180/S181 (engine-sheet)
+
+Rows 12, 13, 14 all closed — see [[engine/ENGINE_REPAIR]] for closure detail.
+
+#### POST-E92 ENGINE REPAIR: Enricher misattribution bug — DONE S185 (engine-sheet, commit `6a30094`)
+
+Two coupled bugs in `checkMitigators.js` v1.0.0: (1) substring keyword matching let "as" (sports team abbreviation) match "last"/"has"/"mass" and false-tag non-sports patterns as 'sports' category; (2) `linkedIds` admitted any initiative as mitigator regardless of policy-domain match, with 'culture' default fallback. Combined → Baylight tagged as mitigator for faith-coverage-gap + council-writeback-drift, both flipping to `gap=remedy-working` and getting skipped from suggestedFrontPage. Fix v1.1.0: word-boundary regex in keyword match + require category alignment between pattern and initiative + remove 'culture' fallback. Verified against `output/engine_audit_c92.json` — 'remedy-working' false-positives 2 → 0; affected patterns now correctly classified as `gap=no-mitigator`. Closed. Sibling `advance-initiative` remedy threshold calibration remains active in ROLLOUT_PLAN.
+
+#### Sheet-hygiene blank-row delete — DONE S185 (engine-sheet)
+
+`Simulation_Ledger` resized from 911 rows (header + 836 real citizens + 74 trailing blanks) to 837 rows (header + 836 real citizens). Service-account `resizeSheet` call. Last row verified as POP-00951 Niani Oakley (legitimate, from S184 female-balance ingest). 0 real citizens affected. Closed.
+
+#### 9 new tier-2 canon firms → Business_Ledger — DONE S185 (engine-sheet)
+
+All 9 firms appended at BIZ-00052 through BIZ-00060 via direct service-account write. Architecture firms cluster Downtown/Uptown/Lake Merritt; Construction firms in West Oakland/Jack London/Fruitvale. Headcount + salary + revenue scaled from real-world peer firms (Atlas Bay ≈ Perkins&Will Oakland office; Anchor Build ≈ Webcor; etc.). Total contribution: ~1,055 jobs + ~$867M aggregate revenue added to Business_Ledger. Key_Personnel left empty — editorial fills as named-citizen entities surface via storylines. Business_Ledger row count 52 → 61. Closed.
+
+### Edition Production closures
+
+#### HOLD: E92 raw edition ingest — UNBLOCKED S180 (functionally lifted)
+
+Functionally lifted by `stripMetadataLeaks()` filter in `ingestEdition.js` (DONE S180; see ROLLOUT_PLAN changelog). Defense-in-depth strip catches scaffolding paths + audit-block markers at ingest time, so raw ingest of contaminated artifacts now produces clean canon. Desk-emission FIX (still active in ROLLOUT_PLAN as architectural fix — desks shouldn't emit audit blocks in body) remains the structural follow-up. Was URGENT, now LOW with safety net in place. Closed.
+
+### Phase-level closure (Other Ready Work table)
+
+#### Canon Fidelity Rollout — DONE S175
+
+S174 reframe of the post-mortem + S175 completion. Three-tier framework ([[canon/CANON_RULES]] Tier 1 use real names / Tier 2 canon-substitute / Tier 3 always block) + per-agent four-file structure (IDENTITY + LENS + RULES + SKILL) + companion roster ([[canon/INSTITUTIONS]]).
+
+- **Wave A (S174):** 8 agents (DJ, Mayor, civic-desk, civic-project-health-center, business-desk, civic-office-baylight-authority, civic-office-district-attorney, civic-project-transit-hub).
+- **Wave B (S175):** 12 generators (chicago-desk, culture-desk, letters-desk, podcast-desk, sports-desk, freelance-firebrand, civic-office-crc-faction, civic-office-ind-swing, civic-office-opp-faction, civic-office-police-chief, civic-project-oari, civic-project-stabilization-fund).
+- **Reviewer rebuild (S175):** 4 agents (rhea-morgan + city-clerk + final-arbiter Canon Fidelity Audit; engine-validator scope-noted N/A as code-only).
+- **EIC application (S175):** mags-corliss SKILL.md updated for editorial writing.
+- **Sports-history carveout (S175):** sports-desk relaxed to permit historical real-MLB figures as franchise context per Mike's sports-universe-laxer policy; current real players outside canon roster remain tier 3.
+- **Validation (S175):** 5 trap-test invocations passed (culture/opp/oari standard pattern + sports-desk Hal historical-MLB carveout + ind-swing split-not-bloc).
+
+Framework operational across all 24 content-generating + content-reviewing agents. Directly addressed C92 reframe priority 1 (agent layer for infrastructure-in-place). Framework reasoning save: Supermemory mags doc `XJi6whXEyPehdN6oDS97hQ`. Plan: [[plans/2026-04-25-canon-fidelity-rollout]].
+
+**S186 follow-up (lives in active ROLLOUT_PLAN):** Read-Time Contamination Check added to CANON_RULES.md + 23-agent RULES.md refresh, motivated by Perkins&Will scrub. The canon-fidelity rollout itself is closed; the read-time extension is a regression-class enhancement on top.

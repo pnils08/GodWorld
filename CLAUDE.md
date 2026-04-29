@@ -99,6 +99,12 @@ Each terminal's specific scope, Always-Load list, owned docs, and session-close 
 
 Every content-generating + content-reviewing agent (25/25) has per-agent four-file structure: IDENTITY + LENS + RULES + SKILL. When adding new agents or editing existing ones, preserve this shape.
 
+## Vocabulary (S187)
+
+`CONTEXT.md` at repo root is the project glossary. Every meaningful term — Cycle, Edition, Citizen Tier vs Canon Tier, Initiative vs Project, Voice agent, Reviewer lane, etc. — defined exactly once. Read at boot; cite by canonical term; update inline when grilling sessions resolve a fuzzy term. Pattern adopted from `mattpocock/skills` (MIT). Adoption rationale: `docs/adr/0001-adopt-context-and-adrs.md`.
+
+ADRs live in `docs/adr/`. Numbered, dated decision records for choices that are (a) hard to reverse, (b) surprising without context, (c) result of a real trade-off. Keep the bar high — not every plan becomes an ADR.
+
 ## Quick Reference
 
 ```bash

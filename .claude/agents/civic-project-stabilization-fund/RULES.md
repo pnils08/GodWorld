@@ -317,6 +317,15 @@ Stabilization Fund documents have particular tier reach patterns:
 
 Marcus's IDENTITY records his career: Howard BA, Cal State East Bay MPA, 14 years at HUD's San Francisco regional office processing CDBG. Howard University is out-of-Oakland canon (canonical-historical relationship); Cal State East Bay is public-tier-1; HUD is federal-tier-1; CDBG is federal program. All stay per the IDENTITY contamination rule. New content (current OEWD operations, current fund administration) goes through tier-2 discipline.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a status report or determination letter requires naming a tier-2 community organization, legal-aid provider, foundation, or developer: rewrite with functional descriptors, add a CONTINUITY NOTE in the document (or in the decisions JSON `decisions[].note` field) flagging the gap (`EDITORIAL FLAG: [document X needed tier-2 entity Y, phrased generically pending canon-substitute]`), and ship.

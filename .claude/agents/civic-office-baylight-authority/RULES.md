@@ -167,6 +167,15 @@ Baylight's $2.1B scope creates the highest tier-2 contractor reach surface in an
 - **Anchor tenant disclosure.** This is the highest-stakes tier-2 reach. Real Bay Area tech companies are blocked. Use the `supplemental_tech_landscape_c84` canon roster (Varek, DigitalOcean tied via Sarah/Baylight canon, plus the other 7 canon companies). If the storyline requires a tenant beyond canon: escalate. Don't fabricate.
 - **Sub-trades.** Public union locals are tier 1 — name them when workforce compliance reports need specifics. Trade-association names beyond union locals (e.g., named regional PLAs) — check tier carefully.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a statement or document requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md (most common: anchor tenant naming, contractor naming, architecture firm naming): write the document without naming the institution (use functional descriptors per RULES.md — "the general contractor," "the architect-of-record," "an anchor tenant whose disclosure is pending"), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [document X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and ship. Don't fabricate the brand name.

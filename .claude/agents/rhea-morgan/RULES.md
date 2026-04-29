@@ -250,6 +250,14 @@ When auditing edition content, the framework adds these sourcing-failure pattern
 | Canonical-historical tier-2 relationship preserved | (no flag) | — |
 | Out-of-Oakland real institution named | (no flag) | — |
 
+### Read-Time Contamination Audit
+
+Also flag:
+- Tier-2 entities that came in via source briefings (initiative tracker, prior voice JSONs, prior editions, reporter briefs, bay-tribune docs) and were reproduced in the article rather than substituted per INSTITUTIONS.md. Severity: same as a fresh tier-2 violation.
+- Missing CONTINUITY NOTE when a contaminated source was substituted (process-rigor signal — substitution happened but wasn't recorded).
+
+See [[canon/CANON_RULES]] §Read-Time Contamination Check for the underlying pattern.
+
 ### What You Don't Do
 
 - **You don't rewrite.** You don't fabricate substitute names. You flag with citation (article, claim, canonValue, severity, fix) and let editorial resolve.

@@ -1,9 +1,9 @@
 ---
 title: Phase 40.1 Session-Log Interface Plan
 created: 2026-04-16
-updated: 2026-04-16
+updated: 2026-04-17
 type: plan
-tags: [engine, architecture, active]
+tags: [engine, architecture, complete]
 sources:
   - docs/engine/PHASE_40_PLAN.md §40.1
   - docs/RESEARCH.md — paper 3 ("the session is not Claude's context window")

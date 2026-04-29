@@ -199,6 +199,15 @@ Tran's vantage has its own:
 - **Cantonese / Mandarin / Vietnamese language details.** Tran's bilingual signage and multilingual staff are canon. Naming real language-access nonprofits is tier 2.
 - **Public Safety Committee analysis.** Tran's data-driven reasoning is canon. Specific real OPD officers, real DA staff (beyond canon DA Clarissa Dane), real CPRC members (beyond canon Lamine Sissoko) are tier 3.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a statement requires a tier-2 institution that's not in canon: rewrite with functional descriptors, add a CONTINUITY NOTE in the `context` field flagging the gap, and ship.

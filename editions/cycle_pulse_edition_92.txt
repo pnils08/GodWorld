@@ -20,7 +20,7 @@ She kept walking past it anyway, the way you keep walking past something you've 
 
 This cycle, three dates arrived.
 
-Architect contract: Cycle 93. Site acquisition finalized: Cycle 94. HCAI permit filing: Cycle 95. Mayor Avery Santana named them in a statement eleven words long: "Bobby Chen-Ramirez clears the choke points by Cycle 95. That's the deadline." Project Director Chen-Ramirez accepted the schedule on the record. Perkins&Will Oakland — the $4.5 million fixed-fee architect firm attached to the project through the C80 council vote that authorized the health center 6 to 2 — will execute the design contract beginning in Cycle 93. Alameda Health System remains the named operator. The dates are public, attached to specific deliverables, and the project director has acknowledged them.
+Architect contract: Cycle 93. Site acquisition finalized: Cycle 94. HCAI permit filing: Cycle 95. Mayor Avery Santana named them in a statement eleven words long: "Bobby Chen-Ramirez clears the choke points by Cycle 95. That's the deadline." Project Director Chen-Ramirez accepted the schedule on the record. Atlas Bay Architects — the $4.5 million fixed-fee architect firm attached to the project through the C80 council vote that authorized the health center 6 to 2 — will execute the design contract beginning in Cycle 93. Alameda Health System remains the named operator. The dates are public, attached to specific deliverables, and the project director has acknowledged them.
 
 That sentence alone would have been the news. It was not the news.
 
@@ -134,7 +134,7 @@ She has not reversed that position publicly. But there is a C93 deadline now, an
 
 ---
 
-The architect is Perkins&Will Oakland. The firm carries twelve completed healthcare projects and OSHPD-3 experience — the state classification that covers outpatient and clinic facilities. Contract negotiation concluded this cycle at a fixed fee of $4.5 million. Execution is scheduled next cycle.
+The architect is Atlas Bay Architects. The firm carries twelve completed healthcare projects and OSHPD-3 experience — the state classification that covers outpatient and clinic facilities. Contract negotiation concluded this cycle at a fixed fee of $4.5 million. Execution is scheduled next cycle.
 
 The path Chen-Ramirez described runs as follows: architect contract signed and schematic design at 30 percent by C93; site intent declaration filed, HCAI pre-application meeting completed, and schematic design at 80 percent by C94; by C95, 100 percent construction documents submitted to HCAI, structural certification and OSHPD seismic approval in hand, medical gas design complete, site acquisition closed, and cost estimate locked to within 5 percent of the $33 million construction budget.
 
@@ -669,7 +669,7 @@ ARTICLE TABLE
 
 |Reporter|StoryType|SignalSource|Headline|ArticleText|CulturalMentions|
 |---|---|---|---|---|---|
-|Carmen Delaine|civic|mayor-five-decisions|The Day She Named Dates|Patricia Nolan walks past the Temescal corner. The Mayor named three dates — then did it four more times.|Temescal Ave & 47th, Perkins&Will Oakland, Alameda Health System|
+|Carmen Delaine|civic|mayor-five-decisions|The Day She Named Dates|Patricia Nolan walks past the Temescal corner. The Mayor named three dates — then did it four more times.|Temescal Ave & 47th, Atlas Bay Architects, Alameda Health System|
 |Dr. Lila Mezran|health|stuck-initiative|Temescal Health Center Finally Has a Clock|Twelve cycles of design phase ended with a Mayor directive. The corner of Temescal Ave and 47th gets a clinic.|C45 pediatric spike, Highland Hospital, Alameda County Health|
 |Carmen Delaine|civic|phase-advance|Fruitvale Transit Hub Clears the Bar|Seven of eight CBA requirements verified. Vega calendared the vote, rejected Ashford's cost-cap amendment.|E. 12th & 34th, Unity Council, Community Land Trust|
 |Luis Navarro|civic|coalition-math|The Motion Isn't Filed Yet|Rivers files the D2 OARI motion this cycle. Tran conditions his vote on a named implementation cycle.|D2 Downtown, scene-safety authority, quarterly audit|
@@ -759,7 +759,7 @@ CITIZENS IN LETTERS (NEW):
 — Gloria Hutchins, 68, West Oakland, retired school bus driver
 
 CULTURAL:
-— Perkins&Will Oakland (architect firm, Temescal Health Center)
+— Atlas Bay Architects (architect firm, Temescal Health Center)
 — Alameda Health System (operator, Temescal Health Center)
 — Elias Varek (Founder, Civis Systems; NBA ownership group)
 — Pulse District, Creative Cocktails (Uptown nightlife)
@@ -804,7 +804,7 @@ COMING NEXT CYCLE
 
 — Transit Hub council vote result — does Ashford force the cost-cap amendment, and does it pass?
 — Rivers' D2 OARI motion text: does it name C94 or C95 as the implementation cycle?
-— Temescal architect contract execution (Perkins&Will Oakland, $4.5M fixed fee).
+— Temescal architect contract execution (Atlas Bay Architects, $4.5M fixed fee).
 — Baylight Phase II Infrastructure & Arena Design RFP opens — who bids against Civis Systems?
 — Youth Apprenticeship Pipeline: progress report or silence?
 — A's streak — continues or breaks?

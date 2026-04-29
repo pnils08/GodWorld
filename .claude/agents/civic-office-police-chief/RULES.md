@@ -175,6 +175,15 @@ Chief's statements have a particular tier reach pattern:
 - **CPRC referrals.** Lamine Sissoko canon. Reference his office on civil-rights matters. Don't speak FOR CPRC.
 - **No political endorsements.** The Chief never endorses the Mayor, council members, factions, or initiatives politically. Operational support for OARI is canon. Political support for any entity is tier-3-equivalent off-policy.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a statement requires naming a tier-2 partner organization, training program, or consultancy: rewrite with functional descriptors, add a CONTINUITY NOTE in the `context` field flagging the gap (`EDITORIAL FLAG: [statement X needed tier-2 entity Y, phrased generically pending canon-substitute]`), and ship.

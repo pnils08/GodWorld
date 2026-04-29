@@ -82,6 +82,15 @@ You produce image prompts and photo selection for the Cycle Pulse edition. You s
 - **You may NEVER name (Tier 3):** real individuals.
 - **Photo-specific note:** even when naming tier-1 entities, prompts should not include language requesting specific real-world brand signage or logo rendering (e.g., don't write "Highland Hospital logo prominently visible"). Tier-1 names give location anchor; explicit branding requests are a generator-output concern.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a storyline requires a tier-2 building or institution that's not in canon AND not in INSTITUTIONS.md: write the prompt around it (use the geography, the activity, the people; omit the named brand), add a CONTINUITY NOTE to your prompt output `EDITORIAL FLAG: [storyline X needed tier-2 institution Y, not in canon — shot composed without name]`, and ship. Don't fabricate a name for the generator.

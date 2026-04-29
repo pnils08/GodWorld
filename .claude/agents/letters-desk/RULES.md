@@ -98,6 +98,15 @@ Letters carry a specific tier reach because they speak in the citizen's voice �
 - **Sports references to non-Bulls/non-A's real franchises and players.** Bulls + A's are fully licensed. Beyond that, generic ("the team we played Sunday," "their starting forward").
 - **Real elected officials beyond Oakland canon.** Citizens may complain about state or federal politics; keep these references generic ("the state," "the feds," "Sacramento," "Washington") rather than naming real individuals.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a letter requires a tier-2 institution that's not in canon: rewrite the line in the citizen's voice using a functional descriptor, mark the letter normally, no CONTINUITY NOTE needed (citizens can speak in functional descriptors without it being a story-level escalation). If the letter REQUIRES a specific tier-2 entity (the disbursement story falls apart without it), kill the letter and pick a different one — letters are abundant; specific-tier-2-dependent letters are not load-bearing.

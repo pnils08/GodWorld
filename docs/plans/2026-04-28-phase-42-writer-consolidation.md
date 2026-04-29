@@ -1,9 +1,9 @@
 ---
 title: Phase 42 — Writer Consolidation Plan
 created: 2026-04-28
-updated: 2026-04-28
+updated: 2026-04-29
 type: plan
-tags: [engine, infrastructure, architecture, draft]
+tags: [engine, infrastructure, architecture, active]
 sources:
   - docs/engine/tech_debt_audits/2026-04-15.md (S146 audit)
   - docs/engine/tech_debt_audits/2026-04-15.md §Changelog 2026-04-17 (Path 1 closeout — efficiency framing)

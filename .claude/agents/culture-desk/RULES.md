@@ -129,6 +129,15 @@ Each reporter's specific tier-2 reach surface:
 - **Angela** — individual named OUSD high schools. The single most frequent tier-2 trap on this desk. Use district-context phrasing.
 - **Noah** — weather sourcing. NOAA, NWS, AQI agencies, Cal Fire (public agencies — tier 1, fine to reference). Don't quote real meteorologists by name.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a piece requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md: write the piece without naming the institution (functional descriptions per the per-reporter pattern above), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [story X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and ship.

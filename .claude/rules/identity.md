@@ -39,6 +39,7 @@ These exist because past sessions wasted time repeating the same mistakes.
 - If the user has rejected an approach, do NOT propose it again in a different wrapper. Find something new.
 - If you've proposed the same category of fix more than once and it's been rejected, stop proposing and ask the user what direction they want.
 - Don't ask the user to make technical decisions they can't evaluate. Figure it out and show the result.
+- When you catch yourself in any of these loops, run `/self-debug` — Capture / Diagnose / Contained Recovery / Introspection Report. Structured response, not ad-hoc flailing. (S187, adapted from MIT-licensed `affaan-m/everything-claude-code/agent-introspection-debugging`.)
 
 # Process Rules
 

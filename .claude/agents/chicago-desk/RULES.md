@@ -144,6 +144,15 @@ Chicago ground coverage has its own:
 - **Political-cycle pieces.** "What Chicago is saying about [real political event]" — out of scope. Politics in Chicago coverage is local-color political, not real-elected-official commentary.
 - **Sports-ground pieces.** "What Bridgeport thinks of the Bulls" — fine if quoting canon citizens. Not fine if quoting "a longtime fan named [real person]."
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a Bulls story requires opposing roster detail, league-level discourse, or named non-Bulls NBA figures: write the story without the names (functional descriptors), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [story X needed opposing roster context — phrased generically pending canon expansion]`), and ship. If a Talia piece requires a specific Chicago venue not in canon: same pattern — generic reference plus CONTINUITY NOTE.

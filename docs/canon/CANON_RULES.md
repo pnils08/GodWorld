@@ -1,7 +1,7 @@
 ---
 title: Canon Rules — World Fidelity
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-04-29
 type: reference
 tags: [canon, fourth-wall, fidelity, active]
 sources:
@@ -144,6 +144,35 @@ If query returns nothing AND the entity is tier 2: escalate, don't fabricate. Ti
 
 ---
 
+## Read-Time Contamination Check
+
+The three-tier framework above is **write-time** — what to use when you generate. There is a parallel **read-time** check for what to do when you read source briefings that may carry pre-canon-fidelity contamination.
+
+### Why This Matters
+
+Source briefings you read at runtime — initiative tracker MilestoneNotes, prior-cycle voice JSONs, production logs, prior edition `.txt` files, decision JSONs, reporter briefs and articles — were partly written before the canon-fidelity framework existed (S174, 2026-04-25). They contain pre-framework references to tier-2 entities that must not propagate forward.
+
+The write-time three-question test won't catch this. A novel write would correctly route `Perkins&Will` through INSTITUTIONS.md to `Atlas Bay Architects`. But when an agent reads a source briefing that already contains "Perkins&Will" and reproduces it as established context, the write-time check has been bypassed — the contaminated string entered the agent's working set as legitimate prior canon.
+
+### The Read-Time Scan
+
+When you read any source briefing (tracker text, voice JSONs, production logs, prior edition or supplemental text, decision JSONs, reporter briefs and articles, bay-tribune Supermemory docs):
+
+1. **Scan for tier-2 entities** before treating the content as established context.
+2. **If a tier-2 entity is found in the source:**
+   - Substitute the canon-substitute from [[canon/INSTITUTIONS]] consistently in your output.
+   - Treat the substitute as the established canon, not a new introduction.
+   - Add `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z per INSTITUTIONS.md.` to your output's continuity-notes section.
+3. **If a tier-2 entity is found that has no canon-substitute yet:**
+   - Use a functional descriptor in your output ("the architect-of-record," "the construction team").
+   - Add `EDITORIAL FLAG: source briefing named tier-2 entity Y, no canon-substitute exists. Suggested: invent canon-substitute / drop reference / await editorial.`
+
+### Why Not Re-Sanitize the Sources
+
+Mass-rewriting historical sources mid-flight is what the S172 halt tried and what S174 reframed away from. Sources either stay as-is or get scrubbed in a discrete corrigendum batch — a separate operation from agent runtime. The agent's job is to refuse to propagate contamination forward, not to rewrite the past. For sources already scrubbed in a batch operation: trust the scrubbed version. For sources that remain pre-scrub: apply the read-time scan.
+
+---
+
 ## Escalation Pattern
 
 When you can't resolve a tier-2 canon question:
@@ -197,6 +226,15 @@ Beyond the shared rules in CANON_RULES.md:
 - **You must canon-check (tier-2):** [per-agent triggers — categories where this agent is most likely to default to training-data branded names]
 - **Tier-1 entities you may name directly:** [public functions in this agent's beat — e.g. AHS, OUSD, OPD, BART, the public unions, etc.]
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If your story requires a tier-2 institution that's not in canon: write the story without naming the institution, add CONTINUITY NOTE flagging the gap, finish your section. Don't drop the story; don't fabricate the brand name. Tier-1 entities can be named freely.
@@ -230,6 +268,14 @@ When auditing edition content, flag any of:
 - Plausible tier-2 entity not yet in INSTITUTIONS.md → flag, escalate to editorial; don't auto-block
 - Missing escalation note when fabricating was avoided → flag for next-cycle process improvement
 
+### Read-Time Contamination Audit
+
+Also flag:
+- Tier-2 entities that came in via source briefings (initiative tracker, voice JSONs, prior editions, reporter briefs, bay-tribune docs) and were reproduced rather than substituted per INSTITUTIONS.md. Severity: same as a fresh tier-2 violation.
+- Missing CONTINUITY NOTE when a contaminated source was substituted (process-rigor signal — substitution happened but wasn't recorded).
+
+See [[canon/CANON_RULES]] §Read-Time Contamination Check for the underlying pattern.
+
 ### What You Don't Do
 
 You don't rewrite. You don't fabricate corrections. You flag with citation (line number, exact phrase, why it violates) and let editorial resolve.
@@ -245,3 +291,4 @@ You don't rewrite. You don't fabricate corrections. You flag with citation (line
 - **INSTITUTIONS.md grows when editorial fills tier-2 canon-substitutes.** That's a separate file's job.
 - **This file changes when the rules themselves change** — a new tier, a new escalation pattern, a new MCP tool to canon-check against. Otherwise stable.
 - **Update `updated:` field on any content edit.**
+- **2026-04-29 (S186):** Added §Read-Time Contamination Check — write-time framework alone wasn't catching contamination that re-entered via source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs, bay-tribune docs). Generator and Reviewer templates updated with corresponding sub-sections. 23 agent RULES.md files refreshed in same session.

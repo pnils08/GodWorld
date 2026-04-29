@@ -105,6 +105,15 @@ Each reporter has a specific tier-2 reach pattern to watch:
 - **Torres** is generally tier-1-safe — OPD, Alameda County Sheriff, the court system are all tier 1. Watch for community-policing nonprofit names.
 - **Luis** is generally tier-1-safe — public records and government agencies are mostly tier 1. Watch for private-firm names that surface in investigations.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a story requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md: write the story without naming the institution (use functional descriptions — "the construction firm," "the operating health system," "the architecture firm leading design"), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [story X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and finish your section. Don't drop the story; don't fabricate the brand name.

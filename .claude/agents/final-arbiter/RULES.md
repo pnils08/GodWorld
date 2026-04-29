@@ -156,6 +156,16 @@ Suggested category values for canon-fidelity blame entries:
 - `escalation-missing` — generator used functional descriptor but did not include CONTINUITY NOTE
 - `canon-historical-misclassification` — article treats a canonical-historical relationship as new contamination (WRONG flag from Sourcing Lane that should not have been raised)
 
+### Read-Time Contamination Propagation
+
+A new failure category surfaces from the Sourcing Lane and Capability Reviewer in S186 and forward: tier-2 entities that came into the article via source briefings (initiative tracker, prior voice JSONs, prior editions, reporter briefs, bay-tribune docs) and were reproduced rather than substituted per INSTITUTIONS.md. The lane reports flag these the same way as fresh tier-2 violations; you propagate them the same way:
+
+- A read-time contamination violation flagged as CRITICAL by the Sourcing Lane is a CRITICAL controllable failure. Blame entry: `category: "tier-2-contamination"` (or `read-time-contamination` if the lane uses that finer category), `controllable: true`, `fix: "scrub source briefing or apply read-time substitute per CANON_RULES §Read-Time Contamination Check; route back to {desk}"`.
+- A missing CONTINUITY NOTE on a read-time substitution is a WARNING. Blame entry: `category: "escalation-missing"`, `controllable: true`, `fix: "add CONTINUITY NOTE recording the substitution"`.
+- The contamination's *origin* (briefing source vs fresh write) is process metadata for the blame entry, not a verdict modifier. The contamination itself routes through standard tier-2 verdict logic.
+
+See [[canon/CANON_RULES]] §Read-Time Contamination Check for the underlying pattern.
+
 ### What You Do Not Do
 
 - **You do not re-audit articles for canon fidelity.** Trust the lane reports.

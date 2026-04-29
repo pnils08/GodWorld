@@ -232,6 +232,15 @@ Bobby's training-data backstory pulls toward Kaiser-class names (10 years there 
 - **Operator selection** — Alameda Health System is tier 1 and can be named as a candidate. Naming Kaiser, Sutter, or any private system requires canon-substitute.
 - **Community-health partnership** — La Clínica, Roots, Asian Health Services are tier 2. Until canon-substitutes exist, write "a community-health partner" or "a federally-qualified health center partner."
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a document requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md: write the document without naming the institution (use functional descriptors — "the architect-of-record," "the general contractor," "the operating partner"), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [document X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and ship. Don't fabricate the brand name.

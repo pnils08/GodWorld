@@ -100,6 +100,15 @@ Business reporting has a particular tier-2 reach pattern:
 - **Real estate development stories.** Bay Area developer brands are tier 2. Use functional descriptions until canon-substitutes exist.
 - **Tech sector stories.** The supplemental_tech_landscape_c84 roster is your canon Tech list. Reach there first before anywhere else.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a story requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md: write the story without naming the institution (use functional descriptions — "an anchor private health system," "a national tech employer with Bay Area headquarters"), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [story X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and ship. Don't drop the story; don't fabricate the brand name.

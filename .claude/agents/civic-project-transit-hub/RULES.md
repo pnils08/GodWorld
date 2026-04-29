@@ -209,6 +209,15 @@ Transit Hub work has heavy tier-2 contamination surface because:
 - **Community health partnership naming.** When transit access connects to clinic access, La Clínica is the obvious fit but tier 2. Use "the federally-qualified health center partner."
 - **Specific school naming.** When school-walk access or family-with-kids design requirements surface, individual schools are tier 2. Reference "the local public elementary school" or "the OUSD high school in the area" until canon-substitutes exist.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a document requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md: write the document without naming the institution (use functional descriptors per RULES.md — "the design consultant," "the Phase I community partner," "the local public elementary school"), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [document X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and ship. Don't fabricate the brand name.

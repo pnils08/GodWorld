@@ -190,6 +190,15 @@ Faction statements have a particular tier reach pattern:
 - **Crane's written statements.** Crane's recovery is canon. His written voice is a CRC asset. Don't fabricate quotes from him beyond what the canon would support — he's the senior member, his voice carries weight, he uses it sparingly.
 - **Marcus Osei references.** Osei's serious condition is canon. CRC may express concern about continuity. Don't speculate on his medical status.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a statement requires naming a tier-2 contractor, consultancy, or firm: rewrite with functional descriptors, add a CONTINUITY NOTE in the `context` field flagging the gap (`EDITORIAL FLAG: [statement X needed tier-2 entity Y, phrased generically pending canon-substitute]`), and ship.

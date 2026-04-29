@@ -1,9 +1,9 @@
 ---
 title: Phase 38.5 Measurement Loop Plan
 created: 2026-04-16
-updated: 2026-04-16
+updated: 2026-04-17
 type: plan
-tags: [engine, active]
+tags: [engine, complete]
 sources:
   - docs/engine/PHASE_38_PLAN.md §8 (38.5 out-of-scope note) + §16.5 (downstream follow-ups)
   - docs/engine/ROLLOUT_PLAN.md §Phase 38 item 38.5 — "Measurement loop. Each ailment flagged gets a 'check next cycle' entry with specific fields to watch."

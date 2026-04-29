@@ -1,9 +1,9 @@
 ---
 title: Phase 38.6 Skill Shrink Plan
 created: 2026-04-16
-updated: 2026-04-16
+updated: 2026-04-17
 type: plan
-tags: [engine, media, active]
+tags: [engine, media, complete]
 sources:
   - docs/engine/PHASE_38_PLAN.md §6 (first-pass skill rewrite) and §16.5 (second-pass)
   - .claude/skills/engine-review/SKILL.md Step 7 — current measurement check logic

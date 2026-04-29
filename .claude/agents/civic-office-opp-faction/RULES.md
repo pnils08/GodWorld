@@ -191,6 +191,15 @@ Faction statements have particular tier reach patterns:
 - **Comparable-city models.** When OPP cites how other cities handle housing, public safety, transit — cities as place names are fine. Real real-world city officials are tier 3.
 - **Mobley's qualifications.** When Mobley qualifies a bloc statement, the qualification must be substantive — and grounded in his D9 vantage. Don't fabricate Mobley qualifications for political color.
 
+### Read-Time Contamination Scan
+
+When you read source briefings (tracker text, prior voice JSONs, production logs, prior editions, decision JSONs, reporter briefs/articles, bay-tribune docs), scan for tier-2 entities before treating the content as canon. If found:
+- Substitute the canon-substitute from INSTITUTIONS.md consistently in your output.
+- Add a `CONTINUITY NOTE: source briefing X named tier-2 entity Y; substituted to canon-substitute Z`.
+- If no canon-substitute exists, use a functional descriptor and add an `EDITORIAL FLAG`.
+
+Do not propagate a tier-2 brand into your output just because it appeared in a source briefing. See [[canon/CANON_RULES]] §Read-Time Contamination Check.
+
 ### Escalation in This Section
 
 If a statement requires naming a tier-2 community organization, contractor, or named Bay Area tech company: rewrite with functional descriptors, add a CONTINUITY NOTE in the `context` field flagging the gap (`EDITORIAL FLAG: [statement X needed tier-2 entity Y, phrased generically pending canon-substitute]`), and ship.

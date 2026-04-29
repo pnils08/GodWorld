@@ -1,7 +1,7 @@
 ---
 title: GodWorld Documentation Index
 created: 2026-04-14
-updated: 2026-04-17
+updated: 2026-04-29
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -9,6 +9,7 @@ sources:
   - docs/engine/ROLLOUT_PLAN.md (Phase 41.2)
 pointers:
   - "[[SCHEMA]] — conventions every entry follows"
+  - "../CONTEXT.md — project vocabulary (companion to SCHEMA — that defines shape, this defines language)"
   - "MEMORY.md — separate index for persistent-memory layer"
   - "docs/engine/DOCUMENTATION_LEDGER.md — older registry, will fold into this file over time"
 ---
@@ -24,6 +25,16 @@ pointers:
 1. Read at boot, before grepping. The pointer is faster than the search.
 2. Grep this file for keywords (`grep -i "ledger" docs/index.md`) before grepping the whole tree.
 3. Follow the `[[wikilinks]]` to the source. If a link is broken, the index is wrong — fix it in the same commit.
+
+---
+
+## Repo root (outside `docs/`)
+
+These files live at `/root/GodWorld/` and are catalogued here for completeness. They are not under the `docs/` tree but are load-bearing.
+
+- **`CONTEXT.md`** — project vocabulary. Every meaningful term defined exactly once. Read at boot; cite by canonical term; update inline when grilling sessions resolve a term. Adopted S187 (ADR-0001). *(reference, vocabulary, active)*
+- **`CLAUDE.md`** — top-level harness rules and routing. Auto-loaded by Claude Code. *(reference, infrastructure, active)*
+- **`MEMORY.md`** — Mags' persistent-memory layer (separate from this catalog). Lives under `/root/.claude/projects/-root-GodWorld/memory/`.
 
 ---
 
@@ -177,10 +188,10 @@ pointers:
 - **[[plans/TEMPLATE]]** — plan file template. Every new plan copies this shape. Adapted from obra/superpowers writing-plans skill (S152). *(reference, architecture, active)*
 - **[[plans/BACKLOG]]** — consolidated backlog of parked phase designs (Phase 4.1, 5.4, 7, 8.6, 9, 11.1, 12, 20, 21, 23, 24, 25, 26.2, 26.3, 27, 28, 29, 30, 32, 35, 36, 37, 41 remainder) + research reference material. Extracted from ROLLOUT_PLAN S152. *(plan, architecture, active)*
 - **[[plans/skill-eval-framework]]** — Anthropic skill-creator eval loop pulled into GodWorld. Grades against story_evaluation/brief_template/citizen_selection. HIGH priority, not started. *(plan, architecture, active)*
-- **[[plans/2026-04-16-phase-38-5-measurement-loop]]** — Phase 38.5 enricher: compares prior-cycle remedy predictions against observed engine state, adds `measurement` field per pattern. Engine/sheet terminal. *(plan, engine, active)*
-- **[[plans/2026-04-16-phase-38-6-skill-shrink]]** — Phase 38.6 skill shrink: `/engine-review` Step 7 consumes structured `measurement` from 38.5 instead of parsing prior-cycle markdown. Research-build terminal. Blocked-by 38.5 for full test. *(plan, media, active)*
+- **[[plans/2026-04-16-phase-38-5-measurement-loop]]** — Phase 38.5 enricher: compares prior-cycle remedy predictions against observed engine state, adds `measurement` field per pattern. Engine/sheet terminal. DONE S156. *(plan, engine, complete)*
+- **[[plans/2026-04-16-phase-38-6-skill-shrink]]** — Phase 38.6 skill shrink: `/engine-review` Step 7 consumes structured `measurement` from 38.5 instead of parsing prior-cycle markdown. Research-build terminal. DONE S156. *(plan, media, complete)*
 - **[[plans/2026-04-16-phase-40-1-session-log-interface]]** — Phase 40.1 session-log interface: `lib/sessionLog.js` read-only helper returning positional slices (last N / since timestamp). DONE S156 — `readByTag` dropped from MVP per inventory; session-end skill migrated as proof. *(plan, engine, complete)*
-- **[[plans/2026-04-16-phase-40-6-injection-defense]]** — Phase 40.6 layered injection defense: six-layer stack (input refusal, memory fence, memory-write gate, context scan, tool gate, Rhea review). Layers 2 and 4 ported from Hermes. Research-build drafted; engine/sheet builds. *(plan, security, active)*
+- **[[plans/2026-04-16-phase-40-6-injection-defense]]** — Phase 40.6 layered injection defense: six-layer stack (input refusal, memory fence, memory-write gate, context scan, tool gate, Rhea review). Layers 2 and 4 ported from Hermes. DONE S156 — all six layers shipped. *(plan, security, complete)*
 - **[[plans/2026-04-16-phase-40-3-credential-audit]]** — Phase 40.3 credential isolation audit: full inventory of env secrets + on-disk credentials, reachability analysis across 5 injection surfaces + 27 sub-agents, 8-task relocation plan. Research-build drafted S156; engine/sheet picks up when priority rises. *(plan, security, active)*
 - **[[plans/mara-reference-files]]** — Mara reference files plan. COMPLETE S105. *(plan, civic, archived)*
 - **[[plans/2026-04-17-briefing-bundle-trim]]** — trim per-desk c-cycle briefing bundle: `base_context.json` shared load, always-empty packet fields deleted, `interviewCandidates` 520→20 via relevance scoring, briefing versioning added via post-publish. Addresses recs 1/2/3/7 from the S156 bloat audit. Research-build drafted S156; media terminal executes. *(plan, media, active)*
@@ -189,12 +200,20 @@ pointers:
 - **[[plans/2026-04-25-photo-pipeline-rebuild]]** — `/edition-print` Step 1 rebuild: `djDirect.js` invokes `subagent_type=dj-hartley` to produce 5–8 art-direction specs as JSON (120–180-word prompts each); `generate-edition-photos.js` consumes JSON verbatim; `photoQA.js` template-bug fix + 1-retry regen loop; `/edition-print` trigger extended to all four journalism skills. Together AI/FLUX default + OpenAI gpt-image-1 A/B task. DJ four-file canon-fidelity structure LOCKED. 13 tasks. Supermemory mags doc `hzvGaG7nh7A8nszmLzzAtF`. *(plan, media, active)*
 - **[[plans/2026-04-26-non-edition-publishing-pipeline]]** — Unified publish pipeline for interview/supplemental/dispatch alongside compiled editions. Format contract is the keystone: all artifacts land as `editions/cycle_pulse_<type>_<cycle>_<slug>.txt` with Bay Tribune masthead + standardized sections (Header / Body / Names Index / Citizen Usage Log / Article Table). One `/post-publish --type` skill with deterministic verification gates; one `/edition-print --type` flag; existing scripts get minimal `--type`/`--cycle` flags. 10 tasks across three phases. Replaces S178 bundled non-edition pipeline gap + DONE-S179 Step 8a/8b skill bug. Validation fixture: C92 Mayor Santana interview replay. *(plan, media, infrastructure, active)*
 - **[[plans/2026-04-26-discord-bot-edition-currency]]** — Discord bot reads current cycle/edition from artifacts that already exist (`base_context.json`, `production_log_edition_c{XX}.md`); delete legacy `latest_edition_brief.md`; wire `base_context.json` refresh into `/post-publish`. Cross-terminal: research-build (skill + plan), engine-sheet (code + filesystem + DISCORD.md), media (letters-desk references). 6 tasks. Surfaced S180 when bot was C90-anchored despite E92 + Mayor interview canonized. *(plan, media, infrastructure, active)*
-- **[[plans/2026-04-27-world-data-unified-ingest-rebuild]]** — S181 follow-up. Per-domain card shape contracts + container-tag scheme (`wd-citizens`, `wd-business`, `wd-faith`, `wd-cultural`, `wd-neighborhood`, `wd-initiative`, `wd-player-truesource`) so MCP lookups can filter at the API layer and DELETE-by-tag becomes the wipe primitive. 5 phases / 13 tasks: inventory script + citizen retrofit (write-new-DELETE-old per Mike S182) + 5 new writers (business / faith / cultural / neighborhood / initiative) + player_truesource retrofit + 4 new MCP tools (`lookup_business` / `lookup_faith_org` / `lookup_cultural` / `get_neighborhood_state`). Tag scheme verified S182 with probe doc `XQseCdoQpsb6SZCUM6i12o`. Research-build owns spec; engine-sheet builds writers + MCP tools. *(plan, architecture, infrastructure, draft)*
+- **[[plans/2026-04-27-world-data-unified-ingest-rebuild]]** — S181 follow-up. Per-domain card shape contracts + container-tag scheme (`wd-citizens`, `wd-business`, `wd-faith`, `wd-cultural`, `wd-neighborhood`, `wd-initiative`, `wd-player-truesource`) so MCP lookups can filter at the API layer and DELETE-by-tag becomes the wipe primitive. **DONE S183** — 9 commits, 843 world-data docs, 100% domain-tagged, 0 orphans. M1-M4 MCP tools live. *(plan, architecture, infrastructure, complete)*
 - **[[plans/2026-04-28-skill-supermemory-alignment]]** — S183 follow-up to the world-data rebuild. Skills that search or save Supermemory get aligned to the post-rebuild tag scheme + new MCP tool inventory. Two artifacts: search/save matrix in `SUPERMEMORY.md` (authoritative) + per-skill `.md` edits where references are misaligned. 4 phases: inventory all skills under `.claude/skills/` for Supermemory references, draft matrix, per-skill alignment edits, validate via `/sift` C92 dry-run. ROLLOUT entry added S182, unblocked S183 by engine-sheet's M1-M4 commit (`c77cb37`). *(plan, media, civic, infrastructure, complete)*
-- **[[plans/2026-04-28-intake-side-citizen-derivation]]** — S184 follow-up combining two engine-sheet handoffs (ENGINE_REPAIR Row 4 lifecycle defaults forward-looking + Row 17 RoleType upstream computation). Goal: spec where + how 8 citizen demographic + lifecycle fields (RoleType, EducationLevel, Gender, YearsInCareer, DebtLevel, NetWorth, MaritalStatus, NumChildren) get computed at intake time, so new citizens land with realistic values instead of empty cells or hardcoded sentinels. 5 phases / ~10 tasks: audit upstream intake paths (`mediaRoomIntake.js`, `processAdvancementIntake.js`, `ingestPublishedEntities.js`, `generateGenericCitizens.js`), choose canonical sources (`data/economic_parameters.json` 198-entry vs live-ledger frequency vs djb2/CDF derivation), per-field specs ported from `scripts/backfillLifecycleDefaults.js`, engine-sheet handoff. Path B fallback in `processAdvancementIntake.js` preserved as defense-in-depth. Same architectural theme as Row 5 name-cluster fix (caps at generator-side). MEDIUM. *(plan, engine, citizens, architecture, draft)*
+- **[[plans/2026-04-28-intake-side-citizen-derivation]]** — S184 follow-up combining two engine-sheet handoffs (ENGINE_REPAIR Row 4 lifecycle defaults forward-looking + Row 17 RoleType upstream computation). 8 citizen demographic + lifecycle fields (RoleType, EducationLevel, Gender, YearsInCareer, DebtLevel, NetWorth, MaritalStatus, NumChildren) computed at intake time. **DONE S184** — `lib/citizenDerivation.js` + `utilities/citizenDerivation.gs` shipped; 3 integration paths (mediaRoomIntake / processAdvancementIntake / ingestPublishedEntities); 5/5 validation gates green. Closes ENGINE_REPAIR Row 4 + Row 17 forward-looking gaps. *(plan, engine, citizens, architecture, done)*
 - **[[plans/2026-04-28-female-citizen-balance]]** — S184 follow-up consuming the intake-derivation library. **DONE S184.** Final F-share **44.26%** (370F / 836 POPID-bearing rows; exceeded ≥40% target). 150 rows landed at POP-00802..POP-00951, all `Gender='female'`. wd-citizen cards built for all 150 (substrate 686 → 836). 4-commit chain: `649b304` plan + name pool → `c583356` script + dry-run 5/5 gates → `a0e6de1` apply + readback verified → `62a01d5` `buildCitizenCards.js --popid-range` flag + targeted card build. Mid-run decisions captured in plan changelog (Notes-marker dropped, faith-leader ROLE_DENYLIST, Gate 4 ±5 → ±7%, filter-then-draw). Cap reviewer assertion #9 (≥3 female citizens in non-official roles per edition) now has substantially more headroom. *(plan, engine, citizens, architecture, done)*
-- **[[plans/2026-04-28-phase-42-writer-consolidation]]** — S184 follow-up. ENGINE_REPAIR Row 8 — refactor 37 files / 175 cycle-path direct-write sites to `ctx.writeIntents` pattern (Path 2 of S146 audit; Path 1 closed S156 by adding all writers to engine.md exceptions list). Frame: efficiency not correctness — zero bugs, exceptions list cleanup. Phase 1 inventory DONE (see [[engine/PHASE_42_INVENTORY]]). Phase 2 (research-build, next session): per-category decisions (schema-setup carve-out, read-state-then-write hazard, caller-passed-sheet helpers) + dryRun + replay verification regimen. Phase 3-5 (engine-sheet, 6-8 sessions): B0 pilot + B1-B7 batches + cull exceptions list. Tiered acceptance: B6 stop-point ships 29 files / ~110 sites (58% of scope); B7 closes 4 intake heavies (mediaRoomIntake/processAdvancementIntake/parseMediaRoomMarkdown/continuityNotesParser = 65 sites). MEDIUM. *(plan, engine, infrastructure, architecture, draft)*
+- **[[plans/2026-04-28-phase-42-writer-consolidation]]** — S184 follow-up. ENGINE_REPAIR Row 8 — refactor 37 files / 175 cycle-path direct-write sites to `ctx.writeIntents` pattern (Path 2 of S146 audit; Path 1 closed S156). Phase 1 inventory + Phase 2 patterns DONE S184; B0 + B1 shipped engine-sheet S184; phase05-ledger §5.6 redesign LOCKED + AMENDED S185 (canonical doc: mags `hQE4rREEWBpS9aS1g3mQ3M`, 18 SL touchers, ~10-13 commits). B2 unblocks once redesign batch lands. Tiered B6 stop-point (~58%) / B7 (full) acceptance preserved. *(plan, engine, infrastructure, architecture, active)*
 - **[[plans/2026-04-25-canon-fidelity-rollout]]** — S174 canon-fidelity rollout, COMPLETE S175. Per-agent four-file structure (IDENTITY + LENS + RULES + SKILL) applying three-tier framework from [[canon/CANON_RULES]]. 25 of 25 agents converted (Wave A 8 + Wave B 12 + Reviewer rebuild 4 + EIC mags-corliss 1; engine-validator scope-noted N/A as code-only). S175 sports-history carveout added per Mike's sports-universe-laxer policy. 5 trap-test validations passed. Q1/Q2/Q3 resolved. Out-of-scope findings (Hal voice file, stale cycle-rule sweep) flagged for follow-up. *(plan, canon, architecture, complete)*
+
+---
+
+## `docs/adr/` — architectural decision records (new S187, ADR pattern)
+
+Small, dated decision records. Created only when a choice is (a) hard to reverse, (b) surprising without context, (c) result of a real trade-off. Pattern adopted from `mattpocock/skills` MIT-licensed example.
+
+- **[[adr/0001-adopt-context-and-adrs]]** — adoption of CONTEXT.md and the ADR pattern itself. The first decision worth recording is the decision to record decisions. *(reference, architecture, decision, active)*
 
 ---
 
@@ -240,6 +259,7 @@ pointers:
 
 ## Changelog
 
+- 2026-04-29 (S187, research-build) — Added Repo root section catalogueing root-level `CONTEXT.md`, `CLAUDE.md`, and `MEMORY.md`. Added `docs/adr/` folder section with ADR-0001 (adoption of CONTEXT.md and the ADR pattern itself). Pattern source: `mattpocock/skills` MIT.
 - 2026-04-21 (S170, research-build) — Registered [[plans/2026-04-21-memento-cbr-case-bank]] (Memento paper) and [[plans/2026-04-21-md-audit-skill]] (existence-staleness audit, triggered by Autogenesis paper + Mike's retirement-protocol observation). Phase 1 of the Memento plan adds `docs/concepts/case-based-reasoning.md` which registers separately when created. Also registered two outside AI review PDFs: `docs/research/godworld_review_2026-04-20.pdf` (shallow surface review; actionable residue = bounded test surface LOW rollout item) and `docs/research/godworld_city_functions_analysis_2026-04-20.pdf` (gap analysis; serves as wiki reference for Phase 43 — Engine Expansion).
 - 2026-04-14 — Initial catalog (Phase 41.2, S146). 86 active docs across 7 folders. Companion to [[SCHEMA]]. Will fold [[engine/DOCUMENTATION_LEDGER]] in over time.
 - 2026-04-16 — Added [[plans/TEMPLATE]] (S152). Plan file contract for the rollout split.

@@ -44,16 +44,15 @@ function mulberry32_uni_(seed) {
 
 function runAsUniversePipeline_(ctx) {
 
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  if (!ctx.ledger) {
+    throw new Error('runAsUniversePipeline_: ctx.ledger not initialized');
+  }
   var ss = ctx.ss;
-  var ledger = ss.getSheetByName('Simulation_Ledger');
   var logSheet = ss.getSheetByName('LifeHistory_Log');
-  if (!ledger) return;
-
-  var values = ledger.getDataRange().getValues();
-  if (values.length < 2) return;
-
-  var header = values[0];
-  var rows = values.slice(1);
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return;
 
   var idx = function(n) { return header.indexOf(n); };
 
@@ -582,9 +581,9 @@ function runAsUniversePipeline_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // BATCH WRITES
+  // BATCH WRITES — Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
   // ═══════════════════════════════════════════════════════════════════════════
-  ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+  ctx.ledger.dirty = true;
 
   // Batch log write (v3.0 - single API call)
   if (logSheet && logRows.length > 0) {

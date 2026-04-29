@@ -132,12 +132,17 @@ function runCivicElections_(ctx) {
   
   // ═══════════════════════════════════════════════════════════════════════════
   // LOAD POTENTIAL CHALLENGERS FROM SIMULATION LEDGER
+  // Phase 42 §5.6: read/mutate via ctx.ledger; commit at Phase 10. Headers
+  // immutable post-init; row-1 rewrite is collapsed to the consolidated
+  // row-2-onward Phase 10 commit (header preserved as initial values).
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  var simLedger = ss.getSheetByName('Simulation_Ledger');
-  var simData = simLedger.getDataRange().getValues();
-  var simHeader = simData[0];
-  
+
+  if (!ctx.ledger) {
+    throw new Error('runCivicElections_: ctx.ledger not initialized');
+  }
+  var simHeader = ctx.ledger.headers;
+  var simRows = ctx.ledger.rows;
+
   var sCol = function(h) { return simHeader.indexOf(h); };
   
   var iSPopId = sCol('POPID');
@@ -153,8 +158,8 @@ function runCivicElections_(ctx) {
   // Build candidate pool: Tier 2-3 citizens, preferably with civic-adjacent roles
   var candidatePool = [];
   
-  for (var s = 1; s < simData.length; s++) {
-    var srow = simData[s];
+  for (var s = 0; s < simRows.length; s++) {
+    var srow = simRows[s];
     var tier = Number(srow[iSTier]) || 5;
     var civFlag = (srow[iSCIV] || '').toString().toLowerCase();
     var sStatus = (srow[iSStatus] || '').toString().toLowerCase();
@@ -435,20 +440,19 @@ function runCivicElections_(ctx) {
     var res = results[r];
     if (res.upset && res.challenger !== 'Unopposed') {
       // Find challenger in sim ledger and mark CIV
-      for (var sl = 1; sl < simData.length; sl++) {
-        var simRow = simData[sl];
+      for (var sl = 0; sl < simRows.length; sl++) {
+        var simRow = simRows[sl];
         var simName = simRow[iSFullName] || (simRow[iSFirst] + ' ' + simRow[iSLast]);
         if (simName.trim() === res.challenger) {
           simRow[iSCIV] = 'y';
           simRow[iSTierRole] = res.office;
-          simData[sl] = simRow;
+          simRows[sl] = simRow;
+          ctx.ledger.dirty = true;
           break;
         }
       }
     }
   }
-  
-  simLedger.getRange(1, 1, simData.length, simData[0].length).setValues(simData);
   
   // ═══════════════════════════════════════════════════════════════════════════
   // OUTPUT TO CTX

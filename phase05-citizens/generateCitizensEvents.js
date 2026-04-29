@@ -48,14 +48,13 @@ function mulberry32_(seed) {
 }
 
 function generateCitizensEvents_(ctx) {
-  var sheet = ctx.ss.getSheetByName("Simulation_Ledger");
-  if (!sheet) return;
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return;
-
-  var header = values[0];
-  var rows = values.slice(1);
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  if (!ctx.ledger) {
+    throw new Error('generateCitizensEvents_: ctx.ledger not initialized');
+  }
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return;
   function idx(n) { return header.indexOf(n); }
 
   var iTier = idx("Tier");
@@ -1444,7 +1443,10 @@ function generateCitizensEvents_(ctx) {
     count++;
   }
 
-  sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+  // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
+  if (count > 0) {
+    ctx.ledger.dirty = true;
+  }
 
   if (lifeLog && logRows.length) {
     var startRow = lifeLog.getLastRow() + 1;

@@ -1059,15 +1059,17 @@ function existsInLedger_(ledgerValues, first, last) {
  * ============================================================================
  */
 function updateNamedCitizens_(ctx) {
-  var sheet = ctx.ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return;
-
-  var range = sheet.getDataRange();
-  var values = range.getValues();
-  if (values.length < 2) return;
-
-  var header = values[0];
-  var rows = values.slice(1);
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  // Audit-miss: §5.6.6 spec did not list this writer (it's in godWorldEngine2.js
+  // itself). Migrated S188 to keep its LastUpdated mutations from being
+  // clobbered by the consolidated commit. Spec table A1 entry #11
+  // (`generateNamedCitizensEvents.js:715`) has zero callers — orphan.
+  if (!ctx.ledger) {
+    throw new Error('updateNamedCitizens_: ctx.ledger not initialized');
+  }
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return;
 
   var idx = function(name) { return header.indexOf(name); };
 
@@ -1075,6 +1077,7 @@ function updateNamedCitizens_(ctx) {
   var iStatus = idx('Status');
   var iLast = idx('LastUpdated');
 
+  var updated = 0;
   for (var i = 0; i < rows.length; i++) {
     var row = rows[i];
 
@@ -1084,14 +1087,16 @@ function updateNamedCitizens_(ctx) {
     if (status === 'Deceased') continue;
     if (mode !== 'ENGINE') continue;
 
-    // Only update LastUpdated
     row[iLast] = ctx.now;
 
     rows[i] = row;
     ctx.summary.citizensUpdated++;
+    updated++;
   }
 
-  sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+  if (updated > 0) {
+    ctx.ledger.dirty = true;
+  }
 }
 
 

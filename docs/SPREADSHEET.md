@@ -6,7 +6,7 @@
 
 **Canonical column map:** `schemas/SCHEMA_HEADERS.md` — auto-generated row/col counts and A/B/C header list for every visible tab (53 as of 2026-04-15 refresh). Refresh via Apps Script `exportAndPushToGitHub` in `utilities/exportSchemaHeaders.js`. Ground truth when this doc's tab descriptions drift. *(Phase 41.6 backlink, S156.)*
 
-Last audited: Session 156 (2026-04-17) — header row counts refreshed from SCHEMA_HEADERS (2026-04-15). Per-tab row counts in the Active Tabs tables below are still from S105 and will have drifted — SCHEMA_HEADERS is the authoritative source for any specific tab.
+Last audited: Session 187 (2026-04-29, /doc-audit data group) — Simulation_Ledger row count bumped to ~837 (S185 sheet-hygiene trim). Other per-tab row counts still from S105 and increasingly drifted — SCHEMA_HEADERS is the authoritative source for any specific tab. SCHEMA_HEADERS itself last regenerated 2026-04-27 (pre-S185 trim); next regen on engine-sheet's schedule.
 
 ---
 
@@ -33,7 +33,7 @@ These are read/written during every cycle run.
 | **World_Population** | 1 | ENGINE | ENGINE | Birth/death/migration totals |
 | **World_Drift_Report** | 1 | ENGINE | ENGINE | Demographic drift metrics |
 | **Cycle_Weather** | 12 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Weather by cycle |
-| **Simulation_Ledger** | 761 | ENGINE, SCRIPT, DASHBOARD | ENGINE | **The citizens.** 47 columns (A-AU; Gender in AU confirmed S146). All ClockModes. |
+| **Simulation_Ledger** | ~837 | ENGINE, SCRIPT, DASHBOARD | ENGINE | **The citizens.** 47 columns (A-AU; Gender in AU confirmed S146). All ClockModes. Max POPID POP-00951 (S184 +150 female balance, S185 -74 blank-row trim). |
 | **LifeHistory_Log** | 3,223 | ENGINE, SCRIPT, DASHBOARD | ENGINE | Citizen life events. 7 columns. |
 | **Generic_Citizens** | 277 | ENGINE, SCRIPT | ENGINE | Emergence pipeline — Tier 4 citizen generation |
 | **Household_Ledger** | 529 | ENGINE | ENGINE | Household groupings, rent, ownership |

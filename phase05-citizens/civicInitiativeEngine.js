@@ -597,10 +597,7 @@ function getCouncilState_(ctx) {
  * Fallback: Get council state from Simulation_Ledger (legacy method)
  */
 function getCouncilStateFromSimLedger_(ctx) {
-  
-  var ss = ctx.ss;
-  var ledger = ss.getSheetByName('Simulation_Ledger');
-  
+
   // v1.2: 9-seat council model
   var state = {
     totalSeats: 9,
@@ -619,13 +616,11 @@ function getCouncilStateFromSimLedger_(ctx) {
     president: null
   };
 
-  if (!ledger) return state;
-  
-  var data = ledger.getDataRange().getValues();
-  if (data.length < 2) return state;
-  
-  var header = data[0];
-  var rows = data.slice(1);
+  // Phase 42 §5.6: fallback path — read SL via shared ctx.ledger.
+  if (!ctx.ledger || ctx.ledger.rows.length === 0) return state;
+
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
   
   var idx = function(n) { return header.indexOf(n); };
   

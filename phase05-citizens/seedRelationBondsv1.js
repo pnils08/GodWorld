@@ -53,15 +53,15 @@ function seedRelationshipBonds_(ctx) {
   
   Logger.log('seedRelationshipBonds_: Starting seed (current: ' + existingCount + ')');
   
-  // Load citizens from Simulation_Ledger
-  var ledgerSheet = ss.getSheetByName('Simulation_Ledger');
-  if (!ledgerSheet) {
-    Logger.log('seedRelationshipBonds_: No Simulation_Ledger found');
+  // Phase 42 §5.6: read SL via shared ctx.ledger so any phase04/phase05
+  // mutations + new citizens (checkForPromotions / processAdvancementIntake
+  // pushes) are visible.
+  if (!ctx.ledger) {
+    Logger.log('seedRelationshipBonds_: ctx.ledger not initialized');
     return 0;
   }
-  
-  var ledgerData = ledgerSheet.getDataRange().getValues();
-  var headers = ledgerData[0];
+  var headers = ctx.ledger.headers;
+  var ledgerRows = ctx.ledger.rows;
   
   // Find column indices
   var cols = {
@@ -77,8 +77,8 @@ function seedRelationshipBonds_(ctx) {
   
   // Build citizen array
   var citizens = [];
-  for (var i = 1; i < ledgerData.length; i++) {
-    var row = ledgerData[i];
+  for (var i = 0; i < ledgerRows.length; i++) {
+    var row = ledgerRows[i];
     var status = cols.status >= 0 ? String(row[cols.status] || '').toLowerCase() : 'active';
 
     if (status === 'active' || status === '') {

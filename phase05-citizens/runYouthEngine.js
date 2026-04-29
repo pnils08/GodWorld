@@ -100,8 +100,8 @@ function runYouthEngine_(ctx) {
   // Get generic citizens (potential youth)
   var genericCitizens = getGenericYouth_(ss);
 
-  // Get named citizens who are youth
-  var namedYouth = getNamedYouth_(ss);
+  // Get named citizens who are youth (Phase 42 §5.6: pass ctx for ctx.ledger access)
+  var namedYouth = getNamedYouth_(ctx);
 
   // Combine youth pools
   var allYouth = namedYouth.concat(genericCitizens);
@@ -261,19 +261,18 @@ function getGenericYouth_(ss) {
 
 /**
  * Get named citizens who are youth-aged.
+ * Phase 42 §5.6: reads SL via shared ctx.ledger.
  *
- * @param {SpreadsheetApp.Spreadsheet} ss
+ * @param {Object} ctx - Engine context with ctx.ledger initialized
  * @return {Array}
  */
-function getNamedYouth_(ss) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet || sheet.getLastRow() < 2) {
+function getNamedYouth_(ctx) {
+  if (!ctx || !ctx.ledger || ctx.ledger.rows.length === 0) {
     return [];
   }
 
-  var data = sheet.getDataRange().getValues();
-  var header = data[0];
-  var rows = data.slice(1);
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
 
   var idx = function(name) { return header.indexOf(name); };
 

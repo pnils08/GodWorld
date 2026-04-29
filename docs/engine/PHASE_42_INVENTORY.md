@@ -69,7 +69,7 @@ Columns:
 | `phase03-population/generateMonthlyDriftReport.js` | 2 | 0 | 2 | 0 | 130 |
 | `phase03-population/updateCityTier.js` | 1 | 0 | 1 | **1** | 77 |
 | `phase04-events/generateGenericCitizenMicroEvent.js` | 3 | 0 | 0 | 0 | 612 |
-| `phase04-events/generateCitizenEvents.js` | 2 | 0 | 1 | 0 | 951 |
+| ~~`phase04-events/generateCitizenEvents.js`~~ | ~~2~~ | ~~0~~ | ~~1~~ | ~~0~~ | ~~951~~ DELETED S185 (dead duplicate of phase05/generateCitizensEvents.js) |
 | `phase04-events/worldEventsLedger.js` | 2 | 0 | 2 | 0 | 126 |
 | `phase04-events/generationalEventsEngine.js` | 2 | 0 | 1 | 0 | 1089 |
 | `phase05-citizens/updateCivicApprovalRatings.js` | 1 | 0 | 1 | 0 | 370 |

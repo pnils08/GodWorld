@@ -15,7 +15,7 @@ paths:
   - Phase 2 world state: `applyEditionCoverageEffects.js` (Edition_Coverage_Ratings — per-edition coverage scoring)
   - Phase 3 population: `applyDemographicDrift.js` (World_Population), `updateNeighborhoodDemographics.js` (Neighborhood_Demographics), `updateCrimeMetrics.js` (Crime_Metrics), `finalizeWorldPopulation.js` (World_Population — per-cycle world-state snapshot), `generateMonthlyDriftReport.js` (World_Drift_Report — monthly drift summary)
   - Phase 3 helper: `updateCityTier.js` (caller-passed sheet — column-update helper, write target decided by caller)
-  - Phase 4 event generators: `generateGenericCitizenMicroEvent.js`, `generateGameModeMicroEvents.js`, `generateCitizenEvents.js`, `generationalEventsEngine.js` — write LifeHistory_Log + Simulation_Ledger citizen event rows
+  - Phase 4 event generators: `generateGenericCitizenMicroEvent.js`, `generateGameModeMicroEvents.js`, `generationalEventsEngine.js` — write LifeHistory_Log + Simulation_Ledger citizen event rows (`generateCitizenEvents.js` deleted S185 — was dead duplicate of phase05's `generateCitizensEvents.js`)
   - Phase 4 helper: `worldEventsLedger.js` (caller-passed sheet — event ledger append helper)
   - Phase 5 Tier-5 engines: `householdFormationEngine.js`, `generationalWealthEngine.js`, `educationCareerEngine.js` — write to their own tracking sheets
   - Phase 5 SL writers: `generateCitizensEvents.js`, `generateNamedCitizensEvents.js`, `checkForPromotions.js`, `runEducationEngine.js`, `runAsUniversePipeline.js` — write to Simulation_Ledger + logs

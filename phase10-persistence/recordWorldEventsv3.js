@@ -1,10 +1,21 @@
 /**
  * ============================================================================
- * recordWorldEventsv3_ v3.5 - Write-Intent Based
+ * recordWorldEventsv3_ v3.6 - Write-Intent Based
  * ============================================================================
  *
  * Enhanced V3 ledger writer with GodWorld Calendar integration.
  * Writes to WorldEvents_V3_Ledger using write-intents model.
+ *
+ * v3.6 Changes (S185 polish):
+ * - deriveDomain: word-boundary keyword matching (\\bkeyword\\b regex) prevents
+ *   substring false-matches like "as" matching "last"/"has"/"mass"
+ * - deriveDomain: domainMap iterated in length-descending order so multi-word
+ *   keywords ("kitchen fire", "lost dog") match before single-word collisions
+ * - domainMap: expanded with 8 keywords for common General fall-throughs
+ *   (misfiled, missing, document, audit, eviction, lease, permit, application)
+ * - deriveEventType: 'health-alert' renamed to 'health-event' — descriptions
+ *   matching health keywords aren't necessarily alerts (no downstream readers
+ *   found for the 'health-alert' literal string)
  *
  * v3.5 Changes:
  * - Deprecated 16 more dead columns (H-V, AB, AC → empty strings)
@@ -149,23 +160,39 @@ function recordWorldEventsv3_(ctx) {
     // Misc
     'earthquake': 'Environment', 'drone': 'Technology', 'balloon': 'Community',
     'lost dog': 'Community', 'flash choir': 'Community', 'lost child': 'Community',
-    'cleanup': 'Environment', 'tree planting': 'Environment'
+    'cleanup': 'Environment', 'tree planting': 'Environment',
+
+    // v3.6 (S185): expanded for General fall-through reduction
+    'misfiled': 'Civic', 'missing funds': 'Civic', 'document': 'Civic',
+    'audit': 'Civic', 'eviction': 'Housing', 'lease': 'Housing',
+    'permit': 'Civic', 'application': 'Civic'
   };
 
+  // v3.6 (S185): pre-sort keywords by descending length so multi-word
+  // and longer-specific keywords match before short ambiguous ones.
+  // Word-boundary regex prevents "as" matching "last"/"mass"/"has".
+  var sortedDomainKeys = [];
+  for (var dk in domainMap) {
+    if (domainMap.hasOwnProperty(dk)) sortedDomainKeys.push(dk);
+  }
+  sortedDomainKeys.sort(function(a, b) { return b.length - a.length; });
+
+  function escapeRegex_(s) {
+    return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
   function deriveDomain(desc) {
-    var lower = desc.toLowerCase();
-    for (var keyword in domainMap) {
-      if (domainMap.hasOwnProperty(keyword)) {
-        if (lower.indexOf(keyword.toLowerCase()) >= 0) {
-          return domainMap[keyword];
-        }
-      }
+    if (!desc) return 'General';
+    for (var i = 0; i < sortedDomainKeys.length; i++) {
+      var keyword = sortedDomainKeys[i];
+      var re = new RegExp('\\b' + escapeRegex_(keyword) + '\\b', 'i');
+      if (re.test(desc)) return domainMap[keyword];
     }
     return 'General';
   }
 
   function deriveEventType(desc, domain) {
-    if (domain === 'Health') return 'health-alert';
+    if (domain === 'Health') return 'health-event';
     if (domain === 'Civic') return 'civic-activity';
     if (domain === 'Infrastructure') return 'infra-incident';
     if (domain === 'Safety') return 'safety-incident';
@@ -248,7 +275,7 @@ function recordWorldEventsv3_(ctx) {
     );
   }
 
-  Logger.log('recordWorldEventsv3_ v3.5: Queued ' + rows.length + ' events for cycle ' + cycle);
+  Logger.log('recordWorldEventsv3_ v3.6: Queued ' + rows.length + ' events for cycle ' + cycle);
 }
 
 

@@ -1043,28 +1043,8 @@ function existsInLedger_(ledgerValues, first, last) {
 }
 
 
-/**
- * ============================================================================
- * SAFE POP-ID GENERATOR
- * ============================================================================
- */
-function nextPopIdSafe_(ledgerValues) {
-  if (ledgerValues.length < 2) return 'POP-00001';
-
-  var header = ledgerValues[0];
-  var idx = header.indexOf('POPID');
-
-  var maxN = 0;
-  for (var r = 1; r < ledgerValues.length; r++) {
-    var v = (ledgerValues[r][idx] || '').toString().trim();
-    var m = v.match(/^POP-(\d+)$/);
-    if (m) {
-      var n = Number(m[1]);
-      if (n > maxN) maxN = n;
-    }
-  }
-  return 'POP-' + padStart_(maxN + 1, 5, '0');
-}
+// S185 dead-code scan removal: nextPopIdSafe_ — superseded by other POPID
+// generators; no callers verified.
 
 
 /**

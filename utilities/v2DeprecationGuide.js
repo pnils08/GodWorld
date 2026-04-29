@@ -150,40 +150,6 @@ function scanForDeprecatedPatterns_(code) {
 }
 
 
-/**
- * Generates a deprecation report for a file.
- * @param {string} fileName - Name of the file
- * @param {string} code - JavaScript source code
- * @returns {Object} Report with findings and recommendations
- */
-function generateDeprecationReport_(fileName, code) {
-  var findings = scanForDeprecatedPatterns_(code);
-
-  var highCount = 0;
-  var mediumCount = 0;
-  var lowCount = 0;
-
-  for (var i = 0; i < findings.length; i++) {
-    var f = findings[i];
-    if (f.severity === 'high') highCount += f.count;
-    else if (f.severity === 'medium') mediumCount += f.count;
-    else lowCount += f.count;
-  }
-
-  return {
-    fileName: fileName,
-    findings: findings,
-    summary: {
-      totalIssues: highCount + mediumCount + lowCount,
-      high: highCount,
-      medium: mediumCount,
-      low: lowCount
-    },
-    v3Ready: highCount === 0 && mediumCount === 0
-  };
-}
-
-
 // ═══════════════════════════════════════════════════════════════════════════
 // MIGRATION HELPERS
 // ═══════════════════════════════════════════════════════════════════════════
@@ -204,108 +170,14 @@ function v3Random_(ctx) {
 }
 
 
-/**
- * V3 random integer replacement.
- * @param {Object} ctx - Engine context
- * @param {number} min - Minimum value (inclusive)
- * @param {number} max - Maximum value (inclusive)
- * @returns {number} Random integer
- */
-function v3RandomInt_(ctx, min, max) {
-  var r = v3Random_(ctx);
-  return Math.floor(r * (max - min + 1)) + min;
-}
-
-
-/**
- * V3 random array pick replacement.
- * @param {Object} ctx - Engine context
- * @param {Array} arr - Array to pick from
- * @returns {*} Random element or null if empty
- */
-function v3PickRandom_(ctx, arr) {
-  if (!arr || arr.length === 0) return null;
-  var idx = Math.floor(v3Random_(ctx) * arr.length);
-  return arr[idx];
-}
-
-
-/**
- * V3 random chance check (like Math.random() < 0.3).
- * @param {Object} ctx - Engine context
- * @param {number} probability - Chance 0-1
- * @returns {boolean} True if chance succeeds
- */
-function v3Chance_(ctx, probability) {
-  return v3Random_(ctx) < probability;
-}
-
-
 // ═══════════════════════════════════════════════════════════════════════════
 // CTX.SUMMARY MIGRATION
 // ═══════════════════════════════════════════════════════════════════════════
 
-/**
- * Creates a compatibility shim between ctx.summary (V2) and canonical ctx (V3).
- * This allows gradual migration while maintaining backwards compatibility.
- *
- * V2 Pattern: ctx.summary.weather
- * V3 Pattern: ctx.world.weather
- *
- * The shim syncs both so old and new code work together.
- */
-function createSummaryShim_(ctx) {
-  // Ensure V3 canonical structure exists
-  ctx.time = ctx.time || {};
-  ctx.world = ctx.world || {};
-  ctx.population = ctx.population || {};
-  ctx.neighborhoods = ctx.neighborhoods || {};
-  ctx.events = ctx.events || {};
-  ctx.citizens = ctx.citizens || {};
-  ctx.civic = ctx.civic || {};
-  ctx.media = ctx.media || {};
-  ctx.audit = ctx.audit || {};
-
-  // Keep summary for backwards compatibility
-  ctx.summary = ctx.summary || {};
-
-  // Sync common fields
-  var syncFields = [
-    { v2: 'cycleId', v3Path: ['time', 'cycleId'] },
-    { v2: 'season', v3Path: ['world', 'season'] },
-    { v2: 'weather', v3Path: ['world', 'weather'] },
-    { v2: 'holiday', v3Path: ['world', 'holiday'] },
-    { v2: 'holidayPriority', v3Path: ['world', 'holidayPriority'] },
-    { v2: 'isFirstFriday', v3Path: ['world', 'isFirstFriday'] },
-    { v2: 'isCreationDay', v3Path: ['world', 'isCreationDay'] },
-    { v2: 'sportsSeason', v3Path: ['world', 'sportsSeason'] },
-    { v2: 'cityDynamics', v3Path: ['world', 'cityDynamics'] },
-    { v2: 'worldPopulation', v3Path: ['population'] },
-    { v2: 'worldEvents', v3Path: ['events', 'worldEvents'] },
-    { v2: 'storySeeds', v3Path: ['events', 'hooks'] },
-    { v2: 'storyHooks', v3Path: ['events', 'hooks'] },
-    { v2: 'relationshipBonds', v3Path: ['citizens', 'bonds'] }
-  ];
-
-  // Copy V2 summary values to V3 canonical locations
-  for (var i = 0; i < syncFields.length; i++) {
-    var field = syncFields[i];
-    var v2Value = ctx.summary[field.v2];
-
-    if (v2Value !== undefined) {
-      var obj = ctx;
-      for (var j = 0; j < field.v3Path.length - 1; j++) {
-        obj = obj[field.v3Path[j]];
-      }
-      var lastKey = field.v3Path[field.v3Path.length - 1];
-      if (obj[lastKey] === undefined) {
-        obj[lastKey] = v2Value;
-      }
-    }
-  }
-
-  return ctx;
-}
+// S185 dead-code scan removals: createSummaryShim_, v3RandomInt_, v3PickRandom_,
+// v3Chance_, generateDeprecationReport_ — explicitly deprecated, no callers
+// (verified by scripts/scanDeadCode.js). v3Random_ kept above (throw-only
+// fallback per S156 Phase 40.3 Path 1).
 
 
 /**

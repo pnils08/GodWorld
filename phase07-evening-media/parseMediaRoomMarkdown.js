@@ -707,54 +707,9 @@ function parseContinuityNotes_(ss, section) {
 }
 
 
-function isSubsectionHeader_(line) {
-  // Strip bold markdown (**HEADER** → HEADER)
-  var clean = line.replace(/\*\*/g, '').trim();
-
-  // ALL CAPS headers (with optional trailing colon/parens)
-  if (clean === clean.toUpperCase() && clean.length > 3 && clean.length < 60) {
-    if (!clean.match(/^[A-Z\s]+:\s+\S/)) {  // Not "KEY: value" format
-      return true;
-    }
-  }
-  // "Header:" format (ends with colon, no value)
-  if (clean.match(/^[A-Za-z\s']+:$/) && clean.length < 40) {
-    return true;
-  }
-  return false;
-}
-
-
-function cleanSubsectionName_(line) {
-  // Strip bold markdown and trailing punctuation
-  return line.replace(/\*\*/g, '').replace(/[:#]+$/, '').trim();
-}
-
-
-function parseNoteLine_(line, subsection, relatedArc) {
-  // Clean leading bullets/dashes
-  var clean = line.replace(/^\s*[-—•*]\s*/, '').trim();
-  if (!clean || clean.length < 3) return null;
-  
-  // Determine note type
-  var noteType = determineNoteType_(clean, subsection);
-  
-  // Build description
-  var description = clean;
-  if (subsection && clean.toLowerCase().indexOf(subsection.toLowerCase().substring(0, 8)) < 0) {
-    description = '[' + subsection + '] ' + clean;
-  }
-  
-  // Extract citizen names
-  var citizens = extractCitizenNames_(clean);
-  
-  return {
-    noteType: noteType,
-    description: description,
-    relatedArc: relatedArc || '',
-    affectedCitizens: citizens
-  };
-}
+// S185 dead-code scan removals: isSubsectionHeader_, cleanSubsectionName_,
+// parseNoteLine_ — legacy markdown-parser sub-helpers from a path no longer
+// invoked. Active parser pipeline routes through different helpers.
 
 
 function determineNoteType_(line, subsection) {

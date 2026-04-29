@@ -28,9 +28,11 @@ S185 engine-sheet. Closes the S156 deferred dead-code item (Path 1 audit §WARNI
 | Allowlisted (manual entry points / Apps Script triggers) | 19 |
 
 Of the 74 unreferenced:
-- **KEEP** as standby/scaffold: 38
-- **DELETE** candidates: 31
-- **REVIEW** (judgment call): 5
+- **KEEP** as standby/scaffold: 46 (writeIntents standby 3 + manual entry 1 + transit 8 + crime 6 + faith 5 + youth 5 + rosterLookup 4 + bondEngine rivalry 2 + story signals 3 + bondPersistence 3 + civic helpers 2 + weather 2 + neighborhood demographics 2)
+- **DELETE** candidates: 20 (v2DeprecationGuide 5 + persistenceExecutor bridges 3 + parseMediaRoomMarkdown sub-helpers 3 + cycleModes timing 3 + eventArcEngine internals 3 + mediaRoomIntake setup 2 + nextPopIdSafe_ 1)
+- **Uncategorized in this audit pass: 8** — scattered single-function unrefs across `phase06-analysis/updateStorylineStatusv1.2.js`, `phase07-evening-media/mediaFeedbackEngine.js`, `phase09-digest/applyCycleWeight.js`, `phase11-media-intake/healthCauseIntake.js`, `utilities/ensureRelationshipBonds.js`, `utilities/exportCitizensSnapshot.js`, `utilities/sheetNames.js`, `utilities/utilityFunctions.js`. Defer to next audit pass — each needs individual review before delete-or-keep.
+
+**S185 update post-DELETE-batch:** All 20 DELETE candidates removed and clasp-deployed. Scan re-ran 74 → 56 unreferenced (net -18; 2 new transitive unrefs surfaced where deleted functions were the sole callers — candidates for next audit pass).
 
 ---
 

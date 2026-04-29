@@ -446,42 +446,10 @@ function logIntentSummary_(ctx) {
 }
 
 
-/**
- * ============================================================================
- * LEGACY BRIDGE FUNCTIONS
- * ============================================================================
- *
- * These functions help migrate existing code to write-intents.
- * They wrap common patterns and can be gradually removed as engines
- * are fully migrated.
- */
-
-
-/**
- * Bridge: Queue an append similar to sheet.appendRow()
- * Use this to migrate existing appendRow calls.
- */
-function bridgeAppendRow_(ctx, sheetName, row, reason, domain) {
-  queueAppendIntent_(ctx, sheetName, row, reason || 'append row', domain || 'legacy');
-}
-
-
-/**
- * Bridge: Queue a cell write similar to range.setValue()
- * Use this to migrate existing setValue calls.
- */
-function bridgeSetValue_(ctx, sheetName, row, col, value, reason, domain) {
-  queueCellIntent_(ctx, sheetName, row, col, value, reason || 'set value', domain || 'legacy');
-}
-
-
-/**
- * Bridge: Queue a range write similar to range.setValues()
- * Use this to migrate existing setValues calls.
- */
-function bridgeSetValues_(ctx, sheetName, startRow, startCol, values, reason, domain) {
-  queueRangeIntent_(ctx, sheetName, startRow, startCol, values, reason || 'set values', domain || 'legacy');
-}
+// S185 dead-code scan removals: bridgeAppendRow_, bridgeSetValue_, bridgeSetValues_
+// — legacy bridges from the V2→V3 intent-API migration; all engines migrated;
+// scan confirmed zero callers. Modern code uses queueAppendIntent_ /
+// queueCellIntent_ / queueRangeIntent_ directly.
 
 
 /**

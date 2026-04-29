@@ -386,63 +386,9 @@ function initializeProfileMode_(ctx) {
 }
 
 
-/**
- * Records start time for a phase.
- * @param {Object} ctx - Engine context
- * @param {string} phaseName - Name of the phase
- */
-function startPhaseTimer_(ctx, phaseName) {
-  if (ctx.mode && ctx.mode.profile) {
-    ctx.audit = ctx.audit || {};
-    ctx.audit.phaseStartTime = new Date().getTime();
-    ctx.audit.currentPhase = phaseName;
-  }
-}
-
-
-/**
- * Records end time for a phase and stores duration.
- * @param {Object} ctx - Engine context
- * @param {string} phaseName - Name of the phase
- */
-function endPhaseTimer_(ctx, phaseName) {
-  if (ctx.mode && ctx.mode.profile && ctx.audit && ctx.audit.phaseStartTime) {
-    var endTime = new Date().getTime();
-    var duration = endTime - ctx.audit.phaseStartTime;
-
-    ctx.audit.phaseTimingsMs = ctx.audit.phaseTimingsMs || {};
-    ctx.audit.phaseTimingsMs[phaseName] = duration;
-
-    ctx.audit.phaseStartTime = null;
-    ctx.audit.currentPhase = null;
-  }
-}
-
-
-/**
- * Gets a summary of phase timings.
- * @param {Object} ctx - Engine context
- * @returns {Object} Timing summary
- */
-function getPhaseTimingSummary_(ctx) {
-  if (!ctx.audit || !ctx.audit.phaseTimingsMs) {
-    return { totalMs: 0, phases: {} };
-  }
-
-  var total = 0;
-  var timings = ctx.audit.phaseTimingsMs;
-
-  for (var phase in timings) {
-    if (timings.hasOwnProperty(phase)) {
-      total += timings[phase];
-    }
-  }
-
-  return {
-    totalMs: total,
-    phases: timings
-  };
-}
+// S185 dead-code scan removals: startPhaseTimer_, endPhaseTimer_, getPhaseTimingSummary_
+// — debug-only phase-timing instrumentation; never wired into the cycle path.
+// Logger.log timestamps provide equivalent visibility when needed.
 
 
 /**

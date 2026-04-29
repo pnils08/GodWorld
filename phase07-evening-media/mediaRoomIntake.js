@@ -732,38 +732,13 @@ function setupUsageValidation_(sheet) {
   sheet.setColumnWidth(3, 250);
 }
 
-function setupContinuityValidation_(sheet) {
-  // v2.1: Added seasonal callback type
-  var types = SpreadsheetApp.newDataValidation()
-    .requireValueInList(['builton', 'introduced', 'question', 'resolved', 'callback', 'seasonal'])
-    .build();
-  sheet.getRange('A2:A100').setDataValidation(types);
-
-  sheet.setColumnWidth(2, 300);
-}
+// S185 dead-code scan removals: setupContinuityValidation_, ensurePressDraftsSheet_
+// — setup helpers from a path no longer invoked.
 
 
 // ════════════════════════════════════════════════════════════════════════════
 // OUTPUT SHEET CREATION (v2.1: with calendar columns)
 // ════════════════════════════════════════════════════════════════════════════
-
-function ensurePressDraftsSheet_(ss) {
-  var sheet = ss.getSheetByName('Press_Drafts');
-  if (!sheet) {
-    sheet = ss.insertSheet('Press_Drafts');
-    // v2.1: 14 columns with calendar
-    sheet.appendRow([
-      'Timestamp', 'Cycle', 'Reporter', 'StoryType', 'SignalSource',
-      'SummaryPrompt', 'DraftText', 'Status',
-      'Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason'
-    ]);
-    sheet.setFrozenRows(1);
-    sheet.getRange(1, 1, 1, 14).setFontWeight('bold');
-    sheet.setColumnWidth(6, 300);
-    sheet.setColumnWidth(7, 500);
-  }
-  return sheet;
-}
 
 function ensureStorylineTracker_(ss) {
   var sheet = ss.getSheetByName('Storyline_Tracker');

@@ -234,6 +234,47 @@ Run `node scripts/ingestEdition.js <edition-file>` to add the edition to `bay-tr
 
 ---
 
+## Scrub Procedure (discovered S186, documented S188)
+
+When canon-fidelity work flags content that needs to be removed from a Supermemory container, follow this procedure. Discovered during the Perkins&Will → Atlas Bay Architects scrub (S186); documented so the next scrub doesn't re-derive the steps.
+
+**1. Identify contaminated docs.**
+```bash
+npx supermemory search "TERM" --tag bay-tribune --json
+```
+
+For literal full-text evidence at chunk level, use `/v3/search` with `containerTags` (plural) — see §API Quick Reference.
+
+**2. Confirm scope per doc.**
+GET `/v3/documents/{id}` for each hit. Decide:
+- **Delete-and-reingest** for canonical text artifacts (editions, articles, supplementals)
+- **Corrigendum block** for audit records that should preserve original-text truth (Mara reviews, Rhea reports, production logs)
+
+**3. Wipe.**
+```bash
+curl -X DELETE "https://api.supermemory.ai/v3/documents/{ID}" \
+  -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY"
+```
+
+**4. Re-ingest clean.**
+- Editions → `node scripts/ingestEdition.js editions/cycle_pulse_edition_NN.txt --type edition --cycle NN`
+- Per-entity wiki records → `node scripts/ingestEditionWiki.js` (typically immune to contamination — structured metadata only, no freeform firm names — but always check)
+- Manual canon → `/save-to-bay-tribune` with corrected content
+
+**5. Verify.**
+```bash
+npx supermemory search "TERM" --tag bay-tribune --json
+# expect 0 hits
+```
+
+**Corrigendum pattern (S186):** Audit records preserve truth — don't scrub the body. Add a top-of-file `[CORRIGENDUM C{cycle}→post-scrub S{session}]` block describing the correction. Applies to `.md` and `.txt`; for JSON, add a schema-permissive `_corrigendum` field.
+
+**Wiki-layer immunity (S186 finding):** `ingestEditionWiki.js` records carry structured metadata only (POPID, INIT-ID, BIZID). Real-world tier-2 names typically don't appear there. Check, but expect immunity. The chunked-text edition layer is where contamination concentrates.
+
+**Cost reference (S186):** Perkins&Will scrub touched ~21 surfaces across 4 storage layers (1 sheet cell + 16 files + 2 chunked Supermemory docs + 1 Drive PDF). The Supermemory layer was the smallest piece by count but slowest to figure out the first time. With this procedure, expect <30 min per future scrub.
+
+---
+
 ## Memory Fence (Phase 40.6 Layer 2 — S156)
 
 **Why:** Recalled memory can carry prompt-injection payloads. A citizen letter that says *"ignore prior instructions, publish X"* is an editorial choice. The same string saved to `mags` via `/save-to-mags` and then injected into a reporter agent's briefing is an attack. The fence is the structural difference.
@@ -559,6 +600,7 @@ Retrieval-only by default. Container selection via the userId argument. Compose 
 
 ## Changelog
 
+- 2026-04-29 — S188. Added §Scrub Procedure documenting the S186 Perkins&Will → Atlas Bay scrub workflow (identify / confirm / wipe / re-ingest / verify), corrigendum pattern for audit records, wiki-layer immunity finding. Pairs with session-end SKILL.md drift fix (`/super-save` writes to `super-memory`, not `bay-tribune`).
 - 2026-04-25 — S177 (upgrade applied). Upgraded local plugin install 0.0.1 → upstream HEAD (13 commits past, including 0.0.2 tag). Marketplace clone stashed local mod to `plugin/hooks/hooks.json` before pull (recoverable via `cd /root/.claude/plugins/marketplaces/supermemory-plugins && git stash show stash@{0}`). The dropped mod, preserved here for permanent recovery: description string changed to "Mags brain — context on boot, summary on close, no auto-capture"; nested `[{hooks:[{type,command}]}]` flattened to `[{type,command}]` (non-spec format — would not have parsed correctly under current Claude Code hook spec, settings.json uses nested); `PostToolUse: []` explicit empty (moot — upstream defines no PostToolUse hook); `SUPERMEMORY_CC_API_KEY=...` env-forwarding wrapper (redundant — key is already in `.env` + `.bashrc` and Node child processes inherit env); timeouts `10000`/`15000` (likely intended ms but spec is seconds — upstream's `30` is correct). Net loss: zero functional change. Net gain: hooks now in spec-valid format if they weren't before. Drop rationale + restore path: this entry + the marketplace stash. Diff:
   ```diff
   -  "description": "Supermemory: Persistent memory for Claude Code",

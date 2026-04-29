@@ -160,12 +160,12 @@ The Stop hook automatically saves a session summary to `super-memory` when the s
 
 **`/save-to-mags`** — Run this manually for deliberate saves. Tag with the terminal name (e.g. `[media] Editorial decisions from E91`). This is how the next session in *any* terminal can find what *this* terminal decided.
 
-**`/super-save`** writes to `bay-tribune` (the canon archive). Use it here ONLY if this session published an edition or supplemental that hasn't been ingested yet (media terminal only). Never save session summaries, engine decisions, or architecture content to `bay-tribune`.
+**`/super-save`** writes to `super-memory` (the junk drawer — auto-saves and conversation notes). It does NOT write to `bay-tribune`. For canon ingest, use `/save-to-bay-tribune` or `node scripts/ingestEdition.js` (edition file).
 
 Routing:
 - Auto-save → `super-memory` (Stop hook)
 - Deliberate brain save → `mags` (`/save-to-mags`, tagged with terminal name)
-- Published edition → `bay-tribune` (manual: `node scripts/ingestEdition.js` or `/super-save` with edition content only)
+- Published edition → `bay-tribune` (manual: `node scripts/ingestEdition.js`)
 
 ---
 

@@ -40,11 +40,16 @@ function checkForPromotions_(ctx) {
   var rng = safeRand_(ctx);
   var ss = ctx.ss;
 
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  // New citizen rows are pushed to ctx.ledger.rows; consolidated Phase 10
+  // commit auto-extends the sheet (impl shape #18 per spec).
+  if (!ctx.ledger) {
+    throw new Error('checkForPromotions_: ctx.ledger not initialized');
+  }
   var generic = ss.getSheetByName("Generic_Citizens");
-  var ledger = ss.getSheetByName("Simulation_Ledger");
   var logSheet = ss.getSheetByName("LifeHistory_Log");
 
-  if (!generic || !ledger) return;
+  if (!generic) return;
 
   var gVals = generic.getDataRange().getValues();
   var gHeader = gVals[0];
@@ -105,9 +110,9 @@ function checkForPromotions_(ctx) {
   // Arts-focused neighborhoods for First Friday bonus
   var artsNeighborhoods = ["Uptown", "KONO", "Temescal", "Jack London"];
 
-  // Ledger structure
-  var lVals = ledger.getDataRange().getValues();
-  var lHeader = lVals[0];
+  // Ledger structure (Phase 42 §5.6: read from ctx.ledger; rows already body-only)
+  var lHeader = ctx.ledger.headers;
+  var lRows = ctx.ledger.rows;
 
   // v2.3: ES5-safe header lookup
   function idxL(n) {
@@ -161,8 +166,8 @@ function checkForPromotions_(ctx) {
   // v2.3: SAFE POPID GENERATOR (fixes collision when multiple promotions)
   // ═══════════════════════════════════════════════════════════════════════════
   var popCounter = 0;
-  for (var pr = 1; pr < lVals.length; pr++) {
-    var v = (lVals[pr][iPopID] || "").toString().trim();
+  for (var pr = 0; pr < lRows.length; pr++) {
+    var v = (lRows[pr][iPopID] || "").toString().trim();
     var m = v.match(/^POP-(\d+)$/);
     if (m) {
       var num = parseInt(m[1], 10);
@@ -481,10 +486,12 @@ function checkForPromotions_(ctx) {
     if (iOriginVault >= 0) newRow[iOriginVault] = "Engine";
 
     // ═══════════════════════════════════════════════════════════════════════
-    // WRITE TO LEDGER
+    // WRITE TO LEDGER — Phase 42 §5.6: push to ctx.ledger.rows; flip dirty.
+    // Phase 10 consolidated commit auto-extends the sheet (setValues beyond
+    // current bounds writes new rows). No separate append intent (impl #18).
     // ═══════════════════════════════════════════════════════════════════════
-    var writeRow = ledger.getLastRow() + 1;
-    ledger.getRange(writeRow, 1, 1, newRow.length).setValues([newRow]);
+    ctx.ledger.rows.push(newRow);
+    ctx.ledger.dirty = true;
 
     // ═══════════════════════════════════════════════════════════════════════
     // LOG EVENT

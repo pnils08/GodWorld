@@ -92,15 +92,21 @@ function processAdvancementIntake_(ctx) {
   };
   
   Logger.log('processAdvancementIntake_ v1.4 starting - Cycle ' + cycle);
-  
-  var usageResults = processMediaUsage_(ss, now, cycle);
+
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  // Sub-functions take ctx so they can access ctx.ledger.headers/rows.
+  if (!ctx || !ctx.ledger) {
+    throw new Error('processAdvancementIntake_: ctx.ledger not initialized (manual path must seed via runAdvancementIntakeManual)');
+  }
+
+  var usageResults = processMediaUsage_(ctx, now, cycle);
   results.usageProcessed = usageResults.processed;
   results.usageSkipped = usageResults.skipped;
   results.promotionsTriggered = usageResults.promotionsTriggered;
-  
-  var advResults = processAdvancementRows_(ss, now, cycle);
+
+  var advResults = processAdvancementRows_(ctx, now, cycle);
   results.advancementsProcessed = advResults.processed;
-  
+
   var intakeResults = processIntakeRows_(ss, now, cycle);
   results.intakeProcessed = intakeResults.processed;
   
@@ -109,10 +115,38 @@ function processAdvancementIntake_(ctx) {
 }
 
 function runAdvancementIntakeManual() {
-  var results = processAdvancementIntake_(null);
+  // Phase 42 §5.6: manual path seeds ctx.ledger and commits inline
+  // (cycle path's Phase 10 commitSimulationLedger_ is not in this scope).
+  var ss = openSimSpreadsheet_();
+  var ledgerSheet = ss.getSheetByName('Simulation_Ledger');
+  if (!ledgerSheet) {
+    SpreadsheetApp.getActive().toast('Simulation_Ledger missing', '⚠️ Advancement Aborted', 10);
+    return;
+  }
+  var values = ledgerSheet.getDataRange().getValues();
+  var ctx = {
+    ss: ss,
+    now: new Date(),
+    summary: { cycleId: getCurrentCycleFromConfig_(ss) },
+    config: {},
+    ledger: {
+      sheet: 'Simulation_Ledger',
+      headers: values[0],
+      rows: values.slice(1),
+      dirty: false
+    }
+  };
+
+  var results = processAdvancementIntake_(ctx);
+
+  if (ctx.ledger.dirty && ctx.ledger.rows.length) {
+    ledgerSheet.getRange(2, 1, ctx.ledger.rows.length, ctx.ledger.headers.length)
+               .setValues(ctx.ledger.rows);
+  }
+
   SpreadsheetApp.getActive().toast(
     'Usage: ' + results.usageProcessed + ' (skipped: ' + results.usageSkipped + ')' +
-    ', Advancements: ' + results.advancementsProcessed + 
+    ', Advancements: ' + results.advancementsProcessed +
     ', Promotions: ' + results.promotionsTriggered,
     '✅ Advancement Complete', 10
   );
@@ -152,7 +186,8 @@ function isEmergenceUsage_(usageType) {
   return true;
 }
 
-function processMediaUsage_(ss, now, cycle) {
+function processMediaUsage_(ctx, now, cycle) {
+  var ss = ctx.ss;
   var results = { processed: 0, skipped: 0, promotionsTriggered: 0 };
   
   var usageSheet = ss.getSheetByName('Citizen_Media_Usage');
@@ -183,9 +218,9 @@ function processMediaUsage_(ss, now, cycle) {
   var gEmergenceCol = findColByName_(genericHeaders, 'EmergenceCount');
   var gStatusCol = findColByName_(genericHeaders, 'Status');
   
-  var ledgerSheet = ss.getSheetByName('Simulation_Ledger');
-  var ledgerData = ledgerSheet ? ledgerSheet.getDataRange().getValues() : [];
-  var ledgerHeaders = ledgerData.length > 0 ? ledgerData[0] : [];
+  // Phase 42 §5.6: read SL from shared ctx.ledger; mutations land in place.
+  var ledgerHeaders = ctx.ledger.headers;
+  var ledgerRows = ctx.ledger.rows;
   var lFirstCol = findColByName_(ledgerHeaders, 'First');
   var lLastCol = findColByName_(ledgerHeaders, 'Last');
   var lTierCol = findColByName_(ledgerHeaders, 'Tier');
@@ -218,23 +253,23 @@ function processMediaUsage_(ss, now, cycle) {
     var last = nameParts.slice(1).join(' ') || '';
     var found = false;
     
-    if (ledgerSheet && lFirstCol >= 0 && lLastCol >= 0) {
-      for (var lr = 1; lr < ledgerData.length; lr++) {
-        var lFirst = String(ledgerData[lr][lFirstCol] || '').trim();
-        var lLast = String(ledgerData[lr][lLastCol] || '').trim();
-        
-        if (lFirst.toLowerCase() === first.toLowerCase() && 
+    if (lFirstCol >= 0 && lLastCol >= 0) {
+      for (var lr = 0; lr < ledgerRows.length; lr++) {
+        var lFirst = String(ledgerRows[lr][lFirstCol] || '').trim();
+        var lLast = String(ledgerRows[lr][lLastCol] || '').trim();
+
+        if (lFirst.toLowerCase() === first.toLowerCase() &&
             lLast.toLowerCase() === last.toLowerCase()) {
           found = true;
-          
-          var currentUsage = ledgerUpdates[lr] ? ledgerUpdates[lr].usageCount : 
-                            (lUsageCol >= 0 ? (Number(ledgerData[lr][lUsageCol]) || 0) : 0);
+
+          var currentUsage = ledgerUpdates[lr] ? ledgerUpdates[lr].usageCount :
+                            (lUsageCol >= 0 ? (Number(ledgerRows[lr][lUsageCol]) || 0) : 0);
           var newUsage = currentUsage + 1;
-          
+
           var currentTier = ledgerUpdates[lr] ? ledgerUpdates[lr].tier :
-                           (lTierCol >= 0 ? (Number(ledgerData[lr][lTierCol]) || 4) : 4);
+                           (lTierCol >= 0 ? (Number(ledgerRows[lr][lTierCol]) || 4) : 4);
           var newTier = currentTier;
-          var popId = lPopIdCol >= 0 ? ledgerData[lr][lPopIdCol] : '';
+          var popId = lPopIdCol >= 0 ? ledgerRows[lr][lPopIdCol] : '';
           
           if (newUsage >= 9 && currentTier > 1) {
             newTier = 1;
@@ -289,47 +324,52 @@ function processMediaUsage_(ss, now, cycle) {
     }
   }
   
-  if (ledgerSheet) {
-    for (var lRow in ledgerUpdates) {
-      var update = ledgerUpdates[lRow];
-      if (lUsageCol >= 0) {
-        ledgerSheet.getRange(Number(lRow) + 1, lUsageCol + 1).setValue(update.usageCount);
-      }
-      if (lTierCol >= 0 && update.tier !== update.oldTier) {
-        ledgerSheet.getRange(Number(lRow) + 1, lTierCol + 1).setValue(update.tier);
-        if (logSheet) {
-          logSheet.appendRow([now, update.popId, update.name || '', 'Promotion',
-            'Advanced from Tier ' + update.oldTier + ' to Tier ' + update.tier,
-            '', cycle]);
-        }
+  // Phase 42 §5.6: per-row mutations on ctx.ledger.rows; flip dirty.
+  var ledgerDirtied = false;
+  for (var lRow in ledgerUpdates) {
+    var update = ledgerUpdates[lRow];
+    var rowIdx = Number(lRow);
+    if (lUsageCol >= 0) {
+      ledgerRows[rowIdx][lUsageCol] = update.usageCount;
+      ledgerDirtied = true;
+    }
+    if (lTierCol >= 0 && update.tier !== update.oldTier) {
+      ledgerRows[rowIdx][lTierCol] = update.tier;
+      ledgerDirtied = true;
+      if (logSheet) {
+        logSheet.appendRow([now, update.popId, update.name || '', 'Promotion',
+          'Advanced from Tier ' + update.oldTier + ' to Tier ' + update.tier,
+          '', cycle]);
       }
     }
   }
+  if (ledgerDirtied) ctx.ledger.dirty = true;
   
   return results;
 }
 
-function processAdvancementRows_(ss, now, cycle) {
+function processAdvancementRows_(ctx, now, cycle) {
+  var ss = ctx.ss;
   var results = { processed: 0 };
   
   var intakeSheet = ss.getSheetByName('Advancement_Intake1');
   if (!intakeSheet) intakeSheet = ss.getSheetByName('Advancement_Intake');
   if (!intakeSheet) return results;
   
-  var ledgerSheet = ss.getSheetByName('Simulation_Ledger');
+  // Phase 42 §5.6: read SL from shared ctx.ledger; mutations land in place;
+  // new citizens push to ctx.ledger.rows (impl shape #18).
   var logSheet = ss.getSheetByName('LifeHistory_Log');
   var genericSheet = ss.getSheetByName('Generic_Citizens');
-  if (!ledgerSheet) return results;
-  
+
   var intakeData = intakeSheet.getDataRange().getValues();
   if (intakeData.length < 2) {
     Logger.log('processAdvancementRows_: No data rows in intake');
     return results;
   }
-  
+
   var intakeHeaders = intakeData[0];
-  var ledgerData = ledgerSheet.getDataRange().getValues();
-  var ledgerHeaders = ledgerData[0];
+  var ledgerHeaders = ctx.ledger.headers;
+  var ledgerRows = ctx.ledger.rows;
   
   var iFirst = findColByName_(intakeHeaders, 'First');
   var iMiddle = findColByName_(intakeHeaders, 'Middle');
@@ -369,11 +409,11 @@ function processAdvancementRows_(ss, now, cycle) {
   // S184 (Phase 4.1.b) — build ledger frequency snapshot ONCE per intake batch.
   // Used by deriveCitizenProfile_ for neighborhood-aware RoleType + EducationLevel draws.
   // citizenDerivation library auto-loaded from utilities/citizenDerivation.js.
-  var ledgerFreq = buildLedgerFreqSnapshot_(ledgerHeaders, ledgerData, { includesHeader: true });
-  
+  var ledgerFreq = buildLedgerFreqSnapshot_(ledgerHeaders, ledgerRows, { includesHeader: false });
+
   var maxPop = 0;
-  for (var r = 1; r < ledgerData.length; r++) {
-    var v = String(ledgerData[r][lPopId] || '').match(/POP-(\d+)/);
+  for (var r = 0; r < ledgerRows.length; r++) {
+    var v = String(ledgerRows[r][lPopId] || '').match(/POP-(\d+)/);
     if (v) maxPop = Math.max(maxPop, Number(v[1]));
   }
   
@@ -398,20 +438,21 @@ function processAdvancementRows_(ss, now, cycle) {
     var notes = iNotes >= 0 ? (row[iNotes] || '') : '';
     
     var existingRow = -1;
-    for (var lr = 1; lr < ledgerData.length; lr++) {
-      var eFirst = String(ledgerData[lr][lFirst] || '').trim().toLowerCase();
-      var eLast = String(ledgerData[lr][lLast] || '').trim().toLowerCase();
+    for (var lr = 0; lr < ledgerRows.length; lr++) {
+      var eFirst = String(ledgerRows[lr][lFirst] || '').trim().toLowerCase();
+      var eLast = String(ledgerRows[lr][lLast] || '').trim().toLowerCase();
       if (eFirst === first.toLowerCase() && eLast === last.toLowerCase()) {
         existingRow = lr;
         break;
       }
     }
-    
+
     if (existingRow >= 0) {
-      if (lTier >= 0) ledgerSheet.getRange(existingRow + 1, lTier + 1).setValue(tier);
-      if (lRoleType >= 0 && roleType) ledgerSheet.getRange(existingRow + 1, lRoleType + 1).setValue(roleType);
-      if (lLastUpdated >= 0) ledgerSheet.getRange(existingRow + 1, lLastUpdated + 1).setValue(now);
-      var popId = lPopId >= 0 ? ledgerData[existingRow][lPopId] : '';
+      if (lTier >= 0) ledgerRows[existingRow][lTier] = tier;
+      if (lRoleType >= 0 && roleType) ledgerRows[existingRow][lRoleType] = roleType;
+      if (lLastUpdated >= 0) ledgerRows[existingRow][lLastUpdated] = now;
+      ctx.ledger.dirty = true;
+      var popId = lPopId >= 0 ? ledgerRows[existingRow][lPopId] : '';
       if (logSheet) {
         logSheet.appendRow([now, popId, (first + ' ' + last).trim(), 'Advancement',
           'Updated to Tier ' + tier + '. ' + notes, '', cycle]);
@@ -460,7 +501,10 @@ function processAdvancementRows_(ss, now, cycle) {
       if (lNetWorth >= 0) newRow[lNetWorth] = profile.NetWorth;
       if (lMaritalStatus >= 0) newRow[lMaritalStatus] = profile.MaritalStatus;
       if (lNumChildren >= 0) newRow[lNumChildren] = profile.NumChildren;
-      ledgerSheet.appendRow(newRow);
+      // Phase 42 §5.6 (impl #18): push new row to ctx.ledger.rows; Phase 10
+      // consolidated commit auto-extends the sheet — no separate append intent.
+      ledgerRows.push(newRow);
+      ctx.ledger.dirty = true;
       if (logSheet) {
         logSheet.appendRow([now, newPopId, (first + ' ' + last).trim(), 'Promotion',
           'Added to Simulation_Ledger as Tier ' + tier + '. ' + notes, '', cycle]);

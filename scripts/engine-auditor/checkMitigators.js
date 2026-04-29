@@ -7,7 +7,7 @@
 
 const fs = require('fs');
 const path = require('path');
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 let registryCache = null;
 function loadRegistry() {
@@ -21,6 +21,15 @@ function num(v) {
   if (v == null || v === '') return null;
   const n = parseFloat(v);
   return Number.isNaN(n) ? null : n;
+}
+
+function escapeRegex(s) {
+  return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function descriptionMatchesKeyword(desc, keyword) {
+  const re = new RegExp('\\b' + escapeRegex(keyword) + '\\b', 'i');
+  return re.test(desc);
 }
 
 function categoryForPattern(pattern, registry) {
@@ -39,9 +48,9 @@ function categoryForPattern(pattern, registry) {
     if (s.includes('displacementpressure') && /=\s*0\.[6-9]/.test(s)) return 'housing';
     if (s.includes('sentiment') && /=\s*(-|0\.[0-3])/.test(s)) return 'culture';
   }
-  const desc = String(pattern.description || '').toLowerCase();
+  const desc = String(pattern.description || '');
   for (const [cat, def] of Object.entries(registry.categories)) {
-    if ((def.keywords || []).some(k => desc.includes(k))) return cat;
+    if ((def.keywords || []).some(k => descriptionMatchesKeyword(desc, k))) return cat;
   }
   return null;
 }
@@ -193,8 +202,11 @@ function enrich(patterns, ctx) {
       for (const id of linkedIds) {
         const row = lookupInitiative(id, ctx.snapshot);
         if (!row) continue;
-        const cat = category || categoryForPattern({ evidence: { fields: { PolicyDomain: row.PolicyDomain } } }, registry);
-        mitigators.push(buildMitigatorEntry(row, cat || 'culture', ctx, registry, pattern));
+        const rowCategory = categoryForPattern({ evidence: { fields: { PolicyDomain: row.PolicyDomain } } }, registry);
+        if (!category) continue;
+        if (!rowCategory) continue;
+        if (category !== rowCategory) continue;
+        mitigators.push(buildMitigatorEntry(row, category, ctx, registry, pattern));
       }
     } else if (category) {
       const candidates = findMitigatorsByCategory(category, pattern, ctx, registry);

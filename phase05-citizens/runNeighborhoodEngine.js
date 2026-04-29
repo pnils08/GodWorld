@@ -525,8 +525,8 @@ function runNeighborhoodEngine_(ctx) {
     rows[r] = row;
   }
 
-  // Write all updated rows
-  ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+  // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
+  ctx.ledger.dirty = true;
 
   // Summary
   S.neighborhoodDriftEvents = neighborhoodDriftEvents;

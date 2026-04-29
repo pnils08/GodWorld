@@ -890,16 +890,24 @@ function padStart_(str, targetLength, padChar) {
 }
 
 function processIntake_(ctx) {
+  // Phase 42 §5.6: SL writes via shared ctx.ledger (push staged rows;
+  // Phase 10 consolidated commit auto-extends the sheet). Direct
+  // sheet-append removed — would clobber checkForPromotions /
+  // processAdvancementIntake pushes that ran later in Phase 5.
+  if (!ctx.ledger) {
+    throw new Error('processIntake_: ctx.ledger not initialized');
+  }
   var intake = ctx.ss.getSheetByName('Intake');
-  var ledger = ctx.ss.getSheetByName('Simulation_Ledger');
-  if (!intake || !ledger) return;
+  if (!intake) return;
 
   var intakeVals = intake.getDataRange().getValues();
   if (intakeVals.length < 2) return;
 
   var intakeHeader = intakeVals[0];
-  var ledgerVals = ledger.getDataRange().getValues();
-  var ledgerHeader = ledgerVals[0];
+  var ledgerHeader = ctx.ledger.headers;
+  // Composite for existsInLedger_ + getMaxPopId_ helper compatibility
+  // (they iterate from r=1 skipping header).
+  var ledgerVals = [ledgerHeader].concat(ctx.ledger.rows);
 
   var idxI = function(name) { return intakeHeader.indexOf(name); };
   var idxL = function(name) { return ledgerHeader.indexOf(name); };
@@ -981,12 +989,17 @@ function processIntake_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // STAGE 2: Batch write all staged rows at once
+  // STAGE 2: Phase 42 §5.6 — push staged rows to ctx.ledger.rows; Phase 10
+  // consolidated commit auto-extends the sheet (impl shape #18).
+  // Direct ledger.getRange(getLastRow()+1, ...).setValues removed: under
+  // §5.6 it would clobber later push-writers (checkForPromotions,
+  // processAdvancementIntake) when Phase 10 commits the unified array.
   // ═══════════════════════════════════════════════════════════════════════════
   if (stagedRows.length > 0) {
-    var startRow = ledger.getLastRow() + 1;
-    ledger.getRange(startRow, 1, stagedRows.length, ledgerHeader.length)
-          .setValues(stagedRows);
+    for (var s = 0; s < stagedRows.length; s++) {
+      ctx.ledger.rows.push(stagedRows[s]);
+    }
+    ctx.ledger.dirty = true;
     ctx.summary.intakeProcessed += stagedRows.length;
   }
 

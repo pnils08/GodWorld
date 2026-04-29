@@ -161,14 +161,13 @@ function buildLogRowSchemaSafe_(width, base7, extras) {
 // ============================================================
 
 function runGenerationalEngine_(ctx) {
-  var sheet = ctx.ss.getSheetByName("Simulation_Ledger");
-  if (!sheet) return;
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return;
-
-  var header = values[0];
-  var rows = values.slice(1);
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  if (!ctx.ledger) {
+    throw new Error('runGenerationalEngine_: ctx.ledger not initialized');
+  }
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return;
   var idx = function (n) { return header.indexOf(n); };
 
   var iPopID = idx("POPID");
@@ -381,8 +380,9 @@ function runGenerationalEngine_(ctx) {
   var updatedCount = 0;
   for (var key in updatedRows) if (updatedRows.hasOwnProperty(key)) updatedCount++;
 
+  // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
   if (updatedCount > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+    ctx.ledger.dirty = true;
   }
 
   generateGenerationalSummary_(ctx);

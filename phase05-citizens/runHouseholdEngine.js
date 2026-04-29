@@ -30,17 +30,14 @@
 
 function runHouseholdEngine_(ctx) {
 
-  var ss = ctx.ss;
-  var ledger = ss.getSheetByName('Simulation_Ledger');
-  // LifeHistory_Log handle removed S184 B0 — appends now route through
-  // queueAppendIntent_ (executor resolves the sheet at execute time).
-  if (!ledger) return;
-
-  var values = ledger.getDataRange().getValues();
-  if (values.length < 2) return;
-
-  var header = values[0];
-  var rows = values.slice(1);
+  // Phase 42 §5.6: read/mutate via shared ctx.ledger; commit handled in Phase 10.
+  // LifeHistory_Log handle removed S184 B0 — appends route through queueAppendIntent_.
+  if (!ctx.ledger) {
+    throw new Error('runHouseholdEngine_: ctx.ledger not initialized');
+  }
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return;
 
   var idx = function(n) { return header.indexOf(n); };
 
@@ -507,9 +504,9 @@ function runHouseholdEngine_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // COMMIT
+  // COMMIT — Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
   // ═══════════════════════════════════════════════════════════════════════════
-  ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+  ctx.ledger.dirty = true;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // SUMMARY

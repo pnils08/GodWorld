@@ -34,16 +34,15 @@ function runRelationshipEngine_(ctx) {
 
   var rng = safeRand_(ctx);
 
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  if (!ctx.ledger) {
+    throw new Error('runRelationshipEngine_: ctx.ledger not initialized');
+  }
   var ss = ctx.ss;
-  var ledger = ss.getSheetByName('Simulation_Ledger');
   var logSheet = ss.getSheetByName('LifeHistory_Log');
-  if (!ledger) return;
-
-  var values = ledger.getDataRange().getValues();
-  if (values.length < 2) return;
-
-  var header = values[0];
-  var rows = values.slice(1);
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return;
 
   var idx = function(name) { return header.indexOf(name); };
 
@@ -593,7 +592,8 @@ function runRelationshipEngine_(ctx) {
     rows[r] = row;
   }
 
-  ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+  // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
+  ctx.ledger.dirty = true;
 }
 
 

@@ -206,18 +206,19 @@ function compressLifeHistory_(ctx, options) {
   var forceAll = options.forceAll || false;
   var basisOverride = options.basis || null;
 
-  var ss = ctx.ss;
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return;
-
+  // Phase 42 §5.6 (A3): SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  // Phase 9 — runs after all phase05 mutations; reads + writes route through
+  // ctx.ledger. Phase 10 commit captures compress's mutations along with
+  // every other writer's.
+  if (!ctx.ledger) {
+    throw new Error('compressLifeHistory_: ctx.ledger not initialized');
+  }
   var S = ctx.summary || {};
   var cycle = S.absoluteCycle || S.cycleId || 0;
 
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return;
-
-  var header = values[0];
-  var rows = values.slice(1);
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return;
 
   function idx(n) { return header.indexOf(n); }
 
@@ -277,8 +278,9 @@ function compressLifeHistory_(ctx, options) {
     updated++;
   }
 
+  // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
   if (updated > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+    ctx.ledger.dirty = true;
   }
 
   S.lifeHistoryCompression = {

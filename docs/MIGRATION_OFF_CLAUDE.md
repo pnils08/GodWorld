@@ -1,14 +1,14 @@
 ---
 title: Migration Off Claude
 created: 2026-04-16
-updated: 2026-04-16
+updated: 2026-04-29
 type: project
-tags: [migration, infrastructure, active]
+tags: [migration, infrastructure, research-watch]
 ---
 
 # Migration Off Claude
 
-**Status:** Active | **Started:** S154 (2026-04-16)
+**Status:** Research/Watch (S156 reclassification — see ROLLOUT_PLAN: spine walked, API pressure off, migrating would unravel the harness; revisit if cost/limits bite again or if migration becomes goal-aligned rather than escape-aligned) | **Started:** S154 (2026-04-16)
 
 **Trigger:** Six sessions of stalled spine work + daily/weekly Claude API limits
 hit by day five. Need a path that's user-aligned, cheaper, and capable enough.

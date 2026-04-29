@@ -2,7 +2,7 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: Session 156, 2026-04-17 (S156: 41 skills, 27 agents, 5 Supermemory containers + legacy sm_project_godworld, Phase 40.3 credential relocation, Phase 41 wiki layer complete, spine walked)
+Last updated: Session 187, 2026-04-29 (S187: 43 skills, 27 agents, 5 active Supermemory containers + legacy sm_project_godworld. CONTEXT.md + ADR-0001 added; /self-debug + /context-budget shipped from MIT-licensed steals.)
 
 ---
 
@@ -18,7 +18,7 @@ Last updated: Session 156, 2026-04-17 (S156: 41 skills, 27 agents, 5 Supermemory
 
 | Service | URL | Purpose | Account |
 |---------|-----|---------|---------|
-| **Google Sheets — Main** | `GODWORLD_SHEET_ID` in `/root/.config/godworld/.env` | Simulation_Ledger (761 rows, 1,200+ total citizens across all ledgers), all engine data sheets | Service account |
+| **Google Sheets — Main** | `GODWORLD_SHEET_ID` in `/root/.config/godworld/.env` | Simulation_Ledger (~837 rows post-S185 sheet-hygiene trim, 47 cols A-AU; 1,200+ total citizens across all ledgers — see schemas/SCHEMA_HEADERS.md for authoritative per-tab counts), all engine data sheets | Service account |
 | **Google Sheets — Comm Hub** | [Comm Hub](https://docs.google.com/spreadsheets/d/1LcgKRnq2S7lg53irurt6MkVB84OOMhOJ4Ig2nsb218s/edit) | Communication hub | Service account |
 | **Google Cloud** | console.cloud.google.com | Service account, Sheets API | `maravance@godworld-486407.iam.gserviceaccount.com` |
 | **Google Apps Script** | script.google.com | 11-phase engine — deployed via `clasp push` (162 files) | riley.steward.system@gmail.com |

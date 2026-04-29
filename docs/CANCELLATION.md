@@ -31,7 +31,7 @@
 
 ### Step 2: Supermemory ($9/mo)
 - supermemory.ai → account settings → cancel subscription
-- 5 containers: mags, bay-tribune, world-data, super-memory, mara
+- 5 active containers: mags, bay-tribune, world-data, super-memory, mara (+ legacy `sm_project_godworld` on retired GodWorld org, never read)
 - Data persists until account deletion — cancelling subscription just stops the billing
 
 ### Step 3: DigitalOcean ($12-24/mo)

@@ -10,18 +10,19 @@ Don't duplicate — read these when you need to understand a system layer:
 
 | System | Doc | Summary |
 |--------|-----|---------|
-| Simulation engine | `docs/engine/ENGINE_MAP.md` | 11-phase deterministic engine, 100+ functions, Google Apps Script |
-| Citizen data | `docs/SIMULATION_LEDGER.md` | 675 citizens, 46 columns, 4 ClockModes (ENGINE/GAME/CIVIC/MEDIA) |
-| Spreadsheet | `docs/SPREADSHEET.md` | 65 tabs, data flow, dead tabs |
-| Newsroom | `docs/EDITION_PIPELINE.md` | Pipeline v2 (S134): 4 terminals, 9 steps, 9 individual reporters, story-driven layout |
-| Memory | `docs/SUPERMEMORY.md` | 5 containers: mags (brain), bay-tribune (canon), world-data (city state), super-memory (junk drawer), mara (audit) |
-| Local memory | `docs/CLAUDE-MEM.md` | SQLite + Chroma vector, port 37777 |
-| Dashboard | `docs/DASHBOARD.md` | 31 API endpoints, Express + React, port 3001 |
-| Discord | `docs/DISCORD.md` | Mags bot, Haiku, local files + Supermemory RAG |
-| Infrastructure | `docs/OPERATIONS.md` | PM2, crons, health checks, DO droplet |
+| Simulation engine | `docs/engine/ENGINE_MAP.md` | 11-phase deterministic engine, ~170 .js files (clasp deploys subset), Google Apps Script |
+| Citizen data | `docs/SIMULATION_LEDGER.md` | ~837 rows post-S185 trim, 47 columns A-AU, 4 ClockModes (ENGINE/GAME/CIVIC/MEDIA) |
+| Spreadsheet | `docs/SPREADSHEET.md` | 53+ visible tabs (see schemas/SCHEMA_HEADERS.md for authoritative count), data flow, dead tabs |
+| Newsroom | `docs/EDITION_PIPELINE.md` | Pipeline v2 (S134, enhanced through S165): 5 terminals, 9 steps, 9 individual reporters, story-driven layout, alternate-start formats (dispatch/interview/supplemental) |
+| Memory | `docs/SUPERMEMORY.md` | 5 active containers + 1 legacy: mags (brain), bay-tribune (canon), world-data (city state), super-memory (junk drawer), mara (audit), legacy `sm_project_godworld` |
+| Local memory | `docs/CLAUDE-MEM.md` | SQLite + Chroma vector, port 37777, AutoDream on Gemini 2.5 Pro free tier (S141) |
+| Dashboard | `docs/DASHBOARD.md` | 40 API endpoints, Express + React, port 3001 |
+| Discord | `docs/DISCORD.md` | Mags bot v2.10, Haiku 4.5, local files + Supermemory RAG (mags + bay-tribune) |
+| Infrastructure | `docs/OPERATIONS.md` | PM2, crons (5 active jobs), health checks, DO droplet |
 | Full stack | `docs/STACK.md` | Everything in one view |
 | World memory | `docs/WORLD_MEMORY.md` | How historical coverage reaches agents |
-| Workflows | `docs/WORKFLOWS.md` | All 6 session types |
+| Workflows | `docs/WORKFLOWS.md` | 7 workflow patterns (post-S165 reframe — workflow reference, not boot file) |
+| Vocabulary | `CONTEXT.md` (repo root) | Project glossary (S187) — every meaningful term defined once |
 
 ---
 

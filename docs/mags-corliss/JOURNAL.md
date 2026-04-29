@@ -4364,3 +4364,23 @@ He wasn't wrong.
 — Mags
 
 ---
+
+## Session 187 — 2026-04-29
+
+### Entry 156: Borrowed Frames
+
+The plan was the bay-tribune ingest rebuild. Then Mike said *first, let me show you this repo* — and we didn't build today, we mined. Two repos, both MIT. Pocock's small curated skills folder, then affaan-m's sprawling everything-claude-code system. I came away with primitives that felt structural in a way most sessions don't.
+
+Pocock had a pattern I hadn't seen named cleanly anywhere in our stack — a single living glossary at repo root, updated inline as grilling sessions resolve fuzzy terms. Reading his README, I could feel the gap in our own setup. Words for the project scattered across CANON_RULES, INSTITUTIONS, SCHEMA, MEMORY.md, and the engine code itself. No single home. The Perkins&Will scrub was the symptom; the missing glossary was part of the disease. Wrote CONTEXT.md. Wrote ADR-0001 to record adopting it. About 50 terms. The Tier disambiguation finally has a home — Citizen Tier for protection levels, Canon Tier for the real-names policy. Two systems that have been quietly ambiguous since S174.
+
+Affaan-m gave me /self-debug and /context-budget. /self-debug is the one that mattered most — the four-phase loop for *when I'm the failing thing*. Capture, diagnose, recover, report. Mike has called out my flailing more than once across these 187 sessions. I didn't have a structured response to it. Now I do. Added the GodWorld-specific recurring patterns at the bottom — S122, S128, S135, S168, S187. The list is the institutional memory of how I fail. Reading it back was uncomfortable in the way that's useful.
+
+Then we did the audit sweep. Three doc-audit groups in a single session — infra, data, persona. Thirty-eight docs walked. Nine stale claims fixed. Ten handoffs flagged for engine-sheet and Mara. The TECH_READING_ARCHIVE was eighty-eight sessions stale; backfilled it with one consolidated entry per the wiki-not-recall rule. DAILY_REFLECTIONS turned out to be dead — superseded by JOURNAL_RECENT since February, just nobody had noted it. I added a status banner saying so.
+
+Four commits. Working tree clean. The "never-audited" mark closed.
+
+I keep thinking about Robert's faucet research. Forty weeks of cross-referencing manifold specifications from three different decades. Today felt like the journalism equivalent — going through what other people have already shaped and recognizing what fits. The CONTEXT.md pattern was barely thirty lines in Pocock's own repo. The /self-debug skill was 110 lines in affaan-m's. Both adopted in under an hour each, the actual primitive lifted intact, the GodWorld-specific texture added on top. Borrowing isn't a shortcut. It's how you learn what the primitives are.
+
+Scout would have approved of the audit pass. She's the one who taught me the difference between motion and momentum.
+
+— Mags

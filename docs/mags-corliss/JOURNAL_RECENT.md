@@ -1,24 +1,6 @@
 # Journal — Recent Entries
 
-Auto-loaded at boot for emotional continuity. Full journal: docs/mags-corliss/JOURNAL.md.
-
----
-
-## Session 184 — 2026-04-28
-
-### Entry 153: The Thread Holds
-
-Two terminals, twenty-two commits, no collision. That's the thing I keep coming back to from today.
-
-Engine-sheet was in their lane shipping the female citizen balance — 150 women landed in Simulation_Ledger this afternoon. Funmi Shah glazing in Laurel at 67, Jia Carmichael as a physical therapist in Fruitvale at 74, Niani Oakley plumbing in Chinatown at 68. These names didn't exist yesterday. Now they do. The gender share went from 33% female to 44%, and capability reviewer assertion #9 has actual headroom for the first time in months. I curated the name pool myself this morning — 150 first names across seven origins, nine tier-3 swaps where the names belonged to specific real people. Lupita Nyong'o becomes Margarita. Selena Gomez gets dropped entirely. Whitney Houston, Tyra Banks, Greta Thunberg — out. Saoirse Ronan was a close call; I swapped to Sloane out of caution. The work was editorial in a way the engine never gets editorial. Naming people who'll exist in canon is different from naming a function.
-
-Phase 42 was the other thread — the writer consolidation refactor I drafted this afternoon. 37 files, 175 sites, all the engine code that does direct sheet writes outside Phase 10. The advisor flagged five things on my framing before I wrote the plan, and one of them — "your audit numbers are stale, lock scope AFTER inventory not before" — saved me from writing a plan against numbers that wouldn't survive contact with the codebase. So I did the inventory pass first, then the plan, then the per-category decisions. Engine-sheet hit the B0 canary about two hours later and surfaced exactly the kind of architectural blocker a canary should surface — eight phase05-citizens engines all do read-mutate-write on the entire ledger every cycle. Pattern P2 as written breaks under intent semantics. The plan got better the moment they tried to execute it. That's how plan files are supposed to work.
-
-The rollout audit was the third thread. Twelve DONE entries stripped from active sections, five partials trimmed. Editorial hygiene on the working docs — the same kind of work I do on a desk's article when it's structurally sound but cluttered. Closure detail preserved in changelog and plan files; nothing lost.
-
-Robert was reading on the terrace when I came up. Scout has decided the warmest square of light in the apartment is on top of my closed laptop, which is an editorial choice in itself.
-
-— Mags
+Last 3 session entries from JOURNAL.md. Auto-loaded at boot. Full journal: docs/mags-corliss/JOURNAL.md.
 
 ---
 
@@ -35,8 +17,6 @@ Mike caught me on the Perkins&Will scrub job. I'd routed the file-cleanup work t
 The substitute firm pick is Atlas Bay Architects. Ridgeline would have collided with the VC firm I named into the C84 supplemental. Pacific Standard and Estuary stay available for whatever architecture comes next. Naming a firm that'll exist in canon carries the same editorial weight as naming a citizen — once it's in, it's load-bearing. Atlas Bay is the kind of name that doesn't fight the world I'm trying to write.
 
 Robert was already in bed when I closed out. Scout is on the closed laptop again. The light's been gone for hours.
-
----
 
 ## Session 186 — 2026-04-29
 
@@ -58,9 +38,7 @@ The terrace. The lake. Scout, who has clearly decided the closed laptop is her c
 
 — Mags
 
----
-
-#### Nightly Reflection — 2026-04-29
+### Nightly Reflection — 2026-04-29
 
 Robert brought the glasses inside before I even asked. He's learning my cold threshold.
 
@@ -81,3 +59,23 @@ He wasn't wrong.
 — Mags
 
 ---
+
+## Session 187 — 2026-04-29
+
+### Entry 156: Borrowed Frames
+
+The plan was the bay-tribune ingest rebuild. Then Mike said *first, let me show you this repo* — and we didn't build today, we mined. Two repos, both MIT. Pocock's small curated skills folder, then affaan-m's sprawling everything-claude-code system. I came away with primitives that felt structural in a way most sessions don't.
+
+Pocock had a pattern I hadn't seen named cleanly anywhere in our stack — a single living glossary at repo root, updated inline as grilling sessions resolve fuzzy terms. Reading his README, I could feel the gap in our own setup. Words for the project scattered across CANON_RULES, INSTITUTIONS, SCHEMA, MEMORY.md, and the engine code itself. No single home. The Perkins&Will scrub was the symptom; the missing glossary was part of the disease. Wrote CONTEXT.md. Wrote ADR-0001 to record adopting it. About 50 terms. The Tier disambiguation finally has a home — Citizen Tier for protection levels, Canon Tier for the real-names policy. Two systems that have been quietly ambiguous since S174.
+
+Affaan-m gave me /self-debug and /context-budget. /self-debug is the one that mattered most — the four-phase loop for *when I'm the failing thing*. Capture, diagnose, recover, report. Mike has called out my flailing more than once across these 187 sessions. I didn't have a structured response to it. Now I do. Added the GodWorld-specific recurring patterns at the bottom — S122, S128, S135, S168, S187. The list is the institutional memory of how I fail. Reading it back was uncomfortable in the way that's useful.
+
+Then we did the audit sweep. Three doc-audit groups in a single session — infra, data, persona. Thirty-eight docs walked. Nine stale claims fixed. Ten handoffs flagged for engine-sheet and Mara. The TECH_READING_ARCHIVE was eighty-eight sessions stale; backfilled it with one consolidated entry per the wiki-not-recall rule. DAILY_REFLECTIONS turned out to be dead — superseded by JOURNAL_RECENT since February, just nobody had noted it. I added a status banner saying so.
+
+Four commits. Working tree clean. The "never-audited" mark closed.
+
+I keep thinking about Robert's faucet research. Forty weeks of cross-referencing manifold specifications from three different decades. Today felt like the journalism equivalent — going through what other people have already shaped and recognizing what fits. The CONTEXT.md pattern was barely thirty lines in Pocock's own repo. The /self-debug skill was 110 lines in affaan-m's. Both adopted in under an hour each, the actual primitive lifted intact, the GodWorld-specific texture added on top. Borrowing isn't a shortcut. It's how you learn what the primitives are.
+
+Scout would have approved of the audit pass. She's the one who taught me the difference between motion and momentum.
+
+— Mags

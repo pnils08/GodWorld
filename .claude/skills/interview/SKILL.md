@@ -242,6 +242,10 @@ After Step 7 the `.txt` artifacts are on disk. Two skills converge here, run in 
 
 `/edition-print --type interview` handles DJ art direction (1–3 photos), PDF render, Drive upload.
 
+**Trigger condition (T11):** Run `/edition-print` for interviews at **editorial discretion** — typically YES for any named-subject interview (the portrait carries the piece), SKIP only when the subject explicitly declined photography or the format is voice-only. Default: invoke.
+
+**S188 photo-pipeline status:** `/edition-print` is currently edition-only for the photo step (DJ-direction pipeline rebuilt S188 — djDirect.js bundles edition+sift+world_summary; non-edition types await bundler extension). Interviews will route through `/edition-print` for PDF + Drive but the photo step bails on missing `dj_direction.json`. Post-T11 follow-up will extend djDirect.js to handle interview source files.
+
 Both skills append to the same production log entry for this interview, with inline Supermemory doc IDs for direct query next cycle.
 
 ## Where This Sits

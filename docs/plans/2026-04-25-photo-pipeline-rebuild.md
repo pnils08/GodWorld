@@ -3,7 +3,7 @@ title: Photo Pipeline Rebuild Plan
 created: 2026-04-25
 updated: 2026-04-25
 type: plan
-tags: [media, active]
+tags: [media, research, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §Edition Production (REBUILD entry, S170 + S172 confirmation)
   - docs/EDITION_PIPELINE.md §Post-Edition Add-Ons §/edition-print
@@ -25,7 +25,7 @@ pointers:
 
 **Architecture:** Today, `generate-edition-photos.js` synthesizes its own one-line prompts from the first sentence of two section headers and hands them to FLUX; DJ's IDENTITY/LENS never enter the loop. The rebuild splits Step 1 into two: `djDirect.js` invokes `subagent_type=dj-hartley` with the full edition + engine audit + world summary, DJ produces 5–8 specs as JSON, then `generate-edition-photos.js` consumes that JSON and executes each prompt verbatim. `photoQA.js` returns real Haiku verdicts (currently ships template strings); a 1-retry regen loop runs on QA fail, then escalates to editorial. `/edition-print` already exists as a post-edition skill — this rebuild changes only its Step 1 internals and extends its trigger surface to all four journalism skills.
 
-**Terminal:** media (executes). Drafted by research-build (this plan).
+**Terminal:** research-build (builds + executes the photo pipeline). Per S188 scope correction, photo pipeline rebuild is research-build owned — media doesn't build.
 
 **Pointers:**
 - Parent rollout entry: [[engine/ROLLOUT_PLAN]] §Edition Production → REBUILD: Photo pipeline (HIGH)

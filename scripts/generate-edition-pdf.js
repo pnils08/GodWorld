@@ -243,8 +243,10 @@ function loadPhotoBase64(photoDir, filename) {
  */
 function findPhotoForSection(manifest, sectionName) {
   if (!manifest || !manifest.photos) return null;
+  if (!sectionName) return null;
   var sectionUpper = sectionName.toUpperCase();
   return manifest.photos.find(function(p) {
+    if (!p.section) return false;
     return p.section.toUpperCase() === sectionUpper;
   });
 }

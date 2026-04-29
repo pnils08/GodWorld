@@ -218,6 +218,33 @@ Faith organizations are tracked in `Faith_Organizations` ledger sheet (17 entrie
 
 ---
 
+## Arts, Culture & Landmarks
+
+Iconic Oakland landmarks and cultural venues. These are public-geographic functions like neighborhoods — using their real names doesn't compete with private Oakland firms, and refusing to name them produces tortured prose. Real names allowed; these are also canon-allowed in image generation (DJ Hartley photo direction may write the venue name and signage into positive frame, not negative-frame).
+
+### Tier 1 — Use real names
+
+- **Fox Theater Oakland** — historic restored theater, 1928, Telegraph & 19th, KONO district. Marquee + signage canon-allowed in frame.
+- **Paramount Theatre** — historic restored theater, 1931, Telegraph & 21st. Marquee + signage canon-allowed.
+- **Heinold's First and Last Chance Saloon** — 1883 saloon, Jack London Square waterfront. Neon sign + venue name canon-allowed in frame (DJ LENS §Vantage Points).
+- **Oakland Museum of California (OMCA)** — public-funded cultural institution.
+- **Chabot Space & Science Center** — public-affiliated science museum, Oakland Hills.
+- **Lake Merritt pergola** — public landmark, east shore (DJ LENS §Vantage Points).
+- **Jack London Square** — public waterfront district (DJ LENS §Vantage Points).
+- **Oakland Coliseum** — public-municipal stadium, A's home venue (DJ LENS §Vantage Points). A's branding inside the frame is canon — see Sports §Tier 1 Oakland Athletics.
+- **Lake Merritt** — public lake, civic center.
+- **Telegraph Avenue** — public street, KONO/Temescal corridor.
+- **Coliseum tunnel** — public-municipal access (DJ LENS §Vantage Points).
+- **Oakland ferry terminal** — public transit infrastructure (DJ LENS §Vantage Points).
+- **Oakland Asian Cultural Center (OACC)** — public-affiliated cultural institution, Chinatown.
+- **Malonga Casquelourd Center for the Arts** — public-affiliated arts center.
+
+### Tier 2 — Canon-substitute required
+
+Privately-branded arts/culture entities (named galleries, named music venues, named restaurant groups when they appear as institutional actors) follow the standard tier-2 substitution rule. Most show up at neighborhood scale and can be invented per CANON_RULES §Invention Authority — only escalate when an existing real-world brand has been quoted as a canon source.
+
+---
+
 ## Maintenance
 
 - **Editorial fills tier-2 canon substitutes** — Mike or Mags decides names. Agents don't auto-name.

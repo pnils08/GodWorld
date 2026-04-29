@@ -1,33 +1,39 @@
 #!/usr/bin/env node
 /**
  * ============================================================================
- * Edition Photo Generator v2.1
+ * Edition Photo Generator v3.0 — DJ-Direction Mode
  * ============================================================================
  *
- * Reads a Cycle Pulse publishable artifact (edition, interview, supplemental,
- * dispatch, interview-transcript) and generates photos using AI.
- * Default mode: auto-assigns photos using Mags' editorial logic.
+ * Stage 2 of the rebuilt photo pipeline (Phase 21.3, S188 — T6).
+ *
+ * Reads `output/photos/e<XX>/dj_direction.json` produced by `djDirect.js` +
+ * the dj-hartley subagent, and generates one image per spec via Together AI
+ * (FLUX.1-dev). The image_prompt from each spec is passed verbatim — no
+ * internal prompt synthesis.
+ *
+ * Per-image artifacts:
+ *   output/photos/e<XX>/<slug>.png            — generated image
+ *   output/photos/e<XX>/<slug>.meta.json      — full spec + provider + ts
+ *
+ * Aggregate artifact:
+ *   output/photos/e<XX>/manifest.json         — overview + all photos
  *
  * Usage:
- *   node scripts/generate-edition-photos.js editions/cycle_pulse_edition_83.txt
- *   node scripts/generate-edition-photos.js editions/cycle_pulse_edition_83.txt --dry-run
- *   node scripts/generate-edition-photos.js editions/cycle_pulse_edition_83.txt --credits-only
- *   node scripts/generate-edition-photos.js editions/cycle_pulse_interview_92_santana.txt --type interview --cycle 92
+ *   node scripts/generate-edition-photos.js 92
+ *   node scripts/generate-edition-photos.js 92 --dry-run
+ *   node scripts/generate-edition-photos.js 92 --model black-forest-labs/FLUX.1.1-pro
  *
  * Flags:
- *   --type {edition|interview|supplemental|dispatch|interview-transcript}
- *           Default: edition. Determines per-type photo budget + output dir.
- *   --cycle N
- *           Required when --type ≠ edition (non-edition filenames don't
- *           always carry cycle in the legacy parser regex).
- *   --dry-run       Show prompts without generating images
- *   --credits-only  Only generate for articles with [Photo:] tags (v1 behavior)
- *
- * Per-type photo budget (cap on auto-assignments):
- *   edition: 5–8 (existing assignPhotos default)
- *   interview / supplemental / dispatch / interview-transcript: 1–3
+ *   --dry-run    Print specs + would-be paths; skip provider call
+ *   --model      Override model (default: black-forest-labs/FLUX.1-dev)
  *
  * Requires: TOGETHER_API_KEY in .env
+ *
+ * Note: Non-edition types (interview, supplemental, dispatch) used to flow
+ * through this script with --type/--cycle and synthesis. Those flows are
+ * temporarily without photo generation until T11 wires DJ-direction mode
+ * into all four journalism skills. Until then, non-edition photo generation
+ * happens through whichever legacy path the calling skill specifies.
  *
  * ============================================================================
  */
@@ -35,56 +41,92 @@
 var path = require('path');
 var fs = require('fs');
 require('/root/GodWorld/lib/env');
-var editionParser = require('../lib/editionParser');
 var photoGen = require('../lib/photoGenerator');
+var photoQA = require('./photoQA');
+var Anthropic = require('@anthropic-ai/sdk');
 
-var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
-
-var PHOTO_BUDGET = {
-  'edition':              { min: 5, max: 8 },
-  'interview':            { min: 1, max: 3 },
-  'supplemental':         { min: 1, max: 3 },
-  'dispatch':             { min: 1, max: 3 },
-  'interview-transcript': { min: 1, max: 3 }
-};
+var DEFAULT_MODEL = 'black-forest-labs/FLUX.1.1-pro';
+var DEFAULT_WIDTH = 1344;
+var DEFAULT_HEIGHT = 768;
+var DEFAULT_STEPS = 28;
+var REGEN_MAX_RETRIES = 1; // T8: max 1 retry per failed photo
 
 // ---------------------------------------------------------------------------
-// CLI flag parsing — --type / --cycle (T9 pattern, mirrors T6/T7)
+// CLI
 // ---------------------------------------------------------------------------
-function parseFlag(name) {
-  var i = process.argv.indexOf('--' + name);
-  if (i === -1 || i === process.argv.length - 1) return null;
-  return process.argv[i + 1];
-}
 
-function parseType() {
-  var raw = parseFlag('type');
-  if (!raw) return 'edition';
-  if (ALLOWED_TYPES.indexOf(raw) === -1) {
-    console.error('[ERROR] --type must be one of: ' + ALLOWED_TYPES.join(', '));
+var ALLOWED_TYPES = ['edition', 'dispatch', 'interview', 'supplemental'];
+
+function parseArgs() {
+  var args = process.argv.slice(2);
+  if (args.length < 1) {
+    console.error('Usage: node scripts/generate-edition-photos.js <cycle> [--type T] [--slug S] [--dry-run] [--model <id>] [--with-qa] [--qa-only]');
     process.exit(1);
   }
-  return raw;
-}
-
-function parseCycleFlag() {
-  var raw = parseFlag('cycle');
-  if (!raw) return null;
-  var n = parseInt(raw, 10);
-  if (!Number.isFinite(n) || n < 1) {
-    console.error('[ERROR] --cycle must be a positive integer');
+  var cycle = parseInt(args[0], 10);
+  if (Number.isNaN(cycle) || cycle < 1) {
+    console.error('Error: first arg must be a positive cycle number (e.g. 92)');
     process.exit(1);
   }
-  return n;
+  var dryRun = args.includes('--dry-run');
+  var withQa = args.includes('--with-qa');
+  var qaOnly = args.includes('--qa-only');
+  var model = DEFAULT_MODEL;
+  var type = 'edition';
+  var slug = null;
+  for (var i = 1; i < args.length; i++) {
+    if (args[i] === '--model' && args[i + 1]) {
+      model = args[i + 1];
+      i++;
+    } else if (args[i] === '--type' && args[i + 1]) {
+      type = args[i + 1];
+      if (ALLOWED_TYPES.indexOf(type) === -1) {
+        console.error('Error: --type must be one of: ' + ALLOWED_TYPES.join(', '));
+        process.exit(1);
+      }
+      i++;
+    } else if (args[i] === '--slug' && args[i + 1]) {
+      slug = args[i + 1];
+      i++;
+    }
+  }
+  if (type !== 'edition' && !slug) {
+    console.error('Error: --slug is required for --type ' + type);
+    process.exit(1);
+  }
+  // --qa-only implies --with-qa
+  if (qaOnly) withQa = true;
+  return { cycle: cycle, dryRun: dryRun, model: model, withQa: withQa, qaOnly: qaOnly, type: type, slug: slug };
 }
 
-// Derive slug suffix from non-edition filename:
-// cycle_pulse_interview_92_santana.txt → "santana"
-function deriveNonEditionSlug(filename, type) {
-  var base = path.basename(filename);
-  var pattern = new RegExp('^cycle_pulse_' + type + '_\\d+_(.+)\\.txt$');
-  var m = base.match(pattern);
-  return m ? m[1] : null;
+function deriveOutDir(type, cycle, slug) {
+  if (type === 'edition') return path.join(__dirname, '..', 'output', 'photos', 'e' + cycle);
+  return path.join(__dirname, '..', 'output', 'photos', type + '_c' + cycle + '_' + slug);
+}
+
+// ---------------------------------------------------------------------------
+// Spec validation
+// ---------------------------------------------------------------------------
+
+var REQUIRED_FIELDS = ['slug', 'thesis', 'mood', 'motifs', 'composition', 'credit', 'image_prompt'];
+
+function validateSpec(spec, idx) {
+  var missing = [];
+  for (var f = 0; f < REQUIRED_FIELDS.length; f++) {
+    if (!spec[REQUIRED_FIELDS[f]]) missing.push(REQUIRED_FIELDS[f]);
+  }
+  if (missing.length > 0) {
+    return { valid: false, reason: 'spec ' + idx + ' missing fields: ' + missing.join(', ') };
+  }
+  var slug = spec.slug;
+  if (!/^[a-z0-9_]+$/.test(slug)) {
+    return { valid: false, reason: 'spec ' + idx + ' slug "' + slug + '" not lowercase_underscore' };
+  }
+  var wc = spec.image_prompt.split(/\s+/).filter(Boolean).length;
+  if (wc < 100 || wc > 220) {
+    return { valid: false, reason: 'spec ' + idx + ' (' + slug + ') prompt word count ' + wc + ' outside 100-220' };
+  }
+  return { valid: true };
 }
 
 // ---------------------------------------------------------------------------
@@ -92,235 +134,465 @@ function deriveNonEditionSlug(filename, type) {
 // ---------------------------------------------------------------------------
 
 async function main() {
-  var args = process.argv.slice(2);
-  var dryRun = args.includes('--dry-run');
-  var creditsOnly = args.includes('--credits-only');
-  var type = parseType();
-  var cycleFlag = parseCycleFlag();
+  var argv = parseArgs();
+  var cycle = argv.cycle;
+  var dryRun = argv.dryRun;
+  var model = argv.model;
 
-  // First non-flag positional that's NOT a flag value (skip values consumed by --type/--cycle)
-  var editionFile = null;
-  for (var ai = 0; ai < args.length; ai++) {
-    var a = args[ai];
-    if (a.startsWith('--')) continue;
-    var prev = args[ai - 1];
-    if (prev === '--type' || prev === '--cycle') continue;
-    editionFile = a;
-    break;
+  var outDir = deriveOutDir(argv.type, cycle, argv.slug);
+  var directionPath = path.join(outDir, 'dj_direction.json');
+
+  if (!fs.existsSync(directionPath)) {
+    console.error('Error: missing dj_direction.json at ' + directionPath);
+    console.error('Run djDirect.js + invoke dj-hartley subagent first (Stage 1).');
+    process.exit(1);
   }
 
-  if (!editionFile) {
-    console.log('Usage: node scripts/generate-edition-photos.js <source.txt> [--type <type>] [--cycle N] [--dry-run] [--credits-only]');
+  var raw = fs.readFileSync(directionPath, 'utf-8');
+  var specs;
+  try {
+    specs = JSON.parse(raw);
+  } catch (e) {
+    console.error('Error: dj_direction.json is not valid JSON: ' + e.message);
+    process.exit(1);
+  }
+
+  if (!Array.isArray(specs)) {
+    console.error('Error: dj_direction.json top-level must be an array');
+    process.exit(1);
+  }
+  if (specs.length === 0) {
+    console.error('Error: dj_direction.json contains zero specs');
+    process.exit(1);
+  }
+
+  // Validate all specs upfront — fail fast if any are malformed
+  var invalid = [];
+  for (var s = 0; s < specs.length; s++) {
+    var check = validateSpec(specs[s], s);
+    if (!check.valid) invalid.push(check.reason);
+  }
+  if (invalid.length > 0) {
+    console.error('Error: spec validation failed:');
+    invalid.forEach(function (r) { console.error('  - ' + r); });
+    process.exit(1);
+  }
+
+  // Slug uniqueness check
+  var slugSet = {};
+  for (var u = 0; u < specs.length; u++) {
+    if (slugSet[specs[u].slug]) {
+      console.error('Error: duplicate slug "' + specs[u].slug + '"');
+      process.exit(1);
+    }
+    slugSet[specs[u].slug] = true;
+  }
+
+  console.log('');
+  console.log('='.repeat(72));
+  console.log('Edition Photo Generator v3.0 — Cycle ' + cycle);
+  console.log('='.repeat(72));
+  console.log('');
+  console.log('  Direction:  ' + directionPath);
+  console.log('  Output dir: ' + outDir);
+  console.log('  Specs:      ' + specs.length);
+  console.log('  Model:      ' + model);
+  console.log('  Mode:       ' + (dryRun ? 'DRY RUN (no provider calls)' :
+                                    argv.qaOnly ? 'QA-ONLY (skip generation, use existing photos)' :
+                                    'live'));
+  console.log('');
+
+  // --qa-only: skip generation, load existing manifest, jump to QA loop
+  if (argv.qaOnly) {
+    var existingManifestPath = path.join(outDir, 'manifest.json');
+    if (!fs.existsSync(existingManifestPath)) {
+      console.error('Error: --qa-only requires existing manifest.json at ' + existingManifestPath);
+      process.exit(1);
+    }
+    var existingManifest = JSON.parse(fs.readFileSync(existingManifestPath, 'utf-8'));
+    if (!existingManifest.photos || existingManifest.photos.length === 0) {
+      console.error('Error: --qa-only found no photos[] in existing manifest');
+      process.exit(1);
+    }
+    console.log('Using existing photos from manifest (' + existingManifest.photos.length + ' photos).');
     console.log('');
-    console.log('  Default: auto-assigns photos using editorial logic');
-    console.log('  --type:        edition|interview|supplemental|dispatch|interview-transcript (default edition)');
-    console.log('  --cycle N:     required when --type ≠ edition');
-    console.log('  --credits-only: only articles with [Photo:] tags (v1 behavior)');
-    console.log('  --dry-run:     show prompts without generating images');
-    process.exit(1);
-  }
-
-  if (type !== 'edition' && cycleFlag === null) {
-    console.error('[ERROR] --cycle is required for --type ' + type +
-      ' (no fallback extraction for non-edition types).');
-    process.exit(1);
-  }
-
-  var fullPath = path.resolve(editionFile);
-  if (!fs.existsSync(fullPath)) {
-    console.error('File not found: ' + fullPath);
-    process.exit(1);
-  }
-
-  console.log('');
-  console.log('=== Bay Tribune Photo Generator v2.1 ===');
-  console.log('');
-
-  // Parse the edition
-  var parsed = editionParser.parseEdition(fullPath);
-
-  // For non-edition types, override edition/slug from flags + filename so
-  // output paths follow the T1 contract (cycle_pulse_<type>_<cycle>_<slug>.txt).
-  // Edition default keeps the legacy parser-derived slug (back-compat).
-  if (type !== 'edition') {
-    var slugSuffix = deriveNonEditionSlug(fullPath, type);
-    parsed.edition = String(cycleFlag);
-    parsed.slug = type + '_c' + cycleFlag + (slugSuffix ? '_' + slugSuffix : '');
-  }
-
-  var resolvedCycle = cycleFlag !== null ? cycleFlag : (parsed.edition || null);
-  var budget = PHOTO_BUDGET[type] || PHOTO_BUDGET.edition;
-
-  console.log('[METADATA] ' + JSON.stringify({
-    type: type,
-    cycle: resolvedCycle,
-    slug: parsed.slug,
-    photoBudget: budget,
-    source: path.basename(fullPath)
-  }, null, 2));
-  console.log('');
-
-  console.log('Edition: ' + parsed.edition);
-  console.log('Weather: ' + parsed.weather);
-  console.log('Sections found: ' + parsed.sections.length);
-  console.log('Photo budget (' + type + '): ' + budget.min + '–' + budget.max);
-  console.log('');
-
-  var photoSections;
-
-  if (creditsOnly) {
-    // V1 behavior: only sections with [Photo:] credits
-    console.log('Mode: credits-only (articles with [Photo:] tags)');
-    photoSections = [];
-    parsed.sections.forEach(function(s) {
-      if (s.photographer && s.beat !== 'editorial') {
-        photoSections.push({
-          section: s,
-          photographer: s.photographer,
-          reason: 'explicit credit'
-        });
-      }
+    await runQaAndRegenLoop({
+      cycle: cycle,
+      outDir: outDir,
+      specs: specs,
+      results: existingManifest.photos,
+      manifest: existingManifest,
+      manifestPath: existingManifestPath,
+      model: model
     });
-  } else {
-    // V2 default: auto-assign using Mags' editorial logic
-    console.log('Mode: auto (Mags\' editorial assignment)');
-    var assignments = photoGen.assignPhotos(parsed.sections);
-    photoSections = assignments.map(function(a) {
-      return {
-        section: a.section,
-        photographer: a.photographer,
-        reason: a.reason
-      };
-    });
+    return;
   }
-
-  // Per-type budget cap — assignPhotos may return more than the non-edition
-  // budget allows; slice down to budget.max. Min is informational (T10
-  // validation will check end-to-end coverage).
-  if (photoSections.length > budget.max) {
-    console.log('Capping photo assignments at type budget: ' +
-      photoSections.length + ' → ' + budget.max + ' (' + type + ')');
-    photoSections = photoSections.slice(0, budget.max);
-  }
-
-  if (photoSections.length === 0) {
-    console.log('No photos to generate.');
-    process.exit(0);
-  }
-
-  console.log('');
-  console.log('Photo assignments (' + photoSections.length + '):');
-  photoSections.forEach(function(ps) {
-    var headline = ps.section.headline || '(no headline)';
-    console.log('  - ' + ps.section.name + ' [' + ps.reason + ']');
-    console.log('    Photographer: ' + ps.photographer);
-    console.log('    Headline: ' + headline.substring(0, 60));
-  });
-  console.log('');
 
   if (dryRun) {
-    console.log('=== DRY RUN — showing prompts only ===');
-    console.log('');
-    photoSections.forEach(function(ps) {
-      var s = ps.section;
-      var scene = photoGen.extractScene(
-        (s.text || '').substring(0, 800),
-        s.headline || '',
-        s.beat,
-        s.name || ''
-      );
-      var prompt = photoGen.buildPhotoPrompt({
-        headline: s.headline,
-        sceneDescription: scene,
-        neighborhood: '',
-        weather: parsed.weather,
-        beat: s.beat
-      }, photoGen.resolvePhotographer(ps.photographer));
-
-      console.log('--- ' + s.name + ' ---');
-      console.log('Photographer: ' + ps.photographer);
-      console.log('Scene: ' + scene);
-      console.log('Prompt: ' + prompt.substring(0, 200) + '...');
+    console.log('-'.repeat(72));
+    console.log('Specs (would generate):');
+    console.log('-'.repeat(72));
+    specs.forEach(function (spec, i) {
+      var wc = spec.image_prompt.split(/\s+/).filter(Boolean).length;
       console.log('');
+      console.log('  [' + (i + 1) + '/' + specs.length + '] ' + spec.slug);
+      console.log('      Credit:   ' + spec.credit);
+      console.log('      Thesis:   ' + spec.thesis);
+      console.log('      Words:    ' + wc + ' (target 120-180)');
+      console.log('      Out:      ' + path.join('output/photos/e' + cycle, spec.slug + '.png'));
+      console.log('      Sidecar:  ' + path.join('output/photos/e' + cycle, spec.slug + '.meta.json'));
     });
+    console.log('');
     console.log('Run without --dry-run to generate images.');
     return;
   }
 
-  // Generate photos
-  var outputDir = path.join(__dirname, '..', 'output', 'photos', parsed.slug || 'e' + parsed.edition);
-  console.log('Output directory: ' + outputDir);
-  console.log('');
+  // Live generation
+  fs.mkdirSync(outDir, { recursive: true });
 
   var results = [];
-  for (var i = 0; i < photoSections.length; i++) {
-    var ps = photoSections[i];
-    var section = ps.section;
-    var slugSource = section.headline || section.name || 'photo_' + i;
-    var slugName = slugSource.substring(0, 80).toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
-    var prefix = parsed.slug || 'e' + parsed.edition;
-    var filename = prefix + '_' + slugName + '.jpg';
+  var failures = [];
 
-    console.log('[' + (i + 1) + '/' + photoSections.length + '] Generating: ' + section.name);
+  for (var i = 0; i < specs.length; i++) {
+    var spec = specs[i];
+    var label = '[' + (i + 1) + '/' + specs.length + '] ' + spec.slug;
+    console.log(label + ' generating...');
 
+    var startMs = Date.now();
     try {
-      var result = await photoGen.generatePhoto({
-        headline: section.headline,
-        text: section.text,
-        sectionName: section.name,
-        neighborhood: '',
-        weather: parsed.weather,
-        beat: section.beat
-      }, {
-        photographer: ps.photographer
+      var result = await photoGen.generateWithTogether(spec.image_prompt, {
+        model: model,
+        width: DEFAULT_WIDTH,
+        height: DEFAULT_HEIGHT,
+        steps: DEFAULT_STEPS
       });
 
-      var saved = await photoGen.savePhoto(result, outputDir, filename);
-      results.push({ section: section.name, file: saved, credit: result.creditLine });
-      console.log('  Credit: ' + result.creditLine);
+      var elapsedMs = Date.now() - startMs;
+      var imageFile = spec.slug + '.png';
+
+      // Save image — savePhoto handles b64 decode + url fallback
+      var saved = await photoGen.savePhoto(
+        { url: result.url, b64: result.b64 },
+        outDir,
+        imageFile
+      );
+
+      // Sidecar metadata
+      var meta = {
+        slug: spec.slug,
+        cycle: cycle,
+        spec: spec,
+        provider: result.provider,
+        model: result.model,
+        generatedAt: new Date().toISOString(),
+        elapsedMs: elapsedMs,
+        imageFile: imageFile,
+        promptWordCount: spec.image_prompt.split(/\s+/).filter(Boolean).length,
+        dimensions: { width: DEFAULT_WIDTH, height: DEFAULT_HEIGHT },
+        steps: DEFAULT_STEPS
+      };
+      var sidecarPath = path.join(outDir, spec.slug + '.meta.json');
+      fs.writeFileSync(sidecarPath, JSON.stringify(meta, null, 2));
+
+      console.log('  ✓ saved: ' + path.basename(saved) + ' (' + (elapsedMs / 1000).toFixed(1) + 's)');
+      console.log('  ✓ sidecar: ' + path.basename(sidecarPath));
       console.log('');
+
+      results.push({
+        slug: spec.slug,
+        file: imageFile,
+        sidecar: path.basename(sidecarPath),
+        credit: spec.credit,
+        section: spec.section || null,
+        elapsedMs: elapsedMs
+      });
     } catch (err) {
-      console.error('  ERROR: ' + err.message);
+      console.error('  ✗ ERROR: ' + err.message);
       console.log('');
+      failures.push({ slug: spec.slug, error: err.message });
     }
   }
 
-  // Summary
+  // Manifest
+  var manifestSlug = argv.type === 'edition' ? 'e' + cycle : argv.type + '_c' + cycle + '_' + argv.slug;
+  var manifest = {
+    cycle: cycle,
+    type: argv.type,
+    slug: manifestSlug,
+    provider: 'together',
+    model: model,
+    generatedAt: new Date().toISOString(),
+    specCount: specs.length,
+    successCount: results.length,
+    failureCount: failures.length,
+    photos: results,
+    failures: failures
+  };
+  var manifestPath = path.join(outDir, 'manifest.json');
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+
+  console.log('='.repeat(72));
+  console.log('Generation complete');
+  console.log('='.repeat(72));
   console.log('');
-  console.log('=== Generation Complete ===');
-  console.log('Photos generated: ' + results.length + '/' + photoSections.length);
-  results.forEach(function(r) {
-    console.log('  ' + r.section + ' -> ' + path.basename(r.file) + ' [' + r.credit + ']');
-  });
-
-  // Write manifest
-  if (results.length > 0) {
-    var manifest = {
-      edition: parsed.edition,
-      type: type,
-      cycle: resolvedCycle,
-      slug: parsed.slug,
-      photoBudget: budget,
-      provider: 'together / FLUX.1-schnell',
-      photos: results.map(function(r) {
-        return {
-          section: r.section,
-          file: path.basename(r.file),
-          credit: r.credit
-        };
-      })
-    };
-
-    fs.mkdirSync(outputDir, { recursive: true });
-    var manifestPath = path.join(outputDir, 'manifest.json');
-    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+  console.log('  Generated: ' + results.length + '/' + specs.length);
+  console.log('  Failures:  ' + failures.length);
+  console.log('  Manifest:  ' + manifestPath);
+  console.log('');
+  if (failures.length > 0) {
+    console.log('  Failed slugs:');
+    failures.forEach(function (f) {
+      console.log('    - ' + f.slug + ': ' + f.error);
+    });
     console.log('');
-    console.log('Manifest: ' + manifestPath);
   }
+
+  // T8: --with-qa runs photoQA + regen-on-fail loop
+  if (argv.withQa) {
+    await runQaAndRegenLoop({
+      cycle: cycle,
+      outDir: outDir,
+      specs: specs,
+      results: results,
+      manifest: manifest,
+      manifestPath: manifestPath,
+      model: model
+    });
+  } else {
+    console.log('Next step: photoQA.js verifies each image against its spec.');
+    console.log('  node scripts/photoQA.js output/photos/e' + cycle);
+    console.log('Or rerun with --with-qa to chain QA + regen-on-fail in one pass.');
+    console.log('');
+  }
+}
+
+// ---------------------------------------------------------------------------
+// T8: QA + regen-on-fail loop
+// ---------------------------------------------------------------------------
+
+async function runQaAndRegenLoop(opts) {
+  var cycle = opts.cycle;
+  var outDir = opts.outDir;
+  var specs = opts.specs;
+  var results = opts.results;
+  var manifest = opts.manifest;
+  var manifestPath = opts.manifestPath;
+  var model = opts.model;
+
+  if (!process.env.ANTHROPIC_API_KEY) {
+    console.error('Error: --with-qa requires ANTHROPIC_API_KEY in environment');
+    process.exit(1);
+  }
+
+  console.log('='.repeat(72));
+  console.log('Photo QA (Haiku) + regen-on-fail loop');
+  console.log('='.repeat(72));
+  console.log('');
+
+  var qaClient = new Anthropic();
+  var specBySlug = {};
+  specs.forEach(function (s) { specBySlug[s.slug] = s; });
+
+  var regenLogPath = path.join(outDir, 'regen_log.md');
+  var regenLog = ['# Regen-on-fail log — Cycle ' + cycle, '',
+                  'Started: ' + new Date().toISOString(), ''];
+
+  var qaResults = [];
+
+  // Initial QA pass
+  for (var i = 0; i < results.length; i++) {
+    var photo = results[i];
+    var slug = photo.slug;
+    var spec = specBySlug[slug];
+    if (!spec) continue;
+    var photoPath = path.join(outDir, photo.file);
+    var label = '[QA ' + (i + 1) + '/' + results.length + '] ' + slug;
+    console.log(label + ' evaluating...');
+
+    try {
+      var qa = await photoQA.evaluatePhoto(qaClient, photoPath, spec);
+      var icon = qa.verdict === 'PASS' ? '✓' : qa.verdict === 'FLAG' ? '!' : '✗';
+      console.log('  ' + icon + ' ' + qa.verdict + ' — ' + qa.summary);
+      console.log('');
+      writeQaSidecar(outDir, slug, photo.file, cycle, qa);
+      qaResults.push({ slug: slug, file: photo.file, qa: qa, regenAttempt: 0 });
+    } catch (err) {
+      console.error('  QA error: ' + err.message);
+      console.log('');
+      qaResults.push({ slug: slug, file: photo.file, qa: null, error: err.message, regenAttempt: 0 });
+    }
+  }
+
+  // Regen pass — only for FAIL verdicts
+  var failures = qaResults.filter(function (r) { return r.qa && r.qa.verdict === 'FAIL'; });
+
+  if (failures.length === 0) {
+    console.log('No FAIL verdicts — no regen needed.');
+    console.log('');
+  } else {
+    console.log('Regen-on-fail: ' + failures.length + ' FAIL verdict(s) — retrying once each.');
+    console.log('');
+    regenLog.push('## Initial QA: ' + failures.length + ' FAIL(s)', '');
+
+    for (var f = 0; f < failures.length; f++) {
+      var failed = failures[f];
+      var fSpec = specBySlug[failed.slug];
+      var label2 = '[Regen ' + (f + 1) + '/' + failures.length + '] ' + failed.slug;
+      console.log(label2 + ' (attempt 2/' + (REGEN_MAX_RETRIES + 1) + ')...');
+      regenLog.push('### ' + failed.slug, '',
+                    '- **Initial verdict:** FAIL',
+                    '- **Initial summary:** ' + failed.qa.summary,
+                    '- **Initial issues:** ' + failed.qa.issues, '');
+
+      try {
+        var retryStart = Date.now();
+        var retryResult = await photoGen.generateWithTogether(fSpec.image_prompt, {
+          model: model,
+          width: DEFAULT_WIDTH,
+          height: DEFAULT_HEIGHT,
+          steps: DEFAULT_STEPS
+        });
+        var retryElapsed = Date.now() - retryStart;
+        var retryPath = path.join(outDir, failed.file);
+        await photoGen.savePhoto(
+          { url: retryResult.url, b64: retryResult.b64 },
+          outDir,
+          failed.file
+        );
+        // Update sidecar with regen marker
+        var sidecarPath = path.join(outDir, failed.slug + '.meta.json');
+        var meta = JSON.parse(fs.readFileSync(sidecarPath, 'utf-8'));
+        meta.regenAttempt = 1;
+        meta.regenAt = new Date().toISOString();
+        meta.regenElapsedMs = retryElapsed;
+        fs.writeFileSync(sidecarPath, JSON.stringify(meta, null, 2));
+        console.log('  ✓ regenerated (' + (retryElapsed / 1000).toFixed(1) + 's)');
+
+        // Re-evaluate
+        var retryQa = await photoQA.evaluatePhoto(qaClient, retryPath, fSpec);
+        var retryIcon = retryQa.verdict === 'PASS' ? '✓' : retryQa.verdict === 'FLAG' ? '!' : '✗';
+        console.log('  ' + retryIcon + ' ' + retryQa.verdict + ' — ' + retryQa.summary);
+        console.log('');
+        writeQaSidecar(outDir, failed.slug, failed.file, cycle, retryQa);
+
+        // Update qaResults
+        for (var qr = 0; qr < qaResults.length; qr++) {
+          if (qaResults[qr].slug === failed.slug) {
+            qaResults[qr].qa = retryQa;
+            qaResults[qr].regenAttempt = 1;
+            break;
+          }
+        }
+
+        regenLog.push('- **Retry result:** ' + retryQa.verdict,
+                      '- **Retry summary:** ' + retryQa.summary, '');
+
+        if (retryQa.verdict === 'FAIL') {
+          // Mark editorial-flag — pipeline continues
+          meta.editorialFlag = true;
+          meta.editorialFlagReason = retryQa.summary;
+          fs.writeFileSync(sidecarPath, JSON.stringify(meta, null, 2));
+          console.log('  ⚠ marked editorial-flag (still FAIL after retry)');
+          console.log('');
+          regenLog.push('- **Status:** EDITORIAL-FLAG (still FAIL after 1 retry)', '');
+        } else {
+          regenLog.push('- **Status:** PROMOTED to ' + retryQa.verdict, '');
+        }
+      } catch (err) {
+        console.error('  ✗ Regen error: ' + err.message);
+        console.log('');
+        regenLog.push('- **Status:** REGEN ERROR — ' + err.message, '');
+      }
+    }
+  }
+
+  // Aggregate QA report
+  var passes = qaResults.filter(function (r) { return r.qa && r.qa.verdict === 'PASS'; }).length;
+  var flags = qaResults.filter(function (r) { return r.qa && r.qa.verdict === 'FLAG'; }).length;
+  var fails = qaResults.filter(function (r) { return r.qa && r.qa.verdict === 'FAIL'; }).length;
+  var qaErrors = qaResults.filter(function (r) { return !r.qa; }).length;
+
+  var qaReport = {
+    cycle: cycle,
+    type: opts.manifest && opts.manifest.type ? opts.manifest.type : 'edition',
+    photoDir: path.basename(outDir),
+    evaluatedAt: new Date().toISOString(),
+    model: 'claude-haiku-4-5-20251001',
+    summary: { pass: passes, flag: flags, fail: fails, errorOrSkip: qaErrors },
+    regenAttempts: failures.length,
+    regenPromoted: failures.length - fails - failures.filter(function (x) {
+      var current = qaResults.find(function (r) { return r.slug === x.slug; });
+      return current && current.qa && current.qa.verdict === 'FAIL';
+    }).length,
+    results: qaResults.map(function (r) {
+      return {
+        slug: r.slug,
+        file: r.file,
+        verdict: r.qa ? r.qa.verdict : 'ERROR',
+        regenAttempt: r.regenAttempt || 0,
+        editorialFlag: r.qa && r.qa.verdict === 'FAIL' && r.regenAttempt > 0,
+        summary: r.qa ? r.qa.summary : (r.error || 'unknown'),
+        issues: r.qa ? r.qa.issues : ''
+      };
+    })
+  };
+  var qaReportPath = path.join(outDir, 'qa_report.json');
+  fs.writeFileSync(qaReportPath, JSON.stringify(qaReport, null, 2));
+
+  // Update manifest with QA summary
+  manifest.qa = {
+    pass: passes,
+    flag: flags,
+    fail: fails,
+    errorOrSkip: qaErrors,
+    regenAttempts: failures.length,
+    runAt: new Date().toISOString()
+  };
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+
+  // Write regen log
+  regenLog.push('## Final QA summary',
+                '- PASS: ' + passes,
+                '- FLAG: ' + flags,
+                '- FAIL: ' + fails + ' (editorial-flag if regen attempted)',
+                '- Regen attempts: ' + failures.length, '');
+  fs.writeFileSync(regenLogPath, regenLog.join('\n'));
+
+  console.log('='.repeat(72));
+  console.log('Final QA summary');
+  console.log('='.repeat(72));
+  console.log('  PASS:  ' + passes);
+  console.log('  FLAG:  ' + flags);
+  console.log('  FAIL:  ' + fails + (fails > 0 ? ' (editorial-flag)' : ''));
+  console.log('  ERROR: ' + qaErrors);
+  console.log('  Regen attempts: ' + failures.length);
+  console.log('');
+  console.log('  QA report: ' + qaReportPath);
+  console.log('  Regen log: ' + regenLogPath);
   console.log('');
 }
 
-main().catch(function(err) {
+function writeQaSidecar(outDir, slug, file, cycle, qa) {
+  var perImageReport = {
+    slug: slug,
+    file: file,
+    cycle: cycle,
+    verdict: qa.verdict,
+    specCompliance: qa.specCompliance,
+    match: qa.match,
+    tone: qa.tone,
+    issues: qa.issues,
+    summary: qa.summary,
+    rawResponse: qa.rawResponse,
+    tokens: qa.tokens,
+    evaluatedAt: new Date().toISOString(),
+    model: 'claude-haiku-4-5-20251001'
+  };
+  var perImagePath = path.join(outDir, slug + '.qa.json');
+  fs.writeFileSync(perImagePath, JSON.stringify(perImageReport, null, 2));
+}
+
+main().catch(function (err) {
   console.error('Fatal error:', err);
   process.exit(1);
 });

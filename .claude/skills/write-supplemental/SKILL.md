@@ -439,6 +439,10 @@ After Step 4 the `.txt` is approved canon on disk. Two skills converge here, run
 
 `/edition-print --type supplemental` handles DJ art direction (1–3 photos), PDF render, Drive upload.
 
+**Trigger condition (T11):** Run `/edition-print` for supplementals **always** — supplementals are deep-dives, the visual layer is a load-bearing part of the deliverable. Default: always invoke.
+
+**S188 photo-pipeline status:** `/edition-print` is currently edition-only for the photo step (DJ-direction pipeline rebuilt S188 — djDirect.js bundles edition+sift+world_summary; non-edition types await bundler extension). Supplementals will route through `/edition-print` for PDF + Drive but the photo step bails on missing `dj_direction.json`. Post-T11 follow-up will extend djDirect.js to handle supplemental source files.
+
 Both skills append to the same supplemental section of `output/production_log_edition_c{XX}.md` with inline Supermemory doc IDs for direct query next cycle.
 
 ---

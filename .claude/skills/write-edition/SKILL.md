@@ -98,9 +98,18 @@ The edition is story-driven, not section-driven.
 ```
 ============================================================
 THE CYCLE PULSE — EDITION {XX}
-Bay Tribune | Cycle {XX} | [Holiday/Season if applicable]
+Bay Tribune | Cycle {N} | Y{n}C{m} | {Season}, {Week}
 Weather: [plain language — from production log] | City Mood: [plain language]
 ============================================================
+
+Masthead format (per EDITION_PIPELINE.md §Published `.txt` Format Contract):
+- Cycle: integer (matches edition number for full editions)
+- Y{n}C{m}: cycle math — n = floor((cycle-1)/52) + 1, m = ((cycle-1)%52) + 1.
+  Cycle 92 = Y2C40. Replaces month-year (real calendar months don't align with cycle clock).
+- Season: Spring | Summer | Fall | Winter (from cycle-to-season mapping)
+- Week: First Friday | Second Friday | etc. (week within the cycle, optional)
+
+Do NOT emit "October 2041" or any month-year token. The simulation is cycle-paced, not calendar-paced.
 
 FRONT PAGE — [best story]
 EDITOR'S DESK — Mags, 150-250 words

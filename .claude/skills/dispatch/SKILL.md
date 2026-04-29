@@ -188,6 +188,10 @@ After Step 4.5 the `.txt` is on disk. Two skills converge here, run in parallel:
 
 `/edition-print --type dispatch` handles DJ art direction (1–3 photos), PDF render, Drive upload.
 
+**Trigger condition (T11):** Run `/edition-print` for dispatches at **editorial discretion** — invoke when the scene warrants a visual asset (a Heinold's-during-game-14 frame, a waterfront dusk, a Coliseum tunnel after a milestone). Skip when the dispatch is voice-only or the scene doesn't add image-layer signal. Default: invoke unless explicitly skipped.
+
+**S188 photo-pipeline status:** `/edition-print` is currently edition-only for the photo step (DJ-direction pipeline rebuilt S188 — djDirect.js bundles edition+sift+world_summary; non-edition types await bundler extension). Dispatches will route through `/edition-print` for PDF + Drive but the photo step bails on missing `dj_direction.json`. Post-T11 follow-up will extend djDirect.js to handle dispatch source files.
+
 Both skills append to the same dispatch section in `output/production_log_edition_c{XX}.md` with inline Supermemory doc IDs for direct query next cycle.
 
 ---

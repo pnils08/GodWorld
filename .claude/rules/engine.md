@@ -11,7 +11,7 @@ paths:
 - Never use `Math.random()` — use `ctx.rng` for deterministic simulation runs.
 - Never write directly to sheets — use write-intents (`ctx.writeIntents`). Only `phase10-persistence/` files execute sheet writes.
   **Documented exceptions (direct sheet writes outside Phase 10):**
-  - Phase 1 engine core: `godWorldEngine2.js` (Engine_Errors, Simulation_Ledger, Intake, Riley_Digest, World_Population — error log + intake processing + digest), `advanceSimulationCalendar.js` (Simulation_Calendar — cycle calendar state)
+  - Phase 1 engine core: `godWorldEngine2.js` (Engine_Errors, Simulation_Ledger, Intake, Riley_Digest, World_Population — error log + intake processing + digest), `advanceSimulationCalendar.js` (Simulation_Calendar — cycle calendar state), `initSimulationLedger.js` (Simulation_Ledger — single-cycle read into shared `ctx.ledger`, Phase 42 §5.6 redesign S188)
   - Phase 2 world state: `applyEditionCoverageEffects.js` (Edition_Coverage_Ratings — per-edition coverage scoring)
   - Phase 3 population: `applyDemographicDrift.js` (World_Population), `updateNeighborhoodDemographics.js` (Neighborhood_Demographics), `updateCrimeMetrics.js` (Crime_Metrics), `finalizeWorldPopulation.js` (World_Population — per-cycle world-state snapshot), `generateMonthlyDriftReport.js` (World_Drift_Report — monthly drift summary)
   - Phase 3 helper: `updateCityTier.js` (caller-passed sheet — column-update helper, write target decided by caller)

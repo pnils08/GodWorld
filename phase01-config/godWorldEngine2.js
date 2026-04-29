@@ -138,6 +138,12 @@ function runWorldCycle() {
   initializeModeFlags_(ctx);
   initializeSeededRng_(ctx);
 
+  // Phase 42 §5.6: shared in-memory Simulation_Ledger. All cycle-path
+  // SL writers/readers route through ctx.ledger.rows. Phase 10 commits
+  // the final state via a single queueRangeIntent_. Must precede every
+  // SL toucher in the cycle.
+  initSimulationLedger_(ctx);
+
   try {
   // ═══════════════════════════════════════════════════════════
   // PHASE 1: CORE TIME + CONFIG
@@ -1419,6 +1425,11 @@ function replayCycle(cycleId) {
  * @param {Object} ctx - Engine context
  */
 function runCyclePhases_(ctx) {
+  // Phase 42 §5.6: shared in-memory Simulation_Ledger (matches runWorldCycle).
+  // All cycle-path SL writers/readers route through ctx.ledger.rows; Phase 10
+  // commits the final state via a single queueRangeIntent_.
+  initSimulationLedger_(ctx);
+
   // ═══════════════════════════════════════════════════════════
   // PHASE 1: CORE TIME + CONFIG
   // ═══════════════════════════════════════════════════════════
@@ -1625,6 +1636,8 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase10-EveningSnapshot', function() { saveEveningSnapshot_(ctx); });
   // Save cycle state for next cycle's analyzers (shock, pattern, recovery)
   safePhaseCall_(ctx, 'Phase10-CycleState', function() { savePreviousCycleState_(ctx); });
+  // Phase 42 §5.6: consolidated Simulation_Ledger commit (matches runWorldCycle).
+  safePhaseCall_(ctx, 'Phase10-CommitLedger', function() { commitSimulationLedger_(ctx); });
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 

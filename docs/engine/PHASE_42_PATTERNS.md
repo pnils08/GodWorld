@@ -422,7 +422,114 @@ Engine-sheet flags back to research-build during execution if any of these surfa
 
    **Pattern P2 as written cannot resolve this without redesign.** Blocks B2 (mechanical Tier-3 P1 migrations include `run*Engine.js` × 4) and any future phase05-citizens range-commit migration.
 
-   **Two redesign sketches for research-build evaluation:** (a) In-memory shared `ctx.ledger` — engines mutate a shared array across phase, Phase 10 commits final state once via single `replace` intent. Preserves read-modify-read chain, bigger refactor. (b) Per-row cell intents on changed rows only — each engine tracks which row indices its mutation touched, queues per-cell or per-row-block intents for just those rows. Less disruptive shape but read-modify-read chain still depends on Phase 10 ordering, so downstream engine in phase05 reads stale sheet state, mutates, queues — collisions still possible if two engines mutate same row. (c) Hybrid — engines that read fresh ledger state mid-phase (relationship reads household state) need (a); engines whose mutations are independent (e.g., `generate*ModeEvents` writing event columns to disjoint citizen sets) might tolerate (b). Surface during research-build redesign session before B2 starts.
+   **REDESIGN LOCKED S185 (research-build, Mike sign-off pending engine-sheet verification): approach (a) — shared in-memory `ctx.ledger`.** Full reasoning + decision narrative archived in mags Supermemory doc `fTzSivJgpXmaBcB5vrPEn1` (retrieve: `curl -s "https://api.supermemory.ai/v3/documents/fTzSivJgpXmaBcB5vrPEn1" -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY"`).
+
+   *Why not (b) or (c):* the collision class is **read-staleness**, not write-overlap. Per-cell intents (b) reduce the write surface but engine B still reads the unmutated sheet — its computation operates on stale state regardless of how the write is queued. The chain is held together today by direct-writes propagating through the sheet between engines; under intent semantics that propagation channel goes away, and only a shared-memory channel restores it. (c) hybrid inherits (b)'s read-staleness for any engine routed through (b), plus adds two patterns to maintain. (a) is the minimal change that matches what the engines are *semantically* doing — read-mutate chain on a shared array — and replaces "sheet-as-IPC" with actual shared memory.
+
+   *Side benefit:* the live shipping bug (cohort B's 3 engines clobbering each other at Phase 10) goes away the moment (a) lands, even before the cohort A direct-writers are migrated. One ledger read per phase instead of 11 also drops cycle-time.
+
+   **Spec:**
+
+   1. **Phase 1 init** (engine core, location TBD by engine-sheet — `godWorldEngine2.js` pre-phase setup or first phase05 entry):
+      ```javascript
+      var ledgerSheet = ss.getSheetByName('Simulation_Ledger');
+      var ledgerValues = ledgerSheet.getDataRange().getValues();
+      ctx.ledger = {
+        sheet: 'Simulation_Ledger',
+        headers: ledgerValues[0],
+        rows: ledgerValues.slice(1),    // body rows only — index 0 = data row 2
+        dirty: false
+      };
+      ```
+
+   2. **Each of the 11 engines** drops its own `ledger.getDataRange().getValues()` and reads from `ctx.ledger.rows`. Header lookup (`var iLife = headers.indexOf('Life')` etc.) reads from `ctx.ledger.headers`.
+
+   3. **Mutations** happen in place on `ctx.ledger.rows[r]`. Any engine that mutates flips `ctx.ledger.dirty = true`. (Setting it once at engine entry if the engine ever mutates is fine — false positives just trigger a no-op-equivalent commit.)
+
+   4. **Each engine drops its `ledger.getRange(2, 1, rows.length, rows[0].length).setValues(rows)` commit.** No more direct ledger writes from any of the 11. Cohort B's `queueRangeIntent_` calls also go away — no per-engine intent at all.
+
+   5. **Phase 10 commit handler:**
+      ```javascript
+      if (ctx.ledger && ctx.ledger.dirty) {
+        queueRangeIntent_(
+          ctx,
+          ctx.ledger.sheet,
+          2,                                // skip header
+          1,
+          ctx.ledger.rows,
+          'phase05-ledger consolidated commit',
+          'citizens'
+        );
+      }
+      ```
+      Single intent, single domain, last-writer-wins semantics now apply only to "this consolidated final state vs whatever else queued an intent on Simulation_Ledger" — which should be nothing else by design (any other writer to Simulation_Ledger is a bug to surface during the audit step below).
+
+   6. **Audit step (engine-sheet, before B2 ships):** grep the entire engine codebase for any non-phase05 read or write of `Simulation_Ledger` that runs *during* the cycle (not pre-cycle init / not phase01 setup). Anything found needs to either:
+      - read from `ctx.ledger.rows` instead of the sheet (so it sees mid-cycle mutations), or
+      - move to phase01 (pre-mutation) or post-Phase 10 (after commit), or
+      - get flagged as a separate hazard for follow-up.
+
+      Known candidates to verify: phase02 world-state writers (`updateNeighborhoodDemographics.js`, `updateCrimeMetrics.js`, `finalizeWorldPopulation.js`) — these write to *other* sheets but may *read* Simulation_Ledger. Cross-phase readers like `phase06-tracking/economicRippleEngine.js`. Phase 7 fame propagation if any path still reads SL. Phase 11 health/continuity intake (writes only, but verify no read-then-mutate pattern on SL columns).
+
+   *Cost estimate:* 11 engines × 2 edits (~30-50 lines changed each, mostly removals) + 1 init helper + 1 Phase 10 commit handler + audit pass. ~6-8 commits in a single engine-sheet session if the audit finds nothing surprising; longer if non-phase05 readers need migrating.
+
+   *Verification regimen:* per §1.5 — pre-batch dryRun snapshot (one full-range intent on SL is the expected delta from baseline); post-batch dryRun (same shape, only phase05 engines' per-engine intent counts drop); live cycle smoke-test confirms downstream readers (phase06 onward) see the consolidated state correctly.
+
+   *Ordering:* this redesign ships **before B2**. Once it lands, B2 mechanical migrations (`run*Engine.js` × 4 P1 patterns) become trivial — they're already converted away from direct-writes by this redesign. B2 then only needs the per-row LifeHistory_Log appends + summary stitching, which are clean P1 cases.
+
+   **Carry-forward to engine-sheet for verification before B2 starts:**
+   - Confirm Phase 1 init location (godWorldEngine2.js pre-phase setup vs first phase05 entry — engine-sheet's call based on actual entry-point structure).
+   - Confirm header alignment: do all 11 engines use the same `headers` row indices? Any engine that recomputes `headers.indexOf` per-row vs caches at top — preserve current cache pattern.
+   - Run the audit step in §5.6.6 before any code change. Surface unexpected non-phase05 readers.
+   - If audit surfaces a writer (not just reader) of SL outside these 11 + phase01 init + phase10 commit, flag back — that's a hazard the redesign didn't anticipate.
+
+   **Audit findings — S185 engine-sheet (§5.6.6 pass complete, no code shipped):** Read-only grep of 162 engine files for `Simulation_Ledger` reads/writes during cycle execution. Cleared categorically: orphans (`educationCareerEngine`, `generationalWealthEngine`, `householdFormationEngine`, `migrationTrackingEngine`, `gentrificationEngine`, `processIntakeV3` — no cycle caller, owned by separate dead-code audit); `civicInitiativeEngine` (writes Initiative_Tracker, not SL); `bondEngine` writes (Relationship_Bond_Ledger, not SL); `healthCauseIntake.js:348` (manual operator, between-cycle); `lib/*.js` (Node-side, not Apps Script cycle); comment-only refs (`storylineHealthEngine`, `continuityNotesParser`, `sheetNames`, `godWorldMenu`, `rosterLookup`); pre-phase05 reads (phase03 `ensureNeighborhoodDemographics_` runs before mutations).
+
+   **🚩 New cycle-path SL writers — same hazard class as cohort A (full-range read-mutate-write), MUST fold into redesign scope:**
+
+   | Phase entry | File | Write line |
+   |-------------|------|------------|
+   | Phase5-GenericMicroEvents (godWorldEngine2:187) | `phase04-events/generateGenericCitizenMicroEvent.js` | 540 |
+   | Phase5-Generational (godWorldEngine2:211) | `phase04-events/generationalEventsEngine.js` | 385 |
+   | Phase5-CitizenEvents (godWorldEngine2:220) | `phase05-citizens/generateCitizensEvents.js` | 1447 |
+   | Phase5-Elections (godWorldEngine2:202) | `phase05-citizens/runCivicElectionsv1.js` | 451 (starts at row 1, includes header) |
+   | Phase9-CompressLifeHistory (godWorldEngine2:329) | `utilities/compressLifeHistory.js` | 281 |
+
+   All five run `getDataRange().getValues()` → mutate → `getRange(...).setValues(rows)`. Same shape, same read-staleness exposure, same redesign treatment (read from `ctx.ledger.rows`, mutate in place, drop own commit, single Phase 10 consolidated commit covers all). `compressLifeHistory_` at Phase 9 is post-everyone-else, currently winning every race because it's last — under the redesign it must route through `ctx.ledger` like the rest, OR Phase 10 commit must run after it (fragile, rejected).
+
+   **🚩 New per-row SL writers — different write shape, same read-staleness exposure:**
+
+   | Phase entry | File | Write lines |
+   |-------------|------|-------------|
+   | Phase5-Promotions (godWorldEngine2:221) | `phase05-citizens/checkForPromotions.js` | 487 (single-row setValues) |
+   | Phase5-Advancement (godWorldEngine2:222) | `phase05-citizens/processAdvancementIntake.js` | 296, 299, 411–413 (per-row setValue), 463 (appendRow) |
+
+   Don't contribute to cohort B's clobbering pattern (no full-range commits), but read SL mid-cycle and mutate per-row mid-cycle. Under the redesign these route through `ctx.ledger.rows` for both reads and per-row mutations. The `appendRow` at processAdvancementIntake:463 (new citizen added during cycle) needs a decision: queue an `append` intent + push to `ctx.ledger.rows` (so downstream phases see the new row), OR queue append-only and let Phase 10 commit handler skip the new row range (it'll already be in ctx.ledger.rows by phase05's end). Engine-sheet picks at impl, but research-build should call out the preferred shape.
+
+   **🚩 Post-phase05 SL readers — read-staleness hazard introduced BY the redesign:**
+
+   | Phase | File | Read line |
+   |-------|------|-----------|
+   | Phase5-Bonds fallback path | `phase05-citizens/bondEngine.js` | 457 |
+   | Phase 7 | `phase07-evening-media/buildEveningFamous.js` | 189 |
+   | Phase 7 | `phase07-evening-media/mediaRoomIntake.js` | 531-532, 1077 |
+   | Phase 9 | `utilities/compressLifeHistory.js` | 210 (read before its own line 281 write) |
+
+   Today these see post-mutation state via the sheet. Under the redesign the sheet doesn't reflect mutations until Phase 10 — they'd see pre-mutation state. Each routes through `ctx.ledger.rows`.
+
+   **🚩 Latent bug (separate from Phase 42, surfaces in audit):** `generateCitizensEvents_` is defined in BOTH `phase04-events/generateCitizenEvents.js:28` AND `phase05-citizens/generateCitizensEvents.js:50`. Apps Script flat namespace — one wins, the other is dead code. Both files contain full-range SL writes. **Must resolve (delete dead file or rename) BEFORE migrating either**, or the migration touches the wrong copy.
+
+   **Spec amendments required (research-build, before engine-sheet ships any redesign batch):**
+
+   1. **Scope expansion 11 → 18 cycle-path SL touchers** (13 writers + 5 readers; compressLifeHistory's read+write pair counted once on each side). Spec must enumerate all of them, not just the original 11.
+   2. **Phase 1 init location: `godWorldEngine2.js` pre-phase setup is now load-bearing** — first-phase05-entry is too late because two of the new writers (`generateGenericCitizenMicroEvents_`, `runGenerationalEngine_`) are in phase04. Lock init at pre-phase-04 entry.
+   3. **Phase 9 `compressLifeHistory_` routing decision** — route through ctx.ledger (preferred, no special case), OR direct + Phase 10 sequenced after (fragile). Recommendation: route through ctx.ledger.
+   4. **Function-name collision resolution** is a prerequisite step, not folded into the migration. Decide which `generateCitizensEvents.js` is dead, delete or rename, ship that commit BEFORE the redesign batch.
+   5. **Cost estimate revision:** ~6-8 commits → ~10-13 commits in one engine-sheet session.
+
+   Decision (a) is still right for the amended scope — read-staleness is the underlying issue regardless of how many engines participate. Approach (b) and (c) get worse with more engines, not better.
+
+   **Status:** §5.6 redesign LOCKED but SCOPE INCOMPLETE. Engine-sheet HOLDING on B2 + redesign batch until research-build amends the spec.
 
    **finalizeWorldPopulation.js was originally suspected to be a peer hazard** — confirmed not (27 sites are P3 cell writes to `World_Population`, single-row scope, different sheet). B5 mechanical migration unblocked.
 
@@ -458,3 +565,5 @@ After applying:
 ## Changelog
 
 - 2026-04-28 — Initial draft (S184, research-build). All 5 per-category decisions locked Mike sign-off: schema-setup carve-out (A + minimal `queueEnsureTabIntent_` API addition); read-state-then-write hazard fix (force `queueBatchAppendIntent_`); caller-passed-sheet refactor (A — single-file caller cascade confirmed); dryRun verification regimen (minimum spec, engine-sheet picks form); reference migrations (5 patterns P1–P5 with before/after from real reference files). Per-file decision map covers all 37 files. 5 carry-forward issues queued for engine-sheet flag-back during execution. Phase 3 B0 pilot (runHouseholdEngine.js) starts after `queueEnsureTabIntent_` API ships.
+- 2026-04-29 — §5.6 phase05-ledger redesign LOCKED (S185, research-build). Mike sign-off pending engine-sheet verification. Approach (a) shared in-memory `ctx.ledger` selected over (b) per-row cell intents and (c) hybrid. Rationale: collision class is read-staleness not write-overlap; (b) doesn't fix it because engine B reading the sheet still sees pre-A state regardless of how A's write is queued. Spec covers Phase 1 init shape, per-engine read/mutate/commit changes, Phase 10 single-intent commit, audit step for non-phase05 SL readers. Ships before B2. Carry-forward checklist for engine-sheet verification embedded in §5.6.
+- 2026-04-29 — §5.6.6 audit complete (S185, engine-sheet). Read-only grep pass across 162 engine files. Surfaced 7 additional cycle-path SL writers (5 full-range cohort-A-equivalent + 2 per-row) + 4 post-phase05 readers + 1 function-name collision NOT in original spec. Decision (a) still correct for amended scope. **Spec amendments required** before engine-sheet ships redesign batch: scope 11→18 touchers; Phase 1 init must be `godWorldEngine2.js` pre-phase-04 (was flexible); Phase 9 `compressLifeHistory_` routing decision; resolve `generateCitizensEvents_` duplicate-definition prerequisite; cost ~6-8 → ~10-13 commits. Engine-sheet HOLDING on B2 + redesign batch pending research-build amendment. Audit findings embedded in §5.6 above.

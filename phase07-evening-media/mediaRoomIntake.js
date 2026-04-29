@@ -83,7 +83,8 @@ function processMediaIntake_(ctx) {
 
   Logger.log('processMediaIntake_ v2.6: Starting intake processing for cycle ' + cycle);
 
-  var results = processAllIntakeSheets_(ss, cycle, cal);
+  // Phase 42 §5.6: pass ctx so SL-reader sub-functions can route via ctx.ledger.
+  var results = processAllIntakeSheets_(ctx, ss, cycle, cal);
 
   ctx.summary.intakeProcessed = results;
 
@@ -111,7 +112,8 @@ function processMediaIntakeV2() {
   var cycle = getCurrentCycle_(ss);
   var cal = getCurrentCalendarContext_(ss);
 
-  var results = processAllIntakeSheets_(ss, cycle, cal);
+  // Manual path — no ctx.ledger. Sub-functions fall back to direct sheet read.
+  var results = processAllIntakeSheets_(null, ss, cycle, cal);
 
   var routing = results.citizenRouting || {};
   var fame = results.fameTracking || {};
@@ -134,8 +136,9 @@ function processMediaIntakeV2() {
 
 /**
  * Shared processing logic — called by both processMediaIntake_(ctx) and processMediaIntakeV2().
+ * @param {Object|null} ctx - Engine context (cycle path) or null (manual menu).
  */
-function processAllIntakeSheets_(ss, cycle, cal) {
+function processAllIntakeSheets_(ctx, ss, cycle, cal) {
   var results = {
     articles: 0,
     storylines: 0,
@@ -145,7 +148,7 @@ function processAllIntakeSheets_(ss, cycle, cal) {
   results.articles = processArticleIntake_(ss, cycle, cal);
   results.storylines = processStorylineIntake_(ss, cycle, cal);
   results.citizenUsage = processCitizenUsageIntake_(ss, cycle, cal);
-  results.citizenRouting = routeCitizenUsageToIntake_(ss, cycle, cal);
+  results.citizenRouting = routeCitizenUsageToIntake_(ctx, ss, cycle, cal);
 
   // v2.7 (S184 — Row 15): citizenFameTracker retired. Tier system + UsageCount
   // + EmergenceCount cover the same signal. Cultural_Ledger fame intact.
@@ -495,7 +498,7 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
  * @param {Object} cal - Calendar context
  * @return {{ routed: number, newCitizens: number, existingCitizens: number }}
  */
-function routeCitizenUsageToIntake_(ss, cycle, cal) {
+function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
   var results = { routed: 0, newCitizens: 0, existingCitizens: 0 };
 
   var usageSheet = ss.getSheetByName('Citizen_Media_Usage');
@@ -528,9 +531,14 @@ function routeCitizenUsageToIntake_(ss, cycle, cal) {
   }
   if (nameCol < 0) return results;
 
-  // Load Simulation_Ledger for existence checks
-  var ledger = ss.getSheetByName('Simulation_Ledger');
-  var ledgerData = ledger ? ledger.getDataRange().getValues() : [];
+  // Phase 42 §5.6: cycle path reads via ctx.ledger; manual path falls back to sheet.
+  var ledgerData;
+  if (ctx && ctx.ledger) {
+    ledgerData = [ctx.ledger.headers].concat(ctx.ledger.rows);
+  } else {
+    var ledger = ss.getSheetByName('Simulation_Ledger');
+    ledgerData = ledger ? ledger.getDataRange().getValues() : [];
+  }
 
   // Get target sheets
   var intakeSheet = ss.getSheetByName('Intake');
@@ -1033,7 +1041,7 @@ function clearAllProcessedIntake() {
  * 3. Route: New → Intake sheet, Existing → Advancement_Intake
  * 4. Log quotes to LifeHistory_Log
  */
-function processRawCitizenUsageLog_(ss, rawText, cycle, cal) {
+function processRawCitizenUsageLog_(ctx, ss, rawText, cycle, cal) {
   var results = {
     parsed: 0,
     newCitizens: 0,
@@ -1048,9 +1056,14 @@ function processRawCitizenUsageLog_(ss, rawText, cycle, cal) {
   var parsed = parseRawCitizenUsageLog_(rawText);
   results.parsed = parsed.totalCount;
 
-  // Get ledger data for existence checks
-  var ledger = ss.getSheetByName('Simulation_Ledger');
-  var ledgerData = ledger ? ledger.getDataRange().getValues() : [];
+  // Phase 42 §5.6: cycle path reads via ctx.ledger; manual path falls back to sheet.
+  var ledgerData;
+  if (ctx && ctx.ledger) {
+    ledgerData = [ctx.ledger.headers].concat(ctx.ledger.rows);
+  } else {
+    var ledger = ss.getSheetByName('Simulation_Ledger');
+    ledgerData = ledger ? ledger.getDataRange().getValues() : [];
+  }
 
   // Process each category
   results = processCategoryEntries_(ss, parsed.civic, 'CIV', ledgerData, cycle, cal, results);
@@ -1442,7 +1455,8 @@ function processRawCitizenUsageLogManual() {
     return;
   }
 
-  var results = processRawCitizenUsageLog_(ss, rawText, cycle, cal);
+  // Manual menu path — no ctx.ledger. Helper falls back to direct sheet read.
+  var results = processRawCitizenUsageLog_(null, ss, rawText, cycle, cal);
 
   var summary = 'Citizen Usage Log v2.2 Complete:\n' +
     '- Parsed: ' + results.parsed + ' entries\n' +

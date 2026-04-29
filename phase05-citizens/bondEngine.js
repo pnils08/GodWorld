@@ -451,14 +451,14 @@ function ensureBondEngineData_(ctx) {
       Logger.log('ensureBondEngineData_: Error loading Citizen_Directory - ' + e.message);
     }
 
-    // v2.5: Fallback to Simulation_Ledger if no citizens loaded
-    if (Object.keys(ctx.citizenLookup).length === 0) {
+    // v2.5: Fallback to Simulation_Ledger if no citizens loaded.
+    // Phase 42 §5.6: read from shared ctx.ledger so any mid-cycle mutations
+    // by phase04/phase05 writers are visible.
+    if (Object.keys(ctx.citizenLookup).length === 0 && ctx.ledger) {
       try {
-        var ledgerSheet = ctx.ss.getSheetByName('Simulation_Ledger');
-        if (ledgerSheet) {
-          var ledgerData = ledgerSheet.getDataRange().getValues();
-          if (ledgerData.length > 1) {
-            var lh = ledgerData[0];
+        var ledgerRows = ctx.ledger.rows;
+        if (ledgerRows.length > 0) {
+          var lh = ctx.ledger.headers;
             var lFirst = findColIndex_(lh, ['First']);
             var lLast = findColIndex_(lh, ['Last']);
             var lNH = findColIndex_(lh, ['Neighborhood']);
@@ -470,8 +470,8 @@ function ensureBondEngineData_(ctx) {
             var lStatus = findColIndex_(lh, ['Status']);
             var lPopId = findColIndex_(lh, ['POPID']);
 
-            for (var lr = 1; lr < ledgerData.length; lr++) {
-              var lrow = ledgerData[lr];
+            for (var lr = 0; lr < ledgerRows.length; lr++) {
+              var lrow = ledgerRows[lr];
               var status = lStatus >= 0 ? String(lrow[lStatus] || '').toLowerCase() : 'active';
               if (status === 'deceased' || status === 'retired' || status === 'inactive') continue;
 
@@ -498,7 +498,6 @@ function ensureBondEngineData_(ctx) {
               }
             }
             diagnostics.sources.push('Simulation_Ledger');
-          }
         }
       } catch (e2) {
         Logger.log('ensureBondEngineData_: Error loading Simulation_Ledger fallback - ' + e2.message);

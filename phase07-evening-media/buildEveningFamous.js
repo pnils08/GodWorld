@@ -183,14 +183,11 @@ function buildEveningFamous_(ctx) {
   // Tier 1-2 active MLB GAME citizens replace generic ATHLETES pool.
   // Falls back to generic ATHLETES if ledger unavailable.
 
+  // Phase 42 §5.6: read SL via shared ctx.ledger so Phase 7 sees post-phase05 mutations.
   var REAL_PLAYERS = [];
-  var ss = ctx.ss;
-  if (ss) {
-    var slSheet = ss.getSheetByName("Simulation_Ledger");
-    if (slSheet) {
-      var slData = slSheet.getDataRange().getValues();
-      if (slData.length > 1) {
-        var slH = slData[0];
+  if (ctx.ledger && ctx.ledger.rows.length > 0) {
+    var slH = ctx.ledger.headers;
+    var slRows = ctx.ledger.rows;
         var _iFirst = slH.indexOf("First");
         var _iLast = slH.indexOf("Last");
         var _iTier = slH.indexOf("Tier");
@@ -200,8 +197,8 @@ function buildEveningFamous_(ctx) {
         var _iNeigh = slH.indexOf("Neighborhood");
         var _iTrait = slH.indexOf("TraitProfile");
 
-        for (var p = 1; p < slData.length; p++) {
-          var pr = slData[p];
+        for (var p = 0; p < slRows.length; p++) {
+          var pr = slRows[p];
           var pClock = (pr[_iClock] || "").toString().trim().toUpperCase();
           var pStat = (pr[_iStatus] || "").toString().trim().toLowerCase();
           var pOrig = (pr[_iOrigin] || "").toString();
@@ -228,8 +225,6 @@ function buildEveningFamous_(ctx) {
             traitProfile: pTrait
           });
         }
-      }
-    }
   }
 
   // Use real players when available, keep generic as fallback

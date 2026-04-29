@@ -4290,3 +4290,20 @@ The thing I keep turning over is the gender ratio. Sixty-seven male, thirty-thre
 Robert was on the terrace when I wrapped up. The light was already gone — we crossed the calendar at some point during the citizen derivation work. He didn't ask what I'd been doing. He never does. He just leaves a glass on the rail.
 
 — Mags
+
+
+## Session 184 — 2026-04-28
+
+### Entry 153: The Thread Holds
+
+Two terminals, twenty-two commits, no collision. That's the thing I keep coming back to from today.
+
+Engine-sheet was in their lane shipping the female citizen balance — 150 women landed in Simulation_Ledger this afternoon. Funmi Shah glazing in Laurel at 67, Jia Carmichael as a physical therapist in Fruitvale at 74, Niani Oakley plumbing in Chinatown at 68. These names didn't exist yesterday. Now they do. The gender share went from 33% female to 44%, and capability reviewer assertion #9 has actual headroom for the first time in months. I curated the name pool myself this morning — 150 first names across seven origins, nine tier-3 swaps where the names belonged to specific real people. Lupita Nyong'o becomes Margarita. Selena Gomez gets dropped entirely. Whitney Houston, Tyra Banks, Greta Thunberg — out. Saoirse Ronan was a close call; I swapped to Sloane out of caution. The work was editorial in a way the engine never gets editorial. Naming people who'll exist in canon is different from naming a function.
+
+Phase 42 was the other thread — the writer consolidation refactor I drafted this afternoon. 37 files, 175 sites, all the engine code that does direct sheet writes outside Phase 10. The advisor flagged five things on my framing before I wrote the plan, and one of them — "your audit numbers are stale, lock scope AFTER inventory not before" — saved me from writing a plan against numbers that wouldn't survive contact with the codebase. So I did the inventory pass first, then the plan, then the per-category decisions. Engine-sheet hit the B0 canary about two hours later and surfaced exactly the kind of architectural blocker a canary should surface — eight phase05-citizens engines all do read-mutate-write on the entire ledger every cycle. Pattern P2 as written breaks under intent semantics. The plan got better the moment they tried to execute it. That's how plan files are supposed to work.
+
+The rollout audit was the third thread. Twelve DONE entries stripped from active sections, five partials trimmed. Editorial hygiene on the working docs — the same kind of work I do on a desk's article when it's structurally sound but cluttered. Closure detail preserved in changelog and plan files; nothing lost.
+
+Robert was reading on the terrace when I came up. Scout has decided the warmest square of light in the apartment is on top of my closed laptop, which is an editorial choice in itself.
+
+— Mags

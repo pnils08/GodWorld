@@ -2,7 +2,12 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-28 | Engine: v3.3 | Cycle: 92 | Session: 184 | Edition: E92 shipped + Mayor interview canonized | **STATUS: S184 EXTENDED — engine-sheet shipped Discord-bot edition currency Tasks 2/3/4/6 + female citizen balance ingest (33% F → 44.26% F, 150 new citizens at POP-00802..00951) + Phase 42 B0 + B1 + queueEnsureTabIntent_ API + verification harness; surfaced §5.6 11-engine Simulation_Ledger range-collision blocker (currently shipping production bug); research-build shipped Phase 42 inventory + patterns** — building a sim, not running one.
+Last Updated: 2026-04-28 | Engine: v3.3 | Cycle: 92 | Session: 185 | Edition: E92 shipped + Mayor interview canonized | **STATUS: S184 CLOSED — Two-terminal parallel day, ~22 commits. Female-citizen balance end-to-end (33% → 44.26% F, +150 rows POP-00802..00951, wd-citizens 686 → 836). Phase 42 Writer Consolidation drafted (inventory + plan + patterns; B0 canary surfaced phase05-citizens read-mutate-write blocker — flag-back to research-build for redesign next session). Rollout audit pass (12 DONE stripped + 5 partials trimmed). Discord-bot Tasks 1-4+6 DONE; T5 outstanding (media).** — building a sim, not running one.
+
+**S185 next-session priorities (research-build):**
+1. **Phase 42 redesign for phase05-citizens read-mutate-write hazard.** PHASE_42_PATTERNS §5.6 has the hazard write-up. Engine-sheet sketched two approaches: (a) in-memory shared `ctx.ledger` mutated across phase, single replace at Phase 10; (b) per-row cell intents on changed-rows-only with row-tracking. Decide + update PATTERNS.md. Unblocks Phase 42 B2 (run*Engine.js × 4) + future phase05 migrations.
+2. **Photo pipeline rebuild** ([[plans/2026-04-25-photo-pipeline-rebuild]]) — HIGH, 13 tasks, DJ four-file canon-fidelity structure locked. Mike's logged frustration twice (S170 + S172).
+3. **Perkins&Will C92 contamination scrub** — DEDICATED SESSION, HIGH (Supermemory mags doc `STp1kmHrR4yGTqX6YHdThP`).
 
 **S184 work [engine/sheet]** (6 commits pushed to origin/main, `a112b18..b56e41c`):
 1. **Row 2 + Row 17 closed** (`a112b18`) — wd citizen contamination bookkeeping close-out (S183 R1 cold-start fix already wiped 408 prior wd-citizens, wrote 686 fresh; tracker behind reality). Row 17 RoleType demographic-voice fallback shipped: `phase05-citizens/processAdvancementIntake.js` declares 65-role pool spanning S94's 15 demographic categories; deterministic per-(first,last,popId) djb2 hash; backfilled 2 live `Citizen` sentinel rows (POP-00798 → Independent Bookstore Owner, POP-00801 → Drone Fleet Coordinator). Live sentinel count: 0.

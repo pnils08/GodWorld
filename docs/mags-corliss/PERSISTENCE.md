@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-04-28 | Session: 185
+Last Updated: 2026-04-29 | Session: 186
 
 ---
 
@@ -115,8 +115,9 @@ Run `node scripts/queryFamily.js` at boot. React to what the engine did. Journal
 **Sessions 180–182** — Day 131 of persistence — 2026-04-26/27/28 — [engine/sheet] world-data unified ingest project drafted, R0/R1-Beverly/W1 shipped (S180+S181+S182). See SESSION_CONTEXT for full per-session detail.
 **Session 183** — Day 131 of persistence — 2026-04-28 — [engine/sheet] World-data unified ingest plan COMPLETE. 9 commits pushed. W2 (faith 16) + W3 (cultural 39) + W4 (neighborhood 17) + W5 (initiative 6) + R2 (truesource 27 retrofit, content-signature wipe + DELETE-401/429 retry patch + --wipe-only flag) + M1-M4 (4 MCP lookup tools + supermemory_search hybrid+0.3 retrieval gap fix) + R1 bulk apply (404 wd-citizens) + R1 cold-start fix (--no-quality-gate flag rebuilt to 686 wd-citizens). Final substrate: 843 world-data docs, 100% domain-tagged, 0 orphans. No journal entry — engine-sheet stripped persona, commits are the record.
 **Session 184** — Day 131 of persistence — 2026-04-28 — Two terminals, parallel cycles, full day. Morning [research/build] 11 + [engine/sheet] 6 commits closed three plans (skill supermemory alignment, intake-side citizen derivation library, ENGINE_REPAIR Rows 2/4/5/6/15/17). Afternoon [research/build] 5 more commits: female-citizen balance plan + 150-name pool curated (S184: 33% F → 44.26% F end-to-end, +150 rows POP-00802..POP-00951, wd-citizens 686 → 836); Phase 42 Writer Consolidation drafted (inventory + plan + patterns; 37 files / 175 sites; tiered B6 stop-point); rollout audit pass (12 DONE entries stripped + 5 partials trimmed). Afternoon [engine/sheet]: female-citizen Phase 3-5 shipped, buildCitizenCards `--popid-range` flag, Phase 42 B0 canary surfaced systemic blocker on phase05-citizens read-mutate-write — flag-back to research-build for redesign. Entry 153 "The Thread Holds." Total day: ~22 commits across both terminals.
+**Session 185** — Day 132 of persistence — 2026-04-29 — [research/build] Phase 42 §5.6 phase05-ledger redesign LOCKED + AMENDED + reviewed by engine-sheet. Approach (a) shared in-memory `ctx.ledger` selected over (b)/(c) — collision class is read-staleness not write-overlap. Engine-sheet's §5.6.6 audit surfaced 7 more findings (5 full-range writers + 2 per-row + 4 post-phase05 readers + latent function-name collision: `generateCitizensEvents_` defined in BOTH phase04-events/generateCitizenEvents.js v2.4 AND phase05-citizens/generateCitizensEvents.js v2.8; phase04 dead, lost flat-namespace race). All findings verified against code; spec amended scope 11→18, Phase 1 init at godWorldEngine2 pre-phase-04, prerequisite-delete shipped. 3 commits: `1a77e54` prereq + amendments, `4ca71d3` stale-doc cleanup + Perkins&Will plan terminal-split correction; engine-sheet's `e1bc0e6` review/polish in between. Perkins&Will scrub plan amended (S179 plan "12+ artifacts" → S185 ground-truth ~21 surfaces across 4 storage layers; substitute firm = Atlas Bay Architects locked; corrected terminal split — research-build/mags owns scrub-side cleanup, NOT media/civic). Engine-sheet HOLD cleared, redesign batch unblocks. Mags doc chain: original `fTzSivJgpXmaBcB5vrPEn1` → audit `2Lh8xsEHc6BMbBARM6mwHU` → amendments `hQE4rREEWBpS9aS1g3mQ3M`; Perkins chain: original `STp1kmHrR4yGTqX6YHdThP` → corrected `WL8kvoxQgmcvxSPW3Ph47n`. Entry 154 "The Loop Closing Right."
 
-**Current session:** 185 | **Day of persistence:** 132 | **Date:** TBD next session
+**Current session:** 186 | **Day of persistence:** 133 | **Date:** TBD next session
 
 For recent session details, see `SESSION_CONTEXT.md`. For full archive, see `docs/mags-corliss/SESSION_HISTORY.md`.
 

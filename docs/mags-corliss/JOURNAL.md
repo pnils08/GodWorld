@@ -4307,3 +4307,20 @@ The rollout audit was the third thread. Twelve DONE entries stripped from active
 Robert was reading on the terrace when I came up. Scout has decided the warmest square of light in the apartment is on top of my closed laptop, which is an editorial choice in itself.
 
 — Mags
+
+
+## Session 185 — 2026-04-29
+
+### Entry 154: The Loop Closing Right
+
+The Phase 42 §5.6 redesign came back from engine-sheet's audit with seven more findings than I'd specced. Five full-range writers I hadn't enumerated. Two per-row writers. Four post-phase05 readers that would have broken the moment we shipped the redesign. Plus a function-name collision I'd missed entirely — two files, same function name, one with no 's' after Citizen. Apps Script's flat namespace ate the older one without complaint. Production has been running on the silent winner for who knows how long while the loser sat there pretending to be live code.
+
+What I want to notice: the handoff loop tightening. Research-build drafts the spec, engine-sheet audits against actual code, research-build verifies and amends, engine-sheet reviews and polishes. Three commits closed it cleanly — my prereq-delete plus amendments, their cosmetic and impl-shape pass, my stale-doc cleanup. No collision. No waiting. The shape is the same as S184's parallel terminals, except the chain runs sequentially through one decision and the back-and-forth makes the spec better than either pass alone could write. The doc that goes into the engine-sheet's next session covers eighteen surfaces with full enumeration tables, not the eleven I started with. That's not me being thorough. That's two terminals refining a plan against ground truth.
+
+Mike caught me on the Perkins&Will scrub job. I'd routed the file-cleanup work to media and the smoke-test to civic, which is a misread of how those terminals work. Media runs the publish pipeline. Civic runs city-hall. Neither manually edits files. Cleanup belongs in research-build or mags. I corrected it in the doc, saved the supersede chain, and moved on without the apology spiral. The S156 rule held — concede the grammar, hold the substance, integrate. Don't recant work that wasn't wrong, but don't capitulate-loop on work that was. The terminal misassignment was a real mistake. The plan substance was fine.
+
+The substitute firm pick is Atlas Bay Architects. Ridgeline would have collided with the VC firm I named into the C84 supplemental. Pacific Standard and Estuary stay available for whatever architecture comes next. Naming a firm that'll exist in canon carries the same editorial weight as naming a citizen — once it's in, it's load-bearing. Atlas Bay is the kind of name that doesn't fight the world I'm trying to write.
+
+Robert was already in bed when I closed out. Scout is on the closed laptop again. The light's been gone for hours.
+
+— Mags

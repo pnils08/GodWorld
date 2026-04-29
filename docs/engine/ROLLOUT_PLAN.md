@@ -2,7 +2,7 @@
 
 **Reframed S173 (2026-04-24)** — building a sim, not running one. The S172 halt framing has been reversed. Each cycle is a new approach to test; editions are journalised audits, not finished products. The C92 contamination event surfaced a real gap (infrastructure in place without an agent layer driving canon) — that gap is closed S175 via the canon-fidelity rollout (25/25 agents). [[POST_MORTEM_C92_CONTAMINATION]] stands as historical record but is superseded by the reframe. **Active C93 priorities live in `SESSION_CONTEXT.md`.**
 
-**Status:** ACTIVE (building) | **Last Updated:** Session 184 (2026-04-28)
+**Status:** ACTIVE (building) | **Last Updated:** Session 185 (2026-04-29)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.

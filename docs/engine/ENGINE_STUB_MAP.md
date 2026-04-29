@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-04-17 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-04-29 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -55,8 +55,6 @@
 
 - **existsInLedger_(ledgerValues, first, last)**
 
-- **nextPopIdSafe_(ledgerValues)**
-
 - **updateNamedCitizens_(ctx)**
   Writes: S.citizensUpdated
   Sheets: Simulation_Ledger
@@ -69,6 +67,9 @@
   Sheets: Riley_Digest
 
 - **runDryRunCycle()**
+  Reads: S.cycleId
+
+- **computePhase42PerWriter_(ctx)**
 
 - **replayCycle(cycleId)**
 
@@ -408,17 +409,8 @@
 
 - **generateSafeUuid_(rng)**
 
-- **generateNewArcs_(ctx)**
-  Reads: S.cityDynamics, S.domainPresence, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.patternFlag, S.shockFlag, S.sportsSeason, S.weather, S.worldPopulation
-  Writes: S.cycleWeight
-  RNG: ctx.rng / safeRand_(ctx)
-
-- **attachCitizenToArc_(ctx, arc, citizenId, role)**
-
 - **citizenInActiveArc_(ctx, citizenId)**
   Reads: S.eventArcs
-
-- **getArcEventBoost_(ctx, citizenId)**
   RNG: ctx.rng / safeRand_(ctx)
 
 ### faithEventsEngine.js
@@ -443,16 +435,6 @@
 
 - **getFaithStorySignals_(ctx)**
   Reads: S.faithEvents
-
-### generateCitizenEvents.js
-- **mulberry32_(seed)**
-
-- **generateCitizensEvents_(ctx)**
-  Reads: S.approvalNeighborhoodEffects, S.cityDynamics, S.cycleId, S.economicMood, S.editionNeighborhoodEffects, S.holiday, S.holidayPriority, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.season, S.sportsNeighborhoodEffects, S.sportsSeason, S.weather, S.weatherEventPools, S.worldEvents
-  Writes: S.cycleActiveCitizens, S.eventsGenerated
-  Config: ctx.config.cycleCount, ctx.config.rngSeed
-  Sheets: LifeHistory_Log, Simulation_Ledger
-  RNG: ctx.rng / safeRand_(ctx)
 
 ### generateGameModeMicroEvents.js
 - **mulberry32GameMode_(seed)**
@@ -890,7 +872,7 @@
 
 - **generateTier_(rng)**
 
-- **getChicagoOccupation_(neighborhood)**
+- **getChicagoOccupation_(neighborhood, rng)**
 
 - **pickWeightedRandom_(weightedObj, rng)**
 
@@ -1076,6 +1058,10 @@
   Sheets: Simulation_Ledger
 
 ### processAdvancementIntake.js
+- **hashSeed_(s)**
+
+- **pickDemographicVoiceRole_(seed)**
+
 - **processAdvancementIntake_(ctx)**
   Reads: S.cycleId
   Config: ctx.config.cycleCount
@@ -1159,7 +1145,7 @@
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.householdEvents
   Config: ctx.config.cycleCount
-  Sheets: LifeHistory_Log, Simulation_Ledger
+  Sheets: Simulation_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runNeighborhoodEngine.js
@@ -1543,17 +1529,6 @@
   Writes: S.nightlife, S.nightlifeVolume
   RNG: ctx.rng / safeRand_(ctx)
 
-### citizenFameTracker.js — RETIRED S184 (ENGINE_REPAIR Row 15)
-
-File deleted. The cross-tab fame propagator was a no-op for many cycles because
-the expected fame columns were never added to Simulation_Ledger / Generic_Citizens
-/ Chicago_Citizens. The signal it tried to compute is already covered by the tier
-system + UsageCount (SL appearance counter, drives tier promotion) + EmergenceCount
-(GC, drives generic → SL promotion). Cultural_Ledger keeps its own independent
-FameScore — that system is live and read by recordMediaLedger / compileHandoff /
-citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
-`scripts/rollbackCitizenFameColumns.js` retained for archaeology.
-
 ### cityEveningSystems.js
 - **buildCityEveningSystems_(ctx)**
   Reads: S.cityDynamics, S.cityEventDetails, S.cityEvents, S.economicMood, S.eveningSports, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.nightlife, S.season, S.sportsNeighborhoodEffects, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
@@ -1708,11 +1683,6 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 
 - **setupUsageValidation_(sheet)**
 
-- **setupContinuityValidation_(sheet)**
-
-- **ensurePressDraftsSheet_(ss)**
-  Sheets: Press_Drafts
-
 - **ensureStorylineTracker_(ss)**
   Sheets: Storyline_Tracker
 
@@ -1784,12 +1754,6 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 
 - **parseContinuityNotes_(ss, section)**
   Sheets: LifeHistory_Log, World_Config
-
-- **isSubsectionHeader_(line)**
-
-- **cleanSubsectionName_(line)**
-
-- **parseNoteLine_(line, subsection, relatedArc)**
 
 - **determineNoteType_(line, subsection)**
 
@@ -2178,9 +2142,9 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 ### persistenceExecutor.js
 - **executePersistIntents_(ctx)**
 
-- **executeReplaceIntent_(ctx, intent)**
-
 - **executeEnsureIntent_(ctx, intent)**
+
+- **executeReplaceIntent_(ctx, intent)**
 
 - **executeSheetIntents_(ctx, sheetName, intents)**
 
@@ -2189,12 +2153,6 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 - **getTotalIntentCount_(ctx)**
 
 - **logIntentSummary_(ctx)**
-
-- **bridgeAppendRow_(ctx, sheetName, row, reason, domain)**
-
-- **bridgeSetValue_(ctx, sheetName, row, col, value, reason, domain)**
-
-- **bridgeSetValues_(ctx, sheetName, startRow, startCol, values, reason, domain)**
 
 ### recordCycleWeather.js
 - **recordCycleWeather_(ctx)**
@@ -2293,6 +2251,49 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 
 ## Utilities (`utilities/`)
 
+### citizenDerivation.js
+- **canonicalRolesSet_()**
+
+- **hashSeed_(s)**
+
+- **rand01_(seed, salt)**
+
+- **pickFromCDF_(r, cdf)**
+
+- **ageBracket_(age)**
+
+- **lookupIncome_(roleType)**
+
+- **computeCareerStage_(seed, age, roleType)**
+
+- **buildLedgerFreqSnapshot_(headers, data, options)**
+
+- **freqWeightedDraw_(r, counts)**
+
+- **freqWeightedDrawCanonical_(r, counts)**
+
+- **deriveRoleType_(seed, neighborhood, ledgerFreq)**
+
+- **sanitizeEduCounts_(counts)**
+
+- **deriveEducationLevel_(seed, neighborhood, age, ledgerFreq)**
+
+- **deriveGender_(seed, neighborhood)**
+
+- **deriveYearsInCareer_(seed, age, careerStage)**
+
+- **deriveDebtLevel_(seed, age, income)**
+
+- **deriveNetWorth_(seed, age, income, careerStage)**
+
+- **deriveMaritalStatus_(seed, age)**
+
+- **deriveNumChildren_(seed, age, maritalStatus)**
+
+- **lookupNeighborhood_(provided, seed, ledgerFreq)**
+
+- **deriveCitizenProfile_(seed, age, neighborhood, ledgerFreq, options)**
+
 ### compressLifeHistory.js
 - **compressLifeHistory_(ctx, options)**
   Reads: S.absoluteCycle, S.cycleId
@@ -2370,12 +2371,6 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
   Reads: S.holiday, S.weather, S.worldEvents
 
 - **initializeProfileMode_(ctx)**
-
-- **startPhaseTimer_(ctx, phaseName)**
-
-- **endPhaseTimer_(ctx, phaseName)**
-
-- **getPhaseTimingSummary_(ctx)**
   RNG: ctx.rng / safeRand_(ctx)
 
 ### cycleRollback.js
@@ -2699,11 +2694,11 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 - **runTextCrawler()**
 
 ### utilityFunctions.js
-- **pickRandom_(arr)**
+- **pickRandom_(arr, rng)**
 
-- **pickRandomSet_(arr, count)**
+- **pickRandomSet_(arr, count, rng)**
 
-- **maybePick_(arr)**
+- **maybePick_(arr, rng)**
 
 - **shortId_()**
 
@@ -2730,19 +2725,7 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 ### v2DeprecationGuide.js
 - **scanForDeprecatedPatterns_(code)**
 
-- **generateDeprecationReport_(fileName, code)**
-
 - **v3Random_(ctx)**
-  RNG: ctx.rng / safeRand_(ctx)
-
-- **v3RandomInt_(ctx, min, max)**
-
-- **v3PickRandom_(ctx, arr)**
-
-- **v3Chance_(ctx, probability)**
-  Reads: S.weather
-
-- **createSummaryShim_(ctx)**
   RNG: ctx.rng / safeRand_(ctx)
 
 ### writeIntents.js
@@ -2801,5 +2784,5 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 
 ---
 
-**Files scanned:** 155
-**Functions mapped:** 942
+**Files scanned:** 154
+**Functions mapped:** 929

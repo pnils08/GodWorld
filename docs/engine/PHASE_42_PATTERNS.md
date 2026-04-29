@@ -428,7 +428,7 @@ Engine-sheet flags back to research-build during execution if any of these surfa
 
    *Side benefit:* the live shipping bug (cohort B's 3 engines clobbering each other at Phase 10) goes away the moment (a) lands, even before the cohort A direct-writers are migrated. One ledger read per phase instead of 11 also drops cycle-time.
 
-   **Spec:**
+   **Spec:** *[NOTE: this original spec block is historical — references "11 engines" and a TBD init location. **Superseded by A1–A6 amendments below** (S185, post-audit). Engine-sheet implements per the amendments: 18 writer-files + 4 reader-files; init locked at `godWorldEngine2.js` pre-phase-04. The shape of each step (1-6) is unchanged; only the scope expanded.]*
 
    1. **Phase 1 init** (engine core, location TBD by engine-sheet — `godWorldEngine2.js` pre-phase setup or first phase05 entry):
       ```javascript
@@ -464,7 +464,7 @@ Engine-sheet flags back to research-build during execution if any of these surfa
       ```
       Single intent, single domain, last-writer-wins semantics now apply only to "this consolidated final state vs whatever else queued an intent on Simulation_Ledger" — which should be nothing else by design (any other writer to Simulation_Ledger is a bug to surface during the audit step below).
 
-   6. **Audit step (engine-sheet, before B2 ships):** grep the entire engine codebase for any non-phase05 read or write of `Simulation_Ledger` that runs *during* the cycle (not pre-cycle init / not phase01 setup). Anything found needs to either:
+   6. **Audit step (engine-sheet, before B2 ships):** *[STATUS: COMPLETE S185 — see "Audit findings — S185 engine-sheet" subsection below; results folded into A1–A6 amendments.]* grep the entire engine codebase for any non-phase05 read or write of `Simulation_Ledger` that runs *during* the cycle (not pre-cycle init / not phase01 setup). Anything found needs to either:
       - read from `ctx.ledger.rows` instead of the sheet (so it sees mid-cycle mutations), or
       - move to phase01 (pre-mutation) or post-Phase 10 (after commit), or
       - get flagged as a separate hazard for follow-up.
@@ -521,7 +521,7 @@ Engine-sheet flags back to research-build during execution if any of these surfa
 
    **Spec amendments LOCKED S185 (research-build, post-audit verification):**
 
-   **A1. Scope expansion 11 → 18 cycle-path SL touchers** (13 writers + 5 readers; compressLifeHistory counted once each side). Full enumeration:
+   **A1. Scope expansion** — original 11 cycle-path SL writers (8 cohort A + 3 cohort B); now **18 writer-files + 4 reader-files**, of which 1 (`compressLifeHistory`) is both. Net new vs original: +7 writer-files (5 full-range + 2 per-row) + 3 reader-only files. Full enumeration:
 
    *Writers — full-range read-mutate-write (13):*
 
@@ -552,6 +552,8 @@ Engine-sheet flags back to research-build during execution if any of these surfa
    |---|-------|------|-------|
    | 17 | Phase5-Promotions | `phase05-citizens/checkForPromotions.js` | 487 (single-row setValues) |
    | 18 | Phase5-Advancement | `phase05-citizens/processAdvancementIntake.js` | 296, 299, 411–413 (per-row setValue), 463 (appendRow) |
+
+   *Impl shape for #18 `appendRow` (engine-sheet's call, locked S185 post-review):* push the new citizen row to `ctx.ledger.rows` directly — **no separate append intent.** Phase 10's consolidated `queueRangeIntent_(2, 1, ctx.ledger.rows)` auto-extends the sheet because Apps Script `setValues` writes beyond current bounds. A separate append intent would double-write. Downstream phases reading `ctx.ledger.rows` see the new row immediately. Engine-sheet documents this choice in the migration commit message.
 
    *Post-phase05 readers — read-staleness introduced BY redesign (5):*
 
@@ -623,3 +625,4 @@ After applying:
 - 2026-04-29 — §5.6 phase05-ledger redesign LOCKED (S185, research-build). Mike sign-off pending engine-sheet verification. Approach (a) shared in-memory `ctx.ledger` selected over (b) per-row cell intents and (c) hybrid. Rationale: collision class is read-staleness not write-overlap; (b) doesn't fix it because engine B reading the sheet still sees pre-A state regardless of how A's write is queued. Spec covers Phase 1 init shape, per-engine read/mutate/commit changes, Phase 10 single-intent commit, audit step for non-phase05 SL readers. Ships before B2. Carry-forward checklist for engine-sheet verification embedded in §5.6.
 - 2026-04-29 — §5.6 SPEC AMENDED post-engine-sheet audit (S185, research-build). Engine-sheet's §5.6.6 audit (mags doc `2Lh8xsEHc6BMbBARM6mwHU`) surfaced 7 additional findings: 5 new full-range writers (phase04 generic-micro + generational, phase05 generateCitizensEvents + civicElections, phase09 compressLifeHistory) + 2 per-row writers (checkForPromotions + processAdvancementIntake) + 4 post-phase05 readers (bondEngine fallback, buildEveningFamous, mediaRoomIntake, compressLifeHistory pre-write read) + 1 latent function-name collision (`generateCitizensEvents_` defined in both phase04 + phase05 files; phase04 v2.4 dead, phase05 v2.8 live). All findings verified against actual code. Amendments locked: scope 11→18, Phase 1 init at godWorldEngine2 pre-phase-04, compressLifeHistory routes through ctx.ledger, prerequisite-delete `phase04-events/generateCitizenEvents.js` (dead) before redesign batch, runCivicElectionsv1.js:451 row-1 quirk handled, cost revised to ~10-13 commits. Approach (a) confirmed correct for amended scope. Pending: prerequisite-delete commit → engine-sheet redesign batch.
 - 2026-04-29 — §5.6.6 audit complete (S185, engine-sheet). Read-only grep pass across 162 engine files. Surfaced 7 additional cycle-path SL writers (5 full-range cohort-A-equivalent + 2 per-row) + 4 post-phase05 readers + 1 function-name collision NOT in original spec. Decision (a) still correct for amended scope. **Spec amendments required** before engine-sheet ships redesign batch: scope 11→18 touchers; Phase 1 init must be `godWorldEngine2.js` pre-phase-04 (was flexible); Phase 9 `compressLifeHistory_` routing decision; resolve `generateCitizensEvents_` duplicate-definition prerequisite; cost ~6-8 → ~10-13 commits. Engine-sheet HOLDING on B2 + redesign batch pending research-build amendment. Audit findings embedded in §5.6 above.
+- 2026-04-29 — §5.6 amendments LOCKED (S185, research-build) + reviewed by engine-sheet. A1 scope (18 writer-files + 4 reader-files); A2 init at `godWorldEngine2.js` pre-phase-04; A3 `compressLifeHistory_` routes through `ctx.ledger`; A4 prerequisite-delete `phase04-events/generateCitizenEvents.js` (verified dead via empty `filePushOrder` → alphabetical → phase05 wins flat-namespace race); A5 cost ~10-13 commits; A6 row-1 quirk for `runCivicElectionsv1.js:451` covered by `ctx.ledger.headers` immutability. Original §5.6 Spec block + §5.6.6 audit step marked superseded inline. Impl shape for #18 `appendRow` locked: push to `ctx.ledger.rows`, no separate append intent. Engine-sheet still holding pending research-build's prerequisite-delete commit.

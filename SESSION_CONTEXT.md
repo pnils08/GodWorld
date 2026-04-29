@@ -2,7 +2,7 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-28 | Engine: v3.3 | Cycle: 92 | Session: 184 | Edition: E92 shipped + Mayor interview canonized | **STATUS: S184 PARALLEL-TERMINAL SESSION — engine-sheet 6 ENGINE_REPAIR rows closed + intake derivation library; research-build 11 commits driving 3 plans to DONE (skill supermemory alignment + discord-bot Task 1 + intake-side citizen derivation)** — building a sim, not running one.
+Last Updated: 2026-04-28 | Engine: v3.3 | Cycle: 92 | Session: 184 | Edition: E92 shipped + Mayor interview canonized | **STATUS: S184 EXTENDED — engine-sheet shipped Discord-bot edition currency Tasks 2/3/4/6 + female citizen balance ingest (33% F → 44.26% F, 150 new citizens at POP-00802..00951) + Phase 42 B0 + B1 + queueEnsureTabIntent_ API + verification harness; surfaced §5.6 11-engine Simulation_Ledger range-collision blocker (currently shipping production bug); research-build shipped Phase 42 inventory + patterns** — building a sim, not running one.
 
 **S184 work [engine/sheet]** (6 commits pushed to origin/main, `a112b18..b56e41c`):
 1. **Row 2 + Row 17 closed** (`a112b18`) — wd citizen contamination bookkeeping close-out (S183 R1 cold-start fix already wiped 408 prior wd-citizens, wrote 686 fresh; tracker behind reality). Row 17 RoleType demographic-voice fallback shipped: `phase05-citizens/processAdvancementIntake.js` declares 65-role pool spanning S94's 15 demographic categories; deterministic per-(first,last,popId) djb2 hash; backfilled 2 live `Citizen` sentinel rows (POP-00798 → Independent Bookstore Owner, POP-00801 → Drone Fleet Coordinator). Live sentinel count: 0.
@@ -12,11 +12,41 @@ Last Updated: 2026-04-28 | Engine: v3.3 | Cycle: 92 | Session: 184 | Edition: E9
 5. **Row 4 closed** (`c9b6769`) — root cause was migration scripts (`addEducationCareerColumns`, `addHouseholdFamilyColumns`, `addGenerationalWealthColumns`) seeding uniform constants when columns were added; lifecycle engines update only on triggers, so 95-99% of rows sat at the migration default. `scripts/backfillLifecycleDefaults.js` (Node + service-account direct write) gives each row a demographically-plausible starting value derived from Age + Income + RoleType + CareerStage; deterministic via djb2 hash on POPID; safety matcher overwrites only rows currently at migration constants. Live state post-apply: top-value share dropped from 95-99% to 2.6-49.6% across 5 fields. Vinnie Keane net worth preserved at $240M canonical; Marcus Osei (council, age 68) → 44.9 yrs / widowed / 2 children / $940k; Benji Dillon (MLB, age 36) → 5.6 yrs / married / $623k.
 6. **Intake-side citizen derivation library shipped** (`b56e41c`) — research-build plan (`docs/plans/2026-04-28-intake-side-citizen-derivation.md`) Phase 4 + 5 implementation. NEW: `lib/citizenDerivation.js` (Node, requires `data/economic_parameters.json`); `utilities/citizenDerivation.js` (Apps Script, 198-entry ECONOMIC_PARAMETERS embedded via sync); `scripts/syncEconomicParameters.js` (regenerates embedded constant from canonical JSON); `scripts/validateIntakeDerivation.js` (Phase 5 fixture, 5-gate verdict). MODIFIED: `mediaRoomIntake.js` (3 'Citizen' literals → ''); `processAdvancementIntake.js` (new-citizen branch routes through `deriveCitizenProfile_()`, writes 9 fields including BirthYear + Neighborhood + 7 derived); `ingestPublishedEntities.js` (`appendCitizens` takes ledgerRows, derivation per candidate, 8-field profile mapped). Phase 5 validation: 5/5 gates green (8 fields populated, 0 'Citizen' literal in 200-citizen sweep, determinism holds, distribution non-uniform 5 marital × 6 child × 37 distinct roles, Apps Script ECONOMIC_PARAMETERS parity 198/198). Closes the forward-looking gap from Rows 4 + 17.
 
-**S184 ENGINE_REPAIR scoreboard:** 6 closures (Rows 2 + 4 + 5 + 6 + 15 + 17). Open: Row 8 (38 direct writers, Phase 42 territory — needs research-build plan-file); Row 11 (pipeline gating, process not engine code).
+**S184 ENGINE_REPAIR scoreboard:** 6 closures (Rows 2 + 4 + 5 + 6 + 15 + 17). Open: Row 8 (Phase 42 — plan + inventory + patterns DONE this session by research-build; B0 + B1 shipped by engine-sheet; B2 BLOCKED on §5.6 redesign); Row 11 (pipeline gating, process not engine code).
 
 **S184 ROLLOUT additions:** POP-00004 Lucia Polito column-misalignment (single-row); empty-cell rows in lifecycle fields (74-165 rows missing BirthYear or shorter than schema); WorldEvents_V3_Ledger keyword classifier polish (recordWorldEventsv3.deriveDomain coverage, separate from subject-attribution gap which is closed).
 
-**S184 clasp deploys:** 4 pushes total. Apps Script-side now 157 files (was 156 + utilities/citizenDerivation.js NEW + phase07/citizenFameTracker.js DELETED).
+**S184 clasp deploys:** 6 pushes total. Apps Script-side now 158 files (157 + queueEnsureTabIntent_ API + verification harness in writeIntents.js + persistenceExecutor.js + godWorldEngine2.js).
+
+**S184 EXTENDED [engine/sheet]** — additional commits this session beyond `a112b18..b56e41c`:
+
+*Discord-bot edition currency (3 commits):*
+- `a67f2b0` — Tasks 2+4: lib/mags.js loadEditionBrief() rewritten to scan output/ for highest-numbered production_log_edition_c{XX}.md (returns first 80 lines, graceful empty fallback). docs/DISCORD.md Knowledge Sources table updated with new contract + line "No standalone bot context files. Bot reads what the publish pipeline already produces."
+- `4edbe26` — Task 3 (extended): output/latest_edition_brief.md DELETED (filesystem only — output/ gitignored). Plan-itemized scripts/postRunFiling.js Edition brief entry stripped. Verify-gate-extension caught 2 plan-missed dead-guarded references — scripts/gradeEdition.js fallback grade-extraction block + header docstring; scripts/weekly-maintenance.sh staleness check block. Verify gate `grep -rn "latest_edition_brief" scripts/ lib/` returns zero.
+- `335e105` — ROLLOUT_PLAN entry marked Tasks 2/3/4/6 DONE. Smoke test green: loadWorldState() cycle 92 ↔ loadEditionBrief() first 80 of production_log_edition_c92.md.
+
+*Female citizen balance — Phase 3-5 (3 commits):*
+- `c583356` — Phase 3+4: scripts/ingestFemaleCitizensBalance.js shipped (Node + service-account direct-write, djb2 determinism, dry-run default + --apply). All 5 dry-run gates green. Mid-run Mike calls: Notes-marker dropped (4th-wall-breaking — POPID-range collision is sole idempotency guard); AI Safety Researcher (Anthropic) allowed canon (in-stack); Youth Pastor + Senior Pastor / Faith Leader added to ROLE_DENYLIST with deterministic salted redraw; Gate 4 age-bracket threshold loosened ±5% → ±7% (≈2σ for n=150 sampling). Pool tuning: rejection-with-retry switched to filter-then-draw.
+- `a0e6de1` — Phase 5: --apply ran clean. 150/150 rows landed at POP-00802..POP-00951, all Gender=female. Three sample rows spot-checked in live SL (Funmi Shah / Jia Carmichael / Niani Oakley) — match dry-run JSON byte-for-byte. **Final F-share 44.26%** (370F / 836 POPID-bearing rows; exceeds ≥40% acceptance criterion). Plan changelog DONE; ROLLOUT entry flipped.
+- `62a01d5` — buildCitizenCards.js gains --popid-range A:B inclusive numeric filter for targeted post-ingest card builds. Run: `--apply --no-quality-gate --popid-range POP-00802:POP-00951`. 150/150 cards written to world-data Supermemory container, 0 errors. Substrate: wd-citizens 686 → 836.
+
+*Phase 42 — B0 + B1 + API + harness (5 commits):*
+- `95c4144` — queueEnsureTabIntent_ API addition to utilities/writeIntents.js + executeEnsureIntent_ handler in phase10-persistence/persistenceExecutor.js. Adds 5th intent kind ('ensure') for defensive runtime tab-creation in intake writers. Priority 25 (lower than replace 50) so ensures fire first. Idempotency-collapse for same-tab repeats. validateIntent_ validKinds extended. Reference docstrings updated. Node-side sanity: queue, validate, priority sort, empty headers, summary all pass.
+- `3c9c856` — Verification harness in runDryRunCycle. PHASE42_VERIFY_BEGIN..END markers + JSON snapshot (schemaVersion, capturedAt, cycleId, summary, perWriter map). +computePhase42PerWriter_ groups intents by (tab|kind|domain) tuple for per-batch diff axis.
+- `103740d` — Carry-forward findings: PHASE_42_PATTERNS §5.6 added with 8-engine phase05-ledger blocker + 2 redesign sketches + finalizeWorldPopulation cleared as NOT a peer hazard (P3 cell writes to World_Population). ROLLOUT_PLAN status: PLAN DRAFTED → PLAN DRAFTED + B2 BLOCKED.
+- `5bd9c3f` — B0 carved: phase05-citizens/runHouseholdEngine.js LifeHistory_Log appendRow → queueAppendIntent_(ctx, 'LifeHistory_Log', [...], 'household event', 'citizens'). Line 507 ledger commit deferred to §5.6 redesign per carve.
+- `b354483` — B1 dead-code removal: 3 dual-pattern files (generateGameModeMicroEvents, generateCivicModeEvents, generateMediaModeEvents) lost their typeof === 'function' fallback paths. **§5.6 EXPANSION:** the 3 already-queued engines were calling queueRangeIntent_ to Simulation_Ledger(2,1,full-table) in production today — same hazard class as the 8 unmigrated; production gets away with it because the OTHER 8 still direct-write sequentially. **§5.6 list 8 → 11 engines.** Hazard is a CURRENT shipping bug, not future migration risk. bondPersistence is the predicted schema-setup carve-out (no migration).
+
+*Phase 42 final state at session-end:*
+- Apps Script deployed (2 clasp pushes — API+harness+B0 / B1 dead-code)
+- B0 + B1 shipped clean
+- B2 BLOCKED on research-build phase05-ledger redesign (3 sketches in §5.6: in-memory shared ctx.ledger / per-row cell intents / hybrid)
+- B3-B5 not yet evaluated against §5.6 hazard class
+- B6 + B7 unblocked (different sheets / different hazard class addressed by §1.2)
+
+**Total S184 [engine/sheet] commits:** 17 (6 from earlier + 11 from this session). All pushed to origin/main.
+
+**Pointer:** mags Supermemory doc `jSxgp42sygkmVdSyVGXEcH` carries the full S184 engine-sheet narrative (11-engine §5.6 finding + commit list + B0/B1 status). Retrieval: `curl -s "https://api.supermemory.ai/v3/documents/jSxgp42sygkmVdSyVGXEcH" -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY"`.
 
 ---
 

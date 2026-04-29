@@ -2180,6 +2180,8 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 
 - **executeReplaceIntent_(ctx, intent)**
 
+- **executeEnsureIntent_(ctx, intent)**
+
 - **executeSheetIntents_(ctx, sheetName, intents)**
 
 - **groupIntentsBySheet_(intents)**
@@ -2757,6 +2759,8 @@ citizenContextBuilder. Migration helpers `scripts/addCitizenFameColumns.js` and
 - **queueBatchAppendIntent_(ctx, tab, rows, reason, domain, priority)**
 
 - **queueReplaceIntent_(ctx, tab, allRows, reason, domain, priority)**
+
+- **queueEnsureTabIntent_(ctx, tab, headers, reason, domain, priority)**
 
 - **queueLogIntent_(ctx, tab, row, reason)**
 

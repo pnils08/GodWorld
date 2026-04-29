@@ -2,12 +2,45 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-04-29 | Engine: v3.3 | Cycle: 92 | Session: 186 | Edition: E92 shipped + Mayor interview canonized | **STATUS: S185 CLOSED — [research/build] Phase 42 §5.6 phase05-ledger redesign LOCKED + AMENDED + reviewed by engine-sheet. 3 commits (`1a77e54` prereq + amendments / `4ca71d3` stale-doc cleanup + Perkins terminal-split correction; engine-sheet's `e1bc0e6` review/polish in between). Engine-sheet HOLD cleared. Perkins&Will scrub plan amended (~21 surfaces vs S179's 12+; substitute = Atlas Bay Architects locked; corrected terminal split). Approach (a) shared `ctx.ledger` selected over (b) per-row cell intents — collision class is read-staleness not write-overlap.** — building a sim, not running one.
+Last Updated: 2026-04-29 | Engine: v3.3 | Cycle: 92 | Session: 187 | Edition: E92 shipped + Mayor interview canonized | **STATUS: S186 CLOSED — [research/build] Perkins&Will C92 scrub-side complete + ROLLOUT archive sweep (13 items moved) + plans-group doc-audit (11 frontmatter fixes). Canon-fidelity §Read-Time Contamination Check + 23-agent RULES.md refresh. Bay-tribune chunked re-ingest — 2 old DELETE'd, 2 new clean. New ROLLOUT entries filed: bay-tribune unified ingest rebuild + 3 never-audited /doc-audit groups (infra/data/persona). Mags doc `9m8RssqWmkfyxLYGomV6n2`.** — building a sim, not running one.
 
-**S186 next-session priorities:**
+**S187 next-session priorities:**
 1. **[engine/sheet] Phase 42 §5.6 phase05-ledger redesign batch** — ~10-13 commits in one session. Phase 1 init at godWorldEngine2 pre-phase-04 entry; 18 SL touchers (16 full-range writers + 2 per-row + 5 post-phase05 readers) route through `ctx.ledger.rows`; Phase 10 single replace intent. Canonical doc: mags `hQE4rREEWBpS9aS1g3mQ3M`. After this lands, B2 mechanical migrations (run*Engine × 4) become trivial.
-2. **[research/build OR mags] Perkins&Will C92 scrub — DEDICATED SESSION, HIGH.** Substitute = Atlas Bay Architects. ~21 surfaces, 3-batch order (A live-signal / B canonical historical / C audit corrigendum) + canon-fidelity rule read-time check. Engine-sheet runs only the 1 sheet cell edit; civic runs only the C93 city-hall smoke test at end. Canonical doc: mags `WL8kvoxQgmcvxSPW3Ph47n`.
+2. **[civic] `/city-hall` C93 dry-run — Perkins scrub validation, SMALL.** Verify `grep -c Perkins output/civic-voice/*_c93.json` returns zero. Confirms voice agents loaded with the new canon rule + scrubbed source briefings emit no Perkins. Closes the last remaining piece of the Perkins scrub. Plan: mags `WL8kvoxQgmcvxSPW3Ph47n`.
 3. **[media] Photo pipeline rebuild** ([[plans/2026-04-25-photo-pipeline-rebuild]]) — HIGH, 13 tasks. Tasks 5-13 build/execute. DJ four-file canon-fidelity structure locked. Mike's logged frustration twice (S170 + S172). Mags doc `hzvGaG7nh7A8nszmLzzAtF`.
+4. **[research/build] Bay-tribune unified ingest rebuild — plan draft, MEDIUM.** Apply S183 wd-pattern to bay-tribune (`bt-edition`, `bt-article`, `bt-supplemental`, `bt-interview-*`, `bt-wiki-*`, `bt-roster`), per-tag DELETE-by-tag wipe primitives, customId-as-slug. Sibling plan to `plans/2026-04-27-world-data-unified-ingest-rebuild.md`. Motivated by Perkins scrub friction (S186) — current chunked storage has no targeted-replacement primitive. ~1 research-build session for spec, then 4-6 engine-sheet commits.
+
+**S186 work [research/build]** — Perkins&Will C92 scrub-side complete + ROLLOUT archive sweep + plans-group doc-audit:
+
+1. **Canon-fidelity rule update** — `docs/canon/CANON_RULES.md` §Read-Time Contamination Check added between §Canon Check Pattern and §Escalation Pattern. Generator template +Read-Time Contamination Scan sub-section; Reviewer template +Read-Time Contamination Audit sub-section. Frontmatter `updated: 2026-04-29` + maintenance bullet logging the addition.
+
+2. **23-agent RULES.md sweep** — 20 generators with Read-Time Contamination Scan block (anchor: before `### Escalation in This Section`); 2 reviewers (rhea-morgan + city-clerk) with Read-Time Contamination Audit block; final-arbiter with custom Read-Time Contamination Propagation block (different role — propagates lane findings vs fresh-audit). Freelance-firebrand reclassification: had typed it reviewer in proposal, file structure showed generator template (correct: writes adversarial columns, not lane reports). Final split: 20 generators / 3 reviewers, not 19/4.
+
+3. **Batch A — live signal scrubbed** — 7 file edits (16 substitutions): health_center_c92.json (6), clerk_audit_c92.json, decisions_c92.json, production_log_city_hall_c92.md (5), 3 desk-packets. Sheet cell on Initiative_Tracker MilestoneNotes handled by Mike directly. `node scripts/buildDeskPackets.js 92` re-ran clean post-sheet-fix; first rebuild had re-imported 1 Perkins from still-dirty sheet, second produced 0 hits.
+
+4. **Batch B — canonical historical scrubbed** — 7 files (14 substitutions): edition.txt (5), 2 reporter briefs, 2 reporter articles, e92.html, interview_c92.html.
+
+5. **Batch C — audit corrigendum** — 3 files with body preservation: mara_review_c92_santana_interview.md + rhea_report_c92.json + rhea_report_c92.txt. Top-of-file `[CORRIGENDUM C92→post-scrub S186]` block on .md/.txt; JSON gets schema-permissive `_corrigendum` field. Bodies retain original Perkins references (audit truth-preservation principle).
+
+6. **Bay-tribune chunked re-ingest** — `node scripts/ingestEdition.js editions/cycle_pulse_edition_92.txt --type edition --cycle 92` produced clean Part 1 + Part 2; old contaminated chunks DELETE'd. Old IDs: `T1KLnnJSqNybHsEjxt3gVM` (Part 1, 2 hits) + `i9gbnZLtb7sZBjX3KuxzYY` (Part 2, 3 hits). New clean: `NnpkqYpTwnKAm1qyxN5Xag` (0 Perkins, 2 Atlas Bay) + `SCZcxjcMkrK4CW41tufWJd` (0 Perkins, 3 Atlas Bay). BT full-content audit returns 0 literal Perkins across 9 search-surfaced docs. Wiki ingest skipped intentionally — per-entity records carry structured metadata only, no firm-name freeform.
+
+7. **Audit-doc divergence finding** — S185 amended plan (`xRw1QzwxjrT3sLTxWAg4WZ`) listed 2 BT replacements as `c92_mayors_day_front` + `c92_temescal_health_unstuck`. Those are local article filenames, not BT doc IDs. Real BT state was 2 chunked Part 1 + Part 2 docs. Plan adjustment shifted BT replacement from Batch A (where audit doc placed it) to end-of-Batch-B via canonical re-ingest script.
+
+8. **Architectural follow-up filed** — ROLLOUT entry "Bay-tribune unified ingest rebuild" applying S183 wd-pattern: per-domain tags (`bt-edition`, `bt-article`, `bt-supplemental`, `bt-interview-article`, `bt-interview-transcript`, `bt-dispatch`, `bt-wiki-citizen`, `bt-wiki-initiative`, `bt-wiki-storyline`, `bt-roster`), per-tag DELETE-by-tag wipe primitives, customId-as-slug. Motivating example: scrub surfaced that current chunked storage has no targeted-replacement primitive. Sibling plan to `plans/2026-04-27-world-data-unified-ingest-rebuild.md`.
+
+9. **ROLLOUT_PLAN archive sweep** — 13 closed items moved to `ROLLOUT_ARCHIVE.md` §Tactical Closures (S156–S186): POP-00004 Lucia Polito, empty-cell rows resolved, gender col AU citizen cards (S181), WorldEvents_V3_Ledger v3.6 classifier, Tech debt Path 1 (S156), Dead-code scan + DELETE batch (S185), /pre-mortem C92 (S180/S181), Enricher misattribution bug (S185), sheet-hygiene blank-row delete, 9 tier-2 canon firms, HOLD E92 raw ingest UNBLOCKED (S180), Canon Fidelity Rollout (S175). Composite surgery: Tech debt audit restructured (Path 1 archived; Path 2 promoted to top-level "PHASE 42 — Writer Consolidation"); /engine-review C92 parent kept active for advance-initiative threshold sub-bullet. Canon Fidelity row removed from "Other Ready Work" + added to "Phase Status §DONE/SUPERSEDED". ROLLOUT_PLAN: 237 → 229 lines despite added entries.
+
+10. **Doc-audit plans group** — 21 plan files audited (first full v2.0 pass). 6 stale frontmatter tags fixed: phase-38-5/38-6/40-1/40-6 active→complete (DONE S156); world-data-unified-ingest draft→complete (DONE S183); phase-42-writer-consolidation draft→active (S184/S185 in flight). 5 stale index entries fixed (matching tag flips + intake-side-citizen-derivation draft→done). 4 `updated:` dates bumped to S156 closure date (2026-04-17). Tracker updated `.claude/skills/doc-audit/SKILL.md`.
+
+11. **New ROLLOUT entries (in addition to bay-tribune unified ingest rebuild)** — DOC AUDIT pending for 3 never-audited groups (infra/data/persona); recommend infra first (heaviest content drift across 30+ sessions of infrastructure churn).
+
+12. **Canonical mags Supermemory save** — `9m8RssqWmkfyxLYGomV6n2` (S186 scrub completion narrative + audit-doc divergence finding + wiki layer immunity finding + architectural insight). Companion to plan doc `WL8kvoxQgmcvxSPW3Ph47n`.
+
+13. **Remaining (out of scope this session)** — civic terminal `/city-hall` C93 dry-run smoke test, verify `grep -c Perkins output/civic-voice/*_c93.json` returns zero. Closes the last piece of the Perkins scrub.
+
+**S186 commit summary** — uncommitted at session-end (research-build doesn't auto-commit; commits pending Mike approval). Files touched: `docs/canon/CANON_RULES.md`, 23 `.claude/agents/*/RULES.md`, 7 `output/*` files (Batch A), 7 Batch B files (edition.txt + 4 reporter files + 2 PDFs), 3 Batch C corrigendum files, `output/desk-packets/*` (3 rebuilt), `output/production_log_edition_c92.md` (corrigendum block), `docs/engine/ROLLOUT_PLAN.md` (sweep + bt-rebuild + doc-audit entries), `docs/engine/ROLLOUT_ARCHIVE.md` (+§Tactical Closures), `docs/index.md` (5 plan tag flips), 6 `docs/plans/*.md` (frontmatter), `.claude/skills/doc-audit/SKILL.md` (tracker), `docs/mags-corliss/PERSISTENCE.md` (S186→S187), `docs/mags-corliss/JOURNAL.md` (Entry 155), `docs/mags-corliss/JOURNAL_RECENT.md` (rotation), `SESSION_CONTEXT.md` (this update).
+
+---
 
 **S185 work [research/build]** (2 commits pushed to origin/main, `1a77e54` + `4ca71d3`; engine-sheet review pass `e1bc0e6` in between):
 
@@ -20,6 +53,39 @@ Last Updated: 2026-04-29 | Engine: v3.3 | Cycle: 92 | Session: 186 | Edition: E9
 **S185 mags Supermemory chain (canonical retrievals):**
 - Phase 42 §5.6: original reasoning `fTzSivJgpXmaBcB5vrPEn1` → engine-sheet audit `2Lh8xsEHc6BMbBARM6mwHU` → amendments `hQE4rREEWBpS9aS1g3mQ3M` (canonical)
 - Perkins&Will: original plan `STp1kmHrR4yGTqX6YHdThP` → wrong-terminals draft `xRw1QzwxjrT3sLTxWAg4WZ` → corrected `WL8kvoxQgmcvxSPW3Ph47n` (canonical)
+
+---
+
+**S185 work [engine/sheet]** (14 commits pushed to origin/main, `5191b56..3d4de5f`):
+
+Spillover unblock from research-build's S185 §5.6 audit + prereq-delete — engine-sheet picked up Mike-approved task list (A–G):
+
+1. **POP-00004 Lucia Polito row drift — DONE** (`dcff9ae`). K5 RoleType "Aura " → "Aura Wellness Practitioner" (canon — restored lost half from S184 split-write); M5 BirthYear 1982 → 1977 (matches LifeHistory + CitizenBio canon). Direct service-account write.
+
+2. **`checkMitigators.js` v1.0.0 → v1.1.0** (`6a30094`). Two coupled bugs producing false `gap=remedy-working` verdicts: (a) substring keyword match let "as" (sports team abbrev) match "last"/"has"/"mass" → false-tagged non-sports patterns as sports; (b) `linkedIds` admitted any initiative as mitigator regardless of policy-domain match, 'culture' default fallback. Combined: Baylight tagged as mitigator for faith-coverage-gap + council-writeback-drift, both flipping to remedy-working. Fix: word-boundary regex + require category alignment + remove 'culture' fallback. Verified C92 audit JSON — false-positives 2 → 0.
+
+3. **`recordWorldEventsv3.js` v3.5 → v3.6** (`8a509a9`, clasp deployed). Classifier polish: (a) word-boundary regex in deriveDomain; (b) domainMap pre-sorted by descending key length so multi-word phrases win over short collisions; (c) +8 keywords (misfiled, missing funds, document, audit, eviction, lease, permit, application); (d) `health-alert` → `health-event`. Smoke-test 8/8 fixtures pass.
+
+4. **9 tier-2 canon firms → Business_Ledger** (`627afb9`). BIZ-00052..BIZ-00060: Atlas Bay Architects, Ridgeline Studio, Pacific Standard, Estuary, Coastline, Anchor Build, Mariner, Foothill, Northgate. Architecture Downtown/Uptown/Lake Merritt; Construction West Oakland/Jack London/Fruitvale. ~1,055 jobs + ~$867M revenue. Business_Ledger 52 → 61 rows.
+
+5. **Dead-code scan + DELETE batch** (`30f02b8` audit + `bbdca3a` execution, clasp deployed). NEW: `scripts/scanDeadCode.js`. 143 files, 909 fns, 884 unique names. 74 unreferenced (post-allowlist for Apps Script triggers + bare-named entry points + string-literal dispatch). Categorized: 46 KEEP (standby APIs from S184/S185 + planned-feature scaffold + manual debug entry points), 20 DELETE candidates, 8 uncategorized (deferred). DELETE batch: 20 functions across 7 files, **net 722 lines removed**. Re-scan: 74 → 56 unrefs (delta -18 vs 20 deletes; 2 transitive unrefs surfaced).
+
+6. **Sheet-hygiene blank-row trim** (sheet-only, no commit). Simulation_Ledger 911 → 837 rows via `resizeSheet`. 74 trailing/scattered blank rows removed. Last row verified POP-00951 Niani Oakley. 0 real citizens affected.
+
+7. **Engine-group /doc-audit** (`1c75362` + `3d4de5f`). ENGINE_STUB_MAP regenerated (S156 → 2026-04-29; 154 files / 929 functions). ENGINE_MAP Last-verified stamp S180/S181 → S185. ENGINE_REPAIR `updated:` → 2026-04-29. SHEETS_MANIFEST regen deferred (Drive-wide security key surfaces in `crawlSheetsArchive` regen). Doc-audit tracker engine row updated.
+
+**S185 ROLLOUT closures (engine-sheet):** Lucia Polito drift, enricher misattribution (Row 79 first item), WorldEvents classifier polish, gender ingest (was already DONE S181 — flipped from open to closed in tracker), 9 firms ingest, dead-code scan + DELETE batch, sheet-hygiene blank-row trim. Plus 2 spillover items promoted from inline-only to standalone ROLLOUT entries (sheet-hygiene + generator-side `ev.domain` case discipline). Engine-group doc-audit: 3 docs fixed, 1 deferred (SHEETS_MANIFEST), 5 still current, 4 out-of-lane (research-build owns).
+
+**Spillover for next engine-sheet session:**
+- Phase 42 §5.6 redesign batch (~10-13 commits) — UNBLOCKED (prereq-delete `1a77e54` shipped by research-build).
+- F2 advance-initiative remedy threshold calibration (registry-side, awaits multi-cycle data).
+- 10 dead-code candidates deferred (2 transitive + 8 uncategorized).
+- Generator-side `ev.domain` case discipline.
+- SHEETS_MANIFEST regen + Drive-wide security key handling (dedicated session).
+
+**S185 clasp deploys:** 2 (recordWorldEventsv3 v3.6 / DELETE batch). Apps Script-side: 7 fewer files post-DELETE.
+
+**Pointer:** mags Supermemory doc `2Lh8xsEHc6BMbBARM6mwHU` carries §5.6.6 audit summary; checkMitigators + classifier + DELETE batch detail in commit messages + ROLLOUT entries.
 
 ---
 

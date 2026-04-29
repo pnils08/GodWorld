@@ -170,14 +170,14 @@ When this terminal discovers something that needs design/research:
 
 - **Engine version:** v3.3
 - **Cycle:** 92 (ran 2026-04-19 02:12 — `Riley_Digest` row for C92 present; Phase2-CityDynamics error recurring but non-blocking — see ENGINE_REPAIR follow-ups)
-- **Citizens:** 761 in Simulation_Ledger (total population 1,200+ across all citizen tabs). See `docs/SIMULATION_LEDGER.md` for tier + mode breakdown.
+- **Citizens:** 836 in Simulation_Ledger post-S184 female-balance ingest (POP-00802..00951 added; +150 rows). Total population 1,200+ across all citizen tabs. Sheet trimmed S185 from 911 → 837 rows (74 trailing blank rows removed; last citizen POP-00951). See `docs/SIMULATION_LEDGER.md` for tier + mode breakdown.
 - **Columns:** 47 (A-AU). Past Z: Income=col26, EducationLevel=col31, CareerStage=col33, Gender=col47 (AU).
 - **Pipeline:** v2 (S134) — 4 terminals, 9 reporters, bounded traits
 - **Feedback loop (S137b):** 3 intake channels operational — coverage ratings, sports feed (6 texture columns), civic voice sentiment. Initiative ImplementationPhase → neighborhood effects. Approval ratings dynamic. Citizen life events feel the loop.
-- **Last deploy:** Check `git log --oneline -5` and `clasp` status
-- **Open engine items (post-E92):** See `docs/engine/ENGINE_REPAIR.md` (rows 8, 9, 10, 11, 12, 13, 14) and `docs/engine/ROLLOUT_PLAN.md` "Data & Pipeline" section.
-- **Active plan (S180):** [docs/plans/2026-04-26-non-edition-publishing-pipeline.md](../../../docs/plans/2026-04-26-non-edition-publishing-pipeline.md) — engine-sheet owns T6–T9. T6 (ingestEdition.js, `1880c3e`) + T7 (ingestEditionWiki.js, `33167b2`) + T9 (4 print scripts, S180) DONE. T8 (rateEditionCoverage.js) gated on C93 observation. **Phase 2 (engine-sheet) complete.** Phase 3 = T10 media validation run against C92 Mayor interview.
-- **S181 entry-task:** ENGINE_REPAIR Row 13 — SCHEMA_HEADERS full alignment diff (parked end of S180). Run `/tech-debt-audit` §4 + regenerate `schemas/SCHEMA_HEADERS.md` via `exportAllHeaders()` + diff write-intent column sets against the post-Phase-38/39/40 commits.
+- **Function count:** 154 engine files / 929 functions (S185 STUB_MAP regen post-DELETE batch). Down from S156 baseline due to 20-function dead-code removal (commit `bbdca3a`, ~722 LOC removed).
+- **Last deploy:** S185 — 2 clasp pushes (`recordWorldEventsv3.js` v3.6 + DELETE batch). Apps Script-side has 7 fewer files post-DELETE.
+- **Open engine items (post-E92):** See `docs/engine/ENGINE_REPAIR.md` (Row 8 Phase 42 — UNBLOCKED S185, redesign batch ready; Row 11 pipeline gating; Rows 1, 2, 4, 5, 6, 15, 17 closed S181-S184). Plus `docs/engine/ROLLOUT_PLAN.md` "Data & Pipeline" section.
+- **S186 entry-task (engine-sheet):** **Phase 42 §5.6 phase05-ledger redesign batch** — ~10-13 commits in one session. Phase 1 init at `godWorldEngine2.js` pre-phase-04 entry; 18 SL touchers (16 full-range writers + 2 per-row + 5 post-phase05 readers) route through `ctx.ledger.rows`; Phase 10 single replace intent. Canonical doc: mags `hQE4rREEWBpS9aS1g3mQ3M`. Prereq-delete shipped S185 (`1a77e54` research-build); B2 mechanical migrations become trivial after this lands.
 - **Refresh rule:** Update this block whenever a cycle runs or schema shifts. Stale state here poisons every engine-sheet boot.
 
 ---

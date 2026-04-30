@@ -233,6 +233,94 @@ for (var i = 0; i < lines.length; i++) {
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
+// EXTRACT STANDALONE NAMES INDEX SECTION
+// ═══════════════════════════════════════════════════════════════════════════
+// Two shapes accepted:
+//   pipe form:    POP-00537 | Marin Tao | Musician        (dispatch / interview / supplemental)
+//   bullet form:  - Patricia Nolan — Retired teacher       (edition top-of-document index)
+// Inline `Names Index:` per-article scan above already covers article-attributed
+// edition rows; this pass picks up the standalone block both editions and
+// non-edition artifacts emit. For citizens already populated by the inline
+// scan, the standalone pass only fills missing `details` (no duplicate article
+// row). For citizens not in the inline scan (the dispatch case — single-body
+// artifacts have no per-article inline lists), the standalone pass is the only
+// path and tags them with section = typeLabel.
+
+var namesIndexLines = findSection('NAMES INDEX', [
+  'CITIZEN USAGE LOG', 'BUSINESSES NAMED', 'STORYLINES UPDATED',
+  'CONTINUITY NOTES', 'ARTICLE TABLE', "EDITOR'S DESK",
+  'FRONT PAGE', 'CIVIC AFFAIRS', 'BUSINESS', 'CULTURE', 'SPORTS',
+  'CHICAGO', 'LETTERS', 'OPINION', 'HEALTH', 'ACCOUNTABILITY',
+  'FEATURES', 'COMING NEXT', 'END EDITION'
+]);
+
+var namesIndexLineCount = 0;
+var namesIndexHits = 0;
+
+for (var nii = 0; nii < namesIndexLines.length; nii++) {
+  var nLine = namesIndexLines[nii].trim();
+  if (!nLine) continue;
+  // Skip pure-separator lines (findSection only filters fully-empty trims;
+  // separators with hyphens, equals, em-dashes still pass through).
+  if (/^[=\-─━_]+$/.test(nLine)) continue;
+  namesIndexLineCount++;
+
+  var indexedName = null;
+  var indexedRole = '';
+
+  // Pipe form: <ID> | <Name> | <Role>. First field must look like an ID
+  // (POP-XXXX, CUL-XXXXXXXX, BIZ-XXXX, FAITH-XXXX). Other pipe-table rows
+  // (e.g., article-table headers) fall through and are ignored.
+  if (nLine.indexOf('|') >= 0) {
+    var parts = nLine.split('|').map(function(p) { return p.trim(); });
+    if (parts.length >= 2 && /^[A-Z]+-[A-Z0-9]+$/.test(parts[0])) {
+      indexedName = parts[1];
+      indexedRole = parts[2] || '';
+    }
+  }
+
+  // Bullet em-dash form: "- Name — Role". Em-dash or en-dash both accepted.
+  if (!indexedName) {
+    var bulletMatch = nLine.match(/^-\s*(.+?)\s*[—–]\s*(.+)$/);
+    if (bulletMatch) {
+      indexedName = bulletMatch[1].trim();
+      indexedRole = bulletMatch[2].trim();
+    }
+  }
+
+  if (!indexedName) continue;
+
+  // Skip reporters/columnists same as inline scan.
+  var roleLc = indexedRole.toLowerCase();
+  if (roleLc === 'reporter' || roleLc === 'columnist' || roleLc === 'senior columnist') continue;
+
+  namesIndexHits++;
+
+  if (!citizenAppearances[indexedName]) {
+    // First record for this citizen — single-body type or top-of-edition only.
+    citizenAppearances[indexedName] = {
+      details: indexedRole,
+      articles: [{ section: typeLabel, headline: '', reporter: '' }]
+    };
+  } else if (!citizenAppearances[indexedName].details && indexedRole) {
+    // Inline scan already attributed them — only fill missing details.
+    citizenAppearances[indexedName].details = indexedRole;
+  }
+}
+
+// Fail-loud sanity check: standalone NAMES INDEX had non-empty content but
+// parser extracted zero entities. Closes gap-log finding #9 (brittle gate).
+if (namesIndexLineCount > 0 && namesIndexHits === 0) {
+  console.error('[ERROR] NAMES INDEX section had ' + namesIndexLineCount +
+    ' non-empty content lines but parser extracted 0 entities. ' +
+    'Sample line: "' + (namesIndexLines.find(function(l) {
+      var t = l.trim();
+      return t && !/^[=\-─━_]+$/.test(t);
+    }) || '').trim() + '"');
+  process.exit(1);
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
 // PARSE CITIZEN USAGE LOG — returning vs new
 // ═══════════════════════════════════════════════════════════════════════════
 
@@ -301,7 +389,7 @@ for (var ci = 0; ci < citizenNames.length; ci++) {
 
   var memText = cName;
   if (cData.details) memText += ' (' + cData.details + ')';
-  memText += ' appeared in Edition ' + cycle;
+  memText += ' appeared in ' + typeLabel + ' ' + cycle;
   memText += ' in ' + uniqueSections.length + ' section(s): ' + uniqueSections.join(', ') + '.';
 
   if (cData.articles.length > 0 && cData.articles[0].headline) {

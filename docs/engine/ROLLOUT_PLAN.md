@@ -47,7 +47,7 @@ Work with plan files that is NOT on the spine. Use when the next spine step is b
 | Phase 41 remainder — 41.3, 41.4, 41.6 | Phase 41.1/41.2/41.5 were step 1; the rest is smaller cleanup | [[plans/BACKLOG]] §Phase 41 |
 | Skill eval framework | HIGH priority, separate from spine — grades skills against criteria files. **First skill `/skill-check` shipped S156** covering `/write-edition` + `/sift`. Sift patched to dump full proposal set so next cycle grades cleanly. Expand to city-hall, dispatch when their assertion files land. | [[plans/skill-eval-framework]] |
 | Memento CBR case-bank | Research-landscape → 4-phase rollout. Framing + reward-tuple capture have standalone value even if Memento never ships (structured reward-signal capture is missing today). Shape B build contingent on ≥500 tuples + droplet headroom (4.6 GB free at S170). | [[plans/2026-04-21-memento-cbr-case-bank]] |
-| `/md-audit` skill — existence-staleness audit | Retirement half of lifecycle discipline. Three-signal detector (mtime + inbound links + active refs) + four-bucket classifier + human-gated archival. Complement to `/doc-audit` (content staleness). Operationalizes S156 no-isolated-MD rule as a scheduled check. | [[plans/2026-04-21-md-audit-skill]] |
+| `/md-audit` skill — existence-staleness audit | **Phase 1+2 DONE S189.** `scripts/mdStalenessDetector.js` + `.claude/skills/md-audit/SKILL.md` shipped. First run: 0 orphans / 0 stale-but-linked / 48 stable-by-reference / 109 fresh at 60d/30d baseline (after directory-walk detector patch — voice files load by `docs/media/voices/` glob, not per-file ref). Phase 3 archival script not built — no orphans to archive. Phase 4/5 deferred. Move to ROLLOUT_ARCHIVE next session-end sweep. | [[plans/2026-04-21-md-audit-skill]] |
 
 ---
 

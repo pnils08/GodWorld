@@ -1,7 +1,7 @@
 ---
 title: /md-audit Skill Plan
 created: 2026-04-21
-updated: 2026-04-21
+updated: 2026-04-30
 type: plan
 tags: [architecture, active]
 sources:
@@ -13,9 +13,17 @@ pointers:
   - "[[SCHEMA]] — doc conventions, frontmatter, stability signals"
   - "[[index]] — register in same commit"
   - "[[RESEARCH]] §S170 Autogenesis — origin framing"
+  - ".claude/skills/md-audit/SKILL.md — built skill"
+  - "scripts/mdStalenessDetector.js — built detector"
 ---
 
 # /md-audit Skill Plan
+
+**Status (2026-04-30, S189):** Phase 1 + Phase 2 SHIPPED. Detector + skill wrapper at `scripts/mdStalenessDetector.js` + `.claude/skills/md-audit/SKILL.md`. First run on the live tree: 0 orphan-candidates / 0 stale-but-linked / 48 stable-by-reference / 109 fresh at 60d staleness + 30d active windows. Phase 3 (gated archival via `scripts/archiveStaleMd.js`) intentionally NOT built — no orphans means destructive script has nothing to do yet. Phase 4 (retroactive `stable: true` seeding) deferred — directory-walk detection captures the same protection without per-file frontmatter edits. Phase 5 (cron scheduling) still deferred per original plan.
+
+**Tuning baseline:** 60d / 30d. Default in-script is 90d / 30d, but 90d showed everything fresh on first run — recent S187 doc-audit cleanup + active development means 60d is the honest threshold for this codebase. Re-evaluate after 2-3 runs.
+
+**Detector amendment (S189):** added directory-path inbound-ref detection. Voice files in `docs/media/voices/` are loaded by directory glob via `/write-supplemental` and several agent files (no per-file references). The unpatched detector flagged all 7 unused voice files as orphans — false positives. Fix: when scanning source contents, also collect any `docs/<path>/` token (path with trailing slash); a file's parent-directory mention from any source counts as an inbound ref. `docs/` itself is excluded from this rule (too generic — would match every top-level doc).
 
 **Goal:** Ship a `/md-audit` skill that flags MD files stale for ≥90 days with no active inbound references, classifies them by staleness reason, and proposes archival (never auto-deletes). Human review gates every destructive action.
 
@@ -142,4 +150,5 @@ pointers:
 
 ## Changelog
 
+- 2026-04-30 (S189, research-build) — Phase 1 + Phase 2 shipped. `scripts/mdStalenessDetector.js` (220 lines) + `.claude/skills/md-audit/SKILL.md`. First run at default 90d showed all 157 docs fresh (active project means recent activity dominates); tightened to 60d → 7 orphan-candidates surfaced, all `docs/media/voices/*.md`. Investigated as false-positive class: voice files load via directory-glob through `/write-supplemental` and 14 agent/skill files mentioning `docs/media/voices/`. Patched detector to count directory-path mentions as inbound refs (parent-dir match excluding `docs/` root). Re-run clean: 0 orphans / 0 stale-but-linked / 48 stable-by-reference / 109 fresh. Phase 3 archival script intentionally not built — no orphans to archive. Phase 4 stable-seeding obviated by dir-walk detection.
 - 2026-04-21 — Initial draft (S170, research-build terminal). Triggered by Autogenesis paper + Mike's retirement-protocol insight. Structure-approved before write, same pattern as `[[plans/2026-04-21-memento-cbr-case-bank]]`.

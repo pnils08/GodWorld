@@ -132,22 +132,35 @@ function findSection(lines, header, endPatterns) {
 }
 
 // ---------------------------------------------------------------------------
-// NAMES INDEX parser — handles T1 strict + pre-T1 freeform
+// NAMES INDEX parser — handles T1 strict + pre-T1 freeform + dispatch flat
 // ---------------------------------------------------------------------------
+// Three row shapes accepted:
+//   T1 strict bullet:    `- POP-00789 | Elias Varek | Founder, Civis Systems`
+//   T1 strict flat:      `POP-00537 | Marin Tao | Musician`         (dispatch — no bullet prefix)
+//   pre-T1 freeform:     `- Patricia Nolan — Retired teacher, Temescal`
+// ID prefix extended POP-only → POP/CUL/BIZ/FAITH per EDITION_PIPELINE.md
+// §Per-section content spec (S189 R2 update). CUL-/BIZ-/FAITH- entries flow
+// through here for downstream filtering — resolveCitizens routes only POP-
+// entries to Simulation_Ledger; non-POP IDs are logged but not appended.
 function parseNamesIndex(sectionLines) {
   const out = [];
   if (!sectionLines) return out;
 
   for (const raw of sectionLines) {
     const line = raw.trim();
-    if (!line || line[0] !== '-') continue;
+    if (!line) continue;
+    // Skip pure-separator lines (findSection only filters fully-empty trims).
+    if (/^[=\-─━_]+$/.test(line)) continue;
+    // Bullet prefix is now optional (dispatch flat-body shape has no leading `-`).
     const stripped = line.replace(/^-\s*/, '');
 
-    // T1 strict: `POP-NNNNN | Name | Role`
-    if (/^POP-\d+\s*\|/.test(stripped)) {
+    // T1 strict: `<PREFIX>-<ID> | Name | Role` (POP/CUL/BIZ/FAITH/etc.)
+    const strictMatch = stripped.match(/^([A-Z]+)-([A-Z0-9]+)\s*\|/);
+    if (strictMatch) {
       const parts = stripped.split('|').map(p => p.trim());
       out.push({
         popId: parts[0] || null,
+        prefix: strictMatch[1],
         fullName: parts[1] || '',
         description: parts[2] || '',
         format: 'strict',
@@ -162,14 +175,15 @@ function parseNamesIndex(sectionLines) {
       const fullName = stripped.slice(0, idx).trim();
       const description = stripped.slice(idx + sep[0].length).trim();
       if (fullName) {
-        out.push({ popId: null, fullName, description, format: 'freeform' });
+        out.push({ popId: null, prefix: null, fullName, description, format: 'freeform' });
         continue;
       }
     }
 
-    // Bare name with no description
-    if (stripped) {
-      out.push({ popId: null, fullName: stripped, description: '', format: 'bare' });
+    // Bare name with no description (only when bullet was present — flat-body
+    // bare lines without a separator are ambiguous and skipped to avoid noise).
+    if (line[0] === '-' && stripped) {
+      out.push({ popId: null, prefix: null, fullName: stripped, description: '', format: 'bare' });
     }
   }
 
@@ -267,8 +281,23 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
   const phantom = [];
   const ambiguous = [];
   const candidates = [];
+  const culturalOnly = [];  // Non-POP IDs (CUL-/BIZ-/FAITH-) — logged, not appended to Sim_Ledger
 
   for (const entry of parsed) {
+    // Route non-POP prefixed entries away from Sim_Ledger. CUL- entries live
+    // in wd-cultural; BIZ- belong in Business_Ledger (parsed separately by
+    // BUSINESSES NAMED). FAITH- → Faith_Organizations. Engine-sheet downstream
+    // (E6 buildCulturalCards) refreshes wd-cultural for CUL- entries.
+    if (entry.prefix && entry.prefix !== 'POP') {
+      culturalOnly.push({
+        id: entry.popId,
+        prefix: entry.prefix,
+        fullName: entry.fullName,
+        description: entry.description,
+      });
+      continue;
+    }
+
     if (entry.popId) {
       const hit = byPopId.get(entry.popId);
       if (!hit) {
@@ -305,7 +334,7 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
 
   // S184 (Phase 4.1.c) — pass raw rows through so appendCitizens can build a
   // ledgerFreq snapshot without a second sheet fetch.
-  return { headers, matched, phantom, ambiguous, candidates, maxPopNum, rows };
+  return { headers, matched, phantom, ambiguous, candidates, culturalOnly, maxPopNum, rows };
 }
 
 // ---------------------------------------------------------------------------
@@ -566,6 +595,25 @@ async function main() {
   if (!bizSection) console.log('  (no BUSINESSES NAMED section in source)');
   console.log('');
 
+  // Fail-loud sanity check: NAMES INDEX section had non-empty content lines
+  // but parser extracted zero citizens. Closes gap-log finding #9 and the E1
+  // false-success pattern at the script level (complements E8's skill-level
+  // cross-check). Counts only non-separator content lines so the existing
+  // "pure-atmosphere artifact" path stays valid for sections that legitimately
+  // contain only headers + separators.
+  if (namesSection) {
+    const contentLines = namesSection.filter(l => {
+      const t = l.trim();
+      return t && !/^[=\-─━_]+$/.test(t);
+    });
+    if (contentLines.length > 0 && parsedCitizens.length === 0) {
+      console.error('[ERROR] NAMES INDEX section had ' + contentLines.length +
+        ' non-empty content lines but parser extracted 0 citizens. ' +
+        'Sample line: "' + contentLines[0].trim() + '"');
+      process.exit(1);
+    }
+  }
+
   if (parsedCitizens.length === 0 && parsedBusinesses.length === 0) {
     console.log('0 entities — pure-atmosphere artifact. Nothing to ingest.');
     process.exit(0);
@@ -581,6 +629,7 @@ async function main() {
   console.log('  candidates: ' + citizenResolution.candidates.length + ' (new — would append)');
   console.log('  ambiguous:  ' + citizenResolution.ambiguous.length);
   console.log('  phantom:    ' + citizenResolution.phantom.length);
+  console.log('  cultural:   ' + citizenResolution.culturalOnly.length + ' (CUL-/non-POP — logged, not appended)');
   console.log('  next POPID: POP-' + String(citizenResolution.maxPopNum + 1).padStart(5, '0'));
   console.log('');
   console.log('BUSINESSES:');
@@ -657,6 +706,7 @@ async function main() {
       })),
       ambiguous: citizenResolution.ambiguous,
       phantom: citizenResolution.phantom,
+      culturalOnly: citizenResolution.culturalOnly,
       appended: citizenAppended,
     },
     businesses: {

@@ -129,7 +129,7 @@ Each task self-contained. Execute in order shown unless engine-sheet flags a dep
   2. Inspect tracking-section renderer. Likely cause: section parser treats the NAMES INDEX block as one continuous text run instead of one element per newline-separated row.
   3. Fix: split each tracking section's content on `\n` (or the canonical row delimiter), render each row as its own paragraph/list-item.
 - **Verify:** Regenerated PDF has Marin Tao row and Brody Kale row on separate lines.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S189 (engine-sheet, commit `c20bb3d`, single-fix-three-bugs). Root cause: `lib/editionParser.js` `isSectionNameChunk` only excluded chunks STARTING with `|`, so dispatch's `POP-00537 | Marin Tao | Musician` rows (start with `POP-`, not `|`) were misclassified as section names — rendered as section-label divs (newlines collapsed → row collapse) AND absorbed the next real header into the next chunk's group (E5b/c). Fix: `chunk.indexOf('|') >= 0 → return false` on chunk classification. Plus `guessBeat` was missing entries for `NAMES INDEX` and `BUSINESSES NAMED` (fell to 'general' → rendered visibly); added meta classifications and reordered so meta checks fire before broader editorial-beat matches (otherwise `BUSINESSES NAMED` matched the `business` check first). KONO dispatch post-fix: 5 sections (was 8), all 4 tracking sections beat=meta → 0 occurrences of any tracking-section name or POP-/CUL- row data in rendered HTML. E92 regression: 13 sections, 277 KB, beats unchanged. See E5b + E5c entries below — same commit closes all three.
 
 #### Task E5b: PDF render — CITIZEN USAGE LOG header drop
 
@@ -139,7 +139,7 @@ Each task self-contained. Execute in order shown unless engine-sheet flags a dep
   2. Inspect header-rendering logic. Likely cause: section header detection regex is over-narrow or template lookup is missing this section name.
   3. Fix: ensure all 4 tracking section headers (NAMES INDEX, CITIZEN USAGE LOG, BUSINESSES NAMED, ARTICLE TABLE) render as visible labels even when the section follows another tracking section directly.
 - **Verify:** Regenerated PDF shows all 4 tracking section headers, each preceding its data rows.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S189 (engine-sheet, commit `c20bb3d`, same fix as E5a). Re-scoped at smoke time: rather than re-render the tracking section headers visibly, treat ALL four tracking sections (NAMES INDEX, CITIZEN USAGE LOG, BUSINESSES NAMED, ARTICLE TABLE) as `meta` beat → skipped from the visible PDF entirely. They're internal metadata, not reader-facing content; the gap log #11 visual-review note "tracking metadata didn't leak into the visible body" was the actual editorial intent. Row collapse stops being a problem once the rows aren't rendered at all. Verify-by-grep: 0 occurrences of any tracking-section header or row data in `output/pdfs/dispatch_c92_kono_second_song.html`.
 
 #### Task E5c: PDF render — ARTICLE TABLE header drop
 
@@ -148,7 +148,7 @@ Each task self-contained. Execute in order shown unless engine-sheet flags a dep
   1. Same root cause family as E5b. Likely a single fix closes both.
   2. After E5b fix, verify ARTICLE TABLE header renders correctly above the dispatch row.
 - **Verify:** Regenerated PDF shows ARTICLE TABLE header above the row `KONO_SECOND_SONG | KAI MARSTON | DISPATCH | 762`.
-- **Status:** [ ] not started — likely closes with E5b
+- **Status:** [x] DONE S189 (engine-sheet, commit `c20bb3d`, same fix as E5a/E5b). Single root-cause fix in `lib/editionParser.js` closed all three render bugs; ARTICLE TABLE now classifies as `meta` and is skipped entirely along with NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED. The fixture row no longer appears under the wrong header because no tracking-section header renders.
 
 #### Task E6: `buildCulturalCards.js` invocation in `/post-publish` for cultural-only NAMES INDEX entries
 
@@ -158,7 +158,7 @@ Each task self-contained. Execute in order shown unless engine-sheet flags a dep
   2. Invocation site: `/post-publish` Step that currently calls `buildCitizenCards.js` after NAMES INDEX ingest. Add a parallel invocation for any CUL- prefixed entries.
   3. Card refresh logic: pull `wd-cultural` row, append/update mention count + last-cycle-mentioned, write back.
 - **Verify:** After running `/post-publish --type dispatch` for the C92 KONO fixture (re-run after E1 + E2 land), `lookup_cultural("Brody Kale")` shows mention count incremented and `last_appeared` reflects C92.
-- **Status:** [ ] not started — depends on E1 + E2 (parser must extract CUL- entities first)
+- **Status:** [x] DONE-engine-sheet S189 (no commit needed) / pending-skill-wire research-build. Engine-sheet half re-scoped at investigation: `scripts/buildCulturalCards.js` already exists from S182 (521 lines, ships `--cul CUL-XXXXX` flag for single-figure refresh, writes to `wd-cultural`/`world-data` containers with proper `cul_id` metadata). Smoke test: `node scripts/buildCulturalCards.js --dry-run --cul CUL-905CBDE8` against Brody Kale assembles a clean payload — Cultural_Ledger row read (KONO neighborhood, Media domain, Local tier, fame 28, 4 media mentions), bay-tribune appearances joined (2 records: my E1 commit's wiki record + S188's narrative chunk). The plan's Step 1 build-decision was already resolved before this gap log was written — only research-build's Step 2 (skill-wiring in `/post-publish`) remains. Engine-sheet handoff to research-build: invoke `node scripts/buildCulturalCards.js --apply --cul <CUL-ID>` per cultural entry from the dispatch's NAMES INDEX, after the citizen card pass.
 
 #### Task E7: POP-00537 Marin Tao BirthYear backfill
 
@@ -169,7 +169,7 @@ Each task self-contained. Execute in order shown unless engine-sheet flags a dep
   3. Update Simulation_Ledger row POP-00537 BirthYear column with the resolved value.
   4. Re-run `node scripts/buildCitizenCards.js POP-00537` to rebuild the wd-citizens card with the corrected age.
 - **Verify:** `lookup_citizen("Marin Tao")` returns non-null BirthYear; computed age = 75 or 76 depending on cycle anchor (2041 − BirthYear).
-- **Status:** [ ] not started
+- **Status:** [x] CLOSED-NO-ACTION S189 (engine-sheet, Mike decision). Investigation surfaced live POP-00537 row already carries `BirthYear=2009` (age 32 under 2041 anchor), not null as the brief claimed. Source of the 2009 fill unidentified — possibly generator default or post-S188 engine-side write. Mike's call: accept the value as canon, treat the C79 "introduced as 75" note as the stale claim. Rationale: the project doesn't need to multiply the iconic 75-year-old count just to backfill one drift; cleaner to let Marin Tao read as 32 going forward and have downstream coverage adapt. No sheet edit, no card rebuild.
 
 #### Task E8: Step 5 verification gate cross-check
 
@@ -179,7 +179,7 @@ Each task self-contained. Execute in order shown unless engine-sheet flags a dep
   2. Add a cross-check: count NAMES INDEX rows in source `.txt` (lines between section header and next `---` delimiter, excluding empty lines). Compare to ingest-script reported entity count. If source-count > 0 AND parsed-count == 0, FAIL LOUDLY (block publish).
   3. Helper: a small `scripts/verifyNamesIndexParse.js` that takes a .txt + expected-count from parsing the source itself, returns exit-1 on mismatch.
 - **Verify:** On the S188 fixture (pre-E1 fix), running Step 5 cross-check returns FAIL with clear message: "NAMES INDEX has 2 source rows but parser returned 0 entities — likely silent parser bug."
-- **Status:** [ ] not started — depends on E1 + E2 (after they land, the cross-check should pass cleanly)
+- **Status:** [x] DONE-engine-sheet-helper S189 (commit `a805e76`) / pending-skill-wire research-build. Helper script `scripts/verifyNamesIndexParse.js` shipped — counts non-separator non-empty NAMES INDEX rows in the source `.txt`, optionally compares against `--expected <N>` (the count an ingest script reported), exits 1 with diagnostic on mismatch. Smoke tests cover all four shapes: dispatch happy path (--expected 2 → exit 0), dispatch S188-style mismatch (--expected 0 against 2 source rows → exit 1 with diagnostic "source has 2 NAMES INDEX rows but ingest script parsed 0"), E92 happy path (--expected 8 → exit 0, bullet em-dash rows count same as pipe rows), no `--expected` (just prints count, exit 0). Defense-in-depth complement to the in-script fail-loud guards added in E1 (commit `e83a5a3`) and E2 (commit `15e7f3e`) — those catch the silent-failure pattern inside their respective ingest scripts; the helper catches the same class at the skill level. Research-build: wire into `/post-publish` Step 5, call between ingest and trust-the-exit-code, block publish on exit 1.
 
 ---
 

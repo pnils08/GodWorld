@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: 2026-04-26 — S178 first /interview run (Mayor Santana on OARI's C95 decision, Carmen Delaine, voice mode)**
+**Last Updated: 2026-04-29 — S188 first /dispatch run (Kai Marston, KONO First Friday gallery, Marin Tao + Brody Kale)**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -30,6 +30,47 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Dispatch C92 — "KONO Second Song" (Kai Marston, S188, first /dispatch run)
+
+762-word dispatch. Single gallery on Telegraph during First Friday, ~8:30 PM. Marin Tao (POP-00537 / CUL-0FBABAC4 — iconic-tier musician, Cultural fame 134, recently promoted Tier 4 → 3 in C80) plays an unmiked three-song set in the back of the gallery; Brody Kale (CUL-905CBDE8 — local-tier KONO media influencer, fame 28) livestreams the gallery hop and lowers his phone during the second song. Pivot: first song misses, second song breaks the room open, third is a fait accompli. Ends with Brody on the sidewalk scrolling, deleting the talking parts, keeping the music.
+
+**Pipeline status (S188):** First /dispatch run end-to-end. Every step tested. Two parsers leaked silently when fed the dispatch shape — flagged below for engine-sheet repair.
+
+**What worked:**
+- Bench development — Kai Marston had 0 prior C92 bylines; the skill's "fewer recent bylines" rule routed correctly. His voice held: present-tense, sensory, scene-not-summary, ends-on-image.
+- Cultural-figure verification via `lookup_cultural` MCP tool. `lookup_citizen` returned empty for both Marin and Brody because the citizen lookup hits world-data citizen cards, which doesn't include cultural-only entities. Cultural lookup found them. Skill should make this branch explicit for arts/music/nightlife dispatches.
+- Brief structure with `<memory-context>` fence around recalled canon — held; reporter agent followed the brief without drift.
+- Format contract uniform: dispatch `.txt` follows the same masthead + 5-section shape as edition. Y2C40 math worked.
+- Editorial review pass on first generation; no revision pass needed.
+
+**Pipeline failures caught this cycle (S188 first /dispatch run):**
+
+1. **`ingestEditionWiki.js` extracted 0 entities from dispatch NAMES INDEX.** The script's APPLY mode ran without error but returned `Citizens found: 0, Returning: 0, New: 0` despite the NAMES INDEX clearly containing `POP-00537 | Marin Tao | Musician` and `CUL-905CBDE8 | Brody Kale | Media Influencer`. Hypothesis: the parser walks per-section structures (FRONT PAGE / CIVIC / SPORTS) and has no handler for the dispatch's flat single-body shape. Result: per-entity wiki records were NOT created in bay-tribune for this dispatch — only the full-text chunk made it (Step 1b succeeded). **Engine-sheet handoff:** `scripts/ingestEditionWiki.js` needs a `--type dispatch` (and `--type interview`, `--type supplemental`) code path that reads NAMES INDEX directly without requiring article-section anchors.
+
+2. **`ingestPublishedEntities.js` parsed 0 citizen rows from same NAMES INDEX.** Same diagnosis class. The dry-run-default-then-`--apply` pattern hid the failure as a false success — script reports "0 entities — pure-atmosphere artifact. Nothing to ingest." but the artifact has 2 named citizens. **Engine-sheet handoff:** parser does not handle the dispatch's NAMES INDEX shape; same fix shape as Finding 1.
+
+3. **`ingestEditionWiki.js` requires `--cycle` for dispatch but error message points to a "no fallback extraction" path that suggests the filename should suffice.** Filename `cycle_pulse_dispatch_92_kono_second_song.txt` carries cycle 92 in position 3, but the script doesn't extract it for non-edition types. Minor — adding `--cycle 92` resolved.
+
+4. **`/dispatch` skill Step 1 cites `lookup_citizen` for verification but cultural-only figures only resolve via `lookup_cultural`.** Brody Kale (no POPID) and Marin Tao (dual POPID + CULID) both first-attempted via `lookup_citizen` returned empty. Skill verbiage should add a one-liner: "For cultural-figure-named scenes (musicians, artists, influencers), first try `lookup_cultural`."
+
+5. **Marin Tao Sim_Ledger BirthYear column null.** Cultural Ledger fame is at 134 (iconic), 22 media mentions, active 16-92 — but no birth year. C79 introduction text noted age 75 in the life-event log. Brief instructed Kai to write around the number. **Engine-sheet handoff:** POP-00537 BirthYear backfill — set 1966 (or whatever year produces age 75 at the C79 introduction's effective year). Cultural figures with iconic-tier presence should have a verified birth year.
+
+6. **Brody Kale has no Simulation_Ledger row at all.** Cultural-only entity. NAMES INDEX format spec (`<POP-ID> | <Name> | <Role/Title>`) doesn't enumerate the cultural-only case. I used CUL-905CBDE8 in place of POP-ID — a one-line spec ambiguity. Format contract should explicitly say "use CUL-XXXXXXX when citizen has no POPID."
+
+7. **PDF parser reported "Sections: 8" on a single-body dispatch.** The `generate-edition-pdf.js` parser likely reads structural section headers (NAMES INDEX, CITIZEN USAGE LOG, BUSINESSES NAMED, ARTICLE TABLE, the four section delimiters) as visible content sections. PDF render completed and looks clean from the outside (98 KB), but worth a visual review to confirm tracking metadata didn't leak into the visible body. Editorial flag for the next dispatch run — review the PDF visually before approving the canonical Drive copy.
+
+8. **Photo step bailed clean for dispatch.** `/edition-print --type dispatch` photo path is T11-pending in `plans/2026-04-25-photo-pipeline-rebuild`. Used `--no-photos` flag on `generate-edition-pdf.js` and the pipeline produced text-only PDF. Working as designed — but until T11 lands, dispatch lacks visual identity in the canonical archive.
+
+9. **Step 5 (citizen+business intake) verification gate is brittle.** When the parser silently returns 0 rows on a real-NAMES-INDEX dispatch, the "verification gate" passes (output JSON written, no errors). The gate doesn't cross-check parsed-row-count against actual NAMES INDEX line count in the source `.txt`. Engine-sheet should add a sanity check: if NAMES INDEX has N rows and parser returns 0, fail loud.
+
+**Editorial calls captured for next cycle:**
+
+- **Marin Tao narrative arc** — She's now appeared in three editions (E80 Piedmont Ave, E83 KONO, this dispatch C92 KONO). Recurring iconic-tier musician. Sift should consider her for a proper supplemental or feature next cycle — three appearances over 12 cycles is enough to merit a profile.
+- **Brody Kale arc opener** — Local-tier influencer with stable trend at fame 28 across 4 mentions. Still ground-level. The "deleting his own narration to keep the song" beat reads as a small character pivot — worth carrying into the next First Friday cycle.
+- **First Friday two-piece coverage paradigm** — Maria Keen wrote the corridor (E92), Kai Marston wrote one room (this dispatch). The two-piece coverage of the same night at different scopes worked; sift can replicate this for high-traffic events (game-night editions, civic vote nights).
+
+**Next sift implication:** First /dispatch run validated the type-aware pipeline end-to-end on the publishing side; the ingest-side parsers are the bottleneck. Dispatches will be runnable but their per-entity canon contributions won't land until engine-sheet ships the NAMES INDEX parser fix.
 
 ### Edition 92 — Cycle Pulse (Grade: A — Maker override on Mags B-floor, Mara rehired same day, published 2026-04-22)
 

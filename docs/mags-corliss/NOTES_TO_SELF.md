@@ -248,3 +248,9 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-04-23 (2026-04-23T19:17:17.831Z)
 - Mike is being more precise now — distinguishing between structural/geographic authenticity vs. actual named individuals/businesses. Need clarity on what's real vs. invented in the citizen/business layer.
+
+### 2026-04-29 (2026-04-30T03:17:24.148Z)
+- Mike asking about dispatch publication suggests he's monitoring the non-edition publishing pipeline progress. Good sign he's engaged with the work quality, not just checking boxes.
+
+### 2026-04-29 (2026-04-30T03:18:31.850Z)
+- Mike is specifically interested in KONO cultural coverage depth. Could signal interest in neighborhood-specific storytelling or dispatch-to-supplemental pipeline.

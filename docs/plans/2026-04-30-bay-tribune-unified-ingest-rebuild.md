@@ -42,7 +42,7 @@ pointers:
   - `scripts/ingestPublishedEntities.js` — **NOT bay-tribune.** This writes engine canon to Sheets (Simulation_Ledger, Business_Ledger). Out of scope; mentioned for completeness so future readers don't conflate.
 
 **Acceptance criteria:**
-1. Tag taxonomy locked: 14 tags below, each carrying the `bay-tribune` companion tag.
+1. Tag taxonomy locked: 16 tags below (14 original + 2 added Task 1.2), each carrying the `bay-tribune` companion tag.
 2. customId scheme locked: every doc carries `customId = <slug>-<chunk-or-record-discriminator>`, deterministic and slug-derivable.
 3. `ingestEdition.js` writes dual-tag + customId for all 5 publish types.
 4. `ingestEditionWiki.js` migrated to `/v3/documents`, writes dual-tag + customId for all 5 wiki-record types.
@@ -72,12 +72,16 @@ pointers:
 | **Roster** | `['bay-tribune', 'bt-roster']` | `/save-to-bay-tribune` type=roster (existing) | `roster-c<XX>-<team>` |
 | **Game result** | `['bay-tribune', 'bt-game-result']` | `/save-to-bay-tribune` type=game-result (existing) | `game-c<XX>-<gameid>` |
 | **Canon correction** | `['bay-tribune', 'bt-canon-correction']` | `/save-to-bay-tribune` type=canon-correction (existing) | `correction-c<XX>-<slug>` |
+| **Archive essay** | `['bay-tribune', 'bt-archive-essay']` | manual ingest from `RICHMOND_ARCHIVE_INDEX` / `P_SLAYER_JOURNEY_INDEX` / `ANTHONY_RAINES_PORTFOLIO_INDEX` (no per-cycle anchor — these are timeless reference pieces) | `archive-<author-slug>-<piece-slug>` |
+| **Podcast transcript** | `['bay-tribune', 'bt-podcast-transcript']` | `/podcast` skill output (Person1/Person2 dialogue distinct from `bt-interview-transcript` Q&A shape) | `podcast-c<XX>-<episode-slug>` |
 
 **Why three wiki-citizen recordTypes share `bt-wiki-citizen`:** all three carry the same retrieval shape ("show me everything we know about Beverly Hayes from edition X"). Tag-level grouping lets a `search_canon --type bt-wiki-citizen` query pull all three subtypes; the `recordType` field in metadata still distinguishes them when needed. Storyline + continuity are functionally distinct retrieval surfaces — they get their own tags.
 
 **Why the `bt-` prefix:** matches the wd-rebuild precedent (`wd-citizens`, `wd-business`, etc.). Future top-level container collisions are avoided (a hypothetical future `dispatch` container is unambiguously different from the `bt-dispatch` sub-tag).
 
 **`bt-wiki-cultural` + `bt-wiki-business` are pre-allocated** even though no writer currently produces them. ingestEditionWiki currently only emits citizen / storyline / continuity records; cultural figures (Marin Tao, Brody Kale per S188 KONO dispatch) and businesses (named in body but engine-canon ingested separately) deserve their own wiki layer. Tag pre-allocation prevents future collision. Writer for those is a separate downstream task, not in this plan's scope.
+
+**`bt-archive-essay` + `bt-podcast-transcript` added post-Phase-1** (S189, Task 1.2 finding). The Phase 1 inventory surfaced 20 "unknown" docs the classifier couldn't slot — content-head inspection identified Hal Richmond historical essays ("Letters from the Golden Era", "Danny Horn: The Architecture of Confidence") and Person1/Person2 podcast transcripts ("Cycle Pulse Edition 90 (Full)") as the dominant shapes. These are real canon (Richmond Archive Index, Anthony Raines Portfolio Index, P Slayer Journey Index reference them; reporters cite them in editions) but predate the format contract. Two tags added so they can be dual-tagged + customId'd in the migration without forcing them through a misleading body-type tag.
 
 ---
 
@@ -177,6 +181,26 @@ Each task is 2–5 minutes of focused work where possible. Larger items are brok
   2. Confirm wipe-policy table per type. Record any surprise classifications (orphan content shapes, prompt-injection-shaped content, content from undocumented writers).
   3. Decide: are existing dual-tagged docs (if any) compatible with the new customId scheme, or do they need re-ingest? If a write predates this plan, it has `containerTags: ['bay-tribune']` (single tag) and no customId — those need re-ingest from source for full hygiene.
 - **Verify:** plan changelog entry added with classification counts.
+- **Status:** [x] DONE S189 (research-build). §Phase 1 findings appended below. Tag scheme amended: 2 new tags added (`bt-archive-essay`, `bt-podcast-transcript`) — total 16 tags. Phase 1.5 inserted: engine-sheet enumerates the remaining 15 unknown docs + builds disposition map per doc before retrofit batch fires. customId-reach forecast: 99% of substrate (173/175) needs re-ingest from canonical source to pick up the customId scheme; 2 docs already carry customId from `/save-to-bay-tribune` archive saves.
+
+### Phase 1.5 — Unknown disposition (engine-sheet)
+
+#### Task 1.5: Enumerate the 20 unknown + 2 published-other docs, build disposition map
+
+- **Files:**
+  - `scripts/auditBayTribuneUnknowns.js` (NEW, optional — could also be a one-off bash + jq invocation)
+  - this plan file (update — append a "Disposition map" subsection under §Phase 1 findings)
+- **Steps:**
+  1. The Phase 1 inventory sampled 5 of 20 unknown docs + 2 of 2 published-other docs. Engine-sheet enumerates the **remaining 15 unknown docs** by paginating `/v3/documents/list`, filtering for the unknown-class IDs from `output/bay_tribune_inventory.json`, GET each, capture title + content-head + customId.
+  2. For each unknown doc, classify into one of four disposition buckets (apply per-doc judgment, not regex):
+     - `archive-essay` — Hal Richmond / P Slayer / Anthony Raines historical pieces (byline + long-form prose). Tag: `bt-archive-essay`. customId: `archive-<author-slug>-<piece-slug>`.
+     - `podcast-transcript` — Person1/Person2 dialogue shape. Tag: `bt-podcast-transcript`. customId: `podcast-c<XX>-<episode-slug>`.
+     - `legacy-edition` — pre-format-contract editions (month-named masthead, no Y<n>C<m> anchor — like the 2 `bt-published-other` Edition 85 + Edition 89 docs). Tag: `bt-edition`. customId: `edition-c<XX>-part-<N>`. Migration path: re-ingest from canonical source if .txt exists; if no .txt exists (pre-format-contract), DELETE-and-re-write with the new tag + customId on the existing content.
+     - `canon-correction` — out-of-band canon notes (like "Edition 91 Canon Notes"). Tag: `bt-canon-correction`. customId: `correction-c<XX>-<slug>`.
+     - `delete-no-replacement` — junk / test / orphan content with no canonical source. DELETE in M1.
+  3. Append the disposition map to §Phase 1 findings as a per-doc table: `id | current-class | disposition | new-tag | new-customId | source-path-or-DELETE`.
+  4. Engine-sheet flags any doc that doesn't fit one of the 4 buckets back to research-build for tag-scheme amendment.
+- **Verify:** disposition map has one row per doc for all 20 unknown + 2 published-other = 22 docs. Sum of buckets = 22.
 - **Status:** [ ] not started
 
 ### Phase 2 — `ingestEdition.js` retrofit (engine-sheet)
@@ -278,7 +302,78 @@ Each task is 2–5 minutes of focused work where possible. Larger items are brok
 
 ## Phase 1 findings
 
-_To be filled by engine-sheet after Task 1.1 + 1.2._
+**Source:** `output/bay_tribune_inventory.json` (engine-sheet Task 1.1, commit `f47d412`, audited 2026-04-30T21:06Z). Two-pass enumeration (list-walk + GET-classify, concurrency=5), 175/175 fetched, 0 fetch failures, classSum verified.
+
+**Scope:** bay-tribune holds **175 docs** total — ~10% the size of world-data's 1,609 pre-S183. Substrate is small enough that the retrofit migration is a single bulk pass, not a per-cycle phased rollout.
+
+| Property | Value | Notes |
+|---|---|---|
+| Total bay-tribune docs | **175** | Out of 1,844 org-wide |
+| Dual-tagged today | **0** | Full 100% retrofit reach — no doc carries `bt-<type>` yet |
+| customId present today | **2** | Only `/save-to-bay-tribune` archive saves carry it. Script-driven ingest = 0 customIds. **99% of docs need re-ingest from canonical source to receive customId.** |
+| Oldest doc | 2026-03-22 | Earliest archive ingest |
+| Newest doc | 2026-04-30 | Today's E1 commit's wiki record landing |
+
+**Class distribution (engine-sheet classifier baseline):**
+
+| Class (current shape) | Count | Maps to (post-rebuild canonical tag) |
+|---|---|---|
+| `bt-wiki-appearance` | 109 | `bt-wiki-citizen` (per-citizen-per-edition appearance — dominant 62%) |
+| `unknown` | 20 | mixed — disposition map in Phase 1.5 |
+| `bt-supplemental` | 10 | `bt-supplemental` ✓ |
+| `bt-edition` | 7 | `bt-edition` ✓ |
+| `bt-wiki-storyline` | 7 | `bt-wiki-storyline` ✓ |
+| `bt-wiki-returning` | 6 | `bt-wiki-citizen` (recordType=citizen-returning subtype) |
+| `bt-wiki-continuity` | 5 | `bt-wiki-continuity` ✓ |
+| `bt-wiki-new` | 5 | `bt-wiki-citizen` (recordType=citizen-new subtype) |
+| `bt-published-other` | 2 | `bt-edition` (legacy editions: "Cycle Pulse Edition 85 / 89 Part 1" — pre-format-contract, month-named masthead) |
+| `bt-dispatch` | 1 | `bt-dispatch` ✓ — KONO Second Song |
+| `bt-edition-chunk` | 1 | `bt-edition` (Part 2 chunk caught by metadata-fallback) |
+| `bt-canon-interview-transcript` | 1 | `bt-interview-transcript` ✓ — Santana C92 |
+| `bt-canon-interview` | 1 | `bt-interview-article` ✓ — Santana C92 |
+
+**Three subtype consolidations under `bt-wiki-citizen`** (plan §Tag scheme already specifies this; no scheme change): the classifier-emitted `bt-wiki-appearance` (109) + `bt-wiki-returning` (6) + `bt-wiki-new` (5) = 120 docs all collapse to `bt-wiki-citizen` on retrofit, with the existing `recordType` metadata field discriminating subtypes when needed. Tag-level grouping enables single-query retrieval ("everything we know about Beverly Hayes from C92") without semantic loss.
+
+**Surprise classifications** (engine-sheet introduced 4 buckets the plan didn't pre-spec):
+- `bt-edition-chunk` — distinguishes Part 2 chunks from lead chunks via metadata-fallback. Re-ingest collapses to single `bt-edition` tag with `-part-N` customId.
+- `bt-canon-interview` + `bt-canon-interview-transcript` — `[CANON:interview-article:...]` wrapper from `/save-to-bay-tribune` matched a different signature than `ingestEdition.js` output. Re-ingest to canonical `bt-interview-article` / `bt-interview-transcript` tags.
+- `bt-published-other` — fallback bucket caught 2 pre-format-contract editions (Edition 85 + Edition 89 with month-named masthead). Migration path: re-ingest under `bt-edition` if canonical source `.txt` exists; otherwise re-tag in place.
+
+**20 unknown docs — sample inspection (5 of 20):**
+
+| ID | customId | Title | Content shape |
+|---|---|---|---|
+| `w2ELDNKn5DmF2qwQadfBZN` | `Q4gvw5j5AMJBM4YZF3cJ2Z` | Letters from the Golden Era... | Hal Richmond byline, long-form prose ("# Letters... By Hal Richmond \| Bay Tribune \| Spring 2040") — **archive essay** |
+| `KiAC9PRSoQS6uLXJkNm8jf` | `7S56FvHs983fJeyBq338Zi` | Danny Horn: The Architecture of Confidence | Hal Richmond byline, profile prose — **archive essay** |
+| `Fe5UBtnbJRVKRjeYqLo3v1` | null | Edition 91 Canon Notes: NBA Expansion... | "Edition 91 Canon Notes. NBA Expansion arc launched..." — **canon correction** (matches `bt-canon-correction` shape; classifier missed it) |
+| `YyCEb8QoTtn3hYHbjEuWYj` | null | Cycle Pulse Edition 91 (Part 2) | Storyline table chunk — **legacy edition** (Part 2 of E91 missed by chunked-edition classifier) |
+| `wBqjpuByrJddqYrricu1Rt` | null | Cycle Pulse Edition 90 (Full) | `<Person1>...<Person2>...` dialogue — **podcast transcript** |
+
+**Tag scheme amendment (this Task 1.2 deliverable):**
+
+Two new tags added to handle dominant unknown content shapes — see updated §Tag scheme table:
+
+- **`bt-archive-essay`** — Hal Richmond / P Slayer / Anthony Raines historical pieces. Real canon, predates format contract, cited by reporters via Richmond Archive Index + P Slayer Journey Index + Anthony Raines Portfolio Index. customId pattern: `archive-<author-slug>-<piece-slug>` (no cycle anchor — these are timeless reference pieces).
+- **`bt-podcast-transcript`** — Person1/Person2 podcast dialogue from `/podcast` skill output. Distinct from `bt-interview-transcript` (different conversational format, different production path). customId pattern: `podcast-c<XX>-<episode-slug>`.
+
+**Disposition map** (locked for sampled 5 + 2 published-other; remaining 15 deferred to Phase 1.5):
+
+| Disposition bucket | Count (estimated) | New tag | Migration path |
+|---|---|---|---|
+| archive-essay | ~10-12 (sampled 2 of unknown 20) | `bt-archive-essay` | bulk re-ingest from `RICHMOND_ARCHIVE_INDEX.md` + sibling indexes via Phase 1.5 disposition map |
+| podcast-transcript | ~3-5 (sampled 1) | `bt-podcast-transcript` | bulk re-ingest from `output/podcasts/` if files exist; otherwise re-write tag + customId on existing doc |
+| legacy-edition | 4 (2 published-other + 2 sampled-unknown chunks) | `bt-edition` | re-ingest from `editions/cycle_pulse_edition_<XX>.txt` if .txt exists; otherwise re-tag in place |
+| canon-correction | ~1-3 (sampled 1) | `bt-canon-correction` | re-tag in place (no canonical source for canon notes — they ARE the source) |
+| delete-no-replacement | 0 (target) | — | only if Phase 1.5 surfaces test/junk content |
+
+**Migration scope** (revised post-Phase 1):
+- **155 docs → retrofit-by-re-ingest** (109 wiki-appearance + 36 typed publishes / wiki-returning / wiki-new / wiki-storyline / wiki-continuity / dispatch / interview pair — all have canonical `.txt` sources)
+- **20 docs → manual disposition** (archive essays + canon notes + podcast transcripts + legacy editions — Phase 1.5 enumerates and decides per doc)
+- **0 docs → DELETE-without-replacement** (no test/junk surfaced in initial sample; revisit if Phase 1.5 finds any)
+
+**Acceptance-criteria #7 status:** Phase 1 inventory complete. Total = 175. Type-shape distribution = 13 classes. Orphan count = 20 unknown (deferred to Phase 1.5 disposition).
+
+**No re-ingest of dual-tagged docs needed** — there are zero dual-tagged docs today (acceptance-criteria #7 sub-point about pre-existing dual-tag compatibility resolves trivially). Every script-driven write goes from `['bay-tribune']` (single) to `['bay-tribune', 'bt-<type>']` (dual) on retrofit. The 2 customId-bearing docs are both `/save-to-bay-tribune` archive saves with random IDs, not the deterministic scheme — they get re-tagged in place but their existing customIds stay (or get migrated to the deterministic pattern if their content head provides enough info to derive — Phase 1.5 decides).
 
 ---
 
@@ -330,8 +425,9 @@ _To be filled by engine-sheet after Phase 6 completes. Mirrors the wd-rebuild §
 ## Phase order + handoff
 
 Engine-sheet executes in this order (each phase produces an artifact research-build can verify):
-1. Task 1.1 (inventory script + run) — establishes substrate.
-2. Task 1.2 (decision pass — research-build appends findings to this plan). Surprise classifications surface here, plan adjusts before writers ship.
+1. Task 1.1 (inventory script + run) — establishes substrate. **DONE S189** (commit `f47d412`).
+2. Task 1.2 (decision pass — research-build appends findings to this plan). Surprise classifications surface here, plan adjusts before writers ship. **DONE S189** (research-build, this section). 2 new tags added (`bt-archive-essay`, `bt-podcast-transcript`); Phase 1.5 inserted.
+2.5. Task 1.5 (engine-sheet — disposition map for the remaining 15 unknown docs). Closes the 22-doc edge case set (20 unknown + 2 published-other) before retrofit batch fires. Output: per-doc disposition map appended to §Phase 1 findings.
 3. Task R1 (`ingestEdition.js` retrofit) — proves the customId + tag-pair pattern on the chunked-body writer.
 4. Task R2 (`ingestEdition.js --wipe-old`) — same writer, replay capability.
 5. Task R3 (`ingestEditionWiki.js` migration) — port the legacy `/v4/memories` writer to the modern shape.
@@ -348,3 +444,4 @@ Research-build re-engages between steps if specs need revision (esp. after Phase
 ## Changelog
 
 - 2026-04-30 (S189, research-build) — Initial draft. Mirrors `[[plans/2026-04-27-world-data-unified-ingest-rebuild]]` pattern from S182-S183 (now-complete sibling). Tag scheme covers 14 types across body / wiki / canon-save layers. customId derivation function specified. Wipe primitive scripted as standalone tool. Validation fixture grounded in S188 KONO dispatch (the smallest end-to-end artifact in the corpus). Engine-sheet phase order locked: inventory → ingestEdition retrofit → ingestEditionWiki migration → wipe primitive → migration → MCP filter. Plan motivated by S185-S186 Perkins scrub friction (mags doc `WL8kvoxQgmcvxSPW3Ph47n`) — current chunked storage has no targeted-replacement primitive. After this rebuild, equivalent scrub = `wipeBayTribuneByCustomId <slug-prefix>` + re-ingest.
+- 2026-04-30 (S189, research-build, late) — Task 1.2 decision pass shipped. Phase 1 findings appended (175 docs / 0 dual-tagged / 2 customIds / 13 classifier buckets, 109 wiki-appearance dominant + 20 unknown edge cases). **Tag scheme amended: 14 → 16 tags** with 2 additions (`bt-archive-essay` for Hal Richmond / P Slayer / Anthony Raines historical pieces; `bt-podcast-transcript` for Person1/Person2 dialogue from `/podcast` skill output — distinct from `bt-interview-transcript` Q&A shape). Phase 1.5 inserted between Phase 1 and Phase 2: engine-sheet enumerates the remaining 15 unknown docs + 2 published-other (sample identified Hal Richmond essays, canon notes, legacy editions, podcast transcripts) and builds per-doc disposition map under 4 buckets (archive-essay / podcast-transcript / legacy-edition / canon-correction / delete-no-replacement) before retrofit batch fires. Acceptance-criteria #7 closes (Phase 1 inventory complete + orphan count = 20 unknown deferred to Phase 1.5). Migration scope revised: 155 retrofit-by-re-ingest + 20 manual disposition + 0 DELETE-without-replacement (target).

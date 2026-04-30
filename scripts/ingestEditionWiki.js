@@ -95,21 +95,33 @@ if (!API_KEY) {
 var text = fs.readFileSync(path.resolve(filePath), 'utf8');
 var filename = path.basename(filePath);
 
-// Cycle resolution: --cycle wins. Otherwise edition fallback to text/filename
-// regex; non-edition types must pass --cycle (their mastheads don't carry the
-// legacy "EDITION N" string and a stray digit elsewhere could mistag canon).
+// Cycle resolution: --cycle wins. Otherwise try the filename format-contract
+// pattern `cycle_pulse_<type>_<cycle>_<slug>.txt` (S180 T7 / EDITION_PIPELINE
+// §Filename contract — applies to dispatch / interview / supplemental).
+// Edition fallback to in-text "EDITION N" or any digit in filename last.
 var cycle = cycleFlag;
+var cycleSource = cycleFlag !== null ? '--cycle flag' : null;
 if (cycle === null) {
-  if (artifactType === 'edition') {
+  // Format-contract filename: cycle_pulse_<type>_<cycle>_<slug>.txt
+  var fnMatch = filename.match(/^cycle_pulse_\w+_(\d+)_.+\.txt$/);
+  if (fnMatch) {
+    cycle = parseInt(fnMatch[1], 10);
+    cycleSource = 'filename (format-contract)';
+  } else if (artifactType === 'edition') {
+    // Edition legacy fallbacks: in-text "EDITION N" or any digit in filename.
     var cm = text.match(/EDITION\s+(\d+)/i) || filename.match(/(\d+)/);
-    if (cm) cycle = parseInt(cm[1], 10);
+    if (cm) {
+      cycle = parseInt(cm[1], 10);
+      cycleSource = text.match(/EDITION\s+(\d+)/i) ? 'in-text masthead' : 'filename (legacy digit)';
+    }
   }
   if (!cycle) {
     console.error('[ERROR] --cycle is required for --type ' + artifactType +
-      ' (no fallback extraction for non-edition types).');
+      ' (filename did not match cycle_pulse_<type>_<cycle>_<slug>.txt pattern).');
     process.exit(1);
   }
 }
+console.log('[CYCLE] C' + cycle + ' (resolved from ' + cycleSource + ')');
 
 var typeLabel = titleCaseType(artifactType);
 var contentTagPrefix = '[TYPE: ' + artifactType + ' | C' + cycle + '] ';

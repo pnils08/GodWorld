@@ -16,8 +16,12 @@
  *   node scripts/postRunFiling.js 87 --upload     # auto-upload missing files
  *   node scripts/postRunFiling.js 87 --skip-drive  # skip Drive upload checks
  *
+ *   # Non-edition runs (dispatch / interview / supplemental):
+ *   node scripts/postRunFiling.js 92 --type dispatch --slug kono_second_song
+ *
  * Output:
- *   output/run_manifest_c{XX}.json — what exists, what's missing, what uploaded
+ *   output/run_manifest_c{XX}.json                  (edition)
+ *   output/run_manifest_<type>_c{XX}_<slug>.json    (non-edition)
  */
 
 const fs = require('fs');
@@ -103,34 +107,81 @@ function buildChecklist(cycle) {
   ];
 }
 
+// Non-edition checklists. Each type ships one canonical .txt + one PDF
+// keyed by slug, plus an optional photos directory (S188 non-edition photo
+// extension — may or may not be populated for any given run). No desk
+// outputs, no Mara audit, no voice statements, no desk packets — those are
+// edition-only artifacts. Drive upload integration deferred (S188 manual).
+function buildNonEditionChecklist(type, cycle, slug) {
+  return [
+    {
+      name: type[0].toUpperCase() + type.slice(1) + ' text',
+      path: `editions/cycle_pulse_${type}_${cycle}_${slug}.txt`,
+      dest: null,
+      required: true,
+    },
+    {
+      name: type[0].toUpperCase() + type.slice(1) + ' PDF',
+      path: `output/pdfs/bay_tribune_${type}_c${cycle}_${slug}.pdf`,
+      dest: null,
+      required: true,
+    },
+    {
+      name: type[0].toUpperCase() + type.slice(1) + ' photos',
+      path: `output/photos/${type}_c${cycle}_${slug}`,
+      type: 'directory',
+      dest: null,
+      required: false,  // photo step bails clean per /edition-print T11
+    },
+  ];
+}
+
+// ─── CLI flag helper ──────────────────────────────────────
+function readFlag(name) {
+  const i = process.argv.indexOf('--' + name);
+  if (i === -1 || i === process.argv.length - 1) return null;
+  const next = process.argv[i + 1];
+  if (next.startsWith('--')) return null;
+  return next;
+}
+
+const ALLOWED_TYPES = ['edition', 'dispatch', 'interview', 'supplemental'];
+
 // ─── Main ──────────────────────────────────────────────────
 function main() {
   const args = process.argv.slice(2).filter(a => !a.startsWith('--'));
   const autoUpload = process.argv.includes('--upload');
   const skipDrive = process.argv.includes('--skip-drive');
+  const typeFlag = readFlag('type') || 'edition';
+  const slugFlag = readFlag('slug');
 
   if (args.length === 0 || process.argv.includes('--help')) {
     console.log(`
 postRunFiling.js — Post-Run Filing Check & Upload
 
-Usage: node scripts/postRunFiling.js <cycle> [--upload] [--skip-drive]
+Usage:
+  node scripts/postRunFiling.js <cycle> [--upload] [--skip-drive]
+  node scripts/postRunFiling.js <cycle> --type <type> --slug <slug>
 
 Flags:
-  --upload      Auto-upload missing files to Drive
+  --type        edition (default) | dispatch | interview | supplemental
+  --slug        Required for non-edition types. Matches the canonical
+                .txt slug (e.g., kono_second_song for the C92 dispatch).
+  --upload      Auto-upload missing files to Drive (edition only)
   --skip-drive  Skip Drive upload checks (local only)
 
-Checks:
-  - Edition text file exists and is named correctly
-  - PDF generated
-  - Photos generated
-  - All 6 desk outputs present
-  - Mara audit packet generated and uploaded
-  - Mara canon audit received (optional)
-  - Voice statements present
-  - Desk packets and base context present
-  - Edition brief written
+Edition checks (default):
+  Edition .txt + PDF + photos, 6 desk outputs, Mara audit packet, Mara
+  canon audit (optional), voice statements (optional), desk packets +
+  base context.
 
-Output: output/run_manifest_c{XX}.json
+Non-edition checks (--type dispatch/interview/supplemental):
+  Canonical .txt + PDF + photos directory (optional). No desk outputs,
+  no Mara audit, no voice statements — those are edition-shaped only.
+
+Output:
+  output/run_manifest_c{XX}.json                 (edition)
+  output/run_manifest_<type>_c{XX}_<slug>.json   (non-edition)
     `);
     process.exit(0);
   }
@@ -141,9 +192,23 @@ Output: output/run_manifest_c{XX}.json
     process.exit(2);
   }
 
-  const checklist = buildChecklist(cycle);
+  if (!ALLOWED_TYPES.includes(typeFlag)) {
+    console.error(`ERROR: --type must be one of: ${ALLOWED_TYPES.join(', ')}`);
+    process.exit(2);
+  }
+  if (typeFlag !== 'edition' && !slugFlag) {
+    console.error(`ERROR: --slug is required for --type ${typeFlag}`);
+    process.exit(2);
+  }
 
-  console.log(`\nPOST-RUN FILING CHECK — Cycle ${cycle}`);
+  const checklist = typeFlag === 'edition'
+    ? buildChecklist(cycle)
+    : buildNonEditionChecklist(typeFlag, cycle, slugFlag);
+
+  const runLabel = typeFlag === 'edition'
+    ? `Cycle ${cycle}`
+    : `${typeFlag[0].toUpperCase() + typeFlag.slice(1)} C${cycle} / ${slugFlag}`;
+  console.log(`\nPOST-RUN FILING CHECK — ${runLabel}`);
   console.log('═'.repeat(50));
 
   const results = [];
@@ -222,6 +287,8 @@ Output: output/run_manifest_c{XX}.json
   // ─── Manifest ───
   const manifest = {
     cycle,
+    type: typeFlag,
+    slug: slugFlag,
     checkedAt: new Date().toISOString(),
     summary: {
       total: results.length,
@@ -233,7 +300,10 @@ Output: output/run_manifest_c{XX}.json
     uploads: needsUpload,
   };
 
-  const manifestPath = path.join(ROOT, `output/run_manifest_c${cycle}.json`);
+  const manifestRel = typeFlag === 'edition'
+    ? `output/run_manifest_c${cycle}.json`
+    : `output/run_manifest_${typeFlag}_c${cycle}_${slugFlag}.json`;
+  const manifestPath = path.join(ROOT, manifestRel);
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
 
   // ─── Summary ───
@@ -250,7 +320,7 @@ Output: output/run_manifest_c{XX}.json
     console.log(`  node scripts/postRunFiling.js ${cycle} --upload`);
   }
 
-  console.log(`\nManifest: output/run_manifest_c${cycle}.json`);
+  console.log(`\nManifest: ${manifestRel}`);
 
   // ─── Auto-rebuild article index ───
   // Keeps dashboard search current after every edition

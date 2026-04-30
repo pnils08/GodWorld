@@ -243,6 +243,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 ## `docs/comparisons/` — side-by-side evaluations (new S156, Phase 41.3)
 
 - **[[comparisons/README|README]]** — what goes here: tool/model/approach comparisons that outlive the decision. DeepSeek vs Claude, packet vs summary, Sandcastle+Daytona vs Managed Agents. *(reference, architecture, research, active)*
+- **[[comparisons/2026-04-30-smfs-vs-bay-tribune-rebuild]]** — S189 eval. Supermemory released SMFS (Supermemory Filesystem) v0.0.1 on 2026-04-29 — POSIX filesystem layer over existing containers via FUSE/NFSv3, semantic grep, 30s sync. If pilot succeeds, Phase 2-7 of `[[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]]` collapse to file ops; 16-tag taxonomy maps 1:1 to directory structure. Mags-first pilot proposed (smallest blast radius, editorial brain, tolerates 30s sync). Bay-tribune rebuild plan placed on HOLD pending pilot outcome. *(comparison, architecture, infrastructure, research, active)*
 
 ---
 
@@ -261,7 +262,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 ## Changelog
 
-- 2026-04-30 (S189, research-build) — `/md-audit` skill Phase 1+2 shipped. Plan-entry status updated to `(plan, architecture, partial)`. Registered new `[[plans/2026-04-30-dispatch-gap-followups]]` (S188 11-gap roll-up structured into plan form) + `[[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]]` (S189 sibling to S183 wd-rebuild — 14-tag taxonomy + customId-as-slug + DELETE-by-customId wipe primitive). No structural changes to the index itself.
+- 2026-04-30 (S189, research-build) — `/md-audit` skill Phase 1+2 shipped. Plan-entry status updated to `(plan, architecture, partial)`. Registered new `[[plans/2026-04-30-dispatch-gap-followups]]` (S188 11-gap roll-up structured into plan form) + `[[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]]` (S189 sibling to S183 wd-rebuild — 14-tag taxonomy + customId-as-slug + DELETE-by-customId wipe primitive). End of session: SMFS released by Supermemory same day → registered `[[comparisons/2026-04-30-smfs-vs-bay-tribune-rebuild]]` eval doc + bay-tribune-rebuild plan flagged HOLD. No structural changes to the index itself.
 - 2026-04-29 (S187, research-build) — Added Repo root section catalogueing root-level `CONTEXT.md`, `CLAUDE.md`, and `MEMORY.md`. Added `docs/adr/` folder section with ADR-0001 (adoption of CONTEXT.md and the ADR pattern itself). Pattern source: `mattpocock/skills` MIT.
 - 2026-04-21 (S170, research-build) — Registered [[plans/2026-04-21-memento-cbr-case-bank]] (Memento paper) and [[plans/2026-04-21-md-audit-skill]] (existence-staleness audit, triggered by Autogenesis paper + Mike's retirement-protocol observation). Phase 1 of the Memento plan adds `docs/concepts/case-based-reasoning.md` which registers separately when created. Also registered two outside AI review PDFs: `docs/research/godworld_review_2026-04-20.pdf` (shallow surface review; actionable residue = bounded test surface LOW rollout item) and `docs/research/godworld_city_functions_analysis_2026-04-20.pdf` (gap analysis; serves as wiki reference for Phase 43 — Engine Expansion).
 - 2026-04-14 — Initial catalog (Phase 41.2, S146). 86 active docs across 7 folders. Companion to [[SCHEMA]]. Will fold [[engine/DOCUMENTATION_LEDGER]] in over time.

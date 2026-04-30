@@ -98,7 +98,7 @@ Each task self-contained. Execute in order shown unless engine-sheet flags a dep
   2. Likely shares parser library or logic with E1 — fix together if so.
   3. Cultural-only entities (CUL- prefix) should NOT trigger `Simulation_Ledger` append (they're not Sim_Ledger citizens). Either skip the SL append for CUL- rows OR route them to a parallel `wd-cultural` write path. Decide based on what `wd-cultural` ingest currently does (see Task E4).
 - **Verify:** Re-run on fixture. Expect 2 entities surfaced; only POP- entities considered for SL append (Marin Tao would already exist as POP-00537, so 0 new SL rows expected; Brody Kale is CUL-only so skipped from SL).
-- **Status:** [ ] not started
+- **Status:** [x] DONE S189 (engine-sheet, commit `15e7f3e`). `parseNamesIndex` reshaped to accept three row shapes: T1 strict bullet (`- POP-NNNNN | Name | Role`), T1 strict flat (`POP-NNNNN | Name | Role` — dispatch shape, no leading bullet), pre-T1 freeform (em-dash). Strict-form regex extended `^POP-\d+\s*\|` → `^([A-Z]+)-([A-Z0-9]+)\s*\|` per [[EDITION_PIPELINE]] §Per-section content spec, capturing prefix on parsed entries. `resolveCitizens` routes POP- entries through Sim_Ledger match/append; non-POP entries (CUL-/BIZ-/FAITH-) collect in a new `culturalOnly` bucket — logged in console summary + JSON output, NOT appended to Simulation_Ledger. Resolves the open-question call: cultural-only entities live in `wd-cultural` (E6 buildCulturalCards in /post-publish refreshes them), not Sim_Ledger. Bare-name fallback restricted to bullet-prefixed lines to avoid flat-body noise. Fail-loud guard added: NAMES INDEX section with non-empty content lines but parser produced 0 citizens → exit 1 with diagnostic. Smoke test KONO dispatch: 2 citizens parsed (1 matched POP-00537, 1 cultural CUL-905CBDE8), 0 candidates. E92 regression: 8 citizens parsed (all matched), 0 cultural, 0 candidates. **Live `--apply` run pending Mike approval gate.**
 
 #### Task E3: `ingestEditionWiki.js` filename-fallback `--cycle` extraction
 
@@ -108,7 +108,7 @@ Each task self-contained. Execute in order shown unless engine-sheet flags a dep
   2. Add filename-fallback parser: if `--cycle` not supplied, parse from filename pattern `cycle_pulse_<type>_<cycle>_<slug>.txt` (the format-contract pattern from [[EDITION_PIPELINE]]). Pattern: `^cycle_pulse_(\w+)_(\d+)_.+\.txt$` → group 2 is cycle.
   3. Print resolved cycle in startup log so failures are debuggable.
 - **Verify:** `node scripts/ingestEditionWiki.js editions/cycle_pulse_dispatch_92_kono_second_song.txt` (no `--cycle` flag) succeeds with logged "cycle: 92 (resolved from filename)".
-- **Status:** [ ] not started
+- **Status:** [x] DONE S189 (engine-sheet, commit `e9b0d37`). Cycle resolver tries the format-contract filename pattern `^cycle_pulse_\w+_(\d+)_.+\.txt$` first for any type, falls back to in-text "EDITION N" / loose digit only for editions. New `[CYCLE]` startup log line names the resolution source — `--cycle flag`, `filename (format-contract)`, `in-text masthead`, or `filename (legacy digit)` — for debuggability. Smoke tests: dispatch without `--cycle` resolves C92 from filename and runs clean; E92 default behavior resolves C92 from in-text masthead unchanged.
 
 #### Task E4: `postRunFiling.js` `--type` flag for non-edition runs
 
@@ -119,7 +119,7 @@ Each task self-contained. Execute in order shown unless engine-sheet flags a dep
   3. Dispatch-specific expected set: `editions/cycle_pulse_dispatch_<XX>_<slug>.txt` + corresponding PDF + Drive upload pointers + bay-tribune doc IDs. Skip: edition.txt, sift_proposals, capability/cycle/Mara reviewer JSONs, podcast.
   4. Default behavior (no `--type`) stays edition-shape for backwards compatibility.
 - **Verify:** `node scripts/postRunFiling.js --type dispatch --cycle 92` reports 0 false-MISSING.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S189 (engine-sheet, commit `6c2f45a`). New `--type {edition|dispatch|interview|supplemental}` flag (default edition, backwards-compatible) + `--slug` flag (required for non-edition). `buildNonEditionChecklist(type, cycle, slug)` ships the minimal expected set per [[EDITION_PIPELINE]] §Filename contract: canonical `.txt` (required), PDF (required), photos directory (optional — photo step bails clean per /edition-print T11). No desk outputs, no Mara audit, no voice statements, no desk packets — those stay edition-shape. Manifest path is type-aware: `output/run_manifest_c<cycle>.json` (edition) vs `output/run_manifest_<type>_c<cycle>_<slug>.json` (non-edition); manifest body carries `type` + `slug` fields for downstream consumers. --help text updated. Smoke test KONO dispatch: 2 required files OK, 1 optional pending (photos), 0 missing — was 7 false-MISSING in S188. E92 default behavior preserved.
 
 #### Task E5a: PDF render — NAMES INDEX row collapse
 

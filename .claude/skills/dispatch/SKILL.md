@@ -1,8 +1,8 @@
 ---
 name: dispatch
 description: Immersive scene piece — one reporter, one location, one moment. Editions report, supplementals explain, dispatches immerse.
-version: "1.1"
-updated: 2026-04-26
+version: "1.2"
+updated: 2026-04-30
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -39,7 +39,7 @@ The difference: "The bar erupted when Horn's ball cleared the fence" is reportin
 - **One location only.** Name it. Ground it. The reader can smell it.
 - **One moment only.** Not "a day at the cafe." A specific 20 minutes.
 - **Present tense energy.** Even if written in past tense, it reads like you're there now.
-- **Citizen verification via MCP.** `lookup_citizen(name)` for citizens, `get_roster("as")` for A's players. For business / faith-org / cultural-figure context when the dispatch touches those domains, use `lookup_business` / `lookup_faith_org` / `lookup_cultural` (returns the structured wd-domain card). Full tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix. Read `docs/media/citizen_selection.md` for full criteria. No exceptions.
+- **Citizen verification via MCP.** `lookup_citizen(name)` for citizens, `get_roster("as")` for A's players. **Cultural-only entities (musicians, artists, public figures registered as cultural-tier without a Sim_Ledger row) return EMPTY from `lookup_citizen` — fall through to `lookup_cultural(name)` to retrieve the wd-cultural card with `CUL-XXXXXXX` identifier.** This is the verification path that landed Marin Tao + Brody Kale in S188's KONO Second Song dispatch. For business / faith-org context when the dispatch touches those domains, use `lookup_business` / `lookup_faith_org`. Full tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix. Read `docs/media/citizen_selection.md` for full criteria. No exceptions.
 - **Read the brief, don't exhaust it.** The brief lists citizens available in the scene. The dispatch uses only the ones that serve the moment — usually 2-3, not all of them. Don't turn a dispatch into a roll call. Some citizens in the brief are there for color; some don't make the final piece.
 - **Follow brief template for structure.** `docs/media/brief_template.md` — dispatch briefs are different from article briefs but citizen handling, canon rules, and verification standards are the same.
 - **World summary is your context.** Read `output/world_summary_c{XX}.md` — weather, mood, what's happening in the city. The dispatch lives in the same world as the edition.
@@ -67,7 +67,7 @@ Match the reporter to the scene's emotional register. Dispatches develop the ben
 
 ## Step 0: Scene Concept
 
-If the user provided a scene description, use it. If not, propose 2-3 scene concepts based on:
+If the user provided a scene description (via `/dispatch [scene]` or the `--scene` arg), use it directly and skip to Step 1. If not, propose 2-3 scene concepts based on:
 - Current cycle storylines (read `output/world_summary_c{XX}.md`)
 - Active story arcs
 - Locations that haven't been featured
@@ -80,6 +80,8 @@ Present to the user:
 - **Mood:** What the scene feels like
 
 **Wait for user approval before proceeding.**
+
+> **Auto-resolve evaluation (S189):** an alternate flow would auto-pick the highest-bench-fit scene from `sift_proposals.json` + engine_review without an editorial gate, with `--scene "X"` as override. Decision: keep the manual approval gate. Editorial control over which moment the city inhabits is the dispatch's whole point — Mags' judgment beats algorithmic ranking on scene selection. Auto-propose (current behavior) preserves the gate while still surfacing 2-3 candidates the skill ranked. Revisit only if the manual gate becomes a bottleneck during a multi-dispatch cycle.
 
 ---
 

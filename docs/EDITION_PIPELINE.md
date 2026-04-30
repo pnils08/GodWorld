@@ -1,6 +1,6 @@
 # Edition Production Pipeline v2
 
-**Redesigned S133. S144 added sift/post-publish/reviewer chain. S148 shipped Phase 39 reviewer lanes + Final Arbiter. S165 added dispatch/interview alternate starts. S170 refresh to match shipped skills.** Skills are the source of truth. This doc is the map. When they disagree, the skills win.
+**Redesigned S133. S144 added sift/post-publish/reviewer chain. S148 shipped Phase 39 reviewer lanes + Final Arbiter. S165 added dispatch/interview alternate starts. S170 refresh to match shipped skills. S189 added cultural-only `CUL-` ID enumeration to NAMES INDEX + CITIZEN USAGE LOG format spec.** Skills are the source of truth. This doc is the map. When they disagree, the skills win.
 
 ---
 
@@ -110,10 +110,12 @@ ARTICLE TABLE
 
 | Section | Row format | Inclusion rule |
 |---|---|---|
-| **NAMES INDEX** | `<POP-ID> \| <Name> \| <Role/Title>` | Citizens explicitly named in body |
-| **CITIZEN USAGE LOG** | `<POP-ID> \| <mention count> \| <quoted? Y/N>` | Any citizen explicitly named (1+ mention) |
+| **NAMES INDEX** | `<ID> \| <Name> \| <Role/Title>` — `<ID>` is `POP-XXXXX` for Sim_Ledger citizens, `CUL-XXXXXXX` for cultural-only entities (musicians, artists, public figures registered in `wd-cultural` without a Sim_Ledger row). One row per entity. **One entity per line — never concatenate two rows.** | All explicitly named entities — citizens AND cultural-only figures |
+| **CITIZEN USAGE LOG** | `<ID> \| <mention count> \| <quoted? Y/N>` — same `<ID>` rule (POP- or CUL-). One row per entity. | Any named entity (1+ mention) |
 | **BUSINESSES NAMED** | `<BIZ-ID or NEW> \| <Name> \| <Sector> \| <Neighborhood>` | Any business explicitly named in body |
 | **ARTICLE TABLE** | `<slug> \| <reporter> \| <section> \| <word count>` | Multi-row for edition; single-row for interview/supplemental/dispatch |
+
+**ID convention (S188):** Cultural-only entities surfaced via `lookup_cultural` carry a `CUL-XXXXXXX` identifier from `wd-cultural`. They appear in NAMES INDEX and CITIZEN USAGE LOG using that ID, NOT a placeholder POP-ID. Example from S188 KONO Second Song dispatch: `POP-00537 | Marin Tao | Musician` and `CUL-905CBDE8 | Brody Kale | Media Influencer`. Ingest scripts must accept both prefixes; rejecting CUL- rows silently is a parser bug (S188 gap #4 + #5).
 
 **BUSINESSES NAMED maps to Business_Ledger columns A–D** (BIZ_ID, Name, Sector, Neighborhood). E–I (Employee_Count, Avg_Salary, Annual_Revenue, Growth_Rate, Key_Personnel) left for the engine to populate. New businesses (no existing BIZ_ID) marked `NEW` for ingest pickup.
 

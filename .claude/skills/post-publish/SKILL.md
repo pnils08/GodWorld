@@ -1,8 +1,8 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.3"
-updated: 2026-04-28
+version: "1.4"
+updated: 2026-04-30
 tags: [media, active]
 effort: high
 argument-hint: "[--type edition|interview|supplemental|dispatch] [--cycle XX] [--source <path>]"
@@ -39,6 +39,7 @@ Flags:
 | 1a wiki ingest | ✓ | ✓ | ✓ | ✓ |
 | 1b text ingest | ✓ | ✓ (article + transcript) | ✓ | ✓ |
 | 2a citizen cards | ✓ | ✓ | ✓ | ✓ |
+| 2a-cul cultural cards | — | ✓ (when CUL-IDs present) | ✓ (when CUL-IDs present) | ✓ (when CUL-IDs present) |
 | 2b new businesses | ✓ | ✓ | ✓ | ✓ |
 | 2c world summary | ✓ | — | — | — |
 | 3 civic wiki | ✓ (when built) | — | — | — |
@@ -106,6 +107,19 @@ Citizens who appeared get updated profiles in world-data. New citizens get cards
 
 **Verification gate:** stdout reports refreshed/created card count ≥ 1 when NAMES INDEX is non-empty. If NAMES INDEX is empty (some dispatches), gate is met by stdout "0 citizens to refresh — empty NAMES INDEX."
 
+**2a-cul. Refresh cultural cards** (`--type {dispatch|interview|supplemental}` — only when NAMES INDEX contains CUL-IDs)
+
+```bash
+# For each CUL-XXXXXXX entry parsed from <source> NAMES INDEX:
+node scripts/buildCulturalCards.js --apply --cul <CUL-ID>
+```
+
+`buildCitizenCards.js` is Sim_Ledger-only — it cannot refresh cultural-only entities (musicians, artists, public figures registered in `wd-cultural` without a Sim_Ledger row). When the artifact's NAMES INDEX names cultural figures (e.g., S188 KONO Second Song dispatch named Marin Tao POP-00537 + Brody Kale CUL-905CBDE8), this substep refreshes their `wd-cultural` cards so the appearance count increments. Citizens with both POP- and CUL- IDs (Beverly Hayes is both citizen AND cultural figure) get both cards refreshed — Step 2a handles the citizen card via POPID; this substep handles the cultural card via CUL-ID.
+
+Skipped for `--type edition` by default — edition NAMES INDEX entries are typically Sim_Ledger citizens with established cards. If a future edition surfaces CUL-only entries, the substep activates the same way (matrix flip + run).
+
+**Verification gate:** for each CUL-ID in source NAMES INDEX, `lookup_cultural(name)` returns a card with `last_appeared` reflecting this cycle. If no CUL-IDs in NAMES INDEX, substep skipped with stdout "0 cultural-only entries — substep N/A this artifact." Plan reference: [[../../../docs/plans/2026-04-30-dispatch-gap-followups]] Task E6 (closes the Brody Kale unrefreshed gap from S188).
+
 **2b. New businesses**
 Flagged here for visibility; actual writes happen in Step 5 via `ingestPublishedEntities.js` (which reads BUSINESSES NAMED and appends new entries to Business_Ledger).
 
@@ -156,7 +170,21 @@ Handles two NAMES INDEX formats: T1 strict (`POP-NNNNN | Name | Role`) and pre-T
 
 Default mode is `--dry-run`; pass `--apply` to write. Output: `output/intake_published_entities_c<XX>_<slug>.json` with full resolution detail (matched / candidates / ambiguous / phantom / appended).
 
-**Verification gate:** `output/intake_published_entities_c<XX>_<slug>.json` written; if `--apply`, `appended` arrays show all rows verified-by-readback (`ok: true`).
+**Verification gate (defense-in-depth, S189 dispatch gap E8):** after `ingestPublishedEntities.js` finishes, cross-check its parsed entity count against the source `.txt` directly:
+
+```bash
+node scripts/verifyNamesIndexParse.js <source> --expected <N>
+```
+
+Where `<N>` = the entity count `ingestPublishedEntities.js` reported (sum of NAMES INDEX rows it parsed — `matched + candidates + ambiguous + phantom + appended`). The helper independently counts NAMES INDEX rows in the source `.txt` (lines between `NAMES INDEX` header and the next section terminator). Exit code 0 = counts match; exit code 1 = mismatch (FAIL LOUDLY, block publish).
+
+**Why this gate exists:** S188 KONO Second Song dispatch run had `ingestEditionWiki.js` + `ingestPublishedEntities.js` both silently return 0 entities despite valid POP-00537 + CUL-905CBDE8 NAMES INDEX rows (false "pure-atmosphere artifact" success). Engine-sheet's E1+E2 fixed the parsers; this gate prevents future parser regressions from re-introducing silent data loss. Plan reference: [[../../../docs/plans/2026-04-30-dispatch-gap-followups]] Task E8.
+
+**Combined gate:**
+1. `output/intake_published_entities_c<XX>_<slug>.json` written; if `--apply`, `appended` arrays show all rows verified-by-readback (`ok: true`).
+2. `verifyNamesIndexParse.js --expected <N>` exits 0 (source NAMES INDEX row count matches parser-reported count).
+
+If gate 2 fails, do NOT proceed to Step 6+. Investigate the parser regression before continuing — silent zero-entity ingest poisons bay-tribune retrieval.
 
 ### Step 5b: Refresh `base_context.json` + desk packets (all types)
 ```bash
@@ -301,6 +329,7 @@ Per-type checklist applicability follows the matrix in §Usage. Edition runs all
 - [ ] Wiki ingest complete (entity count)
 - [ ] Text ingested (doc IDs — two for interview)
 - [ ] Citizen cards refreshed
+- [ ] Cultural cards refreshed (non-edition + CUL-IDs in NAMES INDEX)
 - [ ] World summary ingested (edition only)
 - [ ] Civic wiki ingested (NOT BUILT — skip)
 - [ ] Coverage ratings written (edition) OR C93-gated skip noted (non-edition)
@@ -340,3 +369,4 @@ After `/write-edition` (edition path) or after `/interview`, `/dispatch`, `/writ
 
 - 2026-04-17 — Initial 13-step skill (S156, post-publish formalized).
 - 2026-04-26 — v1.1 (S180, research-build). Type-aware: `--type {edition|interview|supplemental|dispatch}` flag added. Per-type substep matrix encodes default skips; `--skip-<name>` required only for matrix-✓ opt-outs. Verification gate declared on every substep. Coverage ratings (Step 4) explicitly C93-gated for non-edition. Convergence point for the unified non-edition publishing pipeline (plan [[plans/2026-04-26-non-edition-publishing-pipeline]] T3).
+- 2026-04-30 — v1.4 (S189, research-build). Wired E6 + E8 from [[plans/2026-04-30-dispatch-gap-followups]]. **Step 2a-cul cultural-card refresh** (matrix-✓ for dispatch / interview / supplemental when CUL-IDs in NAMES INDEX): `buildCitizenCards.js` is Sim_Ledger-only, so cultural-only entities (Marin Tao type, Brody Kale type) need a parallel `buildCulturalCards.js --apply --cul <CUL-ID>` invocation per CUL-ID parsed from NAMES INDEX. Closes the S188 Brody Kale unrefreshed gap. **Step 5 verification gate cross-check**: after `ingestPublishedEntities.js` reports its parsed entity count, run `verifyNamesIndexParse.js <source> --expected <N>` to independently count NAMES INDEX rows in the source `.txt` — exit 1 (block publish) if counts disagree. Defense-in-depth against future parser regressions reintroducing the S188 silent-zero false-success failure mode. Step 13 checklist + Step 12 production-log section both gain the new substep row.

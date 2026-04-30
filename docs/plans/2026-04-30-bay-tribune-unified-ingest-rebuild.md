@@ -201,7 +201,7 @@ Each task is 2–5 minutes of focused work where possible. Larger items are brok
   3. Append the disposition map to §Phase 1 findings as a per-doc table: `id | current-class | disposition | new-tag | new-customId | source-path-or-DELETE`.
   4. Engine-sheet flags any doc that doesn't fit one of the 4 buckets back to research-build for tag-scheme amendment.
 - **Verify:** disposition map has one row per doc for all 20 unknown + 2 published-other = 22 docs. Sum of buckets = 22.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S189 (engine-sheet). Helper script shipped at `scripts/auditBayTribuneUnknowns.js` (read-only, full-content GET pass over the same 175-doc bay-tribune corpus, filters to `unknown` + `bt-published-other`, captures up to 8KB content head per doc to support per-doc judgment). Output: `output/bay_tribune_unknowns.json` (gitignored). Per-doc disposition map appended to §Phase 1 findings above as "Phase 1.5 per-doc disposition map" subsection — 22 rows, sum = 22 ✓. Bucket totals: 15 legacy-edition + 2 archive-essay + 1 podcast-transcript + 1 canon-correction + 2 delete-no-replacement + 1 FLAGGED legacy-roster. Source existence verified for all 15 legacy-edition rows: `editions/cycle_pulse_edition_<83..91>.txt` all present locally — every M1 re-ingest path is live. **One flag back to research-build:** A's roster doc (`goTKuE7oj8mcWVZMEqBXaX`) doesn't fit Task 1.5's 4 enumerated buckets but maps cleanly to the existing `bt-roster` canonical tag — recommend Task 1.5 step 2 add `legacy-roster` as the 5th disposition bucket (workflow: re-tag in place, customId from "Generated:" date → cycle anchor). One contamination spotted: `3cVPsFy7BkzjPDhapyFYmf` is a meta-rule about the fiction's prosperity framing — explicit fourth-wall contamination per `/save-to-bay-tribune` skill rules, hard DELETE in M1.
 
 ### Phase 2 — `ingestEdition.js` retrofit (engine-sheet)
 
@@ -374,6 +374,58 @@ Two new tags added to handle dominant unknown content shapes — see updated §T
 **Acceptance-criteria #7 status:** Phase 1 inventory complete. Total = 175. Type-shape distribution = 13 classes. Orphan count = 20 unknown (deferred to Phase 1.5 disposition).
 
 **No re-ingest of dual-tagged docs needed** — there are zero dual-tagged docs today (acceptance-criteria #7 sub-point about pre-existing dual-tag compatibility resolves trivially). Every script-driven write goes from `['bay-tribune']` (single) to `['bay-tribune', 'bt-<type>']` (dual) on retrofit. The 2 customId-bearing docs are both `/save-to-bay-tribune` archive saves with random IDs, not the deterministic scheme — they get re-tagged in place but their existing customIds stay (or get migrated to the deterministic pattern if their content head provides enough info to derive — Phase 1.5 decides).
+
+---
+
+### Phase 1.5 per-doc disposition map (engine-sheet, Task 1.5 deliverable)
+
+**Source:** `output/bay_tribune_unknowns.json` (engine-sheet, 2026-04-30, full-content GET pass via `scripts/auditBayTribuneUnknowns.js`). 22 docs captured: 20 unknown + 2 published-other.
+
+**Disposition counts (final, locked):**
+
+| Bucket | Count | Tag | Notes |
+|---|---|---|---|
+| `legacy-edition` | 15 | `bt-edition` | 13 unknowns + 2 published-other; all chunked-edition body content where Part 2/Part 3 lost the masthead. M1 re-ingest from canonical `editions/cycle_pulse_edition_<XX>.txt` collapses them under `edition-c<XX>-part-<N>` discriminators. |
+| `archive-essay` | 2 | `bt-archive-essay` | Hal Richmond historical pieces — re-tag in place, no source-file cleanup needed. |
+| `podcast-transcript` | 1 | `bt-podcast-transcript` | Mis-titled as "Cycle Pulse Edition 90 (Full)" but content is `<Person1>/<Person2>` dialogue. M1 re-ingest from `output/podcasts/` if file exists; otherwise re-tag + correct title in place. |
+| `canon-correction` | 1 | `bt-canon-correction` | "Edition 91 Canon Notes: NBA Expansion..." — re-tag in place, no source. |
+| `delete-no-replacement` | 2 | — | 1 fourth-wall contamination + 1 empty stub. **Both DELETE in M1** without replacement. |
+| `legacy-roster` (FLAGGED) | 1 | `bt-roster` | A's roster doc — taxonomy already has `bt-roster` slot, but Task 1.5's bucket list didn't enumerate `legacy-roster` as a disposition. Engine-sheet flags back to research-build for explicit bucket addition; suggested customId `roster-as-of-c<XX>` per existing canonical scheme. **Sum still 22 with this row counted.** |
+
+**22 = 15 + 2 + 1 + 1 + 2 + 1 ✓**
+
+**Per-doc table:**
+
+| ID | Current class | Disposition | New tag | New customId | Migration path |
+|---|---|---|---|---|---|
+| `Ssa8cuBKSkpexmcaqGrwTQ` | bt-published-other | legacy-edition | `bt-edition` | `edition-c89-part-1` | M1 re-ingest from `editions/cycle_pulse_edition_89.txt` |
+| `8HWBJuMQG5pppe7UAPDi9r` | bt-published-other | legacy-edition | `bt-edition` | `edition-c85-part-1` | M1 re-ingest from `editions/cycle_pulse_edition_85.txt` |
+| `MCngoaXpU6PhQheGL8dLYt` | unknown | legacy-edition | `bt-edition` | `edition-c89-part-2` | M1 re-ingest from `editions/cycle_pulse_edition_89.txt` |
+| `KXFHtJiXoJYFCmxZGPBKKx` | unknown | legacy-edition | `bt-edition` | `edition-c88-part-2` | M1 re-ingest from `editions/cycle_pulse_edition_88.txt` |
+| `mLj8Jkz35EhirScusSyJta` | unknown | legacy-edition | `bt-edition` | `edition-c90-part-2` | M1 re-ingest from `editions/cycle_pulse_edition_90.txt` |
+| `ka951ZLmJiUcTJmozcNWSu` | unknown | legacy-edition | `bt-edition` | `edition-c83-part-2` | M1 re-ingest from `editions/cycle_pulse_edition_83.txt` |
+| `UWk16J6Qrr8nuir7QVoSUz` | unknown | legacy-edition | `bt-edition` | `edition-c83-part-3` | M1 re-ingest from `editions/cycle_pulse_edition_83.txt` |
+| `RarzMBLu7JyBtdMmnMTCHU` | unknown | legacy-edition | `bt-edition` | `edition-c84-part-2` | M1 re-ingest from `editions/cycle_pulse_edition_84.txt` |
+| `FV31L88RMyGwXevHm9SJF1` | unknown | legacy-edition | `bt-edition` | `edition-c84-part-3` | M1 re-ingest from `editions/cycle_pulse_edition_84.txt` |
+| `PsEKuvyxB3Tg9VAutU4Vk2` | unknown | legacy-edition | `bt-edition` | `edition-c85-part-2` | M1 re-ingest from `editions/cycle_pulse_edition_85.txt` |
+| `5yhqUAXRQMHp1bMjYTpWyk` | unknown | legacy-edition | `bt-edition` | `edition-c85-part-3` | M1 re-ingest from `editions/cycle_pulse_edition_85.txt` |
+| `hXJZniHkoggHmXXiZ1emue` | unknown | legacy-edition | `bt-edition` | `edition-c86-part-2` | M1 re-ingest from `editions/cycle_pulse_edition_86.txt` |
+| `1gckAh1Bkb9Fw52D7cfqHU` | unknown | legacy-edition | `bt-edition` | `edition-c86-part-3` | M1 re-ingest from `editions/cycle_pulse_edition_86.txt` |
+| `6P7tEvnJ34ZdFmnsGx4Eur` | unknown | legacy-edition | `bt-edition` | `edition-c87-part-2` | M1 re-ingest from `editions/cycle_pulse_edition_87.txt` |
+| `YyCEb8QoTtn3hYHbjEuWYj` | unknown | legacy-edition | `bt-edition` | `edition-c91-part-2` | M1 re-ingest from `editions/cycle_pulse_edition_91.txt` |
+| `wBqjpuByrJddqYrricu1Rt` | unknown | podcast-transcript | `bt-podcast-transcript` | `podcast-c90` | M1 re-source from `output/podcasts/` if file exists; else re-tag + correct title in place. **Note:** doc title says "Cycle Pulse Edition 90 (Full)" but body is `<Person1>/<Person2>` dialogue — title is wrong. |
+| `w2ELDNKn5DmF2qwQadfBZN` | unknown | archive-essay | `bt-archive-essay` | `archive-hal-richmond-letters-from-the-golden-era-part-1` | re-tag in place; no source rewrite |
+| `KiAC9PRSoQS6uLXJkNm8jf` | unknown | archive-essay | `bt-archive-essay` | `archive-hal-richmond-danny-horn-architecture-of-confidence` | re-tag in place; no source rewrite |
+| `Fe5UBtnbJRVKRjeYqLo3v1` | unknown | canon-correction | `bt-canon-correction` | `correction-c91-nba-expansion-municipal-policy-updates` | re-tag in place; no source rewrite |
+| `rejQse7n5QxDTxa7nbgNg7` | unknown | delete-no-replacement | — | — | **DELETE** in M1. 1-line stub: "Bay Tribune Archive — Oakland journalism canon." No actual content. |
+| `3cVPsFy7BkzjPDhapyFYmf` | unknown | delete-no-replacement | — | — | **DELETE** in M1. Title "Clarification: GodWorld Oakland is a Fictional Prosperous City, Not Real-World Oakland". Content is a meta-rule about the simulation being fictional — explicit fourth-wall contamination per `/save-to-bay-tribune` SKILL.md "Do NOT use for: anything that reveals the simulation is a simulation." Should never have been written here. Hard remove. |
+| `goTKuE7oj8mcWVZMEqBXaX` | unknown | **legacy-roster** ⚠️ | `bt-roster` | `roster-as-of-c<XX>` (XX TBD — content shows "Generated: 2026-03-20"; cycle anchor needs research-build call) | **FLAGGED:** doesn't fit Task 1.5's 4 enumerated buckets. Existing taxonomy at line ~70 has `bt-roster` slot already. Recommend research-build amend Task 1.5 with 5th bucket `legacy-roster` (or 6th counting `delete-no-replacement`). Re-tag in place; cycle anchor for customId pending. |
+
+**Engine-sheet flag for research-build:**
+
+The single A's roster doc (`goTKuE7oj8mcWVZMEqBXaX`) doesn't fit the 4 buckets enumerated in Task 1.5 step 2. The plan's §Tag scheme already includes `bt-roster` as a canonical tag with `roster-as-of-c<XX>` customId pattern, so no taxonomy expansion needed — only a Task 1.5 bucket-list amendment to recognize `legacy-roster` as the 5th valid disposition (workflow: re-tag in place + assign customId from "Generated: <date>" → cycle anchor). Engine-sheet held the doc's row above with disposition `legacy-roster` and the `bt-roster` tag from the canonical taxonomy, awaiting research-build sign-off.
+
+**Source-existence verification:** Spot-check confirmed `editions/cycle_pulse_edition_83.txt` through `editions/cycle_pulse_edition_92.txt` all exist locally — every legacy-edition row has a re-ingest source available. No "if .txt exists" fallback path needed for the 15 legacy-edition docs.
 
 ---
 

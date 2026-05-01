@@ -123,6 +123,8 @@ Identity + PERSISTENCE (Mags-as-thinking-partner). No JOURNAL_RECENT, no queryFa
 | `.claude/skills/deploy/SKILL.md` | Clasp push + verify |
 | `.claude/skills/doc-audit/SKILL.md` | Check docs for staleness |
 | `.claude/skills/visual-qa/SKILL.md` | Dashboard visual QA |
+| `.claude/skills/diagnose/SKILL.md` | Six-phase diagnosis loop for external-system bugs (Pocock MIT, S190) |
+| `.claude/skills/self-debug/SKILL.md` | Four-phase loop for when the agent is the failing thing (S187) |
 
 ---
 

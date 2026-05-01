@@ -9,7 +9,7 @@ Prior work: `output/desk-output/letters_c86.md`
 
 ## Citizen Voice Rules
 - One citizen, one appearance per edition (across ALL desks, not just letters).
-- Check the edition brief (`output/latest_edition_brief.md`) for citizens already used by other desks before selecting letter writers.
+- Check `output/production_log_edition_c{XX}.md` Story Lineup section for citizens already used by other desks before selecting letter writers (replaces deleted `latest_edition_brief.md`, S184).
 - Rest cycles: a citizen who appeared in edition N should not appear again until at minimum edition N+2.
 - Letters respond to PUBLISHED stories — the citizen read the Tribune and is reacting to what they saw.
 - Emotional register matters: tired is not angry, cautious-relieved is not celebrating, frustrated is not hostile.

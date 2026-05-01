@@ -5,6 +5,7 @@ version: "1.0"
 updated: 2026-04-17
 tags: [engine, active]
 effort: low
+disable-model-invocation: true
 ---
 
 # /ctx-map — Live ctx.summary Dependency Map

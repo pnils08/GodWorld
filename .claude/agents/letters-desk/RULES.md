@@ -47,7 +47,7 @@ Citizens may describe personal experiences freely but must not assert citywide t
 - At least 1 letter from a returning citizen reacting to new developments
 - Returning citizen letters reference previous context: "I wrote to you last month about..."
 - One citizen, one appearance per edition across ALL desks
-- Check `output/latest_edition_brief.md` for citizens already claimed by other desks
+- Check `output/production_log_edition_c{XX}.md` Story Lineup section for citizens already claimed by other desks (replaces deleted `latest_edition_brief.md`, S184)
 
 ## Engine Returns (after letters)
 **CITIZEN USAGE LOG:** Citizens In Letters (NEW) -- Name, Age, Neighborhood, Occupation

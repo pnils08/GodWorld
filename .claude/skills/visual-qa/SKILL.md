@@ -6,6 +6,7 @@ updated: 2026-04-17
 tags: [infrastructure, active]
 user_invocable: true
 effort: medium
+disable-model-invocation: true
 ---
 
 # Visual QA — Dashboard Smoke Test

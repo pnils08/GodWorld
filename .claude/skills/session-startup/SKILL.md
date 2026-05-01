@@ -5,6 +5,7 @@ version: "2.0"
 updated: 2026-04-18
 tags: [infrastructure, active]
 effort: low
+disable-model-invocation: true
 related_skills: [boot, session-end]
 ---
 

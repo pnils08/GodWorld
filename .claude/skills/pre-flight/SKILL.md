@@ -5,6 +5,7 @@ version: "1.0"
 updated: 2026-04-17
 tags: [media, active]
 effort: low
+disable-model-invocation: true
 ---
 
 # /pre-flight — Pre-Cycle Input Check

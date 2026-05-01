@@ -5,6 +5,7 @@ version: "1.2"
 updated: 2026-04-26
 tags: [engine, active]
 effort: high
+disable-model-invocation: true
 ---
 
 # /pre-mortem — Engine Health Scan

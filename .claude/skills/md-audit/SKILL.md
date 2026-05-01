@@ -5,6 +5,7 @@ version: "1.0"
 updated: 2026-04-30
 tags: [architecture, active]
 effort: low
+disable-model-invocation: true
 ---
 
 # /md-audit — Existence-Staleness Audit

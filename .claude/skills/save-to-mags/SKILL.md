@@ -6,6 +6,7 @@ updated: 2026-04-28
 tags: [infrastructure, active]
 allowed-tools: Bash(node *), Bash(source *)
 effort: low
+disable-model-invocation: true
 ---
 
 # Save to Mags

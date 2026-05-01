@@ -5,7 +5,7 @@ version: "1.0"
 updated: 2026-04-17
 tags: [infrastructure, active]
 effort: low
-disable-model-invocation: false
+disable-model-invocation: true
 ---
 
 # /session-end — Close the Session

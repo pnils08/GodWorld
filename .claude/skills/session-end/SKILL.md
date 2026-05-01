@@ -1,8 +1,8 @@
 ---
 name: session-end
-description: End-of-session handshake — update persistence files, journal, project state, save to Supermemory, and sign off as Mags.
-version: "1.0"
-updated: 2026-04-17
+description: End-of-session handshake — update persistence files, journal, project state, commit and push work, save to Supermemory, and sign off as Mags.
+version: "1.1"
+updated: 2026-05-01
 tags: [infrastructure, active]
 effort: low
 disable-model-invocation: true
@@ -28,18 +28,26 @@ disable-model-invocation: true
 
 ### Detect which terminal you're in
 
-1. Check the session name (`claude --name` used at launch) or read `.claude/state/current-workflow.txt`
-2. Map to terminal:
+Detection is via tmux window name — same mechanism the SessionStart hook uses (S165). Don't ask Mike, don't read state files, don't infer from work pattern.
 
-| Session name / workflow | Terminal file |
-|------------------------|---------------|
-| `research-build`, `Research`, `Build/Deploy` | `.claude/terminals/research-build/TERMINAL.md` |
-| `engine-sheet`, `Maintenance`, `Cycle Run` | `.claude/terminals/engine-sheet/TERMINAL.md` |
-| `media`, `Media-Room` | `.claude/terminals/media/TERMINAL.md` |
-| `civic` | `.claude/terminals/civic/TERMINAL.md` |
-| Unknown / Chat | No terminal-specific steps — run shared steps only |
+```bash
+tmux display-message -t "$TMUX_PANE" -p '#W'
+```
 
-3. Load that TERMINAL.md and find the **Session Close** section.
+Map to terminal:
+
+| tmux window name | Terminal file | Persona |
+|---|---|---|
+| `research-build` | `.claude/terminals/research-build/TERMINAL.md` | Light |
+| `engine-sheet` | `.claude/terminals/engine-sheet/TERMINAL.md` | Stripped |
+| `media` | `.claude/terminals/media/TERMINAL.md` | Full |
+| `civic` | `.claude/terminals/civic/TERMINAL.md` | Light |
+| `mags` | `.claude/terminals/mags/TERMINAL.md` | Full |
+| Anything else (unmatched, web session, bare `Claude`) | Falls back to `mags` per S165 | Full |
+
+Load that TERMINAL.md and find the **Session Close** section.
+
+**Engine-sheet exception:** stripped persona, no journal, no /save-to-mags, no PERSISTENCE counter. Its §Session Close runs a different shape — see that TERMINAL.md.
 
 ### Run the terminal-specific audit
 
@@ -186,22 +194,96 @@ Use `/batch [task description]` to submit. The next session's startup will remin
 
 ## Step 6: Post-Write Verification
 
-**Read back every file you updated in Steps 1-4.** Confirm:
+Verify writes landed. **Critical: do not cat/tail/head/grep JOURNAL.md or JOURNAL_RECENT.md — S169 (no-display-in-chat rule).** Use metadata-only checks for those two; for everything else, read first 10-20 lines.
 
-1. **PERSISTENCE.md** — Session counter incremented? Last Updated line current?
-2. **JOURNAL.md** — New entry appended? Entry number sequential? Signed `— Mags`?
-3. **JOURNAL_RECENT.md** — Contains exactly 3 entries? Most recent matches what you just wrote?
-4. **SESSION_CONTEXT.md** (if updated) — Session entry present? Last Updated line matches? Max 5 recent sessions?
-5. **ROLLOUT_PLAN.md** (if updated) — Next Session Priorities refreshed? Last Updated line current?
-6. **NEWSROOM_MEMORY.md** (if updated) — New errata/patterns added? Last Updated header current?
+1. **PERSISTENCE.md** — Read first 10 lines: counter incremented? Last Updated current?
 
-**For each file:** Read the first 10 lines (header + last updated) and the section you modified. Don't re-read the whole file — just verify the writes landed.
+2. **JOURNAL.md** — **Metadata only.** Run:
+   ```bash
+   node -e "const e=require('./lib/sessionLog').readLast('docs/mags-corliss/JOURNAL.md', 1)[0]; console.log(e.step, '| body lines:', e.body.split('\\n').length)"
+   ```
+   Verify: step name matches what you wrote, body is non-trivial (>5 lines). **Do NOT** cat the file or read its body.
+
+3. **JOURNAL_RECENT.md** — **Metadata only.** Run:
+   ```bash
+   node -e "console.log(require('./lib/sessionLog').readLast('docs/mags-corliss/JOURNAL_RECENT.md', 5).map(e => e.step))"
+   ```
+   Verify: 3 entries, latest step name matches what you just wrote. **Do NOT** cat the file body.
+
+4. **SESSION_CONTEXT.md** (if updated) — Read first 10 lines: Last Updated line matches, session entry visible.
+
+5. **ROLLOUT_PLAN.md** (if updated) — Read first 20 lines: Next Session Priorities refreshed?
+
+6. **NEWSROOM_MEMORY.md** (if updated) — Read first 10 lines: Last Updated header current.
 
 **If something didn't land:** Fix it now. Don't leave it for the next session.
 
-**If context is too low for full verification:** At minimum verify PERSISTENCE.md counter and JOURNAL_RECENT.md (the two boot files).
+**If context is too low for full verification:** At minimum verify PERSISTENCE.md counter (read first 10 lines) and JOURNAL_RECENT.md (metadata check above) — the two boot files.
 
-This is the documentation equivalent of the engine rule: "Verify after every write. Never report work as complete based on output alone."
+This is the documentation equivalent of the engine rule: "Verify after every write. Never report work as complete based on output alone." But never via journal-body display.
+
+---
+
+## Step 6.5: Commit & Push
+
+**Why:** S190 boot found 6 dirty mags-persistence files left uncommitted from S189. Session-end shipping work is core hygiene — without it, dirty state propagates and the next session has to clean up before doing real work. Persistence files (PERSISTENCE, JOURNAL, JOURNAL_RECENT, SESSION_CONTEXT) get touched every session-end; if uncommitted they accumulate.
+
+### Stage path-specifically
+
+**Never `git add .` or `git add -A`.** Identify each file you touched this session and stage by name. Common patterns per terminal:
+
+| Terminal | Typical session-end paths |
+|---|---|
+| All terminals | `docs/mags-corliss/PERSISTENCE.md`, `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md` |
+| mags | + `docs/mags-corliss/NOTES_TO_SELF.md` |
+| media | + `docs/mags-corliss/NEWSROOM_MEMORY.md`, `output/production_log_edition_c*.md` |
+| civic | + `output/production_log_city_hall_c*.md`, civic governance docs |
+| research-build | + `docs/RESEARCH.md`, `docs/plans/*`, `docs/adr/*`, plus session work |
+| engine-sheet | + engine code, schemas (engine-sheet commits as it goes — usually clean by session-end) |
+
+### Commit
+
+Use HEREDOC for multi-line messages. Persistence rotation can be its own small commit; substantive work gets its own commit(s):
+
+```bash
+git add <specific files>
+git commit -m "$(cat <<'EOF'
+S<N> session-end persistence rotation
+EOF
+)"
+```
+
+For substantive work, follow the project commit style: `S<N> <topic>`, body explains *why* not *what*.
+
+### Cross-terminal stack check (BEFORE pushing)
+
+```bash
+git log origin/main..HEAD --oneline
+```
+
+If output shows commits from other terminals interleaved with yours **AND** they haven't signaled "landable," do **NOT** push. Local commits lose nothing. Pushing here ships their unverified work along with yours.
+
+Full rule: `/root/.claude/projects/-root-GodWorld/memory/feedback_no-cross-terminal-git-push.md`.
+
+**Exception: mags terminal.** Per S165, mags is the boss. If no other terminal is actively stacked, push freely. If another terminal is active, still coordinate.
+
+### Push
+
+If safe:
+
+```bash
+git push
+git status --short  # should be empty
+```
+
+### Failure modes
+
+| Scenario | Action |
+|---|---|
+| Other terminal has stacked unverified work | Hold push. Note in SESSION_CONTEXT entry: "committed locally; push pending coordination." Next session pushes when coordinated. |
+| Pre-commit hook fails | Investigate. **Don't `--no-verify`.** Fix the underlying issue, re-stage, re-commit (new commit, not amend). |
+| Network down | Hold push. Local commits persist. Next session pushes. |
+| Unsure if a journal/note file is yours from this session | If you didn't write it this session, leave it. Don't `git diff` JOURNAL.md (S169 — no journal display in chat). |
 
 ---
 
@@ -238,5 +320,7 @@ One paragraph. Authentic. Then done.
 | Step 4 fails (SESSION_CONTEXT) | Not critical — next session reads slightly stale project state. Fix it then. |
 | Step 5 fails (Supermemory down) | On-disk files are the primary persistence. Supermemory is a bonus layer. |
 | Step 6 finds a write didn't land | Fix it now. Don't propagate bad state. |
-| Context is running low | Prioritize Steps 1, 2, and 6 (identity + journal + verify). Skip 0, 3, 5, 5.5. Always do Step 7 (restart services). Keep goodbye brief. |
-| Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update PERSISTENCE counter and SESSION_CONTEXT "Last Updated" at minimum. Verify both. Always restart services (Step 7). |
+| Context is running low | Prioritize Steps 1, 2, 6, and 6.5 (identity + journal + verify + commit-push). Skip 0, 3, 5, 5.5. Always do Step 7 (restart services). Keep goodbye brief. |
+| Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update PERSISTENCE counter and SESSION_CONTEXT "Last Updated" at minimum. Verify both. **Still commit + push** the persistence rotation (Step 6.5) — never leave dirty state. Always restart services (Step 7). |
+| Step 6.5 cross-terminal check shows other-terminal commits | Hold push. Note "committed locally; push pending coordination" in the SESSION_CONTEXT entry. Next session pushes when coordinated. Local commits lose nothing. |
+| Engine-sheet terminal | Skip Steps 1, 2, 2.5, 5 (no PERSISTENCE counter, no journal, no JOURNAL_RECENT, no /save-to-mags — stripped persona per S156 rule). Run Steps 0, 3, 4, 6, 6.5, 7. Goodbye optional. See `.claude/terminals/engine-sheet/TERMINAL.md §Session Close` for the engine-sheet specific shape. |

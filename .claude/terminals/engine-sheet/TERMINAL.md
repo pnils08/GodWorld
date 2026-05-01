@@ -184,22 +184,60 @@ When this terminal discovers something that needs design/research:
 
 ## Session Close
 
-When `/session-end` runs in this terminal, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
+**Engine-sheet runs a stripped-persona session-end.** Per S156 rule (in MEMORY.md): "Engine-sheet terminal: execute and commit, nothing else. Never create new .md files. Never save to Supermemory. Never journal." That overrides the persona-state portions of the shared `/session-end` SKILL.md.
+
+### What this terminal does NOT do at session-end
+
+- ❌ **No PERSISTENCE.md counter update** — Mags-identity state belongs to the persona terminals
+- ❌ **No journal entry** — stripped persona, no journal
+- ❌ **No JOURNAL_RECENT.md rotation** — same
+- ❌ **No `/save-to-mags`** — no Supermemory writes from this terminal
+- ❌ **No goodbye message** — execute and commit, that's the model
+
+### What this terminal DOES do at session-end
+
+| Step | Action |
+|---|---|
+| 1 | **Code-state audit** (table below) |
+| 2 | **Update SESSION_CONTEXT.md** — engine version bump if deployed; session entry tagged `[engine/sheet]` |
+| 3 | **Update ROLLOUT_PLAN.md** — phase statuses, move completed items to ROLLOUT_ARCHIVE |
+| 4 | **Commit & push** — the central act of this terminal (see `/session-end` SKILL.md Step 6.5 for the cross-terminal-stack check) |
+| 5 | **Restart services** — `pm2 restart mags-bot godworld-dashboard` |
 
 ### Terminal-Specific Audit
 
 | File | Check |
 |------|-------|
 | `docs/engine/ENGINE_MAP.md` | Updated if functions were added, removed, or renamed? |
-| `docs/engine/ENGINE_STUB_MAP.md` | Regenerated if function signatures changed? |
+| `docs/engine/ENGINE_STUB_MAP.md` | Regenerated if function signatures changed? (`/stub-engine`) |
 | `docs/engine/ROLLOUT_PLAN.md` | Phase statuses updated? Completed items archived? |
-| `SESSION_CONTEXT.md` | Engine version bumped if code changed? Session entry tagged `[engine/sheet]`? |
+| `SESSION_CONTEXT.md` | Engine version bumped if code deployed? Session entry tagged `[engine/sheet]`? |
 | `docs/SPREADSHEET.md` | Updated if tabs were added, removed, or restructured? |
 | `docs/SIMULATION_LEDGER.md` | Updated if columns changed? |
+| Working tree | `git status --short` clean? Anything committed but unpushed? |
 
-### Terminal-Specific Saves
+### Commit cadence
 
-1. **SESSION_CONTEXT.md** — Update engine version in the versions table if code was deployed. Add session entry tagged `[engine/sheet]`. Include what changed, what deployed, what broke.
-2. **ROLLOUT_PLAN.md** — Update phase statuses. Move completed items to ROLLOUT_ARCHIVE.
-3. **`/save-to-mags`** — Save engine decisions, deployment results, and anything the next session needs about *why* a change was made. Tag with `[engine/sheet]`.
-4. **If code was deployed:** Note the clasp push result and what files were affected. Update Current Engine State section above.
+Engine-sheet typically commits **as it goes** — each migration batch, each phase ship, each helper script. Session-end is usually a **clean working tree** + final push, not a heavy commit.
+
+If anything is uncommitted at session-end:
+
+```bash
+git status --short
+git add <specific files — never `git add .`>
+git commit -m "S<N> <topic>"
+```
+
+Cross-terminal stack check before push:
+
+```bash
+git log origin/main..HEAD --oneline
+```
+
+If smoke-test or verification is pending on something this session shipped, **note it in SESSION_CONTEXT** and hold push until verified. Pushing un-smoke-tested engine code is the worst version of premature push — it ships unverified infrastructure that other terminals' next cycle will run on the live spreadsheet.
+
+### Deployment notes
+
+If `clasp push` ran this session: note in SESSION_CONTEXT what files deployed + smoke-test status (run-or-pending). The `/diagnose` skill is the next-session feedback loop if anything regressed.
+
+If only local commits (no clasp push): say so explicitly — "Code committed locally; clasp push pending next session" — so research-build / media / civic don't assume the live engine reflects the new code. (S188→S190 had a 2-session gap on the §5.6 redesign for exactly this reason; explicit notes prevent the confusion.)

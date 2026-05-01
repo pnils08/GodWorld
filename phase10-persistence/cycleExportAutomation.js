@@ -106,7 +106,7 @@ var CONFIG = {
  */
 function exportCurrentCycleAll() {
   var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
-  var cycle = getCurrentCycle_(ss);
+  var cycle = getCurrentCycleFromPopulation_(ss);
   var folder = getOrCreateExportFolder_();
   
   var exported = [];
@@ -134,7 +134,7 @@ function exportCurrentCycleAll() {
  */
 function updateAllMirrors() {
   var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
-  var cycle = getCurrentCycle_(ss);
+  var cycle = getCurrentCycleFromPopulation_(ss);
   var folder = getOrCreateExportFolder_();
   
   var updated = [];
@@ -190,7 +190,7 @@ function exportContinuityLog() {
 
 function exportSingleSheet_(sheetName) {
   var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
-  var cycle = getCurrentCycle_(ss);
+  var cycle = getCurrentCycleFromPopulation_(ss);
   var folder = getOrCreateExportFolder_();
   var sheet = ss.getSheetByName(sheetName);
   
@@ -382,7 +382,7 @@ function appendToMirror_(folder, fileName, newContent) {
 /**
  * Get current cycle number from World_Population
  */
-function getCurrentCycle_(ss) {
+function getCurrentCycleFromPopulation_(ss) {
   var sheet = ss.getSheetByName('World_Population');
   if (!sheet) return 0;
   
@@ -421,7 +421,7 @@ function openExportFolder() {
  */
 function showConfig() {
   var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
-  var cycle = getCurrentCycle_(ss);
+  var cycle = getCurrentCycleFromPopulation_(ss);
   
   var msg = 'Current Configuration:\n\n' +
     'Spreadsheet ID: (using openSimSpreadsheet_())\\n' +

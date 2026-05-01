@@ -160,7 +160,7 @@ function loadHandoffData_(cache, cycle) {
   }
 
   data.packetText = loadCyclePacketText_(cache, cycle);
-  data.storylines = loadActiveStorylines_(cache, cycle);
+  data.storylines = loadActiveStorylinesFromCache_(cache, cycle);
   data.worldEvents = loadWorldEvents_(cache, cycle);
   data.storySeeds = loadStorySeeds_(cache, cycle);
   data.civicOfficers = loadCivicOfficers_(cache);
@@ -245,7 +245,7 @@ function loadCyclePacketText_(cache, cycle) {
  * Loads active/recent storylines from Storyline_Tracker.
  * Deduplicates by description — latest cycle wins for matching entries.
  */
-function loadActiveStorylines_(cache, cycle) {
+function loadActiveStorylinesFromCache_(cache, cycle) {
   var values = cache.getValues(SHEET_NAMES.STORYLINE_TRACKER);
   if (values.length < 2) return [];
 
@@ -354,7 +354,7 @@ function loadActiveStorylines_(cache, cycle) {
   }
   for (var na = 0; na < noArc.length; na++) results.push(noArc[na]);
 
-  Logger.log('loadActiveStorylines_: ' + raw.length + ' raw → ' + results.length + ' deduplicated');
+  Logger.log('loadActiveStorylinesFromCache_: ' + raw.length + ' raw → ' + results.length + ' deduplicated');
   return results;
 }
 

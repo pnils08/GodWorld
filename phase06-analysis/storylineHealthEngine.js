@@ -64,7 +64,7 @@ function monitorStorylineHealth_(ctx) {
 
   try {
     // Load active storylines
-    var storylines = loadActiveStorylines_(ss);
+    var storylines = loadActiveStorylinesForHealth_(ss);
     if (storylines.length === 0) {
       return results;
     }
@@ -128,7 +128,7 @@ function monitorStorylineHealth_(ctx) {
 // DATA LOADING
 // ════════════════════════════════════════════════════════════════════════════
 
-function loadActiveStorylines_(ss) {
+function loadActiveStorylinesForHealth_(ss) {
   var sheet = ss.getSheetByName('Storyline_Tracker');
   if (!sheet) return [];
 

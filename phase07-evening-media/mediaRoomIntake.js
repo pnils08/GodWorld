@@ -109,7 +109,7 @@ function processMediaIntake_(ctx) {
 function processMediaIntakeV2() {
 
   var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
-  var cycle = getCurrentCycle_(ss);
+  var cycle = getCurrentCycleFromConfig_(ss);
   var cal = getCurrentCalendarContext_(ss);
 
   // Manual path — no ctx.ledger. Sub-functions fall back to direct sheet read.
@@ -790,7 +790,7 @@ function ensureCitizenMediaUsage_(ss) {
 // HELPER FUNCTIONS
 // ════════════════════════════════════════════════════════════════════════════
 
-function getCurrentCycle_(ss) {
+function getCurrentCycleFromConfig_(ss) {
   var configSheet = ss.getSheetByName('World_Config');
   if (!configSheet) return 0;
 
@@ -1439,7 +1439,7 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
  */
 function processRawCitizenUsageLogManual() {
   var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
-  var cycle = getCurrentCycle_(ss);
+  var cycle = getCurrentCycleFromConfig_(ss);
   var cal = getCurrentCalendarContext_(ss);
 
   // Get raw text from MediaRoom_Paste sheet

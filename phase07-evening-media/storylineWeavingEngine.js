@@ -83,7 +83,7 @@ function weaveStorylines_(ctx) {
 
   try {
     // Load active storylines
-    var storylines = loadActiveStorylines_(ss);
+    var storylines = loadActiveStorylinesForWeaving_(ss);
     if (storylines.length === 0) {
       return results;
     }
@@ -142,7 +142,7 @@ function weaveStorylines_(ctx) {
 // DATA LOADING
 // ════════════════════════════════════════════════════════════════════════════
 
-function loadActiveStorylines_(ss) {
+function loadActiveStorylinesForWeaving_(ss) {
   var sheet = ss.getSheetByName('Storyline_Tracker');
   if (!sheet) return [];
 

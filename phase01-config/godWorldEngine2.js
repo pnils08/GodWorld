@@ -368,6 +368,8 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase10-EveningSnapshot', function() { saveEveningSnapshot_(ctx); });
   // Save cycle state for next cycle's analyzers (shock, pattern, recovery)
   safePhaseCall_(ctx, 'Phase10-CycleState', function() { savePreviousCycleState_(ctx); });
+  // Phase 42 §5.6: consolidated Simulation_Ledger commit (matches runCyclePhases_).
+  safePhaseCall_(ctx, 'Phase10-CommitLedger', function() { commitSimulationLedger_(ctx); });
   // Execute all queued write intents (V3 persistence model)
   safePhaseCall_(ctx, 'Phase10-ExecuteIntents', function() { executePersistIntents_(ctx); });
 

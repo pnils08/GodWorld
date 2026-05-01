@@ -13,10 +13,13 @@ sources:
 pointers:
   - "[[plans/2026-04-28-phase-42-writer-consolidation]] — parent plan"
   - "[[engine/PHASE_42_INVENTORY]] — Phase 1 inventory consumed by this doc"
+  - "[[adr/0002-phase-42-phase05-ledger-redesign]] — §5.6 redesign decision record"
   - "[[SCHEMA]] — doc conventions"
 ---
 
 # Phase 42 Writer Consolidation — Patterns + Decisions
+
+**Phase 42 is a deepening exercise.** Today's cycle path has 175 direct-write sites against shared Sheets — every write crosses the simulation seam (engine ↔ Sheets), making the seam shallow and the calling sites both noisy and fragile. Phase 42 deepens `ctx` as the canonical Module behind that seam: callers route through `ctx.writeIntents` (most paths) and `ctx.ledger` (the §5.6 phase05 path), each a small Interface hiding the materialization mechanics underneath. The §5.6 redesign (ADR-0002) is the canonical Deep-module example — one Phase 1 init + one Phase 10 commit handler hide 18 SL touchers. Vocabulary: see `CONTEXT.md` §Architecture → Refactor lens.
 
 **Engine-sheet's source of truth for Phases 3-5.** Every migration applies one of the 5 reference patterns below. Per-category decisions are locked — schema-setup carve-out shape, read-state-then-write hazard fix, caller-passed-sheet refactor, defensive-ensure-tab via new minimal API, dryRun verification regimen.
 

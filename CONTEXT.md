@@ -1,7 +1,7 @@
 ---
 title: GodWorld CONTEXT
 created: 2026-04-29
-updated: 2026-04-29
+updated: 2026-05-01
 type: reference
 tags: [architecture, vocabulary, active]
 sources:
@@ -150,6 +150,28 @@ This is the **project's** vocabulary, not the world's. World canon (citizen name
 
 **Intent** — A queued write descriptor in `ctx.writeIntents`. Allows batching, dry-run, audit. The migration target for Writers.
 
+#### Refactor lens (Pocock vocabulary, MIT)
+
+Adopted S190 for Phase 42 narrative. Source: Pocock's `improve-codebase-architecture` SKILL.md (MIT).
+
+**Module** — A unit of code with a defined Interface separating "how to use it" from "what it does inside." Modules are the building blocks of architecture; the value of a Module is judged by Depth, not size.
+
+**Interface** — The externally visible surface of a Module: its allowed operations and their signatures. Shrinking the Interface while growing the Implementation increases Depth.
+
+**Implementation** — The internal code behind the Interface. Free to change without breaking callers as long as the Interface contract holds.
+
+**Depth** — Ratio of Implementation cost to Interface cost. **Deep module** = large Implementation behind small Interface (good — `ctx.ledger` is canonical: one init helper + commit handler hide 18 SL touchers). **Shallow module** = small Implementation behind comparably-sized Interface (often a pass-through, often deletable).
+
+**Seam** — A boundary in the codebase where behavior can be substituted for testing or refactor. Interfaces are seam candidates. Phase 42 §5.6 created the simulation seam — Phases read/write `ctx.ledger` rather than `Simulation_Ledger` directly, so the underlying store can be swapped without phase rewrites.
+
+**Adapter** — A thin Module that converts one Interface to another. Adapters are often shallow but earn their keep by isolating change. Example: `lib/photoGenerator.js` adapts FLUX / OpenAI / DALL·E APIs to one shared interface for `generate-edition-photos.js`.
+
+**Leverage** — Ratio of "callers benefiting from a change" to "code touched by the change." High leverage = small change improves many callers. The §5.6 redesign was high-leverage: one Phase 1 init benefited all 18 SL touchers.
+
+**Locality** — How much code one must read in one place to understand a behavior. High Locality = behavior lives in one file. Low Locality = behavior spread across many. Refactors that increase Locality reduce future debugging cost.
+
+**Deletion test** — Ask: "if I delete this Module, does complexity vanish or reappear across N callers?" If complexity vanishes, the Module was a pass-through — delete it. If complexity reappears across N callers, the Module was earning its keep — keep it.
+
 ### Canon fidelity
 
 **Canon Tier** — Real-names policy from CANON_RULES. Tier 1 = use real names. Tier 2 = canon-substitute. Tier 3 = always block. Distinct from Citizen Tier. Locked S174.
@@ -211,4 +233,5 @@ Deeper definitions and full content for terms above:
 
 ## Changelog
 
+- 2026-05-01 — S190, research-build. Added §Architecture → Refactor lens subsection: 9 terms (Module, Interface, Implementation, Depth, Seam, Adapter, Leverage, Locality, Deletion test) adopted from Pocock's `improve-codebase-architecture` SKILL.md (MIT). Phase 42 §5.6 redesign serves as the canonical Deep-module example throughout. Used to reframe `docs/engine/PHASE_42_PATTERNS.md` opening (same session).
 - 2026-04-29 — Initial draft (S187, research-build). Pattern adapted from `mattpocock/skills` MIT-licensed CONTEXT.md. Term inventory drawn from canon-fidelity rollout, Phase 42, S186 scrub, terminal architecture, S183 world-data rebuild. Tier disambiguation (Citizen vs Canon) and Edition capitalization rule formalized in this commit.

@@ -216,6 +216,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 Small, dated decision records. Created only when a choice is (a) hard to reverse, (b) surprising without context, (c) result of a real trade-off. Pattern adopted from `mattpocock/skills` MIT-licensed example.
 
 - **[[adr/0001-adopt-context-and-adrs]]** — adoption of CONTEXT.md and the ADR pattern itself. The first decision worth recording is the decision to record decisions. *(reference, architecture, decision, active)*
+- **[[adr/0002-phase-42-phase05-ledger-redesign]]** — Phase 42 §5.6 chose shared in-memory `ctx.ledger` over per-row intents (b) or hybrid (c). Read-staleness was the collision class; (b) and (c) only addressed write pattern. Implemented S188 (9 commits). Closed cohort B silent-clobber bug. *(reference, architecture, engine, decision, active)*
 
 ---
 

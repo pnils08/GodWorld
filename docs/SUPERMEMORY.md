@@ -51,15 +51,20 @@ The published world. Oakland's living history through journalism.
 
 **How to use:** Search `bay-tribune` when you need current context about Oakland — what's been published about OARI, who was quoted in Fruitvale, what the A's roster looks like. Semantic search works: query "OARI dispatch" and get back all relevant chunks across editions.
 
-**Contents (last audited S113, duplicates cleaned):**
+**Contents (last audited S189 — Phase 1 of bay-tribune unified ingest rebuild plan):**
 
-| Content | Count | Description |
-|---------|-------|-------------|
-| Editions E83-E89 | ~14 docs | 7 Cycle Pulse editions (chunked by Supermemory) |
-| Supplementals C83-C89 | ~16 docs | Fruitvale, tech landscape, housing, food, Baylight labor, education, OARI, Keane, workforce, Quintero, Aitken, Paulson |
-| Oakland A's Roster | 1 doc | 89 players — POPID, name, position, team, tier |
+| Category | Description |
+|---|---|
+| Editions E83-E92 | 10 cycle editions, chunked by Supermemory |
+| Supplementals C83-C92 | Per-cycle deep dives — civic, sports, business, education, demographics |
+| Dispatches | Standalone single-piece dispatches (C92 "KONO Second Song" canonized S188) |
+| Interview articles + transcripts | Council/mayor conversations (Mayor Santana C92 OARI canonized S178) |
+| Wiki entities | Per-citizen, per-storyline, per-business, per-cultural records via `ingestEditionWiki.js` |
+| Rosters + canon corrections | A's roster, legacy roster, post-publish corrigenda |
 
-**Ingest after each edition:** `node scripts/ingestEdition.js <edition-file>`
+**Total per S189 Phase 1 audit:** 175 docs across the above categories. Disposition map for 22 unknown/published-other docs + 16-tag taxonomy in `[[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]]`. Phase 2-7 ON HOLD pending SMFS pilot — see §Active Rebuilds.
+
+**Ingest after each edition:** `node scripts/ingestEdition.js <edition-file>`. Wiki ingest after publish: `node scripts/ingestEditionWiki.js`. Manual canon: `/save-to-bay-tribune`.
 
 ---
 
@@ -74,17 +79,21 @@ The simulation's current state. Structured data from the engine, searchable by p
 **Who reads:** Mags (direct API search for angle briefs), future desk agents (Phase 21.2). Mike on claude.ai via MCP.
 **Who writes:** Direct API ingest after each cycle run. Script: `buildWorldStatePacket.js` (Phase 32.2, not built yet — S131 test ingest was manual).
 
-**Contents (first ingest S131):**
+**Contents (post-S183 unified ingest + S184 female-balance +150):**
 
-| Content | Docs | Records | Description |
-|---------|------|---------|-------------|
-| Citizen Registry | 20 | 675 | Grouped by neighborhood. Name, age, role, tier, career, income, family, displacement risk |
-| Business Registry | 1 | 52 | BIZ_ID, name, sector, neighborhood, employees, revenue, key personnel |
-| Faith Organizations | 1 | 16 | Organization, tradition, neighborhood, leader, congregation size |
-| Employment Roster | 1 | 658 | Who works where. Citizen-to-business mapping |
-| Cultural Ledger | 1 | 35 | Cultural figures, fame category, domain, neighborhood |
-| Neighborhood Map | 1 | 17 | Gentrification phase, crime/noise/nightlife indexes, sentiment, displacement pressure, median income/rent |
-| Neighborhood Demographics | 1 | 17 | Students, adults, seniors, unemployed, school quality, graduation rates |
+| Tag | Count | Card type |
+|---|---|---|
+| `wd-citizens` | 836 | One per Simulation_Ledger row — POPID, name, age, neighborhood, role, tier, career, income, family, displacement risk |
+| `wd-business` | 52 | One per business — BIZID, name, sector, neighborhood, employees, revenue, key personnel |
+| `wd-faith` | 16 | One per faith org — name, tradition, neighborhood, leader, congregation size |
+| `wd-cultural` | 39 | One per cultural figure — POPID/CUL-ID, fame category, domain, neighborhood |
+| `wd-neighborhood` | 17 | One per neighborhood — gentrification, crime/noise/nightlife, sentiment, displacement, income/rent, demographics |
+| `wd-initiative` | 6 | One per initiative — INIT-ID, state, phase, neighborhoods, milestones |
+| `wd-player-truesource` | 27 | One per player — A's + Bulls + opponents |
+| `wd-summary` | per cycle | Per-cycle world summary (tag added S184) |
+| **Total** | **~843** | 100% domain-tagged, 0 orphans |
+
+Per-domain MCP retrieval tools (M1-M4 shipped S183) handle the `mode='hybrid'` + `threshold=0.3` override automatically — see §Search/save matrix below. Wipe primitive: per-domain card writers handle ID-content-scoped DELETE before re-write (e.g., `buildCitizenCards.js --apply` wipes by POPID then re-ingests).
 
 **How to search — keep queries simple and specific:**
 
@@ -143,13 +152,13 @@ Automatic captures and quick saves. May have useful conversation details. Search
 
 | Document | Records | Description |
 |----------|---------|-------------|
-| Citizen Roster | 509 | ENGINE-mode citizens — POPID, name, age, neighborhood, role, tier, status |
+| Citizen Roster | 509+ | ENGINE-mode citizens — POPID, name, age, neighborhood, role, tier, status. Subset filter; may have grown after S184 +150 female-balance addition |
 | Tribune Staff | 29 | Bay Tribune journalists — POPID, name, role, tier |
-| Chicago Citizens | 123 | Bulls players + city figures |
-| Business Registry | 51 | BIZ_ID, name, sector, neighborhood, employees |
-| Faith Organizations | 16 | Name, tradition, neighborhood, leader, POPID |
+| Chicago Citizens | 125 | Bulls players + city figures |
+| Business Registry | 53 | BIZ_ID, name, sector, neighborhood, employees |
+| Faith Organizations | 17 | Name, tradition, neighborhood, leader, POPID |
 
-**Refresh:** `node scripts/buildMaraReference.js` after major ledger changes, then push via direct API.
+**Refresh:** `node scripts/buildMaraReference.js` after major ledger changes, then push via direct API. Counts above reflect last build — re-run if ledger has grown.
 
 ---
 
@@ -272,6 +281,19 @@ npx supermemory search "TERM" --tag bay-tribune --json
 **Wiki-layer immunity (S186 finding):** `ingestEditionWiki.js` records carry structured metadata only (POPID, INIT-ID, BIZID). Real-world tier-2 names typically don't appear there. Check, but expect immunity. The chunked-text edition layer is where contamination concentrates.
 
 **Cost reference (S186):** Perkins&Will scrub touched ~21 surfaces across 4 storage layers (1 sheet cell + 16 files + 2 chunked Supermemory docs + 1 Drive PDF). The Supermemory layer was the smallest piece by count but slowest to figure out the first time. With this procedure, expect <30 min per future scrub.
+
+---
+
+## Active Rebuilds (S189)
+
+**Bay-tribune unified ingest rebuild — plan drafted, Phase 2-7 ON HOLD.** Sibling to the S183 wd-rebuild that refactored world-data into per-domain `wd-*` tag scheme. Same shape applied to bay-tribune: 16-tag taxonomy (`bt-edition`, `bt-supplemental`, `bt-dispatch`, `bt-interview-article`, `bt-interview-transcript`, `bt-wiki-citizen`, `bt-wiki-storyline`, `bt-wiki-continuity`, `bt-wiki-cultural`, `bt-wiki-business`, `bt-roster`, `bt-game-result`, `bt-canon-correction`, `bt-archive-essay`, `bt-podcast-transcript`, `bt-legacy-roster` + parent `bay-tribune`), customId-as-slug discipline, DELETE-by-customId wipe primitive. Motivated by Perkins&Will scrub friction (S185-S186) — current chunked layer has no targeted-replacement primitive. After rebuild, scrub becomes `wipeBayTribuneByCustomId <slug-prefix>` + re-ingest.
+
+**Phase 1 + 1.5 closed S189:** 175-doc inventory baseline + 22-doc disposition map (15 legacy-edition / 2 archive-essay / 1 podcast-transcript / 1 canon-correction / 1 legacy-roster / 2 delete-no-replacement). Fourth-wall contamination doc `3cVPsFy7BkzjPDhapyFYmf` flagged for hard-DELETE.
+
+**Phase 2-7 deferred pending SMFS pilot.** Supermemory released SMFS v0.0.1 on 2026-04-29 — POSIX filesystem layer over containers via FUSE/NFSv3, semantic grep, 30s sync. If pilot succeeds, Phase 2-7 collapse to file ops; the 16-tag taxonomy maps 1:1 to directory structure. Mags-first pilot proposed (smallest blast radius, editorial brain, tolerates 30s sync).
+
+- Plan: `[[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]]`
+- Comparison: `[[comparisons/2026-04-30-smfs-vs-bay-tribune-rebuild]]`
 
 ---
 
@@ -580,12 +602,14 @@ Retrieval-only by default. Container selection via the userId argument. Compose 
 
 | File | Source Tab | Container | Records |
 |------|-----------|-----------|---------|
-| `citizen_roster.txt` | Simulation_Ledger (ENGINE) | `mara` | 509 |
+| `citizen_roster.txt` | Simulation_Ledger (ENGINE) | `mara` | 509+ |
 | `as_roster.txt` | As_Roster | `bay-tribune` | 89 |
 | `tribune_roster.txt` | Bay_Tribune_Oakland | `mara` | 29 |
-| `chicago_roster.txt` | Chicago_Citizens | `mara` | 123 |
-| `business_registry.txt` | Business_Ledger | `mara` | 51 |
-| `faith_registry.txt` | Faith_Organizations | `mara` | 16 |
+| `chicago_roster.txt` | Chicago_Citizens | `mara` | 125 |
+| `business_registry.txt` | Business_Ledger | `mara` | 53 |
+| `faith_registry.txt` | Faith_Organizations | `mara` | 17 |
+
+Counts reflect last `buildMaraReference.js` run; re-run if ledger has grown. ENGINE-mode subset count may have shifted after S184 +150 female-balance addition.
 
 ---
 
@@ -600,6 +624,7 @@ Retrieval-only by default. Container selection via the userId argument. Compose 
 
 ## Changelog
 
+- 2026-04-30 — S190. Currency refresh. **§bay-tribune Contents** rewritten — last audit was S113 (E83-E89, ~31 docs); now reflects S189 Phase 1 audit (175 docs across editions E83-E92, supplementals C83-C92, dispatches, interviews, wiki entities, rosters, corrections). **§world-data Contents** rewritten — last edit was S131 first-ingest snapshot (26 docs); now reflects post-S183 unified ingest with per-domain `wd-*` tag scheme + S184 female-balance +150 (~843 docs total, 100% domain-tagged). **§mara Contents** + **§Reference File Generation** counts refreshed (Chicago 123→125, Business 51→53, Faith 16→17; citizen-roster flagged 509+ post-S184 with refresh note). **§Active Rebuilds (S189)** block added between §Scrub Procedure and §Memory Fence — pointers to bay-tribune unified ingest rebuild plan + SMFS comparison doc + HOLD status.
 - 2026-04-29 — S188. Added §Scrub Procedure documenting the S186 Perkins&Will → Atlas Bay scrub workflow (identify / confirm / wipe / re-ingest / verify), corrigendum pattern for audit records, wiki-layer immunity finding. Pairs with session-end SKILL.md drift fix (`/super-save` writes to `super-memory`, not `bay-tribune`).
 - 2026-04-25 — S177 (upgrade applied). Upgraded local plugin install 0.0.1 → upstream HEAD (13 commits past, including 0.0.2 tag). Marketplace clone stashed local mod to `plugin/hooks/hooks.json` before pull (recoverable via `cd /root/.claude/plugins/marketplaces/supermemory-plugins && git stash show stash@{0}`). The dropped mod, preserved here for permanent recovery: description string changed to "Mags brain — context on boot, summary on close, no auto-capture"; nested `[{hooks:[{type,command}]}]` flattened to `[{type,command}]` (non-spec format — would not have parsed correctly under current Claude Code hook spec, settings.json uses nested); `PostToolUse: []` explicit empty (moot — upstream defines no PostToolUse hook); `SUPERMEMORY_CC_API_KEY=...` env-forwarding wrapper (redundant — key is already in `.env` + `.bashrc` and Node child processes inherit env); timeouts `10000`/`15000` (likely intended ms but spec is seconds — upstream's `30` is correct). Net loss: zero functional change. Net gain: hooks now in spec-valid format if they weren't before. Drop rationale + restore path: this entry + the marketplace stash. Diff:
   ```diff

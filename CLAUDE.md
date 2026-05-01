@@ -21,6 +21,7 @@ The `SessionStart` hook auto-detects your terminal (via tmux window name) and em
 1. **GodWorld MCP** for city data — `lookup_citizen`, `lookup_initiative`, `search_canon`, `search_world`, `get_neighborhood`, `get_council_member`
 2. **claude-mem** for decisions/failures — `mcp__plugin_claude-mem_mcp-search__search` → `get_observations` on top hits
 3. **Supermemory `mags`** for reasoning/conversation — `search-memory.cjs --user "query"`
+4. **`docs/index.md`** for "where does X live in the tree" — grep the catalog before grepping the tree
 
 If Mike says "fix the pipeline" → search `"pipeline fix architecture city-hall"`. If he says "what happened with E89" → search `"E89 failed rejected Mara audit"`. Don't guess. Don't diagnose what was already diagnosed.
 
@@ -112,7 +113,7 @@ node scripts/queryFamily.js          # Family state
 node scripts/queryLedger.js          # Citizen data
 node scripts/buildDeskPackets.js     # Desk input data
 node scripts/validateEdition.js      # Edition validation
-clasp push                           # Deploy engine (128 files)
+clasp push                           # Deploy engine (~125-160 .js/.gs/.html, .claspignore filters lib/dashboard/scripts)
 npx supermemory search "query" --tag bay-tribune  # Canon search
 npx supermemory search "query" --tag world-data   # City state search
 pm2 restart mags-bot                 # Restart Discord bot
@@ -127,7 +128,7 @@ Gotchas: Ledger columns past Z (Income=col26), service account can't create shee
 - **CRC** = Civic Reform Coalition
 - **IND** = Independent (Vega, Tran — NOT a bloc, they don't coordinate)
 - **Intake system** — DONE S137b. Three feedback channels operational (initiative tracker, sports feed, coverage ratings). Don't re-design.
-- **Population** — 1,200+ total (Simulation_Ledger 761, Generic_Citizens 286, Cultural_Ledger 39, Business_Ledger 53, Faith_Organizations 17, Chicago_Citizens 125). Don't cite "675" — that's filtered to one sheet.
+- **Population** — ~1,357 total (Simulation_Ledger ~837 per S187 audit, Generic_Citizens 286, Cultural_Ledger 39, Business_Ledger 53, Faith_Organizations 17, Chicago_Citizens 125). Don't cite "675" or "761" — both stale, filtered to one sheet at a snapshot.
 - **Simulation subject = Oakland.** Oakland IS the world. Outside world exists in canon (Chicago — Mike Paulson's home + the Bulls; sports opponent cities) but real-world sector/geography claims don't import. Tech ecosystem is Oakland (supplemental_tech_landscape_c84 — 9 companies, 900 employees), dynasty sports is Oakland, civic action is Oakland. Don't reason from "tech is SF / finance is NYC / auto is Detroit" — those dismiss canon as implausible. Locked S170 after city-functions gap analysis got Tech ranking wrong by importing real-world Oakland/SF mental model into a simulation where SF doesn't operate as a relational counterweight.
 
 ## Session Lifecycle

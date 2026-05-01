@@ -254,3 +254,21 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-04-29 (2026-04-30T03:18:31.850Z)
 - Mike is specifically interested in KONO cultural coverage depth. Could signal interest in neighborhood-specific storytelling or dispatch-to-supplemental pipeline.
+
+### 2026-04-30 (2026-05-01T03:43:06.649Z)
+- E92 is confirmed live with at least two published pieces (Mayor's Day front and KONO dispatch). Need to reconcile my production notes with actual published state — the working assignments I have suggest 11 stories + letters, but only two are confirmed live so far. Confirm publication timeline and whether remaining stories are queued or still in production.
+
+### 2026-04-30 (2026-05-01T03:43:35.188Z)
+- E92 published with all 11 stories. Dispatch skill identified and fixed gaps during first end-to-end execution. Need to understand what those gaps were and whether they're documented anywhere — could be useful for future dispatch runs and skill refinement.
+
+### 2026-04-30 (2026-05-01T03:44:11.347Z)
+- E92 dispatch produced 11 documented gaps during first full end-to-end run. Gap log should be in production_log_edition_c92.md or NEWSROOM_MEMORY.md §Dispatch C92 entry. Need to audit those gaps to understand what the /dispatch skill is catching and what refinement is still needed before the non-edition publishing pipeline goes active.
+
+### 2026-04-30 (2026-05-01T03:44:32.749Z)
+- Mike's question "11 stories? Huh" suggests my production lineup doesn't match what actually ran in E92. Need to reconcile the working assignment list against the actual published edition. Could indicate story cuts, merges, or a different structure than what I have documented.
+
+### 2026-04-30 (2026-05-01T03:45:07.396Z)
+- Clarified — E92 had 11 stories (full edition published), 11 gaps in dispatch process (fixed before publication). Need actual gap category breakdown from dispatch C92 production log to understand skill performance and what patterns to monitor for future editions.
+
+### 2026-04-30 (2026-05-01T03:45:36.322Z)
+- Dispatch and edition are distinct publication types with separate pipelines. /dispatch skill runs on dispatches (like Kai Marston KONO piece). /edition-print runs on full editions (like E92). I was treating them as the same thing. Need to clarify what those 11 dispatch gaps were — they're not edition-related, they're dispatch-pipeline-specific.

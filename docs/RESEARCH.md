@@ -2031,3 +2031,25 @@ The `Task` tool today spawns Claude subagents that each produce one reply and ex
 **Rollout:** LOW pointer in Infrastructure. Test before build; build after Phase 39 + Phase 40 close and persistent-process infra decision is made.
 
 **Status:** Research-landscape entry. Rollout LOW pointer present in [[engine/ROLLOUT_PLAN]] Infrastructure section. Solo adoptability check completed S172 — not adoptable, path (a) build-our-own locked as leading direction. No plan file (deferred until preconditions close and harness design needs operationalizing). Interim Task-tool PoC viable without plan file.
+
+---
+
+## S189 — SMFS (Supermemory Filesystem) (2026-04-30)
+
+**Source:** smfs.ai + github.com/supermemoryai/smfs. Released 2026-04-29 (v0.0.1, MIT or Apache-2.0). Email announcement to Mike same day, mid-session, the day this session shipped Phase 1.5 of the bay-tribune unified ingest rebuild plan.
+
+**What it is:** Userspace daemon (pure Rust, single static binary) that mounts existing Supermemory containers as POSIX filesystems. macOS uses NFSv3-on-localhost; Linux uses FUSE. Local SQLite cache survives restarts; bidirectional sync (pull on cache miss, push dirty writes; 30s default remote-change sync). Semantic `grep` is the default (`grep -F` forces literal). `cat profile.md` returns synthesized always-fresh container digest.
+
+**Install:** `curl -fsSL smfs.ai/install | sh`. **Setup:** `smfs login` (uses Supermemory API key). **Use:** `smfs mount <container_tag>`.
+
+**Marketing claim:** "83% fewer tokens, 64% fewer tool calls" in tests with Claude and Codex. Self-reported, not independently verified.
+
+**Repo state:** v0.0.1, 179 stars, 0 open issues, languages Rust 39% / Python 41% / TypeScript 19%. Released 2026-04-29.
+
+**Relevance — direct overlap with bay-tribune unified ingest rebuild:** if SMFS works at our scale, Phase 2-7 of the rebuild plan (`ingestEdition.js` retrofit, `ingestEditionWiki.js` migration, `wipeBayTribuneByCustomId.js`, bulk migration, MCP `--type` filter) collapse to file ops: `cp file.txt /smfs/bay-tribune/dispatch/c92/kono.txt`, `rm` for wipe, semantic `grep` for type-filtered search. The 16-tag taxonomy maps 1:1 to directory structure; customId-as-slug becomes filename discipline. Phase 1 inventory + Phase 1.5 disposition map (175 docs / 22 unknown / 6-bucket disposition) carries forward unchanged — editorial decisions are surface-agnostic.
+
+**Risks:** 1-day-old release, 0 issues = pristine-or-untested at scale, marketing benchmarks not independently verified, 30s sync potentially tight for `/post-publish` Step 1 → Step 2 chain, 6-container model footprint unknown, /v4/search MCP tool layer co-existence (S183) needs verification, no explicit Claude Code compatibility statement, vendor concentration (deepens Supermemory dependency though MIT license preserves fork option).
+
+**Decision (S189):** Bay-tribune rebuild Phase 2-7 placed on HOLD. Mags-first pilot proposed (smallest blast radius — editorial brain, not canon, not engine state, recoverable if SMFS misbehaves). Pilot spec at `[[comparisons/2026-04-30-smfs-vs-bay-tribune-rebuild]]` — 10 acceptance steps + 7 acceptance criteria + fail-safe rollback via umount. Engine-sheet runs the install + mount when Mike OKs the third-party binary; 7 days of passive observation through normal Mags work; outcome appended to comparison doc Phase 2 with go/no-go on bay-tribune migration.
+
+**Status:** Research-landscape + active eval. See `[[comparisons/2026-04-30-smfs-vs-bay-tribune-rebuild]]` for full risk surface, pilot proposal, and decision forks.

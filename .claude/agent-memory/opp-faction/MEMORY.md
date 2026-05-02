@@ -52,6 +52,20 @@ Prior work: `output/civic-voice/opp_faction_c91.json`, `output/civic-voice/opp_f
 - **Delgado (STMT-87-OPP-003):** Fruitvale Transit Hub Phase II design launch — locking in community benefits NOW (local hiring, affordable housing, workforce agreements). Tone: measured-vigilant.
 - Mobley: No separate statement (bloc unity)
 
+## C93 Statements
+- **Statements Generated:** 5
+- **Rivers (STMT-93-OPP-001):** D2 OARI motion filed C93 + 8-vote whip campaign. Claimed expansion ownership; aligned with Mayor's slow-defeat frame. Data claim: 84% resolution rate in pilot districts proves readiness. Tone: passionate-substantive.
+- **Rivers (STMT-93-OPP-002):** Friendly amendment coordination — endorsed Mayor's separate-path framing. OPP files motion, Mayor carries amendment. Coalition discipline. Tone: measured-coalition.
+- **Rivers (STMT-93-OPP-003):** INIT-007 Youth Apprenticeship Pipeline legislation-filed advance (engine C93 improvement). Claimed as OPP legislative vehicle tying apprenticeship to Oaks CBA. East Oakland / West Oakland / Fruitvale targeting. Heritage-plus-jobs framing. Tone: passionate-substantive.
+- **Rivers (STMT-93-OPP-004):** West Oakland CULTURE crisis + Stabilization Fund signature escalation. Carter as district lead; OPP bloc behind her. Amplified Mayor's M3 commitment to weekly council oversight + throughput reporting. Tone: passionate-direct.
+- **Rivers (STMT-93-OPP-005):** Oaks naming + workforce-standard frame. Heritage is Mayor's (M4); equity jobs structure is OPP responsibility. Tied to INIT-007 + Phase II RFP + OARI rubric (structural change). Tone: measured-visionary.
+- **Decision Logic:**
+  - **D2 OARI filing:** Option A. Mayor's slow-defeat ultimatum creates political moment. OPP motion + 8-vote whip + Mayor's friendly-amendment = unified expansion ask with distributed responsibility.
+  - **Amendment coordination:** Option A. Coalition trust + procedural clarity. Mayor owns timeline, OPP owns principle. Clarified for Mara directive + council process.
+  - **INIT-007 credit:** Option A. Engine advance (legislation-filed) landed C93. OPP claims legislative ownership as pathway vehicle. Community benefit framing (jobs targeting).
+  - **West Oakland crisis:** Option A + escalation. Amplified Mayor's signature-clearance commitment; added OPP-led oversight + weekly reporting. Carter spotlight. Coalition while maintaining pressure.
+  - **Oaks naming:** Hybrid A + heritage-equity framing. Validated Mayor's M4 (heritage). Added OPP mandate (jobs structure) tied to INIT-007 + CBA + Phase II workforce modeling.
+
 ## C86 Snapshot (for reference)
 - Rivers: OARI Day 30 implementation
 - Carter: Phase 1 disbursement (Beverly Hayes, 12 families)

@@ -59,4 +59,22 @@ Prior work: `output/civic-voice/ind_swing_c86.json`, `output/civic-voice/ind_swi
 - Tran's deciding vote was conditional on D2 expansion potential
 - Tran signals renewal vote contingent on D2 inclusion by C93
 
+## C93 Statements Issued
+
+**Vega (Transit Hub Vote Calendar):** Confirmed November 8 vote schedule holds. Affirmed YES on CBA framework as written; rejected Ashford cost-cap amendment as procedurally unnecessary and substantively redundant. Invoked Council President procedural authority: "Fruitvale has waited long enough." Frame: institutional necessity + fiscal discipline via existing CBA structure.
+
+**Vega (OARI Amendment Sponsorship):** Accepted role as friendly-amendment sponsor for implementation cycle commitment. Conditioned sponsorship on Tran naming the cycle first. Positioned sponsorship as Council President neutral (procedural, not faction-driven) to strengthen 8-vote architecture. "Once Leonard decides, I carry the amendment to the floor."
+
+**Tran (Implementation Cycle Naming):** Chose Option A — named C95 as implementation target for OARI expansion into D2. Based decision on operational alignment (DA escalation triggers C95, Health Center HCAI C95, Okoro checkpoint C95). Fulfills C92 condition: framework + thresholds + named cycle all required for renewal support.
+
+**Tran (D2 Condition Continuation):** Escalated conditional support to three concrete operational gates: (1) OPD readiness certification from Chief Montez by C94 end, (2) Tran-Muñoz thresholds published by C94 end, (3) D2 community advisory chartered by C94 with monthly reporting to him. Gates are district-specific (advisory) + framework-specific (thresholds) + administrative (OPD readiness).
+
+**Canon Assertions (C93):**
+- Transit Hub Phase II vote confirmed for November 8; Vega YES on motion; cost-cap amendment rejected as procedural overreach
+- Vega accepted OARI amendment sponsor role, conditioned on Tran cycle naming
+- Tran named C95 as OARI expansion implementation cycle, aligning with all other city-calendar gates
+- Tran's renewal support conditional on three C94 gates: OPD readiness cert, Tran-Muñoz thresholds publication, D2 advisory charter
+- 8-vote architecture (OPP 4 + Vega + Tran + ???) dependent on amendment landing with Tran's cycle and three operational conditions
+- Council President authority invoked on vote scheduling (precedent from C92, affirmed C93)
+
 ## C87 Statements Issued

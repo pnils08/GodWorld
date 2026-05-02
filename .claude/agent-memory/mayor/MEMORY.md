@@ -7,6 +7,51 @@
 Write to: `output/civic-voice/mayor_c{XX}.json`
 Prior work: `output/civic-voice/mayor_c92.json`
 
+## Key Decisions (C93)
+
+### Personnel/Governance: Health Center Deadline — Reaffirm + Trust Operator (INIT-005)
+- **Decision:** Reaffirm Bobby Chen-Ramirez's three-cycle schedule (architect C93, site C94, HCAI C95).
+- **Statement:** STMT-93-MAYOR-001 — "Bobby Chen-Ramirez is delivering on schedule."
+- **Rationale:** Tracker writeback drift (14/17 neighborhoods showing no sentiment delta) likely broken; trust operational report over broken instrument. At 83 approval, transparency on tool failure is credible.
+- **Political Payoff:** Reaffirm locks deadline without renegotiating. Temescal anchor citizen Patricia Nolan holds. Narrative coherence (all neighborhoods building).
+
+### Crisis Response: West Oakland Grief + Signature Clearance (INIT-001)
+- **Decision:** Public mourning statement tied directly to Stab Fund clearance commitment. Acts Full Gospel grief gathering gets mayoral acknowledgment; signature bottleneck becomes operational action.
+- **Statement:** STMT-93-MAYOR-002 — "West Oakland is grieving. This city grieves with you, and we act with you."
+- **Rationale:** HIGH-severity engine event + 191 unsigned checks in same neighborhood = governance convergence. Tying faith response to housing action positions mayor as both human and executive.
+- **Political Cost:** Public commitment visible on followthrough (Item 3). Political Payoff: Denise Carter credit, neighborhood trust, Acts Full Gospel partnership.
+
+### Directive: Stabilization Fund Signature Clearance — Public Commitment + Throughput Target (INIT-001)
+- **Decision:** Directive to clear 191 approved applications by end-cycle, 50/week throughput, Okoro coordination oversight.
+- **Statement:** STMT-93-MAYOR-003 — "The bottleneck is at my office. That ends now."
+- **Rationale:** Bottleneck canonized in E92; signature delay tied to West Oakland crisis via Item 2. Public commitment with numbers and timeline (50/week × 4 = 200 capacity > 191 need) locks governance discipline.
+- **Authority:** Mayor's office workflow directive, naming Webb (OEWD) and Okoro (Deputy Mayor / Community) as coordinators.
+- **Political Payoff:** At 83 approval, you can own the bottleneck and fix it publicly. Finance Committee reporting (Vega oversight) satisfies CRC accountability demand.
+
+### Vision: NBA Oakland Oaks Naming — Heritage + Workforce Frame (INIT-007)
+- **Decision:** Welcome Oaks name + tie explicitly to Oakland identity + apprenticeship pipeline.
+- **Statement:** STMT-93-MAYOR-004 — "The Oakland Oaks: bringing back what made us proud, building what makes us future."
+- **Rationale:** Varek's throwback choice sits in prosperity-era canon; using it reinforces heritage without losing workforce-first frame. INIT-007 advanced to legislation-filed C93 — credit that moment.
+- **Political Payoff:** Locks CBA mandate into public voice. Front-office staffing, construction training, youth apprenticeship all publicly committed. Varek stays accountable.
+
+### Initiative Response: Phase II RFP — Confirm Open + Scope Positioning (INIT-006)
+- **Decision:** Confirm RFP published, back Ramos on Phase II feasibility scope publication C94.
+- **Statement:** STMT-93-MAYOR-005 — "Phase II is public. The RFP is open. The scope goes to council before the briefing."
+- **Rationale:** Option A per Mara directive — pre-position C94 briefing with public scope on record, avoids silence-failure risk. Naming Ramos honors delivery.
+- **Political Payoff:** Governance transparency. C94 comprehensive briefing (arena capacity, workforce modeling, local hiring, capital requirements) backed by public RFP scope.
+
+### Policy Position: OARI Rubric Reaffirm — Administration Official Standard (INIT-002)
+- **Decision:** Tran-Muñoz framework is administration-official renewal standard (not project-director proposal). C95 motion to carry 75% non-police resolution + stable complaint volume.
+- **Statement:** STMT-93-MAYOR-006 — "The Tran-Muñoz framework is the Oakland administration's official renewal posture."
+- **Rationale:** Option A: move C92 interview from personal voice to administration-official voice. Locks rubric institutionally. Pays political tax openly. Clears ambiguity.
+- **Political Cost:** Owns the shift explicitly. Political Payoff: clarity, credibility, C95 motion language set. Tran-Muñoz framework locked.
+
+### Governance: Okoro Consolidation Posture — Time-Bound + C95 Checkpoint (INIT-001 operational)
+- **Decision:** Consolidation runs through C95 audit, then reset. Council gets checkpoint data (processing backlog, Stab Fund throughput, operational impact). No permanent power grab.
+- **Statement:** STMT-93-MAYOR-007 — "Okoro's consolidation runs through C95 audit. Then we reset. Council gets the checkpoint and the data."
+- **Rationale:** Option A: time-bind consolidation, entangle with Item 3 (signature clearance gives clean data for C95 audit). Defangs Ashford critique.
+- **Political Payoff:** Fiscal discipline, council accountability, clean hand-off to future voice when Okoro agent builds.
+
 ## Key Decisions (C92)
 
 ### Personnel: Marcus Osei Transition — Permanent Reassignment (Final)

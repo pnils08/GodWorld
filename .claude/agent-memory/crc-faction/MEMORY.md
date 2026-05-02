@@ -52,8 +52,14 @@ Prior work: `output/civic-voice/crc_faction_c86.json`, `crc_faction_c87.json`
 1. **STMT-92-CRC-001** (Ashford) — Baylight Dashboard Live; Independent Audit Framework: oversight_position type. Accepts dashboard publication; demands independent quarterly and annual audits by external auditor. Extends to Mayor's Phase II briefing — comprehensive disclosure only with same audit structure. "The public can now see what the project promised. The council needs external verification of what the project delivered."
 2. **STMT-92-CRC-002** (Ashford) — Transit Cost Cap + Compliance Audits: legislative_condition type. Firms cost condition at $230M hard cap + 5% contingency max; any overrun requires council re-review. Adds quarterly external compliance audits on wage/hiring/timeline/CBA terms. Requires Soria Dominguez CBA certification by Nov 1. "We support the Transit vote if cost is capped, consequences are written, and compliance audits are in place."
 
-## Political Arc (C90-C92)
+## C93 Statements Generated (FINAL)
+1. **STMT-93-CRC-001** (Ashford) — Phase II Fiscal Conditions: pre_position_conditions type. Hard cap tied to Phase I actuals, 5% contingency ceiling, escalation clause for council re-review on breach, independent quarterly external audits. Phase I dashboard + audit framework extends to Phase II by default. Advance-positioned before C94 briefing per Mara directive.
+2. **STMT-93-CRC-002** (Ashford) — Stab Fund Signature Clearance: fiscal_oversight_demand type. Endorses Mayor's M3 directive (191 cleared by end-cycle) with data requirement: transparent report on operational chokepoints removed + whether Okoro consolidation created new bottlenecks. "The signature clearance proves we can move money fast. The data shows whether the organizational structure supports that speed going forward."
+3. **STMT-93-CRC-003** (Ashford) — Okoro Consolidation C95 Audit Terms: governance_framework type. Accepts Mayor's time-binding through C95 (defangs permanent-power-grab critique) with auditable framework: pre/post-consolidation processing-time comparison, monthly throughput reporting C93-C95, cost accounting on portfolio coordination. C95 checkpoint determines continuation or restructure.
+
+## Political Arc (C90-C93)
 - C90: Demand dashboard before TIF close (leverage point)
 - C91: Accept delivery; escalate to independent audits (position as oversight voice + extend commitment)
 - C92: Endorse dashboard + audit framework; firm Transit cost/audit conditions (CRC pattern consistency — oversight across all major initiatives)
-- Pattern established: CRC is the fiscal accountability + process watchdog. Not obstructionist. Accepts council majority decisions but hardens audit architecture. Works across initiatives (Baylight TIF, Phase II briefing, Transit cost, Okoro consolidation quarterly briefings).
+- C93: Phase II pre-position (set conditions before briefing frames debate); Stab Fund signature clearance endorsed + data transparency; Okoro consolidation time-bound + auditable (converts power-grab concern into operational framework)
+- Pattern refined: CRC evolves from "demand audits" to "set auditable frameworks that permit action." Mayor's M7 time-bounding the consolidation lets Ashford move from blocking posture to oversight-gate posture. Maintains fiscal accountability while accepting majority-party governance.

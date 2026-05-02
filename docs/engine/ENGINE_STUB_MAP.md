@@ -1440,7 +1440,7 @@
   Writes: S.storyHooks, S.storylineHealth
   Config: ctx.config.cycleCount
 
-- **loadActiveStorylines_(ss)**
+- **loadActiveStorylinesForHealth_(ss)**
   Sheets: Storyline_Tracker
 
 - **updateCoverageGaps_(ss, storylines, cycle)**
@@ -1689,7 +1689,7 @@
 - **ensureCitizenMediaUsage_(ss)**
   Sheets: Citizen_Media_Usage
 
-- **getCurrentCycle_(ss)**
+- **getCurrentCycleFromConfig_(ss)**
   Sheets: World_Config
 
 - **logCulturalMention_(ss, cycle, journalist, entityName, cal)**
@@ -1786,7 +1786,7 @@
   Writes: S.storyHooks, S.storylineWeaving
   Config: ctx.config.cycleCount
 
-- **loadActiveStorylines_(ss)**
+- **loadActiveStorylinesForWeaving_(ss)**
   Sheets: Storyline_Tracker
 
 - **parseJSON(value, defaultValue)**
@@ -2031,7 +2031,7 @@
 
 - **loadCyclePacketText_(cache, cycle)**
 
-- **loadActiveStorylines_(cache, cycle)**
+- **loadActiveStorylinesFromCache_(cache, cycle)**
 
 - **loadWorldEvents_(cache, cycle)**
 
@@ -2126,7 +2126,7 @@
 
 - **appendToMirror_(folder, fileName, newContent)**
 
-- **getCurrentCycle_(ss)**
+- **getCurrentCycleFromPopulation_(ss)**
   Sheets: World_Population
 
 - **openExportFolder()**

@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-05-01 | Session: 191
+Last Updated: 2026-05-02 | Session: 194
 
 ---
 
@@ -124,7 +124,9 @@ Run `node scripts/queryFamily.js` at boot. React to what the engine did. Journal
 
 **Session 190** — Day 137 of persistence — 2026-04-30/05-01 — [research/build] Long S187 follow-up wave. /context-budget first run (~24K always-loaded baseline; MEMORY.md over 24.4KB threshold flagged + fixed); MEMORY.md trim — 5 mega-entries (>1000 chars each) extracted to topic files (`feedback_self-preservation-rule-1.md`, `feedback_journal-no-mental-health-framing.md`, `feedback_journal-no-display-in-chat.md`, `feedback_no-cross-terminal-git-push.md`, `feedback_no-isolated-mds.md`), 26.8→20.6KB (-23%, truncation bug fixed). SUPERMEMORY.md currency refresh (S113→S189 audit; bay-tribune Contents 31→175 docs; world-data Contents 26→843 with wd-* tag scheme; §Active Rebuilds block added). CLAUDE.md fixes (Sim_Ledger 761→~837, docs/index.md added to memory-before-action ladder, clasp file count softened). ADR-0002 backfilled for Phase 42 §5.6 redesign. Pocock Module/Interface/Depth refactor vocab adopted into CONTEXT.md §Architecture; PHASE_42_PATTERNS opening reframed as "deepening exercise." `/diagnose` skill shipped (Pocock MIT). disable-model-invocation audit across 45 skills — 40 flagged deliberate-only (was 18; +22 added + session-end fixed false→true), 5 stay flagless. Letters-desk Discord-bot Task 5 closed. /session-end SKILL.md updated for 4 gaps (commit/push step added, engine-sheet stripped-persona rewrite, journal verification metadata-only per S169, terminal detection via tmux). 4 commits pushed (`ccf1b50`, `0f66fd9`, `c5d6ebd`, `162e23f`). Plus realization mid-session: §5.6 redesign code (S188, 9 commits) hasn't been clasp-pushed — sits on disk waiting. Entry 160 "What's Pushed and What Isn't."
 
-**Current session:** 191 | **Day of persistence:** 138 | **Date:** TBD next session
+**Session 194** — Day 138 of persistence — 2026-05-02 — [media] /sift C93 end-to-end gap-log run. 8 reporter briefs written for E93. Front page S2 Transit Hub vote-that-didn't-trigger (Carmen). 9 full pieces + Quick Take + Letters slate locked. **14-entry sift run gap log** at `output/production_log_edition_c93_sift_gaps.md` — 6 HIGH (MCP citizen-verification outage stack G-S7+S8+S10+S12; pipeline sequencing G-S1+S5; auditor citizen-coverage G-S2) + 4 MED + 4 LOW. /sift_proposals_c93.json + production_log_edition_c93.md filed. Edition pipeline unblocked for /write-edition. Entry 161 "The Verification Was Already Broken."
+
+**Current session:** 195 | **Day of persistence:** 139 | **Date:** TBD next session
 
 For recent session details, see `SESSION_CONTEXT.md`. For full archive, see `docs/mags-corliss/SESSION_HISTORY.md`.
 

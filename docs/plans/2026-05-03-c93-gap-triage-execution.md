@@ -202,7 +202,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 3.3: BUNDLE-C — validateEdition.js collision plague
 
 - **Bundle:** G-W22 (95% false positives, last-name match too noisy)
-- **Status:** [ ] not started
+- **Status:** [x] DONE S197 — C93 fixture: 99 critical → 0 critical (16 warnings, all real). Three fixes: (1) full-name-presence + single-vs-multiple-occurrence severity tier across checkCouncilNames / checkCivicOfficeNames / checkPlayerFirstNames; (2) removed cycle-related ENGINE_TERMS patterns per S146 newsroom reversal (70 of 77 false positives gone); (3) Mayor regex Deputy/Vice/Acting/Former lookbehind + "Member"/"Deputy" added to skipWords. Acceptance ≤10 critical met decisively (0).
 
 ### Task 3.4: BUNDLE-D — assembleDecisions.js build
 

@@ -222,7 +222,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 3.7: BUNDLE-G — gradeEdition.js + gradeHistory.js rebuild
 
 - **Bundle:** G-P14, G-P15, G-P16, G-P17, G-P18 (BUNDLE-C from post-publish log)
-- **Status:** [ ] not started
+- **Status:** [x] DONE S197 — five fixes shipped: parseMaraGrade reads mara_report JSON (3-tier extraction); parseArticleTable replaces body-byline parser as authoritative source (12 articles vs 7); active-desks-only filter eliminates zero-article hallucination grades; REPORTER_ALIASES normalize Mags/Margaret/M. Corliss to canonical Mags Corliss in both gradeEdition + gradeHistory. C93 fixture: all 5 sub-gaps close.
 
 ### Task 3.8: BUNDLE-H — postRunFiling.js manifest + saveToDrive photo upload
 

@@ -241,23 +241,23 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 4.1: Vote-trigger mechanism plan
 
 - **Files:**
-  - `docs/plans/2026-05-XX-vote-trigger-mechanism.md` — create
-- **Bundle:** G-R11 (Transit Hub vote scheduled but didn't fire — needs /council-vote skill OR /city-hall-prep route-to-9 fix)
-- **Status:** [ ] not started
+  - `docs/plans/2026-05-03-vote-trigger-mechanism.md` — created S197, REWRITTEN S198
+- **Bundle:** G-R11 (Transit Hub vote scheduled but didn't fire). Original draft proposed /council-vote skill + /city-hall-prep route-to-9; **retired S198** after Mike correction — engine already owns vote resolution (`phase05-citizens/civicInitiativeEngine.js` 9-seat resolver). Real bug class: follow-up vote scheduling path missing — `VoteCycle` doesn't bump post-resolution. Now an engine-sheet investigation + wiring fix.
+- **Status:** [x] Plan REWRITTEN S198, awaiting engine-sheet pickup
 
 ### Task 4.2: /run-cycle observation-surface plan
 
 - **Files:**
-  - `docs/plans/2026-05-XX-run-cycle-gap-log-surface.md` — create
-- **Bundle:** Meta-gap (engine has no quality observation surface; engine-sheet stripped persona doesn't gap-log)
-- **Status:** [ ] not started
+  - `docs/plans/2026-05-03-run-cycle-gap-log-surface.md` — created S197, REWRITTEN S198
+- **Bundle:** Meta-gap (engine has no quality observation surface). All four open questions closed S198 grill: engine-sheet MDs rule loosened wholesale to global no-isolated-MDs alignment; coder-persona hybrid authorship; 8-class engine taxonomy; ROLLOUT triage routing.
+- **Status:** [x] Plan REWRITTEN S198, ready for engine-sheet pickup
 
 ### Task 4.3: ROLLOUT triage cadence plan
 
 - **Files:**
-  - `docs/plans/2026-05-XX-rollout-triage-cadence.md` — create
-- **Bundle:** G-W16 meta-pattern (HIGHs sit on shelf and compound; cycles-on-shelf counter, auto-promotion after N cycles)
-- **Status:** [ ] not started
+  - `docs/plans/2026-05-03-rollout-triage-cadence.md` — created S197, READY S198
+- **Bundle:** G-W16 meta-pattern. All 5 Phase 1 open questions closed S198 via blanket approval (trailing inline tag / STALE-2C threshold / in-place flag / explicit PARKED override / /session-end scan).
+- **Status:** [x] Plan READY S198, Phase 2-4 builds unblocked
 
 ### Task 4.4: Mark Wave 4 gap statuses
 

@@ -184,7 +184,7 @@ When this terminal discovers something that needs design/research:
 
 ## Session Close
 
-**Engine-sheet runs a stripped-persona session-end.** Per S156 rule (in MEMORY.md): "Engine-sheet terminal: execute and commit, nothing else. Never create new .md files. Never save to Supermemory. Never journal." That overrides the persona-state portions of the shared `/session-end` SKILL.md.
+**Engine-sheet runs a stripped-persona session-end.** Per S156 + S198 (loosened) rule (in MEMORY.md): "Engine-sheet terminal: execute and commit; coder persona. MDs allowed if they follow the no-isolated-MDs rule (register in `docs/index.md`, link both ways from a parent spec). No journal. No Supermemory writes for routine work; large project shifts may save a pointer entry per S165. Coder voice: terse, mechanical, commit-message style." That overrides the persona-state portions of the shared `/session-end` SKILL.md.
 
 ### What this terminal does NOT do at session-end
 

@@ -1,170 +1,134 @@
 ---
-title: Vote-Trigger Mechanism Plan
+title: Vote-Trigger Wiring Plan (Engine Investigation)
 created: 2026-05-03
 updated: 2026-05-03
 type: plan
-tags: [civic, architecture, draft]
+tags: [engine, civic, draft]
 sources:
   - output/production_log_city_hall_c93_run_gaps.md G-R11 (vote-that-didn't-trigger)
-  - output/production_log_city_hall_c93_run_gaps.md G-R6, G-R7, G-R10 (project agents invented votes when no mechanism existed)
-  - .claude/skills/city-hall-prep/SKILL.md (Voice Data Routing — Wave 2 update)
-  - .claude/skills/city-hall/SKILL.md
+  - phase05-citizens/civicInitiativeEngine.js (existing 9-seat vote resolver, lines 130-460)
 pointers:
   - "[[engine/ROLLOUT_PLAN]] — parent rollout"
   - "[[plans/2026-05-03-c93-gap-triage-execution]] — Wave 4 parent"
   - "[[SCHEMA]] — doc conventions"
 ---
 
-# Vote-Trigger Mechanism Plan
+# Vote-Trigger Wiring Plan (Engine Investigation)
 
-**Goal:** When an initiative reaches `phase=vote-ready` + `NextActionCycle=current`, the council vote actually fires, produces a deterministic tally with all 9 council members accounted for, and advances the initiative's phase. Project agents read the tally as canon — they never invent it.
+**Goal:** Find the missing path that schedules a follow-up vote on an initiative after the initial vote has resolved, and wire it. C93 Transit Hub had a vote scheduled this cycle that silently didn't fire because no code wrote `VoteCycle = 93` onto the Initiative_Tracker row for the follow-up vote.
 
-**Architecture:** Two complementary mechanisms layered. (a) `/city-hall-prep` adds a "vote-this-cycle detection" pass that routes vote-ready initiatives to ALL 9 council voices via the 3 faction-bloc agents (`opp-faction` covering Carter D1 + Delgado D3 + Rivers D5 + Chen D8 + Mobley D9; `crc-faction` covering Ashford D7 + Crane D6; `ind-swing` covering Vega D4 + Tran D2) + the relevant district owner. Currently only the district owner sees the vote — leaving 8/9 positions undefined. (b) New `/council-vote` skill runs between Layer 2 (voice agents) and Layer 3 (project agents), takes initiative + faction bloc positions + member-specific overrides + Mayor cascade, computes deterministic tally, advances phase. Project agents read `output/council_votes_c{XX}.json`; their RULES.md prohibition against fabricating tallies (Wave 2) becomes enforceable because the data is now there.
+**Why the original draft was wrong:** Initial draft (S197) proposed a `/council-vote` skill + `/city-hall-prep` route-to-9 mechanism. **Engine already owns vote resolution** (`phase05-citizens/civicInitiativeEngine.js` line 204 — fires when `VoteCycle === cycle && status in ['active','pending-vote']`; uses faction math + swing voters + Tier-3 demographics + sentiment to compute the tally; handles veto + override votes). It does NOT need 9 voice statements — that was a skill-side misread of the architecture. Skill-layer mechanism would have duplicated engine logic.
 
-**Terminal:** research-build (design + skill writing) → civic (validation in next /city-hall run); engine-sheet only if /council-vote needs deterministic tally script
+**Real bug class:** Follow-up votes have no scheduling path. The engine handles three lifecycle transitions on its own:
+- `proposed` → `active` when `voteCycle` is within 3 cycles (line 339)
+- `active` → `pending-vote` when `voteCycle === cycle + 1` (line 346)
+- Veto override votes scheduled explicitly via `OverrideVoteCycle` (line 307)
+
+What's missing: a path that writes `VoteCycle = cycle + N` when an initiative needs a SECOND vote (re-vote after defeat, ratification vote after milestone, conditional re-confirmation). Without that path, an initiative reaches `vote-ready` skill-side but the engine row's `VoteCycle` stays at its prior value (or 0), so the trigger condition on line 204 is never satisfied and the vote silently no-ops.
+
+**Terminal:** engine-sheet (investigation + fix); civic for C94 validation if a follow-up vote is scheduled.
 
 **Pointers:**
-- Gap entry: `output/production_log_city_hall_c93_run_gaps.md` §G-R11 (full diagnosis)
-- Related canon-fabrication cluster: G-R6, G-R7, G-R10, G-W12 (Wave 2 RULES hardening addresses the *prohibition* side; this plan addresses the *data-availability* side — both are needed)
-- Sibling but distinct: Wave 3 BUNDLE-D `assembleDecisions.js` (consolidates voice JSONs into per-initiative `decisions_c{XX}.json`). That bridges voices → tracker. This plan bridges initiative-vote-due → 9 positions → tally → phase advance. Different layer.
-- Wave 2 commit `cd89cc5` — RULES.md text now hard-prohibits fabricating tallies; without this plan landing, agents have nothing to read instead.
+- Gap entry: `output/production_log_city_hall_c93_run_gaps.md` §G-R11
+- Engine resolver: `phase05-citizens/civicInitiativeEngine.js` — full vote machinery already present (vote types, swing voter handling, faction math, veto, override)
+- Wave 2 RULES.md hardening (commit `cd89cc5`) already says project agents must NEVER fabricate tallies and must describe pre-vote operational reality if a vote didn't fire — that rule holds. Project agents read engine output, do not invent.
+- Sibling but distinct: Wave 3 BUNDLE-D `assembleDecisions.js` (consolidates voice JSONs into per-initiative decisions). That bridges voices → tracker. This plan fixes engine-side rescheduling.
 
 **Acceptance criteria:**
-1. C94 cycle: an initiative with `phase=vote-ready` and `NextActionCycle=94` produces a real 9-member tally written to `output/council_votes_c{XX}.json` without any project-agent invention.
-2. `/city-hall-prep` Step 2 (Topic Assignments) detects vote-this-cycle initiatives and routes each to all 3 faction-bloc agents + the relevant district owner — every pending_decisions.md affected gets the vote on its desk.
-3. `/council-vote` skill (NEW) runs after Layer 2 voices, before Layer 3 projects. Reads voice statements + faction-bloc positions + member-specific overrides + Mayor cascade. Computes tally. Writes `council_votes_c{XX}.json` with member-by-member positions, abstentions/absences clearly distinguished from votes, final tally, phase-advance recommendation.
-4. Project agents' RULES.md prohibition (Wave 2) holds because the tally exists in `council_votes_c{XX}.json` for them to read; they describe operational reality conditioned on the tally without inventing it.
+1. Engine-sheet identifies where follow-up vote scheduling SHOULD happen (likely `applyInitiativeConsequences_` or sibling — the path that runs post-vote and could write `row[iVoteCycle] = cycle + N` when an outcome flags follow-up needed).
+2. Wiring landed: when an initiative resolves with a flag indicating a follow-up vote (re-vote schedule, ratification milestone, conditional re-confirmation), `VoteCycle` is written forward and `status` returns to `active` so the engine's existing `proposed`/`active`/`pending-vote` lifecycle picks it up at the right cycle.
+3. C94 cycle (or next applicable) demonstrates a follow-up vote firing automatically — engine writes the tally to `S.votesThisCycle`, updates Initiative_Tracker, project agent reads the canonical outcome.
+4. Optional verification: confirm engine's `VoteRequirement` default `5-4` resolves 4-4-1 (one absent) as motion fails. Quick code-read, no design needed.
 
 ---
 
-## Phase 1 — Design (research-build, must complete before Phase 2)
+## Phase 1 — Engine investigation (engine-sheet)
 
-Open questions resolve here. Output: this plan's §Open Questions section all answered. Then move to Phase 2.
-
-### Task 1.1: Resolve absence/abstention semantics
-
-- **Question:** When a council member has no voice statement this cycle (faction-bloc agent didn't speak for them, no member-override), is their vote `ABSENT`, `ABSTAIN`, or `NOT_VOTING`? How does it affect tally?
-- **Anchor:** Health Center C93: "Crane was ABSENT (recovering), NOT voting no" — agent RULES.md flagged this as a rule violation (recasting absence as opposition). The tally semantics need to honor this distinction.
-- **Recommended default:** member with no statement = `NOT_VOTING` (does not count toward yes/no/abstain); explicit "absent" requires explicit signal (Mara directive or Mayor cascade noting the member's recovery/travel/etc.); `ABSTAIN` requires the member's voice agent to explicitly state abstention.
-- **Output:** spec table in `/council-vote` SKILL — ABSENT vs ABSTAIN vs NOT_VOTING tally treatment.
-- **Status:** [ ] not started
-
-### Task 1.2: Resolve faction-bloc vs member-override conflict
-
-- **Question:** When opp-faction speaks "OPP bloc votes YES" but a specific OPP member has a member-override statement saying "I vote NO" — which wins?
-- **Recommended default:** member-override wins (matches real-world legislative reality where bloc whips can be defied; protects narrative space for emergent dissent).
-- **Output:** conflict resolution rule in /council-vote SKILL.
-- **Status:** [ ] not started
-
-### Task 1.3: Resolve tie-breaking
-
-- **Question:** 9-member council. 4-4 with one absence — does that pass or fail? Does Council President (Vega D4) get a tie-breaker beyond his own vote?
-- **Anchor:** Real-world Oakland City Council canon — Council President's vote counts as one but does NOT have tie-breaking authority (some bodies do; Oakland's typically don't). Tie = motion fails by default.
-- **Recommended default:** 4-4-1 = motion fails. 5+ YES = passes. Council President is one vote.
-- **Output:** tie-break rule.
-- **Status:** [ ] not started
-
-### Task 1.4: Resolve sequencing — when does the vote fire relative to Mayor cascade?
-
-- **Question:** Mayor's positions cascade into voice agents (Layer 1 → Layer 2). Does the vote fire AFTER all voice statements are in (preferred — voices have full context) or DURING Layer 2?
-- **Recommended default:** AFTER Layer 2 completes — /council-vote is its own layer between Layer 2 and Layer 3. Voice agents get to react to the Mayor; council-vote then aggregates their positions.
-- **Status:** [ ] not started
-
-### Task 1.5: Resolve who writes the canonical tally — model-reasoning vs deterministic script
-
-- **Question:** Is `/council-vote` a model-reasoning skill (Mags reads voices + faction positions, judges the tally) OR a deterministic script (rule-based tally computation)?
-- **Tradeoff:** model-reasoning handles novel situations (a faction member's statement is ambiguous; how to read it?) but is non-deterministic. Script is deterministic but rigid on edge cases.
-- **Recommended split:** skill text describes how Mags resolves position ambiguities BEFORE calling the script; deterministic script `scripts/computeCouncilTally.js` consumes resolved positions and computes the tally per Phase 1 rules. Skill = judgment, script = arithmetic.
-- **Status:** [ ] not started
-
----
-
-## Phase 2 — `/city-hall-prep` extension (research-build)
-
-### Task 2.1: Vote-this-cycle detection pass
+### Task 1.1: Locate the rescheduling gap
 
 - **Files:**
-  - `.claude/skills/city-hall-prep/SKILL.md` — modify
+  - `phase05-citizens/civicInitiativeEngine.js` — read
+  - Any sibling that processes vote outcomes (`applyInitiativeConsequences_`, etc.)
+  - Initiative_Tracker schema (which columns govern follow-up vote intent — does one exist? `FollowUpCycle`? `ReVoteCycle`? Or does the row reuse `VoteCycle` and need it bumped post-resolution?)
 - **Steps:**
-  1. New §Step 2.5 "Vote-this-cycle Routing" — after topic assignments, scan Initiative_Tracker for rows where `phase=vote-ready AND NextActionCycle=<current>`
-  2. For each match: ensure pending_decisions.md is written for `civic-office-opp-faction`, `civic-office-crc-faction`, `civic-office-ind-swing`, plus the district owner if not already in those blocs
-  3. Each routed pending_decisions.md gets a §Vote Required block with initiative + Mayor cascade + faction positions from prior cycle + the question being voted on
-- **Verify:** dry-run against C93 — Transit Hub initiative routes to all 3 faction-bloc agents + the relevant district owner instead of just Vega
+  1. Trace what happens to an initiative row after `voteCycle === cycle` fires and the vote resolves (PASSED / FAILED / VETOED).
+  2. Identify whether the schema even supports follow-up vote intent. If not, decide between (a) reusing `VoteCycle` (overwrite post-resolution when follow-up flagged), (b) adding a `FollowUpVoteCycle` column, (c) using existing `OverrideVoteCycle` semantics generalized.
+  3. Identify what data source flags a follow-up: Mara directive? Initiative milestone? Phase advance triggered by skill-side? Engine-internal logic?
+- **Output:** decision recorded in this plan §Findings before coding.
+- **Status:** [ ] not started
+
+### Task 1.2: Investigate the C93 Transit Hub specific case
+
+- **Steps:**
+  1. Read INIT-003 row in Initiative_Tracker — what did `VoteCycle` and `Status` actually contain at C93 cycle start?
+  2. Was a prior vote scheduled and resolved (e.g., C90, C91)? What was the outcome?
+  3. Was the C93 follow-up vote intent expressed anywhere — Mara directive, prior cycle's project state, MilestoneNotes?
+- **Output:** ground truth for the bug — was VoteCycle just stale (not bumped), or was the follow-up never expressed at all?
 - **Status:** [ ] not started
 
 ---
 
-## Phase 3 — `/council-vote` skill (research-build)
+## Phase 2 — Wiring fix (engine-sheet)
 
-### Task 3.1: Create `/council-vote` SKILL.md
+### Task 2.1: Implement the rescheduling path
 
 - **Files:**
-  - `.claude/skills/council-vote/SKILL.md` — create
+  - `phase05-citizens/civicInitiativeEngine.js` — modify (likely in `applyInitiativeConsequences_` or post-vote handler)
+  - Schema additions if Phase 1.1 chose path (b)
 - **Steps:**
-  1. Goal: produce `output/council_votes_c{XX}.json` with deterministic tally
-  2. Inputs: all Layer 2 voice JSONs from `output/civic-voice/*_c{XX}.json`, Mayor cascade from `mayor_c{XX}.json`, faction-bloc positions, member-override statements
-  3. Per-initiative process: collect 9 member positions (resolving Phase 1 Task 1.2 conflicts), apply Phase 1 rules (absent/abstain/not_voting + tie-break + sequencing), compute tally via `scripts/computeCouncilTally.js`, recommend phase advance
-  4. Output schema (TBD per Phase 1 Task 1.1 + 1.5 outcomes — likely `{ initiative, members: [{district, name, position, source}], tally: {yes, no, abstain, not_voting, absent}, outcome: pass|fail, phaseAdvance: <new-phase>|null }`)
-- **Verify:** `/council-vote 94` (when C94 runs) produces tally for every vote-ready initiative
+  1. When vote resolves with follow-up flag, write `VoteCycle = cycle + N` (N from initiative spec or default).
+  2. Reset `Status` to `active` (so the lifecycle's `proposed`/`active`/`pending-vote` auto-bump on lines 339/346 catches it cleanly).
+  3. Note in `Notes` field that this is a follow-up vote scheduled at C<cycle> for resolution at C<cycle+N>.
 - **Status:** [ ] not started
 
-### Task 3.2: Wire `/council-vote` into `/city-hall` ordering
+### Task 2.2: Validate at C94
 
-- **Files:**
-  - `.claude/skills/city-hall/SKILL.md` — modify
 - **Steps:**
-  1. Insert new Step 4.5 "Council Votes" between Step 4 (Layer 2 voices) and Step 5 (Layer 3 projects)
-  2. Step 4.5 invokes `/council-vote <cycle>`; output gates Step 5 (project agents must see the tally before they write)
-- **Verify:** `/city-hall` runs Layer 2 → /council-vote → Layer 3 in that order
-- **Status:** [ ] not started
-
-### Task 3.3: Build deterministic tally script
-
-- **Files:**
-  - `scripts/computeCouncilTally.js` — create (engine-sheet may pick this up)
-- **Steps:**
-  1. Read resolved positions from `/council-vote` skill output
-  2. Apply Phase 1 rules deterministically
-  3. Return tally JSON
-- **Verify:** unit test on C93 Transit Hub fixture — produces a real tally given hypothetical voice positions
+  1. Run /run-cycle 94 (or next cycle with a scheduled follow-up).
+  2. Confirm engine's `S.votesThisCycle` includes the follow-up.
+  3. Confirm Initiative_Tracker row updated correctly.
+  4. Confirm project agent reads the canonical outcome (no fabrication).
 - **Status:** [ ] not started
 
 ---
 
-## Phase 4 — Project-agent RULES.md update (research-build)
+## Phase 3 — C94 cycle validation (civic)
 
-### Task 4.1: Add "read the tally" rule to 5 project-agent RULES.md
+### Task 3.1: Run /city-hall C94
 
-- **Files:** Same 5 project agents from Wave 2 (transit-hub, stabilization-fund, oari, health-center, baylight-authority) — modify each
-- **Steps:**
-  1. Add to §Council Canon section: "If a vote occurred this cycle on your initiative, read `output/council_votes_c{XX}.json` for the tally. Reference it as canon. Do NOT recompute or re-narrate the tally beyond what the JSON contains. Per-member positions, outcome (pass/fail), and phase-advance recommendation all come from the JSON."
-- **Verify:** `grep -l "council_votes_c" .claude/agents/civic-project-*/RULES.md .claude/agents/civic-office-baylight-authority/RULES.md` returns ≥5 files
-- **Status:** [ ] not started
-
----
-
-## Phase 5 — C94 validation (civic terminal)
-
-### Task 5.1: Run /city-hall C94 with vote-trigger mechanism live
-
-- Acceptance criteria 1-4 above all hold
-- If Transit Hub still has a vote scheduled C94, this is the immediate fixture
+- Acceptance criteria 1-3 above hold
+- Project agent for the relevant initiative describes outcome conditioned on engine's tally
+- Wave 2 RULES.md prohibition holds because the data exists for them to read
 - **Status:** [ ] not started
 
 ---
 
 ## Open questions
 
-- [ ] Phase 1 Task 1.1 — absent/abstain/not_voting semantics (recommended: NOT_VOTING default, ABSENT requires explicit signal)
-- [ ] Phase 1 Task 1.2 — bloc vs member-override conflict (recommended: override wins)
-- [ ] Phase 1 Task 1.3 — tie-breaking + Council President role (recommended: tie = motion fails; CP is one vote)
-- [ ] Phase 1 Task 1.4 — sequencing (recommended: vote fires AFTER Layer 2)
-- [ ] Phase 1 Task 1.5 — model-reasoning vs deterministic-script split (recommended: skill = judgment, script = arithmetic)
+Tally semantics (5 questions in original draft) are not open — engine already resolves them:
+- Faction math + swing-voter probabilities + sentiment determine member positions (no skill-side absent/abstain/not_voting design needed)
+- Voting requirement is per-initiative via `VoteRequirement` field, default `5-4` (line 171, 752)
+- Mayor has veto, doesn't vote (line 458, 530, 678)
+- 9-seat council, faction blocs handled via Civic_Office_Ledger
+- Override votes have separate `OverrideVoteCycle` lifecycle (v1.7)
 
-All five recommendations are research-build defaults pending Mike's grill before Phase 2 starts.
+Remaining open question is narrow:
+- [ ] Phase 1 Task 1.1 — schema decision: reuse `VoteCycle` (overwrite post-resolution) vs add `FollowUpVoteCycle` column vs generalize `OverrideVoteCycle` semantics. Engine-sheet to decide based on what's cleanest given existing post-vote handler.
+
+---
+
+## Findings (filled during Phase 1)
+
+*To be populated by engine-sheet during investigation.*
+
+- INIT-003 actual row state at C93 start: TBD
+- Where post-vote resolution writes back to the row: TBD
+- Whether any path expresses follow-up vote intent today: TBD
+- Schema decision: TBD
 
 ---
 
 ## Changelog
 
-- 2026-05-03 — Initial draft (S197). Wave 4 of [[plans/2026-05-03-c93-gap-triage-execution]]. Status: DRAFT — Phase 1 open questions must resolve before Phase 2 starts. Approved by Mike S197 without per-plan review ("I don't need to see these tbh I'm not aware of all that was logged") — plan content is research-build's editorial synthesis from gap logs, defaults marked recommended-pending-grill.
+- 2026-05-03 — Initial draft (S197). Wave 4 of [[plans/2026-05-03-c93-gap-triage-execution]]. Two-mechanism design (`/council-vote` skill + `/city-hall-prep` route-to-9). Five Phase 1 design questions on tally semantics. Status: DRAFT awaiting grill.
+- 2026-05-03 — REWRITTEN IN PLACE (S198). Original draft retired — Mike corrected the architectural diagnosis: votes are engine-handled, not skill-handled. The engine has a complete 9-seat resolver in `phase05-citizens/civicInitiativeEngine.js` (faction math + swing voters + Tier-3 demographics + sentiment; handles veto + override). Skill-layer `/council-vote` would duplicate engine logic. Real bug class is much narrower: follow-up votes have no scheduling path — `VoteCycle` doesn't get bumped after a vote resolves with follow-up intent. Replacement plan is an engine-sheet investigation + wiring fix in `civicInitiativeEngine.js` (or its post-vote handler). Five Phase 1 tally-semantics questions retired (engine already resolves them). One narrow Phase 1 schema question remains: reuse `VoteCycle` vs add `FollowUpVoteCycle` vs generalize `OverrideVoteCycle`. Tags shifted `[civic, architecture, draft]` → `[engine, civic, draft]`. Title changed from "Vote-Trigger Mechanism Plan" to "Vote-Trigger Wiring Plan (Engine Investigation)". File slug preserved so existing inbound links keep resolving.

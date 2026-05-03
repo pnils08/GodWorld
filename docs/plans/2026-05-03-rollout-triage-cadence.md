@@ -3,7 +3,7 @@ title: ROLLOUT Triage Cadence Plan
 created: 2026-05-03
 updated: 2026-05-03
 type: plan
-tags: [architecture, infrastructure, draft]
+tags: [architecture, infrastructure, ready]
 sources:
   - output/production_log_edition_c93_write_gaps.md G-W16 (meta-pattern — HIGHs sit on shelf and compound)
   - docs/engine/ROLLOUT_PLAN.md §Edition Post-Publish (current capture pattern)
@@ -125,14 +125,18 @@ pointers:
 
 ## Open questions
 
-- [ ] Phase 1 Task 1.1 — metadata format (recommended: trailing inline tag)
-- [ ] Phase 1 Task 1.2 — staleness threshold (recommended: STALE-2C at >2 cycles)
-- [ ] Phase 1 Task 1.3 — auto-promotion mechanism (recommended: in-place flag, not section move)
-- [ ] Phase 1 Task 1.4 — PARKED override semantics
-- [ ] Phase 1 Task 1.5 — scan integration point (recommended: /session-end)
+All five closed S198 via blanket approval:
+- [x] Phase 1 Task 1.1 — metadata format: **trailing inline tag** `(promoted: C<XX>, severity: HIGH)` at end of entry's first line
+- [x] Phase 1 Task 1.2 — staleness threshold: **STALE-2C at >2 cycles** unaddressed
+- [x] Phase 1 Task 1.3 — auto-promotion mechanism: **in-place flag** (`[STALE-2C]` prefix on first line); no section move
+- [x] Phase 1 Task 1.4 — PARKED override: **explicit `PARKED: <reason>` flag** excluded from staleness scan; Mike-decision typically, research-build can park with note
+- [x] Phase 1 Task 1.5 — scan integration point: **at /session-end** (research-build terminal); output goes into next session's SESSION_CONTEXT priorities
+
+Plan is action-ready — Phase 2 (backfill) + Phase 3 (tooling) can start without further design.
 
 ---
 
 ## Changelog
 
 - 2026-05-03 — Initial draft (S197). Wave 4 of [[plans/2026-05-03-c93-gap-triage-execution]]. Status: DRAFT — Phase 1 open questions must resolve before Phase 2 starts. Triggered by G-W16 meta-pattern documented S195 (project-agent canon-fabrication HIGHs from S193 sat on shelf and re-landed in desk-reporter agents 2 cycles later).
+- 2026-05-03 — All five Phase 1 open questions closed S198 via Mike blanket approval. Recommendations adopted verbatim (trailing inline tag / STALE-2C threshold / in-place flag / explicit PARKED flag / /session-end integration). Status: DRAFT → ready-for-build. Tags shifted `[architecture, infrastructure, draft]` → `[architecture, infrastructure, ready]`.

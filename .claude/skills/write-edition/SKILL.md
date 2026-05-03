@@ -139,14 +139,48 @@ OPINION — [editorial / op-ed pieces if any]
 LETTERS — [letters to the editor slate]
 ------------------------------------------------------------
 ARTICLE TABLE
+NAMES INDEX
+BUSINESSES NAMED
 CITIZEN USAGE LOG
 STORYLINES UPDATED
 COMING NEXT EDITION
 END EDITION
 ```
 
+**Format-contract footer sections (REQUIRED — see EDITION_PIPELINE.md §Per-section content spec).**
+Three machine-readable sections must appear after ARTICLE TABLE, in this order:
+
+1. `NAMES INDEX` — one row per named entity. Strict format:
+   - `POP-NNNNN | Full Name | Role/Title` for Sim_Ledger citizens
+   - `CUL-NNNNNNN | Name | Role` for cultural-only entities (musicians, public figures from wd-cultural)
+   - `FAITH-NEW | Org Name | Faith Org | Neighborhood` for new faith orgs
+   - `Name — Role` (em-dash) for citizens not yet in canon (ingester promotes to POP-pending row)
+2. `BUSINESSES NAMED` — one row per named business. Strict format:
+   - `BIZ-NNNNN | Name | Sector | Neighborhood` for existing businesses
+   - `NEW | Name | Sector | Neighborhood` for new businesses (sector/neighborhood may be blank)
+3. `CITIZEN USAGE LOG` — editorial categorized prose (human-readable; not parsed for ingest).
+   Subsections like `CIVIC / GOVERNMENT`, `CITIZENS QUOTED OR PROFILED`, `LETTERS WRITERS`,
+   plus `(NEW CANON THIS CYCLE)` sub-headers naming new orgs/firms/faith bodies. Format
+   intentionally loose; the strict sections above are derived from this section by
+   `scripts/emitFormatContractSections.js`.
+
+**Step 3a: Derive strict format-contract sections.** After writing CITIZEN USAGE LOG (rich prose),
+run the helper to derive the strict NAMES INDEX + BUSINESSES NAMED sections and inject them into
+the file before ARTICLE TABLE:
+
+```bash
+node scripts/emitFormatContractSections.js editions/cycle_pulse_edition_{XX}.txt --inject
+```
+
+Idempotent — re-running replaces existing strict sections. Fails loud if CITIZEN USAGE LOG is
+missing or empty. Without this step, `ingestPublishedEntities.js` silently no-ops in /post-publish
+Step 5 (G-W19/G-P6/G-P8/G-P9 — three new citizens + Atlas Bay Architects + Greater Hope Pentecostal
+silently dropped from C93 intake). Verification gate `verifyNamesIndexParse.js --strict` in
+/post-publish Step 5 enforces NAMES INDEX presence — publish blocked if absent.
+
 **Section omission rule:** If a section has no story this cycle, its label and divider don't appear.
-The parser handles missing sections cleanly; never emit an empty section header.
+The parser handles missing sections cleanly; never emit an empty section header. Format-contract
+footer sections are NOT subject to omission — NAMES INDEX must always appear (even if empty body).
 
 Save to `editions/cycle_pulse_edition_{XX}.txt`.
 

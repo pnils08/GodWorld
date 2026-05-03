@@ -318,13 +318,26 @@ async function resolveCitizens(parsed, sheetsClient, sheetId) {
         ambiguous.push({ fullName: entry.fullName, reason: 'single-token name; cannot match' });
         continue;
       }
-      const first = tokens[0];
-      const last = tokens[tokens.length - 1];
-      const key = (first + ' ' + last).toLowerCase();
+      // Strip trailing generational suffix (Sr., Jr., II, III, IV) before
+      // first/last/middle picking so "Calvin Reeves Sr." resolves
+      // first=Calvin, last=Reeves (not last=Sr., middle=Reeves). Suffix is
+      // appended back to `last` for new-citizen candidate rows so display
+      // and ledger stay aligned; lookup key uses the stripped form so an
+      // existing "Calvin Reeves" row matches a "Calvin Reeves Sr." input.
+      const SUFFIX_RE = /^(?:sr|jr|ii|iii|iv)\.?$/i;
+      const nameTokens = [...tokens];
+      let suffix = '';
+      if (nameTokens.length >= 3 && SUFFIX_RE.test(nameTokens[nameTokens.length - 1])) {
+        suffix = nameTokens.pop();
+      }
+      const first = nameTokens[0];
+      const lastBare = nameTokens[nameTokens.length - 1];
+      const middle = nameTokens.length > 2 ? nameTokens.slice(1, -1).join(' ') : '';
+      const key = (first + ' ' + lastBare).toLowerCase();
       const hits = byFirstLast.get(key);
       if (!hits || hits.length === 0) {
-        // Candidate for new append
-        candidates.push({ fullName: entry.fullName, first, last, middle: tokens.length > 2 ? tokens.slice(1, -1).join(' ') : '', description: entry.description });
+        const last = suffix ? `${lastBare} ${suffix}` : lastBare;
+        candidates.push({ fullName: entry.fullName, first, last, middle, description: entry.description });
       } else if (hits.length === 1) {
         matched.push({ popId: hits[0].pop, fullName: entry.fullName, resolved: true });
       } else {

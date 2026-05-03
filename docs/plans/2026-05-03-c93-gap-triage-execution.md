@@ -217,7 +217,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 3.6: BUNDLE-F — buildCitizenCards.js 401 + retry-on-401 anti-pattern
 
 - **Bundle:** G-P24
-- **Status:** [ ] not started
+- **Status:** [x] DONE S197 — paired fix: (1) writeMemory retry revised (401 fail-fast; 429/5xx still retry 3× at 8s; other 4xx fail-fast — was retry-on-401 conflated with rate-limit per S182 wrong shape), (2) pre-flight authProbe() in APPLY mode aborts before bulk write if credential is bad. Verified with fake key — fatal abort within seconds (was: ~5 hours of retry-waste across 575 cards). Real-key runs unaffected; probe ~500ms.
 
 ### Task 3.7: BUNDLE-G — gradeEdition.js + gradeHistory.js rebuild
 

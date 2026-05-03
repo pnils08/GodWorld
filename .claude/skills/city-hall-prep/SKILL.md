@@ -1,8 +1,8 @@
 ---
 name: city-hall-prep
 description: Prepare all inputs for city-hall voice agents. Reads tracker, approvals, world summary, engine review, coverage ratings, previous log, canon, Mara directive. Writes pending decisions per voice.
-version: "1.0"
-updated: 2026-04-17
+version: "1.1"
+updated: 2026-05-03
 tags: [civic, active]
 effort: high
 disable-model-invocation: true
@@ -40,27 +40,27 @@ When this is done right, `/city-hall` runs clean — voices wake, decide, done.
 
 ## Voice Data Routing
 
-Each voice looks at different data. Route the right inputs to the right pending decision:
+Each voice looks at different data. Route the right inputs to the right pending decision.
 
-| Voice | District/Scope | Data They Need |
-|-------|---------------|----------------|
-| Mayor Santana | Citywide | All initiatives, all approval ratings, engine review ailments, Mara directive, coverage feedback across all domains |
-| Chief Montez | Public Safety | Crime metrics, OARI data, safety-related engine ailments, safety coverage ratings |
-| Rivers (OPP/D5) | D5 — East Oakland | OARI in her district, displacement data, D5 neighborhood state, her approval + vulnerability |
-| Delgado (OPP/D3) | D3 — Fruitvale | Transit Hub (Fruitvale), OARI in D3, D3 neighborhood state, her approval |
-| Carter (OPP/D1) | D1 — Jack London/W Oakland | Baylight jobs, Stab Fund (W Oakland), D1 neighborhood state, her approval |
-| Vega (IND/D4) | D4 — Council President | Stab Fund oversight, procedural matters, his approval |
-| Tran (IND/D2) | D2 | OARI expansion demand, D2 neighborhood state (no active initiatives), his approval |
-| Ashford (CRC/D7) | D7 — Fiscal oversight | Baylight audits, Transit Hub cost caps, fiscal data, his approval |
-| Crane (CRC/D6) | D6 | District-specific state, his approval |
-| Chen (CRC/D8) | D8 | District-specific state, her approval |
-| Mobley (OPP/D9) | D9 | District-specific state, his approval |
-| DA Dane | Legal framework | Only runs when legal dimension exists this cycle |
-| Baylight (Ramos) | Construction project | Baylight initiative state, construction milestones, workforce data |
-| OARI (Tran-Muñoz) | Crisis response program | OARI initiative state, dispatch data, expansion planning |
-| Stab Fund (Webb) | Disbursement program | Stab Fund initiative state, processing numbers, applicant queue |
-| Health Center (Chen-Ramirez) | Facility project | Health Center initiative state, construction planning, health ailments from engine review |
-| Transit Hub (Soria D.) | Transit project | Transit Hub initiative state, CBA framework, transit metrics |
+**Agent topology (G-10, S192 — 11 actual agents, NOT 17).** Only Mayor / Chief / DA have individual agents. The 9 council members are grouped into 3 faction-bloc agents (`opp-faction`, `crc-faction`, `ind-swing`). One pending_decisions.md per agent — bloc agents speak for all members in their bloc within one file. The 5 project agents (Baylight / OARI / Stab Fund / Health Center / Transit Hub) are individual.
+
+| Agent (write pending_decisions to) | Speaks for | District/Scope | Data They Need |
+|-------------------------------------|-----------|----------------|----------------|
+| `civic-office-mayor` | Mayor Santana | Citywide | All initiatives, all approval ratings, engine review ailments, Mara directive, coverage feedback across all domains |
+| `civic-office-police-chief` | Chief Montez | Public Safety | Crime metrics, OARI data, safety-related engine ailments, safety coverage ratings |
+| `civic-office-district-attorney` | DA Dane | Legal framework | Only runs when legal dimension exists this cycle |
+| `civic-office-opp-faction` | Rivers (D5) + Delgado (D3) + Carter (D1) + Chen (D8) + Mobley (D9) | OPP bloc — 5 council members | Per-member district data: D5 East Oakland (OARI + displacement), D3 Fruitvale (Transit Hub + OARI), D1 Jack London/W Oakland (Baylight + Stab Fund), D8/D9 district state. Bloc-level political alignment + each member's approval + vulnerability flags |
+| `civic-office-crc-faction` | Ashford (D7) + Crane (D6) | CRC bloc — 2 council members (Chen D8 + Mobley D9 are OPP, NOT CRC — see #note) | D7 fiscal-oversight scope (Baylight audits, Transit Hub cost caps), D6 district state, each member's approval. CRC fiscal-conservative framing |
+| `civic-office-ind-swing` | Vega (D4 Council President) + Tran (D2) | IND swing — 2 council members | Vega: Stab Fund oversight + procedural matters + Council Pres role. Tran: OARI expansion demand + D2 state (no active initiatives in D2). Each speaks for himself — not a bloc, no coordination |
+| `civic-office-baylight-authority` | Director Keisha Ramos | Construction project | Baylight initiative state, construction milestones, workforce data |
+| `civic-project-oari` | Director Vanessa Tran-Muñoz | Crisis response program | OARI initiative state, dispatch data, expansion planning |
+| `civic-project-stabilization-fund` | Director Marcus Webb | Disbursement program | Stab Fund initiative state, processing numbers, applicant queue |
+| `civic-project-health-center` | Director Bobby Chen-Ramirez | Facility project | Health Center initiative state, construction planning, health ailments from engine review |
+| `civic-project-transit-hub` | Lead Elena Soria Dominguez | Transit project | Transit Hub initiative state, CBA framework, transit metrics |
+
+**Council canonical roster (per `Civic_Office_Ledger`):** D1 Carter (OPP), D2 Tran (IND), D3 Delgado (OPP), D4 Vega (IND, Council Pres), D5 Rivers (OPP, Progressive Caucus Lead), D6 Crane (CRC), D7 Ashford (CRC), D8 Chen (OPP — note: previous versions of this skill mis-listed Chen as CRC; corrected S195/S197), D9 Mobley (OPP).
+
+**Why the bloc topology matters (G-R11 from S193 city-hall run gap log):** When an initiative reaches `vote-ready` phase with NextActionCycle = current cycle, the prep MUST route that initiative to the relevant faction-bloc agents to surface positions for ALL 9 council members — otherwise the vote can't tally and the project agent silently invents council positions (G-R6/R7/R10). Single-member routing (e.g., only Vega had Transit Hub on his desk in C93) is the structural cause of vote-not-trigger + fabrication failures.
 
 ## Prerequisites (from /run-cycle)
 
@@ -91,13 +91,18 @@ Create `output/production_log_city_hall_c{XX}.md` with header, timestamp, cycle,
 
 Read all 10 inputs above. For each:
 
-**Sheets:** Read Initiative_Tracker, Civic_Office_Ledger, Edition_Coverage_Ratings via service account.
+**Disk (PRIMARY — G-13, S192).** Read in this order, treat as authoritative:
+1. `output/world_summary_c{XX}.md` — snapshots Civic_Office_Ledger (approval ratings + factions) + Initiative_Tracker (phase + MilestoneNotes) post-cycle. This is the canonical pre-civic state input.
+2. `output/engine_review_c{XX}.md` — derives from Initiative_Tracker; surfaces ailments + remedy-firing patterns.
+3. Previous `output/production_log_c{XX-1}.md` — last cycle's voice outputs + tracker updates + dramatic moments.
+4. Mara directive — the cycle's editorial pressure (citizen accountability questions).
+5. **Prior-cycle published canon** (G-15, S192). `editions/cycle_pulse_*_c{XX-1}_*.txt` + `output/reporters/*/articles/c{XX-1}_*.md` — interviews, dispatches, supplementals from prior cycle. Cross-reference each against active topic-assignment initiatives. If interview/dispatch text mentions an active initiative, the voice agents owning that initiative MUST see the canon excerpt in their pending_decisions.md (memory-fenced). Without this, prep ships stale framing — C92's Mayor interview answered 6 OARI/admin questions that voices would otherwise re-litigate.
 
-**MCP:** Run `get_council_member` for each district with an active voice. Run `lookup_initiative` for each active initiative. Run `get_neighborhood` for affected neighborhoods. For the structured neighborhood-state card (S183 wd-neighborhood layer), use `get_neighborhood_state` instead — narrower than `get_neighborhood`, returns only the card. Full tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
+**Sheets (VERIFICATION — drop unless world-summary is stale).** Sheet reads of Initiative_Tracker / Civic_Office_Ledger / Edition_Coverage_Ratings are redundant if world summary is fresh — every cell that matters is already in the disk inputs above. Run sheet reads ONLY when world_summary mtime is older than the city-hall start time, or when verifying a specific cell. Routine prep reads disk first, sheet second-and-rarely.
 
-**Canon:** Run `search_canon` per active initiative to find what the Tribune has published — promises made, citizen reactions, coverage tone.
+**MCP (LOOKUP).** Run `get_council_member` for each district with an active voice — returns live approval/faction (cross-checks world_summary). Run `lookup_initiative` for each active initiative — returns Initiative_Tracker row with MilestoneNotes (cross-checks world_summary phase). Run `get_neighborhood` / `get_neighborhood_state` for affected neighborhoods (S183 wd-neighborhood layer; the latter is narrower). Full tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix.
 
-**Disk:** Read world summary, engine review, previous city-hall log, previous voice outputs, Mara directive.
+**Canon.** Run `search_canon` per active initiative to find what the Tribune has published — promises made, citizen reactions, coverage tone.
 
 Log tracker state, approval ratings, and key findings in the production log. Present to Mike.
 
@@ -185,3 +190,8 @@ After `/run-cycle` (which produces world summary and engine review). Before `/ci
 
 Service account via `lib/sheets.js`. Spreadsheet ID from `.env`.
 GodWorld MCP for structured lookups. Supermemory `bay-tribune` for canon search.
+
+## Changelog
+
+- 2026-04-17 — v1.0 initial (S156). Voice routing table listed 17 voices including 9 individual council members.
+- 2026-05-03 — v1.1 (S197, engine-sheet executing research-build Wave 1 plan per [[../../../docs/plans/2026-05-03-c93-gap-triage-execution]]). **G-10 Voice Data Routing rewritten:** table now shows the 11 actual agent rows (Mayor + Chief + DA + 3 faction-bloc agents speaking for the 9 council members + 5 project agents) instead of misleading reader into expecting 17 individual agents. Faction membership per Civic_Office_Ledger; previous text mis-listed Chen D8 as CRC, corrected to OPP. **G-13 Step 1 sheet reads demoted to verification:** Disk inputs (world_summary + engine_review + prior production log + prior published canon) are PRIMARY; sheet reads run ONLY when world_summary is stale. Captures actual S192 working practice (sheet reads were skipped because world_summary already snapshotted everything that mattered). Companion entry on G-15 (between-cycle published canon ingestion) added to Step 1 as Disk source #5.

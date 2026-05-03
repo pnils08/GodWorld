@@ -96,11 +96,11 @@ The edition is story-driven, not section-driven.
 **Edition format:**
 
 ```
-============================================================
+------------------------------------------------------------
 THE CYCLE PULSE — EDITION {XX}
 Bay Tribune | Cycle {N} | Y{n}C{m} | {Season}, {Week}
 Weather: [plain language — from production log] | City Mood: [plain language]
-============================================================
+------------------------------------------------------------
 
 Masthead format (per EDITION_PIPELINE.md §Published `.txt` Format Contract):
 - Cycle: integer (matches edition number for full editions)
@@ -111,18 +111,42 @@ Masthead format (per EDITION_PIPELINE.md §Published `.txt` Format Contract):
 
 Do NOT emit "October 2041" or any month-year token. The simulation is cycle-paced, not calendar-paced.
 
+Section dividers MUST be `^-{10,}$` (ten or more dashes on a line by themselves).
+The capability reviewer at `scripts/capability-reviewer/parseEdition.js` parses on this regex
+and rejects `===` or other characters silently (zero sections detected → reviewer-lane skips).
+G-W19 (S196) — DOC drift between this template and the parser cost a full reformat round in C93.
+
+Section labels MUST be from this fixed allowlist (parser-enforced):
+FRONT PAGE | EDITOR'S DESK | CIVIC | CULTURE | BUSINESS | OPINION | SPORTS | LETTERS
+
+Do NOT use rich variants (CIVIC AFFAIRS, CITY LIFE, ACCOUNTABILITY, QUICK TAKE, FEATURES) —
+the parser ignores them and the section's articles silently drop from review.
+
 FRONT PAGE — [best story]
+------------------------------------------------------------
 EDITOR'S DESK — Mags, 150-250 words
-
-[STORIES — ordered by quality, tagged by section]
-
-LETTERS TO THE EDITOR
+------------------------------------------------------------
+CIVIC — [stories tagged civic by sift]
+------------------------------------------------------------
+CULTURE — [stories tagged culture by sift]
+------------------------------------------------------------
+BUSINESS — [stories tagged business by sift]
+------------------------------------------------------------
+SPORTS — [stories tagged sports by sift]
+------------------------------------------------------------
+OPINION — [editorial / op-ed pieces if any]
+------------------------------------------------------------
+LETTERS — [letters to the editor slate]
+------------------------------------------------------------
 ARTICLE TABLE
 CITIZEN USAGE LOG
 STORYLINES UPDATED
 COMING NEXT EDITION
 END EDITION
 ```
+
+**Section omission rule:** If a section has no story this cycle, its label and divider don't appear.
+The parser handles missing sections cleanly; never emit an empty section header.
 
 Save to `editions/cycle_pulse_edition_{XX}.txt`.
 

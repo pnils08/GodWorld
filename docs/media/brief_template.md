@@ -2,7 +2,7 @@
 
 **Follow this when writing angle briefs in /sift Step 5. Updated after each cycle based on what produced good articles.**
 
-Last Updated: S170 (C92)
+Last Updated: S197 (C93)
 
 ---
 
@@ -10,7 +10,7 @@ Last Updated: S170 (C92)
 
 A brief is the only thing a reporter reads before writing. It replaces the old desk packet. If the brief is wrong, the article is wrong. If the brief is thin, the reporter invents. If the brief is bloated, the reporter drowns.
 
-Target: 300-500 words per brief. Enough to write from. Not enough to get lost in.
+Target: 800-1,200 words per single-story brief; 800-1,100 per story for multi-story consolidation (e.g., Carmen 2-story brief lands ~2,000-2,200 total). Hard cap 1,500 words / story. The S144 starter target of 300-500 produced voiceless civic copy that failed C92 review (skill-check A6); C92's Carmen front-page rewrite that worked was ~1,000 words. Enough to write from. Not enough to get lost in.
 
 ---
 
@@ -103,3 +103,4 @@ _Updated by `/post-publish` Step 10 after each edition. What changed and why._
 - S144: starter version created. No cycle data yet.
 - S170 (C92): added "Scene-First Brief Design" section + a 6th bad-brief pattern ("structural pre-prescription on civic pieces"). Evidence: skill-check A6 fail — OARI and Youth Apprenticeship pieces had zero non-official citizen voice because briefs stacked official quotes + canon + directives. Front-page Carmen piece succeeded only after the first brief was rewritten scene-first on Patricia Nolan. Rule going forward: civic briefs open with a citizen/scene, not with official material.
 - **S195 (C93): Mandatory `<established-canon>` 9-member council roster injection in civic-desk and freelance-firebrand briefs.** Evidence: write-edition G-W12+G-W14 — civic-desk Carmen S4 fabricated 6 non-canon council members + 6-3 vote outcome; same fabrication shape as S193 G-R6/R7/R10 (Transit Hub project agent invented James Tran D1, Carmen Delgado D3, Barbara Crane D2, Jennifer Chen D4, Alice Hahn D8, Arav Kumar D9). The S193 fix was promoted to ROLLOUT and never actioned, so the failure recurred in civic-desk this cycle. Canon roster (per Civic_Office_Ledger): D1 Carter (OPP), D2 Tran (IND), D3 Delgado (OPP), D4 Vega (IND, Council Pres), D5 Rivers (OPP, Progressive Caucus Lead), D6 Crane (CRC), D7 Ashford (CRC), D8 Chen (OPP), D9 Mobley (CRC). New rule: every civic-desk + freelance-firebrand + civic-project brief includes the 9-member roster as `ESTABLISHED CANON:` lines; agent RULES.md must hard-fail on naming any council member not in the roster. Scene-first rule from S170 held this cycle — Mezran S1 opened with Patricia Nolan workshop attendee, Maria S3 opened at the West Oakland gathering, both produced strong work.
+- **S197 (C93 triage): Word target updated 300-500 → 800-1,200 per single-story brief.** Closes G-S14 (sift gap log). Evidence: the S144 starter spec was 300-500 but every brief that produced "real journalism" since C92 has trended 800-2,200 (Carmen 2,251, Hal 1,789, Jax 1,420, Maria 1,364, Anthony 1,305). Thin briefs produce voiceless copy (skill-check A6 fail S170); the rewritten C92 Carmen front-page that worked was ~1,000 words. Updated to reflect working practice with a 1,500-word hard cap per story so reporters don't drown. Per [[plans/2026-05-03-c93-gap-triage-execution]] Wave 1 Task 1.3.

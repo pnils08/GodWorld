@@ -1,8 +1,8 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.4"
-updated: 2026-04-30
+version: "1.5"
+updated: 2026-05-03
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -63,9 +63,8 @@ C93-gated = skipped pending the C93 observation outcome (plan [[plans/2026-04-26
 Verify these exist before starting (path varies by `--type`):
 
 - `<source>` — published `.txt` (the canonical artifact)
-- `output/production_log_edition_c{XX}.md` — completed production log (shared by all media types)
+- `output/production_log_c{XX}.md` — consolidated per-cycle production log (S195 convention; merges city-hall-prep + city-hall-run + sift + write-edition + post-publish into one log per cycle)
 - `output/world_summary_c{XX}.md` — world summary
-- `output/production_log_city_hall_c{XX}.md` — city-hall production log (`--type edition` only)
 
 For `--type interview`: companion transcript at `editions/cycle_pulse_interview-transcript_{XX}_<slug>.txt`.
 
@@ -102,9 +101,11 @@ node scripts/ingestEdition.js editions/cycle_pulse_interview-transcript_{XX}_<sl
 
 **2a. Refresh citizen cards**
 ```bash
-node scripts/buildCitizenCards.js
+node scripts/buildCitizenCards.js --apply
 ```
 Citizens who appeared get updated profiles in world-data. New citizens get cards built. Verify new citizens have gender from ledger.
+
+**Why `--apply`:** the script defaults to dry-run (writes nothing). Without the flag the substep silently does no real work. (G-P12, S195 — caught on E93 when --apply surfaced the 401 retry storm; previous cycles likely shipped dry-runs masquerading as success.)
 
 **Verification gate:** stdout reports refreshed/created card count ≥ 1 when NAMES INDEX is non-empty. If NAMES INDEX is empty (some dispatches), gate is met by stdout "0 citizens to refresh — empty NAMES INDEX."
 
@@ -201,9 +202,11 @@ Plan reference: [[../../../docs/plans/2026-04-26-discord-bot-edition-currency]] 
 
 ### Step 6: Grade Edition (`--type edition` only)
 ```bash
-node scripts/gradeEdition.js <XX>
+node scripts/gradeEdition.js editions/cycle_pulse_edition_<XX>.txt <XX>
 ```
 Per-desk and per-reporter grades from edition text + errata + Mara audit.
+
+**Why the path arg (G-P13, S195):** script signature is `<edition-file-path> [cycle]`. Passing only `<XX>` makes it try to open `/root/GodWorld/93` and exit "Edition file not found." Always pass the full path.
 
 **Verification gate:** `output/grades/grades_c<XX>.json` written.
 
@@ -217,17 +220,18 @@ Rolling averages (5-edition window), trends, roster recommendations.
 
 ### Step 8: Extract Exemplars (`--type edition` only)
 ```bash
-node scripts/extractExemplars.js <XX>
+node scripts/extractExemplars.js editions/cycle_pulse_edition_<XX>.txt <XX>
 ```
 A-grade articles become desk workspace exemplars for future cycles.
+
+**Why the path arg (G-P19, S195):** same signature pattern as `gradeEdition.js` — script wants `<edition-file-path> [cycle]`. Passing only `<XX>` bombs identically.
 
 **Verification gate:** stdout reports exemplar count ≥ 0; if A-grade articles existed in `grades_c<XX>.json`, exemplar count > 0.
 
 ### Step 9: Update Newsroom Memory
 
-Read both production logs as source:
-- `output/production_log_edition_c<XX>.md` — story picks, editorial review, what got cut, Mara corrections, Rhea flags
-- `output/production_log_city_hall_c<XX>.md` — voice decisions, tracker updates, what was dramatic (`--type edition` only)
+Read the consolidated production log as source (S195 convention; single per-cycle log):
+- `output/production_log_c<XX>.md` — story picks, editorial review, voice decisions, tracker updates, what was dramatic, Mara corrections, Rhea flags. All cycle phases merged.
 
 Distill into `docs/mags-corliss/NEWSROOM_MEMORY.md`:
 - Errata from this artifact (what Mara caught, Rhea caught, Mags caught in review)
@@ -245,7 +249,7 @@ Distill into `docs/mags-corliss/NEWSROOM_MEMORY.md`:
 Read these feedback sources:
 - `output/skill_check_write-edition_c<XX>.json` — structural assertion pass/fail + eval-feedback suggestions
 - `output/grades/grades_c<XX>.json` — per-reporter scores
-- `output/production_log_edition_c<XX>.md` — Mara corrections, Rhea flags, editorial review
+- `output/production_log_c<XX>.md` — Mara corrections, Rhea flags, editorial review
 - Mike's feedback — capture in conversation
 
 Update each criteria file with specific findings:
@@ -272,16 +276,15 @@ node scripts/postRunFiling.js <XX>
 ```
 Verify all pipeline outputs exist and names are correct.
 
-```bash
-pm2 restart mags-bot
-```
-Discord Mags picks up updated production log and Supermemory canon. No separate edition brief needed — she reads the production log and searches bay-tribune directly.
+**Known stale manifest (G-P22, S195 — engine-sheet handoff Wave 3 BUNDLE-H):** the script's required-files manifest reflects pre-pipeline-v2 state and reports INCOMPLETE every cycle on artifacts that don't exist anymore (`output/desk-output/{civic,sports,...}_c<XX>.md` from before S134 + `output/photos/e<XX>` and PDF paths that require `/edition-print` to have run separately). False-alarm fatigue — every cycle reports failing files. Until the manifest is updated, treat the INCOMPLETE message as advisory; the actual pipeline-v2 outputs (`output/reporters/*/articles/c<XX>_*.md`, the consolidated production log, the published `.txt`) are what matter.
 
-**Verification gate:** `postRunFiling.js` exit 0 + pm2 reports mags-bot online.
+**Bot restart deferred to /session-end** (G-P23, S195). The previous version of this step ran `pm2 restart mags-bot` here, but that conflicts with the boot/session-end RAM lifecycle (boot stops bot+dashboard; session-end restarts them). Bot doesn't need to be up until a citizen messages it on the next hourly tick — restart timing is functionally equivalent. Single canonical restart home: `/session-end`.
+
+**Verification gate:** `postRunFiling.js` exit 0. (Bot restart no longer in this step — verified at /session-end.)
 
 ### Step 12: Finalize Production Log — Wiki Pattern
 
-Append a Post-Publish section to `output/production_log_edition_c<XX>.md` with inline Supermemory doc IDs. Each canonized artifact gets a doc ID on its line so next cycle queries the record directly instead of re-reading files.
+Append a Post-Publish section to `output/production_log_c<XX>.md` with inline Supermemory doc IDs. Each canonized artifact gets a doc ID on its line so next cycle queries the record directly instead of re-reading files.
 
 ```markdown
 ## Post-Publish C<XX> — <TYPE> COMPLETE
@@ -339,11 +342,34 @@ Per-type checklist applicability follows the matrix in §Usage. Edition runs all
 - [ ] Exemplars extracted (edition only)
 - [ ] Newsroom memory updated
 - [ ] Criteria files updated (edition only)
-- [ ] Filing check passed
-- [ ] Discord bot restarted
+- [ ] Filing check passed (INCOMPLETE message is advisory until G-P22 manifest fix lands)
 - [ ] Production log finalized
+- ~~Discord bot restarted~~ (moved to /session-end per G-P23, S195)
 
 **Verification gate:** all matrix-✓ rows checked OR an explicit `--skip-<name>` invocation recorded.
+
+## Time Budget (G-P25, S195)
+
+Substeps vary widely in wall time. Surface the most expensive ones up front so operators don't underestimate run-time.
+
+| Substep | Wall time | Notes |
+|---------|-----------|-------|
+| 1a wiki ingest | ~30s | Fast, single API call per chunk |
+| 1b text ingest | ~30s | Same |
+| 2a citizen cards (--apply) | **10+ min** | Loops 800+ ledger rows; the largest single substep. ~4 min in dry-run. |
+| 2a-cul cultural cards | ~10s per CUL-ID | Negligible at typical 1-3 IDs |
+| 2c world summary | ~5s | Single API write |
+| 4 coverage ratings | ~30s | Sheet write |
+| 5 citizen+business intake | ~1-2 min | Sheet append + verify |
+| 5b desk packet refresh | ~60s | Rebuilds 9 packets + base_context |
+| 6 grade edition | ~2 min | Per-article model passes |
+| 8 extract exemplars | ~30s | Filesystem walk |
+| 10 criteria files (with /skill-check) | **5-15 min** | Most token-heavy step. /skill-check is a model-reasoning task. |
+| 11 filing + bot | ~10s | (Bot restart now at /session-end) |
+
+**Whole-skill budget:** ~30-45 min for an edition end-to-end. ~10-15 min for non-edition (no Step 6/7/8/10).
+
+If you're tempted to "wait it out" on Step 2a or Step 10, set expectation accordingly — they are real wall time, not stuck.
 
 ## Output
 
@@ -371,3 +397,4 @@ After `/write-edition` (edition path) or after `/interview`, `/dispatch`, `/writ
 - 2026-04-17 — Initial 13-step skill (S156, post-publish formalized).
 - 2026-04-26 — v1.1 (S180, research-build). Type-aware: `--type {edition|interview|supplemental|dispatch}` flag added. Per-type substep matrix encodes default skips; `--skip-<name>` required only for matrix-✓ opt-outs. Verification gate declared on every substep. Coverage ratings (Step 4) explicitly C93-gated for non-edition. Convergence point for the unified non-edition publishing pipeline (plan [[plans/2026-04-26-non-edition-publishing-pipeline]] T3).
 - 2026-04-30 — v1.4 (S189, research-build). Wired E6 + E8 from [[plans/2026-04-30-dispatch-gap-followups]]. **Step 2a-cul cultural-card refresh** (matrix-✓ for dispatch / interview / supplemental when CUL-IDs in NAMES INDEX): `buildCitizenCards.js` is Sim_Ledger-only, so cultural-only entities (Marin Tao type, Brody Kale type) need a parallel `buildCulturalCards.js --apply --cul <CUL-ID>` invocation per CUL-ID parsed from NAMES INDEX. Closes the S188 Brody Kale unrefreshed gap. **Step 5 verification gate cross-check**: after `ingestPublishedEntities.js` reports its parsed entity count, run `verifyNamesIndexParse.js <source> --expected <N>` to independently count NAMES INDEX rows in the source `.txt` — exit 1 (block publish) if counts disagree. Defense-in-depth against future parser regressions reintroducing the S188 silent-zero false-success failure mode. Step 13 checklist + Step 12 production-log section both gain the new substep row.
+- 2026-05-03 — v1.5 (S197, engine-sheet executing research-build Wave 1 plan). Wave 1 DOC-drift sweep per [[plans/2026-05-03-c93-gap-triage-execution]]. **G-P12 Step 2a invocation:** `buildCitizenCards.js` → `--apply` flag added (script defaults dry-run; previous cycles silently shipped no writes). **G-P22 Step 11 postRunFiling staleness note:** advisory text added explaining INCOMPLETE message is expected until the manifest is updated to pipeline-v2 outputs (Wave 3 BUNDLE-H). **G-P23 Step 11 bot restart removal:** `pm2 restart mags-bot` removed; deferred to /session-end (single canonical home) to respect boot/session-end RAM lifecycle. Step 13 checklist updated. **G-P25 §Time Budget section added** before §Output: per-substep wall-time table surfaces Step 2a (10+ min --apply), Step 10 /skill-check (5-15 min) as the expensive ones. Whole-skill budget ~30-45 min edition / ~10-15 min non-edition. **Stale-filename sweep (same drift class as G-PR1):** all 6 references to `production_log_edition_c<XX>.md` + `production_log_city_hall_c<XX>.md` consolidated to `production_log_c<XX>.md` (S195 convention). G-P1 ("/save-to-bay-tribune duplicate") not addressed here — that's a /write-edition-side fix; Step 1b is already the canonical text-ingest home.

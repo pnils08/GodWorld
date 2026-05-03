@@ -1,8 +1,8 @@
 ---
 name: edition-print
 description: Post-publish print pipeline — photos, PDF, Drive upload. Edition-only for now (S188 rebuild); non-edition types await T11 wiring.
-version: "1.2"
-updated: 2026-04-29
+version: "1.3"
+updated: 2026-05-03
 tags: [media, active]
 effort: low
 disable-model-invocation: true
@@ -50,7 +50,7 @@ For edition (the only fully-supported type after S188 rebuild):
 - `output/sift_proposals_c<XX>.json` exists (editorial weight signal — feeds DJ bundler)
 - `output/world_summary_c<XX>.md` exists (atmospheric/neighborhood mood for DJ)
 - Source uploaded to Drive (handled by `/write-edition` Step 6 for editions)
-- Production log exists: `output/production_log_edition_c<XX>.md`
+- Production log exists: `output/production_log_c<XX>.md` (consolidated per-cycle log; S195 convention)
 
 For non-edition types (interview/supplemental/dispatch): **DJ-direction pipeline not wired yet (T11 pending).** Photo gen for these types is temporarily unsupported by this skill until T11 extends the bundler to read alternate-start artifacts. The PDF + Drive steps still work.
 
@@ -64,7 +64,7 @@ Full chains:
 
 ## Step 0: Production Log
 
-Read the existing media production log: `output/production_log_edition_c<XX>.md`. Append:
+Read the consolidated media production log: `output/production_log_c<XX>.md`. Append a `## Print Pipeline (<type>)` section:
 
 ```markdown
 ## Print Pipeline (<type>)
@@ -160,7 +160,7 @@ node scripts/saveToDrive.js output/pdfs/bay_tribune_<type>_c<XX>.pdf <type>
 
 Uploads PDF to Drive. Folder routing per `--type`: editions go to existing edition folder; interviews/supplementals/dispatches route to non-edition subfolder OR same folder with type-prefixed filename (engine-sheet T9 picks the implementation).
 
-Photos also upload if Drive destination configured.
+PDF only — photos remain local. (`saveToDrive.js` does not implement directory upload; see G-PR18 in print gap log.)
 
 ## Step 5: Dashboard Update
 
@@ -185,3 +185,4 @@ Done. Print pipeline complete.
 - 2026-04-17 — Initial 6-step skill (S156).
 - 2026-04-26 — v1.1 (S180, research-build). Type-aware: `--type {edition|interview|supplemental|dispatch}` flag added. Per-type photo budget table (1–3 for non-edition, 5–8 unchanged for edition). Triggerable from all four authoring skills. Plan [[plans/2026-04-26-non-edition-publishing-pipeline]] T4.
 - 2026-04-29 — v1.2 (S188, research-build). Photo pipeline rebuild T5–T8 + T10 closed. Step 1 split into three substeps: `djDirect.js` (bundler) → `dj-hartley` subagent invocation in-session → `generate-edition-photos.js` (FLUX-direct, no internal synthesis). Step 2 documents `--with-qa` chain mode + `--qa-only` standalone QA + the regen-on-fail loop with editorial-flag marking. Prerequisites updated to require `sift_proposals_c<XX>.json` + `world_summary_c<XX>.md`. "Future (Phase 21.3)" note removed — it's current. Non-edition types (interview/supplemental/dispatch) flagged as T11-pending; DJ-direction pipeline doesn't reach them yet. Plan [[plans/2026-04-25-photo-pipeline-rebuild]].
+- 2026-05-03 — v1.3 (S197, research-build). Wave 1 DOC-drift sweep per [[plans/2026-05-03-c93-gap-triage-execution]]. Closed G-PR1 (production log filename: `production_log_edition_c<XX>.md` → consolidated `production_log_c<XX>.md` per S195) + G-PR18 (Step 4 "Photos also upload" claim → "PDF only — photos remain local" since `saveToDrive.js` has no directory-upload code). DJ slug-convention G-PR8 + word-band G-PR9 fixes live in dj-hartley agent files (Task 1.2).

@@ -51,6 +51,7 @@ const fs = require('fs');
 const path = require('path');
 const { google } = require('googleapis');
 const citizenDerivation = require('../lib/citizenDerivation');  // S184 (Phase 4.1.c) — intake-side derivation library
+const formatContract = require('./emitFormatContractSections');  // S197 BUNDLE-A — CITIZEN USAGE LOG fallback
 
 const ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
 
@@ -587,12 +588,59 @@ async function main() {
   const namesSection = findSection(lines, 'NAMES INDEX', ['CITIZEN USAGE LOG', 'BUSINESSES NAMED', 'ARTICLE TABLE', 'STORYLINES UPDATED', 'CONTINUITY NOTES', 'COMING NEXT', 'END EDITION', '---']);
   const bizSection = findSection(lines, 'BUSINESSES NAMED', ['ARTICLE TABLE', 'STORYLINES UPDATED', 'CONTINUITY NOTES', 'COMING NEXT', 'END EDITION', '---']);
 
-  const parsedCitizens = parseNamesIndex(namesSection);
-  const parsedBusinesses = parseBusinessesNamed(bizSection);
+  let parsedCitizens = parseNamesIndex(namesSection);
+  let parsedBusinesses = parseBusinessesNamed(bizSection);
+  let fallbackUsed = false;
 
-  console.log(`Parsed: ${parsedCitizens.length} citizen rows, ${parsedBusinesses.length} business rows`);
-  if (!namesSection) console.log('  (no NAMES INDEX section in source)');
-  if (!bizSection) console.log('  (no BUSINESSES NAMED section in source)');
+  // S197 BUNDLE-A — CITIZEN USAGE LOG fallback. Pre-S197 editions (and any
+  // future cycle that skipped the /write-edition Step 3a inject) emit the
+  // rich-prose CITIZEN USAGE LOG without strict NAMES INDEX / BUSINESSES NAMED.
+  // Without this fallback, ingest silently no-ops and new entities are
+  // dropped from canonical sheets (G-W19 / G-P6 / G-P8 / G-P9). The fallback
+  // derives strict-shape rows from the rich CUL via the shared library.
+  if (parsedCitizens.length === 0 && parsedBusinesses.length === 0) {
+    const culRange = formatContract.findSectionRange(lines, 'CITIZEN USAGE LOG',
+      formatContract.FOOTER_HEADERS.filter(h => h !== 'CITIZEN USAGE LOG'));
+    if (culRange) {
+      const culLines = lines.slice(culRange.startBody, culRange.end);
+      const fallback = formatContract.parseCitizenUsageLog(culLines);
+      if (fallback.citizens.length > 0 || fallback.businesses.length > 0 || fallback.faithOrgs.length > 0) {
+        parsedCitizens = fallback.citizens.map(c => ({
+          popId: c.popId,
+          prefix: c.popId ? c.popId.split('-')[0] : null,
+          fullName: c.fullName,
+          description: c.role || '',
+          format: c.popId ? 'strict' : 'freeform',
+        }));
+        // Faith orgs surface as FAITH- prefixed rows in NAMES INDEX; downstream
+        // resolveCitizens routes them to culturalOnly (not Sim_Ledger).
+        for (const f of fallback.faithOrgs) {
+          parsedCitizens.push({
+            popId: 'FAITH-NEW',
+            prefix: 'FAITH',
+            fullName: f.name,
+            description: 'Faith Org',
+            format: 'strict',
+          });
+        }
+        parsedBusinesses = fallback.businesses.map(b => ({
+          bizId: 'NEW',
+          name: b.name,
+          sector: '',
+          neighborhood: '',
+        }));
+        fallbackUsed = true;
+        console.log('[FALLBACK] NAMES INDEX + BUSINESSES NAMED missing; derived from CITIZEN USAGE LOG.');
+        console.log('  Recommend: run `node scripts/emitFormatContractSections.js ' +
+          path.basename(fullPath) + ' --inject` to add strict sections (idempotent).');
+      }
+    }
+  }
+
+  console.log(`Parsed: ${parsedCitizens.length} citizen rows, ${parsedBusinesses.length} business rows` +
+    (fallbackUsed ? ' (via CUL fallback)' : ''));
+  if (!namesSection && !fallbackUsed) console.log('  (no NAMES INDEX section in source)');
+  if (!bizSection && !fallbackUsed) console.log('  (no BUSINESSES NAMED section in source)');
   console.log('');
 
   // Fail-loud sanity check: NAMES INDEX section had non-empty content lines

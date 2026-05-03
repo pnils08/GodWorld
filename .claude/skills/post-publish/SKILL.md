@@ -168,25 +168,27 @@ Reads NAMES INDEX + BUSINESSES NAMED sections from the published `.txt` and appe
 - **Simulation_Ledger** — new citizens land with `Status=pending`, `Tier=4`, `ClockMode=ENGINE`, blank demographics. Engine fills demographic columns next cycle. Existing citizens are NEVER modified — name drifts logged as warnings, not overwrites.
 - **Business_Ledger** — new businesses land with cols A–D populated, E–I blank for engine fill.
 
-Handles two NAMES INDEX formats: T1 strict (`POP-NNNNN | Name | Role`) and pre-T1 freeform (`Name — Description`). Pre-T1 fallback parser allows replay of existing fixtures. BUSINESSES NAMED is T1-strict only; absent section returns 0 gracefully.
+Handles two NAMES INDEX formats: T1 strict (`POP-NNNNN | Name | Role`) and pre-T1 freeform (`Name — Description`). Plus a CITIZEN USAGE LOG fallback (S197 BUNDLE-A): when NAMES INDEX is absent (pre-S197 editions, or any cycle that skipped /write-edition Step 3a inject), the script derives entity rows from the rich-prose CITIZEN USAGE LOG so backfill replay still lands the canonical sheets correctly. BUSINESSES NAMED also fallback-resolves from CITIZEN USAGE LOG `(NEW CANON)` sub-sections; absent strict section + no fallback returns 0 gracefully.
 
 Default mode is `--dry-run`; pass `--apply` to write. Output: `output/intake_published_entities_c<XX>_<slug>.json` with full resolution detail (matched / candidates / ambiguous / phantom / appended).
 
-**Verification gate (defense-in-depth, S189 dispatch gap E8):** after `ingestPublishedEntities.js` finishes, cross-check its parsed entity count against the source `.txt` directly:
+**Verification gate (defense-in-depth, S189 dispatch gap E8 + S197 BUNDLE-A `--strict`):** after `ingestPublishedEntities.js` finishes, cross-check its parsed entity count against the source `.txt` directly:
 
 ```bash
-node scripts/verifyNamesIndexParse.js <source> --expected <N>
+node scripts/verifyNamesIndexParse.js <source> --expected <N> --strict
 ```
 
-Where `<N>` = the entity count `ingestPublishedEntities.js` reported (sum of NAMES INDEX rows it parsed — `matched + candidates + ambiguous + phantom + appended`). The helper independently counts NAMES INDEX rows in the source `.txt` (lines between `NAMES INDEX` header and the next section terminator). Exit code 0 = counts match; exit code 1 = mismatch (FAIL LOUDLY, block publish).
+Where `<N>` = the entity count `ingestPublishedEntities.js` reported (sum of NAMES INDEX rows it parsed — `matched + candidates + ambiguous + phantom + appended`). The helper independently counts NAMES INDEX rows in the source `.txt`. Exit code 0 = counts match AND section present; exit code 1 = mismatch OR `--strict` and NAMES INDEX section absent (FAIL LOUDLY, block publish).
 
-**Why this gate exists:** S188 KONO Second Song dispatch run had `ingestEditionWiki.js` + `ingestPublishedEntities.js` both silently return 0 entities despite valid POP-00537 + CUL-905CBDE8 NAMES INDEX rows (false "pure-atmosphere artifact" success). Engine-sheet's E1+E2 fixed the parsers; this gate prevents future parser regressions from re-introducing silent data loss. Plan reference: [[../../../docs/plans/2026-04-30-dispatch-gap-followups]] Task E8.
+**Why `--strict` exists (S197 BUNDLE-A):** the C93 silent-no-op pattern was missing-section + zero-expected resolved to exit 0. /write-edition emitted CITIZEN USAGE LOG only (no NAMES INDEX, no BUSINESSES NAMED), ingestPublishedEntities silently returned 0 entities, verifyNamesIndexParse said `[OK] no mismatch` against expected=0 — and 5 entities (3 new citizens + Atlas Bay Architects + Greater Hope Pentecostal) silently dropped from canonical sheets. `--strict` requires NAMES INDEX section to be present; if absent the gate fails with a pointer to run `emitFormatContractSections.js --inject` upstream.
+
+**Why the count-match gate exists (S189 dispatch gap E8):** S188 KONO Second Song dispatch run had ingestEditionWiki.js + ingestPublishedEntities.js both silently return 0 entities despite valid POP-00537 + CUL-905CBDE8 NAMES INDEX rows (false "pure-atmosphere artifact" success). Engine-sheet's E1+E2 fixed the parsers; this gate prevents future parser regressions from re-introducing silent data loss. Plan reference: [[../../../docs/plans/2026-04-30-dispatch-gap-followups]] Task E8.
 
 **Combined gate:**
 1. `output/intake_published_entities_c<XX>_<slug>.json` written; if `--apply`, `appended` arrays show all rows verified-by-readback (`ok: true`).
-2. `verifyNamesIndexParse.js --expected <N>` exits 0 (source NAMES INDEX row count matches parser-reported count).
+2. `verifyNamesIndexParse.js --expected <N> --strict` exits 0 (source NAMES INDEX present AND row count matches parser-reported count).
 
-If gate 2 fails, do NOT proceed to Step 6+. Investigate the parser regression before continuing — silent zero-entity ingest poisons bay-tribune retrieval.
+If gate 2 fails with "NAMES INDEX section absent": run `node scripts/emitFormatContractSections.js <source> --inject` to derive the strict sections from CITIZEN USAGE LOG, then re-run /post-publish Step 5. If gate 2 fails with "mismatch": investigate the parser regression before continuing — silent zero-entity ingest poisons bay-tribune retrieval.
 
 ### Step 5b: Refresh `base_context.json` + desk packets (all types)
 ```bash

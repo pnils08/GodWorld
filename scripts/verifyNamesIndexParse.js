@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * verifyNamesIndexParse.js — Independent NAMES INDEX row counter
- * [engine/sheet] — S189 dispatch gap E8 helper
+ * [engine/sheet] — S189 dispatch gap E8 helper, S197 BUNDLE-A --strict + CUL fallback
  *
  * Defense-in-depth complement to the E1/E2 fail-loud guards baked into
  * ingestEditionWiki.js + ingestPublishedEntities.js. Reads the canonical
@@ -17,15 +17,27 @@
  * Usage:
  *   node scripts/verifyNamesIndexParse.js <file.txt>
  *   node scripts/verifyNamesIndexParse.js <file.txt> --expected <N>
+ *   node scripts/verifyNamesIndexParse.js <file.txt> --strict
+ *
+ * Flags:
+ *   --expected <N>  Compare source count against this number; fail on mismatch.
+ *   --strict        Fail loud when NAMES INDEX section is absent, even when
+ *                   no --expected is supplied. Per S197 BUNDLE-A: /post-publish
+ *                   Step 5 invokes with --strict to enforce format-contract
+ *                   presence (the C93 silent-no-op pattern that dropped 5
+ *                   entities was missing-section + zero-expected = exit 0).
+ *                   Without --strict, falls back to counting CITIZEN USAGE LOG
+ *                   content lines for backfill replay of pre-S197 editions.
  *
  * Exit codes:
  *   0  no mismatch (or no --expected supplied — just prints count)
- *   1  source count != expected
+ *   1  source count != expected, OR --strict and section absent
  *   2  argument error or file not found
  */
 
 const fs = require('fs');
 const path = require('path');
+const formatContract = require('./emitFormatContractSections');
 
 const SECTION_TERMINATORS = [
   'CITIZEN USAGE LOG', 'BUSINESSES NAMED', 'STORYLINES UPDATED',
@@ -88,9 +100,10 @@ function countNamesIndexRows(text) {
 
 const filePath = process.argv.find(a => a.endsWith('.txt'));
 const expectedRaw = parseFlag('expected');
+const strict = process.argv.includes('--strict');
 
 if (!filePath) {
-  console.error('Usage: node scripts/verifyNamesIndexParse.js <file.txt> [--expected <N>]');
+  console.error('Usage: node scripts/verifyNamesIndexParse.js <file.txt> [--expected <N>] [--strict]');
   process.exit(2);
 }
 
@@ -119,16 +132,58 @@ if (!result.found) {
   console.log('NAMES INDEX rows in source: ' + result.count);
   if (result.sample) console.log('Sample row 1: "' + result.sample + '"');
 }
+
+// S197 BUNDLE-A — CITIZEN USAGE LOG fallback. When NAMES INDEX is missing
+// but the rich-prose CUL section is present, count derived entities (the
+// same path ingestPublishedEntities.js uses for backfill ingest) so the
+// expected-count comparison still has signal on pre-S197 editions.
+let fallback = null;
+if (!result.found) {
+  const lines = text.split('\n');
+  const culRange = formatContract.findSectionRange(lines, 'CITIZEN USAGE LOG',
+    formatContract.FOOTER_HEADERS.filter(h => h !== 'CITIZEN USAGE LOG'));
+  if (culRange) {
+    const culLines = lines.slice(culRange.startBody, culRange.end);
+    const parsed = formatContract.parseCitizenUsageLog(culLines);
+    fallback = {
+      citizens: parsed.citizens.length,
+      faithOrgs: parsed.faithOrgs.length,
+      total: parsed.citizens.length + parsed.faithOrgs.length,
+    };
+    console.log('CITIZEN USAGE LOG fallback: ' + fallback.total + ' entities ('
+      + fallback.citizens + ' citizens + ' + fallback.faithOrgs + ' faith orgs)');
+  }
+}
+
 if (expected !== null) {
   console.log('Expected (parsed by ingest): ' + expected);
+}
+
+// --strict: NAMES INDEX must be present. Catches the C93 silent-no-op pattern
+// where missing-section + zero-expected resolved to exit 0 and 5 entities
+// were dropped from canonical sheets.
+if (strict && !result.found) {
+  console.error('[FAIL] --strict: NAMES INDEX section absent from source.');
+  console.error('  Pre-publish: run `node scripts/emitFormatContractSections.js ' +
+    path.basename(filePath) + ' --inject` to derive the strict section from CITIZEN USAGE LOG.');
+  if (fallback) {
+    console.error('  CITIZEN USAGE LOG fallback would have produced ' + fallback.total + ' entities.');
+  }
+  process.exit(1);
 }
 
 if (expected === null) {
   process.exit(0);
 }
 
+if (!result.found && fallback && fallback.total === expected) {
+  console.log('[OK] CUL fallback count matches expected (NAMES INDEX absent — backfill path).');
+  process.exit(0);
+}
+
 if (!result.found && expected > 0) {
-  console.error('[FAIL] expected ' + expected + ' parsed entities but source has no NAMES INDEX section');
+  console.error('[FAIL] expected ' + expected + ' parsed entities but source has no NAMES INDEX section'
+    + (fallback ? ' (fallback would yield ' + fallback.total + ')' : ''));
   process.exit(1);
 }
 

@@ -192,7 +192,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 - **Files:**
   - `docs/engine/ROLLOUT_PLAN.md` — modify
 - **Bundle:** G-W19 (compile template ↔ parser format), G-P6, G-P8, G-P9 (NAMES INDEX / BUSINESSES NAMED missing → silent intake drops)
-- **Status:** [ ] not started
+- **Status:** [x] DONE S197 — engine-sheet shipped end-to-end. `scripts/emitFormatContractSections.js` (NEW, ~530 LOC) parses CITIZEN USAGE LOG and emits strict NAMES INDEX (POP-/CUL-/FAITH- prefixes) + BUSINESSES NAMED, idempotent `--inject` mode. `/write-edition` Step 3a wires the helper. `ingestPublishedEntities.js` adds CUL fallback when NAMES INDEX absent (backfill replay path). `verifyNamesIndexParse.js` adds `--strict` flag — fail-loud on missing-section, plus CUL fallback count for diagnostic. `/post-publish` Step 5 invokes with `--strict`. C93 fixture dry-run: 3 new citizens (Vivienne Torres / Diane Foster / Thomas Webb) + Atlas Bay Architects + Greater Hope Pentecostal Church all surface — 5/5 acceptance. Note: bundle spec listed `rateEditionCoverage.js` but it parses article bodies (not NAMES INDEX); left untouched. Surfaced 1 unrelated downstream bug in `resolveCitizens` (Calvin Reeves Sr. → "Calvin Sr." — last-name suffix tokenization); flagged for separate gap, outside BUNDLE-A scope.
 
 ### Task 3.2: BUNDLE-B — MCP citizen verification + queryLedger env
 

@@ -2053,3 +2053,47 @@ The `Task` tool today spawns Claude subagents that each produce one reply and ex
 **Decision (S189):** Bay-tribune rebuild Phase 2-7 placed on HOLD. Mags-first pilot proposed (smallest blast radius — editorial brain, not canon, not engine state, recoverable if SMFS misbehaves). Pilot spec at `[[comparisons/2026-04-30-smfs-vs-bay-tribune-rebuild]]` — 10 acceptance steps + 7 acceptance criteria + fail-safe rollback via umount. Engine-sheet runs the install + mount when Mike OKs the third-party binary; 7 days of passive observation through normal Mags work; outcome appended to comparison doc Phase 2 with go/no-go on bay-tribune migration.
 
 **Status:** Research-landscape + active eval. See `[[comparisons/2026-04-30-smfs-vs-bay-tribune-rebuild]]` for full risk surface, pilot proposal, and decision forks.
+
+---
+
+## S197 — FLUX Text-Suppression Ceiling (2026-05-03)
+
+**Source:** C93 print run gap log G-PR10 / G-PR11 / G-PR14 (`output/production_log_edition_c93_print_gaps.md`). Surfaced during S196 /edition-print run — first full-edition print since E91/S188 (2-cycle silence). Bundled here as Wave 5 of [[plans/2026-05-03-c93-gap-triage-execution]].
+
+**What we observed (C93 evidence):** 4 of 6 generated photos hit text-legibility issues despite mandatory negative-frame paragraphs. Failure modes:
+
+- **mesa_mound_debut_coliseum** — initial: real QuikCAM + ERB stadium-wall logos rendered. Auto-retry (same prompt, FLUX nondeterminism): readable jersey number on uniform back. Manual third attempt (composition rewrite — catcher POV + motion blur + 60-foot distance to suppress jersey-number rendering): FLUX successfully suppressed text but lost the subject — produced a fielder/baseman in lateral angle instead of pitcher mid-windup. **Three attempts, three different failure modes.** Spec dropped from manifest with editorial-flag annotation; SPORTS section shipped text-only.
+- **baylight_crane_overcast_dock** — initial: legible "PORT OF GALLIOND DISTRICT" + "BAYLIGHT AUTHORITY" on signage. Retry: "BAYLIGHT AUTHORITY" still legible on fence sign. FLAG verdict, shipped.
+- **transit_hub_paperwork_no_gavel** — gibberish on placards ("Ovaratora", "Commcittee", "Curstica"). FLAG verdict.
+- **greater_hope_grief_gathering_west_oakland** — motif understatement (chair, candles, elderly couple under-emphasized). FLAG verdict (different failure class — composition, not text).
+
+**Two clean PASSes** (`atlas_bay_fence_sarah_huang`, `heinolds_dusk_waterfront`) shared a pattern: subject in foreground, environmental signage as middle ground or absent, depth-of-field naturally blurred any text. **G-PR13 atlas_bay PASS pattern** confirmed mid-run as the working composition discipline.
+
+**Why this matters — structural ceiling, not buggy:** Negative-frame paragraphs (`NOT in frame: ... NO text artifacts, NO logos, NO recognizable real-world brand identification`) are soft suggestions to FLUX 1.1 pro, not hard constraints. The model deprioritizes them under composition pressure. Every cycle, every photo with "in-environment signage" produces real-world or pseudo-real text. Text suppression in image generation is the new canon-fidelity frontier — the negative-frame paragraph cannot be the load-bearing canon-fidelity mechanism.
+
+**Already shipped (Wave 1 overlay, S197 commit `279b290`):** `scripts/djDirect.js` INSTRUCTION FOR DJ block now hard-states the composition-suppresses-text rule with the atlas_bay pattern as the modeled example. Both edition + non-edition bundle templates carry it. This is the *upstream* fix — DJ specs avoid signage-emphatic compositions where possible. Doesn't solve cases where the composition *requires* signage in frame (mesa stadium walls, baylight construction site).
+
+**Four intervention paths to investigate (research scope):**
+
+1. **OCR post-check primitive.** Run Tesseract or a Vision API (Claude Haiku Vision is already in the QA loop; could extend) over each generated image. Detect text in regions the negative-frame marked NOT-in-frame. Reject if found; route to forced regen with composition-pivot prompt rewrite (path 2). Cost: ~50ms per image for Tesseract; one extra Vision API call per image otherwise. Risk: false positives on text outside negative regions; calibration matters.
+
+2. **Prompt-rewrite-on-retry (Haiku-driven).** Replace the current FLUX-nondeterminism re-roll with a Haiku-mediated prompt-rewrite step: on FAIL, Haiku reads the QA verdict + the failed image, rewrites the prompt with stronger composition + weaker text-emphasis (e.g., "wider angle to push signage out of focal plane," "subject in tight foreground crop, signage exits frame at top edge"). Then retry. The G-PR11 finding is that same-prompt re-rolls roll the same dice; canon failures are prompt-shape failures, not seed failures. Cost: one Haiku call per regen + one extra FLUX call per regen attempt.
+
+3. **ControlNet variants (FLUX dev branch).** FLUX dev variant supports ControlNet — region-specific control over composition while letting the prompt govern text/style. Could fix subject pose (no more "wrong fielder when composition is rewritten" = G-PR14 manifestation) while letting the negative-frame govern text suppression. Cost: dev variant access + ControlNet pre-pass to generate the pose mask. Quality of the pose pre-pass becomes the new bottleneck.
+
+4. **Alternate models with stronger negative-prompt adherence.** Comparison test: SDXL (often cited as stronger on negative prompts than FLUX), Imagen 3 (Google, strong text suppression historically), DALL-E 3 (less photojournalism-style but very disciplined on prompt). Test fixture: re-run mesa, baylight, transit_hub specs through 3-4 alternate models, score on text-suppression PASS rate + subject fidelity. Cost: per-model API access + test cycle. Outcome: hard data on which model survives the canon-fidelity gauntlet.
+
+**Compounding constraint (G-PR14 — prompt-engineering trade-off):** Every additional constraint added to a FLUX prompt costs subject fidelity probability. Mesa attempt-3 demonstrated the pattern — composition-first text-suppression rewrite (path 1 of G-PR13 fix) successfully avoided text but rendered the wrong subject. So the four intervention paths above must each be measured on TWO axes: text-suppression PASS rate AND subject-fidelity PASS rate. Single-axis optimization buys nothing.
+
+**Scope-by-eliminating-the-variable option:** for sports specs especially, switch hero-shot framing to extreme close-up on hands+ball/glove/grip — bypasses both jersey-number rendering AND subject-role ambiguity. Editorial cost: less dynamic visual variety, fewer wide-angle establishing shots in SPORTS section. Worth piloting on next sports hero shot before investing in path 1-4.
+
+**Recommended sequencing (research-build judgment, pending grill):**
+- **Path 2 first** (prompt-rewrite-on-retry) — cheapest meaningful upgrade. Replaces dumb seed re-roll with a real adaptation step. Closes G-PR11 directly.
+- **Path 1 second** (OCR post-check) — detection mechanism that makes paths 2/3/4 actionable. Without it, "did this PASS or FLAG" is judgment-only.
+- **Path 4 in parallel** (alternate-model comparison test) — small experiment, big information value. Could reveal that FLUX is the wrong tool for the canon-fidelity job.
+- **Path 3 last** (ControlNet) — most infrastructure-heavy; only worth building if path 4 confirms FLUX is the right model and path 2 plateaus.
+
+**Decision (S197):** Research-landscape entry. No build commitment yet. Wave 1 overlay (atlas_bay composition pattern in djDirect.js) is the immediate deployed mitigation; this entry frames the research surface for when bandwidth opens. Companion: Wave 3 BUNDLE-E (PDF respects editorialFlag + 3-strike abort) handles the *downstream* failure surface — flagged photos don't ship, regen loops cap at 3. Together with this research, the FLUX ceiling becomes a managed cost rather than an open contamination risk.
+
+**Status:** Research-landscape entry. G-PR10 / G-PR11 / G-PR14 marked WAVE 5 RESEARCH S197 in print gap log. No plan file (research-only — operationalize when an intervention path moves to build).
+

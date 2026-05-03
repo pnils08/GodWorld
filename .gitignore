@@ -48,3 +48,8 @@ graphify-out/
 **/graphify-out/
 output/audit-reports/
 output/audit-state.json
+
+# Python bytecode caches (e.g., from godworld MCP server)
+__pycache__/
+**/__pycache__/
+*.pyc

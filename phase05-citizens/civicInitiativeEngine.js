@@ -145,6 +145,8 @@ function runCivicInitiativeEngine_(ctx) {
   var iVetoReason = idx('VetoReason');             // v1.7
   var iOverrideVoteCycle = idx('OverrideVoteCycle');  // v1.7
   var iOverrideOutcome = idx('OverrideOutcome');   // v1.7
+  var iImplementationPhase = idx('ImplementationPhase');  // v1.8 (S199 G-R11) — phase-transition reschedule
+  var iNextActionCycle = idx('NextActionCycle');          // v1.8 (S199 G-R11) — names the future cycle for the vote
 
   // v1.2: Required header validation to prevent silent write failures
   var required = ['InitiativeID', 'Name', 'Type', 'Status', 'VoteCycle',
@@ -198,6 +200,51 @@ function runCivicInitiativeEngine_(ctx) {
       rows[r] = row;
       updated = true;
       Logger.log('civicInitiativeEngine: Retrying delayed initiative ' + initId);
+    }
+
+    // v1.8 (S199 G-R11): Phase-transition reschedule.
+    // When an initiative completes a non-vote-resolving phase (e.g., visioning)
+    // and is flagged vote-ready with a future NextActionCycle, the engine must
+    // schedule the council vote by bumping VoteCycle and flipping Status into
+    // the active lifecycle. Without this, vote-ready initiatives sit with a
+    // stale VoteCycle (set during the prior phase) and the line-204 trigger
+    // never fires — vote silently no-ops every cycle.
+    //
+    // Trigger: status='visioning-complete' + ImplementationPhase='vote-ready'
+    // + NextActionCycle > cycle. Writes VoteCycle=NextActionCycle, Status=active.
+    // Existing auto-bump at the bottom of the loop catches active→pending-vote
+    // when voteCycle === cycle+1; existing line-204 trigger fires the resolver
+    // at the scheduled cycle.
+    //
+    // Bug class is broader than "follow-up votes" — covers any vote that needs
+    // a fresh schedule after a non-vote-resolving phase transition (visioning
+    // complete, failed→re-vote, conditional→ratification). Engine currently
+    // wires only the visioning-complete case; failed→re-vote and ratification
+    // can be added when those flows surface a real schedule signal.
+    if (status === 'visioning-complete' &&
+        iImplementationPhase >= 0 && iNextActionCycle >= 0) {
+      var implPhase = (row[iImplementationPhase] || '').toString().toLowerCase();
+      var nextCycle = Number(row[iNextActionCycle]) || 0;
+      if (implPhase === 'vote-ready' && nextCycle > cycle) {
+        var prevVoteCycle = voteCycle;
+        row[iVoteCycle] = nextCycle;
+        row[iStatus] = 'active';
+        row[iLastUpdated] = ctx.now;
+        if (iNotes >= 0) {
+          var existingNotes = row[iNotes] || '';
+          row[iNotes] = existingNotes + (existingNotes ? '\n' : '') +
+                        'Cycle ' + cycle + ': Vote scheduled C' + nextCycle +
+                        ' (visioning-complete + vote-ready phase transition; was VoteCycle=' +
+                        prevVoteCycle + ').';
+        }
+        rows[r] = row;
+        updated = true;
+        Logger.log('civicInitiativeEngine: ' + name + ' scheduled vote C' + nextCycle +
+                   ' (was VoteCycle=' + prevVoteCycle + ', status=visioning-complete)');
+        // Update local vars so the same-cycle auto-advance below sees new state
+        status = 'active';
+        voteCycle = nextCycle;
+      }
     }
 
     // Check if this cycle triggers a vote or decision

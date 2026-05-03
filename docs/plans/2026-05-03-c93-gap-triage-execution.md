@@ -227,7 +227,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 3.8: BUNDLE-H — postRunFiling.js manifest + saveToDrive photo upload
 
 - **Bundle:** G-P22, G-PR18
-- **Status:** [ ] not started
+- **Status:** [x] DONE S197 — postRunFiling.js checklist refreshed to pipeline-v2 (6 stale desk-output entries dropped, new glob-children type for reporters/ articles, PDF + photos demoted to optional). C93 re-run: 6 → 1 missing, the 1 being a real Mara-packet gap, not manifest staleness. saveToDrive.js path-(b) chosen: docstring + runtime directory check fail-loud instead of silent stub. Wave 1 + Wave 3 doc-and-code alignment now consistent.
 
 ### Task 3.9: Mark Wave 3 gap statuses
 

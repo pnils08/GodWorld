@@ -666,8 +666,47 @@ async function main() {
 
   if (!noPhotos && fs.existsSync(manifestPath)) {
     manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
-    console.log('Photos found: ' + manifest.photos.length);
-    manifest.photos.forEach(function(p) {
+
+    // S197 BUNDLE-E (G-PR12): respect editorialFlag + dropped sidecars.
+    // Pre-S197 the PDF generator read manifest.json and shipped every
+    // listed photo to print, even ones the QA pipeline marked as
+    // editorialFlag:true or dropped:true (3-strike auto-drop). Operator
+    // had to manually edit the manifest to exclude them. Now the PDF
+    // generator reads each photo's .meta.json sidecar and filters out
+    // entries with `dropped: true` (silent skip) or `editorialFlag: true`
+    // (skip with stderr WARN, unless --include-flagged is passed).
+    var includeFlagged = process.argv.indexOf('--include-flagged') !== -1;
+    var allPhotos = manifest.photos || [];
+    var filteredPhotos = [];
+    var droppedCount = 0;
+    var flaggedCount = 0;
+    for (var p = 0; p < allPhotos.length; p++) {
+      var photo = allPhotos[p];
+      var sidecar = path.join(photoDir, (photo.slug || photo.file.replace(/\.[^.]+$/, '')) + '.meta.json');
+      var sidecarMeta = null;
+      if (fs.existsSync(sidecar)) {
+        try { sidecarMeta = JSON.parse(fs.readFileSync(sidecar, 'utf-8')); } catch (e) { sidecarMeta = null; }
+      }
+      if (sidecarMeta && sidecarMeta.dropped === true) {
+        droppedCount++;
+        console.log('  [DROPPED] ' + photo.section + ' -> ' + photo.file +
+                    ' (reason: ' + (sidecarMeta.droppedReason || 'unspecified') + ')');
+        continue;
+      }
+      if (sidecarMeta && sidecarMeta.editorialFlag === true && !includeFlagged) {
+        flaggedCount++;
+        console.error('  [FLAGGED] ' + photo.section + ' -> ' + photo.file +
+                      ' (reason: ' + (sidecarMeta.editorialFlagReason || 'unspecified') +
+                      ') — skipping. Pass --include-flagged to override.');
+        continue;
+      }
+      filteredPhotos.push(photo);
+    }
+    manifest.photos = filteredPhotos;
+    console.log('Photos found: ' + filteredPhotos.length +
+                (droppedCount > 0 ? ' (' + droppedCount + ' dropped)' : '') +
+                (flaggedCount > 0 ? ' (' + flaggedCount + ' editorial-flagged, skipped)' : ''));
+    filteredPhotos.forEach(function(p) {
       console.log('  - ' + p.section + ' -> ' + p.file);
     });
   } else if (!noPhotos) {

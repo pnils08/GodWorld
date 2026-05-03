@@ -49,7 +49,12 @@ var DEFAULT_MODEL = 'black-forest-labs/FLUX.1.1-pro';
 var DEFAULT_WIDTH = 1344;
 var DEFAULT_HEIGHT = 768;
 var DEFAULT_STEPS = 28;
-var REGEN_MAX_RETRIES = 1; // T8: max 1 retry per failed photo
+// S197 BUNDLE-E (G-PR15): cap regen-on-fail at 2 retries (= 3 total attempts:
+// initial + 2 retries). After the third attempt still FAILs, the spec is
+// auto-dropped from the manifest with `dropped: true, droppedReason: <last
+// QA issues>` so the PDF generator can honor BUNDLE-E's editorialFlag-
+// respect logic without requiring a manual manifest edit.
+var REGEN_MAX_RETRIES = 2;
 
 // ---------------------------------------------------------------------------
 // CLI
@@ -430,7 +435,8 @@ async function runQaAndRegenLoop(opts) {
     console.log('No FAIL verdicts — no regen needed.');
     console.log('');
   } else {
-    console.log('Regen-on-fail: ' + failures.length + ' FAIL verdict(s) — retrying once each.');
+    console.log('Regen-on-fail: ' + failures.length + ' FAIL verdict(s) — up to ' +
+                REGEN_MAX_RETRIES + ' retries each (3 total attempts incl. initial).');
     console.log('');
     regenLog.push('## Initial QA: ' + failures.length + ' FAIL(s)', '');
 
@@ -438,70 +444,88 @@ async function runQaAndRegenLoop(opts) {
       var failed = failures[f];
       var fSpec = specBySlug[failed.slug];
       var label2 = '[Regen ' + (f + 1) + '/' + failures.length + '] ' + failed.slug;
-      console.log(label2 + ' (attempt 2/' + (REGEN_MAX_RETRIES + 1) + ')...');
       regenLog.push('### ' + failed.slug, '',
                     '- **Initial verdict:** FAIL',
                     '- **Initial summary:** ' + failed.qa.summary,
                     '- **Initial issues:** ' + failed.qa.issues, '');
 
-      try {
-        var retryStart = Date.now();
-        var retryResult = await photoGen.generateWithTogether(fSpec.image_prompt, {
-          model: model,
-          width: DEFAULT_WIDTH,
-          height: DEFAULT_HEIGHT,
-          steps: DEFAULT_STEPS
-        });
-        var retryElapsed = Date.now() - retryStart;
-        var retryPath = path.join(outDir, failed.file);
-        await photoGen.savePhoto(
-          { url: retryResult.url, b64: retryResult.b64 },
-          outDir,
-          failed.file
-        );
-        // Update sidecar with regen marker
-        var sidecarPath = path.join(outDir, failed.slug + '.meta.json');
-        var meta = JSON.parse(fs.readFileSync(sidecarPath, 'utf-8'));
-        meta.regenAttempt = 1;
-        meta.regenAt = new Date().toISOString();
-        meta.regenElapsedMs = retryElapsed;
-        fs.writeFileSync(sidecarPath, JSON.stringify(meta, null, 2));
-        console.log('  ✓ regenerated (' + (retryElapsed / 1000).toFixed(1) + 's)');
-
-        // Re-evaluate
-        var retryQa = await photoQA.evaluatePhoto(qaClient, retryPath, fSpec);
-        var retryIcon = retryQa.verdict === 'PASS' ? '✓' : retryQa.verdict === 'FLAG' ? '!' : '✗';
-        console.log('  ' + retryIcon + ' ' + retryQa.verdict + ' — ' + retryQa.summary);
-        console.log('');
-        writeQaSidecar(outDir, failed.slug, failed.file, cycle, retryQa);
-
-        // Update qaResults
-        for (var qr = 0; qr < qaResults.length; qr++) {
-          if (qaResults[qr].slug === failed.slug) {
-            qaResults[qr].qa = retryQa;
-            qaResults[qr].regenAttempt = 1;
-            break;
-          }
-        }
-
-        regenLog.push('- **Retry result:** ' + retryQa.verdict,
-                      '- **Retry summary:** ' + retryQa.summary, '');
-
-        if (retryQa.verdict === 'FAIL') {
-          // Mark editorial-flag — pipeline continues
-          meta.editorialFlag = true;
-          meta.editorialFlagReason = retryQa.summary;
+      // S197 BUNDLE-E — multi-attempt retry loop (was: single retry).
+      // Max attempts = REGEN_MAX_RETRIES + 1 (initial counted, retries here).
+      var currentQa = failed.qa;
+      var sidecarPath = path.join(outDir, failed.slug + '.meta.json');
+      var meta = JSON.parse(fs.readFileSync(sidecarPath, 'utf-8'));
+      var lastRetryError = null;
+      var attemptIdx = 1;
+      while (attemptIdx <= REGEN_MAX_RETRIES && currentQa && currentQa.verdict === 'FAIL') {
+        var attemptNum = attemptIdx + 1;  // initial was attempt 1
+        console.log(label2 + ' (attempt ' + attemptNum + '/' + (REGEN_MAX_RETRIES + 1) + ')...');
+        try {
+          var retryStart = Date.now();
+          var retryResult = await photoGen.generateWithTogether(fSpec.image_prompt, {
+            model: model,
+            width: DEFAULT_WIDTH,
+            height: DEFAULT_HEIGHT,
+            steps: DEFAULT_STEPS
+          });
+          var retryElapsed = Date.now() - retryStart;
+          var retryPath = path.join(outDir, failed.file);
+          await photoGen.savePhoto(
+            { url: retryResult.url, b64: retryResult.b64 },
+            outDir,
+            failed.file
+          );
+          meta.regenAttempt = attemptIdx;
+          meta.regenAt = new Date().toISOString();
+          meta.regenElapsedMs = retryElapsed;
           fs.writeFileSync(sidecarPath, JSON.stringify(meta, null, 2));
-          console.log('  ⚠ marked editorial-flag (still FAIL after retry)');
+          console.log('  ✓ regenerated (' + (retryElapsed / 1000).toFixed(1) + 's)');
+
+          var retryQa = await photoQA.evaluatePhoto(qaClient, retryPath, fSpec);
+          var retryIcon = retryQa.verdict === 'PASS' ? '✓' : retryQa.verdict === 'FLAG' ? '!' : '✗';
+          console.log('  ' + retryIcon + ' ' + retryQa.verdict + ' — ' + retryQa.summary);
           console.log('');
-          regenLog.push('- **Status:** EDITORIAL-FLAG (still FAIL after 1 retry)', '');
-        } else {
-          regenLog.push('- **Status:** PROMOTED to ' + retryQa.verdict, '');
+          writeQaSidecar(outDir, failed.slug, failed.file, cycle, retryQa);
+
+          regenLog.push('- **Retry ' + attemptIdx + ' result:** ' + retryQa.verdict,
+                        '- **Retry ' + attemptIdx + ' summary:** ' + retryQa.summary, '');
+
+          currentQa = retryQa;
+          for (var qr = 0; qr < qaResults.length; qr++) {
+            if (qaResults[qr].slug === failed.slug) {
+              qaResults[qr].qa = retryQa;
+              qaResults[qr].regenAttempt = attemptIdx;
+              break;
+            }
+          }
+        } catch (err) {
+          lastRetryError = err.message;
+          console.error('  ✗ Regen error: ' + err.message);
+          console.log('');
+          regenLog.push('- **Retry ' + attemptIdx + ' status:** REGEN ERROR — ' + err.message, '');
+          break;
         }
-      } catch (err) {
-        console.error('  ✗ Regen error: ' + err.message);
+        attemptIdx++;
+      }
+
+      // Final disposition — three-strikes rule.
+      if (currentQa && currentQa.verdict === 'FAIL') {
+        // Auto-drop after exhausting retries. PDF generator (BUNDLE-E read
+        // side) honors `dropped: true` and skips the spec in print without
+        // requiring manual manifest edits. editorialFlag also set for
+        // backward-compat with any tooling that already reads it.
+        meta.editorialFlag = true;
+        meta.editorialFlagReason = currentQa.summary;
+        meta.dropped = true;
+        meta.droppedReason = currentQa.summary || currentQa.issues || 'FAIL after ' + REGEN_MAX_RETRIES + ' retries';
+        meta.droppedAfterAttempts = REGEN_MAX_RETRIES + 1;
+        fs.writeFileSync(sidecarPath, JSON.stringify(meta, null, 2));
+        console.log('  ⚠ DROPPED after ' + (REGEN_MAX_RETRIES + 1) + ' attempts — ' + meta.droppedReason);
         console.log('');
-        regenLog.push('- **Status:** REGEN ERROR — ' + err.message, '');
+        regenLog.push('- **Status:** DROPPED (3-strikes — still FAIL after ' + REGEN_MAX_RETRIES + ' retries)', '');
+      } else if (lastRetryError) {
+        regenLog.push('- **Status:** REGEN ERROR — ' + lastRetryError, '');
+      } else {
+        regenLog.push('- **Status:** PROMOTED to ' + currentQa.verdict + ' (after ' + (attemptIdx - 1) + ' retries)', '');
       }
     }
   }

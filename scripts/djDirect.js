@@ -715,10 +715,16 @@ function main() {
       unmatched: data.unmatched,
       indexRows: data.indexRows
     });
+    var unmatchedDetail = data.unmatched.length === 0
+      ? '0 proposals'
+      : data.unmatched.length + ' proposals (no article body): ' +
+        data.unmatched.map(function (u) {
+          return (u.id || '?') + ' "' + (u.title || 'untitled').slice(0, 40) + '"';
+        }).join(', ');
     summary = {
       featured: data.matches.length + ' articles (top ' + topN + ' by sift)',
-      indexed: data.indexRows.length + ' total articles',
-      unmatched: data.unmatched.length + ' proposals (no article body found)',
+      sectionsParsed: data.indexRows.length + ' edition rows (raw section/heading count — not unique-article count; see ARTICLE TABLE)',
+      unmatched: unmatchedDetail,
       worldSummary: 'included'
     };
   } else {

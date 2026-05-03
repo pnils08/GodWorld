@@ -197,7 +197,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 3.2: BUNDLE-B — MCP citizen verification + queryLedger env
 
 - **Bundle:** G-S7, G-S8, G-S10, G-S12, G-W15, G-P7
-- **Status:** [ ] not started
+- **Status:** [x] DONE S197 — two distinct roots, six HIGHs closed. Env loader miss in queryLedger.js + rateEditionCoverage.js fixed (`require('lib/env')` added — they were the only two sheets-using scripts missing the loader). MCP server: lookup_citizen / search_world / get_neighborhood switched to hybrid+0.3 (legacy tools used default mode/threshold; wd-* tools shipped S183 already had this fix); get_council_member reads truesource_reference.json directly (was supermemory-only, returned empty on every district); get_roster handles truesource's `{asRoster: list[90]}` shape with team-variant key map (was walking dict expecting flat-list shape). MCP `load_dotenv` path corrected to canonical `/root/.config/godworld/.env`. All 3 acceptance gates pass: lookup_citizen Patricia Nolan returns POP-00729; get_council_member D4 returns Vega; queryLedger POP-00729 succeeds without shell-side env. MCP changes take effect on next Claude Code restart.
 
 ### Task 3.3: BUNDLE-C — validateEdition.js collision plague
 

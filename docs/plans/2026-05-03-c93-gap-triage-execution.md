@@ -207,7 +207,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 3.4: BUNDLE-D — assembleDecisions.js build
 
 - **Bundle:** G-R14 (15-min hand-assembly per cycle, ~120 LOC build)
-- **Status:** [ ] not started
+- **Status:** [x] DONE S197 — `scripts/assembleDecisions.js` shipped (~210 LOC, larger than estimate due to attribution + tie-break heuristics). C93 dry-run primary-voice picks all 6 match manual reference. /city-hall Step 6 collapses from 15-min hand-assembly to single bash command.
 
 ### Task 3.5: BUNDLE-E — PDF respects editorialFlag + 3-strike abort
 

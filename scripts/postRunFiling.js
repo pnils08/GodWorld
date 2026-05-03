@@ -33,6 +33,26 @@ const ROOT = path.resolve(__dirname, '..');
 // ─── Checklist ─────────────────────────────────────────────
 // Each item: { name, path (template), dest (Drive shortcut), required }
 // {XX} gets replaced with cycle number, {E} with edition number (same as cycle)
+//
+// S197 BUNDLE-H (G-P22) — pipeline-v2 manifest refresh. Pre-S197 the
+// checklist required pipeline-v1 paths that no longer exist:
+//   - output/desk-output/<desk>_c<cycle>.md (6 desks) → reported INCOMPLETE
+//     every cycle. Pipeline v2 (S134) writes articles to
+//     output/reporters/<reporter>/articles/c<cycle>_*.md (per-reporter, not
+//     per-desk). Per-desk MD files are not produced anymore.
+//   - PDF + photos required: true → /edition-print is opt-in (S188+);
+//     dispatches and supplementals don't always have a print run. Demoted
+//     to required: false; the /edition-print pipeline produces them when
+//     invoked, and /post-publish does not depend on them existing.
+//
+// Pipeline-v2 expectations (per docs/EDITION_PIPELINE.md):
+//   editions/cycle_pulse_edition_<cycle>.txt          (canonical)
+//   output/reporters/<reporter>/articles/c<cycle>_*.md (per-reporter glob)
+//   output/civic-voice/<office>_c<cycle>.json          (voice statements)
+//   output/desk-packets/{manifest,base_context}.json   (desk inputs)
+//   output/mara-audit/edition_c<cycle>_for_review.txt  (Mara packet)
+//   output/photos/e<cycle>/                            (when /edition-print run)
+//   output/pdfs/bay_tribune_e<cycle>.pdf               (when /edition-print run)
 function buildChecklist(cycle) {
   return [
     // Edition
@@ -42,28 +62,30 @@ function buildChecklist(cycle) {
       dest: 'edition',
       required: true,
     },
-    // PDF
+    // PDF — produced by /edition-print, optional in the post-publish gate.
     {
       name: 'Edition PDF',
       path: `output/pdfs/bay_tribune_e${cycle}.pdf`,
       dest: 'edition',
-      required: true,
+      required: false,
     },
-    // Photos directory
+    // Photos directory — produced by /edition-print, optional.
     {
       name: 'Edition photos',
       path: `output/photos/e${cycle}`,
       type: 'directory',
-      dest: null, // photos upload handled by generate-edition-photos.js
+      dest: null,
+      required: false,
+    },
+    // Reporter articles (pipeline-v2 glob — at least one file with c<cycle>_*.md)
+    {
+      name: 'Reporter articles (pipeline-v2)',
+      path: `output/reporters`,
+      type: 'glob-children',
+      glob: `articles/c${cycle}_*.md`,
+      dest: null,
       required: true,
     },
-    // Desk outputs (6 desks)
-    ...['civic', 'sports', 'culture', 'business', 'chicago', 'letters'].map(desk => ({
-      name: `Desk output: ${desk}`,
-      path: `output/desk-output/${desk}_c${cycle}.md`,
-      dest: null, // not uploaded to Drive
-      required: true,
-    })),
     // Mara audit packet (sent before her review)
     {
       name: 'Mara audit packet: edition',
@@ -219,23 +241,49 @@ Output:
   for (const item of checklist) {
     const fullPath = path.join(ROOT, item.path);
     const isDir = item.type === 'directory';
-    const exists = isDir ? fs.existsSync(fullPath) && fs.statSync(fullPath).isDirectory() : fs.existsSync(fullPath);
-
-    let size = null;
-    if (exists && !isDir) {
-      size = fs.statSync(fullPath).size;
-    } else if (exists && isDir) {
-      try {
-        const files = fs.readdirSync(fullPath);
-        size = files.length;
-      } catch (e) { size = 0; }
+    const isGlobChildren = item.type === 'glob-children';
+    let exists, size = null;
+    if (isGlobChildren) {
+      // S197 BUNDLE-H — glob-children: parent dir + at least one child
+      // matching `glob` pattern in any subdirectory's path. Used for
+      // pipeline-v2 reporter articles where files live at
+      // output/reporters/<reporter>/articles/c<cycle>_*.md and the parent
+      // (output/reporters) is fixed.
+      let found = 0;
+      function walk(dir, depth) {
+        if (depth > 4) return;  // cap recursion
+        let entries = [];
+        try { entries = fs.readdirSync(dir, { withFileTypes: true }); } catch (e) { return; }
+        for (const e of entries) {
+          const p = path.join(dir, e.name);
+          if (e.isDirectory()) walk(p, depth + 1);
+          else {
+            // Match `articles/c<cycle>_*.md` style — substring match on
+            // the relative path from the parent.
+            const rel = path.relative(fullPath, p);
+            const pattern = (item.glob || '').replace(/\*/g, '.*');
+            if (new RegExp(pattern + '$').test(rel)) found++;
+          }
+        }
+      }
+      walk(fullPath, 0);
+      exists = found > 0;
+      size = found;
+    } else if (isDir) {
+      exists = fs.existsSync(fullPath) && fs.statSync(fullPath).isDirectory();
+      if (exists) {
+        try { size = fs.readdirSync(fullPath).length; } catch (e) { size = 0; }
+      }
+    } else {
+      exists = fs.existsSync(fullPath);
+      if (exists) size = fs.statSync(fullPath).size;
     }
 
     const status = exists ? 'OK' : (item.required ? 'MISSING' : 'OPTIONAL');
 
     if (exists) {
       present++;
-      const sizeStr = isDir ? `${size} files` : `${(size / 1024).toFixed(1)}KB`;
+      const sizeStr = (isDir || isGlobChildren) ? `${size} files` : `${(size / 1024).toFixed(1)}KB`;
       console.log(`  [OK] ${item.name} (${sizeStr})`);
     } else if (item.required) {
       missing++;

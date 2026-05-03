@@ -5,6 +5,15 @@
  * Uses OAuth2 (user credentials) to write files to the correct Drive folder.
  * The service account handles reads; this handles writes.
  *
+ * Scope: SINGLE-FILE uploads only (PDFs, .txt artifacts, .md packets). The
+ * /edition-print SKILL.md previously claimed "photos also upload to Drive"
+ * but no photo directory upload code has ever existed here (G-PR18, S196).
+ * Wave 1 (S197) updated SKILL.md to PDF-only honesty; BUNDLE-H confirms
+ * this script aligns to that — passing a directory path is an error, not
+ * a silent feature gap. If photo upload is desired in a future cycle,
+ * extend with a separate `--directory` flag + per-file iteration; the
+ * decision was deferred S197 in favor of doc-truth over feature creep.
+ *
  * Usage:
  *   node scripts/saveToDrive.js <local-file> <destination>
  *   node scripts/saveToDrive.js <local-file> --type <type> [--cycle N]
@@ -324,6 +333,20 @@ async function main() {
 
   if (!fs.existsSync(filePath)) {
     console.error('File not found: ' + filePath);
+    process.exit(1);
+  }
+
+  // S197 BUNDLE-H (G-PR18) — directory args are not supported. Pre-S197
+  // the /edition-print SKILL.md text implied photo-directory upload was
+  // wired here; it never was. Fail-loud instead of silently treating a
+  // directory as a missing file or attempting upload-via-readFile (which
+  // would throw an opaque EISDIR). Caller should iterate the directory
+  // and pass each file individually if photo upload is added later.
+  if (fs.statSync(filePath).isDirectory()) {
+    console.error('[ERROR] saveToDrive uploads single files only. Got directory: ' + filePath);
+    console.error('  Photo-directory upload is not implemented (G-PR18 / S197 BUNDLE-H);');
+    console.error('  /edition-print SKILL.md was updated Wave 1 to reflect PDF-only behavior.');
+    console.error('  If photo upload is needed, iterate the directory and call this script per file.');
     process.exit(1);
   }
 

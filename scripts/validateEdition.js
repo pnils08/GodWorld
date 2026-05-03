@@ -42,11 +42,16 @@ const NOTE = 'NOTE';
 // ─── Engine language patterns ───────────────────────────────────
 // Each entry: { pattern, exclude (optional regex that makes the match OK) }
 const ENGINE_TERMS = [
-  // Direct engine words
-  { pattern: /\bcycle\s+\d+/gi },
-  { pattern: /\bthis cycle\b/gi },
-  { pattern: /\bnext cycle\b/gi },
-  { pattern: /\bsingle-cycle\b/gi },
+  // Direct engine words.
+  // S197 BUNDLE-C — removed cycle-related patterns. Per
+  // .claude/rules/newsroom.md: "The word 'cycle' is allowed and encouraged
+  // in edition text, headlines, and letters as the canonical time unit (S146
+  // reversal — was forbidden, was: 'use natural time references')." The four
+  // patterns here ('cycle \d+', 'this cycle', 'next cycle', 'single-cycle')
+  // were stale relative to that rule and produced 70 of 77 critical findings
+  // on E93 — every one a false positive. Numbered cycle references (Cycle 93,
+  // Cycle 95) and relative cycle references (this cycle, next cycle) are
+  // canonical reporter language, not engine leakage.
   { pattern: /\btension score\b/gi },
   { pattern: /\bseverity level\b/gi },
   { pattern: /\bhigh-severity\b/gi },
@@ -83,6 +88,34 @@ const DEFENSIVE_TERMS = [
 ];
 
 // ─── Helpers ────────────────────────────────────────────────────
+
+// S197 BUNDLE-C — Severity tier for last-name mismatch checks.
+// Three signals decide tier:
+//   1. Does the official/player's full name (expectedFirst LastName) appear
+//      in the text? If no → WARNING (likely a different person sharing the
+//      last name — Maria Reyes the citizen, Caleb Reyes the public defender).
+//   2. If yes, does the foundFirst+LastName combination occur multiple times?
+//      If yes → WARNING (recurring "Marcus Carter" reads like a real
+//      character, not a one-off typo of "Denise Carter").
+//   3. Single occurrence with the canonical name also present → CRITICAL
+//      (the typical typo signature: Wayne Ashford appearing once where
+//      Warren Ashford should be, while Warren Ashford is also referenced).
+function severityForLastNameMismatch(editionText, expectedFirst, expectedLast,
+                                      foundFirst) {
+  const escFirst = expectedFirst.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const escLast = expectedLast.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const fullNameRe = new RegExp(`\\b${escFirst}\\s+${escLast}\\b`);
+  if (!fullNameRe.test(editionText)) return WARNING;
+
+  // Full name is present. Count foundFirst+LastName occurrences.
+  if (foundFirst) {
+    const escFound = foundFirst.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const foundCombo = new RegExp(`\\b${escFound}\\s+${escLast}\\b`, 'g');
+    const matches = editionText.match(foundCombo) || [];
+    if (matches.length >= 2) return WARNING;
+  }
+  return CRITICAL;
+}
 
 function loadJSON(filepath) {
   try {
@@ -146,17 +179,27 @@ function checkCouncilNames(editionText, canon) {
       // Skip common words, titles, and articles that appear before council last names
       const skipWords = ['The', 'And', 'But', 'For', 'With', 'From', 'About', 'When', 'While',
         'After', 'Before', 'Since', 'Until', 'Where', 'That', 'This', 'These', 'Those',
-        'Councilmember', 'Councilwoman', 'Councilman', 'Council', 'Representative',
-        'Commissioner', 'Senator', 'Governor', 'Mayor', 'Judge', 'Officer',
+        'Councilmember', 'Councilwoman', 'Councilman', 'Council', 'Member', 'Representative',
+        'Commissioner', 'Senator', 'Governor', 'Mayor', 'Judge', 'Officer', 'Deputy',
         'Mr', 'Mrs', 'Ms', 'Dr', 'If', 'Or', 'Even', 'Not', 'Just', 'Only',
         'Both', 'Each', 'Every', 'Either', 'Neither', 'Whether', 'Although',
         'Former', 'Current', 'Incoming', 'Outgoing', 'Late', 'Dear', 'Said'];
       if (skipWords.includes(foundFirst)) continue;
+      // S197 BUNDLE-C — last-name collision tier. CRITICAL when council
+      // member's full name appears in text (probable typo); WARNING when
+      // it doesn't (likely different person sharing the last name).
+      const memberLast = member.name.split(' ').pop();
+      const memberFirst = member.name.split(' ')[0];
+      const sev = severityForLastNameMismatch(editionText, memberFirst, memberLast, foundFirst);
       issues.push({
-        severity: CRITICAL,
+        severity: sev,
         check: 'Council Name',
-        detail: `Found "${foundFirst} ${member.name.split(' ').pop()}" — should be "${member.name}" (${member.district}, ${member.faction})`,
-        fix: `Replace "${foundFirst} ${member.name.split(' ').pop()}" → "${member.name}"`
+        detail: (sev === CRITICAL
+          ? `Found "${foundFirst} ${memberLast}" — should be "${member.name}" (${member.district}, ${member.faction})`
+          : `Found "${foundFirst} ${memberLast}" — shares last name with "${member.name}" (${member.district}, ${member.faction}); council member's full name not in text — verify this is a different person`),
+        fix: (sev === CRITICAL
+          ? `Replace "${foundFirst} ${memberLast}" → "${member.name}"`
+          : `Verify "${foundFirst} ${memberLast}" is not a typo of council member "${member.name}"`)
       });
     }
   }
@@ -417,8 +460,11 @@ function checkMayorName(editionText, canon) {
   const canonMayor = canon.executiveBranch.mayor;
   if (!canonMayor) return issues;
 
-  // Look for "Mayor [Name]" patterns
-  const mayorPattern = /\bMayor\s+([A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*)/g;
+  // S197 BUNDLE-C — exclude "Deputy Mayor X", "Vice Mayor X", "Acting Mayor X",
+  // "Former Mayor X" prefixes. Pre-fix the regex matched "Mayor Brenda" inside
+  // "Deputy Mayor Brenda Okoro" and flagged it as a wrong canonical mayor.
+  // Negative lookbehind for the qualifier words.
+  const mayorPattern = /(?<!Deputy\s)(?<!Vice\s)(?<!Acting\s)(?<!Former\s)\bMayor\s+([A-Z][a-zA-Z'-]+(?:\s+[A-Z][a-zA-Z'-]+)*)/g;
   let match;
   while ((match = mayorPattern.exec(editionText)) !== null) {
     const foundName = match[1].trim();
@@ -568,11 +614,20 @@ function checkPlayerFirstNames(editionText, canon, knownOfficialNames) {
       const officialFirsts = officialFirstsByLast[lastNameLower] || [];
       if (officialFirsts.includes(foundFirst)) continue;
 
+      // S197 BUNDLE-C — tier by full-name presence. Same false-positive
+      // class as council/civic checks: a citizen sharing a last name with
+      // a player shouldn't trigger CRITICAL. Demote to WARNING when the
+      // player's full name is absent from the edition.
+      const sev = severityForLastNameMismatch(editionText, player.firstName, player.lastName, foundFirst);
       issues.push({
-        severity: CRITICAL,
+        severity: sev,
         check: 'Player Name',
-        detail: `Found "${foundFirst} ${player.lastName}" — roster says "${player.fullName}"`,
-        fix: `Replace "${foundFirst} ${player.lastName}" → "${player.fullName}"`
+        detail: (sev === CRITICAL
+          ? `Found "${foundFirst} ${player.lastName}" — roster says "${player.fullName}"`
+          : `Found "${foundFirst} ${player.lastName}" — shares last name with roster player "${player.fullName}"; player's full name not in text — verify this is a different person`),
+        fix: (sev === CRITICAL
+          ? `Replace "${foundFirst} ${player.lastName}" → "${player.fullName}"`
+          : `Verify "${foundFirst} ${player.lastName}" is not a typo of roster player "${player.fullName}"`)
       });
     }
   }
@@ -766,11 +821,21 @@ function checkCivicOfficeNames(editionText, civicOfficials, knownPlayerNames) {
       const playerFirsts = playerFirstsByLast[lastName.toLowerCase()] || [];
       if (playerFirsts.includes(foundFirst)) continue;
 
+      // S197 BUNDLE-C — tier by full-name presence. C93 surfaced 99 CRITICAL
+      // findings with ~95% false positives because every citizen sharing a
+      // last name with a Civic_Office_Ledger official triggered "wrong first
+      // name." Maria Reyes (citizen) shouldn't trigger Caleb Reyes (Public
+      // Defender) as a CRITICAL.
+      const sev = severityForLastNameMismatch(editionText, firstName, lastName, foundFirst);
       issues.push({
-        severity: CRITICAL,
+        severity: sev,
         check: 'Civic Official Name',
-        detail: `Found "${foundFirst} ${lastName}" — Civic_Office_Ledger says "${holder}" (${title})`,
-        fix: `Replace "${foundFirst} ${lastName}" → "${holder}"`
+        detail: (sev === CRITICAL
+          ? `Found "${foundFirst} ${lastName}" — Civic_Office_Ledger says "${holder}" (${title})`
+          : `Found "${foundFirst} ${lastName}" — shares last name with civic official "${holder}" (${title}); official's full name not in text — verify this is a different person`),
+        fix: (sev === CRITICAL
+          ? `Replace "${foundFirst} ${lastName}" → "${holder}"`
+          : `Verify "${foundFirst} ${lastName}" is not a typo of civic official "${holder}"`)
       });
     }
   }

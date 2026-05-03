@@ -28,6 +28,32 @@ function gradeFromValue(val) {
   return GRADE_SCALE[10 - clamped] || 'C';
 }
 
+// S197 BUNDLE-G (G-P17 + G-P18) — reporter-name normalization. Pre-S197
+// past grades_c<XX>.json files keyed reporters under raw byline strings,
+// so "Mags Corliss" and "Margaret Corliss" surfaced as two separate
+// reporters in the history view. Normalize at merge time.
+const REPORTER_ALIASES = {
+  'mags': 'Mags Corliss',
+  'mags corliss': 'Mags Corliss',
+  'margaret corliss': 'Mags Corliss',
+  'margaret': 'Mags Corliss',
+  'm. corliss': 'Mags Corliss',
+  'm corliss': 'Mags Corliss',
+  'dr. lila mezran': 'Lila Mezran',
+  'dr lila mezran': 'Lila Mezran',
+};
+
+function normalizeReporter(name) {
+  if (!name) return null;
+  const trimmed = name.trim();
+  if (!trimmed) return null;
+  if (/^(various citizens?|letters desk|various|anonymous|unknown)$/i.test(trimmed)) return null;
+  const lower = trimmed.toLowerCase();
+  if (REPORTER_ALIASES[lower]) return REPORTER_ALIASES[lower];
+  const stripped = trimmed.replace(/^(Dr|Mr|Ms|Mrs|Rev|Bishop|Pastor|Capt|Sgt)\.?\s+/i, '');
+  return stripped;
+}
+
 function computeTrend(grades) {
   if (grades.length < 2) return 'new';
   const recent = GRADE_VALUES[grades[grades.length - 1]] || 5;
@@ -95,16 +121,33 @@ function main() {
   }
 
   // --- Reporter history ---
+  // S197 BUNDLE-G: collapse aliases at the iteration boundary. Past grade
+  // files may key the same reporter under different byline conventions
+  // ("Mags Corliss" / "Margaret Corliss" / "M. Corliss"); normalize at
+  // merge time so rolling averages reflect one person, not three.
   const reporterHistory = {};
   const allReporters = new Set();
   for (const g of recent) {
-    if (g.reporters) Object.keys(g.reporters).forEach(r => allReporters.add(r));
+    if (g.reporters) {
+      Object.keys(g.reporters).forEach(r => {
+        const canon = normalizeReporter(r);
+        if (canon) allReporters.add(canon);
+      });
+    }
   }
 
   for (const reporter of allReporters) {
-    const grades = recent
-      .filter(g => g.reporters && g.reporters[reporter])
-      .map(g => ({ cycle: g.cycle, ...g.reporters[reporter] }));
+    // Collect every per-cycle entry whose key normalizes to `reporter`.
+    // Multiple raw aliases may collapse into a single canonical name.
+    const grades = [];
+    for (const g of recent) {
+      if (!g.reporters) continue;
+      for (const rawKey of Object.keys(g.reporters)) {
+        if (normalizeReporter(rawKey) === reporter) {
+          grades.push({ cycle: g.cycle, ...g.reporters[rawKey] });
+        }
+      }
+    }
 
     const gradeLetters = grades.map(g => g.grade);
     const values = gradeLetters.map(g => GRADE_VALUES[g] || 5);

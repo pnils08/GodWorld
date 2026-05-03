@@ -79,12 +79,117 @@ const REPORTER_DESK = {
   'Selena Grant': 'chicago',
   'Talia Finch': 'chicago',
   'Jax Caldera': 'freelance',
+  'Mags Corliss': 'editor',
   // Supplemental reporters
   'Sharon Okafor': 'culture',
   'Angela Reyes': 'culture',
   'Elliot Graye': 'culture',
   'MintConditionOakTown': 'freelance'
 };
+
+// S197 BUNDLE-G (G-P17) — reporter-name normalization. C93 split Mags
+// Corliss / Margaret Corliss / M. Corliss as separate reporters across
+// gradeEdition + gradeHistory output. Canonical name maps:
+//   - Mags / Margaret / M. Corliss / Margaret Corliss → "Mags Corliss"
+//   - Dr. Lila Mezran → "Lila Mezran" (drops honorific)
+//   - "Various citizens" / "Letters Desk" → null (not a reporter)
+const REPORTER_ALIASES = {
+  'mags': 'Mags Corliss',
+  'mags corliss': 'Mags Corliss',
+  'margaret corliss': 'Mags Corliss',
+  'margaret': 'Mags Corliss',
+  'm. corliss': 'Mags Corliss',
+  'm corliss': 'Mags Corliss',
+  'dr. lila mezran': 'Lila Mezran',
+  'dr lila mezran': 'Lila Mezran',
+};
+
+function normalizeReporter(name) {
+  if (!name) return null;
+  const trimmed = name.trim();
+  if (!trimmed) return null;
+  // Non-reporter labels — skip in grading
+  if (/^(various citizens?|letters desk|various|anonymous)$/i.test(trimmed)) return null;
+  const lower = trimmed.toLowerCase();
+  if (REPORTER_ALIASES[lower]) return REPORTER_ALIASES[lower];
+  // Strip leading honorifics (Dr./Mr./Ms./Mrs.)
+  const stripped = trimmed.replace(/^(Dr|Mr|Ms|Mrs|Rev|Bishop|Pastor|Capt|Sgt)\.?\s+/i, '');
+  return stripped;
+}
+
+// S197 BUNDLE-G (G-P15) — ARTICLE TABLE parser. Authoritative article list
+// for grading. The body-byline parser at parseEdition() missed 3 of 10
+// articles in C93; this reads the structured table directly.
+//
+// Expected format (S197 write-edition compile template):
+//   | # | Section | Headline | Reporter | Words |
+//   |---|---------|----------|----------|-------|
+//   | FRONT | CIVIC | The Vote That Wasn't There | Carmen Delaine | ~950 |
+//   | 2 | EDITOR'S DESK | What Readiness... | M. Corliss | ~230 |
+//   ...
+// Reporter column gets normalizeReporter applied; rows whose reporter
+// resolves to null (Various citizens, Letters Desk) are tagged as letters.
+function parseArticleTable(text) {
+  const lines = text.split('\n');
+  const articles = [];
+  let inTable = false;
+  let headerSeen = false;
+
+  for (const rawLine of lines) {
+    const line = rawLine.trim();
+    if (!inTable) {
+      if (line === 'ARTICLE TABLE' || line === 'ARTICLE TABLE — ENGINE INTAKE FORMAT') {
+        inTable = true;
+      }
+      continue;
+    }
+    // End of table on next section divider, blank-after-content, or major header
+    if (/^(STORYLINES UPDATED|CITIZEN USAGE LOG|NAMES INDEX|BUSINESSES NAMED|CONTINUITY NOTES|COMING NEXT|END EDITION)$/i.test(line)) {
+      break;
+    }
+    // Pipe-separated row
+    if (!line.startsWith('|')) continue;
+    const cells = line.split('|').map(s => s.trim()).filter(Boolean);
+    if (cells.length < 4) continue;
+    // Header row OR separator row
+    const firstCell = cells[0].toLowerCase();
+    if (!headerSeen) {
+      if (firstCell === '#' || firstCell.startsWith('--')) {
+        headerSeen = true;
+      }
+      continue;
+    }
+    // Separator row (---|---|---|...)
+    if (/^-+$/.test(cells[0])) continue;
+    // Data row: # | Section | Headline | Reporter | Words [| ...]
+    const num = cells[0];
+    const section = (cells[1] || '').toLowerCase().replace(/[^a-z]/g, '');
+    const headline = cells[2] || '';
+    const reporterRaw = cells[3] || '';
+    const reporter = normalizeReporter(reporterRaw);
+    const desk = reporter ? (REPORTER_DESK[reporter] || sectionToDesk(section)) : 'letters';
+    articles.push({
+      num, section, headline, reporterRaw, reporter, desk,
+      isLetters: !reporter,
+    });
+  }
+  return articles;
+}
+
+function sectionToDesk(section) {
+  // Section tags from edition format → grading desks
+  if (!section) return 'unknown';
+  const s = section.toLowerCase();
+  if (s.includes('civic') || s.includes('frontpage')) return 'civic';
+  if (s.includes('culture')) return 'culture';
+  if (s.includes('business')) return 'business';
+  if (s.includes('sport')) return 'sports';
+  if (s.includes('opinion')) return 'opinion';
+  if (s.includes('letters')) return 'letters';
+  if (s.includes('chicago')) return 'chicago';
+  if (s.includes('editor')) return 'editor';
+  return 'unknown';
+}
 
 // --- Parse edition text ---
 function parseEdition(text) {
@@ -187,17 +292,57 @@ function parseErrata(cycle) {
 
 // --- Parse Mara grade ---
 function parseMaraGrade(cycle) {
-  // Check for directive files
+  // S197 BUNDLE-G (G-P14) — JSON report path FIRST. C93 surfaced "Mara
+  // grade: not found" because parseMaraGrade only checked the legacy
+  // mara_directive_c<XX>.txt files; the current Mara pipeline writes
+  // mara_report_c<XX>.json with the grade embedded in the `notes` string
+  // (or derivable from the `score` float). Try the JSON first, fall back
+  // to the directive .txt for older cycles.
+  const reportPath = path.join(ROOT, 'output', `mara_report_c${cycle}.json`);
+  if (fs.existsSync(reportPath)) {
+    try {
+      const report = JSON.parse(fs.readFileSync(reportPath, 'utf-8'));
+      // (1) Explicit grade field if present
+      if (report.grade && /^[A-F][+-]?$/.test(report.grade)) return report.grade;
+      // (2) Grade extracted from notes string (Mara's prose conventionally
+      // says "Mara delivered grade A-" or "grade: B+" etc.). Trailing
+      // boundary is "not a letter" rather than \b — \b doesn't fire after
+      // optional non-word chars like "-" so /grade[:\s]+([A-F][+-]?)\b/
+      // backtracks "A-" → "A" before testing the boundary.
+      if (typeof report.notes === 'string') {
+        const m = report.notes.match(/grade[:\s]+([A-F][+-]?)(?![A-Za-z])/i);
+        if (m) return m[1];
+      }
+      // (3) Derive from numeric score (0-1 range). Bands chosen to match
+      // the Mara A-/B+/etc. cadence observed in C90-C93 reports:
+      // 0.95+ → A, 0.90-0.94 → A-, 0.85-0.89 → A-, 0.80-0.84 → B+,
+      // 0.75-0.79 → B, 0.70-0.74 → B-, 0.65-0.69 → C+, 0.60-0.64 → C,
+      // <0.60 → F. (A-/A overlap deliberate — Mara verdict skews A-
+      // when score lands 0.85-0.94 per observed pattern; explicit grade
+      // in notes overrides when present.)
+      if (typeof report.score === 'number') {
+        const s = report.score;
+        if (s >= 0.95) return 'A';
+        if (s >= 0.85) return 'A-';
+        if (s >= 0.80) return 'B+';
+        if (s >= 0.75) return 'B';
+        if (s >= 0.70) return 'B-';
+        if (s >= 0.65) return 'C+';
+        if (s >= 0.60) return 'C';
+        return 'F';
+      }
+    } catch (e) { /* fall through to directive */ }
+  }
+
+  // Legacy directive-file fallback (pre-S197 Mara pipeline)
   const patterns = [
     `mara_directive_c${cycle}.txt`,
     `mara_directive_c${cycle}_REJECTED.txt`
   ];
-
   for (const pat of patterns) {
     const filePath = path.join(ROOT, 'output', pat);
     if (fs.existsSync(filePath)) {
       const text = fs.readFileSync(filePath, 'utf-8');
-      // Look for grade patterns: "Grade: B", "A-", etc.
       const gradeMatch = text.match(/(?:Grade|grade|GRADE)[:\s]+([A-F][+-]?)/);
       if (gradeMatch) return gradeMatch[1];
     }
@@ -424,7 +569,45 @@ function detectSupplemental(filename) {
 // --- Main grading logic ---
 function gradeEdition(editionFile, cycle) {
   const editionText = fs.readFileSync(editionFile, 'utf-8');
-  const articles = parseEdition(editionText);
+  // S197 BUNDLE-G — prefer ARTICLE TABLE for authoritative article list
+  // (G-P15: body-byline parser missed 3 of 10 articles in C93). When the
+  // table is present and non-empty, it overrides body parsing. Body
+  // parser still runs to enrich each article with line counts + body
+  // text needed for empathy + critique scoring.
+  const bodyArticles = parseEdition(editionText);
+  const tableArticles = parseArticleTable(editionText);
+
+  let articles;
+  if (tableArticles.length > 0) {
+    // Merge: ARTICLE TABLE rows are authoritative for count + reporter +
+    // desk; body matches enrich each row with text + lineCount when
+    // available. Match by normalized reporter name first, fall back to
+    // headline substring matching when reporter alone is ambiguous.
+    articles = tableArticles.map(t => {
+      const match = bodyArticles.find(b =>
+        normalizeReporter(b.reporter) === t.reporter
+        && (!t.headline || (b.title && (
+          b.title.toLowerCase().includes(t.headline.toLowerCase().slice(0, 30))
+          || t.headline.toLowerCase().includes(b.title.toLowerCase().slice(0, 30))
+        )))
+      );
+      return {
+        reporter: t.reporter || 'Letters Desk',
+        desk: t.desk,
+        title: t.headline || (match ? match.title : ''),
+        startLine: match ? match.startLine : 0,
+        lineCount: match ? match.lineCount : 0,
+        text: match ? match.text : '',
+      };
+    });
+  } else {
+    // Fallback: body-byline parser (legacy behavior). Apply normalize.
+    articles = bodyArticles.map(a => ({
+      ...a,
+      reporter: normalizeReporter(a.reporter) || a.reporter,
+    }));
+  }
+
   const errata = parseErrata(cycle);
   const maraGrade = parseMaraGrade(cycle);
   const previousGrades = loadPreviousGrades(cycle, 4);
@@ -433,22 +616,28 @@ function gradeEdition(editionFile, cycle) {
 
   const label = isSupplemental ? `Supplemental (${supplementalTopic}) C${cycle}` : `Edition ${cycle}`;
   console.log(`\nGrading ${label}`);
-  console.log(`  Articles found: ${articles.length}`);
+  console.log(`  Articles found: ${articles.length} (table: ${tableArticles.length}, body: ${bodyArticles.length})`);
   console.log(`  Errata entries: ${errata.length}`);
   console.log(`  Mara grade: ${maraGrade || 'not found'}`);
   console.log(`  Previous grade files: ${previousGrades.length}`);
 
   // --- Grade per desk ---
   const desks = {};
-  // For supplementals: only grade desks that have articles (focused pieces)
-  // For editions: grade all standard desks
-  const STANDARD_DESKS = ['civic', 'business', 'culture', 'sports', 'chicago', 'letters'];
-  const activeDeskNames = isSupplemental
-    ? [...new Set(articles.map(a => a.desk))].filter(Boolean)
-    : STANDARD_DESKS;
-  // Include freelance if present in either type
+  // S197 BUNDLE-G (G-P16) — only grade desks that actually shipped articles
+  // this cycle. Pre-S197 the script graded all STANDARD_DESKS regardless,
+  // hallucinating B+ on chicago / letters when those desks contributed
+  // nothing. Now: editions + supplementals both filter to active desks.
+  const STANDARD_DESKS = ['civic', 'business', 'culture', 'sports', 'chicago', 'letters', 'editor', 'opinion'];
+  const desksWithArticles = new Set(articles.map(a => a.desk).filter(Boolean));
+  const activeDeskNames = STANDARD_DESKS.filter(d => desksWithArticles.has(d));
+  // Include freelance if any article is freelance-tagged
   if (!activeDeskNames.includes('freelance') && articles.some(a => a.desk === 'freelance')) {
     activeDeskNames.push('freelance');
+  }
+  // Include any unrecognized desk that has articles (defensive — surface
+  // unknown desk tags instead of silently dropping them).
+  for (const d of desksWithArticles) {
+    if (d && !activeDeskNames.includes(d) && d !== 'unknown') activeDeskNames.push(d);
   }
   const DESK_NAMES = activeDeskNames;
 

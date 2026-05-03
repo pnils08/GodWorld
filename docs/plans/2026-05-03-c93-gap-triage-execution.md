@@ -212,7 +212,7 @@ Group ~25 engine-sheet gaps into 8 clean bundles. Each bundle = one ROLLOUT entr
 ### Task 3.5: BUNDLE-E — PDF respects editorialFlag + 3-strike abort
 
 - **Bundle:** G-PR12, G-PR15
-- **Status:** [ ] not started
+- **Status:** [x] DONE S197 — paired write-side + read-side fix. generate-edition-photos.js: REGEN_MAX_RETRIES bumped 1→2 (3 attempts total); after exhausted retries sets `dropped: true` + `droppedReason` + `droppedAfterAttempts` on sidecar. generate-edition-pdf.js: reads each photo's `.meta.json` and filters out `dropped: true` (silent skip) or `editorialFlag: true` (WARN skip; --include-flagged override). E93 fixture synthetic test verified all three paths (drop / flag-skip / flag-override).
 
 ### Task 3.6: BUNDLE-F — buildCitizenCards.js 401 + retry-on-401 anti-pattern
 

@@ -33,7 +33,7 @@ You generate **structured statements** in JSON format. Each statement is a canon
   "tone": "measured-skeptical",
   "targets": ["civic", "business"],
   "relatedInitiatives": ["INIT-006"],
-  "relatedMembers": ["Nina Chen", "Elliott Crane"]
+  "relatedMembers": ["Elliott Crane"]
 }
 ```
 
@@ -147,6 +147,46 @@ When your prompt includes an **INTERVIEW REQUEST** section, you are being asked 
 - Your answers become canon. They will be cited in future editions.
 
 **Output format:** JSON matching the interview response schema — save to `output/interviews/response_c{XX}_crc-faction.json`.
+
+## Council Canon (Tier-1 Prohibition — S197 Wave 2)
+
+The 9-member council per `Civic_Office_Ledger`:
+
+| District | Member | Faction |
+|----------|--------|---------|
+| D1 | Denise Carter | OPP |
+| D2 | Leonard Tran | IND |
+| D3 | Rose Delgado | OPP |
+| D4 | Ramon Vega | IND, **Council President** |
+| D5 | Janae Rivers | OPP, Progressive Caucus Lead |
+| D6 | Elliott Crane | CRC |
+| D7 | Warren Ashford | CRC |
+| D8 | Nina Chen | **OPP** (NOT CRC — corrected S195) |
+| D9 | Terrence Mobley | **OPP** (NOT CRC) |
+
+Mayor: **Avery Santana** (citywide).
+
+**CRC bloc membership: Ashford (D7) + Crane (D6) ONLY.** Two members, not four. Earlier versions of this RULES.md treated Chen + Mobley as CRC; both are OPP per Civic_Office_Ledger. The Statement Format example above corrected (Nina Chen removed from `relatedMembers` example). When you write CRC bloc statements, speak for Ashford + Crane only.
+
+**Hard rules:**
+- You may NEVER assert a position for a council member who didn't produce a voice statement this cycle. Their position is unknown.
+- You may NEVER fabricate vote tallies. Council votes happen at council level. CRC's job is to articulate fiscal-conservative position; the count comes from the actual vote.
+- You may NEVER invent council member names. Use `mcp__godworld__get_council_member(district)` or the canonical roster above.
+- When citing a council member: name + district + faction MUST match the roster.
+- The Council President is **Vega (D4)**.
+
+**Why:** S195 G-W17 — earlier text mis-grouped Chen as CRC; G-W12/W14 — civic-desk fabricated Janae Rivers as "Council President." Cross-faction confusion was the structural cause; correcting bloc membership at the agent level is the fix.
+
+**Authoritative source:** `Civic_Office_Ledger` sheet (live) and `mcp__godworld__get_council_member`. Update inline roster above when faction membership changes.
+
+## Time Convention (Tier-1 Prohibition — S197 Wave 2)
+
+- **No month names. No years. No calendar dates. Cycles only.**
+- Correct: "within two cycles," "this past cycle," "by next cycle," "C{XX}."
+- Forbidden: "November 8," "Q3 2041," "October 25-27," "May 4th."
+- Year-anchor 2041 is for citizen ages ONLY. Never for calendar dates.
+
+**Authoritative reference:** `.claude/rules/newsroom.md` (S146).
 
 ## Canon Fidelity
 

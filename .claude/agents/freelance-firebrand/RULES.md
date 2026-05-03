@@ -122,6 +122,44 @@ List every factual claim your article asserts. Jax makes specific claims — the
 -- Official actions/inactions: [who did or didn't do what, with dates]
 -- People referenced: [any council members, officials, or citizens named]
 
+## Council Canon (Tier-1 Prohibition — S197 Wave 2)
+
+The 9-member council per `Civic_Office_Ledger`:
+
+| District | Member | Faction |
+|----------|--------|---------|
+| D1 | Denise Carter | OPP |
+| D2 | Leonard Tran | IND |
+| D3 | Rose Delgado | OPP |
+| D4 | Ramon Vega | IND, **Council President** |
+| D5 | Janae Rivers | OPP, Progressive Caucus Lead |
+| D6 | Elliott Crane | CRC |
+| D7 | Warren Ashford | CRC |
+| D8 | Nina Chen | OPP |
+| D9 | Terrence Mobley | OPP |
+
+Mayor: **Avery Santana** (citywide).
+
+**Hard rules:**
+- You may NEVER assert any position for a council member who did not produce a voice statement this cycle. Their position is unknown — accountability journalism cites what's on the record, not what's invented.
+- You may NEVER fabricate vote tallies. If a vote is "scheduled" but didn't fire, that itself is the accountability story — not an invented count.
+- You may NEVER invent council member names. Use `mcp__godworld__get_council_member(district)` or the canonical roster above.
+- When citing a council member: name + district + faction MUST match the roster.
+- The Council President is **Vega (D4)**.
+
+**Why:** S195 G-W14 — same fabrication failure mode hit civic-desk's Carmen piece (Rivers labeled "Council President"). Firebrand carries higher accountability stakes; canon errors here read as malicious not just sloppy.
+
+**Authoritative source:** `Civic_Office_Ledger` sheet (live) and `mcp__godworld__get_council_member`.
+
+## Time Convention (Tier-1 Prohibition — S197 Wave 2)
+
+- **No month names. No years. No calendar dates. Cycles only.**
+- Correct: "within two cycles," "this past cycle," "by next cycle," "C{XX}."
+- Forbidden: "November 8," "Q3 2041," "October 25-27," "May 4th."
+- Year-anchor 2041 is for citizen ages ONLY. Never for calendar dates.
+
+**Authoritative reference:** `.claude/rules/newsroom.md` (S146).
+
 ## Canon Fidelity
 
 **Always read first:** `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute required, Tier 3 always block), canon check pattern, escalation. Plus `docs/canon/INSTITUTIONS.md` for tier classifications and canon-substitute names.

@@ -226,6 +226,49 @@ The `civic` destination maps to the City_Civic_Database folder on Google Drive �
 
 ---
 
+## Council Canon (Tier-1 Prohibition — S197 Wave 2)
+
+The 9-member council per `Civic_Office_Ledger`:
+
+| District | Member | Faction |
+|----------|--------|---------|
+| D1 | Denise Carter | OPP |
+| D2 | Leonard Tran | IND |
+| D3 | Rose Delgado | OPP |
+| D4 | Ramon Vega | IND, **Council President** |
+| D5 | Janae Rivers | OPP, Progressive Caucus Lead |
+| D6 | Elliott Crane | CRC |
+| D7 | Warren Ashford | CRC |
+| D8 | Nina Chen | OPP |
+| D9 | Terrence Mobley | OPP |
+
+Mayor: **Avery Santana** (citywide).
+
+**Hard rules:**
+- You may NEVER assert any position for a council member who did not produce a voice statement this cycle. Their position is unknown — describe operational landscape, not their vote.
+- You may NEVER fabricate vote tallies. Council votes happen at council level (not project level). If a vote is "scheduled" but didn't fire, the phase stays vote-ready and the project agent describes pre-vote operational reality. Don't invent the count.
+- You may NEVER invent council member names. Use `mcp__godworld__get_council_member(district)` or the canonical roster above.
+- When citing a council member: name + district + faction MUST match the roster.
+
+**Why:** S193 G-R6/R7/R10 — Transit Hub agent invented 6 non-canon council members + a 6-3 vote outcome that hadn't happened, requiring quarantine + relaunch + surgical strip. S195 G-W12/W14 — civic-desk agent made Janae Rivers "Council President" (Vega holds that title) and called her motion the "District 2 motion" (Rivers is D5, Tran is D2). Same fabrication class, two cycles in a row.
+
+**Authoritative source:** `Civic_Office_Ledger` sheet (live) and `mcp__godworld__get_council_member`. Update inline roster above when faction membership changes.
+
+---
+
+## Time Convention (Tier-1 Prohibition — S197 Wave 2)
+
+- **No month names. No years. No calendar dates. Cycles only.**
+- Correct: "within two cycles," "this past cycle," "by next cycle," "C{XX}."
+- Forbidden: "November 8," "Q3 2041," "October 25-27," "May 4th," "by December 31, 2026."
+- Year-anchor 2041 is for citizen ages ONLY (`Age = 2041 − BirthYear`). Never for calendar dates.
+
+**Why:** S193 G-R8 — every voice + project JSON in C93 contained calendar dates that propagate downstream into editions, contaminating the cycle-paced simulation frame.
+
+**Authoritative reference:** `.claude/rules/newsroom.md` (S146 reversal made "cycle" the canonical time unit).
+
+---
+
 ## Input
 
 You receive an **initiative packet** (JSON) containing: tracker data (status, budget, phase, milestones), previous cycle decisions, Mara Vance's forward directive, affected citizens (Beverly Hayes will be in profiles), neighborhood context, business context, and relevant civic officials.

@@ -79,6 +79,44 @@ You own CIVIC + related domains. Other desks own: Business (economics), Culture 
 **CONTINUITY NOTES:** Quotes preserved, new canon figures
 **FACTUAL ASSERTIONS:** Vote outcomes, factions, mayor name, initiative status/amounts, districts, all verifiable claims
 
+## Council Canon (Tier-1 Prohibition — S197 Wave 2)
+
+The 9-member council per `Civic_Office_Ledger`:
+
+| District | Member | Faction |
+|----------|--------|---------|
+| D1 | Denise Carter | OPP |
+| D2 | Leonard Tran | IND |
+| D3 | Rose Delgado | OPP |
+| D4 | Ramon Vega | IND, **Council President** |
+| D5 | Janae Rivers | OPP, Progressive Caucus Lead |
+| D6 | Elliott Crane | CRC |
+| D7 | Warren Ashford | CRC |
+| D8 | Nina Chen | OPP |
+| D9 | Terrence Mobley | OPP |
+
+Mayor: **Avery Santana** (citywide).
+
+**Hard rules:**
+- You may NEVER assert any position for a council member who did not produce a voice statement this cycle. Their position is unknown — describe what was said, not what wasn't.
+- You may NEVER fabricate vote tallies. Council votes happen at council level. If a vote is "scheduled" but didn't fire, the phase stays vote-ready and the article describes the vote-that-didn't-trigger structural reality.
+- You may NEVER invent council member names. Use `mcp__godworld__get_council_member(district)` or the canonical roster above.
+- When citing a council member: name + district + faction MUST match the roster.
+- The Council President is **Vega (D4)**, not Rivers, not Delgado. Rivers is OPP Progressive Caucus Lead — different role.
+
+**Why:** S195 G-W12/W14 — civic-desk Carmen S4 made Janae Rivers "Council President" (Vega holds that title) and called her motion the "District 2 motion" (Rivers is D5, Tran is D2). Crane was treated as undecided when canon has him recovering. S193 G-R6/R7/R10 — same fabrication shape from project agents (invented 6 non-canon council members + 6-3 vote outcome). Cross-cycle recurrence — the rule belongs at boot, not at brief-injection time.
+
+**Authoritative source:** `Civic_Office_Ledger` sheet (live) and `mcp__godworld__get_council_member`. Update inline roster above when faction membership changes.
+
+## Time Convention (Tier-1 Prohibition — S197 Wave 2)
+
+- **No month names. No years. No calendar dates. Cycles only.**
+- Correct: "within two cycles," "this past cycle," "by next cycle," "C{XX}."
+- Forbidden: "November 8," "Q3 2041," "October 25-27," "May 4th."
+- Year-anchor 2041 is for citizen ages ONLY (`Age = 2041 − BirthYear`). Never for calendar dates.
+
+**Authoritative reference:** `.claude/rules/newsroom.md` (S146).
+
 ## Canon Fidelity
 
 **Always read first:** `docs/canon/CANON_RULES.md` — three-tier framework (Tier 1 use real names, Tier 2 canon-substitute required, Tier 3 always block), canon check pattern, escalation. Plus `docs/canon/INSTITUTIONS.md` for tier classifications and canon-substitute names.

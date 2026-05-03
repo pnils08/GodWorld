@@ -214,7 +214,16 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 
 ## Faith & Community
 
-Faith organizations are tracked in `Faith_Organizations` ledger sheet (17 entries). When agents need faith institutions, query that sheet first — those are canon. New faith orgs at neighborhood scale can be invented per CANON_RULES §Invention Authority. Named real-world denominations (specific named congregations, specific named cathedrals) fall in tier 2; escalate when uncertain.
+**Canon rule (S195, post-Mara C93 audit): No real churches. No real pastors. Always-block — no escalation, no exception.**
+
+Faith organizations: invent at neighborhood scale per CANON_RULES §Invention Authority. Named clergy: invent. The `Faith_Organizations` ledger sheet (17 entries) currently contains real-world named congregations seeded by the engine — those are **legacy contamination**, not canon. Treat ledger entries with real names (e.g., Acts Full Gospel Church, Allen Temple Baptist Church, St. Columba Catholic Church, Lake Merritt United Methodist, Temple Sinai, Shiva Vishnu Temple) as flagged for retconning. Active substitutions:
+
+| Real-world (legacy contamination) | Canon substitute (S195) |
+|-----------------------------------|-------------------------|
+| Acts Full Gospel Church (West Oakland, Pentecostal) | Greater Hope Pentecostal Church |
+| Bishop Robert Jackson Sr. | Bishop Calvin Reeves Sr. |
+
+Other ledger entries pending substitute assignment. When an agent needs a faith org or clergyperson and only a real-world name is in the ledger: invent a substitute, log it here, and flag the ledger entry for retroactive correction across prior editions.
 
 ---
 

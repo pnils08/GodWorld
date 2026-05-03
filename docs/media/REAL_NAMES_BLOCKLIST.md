@@ -28,6 +28,19 @@
 ### Coaches / Executives
 - Billy Donovan (also listed under NBA — he's a coach)
 
+### Faith Organizations & Clergy (S195 — added post-Mara C93 audit)
+**Always-block — no real churches, no real pastors, no exception.** Engine seeded the Faith_Organizations ledger with real-world names; those are legacy contamination, not canon. Substitutes:
+
+- Acts Full Gospel Church → **Greater Hope Pentecostal Church**
+- Bishop Robert Jackson Sr. → **Bishop Calvin Reeves Sr.**
+- Allen Temple Baptist Church → (pending substitute)
+- St. Columba Catholic Church → (pending substitute)
+- Lake Merritt United Methodist → (pending substitute)
+- Temple Sinai → (pending substitute)
+- Shiva Vishnu Temple → (pending substitute)
+
+Full table maintained in `docs/canon/INSTITUTIONS.md` §Faith & Community. Editions E78, E79, E80, E81, E85, E86, E89, E91 contain unsubstituted real-world canon — flagged for retroactive correction sweep.
+
 ---
 
 ## Notes

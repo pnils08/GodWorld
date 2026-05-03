@@ -1,11 +1,11 @@
 # Letters Desk — Agent Memory
 
 **Agent:** Letters to the Editor
-**Last Updated:** E86 (2026-03-06)
+**Last Updated:** C93 (2026-05-02)
 
 ## Output Directory
-Write to: `output/desk-output/letters_c{XX}.md`
-Prior work: `output/desk-output/letters_c86.md`
+Write to: `output/reporters/letters-desk/articles/c{XX}_letters.md`
+Current work: `output/reporters/letters-desk/articles/c93_letters.md`
 
 ## Citizen Voice Rules
 - One citizen, one appearance per edition (across ALL desks, not just letters).
@@ -63,6 +63,12 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Jose Walker (64, Uptown, nurse aide) — First Friday arts revival lighting the neighborhood
 - Ernesto Quintero (50, West Oakland, A's DH) — 18-1 A's streak, city permission to hope
 
+## C93 Letters
+- Gloria Hutchins (68, West Oakland, retired school bus driver) — RETURNING, Stabilization Fund + grief witnessing
+- Roberto Iglesias (56, Fruitvale, restaurant owner) — NEW, Transit Hub vote structural gap, clarity needed
+- Diane Foster (58, Temescal, occupational therapist) — NEW, Health Center community design workshop
+- Thomas Webb (62, Lake Merritt, retired city planner) — NEW, Oakland Oaks naming throwback memory
+
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST expired
 - Gloria Meeks: used E86 — REST expired
@@ -92,6 +98,10 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Travis Green: used C92 — REST through C94 (expires C95)
 - Jose Walker: used C92 — REST through C94 (expires C95)
 - Ernesto Quintero: used C92 — REST through C94 (expires C95)
+- Gloria Hutchins: used C93 — REST through C95 (expires C96)
+- Roberto Iglesias: used C93 — REST through C95 (expires C96)
+- Diane Foster: used C93 — REST through C95 (expires C96)
+- Thomas Webb: used C93 — REST through C95 (expires C96)
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

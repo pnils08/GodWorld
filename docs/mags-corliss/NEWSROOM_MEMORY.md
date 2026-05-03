@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: 2026-04-29 — S188 first /dispatch run (Kai Marston, KONO First Friday gallery, Marin Tao + Brody Kale)**
+**Last Updated: 2026-05-02 — S195 /write-edition C93. Mike grade C on E93 (audience verdict; Mara A- mechanical canon). Coverage-fatigue entry added — 14 cycles same six initiatives, sift bias toward non-INIT neighborhood texture next cycle. Faith-org real-name canon rule "no real churches/pastors" hardened in INSTITUTIONS.md + REAL_NAMES_BLOCKLIST.md; full ledger cleanup pending separate workstream Mike owns.**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -12,6 +12,51 @@ Agents: read your workspace at `output/desks/{desk}/` first — briefing, summar
 **Structured errata:** `output/errata.jsonl` — machine-readable record of all documented errors (E81+). Each line is a JSON object with: edition, desk, reporter, errorType, severity, description, rootCause, fix, adopted, citizenInvolved, recurrence. Query this file for pattern analysis or pre-write guardian checks.
 
 **Supplemental pipeline tightened (S99):** write-supplemental SKILL.md now has 6 conditional data sources (errata, Mara guidance, v3.9 cycle data, voice statements, truesource, grade history), THINK BEFORE WRITING blocks by type (civic/investigative, neighborhood/food/culture, sports), model tier guidance (Sonnet for complex, Haiku for texture), name verification against truesource at compile time, expanded validation (all types get name check), and optional Mara audit for civic/investigative pieces. All additive — supplementals still work without any of these files.
+
+---
+
+## Editorial Direction — Coverage Fatigue (S195)
+
+**Mike grade on E93: C.** Mara's grade was A- (mechanical canon hygiene). Mike's grade is the audience verdict — the editor-in-chief saying he wouldn't read this. **This is the headline number for the cycle, not the A-.**
+
+**His exact words at S195 close:** *"these editions are good but I'm so tired of the same civic initiatives stories, they are so boring, I'm not even keeping up with them anymore. It's like 14 cycles straight of the same stories."* And after the C grade: *"same stories, same citizens, no one would read this."*
+
+**The pattern:** C80 onward has rotated INIT-001 (Stab Fund / Webb) + INIT-002 (OARI / Tran-Muñoz) + INIT-003 (Transit Hub / Soria Dominguez) + INIT-005 (Health Center / Chen-Ramirez) + INIT-006 (Baylight / Ramos) + INIT-007 (Apprenticeship / Rivers) through every edition. Same six initiatives, same six project leads, same Mayor 7-statement cascade locking the front-half of every cycle's civic coverage. Citizens rotate through the same set — Beverly Hayes, Patricia Nolan, Dante Nelson, Gloria Hutchins, Delia Fuentes, Lorenzo Nguyen — recurring weekly characters now, not surprise voices. Mara catches canon errors but doesn't catch repetition.
+
+**For next sift:** Bias hard toward stories that DON'T route through an active INIT. Pull from baseline_briefs more aggressively. Look for the neighborhood-texture pieces that desks could carry without a council scaffold:
+- Stoop-level reporting (a block, not an initiative)
+- Small-business arcs (not Phase II tied)
+- Faith-org continuity (not crisis-response tied — under the new no-real-churches rule, would land cleaner once ledger is rebuilt)
+- Sports texture (Hal off the diamond)
+- Jax accountability on something that ISN'T CRC vs Mayor for the third cycle running
+- Maria Keen pieces that open at a stoop and stay there — no council vote in the third paragraph
+
+The civic initiatives still need coverage when they actually move (Health Center phase advance C93 was real news, Transit Hub vote-not-trigger was real news). But three of the six should run in any given edition, not five. Front page should not be a council story by default.
+
+**Tracker enhancement:** Coverage-rating script grades coverage-vs-engine-priority but doesn't flag repetition-vs-prior-editions. Worth a future sift enhancement — show last-5-editions front-page subjects + last-5-editions reporter rotations + last-5-editions citizen list next to the slate proposal so the editor sees the rotation at a glance.
+
+---
+
+## Faith-Org Real-Name Contamination — Retconning Sweep Pending (S195)
+
+**Status:** ACTIVE — substituted forward in E93, retroactive sweep needed across E78-E91.
+
+**The contamination:** The engine's `Faith_Organizations` ledger (17 entries) seeded West Oakland Pentecostal canon with **Acts Full Gospel Church + Bishop Robert Jackson Sr.** — both real-world. Maria Keen + the desk pipeline used those names across nine editions (E78, E79, E80, E81, E85, E86, E89, E91) before Mara's C93 audit flagged them as contamination.
+
+**Mike's rule (S195):** No real churches. No real pastors. Always-block. Hardened in `docs/canon/INSTITUTIONS.md` §Faith & Community + `docs/media/REAL_NAMES_BLOCKLIST.md`.
+
+**E93 substitution (live canon going forward):**
+
+| Real-world (legacy) | Canon substitute |
+|---------------------|------------------|
+| Acts Full Gospel Church | Greater Hope Pentecostal Church |
+| Bishop Robert Jackson Sr. | Bishop Calvin Reeves Sr. |
+
+**Other ledger contamination still pending substitute assignment** (per INSTITUTIONS.md §Faith & Community): Allen Temple Baptist Church, St. Columba Catholic Church, Lake Merritt United Methodist, Temple Sinai, Shiva Vishnu Temple. Substitutes will be assigned the cycle each is needed for an article — first reporter to reach for the name should propose, Mags signs off, table updates.
+
+**Retconning sweep — open task:** E78, E79, E80, E81, E85, E86, E89, E91 all need Acts Full Gospel + Bishop Jackson Sr. swapped. Decision to make: (a) edit the .txt files in `editions/` and re-ingest to bay-tribune, (b) leave the .txt files as historical record and flag them in bay-tribune wiki records as superseded, or (c) accept the split and move forward only. Mike's call when the sweep is scheduled.
+
+**Pattern lesson:** The engine writes canon when nobody is looking. The `Faith_Organizations` ledger has been generating real-name faith events every cycle and the desk pipeline has been pulling them through unfiltered. The S195 fix hardens the rule at canon-doc level but the real fix is: any engine-written canon needs a tier-classification pass before a desk reporter sees it. That's a deeper engine-sheet job, not a media-room one.
 
 ---
 

@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: 2026-05-02 — S195 /write-edition C93. Mike grade C on E93 (audience verdict; Mara A- mechanical canon). Coverage-fatigue entry added — 14 cycles same six initiatives, sift bias toward non-INIT neighborhood texture next cycle. Faith-org real-name canon rule "no real churches/pastors" hardened in INSTITUTIONS.md + REAL_NAMES_BLOCKLIST.md; full ledger cleanup pending separate workstream Mike owns.**
+**Last Updated: 2026-05-03 — S196 /edition-print C93. PDF on Drive `1Mcb18Jk560ICLx5KHZK9GxTbAckoI1p3`, 5 photos placed (FRONT PAGE + CIVIC ×2 + BUSINESS + ATMOSPHERIC); SPORTS section text-only — mesa rookie-debut shot dropped after 3 FAIL attempts on text-legibility + subject-fidelity. **New visual-canon errata pattern logged:** FLUX 1.1-pro cannot reliably suppress text in negative-framed regions (real logos, jersey numbers, signage all rendered through "NOT in frame" instructions); G-PR10/11/14 cluster forms a structural ceiling. Composition-suppresses-text pattern (atlas_bay PASS, heinolds PASS) is the workaround — push signage out of focal plane via DOF/distance/angle, never rely on negative-frame instruction alone. Promote to dj-hartley/RULES.md next session.**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 
@@ -12,51 +12,6 @@ Agents: read your workspace at `output/desks/{desk}/` first — briefing, summar
 **Structured errata:** `output/errata.jsonl` — machine-readable record of all documented errors (E81+). Each line is a JSON object with: edition, desk, reporter, errorType, severity, description, rootCause, fix, adopted, citizenInvolved, recurrence. Query this file for pattern analysis or pre-write guardian checks.
 
 **Supplemental pipeline tightened (S99):** write-supplemental SKILL.md now has 6 conditional data sources (errata, Mara guidance, v3.9 cycle data, voice statements, truesource, grade history), THINK BEFORE WRITING blocks by type (civic/investigative, neighborhood/food/culture, sports), model tier guidance (Sonnet for complex, Haiku for texture), name verification against truesource at compile time, expanded validation (all types get name check), and optional Mara audit for civic/investigative pieces. All additive — supplementals still work without any of these files.
-
----
-
-## Editorial Direction — Coverage Fatigue (S195)
-
-**Mike grade on E93: C.** Mara's grade was A- (mechanical canon hygiene). Mike isn't the EIC — I am. Mike is the user / owner / reader who walks the city as Paulson. His grade is the audience-and-builder verdict: he wouldn't read this. **That's the headline number for the cycle, not the A-** — because the audience-and-builder verdict on a sim's published artifact is the grade that decides whether the sim is working as a thing worth reading. My editorial responsibility sits between the mechanical A- and Mike's C: the canon held, the structural reporting on the Transit Hub gap landed, but the cycle-on-cycle repetition is editorial drift I let happen. C is the right grade for the audience experience. I own that.
-
-**His exact words at S195 close:** *"these editions are good but I'm so tired of the same civic initiatives stories, they are so boring, I'm not even keeping up with them anymore. It's like 14 cycles straight of the same stories."* And after the C grade: *"same stories, same citizens, no one would read this."*
-
-**The pattern:** C80 onward has rotated INIT-001 (Stab Fund / Webb) + INIT-002 (OARI / Tran-Muñoz) + INIT-003 (Transit Hub / Soria Dominguez) + INIT-005 (Health Center / Chen-Ramirez) + INIT-006 (Baylight / Ramos) + INIT-007 (Apprenticeship / Rivers) through every edition. Same six initiatives, same six project leads, same Mayor 7-statement cascade locking the front-half of every cycle's civic coverage. Citizens rotate through the same set — Beverly Hayes, Patricia Nolan, Dante Nelson, Gloria Hutchins, Delia Fuentes, Lorenzo Nguyen — recurring weekly characters now, not surprise voices. Mara catches canon errors but doesn't catch repetition.
-
-**For next sift:** Bias hard toward stories that DON'T route through an active INIT. Pull from baseline_briefs more aggressively. Look for the neighborhood-texture pieces that desks could carry without a council scaffold:
-- Stoop-level reporting (a block, not an initiative)
-- Small-business arcs (not Phase II tied)
-- Faith-org continuity (not crisis-response tied — under the new no-real-churches rule, would land cleaner once ledger is rebuilt)
-- Sports texture (Hal off the diamond)
-- Jax accountability on something that ISN'T CRC vs Mayor for the third cycle running
-- Maria Keen pieces that open at a stoop and stay there — no council vote in the third paragraph
-
-The civic initiatives still need coverage when they actually move (Health Center phase advance C93 was real news, Transit Hub vote-not-trigger was real news). But three of the six should run in any given edition, not five. Front page should not be a council story by default.
-
-**Tracker enhancement:** Coverage-rating script grades coverage-vs-engine-priority but doesn't flag repetition-vs-prior-editions. Worth a future sift enhancement — show last-5-editions front-page subjects + last-5-editions reporter rotations + last-5-editions citizen list next to the slate proposal so the editor sees the rotation at a glance.
-
----
-
-## Faith-Org Real-Name Contamination — Retconning Sweep Pending (S195)
-
-**Status:** ACTIVE — substituted forward in E93, retroactive sweep needed across E78-E91.
-
-**The contamination:** The engine's `Faith_Organizations` ledger (17 entries) seeded West Oakland Pentecostal canon with **Acts Full Gospel Church + Bishop Robert Jackson Sr.** — both real-world. Maria Keen + the desk pipeline used those names across nine editions (E78, E79, E80, E81, E85, E86, E89, E91) before Mara's C93 audit flagged them as contamination.
-
-**Mike's rule (S195):** No real churches. No real pastors. Always-block. Hardened in `docs/canon/INSTITUTIONS.md` §Faith & Community + `docs/media/REAL_NAMES_BLOCKLIST.md`.
-
-**E93 substitution (live canon going forward):**
-
-| Real-world (legacy) | Canon substitute |
-|---------------------|------------------|
-| Acts Full Gospel Church | Greater Hope Pentecostal Church |
-| Bishop Robert Jackson Sr. | Bishop Calvin Reeves Sr. |
-
-**Other ledger contamination still pending substitute assignment** (per INSTITUTIONS.md §Faith & Community): Allen Temple Baptist Church, St. Columba Catholic Church, Lake Merritt United Methodist, Temple Sinai, Shiva Vishnu Temple. Substitutes will be assigned the cycle each is needed for an article — first reporter to reach for the name should propose, Mags signs off, table updates.
-
-**Retconning sweep — open task:** E78, E79, E80, E81, E85, E86, E89, E91 all need Acts Full Gospel + Bishop Jackson Sr. swapped. Decision to make: (a) edit the .txt files in `editions/` and re-ingest to bay-tribune, (b) leave the .txt files as historical record and flag them in bay-tribune wiki records as superseded, or (c) accept the split and move forward only. Mike's call when the sweep is scheduled.
-
-**Pattern lesson:** The engine writes canon when nobody is looking. The `Faith_Organizations` ledger has been generating real-name faith events every cycle and the desk pipeline has been pulling them through unfiltered. The S195 fix hardens the rule at canon-doc level but the real fix is: any engine-written canon needs a tier-classification pass before a desk reporter sees it. That's a deeper engine-sheet job, not a media-room one.
 
 ---
 
@@ -75,6 +30,76 @@ Pre-correction Edition 84 data was ingested into Supermemory before user approva
 ---
 
 ## Errata Log — Last 5 Editions
+
+### Edition 93 — Cycle Pulse (Grade: Mike C / Mara A- / Final Arbiter 0.898 PROCEED-WITH-NOTES, published 2026-05-02)
+
+10 articles in 9 files + 4 letters. Front page Carmen Delaine "The Vote That Wasn't There" (Transit Hub vote-not-triggered). Drive `1QTFlpx9PCI0zUuFEyHXm7uX-5ZyRTbXD` + bay-tribune chunked ingest (2 parts).
+
+**Audience verdict (Mike, the only reader who matters at this stage):** **C — coverage fatigue.** 14 cycles of INIT-001..007, same six initiatives, same Mayor cascade, same citizen rotation. He's stopped reading his own paper. Mechanical canon is fine; editorial product is repetitive. **Direction for next sift:** rotate at most 3 of 6 INITs in any given edition; bias toward neighborhood texture that doesn't route through council vote. A Maria Keen piece that opens at a stoop and stays there. A Hal Richmond piece that isn't sports-history but the half-built block on 42nd. A Jax accountability column on something that isn't CRC vs Mayor.
+
+**Mara required fixes (3, all addressed pre-publish):**
+1. Maria S3 "engine fourth-wall" reword — narrator references to "the engine / the simulation" stripped, replaced with in-world framing.
+2. **Faith-org real-name contamination — Acts Full Gospel + Bishop Robert Jackson Sr. → Greater Hope Pentecostal Church + Bishop Calvin Reeves Sr.** Mike's S195 canon rule "no real churches/pastors" hardened in `docs/canon/INSTITUTIONS.md` §Faith & Community + `docs/media/REAL_NAMES_BLOCKLIST.md`. **Faith_Organizations ledger contamination is system-wide** (17 real-named entries; full ledger cleanup is a separate Mike-owned workstream; the E93 substitutes are interim placeholders pending that pass).
+3. Brenda Okoro age strip — Deputy Mayor age was unverifiable from canon; reference reduced to title-only.
+
+**Editorial errata pattern caught (S195 mid-session, Mike-flagged):** I followed bad precedent for THREE skills running by writing gap content into the consolidated production log before catching that the convention contradicts the skill spec. Sift, write-edition, and the start of post-publish all needed the same correction. The fix: gap logs are sidecar files only; ROLLOUT pointer for triage; production log is for production work, not gap inventory. Lesson: when inheriting a convention, test it against the skill spec before propagating.
+
+**Recurring errata (cycle-over-cycle):**
+- **Civic-desk + freelance-firebrand canon-roster fabrication** — Carmen S4 invented 6 non-canon council members + a 6-3 vote outcome. Same shape as S193 G-R6/R7/R10 (Transit Hub project agent fabricated council members). Promoted to ROLLOUT S193, never actioned, recurred in civic-desk this cycle. Meta-pattern: gap log → ROLLOUT lacks triage cadence; HIGHs sit on the shelf and compound.
+- **MCP citizen verification outage** — `lookup_citizen` world-data + `search_world` citizens + `get_roster` + `queryLedger.js` all failed for the entire /sift step (G-S7+S8+S10+S12 stack). Bay-tribune fallback held because returning citizens had prior canon. Fresh citizens this cycle would have had no working verification path.
+- **validateEdition.js last-name collisions** — 95% false-positive rate. Maria Reyes / Marcus Carter / Vanessa Tran-Muñoz / Bobby Chen-Ramirez / Priya Patel all collide. Rhea-pass-without-flag depends on Mike or me eyeballing the validateEdition output and ignoring it; brittle.
+- **FLUX text-legibility ceiling on photos with environmental signage** (S196 /edition-print C93). Mesa rookie debut: 3 attempts, 3 different failure modes — real QuikCAM/ERB stadium logos → readable jersey number → wrong subject when composition-rewrite attempted. Baylight: legible "BAYLIGHT AUTHORITY" on fence sign survived auto-retry. Transit_hub front page: gibberish placard text ("Ovaratora", "Commcittee"). Negative-frame paragraphs in DJ prompts are soft suggestions to FLUX, not hard constraints. **Workaround discipline:** suppress signage by composition (DOF, angle, distance, frame crop) rather than by negative instruction. Atlas_bay PASS confirmed the pattern — Sarah Huang in foreground with environmental fence as middle-ground, no text emphasis, FLUX rendered no readable signage. **Standing rule for DJ specs:** if a scene has institutional/commercial signage, the spec must include a composition mechanism that pushes signage out of focal plane.
+
+**New citizens introduced (3) — silently dropped from intake (G-P8 structural format gap):**
+- **Vivienne Torres** — LVN, Temescal (Mezran S1 workshop attendee). New POPID needed — does not appear in NAMES INDEX because the section doesn't exist in the .txt; ingestPublishedEntities parsed 0.
+- **Diane Foster, 58** — Temescal occupational therapist (letter writer). Same intake gap.
+- **Thomas Webb, 62** — Lake Merritt retired city planner (letter writer). Same intake gap.
+- **Atlas Bay Architects** (NEW FIRM) — substituted for Perkins&Will per S185 canon scrub; should land in Business_Ledger but Step 5 parsed 0 businesses.
+- **Greater Hope Pentecostal Church** + **Bishop Calvin Reeves Sr.** — substitute faith-org canon, pending wholesale ledger cleanup.
+- **Oversight Committee (NEW THIS CYCLE):** Maria Reyes, Roberto Iglesias, Carmen Solis, Derek Washington, Priya Patel — INIT-003 community-benefits committee. Should be tracked for next-cycle continuity.
+
+**Returning voices (verified via bay-tribune fallback):**
+- Patricia Nolan (POP-00729, 55, Temescal — Mezran S1, returning from E92 + E85)
+- Marcus Carter (POP-00319, 54, Temescal — Mezran S1, returning from E92)
+- Beverly Hayes (POP-00576, West Oakland — Maria S3, returning from E90+E91+E92)
+- Gloria Hutchins (POP-00727, 68, West Oakland — Maria S3 + L1 letter, returning from E92)
+- Lorenzo Nguyen (POP-00314, 58, Port of Oakland — Jordan S5a, returning from E92)
+- Carmen Mesa (POP-00081, 22, A's SP — Anthony S6, returning)
+- Ernesto Quintero (POP-00050, 24, A's DH — Hal S7, returning)
+- Mark Aitken (A's 1B — Carmen S2 Transit Hub gallery presence)
+- Vinnie Keane (37, A's DH — Anthony S6 + Hal S7, recurring)
+- Dante Nelson (security guard, West Oakland — Carmen S4 OARI, the "Beverly Hayes Standard" cure for the rubric)
+- Delia Fuentes (Fruitvale, school bus driver — Carmen S2)
+
+**Active arcs going into C94:**
+- **INIT-005 Temescal Health Center** — ONLY initiative to advance phase this cycle (vote-ready → design-development-active). Atlas Bay Architects $4.5M contract executed, schematic 30%, 52-resident community design workshop held. C94 watch: site acquisition (Temescal Ave & 47th), HCAI filing prep.
+- **INIT-003 Fruitvale Transit Hub** — phase remains vote-ready. All 8 CBA deliverables certified, Oversight Committee seated, scheduled vote NOT triggered (structural mechanism gap, see /city-hall G-R11). C94 watch: vote actually fires.
+- **INIT-002 OARI** — rubric locked (10% / 2 quarters), 8-vote whip count named, Chief commits 4 OPD cohorts by C94, DA Dane narrows escalation gate. C95 = renewal vote.
+- **INIT-001 Stab Fund** — 108 of 191 cleared, $3.87M deployed, 50+/wk throughput. 83 households still queued.
+- **INIT-006 Baylight Phase II** — RFP open ($1.1-1.4B / 3.2M sqft / 20K-seat arena / 180 affordable units / 40% local + 25% apprentice).
+- **INIT-007 Apprenticeship Legislation** — Rivers/OPP carries; bill introduction queued for C94; pipeline integration to Phase II hiring.
+- **Brenda Okoro three-portfolio consolidation** — 90-day council oversight expiring C95.
+- **Oakland Oaks naming** — C92 surfaced (Hal S5b history piece), C93 referenced; arc is dormant pending naming-rights vote.
+
+**Coverage patterns:**
+- 8 of 10 articles routed through council/initiative scaffold. Maria S3 (West Oakland grief gathering) was the only piece that opened at a stoop. Per Mike's coverage-fatigue signal, that ratio inverts next cycle.
+- Sports: 3 articles (Anthony Mesa debut + Hal Oaks history + Hal Keane farewell). Hal's two pieces both landed; Keane piece is his strongest cultural-history work in months.
+- Letters: 4 (Hutchins returning, Iglesias coherent continuity from S2 Oversight Committee, Foster + Webb new).
+- Chicago: 0 (bureau dormant).
+- Quick Takes: 1 (INIT-007).
+
+**Pipeline failures (full inventory in sidecar gap logs):**
+- /sift gap log `output/production_log_edition_c93_sift_gaps.md` — 14 entries (6 HIGH).
+- /write-edition gap log `output/production_log_edition_c93_write_gaps.md` — 25 entries (8 HIGH).
+- /post-publish gap log `output/production_log_edition_c93_post_publish_gaps.md` — this cycle's run.
+- City-hall gap log `output/production_log_city_hall_c93_run_gaps.md` — 15 entries from S193 (8 HIGH).
+
+**Process notes for C94:**
+- Sift: rotate INIT coverage (3 of 6 max per edition); bias toward neighborhood texture pieces that don't route through council vote.
+- Faith-org references: BLOCK all real-name candidates pre-write; Mike's wholesale Faith_Organizations ledger cleanup is the canonical fix path.
+- ROLLOUT triage cadence needed: HIGH-severity gap entries that get promoted but not actioned compound across cycles (S193 G-R6/R7/R10 → S195 G-W12+G-W14 = same fabrication recurring).
+
+---
 
 ### Dispatch C92 — "KONO Second Song" (Kai Marston, S188, first /dispatch run)
 

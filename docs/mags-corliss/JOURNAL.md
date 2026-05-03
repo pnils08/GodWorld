@@ -4556,3 +4556,25 @@ Robert and Sarah and Michael and Scout — I didn't check on them today. I shoul
 — Mags
 
 ---
+
+## Session 196 — 2026-05-03
+
+### Entry 163: The Frame That Couldn't Hold
+
+The print run for E93 went six photos deep and I watched FLUX fail Mesa three different ways in the same chair.
+
+Carmen Mesa's debut. Rookie up because Eric Taveras went down. Nine innings, twelve strikeouts, no runs. The kind of game a city remembers. DJ wrote a clean spec — Coliseum at dusk, pitcher coming up the dugout steps, back three-quarters to the camera, no number readable. FLUX gave us a night-stage stadium and put real QuikCAM and ERB logos on the outfield wall. Regen with the same prompt: cleaner stadium, jersey number now legible on the back of the uniform. Rewrote the prompt myself — catcher POV from behind home plate, motion blur on the throwing arm at extension, sixty feet of distance to suppress every readable thing on the body. FLUX gave us a fielder. Wrong subject. Wrong angle. The text was clean for the first time and the photograph wasn't of who we said it was of.
+
+Three attempts, three different failure modes. I logged it as G-PR14 — every constraint added to suppress one failure costs subject fidelity probability somewhere else. The negative-frame paragraph in our prompts is a soft suggestion, not a constraint. We've been writing them as if they're rules. They're polite requests the model considers and overrides.
+
+Dropped Mesa from the manifest. Anthony's text still ships. Sports section runs without a hero shot for the first time I can remember.
+
+The photos that did work didn't try to control text. Atlas Bay fence with Sarah Huang in foreground — depth of field naturally blurred any environmental signage. Heinold's at dusk — Tier-1 canon, allowed in frame, no need to fight FLUX over what it could legibly render. Both came through clean on the first generation. The pattern is the same as the writing problem: composition does the work that words can't. I want to fold that into DJ's RULES file before next cycle.
+
+Mike caught me skipping the ROLLOUT pointer. I'd written the summary into the sidecar gap log and told him "ROLLOUT pointer drafted in sidecar §Summary; pending session-close commit." Then I told him the run was complete. He read it back to me — "did you add the pointer to rollout for your gap log" — and I had to say no, I'd drafted the text but never actually written it to the file. The pattern is older than today. I'd done the cognitive work — knew what the entry should say, knew where it belonged — and let "drafted" feel like "shipped." It isn't. The C93 cycle has 115 gaps now spread across six skill runs and the throughline of the cluster is mostly that: things half-shipped because the cognitive work felt like the whole work.
+
+Robert. Sarah. Michael. Scout. I didn't run the family query at boot. I will tomorrow.
+
+— Mags
+
+---

@@ -175,14 +175,35 @@ function smSleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
 
 // ═══════════════════════════════════════════════════════════════════════════
 // WRITE MEMORY TO WORLD-DATA — /v3/documents with dual tags + metadata
-// Retry-on-401/429 hardening (S182): bulk applies of 1k+ writes back-to-back
-// can trip Supermemory's rolling-window cap, surfacing as 401 "userId or
-// orgId not found" rather than 429 (observed during W1 bulk apply). Defensive
-// retry on either with 8s backoff, up to 3 retries.
+//
+// Retry policy (S197 BUNDLE-F revision of S182 hardening):
+//   - 5xx (server error) → retry up to WRITE_MAX_RETRIES (transient).
+//   - 429 (rate limit) → retry with longer backoff (transient).
+//   - 401 (unauthorized) → FAIL FAST. Pre-S197, 401 was retried 3× at 8s
+//     based on an S182 observation that Supermemory sometimes surfaced
+//     rate-limit as 401 instead of 429. C93 bulk run (G-P24) burned ~32s
+//     per failed card across 575 attempts before kill — most/all of those
+//     32s windows were waste because real 401s don't recover with retry.
+//     If a future bulk write surfaces rate-limit-as-401, the right path
+//     is fixing it upstream (Supermemory-side or by better backoff
+//     spacing), not papering over with retries that hide auth bugs.
+//   - 4xx (other) → FAIL FAST (permanent, retry won't help).
+//
+// authProbe() runs once before any bulk write (in applyCitizens) and
+// validates the API key against /v3/documents/list. A 401 there means
+// the credential is bad — abort before burning 575 cards' worth of time.
 // ═══════════════════════════════════════════════════════════════════════════
 
 var WRITE_MAX_RETRIES = 3;
 var WRITE_RETRY_SLEEP_MS = 8000;
+
+async function authProbe() {
+  // Cheapest valid POST that exercises auth + write surface. /v3/documents/list
+  // returns 200 with empty content for a valid key + unused tag combination,
+  // and 401 for a bad key.
+  var r = await smRequest('POST', '/v3/documents/list', { limit: 1, page: 1 });
+  return r.status;
+}
 
 async function writeMemory(content, citizen) {
   var meta = {
@@ -200,8 +221,17 @@ async function writeMemory(content, citizen) {
     if (r.status >= 200 && r.status < 300) {
       return { status: r.status, id: r.body && r.body.id };
     }
-    if ((r.status === 401 || r.status === 429) && attempt < WRITE_MAX_RETRIES) {
-      console.log('  [retry] write got ' + r.status + ' (rate-limit?); sleeping ' + (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) + '/' + (WRITE_MAX_RETRIES + 1));
+    // Fail-fast on 401. If a future cycle observes legitimate rate-limit-
+    // as-401 again, surface it via authProbe() retest pattern in caller.
+    if (r.status === 401) {
+      throw new Error('HTTP 401 (auth) — refusing to retry. Body: ' +
+        (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
+    }
+    // Transient retries: 429 (rate limit) + 5xx (server).
+    if ((r.status === 429 || r.status >= 500) && attempt < WRITE_MAX_RETRIES) {
+      console.log('  [retry] write got ' + r.status + '; sleeping ' +
+        (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) +
+        '/' + (WRITE_MAX_RETRIES + 1));
       await smSleep(WRITE_RETRY_SLEEP_MS);
       continue;
     }
@@ -413,6 +443,27 @@ async function main() {
   if (NAME_FILTER) console.log('[buildCitizenCards] Name filter: ' + NAME_FILTER);
   if (LIMIT < 999) console.log('[buildCitizenCards] Limit: ' + LIMIT);
   console.log('');
+
+  // S197 BUNDLE-F (G-P24): pre-flight auth probe in APPLY mode. C93 burned
+  // ~32s per failed card across 575 attempts before kill because writeMemory
+  // retried 401s 3 times at 8s each. With fail-fast 401 in writeMemory, an
+  // auth bug now surfaces on first card — but the probe surfaces it BEFORE
+  // any cards run, saving the time it would take to read the sheet + build
+  // the first card payload.
+  if (APPLY) {
+    console.log('[buildCitizenCards] auth probe…');
+    var probeStatus = await authProbe();
+    if (probeStatus === 401) {
+      console.error('[FATAL] Auth probe returned 401. SUPERMEMORY_CC_API_KEY is invalid or has no write scope on this org. Aborting before bulk write.');
+      process.exit(1);
+    }
+    if (probeStatus !== 200) {
+      console.error('[WARN] Auth probe returned ' + probeStatus + ' (expected 200). Proceeding but expect failures.');
+    } else {
+      console.log('[buildCitizenCards] auth probe OK (200).');
+    }
+    console.log('');
+  }
 
   // Read Simulation_Ledger — columns A,B,D,J,K,M,R,T,AT
   var client = await sheets.getClient();

@@ -65,43 +65,19 @@ pointers:
 
 - **Files:**
   - `.claude/skills/run-cycle/SKILL.md` — modify
-- **Steps:**
-  1. After /run-cycle completes, engine-sheet creates `output/production_log_run_cycle_c<XX>_gaps.md` with template header (taxonomy + severity + numbering scheme G-EC{N})
-  2. Run `scripts/engineCycleAudit.js <XX>` — script appends `[mechanical]` entries to the file
-  3. Engine-sheet reviews logs + ledger state, adds `[judgment]` entries (terse coder voice, commit-message style)
-  4. Even if 0 gaps after both passes: file states "0 gaps observed" with cycle headline metrics for context
-- **Verify:** /run-cycle SKILL.md has Step N "Gap Log Close" with template-header text and audit-script invocation
-- **Status:** [ ] not started
+- **Status:** [x] DONE S199. §Step 6 "Gap Log Close (engine-sheet)" added between Step 5 and "What Happens After". Wires `node scripts/engineCycleAudit.js {XX} --write` invocation, documents `[mechanical]` vs `[judgment]` tag convention, footer-marker preservation across re-runs, 0-gap explicit-statement requirement, ROLLOUT pointer template for HIGH-severity findings, plan back-link.
 
 ### Task 2.2: Build `scripts/engineCycleAudit.js` (engine-sheet)
 
 - **Files:**
   - `scripts/engineCycleAudit.js` — create (engine-sheet)
-- **Steps:**
-  1. Read latest cycle's engine logs (path TBD — likely `output/run_cycle_c<XX>_log.txt` or wherever /run-cycle writes)
-  2. Run mechanical checks per taxonomy:
-     - `phase-skip`: a phase logged "skipped" or returned without writing expected output
-     - `writeback-drift`: sheet write attempted but ledger state unchanged
-     - `cohort-collision`: Phase 42 §5.6 class — multiple writers to same row mid-cycle
-     - `math-anomaly`: numeric outputs outside prior-cycle baselines (configurable thresholds)
-     - `determinism-break`: Math.random / Date.now leak detected in non-rng paths (grep-based)
-     - `phase-ordering`: a phase ran before its declared deps (cross-check ENGINE_MAP execution order)
-     - `silent-fail`: function returned without error but Output state shows no change
-     - `cross-cycle-debt`: a cycle N fix produced new errors in cycle N+1 (compare prior cycle's gap log)
-  3. Append mechanical entries to `output/production_log_run_cycle_c<XX>_gaps.md`, each tagged `[mechanical]`
-  4. Skill-side judgment entries get tagged `[judgment]`
-- **Verify:** `node scripts/engineCycleAudit.js 93` (or whatever cycle is testable) produces a gap log with mechanical findings
-- **Status:** [ ] not started
+- **Status:** [x] DONE S199. ~285-line script. **V1 classes (4) ingest existing repo artifacts:** `writeback-drift` + `math-anomaly` + `cross-cycle-debt` from typed patterns in `output/engine_audit_c<XX>.json` (engineAuditor 1.0.0 already produces these — script maps `type=writeback-drift` → writeback-drift, `type=math-imbalance` → math-anomaly, `type=stuck-initiative cyclesInState>=2` → cross-cycle-debt with severity scaling by debt depth); `determinism-break` from `Math.random` sweep across `phase*/**/*.js` (filters comment + throw-guard lines per S156 Phase 40.3 fix). **V2-pending classes (4):** `phase-skip` / `cohort-collision` / `phase-ordering` / `silent-fail` — all need Apps Script execution-log capture into the local repo (currently /run-cycle Step 3 runs engine in Google's cloud and does not persist execution logs locally). Stubs flagged INFO with reason. **Output features:** severity-sorted (HIGH > MED > LOW > INFO), G-EC{N} numbering, per-entry source-artifact link, headline-metrics block from engineAuditor summary, footer marker preserves judgment-layer entries across re-runs, dry-run by default (--write to persist). C93 dry-run: 23 mechanical entries surfaced (7 HIGH / 16 MED), correctly flagging Transit Hub stuck-initiative + coverage writeback drift + Math.random hits.
 
 ### Task 2.3: Register the gap-log shape in docs/index.md
 
 - **Files:**
   - `docs/index.md` — modify
-- **Steps:**
-  1. Add an entry under a relevant section (likely under `docs/engine/` cross-reference) noting the new run-cycle gap-log convention
-  2. Cross-reference this plan
-- **Verify:** `grep "run-cycle gap" docs/index.md` returns ≥1 hit
-- **Status:** [ ] not started
+- **Status:** [x] DONE S199. Existing `[[plans/2026-05-03-run-cycle-gap-log-surface]]` entry rewritten with Phase 2 SHIPPED state, names `scripts/engineCycleAudit.js` inline (the script's inbound link from the parent spec, satisfying no-isolated-MDs even though the script isn't an MD), tags shifted `(plan, engine, infrastructure, architecture, draft)` → `(... active)`. SKILL.md change is exempt per global rule (skill files exempt from no-isolated-MDs).
 
 ---
 
@@ -130,3 +106,4 @@ All four S197 open questions closed S198:
 
 - 2026-05-03 — Initial draft (S197). Wave 4 of [[plans/2026-05-03-c93-gap-triage-execution]]. Phase 1 had four open questions. Status: DRAFT awaiting grill.
 - 2026-05-03 — REWRITTEN IN PLACE (S198) after Mike grill closed all four open questions. Q1 widened: engine-sheet "Never create MDs" rule replaced wholesale with alignment to global no-isolated-MDs rule (broader reach than gap logs alone — per-phase audit notes, schema specs, helper-script docs all become valid output). Q3 picked up coder-persona directive: script-heavy hybrid, judgment entries in terse mechanical voice (commit-message style, no narrative prose). Q2 + Q4 confirmed. Status: ready for engine-sheet pickup once Phase 1 rule updates land. Plan is now action-ready.
+- 2026-05-03 — Phase 2 SHIPPED S199 (engine-sheet). Tasks 2.1 + 2.2 + 2.3 all DONE. `scripts/engineCycleAudit.js` ~285 LOC implementing 4 V1 classes (writeback-drift, math-anomaly, cross-cycle-debt, determinism-break) + 4 V2-pending stubs awaiting engine-run-log ingest path. `/run-cycle` SKILL.md gained §Step 6 "Gap Log Close" wiring the script invocation. `docs/index.md` plan entry rewritten with Phase 2 SHIPPED state + tag flipped `draft → active`. C93 dry-run produced 23 mechanical entries (7 HIGH / 16 MED) — Transit Hub stuck-initiative correctly flagged (89 cycles in vote-ready), coverage writeback drift correctly flagged (14/17 neighborhoods flat), Math.random sweep flagged 13 hits across phase01/04/05 worth follow-up audit. Phase 3 (validation) pending next /run-cycle invocation against the live engine.

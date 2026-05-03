@@ -42,6 +42,26 @@ Read Riley_Digest (3 cycles), Sports Feed (3 cycles), civic production log (if e
 
 **Gate:** File exists on disk + ingest confirmed.
 
+### Step 6: Gap Log Close (engine-sheet)
+
+Run the mechanical baseline audit and append judgment-layer entries.
+
+```bash
+node scripts/engineCycleAudit.js {XX} --write
+```
+
+Writes `output/production_log_run_cycle_c{XX}_gaps.md` with `[mechanical]`-tagged entries across 4 V1 detector classes (`writeback-drift`, `math-anomaly`, `cross-cycle-debt`, `determinism-break`). 4 V2-pending classes (`phase-skip`, `cohort-collision`, `phase-ordering`, `silent-fail`) appended as stubs — they need an engine-run-log ingest path that doesn't exist yet.
+
+After the script runs, engine-sheet appends `[judgment]` entries below the `<!-- end mechanical pass -->` footer marker. The script preserves anything below that marker on re-run, so judgment entries survive a re-audit pass.
+
+Coder-persona voice for judgment entries: terse, mechanical, commit-message style (no narrative prose). G-EC{N+} numbering continues from the mechanical pass.
+
+If 0 mechanical entries observed: file states "0 mechanical gaps observed" with cycle headline metrics for context (vs being absent, which would be ambiguous). Engine-sheet judgment review still recommended.
+
+**Gate:** File exists on disk. ROLLOUT pointer added under `Edition Post-Publish` for any HIGH-severity findings: `RUN-CYCLE C{XX} GAP LOG — S{N} (engine-sheet), N entries, severity`.
+
+Plan: `docs/plans/2026-05-03-run-cycle-gap-log-surface.md` (Phase 2 done S199; Phase 3 validation runs at next /run-cycle invocation).
+
 ## What Happens After
 
 These run as separate skills (may be same or different sessions):

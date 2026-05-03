@@ -14,6 +14,7 @@
  *   node scripts/rateEditionCoverage.js editions/cycle_pulse_edition_90.txt --apply
  */
 
+require('/root/GodWorld/lib/env');  // S197 BUNDLE-B (G-P7) — loads GODWORLD_SHEET_ID + GOOGLE_APPLICATION_CREDENTIALS from /root/.config/godworld/.env
 var fs = require('fs');
 var path = require('path');
 var sheets = require('../lib/sheets');

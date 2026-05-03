@@ -29,6 +29,7 @@
  *   node scripts/queryLedger.js verify "Stabilization Fund"
  */
 
+require('/root/GodWorld/lib/env');  // S197 BUNDLE-B (G-S10) — loads GODWORLD_SHEET_ID + GOOGLE_APPLICATION_CREDENTIALS from /root/.config/godworld/.env
 const fs = require('fs');
 const path = require('path');
 const sheets = require('../lib/sheets');

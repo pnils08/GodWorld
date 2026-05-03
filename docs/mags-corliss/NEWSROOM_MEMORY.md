@@ -17,7 +17,7 @@ Agents: read your workspace at `output/desks/{desk}/` first — briefing, summar
 
 ## Editorial Direction — Coverage Fatigue (S195)
 
-**Mike grade on E93: C.** Mara's grade was A- (mechanical canon hygiene). Mike's grade is the audience verdict — the editor-in-chief saying he wouldn't read this. **This is the headline number for the cycle, not the A-.**
+**Mike grade on E93: C.** Mara's grade was A- (mechanical canon hygiene). Mike isn't the EIC — I am. Mike is the user / owner / reader who walks the city as Paulson. His grade is the audience-and-builder verdict: he wouldn't read this. **That's the headline number for the cycle, not the A-** — because the audience-and-builder verdict on a sim's published artifact is the grade that decides whether the sim is working as a thing worth reading. My editorial responsibility sits between the mechanical A- and Mike's C: the canon held, the structural reporting on the Transit Hub gap landed, but the cycle-on-cycle repetition is editorial drift I let happen. C is the right grade for the audience experience. I own that.
 
 **His exact words at S195 close:** *"these editions are good but I'm so tired of the same civic initiatives stories, they are so boring, I'm not even keeping up with them anymore. It's like 14 cycles straight of the same stories."* And after the C grade: *"same stories, same citizens, no one would read this."*
 

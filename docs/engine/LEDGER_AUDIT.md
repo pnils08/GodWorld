@@ -1,61 +1,79 @@
 # Simulation_Ledger Data Integrity Audit
 
 **Created:** Session 68 (2026-02-28)
-**Last Refresh:** Session 181 (2026-04-27) — S94 RECOVERY VERIFIED; small post-S94 drift identified
+**Last Refresh:** Session 199 (2026-05-04) — S184/S185 ingest captured; new drift surfaced
 **Priority:** CRITICAL — All downstream ledgers depend on this data being correct
 **Rule:** Age = 2041 - BirthYear. Always. The simulation year is 2041.
 
 This is the single tracking document for the Simulation_Ledger overhaul. All audit progress, decisions, and remaining work live here. Other docs reference this file — they don't duplicate it.
 
-> **Document timeline.** S68 baseline (this doc) → S94 corruption recovery (`LEDGER_REPAIR.md`) → S99 schema bump + civic-officials cleanup (`LEDGER_REPAIR.md` post-recovery section) → S181 verification + drift snapshot (this section, below). Read top-down for current state; the historical S68 / S69 / S72 sections below are archive.
+> **Document timeline.** S68 baseline (this doc) → S94 corruption recovery (`LEDGER_REPAIR.md`) → S99 schema bump + civic-officials cleanup (`LEDGER_REPAIR.md` post-recovery section) → S181 verification + drift snapshot → **S199 refresh (this section, below) — captures S184 +150 female-balance ingest + S185 trim + post-S184 drift**. Read top-down for current state; the historical S68 / S69 / S72 / S181 sections below are archive.
 
 ---
 
-## Current State — S181 refresh (2026-04-27)
+## Current State — S199 refresh (2026-05-04)
 
 **Verifier:** `scripts/auditSimulationLedger.js` (run from engine-sheet to refresh).
 
 ### Headline numbers
 
-| Metric | Value | Note |
-|--------|-------|------|
-| Schema | 47 cols A–AU | Was 46 A–AT post-S99; Gender (AU) added since |
-| Total rows | 760 | Includes blank-row gaps |
-| Extant citizens | 686 | S94 closure reported 675 → +11 net since |
-| POPID range | POP-00001 → POP-00801 | |
-| POPID gaps | 115 | LEDGER_REPAIR §"What Happened" reported 113; +2 new gaps since |
-| Tier distribution | 17 T1 / 60 T2 / 218 T3 / 391 T4 | All numeric ✓ |
-| Status enum | 675 Active, 9 Retired, 1 "Recovering", 1 "recovering" | Case-mismatch sentinel — see drift |
-| Age sanity (2041 anchor) | 0 out-of-bounds | All BirthYear values yield ages 0–110 ✓ |
-| RoleType="Citizen" sentinel | **4 citizens** | Drift — see below |
+| Metric | Value | S181 → S199 delta | Note |
+|--------|-------|-------------------|------|
+| Schema | 47 cols A–AU | unchanged | Stable since S181 |
+| Total rows | 836 | +76 (was 760) | S185 trim removed 74 trailing blank rows; net +150 from S184 ingest minus blanks |
+| Extant citizens | 836 | +150 (was 686) | S184 female-balance ingest added POP-00802..00951 |
+| POPID range | POP-00001 → POP-00951 | new max +150 (was → POP-00801) | |
+| POPID gaps | 115 | unchanged | Same gap pattern persists |
+| Tier distribution | 21 T1 / 64 T2 / 210 T3 / 541 T4 | T1 +4 / T2 +4 / T3 -8 / T4 +150 | T4 surge from female-balance ingest (all T4 ENGINE) |
+| Status enum | 675 Active + **151 active (lowercase)** + 9 Retired + 1 Recovering | new lowercase 'active' cohort = drift | **NEW DRIFT** — see below |
+| Age sanity (2041 anchor) | 0 out-of-bounds | unchanged | All BirthYear values yield ages 0–110 ✓ |
+| RoleType="Citizen" sentinel | **0 citizens** | -4 (was 4) | **CLOSED S184** Path B demographic-voice fallback (ENGINE_REPAIR Row 17) |
+| Non-canon-12 neighborhoods | **219 citizens / 8 variants** | NEW DRIFT surfaced | See drift section below |
 
-### S94 recovery claims — **VERIFIED HOLDING**
+### S94 recovery claims — **VERIFIED HOLDING (S199 re-verification)**
 
 LEDGER_REPAIR.md §"Recovery Status: COMPLETE (S94)" claims hold against live data:
 
-| Claim | S94 baseline | S181 live | Holds? |
+| Claim | S94 baseline | S199 live | Holds? |
 |-------|--------------|-----------|--------|
 | 0 missing names | 0 | 0 missing First, 0 missing Last | ✅ |
-| 0 "Citizen" RoleTypes | 0 | 4 (post-S94 drift only — see below) | ✅ for S94 cohort; ⚠ for new |
+| 0 "Citizen" RoleTypes | 0 | **0** (S184 closed the 4-row drift) | ✅ |
 | Tiers all numeric | yes | yes (1–4) | ✅ |
-| EducationLevel populated | 100% | 98.5% (10 missing — all post-S94 additions) | ✅ for S94 cohort |
 | Income populated | 100% | 100% | ✅ |
-| Headcount | 675 | 686 (+11) | ✅ growth, no shrinkage |
+| Age sanity | OK | 0 out-of-bounds | ✅ |
+| Headcount | 675 | 836 (+161 via S184 ingest) | ✅ growth, no shrinkage |
 
-**Verdict:** S94 recovery stands. The historical corruption (S68 mass-role-mangling, age-shift contamination, 4 institution-as-citizen entries, etc.) does not regenerate. New drift is small and localized.
+**Verdict:** S94 recovery stands. The historical corruption (S68 mass-role-mangling, age-shift contamination, 4 institution-as-citizen entries, etc.) does not regenerate. S184 ingest added 150 citizens cleanly (no Citizen-sentinel propagation; closed Row 17 sentinel). NEW drift identified in Status enum + non-canon-12 neighborhoods (see below).
 
-### Tier × ClockMode matrix (S181)
+### Tier × ClockMode matrix (S199)
 
 | | ENGINE | GAME | CIVIC | MEDIA | LIFE |
 |---|---|---|---|---|---|
-| **T1** | 4 | 12 | 0 | 1 | 0 |
-| **T2** | 45 | 5 | 7 | 3 | 0 |
-| **T3** | 88 | 72 | 34 | 24 | 0 |
-| **T4** | 384 | 1 | 5 | 1 | 0 |
+| **T1** | 4 | 14 | 1 | 2 | 0 |
+| **T2** | 38 | 5 | 9 | 12 | 0 |
+| **T3** | 82 | 67 | 35 | 26 | 0 |
+| **T4** | 530 | 4 | 4 | 3 | 0 |
 
-LIFE clock mode is in the enum but has 0 citizens — never adopted. Worth removing from documentation if not planned.
+S184 ingest added 150 T4 ENGINE citizens (vs S181's 384 → S199's 530). T1 grew +4 (4→14 GAME); T2 ENGINE shrank slightly (45→38). LIFE clock mode still 0 — never adopted, candidate for enum removal.
 
-### Drift surfaced by S181 audit
+### Drift surfaced by S199 audit
+
+1. **Status enum case-mismatch — 151 lowercase 'active' rows (NEW S199).** Was 1 lowercase 'recovering' at S181; now 151 'active' (lowercase). Origin: most likely the S184 female-balance ingest writer used lowercase 'active' literal (`row[iStatus] = 'active'`) instead of canonical 'Active'. Downstream consumers that case-fold are fine; consumers that hardcode `=== 'Active'` would skip these 151 rows. **Tracked separately:** worth a 1-line normalization pass via service account when convenient (sed-like rewrite of column G), AND a writer-side fix to use 'Active' (capital A) in the ingest path.
+
+2. **Non-canon-12 neighborhood drift — 219 citizens across 8 variants (NEW S199).** Distribution:
+   - 84 Uptown
+   - 62 Laurel
+   - 57 Piedmont Ave
+   - 12 KONO
+   - 1 Downtown Oakland
+   - 1 Coliseum District
+   (+ 2 more variants per audit script; see live output for tail)
+
+   Not a fresh problem — `phase05-citizens/checkForPromotions.js:190-209` mapping table normalizes some fine-grained → canon-12 (per S180 ENGINE_REPAIR Row 14 closure). The mapping happens at promotion time but doesn't backfill ledger writes from other paths. Citizens generated via S184 ingest and other intake paths land with fine-grained neighborhoods (Uptown, Laurel, Piedmont Ave, KONO are ALL fine-grained children of canon-12 parents). Engine code is correct under parent-child ontology; the drift is documentation-only — these are valid neighborhoods, just not in the canon-12 list.
+
+3. **POPID gaps — unchanged at 115.** Same as S181. Indicates the +2 gap drift between S94 (113) and S181 (115) was a one-time event; no further drift through S184/S185.
+
+### Prior drift, S181 (now closed or stable)
 
 1. **`RoleType="Citizen"` literal — 4 citizens** (all post-S94 additions, all T4 ENGINE):
    - POP-00794 Irene Fay (West Oakland, female)

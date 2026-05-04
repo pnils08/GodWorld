@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * MIGRATION TRACKING ENGINE v1.0
+ * MIGRATION TRACKING ENGINE v1.1
  * ============================================================================
  *
  * Tracks individual migration decisions, displacement risk, and migration events.
@@ -14,12 +14,28 @@
  * - Migration event logging (moved-in, moved-out, moved-within, returned)
  * - Push/pull factor analysis
  *
+ * v1.1 Phase 42 §5.6 alignment (S200):
+ * - Simulation_Ledger reads/writes route through shared ctx.ledger.
+ *   Pre-v1.1 the engine read SL via getDataRange (saw cycle-start state,
+ *   missed cohort-A run*Engine mutations + the Income/WealthLevel/Education
+ *   updates GenWealth and EducationCareer just made earlier in Phase 5)
+ *   and wrote DisplacementRisk + MigrationIntent back via direct setValues
+ *   that Phase 10 commitSimulationLedger_ silently clobbered. Risk + intent
+ *   updates were lost every cycle since §5.6 went live S188.
+ *   Caught by S200 cohort-C audit; S185's §5.6.6 categorical orphan-clear
+ *   missed it (audit grepped file names but the cycle entry point is
+ *   processMigrationTracking_, not the file name).
+ * - Helper readers for Neighborhood_Map + Household_Ledger stay direct —
+ *   those are own-tracking sheets, not affected by §5.6.
+ *
  * Integration:
- * - Reads Simulation_Ledger for citizen demographics
- * - Reads Household_Ledger for rent burden data
+ * - Reads Simulation_Ledger via ctx.ledger
+ * - Reads Household_Ledger for rent burden data (own tracking, direct)
  * - Reads Neighborhood_Map for gentrification/crime/displacement pressure
- * - Writes displacement risk and migration intent to Simulation_Ledger
- * - Logs migration events to Migration_Events sheet
+ *   (own tracking, direct)
+ * - Writes displacement risk and migration intent to ctx.ledger.rows;
+ *   Phase 10 commits in single consolidated intent
+ * - Logs migration events to Migration_Events sheet (TODO — placeholder)
  * - Generates story hooks for forced migrations
  *
  * Story Hooks:
@@ -73,10 +89,13 @@ var RISK_WEIGHTS = {
 // ════════════════════════════════════════════════════════════════════════════
 
 function processMigrationTracking_(ctx) {
-  var ss = ctx.ss;
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  if (!ctx.ledger) {
+    throw new Error('processMigrationTracking_: ctx.ledger not initialized');
+  }
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
 
-  Logger.log('processMigrationTracking_ v1.0: Starting...');
+  Logger.log('processMigrationTracking_ v1.1: Starting...');
 
   var results = {
     assessed: 0,
@@ -86,23 +105,23 @@ function processMigrationTracking_(ctx) {
   };
 
   // Step 1: Assess displacement risk for all citizens
-  var riskResults = assessDisplacementRisk_(ss, cycle);
+  var riskResults = assessDisplacementRisk_(ctx, cycle);
   results.assessed = riskResults.assessed;
   results.highRisk = riskResults.highRisk;
 
   // Step 2: Update migration intent based on risk
-  var intentResults = updateMigrationIntent_(ss, cycle);
+  var intentResults = updateMigrationIntent_(ctx, cycle);
 
   // Step 3: Process migration events (simulated for now - will be driven by other systems)
   // For now, just track existing displaced citizens
-  var eventResults = processMigrationEvents_(ss, ctx, cycle);
+  var eventResults = processMigrationEvents_(ctx, cycle);
   results.events = eventResults.events;
   results.displaced = eventResults.displaced;
 
   // Step 4: Generate story hooks
-  var hookResults = generateMigrationHooks_(ss, ctx, cycle);
+  var hookResults = generateMigrationHooks_(ctx, cycle);
 
-  Logger.log('processMigrationTracking_ v1.0: Complete.');
+  Logger.log('processMigrationTracking_ v1.1: Complete.');
   Logger.log('  Assessed: ' + results.assessed + ', High risk: ' + results.highRisk + ', Events: ' + results.events);
 
   return results;
@@ -113,18 +132,16 @@ function processMigrationTracking_(ctx) {
 // DISPLACEMENT RISK ASSESSMENT
 // ════════════════════════════════════════════════════════════════════════════
 
-function assessDisplacementRisk_(ss, cycle) {
-  var simSheet = ss.getSheetByName('Simulation_Ledger');
-  if (!simSheet) return { assessed: 0, highRisk: 0 };
-
-  var simValues = simSheet.getDataRange().getValues();
-  if (simValues.length < 2) return { assessed: 0, highRisk: 0 };
-
-  var simHeader = simValues[0];
-  var simRows = simValues.slice(1);
+function assessDisplacementRisk_(ctx, cycle) {
+  // Phase 42 §5.6: read/mutate ctx.ledger.rows; Phase 10 commits.
+  // Helper readers (Neighborhood_Map, Household_Ledger) stay direct — those
+  // are own-tracking sheets, not affected by §5.6.
+  var ss = ctx.ss;
+  var simHeader = ctx.ledger.headers;
+  var simRows = ctx.ledger.rows;
+  if (!simRows.length) return { assessed: 0, highRisk: 0 };
 
   var idx = function(n) { return simHeader.indexOf(n); };
-  var iPOPID = idx('POPID');
   var iStatus = idx('Status');
   var iBirthYear = idx('BirthYear');
   var iNeighborhood = idx('Neighborhood');
@@ -134,10 +151,10 @@ function assessDisplacementRisk_(ss, cycle) {
 
   if (iDisplRisk < 0) return { assessed: 0, highRisk: 0 };
 
-  // Load neighborhood displacement pressure
+  // Load neighborhood displacement pressure (Neighborhood_Map — direct read)
   var neighborhoodPressure = buildNeighborhoodPressureMap_(ss);
 
-  // Load household rent burden (if Week 1 deployed)
+  // Load household rent burden (Household_Ledger — direct read; if Week 1 deployed)
   var householdRentBurden = {};
   if (iHouseholdId >= 0) {
     householdRentBurden = buildHouseholdRentBurdenMap_(ss);
@@ -152,7 +169,6 @@ function assessDisplacementRisk_(ss, cycle) {
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased') continue;
 
-    var popid = row[iPOPID];
     var neighborhood = row[iNeighborhood] || '';
     var birthYear = Number(row[iBirthYear]) || 0;
     var age = birthYear > 0 ? (simYear - birthYear) : 30;
@@ -195,7 +211,7 @@ function assessDisplacementRisk_(ss, cycle) {
   }
 
   if (assessed > 0) {
-    simSheet.getRange(2, 1, simRows.length, simRows[0].length).setValues(simRows);
+    ctx.ledger.dirty = true;
   }
 
   return { assessed: assessed, highRisk: highRisk };
@@ -265,15 +281,12 @@ function buildHouseholdRentBurdenMap_(ss) {
 // MIGRATION INTENT
 // ════════════════════════════════════════════════════════════════════════════
 
-function updateMigrationIntent_(ss, cycle) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { updated: 0 };
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return { updated: 0 };
-
-  var header = values[0];
-  var rows = values.slice(1);
+function updateMigrationIntent_(ctx, cycle) {
+  // Phase 42 §5.6: read/mutate ctx.ledger.rows; sees DisplacementRisk values
+  // assessDisplacementRisk_ just wrote earlier in this engine.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { updated: 0 };
 
   var idx = function(n) { return header.indexOf(n); };
   var iStatus = idx('Status');
@@ -310,7 +323,7 @@ function updateMigrationIntent_(ss, cycle) {
   }
 
   if (updated > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+    ctx.ledger.dirty = true;
   }
 
   return { updated: updated };
@@ -321,7 +334,7 @@ function updateMigrationIntent_(ss, cycle) {
 // MIGRATION EVENTS (SIMULATION FOR NOW)
 // ════════════════════════════════════════════════════════════════════════════
 
-function processMigrationEvents_(ss, ctx, cycle) {
+function processMigrationEvents_(ctx, cycle) {
   // For now, this is a placeholder
   // Future enhancement: Process actual migration events from other systems
   // (career changes, household dissolution, crime events, etc.)
@@ -332,21 +345,18 @@ function processMigrationEvents_(ss, ctx, cycle) {
   };
 
   // Check for citizens with very high displacement risk
-  var displaced = checkForDisplacedCitizens_(ss, cycle);
+  var displaced = checkForDisplacedCitizens_(ctx, cycle);
   results.displaced = displaced.count;
 
   return results;
 }
 
-function checkForDisplacedCitizens_(ss, cycle) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { count: 0 };
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return { count: 0 };
-
-  var header = values[0];
-  var rows = values.slice(1);
+function checkForDisplacedCitizens_(ctx, cycle) {
+  // Phase 42 §5.6: read-only — reads ctx.ledger.rows so it sees the
+  // DisplacementRisk + MigrationIntent values written upstream.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { count: 0 };
 
   var idx = function(n) { return header.indexOf(n); };
   var iStatus = idx('Status');
@@ -379,15 +389,12 @@ function checkForDisplacedCitizens_(ss, cycle) {
 // STORY HOOKS
 // ════════════════════════════════════════════════════════════════════════════
 
-function generateMigrationHooks_(ss, ctx, cycle) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { alerts: 0 };
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return { alerts: 0 };
-
-  var header = values[0];
-  var rows = values.slice(1);
+function generateMigrationHooks_(ctx, cycle) {
+  // Phase 42 §5.6: read-only — reads ctx.ledger.rows so hooks reference
+  // the DisplacementRisk + MigrationIntent values written upstream.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { alerts: 0 };
 
   var idx = function(n) { return header.indexOf(n); };
   var iPOPID = idx('POPID');

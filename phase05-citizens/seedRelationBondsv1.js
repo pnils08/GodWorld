@@ -1,10 +1,21 @@
 /**
  * ============================================================================
- * BOND SEEDING v1.3
+ * BOND SEEDING v1.4
  * ============================================================================
- * 
+ *
  * Seeds initial relationship bonds between Oakland citizens.
  * Run once to populate Relationship_Bonds, then bondEngine handles updates.
+ *
+ * v1.4 Changes (S199, Phase B Row 19 collision sweep):
+ * - Renamed 3 file-internal helpers to deconflict Apps Script flat-namespace
+ *   collisions surfaced by scripts/auditFunctionCollisions.js:
+ *     createBond_      → createSeedBond_       (collided w/ bondEngine + generationalEvents)
+ *     generateBondId_  → generateSeedBondId_   (collided w/ bondEngine)
+ *     findColumnIndex_ → findSeedColumnIndex_  (collided w/ applySportsSeason)
+ * - Pure rename, 0 external API change. After this rename bondEngine's defs
+ *   become unambiguous winners (their 8-arg createBond_ + ctx-taking
+ *   generateBondId_ are the runtime-correct versions). Bond subsystem still
+ *   gated on missing Relationship_Bonds tab — separate work item.
  *
  * v1.3 Changes (S83, Phase 23.8):
  * - Name lookup uses First/Last columns (not Name) to match Simulation_Ledger schema
@@ -65,14 +76,14 @@ function seedRelationshipBonds_(ctx) {
   
   // Find column indices
   var cols = {
-    citizenId: findColumnIndex_(headers, ['POPID', 'CitizenId', 'citizenId', 'ID']),
-    first: findColumnIndex_(headers, ['First', 'FirstName', 'Name', 'name']),
-    last: findColumnIndex_(headers, ['Last', 'LastName']),
-    neighborhood: findColumnIndex_(headers, ['Neighborhood', 'neighborhood']),
-    occupation: findColumnIndex_(headers, ['Occupation', 'occupation']),
-    tier: findColumnIndex_(headers, ['Tier', 'tier']),
-    household: findColumnIndex_(headers, ['Household', 'household', 'HouseholdId']),
-    status: findColumnIndex_(headers, ['Status', 'status'])
+    citizenId: findSeedColumnIndex_(headers, ['POPID', 'CitizenId', 'citizenId', 'ID']),
+    first: findSeedColumnIndex_(headers, ['First', 'FirstName', 'Name', 'name']),
+    last: findSeedColumnIndex_(headers, ['Last', 'LastName']),
+    neighborhood: findSeedColumnIndex_(headers, ['Neighborhood', 'neighborhood']),
+    occupation: findSeedColumnIndex_(headers, ['Occupation', 'occupation']),
+    tier: findSeedColumnIndex_(headers, ['Tier', 'tier']),
+    household: findSeedColumnIndex_(headers, ['Household', 'household', 'HouseholdId']),
+    status: findSeedColumnIndex_(headers, ['Status', 'status'])
   };
   
   // Build citizen array
@@ -142,7 +153,7 @@ function seedRelationshipBonds_(ctx) {
     
     for (var m1 = 0; m1 < members.length; m1++) {
       for (var m2 = m1 + 1; m2 < members.length; m2++) {
-        var bond = createBond_(
+        var bond = createSeedBond_(
           members[m1],
           members[m2],
           'family',
@@ -194,7 +205,7 @@ function seedRelationshipBonds_(ctx) {
 
       var bondType = rng() < 0.7 ? 'friendship' : 'professional';
       
-      var bond = createBond_(
+      var bond = createSeedBond_(
         neighbors[n1],
         neighbors[n2],
         bondType,
@@ -244,7 +255,7 @@ function seedRelationshipBonds_(ctx) {
 
       var bondType = rng() < 0.6 ? 'professional' : 'friendship';
       
-      var bond = createBond_(
+      var bond = createSeedBond_(
         coworkers[c1],
         coworkers[c2],
         bondType,
@@ -287,7 +298,7 @@ function seedRelationshipBonds_(ctx) {
     else if (typeRoll < 0.85) bondType = 'alliance';
     else bondType = 'rivalry';
     
-    var bond = createBond_(
+    var bond = createSeedBond_(
       citizens[r1],
       citizens[r2],
       bondType,
@@ -387,9 +398,9 @@ function createRelationshipBondsSheet_(ss) {
 /**
  * Create a bond object
  */
-function createBond_(citizenA, citizenB, type, intensity, origin, cycle, rng) {
+function createSeedBond_(citizenA, citizenB, type, intensity, origin, cycle, rng) {
   return {
-    bondId: 'BOND-' + generateBondId_(rng),
+    bondId: 'BOND-' + generateSeedBondId_(rng),
     citizenA: citizenA.citizenId,
     nameA: citizenA.name,
     citizenB: citizenB.citizenId,
@@ -417,8 +428,8 @@ function makeBondKey_(idA, idB) {
 /**
  * Generate unique bond ID
  */
-function generateBondId_(rng) {
-  if (typeof rng !== 'function') throw new Error('seedRelationBondsv1.generateBondId_: rng parameter required (Phase 40.3 Path 1)');
+function generateSeedBondId_(rng) {
+  if (typeof rng !== 'function') throw new Error('seedRelationBondsv1.generateSeedBondId_: rng parameter required (Phase 40.3 Path 1)');
   var rand = rng;
   var chars = '0123456789ABCDEF';
   var id = '';
@@ -432,7 +443,7 @@ function generateBondId_(rng) {
 /**
  * Find column index from possible header names
  */
-function findColumnIndex_(headers, possibleNames) {
+function findSeedColumnIndex_(headers, possibleNames) {
   for (var i = 0; i < possibleNames.length; i++) {
     var idx = headers.indexOf(possibleNames[i]);
     if (idx >= 0) return idx;

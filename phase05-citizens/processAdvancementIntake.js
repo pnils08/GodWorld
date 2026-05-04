@@ -64,14 +64,10 @@ var DEMOGRAPHIC_VOICE_ROLES = [
 
 // Deterministic per-citizen draw — same first+last always maps to same role.
 // djb2 string hash; Apps Script-safe (no crypto / Buffer / Math.random).
-function hashSeed_(s) {
-  var h = 5381;
-  s = String(s || '');
-  for (var i = 0; i < s.length; i++) {
-    h = ((h << 5) + h + s.charCodeAt(i)) | 0;
-  }
-  return Math.abs(h);
-}
+// hashSeed_ def deleted S199 (Phase B.4 collision dedup) — identical impl
+// lives in utilities/citizenDerivation.js (the right home for a generic
+// hash helper), resolved via flat namespace. Internal callers below use
+// the global def.
 
 function pickDemographicVoiceRole_(seed) {
   return DEMOGRAPHIC_VOICE_ROLES[hashSeed_(seed) % DEMOGRAPHIC_VOICE_ROLES.length];

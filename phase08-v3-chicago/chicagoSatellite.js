@@ -554,26 +554,9 @@ function generateChicagoTravel_(weather, holiday) {
 }
 
 
-/**
- * ============================================================================
- * HELPER: Get month from cycle (internal fallback)
- * ============================================================================
- */
-function getMonthFromCycleInternal_(cycleOfYear) {
-  if (cycleOfYear >= 1 && cycleOfYear <= 5) return 1;
-  if (cycleOfYear >= 6 && cycleOfYear <= 9) return 2;
-  if (cycleOfYear >= 10 && cycleOfYear <= 13) return 3;
-  if (cycleOfYear >= 14 && cycleOfYear <= 17) return 4;
-  if (cycleOfYear >= 18 && cycleOfYear <= 22) return 5;
-  if (cycleOfYear >= 23 && cycleOfYear <= 26) return 6;
-  if (cycleOfYear >= 27 && cycleOfYear <= 30) return 7;
-  if (cycleOfYear >= 31 && cycleOfYear <= 35) return 8;
-  if (cycleOfYear >= 36 && cycleOfYear <= 39) return 9;
-  if (cycleOfYear >= 40 && cycleOfYear <= 44) return 10;
-  if (cycleOfYear >= 45 && cycleOfYear <= 48) return 11;
-  if (cycleOfYear >= 49 && cycleOfYear <= 52) return 12;
-  return 1;
-}
+// getMonthFromCycleInternal_ def deleted S199 (Phase B.4 collision dedup) —
+// identical impl lives in phase08-v3-chicago/v3ChicagoWriter.js, resolved via
+// flat namespace. Internal callers in this file use the global def.
 
 
 /**

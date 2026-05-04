@@ -286,14 +286,9 @@ function loadHouseholds_(ss) {
   return households;
 }
 
-function parseJSON(value, defaultValue) {
-  if (!value || value === '') return defaultValue;
-  try {
-    return JSON.parse(value);
-  } catch (err) {
-    return defaultValue;
-  }
-}
+// parseJSON_ helper deleted S199 (Phase B.4 collision dedup) — identical impl
+// lives in phase07-evening-media/storylineWeavingEngine.js, resolved via flat
+// namespace. Internal callers in this file use the global def.
 
 
 // ════════════════════════════════════════════════════════════════════════════

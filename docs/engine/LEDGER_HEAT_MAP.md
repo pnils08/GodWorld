@@ -2,7 +2,7 @@
 
 **Living reference document for GodWorld sheet health, bloat risk, and cleanup priorities.**
 
-Last Updated: 2026-05-04 | Cycle: 93 | Session: 199 (S30 → S199 partial refresh — see below)
+Last Updated: 2026-05-04 | Cycle: 93 | Session: 201 (S199 partial refresh + S201 Story_Seed_Deck close — see below)
 
 ---
 
@@ -12,7 +12,7 @@ Last Updated: 2026-05-04 | Cycle: 93 | Session: 199 (S30 → S199 partial refres
 
 **NOT refreshed this pass (deeper analysis pending):** §Top Bloat Risks Detailed Breakdown, §Dead Column Inventory, §Archival Strategy, §Column Cleanup Roadmap. These hand-built sections describe specific cleanup tactics + dead-column audits that need fresh per-tab inspection. Sections below are S199 current; sections deeper in this doc are S30 historical context.
 
-**Major finding S199:** **Story_Seed_Deck growth is 30-70× the S30 estimate** — projected +3-8/cycle, observed ~217/cycle (66 → 2,667 rows over 12 cycles). At this rate it hits 10,000 rows around C140 — promoted to RED. Likely runaway append behavior from texture/seed generators that needs gating or archival.
+**Major finding S199 — CLOSED S201:** Story_Seed_Deck growth was 30-70× the S30 estimate (~217/cycle vs estimated +3-8). Investigation S201 showed it was NOT runaway append — `phase07-evening-media/applyStorySeeds.js` has 50+ deduped push sites and per-cycle count climbed legitimately as the simulation matured. The actual bug was structural: no archival. Both consumers (`compileHandoff.loadStorySeeds_` + `buildDeskPackets:1996`) strict-filter to current-cycle, so 92.1% of rows were dead weight. Fix: `maintenance/archiveStorySeeds.js` (N=5 retention) shipped + ran S201 — moved 1,558 rows (C69-C88) to `Story_Seed_Deck_Archive`, retained 1,109 rows (C89-C93). Active sheet now stays ~1,100 rows indefinitely at the ~220/cycle steady-state. C140 wall avoided permanently.
 
 **Other significant deltas vs S30 projections:**
 - LifeHistory_Log: estimated +20-50/cycle, observed ~93/cycle (faster but on schedule)
@@ -41,7 +41,7 @@ GodWorld uses 40+ Google Sheets ledgers across one spreadsheet. Google Sheets ha
 
 | Sheet | Rows (C93) | Cols | C81→C93 | Rate/Cycle | C100 | C150 | C200 | Issue |
 |-------|-----------|------|---------|------------|------|------|------|-------|
-| **Story_Seed_Deck** | **2,667** | 19 | +2,601 | **~217** | ~4,200 | ~15,100 | ~26,000 | **NEW RED S199** — runaway append, ~30× S30 estimate. Hits 10K row wall around C140. |
+| Story_Seed_Deck | 1,109 | 19 | n/a (archive split) | ~220 | ~1,100 | ~1,100 | ~1,100 | **CLOSED S201** — moved 1,558 rows (C69-C88) to Story_Seed_Deck_Archive (N=5 retention via `maintenance/archiveStorySeeds.js`). Steady-state at ~1,100 rows; re-run script periodically to maintain. |
 | LifeHistory_Log | 3,669 | 7 | +1,117 | ~93 | ~4,300 | ~8,950 | ~13,600 | ~93/cycle (was est. +20-50). Compression ROADMAP Phase D pending. |
 | Simulation_Ledger (LifeHistory col) | 836 | 47 | +325 | ~27 | ~1,025 | ~2,375 | ~3,725 | S184 +150 ingest dominated this delta. Text bloat in LifeHistory col, not row bloat per se. |
 

@@ -2,42 +2,61 @@
 
 **Living reference document for GodWorld sheet health, bloat risk, and cleanup priorities.**
 
-Last Updated: 2026-02-16 | Cycle: 81 | Session: 30
+Last Updated: 2026-05-04 | Cycle: 93 | Session: 199 (S30 → S199 partial refresh — see below)
+
+---
+
+## S199 partial refresh (2026-05-04)
+
+**Refreshed:** §Heat Rankings tables below (RED/YELLOW) with current row counts pulled directly via `lib/sheets.js getRawSheetData()`. Growth-rate columns recomputed against C81 baseline (12 cycles elapsed).
+
+**NOT refreshed this pass (deeper analysis pending):** §Top Bloat Risks Detailed Breakdown, §Dead Column Inventory, §Archival Strategy, §Column Cleanup Roadmap. These hand-built sections describe specific cleanup tactics + dead-column audits that need fresh per-tab inspection. Sections below are S199 current; sections deeper in this doc are S30 historical context.
+
+**Major finding S199:** **Story_Seed_Deck growth is 30-70× the S30 estimate** — projected +3-8/cycle, observed ~217/cycle (66 → 2,667 rows over 12 cycles). At this rate it hits 10,000 rows around C140 — promoted to RED. Likely runaway append behavior from texture/seed generators that needs gating or archival.
+
+**Other significant deltas vs S30 projections:**
+- LifeHistory_Log: estimated +20-50/cycle, observed ~93/cycle (faster but on schedule)
+- Story_Hook_Deck: estimated +2-5/cycle, observed ~33/cycle (10× faster)
+- Citizen_Media_Usage: estimated +2-5/cycle, observed ~33/cycle (10× faster)
+- Texture_Trigger_Log: estimated +5-15/cycle, observed ~28/cycle (~2× faster)
+- Press_Drafts + WorldEvents_V3_Ledger + Storyline_Tracker: matching estimates
 
 ---
 
 ## Overview
 
-GodWorld uses 40+ Google Sheets ledgers across one spreadsheet. Google Sheets has a **10 million cell limit** per spreadsheet, and performance degrades noticeably above **10,000 rows per sheet**. At Cycle 81, we're healthy — but several sheets will hit performance walls between Cycle 150-200 without intervention.
+GodWorld uses 40+ Google Sheets ledgers across one spreadsheet. Google Sheets has a **10 million cell limit** per spreadsheet, and performance degrades noticeably above **10,000 rows per sheet**. At Cycle 93, several sheets are growing significantly faster than the S30 projections predicted — Story_Seed_Deck approaches the row-count wall by C140 if growth doesn't slow.
 
 **Methodology:**
-- **Growth rate** = observed rows / cycles active, adjusted for engine behavior
-- **Projections** at C100 (near-term), C150, C200, C281 (200 cycles from now)
+- **Growth rate** = observed rows / cycles elapsed since S30 baseline (12 cycles: C81 → C93)
+- **Projections** at C100 (near-term), C150, C200 (linear extrapolation; assumes growth pattern stable)
 - **Risk levels:** RED (action before C150), YELLOW (monitor, action before C200), GREEN (stable)
 - **Dead columns** = written by engine but never read by any consumer or downstream engine
 
 ---
 
-## Heat Rankings
+## Heat Rankings — S199 refresh
 
 ### RED — Action Needed Before C150
 
-| Sheet | Rows (C81) | Cols | Growth | Rate/Cycle | C100 | C150 | C200 | C281 | Issue |
-|-------|-----------|------|--------|------------|------|------|------|------|-------|
-| LifeHistory_Log | 2,552 | 9 | Append | +20-50 | ~3,200 | ~4,950 | ~6,700 | ~9,550 | Largest sheet, 2 dead cols, 2 empty cols |
-| Simulation_Ledger (LifeHistory col) | 511 | 20 | Update | ~0 rows | ~511 | ~520 | ~530 | ~550 | LifeHistory column = 38% of sheet cell weight; text bloat, not row bloat. No dead cols (see correction below). |
+| Sheet | Rows (C93) | Cols | C81→C93 | Rate/Cycle | C100 | C150 | C200 | Issue |
+|-------|-----------|------|---------|------------|------|------|------|-------|
+| **Story_Seed_Deck** | **2,667** | 19 | +2,601 | **~217** | ~4,200 | ~15,100 | ~26,000 | **NEW RED S199** — runaway append, ~30× S30 estimate. Hits 10K row wall around C140. |
+| LifeHistory_Log | 3,669 | 7 | +1,117 | ~93 | ~4,300 | ~8,950 | ~13,600 | ~93/cycle (was est. +20-50). Compression ROADMAP Phase D pending. |
+| Simulation_Ledger (LifeHistory col) | 836 | 47 | +325 | ~27 | ~1,025 | ~2,375 | ~3,725 | S184 +150 ingest dominated this delta. Text bloat in LifeHistory col, not row bloat per se. |
 
 ### YELLOW — Monitor, Action Before C200
 
-| Sheet | Rows (C81) | Cols | Growth | Rate/Cycle | C100 | C150 | C200 | C281 | Issue |
-|-------|-----------|------|--------|------------|------|------|------|------|-------|
-| WorldEvents_V3_Ledger | 23 | 29 | Append | +5-20 | ~250 | ~850 | ~1,450 | ~2,400 | 7 dead calendar cols + SportsEngine + CanonStatus |
-| Press_Drafts | 58 | 14 | Append | +5-20 | ~290 | ~890 | ~1,490 | ~2,460 | 6 dead calendar cols, DraftText cell bloat |
-| Storyline_Tracker | 110 | 14 | Mixed | +5-10 | ~240 | ~590 | ~940 | ~1,510 | 5 dead calendar cols, no archive for resolved |
-| Story_Seed_Deck | 66 | 14 | Append | +3-8 | ~160 | ~410 | ~660 | ~1,070 | 6 dead calendar cols |
-| Story_Hook_Deck | 46 | 16 | Append | +2-5 | ~110 | ~260 | ~410 | ~650 | 6 dead cols (5 calendar + CalendarTrigger) |
-| Texture_Trigger_Log | 83 | 12 | Append | +5-15 | ~270 | ~770 | ~1,270 | ~2,080 | 5 dead calendar cols |
-| Citizen_Media_Usage | 158 | 13 | Append | +2-5 | ~220 | ~400 | ~580 | ~850 | 6 empty cols (G-L), no archive |
+| Sheet | Rows (C93) | Cols | C81→C93 | Rate/Cycle | C100 | C150 | C200 | Issue |
+|-------|-----------|------|---------|------------|------|------|------|-------|
+| Citizen_Media_Usage | 560 | 15 | +402 | ~33 | ~795 | ~2,440 | ~4,090 | 10× S30 estimate; needs archival of resolved-storyline rows |
+| Story_Hook_Deck | 443 | 28 | +397 | ~33 | ~675 | ~2,330 | ~3,985 | 10× S30 estimate; same root as Story_Seed_Deck |
+| Texture_Trigger_Log | 425 | 12 | +342 | ~28 | ~625 | ~2,055 | ~3,485 | ~2× S30 estimate |
+| WorldEvents_Ledger (legacy v2.1) | 298 | 22 | +219 | ~18 | ~425 | ~1,330 | ~2,235 | Live legacy tab; recordWorldEventsv25 still writes (Phase10-RecordEvents25) |
+| Relationship_Bonds | 268 | 17 | NEW | unknown | — | — | — | Tab present but bond-create paths short-circuit (no callers fire); verify if growth actually started |
+| WorldEvents_V3_Ledger | 242 | 29 | +219 | ~18 | ~370 | ~1,275 | ~2,180 | Matches estimate; 7 dead calendar cols still present |
+| Storyline_Tracker | 239 | 25 | +129 | ~11 | ~315 | ~870 | ~1,425 | Matches estimate; 5 dead calendar cols, no archive |
+| Press_Drafts | 164 | 20 | +106 | ~9 | ~227 | ~677 | ~1,127 | Matches estimate; 6 dead calendar cols, DraftText cell bloat |
 | WorldEvents_Ledger (V2) | 79 | 22 | Append | +1-5 | ~140 | ~290 | ~440 | ~680 | Legacy V2 format, still read by transit + dedup |
 | Initiative_Tracker | 7 | 19 | Append | +1-2 | ~35 | ~110 | ~185 | ~310 | No archive strategy for resolved initiatives |
 | Storyline_Intake | 110 | 12 | Append | +5-10 | ~240 | ~590 | ~940 | ~1,510 | 6 dead calendar cols |

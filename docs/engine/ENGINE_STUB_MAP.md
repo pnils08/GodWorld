@@ -1286,32 +1286,7 @@
   Config: ctx.config.cycleCount
 
 ### arcLifecycleEngine.js
-- **advanceArcLifecycles_(ctx)**
-  Reads: S.cycleId, S.eventArcs
-  Writes: S.arcLifecycleResults
-  Config: ctx.config.cycleCount
-
-- **loadEventArcLedger_(ss)**
-  Sheets: Event_Arc_Ledger
-
-- **processArcLifecycle_(ctx, arc, cycle, ledger)**
-
-- **shouldAdvancePhase_(currentPhase, phaseDuration, tension, nextTransition, cycle)**
-
-- **getNextPhase_(currentPhase)**
-
-- **advanceArcPhase_(ctx, arc, cycle, oldPhase, newPhase, ledger)**
-  RNG: ctx.rng / safeRand_(ctx)
-
-- **checkResolutionTriggers_(ctx, arc, tension, currentPhase, phaseDuration)**
-
-- **resolveArc_(ctx, arc, cycle, trigger, ledger)**
-
-- **generatePhaseTransitionHook_(ctx, arc, oldPhase, newPhase)**
-  Writes: S.storyHooks
-
-- **generateResolutionHook_(ctx, arc, trigger)**
-  Writes: S.storyHooks
+_(deleted S199 — confirmed-dead 523-LOC file. 9 of 10 functions had zero external refs; the 10th (`processArcLifecycle_` 4-arg) was shadowed by `processArcLifeCyclev1.js`'s 1-arg version. ENGINE_MAP.md had already documented "NOT called". Live arc-lifecycle implementation is in `processArcLifeCyclev1.js`.)_
 
 ### computeRecurringCitizens.js
 - **computeRecurringCitizens_(ctx)**

@@ -191,7 +191,7 @@
 |------|----------|------|---------|
 | 8-CycleWeight | `applyCycleWeightForLatestCycle_()` | phase09-digest/applyCycleWeightForLatestCycle.js | Signal scoring (low/medium/high) |
 | 8-V3Preload | `v3PreloadContext_()` | phase08-v3-chicago/v3preLoader.js | Load arc/domain/neighborhood state from ledgers. **LOADS** `S.eventArcs` |
-| 8-ArcLifecycle | `processArcLifecycle_()` | phase06-analysis/arcLifecycleEngine.js | Advance arc phases (early→rising→peak→decline→resolved). **Moved from Phase 6 S116** |
+| 8-ArcLifecycle | `processArcLifecycle_()` | phase06-analysis/processArcLifeCyclev1.js | Advance arc phases (early→rising→peak→decline→resolved). **Moved from Phase 6 S116.** S199: arcLifecycleEngine.js (the 4-arg shadowed version) deleted as confirmed-dead per ENGINE_MAP.md line 279. |
 | 8-StorylineStatus | `updateStorylineStatus_()` | phase06-analysis/updateStorylineStatusv1.2.js | Track storyline health. **Moved from Phase 6 S116** | **⚠ AUDIT:** Writes `ctx.summary.storylineUpdates` — nothing reads it. |
 | 8-StorylineHealth | `monitorStorylineHealth_()` | phase06-analysis/hookLifecycleEngine.js | Monitor storyline decay. **Moved from Phase 6 S116** |
 | 8-V3Integration | `v3Integration_()` | phase08-v3-chicago/v3Integration.js | V3 module orchestrator (arcs, domains, textures, hooks) |
@@ -276,7 +276,7 @@ These exist in the codebase but are NOT in the engine call chain:
 | `phase05-citizens/updateCivicLedgerFactions.js` | Not in engine — setup script |
 | `phase06-analysis/hookLifecycleEngine.js` | Not in engine |
 | `phase06-analysis/storylineHealthEngine.js` | Not in engine |
-| `phase06-analysis/processArcLifeCyclev1.js` | **ACTIVE** — called by engine at godWorldEngine2.js:311. arcLifecycleEngine.js has a different 4-param signature and is NOT called. |
+| `phase06-analysis/processArcLifeCyclev1.js` | **ACTIVE** — called by engine at godWorldEngine2.js:322,1622. The 4-param shadowed `arcLifecycleEngine.js` deleted S199. |
 | `phase07-evening-media/storylineWeavingEngine.js` | Not in engine |
 | `phase07-evening-media/culturalLedger.js` | Not in engine |
 | `phase07-evening-media/citizenFameTracker.js` | Not in engine |

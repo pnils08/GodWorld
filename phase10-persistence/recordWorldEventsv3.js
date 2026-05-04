@@ -1,10 +1,29 @@
 /**
  * ============================================================================
- * recordWorldEventsv3_ v3.6 - Write-Intent Based
+ * recordWorldEventsv3_ v3.7 - Write-Intent Based
  * ============================================================================
  *
  * Enhanced V3 ledger writer with GodWorld Calendar integration.
  * Writes to WorldEvents_V3_Ledger using write-intents model.
+ *
+ * v3.7 Changes (S199 ev.domain case discipline):
+ * - Standardized Domain on UPPERCASE end-to-end (matches the dominant 209-row
+ *   live state from worldEventsEngine.js _domain pools + matches all reader
+ *   expectations: applyShockMonitor.js `=== "SAFETY"`, mediaRoomBriefingGenerator.js
+ *   `=== 'CIVIC'/'TRANSIT'/'INFRASTRUCTURE'`).
+ * - domainMap values lowercased→UPPERCASE ('Health'→'HEALTH', 'Civic'→'CIVIC', etc.)
+ *   so deriveDomain emits UPPERCASE on text-classification fallback.
+ * - domainNeighborhoods keys lowercased→UPPERCASE so per-domain neighborhood pool
+ *   lookups resolve correctly when domain is UPPERCASE (was silently falling
+ *   back to all-neighborhoods because 'CIVIC' didn't match key 'Civic').
+ * - deriveEventType comparisons lowercased→UPPERCASE so eventType derivation
+ *   produces the right semantic label (was returning 'misc-event' for ~209
+ *   rows because 'CIVIC' didn't match `if (domain === 'Civic')` chain — root
+ *   cause of ENGINE_REPAIR Row 6's 91% misc-event problem on the Domain side).
+ * - Added belt-and-suspenders `String(...).toUpperCase()` at the domain pickup
+ *   site so any future writer that forgets the convention gets normalized.
+ * - 4 historical Title Case rows on the live ledger left as-is (low impact;
+ *   readers already check UPPERCASE so they're effectively orphaned but harmless).
  *
  * v3.6 Changes (S185 polish):
  * - deriveDomain: word-boundary keyword matching (\\bkeyword\\b regex) prevents
@@ -74,19 +93,19 @@ function recordWorldEventsv3_(ctx) {
 
   // v3.5: Domain → preferred neighborhoods (meaningful assignment)
   var domainNeighborhoods = {
-    'Sports':         ['Jack London', 'Downtown', 'West Oakland'],
-    'Culture':        ['Temescal', 'KONO', 'Uptown', 'Jack London'],
-    'Business':       ['Downtown', 'Jack London', 'Uptown'],
-    'Safety':         ['West Oakland', 'Downtown', 'Fruitvale', 'Chinatown'],
-    'Civic':          ['Downtown', 'Lake Merritt', 'Uptown'],
-    'Health':         ['Fruitvale', 'West Oakland', 'Downtown', 'Chinatown'],
-    'Education':      ['Fruitvale', 'Temescal', 'Laurel', 'Rockridge'],
-    'Infrastructure': ['West Oakland', 'Downtown', 'Fruitvale', 'Chinatown'],
-    'Festival':       ['Jack London', 'Downtown', 'Uptown', 'Lake Merritt'],
-    'Holiday':        ['Lake Merritt', 'Temescal', 'Piedmont Ave', 'Rockridge'],
-    'Environment':    ['Lake Merritt', 'West Oakland', 'Fruitvale'],
-    'Community':      ['Temescal', 'Fruitvale', 'Laurel', 'West Oakland'],
-    'Technology':     ['Uptown', 'KONO', 'Rockridge']
+    'SPORTS':         ['Jack London', 'Downtown', 'West Oakland'],
+    'CULTURE':        ['Temescal', 'KONO', 'Uptown', 'Jack London'],
+    'BUSINESS':       ['Downtown', 'Jack London', 'Uptown'],
+    'SAFETY':         ['West Oakland', 'Downtown', 'Fruitvale', 'Chinatown'],
+    'CIVIC':          ['Downtown', 'Lake Merritt', 'Uptown'],
+    'HEALTH':         ['Fruitvale', 'West Oakland', 'Downtown', 'Chinatown'],
+    'EDUCATION':      ['Fruitvale', 'Temescal', 'Laurel', 'Rockridge'],
+    'INFRASTRUCTURE': ['West Oakland', 'Downtown', 'Fruitvale', 'Chinatown'],
+    'FESTIVAL':       ['Jack London', 'Downtown', 'Uptown', 'Lake Merritt'],
+    'HOLIDAY':        ['Lake Merritt', 'Temescal', 'Piedmont Ave', 'Rockridge'],
+    'ENVIRONMENT':    ['Lake Merritt', 'West Oakland', 'Fruitvale'],
+    'COMMUNITY':      ['Temescal', 'Fruitvale', 'Laurel', 'West Oakland'],
+    'TECHNOLOGY':     ['Uptown', 'KONO', 'Rockridge']
   };
 
   // ═══════════════════════════════════════════════════════════════════════════
@@ -94,78 +113,78 @@ function recordWorldEventsv3_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   var domainMap = {
     // Health
-    'symptom': 'Health', 'illness': 'Health', 'fainting': 'Health', 'ER': 'Health',
-    'hospital': 'Health', 'heat exhaustion': 'Health', 'burn': 'Health', 'injury': 'Health',
-    'allergy': 'Health',
+    'symptom': 'HEALTH', 'illness': 'HEALTH', 'fainting': 'HEALTH', 'ER': 'HEALTH',
+    'hospital': 'HEALTH', 'heat exhaustion': 'HEALTH', 'burn': 'HEALTH', 'injury': 'HEALTH',
+    'allergy': 'HEALTH',
 
     // Civic
-    'protest': 'Civic', 'petition': 'Civic', 'committee': 'Civic', 'zoning': 'Civic',
-    'budget': 'Civic', 'vote': 'Civic', 'complaint': 'Civic', 'public-comment': 'Civic',
-    'meeting': 'Civic', 'march': 'Civic', 'rally': 'Civic', 'memorial': 'Civic',
-    'ceremony': 'Civic', 'tribute': 'Civic',
+    'protest': 'CIVIC', 'petition': 'CIVIC', 'committee': 'CIVIC', 'zoning': 'CIVIC',
+    'budget': 'CIVIC', 'vote': 'CIVIC', 'complaint': 'CIVIC', 'public-comment': 'CIVIC',
+    'meeting': 'CIVIC', 'march': 'CIVIC', 'rally': 'CIVIC', 'memorial': 'CIVIC',
+    'ceremony': 'CIVIC', 'tribute': 'CIVIC',
 
     // Infrastructure
-    'blackout': 'Infrastructure', 'flicker': 'Infrastructure', 'power': 'Infrastructure',
-    'signal': 'Infrastructure', 'transformer': 'Infrastructure', 'pothole': 'Infrastructure',
-    'water': 'Infrastructure', 'internet': 'Infrastructure', 'transit': 'Infrastructure',
-    'traffic': 'Infrastructure', 'parking': 'Infrastructure', 'gridlock': 'Infrastructure',
+    'blackout': 'INFRASTRUCTURE', 'flicker': 'INFRASTRUCTURE', 'power': 'INFRASTRUCTURE',
+    'signal': 'INFRASTRUCTURE', 'transformer': 'INFRASTRUCTURE', 'pothole': 'INFRASTRUCTURE',
+    'water': 'INFRASTRUCTURE', 'internet': 'INFRASTRUCTURE', 'transit': 'INFRASTRUCTURE',
+    'traffic': 'INFRASTRUCTURE', 'parking': 'INFRASTRUCTURE', 'gridlock': 'INFRASTRUCTURE',
 
     // Crime/Safety
-    'theft': 'Safety', 'break-in': 'Safety', 'piracy': 'Safety', 'suspicious': 'Safety',
-    'pursuit': 'Safety', 'graffiti': 'Safety', 'altercation': 'Safety', 'scalping': 'Safety',
-    'confiscation': 'Safety', 'seizure': 'Safety',
+    'theft': 'SAFETY', 'break-in': 'SAFETY', 'piracy': 'SAFETY', 'suspicious': 'SAFETY',
+    'pursuit': 'SAFETY', 'graffiti': 'SAFETY', 'altercation': 'SAFETY', 'scalping': 'SAFETY',
+    'confiscation': 'SAFETY', 'seizure': 'SAFETY',
 
     // Weather
-    'downpour': 'Weather', 'fog': 'Weather', 'wind': 'Weather', 'temperature': 'Weather',
-    'snow': 'Weather',
+    'downpour': 'WEATHER', 'fog': 'WEATHER', 'wind': 'WEATHER', 'temperature': 'WEATHER',
+    'snow': 'WEATHER',
 
     // Sports (v3.2: expanded)
-    "A's": 'Sports', 'practice': 'Sports', 'player': 'Sports', 'lineup': 'Sports',
-    'athlete': 'Sports', 'celebration': 'Sports', 'rumor': 'Sports', 'game day': 'Sports',
-    'tailgate': 'Sports', 'playoff': 'Sports', 'championship': 'Sports', 'victory': 'Sports',
-    'Opening Day': 'Sports', 'first pitch': 'Sports', 'fan': 'Sports', 'stadium': 'Sports',
-    'watch party': 'Sports',
+    "A's": 'SPORTS', 'practice': 'SPORTS', 'player': 'SPORTS', 'lineup': 'SPORTS',
+    'athlete': 'SPORTS', 'celebration': 'SPORTS', 'rumor': 'SPORTS', 'game day': 'SPORTS',
+    'tailgate': 'SPORTS', 'playoff': 'SPORTS', 'championship': 'SPORTS', 'victory': 'SPORTS',
+    'Opening Day': 'SPORTS', 'first pitch': 'SPORTS', 'fan': 'SPORTS', 'stadium': 'SPORTS',
+    'watch party': 'SPORTS',
 
     // Business
-    'kitchen fire': 'Business', 'staff': 'Business', 'walkout': 'Business', 'forklift': 'Business',
-    'food poisoning': 'Business', 'fender-bender': 'Business', 'vendor': 'Business',
-    'food truck': 'Business', 'food cart': 'Business',
+    'kitchen fire': 'BUSINESS', 'staff': 'BUSINESS', 'walkout': 'BUSINESS', 'forklift': 'BUSINESS',
+    'food poisoning': 'BUSINESS', 'fender-bender': 'BUSINESS', 'vendor': 'BUSINESS',
+    'food truck': 'BUSINESS', 'food cart': 'BUSINESS',
 
     // Education
-    'school': 'Education', 'test score': 'Education', 'teacher': 'Education', 'field trip': 'Education',
+    'school': 'EDUCATION', 'test score': 'EDUCATION', 'teacher': 'EDUCATION', 'field trip': 'EDUCATION',
 
     // Media/Culture
-    'actor': 'Culture', 'influencer': 'Culture', 'musician': 'Culture', 'filming': 'Culture',
-    'gallery': 'Culture', 'art': 'Culture', 'artist': 'Culture', 'exhibit': 'Culture',
+    'actor': 'CULTURE', 'influencer': 'CULTURE', 'musician': 'CULTURE', 'filming': 'CULTURE',
+    'gallery': 'CULTURE', 'art': 'CULTURE', 'artist': 'CULTURE', 'exhibit': 'CULTURE',
 
     // Festival/Holiday (v3.2: new)
-    'parade': 'Festival', 'float': 'Festival', 'festival': 'Festival', 'crowd surge': 'Festival',
-    'barricade': 'Festival', 'overcrowding': 'Festival', 'costume': 'Festival',
-    'fireworks': 'Holiday', 'sparkler': 'Holiday', 'countdown': 'Holiday',
-    'turkey fryer': 'Holiday', 'egg hunt': 'Holiday', 'trick-or-treat': 'Holiday',
-    'haunted': 'Holiday', 'pumpkin': 'Holiday', 'Halloween': 'Holiday',
-    'lion dance': 'Holiday', 'firecracker': 'Holiday', 'dragon': 'Holiday',
-    'mariachi': 'Holiday', 'pinata': 'Holiday', 'fiesta': 'Holiday',
-    'altar': 'Holiday', 'marigold': 'Holiday', 'ofrenda': 'Holiday',
-    'Pride': 'Festival', 'rainbow': 'Festival', 'glitter': 'Festival',
-    'shamrock': 'Holiday', 'green beer': 'Holiday', 'pub crawl': 'Holiday',
-    'BBQ': 'Holiday', 'patriotic': 'Holiday', 'flag': 'Holiday',
+    'parade': 'FESTIVAL', 'float': 'FESTIVAL', 'festival': 'FESTIVAL', 'crowd surge': 'FESTIVAL',
+    'barricade': 'FESTIVAL', 'overcrowding': 'FESTIVAL', 'costume': 'FESTIVAL',
+    'fireworks': 'HOLIDAY', 'sparkler': 'HOLIDAY', 'countdown': 'HOLIDAY',
+    'turkey fryer': 'HOLIDAY', 'egg hunt': 'HOLIDAY', 'trick-or-treat': 'HOLIDAY',
+    'haunted': 'HOLIDAY', 'pumpkin': 'HOLIDAY', 'Halloween': 'HOLIDAY',
+    'lion dance': 'HOLIDAY', 'firecracker': 'HOLIDAY', 'dragon': 'HOLIDAY',
+    'mariachi': 'HOLIDAY', 'pinata': 'HOLIDAY', 'fiesta': 'HOLIDAY',
+    'altar': 'HOLIDAY', 'marigold': 'HOLIDAY', 'ofrenda': 'HOLIDAY',
+    'Pride': 'FESTIVAL', 'rainbow': 'FESTIVAL', 'glitter': 'FESTIVAL',
+    'shamrock': 'HOLIDAY', 'green beer': 'HOLIDAY', 'pub crawl': 'HOLIDAY',
+    'BBQ': 'HOLIDAY', 'patriotic': 'HOLIDAY', 'flag': 'HOLIDAY',
 
     // First Friday (v3.2: new)
-    'First Friday': 'Culture', 'street performer': 'Culture', 'wine spill': 'Culture',
+    'First Friday': 'CULTURE', 'street performer': 'CULTURE', 'wine spill': 'CULTURE',
 
     // Creation Day (v3.2: new)
-    'founders': 'Civic', 'heritage': 'Civic', 'history': 'Civic', 'Oakland': 'Civic',
+    'founders': 'CIVIC', 'heritage': 'CIVIC', 'history': 'CIVIC', 'Oakland': 'CIVIC',
 
     // Misc
-    'earthquake': 'Environment', 'drone': 'Technology', 'balloon': 'Community',
-    'lost dog': 'Community', 'flash choir': 'Community', 'lost child': 'Community',
-    'cleanup': 'Environment', 'tree planting': 'Environment',
+    'earthquake': 'ENVIRONMENT', 'drone': 'TECHNOLOGY', 'balloon': 'COMMUNITY',
+    'lost dog': 'COMMUNITY', 'flash choir': 'COMMUNITY', 'lost child': 'COMMUNITY',
+    'cleanup': 'ENVIRONMENT', 'tree planting': 'ENVIRONMENT',
 
     // v3.6 (S185): expanded for General fall-through reduction
-    'misfiled': 'Civic', 'missing funds': 'Civic', 'document': 'Civic',
-    'audit': 'Civic', 'eviction': 'Housing', 'lease': 'Housing',
-    'permit': 'Civic', 'application': 'Civic'
+    'misfiled': 'CIVIC', 'missing funds': 'CIVIC', 'document': 'CIVIC',
+    'audit': 'CIVIC', 'eviction': 'HOUSING', 'lease': 'HOUSING',
+    'permit': 'CIVIC', 'application': 'CIVIC'
   };
 
   // v3.6 (S185): pre-sort keywords by descending length so multi-word
@@ -192,20 +211,20 @@ function recordWorldEventsv3_(ctx) {
   }
 
   function deriveEventType(desc, domain) {
-    if (domain === 'Health') return 'health-event';
-    if (domain === 'Civic') return 'civic-activity';
-    if (domain === 'Infrastructure') return 'infra-incident';
-    if (domain === 'Safety') return 'safety-incident';
-    if (domain === 'Weather') return 'weather-event';
-    if (domain === 'Sports') return 'sports-news';
-    if (domain === 'Business') return 'business-incident';
-    if (domain === 'Education') return 'education-news';
-    if (domain === 'Culture') return 'cultural-sighting';
-    if (domain === 'Environment') return 'environmental';
-    if (domain === 'Community') return 'community-moment';
-    if (domain === 'Festival') return 'festival-incident';  // v3.2
-    if (domain === 'Holiday') return 'holiday-incident';    // v3.2
-    if (domain === 'Technology') return 'tech-incident';
+    if (domain === 'HEALTH') return 'health-event';
+    if (domain === 'CIVIC') return 'civic-activity';
+    if (domain === 'INFRASTRUCTURE') return 'infra-incident';
+    if (domain === 'SAFETY') return 'safety-incident';
+    if (domain === 'WEATHER') return 'weather-event';
+    if (domain === 'SPORTS') return 'sports-news';
+    if (domain === 'BUSINESS') return 'business-incident';
+    if (domain === 'EDUCATION') return 'education-news';
+    if (domain === 'CULTURE') return 'cultural-sighting';
+    if (domain === 'ENVIRONMENT') return 'environmental';
+    if (domain === 'COMMUNITY') return 'community-moment';
+    if (domain === 'FESTIVAL') return 'festival-incident';  // v3.2
+    if (domain === 'HOLIDAY') return 'holiday-incident';    // v3.2
+    if (domain === 'TECHNOLOGY') return 'tech-incident';
     return 'misc-event';
   }
 
@@ -223,7 +242,11 @@ function recordWorldEventsv3_(ctx) {
     var ev = events[i];
     var desc = ev.description || '';
     var severity = ev.severity || 'low';
-    var domain = ev.domain || deriveDomain(desc);
+    // S199 ev.domain case-discipline: belt-and-suspenders normalization to UPPERCASE.
+    // Engine writers (worldEventsEngine.js _domain pools) emit UPPERCASE; deriveDomain
+    // (post-S199) also emits UPPERCASE. This .toUpperCase() is defensive against any
+    // future writer that emits lowercase or Title Case.
+    var domain = String(ev.domain || deriveDomain(desc)).toUpperCase();
     var eventType = deriveEventType(desc, domain);
 
     // v3.5: Domain-aware neighborhood (deterministic rng)
@@ -275,7 +298,7 @@ function recordWorldEventsv3_(ctx) {
     );
   }
 
-  Logger.log('recordWorldEventsv3_ v3.6: Queued ' + rows.length + ' events for cycle ' + cycle);
+  Logger.log('recordWorldEventsv3_ v3.7: Queued ' + rows.length + ' events for cycle ' + cycle);
 }
 
 

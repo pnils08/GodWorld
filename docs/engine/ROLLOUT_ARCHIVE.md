@@ -596,3 +596,27 @@ Closed 5 gaps in `scripts/gradeEdition.js` + `scripts/gradeHistory.js`. **Mara g
 #### BUNDLE-H — postRunFiling.js manifest update + saveToDrive photo upload + path-arg audit (MED) — DONE S197 (engine-sheet)
 
 Closed G-P22 + G-PR18. **postRunFiling.js (G-P22):** checklist refreshed to pipeline-v2 outputs. Dropped 6 stale `output/desk-output/<desk>_c<cycle>.md` entries (pipeline-v1 paths that no longer exist — reporting MISSING every cycle was the false-alarm signal). Added a new `glob-children` checklist type that walks `output/reporters/<reporter>/articles/` for `c<cycle>_*.md` matches (pipeline-v2 per-reporter article shape). Demoted Edition PDF + Edition photos from required:true → required:false (`/edition-print` is opt-in per S188+; not all cycles run print). C93 fixture re-check: 6 missing → 1 missing. The 1 remaining missing (`mara-audit/edition_c93_for_review.txt`) is a REAL C93 gap (Mara reviewed out of pipeline order per S195 SESSION_CONTEXT note), not manifest staleness — script correctly reflects reality. **saveToDrive.js (G-PR18):** chose path-(b) honest-doc + script-alignment over path-(a) photo-upload implementation. Docstring header updated to state PDF-only scope explicitly + reference G-PR18 closure rationale. Defensive directory check at runtime: passing a directory path exits 1 with explicit error message + pointer to BUNDLE-H rationale, instead of throwing opaque EISDIR. Wave 1 already aligned the SKILL.md side; this commit aligns the script side. **Path-arg audit:** verified postRunFiling.js takes `<cycle>` as positional + `--type/--slug` flags (matches Wave 1 G-P19 SKILL.md pattern); no further changes needed. **Acceptance:** C93 re-run with new checklist surfaces real-state-only signal (1 actual gap surfaced; pre-fix had 6 stale entries masking it). Photo upload path remains a clear extension point if needed in a future cycle.
+
+
+## S201 Archive Pass (2026-05-04)
+
+### Dispatch C92 Gap Follow-ups — DONE S189
+
+Plan: [[plans/2026-04-30-dispatch-gap-followups]]. Closed S189 across 11 items; ROLLOUT pointer carried "7 engine-sheet items remain active" 12 sessions after closure, surfaced + cleared via S201 triage sweep.
+
+**Research-build (R1-R4) DONE S189:** `/dispatch` SKILL.md `lookup_cultural` one-liner + EDITION_PIPELINE format spec CUL-ID enumeration with "one entity per line" rule + Step 0 auto-resolve eval documented inline + PDF visual review (surfaced E5a/b/c render bugs).
+
+**Engine-sheet (E1-E8) DONE S189 — 6 commits to origin/main:**
+
+- `e83a5a3` E1 — `ingestEditionWiki.js` standalone NAMES INDEX section parser (accepts pipe form `<ID> | <Name> | <Role>` with POP-/CUL- prefixes per [[EDITION_PIPELINE]] §Per-section content spec + bullet em-dash form). Fail-loud guard: NAMES INDEX with non-empty content but parser extracts zero entities → exit 1 (eliminates "0 entities — pure-atmosphere artifact" silent-failure pattern).
+- `15e7f3e` E2 — `ingestPublishedEntities.js` parseNamesIndex reshaped (3 row shapes: T1 strict bullet, T1 strict flat, pre-T1 freeform). POP- routes through Sim_Ledger; non-POP (CUL-/BIZ-/FAITH-) collects in `culturalOnly` bucket — logged + JSON output, NOT appended to Simulation_Ledger.
+- `e9b0d37` E3 — `ingestEditionWiki.js` filename-fallback `--cycle` extraction (format-contract pattern `^cycle_pulse_\w+_(\d+)_.+\.txt$` for any type, falls back to in-text "EDITION N" / loose digit only for editions). New `[CYCLE]` startup log line names resolution source.
+- `6c2f45a` E4 — `postRunFiling.js --type {edition|dispatch|interview|supplemental}` flag + `--slug` flag. `buildNonEditionChecklist(type, cycle, slug)` ships minimal expected set per [[EDITION_PIPELINE]] §Filename contract. Manifest path type-aware (`run_manifest_<type>_c<cycle>_<slug>.json`).
+- `c20bb3d` E5a/b/c — single-fix-three-bugs PDF parser. Root cause: `lib/editionParser.js` `isSectionNameChunk` only excluded chunks STARTING with `|`; dispatch `POP-XXXXX | Name | Role` rows misclassified as section names. Fix: `chunk.indexOf('|') >= 0 → return false`. Plus all 4 tracking sections (NAMES INDEX, CITIZEN USAGE LOG, BUSINESSES NAMED, ARTICLE TABLE) classified `meta` → skipped from visible PDF entirely (internal metadata, not reader-facing).
+- `a805e76` E8 — `scripts/verifyNamesIndexParse.js` helper (counts non-separator non-empty NAMES INDEX rows in source `.txt`, optional `--expected <N>` compare, exit 1 with diagnostic on mismatch). Defense-in-depth complement to E1/E2 fail-loud guards. Wired into `/post-publish` SKILL.md Step 5 verification gate by research-build.
+
+**E6 cultural-card refresh:** engine-sheet helper `scripts/buildCulturalCards.js` already shipped S182 (521 lines, `--cul CUL-XXXXX` flag for single-figure refresh, writes to `wd-cultural`/`world-data` with proper `cul_id` metadata). Research-build wired into `/post-publish` SKILL.md v1.4 — new substep `2a-cul. Refresh cultural cards` (matrix-✓ for dispatch/interview/supplemental when CUL-IDs in NAMES INDEX). Per-CUL-ID `buildCulturalCards.js --apply --cul <CUL-ID>` after citizen card pass.
+
+**E7 Marin Tao BirthYear:** CLOSED-NO-ACTION — investigation found POP-00537 already carries `BirthYear=2009` (age 32 under 2041 anchor). Mike accepted as canon. No sheet edit, no card rebuild.
+
+**Acceptance:** all 7 plan acceptance criteria verified on canonical fixture `editions/cycle_pulse_dispatch_92_kono_second_song.txt`.

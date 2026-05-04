@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * EDUCATION & CAREER ENGINE v2.0
+ * EDUCATION & CAREER ENGINE v2.1
  * ============================================================================
  *
  * Tracks education levels, career progression, and education → career pathways.
@@ -15,6 +15,24 @@
  * - Education → career advancement speed (was income correlation in v1.x)
  * - Career mobility detection
  *
+ * v2.1 Phase 42 §5.6 alignment (S200):
+ * - Simulation_Ledger reads/writes route through shared ctx.ledger.
+ *   Pre-v2.1 the engine read SL via getDataRange (saw cycle-start state,
+ *   missed cohort-A in-memory mutations and Wealth's same-engine Income/
+ *   WealthLevel updates from earlier in Phase 5) and wrote back via direct
+ *   setValues that Phase 10 commitSimulationLedger_ silently clobbered.
+ *   Education levels, career stage advancements, and mobility flags were
+ *   all being lost every cycle since §5.6 went live S188.
+ *   Caught by S200 cohort-C audit; S185's §5.6.6 categorical orphan-clear
+ *   missed it (audit grepped file names but the cycle entry point is
+ *   processEducationCareer_, not the file name).
+ * - Side fix: detectCareerMobility_ pre-v2.1 only persisted CareerMobility
+ *   updates if at least one stagnation hook fired (events > 0). Mobility
+ *   was always computed but the conditional write meant most cycles' values
+ *   never landed. Under §5.6 the conditional disappears — mutations to
+ *   ctx.ledger.rows persist regardless once any other writer flips dirty.
+ *   Local dirty flip added so the engine doesn't depend on other writers.
+ *
  * v2.0 Changes (Phase 14.2):
  * - Removed INCOME_BY_EDUCATION and matchEducationToIncome_()
  * - Income no longer overridden by education level
@@ -22,18 +40,10 @@
  * - Eliminates three-way income conflict (career/education/role-based)
  *
  * Integration:
- * - Reads UNI/MED/CIV flags from Simulation_Ledger
+ * - Reads UNI/MED/CIV flags from Simulation_Ledger via ctx.ledger
  * - Hooks into career engine for promotions
- * - Uses school quality from Neighborhood_Demographics (consolidated)
- *
- * DIRECT WRITES (intentional — NOT legacy):
- * This engine uses direct setValues instead of write-intents because it runs
- * last in the Phase 5 Tier-5 chain (after HouseholdFormation and
- * GenerationalWealth). While no subsequent Phase 5 engine reads its output
- * within the same cycle, the pattern is consistent with the other two engines.
- * A future V3 migration would thread all citizen data through ctx.
- * Execution order: HouseholdFormation → GenerationalWealth → EducationCareer
- * (see godWorldEngine2.js lines 210-212)
+ * - Uses school quality from Neighborhood_Demographics (own tracking sheet,
+ *   read directly — not SL-related)
  *
  * Story Hooks:
  * - SCHOOL_QUALITY_CRISIS (severity 8): School quality <3
@@ -94,12 +104,16 @@ var ADVANCEMENT_CYCLES = {
 // ════════════════════════════════════════════════════════════════════════════
 
 function processEducationCareer_(ctx) {
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  if (!ctx.ledger) {
+    throw new Error('processEducationCareer_: ctx.ledger not initialized');
+  }
   var rng = safeRand_(ctx);
 
   var ss = ctx.ss;
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
 
-  Logger.log('processEducationCareer_ v1.1: Starting...');
+  Logger.log('processEducationCareer_ v2.1: Starting...');
 
   var results = {
     processed: 0,
@@ -110,11 +124,11 @@ function processEducationCareer_(ctx) {
   };
 
   // Step 1: Derive education levels from existing flags
-  var eduResults = deriveEducationLevels_(ss, ctx, rng);
+  var eduResults = deriveEducationLevels_(ctx, rng);
   results.educationUpdated = eduResults.updated;
 
   // Step 2: Update career stages and track progression
-  var careerResults = updateCareerProgression_(ss, cycle, rng);
+  var careerResults = updateCareerProgression_(ctx, cycle, rng);
   results.careerAdvanced = careerResults.advanced;
   results.stagnationDetected = careerResults.stagnant;
 
@@ -125,15 +139,16 @@ function processEducationCareer_(ctx) {
   results.incomeAdjusted = 0;
 
   // Step 4: Detect career mobility (advancing/stagnant/declining)
-  var mobilityResults = detectCareerMobility_(ss, ctx, cycle, rng);
+  var mobilityResults = detectCareerMobility_(ctx, cycle, rng);
   results.mobilityEvents = mobilityResults.events;
 
-  // Step 5: Check school quality and generate alerts
+  // Step 5: Check school quality and generate alerts (Neighborhood_Demographics
+  // — not SL, signature stays direct).
   var schoolResults = checkSchoolQuality_(ss, ctx, cycle);
   results.schoolAlerts = schoolResults.alerts;
 
   Logger.log(
-    'processEducationCareer_ v1.1: Complete. ' +
+    'processEducationCareer_ v2.1: Complete. ' +
     'Education: ' + results.educationUpdated + ', ' +
     'Career: ' + results.careerAdvanced + ', ' +
     'Stagnant: ' + results.stagnationDetected + ', ' +
@@ -148,15 +163,11 @@ function processEducationCareer_(ctx) {
 // EDUCATION LEVEL DERIVATION
 // ════════════════════════════════════════════════════════════════════════════
 
-function deriveEducationLevels_(ss, ctx, rng) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { updated: 0 };
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return { updated: 0 };
-
-  var header = values[0];
-  var rows = values.slice(1);
+function deriveEducationLevels_(ctx, rng) {
+  // Phase 42 §5.6: read/mutate ctx.ledger.rows; Phase 10 commits.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { updated: 0 };
 
   var idx = function(n) { return header.indexOf(n); };
   var iEducation = idx('EducationLevel');
@@ -213,7 +224,7 @@ function deriveEducationLevels_(ss, ctx, rng) {
   }
 
   if (updated > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+    ctx.ledger.dirty = true;
   }
 
   return { updated: updated };
@@ -224,15 +235,11 @@ function deriveEducationLevels_(ss, ctx, rng) {
 // CAREER PROGRESSION
 // ════════════════════════════════════════════════════════════════════════════
 
-function updateCareerProgression_(ss, cycle, rng) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { advanced: 0, stagnant: 0 };
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return { advanced: 0, stagnant: 0 };
-
-  var header = values[0];
-  var rows = values.slice(1);
+function updateCareerProgression_(ctx, cycle, rng) {
+  // Phase 42 §5.6: read/mutate ctx.ledger.rows; Phase 10 commits.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { advanced: 0, stagnant: 0 };
 
   var idx = function(n) { return header.indexOf(n); };
   var iCareerStage = idx('CareerStage');
@@ -304,7 +311,7 @@ function updateCareerProgression_(ss, cycle, rng) {
   }
 
   if (advanced > 0 || stagnant > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+    ctx.ledger.dirty = true;
   }
 
   return { advanced: advanced, stagnant: stagnant };
@@ -326,15 +333,11 @@ function updateCareerProgression_(ss, cycle, rng) {
 // CAREER MOBILITY DETECTION
 // ════════════════════════════════════════════════════════════════════════════
 
-function detectCareerMobility_(ss, ctx, cycle, rng) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { events: 0 };
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return { events: 0 };
-
-  var header = values[0];
-  var rows = values.slice(1);
+function detectCareerMobility_(ctx, cycle, rng) {
+  // Phase 42 §5.6: read/mutate ctx.ledger.rows; Phase 10 commits.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { events: 0 };
 
   var idx = function(n) { return header.indexOf(n); };
   var iMobility = idx('CareerMobility');
@@ -347,6 +350,7 @@ function detectCareerMobility_(ss, ctx, cycle, rng) {
   if (iMobility < 0) return { events: 0 };
 
   var events = 0;
+  var mutated = false;
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -382,11 +386,14 @@ function detectCareerMobility_(ss, ctx, cycle, rng) {
     }
 
     row[iMobility] = mobility;
+    mutated = true;
   }
 
-  if (events > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
-  }
+  // Side fix v2.1: pre-fix conditional `if (events > 0)` write meant most
+  // cycles' Mobility values never landed. Mutations are unconditional in the
+  // loop above; flip dirty whenever any row was processed so values always
+  // commit at Phase 10.
+  if (mutated) ctx.ledger.dirty = true;
 
   return { events: events };
 }

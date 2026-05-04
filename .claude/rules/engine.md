@@ -7,6 +7,26 @@ paths:
 
 # Engine Code Rules
 
+## Measure twice, cut once + cascading-effects review (S199 — confirmed-effective)
+
+When Mike opens an engine-sheet session with repair/cleanup work — ROLLOUT triage, ENGINE_REPAIR rows, dead-code deletes, file renames, schema dedup, migration batches — apply this discipline at **every substantive step before any destructive operation**. Empirical caller analysis + runtime state check BEFORE the cut. Reverse when evidence contradicts the hypothesis. Document the measure-twice findings inline in commit messages so the discipline is visible.
+
+**Why this exists:** S199 + S200 caught deep-rooted bugs that quick mechanical work would have missed: Phase A reversal (recordWorldEventsv25.js was LIVE not dead — caller graph caught it before delete); B.2→B.3 wedding-bond semantics drift (rename cascaded into wrong createBond_ binding); v1.9 off-by-one trapped pre-deploy via 5-case re-trace; Path (c) Row 18 elimination via live quant (32% blast radius, not "small minority"); **S200 cohort-C scope expansion** (S185 §5.6.6 audit had grep'd file names instead of `process*_` exposed function names → 4 of 6 "orphans" were live; advisor + caller-graph caught it before commit #1).
+
+**How to apply (per item, in order):**
+
+1. **READ the impl(s)** end-to-end before any destructive operation — never trust an audit's summary alone.
+2. **CALLER GRAPH** — `grep -rn "fnName("` excluding defs; count + classify call sites by phase.
+3. **EMPIRICAL STATE check when relevant** — `Engine_Errors` via `lib/sheets.js getRawSheetData(...)`, live ledger row counts, git log for the touched files.
+4. **SHOW Mike** the triage + reasoning + cascading risks BEFORE touching code.
+5. **REVERSE when evidence contradicts** the initial hypothesis (Phase A reversal is the canonical case; S200 cohort-C scope-expansion the most recent).
+6. **DOCUMENT** the measure-twice findings inline in commit messages — visible discipline is part of the work product.
+7. **For multi-commit batches**, re-run audits between commits to confirm the deltas (collision-audit script ran after every Phase B.x to confirm count drops).
+
+Full case studies + rationale: `/root/.claude/projects/-root-GodWorld/memory/feedback_measure-twice-cascading-effects.md`. Read once if context allows; otherwise the 7-step checklist above is sufficient.
+
+## Engine rules
+
 - 100+ script system with cascade dependencies. Check what reads/writes affected ctx fields before editing.
 - Never use `Math.random()` — use `ctx.rng` for deterministic simulation runs.
 - Never write directly to sheets — use write-intents (`ctx.writeIntents`). Only `phase10-persistence/` files execute sheet writes.

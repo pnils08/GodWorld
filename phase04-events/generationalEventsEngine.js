@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * GENERATIONAL EVENTS ENGINE V2.4 (schema-safe log + normalized calendar + deterministic RNG)
+ * GENERATIONAL EVENTS ENGINE V2.5 (schema-safe log + normalized calendar + deterministic RNG)
  * ============================================================================
  * Key fixes:
  * - LifeHistory_Log schema-safe writes: do NOT add/move columns; only fill existing,
@@ -8,6 +8,16 @@
  * - Normalize calendar season to lowercase for all comparisons.
  * - Deterministic RNG support: ctx.rng or ctx.config.rngSeed ^ cycle.
  * - Health lifecycle uses normalized weighted outcomes (stable probabilities).
+ *
+ * v2.5 Changes (S199, Phase B.3 collision sweep):
+ * - Renamed file-internal `createGenerationalBond_` → `createGenerationalBond_` to deconflict
+ *   Apps Script flat-namespace collision with bondEngine.js's heavyweight
+ *   createGenerationalBond_. The two functions had different slot semantics (this one
+ *   used slot 5/6 as `source`/`arcId`; bondEngine uses `origin`/`domainTag`).
+ *   Without the rename, alphabetical-load order had bondEngine's heavyweight
+ *   sheet-write version winning, hijacking this file's intended lightweight
+ *   in-memory `ctx.summary.relationshipBonds` push. Pure rename, 0 external
+ *   API change. 1 internal call site updated (line 309 wedding bond).
  * ============================================================================
  */
 
@@ -306,7 +316,7 @@ function runGenerationalEngine_(ctx) {
           ctx, row, iLife, iLastU, weddingResult, name, popId, neighborhood, cycle, lifeLog, calendarContext, logWidth
         ));
         if (weddingResult.spouseId) {
-          createBond_(ctx, popId, weddingResult.spouseId, "romantic", "wedding", "", neighborhood, "Married partners");
+          createGenerationalBond_(ctx, popId, weddingResult.spouseId, "romantic", "wedding", "", neighborhood, "Married partners");
         }
         updatedRows[r] = true;
         counts.weddings++;
@@ -1073,7 +1083,7 @@ function getCitizenBondsFromStorage_(ctx, citizenId) {
   return result;
 }
 
-function createBond_(ctx, citizenA, citizenB, bondType, source, arcId, neighborhood, notes) {
+function createGenerationalBond_(ctx, citizenA, citizenB, bondType, source, arcId, neighborhood, notes) {
   ctx.summary.relationshipBonds = ctx.summary.relationshipBonds || [];
   ctx.summary.relationshipBonds.push({
     citizenA: citizenA,

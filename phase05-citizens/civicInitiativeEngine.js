@@ -1,9 +1,22 @@
 /**
  * ============================================================================
- * civicInitiativeEngine_ v1.8
+ * civicInitiativeEngine_ v1.9
  * ============================================================================
  *
  * Tracks civic initiatives and resolves votes/outcomes when cycles match.
+ *
+ * v1.9 Changes (2026-05-03, S199 G-R11):
+ * - FEATURE: Phase-transition vote rescheduling. When an initiative is
+ *   status='visioning-complete' AND ImplementationPhase='vote-ready' AND
+ *   NextActionCycle > cycle, the engine writes VoteCycle = NextActionCycle
+ *   and Status = 'active'. Existing auto-bump (line 346 active→pending-vote)
+ *   then catches voteCycle === cycle+1 the same cycle; line-204 trigger
+ *   fires the resolver at the scheduled cycle. Closes G-R11 (Transit Hub
+ *   vote-that-didn't-trigger) and the broader bug class of "any vote that
+ *   needs a fresh schedule after a non-vote-resolving phase transition."
+ * - Added 2 column lookups: iImplementationPhase, iNextActionCycle.
+ * - Engine-internal trigger; no new ingest path; uses existing tracker fields.
+ * - Plan: docs/plans/2026-05-03-vote-trigger-mechanism.md
  *
  * v1.8 Changes (2026-02-18):
  * - FIX: Record all 9 individual council votes in Notes (was only 2 swing voters)
@@ -145,8 +158,8 @@ function runCivicInitiativeEngine_(ctx) {
   var iVetoReason = idx('VetoReason');             // v1.7
   var iOverrideVoteCycle = idx('OverrideVoteCycle');  // v1.7
   var iOverrideOutcome = idx('OverrideOutcome');   // v1.7
-  var iImplementationPhase = idx('ImplementationPhase');  // v1.8 (S199 G-R11) — phase-transition reschedule
-  var iNextActionCycle = idx('NextActionCycle');          // v1.8 (S199 G-R11) — names the future cycle for the vote
+  var iImplementationPhase = idx('ImplementationPhase');  // v1.9 (S199 G-R11) — phase-transition reschedule
+  var iNextActionCycle = idx('NextActionCycle');          // v1.9 (S199 G-R11) — names the future cycle for the vote
 
   // v1.2: Required header validation to prevent silent write failures
   var required = ['InitiativeID', 'Name', 'Type', 'Status', 'VoteCycle',
@@ -202,7 +215,7 @@ function runCivicInitiativeEngine_(ctx) {
       Logger.log('civicInitiativeEngine: Retrying delayed initiative ' + initId);
     }
 
-    // v1.8 (S199 G-R11): Phase-transition reschedule.
+    // v1.9 (S199 G-R11): Phase-transition reschedule.
     // When an initiative completes a non-vote-resolving phase (e.g., visioning)
     // and is flagged vote-ready with a future NextActionCycle, the engine must
     // schedule the council vote by bumping VoteCycle and flipping Status into

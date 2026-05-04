@@ -235,11 +235,15 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   // PHASE 6: EVENT PROCESSING + ANALYSIS
   // ═══════════════════════════════════════════════════════════
-  // NOTE (Session 30 audit): Phase 5 Tier-5 engines (Household, GenWealth,
-  // Education) and Phase 6 engines below use direct sheet writes instead of
-  // write-intents. This is intentional — subsequent engines in the sequence
-  // read from sheets updated by prior engines within the same cycle.
-  // See individual engine headers for details.
+  // NOTE: Phase 5 Tier-5 engines (HouseholdFormation, GenerationalWealth,
+  // EducationCareer, MigrationTracking) historically used direct sheet
+  // writes; the original Session-30 rationale was that subsequent engines
+  // read from sheets updated by prior engines. Phase 42 §5.6 (S188) replaced
+  // sheet-as-IPC with shared ctx.ledger (the chain still exists, but as
+  // in-memory mutation). Cohort-C migration completed S200 (commits a829c7f,
+  // ed25ea8, 7f95521, 93cd3a4). See PHASE_42_PATTERNS.md §5.6 + per-engine
+  // file headers. Phase 6 engines below have their own write semantics —
+  // not audited as part of S200 cohort-C work.
   safePhaseCall_(ctx, 'Phase6-FilterNoise', function() { filterNoiseEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Prioritize', function() { prioritizeEvents_(ctx); });
 
@@ -1540,11 +1544,15 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // PHASE 6: EVENT PROCESSING + ANALYSIS
   // ═══════════════════════════════════════════════════════════
-  // NOTE (Session 30 audit): Phase 5 Tier-5 engines (Household, GenWealth,
-  // Education) and Phase 6 engines below use direct sheet writes instead of
-  // write-intents. This is intentional — subsequent engines in the sequence
-  // read from sheets updated by prior engines within the same cycle.
-  // See individual engine headers for details.
+  // NOTE: Phase 5 Tier-5 engines (HouseholdFormation, GenerationalWealth,
+  // EducationCareer, MigrationTracking) historically used direct sheet
+  // writes; the original Session-30 rationale was that subsequent engines
+  // read from sheets updated by prior engines. Phase 42 §5.6 (S188) replaced
+  // sheet-as-IPC with shared ctx.ledger (the chain still exists, but as
+  // in-memory mutation). Cohort-C migration completed S200 (commits a829c7f,
+  // ed25ea8, 7f95521, 93cd3a4). See PHASE_42_PATTERNS.md §5.6 + per-engine
+  // file headers. Phase 6 engines below have their own write semantics —
+  // not audited as part of S200 cohort-C work.
   safePhaseCall_(ctx, 'Phase6-FilterNoise', function() { filterNoiseEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Prioritize', function() { prioritizeEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase6-Spotlights', function() { applyNamedCitizenSpotlights_(ctx); });

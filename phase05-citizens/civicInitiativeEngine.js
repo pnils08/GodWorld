@@ -238,7 +238,12 @@ function runCivicInitiativeEngine_(ctx) {
         iImplementationPhase >= 0 && iNextActionCycle >= 0) {
       var implPhase = (row[iImplementationPhase] || '').toString().toLowerCase();
       var nextCycle = Number(row[iNextActionCycle]) || 0;
-      if (implPhase === 'vote-ready' && nextCycle > cycle) {
+      // Inclusive comparison (>=) so a row that entered the current cycle with
+      // NextActionCycle === cycle (e.g., scheduled at a prior cycle but never
+      // rescheduled because v1.9 hadn't shipped yet — INIT-003 Transit Hub at
+      // C94) still fires. Same-cycle path: writes voteCycle = cycle, the
+      // line-204 trigger fires immediately downstream, no auto-bump needed.
+      if (implPhase === 'vote-ready' && nextCycle >= cycle) {
         var prevVoteCycle = voteCycle;
         row[iVoteCycle] = nextCycle;
         row[iStatus] = 'active';

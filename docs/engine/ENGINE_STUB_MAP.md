@@ -2557,12 +2557,7 @@ _(deleted S199 — confirmed-dead 523-LOC file. 9 of 10 functions had zero exter
 - **onOpen()**
 
 ### rollbackToCycle80.js
-- **rollbackToCycle80()**
-
-- **deleteRowsAfterCycle_(ss, sheetName, cycleColName, targetCycle)**
-
-- **resetCycleCounter_(ss, targetCycle)**
-  Sheets: World_Config
+_(deleted S199 — one-off C81 dry-run recovery script from f2d7ca4 ~13 cycles ago. Operationally dead at C93. Closed `deleteRowsAfterCycle_` + `resetCycleCounter_` namespace collisions with `utilities/cycleRollback.js`.)_
 
 ### rosterLookup.js
 - **loadRoster_()**

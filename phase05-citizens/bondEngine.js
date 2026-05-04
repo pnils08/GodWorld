@@ -1304,19 +1304,15 @@ function getBondCitizenArc_(ctx, citizenId) {
   return null;
 }
 
-function getCombinedEventBoost_(ctx, citizenId) {
-  var arc = getBondCitizenArc_(ctx, citizenId);
-  var arcBoost = 1.0;
-  if (arc) {
-    var phaseBoosts = { 'early': 1.2, 'rising': 1.5, 'peak': 2.0, 'decline': 1.3 };
-    arcBoost = phaseBoosts[arc.phase] || 1.0;
-  }
-
-  var allianceData = ctx.summary.allianceBenefits ? ctx.summary.allianceBenefits[citizenId] : null;
-  var allianceBoost = allianceData ? allianceData.boost : 1.0;
-
-  return Math.min(arcBoost * allianceBoost, 3.0);
-}
+// getCombinedEventBoost_ def deleted S199 (Phase B.6 collision dedup) —
+// canonical impl lives in phase05-citizens/runRelationshipEngine.js, resolved
+// via Apps Script flat namespace. NOTE — divergence preserved for future
+// audit: the runRelationshipEngine winner uses `citizenInActiveArc_` (object-
+// only) instead of `getBondCitizenArc_` (string-or-object) and its phaseBoosts
+// dict has 'mid' instead of 'rising' + adds 'resolved'=1.0. When bond infra
+// is restored, validate which arc-phase taxonomy is canonical (rising vs mid
+// — see processArcLifeCyclev1.js determinePhase_) and adjust the surviving
+// def if needed.
 
 
 // ============================================================

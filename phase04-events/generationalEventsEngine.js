@@ -1067,15 +1067,12 @@ function getOrdinal_(n) {
   return n + (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
-function getCitizenBondsFromStorage_(ctx, citizenId) {
-  var bonds = ctx.summary.relationshipBonds || [];
-  var result = [];
-  for (var i = 0; i < bonds.length; i++) {
-    var b = bonds[i];
-    if (b && b.status === "active" && (b.citizenA === citizenId || b.citizenB === citizenId)) result.push(b);
-  }
-  return result;
-}
+// getCitizenBondsFromStorage_ def deleted S199 (Phase B.6 collision dedup) —
+// canonical impl lives in phase05-citizens/bondPersistence.js, resolved via
+// Apps Script flat namespace. The bondPersistence winner now carries the
+// `status === 'active'` filter that this loser provided + adds POPID
+// normalization. Single caller (line ~655 wedding-bond chance) gets correct
+// active-romantic-only semantics either way.
 
 function createGenerationalBond_(ctx, citizenA, citizenB, bondType, source, arcId, neighborhood, notes) {
   ctx.summary.relationshipBonds = ctx.summary.relationshipBonds || [];

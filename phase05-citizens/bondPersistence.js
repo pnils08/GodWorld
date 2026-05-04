@@ -373,12 +373,19 @@ function purgeInactiveBonds_(ctx, maxAge) {
  * Get all bonds involving a specific citizen.
  */
 function getCitizenBondsFromStorage_(ctx, citizenId) {
+  // S199 Phase B.6: added `b.status === 'active'` filter — preserves the
+  // semantic intent of generationalEventsEngine.js's deleted duplicate, which
+  // is the sole caller (line ~655 wedding-bond chance computation reads only
+  // active romantic bonds; resolved/divorced bonds would falsely boost wedding
+  // chance otherwise). POPID normalization (trim+uppercase) preserved.
   var bonds = ctx.summary.relationshipBonds || [];
   var normalized = String(citizenId || '').trim().toUpperCase();
   var result = [];
   for (var i = 0; i < bonds.length; i++) {
     var b = bonds[i];
-    if (b && (String(b.citizenA || '').trim().toUpperCase() === normalized || String(b.citizenB || '').trim().toUpperCase() === normalized)) {
+    if (b && b.status === 'active' &&
+        (String(b.citizenA || '').trim().toUpperCase() === normalized ||
+         String(b.citizenB || '').trim().toUpperCase() === normalized)) {
       result.push(b);
     }
   }

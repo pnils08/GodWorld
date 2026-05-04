@@ -37,7 +37,16 @@ function detect(ctx) {
         x.affectedEntities && x.affectedEntities.initiatives &&
         x.affectedEntities.initiatives.includes(id)
       );
-      if (prev) { cyclesInState = (prev.cyclesInState || 0) + 1; break; }
+      // S199 fix: only carry-forward the prev count if phase still matches.
+      // Without this guard, a phase transition (e.g., INIT-003 vote-scheduled
+      // C92 → vote-ready C93) inherits the stale stuck count from the prior
+      // phase, reporting "89 cycles in vote-ready" when it just entered.
+      const prevPhase = prev && prev.evidence && prev.evidence.fields
+        && prev.evidence.fields.ImplementationPhase;
+      if (prev && prevPhase === phase) {
+        cyclesInState = (prev.cyclesInState || 0) + 1;
+        break;
+      }
       const priorRow = (p.snapshots && p.snapshots.Initiative_Tracker || [])
         .find(r => (r.InitiativeID || r.Name) === id);
       if (priorRow && priorRow.ImplementationPhase === phase) {

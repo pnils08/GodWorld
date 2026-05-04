@@ -1,7 +1,16 @@
 /**
  * ============================================================================
- * HOUSEHOLD FORMATION ENGINE v1.1
+ * HOUSEHOLD FORMATION ENGINE v1.2
  * ============================================================================
+ *
+ * v1.2 Phase 42 §5.6 alignment (S200):
+ * - Simulation_Ledger reads/writes route through shared ctx.ledger
+ *   (read-staleness + write-clobber bugs caught by S200 cohort-C audit;
+ *   S185 §5.6.6 audit had cleared this engine as orphan, missed because
+ *   the audit grepped file names instead of the exposed process*_ entry).
+ * - Household_Ledger + Family_Relationships writes remain direct: those
+ *   are own-tracking sheets, exempt per engine.md, and GenerationalWealth's
+ *   updateHouseholdWealth_ still reads Household_Ledger inline.
  *
  * v1.1 Fixes:
  * - FIX: Math.random() → ctx.rng for deterministic cycles
@@ -22,15 +31,7 @@
  * Integration:
  * - Called from Phase 05 after citizen events
  * - Requires Household_Ledger and Family_Relationships sheets
- * - Updates Simulation_Ledger with household linkage
- *
- * DIRECT WRITES (intentional — NOT legacy):
- * This engine uses direct setValue/appendRow instead of write-intents because
- * GenerationalWealth (next in Phase 5 sequence) reads Household_Ledger
- * immediately after this engine runs. Deferring writes to Phase 10 would
- * cause GenWealth to miss newly formed households.
- * Execution order: HouseholdFormation → GenerationalWealth → EducationCareer
- * (see godWorldEngine2.js lines 210-212)
+ * - Updates Simulation_Ledger HouseholdId via ctx.ledger.rows (Phase 10 commit)
  *
  * Story Hooks Generated:
  * - HOUSEHOLD_FORMED (severity 2): New household established
@@ -103,6 +104,10 @@ var BIRTH_MAX_PARENT_AGE = 45;
  * @returns {Object} - Processing results
  */
 function processHouseholdFormation_(ctx) {
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  if (!ctx.ledger) {
+    throw new Error('processHouseholdFormation_: ctx.ledger not initialized');
+  }
   var ss = ctx.ss;
   var cycle = ctx.config.cycleCount;
   var S = ctx.summary;
@@ -134,7 +139,7 @@ function processHouseholdFormation_(ctx) {
     }
 
     // Load citizen data
-    var citizens = loadCitizens_(ss);
+    var citizens = loadCitizens_(ctx);
     if (citizens.length === 0) {
       return results;
     }
@@ -145,7 +150,7 @@ function processHouseholdFormation_(ctx) {
     var households = loadHouseholds_(ss);
 
     // Form new households
-    var newHouseholds = formNewHouseholds_(ss, citizens, households, cycle, rng);
+    var newHouseholds = formNewHouseholds_(ctx, citizens, households, cycle, rng);
     results.householdsFormed = newHouseholds.length;
 
     // Process births
@@ -161,7 +166,7 @@ function processHouseholdFormation_(ctx) {
     results.divorces = divorces.length;
 
     // Update household incomes
-    updateHouseholdIncomes_(ss, households, citizens);
+    updateHouseholdIncomes_(ctx, households, citizens);
 
     // Detect household stress
     var stressedHouseholds = detectHouseholdStress_(ss, households);
@@ -212,32 +217,44 @@ function processHouseholdFormation_(ctx) {
 // DATA LOADING
 // ════════════════════════════════════════════════════════════════════════════
 
-function loadCitizens_(ss) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return [];
+function loadCitizens_(ctx) {
+  // Phase 42 §5.6: read from shared ctx.ledger; rowIndex maps to sheet row
+  // (ctx.ledger.rows[0] = sheet row 2, so rowIndex = i + 2 in body-row space).
+  var headers = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return [];
 
-  var data = sheet.getDataRange().getValues();
-  if (data.length < 2) return [];
+  var iPopId = headers.indexOf('POPID');
+  var iFirst = headers.indexOf('First');
+  var iLast = headers.indexOf('Last');
+  var iStatus = headers.indexOf('Status');
+  var iBirthYear = headers.indexOf('BirthYear');
+  var iNeighborhood = headers.indexOf('Neighborhood');
+  var iHouseholdId = headers.indexOf('HouseholdId');
+  var iMaritalStatus = headers.indexOf('MaritalStatus');
+  var iNumChildren = headers.indexOf('NumChildren');
+  var iParentIds = headers.indexOf('ParentIds');
+  var iChildrenIds = headers.indexOf('ChildrenIds');
 
-  var headers = data[0];
   var citizens = [];
 
-  for (var i = 1; i < data.length; i++) {
-    var row = data[i];
+  for (var i = 0; i < rows.length; i++) {
+    var row = rows[i];
 
     var citizen = {
-      rowIndex: i + 1,
-      popId: row[headers.indexOf('POPID')] || '',
-      first: row[headers.indexOf('First')] || '',
-      last: row[headers.indexOf('Last')] || '',
-      status: row[headers.indexOf('Status')] || 'active',
-      birthYear: row[headers.indexOf('BirthYear')] || 2000,
-      neighborhood: row[headers.indexOf('Neighborhood')] || '',
-      householdId: row[headers.indexOf('HouseholdId')] || '',
-      maritalStatus: row[headers.indexOf('MaritalStatus')] || 'single',
-      numChildren: row[headers.indexOf('NumChildren')] || 0,
-      parentIds: parseJSON(row[headers.indexOf('ParentIds')], []),
-      childrenIds: parseJSON(row[headers.indexOf('ChildrenIds')], [])
+      rowIndex: i + 2,  // sheet-row-1-indexed (body row i → sheet row i+2)
+      ledgerIndex: i,    // 0-indexed into ctx.ledger.rows (for direct mutation)
+      popId: row[iPopId] || '',
+      first: row[iFirst] || '',
+      last: row[iLast] || '',
+      status: row[iStatus] || 'active',
+      birthYear: row[iBirthYear] || 2000,
+      neighborhood: row[iNeighborhood] || '',
+      householdId: row[iHouseholdId] || '',
+      maritalStatus: row[iMaritalStatus] || 'single',
+      numChildren: row[iNumChildren] || 0,
+      parentIds: parseJSON(row[iParentIds], []),
+      childrenIds: parseJSON(row[iChildrenIds], [])
     };
 
     // Only process active citizens
@@ -295,7 +312,8 @@ function loadHouseholds_(ss) {
 // HOUSEHOLD FORMATION
 // ════════════════════════════════════════════════════════════════════════════
 
-function formNewHouseholds_(ss, citizens, existingHouseholds, cycle, rng) {
+function formNewHouseholds_(ctx, citizens, existingHouseholds, cycle, rng) {
+  var ss = ctx.ss;
   var newHouseholds = [];
   var currentYear = 2041;  // Simulation year — aligned with roster intake
 
@@ -319,9 +337,11 @@ function formNewHouseholds_(ss, citizens, existingHouseholds, cycle, rng) {
     }
   }
 
-  // Form single households
+  // Form single households. Household_Ledger writes stay direct (own tracking
+  // sheet, exempt per engine.md); SL HouseholdId mutation routes through
+  // ctx.ledger per Phase 42 §5.6.
   var householdSheet = ss.getSheetByName('Household_Ledger');
-  var simSheet = ss.getSheetByName('Simulation_Ledger');
+  var iLedgerHouseholdId = ctx.ledger.headers.indexOf('HouseholdId');
 
   for (var i = 0; i < eligibleSingles.length && i < 3; i++) {  // Limit to 3 per cycle
     var citizen = eligibleSingles[i];
@@ -349,7 +369,7 @@ function formNewHouseholds_(ss, citizens, existingHouseholds, cycle, rng) {
       lastUpdated: new Date()
     };
 
-    // Append to Household_Ledger
+    // Append to Household_Ledger (own tracking sheet — stays direct)
     householdSheet.appendRow([
       household.householdId,
       household.headOfHousehold,
@@ -367,11 +387,10 @@ function formNewHouseholds_(ss, citizens, existingHouseholds, cycle, rng) {
       household.lastUpdated
     ]);
 
-    // Update citizen's HouseholdId in Simulation_Ledger
-    var headers = simSheet.getRange(1, 1, 1, simSheet.getLastColumn()).getValues()[0];
-    var householdIdCol = headers.indexOf('HouseholdId') + 1;
-    if (householdIdCol > 0) {
-      simSheet.getRange(citizen.rowIndex, householdIdCol).setValue(householdId);
+    // Mutate citizen's HouseholdId in shared ctx.ledger; Phase 10 commits.
+    if (iLedgerHouseholdId >= 0 && citizen.ledgerIndex !== undefined) {
+      ctx.ledger.rows[citizen.ledgerIndex][iLedgerHouseholdId] = householdId;
+      ctx.ledger.dirty = true;
     }
 
     newHouseholds.push(household);
@@ -441,7 +460,8 @@ function processDivorces_(ss, citizens, households, cycle) {
 // HOUSEHOLD INCOME & STRESS
 // ════════════════════════════════════════════════════════════════════════════
 
-function updateHouseholdIncomes_(ss, households, citizens) {
+function updateHouseholdIncomes_(ctx, households, citizens) {
+  var ss = ctx.ss;
   var sheet = ss.getSheetByName('Household_Ledger');
   if (!sheet) return;
 
@@ -450,8 +470,9 @@ function updateHouseholdIncomes_(ss, households, citizens) {
 
   if (incomeCol === 0) return;
 
-  // Build income lookup from citizens (if Income column exists)
-  var citizenIncomes = buildCitizenIncomeLookup_(ss);
+  // Build income lookup from ctx.ledger (Phase 42 §5.6 — sees in-memory
+  // Income mutations from cohort-A run*Engine writers earlier in Phase 5).
+  var citizenIncomes = buildCitizenIncomeLookup_(ctx);
 
   for (var i = 0; i < households.length; i++) {
     var household = households[i];
@@ -491,23 +512,23 @@ function updateHouseholdIncomes_(ss, households, citizens) {
   }
 }
 
-function buildCitizenIncomeLookup_(ss) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return null;
+function buildCitizenIncomeLookup_(ctx) {
+  // Phase 42 §5.6: read from shared ctx.ledger; cohort-A income mutations
+  // (runCareerEngine, runEducationEngine etc.) live in ctx.ledger.rows by
+  // the time this runs in Phase 5.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return null;
 
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return null;
-
-  var header = values[0];
   var popIdCol = header.indexOf('POPID');
   var incomeCol = header.indexOf('Income');
 
   if (popIdCol < 0 || incomeCol < 0) return null;
 
   var lookup = {};
-  for (var r = 1; r < values.length; r++) {
-    var popId = values[r][popIdCol];
-    var income = Number(values[r][incomeCol]) || 0;
+  for (var r = 0; r < rows.length; r++) {
+    var popId = rows[r][popIdCol];
+    var income = Number(rows[r][incomeCol]) || 0;
     lookup[popId] = income;
   }
 

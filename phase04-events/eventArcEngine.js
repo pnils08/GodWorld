@@ -431,22 +431,9 @@ function generateSafeUuid_(rng) {
 /**
  * Helper: Check if citizen is in any active arc.
  */
-function citizenInActiveArc_(ctx, citizenId) {
-  var arcs = (ctx.summary && ctx.summary.eventArcs) || [];
-
-  for (var ai = 0; ai < arcs.length; ai++) {
-    var arc = arcs[ai];
-    if (!arc || arc.phase === 'resolved') continue;
-    var citizens = arc.involvedCitizens || [];
-    for (var ci = 0; ci < citizens.length; ci++) {
-      if (citizens[ci].id === citizenId) {
-        return arc;
-      }
-    }
-  }
-
-  return null;
-}
+// citizenInActiveArc_ def deleted S199 (Phase B.5 collision dedup) —
+// canonical impl lives in phase05-citizens/runRelationshipEngine.js,
+// resolved via Apps Script flat namespace.
 
 
 

@@ -1262,18 +1262,9 @@ function bondExists_(ctx, citizenA, citizenB) {
   return false;
 }
 
-function getCitizenBonds_(ctx, citizenId) {
-  var bonds = ctx.summary.relationshipBonds || [];
-  var result = [];
-  for (var i = 0; i < bonds.length; i++) {
-    var b = bonds[i];
-    if (b && b.status === BOND_STATUS.ACTIVE &&
-        (b.citizenA === citizenId || b.citizenB === citizenId)) {
-      result.push(b);
-    }
-  }
-  return result;
-}
+// getCitizenBonds_ def deleted S199 (Phase B.5 collision dedup) —
+// canonical impl lives in phase05-citizens/runRelationshipEngine.js (winner adds POPID normalization — strictly safer),
+// resolved via Apps Script flat namespace.
 
 function getRivalryIntensity_(ctx, citizenA, citizenB) {
   var bonds = ctx.summary.relationshipBonds || [];

@@ -8,15 +8,9 @@
  * Global per-cycle uniqueness: no duplicate "pick" anywhere in the cycle
  * ============================================================================
  */
-function mulberry32_(seed) {
-  return function rng() {
-    seed = (seed + 0x6D2B79F5) >>> 0;
-    var t = seed;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
+// mulberry32_ def deleted S199 (Phase B.5 collision dedup) —
+// canonical impl lives in phase07-evening-media/textureTriggers.js,
+// resolved via Apps Script flat namespace.
 
 function generateGenericCitizenMicroEvents_(ctx) {
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.

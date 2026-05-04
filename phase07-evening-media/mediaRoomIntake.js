@@ -790,18 +790,9 @@ function ensureCitizenMediaUsage_(ss) {
 // HELPER FUNCTIONS
 // ════════════════════════════════════════════════════════════════════════════
 
-function getCurrentCycleFromConfig_(ss) {
-  var configSheet = ss.getSheetByName('World_Config');
-  if (!configSheet) return 0;
-
-  var data = configSheet.getDataRange().getValues();
-  for (var i = 0; i < data.length; i++) {
-    if (data[i][0] === 'cycleCount') {
-      return Number(data[i][1]) || 0;
-    }
-  }
-  return 0;
-}
+// getCurrentCycleFromConfig_ def deleted S199 (Phase B.5 collision dedup) —
+// canonical impl lives in phase05-citizens/processAdvancementIntake.js (winner adds String().trim() — defensive),
+// resolved via Apps Script flat namespace.
 
 
 /**

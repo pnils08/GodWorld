@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * GENERATIONAL WEALTH ENGINE v2.0
+ * GENERATIONAL WEALTH ENGINE v2.1
  * ============================================================================
  *
  * Tracks wealth accumulation, inheritance, and economic mobility.
@@ -15,6 +15,20 @@
  * - Home ownership tracking
  * - Savings & debt management
  *
+ * v2.1 Phase 42 §5.6 alignment (S200):
+ * - Simulation_Ledger reads/writes route through shared ctx.ledger.
+ *   Pre-v2.1 the engine read SL via getDataRange (saw cycle-start state,
+ *   missed cohort-A in-memory mutations to Income/etc.) and wrote back via
+ *   direct setValues that Phase 10 commitSimulationLedger_ silently clobbered.
+ *   271/836 citizens (32%) hit the fallback recalc path per cycle, so the
+ *   clobber was material — unseeded Income + every WealthLevel + inheritance
+ *   distribution were all being lost. Caught by S200 cohort-C audit; S185's
+ *   §5.6.6 categorical orphan-clear missed it (audit grepped file names but
+ *   the cycle entry point is processGenerationalWealth_, not the file name).
+ * - Household_Ledger + Family_Relationships writes remain direct: those are
+ *   own-tracking sheets, exempt per engine.md, and updateHouseholdWealth_
+ *   still aggregates SL Income/WealthLevel into Household_Ledger inline.
+ *
  * v2.0 Changes (Phase 14.2):
  * - Income no longer recalculated from career bands for seeded citizens
  * - Career Engine directly adjusts income on transitions (+6-12% promo, etc.)
@@ -26,15 +40,7 @@
  * - Reads EconomicProfileKey to determine seeded vs unseeded citizens
  * - Career Engine adjusts Income directly on transitions (v14.2)
  * - Hooks into generationalEventsEngine.js death events
- * - Updates householdFormationEngine.js with real income
- *
- * DIRECT WRITES (intentional — NOT legacy):
- * This engine uses direct setValues instead of write-intents because:
- * 1. It reads Household_Ledger data written by HouseholdFormation (prior engine)
- * 2. EducationCareer (next engine) reads Income data written here
- * Deferring writes to Phase 10 would break the Phase 5 data chain.
- * Execution order: HouseholdFormation → GenerationalWealth → EducationCareer
- * (see godWorldEngine2.js lines 210-212)
+ * - Updates householdFormationEngine.js with real income via ctx.ledger
  *
  * Story Hooks:
  * - GENERATIONAL_WEALTH_TRANSFER (severity 5): Large inheritance received
@@ -111,10 +117,14 @@ var SAVINGS_RATE_BY_WEALTH = {
 // ════════════════════════════════════════════════════════════════════════════
 
 function processGenerationalWealth_(ctx) {
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  if (!ctx.ledger) {
+    throw new Error('processGenerationalWealth_: ctx.ledger not initialized');
+  }
   var ss = ctx.ss;
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
 
-  Logger.log('processGenerationalWealth_ v1.0: Starting...');
+  Logger.log('processGenerationalWealth_ v2.1: Starting...');
 
   var results = {
     processed: 0,
@@ -127,19 +137,19 @@ function processGenerationalWealth_(ctx) {
   // Step 1: Calculate citizen income from career data
   // v14.2: Now skips seeded citizens (income set by applyEconomicProfiles.js,
   // adjusted by Career Engine transitions). Only recalculates for unseeded citizens.
-  var incomeResults = calculateCitizenIncomes_(ss, ctx);
+  var incomeResults = calculateCitizenIncomes_(ctx);
   results.incomeUpdated = incomeResults.updated;
 
   // Step 2: Calculate wealth levels from income + assets
-  var wealthResults = calculateCitizenWealth_(ss);
+  var wealthResults = calculateCitizenWealth_(ctx);
   results.wealthUpdated = wealthResults.updated;
 
   // Step 3: Process inheritance for recent deaths
-  var inheritanceResults = processInheritance_(ss, ctx, cycle);
+  var inheritanceResults = processInheritance_(ctx, cycle);
   results.inheritanceProcessed = inheritanceResults.processed;
 
   // Step 4: Update household wealth aggregates
-  var householdResults = updateHouseholdWealth_(ss);
+  var householdResults = updateHouseholdWealth_(ctx);
   results.householdsUpdated = householdResults.updated;
 
   // Step 5: Track wealth mobility (upward/downward)
@@ -151,7 +161,7 @@ function processGenerationalWealth_(ctx) {
   results.homesPurchased = homeResults.purchased;
 
   Logger.log(
-    'processGenerationalWealth_ v1.0: Complete. ' +
+    'processGenerationalWealth_ v2.1: Complete. ' +
     'Income: ' + results.incomeUpdated + ', ' +
     'Wealth: ' + results.wealthUpdated + ', ' +
     'Inheritance: ' + results.inheritanceProcessed + ', ' +
@@ -167,15 +177,11 @@ function processGenerationalWealth_(ctx) {
 // INCOME CALCULATION
 // ════════════════════════════════════════════════════════════════════════════
 
-function calculateCitizenIncomes_(ss, ctx) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { updated: 0 };
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return { updated: 0 };
-
-  var header = values[0];
-  var rows = values.slice(1);
+function calculateCitizenIncomes_(ctx) {
+  // Phase 42 §5.6: read/mutate ctx.ledger.rows; Phase 10 commits.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { updated: 0 };
 
   var idx = function(n) { return header.indexOf(n); };
   var iIncome = idx('Income');
@@ -219,7 +225,7 @@ function calculateCitizenIncomes_(ss, ctx) {
   }
 
   if (updated > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+    ctx.ledger.dirty = true;
   }
 
   return { updated: updated };
@@ -265,15 +271,11 @@ function calculateIncomeFromBand_(incomeBand, tier, rng) {
 // WEALTH CALCULATION
 // ════════════════════════════════════════════════════════════════════════════
 
-function calculateCitizenWealth_(ss) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { updated: 0 };
-
-  var values = sheet.getDataRange().getValues();
-  if (values.length < 2) return { updated: 0 };
-
-  var header = values[0];
-  var rows = values.slice(1);
+function calculateCitizenWealth_(ctx) {
+  // Phase 42 §5.6: read/mutate ctx.ledger.rows; Phase 10 commits.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { updated: 0 };
 
   var idx = function(n) { return header.indexOf(n); };
   var iWealth = idx('WealthLevel');
@@ -283,7 +285,6 @@ function calculateCitizenWealth_(ss) {
   var iStatus = idx('Status');
   var iSavings = idx('SavingsRate');
   var iDebt = idx('DebtLevel');
-  var iHouseholdId = idx('HouseholdId');
 
   if (iWealth < 0 || iIncome < 0) return { updated: 0 };
 
@@ -317,7 +318,7 @@ function calculateCitizenWealth_(ss) {
   }
 
   if (updated > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+    ctx.ledger.dirty = true;
   }
 
   return { updated: updated };
@@ -359,7 +360,7 @@ function deriveWealthLevel_(income, inheritance, netWorth, debt) {
 // INHERITANCE PROCESSING
 // ════════════════════════════════════════════════════════════════════════════
 
-function processInheritance_(ss, ctx, cycle) {
+function processInheritance_(ctx, cycle) {
   // Check for recent deaths in ctx.summary.generationalEvents
   var events = (ctx.summary && ctx.summary.generationalEvents) || [];
   var deathEvents = events.filter(function(e) {
@@ -375,12 +376,12 @@ function processInheritance_(ss, ctx, cycle) {
     var deceasedId = deathEvent.popId;
     if (!deceasedId) continue;
 
-    // Get deceased's wealth
-    var deceasedWealth = getCitizenWealth_(ss, deceasedId);
+    // Get deceased's wealth (read from ctx.ledger — sees in-cycle mutations)
+    var deceasedWealth = getCitizenWealth_(ctx, deceasedId);
     if (deceasedWealth.netWorth <= 0) continue;
 
     // Find children/heirs
-    var heirs = findHeirs_(ss, deceasedId);
+    var heirs = findHeirs_(ctx, deceasedId);
     if (heirs.length === 0) continue;
 
     // Calculate inheritance (80% of net worth, 20% "lost" to taxes/fees)
@@ -388,7 +389,7 @@ function processInheritance_(ss, ctx, cycle) {
     var perHeir = Math.round(totalInheritance / heirs.length);
 
     // Distribute to heirs
-    distributeInheritance_(ss, heirs, perHeir, deceasedId, cycle);
+    distributeInheritance_(ctx, heirs, perHeir, deceasedId, cycle);
 
     // Generate story hook if significant
     if (totalInheritance > 50000) {
@@ -409,23 +410,23 @@ function processInheritance_(ss, ctx, cycle) {
   return { processed: processed };
 }
 
-function getCitizenWealth_(ss, popId) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return { netWorth: 0, wealthLevel: 0 };
+function getCitizenWealth_(ctx, popId) {
+  // Phase 42 §5.6: read from ctx.ledger so this sees inheritance distributions
+  // and other in-cycle mutations applied earlier in this same engine run.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return { netWorth: 0, wealthLevel: 0 };
 
-  var values = sheet.getDataRange().getValues();
-  var header = values[0];
   var idx = function(n) { return header.indexOf(n); };
-
   var iPOPID = idx('POPID');
   var iNetWorth = idx('NetWorth');
   var iWealth = idx('WealthLevel');
 
-  for (var r = 1; r < values.length; r++) {
-    if (values[r][iPOPID] === popId) {
+  for (var r = 0; r < rows.length; r++) {
+    if (rows[r][iPOPID] === popId) {
       return {
-        netWorth: Number(values[r][iNetWorth]) || 0,
-        wealthLevel: Number(values[r][iWealth]) || 0
+        netWorth: Number(rows[r][iNetWorth]) || 0,
+        wealthLevel: Number(rows[r][iWealth]) || 0
       };
     }
   }
@@ -433,22 +434,21 @@ function getCitizenWealth_(ss, popId) {
   return { netWorth: 0, wealthLevel: 0 };
 }
 
-function findHeirs_(ss, deceasedId) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return [];
+function findHeirs_(ctx, deceasedId) {
+  // Phase 42 §5.6: read from ctx.ledger.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return [];
 
-  var values = sheet.getDataRange().getValues();
-  var header = values[0];
   var idx = function(n) { return header.indexOf(n); };
-
   var iPOPID = idx('POPID');
   var iParentIds = idx('ParentIds');
   var iStatus = idx('Status');
 
   var heirs = [];
 
-  for (var r = 1; r < values.length; r++) {
-    var row = values[r];
+  for (var r = 0; r < rows.length; r++) {
+    var row = rows[r];
     var status = (row[iStatus] || 'active').toString().toLowerCase();
     if (status === 'deceased') continue;
 
@@ -466,38 +466,42 @@ function findHeirs_(ss, deceasedId) {
   return heirs;
 }
 
-function distributeInheritance_(ss, heirs, amountPerHeir, deceasedId, cycle) {
-  var sheet = ss.getSheetByName('Simulation_Ledger');
-  if (!sheet) return;
+function distributeInheritance_(ctx, heirs, amountPerHeir, deceasedId, cycle) {
+  // Phase 42 §5.6: mutate ctx.ledger.rows; flip dirty; Phase 10 commits.
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return;
 
-  var values = sheet.getDataRange().getValues();
-  var header = values[0];
-  var rows = values.slice(1);
   var idx = function(n) { return header.indexOf(n); };
-
   var iPOPID = idx('POPID');
   var iInheritance = idx('InheritanceReceived');
   var iNetWorth = idx('NetWorth');
 
+  var mutated = false;
   for (var r = 0; r < rows.length; r++) {
     var popId = rows[r][iPOPID];
     if (heirs.indexOf(popId) >= 0) {
       if (iInheritance >= 0) {
         rows[r][iInheritance] = (Number(rows[r][iInheritance]) || 0) + amountPerHeir;
+        mutated = true;
       }
       if (iNetWorth >= 0) {
         rows[r][iNetWorth] = (Number(rows[r][iNetWorth]) || 0) + amountPerHeir;
+        mutated = true;
       }
     }
   }
 
-  sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+  if (mutated) ctx.ledger.dirty = true;
 
-  // Also record in Family_Relationships
-  recordInheritanceInFamily_(ss, heirs, amountPerHeir, deceasedId, cycle);
+  // Also record in Family_Relationships (own-tracking sheet — stays direct).
+  recordInheritanceInFamily_(ctx, heirs, amountPerHeir, deceasedId, cycle);
 }
 
-function recordInheritanceInFamily_(ss, heirs, amount, deceasedId, cycle) {
+function recordInheritanceInFamily_(ctx, heirs, amount, deceasedId, cycle) {
+  // Family_Relationships is an own-tracking sheet (engine.md exempt) — direct
+  // read+write stays the same; only signature aligned to ctx for consistency.
+  var ss = ctx.ss;
   var sheet = ss.getSheetByName('Family_Relationships');
   if (!sheet) return;
 
@@ -538,19 +542,24 @@ function recordInheritanceInFamily_(ss, heirs, amount, deceasedId, cycle) {
 // HOUSEHOLD WEALTH AGGREGATION
 // ════════════════════════════════════════════════════════════════════════════
 
-function updateHouseholdWealth_(ss) {
+function updateHouseholdWealth_(ctx) {
+  // Phase 42 §5.6: SL read sources from ctx.ledger so it sees the Income +
+  // WealthLevel mutations calculateCitizenIncomes_/Wealth_ just made earlier
+  // in this same engine run. Household_Ledger read+write stays direct
+  // (own-tracking sheet, exempt per engine.md).
+  var ss = ctx.ss;
   var householdSheet = ss.getSheetByName('Household_Ledger');
-  var citizenSheet = ss.getSheetByName('Simulation_Ledger');
-  if (!householdSheet || !citizenSheet) return { updated: 0 };
+  if (!householdSheet) return { updated: 0 };
 
   var householdValues = householdSheet.getDataRange().getValues();
-  var citizenValues = citizenSheet.getDataRange().getValues();
-
-  if (householdValues.length < 2 || citizenValues.length < 2) return { updated: 0 };
+  if (householdValues.length < 2) return { updated: 0 };
 
   var hHeader = householdValues[0];
   var hRows = householdValues.slice(1);
-  var cHeader = citizenValues[0];
+
+  var cHeader = ctx.ledger.headers;
+  var citizenRows = ctx.ledger.rows;
+  if (!citizenRows.length) return { updated: 0 };
 
   var hidx = function(n) { return hHeader.indexOf(n); };
   var cidx = function(n) { return cHeader.indexOf(n); };
@@ -560,7 +569,6 @@ function updateHouseholdWealth_(ss) {
   var iHouseholdIncome = hidx('HouseholdIncome');
   var iSavingsBalance = hidx('SavingsBalance');
 
-  var iPopId = cidx('POPID');
   var iCitizenHousehold = cidx('HouseholdId');
   var iIncome = cidx('Income');
   var iWealth = cidx('WealthLevel');
@@ -574,13 +582,13 @@ function updateHouseholdWealth_(ss) {
     var householdId = household[iHouseholdId];
     if (!householdId) continue;
 
-    // Find all members
+    // Find all members (iterates ctx.ledger.rows — sees in-memory mutations)
     var totalIncome = 0;
     var totalWealth = 0;
     var memberCount = 0;
 
-    for (var c = 1; c < citizenValues.length; c++) {
-      var citizen = citizenValues[c];
+    for (var c = 0; c < citizenRows.length; c++) {
+      var citizen = citizenRows[c];
       if (citizen[iCitizenHousehold] === householdId) {
         totalIncome += Number(citizen[iIncome]) || 0;
         totalWealth += Number(citizen[iWealth]) || 0;

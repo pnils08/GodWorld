@@ -188,7 +188,7 @@ Google Sheets API export does NOT support revision-specific downloads (tested �
 - **EconomicProfileKey corrections:** 5 civic officials fixed — Mayor, Chief of Staff, Deputy Mayor, Communications Director, Council President all corrected from "City Council Aide" to actual titles.
 - **CitizenBio column (AT/col 46) added:** Stable 1-2 sentence narrative identity anchors for 17 T2 citizens. Unlike LifeHistory (which compacts into trait tags), CitizenBio persists permanently. Script: `scripts/applyCitizenBios.js`.
 - **Citizen_Media_Usage cleaned:** 1,221→500 rows. 288 C79 backlog rows removed, 433 duplicates removed, 267 dirty CitizenName values cleaned (stripped ages/neighborhoods/occupations). Processing flags reset. Script: `scripts/cleanCitizenMediaUsage.js`.
-- **Simulation_Ledger now has 46 columns (A–AT).** Column AT = CitizenBio.
+- **Simulation_Ledger now has 47 columns (A–AU).** Column AT = CitizenBio (added S99). Column AU = Gender (added since S99 — see LEDGER_AUDIT.md S199 refresh for current schema state).
 
 ### Practice sheet (reference):
 **ID:** `1EX3lBhcqnqyqXhbcjoNLLbjA2sx7gsENEVhEZdOmTN4` — keep as a pre-recovery snapshot.
@@ -209,7 +209,7 @@ Google Sheets API export does NOT support revision-specific downloads (tested �
 
 ## Simulation_Ledger Full Column Reference
 
-**675 citizens, 46 columns (A–AT).** Updated S99.
+**836 citizens, 47 columns (A–AU).** Updated S99 (AT CitizenBio); refreshed S199 (AU Gender + 836-row count). Live state authority: `LEDGER_AUDIT.md` §"Current State — S199 refresh".
 
 | Col | # | Header | Notes |
 |-----|---|--------|-------|
@@ -258,3 +258,5 @@ Google Sheets API export does NOT support revision-specific downloads (tested �
 | AQ | 43 | ReturnedCycle | Cycle they returned |
 | AR | 44 | EconomicProfileKey | Links to economic profile |
 | AS | 45 | EmployerBizId | Links to Business_Ledger |
+| AT | 46 | CitizenBio | Stable 1-2 sentence narrative identity anchor (S99 — applyCitizenBios.js) |
+| AU | 47 | Gender | Demographic gender (added post-S99 — verified by S199 audit) |

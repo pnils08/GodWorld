@@ -116,49 +116,51 @@ GodWorld uses 40+ Google Sheets ledgers across one spreadsheet. Google Sheets ha
 
 ## Top Bloat Risks — Detailed Breakdown
 
-### 1. LifeHistory_Log (RED)
+### 1. LifeHistory_Log (RED — partial mitigation in place)
 
-**The biggest problem.** At 2,552 rows and growing 20-50 per cycle, this sheet hits 10,000 rows around Cycle 250. Every citizen life event (career change, relationship, move, health event, media mention) appends a row.
+**Live S201:** 3,669 rows, 7 cols, growing ~93/cycle (was est. +20-50). Hits 10K wall around C200 if no archive run. Every citizen life event appends a row.
 
-**Current schema (9 cols):**
+**Current schema (7 cols, S201 verified live):**
 | Col | Header | Status |
 |-----|--------|--------|
 | A | Timestamp | Active |
 | B | POPID | Active |
-| C | Name | **DEAD** — redundant with POPID lookup |
+| C | Name | Active (writers populate; was flagged DEAD pre-S31 but S93 fixed empty-name writes — see LEDGER_REPAIR.md Step 6) |
 | D | EventTag | Active |
 | E | EventText | Active |
-| F | Neighborhood | **DEAD** — redundant with citizen's current neighborhood |
+| F | Neighborhood | Active |
 | G | Cycle | Active |
-| H | (empty) | **DEAD** — unused |
-| I | (empty) | **DEAD** — unused |
 
-**Remediation options:**
-1. **Archive old cycles** — Move rows older than 50 cycles to a `LifeHistory_Archive` sheet (highest impact)
-2. **Drop dead columns** — Remove Name (C), Neighborhood (F), and empty cols H-I (saves 4/9 cols = 44% cell reduction)
-3. **Enforce compression** — `compressLifeHistory.js` exists but needs regular scheduling to consolidate old entries
+(Pre-S31 schema had H/I empty cols — both removed; col count dropped 9→7.)
 
-**Priority:** HIGH — archive strategy needed before C150
+**Remediation status:**
+1. **Archive script: SHIPPED S31** — `maintenance/archiveLifeHistory.js` v1.0 (Apps Script, retain 50 cycles, lazy-create archive). Not run in production yet; would drop active sheet ~3,669 → ~1,400-1,750 rows at first run.
+2. **Compression: SHIPPED S116** — `compressLifeHistory.js` v1.5 runs automatically in Phase 9 every 5 cycles (PrevEvening tag added S116). Compresses old text into trait profiles + archetypes + last 20 entries on Simulation_Ledger.
+3. **Dead column drop** — Name + Neighborhood writes were briefly considered DEAD but are active again post-S93 (POPID→Name cross-reference fixes). No further drop needed.
 
-### 2. Simulation_Ledger.LifeHistory Column (RED)
+**Priority:** MEDIUM (was HIGH) — archive script ready; needs first production run before C200 (~10 cycles of headroom). Re-evaluate if growth rate climbs above ~100/cycle.
 
-The Simulation_Ledger itself has only 511 rows and grows slowly (new named citizens only). But column O (`LifeHistory`) stores the **full life history text** for each citizen, making it the heaviest single column in the spreadsheet — approximately 38% of the sheet's cell weight.
+### 2. Simulation_Ledger.LifeHistory Column (YELLOW — text bloat managed by compression)
 
-**Dead columns in Simulation_Ledger:**
+**Live S201:** 836 rows, 47 cols (A-AU). Grew +325 since S30 baseline (S184 +150 ingest dominated; pure citizen-emergence cadence is ~1-3/cycle). Column O (`LifeHistory`) stores the full life history text per citizen — heaviest single column in the spreadsheet by cell weight, but kept bounded by `compressLifeHistory.js` v1.5 (Phase 9, every 5 cycles) which compacts to trait profiles + archetypes + last 20 entries.
+
+**Dead column status (S201 reassessment):**
 | Col | Header | Status | Notes |
 |-----|--------|--------|-------|
-| C | Middle | **DEAD** | Almost always empty. Never read by any engine. |
+| C | Middle | DEAD | Almost always empty. Never read by any engine. |
 | I | ClockMode | **ACTIVE** | Read by 8+ engines. Gates ENGINE/GAME/CIVIC/MEDIA processing. Corrected S89. |
-| N | OrginCity | **DEAD** | Misspelled. Only set for game imports. Never read. |
-| Q | Last Updated | **DEAD** | Never read by any engine or consumer. |
-| S | UsageCount | **DEAD** | Never read. Was planned for media tracking. |
+| N | OrginCity | DEAD | Misspelled. Only set for game imports. Never read. |
+| Q | Last Updated | DEAD | Never read by any engine or consumer. |
+| S | UsageCount | DEAD | Never read. Was planned for media tracking. |
+| AT | CitizenBio | **ACTIVE** | Added S99 — stable narrative anchor for 17 T2 citizens. |
+| AU | Gender | **ACTIVE** | Added post-S99 — verified S199 audit. |
 
-**Remediation:**
-1. **Drop 4 dead columns** (Middle, OrginCity, Last Updated, UsageCount) — ClockMode is ACTIVE (read by 8+ engines, corrected S89)
-2. **Enforce LifeHistory compression** — cap text length, summarize old entries
-3. **Future:** Consider moving LifeHistory to a separate sheet with POPID key
+**Remediation status:**
+1. **Compression: SHIPPED S116** — `compressLifeHistory.js` v1.5 runs every 5 cycles automatically in Phase 9. Bounds text length per citizen.
+2. **Dead column drop** — 4 dead cols (Middle, OrginCity, Last Updated, UsageCount) still present. Drop is safe but low priority — they're empty cells, not bloat.
+3. **LifeHistory→separate sheet split** — deferred indefinitely; compression keeps it manageable.
 
-**Priority:** HIGH — text bloat affects load time for every script that reads Simulation_Ledger
+**Priority:** YELLOW — compression covers the text bloat case; col-drop is opportunistic.
 
 ### 3. WorldEvents_V3_Ledger (YELLOW → GREEN after v3.5)
 
@@ -239,16 +241,23 @@ Growing at 5-20 events per cycle. Was 29 columns with 22 dead. After v3.5 cleanu
 
 ## Archival Strategy
 
-### Priority 1: LifeHistory_Log Archive (Before C150)
+### Priority 0: Story_Seed_Deck Archive — SHIPPED + RAN S201
 
-**When:** After C100, or when row count exceeds 5,000
+**Status:** CLOSED. `maintenance/archiveStorySeeds.js` v1.0 shipped + ran S201. Moved 1,558 rows (C69-C88) to `Story_Seed_Deck_Archive`; retained 1,109 rows (C89-C93). Active sheet stays at ~1,100 rows steady-state with N=5 retention. Re-run periodically to maintain.
+
+**Cadence:** Manual for now. Could wire into Phase 9 maintenance pass alongside compressLifeHistory if drift recurs.
+
+### Priority 1: LifeHistory_Log Archive — SCRIPT SHIPPED, RUN PENDING
+
+**Status:** `maintenance/archiveLifeHistory.js` v1.0 (Apps Script) shipped S31. Has not run in production. Active sheet at 3,669 rows (S201 measure); first archive pass would drop to ~1,400-1,750 rows.
+
+**When to run:** Before C200 (currently ~10 cycles of headroom at ~93/cycle growth).
 **How:**
-1. Create `LifeHistory_Archive` sheet
-2. Move rows where `Cycle < (currentCycle - 50)` to archive
-3. Keep last 50 cycles in active sheet for engine access
-4. Run archive as part of cycle maintenance (manual or scripted)
+1. Run from Apps Script editor: select `archiveLifeHistoryDryRun` → Run (preview)
+2. Then `archiveLifeHistory` → Run (apply)
+3. Retains last 50 cycles; older rows move to `LifeHistory_Archive`
 
-**Impact:** Keeps active sheet under 2,000 rows indefinitely
+**Impact:** Keeps active sheet under 2,000 rows indefinitely with periodic runs.
 
 ### Priority 2: Dead Column Removal (Any Session)
 

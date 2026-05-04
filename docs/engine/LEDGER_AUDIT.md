@@ -25,7 +25,7 @@ This is the single tracking document for the Simulation_Ledger overhaul. All aud
 | POPID range | POP-00001 → POP-00951 | new max +150 (was → POP-00801) | |
 | POPID gaps | 115 | unchanged | Same gap pattern persists |
 | Tier distribution | 21 T1 / 64 T2 / 210 T3 / 541 T4 | T1 +4 / T2 +4 / T3 -8 / T4 +150 | T4 surge from female-balance ingest (all T4 ENGINE) |
-| Status enum | 675 Active + **151 active (lowercase)** + 9 Retired + 1 Recovering | new lowercase 'active' cohort = drift | **NEW DRIFT** — see below |
+| Status enum | 826 Active + 9 Retired + 1 Recovering | drift closed | **CLOSED S201** — was 151 lowercase 'active' from S184 ingest writer; writer fixed (`scripts/ingestFemaleCitizensBalance.js:312`) + 151 cells normalized via service account |
 | Age sanity (2041 anchor) | 0 out-of-bounds | unchanged | All BirthYear values yield ages 0–110 ✓ |
 | RoleType="Citizen" sentinel | **0 citizens** | -4 (was 4) | **CLOSED S184** Path B demographic-voice fallback (ENGINE_REPAIR Row 17) |
 | Non-canon-12 neighborhoods | **219 citizens / 8 variants** | NEW DRIFT surfaced | See drift section below |
@@ -58,7 +58,7 @@ S184 ingest added 150 T4 ENGINE citizens (vs S181's 384 → S199's 530). T1 grew
 
 ### Drift surfaced by S199 audit
 
-1. **Status enum case-mismatch — 151 lowercase 'active' rows (NEW S199).** Was 1 lowercase 'recovering' at S181; now 151 'active' (lowercase). Origin: most likely the S184 female-balance ingest writer used lowercase 'active' literal (`row[iStatus] = 'active'`) instead of canonical 'Active'. Downstream consumers that case-fold are fine; consumers that hardcode `=== 'Active'` would skip these 151 rows. **Tracked separately:** worth a 1-line normalization pass via service account when convenient (sed-like rewrite of column G), AND a writer-side fix to use 'Active' (capital A) in the ingest path.
+1. **Status enum case-mismatch — CLOSED S201.** Was 151 lowercase 'active' rows at S199 audit (was 1 lowercase 'recovering' at S181). Origin confirmed: `scripts/ingestFemaleCitizensBalance.js:312` set `'active'` literal during S184 female-balance ingest of POP-00802..00951 (150 rows) plus POP-00044 (Elliott Crane, D6 council Tier-2 — pre-existing 1 from prior S181 'recovering' lowercase entry that drifted to lowercase 'active' between S181 and S199). Cascading-effects audit S201: zero engine code strict-compares SL.Status === 'Active' (godWorldEngine2.js:1104 only filters 'Deceased'; generateMonthlyCivicSweep.js:111 lowercases first; godWorldEngine2.js:961 + processIntakeV3.js:90 propagate as-is; checkForPromotions.js:363 reads Generic_Citizens not SL; all consumer scripts handle both cases). Fix S201: writer-side `'active'` → `'Active'` + 151-cell live normalization via `lib/sheets.batchUpdate`. Live post-state: 826 Active + 9 Retired + 1 Recovering = 836 (zero lowercase remaining).
 
 2. **Non-canon-12 neighborhood drift — 219 citizens across 8 variants (NEW S199).** Distribution:
    - 84 Uptown

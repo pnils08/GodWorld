@@ -309,7 +309,7 @@ async function main() {
     set('ClockMode', 'ENGINE');
     set('Tier', 4);
     set('RoleType', g.profile.RoleType);
-    set('Status', 'active');
+    set('Status', 'Active');  // S201: was 'active' lowercase — caused 151 lowercase drift on SL; matches canonical case used by godWorldEngine2.js + checkForPromotions.js + processAdvancementIntake.js
     set('BirthYear', g.birthYear);
     set('CreatedAt', nowIso);
     set('Last Updated', nowIso);

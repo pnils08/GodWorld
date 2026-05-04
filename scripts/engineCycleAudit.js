@@ -178,7 +178,12 @@ function auditDeterminismBreak() {
       const lines = content.split('\n');
       lines.forEach((line, i) => {
         if (!/Math\.random\s*\(/.test(line)) return;
-        if (/\/\//.test(line.split('Math.random')[0] || '')) return; // comment before usage
+        // JSDoc/block-comment continuation lines start with optional whitespace
+        // then `*` — every Math.random reference inside a /** ... */ block hits
+        // this. Catches all 13 S199-baseline false-positives across 13 engine
+        // files which describe S156 fixes in changelog blocks.
+        if (/^\s*\*/.test(line)) return;
+        if (/\/\//.test(line.split('Math.random')[0] || '')) return; // line-comment before usage
         if (/throw/.test(line)) return; // throw-guard pattern
         hits++;
         if (examples.length < 5) {

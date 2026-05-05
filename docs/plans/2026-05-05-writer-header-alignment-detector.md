@@ -3,7 +3,7 @@ title: Writer-vs-Header Schema Alignment Detector Plan
 created: 2026-05-05
 updated: 2026-05-05
 type: plan
-tags: [engine, infrastructure, audit, draft]
+tags: [engine, infrastructure, audit, complete]
 sources:
   - SESSION_CONTEXT.md (S201 §5 — Story_Seed_Deck/Story_Hook_Deck header drift incident; 469 stale cells, ~10 cycles of silently-dropped engine routing data)
   - docs/plans/2026-05-03-run-cycle-gap-log-surface.md (parent — V2 detector class slot)
@@ -51,7 +51,15 @@ For each writer, compare expected col positions against `schemas/SCHEMA_HEADERS.
 
 ---
 
-## Phase 1 — Design grill (open questions for Mike)
+## Phase 1 — Design grill (CLOSED S202)
+
+**All five questions: Mike approved recommendations as drafted ("all five rec — go"). Phase 2 build executed same session.**
+
+- Q1 → (a) new 9th class `header-drift`
+- Q2 → (b) schema-aware writers only (auto-filtered: ≥1 field-name lookup OR setValues width ≥ 4)
+- Q3 → (b) synthetic fixture (`scripts/engineCycleAuditTest.js`)
+- Q4 → (a) literal-only regex with local-helper resolution (`var col = function(name) { return headers.indexOf(name); }` pattern)
+- Q5 → (a) per-cycle in §Step 6 alongside V1 classes
 
 ### Q1 — Class taxonomy: 9th class or sub-class?
 
@@ -111,7 +119,7 @@ Tasks below are placeholders pending grill answers.
 ### Task 2.1: Add `header-drift` class (or sub-class) to engineCycleAudit.js
 
 - **Files:** `scripts/engineCycleAudit.js` — modify
-- **Status:** [ ] blocked on Q1
+- **Status:** [x] DONE S202
 - Add detector function reading from writer-set + SCHEMA_HEADERS regen
 - Severity rules per Type 1-4 above
 - Output entries follow existing G-EC{N} numbering scheme
@@ -119,14 +127,14 @@ Tasks below are placeholders pending grill answers.
 ### Task 2.2: Define writer-set scope
 
 - **Files:** `scripts/engineCycleAudit.js` (writer-set constant)
-- **Status:** [ ] blocked on Q2
+- **Status:** [x] DONE S202
 - Source: engine.md documented direct-write exceptions
 - Filter per Q2 outcome
 
 ### Task 2.3: Self-test fixture
 
 - **Files:** `scripts/engineCycleAudit.test.js` (new) or inline test in detector
-- **Status:** [ ] blocked on Q3
+- **Status:** [x] DONE S202
 - Synthesize pre-S201 schema for Story_Seed_Deck / Story_Hook_Deck
 - Run detector; assert it produces HIGH-severity entries for the known drift
 - Run detector with current SCHEMA_HEADERS; assert 0 HIGH
@@ -134,13 +142,13 @@ Tasks below are placeholders pending grill answers.
 ### Task 2.4: Field-name extraction
 
 - **Files:** `scripts/engineCycleAudit.js` (helper)
-- **Status:** [ ] blocked on Q4
+- **Status:** [x] DONE S202
 - Per Q4 outcome: regex / AST / manual annotation
 
 ### Task 2.5: SKILL.md wiring
 
 - **Files:** `.claude/skills/run-cycle/SKILL.md`
-- **Status:** [ ] blocked on Q5 + parent class taxonomy decision
+- **Status:** [x] DONE S202
 - Add detector to §Step 6 listing
 - Update class taxonomy listing if Q1 = (a)
 
@@ -171,3 +179,4 @@ All five are Phase 1 grill items above. Hold pending Mike review.
 ## Changelog
 
 - 2026-05-05 — Initial draft (S202). Triggered by LEDGER_HEAT_MAP §Dead Column Inventory + §Column Cleanup Roadmap re-audit (S202 audit pass) which surfaced the structural drift class as a recurring pattern (S201 Story_Seed_Deck/Story_Hook_Deck case + S202-found Storyline_Intake/Citizen_Usage_Intake schema-shrink with no writer update). 5 open questions for grill. Status: DRAFT.
+- 2026-05-05 — Phase 1 grill closed (Mike approved all 5 recs); Phase 2 built end-to-end same session (S202 engine-sheet). `header-drift` class added to `scripts/engineCycleAudit.js` (~150 LOC: detector + parser + writer-scan + pure-check). Synthetic-fixture self-test at `scripts/engineCycleAuditTest.js` (10/10 pass — pre-S201 schema flags 4 drift entries, post-S201 produces 0, case-mismatch + trim-tolerance both behave correctly). SKILL.md §Step 6 wiring updated. **First-run finding (C93 repo state): 17 entries — 0 HIGH, 17 MED. 8 confirmed silent-fail bugs** (case-mismatch in `mediaRoomIntake.js` + `finalizeWorldPopulation.js` calling `idx('season')` against PascalCase `'Season'` headers — `headers.indexOf` is case-sensitive, every cycle gets default/empty calendar context silently). Remaining 9 entries are defensive-fallback patterns (`'NH' || 'Neighborhood'`, `'OrginCity' || 'OriginCity'`, etc.) or possibly-legacy field references (storylineWeavingEngine: CitizenRoles/ConflictType/RelationshipImpact/CrossStorylineLinks; cycleExportAutomation: AbsoluteCycle). Status: COMPLETE.

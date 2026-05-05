@@ -50,7 +50,9 @@ Run the mechanical baseline audit and append judgment-layer entries.
 node scripts/engineCycleAudit.js {XX} --write
 ```
 
-Writes `output/production_log_run_cycle_c{XX}_gaps.md` with `[mechanical]`-tagged entries across 4 V1 detector classes (`writeback-drift`, `math-anomaly`, `cross-cycle-debt`, `determinism-break`). 4 V2-pending classes (`phase-skip`, `cohort-collision`, `phase-ordering`, `silent-fail`) appended as stubs — they need an engine-run-log ingest path that doesn't exist yet.
+Writes `output/production_log_run_cycle_c{XX}_gaps.md` with `[mechanical]`-tagged entries across 5 detector classes (`writeback-drift`, `math-anomaly`, `cross-cycle-debt`, `determinism-break`, `header-drift`). 4 V2-runtime classes (`phase-skip`, `cohort-collision`, `phase-ordering`, `silent-fail`) appended as stubs — they need an engine-run-log ingest path that doesn't exist yet.
+
+`header-drift` (S202 build) is a structural class — runs against repo state vs `schemas/SCHEMA_HEADERS.md`, flags writers whose field-name lookups or `setValues()` ranges don't match live headers. Self-test: `node scripts/engineCycleAuditTest.js` (synthetic fixture validating the detector would have caught the S201 Story_Seed_Deck/Story_Hook_Deck drift). Plan: `docs/plans/2026-05-05-writer-header-alignment-detector.md`.
 
 After the script runs, engine-sheet appends `[judgment]` entries below the `<!-- end mechanical pass -->` footer marker. The script preserves anything below that marker on re-run, so judgment entries survive a re-audit pass.
 

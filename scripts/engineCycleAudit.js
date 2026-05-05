@@ -5,7 +5,7 @@
  * Usage: node scripts/engineCycleAudit.js <cycle> [--write]
  *
  * Reads the cycle's audit artifacts in output/, runs mechanical checks per the
- * 8-class taxonomy, and emits gap-log entries to:
+ * 9-class taxonomy, and emits gap-log entries to:
  *   output/production_log_run_cycle_c<XX>_gaps.md
  *
  * Default is dry-run (prints to stdout). --write replaces the file
@@ -13,19 +13,21 @@
  * the mechanical pass are preserved by writing them BELOW the mechanical
  * footer marker — re-run keeps anything below the marker).
  *
- * Classes implemented in V1 (data already exists in repo):
+ * Classes implemented in V1 + V2-structural (data in repo):
  *   - writeback-drift    (engine_audit_c<XX>.json type=writeback-drift)
  *   - math-anomaly       (engine_audit_c<XX>.json type=math-imbalance)
  *   - cross-cycle-debt   (engine_audit_c<XX>.json type=stuck-initiative >= 2 cycles)
  *   - determinism-break  (grep engine source for Math.random/Date.now leaks)
+ *   - header-drift       (writer field-name + range writes vs schemas/SCHEMA_HEADERS.md)
  *
- * Classes pending engine-run-log ingest (V2 — Apps Script log capture):
+ * Classes pending engine-run-log ingest (V2-runtime — Apps Script log capture):
  *   - phase-skip
  *   - cohort-collision
  *   - phase-ordering
  *   - silent-fail
  *
  * Plan: docs/plans/2026-05-03-run-cycle-gap-log-surface.md
+ * header-drift detector plan: docs/plans/2026-05-05-writer-header-alignment-detector.md
  * Surfaced: SESSION_CONTEXT.md S197 meta-gap on run-cycle observation surface
  */
 
@@ -61,14 +63,15 @@ function main() {
     });
   }
   findings.push(...auditDeterminismBreak());
+  findings.push(...auditHeaderDrift());
 
-  // V2-pending classes — need engine-run-log ingest path
+  // V2-runtime classes — need engine-run-log ingest path
   for (const cls of ['phase-skip', 'cohort-collision', 'phase-ordering', 'silent-fail']) {
     findings.push({
       class: cls,
       severity: 'INFO',
       pending: true,
-      title: `${cls} — V2-pending (engine-run-log ingest path not yet built)`,
+      title: `${cls} — V2-runtime (engine-run-log ingest path not yet built)`,
       diagnosis: `Detection requires Apps Script execution-log capture into the local repo. /run-cycle Step 3 currently runs engine in Google's cloud and does not persist execution logs locally. When that ingest path lands, this class becomes mechanically detectable.`,
     });
   }
@@ -205,6 +208,199 @@ function auditDeterminismBreak() {
 }
 
 // ---------------------------------------------------------------------------
+// V2-structural detector — header-drift
+// ---------------------------------------------------------------------------
+
+function auditHeaderDrift() {
+  // Repo-state check: writer field-name + range writes vs live SCHEMA_HEADERS.
+  // Scope per Q2: schema-aware writers only — files with >=1 string-literal
+  // field-name lookup OR a setValues call with width >= 4. Non-schema writers
+  // (timestamp appenders, single-cell setters) cannot drift in this class.
+  const schemaPath = path.join(ROOT, 'schemas', 'SCHEMA_HEADERS.md');
+  if (!fs.existsSync(schemaPath)) {
+    return [{
+      class: 'header-drift',
+      severity: 'HIGH',
+      title: 'schemas/SCHEMA_HEADERS.md missing — header-drift detector cannot run',
+      diagnosis: `Detector requires schemas/SCHEMA_HEADERS.md (regen via utilities/exportSchemaHeaders.js). Run that helper from Apps Script and commit the regen, then re-run.`,
+    }];
+  }
+  const schema = parseSchemaHeaders(fs.readFileSync(schemaPath, 'utf8'));
+
+  const writers = [];
+  const writerDirs = ['phase01-init', 'phase02-world-state', 'phase03-population',
+    'phase04-events', 'phase05-citizens', 'phase06-analysis', 'phase07-evening-media',
+    'phase08-tracking', 'phase08-v3-chicago', 'phase09-cycle', 'phase10-persistence',
+    'phase11-storyline-management', 'lib', 'utilities']
+    .map(d => path.join(ROOT, d))
+    .filter(d => fs.existsSync(d));
+
+  for (const dir of writerDirs) {
+    walkJs(dir, (file, content) => {
+      const w = scanWriterFile(file, content);
+      if (w.fieldNames.length === 0 && !w.rangeWrites.some(r => r.width >= 4)) return;
+      writers.push(w);
+    });
+  }
+
+  return runHeaderDriftCheck(schema, writers);
+}
+
+// Pure check — exposed for synthetic-fixture test (engineCycleAuditTest.js).
+function runHeaderDriftCheck(schema, writers) {
+  const out = [];
+  const allHeaders = new Set();
+  const allHeadersTrimmed = new Set();
+  const allHeadersLower = new Map(); // lower → original
+  for (const s of Object.values(schema)) {
+    for (const h of s.headers) {
+      allHeaders.add(h);
+      allHeadersTrimmed.add(h.trim());
+      allHeadersLower.set(h.trim().toLowerCase(), h.trim());
+    }
+  }
+
+  for (const w of writers) {
+    // Type 2 — field-name not in any live header.
+    // Compare with trim() on both sides (defensive trailing-space tolerance).
+    // If only difference is case, escalate diagnosis — `headers.indexOf` is
+    // case-sensitive so the lookup silently returns -1 in production.
+    for (const fn of w.fieldNames) {
+      const fnTrim = fn.trim();
+      if (allHeadersTrimmed.has(fnTrim)) continue; // exact match (mod whitespace)
+      const caseMatch = allHeadersLower.get(fnTrim.toLowerCase());
+      if (caseMatch) {
+        out.push({
+          class: 'header-drift',
+          severity: 'MED',
+          title: `${path.basename(w.file)} case-mismatch: '${fn}' vs live header '${caseMatch}' (silent-fail)`,
+          diagnosis: `Type 2 (case mismatch). ${path.relative(ROOT, w.file)} calls field-name lookup with literal '${fn}'; live header is '${caseMatch}'. \`headers.indexOf\` is case-sensitive — lookup returns -1 every cycle and the writer falls through to default/skip path silently. Sheet target${w.sheets.length === 1 ? '' : 's'}: ${w.sheets.join(', ') || '(unknown)'}.`,
+          sourceRef: path.relative(ROOT, w.file),
+        });
+        continue;
+      }
+      out.push({
+        class: 'header-drift',
+        severity: 'MED',
+        title: `${path.basename(w.file)} references field-name '${fn}' not in any live header`,
+        diagnosis: `Type 2 (field-name mismatch). ${path.relative(ROOT, w.file)} performs a string-literal field-name lookup for '${fn}'; no sheet in schemas/SCHEMA_HEADERS.md has this column. Either header was renamed/dropped without updating the writer, or this is a defensive-fallback literal (writer checks both '${fn}' and a sibling that does match). Sheet target${w.sheets.length === 1 ? '' : 's'}: ${w.sheets.join(', ') || '(unknown)'}.`,
+        sourceRef: path.relative(ROOT, w.file),
+      });
+    }
+
+    // Type 1 — single-sheet writer's max col exceeds sheet colCount (out-of-range / schema-shrunk).
+    if (w.sheets.length === 1) {
+      const target = schema[w.sheets[0]];
+      if (target) {
+        for (const r of w.rangeWrites) {
+          if (r.maxCol == null) continue;
+          if (r.maxCol > target.colCount) {
+            out.push({
+              class: 'header-drift',
+              severity: 'HIGH',
+              title: `${path.basename(w.file)} writes col ${r.maxCol} on '${w.sheets[0]}' (sheet has ${target.colCount} cols)`,
+              diagnosis: `Type 1 (out-of-range write) / Type 4 (schema-shrunk writer). Writer's getRange(...).setValues() targets max col ${r.maxCol} (col=${r.col}, width=${r.width}); live sheet '${w.sheets[0]}' has ${target.colCount} cols. Either sheet schema shrunk and writer didn't follow, or write would silently extend the sheet schema.`,
+              sourceRef: `${path.relative(ROOT, w.file)} (line ${r.line})`,
+            });
+          }
+        }
+      } else {
+        // Sheet target named but absent from SCHEMA_HEADERS — possible deletion / typo / unscanned tab.
+        out.push({
+          class: 'header-drift',
+          severity: 'LOW',
+          title: `${path.basename(w.file)} targets sheet '${w.sheets[0]}' not in SCHEMA_HEADERS`,
+          diagnosis: `Sheet '${w.sheets[0]}' referenced in writer but absent from schemas/SCHEMA_HEADERS.md. Sheet may be hidden (exportSchemaHeaders.js skips hidden tabs per utilities/exportSchemaHeaders.js:150), deleted, or renamed. Manual review.`,
+          sourceRef: path.relative(ROOT, w.file),
+        });
+      }
+    }
+  }
+
+  return out;
+}
+
+function parseSchemaHeaders(md) {
+  // Markdown shape per sheet:
+  //   ## SheetName
+  //   - **Rows:** N
+  //   - **Columns:** M
+  //   | Col | Header |
+  //   |-----|--------|
+  //   | A   | First  |
+  //   ...
+  const schema = {};
+  const sections = md.split(/\n## /);
+  for (let i = 1; i < sections.length; i++) {
+    const sec = sections[i];
+    const nameMatch = sec.match(/^([^\n]+)/);
+    if (!nameMatch) continue;
+    const name = nameMatch[1].trim();
+    const colMatch = sec.match(/\*\*Columns:\*\*\s*(\d+)/);
+    const colCount = colMatch ? parseInt(colMatch[1], 10) : 0;
+    const headers = [];
+    const tableLines = sec.split('\n').filter(l => /^\|\s*[A-Z]+\s*\|/.test(l));
+    for (const line of tableLines) {
+      const parts = line.split('|').map(s => s.trim());
+      // ['', 'A', 'First', '']
+      if (parts.length >= 3 && parts[2]) headers.push(parts[2]);
+    }
+    schema[name] = { headers, colCount };
+  }
+  return schema;
+}
+
+function scanWriterFile(file, content) {
+  const sheets = new Set();
+  for (const m of content.matchAll(/\bgetSheetByName\s*\(\s*['"]([^'"]+)['"]\s*\)/g)) {
+    sheets.add(m[1]);
+  }
+
+  const fieldNames = new Set();
+  // Direct: headers.indexOf('Foo'), findCol_('Foo'), headerCol_('Foo')
+  for (const m of content.matchAll(/\bheaders\.indexOf\s*\(\s*['"]([^'"]+)['"]\s*\)/g)) {
+    fieldNames.add(m[1]);
+  }
+  for (const m of content.matchAll(/\b(?:findCol_|headerCol_)\s*\(\s*['"]([^'"]+)['"]\s*\)/g)) {
+    fieldNames.add(m[1]);
+  }
+  // Local-helper resolution: var col = function(name) { return headers.indexOf(name); } then col('Foo')
+  const helperNames = [];
+  for (const m of content.matchAll(/(?:var|let|const)\s+(\w+)\s*=\s*function\s*\([^)]*\)\s*\{\s*return\s+headers\.indexOf/g)) {
+    helperNames.push(m[1]);
+  }
+  for (const m of content.matchAll(/(?:var|let|const)\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*headers\.indexOf/g)) {
+    helperNames.push(m[1]);
+  }
+  for (const helperName of helperNames) {
+    const re = new RegExp(`\\b${helperName}\\s*\\(\\s*['"]([^'"]+)['"]\\s*\\)`, 'g');
+    for (const m of content.matchAll(re)) fieldNames.add(m[1]);
+  }
+
+  // Range writes: getRange(rowExpr, colExpr, hExpr, wExpr).setValues
+  const rangeWrites = [];
+  const lines = content.split('\n');
+  const rangeRe = /\.getRange\s*\(\s*[^,)]+\s*,\s*([^,)]+)\s*,\s*[^,)]+\s*,\s*([^,)]+)\s*\)\.setValues\b/g;
+  lines.forEach((line, i) => {
+    for (const m of line.matchAll(rangeRe)) {
+      const colExpr = m[1].trim();
+      const widthExpr = m[2].trim();
+      const colNum = /^\d+$/.test(colExpr) ? parseInt(colExpr, 10) : null;
+      const widthNum = /^\d+$/.test(widthExpr) ? parseInt(widthExpr, 10) : null;
+      const maxCol = (colNum != null && widthNum != null) ? colNum + widthNum - 1 : null;
+      rangeWrites.push({ col: colNum, width: widthNum, maxCol, line: i + 1 });
+    }
+  });
+
+  return {
+    file,
+    sheets: Array.from(sheets),
+    fieldNames: Array.from(fieldNames),
+    rangeWrites,
+  };
+}
+
+// ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
@@ -276,13 +472,13 @@ function emit(cycle, findings, auditJson, writeMode) {
     md += `**Cycle headline metrics:** ${s.highSeverity || 0} HIGH / ${s.mediumSeverity || 0} MED / ${s.lowSeverity || 0} LOW patterns flagged by engineAuditor; ${s.improvements || 0} improvements; ${s.incoherence || 0} incoherence findings. Pattern types: ${Object.entries(s.byType || {}).map(([k, v]) => `${k}=${v}`).join(', ')}.\n\n`;
   }
 
-  md += `**Mechanical pass:** ${realCount} entr${realCount === 1 ? 'y' : 'ies'} (HIGH ${summary.HIGH}, MED ${summary.MED}, LOW ${summary.LOW}). 4 V2-pending classes appended below.\n\n`;
-  md += `**Taxonomy** (8 classes per plan): \`phase-skip\` \`writeback-drift\` \`cohort-collision\` \`math-anomaly\` \`determinism-break\` \`phase-ordering\` \`silent-fail\` \`cross-cycle-debt\`.\n\n`;
+  md += `**Mechanical pass:** ${realCount} entr${realCount === 1 ? 'y' : 'ies'} (HIGH ${summary.HIGH}, MED ${summary.MED}, LOW ${summary.LOW}). 4 V2-runtime classes appended below.\n\n`;
+  md += `**Taxonomy** (9 classes): \`phase-skip\` \`writeback-drift\` \`cohort-collision\` \`math-anomaly\` \`determinism-break\` \`phase-ordering\` \`silent-fail\` \`cross-cycle-debt\` \`header-drift\`.\n\n`;
   md += `---\n\n`;
 
   if (realCount === 0 && findings.every(f => f.pending || f.severity === 'INFO')) {
     md += `## 0 mechanical gaps observed\n\n`;
-    md += `Engine audit clean for V1 detector classes. V2-pending classes (phase-skip, cohort-collision, phase-ordering, silent-fail) require engine-run-log ingest before they can be mechanically checked.\n\n`;
+    md += `Engine audit clean for V1 + V2-structural detector classes. V2-runtime classes (phase-skip, cohort-collision, phase-ordering, silent-fail) require engine-run-log ingest before they can be mechanically checked.\n\n`;
     md += `Engine-sheet judgment-layer review still recommended — append entries below the footer marker.\n\n`;
     md += `---\n\n`;
   } else {
@@ -334,4 +530,11 @@ function countBySeverity(findings) {
   return c;
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = {
+  runHeaderDriftCheck,
+  parseSchemaHeaders,
+  scanWriterFile,
+  auditHeaderDrift,
+};

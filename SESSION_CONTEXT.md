@@ -67,6 +67,8 @@ Last Updated: 2026-05-05 | Engine: v3.3 (cohort-C v1.2/v2.1/v2.1/v1.1 + godWorld
 
 8. **[engine/sheet] V2 engineCycleAudit follow-up — Story_Seed_Deck investigation pattern as new detector class?** S201 investigation surfaced engine routing data was being silently dropped due to header drift; a "writer-vs-header schema alignment" detector class could catch similar drifts (compare each engine writer's expected col count vs SCHEMA_HEADERS reality). LOW — flag for V2 expansion design.
 
+9. **[research-build] /disk-audit skill build (NEW S202).** Plan DRAFT [[plans/2026-05-05-disk-inventory-and-dead-file-detection]]. Triggered by S202 droplet hygiene pass — 88%→81% via ad-hoc cleanup, no standing tool re-runs the same triage. Three phases: Phase 1 inventory walker (read-only Node producing JSON manifest of `/root` minus ignorelist), Phase 2 basename ref-scan + `claude-batch` MCP classification (mechanical handles ≥80%, batch API tail at 50% cost), Phase 3 triage report + `/disk-audit` skill wrapper. Read-only end-to-end; archival human-gated like `/md-audit`. **Five Phase 1 open questions to grill before tooling starts** — sha1 cost, ref-scan scope (`/root/GodWorld + /root/.claude` recommended), batch threshold, sibling-script consolidation (NO recommended), cadence (on-demand recommended). MEDIUM. Effort: ~2-3 hours design grill + 1 build session for Phase 1, then engine-sheet handoff option for Phase 2 batch execution.
+
 **Pre-S197 carry-forward priorities (preserved for cross-cycle threading):**
 1. **[media] /podcast E93** — print pipeline complete, podcast next. Skill: `/podcast 93`. Suggested emphasis: Transit Hub vote-that-didn't-trigger; West Oakland grief at Greater Hope Pentecostal; Mesa rookie debut (sports moment, even text-only).
 

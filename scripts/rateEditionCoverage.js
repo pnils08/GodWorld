@@ -1,7 +1,16 @@
 #!/usr/bin/env node
 /**
- * rateEditionCoverage.js v2.0 — Per-Domain Edition Coverage Ratings
+ * rateEditionCoverage.js v2.1 — Per-Domain Edition Coverage Ratings
  * [engine/sheet] — Phase 27.1 coverage ratings channel
+ *
+ * v2.1 (S202) — section-header detector handles bare-uppercase headers
+ *   ("FRONT PAGE", "CIVIC", "BUSINESS", "SPORTS" on their own line — the
+ *   consolidated format adopted ~S189). Pre-S202 detector required either
+ *   "━━━ X ━━━" separators or "# X" markdown prefixes; neither were present
+ *   in E92/E93 → "Articles found: 0" → letters-only signal silently filled
+ *   the sheet for 4 cycles (closes S196 G-P6 + scopes S202 backfill). Added
+ *   fail-loud gate at end of parse so a future format drift exits non-zero
+ *   instead of writing zero-signal ratings.
  *
  * Reads a published edition, maps each article to an engine domain,
  * rates each on -5 to +5, averages per domain, and writes to
@@ -103,15 +112,27 @@ var lines = text.split('\n');
 var articles = [];
 var currentArticle = null;
 
+// Whitelist of valid section names (used by all three regex variants below).
+// Order matters where one prefix is contained in another — longer patterns must
+// match first so "BUSINESS TICKER" doesn't get truncated to "BUSINESS".
+var SECTION_NAMES =
+  'CULTURE & COMMUNITY|CIVIC AFFAIRS|CIVIC BRIEFS|BUSINESS TICKER|FRONT PAGE|CITY LIFE|' +
+  'ACCOUNTABILITY|FEATURES|OPINION|CULTURE|BUSINESS|SPORTS|HEALTH|CHICAGO|CIVIC';
+
+var SEP_HEADER_RE   = new RegExp('[━─═]+\\s*(' + SECTION_NAMES + ')\\s*[━─═]+', 'i');
+var MD_HEADER_RE    = new RegExp('^#+\\s*(' + SECTION_NAMES + ')\\s*$', 'i');
+var BARE_HEADER_RE  = new RegExp('^(' + SECTION_NAMES + ')\\s*$');
+
 for (var i = 0; i < lines.length; i++) {
   var line = lines[i];
 
-  // Section markers like "━━━ SPORTS ━━━" or "── CIVIC AFFAIRS ──" or "SPORTS" in separator blocks
-  var sectionMatch = line.match(/[━─═]+\s*([A-Z][A-Z &]+[A-Z])\s*[━─═]+/);
-  if (!sectionMatch) {
-    // Also try standalone section headers: "SPORTS", "CIVIC AFFAIRS", "CITY LIFE"
-    sectionMatch = line.match(/^#+\s*(SPORTS|CIVIC AFFAIRS|CITY LIFE|BUSINESS|CULTURE|HEALTH|FEATURES|OPINION|ACCOUNTABILITY|LETTERS|CHICAGO|BUSINESS TICKER)/i);
-  }
+  // Three header formats, tried in order:
+  //   1. "━━━ SPORTS ━━━"        (legacy separator block, pre-S189)
+  //   2. "## SPORTS"              (markdown-prefixed)
+  //   3. "SPORTS"                 (bare uppercase on its own line — current consolidated format S189+)
+  var sectionMatch = line.match(SEP_HEADER_RE);
+  if (!sectionMatch) sectionMatch = line.match(MD_HEADER_RE);
+  if (!sectionMatch) sectionMatch = line.match(BARE_HEADER_RE);
 
   if (sectionMatch) {
     if (currentArticle && currentArticle.text.length > 50) {
@@ -143,8 +164,15 @@ for (var i = 0; i < lines.length; i++) {
     currentArticle.text += line + '\n';
   }
 
-  // End markers — ARTICLE TABLE, CITIZEN USAGE, END EDITION, etc.
-  if (/^ARTICLE TABLE|^CITIZEN USAGE|^STORYLINES UPDATED|^COMING NEXT|^END EDITION/i.test(line.trim())) {
+  // End marker — break only at LETTERS TO THE EDITOR. Letters parsing is its
+  // own pass below; breaking here keeps letters out of the section parser AND
+  // separates main content from the trailing structured block (ARTICLE TABLE,
+  // CITIZEN USAGE LOG, STORYLINES UPDATED, COMING NEXT EDITION) which always
+  // appears AFTER letters in every edition E78+. Earlier versions tried to
+  // match those markers directly, but E92 embeds an inline "ARTICLE TABLE
+  // ENTRIES:" + "CITIZEN USAGE LOG:" mid-body that would falsely terminate
+  // the parser before reaching the BUSINESS section.
+  if (/^LETTERS TO THE EDITOR/i.test(line.trim())) {
     if (currentArticle && currentArticle.text.length > 50) {
       articles.push(currentArticle);
     }
@@ -159,6 +187,18 @@ if (currentArticle && currentArticle.text.length > 50) {
 }
 
 console.log('Articles found: ' + articles.length);
+
+// Fail-loud gate: zero articles means the section-header detector broke.
+// Without this, the LETTERS pass below silently produces letters-only ratings
+// that get written to the sheet as if they reflected actual edition coverage.
+// (Failure mode caught S196 G-P6 — sheet contained 4 cycles of letters-only
+// signal because the bare-uppercase header format went undetected.)
+if (articles.length === 0) {
+  console.error('FAIL: parser found 0 articles in ' + filePath);
+  console.error('  Section-header detection broke. Expected headers: ' + SECTION_NAMES.replace(/\|/g, ' / '));
+  console.error('  Inspect the edition file vs SECTION_NAMES in scripts/rateEditionCoverage.js');
+  process.exit(2);
+}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // RATE EACH ARTICLE — tone analysis → -5 to +5

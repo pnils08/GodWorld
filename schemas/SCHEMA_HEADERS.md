@@ -1082,7 +1082,7 @@ pointers:
 ## Story_Hook_Deck
 
 - **Rows:** 444
-- **Columns:** 21
+- **Columns:** 14
 
 | Col | Header |
 |-----|--------|
@@ -1100,13 +1100,6 @@ pointers:
 | L | SuggestedAngle |
 | M | VoiceGuidance |
 | N | MatchConfidence |
-| O | Severity |
-| P | CreatedCycle |
-| Q | HookAge |
-| R | ExpiresAfter |
-| S | IsExpired |
-| T | PickedUp |
-| U | PickupCycle |
 
 ---
 

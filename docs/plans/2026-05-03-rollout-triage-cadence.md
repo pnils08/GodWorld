@@ -3,7 +3,7 @@ title: ROLLOUT Triage Cadence Plan
 created: 2026-05-03
 updated: 2026-05-03
 type: plan
-tags: [architecture, infrastructure, ready]
+tags: [architecture, infrastructure, complete]
 sources:
   - output/production_log_edition_c93_write_gaps.md G-W16 (meta-pattern — HIGHs sit on shelf and compound)
   - docs/engine/ROLLOUT_PLAN.md §Edition Post-Publish (current capture pattern)
@@ -140,3 +140,6 @@ Plan is action-ready — Phase 2 (backfill) + Phase 3 (tooling) can start withou
 
 - 2026-05-03 — Initial draft (S197). Wave 4 of [[plans/2026-05-03-c93-gap-triage-execution]]. Status: DRAFT — Phase 1 open questions must resolve before Phase 2 starts. Triggered by G-W16 meta-pattern documented S195 (project-agent canon-fabrication HIGHs from S193 sat on shelf and re-landed in desk-reporter agents 2 cycles later).
 - 2026-05-03 — All five Phase 1 open questions closed S198 via Mike blanket approval. Recommendations adopted verbatim (trailing inline tag / STALE-2C threshold / in-place flag / explicit PARKED flag / /session-end integration). Status: DRAFT → ready-for-build. Tags shifted `[architecture, infrastructure, draft]` → `[architecture, infrastructure, ready]`.
+- 2026-05-04 — Phase 2 backfill DONE (S202). 10 HIGH entries tagged with `(promoted: C<XX>, severity: HIGH)` in `docs/engine/ROLLOUT_PLAN.md`. Acceptance criterion spec'd ">20" — actual count is 10; discrepancy because the plan was written pre-enumeration and the large C93 gap-log entries are consolidated parent rows (their prose says "promote individual gaps to standalone work items as bandwidth allows"). All actual HIGH entries tagged. First-run stale list will be empty: all tags use C92/C93 and current cycle is C93, so max age = 1 cycle (threshold is >2). Staleness accumulates over future cycles as entries remain unaddressed. Documented in script header.
+- 2026-05-04 — Phase 3 tooling DONE (S202). `scripts/rolloutTriage.js` created — parses ROLLOUT_PLAN for `(promoted: C<XX>, severity: HIGH)` tags, computes age, filters STALE-2C (>2 cycles), excludes PARKED, outputs `output/rollout_triage_c<XX>.md` sorted oldest-first. Handles bullet + table parsing formats. Wired into `.claude/terminals/research-build/TERMINAL.md §Session Close → Terminal-Specific Saves` as step 0 (runs before ROLLOUT priority refresh so stale HIGHs inform what gets elevated).
+- 2026-05-04 — Phase 4 validation DONE (S202). `node scripts/rolloutTriage.js 93` produced: 10 tagged HIGH entries found, 0 STALE-2C. Output at `output/rollout_triage_c93.md`. Correct — first-run empty stale list is expected per C92/C93 tag dates. Plan COMPLETE. Tags shifted `[architecture, infrastructure, ready]` → `[architecture, infrastructure, complete]`.

@@ -184,6 +184,11 @@ When `/session-end` runs in this terminal, follow these steps **in addition to**
 
 ### Terminal-Specific Saves
 
+0. **Rollout triage scan** — Run BEFORE refreshing priorities so stale HIGHs inform what gets elevated:
+   ```bash
+   node scripts/rolloutTriage.js <current-cycle>
+   ```
+   Read `output/rollout_triage_c<N>.md`. If stale HIGHs appear, surface top 3-5 to SESSION_CONTEXT next-session priorities. Empty stale list = no action needed.
 1. **ROLLOUT_PLAN.md** — Refresh Next Session Priorities. Move completed items to ROLLOUT_ARCHIVE with full details. Tag any handoff items with their target terminal.
 2. **RESEARCH.md** — If research was done, log findings with date, source, and actionable takeaways.
 3. **`/save-to-mags`** — Save architecture decisions, design rationale, and anything the next session needs to understand *why* a choice was made. Tag with `[research/build]`.

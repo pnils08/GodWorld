@@ -80,6 +80,20 @@ Scan for functions that do substantially the same thing across different phase f
 
 Report as INFO with both file:line references. These are refactoring candidates, not bugs.
 
+### 8. Function-Name Collisions (Apps Script flat-namespace)
+Apps Script loads all top-level `function name() { ... }` declarations into a single global namespace. Multiple defs of the same name silently resolve to the alphabetically-last file's version — earlier defs become dead code OR the wrong implementation gets called depending on caller file order. ENGINE_REPAIR Row 19 was the systemic close; future drift is caught here.
+
+```bash
+node scripts/auditFunctionCollisions.js          # dry-run, prints to stdout
+node scripts/auditFunctionCollisions.js --write  # persists to output/audit_function_collisions.md
+```
+
+Scans every clasp-pushed `.js`/`.gs` file across `phase*/`, `lib/`, `utilities/`. Groups top-level function definitions by name, reports any name with >1 definition with all file:line locations.
+
+Zero hits is the target. Any hit is CRITICAL — Apps Script will silently override one definition with another at load time.
+
+**Most recent baseline:** S199 cleared 16 → 0 collisions across 11 commits (Phase A + B.1-B.6). Re-run after any commit batch that adds new top-level `function name_` declarations or renames existing ones.
+
 ## Output Format
 
 ```

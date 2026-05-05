@@ -1,7 +1,18 @@
 /**
  * ============================================================================
- * applyCityDynamics_ v2.6 (ES5)
+ * applyCityDynamics_ v3.1 (ES5)
  * ============================================================================
+ *
+ * v3.1 Changes (S202 — wires the dead output):
+ * - Folds S.editionNeighborhoodEffects['city'] per-metric deltas into finalCity
+ *   before clamps. applyEditionCoverageEffects_ writes those deltas every cycle
+ *   based on the prior cycle's edition tone × DOMAIN_RULES; pre-S202 they were
+ *   computed-but-never-read. Closes the second half of the S137b feedback loop.
+ *   Magnitude per cycle: |rating|*0.02 per active domain weight (typical sum
+ *   0.05-0.15 per metric, well below the [0.3, 3.0] clamp range).
+ *
+ * v3.0 Changes (prior):
+ * - prevMedia feedback (hopeFactor, anxietyFactor, crisisSaturation, celebrityBuzz)
  *
  * v2.6 Changes (additive, non-breaking):
  * - Cluster-based dynamics system (5 clusters covering 12 neighborhoods)
@@ -1253,6 +1264,31 @@ function applyCityDynamics_(ctx) {
     Logger.log('applyCityDynamics_ v3.0: Media feedback applied (sentiment ' +
       (mediaSentiment * 0.04).toFixed(3) + ', crisisSat ' + crisisSat.toFixed(2) +
       ', celebBuzz ' + celebBuzz.toFixed(2) + ')');
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // EDITION COVERAGE NEIGHBORHOOD EFFECTS (v3.1, S202 — wires the dead output)
+  // ─────────────────────────────────────────────────────────────────────────
+  // applyEditionCoverageEffects_ (Phase 2, runs immediately before this) writes
+  // S.editionNeighborhoodEffects['city'] with per-metric deltas derived from
+  // the prior cycle's edition tone × DOMAIN_RULES. Pre-S202 those deltas were
+  // computed-but-never-read; the comment in applyEditionCoverageEffects.js:232
+  // claimed this function distributes them but no consumer existed. Now wired.
+  var cityEffects = (S.editionNeighborhoodEffects && S.editionNeighborhoodEffects['city']) || null;
+  if (cityEffects) {
+    if (cityEffects.traffic) finalCity.traffic += cityEffects.traffic;
+    if (cityEffects.retail) finalCity.retail += cityEffects.retail;
+    if (cityEffects.nightlife) finalCity.nightlife += cityEffects.nightlife;
+    if (cityEffects.publicSpaces) finalCity.publicSpaces += cityEffects.publicSpaces;
+    if (cityEffects.communityEngagement) finalCity.communityEngagement += cityEffects.communityEngagement;
+    if (cityEffects.culturalActivity) finalCity.culturalActivity += cityEffects.culturalActivity;
+    Logger.log('applyCityDynamics_ v3.1: Edition coverage neighborhood effects applied — ' +
+      'traffic ' + (cityEffects.traffic || 0).toFixed(3) +
+      ', retail ' + (cityEffects.retail || 0).toFixed(3) +
+      ', nightlife ' + (cityEffects.nightlife || 0).toFixed(3) +
+      ', publicSpaces ' + (cityEffects.publicSpaces || 0).toFixed(3) +
+      ', engagement ' + (cityEffects.communityEngagement || 0).toFixed(3) +
+      ', cultural ' + (cityEffects.culturalActivity || 0).toFixed(3));
   }
 
   finalCity.traffic = clampMult(finalCity.traffic);

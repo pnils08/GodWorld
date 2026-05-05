@@ -1,9 +1,18 @@
 /**
  * ============================================================================
- * V3.9 STORY SEEDS ENGINE — THEME-AWARE JOURNALIST MATCHING
+ * V3.10 STORY SEEDS ENGINE — COVERAGE-TRIGGER WIRE-UP
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
+ *
+ * v3.10 Enhancements (S202 — wires the dead output):
+ * - Reads S.editionCoverageTriggers (set by applyEditionCoverageEffects_ in
+ *   Phase 2 — emitted for every domain with |rating| >= 3 in the prior
+ *   edition) and converts each to a media-feedback seed. Pre-S202 these
+ *   triggers were emitted to S but never read by any phase. Closes the
+ *   hook side of the S137b feedback loop.
+ * - New seedType: 'media-feedback'. Priority 5-7 (scales with rating mag).
+ * - Citywide neighborhood (no specific nh attribution).
  *
  * v3.9 Enhancements:
  * - Theme-aware journalist matching via suggestStoryAngle_()
@@ -1261,6 +1270,30 @@ function applyStorySeeds_(ctx) {
     if (m && m.text) {
       seeds.push(makeSeed(m.text, m.domain || 'GENERAL', m.nh || '', m.priority || 2, m.seedType || 'manual'));
     }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // S202: COVERAGE TRIGGERS — wires Phase 2's dead S.editionCoverageTriggers
+  // ═══════════════════════════════════════════════════════════════════════════
+  // applyEditionCoverageEffects_ (Phase 2) emits a trigger for every domain
+  // with |rating| >= 3 in the prior edition. Each trigger gets converted to a
+  // story seed here so next cycle's reporters see the strong-coverage signal
+  // surfaced in Story_Seed_Deck. Pre-S202 these triggers were emitted to S
+  // but never read — closes the S137b feedback loop's hook side.
+  var coverageTriggers = (S.editionCoverageTriggers && S.editionCoverageTriggers.length) ? S.editionCoverageTriggers : [];
+  for (var cti = 0; cti < coverageTriggers.length; cti++) {
+    var tg = coverageTriggers[cti];
+    if (!tg || !tg.domain) continue;
+    var toneLabel = tg.tone || 'mixed';
+    var ratingMag = Math.abs(tg.rating || 0);
+    // Priority scales with rating magnitude: |5| → 7, |4| → 6, |3| → 5
+    var priority = Math.max(5, Math.min(7, 4 + ratingMag - 2));
+    var reporterFrag = tg.reporter ? ' (' + tg.reporter + ' lead)' : '';
+    var countFrag = tg.articleCount ? ' across ' + tg.articleCount + ' article' + (tg.articleCount === 1 ? '' : 's') : '';
+    var seedText = 'Citywide reaction: ' + toneLabel + ' coverage of ' + tg.domain +
+                   ' last cycle (rating ' + (tg.rating > 0 ? '+' : '') + tg.rating + countFrag + reporterFrag + '). ' +
+                   'Follow-up angle: how does the city carry this signal forward?';
+    seeds.push(makeSeed(seedText, tg.domain, '', priority, 'media-feedback'));
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

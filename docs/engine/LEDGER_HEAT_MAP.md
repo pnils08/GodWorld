@@ -2,7 +2,7 @@
 
 **Living reference document for GodWorld sheet health, bloat risk, and cleanup priorities.**
 
-Last Updated: 2026-05-04 | Cycle: 93 | Session: 201 (S199 partial refresh + S201 Story_Seed_Deck close — see below)
+Last Updated: 2026-05-05 | Cycle: 93 | Session: 202 (S202 §Dead Column Inventory + §Column Cleanup Roadmap re-audit — see below)
 
 ---
 
@@ -20,6 +20,37 @@ Last Updated: 2026-05-04 | Cycle: 93 | Session: 201 (S199 partial refresh + S201
 - Citizen_Media_Usage: estimated +2-5/cycle, observed ~33/cycle (10× faster)
 - Texture_Trigger_Log: estimated +5-15/cycle, observed ~28/cycle (~2× faster)
 - Press_Drafts + WorldEvents_V3_Ledger + Storyline_Tracker: matching estimates
+
+---
+
+## S202 audit pass (2026-05-05)
+
+Per-tab live re-audit of §Dead Column Inventory + §Column Cleanup Roadmap against current `schemas/SCHEMA_HEADERS.md` regen + `lib/sheets.js getRawSheetData()` reads. Verified state below; inline `(verified S202)` and `(STALE — corrected S202)` markers added throughout.
+
+**Resolved since S30 baseline (need table updates):**
+- **Story_Seed_Deck** — calendar block I-N **fully deleted S201** (sheet now 12 cols A-L, was claimed 14 cols 6 dead). Was the largest single dead-col block in the inventory.
+- **Story_Hook_Deck** — calendar block K-P + hookLifecycle cols 14-20 **fully deleted S201** (sheet now 14 cols A-N, was claimed 16 cols 6 dead).
+- **Storyline_Intake** — schema-shrunk to 6 cols A-F; no calendar cols at all (was claimed "G-L (6 cols)"). At some point between S30 and now the sheet was rebuilt slim.
+- **Citizen_Usage_Intake** — schema-shrunk to 6 cols A-F; no calendar cols (was claimed "F-K (6 cols)").
+
+**Still dead, verified S202:**
+- Texture_Trigger_Log H-L (5 calendar) — current 12 cols, calendar block intact.
+- Press_Drafts I-N (6 calendar) — calendar block intact, but **col count claim STALE** (live 20 cols, was claimed 14).
+- Simulation_Ledger Middle (C) / OrginCity (N) / Last Updated (Q) / UsageCount (S) — 4 dead cols verified; **ClockMode (I) is ACTIVE** per S201 §Top Bloat Risks reassessment; Per-Sheet table below STALE on this. Live 47 cols (was claimed 20).
+- WorldEvents_V3_Ledger H-AC — STOPPED v3.5 still holds; cols still in headers but write empty.
+- Domain_Tracker Z-AD (5 calendar) — verified current.
+- Neighborhood_Map K-O (5 calendar) — verified current.
+- Relationship_Bonds M-Q (5 calendar) — verified current.
+- Cultural_Ledger R-T (3 calendar) — verified current.
+
+**STALE entries corrected:**
+- **Event_Arc_Ledger** calendar block — was claimed "N-O, R (Holiday x2, SportsSeason — 3 cols)"; live shows **N-S full block** (Holiday/HolidayPriority/FirstFriday/CreationDay/SportsSeason/CalendarTrigger — 6 cols).
+- **Storyline_Tracker** calendar block — was claimed "J-N (5 cols)"; live shows **I-N (6 cols)** starting at I=Season.
+- **Citizen_Media_Usage** calendar block — was claimed "F-K (6 cols)"; live shows **G-L (6 cols)** (F=Reporter is active).
+- **LifeHistory_Log §1 body** claim "Pre-S31 schema had H/I empty cols — both removed; col count dropped 9→7" — live SCHEMA shows **9 cols with H/I still present as empty** (the empty-col deletion never happened or was reverted). Body needs correction.
+
+**Audit-tooling visibility gap surfaced:**
+- **Press_Drafts not in `schemas/SCHEMA_HEADERS.md` regen** because the sheet is **hidden** in the spreadsheet UI. `utilities/exportSchemaHeaders.js:150` skips `sheet.isSheetHidden()`. Sheet is actively written by `pressDraftWriter.js` (Phase 7) and read by media intake (165 rows live, 20 cols). Mechanically fine — engine doesn't care if a tab is hidden — but the regen output is incomplete for any hidden tab. Future regens should optionally include hidden sheets with a `(hidden)` marker, OR HEAT_MAP should explicitly note which tabs are hidden so it doesn't read as a bug. LOW — flag for /tech-debt-audit consideration.
 
 ---
 
@@ -118,9 +149,9 @@ GodWorld uses 40+ Google Sheets ledgers across one spreadsheet. Google Sheets ha
 
 ### 1. LifeHistory_Log (RED — partial mitigation in place)
 
-**Live S201:** 3,669 rows, 7 cols, growing ~93/cycle (was est. +20-50). Hits 10K wall around C200 if no archive run. Every citizen life event appends a row.
+**Live S202:** 3,670 rows, 9 cols, growing ~93/cycle (was est. +20-50). Hits 10K wall around C200 if no archive run. Every citizen life event appends a row.
 
-**Current schema (7 cols, S201 verified live):**
+**Current schema (9 cols total — 7 active + 2 empty trailing, S202 verified live via SCHEMA_HEADERS regen):**
 | Col | Header | Status |
 |-----|--------|--------|
 | A | Timestamp | Active |
@@ -130,8 +161,10 @@ GodWorld uses 40+ Google Sheets ledgers across one spreadsheet. Google Sheets ha
 | E | EventText | Active |
 | F | Neighborhood | Active |
 | G | Cycle | Active |
+| H | (empty) | DEAD — never written, never read |
+| I | (empty) | DEAD — never written, never read |
 
-(Pre-S31 schema had H/I empty cols — both removed; col count dropped 9→7.)
+(S202 audit correction: prior body claim "Pre-S31 schema had H/I empty cols — both removed; col count dropped 9→7" was STALE — H/I empty cols are STILL present per live schema. Drop is opportunistic; cells empty so zero bloat impact.)
 
 **Remediation status:**
 1. **Archive script: SHIPPED S31** — `maintenance/archiveLifeHistory.js` v1.0 (Apps Script, retain 50 cycles, lazy-create archive). Not run in production yet; would drop active sheet ~3,669 → ~1,400-1,750 rows at first run.
@@ -204,38 +237,46 @@ Growing at 5-20 events per cycle. Was 29 columns with 22 dead. After v3.5 cleanu
 
 | Sheet | Dead Calendar Cols | Additional Dead Cols | Total Dead | Total Cols | Waste % |
 |-------|-------------------|---------------------|------------|------------|---------|
-| Story_Seed_Deck | I-N (6 cols: Season thru SportsSeason) | — | 6 | 14 | 43% |
-| Story_Hook_Deck | K-P (5 calendar + CalendarTrigger) | — | 6 | 16 | 38% |
-| WorldEvents_V3_Ledger | W-AA (5 calendar, v3.4) | H-V, AB-AC (16 cols, v3.5) | 22 | 29 | 76% — STOPPED |
-| Press_Drafts | I-N (6 cols: Season thru SportsSeason) | — | 6 | 14 | 43% |
-| Texture_Trigger_Log | H-L (5 calendar) | — | 5 | 12 | 42% |
-| Simulation_Ledger | — | C, I, N, Q, S (Middle, ClockMode, OrginCity, Last Updated, UsageCount) | 5 | 20 | 25% |
+| Story_Seed_Deck | ~~I-N (6 cols)~~ → **REMOVED S201** | — | 0 | 12 | 0% (was 43% — calendar block deleted) |
+| Story_Hook_Deck | ~~K-P (5 calendar + CalendarTrigger)~~ → **REMOVED S201** | — | 0 | 14 | 0% (was 38% — calendar + hookLifecycle cols deleted) |
+| WorldEvents_V3_Ledger | W-AA (5 calendar, v3.4) | H-V, AB-AC (16 cols, v3.5) | 22 | 29 | 76% — STOPPED (verified S202 — cols still in headers, writes empty) |
+| Press_Drafts | I-N (6 cols: Season thru SportsSeason) | — | 6 | **20** (corrected S202; was 14) | 30% (verified S202) |
+| Texture_Trigger_Log | H-L (5 calendar) | — | 5 | 12 | 42% (verified S202) |
+| Simulation_Ledger | — | C, N, Q, S (Middle, OrginCity, Last Updated, UsageCount) — **ClockMode (I) ACTIVE** per S201 §Top Bloat Risks | 4 (was 5) | **47** (corrected S202; was 20) | 9% (verified S202) |
 
-**Sheets with calendar columns — usage NOT YET VERIFIED (lower priority):**
+**Sheets with calendar columns — S202 live verification:**
 
 | Sheet | Calendar Cols Present | Notes |
 |-------|----------------------|-------|
-| Domain_Tracker | Z-AD (5 cols) | Low growth (+1/cycle), verify before removal |
-| Neighborhood_Map | K-O (5 cols) | State sheet (18 rows), low urgency |
-| Relationship_Bonds | M-Q (5 cols) | New engine, only 1 row, verify before removal |
-| Event_Arc_Ledger | N-O, R (Holiday x2, SportsSeason) | Mixed sheet, verify before removal |
-| Cultural_Ledger | R-T (Holiday, HolidayPriority, SportsSeason) | Small sheet, low urgency |
-| Storyline_Intake | G-L (6 cols) | Intake sheet, likely dead |
-| Citizen_Usage_Intake | F-K (6 cols) | Intake sheet, likely dead |
-| Storyline_Tracker | J-N (5 cols) | Mirror of Storyline_Intake pattern |
-| WorldEvents_Ledger (V2) | F, R-V (Holiday + calendar) | Legacy format |
+| Domain_Tracker | Z-AD (5 cols) | Verified S202. Low growth (+1/cycle). |
+| Neighborhood_Map | K-O (5 cols) | Verified S202. State sheet (18 rows), low urgency. |
+| Relationship_Bonds | M-Q (5 cols) | Verified S202. 269 rows live (was 1 at S30). |
+| Event_Arc_Ledger | **N-S (6 cols: Holiday/HolidayPriority/FirstFriday/CreationDay/SportsSeason/CalendarTrigger)** — corrected S202 (was claimed "N-O, R — 3 cols"; calendar block is full 6) | 32 cols, 366 rows live. |
+| Cultural_Ledger | R-T (3 cols: Holiday, HolidayPriority, SportsSeason) | Verified S202. |
+| Storyline_Intake | **NONE** — corrected S202 (was claimed "G-L (6 cols)"; sheet schema-shrunk to 6 cols A-F, no calendar) | Schema rebuild date unknown; predates S202 audit. |
+| Citizen_Usage_Intake | **NONE** — corrected S202 (was claimed "F-K (6 cols)"; sheet schema-shrunk to 6 cols A-F, no calendar) | Schema rebuild date unknown; predates S202 audit. |
+| Storyline_Tracker | **I-N (6 cols: Season/Holiday/HolidayPriority/IsFirstDay/IsCreationDay/SportsSeason)** — corrected S202 (was claimed "J-N — 5 cols"; calendar block starts at I=Season, 6 cols total) | 25 cols, 240 rows live. |
+| Citizen_Media_Usage | **G-L (6 cols)** — col-letter corrected S202 (was claimed "F-K"; F=Reporter is active, calendar starts G=Season) | 15 cols, 561 rows live. Same pattern as Storyline_Tracker. |
+| WorldEvents_Ledger (V2) | F, R-V (Holiday + calendar) | Legacy format. (S202 not re-verified — legacy tab still appended by recordWorldEventsv25 per §Heat Rankings YELLOW.) |
 
 ### Per-Sheet Dead Column Summary
 
 | Sheet | Dead Columns | Safe to Remove? | Dependencies |
 |-------|-------------|-----------------|-------------|
-| LifeHistory_Log | Name (C), Neighborhood (F), empty H-I | **STOPPED (Session 31)** | 14 files, 17 write sites updated to write `''`. |
-| Simulation_Ledger | Middle (C), ClockMode (I), OrginCity (N), Last Updated (Q), UsageCount (S) | **CANCELLED** | ClockMode read by 8+ engines. Not dead. |
-| Story_Seed_Deck | Season-SportsSeason (I-N) | YES | Written by applyStorySeeds.js, never read. |
-| Story_Hook_Deck | Holiday-CalendarTrigger (K-P) | YES | Written by storyHook.js, never read. |
-| WorldEvents_V3_Ledger | Holiday-CanonStatus (W-AC) | YES | Written by worldEventGenerator.js, never read. |
-| Press_Drafts | Season-SportsSeason (I-N) | YES | Written by generatePressDrafts.js, never read. |
-| Texture_Trigger_Log | Holiday-SportsSeason (H-L) | YES | Written by applyTextureTriggers.js, never read. |
+| LifeHistory_Log | Name (C), Neighborhood (F): **WRITES STOPPED S31** (14 files, 17 sites → ''). H/I empty: **STILL PRESENT S202** (col-drop never executed; opportunistic only — empty cells, no bloat). | Partial — writes stopped but cols intact | Name/Neighborhood active again post-S93 (POPID→Name cross-ref fixes); H/I always empty. |
+| Simulation_Ledger | Middle (C), OrginCity (N), Last Updated (Q), UsageCount (S) — 4 dead cols. **ClockMode (I) ACTIVE** per S201 §Top Bloat Risks reassessment. | YES (4 cols), CANCELLED (ClockMode) | ClockMode read by 8+ engines. Other 4 confirmed unused S202. |
+| Story_Seed_Deck | ~~Season-SportsSeason (I-N)~~ → **REMOVED S201** | DONE | Calendar block deleted; sheet now 12 cols A-L. |
+| Story_Hook_Deck | ~~Holiday-CalendarTrigger (K-P)~~ → **REMOVED S201** | DONE | Calendar + hookLifecycle cols deleted; sheet now 14 cols A-N. |
+| WorldEvents_V3_Ledger | Holiday-CanonStatus (W-AC) | YES — but writes already empty since v3.5 | Written by recordWorldEventsv3.js, never read. Cols stay in headers but no value bloat. |
+| Press_Drafts | Season-SportsSeason (I-N) | YES (verified S202) | Written by pressDraftWriter.js (writes empty since v1.4 per §Phase A); never read. |
+| Texture_Trigger_Log | Holiday-SportsSeason (H-L) | YES (verified S202) | Written by v3TextureWriter.js (writes empty since v3.5 per §Phase A); never read. |
+| Event_Arc_Ledger | N-S (6 cols, corrected S202) | YES (verified S202 — never read) | Newly visible target — calendar block was undercount in S30 audit. |
+| Storyline_Tracker | I-N (6 cols, corrected S202) | YES (verified S202 — never read) | Same calendar pattern; col letters off by one in S30 audit. |
+| Citizen_Media_Usage | G-L (6 cols, corrected S202) | YES (verified S202 — never read) | F=Reporter active; calendar starts G=Season. |
+| Domain_Tracker | Z-AD (5 cols) | LOW (sheet only +1/cycle) | Verified S202. |
+| Cultural_Ledger | R-T (3 cols) | LOW (small sheet) | Verified S202. |
+| Neighborhood_Map | K-O (5 cols) | LOW (18-row state sheet) | Verified S202. |
+| Relationship_Bonds | M-Q (5 cols) | LOW (engine new, 269 rows live) | Verified S202. |
 
 ---
 
@@ -298,7 +339,7 @@ Growing at 5-20 events per cycle. Was 29 columns with 22 dead. After v3.5 cleanu
 
 ## Column Cleanup Roadmap
 
-### Phase A: Stop Writing Dead Calendar Columns — COMPLETED (Session 30)
+### Phase A: Stop Writing Dead Calendar Columns — COMPLETED (Session 30) + EXTENDED S201
 
 5 persistence writers updated to stop writing calendar data to sheets:
 
@@ -314,9 +355,11 @@ Growing at 5-20 events per cycle. Was 29 columns with 22 dead. After v3.5 cleanu
 
 **Existing sheet data preserved.** Old rows keep their calendar values. New rows write empty/omitted values. Sheet headers unchanged — no migration needed.
 
-### Phase B: Simulation_Ledger — CANCELLED
+**S201 extension (header drift fix):** Story_Seed_Deck + Story_Hook_Deck went FURTHER than Phase A — full calendar header columns deleted from the sheet (not just write-stopped). 469 stale pre-v3.4 cells scrubbed across active + archive. Schema rebuild because writer/header mismatch since v3.4/v3.5 caused engine routing data (suggestedJournalist/Angle/Voice/Confidence) to land under stale calendar headers. Story_Seed_Deck 19→12 cols, Story_Hook_Deck 28→14 cols. See SESSION_CONTEXT.md S201 entry §5 + §6.
 
-Audit revealed Middle, ClockMode, OrginCity, Last Updated, UsageCount are ALL actively read by 8+ engines. Not dead columns. See correction note in Heat Rankings table above.
+### Phase B: Simulation_Ledger — PARTIALLY CANCELLED, REASSESSED S201
+
+S30 audit cancelled drop on the assumption all 5 cols (Middle, ClockMode, OrginCity, Last Updated, UsageCount) were active. **S201 reassessment** corrected this: only **ClockMode (I) is ACTIVE** (read by 8+ engines, gates ENGINE/GAME/CIVIC/MEDIA processing per §Top Bloat Risks #2). The other 4 (Middle, OrginCity, Last Updated, UsageCount) are confirmed dead — never read by any engine. Drop is safe but low priority (empty cells, no bloat impact). S202 verified live: all 4 still present, sheet now 47 cols A-AU.
 
 ### Phase C: Implement LifeHistory_Log Archive Script — COMPLETED (Session 31)
 
@@ -366,3 +409,6 @@ Audit revealed Middle, ClockMode, OrginCity, Last Updated, UsageCount are ALL ac
 | 2026-02-16 | 31 | Phase C complete. archiveLifeHistory.js v1.0 created in maintenance/. |
 | 2026-02-16 | 31 | LifeHistory_Log dead columns stopped: Name (C), Neighborhood (F) → '' across 14 files, 17 write sites. |
 | 2026-02-16 | 31 | WorldEvents_V3_Ledger v3.5: 16 more dead cols deprecated (H-V, AB-AC). Only A-G active. Math.random→ctx.rng fix. Domain-aware neighborhoods. Sheet downgraded YELLOW→GREEN. |
+| 2026-05-04 | 199 | §Heat Rankings refresh — RED/YELLOW row counts pulled live; growth rates recomputed against C81 baseline. §Top Bloat Risks Detailed Breakdown deferred. |
+| 2026-05-04 | 201 | Story_Seed_Deck CLOSED (1,558 rows archived; N=5 retention via maintenance/archiveStorySeeds.js). §Top Bloat Risks #1 + #2 + §Archival Strategy §Priority 0 refreshed. ClockMode reassessed ACTIVE. |
+| 2026-05-05 | 202 | §Dead Column Inventory + §Column Cleanup Roadmap re-audit: 4 stale entries corrected (Event_Arc_Ledger N-S not "N-O,R"; Storyline_Tracker I-N not J-N; Citizen_Media_Usage G-L not F-K; LifeHistory_Log §1 body claim "9→7" reversed). 2 sheets schema-shrunk (Storyline_Intake / Citizen_Usage_Intake — no calendar cols, predates audit). 2 col counts corrected (Press_Drafts 14→20; Simulation_Ledger 20→47). Story_Seed_Deck + Story_Hook_Deck flipped to RESOLVED in tables. Audit-tooling gap surfaced: Press_Drafts missing from `schemas/SCHEMA_HEADERS.md` regen. |

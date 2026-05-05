@@ -92,6 +92,26 @@ pointers:
 
 ---
 
+## Phase 4 — V2 detector ingest path (engine-sheet) — DESIGN-DEFERRED-TO-POST-C94
+
+V1 ingest covers 4 classes (writeback-drift / math-anomaly / cross-cycle-debt / determinism-break) — all readable from existing repo artifacts (`output/engine_audit_c<XX>.json` + Math.random sweep across `phase*/**/*.js`). The 4 V2-pending classes (`phase-skip / cohort-collision / phase-ordering / silent-fail`) need Apps Script execution-log capture into the local repo before they become mechanically detectable; right now /run-cycle Step 3 runs the engine in Google's cloud and does not persist execution logs locally.
+
+**Two paths to evaluate:**
+
+- **(a) `Logger.getLog()` snapshot on cycle completion + transfer.** Apps Script side: at end of `runWorldCycle_`, capture `Logger.getLog()` output → write to a designated tab (Run_Log_C{XX}) OR push to GitHub via the same auth path `exportSchemaHeaders.js` already uses. Local side: `engineCycleAudit.js` reads the captured log as input. Pro: captures the full Logger output stream (including all the phase-skip / cohort-collision / phase-ordering signals already emitted by engine code). Con: requires Apps Script-side change (one-time wiring in `godWorldEngine2.js` end-of-cycle); GitHub-push path adds latency/auth surface; tab-write path adds a row-count-bloat tab.
+- **(b) Wire `Logger.log` outputs into a sheet tab the local repo polls.** Apps Script side: replace bare `Logger.log` calls with a wrapped `engineLog_(msg)` that both Logger.log and appends to a `Engine_RunLog` tab. Local side: same as (a). Pro: granular control over what gets persisted; can tag entries by phase. Con: every `Logger.log` site in 100+ engine files needs a code change; sheet-write overhead per call; row-count grows linearly with cycle log volume (~hundreds of lines/cycle).
+
+**Decision-deferred-to-post-C94.** Empirical trigger to pick: V1 catch rate at C94. If V1 classes catch ~all the structural finds that judgment entries flag, the V2 ingest cost may not be worth the build effort. If V1 misses meaningful finds (e.g. phase-skip silent no-ops not visible in `engine_audit_c<XX>.json`), pick path (a) — single-shot end-of-cycle snapshot is cheaper than per-call instrumentation, and `engineCycleAudit.js` parser side is ~the same effort.
+
+**Acceptance criteria (Phase 4):**
+1. Decision recorded post-C94 with reasoning tied to actual V1 catch rate.
+2. If picked: build follow-up plan or Phase 5 here; ship one path; update class taxonomy listing in §Phase 2 Task 2.5 and SKILL.md.
+3. If skipped: V2-pending classes documented as INFO-only with reason in `engineCycleAudit.js` output; no further build.
+
+**Status:** [ ] gated on C94 V1 baseline.
+
+---
+
 ## Open questions
 
 All four S197 open questions closed S198:
@@ -107,3 +127,4 @@ All four S197 open questions closed S198:
 - 2026-05-03 — Initial draft (S197). Wave 4 of [[plans/2026-05-03-c93-gap-triage-execution]]. Phase 1 had four open questions. Status: DRAFT awaiting grill.
 - 2026-05-03 — REWRITTEN IN PLACE (S198) after Mike grill closed all four open questions. Q1 widened: engine-sheet "Never create MDs" rule replaced wholesale with alignment to global no-isolated-MDs rule (broader reach than gap logs alone — per-phase audit notes, schema specs, helper-script docs all become valid output). Q3 picked up coder-persona directive: script-heavy hybrid, judgment entries in terse mechanical voice (commit-message style, no narrative prose). Q2 + Q4 confirmed. Status: ready for engine-sheet pickup once Phase 1 rule updates land. Plan is now action-ready.
 - 2026-05-03 — Phase 2 SHIPPED S199 (engine-sheet). Tasks 2.1 + 2.2 + 2.3 all DONE. `scripts/engineCycleAudit.js` ~285 LOC implementing 4 V1 classes (writeback-drift, math-anomaly, cross-cycle-debt, determinism-break) + 4 V2-pending stubs awaiting engine-run-log ingest path. `/run-cycle` SKILL.md gained §Step 6 "Gap Log Close" wiring the script invocation. `docs/index.md` plan entry rewritten with Phase 2 SHIPPED state + tag flipped `draft → active`. C93 dry-run produced 23 mechanical entries (7 HIGH / 16 MED) — Transit Hub stuck-initiative correctly flagged (89 cycles in vote-ready), coverage writeback drift correctly flagged (14/17 neighborhoods flat), Math.random sweep flagged 13 hits across phase01/04/05 worth follow-up audit. Phase 3 (validation) pending next /run-cycle invocation against the live engine.
+- 2026-05-05 — Phase 4 added (S202): V2 detector ingest path design note. Two paths captured (Logger.getLog snapshot vs sheet-tab poll); decision-deferred-to-post-C94 because the empirical trigger to pick is V1 catch rate at the first real validation cycle. Ships nothing in S202; just the design surface so the post-C94 decision has somewhere to land.

@@ -42,6 +42,7 @@ Flags:
 | 2a citizen cards | ✓ | ✓ | ✓ | ✓ |
 | 2a-cul cultural cards | — | ✓ (when CUL-IDs present) | ✓ (when CUL-IDs present) | ✓ (when CUL-IDs present) |
 | 2b new businesses | ✓ | ✓ | ✓ | ✓ |
+| 2d truesource sweep | ✓ | — | ✓ | — |
 | 2c world summary | ✓ | — | — | — |
 | 3 civic wiki | ✓ (when built) | — | — | — |
 | 4 coverage ratings | ✓ | — (C93-gated) | — (C93-gated) | — (C93-gated) |
@@ -126,6 +127,22 @@ Skipped for `--type edition` by default — edition NAMES INDEX entries are typi
 Flagged here for visibility; actual writes happen in Step 5 via `ingestPublishedEntities.js` (which reads BUSINESSES NAMED and appends new entries to Business_Ledger).
 
 **Verification gate:** BUSINESSES NAMED parsed; NEW rows count logged to production log Step 12 — actual append verification lives in Step 5's output JSON.
+
+**2d. Refresh A's player truesource — incremental sweep** (`--type edition` and `--type supplemental`)
+
+```bash
+node scripts/ingestPlayerTrueSource.js --apply --skip-subfolder --include-flat --include-prospects
+```
+
+Walks `MLB_Roster_Data_Cards/` (top-level flat files) + `Top_Prospects_Data_Cards/` Drive folders for new TrueSource v1.0 attribute sheets, POP-ID DataPages, or per-season intake docs. Ingests each as a `wd-player-truesource`-tagged supplemental memory in world-data keyed by POPID. MCP `lookup_citizen` retrieves these for elite Tier-1/Tier-2 A's players alongside the standard wd-citizen card.
+
+**Why `--skip-subfolder`:** Pass A (the heavy `True_Source/` subfolder walk per player) was bootstrapped S180 (commit `c15050f` — 9/10 elite players ingested). Subsequent runs use this lighter flag set to pick up only newly-added flat-files + new Top_Prospects passes; avoids re-ingesting Pass A docs every cycle.
+
+**Why two paths:** flat `MLB_Roster_Data_Cards/*.txt` covers established roster updates; `Top_Prospects_Data_Cards/` covers minor-league prospects who get promoted. `--include-flat --include-prospects` activates both.
+
+**Skipped for interview + dispatch.** Those types rarely surface MLB roster changes; if a future dispatch covers a roster move (trade, call-up), Mike can re-run the script manually with the same flags or extend the matrix.
+
+**Verification gate:** stdout reports per-player ingest count + POPID resolution table OR "0 new truesource files — no Drive updates this run" when nothing has changed. `output/intake_player_truesource.json` written with full resolution detail. Failure modes (Drive auth, Supermemory 401, POPID resolution gaps) surface to production log Step 12.
 
 **2c. World summary ingest** (`--type edition` only)
 ```bash

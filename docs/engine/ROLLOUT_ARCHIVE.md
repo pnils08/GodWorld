@@ -620,3 +620,96 @@ Plan: [[plans/2026-04-30-dispatch-gap-followups]]. Closed S189 across 11 items; 
 **E7 Marin Tao BirthYear:** CLOSED-NO-ACTION — investigation found POP-00537 already carries `BirthYear=2009` (age 32 under 2041 anchor). Mike accepted as canon. No sheet edit, no card rebuild.
 
 **Acceptance:** all 7 plan acceptance criteria verified on canonical fixture `editions/cycle_pulse_dispatch_92_kono_second_song.txt`.
+
+
+## S202 Archive Pass (2026-05-05)
+
+Audit + closure pass on active ROLLOUT entries that had self-declared DONE in their bodies but had not yet moved to archive. 18 entries archived across 4 sections plus 2 phase-level closures. ROLLOUT_PLAN active drops ~60 lines without losing closure detail.
+
+### Edition Post-Publish closures
+
+#### Discord bot edition currency Task 5 — DONE S190
+
+Plan: [[plans/2026-04-26-discord-bot-edition-currency]]. Tasks 1-4+6 DONE S184. Task 5 closed S190: `.claude/agents/letters-desk/RULES.md:50` + `.claude/agent-memory/letters-desk/MEMORY.md:12` now reference `output/production_log_edition_c{XX}.md` Story Lineup section instead of deleted `latest_edition_brief.md` (S184 deletion). All 6 tasks of the Discord bot edition currency plan now closed.
+
+#### WIRE: `ingestPlayerTrueSource.js` into a skill — DONE S201 (engine-sheet)
+
+Path (a) chosen — `/post-publish` substep `2d. Refresh A's player truesource — incremental sweep` added between Step 2c world-summary and Step 3 civic wiki. Invocation: `node scripts/ingestPlayerTrueSource.js --apply --skip-subfolder --include-flat --include-prospects` (flag set per ROLLOUT acceptance — `--skip-subfolder` because Pass A bootstrap shipped S180 commit `c15050f`, `--include-flat --include-prospects` for full MLB + Top_Prospects coverage). Per-type matrix updated: ✓ edition, — interview, ✓ supplemental, — dispatch (interview + dispatch rarely surface MLB roster changes; manual re-run available if needed). Verification gate: per-player ingest count + POPID resolution table to stdout, `output/intake_player_truesource.json` written, failures surface in production log Step 12. Path (b) /sync-truesource skill not built — script's existing manual-run flags (`--apply --include-flat --include-prospects` without `--skip-subfolder`) cover the deliberate-bootstrap case if needed.
+
+#### FIX: validateEdition.js false positives — DONE S197 (BUNDLE-C, verified S199 d9763ca neighborhood)
+
+96% false-positive rate in E91 dropped to ~0% via: (a) last-name tier with full-name presence check (`scripts/validateEdition.js:92,188-199` — CRITICAL only when council member's full name absent from text + first-name token doesn't match; otherwise downgraded to NOTE — handles Maria Reyes vs Marcus Carter vs Vanessa Tran-Muñoz vs Bobby Chen-Ramirez vs Priya Patel last-name collisions); (b) cycle-language patterns removed (S146 reversal, line 46-48); (c) extended title lookbehind list including Deputy/Vice/Acting/Former (line 183-186) so "Deputy Mayor X" doesn't false-positive against Mayor Santana. Verified live in code. Closes the MEDIUM and the related S195 HIGH G-W22 (last-name-collision plague: ~95% false positives).
+
+#### DISPATCH C92 GAP FOLLOW-UPS — DONE S189 (pointer cleanup)
+
+Already archived in detail under §S201 Archive Pass (above) — Plan: [[plans/2026-04-30-dispatch-gap-followups]], 11 items closed, 6 commits `e83a5a3` + `15e7f3e` + `e9b0d37` + `6c2f45a` + `c20bb3d` + `a805e76`. Stale-pointer carrying "7 engine-sheet items remain active" was cleared S201; this S202 pass removes the residual active-rollout entry that pointed at the S201 archive.
+
+#### Wave 3 — Engine-Sheet Handoff Bundles (S197 research-build → engine-sheet) — DONE S197
+
+Detail already in §S198 Archive Pass (above) — all 8 bundles A-H shipped S197 closing ~22 cross-cycle gaps in 16 commits. Research-build wrote bundle specs in commit `374d7a9`; engine-sheet shipped all 8 same day. S202 removes the residual ROLLOUT header that pointed at the S198 archive. **Surfaced + parked separately as still-active engine-sheet work:** `resolveCitizens` Sr./Jr. tokenizer fix — closed S199 d9763ca, archived in this S202 pass (Data & Pipeline below).
+
+#### C93 GAP TRIAGE EXECUTION PLAN — DONE across all 5 waves (S197+S198)
+
+Plan: [[plans/2026-05-03-c93-gap-triage-execution]]. Cross-cycle triage frame across 115 C93 gaps spanning 6 sidecar logs.
+
+- **Wave 1** DOC-drift sweep (~15 gaps closed) — DONE S197 commit `279b290`
+- **Wave 2** canon RULES hardening (~7 gaps closed) — DONE S197 commit `cd89cc5`
+- **Wave 3** engine-sheet handoff bundles A-H (~22 gaps closed in code) — DONE S197, archived S198
+- **Wave 4** 3 architectural design plans — all closed S198: [[plans/2026-05-03-vote-trigger-mechanism]] REWRITTEN as engine-sheet wiring handoff (engine owns vote resolution; original /council-vote skill design retired; engine-sheet shipped v1.9 fix S199), [[plans/2026-05-03-run-cycle-gap-log-surface]] REWRITTEN with all 4 Q's closed (engine-sheet MDs rule loosened wholesale; coder-persona hybrid; 8-class taxonomy; engine-sheet shipped Phase 2 S199), [[plans/2026-05-03-rollout-triage-cadence]] BUILT S202 (Phase 2 backfill + Phase 3 tooling + Phase 4 validation)
+- **Wave 5** FLUX text-suppression ceiling research note — DONE S197 commit `e62133e` in `docs/RESEARCH.md` §S197
+
+Acceptance met: every gap-log `Status:` line moved from `logged` to closed-state. ~30 LOW gaps remain unwaved (opportunistic close during related work). Six individual sidecar gap logs (city-hall-prep S192, sift S194, write-edition S195, edition-print S196, post-publish S195, city-hall-run S193) stay active in ROLLOUT — they hold the un-promoted LOW remainder.
+
+#### DEDICATED SESSION: Perkins&Will C92 contamination scrub — SCRUB-SIDE DONE S186, civic implicit-pass S193
+
+S186 closed the entire scrub-side workload in one session. **Canon-fidelity rule:** §Read-Time Contamination Check added to `docs/canon/CANON_RULES.md`; 23-agent RULES.md refresh (20 generators with Read-Time Contamination Scan block + 2 reviewers with Read-Time Contamination Audit block + final-arbiter with Read-Time Contamination Propagation block). **Layer 1 live signal:** 7 files + 3 desk packets scrubbed; `buildDeskPackets.js 92` re-ran clean post-sheet-edit (sheet cell handled by Mike directly). **Layer 2 canonical historical:** 7 files scrubbed (edition.txt + 4 reporter briefs/articles + 2 PDFs). **Layer 3 audit corrigendum:** 3 files (Mara review + Rhea .json + Rhea .txt) carry top-of-file `[CORRIGENDUM C92→post-scrub S186]` with body preservation. **Bay-tribune chunked re-ingest:** old `T1KLnnJSqNybHsEjxt3gVM` (Part 1, 2 hits) + `i9gbnZLtb7sZBjX3KuxzYY` (Part 2, 3 hits) DELETE'd; new clean `NnpkqYpTwnKAm1qyxN5Xag` (Part 1) + `SCZcxjcMkrK4CW41tufWJd` (Part 2) ingested via `node scripts/ingestEdition.js`. **Verification:** `grep -c Perkins` returns zero across all Layer 1+2 files; bay-tribune full-content audit returns 0 literal Perkins across 9 search-surfaced docs; Layer 3 audit bodies retain Perkins with corrigendum block at top. **Civic smoke-test residual:** `/city-hall` C93 ran S193 with no Perkins/Will references surfacing in any voice JSON or production-log artifact — implicit smoke-test pass. Architectural follow-up filed: Bay-tribune unified ingest rebuild applying S183 `wd-` pattern (still active in ROLLOUT, motivated by the scrub friction). Original full plan: mags `WL8kvoxQgmcvxSPW3Ph47n`. Connects to S175 Canon Fidelity Rollout (regression case).
+
+### Data & Pipeline closures
+
+#### CLEANUP: Generator-side case discipline for `ev.domain` — DONE S199 (commit `23b3303`, recordWorldEventsv3 v3.6 → v3.7)
+
+Picked option (a)+ — UPPERCASE end-to-end (matches dominant 209-row state + reader expectations). Audit found 3-layer inconsistency: writers UPPERCASE, internal lookups (domainMap/domainNeighborhoods/deriveEventType) Title Case, readers UPPERCASE. Internal Title Case silently mismatched UPPERCASE incoming domains, breaking per-domain neighborhood pool selection AND eventType classification (root cause of Row 6's 91% misc-event Domain side — S184 closure addressed citizen attribution via LifeHistory_Log but left this side broken). 5 changes in single file: domainMap values / domainNeighborhoods keys / deriveEventType comparisons all UPPERCASED, defensive `String(...).toUpperCase()` at domain pickup site, header bump. 4 historical Title Case rows left as-is (orphaned but harmless).
+
+#### FIX: `resolveCitizens` Sr./Jr. suffix tokenizer — DONE S199 (commit `d9763ca`)
+
+Trailing `Sr.`/`Jr.`/`II`/`III`/`IV` (with or without dot) is now stripped from `nameTokens` before first/last/middle picking; suffix appended back to `last` for new-citizen candidate rows so display + ledger stay aligned; lookup key uses the stripped form so an existing "Calvin Reeves" row matches a "Calvin Reeves Sr." input (correct default for editorial ingest where editor almost always means same person; generational duplicates still land via POP-ID path which skips name lookup). Verified against 9 representative inputs incl. Bishop Calvin Reeves Sr., Maria Elena Reyes Jr., John Smith III. Unblocks /post-publish C93 retry --apply backfill.
+
+#### AUDIT: `Math.random` engine sweep — DONE S199 (commit `2c7397f`)
+
+All 13 hits classified as false-positives — every one was inside a `/** ... */` JSDoc changelog block describing the S156 fix (e.g., "Replaced Math.random() with ctx.rng", "Falls back to Math.random()"), not an actual invocation. Filter tightened with `if (/^\s*\*/.test(line)) return;` to skip JSDoc star continuation lines. After fix: 0 real hits across phase01-phase10; engine.md S156 Phase 40.3 closure stands. C93 audit baseline drops 23 → 22 entries (HIGH 7 → 6).
+
+#### AUDIT: engineAuditor 1.0.0 cyclesInState measurement-window bug — DONE S199 (commit `30d0e0f`)
+
+Diagnosis correction: not a "wrong column" bug. The actual issue was a missing phase-match check in `detectStuckInitiatives.detect()` — the per-prior-audit loop trusted `prev.cyclesInState + 1` without verifying phase still matches, so a phase transition (INIT-003 vote-scheduled C92 → vote-ready C93) inherited the stale stuck count from the prior phase. Fix: guard carry-forward with `prevPhase === phase`. Synthetic verification (C92 audit as prior + queryLedger-confirmed C93 row state): INIT-003 89 → 7 (correctly resets after phase transition); INIT-001/002/005/006 unchanged (phases stable, counts honest measurement of audit-window stuck-time). Downstream `engineCycleAudit.js` cross-cycle-debt severity scaling (≥30 HIGH / ≥5 MED) now sees INIT-003 at MED instead of false HIGH. Node-only fix; no clasp push.
+
+### Infrastructure closures
+
+#### `/doc-audit` never-audited cleanup — DONE S187 (research-build) — MEDIUM
+
+Infra (14 docs, 5 fixes), Data (6 docs, 2 fixes + 3 engine-sheet handoffs), Persona (18 docs, 2 fixes + 6 Mara/Mike handoffs flagged). Total: 38 docs audited under v2.0 first pass; 9 fixes applied; 10 cross-terminal handoffs flagged in tracker for Mara/Mike/engine-sheet. **Active follow-ups still tracked in ROLLOUT** as separate entries: (a) Mara-vance handoffs from persona audit (LOW), (b) engine-sheet ledger doc handoffs from data audit (now also DONE S199+S201, archived in this pass below). Tracker entries in `.claude/skills/doc-audit/SKILL.md`.
+
+#### HANDOFF: Engine-sheet ledger-doc refresh — DONE S199+S201 (closure pass)
+
+(1) **LEDGER_AUDIT.md DONE** (commit `250d06e`) — full S199 refresh via `auditSimulationLedger.js`; 836 rows / POPID → POP-00951; Row 17 sentinel verified closed. S201 Status enum drift closed (151 lowercase → 826 Active + 9 Retired + 1 Recovering). (2) **SCHEMA_HEADERS.md DONE** (commit `250d06e` regen, S201 regen post-header-drift-fix `a05e5f6`) — 1416 lines / 57 tabs reflecting Story_Seed_Deck 12-col + Story_Hook_Deck 21-col post-fix. (3) **LEDGER_HEAT_MAP.md DONE** — S199 Heat Rankings refresh; S201 `37cec06` Top Bloat Risks §1 (LifeHistory_Log: archive script SHIPPED S31 / compression SHIPPED S116) + §2 (Sim_Ledger LifeHistory col reclassified RED→YELLOW post-compression) + §Archival Strategy §Priority 0 added (Story_Seed_Deck archive SHIPPED+RAN S201 — 2,667→1,109 active / 1,558 archived). **S202 closure pass `8426d0e`** — §Dead Column Inventory + §Column Cleanup Roadmap re-audited live: 4 stale entries corrected (Event_Arc_Ledger N-S not "N-O,R", Storyline_Tracker I-N not J-N, Citizen_Media_Usage G-L not F-K, LifeHistory_Log §1 body claim "9→7" reversed); 2 sheets schema-shrunk (Storyline_Intake/Citizen_Usage_Intake); 2 col counts corrected (Press_Drafts 14→20, Simulation_Ledger 20→47); Story_Seed_Deck/Story_Hook_Deck flipped RESOLVED in tables; audit-tooling visibility note added (Press_Drafts hidden in spreadsheet → exportSchemaHeaders.js skips per utilities/exportSchemaHeaders.js:150). (4) **LEDGER_REPAIR.md DONE S199** (commit `215ba1c` — A-AT→A-AU, flipped from "still open" S201 triage). (5) **NEW S201 — engine routing header drift FIXED** (commit `a05e5f6`). Story_Seed_Deck + archive + Story_Hook_Deck had v3.4/v3.5 schema drift causing engine-computed routing data (suggestedJournalist/suggestedAngle/voiceGuidance/matchConfidence) to land under stale calendar header labels. Renamed cols + deleted orphans + scrubbed 469 stale pre-v3.4 rows (335 archive + 134 hooks). 1108/1109 active seeds now carry valid journalist match (95% high-confidence, top: Simon Leary 838 / Maria Keen 160 / Luis Navarro 38). Unblocks `buildDeskPackets:2472` + `buildMediaPacket:209` consumers + opens path for /sift to consume engine pre-routes as default signal.
+
+#### `/diagnose` skill — DONE S190 (research-build)
+
+Shipped at `.claude/skills/diagnose/SKILL.md`. Six-phase loop (feedback loop / reproduce / hypothesise / instrument / fix+regression / cleanup+post-mortem) adapted from MIT-licensed `mattpocock/skills/engineering/diagnose/SKILL.md` (Matt Pocock 2026) with attribution preserved. Localized to GodWorld surfaces (engine scripts, MCP tools, dashboard API, dispatch fixtures, Supermemory tags). Disambiguated from `/self-debug` (agent is failing thing → that skill) at the top. GodWorld-specific examples for dispatch parser bug (S188 #4/#5) and Discord bot edition currency (S180). Inbound link: TERMINAL.md Engine Health Skills table.
+
+#### `disable-model-invocation` audit across 45 skills — DONE S190 (research-build)
+
+40 deliberate-invocation-only skills carry `disable-model-invocation: true` (was 18 pre-audit; +22 added S190 + session-end fixed false→true). 5 stay flagless for auto-fire on inferred relevance: `context-budget` (heavy-context trigger), `diagnose` (broken/throwing/failing trigger), `doc-audit` (staleness questions), `health` (engine-feels-off trigger), `self-debug` (agent-stuck trigger). Decision frame: heavy/write/ceremony skills → flagged; scan/read/structured-trigger skills → flagless. Each skill's flag state is now a deliberate decision recorded in its own frontmatter.
+
+#### `/self-debug` skill — DONE S187 (research-build) — HIGH
+
+Shipped at `.claude/skills/self-debug/SKILL.md` (~150 lines). Four-phase loop (Capture / Diagnose / Contained Recovery / Introspection Report) for when the agent is the failing thing. Adapted from MIT-licensed `affaan-m/everything-claude-code/agent-introspection-debugging` (Affaan Mustafa 2026) with attribution preserved. ECC cross-references swapped for our skills (`/diagnose`, `/grill-me`, `/boot`); GodWorld-specific recurring patterns section added (S122 / S128 / S135 / S168 / S187). Inbound link: `.claude/rules/identity.md` Anti-Loop section now points at `/self-debug` as the structured response when patterns match.
+
+#### `/context-budget` skill — DONE S187 (research-build) — MEDIUM
+
+Shipped at `.claude/skills/context-budget/SKILL.md` (~210 lines). Token-overhead audit across `.claude/agents/`, `.claude/skills/`, `.mcp.json`, `.claude/rules/`, CLAUDE.md, MEMORY.md, CONTEXT.md. Adapted from MIT-licensed `affaan-m/everything-claude-code/context-budget` (Affaan Mustafa 2026) with attribution preserved. Localized to GodWorld component shape: 25-agent four-file canon-fidelity stack, path-scoped rules with `identity.md` always-loaded, MEMORY.md size-threshold flag (we hit 25.9KB on close S187), CONTEXT.md per ADR-0001, terminal-scoped persona levels factored into baseline math. **First-audit-run executed S190** (~24K always-loaded baseline; MEMORY.md flagged + fixed in same session); skill body describes the process for repeat runs.
+
+### Other Ready Work closure
+
+#### `/md-audit` skill — Phase 1+2 DONE S189
+
+Plan: [[plans/2026-04-21-md-audit-skill]]. `scripts/mdStalenessDetector.js` + `.claude/skills/md-audit/SKILL.md` shipped. First run: 0 orphans / 0 stale-but-linked / 48 stable-by-reference / 109 fresh at 60d/30d baseline (after directory-walk detector patch — voice files load by `docs/media/voices/` glob, not per-file ref). Phase 3 archival script not built — no orphans to archive. Phase 4/5 deferred (no triggering need yet). Active plan-file entry stays open (status `partial`) for the deferred phases; ROLLOUT-table row archived since Phases 1+2 are the load-bearing build.

@@ -186,6 +186,74 @@ const trimDrifts = runHeaderDriftCheck(trimSchema, [trimWriter]);
 assert(trimDrifts.length === 0,
   `trim tolerance kills false positive on 'Middle ' vs live 'Middle' (got ${trimDrifts.length} entries, want 0)`);
 
+// Case 5 — target-sheet mismatch (writer targets sheet X, field exists on Y).
+// Mirrors the C93 finalizeWorldPopulation finding: writer references season/holiday
+// against World_Population (which has neither), but Season exists on Simulation_Calendar.
+const targetMismatchWriter = scanWriterFile('synthetic/targetMismatch.js', `
+function writeRow_(ctx) {
+  var sheet = ctx.ss.getSheetByName('World_Population');
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var idx = function(name) { return headers.indexOf(name); };
+  if (idx('season') >= 0) {}
+  if (idx('Holiday') >= 0) {}
+}
+`);
+const mismatchSchema = parseSchemaHeaders(`
+## World_Population
+
+- **Rows:** 2
+- **Columns:** 3
+
+| Col | Header |
+|-----|--------|
+| A | timestamp |
+| B | totalPopulation |
+| C | sentiment |
+
+---
+
+## Simulation_Calendar
+
+- **Rows:** 2
+- **Columns:** 2
+
+| Col | Header |
+|-----|--------|
+| A | Season |
+| B | Holiday |
+`);
+const mismatchDrifts = runHeaderDriftCheck(mismatchSchema, [targetMismatchWriter]);
+assert(mismatchDrifts.length === 2,
+  `target-mismatch produces 2 entries (got ${mismatchDrifts.length})`);
+assert(mismatchDrifts.every(d => d.severity === 'MED'),
+  'target-mismatch entries are MED (writer wrong-sheet, not same-sheet case-fail HIGH)');
+assert(mismatchDrifts.some(d => d.diagnosis.includes('Simulation_Calendar')),
+  'target-mismatch diagnosis points at the sheet that DOES have the field');
+assert(mismatchDrifts.some(d => d.title.includes("not on 'World_Population'") || d.title.includes("not on target 'World_Population'") || d.title.includes("not on target")),
+  'target-mismatch title names the writer\'s wrong target sheet');
+
+// Case 6 — same-sheet case mismatch is HIGH (definitive silent-fail), not MED.
+const sameSheetCaseWriter = scanWriterFile('synthetic/sameSheetCase.js', `
+function read_(ss) {
+  var sheet = ss.getSheetByName('Test_Sheet');
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  if (headers.indexOf('myfield') >= 0) {}
+}
+`);
+const sameSheetSchema = parseSchemaHeaders(`
+## Test_Sheet
+
+- **Rows:** 1
+- **Columns:** 1
+
+| Col | Header |
+|-----|--------|
+| A | MyField |
+`);
+const sameSheetDrifts = runHeaderDriftCheck(sameSheetSchema, [sameSheetCaseWriter]);
+assert(sameSheetDrifts.length === 1 && sameSheetDrifts[0].severity === 'HIGH',
+  'same-sheet case mismatch produces 1 HIGH entry (definitive silent-fail)');
+
 // ---------------------------------------------------------------------------
 // Summary
 // ---------------------------------------------------------------------------

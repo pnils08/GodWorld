@@ -249,71 +249,138 @@ function auditHeaderDrift() {
 // Pure check — exposed for synthetic-fixture test (engineCycleAuditTest.js).
 function runHeaderDriftCheck(schema, writers) {
   const out = [];
-  const allHeaders = new Set();
+
+  // Global indexes: trimmed header set + case-folded lookup (lower → [{sheet, header}]).
   const allHeadersTrimmed = new Set();
-  const allHeadersLower = new Map(); // lower → original
-  for (const s of Object.values(schema)) {
+  const allHeadersLower = new Map();
+  for (const [sheetName, s] of Object.entries(schema)) {
     for (const h of s.headers) {
-      allHeaders.add(h);
-      allHeadersTrimmed.add(h.trim());
-      allHeadersLower.set(h.trim().toLowerCase(), h.trim());
+      const t = h.trim();
+      allHeadersTrimmed.add(t);
+      const k = t.toLowerCase();
+      if (!allHeadersLower.has(k)) allHeadersLower.set(k, []);
+      allHeadersLower.get(k).push({ sheet: sheetName, header: t });
     }
   }
+  function sheetIndex(name) {
+    const s = schema[name];
+    if (!s) return null;
+    const trimmed = new Set();
+    const lower = new Map();
+    for (const h of s.headers) {
+      const t = h.trim();
+      trimmed.add(t);
+      lower.set(t.toLowerCase(), t);
+    }
+    return { trimmed, lower, raw: s };
+  }
+  const fileBase = w => path.basename(w.file);
+  const fileRel = w => path.relative(ROOT, w.file);
 
   for (const w of writers) {
-    // Type 2 — field-name not in any live header.
-    // Compare with trim() on both sides (defensive trailing-space tolerance).
-    // If only difference is case, escalate diagnosis — `headers.indexOf` is
-    // case-sensitive so the lookup silently returns -1 in production.
+    const targetName = (w.sheets.length === 1) ? w.sheets[0] : null;
+    const targetIdx = targetName ? sheetIndex(targetName) : null;
+
     for (const fn of w.fieldNames) {
       const fnTrim = fn.trim();
-      if (allHeadersTrimmed.has(fnTrim)) continue; // exact match (mod whitespace)
-      const caseMatch = allHeadersLower.get(fnTrim.toLowerCase());
-      if (caseMatch) {
+      const fnLower = fnTrim.toLowerCase();
+
+      if (targetIdx) {
+        // Single-sheet writer — per-sheet match is authoritative.
+        if (targetIdx.trimmed.has(fnTrim)) continue; // exact match on target
+        const sameSheetCase = targetIdx.lower.get(fnLower);
+        if (sameSheetCase) {
+          // Definitive same-sheet case mismatch → silent-fail every cycle.
+          out.push({
+            class: 'header-drift',
+            severity: 'HIGH',
+            title: `${fileBase(w)} case-mismatch on '${targetName}': '${fn}' vs live header '${sameSheetCase}' (silent-fail)`,
+            diagnosis: `Type 2 (case mismatch, definitive). Writer targets sheet '${targetName}' which has header '${sameSheetCase}', but writer's literal is '${fn}'. \`headers.indexOf\` is case-sensitive — lookup returns -1 every cycle.`,
+            sourceRef: fileRel(w),
+          });
+          continue;
+        }
+        // Field absent from target. Look up on other sheets.
+        const elsewhereExact = (allHeadersLower.get(fnLower) || []).filter(e => e.sheet !== targetName);
+        if (elsewhereExact.some(e => e.header === fnTrim)) {
+          const sheets = elsewhereExact.filter(e => e.header === fnTrim).map(e => e.sheet).slice(0, 3);
+          out.push({
+            class: 'header-drift',
+            severity: 'MED',
+            title: `${fileBase(w)} field '${fn}' not on target '${targetName}' (exists on ${sheets.join(', ')})`,
+            diagnosis: `Type 2 (target-sheet mismatch). Writer targets '${targetName}'; field '${fn}' is absent from that sheet's headers but exists on: ${sheets.join(', ')}. Either wrong sheet target, missing schema migration on '${targetName}', or dead code path.`,
+            sourceRef: fileRel(w),
+          });
+          continue;
+        }
+        if (elsewhereExact.length) {
+          const summary = elsewhereExact.slice(0, 3).map(e => `${e.sheet}:'${e.header}'`).join(', ');
+          out.push({
+            class: 'header-drift',
+            severity: 'MED',
+            title: `${fileBase(w)} field '${fn}' not on '${targetName}' (case-variant on ${elsewhereExact[0].sheet})`,
+            diagnosis: `Type 2. Writer targets '${targetName}'; '${fn}' has no match (any case) on that sheet. Case-variant exists on: ${summary}. Likely wrong sheet target or missing schema migration.`,
+            sourceRef: fileRel(w),
+          });
+          continue;
+        }
         out.push({
           class: 'header-drift',
           severity: 'MED',
-          title: `${path.basename(w.file)} case-mismatch: '${fn}' vs live header '${caseMatch}' (silent-fail)`,
-          diagnosis: `Type 2 (case mismatch). ${path.relative(ROOT, w.file)} calls field-name lookup with literal '${fn}'; live header is '${caseMatch}'. \`headers.indexOf\` is case-sensitive — lookup returns -1 every cycle and the writer falls through to default/skip path silently. Sheet target${w.sheets.length === 1 ? '' : 's'}: ${w.sheets.join(', ') || '(unknown)'}.`,
-          sourceRef: path.relative(ROOT, w.file),
+          title: `${fileBase(w)} field '${fn}' not on '${targetName}' or any sheet`,
+          diagnosis: `Type 2 (orphan literal). Writer targets '${targetName}'; '${fn}' is absent from that sheet and from all other sheets in SCHEMA_HEADERS. Defensive-fallback literal, dead code, or typo.`,
+          sourceRef: fileRel(w),
+        });
+        continue;
+      }
+
+      // Multi-sheet or unknown-target writer — global-union fallback.
+      if (allHeadersTrimmed.has(fnTrim)) continue;
+      const caseMatches = allHeadersLower.get(fnLower);
+      if (caseMatches && caseMatches.length) {
+        const summary = caseMatches.slice(0, 3).map(e => `${e.sheet}:'${e.header}'`).join(', ');
+        out.push({
+          class: 'header-drift',
+          severity: 'MED',
+          title: `${fileBase(w)} case-mismatch (multi-sheet): '${fn}' vs live ${summary}`,
+          diagnosis: `Type 2 (case mismatch, multi-sheet). Writer touches ${w.sheets.length === 0 ? 'no detected sheet target' : 'multiple sheets: ' + w.sheets.join(', ')}. Case-variant of '${fn}' exists on: ${summary}. \`headers.indexOf\` is case-sensitive — confirm which sheet the literal targets and whether the case is correct.`,
+          sourceRef: fileRel(w),
         });
         continue;
       }
       out.push({
         class: 'header-drift',
         severity: 'MED',
-        title: `${path.basename(w.file)} references field-name '${fn}' not in any live header`,
-        diagnosis: `Type 2 (field-name mismatch). ${path.relative(ROOT, w.file)} performs a string-literal field-name lookup for '${fn}'; no sheet in schemas/SCHEMA_HEADERS.md has this column. Either header was renamed/dropped without updating the writer, or this is a defensive-fallback literal (writer checks both '${fn}' and a sibling that does match). Sheet target${w.sheets.length === 1 ? '' : 's'}: ${w.sheets.join(', ') || '(unknown)'}.`,
-        sourceRef: path.relative(ROOT, w.file),
+        title: `${fileBase(w)} references field-name '${fn}' not in any live header`,
+        diagnosis: `Type 2. Writer touches ${w.sheets.length === 0 ? 'no detected sheet target' : w.sheets.join(', ')}. '${fn}' is absent from every sheet in SCHEMA_HEADERS. Defensive-fallback literal or dead code.`,
+        sourceRef: fileRel(w),
       });
     }
 
-    // Type 1 — single-sheet writer's max col exceeds sheet colCount (out-of-range / schema-shrunk).
-    if (w.sheets.length === 1) {
-      const target = schema[w.sheets[0]];
-      if (target) {
-        for (const r of w.rangeWrites) {
-          if (r.maxCol == null) continue;
-          if (r.maxCol > target.colCount) {
-            out.push({
-              class: 'header-drift',
-              severity: 'HIGH',
-              title: `${path.basename(w.file)} writes col ${r.maxCol} on '${w.sheets[0]}' (sheet has ${target.colCount} cols)`,
-              diagnosis: `Type 1 (out-of-range write) / Type 4 (schema-shrunk writer). Writer's getRange(...).setValues() targets max col ${r.maxCol} (col=${r.col}, width=${r.width}); live sheet '${w.sheets[0]}' has ${target.colCount} cols. Either sheet schema shrunk and writer didn't follow, or write would silently extend the sheet schema.`,
-              sourceRef: `${path.relative(ROOT, w.file)} (line ${r.line})`,
-            });
-          }
+    // Type 1 — out-of-range / schema-shrunk write (single-sheet writers only).
+    if (targetIdx) {
+      const target = schema[targetName];
+      for (const r of w.rangeWrites) {
+        if (r.maxCol == null) continue;
+        if (r.maxCol > target.colCount) {
+          out.push({
+            class: 'header-drift',
+            severity: 'HIGH',
+            title: `${fileBase(w)} writes col ${r.maxCol} on '${targetName}' (sheet has ${target.colCount} cols)`,
+            diagnosis: `Type 1 (out-of-range write) / Type 4 (schema-shrunk writer). Writer's getRange(...).setValues() targets max col ${r.maxCol} (col=${r.col}, width=${r.width}); live sheet '${targetName}' has ${target.colCount} cols. Either sheet schema shrunk and writer didn't follow, or write would silently extend the sheet schema.`,
+            sourceRef: `${fileRel(w)} (line ${r.line})`,
+          });
         }
-      } else {
-        // Sheet target named but absent from SCHEMA_HEADERS — possible deletion / typo / unscanned tab.
-        out.push({
-          class: 'header-drift',
-          severity: 'LOW',
-          title: `${path.basename(w.file)} targets sheet '${w.sheets[0]}' not in SCHEMA_HEADERS`,
-          diagnosis: `Sheet '${w.sheets[0]}' referenced in writer but absent from schemas/SCHEMA_HEADERS.md. Sheet may be hidden (exportSchemaHeaders.js skips hidden tabs per utilities/exportSchemaHeaders.js:150), deleted, or renamed. Manual review.`,
-          sourceRef: path.relative(ROOT, w.file),
-        });
       }
+    } else if (w.sheets.length === 1) {
+      // Sheet name in writer but absent from SCHEMA_HEADERS regen (deleted / hidden / renamed).
+      out.push({
+        class: 'header-drift',
+        severity: 'LOW',
+        title: `${fileBase(w)} targets sheet '${w.sheets[0]}' not in SCHEMA_HEADERS`,
+        diagnosis: `Sheet '${w.sheets[0]}' referenced in writer but absent from schemas/SCHEMA_HEADERS.md. Sheet may be hidden (exportSchemaHeaders.js skips hidden tabs per utilities/exportSchemaHeaders.js:150), deleted, or renamed. Manual review.`,
+        sourceRef: fileRel(w),
+      });
     }
   }
 
@@ -355,21 +422,29 @@ function scanWriterFile(file, content) {
   for (const m of content.matchAll(/\bgetSheetByName\s*\(\s*['"]([^'"]+)['"]\s*\)/g)) {
     sheets.add(m[1]);
   }
+  // Phase 42 §5.6 pattern: writers reading via `ctx.ledger.headers` / `ctx.ledger.rows`
+  // operate against Simulation_Ledger even when their `getSheetByName` calls only
+  // name secondary log sheets (LifeHistory_Log, etc.). Without this, scanWriterFile
+  // mis-attributes citizen-column lookups (First/Last/POPID) to the wrong target.
+  if (/\bctx\.ledger\b/.test(content)) {
+    sheets.add('Simulation_Ledger');
+  }
 
   const fieldNames = new Set();
-  // Direct: headers.indexOf('Foo'), findCol_('Foo'), headerCol_('Foo')
-  for (const m of content.matchAll(/\bheaders\.indexOf\s*\(\s*['"]([^'"]+)['"]\s*\)/g)) {
+  // Direct: headers.indexOf('Foo') / header.indexOf('Foo') / findCol_('Foo') / headerCol_('Foo')
+  // Engine code uses both `headers` (plural) and `header` (singular) — accept both.
+  for (const m of content.matchAll(/\bheaders?\.indexOf\s*\(\s*['"]([^'"]+)['"]\s*\)/g)) {
     fieldNames.add(m[1]);
   }
   for (const m of content.matchAll(/\b(?:findCol_|headerCol_)\s*\(\s*['"]([^'"]+)['"]\s*\)/g)) {
     fieldNames.add(m[1]);
   }
-  // Local-helper resolution: var col = function(name) { return headers.indexOf(name); } then col('Foo')
+  // Local-helper resolution: var col = function(name) { return header(s).indexOf(name); } then col('Foo')
   const helperNames = [];
-  for (const m of content.matchAll(/(?:var|let|const)\s+(\w+)\s*=\s*function\s*\([^)]*\)\s*\{\s*return\s+headers\.indexOf/g)) {
+  for (const m of content.matchAll(/(?:var|let|const)\s+(\w+)\s*=\s*function\s*\([^)]*\)\s*\{\s*return\s+headers?\.indexOf/g)) {
     helperNames.push(m[1]);
   }
-  for (const m of content.matchAll(/(?:var|let|const)\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*headers\.indexOf/g)) {
+  for (const m of content.matchAll(/(?:var|let|const)\s+(\w+)\s*=\s*\([^)]*\)\s*=>\s*headers?\.indexOf/g)) {
     helperNames.push(m[1]);
   }
   for (const helperName of helperNames) {

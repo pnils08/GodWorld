@@ -3,6 +3,7 @@
 **Role:** Engine code, sheet structure, clasp deploys. Persists on all engine state and how it connects.
 **Established:** Session 135 (2026-04-05)
 **Terminal tag for saves:** `[engine/sheet]`
+**Operating discipline:** measure twice, cut once + cascading-effects review (full rule at top of `.claude/rules/engine.md`). Per-item READ + caller-graph + empirical state check BEFORE any destructive op. Reverse on evidence-contradicting hypothesis. Document discipline in commit messages.
 
 ---
 
@@ -26,10 +27,35 @@ These files define the project, your rules, and current state. Read at every boo
 |------|---------|
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
-| `.claude/rules/engine.md` | Engine code rules — ctx.rng, write-intents, cascade deps (auto-loaded on engine files) |
+| `.claude/rules/engine.md` | Engine code rules — ctx.rng, write-intents, cascade deps + measure-twice discipline at top (auto-loaded on engine files) |
 | `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
-| `README.md` | Project overview, 11-phase engine, structure, tech stack |
+| `docs/engine/ENGINE_REPAIR.md` | Tactical defects tracker — open rows tell you what's broken (highest-touch doc this terminal) |
 | `.claude/terminals/engine-sheet/TERMINAL.md` | This file — your scope, your docs, your rules |
+
+**Why ENGINE_REPAIR over README at boot (S201 self-audit):** README is project-scoped generic; ENGINE_REPAIR rows enumerate the exact defects this terminal closes. Boot reading it primes the open-work mental model immediately. README stays available on demand for orientation work.
+
+---
+
+## Boot Quick-State
+
+Three commands every session runs before substantive work — primes the empirical-state mental model the measure-twice discipline depends on.
+
+```bash
+git log origin/main..HEAD --oneline   # unpushed commits (cross-terminal stack check)
+git status --short                     # working-tree drift (mags terminal often has journal files)
+node scripts/auditSimulationLedger.js  # live ledger sanity (~3s, prints headcount + Status + Tier dist)
+```
+
+If `auditSimulationLedger.js` surfaces drift not in `LEDGER_AUDIT.md`, the audit doc is stale — flag for refresh during session.
+
+For sessions that include sheet-schema changes, also run:
+
+```bash
+node scripts/auditFunctionCollisions.js   # 0 = clean; non-zero = silent override risk
+node /tmp/check_status_enum.js            # one-off; build per session as needed
+```
+
+Boot quick-state runs in under 10s. Skipping it sacrifices measure-twice on every subsequent destructive op.
 
 ---
 
@@ -210,11 +236,36 @@ When this terminal discovers something that needs design/research:
 |------|-------|
 | `docs/engine/ENGINE_MAP.md` | Updated if functions were added, removed, or renamed? |
 | `docs/engine/ENGINE_STUB_MAP.md` | Regenerated if function signatures changed? (`/stub-engine`) |
-| `docs/engine/ROLLOUT_PLAN.md` | Phase statuses updated? Completed items archived? |
-| `SESSION_CONTEXT.md` | Engine version bumped if code deployed? Session entry tagged `[engine/sheet]`? |
+| `docs/engine/ENGINE_REPAIR.md` | Rows opened/closed this session reflected in tracker with status + session + evidence + fix-pointer? |
+| `docs/engine/ROLLOUT_PLAN.md` | Phase statuses updated? Completed items archived? Stale-pointer triage flagged? |
+| `docs/engine/LEDGER_AUDIT.md` | Drift section refreshed if live state changed (Status enum, schema, headcount)? |
+| `docs/engine/LEDGER_HEAT_MAP.md` | Heat rankings + bloat-risk sections refreshed if sheet sizes/schemas changed? |
+| `docs/engine/LEDGER_REPAIR_*.md` family | Family member added/updated this session? |
+| `schemas/SCHEMA_HEADERS.md` | Regenerated if any sheet schema changed? (`node scripts/regenSchemaHeaders.js`) |
+| `SESSION_CONTEXT.md` | Engine version bumped if code deployed? Session entry tagged `[engine/sheet]`? S201 watch list items closed? |
 | `docs/SPREADSHEET.md` | Updated if tabs were added, removed, or restructured? |
 | `docs/SIMULATION_LEDGER.md` | Updated if columns changed? |
-| Working tree | `git status --short` clean? Anything committed but unpushed? |
+| `docs/index.md` | New MD created this session has an entry? |
+| Working tree | `git status --short` clean? `git log origin/main..HEAD` shows pushed state? |
+| Apps Script orphans | If files were `git rm`'d this session, flag for Mike's manual Apps Script editor cleanup (clasp doesn't auto-sync deletes) |
+
+### MD Gap Self-Audit (S201 — every session-end)
+
+**Standing practice:** at session-end, list the MDs you fetched on demand this session that you'd benefit from having at boot. If a doc was load-bearing for your work but isn't in §Always Load, flag it.
+
+Pattern: walk the session's commits + investigation steps. For each Read/grep/inspection, note whether the file was already in §Always Load or fetched mid-session.
+
+| Question | Action |
+|---|---|
+| Did I fetch a doc 3+ times this session? | Promote to §Always Load OR add a §Boot Quick-State pointer |
+| Did I miss a defect because a doc wasn't loaded? | Update §Always Load + flag the miss in commit message |
+| Did §Always Load force-load a doc I never opened? | Demote to "load on demand" |
+| Did I write a new MD? | Confirm `docs/index.md` entry + parent-spec back-link added (no-isolated-MDs rule) |
+| Did I reach for a script (`auditSimulationLedger`, `regenSchemaHeaders`, etc.) repeatedly? | Promote to §Boot Quick-State if it's measure-twice infrastructure |
+
+This audit lives at the END of session-close — after commits push, before pm2 restart. One-paragraph note in the close summary is sufficient. The aim is **drift-detection on the terminal config itself** so the terminal evolves with the work, not behind it.
+
+S201 example: this session leaned heavily on `ENGINE_REPAIR.md` + `LEDGER_AUDIT.md` + `LEDGER_HEAT_MAP.md` — none were in §Always Load. Self-audit at session-end surfaced the gap; ENGINE_REPAIR added to §Always Load + Boot Quick-State added (3 commands).
 
 ### Commit cadence
 

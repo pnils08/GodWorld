@@ -1,7 +1,7 @@
 ---
 name: disk-rotate
 description: Per-target retention + cleanup for noisy folders (claude-mem logs, bun cache, uv cache, old claude installer versions, session JSONLs, plugin marketplaces). Companion to /disk-audit (which is read-only). Dry-run by default; destructive only with explicit --apply --target X. Each target has a verification gate. Never schedules itself.
-version: "1.0"
+version: "1.1"
 updated: 2026-05-06
 tags: [architecture, infrastructure, active]
 effort: medium
@@ -36,7 +36,7 @@ disable-model-invocation: true
 |---|---|---|---|
 | `claude-mem-logs` | Delete logs >2 days old | Sample 3 dates from each log → query mcp-search; require ≥1 observation per date | ~250 MB |
 | `bun-cache` | Wipe `.bun/install/cache` (canonical: `bun pm cache rm`) | Confirm no process has `.bun/install/cache` open via lsof | ~900 MB |
-| `uv-cache` | `uv cache prune` (canonical) | Confirm no `uv` lock holder via `lsof +D /root/.cache/uv` | ~1.1 GB |
+| `uv-cache` | `uv cache prune --force` (lock blocks indefinitely on persistent MCP daemons) | None — chroma-mcp + claude-batch-mcp holders are expected, not a blocker | unknown; most cache is in-use install paths for persistent MCPs (~fixed cost) |
 | `claude-versions` | Keep current (symlink target) + previous; remove older | `readlink /root/.local/bin/claude` → exclude active; `lsof` confirm older not in use | ~250 MB per old version |
 | `session-jsonls` | Delete `.claude/projects/*.jsonl` files >30 days old | List candidates; require Mike eyeball before --apply | ~500 MB |
 | `plugin-cache` | `.claude/plugins/cache/` + `.claude/plugins/marketplaces/` stale entries (>14 days) | List per-plugin; require Mike approval | ~500 MB |
@@ -69,10 +69,14 @@ disable-model-invocation: true
 4. Append AUDITS.md row.
 
 ### `uv-cache`
-1. `lsof +D /root/.cache/uv` → must show NO non-trivial holders (the `.lock` file alone is OK if no process owns it).
-2. If holders found → list them, abort, suggest "stop these MCPs and re-run."
-3. Run `uv cache prune` (NOT `clean`; prune removes only unreachable objects).
-4. Append AUDITS.md row.
+
+**Persistent-MCP framing (S204 lesson):** chroma-mcp + claude-batch-mcp are long-lived MCP daemons. Claude Code spawns them at session start and they immediately re-attach to the uv cache. "Fresh session boot" does NOT release them. Plain `uv cache prune` blocks indefinitely on the cache lock these daemons hold. The 1.1 GB cache is the fixed cost of running these MCPs — most of it is reachable, in-use install paths, NOT prunable.
+
+1. `lsof +D /root/.cache/uv` → list holders for the record. chroma-mcp + claude-batch-mcp expected; this is NOT a blocker.
+2. Run `uv cache prune --force` (override the cache-lock wait; still safe with active processes — only removes unreachable objects).
+3. Verify recovery via `du -sh /root/.cache/uv` before/after; expect modest delta (KB-MB range, not GB).
+4. If recovery <10 MB: don't re-run until tools are uninstalled. The cache is fixed cost.
+5. Append AUDITS.md row.
 
 ### `claude-versions`
 1. `readlink -f /root/.local/bin/claude` → resolve current.

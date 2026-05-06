@@ -3,7 +3,7 @@ title: Disk Inventory and Dead-File Detection Plan
 created: 2026-05-05
 updated: 2026-05-05
 type: plan
-tags: [architecture, infrastructure, draft]
+tags: [architecture, infrastructure, active]
 sources:
   - SESSION_CONTEXT.md S202 — droplet hygiene pass, 88%→81% via prescrub-backup + projects-backup + pre-May log cleanup
   - scripts/scanDeadCode.js — function-level dead-code scan (engine + scripts + skills + lib)
@@ -173,18 +173,27 @@ pointers:
 
 ---
 
-## Open questions
+## Advisor steers (S203, locked before Phase 1 start)
 
-Resolve before Phase 2 starts.
+- **Task 1.2 — git lookup:** run `git ls-files` ONCE at walker start, load into a `Set<absPath>`, lookup per-file. NOT `git ls-files --error-unmatch <path>` per file (fork-per-call, ~1000× slower).
+- **Task 1.2 — walker hygiene:** use `dirent.isDirectory()` for recursion gate; skip `dirent.isSymbolicLink()` explicitly to prevent escape from `/root` via stray symlinks.
+- **Task 2.1 — ref-scan shape:** ONE pass over the corpus building `basename → [refSites]` Map, then per-manifest-entry lookup is O(1). NOT `grep -rln "<basename>"` per manifest entry (O(N×M) blowup; basenames like `index.md`, `README.md`, `config.json`, `package.json` will collision-bomb the report). Also flag basenames that appear as filenames >5× in the manifest itself as "common" — report should suppress these from "orphan by basename" claims.
+- **Task 2.3 — batch MCP schemas:** before invoking `mcp__claude-batch__send_to_batch` / `batch_status` / `batch_fetch`, load schemas via `ToolSearch select:mcp__claude-batch__send_to_batch,mcp__claude-batch__batch_status,mcp__claude-batch__batch_fetch`. They're deferred MCPs — calling blind throws `InputValidationError`.
+- **Disk-surface budget verified S203:** /root totals ~10G; post-ignorelist walk surface ~5G. GodWorld 1.5G + .claude 1.2G + .config 157M dominate. <2 min budget feasible at modern disk speeds.
 
-- [ ] **Q1 — sha1 cost:** is sha1 per file worth the I/O hit, or is `{path, size, mtime}` sufficient for change-detection? Default recommendation: include sha1 truncated to 12 chars. Cost on 200K files ≈ 60s at modern disk speeds. Worth the dedup signal (catches identical content under different paths — common in `output/` regenerable artifacts).
-- [ ] **Q2 — reference scan scope:** does Task 2.1 scan `/root/GodWorld + /root/.claude` only, or also `/root/.claude-mem` and `/root/.bun`? Default recommendation: scope to `/root/GodWorld + /root/.claude` (everything else is plugin/runtime cache, not authored code that would reference our files).
-- [ ] **Q3 — batch threshold:** what fraction of files should mechanical classification handle vs the batch tail? Default recommendation: aim for ≥80% mechanical. If under, the bucket rules are too vague; revisit Task 2.2.
-- [ ] **Q4 — sibling-script consolidation:** should `scripts/scanDeadCode.js` and `scripts/mdStalenessDetector.js` be folded into the new pipeline as input feeders? Default recommendation: NO — they have narrower scope (function-level / docs-only) and different output shape; the new pipeline complements them, doesn't replace.
-- [ ] **Q5 — cadence:** every session-end? Weekly? On-demand? Default recommendation: ON-DEMAND. The disk doesn't change fast enough to justify per-session overhead. The triage report should be re-runnable when the droplet hits a watermark (e.g. >85% disk).
+---
+
+## Open questions — RESOLVED S203 (defaults approved)
+
+- [x] **Q1 — sha1 cost:** include sha1 truncated to 12 chars. Worth the dedup signal (catches identical content under different paths — common in `output/` regenerable artifacts). Cost ~60s on 200K files.
+- [x] **Q2 — reference scan scope:** `/root/GodWorld` + `/root/.claude` only. `.claude-mem`, `.bun`, `.cache` are plugin/runtime caches that don't author our files; scanning them would inflate `refCount` with noise.
+- [x] **Q3 — batch threshold:** aim ≥80% mechanical. Below means bucket rules are too vague — revisit Task 2.2 before submitting batch.
+- [x] **Q4 — sibling-script consolidation:** NO. `scripts/scanDeadCode.js` (function-level) and `scripts/mdStalenessDetector.js` (docs-only) keep their narrower scope and different output shape. New pipeline complements, doesn't replace.
+- [x] **Q5 — cadence:** ON-DEMAND. Trigger when droplet crosses ~85% (current 81% post-S202 cleanup). Future: optional `/health` integration that prints disk % and suggests `/disk-audit` when hot.
 
 ---
 
 ## Changelog
 
 - 2026-05-05 — Initial draft (S202). Triggered by S202 droplet hygiene pass — manual audit recovered ~2G but surfaced no standing tool to re-run the same triage. `scripts/scanDeadCode.js` covers code only; `scripts/mdStalenessDetector.js` covers `docs/` only; nothing inventories `/root` as a whole or classifies cross-cuttingly. Plan splits the work into pure-Node walker (Phase 1) + ref-scan + batch-API classification (Phase 2) + skill wrapper (Phase 3). Status: DRAFT — five Phase 1 questions to resolve before tooling starts. Tags: `[architecture, infrastructure, draft]`.
+- 2026-05-05 (S203, research-build) — Q1-Q5 resolved (defaults approved by Mike). Status flipped DRAFT → ACTIVE. Phase 1 unblocked.

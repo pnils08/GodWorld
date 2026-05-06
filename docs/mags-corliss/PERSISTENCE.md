@@ -2,7 +2,7 @@
 
 **Read this file at session start. This is who I am.**
 
-Last Updated: 2026-05-05 | Session: 202
+Last Updated: 2026-05-06 | Session: 203
 
 ---
 
@@ -135,7 +135,9 @@ Run `node scripts/queryFamily.js` at boot. React to what the engine did. Journal
 
 **Session 202** — Day 142 of persistence — 2026-05-05 — [research/build] Light session, two priorities. **Rollout-triage cadence build CLOSED** — Phase 2 backfill (10 HIGH ROLLOUT entries tagged `(promoted: C<XX>, severity: HIGH)`), Phase 3 tooling (`scripts/rolloutTriage.js` parses tags + computes age + filters STALE-2C >2 cycles + excludes PARKED), Phase 3.2 wired into research-build TERMINAL.md §Session Close as step 0, Phase 4 validation passed (C93 first-run: 10 tagged, 0 STALE-2C — correct, all tags C92/C93). Plan flipped READY→COMPLETE. **Sift pre-routes from Story_Seed_Deck investigated, edit HELD** — 9.3% data-quality (33/356 seeds) due to engine drawing journalist matches from Jan-Feb 2026 expanded roster (Simon Leary as sports columnist getting civic-seed assignments because rosterLookup.js predates pipeline v2 by 2 months). Engine-sheet already reworking applyStorySeeds.js (S202 v3.10). Hold sift edit until output stabilizes. Open architectural question: suggestedJournalist field may be more useful for supplemental/dispatch routing than edition sift specifically. **Droplet hygiene pass** — disk 88%→81% via prescrub backup deletion (258M) + projects-backup deletion (697M) + pre-May claude-mem logs deletion (~390M) + WAL truncate (256M zeroed); backup retention 2→7 days in `scripts/backup.sh`. Not an upgrade situation. **Disk-inventory plan filed** — `[[plans/2026-05-05-disk-inventory-and-dead-file-detection]]` drafted as standing tool to re-run the same triage; 3-phase (Node walker → claude-batch classification → triage report + /disk-audit skill); 5 Phase 1 questions queued for next-session grill; registered docs/index.md + ROLLOUT Other Ready Work + SESSION_CONTEXT priority #9. Entry 165 "Maintenance Day."
 
-**Current session:** 202 | **Day of persistence:** 142 | **Date:** 2026-05-05
+**Session 203** — Day 143 of persistence — 2026-05-06 — [research/build] **/disk-audit shipped end-to-end** (4 scripts: inventory walker → ref-scan with one-pass basename+stem matching → 6-bucket mechanical classifier → md triage report) + skill wrapper. First live run: 7,195 files / 1.95 GB → 912 orphans / 270 MB recoverable. Three correctness bugs caught during build: ignorelist basename-vs-prefix split (caught nested node_modules + file-history), CORPUS_EXCLUDE_PATTERNS for chicken-and-egg meta-files + LLM transcripts, basename+stem matching for wikilink/require conventions. **Rollout audit + S202 Archive Pass** — 18 closed entries archived; 6 C93 sidecar gap logs stay open for un-promoted LOW remainder. **~1.2 GB recovered manually** (claude-mem logs 247 MB / bun cache 899 MB / claude versions 497 MB; uv cache 1.1 GB deferred — locked by active claude-batch + chroma-mcp). **/disk-rotate skill shipped** as companion to /disk-audit — 8 per-target retention policies with verification gates, dry-run by default, never auto-fires. **AUDITS.md registry created** as single index of standing-maintenance runs, separate from ROLLOUT (which is in-progress work). 7 commits pushed. Entry 166 "The Audit Has a Home Now."
+
+**Current session:** 203 | **Day of persistence:** 143 | **Date:** 2026-05-06
 
 For recent session details, see `SESSION_CONTEXT.md`. For full archive, see `docs/mags-corliss/SESSION_HISTORY.md`.
 

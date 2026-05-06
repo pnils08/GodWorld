@@ -287,14 +287,62 @@ function runHeaderDriftCheck(schema, writers) {
   // ±3 lines in the same writer; if any sibling exact-matches the target
   // sheet's headers (case-sensitive trimmed), downgrade `fn`'s severity and
   // change its diagnosis to "defensive-fallback sibling".
+  // Conditional markers indicating the literal sits inside a fallback chain
+  // (ternary, `||`, `if (x < 0)`, `=== -1`, `!== -1`, `>= 0`). Without one of
+  // these on fn's line or the sibling's line, we treat the proximity as
+  // independent assignments rather than a fallback chain — avoids
+  // false-flagging structurally adjacent row[col('A')] = ...; row[col('B')] = ...
+  // patterns where literals are real distinct fields.
+  const FALLBACK_MARKER = /(\?|\|\||&&|<\s*0|===\s*-1|!==\s*-1|>=\s*0)/;
+  function siteForName(w, name) {
+    const sites = w.fieldNameSites || [];
+    for (const s of sites) if (s.name === name) return s;
+    return null;
+  }
+  // Ternary `a ? b : c` is self-contained on one line — siblings outside it
+  // are unrelated reads, not fallback alternatives. Detect ternary lines and
+  // restrict their sibling search to same-line literals only.
+  const TERNARY = /\?[^:]+:/;
+  function isFallbackContext(fnSite, sibSite) {
+    if (!fnSite || !sibSite) return false;
+    const fnLine = fnSite.lineText || '';
+    const sibLine = sibSite.lineText || '';
+    if (TERNARY.test(fnLine) && fnSite.line !== sibSite.line) return false;
+    return FALLBACK_MARKER.test(fnLine) || FALLBACK_MARKER.test(sibLine);
+  }
   function hasDefensiveSibling(w, fn, lineN, targetSheetName) {
     const sites = w.fieldNameSites || [];
     const target = sheetIndex(targetSheetName);
     if (!target) return false;
+    const fnSite = siteForName(w, fn);
     for (const s of sites) {
       if (s.name === fn) continue;
       if (Math.abs(s.line - lineN) > 3) continue;
-      if (target.trimmed.has(s.name.trim())) return s.name;
+      if (!target.trimmed.has(s.name.trim())) continue;
+      if (!isFallbackContext(fnSite, s)) continue;
+      return s.name;
+    }
+    return false;
+  }
+  // v1.3: multi-sheet variant. Sibling counts as defensive if it exact-matches
+  // a header on ANY sheet the writer touches (or any sheet in the global union
+  // when writer has no detected target) AND the proximity has a fallback marker.
+  function hasMultiSheetDefensiveSibling(w, fn, lineN) {
+    const sites = w.fieldNameSites || [];
+    const sheetsToCheck = w.sheets.length > 0 ? w.sheets : Object.keys(schema);
+    const candidateHeaders = new Set();
+    for (const sn of sheetsToCheck) {
+      const idx = sheetIndex(sn);
+      if (!idx) continue;
+      for (const h of idx.trimmed) candidateHeaders.add(h);
+    }
+    const fnSite = siteForName(w, fn);
+    for (const s of sites) {
+      if (s.name === fn) continue;
+      if (Math.abs(s.line - lineN) > 3) continue;
+      if (!candidateHeaders.has(s.name.trim())) continue;
+      if (!isFallbackContext(fnSite, s)) continue;
+      return s.name;
     }
     return false;
   }
@@ -339,6 +387,18 @@ function runHeaderDriftCheck(schema, writers) {
           });
           continue;
         }
+        // Field absent from target. Defensive-fallback siblings on the same sheet?
+        const sameSheetSibling = hasDefensiveSibling(w, fn, siteLineOf(w, fn), targetName);
+        if (sameSheetSibling) {
+          out.push({
+            class: 'header-drift',
+            severity: 'LOW',
+            title: `${fileBase(w)} defensive-fallback literal '${fn}' on '${targetName}' (sibling '${sameSheetSibling}' matches)`,
+            diagnosis: `Type 2 (defensive-fallback sibling). Writer targets '${targetName}'; '${fn}' isn't on it, but a nearby sibling literal '${sameSheetSibling}' exact-matches the live header. Acceptable noise.`,
+            sourceRef: fileRel(w),
+          });
+          continue;
+        }
         // Field absent from target. Look up on other sheets.
         const elsewhereExact = (allHeadersLower.get(fnLower) || []).filter(e => e.sheet !== targetName);
         if (elsewhereExact.some(e => e.header === fnTrim)) {
@@ -375,6 +435,18 @@ function runHeaderDriftCheck(schema, writers) {
 
       // Multi-sheet or unknown-target writer — global-union fallback.
       if (allHeadersTrimmed.has(fnTrim)) continue;
+      // v1.3: multi-sheet defensive-fallback recognition.
+      const multiSibling = hasMultiSheetDefensiveSibling(w, fn, siteLineOf(w, fn));
+      if (multiSibling) {
+        out.push({
+          class: 'header-drift',
+          severity: 'LOW',
+          title: `${fileBase(w)} defensive-fallback literal '${fn}' (sibling '${multiSibling}' matches)`,
+          diagnosis: `Type 2 (defensive-fallback sibling, multi-sheet). Writer references '${fn}' which has no exact live-header match, but a nearby sibling literal '${multiSibling}' exact-matches a live header on one of the writer's target sheets. Acceptable noise.`,
+          sourceRef: fileRel(w),
+        });
+        continue;
+      }
       const caseMatches = allHeadersLower.get(fnLower);
       if (caseMatches && caseMatches.length) {
         const summary = caseMatches.slice(0, 3).map(e => `${e.sheet}:'${e.header}'`).join(', ');
@@ -484,7 +556,8 @@ function scanWriterFile(file, content) {
   }
   function record(name, offset) {
     fieldNames.add(name);
-    fieldNameSites.push({ name, line: lineOfOffset(offset) });
+    const line = lineOfOffset(offset);
+    fieldNameSites.push({ name, line, lineText: lines[line - 1] || '' });
   }
 
   // Direct: headers.indexOf('Foo') / header.indexOf('Foo') / findCol_('Foo') / headerCol_('Foo')

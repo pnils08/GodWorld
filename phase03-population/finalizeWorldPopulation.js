@@ -1,34 +1,31 @@
 /**
  * ============================================================================
- * FINALIZE WORLD POPULATION v1.1
+ * FINALIZE WORLD POPULATION v1.2 (S203 — v1.1 calendar path removed)
  * ============================================================================
- * 
+ *
  * PURPOSE: Writes complete cycle summary data to World_Population sheet
- * 
- * v1.1 Enhancements:
- * - season column
- * - holiday column
- * - holidayPriority column
- * - isFirstFriday column
- * - isCreationDay column
- * - sportsSeason column
- * - month column
- * - Aligned with GodWorld Calendar v1.0
- * 
+ *
+ * v1.2 Changes (S203 [engine-sheet] header-drift detector audit):
+ * - Removed v1.1 calendar field writes (season/holiday/holidayPriority/
+ *   isFirstFriday/isCreationDay/sportsSeason/month). Those columns were never
+ *   added to live World_Population schema — every write silently no-op'd via
+ *   the `idx(name) >= 0` guards. Calendar values flow through ctx.summary
+ *   per-cycle (Phase 1 advanceSimulationCalendar_), so persistence is
+ *   redundant. Phase 7 mediaRoomIntake.getCurrentCalendarContext_ now reads
+ *   from ctx.summary directly (also fixed S203).
+ *
  * PROBLEM SOLVED: updateWorldPopulation_() runs in Phase 3, before most
  * cycle data exists. This function runs in Phase 9 AFTER all signals,
  * weather, dynamics, and flags are calculated.
- * 
- * INTEGRATION: Add to Phase 9 in runWorldCycle():
- * 
- *   // PHASE 9: FINAL ANALYSIS + DIGEST
+ *
+ * INTEGRATION: Phase 9 in runWorldCycle():
  *   applyCompressedDigestSummary_(ctx);
  *   applyCycleWeightForLatestCycle_(ctx);
- *   finalizeWorldPopulation_(ctx);  // <-- ADD THIS LINE
- * 
+ *   finalizeWorldPopulation_(ctx);
+ *
  * SHEET: World_Population (single-row state sheet, row 2 = data)
- * 
- * WRITES TO COLUMNS:
+ *
+ * WRITES TO COLUMNS (live schema, post-S203):
  *   - cycle
  *   - cycleWeight
  *   - cycleWeightReason
@@ -45,22 +42,15 @@
  *   - nightlifeLoad
  *   - publicSpacesLoad
  *   - sentiment
- *   - season (v1.1)
- *   - holiday (v1.1)
- *   - holidayPriority (v1.1)
- *   - isFirstFriday (v1.1)
- *   - isCreationDay (v1.1)
- *   - sportsSeason (v1.1)
- *   - month (v1.1)
- * 
- * DOES NOT TOUCH (handled by updateWorldPopulation_):
  *   - timestamp
+ *
+ * DOES NOT TOUCH (handled by updateWorldPopulation_):
  *   - totalPopulation
  *   - illnessRate
  *   - employmentRate
  *   - migration
  *   - economy
- * 
+ *
  * ============================================================================
  */
 
@@ -184,36 +174,16 @@ function finalizeWorldPopulation_(ctx) {
   }
 
   // -------------------------------------------------------------------------
-  // v1.1: CALENDAR CONTEXT
+  // CALENDAR CONTEXT — v1.1 path removed S203
   // -------------------------------------------------------------------------
-  
-  if (idx('season') >= 0) {
-    sheet.getRange(dataRow, idx('season') + 1).setValue(S.season || '');
-  }
-  
-  if (idx('holiday') >= 0) {
-    sheet.getRange(dataRow, idx('holiday') + 1).setValue(S.holiday || 'none');
-  }
-  
-  if (idx('holidayPriority') >= 0) {
-    sheet.getRange(dataRow, idx('holidayPriority') + 1).setValue(S.holidayPriority || 'none');
-  }
-  
-  if (idx('isFirstFriday') >= 0) {
-    sheet.getRange(dataRow, idx('isFirstFriday') + 1).setValue(S.isFirstFriday || false);
-  }
-  
-  if (idx('isCreationDay') >= 0) {
-    sheet.getRange(dataRow, idx('isCreationDay') + 1).setValue(S.isCreationDay || false);
-  }
-  
-  if (idx('sportsSeason') >= 0) {
-    sheet.getRange(dataRow, idx('sportsSeason') + 1).setValue(S.sportsSeason || 'off-season');
-  }
-  
-  if (idx('month') >= 0) {
-    sheet.getRange(dataRow, idx('month') + 1).setValue(S.month || 0);
-  }
+  // The v1.1 design wrote 7 calendar fields (season/holiday/holidayPriority/
+  // isFirstFriday/isCreationDay/sportsSeason/month) to World_Population. Those
+  // columns were never added to the live World_Population schema (22 cols
+  // post-S203 SCHEMA_HEADERS), so every cycle's writes silently no-op'd via
+  // the `idx(name) >= 0` guards. Phase 1 advanceSimulationCalendar_ already
+  // populates ctx.summary fresh each cycle (S.season/holiday/etc.), and
+  // Phase 7 mediaRoomIntake reads them from there post-S203. Persistence
+  // layer was redundant — removed.
 
   // -------------------------------------------------------------------------
   // TIMESTAMP (optional - update to show last finalization)
@@ -223,7 +193,7 @@ function finalizeWorldPopulation_(ctx) {
     sheet.getRange(dataRow, idx('timestamp') + 1).setValue(ctx.now || new Date());
   }
 
-  Logger.log('finalizeWorldPopulation_ v1.1: Complete for Cycle ' + (S.cycleId || 'unknown') + 
+  Logger.log('finalizeWorldPopulation_ v1.2: Complete for Cycle ' + (S.cycleId || 'unknown') + 
     ' | Holiday: ' + (S.holiday || 'none') + ' | Sports: ' + (S.sportsSeason || 'off-season'));
 }
 
@@ -276,19 +246,15 @@ function finalizeWorldPopulation_Batch_(ctx) {
   if (idx('publicSpacesLoad') >= 0) dataRow[idx('publicSpacesLoad')] = D.publicSpaces || '';
   if (idx('sentiment') >= 0) dataRow[idx('sentiment')] = D.sentiment || '';
   
-  // v1.1: Calendar context
-  if (idx('season') >= 0) dataRow[idx('season')] = S.season || '';
-  if (idx('holiday') >= 0) dataRow[idx('holiday')] = S.holiday || 'none';
-  if (idx('holidayPriority') >= 0) dataRow[idx('holidayPriority')] = S.holidayPriority || 'none';
-  if (idx('isFirstFriday') >= 0) dataRow[idx('isFirstFriday')] = S.isFirstFriday || false;
-  if (idx('isCreationDay') >= 0) dataRow[idx('isCreationDay')] = S.isCreationDay || false;
-  if (idx('sportsSeason') >= 0) dataRow[idx('sportsSeason')] = S.sportsSeason || 'off-season';
-  if (idx('month') >= 0) dataRow[idx('month')] = S.month || 0;
+  // Calendar context — v1.1 path removed S203 (same rationale as the primary
+  // finalizeWorldPopulation_ above; cols never existed on World_Population, ctx.summary
+  // is the canonical source per-cycle). NOTE: this _Batch_ helper has zero callers
+  // currently — flagged as dead code for separate cleanup pass.
 
   // Write back in single call
   dataRange.setValues([dataRow]);
 
-  Logger.log('finalizeWorldPopulation_Batch_ v1.1: Complete for Cycle ' + (S.cycleId || 'unknown') + 
+  Logger.log('finalizeWorldPopulation_Batch_ v1.2: Complete for Cycle ' + (S.cycleId || 'unknown') +
     ' | Holiday: ' + (S.holiday || 'none') + ' | Sports: ' + (S.sportsSeason || 'off-season'));
 }
 

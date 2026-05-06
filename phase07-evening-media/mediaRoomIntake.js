@@ -79,7 +79,7 @@
 function processMediaIntake_(ctx) {
   var ss = ctx.ss;
   var cycle = ctx.config.cycleCount || 0;
-  var cal = getCurrentCalendarContext_(ss);
+  var cal = getCurrentCalendarContext_(ctx);
 
   Logger.log('processMediaIntake_ v2.6: Starting intake processing for cycle ' + cycle);
 
@@ -110,7 +110,9 @@ function processMediaIntakeV2() {
 
   var ss = openSimSpreadsheet_(); // v2.14: Use configured spreadsheet ID
   var cycle = getCurrentCycleFromConfig_(ss);
-  var cal = getCurrentCalendarContext_(ss);
+  // Manual menu path — no engine ctx; calendar context defaults to empty.
+  // Engine-driven processMediaIntake_ above passes real ctx.
+  var cal = getCurrentCalendarContext_(null);
 
   // Manual path — no ctx.ledger. Sub-functions fall back to direct sheet read.
   var results = processAllIntakeSheets_(null, ss, cycle, cal);
@@ -161,14 +163,24 @@ function processAllIntakeSheets_(ctx, ss, cycle, cal) {
 
 
 // ════════════════════════════════════════════════════════════════════════════
-// v2.1: CALENDAR CONTEXT HELPER
+// v2.2: CALENDAR CONTEXT HELPER (S203 — read from ctx.summary, not sheet)
 // ════════════════════════════════════════════════════════════════════════════
+// S203 [engine-sheet] header-drift detector + caller-graph audit found this
+// helper had been silent-failing since v1.1: it read calendar fields from the
+// World_Population sheet, but those columns were never added to that sheet's
+// schema. Every caller (line ~80, ~110, ~1430+) has been operating on
+// defaults — calendar/holiday/sportsSeason routing data lost for many cycles.
+// Phase 1 advanceSimulationCalendar_ populates ctx.summary fresh each cycle
+// (S.season/holiday/holidayPriority/isFirstFriday/isCreationDay + Phase 2
+// applySportsSeason adds S.sportsSeason). Read from there directly.
 
 /**
- * Gets current calendar context from World_Population sheet.
- * Returns defaults if sheet or columns don't exist.
+ * Gets current calendar context from ctx.summary (post-Phase-1 / -Phase-2).
+ * Returns defaults when ctx is unavailable (manual menu paths).
+ *
+ * @param {Object|null} ctx - Engine context with ctx.summary, or null.
  */
-function getCurrentCalendarContext_(ss) {
+function getCurrentCalendarContext_(ctx) {
   var defaults = {
     season: '',
     holiday: 'none',
@@ -180,28 +192,17 @@ function getCurrentCalendarContext_(ss) {
   };
 
   try {
-    var sheet = ss.getSheetByName('World_Population');
-    if (!sheet) return defaults;
-
-    var lastCol = sheet.getLastColumn();
-    if (lastCol < 1) return defaults;
-
-    var headers = sheet.getRange(1, 1, 1, lastCol).getValues()[0];
-    var dataRow = sheet.getRange(2, 1, 1, lastCol).getValues()[0];
-
-    var idx = function(name) {
-      return headers.indexOf(name);
+    if (!ctx || !ctx.summary) return defaults;
+    var S = ctx.summary;
+    return {
+      season: S.season || defaults.season,
+      holiday: S.holiday || defaults.holiday,
+      holidayPriority: S.holidayPriority || defaults.holidayPriority,
+      isFirstFriday: !!S.isFirstFriday,
+      isCreationDay: !!S.isCreationDay,
+      sportsSeason: S.sportsSeason || defaults.sportsSeason,
+      month: Number(S.simMonth || S.month) || defaults.month
     };
-
-    if (idx('season') >= 0) defaults.season = dataRow[idx('season')] || '';
-    if (idx('holiday') >= 0) defaults.holiday = dataRow[idx('holiday')] || 'none';
-    if (idx('holidayPriority') >= 0) defaults.holidayPriority = dataRow[idx('holidayPriority')] || 'none';
-    if (idx('isFirstFriday') >= 0) defaults.isFirstFriday = dataRow[idx('isFirstFriday')] === true || dataRow[idx('isFirstFriday')] === 'TRUE';
-    if (idx('isCreationDay') >= 0) defaults.isCreationDay = dataRow[idx('isCreationDay')] === true || dataRow[idx('isCreationDay')] === 'TRUE';
-    if (idx('sportsSeason') >= 0) defaults.sportsSeason = dataRow[idx('sportsSeason')] || 'off-season';
-    if (idx('month') >= 0) defaults.month = Number(dataRow[idx('month')]) || 0;
-
-    return defaults;
 
   } catch (e) {
     Logger.log('getCurrentCalendarContext_ ERROR: ' + e.message);
@@ -1431,7 +1432,8 @@ function processQuotedCitizens_(ss, entries, ledgerData, cycle, cal, results) {
 function processRawCitizenUsageLogManual() {
   var ss = openSimSpreadsheet_() // v2.14: Use configured spreadsheet ID;
   var cycle = getCurrentCycleFromConfig_(ss);
-  var cal = getCurrentCalendarContext_(ss);
+  // Manual menu path — no engine ctx; calendar context defaults to empty.
+  var cal = getCurrentCalendarContext_(null);
 
   // Get raw text from MediaRoom_Paste sheet
   var pasteSheet = ss.getSheetByName('MediaRoom_Paste');

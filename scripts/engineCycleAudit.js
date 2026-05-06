@@ -277,6 +277,33 @@ function runHeaderDriftCheck(schema, writers) {
   const fileBase = w => path.basename(w.file);
   const fileRel = w => path.relative(ROOT, w.file);
 
+  // Defensive-fallback proximity: when writer has chained lookups like
+  //   `var x = headers.indexOf('A'); if (x < 0) x = headers.indexOf('B');`
+  // or
+  //   `var x = headers.indexOf('A') >= 0 ? indexOf('A') : indexOf('B')`
+  // and one literal exactly matches the target, the OTHER literals are
+  // intentional fallbacks (legacy alias, typo-tolerance, schema-shift cushion).
+  // Heuristic: for a flagged literal `fn` at line L, look at sibling sites within
+  // ±3 lines in the same writer; if any sibling exact-matches the target
+  // sheet's headers (case-sensitive trimmed), downgrade `fn`'s severity and
+  // change its diagnosis to "defensive-fallback sibling".
+  function hasDefensiveSibling(w, fn, lineN, targetSheetName) {
+    const sites = w.fieldNameSites || [];
+    const target = sheetIndex(targetSheetName);
+    if (!target) return false;
+    for (const s of sites) {
+      if (s.name === fn) continue;
+      if (Math.abs(s.line - lineN) > 3) continue;
+      if (target.trimmed.has(s.name.trim())) return s.name;
+    }
+    return false;
+  }
+  function siteLineOf(w, name) {
+    const sites = w.fieldNameSites || [];
+    for (const s of sites) if (s.name === name) return s.line;
+    return -1;
+  }
+
   for (const w of writers) {
     const targetName = (w.sheets.length === 1) ? w.sheets[0] : null;
     const targetIdx = targetName ? sheetIndex(targetName) : null;
@@ -290,6 +317,18 @@ function runHeaderDriftCheck(schema, writers) {
         if (targetIdx.trimmed.has(fnTrim)) continue; // exact match on target
         const sameSheetCase = targetIdx.lower.get(fnLower);
         if (sameSheetCase) {
+          // Same-sheet case mismatch — but check for defensive-fallback sibling first.
+          const sibling = hasDefensiveSibling(w, fn, siteLineOf(w, fn), targetName);
+          if (sibling) {
+            out.push({
+              class: 'header-drift',
+              severity: 'LOW',
+              title: `${fileBase(w)} defensive-fallback literal '${fn}' on '${targetName}' (sibling '${sibling}' matches)`,
+              diagnosis: `Type 2 (defensive-fallback sibling). Writer's literal '${fn}' has a case-variant '${sameSheetCase}' on '${targetName}', AND a nearby sibling literal '${sibling}' exact-matches the live header. The fallback chain handles both cases — '${fn}' is defensive, not silent-fail. Acceptable noise; no fix needed.`,
+              sourceRef: fileRel(w),
+            });
+            continue;
+          }
           // Definitive same-sheet case mismatch → silent-fail every cycle.
           out.push({
             class: 'header-drift',
@@ -431,13 +470,30 @@ function scanWriterFile(file, content) {
   }
 
   const fieldNames = new Set();
+  const fieldNameSites = []; // [{ name, line }] — raw with duplicates + line numbers,
+                             // used by runHeaderDriftCheck for defensive-fallback proximity.
+  const lines = content.split('\n');
+
+  function lineOfOffset(offset) {
+    let n = 0;
+    for (let i = 0; i < lines.length; i++) {
+      n += lines[i].length + 1;
+      if (offset < n) return i + 1;
+    }
+    return lines.length;
+  }
+  function record(name, offset) {
+    fieldNames.add(name);
+    fieldNameSites.push({ name, line: lineOfOffset(offset) });
+  }
+
   // Direct: headers.indexOf('Foo') / header.indexOf('Foo') / findCol_('Foo') / headerCol_('Foo')
   // Engine code uses both `headers` (plural) and `header` (singular) — accept both.
   for (const m of content.matchAll(/\bheaders?\.indexOf\s*\(\s*['"]([^'"]+)['"]\s*\)/g)) {
-    fieldNames.add(m[1]);
+    record(m[1], m.index);
   }
   for (const m of content.matchAll(/\b(?:findCol_|headerCol_)\s*\(\s*['"]([^'"]+)['"]\s*\)/g)) {
-    fieldNames.add(m[1]);
+    record(m[1], m.index);
   }
   // Local-helper resolution: var col = function(name) { return header(s).indexOf(name); } then col('Foo')
   const helperNames = [];
@@ -449,12 +505,11 @@ function scanWriterFile(file, content) {
   }
   for (const helperName of helperNames) {
     const re = new RegExp(`\\b${helperName}\\s*\\(\\s*['"]([^'"]+)['"]\\s*\\)`, 'g');
-    for (const m of content.matchAll(re)) fieldNames.add(m[1]);
+    for (const m of content.matchAll(re)) record(m[1], m.index);
   }
 
   // Range writes: getRange(rowExpr, colExpr, hExpr, wExpr).setValues
   const rangeWrites = [];
-  const lines = content.split('\n');
   const rangeRe = /\.getRange\s*\(\s*[^,)]+\s*,\s*([^,)]+)\s*,\s*[^,)]+\s*,\s*([^,)]+)\s*\)\.setValues\b/g;
   lines.forEach((line, i) => {
     for (const m of line.matchAll(rangeRe)) {
@@ -471,6 +526,7 @@ function scanWriterFile(file, content) {
     file,
     sheets: Array.from(sheets),
     fieldNames: Array.from(fieldNames),
+    fieldNameSites, // [{ name, line }] — raw, used for defensive-fallback proximity check
     rangeWrites,
   };
 }

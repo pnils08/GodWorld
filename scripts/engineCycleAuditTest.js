@@ -232,6 +232,39 @@ assert(mismatchDrifts.some(d => d.diagnosis.includes('Simulation_Calendar')),
 assert(mismatchDrifts.some(d => d.title.includes("not on 'World_Population'") || d.title.includes("not on target 'World_Population'") || d.title.includes("not on target")),
   'target-mismatch title names the writer\'s wrong target sheet');
 
+// Case 5b — defensive-fallback recognition: when sibling literal exact-matches
+// the target, case-variant siblings are dead-but-harmless fallbacks (LOW, not HIGH).
+// Mirrors cycleExportAutomation.js:395-397 pattern.
+const defensiveFallbackWriter = scanWriterFile('synthetic/defensive.js', `
+function getCycle_(ss) {
+  var sheet = ss.getSheetByName('World_Population');
+  var headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0];
+  var cycleIdx = headers.indexOf('cycle');
+  if (cycleIdx < 0) cycleIdx = headers.indexOf('Cycle');
+  if (cycleIdx < 0) cycleIdx = headers.indexOf('AbsoluteCycle');
+  return cycleIdx;
+}
+`);
+const defensiveSchema = parseSchemaHeaders(`
+## World_Population
+
+- **Rows:** 2
+- **Columns:** 1
+
+| Col | Header |
+|-----|--------|
+| A | cycle |
+`);
+const defensiveDrifts = runHeaderDriftCheck(defensiveSchema, [defensiveFallbackWriter]);
+const cycleHigh = defensiveDrifts.find(d => d.title.includes("'Cycle'") && d.severity === 'HIGH');
+const cycleLow = defensiveDrifts.find(d => d.title.includes("'Cycle'") && d.severity === 'LOW');
+assert(!cycleHigh,
+  'defensive-fallback: PascalCase Cycle does NOT produce HIGH (sibling lowercase cycle matches target)');
+assert(cycleLow && cycleLow.title.includes('defensive-fallback'),
+  'defensive-fallback: PascalCase Cycle is LOW with defensive-fallback diagnosis');
+assert(defensiveDrifts.every(d => d.severity !== 'HIGH'),
+  'defensive-fallback: 0 HIGH entries in chained fallback pattern');
+
 // Case 6 — same-sheet case mismatch is HIGH (definitive silent-fail), not MED.
 const sameSheetCaseWriter = scanWriterFile('synthetic/sameSheetCase.js', `
 function read_(ss) {

@@ -285,3 +285,8 @@ When `/md-audit` lands, revisit whether this skill should:
 - Stay as content-staleness only (current scope)
 - Merge with `/md-audit` into unified frontmatter-driven `/audit`
 - Fold its group definitions into per-doc frontmatter
+
+## Tracking
+
+After every group run, append a row to `[[../../docs/AUDITS]]` Run history table:
+- Date, skill (`/doc-audit <group>`), findings (1-line: drift count + severity), action taken (`fixes applied: N` or `report only`), artifact path (commit hash if fixes shipped, else session note).

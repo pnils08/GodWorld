@@ -1,0 +1,59 @@
+---
+title: Audit Run Registry
+created: 2026-05-06
+updated: 2026-05-06
+type: reference
+tags: [architecture, infrastructure, active]
+sources:
+  - .claude/skills/disk-audit/SKILL.md
+  - .claude/skills/disk-rotate/SKILL.md
+  - .claude/skills/md-audit/SKILL.md
+  - .claude/skills/doc-audit/SKILL.md
+pointers:
+  - "[[engine/ROLLOUT_PLAN]] — open work; this file is for *standing* maintenance jobs"
+  - "[[index]] — registers each audit skill's plan file"
+---
+
+# Audit Run Registry
+
+**The single index of when each maintenance audit was run, what it found, and what (if anything) was acted on.**
+
+Standing maintenance jobs (`/disk-audit`, `/disk-rotate`, `/md-audit`, `/doc-audit`) are NOT rollout items — they're recurring health checks. This registry tracks their cadence + outcomes so any session can answer "when did we last sweep X?" without grepping commit history.
+
+**Update protocol:** every audit-skill run that produces a report (or executes an action) appends a row to the table below. Inline at the end of the skill's last step. Format: one row per run.
+
+---
+
+## Run history
+
+| Date | Skill | Findings (1-line) | Action taken | Commit / artifact |
+|---|---|---|---|---|
+| 2026-05-06 | `/disk-audit` | 7,195 files / 1.95 GB → 912 orphans / 270 MB; headline: 263 MB stale claude-mem logs | report only | `output/disk_audit_2026-05-06.md` (commit `20790e1`) |
+| 2026-05-06 | `/disk-rotate` (manual) | claude-mem logs 5/01–5/03 (247 MB), bun cache (899 MB), claude versions .126+.128 (497 MB) | deleted; uv cache (1.1 GB) deferred — locked by active MCPs | manual S203; ~1.2 GB recovered, disk 84% → 79% |
+
+---
+
+## Cadence guidance
+
+| Skill | When to run | Trigger heuristic |
+|---|---|---|
+| `/disk-audit` | On demand | Droplet >85% disk OR after large `output/` accumulation |
+| `/disk-rotate` | Per-target on demand | Always after `/disk-audit` flags a recoverable bucket; never schedule |
+| `/md-audit` | Monthly-ish | Or after large doc churn (post-archive sweep, post-plan retirement wave) |
+| `/doc-audit` | Per-group on demand | Quarterly per group; or after architectural shifts touch a group's surface |
+
+No skill in this registry runs on a schedule. All are manually invoked. Each gets verification gates before destructive action.
+
+---
+
+## Pattern — every audit skill MUST
+
+1. **Produce a dated artifact** — either an MD report (`output/<skill>_<DATE>.md`) or a JSON manifest. Never log results only to stdout.
+2. **Append a row to this file** — at the end of the skill's run, before declaring done. Mike-readable summary in 1 line.
+3. **Never auto-delete** — destructive actions in `/disk-rotate` etc. require explicit `--apply --target X` per-target invocation.
+
+---
+
+## Changelog
+
+- 2026-05-06 — Initial registry (S203, research-build). Pattern adopted to give standing maintenance jobs a home outside ROLLOUT_PLAN (which is for in-progress / open work). Bootstrapped with the `/disk-audit` first-run record + the manual `/disk-rotate` cleanup of S203.

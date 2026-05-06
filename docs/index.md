@@ -43,6 +43,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 ### Schema & navigation
 - **[[SCHEMA]]** — conventions for naming, frontmatter, tags, links, folder map. Read first when creating any new doc. *(reference, architecture, active)*
 - **[[index]]** — this file. The catalog. *(reference, architecture, active)*
+- **[[AUDITS]]** — registry of standing maintenance audits (`/disk-audit`, `/disk-rotate`, `/md-audit`, `/doc-audit`). One row per run with date / findings / action / commit. Single index for "when did we last sweep X?" — separate from ROLLOUT_PLAN (which is in-progress work). *(reference, architecture, active)*
 
 ### Vision & architecture
 - **[[POST_MORTEM_C92_CONTAMINATION]]** — S172 project halt. Fourth-wall contamination across bay-tribune / world-data / super-memory / editions / filesystem. 20+ real-world Oakland institutional references in E92 alone. Sanitization scope exceeded available drive; project halted at Cycle 92. Includes structural issues, session 172 EIC failures, and resumption path if ever revisited. *(reference, historical, halted)*

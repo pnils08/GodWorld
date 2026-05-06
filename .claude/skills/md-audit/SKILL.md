@@ -62,3 +62,8 @@ Phase 3 (gated archival via `scripts/archiveStaleMd.js`) intentionally not built
 - **90-day threshold** — starting point. If first run produces zero orphans, tighten to 60. If it produces >50, tighten the active window or seed `stable: true` on known durables.
 - **`docs/plans/`** — not excluded. Old completed plans archiving is a feature, not a bug.
 - **False positives** — top-level reference docs (`SCHEMA.md`, `STACK.md`, `SIMULATION_LEDGER.md`, `SPREADSHEET.md`, `reference/V3_ARCHITECTURE.md`, `reference/DEPLOY.md`) are candidates for `stable: true` frontmatter after first review.
+
+## Tracking
+
+After every run, append a row to `[[../../docs/AUDITS]]` Run history table:
+- Date, skill (`/md-audit`), findings (1-line summary — orphan count / stale count / fresh count), action taken (typically `report only`; `archived N docs` if Phase 3 fires), artifact path (`output/md_audit_<DATE>.md`).

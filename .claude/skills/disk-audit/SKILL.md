@@ -89,4 +89,9 @@ Plan file: `docs/plans/2026-05-05-disk-inventory-and-dead-file-detection.md` (dr
 
 Phase 2.3 batch-API submission for the `review` tier intentionally not built — first runs will reveal whether the mechanical classifier handles enough of the load. If batch is needed later, the `review` bucket entries are pre-shaped for `mcp__claude-batch__send_to_batch` consumption.
 
-Phase 3.1 (this triage report) is the read-only deliverable. Phase 3 archival (gated `scripts/archiveStaleFiles.js`) intentionally not built — destructive action stays out of the autonomous loop until the classifier is proven across multiple runs.
+Phase 3.1 (this triage report) is the read-only deliverable. Phase 3 archival (gated `scripts/archiveStaleFiles.js`) intentionally not built — destructive action stays out of the autonomous loop. Use the companion **`/disk-rotate`** skill for per-target retention + cleanup with verification gates.
+
+## Tracking
+
+After every run, append a row to `[[../../docs/AUDITS]]` Run history table:
+- Date, skill (`/disk-audit`), findings (1-line summary from the report), action taken (`report only`), artifact path (`output/disk_audit_<DATE>.md`).

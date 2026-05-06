@@ -52,6 +52,28 @@ const MAX_SCAN_BYTES = 5 * 1024 * 1024;
 // Per Q2 (resolved S203): /root/GodWorld + /root/.claude only.
 const CORPUS_PREFIXES = ['GodWorld/', '.claude/'];
 
+// CORPUS_EXCLUDE_PATTERNS — files inside the corpus prefixes that we DO NOT
+// want to scan as reference sites. Three classes:
+//   (a) This skill's own outputs (chicken-and-egg — they list every basename)
+//   (b) LLM-generated transcripts (recapitulate filenames; not code refs)
+//   (c) claude-code/claude-mem observation dumps (AI-output noise)
+// First wave fix S203 — pre-fix, 4,412 entries had refCount=2 with both
+// disk_inventory + disk_refscan as their only sites.
+const CORPUS_EXCLUDE_PATTERNS = [
+  // (a) This skill's own outputs
+  /^GodWorld\/output\/disk_/,
+  /^output\/disk_/,
+  // (b) LLM batch transcripts — list filenames but don't authoritatively reference
+  /^\.claude\/batches\//,
+  /^GodWorld\/\.claude\/batches\//,
+  // claude-code shell history — every command typed, including grep / cat / ls
+  /^\.claude\/history\.jsonl$/,
+  /^GodWorld\/\.claude\/history\.jsonl$/,
+  // (c) claude-mem extracted observations — AI summaries, not code
+  /^\.claude\/memories\//,
+  /^GodWorld\/\.claude\/memories\//,
+];
+
 // Tokenizer — splits on anything that isn't a basename-character.
 // Keeps dotfiles (.bashrc), extensions (.md), underscores (world_summary), hyphens (claude-mem.db).
 const TOKEN_SPLIT = /[^a-zA-Z0-9._-]+/;
@@ -85,12 +107,29 @@ function findLatestInventory(outDir) {
 // Build basename map from manifest
 // ---------------------------------------------------------------------------
 
+// Minimum stem length to index. Below this, stems collide with too many
+// common-word tokens in prose (e.g. a 2-char stem matches everywhere).
+const STEM_MIN_LENGTH = 3;
+
+function basenameForms(bn) {
+  // For 'foo.md' returns ['foo.md', 'foo'] — wiki convention strips extensions
+  // ('[[engine/LEDGER_REPAIR_HOUSEHOLDS]]' references LEDGER_REPAIR_HOUSEHOLDS.md).
+  // For dotfiles (.bashrc, .gitignore) returns just ['.bashrc'] — no separate stem.
+  const parsed = path.parse(bn);
+  if (parsed.ext === '' || !parsed.name || parsed.name.length < STEM_MIN_LENGTH) {
+    return [bn];
+  }
+  return [bn, parsed.name];
+}
+
 function buildBasenameMap(entries) {
-  const map = new Map(); // basename → [manifestEntry, ...]
+  const map = new Map(); // token (basename or stem) → [manifestEntry, ...]
   for (const entry of entries) {
     const bn = path.basename(entry.path);
-    if (!map.has(bn)) map.set(bn, []);
-    map.get(bn).push(entry);
+    for (const form of basenameForms(bn)) {
+      if (!map.has(form)) map.set(form, []);
+      map.get(form).push(entry);
+    }
   }
   return map;
 }
@@ -176,10 +215,17 @@ function main() {
     .map(([bn, entries]) => ({ basename: bn, count: entries.length }))
     .sort((a, b) => b.count - a.count);
 
-  // Step 2: corpus = manifest entries under /root/GodWorld or /root/.claude.
-  const corpus = manifest.entries.filter(e =>
-    CORPUS_PREFIXES.some(p => e.path.startsWith(p))
-  );
+  // Step 2: corpus = manifest entries under /root/GodWorld or /root/.claude,
+  // minus paths matching CORPUS_EXCLUDE_PATTERNS (this skill's own outputs +
+  // LLM/AI transcripts that recapitulate filenames without authoritatively
+  // referencing them).
+  const corpus = manifest.entries.filter(e => {
+    if (!CORPUS_PREFIXES.some(p => e.path.startsWith(p))) return false;
+    for (const re of CORPUS_EXCLUDE_PATTERNS) {
+      if (re.test(e.path)) return false;
+    }
+    return true;
+  });
 
   console.log(`[diskRefScan] basenames: ${basenameSet.size} unique (${commonBasenames.length} common, >${COMMON_THRESHOLD}×)`);
   console.log(`[diskRefScan] corpus: ${corpus.length} files (filter: GodWorld/ + .claude/)`);
@@ -189,20 +235,28 @@ function main() {
     scanCorpus(corpus, basenameSet, rootAbs);
 
   // Step 4: per manifest entry, lookup refCount + top-5 refSites.
+  // Lookup unions BOTH forms (full basename + stem) — wiki convention strips
+  // extensions in [[wikilinks]]; require() drops .js. Self-references already
+  // filtered during corpus scan.
   const commonSet = new Set(commonBasenames.map(c => c.basename));
   const refEntries = manifest.entries.map(entry => {
     const bn = path.basename(entry.path);
-    const refSites = inverseMap.get(bn);
-    const sites = refSites ? [...refSites] : [];
+    const forms = basenameForms(bn);
+    const sites = new Set();
+    for (const form of forms) {
+      const formSites = inverseMap.get(form);
+      if (formSites) for (const s of formSites) sites.add(s);
+    }
+    const sitesArr = [...sites];
     return {
       path: entry.path,
       basename: bn,
       size: entry.size,
       mtime: entry.mtime,
       gitTracked: entry.gitTracked,
-      refCount: sites.length,
-      refSites: sites.slice(0, 5),
-      common: commonSet.has(bn),
+      refCount: sitesArr.length,
+      refSites: sitesArr.slice(0, 5),
+      common: forms.some(f => commonSet.has(f)),
     };
   });
 

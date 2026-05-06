@@ -59,6 +59,12 @@ const IGNORE_BASENAMES = new Set([
   '.ruff_cache',            // ruff linter cache
   // claude-code edit-history snapshots — per-edit backups, not authored
   'file-history',
+  // Browser cache — runtime state, never authored. Caught .config/google-chrome
+  // leaking ~80 MB of model.tflite + optimization_guide_model_store + Safe
+  // Browsing stores into the orphan report.
+  'google-chrome',
+  'chromium',
+  'BraveSoftware',
 ]);
 
 const IGNORE_PREFIXES = [

@@ -1,7 +1,7 @@
 ---
 title: "ADR-0002: Phase 42 §5.6 — phase05-ledger redesign via shared `ctx.ledger`"
 created: 2026-05-01
-updated: 2026-05-01
+updated: 2026-05-06
 type: reference
 tags: [architecture, engine, decision, active]
 sources:
@@ -94,7 +94,17 @@ Leave the 11 direct-writers in place, document cohort B as a known bug, accept t
 
 **Redesign batch (engine-sheet, S188):** 9 commits `0e31e66..6609c4a` migrated all 16 full-range writers + 2 per-row + 5 spec'd readers + 3 audit-miss readers + Phase 1 init + Phase 10 commit handler to shared `ctx.ledger`. Per-commit breakdown: PHASE_42_PATTERNS Changelog 2026-04-29 (S188).
 
-**Post-redesign (S188+):** B2 mechanical migrations unblocked. Smoke-test (clasp push + live cycle run) pending — to be run when next cycle ships.
+**Post-redesign (S188+):** B2 mechanical migrations unblocked.
+
+**Smoke-test (engine-sheet, S191):** C93 cycle ran end-to-end. Pre-flight caught critical missing wiring — `runWorldCycle` block had no `Phase10-CommitLedger` call (S188 batch wired only `runCyclePhases_`); production entry would have silently dropped every staged ledger write. Closed commit `188ce5b`. Two function-name collisions in non-§5.6 paths surfaced (`loadActiveStorylines_` + `getCurrentCycle_`, same A4 pattern as `generateCitizensEvents_`); closed `2926e76`. Two cohort-C-equivalent migration debts surfaced — `generationalWealthEngine` + `educationCareerEngine` bypass `ctx.ledger`, get clobbered by Phase 10 commit. Logged as ENGINE_REPAIR Row 18.
+
+**Cohort-C followup (engine-sheet, S200):** ENGINE_REPAIR Row 18 closed via Path (b) — all 4 cohort-C engines migrated to `ctx.ledger` in one batch: `householdFormationEngine` v1.2 (`a829c7f`), `generationalWealthEngine` v2.1 (`ed25ea8`), `educationCareerEngine` v2.1 (`7f95521`), `migrationTrackingEngine` v1.1 (`93cd3a4`). Plus `c589b0a` godWorldEngine2.js Session-30 stale rationale ×2 occurrences replaced with §5.6-aware note + commit pointers. Spec scope updated **18 → 22 SL writers + 5 readers** all routing through `ctx.ledger`. Side fix in `educationCareerEngine.detectCareerMobility_`: pre-fix gated SL write on `events > 0` so Mobility was computed every cycle but persisted only when a stagnation hook fired; v2.1 flips dirty unconditionally so Mobility always commits.
+
+**Audit lesson (recorded in PHASE_42_PATTERNS A7):** the S185 §5.6.6 audit had grep'd file names instead of `process<thing>_` exposed function names — Apps Script flat-namespace dispatches by function name, not file name. 4 of 6 supposed "orphans" were live in the cycle path. Future cycle-path orphan checks must grep BOTH `<file-name>` AND `process<thing>_`.
+
+**Clasp deploy (engine-sheet, S201):** cohort-C engines pushed live to Apps Script.
+
+**C94 acceptance (operator-gated):** Mike fires `runWorldCycle()` in Apps Script; engine-sheet picks up post-cycle audit. SESSION_CONTEXT S203 §E enumerates 7 cohort-C ledger-routing checks: Income recalc lands (32% of citizens via fallback band), WealthLevel updates land per cycle, EducationLevel persists per cycle, CareerStage promotions land, CareerMobility flags land per-cycle (side-fix verification), HouseholdId backfill on new households, DisplacementRisk + MigrationIntent land. Engine_Errors should be clean of `Phase5-HouseholdFormation / Phase5-GenerationalWealth / Phase5-EducationCareer / Phase5-MigrationTracking / Phase10-CommitLedger`.
 
 **Spec entry caveat:** spec entry A1 #8 `generateNamedCitizensEvents:715` confirmed orphan at S188 (zero cycle callers). Documented inline at `phase01-config/godWorldEngine2.js:1079`. Migration touched the file for completeness but the engine doesn't fire in normal cycle path.
 

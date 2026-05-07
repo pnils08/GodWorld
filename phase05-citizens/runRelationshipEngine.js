@@ -1,8 +1,13 @@
 /**
  * ============================================================================
- * Relationship Engine v2.4
+ * Relationship Engine v2.5
  * ============================================================================
- * 
+ *
+ * v2.5 (S204 B2 / 2026-05-06):
+ * - LifeHistory_Log appendRow → queueAppendIntent_ (Phase 42 B2 mechanical migration).
+ *   Mirrors S184 B0 runHouseholdEngine pattern. Single caller (godWorldEngine2
+ *   Phase5-Relationships); ctx.ss / logSheet handle removed.
+ *
  * Enhancements over v2.2:
  * - Holiday-specific relationship pools (30+ holidays)
  * - First Friday social boost and events
@@ -35,11 +40,10 @@ function runRelationshipEngine_(ctx) {
   var rng = safeRand_(ctx);
 
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   if (!ctx.ledger) {
     throw new Error('runRelationshipEngine_: ctx.ledger not initialized');
   }
-  var ss = ctx.ss;
-  var logSheet = ss.getSheetByName('LifeHistory_Log');
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   if (!rows.length) return;
@@ -573,8 +577,10 @@ function runRelationshipEngine_(ctx) {
       ctx.summary.cycleActiveCitizens.push(popId);
 
       // Log history
-      if (logSheet) {
-        logSheet.appendRow([
+      queueAppendIntent_(
+        ctx,
+        'LifeHistory_Log',
+        [
           ctx.now,
           row[iPopID],
           ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(),
@@ -582,8 +588,10 @@ function runRelationshipEngine_(ctx) {
           pick,
           neighborhood,
           ctx.summary.cycleId || ctx.summary.absoluteCycle
-        ]);
-      }
+        ],
+        'relationship event',
+        'citizens'
+      );
 
       ctx.summary.eventsGenerated++;
       globalEvents++;

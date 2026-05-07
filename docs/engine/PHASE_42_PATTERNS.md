@@ -380,6 +380,71 @@ Most are P1 (append) + P3 (cell) + occasional P2 (range commit). Notable picks:
 | generateMediaModeEvents.js | 2 | 5 | B1; finish remaining 2 → P1 |
 | bondPersistence.js | 3 | 4 | B1; **all 3 direct = schema-setup carve-out, NO migration** |
 
+### S205 deferred-list triage (5 files / 11 sites)
+
+S204 close deferred 5 cycle-path files from B-batch sequencing pending per-file
+READ + caller-graph + classify pass. Triage shipped S205 (engine-sheet). Each site
+classified (a) ship-now mechanical / (b) B3 schema-setup carve-out / (c) B4
+caller-passed-helper batch / (d) already-closed verify-only.
+
+| File | Site | Phase | Cadence | Class | Pattern → target |
+|------|------|-------|---------|-------|------------------|
+| `phase05-citizens/runCivicElectionsv1.js` | L213-219 `electionLog.appendRow([14 headers])` lazy-create | 5 | once/lifetime | **(b) B3 carve-out** | true schema-setup, ≤1× per spreadsheet |
+| | L394 `electionLog.appendRow(row)` per-election | 5 | C45 even-yr only | **(a) mechanical** | P1 → `queueAppendIntent_(ctx, 'Election_Log', row, …)` |
+| | L432 `officeLedger.getRange(1,1,…).setValues(officeData)` full-sheet rewrite | 5 | C45 even-yr only | **(a) mechanical** | P2 → `queueRangeIntent_(ctx, 'Civic_Office_Ledger', 1, 1, officeData, …)` |
+| `phase05-citizens/generateGenericCitizens.js` | L662 `getRange(getLastRow()+1, …).setValues(rowsToWrite)` | 5 | every cycle | **(a) mechanical** (HIGH PRIO) | P1 → `queueBatchAppendIntent_(ctx, 'Generic_Citizens', rowsToWrite, …)` — closes getLastRow+1 hazard |
+| `phase05-citizens/generateChicagoCitizensv1.js` | L78 SEED `sheet.appendRow(row)` in loop | 8 | rare (pool < 50) | **(a) mechanical-w/-refactor** | P1 → batch-collect → `queueBatchAppendIntent_` |
+| | L102 MAINTAIN `sheet.appendRow(row)` in loop | 8 | when 50 ≤ n < 75 | **(a) mechanical-w/-refactor** | P1 → batch-collect → `queueBatchAppendIntent_` |
+| | L136 CHURN `sheet.getRange(row, 10).setValue('inactive')` | 8 | when n > 55 | **(a) mechanical-w/-refactor** | P3 → `queueCellIntent_(ctx, 'Chicago_Citizens', row, 10, 'inactive', …)` per churned |
+| | L173 `createChicagoCitizensSheet_` `appendRow([10 headers])` | 8 | once/lifetime | **(b) B3 carve-out** | true schema-setup, ≤1× per spreadsheet |
+| `phase05-citizens/bondEngine.js` | L1417 `sheet.appendRow(headers)` in `else` fallback | 10 | DEAD (ensureSheet_ exists) | **(b) B3 carve-out or delete** | fallback path dead — `ensureSheet_` defined in `utilities/utilityFunctions.js:64`; B3 sub-decision: carve-out vs explicit throw if helper missing |
+| | L1469 `getRange(getLastRow()+1, …).setValues(rows)` | 10 | every cycle | **(d) verify-only** | already in Phase 10 (`Phase10-BondLedger`) — §5.6 hazard is cross-phase; no later phase reads `Relationship_Bond_Ledger` between this write and Phase 10 commit. Pattern non-canonical but hazard-benign. Documented exception per `engine.md`. |
+| `phase04-events/worldEventsLedger.js` | entire file | n/a | DELETED S199 `52f0026` | **(d) verify-only** | confirmed no `.js` refs remain (S205 grep — only doc references in PHASE_42_INVENTORY / ENGINE_REPAIR / SESSION_CONTEXT) |
+
+**Caveat — `generateChicagoCitizensv1.js` reload-after-write pattern:** lines 142-157
+reload `sheet.getDataRange().getValues()` AFTER all writes to build
+`ctx.summary.chicagoCitizens`. Queue intents commit at Phase 10 — the post-write
+reload won't see in-flight queued writes. Mechanical migration of L78/L102/L136
+requires tracking `activeCitizens` in-memory through SEED+MAINTAIN+CHURN steps
+and dropping the post-write reload, then deriving `finalCitizens` from the
+in-memory tracking. Reclassified from pure mechanical to **mechanical-with-refactor**
+(needs-care batch); pair with B3 schema carve-out for L173 in same commit.
+
+**Routing summary (S205 triage):**
+
+| Class | Sites | Files (with site refs) | Recommended sequencing |
+|-------|-------|------------------------|------------------------|
+| **(a) ship-now mechanical** | 3 | generateGenericCitizens L662 *(HIGH PRIO — every-cycle getLastRow+1 hazard)*; runCivicElections L394 + L432 | One mechanical-batch commit; bundle with next B-batch |
+| **(a) mechanical-w/-refactor** | 3 | generateChicagoCitizens L78 + L102 + L136 | Separate commit; in-memory tracking refactor + post-write reload removal |
+| **(b) B3 schema-setup carve-out** | 3 | runCivicElections L213-219; generateChicagoCitizens L173; bondEngine L1417 (fallback dead) | B3 batch; engine.md exception entries OR `queueEnsureTabIntent_` on the carve-out files |
+| **(d) verify-only** | 2 | bondEngine L1469 (Phase-10 location → benign); worldEventsLedger (deleted) | No code change; documented here for completeness |
+
+**B-batch routing notes:**
+
+- **B3** (schema-setup carve-out) — 3 sites added to existing B3 candidate set
+  (alongside `bondPersistence.js` 3 sites confirmed S184 + `migrationTrackingEngine.js`
+  + `seedRelationBondsv1.js` carve-out reviews). When B3 ships, decide per-site:
+  documented engine.md exception OR migrate to `queueEnsureTabIntent_`.
+- **B4** (caller-passed-sheet helpers) — **none** of the S205 deferred files are B4.
+  All 5 own their target sheets (`Civic_Office_Ledger`, `Election_Log`,
+  `Generic_Citizens`, `Chicago_Citizens`, `Relationship_Bond_Ledger`). B4 remains
+  scoped to `updateCityTier.js` / `updateTrendTrajectory.js` / `updateMediaSpread.js`
+  per existing per-file decision map.
+- **`runCivicElectionsv1.js` SL portion is DONE** (cohort-A S188 commit `4fbb876`) —
+  uses `ctx.ledger.headers` + `ctx.ledger.rows` for SL reads (lines 140-156) and
+  sets `ctx.ledger.dirty = true` for SL writes (line 450). The 3 triage sites are
+  Civic_Office_Ledger + Election_Log only.
+- **`bondEngine.js` direct write at L1469** — kept as documented exception. Phase 10
+  location (`Phase10-BondLedger` at `godWorldEngine2.js:355,1652`) means the
+  cross-phase read-state-then-write hazard that motivated §5.6 doesn't apply. No
+  later phase reads `Relationship_Bond_Ledger` via `getDataRange` between this
+  write and end-of-cycle. Pattern is non-canonical but hazard-benign; matches
+  existing engine.md Phase 10 direct-writer exceptions.
+- **`worldEventsLedger.js` deletion is durable** — git log shows S199 commit
+  `52f0026` deleted; S205 grep confirms zero `.js` callers; only doc-side
+  references survive (PHASE_42_INVENTORY / ENGINE_REPAIR / SESSION_CONTEXT) which
+  are correct historical context.
+
 ---
 
 ## 4. Verification regimen — minimum spec
@@ -670,4 +735,5 @@ After applying:
 - 2026-04-29 — §5.6 amendments LOCKED (S185, research-build) + reviewed by engine-sheet. A1 scope (18 writer-files + 4 reader-files); A2 init at `godWorldEngine2.js` pre-phase-04; A3 `compressLifeHistory_` routes through `ctx.ledger`; A4 prerequisite-delete `phase04-events/generateCitizenEvents.js` (verified dead via empty `filePushOrder` → alphabetical → phase05 wins flat-namespace race); A5 cost ~10-13 commits; A6 row-1 quirk for `runCivicElectionsv1.js:451` covered by `ctx.ledger.headers` immutability. Original §5.6 Spec block + §5.6.6 audit step marked superseded inline. Impl shape for #18 `appendRow` locked: push to `ctx.ledger.rows`, no separate append intent. Engine-sheet still holding pending research-build's prerequisite-delete commit.
 - 2026-04-29 — §5.6 redesign batch DONE (S188, engine-sheet). 9 commits `0e31e66..6609c4a` shipped in one session, within the ~10-13 estimate: (1) `0e31e66` Phase 1 init at godWorldEngine2 pre-phase-04 (`initSimulationLedger.js`) + Phase 10 commit handler (`commitSimulationLedger.js`); (2) `4e2682d` 4 cohort-A writers — generateGenericCitizenMicroEvent, generationalEventsEngine, runHouseholdEngine, runRelationshipEngine; (3) `4b602ae` 4 cohort-A run*Engine writers — runEducationEngine, runCareerEngine, runNeighborhoodEngine, runCivicRoleEngine; (4) `4fbb876` cohort-A final batch — runAsUniversePipeline, generateCitizensEvents, runCivicElectionsv1 (row-1 quirk handled per A6) + audit-miss writer `updateNamedCitizens_` in godWorldEngine2; (5) `9870130` cohort-B writers (generateGameModeMicroEvents, generateCivicModeEvents, generateMediaModeEvents) + Phase 9 compressLifeHistory; (6) `23f3be9` 2 per-row writers (checkForPromotions, processAdvancementIntake); (7) `ec82f1a` 3 spec'd readers (bondEngine fallback, buildEveningFamous, mediaRoomIntake); (8) `e5cb1f5` 3 audit-miss readers (seedRelationBondsv1, runYouthEngine.getNamedYouth_, civicInitiativeEngine.getCouncilState_); (9) `6609c4a` processIntake_ Phase 10 clobber fix (advisor-caught audit-miss; closes deferred follow-up flagged in commit 4). Spec entry A1 #8 `generateNamedCitizensEvents:715` skipped — verified orphan (zero callers in phase01/04/05; orphan note inline at `phase01-config/godWorldEngine2.js:1079`). B2 (run*Engine × 4 mechanical migrations) unblocked — already converted away from direct writes by the redesign. Smoke-test (clasp push + live cycle run) pending — last engine-sheet step before §5.6 fully archives.
 - 2026-05-04 — §5.6 SPEC AMENDED A7 + cohort-C migration DONE (S200, engine-sheet). Measure-twice pass before ENGINE_REPAIR Row 18 execution surfaced that the §5.6.6 audit's categorical orphan-clear (line 489, S185) was wrong about 4 of 6 engines: `householdFormationEngine`, `generationalWealthEngine`, `educationCareerEngine`, `migrationTrackingEngine` are all wired via `process*_` entry functions in godWorldEngine2.js:230-233 + 1535-1538. Audit had grep'd file names; Apps Script flat-namespace dispatches by function name. Engines have been silently clobbered every cycle since §5.6 went live S188 — Income recalc (32% of citizens), WealthLevel for all citizens, EducationLevel/CareerStage/Mobility, HouseholdId for new households, DisplacementRisk + MigrationIntent. S199-locked Row 18 plan was 4 commits / Wealth + Education only; advisor-prompted re-audit expanded to include the other two mis-cleared engines. Mike picked Path (b) — fix all 4 in one batch — over Path (a) (Wealth+Education only, then file follow-up row). 6 commits shipped: (1) `a829c7f` householdFormationEngine v1.2 — SL reads + HouseholdId setValue routed via ctx.ledger, Household_Ledger writes stay direct; (2) `ed25ea8` generationalWealthEngine v2.1 — 8 SL touchpoints migrated, function signatures unified to `(ctx, ...)`, Household_Ledger + Family_Relationships writes stay direct; (3) `7f95521` educationCareerEngine v2.1 — 3 read+write pairs migrated + side fix for the gated-write Mobility persistence bug; (4) `93cd3a4` migrationTrackingEngine v1.1 — 2 read+write pairs + 2 read-only consumers migrated; (5) `c589b0a` godWorldEngine2.js stale Session-30 cohort-C rationale comment block ×2 occurrences replaced with §5.6-aware note + commit pointers; (6) this PHASE_42_PATTERNS.md A7 amendment + line-489 audit-correction note + Status block update. ENGINE_REPAIR Row 18 status flips to closed in same commit. Spec scope now: 22 SL writer-files + 5 readers all routing through ctx.ledger. Smoke-test pending C94 (operator-gated). Audit lesson recorded in A7: future cycle-path orphan checks must grep BOTH `<file-name>` AND `process<thing>_`.
+- 2026-05-07 — S205 deferred-list triage (engine-sheet). 5 files / 11 sites classified per S205 priority #0 mandate (carry-forward from S204 close). Per-file READ + caller-graph + classification appended as new §3.5 "S205 deferred-list triage" subsection under Per-file decision map. Routing summary: 3 ship-now mechanical (generateGenericCitizens L662 HIGH PRIO + runCivicElections L394+L432 low-cadence), 3 mechanical-with-refactor (generateChicagoCitizens L78+L102+L136 — post-write reload removal required because lines 142-157 reload from sheet AFTER writes; queue intents commit at Phase 10, reload won't see in-flight writes), 3 B3 schema-setup carve-out (runCivicElections L213-219 + generateChicagoCitizens L173 + bondEngine L1417 dead-fallback), 2 verify-only (bondEngine L1469 — Phase-10 location makes §5.6 cross-phase hazard inapplicable, documented exception per engine.md; worldEventsLedger.js — DELETED S199 commit `52f0026`, zero `.js` callers remain). None of the 5 files are B4 (caller-passed-sheet helpers); all own their target sheets. runCivicElectionsv1.js SL portion was DONE cohort-A S188 `4fbb876`; the 3 sites are Civic_Office_Ledger + Election_Log only (separate from §5.6 redesign scope). No code changes in this triage commit — classification only. B-batch routing notes embedded in §3.5 for future B3 + mechanical-batch sequencing.
 - 2026-05-06 — Phase 42 B2 batch CLOSED (8 of 8) + §5.6 half-migration FIX (S204, engine-sheet). 9 engine-sheet commits shipped local in one session. **B2 work** (cleanest mechanical batch — closes the 175-site audit-flagged inventory's last cycle-path Tier-3 cluster): `40981ee` runRelationshipEngine v2.5, `6aa4a3e` runNeighborhoodEngine v2.5, `8cc77b2` runCareerEngine v2.5, `f04fcb6` runCivicRoleEngine v2.3, `119123e` generateGenericCitizenMicroEvent v2.7, `02abf54` generationalEventsEngine v2.6, `5953793` updateCivicApprovalRatings v1.1, `3f3ac3c` gentrificationEngine v1.1. Patterns used: queueAppendIntent_ (×4 LifeHistory_Log single-row), queueBatchAppendIntent_ (×2 LifeHistory_Log batch — closes getLastRow()+1 hazard from §Read-state-then-write), queueCellIntent_ (×1 Civic_Office_Ledger), queueRangeIntent_ (×1 Neighborhood_Map). Two helper deletions in B2/6 (getLogWidth_ + buildLogRowSchemaSafe_) — schema-safe runtime layer obsolete after queueAppendIntent_ migration; S203 v1.3 header-drift detector replaces it (audit-time vs runtime slice). Holiday + season "extras" cols dropped per Mike directive (cols H, I deliberately unnamed on LifeHistory_Log — extras served no purpose on the log ledger). One signature change in B2/8 (`updateGentrificationPhases_(ss, cycle) → (ctx, cycle)`, single internal caller updated). **§5.6 half-migration HIGH-sev fix (`fd9758e`):** Phase A reversal triggered during B2/2 measure-twice — runNeighborhoodEngine claimed §5.6 compliance via `ctx.ledger.dirty = true` but read-side at lines 39-48 still pulled SL via `ledger.getDataRange().getValues()` and built a local-slice `rows` array independent of `ctx.ledger.rows`. Mutations on the local copy silently dropped at Phase 10 commit since C87. S188 commit `4b602ae` listed the file in its 4-engine batch but only the commit-side change landed; read-side was missed. Cross-checked S188-batch peers (runEducationEngine, runCareerEngine, runCivicRoleEngine) — all clean (alias `rows = ctx.ledger.rows`). Only runNeighborhoodEngine had the half-migration. **A7 amend (audit lesson):** files claimed migrated by a batch commit can carry half-migrations even when version stamps + comment markers say otherwise. Future audits must verify BOTH read-side aliasing (`var rows = ctx.ledger.rows` vs direct `getDataRange`) AND commit-side intents (`ctx.ledger.dirty` flip + no orphan setValues), per-file. The S185 §5.6.6 audit caught file-name vs `process*_`-name dispatch errors (A7 original); this catch is finer-grained: same-file mid-migration drift (A7 generalization). Cross-terminal stack: 12 unpushed engine-sheet commits + 3 research-build; clasp push pending next session. Smoke-test pending C94.

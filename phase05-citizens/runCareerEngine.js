@@ -1,7 +1,14 @@
 /**
  * ============================================================================
- * Career Engine v2.4
+ * Career Engine v2.5
  * ============================================================================
+ *
+ * v2.5 (S204 B2 / 2026-05-06):
+ * - LifeHistory_Log batch-flush via getRange(getLastRow()+1).setValues →
+ *   queueBatchAppendIntent_ (Phase 42 B2 mechanical migration). Pattern
+ *   mirrors generateMediaModeEvents:468. logSheet handle + ctx.ss removed.
+ *   Closes the `getLastRow() + 1` read-state-then-write hazard flagged in
+ *   PHASE_42_INVENTORY §Read-state-then-write.
  *
  * Lightweight, calendar-aware, weather-aware career drift generator.
  * Only affects ENGINE-mode Tier-3 and Tier-4 non-UNI/MED/CIV citizens.
@@ -36,11 +43,10 @@
 function runCareerEngine_(ctx) {
 
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  // LifeHistory_Log handle removed S204 B2 — batch flushed via queueBatchAppendIntent_.
   if (!ctx.ledger) {
     throw new Error('runCareerEngine_: ctx.ledger not initialized');
   }
-  var ss = ctx.ss;
-  var logSheet = ss.getSheetByName('LifeHistory_Log');
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   if (!rows.length) return;
@@ -846,27 +852,25 @@ function runCareerEngine_(ctx) {
     row[iLastUpd] = ctx.now;
 
     // v2.3: batch logs (no appendRow inside loop)
-    if (logSheet) {
+    logRows.push([
+      ctx.now,
+      row[iPopID],
+      '',
+      eventTag,
+      pick,
+      '',
+      cycle
+    ]);
+    if (shouldPersistState) {
       logRows.push([
         ctx.now,
         row[iPopID],
         '',
-        eventTag,
-        pick,
+        "CareerState",
+        ("industry=" + st.industry + "|employer=" + st.employer + "|level=" + st.level + "|careerMod=" + st.careerMod),
         '',
         cycle
       ]);
-      if (shouldPersistState) {
-        logRows.push([
-          ctx.now,
-          row[iPopID],
-          '',
-          "CareerState",
-          ("industry=" + st.industry + "|employer=" + st.employer + "|level=" + st.level + "|careerMod=" + st.careerMod),
-          '',
-          cycle
-        ]);
-      }
     }
 
     rows[r] = row;
@@ -881,10 +885,10 @@ function runCareerEngine_(ctx) {
   // Phase 42 §5.6: flip ctx.ledger.dirty; consolidated commit at Phase 10.
   ctx.ledger.dirty = true;
 
-  // v2.3: flush batched logs
-  if (logSheet && logRows.length) {
-    var startRow = logSheet.getLastRow() + 1;
-    logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
+  // v2.5: flush batched logs via Phase 10 executor.
+  if (logRows.length > 0) {
+    queueBatchAppendIntent_(ctx, 'LifeHistory_Log', logRows,
+      'career event log entries', 'citizens', 200);
   }
 
   // Summary

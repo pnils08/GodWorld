@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-05-06 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-05-07 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -442,7 +442,6 @@
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.previousEvening, S.season, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.microEvents
   Config: ctx.config.cycleCount, ctx.config.rngSeed
-  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### generationalEventsEngine.js
@@ -457,15 +456,10 @@
 
 - **pick_(ctx, arr)**
 
-- **getLogWidth_(lifeLog)**
-
-- **buildLogRowSchemaSafe_(width, base7, extras)**
-
 - **runGenerationalEngine_(ctx)**
   Reads: S.cycleId, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.month, S.season, S.simYear, S.sportsSeason
   Writes: S.generationalEvents
   Config: ctx.config.cycleCount
-  Sheets: LifeHistory_Log
 
 - **processHealthLifecycle_(ctx, popId, name, currentStatus, duration, age, tier, cause, neighborhood, cycle, cal)**
 
@@ -502,7 +496,8 @@
   Reads: S.generationalEvents, S.pendingCascades
   Writes: S.generationalSummary
 
-- **applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighborhood, cycle, lifeLog, cal, logWidth)**
+- **applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighborhood, cycle, cal)**
+  Reads: S.generationalEvents
 
 - **getOrdinal_(n)**
 
@@ -941,7 +936,7 @@
   Reads: S.cycleId
   Config: ctx.config.cycleCount
 
-- **updateGentrificationPhases_(ss, cycle)**
+- **updateGentrificationPhases_(ctx, cycle)**
   Sheets: Neighborhood_Map
 
 - **detectGentrificationPhase_(incomeChange, rentChange, whiteChange, highEdPct, displPressure)**
@@ -1066,7 +1061,6 @@
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.careerEvents, S.careerSignals, S.eventsGenerated
   Config: ctx.config.cycleCount, ctx.config.rngSeed
-  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runCivicElectionsv1.js
@@ -1082,7 +1076,6 @@
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.civicRoleEvents, S.eventsGenerated
   Config: ctx.config.cycleCount
-  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runEducationEngine.js
@@ -1105,14 +1098,12 @@
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.neighborhoodAssignments, S.neighborhoodDriftEvents
   Config: ctx.config.cycleCount
-  Sheets: LifeHistory_Log, Simulation_Ledger
   RNG: ctx.rng / safeRand_(ctx)
 
 ### runRelationshipEngine.js
 - **runRelationshipEngine_(ctx)**
   Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.holiday, S.holidayNeighborhood, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.mediaEffects, S.season, S.weather, S.weatherEventPools, S.worldEvents
   Writes: S.cycleActiveCitizens, S.eventsGenerated
-  Sheets: LifeHistory_Log
   RNG: ctx.rng / safeRand_(ctx)
 
 - **getCitizenBonds_(ctx, citizenId)**
@@ -2674,4 +2665,4 @@
 ---
 
 **Files scanned:** 152
-**Functions mapped:** 895
+**Functions mapped:** 893

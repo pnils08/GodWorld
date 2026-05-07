@@ -13,6 +13,9 @@
  *   Migration: read header/rows from ctx.ledger (matches runEducationEngine /
  *   runCareerEngine / runCivicRoleEngine pattern). `ss` retained — still
  *   consumed by pickDemographicNeighborhood_ at line 356.
+ * - LifeHistory_Log appendRow → queueAppendIntent_ (Phase 42 B2 mechanical
+ *   migration, mirrors S184 B0 runHouseholdEngine pattern). logSheet handle
+ *   removed.
  *
  * Assigns Tier-3 and Tier-4 citizens to Oakland neighborhoods.
  * Logs neighborhood drift events with location-specific flavor.
@@ -51,8 +54,8 @@ function runNeighborhoodEngine_(ctx) {
   if (!ctx.ledger) {
     throw new Error('runNeighborhoodEngine_: ctx.ledger not initialized');
   }
+  // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   var ss = ctx.ss;
-  var logSheet = ss.getSheetByName('LifeHistory_Log');
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   if (!rows.length) return;
@@ -508,8 +511,10 @@ function runNeighborhoodEngine_(ctx) {
       row[iLastUpdated] = ctx.now;
 
       // Log to LifeHistory_Log
-      if (logSheet) {
-        logSheet.appendRow([
+      queueAppendIntent_(
+        ctx,
+        'LifeHistory_Log',
+        [
           ctx.now,
           row[iPopID],
           ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(),
@@ -517,8 +522,10 @@ function runNeighborhoodEngine_(ctx) {
           entry,
           neighborhood,
           cycle
-        ]);
-      }
+        ],
+        'neighborhood event',
+        'citizens'
+      );
 
       // Track for summary
       neighborhoodDriftEvents.push({

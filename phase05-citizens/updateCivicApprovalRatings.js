@@ -1,8 +1,14 @@
 /**
  * ============================================================================
- * updateCivicApprovalRatings_ v1.0 (ES5)
+ * updateCivicApprovalRatings_ v1.1 (ES5)
  * ============================================================================
  * [engine/sheet] — Phase 27 civic feedback loop
+ *
+ * v1.1 (S204 B2 / 2026-05-06):
+ * - Approval cell writes routed through queueCellIntent_ (Phase 42 B2). Prior
+ *   pattern: per-change ledgerSheet.getRange(c.row, iApproval+1).setValue
+ *   (direct sheet write, documented exception). Now queues per-cell intents
+ *   committed at Phase 10. isDryRun guard preserved.
  *
  * Updates Civic_Office_Ledger Approval column based on:
  * 1. Initiative performance in the official's district
@@ -16,7 +22,6 @@
  *   < 20: "recall-pressure" — story hook for reporters
  *
  * Runs in Phase 5 after civicInitiativeEngine_.
- * Direct sheet write to Civic_Office_Ledger (documented exception).
  *
  * ============================================================================
  */
@@ -280,15 +285,16 @@ function updateCivicApprovalRatings_(ctx) {
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
-  // WRITE APPROVAL CHANGES (direct sheet write — documented exception)
+  // WRITE APPROVAL CHANGES (v1.1: queueCellIntent_, committed at Phase 10)
   // ═══════════════════════════════════════════════════════════════════════════
 
   if (!isDryRun && changes.length > 0) {
     for (var ci = 0; ci < changes.length; ci++) {
       var c = changes[ci];
-      ledgerSheet.getRange(c.row, iApproval + 1).setValue(c.newApproval);
+      queueCellIntent_(ctx, 'Civic_Office_Ledger', c.row, iApproval + 1, c.newApproval,
+        'approval rating update', 'civic');
     }
-    Logger.log('updateCivicApprovalRatings_ v1.0: Updated ' + changes.length + ' approval ratings');
+    Logger.log('updateCivicApprovalRatings_ v1.1: Queued ' + changes.length + ' approval rating updates');
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

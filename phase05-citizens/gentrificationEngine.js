@@ -1,7 +1,17 @@
 /**
  * ============================================================================
- * GENTRIFICATION ENGINE v1.0
+ * GENTRIFICATION ENGINE v1.1
  * ============================================================================
+ *
+ * v1.1 (S204 B2 / 2026-05-06):
+ * - Neighborhood_Map range write routed through queueRangeIntent_
+ *   (Phase 42 B2). Prior pattern: sheet.getRange(2, 1, rows.length, cols)
+ *   .setValues(rows) — direct full-table-from-row-2 replace inside
+ *   updateGentrificationPhases_ when any row mutated.
+ * - updateGentrificationPhases_ signature: (ss, cycle) → (ctx, cycle).
+ *   ss derived inside via ctx.ss; sheet read for getDataRange retained
+ *   (read-only sheet access is engine.md-permitted). Single caller updated
+ *   (processGentrification_ line 74).
  *
  * Tracks gentrification phases, displacement pressure, and neighborhood transformation.
  *
@@ -71,7 +81,7 @@ function processGentrification_(ctx) {
   };
 
   // Step 1: Update gentrification phases for all neighborhoods
-  var phaseResults = updateGentrificationPhases_(ss, cycle);
+  var phaseResults = updateGentrificationPhases_(ctx, cycle);
   results.analyzed = phaseResults.analyzed;
   results.phasesUpdated = phaseResults.updated;
   results.gentrifying = phaseResults.gentrifying;
@@ -91,7 +101,8 @@ function processGentrification_(ctx) {
 // GENTRIFICATION PHASE DETECTION
 // ════════════════════════════════════════════════════════════════════════════
 
-function updateGentrificationPhases_(ss, cycle) {
+function updateGentrificationPhases_(ctx, cycle) {
+  var ss = ctx.ss;
   var sheet = ss.getSheetByName('Neighborhood_Map');
   if (!sheet) return { analyzed: 0, updated: 0, gentrifying: 0 };
 
@@ -170,7 +181,8 @@ function updateGentrificationPhases_(ss, cycle) {
   }
 
   if (updated > 0) {
-    sheet.getRange(2, 1, rows.length, rows[0].length).setValues(rows);
+    queueRangeIntent_(ctx, 'Neighborhood_Map', 2, 1, rows,
+      'gentrification phase update', 'civic');
   }
 
   return { analyzed: analyzed, updated: updated, gentrifying: gentrifying };

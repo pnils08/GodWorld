@@ -1,7 +1,18 @@
 /**
  * ============================================================================
- * Neighborhood Engine v2.4
+ * Neighborhood Engine v2.5
  * ============================================================================
+ *
+ * v2.5 (S204 / 2026-05-06):
+ * - FIX (HIGH): close §5.6 half-migration left by S188 commit 4b602ae. Prior
+ *   state read SL directly via ledger.getDataRange().getValues() into a local
+ *   `rows` slice, mutated rows[r] = row, then flipped ctx.ledger.dirty = true —
+ *   but mutations were on a copy independent of ctx.ledger.rows, so Phase 10
+ *   committed unmutated state and silently dropped neighborhood assignments +
+ *   LifeHistory + LastUpdated writes for ~7 cycles (C87+).
+ *   Migration: read header/rows from ctx.ledger (matches runEducationEngine /
+ *   runCareerEngine / runCivicRoleEngine pattern). `ss` retained — still
+ *   consumed by pickDemographicNeighborhood_ at line 356.
  *
  * Assigns Tier-3 and Tier-4 citizens to Oakland neighborhoods.
  * Logs neighborhood drift events with location-specific flavor.
@@ -36,16 +47,15 @@ function runNeighborhoodEngine_(ctx) {
 
   var rng = safeRand_(ctx);
 
+  // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  if (!ctx.ledger) {
+    throw new Error('runNeighborhoodEngine_: ctx.ledger not initialized');
+  }
   var ss = ctx.ss;
-  var ledger = ss.getSheetByName('Simulation_Ledger');
   var logSheet = ss.getSheetByName('LifeHistory_Log');
-  if (!ledger) return;
-
-  var values = ledger.getDataRange().getValues();
-  if (values.length < 2) return;
-
-  var header = values[0];
-  var rows = values.slice(1);
+  var header = ctx.ledger.headers;
+  var rows = ctx.ledger.rows;
+  if (!rows.length) return;
 
   var idx = function(name) { return header.indexOf(name); };
 

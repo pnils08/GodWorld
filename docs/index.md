@@ -253,6 +253,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 - **[[comparisons/README|README]]** — what goes here: tool/model/approach comparisons that outlive the decision. DeepSeek vs Claude, packet vs summary, Sandcastle+Daytona vs Managed Agents. *(reference, architecture, research, active)*
 - **[[comparisons/2026-04-30-smfs-vs-bay-tribune-rebuild]]** — S189 eval. Supermemory released SMFS (Supermemory Filesystem) v0.0.1 on 2026-04-29 — POSIX filesystem layer over existing containers via FUSE/NFSv3, semantic grep, 30s sync. If pilot succeeds, Phase 2-7 of `[[plans/2026-04-30-bay-tribune-unified-ingest-rebuild]]` collapse to file ops; 16-tag taxonomy maps 1:1 to directory structure. Mags-first pilot proposed (smallest blast radius, editorial brain, tolerates 30s sync). Bay-tribune rebuild plan placed on HOLD pending pilot outcome. *(comparison, architecture, infrastructure, research, active)*
+- **[[comparisons/2026-05-06-claude-mem-vs-ecc-v2]]** — S204 research close (D4). Verdict: claude-mem's simpler model is enough for its use case (cross-cycle narrative retrieval). ECC v2.1 isn't claude-mem's upgrade path — it solves a different problem (action-pattern → skill promotion). The one borrow-able primitive (confidence scoring 0.3-0.9 with id/trigger/source shape) belongs in `[[plans/skill-eval-framework]]`, not claude-mem. ROLLOUT D4 entry closes. *(comparison, architecture, infrastructure, research, active)*
 
 ---
 

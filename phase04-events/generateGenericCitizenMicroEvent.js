@@ -1,7 +1,15 @@
 /**
  * ============================================================================
- * generateGenericCitizenMicroEvents_ v2.6 (previous evening carry-forward + neighborhood dynamics)
+ * generateGenericCitizenMicroEvents_ v2.7 (previous evening carry-forward + neighborhood dynamics)
  * ============================================================================
+ *
+ * v2.7 (S204 B2 / 2026-05-06):
+ * - LifeHistory_Log batch-flush via getRange(getLastRow()+1).setValues →
+ *   queueBatchAppendIntent_ (Phase 42 B2 mechanical migration). Mirrors
+ *   runCareerEngine v2.5 + generateMediaModeEvents:468. logSheet handle +
+ *   ctx.ss removed. Closes the `getLastRow() + 1` read-state-then-write
+ *   hazard.
+ *
  * Log schema unchanged: [Date, POPID, Name, Category, Text, NeighborhoodOrEngine, Cycle]
  * Optional determinism: ctx.rng or ctx.config.rngSeed (+cycle mix)
  * Cached neighborhood Sets (no per-row Set allocation)
@@ -14,11 +22,10 @@
 
 function generateGenericCitizenMicroEvents_(ctx) {
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  // LifeHistory_Log handle removed S204 B2 — batch flushed via queueBatchAppendIntent_.
   if (!ctx.ledger) {
     throw new Error('generateGenericCitizenMicroEvents_: ctx.ledger not initialized');
   }
-  var ss = ctx.ss;
-  var logSheet = ss.getSheetByName("LifeHistory_Log");
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   if (!rows.length) return;
@@ -513,17 +520,15 @@ function generateGenericCitizenMicroEvents_(ctx) {
 
     if (iLastUpd >= 0) row[iLastUpd] = ctx.now;
 
-    if (logSheet) {
-      logRows.push([
-        ctx.now,
-        popId,
-        '',
-        "Micro-Event",
-        pick,
-        '',
-        cycle
-      ]);
-    }
+    logRows.push([
+      ctx.now,
+      popId,
+      '',
+      "Micro-Event",
+      pick,
+      '',
+      cycle
+    ]);
 
     rows[r] = row;
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;
@@ -535,9 +540,10 @@ function generateGenericCitizenMicroEvents_(ctx) {
     ctx.ledger.dirty = true;
   }
 
-  if (logSheet && logRows.length) {
-    var startRow = logSheet.getLastRow() + 1;
-    logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
+  // v2.7: flush batched logs via Phase 10 executor.
+  if (logRows.length > 0) {
+    queueBatchAppendIntent_(ctx, 'LifeHistory_Log', logRows,
+      'micro-event log entries', 'events', 200);
   }
 
   S.microEvents = eventCount;

@@ -1,8 +1,13 @@
 /**
  * ============================================================================
- * Civic Role Engine v2.2
+ * Civic Role Engine v2.3
  * ============================================================================
- * 
+ *
+ * v2.3 (S204 B2 / 2026-05-06):
+ * - LifeHistory_Log appendRow → queueAppendIntent_ (Phase 42 B2 mechanical
+ *   migration). Mirrors S184 B0 runHouseholdEngine pattern. logSheet handle
+ *   + ctx.ss removed; single caller (godWorldEngine2 Phase5-CivicRole).
+ *
  * Calendar-aware, sentiment-aware, weather-aware civic status observer.
  * Logs CIV citizens with contextual civic notes.
  * Preserves Maker authority. Never modifies status.
@@ -24,11 +29,10 @@ function runCivicRoleEngine_(ctx) {
 
   var rng = safeRand_(ctx);
   // Phase 42 §5.6: SL read/mutate via shared ctx.ledger; commit at Phase 10.
+  // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   if (!ctx.ledger) {
     throw new Error('runCivicRoleEngine_: ctx.ledger not initialized');
   }
-  var ss = ctx.ss;
-  var logSheet = ss.getSheetByName('LifeHistory_Log');
   var header = ctx.ledger.headers;
   var rows = ctx.ledger.rows;
   if (!rows.length) return;
@@ -416,8 +420,10 @@ function runCivicRoleEngine_(ctx) {
     row[iLastUpd] = ctx.now;
 
     // Log to LifeHistory_Log
-    if (logSheet) {
-      logSheet.appendRow([
+    queueAppendIntent_(
+      ctx,
+      'LifeHistory_Log',
+      [
         ctx.now,
         row[iPopID],
         name,
@@ -425,8 +431,10 @@ function runCivicRoleEngine_(ctx) {
         baseNote + context,
         neighborhood,
         cycle
-      ]);
-    }
+      ],
+      'civic role event',
+      'citizens'
+    );
 
     rows[r] = row;
     S.eventsGenerated = (S.eventsGenerated || 0) + 1;

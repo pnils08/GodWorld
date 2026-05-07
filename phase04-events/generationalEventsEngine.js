@@ -1,10 +1,23 @@
 /**
  * ============================================================================
- * GENERATIONAL EVENTS ENGINE V2.5 (schema-safe log + normalized calendar + deterministic RNG)
+ * GENERATIONAL EVENTS ENGINE V2.6 (Phase 42 B2 — LifeHistory_Log via queueAppendIntent_)
  * ============================================================================
- * Key fixes:
- * - LifeHistory_Log schema-safe writes: do NOT add/move columns; only fill existing,
- *   and optionally fill extra columns ONLY if they already exist at the end.
+ *
+ * v2.6 Changes (S204 B2 / 2026-05-06):
+ * - LifeHistory_Log appendRow → queueAppendIntent_ (Phase 42 B2 mechanical
+ *   migration). Mirrors S184 B0 runHouseholdEngine pattern.
+ * - Holiday + season "extras" cols dropped per Mike directive: cols H, I on
+ *   LifeHistory_Log were deliberately unnamed (extras served no purpose on
+ *   the log ledger). Writes baseline 7 cols only.
+ * - Schema-safe runtime layer (getLogWidth_ + buildLogRowSchemaSafe_) deleted.
+ *   The S203 v1.3 header-drift detector replaces it: schema mismatches now
+ *   surface via per-cycle audit instead of silent runtime slice.
+ * - applyMilestone_ signature trimmed: lifeLog + logWidth params removed
+ *   (8 call sites updated). cal param retained — still consumed for
+ *   in-memory ctx.summary.generationalEvents holiday/season metadata.
+ * - lifeLog handle + ctx.ss read removed at engine entry.
+ *
+ * Prior key fixes:
  * - Normalize calendar season to lowercase for all comparisons.
  * - Deterministic RNG support: ctx.rng or ctx.config.rngSeed ^ cycle.
  * - Health lifecycle uses normalized weighted outcomes (stable probabilities).
@@ -129,36 +142,10 @@ function pick_(ctx, arr) {
 // LOG SCHEMA HELPERS (NO mid-array changes; only fill existing cols)
 // ============================================================
 
-function getLogWidth_(lifeLog) {
-  if (!lifeLog) return 0;
-  var lastCol = lifeLog.getLastColumn();
-  if (lastCol <= 0) return 0;
-
-  // Prefer header width if present
-  var header = lifeLog.getRange(1, 1, 1, lastCol).getValues()[0];
-  var w = 0;
-  for (var i = header.length - 1; i >= 0; i--) {
-    if (header[i] !== "" && header[i] != null) {
-      w = i + 1;
-      break;
-    }
-  }
-  return w || lastCol;
-}
-
-function buildLogRowSchemaSafe_(width, base7, extras) {
-  // base7: [date, popId, name, tag, desc, neighborhood, cycle]
-  // extras: appended-only values (e.g. holiday, season) if width allows
-  var row = base7.slice(0);
-  if (extras && extras.length) {
-    for (var i = 0; i < extras.length; i++) row.push(extras[i]);
-  }
-  if (width > 0) {
-    if (row.length > width) row = row.slice(0, width);
-    while (row.length < width) row.push("");
-  }
-  return row;
-}
+// getLogWidth_ + buildLogRowSchemaSafe_ deleted S204 B2 — schema-safe runtime
+// layer obsolete after queueAppendIntent_ migration. LifeHistory_Log writes
+// baseline 7 cols only (extras dropped per Mike directive). Header-drift
+// detector v1.3 (S203) catches schema mismatches at audit time.
 
 // ============================================================
 // MAIN ENGINE
@@ -189,7 +176,7 @@ function runGenerationalEngine_(ctx) {
   var iStatusStart = idx("StatusStartCycle");
   var iHealthCause = idx("HealthCause");
 
-  var lifeLog = ctx.ss.getSheetByName("LifeHistory_Log");
+  // LifeHistory_Log handle removed S204 B2 — appends route through queueAppendIntent_.
   var cycle = (ctx.summary && ctx.summary.cycleId) || (ctx.config && ctx.config.cycleCount) || 0;
 
   ctx._rng = initRng_(ctx, cycle);
@@ -225,7 +212,6 @@ function runGenerationalEngine_(ctx) {
   };
 
   var updatedRows = {};
-  var logWidth = getLogWidth_(lifeLog);
 
   for (var r = 0; r < rows.length; r++) {
     var row = rows[r];
@@ -272,7 +258,7 @@ function runGenerationalEngine_(ctx) {
 
         var transitionEvent = applyMilestone_(
           ctx, row, iLife, iLastU, healthResult, name, popId,
-          neighborhood, cycle, lifeLog, calendarContext, logWidth
+          neighborhood, cycle, calendarContext
         );
         ctx.summary.generationalEvents.push(transitionEvent);
 
@@ -296,7 +282,7 @@ function runGenerationalEngine_(ctx) {
       var gradResult = checkGraduation_(ctx, popId, age, lifeHistory, tier, calendarContext);
       if (gradResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
-          ctx, row, iLife, iLastU, gradResult, name, popId, neighborhood, cycle, lifeLog, calendarContext, logWidth
+          ctx, row, iLife, iLastU, gradResult, name, popId, neighborhood, cycle, calendarContext
         ));
         updatedRows[r] = true;
         counts.graduations++;
@@ -307,7 +293,7 @@ function runGenerationalEngine_(ctx) {
       var weddingResult = checkWedding_(ctx, popId, age, lifeHistory, calendarContext);
       if (weddingResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
-          ctx, row, iLife, iLastU, weddingResult, name, popId, neighborhood, cycle, lifeLog, calendarContext, logWidth
+          ctx, row, iLife, iLastU, weddingResult, name, popId, neighborhood, cycle, calendarContext
         ));
         if (weddingResult.spouseId) {
           createGenerationalBond_(ctx, popId, weddingResult.spouseId, "romantic", "wedding", "", neighborhood, "Married partners");
@@ -321,7 +307,7 @@ function runGenerationalEngine_(ctx) {
       var birthResult = checkBirth_(ctx, popId, age, lifeHistory, calendarContext);
       if (birthResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
-          ctx, row, iLife, iLastU, birthResult, name, popId, neighborhood, cycle, lifeLog, calendarContext, logWidth
+          ctx, row, iLife, iLastU, birthResult, name, popId, neighborhood, cycle, calendarContext
         ));
         triggerBirthCascade_(ctx, popId, name, neighborhood, cycle, calendarContext);
         updatedRows[r] = true;
@@ -333,7 +319,7 @@ function runGenerationalEngine_(ctx) {
       var promoResult = checkPromotion_(ctx, popId, age, lifeHistory, tier, tierRole, calendarContext);
       if (promoResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
-          ctx, row, iLife, iLastU, promoResult, name, popId, neighborhood, cycle, lifeLog, calendarContext, logWidth
+          ctx, row, iLife, iLastU, promoResult, name, popId, neighborhood, cycle, calendarContext
         ));
         triggerPromotionCascade_(ctx, popId, promoResult, cycle);
         updatedRows[r] = true;
@@ -345,7 +331,7 @@ function runGenerationalEngine_(ctx) {
       var retireResult = checkRetirement_(ctx, popId, age, lifeHistory, tier, calendarContext);
       if (retireResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
-          ctx, row, iLife, iLastU, retireResult, name, popId, neighborhood, cycle, lifeLog, calendarContext, logWidth
+          ctx, row, iLife, iLastU, retireResult, name, popId, neighborhood, cycle, calendarContext
         ));
         triggerRetirementCascade_(ctx, popId, name, tierRole, neighborhood, cycle, calendarContext);
         updatedRows[r] = true;
@@ -357,7 +343,7 @@ function runGenerationalEngine_(ctx) {
       var deathResult = checkDeath_(ctx, popId, age, lifeHistory, tier, calendarContext);
       if (deathResult) {
         ctx.summary.generationalEvents.push(applyMilestone_(
-          ctx, row, iLife, iLastU, deathResult, name, popId, neighborhood, cycle, lifeLog, calendarContext, logWidth
+          ctx, row, iLife, iLastU, deathResult, name, popId, neighborhood, cycle, calendarContext
         ));
         row[iStatus] = "deceased";
         triggerDeathCascade_(ctx, popId, name, tier, tierRole, neighborhood, cycle, calendarContext);
@@ -369,7 +355,7 @@ function runGenerationalEngine_(ctx) {
     var healthResult2 = checkHealthEvent_(ctx, popId, age, lifeHistory, calendarContext);
     if (healthResult2) {
       ctx.summary.generationalEvents.push(applyMilestone_(
-        ctx, row, iLife, iLastU, healthResult2, name, popId, neighborhood, cycle, lifeLog, calendarContext, logWidth
+        ctx, row, iLife, iLastU, healthResult2, name, popId, neighborhood, cycle, calendarContext
       ));
 
       if (healthResult2.severity === "severe") {
@@ -1031,7 +1017,7 @@ function generateGenerationalSummary_(ctx) {
 // HELPERS
 // ============================================================
 
-function applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighborhood, cycle, lifeLog, cal, logWidth) {
+function applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighborhood, cycle, cal) {
   var stamp = Utilities.formatDate(ctx.now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");
   var existing = row[iLife] ? row[iLife].toString() : "";
   var line = stamp + " — [" + milestone.tag + "] " + milestone.description;
@@ -1039,13 +1025,16 @@ function applyMilestone_(ctx, row, iLife, iLastU, milestone, name, popId, neighb
   row[iLife] = existing ? existing + "\n" + line : line;
   row[iLastU] = ctx.now;
 
-  // SCHEMA SAFE:
-  // baseline 7 cols, then optional appended cols only if sheet already has them
-  if (lifeLog && logWidth > 0) {
-    var base7 = [ctx.now, popId, '', milestone.tag, milestone.description, '', cycle];
-    var extras = [cal.holiday || "none", cal.season || "unknown"]; // appended-only
-    lifeLog.appendRow(buildLogRowSchemaSafe_(logWidth, base7, extras));
-  }
+  // S204 B2: queue baseline 7-col log entry. Holiday + season extras dropped
+  // (cols H, I deliberately unnamed on LifeHistory_Log per Mike directive);
+  // cal still consumed below for in-memory ctx.summary.generationalEvents.
+  queueAppendIntent_(
+    ctx,
+    'LifeHistory_Log',
+    [ctx.now, popId, '', milestone.tag, milestone.description, '', cycle],
+    'generational milestone',
+    'events'
+  );
 
   return {
     type: milestone.type,

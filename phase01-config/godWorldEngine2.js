@@ -189,7 +189,12 @@ function runWorldCycle() {
   // ═══════════════════════════════════════════════════════════
   // PHASE 5: CITIZENS + RELATIONSHIPS
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
+  // S205: Phase5-GenericCitizens DISABLED — Path B no-grow legacy. Generator writes to
+  // Generic_Citizens (10 cols, no Gender col) with flat age distribution 18-75 and
+  // ungendered name picks; live tab is ~83% male from pre-v2.6 grandfathered clusters.
+  // Architecture decision S205: SL is single source of truth (836 active, Tier 1-5 +
+  // Gender col AU); GC retained as no-grow legacy. Future SL-Tier-5 generator TBD.
+  // safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenericMicroEvents', function() { generateGenericCitizenMicroEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GameModeMicroEvents', function() { generateGameModeMicroEvents_(ctx); });
 
@@ -1498,7 +1503,12 @@ function runCyclePhases_(ctx) {
   // ═══════════════════════════════════════════════════════════
   // PHASE 5: CITIZENS + RELATIONSHIPS
   // ═══════════════════════════════════════════════════════════
-  safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
+  // S205: Phase5-GenericCitizens DISABLED — Path B no-grow legacy. Generator writes to
+  // Generic_Citizens (10 cols, no Gender col) with flat age distribution 18-75 and
+  // ungendered name picks; live tab is ~83% male from pre-v2.6 grandfathered clusters.
+  // Architecture decision S205: SL is single source of truth (836 active, Tier 1-5 +
+  // Gender col AU); GC retained as no-grow legacy. Future SL-Tier-5 generator TBD.
+  // safePhaseCall_(ctx, 'Phase5-GenericCitizens', function() { generateGenericCitizens_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GenericMicroEvents', function() { generateGenericCitizenMicroEvents_(ctx); });
   safePhaseCall_(ctx, 'Phase5-GameModeMicroEvents', function() { generateGameModeMicroEvents_(ctx); });
 

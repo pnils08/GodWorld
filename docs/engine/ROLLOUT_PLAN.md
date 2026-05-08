@@ -1,6 +1,8 @@
 # GodWorld — Rollout Plan
 
-**Reframed S173 (2026-04-24)** — building a sim, not running one. The S172 halt framing has been reversed. Each cycle is a new approach to test; editions are journalised audits, not finished products. The C92 contamination event surfaced a real gap (infrastructure in place without an agent layer driving canon) — that gap is closed S175 via the canon-fidelity rollout (25/25 agents). [[POST_MORTEM_C92_CONTAMINATION]] stands as historical record but is superseded by the reframe. **Active C93 priorities live in `SESSION_CONTEXT.md`.**
+**Reframed S173 (2026-04-24)** — building a sim, not running one. The S172 halt framing has been reversed. Each cycle is a new approach to test; editions are journalised audits, not finished products. The C92 contamination event surfaced a real gap (infrastructure in place without an agent layer driving canon) — that gap is closed S175 via the canon-fidelity rollout (25/25 agents). [[POST_MORTEM_C92_CONTAMINATION]] stands as historical record but is superseded by the reframe.
+
+**This file is canonical for open/closed work** (S207). `SESSION_CONTEXT.md` carries narrative recency only — orientation, not work-tracking. When something closes, update its state here; don't rely on a SESSION_CONTEXT priority block to communicate handoff.
 
 **Status:** ACTIVE (building) | **Last Updated:** Session 206 (2026-05-08)
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.

@@ -1,9 +1,32 @@
 /**
  * ============================================================================
- * V3.11 STORY SEEDS ENGINE — ENGINE A WIRE-UP
+ * V3.12 STORY SEEDS ENGINE — ENGINE B WIRE-UP (multi-axis byline ranker)
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
+ *
+ * v3.12 Enhancements (S206 — Engine B wire-up per routing-foundation plan T3.6):
+ * - makeSeed now ranks every roster journalist via utilities/bylineEngine.js
+ *   `scoreAllBylines_` (theme + format + arc + cadence axes). Returns ranked
+ *   array sorted descending; top entry gets confidence label.
+ * - bylineState built once at applyStorySeeds_ entry: {roster, cadence: {},
+ *   totalSeeds: 0, arcBinding: null}. roster pulled from rosterLookup.js
+ *   getRoster_().journalists. cadence + totalSeeds mutate per-seed AFTER
+ *   scoring (so a seed's own pick doesn't influence its own cap). arcBinding
+ *   pre-resolved per-seed via loadArcBinding_(seedForPriority, storylineRawData).
+ * - 3 new seed fields: bylineCandidate (top.name), bylineConfidence (top.confidence),
+ *   bylineRationale ({components: top.components, alternates: ranked.slice(1,3)}).
+ * - **Transition cycle:** v3.9 suggestStoryAngle_ block KEPT in parallel for one
+ *   cycle. SuggestedJournalist / SuggestedAngle / VoiceGuidance / MatchConfidence
+ *   continue populating from suggestStoryAngle_; new bylineCandidate / Confidence
+ *   / Rationale populate from scoreAllBylines_. Next engine-sheet pickup (post-C94
+ *   smoke-test) will retire suggestStoryAngle_ block + cols I-L per T3.6 spec
+ *   "replace" framing.
+ * - **T3.5 status:** schema-only (AssignedReporter col added to Storyline_Tracker
+ *   live S206); auto-bind writer DEFERRED to research-build (Press_Drafts
+ *   upstream gap — LinkedStoryline col exists but 0% populated, so engine-side
+ *   Press_Drafts-driven path is dead-on-arrival; research-build owns the source
+ *   decision). loadArcBinding_ gracefully no-ops on missing-writer state.
  *
  * v3.11 Enhancements (S206 — Engine A wire-up per routing-foundation plan T2.6):
  * - makeSeed now computes priorityScore + consequenceFloor + priorityComponents
@@ -121,6 +144,20 @@ function applyStorySeeds_(ctx) {
       coverageRawData = ecrSheet.getDataRange().getValues();
     }
   }
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v3.12 (S206): ENGINE B — Byline ranker state init (mutated per-seed)
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Closure-scoped; makeSeed mutates cadence + totalSeeds AFTER each scoring,
+  // pre-resolves arcBinding via loadArcBinding_ before each scoring.
+  // Empty-roster fallback if rosterLookup.js fails to load — scoreAllBylines_
+  // will throw on empty-roster, so the makeSeed call is wrapped in typeof guard.
+  var bylineState = {
+    roster: (typeof getRoster_ === 'function' && getRoster_()) ? getRoster_().journalists : {},
+    cadence: {},
+    totalSeeds: 0,
+    arcBinding: null  // mutated per-seed via loadArcBinding_
+  };
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL SIGNALS
@@ -264,9 +301,13 @@ function applyStorySeeds_(ctx) {
     // priorityEngine functions live in utilities/priorityEngine.js (T2.1-T2.5).
     // Defensive guards: `typeof === 'function'` so cycles still produce seeds
     // even if priorityEngine.js fails to load.
+    // v3.12 (S206): seedForPriority extended with seedType + priority for
+    // bylineEngine consumption (inferSeedFormat_ + storyline-active branch).
     var seedForPriority = {
       domain: normalDomain,
-      linkedStorylineId: linkedStorylineId || null
+      linkedStorylineId: linkedStorylineId || null,
+      seedType: normalSeedType,
+      priority: priority || 1
     };
     var storylineState = (typeof loadStorylineStateForSeed_ === 'function')
       ? loadStorylineStateForSeed_(seedForPriority, storylineRawData, cycle)
@@ -280,6 +321,30 @@ function applyStorySeeds_(ctx) {
     var floorFlag = (typeof isConsequenceFloor_ === 'function')
       ? isConsequenceFloor_(seedForPriority, null, storylineState, coverageState)
       : false;
+
+    // v3.12 (S206): Engine B — multi-axis byline ranker via utilities/bylineEngine.js.
+    // Pre-resolve arcBinding for this seed (null pre-T3.5b auto-bind writer ships;
+    // bylineEngine warm-up returns 0 for arc axis). Mutate cadence + totalSeeds
+    // AFTER scoring so the seed's own pick doesn't influence its own cadence cap.
+    var bylineRanked = null;
+    if (typeof scoreAllBylines_ === 'function' && bylineState.roster && Object.keys(bylineState.roster).length > 0) {
+      bylineState.arcBinding = (typeof loadArcBinding_ === 'function')
+        ? loadArcBinding_(seedForPriority, storylineRawData)
+        : null;
+      try {
+        bylineRanked = scoreAllBylines_(seedForPriority, bylineState);
+      } catch (e) {
+        if (typeof Logger !== 'undefined') {
+          Logger.log('applyStorySeeds_ v3.12: scoreAllBylines_ failed for seed domain=' + normalDomain + ': ' + e.message);
+        }
+        bylineRanked = null;
+      }
+      if (bylineRanked && bylineRanked.length > 0) {
+        var topName = bylineRanked[0].name;
+        bylineState.cadence[topName] = (bylineState.cadence[topName] || 0) + 1;
+      }
+      bylineState.totalSeeds += 1;
+    }
 
     return {
       seedId: Utilities.getUuid().slice(0, 8),
@@ -308,7 +373,16 @@ function applyStorySeeds_(ctx) {
       // v3.11 additions (S206 — Engine A scoring):
       priorityScore: priorityResult ? priorityResult.priorityScore : null,
       priorityComponents: priorityResult ? priorityResult.components : null,
-      consequenceFloor: floorFlag
+      consequenceFloor: floorFlag,
+      // v3.12 additions (S206 — Engine B byline ranking):
+      bylineCandidate: (bylineRanked && bylineRanked.length > 0) ? bylineRanked[0].name : null,
+      bylineConfidence: (bylineRanked && bylineRanked.length > 0) ? (bylineRanked[0].confidence || 'low') : null,
+      bylineRationale: (bylineRanked && bylineRanked.length > 0) ? {
+        components: bylineRanked[0].components,
+        alternates: bylineRanked.slice(1, 3).map(function(r) {
+          return { name: r.name, score: r.score, components: r.components };
+        })
+      } : null
     };
   }
 

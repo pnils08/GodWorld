@@ -1,10 +1,25 @@
 /**
  * ============================================================================
- * V3.6 STORY SEEDS WRITER - Write-Intent Based
+ * V3.7 STORY SEEDS WRITER - Write-Intent Based
  * ============================================================================
  *
  * Writes seeds to Story_Seed_Deck sheet with full calendar context.
  * Uses V3 write-intents model for persistence.
+ *
+ * v3.7 Changes (S206 — Engine B persistence per routing-foundation plan T3.7):
+ * - 3 new columns (P-R) for Engine B byline ranking: BylineCandidate,
+ *   BylineConfidence, BylineRationale (JSON: {components, alternates}).
+ *   Populated by applyStorySeeds.js v3.12 makeSeed via scoreAllBylines_.
+ * - Live sheet widened from 15 → 18 cols S206 via service-account direct write.
+ * - **DEPRECATION NOTE:** SuggestedJournalist (col I), SuggestedAngle (col J),
+ *   VoiceGuidance (col K), MatchConfidence (col L) are kept populated for ONE
+ *   transition cycle so /sift consumers can switch over without breakage. Next
+ *   engine-sheet pickup (post-C94 smoke-test) retires the suggestStoryAngle_
+ *   call site in applyStorySeeds.js + drops cols I-L from this writer per T3.6
+ *   "replace" framing. During transition, SuggestedJournalist is still computed
+ *   from suggestStoryAngle_ (independent path); BylineCandidate is computed
+ *   from scoreAllBylines_ — they MAY diverge for the transition cycle, that's
+ *   expected. Consumers should prefer BylineCandidate going forward.
  *
  * v3.6 Changes (S206 — Engine A persistence per routing-foundation plan T2.7):
  * - 3 new columns (M-O) for Engine A scoring: PriorityScore, ConsequenceFloor,
@@ -45,13 +60,16 @@ var SEED_DECK_HEADERS = [
   'Neighborhood',         // F
   'Priority',             // G
   'SeedText',             // H
-  'SuggestedJournalist',  // I  (v3.5)
-  'SuggestedAngle',       // J  (v3.5)
-  'VoiceGuidance',        // K  (v3.5)
-  'MatchConfidence',      // L  (v3.5)
+  'SuggestedJournalist',  // I  (v3.5 — DEPRECATED v3.7, retired next session post-C94)
+  'SuggestedAngle',       // J  (v3.5 — DEPRECATED v3.7, retired next session post-C94)
+  'VoiceGuidance',        // K  (v3.5 — DEPRECATED v3.7, retired next session post-C94)
+  'MatchConfidence',      // L  (v3.5 — DEPRECATED v3.7, retired next session post-C94)
   'PriorityScore',        // M  (v3.6 — Engine A composite 0-10)
   'ConsequenceFloor',     // N  (v3.6 — Engine A boolean: HEALTH/SAFETY/CIVIC top-domain bottom-floor)
-  'PriorityComponents'    // O  (v3.6 — Engine A breakdown JSON: {domainWeight, severityMul, arcMul, coverageMul, raw, clampApplied})
+  'PriorityComponents',   // O  (v3.6 — Engine A breakdown JSON)
+  'BylineCandidate',      // P  (v3.7 — Engine B top-ranked journalist name)
+  'BylineConfidence',     // Q  (v3.7 — Engine B confidence label: high/medium/low)
+  'BylineRationale'       // R  (v3.7 — Engine B JSON: {components, alternates} — top components + top-3 alternates)
 ];
 
 
@@ -94,7 +112,12 @@ function saveV3Seeds_(ctx) {
       // and degraded-mode runs where priorityEngine.js failed to load.
       s.priorityScore != null ? s.priorityScore : '',  // M  PriorityScore (v3.6)
       s.consequenceFloor === true,                     // N  ConsequenceFloor (v3.6) — boolean to sheet
-      s.priorityComponents ? JSON.stringify(s.priorityComponents) : ''  // O  PriorityComponents JSON (v3.6)
+      s.priorityComponents ? JSON.stringify(s.priorityComponents) : '',  // O  PriorityComponents JSON (v3.6)
+      // v3.7 (S206 — Engine B): defensive nulls for pre-bylineEngine seeds
+      // and degraded-mode runs (empty roster, scoreAllBylines_ throw, etc.).
+      s.bylineCandidate || '',                                           // P  BylineCandidate (v3.7)
+      s.bylineConfidence || '',                                          // Q  BylineConfidence (v3.7)
+      s.bylineRationale ? JSON.stringify(s.bylineRationale) : ''         // R  BylineRationale JSON (v3.7)
     ]);
   }
 
@@ -108,16 +131,16 @@ function saveV3Seeds_(ctx) {
     100
   );
 
-  Logger.log('saveV3Seeds_ v3.6: Queued ' + rows.length + ' seeds for cycle ' + cycle);
+  Logger.log('saveV3Seeds_ v3.7: Queued ' + rows.length + ' seeds for cycle ' + cycle);
 }
 
 
 /**
  * ============================================================================
- * STORY SEED DECK REFERENCE v3.6
+ * STORY SEED DECK REFERENCE v3.7
  * ============================================================================
  *
- * COLUMNS (15):
+ * COLUMNS (18):
  * A   Timestamp
  * B   Cycle
  * C   SeedID
@@ -126,20 +149,22 @@ function saveV3Seeds_(ctx) {
  * F   Neighborhood
  * G   Priority
  * H   SeedText
- * I   SuggestedJournalist (v3.5 — from rosterLookup matching)
- * J   SuggestedAngle (v3.5 — angle suggestion from story engine)
- * K   VoiceGuidance (v3.5 — how the journalist should approach the story)
- * L   MatchConfidence (v3.5 — none/low/medium/high)
+ * I   SuggestedJournalist (v3.5 — DEPRECATED v3.7, retired next session post-C94)
+ * J   SuggestedAngle (v3.5 — DEPRECATED v3.7)
+ * K   VoiceGuidance (v3.5 — DEPRECATED v3.7)
+ * L   MatchConfidence (v3.5 — DEPRECATED v3.7)
  * M   PriorityScore (v3.6 — Engine A composite 0-10)
- * N   ConsequenceFloor (v3.6 — Engine A boolean: HEALTH/SAFETY/CIVIC top-domain bottom-floor)
+ * N   ConsequenceFloor (v3.6 — Engine A boolean)
  * O   PriorityComponents (v3.6 — Engine A breakdown JSON)
+ * P   BylineCandidate (v3.7 — Engine B top-ranked journalist)
+ * Q   BylineConfidence (v3.7 — high/medium/low confidence label)
+ * R   BylineRationale (v3.7 — Engine B JSON {components, alternates})
  *
  * Note: Calendar columns existed in v3.2-v3.3 (cols I-N) but were never read.
  * Removed in v3.4, columns I-L repurposed in v3.5 for seed metadata.
- * Cols M-O added v3.6 for Engine A scoring; live sheet widened S206 via
- * service-account direct write (ensureSheet_ does not extend existing sheets).
- * Pre-S206 rows may have stale calendar data in M-O if their dataset includes
- * pre-v3.4 rows that survived the cleanup.
+ * Cols M-O added v3.6 for Engine A; cols P-R added v3.7 for Engine B. Live
+ * sheet widened S206 via service-account direct write (ensureSheet_ does not
+ * extend existing sheets).
  *
  * ============================================================================
  */

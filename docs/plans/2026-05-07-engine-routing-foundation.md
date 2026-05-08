@@ -195,7 +195,7 @@ Tasks numbered T1.x by phase. Each is 2–5 min focused work. Terminal tag in [b
   3. Pull priority score from Story_Seed_Deck for the same seeds; compute Spearman correlation against Mags' order.
   4. Emit `output/priority_engine_validation_c{XX}.md` with per-cycle correlation + a roll-up.
 - **Verify:** `node scripts/validatePriorityEngine.js` → exits 0; report shows ≥ 0.7 correlation per acceptance criterion 2 (or flags tuning need).
-- **Status:** [ ] not started
+- **Status:** [~] partial — S206 v1 shipped (`scripts/validatePriorityEngine.js`). Plan-amendment: original spec assumed `proposals[].id` maps to `Story_Seed_Deck.SeedID`; live data shows sift uses internal "S1/S2" sequence IDs and proposals aggregate multiple seeds via `sourceSignal` text ("C3+C16", "W1+C1+C5+C10+C14"). Building correlation against fuzzy match would produce false confidence. **v1 ships as side-by-side report generator** (Mags' picks vs Engine A top-15 by priorityScore) with eyeball checklist for v2 design (top-N overlap rule, floor coverage, score-band patterns, domain concentration). Empty-state graceful: detects missing PriorityScore column or zero-populated cycle, reports "awaiting live data," exits 0. **v2 ships post-3-live-cycle data** once matching pattern is observed; will layer Spearman or top-N overlap metric on whatever rule emerges. C93 smoke test: 11 Mags proposals, 0 priorityScore'd seeds (engine-sheet wiring fires from C94 forward), report flagged "awaiting" correctly.
 
 ---
 
@@ -207,47 +207,77 @@ Tasks numbered T1.x by phase. Each is 2–5 min focused work. Terminal tag in [b
   - `utilities/bylineEngine.js` — create
 - **Steps:**
   1. Implement `scoreByline_(seed, journalist, state)` returning per-axis sub-scores:
-     - `themeAxis` — existing partial-match scoring from `suggestStoryAngle_` logic, ported.
+     - `themeAxis` — partial-match scoring ported from `suggestStoryAngle_`. **S206 amendment (Fork 1 resolved → option B):** themeAxis returns 0 for any seed where `seed.domain === 'GENERAL'`. Phase 1 root cause was GENERAL keywords structurally overlap Simon's themes; bypassing themeAxis on GENERAL kills that bias at the byline-engine surface without touching `rosterLookup.js` consumers (sift legacy path, archive engines).
      - `formatAxis` — see T3.2.
      - `cadenceAxis` — see T3.3.
      - `arcBindingAxis` — see T3.4.
   2. `scoreAllBylines_(seed, state)` returns ranked array `[{ name, score, components, confidence }]`.
-  3. Confidence = `(top.score - second.score) / top.score` clamped 0–1; categorical mapping `> 0.4 = high`, `0.2–0.4 = medium`, `< 0.2 = low`.
-- **Verify:** unit-test with mock seeds; civic-severity-high seed scores Carmen Delaine top, not Simon Leary.
-- **Status:** [ ] not started
+  3. Confidence = `(top.score - second.score) / top.score` clamped 0–1; categorical mapping `> 0.4 = high`, `0.2–0.4 = medium`, `< 0.2 = low`. **S206 stewardship fix:** HIGH categorization additionally requires `top.score >= 3` absolute floor — guards against degenerate "barely a signal" cases where top=1, second=0 produces a math-derived 1.0 ratio. Below the absolute floor, even a wide relative gap caps at MEDIUM.
+- **Verify:** unit-test with mock seeds; civic-severity-high seed scores Carmen Delaine top, not Simon Leary; GENERAL-domain seed produces themeAxis=0 across all candidates with format/cadence/arc deciding ranking; degenerate "top=1, second=0" case returns confidence=MEDIUM not HIGH.
+- **Status:** [x] done — S206. `utilities/bylineEngine.js` shipped with `themeAxis_`, `categorizeConfidence_`, `scoreByline_`, `scoreAllBylines_` fully wired; `formatAxis_`, `cadenceAxis_`, `arcBindingAxis_` are stubs (returning 0/0/1.0) for T3.2/T3.3/T3.4 to fill. **DOMAIN_KEYWORDS table mirrored locally** from `rosterLookup.js:740-751` (sync if upstream changes); **GENERAL deliberately absent** from the table — themeAxis_ short-circuits to 0 on GENERAL domain so the bypass cannot be re-introduced by accident. **Composition formula:** `total = (theme + format + arc) * cadence` (additive contributors × cadence multiplier). **Confidence:** `(top - second) / top` with HIGH gated on `top.score >= 3` absolute floor + gap > 0.4; MEDIUM on gap ≥ 0.2. 38 self-test cases (theme axis on CIVIC/HEALTH/GENERAL, defensive nulls, confidence floor degenerate cases, scoreByline composition, scoreAllBylines ranking + plan acceptance Carmen-wins-on-CIVIC at HIGH confidence, empty roster, missing state.roster throws). Plan acceptance test passes: civic-severity seed → Carmen Delaine top with HIGH confidence, Simon Leary scores 0.
 
 #### T3.2: Format-fit classifier [research-build]
 
 - **Files:**
   - `utilities/bylineEngine.js` — modify
 - **Steps:**
-  1. Add `inferSeedFormat_(seed)` returning `'edition' | 'supplemental' | 'dispatch' | 'interview'`.
-     - Engine ailment + civic = `edition`. Single-citizen profile = `interview`. Scene + neighborhood + time-anchored = `dispatch`. Topic deep-dive without urgent severity = `supplemental`.
-  2. Add `formatFitScore_(journalist, format)` table — e.g., DJ Hartley scores high on dispatch (scene/photo), Hal Richmond high on supplemental (long-view), Carmen high on edition (civic lead).
-- **Verify:** unit-test five seed shapes → returns expected format; format-fit returns expected ranking.
-- **Status:** [ ] not started
+  1. Add `inferSeedFormat_(seed)` returning `'edition' | 'supplemental' | 'dispatch' | 'interview'`. **S206 mapping locked from live seedType distribution (1109 active C89-93 seeds):**
+     | seedType | priority/signal | inferred format | rationale |
+     |----------|----------------|-----------------|-----------|
+     | `pattern`, `cluster`, `shock` | any | `edition` | engine-detected ailment, edition-front-page candidate |
+     | `civic`, `health`, `sports` | any | `edition` | typed-domain crisis seed |
+     | `storyline-active` | priority HIGH/urgent | `edition` | active arc, front-page eligible |
+     | `storyline-active` | priority normal/low | `supplemental` | continuing arc, deep-dive territory |
+     | `storyline-followup` | any | `supplemental` | by definition not breaking, retrospective |
+     | `storyline-question` | any | `interview` | unresolved mystery, single-source angle |
+     | `seasonal`, `firstfriday`, `event` | any | `dispatch` | scene-anchored, neighborhood-textured |
+     | `signal` (rare, 1 seed in 5 cycles) | any | `supplemental` | low-volume catch-all |
+  2. Add `formatFitScore_(journalist, format)` lookup. **S206 table locked from desk/role inspection (rosterLookup.js):**
+     ```
+     Per-format scoring (ranges 0–4; per-journalist values keyed by name):
+     edition (civic-lead, front-page bylines):
+       Carmen Delaine 4, Luis Navarro 4, Dr. Lila Mezran 4, Sgt. Rachel Torres 4,
+       Trevor Shimizu 3, Anthony 3, Selena Grant 3, Mags Corliss 3,
+       (most others) 1
+     supplemental (long-view, deep-dive bylines):
+       Hal Richmond 4, Simon Leary 4, Sharon Okafor 4, Mags Corliss 4,
+       Carmen Delaine 3, Mason Ortega 3, Angela Reyes 3,
+       (most others) 1
+     dispatch (scene-anchored, atmosphere bylines):
+       DJ Hartley 4, Maria Keen 4, Mason Ortega 4, Kai Marston 4,
+       Talia Finch 3, Sharon Okafor 3, Tanya Cruz 3,
+       (most others) 1
+     interview (single-citizen profile bylines):
+       Maria Keen 4, Hal Richmond 4, Mags Corliss 3, Luis Navarro 3,
+       Kai Marston 3, Mason Ortega 3,
+       (most others) 1
+     ```
+     Default fit when journalist not in table: 1 (neutral; non-zero so theme-axis can break ties).
+- **Verify:** unit-test five seed shapes → returns expected format per locked table; `formatFitScore_('Carmen Delaine', 'edition') === 4`; `formatFitScore_('DJ Hartley', 'dispatch') === 4`; unknown journalist returns 1.
+- **Status:** [x] done — S206. `inferSeedFormat_`, `formatFitScore_`, `formatAxis_` shipped in `utilities/bylineEngine.js`; `EDITION_SEEDTYPES`/`SUPPLEMENTAL_SEEDTYPES`/`DISPATCH_SEEDTYPES`/`INTERVIEW_SEEDTYPES`/`FORMAT_FIT`/`FORMAT_FIT_DEFAULT` constants exported. **Signature change documented:** `formatAxis_(seed, journalistName)` takes name (not journalist object) since format-fit is name-keyed; per-axis signature asymmetry accepted. **Wiring revealed cascading insight:** GENERAL+storyline-followup (76% of seeds) now routes Simon Leary top by supplemental format-fit alone (Simon scores 4, Carmen 3, Hal 4, Sharon 4, Mags 4 — Simon's still in the top tier but no longer alone). The Simon-magnet pathology rerouted from "every domain via theme bias" to "supplemental format only" — meaningful behavior reduction (theme bias killed on civic/health/etc.) but T3.3 cadence cap remains load-bearing for breaking the format-only dominance on the high-volume supplemental bucket. 6 legacy T3.1 tests had to be updated to use realistic seedType-bearing inputs (originally underspecified); reconciled. Final: 48 new T3.2 test cases, 86/86 total pass.
 
 #### T3.3: Byline cadence cap [research-build]
 
 - **Files:**
   - `utilities/bylineEngine.js` — modify
 - **Steps:**
-  1. Add `loadCycleCadence_(cycle)` reading current cycle's already-emitted seeds from Story_Seed_Deck and returning `{ bylineName: emittedCount }`.
-  2. Add `cadenceMultiplier_(journalist, cadence, totalSeeds)` — returns 1.0 if `cadence[name] / totalSeeds < 0.20`, scales down to 0.3 when ratio ≥ 0.25.
+  1. Add `loadCycleCadence_(cycle, deckData)` reading the prior cycle's emitted seeds from Story_Seed_Deck and returning `{ bylineName: emittedCount }`. **S206 amendment:** uses **prior cycle (cycle - 1)** as the cadence reference, not the current emitting cycle. Reason: applyStorySeeds emits seeds in batch within Phase 7; intra-cycle accumulation would have all seeds reading cadence=0 until the last one. Prior-cycle stable signal is consistent with the plan's "sequence-by-design one-cycle lag" framing (cycle N reflects cycle N-1 state).
+  2. Add `cadenceMultiplier_(journalist, cadence, totalSeeds)` — returns 1.0 if `cadence[name] / totalSeeds < 0.20`, scales linearly down to 0.3 when ratio ≥ 0.25, clamped at 0.3 floor for ratios above. **Math unchanged from plan** — Fork 1 option B (T3.1 GENERAL bypass) handles the structural-overlap case Phase 1 surfaced; cadence cap can stay at 0.3 floor for typed-domain rebalancing without over-rotating against legitimately busy bylines (e.g., P Slayer during dynasty arcs).
   3. Cap is configurable constant `CADENCE_CAP_RATIO = 0.25`.
-- **Verify:** unit-test — feeding Simon Leary at 0.25 ratio reduces his next-seed score by 70%.
-- **Status:** [ ] not started
+- **Verify:** unit-test — feeding Simon Leary at 0.25 ratio in prior cycle reduces his current-cycle score multiplier to 0.3; ratio at 0.18 leaves multiplier at 1.0; no prior-cycle data → multiplier 1.0 for all bylines (cold-start default).
+- **Status:** [x] done — S206. `loadCycleCadence_` + `cadenceMultiplier_` shipped; `cadenceAxis_` stub replaced with wired implementation. Constants exposed: `CADENCE_CAP_KNEE` (0.20), `CADENCE_CAP_RATIO` (0.25), `CADENCE_CAP_FLOOR` (0.3). **Phase 1 fix verified end-to-end:** simulated Simon at 76% prior-cycle cadence reduces his GENERAL+storyline-followup score from 4 (T3.2 baseline) to 1.2 (cadence 0.3); Carmen at 10% prior cadence wins at 3.0 (format 3 × cadence 1.0). Simon-magnet broken under realistic conditions. **`loadCycleCadence_` reads `BylineCandidate` column when present (post-T3.7), falls back to `SuggestedJournalist` for legacy/transition cycles** — both reflect byline-engine recommendation surface; cycle-bridge handled gracefully. 33 new T3.3 test cases (loadCycleCadence happy path, BylineCandidate preference, multi-cycle filtering, empty deck; cadenceMultiplier curve verified at 9 ratio points covering knee/ramp/cap/floor; cadenceAxis cold-start + Simon-magnet flow). 119/119 total pass.
 
 #### T3.4: Arc-byline binding [research-build]
 
 - **Files:**
   - `utilities/bylineEngine.js` — modify
 - **Steps:**
-  1. Add `loadArcBinding_(arcId)` reading `Storyline_Tracker.AssignedReporter` (column TBD in T3.5 — Open Question Q3).
-  2. `arcBindingScore_(journalist, arcBinding)` returns +3 if name matches binding, 0 otherwise.
-  3. Binding decays — if arc closed (Storyline_Tracker.Status = `resolved`), binding nullified.
-- **Verify:** unit-test — Hal bound to dynasty arc → next dynasty seed scores Hal +3.
-- **Status:** [ ] not started
+  1. Add `loadArcBinding_(arcId, storylineData)` pure-function lookup over pre-loaded Storyline_Tracker data; reads `AssignedReporter` column (T3.5 ships it). Caller fetches sheet data; library stays runtime-neutral (matches priorityEngine.js dual-runtime pattern).
+  2. `arcBindingScore_(journalist, arcBinding)` returns +3 if `journalist === arcBinding`, 0 otherwise.
+  3. Binding decays — if arc closed (Storyline_Tracker.Status = `resolved` OR `abandoned`), `loadArcBinding_` returns null; `arcBindingScore_(_, null) === 0`.
+  4. **S206 warm-up acknowledgment:** Fork 2 resolution (auto-bind on Mags' final published bylines, T3.5) means bindings populate over **2 cycles after Phase 6 cutover** (sift Step 3 promoted from shadow → authoritative). Through shadow phase, `arcBindingScore_` returns 0 for all candidates — multi-axis scorer functions as 3-axis (theme + format + cadence). T3.4 contribution becomes meaningful only after first auto-bind row lands. Document the warm-up explicitly in `bylineEngine.js` header so consumers don't expect arc signal pre-cutover.
+- **Verify:** unit-test — Hal bound to dynasty arc → next dynasty seed scores Hal +3; resolved arc → binding null, score 0; warm-up case (no rows in Storyline_Tracker.AssignedReporter populated yet) → score 0 for all candidates without error.
+- **Status:** [x] done — S206. `loadArcBinding_` + `arcBindingScore_` shipped; `arcBindingAxis_` stub replaced. **Stewardship signature change:** plan literal `loadArcBinding_(arcId, storylineData)` adjusted to `loadArcBinding_(seed, storylineData)` for symmetry with priorityEngine.js's `loadStorylineStateForSeed_`. Reads `seed.linkedStorylineId` as Storyline_Tracker rowNumber (per applyStorySeeds.js v3.8 docstring — opaque key). **Decay logic:** `Status='resolved'` or `'abandoned'` → null binding regardless of AssignedReporter cell content. **Warm-up null:** `AssignedReporter` column absent (pre-T3.5) → null for every seed → arcBindingAxis returns 0 for all candidates → multi-axis scorer functions as 3-axis through 2-cycle-after-cutover warm-up. End-to-end verified: with Carmen arc-bound on a GENERAL+storyline-followup seed, Carmen total = (0 theme + 3 format + 3 arc) × 1.0 cadence = 6; Simon (no binding) = 4; Carmen wins. 25 new T3.4 test cases (warm-up null path, decay paths for resolved/abandoned, OOB row, missing seed linkage, score function happy/null path, axis end-to-end, plan acceptance Hal-bound case). 144/144 total pass. **Phase 3 research-build implementation complete (T3.1-T3.4).** Engine-sheet picks up T3.5 (Storyline_Tracker.AssignedReporter column + auto-bind writer), T3.6 (wire bylineEngine into applyStorySeeds), T3.7 (Story_Seed_Deck schema columns). T3.8/T3.9 (research-build) follow once engine-sheet ships.
 
 #### T3.5: Storyline_Tracker AssignedReporter column [engine/sheet]
 
@@ -255,11 +285,15 @@ Tasks numbered T1.x by phase. Each is 2–5 min focused work. Terminal tag in [b
   - `phase06-analysis/storylineWeavingEngine.js` — modify
   - `schemas/SCHEMA_HEADERS.md` — regen
 - **Steps:**
-  1. Add `AssignedReporter` column to Storyline_Tracker.
-  2. Populate when an arc surfaces in 2+ consecutive editions covered by the same byline (auto-bind on observed pattern, not preassignment).
-  3. Header-drift detector pass.
-- **Verify:** `clasp push` + regen → column appears.
-- **Status:** [ ] not started
+  1. Add `AssignedReporter` column to Storyline_Tracker (column position TBD — placement at end is safe, header-drift detector picks it up).
+  2. Populate via auto-bind rule. **S206 Fork 2 resolved → bind on Mags' actual published bylines** (canonical, post-cutover). Implementation:
+     - Read post-publish `editions/cycle_pulse_<edition>_<cycle>.txt` Article Table for byline-per-storyline mapping.
+     - When the same byline appears for the same `StorylineId` in 2+ consecutive editions, write that byline to `AssignedReporter` for that StorylineId row.
+     - Sift's Engine B candidate is **NOT** the bind source. Engine candidates would compound shadow-phase bias; canonical published bylines preserve editorial integrity.
+  3. **S206 warm-up implication for T3.4:** during shadow phase (Phase 6 not yet cut over), sift Step 3 still has Mags assigning bylines manually. The auto-bind rule reads those manual assignments correctly — bindings begin forming as soon as 2+ editions agree on the same arc/byline. After Phase 6 cutover when sift starts pre-filling at high-confidence, auto-bind continues reading actual final assignments (post-Mags-confirm).
+  4. Header-drift detector pass via `node scripts/engineCycleAudit.js --writer-header-only` (zero drift expected).
+- **Verify:** `clasp push` + `node scripts/exportSchemaHeaders.js` → SCHEMA_HEADERS.md shows new `AssignedReporter` column at end of Storyline_Tracker; first auto-bind populates after 2 cycles of consistent byline coverage of any active StorylineId.
+- **Status:** [~] partial — schema-only done S206 (engine-sheet); auto-bind WRITER DEFERRED to research-build. **Schema-only this commit:** Storyline_Tracker widened 25 → 26 cols via `lib/sheets.js` direct service-account write (resizeSheet + appendColumns); col Z = `AssignedReporter`. SCHEMA_HEADERS regen captures new col. `bylineEngine.loadArcBinding_` already gracefully handles missing-col case (`if (bindIdx < 0) return null;`) so adding the col with no writer = warm-up state, returns null arc binding, no harm — Engine B treats every seed as un-bound until writer ships. **Why writer DEFERRED:** measure-twice reversal during T3.5a investigation surfaced that Press_Drafts.LinkedStoryline (col S, position 19) exists but is **0% populated across 164 live rows**. Same dead-col shape as Story_Hook_Deck cleared S203. Engine-side Press_Drafts-driven auto-bind path is dead-on-arrival because the upstream wire (mediaRoomIntake parsing storyline binding from edition .txt → Press_Drafts.LinkedStoryline) is missing. Three implementation paths surface for research-build to pick: **(i)** fix `mediaRoomIntake.js` / `parseMediaRoomMarkdown.js` to populate Press_Drafts.LinkedStoryline at intake time → engine-side auto-bind in `phase06-analysis/storylineWeavingEngine.js` becomes viable. **(ii)** Build Node-side `scripts/bindStorylineReporters.js` that reads `editions/cycle_pulse_*.txt` Article Tables directly + writes `Storyline_Tracker.AssignedReporter` via `lib/sheets.js`; hook into `/post-publish` skill. Bypasses Press_Drafts entirely. **(iii)** Redesign source — maybe Press_Drafts.LinkedStoryline is the wrong target tab and another data path exists. Research-build owns the choice + filing follow-up ROLLOUT row for the upstream gap. T3.5b (auto-bind writer ship) blocks on this decision.
 
 #### T3.6: Wire Engine B into applyStorySeeds [engine/sheet]
 
@@ -275,7 +309,7 @@ Tasks numbered T1.x by phase. Each is 2–5 min focused work. Terminal tag in [b
      bylineRationale: { components: ranked[0].components, alternates: ranked.slice(1, 3) }
      ```
 - **Verify:** existing seed-deck regression test passes; new fields populated.
-- **Status:** [ ] not started
+- **Status:** [x] done — S206 (engine-sheet). `applyStorySeeds.js` v3.11 → v3.12. **Stewardship adjustment to "replace" framing:** v3.9 `suggestStoryAngle_` block KEPT in parallel for ONE transition cycle so /sift consumers can switch over without breakage. Both run side by side: `suggestStoryAngle_` → cols I-L (deprecated v3.7), `scoreAllBylines_` → new fields + cols P-R. Next engine-sheet pickup post-C94 smoke-test retires v3.9 block + drops cols I-L per original "replace" spec. Implementation: (1) `bylineState = {roster: getRoster_().journalists, cadence: {}, totalSeeds: 0, arcBinding: null}` initialized at applyStorySeeds_ entry near priorityEngine raw-data preload; closure-scoped so `makeSeed` invocations mutate as cycle progresses. Empty-roster fallback if `rosterLookup.js` fails to load. (2) Inside `makeSeed`, after Engine A block: pre-resolve `bylineState.arcBinding = loadArcBinding_(seedForPriority, storylineRawData)` (returns null pre-T3.5b auto-bind writer, that's the warm-up state); call `scoreAllBylines_(seedForPriority, bylineState)` wrapped in try/catch (bylineState.roster might be empty in degraded-mode — scoreAllBylines_ throws on empty-roster, caught + nulled out + Logger.log'd). Mutate `bylineState.cadence[topName]++` and `bylineState.totalSeeds++` AFTER scoring so seed's own pick doesn't influence its own cadence cap. (3) Seed return object gains `bylineCandidate` (top.name), `bylineConfidence` (top.confidence), `bylineRationale` ({components: top.components, alternates: ranked.slice(1, 3) mapped to {name, score, components} shape}). (4) `seedForPriority` extended with `seedType` + `priority` fields (Engine B `inferSeedFormat_` + storyline-active branch need them). (5) Defensive guard: `if (typeof scoreAllBylines_ === 'function' && bylineState.roster && Object.keys(bylineState.roster).length > 0)` — cycles still produce seeds with bylineCandidate=null if bylineEngine.js fails to load. clasp deploy LIVE S206.
 
 #### T3.7: Story_Seed_Deck columns for byline output [engine/sheet]
 
@@ -286,7 +320,7 @@ Tasks numbered T1.x by phase. Each is 2–5 min focused work. Terminal tag in [b
   1. Add columns: `BylineCandidate`, `BylineConfidence`, `BylineRationale` (JSON-serialized).
   2. Existing `SuggestedJournalist` column kept for one cycle (transition); deprecation note in file header.
 - **Verify:** regen + clasp push.
-- **Status:** [ ] not started
+- **Status:** [x] done — S206 (engine-sheet). `saveV3Seeds.js` v3.6 → v3.7. (1) `SEED_DECK_HEADERS` extended 15 → 18 cols with P=`BylineCandidate` / Q=`BylineConfidence` / R=`BylineRationale`. (2) Row push maps `s.bylineCandidate || ''` (P), `s.bylineConfidence || ''` (Q), `s.bylineRationale ? JSON.stringify(s.bylineRationale) : ''` (R). (3) Deprecation notes added to cols I-L in headers array + file header docstring + STORY SEED DECK REFERENCE block — SuggestedJournalist / SuggestedAngle / VoiceGuidance / MatchConfidence flagged for retirement next session post-C94 smoke-test, kept populated this cycle for /sift transition. (4) Live Story_Seed_Deck widened from 15 → 18 cols via `lib/sheets.js` direct service-account write (`resizeSheet('Story_Seed_Deck', 18, null)` + `appendColumns('Story_Seed_Deck', 1, 15, ['BylineCandidate', 'BylineConfidence', 'BylineRationale'])`). (5) `node scripts/regenSchemaHeaders.js` ran — `schemas/SCHEMA_HEADERS.md` confirms 18 cols on Story_Seed_Deck. clasp deploy LIVE S206 ("Script is already up to date" idempotency confirmed). Smoke-test pending C94 (first cycle that exercises the full Engine A + Engine B wiring with priorityEngine + bylineEngine code paths live).
 
 #### T3.8: Shadow-run logger in /sift [research-build]
 
@@ -435,10 +469,13 @@ Tasks numbered T1.x by phase. Each is 2–5 min focused work. Terminal tag in [b
 
 Questions that block a task. Resolve and delete. An open question at publish time is a plan defect.
 
-- [ ] **Q1 — Domain weight numerics.** T2.1 ships with a starter table. Mike's grill said "Health probably higher than traffic" — that's directional, not numeric. Resolve before Phase 2 declares Engine A authoritative. Path: 3-cycle shadow validation will surface miscalibrations; tune from there.
-- [ ] **Q2 — Cadence cap percentage.** T3.3 sets `CADENCE_CAP_RATIO = 0.25` as starter. May need lowering if cycle has many seeds (cap binds harder). Empirical from T3.9 first run.
-- [ ] **Q3 — Storyline_Tracker AssignedReporter column placement.** T3.5 adds the column; column letter / position TBD until SCHEMA_HEADERS regen reveals the live shape after engine-sheet's pending B3-B7 work.
-- [ ] **Q4 — Anti-creativity rule made explicit.** Should this plan declare a rule like "Engine B never picks angle text — only candidate byline + voice guidance"? Mike's grill grounded the angle-creative-act position; codify it as a hard constraint here, not just plan prose. Path: add a §"Hard Constraints" section before merging plan from draft → active.
+- [x] **Q1 — Domain weight numerics.** Resolved S206 — Mike granted Engine A stewardship; T2.1 shipped with 19-key superset, T2.8 v1 harness ready for shadow-cycle calibration starting C94. Numerics tunable under stewardship without further blocking grills.
+- [x] **Q2 — Cadence cap percentage.** Resolved S206 — `CADENCE_CAP_RATIO = 0.25` retained at the plan default. Phase 1 diagnosis showed cadence cap alone wouldn't break Simon-magnet on GENERAL seeds; Fork 1 (option B, T3.1) localized that fix to themeAxis-bypass-on-GENERAL instead of forcing cadence-cap to be aggressive. Cadence cap stays at 0.25 / 0.3-floor for typed-domain rebalancing — empirical T3.9 still validates first live cycle.
+- [x] **Q3 — Storyline_Tracker AssignedReporter column placement.** Resolved S206 — placement at end-of-sheet is safe (header-drift detector picks it up); column letter falls out of clasp push order, no pre-allocation needed. T3.5 amended.
+- [x] **Q4 — Anti-creativity rule made explicit.** Resolved — promoted to §Hard Constraints below; locked.
+- [x] **Q5 (new S206) — GENERAL-seed handling.** Resolved — Fork 1 option B locked (themeAxis returns 0 for GENERAL; format/cadence/arc decide). Inlined into T3.1 step 1.
+- [x] **Q6 (new S206) — AssignedReporter auto-bind source.** Resolved — Fork 2 locked (Mags' actual published bylines, not Engine B candidates). Editorial integrity over speed; T3.4 acknowledges 2-cycle warm-up post-cutover. Inlined into T3.5 step 2.
+- [x] **Q7 (new S206) — Confidence formula degenerate case.** Resolved (stewardship math fix) — HIGH confidence categorization additionally requires `top.score >= 3` absolute floor. Guards against `top=1, second=0 → ratio 1.0` false-high. Inlined into T3.1 step 3.
 
 ---
 
@@ -505,4 +542,7 @@ Still Mags' problem, follow-up plans needed:
 
 - 2026-05-07 — Initial draft (S205, research-build). Three grill rounds: (Q1) angle is the irreducible creative act; (Q2) cross-cycle storyline memory is the missing capability for full angle automation; (Q3) story priority and byline are separate concerns — pressure-tested two paths, two-engine split chosen for structural enforcement of the "user can't override engine consequence" rule, independent trust thresholds, and failure isolation. Sequence-by-design (one-cycle lag) confirmed by Mike. Existing framework leveraged: `applyStorySeeds.js` v3.10, `Storyline_Tracker`, `Edition_Coverage_Ratings`, `engine_audit_c{XX}.json`, `rosterLookup.js`. 22 tasks across 6 phases.
 - 2026-05-07 — Phase 1 closed (S206, research-build). T1.1 + T1.2 done. `scripts/diagnoseRoutingMatcher.js` shipped + run; `output/routing_diagnosis_c93.md` + appended root-cause diagnosis emitted. Findings refine the hypothesis: pathology is two-layered. (Layer 1) domain classifier dumps 76% of seeds into GENERAL; typed-domain routing is clean (HEALTH/COMMUNITY/SPORTS/CULTURE/SAFETY/FAITH/ENV/ECON each 100% specialist; CIVIC 88%). (Layer 2) GENERAL keywords `['stability','quiet','texture']` overlap Simon Leary's themes by structural design — Simon scores 5 on every GENERAL seed (texture exact +3, stability partial +1, quiet partial +1), clears HIGH-confidence threshold; closest competitor scores 1 (below admit threshold). Result: GENERAL→Simon at 99.9% (838/839) HIGH-confidence by design, not by accident. Implication: cadence cap (T3.3) becomes load-bearing — Engine B alone won't break the lock since structural overlap survives; cadence cap is what forces spillover. Phase 2 (Engine A) unblocked.
+- 2026-05-07 — T2.8 v1 shipped (S206, post-engine-sheet handoff). Plan-amendment documented in per-task status: original Spearman-against-`proposals[].id` design unworkable (no foreign-key linkage between sift proposals and Story_Seed_Deck). v1 ships as side-by-side report generator with eyeball checklist; v2 lands once 3+ cycles of live data accumulate and matching rule emerges from observation. Mike granted Engine A stewardship same session — T2.8 calibration + Phase 3 design now research-build's autonomous queue.
+- 2026-05-07 — Phase 3 drafted (S206, post-stewardship). Cascade analysis on byline engine surfaced three stewardship calls (locked inline) + two real forks (Mike resolved): **Fork 1 → option B locked** — themeAxis returns 0 for GENERAL-domain seeds (Phase 1 root cause was structural keyword overlap; bypassing themeAxis on GENERAL kills the bias at byline-engine surface without touching `rosterLookup.js` consumers). **Fork 2 → Mags' published bylines locked** as auto-bind source for `Storyline_Tracker.AssignedReporter` (canonical, post-cutover; T3.4 acknowledges 2-cycle warm-up cost). Stewardship locks: confidence formula HIGH-categorization gated on `top.score >= 3` absolute floor (guards degenerate cases); cadence cap math unchanged at 0.25/0.3-floor (Fork 1 handles GENERAL separately, no need to over-rotate); seedType→format mapping table locked from live distribution; per-journalist format-fit table locked from desk/role inspection. Q1-Q4 closed; Q5/Q6/Q7 added and immediately resolved. Plan moves from draft → ready-to-execute. Engine-sheet picks up T3.5 (AssignedReporter column) once research-build ships T3.1-T3.4 + T3.8 + T3.9.
+- 2026-05-07 — Phase 3 research-build implementation closed (S206, post-stewardship). T3.1-T3.4 all shipped in `utilities/bylineEngine.js` (~600 lines, 144 self-tests passing). All four axes wired: themeAxis (with GENERAL bypass), formatAxis (seedType-inferred + per-journalist fit table), cadenceAxis (knee 0.20, cap 0.25, floor 0.3), arcBindingAxis (+3 to bound reporter, decay on resolved/abandoned, warm-up null pre-T3.5). End-to-end Phase-1-fix verified under simulated conditions: Simon at 76% prior cadence → score 1.2 on GENERAL+storyline-followup; Carmen at 10% → score 3 → wins. The Simon-magnet lock breaks under realistic data. Composition formula `total = (theme + format + arc) * cadence` proven across all combinations. Plan-amendments documented per task: signature changes (formatAxis name-keyed, loadArcBinding takes seed for symmetry), legacy-test reconciliation (T3.1 underspecified seeds updated to seedType-bearing), confidence-floor stewardship fix. Engine-sheet picks up T3.5 + T3.6 + T3.7 next; research-build T3.8 (shadow-run logger in /sift skill) + T3.9 (cadence-cap distribution check script) follow.
 - 2026-05-07 — Phase 2 research-build closed (S206). T2.1–T2.5 all done in `utilities/priorityEngine.js` (~430 lines, 85 self-tests passing). Shipped: `DOMAIN_WEIGHTS` (19 keys, expanded to seed-side superset + engine canonical), `SEVERITY_MULTIPLIERS`, `STORYLINE_PRIORITY_TO_SEVERITY`, `COVERAGE_DOMAIN_NORMALIZE` (CRIME→SAFETY etc.), `COVERAGE_THRESHOLDS` (calibrated to live data: saturation ≥+3, crisis ≤-1), `CONSEQUENCE_FLOOR_DOMAINS`. Functions: `computeArcMultiplier_`, `parseStorylineRow_`, `loadStorylineStateForSeed_`, `parseCoverageRow_`, `loadCoverageStateForDomain_`, `computeCoverageMultiplier_`, `computePriorityScore_` (composer), `isConsequenceFloor_` (boolean flag). Three plan-amendments documented in per-task status entries: (1) `loadStorylineState_` signature changed to pure-function lookup over pre-loaded sheet data (runtime-neutral — caller fetches via SpreadsheetApp or `lib/sheets.js`); (2) DOMAIN_WEIGHTS expanded to absorb seed-side reality (FAITH, ECONOMIC, ENVIRONMENT, EDUCATION) without unifying engine-wide vocabulary (~10-site blast radius — separate plan); (3) crisis threshold ≤-3 dropped to ≤-1 to match live rating range. Two engine-sheet items folded into T2.6 spec: `loadActiveStorylines_` column expansion (LastCoverageCycle minimum) + optional `linkedStorylineId` cosmetic rename. Engine-sheet picks up T2.6 + T2.7 next; T2.8 (3-cycle validation harness) returns to research-build after engine-sheet ships and ≥3 cycles run with priority engine wired.

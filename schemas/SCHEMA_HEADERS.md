@@ -1106,7 +1106,7 @@ pointers:
 ## Story_Seed_Deck
 
 - **Rows:** 1110
-- **Columns:** 15
+- **Columns:** 18
 
 | Col | Header |
 |-----|--------|
@@ -1125,6 +1125,9 @@ pointers:
 | M | PriorityScore |
 | N | ConsequenceFloor |
 | O | PriorityComponents |
+| P | BylineCandidate |
+| Q | BylineConfidence |
+| R | BylineRationale |
 
 ---
 
@@ -1169,7 +1172,7 @@ pointers:
 ## Storyline_Tracker
 
 - **Rows:** 240
-- **Columns:** 25
+- **Columns:** 26
 
 | Col | Header |
 |-----|--------|
@@ -1198,6 +1201,7 @@ pointers:
 | W | StaleAfterCycles |
 | X | IsStale |
 | Y | WrapUpGenerated |
+| Z | AssignedReporter |
 
 ---
 

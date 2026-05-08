@@ -97,14 +97,13 @@ function runYouthEngine_(ctx) {
     demographics = getNeighborhoodDemographics_(ss);
   }
 
-  // Get generic citizens (potential youth)
-  var genericCitizens = getGenericYouth_(ss);
-
   // Get named citizens who are youth (Phase 42 §5.6: pass ctx for ctx.ledger access)
   var namedYouth = getNamedYouth_(ctx);
 
-  // Combine youth pools
-  var allYouth = namedYouth.concat(genericCitizens);
+  // S205 Path B: Generic_Citizens youth pool dropped — generator disabled S205;
+  // GC has 0 youth anyway per ENGINE_REPAIR Row 20 (generator wrote ages 18-75
+  // only). SL is single source. getGenericYouth_ retained below as archaeology.
+  var allYouth = namedYouth;
 
   // Generate events
   var events = [];

@@ -223,21 +223,17 @@ function getWorldState_(ss) {
  */
 function findCitizenBase_(ss, identifier) {
   var citizen = null;
-  
+
   // Try Simulation_Ledger first (named citizens)
   citizen = findInSimulationLedger_(ss, identifier);
   if (citizen) {
     citizen.source = 'named';
     return citizen;
   }
-  
-  // Try Generic_Citizens
-  citizen = findInGenericCitizens_(ss, identifier);
-  if (citizen) {
-    citizen.source = 'generic';
-    return citizen;
-  }
-  
+
+  // S205 Path B: Generic_Citizens fallback dropped — architectural decision; SL is
+  // single source (836 active, 47 cols incl. Gender col AU). findInGenericCitizens_
+  // retained as archaeology for legacy GC tab inspection.
   return null;
 }
 

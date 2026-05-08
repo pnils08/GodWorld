@@ -65,7 +65,7 @@
  *
  * Reads from Google Sheets:
  *   Story_Seed_Deck, Story_Hook_Deck, WorldEvents_V3_Ledger, Event_Arc_Ledger,
- *   Civic_Office_Ledger, Initiative_Tracker, Simulation_Ledger, Generic_Citizens,
+ *   Civic_Office_Ledger, Initiative_Tracker, Simulation_Ledger,
  *   Chicago_Citizens, Cultural_Ledger, Oakland_Sports_Feed, Chicago_Sports_Feed,
  *   Storyline_Tracker, Cycle_Packet, LifeHistory_Log,
  *   Household_Ledger, Relationship_Bonds, World_Population, Media_Ledger
@@ -1959,9 +1959,12 @@ async function main() {
       return [];
     });
   }
+  // S205 Path B: Generic_Citizens read dropped — was loaded for console.log count
+  // only (single use, no functional consumer); SL is single source per S205
+  // architectural decision.
   var [
     seedsRaw, hooksRaw, eventsRaw, arcsRaw,
-    civicRaw, initiativeRaw, simRaw, genericRaw,
+    civicRaw, initiativeRaw, simRaw,
     chicagoRaw, culturalRaw, oakSportsRaw, chiSportsRaw,
     storylineRaw, packetRaw, historyRaw,
     householdRaw, bondsRaw, worldPopRaw, simCalRaw,
@@ -1974,7 +1977,6 @@ async function main() {
     safeGet('Civic_Office_Ledger'),
     safeGet('Initiative_Tracker'),
     safeGet('Simulation_Ledger'),
-    safeGet('Generic_Citizens'),
     safeGet('Chicago_Citizens'),
     safeGet('Cultural_Ledger'),
     safeGet('Oakland_Sports_Feed'),
@@ -2032,7 +2034,7 @@ async function main() {
     var name = ((c.First || '') + ' ' + (c.Last || '')).trim();
     if (name) simLedgerByName[name] = c;
   });
-  var genericCitizens = allToObjects(genericRaw);
+  // S205 Path B: genericCitizens var dropped — was only console.log'd, never used.
   var chicagoCitizens = allToObjects(chicagoRaw);
 
   // Cultural
@@ -2164,7 +2166,6 @@ async function main() {
   console.log('  Civic Officers:', civicOfficers.length);
   console.log('  Initiatives:', initiatives.length);
   console.log('  Sim Ledger:', simLedger.length);
-  console.log('  Generic Citizens:', genericCitizens.length);
   console.log('  Chicago Citizens:', chicagoCitizens.length);
   console.log('  Cultural Entities:', culturalLedger.length);
   console.log('  Oakland Sports:', oakSports.length);

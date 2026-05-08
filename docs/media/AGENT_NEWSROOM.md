@@ -2,7 +2,7 @@
 
 **Status:** Implemented (Claude Code agents + skills)
 **Architecture:** Claude Code permanent agents (`.claude/agents/`) + orchestration skills (`.claude/skills/`)
-**Last Updated:** 2026-04-17 (S156)
+**Last Updated:** 2026-05-08 (S206 — content verified: 25 agent dirs in `.claude/agents/` matches doc; four-file structure intact across 24 active agents; engine-validator scope-noted N/A)
 
 ---
 

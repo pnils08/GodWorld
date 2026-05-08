@@ -2,7 +2,7 @@
 
 **What lives where. Read this before searching for files.**
 
-Last Updated: Session 180/181 (2026-04-26) — research-build /doc-audit media spot-check confirmed retention policy + top-level dirs still accurate. C92 output files present: `baseline_briefs_c92.json`, `engine_audit_c92.json`, `engine_review_c92.md`, `world_summary_c92.md`, `production_log_edition_c92.md`, `production_log_city_hall_c92.md`, civic-voice/*_c92.json (11 voices), faith_digest_c92.json (S180), intake_player_truesource.json (S180), intake_published_entities_c92*.json (S180). Prior baseline: S156 (2026-04-17).
+Last Updated: Session 206 (2026-05-08) — research-build /doc-audit media. Top-level dirs + retention policy still accurate. **S206 additions** (routing-foundation plan output): `routing_diagnosis_c93.md` (T1.1 distribution dump, idempotent — re-runnable each cycle), `routing_root_cause_c93.md` (T1.2 human analysis, write-once companion), `priority_engine_validation_c93.md` (T2.8 v1 side-by-side report, idempotent), `storyline_binding_evidence_c{XX}.{md,json}` (T3.5b Phase 1 evidence-logger output, idempotent per cycle), `byline_shadow_log_c{XX}.json` (T3.8, fires from C94 first sift run with engine wired). Prior C93 cycle: `production_log_c93.md` (consolidated single-log per S195 convention) + 6 sidecar gap logs from city-hall-prep/run + sift + write-edition + post-publish + edition-print runs. Prior baselines: S180/181 (2026-04-26), S156 (2026-04-17).
 
 ---
 

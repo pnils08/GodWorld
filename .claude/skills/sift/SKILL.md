@@ -222,6 +222,44 @@ The 9 reporters and their section defaults:
 
 **Update production log** with final assignment table (story → reporter → section tag).
 
+#### Step 3a: Engine B shadow-run logger (T3.8)
+
+Engine B (`utilities/bylineEngine.js`) emits per-seed `bylineCandidate` + `bylineConfidence` + `bylineRationale` into `Story_Seed_Deck` columns P/Q/R from C94 forward (engine-sheet wired the consumer call site at T3.6; schema columns at T3.7). Sift Step 3 does NOT auto-pre-fill from these — Mags + Mike still drive every assignment by hand during shadow phase. The logger captures the diff so we can validate engine quality before promoting at T6.2 cutover.
+
+**Skill action — after final assignments lock:**
+
+1. **Read engine candidates from Story_Seed_Deck** for the current cycle. For each proposal in the locked assignment table, look up the underlying seed(s) by storyline / sourceSignal text-match (best effort — proposals aggregate seeds; pick the highest-confidence engine candidate among matched seeds).
+2. **Emit `output/byline_shadow_log_c{XX}.json`** — one record per proposal:
+   ```json
+   {
+     "cycle": 94,
+     "generatedAt": "<iso>",
+     "phase": "shadow",
+     "entries": [
+       {
+         "proposalId": "S1",
+         "storyTitle": "...",
+         "matchedSeedIds": ["..."],
+         "engineCandidate": "Dr. Lila Mezran",
+         "engineConfidence": "high",
+         "engineRationale": { "components": {...}, "alternates": [...] },
+         "finalAssignment": "Dr. Lila Mezran",
+         "outcome": "agree" | "override" | "engine_silent",
+         "overrideReason": "<one-line, only when outcome=override>"
+       }
+     ]
+   }
+   ```
+3. **Outcome rules:**
+   - `agree` — engineCandidate matches finalAssignment.
+   - `override` — engineCandidate populated but finalAssignment differs. Mike/Mags can append a one-line `overrideReason` if the call has a notable reason; absent reason is fine.
+   - `engine_silent` — Story_Seed_Deck row has no `BylineCandidate` populated for any matched seed (warm-up, parser-miss, or no matched seed). Skip override calculation.
+4. **No auto-pre-fill** — engine candidates appear nowhere in the proposal table presented to Mike. The diff lives in the log only. Promotion to pre-fill behavior is gated on T6.2 cutover after 3-cycle agree-rate review.
+
+**Why this matters:** the log is the calibration substrate for Phase 6 cutover. Engine B's confidence threshold (HIGH/MED/LOW) tunes against observed agree-rates per band. T6.1 reads these logs across 3 cycles to compute per-band agree-rates and surface concentration patterns (any byline accept-rate > 80% or < 30% flags miscalibration).
+
+**File location:** `output/byline_shadow_log_c{XX}.json`. Idempotent — re-running sift overwrites the file.
+
 ### Step 4: Verify Citizens
 
 Read `docs/media/citizen_selection.md` FIRST. It defines how to pick citizens for stories, when to use known versus new citizens, what's canon versus agent color, tier behavior, gender handling, and how many citizens per story type. That file evolves after each cycle.

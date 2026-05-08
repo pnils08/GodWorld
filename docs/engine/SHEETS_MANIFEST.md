@@ -1,5 +1,7 @@
 # Google Sheets Manifest
 
+**⚠️ STALE — S206 doc-audit flag (engine-sheet, 2026-05-08):** This manifest is 22 days old and predates significant schema drift in core tabs: Story_Seed_Deck (12 → 18 cols S206 — Engine A + Engine B persistence: PriorityScore, ConsequenceFloor, PriorityComponents, BylineCandidate, BylineConfidence, BylineRationale), Storyline_Tracker (25 → 26 cols S206 — `AssignedReporter`), Simulation_Ledger (Gender col AU added pre-S202 + S204 B2 batch widening), LifeHistory_Log + Civic_Office_Ledger + Neighborhood_Map (S204 B2 mechanical migrations widening). **Authoritative current state: `schemas/SCHEMA_HEADERS.md` (regenerated 2026-05-08 / S206).** Full regen of THIS manifest is gated on a dedicated session per S185 audit note — `crawlSheetsArchive.js` regen surfaces a Drive-wide security finding (live `ANTHROPIC_API_KEY` in personal Drive sheets) that requires handling before regen can ship.
+
 **Generated:** 2026-04-17 (S156 refresh; timestamp bug in `crawlSheetsArchive.js` fixed same commit so next run auto-stamps)
 **Spreadsheets:** 40 (up from 1 at 2026-02-19 — service account has Drive-archive spreadsheets it didn't previously have. Main engine sheet is `Simulation_Narrative`; others are intake/reference/archive sheets discovered by the crawler.)
 

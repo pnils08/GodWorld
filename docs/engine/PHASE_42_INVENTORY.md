@@ -17,6 +17,8 @@ pointers:
 
 # Phase 42 Writer Consolidation — Inventory
 
+**⚠️ Snapshot frozen S184 (2026-04-28).** This inventory captures Phase 1 baseline state. Subsequent batches (B0 pilot, §5.6 redesign S188, B2 batch closure S204, Path B Generic_Citizens demotion S205, B3-B7 deferred-list triage S205) are NOT reflected here. **For current Phase 42 state read `docs/engine/PHASE_42_PATTERNS.md` Changelog** — it's maintained per-batch and includes the full per-file delta history. Inventory retained as historical baseline only; do not edit to reflect post-S184 state. See PHASE_42_PATTERNS §3 (per-file decision map) + §3.5 (S205 deferred-list triage) for the live picture.
+
 **Methodology:** S146 audit listed 38 files / 197 direct-write sites. citizenFameTracker.js retired S184 (-16 sites). This inventory re-greps each remaining file in the engine codebase as of 2026-04-28 and classifies by migration profile: direct-write count, existing intent usage, lazy-create signals, caller-passed-sheet signature, file size.
 
 **Headline numbers (post-S184 reality):**

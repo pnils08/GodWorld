@@ -4,7 +4,15 @@
 
 **Source:** `phase01-config/godWorldEngine2.js` v2.14 — two identical engine paths (live + dry-run/replay).
 
-**Last verified:** 2026-04-29, Session 185 (engine-sheet /doc-audit engine). Phase dispatch sequence below unchanged from S120. S185 engine-sheet touches: (a) `phase10-persistence/recordWorldEventsv3.js` v3.5 → v3.6 (deriveDomain word-boundary regex + length-sorted keywords + 8 new domains + health-event rename); (b) DELETE batch removed 20 unreferenced helpers across `utilities/v2DeprecationGuide.js` (5), `phase10-persistence/persistenceExecutor.js` (3 bridges), `phase07-evening-media/parseMediaRoomMarkdown.js` (3), `utilities/cycleModes.js` (3), `phase04-events/eventArcEngine.js` (3), `phase07-evening-media/mediaRoomIntake.js` (2), `phase01-config/godWorldEngine2.js` (1 — `nextPopIdSafe_`). All deletions were of internal helpers, not phase dispatch entries — phase order + entry-function names unchanged. **S180/S181 verification preserved:** Phase dispatch sequence below unchanged from S120. S180 phase-code touches were limited to `phase05-citizens/` PHASE_INTENSITY + PHASE_SENTIMENT dict additions (vote-ready / legislation-filed / pilot_evaluation values) — no new dispatch entries, no function-rename. Phase 38 auditor, Phase 39 reviewer lanes, and Phase 40 architecture hardening all shipped S146-S156 as cross-cutting work OUTSIDE this map: Phase 38 auditor runs as Node script `scripts/engineAuditor.js` (post-cycle), Phase 39 reviewers run as Node scripts (`finalArbiter.js`, `rheaTwoPass.js`, `capabilityReviewer.js`, `rewardHackingScanner.js`, `tierClassifier.js`) in the edition review lane, Phase 40 is hooks + settings + credential layout + `utilities/safeRand.js` helper. None alter the phase*/ dispatch below.
+**Last verified:** 2026-05-08, Session 206 (engine-sheet /doc-audit engine). **Phase dispatch sequence has changed since S120**: S188 §5.6 redesign added Phase 1 `initSimulationLedger_(ctx)` pre-phase-04 + Phase 10 `commitSimulationLedger_(ctx)` bookends for shared `ctx.ledger` shape; S205 commented out `Phase5-GenericCitizens` call sites (2 of them — `runCyclePhases_` line 192 + `runWorldCycle_` line 1501) per Path B no-grow-legacy decision (generator file retained for reversibility). All other Phase 5/7/8/10 entries unchanged. **S186→S206 engine-sheet touches:**
+- **S188** `0e31e66..6609c4a` (9 commits) — §5.6 phase05-ledger redesign: 23 cycle-path SL touchers + Phase 1 init + Phase 10 commit handler migrated to shared `ctx.ledger`; cohort-A/B writers + spec'd readers + audit-miss readers + processIntake_ Phase 10 clobber fix.
+- **S199** `2cbe045..eb3cbcb` (~28 commits, 6 workstreams) — civicInitiativeEngine v1.9 (G-R11 vote-trigger reschedule), Phase 19 collisions cleared 16→0 (auditFunctionCollisions.js detector + 11 commits Phase A/B.1-B.6), recordWorldEventsv3 v3.7 ev.domain UPPERCASE, ledger-doc refresh.
+- **S200** `a829c7f..12cf9ce` (6 commits) — ENGINE_REPAIR Row 18 cohort-C migration: householdFormationEngine v1.2 + generationalWealthEngine v2.1 + educationCareerEngine v2.1 + migrationTrackingEngine v1.1 all routed through `ctx.ledger`; A7 amendment for file-name-vs-`process*_`-name dispatch lesson.
+- **S204** `40981ee..3f3ac3c` (9 commits) — Phase 42 B2 batch CLOSED (8 of 8) + Row 21 §5.6 half-migration FIX (`fd9758e` runNeighborhoodEngine v2.5 read-side aliasing).
+- **S205** `dc465c6` (Phase 42 B3-B7 deferred-list triage CLOSED, 5 files / 11 sites classified), `d89693f` (**Phase5-GenericCitizens DISABLED — both call sites commented out**), `0f89860` (Path B reader rewire — runYouthEngine drops getGenericYouth_ + citizenContextBuilder drops findInGenericCitizens_ + buildDeskPackets dead read removed), `aff403c` (hookLifecycle stale-pointer fix).
+- **S206** `dc8ff22` (T2.6 + T2.7 Engine A wired into applyStorySeeds v3.10→v3.11 + saveV3Seeds v3.5→v3.6 + Story_Seed_Deck cols 12→15), `3fead54` (T3.5a + T3.6 + T3.7 Engine B wired into applyStorySeeds v3.11→v3.12 + saveV3Seeds v3.6→v3.7 + Story_Seed_Deck 15→18 + Storyline_Tracker 25→26 AssignedReporter col).
+
+**S180/S181 verification preserved:** Phase 38 auditor, Phase 39 reviewer lanes, and Phase 40 architecture hardening all shipped S146-S156 as cross-cutting work OUTSIDE this map: Phase 38 auditor runs as Node script `scripts/engineAuditor.js` (post-cycle), Phase 39 reviewers run as Node scripts (`finalArbiter.js`, `rheaTwoPass.js`, `capabilityReviewer.js`, `rewardHackingScanner.js`, `tierClassifier.js`) in the edition review lane, Phase 40 is hooks + settings + credential layout + `utilities/safeRand.js` helper. None alter the phase*/ dispatch below. **Phase 42 (writer consolidation §5.6 + B-batch migrations) DOES touch the dispatch via the Phase 1 init + Phase 10 commit bookends added S188** — see `docs/engine/PHASE_42_PATTERNS.md` Changelog for full history.
 
 **S156 helper added:** `utilities/safeRand.js` — `safeRand_(ctx)` is the canonical deterministic RNG resolver called from every phase. Returns `ctx.rng` or throws; never silently falls back to `Math.random`. Replaces 57 inline fallbacks across phases. See `docs/engine/tech_debt_audits/2026-04-15.md`.
 
@@ -76,7 +84,7 @@
 
 | Step | Function | File | Who it processes | Gate |
 |------|----------|------|-----------------|------|
-| 5-GenericCitizens | `generateGenericCitizens_()` | phase05-citizens/generateGenericCitizens.js | Creates new Tier-4 citizens | — |
+| ~~5-GenericCitizens~~ | ~~`generateGenericCitizens_()`~~ | ~~phase05-citizens/generateGenericCitizens.js~~ | **DISABLED S205** — Path B no-grow-legacy decision; SL is single source for citizens; both call sites commented out at `phase01-config/godWorldEngine2.js:192` + `:1501`. Generator file retained for reversibility. | — |
 | 5-GenericMicroEvents | `generateGenericCitizenMicroEvents_()` | phase04-events/generateGenericCitizenMicroEvent.js | Tier 3-4 ENGINE citizens | ClockMode check |
 | 5-GameModeMicroEvents | `generateGameModeMicroEvents_()` | phase04-events/generateGameModeMicroEvents.js | GAME mode citizens | `mode !== "GAME"` skip |
 | 5-CivicModeEvents | `generateCivicModeEvents_()` | phase05-citizens/generateCivicModeEvents.js | CIVIC mode citizens | `mode !== "CIVIC"` skip |
@@ -373,7 +381,7 @@ Note: All engine files use `var S = ctx.summary`. Grep for `S.fieldName`, not `c
 
 | File | Line | Status |
 |------|------|--------|
-| generateGenericCitizens.js | 96 | **FIXED S120** — logs warning |
+| ~~generateGenericCitizens.js~~ | ~~96~~ | ~~**FIXED S120**~~ — generator DISABLED S205; throw guard preserved on file but cycle-path off |
 | generationalEventsEngine.js | 105, 111 | **FIXED S120** — logs warning |
 | v2DeprecationGuide.js | 202 | Open — deprecated helper |
 

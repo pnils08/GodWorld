@@ -517,6 +517,9 @@ Civic terminal + city-hall skill-literacy fix from S167/S168 still load-bearing 
 
 ## Recent Sessions
 
+### Session 205 (2026-05-07) — Two architectural plans + ADR + boot doc-audit [research/build]
+Engine routing foundation plan ([[plans/2026-05-07-engine-routing-foundation]] — 22 tasks / 6 phases, two-engine split Priority+Byline, replaces ROLLOUT line 100 S201 entry); ADR-0003 skills as shared infrastructure (three rules: maturity field + friction-log tail step + proposal-only refinement); chaos cars engine plan ([[plans/2026-05-07-chaos-cars-engine]] — 25 tasks / 6 phases, S190 Pattern C promoted, anti-cookie-cutter chaos engineering, Tier-1 cascade integrates routing Engine A consequenceFloor); /doc-audit boot full v2.0 (closes S176 partial, 14 docs, 3 stale findings owned by /session-end); pacing reframe captured (Mike: surface friction proactively, ADR-0003 friction log is structurally that). Commits `14a949d` + `fa0c025` via pathspec form leaving engine-sheet's parallel staged files untouched. Branch held local pending push coordination per cross-terminal rule. Entry 167 "The Boundary Between Engine and Me."
+
 ### Session 179 (2026-04-26) — S178 bug triage + format-contract schema landed [research/build]
 
 - **Bug #3 (Step 8a/8b ingest scripts) DONE:** `/interview` SKILL Step 8 rewritten — replaced `ingestEditionWiki.js` + `ingestEdition.js` calls (both `.txt`-only, cycle-regex misfires on interview filenames) with `/save-to-bay-tribune` direct invocations. Subsections renumbered 7a–7h → 8a–8h. `/interview` v1.0 → v1.1. `/save-to-bay-tribune` type list extended with `interview-article`/`interview-transcript`, v1.0 → v1.1.

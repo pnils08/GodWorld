@@ -30,6 +30,7 @@ Standing maintenance jobs (`/disk-audit`, `/disk-rotate`, `/md-audit`, `/doc-aud
 |---|---|---|---|---|
 | 2026-05-06 | `/disk-audit` | 7,195 files / 1.95 GB → 912 orphans / 270 MB; headline: 263 MB stale claude-mem logs | report only | `output/disk_audit_2026-05-06.md` (commit `20790e1`) |
 | 2026-05-06 | `/disk-rotate` (manual) | claude-mem logs 5/01–5/03 (247 MB), bun cache (899 MB), claude versions .126+.128 (497 MB) | deleted; uv cache (1.1 GB) deferred — locked by active MCPs | manual S203; ~1.2 GB recovered, disk 84% → 79% |
+| 2026-05-07 | `/doc-audit boot` | 14 docs audited (full v2.0 scope, closes S176 partial); 3 stale, 0 inconsistent, 0 dead refs | report only — all 3 stale findings owned by /session-end ritual (PERSISTENCE session counter, SESSION_CONTEXT 821-line bloat, CLAUDE.md population stamp) | S205 session note |
 
 ---
 

@@ -1,10 +1,19 @@
 /**
  * ============================================================================
- * V3.5 STORY SEEDS WRITER - Write-Intent Based
+ * V3.6 STORY SEEDS WRITER - Write-Intent Based
  * ============================================================================
  *
  * Writes seeds to Story_Seed_Deck sheet with full calendar context.
  * Uses V3 write-intents model for persistence.
+ *
+ * v3.6 Changes (S206 — Engine A persistence per routing-foundation plan T2.7):
+ * - 3 new columns (M-O) for Engine A scoring: PriorityScore, ConsequenceFloor,
+ *   PriorityComponents. Populated by applyStorySeeds.js v3.11 makeSeed; persisted
+ *   here so /sift Step 2 + future Engine B can read priority signal from sheet.
+ * - PriorityComponents written as JSON string (object: domainWeight, severityMul,
+ *   arcMul, coverageMul, raw, clampApplied).
+ * - Live sheet widened from 12 → 15 cols S206 via service-account direct write
+ *   (ensureSheet_ does not extend existing sheets).
  *
  * v3.5 Changes:
  * - Seed metadata persistence: 4 new columns (I-L) for SuggestedJournalist,
@@ -39,7 +48,10 @@ var SEED_DECK_HEADERS = [
   'SuggestedJournalist',  // I  (v3.5)
   'SuggestedAngle',       // J  (v3.5)
   'VoiceGuidance',        // K  (v3.5)
-  'MatchConfidence'       // L  (v3.5)
+  'MatchConfidence',      // L  (v3.5)
+  'PriorityScore',        // M  (v3.6 — Engine A composite 0-10)
+  'ConsequenceFloor',     // N  (v3.6 — Engine A boolean: HEALTH/SAFETY/CIVIC top-domain bottom-floor)
+  'PriorityComponents'    // O  (v3.6 — Engine A breakdown JSON: {domainWeight, severityMul, arcMul, coverageMul, raw, clampApplied})
 ];
 
 
@@ -77,7 +89,12 @@ function saveV3Seeds_(ctx) {
       s.suggestedJournalist || '',      // I  SuggestedJournalist (v3.5)
       s.suggestedAngle || '',           // J  SuggestedAngle (v3.5)
       s.voiceGuidance || '',            // K  VoiceGuidance (v3.5)
-      s.matchConfidence || ''           // L  MatchConfidence (v3.5)
+      s.matchConfidence || '',          // L  MatchConfidence (v3.5)
+      // v3.6 (S206 — Engine A): defensive nulls handle pre-priorityEngine seeds
+      // and degraded-mode runs where priorityEngine.js failed to load.
+      s.priorityScore != null ? s.priorityScore : '',  // M  PriorityScore (v3.6)
+      s.consequenceFloor === true,                     // N  ConsequenceFloor (v3.6) — boolean to sheet
+      s.priorityComponents ? JSON.stringify(s.priorityComponents) : ''  // O  PriorityComponents JSON (v3.6)
     ]);
   }
 
@@ -91,16 +108,16 @@ function saveV3Seeds_(ctx) {
     100
   );
 
-  Logger.log('saveV3Seeds_ v3.5: Queued ' + rows.length + ' seeds for cycle ' + cycle);
+  Logger.log('saveV3Seeds_ v3.6: Queued ' + rows.length + ' seeds for cycle ' + cycle);
 }
 
 
 /**
  * ============================================================================
- * STORY SEED DECK REFERENCE v3.5
+ * STORY SEED DECK REFERENCE v3.6
  * ============================================================================
  *
- * COLUMNS (12):
+ * COLUMNS (15):
  * A   Timestamp
  * B   Cycle
  * C   SeedID
@@ -113,10 +130,16 @@ function saveV3Seeds_(ctx) {
  * J   SuggestedAngle (v3.5 — angle suggestion from story engine)
  * K   VoiceGuidance (v3.5 — how the journalist should approach the story)
  * L   MatchConfidence (v3.5 — none/low/medium/high)
+ * M   PriorityScore (v3.6 — Engine A composite 0-10)
+ * N   ConsequenceFloor (v3.6 — Engine A boolean: HEALTH/SAFETY/CIVIC top-domain bottom-floor)
+ * O   PriorityComponents (v3.6 — Engine A breakdown JSON)
  *
  * Note: Calendar columns existed in v3.2-v3.3 (cols I-N) but were never read.
  * Removed in v3.4, columns I-L repurposed in v3.5 for seed metadata.
- * Existing pre-v3.5 rows may have stale calendar data in I-L.
+ * Cols M-O added v3.6 for Engine A scoring; live sheet widened S206 via
+ * service-account direct write (ensureSheet_ does not extend existing sheets).
+ * Pre-S206 rows may have stale calendar data in M-O if their dataset includes
+ * pre-v3.4 rows that survived the cleanup.
  *
  * ============================================================================
  */

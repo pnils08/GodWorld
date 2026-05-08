@@ -1,9 +1,21 @@
 /**
  * ============================================================================
- * V3.10 STORY SEEDS ENGINE — COVERAGE-TRIGGER WIRE-UP
+ * V3.11 STORY SEEDS ENGINE — ENGINE A WIRE-UP
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
+ *
+ * v3.11 Enhancements (S206 — Engine A wire-up per routing-foundation plan T2.6):
+ * - makeSeed now computes priorityScore + consequenceFloor + priorityComponents
+ *   via utilities/priorityEngine.js (Engine A: domain-severity × arc-persistence
+ *   × prior-coverage). Pre-loads raw Storyline_Tracker + Edition_Coverage_Ratings
+ *   sheets at applyStorySeeds_ entry; passes raw 2D arrays to per-seed
+ *   loadStorylineStateForSeed_ + loadCoverageStateForDomain_ from priorityEngine.
+ * - auditPattern arg passed null — Apps Script doesn't have engine_audit_c{XX}.json
+ *   (post-cycle Node artifact); severity defaults to MED per priorityEngine.
+ * - loadActiveStorylines_ expanded (T2.6 step 4): reads StorylineId (col O),
+ *   LastCoverageCycle (col S), MentionCount (col T) into parsed record. Closes
+ *   the column-set gap surfaced by parseStorylineRow_.
  *
  * v3.10 Enhancements (S202 — wires the dead output):
  * - Reads S.editionCoverageTriggers (set by applyEditionCoverageEffects_ in
@@ -90,6 +102,25 @@ function applyStorySeeds_(ctx) {
   var S = ctx.summary;
   var seeds = [];
   var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // v3.11 (S206): ENGINE A — Pre-load raw sheets for priority engine
+  // ═══════════════════════════════════════════════════════════════════════════
+  // makeSeed (defined below) closes over these — populated NOW so they're
+  // ready when first makeSeed invocation fires. Empty-array defaults if sheets
+  // missing or empty so priorityEngine functions degrade to `null` state.
+  var storylineRawData = [];
+  var coverageRawData = [];
+  if (ctx.ss) {
+    var stSheet = ctx.ss.getSheetByName('Storyline_Tracker');
+    if (stSheet && stSheet.getLastRow() > 0) {
+      storylineRawData = stSheet.getDataRange().getValues();
+    }
+    var ecrSheet = ctx.ss.getSheetByName('Edition_Coverage_Ratings');
+    if (ecrSheet && ecrSheet.getLastRow() > 0) {
+      coverageRawData = ecrSheet.getDataRange().getValues();
+    }
+  }
 
   // ═══════════════════════════════════════════════════════════════════════════
   // PULL SIGNALS
@@ -229,6 +260,27 @@ function applyStorySeeds_(ctx) {
       suggestion = suggestStoryAngle_(themes, signalType);
     }
 
+    // v3.11 (S206): Engine A — priority + consequence-floor scoring.
+    // priorityEngine functions live in utilities/priorityEngine.js (T2.1-T2.5).
+    // Defensive guards: `typeof === 'function'` so cycles still produce seeds
+    // even if priorityEngine.js fails to load.
+    var seedForPriority = {
+      domain: normalDomain,
+      linkedStorylineId: linkedStorylineId || null
+    };
+    var storylineState = (typeof loadStorylineStateForSeed_ === 'function')
+      ? loadStorylineStateForSeed_(seedForPriority, storylineRawData, cycle)
+      : null;
+    var coverageState = (typeof loadCoverageStateForDomain_ === 'function')
+      ? loadCoverageStateForDomain_(normalDomain, coverageRawData, cycle)
+      : null;
+    var priorityResult = (typeof computePriorityScore_ === 'function')
+      ? computePriorityScore_(seedForPriority, null, storylineState, coverageState)
+      : null;
+    var floorFlag = (typeof isConsequenceFloor_ === 'function')
+      ? isConsequenceFloor_(seedForPriority, null, storylineState, coverageState)
+      : false;
+
     return {
       seedId: Utilities.getUuid().slice(0, 8),
       text: text,
@@ -252,7 +304,11 @@ function applyStorySeeds_(ctx) {
       suggestedJournalist: suggestion ? suggestion.journalist : null,
       suggestedAngle: suggestion ? suggestion.angle : null,
       voiceGuidance: suggestion ? suggestion.voiceGuidance : null,
-      matchConfidence: suggestion ? suggestion.confidence : 'none'
+      matchConfidence: suggestion ? suggestion.confidence : 'none',
+      // v3.11 additions (S206 — Engine A scoring):
+      priorityScore: priorityResult ? priorityResult.priorityScore : null,
+      priorityComponents: priorityResult ? priorityResult.components : null,
+      consequenceFloor: floorFlag
     };
   }
 
@@ -392,6 +448,13 @@ function applyStorySeeds_(ctx) {
     var citizensIdx = col('RelatedCitizens');
     var priorityIdx = col('Priority');
     var statusIdx = col('Status');
+    // v3.11 (S206 — T2.6 step 4): expand record with cols needed by priorityEngine
+    // (StorylineId / LastCoverageCycle / MentionCount). parseStorylineRow_ in
+    // utilities/priorityEngine.js reads LastCoverageCycle when present; surfacing
+    // it here closes the column-set gap surfaced by T2.2 status note.
+    var storylineIdIdx = col('StorylineId');
+    var lastCoverageCycleIdx = col('LastCoverageCycle');
+    var mentionCountIdx = col('MentionCount');
 
     for (var i = 1; i < data.length; i++) {
       var row = data[i];
@@ -409,7 +472,11 @@ function applyStorySeeds_(ctx) {
         relatedCitizens: citizensIdx >= 0 ? row[citizensIdx] : '',
         priority: priorityIdx >= 0 ? row[priorityIdx] : 'normal',
         status: status,
-        cyclesSinceAdded: cycle - (cycleAddedIdx >= 0 ? (row[cycleAddedIdx] || 0) : 0)
+        cyclesSinceAdded: cycle - (cycleAddedIdx >= 0 ? (row[cycleAddedIdx] || 0) : 0),
+        // v3.11 additions:
+        storylineId: storylineIdIdx >= 0 ? row[storylineIdIdx] : '',
+        lastCoverageCycle: lastCoverageCycleIdx >= 0 ? row[lastCoverageCycleIdx] : null,
+        mentionCount: mentionCountIdx >= 0 ? row[mentionCountIdx] : 0
       });
     }
 

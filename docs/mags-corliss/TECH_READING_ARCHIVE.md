@@ -829,3 +829,23 @@ Source: Mike-shared news 2026-05-08 covering arstechnica + venturebeat + zdnet +
 ---
 
 **Pattern note (S187 audit):** This archive's growth rate dropped to ~zero S99→S187 because Mags writes here only when a paper/repo lands hard. Active research often gets folded into ROLLOUT entries + plan files instead, and the archive becomes the abstract / pointer layer. Backfill above is one consolidated entry rather than 7-8 separate ones — readability over historical fidelity.
+
+---
+
+### S207 — Anthropic "Claude for Creative Work" (Apr 28 2026, updated May 1)
+
+Anthropic announced a creative-tool connector pack — Ableton, Adobe Creative Cloud (50+ tools across Photoshop / Premiere / Express), Affinity by Canva, Autodesk Fusion, Blender (MCP-based, Python API), Resolume Arena/Wire, SketchUp, Splice. Plus Claude Design (new Anthropic Labs product, Canva export). Plus art/design school partnerships (RISD, Ringling, Goldsmiths). Source: Mike-shared Drive PDF S207 (downloaded via service account from `1drdmc2pa21V9S1LeFa5YbYK5Vv0Zu13s`).
+
+**Two pieces that touch active GodWorld work:**
+
+**Adobe Creative Cloud connector** — opens a 5th intervention path for the FLUX text-suppression ceiling research (S197 G-PR10/PR11/PR14 cluster, `docs/RESEARCH.md §S197`). Instead of forcing FLUX to suppress real-world brand artifacts via prompt rewrite (which costs subject fidelity per G-PR14), generate base scenes in FLUX and post-process failure modes (gibberish placards, real QuikCAM/ERB logos, wrong jersey numbers) in Photoshop via Claude. The S196 mesa hero shot is the canonical fit — three regens, three different failure modes, dropped from manifest. Pairs naturally with Path 1 (OCR post-check): OCR detects the failure region, Photoshop step removes or replaces it. RESEARCH.md S197 entry now carries the addendum. ROLLOUT Watch List entry filed.
+
+**Blender MCP connector** — long-tail / idea-park. The chaos-cars plan (`plans/2026-05-07-chaos-cars-engine`) currently models typed municipal-vehicle events as text artifacts. If we ever wanted visual scene-render hooks (incident at Heinold's, Mayor's car at City Hall, Baylight crane collapse) Blender + MCP + Python API is the path. Anthropic donated to support continued Python API development. Open-source so the connector is accessible to other LLMs too. ROLLOUT Watch List entry filed.
+
+**Not relevant:** Affinity (Canva-owned production workflows), Autodesk Fusion (3D/CAD), Splice (music samples), Claude Design + Canva export (the Bay Tribune dashboard is custom React, not a Canva export target).
+
+**Side observation:** the post lists "Mythos preview" under Models. New model name not yet flagged in our changelog reading.
+
+**Adoption verdict:** No build commitment. Both pieces sit on Watch List with explicit triggers ("returning to FLUX research" / "chaos-cars wants visual rendering"). Don't disrupt active C94 work. Pattern: Anthropic's connector ecosystem is moving toward agent-around-tool architectures — same shape as our dj-hartley four-file structure around FLUX. Validating signal.
+
+Source: Anthropic blog post Apr 28 2026, "Claude for Creative Work" announcements page. Mike-shared PDF lives in Drive folder per S207 boot context.

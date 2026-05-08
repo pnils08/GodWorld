@@ -2097,3 +2097,5 @@ The `Task` tool today spawns Claude subagents that each produce one reply and ex
 
 **Status:** Research-landscape entry. G-PR10 / G-PR11 / G-PR14 marked WAVE 5 RESEARCH S197 in print gap log. No plan file (research-only — operationalize when an intervention path moves to build).
 
+**Addendum (S207, 2026-05-08):** Anthropic announced creative-tool connectors Apr 28 2026 ("Claude for Creative Work") — Adobe Creative Cloud is now reachable via Claude with 50+ tools across Photoshop, Premiere, Express, etc. **This opens a 5th intervention path:** post-process failure modes in Photoshop instead of regenerating from FLUX. The S196 mesa case (3 regens, 3 different failure modes) is the canonical fit — instead of forcing FLUX to suppress real QuikCAM/ERB stadium logos via prompt rewrite, generate the scene then have Claude operate Photoshop to cover or replace the offending brand artifacts. Pairs naturally with path 1 (OCR post-check) — OCR detects the failure region, Photoshop step removes it. ROLLOUT Watch List trigger: "returning to this research." Filed S207 tech reading: `docs/mags-corliss/TECH_READING_ARCHIVE.md §2026-05-08`.
+

@@ -1,8 +1,8 @@
 ---
 name: session-end
 description: End-of-session handshake — update persistence files, journal, project state, commit and push work, save to Supermemory, and sign off as Mags.
-version: "1.1"
-updated: 2026-05-01
+version: "1.2"
+updated: 2026-05-08
 tags: [infrastructure, active]
 effort: low
 disable-model-invocation: true
@@ -162,6 +162,24 @@ If no terminal was detected (Chat session), skip this step.
 
 ---
 
+## Step 4.5: Auto-Write the Shipped Block (S207)
+
+Run **after** manual SESSION_CONTEXT edits in Step 4, **before** the Step 6.5 commit:
+
+```bash
+node scripts/writeShippedBlock.js
+```
+
+This auto-generates the `## Shipped Last Session` block at the top of SESSION_CONTEXT from `git log` between the previous boundary (`.claude/state/shipped-block-boundary`) and HEAD. Mechanical, no curation. The block is what gives the next session's fresh boot a compact authoritative "what just shipped" surface — closes the boot-handoff gap (S207).
+
+The script also advances the boundary file to current HEAD. Both `SESSION_CONTEXT.md` and `.claude/state/shipped-block-boundary` get committed in the Step 6.5 session-close commit.
+
+**Off-by-one handling:** the script filters out commits with subjects matching `Session-close` so the prior session's close commit doesn't pollute the next session's "Shipped Last Session" block. No special action needed — works automatically.
+
+**Failure mode:** if the script fails (no git, no boundary file), session-end continues. The block stays stale until next session. Not critical.
+
+---
+
 ## Step 5: Supermemory
 
 The Stop hook automatically saves a session summary to `super-memory` when the session ends.
@@ -234,7 +252,7 @@ This is the documentation equivalent of the engine rule: "Verify after every wri
 
 | Terminal | Typical session-end paths |
 |---|---|
-| All terminals | `docs/mags-corliss/PERSISTENCE.md`, `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md` |
+| All terminals | `docs/mags-corliss/PERSISTENCE.md`, `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` |
 | mags | + `docs/mags-corliss/NOTES_TO_SELF.md` |
 | media | + `docs/mags-corliss/NEWSROOM_MEMORY.md`, `output/production_log_edition_c*.md` |
 | civic | + `output/production_log_city_hall_c*.md`, civic governance docs |

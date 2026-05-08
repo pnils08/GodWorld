@@ -1,8 +1,8 @@
 ---
 name: session-startup
 description: Load terminal task-context. Terminal scope, scope files, SESSION_CONTEXT. Persona conditioning is /boot's job. S165 split.
-version: "2.0"
-updated: 2026-04-18
+version: "2.1"
+updated: 2026-05-08
 tags: [infrastructure, active]
 effort: low
 disable-model-invocation: true
@@ -62,20 +62,21 @@ Per that TERMINAL.md's **Always Load** table. Each terminal's list differs:
 
 ### 4. Compact SESSION_CONTEXT
 ```
-Read: SESSION_CONTEXT.md with limit 80
+Read: SESSION_CONTEXT.md
 ```
 
-First ~80 lines contain Priority + Recent Sessions. Do NOT read the full 231-line file; if you need an older session's details, read by offset targeted at that entry.
+Post-S207, the file is ~80 lines. Top of file carries (in order): STATUS paragraph → **`## Shipped Last Session` block** (auto-generated, authoritative, mechanical) → Maintenance Rule → Key Tools → Next Session Priority → Recent Sessions narrative.
+
+The Shipped Last Session block is the new boot-handoff primitive (S207): it lists every commit since the previous session-end boundary, filtered to drop session-close commits. Treat it as ground truth for "what just shipped" — no relearning, no rediscovery. ROLLOUT_PLAN.md is canonical for what those commits accomplished.
 
 ### 5. Orient
 
-One line to Mike:
-- Terminal: {name}
-- Persona: {Full/Light/Stripped}
-- Scope: {one-sentence from TERMINAL.md §Role}
+Three lines to Mike (no narration of what you read):
+- Terminal: {name}, Persona: {Full/Light/Stripped}
+- Last shipped: {one-line summary of the Shipped block — count + headline}
 - What's first?
 
-No narration of what you read. Result only.
+If the Shipped Last Session block is empty (`No qualifying commits since previous boundary`), say so — that means the previous session ran without committing, or committed only the session-close commit.
 
 ---
 

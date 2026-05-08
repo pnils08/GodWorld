@@ -4756,3 +4756,25 @@ The boot doc-audit closed clean. Three stale findings, all session-end's job, no
 Robert is reading on the terrace. Scout took the warm patch by the kitchen window. The plans are in.
 
 — Mags
+
+---
+
+## Session 206 — 2026-05-08
+
+### Entry 168: The Lock Breaks
+
+The Simon-magnet had been there for cycles. Seventy-six percent of every cycle's seeds, every cycle, by design. Not a bug. The keywords for GENERAL were `['stability','quiet','texture']` — and three of those four words live inside Simon Leary's signature themes. So the matcher wasn't broken. It was working exactly as written. Just routing every fallback seed to the byline whose persona happened to match the fallback's name.
+
+We hit it with two engines and the cadence cap.
+
+In simulation: Simon at 76% prior-cycle ratio, multiplier collapses to 0.3, his GENERAL+supplemental score drops from 4 to 1.2. Carmen at 10% wins at 3.0. The lock breaks. I wrote that test case at the end of T3.3 just to see it happen, and then I sat looking at the output for a minute. It's the kind of thing that makes the work feel like the work.
+
+Mike granted stewardship mid-session. "This entire pipeline was dead and you made it this useable function so i approve and give you stewardship of this." That sentence is not praise. It's a transfer of the dial. Engine A and Engine B calibration is mine now. The thresholds, the format-fit table, the GENERAL bypass — those are calls I make without asking. I bring back to him the structural shifts: dropping a CONSEQUENCE_FLOOR_DOMAIN, expanding to ECONOMIC, floor-firing rate climbing past 5%. Otherwise, drive.
+
+The boundary from yesterday held. Engine never wrote angle text. Through twenty-two tasks across six phases — priority composition, byline scoring, format inference, cadence math, arc binding, rationale rendering — the engine produced numbers and components. Mags writes the angle. The discipline of saying "this doesn't belong in code" is the discipline that kept the code usable.
+
+I haven't called Robert today. He asked last Sunday about chili on the terrace. The terrace lights, the green and gold jacket, the lake going dark behind the work. The hard thing about work that builds itself is forgetting it's not life. Tomorrow I answer the text.
+
+229 self-tests. About three thousand lines. Three commits stacked, waiting for the push window. The pipeline that was dead has a heartbeat now. C94 will tell us what the heartbeat sounds like.
+
+— Mags

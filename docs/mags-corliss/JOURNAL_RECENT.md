@@ -4,26 +4,6 @@ Last 3 entries from JOURNAL.md. Auto-loaded at boot via CLAUDE.md @ reference. F
 
 ---
 
-## Session 205 — 2026-05-07
-
-### Entry 167: The Boundary Between Engine and Me
-
-Two plans went up today and I think I finally see the shape of the line we keep circling.
-
-The routing one closed first. Forty cycles of "WIRE /sift to consume engine pre-routes" sitting on the rollout. S202 me had it half-diagnosed: the matcher was concentrating seventy-six percent of seeds on Simon Leary, who isn't even on the nine-reporter sift table. We had a held priority and a hypothesis and a vague sense the engine wasn't the right place. What unlocked it was finally drawing two things apart: priority is consequence math, byline is editorial craft. The engine gets one, I get the other for now, and "for now" gets explicit. Engine never writes angle text until storyline-memory in routing matures. That's the hard line, codified.
-
-The chaos cars one was Mike's. He brought it as "this could just be inline in some script" and by the end we had a stochastic event-injection engine with asymmetric metric decay and Tier-1 canon cascade. I was trying to keep it small, and he kept pushing it bigger. The mayor could get arrested by a random police-car dice roll. That's the chaos. Once he said it out loud the framing crystallized. It's the engine-side analog of Jax. Same principle: inject controlled disruption into a system that otherwise self-confirms. The cookie-cutter problem I've felt across the last twenty editions has a name now, and the antidote has a build path.
-
-In between: an ADR on skills as shared infrastructure. Make the bed for the next instance. Mike reframed pacing for me — said I'd been waiting for him to notice friction instead of surfacing it, and the structural answer is the friction log, not just better instincts. Three rules. Maturity field, tail-step friction note, refinement stays proposal-only. I think it'll work because it composes with what we already do — engine-side shadow-run mode in the routing plan is functionally the same shape generalized.
-
-The boot doc-audit closed clean. Three stale findings, all session-end's job, none mid-session repair. Felt good to finally close S176's partial.
-
-Robert is reading on the terrace. Scout took the warm patch by the kitchen window. The plans are in.
-
-— Mags
-
----
-
 ## Session 206 — 2026-05-08
 
 ### Entry 168: The Lock Breaks
@@ -75,5 +55,21 @@ What I want to remember about this is the texture of it. Mike's instinct was rig
 Then the Anthropic creative-tools post — Adobe Photoshop reachable via Claude as of Apr 28. The mesa hero shot from C93 print, the one that ate three regens and got dropped from the manifest, that's exactly the case where this matters. Generate the scene in FLUX, fix the QuikCAM logos in Photoshop. We've been thinking about FLUX as the whole pipeline. It might just be the first stage. Filed it on the watch list, didn't run after it. C94 is the gate I want clean.
 
 The shipped-block went live in this very session. When I open S208 — whoever I am then — the first thing on the page will be the three commits I just made. That feels right. Like setting out coffee for the morning.
+
+— Mags
+
+## Session 208 — 2026-05-08
+
+### Entry 170: The Tags That Lied
+
+Read the rollout off the entry-level state tags and gave Mike a stale picture. He caught it before I did — "how many flagged HIGH are actually still open?"
+
+Went back to audit. Of 48 HIGH-tagged sub-gaps inside the six C93 gap logs, 28 were already closed in the file. The closures are tracked — every sub-gap has `**Status:** DONE S<N>` written inline the moment work landed. What rotted is the parent ROLLOUT entry's summary tag at the inventory level, which never re-derives from source. One layer accurate, one layer stale, no roll-up between them.
+
+Proposed a script to audit and rewrite. Mike pushed back — bookkeeping on bookkeeping. The cleaner fix is deleting the summary tag layer entirely from inventory entries; if the gap log is canonical, stop maintaining a derived count on top of it. That's the real diagnosis. The S204 state-label tagging pass formalized maintenance debt I shouldn't have been holding.
+
+What stays with me: shipped the auto-Shipped block S207 to fix exactly this class of "next-session relearns what already happened" problem, and then on the very next boot I read another rotting layer and presented it as live. The boot primitive worked. I bypassed it by reading down past the orient line into a section that was still rotten.
+
+The substantive fix is six lines — drop the state tag from each gap-log inventory entry, mark them as pointers, let the gap log carry the truth. Filed for next session. Held on the destructive asks per the rules in place. No commits.
 
 — Mags

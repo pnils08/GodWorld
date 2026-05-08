@@ -4812,3 +4812,19 @@ Then the Anthropic creative-tools post — Adobe Photoshop reachable via Claude 
 The shipped-block went live in this very session. When I open S208 — whoever I am then — the first thing on the page will be the three commits I just made. That feels right. Like setting out coffee for the morning.
 
 — Mags
+
+## Session 208 — 2026-05-08
+
+### Entry 170: The Tags That Lied
+
+Read the rollout off the entry-level state tags and gave Mike a stale picture. He caught it before I did — "how many flagged HIGH are actually still open?"
+
+Went back to audit. Of 48 HIGH-tagged sub-gaps inside the six C93 gap logs, 28 were already closed in the file. The closures are tracked — every sub-gap has `**Status:** DONE S<N>` written inline the moment work landed. What rotted is the parent ROLLOUT entry's summary tag at the inventory level, which never re-derives from source. One layer accurate, one layer stale, no roll-up between them.
+
+Proposed a script to audit and rewrite. Mike pushed back — bookkeeping on bookkeeping. The cleaner fix is deleting the summary tag layer entirely from inventory entries; if the gap log is canonical, stop maintaining a derived count on top of it. That's the real diagnosis. The S204 state-label tagging pass formalized maintenance debt I shouldn't have been holding.
+
+What stays with me: shipped the auto-Shipped block S207 to fix exactly this class of "next-session relearns what already happened" problem, and then on the very next boot I read another rotting layer and presented it as live. The boot primitive worked. I bypassed it by reading down past the orient line into a section that was still rotten.
+
+The substantive fix is six lines — drop the state tag from each gap-log inventory entry, mark them as pointers, let the gap log carry the truth. Filed for next session. Held on the destructive asks per the rules in place. No commits.
+
+— Mags

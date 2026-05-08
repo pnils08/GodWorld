@@ -90,7 +90,32 @@ Select reporter by beat fit:
 
 Bench development applies — default to underused reporters when fit allows.
 
-**Show Mike theme + reporter. Wait for approval.**
+### Engine archetype-to-journalist match (T4.5)
+
+For Mode 1 (Voice Interview) where the subject is a verified citizen, **call `matchCitizenToJournalist_(archetype, neighborhood, domain)`** from `utilities/rosterLookup.js:907` to get an engine-validated reporter suggestion. The function exists pre-T4.5 — it scores journalists against the citizen's archetype themes (Connector / Watcher / Striver / Anchor / Catalyst / Caretaker / Drifter), neighborhood weighting (CIVIC vs CULTURE neighborhoods), and story-domain affinity, returning `{ journalist, interviewAngle, voiceGuidance, confidence }`.
+
+**Skill action:**
+
+1. Look up the subject citizen's archetype + neighborhood from `Simulation_Ledger` (or `Generic_Citizens` / `Cultural_Ledger` / `Faith_Organizations` / `Chicago_Citizens` per their canonical home).
+2. Call `matchCitizenToJournalist_(archetype, neighborhood, domain)` where `domain` is the interview's editorial domain (CIVIC / CULTURE / HEALTH / etc.).
+3. Add the result to the briefing as `interviewerCandidate` field:
+   ```json
+   {
+     "interviewerCandidate": {
+       "journalist": "Dr. Lila Mezran",
+       "interviewAngle": "human interest / who they look after",
+       "voiceGuidance": "Calm, clinical, exact",
+       "confidence": "high"
+     }
+   }
+   ```
+4. **Surface to Mike** alongside the manual beat-fit reporter recommendation. Mike picks the reporter; engine's `interviewerCandidate` is a transparency signal, not a pre-fill.
+
+**For Mode 2 (Paulson interview)** the function still runs — Mike's archetype is `Anchor` and his neighborhood / domain context drives the match — but the editorial decision is more constrained (sports beat reporters are the canonical Paulson interlocutors). Use as confirmation, not direction.
+
+**No archetype available?** When the subject's archetype field is empty, fall through to the beat-fit selection above. Engine signal is best-effort, not blocking.
+
+**Show Mike theme + reporter (manual + engine `interviewerCandidate` if populated). Wait for approval.**
 
 ## Step 2: Prepare Questions
 

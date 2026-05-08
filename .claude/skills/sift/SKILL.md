@@ -138,6 +138,41 @@ If the auditor's suggested angle is weak (fails the three-layer test or repeats 
 
 As the criteria files train over more cycles, more threads shift from proposals to questions.
 
+#### Step 2 priority consumption (T4.1)
+
+After Mode A/B proposals are drafted, **read Engine A output** from `Story_Seed_Deck` for the current cycle and apply two transformations to the proposal table:
+
+1. **Floor tagging.** For each proposal, look up the underlying seed(s) by `sourceSignal` text-match (proposals aggregate seeds; pick highest-confidence engine match among matched seeds). If any matched seed has `consequenceFloor === TRUE` (col N), tag the proposal with `[FLOOR]`.
+2. **Priority ranking.** Pull `priorityScore` (col M) per matched seed. Use the **max** score across matched seeds as the proposal's effective priority. Sort the proposal table by priority desc within each band:
+   - **Floored band first** (all `[FLOOR]` proposals, ranked by priorityScore desc among themselves)
+   - **Non-floored band second** (ranked by priorityScore desc)
+   - **Engine-silent proposals last** (no matched seed, no priority — these are sift-only proposals that bypassed the engine)
+
+**Floor semantics:** `[FLOOR]` proposals are non-negotiable from sift's view. Mike can re-order *within* the floored band, but cannot suppress floored items below non-floored ones. The floor flag fires under two conditions, both gated on HIGH severity (see `docs/concepts/routing-rationale.md`):
+
+- HIGH severity AND `coverageState.lastRating ≤ -1` (uncovered crisis, any domain)
+- HIGH severity AND domain ∈ {HEALTH, SAFETY, CIVIC} AND arc active ≥ 2 cycles
+
+**Engine-silent flow:** when the underlying seed has no `priorityScore` populated (warm-up cycle, parser-miss, no matched seed), proposals retain sift's own ranking (front-page score from `story_evaluation.md`) and render with `[engine: silent]` per T5.2. The proposal still works; the engine just has no opinion.
+
+**Lookup pattern:**
+
+```
+For each proposal P in proposals:
+  matchedSeeds = filter(deck rows where seed.sourceSignal references match P.sourceSignal text)
+  if matchedSeeds empty: P.engineSilent = true; continue
+  P.priorityScore = max(s.PriorityScore for s in matchedSeeds)
+  P.consequenceFloor = any(s.ConsequenceFloor === TRUE for s in matchedSeeds)
+  P.bylineCandidate = mode(s.BylineCandidate for s in matchedSeeds)  // most common candidate
+  P.bylineConfidence = max-conf of matched seeds for P.bylineCandidate
+  P.priorityComponents = matched seed's PriorityComponents (col O, JSON)
+  P.bylineRationale = matched seed's BylineRationale (col R, JSON)
+```
+
+**Why this matters:** sift's previous "score by editorial gut" ranking is now an editorial *override* over an engine baseline, not the only signal. Engine A's domain-severity-arc-coverage composite captures the structural priority (HEALTH/SAFETY/CIVIC at top tier; consequence floor for unresolved crises) that hand-ranking can drift from across cycles. Floor tags surface seeds Mags would otherwise bury; non-floor proposals preserve full editorial latitude.
+
+Floor tags + priority ranking feed T5.2's rationale suffix rendering directly — T4.1 reads the data, T5.2 renders the line.
+
 #### Step 2 rationale rendering (T5.2)
 
 Each proposal carries a one-line **rationale suffix** that surfaces the engine's "why" — auditable transparency on Engine A priority + Engine B byline scoring without requiring code-reads. Format spec lives in `docs/concepts/routing-rationale.md`; this section says how to render.
@@ -269,6 +304,23 @@ The 9 reporters and their section defaults:
 | Letters | LETTERS | Always runs last — reacts to edition topics |
 
 **Update production log** with final assignment table (story → reporter → section tag).
+
+#### Step 3 byline pre-fill behavior (T4.2)
+
+Engine B emits `bylineCandidate` (col P) + `bylineConfidence` (col Q, `high`/`medium`/`low`) per seed. **Confidence threshold rule** governs how sift surfaces engine candidates to Mike during Step 3:
+
+| Confidence | Future behavior (post-T6.2 cutover) | Current behavior (shadow) |
+|------------|--------------------------------------|---------------------------|
+| `high` | Pre-fill in proposal table; Mags reviews; ack → confirm | **Fall through** — engine candidate hidden; Mags assigns from scratch |
+| `medium` | Present as suggestion under proposal; Mags confirms | **Fall through** — engine candidate hidden |
+| `low` | Ignore; Mags assigns from scratch | **Fall through** (same as high/medium during shadow) |
+| `silent` | (no engine candidate) | Mags assigns from scratch |
+
+**During shadow phase (S206 → T6.2 cutover):** all four confidence bands fall through to Mags. The engine candidate appears nowhere in the proposal table presented to Mike. Step 3a (T3.8) silently logs the engine-vs-final diff for cutover calibration; nothing user-visible changes from pre-Engine-B behavior.
+
+**Cutover gate (T6.2):** post-3-cycle accumulation of T3.8 shadow logs, T6.1 computes per-band agree-rates. **Promotion to threshold-driven pre-fill requires `high`-band agree-rate ≥ 85% across 3 cycles.** If the gate doesn't clear, the threshold rule stays disabled and a tuning task fires (likely on confidence formula calibration, format-fit table, or cadence-cap math).
+
+**Why deferred:** matching pattern + bias profile of Engine B output is unknown until live cycles produce data. Pre-filling at HIGH confidence before the agree-rate is measured could compound shadow-phase bias into editorial behavior. Shadow-first preserves Mags' assignment authority during the validation window; promotion to pre-fill is a Mike-approved gate, not automatic.
 
 #### Step 3a: Engine B shadow-run logger (T3.8)
 

@@ -149,6 +149,19 @@ Reporters by specialty (not exhaustive — anyone can cover anything):
 
 Check the reporter table above. If you're about to assign Carmen, Jordan, Maria, or P Slayer — stop and ask if someone else fits better.
 
+#### Engine B byline pool (T4.3)
+
+When the supplemental originates from a `Story_Seed_Deck` seed (e.g., a `storyline-followup` carrying a `BylineCandidate` per Engine B), **the candidate is valid even if the byline is not on the edition's 9-reporter front-page table.** Engine B scores against the full 25-byline `rosterLookup.js` pool — Simon Leary, Hal Richmond, Sharon Okafor, Trevor Shimizu, Mason Ortega, Angela Reyes, Kai Marston, Talia Finch, Selena Grant, etc. — and `formatFitScore_('<journalist>', 'supplemental')` ranks long-view + deep-dive bylines highest on the supplemental format.
+
+The edition's 9-reporter constraint is a CYCLE-PULSE concern, not a supplemental concern. For supplemental work:
+
+- Engine B's `bylineCandidate` from the supplemental's source seed is the default suggestion
+- The full 25-byline pool is in scope; nothing about supplementals constrains to the front-page 9
+- Editorial latitude is unchanged — Mags can override the Engine B candidate per the "design stories first, then match reporters" principle above
+- "Develop the bench" rule still applies; Engine B's format-fit table actively biases toward the supplemental archetype (Hal/Simon/Sharon/Mags = 4-fit), which aligns with the bench-development goal
+
+**Lookup:** if running supplemental against a specific seed, read `Story_Seed_Deck.BylineCandidate` (col P) for that seed; otherwise fall through to the existing "design first, match second" workflow.
+
 ### 1c. Plan the Coverage
 
 Show the user something like:

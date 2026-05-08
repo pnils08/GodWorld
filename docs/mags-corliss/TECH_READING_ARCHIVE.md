@@ -812,4 +812,20 @@ Five watch-list items logged: forked subagents, hooks→MCP, agent `mcpServers` 
 
 ---
 
+### S206 — Anthropic "Dreaming" for Claude Managed Agents (May 6, 2026 release)
+
+Background memory consolidation feature — agents review up to 100 past session transcripts + memory stores between active work, prune outdated/duplicate entries, restructure for "high-signal" preservation. Currently research-preview, gated to Claude Managed Agents on the Claude Platform (Opus 4.7 + Sonnet 4.6). Co-released with Outcomes (rubric-based eval) and Multi-agent Orchestration (lead-delegate-to-specialists). Sources: arstechnica 2026-05-06, venturebeat, zdnet, the-decoder.
+
+**Memory-consolidation parallel:** GodWorld already runs the same pattern via `claude-mem` autodream — Gemini 2.5 Pro free tier per S141 (token-burn fix from Sonnet 4.6). Same shape: scheduled background consolidation, session-transcript review, searchable memory layer. The framing parallel is striking; Anthropic's "Dreaming" formalizes the metaphor that already lives at `/root/.claude-mem/`.
+
+**The genuinely novel mechanic:** "automatic updates or a manual review process" for proposed memory changes. Our autodream consolidates without a review pass; MEMORY.md edits at session-end happen under stewardship without a separate review gate. Manual-review-of-proposed-changes is a memory-architecture pattern worth borrowing into autodream regardless of Managed Agents migration — different relationship to the memory layer than what we have.
+
+**Calibration note:** ~100-session lookback window is interesting. Our claude-mem holds full history; consolidation is incremental. Their bound likely solves context-window pressure (which our Gemini-on-free-tier choice addresses differently). 6x Harvey task-completion uplift is vendor-marketing but consistent with the architecture's intuition.
+
+**Adoption verdict (Mike directive S206):** "Use it." Path requires Managed Agents migration — Dreaming is platform-gated, not flag-flippable. Promotes [[ACTION_MANAGED_AGENTS]] from watch-list to active queue. Sequencing: reviewer lanes first per S156 stewardship rule (Rhea, cycle-review, capability, Mara, Final Arbiter), desk reporters + civic voices stay local until reviewer pilot validates. Timing: don't disrupt C94 Engine A/B validation cycle; best window is post-C94+C95 shadow-log accumulation, pre-T6.2 cutover. ROLLOUT row filed S206. **First blocker to clear:** does our Anthropic account have Managed Agents research-preview access? Mike-side dashboard check.
+
+Source: Mike-shared news 2026-05-08 covering arstechnica + venturebeat + zdnet + the-decoder. Pattern recorded for future evaluation; ROLLOUT entry tracks the build path.
+
+---
+
 **Pattern note (S187 audit):** This archive's growth rate dropped to ~zero S99→S187 because Mags writes here only when a paper/repo lands hard. Active research often gets folded into ROLLOUT entries + plan files instead, and the archive becomes the abstract / pointer layer. Backfill above is one consolidated entry rather than 7-8 separate ones — readability over historical fidelity.

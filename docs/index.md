@@ -249,6 +249,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 ## `docs/concepts/` — architectural concepts and principles (new S156, Phase 41.3)
 
 - **[[concepts/README|README]]** — what goes here: long-form explanations of load-bearing ideas (three-layer-coverage, deterministic-guardrails, etc.). Complements short-form rules in MEMORY.md. *(reference, architecture, active)*
+- **[[concepts/routing-rationale]]** — canonical shape every engine-side routing decision exposes to consumer skills. Plan T5.1 deliverable. Codifies the JSON payload `priorityScore` + `priorityComponents` + `consequenceFloor` + `bylineCandidate` + `bylineConfidence` + `bylineRationale` written to `Story_Seed_Deck` cols M-R, plus the one-line "why" suffix format `/sift` Step 2 renders for editorial transparency. Engine A/B export contract; Phase 4 consumers read; Phase 5 rendering surfaces. *(concept, engine, media, architecture, active)*
 
 ---
 

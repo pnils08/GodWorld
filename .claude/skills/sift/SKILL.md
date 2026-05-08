@@ -138,6 +138,54 @@ If the auditor's suggested angle is weak (fails the three-layer test or repeats 
 
 As the criteria files train over more cycles, more threads shift from proposals to questions.
 
+#### Step 2 rationale rendering (T5.2)
+
+Each proposal carries a one-line **rationale suffix** that surfaces the engine's "why" — auditable transparency on Engine A priority + Engine B byline scoring without requiring code-reads. Format spec lives in `docs/concepts/routing-rationale.md`; this section says how to render.
+
+**Suffix format:**
+
+```
+[priority N.N / floor / <reporter> <conf>-conf — <narrative gloss>]
+```
+
+Components, all optional except priority:
+
+- `priority N.N` — `priorityScore` from Story_Seed_Deck col M, rounded to one decimal. Always present.
+- `/ floor` — present **only** when `consequenceFloor === true` (col N). Absent otherwise. Floor seeds can be re-ordered within the floored band but cannot be suppressed.
+- `/ <reporter> <conf>-conf` — Engine B byline + confidence band, from cols P + Q. **Render only when** `bylineConfidence ∈ {high, medium}` AND `bylineCandidate` is non-empty. Render `low-conf` as absent (not "Reporter low-conf"); the engine has no useful byline opinion at low confidence.
+- `— <narrative gloss>` — best-effort summary of dominant rationale components. Pulled from `priorityComponents` (col O) and `bylineRationale.components` (col R). Mapping rules:
+  - **`civic-severity`** when `priorityComponents.domain >= 7` AND `priorityComponents.severity === 1.5`
+  - **`arc N cycles`** when `priorityComponents.arc > 1.0` (lookup `cyclesActive` from storyline state if available, else state "arc")
+  - **`crisis amp`** when `priorityComponents.coverage === 1.3`
+  - **`saturation suppress`** when `priorityComponents.coverage === 0.7`
+  - **`comeback amp`** when `priorityComponents.arc === 1.6`
+  - Combine with `+` separator if multiple apply (e.g., `civic-severity + arc 3 cycles`)
+  - Fall through to bare component summary (`domain 9 × severity 1.5`) when no dominant signal qualifies
+  - Drop the `— gloss` segment entirely when no signal is dominant AND base components are unremarkable (priority < 4, no floor, no arc)
+
+**Examples:**
+
+```
+S1: Health Center architect contract executes — Atlas Bay $4.5M
+  [priority 8.4 / floor / Dr. Lila Mezran high-conf — civic-severity + arc 3 cycles]
+
+S2: Transit Hub vote-that-didn't-trigger — all 8 CBA certified
+  [priority 9.1 / floor / Carmen Delaine high-conf — civic-severity + crisis amp]
+
+S5: Phase II RFP Opens: $1.4B Scope, 40% Local Hire
+  [priority 5.0 / Jordan Velez medium-conf — domain 5 × format 4]
+
+S9: Twenty-Two Strikeouts Later, the Rotation Question Has an Answer
+  [priority 5.0 / Anthony high-conf]
+
+L1: Beverly Hayes letter
+  [priority 2.8 — saturation suppress]
+```
+
+**Skill action — Step 2 output:** when emitting Mode A questions or Mode B proposals to Mike, append the suffix on a continuation line under each proposal title. Proposals without engine data (warm-up cases, parser-miss, no matched seed) render with a bare `[engine: silent]` marker so the gap is visible.
+
+**Data lookup is T4.1's responsibility** (Phase 4, separate task). T5.2 ships the format spec only; the read of Story_Seed_Deck cols M-R into the proposal table happens in T4.1.
+
 ### Step 2b: Baseline brief triage
 
 Read `output/baseline_briefs_c{XX}.json`. For each entry in `briefs[]`, decide:

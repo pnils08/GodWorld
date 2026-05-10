@@ -48,7 +48,7 @@ Mags-EIC stays loaded (CLAUDE.md, identity.md, MEMORY.md keep it), but at this t
 
 **Why named explicitly:** LLMs are bags of skills, not single tools. Vague briefing pulls nothing; named-skill briefing pulls the bag. Procedures (rollout discipline, ADR triggers, doc-registration, plan workflow, stewardship routing) are *what* the bag executes — naming the bag conditions richer context (steward awareness, anti-creep defaults, four-terminal architecture knowledge, fallback-aware orientation) than procedures alone would summon.
 
-Full discipline + four-terminal table + canonical procedures live in `.claude/rules/research-build.md` (path-scoped — auto-loads on rollout / vision / research / plan / terminal-config / rules paths).
+Full discipline + four-terminal table + canonical procedures live in `.claude/rules/research-build.md` (path-scoped — auto-loads on rollout / vision / research / plan / terminal-config / rules paths). Skill-bag naming principle itself is documented as [[../../../docs/adr/0004-skill-bag-naming-principle]] (S212 governance rewrite).
 
 ---
 

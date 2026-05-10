@@ -1,7 +1,7 @@
 ---
 title: Four-Component Architecture Map
 created: 2026-04-16
-updated: 2026-04-29
+updated: 2026-05-09
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -82,8 +82,8 @@ Three layers, smallest to largest surface.
 | Harness layer | Scope | File location | Reload trigger |
 |---------------|-------|---------------|----------------|
 | Identity (always loaded) | Mags persona, non-negotiables, canon facts | `.claude/rules/identity.md`, `CLAUDE.md`, `/root/.claude/CLAUDE.md` | Session boot, `/boot` after compaction |
-| Rules (path-scoped) | Engine rules, newsroom rules, dashboard rules | `.claude/rules/engine.md`, `.claude/rules/newsroom.md`, `.claude/rules/dashboard.md` | Auto-loaded when paths match |
-| Skills (invoked) | 41 skill files shaping specific workflows | `.claude/skills/*/SKILL.md` | Explicit invocation or description-triggered |
+| Rules (path-scoped) | Engine, newsroom, dashboard, civic (S212), research-build (S212), plus identity.md (always-loaded) | `.claude/rules/{engine,newsroom,dashboard,civic,research-build,identity}.md` | Auto-loaded when paths match (identity always) |
+| Skills (invoked) | 47 skill files shaping specific workflows | `.claude/skills/*/SKILL.md` | Explicit invocation or description-triggered |
 
 Agents are harness + tool bindings packaged together: each of the 27 `.claude/agents/*` folders holds a sub-agent's identity, allowed tools, and voice.
 

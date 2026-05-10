@@ -2,7 +2,7 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: Session 187, 2026-04-29 (S187: 43 skills, 27 agents, 5 active Supermemory containers + legacy sm_project_godworld. CONTEXT.md + ADR-0001 added; /self-debug + /context-budget shipped from MIT-licensed steals.)
+Last updated: Session 212, 2026-05-09 (S212: 47 skills, 27 agents, 4 terminals post-S211 mags-trim, 5 active Supermemory containers + legacy sm_project_godworld. S212 skill-bag naming across all 4 terminals + civic.md / research-build.md NEW path-scoped rules; ADRs 0001-0003.)
 
 ---
 
@@ -110,9 +110,9 @@ Phase 40.3 isolation: all GodWorld credentials live OUTSIDE the repo working dir
 | **Thinking Summaries** | See reasoning in transcript (ctrl+o) | Enabled S120 |
 | **Channels** | MCP servers push inbound messages (Discord) | Enabled S120 — launch with `claude --channels` |
 
-## Skills (41 total, S156)
+## Skills (47 total, S212)
 
-All 41 skill files conform to SCHEMA §11 as of Phase 41.4 S156 (required fields: name, description, version, updated, tags, effort). Full list in `.claude/skills/`. Groupings:
+All skill files conform to SCHEMA §11 as of Phase 41.4 S156 (required fields: name, description, version, updated, tags, effort). Full list in `.claude/skills/`. Groupings:
 
 Session lifecycle: (auto-boot), /session-startup, /session-end, /boot, /grill-me
 Edition production: /write-edition, /write-supplemental, /podcast, /edition-print, /dispatch, /interview, /run-cycle, /sift, /pre-flight, /post-publish, /style-pass

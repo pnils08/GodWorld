@@ -1,7 +1,7 @@
 ---
 title: GodWorld Documentation Index
 created: 2026-04-14
-updated: 2026-04-30
+updated: 2026-05-09
 type: reference
 tags: [architecture, infrastructure, active]
 sources:

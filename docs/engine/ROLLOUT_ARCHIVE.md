@@ -751,3 +751,12 @@ ROLLOUT_PLAN.md restructured per ADR-0005: numbered phases (33, 38-42) replaced 
 ### Migration meta
 
 The S212 restructure was the third governance pass this session: ADR-0004 (skill-bag naming) + ADR-0005 (ROLLOUT structure) + GAP_LOG_TEMPLATE.md (gap-log compliant template for civic + media generator-terminal sidecars). Together they establish self-regulating MD discipline — new work files cleanly into groups via templates; old work moves to archive cleanly via `done-pending-archive` state + session-end sweep; descriptions live in pointer docs (plan / gap log / research / ADR / parent spec) instead of inline rollout narrative.
+
+### S212 close — additional governance closures (2026-05-10)
+
+Sweep at S212 session-end. governance.3 + governance.5 closed and removed from ROLLOUT_PLAN (filed mid-session, completed same session).
+
+- **governance.3 — Plan-tag-follows-changelog gate** — DONE S212 commit `701863f`. `scripts/auditPlanTagDrift.js` shipped (162 lines). Three known transition patterns detected (`draft↔active↔complete`); conservative regex avoids task-level false positives ("Task 1 DONE" no longer triggers). Wired into research-build `TERMINAL.md §Session Close step 0.5`. First run S212 found 1 drift (disk-inventory plan changelog-behind-tag); fixed inline. Re-run clean.
+- **governance.5 — Wire 8 heavy skills to GAP_LOG_TEMPLATE** — DONE S212 commit `4335049`. §Gap log sections inserted into civic generators (city-hall, city-hall-prep) + media generators (sift, write-edition, edition-print, post-publish, dispatch, interview) with per-skill prefix (G-R*, G-PREP*, G-S*, G-W*, G-PR*, G-P*, G-D*, G-I*) + output paths + 3-5 common categories drawn from C93 gap-log experience.
+
+Both rows removed from ROLLOUT_PLAN §governance.* table at S212 session-end. Net active governance count: 4 (governance.1, governance.2, governance.4, governance.6). governance.3 and governance.5 closed; governance.6 newly opened (rolloutTriage script regression caught at session-end audit).

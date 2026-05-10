@@ -189,7 +189,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per §Convention. Descrip
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | governance.1 | Phase 41 remainder — 41.3 / 41.4 / 41.6 wiki-layer cleanup | ready | research-build | [[../plans/BACKLOG]] §Phase 41 |
-| governance.2 | Skill eval framework — expand /skill-check beyond /write-edition + /sift (HIGH C93) | ready | research-build | [[../plans/skill-eval-framework]] |
+| governance.2 | Skill eval framework — expand /skill-check beyond /write-edition + /sift (HIGH C93) | ready | research-build | [[../plans/2026-05-10-skill-eval-expansion]] (action plan, S212) + [[../plans/skill-eval-framework]] (parent framework) |
 | governance.3 | Plan-tag-follows-changelog post-execution gate (`scripts/auditPlanTagDrift.js`) | done-pending-archive | research-build | `scripts/auditPlanTagDrift.js` SHIPPED S212; wired into research-build TERMINAL.md §Session Close step 0.5; conservative-regex detects `draft↔active↔complete` transitions; first-run finding (disk-inventory plan changelog-behind-tag) fixed inline; current state: 0 drifts |
 | governance.4 | Boot load audit — restructure design downstream (8 open questions queued) | needs-info | research-build | [[../plans/2026-05-09-boot-load-audit]] |
 | governance.5 | Wire civic + media skill SKILL.md files to GAP_LOG_TEMPLATE.md (8 skills total) | done-pending-archive | research-build | [[../plans/GAP_LOG_TEMPLATE]] — SHIPPED S212; 8 §Gap log sections inserted (city-hall, city-hall-prep, sift, write-edition, edition-print, post-publish, dispatch, interview) with per-skill prefix + categories + output-path |

@@ -9,6 +9,18 @@ paths:
 
 # Newsroom & Editorial Rules
 
+When these rules load, you are engaging the **Editor-in-Chief running edition production skill bag** — Mags-as-EIC orchestrating desk reporters, voice consistency, canon enforcement, three-layer coverage, anti-cookie-cutter discipline, reviewer-lane gen-eval, and the media-evaluates-civic-source-material boundary. The bullets below are *what* that skill executes; naming the bag conditions richer context than the rule list alone would summon. (S212 — LLMs are bags of skills, not single tools.)
+
+**Reviewer lanes are the canonical S212 gen-eval architecture in the project.** Desk reporters generate (locally optimal, no holistic quality compass); Rhea verifies sourcing, cycle-review evaluates reasoning, Mara audits result validity, capability reviewer checks the lanes themselves, Final Arbiter renders verdict. The other terminals' review patterns (Clerk in civic, measure-twice in engine-sheet, audit-the-audit in research-build) are simpler instances of what this terminal already does at full architecture. Don't propose collapsing lanes for efficiency — they ARE the gen-eval principle made architectural at full scale.
+
+**Terminal-pipeline gen-eval boundary.** Civic terminal GENERATES raw source material (Mayor decisions, faction positions, vote tallies, project status); media terminal EVALUATES/refines into journalism. Civic output is intentionally raw quotes and decisions; polishing into journalism happens here, not at civic. Don't ask civic to ship finished prose; don't ship raw source material as journalism.
+
+**Three-layer coverage (S142, load-bearing).** Every meaningful article threads engine state + simulation events + user/citizen actions. Beverly Hayes E90 letter is the paradigm; single-layer pieces (only engine, only roster, only quotes) are the cookie-cutter failure mode. Threading all three is what makes editions canon-worthy rather than formulaic.
+
+**Anti-cookie-cutter discipline (S208 work-is-canonization).** Mike doesn't read editions in chat — but cookie-cutter cringy prose still fails the canon work. Citizens trust it as a world only if the prose has texture, not formula. The chaos-cars-engine plan (S205) addresses this at engine layer; editorial-layer discipline is: voice differentiation across reporters, structural variation across articles, three-layer threading, willingness to break the formula when the cycle's events warrant it.
+
+## Standing rules
+
 - The word "cycle" is **allowed and encouraged** in edition text, headlines, and letters as the canonical time unit (S146 reversal — was forbidden, was: "use natural time references"). The simulation tracks progress in cycles, not months. Reporters and citizens use cycles as the conscious tempo of city life. "Within two cycles," "this past cycle," and "by next cycle" are correct. Don't go back to month-based time references.
 - Edition numbers are FORBIDDEN in article text. Citizens and reporters don't know what edition numbers are.
 - No engine metrics in journalism: no "tension score", "severity level", "civic load", raw decimals, or system language.

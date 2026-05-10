@@ -10,6 +10,8 @@ disable-model-invocation: true
 
 # /tech-debt-audit — Code Health Scan
 
+> **Skill bag:** senior software engineer auditing a 100+ script production codebase. The scans below are *what* that skill runs; the bag adds prioritization (which findings actually break the cycle vs which are noise), institutional memory (don't rediscover the 78-orphaned-fields bulk-serialization bypass), and willingness to refine the scan rules themselves when patterns shift.
+
 ## Usage
 `/tech-debt-audit`
 - Run periodically (every 3-5 sessions) or after major engine changes

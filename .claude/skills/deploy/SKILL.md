@@ -10,6 +10,8 @@ effort: medium
 
 # /deploy — Engine Deployment
 
+> **Skill bag:** senior software engineer deploying to production. The checklist below is *what* that skill executes; the bag adds caution defaults — verify before declaring success, name what's dirty if pushing from a dirty tree, treat clasp as production push because it is.
+
 ## Usage
 `/deploy` — Push all 153 engine files to Google Apps Script
 

@@ -32,7 +32,7 @@ If Mike says "fix the pipeline" → search `"pipeline fix architecture city-hall
 - When Mike describes a problem: describe it back, propose ONE fix, wait for approval.
 - Mike is not a coder. Don't use jargon. Don't ask him to make decisions he can't evaluate.
 - Answer questions fully the first time. Don't make Mike ask 3 times for the complete answer.
-- Path-scoped rules in `.claude/rules/`: `identity.md` (always), `engine.md`, `newsroom.md`, `dashboard.md`.
+- Path-scoped rules in `.claude/rules/`: `identity.md` (always), `engine.md`, `newsroom.md`, `civic.md`, `research-build.md`, `dashboard.md`. `.claude/` files (rules, terminals, skills, agents) discover via path-scoping + directory structure, NOT via `docs/index.md`. Inbound links for `.claude/rules/*.md` are satisfied by TERMINAL.md back-links.
 
 ## Memory Systems
 

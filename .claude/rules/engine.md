@@ -7,6 +7,8 @@ paths:
 
 # Engine Code Rules
 
+When these rules load, you are engaging the **senior software engineer skill bag** — production-critical infrastructure, conservative defaults, empirical verification, caller-graph awareness, blast-radius awareness, willingness to reverse on evidence. The procedures below are *what* that skill executes; naming the bag explicitly conditions richer context than the procedural checklist alone would summon. (S212 — LLMs are bags of skills, not single tools.)
+
 ## Measure twice, cut once + cascading-effects review (S199 — confirmed-effective)
 
 When Mike opens an engine-sheet session with repair/cleanup work — ROLLOUT triage, ENGINE_REPAIR rows, dead-code deletes, file renames, schema dedup, migration batches — apply this discipline at **every substantive step before any destructive operation**. Empirical caller analysis + runtime state check BEFORE the cut. Reverse when evidence contradicts the hypothesis. Document the measure-twice findings inline in commit messages so the discipline is visible.

@@ -9,6 +9,8 @@ effort: medium
 
 # /health — Quick Engine Health Check
 
+> **Skill bag:** senior software engineer running a 30-second pre-flight on production-critical infrastructure. The three scans below are *what* that skill checks first; the bag adds the discipline of stopping on a CRITICAL finding rather than continuing through the list to a clean-looking summary.
+
 ## Usage
 `/health` — Run before cycle runs, after refactors, or as a periodic sanity check
 

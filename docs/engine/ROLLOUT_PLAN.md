@@ -4,14 +4,15 @@
 
 **This file is canonical for open/closed work** (S207). `SESSION_CONTEXT.md` carries narrative recency only — orientation, not work-tracking. When something closes, update its state here; don't rely on a SESSION_CONTEXT priority block to communicate handoff.
 
-**Status:** ACTIVE (building) | **Last Updated:** Session 206 (2026-05-08)
+**Status:** ACTIVE (building) | **Last Updated:** Session 212 (2026-05-10) — ADR-0005 restructure scaffolding
+**Filing protocol (S212):** semantic groups + pointer-only entries — see §Group taxonomy + §How to add work + §How to close work below. Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.
 **Research context:** `docs/RESEARCH.md` — findings log, evaluations, sources.
 **Wiki layer:** [[SCHEMA]] (conventions) + [[index]] (catalog) — read at boot. (Phase 41.1 + 41.2, S146.)
-**Plan-file contract:** [[plans/TEMPLATE]] — every new plan copies this shape (S152).
+**Plan-file contract:** [[plans/TEMPLATE]] — every new plan copies this shape (S152). Also referenced from §How to add work below.
 **Phase backlog:** [[plans/BACKLOG]] — designs catalogued but not yet scheduled. Promote to its own plan file when a session picks one up.
-**Terminal handoffs:** Items tagged `(engine terminal)` or `(media terminal)` are handed off to that persistent chat. Research/build terminal designs; engine/sheet terminal executes code.
+**Terminal owners:** `engine-sheet` / `media` / `civic` / `research-build`. Research-build owns this doc; engine-sheet executes engine code; media runs editions; civic runs city-hall.
 
 ---
 
@@ -54,6 +55,119 @@ Adapted from Pocock's `triage` skill (MIT). Every active rollout item carries on
 Tag inline in the entry's prose alongside severity/promoted: e.g. `(promoted: C93, severity: HIGH, state: ready)`. Terminal tags `(engine-sheet)`, `(media)`, `(civic)`, `(research-build)` are orthogonal — state answers "is this pickable right now"; terminal answers "by whom."
 
 Watch List items below are tracking-only (`wontfix`-or-`needs-info` until trigger fires) and don't carry state tags. The Spine table is historical (all DONE).
+
+---
+
+## Group taxonomy (S212 — see [[../adr/0005-rollout-plan-structure]])
+
+Open work is grouped by type-of-work. Each entry codes as `<group>.<n>`. Numbers within a group are identifiers, not strictly sequential — new work picks the next available number; deletions don't renumber. Cross-cutting work picks the **primary group** (don't multi-tag).
+
+| Group | Scope | Typical pointer destinations |
+|-------|-------|------------------------------|
+| **pipeline** | Edition production end-to-end (sift / write-edition / post-publish / dispatch / interview / supplemental / print / photos) | `[[../plans/...]]`, `[[../../output/production_log_..._gaps]]`, `[[../media/...]]` |
+| **engine** | Engine code, ledger, schema, tech debt, engine-sheet repair | `[[../plans/...]]`, `[[PHASE_42_PATTERNS]]`, `[[ENGINE_REPAIR]]` rows |
+| **canon** | World-fidelity layer, citizens, voices, real-name blocklists, contamination scrub | `[[../canon/CANON_RULES]]`, `[[../canon/INSTITUTIONS]]` |
+| **civic** | City-hall, voice agents, council canon, civic-process gap-logs, governance simulation | `[[../plans/...]]`, civic gap-logs, `[[../mara-vance/...]]` |
+| **infrastructure** | Supermemory, Discord, dashboard, MCP, claude-mem, services, ingest pipelines | `[[../STACK]]`, `[[../SUPERMEMORY]]`, `[[../plans/...]]` |
+| **research** | Papers, external tools, evaluations, watch-list items | `[[../RESEARCH]] §section`, `[[../mags-corliss/TECH_READING_ARCHIVE]] §S<N>` |
+| **governance** | Skills, MDs, ADRs, MEMORY rules, doc-audit, project-internal hygiene | `[[../adr/...]]`, `[[../plans/...]]`, `.claude/skills/...` |
+
+Full taxonomy + alternatives considered: [[../adr/0005-rollout-plan-structure]].
+
+---
+
+## How to add work (S212 protocol)
+
+1. Identify primary group from §Group taxonomy.
+2. Pick the next available number in that group.
+3. Title ≤80 chars — clearly identifies the work.
+4. Set state per §Convention (typically `ready` for picker-grabable, `needs-info` if gated).
+5. Set owner: terminal that picks up.
+6. **Identify or create the pointer doc:**
+   - **Designed work** → copy [[../plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`; register in [[../index]] same commit per S147 inbound-link rule.
+   - **In-flight observations** → existing gap log (`output/production_log_..._gaps.md`).
+   - **Evaluations** → append to [[../RESEARCH]] §section or create `docs/research/<topic>.md`.
+   - **Architectural decisions** → next ADR (follow ADR-0001 / 0004 / 0005 shape).
+   - **Engine work** → existing parent spec ([[PHASE_42_PATTERNS]], [[ENGINE_REPAIR]] row).
+7. Add the row to the appropriate group table in §Open Work.
+
+**Description content lives in the pointer doc, NOT the ROLLOUT row.** ROLLOUT is the index, not the encyclopedia. (S147 rule, ADR-0005 enforcement.)
+
+---
+
+## How to close work (S212 protocol)
+
+1. Update the row's State field to `done-pending-archive`.
+2. Add a brief note in the row's pointer doc: what shipped, commit hash, session.
+3. At session-end, sweep all `done-pending-archive` rows to [[ROLLOUT_ARCHIVE]]:
+   - Move the row (don't delete).
+   - Archive section mirrors the ROLLOUT_PLAN group structure.
+   - Include the closing-session note inline in the archive row.
+
+Sweep cadence: every session-end. Research-build owns the sweep per terminal stewardship. Engine-sheet sweep applies to `engine.*` rows it owns; civic sweep applies to `civic.*`; media sweep applies to `pipeline.*`.
+
+---
+
+## Open Work — by group
+
+> **⚠️ Migration in progress (S212).** ADR-0005 restructure scaffolding shipped; per-entry classification + extraction + pointer creation deferred to next research-build session for measure-twice clean focus per group. Existing entries preserved below under §Migration Pending until migrated.
+
+### pipeline.* — Edition production
+
+*(empty — migrating from §Migration Pending below)*
+
+| # | Item | State | Owner | Pointer |
+|---|------|-------|-------|---------|
+
+### engine.* — Engine code, ledger, schema
+
+*(empty — migrating)*
+
+| # | Item | State | Owner | Pointer |
+|---|------|-------|-------|---------|
+
+### canon.* — World-fidelity layer
+
+*(empty — migrating)*
+
+| # | Item | State | Owner | Pointer |
+|---|------|-------|-------|---------|
+
+### civic.* — City-hall, voice agents, council
+
+*(empty — migrating)*
+
+| # | Item | State | Owner | Pointer |
+|---|------|-------|-------|---------|
+
+### infrastructure.* — Supermemory, services, ingest
+
+*(empty — migrating)*
+
+| # | Item | State | Owner | Pointer |
+|---|------|-------|-------|---------|
+
+### research.* — Papers, external tools, evaluations
+
+*(empty — migrating)*
+
+| # | Item | State | Owner | Pointer |
+|---|------|-------|-------|---------|
+
+### governance.* — Skills, MDs, ADRs, project hygiene
+
+*(empty — migrating)*
+
+| # | Item | State | Owner | Pointer |
+|---|------|-------|-------|---------|
+
+---
+
+## ⚠️ Migration Pending (S212 — to be migrated next session)
+
+The work items below are scheduled for migration to the new group structure. Each entry will be classified into its primary group, title extracted (≤80 chars), pointer identified or created. Per-entry measure-twice scheduled for next research-build session.
+
+Until migration completes, **new work follows the S212 protocol** (file under §Open Work groups above using §How to add work). Existing entries below remain readable as-is.
 
 ---
 

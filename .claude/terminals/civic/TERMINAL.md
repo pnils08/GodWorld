@@ -50,6 +50,22 @@ Full discipline + canon-critical reminders + cascade order live in `.claude/rule
 
 ---
 
+## Filing work to ROLLOUT (S212 / ADR-0005)
+
+This terminal primarily files into:
+- `civic.*` — city-hall production, voice agents, council canon, civic-process gap logs
+
+For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
+- Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
+- City-hall production gap logs → `output/production_log_city_hall_c{XX}_*_gaps.md`
+- Mara/civic governance docs → [[../../../docs/mara-vance/...]]
+
+When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (civic sweeps `civic.*` rows).
+
+Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
+
+---
+
 ## Owned Documentation
 
 ### Civic Governance

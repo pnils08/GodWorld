@@ -77,6 +77,23 @@ Full principle + composition with FOUR_COMPONENT_MAP + reversal triggers + how-t
 
 ---
 
+## Filing work to ROLLOUT (S212 / ADR-0005)
+
+This terminal primarily files into:
+- `engine.*` — engine code, ledger, schema, tech debt, engine-sheet repair
+- `governance.*` (occasional) — engine-spec docs, schema specs, helper-script specs
+
+For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
+- Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
+- Engine work → existing parent spec ([[../../../docs/engine/PHASE_42_PATTERNS]], [[../../../docs/engine/ENGINE_REPAIR]] row)
+- In-flight observations → engine gap logs (`output/production_log_..._gaps.md`)
+
+When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (engine-sheet sweeps `engine.*` rows it owns).
+
+Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
+
+---
+
 ## Owned Documentation
 
 These are the files this terminal is responsible for keeping current. When you change engine code or sheet structure, update the relevant doc here.

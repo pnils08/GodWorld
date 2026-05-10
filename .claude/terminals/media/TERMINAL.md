@@ -56,6 +56,23 @@ Full discipline + standing rules + canon-critical reminders live in `.claude/rul
 
 ---
 
+## Filing work to ROLLOUT (S212 / ADR-0005)
+
+This terminal primarily files into:
+- `pipeline.*` — edition production end-to-end (sift / write-edition / post-publish / dispatch / interview / supplemental / print / photos)
+
+For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
+- Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
+- Edition-skill gap logs → `output/production_log_edition_c{XX}_*_gaps.md`
+- Media docs → [[../../../docs/media/...]]
+- Existing parent specs → [[../../../docs/EDITION_PIPELINE]], [[../../../docs/media/MEDIA_ROOM_STYLE_GUIDE]]
+
+When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (media sweeps `pipeline.*` rows).
+
+Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
+
+---
+
 ## Owned Documentation
 
 ### Edition Pipeline & Production

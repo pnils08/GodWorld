@@ -52,6 +52,26 @@ Full discipline + four-terminal table + canonical procedures live in `.claude/ru
 
 ---
 
+## Filing work to ROLLOUT (S212 / ADR-0005)
+
+This terminal primarily files into:
+- `governance.*` — skills, MDs, ADRs, MEMORY rules, doc-audit, project-internal hygiene
+- `research.*` — papers, external tools, evaluations, watch-list items
+
+Plus **stewardship across all groups** — architectural decisions can land in `pipeline.*` / `engine.*` / `canon.*` / `civic.*` / `infrastructure.*` via ADR + cross-terminal handoff. Research-build owns ROLLOUT_PLAN structure itself + the canonical session-end sweep cadence.
+
+For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
+- Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`; register in [[../../../docs/index]] same commit per S147 inbound-link rule
+- Research evaluations → append to [[../../../docs/RESEARCH]] §section or create `docs/research/<topic>.md`
+- Architectural decisions → next ADR following ADR-0001 / 0004 / 0005 shape
+- Reading log → [[../../../docs/mags-corliss/TECH_READING_ARCHIVE]] entry per source
+
+When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (research-build runs the canonical sweep across all groups).
+
+Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
+
+---
+
 ## Owned Documentation
 
 ### Vision & Architecture

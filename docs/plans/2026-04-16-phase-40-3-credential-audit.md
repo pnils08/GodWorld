@@ -3,7 +3,7 @@ title: Phase 40.3 Credential Isolation Audit Plan
 created: 2026-04-16
 updated: 2026-04-16
 type: plan
-tags: [architecture, infrastructure, security, active]
+tags: [architecture, infrastructure, security, complete]
 sources:
   - docs/engine/PHASE_40_PLAN.md §40.3
   - docs/research/papers/paper3.pdf — "The security boundary" (Anthropic Engineering, April 2026)

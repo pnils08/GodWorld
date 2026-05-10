@@ -3,7 +3,7 @@ title: /run-cycle Gap-Log Observation Surface Plan
 created: 2026-05-03
 updated: 2026-05-03
 type: plan
-tags: [engine, infrastructure, architecture, draft]
+tags: [engine, infrastructure, architecture, active]
 sources:
   - SESSION_CONTEXT.md (S197 surfacing — meta-gap noted while triaging C93 gap logs)
   - .claude/terminals/engine-sheet/TERMINAL.md (§Session Close rule loosened S198)

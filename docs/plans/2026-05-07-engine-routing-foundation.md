@@ -3,7 +3,7 @@ title: Engine Routing Foundation Plan
 created: 2026-05-07
 updated: 2026-05-07
 type: plan
-tags: [engine, media, architecture, draft]
+tags: [engine, media, architecture, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §"WIRE: /sift consume engine pre-routes from Story_Seed_Deck" (S201, line 100)
   - docs/EDITION_PIPELINE.md (master chain + sequence-by-design)

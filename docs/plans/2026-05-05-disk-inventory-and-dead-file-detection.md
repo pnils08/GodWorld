@@ -3,7 +3,7 @@ title: Disk Inventory and Dead-File Detection Plan
 created: 2026-05-05
 updated: 2026-05-05
 type: plan
-tags: [architecture, infrastructure, active]
+tags: [architecture, infrastructure, complete]
 sources:
   - SESSION_CONTEXT.md S202 — droplet hygiene pass, 88%→81% via prescrub-backup + projects-backup + pre-May log cleanup
   - scripts/scanDeadCode.js — function-level dead-code scan (engine + scripts + skills + lib)

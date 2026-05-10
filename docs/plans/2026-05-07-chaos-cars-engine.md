@@ -3,7 +3,7 @@ title: Chaos Cars Engine Plan
 created: 2026-05-07
 updated: 2026-05-07
 type: plan
-tags: [engine, architecture, draft]
+tags: [engine, architecture, active]
 sources:
   - docs/engine/ROLLOUT_PLAN.md §"IDEAS: Arc engine grafts + typed municipal-vehicle character system + micro-event overlap detection" (S190 entry, line 107) — Pattern C source
   - output/drive-files/GodWorld_Escalation_Engine_v1.0.txt (DeepSeek v1, rejected as-is — patterns kept)

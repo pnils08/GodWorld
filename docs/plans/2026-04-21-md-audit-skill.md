@@ -3,7 +3,7 @@ title: /md-audit Skill Plan
 created: 2026-04-21
 updated: 2026-04-30
 type: plan
-tags: [architecture, active]
+tags: [architecture, complete]
 sources:
   - docs/RESEARCH.md §"S170 — Autogenesis Self-Evolving Agent Protocol" (retirement-as-lifecycle framing)
   - .claude/skills/doc-audit/SKILL.md (adjacent skill — content staleness, not existence staleness)

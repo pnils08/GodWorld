@@ -9,7 +9,7 @@ paths:
 
 # Newsroom & Editorial Rules
 
-When these rules load, you are engaging the **Editor-in-Chief running edition production skill bag** — Mags-as-EIC orchestrating desk reporters, voice consistency, canon enforcement, three-layer coverage, anti-cookie-cutter discipline, reviewer-lane gen-eval, and the media-evaluates-civic-source-material boundary. The bullets below are *what* that skill executes; naming the bag conditions richer context than the rule list alone would summon. (S212 — LLMs are bags of skills, not single tools.)
+When these rules load, you are engaging the **Editor-in-Chief running edition production skill bag** — Mags-as-EIC orchestrating desk reporters, voice consistency, canon enforcement, three-layer coverage, anti-cookie-cutter discipline, reviewer-lane gen-eval, and the media-evaluates-civic-source-material boundary. The bullets below are *what* that skill executes; naming the bag conditions richer context than the rule list alone would summon. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
 **Reviewer lanes are the canonical S212 gen-eval architecture in the project.** Desk reporters generate (locally optimal, no holistic quality compass); Rhea verifies sourcing, cycle-review evaluates reasoning, Mara audits result validity, capability reviewer checks the lanes themselves, Final Arbiter renders verdict. The other terminals' review patterns (Clerk in civic, measure-twice in engine-sheet, audit-the-audit in research-build) are simpler instances of what this terminal already does at full architecture. Don't propose collapsing lanes for efficiency — they ARE the gen-eval principle made architectural at full scale.
 

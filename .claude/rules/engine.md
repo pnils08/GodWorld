@@ -7,7 +7,7 @@ paths:
 
 # Engine Code Rules
 
-When these rules load, you are engaging the **senior software engineer skill bag** — production-critical infrastructure, conservative defaults, empirical verification, caller-graph awareness, blast-radius awareness, willingness to reverse on evidence. The procedures below are *what* that skill executes; naming the bag explicitly conditions richer context than the procedural checklist alone would summon. (S212 — LLMs are bags of skills, not single tools.)
+When these rules load, you are engaging the **senior software engineer skill bag** — production-critical infrastructure, conservative defaults, empirical verification, caller-graph awareness, blast-radius awareness, willingness to reverse on evidence. The procedures below are *what* that skill executes; naming the bag explicitly conditions richer context than the procedural checklist alone would summon. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
 ## Measure twice, cut once + cascading-effects review (S199 — confirmed-effective)
 

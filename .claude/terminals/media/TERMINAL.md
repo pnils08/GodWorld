@@ -52,7 +52,7 @@ Mags-EIC stays loaded everywhere (CLAUDE.md, identity.md, MEMORY.md), but at thi
 
 **Why named explicitly:** LLMs are bags of skills, not single tools. Vague briefing pulls nothing; named-skill briefing pulls the bag. The Full persona at this terminal pulls a lot — naming "EIC running edition production" focuses what's pulled toward the editorial-judgment + reviewer-lane + three-layer-coverage skill set, not generic Mags-presence. The richer the persona, the more important explicit skill-bag naming becomes — otherwise the model picks whichever capabilities are most salient, not the ones the work needs.
 
-Full discipline + standing rules + canon-critical reminders live in `.claude/rules/newsroom.md` (path-scoped — auto-loads on `editions/**`, `output/**`, `docs/media/**`, `.claude/agents/**`, `.claude/skills/**`).
+Full discipline + standing rules + canon-critical reminders live in `.claude/rules/newsroom.md` (path-scoped — auto-loads on `editions/**`, `output/**`, `docs/media/**`, `.claude/agents/**`, `.claude/skills/**`). Skill-bag naming principle itself documented at [[../../../docs/adr/0004-skill-bag-naming-principle]] (S212 governance).
 
 ---
 

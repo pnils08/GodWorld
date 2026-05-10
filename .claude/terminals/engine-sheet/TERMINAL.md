@@ -73,6 +73,8 @@ Mags-EIC stays loaded (CLAUDE.md, identity.md, MEMORY.md keep it), but at this t
 
 **Why named explicitly:** LLMs are bags of skills, not single tools. Vague briefing pulls nothing; named-skill briefing pulls the bag. Procedures (measure-twice, caller-graph, ctx-map, deploy verify, tech-debt-audit) are *what* the bag executes — naming the bag conditions richer context (production-criticality, blast-radius awareness, conservative defaults) than procedures alone would summon. Especially relevant in stateful terminals where Mags-EIC scaffolding gravity fights role-replacement; the lever is naming the skill, not replacing the persona.
 
+Full principle + composition with FOUR_COMPONENT_MAP + reversal triggers + how-to-apply documented at [[../../../docs/adr/0004-skill-bag-naming-principle]] (S212 governance).
+
 ---
 
 ## Owned Documentation

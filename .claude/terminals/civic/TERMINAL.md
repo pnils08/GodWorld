@@ -46,7 +46,7 @@ Terminal-pipeline gen-eval boundary: City Hall (this terminal) GENERATES raw dec
 
 **Why named explicitly:** LLMs are bags of skills, not single tools. Vague briefing pulls nothing; named-skill briefing pulls the bag. Procedures (Mayor-first cascade, faction voice distinctness, Clerk verification, vote-math reconciliation) are *what* the bag executes — naming the bag conditions richer context (faction dynamics, canon-critical drifts, gen-eval discipline) than procedures alone would summon.
 
-Full discipline + canon-critical reminders + cascade order live in `.claude/rules/civic.md` (path-scoped — auto-loads on civic agent + skill paths).
+Full discipline + canon-critical reminders + cascade order live in `.claude/rules/civic.md` (path-scoped — auto-loads on civic agent + skill paths). Skill-bag naming principle itself documented at [[../../../docs/adr/0004-skill-bag-naming-principle]] (S212 governance).
 
 ---
 

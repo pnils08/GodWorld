@@ -180,6 +180,23 @@ Check all outputs exist:
 
 Done. Print pipeline complete.
 
+## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+
+At skill close, capture friction observed during the print pipeline as a gap log. /edition-print is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
+
+**Output path:** `output/production_log_edition_c<XX>_print_gaps.md` (sidecar to consolidated `output/production_log_c<XX>.md` per S195 convention).
+
+**Gap prefix:** **G-PR\*** (e.g., G-PR1, G-PR8, G-PR10).
+
+**Common categories for /edition-print gaps:**
+- tier-1-autonomy-blockers (slug-convention mismatch, stale per-skill log filename, single-run-die issues)
+- FLUX-canon-fidelity (text-suppression ceiling, regen-on-fail re-rolls same prompt, prompt-engineering tradeoffs)
+- silent-defect-risk (PDF generator ignoring `editorialFlag`, manifest vs `qa_report.json` disagreement)
+- doc-drift (slug case, word-band, output-path conventions vs script validators)
+- process-design (no abort threshold, partial-success silence)
+
+**Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `pipeline.<n>` pointing at the gap log per ADR-0005 §How to add work. Cross-cycle pattern observations are the highest-leverage findings (~30% of gaps across media skills are doc-drift class — single reconciliation pass closes them).
+
 ## Changelog
 
 - 2026-04-17 — Initial 6-step skill (S156).

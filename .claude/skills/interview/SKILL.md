@@ -273,6 +273,22 @@ After Step 7 the `.txt` artifacts are on disk. Two skills converge here, run in 
 
 Both skills append to the same production log entry for this interview, with inline Supermemory doc IDs for direct query next cycle.
 
+## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+
+At skill close, capture friction observed during interview production as a gap log. /interview is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running. Interviews can spawn world-altering canon — friction here is high-stakes.
+
+**Output path:** `output/production_log_interview_c<XX>_<subject-slug>_gaps.md` (one per interview since interviews are subject-specific).
+
+**Gap prefix:** **G-I\*** (e.g., G-I1).
+
+**Common categories for /interview gaps:**
+- archetype-match (interviewerCandidate routing per `matchCitizenToJournalist_`)
+- canon-creation-risk (transcript becomes canon — fabrication, drift, voice violations)
+- transcript-vs-article (publishing both, Supermemory ingest of both, format compliance)
+- pipeline-step-coverage (Step 8d coverage-ratings DEFERRED decision per S179)
+
+**Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `pipeline.<n>` pointing at the gap log per ADR-0005 §How to add work. Interviews benefit especially from this discipline because canon stakes are higher than other heavy skills.
+
 ## Where This Sits
 
 Runs within the current cycle, after `/write-edition` and `/post-publish`. Interviews extend coverage — a single conversation, deep signal.

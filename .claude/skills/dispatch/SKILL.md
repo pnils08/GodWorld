@@ -230,6 +230,22 @@ Both skills append to the same dispatch section in `output/production_log_editio
 
 ---
 
+## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+
+At skill close, capture friction observed during dispatch production as a gap log. /dispatch is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
+
+**Output path:** `output/production_log_dispatch_c<XX>_<slug>_gaps.md` (one per dispatch since dispatches can run multiple times per cycle).
+
+**Gap prefix:** **G-D\*** (e.g., G-D1).
+
+**Common categories for /dispatch gaps:**
+- scene-fit (canonical pool DJ/Maria/Mason/Kai vs Tier-2 vs off-pool reporter)
+- format-contract (dispatch .txt format compliance, masthead/sections per S179 plan)
+- canon-creation-risk (citizens invented in scene without verification)
+- handoff (sift dispatch route, post-publish ingest, parser-vs-validator)
+
+**Discipline:** write the gap log even on clean runs (or note "no gaps" inline if dispatch ran cleanly). File a ROLLOUT row in `pipeline.<n>` pointing at the gap log per ADR-0005 §How to add work as needed.
+
 ## Where This Sits
 
 Runs within the current cycle, typically after `/write-edition` and `/post-publish` are complete. Dispatches extend coverage — same world, one scene. Can run multiple times per cycle.

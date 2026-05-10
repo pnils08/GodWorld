@@ -191,6 +191,22 @@ After `/run-cycle` (which produces world summary and engine review). Before `/ci
 Service account via `lib/sheets.js`. Spreadsheet ID from `.env`.
 GodWorld MCP for structured lookups. Supermemory `bay-tribune` for canon search.
 
+## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+
+At skill close, capture friction observed during prep as a gap log. /city-hall-prep is a heavy skill at the **civic generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
+
+**Output path:** `output/production_log_city_hall_c<XX>_gaps.md` (sidecar to `output/production_log_city_hall_c<XX>.md`).
+
+**Gap prefix:** **G-PREP\*** (e.g., G-PREP1, G-PREP15. /city-hall *run* uses G-R\*.)
+
+**Common categories for /city-hall-prep gaps:**
+- pipeline-fragility (MCP outage on `lookup_initiative` / `get_council_member`, derivative-doc staleness)
+- user-soft (between-cycle published-canon ingestion, voice routing surprises)
+- process-gap (skill-vs-actual-practice drift, sheet-read steps demoted because world summary already snapshots)
+- canon-risk (faction-bloc topology in voice routing table — Mara-additive framing, faction-vs-individual confusion)
+
+**Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `civic.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote individual HIGH gaps as bandwidth allows.
+
 ## Changelog
 
 - 2026-04-17 — v1.0 initial (S156). Voice routing table listed 17 voices including 9 individual council members.

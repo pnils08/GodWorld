@@ -352,6 +352,23 @@ These elements were part of the old write-edition (pre-S144) and are now handled
 - **Desk packet building** → legacy scripts preserved, not in pipeline
 - **Voice workspace building** → `/city-hall-prep`
 
+## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+
+At skill close, capture friction observed during edition write as a gap log. /write-edition is the heaviest skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
+
+**Output path:** `output/production_log_edition_c<XX>_write_gaps.md` (sidecar to `output/production_log_edition_c<XX>.md`).
+
+**Gap prefix:** **G-W\*** (e.g., G-W1, G-W19, G-W22).
+
+**Common categories for /write-edition gaps:**
+- doc-drift (skill compile template vs parser/validator constants — high-recurring class, ~30% of accumulated gaps)
+- canon-fidelity (council-roster fabrication, last-name collisions, citizen-invention)
+- parser-validator-mismatch (section dividers, allowlists, multi-article collapse)
+- routing (sift→desk handoff, reporter→desk-agent mapping, scene-fit overrides)
+- reviewer-handoff (Mara format expectations, Final Arbiter override propagation)
+
+**Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `pipeline.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote individual HIGH gaps as bandwidth allows. The S195 G-W16 meta-pattern (HIGHs sit on shelf and compound across cycles) makes promotion-cadence load-bearing.
+
 ## Where This Sits
 
 After `/sift`. Before `/edition-print` and `/post-publish`.

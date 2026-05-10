@@ -316,6 +316,22 @@ The production log is the ONLY civic document sift reads. If a voice quote, deci
 
 **Save location:** `output/production_log_city_hall_c{XX}.md` — this file persists. It survives compaction, session changes, and context loss. The edition pipeline reads it.
 
+## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+
+At skill close, capture friction observed during the city-hall run as a gap log. /city-hall is a heavy skill at the **civic generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
+
+**Output path:** `output/production_log_city_hall_c<XX>_run_gaps.md` (sidecar to `output/production_log_city_hall_c<XX>.md`).
+
+**Gap prefix:** **G-R\*** (e.g., G-R1, G-R8 — for `/city-hall` *run* gaps. /city-hall-prep uses G-PREP\*.)
+
+**Common categories for /city-hall gaps:**
+- pipeline-fragility (script/file/handoff drift, `assembleDecisions.js` bridging gap)
+- canon-fidelity (council-roster fabrication by project agents, faction-bloc misalignment)
+- process-gap (vote not triggering — only N of 9 voices have initiative on desk; date/year leakage)
+- reviewer-side (City Clerk reads quarantine directory, audit JSON malformed, applyTrackerUpdates dry-run gate)
+
+**Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `civic.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote individual HIGH gaps to standalone work items as bandwidth allows.
+
 **City hall is done. Edition is a separate session.**
 
 ## What This Replaces

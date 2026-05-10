@@ -192,7 +192,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per §Convention. Descrip
 | governance.2 | Skill eval framework — expand /skill-check beyond /write-edition + /sift (HIGH C93) | ready | research-build | [[../plans/skill-eval-framework]] |
 | governance.3 | Plan-tag-follows-changelog post-execution gate (`scripts/auditPlanTagDrift.js`) | ready | research-build | inline-design (S212 plans-audit meta-pattern) |
 | governance.4 | Boot load audit — restructure design downstream (8 open questions queued) | needs-info | research-build | [[../plans/2026-05-09-boot-load-audit]] |
-| governance.5 | Wire civic + media skill SKILL.md files to GAP_LOG_TEMPLATE.md (8 skills total) | ready | research-build | [[../plans/GAP_LOG_TEMPLATE]] |
+| governance.5 | Wire civic + media skill SKILL.md files to GAP_LOG_TEMPLATE.md (8 skills total) | done-pending-archive | research-build | [[../plans/GAP_LOG_TEMPLATE]] — SHIPPED S212; 8 §Gap log sections inserted (city-hall, city-hall-prep, sift, write-edition, edition-print, post-publish, dispatch, interview) with per-skill prefix + categories + output-path |
 
 ---
 

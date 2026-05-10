@@ -405,6 +405,23 @@ If you're tempted to "wait it out" on Step 2a or Step 10, set expectation accord
 | `docs/media/citizen_selection.md` | Next sift Step 4 |
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | Next sift Step 1 |
 
+## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+
+At skill close, capture friction observed during post-publish as a gap log. /post-publish is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running. Type-aware: same gap log structure for edition / interview / supplemental / dispatch publishes.
+
+**Output path:** `output/production_log_<type>_c<XX>_post_publish_gaps.md` (sidecar to consolidated `output/production_log_c<XX>.md` per S195 convention).
+
+**Gap prefix:** **G-P\*** (e.g., G-P1, G-P14).
+
+**Common categories for /post-publish gaps:**
+- format-contract (CITIZEN USAGE LOG vs NAMES INDEX, parser silent no-ops, BUSINESSES NAMED absence)
+- env-auth (env vars missing, Supermemory 401 retries, pre-flight gaps)
+- grading-pipeline (Mara grade not found, hallucinated counts, reporter-name normalization)
+- sequencing (early-ingest duplicates, bot-restart conflict with /session-end)
+- stale-derivative (world-summary/manifest reflecting pre-pipeline-v2 state)
+
+**Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `pipeline.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote bundles (e.g., BUNDLE-A format-contract enforcement, BUNDLE-D pre-flight env+auth) when multiple gaps share root cause.
+
 ## Where This Sits
 
 After `/write-edition` (edition path) or after `/interview`, `/dispatch`, `/write-supplemental` (alternate paths). Parallel with `/edition-print`. Closes the loop.

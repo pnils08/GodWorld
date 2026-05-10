@@ -419,6 +419,22 @@ When this skill completes, `/write-edition` picks up by reading:
 - Decide supplemental topics — that's a conversation after the edition publishes
 - Run city-hall voices — that already happened
 
+## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
+
+At skill close, capture friction observed during sift as a gap log. /sift is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
+
+**Output path:** `output/production_log_edition_c<XX>_sift_gaps.md` (sidecar to `output/production_log_edition_c<XX>.md`).
+
+**Gap prefix:** **G-S\*** (e.g., G-S1, G-S2).
+
+**Common categories for /sift gaps:**
+- pipeline-fragility (MCP citizen-verification outage, derivative-artifact staleness)
+- citizen-verification (`lookup_citizen` / `get_council_member` / `get_roster` failures)
+- doc-drift (sift skill text vs validator/parser constants)
+- canon-risk (front-page proposals based on stale civic state)
+
+**Discipline:** write the gap log even on clean runs (zero-gap entry confirms skill ran). File a ROLLOUT row in `pipeline.<n>` pointing at the gap log per ADR-0005 §How to add work. Promote individual HIGH gaps to standalone work items as bandwidth allows.
+
 ## Where This Sits
 
 After `/city-hall`. Before `/write-edition`.

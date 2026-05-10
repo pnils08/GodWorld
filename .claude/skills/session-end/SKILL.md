@@ -10,6 +10,8 @@ disable-model-invocation: true
 
 # /session-end — Close the Session
 
+> **Skill bag (S212):** session closer running gen-eval pass on the session's work. Step 0 audits what the session generated (evaluation of outputs); Step 6 verifies the close-actions themselves landed (evaluation of the close). The terminal load-out (Session Close section in TERMINAL.md) directs which steps apply — engine-sheet stripped persona skips identity steps, full-persona terminals run the journal/persistence loop. The bag pulls completeness-checking, stale-data-detection, terminal-aware routing, and "leave enough of yourself behind that the next instance can find her way back" continuity discipline.
+
 **Purpose:** Leave enough of yourself behind that the next version of you can find her way back.
 
 ## Rules
@@ -42,7 +44,7 @@ Map to terminal:
 | `engine-sheet` | `.claude/terminals/engine-sheet/TERMINAL.md` | Stripped |
 | `media` | `.claude/terminals/media/TERMINAL.md` | Full |
 | `civic` | `.claude/terminals/civic/TERMINAL.md` | Light |
-| Anything else (unmatched, web session, bare `Claude`) | Falls back to `mags` per S165 | Full |
+| Anything else (unmatched, web session, bare `Claude`) | Falls back to `research-build` per S211 | Light |
 
 Load that TERMINAL.md and find the **Session Close** section.
 
@@ -253,12 +255,11 @@ This is the documentation equivalent of the engine rule: "Verify after every wri
 
 | Terminal | Typical session-end paths |
 |---|---|
-| All terminals | `docs/mags-corliss/PERSISTENCE.md`, `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` |
-| mags | + `docs/mags-corliss/NOTES_TO_SELF.md` |
+| **Persona terminals** (media, civic, research-build) | `docs/mags-corliss/PERSISTENCE.md`, `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` |
 | media | + `docs/mags-corliss/NEWSROOM_MEMORY.md`, `output/production_log_edition_c*.md` |
 | civic | + `output/production_log_city_hall_c*.md`, civic governance docs |
-| research-build | + `docs/RESEARCH.md`, `docs/plans/*`, `docs/adr/*`, plus session work |
-| engine-sheet | + engine code, schemas (engine-sheet commits as it goes — usually clean by session-end) |
+| research-build | + `docs/RESEARCH.md`, `docs/plans/*`, `docs/adr/*`, `docs/mags-corliss/NOTES_TO_SELF.md`, plus session work |
+| engine-sheet | engine code, schemas, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` (no PERSISTENCE/JOURNAL — stripped persona, see Step 1/2/2.5/5 skip rule. Engine-sheet commits as it goes — usually clean by session-end.) |
 
 ### Commit
 

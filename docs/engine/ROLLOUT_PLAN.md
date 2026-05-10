@@ -177,7 +177,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per §Convention. Descrip
 | research.2 | Memento CBR case-bank (Phase 1 ready; Phase 2 blocked on ≥500 tuples + droplet headroom) | blocked | research-build | [[../plans/2026-04-21-memento-cbr-case-bank]] |
 | research.3 | Document processing pipeline evaluation (Qianfan-OCR for civic-doc ingest) | needs-info | research-build | inline-eval (trigger: civic pipeline needs real-world doc input) |
 | research.4 | Desk agents migration off Claude → DeepSeek (research/watch — cost/limits trigger) | needs-info | research-build | [[../MIGRATION_OFF_CLAUDE]] |
-| research.5 | Instant compaction — Strategic compact PreToolUse hook port (`affaan-m/everything-claude-code`) | ready | research-build | inline-pattern |
+| research.5 | Instant compaction — Strategic compact PreToolUse hook port (`affaan-m/everything-claude-code`) | blocked | research-build | upstream not locally available (S212 check); pre-task: clone `affaan-m/everything-claude-code` to a workspace OR fetch the hook file via `gh` / curl before porting. ROLLOUT entry says "port directly" — invent-from-concept risks divergence. inline-pattern |
 | research.6 | Context clearing strategy — `context-management-2025-06-27` beta flag eval | ready | research-build | beta-flag eval |
 | research.7 | KAIROS background daemon monitoring (Anthropic future feature) | needs-info | research-build | external-watch |
 | research.8 | Hermes Agent (NousResearch) reference architecture monitoring | needs-info | research-build | external-watch |

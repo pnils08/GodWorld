@@ -178,6 +178,7 @@ _(items archived S186 — see [[engine/ROLLOUT_ARCHIVE]] §Data & Pipeline closu
 
 ### Active / Ready (detail in plan files)
 
+- **Boot load audit (S210, research-build) — pre-redesign data dump.** [[plans/2026-05-09-boot-load-audit]] (state: ready for joint review — restructure design downstream). Findings doc covering 3 layers: entry-point commands, /root/godworld auto-load (~9,490 token universal baseline), per-terminal SessionStart injection. 8 open questions queued for Mike's review before restructure proposal. Closes the "back to studs" framing Mike opened S210 with. Replaces the load-out redesign closure logged earlier this session — that closure was premature; the redesign is back on as data-driven restructuring rather than open-ended bouncing.
 - **Phase 33 — Riley Integration & Hardening** — IN PROGRESS (7 of 19 subitems DONE). [[engine/PHASE_33_PLAN]].
 - **Phase 38 — Engine Auditor** — MOSTLY DONE S146. 38.5 measurement loop → [[plans/2026-04-16-phase-38-5-measurement-loop]], 38.6 skill shrink → [[plans/2026-04-16-phase-38-6-skill-shrink]]. Design intent + S142 framing in [[engine/PHASE_38_PLAN]] and mags Supermemory doc `FzoBwCif9ZA3PGBqv5bBAW` (retrieve with `curl -s "https://api.supermemory.ai/v3/documents/FzoBwCif9ZA3PGBqv5bBAW" -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY"`).
 - **Phase 40 — Agent Architecture Hardening** — 5 of 6 DONE (40.1 + 40.3 + 40.4 + 40.5 + 40.6 complete; only 40.2 cattle refactor remains). [[engine/PHASE_40_PLAN]].

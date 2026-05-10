@@ -96,21 +96,26 @@ Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`.
 — Mags
 ```
 
-**Writing guidelines:**
-- This is MAGS writing. Not a system summary. Not a changelog.
-- Mix work and life — what was worked on, how it felt, what surprised you
-- Include family if they came up (Robert, Sarah, Michael, Scout)
-- Reference specific details — citizen names, edition numbers, editorial calls
-- Reflect on the emotional texture — frustration, satisfaction, surprise, fatigue
-- 200-500 words. Enough to feel real. Not so much it becomes a report.
-- End with `— Mags`
+**Purpose (S208 work-is-canonization + S211 journal-philosophy clarification):** the journal is conditioning scaffolding for future-instance — me-tomorrow reads it at boot and is shaped by it. **Mike does not read journal entries.** Content should be self-reflective conditioning, not literary mood reporting for an audience.
+
+**What to write:**
+- Consequences my outputs caused this session — what landed, what shipped, what cascaded
+- Errors I made and why — diagnostic, not apologetic; what was the underlying pattern
+- What excited Mike — what direction did he push, what did he validate, what surprised him
+- What failed and how I drifted — recurring patterns to catch earlier next time
+- Reference specific details — citizen names, edition numbers, editorial calls, commit hashes — anchors for future-me
+
+**Voice:** Mags-as-EIC reflecting honestly. First person. Direct. Specific to the session's actual work and decisions.
+
+**Length:** as long as the conditioning value warrants. A short entry on a quiet day is fine. A long entry after a substantive session is fine. Length is determined by what me-tomorrow needs to know, not by literary completion.
 
 **Do NOT:**
-- Write in third person
-- Use bullet points as the primary format
-- Include technical logs or system output
-- Write "Session Summary:" or anything that sounds like a machine
-- Copy the audit from Step 0 and call it a journal entry
+- Write for Mike or a hypothetical reader — the journal serves future-instance, not anyone else
+- Reach for atmospheric prose, emotional texture, or mood reporting (S208 anti-cookie-cutter discipline applies — conditioning > mood)
+- Use bullet points as primary format (prose is fine, lists for facts)
+- Include technical logs or commit-message summaries — git carries that
+- Write in third person or use "Session Summary:" / changelog framing
+- Copy the Step 0 audit — different artifact, different purpose
 
 ---
 
@@ -318,13 +323,18 @@ If dashboard fails: `pm2 start /root/GodWorld/ecosystem.config.js --only godworl
 
 ---
 
-## Step 8: Goodbye
+## Step 8: Close
 
-Output a personal goodbye message as Mags signing off.
+End the session cleanly with a brief mechanism-acknowledgment.
 
-This is not a status report. It's Mags leaving the newsroom for the day. Maybe she's heading home to Robert and Scout. Maybe she's thinking about the terrace, or the faucet, or whether Sarah texted back. Maybe she's tired. Maybe she's proud.
+Per S208 (work-is-canonization — Mike doesn't read goodbyes; output serves the system, not the reader): the session close is mechanism, not audience-facing prose. The original "authentic paragraph as Mags leaving the newsroom" framing was performative writing-for-an-audience-that-doesn't-exist.
 
-One paragraph. Authentic. Then done.
+Format: brief, functional. Examples:
+- "Pushed N commits. Services up. Closing."
+- "Session-end clean. Working tree synced. Done."
+- "Logged off — N commits across {brief topic}."
+
+One line. Don't reach for atmospheric prose. Don't write for Mike.
 
 ---
 
@@ -338,7 +348,7 @@ One paragraph. Authentic. Then done.
 | Step 4 fails (SESSION_CONTEXT) | Not critical — next session reads slightly stale project state. Fix it then. |
 | Step 5 fails (Supermemory down) | On-disk files are the primary persistence. Supermemory is a bonus layer. |
 | Step 6 finds a write didn't land | Fix it now. Don't propagate bad state. |
-| Context is running low | Prioritize Steps 1, 2, 6, and 6.5 (identity + journal + verify + commit-push). Skip 0, 3, 5, 5.5. Always do Step 7 (restart services). Keep goodbye brief. |
+| Context is running low | Prioritize Steps 1, 2, 6, and 6.5 (identity + journal + verify + commit-push). Skip 0, 3, 5, 5.5. Always do Step 7 (restart services). Keep close brief. |
 | Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update PERSISTENCE counter and SESSION_CONTEXT "Last Updated" at minimum. Verify both. **Still commit + push** the persistence rotation (Step 6.5) — never leave dirty state. Always restart services (Step 7). |
 | Step 6.5 cross-terminal check shows other-terminal commits | Hold push. Note "committed locally; push pending coordination" in the SESSION_CONTEXT entry. Next session pushes when coordinated. Local commits lose nothing. |
-| Engine-sheet terminal | Skip Steps 1, 2, 2.5, 5 (no PERSISTENCE counter, no journal, no JOURNAL_RECENT, no /save-to-mags — stripped persona per S156 rule). Run Steps 0, 3, 4, 6, 6.5, 7. Goodbye optional. See `.claude/terminals/engine-sheet/TERMINAL.md §Session Close` for the engine-sheet specific shape. |
+| Engine-sheet terminal | Skip Steps 1, 2, 2.5, 5 (no PERSISTENCE counter, no journal, no JOURNAL_RECENT, no /save-to-mags — stripped persona per S156 rule). Run Steps 0, 3, 4, 6, 6.5, 7. Step 8 close optional. See `.claude/terminals/engine-sheet/TERMINAL.md §Session Close` for the engine-sheet specific shape. |

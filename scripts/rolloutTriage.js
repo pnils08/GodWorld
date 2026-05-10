@@ -6,6 +6,13 @@
 // STALE-2C threshold requires >2 cycles. Stale list will be empty on first run.
 // Staleness accumulates as entries remain unaddressed across future cycles.
 //
+// S212 fix: regex extended to accept S204 state-taxonomy suffix
+//   `(promoted: C<N>, severity: HIGH, state: <state>)` — was breaking on the
+//   `, state: <state>` segment introduced S204 §Convention. Entries returning
+//   `(unknown)` title (i.e. §Convention example tag inline) are now filtered.
+//   S208 detag of 6 gap-log entries is downstream — those became pointers
+//   intentionally and should not surface here.
+//
 // Usage: node scripts/rolloutTriage.js <current-cycle>
 // Output: output/rollout_triage_c<N>.md
 
@@ -28,22 +35,33 @@ function parseCycle(arg) {
 }
 
 function extractTitle(line) {
+  const trimmed = line.trim();
+  // S212: check table-row format first. A table row starts with `|`; the
+  // first bold-wrapped span inside a table row is part of the cell content,
+  // not the title. Old order (bullet before table) returned the wrong title
+  // for entries like `| Skill eval framework | ... **First skill ...** ...`.
+  if (trimmed.startsWith('|')) {
+    const tableMatch = line.match(/^\s*\|\s*([^|]+?)\s*\|/);
+    if (tableMatch) return tableMatch[1].trim();
+  }
   const bulletMatch = line.match(/\*\*([^*]+)\*\*/);
   if (bulletMatch) return bulletMatch[1].trim();
-  const tableMatch = line.match(/^\|\s*([^|]+?)\s*\|/);
-  if (tableMatch) return tableMatch[1].trim();
   return '(unknown)';
 }
 
 function parseRolloutEntries(content) {
   const lines = content.split('\n');
   const entries = [];
-  const promotedRe = /\(promoted: C(\d+), severity: HIGH\)/;
+  // S212: accept optional `, state: <anything-not-paren>` suffix per S204 state-taxonomy.
+  const promotedRe = /\(promoted: C(\d+), severity: HIGH(?:, state: [^)]+)?\)/;
   for (const line of lines) {
     const m = line.match(promotedRe);
     if (!m) continue;
     const promotedCycle = parseInt(m[1], 10);
     const title = extractTitle(line);
+    // Skip entries with no extractable title — typically the §Convention
+    // example tag inside backticks, not a real ROLLOUT entry.
+    if (title === '(unknown)') continue;
     const parked = /PARKED:/i.test(line);
     entries.push({ title, promotedCycle, parked, line: line.trim() });
   }

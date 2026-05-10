@@ -74,7 +74,7 @@ If a doc would be isolated (no natural parent), question whether it should exist
 
 When closing a rollout entry: move to `ROLLOUT_ARCHIVE.md` with full details (commit hashes, what shipped, what was learned). Don't delete inline.
 
-When triaging stale entries: `node scripts/rolloutTriage.js <cycle>` (note: broken from S208 detag fix — open follow-up). When fixed, run before refreshing priorities so stale HIGHs inform what gets elevated.
+When triaging stale entries: `node scripts/rolloutTriage.js <cycle>` (S212 fix — regex extended to accept S204 state-taxonomy suffix; entry-context filter drops §Convention example tag; table-row title extraction reordered before bullet match). Run before refreshing priorities so stale HIGHs inform what gets elevated.
 
 ## Plan workflow
 

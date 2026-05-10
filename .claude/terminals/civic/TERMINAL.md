@@ -57,7 +57,7 @@ This terminal primarily files into:
 
 For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
 - Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
-- City-hall production gap logs → `output/production_log_city_hall_c{XX}_*_gaps.md`
+- City-hall production gap logs → `output/production_log_city_hall_c{XX}_*_gaps.md` — **new gap logs follow [[../../../docs/plans/GAP_LOG_TEMPLATE]] (S212 — civic is a generator terminal that produces sidecar gap logs capturing skill inefficiency)**
 - Mara/civic governance docs → [[../../../docs/mara-vance/...]]
 
 When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (civic sweeps `civic.*` rows).

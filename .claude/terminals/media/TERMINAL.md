@@ -63,7 +63,7 @@ This terminal primarily files into:
 
 For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
 - Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
-- Edition-skill gap logs → `output/production_log_edition_c{XX}_*_gaps.md`
+- Edition-skill gap logs → `output/production_log_edition_c{XX}_*_gaps.md` — **new gap logs follow [[../../../docs/plans/GAP_LOG_TEMPLATE]] (S212 — media is a generator terminal that produces sidecar gap logs capturing skill inefficiency)**
 - Media docs → [[../../../docs/media/...]]
 - Existing parent specs → [[../../../docs/EDITION_PIPELINE]], [[../../../docs/media/MEDIA_ROOM_STYLE_GUIDE]]
 

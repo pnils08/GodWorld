@@ -68,7 +68,7 @@ Cross-cutting work picks the **primary group**. A Phase 42 item that touches eng
 Replace inline narrative with table rows:
 
 ```
-| # | Item | State | Owner | Pointer |
+| # | Item | State | Terminal | Pointer |
 |---|------|-------|-------|---------|
 | pipeline.1 | C93 sift gap log triage | needs-info | media | [[output/production_log_edition_c93_sift_gaps]] |
 | engine.1 | Phase 42 §5.6 ctx.ledger redesign | in-progress | engine-sheet | [[plans/2026-04-28-phase-42-writer-consolidation]] |
@@ -79,7 +79,7 @@ Five columns:
 - **#** — `<group>.<n>` code
 - **Item** — title, ≤80 chars, clearly identifies the work
 - **State** — per Convention §State labels (S204): `ready` / `needs-info` / `in-progress` / `blocked` / `done-pending-archive` / `wontfix`
-- **Owner** — terminal that picks up: `engine-sheet` / `civic` / `media` / `research-build`. Slash-separated for cross-terminal work.
+- **Terminal** — which terminal picks up: `engine-sheet` / `civic` / `media` / `research-build`. Slash-separated for cross-terminal work.
 - **Pointer** — wikilink to the doc that carries the actual description
 
 **Description lives in the pointer doc.** Plan files for designed work, gap logs for in-flight observations, research entries for evaluations, ADRs for architectural decisions, parent specs (`PHASE_42_PATTERNS`, `ENGINE_REPAIR` rows) for engine work. If no existing pointer exists, create one — typically a plan file or a research entry. Don't fold description back into the ROLLOUT row.
@@ -180,10 +180,10 @@ ADR-0004 (skill-bag naming) and ADR-0005 (this) share a discovery-wiring pattern
 2. Pick the next available number in that group
 3. Write a ≤80 char title
 4. Set state per Convention §State labels (typically `ready` for picker-grabable work, `needs-info` if gated on Mike or external)
-5. Set owner per terminal taxonomy
+5. Set terminal per group recommendations (`engine-sheet` / `media` / `civic` / `research-build`)
 6. **Identify or create the pointer doc:**
    - For designed work: create or link `[[plans/YYYY-MM-DD-topic]]` — **copy `[[plans/TEMPLATE]]` for shape; register in `[[index]]` same commit per S147 inbound-link rule**
-   - For in-flight observations: link the gap log `[[output/production_log_..._gaps]]`
+   - For in-flight observations from heavy-skill runs (civic + media generator terminals): link the gap log `[[output/production_log_..._gaps]]` — **new gap logs follow `[[plans/GAP_LOG_TEMPLATE]]` per S212 protocol; engine-sheet uses `[[engine/ENGINE_REPAIR]]` rows for its tactical-defects sidecar (different shape)**
    - For evaluations: append to `[[RESEARCH]] §section` or create `[[research/topic]]`
    - For decisions: write or link an ADR (next ADR number, follow ADR-0001/0004/0005 shape)
    - For engine work: link to existing parent (PHASE_X_PATTERNS, ENGINE_REPAIR row)

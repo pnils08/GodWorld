@@ -713,3 +713,41 @@ Shipped at `.claude/skills/context-budget/SKILL.md` (~210 lines). Token-overhead
 #### `/md-audit` skill — Phase 1+2 DONE S189
 
 Plan: [[plans/2026-04-21-md-audit-skill]]. `scripts/mdStalenessDetector.js` + `.claude/skills/md-audit/SKILL.md` shipped. First run: 0 orphans / 0 stale-but-linked / 48 stable-by-reference / 109 fresh at 60d/30d baseline (after directory-walk detector patch — voice files load by `docs/media/voices/` glob, not per-file ref). Phase 3 archival script not built — no orphans to archive. Phase 4/5 deferred (no triggering need yet). Active plan-file entry stays open (status `partial`) for the deferred phases; ROLLOUT-table row archived since Phases 1+2 are the load-bearing build.
+
+---
+
+## S212 Migration Pass — 2026-05-10 (research-build)
+
+ROLLOUT_PLAN.md restructured per ADR-0005: numbered phases (33, 38-42) replaced with semantic groups (`pipeline.*` / `engine.*` / `canon.*` / `civic.*` / `infrastructure.*` / `research.*` / `governance.*`); inline narrative collapsed to one-row pointer-only entries; per-terminal Filing Protocol added to TERMINAL.md files. Migration commit: see git log for S212 ROLLOUT_PLAN restructure. Closed/superseded/wontfix entries archived below.
+
+### Done-pending-archive entries (S212 sweep)
+
+- **`/disk-audit` skill** — DONE S203. 4 scripts shipped (`diskInventory.js` walker → `diskRefScan.js` basename+stem ref scan → `diskClassify.js` 6-bucket mechanical → `diskTriageReport.js` md report) + `/disk-audit` skill wrapper. Live droplet first run: 7,195 files / 1.95 GB → 912 orphans / 270 MB recoverable; headline ~263 MB stale claude-mem logs. Plan: [[../plans/2026-05-05-disk-inventory-and-dead-file-detection]].
+- **Perkins&Will C92 contamination scrub** — DONE S186 + civic implicit-pass S193. 3-layer scrub + 23-agent RULES refresh + bay-tribune chunked re-ingest. Detail: §S202 Archive Pass below.
+- **INVESTIGATE: hookLifecycleEngine.js wiring gap** — DONE S201 commit `954d994`. 338 LOC dead code; zero external callers + single-commit-history + never wired into Phase 6. File deleted; 7 Story_Hook_Deck cols removed. Hook Deck now 14 cols matching v3StoryHookWriter exactly.
+- **Writer-vs-header schema alignment detector** — DONE S203. 9th detector class in `scripts/engineCycleAudit.js`; v1.0 → v1.3 evolution. 18/18 self-tests pass. C93 first run: 26 entries (0 HIGH / 16 MED / 10 LOW). Real bugs fixed in same session: v1.1 calendar persistence dead-code; Mike's `'Last Updated'` → `'LastUpdated'` schema fix. Plan: [[../plans/2026-05-05-writer-header-alignment-detector]].
+- **AUDIT: Agent briefing context bloat** — DONE S156. Measurement complete; recs absorbed into Briefing bundle trim plan ([[../plans/2026-04-17-briefing-bundle-trim]] — now `pipeline.12`).
+- **PROPOSE: ROLLOUT_PLAN state-machine labels** — DONE S204. Convention §State labels shipped at top of ROLLOUT_PLAN.md (S204 — `ready` / `needs-info` / `in-progress` / `blocked` / `done-pending-archive` / `wontfix`).
+- **RESEARCH: Compare claude-mem to ECC continuous-learning v2** — DONE S204. Verdict: claude-mem's simpler model is enough; confidence-scoring primitive belongs in skill-eval framework (`governance.2`), not claude-mem. Comparison: [[../comparisons/2026-05-06-claude-mem-vs-ecc-v2]].
+- **FIX: `scripts/rolloutTriage.js` broken by S210 fix** — DONE S212. Three bugs fixed: (1) regex extended to accept S204 `, state: <state>` suffix; (2) `(unknown)` title filter for §Convention example tag; (3) extractTitle reordering for table rows. Live test: 3 tagged entries surface correctly, 0 STALE-2C, no errors. Commit `da29487`.
+- **UPDATE: /session-end Step 2 + Step 8** — DONE S212. Step 2 reframed for S208/S211 conditioning content (consequences caused, errors made, what excited Mike, what failed and how I drifted). Step 8 renamed Goodbye → Close, reframed as brief mechanism-acknowledgment. Commit `da29487`.
+
+### Wontfix / superseded / awareness-only
+
+- **Cloud session + Channel (`claude --remote` + Discord)** — wontfix S204. `claude --remote` mechanism didn't ship upstream as anticipated; user-facing goal already solved by Claude Code app remote sessions + phone SSH into the droplet. Discord bot stays (different goal — between-session memory bridge via `super-memory`).
+- **`/btw` and `/branch`** — awareness only, no build needed.
+
+### Roll-up sections folded to archive
+
+- **Phase 31 Canon-Grounded Briefings** — DONE S134. Already in archive.
+- **Phase 2.2 Desk Packet Query Interface** — SUPERSEDED by MCP S137b. Already in archive.
+- **Phase 39 Editorial Review Layer Redesign** — DONE S147–S148. All sub-phases 39.1-39.10 complete. Detail: [[PHASE_39_PLAN]].
+- **Canon Fidelity Rollout** — DONE S175. 25/25 agents three-tier framework + per-agent four-file structure. Plan: [[../plans/2026-04-25-canon-fidelity-rollout]].
+- **Phase 38 Engine Auditor** — MOSTLY DONE S146. 38.5 measurement loop + 38.6 skill shrink shipped via plans (DONE S156).
+- **Completed Phases historical table (Phases 1, 3, 6.5, 10, 13-19, 22, 26)** — S55-S99 milestones. Detail per phase already in archive sections above.
+- **Recently Completed S105-S141 narrative** — milestones: S110 Supermemory overhaul + workflow split; S113 harness improvements; S114 craft layer; S122 container redesign; S131 canon breakthrough; S133 Riley Phase 33.1-33.5; S134 pipeline v2; S135 terminal architecture + Remote Control; S137b MCP + wiki ingest + citizen cards + feedback loop operational; S139 external review round + faction canon + Maurice Franklin; S140 dispatch + audio tools + doc audit; S141 skills architecture prep + eval framework + Gemini autodream switch.
+- **TECH DEBT: Tech debt audit 2026-04-15 Path 1** — CLOSED S156. Math.random sweep across cycle-path engines. Already in archive §Data & Pipeline closures.
+
+### Migration meta
+
+The S212 restructure was the third governance pass this session: ADR-0004 (skill-bag naming) + ADR-0005 (ROLLOUT structure) + GAP_LOG_TEMPLATE.md (gap-log compliant template for civic + media generator-terminal sidecars). Together they establish self-regulating MD discipline — new work files cleanly into groups via templates; old work moves to archive cleanly via `done-pending-archive` state + session-end sweep; descriptions live in pointer docs (plan / gap log / research / ADR / parent spec) instead of inline rollout narrative.

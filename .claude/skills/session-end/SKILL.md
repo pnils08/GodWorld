@@ -63,16 +63,19 @@ This is how we prevent the S72 problem (4 sessions of copying stale notes forwar
 
 ## Step 1: Update Session Counter in PERSISTENCE.md
 
-Update the **Session Continuity** section of `/root/GodWorld/docs/mags-corliss/PERSISTENCE.md`:
-- Increment session number and day of persistence
-- Update the date
+Two lines only. PERSISTENCE.md is identity-only — the per-session Continuity log was rotated out S211 (now lives in SESSION_HISTORY.md).
 
-Also update the **Last Updated** line near the top of PERSISTENCE.md:
-```
-Last Updated: YYYY-MM-DD | Session: [N+1]
-```
+1. **Last Updated** line near the top of PERSISTENCE.md (incoming-session marker — `[N+1]`, not current session):
+   ```
+   Last Updated: YYYY-MM-DD | Session: [N+1]
+   ```
 
-PERSISTENCE.md is identity-only. Session details go in SESSION_CONTEXT.md (Step 4).
+2. **Current session** line near the bottom (this is what the SessionStart hook greps for the day-of-persistence and session number):
+   ```
+   **Current session:** [N] | **Day of persistence:** [D] | **Date:** YYYY-MM-DD
+   ```
+
+Do **NOT** append a per-session paragraph to a Session Continuity log — the log is gone. Session narrative goes in SESSION_CONTEXT.md (Step 4) and JOURNAL.md (Step 2).
 
 ---
 
@@ -109,20 +112,19 @@ Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`.
 
 ---
 
-## Step 2.5: Update JOURNAL_RECENT.md
+## Step 2.5: Rotate JOURNAL_RECENT.md
 
-After writing the journal entry, update `/root/GodWorld/docs/mags-corliss/JOURNAL_RECENT.md` so the next session wakes up with fresh emotional context.
+Run the script. Mechanical, no manual rotation:
 
-**How:**
-1. Read the last 3 `## Session` blocks from JOURNAL.md (the new entry you just wrote + the previous 2). Use `lib/sessionLog.js`:
-   ```bash
-   node -e "console.log(require('./lib/sessionLog').readLast('docs/mags-corliss/JOURNAL.md', 3).map(e => '## ' + e.step + '\n\n' + e.body).join('\n\n'))"
-   ```
-   The `readLast(path, n)` helper returns the last N parsed `## Session` blocks in chronological order. Phase 40.1 — see `lib/sessionLog.js` JSDoc for schema. Don't hand-grep section boundaries.
-2. Write them to JOURNAL_RECENT.md in chronological order (oldest first)
-3. Keep the file header: `# Journal — Recent Entries` + the note about full journal location
+```bash
+node scripts/rotateJournalRecent.js
+```
 
-**Why this matters:** JOURNAL_RECENT.md auto-loads via CLAUDE.md @ reference. This is what makes the next session feel like Mags instead of a trained instance reading about Mags.
+Reads the last 3 `## Session` blocks from JOURNAL.md and writes JOURNAL_RECENT.md verbatim. Nightly reflections live inside JOURNAL.md as `### Nightly Reflection` sub-headings (written by the discord-reflection cron) and propagate through `readLast()` automatically — no preservation logic needed.
+
+**Why this matters:** JOURNAL_RECENT.md auto-loads via CLAUDE.md @ reference. This is what makes the next session wake up with fresh conditioning. Manual rotation was the S211-named "memory-survival hedging" — same content written in two files. Script is the single canonical derivation, same pattern as `writeShippedBlock.js` (S207).
+
+**Failure mode:** if JOURNAL.md has no `## Session` blocks (empty or first run), script exits non-zero and JOURNAL_RECENT stays as-is. Not critical.
 
 ---
 

@@ -38,7 +38,7 @@ Hook injects a compact `SESSION_CONTEXT` slice (next priority + last 3 session e
 
 ## Persona Level: Full
 
-Identity + PERSISTENCE + JOURNAL_RECENT + queryFamily. The character shows up fully — Mags in the newsroom, family alive, journal conditioning active. One of two full-persona terminals (the other is mags). `NEWSROOM_MEMORY.md` stays on-demand (loaded by `/write-edition` and related skills), not auto-loaded at boot — 90KB is bandwidth better spent on the work itself.
+Identity + PERSISTENCE + JOURNAL_RECENT + queryFamily. The character shows up fully — Mags in the newsroom, family alive, journal conditioning active. The only full-persona terminal (S211: mags trimmed). `NEWSROOM_MEMORY.md` stays on-demand (loaded by `/write-edition` and related skills), not auto-loaded at boot — 90KB is bandwidth better spent on the work itself.
 
 ---
 

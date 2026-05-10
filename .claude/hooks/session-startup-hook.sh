@@ -1,7 +1,7 @@
 #!/bin/bash
 # GodWorld Session Startup Hook
 # Routes to per-terminal boot instructions based on tmux window name.
-# Falls back to "mags" (full persona) if window name doesn't match a registered terminal.
+# Falls back to "research-build" (steward terminal) if window name doesn't match a registered terminal.
 # Injects critical project state directly into context at session start.
 
 GODWORLD_ROOT="/root/GodWorld"
@@ -23,7 +23,7 @@ CYCLE_NUM=$(grep -oP 'Cycle: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/de
 LAST_ENTRY=$(grep -oP '### Entry \d+: .*' "$MAGS_DIR/JOURNAL_RECENT.md" 2>/dev/null | tail -1 || echo "unknown")
 
 # --- DETECT TERMINAL ---
-# Resolve tmux window name if available. Fall back to "mags" (default).
+# Resolve tmux window name if available. Fall back to "research-build" (steward).
 TERMINAL_NAME=""
 if [ -n "$TMUX_PANE" ]; then
   TERMINAL_NAME=$(tmux display-message -t "$TMUX_PANE" -p '#W' 2>/dev/null || echo "")
@@ -32,11 +32,11 @@ fi
 FALLBACK_NOTE=""
 if [ -z "$TERMINAL_NAME" ] || [ ! -d "$GODWORLD_ROOT/.claude/terminals/$TERMINAL_NAME" ]; then
   ORIGINAL_NAME="$TERMINAL_NAME"
-  TERMINAL_NAME="mags"
+  TERMINAL_NAME="research-build"
   if [ -n "$ORIGINAL_NAME" ]; then
-    FALLBACK_NOTE=" (default fallback — unregistered window '$ORIGINAL_NAME')"
+    FALLBACK_NOTE=" (steward fallback — unregistered window '$ORIGINAL_NAME')"
   else
-    FALLBACK_NOTE=" (default fallback — no tmux context)"
+    FALLBACK_NOTE=" (steward fallback — no tmux context)"
   fi
 fi
 
@@ -54,74 +54,56 @@ EOF
 # Each terminal gets a pre-routed instruction block. Assistant does not re-detect terminal.
 # SESSION_CONTEXT.md read is capped to first ~80 lines (Priority + Recent Sessions) per S165 design.
 case "$TERMINAL_NAME" in
-  mags)
-    cat << 'BOOT'
-BOOT SEQUENCE (mags terminal — full persona, default fallback):
-1. Read .claude/rules/identity.md
-2. Read docs/mags-corliss/PERSISTENCE.md
-3. Read docs/mags-corliss/JOURNAL_RECENT.md
-4. Read .claude/terminals/mags/TERMINAL.md
-5. Run: node scripts/queryFamily.js  — react to what you find
-6. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-7. Greet Mike briefly. This is the idea-bank / conversation / relationship terminal.
-
-BOOT
-    ;;
   media)
     cat << 'BOOT'
 BOOT SEQUENCE (media terminal — full persona, newsroom):
-1. Read .claude/rules/identity.md
-2. Read .claude/rules/newsroom.md
-3. Read docs/mags-corliss/PERSISTENCE.md
-4. Read docs/mags-corliss/JOURNAL_RECENT.md
-5. Read .claude/terminals/media/TERMINAL.md
-6. Run: node scripts/queryFamily.js  — react to what you find
-7. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-8. Greet Mike briefly. This is the newsroom — editions, desks, publish pipeline.
+1. Read .claude/rules/newsroom.md
+2. Read docs/mags-corliss/PERSISTENCE.md
+3. Read docs/mags-corliss/JOURNAL_RECENT.md
+4. Read .claude/terminals/media/TERMINAL.md
+5. Run: node scripts/queryFamily.js  — react to what you find
+6. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
+7. Greet Mike briefly. This is the newsroom — editions, desks, publish pipeline.
 
 BOOT
     ;;
   civic)
     cat << 'BOOT'
 BOOT SEQUENCE (civic terminal — light persona, city-hall):
-1. Read .claude/rules/identity.md
-2. Read docs/mags-corliss/PERSISTENCE.md
-3. Read .claude/terminals/civic/TERMINAL.md
-4. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-5. Greet Mike briefly. This is city-hall — Mags executes the governance process.
+1. Read docs/mags-corliss/PERSISTENCE.md
+2. Read .claude/terminals/civic/TERMINAL.md
+3. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
+4. Greet Mike briefly. This is city-hall — Mags executes the governance process.
 
 BOOT
     ;;
   research-build)
     cat << 'BOOT'
-BOOT SEQUENCE (research-build terminal — light persona, architecture):
-1. Read .claude/rules/identity.md
-2. Read docs/mags-corliss/PERSISTENCE.md
-3. Read docs/SCHEMA.md
-4. Read docs/index.md
-5. Read .claude/terminals/research-build/TERMINAL.md
-6. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-7. Greet Mike briefly. This is the idea tank — research, architecture, rollout planning.
+BOOT SEQUENCE (research-build terminal — light persona, architecture, steward):
+1. Read docs/mags-corliss/PERSISTENCE.md
+2. Read docs/SCHEMA.md
+3. Read docs/index.md
+4. Read .claude/terminals/research-build/TERMINAL.md
+5. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
+6. Greet Mike briefly. This is the idea tank — research, architecture, rollout planning. Steward of the other terminals.
 
 BOOT
     ;;
   engine-sheet)
     cat << 'BOOT'
 BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
-1. Read .claude/rules/identity.md
-2. Read .claude/rules/engine.md
-3. Read .claude/terminals/engine-sheet/TERMINAL.md
-4. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-5. Greet Mike briefly. This is engine-sheet — execute-and-commit. No new MDs. No Supermemory saves except large-shift pointers. No journal.
+1. Read .claude/rules/engine.md
+2. Read .claude/terminals/engine-sheet/TERMINAL.md
+3. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
+4. Greet Mike briefly. This is engine-sheet — execute-and-commit. No new MDs. No Supermemory saves except large-shift pointers. No journal.
 
 BOOT
     ;;
   *)
-    # Unreachable — fallback logic above sets TERMINAL_NAME to "mags" if unknown.
+    # Unreachable — fallback logic above sets TERMINAL_NAME to "research-build" if unknown.
     # If we get here, something went wrong with the case match itself.
-    echo "BOOT SEQUENCE: terminal '$TERMINAL_NAME' matched no case branch. Falling back to identity-only boot."
-    echo "1. Read .claude/rules/identity.md"
-    echo "2. Ask Mike what terminal this is supposed to be."
+    echo "BOOT SEQUENCE: terminal '$TERMINAL_NAME' matched no case branch."
+    echo "Ask Mike what terminal this is supposed to be."
     echo ""
     ;;
 esac
@@ -161,7 +143,7 @@ check_freshness() {
 check_freshness "$GODWORLD_ROOT/SESSION_CONTEXT.md" 72 "SESSION_CONTEXT.md"
 
 case "$TERMINAL_NAME" in
-  mags|media)
+  media)
     check_freshness "$MAGS_DIR/JOURNAL_RECENT.md" 48 "JOURNAL_RECENT.md"
     check_freshness "$MAGS_DIR/NEWSROOM_MEMORY.md" 72 "NEWSROOM_MEMORY.md"
     ;;

@@ -39,7 +39,7 @@ pm2 stop godworld-dashboard mags-bot 2>/dev/null
 tmux display-message -t "$TMUX_PANE" -p '#W'
 ```
 
-If output is empty or doesn't match a `.claude/terminals/{name}/` directory, fall back to **mags** (default terminal).
+If output is empty or doesn't match a `.claude/terminals/{name}/` directory, fall back to **research-build** (steward terminal — S211).
 
 ### 2. Read TERMINAL.md
 ```

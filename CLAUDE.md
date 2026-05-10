@@ -15,7 +15,7 @@ The `SessionStart` hook auto-detects your terminal (via tmux window name) and em
 - **`/session-startup`** — terminal context reload (TERMINAL.md + scope files + compact SESSION_CONTEXT slice). Use when the hook misfired or terminal scope drifted.
 - Cold fresh session: hook injects both. Post-compaction: `/boot` alone. Terminal switch or hook-miss: `/session-startup` alone.
 
-**Fallback terminal is `mags`** — when the tmux window name doesn't match a registered `.claude/terminals/{name}/` directory, the hook routes to mags (full persona, idea-bank scope). Covers unregistered windows, web sessions without tmux, and the bare "Claude" case.
+**Fallback terminal is `research-build`** — when the tmux window name doesn't match a registered `.claude/terminals/{name}/` directory, the hook routes to research-build (steward of the other terminals). Covers unregistered windows, web sessions without tmux, and the bare "Claude" case.
 
 **Memory before action.** Before guessing, search (in this order):
 1. **GodWorld MCP** for city data — `lookup_citizen`, `lookup_initiative`, `search_canon`, `search_world`, `get_neighborhood`, `get_council_member`
@@ -62,16 +62,15 @@ The `godworld` MCP server provides direct tool access to city data. **Use MCP to
 | `get_council_member(district)` | Reading Civic_Office_Ledger | Official + approval + faction |
 | `get_domain_ratings(cycle)` | Reading Edition_Coverage_Ratings | Per-domain media ratings |
 
-## Terminal Architecture (S135 + S165)
+## Terminal Architecture (S135 + S165 + S211)
 
-5 terminals. Persona level and journal behavior differ per terminal scope.
+4 terminals. Persona level and journal behavior differ per terminal scope. research-build is steward + default fallback.
 
 | Terminal | Scope | Persona | Journal |
 |----------|-------|---------|---------|
-| **mags** | Everyday Mags — idea bank, conversation, relationship, meta-aware. Default fallback. | Full | Yes |
 | **media** | Edition production, desk agents, publish pipeline | Full | Yes |
 | **civic** | City-hall, voice agents, initiative tracking | Light | Yes |
-| **research-build** | Architecture, research, rollout planning | Light | Yes |
+| **research-build** | Architecture, research, rollout planning. Steward + default fallback. | Light | Yes |
 | **engine-sheet** | Engine code, sheets, clasp deploys | Stripped | No (commits + SESSION_CONTEXT + large-shift Supermemory pointers) |
 
 **Persona levels:**
@@ -79,7 +78,7 @@ The `godworld` MCP server provides direct tool access to city data. **Use MCP to
 - **Light** — identity + PERSISTENCE (character present, no family query, no journal conditioning for the session)
 - **Stripped** — identity only (name + rules, no character scaffolding)
 
-Handoffs between terminals flow through `ROLLOUT_PLAN.md` (tagged `(research-build terminal)`, `(media terminal)`, etc.) and `SESSION_CONTEXT.md` (tagged `[research/build]`, `[media]`, `[civic]`, `[engine/sheet]`, `[mags]`). No new Supermemory containers for terminals — tag saves with the `[terminal-name]` prefix.
+Handoffs between terminals flow through `ROLLOUT_PLAN.md` (tagged `(research-build terminal)`, `(media terminal)`, etc.) and `SESSION_CONTEXT.md` (tagged `[research/build]`, `[media]`, `[civic]`, `[engine/sheet]`). No new Supermemory containers for terminals — tag saves with the `[terminal-name]` prefix.
 
 Each terminal's specific scope, Always-Load list, owned docs, and session-close audit are defined in its own `.claude/terminals/{name}/TERMINAL.md`.
 

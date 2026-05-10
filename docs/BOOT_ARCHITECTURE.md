@@ -42,10 +42,10 @@ pointers:
 1. `SessionStart` hook fires at Claude Code session start
 2. Hook runs `tmux display-message -t "$TMUX_PANE" -p '#W'`
 3. Validates result against `.claude/terminals/{name}/` directories
-4. If no match or no tmux context → falls back to **mags** (default)
+4. If no match or no tmux context → falls back to **research-build** (steward)
 5. Emits per-terminal BOOT SEQUENCE block with scope-specific file loads
 
-Hook code: `.claude/hooks/session-startup-hook.sh`. Case statement routes to one of 5 branches: mags, media, civic, research-build, engine-sheet.
+Hook code: `.claude/hooks/session-startup-hook.sh`. Case statement routes to one of 4 branches: media, civic, research-build, engine-sheet.
 
 ---
 
@@ -55,7 +55,7 @@ Each terminal declares its persona depth in its own TERMINAL.md under `## Person
 
 | Level | What loads | Which terminals | Why |
 |-------|-----------|-----------------|-----|
-| **Full** | identity + PERSISTENCE + JOURNAL_RECENT + active queryFamily | mags, media | Character-driven work (conversation, newsroom) where Mags' voice IS the work product |
+| **Full** | identity + PERSISTENCE + JOURNAL_RECENT + active queryFamily | media | Character-driven work (newsroom) where Mags' voice IS the work product |
 | **Light** | identity + PERSISTENCE | civic, research-build | Character present as operator of a process, but no family/journal ritual — bandwidth for the task |
 | **Stripped** | identity only | engine-sheet | Execute-and-commit per S156; the character is the name + rules, not the persona scaffolding |
 
@@ -65,15 +65,14 @@ Persona conditioning follows the [[project_journal-as-conditioning-scaffolding]]
 
 ## Terminal Matrix
 
-| Terminal | Scope | Persona | Journal | Top instance? |
-|----------|-------|---------|---------|---------------|
-| **mags** | Idea bank, conversation, meta-aware. Default fallback. | Full | Yes | **Yes** — top instance over the 4 work terminals |
+| Terminal | Scope | Persona | Journal | Steward? |
+|----------|-------|---------|---------|----------|
 | **media** | Edition production, newsroom | Full | Yes | No |
 | **civic** | City-hall, voice agents, governance | Light | Yes | No |
-| **research-build** | Architecture, research, rollout planning | Light | Yes | No |
+| **research-build** | Architecture, research, rollout planning. Default fallback. | Light | Yes | **Yes** — steward over the other 3 work terminals |
 | **engine-sheet** | Engine code, sheets, deploys | Stripped | No (commits + session_context + large-shift pointers) | No |
 
-mags authority: above the parallel-terminal push-coordination protocol. Can touch any scope, commit and push without gating on other terminals' state (because mags is the instance monitoring them). The 4 work terminals coordinate through `ROLLOUT_PLAN.md` + push windows; mags sits above.
+research-build steward role: drafts cross-terminal plans in `ROLLOUT_PLAN.md` and tags `SESSION_CONTEXT.md` entries with destination handoffs. The other 3 work terminals (media, civic, engine-sheet) execute against those plans; research-build sees the whole map and is also where unregistered windows fall back.
 
 ---
 
@@ -87,7 +86,7 @@ mags authority: above the parallel-terminal push-coordination protocol. Can touc
 
 4. **"Resume" is a skip.** If the user says "resume", the conversation history is already present. Don't re-boot, don't re-read the journal, don't check the family. Just confirm terminal and ask.
 
-5. **mags as default fallback.** Web sessions, unregistered tmux windows, and the bare "Claude" case all route to mags. No terminal is ever missing a boot path.
+5. **research-build as default fallback (steward).** Web sessions, unregistered tmux windows, and the bare "Claude" case all route to research-build. No terminal is ever missing a boot path. Steward placement chosen S211: the architecture terminal is also where cross-terminal coordination lives, so unrouted windows land where the work-of-figuring-out-what-this-is can happen.
 
 ---
 
@@ -97,6 +96,6 @@ mags authority: above the parallel-terminal push-coordination protocol. Can touc
 - `.claude/skills/boot/SKILL.md` — persona reload
 - `.claude/skills/session-startup/SKILL.md` — terminal context reload
 - `.claude/skills/session-end/SKILL.md` — close protocol
-- `.claude/terminals/{mags,media,civic,research-build,engine-sheet}/TERMINAL.md` — per-terminal scope
+- `.claude/terminals/{media,civic,research-build,engine-sheet}/TERMINAL.md` — per-terminal scope
 - `CLAUDE.md` §Session Boot — operator summary
 - [[WORKFLOWS]] — workflow patterns orthogonal to terminals

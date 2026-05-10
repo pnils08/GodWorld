@@ -1,12 +1,12 @@
 # Edition Production Pipeline v2
 
-**Redesigned S133. S144 added sift/post-publish/reviewer chain. S148 shipped Phase 39 reviewer lanes + Final Arbiter. S165 added dispatch/interview alternate starts + fifth (mags) terminal. S170 refresh to match shipped skills. S189 added cultural-only `CUL-` ID enumeration to NAMES INDEX + CITIZEN USAGE LOG format spec. S206 routing-foundation: Engine A (priorityEngine.js) + Engine B (bylineEngine.js) emit `priorityScore` + `consequenceFloor` + `bylineCandidate` + `bylineConfidence` + `bylineRationale` per seed at applyStorySeeds.js v3.12 → Story_Seed_Deck cols M-R; consumer skills sift/write-supplemental/dispatch/interview wired per Phase 4. See [[plans/2026-05-07-engine-routing-foundation]] + [[concepts/routing-rationale]].** Skills are the source of truth. This doc is the map. When they disagree, the skills win.
+**Redesigned S133. S144 added sift/post-publish/reviewer chain. S148 shipped Phase 39 reviewer lanes + Final Arbiter. S165 added dispatch/interview alternate starts (mags terminal trimmed S211 — research-build is steward + fallback). S170 refresh to match shipped skills. S189 added cultural-only `CUL-` ID enumeration to NAMES INDEX + CITIZEN USAGE LOG format spec. S206 routing-foundation: Engine A (priorityEngine.js) + Engine B (bylineEngine.js) emit `priorityScore` + `consequenceFloor` + `bylineCandidate` + `bylineConfidence` + `bylineRationale` per seed at applyStorySeeds.js v3.12 → Story_Seed_Deck cols M-R; consumer skills sift/write-supplemental/dispatch/interview wired per Phase 4. See [[plans/2026-05-07-engine-routing-foundation]] + [[concepts/routing-rationale]].** Skills are the source of truth. This doc is the map. When they disagree, the skills win.
 
 ---
 
 ## Architecture
 
-Five terminals (post-S165 — mags added as fallback for unregistered windows + idea-bank). Two production logs. One world.
+Four terminals (S211: mags trimmed; research-build is steward + fallback for unregistered windows). Two production logs. One world.
 
 | Terminal | Focus | Production Log |
 |----------|-------|---------------|

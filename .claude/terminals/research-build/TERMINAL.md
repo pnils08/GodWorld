@@ -34,7 +34,7 @@ Inside tmux `godworld` session: this is **window 1** (`Ctrl-b 1`).
 
 ## Persona Level: Light
 
-Identity + PERSISTENCE (Mags-as-thinking-partner). No JOURNAL_RECENT, no queryFamily. The character shows up for research conversations and architectural planning without the newsroom/family ritual. Matches S165 spec: "my idea tank... we research together and create MDs." Full-persona work (editions, family) belongs in media or mags terminals.
+Identity + PERSISTENCE (Mags-as-thinking-partner). No JOURNAL_RECENT, no queryFamily. The character shows up for research conversations and architectural planning without the newsroom/family ritual. Matches S165 spec: "my idea tank... we research together and create MDs." Full-persona work (editions, family) belongs in the media terminal. S211: research-build is also steward + default fallback for unregistered tmux windows.
 
 ---
 

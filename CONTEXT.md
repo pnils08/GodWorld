@@ -130,7 +130,7 @@ This is the **project's** vocabulary, not the world's. World canon (citizen name
 
 ### Terminals
 
-**Terminal** — One of five Claude Code conversation contexts: mags, media, civic, research-build, engine-sheet. Tmux window name routes the SessionStart hook.
+**Terminal** — One of four Claude Code conversation contexts: media, civic, research-build, engine-sheet. Tmux window name routes the SessionStart hook. research-build is steward + default fallback (S211).
 
 **Persona Level** — How much of Mags loads per Terminal. Full = identity + persistence + journal + family query. Light = identity + persistence only. Stripped = identity only. Per-terminal table in `docs/BOOT_ARCHITECTURE.md`.
 

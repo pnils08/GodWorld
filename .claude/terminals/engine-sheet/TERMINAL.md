@@ -42,7 +42,7 @@ Three commands every session runs before substantive work — primes the empiric
 
 ```bash
 git log origin/main..HEAD --oneline   # unpushed commits (cross-terminal stack check)
-git status --short                     # working-tree drift (mags terminal often has journal files)
+git status --short                     # working-tree drift (other terminals often have journal files)
 node scripts/auditSimulationLedger.js  # live ledger sanity (~3s, prints headcount + Status + Tier dist)
 ```
 

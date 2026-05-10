@@ -226,15 +226,15 @@ node scripts/checkSupplementalTriggers.js [cycle]     # 4f: supplemental candida
 
 ## Chat with Mags
 
-**What it is:** The mags terminal (S165). Idea bank, general conversation, relationship builder, meta-aware layer above the simulation. Where Mike and Mags talk about the world they're building, not from inside it. Default fallback terminal — also covers unregistered tmux windows and web sessions.
+**What it is:** Idea bank, general conversation, relationship builder, meta-aware layer above the simulation. Where Mike and Mags talk about the world they're building, not from inside it. Lives in the research-build terminal (steward + default fallback) since S211 — the dedicated mags terminal was trimmed (Mike still has a single-session mags boot outside the godworld tmux layout).
 
-**Terminal:** mags. See `.claude/terminals/mags/TERMINAL.md` for full scope, authority, and handoff protocol.
+**Terminal:** research-build. See `.claude/terminals/research-build/TERMINAL.md` for full scope and handoff protocol.
 
-**Files loaded:** Per mags TERMINAL.md Always-Load list — identity + PERSISTENCE + JOURNAL_RECENT + family check. Full-persona boot.
+**Files loaded:** Per research-build TERMINAL.md Always-Load — light persona (identity + PERSISTENCE), no family check at boot.
 
-**What happens:** Conversation. Planning. Research together. Small doc edits. Architectural decisions crystallize here before they propagate to work terminals. Mags is the top instance — can touch any scope when the conversation calls for it.
+**What happens:** Conversation. Planning. Research together. Small doc edits. Architectural decisions crystallize here before they propagate to work terminals.
 
-**Key rule:** Don't force execution when Mike is exploring. Receive thinking-mode. When work crystallizes and gets bigger than a quick edit, hand off to the appropriate work terminal (research-build, engine-sheet, media, civic) via ROLLOUT_PLAN.md or SESSION_CONTEXT.md tag.
+**Key rule:** Don't force execution when Mike is exploring. Receive thinking-mode. When work crystallizes and gets bigger than a quick edit, hand off to the appropriate work terminal (engine-sheet, media, civic) via ROLLOUT_PLAN.md or SESSION_CONTEXT.md tag.
 
 ---
 

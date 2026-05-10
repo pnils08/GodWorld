@@ -42,7 +42,6 @@ Map to terminal:
 | `engine-sheet` | `.claude/terminals/engine-sheet/TERMINAL.md` | Stripped |
 | `media` | `.claude/terminals/media/TERMINAL.md` | Full |
 | `civic` | `.claude/terminals/civic/TERMINAL.md` | Light |
-| `mags` | `.claude/terminals/mags/TERMINAL.md` | Full |
 | Anything else (unmatched, web session, bare `Claude`) | Falls back to `mags` per S165 | Full |
 
 Load that TERMINAL.md and find the **Session Close** section.
@@ -282,8 +281,6 @@ git log origin/main..HEAD --oneline
 If output shows commits from other terminals interleaved with yours **AND** they haven't signaled "landable," do **NOT** push. Local commits lose nothing. Pushing here ships their unverified work along with yours.
 
 Full rule: `/root/.claude/projects/-root-GodWorld/memory/feedback_no-cross-terminal-git-push.md`.
-
-**Exception: mags terminal.** Per S165, mags is the boss. If no other terminal is actively stacked, push freely. If another terminal is active, still coordinate.
 
 ### Push
 

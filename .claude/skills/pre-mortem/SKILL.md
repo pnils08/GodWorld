@@ -10,6 +10,8 @@ disable-model-invocation: true
 
 # /pre-mortem — Engine Health Scan
 
+> **Skill bag:** senior software engineer running pre-cycle silent-failure scan on production-critical infrastructure. The scans below are *what* that skill checks; the bag adds the discipline of treating gates as gates (CRITICAL = stop, not "stop and continue"), and flagging cascade-risk patterns even when the proximate code looks fine. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.
+
 ## Usage
 `/pre-mortem`
 - Run before `/run-cycle` to catch problems before they cascade

@@ -10,6 +10,8 @@ disable-model-invocation: true
 
 # /ctx-map — Live ctx.summary Dependency Map
 
+> **Skill bag:** senior software engineer mapping ctx-field dependencies — production-critical infrastructure cartography. The output below is *what* that skill generates; the bag adds the discipline of treating live code as ground truth (not ENGINE_STUB_MAP, not ctx-map runs from prior cycles — current code), and reading both writers and readers per field before declaring a chain understood. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.
+
 ## Usage
 `/ctx-map` — Generate current field dependency map from live code
 `/ctx-map [fieldName]` — Show full chain for one specific field

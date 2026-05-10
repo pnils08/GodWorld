@@ -10,6 +10,8 @@ disable-model-invocation: true
 
 # /stub-engine — Engine Function Map
 
+> **Skill bag:** senior software engineer generating regenerable function-reference map across all 11 engine phases. The output below is *what* that skill builds; the bag adds the discipline of treating ENGINE_STUB_MAP as a regenerable artifact (when it feels stale, regenerate; don't trust the prior generation), and noting ctx reads + writes per function as load-bearing for downstream pre-mortem / ctx-map work. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.
+
 ## Usage
 `/stub-engine`
 - Run after compaction to quickly re-orient on the codebase

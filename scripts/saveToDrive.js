@@ -239,12 +239,13 @@ async function runTest() {
 }
 
 async function mapSubfolders() {
-  // Auto-discover subfolder IDs from the manifest
+  // Auto-discover subfolder IDs from the manifest. Manifest is built by
+  // scripts/buildCombinedManifest.js (separate workflow); when absent, the
+  // hardcoded DESTINATIONS table at file-top is authoritative.
+  // G-PR20 (S215): previously logged "No manifest found" every run as if
+  // it were an error — the fallback path is the standard operational state.
   var manifestPath = path.join(__dirname, '..', 'output', 'drive-manifest.json');
-  if (!fs.existsSync(manifestPath)) {
-    console.log('No manifest found — using root folders only.');
-    return;
-  }
+  if (!fs.existsSync(manifestPath)) return;
 
   var manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf-8'));
   var folders = manifest.entries.filter(function(e) { return e.isFolder; });
@@ -352,9 +353,22 @@ async function main() {
 
   // Print the metadata block — post-publish verifier reads stdout to confirm
   // type/cycle plumbed through the print pipeline.
+  // G-PR19 (S215): if --cycle wasn't passed, try to derive from filename.
+  // Accepts `bay_tribune_e93.pdf`, `bay_tribune_cycle93.pdf`, or any filename
+  // containing `e<NN>` / `c<NN>` / `cycle<NN>`. Cosmetic but the metadata
+  // audit trail now reflects the actual cycle instead of null.
+  var cycleResolved = cycleFlag;
+  if (cycleResolved === null) {
+    var fnBase = path.basename(filePath);
+    var fnMatch = fnBase.match(/(?:^|[_\-])(?:e|c|cycle)?(\d{1,4})\.(?:pdf|html|md|txt|json)$/i)
+      || fnBase.match(/(?:^|[_\-])(?:e|c|cycle)(\d{1,4})(?:[_\-.]|$)/i);
+    if (fnMatch) cycleResolved = parseInt(fnMatch[1], 10);
+  }
+
   console.log('[METADATA] ' + JSON.stringify({
     type: typeFlag || null,
-    cycle: cycleFlag,
+    cycle: cycleResolved,
+    cycleSource: cycleFlag !== null ? 'flag' : (cycleResolved !== null ? 'filename' : 'unset'),
     destinationKey: dest,
     destinationFolder: resolveDestination(dest),
     file: path.basename(filePath),

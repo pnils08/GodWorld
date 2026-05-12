@@ -451,7 +451,17 @@ function buildNewspaperHtml(parsed, options) {
   html.push('  <div class="masthead-flag">The Bay Tribune</div>');
   html.push('  <div class="masthead-sub">' + mastheadSub + '</div>');
   var metaParts = [];
-  if (parsed.date) metaParts.push(parsed.date);
+  // G-PR17 (S215): fall back to today's formatted date when parser couldn't
+  // extract a masthead date from the .txt. Pre-fix, missing date silently
+  // produced "Oakland, California | Weather" with no publication date.
+  if (parsed.date) {
+    metaParts.push(parsed.date);
+  } else {
+    var today = new Date();
+    var months = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+    metaParts.push(months[today.getMonth()] + ' ' + today.getDate() + ', ' + today.getFullYear());
+  }
   metaParts.push('Oakland, California');
   if (parsed.weather) metaParts.push(parsed.weather);
   html.push('  <div class="masthead-meta">' + escapeHtml(metaParts.join(' | ')) + '</div>');
@@ -709,6 +719,28 @@ async function main() {
     filteredPhotos.forEach(function(p) {
       console.log('  - ' + p.section + ' -> ' + p.file);
     });
+
+    // G-PR16 (S215): inverse-pass warning. Pre-fix, sections that text-shipped
+    // without a photo were silent — caller couldn't tell intentional skip
+    // (text-only by editorial choice) from accidental gap (photo failed to
+    // generate). Surface the unmatched section list so the operator decides.
+    var photoSections = {};
+    filteredPhotos.forEach(function(p) {
+      if (p.section) photoSections[p.section.toUpperCase()] = true;
+    });
+    var META_SECTIONS = { 'ARTICLE TABLE': 1, 'NAMES INDEX': 1, 'CITIZEN USAGE LOG': 1,
+      'STORYLINES UPDATED': 1, 'CONTINUITY NOTES': 1, 'BUSINESSES NAMED': 1,
+      'COMING NEXT EDITION': 1, 'END EDITION': 1 };
+    var missingPhotoSections = [];
+    for (var ms = 0; ms < parsed.sections.length; ms++) {
+      var sectionName = (parsed.sections[ms].name || '').toUpperCase().trim();
+      if (!sectionName || META_SECTIONS[sectionName]) continue;
+      if (!photoSections[sectionName]) missingPhotoSections.push(sectionName);
+    }
+    if (missingPhotoSections.length > 0) {
+      console.log('Sections without photos: ' + missingPhotoSections.join(', ') +
+                  ' (text-only — verify intentional)');
+    }
   } else if (!noPhotos) {
     console.log('No photo manifest found at ' + manifestPath);
     console.log('Run generate-edition-photos.js first, or use --no-photos');

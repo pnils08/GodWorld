@@ -193,6 +193,8 @@ Reporter takes the transcript and writes the published piece:
 
 Save to `output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md`
 
+**Reporter-directory convention:** `{reporter}` slug is **hyphen-separated** (matches the rest of `output/reporters/` — `carmen-delaine`, `dr-lila-mezran`, `hal-richmond`, etc.). Underscore form (`carmen_delaine`) creates a duplicate directory — see G-S13 (sift gap log, closed S215 via migration). The subject-slug convention below (underscore-separated) applies only to the filename's interview subject, not the reporter directory.
+
 Target: 800-1200 words (Voice mode). Mike-determined for Paulson mode.
 
 ## Step 4.5: Compile to `.txt`

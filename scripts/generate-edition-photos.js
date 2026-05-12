@@ -154,21 +154,44 @@ async function main() {
   }
 
   var raw = fs.readFileSync(directionPath, 'utf-8');
-  var specs;
+  var parsed;
   try {
-    specs = JSON.parse(raw);
+    parsed = JSON.parse(raw);
   } catch (e) {
     console.error('Error: dj_direction.json is not valid JSON: ' + e.message);
     process.exit(1);
   }
 
-  if (!Array.isArray(specs)) {
-    console.error('Error: dj_direction.json top-level must be an array');
+  // G-PR7 (S215): accept either legacy shape (top-level array of specs) OR
+  // extended object shape `{ specs: [...], skipped: [...], editorial_note: ""}`.
+  // The extended shape lets DJ document which featured stories were
+  // deliberately not photographed (and why) — invisible in the old array form.
+  var specs, skipped = [], editorialNote = '';
+  if (Array.isArray(parsed)) {
+    specs = parsed;
+  } else if (parsed && typeof parsed === 'object' && Array.isArray(parsed.specs)) {
+    specs = parsed.specs;
+    skipped = Array.isArray(parsed.skipped) ? parsed.skipped : [];
+    editorialNote = (parsed.editorial_note || '').trim();
+  } else {
+    console.error('Error: dj_direction.json must be either an array of specs OR ' +
+      'an object `{ specs: [...], skipped: [...], editorial_note: "" }`');
     process.exit(1);
   }
+
   if (specs.length === 0) {
     console.error('Error: dj_direction.json contains zero specs');
     process.exit(1);
+  }
+
+  if (skipped.length > 0) {
+    console.log('Editorial skips (DJ chose not to photograph):');
+    skipped.forEach(function(s) {
+      console.log('  - ' + (s.slug || '(no slug)') + ': ' + (s.reason || '(no reason)'));
+    });
+  }
+  if (editorialNote) {
+    console.log('Editorial note: ' + editorialNote);
   }
 
   // Validate all specs upfront — fail fast if any are malformed

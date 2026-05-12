@@ -325,8 +325,14 @@ function composeBundle(opts) {
   lines.push('  (Heinold\'s, ferry terminal, Coliseum tunnel, Lake Merritt pergola, etc.)');
   lines.push('- 0–1 portrait if a citizen profile anchors the edition');
   lines.push('');
-  lines.push('Output a **single JSON array**. Each spec follows the §Worked Example shape ');
-  lines.push('from `docs/plans/2026-04-25-photo-pipeline-rebuild.md`:');
+  lines.push('Output JSON — either a **bare array** of specs OR an **extended object** ');
+  lines.push('`{ "specs": [...], "skipped": [...], "editorial_note": "..." }`. Use the extended ');
+  lines.push('shape when you deliberately leave capacity on the table (e.g. you produced 6 specs ');
+  lines.push('but the edition has 8 featured stories). Document which featured stories were skipped ');
+  lines.push('and why — without this field, future audits can\'t tell editorial choice from oversight. ');
+  lines.push('(G-PR7, S215.) `skipped` entries: `{ "slug": "<featured-story-slug>", "reason": "<why>" }`. ');
+  lines.push('`editorial_note` is one line of art-direction rationale for the whole bundle. Each spec ');
+  lines.push('follows the §Worked Example shape from `docs/plans/2026-04-25-photo-pipeline-rebuild.md`:');
   lines.push('');
   lines.push('```json');
   lines.push('{');

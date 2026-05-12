@@ -4,7 +4,15 @@
  * not firing.
  */
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
+
+// S216 engine.13 — Civic_Office_Ledger contains 999 rows including DA-01,
+// PD-01, STAFF-COS, STAFF-DM-* etc. updateCivicApprovalRatings.js only
+// processes officeIds matching ^COUNCIL or ^MAYOR (see phase05-citizens
+// approval-engine filter). Counting flat approvals across the full 999-row
+// universe over-flags 990+ "unchanged" rows that the engine never touches by
+// design. Filter the detector to the same universe the engine writes.
+const APPROVAL_OFFICE_PATTERN = /^(COUNCIL|MAYOR)/i;
 
 function num(v) {
   if (v == null || v === '') return null;
@@ -63,6 +71,10 @@ function detect(ctx) {
     for (const c of council) {
       const key = c.OfficeId || c.PopId;
       if (!key) continue;
+      // S216 engine.13: skip non-elected rows (DA, PD, STAFF) — engine doesn't
+      // recompute their approval, so "flat" is correct expected behavior, not
+      // writeback drift.
+      if (!APPROVAL_OFFICE_PATTERN.test(key)) continue;
       const prev = priorById.get(key);
       if (!prev) continue;
       const a1 = num(c.Approval), a0 = num(prev.Approval);

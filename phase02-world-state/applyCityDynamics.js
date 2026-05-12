@@ -1,7 +1,23 @@
 /**
  * ============================================================================
- * applyCityDynamics_ v3.1 (ES5)
+ * applyCityDynamics_ v3.2 (ES5)
  * ============================================================================
+ *
+ * v3.2 Changes (S216 engine.13 — completes the S202 wiring):
+ * - Folds S.editionSentimentBoost into finalCity.sentiment before clamps.
+ *   S202 wired traffic/retail/nightlife/publicSpaces/communityEngagement/
+ *   culturalActivity from editionNeighborhoodEffects['city'] but missed
+ *   sentiment, which lives on a separate scalar (S.editionSentimentBoost in
+ *   applyEditionCoverageEffects). Pre-S216 that scalar incremented S.sentiment
+ *   directly but no consumer read S.sentiment downstream — the coverage→
+ *   per-neighborhood sentiment chain was a dead write. C92 produced +0.16
+ *   sentiment from 9 coverage ratings; none reached Neighborhood_Map writes.
+ *   v3NeighborhoodWriter reads dynamics.sentiment as base, so once finalCity
+ *   absorbs the boost, it propagates to per-neighborhood Sentiment via the
+ *   normal (base + neighborhoodMod + variance) formula. Pre-clamp magnitude
+ *   capped at ±0.20 in coverage; clampSent at line below caps further.
+ *   Closes engine.13 G-EC6 — auditor's writeback-drift detector should drop
+ *   the 14/N flat-neighborhood pattern by C95.
  *
  * v3.1 Changes (S202 — wires the dead output):
  * - Folds S.editionNeighborhoodEffects['city'] per-metric deltas into finalCity
@@ -1289,6 +1305,22 @@ function applyCityDynamics_(ctx) {
       ', publicSpaces ' + (cityEffects.publicSpaces || 0).toFixed(3) +
       ', engagement ' + (cityEffects.communityEngagement || 0).toFixed(3) +
       ', cultural ' + (cityEffects.culturalActivity || 0).toFixed(3));
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────
+  // EDITION COVERAGE SENTIMENT BOOST (v3.2, S216 engine.13)
+  // ─────────────────────────────────────────────────────────────────────────
+  // applyEditionCoverageEffects_ computes S.editionSentimentBoost from the
+  // prior cycle's coverage ratings (rating × sentimentWeight × 0.015 summed
+  // across domains, clamped ±0.20). S202 wired traffic/retail/etc but missed
+  // this scalar — pre-S216, the coverage→sentiment chain was a dead write.
+  // Now the boost flows into finalCity.sentiment, then to per-neighborhood
+  // Sentiment via v3NeighborhoodWriter's base+mod+variance formula.
+  var sentimentBoost = Number(S.editionSentimentBoost || 0);
+  if (sentimentBoost !== 0) {
+    finalCity.sentiment += sentimentBoost;
+    Logger.log('applyCityDynamics_ v3.2: Edition coverage sentiment boost applied — ' +
+      sentimentBoost.toFixed(4));
   }
 
   finalCity.traffic = clampMult(finalCity.traffic);

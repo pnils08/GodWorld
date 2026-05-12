@@ -53,6 +53,7 @@ function main() {
     auditJson = loadAuditJson(cycle);
     findings.push(...auditWritebackDrift(auditJson));
     findings.push(...auditMathAnomaly(auditJson));
+    findings.push(...auditCoverageGap(auditJson));
     findings.push(...auditCrossCycleDebt(auditJson, cycle));
   } catch (err) {
     findings.push({
@@ -123,6 +124,25 @@ function auditMathAnomaly(audit) {
       title: trimTitle(p.description || 'Math imbalance detected'),
       diagnosis: buildDiagnosis(p),
       sourceRef: `output/engine_audit_c${audit.cycle}.json (pattern type=math-imbalance)`,
+    });
+  }
+  return out;
+}
+
+// S216 engine.14: coverage-gap is editorial signal (events occurred in a
+// domain but no Tribune coverage rated that domain) — distinct class from
+// math-imbalance (engine calculation drift). Surfaced separately so triage
+// can route to desk packets / editorial dashboard, not engine repair.
+function auditCoverageGap(audit) {
+  const out = [];
+  for (const p of audit.patterns || []) {
+    if (p.type !== 'coverage-gap') continue;
+    out.push({
+      class: 'coverage-gap',
+      severity: severityFromAudit(p.severity),
+      title: trimTitle(p.description || 'Coverage gap detected'),
+      diagnosis: buildDiagnosis(p),
+      sourceRef: `output/engine_audit_c${audit.cycle}.json (pattern type=coverage-gap)`,
     });
   }
   return out;

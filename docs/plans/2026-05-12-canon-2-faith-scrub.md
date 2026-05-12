@@ -168,7 +168,7 @@ pointers:
   1. For each BIZ-ID identified in the P0 export faith cross-walk, write the new BizName to match the org's canon substitute.
   2. Confirm BIZ-00028 (West Oakland faith org / Jaston employer) reflects the new West Oakland canon-substitute org name.
 - **Verify:** Readback of touched BIZ rows returns new BizName values; cross-reference Jaston's employer link still resolves.
-- **Status:** [ ] not started
+- **Status:** [N/A] skip (S218 engine-sheet flagged contradiction with INSTITUTIONS.md §Out of scope; research-build confirmed skip same session). The task as originally written assumed Business_Ledger carries per-faith-org BIZ entries that need BizName updates. P0 export proved otherwise: zero `Business_Ledger.Name ∈ Faith_Organizations.Organization` matches; only false-positive keyword hit is `Temple Lounge` (nightlife venue, not a faith org); all 17 faith-leader POPs share `BIZ-00028 / West Oakland Community Center / Community Services` as `EmployerBizId` — a real canon community center, not a faith org. There is nothing to write here for canon.2. The BIZ-00028 shared-employer-link issue (a Rockridge rabbi shouldn't list West Oakland Community Center as employer) is a data-modeling question separate from Tier-3 contamination, flagged in `[[../canon/INSTITUTIONS]]` §Out of scope for canon.2 → follow-up plan owning faith-org BIZ modeling (per-org BIZ entries vs employer-link refactor).
 
 ---
 
@@ -226,14 +226,14 @@ pointers:
 #### Task 5.2: Scoped wipes for affected business / citizen cards
 
 - **Files:**
-  - `scripts/buildBusinessCards.js` — invoke with `--name` filter for each affected BIZ
+  - ~~`scripts/buildBusinessCards.js` — invoke with `--name` filter for each affected BIZ~~ (N/A — see Task 3.3 skip rationale)
   - `scripts/buildCitizenCards.js` — invoke with `--popid` filter for each affected LeaderPOPID
 - **Steps:**
-  1. For every BIZ touched in Task 3.3, re-run `buildBusinessCards.js --apply --name "<new BizName>"` so the wd-business card reflects the new org name.
+  1. ~~For every BIZ touched in Task 3.3, re-run `buildBusinessCards.js --apply --name "<new BizName>"` so the wd-business card reflects the new org name.~~ N/A — Task 3.3 skipped; no BIZ entries got renamed in P3.
   2. For every LeaderPOPID touched in Task 3.2, re-run `buildCitizenCards.js --apply --popid <POPID>` so the wd-citizens card reflects the new leader name.
   3. Jaston POP-00758: confirm card already canonical, skip unless Role text changed.
-- **Verify:** MCP `lookup_business` + `lookup_citizen` against the affected entries return updated names; bay-tribune (separate container) untouched.
-- **Status:** [ ] not started
+- **Verify:** MCP `lookup_citizen` against the 15 touched POPIDs returns updated names; bay-tribune (separate container) untouched. Business-side verification dropped — no business cards changed.
+- **Status:** [ ] not started — citizen-side only
 
 ---
 
@@ -250,3 +250,5 @@ pointers:
 - 2026-05-12 — Initial draft (S218 research-build). Plan structure approved by Mike in chat; engine-sheet standing by for P0 handoff. Pre-write decisions captured under Open Questions.
 - 2026-05-12 — P0 export complete (S218 engine-sheet). `output/faith_canon_export_c93.md` shipped; three measure-twice findings beyond plan baseline (no per-org BIZ entries / shared BIZ-00028 / FO↔SL drift on POP-00756 + POP-00758).
 - 2026-05-12 — P1+P2 complete (S218 research-build). 16-row substitution table + 34-row corrections-forward map shipped in `INSTITUTIONS.md` §Faith; 16+16 blocklist in `REAL_NAMES_BLOCKLIST.md`; pattern generalized in `CANON_RULES.md` §Corrections-Forward Maps. Mike approved slate as-presented + sided on three structural decisions (BIZ-00028 leave-alone, POP-00734 orphan out-of-scope, FO↔SL drift overwrite). Engine-sheet handoff: P3 (sheet writes) → P4 (canon filter) → P5 (Supermemory rebuild).
+- 2026-05-12 — P3.1 + P3.2 complete (S218 engine-sheet). `applyFaithCanonSubsP3.js` batch-wrote 62 ranges (32 FO + 30 SL) in one atomic round-trip. POP-00756 Torres↔Terez + POP-00758 Jackson↔Jaston drift cases closed. Blocklist grep 0 hits across 34 Tier-3 tokens; fresh P0 re-export reports zero FO↔SL drift.
+- 2026-05-12 — P3.3 N/A (S218 engine-sheet flagged + research-build confirmed). P0 export proved Business_Ledger carries no faith-org BIZ entries; nothing to write. BIZ-00028 shared-employer-link issue is data-modeling, not Tier-3, already flagged in INSTITUTIONS.md §Out of scope. P5.2 business-side also marked N/A in same pass (no business cards to refresh).

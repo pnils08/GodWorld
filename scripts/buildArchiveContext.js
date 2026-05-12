@@ -29,14 +29,26 @@ require('/root/GodWorld/lib/env');
 var fs = require('fs');
 var path = require('path');
 var https = require('https');
+var crypto = require('crypto');
 
 var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 var CONTAINER_TAG = 'bay-tribune';
 var API_HOST = 'api.supermemory.ai';
 var OUTPUT_DIR = path.join(__dirname, '..', 'output', 'desk-briefings');
 var PACKETS_DIR = path.join(__dirname, '..', 'output', 'desk-packets');
+var CACHE_DIR = path.join(__dirname, '..', 'output', 'cache');
 
 var DRY_RUN = process.argv.includes('--dry-run');
+// S215 pipeline.21 (G-P11) — same-cycle cache for Supermemory + dashboard
+// queries. Default ON; pass --no-cache to force fresh fetch. Re-running
+// /post-publish during debugging within the same cycle reuses results
+// (saved ~46 API calls / re-run on the typical 23-query path).
+var NO_CACHE = process.argv.includes('--no-cache');
+// Per-cycle empty-query log (G-P11 fix candidate c) — when a query returns
+// [EMPTY] from both SM + dashboard, log it for per-citizen-index-gap
+// investigation. Pre-fix, 4 of 5 A's player queries returned empty silently
+// (Aitken, Dillon, Kelley, Davis); only Vinnie Keane resolved.
+var EMPTY_QUERIES = [];
 
 // ---------------------------------------------------------------------------
 // Detect cycle number
@@ -136,6 +148,37 @@ function searchDashboard(query, limit) {
 }
 
 function sleep(ms) { return new Promise(function(r) { setTimeout(r, ms); }); }
+
+// ---------------------------------------------------------------------------
+// Cache layer (S215 pipeline.21 / G-P11)
+// ---------------------------------------------------------------------------
+// Cache file: output/cache/archive_context_c{XX}.json
+// Shape: { "<sha1(query|target)>": { query, target, sm, dash, fetchedAt } }
+// Same-cycle reuse only — different cycles get fresh fetches because new
+// edition ingests + civic decisions land between cycles. Force-refresh
+// within cycle via --no-cache flag.
+function loadCache(cycle) {
+  if (NO_CACHE) return {};
+  var cachePath = path.join(CACHE_DIR, 'archive_context_c' + cycle + '.json');
+  if (!fs.existsSync(cachePath)) return {};
+  try {
+    return JSON.parse(fs.readFileSync(cachePath, 'utf-8'));
+  } catch (e) {
+    console.warn('[CACHE] Could not parse ' + cachePath + ': ' + e.message);
+    return {};
+  }
+}
+
+function saveCache(cycle, cache) {
+  if (NO_CACHE) return;
+  if (!fs.existsSync(CACHE_DIR)) fs.mkdirSync(CACHE_DIR, { recursive: true });
+  var cachePath = path.join(CACHE_DIR, 'archive_context_c' + cycle + '.json');
+  fs.writeFileSync(cachePath, JSON.stringify(cache, null, 2));
+}
+
+function cacheKey(query, target) {
+  return crypto.createHash('sha1').update(query + '|' + target).digest('hex');
+}
 
 // ---------------------------------------------------------------------------
 // Read desk summary to extract search terms
@@ -295,6 +338,8 @@ async function main() {
   var baseCtx = readBaseContext(cycle);
   var desks = ['civic', 'sports', 'culture', 'business', 'chicago', 'letters'];
   var totalQueries = 0;
+  var cacheHits = 0;
+  var cache = loadCache(cycle);
 
   // Process each desk
   for (var d = 0; d < desks.length; d++) {
@@ -314,9 +359,30 @@ async function main() {
         continue;
       }
 
-      console.log('  [SEARCH] "' + query + '"');
-      var smContext = await searchSupermemory(query, 2);
-      var dashContext = await searchDashboard(query, 3);
+      var key = cacheKey(query, desk);
+      var cached = cache[key];
+      var smContext, dashContext;
+      if (cached && !NO_CACHE) {
+        smContext = cached.sm || '';
+        dashContext = cached.dash || '';
+        cacheHits++;
+        console.log('  [CACHED] "' + query + '"');
+      } else {
+        console.log('  [SEARCH] "' + query + '"');
+        smContext = await searchSupermemory(query, 2);
+        dashContext = await searchDashboard(query, 3);
+        cache[key] = {
+          query: query,
+          target: desk,
+          sm: smContext,
+          dash: dashContext,
+          fetchedAt: new Date().toISOString(),
+        };
+        // Rate limit (Supermemory only — dashboard is local). Skipped on
+        // cache hits since no network call fired.
+        await sleep(300);
+      }
+
       var context = [smContext, dashContext].filter(Boolean).join('\n\n---\n\n');
       results.push({ query: query, context: context });
 
@@ -324,10 +390,8 @@ async function main() {
         console.log('  [OK] ' + context.length + ' chars (SM: ' + (smContext || '').length + ', Dash: ' + (dashContext || '').length + ')');
       } else {
         console.log('  [EMPTY]');
+        EMPTY_QUERIES.push({ target: desk, query: query });
       }
-
-      // Rate limit (Supermemory only — dashboard is local)
-      await sleep(300);
     }
 
     if (!DRY_RUN) {
@@ -354,9 +418,28 @@ async function main() {
       continue;
     }
 
-    console.log('  [SEARCH] "' + rq + '"');
-    var rSm = await searchSupermemory(rq, 3);
-    var rDash = await searchDashboard(rq, 3);
+    var rheaKey = cacheKey(rq, 'rhea');
+    var rheaCached = cache[rheaKey];
+    var rSm, rDash;
+    if (rheaCached && !NO_CACHE) {
+      rSm = rheaCached.sm || '';
+      rDash = rheaCached.dash || '';
+      cacheHits++;
+      console.log('  [CACHED] "' + rq + '"');
+    } else {
+      console.log('  [SEARCH] "' + rq + '"');
+      rSm = await searchSupermemory(rq, 3);
+      rDash = await searchDashboard(rq, 3);
+      cache[rheaKey] = {
+        query: rq,
+        target: 'rhea',
+        sm: rSm,
+        dash: rDash,
+        fetchedAt: new Date().toISOString(),
+      };
+      await sleep(300);
+    }
+
     var rctx = [rSm, rDash].filter(Boolean).join('\n\n---\n\n');
     rheaResults.push({ query: rq, context: rctx });
 
@@ -364,9 +447,8 @@ async function main() {
       console.log('  [OK] ' + rctx.length + ' chars (SM: ' + (rSm || '').length + ', Dash: ' + (rDash || '').length + ')');
     } else {
       console.log('  [EMPTY]');
+      EMPTY_QUERIES.push({ target: 'rhea', query: rq });
     }
-
-    await sleep(300);
   }
 
   if (!DRY_RUN) {
@@ -388,7 +470,28 @@ async function main() {
     console.log('  [WROTE] ' + rheaPath + ' (' + rheaMd.length + ' chars)');
   }
 
-  console.log('\n[DONE] ' + totalQueries + ' total Supermemory queries across ' + (desks.length + 1) + ' targets');
+  // S215 pipeline.21 (G-P11) — persist cache + log empty-query report
+  if (!DRY_RUN) {
+    saveCache(cycle, cache);
+  }
+  if (EMPTY_QUERIES.length > 0 && !DRY_RUN) {
+    var emptyLogPath = path.join(__dirname, '..', 'output', 'empty_queries_c' + cycle + '.log');
+    var lines = ['# Empty Archive-Context Queries — C' + cycle];
+    lines.push('# Generated: ' + new Date().toISOString());
+    lines.push('# Pattern: queries that returned [EMPTY] from BOTH Supermemory + dashboard.');
+    lines.push('# Investigate: are these per-citizen index gaps (G-P11 fix candidate c) or stale queries?');
+    lines.push('');
+    EMPTY_QUERIES.forEach(function(eq) {
+      lines.push('[' + eq.target + '] ' + eq.query);
+    });
+    fs.writeFileSync(emptyLogPath, lines.join('\n'));
+    console.log('\n[EMPTY-LOG] ' + EMPTY_QUERIES.length + ' empty queries logged to ' + path.basename(emptyLogPath));
+  }
+
+  var apiCalls = totalQueries - cacheHits;
+  console.log('\n[DONE] ' + totalQueries + ' total queries across ' + (desks.length + 1) + ' targets — ' +
+    apiCalls + ' API calls, ' + cacheHits + ' cache hits' +
+    (cacheHits > 0 ? ' (' + Math.round(100 * cacheHits / totalQueries) + '% cache rate)' : ''));
 }
 
 main().catch(function(err) {

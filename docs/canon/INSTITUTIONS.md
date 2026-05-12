@@ -254,6 +254,24 @@ Privately-branded arts/culture entities (named galleries, named music venues, na
 
 ---
 
+## Neighborhoods
+
+Public-geographic units. Names and boundaries match real Oakland (simulation-is-Oakland framing, S170). The Neighborhood_Map sheet is engine-source-of-truth for the district assignment + adjacency graph; canon entries here document the editorial framing each neighborhood carries (scope, key features, district anchor, council voice). When a new neighborhood gets canonized (or an existing one needs explicit district anchor), add a row here AND update Neighborhood_Map in the same work cycle.
+
+### Tier 1 — Use real names (with canonical district anchor)
+
+- **KONO (Koreatown-Northgate)** — emerging neighborhood, Telegraph Avenue corridor north of Downtown and south of Temescal. Approximate boundaries: 20th Street (south) to 30th/MacArthur (north), Telegraph Avenue as spine. Cultural-event density (Fox Theater Oakland sits in KONO district per §Arts/Culture/Landmarks above). C92 dispatch "KONO Second Song" (Marin Tao POP-00537 + Brody Kale CUL-905CBDE8) is the load-bearing canon precedent. **Council district anchor: D7 (Warren Ashford, CRC)** — newly canonized S215 (closes civic.10a; KONO was unassigned through C93 despite inflow-strain rotation 2 of last 3 cycles per G-12 city-hall-prep gap log). Rationale: KONO/Temescal corridor framing in §Arts/Culture/Landmarks already binds KONO to Temescal (D7); fiscal-conservative voice posture (Ashford CRC) explains why KONO inflow-strain wasn't getting community-development voice attention through C93. Adjacent neighborhoods: Downtown (D2, Tran), Temescal (D7, Ashford), Adams Point (D8, Chen).
+
+### Tier 2 — Canon-substitute required
+
+(None — neighborhoods are public-geographic and use real names.)
+
+### District-anchor backlog
+
+Other Oakland neighborhoods that have surfaced in canon but lack explicit district anchors in this doc — fill incrementally as they appear in cycle work. Reference Neighborhood_Map sheet for current authoritative assignments; this doc carries the editorial framing layer on top.
+
+---
+
 ## Maintenance
 
 - **Editorial fills tier-2 canon substitutes** — Mike or Mags decides names. Agents don't auto-name.

@@ -122,25 +122,16 @@ Access via engine scripts or Claude.ai project context:
 
 ---
 
-## 🚀 What's Next
+## 🚀 Current Build Status
 
-**Week 2 (Upcoming):** Town Halls & Public Hearings
-- PublicSupport score on initiatives (0-100)
-- Citizen speakers (3-8 per hearing)
-- Trigger conditions: controversy >=7, low approval <35, neighborhood crisis
-- Outcomes: calm, heated, consensus, protest
-- Uses Approval column added in v1.7
+Civic engine v1.7 (veto + override + approval ratings) is the live engine layer. The originally-planned v1.8+ features (Town Halls, Council Availability tracking, Vote History & Executive Orders) **did not ship** — project focus shifted in the months following v1.7 to:
 
-**Week 3:** Enhanced Council Availability
-- Personal leave tracking
-- Scandal/investigation status
-- Availability as 0-1 score (not boolean)
-- Quorum checks
+- **engine.7** — Engine Routing Foundation (Phase 6 cutover, story-seed routing with priorityScore + bylineCandidate + confidence; gated on 3 cycles shadow data, currently in-progress)
+- **engine.10** — Phase 43 City Functions (5-domain priority order — operational scaffolding for how the city functions across domains)
+- **engine.11** — Chaos-Cars Engine (typed municipal-vehicle stochastic event injection)
+- **engine.13 / engine.14** — Writeback-drift + math-anomaly root cause investigations from C93 mechanical auditor (filed S216)
 
-**Week 4:** Vote History & Executive Orders
-- RecentVotes JSON (last 5 votes per member)
-- Mayor emergency powers during crisis
-- Pattern detection for journalism
+For canonical current work see `docs/engine/ROLLOUT_PLAN.md`. The "Week 2/3/4" framing in earlier versions of this README is **deprecated** — those features are not on the active roadmap.
 
 ---
 
@@ -153,5 +144,6 @@ Access via engine scripts or Claude.ai project context:
 
 ---
 
-**Last Updated:** 2026-02-11
+**Last Updated:** 2026-05-12 (civic.3 close — README §What's Next refreshed; "Week 2/3/4" plans deprecated; AUDIT_HISTORY.md rolling-5 convention superseded by per-cycle artifacts; CLAUDE_AI_SYSTEM_PROMPT.md last-sync stamp added)
+**Engine layer last updated:** v1.7, 2026-02-11
 **Maintained By:** GodWorld Project Team

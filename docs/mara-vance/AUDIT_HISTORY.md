@@ -1,14 +1,22 @@
 # Mara Vance — Audit History
 
-**Last Updated: Cycle 84 — 2026-02-25**
+**Last Updated:** Cycle 84 — 2026-02-25 (last full update to this file)
+**Status note (2026-05-12, civic.3 close):** Rolling-5 narrative convention superseded — Mara has produced per-cycle audits in scattered formats since C86. This file preserves the historical record (C80-C85 rolling-5, snapshots of initiative/council/status as of C84). For current canonical state:
 
-This is my institutional memory. I read this file at the start of every session and update it after every audit. It replaces the Supermemory search-and-save loop that wasn't working — I was writing reflections no one read, and searching a pool where my own findings rarely surfaced. Now my findings live here, on disk, structured and accessible.
+- Per-cycle audits: see Audit Log table below for E87/E88/E89/E91/E92/E93 artifact paths
+- Current initiative state: `Initiative_Tracker` sheet (MCP `lookup_initiative`)
+- Current council state: `Civic_Office_Ledger` sheet (MCP `get_council_member`)
+- Current open audits: Mara's claude.ai session memory + per-cycle artifacts
+
+Treat the snapshots in this file as historical reference, not current ground truth.
+
+This was originally my institutional memory — I read it at the start of every session and updated after every audit. It replaced a Supermemory search-and-save loop that wasn't working. The per-cycle artifact convention took over because the rolling-5 narrative scaled poorly past 5 cycles of carryover.
 
 ---
 
 ## Initiative Status Board
 
-*Living tracker. Updated after each audit. This replaces the static Part V table in the Operating Manual.*
+*[SNAPSHOT — C84 / 2026-02-25] Historical reference. See `Initiative_Tracker` sheet (MCP `lookup_initiative`) for current state.*
 
 | Initiative | ID | Status | Budget | Vote | Result | Key Facts | Next Gate |
 |------------|-----|--------|--------|------|--------|-----------|-----------|
@@ -19,7 +27,9 @@ This is my institutional memory. I read this file at the start of every session 
 | Fruitvale Transit Hub Phase II | INIT-003 | ACTIVE | $230M | C86 (projected) | — | Visioning sessions C83-86. Transit and housing focus. | Visioning completion, council vote |
 | Port of Oakland Green Modernization | INIT-004 | PIPELINE | — | C88-90 (projected) | — | Federal grant pending. External decision. Not yet formally proposed in-world. | Grant decision |
 
-### Council Composition (Current)
+### Council Composition (Snapshot)
+
+*[SNAPSHOT — C84 / 2026-02-25] Historical reference. See `Civic_Office_Ledger` sheet (MCP `get_council_member`) for current state.*
 
 | District | Member | Faction | Status |
 |----------|--------|---------|--------|
@@ -37,12 +47,33 @@ This is my institutional memory. I read this file at the start of every session 
 
 ### Status Alerts
 
+*[SNAPSHOT — C84 / 2026-02-25] Historical reference. Per-cycle voice/health/availability state lives in Civic_Office_Ledger + active voice JSONs.*
+
 - **Elliott Crane (D6)** — Recovering. Missed Health Center vote (C80). Voted remotely on OARI (C82) and Baylight (C83).
-- **Marcus Osei (Deputy Mayor)** — Serious condition. No interim appointment.
+- **Marcus Osei (Deputy Mayor)** — Serious condition. No interim appointment. *(Note S215: civic-office-okoro four-file built — Brenda Okoro Deputy Mayor speaks on Stab Fund / Community Dev / ED-coverage; absence-of-statement is meaningful per RULES.)*
 
 ---
 
-## Audit Log (Rolling — Last 5 Cycles)
+## Audit Log
+
+**Rolling-5 narrative convention deprecated as of C86.** Per-cycle audit artifacts are now canonical. The C80-C85 narrative entries below are preserved as historical reference.
+
+### Per-cycle audits (C86 → C93)
+
+| Cycle | Artifact(s) | Format |
+|-------|-------------|--------|
+| C86 | — | No artifact retained |
+| C87 | `output/mara-audit/edition_c87_for_review.txt` + `output/mara-directives/mara_directive_c87_REJECTED.txt` | Review draft + directive |
+| C88 | `output/mara-audit/edition_c88_for_review.txt` | Review draft |
+| C89 | `output/mara_canon_audit_c89.txt` | Canon audit |
+| C90 | — | No artifact retained |
+| C91 | `output/mara_report_c91.json` | Structured report |
+| C92 | `output/mara_review_c92_santana_interview.md` + `output/mara-directives/mara_directive_c92.txt` | Review + directive |
+| C93 | `output/mara_report_c93.json` + `output/mara-directives/mara_directive_c93.txt` | Structured report + directive |
+
+Audit grades (where issued) and recurring patterns now live in the per-cycle artifacts. The narrative rolling-5 below is preserved for the C80-C85 era; subsequent narrative summaries are not maintained.
+
+### Historical rolling-5 (preserved — C80 through C85)
 
 ### Cycle 85 — Grade A- (88/100) | Approved With Corrections
 
@@ -165,6 +196,8 @@ This is my institutional memory. I read this file at the start of every session 
 ---
 
 ## Open Questions for Next Audit
+
+*[SNAPSHOT — C84 / 2026-02-25] Historical reference. Open-question carry-forward now lives in Mara's per-cycle directive files (`output/mara-directives/mara_directive_c*.txt`).*
 
 1. **Stabilization Fund authorization date:** Resolved to "late 2040" in E85. Both desks now consistent. Confirm in institutional record.
 2. **Deputy Mayor Osei portfolio:** Who is managing Economic Development in his absence? Two editions of silence. Chase in C86.

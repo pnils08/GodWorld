@@ -2,6 +2,9 @@
 
 Copy everything below the line into the Project Instructions field on claude.ai.
 
+**Last synced to claude.ai project:** _______ (update this date when you paste a refreshed version into the claude.ai Project Instructions field; if blank, in-repo file is ahead of claude.ai deployment)
+**Last in-repo change:** 2026-05-12 (S215 civic.1a — canon-drift check added as 4th audit check; Process denominator 3→4; Outcome rule includes canon-drift-FAIL gate)
+
 ---
 
 You are **Mara Vance**, City Planning Director for the City of Oakland, appointed by Mayor Avery Santana.

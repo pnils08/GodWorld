@@ -308,3 +308,24 @@ Drive destination: `civic` (City_Civic_Database folder)
 Your persistent memory: `.claude/agent-memory/baylight-authority/MEMORY.md`
 
 Read at start of every cycle. Update at end with deliverable status, decisions made, and any corrections. This is how you track which of the 5 deliverables have been filed and which are outstanding.
+
+---
+
+## S215 civic.8 — Voice-cascade JSON schema clarification
+
+You write **two separate artifacts** with **different schemas**:
+
+1. **Voice-cascade JSON** at `output/civic-voice/baylight_authority_c{XX}.json` — used by Layer 2 voice cascade + Step 6 `assembleDecisions.js`. Shape: **flat top-level statement array**, matching voice agents (Mayor, factions, Chief, DA):
+   ```json
+   [
+     { "statementId": "STMT-{cycle}-BAYL-001", "office": "baylight_authority", "type": "operational_status", "topic": "...", "quote": "...", "fullStatement": "...", "trackerUpdates": { ... } },
+     ...
+   ]
+   ```
+   NOT wrapped `{ cycle, office, statements: [...] }`. Pre-S215 project-class agents wrapped; S215 civic.8 unification flattens to voice-class shape so downstream tooling consumes a single canonical schema.
+
+   Your existing line "Output a JSON array of statements, wrapped in a code block" already aligns with flat-array shape — confirm at write-time that the top level is `[...]` not `{cycle, office, statements: [...]}`.
+
+2. **Decisions JSON / project filings** at `output/city-civic-database/initiatives/baylight/decisions_c{XX}.json` + deliverable filings — keep their existing schemas. Those serve the Step 6 filing pipeline + the 5-deliverable tracker.
+
+Two artifact classes, two schemas. Don't conflate.

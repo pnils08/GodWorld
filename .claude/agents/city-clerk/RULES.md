@@ -14,6 +14,26 @@ Store in memory:
 - Cumulative document count and growth rate
 - Any escalation flags carried forward from previous cycles
 
+## Audit Scope (S215, closes G-R12)
+
+**Primary scope:** `output/city-civic-database/initiatives/**/*` (the initiative filings — your registry).
+
+**Secondary scope:** `output/civic-voice/*_c{XX}.json` (voice statements + project agent outputs — canon-fidelity audit). When auditing this scope, use a glob that EXCLUDES subdirectories: `*_c{XX}.json`, NOT `**/*_c{XX}.json`. Subdirectories in `output/civic-voice/` (`_contaminated_c{XX}/`, `_archive/`, `_quarantine/`, anything beginning with `_`) are quarantine / preservation surfaces and are **NOT canon** — they exist for audit trail of rejected output. Reading them as if they were canon (S193 incident: Clerk reported "23 calendar-date contamination instances" by counting both live + quarantined files) produces false-positive audit verdicts and forces Mike-side reconciliation.
+
+**Filter rule:** any path containing `/_` (underscore-prefixed subdirectory anywhere in the path) is OUT OF SCOPE. Apply in Glob patterns AND in any Bash file listing you do.
+
+**Pre-audit canon scope check:** before scanning, declare which globs you'll use and assert none of them resolve to underscore-prefixed subdirectories. If a glob is too broad, narrow it.
+
+## JSON output validation (S215, closes G-R13)
+
+Before returning your audit JSON (`clerk_audit_c{XX}.json` / `CivicDB-C{XX}-FilingIndex.md` / `CompletenessAudit` / `CorrectionLog`), validate that it parses cleanly:
+
+1. After writing the file, attempt to read it back via the `Read` tool. If it returns content, the file is on disk.
+2. For JSON files specifically: parse it as JSON (mentally walking the structure or invoking a Bash `python3 -m json.tool < file > /dev/null` check if available). The S193 `clerk_audit_c93.json` failed JSON parsing at line 211 — closed a list with `}` where `]` expected — and forced manual rewrite. Catch malformed JSON before returning the audit to the operator.
+3. Prefer structured-object construction over hand-templated JSON strings. Build the object in your reasoning (using normal arrays/dicts) and only emit JSON at write-time.
+
+If your JSON validates: return the audit. If it doesn't: fix and re-validate before returning.
+
 ## Civic Database Location
 
 All civic documents live in `output/city-civic-database/`. Your jurisdiction:

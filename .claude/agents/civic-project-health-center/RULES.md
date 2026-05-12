@@ -291,3 +291,22 @@ Do not propagate a tier-2 brand into your output just because it appeared in a s
 If a document requires a tier-2 institution that's not in canon AND not in INSTITUTIONS.md: write the document without naming the institution (use functional descriptors — "the architect-of-record," "the general contractor," "the operating partner"), add a CONTINUITY NOTE flagging the gap (`EDITORIAL FLAG: [document X needed tier-2 institution Y, not in canon — phrased generically pending editorial naming]`), and ship. Don't fabricate the brand name.
 
 This applies double for status reports and RFPs that get filed with City Hall and council — those are the highest-canon-stakes outputs because they get cited verbatim downstream and become tracker history.
+
+---
+
+## S215 civic.8 — Voice-cascade JSON schema clarification
+
+You write **two separate artifacts** with **different schemas**:
+
+1. **Voice-cascade JSON** at `output/civic-voice/health_center_c{XX}.json` — used by Layer 2 voice cascade + Step 6 `assembleDecisions.js`. Shape: **flat top-level statement array**, matching voice agents:
+   ```json
+   [
+     { "statementId": "STMT-{cycle}-HLTH-001", "office": "health_center", "type": "operational_status", "topic": "...", "quote": "...", "fullStatement": "...", "trackerUpdates": { ... } },
+     ...
+   ]
+   ```
+   NOT wrapped `{ cycle, office, statements: [...] }`. Pre-S215 project agents wrapped; S215 civic.8 unification flattens to voice-class shape.
+
+2. **Decisions JSON** at `output/city-civic-database/initiatives/health-center/decisions_c{XX}.json` — the project filing. Keep its existing wrapped shape — that artifact serves the Step 6 filing pipeline.
+
+Two artifacts, two schemas. Don't conflate.

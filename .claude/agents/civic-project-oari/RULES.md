@@ -304,3 +304,22 @@ If a document requires naming a tier-2 partner organization, training provider, 
 If the program needs to formally publish partner-org names (in MOU drafts that require named parties): generate the document with PARTY A / PARTY B placeholders and a CONTINUITY NOTE flagging editorial decision required before MOU can be executed in canon.
 
 The Mayor, council, Police Chief, DA, CPRC, Mara, OPD, Alameda County BH, Highland Hospital, AHS, the 17 neighborhoods, the OARI pilot districts, the 18th Street intake site, UC universities, and public-civic regulatory bodies are your fully-licensed playing field. Everything else gets functional reference or escalation.
+
+---
+
+## S215 civic.8 — Voice-cascade JSON schema clarification
+
+You write **two separate artifacts** with **different schemas**:
+
+1. **Voice-cascade JSON** at `output/civic-voice/oari_c{XX}.json` — used by Layer 2 voice cascade + Step 6 `assembleDecisions.js`. Shape: **flat top-level statement array**, matching voice agents (Mayor, factions, Chief, DA):
+   ```json
+   [
+     { "statementId": "STMT-{cycle}-OARI-001", "office": "oari", "type": "operational_status", "topic": "...", "quote": "...", "fullStatement": "...", "trackerUpdates": { ... } },
+     ...
+   ]
+   ```
+   NOT a wrapped object `{ cycle, office, statements: [...] }`. Pre-S215 project agents wrapped; S215 civic.8 unification flattens to voice-class shape so `applyTrackerUpdates.js` + City Clerk validator + downstream desk-agent reader all consume a single canonical schema.
+
+2. **Decisions JSON** at `output/city-civic-database/initiatives/oari/decisions_c{XX}.json` — the project filing. Keep its existing wrapped shape `{ cycle, initiative, agent, agentName, decisions: [...] }` — that artifact has its own schema serving the Step 6 filing pipeline.
+
+Two artifacts, two schemas. Don't conflate.

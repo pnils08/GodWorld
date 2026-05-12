@@ -1,8 +1,8 @@
 ---
 name: city-hall-prep
 description: Prepare all inputs for city-hall voice agents. Reads tracker, approvals, world summary, engine review, coverage ratings, previous log, canon, Mara directive. Writes pending decisions per voice.
-version: "1.1"
-updated: 2026-05-03
+version: "1.2"
+updated: 2026-05-11
 tags: [civic, active]
 effort: high
 disable-model-invocation: true
@@ -47,6 +47,7 @@ Each voice looks at different data. Route the right inputs to the right pending 
 | Agent (write pending_decisions to) | Speaks for | District/Scope | Data They Need |
 |-------------------------------------|-----------|----------------|----------------|
 | `civic-office-mayor` | Mayor Santana | Citywide | All initiatives, all approval ratings, engine review ailments, Mara directive, coverage feedback across all domains |
+| `civic-office-okoro` | Deputy Mayor Brenda Okoro | Community Dev + Stab Fund + ED (Osei coverage) | Stab Fund processing trends + district equity + portfolio-load impact; speaks when Stab Fund anomaly, Mara directive names her, oversight checkpoint approaches, or Mayor cascade lands on her portfolios. Absence-of-statement is meaningful — don't force a statement (S215 civic.5). |
 | `civic-office-police-chief` | Chief Montez | Public Safety | Crime metrics, OARI data, safety-related engine ailments, safety coverage ratings |
 | `civic-office-district-attorney` | DA Dane | Legal framework | Only runs when legal dimension exists this cycle |
 | `civic-office-opp-faction` | Rivers (D5) + Delgado (D3) + Carter (D1) + Chen (D8) + Mobley (D9) | OPP bloc — 5 council members | Per-member district data: D5 East Oakland (OARI + displacement), D3 Fruitvale (Transit Hub + OARI), D1 Jack London/W Oakland (Baylight + Stab Fund), D8/D9 district state. Bloc-level political alignment + each member's approval + vulnerability flags |
@@ -87,6 +88,12 @@ Full convention: [[SUPERMEMORY]] §Memory Fence. Covers the threat model and whe
 
 Create `output/production_log_city_hall_c{XX}.md` with header, timestamp, cycle, Mike's pressure.
 
+**Mike's pressure auto-derive (S215, closes G-5).** "Pressure from Mike" defaults to the synthesis of: engine review HIGH-severity ailments (`output/engine_review_c{XX}.md` §Ailments / §Stuck Initiatives), Mara directive content (`output/mara-directives/mara_directive_c{XX}.txt` if present), and active civic items in `docs/engine/ROLLOUT_PLAN.md` §civic.*. Compute the default, write it into the production log, then ask Mike to confirm or override. Mike-override fires only when his read of the cycle differs from those engine signals (e.g., front-page-rotation pressure, audit follow-up ask, off-rubric editorial direction) — anomaly-only escalation, not always-on.
+
+**Mara additive only (S215, closes G-9).** Mara directive is a check-against frame to compare and reconcile, NOT a starting point to defer to. Mags-and-engine-review drive topic assignments; Mara's directive becomes a `## Mara cross-check` block at the bottom of the production log header — "Did our topic assignments answer her questions? Where do they differ?" Don't treat the directive as primary input. This was Mike's explicit correction during S192 ("this is your space not hers"); without it written into the skill, the framing re-drifts every session.
+
+**Mara directive auto-derivation (S215, closes G-4).** When Mara's directive is absent (some cycles don't get one), derive a default `output/mara-directives/mara_directive_c{XX}_AUTO.txt` from: (1) engine review HIGH-severity ailments, (2) prior-cycle Initiative_Tracker `MilestoneNotes` deltas, (3) prior-cycle voice JSON gaps (questions raised in voice statements that no agent answered), (4) C92-style per-voice "missing answer" framing. Voice prep then uses the AUTO directive as the Mara cross-check input; Mara's manual version overrides if she files one later. This converts an optional input into an always-on input without requiring claude.ai turnaround on every cycle.
+
 ### Step 1: Read All Inputs
 
 Read all 10 inputs above. For each:
@@ -104,7 +111,19 @@ Read all 10 inputs above. For each:
 
 **Canon.** Run `search_canon` per active initiative to find what the Tribune has published — promises made, citizen reactions, coverage tone.
 
-Log tracker state, approval ratings, and key findings in the production log. Present to Mike.
+Log tracker state, approval ratings, and key findings in the production log.
+
+**World summary stale-civic-decisions framing (S215, closes G-7).** The world summary's §Civic Decisions section can read stale if the current cycle's `/city-hall` hasn't run yet — it presents the prior-cycle cascade as if locked, with a small disclaimer reader has to notice. When ingesting world_summary at Step 1, treat any §Civic Decisions data as "Last Locked (C{XX-1})" until the current cycle produces new voice JSONs. Don't propagate stale framing into pending_decisions packets — voice agents must see explicit "C{XX-1} canon, C{XX} not yet decided" labeling. Engine-side fix is filed at pipeline.14 (world_summary auto-rebuild after /city-hall); until that ships, the disclaimer-respect rule lives here.
+
+**Anomaly-only present-to-Mike gate (S215, closes G-6 Step 1 side).** Previous convention: always present Step 1 input summary to Mike. New convention: compute input completeness automatically (all expected files present, all approval ratings reasonable, all initiatives accounted for) and surface to Mike ONLY on anomaly:
+
+- Approval shift >5pts on any council member from prior cycle
+- HIGH-severity engine ailment unaddressed (no topic assignment in §Topic Assignments for it)
+- New initiative phase change since prior cycle (vote-ready, design-active, etc.)
+- Missing C{XX-1} voice output for an agent expected to speak this cycle
+- World summary mtime older than city-hall start (G-7 staleness condition)
+
+If none of those fire, Step 1 completes silently with one-line "no anomalies — proceeding to Step 2" log entry. Operator escalates to Mike's review only on actual anomaly.
 
 ### Step 2: Topic Assignments
 
@@ -147,14 +166,24 @@ For each voice with a decision, write `output/civic-voice-workspace/{office}/cur
 - Full initiative packets
 - Anything from buildInitiativePackets.js
 
-### Step 4: Verify Prep Outputs
+### Step 4: Verify Prep Outputs (anomaly-only gate, S215 G-6)
 
 Check all files exist:
 - Production log created with tracker state + approvals + topic assignments
 - Pending decisions written for each assigned voice
 - Previous cycle context loaded and referenced
+- Any pending_decisions referencing a council member matches the canonical 9-member roster (D1-D9 per Civic_Office_Ledger)
+- Vote-trigger detection: any initiative at `vote-ready` phase with NextActionCycle = current cycle is routed to all 9 council voices via faction-bloc agents (G-R11 pre-condition)
 
-Present to Mike for approval before running `/city-hall`.
+**Anomaly-only present-to-Mike (S215, closes G-6 Step 4 side).** City Clerk pre-flight pass verifies voice files exist for assigned voices, content matches assignments, no canon violations. If Clerk passes clean, Step 4 completes silently with one-line "prep verified — running /city-hall" log entry. Mike's review fires only when Clerk flags a structural issue:
+
+- Pending_decisions packet references a non-canonical council member (e.g., wrong district)
+- Vote-ready initiative not routed to faction-bloc agents
+- Missing pending_decisions for a voice expected to speak (per topic assignments)
+- Approval ratings inconsistent between disk inputs and pending_decisions packet
+- Quarantine subdirs accidentally re-included in canon scope (G-R12 — see city-clerk RULES.md)
+
+Default outcome: silent pass. Mike-review outcome: anomaly named + suggested fix proposed before `/city-hall` runs.
 
 ## Output Files
 

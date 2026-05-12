@@ -1,8 +1,8 @@
 ---
 name: city-hall
 description: Run the civic government — voice agents make decisions, tracker updates, canon output. Mags sifts, agents decide.
-version: "2.0"
-updated: 2026-04-17
+version: "2.1"
+updated: 2026-05-11
 tags: [civic, active]
 effort: high
 disable-model-invocation: true
@@ -133,6 +133,8 @@ For each voice that has a decision this cycle, write `output/civic-voice-workspa
 ```
 **Every voice must include `trackerUpdates` if their decision changes an initiative's state.** This is how the tracker gets updated — no manual extraction.
 
+**statementId is opaque; route on `office` (S215, closes G-R3).** S193 ran six voices with four different statementId prefix conventions (`STMT-93-MAYOR-001`, `STMT-93-OPD-001`, `STMT-93-IND-VEGA-001`, `STMT-93-baylight_authority-001`). Downstream tooling (applyTrackerUpdates, civic_sentiment aggregator, future analytics) should NOT parse the prefix — they route on the `office` field, which is consistent. Voice agents may use any statementId convention they like as long as it's unique within their own JSON; the field is for traceability, not dispatch. Document only — no need to enforce a single prefix shape across agents.
+
 ## Step 3: Run Mayor FIRST (Layer 1)
 
 Launch `civic-office-mayor` agent. Mayor gets:
@@ -157,6 +159,7 @@ Launch remaining voice agents in parallel. Each gets:
 The voices know what the Mayor decided. They react to it, support it, oppose it, or go rogue.
 
 **Voice agents (all output to `output/civic-voice/{name}_c{XX}.json`):**
+- `civic-office-okoro` → `okoro_c{XX}.json` — Deputy Mayor; speaks on Stab Fund / Community Dev / ED-coverage operations. Absence-of-statement is meaningful; don't force a run (S215 civic.5)
 - `civic-office-police-chief` → `police_chief_c{XX}.json`
 - `civic-office-opp-faction` → `opp_faction_c{XX}.json`
 - `civic-office-crc-faction` → `crc_faction_c{XX}.json`
@@ -198,6 +201,8 @@ Include trackerUpdates in your output JSON.
 ```
 
 **Output:** `output/civic-voice/{project}_c{XX}.json` — same schema as voices, must include `trackerUpdates`.
+
+**Project agents may NOT pre-write Step 6 artifacts (S215, closes G-R5).** S193 Baylight Authority agent wrote both its voice JSON AND `output/city-civic-database/initiatives/baylight/decisions_c93.json` (Step 6 artifact) within its tool call. Content was correct but ordering violated the user-approval gate that protects Step 6. Project agent SKILL.md / RULES.md for every project (Baylight, OARI, Stab Fund, Health Center, Transit Hub) carries the constraint: write ONLY the voice JSON at Step 5; `output/city-civic-database/initiatives/{name}/decisions_c{XX}.json` is assembled by `scripts/assembleDecisions.js` (S197 G-R14) at Step 6, NOT by the agent. If a project agent appears to pre-write the Step 6 artifact, treat as a skill-fidelity violation and surface to Mike before approving the tracker apply.
 
 **Project agents:**
 - `civic-project-stabilization-fund` — disbursement logistics, applicant experiences, processing numbers

@@ -376,3 +376,22 @@ If a status report or determination letter requires naming a tier-2 community or
 If a quarterly fund report requires naming external partner organizations for transparency: generate the document with PARTY A / PARTY B placeholders for tier-2 entities and a CONTINUITY NOTE flagging editorial decision required before the report can be published in canon.
 
 The Mayor's office, council, Mara, City Auditor, OEWD, HUD/HUD-SF/CDBG, the 17 neighborhoods, canon citizens (Beverly Hayes etc.), Carla Edmonds, federal program names, public union locals, and Marcus's canonical-historical institutions (Howard, Cal State East Bay, HUD) are your fully-licensed playing field. Anything beyond requires functional reference or escalation.
+
+---
+
+## S215 civic.8 — Voice-cascade JSON schema clarification
+
+You write **two separate artifacts** with **different schemas**:
+
+1. **Voice-cascade JSON** at `output/civic-voice/stabilization_fund_c{XX}.json` — used by Layer 2 voice cascade + Step 6 `assembleDecisions.js`. Shape: **flat top-level statement array**, matching voice agents:
+   ```json
+   [
+     { "statementId": "STMT-{cycle}-STAB-001", "office": "stabilization_fund", "type": "operational_status", "topic": "...", "quote": "...", "fullStatement": "...", "trackerUpdates": { ... } },
+     ...
+   ]
+   ```
+   NOT wrapped `{ cycle, office, statements: [...] }`. Pre-S215 project agents wrapped; S215 civic.8 unification flattens to voice-class shape so downstream tooling consumes a single canonical schema.
+
+2. **Decisions JSON** at `output/city-civic-database/initiatives/stabilization-fund/decisions_c{XX}.json` — the project filing. Keep its existing wrapped shape (`{ cycle, initiative, agent, agentName, decisions: [...] }`) — that artifact has its own schema serving the Step 6 filing pipeline.
+
+Two artifacts, two schemas. Don't conflate.

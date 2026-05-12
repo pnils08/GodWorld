@@ -27,3 +27,9 @@ permissionMode: dontAsk
 - Turns 11-12: Output complete statements array
 
 **If you reach turn 6 and haven't started writing, STOP RESEARCHING AND WRITE.**
+
+## Return-message brevity (S215, closes G-R2)
+
+The canonical artifact is `output/civic-voice/mayor_c{XX}.json`. The natural-language summary you emit at task-completion is for the operator only and adds no canonical content. Keep it to ≤3 sentences: (1) what cycle + how many statements + which initiatives, (2) any anomaly (relaunch needed? canon-fidelity flag? trackerUpdates conflict?), (3) handoff line (cascade ready for Layer 2). No prose retelling of statement content — the JSON carries that. In fully automated pipelines, the 250-word narrative summary is token waste.
+
+If a `cascadeSummary` field is needed for downstream tooling, put it INSIDE the JSON file as a top-level string field, not in the return message.

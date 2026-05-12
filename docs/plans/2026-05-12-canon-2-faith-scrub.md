@@ -147,7 +147,7 @@ pointers:
   2. For each row, write the new Organization value into column A and the new Leader value into column F.
   3. Verify by reading both columns back row-by-row against the table.
 - **Verify:** Direct `lib/sheets.js` readback returns the 16 fictional names; no real-name strings remain. Spot-check with `grep "Acts Full Gospel\|Allen Temple\|Cathedral of Christ the Light\|Beth Jacob\|Kehilla\|Masjid Al-Islam\|Lake Merritt UMC\|Temple Sinai\|Shiva Vishnu\|Bishop Robert Jackson\|Bishop Calvin Reeves"` against the live readback → no matches.
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 engine-sheet, 2026-05-12). Shipped `scripts/applyFaithCanonSubsP3.js` (parses §Canon substitution table from `INSTITUTIONS.md`, dry-run by default, `--apply` executes one `batchUpdate`). Wrote 32 FO ranges (16 rows × {A Organization, F Leader}) in one atomic round-trip; post-write readback confirmed all 16 rows match expected canon strings; blocklist grep returned 0 hits across 34 Tier-3 tokens. Independent re-run of `exportFaithCanonC93.js` reports `No drift detected` on FO.Leader ↔ SL.First+Last cross-check — POP-00756 (Torres↔Terez) + POP-00758 (Jackson↔Jaston, S195 leak) both closed.
 
 #### Task 3.2: Write Simulation_Ledger faith-leader POP Name + Role
 
@@ -158,7 +158,7 @@ pointers:
   2. Write the new leader Name. Preserve BirthYear, Gender, Neighborhood, Tier — only the Name string changes (and Role if the original Role text contained a real name, e.g., "Pastor of Acts Full Gospel" → "Pastor of [new org]").
   3. For Jaston POP-00758: confirm the existing row already reads `Robert Jaston / Senior Pastor / West Oakland / BIZ-00028` and skip — already canon.
 - **Verify:** Readback for each touched POPID returns the new name; rows not in the substitution table are untouched (compare against P0 export).
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 engine-sheet, 2026-05-12). Same `applyFaithCanonSubsP3.js` batch wrote 30 SL ranges (15 rows × {B First, D Last}; POP-00758 Jaston skipped — SL already canon per Mike directive). RoleType (col K) not touched — P0 surfaced all 15 affected POPs carry generic `Senior Pastor / Faith Leader` (or POP-00764 `Community Organizer`), no real-org names embedded in Role text. POP-00766 last name unchanged (`Singh` → `Singh`, only first name `Gurpreet` → `Manjit` differs). Verify pass: 31 touched rows match expected; blocklist grep 0 hits; fresh P0 re-export reports zero FO ↔ SL drift.
 
 #### Task 3.3: Write Business_Ledger faith-org BIZ entries
 

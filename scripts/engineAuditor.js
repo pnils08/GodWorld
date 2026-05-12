@@ -46,6 +46,12 @@ const enrichers = [
   { name: 'resolveAffectedCitizens', module: require('./engine-auditor/resolveAffectedCitizens') },
   { name: 'generateTribuneFraming', module: require('./engine-auditor/generateTribuneFraming') },
   { name: 'measureRemedies', module: require('./engine-auditor/measureRemedies') },
+  // checkOrphanAilments runs LAST. Reads each HIGH-severity pattern's
+  // affectedEntities.neighborhoods against Neighborhood_Map.District; flags
+  // unmapped neighborhoods as orphans + surfaces summary in audit JSON.
+  // S215 (civic.10c / G-12): fail-loud detector for KONO-class structural
+  // gaps where a HIGH-impact event lacks a district owner.
+  { name: 'checkOrphanAilments', module: require('./engine-auditor/checkOrphanAilments') },
 ];
 
 const SHEETS_TO_READ = [
@@ -237,6 +243,9 @@ async function main() {
     measurementHistory: ctx.measurementHistory || [],
     snapshots: persistedSnapshots,
     citizenIncomes,
+    // S215 civic.10c — orphan-ailment summary (HIGH-severity patterns with
+    // neighborhoods lacking a district owner per Neighborhood_Map.District).
+    orphanAilments: ctx.orphanAilments || { highImpactChecked: 0, orphanCount: 0, unmappedNeighborhoods: [], patterns: [] },
   };
   const auditPath = path.join(outputDir, `engine_audit_c${cycle}.json`);
   fs.writeFileSync(auditPath, JSON.stringify(auditOutput, null, 2));

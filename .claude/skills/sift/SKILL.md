@@ -1,7 +1,7 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads world summary, engine review, city-hall log. Proposes stories, assigns reporters, verifies citizens, writes angle briefs. The game moment.
-version: "1.1"
+version: "1.2"
 updated: 2026-05-11
 tags: [media, active]
 effort: high
@@ -70,6 +70,28 @@ if (!r.safe) {
 Blocks are appended to `output/injection_blocks.log`. Never silently skip a flagged brief — stop and surface the match. Full regex set and source in `lib/contextScan.js` header.
 
 ## Steps
+
+### Step 0: Pre-flight Staleness Gate (S215, pipeline.14b)
+
+Before reading the 3 input documents, run the staleness gate to verify world_summary + engine_audit reflect the cycle's `/city-hall` outcomes:
+
+```bash
+node scripts/checkPostPublishStaleness.js --cycle <XX>
+```
+
+The script (engine-sheet, pipeline.14a) compares mtimes on `output/world_summary_c<XX>.md` + `output/engine_audit_c<XX>.json` against `output/production_log_city_hall_c<XX>.md`. If either derivative is older than the city-hall log, /sift is about to consume a pre-civic snapshot and miss every civic decision the cycle produced — the G-S1/G-S5 sequencing class that cost the C93 cycle real time.
+
+**Reaction when stale (same rebuild path as /post-publish Step 0):**
+
+| Stale artifact | Rebuild skill | Invocation |
+|----------------|---------------|------------|
+| `output/world_summary_c<XX>.md` | `/build-world-summary` | `/build-world-summary <XX>` |
+| `output/engine_audit_c<XX>.json` | `/engine-review` | `/engine-review <XX>` |
+| Both stale | both, in order | `/build-world-summary <XX>` THEN `/engine-review <XX>` |
+
+After rebuild, re-invoke `/sift` at Step 0. Skip the rebuild ONLY when the cycle had no `/city-hall` run by design (then document in production log). Don't ship sift proposals against stale inputs — front-page candidates land based on engine state that pre-dates civic action.
+
+**Why the gate runs here too:** /sift is the FIRST downstream consumer of world_summary + engine_audit. /post-publish is the LAST. Catching staleness at /sift saves an entire edition's worth of cycle work; catching it at /post-publish is the safety net.
 
 ### Step 1: Extract Threads
 

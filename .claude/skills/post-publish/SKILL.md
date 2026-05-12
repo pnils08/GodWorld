@@ -98,7 +98,26 @@ Compares mtimes of derivative artifacts (`output/world_summary_c<XX>.md`, `outpu
 
 **Behavior:** advisory only — prints `STALE: <artifact>_c<XX> built BEFORE /city-hall ran — civic decisions may not be reflected. Re-run /build-world-summary before continuing.` per stale artifact and exits 0. No blocking. The rebuild trigger is a separate workflow (pipeline.14b, research-build).
 
-**Reaction when stale:** stop, re-run `/build-world-summary` (or the equivalent rebuild path for the flagged artifact), then re-enter /post-publish at Step 0 for a clean pass. Skip only if you've already accounted for the stale state intentionally (e.g., the cycle had no /city-hall run by design).
+**Reaction when stale — explicit rebuild paths (S215, closes pipeline.14b):**
+
+Per stale artifact, run the corresponding rebuild skill BEFORE continuing /post-publish:
+
+| Stale artifact | Rebuild skill | Invocation |
+|----------------|---------------|------------|
+| `output/world_summary_c<XX>.md` | `/build-world-summary` | `/build-world-summary <XX>` |
+| `output/engine_audit_c<XX>.json` | `/engine-review` | `/engine-review <XX>` |
+| Both stale | both, in order | `/build-world-summary <XX>` THEN `/engine-review <XX>` (world summary feeds engine review framing per /sift Step 1 line 35) |
+
+After rebuild, re-invoke `/post-publish` at Step 0. The staleness gate should now report silent (fresh) and the skill continues from Step 1. If the staleness gate STILL reports STALE after rebuild, the rebuild skill itself failed (file wasn't written, exit code non-zero, or path mismatch) — investigate before continuing; do NOT skip with the intentional-stale carve-out unless you can name the reason.
+
+**Intentional-stale carve-out:** skip rebuild ONLY when:
+- The cycle had no `/city-hall` run by design (no civic decisions to fold in)
+- The current `/post-publish` invocation is an emergency backfill on an already-canonized artifact (rare)
+- Mike explicitly directs proceeding without rebuild
+
+In all three carve-out cases, document the rationale in the production log §Step 0 entry. Don't ship silently with stale framing.
+
+**Why rebuild is operator-invoked, not script-invoked:** /build-world-summary and /engine-review are model skills (require Claude Code skill invocation), not deterministic scripts. The staleness gate at Step 0 is deterministic (mtime comparison); the rebuild path is model territory. Engine-sheet handled the gate (pipeline.14a, `lib/staleness.js` + `scripts/checkPostPublishStaleness.js`); research-build handles the rebuild trigger documentation (this section, pipeline.14b).
 
 **Verification gate:** exit 0 always. Stale → WARN lines printed. Fresh → silent. Missing baseline (no /city-hall log) → silent. Missing artifact → silent.
 

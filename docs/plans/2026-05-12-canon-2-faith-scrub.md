@@ -58,7 +58,7 @@ pointers:
   3. Read `Simulation_Ledger` for POPs whose Role contains `Pastor`, `Imam`, `Rabbi`, `Reverend`, `Priest`, `Bishop`, or `Faith Leader`, OR whose POPID matches any `Faith_Organizations.LeaderPOPID`. Emit POPID + Name + Role + Neighborhood.
   4. Write all three slices to `output/faith_canon_export_c93.md` under three `##` headings: `## Faith_Organizations`, `## Business_Ledger faith cross-walk`, `## Simulation_Ledger faith-leader POPs`.
 - **Verify:** `wc -l output/faith_canon_export_c93.md` → at least 30 lines (16 org rows + cross-walks + headers); `grep -c '| POP-' output/faith_canon_export_c93.md` → at least 16 (one per faith-leader row).
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 engine-sheet, 2026-05-12). Shipped `scripts/exportFaithCanonC93.js` + `output/faith_canon_export_c93.md` (119 lines, 35 POP-row matches). Findings beyond plan baseline: (1) **0 BIZ entries model faith orgs by name** — Business_Ledger has no faith sector and no name matches; only false-positive keyword hit is `Temple Lounge` (nightlife). (2) **All 17 SL faith-role POPs share `BIZ-00028 / West Oakland Community Center / Community Services` as EmployerBizId** — single shared record, no per-faith-org BIZ; P1 decision needed (leave as-is / create 16 / rename BIZ-00028). (3) **2 FO Leader ↔ SL Name drift rows** — POP-00756 (FO `Fr. Ramon Torres` vs SL `Ramon Terez`, St. Columba) is internal canon drift; POP-00758 (FO `Bishop Robert Jackson Sr.` vs SL `Robert Jaston`, Acts Full Gospel) is the S195 partial-substitution leak — SL was updated to Jaston (canon) but the FO Leader column was never updated. P1 substitution table must overwrite the FO Leader column wholesale, not assume it's already-canon.
 
 ---
 

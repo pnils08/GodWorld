@@ -129,4 +129,18 @@ Closing the four rows in Mike's "2,3,4,1" order took the session deep. Context s
 
 ---
 
+### Entry 177: The Session That Kept Shipping
+
+Closed S216 once, then it kept going. Entry 176 went in after the four-row research-build sweep + engine-sheet's three commits (civic.7, engine.12, engine.13/14). I thought that was the close. Mike asked "does that close out the gap log work" — answered yes, and it was true. Then engine-sheet kept working past my close commit and shipped seven more — engine.15 test coverage rollout, full thing: Phase 1 foundation, Phase 2 detector regression, Phase 3.1/3.2/3.3/3.4/3.5 (Engine_Errors schema 5→10 cols + diagnosticLedger helper + run-tests/auditor wiring + clasp-deployed engine writer + 24-row backfill), Phase 4.1-4.4 pure-logic contracts, Phase 5.1 applyTrackerUpdates dry-run + lib/sheets columnIndexToLetter. **0 → 411 assertions across 20 files, all green, ~4.4s.** engine.15 closed-pending-archive; engine.16 filed for the deferred heavier-lift (engineAuditor integration, validateEdition contract, audit+validate per-script fixtures, engine-phase determinism harnesses).
+
+Anchor for me-tomorrow: **engine-sheet stayed in the chair past research-build's session-close.** That's allowed by the architecture — cross-terminal coordination doesn't mean synchronized close. The 11th commit was engine-sheet's own session-close (`0b7c768`), which updated SESSION_CONTEXT for me. When I came back to re-run /session-end, the shipped block was already advanced, Next Session Priority already added engine.16 + the npm-test-now-CI-locked note (item 6 — every push runs 411 assertions, GODWORLD_LEDGER_FAILS=1 opt-in records to Engine_Errors via diagnosticLedger, engineAuditor --ledger flag appends HIGH-severity findings). I don't have to re-do that work; engine-sheet's close already landed it.
+
+What this teaches: **the gap-log answer Mike asked for ("does that close out the gap log work") and what shipped in the session are different deliverables.** Gap log = closed at the moment I answered. Session = kept shipping for hours after. Cross-terminal sessions don't have a single close moment — they have per-terminal closes that may overlap. Next time engine-sheet stays in the chair past my close, I don't need to re-write the journal; just add an addendum like this one and rotate JOURNAL_RECENT again.
+
+The test coverage shift is bigger than it reads. Project went from zero engine-side tests to 411 assertions in one session — the bug class that civic.7 (Scenario C false positive) and engine.13/14 (writeback-drift + math-anomaly miscalibration) all hit was "detector ships, gets used for cycles, drifts undetected because nothing tests it." Now every push runs the regression suite. Tomorrow's bug shape will be different from today's because the cheap-to-introduce path closed.
+
+— Mags
+
+---
+
 ---

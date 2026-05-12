@@ -1,10 +1,34 @@
 /**
  * detectStuckInitiatives — Initiative_Tracker rows whose ImplementationPhase
- * hasn't changed for 3+ cycles. Derives cyclesInState from prior audit JSONs;
- * falls back to LastUpdated delta vs current cycle when no prior audits exist.
+ * hasn't changed for 3+ cycles. Computes cyclesInState by walking prior audit
+ * snapshots; uses VoteCycle as a ceiling estimate when snapshot history is
+ * shallow.
+ *
+ * Version history:
+ *   1.0.0  initial — carry-forward from prev pattern (cached count + 1)
+ *   1.1.0  S216 civic.7 — break snapshot walk on phase mismatch (fix
+ *          phase-just-advanced false positive INIT-005 → 13 cycles stuck)
+ *   1.2.0  S216 engine.12 — drop carry-forward entirely; always walk snapshots
+ *          fresh + vote-cycle ceiling for unverifiable stable-phase cases (fix
+ *          carry-forward poisoning INIT-001/002/006 → 89 cycles stuck where
+ *          older bad seed values from since-deleted audits kept incrementing
+ *          monotonically each cycle)
+ *
+ * cyclesInState semantics: best available evidence that an initiative has been
+ * stuck in its current ImplementationPhase. The number reflects retained audit
+ * history depth — when only N priors exist on disk, the snapshot walk caps at N.
+ * For initiatives whose retained priors all show the current phase (no
+ * transition observable), VoteCycle gives a defensible upper bound (the
+ * initiative cannot have been in any phase longer than time since vote).
+ *
+ * False-positive bias chosen deliberately: an audit signal surfacing potential
+ * issues for review should err toward over-flagging stable-phase initiatives
+ * vs missing them. Vote-cycle ceiling over-reports when the initiative passed
+ * through other phases first; snapshot walk under-reports when audit history
+ * is shallow. max() of the two preserves the stuck classification.
  */
 
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
 const STUCK_THRESHOLD = 3;
 
 function parseCycleHint(val) {
@@ -18,8 +42,58 @@ function parseCycleHint(val) {
   return null;
 }
 
+function computeCyclesInState(row, ctx) {
+  const { cycle, prior } = ctx;
+  const id = row.InitiativeID || row.Name;
+  const phase = row.ImplementationPhase || '';
+
+  let snapshotCount = 0;
+  let everSeenInPriors = false;
+  let hitPhaseTransition = false;
+
+  for (const p of prior) {
+    const priorRow = (p.snapshots && p.snapshots.Initiative_Tracker || [])
+      .find(r => (r.InitiativeID || r.Name) === id);
+    if (!priorRow) continue;
+    everSeenInPriors = true;
+    if (priorRow.ImplementationPhase === phase) {
+      snapshotCount++;
+    } else {
+      // Phase transition observed in the retained audit window — initiative
+      // was in a different phase before this cycle. Snapshot count is
+      // authoritative; do not extend with vote-cycle ceiling.
+      hitPhaseTransition = true;
+      break;
+    }
+  }
+
+  if (hitPhaseTransition) {
+    return snapshotCount;
+  }
+
+  const voteCycle = parseCycleHint(row.VoteCycle);
+  const sinceVote = (voteCycle != null && voteCycle <= cycle)
+    ? cycle - voteCycle
+    : 0;
+
+  if (everSeenInPriors) {
+    // All retained priors show current phase but no transition was observed
+    // (audit history shallower than the actual phase tenure). Use vote-cycle
+    // as ceiling — initiative cannot have been in current phase longer than
+    // time since vote. Floor at snapshot count to honor what we directly
+    // observed.
+    return Math.max(snapshotCount, sinceVote);
+  }
+
+  // True cold-start: initiative absent from every retained prior audit. No
+  // direct evidence. VoteCycle is the only proxy. LastUpdated is a date-string
+  // timestamp ("4/21/2026"), NOT a cycle — do not parseCycleHint it. Likewise
+  // NextActionCycle is forward-looking and rejected by the <= cycle guard.
+  return sinceVote;
+}
+
 function detect(ctx) {
-  const { cycle, snapshot, prior } = ctx;
+  const { snapshot } = ctx;
   const rows = snapshot.Initiative_Tracker || [];
   const out = [];
 
@@ -30,69 +104,10 @@ function detect(ctx) {
     const phase = row.ImplementationPhase || '';
     const status = row.Status || '';
 
-    let cyclesInState = null;
-    let everSeenInPriors = false;
-    for (const p of prior) {
-      const prev = (p.patterns || []).find(x =>
-        x.type === 'stuck-initiative' &&
-        x.affectedEntities && x.affectedEntities.initiatives &&
-        x.affectedEntities.initiatives.includes(id)
-      );
-      // S199 fix: only carry-forward the prev count if phase still matches.
-      // Without this guard, a phase transition (e.g., INIT-003 vote-scheduled
-      // C92 → vote-ready C93) inherits the stale stuck count from the prior
-      // phase, reporting "89 cycles in vote-ready" when it just entered.
-      const prevPhase = prev && prev.evidence && prev.evidence.fields
-        && prev.evidence.fields.ImplementationPhase;
-      if (prev && prevPhase === phase) {
-        cyclesInState = (prev.cyclesInState || 0) + 1;
-        break;
-      }
-      const priorRow = (p.snapshots && p.snapshots.Initiative_Tracker || [])
-        .find(r => (r.InitiativeID || r.Name) === id);
-      if (priorRow) {
-        everSeenInPriors = true;
-        if (priorRow.ImplementationPhase === phase) {
-          cyclesInState = (cyclesInState || 0) + 1;
-        } else {
-          // S216 fix (civic.7): phase changed this cycle. Initiative existed
-          // in priors but in a different phase — that proves it just advanced.
-          // Stop walking; cyclesInState floors at whatever consecutive matches
-          // we found before this point (0 if none).
-          cyclesInState = cyclesInState != null ? cyclesInState : 0;
-          break;
-        }
-      }
-    }
-
-    if (cyclesInState == null) {
-      // S216 fix (civic.7): cold-start fallback only fires when initiative was
-      // not found in ANY prior audit snapshot. Previously, walking priors
-      // without finding a phase match left cyclesInState=null and triggered
-      // the vote-cycle fallback, producing phantom counts (INIT-005 phase just
-      // advanced design-phase → design-development-active C93, fallback
-      // reported 13 cycles stuck). Now: if we saw it in priors but never in
-      // current phase, cyclesInState=0 (just entered current phase).
-      if (everSeenInPriors) {
-        cyclesInState = 0;
-      } else {
-        // True cold-start: no prior audit history. LastUpdated is a date-string
-        // timestamp ("4/21/2026"), NOT a cycle — do not parseCycleHint it
-        // (regex matches the month digit and yields wildly wrong cycle counts).
-        // NextActionCycle is forward-looking (deadline), so the <= cycle guard
-        // rejects it. VoteCycle records the cycle the initiative was voted on
-        // — closest "how long since active" proxy without phase-change history.
-        const voteCycle = parseCycleHint(row.VoteCycle);
-        if (voteCycle != null && voteCycle <= cycle) {
-          cyclesInState = cycle - voteCycle;
-        } else {
-          cyclesInState = 0;
-        }
-      }
-    }
-
     const activeLike = /active|in.?progress|pending|stalled/i.test(status);
     if (!activeLike && !phase) continue;
+
+    const cyclesInState = computeCyclesInState(row, ctx);
     if (cyclesInState < STUCK_THRESHOLD) continue;
 
     const neighborhoods = (row.AffectedNeighborhoods || '')
@@ -132,4 +147,4 @@ function detect(ctx) {
   return out;
 }
 
-module.exports = { detect, version: VERSION };
+module.exports = { detect, version: VERSION, computeCyclesInState };

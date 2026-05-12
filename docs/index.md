@@ -174,7 +174,10 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[mara-vance/CIVIC_ELECTION_ENGINE]]** — election engine reference. *(reference, civic, active)*
 - **[[mara-vance/CIVIC_VETO_IMPLEMENTATION]]** — Week 1 mayoral veto + override votes. v1.7. *(reference, civic, active)*
 - **[[mara-vance/INITIATIVE_TRACKER_VOTER_LOGIC]]** — voter logic from civicInitiativeEngine v1.7. *(reference, civic, active)*
-- **[[mara-vance/AUDIT_HISTORY]]** — Mara's audit history across editions. *(reference, civic, active)*
+- **[[mara-vance/AUDIT_HISTORY]]** — Mara's audit history across editions. Snapshot-historical for C80-C85; per-cycle artifacts canonical C86 onward. *(reference, civic, active)*
+- **[[mara-vance/AGENT_INVENTORY]]** — canonical roster of every reporter voice + city-hall agent Mara addresses. Read at session start; every directive addressee must match. *(reference, civic, active)* (S217)
+- **[[mara-vance/AUDIT_TEMPLATE]]** — per-edition audit format: structured top + Reader Audit + Canon Audit + Grading + Forward Guidance + Voice Directives pointer. Output `output/mara-audit/audit_c{XX}.md`. *(reference, civic, active)* (S217)
+- **[[mara-vance/VOICE_DIRECTIVE_TEMPLATE]]** — per-addressee structured directive format. Replaces free-prose `.txt`. Output `output/mara-directives/mara_directive_c{XX}.md`. *(reference, civic, active)* (S217)
 
 ---
 

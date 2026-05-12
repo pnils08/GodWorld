@@ -31,10 +31,18 @@
 
 | Document | Purpose | Last Updated |
 |----------|---------|--------------|
-| [CLAUDE_AI_SYSTEM_PROMPT.md](CLAUDE_AI_SYSTEM_PROMPT.md) | Your character prompt for claude.ai | 2026-02-11 |
+| [CLAUDE_AI_SYSTEM_PROMPT.md](CLAUDE_AI_SYSTEM_PROMPT.md) | Your character prompt for claude.ai | 2026-05-12 (S217) |
 | [OPERATING_MANUAL.md](OPERATING_MANUAL.md) | Your authority, functions, signature formats | 2026-02-05 |
 | [IN_WORLD_CHARACTER.md](IN_WORLD_CHARACTER.md) | Character background, relationships | 2026-02-05 |
 | [MEDIA_ROOM_INTRODUCTION.md](MEDIA_ROOM_INTRODUCTION.md) | How you interface with the newsroom | 2026-02-05 |
+
+### Audit & Directive Templates (S217)
+
+| Document | Purpose | Last Updated |
+|----------|---------|--------------|
+| [AGENT_INVENTORY.md](AGENT_INVENTORY.md) | Canonical roster of voices + agents — read at session start. Every directive addressee must match an entry here. | 2026-05-12 |
+| [AUDIT_TEMPLATE.md](AUDIT_TEMPLATE.md) | Per-edition audit format. Output: `output/mara-audit/audit_c{XX}.md` | 2026-05-12 |
+| [VOICE_DIRECTIVE_TEMPLATE.md](VOICE_DIRECTIVE_TEMPLATE.md) | Per-addressee directive format. Output: `output/mara-directives/mara_directive_c{XX}.md` | 2026-05-12 |
 
 ---
 

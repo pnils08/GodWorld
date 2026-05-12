@@ -41,10 +41,23 @@ If Mike says "fix the pipeline" → search `"pipeline fix architecture city-hall
 | **claude-mem** | WHAT happened — decisions, code, failures | `search` → `get_observations` |
 | **Supermemory `mags`** | WHY — reasoning, conversation context | `search-memory.cjs --user "query"` |
 | **Supermemory `bay-tribune`** | World canon — published editions, citizens | `npx supermemory search "query" --tag bay-tribune` |
-| **Supermemory `world-data`** | City state — citizens, businesses, faith, demographics | `npx supermemory search "query" --tag world-data` |
+| **Supermemory `world-data`** | City state — citizens, businesses, faith, demographics. Partitioned into 8 domain sub-tags. | `npx supermemory search "query" --tag world-data` (broad) or `--tag wd-faith --mode hybrid --threshold 0.3` (narrow) |
 | **Supermemory `super-memory`** | Between-session bridge — auto-saves, Discord conversations, Moltbook, nightly reflections | `search-memory.cjs --repo "query"` or `npx supermemory search "query" --tag super-memory` |
 
 Full docs: `docs/SUPERMEMORY.md`. Container config: `.claude/.supermemory-claude/config.json`.
+
+**`world-data` sub-tags (S183, 2026-04-28):** every wd-* doc also carries the `world-data` parent — sub-tags are filters within the umbrella, not separate containers. The GodWorld MCP tools query the narrow sub-tags; CLI search defaults return zero hits against the short structured cards, so narrow CLI queries need `--mode hybrid --threshold 0.3`.
+
+| Sub-tag | What's in it | Narrow MCP tool |
+|---------|--------------|------------------|
+| `wd-citizens` | Per-POP citizen cards | `lookup_citizen(name)` |
+| `wd-business` | Per-BIZ business cards | `lookup_business(name)` |
+| `wd-faith` | Per-faith-org cards | `lookup_faith_org(name)` |
+| `wd-cultural` | Per-cultural-figure cards | `lookup_cultural(name)` |
+| `wd-neighborhood` | Per-neighborhood cards | `get_neighborhood_state(name)` |
+| `wd-initiative` | Per-initiative cards | `lookup_initiative(name)` (currently broad) |
+| `wd-player-truesource` | Per-player cards | `get_roster(team)` (sheet-backed) |
+| `wd-summary` | Per-cycle world summary | none yet — CLI only |
 
 ## GodWorld MCP (S137b) — USE THIS FIRST
 

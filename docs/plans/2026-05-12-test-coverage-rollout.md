@@ -40,14 +40,17 @@ Cheapest item, unblocks everything. Acceptance: `npm test` runs all `*.test.js` 
 
 ### Phase 2 — Detector regression coverage (the missing class)
 
-Three of seven detectors covered S216. Cover the remaining four. Acceptance: every detector under `scripts/engine-auditor/` has a `*.test.js` peer.
+**Status: 2.1-2.6 done S216 (2.7 deferred).** Acceptance met: every detector under `scripts/engine-auditor/` has a `*.test.js` peer.
 
-- **2.1** `detectAnomalies.test.js` — covers the 4 cyclesInState=1 anomaly variants
-- **2.2** `detectCascadeFailures.test.js` — single failure case
-- **2.3** `detectImprovements.test.js` — covers both improvement detection paths
-- **2.4** `detectProductionImbalance.test.js` — covers both production-imbalance variants
-- **2.5** `detectRepeatingEvents.test.js` — RECUR_WINDOW recurrence detection
-- **2.6** `engineAuditor.integration.test.js` — fixture audit JSON in, expected pattern set out (covers detector orchestration)
+- **2.1** ✅ `detectAnomalies.test.js` — 17 assertions across 4 subchecks (citizen-income spike/drop, approval-flip, crime-outlier 3σ, migration-shift) + edge cases (< 3 priors, empty priors, peerShare confidence routing)
+- **2.2** ✅ `detectCascadeFailures.test.js` — 9 assertions (all silent → high, half silent → medium, healthy → no pattern, events count as signal, passive initiative skipped, empty AffectedNeighborhoods skipped)
+- **2.3** ✅ `detectImprovements.test.js` — 9 assertions (phase-advance, sentiment-rise, threshold gates, no-prior, new-initiative)
+- **2.4** ✅ `detectProductionImbalance.test.js` — 12 assertions across both subchecks (domain-skew high/medium/no-skew + single-domain edge; migration-without-economic + suppression by economic event + count-threshold)
+- **2.5** ✅ `detectRepeatingEvents.test.js` — 10 assertions (3+ cycle recurrence + stuck initiative high; active matching → suppressed; no matching domain → medium; below RECUR_WINDOW → none; empty digest; short-token filtering)
+- **2.6** ✅ `detectIncoherence.test.js` — 10 assertions (implemented health vs low sentiment, implemented crime vs high crime, healthy → no incoherence, council-vs-district approval-flip, non-implemented skipped, unmapped domain skipped). Detector was missing from original plan — added in same batch.
+- **2.7** Deferred to subsequent session: `engineAuditor.integration.test.js` — fixture audit JSON in, expected pattern set out. Requires environment refactor — `engineAuditor.js main()` does live sheet read via `lib/sheets.js`. Per-detector unit tests now cover load-bearing logic; integration test remains valuable for orchestration regression but is a higher-cost ship.
+
+**Net result S216 Phase 2:** 6 new test files, 67 new assertions. Total project test surface: 13 test files, 196 assertions, all green under `npm test` (~1s).
 
 ### Phase 3 — Engine_Errors expansion → Diagnostic_Ledger
 
@@ -115,3 +118,4 @@ Phase 1 ships first (foundation). Phase 2 + 3 can ship in parallel sessions (no 
 ## Changelog
 
 - 2026-05-12 — Plan filed (S216 engine-sheet). Phase 1 ships in same session: scripts/run-tests.js + package.json test script + lint.yml test job. Phases 2-7 picker-grab for subsequent engine-sheet sessions.
+- 2026-05-12 — Phase 2 ships in same session (S216 engine-sheet continuation). 2.1-2.6 complete, 2.7 deferred (engineAuditor.integration.test.js needs lib/sheets mocking refactor first). 6 new test files, 67 new assertions. Total: 13 files / 196 assertions / all green. Detector regression class fully covered — every `scripts/engine-auditor/detect*.js` has a `*.test.js` peer. Bonus: `detectIncoherence.js` was missing from the original plan; covered in same batch.

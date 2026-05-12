@@ -221,7 +221,7 @@ pointers:
   1. Run `node scripts/buildFaithCards.js --apply --wipe-old`.
   2. Confirm the wipe pass finds the legacy real-name cards and deletes them; the write pass produces 16 new cards under the substituted names.
 - **Verify:** Run output shows `Written: 16` and `DELETE results: 16 ok / 0 failed` (or matching count if any duplicates were resident). `mcp__godworld__lookup_faith_org` for each new org name returns the new card; lookup for `"Acts Full Gospel"` returns zero results.
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 engine-sheet, 2026-05-12). **Measure-twice trap caught pre-write:** the existing `wipeOldFaithCards` matched only against current FO rows (now canon-named), so plain `--apply --wipe-old` would have left all 16 legacy real-name cards in place and written 16 canon cards alongside them (32 docs / contamination persisted). Fix shipped same commit: `wipeOldFaithCards` extended to union `allowedOrgs` with `canonBlocklist.loadFaithBlocklist().orgs` (17 names) — durable contract change so future Tier-3 rename scrubs work out-of-the-box. Defensive guard added: optional `EXPECT_WIPE_MATCHES=N` env var aborts pre-DELETE if match count differs. Ran `EXPECT_WIPE_MATCHES=16 node scripts/buildFaithCards.js --apply --wipe-old`: enumerated 1306 world-data candidates, target set size 33 (16 canon + 17 blocklist), GET pass matched exactly 16 legacy cards, EXPECT guard satisfied, `DELETE 16/16 ok=16 failed=0`, 30s indexing settle, `Written: 16 | Errors: 0`. Independent re-probe (/v3/documents/list + GET per doc) confirms `wd-faith` now 16 docs, 0 blocklist hits, all 16 canon org names present. bay-tribune cross-contamination filter stripped 41 raw bay-tribune hits before write (paper-of-record isolation intact).
 
 #### Task 5.2: Scoped wipes for affected business / citizen cards
 
@@ -233,7 +233,7 @@ pointers:
   2. For every LeaderPOPID touched in Task 3.2, re-run `buildCitizenCards.js --apply --popid <POPID>` so the wd-citizens card reflects the new leader name.
   3. Jaston POP-00758: confirm card already canonical, skip unless Role text changed.
 - **Verify:** MCP `lookup_citizen` against the 15 touched POPIDs returns updated names; bay-tribune (separate container) untouched. Business-side verification dropped — no business cards changed.
-- **Status:** [ ] not started — citizen-side only
+- **Status:** [x] complete (S218 engine-sheet, 2026-05-12). buildBusinessCards step skipped per P3.3 N/A ruling — no per-faith-org BIZ entries exist; shared BIZ-00028 not in scope. buildCitizenCards step shipped: `node scripts/buildCitizenCards.js --popid-range POP-00753:POP-00768 --apply --wipe-old --no-quality-gate` covered the full 16-leader range (POP-00758 Jaston included for idempotent re-write — accepting redundancy over a split range; same canon name + same SL data = effective no-op). Pre-flight probe confirmed 15 stale + 1 already-canon. `--no-quality-gate` combined with `--wipe-old` extends the wipe to already-tagged wd-citizens per S183 script docstring. Run: matched 16, deleted 16, wrote 16, 0 errors; bay-tribune cross-tag filter stripped 9 raw hits (paper-of-record intact). Independent re-probe confirms all 16 wd-citizens cards canon-clean: Eunice Marston / Ophelia Brenner / Antoine Vermeer / Ramon Solano / Daniel Han / Robert Jaston / Naomi Sterling / Yael Bauer / Idris Karim / Aziz Rahimi / Kenji Tanaka / Tao Lee / Anand Krishnamurthy / Manjit Singh / Miriam Goldstein / Eleanor Bishop. 0 blocklist hits.
 
 ---
 

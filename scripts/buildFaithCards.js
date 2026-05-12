@@ -240,6 +240,18 @@ async function wipeOldFaithCards(faiths) {
 
   var allowedOrgs = {};
   faiths.forEach(function(f) { allowedOrgs[f.organization] = true; });
+  // Union with canonBlocklist legacy real-org names so wipe-old catches
+  // previously-shipped contamination after a Tier-3 rename scrub (canon.2 P5).
+  // Without this, wipe matches only what we're about to rewrite — a rename
+  // leaves the legacy card in place and the rewrite lands a sibling, doubling
+  // the docs and preserving contamination in retrieval.
+  try {
+    var legacy = require('../lib/canonBlocklist').loadFaithBlocklist().orgs;
+    legacy.forEach(function(n) { allowedOrgs[n] = true; });
+    console.log('[wipe-old] extended with ' + legacy.size + ' canonBlocklist legacy org names');
+  } catch (e) {
+    console.log('[wipe-old] canonBlocklist unavailable, proceeding with current-rows-only allowedOrgs (' + e.message + ')');
+  }
   console.log('[wipe-old] target Organization set size: ' + Object.keys(allowedOrgs).length);
 
   console.log('[wipe-old] GET pass to extract org from content (concurrency=' + WIPE_GET_CONCURRENCY + ')');
@@ -270,6 +282,17 @@ async function wipeOldFaithCards(faiths) {
     throw new Error('wipe-old: ' + emptyAfterRetry + ' docs returned empty content after retry. Refusing to apply with incomplete data.');
   }
   console.log('[wipe-old] matches to DELETE: ' + matches.length);
+  matches.forEach(function(m) { console.log('  match: ' + m.id + ' | ' + m.organization); });
+
+  // Optional guard: caller can set EXPECT_WIPE_MATCHES=N to abort pre-DELETE
+  // if the match count differs (defensive paranoia for destructive runs).
+  if (process.env.EXPECT_WIPE_MATCHES) {
+    var expected = parseInt(process.env.EXPECT_WIPE_MATCHES, 10);
+    if (matches.length !== expected) {
+      throw new Error('wipe-old: EXPECT_WIPE_MATCHES=' + expected + ' but matches.length=' + matches.length + ' — aborting before DELETE.');
+    }
+    console.log('[wipe-old] EXPECT_WIPE_MATCHES guard satisfied (' + expected + ' === ' + matches.length + ')');
+  }
 
   console.log('[wipe-old] DELETE pass');
   var deleted = 0;

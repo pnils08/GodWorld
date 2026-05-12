@@ -480,12 +480,22 @@ for (var ctn = 0; ctn < continuityNotes.length; ctn++) {
 // DISPLAY SUMMARY
 // ═══════════════════════════════════════════════════════════════════════════
 
-console.log('\nWIKI EXTRACTION SUMMARY:');
-console.log('  Citizens found: ' + citizenNames.length);
-console.log('    Cross-section: ' + citizenNames.filter(function(n) {
+// G-P2 (S215): label rename + headline total. Pre-fix, the line read
+// `Citizens found: 0` immediately above `Returning: 48 / New: 0`, which was
+// contradictory at a glance. The `citizenNames` array actually counted only
+// citizens reached via the inline `Names Index:` per-article scan (the
+// cross-section bucket); the standalone NAMES INDEX block + returning/new
+// resolution happened in a separate pass below. Reusing the same label for
+// a sub-bucket count read as a bug.
+var crossSectionCount = citizenNames.filter(function(n) {
   return citizenAppearances[n].articles.map(function(a) { return a.section; })
     .filter(function(s, i, arr) { return s && arr.indexOf(s) === i; }).length >= 2;
-}).length);
+}).length;
+console.log('\nWIKI EXTRACTION SUMMARY:');
+console.log('  Citizens total: ' + (returningCitizens.length + newCitizens.length) +
+  ' (' + returningCitizens.length + ' returning + ' + newCitizens.length + ' new)');
+console.log('  Cross-section citizens (article-attributed scan): ' + citizenNames.length);
+console.log('    of those, in 2+ sections: ' + crossSectionCount);
 console.log('  Returning: ' + returningCitizens.length);
 console.log('  New: ' + newCitizens.length);
 console.log('  Storylines: ' + storylines.length);

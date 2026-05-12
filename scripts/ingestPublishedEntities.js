@@ -676,7 +676,25 @@ async function main() {
   }
 
   if (parsedCitizens.length === 0 && parsedBusinesses.length === 0) {
+    // G-P10 (S215): write a sentinel report instead of silently exiting.
+    // Pre-fix the script exited cleanly with no filesystem evidence, so
+    // future debug sessions saw "no JSON" and assumed the script never ran.
+    const outPath = path.join(__dirname, '..', 'output',
+      'intake_published_entities_c' + cycle + '_' + slug + '.json');
+    const outDir = path.dirname(outPath);
+    if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+    const sentinel = {
+      timestamp: new Date().toISOString(),
+      source: path.basename(fullPath),
+      type, cycle, slug,
+      mode: dryRun ? 'dry-run' : 'apply',
+      skipReason: '0 entities — pure-atmosphere artifact (no NAMES INDEX content + no CUL fallback hits). Script ran and finished cleanly; nothing to ingest.',
+      citizens: { parsed: 0, matched: [], candidates: [], ambiguous: [], phantom: [], culturalOnly: [], appended: [] },
+      businesses: { parsed: 0, matched: [], candidates: [], mismatches: [], appended: [] },
+    };
+    fs.writeFileSync(outPath, JSON.stringify(sentinel, null, 2));
     console.log('0 entities — pure-atmosphere artifact. Nothing to ingest.');
+    console.log('Sentinel report written: ' + outPath);
     process.exit(0);
   }
 

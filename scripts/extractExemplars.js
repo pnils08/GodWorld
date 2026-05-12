@@ -37,14 +37,58 @@ const DESK_HEADERS = {
 // Grades that qualify for exemplar extraction
 const EXEMPLAR_THRESHOLD = ['A', 'A-'];
 
+// Annex markers — once an edition crosses into the annex region (names index,
+// civic officials block, sports figures roster, citizen usage log, etc.) the
+// remainder is metadata, not article content. Section-header strings can
+// reappear inside the annex (e.g. `CIVIC / GOVERNMENT` block under NAMES INDEX),
+// which used to cause the loop to push a second `civic` section that had no
+// bylines — producing the "civic: A — extracted ... / civic: A — no articles
+// found" double-iteration log (G-P20, S215).
+const ANNEX_MARKERS = [
+  'NAMES INDEX',
+  'CIVIC OFFICIALS QUOTED',
+  'SPORTS FIGURES:',
+  'CITIZEN USAGE LOG',
+  'BUSINESSES NAMED',
+  'ARTICLE TABLE',
+  'STORYLINES UPDATED',
+  'CONTINUITY NOTES',
+];
+
+function isAnnexMarker(line) {
+  for (let k = 0; k < ANNEX_MARKERS.length; k++) {
+    if (line.startsWith(ANNEX_MARKERS[k])) return true;
+  }
+  return false;
+}
+
 function extractSections(text) {
   const lines = text.split('\n');
   const sections = [];
   let currentDesk = null;
   let sectionStart = null;
+  let inAnnex = false;
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
+
+    // Once we hit the annex region, close the current section and stop.
+    // The end-of-file fallback below would otherwise still find a partial
+    // section in the annex.
+    if (isAnnexMarker(line)) {
+      if (currentDesk && sectionStart !== null) {
+        sections.push({
+          desk: currentDesk,
+          startLine: sectionStart,
+          endLine: i - 1,
+          text: lines.slice(sectionStart, i).join('\n')
+        });
+        currentDesk = null;
+        sectionStart = null;
+      }
+      inAnnex = true;
+      break;
+    }
 
     for (const [header, desk] of Object.entries(DESK_HEADERS)) {
       if (line === header || line.startsWith(header)) {
@@ -63,6 +107,8 @@ function extractSections(text) {
       }
     }
   }
+
+  if (inAnnex) return sections;
 
   // Close last section
   if (currentDesk && sectionStart !== null) {

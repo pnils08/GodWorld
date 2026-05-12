@@ -70,13 +70,6 @@ function splitName(name) {
   return { first: parts[0], last: parts.slice(1).join(' ') };
 }
 
-// A1-letter helper (1-indexed col → letter; supports cols past Z)
-function colLetter(n) {
-  var s = '';
-  while (n > 0) { var r = (n - 1) % 26; s = String.fromCharCode(65 + r) + s; n = Math.floor((n - 1) / 26); }
-  return s;
-}
-
 (async function main() {
   var subs = parseSubstitutionTable();
   console.log('[canon.2 P3] Parsed substitution rows: ' + subs.length);

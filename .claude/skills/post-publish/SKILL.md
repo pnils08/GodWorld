@@ -37,6 +37,7 @@ Flags:
 
 | Step | edition | interview | supplemental | dispatch |
 |------|---------|-----------|--------------|----------|
+| 0 staleness gate | ✓ | ✓ | ✓ | ✓ |
 | 1a wiki ingest | ✓ | ✓ | ✓ | ✓ |
 | 1b text ingest | ✓ | ✓ (article + transcript) | ✓ | ✓ |
 | 2a citizen cards | ✓ | ✓ | ✓ | ✓ |
@@ -84,6 +85,22 @@ Several substeps are independent and can run concurrently to compress wall time.
 Wall-time saving on edition runs: ~60-90s (Step 2a citizen cards is the slowest substep; running 2c + 4 against its wall time recovers their duration).
 
 ## Steps
+
+### Step 0: Pre-flight Staleness Gate (S215)
+
+```bash
+node scripts/checkPostPublishStaleness.js --cycle <XX>
+```
+
+Compares mtimes of derivative artifacts (`output/world_summary_c<XX>.md`, `output/engine_audit_c<XX>.json`) against the authoritative baseline (`output/production_log_city_hall_c<XX>.md`). If either derivative is older than the city-hall log, that derivative was built BEFORE /city-hall ran — downstream skills (sift, post-publish, edition-print) would consume a pre-civic snapshot and the cycle's civic decisions would silently drop from desk-agent inputs.
+
+**Closes pipeline.14a (S215).** Triggered by C93: world_summary built May 1, /city-hall ran days later, edition consumed stale summary, five gap-log entries surfaced the same sequencing class (G-S1 / G-S5 / G-P3 / G-PR3 / G-7).
+
+**Behavior:** advisory only — prints `STALE: <artifact>_c<XX> built BEFORE /city-hall ran — civic decisions may not be reflected. Re-run /build-world-summary before continuing.` per stale artifact and exits 0. No blocking. The rebuild trigger is a separate workflow (pipeline.14b, research-build).
+
+**Reaction when stale:** stop, re-run `/build-world-summary` (or the equivalent rebuild path for the flagged artifact), then re-enter /post-publish at Step 0 for a clean pass. Skip only if you've already accounted for the stale state intentionally (e.g., the cycle had no /city-hall run by design).
+
+**Verification gate:** exit 0 always. Stale → WARN lines printed. Fresh → silent. Missing baseline (no /city-hall log) → silent. Missing artifact → silent.
 
 ### Step 1: Bay-Tribune Ingest — Canon
 
@@ -372,6 +389,7 @@ The doc IDs embedded here are the query keys. Next cycle's sift reads this log f
 
 Per-type checklist applicability follows the matrix in §Usage. Edition runs all rows; non-edition types skip the `—` rows.
 
+- [ ] Staleness gate clean OR rebuild done before Step 1 (`node scripts/checkPostPublishStaleness.js --cycle <XX>`)
 - [ ] Wiki ingest complete (entity count)
 - [ ] Text ingested (doc IDs — two for interview)
 - [ ] Citizen cards refreshed

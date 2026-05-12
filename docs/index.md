@@ -121,6 +121,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[media/intake]]** — edition intake section reference. *(reference, media, active)*
 
 ### Newsroom architecture & style
+- **[[../.claude/agents/REPORTER_DESK_INDEX]]** — Reporter byline → desk-agent routing map. Single source of truth for `/sift` dispatch.json + `/write-edition` Step 1 launches. Built S215 (pipeline.16). *(reference, media, active)*
 - **[[media/AGENT_NEWSROOM]]** — Claude Code agents + skills architecture. *(reference, media, active)*
 - **[[media/MEDIA_ROOM_STYLE_GUIDE]]** — voice, data treatment, continuity, clock rules. *(reference, media, active)*
 - **[[media/TIME_CANON_ADDENDUM]]** — dual-clock system, sports time vs city time. *(reference, media, active)*

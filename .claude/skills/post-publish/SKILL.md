@@ -1,7 +1,7 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.5"
+version: "1.6"
 updated: 2026-05-03
 tags: [media, active]
 effort: high
@@ -69,6 +69,20 @@ Verify these exist before starting (path varies by `--type`):
 
 For `--type interview`: companion transcript at `editions/cycle_pulse_interview-transcript_{XX}_<slug>.txt`.
 
+## Parallelization Notes (S215, closes G-P5)
+
+Several substeps are independent and can run concurrently to compress wall time. Default to running these in parallel via separate background invocations:
+
+| Group | Substeps | Constraint |
+|-------|----------|-----------|
+| **Parallel-OK** | 2a citizen cards, 2c world summary, 4 coverage ratings | No interdependency. Each writes a different surface (world-data citizens, world-data summary, sheets). Run concurrently. |
+| **Sequential after parallel group** | Step 5 (citizen+business intake) | Depends on Step 2a completion via the verification gate (NAMES INDEX presence + parsed count). |
+| **Sequential after Step 5** | Steps 6 (grade), 7 (grade history), 8 (exemplars) | Depend on Step 5's intake JSON for entity attribution. |
+| **Parallel-OK with the grade group** | Step 9 (newsroom memory), Step 10 (criteria files) | Independent of the grade-chain output; can run alongside Steps 6-8. |
+| **Sequential at end** | Step 11 (filing + bot), Step 12 (production log), Step 13 (checklist) | Final state-of-the-skill steps; run after all prior substeps complete. |
+
+Wall-time saving on edition runs: ~60-90s (Step 2a citizen cards is the slowest substep; running 2c + 4 against its wall time recovers their duration).
+
 ## Steps
 
 ### Step 1: Bay-Tribune Ingest — Canon
@@ -83,7 +97,10 @@ Extracts per-citizen, per-initiative, per-business, per-storyline records from t
 
 Review: spot-check 2-3 records against the article body.
 
-**1b. Text ingest (BACKUP)**
+**1b. Text ingest (BACKUP) — single canonical home (S215, closes G-P1)**
+
+Step 1b is the **only** home for edition text ingest. As of S215, `/write-edition` Step 6 no longer runs `ingestEdition.js` at close — running it both there and here produced duplicate bay-tribune text records (different doc IDs, same content) that polluted future sift queries. If `/write-edition` close already ingested text for some reason (rare emergency backfill), skip this substep and document in the production log.
+
 ```bash
 node scripts/ingestEdition.js <source> --type <type> --cycle <XX>
 ```
@@ -433,4 +450,5 @@ After `/write-edition` (edition path) or after `/interview`, `/dispatch`, `/writ
 - 2026-04-17 — Initial 13-step skill (S156, post-publish formalized).
 - 2026-04-26 — v1.1 (S180, research-build). Type-aware: `--type {edition|interview|supplemental|dispatch}` flag added. Per-type substep matrix encodes default skips; `--skip-<name>` required only for matrix-✓ opt-outs. Verification gate declared on every substep. Coverage ratings (Step 4) explicitly C93-gated for non-edition. Convergence point for the unified non-edition publishing pipeline (plan [[plans/2026-04-26-non-edition-publishing-pipeline]] T3).
 - 2026-04-30 — v1.4 (S189, research-build). Wired E6 + E8 from [[plans/2026-04-30-dispatch-gap-followups]]. **Step 2a-cul cultural-card refresh** (matrix-✓ for dispatch / interview / supplemental when CUL-IDs in NAMES INDEX): `buildCitizenCards.js` is Sim_Ledger-only, so cultural-only entities (Marin Tao type, Brody Kale type) need a parallel `buildCulturalCards.js --apply --cul <CUL-ID>` invocation per CUL-ID parsed from NAMES INDEX. Closes the S188 Brody Kale unrefreshed gap. **Step 5 verification gate cross-check**: after `ingestPublishedEntities.js` reports its parsed entity count, run `verifyNamesIndexParse.js <source> --expected <N>` to independently count NAMES INDEX rows in the source `.txt` — exit 1 (block publish) if counts disagree. Defense-in-depth against future parser regressions reintroducing the S188 silent-zero false-success failure mode. Step 13 checklist + Step 12 production-log section both gain the new substep row.
+- 2026-05-11 — v1.6 (S215, research-build). Pipeline.18 heavy-skill text reconciliation sweep. **G-P1 closed:** Step 1b now explicitly stated as the single canonical home for edition text ingest; `/write-edition` Step 6 no longer runs `ingestEdition.js` at close (companion edit shipped same commit). **G-P5 closed:** new §Parallelization Notes section before §Steps surfaces the parallel-OK groupings (2a + 2c + 4 concurrent; 9 + 10 alongside 6-8). Saves ~60-90s wall time per edition run. Other pipeline.18 items (G-P2 ingestEditionWiki summary fix, G-P10 zero-entity JSON sentinel, G-P20 extractExemplars double-iterate) are engine-sheet code work filed at pipeline.19, not in scope here.
 - 2026-05-03 — v1.5 (S197, engine-sheet executing research-build Wave 1 plan). Wave 1 DOC-drift sweep per [[plans/2026-05-03-c93-gap-triage-execution]]. **G-P12 Step 2a invocation:** `buildCitizenCards.js` → `--apply` flag added (script defaults dry-run; previous cycles silently shipped no writes). **G-P22 Step 11 postRunFiling staleness note:** advisory text added explaining INCOMPLETE message is expected until the manifest is updated to pipeline-v2 outputs (Wave 3 BUNDLE-H). **G-P23 Step 11 bot restart removal:** `pm2 restart mags-bot` removed; deferred to /session-end (single canonical home) to respect boot/session-end RAM lifecycle. Step 13 checklist updated. **G-P25 §Time Budget section added** before §Output: per-substep wall-time table surfaces Step 2a (10+ min --apply), Step 10 /skill-check (5-15 min) as the expensive ones. Whole-skill budget ~30-45 min edition / ~10-15 min non-edition. **Stale-filename sweep (same drift class as G-PR1):** all 6 references to `production_log_edition_c<XX>.md` + `production_log_city_hall_c<XX>.md` consolidated to `production_log_c<XX>.md` (S195 convention). G-P1 ("/save-to-bay-tribune duplicate") not addressed here — that's a /write-edition-side fix; Step 1b is already the canonical text-ingest home.

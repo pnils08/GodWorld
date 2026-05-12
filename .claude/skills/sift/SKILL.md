@@ -1,8 +1,8 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads world summary, engine review, city-hall log. Proposes stories, assigns reporters, verifies citizens, writes angle briefs. The game moment.
-version: "1.0"
-updated: 2026-04-17
+version: "1.1"
+updated: 2026-05-11
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -74,6 +74,14 @@ Blocks are appended to `output/injection_blocks.log`. Never silently skip a flag
 ### Step 1: Extract Threads
 
 Read the 3 documents. Extract every active thread. Then read newsroom memory and annotate threads with history — what was covered before, what's an open arc, what's a gap.
+
+**NEWSROOM_MEMORY.md ranged-read prescription (S215, closes G-S4).** The file is ~1,155 lines / ~50K tokens — exceeds the Read tool's 25K-token whole-file limit. Read by section, not whole-file:
+
+- **Last cycle's E{XX-1} entry** — use `grep -n "^### E{XX-1}" docs/mags-corliss/NEWSROOM_MEMORY.md` to find the line range, then Read with `offset` + `limit` for ~80-line window
+- **Standing Directives + Character Continuity** — lines ~880-990 (stable range; grep for `^## Standing Directives` and `^## Character Continuity` if drift)
+- **Topic-specific lookup** — grep for the topic / citizen name and Read the surrounding range
+
+Whole-file loads will silently truncate at ~25K tokens, dropping pre-E80 canon corrections + Mara directive history + older desk notes. Don't trust an apparent "full read" — confirm coverage by ranged-targeting the sections sift actually needs.
 
 Present to Mike in this format:
 
@@ -260,9 +268,21 @@ LETTERS: reacts to edition (always runs last)
 
 **Section tags:** SPORTS, CIVIC AFFAIRS, CITY LIFE, BUSINESS, FEATURES, HEALTH, ACCOUNTABILITY, OPINION, LETTERS
 
+### Step 2.5: Dump proposals JSON BEFORE presenting (GATE — S215, closes G-S6)
+
+**Hard gate.** This was buried in Step 2 prose; promoted to its own step because S194 ran the present-before-dump path and Mike's narrowing partly overwrote the SoT before it was captured. Dump first, present second.
+
+Write `output/sift_proposals_c{XX}.json` — every question (Q1..Qn), every story proposal (S1..Sn), every baseline-brief decision (promote / baseline / suppress), and the recommended front page. The JSON is the ground truth for `/skill-check sift {XX}` — it records what sift proposed BEFORE Mike's picks narrowed it. If you skip this step, the post-cycle skill-eval lane has no ground truth.
+
+After the JSON lands, present the proposal set to Mike (format from Step 2).
+
 **Mike responds:** answers to questions + picks from proposals. "Q1: push deployment. Q2: advance it. S1 yes, S2 yes, cut S3, front page should be S1." Simple — no technical decisions.
 
-**Before Mike responds:** Dump the full proposal set to `output/sift_proposals_c{XX}.json` — every question (Q1..Qn), every story proposal (S1..Sn), every baseline-brief decision (promote / baseline / suppress), and the recommended front page. Shape:
+**Step 6 verification check (added S215):** verify `output/sift_proposals_c{XX}.json` exists and `proposals.length >= picked_count` before declaring sift done — catches a missed dump.
+
+### Step 2.5 JSON shape
+
+The shape:
 
 ```json
 {
@@ -276,8 +296,6 @@ LETTERS: reacts to edition (always runs last)
   "engineSignalsUncovered": []
 }
 ```
-
-This file is the ground truth for `/skill-check sift {XX}` — it records what sift actually proposed before Mike's picks narrowed it. Do not skip.
 
 **After Mike responds:** Create `output/production_log_edition_c{XX}.md`. Log stories picked, front page choice, section tags. This log persists through all remaining steps and into write-edition.
 
@@ -370,6 +388,26 @@ For every citizen in every story:
 - Show Mike candidates with real details. Mike picks who fits.
 
 No name goes into an angle brief unverified.
+
+**New-citizen acceptance (S215, closes G-S11).** Citizens not in canon CAN be valid if they're sourced from the cycle's engine output (Mike's sports feed, world_summary Sports section, dispatch artifacts). Before flagging a name as "invented / unverified," cross-check against `output/world_summary_c{XX}.md` Sports section + any C{XX} dispatch / supplemental that came in. If the name appears there, mark the citizen `NEW-THIS-CYCLE — engine-sourced (sports-feed | dispatch | supplemental)` in the verified citizen table and proceed; reporter brief should flag the citizen as new canon being introduced this cycle. Example: Frank Reyna C93 (Mesa rookie call-up) returned 0 hits in world-data + bay-tribune; valid because sports-feed introduced him.
+
+**Canonical Council Roster injection for civic briefs (S215, closes G-W14 sift-side).** For every civic-affiliated brief (story tagged CIVIC AFFAIRS or referencing any council member), attach a `CANONICAL COUNCIL ROSTER (cycle-frozen)` block at the head of the brief. Pull from `mcp__godworld__get_council_member` for each D1-D9 OR scripted read of `output/desk-packets/truesource_reference.json` if MCP is unavailable. Format:
+
+```
+CANONICAL COUNCIL ROSTER (cycle-frozen, do not invent)
+D1 — Denise Carter (OPP)
+D2 — Leonard Tran (IND)
+D3 — Rose Delgado (OPP)
+D4 — Ramon Vega (IND, Council President)
+D5 — Janae Rivers (OPP)
+D6 — Elliott Crane (CRC)
+D7 — Warren Ashford (CRC)
+D8 — Nina Chen (OPP)
+D9 — Terrence Mobley (OPP)
+Mayor — Avery Santana (she/her)
+```
+
+The boot-loaded civic-desk + freelance-firebrand RULES.md (S197 Wave 2) is the primary canon-fidelity mechanism; this brief-side injection is defense-in-depth so the agent self-fences AND the brief carries fact-aligned data.
 
 **Update production log** with verified citizen table (name, POP-ID, role, neighborhood, gender, story).
 

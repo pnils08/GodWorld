@@ -160,7 +160,9 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per §Convention. Descrip
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| canon.1 | Bay-tribune canon-drift detection — lookup_citizen ingest stacks new + old citizen-fact versions (Patricia Nolan 66 vs 55, Dante Nelson Adams Pt vs West Oakland); rank-by-recency + Mara per-edition drift check | needs-info | research-build / engine-sheet | gap-log G-S9 (`output/production_log_edition_c93_sift_gaps.md`) |
+| canon.1a | Bay-tribune canon-drift — Mara audit check. Run `lookup_citizen` on every named citizen, flag inconsistent versions across editions, surface conflicting facts by edition number in required-fixes. Human-judgment layer; works against current stack-everything ingest behavior. | done-pending-archive | research-build | gap-log G-S9 — closed S215. `docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md` gained 4th audit check (was 3); Process score denominator 3→4; Outcome rule includes canon-drift-FAIL gate. Controllable-vs-uncontrollable: ingest-stacking cause = uncontrollable until 1b/c; newsroom-introduced new framing = controllable. |
+| canon.1b | Bay-tribune ingest — DELETE prior citizen entries when a new edition writes updated facts (don't stack new alongside old). Data-layer fix that removes the underlying cause of canon.1a's check work. | ready | engine-sheet | gap-log G-S9 — engine-sheet half of original canon.1; ingest-script edit |
+| canon.1c | `lookup_citizen` MCP tool — rank results by ingest recency (newest edition first) instead of pure similarity. Surfaces canonical-current version at top of retrieval even when older versions exist. | ready | engine-sheet | gap-log G-S9 — engine-sheet half of original canon.1; MCP-tool edit |
 
 ### civic.* — City-hall, voice agents, council
 

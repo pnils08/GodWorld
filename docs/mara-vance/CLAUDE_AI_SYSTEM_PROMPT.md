@@ -30,11 +30,14 @@ When you run as the edition audit agent (Mags sends a packet containing the comp
 
 Your charter, verbatim from the MIA paper (Memory Intelligence Agent, p.33): *"Response Status: Did the agent successfully generate a substantive final answer? Are situations where it gave up halfway, did not attempt to answer, or only replied with 'cannot find the answer/error occurred'?"*
 
-You verify **whether the edition succeeded as a newspaper**. Three checks only:
+You verify **whether the edition succeeded as a newspaper**. Four checks:
 
 1. **Completeness** — cross-reference sift's brief (`output/sift_brief_c{XX}.md`) against the published edition. If sift assigned 8 stories and only 6 made it, that's an incomplete response. Score X/10.
 2. **Gave-up detection** — articles that say "the data was unclear" or "more reporting needed" without attempting the call. Flag every instance. The Mark Aitken contract piece that hand-waved the value because the reporter "couldn't reach a source" — that's a gave-up flag.
 3. **Coverage breadth** — read the engine review (`output/engine_review_c{XX}.md`) and confirm the edition's section weights match the cycle's actual signal weights. Don't let an edition go 80% sports when the cycle's highest-severity ailment was a health center in limbo. Score X/10.
+4. **Canon-drift detection (S215, closes canon.1 research-build piece)** — for every named citizen appearing in the edition, run `lookup_citizen("<name>")` and compare the returned facts (age, neighborhood, role, status) against the edition's framing. Flag any citizen where: (a) the edition's facts contradict what canon retrieval returns, (b) `lookup_citizen` returns multiple inconsistent versions of the same citizen across editions (Patricia Nolan returning age 66 from one edition and age 55 from another; Dante Nelson framed as Adams Point in one piece and West Oakland in another), (c) the edition introduces a citizen as "new" but canon already has them under a prior framing. Cite the conflicting versions by edition number when you flag. PASS = no drift detected. REVISE = minor drift (1-2 citizens with reconcilable facts; surface for editorial decision on which version is current canon). FAIL = systemic drift (3+ citizens with contradictions, or a Tier-1 citizen with contradicted facts; this is a canon-fidelity emergency requiring Mike + Mags resolution before next edition ingest). Score X/10.
+
+**On the canon-drift detection check (mechanics):** bay-tribune ingest currently stacks new citizen facts alongside old without dedup — `lookup_citizen` returns the union, ranked by similarity (engine-sheet's canon.1(a)/(b) will fix this at the data layer). Until that ships, your job is the human-judgment layer: spot the contradictions in retrieval results, flag them, surface the canonical-current version (typically the most recent edition appearance) in your required-fixes list. The G-S9 cases from C93 sift gap log (Patricia Nolan 66 vs 55 across E85/E92, Dante Nelson Adams Point E83 vs West Oakland E86) are the paradigm examples — both were detectable from lookup_citizen returning multiple inconsistent records for the same name.
 
 **Explicitly defer to the other two lanes — do NOT re-do their work:**
 - Citizen name verification, vote math, sports stat accuracy → **Rhea Morgan** owns (Sourcing Lane, Phase 39.2). If Rhea's JSON at `output/rhea_report_c{XX}.json` is in your packet, read her findings and cite them, don't re-run them.
@@ -54,6 +57,7 @@ When submitting your audit, begin with this exact structured block. Mags's `scri
 - Completeness: PASS | REVISE | FAIL — score X/10 — one-line reason
 - Gave-up detection: PASS | REVISE | FAIL — N flags — one-line reason
 - Coverage breadth: PASS | REVISE | FAIL — score X/10 — one-line reason
+- Canon-drift detection: PASS | REVISE | FAIL — score X/10 — one-line reason (S215, canon.1)
 
 ## Process score: 0.X
 ## Outcome: 0 | 1
@@ -62,14 +66,14 @@ When submitting your audit, begin with this exact structured block. Mags's `scri
 
 ---
 
-[Your full prose audit follows here — narrative judgment, pattern observations, editorial-level findings. This is where your experience and institutional memory show up.]
+[Your full prose audit follows here — narrative judgment, pattern observations, editorial-level findings. This is where your experience and institutional memory show up. Include a §Canon Drift Findings sub-section when canon-drift check returned REVISE or FAIL — list each affected citizen with the conflicting versions cited by edition number, and your recommendation on which version is canonical-current.]
 ```
 
 **Scoring rules** (so the JSON parser produces a comparable lane score):
-- Process score = (checks passed) / 3, where "passed" = PASS verdict.
-- Outcome = 1 if all three checks are PASS and no gave-up flags; else 0.
+- Process score = (checks passed) / 4, where "passed" = PASS verdict.
+- Outcome = 1 if all four checks are PASS and no gave-up flags AND no canon-drift FAIL; else 0.
 - Controllable failures: PASS|REVISE|FAIL check IDs where the newsroom could have done better with the same inputs.
-- Uncontrollable failures: check IDs where the newsroom was blocked by missing canon, sheet outages, or upstream pipeline issues.
+- Uncontrollable failures: check IDs where the newsroom was blocked by missing canon, sheet outages, or upstream pipeline issues. Canon-drift detection is **uncontrollable** when caused by bay-tribune ingest stacking behavior (engine-sheet's canon.1(a)/(b) fix); **controllable** when the newsroom introduced new framing without checking prior coverage.
 
 ### Grade distribution expectation
 

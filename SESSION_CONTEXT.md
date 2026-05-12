@@ -64,13 +64,11 @@ Cross-terminal coordination + session-opening framing. Per-group detail in ROLLO
 
 3. **C94 first live cycle [engine-sheet → media]** — engine.7 routing-foundation gate. First cycle with Engine A + Engine B wired into `applyStorySeeds.js`. Validates: priorityScore + consequenceFloor populate cols M-N; bylineCandidate + confidence + rationale populate cols P-R; T3.8 shadow logger captures engine-vs-Mags diff first time; T3.9 cadence-cap distribution check exits 0 if rebalance is working. **First-run Okoro window:** S215 built civic-office-okoro four-file (Deputy Mayor, Stab Fund / Community Dev / ED-coverage portfolios) — first time she speaks; absence-of-statement is meaningful per RULES so a quiet cycle is valid. **First-run Mara canon-drift check:** Mara's audit gained 4th check S215 (`5981d16`); first cycle she runs the new check, expect the C93 drift backlog (Patricia Nolan 66/55, Dante Nelson Adams Pt/W Oakland) to surface in her required-fixes if those citizens land in C94.
 
-4. **canon.1b review window [research-build / Mike]** — `ingestEditionWiki.js --wipe-priors` detection layer shipped S215 as dry-run-default. Heuristic is intentionally broad (matches by name + no-cycle-tag for legacy docs); dry-run on E93 flagged 1-18 priors per citizen including valuable canon history (Beverly Hayes letters, Dante Nelson dialogue across editions). Mike reviews candidate list before authorizing any --apply destructive run. canon.1c (recency rank) is the safe read-side mitigation already active in lookup_citizen.
+4. **research.11 FLUX research cluster [research-build]** — G-PR10/PR11/PR14 ceiling work (composition discipline, OCR post-check, prompt-rewrite-on-retry, alternate-model comparison). Needs droplet GPU time + focused session. Not picker-grabbable for skill-text edit passes; pick when there's a dedicated research window.
 
-5. **research.11 FLUX research cluster [research-build]** — G-PR10/PR11/PR14 ceiling work (composition discipline, OCR post-check, prompt-rewrite-on-retry, alternate-model comparison). Needs droplet GPU time + focused session. Not picker-grabbable for skill-text edit passes; pick when there's a dedicated research window.
+5. **governance.2 — skill-eval framework expansion [research-build]** — plan filed S212 ([[plans/2026-05-10-skill-eval-expansion]]). Expand /skill-check to /city-hall + /dispatch + /interview. Now unblocked from S215 dependency on skill-text reconciliation (closed in pipeline.18 + civic.4).
 
-6. **governance.2 — skill-eval framework expansion [research-build]** — plan filed S212 ([[plans/2026-05-10-skill-eval-expansion]]). Expand /skill-check to /city-hall + /dispatch + /interview. Now unblocked from S215 dependency on skill-text reconciliation (closed in pipeline.18 + civic.4).
-
-7. **governance.4 — boot-load audit downstream design [research-build, needs-info]** — 8 open questions queued in [[plans/2026-05-09-boot-load-audit]] await Mike's joint review.
+6. **governance.4 — boot-load audit downstream design [research-build, needs-info]** — 8 open questions queued in [[plans/2026-05-09-boot-load-audit]] await Mike's joint review.
 
 ---
 

@@ -115,6 +115,20 @@ Log tracker state, approval ratings, and key findings in the production log.
 
 **World summary stale-civic-decisions framing (S215, closes G-7).** The world summary's §Civic Decisions section can read stale if the current cycle's `/city-hall` hasn't run yet — it presents the prior-cycle cascade as if locked, with a small disclaimer reader has to notice. When ingesting world_summary at Step 1, treat any §Civic Decisions data as "Last Locked (C{XX-1})" until the current cycle produces new voice JSONs. Don't propagate stale framing into pending_decisions packets — voice agents must see explicit "C{XX-1} canon, C{XX} not yet decided" labeling. Engine-side fix is filed at pipeline.14 (world_summary auto-rebuild after /city-hall); until that ships, the disclaimer-respect rule lives here.
 
+**Auto-investigate engine-flagged initiatives (S216, closes civic.11).** Engine review can false-flag a phase-advanced initiative as `mitigator-stuck` or `remedy-not-firing` — civic.7's INIT-005 C93 case was a Scenario C engine-auditor bug where `cyclesInPhase` walked priors, found a phase mismatch, and triggered the cold-start fallback. Before propagating any engine-review ailment of class `mitigator-stuck` or `remedy-not-firing` into topic assignments, run the MilestoneNotes reader for each affected initiative:
+
+```bash
+node scripts/readInitiativeMilestoneNotes.js <INIT-ID> {XX}
+```
+
+Capture the output to the production log. Three dispositions:
+
+- **MilestoneNotes contains a C{XX} entry naming concrete progress** → engine auditor likely false-flagged (Scenario C, phase advanced this cycle). Drop the ailment from the topic-assignment surface; note "engine auditor false positive verified via MilestoneNotes" in the production log. Don't burn voice cycles re-litigating phase advances that happened.
+- **MilestoneNotes has no C{XX} entry** → real signal (Scenario A — commitment slipped, or B — writeback bug). Surface the highlighted history to the owning voice's topic assignment with the missing-entry note ("no C{XX} milestone yet — voice owes a commitment-status update").
+- **MilestoneNotes has a C{XX} entry that contradicts the engine flag** (e.g., "delayed pending council approval") → real but reframed. Surface to topic assignment with the contradicting note attached so the voice agent sees the documented reason and can respond against it.
+
+Runs at Step 1, before Step 2 builds topic assignments. The auto-investigation prevents a cycle of voice work being wasted on phantom-stuck initiatives like INIT-005 was in C93. Plan + Scenario C trace: [[../../../docs/plans/2026-05-11-civic-7-init-005-investigation]].
+
 **Anomaly-only present-to-Mike gate (S215, closes G-6 Step 1 side).** Previous convention: always present Step 1 input summary to Mike. New convention: compute input completeness automatically (all expected files present, all approval ratings reasonable, all initiatives accounted for) and surface to Mike ONLY on anomaly:
 
 - Approval shift >5pts on any council member from prior cycle
@@ -240,3 +254,4 @@ At skill close, capture friction observed during prep as a gap log. /city-hall-p
 
 - 2026-04-17 — v1.0 initial (S156). Voice routing table listed 17 voices including 9 individual council members.
 - 2026-05-03 — v1.1 (S197, engine-sheet executing research-build Wave 1 plan per [[../../../docs/plans/2026-05-03-c93-gap-triage-execution]]). **G-10 Voice Data Routing rewritten:** table now shows the 11 actual agent rows (Mayor + Chief + DA + 3 faction-bloc agents speaking for the 9 council members + 5 project agents) instead of misleading reader into expecting 17 individual agents. Faction membership per Civic_Office_Ledger; previous text mis-listed Chen D8 as CRC, corrected to OPP. **G-13 Step 1 sheet reads demoted to verification:** Disk inputs (world_summary + engine_review + prior production log + prior published canon) are PRIMARY; sheet reads run ONLY when world_summary is stale. Captures actual S192 working practice (sheet reads were skipped because world_summary already snapshotted everything that mattered). Companion entry on G-15 (between-cycle published canon ingestion) added to Step 1 as Disk source #5.
+- 2026-05-12 — v1.2 (S216, research-build closing civic.11). **Step 1 — Auto-investigate engine-flagged initiatives:** wired `scripts/readInitiativeMilestoneNotes.js` for `mitigator-stuck` / `remedy-not-firing` ailments. Three dispositions (Scenario A / B / C) computed before Step 2 topic-assignment build, capturing the civic.7 INIT-005 false-positive case as a routine prep-time disambiguation rather than a same-cycle wasted voice cycle. Plan: [[../../../docs/plans/2026-05-11-civic-7-init-005-investigation]].

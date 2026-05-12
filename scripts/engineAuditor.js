@@ -149,27 +149,13 @@ function buildCitizenIncomes(ledger) {
   return out;
 }
 
-async function main() {
-  const t0 = Date.now();
-  console.log('=== Engine Auditor (Phase 38.1 + 38.7 + 38.8) ===\n');
-
-  const cycle = await getCurrentCycle();
-  console.log(`Cycle: ${cycle}`);
-
-  const outputDir = path.join(__dirname, '..', 'output');
-  if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
-
-  console.log('Reading sheets...');
-  const snapshot = await loadSnapshot();
-  const prior = loadPreviousAudits(cycle, outputDir);
-
-  const fixturePrior = loadPriorFixture();
-  if (fixturePrior) {
-    console.log(`  fixture prior injected from ${process.env.ENGINE_AUDITOR_PRIOR_FIXTURE}`);
-    prior.unshift(fixturePrior);
-  }
-
-  const ctx = { cycle, snapshot, prior };
+// S217 engine.16 Phase 2.7 — pure orchestration extracted from main() so the
+// integration test can feed a synthetic ctx without going through lib/sheets.
+// No behavior change: ailment detectors → enrichers → anomalies → briefs in
+// the same order, with the same error-handling pattern. Returns the three
+// audit-output structures + raw arrays for the caller to log/persist.
+async function runEngineAudit(ctx) {
+  const { cycle, snapshot = {} } = ctx;
 
   console.log('Running ailment detectors (38.1)...');
   const patterns = [];
@@ -247,8 +233,6 @@ async function main() {
     // neighborhoods lacking a district owner per Neighborhood_Map.District).
     orphanAilments: ctx.orphanAilments || { highImpactChecked: 0, orphanCount: 0, unmappedNeighborhoods: [], patterns: [] },
   };
-  const auditPath = path.join(outputDir, `engine_audit_c${cycle}.json`);
-  fs.writeFileSync(auditPath, JSON.stringify(auditOutput, null, 2));
 
   const anomaliesOutput = {
     cycle,
@@ -263,8 +247,6 @@ async function main() {
       }, {}),
     },
   };
-  const anomaliesPath = path.join(outputDir, `engine_anomalies_c${cycle}.json`);
-  fs.writeFileSync(anomaliesPath, JSON.stringify(anomaliesOutput, null, 2));
 
   const briefsOutput = {
     cycle,
@@ -280,6 +262,44 @@ async function main() {
       withPromotionHints: briefs.filter(b => b.promotionHints && b.promotionHints.length > 0).length,
     },
   };
+
+  return {
+    auditOutput, anomaliesOutput, briefsOutput,
+    patterns, anomalies, briefs, detectorVersions,
+  };
+}
+
+async function main() {
+  const t0 = Date.now();
+  console.log('=== Engine Auditor (Phase 38.1 + 38.7 + 38.8) ===\n');
+
+  const cycle = await getCurrentCycle();
+  console.log(`Cycle: ${cycle}`);
+
+  const outputDir = path.join(__dirname, '..', 'output');
+  if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
+
+  console.log('Reading sheets...');
+  const snapshot = await loadSnapshot();
+  const prior = loadPreviousAudits(cycle, outputDir);
+
+  const fixturePrior = loadPriorFixture();
+  if (fixturePrior) {
+    console.log(`  fixture prior injected from ${process.env.ENGINE_AUDITOR_PRIOR_FIXTURE}`);
+    prior.unshift(fixturePrior);
+  }
+
+  const ctx = { cycle, snapshot, prior };
+
+  const { auditOutput, anomaliesOutput, briefsOutput, patterns, anomalies, briefs } =
+    await runEngineAudit(ctx);
+
+  const auditPath = path.join(outputDir, `engine_audit_c${cycle}.json`);
+  fs.writeFileSync(auditPath, JSON.stringify(auditOutput, null, 2));
+
+  const anomaliesPath = path.join(outputDir, `engine_anomalies_c${cycle}.json`);
+  fs.writeFileSync(anomaliesPath, JSON.stringify(anomaliesOutput, null, 2));
+
   const briefsPath = path.join(outputDir, `baseline_briefs_c${cycle}.json`);
   fs.writeFileSync(briefsPath, JSON.stringify(briefsOutput, null, 2));
 
@@ -326,4 +346,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { main };
+module.exports = { main, runEngineAudit };

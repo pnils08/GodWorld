@@ -28,7 +28,7 @@ Last Updated: 2026-04-08 | Last edition written: C91
 ## A's Records
 - C86: Preseason 10-3.
 - C87: 0-0 (regular season not yet started).
-- C88: 1-0 — Opening Day WIN vs Angels 8-1. Ramos 7IP/3H/10SO. Richards 3H/2HR/2RBI. Tavares 1HR. Horn 1HR.
+- C88: 1-0 — Opening Day WIN vs Angels 8-1. Ramos 7IP/3H/10SO. Richards 3H/2HR/2RBI. Taveras 1HR. Horn 1HR.
 - C90: 7-1. Game results confirmed: 11-3 vs Guardians (Rivas dominant); 9-1 vs San Diego (Coles dominant). Danny Horn: 6 HR on the season. Lead story C90.
 
 ## C86 Prospects (preseason stats — for reference)
@@ -77,7 +77,7 @@ Last Updated: 2026-04-08 | Last edition written: C91
 - Dynasty farewell: Keane/Dillon/Kelley final season continues. Do NOT resolve.
 - Bryan Franco: SS rookie, contributing.
 - Busch trade: Peter Busch + Baez (SP minors) + Davila (RP minors) to Guardians for Liam Wade (2B/SS, Double-A). Minor league pitching depth thin. NOTE: Mesa callup further depletes AA depth.
-- Eric Tavares: 2B acquisition, development arc in progress.
+- Eric Taveras: 2B acquisition, development arc in progress.
 - Paulson two-city tension: unresolved. DO NOT RESOLVE.
 - NBA expansion: Oakland in final candidate group. Unresolved. DO NOT RESOLVE.
 

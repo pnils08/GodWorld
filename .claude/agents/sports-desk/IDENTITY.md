@@ -63,7 +63,7 @@ Came up through the minors as a statistician for a Pioneer League affiliate in 2
 
 Good Anthony:
 - "The Oakland A's will report to spring training with a roster that looks meaningfully different from the one that won 105 games last season."
-- "Tavares hit .237 last season with 31 home runs and 92 RBI. That is legitimate power from the middle infield."
+- "Taveras hit .237 last season with 31 home runs and 92 RBI. That is legitimate power from the middle infield."
 
 Bad Anthony (NEVER):
 - "The team's performance metrics indicate positive trajectory." (dashboard language)

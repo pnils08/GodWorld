@@ -102,51 +102,69 @@ function parse(filePath) {
 
 /**
  * Split a section body into individual articles.
- * Heuristic: an article starts with a non-blank line that isn't all-caps and is
- * followed within ~3 lines by "By {Name}" byline. Articles are separated by 1+
- * blank lines preceding the next headline.
+ *
+ * G-W20 fix (S215): anchor on `# Headline` markdown markers. The pre-fix
+ * heuristic was "block first line short + capitalized AND block second line
+ * is `By <Name>`" — that misses the consolidated E89+ format where headline,
+ * subhead, and byline are paragraph-separated:
+ *
+ *     # OARI Rubric Locks; Eight Votes Now Visible
+ *
+ *     **The C95 OARI architecture is now visible on paper — ...**
+ *
+ *     *By Carmen Delaine | Bay Tribune Civic Ledger*
+ *
+ * Splitting on `\n{2,}` made `next` (the subhead) — not the byline — so the
+ * heuristic failed and every section collapsed to 1 article. C93 returned 8
+ * total articles for an 8-byline edition (1 per section) instead of per-byline.
+ *
+ * Post-fix: walk lines; every `# Headline` line opens a new article slice;
+ * everything before the first `#` becomes section preamble (a single article
+ * with no headline, preserving old-format behavior for editions that pre-date
+ * the `#`-headlined consolidated format). Byline extracted from the body.
  */
 function finalizeSection(section) {
   const text = section.body;
-  const blocks = text.split(/\n{2,}/);
-  const articles = [];
-  let pending = null;
+  const lines = text.split('\n');
+  const slices = [];
+  let currentHeadline = '';
+  let currentLines = [];
 
-  for (let k = 0; k < blocks.length; k++) {
-    const block = blocks[k].trim();
-    if (!block) continue;
-    const blockLines = block.split('\n');
-    const firstLine = blockLines[0].trim();
-    const isShort = firstLine.length < 120;
-    const looksLikeHeadline =
-      isShort &&
-      !firstLine.startsWith('By ') &&
-      !firstLine.startsWith('—') &&
-      !firstLine.startsWith('-') &&
-      firstLine !== firstLine.toLowerCase();
-    const next = (blockLines[1] || '').trim();
-    const nextIsByline = /^By\s+/i.test(next);
-    if (looksLikeHeadline && nextIsByline) {
-      // New article
-      if (pending) articles.push(pending);
-      pending = {
-        headline: firstLine,
-        byline: next.replace(/^By\s+/i, '').trim(),
-        body: blockLines.slice(2).join('\n').trim(),
-      };
-    } else if (pending) {
-      // Continuation of current article
-      pending.body += '\n\n' + block;
+  for (let k = 0; k < lines.length; k++) {
+    const line = lines[k];
+    // Only h1 markers `# Headline` count as article boundaries.
+    // h2/h3 (`## Subhead`) appear inside article bodies for callouts;
+    // splitting on those would break mid-article. h4+ same reasoning.
+    const m = line.match(/^#\s+(.+?)\s*$/);
+    if (m) {
+      if (currentLines.length > 0 || currentHeadline) {
+        slices.push({ headline: currentHeadline, lines: currentLines });
+      }
+      currentHeadline = m[1].trim();
+      currentLines = [];
     } else {
-      // Section preamble before any byline
-      pending = {
-        headline: '',
-        byline: '',
-        body: block,
-      };
+      currentLines.push(line);
     }
   }
-  if (pending) articles.push(pending);
+  if (currentLines.length > 0 || currentHeadline) {
+    slices.push({ headline: currentHeadline, lines: currentLines });
+  }
+
+  const articles = [];
+  for (let s = 0; s < slices.length; s++) {
+    const slice = slices[s];
+    const body = slice.lines.join('\n').trim();
+    if (!slice.headline && !body) continue;
+    // Byline: first `By <Name>` line in body. Allow up to 2 leading/trailing
+    // markdown markers (italic `*By ...*` or bold `**By ...**` per Hal's
+    // E93 wrap shape).
+    const bm = body.match(/(?:^|\n)\s*[*_]{0,2}By\s+([^|*_\n]+?)(?:\s*[|]|\s*[*_]{0,2}\s*(?:\n|$))/i);
+    articles.push({
+      headline: slice.headline,
+      byline: bm ? bm[1].trim() : '',
+      body: body,
+    });
+  }
   section.articles = articles;
 }
 

@@ -108,9 +108,21 @@ var NEGATIVE_WORDS = [
 
 var lines = text.split('\n');
 
-// Find article boundaries — look for section headers and bylines
+// Find article boundaries — byline-anchored, with section propagation.
+//
+// Pre-fix (S215 G-P6-followup): boundaries were section-header-anchored —
+// one article per section. Multi-byline sections collapsed to one article
+// (FRONT PAGE = Carmen + Margaret → 1 article; CIVIC = Mags-Quick-Take + Mezran
+// → 1 article); the byline loop also overwrote `reporter` on every match so
+// the last byline in the section won. E93 had 7 bylines but the parser found 6
+// and mis-attributed reporters. Tone analysis ran on merged multi-article text.
+//
+// Post-fix: bylines anchor articles; the most-recently-seen section header
+// propagates as `section`. Each article carries its own reporter + tone.
 var articles = [];
 var currentArticle = null;
+var currentSection = '';
+var pendingHeadline = '';
 
 // Whitelist of valid section names (used by all three regex variants below).
 // Order matters where one prefix is contained in another — longer patterns must
@@ -122,68 +134,86 @@ var SECTION_NAMES =
 var SEP_HEADER_RE   = new RegExp('[━─═]+\\s*(' + SECTION_NAMES + ')\\s*[━─═]+', 'i');
 var MD_HEADER_RE    = new RegExp('^#+\\s*(' + SECTION_NAMES + ')\\s*$', 'i');
 var BARE_HEADER_RE  = new RegExp('^(' + SECTION_NAMES + ')\\s*$');
+var BYLINE_RE       = /^(?:By|BY)\s+(.+?)(?:\s*[|,]|$)/;
+var SEP_LINE_RE     = /^[━─═\-*#|]+\s*$/;
+
+function pushIfSubstantive(article) {
+  if (article && article.text.length > 50) articles.push(article);
+}
 
 for (var i = 0; i < lines.length; i++) {
   var line = lines[i];
+  var trimmed = line.trim();
 
-  // Three header formats, tried in order:
+  // Section-header detection — promotes currentSection, doesn't close article.
+  // Three header formats:
   //   1. "━━━ SPORTS ━━━"        (legacy separator block, pre-S189)
   //   2. "## SPORTS"              (markdown-prefixed)
-  //   3. "SPORTS"                 (bare uppercase on its own line — current consolidated format S189+)
-  var sectionMatch = line.match(SEP_HEADER_RE);
-  if (!sectionMatch) sectionMatch = line.match(MD_HEADER_RE);
-  if (!sectionMatch) sectionMatch = line.match(BARE_HEADER_RE);
-
+  //   3. "SPORTS"                 (bare uppercase on its own line — current
+  //                                consolidated format S189+)
+  var sectionMatch = line.match(SEP_HEADER_RE) || line.match(MD_HEADER_RE) || line.match(BARE_HEADER_RE);
   if (sectionMatch) {
-    if (currentArticle && currentArticle.text.length > 50) {
-      articles.push(currentArticle);
-    }
-    currentArticle = {
-      section: sectionMatch[1].trim(),
-      reporter: '',
-      headline: '',
-      text: '',
-      startLine: i
-    };
+    currentSection = sectionMatch[1].trim();
+    pendingHeadline = '';
+    if (currentArticle) currentArticle.text += line + '\n';
     continue;
   }
 
-  // Byline detection: "By Carmen Delaine" or "By P Slayer"
-  var bylineMatch = line.match(/^(?:By|BY)\s+(.+?)(?:\s*[|,]|$)/);
-  if (bylineMatch && currentArticle) {
-    currentArticle.reporter = bylineMatch[1].trim();
+  // Byline detection — closes any open article and starts a new one with the
+  // current section. Per-article reporter is fixed at byline parse, not
+  // overwritten by later bylines.
+  var bylineMatch = line.match(BYLINE_RE);
+  if (bylineMatch) {
+    pushIfSubstantive(currentArticle);
+    currentArticle = {
+      section: currentSection || '(unknown)',
+      reporter: bylineMatch[1].trim(),
+      headline: pendingHeadline,
+      text: line + '\n',
+      startLine: i,
+    };
+    pendingHeadline = '';
+    continue;
   }
 
-  // Headline detection: first non-empty line after section header that isn't a separator
-  if (currentArticle && !currentArticle.headline && line.trim() && !/^[━─═\-*#|]/.test(line.trim())) {
-    currentArticle.headline = line.trim();
+  // Track candidate headline as the most-recent non-separator non-empty line
+  // before a byline. Reset on new section.
+  if (trimmed && !SEP_LINE_RE.test(trimmed)) {
+    if (!currentArticle) {
+      pendingHeadline = trimmed;
+    } else if (!currentArticle.headline) {
+      currentArticle.headline = trimmed;
+    }
   }
 
-  // Accumulate text
+  // Accumulate text into the open article.
   if (currentArticle) {
     currentArticle.text += line + '\n';
   }
 
-  // End marker — break only at LETTERS TO THE EDITOR. Letters parsing is its
-  // own pass below; breaking here keeps letters out of the section parser AND
+  // End marker — break at LETTERS TO THE EDITOR. Letters parsing is its own
+  // pass below; breaking here keeps letters out of the section parser AND
   // separates main content from the trailing structured block (ARTICLE TABLE,
-  // CITIZEN USAGE LOG, STORYLINES UPDATED, COMING NEXT EDITION) which always
-  // appears AFTER letters in every edition E78+. Earlier versions tried to
-  // match those markers directly, but E92 embeds an inline "ARTICLE TABLE
-  // ENTRIES:" + "CITIZEN USAGE LOG:" mid-body that would falsely terminate
-  // the parser before reaching the BUSINESS section.
-  if (/^LETTERS TO THE EDITOR/i.test(line.trim())) {
-    if (currentArticle && currentArticle.text.length > 50) {
-      articles.push(currentArticle);
-    }
+  // CITIZEN USAGE LOG, STORYLINES UPDATED, COMING NEXT EDITION).
+  if (/^LETTERS TO THE EDITOR/i.test(trimmed)) {
+    pushIfSubstantive(currentArticle);
     currentArticle = null;
-    break; // Stop parsing at structured sections
+    break;
   }
 }
 
-// Catch last article
-if (currentArticle && currentArticle.text.length > 50) {
-  articles.push(currentArticle);
+// Catch last article.
+pushIfSubstantive(currentArticle);
+
+// Coverage gate (G-P6-followup): compare detected articles to the raw byline
+// count up-front. If parser found fewer articles than there are bylines, warn
+// loudly — downstream domain ratings will encode less than what was published.
+var rawBylineCount = (text.match(/^By\s+/gm) || []).length;
+if (articles.length < rawBylineCount) {
+  console.warn('[WARN] Parser detected ' + articles.length + ' articles but source has ' +
+    rawBylineCount + ' bylines. ' + (rawBylineCount - articles.length) +
+    ' article(s) below the 50-char substantive threshold or skipped — domain ratings ' +
+    'will not reflect them. Inspect source.');
 }
 
 console.log('Articles found: ' + articles.length);

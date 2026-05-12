@@ -127,7 +127,7 @@ Mass trades destroy championship core (Cy Newell, Edmundo Peña, Peter Busch, Ag
   - **Edmundo Peña** - 5x All-Star closer, 42 saves → GONE for 26-year-old with 5 blown saves
   - **Benji Dillon** - 2nd in Cy Young, ALCS G4 shutout → NOT RETURNING
   - **Antonio Castro** - career year → GONE for Jeremy McCracken (9-14)
-- **New Pieces:** Travis Coles (ace), Eric Tavares (.237 hitter, 7-year contract), Deacon Seymour (manager never managed before)
+- **New Pieces:** Travis Coles (ace), Eric Taveras (.237 hitter, 7-year contract), Deacon Seymour (manager never managed before)
 - **Key Quote:** "Maybe Mike Paulson is in Chicago eating dinner with basketball players while Oakland burns."
 - **Grudging Loyalty:** "I'll be there Opening Day. I'll wear my Kelley jersey. But I won't pretend this doesn't hurt."
 - **Supermemory Status:** ✅ Saved (ID: dhJQsdLKCXrr2TZN6kZEUv)
@@ -396,7 +396,7 @@ Mass trades destroy championship core (Cy Newell, Edmundo Peña, Peter Busch, Ag
 
 **New Acquisitions (skepticism):**
 - Travis Coles (cost Cy/Agustin/Peter)
-- Eric Tavares (.237 hitter, 7-year contract)
+- Eric Taveras (.237 hitter, 7-year contract)
 - Jeremy McCracken (9-14, cost Castro)
 - Deacon Seymour (manager never managed before)
 
@@ -458,7 +458,7 @@ Independent voice within Bay Tribune Opinion Division, bridge between fans/field
 - Cy Newell - debut hero, "sharpening" quote, traded away
 - Edmundo Peña - 5x All-Star closer, decade of dominance
 - Deacon Seymour (POP-00528) - new manager, subject of skepticism
-- Eric Tavares - 7-year contract, .237 hitter, "next Isley Kelley?"
+- Eric Taveras - 7-year contract, .237 hitter, "next Isley Kelley?"
 - Travis Coles - ace acquisition that cost three beloved players
 
 ---

@@ -4,7 +4,8 @@
   "description": "GodWorld city simulation engine",
   "scripts": {
     "lint": "eslint . --ext .js --max-warnings 50",
-    "lint:fix": "eslint . --ext .js --fix"
+    "lint:fix": "eslint . --ext .js --fix",
+    "test": "node scripts/run-tests.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.79.0",

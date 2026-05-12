@@ -483,7 +483,7 @@ pointers:
 ## Engine_Errors
 
 - **Rows:** 25
-- **Columns:** 5
+- **Columns:** 10
 
 | Col | Header |
 |-----|--------|
@@ -492,6 +492,11 @@ pointers:
 | C | Phase |
 | D | Error |
 | E | Stack |
+| F | Class |
+| G | Source |
+| H | Severity |
+| I | Resolved |
+| J | Hash |
 
 ---
 

@@ -69,25 +69,59 @@ function logEngineError_(ctx, phase, error) {
     ctx.summary.auditIssues.push('[' + phase + '] ' + error.message);
   }
 
-  // Optionally write to Engine_Errors sheet (creates if missing)
+  // Optionally write to Engine_Errors sheet (creates if missing).
+  // S216 engine.15 Phase 3 — sheet expanded from 5 → 10 cols. Writer now
+  // populates Class/Source/Severity/Resolved/Hash for cross-class diagnostic
+  // ledger consistency (lib/diagnosticLedger reads same sheet). Severity
+  // 'high' for FATAL phases, 'medium' for non-fatal phase failures.
   try {
     if (ctx && ctx.ss) {
       var errSheet = ctx.ss.getSheetByName('Engine_Errors');
       if (!errSheet) {
         errSheet = ctx.ss.insertSheet('Engine_Errors');
-        errSheet.appendRow(['Timestamp', 'Cycle', 'Phase', 'Error', 'Stack']);
+        errSheet.appendRow(['Timestamp', 'Cycle', 'Phase', 'Error', 'Stack',
+          'Class', 'Source', 'Severity', 'Resolved', 'Hash']);
       }
       var cycleId = (ctx.summary && ctx.summary.cycleId) ? ctx.summary.cycleId : 'Unknown';
+      var severity = /FATAL/i.test(phase) ? 'high' : 'medium';
+      var hashInput = 'engine-error|' + phase + '|' + (error.message || '').substring(0, 100);
+      var hash = computeShortHash_(hashInput);
       errSheet.appendRow([
         new Date().toISOString(),
         cycleId,
         phase,
         error.message,
-        (error.stack || 'N/A').substring(0, 500)
+        (error.stack || 'N/A').substring(0, 500),
+        'engine-error',
+        phase,
+        severity,
+        '',
+        hash
       ]);
     }
   } catch (logErr) {
     Logger.log('Could not write to Engine_Errors sheet: ' + logErr.message);
+  }
+}
+
+/**
+ * Short hash for Engine_Errors dedup. Apps Script doesn't have crypto;
+ * use Utilities.computeDigest with SHA1 and return first 12 hex chars.
+ * Mirrors lib/diagnosticLedger.computeHash() so node-side dedup matches
+ * engine-side writes.
+ */
+function computeShortHash_(input) {
+  try {
+    var bytes = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_1, input);
+    var hex = '';
+    for (var i = 0; i < bytes.length; i++) {
+      var b = bytes[i] < 0 ? bytes[i] + 256 : bytes[i];
+      var s = b.toString(16);
+      hex += s.length === 1 ? '0' + s : s;
+    }
+    return hex.substring(0, 12);
+  } catch (e) {
+    return '';
   }
 }
 

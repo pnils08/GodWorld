@@ -4,7 +4,7 @@
  * falls back to LastUpdated delta vs current cycle when no prior audits exist.
  */
 
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 const STUCK_THRESHOLD = 3;
 
 function parseCycleHint(val) {
@@ -31,6 +31,7 @@ function detect(ctx) {
     const status = row.Status || '';
 
     let cyclesInState = null;
+    let everSeenInPriors = false;
     for (const p of prior) {
       const prev = (p.patterns || []).find(x =>
         x.type === 'stuck-initiative' &&
@@ -49,24 +50,44 @@ function detect(ctx) {
       }
       const priorRow = (p.snapshots && p.snapshots.Initiative_Tracker || [])
         .find(r => (r.InitiativeID || r.Name) === id);
-      if (priorRow && priorRow.ImplementationPhase === phase) {
-        cyclesInState = (cyclesInState || 0) + 1;
+      if (priorRow) {
+        everSeenInPriors = true;
+        if (priorRow.ImplementationPhase === phase) {
+          cyclesInState = (cyclesInState || 0) + 1;
+        } else {
+          // S216 fix (civic.7): phase changed this cycle. Initiative existed
+          // in priors but in a different phase — that proves it just advanced.
+          // Stop walking; cyclesInState floors at whatever consecutive matches
+          // we found before this point (0 if none).
+          cyclesInState = cyclesInState != null ? cyclesInState : 0;
+          break;
+        }
       }
     }
 
     if (cyclesInState == null) {
-      // Cold-start fallback: no prior audits to derive cyclesInState from.
-      // LastUpdated is a date-string timestamp ("4/21/2026"), NOT a cycle —
-      // do not parseCycleHint it (regex matches the month digit and yields
-      // wildly wrong cycle counts). NextActionCycle is forward-looking
-      // (deadline), so the <= cycle guard rejects it. VoteCycle records the
-      // cycle the initiative was voted on — closest "how long since active"
-      // proxy without phase-change history.
-      const voteCycle = parseCycleHint(row.VoteCycle);
-      if (voteCycle != null && voteCycle <= cycle) {
-        cyclesInState = cycle - voteCycle;
-      } else {
+      // S216 fix (civic.7): cold-start fallback only fires when initiative was
+      // not found in ANY prior audit snapshot. Previously, walking priors
+      // without finding a phase match left cyclesInState=null and triggered
+      // the vote-cycle fallback, producing phantom counts (INIT-005 phase just
+      // advanced design-phase → design-development-active C93, fallback
+      // reported 13 cycles stuck). Now: if we saw it in priors but never in
+      // current phase, cyclesInState=0 (just entered current phase).
+      if (everSeenInPriors) {
         cyclesInState = 0;
+      } else {
+        // True cold-start: no prior audit history. LastUpdated is a date-string
+        // timestamp ("4/21/2026"), NOT a cycle — do not parseCycleHint it
+        // (regex matches the month digit and yields wildly wrong cycle counts).
+        // NextActionCycle is forward-looking (deadline), so the <= cycle guard
+        // rejects it. VoteCycle records the cycle the initiative was voted on
+        // — closest "how long since active" proxy without phase-change history.
+        const voteCycle = parseCycleHint(row.VoteCycle);
+        if (voteCycle != null && voteCycle <= cycle) {
+          cyclesInState = cycle - voteCycle;
+        } else {
+          cyclesInState = 0;
+        }
       }
     }
 

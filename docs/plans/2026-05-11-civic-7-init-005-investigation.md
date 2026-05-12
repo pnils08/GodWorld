@@ -1,9 +1,9 @@
 ---
 title: civic.7 — INIT-005 phase-advance investigation + MilestoneNotes reader
 created: 2026-05-11
-updated: 2026-05-11
+updated: 2026-05-12
 type: plan
-tags: [civic, engine, investigation, active]
+tags: [civic, engine, investigation, closed]
 sources:
   - "[[../../output/production_log_city_hall_c93_gaps.md]] §G-11 — origin gap"
   - "[[../engine/ROLLOUT_PLAN]] §civic.7 — parent ROLLOUT entry"
@@ -122,3 +122,4 @@ If Phase 1 reveals Scenario B with a writeback bug, the whole row stays engine-s
 ## Changelog
 
 - 2026-05-11 — Plan filed (S215 research-build close). Engine-sheet picker-grab. Investigation procedure + acceptance criteria + helper-script spec inline. Registered in [[../index]].
+- 2026-05-12 — Closed (S216 engine-sheet). Outcome: **Scenario C — engine auditor false positive**, neither A (commitment slipped) nor B (writeback bug). Phase 1 read of Initiative_Tracker INIT-005 row directly: `ImplementationPhase = "design-development-active"` (advanced from C92's `design-phase`); MilestoneNotes contains C93 entry naming Atlas Bay Architects executing $4.5M fixed-fee contract + Sarah Huang on-site + 30% schematic + 52-resident community workshop. Chen-Ramirez C93 voice JSON wrote `trackerUpdates.ImplementationPhase = "design-development-active"` correctly; applyTrackerUpdates fired correctly. Bug located in `scripts/engine-auditor/detectStuckInitiatives.js` v1.0.0 — `cyclesInPhase()` walked priors, found INIT-005 in `design-phase` ≠ current `design-development-active`, exited loop with `cyclesInState=null`, triggered cold-start vote-cycle fallback (93−80=13), false-flagged stuck. Fix v1.1.0: `everSeenInPriors` flag + break-on-snapshot-phase-mismatch. Cold-start fallback now only fires when initiative was NEVER in any prior audit. Verified: detector re-run on C93 data drops INIT-005 + INIT-003 from stuck-initiative list (both phase-advanced this cycle); 3 stable-phase initiatives (INIT-001/002/006) still report inflated counts from carry-forward poisoning of older bad seed values — split out as ROLLOUT engine.12 (needs-info; options: regenerate priors / sanity clamp / one-cycle reset pass). Phase 3 helper `scripts/readInitiativeMilestoneNotes.js` shipped — reads single Initiative_Tracker row, splits MilestoneNotes on C{NN} boundaries, highlights matching cycle entry with star marker. City-hall-prep Step 1 wiring (Phase 3.2 of plan) split out as ROLLOUT civic.11 (research-build domain).

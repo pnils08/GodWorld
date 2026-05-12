@@ -38,6 +38,12 @@ const baselineBriefs = require('./engine-auditor/generateBaselineBriefs');
 const enrichers = [
   { name: 'checkMitigators', module: require('./engine-auditor/checkMitigators') },
   { name: 'recommendRemedy', module: require('./engine-auditor/recommendRemedy') },
+  // resolveAffectedCitizens must run BEFORE generateTribuneFraming — framing
+  // reads pattern.affectedEntities.citizens and propagates to storyHandles.
+  // S215 (pipeline.15 / G-S2 + G-S3 + G-W7): pre-fix the citizens slot was
+  // always empty, so framing shipped empty storyHandles and reporters
+  // fabricated names against unresolved demographic briefs.
+  { name: 'resolveAffectedCitizens', module: require('./engine-auditor/resolveAffectedCitizens') },
   { name: 'generateTribuneFraming', module: require('./engine-auditor/generateTribuneFraming') },
   { name: 'measureRemedies', module: require('./engine-auditor/measureRemedies') },
 ];

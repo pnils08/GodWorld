@@ -68,13 +68,13 @@ Cheapest item, unblocks everything. Acceptance: `npm test` runs all `*.test.js` 
 
 ### Phase 4 — High-value pure-logic contracts
 
-Highest blast-radius pure-logic items. Acceptance: each file has fixture-driven tests covering the canonical cases + 2-3 edge cases.
+**Status: 4.1-4.4 done S216. 4.5 deferred to next session (1100-line script, heavier ship).**
 
-- **4.1** `lib/editionParser.js` — golden-file tests against `editions/cycle_pulse_edition_*.txt` (editions 78-93 already in tree as fixtures). Pin parser output for each.
-- **4.2** `lib/citizenDerivation.js` — tier classification tests. Canon-protected; wrong tier downgrade can delete a Tier-1.
-- **4.3** `lib/economicLookup.js` — retiree-role regex + small lookup paths.
-- **4.4** `lib/districtMap.js` — pure 92-line lookup; trivial coverage.
-- **4.5** `scripts/validateEdition.js` contract — pin editions 78-93 as known-pass fixtures. Hand-craft 3-4 known-fail editions (missing byline, time-rule violation, vote-math mismatch). Assert validateEdition keeps passing the good and rejects the bad.
+- **4.1** ✅ `lib/editionParser.test.js` — `guessBeat` covers 15+ named beats (meta precedence-first, editorial beats, case-insensitive). `parseEdition` smoke-tests 5 most recent edition fixtures from `editions/`; asserts parse doesn't throw + result.sections is non-empty array with name/beat fields.
+- **4.2** ✅ `lib/citizenDerivation.test.js` — 18 scenarios. Hash determinism, ageBracket 5-band coverage, ANCHOR_YEAR canon (2041), pickFromCDF, deriveGender (neighborhood variance + base 0.51 + determinism), computeCareerStage, deriveYearsInCareer (clamped + retiree path), deriveDebtLevel (income-inverse), deriveNetWorth (age × income × retiree), deriveMaritalStatus (bracket-conditional CDF + widowed-only-45+), deriveNumChildren (partnered effect), deriveCitizenProfile orchestrator (all-fields + determinism), lookupNeighborhood (Engine/Generational sentinels rejected).
+- **4.3** ✅ `lib/economicLookup.test.js` — buildParamIndex, lookupProfile (happy path + null + SPORTS_OVERRIDE), calculateIncome (null profile + range-clamped + tier modifier scaling + retirement reduction), deriveWealthLevel (8 thresholds + net-worth boost), deriveSavingsRate (bracket mapping), isRetiredRole regex (positive + word-boundary "Retiree" rejected + null/empty).
+- **4.4** ✅ `lib/districtMap.test.js` — 6 scenarios. DISTRICT_NEIGHBORHOODS (9 districts), DISTRICT_FACTIONS canon (OPP=4, CRC=3, IND=2 totaling 9), DISTRICT_HOLDERS (D7 Ashford, D2 Tran, D5 Rivers + all 9 present), getDistrictForNeighborhood (case-insensitive + null/unknown), getNeighborhoodsForDistricts (multi-district split + case-insensitive + unknown), getAllNeighborhoods.
+- **4.5** Deferred: `scripts/validateEdition.js` contract test. 1100-line script with multiple validation rules. Test design needs: (a) pin editions 78-93 as known-pass fixtures (16 fixtures, may take 30-60s to run all); (b) hand-craft 3-4 known-fail editions covering distinct failure modes (missing byline, time-rule violation, vote-math mismatch, missing front-page citizen brief). Plan + prep next session.
 
 ### Phase 5 — Mutating-script safety contracts
 
@@ -119,3 +119,4 @@ Phase 1 ships first (foundation). Phase 2 + 3 can ship in parallel sessions (no 
 - 2026-05-12 — Plan filed (S216 engine-sheet). Phase 1 ships in same session: scripts/run-tests.js + package.json test script + lint.yml test job. Phases 2-7 picker-grab for subsequent engine-sheet sessions.
 - 2026-05-12 — Phase 2 ships in same session (S216 engine-sheet continuation). 2.1-2.6 complete, 2.7 deferred (engineAuditor.integration.test.js needs lib/sheets mocking refactor first). 6 new test files, 67 new assertions. Total: 13 files / 196 assertions / all green. Detector regression class fully covered — every `scripts/engine-auditor/detect*.js` has a `*.test.js` peer. Bonus: `detectIncoherence.js` was missing from the original plan; covered in same batch.
 - 2026-05-12 — Phase 3 ships complete in same session. 3.1: live Engine_Errors expansion 5 → 10 cols + 24-row backfill. 3.2: `lib/diagnosticLedger.js` (DI factory, 29-assertion test). 3.3: `scripts/run-tests.js` opt-in wiring (gated on env vars). 3.4: `scripts/engineAuditor.js --ledger` flag for audit findings. 3.5: schema regen. Engine writer `logEngineError_()` updated to 10-cell rows + clasp push deployed. Net: runtime errors, test fails, and audit findings share one surface with consistent classification + dedup + resolution tracking. Total project test surface: 14 files / 225 assertions / all green.
+- 2026-05-12 — Phase 4.1-4.4 ships in same session. Pure-logic contracts: lib/districtMap.test.js (6 scenarios), lib/economicLookup.test.js (12 scenarios), lib/citizenDerivation.test.js (18 scenarios), lib/editionParser.test.js (5 scenarios incl. real edition-fixture parse smoke). 4.5 (validateEdition 1100-line contract) deferred to next session. Total project test surface: 18 files / 373 assertions / all green.

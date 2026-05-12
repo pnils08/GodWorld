@@ -53,7 +53,8 @@ PROJECT_ROOT = Path(__file__).parent.parent
 # ═══════════════════════════════════════════════════════════════════════════
 
 def supermemory_search(query: str, container: str, limit: int = 5,
-                       mode: str = None, threshold: float = None) -> str:
+                       mode: str = None, threshold: float = None,
+                       sort: str = None) -> str:
     """Search a Supermemory container.
 
     mode: None (CLI default 'memories'), 'hybrid', or 'documents'. Use 'hybrid'
@@ -61,6 +62,13 @@ def supermemory_search(query: str, container: str, limit: int = 5,
         default memories-mode threshold of 0.6.
     threshold: None (CLI default 0.6) or a 0-1 float. Lower for richer recall
         on short cards.
+    sort: None (similarity, CLI default) or 'recency'. Recency parses the CLI's
+        --json output and re-ranks by updatedAt desc — for stacked-canon
+        containers like bay-tribune where the newest ingest is authoritative
+        and older versions are stale (S215 canon.1c / G-S9: Patricia Nolan
+        66→55 across E85→E92→E93 + Dante Nelson Adams Point→West Oakland
+        across E83→E86; bay-tribune doesn't dedupe per-citizen, so similarity
+        ranking surfaces whichever version had the fattest content match).
     """
     try:
         cmd = ['npx', 'supermemory', 'search', query, '--tag', container,
@@ -69,6 +77,49 @@ def supermemory_search(query: str, container: str, limit: int = 5,
             cmd.extend(['--mode', mode])
         if threshold is not None:
             cmd.extend(['--threshold', str(threshold)])
+
+        if sort == 'recency':
+            # Need JSON to access updatedAt for client-side re-rank. Fetch a
+            # wider window then trim — the top-similarity hits aren't always
+            # the top-recency hits, so over-fetch + sort + trim is the only
+            # way to guarantee the newest version reaches the caller.
+            cmd_json = cmd + ['--limit', str(max(limit * 3, 10)), '--json']
+            # Replace the original --limit pair with the wider one
+            for i, arg in enumerate(cmd_json):
+                if arg == '--limit' and i + 1 < len(cmd_json) and cmd_json[i + 1] == str(limit):
+                    cmd_json[i + 1] = str(max(limit * 3, 10))
+                    break
+            result = subprocess.run(
+                cmd_json,
+                capture_output=True, text=True, timeout=15,
+                cwd=str(PROJECT_ROOT)
+            )
+            if not result.stdout:
+                return f"No results for '{query}' in {container}"
+            try:
+                parsed = json.loads(result.stdout)
+                hits = parsed.get('results', [])
+                # Sort newest-first by updatedAt (ISO 8601 strings sort
+                # lexicographically; falsy values to the end).
+                hits.sort(key=lambda r: r.get('updatedAt') or '', reverse=True)
+                top = hits[:limit]
+                if not top:
+                    return f"No results for '{query}' in {container}"
+                # Render same shape as the CLI text output for consistency
+                # with existing callers.
+                lines = [f"=== {container} — recency-ranked, {len(top)} of {len(hits)} hits ==="]
+                for r in top:
+                    when = (r.get('updatedAt') or '').split('T')[0]
+                    sim = r.get('similarity')
+                    sim_tag = f" sim={sim:.3f}" if isinstance(sim, (int, float)) else ''
+                    lines.append(f"--- {when} (id={r.get('id', '?')}){sim_tag}")
+                    body = r.get('memory') or r.get('content') or ''
+                    lines.append(body)
+                return '\n'.join(lines)
+            except (json.JSONDecodeError, AttributeError, TypeError):
+                # Fall back to raw stdout if JSON parse fails
+                return result.stdout.strip()
+
         result = subprocess.run(
             cmd,
             capture_output=True, text=True, timeout=15,
@@ -122,10 +173,17 @@ def lookup_citizen(name: str) -> str:
     # Also try wd-citizens directly first as the most specific source.
     citizen_card = supermemory_search(name, 'wd-citizens', 3, mode='hybrid', threshold=0.3)
     world = supermemory_search(name, 'world-data', 3, mode='hybrid', threshold=0.3)
-    canon = supermemory_search(name, 'bay-tribune', 3, mode='hybrid', threshold=0.3)
+    # S215 canon.1c (G-S9): bay-tribune stacks per-citizen wiki entries by
+    # edition (Patricia Nolan E85→E92→E93 each persist). Similarity ranking
+    # returns whichever version had the fattest text match — often a stale
+    # edition. Recency rank pushes the newest ingest to the top so callers
+    # see canonical-current facts first. canon.1b will eventually wipe the
+    # priors at ingest time; until then 1c surfaces the current version.
+    canon = supermemory_search(name, 'bay-tribune', 3, mode='hybrid', threshold=0.3,
+                               sort='recency')
     return (f"=== WD-CITIZENS (structured card) ===\n{citizen_card}\n\n"
             f"=== WORLD-DATA (broader state) ===\n{world}\n\n"
-            f"=== BAY-TRIBUNE (canon history) ===\n{canon}")
+            f"=== BAY-TRIBUNE (canon history, newest first) ===\n{canon}")
 
 
 @mcp.tool()

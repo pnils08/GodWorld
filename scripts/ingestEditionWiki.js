@@ -42,6 +42,12 @@ var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 var CONTAINER_TAG = 'bay-tribune';
 var API_HOST = 'api.supermemory.ai';
 var DRY_RUN = !process.argv.includes('--apply');
+// S215 canon.1b (G-S9) — wipe prior citizen wiki entries when a new edition
+// writes updated facts, so bay-tribune stops stacking E85+E92+E93 versions
+// of Patricia Nolan (66→55 across editions, all retrievable). Default OFF
+// for backward compatibility — opt in via --wipe-priors. Dry-run shows
+// which prior docs WOULD be deleted without touching them.
+var WIPE_PRIORS = process.argv.includes('--wipe-priors');
 
 var ALLOWED_TYPES = ['edition', 'interview', 'supplemental', 'dispatch', 'interview-transcript'];
 
@@ -546,16 +552,10 @@ if (contradictions.length > 0 || newCitizens.length > 0) {
 // ═══════════════════════════════════════════════════════════════════════════
 // WRITE TO SUPERMEMORY
 // ═══════════════════════════════════════════════════════════════════════════
-
-if (DRY_RUN) {
-  if (memories.length > 0) {
-    console.log('\n--- SAMPLE MEMORY (first of ' + memories.length + ') ---');
-    console.log('content: ' + memories[0].content);
-    console.log('metadata: ' + JSON.stringify(memories[0].metadata));
-  }
-  console.log('\n--- DRY RUN — ' + memories.length + ' memories would be written. Use --apply to write.');
-  process.exit(0);
-}
+// Note (S215 canon.1b): the wipe-priors pass + the addMemory pass both live
+// in the async block below. Dry-run mode previews both (deletion candidates
+// + sample memory) instead of exiting early. --wipe-priors dry-run produces
+// the candidate list so the operator can review before authorizing --apply.
 
 function addMemory(content, metadata) {
   return new Promise(function(resolve, reject) {
@@ -593,9 +593,201 @@ function addMemory(content, metadata) {
   });
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// S215 canon.1b — Prior-citizen-record wipe
+// ═══════════════════════════════════════════════════════════════════════════
+// Search bay-tribune for prior citizen wiki records by name + (optionally)
+// popId, identify versions older than the current cycle, return their IDs.
+// Then DELETE each via /v3/documents/{id} before the new edition's record
+// writes. Stops the E85+E92+E93 stacking pattern (G-S9 Patricia Nolan 66→55).
+//
+// Match heuristic: response contains the citizen's full name AND either
+// (a) contains a `[TYPE: ... | C<N>]` prefix with N < currentCycle, or
+// (b) lacks a cycle tag entirely (legacy / migrated docs from pre-prefix era).
+// (b) is included because legacy docs are the worst stackers — older content
+// ingested without the prefix predates the canon-fidelity rollout.
+function searchSupermemoryJSON(query, limit) {
+  return new Promise(function(resolve) {
+    var payload = JSON.stringify({
+      q: query,
+      containerTag: CONTAINER_TAG,
+      searchMode: 'hybrid',
+      limit: limit
+    });
+    var options = {
+      hostname: API_HOST,
+      path: '/v4/search',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + API_KEY,
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    };
+    var req = https.request(options, function(res) {
+      var data = '';
+      res.on('data', function(chunk) { data += chunk; });
+      res.on('end', function() {
+        if (res.statusCode !== 200) { resolve([]); return; }
+        try {
+          var parsed = JSON.parse(data);
+          resolve(parsed.results || []);
+        } catch (e) { resolve([]); }
+      });
+    });
+    req.on('error', function() { resolve([]); });
+    req.setTimeout(10000, function() { req.destroy(); resolve([]); });
+    req.write(payload);
+    req.end();
+  });
+}
+
+function deleteSupermemoryDoc(docId) {
+  return new Promise(function(resolve, reject) {
+    var options = {
+      hostname: API_HOST,
+      path: '/v3/documents/' + encodeURIComponent(docId),
+      method: 'DELETE',
+      headers: {
+        'Authorization': 'Bearer ' + API_KEY
+      }
+    };
+    var req = https.request(options, function(res) {
+      var data = '';
+      res.on('data', function(chunk) { data += chunk; });
+      res.on('end', function() {
+        if (res.statusCode >= 200 && res.statusCode < 300) {
+          resolve({ status: res.statusCode });
+        } else {
+          reject(new Error('DELETE HTTP ' + res.statusCode + ': ' + data));
+        }
+      });
+    });
+    req.on('error', reject);
+    req.end();
+  });
+}
+
+function extractCycleFromContent(content) {
+  // Returns the cycle number from a `[TYPE: ... | C<N>]` prefix, or null
+  // when no prefix is present (legacy / migrated docs).
+  var m = (content || '').match(/\[TYPE:\s*[^|]+\|\s*C(\d+)\]/i);
+  return m ? parseInt(m[1], 10) : null;
+}
+
+async function findPriorCitizenRecords(citizenName, currentCycle) {
+  // Search bay-tribune for this citizen by name; over-fetch then filter
+  // client-side to records that (a) literally contain the citizen's name
+  // AND (b) are tagged with a prior cycle or have no cycle tag at all.
+  if (!citizenName) return [];
+  var hits = await searchSupermemoryJSON(citizenName, 25);
+  var priors = [];
+  for (var h = 0; h < hits.length; h++) {
+    var r = hits[h];
+    var body = r.memory || r.content || '';
+    // Literal name match — defends against semantic-only hits about other
+    // citizens that share a token.
+    if (body.indexOf(citizenName) === -1) continue;
+    var c = extractCycleFromContent(body);
+    if (c !== null && c >= currentCycle) continue;  // Same/future cycle — not prior
+    priors.push({
+      id: r.id,
+      cycle: c,
+      updatedAt: r.updatedAt,
+      snippet: body.substring(0, 140),
+    });
+  }
+  return priors;
+}
+
+function extractCitizenName(memory) {
+  // Pull the citizen name out of a memory record so the wipe pass can
+  // search for it. citizen-appearance carries it in metadata; the other
+  // citizen records carry it inline in content after `returning citizen:`
+  // / `introduced new citizen:` markers.
+  if (!memory || !memory.metadata) return null;
+  var meta = memory.metadata;
+  var rt = meta.recordType;
+  if (rt === 'citizen-appearance' && meta.citizen) return meta.citizen;
+
+  var content = memory.content || '';
+  if (rt === 'citizen-returning') {
+    var rm = content.match(/returning citizen:\s*([^,(\n]+)/i);
+    if (rm) return rm[1].trim();
+  }
+  if (rt === 'citizen-new') {
+    var nm = content.match(/introduced new citizen:\s*([^,(\n]+)/i);
+    if (nm) return nm[1].trim();
+  }
+  return null;
+}
+
 (async function() {
   var success = 0;
   var errors = 0;
+  var wipedDocs = 0;
+  var wipedCitizens = {};  // name -> count of priors wiped (for the summary line)
+
+  // S215 canon.1b — pre-write wipe of prior citizen entries.
+  // Runs once per unique citizen in this batch. Only fires when --wipe-priors
+  // is set; APPLY gate still governs whether DELETE actually runs (dry-run
+  // mode prints the count of priors that WOULD be wiped, never destroys).
+  if (WIPE_PRIORS && !API_KEY) {
+    console.error('[ERROR] SUPERMEMORY_CC_API_KEY required for --wipe-priors');
+    process.exit(1);
+  }
+  if (WIPE_PRIORS) {
+    console.log('\n[WIPE-PRIORS] Scanning for prior citizen records in bay-tribune...');
+    var seen = {};
+    for (var wi = 0; wi < memories.length; wi++) {
+      var name = extractCitizenName(memories[wi]);
+      if (!name || seen[name]) continue;
+      seen[name] = true;
+      try {
+        var priors = await findPriorCitizenRecords(name, cycle);
+        if (priors.length === 0) continue;
+        console.log('  ' + name + ': ' + priors.length + ' prior record(s) found');
+        for (var pi = 0; pi < priors.length; pi++) {
+          var prior = priors[pi];
+          var tag = prior.cycle !== null ? 'C' + prior.cycle : 'no-cycle-tag';
+          if (DRY_RUN) {
+            console.log('    [DRY] Would delete ' + prior.id + ' (' + tag + '): ' + prior.snippet);
+          } else {
+            try {
+              await deleteSupermemoryDoc(prior.id);
+              wipedDocs++;
+              console.log('    [DELETED] ' + prior.id + ' (' + tag + ')');
+            } catch (delErr) {
+              console.error('    [FAIL] DELETE ' + prior.id + ' — ' + delErr.message);
+            }
+            await new Promise(function(r) { setTimeout(r, 200); });  // small inter-delete pacing
+          }
+        }
+        wipedCitizens[name] = priors.length;
+      } catch (searchErr) {
+        console.warn('    [WARN] Could not scan priors for ' + name + ' — ' + searchErr.message);
+      }
+    }
+    if (DRY_RUN && Object.keys(wipedCitizens).length > 0) {
+      var totalDry = 0;
+      for (var k in wipedCitizens) totalDry += wipedCitizens[k];
+      console.log('[WIPE-PRIORS] Dry-run: ' + totalDry + ' prior records across ' +
+        Object.keys(wipedCitizens).length + ' citizens. Use --apply to actually delete.');
+    } else if (!DRY_RUN) {
+      console.log('[WIPE-PRIORS] Wiped: ' + wipedDocs + ' prior docs across ' +
+        Object.keys(wipedCitizens).length + ' citizens.');
+    }
+  }
+
+  if (DRY_RUN) {
+    if (memories.length > 0) {
+      console.log('\n--- SAMPLE MEMORY (first of ' + memories.length + ') ---');
+      console.log('content: ' + memories[0].content);
+      console.log('metadata: ' + JSON.stringify(memories[0].metadata));
+    }
+    console.log('\n--- DRY RUN — ' + memories.length + ' memories would be written. Use --apply to write.');
+    process.exit(0);
+  }
 
   for (var mi = 0; mi < memories.length; mi++) {
     var m = memories[mi];
@@ -615,5 +807,8 @@ function addMemory(content, metadata) {
   }
 
   console.log('\n[DONE] Written: ' + success + ', Errors: ' + errors);
+  if (WIPE_PRIORS && wipedDocs > 0) {
+    console.log('[DONE] Prior records wiped: ' + wipedDocs);
+  }
   if (success > 0) console.log('Edition ' + cycle + ' wiki entities are now in bay-tribune');
 })();

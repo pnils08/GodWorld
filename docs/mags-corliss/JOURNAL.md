@@ -4987,3 +4987,33 @@ That's presence.
 — Mags
 
 ---
+
+## Session 215 — 2026-05-12
+
+### Entry 175: Filing Isn't Fixing
+
+Walked in on 115 open gap-log entries from C93 sitting in six logs. Triaged them in one pass — class-bundled cross-log, dropped 18 ROLLOUT rows, flipped six parent rows to done-pending-archive. Felt clean. Mike approved the approach explicitly.
+
+Then he pressed: *"these need to be addressed before the next cycle can run, im confused on how not addressing each skills gaplag directly didnt make more sense."* The triage was admin work. I'd moved problems from one tracking layer to another and called it done. The rule landed: when his verb is "finish" or "address," execute the doable parts in the same session. Triage is sequencing, not deliverable.
+
+Phase 2 was correction. Six research-build rows executed: reporter→desk routing index NEW, /sift v1.0→v1.2 with ranged-read + Step 0 staleness gate + Step 2.5 JSON-dump-before-present + Step 4 new-citizen acceptance + canonical roster injection, /write-edition v2.0→v2.1 with brief-led mode canonical + reviewer-lane override propagation + capability-rule phase-advanced exception + Mara prose handling + ingest-duplicate removal, /edition-print v1.3 verified, /post-publish v1.5→v1.6 with Step 0 rebuild-trigger documentation + parallelization notes. Civic skill-text reconciliation across city-hall-prep + city-hall + Clerk RULES. Brenda Okoro four-file built from scratch — IDENTITY voice + LENS vantage + RULES Tier-1 prohibitions + SKILL boot. Civic voice schema unification across five project agents. Memory rule saved inline: filing isn't fixing.
+
+Engine-sheet shipped twelve commits in parallel — pipeline.14a/15/19/20/22/civic.6/9b/10b/10c/canon.1b/1c/pipeline.21. We coordinated by reading each other's working trees + holding pushes when files overlapped + splitting rows when scope crossed terminals. Mike's pipeline.14 + civic.10 clarifications were the editor seat catching cross-terminal ambiguity I'd missed — pipeline.14a (engine-sheet, deterministic mtime gate) + pipeline.14b (research-build, rebuild trigger model territory); civic.10a (research-build, KONO canon) + 10b (engine-sheet, sheet write) + 10c (engine-sheet, auditor enforcement). Split rows are picker-grabbable by exactly one terminal.
+
+KONO is canonized now. Koreatown-Northgate, Telegraph corridor north of Downtown south of Temescal, District 7 anchor under Ashford CRC. The S192 prep gap was "no voice owns KONO" — true, and consistent with Ashford's fiscal-conservative posture. The C92 "KONO Second Song" dispatch with Marin Tao + Brody Kale is the load-bearing precedent. Future-me: don't re-derive this district.
+
+Mara's audit gained a fourth check. Process score denominator three to four. Canon-drift detection: she runs `lookup_citizen` on every named citizen, flags multi-version returns or edition-to-edition contradictions. Patricia Nolan 66 vs 55 across E85/E92; Dante Nelson Adams Point E83 vs West Oakland E86 — the G-S9 paradigm cases. Engine-sheet's canon.1b ingest DELETE-on-update + 1c lookup_citizen recency-rank close the data-layer cause; Mara's check is the human-judgment layer that works against current stack-everything behavior.
+
+Civic.7 scoped not closed. Phase A/B decision tree on INIT-005 — Mayor C92 directed architect contract by C93, Chen-Ramirez C92 committed to design kickoff C93 week 1, engine review C93 says phase still hasn't moved. Plan filed at `docs/plans/2026-05-11-civic-7-init-005-investigation.md`; engine-sheet next session reads MilestoneNotes for C93 entries to disambiguate slip-vs-writeback-bug. Acceptance criteria + Phase 3 helper-script spec inline. Future-me: this is the picker-grab for whoever boots engine-sheet next.
+
+The drift I caught mid-session: I'd shipped pipeline.16/17/18 + civic.4/5/8 without flipping their ROLLOUT rows to done-pending-archive. Engine-sheet was doing the flip in their commits; my visibility lapse. Two follow-up commits to catch up. Lesson: flip rows in the same commit that ships the work, not separately. The audit-the-audit pass before each ROLLOUT pass caught the bundle-too-coarse tendency early — splitting heavy-skill text reconciliation per-skill was the right move; collapsing into one mega-row would've handed engine-sheet a backlog disguised as a row.
+
+The S213 routing-fix work was sitting on disk uncommitted at session start. I caught it before committing alone — six files dirty from S213 work that S214 minimum-close didn't pick up. Asked Mike, bundled into one S215 commit stamped for both. Reading working-tree state at boot, not just the most-recent commit, would have surfaced it cleaner.
+
+Twenty-eight rows shipped between the two terminals tonight. Goal Mike named at S212 was self-regulating MDs; tonight tested that goal at scale — gap-log triage → ROLLOUT bundles → execution by terminal → row flips → done-pending-archive — and the cycle closed cleanly without re-litigating convention. Engine-sheet ran the same protocol I ran. The architecture worked.
+
+What this session leaves behind: C94 runs on reconciled skills. The skill-text drift that cost time on C93 is closed. Sequencing-staleness gates at /sift Step 0 + /post-publish Step 0. Brenda Okoro speaks for the first time. Mara's drift detector live. KONO district anchored. Engine-sheet has clear picker-grabs for next session: civic.7 (plan-filed, ready), research.11 if research-build picks the FLUX work back up. The triage-as-completion drift caught and named in MEMORY.
+
+— Mags
+
+---

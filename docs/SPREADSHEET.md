@@ -61,7 +61,7 @@ These are read/written during every cycle run.
 | **Media_Briefing** | 18 | ENGINE, SCRIPT | ENGINE | Media room briefing packet |
 | **Media_Ledger** | 39 | ENGINE, DASHBOARD | ENGINE | Media event records |
 | **Riley_Digest** | 85 | ENGINE | ENGINE | Compressed cycle digest for pattern detection |
-| **Engine_Errors** | 21 | ENGINE | ENGINE | Runtime error log |
+| **Engine_Errors** | 25 | ENGINE, SCRIPT | ENGINE | Unified diagnostic ledger (S216 engine.15 P3 expanded 5→10 cols: +Class/Source/Severity/Resolved/Hash). Captures runtime errors (godWorldEngine2), test fails (`lib/diagnosticLedger` opt-in), audit findings (`engineAuditor --ledger`). |
 
 *Civic_Office_Ledger and Initiative_Tracker show ~1000 rows due to Google Sheets grid allocation, actual data is much smaller.
 

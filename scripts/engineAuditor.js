@@ -289,6 +289,34 @@ async function main() {
   console.log(`Wrote ${briefsPath}`);
   console.log(`Ailments: ${patterns.length} | Anomalies: ${anomalies.length} | Briefs: ${briefs.length}`);
   console.log(`Elapsed: ${elapsed}s`);
+
+  // S216 engine.15 Phase 3.4 — opt-in: append HIGH-severity unresolved findings
+  // to Engine_Errors via diagnosticLedger when --ledger flag set. Off by default
+  // — every audit run would otherwise pollute the sheet with same-pattern
+  // entries (recordIfNew dedups via hash, but the noise still adds up).
+  if (process.argv.includes('--ledger') && process.env.GODWORLD_SHEET_ID) {
+    try {
+      const ledger = require('../lib/diagnosticLedger');
+      const highPatterns = patterns.filter(p => p.severity === 'high');
+      if (highPatterns.length === 0) {
+        console.log('  --ledger: no HIGH-severity patterns to record');
+      } else {
+        const entries = highPatterns.map(p => ({
+          class: 'audit-finding',
+          source: `engineAuditor:${p.type}`,
+          error: p.description || `${p.type} pattern`,
+          context: JSON.stringify(p.evidence && p.evidence.fields || {}).substring(0, 500),
+          severity: p.severity,
+          cycle,
+        }));
+        const results = await Promise.all(entries.map(e => ledger.recordIfNew(e)));
+        const written = results.filter(r => r.written).length;
+        console.log(`  --ledger: ${written}/${entries.length} new audit-finding entries recorded (${entries.length - written} dedup hits)`);
+      }
+    } catch (err) {
+      console.error(`  --ledger error (continuing): ${err.message}`);
+    }
+  }
 }
 
 if (require.main === module) {

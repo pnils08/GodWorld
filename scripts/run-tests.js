@@ -85,5 +85,36 @@ if (failed.length === 0) {
 } else {
   console.log(red(bold(`✗ ${failed.length}/${tests.length} test files failed`)) + dim(` (${totalElapsed}s)`));
   failed.forEach(f => console.log(red(`  - ${f}`)));
+
+  // S216 engine.15 Phase 3.3 — record test-fail entries to diagnosticLedger
+  // when run locally (GODWORLD_SHEET_ID present + opt-in env). CI runs without
+  // credentials skip the write. Opt-in via GODWORLD_LEDGER_FAILS=1 to avoid
+  // every local run polluting the sheet during active development.
+  if (process.env.GODWORLD_SHEET_ID && process.env.GODWORLD_LEDGER_FAILS === '1') {
+    try {
+      require('../lib/env');
+      const ledger = require('../lib/diagnosticLedger');
+      const entries = failed.map(rel => ({
+        class: 'test-fail',
+        source: rel,
+        error: `Test file failed (non-zero exit)`,
+        severity: 'medium',
+      }));
+      Promise.all(entries.map(e => ledger.recordIfNew(e)))
+        .then(results => {
+          const written = results.filter(r => r.written).length;
+          console.log(dim(`  diagnosticLedger: ${written}/${entries.length} new test-fail entries recorded`));
+          process.exit(1);
+        })
+        .catch(err => {
+          console.error(dim(`  diagnosticLedger error (continuing): ${err.message}`));
+          process.exit(1);
+        });
+      return;
+    } catch (err) {
+      console.error(dim(`  diagnosticLedger unavailable (continuing): ${err.message}`));
+    }
+  }
+
   process.exit(1);
 }

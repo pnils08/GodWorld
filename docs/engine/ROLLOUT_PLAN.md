@@ -137,7 +137,7 @@ Per ADR-0005: each entry codes as `<group>.<n>`. State per §Convention. Descrip
 | pipeline.19 | Engine-side parser/script bug sweep — parseEdition inner article splitter + rateEditionCoverage parser + world_summary name-canon + ingestEditionWiki summary + Step 5 zero-entity JSON + extractExemplars double-iterate | ready | engine-sheet | gap-logs G-W20/W24, G-P2/P6-followup/P10/P20 |
 | pipeline.20 | Edition-print + path-cleanup misc polish — DJ word-band + missing-section warning + PDF date masthead + saveToDrive cycle parse + manifest warning + carmen_delaine path dedupe | ready | engine-sheet | gap-logs G-S13, G-PR7/PR16/PR17/PR19/PR20 |
 | pipeline.21 | buildDeskPackets caching + per-citizen index gap (4 of 5 player queries returned EMPTY) | needs-info | engine-sheet | gap-log G-P11 |
-| pipeline.22 | Civic wiki ingest builder — `ingestCivicWiki.js` per-official records to bay-tribune (`bt-civic-voice` tag) | ready | engine-sheet | gap-log G-P4 |
+| pipeline.22 | Civic wiki ingest builder — `ingestCivicWiki.js` per-official records to bay-tribune (`bt-civic-voice` tag) | done-pending-archive | engine-sheet | gap-log G-P4 — shipped S215; `scripts/ingestCivicWiki.js` + `/post-publish` Step 3 wired; C93 dry-run 39 memories (33 statements + 6 decisions); --apply pending Mike auth |
 
 ### engine.* — Engine code, ledger, schema
 

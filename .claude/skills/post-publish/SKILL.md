@@ -44,7 +44,7 @@ Flags:
 | 2b new businesses | ✓ | ✓ | ✓ | ✓ |
 | 2d truesource sweep | ✓ | — | ✓ | — |
 | 2c world summary | ✓ | — | — | — |
-| 3 civic wiki | ✓ (when built) | — | — | — |
+| 3 civic wiki | ✓ | — | — | — |
 | 4 coverage ratings | ✓ | — (C93-gated) | — (C93-gated) | — (C93-gated) |
 | 5 citizen+business intake | ✓ | ✓ | ✓ | ✓ |
 | 6 grade | ✓ | — | — | — |
@@ -177,9 +177,15 @@ World summary is per-cycle, not per-artifact. Non-edition types skip this withou
 
 ### Step 3: Civic Wiki — Per-Official Records (`--type edition` only)
 
-NOT BUILT. Future: `ingestCivicWiki.js` reads city-hall production log, produces per-official records matching the wiki ingest pattern. Until built, voice decisions live on disk in the city-hall production log and voice JSON files.
+```bash
+node scripts/ingestCivicWiki.js --cycle <XX> --apply
+```
 
-**Verification gate:** skipped for non-edition types and edition-when-script-missing. Skip annotated in production log Step 12.
+Shipped S215 (closes pipeline.22 / G-P4). Reads `output/civic-voice/<office>_c<XX>.json` (per-voice statement arrays — Mayor, factions, projects, Clerk, Chief, DA) + `output/city-civic-database/initiatives/*/decisions_c<XX>.json` (per-initiative consolidated decision) and emits per-statement + per-decision wiki records to `bay-tribune`. Each statement memory carries speaker / office / topic / position / quote / reasoning / related initiatives in content body for full-text indexing; metadata carries `recordType: civic-statement` (or `civic-decision`), `cycle`, `statementId`, `office`, `popId`, `topic`, `relatedInitiatives` for filtered retrieval.
+
+Use this so next-cycle sift can ask "what has Mayor Santana said about Health Center across cycles" via bay-tribune search instead of re-reading every civic voice JSON. Default is `--dry-run`; pass `--apply` to write.
+
+**Verification gate:** stdout reports `[DONE] Written: N, Errors: 0` AND N matches the pre-write `Total memories: N` line. Non-edition types skip this step (civic wiki is per-cycle, edition-aligned). Skip annotated in production log Step 12.
 
 ### Step 4: Coverage Ratings to Sheet
 ```bash
@@ -371,7 +377,7 @@ Per-type checklist applicability follows the matrix in §Usage. Edition runs all
 - [ ] Citizen cards refreshed
 - [ ] Cultural cards refreshed (non-edition + CUL-IDs in NAMES INDEX)
 - [ ] World summary ingested (edition only)
-- [ ] Civic wiki ingested (NOT BUILT — skip)
+- [ ] Civic wiki ingested (`node scripts/ingestCivicWiki.js --cycle <XX> --apply`; skip for non-edition types)
 - [ ] Coverage ratings written (edition) OR C93-gated skip noted (non-edition)
 - [ ] Edition graded (edition only)
 - [ ] Grade history updated (edition only)

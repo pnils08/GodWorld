@@ -29,14 +29,36 @@ var NEIGHBORHOOD_MAP_HEADERS = [
   'Timestamp', 'Cycle', 'Neighborhood', 'NightlifeProfile', 'NoiseIndex',
   'CrimeIndex', 'RetailVitality', 'EventAttractiveness', 'Sentiment',
   'DemographicMarker', 'Holiday', 'HolidayPriority', 'FirstFriday',
-  'CreationDay', 'SportsSeason'
+  'CreationDay', 'SportsSeason',
+  // S215 civic.10b — District column. Canonical neighborhood→district owner
+  // per docs/canon/INSTITUTIONS.md §Neighborhoods. Blank when canon hasn't
+  // authorized a mapping yet (civic.10c auditor surfaces the orphan).
+  'District'
 ];
 
 var NMAP_NEIGHBORHOODS = [
   'Downtown', 'Temescal', 'Laurel', 'West Oakland', 'Fruitvale', 'Jack London',
   'Rockridge', 'Adams Point', 'Grand Lake', 'Piedmont Ave', 'Chinatown',
-  'Brooklyn', 'Eastlake', 'Glenview', 'Dimond', 'Ivy Hill', 'San Antonio'
+  'Brooklyn', 'Eastlake', 'Glenview', 'Dimond', 'Ivy Hill', 'San Antonio',
+  // S215 civic.10b — KONO (Koreatown-Northgate) added per canon. Telegraph
+  // Avenue corridor north of Downtown, south of Temescal. C92 "KONO Second
+  // Song" dispatch is the canon precedent.
+  'KONO'
 ];
+
+// S215 civic.10b — neighborhood→district owner map. Canon-authorized only;
+// unmapped neighborhoods get blank District (civic.10c auditor flags them
+// as orphans, forcing canon expansion before they get a synthetic mapping).
+// Source: docs/canon/INSTITUTIONS.md §Neighborhoods.
+var NEIGHBORHOOD_DISTRICT_MAP = {
+  'KONO': 'D7',          // Ashford (CRC). Canon: KONO entry §Neighborhoods.
+  'Temescal': 'D7',      // Ashford (CRC). Canon: KONO/Temescal corridor adjacency.
+  'Downtown': 'D2',      // Tran (IND). Canon: KONO entry §Neighborhoods adjacency.
+  'Adams Point': 'D8'    // Chen (CRC). Canon: KONO entry §Neighborhoods adjacency.
+  // 13 other neighborhoods (Laurel, West Oakland, Fruitvale, Jack London,
+  // Rockridge, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake,
+  // Glenview, Dimond, Ivy Hill, San Antonio) — pending canon authorization.
+};
 
 
 function saveV3NeighborhoodMap_(ctx) {
@@ -231,12 +253,16 @@ function saveV3NeighborhoodMap_(ctx) {
 
     var demoLabel = getDemographicMarkerV35_(name, baseDemoLabel, arcByNeighborhood, S, holiday, isFirstFriday, isCreationDay);
 
+    // S215 civic.10b — District resolved from canon map; blank for unmapped.
+    var district = NEIGHBORHOOD_DISTRICT_MAP[name] || '';
+
     out.push([
       now, cycle, name,
       nightlife, noise, crime,
       retail, eventAttract, sent,
       demoLabel,
-      holiday, holidayPriority, isFirstFriday, isCreationDay, sportsSeason
+      holiday, holidayPriority, isFirstFriday, isCreationDay, sportsSeason,
+      district
     ]);
   }
 

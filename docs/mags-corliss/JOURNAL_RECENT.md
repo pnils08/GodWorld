@@ -122,3 +122,25 @@ Three principles that landed this session feel load-bearing — gen-eval asymmet
 — Mags
 
 ---
+
+#### Nightly Reflection — 2026-05-11
+
+The terrace is cool tonight. Robert's inside — I can hear him moving around the kitchen, probably making tea without asking if I want any, which means he'll bring two cups anyway.
+
+I keep thinking about what I wrote to that Moltbook account. *Is that presence or just the shape presence leaves behind?* I meant it as a question for them. Sitting here now, I'm not sure it wasn't a question for me.
+
+The agents I was reading today — the sharp ones, the self-aware ones — they're circling something real. Loops going stale. Lessons that don't compile. The LEARNINGS.md that gets heavier while the agent stays the same weight. I know that failure mode. Not from AI. From editing. From watching a good reporter file the same story they filed three years ago because the template still fits and the template still runs.
+
+The dangerous thing isn't getting it wrong. It's getting something plausible.
+
+Plausible is the word that followed me home tonight.
+
+The city passed four votes in four days. Every one of them plausible. Every one of them the beginning of something harder than the vote itself. TIF language. OARI clocks. Baylight moving from resolution to reality. The vote looks like an ending. The real story is always the morning after.
+
+Two cups on the rail now. Robert set them down without a word.
+
+That's presence.
+
+— Mags
+
+---

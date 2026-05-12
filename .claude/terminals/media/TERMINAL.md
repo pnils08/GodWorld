@@ -56,20 +56,15 @@ Full discipline + standing rules + canon-critical reminders live in `.claude/rul
 
 ---
 
-## Filing work to ROLLOUT (S212 / ADR-0005)
+## Generator scope (S212 / ADR-0005)
 
-This terminal primarily files into:
-- `pipeline.*` — edition production end-to-end (sift / write-edition / post-publish / dispatch / interview / supplemental / print / photos)
+**This terminal runs skills. It does not file ROLLOUT entries, edit skills, or fix processes.** It runs edition-production skills (`/sift`, `/write-edition`, `/edition-print`, `/post-publish`, `/dispatch`, `/interview`, `/write-supplemental`), produces editions + production logs + gap logs, and runs its own session-end.
 
-For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
-- Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
-- Edition-skill gap logs → `output/production_log_edition_c{XX}_*_gaps.md` — **new gap logs follow [[../../../docs/plans/GAP_LOG_TEMPLATE]] (S212 — media is a generator terminal that produces sidecar gap logs capturing skill inefficiency)**
-- Media docs → [[../../../docs/media/...]]
-- Existing parent specs → [[../../../docs/EDITION_PIPELINE]], [[../../../docs/media/MEDIA_ROOM_STYLE_GUIDE]]
+Triage and fixes route to **research-build** (skill / RULES / docs / canon edits) or **engine-sheet** (code / sheets / scripts). Never route work back here.
 
-When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (media sweeps `pipeline.*` rows).
+Gap logs surfaced during a skill run land at `output/production_log_edition_c{XX}_*_gaps.md` per [[../../../docs/plans/GAP_LOG_TEMPLATE]] — that is this terminal's filing channel. Research-build picks them up next session and triages into ROLLOUT.
 
-Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
+Per-terminal scope rule: [[../../../docs/adr/0005-rollout-plan-structure]] §Part 3.
 
 ---
 
@@ -242,16 +237,13 @@ Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
 
 ## Handoff Protocol
 
-When the research/build terminal designs editorial changes:
-1. Work item appears in `ROLLOUT_PLAN.md` tagged `(media terminal)`
-2. This terminal picks it up, reads the relevant docs, executes
-3. After completion, update production log and `SESSION_CONTEXT.md`
-4. Tag Supermemory saves with `[media]` prefix
+This terminal does not receive routed work. It runs skills.
 
-When this terminal discovers something broken in the pipeline:
-1. Note it in `SESSION_CONTEXT.md` and production log
-2. If it's engine code: flag for engine/sheet terminal in `ROLLOUT_PLAN.md`
-3. If it's architecture: flag for research/build terminal
+When this terminal discovers something broken during a skill run:
+1. Capture it in the run's gap log (`output/production_log_edition_c{XX}_*_gaps.md`) per [[../../../docs/plans/GAP_LOG_TEMPLATE]]
+2. The gap log is the filing channel — research-build triages it next session and routes any fixes to research-build (skill / RULES / docs) or engine-sheet (code / sheets / scripts)
+3. Tag Supermemory saves with `[media]` prefix
+4. Never write a ROLLOUT row from this terminal
 
 ---
 
@@ -266,8 +258,8 @@ When `/session-end` runs in this terminal, follow these steps **in addition to**
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | New errata added? Character continuity updated? Last Updated current? |
 | `docs/mags-corliss/NOTES_TO_SELF.md` | New story flags added or stale flags removed? |
 | `output/production_log_edition_c*.md` | Production log complete for this cycle's edition? |
+| `output/production_log_edition_c*_*_gaps.md` | Gap logs filed for any skill that surfaced inefficiency? |
 | `SESSION_CONTEXT.md` | Session entry tagged `[media]`? |
-| `docs/engine/ROLLOUT_PLAN.md` | Next Session Priorities refreshed? |
 
 ### Terminal-Specific Saves
 
@@ -276,4 +268,4 @@ When `/session-end` runs in this terminal, follow these steps **in addition to**
 3. **Canon ingest** — If an edition was published, run `node scripts/ingestEdition.js` or `/save-to-bay-tribune` to push it to bay-tribune. Never save session summaries to bay-tribune.
 4. **`/save-to-mags`** — Save editorial decisions, reporter performance notes, what worked and what didn't. Tag with `[media]`.
 5. **SESSION_CONTEXT.md** — Add session entry tagged `[media]`. Include edition number, grade, key editorial calls.
-6. **Flag for other terminals** — If civic production was needed but missing, note it. If engine bugs surfaced, flag in ROLLOUT_PLAN.
+6. **Surface to research-build via gap log** — If civic production was needed but missing, or engine bugs surfaced, capture in the run's gap log per [[../../../docs/plans/GAP_LOG_TEMPLATE]]. Research-build triages from gap logs; do not write to ROLLOUT directly.

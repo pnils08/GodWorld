@@ -1,7 +1,7 @@
 ---
 title: "ADR-0005: ROLLOUT_PLAN structure — semantic groups + pointer-only entries + per-terminal filing protocol"
 created: 2026-05-10
-updated: 2026-05-10
+updated: 2026-05-11
 type: reference
 tags: [architecture, infrastructure, decision, active]
 sources:
@@ -86,20 +86,33 @@ Five columns:
 
 ### Part 3: Per-terminal filing protocol
 
-Each `.claude/terminals/{name}/TERMINAL.md` carries a **§Filing work to ROLLOUT** section pointing to:
+**Generator-vs-builder split.** Two terminals are **generator spaces** — they run skills and produce artifacts, period. Two terminals are **builder spaces** — they design, edit, and code. Routing is one-directional: generator runs surface artifacts (editions, civic output, gap logs) → builders pick those up and execute fixes. Generators never edit skills, fix processes, triage gap logs, or file ROLLOUT entries.
 
-- Which groups that terminal typically files into (recommendation, not restriction)
-- Inline link to ROLLOUT_PLAN §How to add work for the template
-- The archive cadence (`done-pending-archive` → session-end sweep → `ROLLOUT_ARCHIVE.md`)
+| Terminal | Role | What this terminal does | What this terminal never does |
+|----------|------|-------------------------|-------------------------------|
+| **media** | Generator | Runs edition-production skills (`/sift`, `/write-edition`, `/edition-print`, `/post-publish`, `/dispatch`, `/interview`, `/supplemental`); produces editions + gap logs + production artifacts; runs its own session-end. | Edits skills. Fixes processes. Triages gap logs. Files ROLLOUT entries. |
+| **civic** | Generator | Runs city-hall skills (`/city-hall-prep`, `/city-hall`); produces civic artifacts + voice agent output + gap logs; runs its own session-end. | Edits skills. Fixes processes. Triages gap logs. Files ROLLOUT entries. |
+| **engine-sheet** | Builder | Engine code, ledger, schema, phase patterns, scripts, clasp deploys. Picks up engine work routed by research-build or surfaced by its own `/run-cycle` audit. | Runs edition skills. Triages media/civic gap logs (research-build triages first, engine fixes route here). |
+| **research-build** | Builder + Steward | Architecture, plans, ADRs, skill edits, doc graph, ROLLOUT stewardship, gap-log triage, research synthesis. Routes engine work to engine-sheet. | Executes engine code (delegates to engine-sheet). |
 
-Per-terminal default groups (recommendations, override when work crosses):
+**Routing flow (one-directional):**
+
+1. Generator terminal (media or civic) runs a skill → produces artifact + gap log to `output/`.
+2. Research-build picks up the gap log next session → triages entries → files ROLLOUT rows in the appropriate group with terminal column set to `research-build` (skill / RULES / docs / canon edits) or `engine-sheet` (code / scripts / sheet schema).
+3. Builder terminal (research-build or engine-sheet) executes; closes via `done-pending-archive` → `ROLLOUT_ARCHIVE.md` sweep.
+
+**Generator session-end:** still runs (per each terminal's TERMINAL.md §Session Close). Generator terminals close their own session — counters, journal-equivalents, log artifacts. They do not write to ROLLOUT.
+
+**Filing-protocol implication:** §How to add work template applies to research-build and engine-sheet only. media and civic never file. If you are at media or civic and notice work that needs filing, surface it to research-build via the gap-log artifact (which is its filing channel) — don't write a ROLLOUT row.
+
+Per-terminal group recommendations (for builder terminals):
 
 | Terminal | Primary groups | Notes |
 |----------|---------------|-------|
 | **engine-sheet** | `engine.*` | Schema specs / engine-repair rows / phase-pattern inventory often file as engine.* but may file `governance.*` for engine-spec docs |
-| **civic** | `civic.*` | Civic-process gap logs and city-hall artifacts |
-| **media** | `pipeline.*` | All edition-production gap logs and media-side fixes |
-| **research-build** | `governance.*`, `research.*` | Plus stewardship across all groups (architectural decisions land here regardless of which group they affect) |
+| **research-build** | `governance.*`, `research.*` | Plus stewardship across all groups (architectural decisions land here regardless of which group they affect, including pipeline.* and civic.* triage routed from generator gap logs) |
+
+Generator terminals (media, civic) have no primary groups — they don't file.
 
 ### Templates inline in ROLLOUT_PLAN
 
@@ -180,7 +193,7 @@ ADR-0004 (skill-bag naming) and ADR-0005 (this) share a discovery-wiring pattern
 2. Pick the next available number in that group
 3. Write a ≤80 char title
 4. Set state per Convention §State labels (typically `ready` for picker-grabable work, `needs-info` if gated on Mike or external)
-5. Set terminal per group recommendations (`engine-sheet` / `media` / `civic` / `research-build`)
+5. Set terminal — **builder terminals only**: `engine-sheet` (code / sheets / scripts) or `research-build` (skill / RULES / docs / ADRs / triage). Slash-separated for cross-builder work. Never `media` or `civic` — those are generator spaces and don't receive routed work (see §Part 3 routing flow).
 6. **Identify or create the pointer doc:**
    - For designed work: create or link `[[plans/YYYY-MM-DD-topic]]` — **copy `[[plans/TEMPLATE]]` for shape; register in `[[index]]` same commit per S147 inbound-link rule**
    - For in-flight observations from heavy-skill runs (civic + media generator terminals): link the gap log `[[output/production_log_..._gaps]]` — **new gap logs follow `[[plans/GAP_LOG_TEMPLATE]]` per S212 protocol; engine-sheet uses `[[engine/ENGINE_REPAIR]]` rows for its tactical-defects sidecar (different shape)**
@@ -208,3 +221,9 @@ If a row's group is wrong (work shifted scope), edit the row's `#` code and move
 - **ADR-0001** — adopting CONTEXT.md and ADRs. ADR-0005 follows the bar set there.
 - **ADR-0003** — skills as shared infrastructure. The friction-log pattern from ADR-0003 is the precedent for "templates govern future use, not just current shape."
 - **ADR-0004** — skill-bag naming principle. The discovery-wiring pattern (back-links from auto-loaded surfaces) is reused here.
+
+---
+
+## Changelog
+
+- 2026-05-11 (S213, research-build) — §Part 3 corrected. Original framing treated all four terminals as filers with "primary groups" — civic.* listed under civic terminal, pipeline.* listed under media terminal, "media-side fixes" called out as if media fixes anything. That was structurally wrong: media + civic are generator spaces (run skills, produce artifacts, period). Rewrote §Part 3 with generator-vs-builder split + one-directional routing flow + filing-protocol implication. §How to apply step 5 mirrored: builder terminals only on Terminal column. Companion edit: ROLLOUT_PLAN.md flipped 15 mis-tagged rows (pipeline.3-13 + civic.1-3) off generator terminals onto research-build / engine-sheet.

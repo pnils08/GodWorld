@@ -50,19 +50,15 @@ Full discipline + canon-critical reminders + cascade order live in `.claude/rule
 
 ---
 
-## Filing work to ROLLOUT (S212 / ADR-0005)
+## Generator scope (S212 / ADR-0005)
 
-This terminal primarily files into:
-- `civic.*` — city-hall production, voice agents, council canon, civic-process gap logs
+**This terminal runs skills. It does not file ROLLOUT entries, edit skills, or fix processes.** It runs city-hall skills (`/city-hall-prep`, `/city-hall`), produces civic artifacts + voice agent output + production logs + gap logs, and runs its own session-end.
 
-For the entry template + protocol see [[../../../docs/engine/ROLLOUT_PLAN]] §How to add work. Description content lives in the pointer doc:
-- Designed work → copy [[../../../docs/plans/TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`
-- City-hall production gap logs → `output/production_log_city_hall_c{XX}_*_gaps.md` — **new gap logs follow [[../../../docs/plans/GAP_LOG_TEMPLATE]] (S212 — civic is a generator terminal that produces sidecar gap logs capturing skill inefficiency)**
-- Mara/civic governance docs → [[../../../docs/mara-vance/...]]
+Triage and fixes route to **research-build** (skill / RULES / docs / canon edits) or **engine-sheet** (code / sheets / scripts). Never route work back here.
 
-When work completes: set state `done-pending-archive`; session-end sweep moves the row to [[../../../docs/engine/ROLLOUT_ARCHIVE]] (civic sweeps `civic.*` rows).
+Gap logs surfaced during a skill run land at `output/production_log_city_hall_c{XX}_*_gaps.md` per [[../../../docs/plans/GAP_LOG_TEMPLATE]] — that is this terminal's filing channel. Research-build picks them up next session and triages into ROLLOUT.
 
-Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
+Per-terminal scope rule: [[../../../docs/adr/0005-rollout-plan-structure]] §Part 3.
 
 ---
 
@@ -199,19 +195,17 @@ Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
 
 ## Handoff Protocol
 
-When the research/build terminal designs civic changes:
-1. Work item appears in `ROLLOUT_PLAN.md` tagged `(civic terminal)`
-2. This terminal picks it up, executes
-3. After completion, update production log and `SESSION_CONTEXT.md`
-4. Tag Supermemory saves with `[civic]` prefix
+This terminal does not receive routed work. It runs skills.
 
 When this terminal produces civic output for the newsroom:
 1. Write to `production_log_city_hall_c{XX}.md`
 2. Media terminal reads the log as input to `/write-edition`
 
-When this terminal discovers engine-level civic bugs:
-1. Note in `SESSION_CONTEXT.md`
-2. Flag for engine/sheet terminal in `ROLLOUT_PLAN.md`
+When this terminal discovers something broken during a skill run:
+1. Capture it in the run's gap log (`output/production_log_city_hall_c{XX}_*_gaps.md`) per [[../../../docs/plans/GAP_LOG_TEMPLATE]]
+2. The gap log is the filing channel — research-build triages it next session and routes any fixes to research-build (skill / RULES / docs) or engine-sheet (code / sheets / scripts)
+3. Tag Supermemory saves with `[civic]` prefix
+4. Never write a ROLLOUT row from this terminal
 
 ---
 
@@ -224,9 +218,9 @@ When `/session-end` runs in this terminal, follow these steps **in addition to**
 | File | Check |
 |------|-------|
 | `output/production_log_city_hall_c*.md` | Production log complete? All voice agents ran? Clerk verified? |
+| `output/production_log_city_hall_c*_*_gaps.md` | Gap logs filed for any skill that surfaced inefficiency? |
 | `docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md` | Updated if council votes or initiative statuses changed? |
 | `SESSION_CONTEXT.md` | Session entry tagged `[civic]`? |
-| `docs/engine/ROLLOUT_PLAN.md` | Next Session Priorities refreshed? |
 
 ### Terminal-Specific Saves
 

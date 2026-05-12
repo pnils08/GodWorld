@@ -26,6 +26,7 @@ import os
 import json
 import subprocess
 from pathlib import Path
+from urllib.parse import quote
 from fastmcp import FastMCP
 
 # Load env. S197 BUNDLE-B (G-S7/G-S10/G-W15): canonical env path is
@@ -79,11 +80,20 @@ def supermemory_search(query: str, container: str, limit: int = 5,
 
 
 def dashboard_get(endpoint: str) -> str:
-    """Query the dashboard API."""
+    """Query the dashboard API. Sends basic-auth from DASHBOARD_USER/DASHBOARD_PASS
+    if set — dashboard middleware gates all /api/* except /api/health (S215 G-3
+    follow-up: every prior MCP dashboard call silently 401-ed; tools that depended
+    on dashboard_get were returning auth errors as data)."""
     try:
         import urllib.request
+        import base64
         url = f"{DASHBOARD_URL}{endpoint}"
         req = urllib.request.Request(url)
+        user = os.environ.get('DASHBOARD_USER', '').strip()
+        pwd = os.environ.get('DASHBOARD_PASS', '').strip()
+        if user and pwd:
+            token = base64.b64encode(f"{user}:{pwd}".encode()).decode()
+            req.add_header('Authorization', f'Basic {token}')
         with urllib.request.urlopen(req, timeout=5) as resp:
             return resp.read().decode('utf-8')
     except Exception as e:
@@ -120,13 +130,85 @@ def lookup_citizen(name: str) -> str:
 
 @mcp.tool()
 def lookup_initiative(name: str) -> str:
-    """Look up a civic initiative by name. Returns current status, phase, neighborhoods, and recent milestones.
+    """Look up a civic initiative by name or ID (e.g. 'Stabilization Fund' or 'INIT-001').
+    Returns Initiative_Tracker record: status, phase, vote cycle, budget, implementation
+    summary, engine outcome (vote breakdown, affected neighborhoods, policy domain).
     Use this instead of reading Initiative_Tracker sheet directly."""
-    # Try dashboard first
-    result = dashboard_get(f'/api/search/articles?q={name}')
-    # Also search world-data for structured state
-    world = supermemory_search(f"{name} initiative", 'world-data', 3)
-    return f"=== INITIATIVE STATE ===\n{world}\n\n=== RELATED ARTICLES ===\n{result[:2000]}"
+    # G-1 fix (S215): read filesystem directly. Pattern mirrors get_roster —
+    # no dashboard round-trip, no auth dependency. Sources:
+    #   - output/initiative_tracker.json (Layer 2 — editorial tracker)
+    #   - output/desk-packets/civic_c{latest}.json (Layer 1 — engine outcomes)
+    # Old impl never read the tracker at all (dashboard articles search +
+    # world-data supermemory) — CLAUDE.md docstring was a lie.
+    tracker = read_json_file('output/initiative_tracker.json')
+    items = tracker.get('initiatives', []) if isinstance(tracker, dict) else []
+
+    needle = name.strip().lower()
+    match = None
+    for it in items:
+        if (it.get('id') or '').lower() == needle:
+            match = it
+            break
+    if not match:
+        for it in items:
+            if needle and needle in (it.get('name') or '').lower():
+                match = it
+                break
+
+    if not match:
+        # Semantic fallback — no tracker row matched. Note miss explicitly so
+        # callers know they got fallback prose, not authoritative tracker data.
+        world = supermemory_search(f"{name} initiative", 'world-data', 3,
+                                   mode='hybrid', threshold=0.3)
+        avail = ', '.join((it.get('id') or '?') for it in items) or '(tracker empty)'
+        return (f"=== NO TRACKER MATCH for '{name}' — semantic fallback (world-data) ===\n"
+                f"Available tracker IDs: {avail}\n\n{world}")
+
+    # Engine outcome layer — read latest civic desk packet for this initiative
+    engine = None
+    packets_dir = PROJECT_ROOT / 'output' / 'desk-packets'
+    if packets_dir.exists():
+        civic_packets = sorted(
+            (p for p in packets_dir.iterdir() if p.name.startswith('civic_c') and p.name.endswith('.json')),
+            key=lambda p: int(''.join(c for c in p.stem if c.isdigit()) or '0'),
+            reverse=True,
+        )
+        if civic_packets:
+            try:
+                packet = json.loads(civic_packets[0].read_text())
+                outcomes = (packet.get('canonReference') or {}).get('recentOutcomes') or []
+                engine = next((o for o in outcomes if o.get('initiativeId') == match.get('id')), None)
+            except (json.JSONDecodeError, OSError):
+                engine = None
+
+    impl = match.get('implementation') or {}
+    neighborhoods = match.get('neighborhoods') or []
+    lines = [
+        f"=== INITIATIVE: {match.get('id')} {match.get('name')} ===",
+        f"Status: {match.get('status')} | Vote cycle: {match.get('voteCycle')} | Budget: {match.get('budget')}",
+        f"Domain: {match.get('domain')} | Neighborhoods: {', '.join(neighborhoods) or '(none)'}",
+        "",
+        "Implementation:",
+        f"  Phase: {impl.get('phase')}",
+        f"  Status: {impl.get('status')}",
+        f"  Summary: {impl.get('summary')}",
+        f"  Next action: {impl.get('nextScheduledAction')} (cycle {impl.get('nextActionCycle')})",
+    ]
+    if engine:
+        affected = engine.get('affectedNeighborhoods') or []
+        # Engine packet may emit string or list — normalize.
+        if isinstance(affected, str):
+            affected_str = affected.strip() or '(none)'
+        else:
+            affected_str = ', '.join(affected) or '(none)'
+        lines.extend([
+            "",
+            "Engine outcome (latest civic packet):",
+            f"  Vote breakdown: {engine.get('voteBreakdown')}",
+            f"  Policy domain: {engine.get('policyDomain')}",
+            f"  Affected neighborhoods: {affected_str}",
+        ])
+    return '\n'.join(lines)
 
 
 @mcp.tool()
@@ -154,7 +236,9 @@ def search_articles(query: str) -> str:
     """Search all published articles via the dashboard API.
     Returns headlines, reporters, citizens mentioned.
     Use for: 'articles about Danny Horn', 'civic affairs coverage', 'Fruitvale stories'."""
-    result = dashboard_get(f'/api/search/articles?q={query}')
+    # G-3 fix (S215): URL-encode query — spaces/punctuation crashed urllib
+    # with "URL can't contain control characters" on every multi-word call.
+    result = dashboard_get(f'/api/search/articles?q={quote(query)}')
     return result[:3000] if result else "Dashboard not available"
 
 

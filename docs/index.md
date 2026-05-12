@@ -114,10 +114,13 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ## `docs/media/` — newsroom artifacts, criteria, indexes
 
-### Criteria (S144 — sift + write-edition assertions)
+### Criteria (S144 — sift + write-edition assertions; S216 — city-hall + dispatch + interview added)
 - **[[media/story_evaluation]]** — story scoring rubric. Carries changelog. *(reference, media, active)*
 - **[[media/brief_template]]** — angle brief template. Carries changelog. *(reference, media, active)*
 - **[[media/citizen_selection]]** — citizen selection rubric for briefs. Carries changelog. *(reference, media, active)*
+- **[[media/city_hall_evaluation]]** — city-hall source-material assertions. 8 criteria covering decision resolution, vote math, cascade order, voice coverage. Built S216 (governance.2). *(reference, civic, media, active)*
+- **[[media/dispatch_evaluation]]** — dispatch scene-piece assertions. 8 criteria covering location specificity, identity-through-action, image-ending, word count. Built S216 (governance.2). *(reference, media, active)*
+- **[[media/interview_evaluation]]** — interview canon-grounded Q&A assertions. 9 criteria covering theme, canon grounding, question progression, voice differentiation. Built S216 (governance.2). *(reference, media, active)*
 - **[[media/intake]]** — edition intake section reference. *(reference, media, active)*
 
 ### Newsroom architecture & style

@@ -1,8 +1,8 @@
 ---
 name: skill-check
-description: Grade a production skill's run against its assertion file. Catches structural drift (skill ran but didn't do its job) that edition-level review misses. Runs during post-publish for the cycle that just shipped. Usage — `/skill-check write-edition 91` grades `/write-edition` on cycle 91 against `docs/media/story_evaluation.md`, produces `output/skill_check_<skill>_c<cycle>.json`. First target: write-edition. Expands to sift, dispatch, city-hall as assertion files appear.
-version: "1.0"
-updated: 2026-04-17
+description: Grade a production skill's run against its assertion file. Catches structural drift (skill ran but didn't do its job) that edition-level review misses. Runs during post-publish for the cycle that just shipped. Usage — `/skill-check write-edition 91` grades `/write-edition` on cycle 91 against `docs/media/story_evaluation.md`, produces `output/skill_check_<skill>_c<cycle>.json`. Supported targets: write-edition, sift, city-hall, dispatch, interview.
+version: "1.1"
+updated: 2026-05-12
 tags: [engine, active]
 effort: medium
 disable-model-invocation: true
@@ -29,10 +29,11 @@ Automated grader for GodWorld production skills. One skill, one cycle, one asser
 |-------|------------------|------------|---------|
 | `write-edition` | `docs/media/story_evaluation.md` | `output/production_log_edition_c<N>.md` | `output/reporters/*/articles/c<N>_*.md`, `output/engine_audit_c<N>.json` (for signal cross-ref) |
 | `sift` | `docs/media/story_evaluation.md` (priority signals + three-layer test) | `output/sift_proposals_c<N>.json` (proposal set — written by sift Step 2 before Mike picks) + `output/production_log_edition_c<N>.md` Step 2 (picks) | `output/engine_audit_c<N>.json`, `output/baseline_briefs_c<N>.json`, `output/reporters/*/c<N>_brief.md` |
-| `city-hall` | TBD — create `docs/civic/decision_evaluation.md` first | `output/production_log_city_hall_c<N>.md` | `output/civic-voice/*_c<N>.json` |
-| `dispatch` | TBD — create `docs/media/scene_evaluation.md` first | reporter production log | reporter article |
+| `city-hall` | `docs/media/city_hall_evaluation.md` (S216 governance.2) | `output/production_log_city_hall_c<N>.md` | `output/civic-voice/*_c<N>.json` |
+| `dispatch` | `docs/media/dispatch_evaluation.md` (S216 governance.2) | reporter production log | `editions/cycle_pulse_dispatch_c<N>_<slug>.txt` |
+| `interview` | `docs/media/interview_evaluation.md` (S216 governance.2) | reporter production log + transcript | `editions/cycle_pulse_interview_c<N>_<subject>.txt` + transcript file |
 
-Only `write-edition` is live at first. Extend the map as assertion files land.
+All 5 targets live. Run conditionally — only invoke for a skill that actually ran the cycle (artifact exists at the transcript path above).
 
 ## Process
 
@@ -110,7 +111,13 @@ This confirms the checker would have flagged the same drift Mara caught post-pub
 
 ## Extension plan
 
-- Once live for `/write-edition`: wire into `/post-publish` Step 10 changelog.
-- Add `/sift` assertions next (easiest — same file, different lens).
-- Create `docs/civic/decision_evaluation.md` before adding `/city-hall` target.
-- Create `docs/media/scene_evaluation.md` before adding `/dispatch` target.
+- Once live for `/write-edition`: wire into `/post-publish` Step 10 changelog. *(Done — S156.)*
+- Add `/sift` assertions next (easiest — same file, different lens). *(Done — sift reads same story_evaluation.md with priority-signals + three-layer test lens.)*
+- Create `docs/media/city_hall_evaluation.md` before adding `/city-hall` target. *(Done — S216 governance.2.)*
+- Create `docs/media/dispatch_evaluation.md` before adding `/dispatch` target. *(Done — S216 governance.2.)*
+- Create `docs/media/interview_evaluation.md` before adding `/interview` target. *(Done — S216 governance.2.)*
+
+## Changelog
+
+- 2026-04-17 — v1.0 initial (S156). Live for `/write-edition`; sift reads same `story_evaluation.md` with different lens.
+- 2026-05-12 — v1.1 (S216, research-build closing governance.2). Skill→assertion map extended: city-hall + dispatch + interview added with their own assertion files at `docs/media/{city_hall,dispatch,interview}_evaluation.md`. Map's two TBD entries (city-hall → `docs/civic/decision_evaluation.md`, dispatch → `docs/media/scene_evaluation.md`) corrected to actual shipped paths under `docs/media/`. Interview added as 5th target. Description field updated to list all 5 supported targets.

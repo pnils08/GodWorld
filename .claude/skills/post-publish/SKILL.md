@@ -322,31 +322,47 @@ Distill into `docs/mags-corliss/NEWSROOM_MEMORY.md`:
 
 ### Step 10: Update Criteria Files (`--type edition` only)
 
-**First run `/skill-check write-edition <XX>`** — grades the skill's run against `docs/media/story_evaluation.md` and writes `output/skill_check_write-edition_c<XX>.json`. That JSON is the main feedback source: its `assertions`, `reviewerOverlap`, and `evalFeedback` tell you exactly which criteria held and which need sharpening.
+**Run `/skill-check` for each skill that produced a cycle artifact** — S216 governance.2 extended skill-check from 2 targets (write-edition + sift) to 5 (added city-hall + dispatch + interview). For each target, check whether the cycle has the relevant artifact; if yes, run /skill-check; if no, skip with one-line "no <skill> artifact this cycle" note.
+
+| Skill | Artifact check (run /skill-check if exists) | Writes |
+|-------|---------------------------------------------|--------|
+| `write-edition` | `output/production_log_edition_c<XX>.md` exists | `output/skill_check_write-edition_c<XX>.json` |
+| `sift` | `output/sift_proposals_c<XX>.json` exists | `output/skill_check_sift_c<XX>.json` |
+| `city-hall` | `output/production_log_city_hall_c<XX>.md` exists | `output/skill_check_city-hall_c<XX>.json` |
+| `dispatch` | `editions/cycle_pulse_dispatch_c<XX>_*.txt` exists | `output/skill_check_dispatch_c<XX>.json` |
+| `interview` | `editions/cycle_pulse_interview_c<XX>_*.txt` exists | `output/skill_check_interview_c<XX>.json` |
+
+Each /skill-check JSON is a feedback source: its `assertions`, `reviewerOverlap`, and `evalFeedback` tell you exactly which criteria held and which need sharpening.
 
 Read these feedback sources:
-- `output/skill_check_write-edition_c<XX>.json` — structural assertion pass/fail + eval-feedback suggestions
+- Each `output/skill_check_<skill>_c<XX>.json` produced this step — structural assertion pass/fail + eval-feedback suggestions
 - `output/grades/grades_c<XX>.json` — per-reporter scores
 - `output/production_log_c<XX>.md` — Mara corrections, Rhea flags, editorial review
 - Mike's feedback — capture in conversation
 
-Update each criteria file with specific findings:
+Update each criteria file with specific findings based on its /skill-check output:
 
-**`docs/media/story_evaluation.md`:** which priority signals predicted strong articles, did front-page scoring match the actual best article, weak story indicators to add.
+**`docs/media/story_evaluation.md`** (write-edition + sift):  which priority signals predicted strong articles, did front-page scoring match the actual best article, weak story indicators to add.
 
 **`docs/media/brief_template.md`:** which briefs produced articles that followed closely, which produced drift, word-count tuning.
 
 **`docs/media/citizen_selection.md`:** any citizen misrepresented (role, neighborhood, gender, history), freshness balance, any reporter invented details contradicting canon.
 
+**`docs/media/city_hall_evaluation.md`** (city-hall, S216): which criteria held / failed for this cycle's civic source-material run; any new failure pattern to encode as a criterion.
+
+**`docs/media/dispatch_evaluation.md`** (dispatch, S216): word-count band tuning (criterion 4 is intentionally provisional), location-specificity examples, identity-through-action vs data-dump patterns observed.
+
+**`docs/media/interview_evaluation.md`** (interview, S216): voice-differentiation sharpening (criterion 9 is intentionally subjective), world-altering canon flagging patterns, archetype-match observations.
+
 Pattern from skill-creator eval framework (S141): set assertions, grade each assertion against the actual edition, update criteria with what passed and failed. Over cycles the criteria files become the trained editorial standard.
 
-Each criteria file gets a changelog entry at the bottom:
+Each updated criteria file gets a changelog entry at the bottom:
 ```
 ## Changelog
 - C<XX>: [what changed] — [why, based on what evidence]
 ```
 
-**Verification gate:** each of the three criteria files has a new changelog entry dated this cycle.
+**Verification gate:** for each skill whose artifact existed this cycle, a corresponding /skill-check JSON exists in output/ AND its assertion file has a new changelog entry dated this cycle. Skills whose artifact didn't exist this cycle are skipped (one-line skip note in the post-publish production log).
 
 ### Step 11: Filing + Cleanup
 ```bash

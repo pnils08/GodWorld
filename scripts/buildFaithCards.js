@@ -39,6 +39,7 @@
 require('/root/GodWorld/lib/env');
 var https = require('https');
 var sheets = require('../lib/sheets');
+var canonBlocklist = require('../lib/canonBlocklist');
 
 var API_KEY = process.env.SUPERMEMORY_CC_API_KEY;
 var CONTAINER_TAG = 'world-data';
@@ -463,6 +464,31 @@ async function main() {
   if (LIMIT < faiths.length) {
     faiths = faiths.slice(0, LIMIT);
     console.log('[buildFaithCards] Limited to: ' + faiths.length);
+  }
+
+  // ─── canon.2 P4 Tier-3 contamination check ─────────────────────────────────
+  // Tripped if any Faith_Organizations row carries a real-world org or leader
+  // name from REAL_NAMES_BLOCKLIST.md §Faith. --dry-run logs and continues;
+  // --apply throws on first violation so contaminated cards never reach
+  // Supermemory.
+  var canonViolations = [];
+  for (var ci = 0; ci < faiths.length; ci++) {
+    try {
+      canonBlocklist.checkFaithRow(faiths[ci]);
+    } catch (e) {
+      canonViolations.push({ faith: faiths[ci], message: e.message });
+    }
+  }
+  if (canonViolations.length > 0) {
+    console.error('');
+    console.error('[buildFaithCards] CANON BLOCKLIST VIOLATIONS: ' + canonViolations.length);
+    canonViolations.forEach(function(v) { console.error('  ' + v.message); });
+    if (APPLY) {
+      console.error('[buildFaithCards] --apply mode: aborting before any write.');
+      process.exit(1);
+    }
+    console.error('[buildFaithCards] --dry-run mode: continuing for visibility; writes would have been blocked.');
+    console.error('');
   }
 
   // Load Faith_Ledger recent events

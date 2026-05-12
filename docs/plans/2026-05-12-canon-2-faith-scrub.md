@@ -184,7 +184,7 @@ pointers:
   2. Parser strategy: read the section, extract every left-hand-side name from `Real Name → Canon Substitute` rows, classify by Organizations vs Clergy heading.
   3. Export a `checkFaithRow(faith)` function that throws `Error('Canon blocklist violation: Organization "X" matches Tier-3 real name')` or the leader equivalent.
 - **Verify:** Unit-style test invocation: `node -e "const cb = require('./lib/canonBlocklist'); console.log(cb.loadFaithBlocklist().orgs.size)"` → number ≥ 16.
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 engine-sheet, 2026-05-12). Shipped `lib/canonBlocklist.js` — parses §Faith Organizations & Clergy + §Retired interim substitutes from REAL_NAMES_BLOCKLIST.md. Live sizes: `orgs.size = 17`, `leaders.size = 17` (16 main + 1 retired in each set). Retired section classified by honorific-prefix heuristic (Bishop/Rev./Fr./Dr./Rabbi/Imam/Pandit/Bhai/Father/Pastor → leaders; otherwise orgs). `checkFaithRow(faith)` uses case-insensitive substring containment (defense-in-depth vs exact equality — catches `"acts full gospel church"` lowercase + any suffix like `"Acts Full Gospel Church, Retired"`).
 
 #### Task 4.2: Wire filter into buildFaithCards.js startup
 
@@ -195,7 +195,7 @@ pointers:
   2. If `--dry-run`, log the violation and continue (so dry-runs surface contamination without aborting).
   3. If `--apply`, throw and exit non-zero on first violation — never silently skip.
 - **Verify:** `node scripts/buildFaithCards.js --dry-run` against the cleaned sheet exits 0; manually planting `"Acts Full Gospel Church"` into one row of a test fixture causes `--apply` to exit non-zero with the org name in the error message.
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 engine-sheet, 2026-05-12). `buildFaithCards.js` imports `canonBlocklist` at top; new check block inserted in `main()` between LIMIT slice and `loadRecentLedgerEvents` — iterates `faiths`, collects every `checkFaithRow` throw into a `canonViolations` array, then: under `--apply` aborts pre-write with `process.exit(1)`; under `--dry-run` logs the violations and continues. Live `node scripts/buildFaithCards.js --dry-run` against the canon-clean sheet exits 0 (no violations) and shows card payloads carrying canon substitutes (`Telegraph Presbyterian Fellowship / Rev. Eunice Marston` etc.). Planted-contamination behaviour covered by unit tests (Task 4.3) — live planted-fixture test deferred since live FO is already canon-clean and re-contaminating just to re-clean adds noise without information gain over the unit coverage.
 
 #### Task 4.3: Smoke-test with a planted contaminated fixture
 
@@ -207,7 +207,7 @@ pointers:
   3. Test 3: `checkFaithRow({ organization: 'New Canon Org', leader: 'New Canon Leader' })` does not throw.
   4. Test 4: `checkFaithRow({ organization: 'New Canon Org', leader: 'Bishop Robert Jackson Sr.' })` throws on leader.
 - **Verify:** `npm test` includes the new file; all 4 assertions pass.
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 engine-sheet, 2026-05-12). Shipped `lib/canonBlocklist.test.js` — 12 assertions across 5 test blocks (expanded from plan's 4-baseline). Coverage: (1) loadFaithBlocklist returns Sets, sizes ≥ 16, contains both main + retired tokens; (2) real org throws with the org-name surfaced in the error message; (3) clean canon row passes; (4) real leader throws even when org is canon (per-field check confirmed); (5) case-insensitive substring match (lowercase `"acts full gospel church"` still throws). `npm test`: **36/36 test files green** (was 35; +1 = this file), ~40s runtime. Plan acceptance ≥4 assertions met; 12 actual.
 
 ---
 

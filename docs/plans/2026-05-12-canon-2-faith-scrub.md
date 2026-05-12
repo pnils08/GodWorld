@@ -73,7 +73,7 @@ pointers:
   2. Note any leaders whose POPID already maps to a fictional citizen card (e.g., Jaston POP-00758 for West Oakland — pulled from S195 INSTITUTIONS.md note + MCP lookup). Those LeaderPOPIDs survive; only the displayed Name string changes.
   3. Flag any leader rows where the POPID is empty — those need either a new POP allocation or use of an existing unassigned citizen.
 - **Verify:** Mental map captured; cross-references between org rows / BIZ rows / POP rows resolved.
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 research-build, 2026-05-12). Tabulation captured inline in chat; 16 FO rows + 17 SL POPs (1 orphan POP-00734 Father Miguel out-of-scope) cross-referenced. Three structural findings from P0 export (no per-org BIZ entries / shared BIZ-00028 / 2 FO↔SL drift rows + 4 FO↔SL neighborhood drift rows) flagged as out-of-scope for canon.2 in §Out of scope of INSTITUTIONS.md.
 
 #### Task 1.2: Draft substitution table
 
@@ -86,7 +86,7 @@ pointers:
      - A short naming-conventions paragraph noting fictional substitutes must not pattern-match real Oakland faith institutions (S217 Greater Hope / Reeves failure mode).
   2. Resolve the Reeves/Jaston split: West Oakland Pentecostal row uses Jaston (POP-00758) as Canon Substitute (leader). Reeves dropped from canon-forward table; added to corrections-forward map (Task 1.4) as bay-tribune-only frozen reference.
 - **Verify:** Table has exactly 16 rows; every row has an org substitute + a leader substitute + a LeaderPOPID (existing or to-allocate flagged).
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 research-build, 2026-05-12). `docs/canon/INSTITUTIONS.md` §Faith & Community replaced — S195 always-block rule preserved, naming-conventions paragraph added (S217 too-close-to-real failure mode named), 16-row substitution table shipped with display-title notes per clergy, POP-00758 Jaston canon-forward preserved, POP-00756 Torres↔Terez SL drift resolved via Solano substitute.
 
 #### Task 1.3: Sync REAL_NAMES_BLOCKLIST.md
 
@@ -97,7 +97,7 @@ pointers:
   2. Add a one-line note that `INSTITUTIONS.md` §Faith is the authoritative source; this file is the runtime block-list copy the canon filter reads.
   3. Append the 2 Reeves-era retired substitutes (Greater Hope Pentecostal Church, Bishop Calvin Reeves Sr.) to the blocklist — they also can never be written to wd-faith going forward.
 - **Verify:** `grep -c "→" docs/media/REAL_NAMES_BLOCKLIST.md` in §Faith returns at least 32 (16 orgs + 16 leaders).
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 research-build, 2026-05-12). §Faith Organizations & Clergy block replaced — 16 org substitutions + 16 clergy substitutions + retired-S195-interim block (Greater Hope Pentecostal + Bishop Calvin Reeves Sr.) + historical edition notes preserved. Cross-reference back to INSTITUTIONS.md §Faith as authoritative source.
 
 #### Task 1.4: Mike approves the substitution slate
 
@@ -106,7 +106,7 @@ pointers:
   1. Show Mike the proposed 16-row substitution table inline before commit.
   2. Apply edits per his feedback; revise until approved.
 - **Verify:** Approval received in chat.
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 research-build, 2026-05-12). Mike approved slate as-presented ("yeah this def gets granular over religion and extends beyond like Lake Merrit Catholic Church... ill side with you on best practices here") + sided with framing on the three structural decisions (BIZ-00028 leave-alone, POP-00734 orphan out-of-scope, FO↔SL drift overwrite policy). No forensic web-vet requested.
 
 ---
 
@@ -122,7 +122,7 @@ pointers:
   3. Populate rows from `REAL_NAMES_BLOCKLIST.md` §Faith historical references (E78, E79, E80, E81, E85, E86, E89, E91, E93 per S195 note + the journal-confirmed E93 specifics). Add a row for Greater Hope Pentecostal + Bishop Calvin Reeves Sr. with Editions=E93 only and `Notes: S195 interim substitute retired S218 — too close to real; bay-tribune frozen reference`.
   4. Add a one-paragraph rule at the bottom: bay-tribune Supermemory + published editions are not retroactively edited; this map is the canonical reconciliation for any future agent that reads back into the bay-tribune archive and encounters a real name.
 - **Verify:** Corrections-forward table renders cleanly; every retired real name + the Reeves substitute appears with a superseder.
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 research-build, 2026-05-12). `INSTITUTIONS.md` §Faith Corrections Forward shipped — 34-row table (16 orgs + 16 clergy + 2 retired S195 interim substitutes), per-edition citations marked "per Mara audit log" with note that specific citations populate as audit logs and reader-side scans surface them. Paper-of-record principle stated explicitly at end of section. §Out of scope subsection added (BIZ-00028 / POP-00734 orphan / FO↔SL neighborhood drift) so engine-sheet sees the boundary of canon.2 cleanly.
 
 #### Task 2.2: Update CANON_RULES.md cross-reference
 
@@ -131,7 +131,7 @@ pointers:
 - **Steps:**
   1. Add one bullet under §Read-Time Contamination Check noting: when a real faith-org or clergy name is found in a bay-tribune source briefing, consult `[[canon/INSTITUTIONS]] §Faith Corrections Forward` for the canon substitute. This is the reusable pattern any future Tier-3 retroactive scrub follows.
 - **Verify:** New bullet exists; INSTITUTIONS link resolves.
-- **Status:** [ ] not started
+- **Status:** [x] complete (S218 research-build, 2026-05-12). `CANON_RULES.md` §Read-Time Contamination Check gained a §Corrections-Forward Maps subsection — generalizes the pattern beyond faith (any future Tier-3 retroactive scrub authors a `[[INSTITUTIONS]] §<Domain> Corrections Forward` map). Lists currently-active map as Faith S218.
 
 ---
 
@@ -248,3 +248,5 @@ pointers:
 ## Changelog
 
 - 2026-05-12 — Initial draft (S218 research-build). Plan structure approved by Mike in chat; engine-sheet standing by for P0 handoff. Pre-write decisions captured under Open Questions.
+- 2026-05-12 — P0 export complete (S218 engine-sheet). `output/faith_canon_export_c93.md` shipped; three measure-twice findings beyond plan baseline (no per-org BIZ entries / shared BIZ-00028 / FO↔SL drift on POP-00756 + POP-00758).
+- 2026-05-12 — P1+P2 complete (S218 research-build). 16-row substitution table + 34-row corrections-forward map shipped in `INSTITUTIONS.md` §Faith; 16+16 blocklist in `REAL_NAMES_BLOCKLIST.md`; pattern generalized in `CANON_RULES.md` §Corrections-Forward Maps. Mike approved slate as-presented + sided on three structural decisions (BIZ-00028 leave-alone, POP-00734 orphan out-of-scope, FO↔SL drift overwrite). Engine-sheet handoff: P3 (sheet writes) → P4 (canon filter) → P5 (Supermemory rebuild).

@@ -171,6 +171,13 @@ When you read any source briefing (tracker text, voice JSONs, production logs, p
 
 Mass-rewriting historical sources mid-flight is what the S172 halt tried and what S174 reframed away from. Sources either stay as-is or get scrubbed in a discrete corrigendum batch — a separate operation from agent runtime. The agent's job is to refuse to propagate contamination forward, not to rewrite the past. For sources already scrubbed in a batch operation: trust the scrubbed version. For sources that remain pre-scrub: apply the read-time scan.
 
+### Corrections-Forward Maps (per-domain reconciliation)
+
+When a domain undergoes a discrete scrub batch (e.g., canon.2 faith-canon scrub S218), the scrub authors a *corrections-forward map* in `[[INSTITUTIONS]]` §<Domain> Corrections Forward that lists each real name shipped in canon × the substitute superseding it. bay-tribune Supermemory + published editions remain unchanged (paper-of-record principle); the map is the canonical reconciliation any future agent uses when it encounters the real name in a bay-tribune source briefing. Substitute per the map; add a `CONTINUITY NOTE: source briefing X named pre-scrub entity Y; substituted to canon-substitute Z per INSTITUTIONS §<Domain> Corrections Forward.` The pattern generalizes to any future Tier-3 retroactive scrub.
+
+Currently active corrections-forward maps:
+- `[[INSTITUTIONS]]` §Faith Corrections Forward (S218) — 16 orgs + 18 clergy names + 2 retired interim substitutes.
+
 ---
 
 ## Escalation Pattern

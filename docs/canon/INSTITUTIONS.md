@@ -216,14 +216,81 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 
 **Canon rule (S195, post-Mara C93 audit): No real churches. No real pastors. Always-block — no escalation, no exception.**
 
-Faith organizations: invent at neighborhood scale per CANON_RULES §Invention Authority. Named clergy: invent. The `Faith_Organizations` ledger sheet (17 entries) currently contains real-world named congregations seeded by the engine — those are **legacy contamination**, not canon. Treat ledger entries with real names (e.g., Acts Full Gospel Church, Allen Temple Baptist Church, St. Columba Catholic Church, Lake Merritt United Methodist, Temple Sinai, Shiva Vishnu Temple) as flagged for retconning. Active substitutions:
+Faith organizations: invent at neighborhood scale per CANON_RULES §Invention Authority. Named clergy: invent. `Faith_Organizations` ledger sheet was seeded by the engine with 16 real Oakland faith institutions + their real clergy; `Simulation_Ledger` faith-leader POPs were seeded with real-Oakland clergy names. The substitution table below is canon-forward as of S218 (plan: `[[../plans/2026-05-12-canon-2-faith-scrub]]`).
 
-| Real-world (legacy contamination) | Canon substitute (S195) |
-|-----------------------------------|-------------------------|
-| Acts Full Gospel Church (West Oakland, Pentecostal) | Greater Hope Pentecostal Church |
-| Bishop Robert Jackson Sr. | Bishop Calvin Reeves Sr. |
+### Naming conventions
 
-Other ledger entries pending substitute assignment. When an agent needs a faith org or clergyperson and only a real-world name is in the ledger: invent a substitute, log it here, and flag the ledger entry for retroactive correction across prior editions.
+Substitute names should be **clearly fictional within an Oakland 2041 simulation** — not necessarily globally unique. Geographic anchors (Telegraph, Foothill, Adams Point, Temescal, Lake Merritt) are canon-permissible per S170 (simulation-is-Oakland). The S217 failure mode is *pattern-matching named real religious figures* (Bishop Robert Jackson Sr. → Bishop Calvin Reeves Sr. failed because both names map to real people somewhere); avoid that by drifting clergy first/last names off of common Oakland-area religious-leader name combinations.
+
+### Canon substitution table (16 rows + 1 retired interim)
+
+| LeaderPOPID | Real Org (legacy) | Tradition | Neighborhood | Canon Org | Canon Leader (SL Name) | Notes |
+|---|---|---|---|---|---|---|
+| POP-00753 | First Presbyterian Church | Protestant | Downtown | Telegraph Presbyterian Fellowship | Eunice Marston | display title: Rev. |
+| POP-00754 | Allen Temple Baptist Church | Baptist | East Oakland | Foothill Baptist Tabernacle | Ophelia Brenner | display title: Dr. |
+| POP-00755 | Cathedral of Christ the Light | Catholic | Lake Merritt | Cathedral of the Living Word | Antoine Vermeer | display title: Bishop |
+| POP-00756 | St. Columba Catholic Church | Catholic | Fruitvale | St. Esperanza Parish | Ramon Solano | display title: Fr.; resolves Torres↔Terez SL drift |
+| POP-00757 | Lake Merritt United Methodist | Methodist | Adams Point | Adams Point United Methodist | Daniel Han | display title: Rev. |
+| POP-00758 | Acts Full Gospel Church | Pentecostal | West Oakland | New Covenant Pentecostal Assembly | Robert Jaston | display title: Bishop; SL already canon, FO.Leader overwrite resolves S195 drift |
+| POP-00759 | Temple Sinai | Reform Jewish | Rockridge | Temple Beth Or | Naomi Sterling | display title: Rabbi |
+| POP-00760 | Beth Jacob Congregation | Orthodox Jewish | Piedmont Ave | B'nai Tikvah Synagogue | Yael Bauer | display title: Rabbi |
+| POP-00761 | Islamic Center of Oakland | Muslim | Temescal | Temescal Islamic Center | Idris Karim | display title: Imam |
+| POP-00762 | Masjid Al-Islam | Muslim | East Oakland | Masjid An-Nur Oakland | Aziz Rahimi | display title: Imam |
+| POP-00763 | Oakland Buddhist Temple | Buddhist | Chinatown | Bay Pure Land Buddhist Temple | Kenji Tanaka | display title: Rev. |
+| POP-00764 | East Bay Meditation Center | Buddhist | Downtown | Lake Merritt Mindfulness Sangha | Tao Lee | no clerical title — community organizer role per SL |
+| POP-00765 | Shiva Vishnu Temple | Hindu | Montclair | Bharat Mandir of the East Bay | Anand Krishnamurthy | display title: Pandit |
+| POP-00766 | Gurdwara Sahib of Oakland | Sikh | Fruitvale | Gurdwara Singh Sabha Fruitvale | Manjit Singh | display title: Bhai |
+| POP-00767 | Kehilla Community Synagogue | Jewish Renewal | Grand Lake | Or Hashalom Renewal Community | Miriam Goldstein | display title: Rabbi |
+| POP-00768 | First Unitarian Church | Unitarian | Lake Merritt | Lakeshore Unitarian Universalist Fellowship | Eleanor Bishop | display title: Rev. |
+
+### Corrections Forward
+
+The bay-tribune Supermemory container + published editions are not retroactively edited (paper-of-record principle, S217). Real names that appeared in bay-tribune source briefings before this scrub map forward to the canon substitute below. Any agent reading bay-tribune that encounters a real name in this table substitutes per CANON_RULES §Read-Time Contamination Check.
+
+| Real Name shipped in canon | Editions (per S195/S217 audit) | Canon substitute superseding C94+ | Notes |
+|---|---|---|---|
+| Acts Full Gospel Church | E78–E91 cluster (Mara C93 audit log), E93 | New Covenant Pentecostal Assembly | Original Tier-3 incident |
+| Bishop Robert Jackson Sr. | E78–E91 cluster, E93 | Bishop Robert Jaston | Original Tier-3 incident |
+| Allen Temple Baptist Church | per Mara audit log | Foothill Baptist Tabernacle | |
+| St. Columba Catholic Church | per Mara audit log | St. Esperanza Parish | |
+| Lake Merritt United Methodist | per Mara audit log | Adams Point United Methodist | |
+| Temple Sinai | per Mara audit log | Temple Beth Or | |
+| Shiva Vishnu Temple | per Mara audit log | Bharat Mandir of the East Bay | |
+| First Presbyterian Church | per Mara audit log | Telegraph Presbyterian Fellowship | |
+| Cathedral of Christ the Light | per Mara audit log | Cathedral of the Living Word | |
+| Beth Jacob Congregation | per Mara audit log | B'nai Tikvah Synagogue | |
+| Islamic Center of Oakland | per Mara audit log | Temescal Islamic Center | |
+| Masjid Al-Islam | per Mara audit log | Masjid An-Nur Oakland | |
+| Oakland Buddhist Temple | per Mara audit log | Bay Pure Land Buddhist Temple | |
+| East Bay Meditation Center | per Mara audit log | Lake Merritt Mindfulness Sangha | |
+| Gurdwara Sahib of Oakland | per Mara audit log | Gurdwara Singh Sabha Fruitvale | |
+| Kehilla Community Synagogue | per Mara audit log | Or Hashalom Renewal Community | |
+| First Unitarian Church | per Mara audit log | Lakeshore Unitarian Universalist Fellowship | |
+| Greater Hope Pentecostal Church | E93 only | New Covenant Pentecostal Assembly | S195 interim substitute retired S218 — too close to real |
+| Bishop Calvin Reeves Sr. | E93 only | Bishop Robert Jaston | S195 interim substitute retired S218 — too close to real |
+| Dr. Jacqueline Thompson | per Mara audit log | Dr. Ophelia Brenner | |
+| Bishop Michael Barber | per Mara audit log | Bishop Antoine Vermeer | |
+| Fr. Ramon Torres | per Mara audit log | Fr. Ramon Solano | |
+| Rev. David Park | per Mara audit log | Rev. Daniel Han | |
+| Rabbi Jacqueline Mates-Muchin | per Mara audit log | Rabbi Naomi Sterling | |
+| Rabbi Yehuda Ferris | per Mara audit log | Rabbi Yael Bauer | |
+| Imam Abdul Rahman | per Mara audit log | Imam Idris Karim | |
+| Imam Faheem Shuaibe | per Mara audit log | Imam Aziz Rahimi | |
+| Rev. Kodo Umezu | per Mara audit log | Rev. Kenji Tanaka | |
+| Larry Yang | per Mara audit log | Tao Lee | |
+| Pandit Venkatesh Sharma | per Mara audit log | Pandit Anand Krishnamurthy | |
+| Bhai Gurpreet Singh | per Mara audit log | Bhai Manjit Singh | |
+| Rabbi Dev Noily | per Mara audit log | Rabbi Miriam Goldstein | |
+| Rev. Margaret Chen | per Mara audit log | Rev. Eunice Marston | |
+| Rev. Michelle Collins | per Mara audit log | Rev. Eleanor Bishop | |
+
+Specific per-edition citations populate as Mara audit logs and reader-side scans surface them; absence of a citation column entry means the map applies whenever the real name is encountered.
+
+### Out of scope for canon.2 (flagged for follow-up)
+
+- **BIZ-00028 shared faith-leader employer** — all 16 (+1 orphan) faith-role POPs share `BIZ-00028 / West Oakland Community Center / Community Services` as `EmployerBizId`. Data-modeling issue, not Tier-3 contamination. Resolve via per-faith-org BIZ entries or refactor the employer link in a follow-up plan.
+- **POP-00734 Father Miguel (Fruitvale Parish priest)** — keyword-matched in P0 export but not in any Faith_Organizations row. Generic name, no Tier-3 risk. Re-surface for substitution if/when editorial assigns him to an org.
+- **FO/SL Neighborhood drift (4 rows: POP-00754, 00757, 00762, 00767)** — leader residence sheet column diverges from org neighborhood. Not Tier-3. Flag for separate data-cleanup pass.
 
 ---
 

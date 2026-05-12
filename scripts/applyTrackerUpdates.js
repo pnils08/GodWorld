@@ -6,16 +6,28 @@
  * trackerUpdates, and writes them to the Initiative_Tracker sheet. This closes
  * the feedback loop: agent decisions actually change the world.
  *
+ * S215 (civic.9b) — additionally walks voice statement JSONs under
+ * output/civic-voice/*_c{XX}.json and enforces the trackerOwner schema
+ * (`primary` / `secondary` / `advisory`) from
+ * docs/plans/2026-05-11-civic-tracker-collision-schema.md. During the
+ * deprecation window (C94-C95), missing `trackerOwner` defaults to `primary`
+ * with a per-statement deprecation warning and collisions downgrade to
+ * warnings (not failures). Strict enforcement engages once voice agents
+ * migrate to carry the field; until then the existing decisions-JSON write
+ * path remains authoritative.
+ *
  * Usage:
  *   node scripts/applyTrackerUpdates.js [cycle]           # Dry run (default)
  *   node scripts/applyTrackerUpdates.js [cycle] --apply    # Write to sheet
  *
  * Reads from:
- *   output/city-civic-database/initiatives/{agent}/decisions_c{XX}.json
+ *   output/city-civic-database/initiatives/{agent}/decisions_c{XX}.json  (write source)
+ *   output/civic-voice/{office}_c{XX}.json                               (schema layer)
  *
  * Writes to:
  *   Initiative_Tracker sheet — columns: ImplementationPhase, MilestoneNotes,
  *   NextScheduledAction, NextActionCycle, LastUpdated
+ *   output/civic_sentiment_c{XX}.json (apply-only post-S215)
  *
  * Run AFTER: initiative agents produce decisions
  * Run BEFORE: next cycle's buildInitiativePackets.js
@@ -28,6 +40,7 @@ const sheets = require('../lib/sheets');
 
 const ROOT = path.resolve(__dirname, '..');
 const DECISIONS_DIR = path.join(ROOT, 'output/city-civic-database/initiatives');
+const VOICE_DIR = path.join(ROOT, 'output/civic-voice');
 const SHEET_NAME = 'Initiative_Tracker';
 const APPLY = process.argv.includes('--apply');
 
@@ -38,6 +51,9 @@ const WRITEBACK_FIELDS = [
   'NextScheduledAction',
   'NextActionCycle'
 ];
+
+const VALID_OWNERS = ['primary', 'secondary', 'advisory'];
+const SECONDARY_FOLD_CAP = 3;
 
 const getCurrentCycle = require('../lib/getCurrentCycle');
 const CYCLE = getCurrentCycle();
@@ -72,10 +88,151 @@ function findDecisionFiles(cycle) {
   return files;
 }
 
+// ─────────────────────────────────────────────────────────────────────────────
+// Voice-statement schema audit (S215, civic.9b)
+//
+// Walks voice JSONs, surfaces trackerOwner-schema violations + collisions
+// before the write phase runs. Returns { collisions, deprecation, byInitiative }.
+// Side effects: prints schema state per statement; never blocks the write path
+// during the deprecation window.
+// ─────────────────────────────────────────────────────────────────────────────
+function auditVoiceStatementSchema(cycle) {
+  const byInitiative = {};
+  let totalStatements = 0;
+  let missingOwnerCount = 0;
+  const deprecation = [];
+  const collisions = [];
+
+  if (!fs.existsSync(VOICE_DIR)) {
+    return { collisions, deprecation, byInitiative, totalStatements };
+  }
+
+  const voiceFiles = fs.readdirSync(VOICE_DIR)
+    .filter(f => f.endsWith(`_c${cycle}.json`));
+
+  for (const f of voiceFiles) {
+    const fp = path.join(VOICE_DIR, f);
+    let data;
+    try {
+      data = JSON.parse(fs.readFileSync(fp, 'utf-8'));
+    } catch (e) {
+      console.warn(`  WARNING: Could not parse voice file ${f}: ${e.message}`);
+      continue;
+    }
+    const statements = Array.isArray(data) ? data : (data.statements || []);
+    for (const s of statements) {
+      if (!s || !s.trackerUpdates || Object.keys(s.trackerUpdates).length === 0) continue;
+      totalStatements++;
+      // Resolve initiative ID from trackerUpdates first; fall back to first
+      // relatedInitiatives entry; final fallback to UNKNOWN (caught downstream).
+      const initId = s.trackerUpdates.InitiativeID
+        || s.trackerUpdates.initiative
+        || (s.relatedInitiatives || [])[0]
+        || 'UNKNOWN';
+
+      let owner = (s.trackerOwner || '').toLowerCase();
+      if (!owner) {
+        // Deprecation default — primary during C94-C95 transition window.
+        owner = 'primary';
+        missingOwnerCount++;
+        deprecation.push({
+          office: s.office,
+          statementId: s.statementId,
+          initiative: initId,
+          topic: s.topic,
+        });
+      } else if (VALID_OWNERS.indexOf(owner) === -1) {
+        // Schema violation — invalid value. Log + skip to advisory.
+        console.warn(`  SCHEMA VIOLATION: ${s.statementId} on ${initId} has trackerOwner="${s.trackerOwner}" (valid: ${VALID_OWNERS.join('/')}). Treating as advisory.`);
+        owner = 'advisory';
+      }
+
+      if (!byInitiative[initId]) byInitiative[initId] = [];
+      byInitiative[initId].push({
+        office: s.office,
+        statementId: s.statementId,
+        topic: s.topic,
+        owner,
+        trackerUpdates: s.trackerUpdates,
+        ownerMissing: !s.trackerOwner,
+      });
+    }
+  }
+
+  // Collision detection — only on (initiative, cycle) pairs with >1 primary.
+  for (const initId of Object.keys(byInitiative)) {
+    const primaries = byInitiative[initId].filter(s => s.owner === 'primary');
+    if (primaries.length > 1) {
+      // Downgrade to warning if ALL competing primaries are missing the field
+      // (deprecation transition); strict failure if any of them carried it
+      // explicitly.
+      const anyExplicit = primaries.some(s => !s.ownerMissing);
+      collisions.push({
+        initiative: initId,
+        primaries: primaries.map(s => ({
+          office: s.office,
+          statementId: s.statementId,
+          topic: s.topic,
+          explicitField: !s.ownerMissing,
+        })),
+        strict: anyExplicit,
+      });
+    }
+  }
+
+  return {
+    collisions,
+    deprecation,
+    byInitiative,
+    totalStatements,
+    allMissing: missingOwnerCount === totalStatements && totalStatements > 0,
+  };
+}
+
+function summarizeSchemaAudit(audit) {
+  if (audit.totalStatements === 0) {
+    console.log('  Voice schema: 0 statements with trackerUpdates — schema audit skipped.\n');
+    return;
+  }
+  console.log(`  Voice schema: ${audit.totalStatements} statements with trackerUpdates across ${Object.keys(audit.byInitiative).length} initiatives.`);
+  if (audit.allMissing) {
+    console.log(`  DEPRECATION: 0 of ${audit.totalStatements} statements carry the trackerOwner field. ` +
+      `Strict enforcement engages C96+ (see docs/plans/2026-05-11-civic-tracker-collision-schema.md).`);
+  } else if (audit.deprecation.length > 0) {
+    console.log(`  DEPRECATION: ${audit.deprecation.length} of ${audit.totalStatements} statements missing trackerOwner; default=primary:`);
+    for (const d of audit.deprecation.slice(0, 8)) {
+      console.log(`    - ${d.statementId} (${d.office}) on ${d.initiative}: ${d.topic}`);
+    }
+    if (audit.deprecation.length > 8) {
+      console.log(`    ... ${audit.deprecation.length - 8} more`);
+    }
+  }
+  if (audit.collisions.length > 0) {
+    console.log('');
+    for (const c of audit.collisions) {
+      const severity = c.strict ? 'COLLISION' : 'COLLISION (deprecation-warning)';
+      console.log(`  ${severity} on ${c.initiative} (cycle ${CYCLE}):`);
+      for (let i = 0; i < c.primaries.length; i++) {
+        const p = c.primaries[i];
+        const tag = p.explicitField ? '' : ' [default-primary; trackerOwner missing]';
+        console.log(`    Primary claim ${i + 1}: ${p.office} — ${p.statementId} (topic: "${p.topic}")${tag}`);
+      }
+      console.log(`    Resolution: re-run upstream voice agent(s) and downgrade one claim to secondary.`);
+      console.log(`    Convention: Mayor wins on political framing; project director wins on operational detail.`);
+    }
+  }
+  console.log('');
+}
+
 async function main() {
   console.log(`\n=== applyTrackerUpdates.js — Cycle ${CYCLE} ${APPLY ? '(LIVE WRITE)' : '(DRY RUN)'} ===\n`);
 
-  // Find all decision files with tracker updates
+  // S215 civic.9b — voice schema audit. Surface collisions + deprecation
+  // pre-flight; non-blocking during the C94-C95 transition.
+  const audit = auditVoiceStatementSchema(CYCLE);
+  summarizeSchemaAudit(audit);
+
+  // Find all decision files with tracker updates (existing write path)
   const decisions = findDecisionFiles(CYCLE);
 
   if (decisions.length === 0) {
@@ -109,6 +266,33 @@ async function main() {
   for (const dec of decisions) {
     console.log(`--- ${dec.agent} (${dec.initiativeId}) ---`);
     console.log(`  File: ${path.basename(dec.file)}`);
+
+    // S215 civic.9b — secondary fold-in. When schema audit identified
+    // secondary voice statements on this initiative, append their
+    // MilestoneNotes to the consolidated decision's note string (cap 3;
+    // overflow auto-demotes to advisory and is logged but not folded).
+    const voiceStmts = audit.byInitiative[dec.initiativeId] || [];
+    const secondaries = voiceStmts.filter(s => s.owner === 'secondary');
+    const folded = secondaries.slice(0, SECONDARY_FOLD_CAP);
+    const overflow = secondaries.slice(SECONDARY_FOLD_CAP);
+    if (folded.length > 0) {
+      const baseNote = (dec.trackerUpdates.MilestoneNotes || '').trim();
+      const appended = folded
+        .map(s => {
+          const note = (s.trackerUpdates.MilestoneNotes || '').trim();
+          return note ? `Also weighed in: ${s.office} — ${note}` : null;
+        })
+        .filter(Boolean);
+      if (appended.length > 0) {
+        dec.trackerUpdates.MilestoneNotes = baseNote
+          ? `${baseNote} | ${appended.join(' | ')}`
+          : appended.join(' | ');
+        console.log(`  Folded ${appended.length} secondary note(s): ${folded.map(s => s.office).join(', ')}`);
+      }
+    }
+    if (overflow.length > 0) {
+      console.log(`  Demoted ${overflow.length} overflow secondary/secondaries to advisory: ${overflow.map(s => s.office + ' (' + s.statementId + ')').join(', ')}`);
+    }
 
     // Find matching row by InitiativeID
     const rowIndex = trackerRows.findIndex(r =>
@@ -224,12 +408,28 @@ async function main() {
     timestamp: new Date().toISOString()
   };
 
-  fs.writeFileSync(sentimentFile, JSON.stringify(sentimentData, null, 2));
+  // S215 civic.9b (G-R15) — sentiment write is APPLY-gated. Pre-fix the
+  // script wrote civic_sentiment_c{XX}.json regardless of --apply, which
+  // violated the dry-run contract. The sentiment value still gets logged
+  // either way for visibility.
   console.log(`\nCivic Voice Sentiment: ${civicSentiment.toFixed(3)} (from ${sentimentCount} decisions)`);
-  console.log(`Written to: ${path.basename(sentimentFile)}`);
+  if (APPLY) {
+    fs.writeFileSync(sentimentFile, JSON.stringify(sentimentData, null, 2));
+    console.log(`Written to: ${path.basename(sentimentFile)}`);
+  } else {
+    console.log(`(dry-run — sentiment file NOT written; use --apply to persist)`);
+  }
 
   console.log(`\n=== Summary ===`);
   console.log(`Updated: ${updatedCount} | Skipped: ${skippedCount} | Total: ${decisions.length}`);
+  if (audit.collisions.length > 0) {
+    const strictCount = audit.collisions.filter(c => c.strict).length;
+    if (strictCount > 0) {
+      console.log(`Schema collisions (strict, post-migration): ${strictCount} — fix upstream voice agents and re-run.`);
+    } else {
+      console.log(`Schema collisions (deprecation-warning): ${audit.collisions.length} — pre-migration default-primary expected.`);
+    }
+  }
   if (!APPLY && updatedCount > 0) {
     console.log(`\nDry run — use --apply to write to ${SHEET_NAME}`);
   }

@@ -226,6 +226,8 @@ Empirical (S183 M1-M4 commit `c77cb37`): Masjid Al-Islam `wd-faith` query return
 ### Session Boot (automatic)
 The plugin calls `/v4/profile` for both `mags` and `bay-tribune`. Returns static facts + recent dynamic memories. Injected into context before the first message.
 
+> **Pipeline gap (S221, governance.12):** The full conversation-turn → session_turn doc → `/v4/profile` auto-extraction → static User Profile → SessionStart injection chain is partially covered across this doc but the auto-extraction step in the middle isn't explained. That's the contamination vector S221 surfaced (engineer-Mags entries written into identity for months) AND the leverage point Mike flagged — third auto-memory layer alongside claude-mem + autodream, highest-leverage because it lands as persistent identity. Pipeline doc + leverage design pending: `[[plans/2026-05-13-supermemory-profile-leverage]]`.
+
 ### Terminal Tagging (S135)
 
 When saving to any container, prefix with the terminal name: `[research/build]`, `[engine/sheet]`, `[media]`, `[civic]`. This enables filtering saves by source terminal without fragmenting containers into per-terminal silos. The 5 containers stay organized by WHAT the data is — terminal tags track WHERE it came from.

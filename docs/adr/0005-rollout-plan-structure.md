@@ -16,6 +16,8 @@ pointers:
   - "[[../plans/TEMPLATE]] — copy this when a ROLLOUT pointer references a not-yet-existing plan"
   - "[[../../.claude/terminals/research-build/TERMINAL]] — research-build owns ROLLOUT_PLAN"
   - "[[index]] — ADR registered same commit"
+  - "auto-memory `feedback_rollout-pointers-not-notes.md` — the S147 rule this ADR institutionalizes"
+  - "auto-memory `feedback_filing-isnt-fixing.md` (inline in MEMORY.md, S215) — companion: ROLLOUT rows aren't a substitute for execution when work is in-session-doable"
 ---
 
 # ADR-0005: ROLLOUT_PLAN structure — semantic groups + pointer-only entries + per-terminal filing protocol

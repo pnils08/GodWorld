@@ -325,6 +325,29 @@ git log origin/main..HEAD --oneline
 
 If smoke-test or verification is pending on something this session shipped, **note it in SESSION_CONTEXT** and hold push until verified. Pushing un-smoke-tested engine code is the worst version of premature push — it ships unverified infrastructure that other terminals' next cycle will run on the live spreadsheet.
 
+### Pattern-citation convention (S218 cross-link discipline)
+
+When a commit is a genuine **instance** of a recognized discipline pattern, include a `Pattern:` line in the commit body referencing the auto-memory:
+
+```
+Pattern: feedback_measure-twice-cascading-effects
+Pattern: feedback_senior-engineer-default
+```
+
+This makes the pattern's case-history surfaceable in one command: `git log --grep "Pattern: feedback_measure-twice"` returns every case the discipline has been applied across project history. Pairs with the `## Instances` index at the bottom of each pattern memory.
+
+**Bar (do not dilute):** only cite a pattern when the commit is *genuinely an instance* of that pattern — not when the commit is merely adjacent or shares vocabulary. Examples that earn a citation:
+- A destructive-op trap caught by reading impl + caller graph before the cut (`feedback_measure-twice-cascading-effects`)
+- A trim or follow-up shipped inline without queueing for approval, where a senior engineer would just handle it (`feedback_senior-engineer-default`)
+- An in-session execution of work that could have been parked in a gap-log or ROLLOUT row but was closed instead (`feedback_filing-isnt-fixing`)
+
+Examples that do **not** earn a citation:
+- Routine code edits with no discipline-class implication
+- Adjacent work that touches a file the pattern has been applied to before
+- Commits that simply mention the pattern in passing without instantiating it
+
+When in doubt: don't cite. Diluted patterns are worse than no convention.
+
 ### Deployment notes
 
 If `clasp push` ran this session: note in SESSION_CONTEXT what files deployed + smoke-test status (run-or-pending). The `/diagnose` skill is the next-session feedback loop if anything regressed.

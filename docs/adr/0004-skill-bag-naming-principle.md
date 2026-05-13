@@ -10,11 +10,13 @@ sources:
   - "[[adr/0001-adopt-context-and-adrs]] — ADR pattern + bar-keeping discipline"
   - "[[FOUR_COMPONENT_MAP]] — the architecture this ADR clarifies (composition property, not 5th component)"
 pointers:
-  - "[[../../.claude/terminals/engine-sheet/TERMINAL]] §Skill Bag (S212) — first instance"
+  - "[[../../.claude/terminals/engine-sheet/TERMINAL]] §Skill Bag (S212) — first instance; promoted to engineer-for-all-life S218"
   - "[[../../.claude/terminals/civic/TERMINAL]] §Skill Bag (S212)"
   - "[[../../.claude/terminals/research-build/TERMINAL]] §Skill Bag (S212)"
   - "[[../../.claude/terminals/media/TERMINAL]] §Skill Bag (S212)"
   - "[[index]] — ADR registered same commit"
+  - "auto-memory `feedback_measure-twice-cascading-effects.md` — engine-sheet bag's core discipline; named-skill-bag application"
+  - "auto-memory `feedback_senior-engineer-default.md` (S218) — engine-sheet authority promotion; named-skill-bag's authority dimension"
 ---
 
 # ADR-0004: Skill-bag naming as load-out composition principle

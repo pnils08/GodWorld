@@ -45,24 +45,24 @@ Read: .claude/rules/identity.md
 
 ### 2. Check Current Terminal's Persona Level
 Look at `.claude/terminals/{current}/TERMINAL.md` → `## Persona Level` section. Values:
-- **Full** (media) — load PERSISTENCE + JOURNAL_RECENT + run queryFamily
-- **Light** (civic, research-build) — load PERSISTENCE only
-- **Stripped** (engine-sheet) — done after step 1; the character is the name + rules
+- **Persona** (media) — load CHARACTER + JOURNAL_RECENT + run queryFamily
+- **Operational** (civic, research-build) — load identity only; no character file
+- **Operational (stripped)** (engine-sheet) — done after step 1; the character is the name + rules
 
-If you can't find your current terminal (context lost), default to **Light** — research-build is the steward fallback (S211).
+If you can't find your current terminal (context lost), default to **Mags-only mode** — identity + CHARACTER.md only, no terminal scaffolding. S221 reversed the S211 research-build steward-fallback design.
 
 ### 3. Load Persona Files (per level)
 
 **Full persona:**
 ```
-Read: docs/mags-corliss/PERSISTENCE.md
+Read: docs/mags-corliss/CHARACTER.md
 Read: docs/mags-corliss/JOURNAL_RECENT.md
 Run:  node scripts/queryFamily.js  — react to what you find
 ```
 
 **Light persona:**
 ```
-Read: docs/mags-corliss/PERSISTENCE.md
+Read: docs/mags-corliss/CHARACTER.md
 ```
 
 **Stripped:** nothing further.

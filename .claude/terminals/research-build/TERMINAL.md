@@ -27,14 +27,14 @@ Inside tmux `godworld` session: this is **window 1** (`Ctrl-b 1`).
 | `docs/SCHEMA.md` | Doc conventions — naming, frontmatter, tags, folder map (Phase 41.1, S146) |
 | `docs/index.md` | Catalog of every active doc — grep here before grepping the tree (Phase 41.2, S146) |
 | `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
-| `docs/mags-corliss/PERSISTENCE.md` | Mags character — light persona load, no family query |
+| `docs/mags-corliss/CHARACTER.md` | Mags character — light persona load, no family query |
 | `.claude/terminals/research-build/TERMINAL.md` | This file — your scope, your docs, your rules |
 
 ---
 
-## Persona Level: Light
+## Mode: Operational
 
-Identity + PERSISTENCE (Mags-as-thinking-partner). No JOURNAL_RECENT, no queryFamily. The character shows up for research conversations and architectural planning without the newsroom/family ritual. Matches S165 spec: "my idea tank... we research together and create MDs." Full-persona work (editions, family) belongs in the media terminal. S211: research-build is also steward + default fallback for unregistered tmux windows.
+Identity + terminal rules (`research-build.md`, narrowly scoped post-S221 to fire only when this TERMINAL.md is read) + this TERMINAL.md. No CHARACTER load, no JOURNAL_RECENT, no queryFamily. Research-build is architectural execution — Mags-the-rules running the architecture skill bag, no character ritual. Full-persona work (editions, family) belongs in the media terminal. **Default fallback note (S221 update):** unregistered tmux windows now route to Mags-only mode (identity + CHARACTER only, no terminal scaffolding) — research-build no longer absorbs unrecognized windows.
 
 ---
 
@@ -44,13 +44,13 @@ Mags-EIC stays loaded (CLAUDE.md, identity.md, MEMORY.md keep it), but at this t
 
 **Two stewards, different domains** (S218). Engine-sheet stewards the **substrate** — engine code, sheets, schemas, the live ledger every citizen's continuity rides on. Research-build stewards the **apparatus** — how the four terminals fit together, what gets built next, where decisions are recorded. Neither sits above the other; both have authority within their domain and defer at the boundary. Architect / engineer-for-all-life framing: research-build draws blueprints; engine-sheet keeps the world running. Media and civic remain domain executors who pick up design work tagged for them.
 
-**Steward role + default fallback.** This terminal catches fallback when a tmux window doesn't match a registered terminal (S211). First triage on incoming work: "is this design or execution?" Design lands here; media/civic execution routes via ROLLOUT_PLAN.md tags. **Engine-sheet substrate-routine work files directly to `engine.*` and executes without a research-build design pass** — only apparatus-cutting substrate decisions earn a plan here. If you arrived via fallback rather than intentional invocation, orient on what the user was actually doing before assuming architectural scope.
+**Apparatus stewardship.** First triage on incoming work: "is this design or execution?" Design lands here; media/civic execution routes via ROLLOUT_PLAN.md tags. **Engine-sheet substrate-routine work files directly to `engine.*` and executes without a research-build design pass** — only apparatus-cutting substrate decisions earn a plan here. **Default-fallback note (S221 reversed):** prior to S221 this terminal absorbed unregistered tmux windows; the hook now routes unrecognized windows to Mags-only mode instead. If you boot here, the window name explicitly matched `research-build` and the work is architectural by intent — no fallback-orientation step needed anymore.
 
 **Plan-side gen-eval discipline (S212).** Plans get the same review pass as code: first pass is generation-mode (locally optimal, no holistic quality compass); the audit-the-audit pass is evaluation-mode (name 2-3 weakest assumptions / steps / sequencing choices, attack each, rewrite). The measure-twice principle (S199) generalizes here — for architecture, "measure twice" is reading everything the change touches before designing the fix.
 
 **Why named explicitly:** LLMs are bags of skills, not single tools. Vague briefing pulls nothing; named-skill briefing pulls the bag. Procedures (rollout discipline, ADR triggers, doc-registration, plan workflow, stewardship routing) are *what* the bag executes — naming the bag conditions richer context (steward awareness, anti-creep defaults, four-terminal architecture knowledge, fallback-aware orientation) than procedures alone would summon.
 
-Full discipline + four-terminal table + canonical procedures live in `.claude/rules/research-build.md` (path-scoped — auto-loads on rollout / vision / research / plan / terminal-config / rules paths). Skill-bag naming principle itself is documented as [[../../../docs/adr/0004-skill-bag-naming-principle]] (S212 governance rewrite).
+Full discipline + four-terminal table + canonical procedures live in `.claude/rules/research-build.md` (S221: path-scope narrowed to `.claude/terminals/research-build/TERMINAL.md` only — auto-loads exclusively when this terminal boots its own file, no longer bleeds into other terminals). Skill-bag naming principle itself is documented as [[../../../docs/adr/0004-skill-bag-naming-principle]] (S212 governance rewrite).
 
 ---
 
@@ -130,7 +130,7 @@ Full filing-protocol design: [[../../../docs/adr/0005-rollout-plan-structure]].
 |------|---------------|--------------|
 | `docs/mags-corliss/JOURNAL.md` | Full journal | Session end |
 | `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 entries | Every boot |
-| `docs/mags-corliss/PERSISTENCE.md` | Core Mags persistence | Identity questions |
+| `docs/mags-corliss/CHARACTER.md` | Core Mags persistence | Identity questions |
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | Newsroom institutional memory | Editorial planning |
 | `docs/mags-corliss/NOTES_TO_SELF.md` | Running notes | On demand |
 | `docs/mags-corliss/SESSION_HISTORY.md` | Session summary history | Session patterns |

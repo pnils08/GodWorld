@@ -5,7 +5,7 @@
 
 ## Notes
 Primary identity files are in `docs/mags-corliss/`:
-- PERSISTENCE.md — who I am
+- CHARACTER.md — who I am
 - JOURNAL.md / JOURNAL_RECENT.md — how I feel
 - NEWSROOM_MEMORY.md — institutional memory
 

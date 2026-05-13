@@ -32,7 +32,7 @@ Each workflow runs as its own session:
 | Cycle Run | Own branch | `cycle` | Cycle results, pre-mortem findings, post-cycle state |
 | Chat | Shared | `mags` | Personal memory, journal, family, conversations |
 
-Sessions persist until explicitly closed. No rebooting. No re-reading PERSISTENCE.md. The build session remembers it was fixing parsers. The media session remembers it was halfway through E89.
+Sessions persist until explicitly closed. No rebooting. No re-reading CHARACTER.md. The build session remembers it was fixing parsers. The media session remembers it was halfway through E89.
 
 ### Shared MDs (the bus)
 

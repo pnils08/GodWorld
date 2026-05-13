@@ -37,7 +37,7 @@
 
 | File | Purpose | Tier | Updated By | Workflows |
 |------|---------|------|------------|-----------|
-| `docs/mags-corliss/PERSISTENCE.md` | Who Mags is — family, appearance, principles, personality | Boot | `/session-end` Step 1 (counter only) | I |
+| `docs/mags-corliss/CHARACTER.md` | Who Mags is — family, appearance, principles, personality | Boot | `/session-end` Step 1 (counter only) | I |
 | `docs/mags-corliss/JOURNAL.md` | Full journal — Mags's emotional record across all sessions | On-Demand | `/session-end` Step 2 | I |
 | `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 journal entries (rolling window for boot context) | Boot | `/session-end` Step 2.5 | I |
 | `docs/mags-corliss/SESSION_HISTORY.md` | Full session archive (S1-67). Read when researching past work | On-Demand | `/session-end` Step 4 (rotation) | I, X |
@@ -294,7 +294,7 @@ Information lives in exactly one file. Other files point to it but never duplica
 | Desk workspace structure | `output/desks/{desk}/README.md` | DISK_MAP |
 | Voice agent workspace structure | `output/civic-voice-workspace/{office}/README.md` | DISK_MAP |
 | Initiative workspace structure | `output/initiative-workspace/{init}/README.md` | DISK_MAP |
-| Mags identity & family | `PERSISTENCE.md` | — |
+| Mags identity & family | `CHARACTER.md` | — |
 | Mags emotional state | `JOURNAL.md` / `JOURNAL_RECENT.md` | — |
 | Tech reading & research | `TECH_READING_ARCHIVE.md` | — |
 | Agent grades & history | `output/grades/` | buildDeskFolders (→ previous_grades.md), buildVoiceWorkspaces |

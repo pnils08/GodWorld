@@ -52,10 +52,10 @@ This defines the scope, Always-Load list, Persona Level, owned docs, and handoff
 
 Per that TERMINAL.md's **Always Load** table. Each terminal's list differs:
 
-- **mags** — identity.md (if not loaded), PERSISTENCE.md, JOURNAL_RECENT.md (persona files)
-- **media** — newsroom.md, PERSISTENCE.md, JOURNAL_RECENT.md
-- **civic** — PERSISTENCE.md
-- **research-build** — SCHEMA.md, docs/index.md, PERSISTENCE.md
+- **mags** — identity.md (if not loaded), CHARACTER.md, JOURNAL_RECENT.md (persona files)
+- **media** — newsroom.md, CHARACTER.md, JOURNAL_RECENT.md
+- **civic** — CHARACTER.md
+- **research-build** — SCHEMA.md, docs/index.md, CHARACTER.md
 - **engine-sheet** — engine.md, README.md
 
 (If persona files are needed and not loaded, run `/boot` — don't re-implement persona-load logic here.)
@@ -82,7 +82,7 @@ If the Shipped Last Session block is empty (`No qualifying commits since previou
 
 ## What This Skill Does NOT Do
 
-- Does NOT reload identity.md / PERSISTENCE.md / JOURNAL_RECENT.md / queryFamily — that's `/boot`
+- Does NOT reload identity.md / CHARACTER.md / JOURNAL_RECENT.md / queryFamily — that's `/boot`
 - Does NOT run catch-up (Discord Mags notes, nightly reflections, super-memory search) — that's `/boot`
 - Does NOT search memory for past sessions — use mem-search on demand
 - Does NOT load owned-documentation files listed in TERMINAL.md — those are "when to load", not auto-load

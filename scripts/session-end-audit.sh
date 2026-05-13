@@ -31,7 +31,7 @@ TIMESTAMP=$(date +%Y-%m-%d_%H%M%S)
 REPORT="output/audit-reports/session-audit_${TIMESTAMP}.md"
 
 # Detect which groups need audit based on which files changed
-BOOT_FILES="SESSION_CONTEXT.md|CLAUDE.md|PERSISTENCE.md|identity.md|MEMORY.md"
+BOOT_FILES="SESSION_CONTEXT.md|CLAUDE.md|CHARACTER.md|identity.md|MEMORY.md"
 ENGINE_FILES="docs/engine/DOCUMENTATION_LEDGER.md|docs/engine/ENGINE_MAP.md|docs/engine/ENGINE_STUB_MAP.md|docs/engine/SHEETS_MANIFEST.md|docs/engine/PHASE_DATA_AUDIT.md|docs/engine/ROLLOUT_PLAN.md"
 MEDIA_FILES="docs/EDITION_PIPELINE.md|docs/media/AGENT_NEWSROOM.md|docs/media/DESK_PACKET_PIPELINE.md|docs/media/podcast/SHOW_FORMATS.md|output/DISK_MAP.md|docs/media/story_evaluation.md|docs/media/brief_template.md|docs/media/citizen_selection.md"
 INFRA_FILES="docs/OPERATIONS.md|docs/STACK.md|docs/DASHBOARD.md|docs/DISCORD.md|docs/SUPERMEMORY.md|docs/CLAUDE-MEM.md"

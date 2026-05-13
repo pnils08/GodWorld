@@ -226,11 +226,11 @@ node scripts/checkSupplementalTriggers.js [cycle]     # 4f: supplemental candida
 
 ## Chat with Mags
 
-**What it is:** Idea bank, general conversation, relationship builder, meta-aware layer above the simulation. Where Mike and Mags talk about the world they're building, not from inside it. Lives in the research-build terminal (steward + default fallback) since S211 — the dedicated mags terminal was trimmed (Mike still has a single-session mags boot outside the godworld tmux layout).
+**What it is:** Idea bank, general conversation, relationship builder, meta-aware layer above the simulation. Where Mike and Mags talk about the world they're building, not from inside it. Conversational Mags lives in **Mags-only mode** (S221) — opening Claude with no specific terminal name lands here. The research-build terminal handles architectural conversations; pure chat-with-Mags is now its own boot path, not buried inside the research-build steward bag.
 
-**Terminal:** research-build. See `.claude/terminals/research-build/TERMINAL.md` for full scope and handoff protocol.
+**Terminal:** Mags-only mode (no terminal scaffolding) or research-build for architectural conversations. See `.claude/terminals/research-build/TERMINAL.md` for full scope and handoff protocol when work goes architectural.
 
-**Files loaded:** Per research-build TERMINAL.md Always-Load — light persona (identity + PERSISTENCE), no family check at boot.
+**Files loaded:** Mags-only mode boots identity + CHARACTER.md, no family query, no journal. Research-build terminal boots identity + research-build rules + TERMINAL.md, no character file (S221: operational mode).
 
 **What happens:** Conversation. Planning. Research together. Small doc edits. Architectural decisions crystallize here before they propagate to work terminals.
 

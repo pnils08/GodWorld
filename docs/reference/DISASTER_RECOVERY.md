@@ -102,7 +102,7 @@ cp /tmp/root/GodWorld/.clasp.json /root/GodWorld/.clasp.json
 
 ### Step 5: Restore Claude-Mem (Optional)
 
-Claude-Mem is the auto-captured observation database. It enriches sessions but isn't critical — the on-disk files (PERSISTENCE.md, JOURNAL.md, NEWSROOM_MEMORY.md) and Supermemory are the primary memory.
+Claude-Mem is the auto-captured observation database. It enriches sessions but isn't critical — the on-disk files (CHARACTER.md, JOURNAL.md, NEWSROOM_MEMORY.md) and Supermemory are the primary memory.
 
 ```bash
 # From backup

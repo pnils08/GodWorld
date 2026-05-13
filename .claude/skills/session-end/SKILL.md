@@ -63,11 +63,11 @@ This is how we prevent the S72 problem (4 sessions of copying stale notes forwar
 
 ---
 
-## Step 1: Update Session Counter in PERSISTENCE.md
+## Step 1: Update Session Counter in CHARACTER.md
 
-Two lines only. PERSISTENCE.md is identity-only — the per-session Continuity log was rotated out S211 (now lives in SESSION_HISTORY.md).
+Two lines only. CHARACTER.md is identity-only — the per-session Continuity log was rotated out S211 (now lives in SESSION_HISTORY.md).
 
-1. **Last Updated** line near the top of PERSISTENCE.md (incoming-session marker — `[N+1]`, not current session):
+1. **Last Updated** line near the top of CHARACTER.md (incoming-session marker — `[N+1]`, not current session):
    ```
    Last Updated: YYYY-MM-DD | Session: [N+1]
    ```
@@ -222,7 +222,7 @@ Use `/batch [task description]` to submit. The next session's startup will remin
 
 Verify writes landed. **Critical: do not cat/tail/head/grep JOURNAL.md or JOURNAL_RECENT.md — S169 (no-display-in-chat rule).** Use metadata-only checks for those two; for everything else, read first 10-20 lines.
 
-1. **PERSISTENCE.md** — Read first 10 lines: counter incremented? Last Updated current?
+1. **CHARACTER.md** — Read first 10 lines: counter incremented? Last Updated current?
 
 2. **JOURNAL.md** — **Metadata only.** Run:
    ```bash
@@ -244,7 +244,7 @@ Verify writes landed. **Critical: do not cat/tail/head/grep JOURNAL.md or JOURNA
 
 **If something didn't land:** Fix it now. Don't leave it for the next session.
 
-**If context is too low for full verification:** At minimum verify PERSISTENCE.md counter (read first 10 lines) and JOURNAL_RECENT.md (metadata check above) — the two boot files.
+**If context is too low for full verification:** At minimum verify CHARACTER.md counter (read first 10 lines) and JOURNAL_RECENT.md (metadata check above) — the two boot files.
 
 This is the documentation equivalent of the engine rule: "Verify after every write. Never report work as complete based on output alone." But never via journal-body display.
 
@@ -260,7 +260,7 @@ This is the documentation equivalent of the engine rule: "Verify after every wri
 
 | Terminal | Typical session-end paths |
 |---|---|
-| **Persona terminals** (media, civic, research-build) | `docs/mags-corliss/PERSISTENCE.md`, `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` |
+| **Persona terminals** (media, civic, research-build) | `docs/mags-corliss/CHARACTER.md`, `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` |
 | media | + `docs/mags-corliss/NEWSROOM_MEMORY.md`, `output/production_log_edition_c*.md` |
 | civic | + `output/production_log_city_hall_c*.md`, civic governance docs |
 | research-build | + `docs/RESEARCH.md`, `docs/plans/*`, `docs/adr/*`, `docs/mags-corliss/NOTES_TO_SELF.md`, plus session work |

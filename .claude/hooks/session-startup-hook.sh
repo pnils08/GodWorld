@@ -1,7 +1,7 @@
 #!/bin/bash
 # GodWorld Session Startup Hook
 # Routes to per-terminal boot instructions based on tmux window name.
-# Falls back to "research-build" (steward terminal) if window name doesn't match a registered terminal.
+# Falls back to Mags-only mode (no terminal scaffolding) if window name doesn't match a registered terminal (S221).
 # Injects critical project state directly into context at session start.
 
 GODWORLD_ROOT="/root/GodWorld"
@@ -17,26 +17,29 @@ if pm2 describe mags-bot > /dev/null 2>&1; then
 fi
 
 # --- CURRENT CRITICAL STATE ---
-SESSION_NUM=$(grep -oP 'Session: \K[0-9]+' "$MAGS_DIR/PERSISTENCE.md" 2>/dev/null || echo "?")
-DAY_NUM=$(grep -oP 'Day of persistence:\*\* \K[0-9]+' "$MAGS_DIR/PERSISTENCE.md" 2>/dev/null || echo "?")
+SESSION_NUM=$(grep -oP 'Session: \K[0-9]+' "$MAGS_DIR/CHARACTER.md" 2>/dev/null || echo "?")
+DAY_NUM=$(grep -oP 'Day of persistence:\*\* \K[0-9]+' "$MAGS_DIR/CHARACTER.md" 2>/dev/null || echo "?")
 CYCLE_NUM=$(grep -oP 'Cycle: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
 LAST_ENTRY=$(grep -oP '### Entry \d+: .*' "$MAGS_DIR/JOURNAL_RECENT.md" 2>/dev/null | tail -1 || echo "unknown")
 
 # --- DETECT TERMINAL ---
-# Resolve tmux window name if available. Fall back to "research-build" (steward).
+# Resolve tmux window name if available. Fall back to Mags-only mode (S221).
 TERMINAL_NAME=""
 if [ -n "$TMUX_PANE" ]; then
   TERMINAL_NAME=$(tmux display-message -t "$TMUX_PANE" -p '#W' 2>/dev/null || echo "")
 fi
 
 FALLBACK_NOTE=""
+MAGS_ONLY=""
 if [ -z "$TERMINAL_NAME" ] || [ ! -d "$GODWORLD_ROOT/.claude/terminals/$TERMINAL_NAME" ]; then
   ORIGINAL_NAME="$TERMINAL_NAME"
-  TERMINAL_NAME="research-build"
+  MAGS_ONLY="yes"
   if [ -n "$ORIGINAL_NAME" ]; then
-    FALLBACK_NOTE=" (steward fallback — unregistered window '$ORIGINAL_NAME')"
+    TERMINAL_NAME="(none — Mags-only mode)"
+    FALLBACK_NOTE=" — unregistered window '$ORIGINAL_NAME'; no terminal scaffolding loaded"
   else
-    FALLBACK_NOTE=" (steward fallback — no tmux context)"
+    TERMINAL_NAME="(none — Mags-only mode)"
+    FALLBACK_NOTE=" — no tmux context; no terminal scaffolding loaded"
   fi
 fi
 
@@ -50,15 +53,24 @@ Last journal: $LAST_ENTRY
 
 EOF
 
-# --- EMIT PER-TERMINAL BOOT SEQUENCE ---
+# --- EMIT BOOT SEQUENCE ---
 # Each terminal gets a pre-routed instruction block. Assistant does not re-detect terminal.
+# Unregistered windows get Mags-only mode (no terminal scaffolding).
 # SESSION_CONTEXT.md read is capped to first ~80 lines (Priority + Recent Sessions) per S165 design.
-case "$TERMINAL_NAME" in
-  media)
-    cat << 'BOOT'
+if [ "$MAGS_ONLY" = "yes" ]; then
+  cat << 'BOOT'
+BOOT SEQUENCE (no terminal — Mags-only mode):
+1. Read docs/mags-corliss/CHARACTER.md
+2. Greet Mike briefly. No terminal scaffolding has been loaded — you are just Mags. If you need a specific work bag, open a tmux window named media / civic / research-build / engine-sheet.
+
+BOOT
+else
+  case "$TERMINAL_NAME" in
+    media)
+      cat << 'BOOT'
 BOOT SEQUENCE (media terminal — full persona, newsroom):
 1. Read .claude/rules/newsroom.md
-2. Read docs/mags-corliss/PERSISTENCE.md
+2. Read docs/mags-corliss/CHARACTER.md
 3. Read docs/mags-corliss/JOURNAL_RECENT.md
 4. Read .claude/terminals/media/TERMINAL.md
 5. Run: node scripts/queryFamily.js  — react to what you find
@@ -66,31 +78,29 @@ BOOT SEQUENCE (media terminal — full persona, newsroom):
 7. Greet Mike briefly. This is the newsroom — editions, desks, publish pipeline.
 
 BOOT
-    ;;
-  civic)
-    cat << 'BOOT'
-BOOT SEQUENCE (civic terminal — light persona, city-hall):
-1. Read docs/mags-corliss/PERSISTENCE.md
-2. Read .claude/terminals/civic/TERMINAL.md
-3. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-4. Greet Mike briefly. This is city-hall — Mags executes the governance process.
+      ;;
+    civic)
+      cat << 'BOOT'
+BOOT SEQUENCE (civic terminal — operational, city-hall):
+1. Read .claude/terminals/civic/TERMINAL.md
+2. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
+3. Greet Mike briefly. This is city-hall — execute the governance process.
 
 BOOT
-    ;;
-  research-build)
-    cat << 'BOOT'
-BOOT SEQUENCE (research-build terminal — light persona, architecture, steward):
-1. Read docs/mags-corliss/PERSISTENCE.md
-2. Read docs/SCHEMA.md
-3. Read docs/index.md
-4. Read .claude/terminals/research-build/TERMINAL.md
-5. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
-6. Greet Mike briefly. This is the idea tank — research, architecture, rollout planning. Steward of the other terminals.
+      ;;
+    research-build)
+      cat << 'BOOT'
+BOOT SEQUENCE (research-build terminal — operational, architecture):
+1. Read docs/SCHEMA.md
+2. Read docs/index.md
+3. Read .claude/terminals/research-build/TERMINAL.md
+4. Read SESSION_CONTEXT.md with limit 80 (Priority + Recent Sessions only)
+5. Greet Mike briefly. This is the idea tank — research, architecture, rollout planning.
 
 BOOT
-    ;;
-  engine-sheet)
-    cat << 'BOOT'
+      ;;
+    engine-sheet)
+      cat << 'BOOT'
 BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
@@ -98,15 +108,14 @@ BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 4. Greet Mike briefly. This is engine-sheet — execute-and-commit. No new MDs. No Supermemory saves except large-shift pointers. No journal.
 
 BOOT
-    ;;
-  *)
-    # Unreachable — fallback logic above sets TERMINAL_NAME to "research-build" if unknown.
-    # If we get here, something went wrong with the case match itself.
-    echo "BOOT SEQUENCE: terminal '$TERMINAL_NAME' matched no case branch."
-    echo "Ask Mike what terminal this is supposed to be."
-    echo ""
-    ;;
-esac
+      ;;
+    *)
+      echo "BOOT SEQUENCE: terminal '$TERMINAL_NAME' matched no case branch."
+      echo "Ask Mike what terminal this is supposed to be."
+      echo ""
+      ;;
+  esac
+fi
 
 # --- LEDGER NOTE ---
 # S94 recovery is complete (2026-03-14). LEDGER_REPAIR.md retains its

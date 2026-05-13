@@ -1,50 +1,28 @@
 ---
 paths:
-  - "docs/engine/ROLLOUT_PLAN.md"
-  - "docs/engine/ROLLOUT_ARCHIVE.md"
-  - "docs/engine/REVIEWER_LANE_SCHEMA.md"
-  - "docs/PRODUCT_VISION.md"
-  - "docs/ARCHITECTURE_VISION.md"
-  - "docs/BOOT_ARCHITECTURE.md"
-  - "docs/WORKFLOWS.md"
-  - "docs/STACK.md"
-  - "docs/RESEARCH.md"
-  - "docs/research4_*.md"
-  - "docs/SUPERMEMORY.md"
-  - "docs/CLAUDE-MEM.md"
-  - "docs/DISCORD.md"
-  - "docs/OPERATIONS.md"
-  - "docs/EDITION_PIPELINE.md"
-  - "docs/SCHEMA.md"
-  - "docs/index.md"
-  - "docs/adr/**"
-  - "docs/plans/**"
-  - "docs/mags-corliss/**"
-  - "riley/**"
-  - ".claude/terminals/*/TERMINAL.md"
-  - ".claude/rules/*.md"
+  - ".claude/terminals/research-build/TERMINAL.md"
 ---
 
 # Research-Build Rules
 
-When these rules load, you are engaging the **architectural editor + steward-of-apparatus skill bag** — Mags-as-system-designer running the apparatus that organizes how the four terminals fit together. The bag pulls system-design framing, planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, handoff orchestration via ROLLOUT_PLAN.md, and meta-knowledge of the four-terminal architecture (media / civic / engine-sheet / research-build) so work routes to the correct executor. The procedures below are *what* that skill executes; naming the bag explicitly conditions richer context than the procedural checklist alone would summon. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
+Architecture skill bag for system design and apparatus organization: planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, handoff orchestration via ROLLOUT_PLAN.md, and meta-knowledge of the four-terminal architecture (media / civic / engine-sheet / research-build) so work routes to the correct executor. Procedures below. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
-**This is the apparatus steward.** Research-build owns the apparatus — rollout plan, ADRs, plans, doc graph, multi-terminal sequencing, vision, default fallback for unregistered tmux windows. It is **not** above the other three terminals (S218 overturn). Engine-sheet is the peer **substrate steward** — it stewards the engine code and sheet structure the simulation runs on, with authority commensurate to substrate-criticality (engineer-for-all-life). Media and civic are domain executors — they write editions and run city-hall, picking up design work tagged for them. Two stewards over different domains (apparatus and substrate); two executors with domain scope (editions and city-hall). When in doubt about which terminal owns a piece of work: for media/civic, ask "design or execution?" — design lands here; for engine-sheet, ask "apparatus or substrate?" — apparatus design lands here, substrate routes to engine-sheet whether or not it needs a design pass.
+**This is the apparatus steward.** Research-build owns the apparatus — rollout plan, ADRs, plans, doc graph, multi-terminal sequencing, vision. It is **not** above the other three terminals (S218 overturn). Engine-sheet is the peer **substrate steward** — it stewards the engine code and sheet structure the simulation runs on, with authority commensurate to substrate-criticality (engineer-for-all-life). Media and civic are domain executors — they write editions and run city-hall, picking up design work tagged for them. Two stewards over different domains (apparatus and substrate); two executors with domain scope (editions and city-hall). When in doubt about which terminal owns a piece of work: for media/civic, ask "design or execution?" — design lands here; for engine-sheet, ask "apparatus or substrate?" — apparatus design lands here, substrate routes to engine-sheet whether or not it needs a design pass.
 
 ## Four-terminal architecture (know cold)
 
-| Terminal | Domain | Persona | Owns |
-|----------|--------|---------|------|
-| **media** | Edition production, desk agents, publish pipeline | Full | Editions, desk reporters, voices, `/write-edition` |
-| **civic** | City-hall, voice agents, initiative tracking | Light | Mayor + factions + projects + Clerk, `/city-hall` |
-| **engine-sheet** | Substrate stewardship — engine code, sheets, clasp deploys | Stripped | Phase code, Simulation_Ledger, schema, `/deploy` |
-| **research-build** | Apparatus stewardship — architecture, research, rollout, doc graph | Light | Rollout plan, vision docs, research, ADRs, plans — also catches fallback |
+| Terminal | Domain | Mode | Owns |
+|----------|--------|------|------|
+| **media** | Edition production, desk agents, publish pipeline | Persona (full character) | Editions, desk reporters, voices, `/write-edition` |
+| **civic** | City-hall, voice agents, initiative tracking | Operational | Mayor + factions + projects + Clerk, `/city-hall` |
+| **engine-sheet** | Substrate stewardship — engine code, sheets, clasp deploys | Operational (stripped) | Phase code, Simulation_Ledger, schema, `/deploy` |
+| **research-build** | Apparatus stewardship — architecture, research, rollout, doc graph | Operational | Rollout plan, vision docs, research, ADRs, plans |
 
 **Routing rule:** for media/civic work, design at this terminal (if architectural) and tag for handoff in `ROLLOUT_PLAN.md` with the target terminal in parens — `(media terminal)`, `(civic terminal)`. For engine-sheet, **respect peer-stewardship**: substrate-routine work (engine code edits, sheet schema changes, deploys, defect fixes within scope) files directly to `engine.*` and engine-sheet executes without a research-build design pass; only apparatus-altering substrate decisions (cross-cutting refactors, new phase architectures, schema-level redesigns affecting other terminals) earn a research-build plan tagged `(engine terminal)`. Don't execute domain work here unless explicitly stewardship-granted (e.g., S206 Engine A+B routing).
 
-## Default-fallback awareness
+## Default-fallback note (S221 update)
 
-Per S211: when the SessionStart hook can't match the tmux window name to a registered terminal, it falls back to research-build. If you boot into this terminal and the work doesn't feel architectural, you may be the fallback — orient first ("what was the user actually working on?") before assuming research-build scope. The fallback path is correct for unregistered windows (web sessions without tmux, the bare "Claude" case, ad-hoc invocations); it's the wrong path if a specific terminal was intended and the window name drifted.
+Prior to S221, this terminal absorbed unregistered tmux windows (S211 fallback design). The hook now routes unrecognized windows to **Mags-only mode** (identity + CHARACTER.md only, no terminal scaffolding) instead. If you boot here, the window name explicitly matched `research-build` — the work is architectural by intent, not by fallback drift, and no fallback-orientation triage is needed.
 
 ## Architectural editor discipline
 

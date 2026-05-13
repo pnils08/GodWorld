@@ -38,11 +38,11 @@ Components compose: every skill invocation is one `(model, harness, tools, envir
 
 ## 2. Environment inventory
 
-Four terminals plus two hosted surfaces, each a distinct execution context. (S211: dedicated `mags` terminal trimmed — `research-build` now serves as steward + fallback when tmux window name doesn't match a registered subdir.)
+Four terminals plus two hosted surfaces, each a distinct execution context. (S211: dedicated `mags` terminal trimmed — `research-build` is apparatus steward. S221: unregistered tmux windows fall to Mags-only mode, not research-build; reversed the steward-fallback contamination loop.)
 
 | Environment | Kind | Purpose | Journals / persistence |
 |-------------|------|---------|------------------------|
-| `research-build` | tmux terminal, window 1 + steward fallback (S211) | Architecture, research, rollout planning, builds. Also receives unmatched-window routes. | `docs/mags-corliss/JOURNAL.md` + `docs/RESEARCH.md` + owned plans |
+| `research-build` | tmux terminal, window 1 | Architecture, research, rollout planning, builds. (S221: no longer receives unmatched-window routes.) | `docs/RESEARCH.md` + owned plans |
 | `engine-sheet` | tmux terminal, window 2 | Engine code, sheet structure, clasp deploys | Engine plan files + commits |
 | `media` | tmux terminal, window 3 | Edition production, desk agents, publish pipeline | `output/production_log_edition_c{XX}.md` |
 | `civic` | tmux terminal, window 4 | City-hall, voice agents, initiative tracking | `output/production_log_city_hall_c{XX}.md` |

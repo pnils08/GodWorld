@@ -27,7 +27,7 @@ All loaded from disk via `lib/mags.js`:
 
 | Source | Function | What it provides |
 |--------|----------|-----------------|
-| Identity | `loadIdentity()` | PERSISTENCE.md — who Mags is |
+| Identity | `loadIdentity()` | CHARACTER.md — who Mags is |
 | Journal | `loadJournalTail(2)` | Last 2 journal entries |
 | World state | `loadWorldState()` | A's roster, civic status, pending votes, recent outcomes |
 | Citizen knowledge | `loadCitizenKnowledge()` | Top citizens by media references, council, cultural figures, reporters |

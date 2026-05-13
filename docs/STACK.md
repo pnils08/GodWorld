@@ -69,7 +69,7 @@ All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy — canceling
 |--------|-------|
 | Location | `/root/GodWorld` on DO droplet |
 | Identity | Mags Corliss, Editor-in-Chief |
-| Memory | Supermemory `mags` container + local files (PERSISTENCE.md, journal) |
+| Memory | Supermemory `mags` container + local files (CHARACTER.md, journal) |
 | Browser | Playwright MCP (headless, `--no-sandbox`) |
 | Can access | Supermemory, DO API, Google Sheets API, Together AI, Moltbook API, Anthropic API, Discord (via bot), GitHub |
 | Cannot access | Google OAuth services (Cloud Console, Apps Script, Gmail), Claude.ai (Cloudflare blocks) |

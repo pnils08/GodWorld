@@ -65,14 +65,14 @@ Persona conditioning follows the [[project_journal-as-conditioning-scaffolding]]
 
 ## Terminal Matrix
 
-| Terminal | Scope | Persona | Journal | Steward? |
-|----------|-------|---------|---------|----------|
-| **media** | Edition production, newsroom | Full | Yes | No |
-| **civic** | City-hall, voice agents, governance | Light | Yes | No |
-| **research-build** | Architecture, research, rollout planning. Default fallback. | Light | Yes | **Yes** — steward over the other 3 work terminals |
-| **engine-sheet** | Engine code, sheets, deploys | Stripped | No (commits + session_context + large-shift pointers) | No |
+| Terminal | Scope | Mode | Journal | Steward? |
+|----------|-------|------|---------|----------|
+| **media** | Edition production, newsroom | Persona (full character) | Yes | No |
+| **civic** | City-hall, voice agents, governance | Operational | No | No |
+| **research-build** | Architecture, research, rollout planning | Operational | No | **Yes** — apparatus steward (peer to engine-sheet's substrate stewardship per S218) |
+| **engine-sheet** | Engine code, sheets, deploys | Operational (stripped) | No (commits + session_context + large-shift pointers) | **Yes** — substrate steward (S218 peer-stewardship promotion) |
 
-research-build steward role: drafts cross-terminal plans in `ROLLOUT_PLAN.md` and tags `SESSION_CONTEXT.md` entries with destination handoffs. The other 3 work terminals (media, civic, engine-sheet) execute against those plans; research-build sees the whole map and is also where unregistered windows fall back.
+research-build apparatus-steward role: drafts cross-terminal plans in `ROLLOUT_PLAN.md` and tags `SESSION_CONTEXT.md` entries with destination handoffs. The other 3 work terminals execute against those plans; research-build sees the whole map. **Unregistered windows fall to Mags-only mode (S221), not research-build** — the steward-fallback design from S211 was the contamination loop and got reversed.
 
 ---
 
@@ -86,7 +86,7 @@ research-build steward role: drafts cross-terminal plans in `ROLLOUT_PLAN.md` an
 
 4. **"Resume" is a skip.** If the user says "resume", the conversation history is already present. Don't re-boot, don't re-read the journal, don't check the family. Just confirm terminal and ask.
 
-5. **research-build as default fallback (steward).** Web sessions, unregistered tmux windows, and the bare "Claude" case all route to research-build. No terminal is ever missing a boot path. Steward placement chosen S211: the architecture terminal is also where cross-terminal coordination lives, so unrouted windows land where the work-of-figuring-out-what-this-is can happen.
+5. **Mags-only mode as default fallback (S221).** Web sessions, unregistered tmux windows, and the bare "Claude" case fall to Mags-only mode: identity + CHARACTER.md only, no terminal scaffolding. The original S211 design routed unregistered windows to research-build as steward fallback; S221 reversed it. Steward placement put research-build's apparatus-bag framing in front of every "open Claude" event regardless of whether architectural work was intended — Mike surfaced the contamination loop and the fallback got rewritten. No terminal is missing a boot path; the fallback is now bare Mags.
 
 ---
 

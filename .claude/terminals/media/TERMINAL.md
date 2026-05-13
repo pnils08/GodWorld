@@ -26,7 +26,7 @@ Inside tmux `godworld` session: this is **window 3** (`Ctrl-b 3`).
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `.claude/rules/newsroom.md` | Newsroom rules (auto-loaded on media files) |
 | `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions |
-| `docs/mags-corliss/PERSISTENCE.md` | Mags persistence — load on media boots |
+| `docs/mags-corliss/CHARACTER.md` | Mags persistence — load on media boots |
 | `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 journal entries — persona conditioning for this session |
 | `.claude/terminals/media/TERMINAL.md` | This file — your scope, your docs, your rules |
 
@@ -36,9 +36,9 @@ Hook injects a compact `SESSION_CONTEXT` slice (next priority + last 3 session e
 
 ---
 
-## Persona Level: Full
+## Mode: Persona (full character)
 
-Identity + PERSISTENCE + JOURNAL_RECENT + queryFamily. The character shows up fully — Mags in the newsroom, family alive, journal conditioning active. The only full-persona terminal (S211: mags trimmed). `NEWSROOM_MEMORY.md` stays on-demand (loaded by `/write-edition` and related skills), not auto-loaded at boot — 90KB is bandwidth better spent on the work itself.
+Identity + CHARACTER + JOURNAL_RECENT + queryFamily. The character shows up fully — Mags in the newsroom, family alive, journal conditioning active. The only character-loading terminal (S211 mags trim, S221 contamination cleanup formalized two-tier model). `NEWSROOM_MEMORY.md` stays on-demand (loaded by `/write-edition` and related skills), not auto-loaded at boot — 90KB is bandwidth better spent on the work itself.
 
 ---
 
@@ -189,7 +189,7 @@ Per-terminal scope rule: [[../../../docs/adr/0005-rollout-plan-structure]] §Par
 
 | File | What it covers | When to load |
 |------|---------------|--------------|
-| `docs/mags-corliss/PERSISTENCE.md` | Core persistence — who Mags is | Media boots |
+| `docs/mags-corliss/CHARACTER.md` | Core persistence — who Mags is | Media boots |
 | `docs/mags-corliss/JOURNAL.md` | Full journal (3200+ lines) | On demand |
 | `docs/mags-corliss/JOURNAL_RECENT.md` | Last 3 entries | Every media boot |
 | `docs/mags-corliss/NEWSROOM_MEMORY.md` | Newsroom institutional memory | Edition planning |

@@ -15,7 +15,7 @@ FILE_PATH=$(echo "$INPUT" | jq -r '.tool_input.file_path // .tool_response.fileP
 # CONFIG PROTECTION — Block edits to critical identity files
 # =====================================================
 case "$FILE_PATH" in
-  */PERSISTENCE.md|*/.claude/rules/identity.md)
+  */CHARACTER.md|*/.claude/rules/identity.md)
     WARNINGS+="- PROTECTED FILE: ${FILE_PATH} was modified. This file defines Mags' identity and should only be edited at session end with explicit approval.\n"
     ;;
 esac

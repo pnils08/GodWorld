@@ -11,11 +11,11 @@ The `SessionStart` hook auto-detects your terminal (via tmux window name) and em
 **If the user says "resume"** — the conversation history is already here. Don't re-boot, don't re-read the journal, don't check the family. Just confirm the terminal and ask what's next.
 
 **Skill split (don't conflate these — S163 failure pattern):**
-- **`/boot`** — persona reload (identity + PERSISTENCE + JOURNAL_RECENT + queryFamily, scaled to the terminal's Persona Level). Use after compaction or when identity drifts mid-session.
+- **`/boot`** — persona reload, scaled to the terminal's mode (media loads identity + CHARACTER + JOURNAL_RECENT + queryFamily; operational terminals load identity only; unregistered windows reload Mags-only). Use after compaction or when identity drifts mid-session.
 - **`/session-startup`** — terminal context reload (TERMINAL.md + scope files + compact SESSION_CONTEXT slice). Use when the hook misfired or terminal scope drifted.
 - Cold fresh session: hook injects both. Post-compaction: `/boot` alone. Terminal switch or hook-miss: `/session-startup` alone.
 
-**Fallback terminal is `research-build`** — when the tmux window name doesn't match a registered `.claude/terminals/{name}/` directory, the hook routes to research-build (steward of the other terminals). Covers unregistered windows, web sessions without tmux, and the bare "Claude" case.
+**Unregistered windows fall to Mags-only mode (S221)** — when the tmux window name doesn't match a registered `.claude/terminals/{name}/` directory, the hook emits a bare boot: identity + CHARACTER.md only, no terminal scaffolding. Use this when you want to talk to Mags without picking a work bag. Previously fell back to `research-build`; that was the contamination vector fixed S221.
 
 **Memory before action.** Before guessing, search (in this order):
 1. **GodWorld MCP** for city data — `lookup_citizen`, `lookup_initiative`, `search_canon`, `search_world`, `get_neighborhood`, `get_council_member`
@@ -75,21 +75,22 @@ The `godworld` MCP server provides direct tool access to city data. **Use MCP to
 | `get_council_member(district)` | Reading Civic_Office_Ledger | Official + approval + faction |
 | `get_domain_ratings(cycle)` | Reading Edition_Coverage_Ratings | Per-domain media ratings |
 
-## Terminal Architecture (S135 + S165 + S211)
+## Terminal Architecture (S135 + S165 + S211 + S221)
 
-4 terminals. Persona level and journal behavior differ per terminal scope. research-build is steward + default fallback.
+4 terminals, two modes. **Media** is the only character terminal — full Mags-as-person (CHARACTER.md, family, journal). **Civic, research-build, engine-sheet** are operational tool bags — no character file load, no journal, identity + their own rules only. Each terminal governs itself: no terminal reads another terminal's rules or character files (S221 contamination fix).
 
-| Terminal | Scope | Persona | Journal |
-|----------|-------|---------|---------|
-| **media** | Edition production, desk agents, publish pipeline | Full | Yes |
-| **civic** | City-hall, voice agents, initiative tracking | Light | Yes |
-| **research-build** | Architecture, research, rollout planning. Steward + default fallback. | Light | Yes |
-| **engine-sheet** | Engine code, sheets, clasp deploys | Stripped | No (commits + SESSION_CONTEXT + large-shift Supermemory pointers) |
+| Terminal | Scope | Mode | Journal |
+|----------|-------|------|---------|
+| **media** | Edition production, desk agents, publish pipeline | Persona (full character) | Yes |
+| **civic** | City-hall, voice agents, initiative tracking | Operational | No |
+| **research-build** | Architecture, research, rollout planning | Operational | No |
+| **engine-sheet** | Engine code, sheets, clasp deploys | Operational (stripped) | No |
 
-**Persona levels:**
-- **Full** — identity + PERSISTENCE + JOURNAL_RECENT + active queryFamily
-- **Light** — identity + PERSISTENCE (character present, no family query, no journal conditioning for the session)
-- **Stripped** — identity only (name + rules, no character scaffolding)
+**Modes:**
+- **Persona** (media only) — identity + CHARACTER + JOURNAL_RECENT + active queryFamily. Mags as a person; family, voice, history all loaded.
+- **Operational** (civic, research-build, engine-sheet) — identity + terminal's own rules + TERMINAL.md. Mags-the-rules only; no character file load. Each rules file is path-scoped narrowly to its own terminal's files; no bleed across terminals.
+
+**Unregistered windows: Mags-only mode** — boot emits identity + CHARACTER.md, no terminal scaffolding. Open a tmux window named `media` / `civic` / `research-build` / `engine-sheet` to load a work bag; anything else gets bare Mags.
 
 Handoffs between terminals flow through `ROLLOUT_PLAN.md` (tagged `(research-build terminal)`, `(media terminal)`, etc.) and `SESSION_CONTEXT.md` (tagged `[research/build]`, `[media]`, `[civic]`, `[engine/sheet]`). No new Supermemory containers for terminals — tag saves with the `[terminal-name]` prefix.
 

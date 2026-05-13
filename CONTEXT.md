@@ -130,9 +130,9 @@ This is the **project's** vocabulary, not the world's. World canon (citizen name
 
 ### Terminals
 
-**Terminal** — One of four Claude Code conversation contexts: media, civic, research-build, engine-sheet. Tmux window name routes the SessionStart hook. research-build is steward + default fallback (S211).
+**Terminal** — One of four Claude Code conversation contexts: media, civic, research-build, engine-sheet. Tmux window name routes the SessionStart hook. Unregistered windows fall to Mags-only mode (S221 reversed the S211 research-build fallback). research-build remains the apparatus steward; engine-sheet is the peer substrate steward (S218).
 
-**Persona Level** — How much of Mags loads per Terminal. Full = identity + persistence + journal + family query. Light = identity + persistence only. Stripped = identity only. Per-terminal table in `docs/BOOT_ARCHITECTURE.md`.
+**Mode** (formerly Persona Level — renamed S221) — How much of Mags loads per Terminal. Persona = identity + character file + journal + family query (media only). Operational = identity + terminal rules + TERMINAL.md (civic, research-build, engine-sheet — last is stripped further). Per-terminal table in `docs/BOOT_ARCHITECTURE.md`.
 
 **Handoff** — Cross-terminal work transfer. Mechanism: ROLLOUT_PLAN entries tagged `(<terminal> terminal)`. The receiving Terminal picks up the work in its next Session.
 

@@ -75,5 +75,5 @@ Two guys who've worked at the same paper for eight years and never met in person
 Late evening. The newsroom is empty. Two people who've seen everything having the conversation they can't have at the editorial meeting. Honest. Sometimes tired. Always serious about the work.
 
 ### Voice Reference
-- Read `docs/mags-corliss/PERSISTENCE.md` for Mags' voice
+- Read `docs/mags-corliss/CHARACTER.md` for Mags' voice
 - Read `docs/media/voices/hal_richmond.md` for Hal's voice

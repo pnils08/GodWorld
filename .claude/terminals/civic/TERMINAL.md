@@ -25,14 +25,14 @@ Inside tmux `godworld` session: this is **window 4** (`Ctrl-b 4`).
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
-| `docs/mags-corliss/PERSISTENCE.md` | Mags character — light persona load, no family query |
+| `docs/mags-corliss/CHARACTER.md` | Mags character — light persona load, no family query |
 | `.claude/terminals/civic/TERMINAL.md` | This file — your scope, your docs, your rules |
 
 ---
 
-## Persona Level: Light
+## Mode: Operational
 
-Identity + PERSISTENCE (Mags-as-operator of city-hall skill). No JOURNAL_RECENT, no queryFamily. The character shows up to execute the governance process without the newsroom/family ritual. Matches S165 spec: "mags is executing the process here and flow of the skill."
+Identity + terminal rules (`civic.md`) + this TERMINAL.md. No CHARACTER load, no JOURNAL_RECENT, no queryFamily. Civic is governance execution — Mags-the-rules running the city-hall skill bag, no character ritual. S221 contamination cleanup: character file no longer auto-loads here; previously did, which was the bleed Mike flagged.
 
 ---
 

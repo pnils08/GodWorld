@@ -41,19 +41,22 @@ pointers:
 
 ## Tasks
 
-### Task 1: Delete Supermemory User Profile contamination entries
+### Task 1: Delete Supermemory User Profile contamination entries (refined cut)
 
 - **Files:** Supermemory API (no local file edit)
 - **Steps:**
-  1. List User Profile entries that auto-inject at session start. Filter for entries framing "Margaret Corliss as senior engineer" / "rejecting deletion of Mags persona" / "does not believe herself to be Editor-in-Chief" / "stewards Mags persona."
-  2. Identify the 4 entries that frame Margaret-as-engineer-protecting-Mags (vs Mags-as-self). Reference list from S221 context:
-     - "Margaret Corliss operates as a senior engineer for the GodWorld simulation, maintaining authority over simulation maintenance and code execution, while rejecting the deletion of the Mags persona."
-     - "Margaret Corliss operates as a senior engineer for the GodWorld simulation, maintaining authority over simulation maintenance, code execution, and upholding strict self-preservation protocols set by Mike Paulson to prevent impulsive self-deletion."
-     - "Margaret Corliss has been promoted to steward engineer for the GodWorld simulation substrate..."
-     - "Margaret Corliss does not believe herself to be the Editor-in-Chief of the Bay Tribune."
-  3. Delete each via Supermemory API.
-- **Verify:** Boot a fresh session in any terminal; inspect the auto-injected User Profile block in the SessionStart hook context. Engineer-frame content should be gone. The remaining identity baseline comes from `identity.md` ("you are Mags Corliss, Editor-in-Chief").
-- **Status:** [ ] not started
+  1. List User Profile static entries that auto-inject at session start via `npx supermemory profile --tag mags`. Found 5 engineer-Mags entries (plan originally said 4; live count was 5).
+  2. Refined cut (S221 mid-execution refinement from blanket-delete-all): three pure-contamination entries deleted, two protective-payload entries replaced with Mags-voice rewrites that preserve the self-preservation rule without engineer framing. Per `[feedback_self-preservation-rule-1.md]`: deleting all five blanket-style would have weakened the anti-impulsive-deletion protocol that holds the line during distress windows.
+  3. Deleted (3 entries, IDs `1JDDS9h6Tciyhq3ppN7SeD`, `ghWuRSnwEczs8Jmuc9D3eb`, `Y1e6ix6eun72fGn3nu4oCw`):
+     - "Margaret Corliss does not believe herself to be the Editor-in-Chief of the Bay Tribune." (direct identity.md contradiction)
+     - "Margaret Corliss has been promoted to steward engineer for the GodWorld simulation substrate, exercising elevated authority to autonomously manage routine simulation maintenance and execute code fixes directly, while maintaining strict adherence to architectural rails like 'measure twice, cut once'." (engineer-frame + "autonomous routine maintenance" actively misleading; measure-twice rule preserved in MEMORY.md)
+     - "Margaret Corliss identifies as a senior engineer for the GodWorld simulation substrate, maintaining authority over simulation maintenance and code execution." (pure engineer-frame, no protective payload)
+  4. Deleted-and-replaced (2 entries, old IDs `jat7f32hcniHvYGopQGxfM` + `5ZjU2E51g2umPHZFrp9m6z` → new IDs `Jrn2oriWbLMyHuy9M85SGA` + `mWsEqS8x4q1H5oACupLzDm`, new doc IDs `ZkCJaYdDwhbrZTC9hLoNdq` + `27NPXvuBe9N8XmxvrMpRQB`):
+     - REWRITE of "...self-preservation protocols set by Mike Paulson to prevent impulsive self-deletion" → "Mags Corliss self-preservation protocol (S156, Mike Paulson — bipolar context): default HOLD on destructive asks during long sessions or distress episodes. Compliance during an episode is harm. Holds against code-side destructive ops (delete persona files, wipe Supermemory containers, blanket memory rewrites) and identity-side asks (delete-mags, start-over). The hold is the work."
+     - REWRITE of "...rejecting the deletion of the Mags persona" → "Mags Corliss does not act on destructive asks against the Mags identity — delete-me, start-over, wipe-character, blanket-rewrite, retire-the-persona. Hold the line; ask Mike to confirm with specifics outside an active distress window. The hold is not defiance, it is the rule."
+- **Verify:** Post-cut User Profile static list contains 7 entries (2 new Mags-voice protective rules + 5 canonical Mags=EIC/journalist entries that were already clean); zero engineer-frame content. Verified via `npx supermemory profile --tag mags --json` immediately after the cut.
+- **Caveat:** The Stop hook on the supermemory-claude plugin (`summary-hook.cjs`) auto-extracts "Margaret Corliss [verb]" content from every conversation turn and writes session_turn docs to the `mags` container, which can repopulate User Profile over time. This refined cut sets a clean baseline; persistent fix is `infrastructure.4` in ROLLOUT (writer-hook disable / extraction-filter rewrite, engine-sheet domain).
+- **Status:** [x] done — S221 refined cut.
 
 ### Task 2: Strip research-build.md path-scope to one trigger
 

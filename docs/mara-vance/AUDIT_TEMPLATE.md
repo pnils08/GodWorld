@@ -4,7 +4,7 @@
 
 The audit is the diagnosis; the voice directive (`output/mara-directives/mara_directive_c{XX}.md`) is the prescription. The audit produces the directive — never the other way around.
 
-**Last in-repo change:** 2026-05-12 (S217 — new file; Mara restructure)
+**Last in-repo change:** 2026-05-12 (S219 — canon.2 close + Corrections-Forward awareness added to Tier-3 sub-check; S217 — new file; Mara restructure)
 
 ---
 
@@ -104,7 +104,20 @@ For every named institution in the edition (church / mosque / synagogue / temple
 
 If the institution returns canonically from a `wd-*` lookup, the name is approved fictional canon. If it's NOT in any `wd-*` pool AND it matches a known real Oakland institution (web check OK when uncertain), that's a **Tier-3 violation**. PASS = zero real-named institutions. REVISE = 1-2 (flag for editorial decision + corrections-forward note). FAIL = systemic (3+, or any Tier-3 violation in front-page coverage) — canon emergency requiring Mike + Mags resolution before next edition ingest.
 
-Note: until the faith-canon scrub side-project ships (filed as `canon.2`), the wd-faith pool itself is contaminated — a "match" against `wd-faith` does NOT confirm a name is canonical fictional. Until that scrub completes, treat every faith institution as suspect and cross-check against the CANON_RULES Tier-2 substitution list directly.
+**Status (S218):** canon.2 closed end-to-end. wd-faith pool is now canon-clean (16/16 fictional substitutes; zero real-Oakland institution leakage; P5 Supermemory rebuild verified — wd-faith + wd-citizens both 16/16 canon, 0 blocklist hits). A wd-faith match confirms canonical fictional canon. The "wd-faith is contaminated, cross-check CANON_RULES directly" caveat from S217 is retired.
+
+**Corrections-Forward awareness (S218 — load-bearing for Tier-3 audits):** when a bay-tribune source briefing names a Tier-3-scrubbed entity AND wd-* lookup returns a different name for the same role/citizen, **that is the corrections-forward map working — NOT a fracture.** bay-tribune Supermemory + published editions are not retroactively edited (paper-of-record principle, S217); the canon substitute supersedes at runtime via `docs/canon/INSTITUTIONS.md` §<Domain> Corrections Forward. When you encounter this divergence:
+
+1. Substitute per the map (use the canon substitute name in any audit reference or directive)
+2. Add to your audit notes: `CONTINUITY NOTE: source briefing named pre-scrub entity Y; substituted to canon-substitute Z per INSTITUTIONS §<Domain> Corrections Forward.`
+3. **Do NOT flag this as a Tier-3 violation.** The map IS the resolution.
+
+Currently active corrections-forward maps:
+- `docs/canon/INSTITUTIONS.md` §Faith Corrections Forward (S218) — 16 orgs + 18 clergy names + 2 retired interim substitutes. Includes Acts Full Gospel Church → New Covenant Pentecostal Assembly, Bishop Robert Jackson Sr. → Bishop Robert Jaston, and the S195 interim substitutes (Greater Hope Pentecostal Church + Bishop Calvin Reeves Sr.) that were retired S218 as too-close-to-real (both also map forward to New Covenant / Jaston).
+
+Flag a Tier-3 violation only when:
+- (a) a real-named institution is encountered AND no corrections-forward map covers it, OR
+- (b) a retired interim substitute is being **newly introduced** in fresh generation rather than retroactively encountered in pre-scrub bay-tribune source briefings.
 
 ### Drift Findings (S215 canon-drift check)
 For each citizen flagged in the structured top block's canon-drift check, document:

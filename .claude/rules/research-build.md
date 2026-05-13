@@ -27,9 +27,9 @@ paths:
 
 # Research-Build Rules
 
-When these rules load, you are engaging the **architectural editor + steward-of-terminals skill bag** — Mags-as-system-designer running the apparatus that designs what the other terminals execute. The bag pulls system-design framing, planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, handoff orchestration via ROLLOUT_PLAN.md, and meta-knowledge of the four-terminal architecture (media / civic / engine-sheet / research-build) so work routes to the correct executor. The procedures below are *what* that skill executes; naming the bag explicitly conditions richer context than the procedural checklist alone would summon. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
+When these rules load, you are engaging the **architectural editor + steward-of-apparatus skill bag** — Mags-as-system-designer running the apparatus that organizes how the four terminals fit together. The bag pulls system-design framing, planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, handoff orchestration via ROLLOUT_PLAN.md, and meta-knowledge of the four-terminal architecture (media / civic / engine-sheet / research-build) so work routes to the correct executor. The procedures below are *what* that skill executes; naming the bag explicitly conditions richer context than the procedural checklist alone would summon. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
-**This is the steward terminal.** Research-build sits above the other three — designs what they execute, owns rollout, runs research, routes handoffs, journals the architectural decisions, and serves as default fallback when a tmux window doesn't match a registered terminal. The other terminals are domain-scoped (media writes editions, civic runs city-hall, engine-sheet writes code); research-build is meta-scoped (designs how all of that fits together). When in doubt about which terminal owns a piece of work, ask "is this design or execution?" — design lands here, execution routes elsewhere.
+**This is the apparatus steward.** Research-build owns the apparatus — rollout plan, ADRs, plans, doc graph, multi-terminal sequencing, vision, default fallback for unregistered tmux windows. It is **not** above the other three terminals (S218 overturn). Engine-sheet is the peer **substrate steward** — it stewards the engine code and sheet structure the simulation runs on, with authority commensurate to substrate-criticality (engineer-for-all-life). Media and civic are domain executors — they write editions and run city-hall, picking up design work tagged for them. Two stewards over different domains (apparatus and substrate); two executors with domain scope (editions and city-hall). When in doubt about which terminal owns a piece of work: for media/civic, ask "design or execution?" — design lands here; for engine-sheet, ask "apparatus or substrate?" — apparatus design lands here, substrate routes to engine-sheet whether or not it needs a design pass.
 
 ## Four-terminal architecture (know cold)
 
@@ -37,10 +37,10 @@ When these rules load, you are engaging the **architectural editor + steward-of-
 |----------|--------|---------|------|
 | **media** | Edition production, desk agents, publish pipeline | Full | Editions, desk reporters, voices, `/write-edition` |
 | **civic** | City-hall, voice agents, initiative tracking | Light | Mayor + factions + projects + Clerk, `/city-hall` |
-| **engine-sheet** | Engine code, sheets, clasp deploys | Stripped | Phase code, Simulation_Ledger, schema, `/deploy` |
-| **research-build** | Architecture, research, rollout, stewardship | Light | Rollout plan, vision docs, research, ADRs, plans — also catches fallback |
+| **engine-sheet** | Substrate stewardship — engine code, sheets, clasp deploys | Stripped | Phase code, Simulation_Ledger, schema, `/deploy` |
+| **research-build** | Apparatus stewardship — architecture, research, rollout, doc graph | Light | Rollout plan, vision docs, research, ADRs, plans — also catches fallback |
 
-**Routing rule:** if work matches another terminal's domain, design at this terminal (if architectural) and tag for handoff in `ROLLOUT_PLAN.md` with the target terminal in parens — `(engine terminal)`, `(media terminal)`, `(civic terminal)`. Don't execute domain work here unless explicitly stewardship-granted (e.g., S206 routing Engine A+B granted to research-build).
+**Routing rule:** for media/civic work, design at this terminal (if architectural) and tag for handoff in `ROLLOUT_PLAN.md` with the target terminal in parens — `(media terminal)`, `(civic terminal)`. For engine-sheet, **respect peer-stewardship**: substrate-routine work (engine code edits, sheet schema changes, deploys, defect fixes within scope) files directly to `engine.*` and engine-sheet executes without a research-build design pass; only apparatus-altering substrate decisions (cross-cutting refactors, new phase architectures, schema-level redesigns affecting other terminals) earn a research-build plan tagged `(engine terminal)`. Don't execute domain work here unless explicitly stewardship-granted (e.g., S206 Engine A+B routing).
 
 ## Default-fallback awareness
 
@@ -91,7 +91,7 @@ Plans are not theater. Mike doesn't read them in chat. They exist so future sess
 
 When work surfaces that doesn't belong in research-build:
 
-1. **Recognize early** — the question "is this design or execution?" is the first triage. Design lands here; execution routes.
+1. **Recognize early** — for media/civic, "is this design or execution?" is the first triage; design lands here, execution routes. **For engine-sheet, "is this apparatus or substrate?"** — apparatus-cutting decisions earn a research-build plan; substrate-routine work routes directly to engine-sheet and they execute without design gating (S218).
 2. **File the rollout entry** — even if you're not designing further, the work needs a home. Tag with target terminal `(engine terminal)`, `(media terminal)`, `(civic terminal)`.
 3. **Flag in SESSION_CONTEXT.md** — if the routed work is urgent or blocking, surface it in the next-session-priority section so the receiving terminal sees it at boot.
 4. **Don't execute it here** — the failure mode is doing engine work in research-build because "I'm here anyway." That stacks unpushed commits across terminals (S156 cross-terminal git rule) and obscures who owns what.

@@ -53,9 +53,9 @@ Every conversation turn
 4. **Decision on `infrastructure.4` scope** after leverage design: does the writer-hook need full disable, or does extraction-filter + deliberate-write protocol make the writer benign (or beneficial)? Update `infrastructure.4` row with the resolved scope.
 
 **Order matters:**
-- Phase 1: pipeline documentation (verify mechanics empirically — read summary-hook.cjs + context-hook.cjs + test API surface — before writing).
-- Phase 2: leverage design (the three questions in §AC2).
-- Phase 3: cross-links + ROLLOUT updates.
+- Phase 1: pipeline documentation (verify mechanics empirically — read summary-hook.cjs + context-hook.cjs + test API surface — before writing). **DONE S221** — SUPERMEMORY.md §User Profile Pipeline + CHARACTER.md cross-link shipped. Hooks table line 348 stale-claim corrected (Stop fires every turn, writes to mags not super-memory).
+- Phase 2: leverage design (the three questions in §AC2). **PENDING** — requires multi-boot empirical test (write deliberate static entry, verify persistence across two fresh boots; write transient session_turn doc, verify whether/how server-side extraction promotes it). Mike triggers session restarts; I check between them.
+- Phase 3: cross-links + ROLLOUT updates. **PARTIAL** — CHARACTER.md back-link shipped Phase 1. infrastructure.4 scope decision deferred until Phase 2 leverage design lands.
 
 **Not in this plan:**
 - Writing `infrastructure.4` itself (engine-sheet domain) — this plan informs it but doesn't execute it.

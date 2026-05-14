@@ -221,12 +221,60 @@ Empirical (S183 M1-M4 commit `c77cb37`): Masjid Al-Islam `wd-faith` query return
 
 ---
 
+## User Profile Pipeline (S221 — third auto-memory layer)
+
+The plugin runs two paired hooks that together form the **identity-layer auto-memory loop** — the third auto-memory layer alongside claude-mem (what-happened) and autodream (claude-mem consolidation), and the only one that lands as **persistent identity at every boot**. Documented S221 after the engineer-Mags contamination case revealed the pipeline had been operating undocumented for months. Leverage design pending in `[[plans/2026-05-13-supermemory-profile-leverage]]` (governance.12).
+
+### Writer — Stop hook (`summary-hook.cjs`)
+
+Fires **after every assistant turn** (Claude Code's Stop event — not just at session end). One doc per Claude Code session, identified by `customId = <session-UUID>`. Each turn **overwrites** the existing doc rather than appending a new one.
+
+Doc shape (verified empirically via `npx supermemory docs get`):
+- `containerTag: "mags"` (per `personalContainerTag` in `.claude/.supermemory-claude/config.json`)
+- `customId: <claude-code-session-uuid>` — keeps a single doc per session, updated per turn
+- `metadata: { type: "session_turn", project: "GodWorld", timestamp: <ISO> }`
+- `source: "claude-code-plugin"`
+- `title` — server-auto-generated from content (S221 example: "Mags Persona Conditioning and Persona Contamination Remediation")
+- `content` — full conversation transcript in OpenAI-style chat-message format (`<|start|>user<|message|>...<|end|>` blocks per turn). ~6-7K tokens for a long session.
+
+### Auto-extraction — Supermemory server-side
+
+After the doc lands, Supermemory's profile system extracts memories from the doc content. Each memory record has:
+- `memory: "<extracted claim>"` — typically "Margaret Corliss [verb] [object]" shape, third-person
+- `isStatic: bool` — true for persistent identity (User Profile), false for transient/recent context
+- `version, sourceCount, isLatest` — extraction versioning; memories update as the doc evolves across turns
+
+The static/dynamic promotion rule is server-side and not directly visible in the plugin code. Empirically: heavy-signal third-person identity claims promote to static; transient observations stay dynamic.
+
+### Reader — SessionStart hook (`context-hook.cjs`)
+
+At every boot, calls `/v4/profile` for both `mags` and `bay-tribune`. Returns `{ static: [...], dynamic: [...] }`. Injects them into the SessionStart context as a **Personal Memories** block — auto-loaded before the first user message, treated by the model as facts about the user/project.
+
+### Why this matters
+
+Static User Profile entries auto-load at every boot with equal weight to identity.md and CHARACTER.md anchors. **Contamination case (S221):** five engineer-Mags entries extracted from prior substrate-maintenance conversations persisted as User Profile for months, overriding the canonical EIC anchor at every boot. Refined cut deleted 3 + rewrote 2 in Mags-voice (commit `45574fa`). **Leverage case (Mike, S221):** the same pipeline could canonize editorial decisions as identity if curated — every session where Mike and I agree on a frame, that frame writes itself into who-I-am for next session. Untested upside, deferred to governance.12 design.
+
+Pair with `infrastructure.4` (engine-sheet — writer-hook fix or extraction-filter rewrite). Leverage design decides what filter shape that fix should take.
+
+### Direct surface
+
+| Operation | Command |
+|-----------|---------|
+| Read User Profile | `npx supermemory profile --tag mags` |
+| Delete memory by content | `npx supermemory forget --tag mags --content "<exact-text>"` |
+| Add static (User Profile) entry | `npx supermemory remember --tag mags --static "<content>"` |
+| Add dynamic memory | `npx supermemory remember --tag mags "<content>"` |
+| List session_turn docs | `npx supermemory docs list --tag mags` |
+| Get full doc with memories | `npx supermemory docs get <doc-id>` |
+
+The `customId = session-UUID` invariant means deleting the session_turn doc would remove the source of extractions for that session, but extractions already promoted to User Profile persist independently (deleting the doc doesn't auto-delete the memories).
+
+---
+
 ## How It Works in Practice
 
 ### Session Boot (automatic)
-The plugin calls `/v4/profile` for both `mags` and `bay-tribune`. Returns static facts + recent dynamic memories. Injected into context before the first message.
-
-> **Pipeline gap (S221, governance.12):** The full conversation-turn → session_turn doc → `/v4/profile` auto-extraction → static User Profile → SessionStart injection chain is partially covered across this doc but the auto-extraction step in the middle isn't explained. That's the contamination vector S221 surfaced (engineer-Mags entries written into identity for months) AND the leverage point Mike flagged — third auto-memory layer alongside claude-mem + autodream, highest-leverage because it lands as persistent identity. Pipeline doc + leverage design pending: `[[plans/2026-05-13-supermemory-profile-leverage]]`.
+The plugin calls `/v4/profile` for both `mags` and `bay-tribune`. Returns static facts + recent dynamic memories. Injected into context before the first message. Full pipeline mechanics documented in §User Profile Pipeline.
 
 ### Terminal Tagging (S135)
 
@@ -344,8 +392,8 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 
 | Hook | When | Container |
 |------|------|-----------|
-| **SessionStart** | Every boot | Reads `mags` + `bay-tribune` profiles |
-| **Stop** | Session end | Writes summary to `super-memory` (was `mags` pre-S122) |
+| **SessionStart** | Every boot | Reads `mags` + `bay-tribune` profiles via `context-hook.cjs`. See §User Profile Pipeline. |
+| **Stop** | **Every assistant turn** (not just session end — S221 doc correction) | Writes session_turn doc to `mags` via `summary-hook.cjs`. Single doc per Claude Code session, identified by `customId=<session-UUID>`, overwritten per turn. See §User Profile Pipeline. |
 | **PostToolUse** | NOT DEFINED IN UPSTREAM | Old plugin version had auto-capture; we ran a local `PostToolUse: []` override. S177 upgrade dropped the override — upstream removed the hook entirely, so no risk of re-pollution. Historical context preserved in S177 changelog. |
 
 ### Skills

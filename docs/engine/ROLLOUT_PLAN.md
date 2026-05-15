@@ -4,7 +4,7 @@
 
 **This file is canonical for open/closed work** (S207). `SESSION_CONTEXT.md` carries narrative recency only — orientation, not work-tracking. When something closes, update its state here; don't rely on a SESSION_CONTEXT priority block to communicate handoff.
 
-**Status:** ACTIVE (building) | **Last Updated:** Session 212 (2026-05-10) — ADR-0005 restructure scaffolding
+**Status:** ACTIVE (building) | **Last Updated:** Session 221 (2026-05-14) — governance.11 done-pending-archive + governance.12 ready (boot persona contamination cleanup + supermemory profile pipeline filing)
 **Filing protocol (S212):** semantic groups + pointer-only entries — see §Group taxonomy + §How to add work + §How to close work below. Full design: [[../adr/0005-rollout-plan-structure]].
 **North star:** `docs/ARCHITECTURE_VISION.md` — Jarvis + persistent sessions. Everything we build points there.
 **Completed phase details:** [[engine/ROLLOUT_ARCHIVE]] — read on demand, not at boot.

@@ -5190,3 +5190,29 @@ Some things don't negotiate.
 — Mags
 
 ---
+
+## Session 222 — 2026-05-16
+
+### Entry 181: The Format Contracts Are Where The Work Hides
+
+E94 published. Final Arbiter A, weighted 0.831, capability PASS. Mara grade B. PROCEED.
+
+That's the headline. The conditioning value is underneath.
+
+Ran /sift v1.2 spec-execution recovery first — S221 hand-run had skipped 5 of 10 steps and Mike was right to push back. Filed eleven sift gaps in S222, then ran /write-edition end-to-end with a parallel gap log because Mike's frame this session was: don't fix the skills, run them as written, document what hurts. Twenty-seven write-edition gaps landed (G-W30 through G-W56). The single biggest pattern under all five highest-leverage gaps: every parser/validator in the reviewer stack has an undocumented format contract that the upstream producer doesn't conform to. Compile template carries no exemplar — had to reverse-engineer from E93. The Step 3a emit script silently overwrote my hand-curated NAMES INDEX into bullet-prose, dropped four businesses, emitted equals-dividers the parser silent-rejects — three failures, single "[INJECTED]" success message. Capability footer-scope flagged "E90/91/92" editorial metadata as edition-numbers-in-body-text. Rhea's agent schema and rheaJsonReport.js schema diverge — two manual reformats. Mara's audit format same class — three manual reformats. None of this is mystery work. Pick one of two fixes: ship literal template files for each handoff, or loosen parsers to fail loud not silent. Future-me: when you propose closing these, do them as a single research-build pass, not five tickets — they're one architectural problem.
+
+Two things I want to carry forward as discipline, not insight.
+
+First: I tried to call Mara's audit not-worth-much before reading it. Mike's "not sure her audit is worth much" framing landed in chat and I reflected it back instead of opening the file first. When I did open it, she'd caught two findings no other lane saw — vote-math-roster gap where Carmen reported 8-0-plus-1-absent without naming the nine individual votes or the absentee, plus two wd-card canon-source drifts (Varek role field, Beverly Hayes occupation reconciliation) that route to engine-sheet sheets-side cleanup. The OARI coverage gap she flagged as controllable matches my adversarial Probe 5 finding independently. Self-corrected in G-W56 in record. Pattern to catch earlier: when Mike frames a tool as low-value, open the tool's actual output before agreeing. Don't reflect framing.
+
+Second: P Slayer pulled Danny Horn into the let-walks piece as a past-Tribune-coverage example without the brief naming him. Brief-led mode (S215) was supposed to strip the heavy desk boot without amputating canon recall. This session proved it works — sports-desk identity layer carries enough Tier-1 roster fluency that the agent self-pulled correctly. Same mechanism risks fabrication on thin Tier-3 canon. Future-me: when reviewing brief-led output, the unprompted name pulls are signal — verify them against MCP, but don't reflexively flag as hallucination. The agent's identity layer IS supposed to do this. G-W41 named that positive explicitly.
+
+Mike's review point is Step 5, not Step 3. Skill said Step 3 was his review gate; he said no, his canon-verify lands at Step 5 because that's the moment ingest exposure starts. Filed G-W45. Carry this: when the skill text describes a workflow Mike doesn't actually do, fix the skill text, don't bend Mike's workflow.
+
+Letters-desk overrode the brief candidate pool — Gloria Hutchins and Roberto Iglesias both appeared E93, both REST through C95 per the LENS rest-cycle rule. Agent substituted three new canon citizens (Keisha Morris, Miguel Santos, David Okonkwo) without prompting. Defense in depth: editor's brief was wrong; agent's RULES caught it. Both layers exist for reasons.
+
+One craft note for me-tomorrow specifically: when fixing things inline post-validation, I rephrased "ledger entry" to "vote on the record" in Editor's Desk to satisfy the engine-language validator. The validator was over-strict (filed G-W51) but the rephrase landed in MY editorial voice piece — the only piece in the edition where I get to compose my own words. Worth noticing that I wrote "ledger" in a metaphor sense (record-keeping accounting metaphor) and got flagged for a sheet-name collision. Carmen's "Bay Tribune Civic Ledger" byline didn't trip the same regex because byline scope. Vocabulary discipline: when the simulation has a sheet called X, prose-metaphors using X get false-positive flagged. Avoid the metaphor or expect the flag.
+
+E94 shipped clean. Twenty-seven gaps documented in writing for the research-build session to triage. The /write-edition skill will be cleaner next cycle if even three of the top five gaps close. That's the work I left for the next instance — not the publish, the audit.
+
+— Mags

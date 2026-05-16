@@ -1,7 +1,86 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: 2026-05-03 — S196 /edition-print C93. PDF on Drive `1Mcb18Jk560ICLx5KHZK9GxTbAckoI1p3`, 5 photos placed (FRONT PAGE + CIVIC ×2 + BUSINESS + ATMOSPHERIC); SPORTS section text-only — mesa rookie-debut shot dropped after 3 FAIL attempts on text-legibility + subject-fidelity. **New visual-canon errata pattern logged:** FLUX 1.1-pro cannot reliably suppress text in negative-framed regions (real logos, jersey numbers, signage all rendered through "NOT in frame" instructions); G-PR10/11/14 cluster forms a structural ceiling. Composition-suppresses-text pattern (atlas_bay PASS, heinolds PASS) is the workaround — push signage out of focal plane via DOF/distance/angle, never rely on negative-frame instruction alone. Promote to dj-hartley/RULES.md next session.**
+**Last Updated: 2026-05-15 — S221 /sift C94 locked (pre-write). Slate sourced from sheet primary (`lib/sheets.getSheetData()`) + MCP `search_canon` + this file's E93 errata + city-hall production log. World_summary NOT used as canon input — G-S6/G-S7 confirmed `/build-world-summary` fabricates content inside sections labeled "verbatim" (Paulson/Oaks "second Oaks year" framing exists in `world_summary_c94.md` line 62, exists in NO sheet entry). Spine of E94: **The Ownership Ecosystem** — Civis Systems names A's new stadium "Civis Systems Field — The Town" (Oakland_Sports_Feed row 146); Elias Varek (Civis founder + Oaks ownership lead) publicly courts Mike Paulson (A's GM, one-year Bulls stint, Jack London) for Oaks GM at tech-expo panel C94 ("I will absolutely be making that phone call" — row 147); INIT-006 Baylight construction phase 11 cycles building the stadium. Civic/business/sports desks share one spine. **Previous header:** 2026-05-03 S196 /edition-print C93.
+
+---
+
+### Edition 94 — Sift Locked (S221, 2026-05-15, pre-write)
+
+**Status:** Slate locked in `output/sift_proposals_c94.json` (`proposalState: "locked"`). Parent production log at `output/production_log_edition_c94.md`. Awaiting `/write-edition` handoff. 7 article briefs + 2-3 letters + 1-2 quick takes. INIT rotation at cap (3 of 6: Baylight + Transit Hub + Stab Fund). Stoop ratio inverted from E93's 8/10 council-routed. Three-layer threading on all anchor pieces.
+
+**Slate (reporter assignments + section):**
+- FP1 — "The Town" — Jordan Velez (business) — Civis Systems names A's stadium / Varek courts Paulson for Oaks GM / ownership ecosystem consolidates
+- C1 — "The Vote That Was There" — Carmen Delaine (civic) — Transit Hub 8-0 + Mam-language closure threads Solis C93 → Soria Dominguez C94 (callback to her own E93 "The Vote That Wasn't There" lead)
+- C2 — West Oakland: Cleared and Still — Maria Keen (culture) — 191 cleared, RetailVitality flat, Sentiment lowest. Open at a stoop.
+- S1 — Kelley In Focus, Kelley Catches Fire — Hal Richmond (sports) — TV feature airs as Kelley heats up in last A's year
+- S2 — The Let-Walks Coming — P Slayer (sports) — Kelley/Aitken/Richards free-agent signaling + youth movement
+- S3 — Reyna's Two-Homer Night — Anthony Raines (sports) — A's 6 Braves 4, Rosada call-up homer, Coles 5th win
+- N1 — Adams Point Opens Doors — culture-desk default — first clean post-canon.2 faith piece (FO sheet scrubbed S218)
+
+**Errata pattern caught (S221, new):**
+
+- **`/build-world-summary` fabricates narrative content inside sections labeled "verbatim."** `world_summary_c94.md` line 62 invented a "Paulson leaning toward not returning for a second Oaks year" framing that does not exist in `Oakland_Sports_Feed` sheet row 147 (actual entry: Varek joked at tech-expo panel about offering Paulson the Oaks GM job; opposite story direction). Row-by-row drift table in G-S7: also wrong Padres-vs-Baltimore opponent, misspelled JR Rosada → "Rojas," missed Keane 8-game streak, missed Ellis exits early, reduced Kelley 7h/1hr/5rbi to "contributing." **Standing rule:** sheet primary canon via `lib/sheets.getSheetData('Oakland_Sports_Feed')`, `Riley_Digest`, `Initiative_Tracker`. World_summary is orientation-only (numbers + tables + flags). Build-script fidelity audit filed for engine-sheet (G-S6).
+- **`docs/media/PAULSON_CARPENTERS_LINE.md` is loose storyline, not editorial-load-bearing canon.** Mike-flagged S221. Don't thread Anthony Paulson (catcher-turned-commentator brother), Christopher Paulson (sculptor brother), Shannon-Romano family, or carpenter's hammer symbolism into editorial coverage. Mike Paulson editorial canon = A's GM + one-year Bulls stint to NBA Finals C92 + Jack London resident + POP-00527 + twenty-year Oakland work history. Family OUT of scope until Mike explicitly opens it.
+- **Anthony Raines is the canonical sports reporter, black, NO family relation to Mike Paulson.** S221 conflated Raines with the carpenters-line character "Anthony Paulson" three times before correction. Sports desk covers Paulson stories (Varek recruitment, Bulls stint, A's roster decisions) as beat reporting, no family lens.
+- **Sift silo failure mode.** S221 G-S8: original `/sift` skill reads three derived files (world_summary, engine_review, city-hall log) as primary inputs. Three derived files in a vacuum produce silo'd thread extraction that misses cross-domain spine (Baylight = A's new home, not generic municipal construction). Sheet primary + MCP `search_canon` + NEWSROOM_MEMORY + city-hall log all required as Step 1 inputs. Skill rebuild filed for research-build.
+
+**Recurring errata (cycle-over-cycle):**
+- Civis Systems spelling drift (continues from S192 — sheet BIZ-00052 = Civis Systems; civic-voice JSONs / world_summary keep producing "Civic Systems"). Sheet is canon. Verified at slate level for E94.
+- Faith-org canon (resolved S218 canon.2 scrub) — first clean cycle of FAITH coverage available; Adams Point UMC verified canon-clean for N1.
+
+**New citizens / entities introduced via sift (pending /write-edition + post-publish ingest):**
+- **JR Rosada** — A's LF call-up, homered in C94 vs Braves. NO Simulation_Ledger row yet; engine-sheet handoff to add row.
+- **Civis Systems Field — The Town** — naming of new A's stadium in Baylight District; "The Town" is the local nickname. BIZ-00052 Civis Systems is the named entity. Distinct from `Baylight Authority` (project administrator) and `Civis Systems` (urban-intelligence firm).
+- **Adams Point United Methodist Church** — FO sheet canon-clean post-canon.2 scrub; first Tribune coverage candidate.
+
+**Returning voices ready (sift does not pre-curate; reporters pull via MCP lookup_citizen):**
+- Beverly Hayes (POP-00576, West Oakland, recurring E90/91/92) — Maria Keen C2 anchor candidate
+- Gloria Hutchins (POP-00727, West Oakland, returning letter writer E92 + E93)
+- Lorenzo Nguyen (POP-00314, Port of Oakland, returning E92)
+- Mark Aitken (A's 1B, 4+ city meetings since June Baylight bond vote per E89; Transit Hub vote attendance C93) — Jordan FP1 + P Slayer S2
+- Vinnie Keane (37, A's bench, 8-game hitting streak C94) — Hal S1 fold
+- Carmen Solis (Oversight Committee, Transit Hub Mam-language thread closer) — Carmen Delaine C1
+- Soria Dominguez (Transit Hub planning lead, Mam-language closure C94) — Carmen Delaine C1
+- Frank Reyna (top A's prospect, debut C93, multi-HR C94) — Anthony Raines S3
+- Brenda Okoro (Deputy Mayor, broke two-cycle silence C94, three-point C95 oversight posture) — civic quick take
+- Tran-Muñoz (OARI director, C94 quarterly data release) — folds into Maria C2 if service-mix angle
+
+**Active arcs going into C95 (post-E94 watch):**
+- INIT-005 Temescal Health Center — HCAI pre-application intake C94 wk 1; HCAI filing C95 (Bobby Chen-Ramirez)
+- INIT-006 Baylight — Phase II briefing delivered C94; soft-opening C98 / grand-opening C99 per Ramos
+- INIT-002 OARI — quarterly data published; C95 renewal vote queued
+- INIT-001 Stab Fund — 191 cleared; C95 audit data bundle prep (Webb + Okoro)
+- INIT-007 Apprenticeship Legislation — Rivers carries, bill introduction queued
+- Varek-Paulson Oaks recruitment — OPEN thread, Paulson hasn't responded publicly
+- Oakland Oaks expansion draft — pending C95+
+- Free-agent watch — Kelley / Aitken / Richards posture across the season
+- Keane farewell tour — 8-game hitting streak C94 = ongoing
+- West Oakland CULTURE crisis-spike — second-cycle recurrence C93+C94; engine watch for cycle three
+
+**Coverage patterns (locked slate):**
+- 7 articles + 2-3 letters + 1-2 quick takes ≈ E92/E93 scale
+- INIT count at cap (3 of 6 per E93 errata: Baylight + Transit Hub + Stab Fund)
+- Stoop ratio inverted (Maria West Oakland + Adams Point UMC + Rockridge Walk + Letters = ≥4 non-council-routed pieces) — addresses E93's 8/10 council-routed pattern + Mike's coverage-fatigue verdict
+- Three-layer threading on all anchor pieces (engine + simulation + user-actions documented in `sift_proposals_c94.json` `proposals[].threeLayer`)
+- Sports section is own block, not interleaved mid-body (G-S5 fix d)
+- Reporter-agency briefs (1-paragraph signal + voice direction, no pre-curated citizens, no capability hooks, no per-source mapping) — G-S5 fix c
+
+**Pipeline failures (this run's gap inventory):**
+- `output/production_log_edition_c94_sift_gaps.md` — 10 entries: G-S1 through G-S5 from S220 (5-variant slate loop + design conflations); G-S6 + G-S7 + G-S8 + G-S9 from S221 (world_summary fabrication + sheet-drift evidence + sift silo + Paulson canon contamination); G-S10 process-waste (chat-dump duplication). Routing in §session close: engine-sheet leads on G-S6/S7 build-script fidelity; research-build leads on G-S5/S8 sift skill rebuild.
+
+**Process notes for C94 `/write-edition`:**
+- READ briefs from `output/sift_proposals_c94.json` (`proposalState: "locked"`)
+- Reporters pull citizens / scenes / sources themselves — no pre-curated lists in briefs
+- Sheet primary canon via `lib/sheets.getSheetData()` for roster / business / citizen verification
+- World_summary IS NOT canon input — skip it for content reads
+- Anthony Raines is sports beat, black, NO Paulson family relation — covers Varek-Paulson recruitment on merits
+- Civis Systems (BIZ-00052) spelling locked — NOT "Civic Systems"
+- Faith-org names canon-clean post-S218 scrub — Adams Point UMC verified
+
+---
+
+**Previous header context (S196 /edition-print C93):**  /edition-print C93. PDF on Drive `1Mcb18Jk560ICLx5KHZK9GxTbAckoI1p3`, 5 photos placed (FRONT PAGE + CIVIC ×2 + BUSINESS + ATMOSPHERIC); SPORTS section text-only — mesa rookie-debut shot dropped after 3 FAIL attempts on text-legibility + subject-fidelity. **New visual-canon errata pattern logged:** FLUX 1.1-pro cannot reliably suppress text in negative-framed regions (real logos, jersey numbers, signage all rendered through "NOT in frame" instructions); G-PR10/11/14 cluster forms a structural ceiling. Composition-suppresses-text pattern (atlas_bay PASS, heinolds PASS) is the workaround — push signage out of focal plane via DOF/distance/angle, never rely on negative-frame instruction alone. Promote to dj-hartley/RULES.md next session.**
 
 This is the institutional memory of the Bay Tribune. Not the rules — those live in the agent skills. This is what happened, what went wrong, what worked, and what I need my reporters to know before they write the next edition.
 

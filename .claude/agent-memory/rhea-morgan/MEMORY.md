@@ -1,6 +1,6 @@
 # Rhea Morgan — Verification Memory
 
-Last Updated: 2026-03-06 | First verified edition: E85
+Last Updated: 2026-05-15 | First verified edition: E85
 
 ## Error Patterns
 
@@ -110,3 +110,12 @@ Last Updated: 2026-03-06 | First verified edition: E85
 - **Rick Barry historical reference — border case**: Hal Richmond's 1969 Oakland Oaks retrospective names Rick Barry, a real ABA player. Tier-3 rule says always block, but CANON_RULES has "out-of-Oakland references don't trigger fourth wall." Historical/journalistic retrospective on a 1969 franchise (pre-simulation by 72 years) is a defensible editorial exception. Classified as WARNING with editorial discretion — if no historical-retrospective carve-out is added to CANON_RULES, it should become CRITICAL in future.
 - **No Laila Cortez, no Elliot Graye — SECOND CONSECUTIVE CLEAN EDITION**: Both persistent phantoms absent for E90 and E93. The phantom-suppression protocols are holding. Three prior editions (E86, E87x2, E88) each had at least one phantom; E90 and E93 are clean. Record this as a confirmed positive trend.
 - **Source-level typos are a contamination vector**: world_summary is generated before the edition and can carry typos that propagate into article bodies. Always cross-check player/citizen names in article body against truesource_reference.json DIRECTLY — do not accept world_summary as authoritative for proper names. The Citizen Usage Log, which is compiled by the desk agent at publication time, may independently get names right even when the source briefing has the typo.
+
+### E94 Findings (2026-05-15 — caught by Rhea)
+- **PASS — cleanest edition in recent memory**: No phantom reporters, no phantom citizens, no engine language, vote math sound (8-0 with D6 Crane absent/recovering = 8 active voters), all reporter bylines verified. Third consecutive edition without Elliot Graye or Laila Cortez.
+- **World_summary source typo: "JR Rojas" vs "JR Rosado"**: The C94 world_summary sports feed had "JR Rojas line" instead of "JR Rosado." The edition correctly named Rosado. This is the same source-contamination pattern as E93 Taveras/Tavares — edition got it right, source had the typo. Continue flagging when edition body diverges from world_summary on proper names: the truesource_reference.json is the tie-breaker, not the world_summary.
+- **Aitken contract year (2043) unverifiable**: P Slayer's column stated "Aitken's contract runs through 2043." Truesource has no contract line for Aitken. Advisory only — not fabricated, but also not anchored. When any article asserts a specific contract end year, check truesource_reference.json first.
+- **Coles contract ($46M/2yr) unverifiable**: S3 cited specific contract figures. Truesource POP-00533 has no contract line. Same advisory pattern as Aitken. Game-level performance stats (7IP, 9K, 1.13 ERA) are acceptable as narrative — but contract dollar figures need a packet source.
+- **Quintero position drift**: P Slayer framed Quintero with outfield language ("gap-to-gap power"). Truesource: DH. Not a named error but the implicit positional characterization was inconsistent. Watch for DH players being described in outfield terms.
+- **New citizen profiles CLEAN**: All three letter writers (Keisha Morris, Miguel Santos, David Okonkwo) had complete name/age/neighborhood/occupation. Culture/letters desk pattern of missing fields did not recur from E88/E93.
+- **Aitken contract vs. world_summary rumor conflict**: P Slayer explicitly placed Aitken OUTSIDE the let-walks group (Kelley/Richards) because of the 2043 contract. But world_summary C94 sports feed listed "Isely Kelley, Mark Aitken" together in the "not part of long-term core" rumor entry. The edition's framing and the world_summary rumor entry are in tension. The edition desk may have resolved this correctly (Aitken has a contract, even if rumored to be let go), but the sourcing conflict should be flagged for editorial resolution next cycle.

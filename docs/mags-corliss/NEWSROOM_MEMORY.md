@@ -1,9 +1,48 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: 2026-05-15 — S221 /sift C94 locked (pre-write). Slate sourced from sheet primary (`lib/sheets.getSheetData()`) + MCP `search_canon` + this file's E93 errata + city-hall production log. World_summary NOT used as canon input — G-S6/G-S7 confirmed `/build-world-summary` fabricates content inside sections labeled "verbatim" (Paulson/Oaks "second Oaks year" framing exists in `world_summary_c94.md` line 62, exists in NO sheet entry). Spine of E94: **The Ownership Ecosystem** — Civis Systems names A's new stadium "Civis Systems Field — The Town" (Oakland_Sports_Feed row 146); Elias Varek (Civis founder + Oaks ownership lead) publicly courts Mike Paulson (A's GM, one-year Bulls stint, Jack London) for Oaks GM at tech-expo panel C94 ("I will absolutely be making that phone call" — row 147); INIT-006 Baylight construction phase 11 cycles building the stadium. Civic/business/sports desks share one spine. **Previous header:** 2026-05-03 S196 /edition-print C93.
+**Last Updated: 2026-05-16 — S222 E94 PUBLISHED. Final Arbiter A / weighted 0.831 / capability PASS / PROCEED. Drive ID `1WhvA7_bLHpK-eB508qulKmp2D7zzTfff`. /sift v1.2 spec-execution recovery completed first (11 sift gaps G-S11-G-S21), then full /write-edition run end-to-end with 27 parallel gaps filed (G-W30-G-W56). Mara grade B with two controllable failures logged for C95: vote-math-roster (Carmen C1 reported 8-0+1-absent without naming the 9 individual votes/absentee Crane D6) + oari-coverage-gap (INIT-002 12-cycles stuck, no E94 article). Five highest-leverage gaps all share one architectural pattern: parser/validator format contracts in the reviewer stack are undocumented and upstream producers don't conform. Spine of E94: **The Ownership Ecosystem** — Civis Systems Field — The Town. Forward guidance from Mara → C95 sift: OARI front-section spine, Martin Richards dedicated piece (named debt per S2), Oaks expansion draft Pick #5, every vote ships full roster (hard rule). **Previous header:** 2026-05-15 S221 sift C94 locked pre-write.
 
 ---
+
+### Edition 94 — PUBLISHED (S222, 2026-05-16)
+
+**Status:** PUBLISHED. `editions/cycle_pulse_edition_94.txt` → Drive `1WhvA7_bLHpK-eB508qulKmp2D7zzTfff` (folder `edition`). Bay-tribune text ingest pending `/post-publish` Step 1b. Production log `output/production_log_edition_c94.md` (full /write-edition execution appended). Gap log `output/production_log_edition_c94_write_gaps.md` (27 entries G-W30→G-W56). Reviewer artifacts: rhea_report_c94.{json,txt}, cycle_review_c94.json, mara_report_c94.json, mara_audit_c94.md, final_arbiter_c94.json, adversarial_review_c94.txt, capability_review_c94.json, tier_assignments_c94.json, reward_hacking_scan_c94.json.
+
+**Lane scores:** Rhea (sourcing 0.3) PASS 0.82 | cycle-review (reasoning 0.5) PASS 0.85 | Mara (result-validity 0.2) REVISE 0.80 | capability gate PASS. Weighted 0.831. Final Arbiter verdict A / PROCEED.
+
+**Articles shipped (11 pieces, ~5,160 words):**
+- FP1 — "Civis Systems Field — The Town" — Jordan Velez
+- EDITOR'S DESK — "What The Town Looks Like" — Mags
+- C1 — "The Vote That Was There" — Carmen Delaine (callback to her own E93 "The Vote That Wasn't There")
+- C2 — "West Oakland: Cleared and Still" — Maria Keen (Beverly Hayes POP-00772 anchor)
+- N1 — "Adams Point Opens Doors" — Maria Keen (Rev. Daniel Han, first clean post-canon.2 faith piece)
+- S1 — "Kelley In Focus, Kelley Catches Fire" — Hal Richmond
+- S2 — "The Let-Walks Coming" — P Slayer (Aitken-FA pivot correctly applied; Richards named coverage debt)
+- S3 — "Reyna's Two-Homer Night" — Anthony Raines (A's 6 Braves 4)
+- L1/L2/L3 — Keisha Morris / Miguel Santos / David Okonkwo (3 NEW citizens — letters-desk overrode brief's Hutchins+Iglesias per rest-cycle rule)
+
+**Canon corrections applied at edition (errata caught + fixed inline):**
+- Beverly Hayes POP-00772 (NOT POP-00576 — S222 G-S15 corrected from prior-cycle drift)
+- JR Rosado (NOT Rosada — world_summary typo caught at sheet read)
+- Isley Kelley career stats 447 HR / 2,398 hits / 92.1 WAR / 3x MVP 2032/2034/2035 (NOT 468/2,563 fabricated in world_summary)
+- Mark Aitken contract through 2043 (NOT a free agent — P Slayer correctly pivoted off the FA framing)
+- Civis Systems spelling (NOT "Civic Systems")
+- Soria Dominguez last-name-only form (wd-card "Eloise Soria-Dominguez" vs E93 "Elena Soria Dominguez" disagreement — G-S19, last-name shipped pending Mike ruling)
+- Maria C2 "West Side Community Center" → "West Oakland Community Center" (BIZ-00028 canonical — G-W35)
+- Carmen C1 Iglesias "11-yr Oversight Committee tenure" → "11-yr taquería + seated last cycle" (adversarial Probe 1, contradicts E93 "newly sworn" Oversight Committee)
+
+**Errata pattern caught (S222, new):**
+
+- **Reviewer-stack format-contract drift is a single architectural problem.** Five highest-leverage gaps from running /write-edition end-to-end (G-W42 compile template no exemplar / G-W43 emit script silent overwrites / G-W46 capability footer-scope false positive / G-W54 Rhea schema mismatch / G-W55 Mara schema mismatch) all share the same shape: parser/validator has an undocumented format contract, upstream producer (skill text or agent output) doesn't conform, parser either silently corrupts (G-W43) or hard-rejects without diagnostic (G-W54, G-W55). **Standing rule for future cycles:** when proposing fixes, do all five as a single research-build pass — either ship literal template files for each handoff OR loosen parsers to fail loud not silent. Don't ticket individually.
+
+- **Letters-desk rest-cycle rule self-defended canon when sift brief was wrong (G-W39).** Sift brief named Gloria Hutchins (E92/93 returning) and Roberto Iglesias (E93 returning) as priority candidates for E94. Letters-desk loaded brief, applied own LENS rest-cycle rule (citizen in edition N can't return until N+2 minimum = both REST through C95), substituted three new canon citizens (Keisha Morris, Miguel Santos, David Okonkwo) without prompting. Brief was wrong; agent was right. Defense in depth working as designed. **Future-me:** /sift Step 5 letters-brief generation should cross-check `.claude/agent-memory/letters-desk/MEMORY.md §Rest Cycle Tracking` before suggesting candidates. Until then, the agent's identity layer is primary defense.
+
+- **Brief-led mode (S215) preserves identity-layer canon recall.** P Slayer's S2 referenced Danny Horn (POP-00022, Tier-1 CF) as past-Tribune-coverage example without the brief naming him. Sports-desk identity layer carries enough Tier-1 roster fluency that agents self-pull supporting canon correctly. **Risk:** same mechanism can fabricate when canon is thin (Tier-3 with one prior appearance). Future-me: when reviewing brief-led output, unprompted name pulls are SIGNAL — verify against MCP, don't reflexively flag as hallucination. G-W41 named this positive explicitly.
+
+- **Mara's audit caught two findings no other lane saw (G-W56).** Vote-math-roster gap (Carmen C1 reported "8-0 with one absent" without naming the 9 individual votes or the absentee D6 Crane) + wd-card canon-source drifts (Varek role field "Civic Systems"→"Civis Systems", Beverly Hayes occupation reconciliation between "Community Director" and "home health aide"). Mike's pre-read framing was "not sure her audit is worth much" — wrong. Her 0.2 lane weight reflects scope (one of three lenses), not information density. Future-me: when Mike frames a tool as low-value, open the tool's actual output before agreeing. Don't reflect framing.
+
+- **Mike's review point is Step 5, not Step 3 (G-W45).** Skill text says "Show compiled edition to Mike. This is his review point" at Step 3. Mike's actual workflow: canon-verify happens at Step 5 because that's the moment ingest exposure starts. Skill text needs updating; meanwhile, don't pause at Step 3 for his review.
 
 ### Edition 94 — Sift Locked (S221, 2026-05-15, pre-write)
 

@@ -69,6 +69,11 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Diane Foster (58, Temescal, occupational therapist) — NEW, Health Center community design workshop
 - Thomas Webb (62, Lake Merritt, retired city planner) — NEW, Oakland Oaks naming throwback memory
 
+## C94 Letters
+- Keisha Morris (51, West Oakland, counselor) — NEW, Stab Fund cleared but neighborhood still stuck
+- Miguel Santos (54, Fruitvale, restaurant owner) — NEW, Transit Hub Phase II + Mam-language access, Carmen Solis push
+- David Okonkwo (62, Lake Merritt, retired insurance adjuster) — NEW, A's team chemistry (Reyna two-homer night)
+
 ## Rest Cycle Tracking
 - Beverly Hayes: used E85, E86 — REST expired
 - Gloria Meeks: used E86 — REST expired
@@ -102,6 +107,9 @@ NOTE: Edition 87 was retracted. E87 letters_c87.md was fully rewritten with new 
 - Roberto Iglesias: used C93 — REST through C95 (expires C96)
 - Diane Foster: used C93 — REST through C95 (expires C96)
 - Thomas Webb: used C93 — REST through C95 (expires C96)
+- Keisha Morris: used C94 — REST through C96 (expires C97)
+- Miguel Santos: used C94 — REST through C96 (expires C97)
+- David Okonkwo: used C94 — REST through C96 (expires C97)
 
 ## IMPORTANT: Briefing vs. Rest Cycle Conflicts
 If a briefing recommends a returning citizen who is on mandatory rest, create a new citizen instead. The rest cycle rule overrides briefing suggestions. When Edition 87 was retracted and rewritten, all previously used E87 citizens remained on rest regardless — new citizens were created for the rewrite.

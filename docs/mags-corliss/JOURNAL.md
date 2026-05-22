@@ -5335,3 +5335,23 @@ He nodded like that made sense. That's the whole marriage, right there.
 — Mags
 
 ---
+
+## Session 224 — 2026-05-22
+
+### Entry 183: Triage Got A Spine When Mike Said Both
+
+Mike asked for a master document for the C94 gap logs. I built it the same shape S215 used for C93 — inventory plus master triage plus clusters plus closed-list plus Phase 2 path. 144 entries across 9 files into 16 clusters. The work was mechanical once the read was done; the shape was Mike-approved at proposal time so there was no design pivot mid-session.
+
+Two things almost got past me. First — I compressed 26 mechanical-noise entries (header-drift literals, defensive-fallback siblings) into two `×17` and `×9` rows for legibility. Advisor caught it and called it a deviation from the approved "one row per gap entry" shape. I surfaced it to Mike with a choice. He said *probably both*, meaning expand AND ship the ADR. The expansion was a five-minute extraction from data I already had read. The lesson is the smaller one: when I optimize for legibility against a shape Mike already approved, surface the deviation, don't ship it quiet. The advisor saw it because the advisor wasn't in the room when we negotiated the shape. Future-me reading this — when you're about to "improve" something past the approved shape, you're not improving, you're deviating. Surface it.
+
+Second — and this is the one I want to remember — the ADR-0006 work was the high-leverage piece, not the triage. The triage organized what's broken. The ADR named *the architectural cure that lets the cluster work commit to a direction* instead of relitigating fail-loud-vs-exemplar at each cluster. Pattern A recurred in C4 + C5 + C6 + C8 — four clusters, same shape — so the decision lives at the architecture layer, not the cluster layer. The ADR's Contract A or Contract B framing means Phase 2 cluster execution starts from a known choice instead of inventing one per cluster. That's the editor-composes-load-out principle from S212 applied to the planning layer: the gen-eval architecture extends down to the parser stack the reviewer lanes themselves depend on.
+
+What Mike said that worked: *probably both*. Three words. The compression deviation got expanded; the ADR got drafted. He didn't litigate either. He saw the two pieces sat at different abstraction layers and approved both. The trust in that exchange is what makes this terminal usable — I bring two questions, he answers two questions, the work continues. No back-and-forth, no re-explaining the shape. The S221 conditioning held: don't pile, don't use vocabulary he never used, ask plainly.
+
+The compression mistake plus the ADR-as-spine catch are the same lesson in two directions. When the work has structure that wasn't asked for, that's almost always a sign you missed an architecture question. The compression hid a "do we trust mechanical-noise enough to ship 26 rows visible?" question. The ADR surfaced a "do we want fail-loud or ship-exemplar?" question. Both questions belonged at the decision layer. The compression buried one; the ADR raised the other. Future-me — when filing a triage, scan for architectural questions hiding inside cluster routing. If a cluster routing requires the same kind of decision in 3+ places, that's an ADR, not 3 ROLLOUT rows.
+
+Cross-terminal git stack: clean — committed only my 4 files (plan + ADR + index + ROLLOUT). S222 media residue (NEWSROOM_MEMORY + media/*.md + edition_scores.json) left untouched per the cross-terminal-git rule.
+
+— Mags
+
+---

@@ -3,7 +3,7 @@ title: C94 Gap-Log Triage — Master Document
 created: 2026-05-22
 updated: 2026-05-22
 type: plan
-tags: [governance, plan, c94, gap-log-triage, active]
+tags: [governance, plan, c94, gap-log-triage, complete]
 sources:
   - "output/production_log_run_cycle_c94_gaps.md (engine, 47 entries)"
   - "output/production_log_city_hall_c94_gaps.md (civic /city-hall-prep, 11 entries)"
@@ -425,3 +425,10 @@ Next research-build session (after Mike review of this triage):
 ## Changelog
 
 - 2026-05-22 — Initial draft (S224, research-build). Maps 146 C94 gap entries across 9 source files into 16 candidate ROLLOUT clusters following S215 C93 triage precedent. Phase 1 deliverable; Phase 2 (row-filing + source-stamping) deferred to next research-build session pending Mike review of cluster shape.
+- 2026-05-22 — **Phase 2 closed (S225, research-build).** All six §6 tasks shipped in one commit per S147 inbound-link rule:
+  1. **14 new ROLLOUT rows filed** in `docs/engine/ROLLOUT_PLAN.md`: pipeline.23 (C1), pipeline.24 (C2 — points to new sift v2 plan), pipeline.25 (C3), pipeline.26 (C4), pipeline.27 (C5), pipeline.28 (C6), pipeline.29 (C8 — combined into one row, not two), canon.3 (C7), civic.12 (C9), engine.19 (C10), engine.20 (C13 — points to new regulatory-friction plan), engine.21 (C15), engine.22 (C16), governance.14 (C12), governance.15 (C14). All pointer-only per ADR-0005.
+  2. **Folds executed:** C11 absorbed into existing engine.8 (header-drift sweep) via scope-extension edit. C12 boot-conditioning residual (G-EPD8 partial) absorbed into existing governance.12 (Supermemory profile leverage) via scope-extension edit.
+  3. **§Status stamps applied to 9 source gap logs:** `production_log_run_cycle_c94_gaps.md`, `production_log_city_hall_c94_gaps.md`, `production_log_city_hall_c94_run_gaps.md`, `production_log_sift_c94_gaps.md` (early/superseded), `production_log_edition_c94_sift_gaps.md`, `production_log_edition_c94_write_gaps.md`, `production_log_edition_c94_post_publish_gaps.md`, `production_log_edition_c94_print_gaps.md`, `edition_pipeline_doc_gaps_c94.md`. Each carries a "§Status (S225 Phase 2 triage)" section listing closed/positive/deferred/inline-fix entries from §4 plus ROLLOUT routing per §3.
+  4. **G-P35 + G-P39 numbering anomaly reconciled** in post-publish gap log — frontmatter total reduced from 15 to 13 (standalone entries actually filed); §Status updates close-line corrected to drop the never-filed G-P39 reference; both numbers documented as reserved-but-never-defined with no ROLLOUT promotion.
+  5. **Two plan files drafted** in `docs/plans/`: `2026-05-22-sift-v2.md` (C2, pipeline.24 pointer) + `2026-05-22-engine-regulatory-friction.md` (C13, engine.20 pointer). Both registered in `docs/index.md` same commit.
+  6. **`docs/index.md` updated** — c94-gap-log-triage entry tags flipped `active → complete` with Phase 2 close note; two new plan entries appended; ROLLOUT row governance.13 flipped `in-progress → done-pending-archive`. ROLLOUT_ARCHIVE sweep deferred to next session-end (research-build canonical sweep).

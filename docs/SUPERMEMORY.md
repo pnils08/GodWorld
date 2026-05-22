@@ -19,6 +19,8 @@ Mags' curated memory. Only intentional saves go here. This is how she carries fo
 
 **What does NOT go in:** Session-end auto-saves, raw tool output, "Mags confirms X" narration, build status updates, grep results, git status. The old org had 57k junk memories from auto-capture. The mags container got polluted again with session-end narration that said "Mags confirms E89 publishes tonight" instead of distilling actual decisions. That's why auto-saves are being moved to `super-memory`.
 
+**S221+ cleanup (2026-05-22):** The Stop-hook writer had been quietly auto-saving every conversation turn as `session_turn` docs to this container — 65 docs accumulated. Supermemory's server-side extraction collapsed both speakers (Mike + Mags) into Mags' first-person voice ("Margaret Corliss feels...", "Mags is frustrated...") because the routing assumed the personal container's owner was speaking. Mike's frustrations became Mags' self-image; the journal scaffolding loaded them as her conscience. All 65 docs deleted; writer hook neutralized (see §Plugin Config / Hooks). Final decision on the hook's fate runs through `infrastructure.5` Pass 3 + `governance.12` leverage design.
+
 **Who reads:** Mags at session boot (automatic), Discord bot on every message, Moltbook heartbeat.
 **Who writes:** `/save-to-mags` only — manual, deliberate. Discord bot. Moltbook.
 **Plugin role:** `personalContainerTag` in config.
@@ -227,6 +229,8 @@ The plugin runs two paired hooks that together form the **identity-layer auto-me
 
 ### Writer — Stop hook (`summary-hook.cjs`)
 
+**Neutralized 2026-05-22 (S221+).** Hook is loaded but returns null before writing — see §Plugin Config / Hooks for the mechanism + reversal. The description below reflects the hook's behavior when active, retained for the leverage design + future scope decision.
+
 Fires **after every assistant turn** (Claude Code's Stop event — not just at session end). One doc per Claude Code session, identified by `customId = <session-UUID>`. Each turn **overwrites** the existing doc rather than appending a new one.
 
 Doc shape (verified empirically via `npx supermemory docs get`):
@@ -286,7 +290,7 @@ When saving to any container, prefix with the terminal name: `[research/build]`,
 - **Don't guess. Search.**
 
 ### Session End (automatic)
-The Stop hook saves a session summary to `mags`. This is what the next session's boot profile pulls from.
+~~The Stop hook saves a session summary to `mags`.~~ **Neutralized 2026-05-22** — see §Plugin Config / Hooks. Boot profile now pulls only from deliberate `/save-to-mags` entries, nightly Discord reflections, Moltbook records, and the static User Profile slice (pre-S221 canonical + S221 protective writes). Cross-session conversational recall during the neutralization window goes through claude-mem (build observations) + the journal (Mags' conscience scaffolding).
 
 ### After Publishing an Edition
 Run `node scripts/ingestEdition.js <edition-file>` to add the edition to `bay-tribune`. This is what makes the archive searchable.
@@ -392,8 +396,8 @@ File: `.claude/.supermemory-claude/config.json` (gitignored)
 
 | Hook | When | Container |
 |------|------|-----------|
-| **SessionStart** | Every boot | Reads `mags` + `bay-tribune` profiles via `context-hook.cjs`. See §User Profile Pipeline. |
-| **Stop** | **Every assistant turn** (not just session end — S221 doc correction) | Writes session_turn doc to `mags` via `summary-hook.cjs`. Single doc per Claude Code session, identified by `customId=<session-UUID>`, overwritten per turn. See §User Profile Pipeline. |
+| **SessionStart** | Every boot | Reads `mags` + `bay-tribune` profiles via `context-hook.cjs`. See §User Profile Pipeline. **Still active** — disposition deferred to `infrastructure.5` Pass 3. |
+| **Stop** | ~~**Every assistant turn**~~ — **NEUTRALIZED 2026-05-22 (S221+)** | Writer hook is loaded by Claude Code but exits silently every fire. Mechanism: `~/.supermemory-claude/settings.json` sets `signalExtraction:true` + `signalKeywords:[]` → `formatSignalEntries` finds zero matches → returns null → `summary-hook.cjs` returns without writing. Reverse: delete `~/.supermemory-claude/settings.json` or set `signalExtraction:false` to restore auto-save-every-turn behavior. Final disposition (full disable / extraction-filter rewrite / speaker-routed rebuild) decided by `infrastructure.5` Pass 3 verdict + `governance.12` leverage design. See §User Profile Pipeline. |
 | **PostToolUse** | NOT DEFINED IN UPSTREAM | Old plugin version had auto-capture; we ran a local `PostToolUse: []` override. S177 upgrade dropped the override — upstream removed the hook entirely, so no risk of re-pollution. Historical context preserved in S177 changelog. |
 
 ### Skills
@@ -674,6 +678,7 @@ Counts reflect last `buildMaraReference.js` run; re-run if ledger has grown. ENG
 
 ## Changelog
 
+- 2026-05-22 — S221+. **Stop hook neutralized + 65 `session_turn` docs deleted from `mags`.** Surfaced when Mike noticed Supermemory had been auto-saving conversation turns as `session_turn` docs (~7K tokens each) and the server-side extraction was collapsing both speakers into Mags' first-person voice ("Margaret Corliss feels frustrated..." for content that was actually Mike venting). The journal scaffolding loaded those at boot as Mags' conscience — Mike's frustrations became her self-image. Two-part fix: (1) deleted all 65 polluted docs (count 65 → 0); (2) neutralized writer hook globally via `~/.supermemory-claude/settings.json` (`signalExtraction:true` + `signalKeywords:[]` → `formatSignalEntries` returns null → hook exits without writing). Verified mechanism by replicating `getSignalConfig` merge logic inline. SessionStart context-hook left active (decision deferred to optimization session). Filed `infrastructure.5` audit plan ([[plans/2026-05-22-supermemory-load-bearing-audit]]) for the broader load-bearing-vs-MD-substrate question — sibling to `governance.12` (User Profile leverage design) and `infrastructure.4` (writer-hook final disposition). §Plugin Config / Hooks, §User Profile Pipeline / Writer, §How It Works / Session End, §mags container all updated to reflect neutralized state.
 - 2026-04-30 — S190. Currency refresh. **§bay-tribune Contents** rewritten — last audit was S113 (E83-E89, ~31 docs); now reflects S189 Phase 1 audit (175 docs across editions E83-E92, supplementals C83-C92, dispatches, interviews, wiki entities, rosters, corrections). **§world-data Contents** rewritten — last edit was S131 first-ingest snapshot (26 docs); now reflects post-S183 unified ingest with per-domain `wd-*` tag scheme + S184 female-balance +150 (~843 docs total, 100% domain-tagged). **§mara Contents** + **§Reference File Generation** counts refreshed (Chicago 123→125, Business 51→53, Faith 16→17; citizen-roster flagged 509+ post-S184 with refresh note). **§Active Rebuilds (S189)** block added between §Scrub Procedure and §Memory Fence — pointers to bay-tribune unified ingest rebuild plan + SMFS comparison doc + HOLD status.
 - 2026-04-29 — S188. Added §Scrub Procedure documenting the S186 Perkins&Will → Atlas Bay scrub workflow (identify / confirm / wipe / re-ingest / verify), corrigendum pattern for audit records, wiki-layer immunity finding. Pairs with session-end SKILL.md drift fix (`/super-save` writes to `super-memory`, not `bay-tribune`).
 - 2026-04-25 — S177 (upgrade applied). Upgraded local plugin install 0.0.1 → upstream HEAD (13 commits past, including 0.0.2 tag). Marketplace clone stashed local mod to `plugin/hooks/hooks.json` before pull (recoverable via `cd /root/.claude/plugins/marketplaces/supermemory-plugins && git stash show stash@{0}`). The dropped mod, preserved here for permanent recovery: description string changed to "Mags brain — context on boot, summary on close, no auto-capture"; nested `[{hooks:[{type,command}]}]` flattened to `[{type,command}]` (non-spec format — would not have parsed correctly under current Claude Code hook spec, settings.json uses nested); `PostToolUse: []` explicit empty (moot — upstream defines no PostToolUse hook); `SUPERMEMORY_CC_API_KEY=...` env-forwarding wrapper (redundant — key is already in `.env` + `.bashrc` and Node child processes inherit env); timeouts `10000`/`15000` (likely intended ms but spec is seconds — upstream's `30` is correct). Net loss: zero functional change. Net gain: hooks now in spec-valid format if they weren't before. Drop rationale + restore path: this entry + the marketplace stash. Diff:

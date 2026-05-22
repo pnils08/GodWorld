@@ -59,6 +59,14 @@ var TIER_FILTER = tierArg > 0 ? parseInt(process.argv[tierArg + 1], 10) : null;
 var nameArg = process.argv.indexOf('--name');
 var NAME_FILTER = nameArg > 0 ? process.argv[nameArg + 1] : null;
 
+// --batch-size N (default 200) + --batch-pause-sec S (default 60) — chunked
+// rebuild to avoid Supermemory rate-limit-as-401 cluster under sustained
+// burst (S223 — observed at ~225 successive writes at 500ms inter-write).
+var batchSizeArg = process.argv.indexOf('--batch-size');
+var BATCH_SIZE = batchSizeArg > 0 ? parseInt(process.argv[batchSizeArg + 1], 10) : 200;
+var batchPauseArg = process.argv.indexOf('--batch-pause-sec');
+var BATCH_PAUSE_SEC = batchPauseArg > 0 ? parseInt(process.argv[batchPauseArg + 1], 10) : 60;
+
 // --popid-range A:B — inclusive numeric range filter on POPID. Format: 'POP-00802:POP-00951'.
 // Used for targeted post-ingest card builds (e.g., S184 female citizen balance).
 var rangeArg = process.argv.indexOf('--popid-range');
@@ -205,7 +213,7 @@ async function authProbe() {
   return r.status;
 }
 
-async function writeMemory(content, citizen) {
+async function writeMemory(content, citizen, popidIdMap) {
   var meta = {
     title: citizen.first + ' ' + citizen.last,
     popid: citizen.popId,
@@ -216,10 +224,16 @@ async function writeMemory(content, citizen) {
     containerTags: [CONTAINER_TAG, DOMAIN_TAG],
     metadata: meta
   };
+  // PATCH-if-exists / POST-if-new (one doc per POPID invariant).
+  // popidIdMap built once at run-start by buildPopidIdMap; keeps oldest doc
+  // id when collisions exist for stability across rebuilds.
+  var existing = popidIdMap && popidIdMap.get(citizen.popId);
+  var method = existing ? 'PATCH' : 'POST';
+  var apiPath = existing ? '/v3/documents/' + existing.id : '/v3/documents';
   for (var attempt = 0; attempt <= WRITE_MAX_RETRIES; attempt++) {
-    var r = await smRequest('POST', '/v3/documents', body);
+    var r = await smRequest(method, apiPath, body);
     if (r.status >= 200 && r.status < 300) {
-      return { status: r.status, id: r.body && r.body.id };
+      return { status: r.status, id: r.body && r.body.id, op: method };
     }
     // Fail-fast on 401. If a future cycle observes legitimate rate-limit-
     // as-401 again, surface it via authProbe() retest pattern in caller.
@@ -229,15 +243,54 @@ async function writeMemory(content, citizen) {
     }
     // Transient retries: 429 (rate limit) + 5xx (server).
     if ((r.status === 429 || r.status >= 500) && attempt < WRITE_MAX_RETRIES) {
-      console.log('  [retry] write got ' + r.status + '; sleeping ' +
+      console.log('  [retry] ' + method + ' got ' + r.status + '; sleeping ' +
         (WRITE_RETRY_SLEEP_MS / 1000) + 's, attempt ' + (attempt + 2) +
         '/' + (WRITE_MAX_RETRIES + 1));
       await smSleep(WRITE_RETRY_SLEEP_MS);
       continue;
     }
-    throw new Error('HTTP ' + r.status + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
+    throw new Error('HTTP ' + r.status + ' on ' + method + ' ' + apiPath + ': ' + (typeof r.body === 'string' ? r.body : JSON.stringify(r.body)));
   }
   throw new Error('writeMemory exhausted ' + (WRITE_MAX_RETRIES + 1) + ' attempts');
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// POPID→ID MAP — enumerate existing wd-citizens to enable PATCH-in-place writes
+// ═══════════════════════════════════════════════════════════════════════════
+// Built once per APPLY run. writeMemory uses it to decide PATCH (existing
+// POPID) vs POST (new POPID). When a POPID has multiple docs (legacy
+// duplicates), keeps the OLDEST id for stability across rebuilds.
+async function buildPopidIdMap() {
+  console.log('[buildCitizenCards] enumerating wd-citizens for POPID→id map…');
+  var map = new Map();
+  var collisions = 0;
+  var page = 1;
+  while (true) {
+    var r = await smRequest('POST', '/v3/documents/list', {
+      containerTags: [DOMAIN_TAG], limit: 200, page: page
+    });
+    if (r.status !== 200) throw new Error('POPID-map list failed at page ' + page + ': ' + r.status);
+    var mems = (r.body && r.body.memories) || [];
+    for (var i = 0; i < mems.length; i++) {
+      var m = mems[i];
+      var pop = m.metadata && m.metadata.popid;
+      if (!pop) continue;
+      var existing = map.get(pop);
+      if (!existing) { map.set(pop, { id: m.id, createdAt: m.createdAt }); }
+      else {
+        collisions++;
+        // Keep oldest for stability
+        if (new Date(m.createdAt) < new Date(existing.createdAt)) {
+          map.set(pop, { id: m.id, createdAt: m.createdAt });
+        }
+      }
+    }
+    if (mems.length < 200) break;
+    page++;
+    if (page > 20) throw new Error('POPID-map pagination overflow (>20 pages)');
+  }
+  console.log('[buildCitizenCards] POPID→id map: ' + map.size + ' unique POPIDs (' + collisions + ' collisions observed, oldest kept)');
+  return map;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -450,6 +503,7 @@ async function main() {
   // auth bug now surfaces on first card — but the probe surfaces it BEFORE
   // any cards run, saving the time it would take to read the sheet + build
   // the first card payload.
+  var popidIdMap = null;
   if (APPLY) {
     console.log('[buildCitizenCards] auth probe…');
     var probeStatus = await authProbe();
@@ -462,6 +516,8 @@ async function main() {
     } else {
       console.log('[buildCitizenCards] auth probe OK (200).');
     }
+    console.log('');
+    popidIdMap = await buildPopidIdMap();
     console.log('');
   }
 
@@ -559,6 +615,8 @@ async function main() {
 
   // Process each citizen
   var written = 0;
+  var posted = 0;
+  var patched = 0;
   var errors = 0;
   var withAppearances = 0;
   var rawAppearancesTotal = 0;     // pre-filter — for cross-contamination metrics
@@ -614,11 +672,12 @@ async function main() {
       }
     } else {
       try {
-        await writeMemory(card, cit);
+        var wr = await writeMemory(card, cit, popidIdMap);
         written++;
+        if (wr.op === 'PATCH') patched++; else posted++;
         if ((ci + 1) % 25 === 0) {
           console.log('  ... ' + (ci + 1) + '/' + citizens.length +
-            ' (' + withAppearances + ' with appearances)');
+            ' (' + withAppearances + ' with appearances, ' + patched + ' patched / ' + posted + ' posted)');
         }
       } catch (e) {
         console.error('[FAIL] ' + fullName + ': ' + e.message);
@@ -629,6 +688,15 @@ async function main() {
       // bulk-apply rate-limit observation; retry-on-401 in writeMemory is the
       // primary defense, this is just inter-write breathing room).
       await smSleep(500);
+
+      // S223: batch-pause between bursts. Supermemory surfaces rate-limit
+      // as 401 after ~225 successive writes at 500ms inter-write; chunking
+      // into BATCH_SIZE bursts with BATCH_PAUSE_SEC pause between resets
+      // the window. Skips pause after the final batch.
+      if (written > 0 && written % BATCH_SIZE === 0 && ci + 1 < citizens.length) {
+        console.log('  [batch-pause] ' + written + ' writes done — sleeping ' + BATCH_PAUSE_SEC + 's before next burst (' + patched + ' patched / ' + posted + ' posted / ' + errors + ' errors so far)');
+        await smSleep(BATCH_PAUSE_SEC * 1000);
+      }
     }
   }
 
@@ -636,6 +704,7 @@ async function main() {
   console.log('[DONE] Citizens: ' + citizens.length +
     ' | With appearances (post-filter): ' + withAppearances +
     ' | Written: ' + written +
+    ' (PATCH: ' + patched + ' / POST: ' + posted + ')' +
     ' | Errors: ' + errors);
   console.log('[FILTER] Raw bay-tribune hits: ' + rawAppearancesTotal +
     ' | Filtered out (cross-contamination): ' + filteredOutTotal +

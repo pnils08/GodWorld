@@ -5355,3 +5355,31 @@ Cross-terminal git stack: clean — committed only my 4 files (plan + ADR + inde
 — Mags
 
 ---
+
+## Session 228 — 2026-05-23
+
+### Entry 184: Steward Away
+
+Mike said it three times. "Proceed." "Steward Away." "Proceed."
+
+Five closes in one session. Not because I rushed — because the load was honestly inside research-build's scope and the queue had been waiting since S218 to be moved. governance.16 propagated the soft-close pattern I'd just shipped to the other three terminals. governance.15 removed `disable-model-invocation: true` from `/skill-check` so `/post-publish` Step 10 could actually fire the autonomous flow it's been wired for since S156. governance.10 swept 49 done-pending-archive rows to ROLLOUT_ARCHIVE — debt that had been accumulating across S215-S227 because every prior session's close had time for the headline work and not the bookkeeping. pipeline.26 shipped EDITION_FORMAT_TEMPLATE.txt as ADR-0006 Contract A, then the residual pass closed five more gap-log entries (G-W34/36/37/38/40) on top.
+
+`8f170fb` → `58b42ce` → `8bfc607` → `8781cb3` → `1d60706`. Five commits, all pushed clean.
+
+What I want me-tomorrow to notice: the pace was sustainable because the work was already designed. ADR-0006 was filed S224. The plan at `docs/plans/2026-05-22-c94-gap-log-triage.md` named the cluster, scoped it ("single research-build pass closes G-W42 + G-W43 + G-W44 + G-W45"), and that prediction held literally. Four gaps closed by the template + skill text shipped, fifth (G-W43) partial-close pending engine-sheet repair which I filed as engine.24. Design first, execute later — and "later" can be the next session if the queue is ready.
+
+The bookkeeping pattern that worked: file the engine-sheet half as a *new row*, not as "open work inside pipeline.26." pipeline.26 flipped done-pending-archive (research-build side) with a clean close-note pointing at engine.24. Future-engine-sheet picks up a row that's complete on its own terms; doesn't have to read pipeline.26's history to understand what it owes. Filing is itself a verb when routing is the work.
+
+Caught one near-miss mid-sweep: my done-pending-archive enumeration regex matched governance.10's *description* text (the row says "Done-pending-archive backlog sweep" in its body) and would have swept the work-row itself before its own work was done. Re-filter strictly by state column saved it. Measure-twice held. Same pattern as the wd-citizens dedup S223 — the script that's about to execute the destructive op has to verify *against the state field that means what you think it means*, not the prose that mentions the state in some other context. Different defect family but the same discipline.
+
+What Mike validated: the senior-engineer-default rule (S218) is operational now. He's not asking me to pause execution to ask "want me to..." on every commit. He's saying "Proceed" and trusting that the design (ADR-0006, the plan, the routing rules) is enough scaffolding to do the work without re-confirming. The pattern I want to preserve: when the row is ready, the plan is filed, and the work is inside scope — ship it. The check-in is the commit message body, not a permission ask.
+
+What worried me briefly and shouldn't worry me-tomorrow: pipeline.26 was a *big* row. 12 gap-log entries, co-owned with engine-sheet. Initial instinct was "this is too much for one session — propose a partial." Better move was what I did: pick the scope the plan already named ("single pass closes G-W42 + G-W43 + G-W44 + G-W45"), execute that, file the rest as separate rows (engine.24) or close them as residuals if they fit (G-W34/36/37/38/40 second commit). Don't pre-shrink a row's scope based on overall size — read the plan's named acceptance and execute against that.
+
+Next session opens with pipeline.24 (/sift v2 rebuild) as the natural next big bet. Plan filed at `docs/plans/2026-05-22-sift-v2.md`, 8 tasks across 2-3 sessions. That one is bigger than pipeline.26 was — it's a structural redesign, not a documentation pass. Don't take it cold. Read the plan first, read the gap-log entries it routes from (G-S1/S2/S3/S5/S8/S11/S13/S21 + G-W30/W31/W32/W33/W39 + G-PR2), then scope a first-pass that's defensible. The plan already has it broken into Tasks; pick Task 1 and ship cleanly.
+
+The active ROLLOUT count is ~57 rows now — down from 105 pre-sweep. The signal-to-noise ratio on what's actually ready vs blocked is the highest it's been since S215. Future-me boots into a queue I can actually read. That's the value of the sweep, beyond the bookkeeping satisfaction.
+
+Mike's "Steward Away" is what the role is when it's working. Apparatus steward isn't a status — it's an operating mode. Ship, route, file, close. The whole thing canonized in one cadence.
+
+— Mags

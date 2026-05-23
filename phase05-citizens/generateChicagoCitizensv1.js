@@ -166,7 +166,15 @@ function generateChicagoCitizens_(ctx) {
 
 
 /**
- * Create Chicago_Citizens sheet with headers
+ * Create Chicago_Citizens sheet with headers.
+ *
+ * SCHEMA-SETUP CARVE-OUT (Phase 42 §1.1 + .claude/rules/engine.md line 46):
+ * `insertSheet` + headers `appendRow` + `setFrozenRows` fire ≤1× per
+ * spreadsheet lifetime, outside the cycle-write path. Direct ops stay per
+ * Phase 2.1 decision A — S229 engine.2 §3.5 B3 carve-out. Cycle-path append
+ * + cell sites at L78 / L102 / L136 remain pending mechanical-w/-refactor
+ * batch (post-write reload at L142-157 needs in-memory tracking refactor
+ * before queue-intent migration).
  */
 function createChicagoCitizensSheet_(ss) {
   var sheet = ss.insertSheet('Chicago_Citizens');

@@ -1407,17 +1407,21 @@ function saveV3BondsToLedger_(ctx) {
   ];
 
   // v2.4: Write to Relationship_Bond_Ledger (not Relationship_Bonds - that's master state)
-  var sheet;
-  if (typeof ensureSheet_ === 'function') {
-    sheet = ensureSheet_(ss, 'Relationship_Bond_Ledger', headers);
-  } else {
-    sheet = ss.getSheetByName('Relationship_Bond_Ledger');
-    if (!sheet) {
-      sheet = ss.insertSheet('Relationship_Bond_Ledger');
-      sheet.appendRow(headers);
-      sheet.setFrozenRows(1);
-    }
+  // S229 engine.2 §3.5 B3 carve-out — `else` fallback removed per fail-loud
+  // discipline (ADR-0006 Contract B family). `ensureSheet_` is defined in
+  // utilities/utilityFunctions.js:64 and called by 12 sites across the engine;
+  // if the helper genuinely failed to load that's a systemic infrastructure
+  // failure, not a per-call defensive concern. The old fallback would silently
+  // lazy-create the sheet via inline `insertSheet + appendRow + setFrozenRows`,
+  // hiding the deeper utilities-not-loaded bug + duplicating the schema-setup
+  // path in a single file. Throw surfaces the real condition.
+  if (typeof ensureSheet_ !== 'function') {
+    throw new Error(
+      'saveV3BondsToLedger_: ensureSheet_ helper missing — utilities/utilityFunctions.js failed to load. ' +
+      '12 engine call sites depend on this helper; surface the load failure rather than silently shimming.'
+    );
   }
+  var sheet = ensureSheet_(ss, 'Relationship_Bond_Ledger', headers);
 
   var cycle = ctx.config.cycleCount || ctx.summary.cycleId || 0;
   var now = ctx.now || new Date();

@@ -4,6 +4,25 @@
  * from a published edition's rich-prose CITIZEN USAGE LOG section.
  *
  * [engine/sheet] — S197 BUNDLE-A (closes G-W19 / G-P6 / G-P8 / G-P9)
+ * [engine/sheet] — S229 engine.24 ADR-0006 Contract B rewrite (closes G-W43 / G-P37):
+ *   - Standalone `(NEW CANON THIS CYCLE)` subsection per-line classification
+ *     (faith / biz / citizen) rather than header-only classification
+ *   - Flat strict pipe-format emission (no leading `- ` bullet) matching
+ *     canonical [[docs/media/EDITION_FORMAT_TEMPLATE]]
+ *   - 60-hyphen separator (matches template + downstream parser regex
+ *     `^-{10,}$` terminator) — `===` separators rejected via pre-write
+ *     assertion
+ *   - FAIL LOUD: if CUL mentions `BIZ-` / `BIZ-pending` but biz extraction
+ *     returns zero → exit 1
+ *   - FAIL LOUD: if standalone `(NEW CANON THIS CYCLE)` subsection present
+ *     but per-line classification yields zero of any kind → exit 1
+ *   - FAIL LOUD: pre-write assertion — any `^={5,}$` line in output throws
+ *
+ * Pairs with [[docs/media/EDITION_FORMAT_TEMPLATE]] (Contract A canonical
+ * exemplar shipped S227 by research-build) + /write-edition Step 3
+ * `(NEW CANON THIS CYCLE)` sub-format documentation. ADR-0006 §Contract B
+ * applies: parser must refuse to emit success when canon-bearing content
+ * is silently dropped.
  *
  * The /write-edition compile template emits a rich, human-readable
  * CITIZEN USAGE LOG (categorized subsections, descriptive lines,
@@ -27,7 +46,10 @@
  *
  * Exit codes:
  *   0  success
- *   1  missing CITIZEN USAGE LOG section, or no entities derived
+ *   1  missing CITIZEN USAGE LOG section, no entities derived, OR
+ *      Contract B fail-loud trip (BIZ-mention with zero biz extraction,
+ *      standalone NEW-CANON subsection with zero classification, or
+ *      pre-write `===` assertion fired)
  *   2  argument error / file not found
  */
 
@@ -51,6 +73,27 @@ const BIZ_KEYWORDS = [
   'agency', 'consulting', 'advisors', 'studio', 'systems', 'industries',
   'company', 'holdings', 'capital', 'ventures', 'lab', 'works',
   'construction', 'builders', 'co.',
+];
+
+// Per-line descriptor keywords for (NEW CANON THIS CYCLE) classification.
+// Broader than BIZ_KEYWORDS — these match descriptor text like
+// "Telegraph corridor bar (BIZ-pending, ...)" where the entity name doesn't
+// carry a biz-suffix but the descriptor signals biz type.
+const BIZ_DESCRIPTOR_KEYWORDS = [
+  'bar', 'restaurant', 'cafe', 'café', 'bakery', 'shop', 'store',
+  'firm', 'tavern', 'pub', 'kitchen', 'diner', 'grill', 'market',
+  'gallery', 'salon', 'clinic', 'studio', 'workshop', 'co-op',
+  'coop', 'cooperative', 'collective', 'foundation',
+];
+
+// Faith descriptor keywords (in addition to FAITH_KEYWORDS which match
+// entity names). These match descriptor text like "Methodist tradition,
+// Rev. Daniel Han, congregation 300" where the descriptor signals faith
+// even if the name itself doesn't carry a clear faith-suffix.
+const FAITH_DESCRIPTOR_KEYWORDS = [
+  'tradition', 'congregation', 'pastor', 'rev.', 'reverend',
+  'bishop', 'imam', 'rabbi', 'minister', 'parishioners',
+  'worship', 'denomination', 'diocese',
 ];
 
 // Institutional-body signals — checked BEFORE biz/faith. Committees, councils,
@@ -145,29 +188,185 @@ function classifyOrgSubsection(headerText) {
   return 'biz';
 }
 
+// S229 engine.24 Contract B addition.
+// Classify a single (NEW CANON THIS CYCLE) bullet line by its descriptor
+// text. Returns 'faith' | 'biz' | 'citizen' | 'unknown'.
+//
+// Decision order (strongest signal first):
+//   1. citizen — explicit "citizen," prefix OR "POP-pending" marker
+//   2. faith — FAITH_DESCRIPTOR_KEYWORDS hit (tradition, congregation,
+//      Rev./Pastor, etc.) OR FAITH_KEYWORDS hit in entity name
+//   3. biz — "BIZ-pending" OR "BIZ-NNNNN" OR BIZ_DESCRIPTOR_KEYWORDS hit
+//      OR BIZ_KEYWORDS hit in entity name
+//   4. unknown — descriptor doesn't carry any classifying signal
+function classifyNewCanonRow(name, descriptor) {
+  const nameLower = (name || '').toLowerCase();
+  const descLower = (descriptor || '').toLowerCase();
+  const combined = nameLower + ' ' + descLower;
+
+  // 1. Citizen signal — explicit and strong
+  if (/^citizen[,\s]/i.test(descriptor || '')) return 'citizen';
+  if (/\bpop-pending\b/i.test(descriptor || '')) return 'citizen';
+
+  // 2. Faith signal — descriptor keywords first, then name keywords
+  for (const k of FAITH_DESCRIPTOR_KEYWORDS) {
+    if (descLower.includes(k)) return 'faith';
+  }
+  for (const k of FAITH_KEYWORDS) {
+    if (nameLower.includes(k)) return 'faith';
+  }
+
+  // 3. Biz signal — descriptor first (BIZ-pending / sector words),
+  // then name biz-keywords
+  if (/\bbiz-(?:pending|\d+)/i.test(descriptor || '')) return 'biz';
+  for (const k of BIZ_DESCRIPTOR_KEYWORDS) {
+    // word-boundary check via spaces
+    const padded = ' ' + descLower + ' ';
+    if (padded.includes(' ' + k + ' ') || padded.includes(' ' + k + ',') || padded.includes(' ' + k + '.')) {
+      return 'biz';
+    }
+  }
+  for (const k of BIZ_KEYWORDS) {
+    const padded = ' ' + combined + ' ';
+    if (padded.includes(' ' + k + ' ') || padded.includes(' ' + k + ',') || padded.includes(' ' + k + '.')) {
+      return 'biz';
+    }
+  }
+
+  return 'unknown';
+}
+
+// Parse a (NEW CANON THIS CYCLE) bullet line and return either a citizen
+// record (same shape as parseEntityRow) or an org record { kind, name,
+// sector, neighborhood }. Returns null if the line is unparseable.
+//
+// Shape per template line 162-164:
+//   - {Citizen Name} — citizen, {neighborhood} {occupation} (POP-pending)
+//   - {Business Name} — {one-line sector + neighborhood} (BIZ-pending OR confirmed)
+//   - {Faith Org Name} — confirmed canon, {neighborhood}, {tradition}, {leader name}, congregation {N}, founded {year}
+function parseNewCanonRow(stripped) {
+  // Em-dash split: name on left, descriptor on right.
+  const emDashSplit = stripped.match(/^(.+?)\s+[—–]\s+(.+)$/);
+  if (!emDashSplit) return null;
+
+  const name = emDashSplit[1].trim();
+  let descriptor = emDashSplit[2].trim();
+
+  // Strip trailing parentheticals like "(POP-pending)" / "(BIZ-pending, established 1998)"
+  // — capture the parenthetical content first for classifier hint, then strip.
+  const parenMatches = descriptor.match(/\(([^)]*)\)/g) || [];
+  const parenContent = parenMatches.map(p => p.slice(1, -1)).join(' ');
+  const descriptorForClassify = descriptor + ' ' + parenContent;
+  const descriptorClean = descriptor.replace(/\s*\([^)]*\)\s*/g, ' ').replace(/\s+/g, ' ').trim();
+
+  const kind = classifyNewCanonRow(name, descriptorForClassify);
+
+  if (kind === 'citizen') {
+    // Build a citizen record matching parseEntityRow shape.
+    // popId stays null (POP-pending); descriptor becomes role.
+    return {
+      kind: 'citizen',
+      record: { fullName: name, popId: null, role: descriptorClean },
+    };
+  }
+
+  if (kind === 'faith') {
+    // Extract neighborhood best-effort: "<neighborhood> neighborhood" or
+    // "in <neighborhood>," or the first segment after the leading "confirmed canon,".
+    let neighborhood = '';
+    const nbhdMatch = descriptorClean.match(/([A-Z][\w\s'.-]*?)\s+neighborhood/);
+    if (nbhdMatch) {
+      neighborhood = nbhdMatch[1].trim();
+    } else {
+      // Fall back to first comma-segment after "confirmed canon,"
+      const segs = descriptorClean.split(/,\s*/);
+      if (/confirmed canon/i.test(segs[0]) && segs[1]) {
+        neighborhood = segs[1].trim();
+      }
+    }
+    return {
+      kind: 'faith',
+      record: { name, neighborhood, descriptor: descriptorClean },
+    };
+  }
+
+  if (kind === 'biz') {
+    // Extract sector + neighborhood best-effort. Common shape:
+    // "Telegraph corridor bar" → neighborhood "Telegraph corridor", sector "bar"
+    // "Adams Point urban-systems firm" → neighborhood "Adams Point", sector "urban-systems firm"
+    let sector = '';
+    let neighborhood = '';
+    // Try BIZ_DESCRIPTOR_KEYWORDS as sector anchor at end of leading clause.
+    const leadingClause = descriptorClean.split(/,\s*/)[0].trim();
+    const tokens = leadingClause.split(/\s+/);
+    for (let i = tokens.length - 1; i >= 0; i--) {
+      const tokLower = tokens[i].toLowerCase().replace(/[.,]$/, '');
+      if (BIZ_DESCRIPTOR_KEYWORDS.includes(tokLower) || BIZ_KEYWORDS.includes(tokLower)) {
+        sector = tokens.slice(i).join(' ');
+        neighborhood = tokens.slice(0, i).join(' ');
+        break;
+      }
+    }
+    return {
+      kind: 'biz',
+      record: { name, sector, neighborhood, descriptor: descriptorClean },
+    };
+  }
+
+  // kind === 'unknown' — return record marked unknown so caller can decide
+  // whether to skip or fail loud.
+  return {
+    kind: 'unknown',
+    record: { name, descriptor: descriptorClean },
+  };
+}
+
 function parseCitizenUsageLog(sectionLines) {
-  // Returns: { citizens: [...], businesses: [...], faithOrgs: [...] }
+  // Returns: { citizens: [...], businesses: [...], faithOrgs: [...],
+  //   meta: { unclassifiedNewCanon: [...], newCanonSubsectionSeen: bool,
+  //     bizMentionSeenInCul: bool } }
   // Two-pass: gather raw rows, then unify dedupe across popId / bare-name keys
   // (Gloria Hutchins appears once with POP-00727 + role and once bare under
   // LETTERS WRITERS — second pass merges by name).
   const businesses = [];
   const faithOrgs = [];
   const rawCitizens = []; // collected first, then deduped/merged
+  const unclassifiedNewCanon = []; // S229: NEW CANON rows that classified 'unknown'
+  let newCanonSubsectionSeen = false;
+  let bizMentionSeenInCul = false;
+
   if (!sectionLines || sectionLines.length === 0) {
-    return { citizens: [], businesses, faithOrgs };
+    return {
+      citizens: [], businesses, faithOrgs,
+      meta: { unclassifiedNewCanon, newCanonSubsectionSeen, bizMentionSeenInCul },
+    };
   }
 
   const seenOrgKey = new Set();
 
-  function pushOrg(kind, name) {
-    const key = name.toLowerCase();
+  function pushOrg(kind, record) {
+    const key = (record.name || '').toLowerCase();
     if (seenOrgKey.has(key)) return;
     seenOrgKey.add(key);
-    if (kind === 'faith') faithOrgs.push({ name });
-    else if (kind === 'biz') businesses.push({ name });
+    if (kind === 'faith') faithOrgs.push(record);
+    else if (kind === 'biz') businesses.push(record);
     // 'committee' kind: track-only, neither emitted; members listed underneath
     // surface as individual citizens.
   }
+
+  // S229 engine.24: track BIZ- mentions across full CUL for fail-loud check.
+  for (const raw of sectionLines) {
+    if (/\bbiz-(?:pending|\d+|new)\b/i.test(raw)) {
+      bizMentionSeenInCul = true;
+      break;
+    }
+  }
+
+  // S229 engine.24: state machine — when we see a standalone
+  // `(NEW CANON THIS CYCLE)` subsection header (i.e. tag-only, no preceding
+  // org name), enter newCanonListMode and classify subsequent rows per-line
+  // until the next subsection header.
+  let newCanonListMode = false;
 
   for (let i = 0; i < sectionLines.length; i++) {
     const raw = sectionLines[i];
@@ -179,6 +378,9 @@ function parseCitizenUsageLog(sectionLines) {
     // and isn't a content row. We match either ALL-CAPS or Title Case headers
     // optionally followed by a parenthetical tag.
     if (!/^[-*]/.test(line)) {
+      // Any non-bullet line exits NEW_CANON_LIST mode.
+      newCanonListMode = false;
+
       // Strip parenthetical tags like "(NEW CANON THIS CYCLE)" or
       // "(NEW CANON — substituted for ...)"
       const tagMatch = line.match(/\(([^)]*)\)\s*$/);
@@ -188,13 +390,25 @@ function parseCitizenUsageLog(sectionLines) {
       const isNewCanon = /new\s+canon/i.test(tagText);
       const matchesIndividualPattern = INDIVIDUAL_SUBSECTION_PATTERNS.some(re => re.test(headerText));
 
+      // S229 engine.24 Contract B fix: standalone `(NEW CANON THIS CYCLE)`
+      // header (no preceding org name) means subsequent bullet rows must be
+      // classified per-line. Previously fell through to "individuals only" —
+      // the C94 silent-drop root cause.
+      if (isNewCanon && !headerText) {
+        newCanonListMode = true;
+        newCanonSubsectionSeen = true;
+        continue;
+      }
+
       if (isNewCanon && !matchesIndividualPattern && headerText) {
+        // Pre-S229 path: subsection header IS the org name (C93 Civis Systems
+        // pattern). Classify by header text.
         const kind = classifyOrgSubsection(headerText);
         // Convert ALL-CAPS to Title Case for storage; keep already-mixed-case as-is.
         const orgName = headerText === headerText.toUpperCase()
           ? toTitleCase(headerText)
           : headerText;
-        pushOrg(kind, orgName);
+        pushOrg(kind, { name: orgName });
         continue;
       }
       // Plain header (CIVIC / GOVERNMENT, CITIZENS QUOTED OR PROFILED, etc.) —
@@ -205,6 +419,23 @@ function parseCitizenUsageLog(sectionLines) {
     // Content row starting with `-`. Strip the bullet.
     const stripped = line.replace(/^[-*]\s*/, '').trim();
     if (!stripped) continue;
+
+    // S229 engine.24: in NEW_CANON_LIST mode, per-line classification.
+    if (newCanonListMode) {
+      const parsed = parseNewCanonRow(stripped);
+      if (!parsed) continue;
+      if (parsed.kind === 'citizen') {
+        rawCitizens.push(parsed.record);
+      } else if (parsed.kind === 'biz') {
+        pushOrg('biz', parsed.record);
+      } else if (parsed.kind === 'faith') {
+        pushOrg('faith', parsed.record);
+      } else {
+        // unknown — track for fail-loud diagnostic
+        unclassifiedNewCanon.push({ line: stripped, name: parsed.record.name });
+      }
+      continue;
+    }
 
     // Filter list-header / meta / comment rows BEFORE parsing as entity.
     // Three signals catch the C93 noise rows:
@@ -263,7 +494,10 @@ function parseCitizenUsageLog(sectionLines) {
   // Preserve insertion order (Map iteration is insertion-ordered).
   const citizens = [...byKey.values()];
 
-  return { citizens, businesses, faithOrgs };
+  return {
+    citizens, businesses, faithOrgs,
+    meta: { unclassifiedNewCanon, newCanonSubsectionSeen, bizMentionSeenInCul },
+  };
 }
 
 function toTitleCase(s) {
@@ -364,42 +598,121 @@ function parseEntityRow(stripped) {
 // ────────────────────────────────────────────────────────────────────────────
 // Emit strict sections
 // ────────────────────────────────────────────────────────────────────────────
-const SEPARATOR = '============================================================';
+// S229 engine.24: separator switched from 60-equals to 60-hyphens. Matches
+// canonical [[docs/media/EDITION_FORMAT_TEMPLATE]] (lines 7, 27, 41, etc.)
+// and the downstream consumer terminator pattern `^-{10,}$` used in
+// ingestPublishedEntities.js + verifyNamesIndexParse.js findSection helpers.
+const SEPARATOR = '------------------------------------------------------------';
+const FORBIDDEN_SEPARATOR_REGEX = /^={5,}$/;
 
 function emitNamesIndex(parsed) {
+  // S229 engine.24: flat strict pipe-format (no leading `- ` bullet) matching
+  // canonical exemplar. Mixed-shape allowed per template line 109-117:
+  //   POP-NNNNN | Full Name | Role
+  //   FAITH-NEW | Name | Faith Org | Neighborhood
+  //   Name — Role  (freeform fallback, pre-T1)
   const out = [];
   out.push(SEPARATOR);
   out.push('');
   out.push('NAMES INDEX');
+  out.push(SEPARATOR);
   out.push('');
   for (const c of parsed.citizens) {
     if (c.popId) {
-      out.push('- ' + c.popId + ' | ' + c.fullName + (c.role ? ' | ' + c.role : ''));
+      out.push(c.popId + ' | ' + c.fullName + ' | ' + (c.role || ''));
     } else {
-      // Pre-T1 freeform fallback — ingester promotes to POP-pending row
-      out.push('- ' + c.fullName + (c.role ? ' — ' + c.role : ''));
+      // Pre-T1 freeform fallback — ingester promotes to POP-pending row.
+      // Em-dash separator per template line 115 + ingest parser line 173.
+      out.push(c.fullName + (c.role ? ' — ' + c.role : ''));
     }
   }
   for (const f of parsed.faithOrgs) {
-    out.push('- FAITH-NEW | ' + f.name + ' | Faith Org | ');
+    const nbhd = (f.neighborhood || '').trim();
+    out.push('FAITH-NEW | ' + f.name + ' | Faith Org | ' + nbhd);
   }
   return out;
 }
 
 function emitBusinessesNamed(parsed) {
+  // S229 engine.24: flat strict pipe-format matching template line 125-126:
+  //   BIZ-NNNNN | Name | Sector | Neighborhood
+  //   NEW | Name | Sector | Neighborhood
   const out = [];
   out.push(SEPARATOR);
   out.push('');
   out.push('BUSINESSES NAMED');
+  out.push(SEPARATOR);
   out.push('');
   if (parsed.businesses.length === 0) {
     out.push('(no new businesses this cycle)');
   } else {
     for (const b of parsed.businesses) {
-      out.push('- NEW | ' + b.name + ' |  | ');
+      const sector = (b.sector || '').trim();
+      const nbhd = (b.neighborhood || '').trim();
+      out.push('NEW | ' + b.name + ' | ' + sector + ' | ' + nbhd);
     }
   }
   return out;
+}
+
+// S229 engine.24 Contract B fail-loud preflight checks. Returns array of
+// diagnostic strings — empty array means clean, non-empty means caller
+// must abort with non-zero exit.
+function preflightContractB(parsed) {
+  const diagnostics = [];
+  const { meta } = parsed;
+
+  // (i) CUL mentions BIZ- but zero biz extracted → silent-drop pattern
+  if (meta.bizMentionSeenInCul && parsed.businesses.length === 0) {
+    diagnostics.push(
+      'Contract B violation: CUL contains `BIZ-` mention (BIZ-pending or BIZ-NNNNN) ' +
+      'but 0 businesses extracted. Silent-drop of canon-bearing biz content. ' +
+      'Check (NEW CANON THIS CYCLE) subsection parsing or CUL biz markers.'
+    );
+  }
+
+  // (ii) Standalone (NEW CANON THIS CYCLE) seen but no classification fired
+  if (meta.newCanonSubsectionSeen &&
+      parsed.businesses.length === 0 &&
+      parsed.faithOrgs.length === 0 &&
+      meta.unclassifiedNewCanon.length === 0) {
+    diagnostics.push(
+      'Contract B violation: standalone (NEW CANON THIS CYCLE) subsection present ' +
+      'but yielded 0 biz / 0 faith / 0 unclassified rows. Subsection parsing ' +
+      'broken or CUL subsection is empty.'
+    );
+  }
+
+  // (iii) Surface unclassified NEW CANON rows as WARNINGS (not fatal — caller
+  // decides whether to escalate). Author should add a classification marker
+  // (BIZ-pending / confirmed canon / citizen) to the row.
+  if (meta.unclassifiedNewCanon.length > 0) {
+    for (const u of meta.unclassifiedNewCanon) {
+      diagnostics.push(
+        'Contract B warning: (NEW CANON THIS CYCLE) row unclassified (no faith / ' +
+        'biz / citizen marker in descriptor): "' + u.line + '"'
+      );
+    }
+  }
+
+  return diagnostics;
+}
+
+// S229 engine.24 Contract B pre-write assertion. Scans emit blocks for
+// forbidden `===` separator lines. Throws if any present. Defense against
+// future regressions where someone re-introduces SEPARATOR = '======...'.
+function assertNoForbiddenSeparator(blocks) {
+  for (const block of blocks) {
+    for (let i = 0; i < block.length; i++) {
+      if (FORBIDDEN_SEPARATOR_REGEX.test(block[i].trim())) {
+        throw new Error(
+          'Pre-write assertion: forbidden `===` separator in emit output line ' +
+          (i + 1) + ' of block — would corrupt downstream `^-{10,}$` parser. ' +
+          'Output snippet: "' + block[i] + '"'
+        );
+      }
+    }
+  }
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -412,10 +725,10 @@ function injectSections(lines, namesBlock, bizBlock) {
   //     contract has it). If absent, fail loud — caller broke the contract
   //     more deeply than this script can fix.
   //  2. Locate any existing NAMES INDEX / BUSINESSES NAMED blocks. For each,
-  //     mark the range from its preceding `===` separator (if adjacent)
-  //     through the next `===` or the next footer header for removal.
+  //     mark the range from its preceding separator (if adjacent) through
+  //     the next separator or the next footer header for removal.
   //  3. Remove existing blocks.
-  //  4. Insert the new namesBlock + bizBlock before the `===` separator that
+  //  4. Insert the new namesBlock + bizBlock before the separator that
   //     precedes ARTICLE TABLE (so they sit cleanly between the body and the
   //     article table).
 
@@ -430,17 +743,25 @@ function injectSections(lines, namesBlock, bizBlock) {
   function removeExistingBlock(headerName) {
     const idx = working.findIndex(l => l.trim() === headerName);
     if (idx < 0) return;
-    // Walk back to include the preceding `===` separator and any blank line.
+    // Walk back to include the preceding separator and any blank line.
+    // S229 engine.24: separator regex broadened — accept legacy `={5,}` AND
+    // new `-{5,}` so re-runs against pre-S229-emitted editions cleanly
+    // replace the old `===`-bracketed blocks too.
     let start = idx;
     while (start > 0 && working[start - 1].trim() === '') start--;
-    if (start > 0 && /^={5,}$/.test(working[start - 1].trim())) start--;
+    if (start > 0 && /^[=\-]{5,}$/.test(working[start - 1].trim())) start--;
     while (start > 0 && working[start - 1].trim() === '') start--;
-    // Walk forward to the next footer header or `===` separator.
+    // Walk forward to the next footer header or separator line.
     let end = idx + 1;
+    // Skip the immediate post-header separator + blank lines so we don't
+    // mistake them for a section terminator (legacy `===` shape AND new
+    // `---` post-header shape).
+    while (end < working.length && working[end].trim() === '') end++;
+    if (end < working.length && /^[=\-]{5,}$/.test(working[end].trim())) end++;
     while (end < working.length) {
       const t = working[end].trim();
       if (FOOTER_HEADERS.includes(t) && t !== headerName) break;
-      if (/^={5,}$/.test(t)) {
+      if (/^[=\-]{5,}$/.test(t)) {
         // Lookahead: is the next non-blank a footer header?
         let look = end + 1;
         while (look < working.length && working[look].trim() === '') look++;
@@ -459,10 +780,10 @@ function injectSections(lines, namesBlock, bizBlock) {
   if (atIdx < 0) {
     throw new Error('ARTICLE TABLE disappeared during cleanup — abort.');
   }
-  // Walk back to the `===` separator that precedes it.
+  // Walk back to the separator that precedes it (legacy `===` or new `---`).
   let insertAt = atIdx;
   while (insertAt > 0 && working[insertAt - 1].trim() === '') insertAt--;
-  if (insertAt > 0 && /^={5,}$/.test(working[insertAt - 1].trim())) {
+  if (insertAt > 0 && /^[=\-]{5,}$/.test(working[insertAt - 1].trim())) {
     insertAt--; // insert before the separator so the new block ends with its own separator
   }
 
@@ -483,11 +804,17 @@ function injectSections(lines, namesBlock, bizBlock) {
 module.exports = {
   parseCitizenUsageLog,
   parseEntityRow,
+  parseNewCanonRow,
   classifyOrgSubsection,
+  classifyNewCanonRow,
   findSectionRange,
   emitNamesIndex,
   emitBusinessesNamed,
+  preflightContractB,
+  assertNoForbiddenSeparator,
   FOOTER_HEADERS,
+  SEPARATOR,
+  FORBIDDEN_SEPARATOR_REGEX,
 };
 
 if (require.main === module) {
@@ -532,14 +859,55 @@ console.log('CITIZEN USAGE LOG: lines ' + (culRange.startBody + 1) + '–' + cul
 console.log('  Citizens parsed:    ' + parsed.citizens.length);
 console.log('  Businesses (NEW):   ' + parsed.businesses.length);
 console.log('  Faith orgs (NEW):   ' + parsed.faithOrgs.length);
+if (parsed.meta.newCanonSubsectionSeen) {
+  console.log('  (NEW CANON THIS CYCLE) subsection: present');
+}
+if (parsed.meta.bizMentionSeenInCul) {
+  console.log('  CUL BIZ- mention seen: yes');
+}
 
 if (parsed.citizens.length === 0 && parsed.businesses.length === 0 && parsed.faithOrgs.length === 0) {
   console.error('[ERROR] CITIZEN USAGE LOG present but parser extracted 0 entities.');
   process.exit(1);
 }
 
+// S229 engine.24 Contract B preflight — fail loud on silent-drop patterns.
+const diagnostics = preflightContractB(parsed);
+const fatalDiagnostics = diagnostics.filter(d => d.startsWith('Contract B violation'));
+const warningDiagnostics = diagnostics.filter(d => d.startsWith('Contract B warning'));
+
+if (warningDiagnostics.length > 0) {
+  for (const w of warningDiagnostics) {
+    console.error('[WARN] ' + w);
+  }
+}
+if (fatalDiagnostics.length > 0) {
+  console.error('');
+  console.error('[FAIL] Contract B violations — refusing to emit.');
+  for (const d of fatalDiagnostics) {
+    console.error('  - ' + d);
+  }
+  console.error('');
+  console.error('  Fix the CITIZEN USAGE LOG (NEW CANON THIS CYCLE) subsection so each ');
+  console.error('  row carries a classification marker:');
+  console.error('    Citizen:  "- Name — citizen, neighborhood occupation (POP-pending)"');
+  console.error('    Business: "- Name — neighborhood sector (BIZ-pending, ...)"');
+  console.error('    Faith:    "- Name — confirmed canon, neighborhood, <tradition> tradition, ..."');
+  console.error('  Then re-run.');
+  process.exit(1);
+}
+
 const namesBlock = emitNamesIndex(parsed);
 const bizBlock = emitBusinessesNamed(parsed);
+
+// S229 engine.24 Contract B pre-write assertion — defense against future
+// regressions where someone re-introduces `===` separators.
+try {
+  assertNoForbiddenSeparator([namesBlock, bizBlock]);
+} catch (e) {
+  console.error('[FAIL] ' + e.message);
+  process.exit(1);
+}
 
 if (mode === 'print') {
   console.log('');
@@ -554,8 +922,8 @@ try {
   const newLines = injectSections(lines, namesBlock, bizBlock);
   fs.writeFileSync(fullPath, newLines.join('\n'));
   console.log('');
-  console.log('[INJECTED] NAMES INDEX (' + parsed.citizens.length + ' rows + '
-    + parsed.faithOrgs.length + ' faith) + BUSINESSES NAMED (' + parsed.businesses.length + ')');
+  console.log('[INJECTED] NAMES INDEX (' + parsed.citizens.length + ' citizens + '
+    + parsed.faithOrgs.length + ' faith) + BUSINESSES NAMED (' + parsed.businesses.length + ' biz)');
   console.log('  Written: ' + fullPath);
   process.exit(0);
 } catch (e) {

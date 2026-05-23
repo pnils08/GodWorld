@@ -192,15 +192,21 @@ function parseNamesIndex(sectionLines) {
 }
 
 // ---------------------------------------------------------------------------
-// BUSINESSES NAMED parser — strict only (T1 contract)
+// BUSINESSES NAMED parser — strict pipe-format, bullet prefix optional
 // ---------------------------------------------------------------------------
+// S229 engine.24 coupling fix (G-P37 root cause): bullet prefix REQUIRED
+// pre-S229 caused C94 to silently drop all 4 published BUSINESSES NAMED
+// rows (canonical exemplar + C94 published form are flat, no bullet).
+// Loosened to mirror NAMES INDEX parser at line 156 — strip optional `-`
+// prefix then split on pipe. Skip blank + separator lines.
 function parseBusinessesNamed(sectionLines) {
   const out = [];
   if (!sectionLines) return out;
 
   for (const raw of sectionLines) {
     const line = raw.trim();
-    if (!line || line[0] !== '-') continue;
+    if (!line) continue;
+    if (/^[=\-─━_]+$/.test(line)) continue;
     const stripped = line.replace(/^-\s*/, '');
     if (stripped.indexOf('|') < 0) continue;
 

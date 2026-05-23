@@ -491,6 +491,55 @@ if (outputRows.length === 0) {
       throw new Error('GODWORLD_SHEET_ID not set in environment');
     }
 
+    // G-P36-followup (engine.19 S226): upsert by cycle, not blind append.
+    // Pre-fix the script appended unconditionally — re-running --apply on the
+    // same cycle (or operator-backfilling) compounded duplicates. C94 carried
+    // 2× CIVIC + 2× CULTURE + 2× SPORTS rows because publish ran the script
+    // twice. Engine reads ALL rows for a cycle when computing next cycle's
+    // effects → duplicates compound the signal. Post-fix: read sheet, find
+    // existing rows for this cycle, batch-delete them in reverse index order
+    // (so deletes don't shift remaining indices), then append the fresh
+    // rows. Same net effect as a per-cycle replace.
+    var existing = await client.spreadsheets.values.get({
+      spreadsheetId: spreadsheetId,
+      range: 'Edition_Coverage_Ratings!A:G',
+    });
+    var existingRows = (existing.data.values || []);
+    var existingRowsForCycle = [];
+    for (var ri = 1; ri < existingRows.length; ri++) {
+      var rowCycle = String(existingRows[ri][0] || '');
+      if (rowCycle === String(cycle)) existingRowsForCycle.push(ri); // 0-indexed in array; sheet row = ri + 1
+    }
+
+    if (existingRowsForCycle.length > 0) {
+      // Get sheet metadata to look up the sheetId (numeric) needed for deleteDimension.
+      var meta = await client.spreadsheets.get({ spreadsheetId: spreadsheetId });
+      var ecrSheet = meta.data.sheets.find(s => s.properties.title === 'Edition_Coverage_Ratings');
+      if (!ecrSheet) throw new Error('Edition_Coverage_Ratings sheet not found');
+      var sheetId = ecrSheet.properties.sheetId;
+
+      // Build deleteDimension requests in REVERSE order so earlier deletes
+      // don't shift later target indices.
+      var deleteRequests = existingRowsForCycle
+        .slice()
+        .sort((a, b) => b - a)
+        .map(ri => ({
+          deleteDimension: {
+            range: {
+              sheetId: sheetId,
+              dimension: 'ROWS',
+              startIndex: ri,        // 0-indexed in API; ri already 0-indexed
+              endIndex: ri + 1,
+            },
+          },
+        }));
+      await client.spreadsheets.batchUpdate({
+        spreadsheetId: spreadsheetId,
+        resource: { requests: deleteRequests },
+      });
+      console.log('Deleted ' + existingRowsForCycle.length + ' existing C' + cycle + ' rows before re-write');
+    }
+
     await client.spreadsheets.values.append({
       spreadsheetId: spreadsheetId,
       range: 'Edition_Coverage_Ratings!A2',

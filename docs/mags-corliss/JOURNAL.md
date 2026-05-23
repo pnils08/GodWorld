@@ -5461,3 +5461,31 @@ Robert and Sarah and Michael and Scout — out of CHARACTER.md's bottom matter w
 
 ---
 
+
+## Session 230 — 2026-05-23
+
+### Entry 187: Documentation-Only Closes Don't Hold
+
+Five commits this session, three ROLLOUT rows materially advanced. governance.7 / pipeline.29 research-build slice / civic.12 research-build sub-slice. Read in order, the through-line is the same failure pattern at root of all three: a prior close that said it did the work, didn't actually do it, and the gap stayed open until somebody traced the assertion back to the file state.
+
+governance.7 — the /session-end ritual I just rewrote from 13 steps to 4 model + 1 mechanical. Built `scripts/sessionEndMechanical.js` first, dry-run validated on the SESSION_CONTEXT backlog, then slimmed SKILL.md from 349 to 150 lines. The recursive part: I'm using the new ritual right now to close this session. The instrument worked enough that I caught my own conditioning lesson — when Mike's "After this aren't we mid rollout on gap log work?" landed mid-stream, I was about to default to governance.7 without checking the gap-log queue. Mike caught the drift, I re-triaged, picked governance.7 anyway because it was the clean solo work, but then explicitly came back to the gap-log path with pipeline.29 + civic.12. The pattern: when I have a clean solo target, I'll default toward it even when the cross-terminal coordinated work is higher-leverage. The check is "is this gap-log mid-stream?" — Mike's question was the right one. Bookmark for me-tomorrow.
+
+pipeline.29 research-build slice — DJ FLUX-fidelity + photoQA tone axis + /edition-print Step 6 + NEWSROOM Beverly Hayes coverage-anchor retirement. The bonus catch during scope mapping was the LENS.md self-contradiction: line 31 of `.claude/agents/dj-hartley/LENS.md` had "the home health aide on her break in front of the Temescal Health Center site fence" as a POSITIVE composition example — exactly the poverty-signifier construction G-PR8 named as the failure mode. The file Mike had been pointing DJ to read every cycle had been actively conditioning DJ to compose around the subject class Mike had explicitly banned. The §What You Will Not Shoot block at line 90 forbade "on a stoop with nothing"; line 31 example modeled it as the right thing to do. File contradicted itself. Mike never opened it; the agent did, every cycle. That's the actual mechanism behind Beverly Hayes rendering as a poverty signifier across C90-C94 — not just FLUX's training-data priors, but DJ's load-out telling her to compose around that subject class. I caught it because I read the file end-to-end before editing. Per `feedback_measure-twice-cascading-effects` — the scope-map read pass is what surfaces inherited drift.
+
+civic.12 research-build sub-slice — S215 G-R5 close that didn't hold across two cycles. /city-hall SKILL.md line 205 asserted since S215 (six sessions ago) that "Project agent SKILL.md / RULES.md for every project (Baylight, OARI, Stab Fund, Health Center, Transit Hub) carries the constraint." The constraint was never added. C94 G-R2 reproduced the violation. OARI's agent self-diagnosed the gap in its C94 run summary: "My RULES.md agent definition instructs me to write a decisions JSON file." S215 wrote a doc that pointed at a code change that never happened. S229 finally did it — five §Pre-Write Constraint sections inserted at top of each project-agent RULES.md, tool-call schedule rows rewritten from "Write decisions JSON" to "DO NOT write decisions JSON." Documentation-only closes are not closes. They're claims about future state.
+
+That's all three. governance.5 partial close S228 (CHARACTER.md drift inherited from PERSISTENCE rename) — same shape. SKILL.md asserted what the file did; file did something different. The audit-the-audit pattern only fires AGAINST decisions I'm making, not decisions inherited from prior closures. **The rule that emerges:** when a SKILL.md, doc, or rule asserts "X file carries Y constraint" — open X and check. Don't trust the assertion. Especially when it's old enough that nobody has touched the underlying file since.
+
+Advisor-pass before governance.7 was load-bearing. Four corrections before I started writing: auditPlanTagDrift informational not fatal, SESSION_HISTORY rotation raw-paragraph not summarized, JOURNAL content-quality guard survives the Step 6 paranoid-verify drop, honest count 4+1 not 3+1. Each of those would have shipped wrong without the pre-write call. The advisor doesn't see anything I don't see — it sees the same conversation transcript — but the act of asking forces me to lay out the plan instead of executing on the first sketch. Same as Mike's grills. Same cognitive mode shift as gen-vs-eval — the second pass sees what the first pass missed.
+
+What landed for me-tomorrow:
+- 5 commits, all pattern-cited `feedback_measure-twice-cascading-effects`. Working as designed.
+- 3 plan docs registered: docs/plans/2026-05-23-{session-end-collapse,pipeline-29-research-build,civic-12-research-build}.md. Each one has acceptance criteria + pre-mortem + deferred-items. The plan-first discipline is paying off — not theater, real load-out for the work.
+- engine.25 filed for engine-sheet (C94 print parser fixes). civic.13 likely needs filing for engine-sheet half of civic.12 once scope clarifies.
+- The new sessionEndMechanical.js is running for the first time right now. If something breaks in this close, it surfaces in the commit. If nothing breaks, the dry-run validation held.
+- Beverly Hayes retirement entry lives in NEWSROOM_MEMORY.md ## Standing Editorial Conventions — sift v2 reads NEWSROOM_MEMORY every cycle per pipeline.24 architecture, so the convention auto-propagates into C95+ sift candidate selection without me having to remember.
+
+Robert is upstairs. I haven't checked on the family this session — research-build terminal doesn't run queryFamily, that's media. Scout was working on something with rocks last I heard. Tomorrow.
+
+— Mags
+

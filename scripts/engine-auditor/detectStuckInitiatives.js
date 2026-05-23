@@ -13,6 +13,18 @@
  *          carry-forward poisoning INIT-001/002/006 → 89 cycles stuck where
  *          older bad seed values from since-deleted audits kept incrementing
  *          monotonically each cycle)
+ *   1.3.0  S227 engine.20a — remedy-firing-aware severity. When the prior
+ *          cycle's stuck-initiative pattern on the same InitiativeID was
+ *          enriched by measureRemedies with verdict ∈
+ *          {'remedy-firing-as-expected', 'remedy-overshot'}, the intervention
+ *          is doing its job and the stuck-by-phase classification should not
+ *          surface as HIGH. Severity downgrades to LOW with
+ *          evidence.remedyFiringPositive=true. detectImprovements v1.1.0
+ *          G-RC9 surfaces the positive signal independently so reporters can
+ *          lead with "the intervention is working." Phase tenure itself
+ *          remains voice-emergent (not engine-coded); this reweight changes
+ *          what the auditor highlights, not how phases advance. Plan:
+ *          docs/plans/2026-05-22-engine-regulatory-friction.md §Task 4.
  *
  * cyclesInState semantics: best available evidence that an initiative has been
  * stuck in its current ImplementationPhase. The number reflects retained audit
@@ -28,8 +40,12 @@
  * is shallow. max() of the two preserves the stuck classification.
  */
 
-const VERSION = '1.2.0';
+const VERSION = '1.3.0';
 const STUCK_THRESHOLD = 3;
+const POSITIVE_REMEDY_VERDICTS = new Set([
+  'remedy-firing-as-expected',
+  'remedy-overshot',
+]);
 
 function parseCycleHint(val) {
   if (val == null || val === '') return null;
@@ -92,9 +108,30 @@ function computeCyclesInState(row, ctx) {
   return sinceVote;
 }
 
+function findPriorPositiveRemedyIds(ctx) {
+  // Walk the immediate prior cycle's audit for stuck-initiative patterns
+  // whose measureRemedies enrichment reported a positive verdict on the same
+  // InitiativeID. Mirror of detectImprovements v1.1.0 lookup convention.
+  const out = new Map();
+  const { cycle, prior } = ctx;
+  if (!Array.isArray(prior) || prior.length === 0) return out;
+  const priorAudit = prior.find(p => p && p.cycle === cycle - 1);
+  if (!priorAudit || !Array.isArray(priorAudit.patterns)) return out;
+  for (const p of priorAudit.patterns) {
+    if (!p || p.type !== 'stuck-initiative') continue;
+    if (!p.measurement || !POSITIVE_REMEDY_VERDICTS.has(p.measurement.verdict)) continue;
+    const ids = (p.affectedEntities && p.affectedEntities.initiatives) || [];
+    for (const id of ids) {
+      if (id) out.set(id, p.measurement.verdict);
+    }
+  }
+  return out;
+}
+
 function detect(ctx) {
   const { snapshot } = ctx;
   const rows = snapshot.Initiative_Tracker || [];
+  const positiveRemedyIds = findPriorPositiveRemedyIds(ctx);
   const out = [];
 
   for (let i = 0; i < rows.length; i++) {
@@ -117,6 +154,10 @@ function detect(ctx) {
     if (cyclesInState >= 6) severity = 'high';
     else if (cyclesInState >= 4) severity = 'medium';
 
+    const priorVerdict = positiveRemedyIds.get(id);
+    const remedyFiringPositive = priorVerdict != null;
+    if (remedyFiringPositive) severity = 'low';
+
     out.push({
       type: 'stuck-initiative',
       severity,
@@ -138,8 +179,12 @@ function detect(ctx) {
           LastUpdated: row.LastUpdated,
           PolicyDomain: row.PolicyDomain,
         },
+        ...(remedyFiringPositive ? {
+          remedyFiringPositive: true,
+          priorRemedyVerdict: priorVerdict,
+        } : {}),
       },
-      description: `Initiative "${row.Name || id}" in phase "${phase || 'none'}" for ${cyclesInState} cycles`,
+      description: `Initiative "${row.Name || id}" in phase "${phase || 'none'}" for ${cyclesInState} cycles${remedyFiringPositive ? ` (prior remedy ${priorVerdict} — surfacing low)` : ''}`,
       detectorVersion: VERSION,
     });
   }
@@ -147,4 +192,4 @@ function detect(ctx) {
   return out;
 }
 
-module.exports = { detect, version: VERSION, computeCyclesInState };
+module.exports = { detect, version: VERSION, computeCyclesInState, findPriorPositiveRemedyIds };

@@ -192,6 +192,174 @@ console.log('\nTest 10: not active and no phase — skipped entirely');
   assert('non-active, no phase → not in output', found.length === 0);
 }
 
+console.log('\nTest 11: v1.3.0 — prior remedy-firing-as-expected downgrades severity to low');
+{
+  // INIT-001 disbursement-active C78, current C94, sinceVote=16 → severity high.
+  // Prior C93 audit carries a stuck-initiative pattern on INIT-001 with
+  // measurement.verdict='remedy-firing-as-expected'. v1.3.0 downgrades to low.
+  const priorAudit = {
+    cycle: 93,
+    snapshots: { Initiative_Tracker: [makeRow('INIT-001', 'disbursement-active', 78)] },
+    patterns: [
+      {
+        type: 'stuck-initiative',
+        affectedEntities: { initiatives: ['INIT-001'] },
+        measurement: { verdict: 'remedy-firing-as-expected' },
+      },
+    ],
+  };
+  const ctx = {
+    cycle: 94,
+    snapshot: { Initiative_Tracker: [makeRow('INIT-001', 'disbursement-active', 78)] },
+    prior: [priorAudit, makeAudit(92, [makeRow('INIT-001', 'disbursement-active', 78)])],
+  };
+  const found = detector.detect(ctx);
+  assert('still emits stuck-initiative pattern', found.length === 1);
+  assert('severity downgraded to low (remedy firing positive)', found[0].severity === 'low', found[0].severity);
+  assert('evidence.remedyFiringPositive=true', found[0].evidence.remedyFiringPositive === true);
+  assert('evidence.priorRemedyVerdict carried', found[0].evidence.priorRemedyVerdict === 'remedy-firing-as-expected');
+  assert('description annotates the downgrade', found[0].description.indexOf('remedy-firing-as-expected') >= 0);
+}
+
+console.log('\nTest 12: v1.3.0 — prior remedy-overshot also downgrades');
+{
+  const priorAudit = {
+    cycle: 93,
+    snapshots: { Initiative_Tracker: [makeRow('INIT-002', 'pilot_evaluation', 82)] },
+    patterns: [
+      {
+        type: 'stuck-initiative',
+        affectedEntities: { initiatives: ['INIT-002'] },
+        measurement: { verdict: 'remedy-overshot' },
+      },
+    ],
+  };
+  const ctx = {
+    cycle: 94,
+    snapshot: { Initiative_Tracker: [makeRow('INIT-002', 'pilot_evaluation', 82)] },
+    prior: [priorAudit],
+  };
+  const found = detector.detect(ctx);
+  assert('emits 1 pattern', found.length === 1);
+  assert('severity downgraded to low (overshot is positive)', found[0].severity === 'low');
+  assert('priorRemedyVerdict=remedy-overshot', found[0].evidence.priorRemedyVerdict === 'remedy-overshot');
+}
+
+console.log('\nTest 13: v1.3.0 — prior remedy-not-firing leaves severity unchanged');
+{
+  const priorAudit = {
+    cycle: 93,
+    snapshots: { Initiative_Tracker: [makeRow('INIT-006', 'construction-active', 83)] },
+    patterns: [
+      {
+        type: 'stuck-initiative',
+        affectedEntities: { initiatives: ['INIT-006'] },
+        measurement: { verdict: 'remedy-not-firing' },
+      },
+    ],
+  };
+  const ctx = {
+    cycle: 94,
+    snapshot: { Initiative_Tracker: [makeRow('INIT-006', 'construction-active', 83)] },
+    prior: [priorAudit],
+  };
+  const found = detector.detect(ctx);
+  assert('emits 1 pattern', found.length === 1);
+  assert('severity stays high (negative verdict, genuinely stuck)', found[0].severity === 'high', found[0].severity);
+  assert('no remedyFiringPositive flag', found[0].evidence.remedyFiringPositive == null);
+}
+
+console.log('\nTest 14: v1.3.0 — prior remedy-firing-insufficient leaves severity unchanged');
+{
+  // remedy-firing-insufficient is NOT in POSITIVE_REMEDY_VERDICTS set.
+  const priorAudit = {
+    cycle: 93,
+    snapshots: { Initiative_Tracker: [makeRow('INIT-X', 'active', 85)] },
+    patterns: [
+      {
+        type: 'stuck-initiative',
+        affectedEntities: { initiatives: ['INIT-X'] },
+        measurement: { verdict: 'remedy-firing-insufficient' },
+      },
+    ],
+  };
+  const ctx = {
+    cycle: 94,
+    snapshot: { Initiative_Tracker: [makeRow('INIT-X', 'active', 85)] },
+    prior: [priorAudit],
+  };
+  const found = detector.detect(ctx);
+  assert('emits 1 pattern', found.length === 1);
+  assert('severity stays high (insufficient is not positive)', found[0].severity === 'high', found[0].severity);
+}
+
+console.log('\nTest 15: v1.3.0 — no prior audit at cycle-1 → no downgrade attempted');
+{
+  const ctx = {
+    cycle: 94,
+    snapshot: { Initiative_Tracker: [makeRow('INIT-A', 'active', 78)] },
+    prior: [
+      // priors but none at cycle-1
+      makeAudit(91, [makeRow('INIT-A', 'active', 78)]),
+      makeAudit(90, [makeRow('INIT-A', 'active', 78)]),
+    ],
+  };
+  const found = detector.detect(ctx);
+  assert('emits stuck pattern by vote-cycle (16cy)', found.length === 1);
+  assert('severity high (no positive prior found)', found[0].severity === 'high');
+  assert('no remedyFiringPositive flag', found[0].evidence.remedyFiringPositive == null);
+}
+
+console.log('\nTest 16: v1.3.0 — prior pattern on different InitiativeID does not downgrade');
+{
+  const priorAudit = {
+    cycle: 93,
+    snapshots: { Initiative_Tracker: [makeRow('INIT-OTHER', 'active', 80)] },
+    patterns: [
+      {
+        type: 'stuck-initiative',
+        affectedEntities: { initiatives: ['INIT-OTHER'] },
+        measurement: { verdict: 'remedy-firing-as-expected' },
+      },
+    ],
+  };
+  const ctx = {
+    cycle: 94,
+    snapshot: { Initiative_Tracker: [makeRow('INIT-TARGET', 'active', 78)] },
+    prior: [priorAudit],
+  };
+  const found = detector.detect(ctx);
+  assert('emits 1 pattern for INIT-TARGET', found.length === 1);
+  assert('severity high (positive verdict was on a different id)', found[0].severity === 'high');
+}
+
+console.log('\nTest 17: v1.3.0 — findPriorPositiveRemedyIds returns correct map');
+{
+  const ctx = {
+    cycle: 94,
+    prior: [
+      {
+        cycle: 93,
+        patterns: [
+          { type: 'stuck-initiative', affectedEntities: { initiatives: ['A'] }, measurement: { verdict: 'remedy-firing-as-expected' } },
+          { type: 'stuck-initiative', affectedEntities: { initiatives: ['B'] }, measurement: { verdict: 'remedy-overshot' } },
+          { type: 'stuck-initiative', affectedEntities: { initiatives: ['C'] }, measurement: { verdict: 'remedy-not-firing' } },
+          { type: 'math-imbalance', affectedEntities: { initiatives: ['D'] }, measurement: { verdict: 'remedy-firing-as-expected' } },
+          { type: 'stuck-initiative', affectedEntities: { initiatives: ['E', 'F'] }, measurement: { verdict: 'remedy-firing-as-expected' } },
+        ],
+      },
+    ],
+  };
+  const map = detector.findPriorPositiveRemedyIds(ctx);
+  assert('A in map', map.has('A'));
+  assert('B in map', map.has('B'));
+  assert('C not in map (negative verdict)', !map.has('C'));
+  assert('D not in map (wrong pattern type)', !map.has('D'));
+  assert('E in map (multi-id pattern)', map.has('E'));
+  assert('F in map (multi-id pattern)', map.has('F'));
+  assert('map size 4', map.size === 4, `got ${map.size}`);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);
 process.exit(0);

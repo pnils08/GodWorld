@@ -64,7 +64,7 @@ Engine versions, cascade dependencies, and the documentation registry live in `d
 | **Clasp Push** | Deploy ~158 engine files to Apps Script | `/deploy` or `clasp push` |
 | **Web Dashboard** | 40 API endpoints, Express + React, port 3001 | PM2: godworld-dashboard |
 | **Scheduled Agents** | 3 remote agents on Anthropic cloud | `claude.ai/code/scheduled` |
-| **AutoDream** | Background memory consolidation — Gemini 2.5 Pro free tier | Settings: `/root/.claude-mem/settings.json` |
+| **AutoDream** | **DISABLED S228** — redundant with MD persistence + Supermemory + claude-mem observations | `autoDreamEnabled: false` in `~/.claude/settings.json` |
 | **Engine Health** | `/health`, `/ctx-map`, `/deploy`, `/pre-mortem`, `/tech-debt-audit`, `/doc-audit` | See CLAUDE.md |
 | **Hookify** | 5 active rules | `/hookify:list` |
 | **GodWorld MCP** | 10 tools for structured city data | See CLAUDE.md |

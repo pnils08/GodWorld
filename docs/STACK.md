@@ -103,7 +103,7 @@ Phase 40.3 isolation: all GodWorld credentials live OUTSIDE the repo working dir
 | Service | What | Status |
 |---------|------|--------|
 | **Scheduled Remote Agents** | 3 agents on Anthropic cloud: Mara sync (daily 6am), Code review (Mon 6am), Bay-tribune audit (daily 7am) | Active — manage at claude.ai/code/scheduled |
-| **AutoDream** | Background memory consolidation — claude-mem plugin spawns observer sessions on hook events | Enabled S120; summarizer provider **switched to Gemini 2.5 Pro free tier on 2026-04-10 / S141** after Sonnet 4.6 burn (10%/day). Settings: `/root/.claude-mem/settings.json` |
+| **AutoDream** | Background memory consolidation (DISABLED) | **DISABLED S228 2026-05-23** — `autoDreamEnabled: false` in `~/.claude/settings.json`. Lineage: Sonnet 4.6 (S120) → Gemini 2.5 Pro (S141) → DeepSeek/OpenRouter (S228) → off. Redundant given MD persistence layer + Supermemory + claude-mem observations DB. claude-mem daemon stays alive for MCP search. |
 | **Auto Mode** | Classifier-based permissions — activate with `/auto` | Configured S120, rules in project settings |
 | **HTTP Hooks** | SessionStart, Stop, SubagentStart, SubagentStop, FileChanged → dashboard | Active S120 |
 | **Hookify Rules** | 5 rules: fourth-wall-guard, credential-guard, clockmode-media-guard, super-save-misuse, plan-paralysis-guard | Active |

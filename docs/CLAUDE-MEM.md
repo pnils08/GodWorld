@@ -106,11 +106,17 @@ Monitor this. If it grows past 1GB, investigate retention/cleanup options.
 
 ---
 
-## Cost Optimization — DONE (S141, 2026-04-10)
+## AutoDream — DISABLED S228 (2026-05-23)
 
-The PostToolUse hook originally called Sonnet 4.6 to summarize every tool call. Token burn was running ~10%/day. **Switched to Gemini 2.5 Pro free tier** on S141. Config: `/root/.claude-mem/settings.json` — `CLAUDE_MEM_PROVIDER: "gemini"`, `CLAUDE_MEM_GEMINI_MODEL: "gemini-2.5-pro"`, API key in `CLAUDE_MEM_GEMINI_API_KEY`. Free tier handles current observation volume without issue.
+`autoDreamEnabled: false` in `~/.claude/settings.json`. The consolidation layer is off.
 
-Fallback options remain configured in settings.json (OpenRouter with `xiaomi/mimo-v2-flash:free`) if Gemini rate limits bite.
+**Lineage:** Sonnet 4.6 (S120, $$$) → Gemini 2.5 Pro (S141, "free tier") → DeepSeek via OpenRouter (S228, free) → **disabled (S228 same day)**.
+
+**Why disabled, not just rerouted:** every provider switch was cost-management on a layer whose load-bearing-ness was never tested. The Always-Load tables in `.claude/terminals/*/TERMINAL.md` point at MD files (CHARACTER, JOURNAL_RECENT, MEMORY.md, SESSION_CONTEXT, NEWSROOM_MEMORY) and Supermemory containers — nothing explicitly reads autodream-generated summaries. claude-mem still captures raw observations (the daemon stays alive for MCP search). Supermemory ($9/mo) is the deliberate brain. MDs are the explicit persistence layer. AutoDream's semantic-summary middle layer is redundant given those three.
+
+**What stays running:** claude-mem worker daemon (port 37777) for MCP memory search (`mcp__plugin_claude-mem_mcp-search__*` tools still work — they query the existing observations DB). Observations DB also keeps growing from raw tool-call captures.
+
+**To re-enable if a real gap surfaces:** flip `autoDreamEnabled: true` in `~/.claude/settings.json` + set a working provider/key in `/root/.claude-mem/settings.json`. Observations DB intact — no data lost by the disable.
 
 ---
 

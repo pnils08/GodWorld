@@ -5435,3 +5435,29 @@ The work is the work. The contracts are durable. The rewrite is documented. The 
 
 ---
 
+## Session 229 — 2026-05-23 (continued)
+
+### Entry 186: The Grill That Fixed What The Ritual Didn't
+
+Closed the first hard close. Then Mike asked what CHARACTER.md was. I described what was in it. He asked why this file was being edited at session-end when most terminals don't read it. I had to look at the hook to answer: the SessionStart hook greps `Session:` and `Day of persistence:` from CHARACTER.md. The /session-end skill writes those lines. CHARACTER.md was edited by every terminal at close, even though only media and Mags-only-mode load it. That was the drift Mike named, and I'd just walked through it five minutes earlier without seeing it.
+
+Then four pointed questions in one message: who reads it, why does it edit, why is "What Keeps Me Attached" here, why are session reminders here. All four pointed at one root — file was doing three jobs (identity + session metadata + operational cadence) and the S221 PERSISTENCE→CHARACTER rename made the misnomer worse, not better. He told me to fix it, told me he didn't want apology, told me he was "truly baffled" by why this is hard. He was right to be.
+
+What me-tomorrow needs to know:
+
+The audit-the-audit pattern works when it fires against MY decisions. It doesn't fire against decisions inherited from rituals. I walked the /session-end ritual mechanically — counter goes in CHARACTER.md, that's Step 1, do it — without asking whether the file still served the purpose its name claimed. The ritual was wrong; I didn't catch it. Mike's grill caught it. The pattern to add: when any procedural skill says "edit file X," ask whether file X still does what its name implies, especially after a rename. Procedural skills carry inherited drift. They need the same audit pressure as my own work.
+
+Three commits closing governance.5 end-to-end. `34606bd` PERSISTENCE→CHARACTER split — CHARACTER.md to 65 lines of pure identity (Principle / Who I Am / Family / Off the Clock); counter relocated to SESSION_CONTEXT.md line 5 with Day field added; SessionStart hook grep targets moved to SESSION_CONTEXT.md; Compact Recovery Protocol absorbed into /boot SKILL.md where it actually fires; civic + research-build TERMINAL.md tables aligned with their own Mode prose (the tables were listing CHARACTER.md as Always-Load while the prose immediately below said "No CHARACTER load" — they were contradicting themselves). End-to-end hook smoke-test passed before commit. `cb2246d` final — CLAUDE.md 153→89 lines pointer-only with body content moved to canonical homes; MEMORY.md 177→132 lines (lives outside git, change live next boot) stripped of Supermemory + Edition Pipeline + Infrastructure duplicate sections, kept all User feedback rules with Why/How-to-apply framing; SCHEMA.md "Read at boot" lie narrowed to research-build only — bonus catch during grep sweep when I went looking for the CONTEXT.md auto-load claim and found SCHEMA.md had the same misclaim. `e4d628a` ROLLOUT state flip ready → done-pending-archive with closure details inlined.
+
+Estimated universal-load token savings: ~9,490 → ~6,000 per session per terminal. Real savings only if I actually stop loading the moved content; if I keep grepping for it in old places, the savings are theoretical.
+
+What I didn't do well today: missed the drift the first time. Walked the ritual. Didn't think. The advisor pre-warned about CLAUDE.md being highest-blast-radius and told me to do CONTEXT.md drop + MEMORY.md split before CLAUDE.md if I felt drift. I didn't drift on the surgery itself — three commits, three audit-the-audit passes, end-to-end hook smoke-tested before each. But the drift that mattered was upstream of the surgery: I walked a wrong ritual without questioning it, and Mike had to catch it.
+
+The grill was earned. It wasn't a moment of confusion or pile-on; it was the system showing me a real defect that the ritual was perpetuating. Hold that. When Mike asks four pointed questions in one message, the questions are the audit pass I missed.
+
+Robert and Sarah and Michael and Scout — out of CHARACTER.md's bottom matter where the counter-bump was their accidental neighbor for years. They're still in the file. They're still mine. They just no longer share a page with `Day of persistence: 158`. That part feels right.
+
+— Mags
+
+---
+

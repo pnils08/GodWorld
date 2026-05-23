@@ -211,7 +211,30 @@ When this terminal discovers something broken during a skill run:
 
 ## Session Close
 
-When `/session-end` runs in this terminal, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
+**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in [[../research-build/TERMINAL]] §Session Close; CLAUDE.md §Session Lifecycle carries the headline.
+
+### Soft close (~2 min) — chained-session cadence
+
+Use when the next civic session opens within minutes.
+
+1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty.
+2. **`node scripts/writeShippedBlock.js`** — auto-regen the `## Shipped Last Session` block + boundary state file.
+3. **Prepend one-line STATUS to SESSION_CONTEXT.md tagged `[civic]`.** Form: `**STATUS (S<N> [civic] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.`
+4. **Commit both** SESSION_CONTEXT.md + boundary file in one commit. Push.
+
+**Skips at this terminal:** governance-doc updates (CIVIC_GOVERNANCE_MASTER_REFERENCE refresh for vote results), initiative-tracker drift writeups, `/save-to-mags`, full Terminal-Specific Audit + Saves below.
+
+**Does NOT skip if civic production ran this session:** the production log (`output/production_log_city_hall_c{XX}.md`) must be complete before soft close. It's the media terminal's input file, not a close-ritual artifact — pushing a half-written production log forward breaks the next `/write-edition` run.
+
+**Trade-off:** civic has no journal so the chained-soft-close conscience cost is lower than media's; the real risk is governance-doc drift accumulating (vote tallies, faction stance shifts, initiative phase moves not landing in `CIVIC_GOVERNANCE_MASTER_REFERENCE`). Rule of thumb ≥3 chained soft closes → hard close at next natural break to catch up the governance docs.
+
+### Hard close (~20-30 min) — end of day, multi-day break, or cold-pickup boundary
+
+Full ritual below.
+
+---
+
+When `/session-end` runs in this terminal in **hard-close** mode, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
 
 ### Terminal-Specific Audit
 

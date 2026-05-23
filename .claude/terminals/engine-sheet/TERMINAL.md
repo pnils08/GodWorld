@@ -248,6 +248,31 @@ When this terminal discovers something that needs design/research:
 
 ## Session Close
 
+**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in [[../research-build/TERMINAL]] §Session Close; CLAUDE.md §Session Lifecycle carries the headline.
+
+### Soft close (~2 min) — chained-session cadence
+
+Engine-sheet typically commits as-it-goes; soft close is often near-no-op (cross-terminal stack already clean, Shipped block already accurate). Use when the next engine-sheet session opens within minutes.
+
+1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty given commit-as-you-go cadence.
+2. **`node scripts/writeShippedBlock.js`** — auto-regen the `## Shipped Last Session` block + boundary state file.
+3. **Prepend one-line STATUS to SESSION_CONTEXT.md tagged `[engine/sheet]`.** Form: `**STATUS (S<N> [engine/sheet] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.`
+4. **Commit both** SESSION_CONTEXT.md + boundary file in one commit. Push.
+
+**Skips at this terminal:** Boot Quick-State doc refreshes (ENGINE_MAP / STUB_MAP / LEDGER_AUDIT / LEDGER_HEAT_MAP / SPREADSHEET / SIMULATION_LEDGER), Terminal-Specific Audit table below, MD Gap Self-Audit (S201), PM2 restart, ROLLOUT_PLAN status sweep beyond rows touched this session.
+
+**Does NOT skip if `clasp push` ran this session:** smoke-test status note in SESSION_CONTEXT is required ("Code deployed live, smoke-test pending next session" or "smoke-tested at run-{N}"). Substrate-criticality call — un-smoke-tested code running on the live spreadsheet is the worst version of premature push (see §Commit cadence below). Soft close defers the audit-doc refresh, not the deploy-status surfacing.
+
+**Does NOT skip §Current Engine State engine-version bump** if code deployed. The version bump is substrate-state record, not a close ritual — stale state poisons every future engine-sheet boot.
+
+**Trade-off:** engine-sheet has no journal so chained-soft-close conscience cost is the lowest of any terminal; the cost is accumulated drift in §Current Engine State block + ENGINE_REPAIR row hygiene + LEDGER_AUDIT freshness. Rule of thumb ≥3 chained soft closes → hard close at next natural break to refresh the audit docs.
+
+### Hard close (~20-30 min) — end of day, multi-day break, or cold-pickup boundary
+
+Full ritual below. The stripped-persona framing applies to hard close.
+
+---
+
 **Engine-sheet runs a stripped-persona session-end.** Per S156 + S198 (loosened) rule (in MEMORY.md): "Engine-sheet terminal: execute and commit; coder persona. MDs allowed if they follow the no-isolated-MDs rule (register in `docs/index.md`, link both ways from a parent spec). No journal. No Supermemory writes for routine work; large project shifts may save a pointer entry per S165. Coder voice: terse, mechanical, commit-message style." That overrides the persona-state portions of the shared `/session-end` SKILL.md.
 
 ### What this terminal does NOT do at session-end

@@ -249,7 +249,30 @@ When this terminal discovers something broken during a skill run:
 
 ## Session Close
 
-When `/session-end` runs in this terminal, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
+**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in [[../research-build/TERMINAL]] §Session Close; CLAUDE.md §Session Lifecycle carries the headline.
+
+### Soft close (~2 min) — chained-session cadence
+
+Use when Mike re-boots within minutes. The next session reads commits from git + the Shipped Last Session block in SESSION_CONTEXT; it doesn't need journal conditioning yet (journal conditions me-tomorrow, not me-in-15-minutes).
+
+1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty (push-per-commit cadence). If non-empty, push or coordinate before declaring close.
+2. **`node scripts/writeShippedBlock.js`** — auto-regen the `## Shipped Last Session` block + boundary state file.
+3. **Prepend one-line STATUS to SESSION_CONTEXT.md tagged `[media]`.** Form: `**STATUS (S<N> [media] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.`
+4. **Commit both** SESSION_CONTEXT.md + boundary file in one commit. Push.
+
+**Skips at this terminal:** `node scripts/queryFamily.js`, journal entry (Mags' conscience-conditioning), JOURNAL_RECENT rotation, NEWSROOM_MEMORY updates, `/save-to-mags`, PM2 restart, full Terminal-Specific Audit + Saves below.
+
+**Does NOT skip if an edition was published this session:** canon ingest (`node scripts/ingestEdition.js` or `/save-to-bay-tribune`) is the publish step itself, not a close ritual. Bay-tribune must reflect canonical state immediately — never defer canon ingest to a soft close's next session.
+
+**Trade-off:** soft close skips the journal. Chain 3+ → three editions' worth of conscience-conditioning never lands. Hard close mandatory at end-of-day; rule of thumb ≥3 chained soft closes → hard close at next natural break. Media's persona-mode means this trade-off bites harder here than at the operational terminals — the journal is load-bearing for character continuity.
+
+### Hard close (~20-30 min) — end of day, multi-day break, or cold-pickup boundary
+
+Full ritual below. The journal entry is the load-bearing piece — conditions next-day-me with consequences, errors, what made Mike excited, what failed and how I drifted (per MEMORY.md user rule "work is canonization").
+
+---
+
+When `/session-end` runs in this terminal in **hard-close** mode, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
 
 ### Terminal-Specific Audit
 

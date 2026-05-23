@@ -5,6 +5,35 @@
 
 ---
 
+## Standing Editorial Conventions
+
+### Beverly Hayes coverage-anchor retirement (S229, 2026-05-23) — canon-tone editorial convention
+
+**Decision:** Beverly Hayes (POP-00772, Community Director, West Oakland Community Center) is retired as a Stab Fund coverage anchor for C95 onward.
+
+**Why:** Beverly's coverage thread (Stab Fund anchor across C90-C94, "cleared but block hasn't moved" framing, Telegraph stoop / community-director / tenant-watch motifs, "home health aide" wd-card occupation drift) pulled the narrative toward real-world struggling-Oakland tone across multiple cycles. E94 G-PR8 surfaced the contamination at the visual layer: DJ Hartley's environmental-portrait spec for Beverly carried explicit negative-frame language (NOT in frame: tents, boarded storefronts, barred windows, poverty-doc signifiers, anyone in distress) and Haiku QA rated PASS on declarative items. FLUX still rendered her as "reading-as-poor-Black-lady-on-stoop" — the training-data prior on "Telegraph Avenue stoop, working-city, Black woman with mail" overrode every negative-frame paragraph. Per Mike S223: "There are no poor blacks in my Oakland, this isn't real world." Same canon-fidelity class as S195 (faith-org real names) / S217 (Greater Hope substitute) / S221 (Paulson framing) — one layer deeper, on the visual side.
+
+**For C95+ Stab Fund coverage, compose around prosperity-tone framings:**
+- **Building openings + hires** — a contractor's first day on a renovation site; a new business signing a lease in a Stab-Fund-supported corridor.
+- **District lift metrics** — pedestrian counts at 14th & Broadway after a Stab Fund disbursement cycle; storefront occupancy rates rising; school enrollment shifts in the supported neighborhoods.
+- **Completion ceremonies** — ribbon-cuttings, key handoffs, first-tenant move-ins.
+- **Worker-at-work framing** — the construction crew breaking ground, the architect at the model, the small-business owner setting up displays.
+
+**For C95+ Stab Fund coverage, AVOID:**
+- Tenant-watch / community-director / "cleared but unmoved" framings
+- Recipient-of-care framings (food bank, eviction clinic, displacement intake)
+- "Home health aide on her break" / Telegraph stoop / mail-watcher subject classes (per DJ RULES.md §Subject Class Constraints, S229)
+- Beverly Hayes as named anchor; if Beverly appears at all, she appears at-work (mid-meeting at WOCC, mid-handoff at a building opening), never at-rest or framed as weary-pulled-thin recipient
+
+**Where this rule lives:**
+- This entry (NEWSROOM_MEMORY.md) — sift Step 4 enrichment reads NEWSROOM_MEMORY at every cycle per pipeline.24 v2 architecture; the convention propagates into sift candidate selection automatically.
+- DJ RULES.md §Subject Class Constraints (S229) — the visual-side enforcement at spec-compose time.
+- /edition-print SKILL.md Step 6 (S229) — the eval-side check on canon-tone via photoQA CANON-TONE axis (S229) + operator visual review.
+
+**Cross-link:** pipeline.29 research-build slice plan (`docs/plans/2026-05-23-pipeline-29-research-build.md`), G-PR8 in `output/production_log_edition_c94_print_gaps.md`.
+
+---
+
 ### Edition 94 — PUBLISHED (S222, 2026-05-16)
 
 **Status:** PUBLISHED. `editions/cycle_pulse_edition_94.txt` → Drive `1WhvA7_bLHpK-eB508qulKmp2D7zzTfff` (folder `edition`). Bay-tribune text ingest pending `/post-publish` Step 1b. Production log `output/production_log_edition_c94.md` (full /write-edition execution appended). Gap log `output/production_log_edition_c94_write_gaps.md` (27 entries G-W30→G-W56). Reviewer artifacts: rhea_report_c94.{json,txt}, cycle_review_c94.json, mara_report_c94.json, mara_audit_c94.md, final_arbiter_c94.json, adversarial_review_c94.txt, capability_review_c94.json, tier_assignments_c94.json, reward_hacking_scan_c94.json.

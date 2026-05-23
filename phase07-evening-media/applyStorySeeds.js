@@ -1,9 +1,20 @@
 /**
  * ============================================================================
- * V3.12 STORY SEEDS ENGINE — ENGINE B WIRE-UP (multi-axis byline ranker)
+ * V3.13 STORY SEEDS ENGINE — Byline candidate-pool filter (G-S14)
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
+ *
+ * v3.13 Enhancements (S225 — Engine B candidate-pool filter per ROLLOUT engine.21):
+ * - bylineState.roster now filtered via utilities/bylineEngine.js
+ *   `filterRosterForByline_` to exclude non-reporter roles (Editor-in-Chief,
+ *   Senior Photographer, Photo Assistant, Copy Chief). Editor's seat composes
+ *   the load-out, not byline assignments; photo desk produces images, not
+ *   articles. C94 byline_shadow_log showed Mags-EIC routed for FP1 + QT1 and
+ *   DJ Hartley routed for N1 — all suppressed at candidate source.
+ * - Editorial design preserved in bylineEngine.FORMAT_FIT tables — Mags's
+ *   `supplemental: 4` row documents historical column-writing weight even
+ *   though she's no longer a routed byline candidate.
  *
  * v3.12 Enhancements (S206 — Engine B wire-up per routing-foundation plan T3.6):
  * - makeSeed now ranks every roster journalist via utilities/bylineEngine.js

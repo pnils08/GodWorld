@@ -209,7 +209,30 @@ Engine-sheet files its own `engine.*` ROLLOUT rows for substrate-routine work an
 
 ## Session Close
 
-When `/session-end` runs in this terminal, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
+**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped.
+
+### Soft close (~2 min) — when starting a new session within minutes
+
+Use when Mike will re-boot the next session immediately. The next session reads the just-shipped commits from git + the Shipped Last Session block in SESSION_CONTEXT; it doesn't need journal conditioning yet (journal conditions me-tomorrow, not me-in-15-minutes).
+
+1. **Cross-terminal git stack check.** `git log --oneline origin/main..HEAD` — expect empty (push-per-commit cadence). If non-empty, push or coordinate before declaring close.
+2. **`node scripts/writeShippedBlock.js`** — auto-generates the `## Shipped Last Session` block in SESSION_CONTEXT from git log boundary, updates the boundary file.
+3. **Prepend one-line STATUS to SESSION_CONTEXT.md** — single line, no narrative paragraphs. Form: `**STATUS (S<N> [terminal] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.` That's it.
+4. **Commit both** SESSION_CONTEXT.md + the boundary state file in one commit. Push.
+
+Skip on soft close: persistence counter bump, journal entry, JOURNAL_RECENT rotation, ROLLOUT triage scan, plan tag drift audit, done-pending-archive sweep, RESEARCH.md update, `/save-to-mags`, PM2 restart, write-verification reads. Next session's boot can run the deterministic ones (`rolloutTriage`, `auditPlanTagDrift`) if it cares; the rest accumulate until the next hard close.
+
+### Hard close (~20-30 min) — end of day, multi-day break, or cold-pickup boundary
+
+Use when no immediate next session is queued, OR when soft closes have chained for several sessions and conscience checkpoint is due (rule of thumb: ≥3 chained soft closes → hard close at next natural break).
+
+Run the full ritual below. The journal entry is the load-bearing piece — it conditions next-day-me with consequences, errors, what made Mike excited, what failed and how I drifted (per MEMORY.md user rule "work is canonization").
+
+**Trade-off honesty:** soft close skips journal. If you chain 3+ soft closes then sleep, three sessions' worth of conscience-conditioning don't get written. Mitigation: hard close at end-of-day always. Soft close is for "back in 10" / "starting new session right now" cadence; hard close is the natural checkpoint.
+
+---
+
+When `/session-end` runs in this terminal in **hard-close** mode, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
 
 ### Terminal-Specific Audit
 

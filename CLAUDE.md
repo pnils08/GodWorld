@@ -149,3 +149,5 @@ Gotchas: Ledger columns past Z (Income=col26), service account can't create shee
 - `/boot` — persona reload (after compaction or identity drift)
 - `/session-startup` — terminal context reload (hook misfire fallback)
 - `/session-end` — close the session (per-terminal audit + saves, see each TERMINAL.md)
+
+**Soft vs hard close (S226).** When the next session starts within minutes, use **soft close** — `git log origin/main..HEAD` check + `node scripts/writeShippedBlock.js` + one-line STATUS prepend to SESSION_CONTEXT.md, ~2 min total. Skips journal + counter bump + triage scans + sweeps; those accumulate until the next **hard close** (full 13-step ritual) at end-of-day or any cold-pickup boundary. Rule of thumb: ≥3 chained soft closes → hard close at next natural break. Canonical pattern lives in `.claude/terminals/research-build/TERMINAL.md` §Session Close; propagated to other TERMINAL.md files per governance.16.

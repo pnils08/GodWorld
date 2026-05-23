@@ -2,7 +2,9 @@
 
 **Read this file at the start of every session.**
 
-Last Updated: 2026-05-22 | Engine: v3.3 | Cycle: 94 | Session: 225 | Edition: **E94 PUBLISHED**
+Last Updated: 2026-05-23 | Engine: v3.3 | Cycle: 94 | Session: 226 | Edition: **E94 PUBLISHED**
+
+**STATUS (S225/S226 research-build — soft close, chaining to S227):** 4 research-build commits this session (`c126caf` governance.13 Phase 2 + `6db234e` C15 correction + `1dda8f6` pipeline.23 + `4e3198b` pipeline.27) plus this commit which both files the S226 soft-close pattern (CLAUDE.md §Session Lifecycle + research-build TERMINAL.md §Session Close + governance.16 ROLLOUT row for propagation to other 3 TERMINAL.md files) and demonstrates it (this STATUS line + auto-generated Shipped block via `node scripts/writeShippedBlock.js`). Engine-sheet ran in parallel: `bc7b900` + `1f84ae4` + `7bec4a8` (engine.21a + engine.22) + `9469ed3` (rotation) + `a3ffd13` (engine.23) + `ffc4e26` (engine.19). 5 ROLLOUT rows closed end-to-end across both terminals (governance.13 + engine.21 + engine.22 + engine.23 + pipeline.23 + pipeline.27 = 6 actually, plus engine.19 from engine-sheet final push). See Shipped block + commit bodies for detail; this STATUS is intentionally minimal per soft-close pattern (no narrative paragraphs; the work product lives in commits + ROLLOUT). Next session opens with: governance.16 propagation (3 TERMINAL.md edits) + the queue (governance.10 sweep, governance.15 skill-check, pipeline.26 format contracts, civic.12, canon.3, pipeline.24 sift v2, pipeline.29 DJ/PDF).
 
 **STATUS (S225 engine-sheet — engine.21a byline filter + engine.22 truesource resolver + engine.23 filed):** [engine/sheet, close — 3 commits + clasp push]. C94 gap-log triage execution pass — picked up engine.21 + engine.22 from S225 research-build's Phase 2 row-filing earlier today (`c126caf`). **engine.22 shipped** (`1f84ae4`): `scripts/ingestPlayerTrueSource.js` gained `normalizeNameKey()` helper applied symmetrically to ledger-map insertion + resolver query — diacritics-strip + lowercase + strip non-alphanumeric non-space + collapse whitespace; replaces two-tier exact+stripped map. Empirical against live Simulation_Ledger (842 keys): `J.R. Rosado` → POP-00054 (matched gap-log claim), `JR Rosado` → POP-00054, diacritic regression-safe (`José Colón` ↔ `Jose Colon` → POP-00599), no false-positive on `NotARealPlayer Xyz`. Node-only, no clasp push. **engine.21a shipped** (`7bec4a8`): `utilities/bylineEngine.js` gained `BYLINE_INELIGIBLE_ROLES` table (Editor-in-Chief / Senior Photographer / Photo Assistant / Copy Chief) + `filterRosterForByline_(roster)` helper; `phase07-evening-media/applyStorySeeds.js` v3.12 → v3.13 applies filter at `bylineState.roster` construction. Editorial weight preserved in FORMAT_FIT tables — Mags's `supplemental: 4` row documents historical column-writing role even though she's no longer a routed byline candidate. Empirical via vm-sandboxed rosterLookup + bylineEngine: 28 raw → 24 byline-eligible (Mags Corliss + DJ Hartley + Arman Gutiérrez + Rhea Morgan dropped; Anthony + Maria Keen retained). bylineEngine self-tests 154/154 (was 144 pre-add). Clasp push confirmed (`Script is already up to date` on re-check); filter live on next `applyStorySeeds_` cycle run. **engine.23 filed** in `bc7b900` housekeeping: empirical decomposition of `output/byline_shadow_log_c94.json` showed Maria-Keen over-weight (S1 Kelley In Focus + S2 Let-Walks Coming + QT2 Rockridge Autumn Walk) is driven by THEME axis (theme:8) on upstream-COMMUNITY-tagged sports/scoreboard seeds, NOT format-fit weighting (format:1 across all three). COMMUNITY keywords `[faith, family, neighborhood, rhythm]` match Maria's signature themes. Original gap-log diagnosis of "beat-domain vs format-fit weighting" inverted — byline engine is doing what its inputs say; root cause is upstream seed-domain assignment in `applyStorySeeds.js makeSeed`. New ROLLOUT row `engine.23 ready` filed engine-sheet. **ROLLOUT bookkeeping:** engine.21 + engine.22 flipped done-pending-archive with empirical-verification details inline; engine.23 filed ready; both rows + new row sweep to ROLLOUT_ARCHIVE in next governance.10-class bookkeeping pass. **Pattern citations:** engine.22 + engine.21a commits carry `feedback_measure-twice-cascading-effects` (algorithm-verified-before-edit via Node unit test, integration-test-after-edit via vm-sandbox); engine.23 filing carries `feedback_filing-isnt-fixing` (in-session diagnosis filed as actionable engine-sheet row, not parked). **Cross-terminal git stack:** clean — 3 engine-sheet commits to origin/main, no other terminal in play. S222 media residue (NEWSROOM_MEMORY, media/*.md, edition_scores.json) + `.claude/scheduled_tasks.lock` untouched per cross-terminal-git rule. **Smoke-test status:** engine.22 live immediately for next `ingestPlayerTrueSource.js` run; engine.21a filter effect manifests on next applyStorySeeds_ cycle run (clasp-deployed, not yet exercised in a real cycle).
 
@@ -32,15 +34,16 @@ For per-session detail older than the most recent 5, see `docs/mags-corliss/SESS
 
 ---
 
-## Shipped Last Session (S225)
+## Shipped Last Session (S226)
 
 *Auto-generated by `scripts/writeShippedBlock.js` at session-end. Source: `git log`. ROLLOUT_PLAN.md is canonical for what these commits accomplished.*
 
-- `bc7b900` S225 [engine/sheet] engine.21 + engine.22 → done-pending-archive; engine.23 filed (seed-domain mis-tagging follow-up)
-- `7bec4a8` S225 [engine/sheet] engine.21a — Engine B byline candidate-pool filter (G-S14 part 1)
-- `1f84ae4` S225 [engine/sheet] engine.22 — truesource POPID resolver name normalization (G-P33)
-- `c126caf` S225 [research-build] governance.13 Phase 2 — C94 triage rows filed + 2 plans drafted + 9 gap-logs stamped
-- `750af46` S224 [research-build] session-end persistence rotation
+- `ffc4e26` S226 [engine/sheet] engine.19 — auditor + detector calibration sweep (9 gap items)
+- `4e3198b` S225 [research-build] pipeline.27 — reviewer-lane schema reconciliation (Rhea + Mara)
+- `a3ffd13` S226 [engine/sheet] engine.23 — applyStorySeeds.js v3.14 thread-storyline domain routing fix
+- `1dda8f6` S225 [research-build] pipeline.23 — staleness gate retired + production_log path canonicalized
+- `6db234e` S225 [research-build] triage §3 C15 empirical correction — beat-domain wrong diagnosis, real cause engine.23
+- `9469ed3` S225 [engine/sheet] session-end persistence rotation
 
 ---
 

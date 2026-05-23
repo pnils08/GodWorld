@@ -1,9 +1,30 @@
 /**
  * ============================================================================
- * V3.13 STORY SEEDS ENGINE — Byline candidate-pool filter (G-S14)
+ * V3.14 STORY SEEDS ENGINE — Thread-storyline domain routing fix (engine.23)
  * ============================================================================
  *
  * Produces newsroom-ready narrative seeds with GodWorld Calendar integration.
+ *
+ * v3.14 Enhancements (S226 — Upstream seed-domain mis-tagging fix per ROLLOUT engine.23):
+ * - STORYLINE_TYPE_DOMAINS['thread'] re-routed COMMUNITY → GENERAL. Empirical
+ *   audit of live Storyline_Tracker (30 thread-type rows): 23/30 carry
+ *   sports/civic/culture/business/health/infrastructure content; only 4 are
+ *   legitimately COMMUNITY/FAITH. The 'thread' label is a narrative-shape tag
+ *   (recurring loose thread) not a content-domain tag, so a fixed COMMUNITY
+ *   mapping over-weighted Maria Keen's signature themes [Faith, Family,
+ *   Neighborhood rhythm, ...] via bylineEngine.themeAxis_ +3 +3 +1 +1 = 8 on
+ *   every dormant thread regardless of content. C94 byline_shadow_log entries
+ *   S1 Kelley + S2 Let-Walks + QT2 Rockridge + C2 West Oakland all scored
+ *   theme:8 for Maria Keen tracing back to thread-typed storylines. Routing
+ *   threads to GENERAL bypasses themeAxis (Fork 1 = B amendment, line 106 of
+ *   bylineEngine.js) and lets the canonical S206-locked FORMAT_FIT table
+ *   decide. Aligns 'thread' with 'arc' + 'developing' as heterogeneous
+ *   storyline shapes that all default to GENERAL.
+ * - Side effects audited: priorityEngine coverage-state shifts COMMUNITY →
+ *   GENERAL bucket (correct — threads aren't really one domain's coverage);
+ *   compileHandoff dedup key shifts; generateAngle_ drops the LIFESTYLE desk
+ *   hint for thread follow-ups (advisory only, sift decides desk routing);
+ *   bylineEngine self-tests have no COMMUNITY case so no test changes needed.
  *
  * v3.13 Enhancements (S225 — Engine B candidate-pool filter per ROLLOUT engine.21):
  * - bylineState.roster now filtered via utilities/bylineEngine.js
@@ -576,12 +597,24 @@ function applyStorySeeds_(ctx) {
   }
 
   /**
-   * Map storyline type to domain
+   * Map storyline type to domain.
+   *
+   * 'thread' was 'COMMUNITY' through v3.13 — empirical audit S226 (engine.23)
+   * found StorylineType is overloaded: 'sports' / 'question' / 'mystery' /
+   * 'seasonal' / 'festival' carry content-domain semantics, but 'thread' /
+   * 'arc' / 'developing' label narrative shape and span heterogeneous content.
+   * Of 30 live thread-typed rows: 23 sports/civic/culture/business/health/
+   * infrastructure, 4 legitimately community/faith, 3 partial fits. Forcing
+   * threads to COMMUNITY hit Maria Keen's signature themes for theme:8 on
+   * every dormant thread regardless of content; threads now route GENERAL
+   * (themeAxis_ short-circuits to 0 on GENERAL per bylineEngine.js:106) and
+   * format axis decides byline. See scripts/auditStorylineDomainRouting.js
+   * for the regression check.
    */
   var STORYLINE_TYPE_DOMAINS = {
     'arc': 'GENERAL',
     'question': 'CIVIC',
-    'thread': 'COMMUNITY',
+    'thread': 'GENERAL',
     'mystery': 'CIVIC',
     'developing': 'GENERAL',
     'seasonal': 'CULTURE',

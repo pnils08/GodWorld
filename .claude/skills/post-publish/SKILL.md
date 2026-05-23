@@ -1,8 +1,8 @@
 ---
 name: post-publish
 description: Close the feedback loop. Canonize to Supermemory, update world-data, write ratings to sheets, grade reporters, update criteria files, update newsroom memory. Type-aware — edition, interview, supplemental, dispatch all converge here.
-version: "1.6"
-updated: 2026-05-03
+version: "1.7"
+updated: 2026-05-23
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -37,7 +37,7 @@ Flags:
 
 | Step | edition | interview | supplemental | dispatch |
 |------|---------|-----------|--------------|----------|
-| 0 staleness gate | ✓ | ✓ | ✓ | ✓ |
+| 0 staleness gate | — | — | — | — | (RETIRED S225 — see §Step 0 below)
 | 1a wiki ingest | ✓ | ✓ | ✓ | ✓ |
 | 1b text ingest | ✓ | ✓ (article + transcript) | ✓ | ✓ |
 | 2a citizen cards | ✓ | ✓ | ✓ | ✓ |
@@ -86,40 +86,11 @@ Wall-time saving on edition runs: ~60-90s (Step 2a citizen cards is the slowest 
 
 ## Steps
 
-### Step 0: Pre-flight Staleness Gate (S215)
+### Step 0: Pre-flight Staleness Gate — RETIRED S225 (pipeline.23, closes G-P28)
 
-```bash
-node scripts/checkPostPublishStaleness.js --cycle <XX>
-```
+**Retired.** The S215 staleness gate modeled the wrong dependency direction. `scripts/checkPostPublishStaleness.js` compared `world_summary` + `engine_audit` mtimes against the `/city-hall` production log, but `world_summary` is INPUT to `/city-hall` (built before it), not output — so the gate fired STALE every cycle by design flaw (G-P28, G-S11). The advisory line "Re-run /build-world-summary before continuing" misled the operator into spurious rebuilds; Mike spent cycles escalating "should we rebuild?" with no real signal underneath.
 
-Compares mtimes of derivative artifacts (`output/world_summary_c<XX>.md`, `output/engine_audit_c<XX>.json`) against the authoritative baseline (`output/production_log_city_hall_c<XX>.md`). If either derivative is older than the city-hall log, that derivative was built BEFORE /city-hall ran — downstream skills (sift, post-publish, edition-print) would consume a pre-civic snapshot and the cycle's civic decisions would silently drop from desk-agent inputs.
-
-**Closes pipeline.14a (S215).** Triggered by C93: world_summary built May 1, /city-hall ran days later, edition consumed stale summary, five gap-log entries surfaced the same sequencing class (G-S1 / G-S5 / G-P3 / G-PR3 / G-7).
-
-**Behavior:** advisory only — prints `STALE: <artifact>_c<XX> built BEFORE /city-hall ran — civic decisions may not be reflected. Re-run /build-world-summary before continuing.` per stale artifact and exits 0. No blocking. The rebuild trigger is a separate workflow (pipeline.14b, research-build).
-
-**Reaction when stale — explicit rebuild paths (S215, closes pipeline.14b):**
-
-Per stale artifact, run the corresponding rebuild skill BEFORE continuing /post-publish:
-
-| Stale artifact | Rebuild skill | Invocation |
-|----------------|---------------|------------|
-| `output/world_summary_c<XX>.md` | `/build-world-summary` | `/build-world-summary <XX>` |
-| `output/engine_audit_c<XX>.json` | `/engine-review` | `/engine-review <XX>` |
-| Both stale | both, in order | `/build-world-summary <XX>` THEN `/engine-review <XX>` (world summary feeds engine review framing per /sift Step 1 line 35) |
-
-After rebuild, re-invoke `/post-publish` at Step 0. The staleness gate should now report silent (fresh) and the skill continues from Step 1. If the staleness gate STILL reports STALE after rebuild, the rebuild skill itself failed (file wasn't written, exit code non-zero, or path mismatch) — investigate before continuing; do NOT skip with the intentional-stale carve-out unless you can name the reason.
-
-**Intentional-stale carve-out:** skip rebuild ONLY when:
-- The cycle had no `/city-hall` run by design (no civic decisions to fold in)
-- The current `/post-publish` invocation is an emergency backfill on an already-canonized artifact (rare)
-- Mike explicitly directs proceeding without rebuild
-
-In all three carve-out cases, document the rationale in the production log §Step 0 entry. Don't ship silently with stale framing.
-
-**Why rebuild is operator-invoked, not script-invoked:** /build-world-summary and /engine-review are model skills (require Claude Code skill invocation), not deterministic scripts. The staleness gate at Step 0 is deterministic (mtime comparison); the rebuild path is model territory. Engine-sheet handled the gate (pipeline.14a, `lib/staleness.js` + `scripts/checkPostPublishStaleness.js`); research-build handles the rebuild trigger documentation (this section, pipeline.14b).
-
-**Verification gate:** exit 0 always. Stale → WARN lines printed. Fresh → silent. Missing baseline (no /city-hall log) → silent. Missing artifact → silent.
+If real sequencing concerns arise (e.g., engine produced new state but world_summary wasn't rebuilt), compare `output/world_summary_c<XX>.md` mtime against `output/engine_audit_c<XX>.json` manually — that's the correct upstream baseline. Engine-sheet may retire `scripts/checkPostPublishStaleness.js` + `lib/staleness.js` in a future sweep (vestigial after this retirement).
 
 ### Step 1: Bay-Tribune Ingest — Canon
 
@@ -510,4 +481,5 @@ After `/write-edition` (edition path) or after `/interview`, `/dispatch`, `/writ
 - 2026-04-26 — v1.1 (S180, research-build). Type-aware: `--type {edition|interview|supplemental|dispatch}` flag added. Per-type substep matrix encodes default skips; `--skip-<name>` required only for matrix-✓ opt-outs. Verification gate declared on every substep. Coverage ratings (Step 4) explicitly C93-gated for non-edition. Convergence point for the unified non-edition publishing pipeline (plan [[plans/2026-04-26-non-edition-publishing-pipeline]] T3).
 - 2026-04-30 — v1.4 (S189, research-build). Wired E6 + E8 from [[plans/2026-04-30-dispatch-gap-followups]]. **Step 2a-cul cultural-card refresh** (matrix-✓ for dispatch / interview / supplemental when CUL-IDs in NAMES INDEX): `buildCitizenCards.js` is Sim_Ledger-only, so cultural-only entities (Marin Tao type, Brody Kale type) need a parallel `buildCulturalCards.js --apply --cul <CUL-ID>` invocation per CUL-ID parsed from NAMES INDEX. Closes the S188 Brody Kale unrefreshed gap. **Step 5 verification gate cross-check**: after `ingestPublishedEntities.js` reports its parsed entity count, run `verifyNamesIndexParse.js <source> --expected <N>` to independently count NAMES INDEX rows in the source `.txt` — exit 1 (block publish) if counts disagree. Defense-in-depth against future parser regressions reintroducing the S188 silent-zero false-success failure mode. Step 13 checklist + Step 12 production-log section both gain the new substep row.
 - 2026-05-11 — v1.6 (S215, research-build). Pipeline.18 heavy-skill text reconciliation sweep. **G-P1 closed:** Step 1b now explicitly stated as the single canonical home for edition text ingest; `/write-edition` Step 6 no longer runs `ingestEdition.js` at close (companion edit shipped same commit). **G-P5 closed:** new §Parallelization Notes section before §Steps surfaces the parallel-OK groupings (2a + 2c + 4 concurrent; 9 + 10 alongside 6-8). Saves ~60-90s wall time per edition run. Other pipeline.18 items (G-P2 ingestEditionWiki summary fix, G-P10 zero-entity JSON sentinel, G-P20 extractExemplars double-iterate) are engine-sheet code work filed at pipeline.19, not in scope here.
+- 2026-05-23 — v1.7 (S225, research-build). **Pipeline.23 closure (cluster C1, partial — staleness-gate half).** Step 0 staleness gate retired (closes G-P28 + companion G-S11 in /sift). The S215 gate modeled the wrong dependency direction (world_summary IS input to /city-hall, not output), so it fired STALE every cycle by design flaw — operator escalated rebuilds for nothing. Section rewritten as a retirement note + manual fallback (compare world_summary vs engine_audit mtimes by hand if sequencing concerns arise). Substep matrix row 0 marked retired across all four type columns. Engine-sheet may delete `scripts/checkPostPublishStaleness.js` + `lib/staleness.js` in a future sweep (vestigial). Pipeline.23 also closes G-P26 (path harmonization) via companion /sift + /write-edition consolidation edits — /post-publish already declares consolidated `production_log_c<XX>.md` per S195 sweep S197 v1.5, no path edit needed here.
 - 2026-05-03 — v1.5 (S197, engine-sheet executing research-build Wave 1 plan). Wave 1 DOC-drift sweep per [[plans/2026-05-03-c93-gap-triage-execution]]. **G-P12 Step 2a invocation:** `buildCitizenCards.js` → `--apply` flag added (script defaults dry-run; previous cycles silently shipped no writes). **G-P22 Step 11 postRunFiling staleness note:** advisory text added explaining INCOMPLETE message is expected until the manifest is updated to pipeline-v2 outputs (Wave 3 BUNDLE-H). **G-P23 Step 11 bot restart removal:** `pm2 restart mags-bot` removed; deferred to /session-end (single canonical home) to respect boot/session-end RAM lifecycle. Step 13 checklist updated. **G-P25 §Time Budget section added** before §Output: per-substep wall-time table surfaces Step 2a (10+ min --apply), Step 10 /skill-check (5-15 min) as the expensive ones. Whole-skill budget ~30-45 min edition / ~10-15 min non-edition. **Stale-filename sweep (same drift class as G-PR1):** all 6 references to `production_log_edition_c<XX>.md` + `production_log_city_hall_c<XX>.md` consolidated to `production_log_c<XX>.md` (S195 convention). G-P1 ("/save-to-bay-tribune duplicate") not addressed here — that's a /write-edition-side fix; Step 1b is already the canonical text-ingest home.

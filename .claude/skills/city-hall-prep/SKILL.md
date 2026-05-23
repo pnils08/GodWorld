@@ -1,8 +1,8 @@
 ---
 name: city-hall-prep
 description: Prepare all inputs for city-hall voice agents. Reads tracker, approvals, world summary, engine review, coverage ratings, previous log, canon, Mara directive. Writes pending decisions per voice.
-version: "1.2"
-updated: 2026-05-11
+version: "1.3"
+updated: 2026-05-23
 tags: [civic, active]
 effort: high
 disable-model-invocation: true
@@ -101,7 +101,7 @@ Read all 10 inputs above. For each:
 **Disk (PRIMARY — G-13, S192).** Read in this order, treat as authoritative:
 1. `output/world_summary_c{XX}.md` — snapshots Civic_Office_Ledger (approval ratings + factions) + Initiative_Tracker (phase + MilestoneNotes) post-cycle. This is the canonical pre-civic state input.
 2. `output/engine_review_c{XX}.md` — derives from Initiative_Tracker; surfaces ailments + remedy-firing patterns.
-3. Previous `output/production_log_c{XX-1}.md` — last cycle's voice outputs + tracker updates + dramatic moments.
+3. Previous `output/production_log_c{XX-1}.md` — last cycle's voice outputs + tracker updates + dramatic moments. **Graceful fallback (S225 pipeline.23, closes G-PREP2):** if `production_log_c{XX-1}.md` is missing (early-life cycles, manual intervention, or a /post-publish run that didn't finalize), fall back in this order: (a) split-form historical `output/production_log_edition_c{XX-1}.md` from prior pre-S195 cycles; (b) `output/production_log_city_hall_c{XX-1}.md` (civic-side only — partial context, but better than zero); (c) document the absence in the production log §Step 1 entry and continue without prior-cycle context. Don't silently no-op — surface the missing baseline.
 4. Mara directive — the cycle's editorial pressure (citizen accountability questions).
 5. **Prior-cycle published canon** (G-15, S192). `editions/cycle_pulse_*_c{XX-1}_*.txt` + `output/reporters/*/articles/c{XX-1}_*.md` — interviews, dispatches, supplementals from prior cycle. Cross-reference each against active topic-assignment initiatives. If interview/dispatch text mentions an active initiative, the voice agents owning that initiative MUST see the canon excerpt in their pending_decisions.md (memory-fenced). Without this, prep ships stale framing — C92's Mayor interview answered 6 OARI/admin questions that voices would otherwise re-litigate.
 

@@ -1,7 +1,7 @@
 ---
 name: write-edition
 description: Execute the edition from sift output. Launch reporters, review articles, compile, validate, Mara audit, publish. Mechanical when sift is right.
-version: "2.1"
+version: "2.2"
 updated: 2026-05-11
 tags: [media, active]
 effort: high
@@ -28,7 +28,7 @@ If sift is right, this is mechanical.
 ## Prerequisites
 
 Verify these exist before starting:
-- `output/production_log_edition_c{XX}.md` — from `/sift` (has story picks, assignments, citizen table, brief paths)
+- `output/production_log_c{XX}.md` — from `/sift` (has story picks, assignments, citizen table, brief paths). S225 pipeline.23 consolidated edition-flow log to canonical S195 path; civic-side log at `production_log_city_hall_c{XX}.md` is a separate file.
 - `output/reporters/{reporter}/c{XX}_brief.md` — angle briefs from `/sift` (one per assigned reporter)
 
 If either is missing, `/sift` didn't complete. Don't proceed.
@@ -379,7 +379,7 @@ After publish, two separate skills pick up:
 |------|---------|------------|
 | `output/reporters/{reporter}/articles/*.md` | Reporter articles | Step 1 |
 | `editions/cycle_pulse_edition_{XX}.txt` | Published edition | Step 3 |
-| `output/production_log_edition_c{XX}.md` | Continued from sift — reporter results, review, compile, validation, Mara, publish added | Steps 1-6 |
+| `output/production_log_c{XX}.md` | Continued from sift — reporter results, review, compile, validation, Mara, publish added | Steps 1-6 |
 
 ## Legacy Reference
 
@@ -397,7 +397,7 @@ These elements were part of the old write-edition (pre-S144) and are now handled
 
 At skill close, capture friction observed during edition write as a gap log. /write-edition is the heaviest skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_edition_c<XX>_write_gaps.md` (sidecar to `output/production_log_edition_c<XX>.md`).
+**Output path:** `output/production_log_edition_c<XX>_write_gaps.md` (sidecar; the `_edition_` infix on gap-log sidecars is intentional — anchors per-skill sidecars to the edition flow even though the parent log is consolidated `production_log_c<XX>.md` per S195).
 
 **Gap prefix:** **G-W\*** (e.g., G-W1, G-W19, G-W22).
 

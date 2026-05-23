@@ -1,8 +1,8 @@
 ---
 name: sift
 description: Editorial planning for the edition. Reads world summary, engine review, city-hall log. Proposes stories, assigns reporters, verifies citizens, writes angle briefs. The game moment.
-version: "1.2"
-updated: 2026-05-11
+version: "1.3"
+updated: 2026-05-23
 tags: [media, active]
 effort: high
 disable-model-invocation: true
@@ -71,27 +71,11 @@ Blocks are appended to `output/injection_blocks.log`. Never silently skip a flag
 
 ## Steps
 
-### Step 0: Pre-flight Staleness Gate (S215, pipeline.14b)
+### Step 0: Pre-flight Staleness Gate — RETIRED S225 (pipeline.23, closes G-S11)
 
-Before reading the 3 input documents, run the staleness gate to verify world_summary + engine_audit reflect the cycle's `/city-hall` outcomes:
+**Retired.** The S215 staleness gate at this step modeled the wrong dependency direction. `scripts/checkPostPublishStaleness.js` compared `world_summary` + `engine_audit` mtimes against the `/city-hall` production log, but `world_summary` is INPUT to `/city-hall` (built before it), not output — so the gate fired STALE every cycle by design flaw (G-P28, G-S11). Operator cycles burned escalating "should we rebuild?" on each run for nothing.
 
-```bash
-node scripts/checkPostPublishStaleness.js --cycle <XX>
-```
-
-The script (engine-sheet, pipeline.14a) compares mtimes on `output/world_summary_c<XX>.md` + `output/engine_audit_c<XX>.json` against `output/production_log_city_hall_c<XX>.md`. If either derivative is older than the city-hall log, /sift is about to consume a pre-civic snapshot and miss every civic decision the cycle produced — the G-S1/G-S5 sequencing class that cost the C93 cycle real time.
-
-**Reaction when stale (same rebuild path as /post-publish Step 0):**
-
-| Stale artifact | Rebuild skill | Invocation |
-|----------------|---------------|------------|
-| `output/world_summary_c<XX>.md` | `/build-world-summary` | `/build-world-summary <XX>` |
-| `output/engine_audit_c<XX>.json` | `/engine-review` | `/engine-review <XX>` |
-| Both stale | both, in order | `/build-world-summary <XX>` THEN `/engine-review <XX>` |
-
-After rebuild, re-invoke `/sift` at Step 0. Skip the rebuild ONLY when the cycle had no `/city-hall` run by design (then document in production log). Don't ship sift proposals against stale inputs — front-page candidates land based on engine state that pre-dates civic action.
-
-**Why the gate runs here too:** /sift is the FIRST downstream consumer of world_summary + engine_audit. /post-publish is the LAST. Catching staleness at /sift saves an entire edition's worth of cycle work; catching it at /post-publish is the safety net.
+If real sequencing concerns arise (e.g., engine produced new state but world_summary wasn't rebuilt), compare `output/world_summary_c<XX>.md` mtime against `output/engine_audit_c<XX>.json` manually — that's the correct upstream baseline. No automated gate. Engine-sheet may retire `scripts/checkPostPublishStaleness.js` + `lib/staleness.js` in a future sweep (vestigial after this retirement).
 
 ### Step 1: Extract Threads
 
@@ -319,7 +303,7 @@ The shape:
 }
 ```
 
-**After Mike responds:** Create `output/production_log_edition_c{XX}.md`. Log stories picked, front page choice, section tags. This log persists through all remaining steps and into write-edition.
+**After Mike responds:** Create `output/production_log_c{XX}.md`. Log stories picked, front page choice, section tags. This log persists through all remaining steps and into write-edition.
 
 ### Step 3: Confirm Reporter Assignments
 
@@ -458,7 +442,7 @@ Present checklist to Mike. When approved, sift is done.
 | File | Purpose | Created by |
 |------|---------|------------|
 | `output/reporters/{reporter}/c{XX}_brief.md` | One angle brief per assigned reporter | Step 5 |
-| `output/production_log_edition_c{XX}.md` | Edition production log — created Step 2, updated Steps 3-5, continued by write-edition | Step 2 |
+| `output/production_log_c{XX}.md` | Edition production log — created Step 2, updated Steps 3-5, continued by write-edition | Step 2 |
 
 ## Handoff to /write-edition
 
@@ -466,7 +450,7 @@ When this skill completes, `/write-edition` picks up by reading:
 
 | File | What write-edition does with it |
 |------|-------------------------------|
-| `output/production_log_edition_c{XX}.md` | Continues this log — adds reporter results, editorial review, compile, validation, publish steps |
+| `output/production_log_c{XX}.md` | Continues this log — adds reporter results, editorial review, compile, validation, publish steps |
 | `output/reporters/{reporter}/c{XX}_brief.md` | Each reporter reads ONLY their brief + their IDENTITY.md. Nothing else. |
 
 `/write-edition` does NOT re-read the world summary, engine review, or city-hall log. Everything reporters need is in their briefs. If the sift is right, write-edition is mechanical.
@@ -483,7 +467,7 @@ When this skill completes, `/write-edition` picks up by reading:
 
 At skill close, capture friction observed during sift as a gap log. /sift is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running.
 
-**Output path:** `output/production_log_edition_c<XX>_sift_gaps.md` (sidecar to `output/production_log_edition_c<XX>.md`).
+**Output path:** `output/production_log_edition_c<XX>_sift_gaps.md` (sidecar to `output/production_log_c<XX>.md`).
 
 **Gap prefix:** **G-S\*** (e.g., G-S1, G-S2).
 

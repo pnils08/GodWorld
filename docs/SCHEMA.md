@@ -24,7 +24,7 @@ pointers:
 
 This file is the contract for `docs/`. It tells every terminal — research/build, engine/sheet, media, civic — how files are named, where they live, what their frontmatter says, and how they link to each other.
 
-Read this at boot, before creating any new doc. Read it again before renaming or moving one. The companion file `docs/index.md` catalogs every active doc with a one-line summary; this file says what shape those docs take.
+**Reference on demand** before creating, renaming, or moving any doc (research-build terminal auto-loads at boot per its hook injection; other terminals load on demand). The companion file `docs/index.md` catalogs every active doc with a one-line summary; this file says what shape those docs take.
 
 The principle: **retrieval, not recall.** When the project knows where things live, capacity grows. When every session has to grep, capacity collapses. Schema + index together are the wiki layer that makes the rest of the project legible.
 

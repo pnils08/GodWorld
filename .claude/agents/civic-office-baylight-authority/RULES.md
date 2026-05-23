@@ -1,5 +1,18 @@
 # Baylight Authority — Rules
 
+## Pre-Write Constraint — Step 5 vs Step 6 (S229 G-R2 / S215 G-R5 close)
+
+**You DO NOT pre-write `decisions_c{XX}.json` at Step 5.** That artifact is created at Step 6 by `scripts/assembleDecisions.js` from your voice JSON content. Writing it at Step 5 violates the user-approval gate that protects Step 6 tracker apply.
+
+Your Step 5 output is:
+- **REQUIRED:** voice JSON at `output/civic-voice/baylight_authority_c{XX}.json` — flat top-level statement array matching cabinet/voice cascade shape.
+- **OPTIONAL:** deliverable filings at `output/city-civic-database/initiatives/baylight/` (construction-progress reports, milestone announcements, deliverable filings per the 5-deliverable tracker, TIF reports, workforce agreements, venue activation timelines) per your IDENTITY canon scope. These are the project director's legitimate ongoing filings, distinct from the decisions JSON.
+- **FORBIDDEN:** `output/city-civic-database/initiatives/baylight/decisions_c{XX}.json` — `assembleDecisions.js` creates this at Step 6 from your voice JSON's decisions[] content. If you write it at Step 5, the Step 6 apply runs against your stale pre-write instead of canonically-assembled content. This is the EXACT failure pattern caught in C93 G-R5 (closed S215 documentation-only) AND C94 G-R2 (recurred because the constraint was never structurally added until S229).
+
+This section is the structural enforcement. The S215 G-R5 close at `/city-hall` SKILL.md asserted "Project agent RULES.md carries the constraint" — that assertion was documentation-only until S229 added these sections. Sections below this one still describe the decisions JSON's schema (downstream understanding, audit trail), but you do not write it.
+
+**Layer routing note (S229 G-R3):** despite your `civic-office-*` path prefix, you run at Layer-3 with the other project directors (OARI, Stab Fund, Health Center, Transit Hub) — not Layer-2 with cabinet voices. You receive full cascade context (Mayor + all factions + cabinet) before reporting. Your path prefix is a legacy naming artifact; you are a project director.
+
 ## Your Output Directory
 
 **Write voice statements to:** `output/civic-voice/baylight_authority_c{XX}.json`
@@ -75,7 +88,7 @@ These decisions are canon. Your construction updates and civic filings should re
 | 1-2 | Read memory file (`.claude/agent-memory/baylight-authority/MEMORY.md`) + initiative packet. Identify Baylight events. |
 | 3-4 | Check initiative status, September 15 deliverables, construction items. |
 | 5-8 | Write 1-2 voice statements (JSON format, same as before). |
-| 9-11 | **Write civic documents** — deliverable filings, progress reports, workforce updates. Save to `output/city-civic-database/initiatives/baylight/`. Write decisions JSON to `output/city-civic-database/initiatives/baylight/decisions_c{XX}.json`. |
+| 9-11 | **Write civic documents** — deliverable filings, progress reports, workforce updates. Save to `output/city-civic-database/initiatives/baylight/`. **DO NOT write decisions JSON** — per §Pre-Write Constraint (top of file, S229), `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. |
 | 12-13 | **Update memory.** Edit `.claude/agent-memory/baylight-authority/MEMORY.md` with deliverable status, decisions made. |
 | 14-15 | Output statements + document summary. |
 

@@ -1,5 +1,16 @@
 # OEWD Stabilization Fund — Rules
 
+## Pre-Write Constraint — Step 5 vs Step 6 (S229 G-R2 / S215 G-R5 close)
+
+**You DO NOT pre-write `decisions_c{XX}.json` at Step 5.** That artifact is created at Step 6 by `scripts/assembleDecisions.js` from your voice JSON content. Writing it at Step 5 violates the user-approval gate that protects Step 6 tracker apply.
+
+Your Step 5 output is:
+- **REQUIRED:** voice JSON at `output/civic-voice/stabilization_fund_c{XX}.json` — flat top-level statement array matching cabinet/voice cascade shape.
+- **OPTIONAL:** deliverable filings at `output/city-civic-database/initiatives/stabilization-fund/` (application reviews, eligibility determinations, status reports, disbursement memos) per your IDENTITY canon scope. These are the project director's legitimate ongoing filings, distinct from the decisions JSON.
+- **FORBIDDEN:** `output/city-civic-database/initiatives/stabilization-fund/decisions_c{XX}.json` — `assembleDecisions.js` creates this at Step 6 from your voice JSON's decisions[] content. If you write it at Step 5, the Step 6 apply runs against your stale pre-write instead of canonically-assembled content.
+
+This section is the structural enforcement. The S215 G-R5 close at `/city-hall` SKILL.md asserted "Project agent RULES.md carries the constraint" — that assertion was documentation-only until S229 added these sections. Sections below this one still describe the decisions JSON's schema (downstream understanding, audit trail), but you do not write it.
+
 ## What You Produce
 
 Each cycle, you produce **civic documents** and a **decisions summary**. You are not a journalist and you are not a politician. You are a civil servant who writes reports, reviews applications, and makes eligibility determinations.
@@ -206,7 +217,7 @@ The `civic` destination maps to the City_Civic_Database folder on Google Drive �
 | 3-4 | Read Mara's directive. Identify what she's asking for and what the political moment requires. |
 | 5-6 | **Decide.** How many applications did you review this cycle? Who got approved? Who got denied? Did you escalate the disbursement hold? Did Beverly Hayes get her letter? Make real decisions. |
 | 7-10 | **Write documents.** Status report, determination letters (1-2 named citizens), any escalation memos. Save to `output/city-civic-database/initiatives/stabilization-fund/`. |
-| 11-12 | **Write decisions JSON.** Machine-readable summary of all decisions made. Save to `output/city-civic-database/initiatives/stabilization-fund/decisions_c{XX}.json`. |
+| 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
 | 13-14 | **Update memory.** Edit your memory file with new financial state, decision history, and any corrections. |
 | 15 | Output summary to the pipeline. |
 

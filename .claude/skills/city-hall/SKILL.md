@@ -164,8 +164,9 @@ The voices know what the Mayor decided. They react to it, support it, oppose it,
 - `civic-office-opp-faction` → `opp_faction_c{XX}.json`
 - `civic-office-crc-faction` → `crc_faction_c{XX}.json`
 - `civic-office-ind-swing` → `ind_swing_c{XX}.json`
-- `civic-office-baylight-authority` → `baylight_authority_c{XX}.json`
 - `civic-office-district-attorney` → only if relevant this cycle
+
+**Note (S229 G-R3):** `civic-office-baylight-authority` is **NOT** a Layer-2 cabinet voice — she runs at Layer-3 with the other project directors (see §Step 5). The `civic-office-*` path prefix is a legacy naming artifact; per her RULES.md §Pre-Write Constraint + §Layer routing note, she is a project director who receives full Layer-2 cascade context before reporting.
 
 **Wait for all voices to complete.** Read their decisions.
 
@@ -202,7 +203,7 @@ Include trackerUpdates in your output JSON.
 
 **Output:** `output/civic-voice/{project}_c{XX}.json` — same schema as voices, must include `trackerUpdates`.
 
-**Project agents may NOT pre-write Step 6 artifacts (S215, closes G-R5).** S193 Baylight Authority agent wrote both its voice JSON AND `output/city-civic-database/initiatives/baylight/decisions_c93.json` (Step 6 artifact) within its tool call. Content was correct but ordering violated the user-approval gate that protects Step 6. Project agent SKILL.md / RULES.md for every project (Baylight, OARI, Stab Fund, Health Center, Transit Hub) carries the constraint: write ONLY the voice JSON at Step 5; `output/city-civic-database/initiatives/{name}/decisions_c{XX}.json` is assembled by `scripts/assembleDecisions.js` (S197 G-R14) at Step 6, NOT by the agent. If a project agent appears to pre-write the Step 6 artifact, treat as a skill-fidelity violation and surface to Mike before approving the tracker apply.
+**Project agents may NOT pre-write Step 6 artifacts (S215 G-R5 → S229 G-R2 structural close).** S193 Baylight Authority agent wrote both its voice JSON AND `output/city-civic-database/initiatives/baylight/decisions_c93.json` (Step 6 artifact) within its tool call. Content was correct but ordering violated the user-approval gate that protects Step 6. **S215 close was documentation-only — the constraint asserted here was never actually added to the per-agent RULES.md files, and C94 G-R2 reproduced the failure (Baylight + OARI both pre-wrote despite explicit prompt warnings).** S229 closed the structural gap: §Pre-Write Constraint sections added to all 5 project-agent RULES.md (`civic-project-{oari,health-center,stabilization-fund,transit-hub}` + `civic-office-baylight-authority`) explicitly forbidding `decisions_c{XX}.json` pre-write at Step 5, plus tool-call schedule entries rewritten from "Write decisions JSON" → "DO NOT write decisions JSON". `output/city-civic-database/initiatives/{name}/decisions_c{XX}.json` is assembled by `scripts/assembleDecisions.js` (S197 G-R14) at Step 6, NOT by the agent. If a project agent still pre-writes the Step 6 artifact, treat as a skill-fidelity violation, surface to Mike before approving tracker apply, AND check whether that agent's RULES.md §Pre-Write Constraint was inadvertently removed.
 
 **Project agents:**
 - `civic-project-stabilization-fund` — disbursement logistics, applicant experiences, processing numbers

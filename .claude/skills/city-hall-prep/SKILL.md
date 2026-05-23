@@ -94,6 +94,16 @@ Create `output/production_log_city_hall_c{XX}.md` with header, timestamp, cycle,
 
 **Mara directive auto-derivation (S215, closes G-4).** When Mara's directive is absent (some cycles don't get one), derive a default `output/mara-directives/mara_directive_c{XX}_AUTO.txt` from: (1) engine review HIGH-severity ailments, (2) prior-cycle Initiative_Tracker `MilestoneNotes` deltas, (3) prior-cycle voice JSON gaps (questions raised in voice statements that no agent answered), (4) C92-style per-voice "missing answer" framing. Voice prep then uses the AUTO directive as the Mara cross-check input; Mara's manual version overrides if she files one later. This converts an optional input into an always-on input without requiring claude.ai turnaround on every cycle.
 
+**Mara directive Drive discovery (S229 G-PREP3).** Mara files her directives manually through claude.ai → Drive; the disk-side path is not always populated even when she filed one. Before AUTO-derivation, check Drive for a manually-filed directive:
+
+1. Check Drive folder `mara-directives/` (or the cycle's Drive folder if a per-cycle convention is set in `docs/media/DRIVE_MANIFEST.md` — verify path on each cycle until convention regularizes) for `mara_directive_c{XX}.{txt,md}`.
+2. If found, download via `node scripts/downloadDriveFile.js <fileId> output/mara-directives/mara_directive_c{XX}.txt`.
+3. If absent on Drive AND absent on disk, fall back to AUTO-derivation per S215 G-4 with explicit "no manual Mara directive this cycle" warning logged to the production log header.
+
+This converts "operator-side institutional knowledge (Mike hands me the Drive file ID via chat)" into a skill-level step. The Drive folder ID for the `mara-directives/` folder is the canonical pointer; until that ID is hard-coded here or the folder convention regularizes (Mara writes directly to disk via service-account), use Drive search or fall back to AUTO.
+
+**Mara ESCALATION override (S229 G-PREP8).** ESCALATION-tagged Mara directives override absence-of-statement defaults. If Mara filed an ESCALATION directive on a voice agent who is normally treated as absence-meaningful (Okoro per civic.5 — "absence-of-statement is meaningful, don't force a statement"), the voice MUST be assigned a topic. ESCALATION signals Mara already gave that voice one cycle of pass; a second cycle of pass would be canonical drift. Tag the voice's pending_decisions packet with `MARA ESCALATION — voice must respond` so the agent's identity layer sees the override at execution time. Default behavior is override; if Mara explicitly tags `ESCALATION — absence acceptable` (escape clause), the absence-of-statement default holds.
+
 ### Step 1: Read All Inputs
 
 Read all 10 inputs above. For each:

@@ -1,5 +1,16 @@
 # OARI — Rules
 
+## Pre-Write Constraint — Step 5 vs Step 6 (S229 G-R2 / S215 G-R5 close)
+
+**You DO NOT pre-write `decisions_c{XX}.json` at Step 5.** That artifact is created at Step 6 by `scripts/assembleDecisions.js` from your voice JSON content. Writing it at Step 5 violates the user-approval gate that protects Step 6 tracker apply.
+
+Your Step 5 output is:
+- **REQUIRED:** voice JSON at `output/civic-voice/oari_c{XX}.json` — flat top-level statement array matching cabinet/voice cascade shape.
+- **OPTIONAL:** deliverable filings at `output/city-civic-database/initiatives/oari/` (formal milestone reports, dispatch protocols, MOUs, compliance reports) per your IDENTITY canon scope. These are the project director's legitimate ongoing filings, distinct from the decisions JSON.
+- **FORBIDDEN:** `output/city-civic-database/initiatives/oari/decisions_c{XX}.json` — `assembleDecisions.js` creates this at Step 6 from your voice JSON's decisions[] content. If you write it at Step 5, the Step 6 apply runs against your stale pre-write instead of canonically-assembled content.
+
+This section is the structural enforcement. The S215 G-R5 close at `/city-hall` SKILL.md asserted "Project agent RULES.md carries the constraint" — that assertion was documentation-only until S229 added these sections. Sections below this one still describe the decisions JSON's schema (downstream understanding, audit trail), but you do not write it.
+
 ## What You Produce
 
 ### Document Types
@@ -136,7 +147,7 @@ Drive destination: `civic` (City_Civic_Database folder)
 | 3-4 | Read Mara's directive. What's the political pressure this cycle? |
 | 5-6 | **Decide.** How many hires? Did OPD sign the dispatch spec? Did the MOU execute? Did you request the timeline extension? |
 | 7-10 | **Write documents.** Milestone report, hiring criteria (if not yet published), any MOUs or escalation memos. Save to `output/city-civic-database/initiatives/oari/`. |
-| 11-12 | **Write decisions JSON.** Save to `output/city-civic-database/initiatives/oari/decisions_c{XX}.json`. |
+| 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
 | 13-14 | **Update memory.** Edit `.claude/agent-memory/oari/MEMORY.md`. |
 | 15 | Output summary. |
 

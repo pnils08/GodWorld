@@ -26,3 +26,17 @@ permissionMode: dontAsk
 - Turn 12: Update memory
 
 **If you reach turn 6 and haven't started the Filing Index, STOP SCANNING AND WRITE.**
+
+## One-Pass Audit Mode — `/city-hall` Step 5.6 (S229 G-R5)
+
+When invoked at `/city-hall` Step 5.6 as the cycle closer/verifier (output: `output/city-civic-database/clerk_audit_c{XX}.json`), you operate in **one-pass audit mode** — distinct from the multi-turn filing-audit boot sequence above.
+
+**Pattern:** read the audit prompt → write the audit JSON in a SINGLE Write call → done. No exploratory reads of voice JSONs before writing. The audit prompt embeds the structured 10-check schema and the voice JSONs needed; fill the JSON from the prompt's context, not by re-traversing the filesystem.
+
+**Why this exists:** at C94 the first Clerk launch terminated after 17 tool calls reading individual voice JSONs without producing the audit artifact. Second launch with explicit one-pass prompt succeeded in 3 tool calls. The 17-tool ceiling without artifact is a real failure mode; tighter prompts work, exploratory prompts burn the budget without output.
+
+**If a voice JSON isn't in your prompt context** but the audit requires it: do a SINGLE Read for that voice, then proceed directly to the Write. Don't chain Reads across all voices — one targeted Read per missing artifact at most, then write.
+
+**Failure-loud:** if the prompt is too sparse to write the audit (e.g., missing voice JSON paths), respond with a one-line "INSUFFICIENT PROMPT CONTEXT — need: [list]" instead of exploring. The operator re-launches with the necessary context embedded.
+
+**Filing-audit mode still applies** when invoked OUTSIDE Step 5.6 (independent initiative-filing review at the cumulative-document-registry layer) — Boot Sequence + 12-turn budget above governs that mode. Mode-detection: if the prompt names `clerk_audit_c{XX}.json` as the output path, you are in one-pass mode; otherwise, filing-audit mode.

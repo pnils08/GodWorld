@@ -378,7 +378,14 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
 
-  safePhaseCall_(ctx, 'Phase8-ChicagoCitizens', function() { generateChicagoCitizens_(ctx); });
+  // S229 DISABLED — Chicago is canonically dead in the sim (Path B no-grow-legacy,
+  // mirror of S205 Phase5-GenericCitizens disable). Pool frozen at ~124 rows in
+  // Chicago_Citizens sheet; no more SEED/MAINTAIN/CHURN cycle-path writes. File
+  // `phase05-citizens/generateChicagoCitizensv1.js` retained for reversibility.
+  // Sister disable: Phase10-Chicago later in this function + both Chicago sites
+  // in the cycle-phases entry point below. Mechanical-w/-refactor batch in
+  // PHASE_42_PATTERNS §3.5 (L78/L102/L136) reclassified to verify-only-phase-disabled.
+  // safePhaseCall_(ctx, 'Phase8-ChicagoCitizens', function() { generateChicagoCitizens_(ctx); });
 
   // ═══════════════════════════════════════════════════════════
   // PHASE 9: FINAL ANALYSIS + DIGEST
@@ -406,7 +413,9 @@ function runWorldCycle() {
   safePhaseCall_(ctx, 'Phase10-Seeds', function() { saveV3Seeds_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Hooks', function() { saveV3Hooks_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Textures', function() { saveV3Textures_(ctx); });
-  safePhaseCall_(ctx, 'Phase10-Chicago', function() { saveV3Chicago_(ctx); });
+  // S229 DISABLED — sister of Phase8-ChicagoCitizens disable above.
+  // No more per-cycle Chicago_Feed appends. Pool frozen + feed frozen.
+  // safePhaseCall_(ctx, 'Phase10-Chicago', function() { saveV3Chicago_(ctx); });
 
   safePhaseCall_(ctx, 'Phase10-CyclePacket', function() { buildCyclePacket_(ctx); });
   safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
@@ -1690,7 +1699,9 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase8-StorylineHealth', function() { monitorStorylineHealth_(ctx); });
   safePhaseCall_(ctx, 'Phase8-V3Integration', function() { v3Integration_(ctx); });
   safePhaseCall_(ctx, 'Phase8-DemographicDrift', function() { deriveDemographicDrift_(ctx); });
-  safePhaseCall_(ctx, 'Phase8-ChicagoCitizens', function() { generateChicagoCitizens_(ctx); });
+  // S229 DISABLED — Chicago Path B no-grow-legacy. See production entry point
+  // comment block above for full rationale + reversibility note. Cycle-phases sister.
+  // safePhaseCall_(ctx, 'Phase8-ChicagoCitizens', function() { generateChicagoCitizens_(ctx); });
   // v2.13: Compress LifeHistory into TraitProfiles for archetype-aware event generation
   safePhaseCall_(ctx, 'Phase9-CompressLifeHistory', function() { compressLifeHistory_(ctx); });
   safePhaseCall_(ctx, 'Phase9-FinalizePopulation', function() { finalizeWorldPopulation_(ctx); });
@@ -1712,7 +1723,8 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase10-Seeds', function() { saveV3Seeds_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Hooks', function() { saveV3Hooks_(ctx); });
   safePhaseCall_(ctx, 'Phase10-Textures', function() { saveV3Textures_(ctx); });
-  safePhaseCall_(ctx, 'Phase10-Chicago', function() { saveV3Chicago_(ctx); });
+  // S229 DISABLED — sister of Phase8-ChicagoCitizens disable above (cycle-phases path).
+  // safePhaseCall_(ctx, 'Phase10-Chicago', function() { saveV3Chicago_(ctx); });
   safePhaseCall_(ctx, 'Phase10-CyclePacket', function() { buildCyclePacket_(ctx); });
   safePhaseCall_(ctx, 'Phase10-MediaBriefing', function() { generateMediaBriefing_(ctx); });
   safePhaseCall_(ctx, 'Phase10-MediaLedger', function() { recordMediaLedger_(ctx); });

@@ -387,6 +387,40 @@ function arcBindingAxis_(journalistName, state) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// BYLINE_INELIGIBLE_ROLES — roles excluded from byline auto-assignment.
+//
+// Editor-in-Chief composes the load-out (doesn't take byline assignments);
+// photo desk produces images, not articles; Copy Chief is editorial QA.
+// These names are present in the newsroom roster for context lookup but
+// must never appear as engine candidates. G-S14 (C94): without this filter
+// FP1 + QT1 routed to Mags Corliss, N1 routed to DJ Hartley.
+//
+// Filter applied at state.roster construction by callers via
+// filterRosterForByline_. Editorial design preserved: Mags's
+// `Mags Corliss: 4` row in FORMAT_FIT.supplemental documents editor's
+// historical column-writing weight; she just isn't a routed candidate.
+// ─────────────────────────────────────────────────────────────────────────────
+var BYLINE_INELIGIBLE_ROLES = {
+  'Editor-in-Chief': true,
+  'Senior Photographer': true,
+  'Photo Assistant': true,
+  'Copy Chief': true
+};
+
+function filterRosterForByline_(roster) {
+  if (!roster) return {};
+  var out = {};
+  var names = Object.keys(roster);
+  for (var i = 0; i < names.length; i++) {
+    var entry = roster[names[i]];
+    var role = entry && entry.role ? String(entry.role) : '';
+    if (BYLINE_INELIGIBLE_ROLES[role]) continue;
+    out[names[i]] = entry;
+  }
+  return out;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // scoreByline_ — multi-axis scorer for one (seed, journalist) pair.
 //
 // Returns:
@@ -825,6 +859,28 @@ function _runSelfTests_() {
   eq('rankedArc: Carmen tops Simon under arc binding', rankedArc[0].name, 'Carmen Delaine');
   eq('rankedArc: Carmen score 6', rankedArc[0].score, 6);
 
+  // ── G-S14: filterRosterForByline_ — non-reporter candidate-pool filter ──
+  var roleMixed = {
+    'Anthony':         { desk: 'sports',    role: 'Lead Beat Reporter' },
+    'Hal Richmond':    { desk: 'sports',    role: 'Senior Historian' },
+    'Mags Corliss':    { desk: 'editorial', role: 'Editor-in-Chief' },
+    'DJ Hartley':      { desk: 'sports',    role: 'Senior Photographer' },
+    'Arman Gutiérrez': { desk: 'photo',     role: 'Photo Assistant' },
+    'Rhea Morgan':     { desk: 'editorial', role: 'Copy Chief' },
+    'NoRoleEntry':     { desk: 'wire' }  // missing role -> kept (defensive)
+  };
+  var filtered = filterRosterForByline_(roleMixed);
+  eq('filter: Anthony reporter kept', filtered['Anthony'] != null, true);
+  eq('filter: Hal historian kept', filtered['Hal Richmond'] != null, true);
+  eq('filter: Mags EIC dropped', filtered['Mags Corliss'] == null, true);
+  eq('filter: DJ photographer dropped', filtered['DJ Hartley'] == null, true);
+  eq('filter: Arman photo assistant dropped', filtered['Arman Gutiérrez'] == null, true);
+  eq('filter: Rhea copy chief dropped', filtered['Rhea Morgan'] == null, true);
+  eq('filter: missing-role entry kept (defensive)', filtered['NoRoleEntry'] != null, true);
+  eq('filter: filtered size = 3 of 7', Object.keys(filtered).length, 3);
+  eq('filter: null roster -> {}', Object.keys(filterRosterForByline_(null)).length, 0);
+  eq('filter: empty roster -> {}', Object.keys(filterRosterForByline_({})).length, 0);
+
   console.log('bylineEngine self-tests: ' + pass + ' pass / ' + fail + ' fail');
   if (fail > 0 && typeof process !== 'undefined') process.exit(1);
 }
@@ -859,7 +915,9 @@ if (typeof module !== 'undefined' && module.exports) {
     cadenceMultiplier_: cadenceMultiplier_,
     ARC_BINDING_BONUS: ARC_BINDING_BONUS,
     loadArcBinding_: loadArcBinding_,
-    arcBindingScore_: arcBindingScore_
+    arcBindingScore_: arcBindingScore_,
+    BYLINE_INELIGIBLE_ROLES: BYLINE_INELIGIBLE_ROLES,
+    filterRosterForByline_: filterRosterForByline_
   };
 }
 

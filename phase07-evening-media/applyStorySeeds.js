@@ -152,8 +152,15 @@ function applyStorySeeds_(ctx) {
   // pre-resolves arcBinding via loadArcBinding_ before each scoring.
   // Empty-roster fallback if rosterLookup.js fails to load — scoreAllBylines_
   // will throw on empty-roster, so the makeSeed call is wrapped in typeof guard.
+  //
+  // v3.13 (S225): filterRosterForByline_ drops Editor-in-Chief, photo desk,
+  // and Copy Chief from the byline candidate pool (G-S14). Editorial seat
+  // composes the load-out, not byline assignments.
+  var bylineRawRoster = (typeof getRoster_ === 'function' && getRoster_()) ? getRoster_().journalists : {};
   var bylineState = {
-    roster: (typeof getRoster_ === 'function' && getRoster_()) ? getRoster_().journalists : {},
+    roster: (typeof filterRosterForByline_ === 'function')
+      ? filterRosterForByline_(bylineRawRoster)
+      : bylineRawRoster,
     cadence: {},
     totalSeeds: 0,
     arcBinding: null  // mutated per-seed via loadArcBinding_

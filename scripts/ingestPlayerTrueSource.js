@@ -173,6 +173,19 @@ function stripDiacritics(s) {
   return s.normalize('NFD').replace(/[̀-ͯ]/g, '');
 }
 
+// Normalize a name to a stable lookup key — diacritics-stripped, lowercase,
+// punctuation-stripped, whitespace-collapsed. Lets "J.R. Rosado" match
+// ledger "JR Rosado" (G-P33), "José Colón" match "Jose Colon", "O'Brien"
+// match "OBrien". Symmetric: applied to both map insertion and query.
+function normalizeNameKey(name) {
+  if (!name) return '';
+  return stripDiacritics(String(name))
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 let ledgerCache = null;
 async function loadLedger() {
   if (ledgerCache) return ledgerCache;
@@ -181,9 +194,6 @@ async function loadLedger() {
   const popIdx = 0;
   const firstIdx = headers.indexOf('First');
   const lastIdx = headers.indexOf('Last');
-  // Two-tier map: keyed both with and without diacritics so accented input
-  // names (Allen López, José Colón) match ledger rows stored without accents
-  // (or vice versa).
   const map = new Map();
   for (let i = 1; i < rows.length; i++) {
     const r = rows[i];
@@ -191,10 +201,8 @@ async function loadLedger() {
     const first = (r[firstIdx] || '').trim();
     const last = (r[lastIdx] || '').trim();
     if (pop && first && last) {
-      const exact = (first + ' ' + last).toLowerCase();
-      const stripped = stripDiacritics(exact);
-      if (!map.has(exact)) map.set(exact, pop);
-      if (!map.has(stripped)) map.set(stripped, pop);
+      const key = normalizeNameKey(first + ' ' + last);
+      if (key && !map.has(key)) map.set(key, pop);
     }
   }
   ledgerCache = map;
@@ -207,8 +215,7 @@ async function resolvePopIdByName(playerName) {
   if (tokens.length < 2) return null;
   const first = tokens[0];
   const last = tokens[tokens.length - 1];
-  const exact = (first + ' ' + last).toLowerCase();
-  return ledger.get(exact) || ledger.get(stripDiacritics(exact)) || null;
+  return ledger.get(normalizeNameKey(first + ' ' + last)) || null;
 }
 
 // ---------------------------------------------------------------------------

@@ -191,10 +191,13 @@ function countCriticals(stdout) {
   }
 
   console.log('\nTest 9: E93 known-pass under current canon');
-  {
+  if (CANON_PRESENT) {
     assert('E93 exits 0', e93.status === 0, `exit=${e93.status}`);
     assert('E93 STATUS is PASSABLE or CLEAN',
       /STATUS:\s*(PASSABLE|CLEAN)/.test(e93.stdout));
+  } else {
+    skip('E93 exits 0', 'canon files absent (CI environment)');
+    skip('E93 STATUS is PASSABLE or CLEAN', 'canon files absent (CI environment)');
   }
 
   // Historical snapshots — canon drifted across cycles (council districts,
@@ -231,27 +234,45 @@ function countCriticals(stdout) {
     skip('E90 >= 2 CRITICALs', 'canon files absent (CI environment)');
   }
 
+  // Tests 13-15: each fixture deliberately triggers a violation that
+  // validateEdition reports under a labeled section. The exit-code assertion
+  // passes without canon (validateEdition returns non-zero on file-load
+  // failures too), but the label-in-output assertion requires the check
+  // function to actually run — which needs canon loaded. Guard the label
+  // assertions with CANON_PRESENT.
   console.log('\nTest 13: Engine-language leak fixture triggers CRITICAL');
   {
     assert('engine-leak fixture exits 1', engineLeak.status === 1,
       `exit=${engineLeak.status}`);
-    assert('Engine Language label in output',
-      /\[Engine Language\]/.test(engineLeak.stdout));
+    if (CANON_PRESENT) {
+      assert('Engine Language label in output',
+        /\[Engine Language\]/.test(engineLeak.stdout));
+    } else {
+      skip('Engine Language label in output', 'canon files absent (CI environment)');
+    }
   }
 
   console.log('\nTest 14: Real-name blocklist fixture triggers CRITICAL');
   {
     assert('real-name fixture exits 1', realName.status === 1,
       `exit=${realName.status}`);
-    assert('Real-Name Screening label in output',
-      /\[Real-Name Screening\]/.test(realName.stdout));
+    if (CANON_PRESENT) {
+      assert('Real-Name Screening label in output',
+        /\[Real-Name Screening\]/.test(realName.stdout));
+    } else {
+      skip('Real-Name Screening label in output', 'canon files absent (CI environment)');
+    }
   }
 
   console.log('\nTest 15: Vote-math mismatch fixture triggers CRITICAL');
   {
     assert('vote-math fixture exits 1', voteMath.status === 1,
       `exit=${voteMath.status}`);
-    assert('Vote Math label in output', /\[Vote Math\]/.test(voteMath.stdout));
+    if (CANON_PRESENT) {
+      assert('Vote Math label in output', /\[Vote Math\]/.test(voteMath.stdout));
+    } else {
+      skip('Vote Math label in output', 'canon files absent (CI environment)');
+    }
   }
 
   console.log('\nTest 16: Wrong-mayor fixture triggers CRITICAL');

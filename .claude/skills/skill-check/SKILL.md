@@ -1,11 +1,10 @@
 ---
 name: skill-check
 description: Grade a production skill's run against its assertion file. Catches structural drift (skill ran but didn't do its job) that edition-level review misses. Runs during post-publish for the cycle that just shipped. Usage — `/skill-check write-edition 91` grades `/write-edition` on cycle 91 against `docs/media/story_evaluation.md`, produces `output/skill_check_<skill>_c<cycle>.json`. Supported targets: write-edition, sift, city-hall, dispatch, interview.
-version: "1.1"
-updated: 2026-05-12
+version: "1.2"
+updated: 2026-05-23
 tags: [engine, active]
 effort: medium
-disable-model-invocation: true
 ---
 
 # skill-check
@@ -121,3 +120,4 @@ This confirms the checker would have flagged the same drift Mara caught post-pub
 
 - 2026-04-17 — v1.0 initial (S156). Live for `/write-edition`; sift reads same `story_evaluation.md` with different lens.
 - 2026-05-12 — v1.1 (S216, research-build closing governance.2). Skill→assertion map extended: city-hall + dispatch + interview added with their own assertion files at `docs/media/{city_hall,dispatch,interview}_evaluation.md`. Map's two TBD entries (city-hall → `docs/civic/decision_evaluation.md`, dispatch → `docs/media/scene_evaluation.md`) corrected to actual shipped paths under `docs/media/`. Interview added as 5th target. Description field updated to list all 5 supported targets.
+- 2026-05-23 — v1.2 (S227, research-build closing governance.15 / G-P40). Removed `disable-model-invocation: true` frontmatter flag. Rationale: the flag was defensive from v1.0 when this was a manual grading tool and `/post-publish` wasn't wired; governance.2 (S216) extended to 5 targets + `/post-publish` Step 10 (S156) was wired to invoke it across all 5. Autonomous `/post-publish` flow now fires `/skill-check` 5× at Step 10 as designed. Alternative considered + rejected: split Step 10a (operator-fires) / 10b (autonomous criteria update) — divergent parallel logic for same intent. No other behavioral changes; Step 6 changelog-append remains the only source-controlled write side-effect.

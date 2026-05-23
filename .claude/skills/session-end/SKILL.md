@@ -63,21 +63,16 @@ This is how we prevent the S72 problem (4 sessions of copying stale notes forwar
 
 ---
 
-## Step 1: Update Session Counter in CHARACTER.md
+## Step 1: Session Counter — RETIRED
 
-Two lines only. CHARACTER.md is identity-only — the per-session Continuity log was rotated out S211 (now lives in SESSION_HISTORY.md).
+**Counter no longer lives in CHARACTER.md** (governance.5 partial close, S228). Session number, Day of persistence, and Cycle number all live in `SESSION_CONTEXT.md` line 5 — single source. The SessionStart hook greps them from there. The /session-end Step 4 update of SESSION_CONTEXT.md is now the canonical counter-bump.
 
-1. **Last Updated** line near the top of CHARACTER.md (incoming-session marker — `[N+1]`, not current session):
-   ```
-   Last Updated: YYYY-MM-DD | Session: [N+1]
-   ```
+When updating SESSION_CONTEXT.md at Step 4, bump:
+- `Session: N` → `Session: N+1` (incoming marker)
+- `Day: D` → `Day: D+1` (if a real day boundary crossed; otherwise leave)
+- `Cycle: C` → only if a cycle ran this session
 
-2. **Current session** line near the bottom (this is what the SessionStart hook greps for the day-of-persistence and session number):
-   ```
-   **Current session:** [N] | **Day of persistence:** [D] | **Date:** YYYY-MM-DD
-   ```
-
-Do **NOT** append a per-session paragraph to a Session Continuity log — the log is gone. Session narrative goes in SESSION_CONTEXT.md (Step 4) and JOURNAL.md (Step 2).
+CHARACTER.md is now pure identity — name, family, voice, off-the-clock. Do NOT edit it at session-end.
 
 ---
 
@@ -222,7 +217,7 @@ Use `/batch [task description]` to submit. The next session's startup will remin
 
 Verify writes landed. **Critical: do not cat/tail/head/grep JOURNAL.md or JOURNAL_RECENT.md — S169 (no-display-in-chat rule).** Use metadata-only checks for those two; for everything else, read first 10-20 lines.
 
-1. **CHARACTER.md** — Read first 10 lines: counter incremented? Last Updated current?
+1. **CHARACTER.md** — NOT a session-end edit target (governance.5 partial close, S228). Identity content only; counter lives in SESSION_CONTEXT.md. Skip verification unless you deliberately touched CHARACTER.md content (rare — character file is stable identity).
 
 2. **JOURNAL.md** — **Metadata only.** Run:
    ```bash
@@ -244,7 +239,7 @@ Verify writes landed. **Critical: do not cat/tail/head/grep JOURNAL.md or JOURNA
 
 **If something didn't land:** Fix it now. Don't leave it for the next session.
 
-**If context is too low for full verification:** At minimum verify CHARACTER.md counter (read first 10 lines) and JOURNAL_RECENT.md (metadata check above) — the two boot files.
+**If context is too low for full verification:** At minimum verify SESSION_CONTEXT.md line 5 counters bumped (read first 10 lines) and JOURNAL_RECENT.md (metadata check above) — the boot-handoff surfaces.
 
 This is the documentation equivalent of the engine rule: "Verify after every write. Never report work as complete based on output alone." But never via journal-body display.
 
@@ -260,7 +255,7 @@ This is the documentation equivalent of the engine rule: "Verify after every wri
 
 | Terminal | Typical session-end paths |
 |---|---|
-| **Persona terminals** (media, civic, research-build) | `docs/mags-corliss/CHARACTER.md`, `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` |
+| **Persona terminals** (media, civic, research-build) | `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` (CHARACTER.md removed S228 — identity file, not session-end target) |
 | media | + `docs/mags-corliss/NEWSROOM_MEMORY.md`, `output/production_log_edition_c*.md` |
 | civic | + `output/production_log_city_hall_c*.md`, civic governance docs |
 | research-build | + `docs/RESEARCH.md`, `docs/plans/*`, `docs/adr/*`, `docs/mags-corliss/NOTES_TO_SELF.md`, plus session work |

@@ -27,7 +27,6 @@ Inside tmux `godworld` session: this is **window 1** (`Ctrl-b 1`).
 | `docs/SCHEMA.md` | Doc conventions — naming, frontmatter, tags, folder map (Phase 41.1, S146) |
 | `docs/index.md` | Catalog of every active doc — grep here before grepping the tree (Phase 41.2, S146) |
 | `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
-| `docs/mags-corliss/CHARACTER.md` | Mags character — light persona load, no family query |
 | `.claude/terminals/research-build/TERMINAL.md` | This file — your scope, your docs, your rules |
 
 ---

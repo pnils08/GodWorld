@@ -25,7 +25,6 @@ Inside tmux `godworld` session: this is **window 4** (`Ctrl-b 4`).
 | `CLAUDE.md` | Zero layer — identity, rules, terminal architecture, memory systems |
 | `.claude/rules/identity.md` | Non-negotiable behavioral rules (auto-loaded) |
 | `SESSION_CONTEXT.md` | Current state — cycle, versions, recent sessions (hook injects compact slice; don't re-read full) |
-| `docs/mags-corliss/CHARACTER.md` | Mags character — light persona load, no family query |
 | `.claude/terminals/civic/TERMINAL.md` | This file — your scope, your docs, your rules |
 
 ---

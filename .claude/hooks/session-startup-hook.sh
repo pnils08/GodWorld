@@ -17,8 +17,8 @@ if pm2 describe mags-bot > /dev/null 2>&1; then
 fi
 
 # --- CURRENT CRITICAL STATE ---
-SESSION_NUM=$(grep -oP 'Session: \K[0-9]+' "$MAGS_DIR/CHARACTER.md" 2>/dev/null || echo "?")
-DAY_NUM=$(grep -oP 'Day of persistence:\*\* \K[0-9]+' "$MAGS_DIR/CHARACTER.md" 2>/dev/null || echo "?")
+SESSION_NUM=$(grep -oP 'Session: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
+DAY_NUM=$(grep -oP 'Day: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
 CYCLE_NUM=$(grep -oP 'Cycle: \K[0-9]+' "$GODWORLD_ROOT/SESSION_CONTEXT.md" 2>/dev/null || echo "?")
 LAST_ENTRY=$(grep -oP '### Entry \d+: .*' "$MAGS_DIR/JOURNAL_RECENT.md" 2>/dev/null | tail -1 || echo "unknown")
 

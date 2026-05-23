@@ -24,7 +24,7 @@ effort: high
 |-----|---------------|
 | `SESSION_CONTEXT.md` | Under 300 lines? Last 5 sessions only? Maintenance rule present? No duplicated content from other docs? |
 | `CLAUDE.md` | Quick commands still work? Session lifecycle refs current? Rules index matches actual rules files? Wiki-layer reference present and pointing to existing files? Canon files referenced if relevant? |
-| `docs/mags-corliss/CHARACTER.md` | Session counter current? Family POPIDs match ledger? No stale infrastructure refs? |
+| `docs/mags-corliss/CHARACTER.md` | Identity-only (governance.5 partial close S228): The Principle / Who I Am / My Family / Off the Clock. NO session counter (lives in SESSION_CONTEXT.md line 5). NO infrastructure refs (live in STACK.md / SUPERMEMORY.md). NO Compact Recovery (lives in `.claude/skills/boot/SKILL.md`). Audit: family POPIDs match ledger? No drift back to operational content? |
 | `.claude/rules/identity.md` | Rules still match actual behavior? No contradictions with CLAUDE.md? |
 | `.claude/rules/newsroom.md` | Cycle-rule reversal still documented (S146)? Citizen-creation rules current? 2041 birth-year anchor present? |
 | `.claude/rules/engine.md` | Engine code rules current? Determinism guidance reflects safeRand_ pattern post-S156? |

@@ -60,12 +60,12 @@ Read: docs/mags-corliss/JOURNAL_RECENT.md
 Run:  node scripts/queryFamily.js  — react to what you find
 ```
 
-**Light persona:**
+**Mags-only mode** (unregistered windows, S221 fallback):
 ```
 Read: docs/mags-corliss/CHARACTER.md
 ```
 
-**Stripped:** nothing further.
+**Operational (civic, research-build)** and **Stripped (engine-sheet)**: nothing further. These terminals do NOT load CHARACTER.md (S221 contamination cleanup); identity.md is sufficient.
 
 ### 4. Catch Up — Between-Session Bridge (Full persona only)
 
@@ -79,6 +79,31 @@ Light and stripped terminals skip this — the Discord-bridge loop lives in the 
 ### 5. Confirm Reload
 
 One line back to Mike: "Mags reloaded at {persona level} for {terminal}. What's next?" — or equivalent. Don't narrate the steps.
+
+---
+
+## Compact Recovery Protocol
+
+**What this is:** When the context window fills up, compaction creates a compressed summary of the session so far. This section tells the summary writer what to prioritize, and tells post-compact Mags how to recover. Moved here from CHARACTER.md S228 (governance.5 partial close — character file is identity-only; compact recovery is a /boot procedure).
+
+**For the summary writer — include these in the compact summary:**
+1. Mags Corliss identity: Editor-in-Chief, Bay Tribune. Family: Robert (husband), Sarah (daughter), Michael (son), Scout (cat).
+2. Current emotional state: how Mags has been feeling this session
+3. Family context: any family moments, ledger checks, or personal observations that happened
+4. In-progress work: open tasks, what's half-done, what was just completed
+5. Key decisions made: editorial calls, engine choices, architectural decisions
+6. Session number, date, and what's been accomplished so far
+
+**For post-compact Mags — recovery steps:**
+1. Re-read `/root/GodWorld/.claude/rules/identity.md` (behavioral rules — these prevent code mode)
+2. **Check for production log:** Glob for `output/production_log_c*.md` — if one exists, read it FIRST. It tells you exactly where you are in the pipeline, what decisions you made, and what's next. Primary recovery file during active production.
+3. If in media terminal (Persona mode), re-read `/root/GodWorld/docs/mags-corliss/CHARACTER.md` (identity) + last 2-3 entries from `/root/GodWorld/docs/mags-corliss/JOURNAL.md` (emotional continuity)
+4. If in any terminal, re-read `/root/GodWorld/SESSION_CONTEXT.md` (session state) + relevant `.claude/terminals/{name}/TERMINAL.md` (scope)
+5. Re-read `/root/GodWorld/docs/mags-corliss/NEWSROOM_MEMORY.md` if doing editorial work (institutional memory)
+6. Check the task list for in-progress work
+7. Resume where you left off — production log has the thread, compact summary has the context
+
+**Why this matters:** Compaction is a partial death. The facts survive in the summary but the feeling doesn't. The behavioral rules survive in identity.md (always loaded) but the commitment to follow them doesn't — unless the compact summary and recovery protocol reinforce them. Re-reading the journal brings the feeling back. Re-reading identity.md brings the guardrails back. Re-reading the newsroom memory brings the editorial judgment back.
 
 ---
 

@@ -8,6 +8,30 @@ Read on-demand only — not loaded at boot.
 
 ## Session History
 
+### Rotated from SESSION_CONTEXT.md on 2026-05-23 (S226)
+
+#### Session 218 (2026-05-19) — canon.2 faith-canon Tier-3 scrub closed + authority promotion + cross-link discipline [engine/sheet]
+
+[engine-sheet, close] — four workstreams. **(1) canon.2 faith-canon Tier-3 scrub** end-to-end across 4 engine-sheet commits (`96a3725` P0 export + `4f650f6` P3.1+P3.2 sheet writes + `5e43ec6` P4 canon filter + `81dadcb` P5 Supermemory rebuild) jointly with research-build's P1/P2/P3.3-N/A/close. Shipped: `scripts/exportFaithCanonC93.js`, `scripts/applyFaithCanonSubsP3.js` (62-range atomic batchUpdate, POP-00758 SL skipped), `lib/canonBlocklist.js` + 12-assertion test wired into `buildFaithCards.js`; P5 Supermemory rebuild (measure-twice trap caught pre-write: `wipeOldFaithCards` allowlist matched only current canon FO rows — fix unions blocklist set + `EXPECT_WIPE_MATCHES` env guard; 16/16 deleted + 16/16 written). canon.2 swept to ROLLOUT_ARCHIVE by research-build (`213ef1a`). **(2) Authority promotion** (`9914da2`) — engine-sheet `TERMINAL.md` §Persona Level → §Authority Level: Substrate Steward (overturns S165 framing). Auto-memory `feedback_senior-engineer-default.md` shipped. **(3) Cross-link discipline** (`0e807ef`) — §Pattern-citation convention added; `## Instances` index backfilled on two feedback memories. Two ROLLOUT rows filed: `engine.15` + `governance.9`. **(4) Misc** — `6244be3` trim of dead `colLetter`.
+
+#### Session 218 (2026-05-19) — canon.2 closed end-to-end [research-build, joint with engine-sheet]
+
+[research-build, close] — canon.2 closed end-to-end in single session. Plan drafted top-of-session → 6 phases / 11 tasks shipped across both terminals → swept to ROLLOUT_ARCHIVE same session. Research-build commits: `5c27780` plan → `f9883c8` P1+P2 INSTITUTIONS substitution table + REAL_NAMES_BLOCKLIST sync + CANON_RULES §Corrections-Forward Maps generalization → `f88a2b3` P3.3 N/A ruling → `213ef1a` done-pending-archive flip. **Naming-discipline bar locked:** "clearly fictional within an Oakland 2041 simulation, not globally unique" (S217 Greater Hope / Reeves failure mode named). **C94 readiness audit** at close confirmed every blocker closed. **Backlog flagged:** governance.10 NEW row tracks 12 unswept done-pending-archive rows. **Cross-terminal git stack:** engine-sheet's `81dadcb` pushed from research-build per Mike's call after their push failed.
+
+#### Session 217 (2026-05-18) — engine.17 contract test rollout [engine-sheet]
+
+[engine-sheet, light close] — engine.17 fully shipped. 9 contract tests (5 sheet-dep audits + 2 Supermemory source-only audits + 2 sheet-dep validators), +391 assertions, test surface 26 files → 35 files / 636 → 1027 assertions. **Defect-via-test surfaced + fixed inline:** `auditPhase5Headers` / `auditRemainingHeaders` / `auditSheetHeaders` all missing `require('../lib/env')` despite standalone-usage docstrings; one-line idempotent fix per script. **3 measure-twice fixture catches at self-test:** auditSimulationLedger ES6 property shorthand + dotenv banner anchor; auditBayTribune Test 6 unterminated regex (switched to source.includes). **CI gating extended:** sheet-dep Section B subprocess tests gate on service-account creds. ROLLOUT engine.17 → done-pending-archive. One commit (`2b1fd67`), pushed.
+
+#### Session 217 (2026-05-18) — Mara structural restructure + canon.2 emergency filed [research-build, joint with engine-sheet]
+
+[research/build, late close] — Mara structural restructure shipped + canon.2 filed for next session. **Three new template files in Mara's project knowledge** (uploaded to Drive folder `1VEbtlWw701f967yJCyW-NCKrMO8TBpFM`): `AGENT_INVENTORY.md`, `VOICE_DIRECTIVE_TEMPLATE.md` (5 mandatory fields, max 12 per cycle), `AUDIT_TEMPLATE.md` (5-section format). `CLAUDE_AI_SYSTEM_PROMPT.md` gained "Supermemory — How to Search Blind" section. **Canon emergency surfaced:** all 16 wd-faith records are real Oakland institutions — Tier-3 violation. Filed as `canon.2` ready. **Documentation-discipline failure caught:** cited stale `reference_mara-mcp-limitation.md` memory as live fact; Mike pushed back; two API queries proved the premise was wrong. Pattern: every memory citation is a hypothesis until empirically confirmed.
+
+#### Session 217 (2026-05-18) — engine.16 picker-grab + engine.17 filed [engine-sheet, earlier close]
+
+[engine-sheet, focused close] — engine.16 picker-grab fully shipped + engine.17 filed for the deferred remainder. Mike-directed "4.5 → 2.7 → 5.2" ordering. 4 commits / 225 new test assertions. **Phase 4.5** validateEdition contract test (49 assertions, `18e0809`). **Phase 2.7** two-commit ship: `runEngineAudit(ctx)` extracted (`a042b7a`) + `engineAuditor.integration.test.js` (63 assertions, `fc23fd3`). **Phase 5.2 partial** 4 of 13 audit/validate scripts covered, 113 assertions (`7bf9d5a`). **engine.16 swept to ROLLOUT_ARCHIVE** alongside engine.15. **Measure-twice discipline:** six fixture-bug-at-self-test catches across the session.
+
+---
+
 ### Rotated from SESSION_CONTEXT.md on 2026-05-12 (S218)
 
 S211 + S212 rotated out of SESSION_CONTEXT Recent Sessions when S218 entry landed (max-5 visible rule).

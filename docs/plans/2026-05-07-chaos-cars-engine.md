@@ -106,7 +106,7 @@ Tasks numbered T<phase>.<idx>. Each is 2–5 min focused work unless flagged DES
   2. Implement `validateOutcome_(outcomeText)` — throws `Error('chaos_cars: forbidden outcome detected: ' + matched)` if any forbidden token appears (case-insensitive substring match).
   3. Export validator for use in Phase 2 config-loading + Phase 3 dice roll.
 - **Verify:** unit test in file footer — feed `'died in accident'` → throws; feed `'minor injury'` → returns true.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S229 (engine-sheet). `lib/chaosCarsConfig.js` shipped (158 LOC) — `FORBIDDEN_OUTCOMES` frozen array expanded beyond plan's named-minimum to cover stem variants (dies / dying / fatality / fatalities / kills / killing / perish / perished / casualty / casualties / homicide / suicide / murder / murdered — 21 tokens total; cost of over-enumeration < cost of false-negative). `validateOutcome(text)` uses word-boundary regex (`\b`) not substring — `deadline` / `killdeer` / `dieseling` / `fatalism` all pass (false-positive avoidance verified in test 5). Bonus `validateVehicleConfig(config)` convenience wrapper scans full `textureOutcomes[]` and names both offending vehicle + forbidden token in the throw message (Phase 2 will call this at config-load time). Tests live in parallel `lib/chaosCarsConfig.test.js` per project convention (not "file footer" as plan suggested — `scripts/run-tests.js` picks up `*.test.js`). 66 assertions across 8 test groups, all green. Module exports: `FORBIDDEN_OUTCOMES`, `validateOutcome`, `validateVehicleConfig` — stable contract for Phase 2 consumption.
 
 ---
 

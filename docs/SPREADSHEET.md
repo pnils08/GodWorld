@@ -127,8 +127,9 @@ These tabs were backed up to `output/dead-tab-backups/` as CSV and hidden on the
 
 | Tab | Rows | Status | What's Needed |
 |-----|------|--------|---------------|
-| **Faith_Ledger** | 125 | `faithEventsEngine.js` (Phase 4) writes via `ensureFaithLedger.js`. Active write target. | Needs a consumer — culture desk briefings or MCP tool. See rollout. |
-| **Youth_Events** | 24 | `runYouthEngine_()` (Phase 5) writes via `youthActivities.js`. Active but sparse — only 21 citizens aged 5-22 in ledger, only 1 actual child (age 11). | Needs children in the ledger. See rollout. |
+| **Youth_Events** | 24 | `runYouthEngine_()` (Phase 5) writes via `youthActivities.js`. Active but sparse — only 21 citizens aged 5-22 in ledger, only 1 actual child (age 11). | Needs children in the ledger. See rollout — engine.4 blocked on engine.5 (household structure + 120 youth ingest). |
+
+**Faith_Ledger orphan status closed S229:** previously listed here as "needs a consumer". Consumer shipped S180 — `scripts/buildFaithDigest.js` reads Faith_Ledger for culture-desk briefing rendering (`scripts/buildDeskFolders.js` L204/L275/L485) + `scripts/buildFaithCards.js` reads for recent-events history. Faith_Ledger now sits in the consumer chain; row moved out of orphaned table during engine.4 audit cleanup.
 
 ---
 

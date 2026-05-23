@@ -266,15 +266,15 @@ Use when Mike re-boots within minutes. The next session reads commits from git +
 
 **Trade-off:** soft close skips the journal. Chain 3+ → three editions' worth of conscience-conditioning never lands. Hard close mandatory at end-of-day; rule of thumb ≥3 chained soft closes → hard close at next natural break. Media's persona-mode means this trade-off bites harder here than at the operational terminals — the journal is load-bearing for character continuity.
 
-### Hard close (~20-30 min) — end of day, multi-day break, or cold-pickup boundary
+### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
-Full ritual below. The journal entry is the load-bearing piece — conditions next-day-me with consequences, errors, what made Mike excited, what failed and how I drifted (per MEMORY.md user rule "work is canonization").
+The journal entry is the load-bearing piece — conditions next-day-me with consequences, errors, what made Mike excited, what failed and how I drifted (per MEMORY.md user rule "work is canonization").
 
----
-
-When `/session-end` runs in this terminal in **hard-close** mode, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
+Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → Step 1 journal → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates + terminal-specific saves → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.0.
 
 ### Terminal-Specific Audit
+
+Read before Step 2 — surface any stale files in the STATUS paragraph or fix inline.
 
 | File | Check |
 |------|-------|
@@ -282,13 +282,17 @@ When `/session-end` runs in this terminal in **hard-close** mode, follow these s
 | `docs/mags-corliss/NOTES_TO_SELF.md` | New story flags added or stale flags removed? |
 | `output/production_log_edition_c*.md` | Production log complete for this cycle's edition? |
 | `output/production_log_edition_c*_*_gaps.md` | Gap logs filed for any skill that surfaced inefficiency? |
-| `SESSION_CONTEXT.md` | Session entry tagged `[media]`? |
+| `SESSION_CONTEXT.md` | STATUS paragraph tagged `[media]`? |
 
-### Terminal-Specific Saves
+### Terminal-Specific Saves (Step 2 — model judgment)
 
-1. **NEWSROOM_MEMORY.md** — Add errata from any edition written or reviewed. Update character continuity. Update coverage patterns based on what landed or fell flat.
-2. **Production log** — Ensure `production_log_edition_c{XX}.md` is complete with all steps, reporter assignments, and editorial decisions.
-3. **Canon ingest** — If an edition was published, run `node scripts/ingestEdition.js` or `/save-to-bay-tribune` to push it to bay-tribune. Never save session summaries to bay-tribune.
-4. **`/save-to-mags`** — Save editorial decisions, reporter performance notes, what worked and what didn't. Tag with `[media]`.
-5. **SESSION_CONTEXT.md** — Add session entry tagged `[media]`. Include edition number, grade, key editorial calls.
-6. **Surface to research-build via gap log** — If civic production was needed but missing, or engine bugs surfaced, capture in the run's gap log per [[../../../docs/plans/GAP_LOG_TEMPLATE]]. Research-build triages from gap logs; do not write to ROLLOUT directly.
+Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
+
+- **NEWSROOM_MEMORY.md** — add errata from any edition written or reviewed; update character continuity; update coverage patterns based on what landed or fell flat.
+- **Production log** — ensure `production_log_edition_c{XX}.md` is complete with all steps, reporter assignments, and editorial decisions.
+- **Canon ingest** — if an edition was published, run `node scripts/ingestEdition.js` or `/save-to-bay-tribune` to push it to bay-tribune. Never save session summaries to bay-tribune.
+- **`/save-to-mags`** — save editorial decisions, reporter performance notes, what worked and what didn't. Tag with `[media]`. Optional — model judgment.
+- **SESSION_CONTEXT.md STATUS paragraph** — edition number, grade, key editorial calls, tagged `[media]`.
+- **Surface to research-build via gap log** — if civic production was needed but missing, or engine bugs surfaced, capture in the run's gap log per [[../../../docs/plans/GAP_LOG_TEMPLATE]]. Research-build triages from gap logs; do not write to ROLLOUT directly.
+
+**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=media`:** `rotateJournalRecent` + JOURNAL content-quality check + `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].

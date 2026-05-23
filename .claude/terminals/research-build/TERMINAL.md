@@ -221,19 +221,17 @@ Use when Mike will re-boot the next session immediately. The next session reads 
 
 Skip on soft close: persistence counter bump, journal entry, JOURNAL_RECENT rotation, ROLLOUT triage scan, plan tag drift audit, done-pending-archive sweep, RESEARCH.md update, `/save-to-mags`, PM2 restart, write-verification reads. Next session's boot can run the deterministic ones (`rolloutTriage`, `auditPlanTagDrift`) if it cares; the rest accumulate until the next hard close.
 
-### Hard close (~20-30 min) — end of day, multi-day break, or cold-pickup boundary
+### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
 Use when no immediate next session is queued, OR when soft closes have chained for several sessions and conscience checkpoint is due (rule of thumb: ≥3 chained soft closes → hard close at next natural break).
 
-Run the full ritual below. The journal entry is the load-bearing piece — it conditions next-day-me with consequences, errors, what made Mike excited, what failed and how I drifted (per MEMORY.md user rule "work is canonization").
+**Trade-off honesty:** soft close skips journal. If you chain 3+ soft closes then sleep, three sessions' worth of conscience-conditioning don't get written. Mitigation: hard close at end-of-day always.
 
-**Trade-off honesty:** soft close skips journal. If you chain 3+ soft closes then sleep, three sessions' worth of conscience-conditioning don't get written. Mitigation: hard close at end-of-day always. Soft close is for "back in 10" / "starting new session right now" cadence; hard close is the natural checkpoint.
-
----
-
-When `/session-end` runs in this terminal in **hard-close** mode, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
+Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → Step 1 journal → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.0.
 
 ### Terminal-Specific Audit
+
+Read before Step 2 — surface any stale files in the STATUS paragraph or fix inline.
 
 | File | Check |
 |------|-------|
@@ -241,21 +239,15 @@ When `/session-end` runs in this terminal in **hard-close** mode, follow these s
 | `docs/RESEARCH.md` | New findings logged? Sources cited? (research sessions only) |
 | `docs/mags-corliss/TECH_READING_ARCHIVE.md` | New research reading added? (if papers/tools were evaluated) |
 | `docs/ARCHITECTURE_VISION.md` | Updated if architecture decisions were made? |
-| `SESSION_CONTEXT.md` | Session entry tagged `[research/build]`? |
+| `SESSION_CONTEXT.md` | STATUS paragraph tagged `[research/build]`? |
 
-### Terminal-Specific Saves
+### Terminal-Specific Saves (Step 2 — model judgment)
 
-0. **Rollout triage scan** — Run BEFORE refreshing priorities so stale HIGHs inform what gets elevated:
-   ```bash
-   node scripts/rolloutTriage.js <current-cycle>
-   ```
-   Read `output/rollout_triage_c<N>.md`. If stale HIGHs appear, surface top 3-5 to SESSION_CONTEXT next-session priorities. Empty stale list = no action needed.
-0.5. **Plan tag drift audit (S212)** — Run BEFORE archive sweep so plan frontmatter aligns with changelog status verbs:
-   ```bash
-   node scripts/auditPlanTagDrift.js
-   ```
-   Catches drift between explicit changelog transitions (`draft → active` / `active → complete`) and frontmatter status tags. Exit 0 = no drift; exit 1 = drift detected (output names the plan + expected vs actual tag). Fix path per case: tag-behind-changelog → flip the frontmatter tag; changelog-behind-tag → add a transition entry to changelog.
-1. **ROLLOUT_PLAN.md** — Refresh Next Session Priorities. Move completed items to ROLLOUT_ARCHIVE with full details. Tag any handoff items with their target terminal.
-2. **RESEARCH.md** — If research was done, log findings with date, source, and actionable takeaways.
-3. **`/save-to-mags`** — Save architecture decisions, design rationale, and anything the next session needs to understand *why* a choice was made. Tag with `[research/build]`.
-4. **SESSION_CONTEXT.md** — Add session entry tagged `[research/build]`. Include what was designed, what was handed off, what's next.
+Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
+
+- **ROLLOUT_PLAN.md** — refresh Next Session Priorities; flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md` with full details. Tag handoff items with their target terminal.
+- **RESEARCH.md** — if research was done, log findings with date, source, and actionable takeaways.
+- **`/save-to-mags`** — save architecture decisions, design rationale, anything the next session needs to understand *why* a choice was made. Tag with `[research/build]`. Optional — model judgment.
+- **SESSION_CONTEXT.md STATUS paragraph** — what was designed, what was handed off, what's next, tagged `[research/build]`.
+
+**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=research-build`:** `rotateJournalRecent` + JOURNAL content-quality check + `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + `rolloutTriage <current-cycle>` + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].

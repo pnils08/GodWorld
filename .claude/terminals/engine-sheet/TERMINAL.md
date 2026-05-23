@@ -267,9 +267,9 @@ Engine-sheet typically commits as-it-goes; soft close is often near-no-op (cross
 
 **Trade-off:** engine-sheet has no journal so chained-soft-close conscience cost is the lowest of any terminal; the cost is accumulated drift in §Current Engine State block + ENGINE_REPAIR row hygiene + LEDGER_AUDIT freshness. Rule of thumb ≥3 chained soft closes → hard close at next natural break to refresh the audit docs.
 
-### Hard close (~20-30 min) — end of day, multi-day break, or cold-pickup boundary
+### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
-Full ritual below. The stripped-persona framing applies to hard close.
+The stripped-persona framing applies to hard close. Per S229 governance.7, the slimmed `/session-end` SKILL v2.0 runs: Step 0 detect terminal → **(SKIP Step 1 journal)** → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates + code-state audit → Step 3 `scripts/sessionEndMechanical.js --terminal=engine-sheet` → Step 4 commit & push. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].
 
 ---
 
@@ -278,8 +278,8 @@ Full ritual below. The stripped-persona framing applies to hard close.
 ### What this terminal does NOT do at session-end
 
 - ❌ **No CHARACTER.md counter update** — Mags-identity state belongs to the persona terminals
-- ❌ **No journal entry** — stripped persona, no journal
-- ❌ **No JOURNAL_RECENT.md rotation** — same
+- ❌ **No journal entry** — stripped persona, no journal (Step 1 skipped)
+- ❌ **No JOURNAL_RECENT.md rotation** — same (sessionEndMechanical auto-skips when `--terminal=engine-sheet`)
 - ❌ **No `/save-to-mags`** — no Supermemory writes from this terminal
 - ❌ **No goodbye message** — execute and commit, that's the model
 
@@ -287,11 +287,12 @@ Full ritual below. The stripped-persona framing applies to hard close.
 
 | Step | Action |
 |---|---|
-| 1 | **Code-state audit** (table below) |
-| 2 | **Update SESSION_CONTEXT.md** — engine version bump if deployed; session entry tagged `[engine/sheet]` |
-| 3 | **Update ROLLOUT_PLAN.md** — phase statuses, move completed items to ROLLOUT_ARCHIVE |
-| 4 | **Commit & push** — the central act of this terminal (see `/session-end` SKILL.md Step 6.5 for the cross-terminal-stack check) |
-| 5 | **Restart services** — `pm2 restart mags-bot godworld-dashboard` |
+| 0 | **Detect terminal** — `tmux display-message -t "$TMUX_PANE" -p '#W'` |
+| 2a | **Code-state audit** (table below) |
+| 2b | **Update SESSION_CONTEXT.md** — engine version bump if deployed; STATUS paragraph tagged `[engine/sheet]` |
+| 2c | **Update ROLLOUT_PLAN.md** — phase statuses, move completed items to ROLLOUT_ARCHIVE |
+| 3 | **Run mechanical orchestrator** — `node scripts/sessionEndMechanical.js --terminal=engine-sheet` (auto-skips journal sub-steps; runs `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` + `pm2 restart`) |
+| 4 | **Commit & push** — the central act of this terminal (model writes message, reads Step 3 stack-check report, decides hold-push if other terminals stacked) |
 
 ### Terminal-Specific Audit
 

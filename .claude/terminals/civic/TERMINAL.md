@@ -227,27 +227,29 @@ Use when the next civic session opens within minutes.
 
 **Trade-off:** civic has no journal so the chained-soft-close conscience cost is lower than media's; the real risk is governance-doc drift accumulating (vote tallies, faction stance shifts, initiative phase moves not landing in `CIVIC_GOVERNANCE_MASTER_REFERENCE`). Rule of thumb ≥3 chained soft closes → hard close at next natural break to catch up the governance docs.
 
-### Hard close (~20-30 min) — end of day, multi-day break, or cold-pickup boundary
+### Hard close (~5-10 min) — end of day, multi-day break, or cold-pickup boundary
 
-Full ritual below.
-
----
-
-When `/session-end` runs in this terminal in **hard-close** mode, follow these steps **in addition to** the shared steps (persistence counter, journal, JOURNAL_RECENT, SESSION_CONTEXT, verify, restart bot).
+Per S229 governance.7 the hard-close ritual collapsed from 13 steps to 4 model + 1 mechanical (`scripts/sessionEndMechanical.js`). Run the slimmed `/session-end` SKILL: Step 0 detect terminal → Step 1 journal → Step 2 SESSION_CONTEXT STATUS + ROLLOUT updates + terminal-specific saves → Step 3 mechanical script → Step 4 commit & push. Full skill: `.claude/skills/session-end/SKILL.md` v2.0.
 
 ### Terminal-Specific Audit
+
+Read before Step 2 — surface any stale files in the STATUS paragraph or fix inline.
 
 | File | Check |
 |------|-------|
 | `output/production_log_city_hall_c*.md` | Production log complete? All voice agents ran? Clerk verified? |
 | `output/production_log_city_hall_c*_*_gaps.md` | Gap logs filed for any skill that surfaced inefficiency? |
 | `docs/mara-vance/CIVIC_GOVERNANCE_MASTER_REFERENCE.md` | Updated if council votes or initiative statuses changed? |
-| `SESSION_CONTEXT.md` | Session entry tagged `[civic]`? |
+| `SESSION_CONTEXT.md` | STATUS paragraph tagged `[civic]`? |
 
-### Terminal-Specific Saves
+### Terminal-Specific Saves (Step 2 — model judgment)
 
-1. **Production log** — Ensure `production_log_city_hall_c{XX}.md` is complete with Mayor decision, faction responses, project agent updates, and clerk verification.
-2. **Governance docs** — If votes happened or initiatives moved, update the master reference and initiative tracker.
-3. **`/save-to-mags`** — Save civic decisions, what the Mayor chose, how factions reacted, anything the media terminal needs for journalism. Tag with `[civic]`.
-4. **SESSION_CONTEXT.md** — Add session entry tagged `[civic]`. Include what decisions were made, which initiatives moved, what's pending.
-5. **Flag for media terminal** — Note in the production log what's ready for the newsroom. The civic production log is the media terminal's input.
+Update during Step 2 of the slimmed SKILL alongside SESSION_CONTEXT + ROLLOUT:
+
+- **Production log** — ensure `production_log_city_hall_c{XX}.md` is complete with Mayor decision, faction responses, project agent updates, and clerk verification.
+- **Governance docs** — if votes happened or initiatives moved, update the master reference and initiative tracker.
+- **`/save-to-mags`** — save civic decisions, what the Mayor chose, how factions reacted, anything the media terminal needs for journalism. Tag with `[civic]`. Optional — model judgment.
+- **SESSION_CONTEXT.md STATUS paragraph** — what decisions were made, which initiatives moved, what's pending, tagged `[civic]`.
+- **Flag for media terminal** — note in the production log what's ready for the newsroom. The civic production log is the media terminal's input.
+
+**Mechanical (Step 3) — auto-runs from `sessionEndMechanical.js --terminal=civic`:** `rotateJournalRecent` + JOURNAL content-quality check + `writeShippedBlock` + `auditPlanTagDrift` (informational, never fatal) + cross-terminal git stack check + opt-in `--rotate-history` SESSION_CONTEXT → SESSION_HISTORY rotation + `pm2 restart`. Plan: [[../../../docs/plans/2026-05-23-session-end-collapse]].

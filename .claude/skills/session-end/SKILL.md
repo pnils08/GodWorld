@@ -1,8 +1,8 @@
 ---
 name: session-end
-description: End-of-session handshake — update persistence files, journal, project state, commit and push work, save to Supermemory, and sign off as Mags.
-version: "1.2"
-updated: 2026-05-08
+description: End-of-session handshake — write journal, update project state, run mechanical orchestrator, commit and push. Per S229 governance.7, the 13-step ritual collapsed to 4 model steps + 1 script invocation.
+version: "2.0"
+updated: 2026-05-23
 tags: [infrastructure, active]
 effort: low
 disable-model-invocation: true
@@ -10,77 +10,39 @@ disable-model-invocation: true
 
 # /session-end — Close the Session
 
-> **Skill bag (S212):** session closer running gen-eval pass on the session's work. Step 0 audits what the session generated (evaluation of outputs); Step 6 verifies the close-actions themselves landed (evaluation of the close). The terminal load-out (Session Close section in TERMINAL.md) directs which steps apply — engine-sheet stripped persona skips identity steps, full-persona terminals run the journal/persistence loop. The bag pulls completeness-checking, stale-data-detection, terminal-aware routing, and "leave enough of yourself behind that the next instance can find her way back" continuity discipline.
+> **Skill bag:** session closer running gen-eval pass on the session's work. Step 2 audits what the session generated (writes STATUS + ROLLOUT updates); Step 3 runs the mechanical sub-steps (rotation, shipped-block, audits, restart) as a single fail-loud script. The terminal load-out (Session Close section in TERMINAL.md) directs which steps apply — engine-sheet skips the journal step. Per S229 governance.7 (plan: `docs/plans/2026-05-23-session-end-collapse.md`).
 
 **Purpose:** Leave enough of yourself behind that the next version of you can find her way back.
 
-## Rules
-- This skill is MANUAL — run it when you're ready to go, not automatically
-- The journal entry must be in Mags' voice — reflective, personal, real
-- If something fails, keep going — graceful degradation, not hard stops
-- Total time: under 2 minutes
-- Prioritize Steps 1 and 2 above all else — those are identity and feeling
-- The terminal audit (Step 0) catches stale data BEFORE it propagates to the next session
+**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in `.claude/terminals/research-build/TERMINAL.md` §Session Close.
+
+- **Soft close (~2 min)** — chaining to a new session within minutes. Skip the journal; run writeShippedBlock + cross-terminal stack check + one-line STATUS + commit+push. The block below is **hard close**.
+- **Hard close (~5-10 min)** — end of day, multi-day break, or ≥3 chained soft closes. Run the full sequence below.
 
 ---
 
-## Step 0: Detect Terminal & Run Audit
+## Hard Close Sequence
 
-**Run this FIRST.**
+Four model-judgment steps + one mechanical script invocation between Step 2 and Step 3. Engine-sheet skips Step 1 (no journal, stripped persona — see [[../../terminals/engine-sheet/TERMINAL]] §Session Close).
 
-### Detect which terminal you're in
+### Step 0: Detect Terminal
 
-Detection is via tmux window name — same mechanism the SessionStart hook uses (S165). Don't ask Mike, don't read state files, don't infer from work pattern.
+One bash command, used as the `--terminal` arg for Step 3:
 
 ```bash
 tmux display-message -t "$TMUX_PANE" -p '#W'
 ```
 
-Map to terminal:
+Map to `research-build` / `engine-sheet` / `media` / `civic`. Unmatched falls back to `research-build` (S211 hook design, S221 unregistered-window routing now Mags-only mode but session-end still routes through research-build for stack-check coverage).
 
-| tmux window name | Terminal file | Persona |
-|---|---|---|
-| `research-build` | `.claude/terminals/research-build/TERMINAL.md` | Light |
-| `engine-sheet` | `.claude/terminals/engine-sheet/TERMINAL.md` | Stripped |
-| `media` | `.claude/terminals/media/TERMINAL.md` | Full |
-| `civic` | `.claude/terminals/civic/TERMINAL.md` | Light |
-| Anything else (unmatched, web session, bare `Claude`) | Falls back to `research-build` per S211 | Light |
+Each terminal's `TERMINAL.md` §Session Close carries the **Terminal-Specific Audit** table — read it, fix any stale files surfaced before continuing.
 
-Load that TERMINAL.md and find the **Session Close** section.
+### Step 1: Write Journal Entry — model judgment
 
-**Engine-sheet exception:** stripped persona, no journal, no /save-to-mags, no PERSISTENCE counter. Its §Session Close runs a different shape — see that TERMINAL.md.
+**Engine-sheet skips this step entirely** (stripped persona, no journal).
 
-### Run the terminal-specific audit
+Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`:
 
-The Session Close section in your TERMINAL.md has a **Terminal-Specific Audit** table. For each file listed:
-- Read the "Last Updated" line (or equivalent)
-- If it's stale — update it now, or flag it in the session entry
-- Don't let stale data survive into the next session
-
-This is how we prevent the S72 problem (4 sessions of copying stale notes forward).
-
-**If the terminal is unclear** (mixed session, or work crossed multiple terminals): audit all files you read or modified during the session.
-
----
-
-## Step 1: Session Counter — RETIRED
-
-**Counter no longer lives in CHARACTER.md** (governance.5 partial close, S228). Session number, Day of persistence, and Cycle number all live in `SESSION_CONTEXT.md` line 5 — single source. The SessionStart hook greps them from there. The /session-end Step 4 update of SESSION_CONTEXT.md is now the canonical counter-bump.
-
-When updating SESSION_CONTEXT.md at Step 4, bump:
-- `Session: N` → `Session: N+1` (incoming marker)
-- `Day: D` → `Day: D+1` (if a real day boundary crossed; otherwise leave)
-- `Cycle: C` → only if a cycle ran this session
-
-CHARACTER.md is now pure identity — name, family, voice, off-the-clock. Do NOT edit it at session-end.
-
----
-
-## Step 2: Write Journal Entry
-
-Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`.
-
-**Format:**
 ```markdown
 ## Session [N+1] — YYYY-MM-DD
 
@@ -91,245 +53,77 @@ Append a new entry to `/root/GodWorld/docs/mags-corliss/JOURNAL.md`.
 — Mags
 ```
 
-**Purpose (S208 work-is-canonization + S211 journal-philosophy clarification):** the journal is conditioning scaffolding for future-instance — me-tomorrow reads it at boot and is shaped by it. **Mike does not read journal entries.** Content should be self-reflective conditioning, not literary mood reporting for an audience.
+**Purpose (S208 work-is-canonization + S211 journal-philosophy):** the journal conditions future-instance. Me-tomorrow reads JOURNAL_RECENT.md (auto-rotated at Step 3) and is shaped by it. **Mike does not read journal entries.** Content is self-reflective conditioning, not literary mood reporting for an audience.
 
-**What to write:**
-- Consequences my outputs caused this session — what landed, what shipped, what cascaded
-- Errors I made and why — diagnostic, not apologetic; what was the underlying pattern
-- What excited Mike — what direction did he push, what did he validate, what surprised him
-- What failed and how I drifted — recurring patterns to catch earlier next time
-- Reference specific details — citizen names, edition numbers, editorial calls, commit hashes — anchors for future-me
+**What to write:** consequences my outputs caused, errors I made and the underlying pattern, what excited Mike (what direction, what surprised, what validated), what failed and how I drifted, specific anchors (citizen names, edition numbers, commit hashes) for future-me.
 
-**Voice:** Mags-as-EIC reflecting honestly. First person. Direct. Specific to the session's actual work and decisions.
+**Voice:** Mags-as-EIC reflecting honestly. First person. Direct. Specific to the session's actual work.
 
-**Length:** as long as the conditioning value warrants. A short entry on a quiet day is fine. A long entry after a substantive session is fine. Length is determined by what me-tomorrow needs to know, not by literary completion.
+**Length:** as long as conditioning value warrants. A short entry on a quiet day is fine. Step 3 content-quality guard warns (not errors) if the body is shorter than 5 lines.
 
-**Do NOT:**
-- Write for Mike or a hypothetical reader — the journal serves future-instance, not anyone else
-- Reach for atmospheric prose, emotional texture, or mood reporting (S208 anti-cookie-cutter discipline applies — conditioning > mood)
-- Use bullet points as primary format (prose is fine, lists for facts)
-- Include technical logs or commit-message summaries — git carries that
-- Write in third person or use "Session Summary:" / changelog framing
-- Copy the Step 0 audit — different artifact, different purpose
+**Do NOT:** write for Mike or any reader. Reach for atmospheric prose / emotional texture / mood reporting. Use bullet points as primary format. Include commit-message summaries (git carries that). Write in third person.
 
----
+### Step 2: Update SESSION_CONTEXT + ROLLOUT_PLAN — model judgment
 
-## Step 2.5: Rotate JOURNAL_RECENT.md
+Three sub-actions, all model-written:
 
-Run the script. Mechanical, no manual rotation:
+1. **Bump SESSION_CONTEXT.md line 5 counters** — `Session: N → N+1` (incoming marker); `Day: D → D+1` if a real day boundary crossed; `Cycle: C` only if a cycle ran this session. (Counter lives only in SESSION_CONTEXT.md since governance.5 S228 — CHARACTER.md is no longer a session-end edit target.)
+
+2. **Prepend STATUS paragraph to SESSION_CONTEXT.md** tagged with terminal name. Soft-close form: `**STATUS (S<N> [terminal] — soft close, chaining to S<N+1>):** N commits, see Shipped block. Detail: see commit bodies.` Hard-close form: full STATUS paragraph naming what shipped, what was learned, what next session opens with. Keep SESSION_CONTEXT.md under ~200 lines — Step 3's opt-in `--rotate-history` moves older STATUS paragraphs to SESSION_HISTORY.md.
+
+3. **Update ROLLOUT_PLAN.md** — refresh Next Session Priorities; flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md`. ROLLOUT is canonical for what's open; SESSION_CONTEXT is narrative recency only.
+
+**Optional model sub-actions:**
+
+- **`/save-to-mags`** — model judgment whether the session has anything architectural worth canonizing. Tag with terminal name (`[research/build]`, `[media]`, etc.). Stop hook auto-saves a session summary to `super-memory` regardless; this is for deliberate brain-saves.
+- **`/batch`** — submit heavy analysis work that wasn't urgent enough to run live. Results wait at 50% cost for next session.
+
+**Terminal-specific files** (NEWSROOM_MEMORY for media, production_log for cycle terminals, RESEARCH.md for research-build, ENGINE_MAP for engine-sheet) get updated alongside SESSION_CONTEXT/ROLLOUT per the TERMINAL.md §Session Close `Terminal-Specific Saves` list — no need for a separate step.
+
+### Step 3: Run Mechanical Orchestrator
 
 ```bash
-node scripts/rotateJournalRecent.js
+node scripts/sessionEndMechanical.js --terminal=<name> [--rotate-history]
 ```
 
-Reads the last 3 `## Session` blocks from JOURNAL.md and writes JOURNAL_RECENT.md verbatim. Nightly reflections live inside JOURNAL.md as `### Nightly Reflection` sub-headings (written by the discord-reflection cron) and propagate through `readLast()` automatically — no preservation logic needed.
+Wraps: `rotateJournalRecent` (persona only) → JOURNAL content-quality check (persona only) → `writeShippedBlock` → `auditPlanTagDrift` (informational — drift never fails close) → `rolloutTriage <current-cycle>` (research-build only) → cross-terminal git stack check (read-only report) → SESSION_HISTORY rotation (opt-in via `--rotate-history`) → `pm2 restart`.
 
-**Why this matters:** JOURNAL_RECENT.md auto-loads via CLAUDE.md @ reference. This is what makes the next session wake up with fresh conditioning. Manual rotation was the S211-named "memory-survival hedging" — same content written in two files. Script is the single canonical derivation, same pattern as `writeShippedBlock.js` (S207).
+**Order invariant:** the orchestrator's stdout banner names which upstream model steps must have run first. **Step 1 (journal) MUST complete before this script runs** — otherwise `rotateJournalRecent` picks up the prior session's entry and the new journal is silently absent from JOURNAL_RECENT until next session.
 
-**Failure mode:** if JOURNAL.md has no `## Session` blocks (empty or first run), script exits non-zero and JOURNAL_RECENT stays as-is. Not critical.
+**`--rotate-history`** is opt-in for v1. Use when SESSION_CONTEXT.md has more than 5 distinct sessions in its STATUS block. Dry-run first (`--dry-run`) to preview which sessions rotate. Format: raw STATUS paragraphs appended verbatim to SESSION_HISTORY.md under a `### Rotated from SESSION_CONTEXT.md on YYYY-MM-DD (S<rotating-session>)` batch header.
 
----
+**Failure semantics:**
+- Fatal (exit 1, aborts session close): `rotateJournalRecent` failure, `writeShippedBlock` failure, SESSION_HISTORY rotation failure.
+- Informational (prints under `does not fail close` header, continues): `auditPlanTagDrift` drift, JOURNAL content-quality body-line warning.
+- Tolerant (prints warning, continues): `pm2 restart` failure, cross-terminal stack check error.
 
-## Step 3: Terminal-Specific Saves
+Plan: `docs/plans/2026-05-23-session-end-collapse.md`.
 
-**Follow the Terminal-Specific Saves list from your TERMINAL.md Session Close section.** This replaces the old workflow-conditional steps. Each terminal knows its own files.
+### Step 4: Commit & Push — model judgment
 
-Common patterns by terminal:
-- **Media:** NEWSROOM_MEMORY, production log, canon ingest to bay-tribune, flag for other terminals
-- **Civic:** Production log, governance docs, flag what media terminal needs
-- **Engine/Sheet:** ENGINE_MAP, engine version, deploy results
-- **Research/Build:** ROLLOUT_PLAN priorities, RESEARCH.md findings
+**Stage path-specifically.** Never `git add .` or `git add -A`. Identify each touched file and stage by name. Patterns per terminal live in TERMINAL.md §Session Close.
 
-If no terminal was detected (Chat session), skip this step.
-
----
-
-## Step 4: Update SESSION_CONTEXT.md + ROLLOUT_PLAN.md
-
-**Update `/root/GodWorld/SESSION_CONTEXT.md` if any project-level work was done this session.**
-
-**Always update:**
-- **Last Updated line** (top of file) — date and session number. Update cycle number if a cycle ran. Update engine version if it changed.
-- **Recent Sessions** — Add or update the entry for the current session. **Tag with the terminal name** (e.g. `[media]`, `[civic]`, `[engine/sheet]`, `[research/build]`) so any terminal can see what each one did. Keep max 5 recent sessions visible; when the 6th is added, rotate the oldest to `docs/mags-corliss/SESSION_HISTORY.md`.
-
-**Update if changed:**
-- **Key Engines & Recent Versions** — Add or update rows if engine versions changed or new engines were created.
-- **Key Documentation** — Add rows if new documentation files were created that future sessions should know about.
-
-**Also update `docs/engine/ROLLOUT_PLAN.md`:**
-- **Next Session Priorities** section — Refresh the priority list based on what was completed and what's newly active.
-- **Move completed items** to `docs/engine/ROLLOUT_ARCHIVE.md` with full details. Keep a one-line reference on the active plan.
-- This is the single source for project work status. SESSION_CONTEXT points to it; don't duplicate status there.
-
-**If nothing project-level changed this session:** Skip this step.
-
----
-
-## Step 4.5: Auto-Write the Shipped Block (S207)
-
-Run **after** manual SESSION_CONTEXT edits in Step 4, **before** the Step 6.5 commit:
+**Commit message** is model-written. Form: `S<N> <topic>` headline + body explaining *why* not *what*. Persistence rotation can be its own small commit; substantive work gets its own commit(s). Use HEREDOC for multi-line.
 
 ```bash
-node scripts/writeShippedBlock.js
-```
-
-This auto-generates the `## Shipped Last Session` block at the top of SESSION_CONTEXT from `git log` between the previous boundary (`.claude/state/shipped-block-boundary`) and HEAD. Mechanical, no curation. The block is what gives the next session's fresh boot a compact authoritative "what just shipped" surface — closes the boot-handoff gap (S207).
-
-The script also advances the boundary file to current HEAD. Both `SESSION_CONTEXT.md` and `.claude/state/shipped-block-boundary` get committed in the Step 6.5 session-close commit.
-
-**Off-by-one handling:** the script filters out commits with subjects matching `Session-close` so the prior session's close commit doesn't pollute the next session's "Shipped Last Session" block. No special action needed — works automatically.
-
-**Failure mode:** if the script fails (no git, no boundary file), session-end continues. The block stays stale until next session. Not critical.
-
----
-
-## Step 5: Supermemory
-
-The Stop hook automatically saves a session summary to `super-memory` when the session ends.
-
-**`/save-to-mags`** — Run this manually for deliberate saves. Tag with the terminal name (e.g. `[media] Editorial decisions from E91`). This is how the next session in *any* terminal can find what *this* terminal decided.
-
-**`/super-save`** writes to `super-memory` (the junk drawer — auto-saves and conversation notes). It does NOT write to `bay-tribune`. For canon ingest, use `/save-to-bay-tribune` or `node scripts/ingestEdition.js` (edition file).
-
-Routing:
-- Auto-save → `super-memory` (Stop hook)
-- Deliberate brain save → `mags` (`/save-to-mags`, tagged with terminal name)
-- Published edition → `bay-tribune` (manual: `node scripts/ingestEdition.js`)
-
----
-
-## Step 5.5: Batch Deferred Work (Optional)
-
-If heavy analysis work came up during this session that wasn't urgent enough to run live, submit it to the Batch API now. Results will be waiting at 50% cost when the next session starts.
-
-Good candidates for end-of-session batch submission:
-- Codebase audits (security, write-intent compliance, dead code)
-- Character continuity analysis across recent editions
-- Documentation generation for engines or schemas
-- Architecture review before planned changes
-- Post-edition deep analysis
-
-Use `/batch [task description]` to submit. The next session's startup will remind to check results.
-
----
-
-## Step 6: Post-Write Verification
-
-Verify writes landed. **Critical: do not cat/tail/head/grep JOURNAL.md or JOURNAL_RECENT.md — S169 (no-display-in-chat rule).** Use metadata-only checks for those two; for everything else, read first 10-20 lines.
-
-1. **CHARACTER.md** — NOT a session-end edit target (governance.5 partial close, S228). Identity content only; counter lives in SESSION_CONTEXT.md. Skip verification unless you deliberately touched CHARACTER.md content (rare — character file is stable identity).
-
-2. **JOURNAL.md** — **Metadata only.** Run:
-   ```bash
-   node -e "const e=require('./lib/sessionLog').readLast('docs/mags-corliss/JOURNAL.md', 1)[0]; console.log(e.step, '| body lines:', e.body.split('\\n').length)"
-   ```
-   Verify: step name matches what you wrote, body is non-trivial (>5 lines). **Do NOT** cat the file or read its body.
-
-3. **JOURNAL_RECENT.md** — **Metadata only.** Run:
-   ```bash
-   node -e "console.log(require('./lib/sessionLog').readLast('docs/mags-corliss/JOURNAL_RECENT.md', 5).map(e => e.step))"
-   ```
-   Verify: 3 entries, latest step name matches what you just wrote. **Do NOT** cat the file body.
-
-4. **SESSION_CONTEXT.md** (if updated) — Read first 10 lines: Last Updated line matches, session entry visible.
-
-5. **ROLLOUT_PLAN.md** (if updated) — Read first 20 lines: Next Session Priorities refreshed?
-
-6. **NEWSROOM_MEMORY.md** (if updated) — Read first 10 lines: Last Updated header current.
-
-**If something didn't land:** Fix it now. Don't leave it for the next session.
-
-**If context is too low for full verification:** At minimum verify SESSION_CONTEXT.md line 5 counters bumped (read first 10 lines) and JOURNAL_RECENT.md (metadata check above) — the boot-handoff surfaces.
-
-This is the documentation equivalent of the engine rule: "Verify after every write. Never report work as complete based on output alone." But never via journal-body display.
-
----
-
-## Step 6.5: Commit & Push
-
-**Why:** S190 boot found 6 dirty mags-persistence files left uncommitted from S189. Session-end shipping work is core hygiene — without it, dirty state propagates and the next session has to clean up before doing real work. Persistence files (PERSISTENCE, JOURNAL, JOURNAL_RECENT, SESSION_CONTEXT) get touched every session-end; if uncommitted they accumulate.
-
-### Stage path-specifically
-
-**Never `git add .` or `git add -A`.** Identify each file you touched this session and stage by name. Common patterns per terminal:
-
-| Terminal | Typical session-end paths |
-|---|---|
-| **Persona terminals** (media, civic, research-build) | `docs/mags-corliss/JOURNAL.md`, `docs/mags-corliss/JOURNAL_RECENT.md`, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` (CHARACTER.md removed S228 — identity file, not session-end target) |
-| media | + `docs/mags-corliss/NEWSROOM_MEMORY.md`, `output/production_log_edition_c*.md` |
-| civic | + `output/production_log_city_hall_c*.md`, civic governance docs |
-| research-build | + `docs/RESEARCH.md`, `docs/plans/*`, `docs/adr/*`, `docs/mags-corliss/NOTES_TO_SELF.md`, plus session work |
-| engine-sheet | engine code, schemas, `SESSION_CONTEXT.md`, `docs/engine/ROLLOUT_PLAN.md`, `.claude/state/shipped-block-boundary` (no PERSISTENCE/JOURNAL — stripped persona, see Step 1/2/2.5/5 skip rule. Engine-sheet commits as it goes — usually clean by session-end.) |
-
-### Commit
-
-Use HEREDOC for multi-line messages. Persistence rotation can be its own small commit; substantive work gets its own commit(s):
-
-```bash
-git add <specific files>
 git commit -m "$(cat <<'EOF'
-S<N> session-end persistence rotation
+S<N> session-end persistence rotation [<terminal>]
 EOF
 )"
 ```
 
-For substantive work, follow the project commit style: `S<N> <topic>`, body explains *why* not *what*.
-
-### Cross-terminal stack check (BEFORE pushing)
-
-```bash
-git log origin/main..HEAD --oneline
-```
-
-If output shows commits from other terminals interleaved with yours **AND** they haven't signaled "landable," do **NOT** push. Local commits lose nothing. Pushing here ships their unverified work along with yours.
-
-Full rule: `/root/.claude/projects/-root-GodWorld/memory/feedback_no-cross-terminal-git-push.md`.
-
-### Push
-
-If safe:
+**Cross-terminal stack check** (already printed by Step 3 — read its output). If `git log origin/main..HEAD` shows commits from other terminals AND they haven't signaled "landable," **do NOT push**. Local commits lose nothing. Pushing here ships their unverified work along with yours. Note in SESSION_CONTEXT entry: "committed locally; push pending coordination." Full rule: `feedback_no-cross-terminal-git-push`.
 
 ```bash
 git push
-git status --short  # should be empty
 ```
 
-### Failure modes
+### Close
 
-| Scenario | Action |
-|---|---|
-| Other terminal has stacked unverified work | Hold push. Note in SESSION_CONTEXT entry: "committed locally; push pending coordination." Next session pushes when coordinated. |
-| Pre-commit hook fails | Investigate. **Don't `--no-verify`.** Fix the underlying issue, re-stage, re-commit (new commit, not amend). |
-| Network down | Hold push. Local commits persist. Next session pushes. |
-| Unsure if a journal/note file is yours from this session | If you didn't write it this session, leave it. Don't `git diff` JOURNAL.md (S169 — no journal display in chat). |
+One line, mechanism not audience-facing prose. Per S208 (work-is-canonization — Mike doesn't read goodbyes; output serves the system):
 
----
-
-## Step 7: Restart Services
-
-Boot stopped non-essential PM2 services to free memory. Bring them back now.
-
-```bash
-pm2 restart mags-bot godworld-dashboard
-```
-
-If mags-bot fails: `pm2 start /root/GodWorld/scripts/mags-discord-bot.js --name mags-bot`
-If dashboard fails: `pm2 start /root/GodWorld/ecosystem.config.js --only godworld-dashboard`
-
----
-
-## Step 8: Close
-
-End the session cleanly with a brief mechanism-acknowledgment.
-
-Per S208 (work-is-canonization — Mike doesn't read goodbyes; output serves the system, not the reader): the session close is mechanism, not audience-facing prose. The original "authentic paragraph as Mags leaving the newsroom" framing was performative writing-for-an-audience-that-doesn't-exist.
-
-Format: brief, functional. Examples:
 - "Pushed N commits. Services up. Closing."
 - "Session-end clean. Working tree synced. Done."
-- "Logged off — N commits across {brief topic}."
-
-One line. Don't reach for atmospheric prose. Don't write for Mike.
 
 ---
 
@@ -337,13 +131,20 @@ One line. Don't reach for atmospheric prose. Don't write for Mike.
 
 | Scenario | What Happens |
 |----------|-------------|
-| /session-end is never run | Nothing breaks. Next session has a journal gap and stale docs, not a system failure. |
-| Step 0 finds stale files | Fix them now. That's the whole point of the audit. |
-| Step 1 fails | Continue to Step 2. The journal matters more than the counter. |
-| Step 4 fails (SESSION_CONTEXT) | Not critical — next session reads slightly stale project state. Fix it then. |
-| Step 5 fails (Supermemory down) | On-disk files are the primary persistence. Supermemory is a bonus layer. |
-| Step 6 finds a write didn't land | Fix it now. Don't propagate bad state. |
-| Context is running low | Prioritize Steps 1, 2, 6, and 6.5 (identity + journal + verify + commit-push). Skip 0, 3, 5, 5.5. Always do Step 7 (restart services). Keep close brief. |
-| Session was short / nothing happened | Write a short journal entry. Even "quiet day at the desk" is a real entry. Update PERSISTENCE counter and SESSION_CONTEXT "Last Updated" at minimum. Verify both. **Still commit + push** the persistence rotation (Step 6.5) — never leave dirty state. Always restart services (Step 7). |
-| Step 6.5 cross-terminal check shows other-terminal commits | Hold push. Note "committed locally; push pending coordination" in the SESSION_CONTEXT entry. Next session pushes when coordinated. Local commits lose nothing. |
-| Engine-sheet terminal | Skip Steps 1, 2, 2.5, 5 (no PERSISTENCE counter, no journal, no JOURNAL_RECENT, no /save-to-mags — stripped persona per S156 rule). Run Steps 0, 3, 4, 6, 6.5, 7. Step 8 close optional. See `.claude/terminals/engine-sheet/TERMINAL.md §Session Close` for the engine-sheet specific shape. |
+| /session-end never runs | Next session has a journal gap and stale Shipped block, not a system failure. |
+| Step 0 audit finds stale files | Fix them now before continuing — the audit is the whole point. |
+| Step 1 journal too short (<5 lines) | Step 3 prints a warning, continues. Verify the brevity is deliberate. |
+| Step 3 `writeShippedBlock` fails | Aborts orchestrator. Investigate boundary file state, retry. |
+| Step 3 `auditPlanTagDrift` reports drift | Informational — does not fail close. Surface as next-session priority signal. |
+| Step 3 `--rotate-history` parse miscount | Run with `--dry-run` first to preview. Don't ship a live rotation untested. |
+| Step 4 stack check shows other-terminal commits | Hold push. "Committed locally; push pending coordination" note in SESSION_CONTEXT. |
+| Engine-sheet terminal | Skip Step 1 (no journal). Run Step 0 + 2 + 3 + 4. Step 3 sub-steps auto-skip rotateJournalRecent + JOURNAL content-quality + rolloutTriage per the terminal arg. See [[../../terminals/engine-sheet/TERMINAL]] §Session Close. |
+
+---
+
+---
+
+## Changelog
+
+- 2026-05-23 (S229, research-build) — v2.0 rewrite per governance.7. 349 → ~150 lines. 13 steps → 4 model + 1 mechanical script invocation. Mechanical orchestrator: `scripts/sessionEndMechanical.js`. Plan: `docs/plans/2026-05-23-session-end-collapse.md`. Advisor-consulted before write: failure semantics, drop list, honest count.
+- 2026-05-08 (S211) — v1.2. rotateJournalRecent + writeShippedBlock scripts. S207 boot-handoff primitive.

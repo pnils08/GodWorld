@@ -1,7 +1,18 @@
 /**
  * ============================================================================
- * runCivicElections_ v1.1
+ * runCivicElections_ v1.2
  * ============================================================================
+ *
+ * v1.2 — S229 engine.2 §3.5 routing (PHASE_42_PATTERNS):
+ *   L394 electionLog.appendRow → queueAppendIntent_('Election_Log', ...) — P1
+ *   L432 officeLedger.getRange.setValues → queueRangeIntent_('Civic_Office_Ledger', ...) — P2
+ *   L213-219 lazy-create insertSheet + headers stays direct as
+ *     schema-setup carve-out per Phase 2.1 decision A (fires ≤1× per
+ *     spreadsheet lifetime; documented in .claude/rules/engine.md line 44).
+ *   SL portion done cohort-A S188 `4fbb876`; these 3 sites are
+ *     Civic_Office_Ledger + Election_Log only.
+ *   Cadence: cycle 45 of even God-world years; next firing C97 (we're
+ *     at C94, 3-cycle smoke-test buffer pre-firing).
  * 
  * Lightweight election engine for GodWorld civic positions.
  * Runs during November election window (Cycles 45-48 of even years).
@@ -207,8 +218,13 @@ function runCivicElections_(ctx) {
   
   var results = [];
   var electionLog = ss.getSheetByName('Election_Log');
-  
-  // Create Election_Log if missing
+
+  // Create Election_Log if missing.
+  // SCHEMA-SETUP CARVE-OUT (Phase 42 §1.1 + .claude/rules/engine.md line 44):
+  //   insertSheet + headers appendRow + setFrozenRows fire ≤1× per spreadsheet
+  //   lifetime, outside the cycle-write path. Direct ops stay; cycle-path
+  //   election writes route via queueAppendIntent_ at line 394 + queueRangeIntent_
+  //   at line 432 below. Per Phase 2.1 decision A (PHASE_42_PATTERNS §1.1).
   if (!electionLog) {
     electionLog = ss.insertSheet('Election_Log');
     electionLog.appendRow([
@@ -391,7 +407,9 @@ function runCivicElections_(ctx) {
     // LOG ELECTION RESULT
     // ─────────────────────────────────────────────────────────────────────────
     
-    electionLog.appendRow([
+    // S229 engine.2 §3.5 — P1 mechanical migration. Cycle-path append
+    // routed via writeIntents; Phase 10 commits to Election_Log tab.
+    queueAppendIntent_(ctx, 'Election_Log', [
       new Date(),
       cycle,
       godWorldYear,
@@ -406,7 +424,7 @@ function runCivicElections_(ctx) {
       seat.isVacant ? 'N/A' : 'Yes',
       econMood,
       narrative
-    ]);
+    ], 'log election result — ' + seat.officeId + ' ' + winner, 'civic');
     
     // ─────────────────────────────────────────────────────────────────────────
     // STORE RESULT FOR MEDIA BRIEFING
@@ -428,8 +446,19 @@ function runCivicElections_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // WRITE BACK CIVIC OFFICE LEDGER
   // ═══════════════════════════════════════════════════════════════════════════
-  
-  officeLedger.getRange(1, 1, officeData.length, officeData[0].length).setValues(officeData);
+
+  // S229 engine.2 §3.5 — P2 mechanical migration. Full-sheet rewrite routed
+  // via writeIntents; Phase 10 commits to Civic_Office_Ledger tab.
+  // Note: width derived from officeData[0].length matches original direct
+  // setValues call exactly — no schema drift introduced by the migration.
+  queueRangeIntent_(
+    ctx,
+    'Civic_Office_Ledger',
+    1, 1,
+    officeData,
+    'rewrite office ledger after C' + cycle + ' elections',
+    'civic'
+  );
   
   // ═══════════════════════════════════════════════════════════════════════════
   // UPDATE SIMULATION LEDGER FOR NEW OFFICEHOLDERS

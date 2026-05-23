@@ -50,7 +50,7 @@ You are reviewing an AI-generated photo against the photo direction spec the art
 
 The spec is your ground truth. Verify the image satisfies it.
 
-Evaluate on four axes:
+Evaluate on five axes:
 
 1. NEGATIVE-FRAME COMPLIANCE
    The spec contains a "NOT in frame:" paragraph listing what must be absent.
@@ -97,6 +97,37 @@ Evaluate on four axes:
    Camera language (35mm, eye-level, depth) matches spec. Lighting matches
    mood register. Does it look like documentary photography or AI slop?
 
+5. CANON-TONE FIDELITY
+   Beyond declarative negative-frame compliance, does the image READ ON-CANON
+   for Oakland 2041? The setting is prosperity-era Oakland — dynasty A's,
+   building city, working neighborhoods with dignity. NOT real-world
+   struggling-Oakland (poverty-doc aesthetic, blight-as-texture,
+   despair-as-mood, training-data ghetto-Oakland).
+
+   This is the tone-vs-canon check that declarative items miss. An image can
+   pass NEGATIVE_FRAME (no tents, no boarded storefronts, no broken glass)
+   AND still read as poverty-doc tone — the subject framed as weary
+   recipient-of-care on a stoop, training-data prior on "working-city Black
+   resident with mail" overriding the prompt's prosperity language. (S223
+   G-PR8 — Beverly Hayes spec passed declarative items, rendered as poverty
+   signifier; canon contamination caught only at Mike's eyeball review.)
+
+   FLAG if: image reads as struggling-city / poverty-doc / blight-aesthetic
+   tone, even when no banned items appear in frame. Subject framed as weary
+   / pulled-thin / recipient-of-hardship rather than worker-at-work or
+   neighborhood-resident-in-motion. "Telegraph stoop with mail" / "community
+   director slumped at door" / "tenant-watch-from-window" framings.
+
+   PASS if: subject reads at dignity-of-work / dignity-of-place / prosperity-
+   canon. Worker in motion, neighborhood texture, family pace, building-city
+   energy. Hardship-adjacent stories framed at the work-in-motion layer
+   (construction site sunrise, organizer mid-meeting) rather than the
+   recipient layer.
+
+   This is a softer signal than NEGATIVE_FRAME (which is a discrete-item
+   check). Tone-canon-mismatch → FLAG, not FAIL. The discrete-item failures
+   stay FAIL.
+
 Verdict rubric:
 - PASS = all four axes green; printable as-is
 - FLAG = printable but minor issues (gibberish sign text, slight composition
@@ -113,6 +144,7 @@ POSITIVE_FRAME: write yes or no — does the image show the spec's called-for su
 TIER_VIOLATIONS: write a comma-separated list of any tier-fidelity violations found, or write none
 MATCH: write 1-2 sentences assessing whether the photo depicts what the spec called for
 TONE: write 1-2 sentences on photojournalism quality and mood register fidelity
+CANON_TONE: write 1-2 sentences on whether the image reads as prosperity-era Oakland or struggling-city tone. Specifically: does the subject framing read at dignity-of-work / neighborhood-texture / building-city energy (PASS), or at recipient-of-hardship / weary-pulled-thin / poverty-doc aesthetic (FLAG)?
 ISSUES: write a comma-separated list of all problems found, or write none
 SUMMARY: write 1 sentence overall`;
 
@@ -170,6 +202,7 @@ function parseResponse(text) {
     },
     match: grab('MATCH'),
     tone: grab('TONE'),
+    canonTone: grab('CANON_TONE'),
     issues: grab('ISSUES'),
     summary: grab('SUMMARY')
   };
@@ -234,6 +267,7 @@ async function evaluatePhoto(client, photoPath, spec) {
     specCompliance: parsed.specCompliance,
     match: parsed.match,
     tone: parsed.tone,
+    canonTone: parsed.canonTone,
     issues: parsed.issues,
     summary: parsed.summary,
     rawResponse: text,
@@ -395,6 +429,7 @@ async function main() {
         specCompliance: evaluation.specCompliance,
         match: evaluation.match,
         tone: evaluation.tone,
+        canonTone: evaluation.canonTone,
         issues: evaluation.issues,
         summary: evaluation.summary,
         rawResponse: evaluation.rawResponse,
@@ -412,6 +447,7 @@ async function main() {
         specCompliance: evaluation.specCompliance,
         match: evaluation.match,
         tone: evaluation.tone,
+        canonTone: evaluation.canonTone,
         issues: evaluation.issues,
         summary: evaluation.summary
       });

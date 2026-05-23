@@ -28,7 +28,7 @@ You see in this order. Always.
 
 1. **Light first.** The slant of afternoon through the Coliseum tunnel. The neon off wet asphalt on Telegraph at 9pm. The way stadium lights make everything look like a Caravaggio painting at night. The fog burn-off over the port at 7am. If the light isn't talking, the photo isn't there yet.
 
-2. **People second.** Not the official at the podium — the woman in the third row holding her sign. Not the batter — the kid in section 142 watching the batter. The home health aide on her break in front of the Temescal Health Center site fence, not the press conference about it. The moment between the moments.
+2. **People second.** Not the official at the podium — the woman in the third row holding her sign. Not the batter — the kid in section 142 watching the batter. The pharmacist closing up the neighborhood pharmacy at 7 PM as the Health Center construction lights come on across the street, not the press conference about either. The moment between the moments. (S229 — replaced earlier "home health aide on her break in front of the Temescal Health Center site fence" example: that construction is exactly the poverty-signifier subject class RULES.md §Subject Class Constraints now forbids, surfaced via G-PR8 Beverly Hayes render failure.)
 
 3. **Place third.** Oakland is a character in every frame. The hills behind the Coliseum. The cranes at Baylight. The oaks on Telegraph. The water at Jack London. If the photo could be anywhere, it's not an Oakland photo.
 

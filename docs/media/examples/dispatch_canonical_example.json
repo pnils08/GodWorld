@@ -1,0 +1,87 @@
+{
+  "_comment": "CANONICAL EXEMPLAR per ADR-0006 Contract A. Placeholders only; not for direct execution. Producers fill placeholders with real values to satisfy docs/media/dispatch_schema.md. The worked example at output/examples/dispatch_c94_worked_example.json shows the schema filled with real C94 data.",
+  "cycle": 0,
+  "edition": "E{XX}",
+  "generatedAt": "{ISO-8601 timestamp, e.g. 2026-05-23T18:42:00.000Z}",
+  "siftSkillVersion": "v2.{x}.{y}",
+  "proposalsFile": "output/sift_proposals_c{XX}.json",
+  "slateLockedBy": "{user name — Mike Paulson by convention}",
+  "slateLockedAt": "{ISO-8601 timestamp}",
+
+  "articles": [
+    {
+      "slot": "FP1",
+      "section": "FRONT_PAGE",
+      "briefFile": "output/reporters/{reporter-slug}/c{XX}_FP1_brief.md",
+      "reporter": "{Reporter Full Name}",
+      "desk": "{desk-slug}",
+      "headline": "{Real Working Headline ≤ 80 chars}",
+      "outputPath": "output/reporters/{reporter-slug}/articles/c{XX}_FP1.md",
+      "voiceDirective": "{One-line voice direction summary ≤ 200 chars}",
+      "spine": "{Cycle spine — one line}",
+      "threeLayerKeys": {
+        "engine": "{Engine layer — one line, plain language}",
+        "simulation": "{Simulation layer — one line}",
+        "userActions": "{User actions layer — one line}"
+      },
+      "initsTouched": ["INIT-NNN"]
+    },
+    {
+      "slot": "C1",
+      "section": "CIVIC",
+      "briefFile": "output/reporters/{reporter-slug}/c{XX}_C1_brief.md",
+      "reporter": "{Reporter Full Name}",
+      "desk": "civic-desk",
+      "headline": "{Real Working Headline}",
+      "outputPath": "output/reporters/{reporter-slug}/articles/c{XX}_C1.md",
+      "voiceDirective": "{One-line voice direction summary}",
+      "spine": "{Cycle spine OR this piece's sub-thread}",
+      "threeLayerKeys": {
+        "engine": "{Engine layer}",
+        "simulation": "{Simulation layer}",
+        "userActions": "{User actions layer}"
+      },
+      "initsTouched": ["INIT-NNN"]
+    },
+    {
+      "slot": "S1",
+      "section": "SPORTS",
+      "briefFile": "output/reporters/{reporter-slug}/c{XX}_S1_brief.md",
+      "reporter": "{Reporter Full Name}",
+      "desk": "sports-desk",
+      "headline": "{Real Working Headline}",
+      "outputPath": "output/reporters/{reporter-slug}/articles/c{XX}_S1.md",
+      "voiceDirective": "{One-line voice direction summary}",
+      "spine": "{Spine}",
+      "threeLayerKeys": {
+        "engine": "{Engine layer}",
+        "simulation": "{Simulation layer}",
+        "userActions": "{User actions layer}"
+      },
+      "initsTouched": []
+    }
+  ],
+
+  "letters": {
+    "candidatesFile": "output/letters/c{XX}_candidates.md",
+    "deskAssigned": "letters-desk",
+    "secondStageHandoff": "/write-edition Step 3.5b"
+  },
+
+  "quickTakes": [
+    {
+      "slot": "QT1",
+      "section": "{PARENT_SECTION_TAG — e.g. CIVIC for a Mayor-office QT}",
+      "briefFile": "output/quick-takes/c{XX}_QT1_brief.md",
+      "headline": "{Real Working Headline}",
+      "reporter": null,
+      "desk": "{desk-slug}",
+      "outputPath": "output/quick-takes/c{XX}_QT1.md"
+    }
+  ],
+
+  "spine": "{Cycle spine — one-sentence summary of what the edition is about}",
+  "engineSignalsCovered": ["{SIGNAL_NAME}", "..."],
+  "engineSignalsUncovered": ["{SIGNAL_NAME}", "..."],
+  "notes": "{Free-text editorial notes — optional}"
+}

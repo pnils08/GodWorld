@@ -1,0 +1,164 @@
+{
+  "_comment": "WORKED EXAMPLE — C94 real values derived from output/sift_proposals_c94.json S221 locked slate. NOT the canonical exemplar (that's dispatch_canonical_example.json with placeholders per ADR-0006 Contract A). This file shows the schema filled with real data so human readers can see what a real dispatch looks like. /sift v2 emits a file shaped like this for live runs.",
+  "cycle": 94,
+  "edition": "E94",
+  "generatedAt": "2026-05-15T00:00:00.000Z",
+  "siftSkillVersion": "v2.0.0-worked-example",
+  "proposalsFile": "output/sift_proposals_c94.json",
+  "slateLockedBy": "Mike Paulson",
+  "slateLockedAt": "2026-05-15T00:00:00.000Z",
+
+  "articles": [
+    {
+      "slot": "FP1",
+      "section": "FRONT_PAGE",
+      "briefFile": "output/reporters/jordan-velez/c94_FP1_brief.md",
+      "reporter": "Jordan Velez",
+      "desk": "business-desk",
+      "headline": "The Town",
+      "outputPath": "output/reporters/jordan-velez/articles/c94_FP1.md",
+      "voiceDirective": "Business analytical, multi-domain — the ownership-ecosystem read of the cycle",
+      "spine": "Ownership ecosystem — Civis Systems names A's stadium / Varek courts Paulson / Baylight Phase 11",
+      "threeLayerKeys": {
+        "engine": "INIT-006 Baylight construction-active 11 cycles; EventAttractiveness -4.0 Jack London/Downtown",
+        "simulation": "Civis Systems Field — The Town naming; Varek tech-expo Paulson recruitment quote",
+        "userActions": "Mike-typed Oakland_Sports_Feed canon rows 146 + 147 + civic Baylight Authority Phase II briefing"
+      },
+      "initsTouched": ["INIT-006"]
+    },
+    {
+      "slot": "C1",
+      "section": "CIVIC",
+      "briefFile": "output/reporters/carmen-delaine/c94_C1_brief.md",
+      "reporter": "Carmen Delaine",
+      "desk": "civic-desk",
+      "headline": "The Vote That Was There",
+      "outputPath": "output/reporters/carmen-delaine/articles/c94_C1.md",
+      "voiceDirective": "Civic affairs, callback frame — structural sister-piece to your own C93 lead",
+      "spine": "Transit Hub 8-0 — the vote that converted from C93's failed-fire",
+      "threeLayerKeys": {
+        "engine": "INIT-003 phase advances vote-ready → vote-passed; NextActionCycle 94 → 95",
+        "simulation": "8-0 vote tally; Mam-language deliverables in-scope; Tran D2 conditional → firm YES",
+        "userActions": "Soria Dominguez 3-point deliverable; Vega procedural confirmation; Mara directive closed"
+      },
+      "initsTouched": ["INIT-003"]
+    },
+    {
+      "slot": "C2",
+      "section": "CIVIC",
+      "briefFile": "output/reporters/maria-keen/c94_C2_brief.md",
+      "reporter": "Maria Keen",
+      "desk": "culture-desk",
+      "headline": "West Oakland: Cleared and Still",
+      "outputPath": "output/reporters/maria-keen/articles/c94_C2.md",
+      "voiceDirective": "Open at a stoop, stay there — neighborhood texture that doesn't route through council vote",
+      "spine": "West Oakland — cleared but stuck",
+      "threeLayerKeys": {
+        "engine": "RetailVitality 5.50 lowest in city; Sentiment -0.06 lowest; CULTURE crisis-spike 45 second cycle",
+        "simulation": "191 Stab Fund cleared (Webb); Mayor operational-win-with-structural-audit",
+        "userActions": "OPP-004 commitment; C95 audit data bundle in prep; Okoro escalation Stab Fund processing"
+      },
+      "initsTouched": ["INIT-001"]
+    },
+    {
+      "slot": "CU1",
+      "section": "CULTURE",
+      "briefFile": "output/reporters/maria-keen/c94_CU1_brief.md",
+      "reporter": "Maria Keen",
+      "desk": "culture-desk",
+      "headline": "Adams Point Opens Doors",
+      "outputPath": "output/reporters/maria-keen/articles/c94_CU1.md",
+      "voiceDirective": "Scene piece — who's in the building, who's at the door, what's the texture of a church that decides to open without being asked",
+      "spine": "Faith atmospheric — first clean post-canon.2 faith piece",
+      "threeLayerKeys": {
+        "engine": "Adams Point UMC crisis-response medium-severity FAITH event",
+        "simulation": "Congregation opens doors; Adams Point Sentiment +0.02",
+        "userActions": "Canon.2 faith Tier-3 scrub closed S218 — first clean cycle for FAITH coverage"
+      },
+      "initsTouched": []
+    },
+    {
+      "slot": "S1",
+      "section": "SPORTS",
+      "briefFile": "output/reporters/hal-richmond/c94_S1_brief.md",
+      "reporter": "Hal Richmond",
+      "desk": "sports-desk",
+      "headline": "Kelley In Focus, Kelley Catches Fire",
+      "outputPath": "output/reporters/hal-richmond/articles/c94_S1.md",
+      "voiceDirective": "Cultural-history-meets-current-moment, your frame — the TV feature airing as a player about to leave goes off",
+      "spine": "A's free-agent transition — Kelley feature airs as he heats up",
+      "threeLayerKeys": {
+        "engine": "Kelley FA 2042 per truesource; A's record 21-4 → 23-5 swing",
+        "simulation": "Kelley 7h/1hr/5rbi in series loss; 'Isley Kelley: In Focus' TV feature; Keane 8-game hitting streak",
+        "userActions": "Mike-typed Oakland_Sports_Feed canon row 148 + row 145 free-agent framing"
+      },
+      "initsTouched": []
+    },
+    {
+      "slot": "S2",
+      "section": "SPORTS",
+      "briefFile": "output/reporters/p-slayer/c94_S2_brief.md",
+      "reporter": "P Slayer",
+      "desk": "sports-desk",
+      "headline": "The Let-Walks Coming",
+      "outputPath": "output/reporters/p-slayer/articles/c94_S2.md",
+      "voiceDirective": "Fan-emotional, your range — faces-of-the-franchise question when ownership picks youth",
+      "spine": "A's free-agent transition — Kelley/Aitken/Richards not coming back",
+      "threeLayerKeys": {
+        "engine": "Kelley/Aitken/Richards FA 2042; truesource story #2 generational handoff; story #7 Richards coverage gap",
+        "simulation": "Front-office source quote; fan sentiment LOW; Aitken civic-presence pattern E89 + E93",
+        "userActions": "Mike-typed Oakland_Sports_Feed canon row 145 free-agent rumor"
+      },
+      "initsTouched": []
+    },
+    {
+      "slot": "S3",
+      "section": "SPORTS",
+      "briefFile": "output/reporters/anthony-raines/c94_S3_brief.md",
+      "reporter": "Anthony Raines",
+      "desk": "sports-desk",
+      "headline": "Reyna's Two-Homer Night",
+      "outputPath": "output/reporters/anthony-raines/articles/c94_S3.md",
+      "voiceDirective": "Game piece — let line scores carry the frame; the let-walks story is in P Slayer's lane",
+      "spine": "Youth movement on the field — Reyna debut HRs, Coles ERA 1.13",
+      "threeLayerKeys": {
+        "engine": "Reyna prospect status per truesource; A's record 23-5 W1",
+        "simulation": "Reyna 3h/2hr/2rbi; JR Rosada call-up homer; Coles 7 IP / 3 ER / 9 SO / 5th win / 1.13 ERA",
+        "userActions": "Mike-typed Oakland_Sports_Feed canon row 149"
+      },
+      "initsTouched": []
+    }
+  ],
+
+  "letters": {
+    "candidatesFile": "output/letters/c94_candidates.md",
+    "deskAssigned": "letters-desk",
+    "secondStageHandoff": "/write-edition Step 3.5b"
+  },
+
+  "quickTakes": [
+    {
+      "slot": "QT1",
+      "section": "CIVIC",
+      "briefFile": "output/quick-takes/c94_QT1_brief.md",
+      "headline": "Okoro Speaks",
+      "reporter": null,
+      "desk": "civic-desk",
+      "outputPath": "output/quick-takes/c94_QT1.md"
+    },
+    {
+      "slot": "QT2",
+      "section": "CULTURE",
+      "briefFile": "output/quick-takes/c94_QT2_brief.md",
+      "headline": "Rockridge Autumn Walk",
+      "reporter": null,
+      "desk": "culture-desk",
+      "outputPath": "output/quick-takes/c94_QT2.md"
+    }
+  ],
+
+  "spine": "Ownership ecosystem — Civis Systems names A's stadium 'Civis Systems Field — The Town', Varek courts Paulson for Oaks GM, Baylight construction phase 11 cycles building the stadium; one private network shaping Oakland's two pro franchises and the district they'll play in.",
+  "engineSignalsCovered": ["INIT-006-Baylight", "INIT-003-TransitHub", "INIT-001-StabFund", "ADAMS_POINT_UMC", "PAULSON_OAKS_RECRUITMENT", "AS_FRANCHISE_LET_WALKS", "MAYOR_APPROVAL_SHIFT", "OKORO_ESCALATION_RESET"],
+  "engineSignalsUncovered": ["KONO_INFLOW_STRAIN", "FRUITVALE_NOISE", "EAST_OAKLAND_FOOD_PANTRY"],
+  "notes": "Hand-derived from output/sift_proposals_c94.json S221 locked slate to demonstrate v2 dispatch shape. C94 ran v1.2 hand-execution and did NOT emit a dispatch.json — this file is retrospective worked example, not the actual artifact emitted at run time."
+}

@@ -192,6 +192,60 @@ console.log('\nTest 7: growth-without-pressure subcheck still emits as math-imba
   assert('growth-without-pressure flagged as math-imbalance (engine signal, not editorial)', !!growth);
 }
 
+console.log('\nTest 8: G-EC22/G-EC23 — mitigatorState semantic field on decay patterns');
+{
+  // Three buckets:
+  //   (a) 3 signals + no matching init → severity high, mitigatorState 'no-mitigator-needs-new-initiative'
+  //   (b) 2 signals + no matching init → severity medium, mitigatorState 'no-mitigator-minor'
+  //   (c) 2+ signals + matching init   → severity low, mitigatorState 'mitigator-firing'
+  // C94 Chinatown/Glenview were bucket (b) — minor unmitigated decay, signal
+  // for ED portfolio but not yet "needs new initiative" magnitude.
+  const ctx = {
+    cycle: 93,
+    snapshot: {
+      Neighborhood_Map: [
+        // 3-signal decay (severe)
+        { Neighborhood: 'West Oakland', Sentiment: -0.10, RetailVitality: 2.0, CrimeIndex: 8, DisplacementPressure: 0.1 },
+        // 2-signal minor decay
+        { Neighborhood: 'Chinatown', Sentiment: 0.0, RetailVitality: 5.93, CrimeIndex: 3, DisplacementPressure: 0 },
+        // 2+ signal decay WITH mitigator
+        { Neighborhood: 'Temescal', Sentiment: -0.10, RetailVitality: 2.0, CrimeIndex: 5, DisplacementPressure: 0 },
+      ],
+      Initiative_Tracker: [
+        { InitiativeID: 'INIT-H', Status: 'passed', ImplementationPhase: 'disbursement-active', AffectedNeighborhoods: 'Temescal' },
+      ],
+      WorldEvents_V3_Ledger: [],
+      Edition_Coverage_Ratings: [],
+    },
+    prior: [makeAudit(92, {
+      Neighborhood_Map: [
+        { Neighborhood: 'West Oakland', Sentiment: 0.05, RetailVitality: 4.5, CrimeIndex: 4, DisplacementPressure: 0 },
+        { Neighborhood: 'Chinatown',    Sentiment: 0.02, RetailVitality: 6.56, CrimeIndex: 3, DisplacementPressure: 0 },
+        { Neighborhood: 'Temescal',     Sentiment: 0.05, RetailVitality: 4.5, CrimeIndex: 4, DisplacementPressure: 0 },
+      ],
+    })],
+  };
+  const found = detector.detect(ctx);
+  const wo = found.find(p => p.evidence.fields.Neighborhood === 'West Oakland');
+  const ct = found.find(p => p.evidence.fields.Neighborhood === 'Chinatown');
+  const tm = found.find(p => p.evidence.fields.Neighborhood === 'Temescal');
+
+  assert('West Oakland (3-signal no-mitigator) emitted', !!wo);
+  assert('West Oakland mitigatorState = needs-new-initiative',
+    wo && wo.evidence.fields.mitigatorState === 'no-mitigator-needs-new-initiative',
+    wo && wo.evidence.fields.mitigatorState);
+
+  assert('Chinatown (2-signal no-mitigator) emitted', !!ct);
+  assert('Chinatown mitigatorState = no-mitigator-minor',
+    ct && ct.evidence.fields.mitigatorState === 'no-mitigator-minor',
+    ct && ct.evidence.fields.mitigatorState);
+
+  assert('Temescal (2-signal mitigator-active) emitted', !!tm);
+  assert('Temescal mitigatorState = mitigator-firing',
+    tm && tm.evidence.fields.mitigatorState === 'mitigator-firing',
+    tm && tm.evidence.fields.mitigatorState);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);
 process.exit(0);

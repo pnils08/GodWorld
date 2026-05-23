@@ -69,6 +69,16 @@ function logEngineError_(ctx, phase, error) {
     ctx.summary.auditIssues.push('[' + phase + '] ' + error.message);
   }
 
+  // G-RC6 (engine.19, S226): dedicated counter for cycle-close reporting.
+  // auditIssues is shared with crisis-bucket pushes (generateCrisisBuckets +
+  // others), so `auditIssues.length` overcounts the "Errors logged" close-
+  // statement label vs the actual Engine_Errors sheet append count. This
+  // counter increments ONCE per logEngineError_ call → exactly matches the
+  // number of Engine_Errors rows appended this cycle.
+  if (ctx && ctx.summary) {
+    ctx.summary.engineErrorCount = (ctx.summary.engineErrorCount || 0) + 1;
+  }
+
   // Optionally write to Engine_Errors sheet (creates if missing).
   // S216 engine.15 Phase 3 — sheet expanded from 5 → 10 cols. Writer now
   // populates Class/Source/Severity/Resolved/Hash for cross-class diagnostic
@@ -443,9 +453,13 @@ function runWorldCycle() {
       }
     }
 
-    // Log cycle completion summary
-    var errorCount = (ctx && ctx.summary && ctx.summary.auditIssues) ? ctx.summary.auditIssues.length : 0;
-    Logger.log('Cycle completed. Errors logged: ' + errorCount);
+    // Log cycle completion summary. G-RC6 (engine.19, S226): report
+    // engineErrorCount (Engine_Errors sheet append count) — NOT
+    // auditIssues.length, which conflates errors with crisis-bucket pushes
+    // and produced the "errors logged: 2 vs Engine_Errors row: 1" gap.
+    var engineErrors = (ctx && ctx.summary && ctx.summary.engineErrorCount) || 0;
+    var auditIssueCount = (ctx && ctx.summary && ctx.summary.auditIssues) ? ctx.summary.auditIssues.length : 0;
+    Logger.log('Cycle completed. Engine errors logged: ' + engineErrors + '; audit issues tracked: ' + auditIssueCount);
   }
 }
 

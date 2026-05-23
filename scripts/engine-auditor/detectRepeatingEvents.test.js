@@ -107,6 +107,65 @@ console.log('\nTest 5: empty digest → no patterns');
   assert('empty Riley_Digest → no patterns', found.length === 0);
 }
 
+console.log('\nTest 6b: G-RC8 — multi-word error template emits ONE coalesced pattern, not N per-token');
+{
+  // Pre-v1.1.0 failure mode: a stable error template recurring across cycles
+  // tokenized into multiple ≥4-char tokens, each producing an independent
+  // pattern (1 root issue → 8 audit patterns). Post-v1.1.0 row-provenance
+  // dedup coalesces tokens that always co-occur in the same rows.
+  const errText = 'transformer outage uptown infrastructure shortfall';
+  const ctx = {
+    cycle: 93,
+    snapshot: {
+      Riley_Digest: [
+        { Cycle: 91, Issues: errText, PatternFlag: '' },
+        { Cycle: 92, Issues: errText, PatternFlag: '' },
+        { Cycle: 93, Issues: errText, PatternFlag: '' },
+      ],
+      Initiative_Tracker: [],
+    },
+  };
+  const found = require('./detectRepeatingEvents').detect(ctx);
+  assert('exactly one pattern emitted (coalesced)', found.length === 1, `got ${found.length}`);
+  const p = found[0];
+  // Primary token tie-break: PatternFlag absent → first-appearance order.
+  // First ≥4-char token of "transformer outage uptown infrastructure shortfall"
+  // is "transformer".
+  assert('primary token = "transformer" (first-seen)', p && p.evidence.fields.recurringIssue === 'transformer', p && p.evidence.fields.recurringIssue);
+  assert('recurringTokens field carries the full coalesced group',
+    p && Array.isArray(p.evidence.fields.recurringTokens) && p.evidence.fields.recurringTokens.length === 5,
+    p && p.evidence.fields.recurringTokens && p.evidence.fields.recurringTokens.length);
+  // Sanity — all 5 are members.
+  const tokens = new Set(p && p.evidence.fields.recurringTokens);
+  assert('all 5 co-occurring tokens present',
+    tokens.has('transformer') && tokens.has('outage') && tokens.has('uptown')
+    && tokens.has('infrastructure') && tokens.has('shortfall'));
+}
+
+console.log('\nTest 6c: G-RC8 — disjoint tokens NOT coalesced (different provenance)');
+{
+  // Two unrelated recurring issues across cycles should produce TWO patterns,
+  // not one — the dedup is provenance-based, not blanket-merge.
+  const ctx = {
+    cycle: 93,
+    snapshot: {
+      Riley_Digest: [
+        { Cycle: 91, Issues: 'transit problem', PatternFlag: 'transit' },
+        { Cycle: 92, Issues: 'transit problem', PatternFlag: 'transit' },
+        { Cycle: 93, Issues: 'transit problem', PatternFlag: 'transit' },
+        { Cycle: 91, Issues: 'flooding alert', PatternFlag: 'flood' },
+        { Cycle: 92, Issues: 'flooding alert', PatternFlag: 'flood' },
+        { Cycle: 93, Issues: 'flooding alert', PatternFlag: 'flood' },
+      ],
+      Initiative_Tracker: [],
+    },
+  };
+  const found = require('./detectRepeatingEvents').detect(ctx);
+  // 'transit' rows have provenance {91:0, 92:1, 93:2}; 'flooding' rows have
+  // {91:3, 92:4, 93:5}. Different provenance → two groups → two patterns.
+  assert('two distinct patterns (disjoint provenance)', found.length === 2, `got ${found.length}`);
+}
+
 console.log('\nTest 6: short tokens (< 4 chars) ignored');
 {
   const ctx = {

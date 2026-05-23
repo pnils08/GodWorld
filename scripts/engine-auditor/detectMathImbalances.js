@@ -23,9 +23,18 @@
  *          detection (requires prior audit). Per-neighborhood initiative
  *          matching for the offset rider. production-without-consumption
  *          subcheck retyped from 'math-imbalance' to 'coverage-gap'.
+ *   1.2.0  S226 engine.19 G-EC22/G-EC23 — decay patterns gain a structured
+ *          `mitigatorState` field with values 'no-mitigator-needs-new-initiative'
+ *          | 'mitigator-firing' | 'no-mitigator-minor'. Replaces downstream
+ *          having to parse the description string to differentiate. C94
+ *          Chinatown + Glenview decay traced cleanly to this missing semantic:
+ *          both flagged "no matching initiative" but city-hall-prep routed
+ *          them to Mayor + Okoro Economic Development portfolio, which needs
+ *          structured data, not free-form text. Field is purely additive —
+ *          does not change severity classification or pattern type.
  */
 
-const VERSION = '1.1.0';
+const VERSION = '1.2.0';
 
 // Decay-direction thresholds. Calibrated from observed C92→C93 deltas:
 // typical Sentiment movement ±0.01-0.02, CrimeIndex ±0/+1, RetailVitality
@@ -108,10 +117,19 @@ function detect(ctx) {
       // load-bearing signal; decay-with-mitigator-but-still-decaying is
       // worth surfacing but lower severity.
       let severity;
+      let mitigatorState;
       if (matchingInits.length === 0) {
         severity = decaySignals.length >= 3 ? 'high' : 'medium';
+        // v1.2.0 (G-EC22/G-EC23): differentiate decay-bands. Multi-signal
+        // unmitigated decay → 'needs-new-initiative' (city-hall routes to
+        // Mayor/Econ-Dev portfolio); 2-signal unmitigated decay → 'minor'
+        // (advisory only, may still be noise from background drift).
+        mitigatorState = decaySignals.length >= 3
+          ? 'no-mitigator-needs-new-initiative'
+          : 'no-mitigator-minor';
       } else {
         severity = 'low';
+        mitigatorState = 'mitigator-firing';
       }
 
       out.push({
@@ -131,6 +149,7 @@ function detect(ctx) {
             Neighborhood: n.Neighborhood,
             decaySignals,
             matchingActiveInitiatives: matchingInits,
+            mitigatorState,
             priorCycle: priorAudit.cycle,
           },
         },
@@ -163,8 +182,21 @@ function detect(ctx) {
   }
   const coveredDomains = new Set(lastCycleCoverage.map(c => (c.Domain || '').toLowerCase()));
 
+  // G-EC1 (engine.19, S226): routingHint differentiates domains by editorial
+  // weight class. High-weight domains (civic, health, sports) warrant a
+  // dedicated piece when production-without-consumption fires; low-weight
+  // domains (faith, community, weather) typically thread into roundup
+  // coverage rather than getting their own piece — flagging them at MED
+  // severity every cycle without a structured downstream hint produced
+  // recurring noise. C94 G-EC1 traced cleanly to this: faith 5 events × 0
+  // coverage repeated every cycle. Hint is purely additive; severity
+  // unchanged.
+  const HIGH_WEIGHT_DOMAINS = new Set(['civic', 'health', 'sports', 'safety', 'infrastructure']);
   for (const [domain, count] of Object.entries(eventsByDomain)) {
     if (count >= 5 && !coveredDomains.has(domain)) {
+      const routingHint = HIGH_WEIGHT_DOMAINS.has(domain)
+        ? 'dedicated-piece-warranted'
+        : 'roundup-thread-acceptable';
       out.push({
         type: 'coverage-gap',
         severity: count >= 10 ? 'high' : 'medium',
@@ -178,6 +210,7 @@ function detect(ctx) {
             eventCount: count,
             priorCycleCoverage: 0,
             subCheck: 'production-without-consumption',
+            routingHint,
           },
         },
         description: `Domain "${domain}" produced ${count} events this cycle with zero Tribune coverage last cycle`,

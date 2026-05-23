@@ -99,10 +99,35 @@ function generate(ctx, ailmentPatterns) {
   thisCycleEvents.forEach((e, idx) => {
     const domain = (e.Domain || 'unknown').toLowerCase();
     const nbhd = e.Neighborhood || null;
+
+    // G-S12 (engine.19, S226): synthesize a description when EventDescription
+    // is empty. C94 emitted an `event-culture-0` brief with empty description
+    // because WorldEvents_V3_Ledger.EventDescription was blank on the source
+    // row; sift had to manually suppress it. Now: fall back to EventType +
+    // Neighborhood + Domain phrase; if neither description nor EventType
+    // exists, skip the brief entirely rather than emit a stub.
+    const rawDesc = String(e.EventDescription || '').trim();
+    const eventType = String(e.EventType || '').trim();
+    let description;
+    if (rawDesc) {
+      description = rawDesc;
+    } else if (eventType) {
+      // Synthesize: "<event-type-prose> in <Neighborhood> (<DOMAIN>)"
+      const parts = [eventType.replace(/[-_]+/g, ' ')];
+      if (nbhd) parts.push('in ' + nbhd);
+      if (e.Domain) parts.push('(' + e.Domain + ')');
+      description = parts.join(' ');
+    } else {
+      // No description, no event type — skip. The sift would suppress anyway;
+      // skipping at source keeps the audit honest.
+      return;
+    }
+
     const hints = [];
     if (nbhd && activeAilmentNeighborhoods.has(nbhd)) hints.push(`${nbhd} has an active ailment this cycle — event contextualizes it`);
     if (num(e.ImpactScore) != null && num(e.ImpactScore) >= 0.7) hints.push('High ImpactScore — likely newsworthy');
     if (String(e.ShockFlag).toLowerCase() === 'true') hints.push('ShockFlag set');
+    if (!rawDesc) hints.push('Description synthesized from EventType — verify source-ledger row before promoting');
 
     briefs.push(makeBrief({
       id: makeId('event', `${domain}-${idx}`),
@@ -110,7 +135,8 @@ function generate(ctx, ailmentPatterns) {
       subjectIds: [],
       neighborhood: nbhd,
       facts: {
-        description: e.EventDescription,
+        description,
+        descriptionSource: rawDesc ? 'ledger' : 'synthesized',
         eventType: e.EventType,
         domain: e.Domain,
         severity: e.Severity,

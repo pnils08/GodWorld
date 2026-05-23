@@ -128,6 +128,82 @@ console.log('\nTest 6: new initiative not in prior → skipped (no comparison po
   assert('new initiative without prior → skipped', found.length === 0);
 }
 
+console.log('\nTest 7: G-RC9 — prior remedy-overshot verdict emits improvement');
+{
+  const ctx = {
+    cycle: 93,
+    snapshot: { Initiative_Tracker: [], Neighborhood_Map: [] },
+    prior: [{
+      cycle: 92,
+      snapshots: { Initiative_Tracker: [], Neighborhood_Map: [] },
+      patterns: [
+        {
+          type: 'stuck-initiative',
+          severity: 'high',
+          affectedEntities: { initiatives: ['INIT-002'], neighborhoods: ['Fruitvale'], citizens: [], councilSeats: [] },
+          measurement: {
+            available: true,
+            verdict: 'remedy-overshot',
+            expectedField: 'Neighborhood_Map.Sentiment',
+            expected: 0.05,
+            observed: 0.20,
+            priorRemedyType: 'advance-initiative',
+          },
+        },
+      ],
+    }],
+  };
+  const found = detector.detect(ctx);
+  const overshoot = found.find(f => f.evidence.fields.priorVerdict === 'remedy-overshot');
+  assert('remedy-overshot improvement emitted', !!overshoot);
+  assert('priorPatternType = stuck-initiative', overshoot && overshoot.evidence.fields.priorPatternType === 'stuck-initiative');
+  assert('observed = 0.20', overshoot && overshoot.evidence.fields.observed === 0.20);
+  assert('affectedEntities propagated from prior pattern', overshoot && overshoot.affectedEntities.initiatives.includes('INIT-002'));
+}
+
+console.log('\nTest 8: G-RC9 — remedy-firing-as-expected also emits improvement');
+{
+  const ctx = {
+    cycle: 93,
+    snapshot: { Initiative_Tracker: [], Neighborhood_Map: [] },
+    prior: [{
+      cycle: 92,
+      snapshots: { Initiative_Tracker: [], Neighborhood_Map: [] },
+      patterns: [{
+        type: 'math-imbalance',
+        affectedEntities: { initiatives: [], neighborhoods: ['West Oakland'], citizens: [], councilSeats: [] },
+        measurement: { available: true, verdict: 'remedy-firing-as-expected',
+                       expectedField: 'Neighborhood_Map.RetailVitality', expected: 0.5, observed: 0.6 },
+      }],
+    }],
+  };
+  const found = detector.detect(ctx);
+  const fired = found.find(f => f.evidence.fields.priorVerdict === 'remedy-firing-as-expected');
+  assert('remedy-firing-as-expected improvement emitted', !!fired);
+}
+
+console.log('\nTest 9: G-RC9 — negative verdicts NOT emitted');
+{
+  const ctx = {
+    cycle: 93,
+    snapshot: { Initiative_Tracker: [], Neighborhood_Map: [] },
+    prior: [{
+      cycle: 92,
+      snapshots: { Initiative_Tracker: [], Neighborhood_Map: [] },
+      patterns: [
+        { type: 'stuck-initiative', affectedEntities: { initiatives: ['INIT-A'], neighborhoods: [], citizens: [], councilSeats: [] },
+          measurement: { available: true, verdict: 'remedy-not-firing', expectedField: 'X.Y', expected: 1, observed: 0 } },
+        { type: 'stuck-initiative', affectedEntities: { initiatives: ['INIT-B'], neighborhoods: [], citizens: [], councilSeats: [] },
+          measurement: { available: true, verdict: 'remedy-firing-insufficient', expectedField: 'X.Y', expected: 1, observed: 0.3 } },
+      ],
+    }],
+  };
+  const found = detector.detect(ctx);
+  const negEmitted = found.filter(f => f.evidence.fields.priorVerdict === 'remedy-not-firing'
+                                      || f.evidence.fields.priorVerdict === 'remedy-firing-insufficient');
+  assert('negative verdicts produce no improvement patterns', negEmitted.length === 0);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);
 process.exit(0);

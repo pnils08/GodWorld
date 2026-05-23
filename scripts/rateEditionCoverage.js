@@ -134,7 +134,29 @@ var SECTION_NAMES =
 var SEP_HEADER_RE   = new RegExp('[━─═]+\\s*(' + SECTION_NAMES + ')\\s*[━─═]+', 'i');
 var MD_HEADER_RE    = new RegExp('^#+\\s*(' + SECTION_NAMES + ')\\s*$', 'i');
 var BARE_HEADER_RE  = new RegExp('^(' + SECTION_NAMES + ')\\s*$');
-var BYLINE_RE       = /^(?:By|BY)\s+(.+?)(?:\s*[|,]|$)/;
+// Byline detector — strict structure. Pre-fix (G-P36 / engine.19 S226) accepted
+// `^(?:By|BY)\s+(.+?)(?:\s*[|,]|$)/` which mis-matched body prose like
+// "By noon, the tables were set." (terminating on the comma, capturing "noon"
+// as reporter). The phantom byline truncated the prior article + stole the
+// next paragraphs + landed in the wrong section, producing a CULTURE −1
+// mis-rating downstream. Post-fix: name must start with uppercase letter
+// (rejects "noon", "Friday", "Saturday", etc. that lead common time-prose);
+// tail (if present) must match a known affiliation pattern — bare bylines
+// like `By Hal Richmond` still accepted via no-tail branch.
+var BYLINE_RE       = /^(?:By|BY)\s+([A-Z][^|,\n]*?)(?:\s*[|,]\s*(.+))?\s*$/;
+var BYLINE_AFFIL_RE = /\b(?:Bay\s+Tribune|Editor[\s-]in[\s-]Chief|Senior\s+(?:Writer|Photographer|Editor|Historian|Journalist)|Bureau(?:\s+Chief)?|Correspondent|Beat\s+Reporter|Lead\s+(?:Beat|Sports)|City\s+Hall|Civic\s+(?:Ledger|Affairs)|Community\s+Affairs|Religious\s+Affairs|Arts\s*(?:&|and)\s*Entertainment|Health\s+(?:Desk|Beat)|Sports|Business|Culture|Accountability|Education|Photographer|A's\s+Beat|Neighborhoods|Politics\s+Desk|Business\s+Desk|Civic\s+Beat)\b/i;
+
+function detectByline_(line) {
+  var m = line.match(BYLINE_RE);
+  if (!m) return null;
+  var name = m[1].trim();
+  if (!name) return null;
+  var tail = m[2] ? m[2].trim() : '';
+  if (!tail) return name;                       // bare byline — accept
+  if (BYLINE_AFFIL_RE.test(tail)) return name;  // affiliated — accept
+  return null;                                  // prose continuation — reject
+}
+
 var SEP_LINE_RE     = /^[━─═\-*#|]+\s*$/;
 
 function pushIfSubstantive(article) {
@@ -161,13 +183,15 @@ for (var i = 0; i < lines.length; i++) {
 
   // Byline detection — closes any open article and starts a new one with the
   // current section. Per-article reporter is fixed at byline parse, not
-  // overwritten by later bylines.
-  var bylineMatch = line.match(BYLINE_RE);
-  if (bylineMatch) {
+  // overwritten by later bylines. detectByline_ enforces strict structure
+  // (uppercase name + affiliation tail OR bare form) to reject body prose
+  // like "By noon, the tables..." (G-P36 fix, engine.19 S226).
+  var detectedReporter = detectByline_(line);
+  if (detectedReporter) {
     pushIfSubstantive(currentArticle);
     currentArticle = {
       section: currentSection || '(unknown)',
-      reporter: bylineMatch[1].trim(),
+      reporter: detectedReporter,
       headline: pendingHeadline,
       text: line + '\n',
       startLine: i,
@@ -205,13 +229,20 @@ for (var i = 0; i < lines.length; i++) {
 // Catch last article.
 pushIfSubstantive(currentArticle);
 
-// Coverage gate (G-P6-followup): compare detected articles to the raw byline
-// count up-front. If parser found fewer articles than there are bylines, warn
-// loudly — downstream domain ratings will encode less than what was published.
-var rawBylineCount = (text.match(/^By\s+/gm) || []).length;
-if (articles.length < rawBylineCount) {
+// Coverage gate (G-P6-followup, refined G-P36): compare detected articles to
+// the byline count up-front. Counter uses the same detectByline_ acceptance
+// gate as the parser so prose lines like "By noon, the tables..." don't
+// inflate the expected count. If parser found fewer articles than there are
+// valid bylines, warn loudly — downstream domain ratings will encode less
+// than what was published.
+var validBylineCount = 0;
+var bylineCountLines = text.split('\n');
+for (var bc = 0; bc < bylineCountLines.length; bc++) {
+  if (detectByline_(bylineCountLines[bc])) validBylineCount++;
+}
+if (articles.length < validBylineCount) {
   console.warn('[WARN] Parser detected ' + articles.length + ' articles but source has ' +
-    rawBylineCount + ' bylines. ' + (rawBylineCount - articles.length) +
+    validBylineCount + ' valid bylines. ' + (validBylineCount - articles.length) +
     ' article(s) below the 50-char substantive threshold or skipped — domain ratings ' +
     'will not reflect them. Inspect source.');
 }

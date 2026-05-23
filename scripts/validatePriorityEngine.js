@@ -152,39 +152,60 @@ function renderTopSeedsTable(top) {
 
 async function main() {
   const args = parseArgs();
-  const cycle = args.cycle != null ? args.cycle : findLatestCycleWithProposals();
+  // G-RC10 (engine.19, S226): degraded-mode emit. /run-cycle ends before
+  // /sift fires, so engine-sheet's natural smoke-test point lacked the
+  // sift_proposals_c{XX}.json the validator hard-required. Pre-fix: throw
+  // and fail the smoke-test. Post-fix: when cycle is explicit (--cycle) and
+  // proposals are missing, emit an Engine-A-only top-N report stating
+  // "awaiting /sift" so the validator runs cleanly post-/run-cycle and
+  // re-runs cleanly post-/sift with the full side-by-side.
+  let cycle = args.cycle;
+  if (cycle == null) cycle = findLatestCycleWithProposals();
   if (!cycle) {
-    throw new Error('No sift_proposals_c{XX}.json files found and no --cycle provided');
+    throw new Error(
+      'No sift_proposals_c{XX}.json files found and no --cycle provided. ' +
+      'Pass --cycle <N> for degraded-mode Engine-A-only emit.'
+    );
   }
 
   const proposals = loadProposals(cycle);
-  if (!proposals) {
-    throw new Error(`output/sift_proposals_c${cycle}.json not found`);
-  }
+  const degradedMode = !proposals;
 
   const deckRows = await getRawSheetData(SHEET);
   const index = buildSeedIndex(deckRows);
-  const top = topScoredSeeds(index, cycle, 15);
+  const top = topScoredSeeds(index, cycle, degradedMode ? 25 : 15);
 
   const outPath = path.join(__dirname, '..', 'output', `priority_engine_validation_c${cycle}.md`);
 
   const lines = [];
-  lines.push(`# Priority Engine Validation — C${cycle}`);
+  lines.push(`# Priority Engine Validation — C${cycle}${degradedMode ? ' (Engine-A-only — awaiting /sift)' : ''}`);
   lines.push('');
   lines.push(`**Generated:** ${new Date().toISOString()}`);
-  lines.push(`**Sift proposals:** ${proposals.proposals ? proposals.proposals.length : 0}`);
+  if (degradedMode) {
+    lines.push(`**Sift proposals:** awaiting (\`output/sift_proposals_c${cycle}.json\` not yet produced)`);
+  } else {
+    lines.push(`**Sift proposals:** ${proposals.proposals ? proposals.proposals.length : 0}`);
+  }
   lines.push(`**Story_Seed_Deck rows for C${cycle}:** ${index.rows.filter((r) => parseInt(r[index.cols.cycle], 10) === cycle).length}`);
   lines.push(`**Engine A live data:** ${index.hasPriorityCols && top.length > 0 ? 'present' : 'awaiting'}`);
+  lines.push(`**Mode:** ${degradedMode ? 'degraded — Engine-A top-25 emit only, side-by-side comparison awaits /sift output' : 'full side-by-side'}`);
   lines.push('');
-  lines.push('Plan T2.8 §v1 — side-by-side surfacing only. Spearman correlation against pick order deferred to v2 once 3+ cycles of live data accumulate. Manual eyeball: do Mags\' top proposals appear in Engine A\'s top-scored seeds?');
+  if (degradedMode) {
+    lines.push('Plan T2.8 §v1 — degraded path (G-RC10, engine.19 S226). /run-cycle\'s natural smoke-test point ends before /sift; validator now emits Engine-A-only top-25 in that window. Re-run after /sift to land the full side-by-side comparison.');
+  } else {
+    lines.push('Plan T2.8 §v1 — side-by-side surfacing only. Spearman correlation against pick order deferred to v2 once 3+ cycles of live data accumulate. Manual eyeball: do Mags\' top proposals appear in Engine A\'s top-scored seeds?');
+  }
   lines.push('');
 
-  lines.push(`## Mags' editorial pick order (from \`sift_proposals_c${cycle}.json\`)`);
-  lines.push('');
-  lines.push(renderProposalsTable(proposals.proposals || []));
-  lines.push('');
+  if (!degradedMode) {
+    lines.push(`## Mags' editorial pick order (from \`sift_proposals_c${cycle}.json\`)`);
+    lines.push('');
+    lines.push(renderProposalsTable(proposals.proposals || []));
+    lines.push('');
+  }
 
-  lines.push(`## Engine A top-15 seeds for C${cycle} (priorityScore desc)`);
+  const topN = degradedMode ? 25 : 15;
+  lines.push(`## Engine A top-${topN} seeds for C${cycle} (priorityScore desc)`);
   lines.push('');
   lines.push(renderTopSeedsTable(top));
   lines.push('');
@@ -213,13 +234,14 @@ async function main() {
 
   lines.push('---');
   lines.push('');
-  lines.push(`**Provenance:** \`scripts/validatePriorityEngine.js\` v1 (S206) reading \`Story_Seed_Deck\` + \`sift_proposals_c${cycle}.json\`. v1 is read-only side-by-side; v2 (post 3-cycle data) adds correlation metric.`);
+  lines.push(`**Provenance:** \`scripts/validatePriorityEngine.js\` v1.1 (S226 G-RC10 degraded-mode) reading \`Story_Seed_Deck\`${degradedMode ? ' (sift proposals not yet produced; re-run post-/sift for full side-by-side)' : ` + \`sift_proposals_c${cycle}.json\``}. v1 is read-only side-by-side; v2 (post 3-cycle data) adds correlation metric.`);
 
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, lines.join('\n'));
   console.log(`Wrote ${outPath}`);
   console.log(`Cycle: C${cycle}`);
-  console.log(`Mags proposals: ${proposals.proposals ? proposals.proposals.length : 0}`);
+  console.log(`Mode: ${degradedMode ? 'degraded (Engine-A-only)' : 'full side-by-side'}`);
+  console.log(`Mags proposals: ${degradedMode ? 'awaiting' : (proposals.proposals ? proposals.proposals.length : 0)}`);
   console.log(`Engine A top seeds for C${cycle}: ${top.length}`);
   console.log(`Engine A live data: ${index.hasPriorityCols && top.length > 0 ? 'present' : 'awaiting'}`);
 }

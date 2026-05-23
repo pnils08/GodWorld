@@ -118,6 +118,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[media/story_evaluation]]** — story scoring rubric. Carries changelog. *(reference, media, active)*
 - **[[media/brief_template]]** — angle brief template. Carries changelog. *(reference, media, active)*
 - **[[media/citizen_selection]]** — citizen selection rubric for briefs. Carries changelog. *(reference, media, active)*
+- **[[media/EDITION_FORMAT_TEMPLATE]]** — canonical edition `.txt` format exemplar per ADR-0006 Contract A. Masthead frame, divider regex, section allowlist, article shape, NAMES INDEX + BUSINESSES NAMED + CITIZEN USAGE LOG sub-formats. Referenced by `/write-edition` Step 3 + Step 5 + `emitFormatContractSections.js`. S227 ship — closes G-W42, partial close on G-W43 (engine-sheet emit-script repair pending). *(reference, media, format-contract, active)*
 - **[[media/city_hall_evaluation]]** — city-hall source-material assertions. 8 criteria covering decision resolution, vote math, cascade order, voice coverage. Built S216 (governance.2). *(reference, civic, media, active)*
 - **[[media/dispatch_evaluation]]** — dispatch scene-piece assertions. 8 criteria covering location specificity, identity-through-action, image-ending, word count. Built S216 (governance.2). *(reference, media, active)*
 - **[[media/interview_evaluation]]** — interview canon-grounded Q&A assertions. 9 criteria covering theme, canon grounding, question progression, voice differentiation. Built S216 (governance.2). *(reference, media, active)*

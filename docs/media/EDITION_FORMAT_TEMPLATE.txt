@@ -1,0 +1,193 @@
+============================================================
+THE CYCLE PULSE — EDITION {XX}
+Bay Tribune | Cycle {N} | Y{n}C{m} | {Season}
+Weather: {plain-language one-liner} | City Mood: {plain-language one-liner}
+============================================================
+
+------------------------------------------------------------
+FRONT PAGE
+------------------------------------------------------------
+
+# {Headline of the cycle's best story}
+
+**{Bold tagline — single paragraph, ~30-50 words, drops the body's frame into the eye in one breath. Optional but conventional for front page and feature pieces.}**
+
+By {Reporter Name} | Bay Tribune {Section or Bureau}
+
+---
+
+{Body prose. Paragraphs separated by blank lines. No engine grammar, no edition numbers, no "this cycle" if "cycle" alone reads cleaner. Cycle is the canonical time unit per S146 — use it.}
+
+{Subsequent paragraphs as needed.}
+
+---
+
+{If the article has internal section breaks — e.g., a sidebar, a list, a closing turn — separate with single `---` line.}
+
+------------------------------------------------------------
+EDITOR'S DESK
+------------------------------------------------------------
+
+# {Editor's column headline}
+
+By Margaret Corliss | Editor-in-Chief
+
+{Editor's desk runs 150-250 words. Direct, terse, lays the cycle's read-this-first map.}
+
+{Sign off with em-dash + M.C. on its own line.}
+
+— M.C.
+
+------------------------------------------------------------
+CIVIC
+------------------------------------------------------------
+
+# {Headline of C1}
+
+**{Bold tagline if used for this piece — optional.}**
+
+By {Reporter} | Bay Tribune {Section or Bureau}
+
+---
+
+{C1 body prose.}
+
+# {Headline of C2 — multi-article sections separate articles with blank line + next `#` headline, no internal divider}
+
+**{Tagline.}**
+
+By {Reporter} | Bay Tribune {Section}
+
+---
+
+{C2 body.}
+
+------------------------------------------------------------
+CULTURE
+------------------------------------------------------------
+
+{Same shape — `#` headline / optional `**tagline**` / `By Reporter | Bay Tribune Section` / `---` / body.}
+
+------------------------------------------------------------
+BUSINESS
+------------------------------------------------------------
+
+{Same shape. Omit this section entirely if no business piece this cycle — never emit empty headers.}
+
+------------------------------------------------------------
+SPORTS
+------------------------------------------------------------
+
+{Same shape. Sports often runs 2-3 articles; separate as above.}
+
+------------------------------------------------------------
+OPINION
+------------------------------------------------------------
+
+{Same shape. Editorial / op-ed only — Editor's Desk is its own section above.}
+
+------------------------------------------------------------
+LETTERS
+------------------------------------------------------------
+
+# {Letter 1 headline OR `Re: {referenced article}`}
+
+{Letter prose, 80-150 words.}
+
+— {Writer Name}, {Neighborhood}
+
+# {Letter 2 headline}
+
+{Letter prose.}
+
+— {Writer Name}, {Neighborhood}
+
+------------------------------------------------------------
+NAMES INDEX
+------------------------------------------------------------
+
+{One row per named entity. STRICT pipe-format — `ingestPublishedEntities.js` parses this. Mixed shapes allowed:}
+
+POP-NNNNN | Full Name | Role/Title
+POP-NNNNN | Full Name | Role/Title
+CUL-NNNNNNN | Name | Role
+FAITH-NEW | Org Name | Faith Org | Neighborhood
+Name — Role
+
+{Em-dash form (`Name — Role`) is for citizens not yet in canon; ingester promotes to POP-pending. Avoid bullet-prose form (`- POP-NNNNN | Name | Prose description`) — `emitFormatContractSections.js` may emit this incorrectly (G-W43 engine-sheet repair pending). If the emit script produces bullet-prose, hand-restore strict pipe-format before publish.}
+
+------------------------------------------------------------
+BUSINESSES NAMED
+------------------------------------------------------------
+
+{One row per named business. Strict pipe-format:}
+
+BIZ-NNNNN | Name | Sector | Neighborhood
+NEW | Name | Sector | Neighborhood
+
+{NEW-prefix for businesses not yet in canon; sector/neighborhood may be blank if not yet established.}
+
+------------------------------------------------------------
+ARTICLE TABLE
+------------------------------------------------------------
+
+{Slot table — one row per article. Format intentionally flexible; reviewers + final arbiter read this for slot/reporter/headline mapping:}
+
+| Slot | Section | Reporter | Headline |
+|------|---------|----------|----------|
+| FP1 | FRONT PAGE | {Reporter} | {Headline} |
+| C1 | CIVIC | {Reporter} | {Headline} |
+| L1 | LETTERS | {Writer} | Re: {ref} |
+
+------------------------------------------------------------
+CITIZEN USAGE LOG
+------------------------------------------------------------
+
+{Editorial categorized prose, human-readable. `emitFormatContractSections.js` parses the `(NEW CANON THIS CYCLE)` subsection for biz/faith extraction — see sub-format rules below.}
+
+CIVIC / GOVERNMENT
+- {Citizen Name} ({POPID}) — {role + appearance context}
+- {Citizen Name} ({POPID}) — {role + appearance context}
+
+SPORTS
+- {Player Name} ({POPID}) — {appearance context}
+
+BUSINESS / OWNERSHIP
+- {Citizen Name} ({POPID}) — {role + appearance context}
+
+LETTERS WRITERS
+- {Writer Name} (NEW, {age}, {Neighborhood}, {occupation}) — L{N} reacts to {referenced slot}
+
+(NEW CANON THIS CYCLE)
+- {Citizen Name} — citizen, {neighborhood} {occupation} (POP-pending)
+- {Business Name} — {one-line sector + neighborhood} (BIZ-pending OR confirmed)
+- {Faith Org Name} — confirmed canon, {neighborhood}, {tradition}, {leader name}, congregation {N}, founded {year}
+
+{Sub-format rules for (NEW CANON THIS CYCLE) subsection:}
+
+{1. Each line starts with `- ` (bullet).}
+{2. Entity name precedes the em-dash delimiter (` — `).}
+{3. After em-dash: comma-separated metadata.}
+{4. For businesses: include "BIZ-pending" or "confirmed canon" marker, sector, neighborhood, optional establishment year.}
+{5. For faith orgs: include "confirmed canon", neighborhood, tradition, leader name, congregation size, founding year (per canon.2 faith Tier-3 scrub canonical-substitute shape).}
+{6. For citizens: include "citizen" word + occupation + neighborhood + "POP-pending".}
+
+{The emit script extracts BIZ-NEW + FAITH-NEW rows from this subsection. Wrong-shape entries are silently dropped (G-W43 — engine-sheet repair pending). Until repair lands, verify emit script output matches author intent before continuing past Step 3a.}
+
+------------------------------------------------------------
+STORYLINES UPDATED
+------------------------------------------------------------
+
+- **{Storyline name (slot — status, e.g., FP1, NEW SPINE / C1 / RECURRING / DORMANT)}** — {one-line update on what advanced this cycle}.
+- **{Storyline name}** — {one-line update}.
+
+------------------------------------------------------------
+COMING NEXT EDITION
+------------------------------------------------------------
+
+- **{Forward-looking headline}** — {one-line note on what surfaces next cycle and why}.
+- **{Forward-looking headline}** — {one-line note}.
+
+------------------------------------------------------------
+END EDITION
+------------------------------------------------------------

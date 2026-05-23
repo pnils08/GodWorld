@@ -111,7 +111,11 @@ The edition is story-driven, not section-driven.
 3. Label each with its section tag from sift assignments
 4. If a section has no story this cycle, it doesn't appear
 
-**Edition format:**
+**Canonical format exemplar (S227 — ADR-0006 Contract A):** Use [[../../docs/media/EDITION_FORMAT_TEMPLATE]] as the authoritative format reference. Copy + fill placeholders. The template is the contract. The format snippet below is explanatory (rule definitions); the template carries the canonical literal shape (masthead `===`-frame / `---`-divider sandwich for section labels / `# headline` + optional `**tagline**` + `By Reporter | Bay Tribune Section` + `---` body block / NAMES INDEX strict pipe-format / CITIZEN USAGE LOG `(NEW CANON THIS CYCLE)` sub-format the emit script parses for biz/faith).
+
+If template + skill text disagree on detail, **template is canonical**. Skill drift gets caught next cycle; template stays the literal artifact reviewers parse against.
+
+**Edition format (rule reference):**
 
 ```
 ------------------------------------------------------------
@@ -165,22 +169,28 @@ COMING NEXT EDITION
 END EDITION
 ```
 
-**Format-contract footer sections (REQUIRED — see EDITION_PIPELINE.md §Per-section content spec).**
-Three machine-readable sections must appear after ARTICLE TABLE, in this order:
+**Format-contract footer sections (REQUIRED — see [[../../docs/media/EDITION_FORMAT_TEMPLATE]] §Footer sections for canonical literal shape).** S227 correction (closes G-W42 / partial G-W43): canonical order shipped in E94 is `NAMES INDEX` → `BUSINESSES NAMED` → `ARTICLE TABLE` → `CITIZEN USAGE LOG`. The template carries this order. Earlier skill text said "after ARTICLE TABLE" for the strict three; that was inaccurate.
 
-1. `NAMES INDEX` — one row per named entity. Strict format:
+1. `NAMES INDEX` — one row per named entity. Strict pipe-format:
    - `POP-NNNNN | Full Name | Role/Title` for Sim_Ledger citizens
    - `CUL-NNNNNNN | Name | Role` for cultural-only entities (musicians, public figures from wd-cultural)
    - `FAITH-NEW | Org Name | Faith Org | Neighborhood` for new faith orgs
    - `Name — Role` (em-dash) for citizens not yet in canon (ingester promotes to POP-pending row)
-2. `BUSINESSES NAMED` — one row per named business. Strict format:
+2. `BUSINESSES NAMED` — one row per named business. Strict pipe-format:
    - `BIZ-NNNNN | Name | Sector | Neighborhood` for existing businesses
    - `NEW | Name | Sector | Neighborhood` for new businesses (sector/neighborhood may be blank)
-3. `CITIZEN USAGE LOG` — editorial categorized prose (human-readable; not parsed for ingest).
+3. `CITIZEN USAGE LOG` — editorial categorized prose (human-readable; partial parse for ingest).
    Subsections like `CIVIC / GOVERNMENT`, `CITIZENS QUOTED OR PROFILED`, `LETTERS WRITERS`,
-   plus `(NEW CANON THIS CYCLE)` sub-headers naming new orgs/firms/faith bodies. Format
-   intentionally loose; the strict sections above are derived from this section by
-   `scripts/emitFormatContractSections.js`.
+   plus `(NEW CANON THIS CYCLE)` sub-header. The strict sections above are derived from this
+   section by `scripts/emitFormatContractSections.js` — the `(NEW CANON THIS CYCLE)` subsection
+   is the canonical input for biz/faith extraction. Sub-format rules:
+   - Each line starts with `- ` (bullet)
+   - Entity name precedes em-dash delimiter (` — `)
+   - After em-dash: comma-separated metadata
+   - For businesses: include `BIZ-pending` OR `confirmed canon` marker, sector, neighborhood
+   - For faith orgs: include `confirmed canon`, neighborhood, tradition, leader name, congregation size, founding year
+   - For citizens: include `citizen` + occupation + neighborhood + `POP-pending`
+   Wrong-shape entries are silently dropped by `emitFormatContractSections.js` today (G-W43 — engine-sheet repair pending). Until repair lands, verify emit script output matches author intent before continuing past Step 3a; if NAMES INDEX comes back as bullet-prose or BUSINESSES NAMED writes zero with biz mentions present, hand-restore from template.
 
 **Step 3a: Derive strict format-contract sections.** After writing CITIZEN USAGE LOG (rich prose),
 run the helper to derive the strict NAMES INDEX + BUSINESSES NAMED sections and inject them into
@@ -202,9 +212,15 @@ footer sections are NOT subject to omission — NAMES INDEX must always appear (
 
 Save to `editions/cycle_pulse_edition_{XX}.txt`.
 
-**Show compiled edition to Mike.** This is his review point.
+**Compile complete; file ready at canonical path. Continue to Step 3.25.** (S227 correction, closes G-W45: Mike's canon-review point is Step 5, not Step 3. Step 3 produces a complete file; Step 5 is the USER APPROVAL GATE for canon-verify before Mara/ingest exposure.)
 
 **Update production log** with compile details (front page, total articles, edition path).
+
+**QUICK TAKES handling (S227, closes G-W44).** /sift slates sometimes carry "Quick Takes" (QT) entries; the section allowlist has no QUICK TAKES section. Two routes:
+- **(a) Fold into existing section** — if a QT has a topical home, place it as a standalone short piece inside CIVIC / CULTURE / etc. with its own `#` headline + `By Reporter | Bay Tribune Section` block. No QT separator needed; it reads as a short article.
+- **(b) Drop from the cycle** — if no reporter source material exists or the QT lacks anchor (no civic-office statement for an Okoro mini-take, no DJ photo for a walk feature), cut it from compile. Don't carry through to a half-written placeholder.
+
+Default: (a) when source material exists, (b) when it doesn't. Editor's Desk may also absorb spine framing the QT was carrying — that's the third path. The intent of QT was lightweight texture, not architectural separation; the section allowlist deliberately omits a QT section so texture lands inside topical sections.
 
 ## Step 3.25: Adversarial Review + Tier Classification + Reward Hacking Scan (Phase 39.8/39.9/39.10, S148)
 
@@ -302,6 +318,10 @@ Run `/cycle-review` as the **Reasoning Lane** (Phase 39.4, weight 0.5). Produces
 **Update production log** with cycle-review lane score.
 
 ## Step 5: Mara Audit (Result Validity Lane, External)
+
+**USER APPROVAL GATE — Mike reviews the compiled edition for canon before uploading to Drive for Mara** (S227, closes G-W45). Show Mike the compiled edition + the lane JSONs from Steps 4/4.1/3.5 (validation + Rhea + cycle-review + capability). Canon-verify happens here: this is where the edition crosses from internal-pipeline state to external-ingest exposure (Drive + Mara on claude.ai). Mike's check at Step 3 was deferred from prior skill text — that placement was wrong; review-for-canon lands at Step 5, publish-approval lands at Step 5.5 / 6, the two are distinct gates.
+
+After Mike says go:
 
 Mara is on claude.ai — **Result Validity Lane** (Phase 39.5, weight 0.2).
 

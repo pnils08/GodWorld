@@ -152,6 +152,8 @@ If the auditor's suggested angle is weak (fails the three-layer test or repeats 
 
 As the criteria files train over more cycles, more threads shift from proposals to questions.
 
+**Quick Takes handling (S227, closes G-W44).** /sift slates have sometimes carried "Quick Takes (QT1, QT2)" as a standalone slate category alongside regular proposals. /write-edition Step 3 section allowlist deliberately omits a QUICK TAKES section — short-form texture lands inside the topical section (CIVIC / CULTURE / etc.) as a standalone short piece, not in a dedicated QT section. **Rule:** slate emissions must not invent a QUICK TAKES section. If a proposal is short-form texture, assign it a section tag from the allowlist (FRONT PAGE | EDITOR'S DESK | CIVIC | CULTURE | BUSINESS | OPINION | SPORTS | LETTERS) and label its slot accordingly (e.g., `C-QT` for a civic quick take that runs ~150 words inside CIVIC, or fold into a feature-piece sidebar). If the short-form has no topical home, drop it from slate rather than carry through to a half-written compile-time placeholder. The intent of QT was lightweight cycle texture, not architectural separation — preserve the texture by routing to the right section, not by creating a new section.
+
 #### Step 2 priority consumption (T4.1)
 
 After Mode A/B proposals are drafted, **read Engine A output** from `Story_Seed_Deck` for the current cycle and apply two transformations to the proposal table:

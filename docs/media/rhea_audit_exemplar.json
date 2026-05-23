@@ -1,0 +1,54 @@
+{
+  "_comment": "CANONICAL EXEMPLAR — Rhea sourcing-lane audit. ADR-0006 Contract A. Every Rhea agent run MUST emit a file whose top-level keys + types match this exemplar exactly. The parser at scripts/rheaJsonReport.js is authoritative; this exemplar mirrors its requireSchema(). DO NOT remove or rename top-level keys. DO NOT change `lane` or `weight` values. ADDITIONAL fields are OK (e.g., `generatedAt`, `controllableFailures`, `uncontrollableFailures` get recomputed by the parser).",
+  "_validate": "Before saving your real report, run: node scripts/rheaJsonReport.js --json output/rhea_report_c<XX>.json — exit 0 means schema is valid; exit 2 means schema violation (parser prints what's missing/wrong).",
+  "_pipeline_27": "Shipped S225 to close G-W54 (Rhea agent JSON schema vs rheaJsonReport.js validator — 2 manual reformats per cycle). See docs/plans/2026-05-22-c94-gap-log-triage.md §3 C5.",
+
+  "lane": "sourcing",
+  "weight": 0.3,
+  "cycle": 94,
+  "generatedAt": "2026-05-23T00:00:00.000Z",
+  "score": 0.82,
+  "verdict": "PASS",
+  "checks": {
+    "citizen-name-verification": {
+      "pass": true,
+      "issues": []
+    },
+    "vote-civic-verification": {
+      "pass": false,
+      "issues": [
+        {
+          "article": "C1 — Carmen Delaine, The Vote That Was There",
+          "claim": "Transit Hub passed 8-0",
+          "canonValue": "8-0-1 (Crane D6 absent)",
+          "severity": "CRITICAL",
+          "fix": "Add Crane absentee to the vote-math reconciliation; revise total to 8 YES / 0 NO / 1 ABSENT."
+        }
+      ]
+    },
+    "sports-record-verification": {
+      "pass": true,
+      "issues": []
+    },
+    "canon-continuity": {
+      "pass": true,
+      "issues": []
+    },
+    "quote-attribution": {
+      "pass": true,
+      "issues": [
+        {
+          "article": "FP1 — Jordan Velez, The Town",
+          "claim": "Quote attributed to Varek without sheet citation",
+          "canonValue": "Oakland_Sports_Feed row 147 carries the canonical quote",
+          "severity": "WARNING",
+          "fix": "Add inline source attribution to row 147 in the next revision."
+        }
+      ]
+    }
+  },
+  "process": 0.8,
+  "outcome": 1,
+  "controllableFailures": ["vote-civic-verification"],
+  "uncontrollableFailures": []
+}

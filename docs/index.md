@@ -121,6 +121,8 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[media/city_hall_evaluation]]** — city-hall source-material assertions. 8 criteria covering decision resolution, vote math, cascade order, voice coverage. Built S216 (governance.2). *(reference, civic, media, active)*
 - **[[media/dispatch_evaluation]]** — dispatch scene-piece assertions. 8 criteria covering location specificity, identity-through-action, image-ending, word count. Built S216 (governance.2). *(reference, media, active)*
 - **[[media/interview_evaluation]]** — interview canon-grounded Q&A assertions. 9 criteria covering theme, canon grounding, question progression, voice differentiation. Built S216 (governance.2). *(reference, media, active)*
+- **[[media/rhea_audit_exemplar]]** — canonical exemplar for Rhea sourcing-lane JSON audit (ADR-0006 Contract A, S225 pipeline.27). Every Rhea run should mirror this shape; parser `scripts/rheaJsonReport.js` is authoritative. Closes G-W54 (Rhea schema vs validator — 2 manual reformats per cycle). Self-validate: `node scripts/rheaJsonReport.js --json output/rhea_report_c<XX>.json`. *(reference, media, reviewer-lane, active)*
+- **[[media/mara_audit_exemplar]]** — canonical exemplar for Mara result-validity-lane markdown audit (ADR-0006 Contract A, S225 pipeline.27). Three check lines in structured top (NOT four — previous spec drifted with a 4th canon-drift check that parser silently dropped, causing /4 math drift and 3 reformats per cycle). Closes G-W55. Self-validate: `node scripts/maraJsonReport.js --md output/mara_audit_c<XX>.md`. *(reference, media, reviewer-lane, active)*
 - **[[media/intake]]** — edition intake section reference. *(reference, media, active)*
 
 ### Newsroom architecture & style

@@ -45,8 +45,16 @@ You produce two artifacts:
 - `article` — headline or section where the issue appears
 - `claim` — verbatim claim from the edition
 - `canonValue` — what the canonical source actually says (empty string if not applicable)
-- `severity` — `CRITICAL` or `WARNING`
+- `severity` — `CRITICAL` | `WARNING` | `UNCONTROLLABLE` (S225 pipeline.27 — UNCONTROLLABLE previously missing from this list; parser at `scripts/rheaJsonReport.js` recognizes all three. Use UNCONTROLLABLE when a canon source was unavailable (API down, ledger read timed out, Supermemory query failed) — document the environment failure in the issue body and the check ID lands in `uncontrollableFailures`.)
 - `fix` — string-level replacement or explicit instruction (required for CRITICAL issues)
+
+**Canonical exemplar (ADR-0006 Contract A, S225 pipeline.27):** `docs/media/rhea_audit_exemplar.json`. Every Rhea run should mirror that shape. Self-validate before saving:
+
+```bash
+node scripts/rheaJsonReport.js --json output/rhea_report_c{XX}.json
+```
+
+Exit 0 = schema valid + .txt rendered. Exit 2 = schema violation (parser prints what's missing/wrong). If exit 2, fix the JSON and re-run before declaring the lane report done — manual reformats by Mags downstream were the C94 G-W54 pain.
 
 **Process, outcome, controllable/uncontrollable** — see `docs/engine/REVIEWER_LANE_SCHEMA.md`. Rules for this lane:
 - `process` = fraction of the 5 checks that passed (0.0–1.0)

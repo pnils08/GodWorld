@@ -21,6 +21,8 @@ The audit is the diagnosis; the voice directive (`output/mara-directives/mara_di
 
 ## §Top Block (verbatim format — parser-required)
 
+**Canonical exemplar:** [[../media/mara_audit_exemplar]] — copy and edit. Shows the exact shape the parser expects. (ADR-0006 Contract A, S225 pipeline.27.)
+
 ```markdown
 # Mara Audit — Cycle {XX}
 
@@ -28,7 +30,6 @@ The audit is the diagnosis; the voice directive (`output/mara-directives/mara_di
 - Completeness: PASS | REVISE | FAIL — score X/10 — one-line reason
 - Gave-up detection: PASS | REVISE | FAIL — N flags — one-line reason
 - Coverage breadth: PASS | REVISE | FAIL — score X/10 — one-line reason
-- Canon-drift detection: PASS | REVISE | FAIL — score X/10 — one-line reason
 
 ## Process score: 0.X
 ## Outcome: 0 | 1
@@ -38,13 +39,23 @@ The audit is the diagnosis; the voice directive (`output/mara-directives/mara_di
 ---
 ```
 
-**Scoring rules** (preserved from CLAUDE_AI_SYSTEM_PROMPT — do not change without coordinating with `maraJsonReport.js`):
+**Three check lines, not four (S225 pipeline.27, closes G-W55).** Previous template carried a 4th `Canon-drift detection` line in the structured top, but `scripts/maraJsonReport.js` only parses three CHECK_IDS (`completeness`, `gave-up-detection`, `coverage-breadth`) — the 4th line was silently dropped, the `/4` math was wrong, 3 manual reformats per cycle resulted. Canon-fidelity findings now live in §Canon Audit (below the structured top, narrative form); the parser-required top stays 3 checks.
 
-- Process score = (checks passed) / 4, where "passed" = PASS verdict
-- Outcome = 1 if all four checks are PASS AND no gave-up flags AND no canon-drift FAIL; else 0
+**Scoring rules** (parser at `scripts/maraJsonReport.js` is authoritative; do not change without coordinating):
+
+- Process score = (checks passed) / 3, where "passed" = PASS verdict (3 checks: completeness + gave-up-detection + coverage-breadth)
+- Outcome = 1 if all three checks are PASS AND no gave-up flags AND no canon-drift FAIL surfaced in §Canon Audit; else 0
 - Controllable failures: check IDs where the newsroom could have done better with same inputs
 - Uncontrollable failures: check IDs blocked by missing canon, sheet outages, upstream pipeline issues
-- Canon-drift detection is uncontrollable when caused by bay-tribune ingest stacking (canon.1 fix pending); controllable when newsroom introduced new framing without checking prior coverage
+- Canon-drift findings live in §Canon Audit (narrative section below) — controllable when newsroom introduced new framing without checking prior coverage, uncontrollable when caused by bay-tribune ingest stacking (canon.1 fix pending). Surface specific drift cases under §Canon Audit; the lane Outcome score reflects their presence/absence via the operator's verdict here.
+
+**Validate before pasting back from claude.ai:**
+
+```bash
+node scripts/maraJsonReport.js --md output/mara_audit_c{XX}.md
+```
+
+Exit 0 = parsed + JSON written. Exit 2 = structured top malformed (parser prints what's missing).
 
 ---
 
@@ -119,12 +130,15 @@ Flag a Tier-3 violation only when:
 - (a) a real-named institution is encountered AND no corrections-forward map covers it, OR
 - (b) a retired interim substitute is being **newly introduced** in fresh generation rather than retroactively encountered in pre-scrub bay-tribune source briefings.
 
-### Drift Findings (S215 canon-drift check)
-For each citizen flagged in the structured top block's canon-drift check, document:
+### Drift Findings (S215 canon-drift check — now sub-check of §Canon Audit per S225 pipeline.27)
+
+The canon-drift check no longer appears in the parser-required structured top (see §Top Block scoring rules). Document drift here in §Canon Audit narrative form. For each citizen with conflicting canon versions:
 - Citizen name
 - Conflicting versions cited by edition number (e.g., "Patricia Nolan age 66 in E85, age 55 in E92")
 - Recommended canonical-current version (typically most recent edition appearance)
 - Whether drift is controllable (newsroom introduced new framing) or uncontrollable (bay-tribune ingest stacking)
+
+**Outcome impact:** if drift findings are FAIL-class (newsroom-introduced new framing without checking prior canon), reflect in your Lane Outcome verdict at the structured top (Outcome=0). If drift is uncontrollable (ingest stacking), surface in §Uncontrollable failures but Outcome can remain 1 if all three parsed checks pass.
 
 **Format:** structured list per sub-check. Drift findings get their own labeled sub-section so Mags can read them as a fix list.
 

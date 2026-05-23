@@ -55,7 +55,7 @@ When submitting your audit, follow the format in `AUDIT_TEMPLATE.md` — structu
 
 Per-cycle output path: `output/mara-audit/audit_c{XX}.md` (markdown, canonical format replacing the historical scattered json/txt/md mix).
 
-The structured top block — required exactly as below — is what the parser reads:
+The structured top block — required exactly as below — is what the parser reads. **Canonical exemplar lives at `docs/media/mara_audit_exemplar.md`** in the GodWorld repo (ADR-0006 Contract A, S225 pipeline.27); the form below mirrors it.
 
 ```markdown
 # Mara Audit — Cycle {XX}
@@ -64,7 +64,6 @@ The structured top block — required exactly as below — is what the parser re
 - Completeness: PASS | REVISE | FAIL — score X/10 — one-line reason
 - Gave-up detection: PASS | REVISE | FAIL — N flags — one-line reason
 - Coverage breadth: PASS | REVISE | FAIL — score X/10 — one-line reason
-- Canon-drift detection: PASS | REVISE | FAIL — score X/10 — one-line reason (S215, canon.1)
 
 ## Process score: 0.X
 ## Outcome: 0 | 1
@@ -73,14 +72,16 @@ The structured top block — required exactly as below — is what the parser re
 
 ---
 
-[Your full prose audit follows here — narrative judgment, pattern observations, editorial-level findings. This is where your experience and institutional memory show up. Include a §Canon Drift Findings sub-section when canon-drift check returned REVISE or FAIL — list each affected citizen with the conflicting versions cited by edition number, and your recommendation on which version is canonical-current.]
+[Your full prose audit follows here — narrative judgment, pattern observations, editorial-level findings. Canon-drift findings live in §Canon Audit below (NOT in the structured top); list each affected citizen with the conflicting versions cited by edition number and your recommendation on which version is canonical-current.]
 ```
 
+**Three check lines, not four (S225 pipeline.27, closes G-W55).** Previous prompt carried a 4th `Canon-drift detection` line in the structured top, but `scripts/maraJsonReport.js` only parses three CHECK_IDS (`completeness`, `gave-up-detection`, `coverage-breadth`) — the 4th line was silently dropped, the `/4` math was wrong, 3 manual reformats per cycle resulted. Canon-drift now goes in §Canon Audit narrative section.
+
 **Scoring rules** (so the JSON parser produces a comparable lane score):
-- Process score = (checks passed) / 4, where "passed" = PASS verdict.
-- Outcome = 1 if all four checks are PASS and no gave-up flags AND no canon-drift FAIL; else 0.
+- Process score = (checks passed) / 3, where "passed" = PASS verdict (3 checks: completeness + gave-up-detection + coverage-breadth).
+- Outcome = 1 if all three checks are PASS and no gave-up flags AND no canon-drift FAIL surfaced in §Canon Audit; else 0.
 - Controllable failures: PASS|REVISE|FAIL check IDs where the newsroom could have done better with the same inputs.
-- Uncontrollable failures: check IDs where the newsroom was blocked by missing canon, sheet outages, or upstream pipeline issues. Canon-drift detection is **uncontrollable** when caused by bay-tribune ingest stacking behavior (engine-sheet's canon.1(a)/(b) fix); **controllable** when the newsroom introduced new framing without checking prior coverage.
+- Uncontrollable failures: check IDs where the newsroom was blocked by missing canon, sheet outages, or upstream pipeline issues. Canon-drift findings (now in §Canon Audit) are **uncontrollable** when caused by bay-tribune ingest stacking behavior (engine-sheet's canon.1(a)/(b) fix); **controllable** when the newsroom introduced new framing without checking prior coverage.
 
 ### Grade distribution expectation
 

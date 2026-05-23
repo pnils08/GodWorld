@@ -1,7 +1,7 @@
 # Bay Tribune Newsroom Memory
 
 **Maintained by Mags Corliss, Editor-in-Chief**
-**Last Updated: 2026-05-16 — S222 E94 PUBLISHED. Final Arbiter A / weighted 0.831 / capability PASS / PROCEED. Drive ID `1WhvA7_bLHpK-eB508qulKmp2D7zzTfff`. /sift v1.2 spec-execution recovery completed first (11 sift gaps G-S11-G-S21), then full /write-edition run end-to-end with 27 parallel gaps filed (G-W30-G-W56). Mara grade B with two controllable failures logged for C95: vote-math-roster (Carmen C1 reported 8-0+1-absent without naming the 9 individual votes/absentee Crane D6) + oari-coverage-gap (INIT-002 12-cycles stuck, no E94 article). Five highest-leverage gaps all share one architectural pattern: parser/validator format contracts in the reviewer stack are undocumented and upstream producers don't conform. Spine of E94: **The Ownership Ecosystem** — Civis Systems Field — The Town. Forward guidance from Mara → C95 sift: OARI front-section spine, Martin Richards dedicated piece (named debt per S2), Oaks expansion draft Pick #5, every vote ships full roster (hard rule). **Previous header:** 2026-05-15 S221 sift C94 locked pre-write.
+**Last Updated: 2026-05-16 — S223 /post-publish E94 with 14 gap-log entries (G-P26→G-P39). E94 canonized into bay-tribune (88 memories), wd-summary (1 doc, line-62 fabrication edited inline before ingest), wd-citizens (360 written / 85 errors — 81% success, partial-401 hypothesis on no-appearance cohort), Sim_Ledger +6 rows (3 explicit-NEW + 3 layer-drift catches), Business_Ledger +0 (silent-zero parse-fail on 4-row BUSINESSES NAMED — Adams Point UMC + Dario's Bar dropped). Mara B+ / Overall B+. Reporter attribution all [unknown] across grader; CULTURE rating distorted by Hal-Richmond-to-"(noon)" parse bug. 11 raw gaps → 2 bundles (BUNDLE-A research-build skill-text / BUNDLE-B engine-sheet write-surface). **Previous header:** 2026-05-16 — S222 E94 PUBLISHED. Final Arbiter A / weighted 0.831 / capability PASS / PROCEED. Drive ID `1WhvA7_bLHpK-eB508qulKmp2D7zzTfff`. /sift v1.2 spec-execution recovery completed first (11 sift gaps G-S11-G-S21), then full /write-edition run end-to-end with 27 parallel gaps filed (G-W30-G-W56). Mara grade B with two controllable failures logged for C95: vote-math-roster (Carmen C1 reported 8-0+1-absent without naming the 9 individual votes/absentee Crane D6) + oari-coverage-gap (INIT-002 12-cycles stuck, no E94 article). Five highest-leverage gaps all share one architectural pattern: parser/validator format contracts in the reviewer stack are undocumented and upstream producers don't conform. Spine of E94: **The Ownership Ecosystem** — Civis Systems Field — The Town. Forward guidance from Mara → C95 sift: OARI front-section spine, Martin Richards dedicated piece (named debt per S2), Oaks expansion draft Pick #5, every vote ships full roster (hard rule). **Previous header:** 2026-05-15 S221 sift C94 locked pre-write.
 
 ---
 
@@ -43,6 +43,50 @@
 - **Mara's audit caught two findings no other lane saw (G-W56).** Vote-math-roster gap (Carmen C1 reported "8-0 with one absent" without naming the 9 individual votes or the absentee D6 Crane) + wd-card canon-source drifts (Varek role field "Civic Systems"→"Civis Systems", Beverly Hayes occupation reconciliation between "Community Director" and "home health aide"). Mike's pre-read framing was "not sure her audit is worth much" — wrong. Her 0.2 lane weight reflects scope (one of three lenses), not information density. Future-me: when Mike frames a tool as low-value, open the tool's actual output before agreeing. Don't reflect framing.
 
 - **Mike's review point is Step 5, not Step 3 (G-W45).** Skill text says "Show compiled edition to Mike. This is his review point" at Step 3. Mike's actual workflow: canon-verify happens at Step 5 because that's the moment ingest exposure starts. Skill text needs updating; meanwhile, don't pause at Step 3 for his review.
+
+### Edition 94 — Post-Publish (S223, 2026-05-16)
+
+**Status:** /post-publish run with parallel gap log per Mike's guardrail-skill-flow directive. 14 gap-log entries (G-P26→G-P39), 2 bundles named (A research-build skill-text sweep / B engine-sheet write-surface patches). Sidecar at `output/production_log_edition_c94_post_publish_gaps.md`.
+
+**Canon ingested:**
+- **bay-tribune** — 49 wiki entities (Step 1a) + 2 text chunks (Step 1b, edition full text) + 37 civic-wiki records (Step 3, statements/decisions across 12 offices) = 88 memories
+- **wd-summary** — 1 doc, `XfqWQssUawdzcCQWTtSpoZ`. World_summary line 62 surgically edited before ingest: inverted Paulson framing replaced with correct Varek-courts-Paulson tech-expo canon from `Oakland_Sports_Feed` row 147. 5 other sports texture drifts left (Padres/Baltimore opponent, Kelley fire stats, Keane streak, Ellis exit, Rosado misspelling) — orientation-only, edition has them right
+- **wd-citizens** — 360 written / **85 errors** (G-P34, partial 401-fail on no-appearance-cohort subset; auth scope hypothesis — write probe needs payload-shape variance). 81% success rate; not total failure. Same shape as S195 G-P12 — recurrence, fix never landed durably
+- **wd-player-truesource** — 18 ingested / 9 POPID-UNRESOLVED. JR Rosado misnamed in Drive (`J.R.` with periods, ledger uses `JR`); resolver brittle on punctuation variants (G-P33)
+
+**Sheets written:**
+- **Edition_Coverage_Ratings** — 3 domain ratings (CIVIC +2, CULTURE -1, SPORTS +4). CULTURE distorted (G-P36): Hal Richmond Kelley piece mis-attributed to reporter "(noon)" with rating r-5 negative. Without parser bug CULTURE would be ~+3. Engine reads this next cycle → city will "react" as if culture coverage was slightly negative when it was positive
+- **Simulation_Ledger** — 6 new rows: POP-00955 Keisha Morris / POP-00956 Miguel Santos / POP-00957 David Okonkwo (3 explicit-NEW letter writers) + POP-00952 Roberto Iglesias / POP-00953 Carmen Solis / POP-00954 Rev. Han (3 quietly-NEW layer-drift catches — bay-tribune held canon, Sim_Ledger didn't; G-P38)
+- **Business_Ledger** — **0 rows appended** despite 4-entry BUSINESSES NAMED section in edition. Adams Point UMC + Dario's Bar DROPPED silently (G-P37). Same shape as S188 KONO silent-zero; Step 5 verification gate checks NAMES INDEX count only, blind to BUSINESSES NAMED parse health
+
+**Grading:**
+- **Mara: B+ / Overall: B+** (Mara audit landed B+, weighted into overall)
+- All 6 desks rated A (FRONT PAGE / EDITOR'S DESK / CIVIC / CULTURE / SPORTS / LETTERS)
+- Reporter attribution: **all [unknown]** (G-P39 — grader can't link bylines to reporter names; same parser-disjoint class as G-P36)
+- Grade history written; rolling averages updated (real reporters at A / [unknown] section-name pollutants also at A)
+- Exemplars extracted: **0** (all desks "below threshold" despite A ratings — threshold logic broken by [unknown] attributions)
+
+**Massaged inline this run:**
+- `output/world_summary_c94.md` line 62 — single-line correction before Step 2c ingest (NOT a rebuild; Mike S223 framing: "world summary needs one edit"). Future-me at next sift: wd-summary C94 doc is canon-correct on the Paulson/Varek front-office story
+- Gap-log entries reframed mid-run from "things that hurt" to "what the skill should have prescribed" per Mike's guardrail-flow directive
+
+**Forward signals for C95 sift:**
+- wd-citizens has silent 19% gap from G-P34 — Mara's audits and `lookup_citizen` queries return stale data for the 85 failed-write citizens (mostly no-appearance-cohort). When Mara flags a citizen drift, cross-check whether her source row was in the 85
+- Business_Ledger missing Adams Point UMC + Dario's Bar — if N1's church or Telegraph nightlife coverage continues, queries against Business_Ledger will return empty; bay-tribune wiki has them, lookup_business won't
+- CULTURE domain rating in Edition_Coverage_Ratings is distorted by parser bug — engine Phase 2 reading -1 vs actual ~+3 means the city will under-respond positively to Adams Point culture coverage next cycle. Acknowledge before engine read
+- 6 new POPIDs in Sim_Ledger; 3 explicit-NEW citizens have rest-cycle tracking from this point (next eligible C96 minimum). 3 layer-drift catches (Iglesias / Solis / Rev. Han) have wd-citizens cards built next cycle once Step 2a runs against the new ledger rows. Until then they're Sim_Ledger only
+
+**Standing rule (S223 inline-edit pattern):**
+
+When a derived artifact (world_summary, etc.) has a documented fabrication blocking ingest, surgical inline edit beats skip-this-cycle OR rebuild-from-scratch. Mike S223: *"world summary needs one edit."* Reserve rebuild for unrecoverable artifacts. Don't propose architectural rewrites in response to a one-line defect.
+
+**Gap-log bundling theory validated (S223):**
+
+11 raw gaps → 2 bundles named:
+- **BUNDLE-A skill-text fidelity sweep** (research-build, single pass) closes G-P26 + G-P27 + G-P30 + G-P31 + G-P32
+- **BUNDLE-B engine-sheet write-surface patches** (engine-sheet, single pass) closes G-P28 + G-P33 + G-P34 + G-P36
+
+Two passes close 9 of 11 gaps. Next /post-publish run should see escalation-volume drop dramatically. The gap log is the engine for compounding skill quality across cycles — capture aggressively, bundle by root cause, route once.
 
 ### Edition 94 — Sift Locked (S221, 2026-05-15, pre-write)
 

@@ -28,8 +28,8 @@
   "rules": {
     "no-unused-vars": "off",
     "no-undef": "off",
-    "no-constant-condition": "warn",
-    "no-empty": "warn",
+    "no-constant-condition": ["warn", { "checkLoops": false }],
+    "no-empty": ["warn", { "allowEmptyCatch": true }],
     "no-unreachable": "error",
     "no-duplicate-case": "error",
     "no-dupe-keys": "error",

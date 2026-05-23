@@ -116,7 +116,9 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ### Criteria (S144 — sift + write-edition assertions; S216 — city-hall + dispatch + interview added)
 - **[[media/story_evaluation]]** — story scoring rubric. Carries changelog. *(reference, media, active)*
-- **[[media/brief_template]]** — angle brief template. Carries changelog. *(reference, media, active)*
+- **[[media/brief_template]]** — angle brief template v1 (DEPRECATED S228 — superseded by `brief_template_v2`). Carries changelog. *(reference, media, deprecated)*
+- **[[media/brief_template_v2]]** — angle brief template v2 — reporter-agency / signal+voice shape. One brief per article slot, no prose-body, no citizens-table, no specific-data dump. Section enum + filename convention + field-by-field rules + letters/QT variants. SPEC contract class (LLM-readable, no machine parser). Built S228 (pipeline.24 Task 3). *(reference, media, sift, active)*
+- **[[media/brief_template_v2_exemplar]]** — canonical exemplar for `brief_template_v2` per ADR-0006 Contract A. Three variants (main article / quick-take / letters candidate pool) with placeholders. Anti-pattern list. Built S228 (pipeline.24 Task 3). *(reference, media, sift, exemplar, active)*
 - **[[media/citizen_selection]]** — citizen selection rubric for briefs. Carries changelog. *(reference, media, active)*
 - **[[media/EDITION_FORMAT_TEMPLATE]]** — canonical edition `.txt` format exemplar per ADR-0006 Contract A. Masthead frame, divider regex, section allowlist, article shape, NAMES INDEX + BUSINESSES NAMED + CITIZEN USAGE LOG sub-formats. Referenced by `/write-edition` Step 3 + Step 5 + `emitFormatContractSections.js`. S227 ship — closes G-W42, partial close on G-W43 (engine-sheet emit-script repair pending). *(reference, media, format-contract, active)*
 - **[[media/city_hall_evaluation]]** — city-hall source-material assertions. 8 criteria covering decision resolution, vote math, cascade order, voice coverage. Built S216 (governance.2). *(reference, civic, media, active)*

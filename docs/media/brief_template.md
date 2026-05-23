@@ -1,5 +1,9 @@
 # Angle Brief Template
 
+**DEPRECATED (S228, 2026-05-23) — see [[brief_template_v2]].** This v1 template (S197/S222 line: prose-body + citizens-table + specific-data dump) is superseded by reporter-agency v2 (signal + voice-direction + canon-pointers). v1 stays in tree until SKILL.md v2.0 (pipeline.24 Task 6) removes the last reference; then v1 archives per [[SCHEMA]] §8. Do not author new briefs against this template.
+
+---
+
 **Follow this when writing angle briefs in /sift Step 5. Updated after each cycle based on what produced good articles.**
 
 Last Updated: S197 (C93)

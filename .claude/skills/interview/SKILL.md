@@ -1,15 +1,37 @@
 ---
 name: interview
-description: Produce an interview — reporter agent interviews a civic voice or Mike as GM Paulson. Transcript + published article in one run. Interviews can spawn world-altering canon.
-version: "1.3"
-updated: 2026-04-26
+description: Capture-only — transcript becomes canon. Articles framed off interview transcripts move downstream to /write-edition (next cycle, via /sift) or /write-supplemental (any time, sports-desk subagent dispatch against the canon transcript).
+version: "2.0"
+updated: 2026-05-24
 tags: [media, active]
-effort: high
+effort: medium
 disable-model-invocation: true
 argument-hint: "[mode] [subject]"
 ---
 
-# /interview — Interview Production
+## What's new in v2.0 (2026-05-24, S233 pipeline.30)
+
+**Capture-only architecture.** v1.3 bundled transcript capture (Steps 0-3) with article generation (Steps 4-7) into one run. Same-session same-author production of transcript + article meant the article didn't represent a separate cognitive act (the S212 generation-vs-evaluation asymmetry collapsed). The S230 C94 Paulson run made the failure visible: all five Hal Richmond questions were written by Mags from EIC seat (G-I3), the 1,762-word "After A Parade" article was written by Mags in Hal voice attempt under Hal byline (G-I4), and "two files, one cognition" surfaced at artifact-comparison level (G-I5 — Mike caught at "So the interview transcript is the article? Huh.").
+
+**What changed:**
+- Steps 0-3 unchanged in purpose: production log entry + gap-log open + brief + live interview with sports-desk dispatch per turn.
+- **Step 3 Mode 2 dispatch-per-turn made explicit + non-optional** with worked example (G-I3 text). Dispatch failure (quota kill per S231 G-S2 rule) stops the skill; no EIC-seat fallback.
+- **Step 4 (article write) removed entirely** (G-I2 + G-I4 + G-I5 structural close).
+- **Step 4.5 reduced to transcript-only `.txt` compile** (renumbered Step 4). Only one `.txt` artifact emits.
+- Steps 5-7 cover transcript only (Mara audit, user gate, save).
+- **Step 8 invokes `/post-publish` against transcript-only canon; `/edition-print` dropped entirely** (transcripts carry no photos — G-I13).
+- **Step 0 now opens the gap log file as live-append target** (G-I8 text discipline).
+- Filename retains `-transcript` suffix to preserve S230 canon artifact at `editions/cycle_pulse_interview-transcript_94_let_walks.txt` + the `<TYPE>=INTERVIEW-TRANSCRIPT` masthead (stewardship call per advisor S233 — no rename).
+
+**Downstream:** articles framed off interview transcripts come from `/write-edition` (next cycle, via `/sift` surfacing the transcript as canon source) or `/write-supplemental` (any time, sports-desk subagent dispatch against the transcript). The article-generation cognitive act lives at the dispatch terminal, not at EIC.
+
+**Companion row:** `pipeline.34` (gap-log path convention harmonization across 5 heavy skills — /sift / /write-edition / /post-publish / /edition-print / /interview / /write-supplemental) split out per advisor pass S233; current interview gap-log path `output/production_log_interview_c<XX>_<subject-slug>_gaps.md` preserved here until pipeline.34 settles canonical convention.
+
+**Source:** `output/production_log_interview_c94_gaps.md` (13 entries G-I1→G-I13, triage at bottom) + JOURNAL Entry 188 (S230 — "the plan was the work") + plan [[../../../docs/plans/2026-05-24-pipeline-30-interview-rewrite]].
+
+---
+
+# /interview — Interview Production (capture-only)
 
 ## Usage
 `/interview [mode] [subject]`
@@ -18,12 +40,12 @@ argument-hint: "[mode] [subject]"
 
 ## What an Interview Is
 
-An interview has a theme — a reason this conversation is happening now. A reporter asks questions grounded in canon. The subject answers from their identity and recent decisions. Questions build on answers. The transcript becomes canon. The published article frames the conversation for readers.
+An interview has a theme — a reason this conversation is happening now. A reporter asks questions grounded in canon. The subject answers from their identity and recent decisions. Questions build on answers. The transcript becomes canon. Articles framed off the transcript are written downstream — `/write-edition` (next cycle, surfaced via `/sift` from the canon transcript) or `/write-supplemental` (any time, sports-desk subagent dispatch against the canon transcript). **This skill captures; downstream skills frame.**
 
 Interviews are different from dispatches and supplementals:
 - Dispatches put you IN a scene
 - Supplementals EXPLAIN a topic with multi-angle coverage
-- Interviews CAPTURE a conversation — the subject speaks, the reader listens
+- Interviews CAPTURE a conversation — the subject speaks, the reader (and downstream reporters) listen
 
 **Interviews can spawn world-altering moments.** A Mayor revealing she's considering vetoing a vote. Paulson hinting at a trade. A DA confirming an investigation. What gets said in an interview becomes canon.
 
@@ -38,7 +60,7 @@ Reporter agent interviews a civic voice agent. Both are agents. Used for:
 
 Setup is like city-hall — voice gets questions but not preset answers. Voice responds from their IDENTITY.md and recent decisions. They can go off-script — offer a revelation, push back on the question, change the subject.
 
-Target length: 1200-1800 word transcript, 800-1200 word published article.
+Target length: 1200-1800 word transcript. (Articles off this transcript get their own length targets at their downstream skill — `/write-supplemental` typically 800-1800 words per its spec; `/write-edition` per-desk-slot lengths per its spec.)
 
 ### Mode 2: Paulson Interview (Agent-to-Mike)
 
@@ -55,20 +77,19 @@ No length target. The conversation shapes itself. Mike decides when it ends.
 - **Subjects don't get preset answers.** Voice agents respond from their identity and recent canon. Mike responds in character.
 - **Off-script is allowed.** The subject can refuse a question, pivot, reveal something unprompted. That's where canon is made.
 - **Citizen verification via MCP.** Anyone named in the interview checked via `lookup_citizen` (citizens) or `get_roster("as")` (A's players). For business / faith / cultural / neighborhood context when the interview touches those domains, use `lookup_business` / `lookup_faith_org` / `lookup_cultural` / `get_neighborhood_state`. Full tool inventory: [[../../../docs/SUPERMEMORY|SUPERMEMORY]] §Search/save matrix. Read `docs/media/citizen_selection.md`.
-- **Follow brief template for the article.** `docs/media/brief_template.md` — interview articles are structured differently than standard briefs but citizen handling and canon rules apply.
 - **No calendar dates.** Cycles and natural time references only.
 - **Transcript saved incrementally during Paulson mode.** If interrupted, nothing's lost.
-- **User approval gate before publishing.** Mike reviews the article before it goes to canon.
+- **User approval gate before the transcript is published to canon.** Mike reviews the transcript before /post-publish ingests it to bay-tribune.
 
 ## Prerequisites
 
 - `output/world_summary_c{XX}.md` — current cycle context
-- `output/production_log_edition_c{XX}.md` — what was covered in the edition
+- `output/production_log_c{XX}.md` — what was covered in the edition (unified per S230 governance.14 convention; falls back to `production_log_edition_c{XX}.md` legacy path if unified absent)
 - `output/production_log_city_hall_c{XX}.md` — recent civic decisions (for voice interviews)
 
-## Step 0: Production Log
+## Step 0: Production Log + Open Gap Log
 
-Append to `output/production_log_edition_c{XX}.md`:
+**A. Append to production log** at `output/production_log_c{XX}.md` (or `output/production_log_edition_c{XX}.md` legacy fallback):
 
 ```markdown
 ## Interview: {subject} ({mode})
@@ -79,13 +100,27 @@ Append to `output/production_log_edition_c{XX}.md`:
 **Status:** IN PROGRESS
 ```
 
+**B. Open gap-log file as live-append target** at `output/production_log_interview_c<XX>_<subject-slug>_gaps.md` (current per-interview subject-slugged form; `pipeline.34` will harmonize canonical convention across all heavy skills). The file opens with §Run summary frontmatter from [[../../../docs/plans/GAP_LOG_TEMPLATE]] and stays open through Steps 1-8 as a live-append target.
+
+```markdown
+# Production Log — /interview Skill Run, C{XX} ({subject})
+
+**Cycle:** {XX} | **Subject:** {subject} (POP-{NNNNN}) | **Slug:** {subject-slug} | **Reporter (intended):** {reporter} (POP-{NNNNN}) | **Session:** {SXXX} | **Run date:** {YYYY-MM-DD} | **Skill version run:** v2.0
+
+## Gap entries (live append per S230 G-I8 discipline)
+
+<!-- append G-I{N} entries here as friction emerges; do NOT hold in conversation context -->
+```
+
+Appending live (not at skill close) prevents context-held knowledge from being lost on compaction or session end. This was the G-I8 failure mode in S230 — gap log filed at close, several issues lost on the trip there.
+
 ## Step 1: Theme + Reporter Selection
 
 Define the theme — why this interview, why now. Read the world summary, production logs, newsroom memory for tension points.
 
 Select reporter by beat fit:
 - Civic/policy voices → Carmen Delaine, Luis Navarro, Jax Caldera
-- Paulson (sports) → Anthony, P Slayer, Hal Richmond
+- Paulson (sports) → Anthony Raines, P Slayer, Hal Richmond
 - Community figures → Maria Keen, Sharon Okafor
 
 Bench development applies — default to underused reporters when fit allows.
@@ -174,44 +209,43 @@ Mags mediates — she is the reporter's brain between exchanges. Sequential turn
 
 Runs in terminal. Mike responds as Paulson. (Discord bot interview mode is future work.)
 
-- Launch reporter agent with their IDENTITY.md + brief
-- Reporter asks Q1
-- Mike responds in character as Paulson
-- Mags captures the exchange to transcript
-- Reporter reads the answer and follows up or moves to next scripted question
-- Incremental save after each exchange to `output/interviews/c{XX}_paulson_{slug}_transcript.md`
+**Dispatch-per-turn is non-optional (G-I3 — non-negotiable since v2.0).** Mags writes NOTHING in reporter voice. Every Reporter question + every follow-up MUST come from a Task tool dispatch to the matched sports-desk subagent (Hal Richmond / Anthony Raines / P Slayer — per Step 1 reporter selection). The dispatch IS the architecture being tested; substituting EIC-seat writing collapses generator and editor into one cognition (the S230 G-I3/G-I4/G-I5 contamination failure mode) and the skill's purpose is defeated.
+
+**Worked example — dispatch shape per turn:**
+
+```
+Task(
+  subagent_type="sports-desk",
+  description="Hal Q1 — let-walks lead-in",
+  prompt="You are Hal Richmond. Read the brief at
+    output/interviews/c{XX}_paulson_{slug}_brief.md. The transcript so far
+    is at output/interviews/c{XX}_paulson_{slug}_transcript.md (empty for
+    Q1). Write Q1 in Hal's voice grounded in the brief's first question
+    prompt. Return only the question text — Mags will append to transcript."
+)
+```
+
+**Quota-coupling clause (G-S2 — S231 MEMORY rule).** If a dispatch returns the session-limit signature (`status=completed` + `<result>` carrying "session limit" string + `<total_tokens>0</total_tokens>`), **STOP the skill immediately**. Do NOT fall back to EIC-seat question-writing. Log the infra failure to the gap log (G-S2 detection signature per MEMORY rule) and end the skill with disposition `INCOMPLETE — quota`; resume after the reset window.
+
+**Run sequence:**
+- Dispatch reporter agent for Q1 (per worked example above) — capture the returned question
+- Append the question to transcript at `output/interviews/c{XX}_paulson_{slug}_transcript.md`
+- Mike responds in character as Paulson; append response to transcript
+- Mags reads the answer and dispatches reporter again for Q2 or follow-up (one Task per turn)
+- Incremental save after each exchange
 - Mike ends when natural
 - Reporter doesn't know Mike is Mike — they're interviewing GM Paulson
 
-## Step 4: Write the Article
+## Step 4: Compile Transcript to .txt
 
-Reporter takes the transcript and writes the published piece:
-- Setup: why this interview, context
-- Key exchanges with quotes
-- Moments that matter — revelations, pushback, refusals
-- Closing — what the reader takes away
+The transcript `.md` is intermediate. The transcript `.txt` is canon. Compile per [[../../../docs/EDITION_PIPELINE|EDITION_PIPELINE]] §Published `.txt` Format Contract — Bay Tribune masthead + 5 structural sections (HEADER / BODY / NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED / ARTICLE TABLE).
 
-Save to `output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md`
+One `.txt` artifact emits:
 
-**Reporter-directory convention:** `{reporter}` slug is **hyphen-separated** (matches the rest of `output/reporters/` — `carmen-delaine`, `dr-lila-mezran`, `hal-richmond`, etc.). Underscore form (`carmen_delaine`) creates a duplicate directory — see G-S13 (sift gap log, closed S215 via migration). The subject-slug convention below (underscore-separated) applies only to the filename's interview subject, not the reporter directory.
-
-Target: 800-1200 words (Voice mode). Mike-determined for Paulson mode.
-
-## Step 4.5: Compile to `.txt`
-
-The reporter `.md` is intermediate. The `.txt` is canon. Compile per [[EDITION_PIPELINE]] §Published `.txt` Format Contract — Bay Tribune masthead + 5 structural sections (HEADER / BODY / NAMES INDEX / CITIZEN USAGE LOG / BUSINESSES NAMED / ARTICLE TABLE).
-
-Two `.txt` artifacts emit:
-
-1. **Article `.txt`** — `editions/cycle_pulse_interview_<cycle>_<slug>.txt`
-   - Body: the published article
-   - Article Table: single row (`<slug> | <reporter> | INTERVIEW | <word count>`)
-   - Masthead `<TYPE>=INTERVIEW`, descriptor = "Subject / Topic"
-
-2. **Transcript `.txt`** — `editions/cycle_pulse_interview-transcript_<cycle>_<slug>.txt`
-   - Body: the full transcript
-   - Article Table: single row (`<slug> | <reporter> | INTERVIEW-TRANSCRIPT | <word count>`)
-   - Masthead identical to the article except `<TYPE>=INTERVIEW-TRANSCRIPT`
+**Transcript `.txt`** — `editions/cycle_pulse_interview-transcript_<cycle>_<slug>.txt`
+- Body: the full transcript verbatim
+- Article Table: single row (`<slug> | <reporter> | INTERVIEW-TRANSCRIPT | <word count>`)
+- Masthead `<TYPE>=INTERVIEW-TRANSCRIPT`, descriptor = "Subject / Topic"
 
 Slug rule: 1–3 words, lowercase, underscore-separated. Editorial pick at authoring time. Once published, immutable. Replicated identically across filename, masthead descriptor, sift queries, MCP search, Mara, packets, production log, bay-tribune metadata.
 
@@ -219,75 +253,66 @@ Names Index, Citizen Usage Log, Businesses Named populated from the citizens/bus
 
 `Y<n>C<m>` math: `n = floor((cycle-1) / 52) + 1`, `m = ((cycle-1) % 52) + 1`. Cycle 92 = `Y2C40`. No month names.
 
+**Filename stewardship note (v2.0):** filename retains the `-transcript` suffix from v1.3 to preserve the canon S230 artifact at `editions/cycle_pulse_interview-transcript_94_let_walks.txt` + the `<TYPE>=INTERVIEW-TRANSCRIPT` masthead. The legacy bare `cycle_pulse_interview_<cycle>_<slug>.txt` (article path) is retired by v2.0 — articles framed off transcripts live under `cycle_pulse_supplemental_<cycle>_<slug>.txt` (write-supplemental output) or in the next edition's sports section (write-edition output).
+
 ## Step 5: Mara Audit (Paulson mode, optional for Voice)
 
 **Paulson interviews always go to Mara** — they establish heavy canon (trades, org decisions, dynasty moves). Mara catches continuity issues before publication.
 
 **Voice interviews go to Mara when** they establish initiative state changes, council positions, faction dynamics, or legal framework.
 
-Upload the `.txt` artifacts (canon — not the `.md` intermediates) to Drive for Mara:
+Upload the transcript `.txt` (canon — not the `.md` intermediate) to Drive for Mara:
 ```bash
-node scripts/saveToDrive.js editions/cycle_pulse_interview_<cycle>_<slug>.txt mara
 node scripts/saveToDrive.js editions/cycle_pulse_interview-transcript_<cycle>_<slug>.txt mara
 ```
 
-Mara audits the `.txt` (same format she audits everywhere else), returns corrections via Mike.
+Mara audits the transcript `.txt` (same format she audits everywhere else), returns corrections via Mike.
 
 ## Step 6: User Review Gate
 
 **STOP. Nothing gets published until Mike approves.**
 
 Show:
-- Article `.txt` — `editions/cycle_pulse_interview_<cycle>_<slug>.txt` (canonical artifact)
-- Transcript `.txt` — `editions/cycle_pulse_interview-transcript_<cycle>_<slug>.txt` (full record)
+- Transcript `.txt` — `editions/cycle_pulse_interview-transcript_<cycle>_<slug>.txt` (canonical artifact)
 - Canon established: [list new facts, decisions, revelations]
 - Mara corrections (if applicable)
 
-Mike approves or adjusts. **If Mike spoke it to a reporter, it's canon.** No public/private split — the full transcript goes to bay-tribune. The article is the polished frame; the transcript is the record.
+Mike approves or adjusts. **If Mike spoke it to a reporter, it's canon.** No public/private split — the full transcript goes to bay-tribune. **The transcript IS the canon record.** Articles framed off this transcript come later via downstream skills (`/write-edition` next cycle via `/sift`, or `/write-supplemental` any time via sports-desk dispatch against the transcript).
 
 ## Step 7: Save
 
-Reporter `.md` files (intermediates) and the canonical `.txt` files (Step 4.5) are both on disk:
+Transcript intermediate (`.md`) and canonical (`.txt`) are both on disk:
 
 1. **Transcript intermediate:** `output/interviews/c{XX}_{subject_slug}_transcript.md`
-2. **Article intermediate:** `output/reporters/{reporter}/articles/c{XX}_interview_{subject_slug}.md`
-3. **Article canon `.txt`:** `editions/cycle_pulse_interview_{XX}_{slug}.txt`
-4. **Transcript canon `.txt`:** `editions/cycle_pulse_interview-transcript_{XX}_{slug}.txt`
-
-PDF rendering + Drive upload moves to `/edition-print --type interview --cycle <XX>` (runs in parallel with Step 8).
+2. **Transcript canon `.txt`:** `editions/cycle_pulse_interview-transcript_{XX}_{slug}.txt`
 
 ## Step 8: Post-Interview Pipeline
 
-After Step 7 the `.txt` artifacts are on disk. Two skills converge here, run in parallel:
+After Step 7 the transcript `.txt` is on disk. Run `/post-publish` against the transcript-only canon:
 
 ```
-/post-publish --type interview --cycle <XX> --source editions/cycle_pulse_interview_<XX>_<slug>.txt
-/edition-print --type interview --cycle <XX> --source editions/cycle_pulse_interview_<XX>_<slug>.txt
+/post-publish --type interview --cycle <XX> --source editions/cycle_pulse_interview-transcript_<XX>_<slug>.txt
 ```
 
-`/post-publish --type interview` handles canon ingest (bay-tribune wiki + article text + transcript text), citizen card refresh, newsroom memory update, production log finalization, mags-bot restart. Per-substep verification gates per the [[../post-publish/SKILL|post-publish]] matrix; the interview row of that matrix governs which substeps run.
+`/post-publish --type interview` handles canon ingest (bay-tribune wiki + transcript text — one doc ID, not two), citizen card refresh, newsroom memory update, production log finalization, mags-bot restart. Per-substep verification gates per the [[../post-publish/SKILL|post-publish]] matrix; the interview row of that matrix governs which substeps run.
 
-`/edition-print --type interview` handles DJ art direction (1–3 photos), PDF render, Drive upload.
+**No `/edition-print` invocation.** Transcripts carry no photos — the canon artifact is text-only. Photos belong to downstream framed articles (`/write-edition` next cycle or `/write-supplemental` any time) which run their own `/edition-print` against the framed article's `.txt`.
 
-**Trigger condition (T11):** Run `/edition-print` for interviews at **editorial discretion** — typically YES for any named-subject interview (the portrait carries the piece), SKIP only when the subject explicitly declined photography or the format is voice-only. Default: invoke.
+`/post-publish` appends to the same production log entry for this interview, with inline Supermemory doc IDs for direct query next cycle.
 
-**S188 photo-pipeline status:** `/edition-print` is currently edition-only for the photo step (DJ-direction pipeline rebuilt S188 — djDirect.js bundles edition+sift+world_summary; non-edition types await bundler extension). Interviews will route through `/edition-print` for PDF + Drive but the photo step bails on missing `dj_direction.json`. Post-T11 follow-up will extend djDirect.js to handle interview source files.
+## Gap log (S212 — see [[../../../docs/plans/GAP_LOG_TEMPLATE]])
 
-Both skills append to the same production log entry for this interview, with inline Supermemory doc IDs for direct query next cycle.
+Gap log opens at **Step 0** as live-append target (see Step 0 §B above); friction-during-skill goes there before it's lost to context. At skill close, append a §Disposition summary + close the file with patterns cited. /interview is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running. Interviews can spawn world-altering canon — friction here is high-stakes.
 
-## Gap log (S212 — see [[../../docs/plans/GAP_LOG_TEMPLATE]])
-
-At skill close, capture friction observed during interview production as a gap log. /interview is a heavy skill at the **media generator terminal**; sidecar gap logs catch inefficiency the skill couldn't catch while running. Interviews can spawn world-altering canon — friction here is high-stakes.
-
-**Output path:** `output/production_log_interview_c<XX>_<subject-slug>_gaps.md` (one per interview since interviews are subject-specific).
+**Output path:** `output/production_log_interview_c<XX>_<subject-slug>_gaps.md` (current per-interview subject-slugged form; `pipeline.34` will harmonize canonical convention across all 5 heavy skills + /write-supplemental).
 
 **Gap prefix:** **G-I\*** (e.g., G-I1).
 
 **Common categories for /interview gaps:**
 - archetype-match (interviewerCandidate routing per `matchCitizenToJournalist_`)
 - canon-creation-risk (transcript becomes canon — fabrication, drift, voice violations)
-- transcript-vs-article (publishing both, Supermemory ingest of both, format compliance)
-- pipeline-step-coverage (Step 8d coverage-ratings DEFERRED decision per S179)
+- dispatch-architecture (Step 3 Mode 2 dispatch-per-turn discipline; quota-coupling per G-S2)
+- pipeline-step-coverage (Step 8 /post-publish per-type matrix interview row)
 
 **Discipline:** write the gap log even on clean runs. File a ROLLOUT row in `pipeline.<n>` pointing at the gap log per ADR-0005 §How to add work. Interviews benefit especially from this discipline because canon stakes are higher than other heavy skills.
 
@@ -295,7 +320,9 @@ At skill close, capture friction observed during interview production as a gap l
 
 Runs within the current cycle, after `/write-edition` and `/post-publish`. Interviews extend coverage — a single conversation, deep signal.
 
-Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → `/write-edition` → `/post-publish` → `/edition-print` → then supplementals, dispatches, interviews, podcasts as needed
+**Capture-only since v2.0 (S233 pipeline.30):** interviews establish canon as transcripts; articles framed off transcripts come downstream via `/write-edition` (next cycle's sports section, surfaced via `/sift` from the canon transcript) or `/write-supplemental` (any time, sports-desk subagent dispatch against the canon transcript). The article-generation cognitive act lives at the dispatch terminal, not at EIC.
+
+Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → `/write-edition` → `/post-publish` → `/edition-print` → then supplementals, dispatches, interviews, podcasts as needed → next cycle's `/sift` surfaces interview transcripts as canon source for downstream coverage.
 
 ## Examples of Good Interview Themes
 
@@ -306,13 +333,16 @@ Full chain: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/sift` → 
 - DA Dane when a legal dimension emerges from civic decisions
 
 **Paulson mode:**
-- Anthony interviews Paulson after a big trade rumor
+- Anthony Raines interviews Paulson after a big trade rumor
 - P Slayer asks Paulson about Keane's farewell season pressure
 - Luis Navarro asks Paulson about the Baylight arena feasibility timeline
 - Hal Richmond asks Paulson about dynasty-window decisions with long tails
 
 ## What This Skill Does NOT Do
 
+- **Write articles.** Articles framed off interview transcripts come from `/write-edition` (next cycle via `/sift`) or `/write-supplemental` (sports-desk dispatch against the canon transcript). The S230 Mags-in-Hal article failure (G-I4) is why this skill is capture-only since v2.0.
+- **Substitute EIC-seat writing for sports-desk dispatch in Mode 2.** Every question + follow-up MUST come from a Task tool dispatch. Dispatch dies (quota kill per G-S2), the skill stops; no fallback writing from EIC seat. This is the non-negotiable G-I3 rule.
+- **Render PDFs or invoke `/edition-print`.** Transcript is canonical text; photos and PDF render belong to downstream framed articles, which run their own `/edition-print` against the framed article's `.txt`.
 - **Interview citizens or players** — that's a dispatch or supplemental with quotes, not an interview
 - **Run without a theme** — every interview has a reason
 - **Publish without user approval** — Paulson interviews especially need the review gate

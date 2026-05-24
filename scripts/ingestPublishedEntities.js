@@ -200,6 +200,67 @@ function enrichCandidateWithProseSignals(candidate, footerMap, fullText) {
 }
 
 // ---------------------------------------------------------------------------
+// T7 canon.3 / ADR-0007 §Lookup precedence step 4 — bay-tribune cross-check.
+//
+// Pre-T7, any NAMES INDEX name with no Sim_Ledger first+last match was
+// classified as NEW and appended on --apply. That path caused the S222 C94
+// double-classification of Carmen Solis + Roberto Iglesias: both already
+// existed in published bay-tribune canon (E93) but had no Sim_Ledger row,
+// so ingest re-classified them as NEW POPIDs on every subsequent cycle that
+// referenced them — squatter pattern.
+//
+// T7 splits the candidate set: candidates with a bay-tribune index hit are
+// re-routed to `canonDrift` and never appended. Engine-sheet does the
+// backfill manually via canon3_backfill_t9.js or similar scripts. The drift
+// JSON shape matches the audit script's entry shape (bay_tribune_doc_ids /
+// first_edition_seen / suggested_action) for cross-consumer consistency,
+// extended with {popid: null, surfacedBy, cycle} per plan §Task 7.
+// ---------------------------------------------------------------------------
+function partitionCandidatesByBayTribuneIndex(candidates, bayTribuneIndex, cycle) {
+  const canonNew = [];
+  const canonDrift = [];
+  if (!bayTribuneIndex || bayTribuneIndex.size === 0) {
+    return { canonNew: candidates.slice(), canonDrift: [] };
+  }
+  for (const c of candidates) {
+    const forms = [];
+    if (c.middle) forms.push(c.first + ' ' + c.middle + ' ' + c.last);
+    forms.push(c.first + ' ' + c.last);
+    let hit = null;
+    for (const form of forms) {
+      const key = normalizeFullName(form);
+      if (key && bayTribuneIndex.has(key)) {
+        hit = bayTribuneIndex.get(key);
+        break;
+      }
+    }
+    if (hit) {
+      const editionsList = Array.from(hit.editions).sort();
+      canonDrift.push({
+        popid: null,
+        name: hit.name || (c.first + ' ' + c.last),
+        bay_tribune_doc_ids: editionsList,
+        first_edition_seen: hit.firstEdition,
+        narrative_role_snippet: (hit.snippets && hit.snippets[0]) || '',
+        count: hit.count,
+        suggested_action: editionsList.length >= 2 ? 'backfill' : 'investigate',
+        surfacedBy: 'post-publish-step-5',
+        cycle,
+        candidateOrigin: {
+          first: c.first,
+          last: c.last,
+          middle: c.middle || '',
+          description: c.description || '',
+        },
+      });
+    } else {
+      canonNew.push(c);
+    }
+  }
+  return { canonNew, canonDrift };
+}
+
+// ---------------------------------------------------------------------------
 // Section finder (reuses pattern from ingestEditionWiki.js)
 // ---------------------------------------------------------------------------
 function findSection(lines, header, endPatterns) {
@@ -828,9 +889,55 @@ async function main() {
       ' new candidates enriched (footer-rows: ' + footerMap.size + ').');
   }
 
+  // T7 canon.3 / ADR-0007 — bay-tribune cross-check before NEW classification.
+  // For each candidate that survived resolveCitizens (no Sim_Ledger match),
+  // check whether the name appears in published bay-tribune editions. Hits
+  // re-route to canonDrift and are excluded from the append path; engine-sheet
+  // backfills them manually against canonical sources.
+  let canonNewCitizens = citizenResolution.candidates;
+  let canonDriftCitizens = [];
+  if (citizenResolution.candidates.length > 0) {
+    try {
+      const audit = require('./auditCanonDrift');
+      const editionsDir = path.join(__dirname, '..', 'editions');
+      console.log('[bay-tribune] loading canonical sets for drift cross-check…');
+      const simSet = await audit.loadSimLedgerNames();
+      const culturalSet = await audit.loadSheetNameColumn('Cultural_Ledger', ['Name', 'CitizenName', 'FullName']);
+      const chicagoSet = await audit.loadSheetNameColumn('Chicago_Citizens', ['Name', 'FullName', 'First']);
+      const faithSet = await audit.loadSheetNameColumn('Faith_Organizations', ['Organization', 'Name', 'OrgName']);
+      const bayTribuneIndex = audit.buildBayTribuneNameIndex({
+        editionsDir, simSet, culturalSet, chicagoSet, faithSet,
+      });
+      console.log('[bay-tribune] index built: ' + bayTribuneIndex.size + ' drift names from ' +
+        'editions/cycle_pulse_edition_*.txt');
+      const partition = partitionCandidatesByBayTribuneIndex(
+        citizenResolution.candidates, bayTribuneIndex, cycle);
+      canonNewCitizens = partition.canonNew;
+      canonDriftCitizens = partition.canonDrift;
+      console.log('[bay-tribune] partition: ' + canonNewCitizens.length + ' genuine NEW / ' +
+        canonDriftCitizens.length + ' canon-layer-drift (deferred to engine-sheet backfill)');
+      if (canonDriftCitizens.length > 0) {
+        const driftPath = path.join(__dirname, '..', 'output', 'canon_drift_c' + cycle + '.json');
+        const driftDir = path.dirname(driftPath);
+        if (!fs.existsSync(driftDir)) fs.mkdirSync(driftDir, { recursive: true });
+        fs.writeFileSync(driftPath, JSON.stringify(canonDriftCitizens, null, 2));
+        console.log('[bay-tribune] canon-drift report written: ' + driftPath);
+      }
+    } catch (err) {
+      console.error('[bay-tribune] WARN — drift cross-check failed: ' + err.message);
+      console.error('[bay-tribune] falling back to pre-T7 behavior (all candidates treated as NEW)');
+      // Fail-open is the conservative choice here: pre-T7 behavior is the
+      // worst-case (same as today), and operator still sees candidates
+      // listed in the dry-run report below before --apply.
+    }
+  }
+
   console.log('CITIZENS:');
   console.log('  matched:    ' + citizenResolution.matched.length);
-  console.log('  candidates: ' + citizenResolution.candidates.length + ' (new — would append)');
+  console.log('  candidates: ' + canonNewCitizens.length + ' (new — would append)');
+  if (canonDriftCitizens.length > 0) {
+    console.log('  canon-drift:' + String(canonDriftCitizens.length).padStart(2) + ' (bay-tribune-known; NOT appended — see canon_drift_c' + cycle + '.json)');
+  }
   console.log('  ambiguous:  ' + citizenResolution.ambiguous.length);
   console.log('  phantom:    ' + citizenResolution.phantom.length);
   console.log('  cultural:   ' + citizenResolution.culturalOnly.length + ' (CUL-/non-POP — logged, not appended)');
@@ -844,9 +951,9 @@ async function main() {
   console.log('');
 
   // Detail dump (helpful for dry-run inspection)
-  if (citizenResolution.candidates.length > 0) {
+  if (canonNewCitizens.length > 0) {
     console.log('Citizen candidates (would append):');
-    citizenResolution.candidates.forEach((c, i) => {
+    canonNewCitizens.forEach((c, i) => {
       const popNum = citizenResolution.maxPopNum + 1 + i;
       console.log('  ' + 'POP-' + String(popNum).padStart(5, '0') + '  ' + c.first + ' ' + c.last + (c.description ? ' — ' + c.description.slice(0, 60) : ''));
       const signals = [];
@@ -857,6 +964,15 @@ async function main() {
       if (signals.length > 0) {
         console.log('            [prose-signals] ' + signals.join(' | '));
       }
+    });
+    console.log('');
+  }
+  if (canonDriftCitizens.length > 0) {
+    console.log('Canon-layer drift (bay-tribune-known; NOT appended — engine-sheet backfill):');
+    canonDriftCitizens.forEach(d => {
+      console.log('  ' + d.name.padEnd(35) + ' [' + d.suggested_action.padEnd(11) + '] ' +
+        'editions=' + d.bay_tribune_doc_ids.length + ' count=' + d.count +
+        ' first=' + d.first_edition_seen);
     });
     console.log('');
   }
@@ -884,7 +1000,9 @@ async function main() {
   let businessAppended = [];
   if (apply) {
     console.log('--apply: writing to live sheets');
-    citizenAppended = await appendCitizens(citizenResolution.candidates, citizenResolution.headers, citizenResolution.maxPopNum, sheetsClient, sheetId, citizenResolution.rows);
+    // T7: append only canonNewCitizens; canonDriftCitizens are deferred to
+    // engine-sheet backfill via the canon_drift_c<cycle>.json report.
+    citizenAppended = await appendCitizens(canonNewCitizens, citizenResolution.headers, citizenResolution.maxPopNum, sheetsClient, sheetId, citizenResolution.rows);
     businessAppended = await appendBusinesses(bizResolution.candidates, bizResolution.maxBizNum, sheetsClient, sheetId);
 
     const allOk = citizenAppended.every(r => r.ok) && businessAppended.every(r => r.ok);
@@ -912,10 +1030,11 @@ async function main() {
     citizens: {
       parsed: parsedCitizens.length,
       matched: citizenResolution.matched,
-      candidates: citizenResolution.candidates.map((c, i) => ({
+      candidates: canonNewCitizens.map((c, i) => ({
         ...c,
         proposedPopId: 'POP-' + String(citizenResolution.maxPopNum + 1 + i).padStart(5, '0'),
       })),
+      canonDrift: canonDriftCitizens,
       ambiguous: citizenResolution.ambiguous,
       phantom: citizenResolution.phantom,
       culturalOnly: citizenResolution.culturalOnly,
@@ -943,7 +1062,9 @@ module.exports = {
   extractLetterFooterSignals: extractLetterFooterSignals,
   enrichCandidateWithProseSignals: enrichCandidateWithProseSignals,
   detectGenderFromPronouns: detectGenderFromPronouns,
-  normalizeFullName: normalizeFullName
+  normalizeFullName: normalizeFullName,
+  // S233 canon.3 T7 — bay-tribune drift partition
+  partitionCandidatesByBayTribuneIndex: partitionCandidatesByBayTribuneIndex
 };
 
 if (require.main === module) {

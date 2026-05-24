@@ -184,9 +184,9 @@ pointers:
   4. Genuine NEW (no bay-tribune hits + no Sim_Ledger row) proceeds with current append behavior.
   5. canon_drift JSON schema: use array-of-objects to allow multiple drift hits per cycle; append-or-create file.
 - **Verify:**
-  - Dry-run against C94 inputs (`--dry-run` flag if exists, or read-only test): Carmen Solis + Roberto Iglesias surface as canon-layer-drift hits, NOT as NEW (they were classified NEW in S222 C94 run pre-T7).
-  - canon_drift_c94.json exists with 2+ entries (Carmen + Roberto + possibly Rev. Han if she'd been bay-tribune-cited pre-E94).
-- **Status:** [ ] not started — engine-sheet pickup
+  - ~~Dry-run against C94 inputs: Carmen Solis + Roberto Iglesias surface as canon-layer-drift hits~~ — superseded by T9 S232 backfill (Carmen → POP-00953, Roberto → POP-00952 both landed; C94 re-run now produces 0 candidates because all 24 NAMES INDEX entries match Sim_Ledger). Empirical verification used a synthetic C95 fixture instead.
+  - Synthetic-fixture empirical verification (S233): three NAMES INDEX rows — Raymond Polk + Paulette Okafor (S229-frozen Bridgeport canon, in editions/E84-E90 not Sim_Ledger) + Synthetia Brandnew (no bay-tribune prior). Partition produced 1 canonNew + 2 canon-drift; `output/canon_drift_c95.json` contained the two with shape per §305 schema lock.
+- **Status:** [x] done-pending-archive — S233 engine-sheet
 
 ### Task 8: scripts/auditCanonDrift.js — one-time find bay-tribune-only citizens missing from Sim_Ledger [engine-sheet]
 
@@ -302,7 +302,7 @@ pointers:
 
 ## Open questions
 
-- [ ] `output/canon_drift_c<XX>.json` schema — proposed shape `[{popid, name, bayTribuneHits, suggestedAction, surfacedBy, cycle}]` is a starting point; engine-sheet may refine during T7/T8 implementation. Lock at first commit of T7 so T2 spec text can reference final field names.
+- [x] `output/canon_drift_c<XX>.json` schema — **LOCKED at T7 first commit (S233 engine-sheet)**. Final shape aligns with `auditCanonDrift` entry keys for cross-consumer consistency (audit emits `canon_drift_audit_<ts>.json` with the same field names): `[{popid: null, name, bay_tribune_doc_ids: string[], first_edition_seen: string, narrative_role_snippet: string, count: number, suggested_action: 'backfill'|'investigate', surfacedBy: 'post-publish-step-5', cycle: number, candidateOrigin: {first, last, middle, description}}]`. `candidateOrigin` is T7-side addition — preserves the resolveCitizens-side parse so engine-sheet backfill scripts can match the exact source candidate without re-parsing the .txt. T2 (research-build) spec text may now reference these field names directly.
 - [ ] T9 Carmen + Roberto BirthYear estimates — defaulting to 1975/1980 based on narrative cues. Mike may want to inspect E93 text and ratify before write, OR engine-sheet can write defaults and revisit if a future cycle's coverage surfaces a better signal.
 - [ ] T12 Dario's Bar neighborhood — E94 BUSINESSES NAMED section lists it without neighborhood. Need to inspect E94 prose during backfill to assign canonical neighborhood. If unclear, default to operator-decides-from-E94-prose at write time.
 

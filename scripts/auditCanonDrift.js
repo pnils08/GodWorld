@@ -359,29 +359,38 @@ function candidateIsKnown(surface, canonicalSet, culturalSet, chicagoSet, faithS
   return { hit: false };
 }
 
-// -------------------- main --------------------
+// -------------------- bay-tribune name index --------------------
 
-async function main() {
-  console.log('[auditCanonDrift] loading canonical name sets from sheets…');
-  const simSet = await loadSimLedgerNames();
-  const culturalSet = await loadSheetNameColumn('Cultural_Ledger', ['Name', 'CitizenName', 'FullName']);
-  const chicagoSet = await loadSheetNameColumn('Chicago_Citizens', ['Name', 'FullName', 'First']);
-  const faithSet = await loadSheetNameColumn('Faith_Organizations', ['Organization', 'Name', 'OrgName']);
-  console.log('[auditCanonDrift] sim=' + simSet.size +
-    ' / cultural=' + culturalSet.size +
-    ' / chicago=' + chicagoSet.size +
-    ' / faith=' + faithSet.size + ' canonical names loaded');
+// Walks edition .txt files in `editionsDir`, extracts proper-noun candidate
+// names, filters out anything already known to the supplied canonical sets
+// (Sim_Ledger / Cultural / Chicago / Faith), drops denylist hits, and returns
+// a Map<normalizedAggKey, entry> where entry =
+//   {name, editions:Set<string>, snippets:string[], count, firstEdition}.
+//
+// This is the bay-tribune drift index — names that appear in published prose
+// but have no canonical row anywhere. Audit main() turns it into a report;
+// ingestPublishedEntities (T7) uses it as a per-candidate gate to keep
+// drift names out of the NEW-citizen append path (ADR-0007 §Lookup precedence
+// step 4 — "bay-tribune returns hit but Sim_Ledger doesn't → canon-layer-drift").
+//
+// Sync function (file IO only). Callers pre-load the sets via the exported
+// loadSimLedgerNames + loadSheetNameColumn helpers.
+function buildBayTribuneNameIndex(opts) {
+  const editionsDir = opts.editionsDir;
+  const simSet = opts.simSet || new Set();
+  const culturalSet = opts.culturalSet || new Set();
+  const chicagoSet = opts.chicagoSet || new Set();
+  const faithSet = opts.faithSet || new Set();
+  const verbose = !!opts.verbose;
 
-  const editionFiles = fs.readdirSync(EDITIONS_DIR)
+  const editionFiles = fs.readdirSync(editionsDir)
     .filter(f => /^cycle_pulse_edition_\d+\.txt$/.test(f))
     .sort();
-  console.log('[auditCanonDrift] scanning ' + editionFiles.length + ' edition files…');
 
-  // candidateKey (normalized) → {surface, editions:Set, snippets:[], count, firstEdition}
   const agg = new Map();
 
   for (const f of editionFiles) {
-    const filepath = path.join(EDITIONS_DIR, f);
+    const filepath = path.join(editionsDir, f);
     let raw;
     try {
       raw = fs.readFileSync(filepath, 'utf-8');
@@ -396,13 +405,9 @@ async function main() {
       if (verdict.hit) {
         continue;
       }
-      // Use the byline+title-stripped form as aggregation key so "But Carmen Solis"
-      // and "Said Carmen Solis" coalesce into one "Carmen Solis" bucket. Display
-      // the cleaned surface form in the report.
       const stripped = stripBylineAndTitle(c.surface.split(/\s+/));
       const aggKey = normalizeNameKey(stripped.join(' '));
       if (!aggKey || aggKey.split(' ').length < 2) continue;
-      // Re-check stripped form against denylist (sentence-starter strip may unmask a denylist hit)
       if (isDenied(aggKey)) continue;
       const cleanSurface = stripped.join(' ');
       let entry = agg.get(aggKey);
@@ -421,14 +426,40 @@ async function main() {
         entry.snippets.push(snippet(text, c.offset, c.surface.length));
       }
       entry.count++;
-      // Keep the longest cleaned surface form as canonical (prefer 3-word over 2-word)
       if (cleanSurface.split(/\s+/).length > entry.name.split(/\s+/).length) {
         entry.name = cleanSurface;
       }
       kept++;
     }
-    if (VERBOSE) console.log('  ' + f + ' — candidates: ' + cands.length + ' / kept: ' + kept);
+    if (verbose) console.log('  ' + f + ' — candidates: ' + cands.length + ' / kept: ' + kept);
   }
+
+  return agg;
+}
+
+// -------------------- main --------------------
+
+async function main() {
+  console.log('[auditCanonDrift] loading canonical name sets from sheets…');
+  const simSet = await loadSimLedgerNames();
+  const culturalSet = await loadSheetNameColumn('Cultural_Ledger', ['Name', 'CitizenName', 'FullName']);
+  const chicagoSet = await loadSheetNameColumn('Chicago_Citizens', ['Name', 'FullName', 'First']);
+  const faithSet = await loadSheetNameColumn('Faith_Organizations', ['Organization', 'Name', 'OrgName']);
+  console.log('[auditCanonDrift] sim=' + simSet.size +
+    ' / cultural=' + culturalSet.size +
+    ' / chicago=' + chicagoSet.size +
+    ' / faith=' + faithSet.size + ' canonical names loaded');
+
+  const editionFiles = fs.readdirSync(EDITIONS_DIR)
+    .filter(f => /^cycle_pulse_edition_\d+\.txt$/.test(f))
+    .sort();
+  console.log('[auditCanonDrift] scanning ' + editionFiles.length + ' edition files…');
+
+  const agg = buildBayTribuneNameIndex({
+    editionsDir: EDITIONS_DIR,
+    simSet, culturalSet, chicagoSet, faithSet,
+    verbose: VERBOSE,
+  });
 
   // Build report
   const report = Array.from(agg.values())
@@ -476,11 +507,16 @@ if (require.main === module) {
 module.exports = {
   normalizeNameKey: normalizeNameKey,
   stripTitlePrefix: stripTitlePrefix,
+  stripBylineAndTitle: stripBylineAndTitle,
   isDenied: isDenied,
   stripNamesIndex: stripNamesIndex,
   extractCandidates: extractCandidates,
   buildKeysToCheck: buildKeysToCheck,
   candidateIsKnown: candidateIsKnown,
+  // T7 canon.3 exports — index builder + sheet loaders for ingest callers
+  buildBayTribuneNameIndex: buildBayTribuneNameIndex,
+  loadSimLedgerNames: loadSimLedgerNames,
+  loadSheetNameColumn: loadSheetNameColumn,
   _DENYLIST: DENYLIST,
   _TITLE_PREFIXES: TITLE_PREFIXES
 };

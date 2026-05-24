@@ -618,6 +618,7 @@ async function main() {
   var posted = 0;
   var patched = 0;
   var errors = 0;
+  var failureList = [];            // T6 canon.3 — populated on writeMemory catch; dumped at main() end if errors > 0
   var withAppearances = 0;
   var rawAppearancesTotal = 0;     // pre-filter — for cross-contamination metrics
   var filteredOutTotal = 0;        // dropped by full-name post-filter
@@ -682,6 +683,12 @@ async function main() {
       } catch (e) {
         console.error('[FAIL] ' + fullName + ': ' + e.message);
         errors++;
+        failureList.push({
+          popid: cit.popId,
+          name: fullName,
+          error_message: e.message,
+          http_status: (e && e.status) || null
+        });
       }
 
       // Rate limit — 500ms between writes (bumped from 300ms post-S182 W1
@@ -719,6 +726,54 @@ async function main() {
   if (!APPLY && citizens.length > 5) {
     console.log('\nShowed first 5 + citizens with appearances. Use --apply to write all.');
   }
+
+  // T6 canon.3 — Errors-gate: dump failure list + exit non-zero so /post-publish
+  // Step 2a + Step 5-bis can stop on partial failure per ADR-0007 §How to Apply.
+  // Pre-T6 the script always exited 0; downstream skills had no way to detect
+  // silent partial failure beyond grepping stdout.
+  if (errors > 0) {
+    var failPath = emitErrorGateDump({
+      total_attempted: citizens.length,
+      written: written,
+      errors: errors,
+      failures: failureList
+    });
+    console.error('[GATE-FAIL] ' + errors + ' card write(s) failed; details: ' + failPath);
+    process.exit(1);
+  }
 }
 
-main().catch(function(e) { console.error('[FATAL]', e); process.exit(1); });
+// T6 canon.3 — Extracted for unit-test: callable with stub stats so the gate
+// contract (dump-file shape, cycle resolution, file path) is verifiable
+// without round-tripping through Sim_Ledger reads + Supermemory writes.
+// Returns the dump-file path. Does NOT exit — caller decides exit code.
+function emitErrorGateDump(stats) {
+  var cycleResolved = process.env.CYCLE || process.env.CYCLE_NUMBER || null;
+  if (!cycleResolved) {
+    try {
+      var bcPath = path.join(__dirname, '..', 'output/desk-packets/base_context.json');
+      var bc = JSON.parse(fs.readFileSync(bcPath, 'utf-8'));
+      cycleResolved = bc.cycle || bc.cycleNumber || (bc.baseContext && bc.baseContext.cycle) || null;
+    } catch (_) { /* base_context unavailable — fall back to timestamp */ }
+  }
+  var cycleSlug = cycleResolved
+    ? ('c' + String(cycleResolved).replace(/^[cC]/, ''))
+    : ('ts' + Date.now());
+  var failPath = path.join(__dirname, '..', 'output', 'citizen_card_failures_' + cycleSlug + '.json');
+  var payload = {
+    cycle: cycleResolved,
+    timestamp: new Date().toISOString(),
+    total_attempted: stats.total_attempted,
+    written: stats.written,
+    errors: stats.errors,
+    failures: stats.failures || []
+  };
+  fs.writeFileSync(failPath, JSON.stringify(payload, null, 2));
+  return failPath;
+}
+
+module.exports = { emitErrorGateDump: emitErrorGateDump };
+
+if (require.main === module) {
+  main().catch(function(e) { console.error('[FATAL]', e); process.exit(1); });
+}

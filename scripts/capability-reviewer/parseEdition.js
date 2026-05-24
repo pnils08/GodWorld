@@ -19,7 +19,14 @@
 const fs = require('fs');
 
 const DIVIDER_RE = /^-{10,}$/;
-const SECTION_HEADERS = new Set([
+// Major-boundary dividers (60+ equals) separate editorial sections from the
+// footer block. Treated as divider-like for section-header look-ahead so the
+// footer parses correctly. (G-W46 follow-on S231.)
+const MAJOR_BOUNDARY_RE = /^={10,}$/;
+
+// Editorial sections — these carry article body text that capability assertions
+// (engine-language, edition-number, three-layer, etc.) should scan.
+const EDITORIAL_SECTION_HEADERS = new Set([
   'FRONT PAGE',
   "EDITOR'S DESK",
   'SPORTS',
@@ -34,6 +41,33 @@ const SECTION_HEADERS = new Set([
   'OBITUARIES',
   'WEATHER',
   'CLASSIFIEDS',
+]);
+
+// Footer sections — editorial metadata (canon tracking, indexes, coming-next
+// teasers) emitted AFTER all article sections. Before S231 pipeline.28 G-W46
+// fix, these were not recognized as sections, so their content got absorbed
+// into the body of the last editorial section (typically LETTERS). That
+// silently broke assertEditionNumbersNotInArticleText (footer routinely
+// cites E91/E92/E93 for canon-tracking; assertion flagged this as
+// blocking-tier rule violation in article body) and made
+// assertAtLeastThreeFemaleCitizens fail (NAMES INDEX carries POPIDs that
+// the body-only scanner never saw).
+//
+// Per-assertion behavior is documented inline at each assertion; the parser
+// just labels these correctly so assertions can opt in or out via the
+// `isFooter` flag on each section.
+const FOOTER_SECTION_HEADERS = new Set([
+  'NAMES INDEX',
+  'BUSINESSES NAMED',
+  'ARTICLE TABLE',
+  'CITIZEN USAGE LOG',
+  'STORYLINES UPDATED',
+  'COMING NEXT EDITION',
+]);
+
+const SECTION_HEADERS = new Set([
+  ...EDITORIAL_SECTION_HEADERS,
+  ...FOOTER_SECTION_HEADERS,
 ]);
 
 function parse(filePath) {
@@ -65,22 +99,36 @@ function parse(filePath) {
   // Walk sections
   while (i < lines.length) {
     const line = lines[i].trim();
-    if (DIVIDER_RE.test(line)) {
-      // Look ahead one line for the section header
-      const next = (lines[i + 1] || '').trim();
+    if (DIVIDER_RE.test(line) || MAJOR_BOUNDARY_RE.test(line)) {
+      // Look ahead for the section header, skipping blank lines + any
+      // adjacent major-boundary / divider lines (footer block opens with
+      // `------ \n ====== \n blank \n NAMES INDEX \n ------` shape).
+      let lookI = i + 1;
+      while (lookI < lines.length) {
+        const peek = (lines[lookI] || '').trim();
+        if (peek === '' || DIVIDER_RE.test(peek) || MAJOR_BOUNDARY_RE.test(peek)) {
+          lookI++;
+          continue;
+        }
+        break;
+      }
+      const next = (lines[lookI] || '').trim();
       if (SECTION_HEADERS.has(next.toUpperCase())) {
         // Close the previous section
         if (currentSection) {
           finalizeSection(currentSection);
           sections.push(currentSection);
         }
+        const titleUpper = next.toUpperCase();
         currentSection = {
-          title: next.toUpperCase(),
+          title: titleUpper,
           body: '',
           articles: [],
+          isFooter: FOOTER_SECTION_HEADERS.has(titleUpper),
         };
-        // Skip divider, header, divider after
-        i += 2;
+        // Advance past the header + any trailing divider/boundary on the next
+        // line. lookI points to the header line; resume one past it.
+        i = lookI + 1;
         if ((lines[i] || '').trim() && DIVIDER_RE.test(lines[i].trim())) {
           i++;
         }
@@ -124,6 +172,14 @@ function parse(filePath) {
  * the `#`-headlined consolidated format). Byline extracted from the body.
  */
 function finalizeSection(section) {
+  // Footer sections (NAMES INDEX, BUSINESSES NAMED, etc.) carry editorial
+  // metadata, not articles. Don't split by `# Headline`; capability assertions
+  // that need to read footer content read section.body directly + check
+  // section.isFooter to scope appropriately. (G-W46 + G-W48 fix S231.)
+  if (section.isFooter) {
+    section.articles = [];
+    return;
+  }
   const text = section.body;
   const lines = text.split('\n');
   const slices = [];

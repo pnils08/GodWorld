@@ -238,9 +238,10 @@ pointers:
   4. NEWSROOM_MEMORY: add note under §Standing Editorial Conventions → §Scaffold-time discipline pointing at the corrections-forward entry; future Soria references use "Eloise Soria-Dominguez."
   5. **Do NOT edit bay-tribune E93 wiki entry** — paper-of-record principle. The corrections-forward map is the substitution mechanism; bay-tribune stays unchanged.
 - **Verify:**
-  - `grep -n "Soria-Dominguez" docs/canon/INSTITUTIONS.md docs/canon/CANON_RULES.md docs/mags-corliss/NEWSROOM_MEMORY.md` → entries present.
-  - Sim_Ledger POP-00791 Name field already "Eloise Soria-Dominguez" per S222 sift gap log — confirm no write needed (wd-card matches canon).
-- **Status:** [ ] not started — engine-sheet pickup
+  - `grep -n "Soria-Dominguez" docs/canon/INSTITUTIONS.md docs/canon/CANON_RULES.md` → INSTITUTIONS L352 + CANON_RULES L180 entries present (S233).
+  - Sim_Ledger POP-00791 First=`Eloise` / Last=`Soria-Dominguez` verified live S233 — no write needed.
+  - **NEWSROOM_MEMORY half DEFERRED to research-build** — `docs/mags-corliss/*` is research-build's owned scope per engine-sheet TERMINAL.md §NOT Your Files. Engine-sheet does not edit. Step 4 (NEWSROOM_MEMORY pointer to Citizens Corrections Forward + Soria normalization note) stays open inside the canon.3 ROLLOUT row for research-build pickup (queues against the same file as T11 NEWSROOM_MEMORY half).
+- **Status:** [x] done-pending-archive (engine-sheet half) — S233. NEWSROOM_MEMORY pointer half open for research-build.
 
 ### Task 11: Aitken POPID alias doc [engine-sheet, data]
 

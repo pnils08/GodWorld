@@ -1,7 +1,7 @@
 ---
 title: Canon Institutions — Oakland-as-Simulated 2041
 created: 2026-04-25
-updated: 2026-04-25
+updated: 2026-05-24
 type: reference
 tags: [canon, fourth-wall, institutions, active]
 sources:
@@ -336,6 +336,22 @@ Public-geographic units. Names and boundaries match real Oakland (simulation-is-
 ### District-anchor backlog
 
 Other Oakland neighborhoods that have surfaced in canon but lack explicit district anchors in this doc — fill incrementally as they appear in cycle work. Reference Neighborhood_Map sheet for current authoritative assignments; this doc carries the editorial framing layer on top.
+
+---
+
+## Citizens
+
+Most citizens live in `Simulation_Ledger` (POPID-keyed structured rows) — that sheet is the canonical source for First/Last/Neighborhood/Occupation. This section is the editorial-substitution layer: when a citizen's published name in bay-tribune drifted from canonical form (typo, name-form variant, mid-cycle ruling) the corrections-forward map below routes reads of the drifted form to the canonical form. Symmetric pattern to §Faith Corrections Forward; same paper-of-record principle (bay-tribune is never edited backward; structured layers correct forward).
+
+### Corrections Forward
+
+The bay-tribune Supermemory container + published editions are not retroactively edited (paper-of-record principle, S217 + ADR-0007 §Reconciliation rule 1). Citizen-name forms that appeared in bay-tribune source briefings before a canonical ruling map forward to the canon form below. Any agent reading bay-tribune that encounters a real name in this table substitutes per CANON_RULES §Read-Time Contamination Check + ADR-0007 §How to apply step 5.
+
+| Bay-tribune form | Editions | Canon form (Sim_Ledger) | Notes |
+|---|---|---|---|
+| Elena Soria Dominguez | E93 only | Eloise Soria-Dominguez (POP-00791) | S230 ruling per canon.3 ADR-0007 — bay-tribune E93 published "Elena," wd-card + Sim_Ledger POP-00791 canonical "Eloise"; Mike call favors wd-card form. Reporters encountering "Elena" in E93 source briefings substitute to "Eloise Soria-Dominguez" with CONTINUITY NOTE. POP-00791 First/Last verified `Eloise` / `Soria-Dominguez` S233. |
+
+Specific per-edition citations populate as Mara audit logs and reader-side scans surface them; absence of a citation column entry means the map applies whenever the bay-tribune form is encountered.
 
 ---
 

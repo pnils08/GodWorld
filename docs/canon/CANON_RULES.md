@@ -1,7 +1,7 @@
 ---
 title: Canon Rules — World Fidelity
 created: 2026-04-25
-updated: 2026-04-29
+updated: 2026-05-24
 type: reference
 tags: [canon, fourth-wall, fidelity, active]
 sources:
@@ -177,6 +177,7 @@ When a domain undergoes a discrete scrub batch (e.g., canon.2 faith-canon scrub 
 
 Currently active corrections-forward maps:
 - `[[INSTITUTIONS]]` §Faith Corrections Forward (S218) — 16 orgs + 18 clergy names + 2 retired interim substitutes.
+- `[[INSTITUTIONS]]` §Citizens Corrections Forward (S230 — canon.3 ADR-0007) — 1 entry (Elena Soria Dominguez → Eloise Soria-Dominguez POP-00791 per Mike ruling).
 
 ---
 
